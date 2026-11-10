@@ -1457,6 +1457,9 @@
       "item:community-health-workers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:community-health-workers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:community-health-workers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30862,6 +30865,21 @@
           "id": "community-health-workers.path.recruitment-sample.1",
           "title": "Recruitment sample usage notes",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The program name matches, but the phone number and hours come from different versions. Identify the official information to check and what to hand over to the community contact."
+            ]
+          },
+          "id": "community-health-workers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Verify a community resource referral",
+          "type": "notice"
         }
       ]
     },
@@ -37663,6 +37681,13 @@
         "id": "community-health-workers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "community-health-workers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38186,7 +38211,7 @@
       "text": "Community health workers"
     }
   },
-  "source_content_sha256": "51e94ce5c441ae8288656365e3bf444052d4f1f8c3c6301066af295ccb8d84cc",
+  "source_content_sha256": "fb4f9fca4f5f1f5dc5e64f88322244726d32a0c593bf64546a7f8df81697c02b",
   "subject": {
     "canonical_slug": "community-health-workers",
     "name": "Community health workers",

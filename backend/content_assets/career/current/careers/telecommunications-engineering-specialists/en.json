@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Look at whether you can clarify requirements, clearly map connections, calculate capacity, and explain a plan's limitations; ask questions when conditions are unknown and revalidate after changes, rather than simply presenting an attractive topology diagram."
+              "Paper check | Compare a fictional equipment specification with a test record. Flag one entry using an older interface version and list the attachment needed for review. "
             ]
           },
           "id": "telecommunications-engineering-specialists.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24872,14 +24871,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Telecommunications engineering specialists design or configure wired, wireless, and satellite communication systems carrying voice, video, and data, coordinate installation and maintenance, check technical specifications, compatibility, costs, and performance, provide technical support to users, and retain system and issue records. The task definition of O*NET 15-1241.01 does not equate to all duties of similarly named Chinese roles or the parent statistical occupation."
+              "Telecommunications engineering specialists specify equipment or networks, diagnose service issues and coordinate upgrades. Design and support both depend on traceable standards and equipment records. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "telecommunications-engineering-specialists.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "editorial"
+            "transfer-onet-15-1241.01"
           ],
           "type": "prose"
         }
@@ -25642,15 +25639,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has not established verifiable task-level AI ratings for telecommunications engineering specialists and shows a separate editorial estimate. Supporting uses for organizing requirements, drafting documentation, and forming diagnostic hypotheses can be discussed, but verified efficiency gains cannot be claimed. Keep technical capability, actual organizational adoption, and job outcomes separate; people still verify capacity, configurations, security, and operational permission. This page does not predict an individual's unemployment probability. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional equipment specification with a test record. Flag one entry using an older interface version and list the attachment needed for review."
             ]
           },
           "id": "telecommunications-engineering-specialists.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "nist",
-            "editorial"
+            "transfer-onet-15-1241.01",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33574,6 +33569,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-15-1241.01",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 15-1241.01 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/15-1241.01"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39047,10 +39069,10 @@
       "text": "Telecommunications Engineering Specialists: Duties, Wage Definitions, and an Entry Experience"
     }
   },
-  "source_content_sha256": "60ae170174c51d48f9eeed1ef03ff0ed65cf4800fe600a5567fb50feb16a420d",
+  "source_content_sha256": "fa4991699a1bc2dd142f5f9063e1649e103edd9e697ac2d565ade5218e3c00cd",
   "subject": {
     "canonical_slug": "telecommunications-engineering-specialists",
     "name": "Telecommunications Engineering Specialists",
-    "summary": "Telecommunications engineering specialists design, configure, and maintain communication systems carrying voice, video, and data, check business requirements, topology, capacity, and equipment compatibility, coordinate installation testing, and retain change and fault records. O*NET-SOC 15-1241.01 defines this page's US task scope; wages and employment refer to parent occupation Computer Network Architects 15-1241 and cannot be treated as separately reported suboccupation data. Chinese job titles, qualifications, and authorization require separate checks."
+    "summary": "Telecommunications engineering specialists specify equipment or networks, diagnose service issues and coordinate upgrades. Design and support both depend on traceable standards and equipment records."
   }
 }

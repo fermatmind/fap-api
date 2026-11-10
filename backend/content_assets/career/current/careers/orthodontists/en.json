@@ -173,6 +173,9 @@
       "item:orthodontists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:orthodontists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:orthodontists.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12328,6 +12331,21 @@
             "bls-ooh-dentists-2026"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Models and photos from one follow-up have different revisions. Tell the clinical reviewer what dates and sources are known and what version needs confirmation."
+            ]
+          },
+          "id": "orthodontists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Prepare an orthodontic follow-up for review",
+          "type": "notice"
         }
       ]
     },
@@ -14800,6 +14818,13 @@
         "id": "orthodontists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "orthodontists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15065,7 +15090,7 @@
       "text": "Orthodontist"
     }
   },
-  "source_content_sha256": "fdbd0d185d5e6b4bb4367e2959fc74a009fdda28030be2cd98414299c2a50491",
+  "source_content_sha256": "137ca01a36f18aff057dbc6e63685c8c8e2dddb9f17bb87750ef1f499a67a470",
   "subject": {
     "canonical_slug": "orthodontists",
     "name": "Orthodontist",

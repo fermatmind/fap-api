@@ -23666,13 +23666,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe whether you are willing to read business data, clarify objectives, compare costs, organise cross-departmental implementation and explain the results to the governing body. Being persuasive once is not enough; can you record assumptions, accept objections and adjust a failed plan in time?"
+              "Paper check | Read a fictional business summary. Separate resource tradeoffs that require a decision from scheduling items a department can handle, and identify the owner for each. "
             ]
           },
           "id": "top-executives.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24879,14 +24878,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "The chief executive sets organisational policy and overall direction within the framework set by the board or the corresponding governing body, and plans and coordinates top management activities through subordinate executives and department managers. Their outputs include resource and budget plans, organisational policies, responsibility arrangements and explanations of business results; the specific powers must be determined by the actual governance and authorisation."
+              "Top executive roles include chief executives who set organizational direction and coordinate budgets, and general operations leaders who turn goals into departmental operations and staffing decisions. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "top-executives.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "editorial"
+            "transfer-onet-11-1011.00",
+            "transfer-onet-11-1021.00"
           ],
           "type": "prose"
         }
@@ -25621,15 +25619,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the comparable AI adoption rate, task effects and net employment causal data for this occupation, and the score remains missing. Draft summaries and option organisation are editorial trial suggestions, and the truthfulness, trade-offs and authorisation responsibility are still checked by people. BLS11-1011 was 2025—2035 overall growth of 3.2%, a ten-year net increase of 9300 people and an average annual 19100 openings including replacements as component indicators, not AI-only creation or an individual hiring probability. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Read a fictional business summary. Separate resource tradeoffs that require a decision from scheduling items a department can handle, and identify the owner for each."
             ]
           },
           "id": "top-executives.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "editorial",
-            "ratify"
+            "transfer-onet-11-1011.00",
+            "transfer-onet-11-1021.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33650,6 +33647,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-11-1011.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 11-1011.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/11-1011.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-11-1021.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 11-1021.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/11-1021.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39169,10 +39207,10 @@
       "text": "Chief executives"
     }
   },
-  "source_content_sha256": "23ba0c66ffe918d3b9319bc94e1e697b3b5087d0409186cc6aa003d8e779fb6a",
+  "source_content_sha256": "0667a69dce4ccd9955ef47a752118e04286a0d48687e6f8e7bb2c094dab5eb4f",
   "subject": {
     "canonical_slug": "top-executives",
     "name": "Chief executives",
-    "summary": "The chief executive sets organisational policy and overall direction within the framework determined by the board or the corresponding governing body, coordinates the budget, the business and the senior management team, and explains the business results. The United States identity uses O*NET 11-1011.00; the specific powers of a Chinese manager must be checked together with the company's articles of association and the board's authorisation. The low-cost experience can start with the budget and decision memorandum on the fictional business material on this page."
+    "summary": "Top executive roles include chief executives who set organizational direction and coordinate budgets, and general operations leaders who turn goals into departmental operations and staffing decisions."
   }
 }

@@ -23667,14 +23667,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Tool and die making suits people willing to read drawings, calculate, machine and check assembly results. An observable signal is recording the datum and tolerance and, when an anomaly is found, stating the basis rather than declaring acceptance by feel; at the same time, on-site safety training and the division of duties must be accepted."
+              "Paper check | Compare a fictional die drawing with its inspection record. Flag a dimension checked against an older revision and refer it to the inspection lead. "
             ]
           },
           "id": "tool-and-die-makers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24814,13 +24812,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Tool and die makers analyse technical specifications, calculate dimensions and tolerances, arrange materials and processes, set up and operate machine tools, and fit and assemble the related parts, making and repairing moulds, cutting tools, jigs, gauges and machined hand tools. Delivery also concerns dimensions, fit, surface and function, not just completing one machining operation."
+              "Tool and die makers interpret drawings and tolerances, plan machining and fit, and use measuring instruments to check dimensions, alignment or clearance. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tool-and-die-makers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh"
+            "transfer-onet-51-4111.00"
           ],
           "type": "prose"
         }
@@ -25485,17 +25482,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: reviewable task scores, the national AI adoption rate and net employment causal results for this occupation. Vendor machining suggestions do not prove that mould making and repair testing are completed automatically; the BLS2025—2035 overall decline of 9.2%, the ten-year net reduction of about 5200 people and the average annual 4300 openings that includes replacements are component indicators and do not represent AI-only job cuts or an individual's probability of unemployment. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional die drawing with its inspection record. Flag a dimension checked against an older revision and refer it to the inspection lead."
             ]
           },
           "id": "tool-and-die-makers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "ratify",
-            "bls",
-            "nist",
-            "editorial"
+            "transfer-onet-51-4111.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33141,6 +33134,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-4111.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-4111.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-4111.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38662,10 +38682,10 @@
       "text": "Tool and die makers"
     }
   },
-  "source_content_sha256": "75a609b56db01a23f0a9bbe48140e8a64c5e57cfab9737154f1014b2ffd1c3db",
+  "source_content_sha256": "2efd9991fc6161770b824d4e015330f303e10ae9221b9e34c095f568c6c55037",
   "subject": {
     "canonical_slug": "tool-and-die-makers",
     "name": "Tool and die makers",
-    "summary": "Tool and die makers calculate dimensions and tolerances from drawings and technical requirements, arrange machining processes, and make and repair moulds, cutting tools, jigs and gauges. The work includes both machine tool machining and assembly, measurement and testing; the delivery standard is whether the tool works as required, not merely whether the parts have been machined."
+    "summary": "Tool and die makers interpret drawings and tolerances, plan machining and fit, and use measuring instruments to check dimensions, alignment or clearance."
   }
 }

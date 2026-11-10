@@ -23371,14 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "路径：从完整作品和修订记录开始，核具体雇主的语言、题材和作品要求。美国受薪写作岗位常偏好相关本科学历，不是所有写作活动的统一执照。"
+              "纸面体验｜为自拟的四行词写两种结尾，比较朗读节奏，说明你会保留哪一处修改和理由。 "
             ]
           },
           "id": "poets-lyricists-and-creative-writers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet",
-            "bls"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23668,14 +23666,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET 27-3043.05 的核心是为出版或表演创作原创文字；题材可以是诗歌、歌词、故事、散文或剧本。受雇和自由职业的合同、收入及权利安排不同。"
+              "诗人、歌词作者和创意写作者把主题发展成诗歌、歌词或其他文本，并通过改稿调整节奏、视角和措辞。不同体裁对声音和结构的要求不同。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "poets-lyricists-and-creative-writers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "cnclass"
+            "transfer-onet-27-3043.05"
           ],
           "type": "prose"
         },
@@ -24766,15 +24762,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得诗人、作词人与创意写作者的AI采用率、替代率或任务级评分依据。可把主题联想、结构变体、改写与格式检查作为编辑试用建议；作者仍须决定作品意图、核事实与授权并完成修改。任务暴露研究不能推出细分职业就业结果。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：为自拟的四行词写两种结尾，比较朗读节奏，说明你会保留哪一处修改和理由。"
             ]
           },
           "id": "poets-lyricists-and-creative-writers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-27-3043.05",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32616,6 +32610,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-27-3043.05",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 27-3043.05 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/27-3043.05"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37861,10 +37882,10 @@
       "text": "诗人、作词人与创意写作者：作品、收入与入行路径"
     }
   },
-  "source_content_sha256": "f2fa1d36b4969614edc806037a9581ae032d062e930a18709aba715306eeb91d",
+  "source_content_sha256": "944ea97e4374b09c5def34c1f194b699f8cdf2db1bac0744b9502e73da7996c6",
   "subject": {
     "canonical_slug": "poets-lyricists-and-creative-writers",
     "name": "诗人、作词人与创意写作者",
-    "summary": "诗人、作词人与创意写作者（O*NET 27-3043.05）创作供出版或表演的诗歌、歌词、故事、散文与剧本。工作包括确定主题和形式、查证素材、起草、与编辑或制作方讨论并多轮修订。作品质量、署名与授权需要由作者和相关权利方核对。"
+    "summary": "诗人、歌词作者和创意写作者把主题发展成诗歌、歌词或其他文本，并通过改稿调整节奏、视角和措辞。不同体裁对声音和结构的要求不同。"
   }
 }

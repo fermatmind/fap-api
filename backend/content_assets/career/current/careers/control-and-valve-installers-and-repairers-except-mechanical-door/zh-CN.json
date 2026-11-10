@@ -1430,6 +1430,9 @@
       "item:control-and-valve-installers-and-repairers-except-mechanical-door.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:control-and-valve-installers-and-repairers-except-mechanical-door.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:control-and-valve-installers-and-repairers-except-mechanical-door.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30210,6 +30213,21 @@
           "id": "control-and-valve-installers-and-repairers-except-mechanical-door.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。工单 V6 要求阀门编号和复测时间。甲的阀号正确但时间空白，乙有时间却引用另一阀门。指出需补哪条凭证，真实调节和复测由现场授权人员完成。"
+            ]
+          },
+          "id": "control-and-valve-installers-and-repairers-except-mechanical-door.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核阀门复测单",
+          "type": "notice"
         }
       ]
     },
@@ -36503,6 +36521,13 @@
         "id": "control-and-valve-installers-and-repairers-except-mechanical-door.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "control-and-valve-installers-and-repairers-except-mechanical-door.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -36916,7 +36941,7 @@
       "text": "控制与阀门安装维修工（非机械门类）"
     }
   },
-  "source_content_sha256": "4212c47b3600537d9a3a10747f6d10450103d41d8594d94c46c5be90002ccf47",
+  "source_content_sha256": "d6716f4db13ec9bf97b288c69c2f26ac9c6abfe5883eccc7ca473c39840bef3b",
   "subject": {
     "canonical_slug": "control-and-valve-installers-and-repairers-except-mechanical-door",
     "name": "控制与阀门安装维修工（非机械门类）",

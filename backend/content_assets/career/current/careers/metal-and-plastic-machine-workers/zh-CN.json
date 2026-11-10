@@ -167,6 +167,9 @@
       "item:metal-and-plastic-machine-workers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:metal-and-plastic-machine-workers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:metal-and-plastic-machine-workers.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12959,6 +12962,21 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。工单 M2 的图纸版本是 R3。记录甲的工件和测量值齐全却引用 R2，乙写 R3 但缺测量记录。列出两处待核问题，交给首件记录负责人。"
+            ]
+          },
+          "id": "metal-and-plastic-machine-workers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核数控工件首件凭证",
+          "type": "notice"
         }
       ]
     },
@@ -15418,6 +15436,13 @@
         "id": "metal-and-plastic-machine-workers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "metal-and-plastic-machine-workers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15659,7 +15684,7 @@
       "text": "数控机床操作员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "013dd48a0180d0c0249fd21bbd9ad27f39d31a0b240f5414773c2d9b75d7b7c3",
+  "source_content_sha256": "5a6a94336932227480eafacf187d2f443dbedfe94a8d8d2467d8672ca3306adc",
   "subject": {
     "canonical_slug": "metal-and-plastic-machine-workers",
     "name": "数控机床操作员",

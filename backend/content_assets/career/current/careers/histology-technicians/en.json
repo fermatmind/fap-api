@@ -23975,7 +23975,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Direct answer | Histology Technicians on this page is the exact O*NET occupation 29-2012.01, Histology Technicians. Work falls into several categories: (i) Specimens and preparation—freezing tissue specimens, embedding them in paraffin blocks or impregnating them with wax, and operating computerized laboratory equipment to dehydrate, decalcify, or microincinerate tissue samples. (ii) Sectioning and mounting—cutting body-tissue sections with microtomes for microscopic examination and mounting tissue specimens on glass slides. (iii) Staining and coverslipping—staining tissue specimens with dyes or other chemicals to make cellular details visible under a microscope and loading slides into staining equipment. (iv) Equipment and archiving—maintaining laboratory equipment such as microscopes, microtomes, immunostainers, tissue processors, embedding centers and water baths, and archiving diagnostic materials such as histological slides and paraffin blocks. (v) Quality and records—recording processing, sectioning and staining parameters under processes and quality standards, identifying abnormalities, and reporting them."
+              "Use fictional specimen IDs to make a handoff sheet. Mark the processing stage, missing information and the next quality check. Do not use real patient data or treat the sample as laboratory training."
             ]
           },
           "id": "histology-technicians.profile.career-quick-answers-block.1",
@@ -24162,7 +24162,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Boundary conclusion | This page covers O*NET 29-2012.01, Histology Technicians. The core differences from adjacent roles concern objects of work, outputs, and authority levels. This occupation works with tissue specimens, sections, staining, and slides, producing quality-compliant, traceable histological slides and specimen and process records. Workers use specimen-processing and instrument-operation skills and quality awareness within job authority, taking responsibility for specimen integrity, sectioning and staining quality, and operational safety, but not pathology diagnosis. Medical and clinical laboratory technologists and technicians, cytotechnologists, biological technicians, and chemical technicians focus on their own objects and testing outputs, with different responsibilities and authority levels."
+              "Technicians prepare and track specimens and slides. Authorized clinicians or other qualified personnel make and sign diagnoses under applicable rules. Ask the laboratory how it assigns technical review and clinical sign-off."
             ]
           },
           "id": "histology-technicians.profile.career-quick-answers-block.7",
@@ -24232,7 +24232,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Occupational profile | 29-2012.01 prepares slides from tissue sections for pathologists' microscopic examination and diagnosis and may assist research. Technical processing, technical quality verification, and signing diagnostic reports are different authorities. Chinese pathology-technology roles do not gain physician diagnostic qualifications through their title or slide-preparation experience."
+              "Histology technicians prepare tissue slides and record specimen handling under laboratory procedures. They may cut sections, stain slides and check preparation quality. Slide preparation supports later review; it does not itself establish a diagnosis."
             ]
           },
           "id": "histology-technicians.profile.definition-block.11",
@@ -28134,13 +28134,13 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
@@ -28152,13 +28152,13 @@
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Cytotechnologists",
@@ -32139,10 +32139,13 @@
                 "question_key": "career.faq.histology-technicians.q3"
               },
               {
-                "answer": "Employment and growth presented on O*NET's 29-2012.01 page use broader parent-occupation coverage: employment of 351,200 in 2024 and projected employment of 357,200 in 2034, Slower than average growth (2%, no Bright Outlook label) for 2024–2034, and approximately 22,600 average annual openings over the period, including growth and replacement. These are parent-occupation figures, not exact projections for this occupation.",
+                "answer": "BLS Table 1.2: U.S. parent occupation Clinical Laboratory Technologists and Technicians 29-2010 had about 343,000 jobs in 2025 and is projected to have about 352,400 in 2035 (+2.7%), with about 20,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. These are parent-occupation figures, not exact projections for this occupation.",
                 "id": "histology-technicians.faq.4",
                 "question": "What is the employment outlook?",
-                "question_key": "career.faq.histology-technicians.q4"
+                "question_key": "career.faq.histology-technicians.q4",
+                "source_refs": [
+                  "bls-histology-ep"
+                ]
               },
               {
                 "answer": "O*NET places this occupation in Job Zone Three (medium preparation needed), 6.0 to less than 7.0 (SVP 6.0 to < 7.0). The education section reports 48% requiring an associate's or other two-year degree, 16% a postsecondary certificate, and 12% a high school diploma or equivalent (the page lists these three items). Some institutions or jurisdictions require histology or medical-laboratory technology certification or registration. In mainland China, roles involving biosafety and hazardous chemicals must meet biosafety and occupational-health requirements, subject to institutional and competent-authority requirements.",
@@ -32175,10 +32178,13 @@
                 "question_key": "career.faq.histology-technicians.q9"
               },
               {
-                "answer": "This page mainly uses O*NET 29-2012.01, U.S. BLS OEWS 2025, and BLS Employment Projections 2024–2034, alongside ILO and NIST occupational-exposure and governance research. U.S. wage and employment data cover the broader parent occupation labeled on the page, Clinical Laboratory Technologists and Technicians, not exact figures for this occupation. For mainland China, only statistical coverage and visible gaps are recorded. This page does not constitute medical, biosafety, quality, or legal advice.",
+                "answer": "This page mainly uses O*NET 29-2012.01, U.S. BLS Table 1.2: U.S. parent occupation Clinical Laboratory Technologists and Technicians 29-2010 had about 343,000 jobs in 2025 and is projected to have about 352,400 in 2035 (+2.7%), with about 20,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. U.S. wage and employment data cover the broader parent occupation labeled on the page, Clinical Laboratory Technologists and Technicians, not exact figures for this occupation. For mainland China, only statistical coverage and visible gaps are recorded. This page does not constitute medical, biosafety, quality, or legal advice.",
                 "id": "histology-technicians.faq.10",
                 "question": "What are this page's sources and coverage boundaries?",
-                "question_key": "career.faq.histology-technicians.q10"
+                "question_key": "career.faq.histology-technicians.q10",
+                "source_refs": [
+                  "bls-histology-ep"
+                ]
               }
             ]
           },
@@ -32235,7 +32241,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The NBS release checked in this round did not provide an exact national occupational distribution for histology technicians in China. Health and social-work industry averages cover multiple occupations as background, not occupational medians, starting pay, monthly pay, or take-home wages. U.S. histology-specific wages, employment and industry data, occupational-segment medians, measured AI adoption and efficiency, and state licensing conditions remain missing. Protected quick answers / FAQ / shared facts and old registrations retain old-period 351200 / 22600 / 2% figures and bonus explanations; the entire page is not consistent."
+              "U.S. wages and projections cover the broader clinical laboratory occupation group. Named employers illustrate tasks and do not establish universal credentials or authority."
             ]
           },
           "id": "histology-technicians.sources.source-card.4",
@@ -32267,25 +32273,25 @@
                 "entity": "Big Five Personality Test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "Emotional Intelligence Test",
+                "entity": "Histotechnologists",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/en/career/jobs/histotechnologists"
               },
               {
                 "entity": "This occupation (Histology Technicians)",
@@ -32346,7 +32352,7 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to check employment of 351,200 in 2024 and 357,200 in 2034, growth of 2% for 2024–2034, and approximately 22,600 average annual openings over the period.",
+                  "BLS Table 1.2: U.S. parent occupation Clinical Laboratory Technologists and Technicians 29-2010 had about 343,000 jobs in 2025 and is projected to have about 352,400 in 2035 (+2.7%), with about 20,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
                   "Used to explain that the data cover the broader parent occupation, Employment Projections differ from OEWS point-in-time employment estimates, and projections are not individual job outcomes."
                 ],
                 "evidence_type": "official employment trends",
@@ -32354,10 +32360,10 @@
                 "limitation": "The page explicitly labels employment and growth as covering the broader parent occupation, Clinical Laboratory Technologists and Technicians, not this exact occupation; Slower than average growth of 2%, with no Bright Outlook label.",
                 "market": "United States",
                 "name": "O*NET OnLine: Histology Technicians employment trends (29-2012.01, broader parent-occupation coverage)",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
+                "period": "2025–2035",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "29-2012.01 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/29-2012.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32772,6 +32778,18 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS Table 1.2: U.S. parent occupation Clinical Laboratory Technologists and Technicians 29-2010 had about 343,000 jobs in 2025 and is projected to have about 352,400 in 2035 (+2.7%), with about 20,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring."
+                ],
+                "id": "bls-histology-ep",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -34642,7 +34660,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "What categories of work do histology technicians perform?",
+            "question": "What can you show when applying for a histology technician role?",
             "table": {
               "rows": [
                 {
@@ -34699,7 +34717,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "Where are the boundaries between histology technicians and adjacent roles?",
+            "question": "Can a technician sign a pathology diagnosis?",
             "table": {
               "rows": [
                 {
@@ -36655,7 +36673,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Employment Projections (2024–2034, broader parent-occupation coverage)",
+            "label": "BLS Employment Projections (2025–2035, broader parent-occupation coverage)",
             "secondary_value": null,
             "value": {
               "$item": "histology-technicians.profile.onet-structured-fields-block.4",
@@ -37420,7 +37438,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit histology work",
+        "label": "Explore work activities with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37517,7 +37535,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "IQ (Chinese)"
+            "label": "IQ"
           },
           {
             "href": {
@@ -37527,7 +37545,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Histotechnologists"
           }
         ]
       },
@@ -37740,7 +37758,7 @@
         "fact_id": "us-wage-2025",
         "market": "United States",
         "measure": "Median wage",
-        "occupation_scope": "This occupation: Histology Technicians",
+        "occupation_scope": "U.S. parent occupation: Clinical Laboratory Technologists and Technicians (29-2010)",
         "period": "2025",
         "source_refs": [
           "onet"
@@ -37771,39 +37789,39 @@
         ]
       },
       {
-        "derivation": "Coverage | BLS Employment Projections 2024–2034. The page explicitly labels growth as covering the broader parent occupation, Clinical Laboratory Technologists and Technicians, not this exact occupation (Slower than average growth of 2%, no Bright Outlook label). Base-year employment is 351,200 in 2024, with projected employment of 357,200 in 2034. Projections include replacement demand and are not actual recruitment or layoffs.",
-        "display_value": "Slower than average growth (2%) (2024–2034, BLS Employment Projections; the page labels broader parent-occupation coverage, Clinical Laboratory Technologists and Technicians, not this exact occupation; no Bright Outlook label)",
+        "derivation": "BLS Table 1.2: U.S. parent occupation Clinical Laboratory Technologists and Technicians 29-2010 had about 343,000 jobs in 2025 and is projected to have about 352,400 in 2035 (+2.7%), with about 20,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "+2.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth",
-        "occupation_scope": "This occupation: Histology Technicians",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. parent occupation: Clinical Laboratory Technologists and Technicians (29-2010)",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-histology-ep"
         ]
       },
       {
-        "derivation": "Coverage | BLS Employment Projections base year. The page explicitly labels employment as covering the broader parent occupation, Clinical Laboratory Technologists and Technicians, not this exact occupation. This differs from BLS OEWS point-in-time employment estimates; this page labels them separately without mixing.",
-        "display_value": "Employment: approximately 351,200 (2024, BLS Employment Projections base year; the page labels broader parent-occupation coverage, Clinical Laboratory Technologists and Technicians, not this exact occupation)",
+        "derivation": "BLS Table 1.2: U.S. parent occupation Clinical Laboratory Technologists and Technicians 29-2010 had about 343,000 jobs in 2025 and is projected to have about 352,400 in 2035 (+2.7%), with about 20,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 343,000 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Number employed",
-        "occupation_scope": "This occupation: Histology Technicians",
-        "period": "2024",
+        "occupation_scope": "U.S. parent occupation: Clinical Laboratory Technologists and Technicians (29-2010)",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-histology-ep"
         ]
       },
       {
-        "derivation": "Coverage | BLS Employment Projections period openings: approximately 22,600 annually for 2024–2034, including growth and replacement. The page labels broader parent-occupation coverage. These are period-average annual figures, mainly reflecting replacement demand, not net new jobs.",
-        "display_value": "Projected average annual openings: approximately 22,600 (2024–2034, BLS Employment Projections, broader parent-occupation coverage, including growth and replacement)",
+        "derivation": "BLS Table 1.2: U.S. parent occupation Clinical Laboratory Technologists and Technicians 29-2010 had about 343,000 jobs in 2025 and is projected to have about 352,400 in 2035 (+2.7%), with about 20,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 20,800 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Average annual job openings",
-        "occupation_scope": "This occupation: Histology Technicians",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. parent occupation: Clinical Laboratory Technologists and Technicians (29-2010)",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-histology-ep"
         ]
       },
       {
@@ -37885,25 +37903,25 @@
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "U.S. median pay (2025, BLS OEWS, broader parent occupation Clinical Laboratory Technologists and Technicians, not this exact occupation)"
+        "label": "U.S. parent occupation median pay (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024–2034, broader parent-occupation coverage, not this exact occupation)"
+        "label": "Parent occupation: U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment (2024, broader parent-occupation coverage, not this exact occupation)"
+        "label": "Parent occupation: U.S. jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024–2034, broader parent-occupation coverage)"
+        "label": "Parent occupation: U.S. annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -37917,17 +37935,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What histology technicians do, the skills and qualifications needed, pay and outlook, and tasks AI may change. Retains occupational scope (O*NET 29-2012.01), Job Zone Three (medium preparation needed) and education notes, U.S. wage and employment parent-occupation coverage notes, and mainland China data gaps."
+      "text": "Learn what histology technicians prepare and document and how they differ from histotechnologists and pathologists."
     },
     "title": {
       "availability": "available",
-      "text": "Histology Technicians"
+      "text": "Histology Technician: Tissue Slides, Staining and Quality Checks"
     }
   },
-  "source_content_sha256": "333072ebb35a0c13c329c79abfd9d9296563d4a495d655544623e13be9dd5dd4",
+  "source_content_sha256": "86a87785cadc91a9678d6a98b1b6f1ffddf846326d0acb7ea00f721be1d72004",
   "subject": {
     "canonical_slug": "histology-technicians",
-    "name": "Histology Technicians",
-    "summary": "Histology Technicians corresponds to the exact O*NET/SOC occupation 29-2012.01, Histology Technicians: preparing histological slides from tissue sections for microscopic examination and diagnosis by pathologists; workers may assist with research studies. Core tasks include cutting body-tissue sections with microtomes for microscopic examination, embedding tissue specimens in paraffin blocks or impregnating them with wax, mounting tissue specimens on glass slides, staining tissue specimens with dyes or other chemicals to make cellular details visible under a microscope, and freezing tissue specimens. Common job titles include Histology Technician, Histologic Technician, Histologist, and Clinical Histology Technician. Official scope: Prepare histological slides from tissue sections for microscopic examination and diagnosis by pathologists. May assist with research studies. Coverage note: O*NET explicitly labels the wage and employment data presented on its 29-2012.01 page as covering the broader parent occupation, Clinical Laboratory Technologists and Technicians, rather than this exact occupation. This page labels that coverage accurately and does not extrapolate it as starting pay for this occupation. The occupation is in Job Zone Three (medium preparation needed), 6.0 to less than 7.0 (SVP 6.0 to < 7.0). This page does not constitute medical, biosafety, occupational-health, or legal advice."
+    "name": "Histology Technician",
+    "summary": "Histology technicians prepare tissue slides and record specimen handling under laboratory procedures. They may cut sections, stain slides and check preparation quality. Slide preparation supports later review; it does not itself establish a diagnosis."
   }
 }

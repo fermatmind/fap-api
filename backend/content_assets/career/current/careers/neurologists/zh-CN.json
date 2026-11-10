@@ -188,6 +188,9 @@
       "item:neurologists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:neurologists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:neurologists.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -12378,6 +12381,21 @@
             "fsmb-licensure"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。转诊单说症状上周开始，病史表写本月初。分别注明来源与原话，并写一句请临床人员核实的问题。"
+            ]
+          },
+          "id": "neurologists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "整理症状时间线供复核",
+          "type": "notice"
         }
       ]
     },
@@ -14896,6 +14914,13 @@
         "id": "neurologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "neurologists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15225,7 +15250,7 @@
       "text": "神经科医师"
     }
   },
-  "source_content_sha256": "754ad99c3853ecc37f72a129431e30a522f874f98ed8c8a237159c7a6492b559",
+  "source_content_sha256": "016e6361b64a3beb3036869b46aa896713798532516a7c62d316e4c84bd3a79f",
   "subject": {
     "canonical_slug": "neurologists",
     "name": "神经科医师",

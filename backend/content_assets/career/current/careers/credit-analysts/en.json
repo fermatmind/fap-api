@@ -9,7 +9,7 @@
         "status": "pending_mapping"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:employment-g04-current": {
         "status": "pending_mapping"
@@ -18,7 +18,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:growth-g04-current": {
         "status": "pending_mapping"
@@ -57,9 +57,15 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:openings-g04-current": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-analyst-cib": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-analyst-spdb": {
         "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
@@ -26152,12 +26158,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no checkable recruitment or quote statistics for mainland Chinese credit analysis posts; pay disclosure for an individual unit's post cannot represent the national level"
+              "CIB’s Shenyang branch advertised for credit review staff with at least three years of related corporate credit work in Liaoning and the ability to review cases independently. SPDB’s Shanghai head-office corporate credit approval role was a more senior example requiring at least ten years of related experience and prior senior approval work. Neither notice lists pay."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "analyst-cib",
+            "analyst-spdb"
           ],
           "type": "prose"
         },
@@ -26252,7 +26259,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The mainland China wage section of this page keeps only the evidence boundary: the sector average is not treated as an occupational wage, US data is not used as a substitute, and no national median, starting wage or percentile for credit analysts is stated."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -31000,7 +31007,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Analyze the credit data and financial statements of individuals or enterprises, judge the risk level involved in lending or credit granting, use computer programs to generate financial ratios to assess a client's financial condition, complete loan applications (including credit analysis and loan application summaries) and submit them for approval to authorized bodies such as loan committees, analyze financial data such as income growth and management quality and market share to judge the expected profitability of loans, compare the liquidity and profitability and credit history of the assessed institution with similar institutions in the same industry and region, prepare reports including\nthe risk level, assess client records based on income and savings data and repayment records and transaction activity and recommend repayment plans, review personal or corporate client files and identify and select overdue accounts for collection, contact clients to collect overdue amounts and handle client complaints and verify financial and credit transactions, and exchange clients' credit information with credit reporting agencies and business representatives.",
+                "answer": "Review financial statements, cash flow, debt and credit records. Verify sources and anomalies, document risks and limits, then submit the analysis to the authorized decision-maker.",
                 "id": "actors.faq.1",
                 "question": "What does a credit analyst specifically do every day?",
                 "question_key": "career.faq.credit-analysts.1",
@@ -31009,9 +31016,9 @@
                 ]
               },
               {
-                "answer": "Credit analysts judge the degree of credit risk for individuals or enterprises in credit granting and lending decisions and prepare reports for decisions; financial analysts study securities and markets and provide investment analysis; accountants and auditors prepare and audit financial information; budget analysts prepare and analyze institutional budgets; financial managers coordinate financial activities and teams; loan officers meet clients and advance loan applications; insurance underwriters assess insured risk and underwriting conditions.",
+                "answer": "Credit analysts focus on repayment capacity and risk. Credit checkers focus on applications, accounts and authorization procedures. Loan officers may also work with applicants and assemble documentation.",
                 "id": "actors.faq.2",
-                "question": "What is the difference between credit analysts and financial analysts or accountants and auditors?",
+                "question": "How do credit analysts differ from credit checkers and loan officers?",
                 "question_key": "career.faq.credit-analysts.2",
                 "source_refs": [
                   "onet"
@@ -31027,9 +31034,9 @@
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: three types of tasks—financial ratios and report consolidation, draft reports and application summaries, and client file screening and classification—can be partly taken on by tools; this page has no single-occupation adoption rate or replacement data.",
+                "answer": "Tools can extract statement items or flag anomalies. Analysts still verify source documents, accounting definitions, authorization and assumptions. This is not a measurement of AI adoption or job displacement.",
                 "id": "actors.faq.4",
-                "question": "For which credit analyst tasks is there evidence of AI change?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.credit-analysts.4",
                 "source_refs": [
                   "onet"
@@ -31045,12 +31052,14 @@
                 ]
               },
               {
-                "answer": "In the US 2025 wage data, the median annual wage is 83,510 US dollars and the median hourly wage is 40.15 US dollars (single occupation basis 13-2041.00), with annual percentiles of 56,250／65,210／83,510／122,460／169,230 US dollars; no occupation-level wage figure was obtained for Mainland China, and this page handles it as a gap without filling it in with an industry average.",
+                "answer": "The May 2025 U.S. median wage was $83,510 per year and $40.15 per hour. CIB’s Shenyang branch advertised for credit review staff with at least three years of related corporate credit work in Liaoning and the ability to review cases independently. SPDB’s Shanghai head-office corporate credit approval role was a more senior example requiring at least ten years of related experience and prior senior approval work. Neither notice lists pay.",
                 "id": "actors.faq.6",
                 "question": "About how much do credit analysts earn, and how should it be compared?",
                 "question_key": "career.faq.credit-analysts.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "analyst-cib",
+                  "analyst-spdb"
                 ]
               },
               {
@@ -31081,12 +31090,12 @@
                 ]
               },
               {
-                "answer": "The O*NET employment trends page (based on the BLS 2024—2034 projection) shows this segment at about 67,800 people in 2024, a projection label of Decline (-1% or lower), and about 3,700 average annual openings including growth and replacement; the work is mainly data processing and verification and communication in an office environment and must be verified against the local financial industry structure and compliance requirements.",
+                "answer": "BLS projects U.S. employment in SOC 13-2041 to go from about 64,700 in 2025 to 61,900 in 2035 (−4.3%). It projects about 3,100 openings per year, including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should I consider now when choosing the credit analyst occupation?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.credit-analysts.10",
                 "source_refs": [
-                  "bls"
+                  "a20-bls-projections"
                 ]
               }
             ]
@@ -31506,7 +31515,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Supports this occupation's tasks and work context and preparation level.",
                   "Does not include technology adoption or job replacement data."
@@ -31519,7 +31528,7 @@
                 "period": "Current O*NET profile; the 2026 page update is not a uniform survey year; verified 2026-10-09 in this round",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/13-2041.00"
+                "url": "https://www.onetonline.org/link/details/13-2041.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31785,6 +31794,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment in SOC 13-2041 to go from about 64,700 in 2025 to 61,900 in 2035 (−4.3%). It projects about 3,100 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a20-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Credit review and disbursement checks were listed separately. Credit review required at least three years of relevant work."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "analyst-cib",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Shenyang branch credit review",
+                "period": "Not stated",
+                "publisher": "Industrial Bank",
+                "scope": "recruitment_proxy",
+                "url": "https://branch.cib.com.cn/ShenYang/jobs/jobs.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Senior adjacent role: bachelor’s degree or higher, ten or more years of relevant experience and prior senior approval work. No pay amount."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "analyst-spdb",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "SPDB Shanghai head-office corporate credit approval",
+                "period": "2025-03",
+                "publisher": "Shanghai State-owned Assets Commission",
+                "scope": "recruitment_proxy",
+                "url": "https://www.gzw.sh.gov.cn/shgzw_xxgk_cqzp/20250304/ecbe908818cd40079a4576414855cf2f.html"
               }
             ]
           },
@@ -34894,7 +34948,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (recruitment quote basis)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34906,13 +34960,14 @@
           "china_soc_row": "US O*NET-SOC13-2041.00; for China this round obtained no one-to-one occupation mapping or occupation wage material, which is not an assertion that none exists officially.",
           "edu": "Training and qualifications are in the entry module",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026-g04-current"
+            "posting-analyst-cib",
+            "posting-analyst-spdb"
           ],
           "sources_note": "Source links are used within their respective statistical or announcement scope; where the statistical period or survey object or pay basis differs, cite them separately and do not convert between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect credit analysts' wages?",
             "driver_heading": "How does credit analysis work arrange the approval and reporting cycle?",
-            "official_heading": "Official statistical basis and gap notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Editorial preparation direction, not a Chinese education threshold or recruitment statistic or salary grade",
             "scenario_heading": "How should preparation ability and job direction be verified separately?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35556,7 +35611,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/financial-and-investment-analysts",
+            "target_href": "/en/career/jobs/financial-and-investment-analysts",
             "target_slug": "financial-and-investment-analysts",
             "target_title": "Financial analysts (adjacent occupation)",
             "transition_distance": {
@@ -35579,7 +35634,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/accountants-and-auditors",
+            "target_href": "/en/career/jobs/accountants-and-auditors",
             "target_slug": "accountants-and-auditors",
             "target_title": "Accountants and auditors (adjacent occupation)",
             "transition_distance": {
@@ -35602,7 +35657,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/financial-managers",
+            "target_href": "/en/career/jobs/financial-managers",
             "target_slug": "financial-managers",
             "target_title": "Financial managers (adjacent occupation)",
             "transition_distance": {
@@ -35625,7 +35680,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/loan-officers",
+            "target_href": "/en/career/jobs/loan-officers",
             "target_slug": "loan-officers",
             "target_title": "Loan officers (adjacent occupation)",
             "transition_distance": {
@@ -35648,7 +35703,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/insurance-underwriters",
+            "target_href": "/en/career/jobs/insurance-underwriters",
             "target_slug": "insurance-underwriters",
             "target_title": "Insurance underwriters (adjacent occupation)",
             "transition_distance": {
@@ -35671,7 +35726,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/budget-analysts",
+            "target_href": "/en/career/jobs/budget-analysts",
             "target_slug": "budget-analysts",
             "target_title": "Budget analysts (adjacent occupation)",
             "transition_distance": {
@@ -35694,7 +35749,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/credit-authorizers-checkers-and-clerks",
+            "target_href": "/en/career/jobs/credit-authorizers-checkers-and-clerks",
             "target_slug": "credit-authorizers-checkers-and-clerks",
             "target_title": "Credit authorizers, checkers, and clerks (adjacent occupation)",
             "transition_distance": {
@@ -35717,7 +35772,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/personal-financial-advisors",
+            "target_href": "/en/career/jobs/personal-financial-advisors",
             "target_slug": "personal-financial-advisors",
             "target_title": "Personal financial advisors (adjacent occupation)",
             "transition_distance": {
@@ -35805,7 +35860,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35854,7 +35909,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35903,7 +35958,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35952,7 +36007,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36001,7 +36056,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36050,7 +36105,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36672,7 +36727,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of credit analysts",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36786,11 +36841,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -37203,39 +37258,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 67,800 people (2024, single occupation basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "64,700 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size",
-        "occupation_scope": "The 2024 employment estimate for this segment on the O*NET employment trends page (based on the BLS 2024—2034 projection)",
-        "period": "2024 (O*NET/BLS); retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 13-2041",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a20-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Decline -1% or lower (2024—2034, label Decline)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "−4.3%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Employment change rate",
-        "occupation_scope": "The projection label Decline for this segment on the O*NET employment trends page (based on the BLS 2024—2034 projection); it is a range label, not a personal employment guarantee",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 13-2041",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a20-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 3,700 per year (2024—2034, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "3,100 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Average annual job openings",
-        "occupation_scope": "The 2024—2034 openings for this segment on the O*NET employment trends page, which state that growth and replacement demand are included and do not equal net new additions",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 13-2041",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a20-bls-projections"
         ]
       },
       {
@@ -37393,6 +37448,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Credit review and disbursement checks were listed separately. Credit review required at least three years of relevant work.",
+        "fact_id": "posting-analyst-cib",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Shenyang branch credit review",
+        "period": "Not stated",
+        "source_refs": [
+          "analyst-cib"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Senior adjacent role: bachelor’s degree or higher, ten or more years of relevant experience and prior senior approval work. No pay amount.",
+        "fact_id": "posting-analyst-spdb",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "SPDB Shanghai head-office corporate credit approval",
+        "period": "2025-03",
+        "source_refs": [
+          "analyst-spdb"
+        ]
       }
     ]
   },
@@ -37419,19 +37498,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "US employment projection (2024—2034, decline -1% or lower)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "US employment level (2024, about 67,800 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "US average annual job openings (2024—2034, about 3,700)"
+        "label": "U.S. projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37445,17 +37524,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Credit analysts (O*NET-SOC 13-2041.00) analyze the credit data and financial statements of individuals or enterprises, judge lending or credit granting risk, and prepare reports for decisions: covering generating financial ratios, completing loan applications and summaries, preparing risk reports, comparing the liquidity and profitability and credit history of similar institutions, assessing client records and recommending repayment plans, identifying overdue accounts, collection and verifying credit transactions, and exchanging credit information; includes the US 2025 median annual wage of \n83,510 US dollars (hourly 40.15 US dollars), about 67,800 people employed in 2024, the 2024—2034 employment projection of decline (-1% or lower), the occupation-level wage and employment gap for Mainland China, and control points for credit information protection and record retention and authorization and approval boundaries and model and data quality."
+      "text": "See how credit analysts read statements, assess cash flow and write risk reviews. Compare two Chinese bank roles and U.S. wages."
     },
     "title": {
       "availability": "available",
       "text": "Credit analysts"
     }
   },
-  "source_content_sha256": "dafe50c85b898ae3dfd1002c17aa2b7be6169763b6b4d3916897f00be5c58f39",
+  "source_content_sha256": "5f4b16873dccfd02c4443a4e017f575b5b36558350424f3fdc30ce4a0f528aec",
   "subject": {
     "canonical_slug": "credit-analysts",
     "name": "Credit analysts",
-    "summary": "In the United States, credit analysts correspond to O*NET-SOC 13-2041.00 (Credit Analysts). The core is analyzing the credit data and financial statements of individuals or enterprises, judging the degree of risk involved in lending or credit granting, and preparing reports containing credit information for decision use: use computer programs to generate financial ratios to assess a client's financial condition, complete loan applications (including credit analysis and loan application summaries) and submit them to the loan committee for approval, analyze financial data such as income growth \nand management quality and market share to judge the expected profitability of loans, compare the assessed institution's liquidity and profitability and credit history with similar institutions in the same industry and region, assess client records based on income and savings data and repayment records and transaction activity and recommend repayment plans, review personal or corporate client files and identify and select overdue accounts for collection, contact clients to collect overdue amounts and communicate with clients to handle complaints and verify financial and credit transactions, and exchange client credit information with credit reporting agencies and business representatives. The US basis is a single occupation segment, while similar positions on the China side are spread across banking and consumer finance and credit reporting and risk control, which is not a one-to-one correspondence with that US occupation segment, and the employment and authorization and pay bases cannot be interchanged."
+    "summary": "Review financial statements, cash flow, debt and credit records. Verify sources and anomalies, document risks and limits, then submit the analysis to the authorized decision-maker."
   }
 }

@@ -164,6 +164,9 @@
       "item:ophthalmic-medical-technicians.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:ophthalmic-medical-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:ophthalmic-medical-technicians.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12292,6 +12295,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. One examination slip lists the date and test. Another lists the patient code but no date. Identify the fields the eye care team should reconcile."
+            ]
+          },
+          "id": "ophthalmic-medical-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Match eye examination records",
+          "type": "notice"
         }
       ]
     },
@@ -14678,6 +14696,13 @@
         "id": "ophthalmic-medical-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "ophthalmic-medical-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14907,7 +14932,7 @@
       "text": "Ophthalmic medical technician: work, wages, and entry paths"
     }
   },
-  "source_content_sha256": "7a4543e7cb8b9505cec9c955537f1f6aa3cf43053359404102df5e7bab5fc636",
+  "source_content_sha256": "78e16b5cc78b443703e81214c73968afcfedef92dd98e3cea78f07060b33d61a",
   "subject": {
     "canonical_slug": "ophthalmic-medical-technicians",
     "name": "Ophthalmic medical technician",

@@ -32,9 +32,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1557,7 +1554,7 @@
         "status": "pending_mapping"
       },
       "item:aircraft-service-attendants.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:aircraft-service-attendants.sources.source-card.1": {
         "status": "mapped"
@@ -22517,17 +22514,8 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.14.url": {
-        "ref": {
-          "id": "aircraft-service-attendants.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            13,
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.15.accessed_at": {
         "ref": {
@@ -23341,13 +23329,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Aircraft service attendants (the U.S. counterpart is O*NET/BLS 53-6032 Aircraft Service Attendants, including fuelers, de-icers and ground line service) refuel aircraft on the apron and de-ice them, top up water and coolant, empty the waste tanks, maintain the air and oxygen systems, and clean and polish the fuselage exterior: marshall the aircraft into position by hand signal, wand or other means, refuel with a fuel-truck hose, spray de-icing fluid from a bucket lifted by a truck crane, tow the aircraft to the gate or the hangar with a tug, empty or top up the lavatory system, top up the potable water tank, inspect components to locate cracks, damage and leaks, and complete the task records. The workplace is the apron, and the core measures are operational safety, the handling of fuel and de-icing fluid, traceable records and the reporting of anomalies, not flying the aircraft or carrying out an aircraft maintenance release. People likely to explore it are usually willing to work to procedure outdoors and on shifts, can adapt to noise and vehicle traffic, and are prepared for the fuel and apron safety responsibility."
+              "Practice only with fictional records. Do not perform fueling, deicing or ramp work."
             ]
           },
           "id": "aircraft-service-attendants.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23356,12 +23343,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "An editorially designed paper exercise G-v1: use the four fixed records below to check the time window, the duration, the overlap of the same person or the same flight, and the sign-off. The first-round answer is A/D conforming in the field and period, B conflicting with A, and C evidence pending for a missing sign-off; changing B to 09:10–09:20 removes the overlap, while C is still evidence pending. The exercise involves no real refuelling, no de-icing parameters and no on-the-spot operation, and cannot demonstrate outdoor tolerance or confer a work qualification."
+              "Open “GS-43 | Check four ground-service handover records” in the entry section. Check time, conflicts and receipt, then submit both versions."
             ]
           },
           "id": "aircraft-service-attendants.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23370,14 +23357,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "People more likely to adapt: those who can work step by step to the procedure and the checklist without skipping a step, who are willing to keep their attention in an apron environment with noise, weather and moving vehicles, who can accept shift work, night work and peak-season overtime and wear the reflective markings and protective equipment as required, and who respect the risk of fuel fire, spillage and apron vehicles. The risk is usually greater for those unwilling to work to procedure, inclined to simplify the bonding and the fuel checks on experience, or impatient with anomaly reporting and records."
+              "Explore this work if you like checking times, identifiers and receipts and can report conflicts or gaps clearly under time pressure."
             ]
           },
           "id": "aircraft-service-attendants.quick-decision.fit-decision-checklist.3",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23386,15 +23372,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no precise wage distribution for this occupation in China was obtained. For the United States 53-6032 the wage in 2025, month 5 (May) has a median of 40,450 U.S. dollars/year and 19.45 U.S. dollars/hour, with the 10/25/75/90 percentiles at 33,830/35,740/46,830/57,610 U.S. dollars/year (BLS OEWS shown by O*NET). The latest BLS 2025—2035 projection: the United States 53-6032 has a base-year employment of 31,200 people, 2035 at 32,900 people, a rise of 5.6%, an official net change of about 1,700 people and average annual openings of about 4,000. The openings include replacement demand and are not a guarantee of net new posts or of individual hiring. O*NET currently also shows the 2025–2035 period with 31,200 people and about 4,000 openings a year; the precise rate of change follows the BLS independent occupation row. China is used only as an industry and unit average comparison. Mainland China, Rules on the Safety Management of Transport Airport Operations (Ministry of Transport Order No. 5 of 2025, in force 2026-07-01): the airport operator designates the aircraft cleaning and de-icing/anti-icing areas and sets out the de-icing fluid recovery measures; personnel working in the movement area receive initial and recurrent training from their own organisation, with a recurrent training interval of no more than 13 months, and wear a controlled-area pass and reflective-marked work clothing. Article 118 the permit and the ban on commercial mobile refuelling apply to ground-equipment fuel stations and services and are not an aircraft refuelling qualification; an organisation's own-use mobile refuelling follows the civil aviation provisions."
+              "Explore this work if you like checking times, identifiers and receipts and can report conflicts or gaps clearly under time pressure."
             ]
           },
           "id": "aircraft-service-attendants.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "oews",
-            "ep",
-            "nbs",
-            "airport"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23403,12 +23387,11 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: an aircraft ground-service post that refuels the aircraft, de-ices it, tops up water and coolant, empties waste water and cleans the fuselage on the apron to procedure, and completes the towing, the marshalling and the records."
+              "Aircraft service attendants fuel aircraft and record the work. Some assignments include deicing, replenishment, waste servicing, exterior cleaning, marshalling or towing. Check the employer’s scope and authorization; cabin cleaning and maintenance signoff are separate work."
             ]
           },
           "id": "aircraft-service-attendants.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23426,12 +23409,11 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The tasks of aircraft service attendants fall into four categories: fuel and fluid supply (refuelling the aircraft with a hose connected to the fuel truck, topping up the potable water tank, the water and the coolant, emptying the lavatory system or topping up the disinfectant, and maintaining the air and oxygen systems); de-icing and exterior cleaning (spraying de-icing fluid from a bucket lifted by a truck crane, climbing a ladder to clean the fuselage surface and cleaning and polishing the exterior); apron work and marshalling (marshalling the aircraft to the designated area by hand signal, wand or other means, towing it to the gate or the hangar with a tug, communicating arrival and departure matters with flight dispatch or the personnel concerned by radio, and loading baggage or cargo for the crew or the passengers); and inspection and records (inspecting components to locate cracks, damage, leaks or other problems, completing the forms that record the finished tasks, and reporting anomalies as required)."
+              "Aircraft service attendants fuel aircraft and record the work. Some assignments include deicing, replenishment, waste servicing, exterior cleaning, marshalling or towing. Check the employer’s scope and authorization; cabin cleaning and maintenance signoff are separate work. Typical outputs include a completed work record, an exception note and a handover."
             ]
           },
           "id": "aircraft-service-attendants.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23441,7 +23423,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 53-6032.00 Aircraft Service Attendants: refuel aircraft; this may include de-icing the aircraft, topping up water and coolant, emptying waste tanks, maintaining the air and oxygen systems, or cleaning and polishing the aircraft exterior. Common job titles include Aircraft Deicer, Aircraft Refueler, Fueler and Refueler. O*NET marks this occupation as Bright Outlook."
+              "Aircraft service attendants fuel aircraft and record the work. Some assignments include deicing, replenishment, waste servicing, exterior cleaning, marshalling or towing. Check the employer’s scope and authorization; cabin cleaning and maintenance signoff are separate work. O*NET 53-6032.00 lists example titles including refueler and deicer."
             ]
           },
           "id": "aircraft-service-attendants.profile.onet-structured-fields-block.1",
@@ -23455,17 +23437,16 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Refuelling｜Hose and fuel check｜Refuel the aircraft with a hose connected to the fuel truck, check the fuel and the quantity, and complete the grounding and the recheck to procedure.",
-              "Fluid supply｜Water and coolant｜Top up the aircraft potable water tank, the water and the coolant, and maintain the air and oxygen systems.",
-              "Waste water handling｜Lavatory system｜Empty the aircraft lavatory system or top up the disinfectant, and dispose of the waste water as required.",
-              "De-icing work｜Bucket and de-icing fluid｜Spray de-icing fluid onto the aircraft from a bucket lifted by a truck crane, working at the designated location and to the recovery requirements.",
-              "Apron marshalling｜Towing and signals｜Marshall the aircraft into position by hand signal, wand and other means, and tow it to the gate or the hangar with a tug.",
-              "Inspection and records｜Exterior cleaning and reporting｜Climb a ladder to clean and polish the aircraft exterior, inspect components to locate cracks, damage and leaks, complete the task records and report anomalies."
+              "Refuelling｜Hose and fuel check｜Check the assigned fueling task, equipment and records.",
+              "Fluid supply｜Water and coolant｜Some assignments replenish potable water or coolant; check the work order and authorization.",
+              "Waste water handling｜Lavatory system｜Some assignments service waste tanks or replenish disinfectant.",
+              "De-icing work｜Work basket and deicing fluid｜A deicing assignment follows the applicable procedure and role boundaries.",
+              "Apron marshalling｜Towing and signals｜Check whether marshalling or towing is part of the assignment.",
+              "Inspection and records｜Exterior cleaning and reporting｜Exterior cleaning, visual checks and records vary by assignment."
             ]
           },
           "id": "aircraft-service-attendants.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -23520,13 +23501,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Receive the flight and the job order: confirm the aircraft type, the job items (refuelling, de-icing, water and waste water, cleaning) and the time window. → Apron preparation and marshalling: marshall the aircraft into position to the signals and confirm the safety conditions such as the engine state, the wheel chocks and the equipment clearance to the specific work procedure. → Fuel and fluid work: ground to procedure, check the fuel and the quantity and complete the refuelling and the fluid supply. → De-icing and exterior cleaning: complete the de-icing and the cleaning at the designated location and to the recovery requirements. → Inspection and anomaly handling: inspect components to locate cracks, damage and leaks, and on an anomaly stop and report to procedure. → Records and handover: complete the task records and hand over with dispatch, engineering and the next shift."
+              "Check the work order and time window → Confirm assigned work and responsibilities → Prepare equipment under the applicable procedure → Perform only authorized tasks → Record, report or escalate exceptions by type and authority; the procedure determines when work stops or resumes → Record the status and hand it over"
             ]
           },
           "id": "aircraft-service-attendants.profile.career-quick-answers-block.3",
           "source_refs": [
             "onet",
-            "onet"
+            "gs-fuel"
           ],
           "type": "prose"
         },
@@ -23683,13 +23664,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The object is the aircraft fuel, water and coolant, the waste water and lavatory system, the air and oxygen systems, the de-icing fluid and the fuselage exterior, together with the fuel truck, the tug and the de-icing equipment; the basis is the job order, the organisation's work procedure, the safety provisions and the airport management system."
+              "Work objects vary by assignment and can include the aircraft, servicing equipment and job records. Use the work order and procedures to check the scope, authority and handover."
             ]
           },
           "id": "aircraft-service-attendants.profile.career-quick-answers-block.11",
           "source_refs": [
             "onet",
-            "onet"
+            "gs-fuel"
           ],
           "type": "prose"
         },
@@ -23698,14 +23679,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Aircraft service attendants (the U.S. counterpart is O*NET/BLS 53-6032 Aircraft Service Attendants, including fuelers and de-icers) refuel aircraft on the apron and de-ice them, top up water and coolant, empty the waste tanks, maintain the air and oxygen systems and clean and polish the fuselage exterior: marshall the aircraft into position to the signals, refuel with a fuel-truck hose and check the fuel and the quantity, spray de-icing fluid from a bucket, tow the aircraft with a tug, inspect components to locate cracks, damage and leaks, and complete the task records. The workplace is the apron. On the mainland China side, aircraft de-icing, cleaning and apron refuelling follow the Rules on the Safety Management of Transport Airport Operations and the management systems of the airport, the aviation-fuel and the ground-service organisations. In boundary terms it is not the same as an aircraft maintenance and release post, nor the same as an aircraft flying and airport-operations control post."
+              "Aircraft service attendants fuel aircraft and record the work. Some assignments include deicing, replenishment, waste servicing, exterior cleaning, marshalling or towing. Check the employer’s scope and authorization; cabin cleaning and maintenance signoff are separate work. Ground service can include fueling, replenishment, deicing or ramp work within the worker’s authorization. Aircraft maintenance, release after maintenance, flight crew operations and airport management are separate functions. Check maintenance duties and signing authority under the applicable jurisdiction and the employer’s authorization."
             ]
           },
           "id": "aircraft-service-attendants.profile.definition-block.11",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "airport"
           ],
           "type": "prose"
         },
@@ -23819,13 +23799,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Aircraft de-icing and anti-icing must be carried out in the area the airport operator designates, and the de-icing fluid recovered as required; the work procedure and the post authorisation for aircraft refuelling are checked separately with the organisation. The ban in Article 118 on commercial mobile refuelling of ground equipment cannot be turned into an aircraft refuelling ban. Anything beyond the authorisation, or an anomaly found, is reported and handled to the organisation's procedure."
+              "Articles 24 and 26 of the CAAC aviation fuel supply rules require covered suppliers to ensure covered staff complete and pass safety training before taking up the work and to set aircraft fueling and defueling procedures. Check airside access, vehicle driving and task authority separately under applicable rules and employer requirements."
             ]
           },
           "id": "aircraft-service-attendants.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-fuel",
+            "airport"
           ],
           "type": "prose"
         },
@@ -23834,13 +23814,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "A fuel anomaly, a leak, component damage or an equipment fault found must be stopped and reported as required, and must not be concealed or the record simplified because of flight pressure."
+              "For a fuel anomaly, spill, damage or equipment fault, follow the applicable procedures and your authority to record, report or escalate it. The procedure determines when work stops or resumes."
             ]
           },
           "id": "aircraft-service-attendants.profile.career-quick-answers-block.20",
           "source_refs": [
             "onet",
-            "onet"
+            "gs-fuel"
           ],
           "type": "prose"
         },
@@ -24110,14 +24090,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Suggested order of choice: first decide the direction (refuelling and fluid work, de-icing and exterior cleaning, or apron marshalling and towing), then check the employer type and the scope of work (whether dangerous goods and special cargo are involved), and finally confirm the training and certification requirements, the equipment and protection conditions, the shift arrangements and the authorisation path. The three directions share the apron safety procedure, the fuel and fluid handling, the anomaly reporting and the record handover; moving to aircraft maintenance requires a separate licence and type authorisation, and moving to an adjacent service occupation requires filling in the corresponding equipment and industry rules, so it cannot be transferred directly."
+              "Choose among fueling, deicing and ramp marshalling first, then check duties, shifts, training and authority with the employer. If you are considering maintenance or release, verify the specific duties and authority separately."
             ]
           },
           "id": "aircraft-service-attendants.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "gs-fuel",
+            "airport"
           ],
           "type": "prose"
         },
@@ -24189,12 +24169,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Refuel the aircraft with a hose connected to the fuel truck, check the fuel and the quantity and complete the grounding and the recheck."
+              "Check the work order, fuel and records within your authorized duties."
             ]
           },
           "id": "aircraft-service-attendants.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
-            "onet",
+            "gs-fuel",
             "onet"
           ],
           "type": "prose"
@@ -24248,13 +24228,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Spray de-icing fluid from a bucket, climb a ladder to clean and polish the fuselage exterior, and work at the designated location and to the recovery requirements."
+              "Some deicing assignments use a work basket raised by a truck-mounted crane. Exterior cleaning duties vary by assignment."
             ]
           },
           "id": "aircraft-service-attendants.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
             "onet",
-            "onet"
+            "airport"
           ],
           "type": "prose"
         },
@@ -24336,13 +24316,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Facing airworthiness maintenance and release; a licence and a type endorsement are required, and service personnel do not carry out maintenance or release."
+              "Ground service can include fueling, replenishment, deicing or ramp work within the worker’s authorization. Aircraft maintenance, release after maintenance, flight crew operations and airport management are separate functions. Check maintenance duties and signing authority under the applicable jurisdiction and the employer’s authorization."
             ]
           },
           "id": "aircraft-service-attendants.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
             "onet",
-            "onet"
+            "airport"
           ],
           "type": "prose"
         },
@@ -24714,13 +24694,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Proactively record the fuel, the de-icing fluid and the equipment data, treat a system prompt and the work procedure separately, and on an anomaly stop and report to procedure; take part in the de-icing and spillage drills."
+              "Record the relevant equipment and work order status. Use tool alerts as prompts to check. Record, report or escalate exceptions according to their type, procedure and your authority."
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-fuel",
+            "airport"
           ],
           "type": "prose"
         },
@@ -24791,14 +24771,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "No study of this occupation's actual AI adoption, substitution rate or effect was obtained this round. The editors set out conditional assistance scenarios for the job order, the metering records, the equipment information and the scheduling; the occupational task material does not show that these scenarios are deployed or effective. Real work still follows the training, the procedure and the organisation authorisation, and projected growth cannot be used to assert that AI will not replace the post. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Tools can check identifiers, timestamps and receipt fields and flag possible conflicts. Actual equipment and fuel decisions follow authorized procedures and staff roles. No occupational displacement rate is available."
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25036,12 +25013,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Confirming the bonding and the static protection, checking the fuel and the quantity, and stopping and reporting a spillage."
+              "Check the work order, fuel and records within your authorized duties. Record, report or escalate exceptions under the applicable procedure and your authority."
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
+            "gs-fuel",
             "onet"
           ],
           "type": "prose"
@@ -25628,7 +25605,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial advice: first check the target post's tasks and the formal training requirements, then do the G-v1 paper record check, keeping the conflicts and the evidence-pending items; the Chinese regulations, the on-site operation and the qualifications are checked against the actual sources in the entry section."
+              "Editorial advice: first check the target post's tasks and the formal training requirements, then do the GS-43 paper record check, keeping the conflicts and the evidence-pending items; the Chinese regulations, the on-site operation and the qualifications are checked against the actual sources in the entry section."
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.76",
@@ -25643,7 +25620,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET tasks support the preparation objects; G-v1 is an editorial exercise"
+              "O*NET tasks support the preparation objects; GS-43 is an editorial exercise"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.77",
@@ -25748,12 +25725,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial risk scenario: a missing bonding step, static protection or fuel check can increase the risk of fire, spillage or mis-fuelling; it is not presumed that every omission necessarily causes an incident. The specific check and stop conditions follow the current manual and the division of work for authorised work."
+              "Editorial scenario: the fueling work order and job requirements do not match. Check the original records under the employer’s procedure and hand over to the responsible role. Do not use this example to perform operational work."
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.84",
           "source_refs": [
-            "onet",
+            "gs-fuel",
             "onet"
           ],
           "type": "prose"
@@ -25763,13 +25740,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Complete the bonding and the fuel and quantity checks strictly to the work procedure and re-check them, and on an anomaly stop and report to procedure."
+              "Review the work record under the applicable procedure and role assignments. The procedure determines when work stops or resumes."
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-fuel",
+            "airport"
           ],
           "type": "prose"
         },
@@ -25822,13 +25799,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "On finding a spillage, stop the work to procedure at once and handle it, and collect and hand over the waste water as required."
+              "Spill reporting and waste-fluid handover are separate matters. Follow the relevant procedures and on-site authority for each."
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-fuel",
+            "airport"
           ],
           "type": "prose"
         },
@@ -26011,12 +25988,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Check and record to procedure, and stop the work on an anomaly."
+              "Check and record against the procedure. Report or escalate exceptions according to their type and your authority."
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.102",
           "source_refs": [
-            "onet"
+            "gs-fuel",
+            "airport"
           ],
           "type": "prose"
         },
@@ -26025,11 +26003,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Refuel with a hose connected to the fuel truck, check the fuel and the quantity and complete the bonding and the recheck."
+              "Check the work order, fuel and records within your authorized duties."
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.103",
           "source_refs": [
+            "gs-fuel",
             "onet"
           ],
           "type": "prose"
@@ -26139,12 +26118,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Spray de-icing fluid from a bucket, and climb a ladder to clean and polish the fuselage exterior."
+              "Some deicing assignments use a work basket raised by a truck-mounted crane. Exterior cleaning duties vary by assignment."
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.111",
           "source_refs": [
-            "onet"
+            "onet",
+            "airport"
           ],
           "type": "prose"
         },
@@ -26586,13 +26566,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Aircraft refuelling / de-icing / cleaning / marshalling tasks"
+              "Historical Daxing aircraft refueler posting"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-daxing"
           ],
           "type": "prose"
         },
@@ -26601,13 +26580,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no uniform Chinese education threshold for this occupation and no item-by-item verifiable recruitment announcement were obtained; check the education, the training and the authorisation against the target organisation's announcement, and do not presume a junior-secondary starting point."
+              "China Aviation Oil’s Beijing company listed seven refueler positions at Beijing Daxing International Airport on November 22, 2024. It asked for junior college or higher; the refueler role also required a B2 or higher driving license, at least one year of driving and a driving skills assessment. The notice listed CNY 4,000–7,000 monthly before tax for the three advertised roles together, without a separate refueler range."
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-daxing"
           ],
           "type": "prose"
         },
@@ -26631,13 +26609,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Air transport ground service attendants (passenger / cargo)"
+              "CAFUC and China Aviation Oil training cohort"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-cafuc"
           ],
           "type": "prose"
         },
@@ -26646,13 +26623,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2022 national vocational skill standard 4-02-04-02 lists only civil aviation passenger agents and civil aviation cargo agents and cannot be taken as a uniform qualification or education threshold for aircraft refuelling or de-icing; check separately against the actual tasks."
+              "The 2025 first CAFUC and China Aviation Oil training cohort planned to select 40 eligible students from the university’s 2023 undergraduate intake. This is a school-employer program, not a count of refueler openings. Its education and training conditions are specific to the program."
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-cafuc"
           ],
           "type": "prose"
         },
@@ -26826,13 +26802,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial search direction: a regional airport or general-aviation support; no recruitment sample was obtained this round, so the specific items, aircraft types and shifts must be checked with the employer."
+              "Check duties, equipment and shifts with the target employer at a regional airport or general aviation facility."
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-daxing"
           ],
           "type": "prose"
         },
@@ -26870,13 +26845,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "A scenario comparison requires the employer type, the job items, the shift and the region to be consistent; an industry proxy cannot replace the written pay terms."
+              "The notice groups pay across three roles. It does not establish refueler-only or national wages."
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-daxing"
           ],
           "type": "prose"
         },
@@ -26885,13 +26859,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "When checking your own expectations, first confirm the employer type (airline ground service / airport ground service / aviation-fuel enterprise / third-party support), the job items (refuelling, de-icing, cleaning and towing) and the certification and shift arrangements; do not use an industry proxy in place of the written pay terms."
+              "China Aviation Oil’s Beijing company listed seven refueler positions at Beijing Daxing International Airport on November 22, 2024. It asked for junior college or higher; the refueler role also required a B2 or higher driving license, at least one year of driving and a driving skills assessment. The notice listed CNY 4,000–7,000 monthly before tax for the three advertised roles together, without a separate refueler range."
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-daxing"
           ],
           "type": "prose"
         },
@@ -27763,19 +27736,19 @@
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Automotive and water transport service attendants",
@@ -27998,13 +27971,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "An editorially designed paper exercise G-v1: use the four fixed records below to check the time window, the duration, the overlap of the same person or the same flight, and the sign-off. The first-round answer is A/D conforming in the field and period, B conflicting with A, and C evidence pending for a missing sign-off; changing B to 09:10–09:20 removes the overlap, while C is still evidence pending. The exercise involves no real refuelling, no de-icing parameters and no on-the-spot operation, and cannot demonstrate outdoor tolerance or confer a work qualification."
+              "Use GS-43 to try checking time windows, conflicts and receipts, then write a paper handover. Verify practical training separately."
             ]
           },
           "id": "aircraft-service-attendants.fit.riasec-fit-block.9",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28273,12 +28245,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Skipping the bonding step or a check on grounds of flight pressure enlarges the safety risk."
+              "Skipping a required check or record to meet a turnaround window can leave the next worker unable to confirm the job status."
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.25",
           "source_refs": [
-            "onet"
+            "onet",
+            "gs-fuel"
           ],
           "type": "prose"
         },
@@ -28301,13 +28274,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This occupation is aircraft service attendants (O*NET 53-6032.00), with the interest code RC (Realistic, Conventional). The fit judgement should look at observable behaviour: whether the person can do hands-on work to procedure outdoors and on shifts, whether they can check the fuel, the quantity and the safety conditions step by step, and whether they can complete the records faithfully and, on an anomaly, stop and report as required."
+              "O*NET gives the occupation the RC interest code (Realistic, Conventional). Look for whether you can follow procedures on shifts or outdoors, keep accurate records, and hand over exceptions under time pressure."
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.27",
           "source_refs": [
             "onet",
-            "onet"
+            "gs-fuel"
           ],
           "type": "prose"
         },
@@ -28589,13 +28562,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "There is no 'suited' personality. Reliability comes from observable behaviour: whether the person can work step by step to procedure, check the fuel and the safety conditions, and keep to stopping on an anomaly and reporting under time pressure."
+              "Look for whether you can follow procedures on shifts or outdoors, keep accurate records, and hand over exceptions under time pressure. Record, report or escalate exceptions under the applicable procedure and your authority."
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.46",
           "source_refs": [
             "onet",
-            "onet"
+            "gs-fuel"
           ],
           "type": "prose"
         },
@@ -28677,7 +28650,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The G-v1 time-window and duration check can be observed first. No uniform IQ score threshold was obtained this round; a numerical exercise is not the same as a real operating assessment."
+              "The GS-43 time-window and duration check can be observed first. No uniform IQ score threshold was obtained this round; a numerical exercise is not the same as a real operating assessment."
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.52",
@@ -28721,12 +28694,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "An editorially designed paper exercise G-v1: use the four fixed records below to check the time window, the duration, the overlap of the same person or the same flight, and the sign-off. The first-round answer is A/D conforming in the field and period, B conflicting with A, and C evidence pending for a missing sign-off; changing B to 09:10–09:20 removes the overlap, while C is still evidence pending. The exercise involves no real refuelling, no de-icing parameters and no on-the-spot operation, and cannot demonstrate outdoor tolerance or confer a work qualification."
+              "Use GS-43 to try checking time windows, conflicts and receipts, then write a paper handover. Verify practical training separately."
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.55",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28735,13 +28708,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The fit signals come from observable behaviour: whether the person can complete the refuelling, de-icing and cleaning step by step to the work procedure, verify the fuel, the quantity and the safety conditions repeatedly and record faithfully, and keep to stopping on an anomaly and reporting under flight-window pressure and bad weather. The RC interest code is a reviewable starting point."
+              "Look for whether you can follow procedures on shifts or outdoors, keep accurate records, and hand over exceptions under time pressure. Record, report or escalate exceptions under the applicable procedure and your authority."
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.56",
           "source_refs": [
             "onet",
-            "onet"
+            "gs-fuel"
           ],
           "type": "prose"
         },
@@ -28750,13 +28723,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Situations that call for caution: an unwillingness to work to procedure and a tendency to simplify the bonding and the checks on experience, impatience with repeated verification and recording, an inability to adapt to apron noise and shift and night work, or a lack of respect for the fuel and apron safety responsibility."
+              "If you dislike checks and recordkeeping, tend to skip steps, or cannot work nights or on an apron, first check the actual shifts and duties."
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.57",
           "source_refs": [
             "onet",
-            "onet"
+            "gs-fuel"
           ],
           "type": "prose"
         },
@@ -28765,12 +28738,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "An editorially designed paper exercise G-v1: use the four fixed records below to check the time window, the duration, the overlap of the same person or the same flight, and the sign-off. The first-round answer is A/D conforming in the field and period, B conflicting with A, and C evidence pending for a missing sign-off; changing B to 09:10–09:20 removes the overlap, while C is still evidence pending. The exercise involves no real refuelling, no de-icing parameters and no on-the-spot operation, and cannot demonstrate outdoor tolerance or confer a work qualification."
+              "Complete both record checks, decide each row’s time and receipt status, and write a handover."
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.58",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28912,10 +28885,10 @@
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "entity": "BLS Occupational Employment and Wage Statistics (OEWS): 53-6032",
+                "entity": "CAAC aviation fuel supply safety operations rules",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/53-6032.00"
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202510/P020251020349847870549.pdf"
               },
               {
                 "entity": "O*NET 53-6032.00 Work Context",
@@ -28968,13 +28941,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Four classes of risk need the earliest judgement: first, the fuel and fluid risk (skipping the bonding step or the fuel check, a refuelling spillage, the improper handling of waste water and the lavatory system); second, the apron-operations risk (a de-icing location or recovery that does not comply, a collision during apron vehicle traffic or towing); third, the work-safety and health risk (work at height, whole-body vibration, low-temperature de-icing, noise and long shifts); and fourth, the record and qualification risk (an untrue work record, training and certification not completed as required, work beyond the authorisation). The risk varies with the work direction: refuelling is closer to the fuel check and fire and static prevention, de-icing and cleaning to work at height and de-icing fluid recovery, and apron marshalling and towing to vehicle operation and accurate signals."
+              "Check risks by assignment: fuel and waste fluids, ramp vehicles and deicing, height and shifts, and records and authorization. The examples are for career exploration."
             ]
           },
           "id": "aircraft-service-attendants.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
+            "gs-fuel",
             "onet"
           ],
           "type": "prose"
@@ -29016,12 +28988,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Editorial risk scenario: a missing bonding step, static protection or fuel check can increase the risk of fire, spillage or mis-fuelling; it is not presumed that every omission necessarily causes an incident. The specific check and stop conditions follow the current manual and the division of work for authorised work."
+              "If the record is handed over without checking it, the next worker may not be able to confirm the job status or outstanding issues."
             ]
           },
           "id": "aircraft-service-attendants.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
+            "gs-fuel",
             "onet"
           ],
           "type": "prose"
@@ -29031,13 +29003,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Complete the bonding and the fuel and quantity checks strictly to the work procedure and re-check them, and on an anomaly stop and report to procedure."
+              "Follow the applicable procedure when checking the task, equipment and record. Report or escalate exceptions according to their type and your authority."
             ]
           },
           "id": "aircraft-service-attendants.risk.career-risk-cards.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-fuel",
+            "airport"
           ],
           "type": "prose"
         },
@@ -29046,12 +29018,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Starting to refuel after skipping one bonding confirmation to keep up with the flight turnaround window."
+              "The turnaround deadline is approaching and the work order does not match the recorded status."
             ]
           },
           "id": "aircraft-service-attendants.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
+            "gs-fuel",
             "onet"
           ],
           "type": "prose"
@@ -29149,12 +29121,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "On finding a spillage, stop the work to procedure at once and handle it, and collect and hand over the waste water as required."
+              "Follow the applicable procedures and on-site authority for spill reporting, stopping or resuming work, and collecting or handing over waste fluids."
             ]
           },
           "id": "aircraft-service-attendants.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "gs-fuel",
+            "airport"
           ],
           "type": "prose"
         },
@@ -29372,12 +29345,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The BLS OEWS2025, month 5 (May) wage percentiles shown by O*NET; it provides no incident rate for these risks and no employment projection."
+              "The CAAC fuel supply rules require relevant staff to pass safety training before taking up work (Article 24), and suppliers to establish aircraft fueling and defueling procedures (Article 26)."
             ]
           },
           "id": "aircraft-service-attendants.risk.career-risk-cards.36",
           "source_refs": [
-            "onet"
+            "gs-fuel"
           ],
           "type": "prose"
         },
@@ -29400,12 +29373,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Rules on the Safety Management of Transport Airport Operations (the mainland China requirements for apron work, de-icing and cleaning, and training and recurrent training)."
+              "Article 22 requires the relevant organizations to provide initial and recurrent training to their own airside workers, with no more than 13 months between recurrent training. Check access and task authority separately."
             ]
           },
           "id": "aircraft-service-attendants.risk.career-risk-cards.38",
           "source_refs": [
-            "onet"
+            "airport"
           ],
           "type": "prose"
         },
@@ -29453,36 +29426,36 @@
               [
                 "Refuelling direction",
                 "Complete the apron-operations training and observe refuelling and fluid supply work.",
-                "Able to check the fuel and the quantity to the job order and restate the grounding and fire-prevention requirements.",
-                "The original G-v1 four rows and the conflict check sheet, not a refuelling step list.",
+                "Explain how you would check the work order, applicable procedure and training requirement.",
+                "Two paper checks. Verify practical training separately.",
                 "Unlike aircraft mechanics and technicians: it carries out fuel and fluid work and does not carry out maintenance or a release."
               ],
               [
                 "De-icing and exterior cleaning direction",
                 "Observe de-icing fluid spraying and fuselage cleaning work.",
                 "Able to restate the de-icing fluid mixture ratio, the work location and the recovery requirements.",
-                "The G-v1 time-window and duration recheck, not the de-icing mixture ratio, the quantity or the actual operation.",
+                "Two paper checks. Verify practical training separately.",
                 "Unlike aircraft cargo handling supervisors: it faces the aircraft exterior and fluid work and does not carry the cargo load planning."
               ],
               [
                 "Apron marshalling and towing direction",
                 "Observe signal marshalling and tug operation.",
                 "Accurate signals, the safety conditions confirmed and complete work records.",
-                "The G-v1 same-person / same-flight conflict and the second check of the B adjustment, not a towing operating qualification.",
+                "Two paper checks. Verify practical training separately.",
                 "Unlike airport operations specialists: it focuses on on-site marshalling and towing and does not carry airport operations control."
               ],
               [
                 "Fluid supply and waste-water handling",
                 "Top up the potable water, the water and the coolant and empty the lavatory system.",
                 "The handling record is complete, contamination is controlled and an anomaly is reported to procedure.",
-                "The G-v1 evidence-pending record for a missing sign-off, not a real fluid-handling scheme.",
+                "Two paper checks. Verify practical training separately.",
                 "Unlike an aircraft maintenance post: it carries servicing and fluid work and does not involve component repair."
               ],
               [
                 "Records and handover",
                 "Complete the work records and hand over with dispatch, engineering and the shift.",
                 "Accurate records, complete anomaly notes and a traceable handover.",
-                "The G-v1 first check, second check and one-page handover summary, with C kept open.",
+                "Two paper checks. Verify practical training separately.",
                 "Unlike a safety inspection post: it combines on-site work with the record and handover responsibility."
               ]
             ]
@@ -29506,7 +29479,7 @@
                 "values": [
                   "U.S. education questionnaire",
                   "The O*NET questionnaire asks what education a new employee needs to do this occupation, and 77% answered a high school diploma or equivalent, 11% a post-secondary non-degree certificate and 11% some college but no degree; these are U.S. respondent answers, not the education distribution of those in post or a Chinese entry threshold. The current Job Zone is 1–2. The BLS typical entry education is a high school diploma or equivalent plus short-term on-the-job training.",
-                  "Insufficient evidence: no uniform Chinese education threshold for this occupation and no item-by-item verifiable recruitment announcement were obtained; this card is a professional-material and rule check item and does not pass itself off as a recruitment survey."
+                  "China Aviation Oil’s Beijing company listed seven refueler positions at Beijing Daxing International Airport on November 22, 2024. It asked for junior college or higher; the refueler role also required a B2 or higher driving license, at least one year of driving and a driving skills assessment. The notice listed CNY 4,000–7,000 monthly before tax for the three advertised roles together, without a separate refueler range."
                 ]
               },
               {
@@ -29538,7 +29511,9 @@
           "id": "aircraft-service-attendants.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "onet"
+            "gs-daxing",
+            "gs-cafuc",
+            "gs-fuel"
           ],
           "title": "Which formal requirements must be checked for entry preparation?",
           "type": "cards"
@@ -29551,42 +29526,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "The fixed G-v1 question set",
+                  "The fixed GS-43 question set",
                   "Four paper records (the same fictional date): A｜F1｜P1｜window 09:00–09:20｜start and end 09:00–09:10｜10 minutes｜signed; B｜F1｜P1｜window 09:00–09:25｜start and end 09:05–09:15｜10 minutes｜signed; C｜F2｜P2｜window 09:00–09:20｜start and end 09:00–09:15｜15 minutes｜sign-off missing; D｜F2｜P1｜window 09:20–09:35｜start and end 09:20–09:30｜10 minutes｜signed.",
-                  "Rules: the start is not earlier than the window start, the end is not later than the window end, and the end minus the start equals the given duration; the same person or the same flight must not have overlapping periods, and a previous end equal to the next start is allowed. A missing sign-off is recorded as evidence pending only and is not fabricated. Only the fields given above are checked.",
-                  "Task: classify each row and list the conflicting object, the intersection and the minutes; change only B's start and end to remove the conflict and re-check all the records a second time, keeping the other inputs. There is no real flight, refuelling or de-icing operating requirement."
+                  "Rules: the start is not earlier than the window start, the end is not later than the window end, and the end minus the start equals the given duration; the same person or the same flight must not have overlapping periods, and a previous end equal to the next start is allowed. A missing sign-off is recorded as evidence pending only and is not fabricated. Only the fields given above are checked. Check in order A, B, C, D. If two entries overlap, retain the earlier-listed entry and flag the later-listed one for revision.",
+                  "Classify each row and record any overlap, the shared person or flight, and its duration. Change only the start and end of the later-listed record you flagged. Keep all other inputs and recheck all four rows. Use only the fictional records."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Reference answer",
-                  "First check: A/D conform in the field and the period (2 rows), B overlaps A for the same person and the same flight from 09:05 to 09:10 for 5 minutes (1 row conflicting); C conforms in the period and the duration but its sign-off is missing (1 row evidence pending). All are within the given window, and the durations are 10/10/15/10 minutes.",
-                  "Feasible change: change B to 09:10–09:20, still 10 minutes and within the 09:00–09:25 window; P1's A→B→D meet end to end with no overlap, and the same flight F1 has no overlap either. The second check finds A/B/D conforming in the field and the period, with C still evidence pending, so the case cannot be closed entirely."
+                  "Complete the original and revised checks independently",
+                  "Check each row’s timing, window, duration, overlaps for the same person or flight, and receipt.",
+                  "List the original and revised values, the decision and the reason. Keep the original table."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Recheck and the 10-point editorial scoring",
-                  "An independent recheck of the original four rows: 1 point for each classified row, 4 in total; 1 point each for stating the A/B 5-minute intersection and the feasible B adjustment, 2 in total; and 1 point each for marking C's missing sign-off and refusing to fabricate it, 2 in total.",
-                  "The end-to-end and window and duration boundary check, 1 point; stating explicitly that the paper cannot demonstrate a real operation or an authorisation, 1 point; 10 in total. There is no hiring pass mark; a failure locates the specific row and condition, and after the change all four rows are re-checked."
+                  "Check after submitting",
+                  "On Day 6, submit both checks and a one-page handover independently.",
+                  "On Day 7, open “GS-43 reference (open after submitting)” in the FAQ."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "Paper boundary",
-                  "G-v1 observes only table reading, resource conflicts, record gaps and handover; it does not demonstrate outdoor tolerance, equipment operation, real rostering safety, training or a work qualification, and it uses no real internal airport material."
+                  "GS-43 observes only table reading, resource conflicts, record gaps and handover; it does not demonstrate outdoor tolerance, equipment operation, real rostering safety, training or a work qualification, and it uses no real internal airport material."
                 ]
               }
             ]
           },
           "id": "aircraft-service-attendants.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "Entry exercise: the G-v1 paper shift-record check (fictional material)",
+          "title": "GS-43 | Check four ground-service handover records",
           "type": "cards"
         },
         {
@@ -29597,38 +29572,38 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Original input sheet",
-                  "Keep the four G-v1 rows, the version, the windows, the durations and the sign-off states as they are; record the before and after values of any change and do not substitute a real flight.",
-                  "Attach the four-row first-check status: A/D conform in the field and the period, B conflicts and C is evidence pending; note the A/B overlap of 5 minutes."
+                  "Original and revised tables",
+                  "Keep the input and give each row’s decision and reason.",
+                  "Show values before and after any change."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Independent recheck sheet",
-                  "Cover the reference answer, recompute the windows, the durations and the same-person / same-flight intersections, and then correct your answer item by item.",
-                  "List the four-row result after the B09:10–09:20 adjustment, keep C's missing sign-off as evidence pending and note who must provide which record; the sign-off must not be fabricated."
+                  "Independent recheck",
+                  "Recheck windows, durations, overlaps and receipts without the reference.",
+                  "Hand off items that still need evidence to the appropriate role."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "One-page handover summary",
-                  "Summarise the first check as 2 conforming / 1 conflicting / 1 evidence pending and the second check as 3 conforming / 1 evidence pending; explain the B correction and the fact that C is not closed, and list the 10-point editorial scoring and the error location."
+                  "List row decisions and totals in both versions, then name the evidence and people needed."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "Requirements check annex",
-                  "Separately list the target organisation's education, training, pass, project authorisation and shift items still to be confirmed, with the official sources; keep them apart from the G-v1 paper performance and do not claim that a post authority has been obtained."
+                  "Separately list the target organisation's education, training, pass, project authorisation and shift items still to be confirmed, with the official sources; keep them apart from the GS-43 paper performance and do not claim that a post authority has been obtained."
                 ]
               }
             ]
           },
           "id": "aircraft-service-attendants.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "What verifiable portfolio material can be prepared when entering the field?",
           "type": "cards"
@@ -29692,59 +29667,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1｜Freezing the input",
-                  "Freeze the four G-v1 inputs and read the window, duration, same-person / same-flight and sign-off rules; separately list the target organisation's requirements still to be confirmed."
+                  "Day 1",
+                  "Freeze the four GS-43 inputs and read the window, duration, same-person / same-flight and sign-off rules; separately list the target organisation's requirements still to be confirmed."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2｜Window and duration",
+                  "Day 2",
                   "Check the window and the end minus the start row by row, keeping the original values and the calculation."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3｜Overlap check",
-                  "Check the P1 and F1 intersections and write the A/B overlap 09:05–09:10 of 5 minutes in total, without carrying out a real operation from the exercise."
+                  "Day 3",
+                  "Check overlaps for the same person or flight and record your reasons."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4｜Missing sign-off",
-                  "Check the sign-offs and record C as evidence pending; state which piece of evidence is missing and do not fabricate a signature."
+                  "Day 4",
+                  "Record missing evidence and who should receive it."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5｜Candidate adjustment",
-                  "Change only B to 09:10–09:20 and re-check the window, the 10 minutes and the end-to-end A→B→D."
+                  "Day 5",
+                  "Write a separate revised table and recheck all four rows."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6｜Independent recheck",
-                  "Cover the answer and re-check the four rows independently, recording the differences from the first check; C is still evidence pending."
+                  "Day 6",
+                  "Submit both tables and a one-page handover without reading the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7｜Summary and decision",
-                  "Hand in the original sheet, the recheck sheet, the handover summary and the requirements check annex; locate the errors under the 10-point editorial rule and decide whether to continue a formal post investigation."
+                  "Day 7",
+                  "Open “GS-43 reference (open after submitting)” in the FAQ, record differences and choose one service area to explore."
                 ]
               }
             ]
           },
           "id": "aircraft-service-attendants.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "Seven-day paper exercise: re-checking the four G-v1 records",
+          "title": "Seven-day paper exercise: GS-43",
           "type": "timeline"
         },
         {
@@ -29753,17 +29728,17 @@
           "data": {
             "entries": [
               "The paper result only helps observe the record-checking habit and cannot demonstrate apron, outdoor or shift tolerance.",
-              "Distinguish the refuelling, de-icing/cleaning and marshalling/towing directions by the real tasks; G-v1 does not replace the specialised training.",
+              "Distinguish the refuelling, de-icing/cleaning and marshalling/towing directions by the real tasks; GS-43 does not replace the specialised training.",
               "Check the education, the training, the pass and the project authorisation in the target organisation's announcement; an item with no announcement stays to be confirmed.",
               "Confirm that the passenger/cargo skill standard is not a uniform aircraft refuelling/de-icing qualification, and check the recognition of other certificates separately.",
-              "The first check gives 2 conforming, 1 conflicting and 1 evidence pending; after the B adjustment the second check gives 3 conforming and 1 evidence pending, so C cannot be closed.",
+              "Use the reference to check both versions’ decisions, totals and missing evidence.",
               "The 10-point editorial scoring only locates the four-row classification, the overlap and the adjustment, the missing sign-off and the boundary understanding; there is no hiring pass mark.",
               "Hand in the original sheet, the independent recheck, the handover summary and the requirements annex; the formal training follows the organisation's arrangement, and the paper deliverable confers no work authority."
             ]
           },
           "id": "aircraft-service-attendants.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "How to decide at the end of the seven days whether to continue",
           "type": "list"
@@ -29793,7 +29768,7 @@
             "rows": [
               [
                 "Movement-area operations safety initial and recurrent training",
-                "Personnel entering the movement area (Chinese regulation)",
+                "Airside workers of the relevant organization under Article 22",
                 "The organisation trains and assesses to its system",
                 "According to the applicable post requirements",
                 "A recurrent-training interval of no more than 13 months; the initial and recurrent training content follows the civil aviation provisions",
@@ -29863,17 +29838,17 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "Chinese movement-area personnel receive initial and recurrent training under their own organisation's system, with an interval of no more than 13 months; the controlled-area pass and the specific vehicle and project training authority are checked separately. The regulation gives no uniform education for this occupation and no individual refuelling/de-icing certificate; the ground-equipment fuel station permit is an operator requirement, not an aircraft refuelling qualification.",
-              "A civilian vehicle-service or industrial-maintenance credential does not replace apron-operations training and authorisation; this occupation's experience used in another industry usually also requires renewed recognition under the target industry's requirements.",
-              "Movement-area support personnel must receive initial and recurrent training (the recurrent-training interval must not exceed thirteen months) and are managed under the violation point system.",
-              "Those intending to enter should check the education, the medical examination, the training and the certification requirements in the official information, together with the job items and the shift arrangements, and apply through official channels."
+              "Articles 24 and 26 of the CAAC aviation fuel supply rules require covered suppliers to ensure covered staff complete and pass safety training before taking up the work and to set aircraft fueling and defueling procedures. Check airside access, vehicle driving and task authority separately under applicable rules and employer requirements.",
+              "Check the applicable rules and employer manual separately for access, driving and operating authority.",
+              "Fuel for ground equipment and fuel for aircraft are separate services.",
+              "Check the actual posting, applicable rules and employer authorization."
             ]
           },
           "id": "aircraft-service-attendants.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "gs-fuel",
+            "airport",
+            "gs-daxing"
           ],
           "title": "Notes on qualification and authorisation boundaries",
           "type": "notice"
@@ -29883,17 +29858,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no item-by-item verifiable recruitment announcement for this occupation was obtained this round; preparation advice, a skill standard or an occupational questionnaire is not treated as a recruitment sample.",
-              "The U.S. questionnaire asks about the new-employee education requirement, not an education distribution; no uniform Chinese education for this occupation was obtained, and the passenger/cargo skill standard cannot be applied directly.",
-              "Judge whether the post's tasks involve aircraft refuelling, de-icing, fluid supply, cleaning or marshalling/towing; a similar title is not enough to establish a match."
+              "China Aviation Oil’s Beijing company listed seven refueler positions at Beijing Daxing International Airport on November 22, 2024. It asked for junior college or higher; the refueler role also required a B2 or higher driving license, at least one year of driving and a driving skills assessment. The notice listed CNY 4,000–7,000 monthly before tax for the three advertised roles together, without a separate refueler range. The 2025 first CAFUC and China Aviation Oil training cohort planned to select 40 eligible students from the university’s 2023 undergraduate intake. This is a school-employer program, not a count of refueler openings. Its education and training conditions are specific to the program."
             ]
           },
           "id": "aircraft-service-attendants.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "gs-daxing",
+            "gs-cafuc"
           ],
           "title": "Notes on the recruitment sample",
           "type": "notice"
@@ -29943,14 +29914,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The O*NET questionnaire asks what education a new employee needs to do this occupation, and 77% answered a high school diploma or equivalent, 11% a post-secondary non-degree certificate and 11% some college but no degree; these are U.S. respondent answers, not the education distribution of those in post or a Chinese entry threshold. The current Job Zone is 1–2. The BLS typical entry education is a high school diploma or equivalent plus short-term on-the-job training. The Chinese requirements are checked separately: mainland China, Rules on the Safety Management of Transport Airport Operations (Ministry of Transport Order No. 5 of 2025, in force 2026-07-01): the airport operator designates the aircraft cleaning and de-icing/anti-icing areas and sets out the de-icing fluid recovery measures; personnel working in the movement area receive initial and recurrent training from their own organisation, with a recurrent training interval of no more than 13 months, and wear a controlled-area pass and reflective-marked work clothing. Article 118 the permit and the ban on commercial mobile refuelling apply to ground-equipment fuel stations and services and are not an aircraft refuelling qualification; an organisation's own-use mobile refuelling follows the civil aviation provisions. Insufficient evidence: no uniform Chinese education requirement for this occupation and no complete recruitment announcement sample were obtained."
+              "The O*NET questionnaire asks what education a new employee needs to do this occupation, and 77% answered a high school diploma or equivalent, 11% a post-secondary non-degree certificate and 11% some college but no degree; these are U.S. respondent answers, not the education distribution of those in post or a Chinese entry threshold. The current Job Zone is 1–2. The BLS typical entry education is a high school diploma or equivalent plus short-term on-the-job training. The Chinese requirements are checked separately: mainland China, Rules on the Safety Management of Transport Airport Operations (Ministry of Transport Order No. 5 of 2025, in force 2026-07-01): the airport operator designates the aircraft cleaning and de-icing/anti-icing areas and sets out the de-icing fluid recovery measures; personnel working in the movement area receive initial and recurrent training from their own organisation, with a recurrent training interval of no more than 13 months, and wear a controlled-area pass and reflective-marked work clothing. Article 118 the permit and the ban on commercial mobile refuelling apply to ground-equipment fuel stations and services and are not an aircraft refuelling qualification; an organisation's own-use mobile refuelling follows the civil aviation provisions. The Daxing posting and CAFUC cohort illustrate particular conditions without establishing a mainland-wide entry rule."
             ]
           },
           "id": "aircraft-service-attendants.path.career-path-block.11",
           "source_refs": [
             "onet",
             "ep",
-            "airport"
+            "airport",
+            "gs-daxing",
+            "gs-cafuc"
           ],
           "type": "prose"
         },
@@ -30224,12 +30197,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Able to check the fuel and the quantity to the job order and restate the grounding and fire-prevention requirements."
+              "Explain how you would check the work order, applicable procedure and training requirement."
             ]
           },
           "id": "aircraft-service-attendants.path.career-path-block.30",
           "source_refs": [
-            "onet",
+            "gs-fuel",
             "onet"
           ],
           "type": "prose"
@@ -31179,13 +31152,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no official employment projection corresponding to this occupation in China was obtained. The latest BLS 2025—2035 projection: the United States 53-6032 has a base-year employment of 31,200 people, 2035 at 32,900 people, a rise of 5.6%, an official net change of about 1,700 people and average annual openings of about 4,000. The openings include replacement demand and are not a guarantee of net new posts or of individual hiring. This round's O*NET summary also showed 2025 at 31,200 people, the 2025—2035 growth categories of 5% to 6% and about 4,000 openings a year; the precise growth rate and net change follow the detailed BLS table. The adjacent-occupation moves are an editorial capability comparison, not a verified transfer success rate."
+              "For U.S. SOC 53-6032, BLS projects about 31,200 jobs in 2025 and 32,900 in 2035, up 5.6%, with about 1,700 net new jobs and 4,000 annual openings including replacements. The mainland examples apply to their own place and program. They do not establish national employment."
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.8",
           "source_refs": [
             "ep",
-            "onet"
+            "gs-daxing",
+            "gs-cafuc"
           ],
           "type": "prose"
         },
@@ -31911,28 +31885,41 @@
           "data": {
             "entries": [
               {
-                "answer": "Refuel aircraft on the apron and de-ice them, top up water and coolant, empty the waste tanks, maintain the air and oxygen systems and clean and polish the fuselage exterior: marshall the aircraft into position to the signals, refuel with a fuel-truck hose and check the fuel and the quantity, spray de-icing fluid from a bucket, tow the aircraft with a tug, inspect components to locate cracks, damage and leaks, and complete the task records and report anomalies as required.",
+                "answer": "Aircraft service attendants fuel aircraft and record the work. Some assignments include deicing, replenishment, waste servicing, exterior cleaning, marshalling or towing. Check the employer’s scope and authorization; cabin cleaning and maintenance signoff are separate work.",
                 "id": "aircraft-service-attendants.faq.1",
                 "question": "What does an aircraft service attendant do each day?",
-                "question_key": "career.faq.aircraft-service-attendants.daily-work"
+                "question_key": "career.faq.aircraft-service-attendants.daily-work",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "Aircraft service attendants carry out the fuel, fluid supply, de-icing, cleaning and apron-marshalling work within the authorisation; aircraft maintenance and airworthiness release are carried out by licensed maintenance personnel; the operation of the aircraft is the crew's responsibility; airport operations and unified apron management are the airport operator's responsibility, and the work concerned must follow the locations and the management system it designates. Automotive and water transport service attendants face vehicles and vessels and differ from this occupation in object and rules, so it cannot be transferred directly.",
+                "answer": "Ground service can include fueling, replenishment, deicing or ramp work within the worker’s authorization. Aircraft maintenance, release after maintenance, flight crew operations and airport management are separate functions. Check maintenance duties and signing authority under the applicable jurisdiction and the employer’s authorization.",
                 "id": "aircraft-service-attendants.faq.2",
                 "question": "Where is the boundary between this occupation and adjacent posts?",
-                "question_key": "career.faq.aircraft-service-attendants.comparison"
+                "question_key": "career.faq.aircraft-service-attendants.comparison",
+                "source_refs": [
+                  "onet",
+                  "airport"
+                ]
               },
               {
-                "answer": "Insufficient evidence: no study of this occupation's AI substitution rate, adoption or effect was obtained. This page sets out only conditional recording assistance scenarios and does not judge a causal AI effect from the BLS growth. The latest BLS 2025—2035 projection: the United States 53-6032 has a base-year employment of 31,200 people, 2035 at 32,900 people, a rise of 5.6%, an official net change of about 1,700 people and average annual openings of about 4,000. The openings include replacement demand and are not a guarantee of net new posts or of individual hiring. O*NET still shows the 2024—2034 figures of 28,000 people, 5% to 6% and 4,300 openings, while this page's main data use the new BLS table.",
+                "answer": "Tools can check identifiers, timestamps and receipt fields and flag possible conflicts. Actual equipment and fuel decisions follow authorized procedures and staff roles. No occupational displacement rate is available.",
                 "id": "aircraft-service-attendants.faq.3",
                 "question": "Will this occupation be replaced by AI?",
-                "question_key": "career.faq.aircraft-service-attendants.ai"
+                "question_key": "career.faq.aircraft-service-attendants.ai",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "Insufficient evidence: no precise national or by-city wage distribution for this occupation in China was obtained. The National Bureau of Statistics 2025 figures of 133,981 yuan/year for non-private transport, storage and postal services and 113,594 yuan/year for non-private manufacturing are broad sector averages only and do not represent this occupation's wage.",
+                "answer": "A mainland-wide wage distribution for this occupation was not available. China Aviation Oil’s Beijing company listed seven refueler positions at Beijing Daxing International Airport on November 22, 2024. It asked for junior college or higher; the refueler role also required a B2 or higher driving license, at least one year of driving and a driving skills assessment. The notice listed CNY 4,000–7,000 monthly before tax for the three advertised roles together, without a separate refueler range.",
                 "id": "aircraft-service-attendants.faq.4",
                 "question": "How should wages in mainland China be understood?",
-                "question_key": "career.faq.aircraft-service-attendants.china-pay"
+                "question_key": "career.faq.aircraft-service-attendants.china-pay",
+                "source_refs": [
+                  "gs-daxing"
+                ]
               },
               {
                 "answer": "U.S. definition: in 2025, month 5 (May), 53-6032 had a median annual wage of 40,450 U.S. dollars (an hourly wage of 19.45 U.S. dollars), with the 10th percentile at 33,830 U.S. dollars, the 25th percentile at 35,740 U.S. dollars, the 75th percentile at 46,830 U.S. dollars and the 90th percentile at 57,610 U.S. dollars (BLS Occupational Employment and Wage Statistics OEWS, displayed through O*NET). A percentile is a position in a statistical distribution and does not represent a starting wage.",
@@ -31941,22 +31928,33 @@
                 "question_key": "career.faq.aircraft-service-attendants.us-pay"
               },
               {
-                "answer": "The O*NET questionnaire asks what education a new employee needs to do this occupation, and 77% answered a high school diploma or equivalent, 11% a post-secondary non-degree certificate and 11% some college but no degree; these are U.S. respondent answers, not the education distribution of those in post or a Chinese entry threshold. The current Job Zone is 1–2. The BLS typical entry education is a high school diploma or equivalent plus short-term on-the-job training. The specific Chinese education, medical examination and item authority are checked with the target organisation; mainland China, Rules on the Safety Management of Transport Airport Operations (Ministry of Transport Order No. 5 of 2025, in force 2026-07-01): the airport operator designates the aircraft cleaning and de-icing/anti-icing areas and sets out the de-icing fluid recovery measures; personnel working in the movement area receive initial and recurrent training from their own organisation, with a recurrent training interval of no more than 13 months, and wear a controlled-area pass and reflective-marked work clothing. Article 118 the permit and the ban on commercial mobile refuelling apply to ground-equipment fuel stations and services and are not an aircraft refuelling qualification; an organisation's own-use mobile refuelling follows the civil aviation provisions.",
+                "answer": "Articles 24 and 26 of the CAAC aviation fuel supply rules require covered suppliers to ensure covered staff complete and pass safety training before taking up the work and to set aircraft fueling and defueling procedures. Check airside access, vehicle driving and task authority separately under applicable rules and employer requirements. China Aviation Oil’s Beijing company listed seven refueler positions at Beijing Daxing International Airport on November 22, 2024. It asked for junior college or higher; the refueler role also required a B2 or higher driving license, at least one year of driving and a driving skills assessment. The notice listed CNY 4,000–7,000 monthly before tax for the three advertised roles together, without a separate refueler range.",
                 "id": "aircraft-service-attendants.faq.6",
                 "question": "How can someone become a service worker in this occupation?",
-                "question_key": "career.faq.aircraft-service-attendants.education"
+                "question_key": "career.faq.aircraft-service-attendants.education",
+                "source_refs": [
+                  "gs-fuel",
+                  "gs-daxing"
+                ]
               },
               {
-                "answer": "Mainly skipping the bonding step or the fuel check, a de-icing location or recovery that does not comply, improper spillage and waste-water handling, the risks of apron vehicles and work at height, an untrue record or work beyond the authorisation, and fatigue from shift work and the winter de-icing peak. Working step by step to the procedure, checking the fuel and the quantity, working at the designated location and carrying out the de-icing fluid recovery, and stopping on an anomaly and reporting it are the basic controls; the specific provisions follow the airport management system and the organisation's work procedure.",
+                "answer": "Check which fuel, vehicle, height, waste-fluid or shift risks apply to your role and follow the relevant procedures. Record, report or escalate exceptions according to their type and your authority. The applicable procedure determines when work stops or resumes.",
                 "id": "aircraft-service-attendants.faq.7",
                 "question": "What are the main risks of this occupation?",
-                "question_key": "career.faq.aircraft-service-attendants.risk"
+                "question_key": "career.faq.aircraft-service-attendants.risk",
+                "source_refs": [
+                  "gs-fuel",
+                  "airport"
+                ]
               },
               {
-                "answer": "The latest BLS 2025—2035 projection: the United States 53-6032 has a base-year employment of 31,200 people, 2035 at 32,900 people, a rise of 5.6%, an official net change of about 1,700 people and average annual openings of about 4,000. The openings include replacement demand and are not a guarantee of net new posts or of individual hiring. O*NET still shows the 2024—2034 figures of 28,000 people, 5% to 6% and 4,300 openings, while this page's main data use the new BLS table. They cannot be extrapolated to Chinese employment.",
+                "answer": "For U.S. SOC 53-6032, BLS projects about 31,200 jobs in 2025 and 32,900 in 2035, up 5.6%, with about 1,700 net new jobs and 4,000 annual openings including replacements.",
                 "id": "aircraft-service-attendants.faq.8",
                 "question": "What are the U.S. employment prospects?",
-                "question_key": "career.faq.aircraft-service-attendants.outlook"
+                "question_key": "career.faq.aircraft-service-attendants.outlook",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
                 "answer": "U.S. O*NET respondent answers for this occupation: 89% never indoors in a controlled setting, 28% daily covered outdoor work, 74% daily time pressure, 67% making decisions every day, 58% considering the consequences of an error extremely serious, 64% almost continuous repetitive motion, 51% daily whole-body vibration and 39% daily work at height. 17% reported a typical week of 40 hours and the other bands were not obtained this round; no claim is made that the others are longer or that this represents a Chinese shift pattern.",
@@ -31969,6 +31967,15 @@
                 "id": "aircraft-service-attendants.faq.10",
                 "question": "How should someone choose between refuelling, de-icing and exterior cleaning, and apron marshalling and towing?",
                 "question_key": "career.faq.aircraft-service-attendants.direction-choice"
+              },
+              {
+                "answer": "First check: A/D conform in the field and the period (2 rows), B overlaps A for the same person and the same flight from 09:05 to 09:10 for 5 minutes (1 row conflicting); C conforms in the period and the duration but its sign-off is missing (1 row evidence pending). All are within the given window, and the durations are 10/10/15/10 minutes. Feasible change: change B to 09:10–09:20, still 10 minutes and within the 09:00–09:25 window; P1's A→B→D meet end to end with no overlap, and the same flight F1 has no overlap either. The second check finds A/B/D conforming in the field and the period, with C still evidence pending, so the case cannot be closed entirely. An independent recheck of the original four rows: 1 point for each classified row, 4 in total; 1 point each for stating the A/B 5-minute intersection and the feasible B adjustment, 2 in total; and 1 point each for marking C's missing sign-off and refusing to fabricate it, 2 in total. The end-to-end and window and duration boundary check, 1 point; stating explicitly that the paper cannot demonstrate a real operation or an authorisation, 1 point; 10 in total. There is no hiring pass mark; a failure locates the specific row and condition, and after the change all four rows are re-checked.",
+                "id": "aircraft-service-attendants.faq.11",
+                "question": "GS-43 reference (open after submitting)",
+                "question_key": "career.faq.aircraft-service-attendants.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -32003,14 +32010,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The O*NET tasks, education and work context for this occupation; the BLS OEWS2025, month 5 (May) wage and the 2025—2035 projection are used separately; the airport regulation in force on 2026-07-01; the 2022 national skill standard for air transport ground service attendants serves only as a passenger/cargo comparison; and the National Bureau of Statistics 2025 industry and unit wage averages."
+              "O*NET covers duties, OEWS provides national wages, and BLS Table 1.2 provides projections. The Daxing posting, training cohort and CAAC rules each apply within their own scope."
             ]
           },
           "id": "aircraft-service-attendants.sources.source-card.2",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "oews",
+            "ep",
+            "gs-daxing",
+            "gs-cafuc",
+            "gs-fuel"
           ],
           "type": "prose"
         },
@@ -32019,12 +32029,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Material check date: 2026-10-08; wage 2025, month 5 (May); employment projection 2025–2035; the commencement of the airport regulation and the other material periods are noted separately."
+              "U.S. wages are for May 2025 and projections cover 2025–2035. Read the mainland posting and program on their original dates."
             ]
           },
           "id": "aircraft-service-attendants.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep",
+            "gs-daxing",
+            "gs-cafuc"
           ],
           "type": "prose"
         },
@@ -32033,13 +32046,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no U.S. per-industry median wage for this occupation was obtained this round. The wage is the U.S. OEWS2025, month 5 (May) figure shown through O*NET and the employment is the BLS2025—2035 projection; China serves only as an industry and unit average reference, and it is not claimed that the BLS did not publish it. The Chinese airport regulation governs the training, the controlled area and the de-icing/anti-icing and cleaning areas; the ground-equipment refuelling service article cannot be turned into an aircraft refuelling qualification. G-v1 is a fictional paper record exercise and does not replace the formal training and operation."
+              "The Daxing pay range covers three advertised roles, so it does not establish a refueler-only or national wage. Paper exercises do not replace practical training."
             ]
           },
           "id": "aircraft-service-attendants.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "onet"
+            "gs-daxing",
+            "gs-fuel"
           ],
           "type": "prose"
         }
@@ -32072,19 +32085,19 @@
                 "entity": "MBTI personality test",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram personality test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the aircraft service attendant occupation page",
@@ -32114,73 +32127,73 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "exact",
-                  "Accessed 2026-10-02; the actual scope is in the limitation"
+                  "Aircraft service attendants fuel aircraft and record the work. Some assignments include deicing, replenishment, waste servicing, exterior cleaning, marshalling or towing. Check the employer’s scope and authorization; cabin cleaning and maintenance signoff are separate work.",
+                  "U.S. occupational duties."
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "The O*NET occupation summary supports the identity, the tasks and the RC code; the older 2024—2034 projection is not used as this page's main projection.",
+                "limitation": "U.S. occupational duties.",
                 "market": "United States",
-                "name": "O*NET OnLine 53-6032.00 aircraft service attendants occupation summary",
-                "period": "2026 occupation page; each survey item has its own material period",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 53-6032.00: aircraft service duties",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-6032.00"
+                "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "exact",
-                  "Accessed 2026-10-02; the actual scope is in the limitation"
+                  "The May 2025 U.S. national median was $40,450 a year and $19.45 an hour. Annual wage percentiles 10/25/50/75/90 were $33,830/$35,740/$40,450/$46,830/$57,610.",
+                  "National occupational data."
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "bls",
-                "limitation": "The direct BLS occupation page was not read successfully this round; the wage is checked through the BLS OEWS shown by O*NET, and its employment size is not cited.",
+                "limitation": "National occupational data.",
                 "market": "United States",
-                "name": "The BLS OEWS2025, month 5 (May) wage shown by O*NET: 53-6032.00",
-                "period": "Wages in 2025, month 5 (May)",
-                "publisher": "O*NET OnLine (BLS OEWS data)",
+                "name": "National BLS OEWS wages shown by O*NET",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-6032.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "exact",
-                  "Accessed 2026-10-02; the actual scope is in the limitation"
+                  "For U.S. SOC 53-6032, BLS projects about 31,200 jobs in 2025 and 32,900 in 2035, up 5.6%, with about 1,700 net new jobs and 4,000 annual openings including replacements.",
+                  "National projections."
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "National 53-6032 with a 31,200 base year, a rise of 5.6%, a net change of about 1,700 people and about 4,000 openings a year; it is not an OEWS employment value or a Chinese projection.",
+                "limitation": "National projections.",
                 "market": "United States",
-                "name": "BLS2025—2035 employment projection: 53-6032",
-                "period": "The 2025 base year and the 2025—2035 projection",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "name": "BLS Employment Projections Table 1.2: 53-6032",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "exact",
-                  "Accessed 2026-10-02; the actual scope is in the limitation"
+                  "The May 2025 U.S. national median was $40,450 a year and $19.45 an hour. Annual wage percentiles 10/25/50/75/90 were $33,830/$35,740/$40,450/$46,830/$57,610.",
+                  "National occupational data."
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "oews",
-                "limitation": "The BLS OEWS wage is shown through O*NET; a percentile is not a starting wage or a wage floor or ceiling.",
+                "limitation": "National occupational data.",
                 "market": "United States",
-                "name": "The BLS 2025, month 5 (May) wage percentiles shown by O*NET (53-6032.00)",
-                "period": "2025, month 5 (May)",
-                "publisher": "O*NET OnLine (BLS OEWS data)",
+                "name": "National BLS OEWS wages shown by O*NET",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-6032.00"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "industry_proxy",
+                  "Annual average wages by broad sector, unit and position category, without a separate figure for this occupation; the same National Bureau of Statistics material already checked in this task is reused.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "industry_proxy",
@@ -32196,7 +32209,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "4-02-04-02 lists only civil aviation passenger agents and civil aviation cargo agents; it does not correspond directly to aircraft refuelling/de-icing or to this occupation's education qualification.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32212,7 +32225,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "Articles 19/22/23/24 on training management and the controlled area, Articles 113/114 on the cleaning and de-icing/anti-icing areas and the recovery, and Article 118 on ground-equipment refuelling; it provides no uniform aircraft refuelling certificate or wage.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "exact",
@@ -32228,7 +32241,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Respondent work context, not an incident rate, a Chinese shift pattern, an individual health judgement or an AI adoption rate.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32244,7 +32257,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "The software list from 2025 occupation-linked job postings; the Excel, Office, Windows and Word shares are all Not available, and this is not an on-site tool inventory or AI adoption evidence.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32260,7 +32273,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Used for the task list and the work activities. U.S. occupational material does not demonstrate a Chinese training qualification, an AI deployment or a recruitment effect.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32276,7 +32289,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Used for the shares of work at height, whole-body vibration and working hours. U.S. occupational material does not demonstrate a Chinese training qualification, an AI deployment or a recruitment effect.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32292,7 +32305,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "The legal basis for the wage composition and the NBS statistical note are kept apart; this occupation's annual wage is not listed separately.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32308,7 +32321,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Used for the note on the interest code RC (Realistic, Conventional). U.S. occupational material does not demonstrate a Chinese training qualification, an AI deployment or a recruitment effect.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32322,25 +32335,25 @@
                 "url": "https://www.onetonline.org/link/summary/53-6032.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "contextual",
-                  "Accessed 2026-10-02; the actual scope is in the limitation"
+                  "Independently check four fictional records.",
+                  "Paper exercise."
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "77/11/11 are respondent answers on the new-employee education requirement, not an in-post distribution; the current Job Zone1–2, which is not a Chinese entry rule.",
-                "market": "United States",
-                "name": "O*NET education questionnaire and Job Zone1–2",
-                "period": "2026 occupation page; the new-employee education requirement questionnaire",
-                "publisher": "O*NET OnLine",
-                "scope": "contextual",
-                "url": "https://www.onetonline.org/link/details/53-6032.00"
+                "limitation": "Paper exercise.",
+                "market": "Fictional case",
+                "name": "GS-43 | Check four ground-service handover records",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": null
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "The URL is in fact a custom report selection page that supports only the occupational identity and the custom entry point and is not evidence of research, AI or complete occupational data.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32356,7 +32369,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Used as a reference for the tasks and duties. U.S. occupational material does not demonstrate a Chinese training qualification, an AI deployment or a recruitment effect.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32372,7 +32385,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Used for the note on the tasks and the work steps. U.S. occupational material does not demonstrate a Chinese training qualification, an AI deployment or a recruitment effect.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32388,7 +32401,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Used for the note on the inspection, the component location and the recording requirements. U.S. occupational material does not demonstrate a Chinese training qualification, an AI deployment or a recruitment effect.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32404,7 +32417,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Used as a reference for the task list. U.S. occupational material does not demonstrate a Chinese training qualification, an AI deployment or a recruitment effect.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32420,7 +32433,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Used for the task description and the duty boundary. U.S. occupational material does not demonstrate a Chinese training qualification, an AI deployment or a recruitment effect.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32436,7 +32449,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Used for the note on the occupational attributes. U.S. occupational material does not demonstrate a Chinese training qualification, an AI deployment or a recruitment effect.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32452,7 +32465,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Used for the note on the data definition. U.S. occupational material does not demonstrate a Chinese training qualification, an AI deployment or a recruitment effect.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32468,7 +32481,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "88% transport and warehousing and 12% other industries; the industry composition is not a per-industry occupational wage or a Chinese industry distribution.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32484,7 +32497,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Used as a reference for the tasks and duties. U.S. occupational material does not demonstrate a Chinese training qualification, an AI deployment or a recruitment effect.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32498,25 +32511,25 @@
                 "url": "https://www.onetonline.org/link/summary/53-6032.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "exact",
-                  "Accessed 2026-10-02; the actual scope is in the limitation"
+                  "The May 2025 U.S. national median was $40,450 a year and $19.45 an hour. Annual wage percentiles 10/25/50/75/90 were $33,830/$35,740/$40,450/$46,830/$57,610.",
+                  "National occupational data."
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "The national wage quintiles and the material period; it provides no Chinese wage or the per-industry median missing from this page.",
+                "limitation": "National occupational data.",
                 "market": "United States",
-                "name": "O*NET OnLine 53-6032.00 national wage percentile page",
-                "period": "2025, month 5 (May)",
-                "publisher": "O*NET OnLine (BLS OEWS data)",
+                "name": "National BLS OEWS wages shown by O*NET",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-6032.00"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Used for the note on the inspection, the component location and the recording process. U.S. occupational material does not demonstrate a Chinese training qualification, an AI deployment or a recruitment effect.",
                   "Accessed 2026-10-02; the actual scope is in the limitation"
                 ],
                 "evidence_type": "contextual",
@@ -32545,21 +32558,68 @@
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Refuelling｜Hose and fuel check｜Refuel the aircraft with a hose connected to the fuel truck, check the fuel and the quantity, and complete the grounding and the recheck to procedure. — 0/100; weight=1/3; aircraft-service-attendants.profile.responsibilities-block.1[0]",
-                  "De-icing work｜Bucket and de-icing fluid｜Spray de-icing fluid onto the aircraft from a bucket lifted by a truck crane, working at the designated location and to the recovery requirements. — 0/100; weight=1/3; aircraft-service-attendants.profile.responsibilities-block.1[3]",
-                  "Apron marshalling｜Towing and signals｜Marshall the aircraft into position by hand signal, wand and other means, and tow it to the gate or the hangar with a tug. — 25/100; weight=1/3; aircraft-service-attendants.profile.responsibilities-block.1[4]"
+                  "The occupational record describes duties and documentation.",
+                  "Does not give a displacement rate.",
+                  "Does not give a displacement rate.",
+                  "Does not give a displacement rate.",
+                  "Does not give a displacement rate."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "primary_document",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "Does not give a displacement rate.",
+                "market": "United States",
+                "name": "O*NET: records and handover tasks",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-6032.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "China Aviation Oil’s Beijing company listed seven refueler positions at Beijing Daxing International Airport on November 22, 2024. It asked for junior college or higher; the refueler role also required a B2 or higher driving license, at least one year of driving and a driving skills assessment. The notice listed CNY 4,000–7,000 monthly before tax for the three advertised roles together, without a separate refueler range."
+                ],
+                "evidence_type": "primary_document",
+                "id": "gs-daxing",
+                "limitation": "Historical notice; pay listed for three roles together.",
+                "market": "Mainland China",
+                "name": "Daxing employment platform: refueler and related postings",
+                "period": "2024-11-22",
+                "publisher": "China Aviation Oil Beijing / Daxing",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.daxing.net/tzgg/180693.jhtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The 2025 first CAFUC and China Aviation Oil training cohort planned to select 40 eligible students from the university’s 2023 undergraduate intake. This is a school-employer program, not a count of refueler openings. Its education and training conditions are specific to the program."
+                ],
+                "evidence_type": "primary_document",
+                "id": "gs-cafuc",
+                "limitation": "Program selection, not general eligibility.",
+                "market": "Mainland China",
+                "name": "CAFUC: first China Aviation Oil training cohort",
+                "period": "2025-08-11",
+                "publisher": "CAFUC / China Aviation Oil",
+                "scope": "contextual",
+                "url": "https://www.cafuc.edu.cn/info/1064/50157.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Articles 24 and 26 of the CAAC aviation fuel supply rules require covered suppliers to ensure covered staff complete and pass safety training before taking up the work and to set aircraft fueling and defueling procedures. Check airside access, vehicle driving and task authority separately under applicable rules and employer requirements."
+                ],
+                "evidence_type": "primary_document",
+                "id": "gs-fuel",
+                "limitation": "Check the duties, personnel and entities covered.",
+                "market": "Mainland China",
+                "name": "CAAC: civil airport aviation fuel supply safety operations",
+                "period": "2025",
+                "publisher": "CAAC",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202510/P020251020349847870549.pdf"
               }
             ]
           },
@@ -33566,7 +33626,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "Skipping the bonding step or the fuel check"
+            "风险": "Fueling work order and record disagree"
           },
           {
             "为什么重要": {
@@ -34775,7 +34835,7 @@
             },
             "evidence_refs": [
               "onet",
-              "privacy"
+              "fuel-rules"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34790,7 +34850,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "Skipping the bonding step or the fuel check"
+            "title": "Fueling work order and record disagree"
           },
           {
             "affected_roles": {
@@ -34839,7 +34899,7 @@
             },
             "evidence_refs": [
               "privacy",
-              "employer"
+              "fuel-rules"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34986,7 +35046,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "bls",
+            "id": "fuel-rules",
             "label": {
               "$link": "aircraft-service-attendants.risk.career-risk-cards.7",
               "block": "risk",
@@ -35430,7 +35490,7 @@
             "ai_heading": "Will AI affect the pay of aircraft service attendants?",
             "driver_heading": "Which industries and directions use this occupation?",
             "official_heading": "Public recruitment sample (historical announcements, not official statistics)",
-            "scenario_caption": "Preparation background and qualification check (editorial compilation; no uniform education or recruitment sample for this occupation was obtained)",
+            "scenario_caption": "Education and training: check the specific posting and program",
             "scenario_heading": "Given different preparation backgrounds, which formal post requirements should be checked?",
             "scenario_interpretation_label": "Notes and verification advice",
             "scenario_role_label": "Preparation background",
@@ -35658,7 +35718,6 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-finance-2025",
             "industry": {
               "$item": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -35679,7 +35738,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-professional-2025",
             "industry": {
               "$item": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -35700,7 +35758,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-localgov-2025",
             "industry": {
               "$item": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -35895,9 +35952,9 @@
         }
       },
       "hero": {
-        "h1": "Aircraft service attendants",
-        "quick_answer": "Aircraft service attendants refuel aircraft on the apron and de-ice them, top up water and coolant, empty the waste tanks, maintain the air and oxygen systems and clean and polish the fuselage exterior: marshall the aircraft into position to the signals, refuel with a fuel-truck hose and check the fuel and the quantity, spray de-icing fluid from a bucket, tow the aircraft with a tug and complete the task records; this page gives the U.S. OEWS wage percentiles and the BLS employment projection, and for China only a civilian industry-basis reference.",
-        "title": "Aircraft service attendants"
+        "h1": "Aircraft Service Attendants",
+        "quick_answer": "Aircraft service attendants fuel aircraft and record the work. Some assignments include deicing, replenishment, waste servicing, exterior cleaning, marshalling or towing. Check the employer’s scope and authorization; cabin cleaning and maintenance signoff are separate work.",
+        "title": "Aircraft Service Attendants"
       },
       "market_signal_card": {
         "context_links": [
@@ -36425,7 +36482,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook and employment projection (53-6032)",
+            "label": "National BLS OEWS wages and the O*NET education question (53-6032)",
             "secondary_value": null,
             "value": {
               "$item": "aircraft-service-attendants.profile.onet-structured-fields-block.2",
@@ -37248,7 +37305,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit an aircraft service attendant",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37325,7 +37382,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five personality (English)"
+            "label": "Big Five personality test"
           },
           {
             "href": {
@@ -37335,7 +37392,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -37345,7 +37402,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Enneagram (Chinese)"
+            "label": "Enneagram test"
           },
           {
             "href": {
@@ -37355,7 +37412,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Intelligence and reasoning (Chinese)"
+            "label": "Intelligence and reasoning test"
           }
         ]
       },
@@ -37462,7 +37519,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and service records",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of work directions",
       "fit": "Occupation fit guide",
@@ -37850,27 +37907,15 @@
         "source_refs": [
           "ep"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "8%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Aircraft service attendants",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and service records"
     },
     "badges": [
       "Apron support: aircraft refuelling and de-icing · fluid supply and waste-water handling · apron marshalling and records",
@@ -37914,17 +37959,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What an aircraft service attendant does, which apron-operations training and certification are needed, the U.S. wage percentiles and employment outlook, and the scope of the mainland China airport operations safety provisions and the industry wage reference; the data basis and the gaps are explained."
+      "text": "Compare aircraft fueling, deicing and other ground services. See a Daxing hiring example and U.S. wages, then try a fictional handover."
     },
     "title": {
       "availability": "available",
-      "text": "Aircraft service attendants: apron refuelling, de-icing and ground service (O*NET 53-6032)"
+      "text": "Aircraft Service Attendants: Duties, Pay and Entry"
     }
   },
-  "source_content_sha256": "1e7876b860c12b66b34a47b06ddfdb798ec4d43bd989e4e925b4102d3995f971",
+  "source_content_sha256": "7ad004194dd71fae88f944542dab52065602b5bef70c8820ba0371a8c2bcb32b",
   "subject": {
     "canonical_slug": "aircraft-service-attendants",
-    "name": "Aircraft service attendants",
-    "summary": "Aircraft service attendants refuel, de-ice, top up water and coolant, empty waste water and clean the fuselage of an aircraft on the apron to procedure, and complete the towing, the marshalling and the records; the judgement focuses on apron-operations training and certification, the checking of the fuel and the safety conditions, and the responsibility to stop on an anomaly and report it."
+    "name": "Aircraft Service Attendants",
+    "summary": "Aircraft service attendants fuel aircraft and record the work. Some assignments include deicing, replenishment, waste servicing, exterior cleaning, marshalling or towing. Check the employer’s scope and authorization; cabin cleaning and maintenance signoff are separate work."
   }
 }

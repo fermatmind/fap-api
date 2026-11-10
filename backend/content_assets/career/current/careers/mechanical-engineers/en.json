@@ -7292,18 +7292,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "This page covers O*NET 17-2141.00, Mechanical Engineers: performing engineering duties to plan and design tools, engines, machines, and other mechanically functioning equipment, and overseeing installation, operation, maintenance, and repair of equipment such as centralized heating, gas, water, and steam systems. Common reported job titles include Applications Engineer, Design Engineer, Equipment Engineer, Mechanical Design Engineer, Product Development Engineer, Product Engineer, Project Engineer, and Test Engineer. Work mainly involves indoor design and analysis, alongside fieldwork and testing. This page excludes adjacent occupations such as Mechanical Engineering Technologists and Technicians (17-3027.00), Industrial Engineers (17-2112.00), and Mechanical Drafters (17-3013.00)."
+              "Mechanical engineers turn functional and manufacturing requirements into designs, analyses and test plans. They compare alternatives, develop prototypes and coordinate with drafting, manufacturing and quality teams."
             ]
           },
           "id": "mechanical-engineers.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
-            "onet-tasks",
-            "onet-context",
-            "onet-industry",
-            "onet-education",
-            "onet-details",
-            "onet-wages"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7400,12 +7394,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Verify first: requirements and functional targets, applicable standards and regulations, material and process conditions, loads and operating conditions, cost and schedule constraints, and engineering and compliance judgments requiring confirmation by the responsible engineer."
+              "Use a fictional mechanism. State the loads, space and production constraints, compare two designs and explain how you would verify each requirement."
             ]
           },
           "id": "mechanical-engineers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-tasks"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7414,12 +7408,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Work cycle: begin with interpreting drawings and requirements, proceed through feasibility and cost analysis, design and calculations, modeling and validation, review and sign-off, and end with delivery and change management. Do not begin design before all requirements and standards are confirmed, or issue any performance or safety conclusion before it has been reviewed."
+              "Engineers focus on design decisions, analysis and verification. Drafters translate design inputs into controlled drawings. Some projects combine work, but approval authority still matters."
             ]
           },
           "id": "mechanical-engineers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-tasks"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -8332,12 +8326,13 @@
                 ]
               },
               {
-                "answer": "BLS/O*NET reports approximately 293,100 employed in 2024, projected faster-than-average growth over 2024—2034 (approximately 7% or higher), and approximately 18,100 average annual openings including replacement demand. These are statistical projections, not an individual's hiring probability.",
+                "answer": "BLS Table 1.2: U.S. occupation 17-2141 had about 298,500 jobs in 2025 and is projected to have about 332,000 in 2035 (+11.2%), with about 17,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. These are statistical projections, not an individual's hiring probability.",
                 "id": "mechanical-engineers.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.mechanical-engineers.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "onet-trends",
+                  "bls-design-ep"
                 ]
               },
               {
@@ -8569,18 +8564,18 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "293,100 employed in 2024; projected faster-than-average growth over 2024—2034 (approximately 7% or higher); approximately 18,100 average annual openings.",
+                  "BLS Table 1.2: U.S. occupation 17-2141 had about 298,500 jobs in 2025 and is projected to have about 332,000 in 2035 (+11.2%), with about 17,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
                   "Includes replacement demand and does not equal net job growth."
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
                 "limitation": "Includes replacement demand and does not equal net job growth.",
                 "market": "United States",
-                "name": "O*NET 17-2141.00 National Employment Trends (BLS 2024—2034 Projections)",
-                "period": "2024—2034 projections; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "name": "U.S. BLS Table 1.2: Occupational projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/17-2141.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8710,6 +8705,18 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS Table 1.2: U.S. occupation 17-2141 had about 298,500 jobs in 2025 and is projected to have about 332,000 in 2035 (+11.2%), with about 17,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring."
+                ],
+                "id": "bls-design-ep",
+                "market": "United States",
+                "name": "U.S. BLS Table 1.2: Occupational projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -9524,7 +9531,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "What Should Be Checked First in This Work?",
+            "question": "What should a mechanical engineering portfolio example show?",
             "table": {
               "rows": [
                 {
@@ -9556,7 +9563,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "How Can You Assess the Complete Work Cycle?",
+            "question": "How does a mechanical engineer differ from a drafter?",
             "table": {
               "rows": [
                 {
@@ -11151,7 +11158,7 @@
           "entry": "mechanical-engineers.navigation.1",
           "field": "url"
         },
-        "label": "Test Whether My Career Interests Fit Mechanical Engineering",
+        "label": "Explore work activities with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11271,39 +11278,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "293,100 people",
+        "derivation": "BLS Table 1.2: U.S. occupation 17-2141 had about 298,500 jobs in 2025 and is projected to have about 332,000 in 2035 (+11.2%), with about 17,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 298,500 jobs",
         "fact_id": "us-employment-2024",
         "market": "United States",
         "measure": "2024 employment level",
         "occupation_scope": "17-2141.00",
-        "period": "2024; accessed 2026-09-25",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET national employment trends page: projected faster-than-average growth over 2024—2034 (approximately 7% or higher).",
-        "display_value": "Faster-than-average growth (approximately 7% or higher, 2024—2034)",
+        "derivation": "BLS Table 1.2: U.S. occupation 17-2141 had about 298,500 jobs in 2025 and is projected to have about 332,000 in 2035 (+11.2%), with about 17,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "+11.2%",
         "fact_id": "us-growth",
         "market": "United States",
         "measure": "Projected employment growth",
         "occupation_scope": "17-2141.00",
-        "period": "2024—2034; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "Estimated openings over the projection period, including replacement demand.",
-        "display_value": "Approximately 18,100 openings per year (2024—2034)",
+        "derivation": "BLS Table 1.2: U.S. occupation 17-2141 had about 298,500 jobs in 2025 and is projected to have about 332,000 in 2035 (+11.2%), with about 17,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 17,800 per year",
         "fact_id": "us-openings",
         "market": "United States",
         "measure": "Projected openings (annual average)",
         "occupation_scope": "17-2141.00",
-        "period": "2024—2034; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
@@ -11379,19 +11386,19 @@
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "US Employment Growth"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "US Employment Level"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "US Average Annual Openings"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11405,17 +11412,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Mechanical engineers (O*NET 17-2141.00) design and evaluate tools, engines, and mechanical equipment and plan installation, operation, and maintenance. BLS 2025 median annual wage: USD 104,110. Employment in 2024: 293,100; projected faster-than-average growth over 2024—2034 (approximately 7% or higher). Includes work context, risks, and entry paths."
+      "text": "Learn how mechanical engineers compare designs and verify requirements, and how the role differs from drafting and technician work."
     },
     "title": {
       "availability": "available",
-      "text": "Mechanical Engineers: Work, US Wages, and Entry Paths"
+      "text": "Mechanical Engineer: Design Tradeoffs, Prototypes and Verification"
     }
   },
-  "source_content_sha256": "98d3f3fee0d4d4084ff6f77ded72703f8c0380c19cd3c0fc6460128e6962f0c1",
+  "source_content_sha256": "3ac0b44b5dfbf8ef67a40e0a70cafe58cb53dcdc0fd0f1eec9f7cd18a8cf426a",
   "subject": {
     "canonical_slug": "mechanical-engineers",
-    "name": "Mechanical Engineers",
-    "summary": "Mechanical engineers (O*NET 17-2141.00) design and evaluate tools, engines, mechanical equipment, and heat-transfer, gas, water, and steam systems; plan installation, operation, and maintenance; assess costs and energy efficiency; and take responsibility for design decisions and sign-off."
+    "name": "Mechanical Engineer",
+    "summary": "Mechanical engineers turn functional and manufacturing requirements into designs, analyses and test plans. They compare alternatives, develop prototypes and coordinate with drafting, manufacturing and quality teams."
   }
 }

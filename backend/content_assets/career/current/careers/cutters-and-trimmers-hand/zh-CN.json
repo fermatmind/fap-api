@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-a47-fogang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a47-qingcheng": {
+        "status": "pending_mapping"
+      },
       "fact:r5-employment-2025": {
         "status": "pending_mapping"
       },
@@ -1695,7 +1701,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -19546,56 +19552,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22572,7 +22542,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "低风险验证：用纸板、布料或泡沫等安全材料完成一次「按虚构工单读尺寸—用样板画线定位—按线裁切—量尺复核是否超公差—挑出并标记瑕疵—计数打包」练习，只判断工作偏好；练习不使用刀具以外的危险设备、不接触真实生产订单与客户资料，不等同雇主录用或上岗授权。"
+              "用本页三条虚构裁片记录做一页交接。核对宽度范围、布纹标记和缺口位置，再比较单项变式。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -23633,7 +23603,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国51-9031自身口径：2025年就业约5,900人；BLS预测2025—2035年减少约1,100人、下降19%。O*NET将其归为Decline（-1%或更低），年均约500个含增长与替换的空缺；净减少与替换性空缺可同时存在，不是个人录用概率，也不证明AI因果。"
+              "美国51-9031自身口径：2025年就业约5,900人；BLS预测2025—2035年减少约1,100人、下降18.9%。O*NET将其归为Decline（-1%或更低），年均约500个含增长与替换的空缺；净减少与替换性空缺可同时存在，不是个人录用概率，也不证明AI因果。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
@@ -24143,7 +24113,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下一步：用本页的虚构练习或一次车间跟做，核对目标方向的对象是手工裁切修边、机器切割切片、金属冲压下料、手工打磨抛光、机器送料下料、纺织裁剪还是非金属成型，再决定方向。"
+              "先核岗位主要工具与交付物，再问是裁剪修边、设备操作还是制版。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.transition",
@@ -24458,7 +24428,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国51-9031自身口径：2025年就业约5,900人；BLS预测2025—2035年减少约1,100人、下降19%。O*NET将其归为Decline（-1%或更低），年均约500个含增长与替换的空缺；净减少与替换性空缺可同时存在，不是个人录用概率，也不证明AI因果。"
+              "美国51-9031自身口径：2025年就业约5,900人；BLS预测2025—2035年减少约1,100人、下降18.9%。O*NET将其归为Decline（-1%或更低），年均约500个含增长与替换的空缺；净减少与替换性空缺可同时存在，不是个人录用概率，也不证明AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
@@ -24649,7 +24619,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国51-9031自身口径：2025年就业约5,900人；BLS预测2025—2035年减少约1,100人、下降19%。O*NET将其归为Decline（-1%或更低），年均约500个含增长与替换的空缺；净减少与替换性空缺可同时存在，不是个人录用概率，也不证明AI因果。"
+              "美国51-9031自身口径：2025年就业约5,900人；BLS预测2025—2035年减少约1,100人、下降18.9%。O*NET将其归为Decline（-1%或更低），年均约500个含增长与替换的空缺；净减少与替换性空缺可同时存在，不是个人录用概率，也不证明AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
@@ -26111,12 +26081,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "：只有实际岗位任务与材料匹配时才作比较；本轮未核统一学历、计件比例或职业工资分位，按目标雇主公开条件逐项核对。"
+              "一条岗位合并手工修边与全检，另一条合并手剪与电剪。向雇主确认工具、分工和计薪口径。当前在招状态未核。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "r5-cn-safety"
+            "a47-fogang",
+            "a47-qingcheng"
           ],
           "type": "prose"
         },
@@ -26411,7 +26382,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国51-9031自身口径：2025年就业约5,900人；BLS预测2025—2035年减少约1,100人、下降19%。O*NET将其归为Decline（-1%或更低），年均约500个含增长与替换的空缺；净减少与替换性空缺可同时存在，不是个人录用概率，也不证明AI因果。"
+              "美国51-9031自身口径：2025年就业约5,900人；BLS预测2025—2035年减少约1,100人、下降18.9%。O*NET将其归为Decline（-1%或更低），年均约500个含增长与替换的空缺；净减少与替换性空缺可同时存在，不是个人录用概率，也不证明AI因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
@@ -26804,7 +26775,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先用纸板、布料或泡沫等安全材料完成一次「按虚构工单读尺寸—用样板画线定位—按线裁切—量尺复核是否超公差—挑出并标记瑕疵—计数打包」练习，或一次车间跟做，再判断偏好。"
+              "用本页三条虚构裁片记录做一页交接。核对宽度范围、布纹标记和缺口位置，再比较单项变式。"
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -27858,7 +27829,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先做纸面尺寸与瑕疵标记推演，并获取真实岗位的工时、材料、设备及培训说明；进入车间或使用刀具必须经允许和安全培训，虚构练习不授权设备操作。"
+              "纸面练习观察自己是否愿意复核裁片记录。向雇主确认使用手剪、电剪还是固定裁床，以及实际分工。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.next.answer",
@@ -28597,15 +28568,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本页不引用具体招聘公告，也不把历史招聘案例计为在招岗位；招聘与任职条件须按目标单位当年公开信息核对。",
+              "广东博恩新材料科技列后段修边兼全检岗位 1 人，综合薪资 4,000–6,000 元/月，公告写明手工细活、计件和长白班。 清远威登制衣的历史招聘列样衣房裁床师傅 2 人，要求懂手工裁剪和电剪，了解面料与纸样布纹。该岗位行未列报价。 一条岗位合并手工修边与全检，另一条合并手剪与电剪。向雇主确认工具、分工和计薪口径。当前在招状态未核。",
               "示例中的培训、观察与带教考察方式为编辑设计，用于说明常见验证方式，不代表任何单位的统一流程。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "r5-onet-current",
-            "r5-bls-current",
-            "r5-cn-safety"
+            "a47-fogang",
+            "a47-qingcheng"
           ],
           "type": "notice"
         },
@@ -28730,9 +28700,9 @@
               {
                 "id": "scene",
                 "values": [
-                  "作品一：虚构下料方案",
-                  "交付物：一份完全虚构的裁切与仿形方案，含工单尺寸、样板定位方式、量尺画线要点与公差核对方法。",
-                  "写明每处判断的依据（工单、样板或检验标准），方案不得自相矛盾。"
+                  "作品一：裁片核对记录",
+                  "保留原题与 H13 变式。",
+                  "记录依据、状态和接手人。"
                 ]
               },
               {
@@ -28981,34 +28951,34 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "虚构生产情景材料（练习输入）",
-                  "虚构情境：一名手工切割与修整工在当班时遇到四个问题。第一，一批材料上有局部划痕与色差，工单要求的外观等级并不确定；第二，一条件料的实测尺寸落在公差边缘，是否放行不清楚；第三，台式刀具下压后出现毛边，刀具有些钝；第四，交期很紧，班组长希望先做完再补首件记录。",
-                  "已给材料：工单尺寸与数量；外观等级与瑕疵限度样品；检验与首件确认要求；刀具保养与更换规程。",
-                  "未给材料：边缘尺寸的判定与让步规则、刀具更换的执行权限、首件记录的先后顺序，以及超差与漏检的责任分工。练习中如需要这些条件，请明确写出你的假设与需要确认的对象。"
+                  "三条虚构裁片记录",
+                  "H12：宽度要求 79–81 毫米，记录 82 毫米，布纹与缺口标记齐全。",
+                  "H13：宽度在范围内，缺口位置一致，布纹标记栏空白。",
+                  "H14：宽度在范围内，布纹一致，样板要求左侧缺口，裁片记录为右侧。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "任务要求",
-                  "请写出一页处置与上报方案：包含瑕疵与色差的核对与处理建议、边缘尺寸的复核与处置、毛边与刀具问题的处理，以及交期压力下首件与记录的先后安排。",
-                  "方案要写明哪些信息来自题面材料、哪些还是假设，并说明依据的是工单、检验标准还是刀具规程。"
+                  "一页交接",
+                  "逐条记录依据、状态与接手人。质检核宽度和布纹，样板负责人核缺口位置，质检签批放行。",
+                  "单项变式：H13 布纹标记栏补录为「与样板一致」，其余不变。另列变化行。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "参考交付（可从题面推导）",
-                  "方案应包含：瑕疵与色差（按限度样品逐件核对，超限度挑出并标记，不确定时提请检验或班组长确认，不自行放宽）、边缘尺寸（复测并核对是否在公差内，超差停机隔离并按规程上报，不擅自放行）、毛边与刀具（按规程更换或磨锐刀具，先复位与首件确认再继续）、交期压力（说明首件与记录不能省略，必要时申请调整或补充资源，不先做完再补记录）、交接（写清四项事项的状态、已采取动作与待确认事项）。",
-                  "参考交付只列应包含的要素，不要求与示例措辞一致；能说明判断依据即可。"
+                  "先独立完成",
+                  "第六天交原题和变式。",
+                  "第七天到「常见问题与资料来源」打开「手工裁片记录参考答案（完成第六天后再打开）」。"
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "边界与不可推断的结论",
-                  "本题只检验量尺核对意识、检验判定、刀具与安全处置与异常升级意识，不评价真实个案的处理是否合规，也不构成安全认定、责任判定或法律意见。",
-                  "不得使用真实生产订单或未脱敏的商业信息；涉及真实刀具与设备操作、个人防护、粉尘与噪声防护以及成品检验时须按安全规程、作业指导书与单位制度执行。"
+                  "练习边界",
+                  "只核纸面记录。",
+                  "真实裁剪、返工和放行遵照工位流程。"
                 ]
               }
             ]
@@ -29019,7 +28989,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "虚构练习材料：裁切公差与刀具安全问题处置",
+          "title": "虚构手工裁片记录交接",
           "type": "cards"
         },
         {
@@ -29030,50 +29000,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "第 1 天：读一份公开材料",
-                  "找一份公开的手工裁切或安全生产科普材料，标出三条关键要求与对应做法，写下你想确认的地方。"
+                  "第 1 天",
+                  "抄录裁片编号和宽度要求。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "第 2 天：做一次量尺画线推演",
-                  "用纸板等安全材料，按虚构工单写出尺寸、样板定位方式与画线要点，并注明需确认的条件。"
+                  "第 2 天",
+                  "逐条比较宽度。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第 3 天：写一份首件与公差核对清单",
-                  "用虚构工单，列出首件确认与抽检的项目与判定依据，标出必须停机上报的项。"
+                  "第 3 天",
+                  "核布纹栏。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "第 4 天：做一次安全与防护核对",
-                  "用虚构场景写出刀具操作、个人防护与粉尘噪声防护的核对要点与异常处置顺序。"
+                  "第 4 天",
+                  "比对缺口位置。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "第 5 天：写一次检验与分级记录",
-                  "用虚构件料写一份瑕疵判定与分离分级记录，包含判定依据、隔离方式与上报路径。"
+                  "第 5 天",
+                  "写状态和接手人。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第 6 天：让他人只凭材料复核",
-                  "让一位同伴只看你的方案复核你的判断，记录对方提出的问题。"
+                  "第 6 天",
+                  "独立交一页，写原题三条记录，并单列变式的变化行。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第 7 天：判断是否继续",
-                  "回到本页的判断清单，写下你愿意继续的三条理由与需要慎重的两条条件。"
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「手工裁片记录参考答案（完成第六天后再打开）」。 写一处修订。"
                 ]
               }
             ]
@@ -29092,13 +29062,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "具体变化：你是否能在给定材料下写清量尺依据、公差核对、刀具处置与上报的顺序，而不是只写「已完成」。",
-              "事实与选择：你更愿意做手工裁切与仿形、修整打磨与检验，还是设备操作与工序协作方向。",
-              "练习消耗：长时间站立、重复动作与重复检验，哪一步最消耗你，你能否接受它在工作里反复出现。",
-              "材料边界：练习材料均为虚构或以公开资料为基础，不得写入真实生产订单或未脱敏的商业信息。",
-              "反馈反应：当你的尺寸或外观被检验指出问题时，你是否愿意回到工单与标准补齐。",
-              "过程兴趣：即使量尺与裁切重复，你是否愿意每次都完成首件核对与记录，而不是凭经验跳过规程。",
-              "下一步：如果前六步你都愿意继续，下一步是在合规前提下（如车间跟做或一次带训）完成一次从量尺、裁切到检验与打包的闭环并请有经验者评阅；如果某一步明显消耗，先缩小方向再验证。"
+              "保留两版。",
+              "写各条依据。",
+              "区分记录完整与已获放行。",
+              "注明接手人。",
+              "对照参考记录修订。",
+              "向雇主核实际分工。",
+              "保存交接样例。"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30419,7 +30389,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国51-9031自身口径：2025年就业约5,900人；BLS预测2025—2035年减少约1,100人、下降19%。O*NET将其归为Decline（-1%或更低），年均约500个含增长与替换的空缺；净减少与替换性空缺可同时存在，不是个人录用概率，也不证明AI因果。"
+              "美国51-9031自身口径：2025年就业约5,900人；BLS预测2025—2035年减少约1,100人、下降18.9%。O*NET将其归为Decline（-1%或更低），年均约500个含增长与替换的空缺；净减少与替换性空缺可同时存在，不是个人录用概率，也不证明AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
@@ -31011,12 +30981,14 @@
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位年薪 38,020 美元（时薪 18.28 美元），分位为 26,630／34,050／38,020／47,850／57,870 美元（时薪 12.80／16.37／18.28／23.01／27.82），为 O*NET-SOC 51-9031.00 自身口径；按州或地区细分的数值须在 O*NET 当地工资页按地区与期间查询，不能当作个人报价；中国大陆未取得职业级数值，本页按缺口处理，不使用行业均值或招聘样本代填。",
+                "answer": "美国 2025 年中位年薪 38,020 美元、时薪 18.28 美元。大陆岗位样本来自不同工序与用工口径。 广东博恩新材料科技列后段修边兼全检岗位 1 人，综合薪资 4,000–6,000 元/月，公告写明手工细活、计件和长白班。 清远威登制衣的历史招聘列样衣房裁床师傅 2 人，要求懂手工裁剪和电剪，了解面料与纸样布纹。该岗位行未列报价。",
                 "id": "actors.faq.6",
                 "question": "这个职业的工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.cutters-and-trimmers-hand.6",
                 "source_refs": [
-                  "oews"
+                  "r5-onet-current",
+                  "a47-fogang",
+                  "a47-qingcheng"
                 ]
               },
               {
@@ -31038,7 +31010,7 @@
                 ]
               },
               {
-                "answer": "先用纸板、布料或泡沫等安全材料完成一次「按虚构工单读尺寸—用样板画线定位—按线裁切—量尺复核是否超公差—挑出并标记瑕疵—计数打包」练习，或一次车间跟做，再核对目标方向的对象、公差要求与安全边界。",
+                "answer": "用本页三条虚构裁片记录做一页交接。核对宽度范围、布纹标记和缺口位置，再比较单项变式。",
                 "id": "actors.faq.9",
                 "question": "零基础想尝试这个方向，应该先做什么？",
                 "question_key": "career.faq.cutters-and-trimmers-hand.9",
@@ -31047,13 +31019,19 @@
                 ]
               },
               {
-                "answer": "O*NET 摘要与就业趋势页（基于 BLS 2024—2034 年预测，51-9031.00 自身口径）显示该口径 2024 年约 7,000 人，预测标签为 Decline（下降 -1% 或更低），年均约 600 个含增长与替换的空缺；该预测为职业总量口径，工作以手工裁切、修整与检验为主，须按本地制造与加工订单、产品结构与自动化投资核对。",
+                "answer": "美国 BLS 表 1.2 的 51-9031 行显示，2025 年约 5,900 人，2035 年预计约 4,800 人，下降 18.9%，年均岗位空缺约 500 个，含替补。",
                 "id": "actors.faq.10",
                 "question": "现在选择这个职业，还应考虑什么？",
                 "question_key": "career.faq.cutters-and-trimmers-hand.10",
                 "source_refs": [
-                  "bls"
+                  "r5-bls-current"
                 ]
+              },
+              {
+                "answer": "H12 的 82 毫米超过 81 毫米上限，交质检。H13 缺布纹标记，交质检补核。H14 缺口位置左右不一致，交样板负责人核对。变式 H13 的布纹记录已补齐，交质检签批，补齐标记不等于放行。H12、H14 不变。自核四项：宽度、布纹、缺口、两版交接与权限。",
+                "id": "actors.faq.11",
+                "question": "手工裁片记录参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.cutters-and-trimmers-hand.11"
               }
             ]
           },
@@ -31068,7 +31046,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "美国工资为2025 OEWS，现期就业为2025基期/2025—2035预测，51-9031自身口径；中国2025制造业均值仅行业背景，精确职业工资和招聘样本证据不足。",
+              "美国使用 51-9031 职业的工资与就业数据。中国大陆两条招聘公告仅作岗位样本，职业工资分布仍缺可比资料。",
               "受访工作情境、学历意见、招聘技术词、行业均值与编辑候选各有分母和限制，不互换或推个人报价、录用和AI因果。",
               "工资、就业与行业分布的期间分别标注；比较时以本模块来源的具体统计期为准，不将历史值混为现期。"
             ]
@@ -31297,21 +31275,19 @@
                 "url": "https://www.onetonline.org/link/summary/53-7063.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "支持该职业的就业与预测口径（本细类自身）。",
-                  "不含中国大陆信息，不能替代中国大陆数据。",
-                  "本轮核查（2026-10-09）：旧2024–2034登记保留供范围外历史消费者；本轮现期授权模块改引r5-bls-current及r5-onet-current。"
+                  "美国 BLS 表 1.2 的 51-9031 行显示，2025 年约 5,900 人，2035 年预计约 4,800 人，下降 18.9%，年均岗位空缺约 500 个，含替补。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "旧2024–2034登记保留供范围外历史消费者；本轮现期授权模块改引r5-bls-current及r5-onet-current。",
+                "limitation": "美国职业投影。",
                 "market": "美国",
-                "name": "O*NET OnLine：Cutters and Trimmers, Hand 51-9031.00 摘要与就业趋势（基于 BLS 2024—2034 年预测，本细类自身口径）",
-                "period": "2024—2034 年预测期；检索 2026-09-19",
+                "name": "BLS 表 1.2：手工裁剪与修边工 51-9031",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/51-9031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31663,17 +31639,17 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "51-9031自身口径：2025就业5,900人，预测减少1,100人、下降19%；典型入职无正式学历凭证要求、无相关经验、短期在岗培训。典型条件非所有雇主准入规则；非中国门槛，也不证明AI造成下降。"
+                  "美国 BLS 表 1.2 的 51-9031 行显示，2025 年约 5,900 人，2035 年预计约 4,800 人，下降 18.9%，年均岗位空缺约 500 个，含替补。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r5-bls-current",
-                "limitation": "51-9031自身口径：2025就业5,900人，预测减少1,100人、下降19%；典型入职无正式学历凭证要求、无相关经验、短期在岗培训。典型条件非所有雇主准入规则；非中国门槛，也不证明AI造成下降。",
+                "limitation": "51-9031自身口径：2025就业5,900人，预测减少1,100人、下降18.9%；典型入职无正式学历凭证要求、无相关经验、短期在岗培训。典型条件非所有雇主准入规则；非中国门槛，也不证明AI造成下降。",
                 "market": "美国",
                 "name": "BLS：未详述职业数据—Cutters and trimmers, hand（2025–2035）",
                 "period": "2025基期、2025–2035预测；May 2025工资；检索 2026-10-09",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31811,6 +31787,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "广东博恩新材料科技列后段修边兼全检岗位 1 人，综合薪资 4,000–6,000 元/月，公告写明手工细活、计件和长白班。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a47-fogang",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "裁剪与修边招聘样本",
+                "period": "2026-10-27",
+                "publisher": "佛冈县人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.fogang.gov.cn/zwgk/zdlyxx/jycy/zpxx/qyzpxx/content/post_2202939.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "清远威登制衣的历史招聘列样衣房裁床师傅 2 人，要求懂手工裁剪和电剪，了解面料与纸样布纹。该岗位行未列报价。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a47-qingcheng",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "裁剪与修边招聘样本",
+                "period": "2017",
+                "publisher": "清远市清城区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.qingcheng.gov.cn/xxgk/mszd/jiuye/content/post_183652.html"
               }
             ]
           },
@@ -34684,9 +34690,9 @@
               "说明": "不使用个别单位或平台的薪酬披露冒充全国数据，也不插值。"
             },
             {
-              "指标": "制造业行业背景（非职业工资）",
-              "数值": "非私营113,594元/年；私营76,055元/年（2025税前年均）",
-              "说明": "雇主实际归制造业时才适用；不同单位类型分别读，不作职业中位数、月薪或个人报价。"
+              "指标": "招聘样本",
+              "数值": "广东博恩新材料科技列后段修边兼全检岗位 1 人，综合薪资 4,000–6,000 元/月，公告写明手工细活、计件和长白班。 清远威登制衣的历史招聘列样衣房裁床师傅 2 人，要求懂手工裁剪和电剪，了解面料与纸样布纹。该岗位行未列报价。",
+              "说明": "一条岗位合并手工修边与全检，另一条合并手剪与电剪。向雇主确认工具、分工和计薪口径。当前在招状态未核。"
             }
           ],
           "china_ai_row": {
@@ -34698,7 +34704,7 @@
           "china_class_row": "中国岗位须按实际材料、裁切/修边工序与设备权限匹配；不能将美国职业代码直接映射为中国统一学历、工资或许可条件。",
           "china_edu_table": [
             {
-              "学历段": "岗位准备核对（编辑建议）",
+              "学历段": "后段修边兼全检：手工细活",
               "岗位方向": "裁剪、修边或打磨辅助岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -34708,7 +34714,7 @@
               }
             },
             {
-              "学历段": "岗位准备核对（编辑建议）",
+              "学历段": "样衣房裁床：手剪与电剪",
               "岗位方向": "裁切、修边或质检岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34835,11 +34841,15 @@
               }
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
+              "城市/区间": "佛冈与清城招聘样本",
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "posting-a47-fogang",
+                    "field": "display_value"
+                  },
+                  {
+                    "$fact": "posting-a47-qingcheng",
                     "field": "display_value"
                   },
                   {
@@ -34849,7 +34859,7 @@
                     "type": "prose"
                   }
                 ],
-                "separator": ""
+                "separator": "\n"
               }
             },
             {
@@ -34865,7 +34875,8 @@
           "china_soc_row": "美国O*NET-SOC 51-9031.00；中国职业工资匹配证据不足，行业背景按雇主实际归类使用。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a47-fogang",
+            "posting-a47-qingcheng"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
@@ -34878,7 +34889,7 @@
             "scenario_role_label": "核对范围",
             "scenario_value_label": "岗位方向"
           },
-          "us_growth": "下降19%（BLS 2025—2035本职业总量预测）",
+          "us_growth": "下降18.9%（BLS 2025—2035本职业总量预测）",
           "us_median": "38,020美元/年（中位数，2025 年工资数据；时薪 18.28 美元）"
         }
       },
@@ -34980,7 +34991,7 @@
               "$fact": "r5-growth-2025-2035",
               "field": "display_value"
             },
-            "说明": "BLS预测2025—2035下降19%、约减少1,100人；O*NET用Decline宽标签，不是AI因果或个人失业概率。"
+            "说明": "BLS预测2025—2035下降18.9%、约减少1,100人；O*NET用Decline宽标签，不是AI因果或个人失业概率。"
           },
           {
             "fact_ref": "r5-openings-2025-2035",
@@ -36786,20 +36797,12 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
-          {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "label": "了解我的人格偏好"
+            "label": "MBTI 人格测评"
           },
           {
             "href": "/zh/tests/big-five-personality-test-ocean-model",
-            "label": "了解我的大五特质"
+            "label": "大五人格测评"
           }
         ]
       },
@@ -37205,74 +37208,74 @@
       },
       {
         "derivation": null,
-        "display_value": "约7,000人（2024 年）",
+        "display_value": "约5,900人（2025年）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模（存量统计）",
-        "occupation_scope": "Cutters and Trimmers, Hand（51-9031.00）本细类口径；2024 年就业人数来自 O*NET 摘要页（基于 BLS 2024—2034 年预测）",
-        "period": "2024 年基期；检索 2026-09-19",
+        "occupation_scope": "51-9031自身美国职业口径；现期独立事实，不改范围外历史消费者",
+        "period": "2025基期；检索2026-10-09",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "下降 -1% 或更低（2024—2034 年，标签「Decline」）",
+        "display_value": "下降 18.9%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "预测就业变化（职业总量）",
-        "occupation_scope": "51-9031.00 本细类口径；预测标签 Decline（-1% 或更低），属于预测期总量变化，不是个人录用概率",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "51-9031自身美国职业口径；现期独立事实，不改范围外历史消费者",
+        "period": "2025—2035预测；检索2026-10-09",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约600个（2024—2034 年年均，含增长与替换）",
+        "display_value": "约500个/年（2025—2035，含增长与替换）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "年均职位空缺（含增长与替换）",
-        "occupation_scope": "51-9031.00 本细类口径；空缺为 2024—2034 年年均，含因增长与替换产生的位置",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "51-9031自身美国职业口径；现期独立事实，不改范围外历史消费者",
+        "period": "2025—2035预测；检索2026-10-09",
         "source_refs": [
-          "bls"
+          "r5-onet-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "制造业｜70%（2024 年行业分布中的就业占比）",
+        "display_value": "制造业｜65%（2025年就业占比，非工资）",
         "fact_id": "industry-theater",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
-        "occupation_scope": "51-9031.00 本细类口径；制造业是 O*NET 行业分布中占比最高的门类",
-        "period": "2024 年行业分布；检索 2026-09-19",
+        "occupation_scope": "51-9031自身美国职业口径；现期独立事实，不改范围外历史消费者",
+        "period": "2025行业分布；检索2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "其他行业（含批发贸易）｜30%（2024 年行业分布中的就业占比）",
+        "display_value": "行政与支持服务业｜13%（2025年就业占比，非工资）",
         "fact_id": "industry-education",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
-        "occupation_scope": "51-9031.00 本细类口径；其他行业是 O*NET 行业页合并公布的第二类",
-        "period": "2024 年行业分布；检索 2026-09-19",
+        "occupation_scope": "51-9031自身美国职业口径；现期独立事实，不改范围外历史消费者",
+        "period": "2025行业分布；检索2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "统计状态：O*NET 2024 年行业分布仅将本职业就业归入「制造业」与「其他行业（含批发贸易）」两类",
+        "display_value": "主要行业：制造业65%、行政与支持服务业13%；其余未在本页逐项展开",
         "fact_id": "industry-amusement",
         "market": "美国",
         "measure": "行业分布口径说明（非工资）",
-        "occupation_scope": "51-9031.00 本细类口径；O*NET 行业页未公布更细的行业门类占比，本页不据两类占比再拆分",
-        "period": "2024 年行业分布；检索 2026-09-19",
+        "occupation_scope": "51-9031自身美国职业口径；现期独立事实，不改范围外历史消费者",
+        "period": "2025行业分布；检索2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
@@ -37301,7 +37304,7 @@
       },
       {
         "derivation": null,
-        "display_value": "下降19%（2025—2035年）",
+        "display_value": "下降 18.9%",
         "fact_id": "r5-growth-2025-2035",
         "market": "美国",
         "measure": "预测就业变化（职业总量）",
@@ -37370,6 +37373,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "广东博恩新材料科技列后段修边兼全检岗位 1 人，综合薪资 4,000–6,000 元/月，公告写明手工细活、计件和长白班。",
+        "fact_id": "posting-a47-fogang",
+        "market": "中国大陆",
+        "measure": "岗位招聘记录",
+        "occupation_scope": "裁剪与修边招聘样本",
+        "period": "2026-10-27",
+        "source_refs": [
+          "a47-fogang"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "清远威登制衣的历史招聘列样衣房裁床师傅 2 人，要求懂手工裁剪和电剪，了解面料与纸样布纹。该岗位行未列报价。",
+        "fact_id": "posting-a47-qingcheng",
+        "market": "中国大陆",
+        "measure": "岗位招聘记录",
+        "occupation_scope": "裁剪与修边招聘样本",
+        "period": "2017",
+        "source_refs": [
+          "a47-qingcheng"
+        ]
       }
     ]
   },
@@ -37396,19 +37423,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，Decline 下降 -1% 或更低）"
+        "label": "美国就业变化（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 7,000 人）"
+        "label": "美国就业人数（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，约 600 个，含增长与替换）"
+        "label": "美国年均岗位空缺（2025–2035 年）"
       },
       {
         "availability": "missing",
@@ -37422,14 +37449,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "手工切割与修整工（O*NET-SOC 51-9031.00）使用手工工具或手持动力工具切割与修整地毯、织物、石材、玻璃、橡胶等制成品：覆盖读工单确定尺寸与数量、按样板或量具定位画线、用刀具与剪具或台式切割设备下料与仿形、按尺寸重量类型颜色分离材料、折叠整形、修整边料与线头、调整导板与限位、更换与磨锐刀具、打磨抛光清洁并标记成品、计数称重打包与搬运等任务；需说明其美国工资与就业为该细类自身口径（2025 年中位年薪 38,020 美元、时薪 18.28 美元；2024 年约 7,000 人在岗；2024—2034 年预测为下降 -1% 或更低；年均约 600 个含增长与替换的空缺；行业分布 制造业 70%／其他行业 30%；兴趣代码 RC），以及中国大陆该类岗位的行业口径缺口与刀具安全、手部防护、尺寸核对与质量检验等控制点。"
+      "text": "了解手工裁剪与修边工的职责、美国工资与就业预测、大陆岗位样本，再练习纸面裁片核对。"
     },
     "title": {
       "availability": "available",
       "text": "手工切割与修整工"
     }
   },
-  "source_content_sha256": "54d3fafd324e83f9fa61589c066f55cc4c54aa0c21b09c3408386edab64ad2ee",
+  "source_content_sha256": "f53d4da5bf4bab10b0feb61c46710ee2da1ea8700ca735d6106bb4a0ec2867f5",
   "subject": {
     "canonical_slug": "cutters-and-trimmers-hand",
     "name": "手工切割与修整工",

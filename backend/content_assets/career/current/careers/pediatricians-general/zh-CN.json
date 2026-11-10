@@ -1283,6 +1283,9 @@
       "item:pediatricians-general.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:pediatricians-general.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:pediatricians-general.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30945,6 +30948,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。家长记的是下周复查，预约单却写下月。写给随访团队一条说明，保留两种来源并注明待确认日期。"
+            ]
+          },
+          "id": "pediatricians-general.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "核普通儿科随访计划",
+          "type": "notice"
         }
       ]
     },
@@ -37338,6 +37356,13 @@
         "id": "pediatricians-general.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "pediatricians-general.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37687,7 +37712,7 @@
       "text": "儿科医生"
     }
   },
-  "source_content_sha256": "dc0fbeed2616e46cc74957dfea435bf5a4d0d774b5200d05abfb252b1ac62855",
+  "source_content_sha256": "673e0b5ba04fc8d2fb6b4a667be3edba28c512de6e2006f13282f010657bd722",
   "subject": {
     "canonical_slug": "pediatricians-general",
     "name": "普通儿科医生",

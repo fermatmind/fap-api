@@ -191,6 +191,9 @@
       "item:occupational-health-and-safety-specialists.path.seven-day-trial.6": {
         "status": "pending_mapping"
       },
+      "item:occupational-health-and-safety-specialists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:occupational-health-and-safety-specialists.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12878,6 +12881,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. One action has a site photo but no verification. Another was checked at the wrong location. State what each supports and who should verify closure."
+            ]
+          },
+          "id": "occupational-health-and-safety-specialists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Evaluate workplace safety corrective evidence",
+          "type": "notice"
         }
       ]
     },
@@ -15278,6 +15296,13 @@
         "id": "occupational-health-and-safety-specialists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-health-and-safety-specialists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15632,7 +15657,7 @@
       "text": "Occupational Health and Safety Specialists career profile｜tasks, wages, access, and boundaries"
     }
   },
-  "source_content_sha256": "43c1bcd99c30ba933877b130f82a295bc5432e033e1621bdfe5ac76acc2037ac",
+  "source_content_sha256": "f5dfec48ce767562cc22e8eb5dcc7e5354e25d3ab82554dfa4f0a4ce50b1253c",
   "subject": {
     "canonical_slug": "occupational-health-and-safety-specialists",
     "name": "Occupational health and safety specialists",

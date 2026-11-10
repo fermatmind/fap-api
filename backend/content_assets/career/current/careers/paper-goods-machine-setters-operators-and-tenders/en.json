@@ -141,7 +141,7 @@
         "status": "mapped"
       },
       "item:paper-goods-machine-setters-operators-and-tenders.path.credential-decision.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:paper-goods-machine-setters-operators-and-tenders.path.employer-evidence.3": {
         "status": "mapped"
@@ -150,16 +150,22 @@
         "status": "pending_mapping"
       },
       "item:paper-goods-machine-setters-operators-and-tenders.path.entry-role-comparison.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:paper-goods-machine-setters-operators-and-tenders.path.interview-probation.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:paper-goods-machine-setters-operators-and-tenders.path.recruitment-sample.1": {
         "status": "pending_mapping"
       },
-      "item:paper-goods-machine-setters-operators-and-tenders.path.seven-day-trial.6": {
+      "item:paper-goods-machine-setters-operators-and-tenders.path.seven-day-decision.1": {
         "status": "mapped"
+      },
+      "item:paper-goods-machine-setters-operators-and-tenders.path.seven-day-trial.6": {
+        "status": "pending_mapping"
       },
       "item:paper-goods-machine-setters-operators-and-tenders.profile.career-quick-answers-block.4": {
         "status": "mapped"
@@ -216,7 +222,7 @@
         "status": "pending_mapping"
       },
       "item:paper-goods-machine-setters-operators-and-tenders.sources.faq-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -5805,52 +5811,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -6081,36 +6225,98 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
         "ref": {
@@ -12181,7 +12387,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: a nationwide same-scope wage distribution for paper goods machine operators in China was not obtained, and the above-scale manufacturing production broad-position average is not this occupation's wage. This job processes paper and paperboard into products such as cartons, paper cups, and paper cores; the emphasis is on machine setup, feeding, monitoring, correction, and finished-product inspection."
+              "Use this as a career exploration guide. A paper check does not assess fitness for the job or authorize equipment operation."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.quick-decision.fermat-decision-card.1",
@@ -12196,7 +12402,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Suited to people who can verify work order dimensions, adjust machine guides and tension, and continuously identify jams, misalignment, and gluing defects."
+              "If you catch mismatched stock or inspection records and can explain exactly which job they belong to, try the paper exercise to see how this work feels."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.quick-decision.fit-decision-checklist.2",
@@ -12210,7 +12416,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Choose carefully if you are unwilling to follow the procedures for rotating blades, pinch points, and shutdown maintenance, or if you mistake machine operation for hand packing."
+              "If you prefer to set your own pace, ask how operators monitor the moving line and sample products while production continues. If something goes wrong, follow the site’s stop and handoff rules within your authorization."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.quick-decision.fit-decision-checklist.3",
@@ -12224,7 +12430,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Machine documentation and simulated work orders can be used to practice parameters, inspection, and handoffs; real machine operation and troubleshooting must go through employer training and authorization."
+              "Open “PG-25: Match a Paperboard Setup Record” in section 09. Compare two fictional records with the work order and write one review question. Which field did you check first? Could another person follow your decision?"
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.quick-decision.fermat-decision-card.4",
@@ -12246,7 +12452,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET 51-9196.00: sets up, operates, or tends machines that cut, corrugate, fold, glue, form, or seal paper or paperboard into paper products."
+              "Paper goods machine operators work with paper or paperboard to make products such as cartons and other containers. The steps depend on the line and may include cutting, corrugating, folding, gluing or forming."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.profile.definition-block.1",
@@ -12322,13 +12528,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Historical: U.S. 2024 employment in this occupation was about 97,500 people, not real-time hiring. Current BLS precise 51-9196 employment is 96,100 in 2025 and a projected 92,600 in 2035; the two bases cannot be computed together."
+              "Match the material and sample to the job record, and report any mismatch through the line procedure."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.profile.definition-block.6",
           "source_refs": [
-            "onet-summary",
-            "bls-ep-2025-2035"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -12387,7 +12592,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Paper goods machine operators handle paper and paperboard; metal and plastic extruding and rolling equipment handles different materials and processes."
+              "Paper goods machine operators set up and monitor equipment that forms paper products. Hand packers pack finished items, while maintenance workers diagnose and repair machinery. Check the main task before applying."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.3",
@@ -12629,7 +12834,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 median hourly wage for U.S. O*NET 51-9196.00 is 24.17 U.S. dollars and the median annual wage is 50,270 U.S. dollars."
+              "Source: May 2025 national wage estimates."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.1",
@@ -12643,13 +12848,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Historical: U.S. 2024 employment was about 97,500 people, not current openings. Current BLS precise 51-9196 employment is 96,100 in 2025 and a projected 92,600 in 2035, and it cannot be computed across periods."
+              "Source: May 2025 national wage estimates."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-summary",
-            "bls-ep-2025-2035"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -12658,7 +12862,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The median is not starting pay or a personal quote, and cannot be converted directly into Chinese wages."
+              "Source: May 2025 national wage estimates."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.3",
@@ -12672,7 +12876,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The U.S. BLS OEWS 2025 wages for this occupation were obtained: 10th/25th/50th/75th/90th percentile annual wages of 37,300/44,920/50,270/60,180/70,320 U.S. dollars, corresponding to hourly wages of 17.93/21.60/24.17/28.93/33.81 U.S. dollars; percentiles are not seniority levels, starting pay, or a personal quote, and are not converted into Chinese wages."
+              "Source: May 2025 national wage estimates."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.4",
@@ -12686,7 +12890,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The actual offer must be verified against the region, product, shifts, hours, and equipment responsibility."
+              "Source: May 2025 national wage estimates."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.5",
@@ -12700,14 +12904,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wages are 2025; the older 2024 employment of 97,500 and the 2024—2034 decline of -1% or lower with an annual average of 8,100 openings are kept as history. The current BLS precise 51-9196 shows 2025—2035 overall decline of 3.6% and a net decrease of 3,500 people, with an annual average of about 9,000 openings including replacements. The net decrease differs from the annual average openings, and the overall figure is not AI adoption, replacement, individual unemployment, or Chinese demand."
+              "Source: May 2025 national wage estimates."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "onet-wages",
-            "onet-summary",
-            "bls-ep-2025-2035"
+            "onet-wages"
           ],
           "type": "prose"
         }
@@ -12951,6 +13153,13 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "Stage",
+              "Tasks",
+              "Authority limits",
+              "Evidence",
+              "Next step"
+            ],
             "rows": [
               [
                 "Career exploration.",
@@ -12994,6 +13203,7 @@
             "onet-summary",
             "internal-rubric"
           ],
+          "title": "Entry roles and tasks",
           "type": "table"
         },
         {
@@ -13071,6 +13281,12 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "Situation",
+              "Response",
+              "Review points",
+              "Evidence"
+            ],
             "rows": [
               [
                 "Paper jam.",
@@ -13103,6 +13319,7 @@
             "onet-summary",
             "internal-rubric"
           ],
+          "title": "What a reviewer can check",
           "type": "table"
         },
         {
@@ -13113,31 +13330,56 @@
               {
                 "id": "paper-goods-machine-setters-operators-and-tenders.trial.day1",
                 "values": [
-                  "Day 1.",
-                  "Define the object and output."
+                  "Day 1",
+                  "Start W-PG. To compare two fictional edge-check notes, require the same job code and a recorded inspection location on each."
                 ]
               },
               {
                 "id": "paper-goods-machine-setters-operators-and-tenders.trial.day3",
                 "values": [
-                  "Day 3.",
-                  "Complete the simulation and inspection."
+                  "Day 2",
+                  "Note D1: job X4, left edge. Record both fields."
                 ]
               },
               {
                 "id": "paper-goods-machine-setters-operators-and-tenders.trial.day7",
                 "values": [
-                  "Day 7.",
-                  "Review errors and improve."
+                  "Day 3",
+                  "Note D8: job X4, location blank. Record both fields as written."
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "Day 4",
+                  "Check the fields and write a question for the shift reviewer."
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "Day 5",
+                  "Write a one-line decision with both record IDs."
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "Day 6",
+                  "Work alone first. Recheck the job code and location in each note. Peer feedback is optional."
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "Day 7",
+                  "After the Day 6 independent check, open “W-PG answer key (Day 7)” in the FAQ. Compare your note, then choose one habit to practice."
                 ]
               }
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.path.seven-day-trial.6",
-          "source_refs": [
-            "onet-summary",
-            "internal-rubric"
-          ],
+          "title": "Seven-day paper trial: a separate case",
           "type": "timeline"
         },
         {
@@ -13152,6 +13394,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Topic",
+              "Evidence",
+              "Verifier",
+              "Condition",
+              "Limit",
+              "Responsible party",
+              "Next step"
             ],
             "rows": [
               [
@@ -13215,6 +13466,7 @@
             "onet-summary",
             "internal-rubric"
           ],
+          "title": "Training and authorization by duty",
           "type": "table"
         },
         {
@@ -13246,6 +13498,67 @@
             "internal-rubric"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials (about 10 minutes)",
+                  "A fictional carton order needs board grade R3 and a fold check tied to the same sheet ID.",
+                  "Sheet P2: grade R3, fold check refers to P6. Sheet P6: grade R5, fold check refers to P6.",
+                  "Use paper only; do not feed, adjust or clear equipment."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Decide whether either record is ready for paperwork review. Cite the board grade and fold check on both.",
+                  "Tell the reviewer what original record to check next."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Where to find the reference",
+                  "After your own attempt, open “PG-25 answer key” in the FAQ.",
+                  "Compare it with your notes."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Did I cite both records, explain my decision, and name the person who could verify it?"
+                ]
+              }
+            ]
+          },
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "title": "PG-25: Match a Paperboard Setup Record",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "I read both records.",
+              "I checked both rules.",
+              "I recorded my comparison decision.",
+              "I named the reviewer.",
+              "I used fictional records only.",
+              "I rechecked my work independently.",
+              "I chose one habit to practice."
+            ]
+          },
+          "id": "paper-goods-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "title": "Judgement questions after seven days",
+          "type": "list"
         }
       ]
     },
@@ -13260,7 +13573,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Historical: the precise 51-9196 was projected to decline -1% or lower over 2024—2034. The current BLS precise 51-9196 shows 2025—2035 overall decline of 3.6% and a net decrease of 3,500 people, from 96,100 employed in 2025 to a projected 92,600 in 2035; not AI attribution or individual layoffs."
+              "BLS Table 1.2 lists 96,100 U.S. jobs in 2025 and projects 92,600 in 2035 for Paper Goods Machine Setters, Operators, and Tenders (51-9196). The published net decline is 3,500 jobs (3.6%), and 9,000 projected average annual openings include replacements."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.market-signals.market-signal-card.1",
@@ -13275,12 +13588,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Historical 2024—2034 annual average of about 8,100 openings including turnover. The current 2025—2035 annual average of about 9,000 openings includes growth and replacements and does not equal the overall net decrease of 3,500 people or the current hiring volume."
+              "United States"
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -13290,12 +13602,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Historical 2024 U.S. employment in this occupation 97,500 people; current BLS precise 51-9196 employment in 2025 is 96,100 people, and it cannot be computed across bases or represent Chinese position demand."
+              "2025–2035"
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -13305,12 +13616,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Automation can change some setup and inspection tasks; on-site machine setup, anomaly handling, and safety responsibility still need verification."
+              "The 2025 figure is the baseline; the 2035 figure is a projection."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.market-signals.market-signal-card.4",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13319,12 +13630,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Moving to hand packing, other material machine operation, or industrial machinery maintenance requires adding the target skills and authorization."
+              "These national estimates do not measure local hiring or demand in mainland China."
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         }
@@ -13369,7 +13680,7 @@
                 ]
               },
               {
-                "answer": "Digital tools can flag defects or parameters, but the physical item, machine status, and anomalies must be reviewed by trained personnel.",
+                "answer": "The evidence does not show whether AI will replace this occupation. Automated inspection can flag a mismatch for review, but trained staff verify material, investigate problems and follow equipment safety procedures. BLS projects overall jobs without isolating AI.",
                 "id": "paper-goods-machine-setters-operators-and-tenders.faq.4",
                 "question": "Can AI replace machine monitoring?",
                 "question_key": "career.faq.paper-goods-machine-setters-operators-and-tenders.4",
@@ -13397,7 +13708,7 @@
                 ]
               },
               {
-                "answer": "The 2025 U.S. median for this occupation is 24.17 per hour and 50,270 U.S. dollars per year; the quintiles were obtained but are not seniority or starting pay. BLS precise 51-9196 goes from 96,100 employed in 2025 to a projected 92,600 in 2035, with 2025—2035 overall decline of 3.6%, a net decrease of 3,500, and an annual average of about 9,000 openings including replacements. Not AI adoption, replacement, or individual layoffs; the older 2024 employment of 97,500 and the 2024—2034 materials are kept as history.",
+                "answer": "May 2025 U.S. median annual wage: $50,270. BLS Table 1.2 lists 96,100 U.S. jobs in 2025 and projects 92,600 in 2035 for Paper Goods Machine Setters, Operators, and Tenders (51-9196). The published net decline is 3,500 jobs (3.6%), and 9,000 projected average annual openings include replacements.",
                 "id": "paper-goods-machine-setters-operators-and-tenders.faq.7",
                 "question": "What are the U.S. wages and employment?",
                 "question_key": "career.faq.paper-goods-machine-setters-operators-and-tenders.7",
@@ -13408,19 +13719,33 @@
                 ]
               },
               {
-                "answer": "First practice parameters and inspection with simulated work orders; real machine startup, jam handling, and maintenance follow employer training authorization.",
+                "answer": "BLS lists high school or equivalent and moderate-term on-the-job training as typical for this U.S. occupation. The O*NET new-hire survey shows 69% of respondents selected high school or equivalent, 20% less than high school and 9% some college without a degree. This describes respondent choices about new hires; it is not incumbent education or a universal rule.",
                 "id": "paper-goods-machine-setters-operators-and-tenders.faq.8",
                 "question": "How can you get started safely?",
                 "question_key": "career.faq.paper-goods-machine-setters-operators-and-tenders.8",
                 "source_refs": [
                   "onet-details"
                 ]
+              },
+              {
+                "answer": "Neither record is ready. P2 shows the requested grade but its fold check refers to P6; P6 has the matching fold check but lists grade R5. Ask for the fold check tied to P2. Do not move a check from one sheet to the other.",
+                "id": "paper-goods-machine-setters-operators-and-tenders.faq.trial-short-reference",
+                "question": "PG-25 answer key",
+                "question_key": "career.faq.paper-goods-machine-setters-operators-and-tenders.trial-short-reference"
+              },
+              {
+                "answer": "Both notes name X4, but D8 has no inspection location. Under the paper rule they cannot yet be compared. Ask the shift reviewer to verify D8’s original location entry.",
+                "id": "paper-goods-machine-setters-operators-and-tenders.faq.trial-week-reference",
+                "question": "W-PG answer key (Day 7)",
+                "question_key": "career.faq.paper-goods-machine-setters-operators-and-tenders.trial-week-reference"
               }
             ]
           },
           "id": "paper-goods-machine-setters-operators-and-tenders.sources.faq-block.1",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "bls-ep-2025-2035",
+            "onet-wages"
           ],
           "type": "faq"
         },
@@ -13473,13 +13798,13 @@
                 "entity": "Paper goods machine setter and operator.",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Paper goods machine setter and operator.",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Paper goods machine setter and operator.",
@@ -13533,7 +13858,7 @@
                 "period": "2025 Table 7 above-scale manufacturing production broad position.",
                 "publisher": "National Bureau of Statistics.",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -13613,14 +13938,14 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "Five annual wages of 37300/44920/50270/60180/70320 U.S. dollars; five hourly wages of 17.93/21.60/24.17/28.93/33.81 U.S. dollars."
+                  "The U.S. national median was $50,270 a year and $24.17 an hour. The original table publishes both annual and hourly percentiles."
                 ],
                 "evidence_type": "official wage data",
                 "id": "onet-wages",
-                "limitation": "Percentiles are not seniority, starting pay, a personal quote, or Chinese wages, and are not inferred from the median.",
+                "limitation": "The U.S. national distribution cannot establish starting pay, an individual offer or pay in mainland China.",
                 "market": "US",
                 "name": "National Wages 51-9196.00 Paper Goods Machine Setters, Operators, And Tenders",
-                "period": "BLS OEWS2025 U.S. precise 51-9196 wages.",
+                "period": "May 2025 (BLS OEWS)",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-9196.00"
@@ -13671,18 +13996,19 @@
                 "url": "https://www.onetonline.org/link/hot_tech/51-9196.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Manufacturing 95%; Other industries 5%",
+                  "O*NET Details lists top industries for 2025; the industry table gives the rest of the distribution. These are employment shares, not wage estimates."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "O*NET Details lists top industries for 2025; the industry table gives the rest of the distribution. These are employment shares, not wage estimates.",
                 "market": "US",
-                "name": "Industries: 51-9196.00 - Paper Goods Machine Setters, Operators, and Tenders",
-                "period": "current page; accessed 2026-09-02",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "name": "O*NET 2025 employment by industry",
+                "period": "2025",
+                "publisher": "O*NET",
+                "scope": "Paper Goods Machine Setters, Operators, and Tenders",
                 "url": "https://www.onetonline.org/link/industry/51-9196.00"
               },
               {
@@ -13718,14 +14044,14 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "Five annual wages of 37300/44920/50270/60180/70320 U.S. dollars; five hourly wages of 17.93/21.60/24.17/28.93/33.81 U.S. dollars."
+                  "The U.S. national median was $50,270 a year and $24.17 an hour. The original table publishes both annual and hourly percentiles."
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "Percentiles are not seniority, starting pay, a personal quote, or Chinese wages, and are not inferred from the median.",
+                "limitation": "The U.S. national distribution cannot establish starting pay, an individual offer or pay in mainland China.",
                 "market": "US",
                 "name": "National Wages: 51-9196.00 - Paper Goods Machine Setters, Operators, and Tenders",
-                "period": "BLS OEWS2025 U.S. precise 51-9196 wages.",
+                "period": "May 2025 (BLS OEWS)",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-9196.00"
@@ -13746,18 +14072,19 @@
                 "url": "https://www.onetonline.org/link/summary/51-9196.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Employment 96100 to 92600 people, -3.6%, net decrease 3500, annual average of about 9000 openings including replacements."
+                  "BLS Table 1.2 lists 96,100 U.S. jobs in 2025 and projects 92,600 in 2035 for Paper Goods Machine Setters, Operators, and Tenders (51-9196). The published net decline is 3,500 jobs (3.6%), and 9,000 projected average annual openings include replacements.",
+                  "BLS lists high school or equivalent and moderate-term on-the-job training as typical for this U.S. occupation."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-ep-2025-2035",
-                "limitation": "The precise 51-9196 is not the parent 51-9190; the overall figure is not AI adoption replacement, individual layoffs, real-time hiring, or Chinese demand.",
+                "limitation": "BLS Table 1.2 lists 96,100 U.S. jobs in 2025 and projects 92,600 in 2035 for Paper Goods Machine Setters, Operators, and Tenders (51-9196). The published net decline is 3,500 jobs (3.6%), and 9,000 projected average annual openings include replacements.",
                 "market": "US",
-                "name": "BLS Table 1.2 precise 51-9196 overall employment projections.",
-                "period": "2025—2035",
+                "name": "BLS Table 1.2: exact occupation outlook",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "Paper Goods Machine Setters, Operators, and Tenders",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
@@ -13776,6 +14103,21 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A February 2026 Nanchang county posting for corrugator and gluing line leads asked for at least two years of experience operating the relevant equipment. It describes one employer’s lead roles."
+                ],
+                "evidence_type": "Historical local recruitment notice",
+                "id": "cn-example-025",
+                "limitation": "Historical example only. It does not establish a national entry requirement, wage level or current vacancy.",
+                "market": "Mainland China",
+                "name": "Nanchang county: corrugated board equipment recruitment",
+                "period": "2026-02-25",
+                "publisher": "Nanchang County Government",
+                "scope": "Paper Goods Machine Setters, Operators, and Tenders",
+                "url": "https://ncxl.nc.gov.cn/ncxljkq/qyzp/202602/1305d6a4020045568e058723dbd2bbe3.shtml"
               }
             ]
           },
@@ -14428,7 +14770,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "Historical employment scope.",
+                  "label": "Finished-product checks",
                   "secondary_value": {
                     "$item": "paper-goods-machine-setters-operators-and-tenders.profile.onet-structured-fields-block.5",
                     "block": "profile",
@@ -14457,7 +14799,7 @@
             }
           },
           {
-            "answer": "The 2025 U.S. precise 51-9196 median annual wage is 50,270 U.S. dollars with 96,100 employed; over 2025—2035 overall decline is 3.6%, a net decrease of 3,500, and an annual average of about 9,000 openings including replacements, not AI replacement or individual job-loss probability.",
+            "answer": "May 2025 U.S. medians were $50,270 a year; $24.17 an hour. BLS counts 96,100 U.S. jobs in 2025 and projects 92,600 in 2035, a decline of 3,500 jobs (3.6%). The projected average of 9,000 openings a year includes replacements.",
             "key": "qa2",
             "question": "What are the official U.S. data?",
             "table": {
@@ -14484,31 +14826,31 @@
                   "alternate_value": null,
                   "label": "U.S. median annual wage.",
                   "secondary_value": "U.S. national occupational data.",
-                  "value": "$50,270（2025）"
+                  "value": "$50,270 (May 2025)"
                 },
                 {
                   "alternate_value": null,
                   "label": "2025 employed.",
                   "secondary_value": "U.S. precise 51-9196 employment stock.",
-                  "value": "96,100 people."
+                  "value": "96,100 jobs"
                 },
                 {
                   "alternate_value": null,
                   "label": "Projected change.",
                   "secondary_value": "U.S. overall projection, not AI replacement.",
-                  "value": "2025—2035 decline 3.6%; net decrease of 3,500 people."
+                  "value": "−3.6%; 3,500 fewer jobs"
                 },
                 {
                   "alternate_value": null,
                   "label": "Annual average openings.",
-                  "secondary_value": "2025—2035, includes growth and turnover replacements.",
-                  "value": "About 9,000 per year."
+                  "secondary_value": "Includes openings to replace workers who move to another occupation or leave the labor force. A change of employer within the occupation does not count.",
+                  "value": "9,000 projected per year"
                 }
               ]
             }
           },
           {
-            "answer": "Paper Goods Machine Setters, Operators, and Tenders can use tools to assist with organizing information, but real adoption, authority, result release, and anomaly escalation still need to be verified by responsible people.",
+            "answer": "Begin with site-specific training and a supervised line demonstration. Check the work order, match stock to the job, and ask who may stop, adjust or restart the equipment. Do not clear a jam on your own.",
             "key": "qa1",
             "question": "How can you get started safely?",
             "table": {
@@ -14565,7 +14907,7 @@
         "context_links": [
           {
             "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "label": "U.S. employment outlook and related roles"
           }
         ],
         "direct_answer": {
@@ -14769,7 +15111,7 @@
           "china_intl": "O*NET precise 51-9196 paper goods machine tasks｜https://www.onetonline.org/link/summary/51-9196.00",
           "china_name_row": "Above-scale manufacturing production broad-position wage reference.",
           "china_open": "Paper products manufacturing employers can verify whether they fall under the above-scale manufacturing production broad position; the equipment model, paperboard product, hours and shifts, quality responsibilities, and actual contract are verified separately.",
-          "china_open_note": "For salary judgments, return to verifying the specific city, employer, position level, and public job posting terms.",
+          "china_open_note": "A February 2026 Nanchang county posting for corrugator and gluing line leads asked for at least two years of experience operating the relevant equipment. It describes one employer’s lead roles. Historical example only. It does not establish a national entry requirement, wage level or current vacancy.",
           "china_ref": "NBS 2025 Table 7 manufacturing production broad position｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "china_salary_note": "NBS 2025 Table 7: 79,182 yuan per year for production, manufacturing, and related personnel in above-scale manufacturing is a pre-tax annual average that includes many production positions and is not the median, starting pay, or take-home for paper goods machine operators. Only actual above-scale manufacturing legal-person employers may refer to it; the survey covers urban legal persons with 5 or more employees and excludes self-employed operation and freelance work, while the above-scale condition is verified separately. Pre-tax includes withheld taxes, personal social insurance, and the housing provident fund; small paper products workshops, self-employed income, non-manufacturing, or outsourcing actual employers do not apply it directly.",
           "china_salary_table": [
@@ -14817,49 +15159,49 @@
         "bls_table": [
           {
             "指标": "Salary 10th percentile.",
-            "数值": "$37,300",
+            "数值": "$37,300 per year; $17.93 per hour",
             "说明": "BLS OEWS2025 U.S. precise 51-9196 annual wages; percentiles are not seniority, starting pay, or a personal income guarantee."
           },
           {
             "指标": "Salary 25th percentile.",
-            "数值": "$44,920",
+            "数值": "$44,920 per year; $21.60 per hour",
             "说明": "BLS OEWS2025 U.S. precise 51-9196 annual wages; percentiles are not seniority, starting pay, or a personal income guarantee."
           },
           {
             "指标": "Salary median.",
-            "数值": "$50,270",
+            "数值": "$50,270 per year; $24.17 per hour",
             "说明": "BLS OEWS2025 U.S. precise 51-9196 annual wages; percentiles are not seniority, starting pay, or a personal income guarantee."
           },
           {
             "指标": "Salary 75th percentile.",
-            "数值": "$60,180",
+            "数值": "$60,180 per year; $28.93 per hour",
             "说明": "BLS OEWS2025 U.S. precise 51-9196 annual wages; percentiles are not seniority, starting pay, or a personal income guarantee."
           },
           {
             "指标": "Salary 90th percentile.",
-            "数值": "$70,320",
+            "数值": "$70,320 per year; $33.81 per hour",
             "说明": "BLS OEWS2025 U.S. precise 51-9196 annual wages; percentiles are not seniority, starting pay, or a personal income guarantee."
           },
           {
-            "指标": "Employment.",
-            "数值": "96,100",
-            "说明": "2025 precise 51-9196 employment stock; a projected 92,600 in 2035, not real-time hiring."
+            "指标": "U.S. employment (jobs)",
+            "数值": "96,100 jobs in 2025; 92,600 projected for 2035",
+            "说明": "BLS Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET occupational scope｜https://www.onetonline.org/link/details/51-9196.00"
           },
           {
-            "指标": "Employment outlook 2025—2035.",
-            "数值": "Decline 3.6% (net decrease of 3,500 people).",
-            "说明": "U.S. overall employment projections; does not support AI adoption, replacement, or individual job-loss probability."
+            "指标": "Projected job change (2025–2035)",
+            "数值": "−3.6%; published net decline 3,500 jobs",
+            "说明": "BLS Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET occupational scope｜https://www.onetonline.org/link/details/51-9196.00"
           },
           {
-            "指标": "Job openings (annual average).",
-            "数值": "About 9,000 per year.",
-            "说明": "2025—2035 includes growth and turnover replacements; even with an overall decline there are replacement openings, which are not net additions."
+            "指标": "Projected annual openings",
+            "数值": "9,000 projected openings per year, including replacements",
+            "说明": "BLS Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET occupational scope｜https://www.onetonline.org/link/details/51-9196.00"
           }
         ],
-        "boundary": "The 2025 U.S. precise 51-9196 wage distribution is not Chinese income; the current overall employment projection is 2025—2035, and the older 2024 and 2024—2034 are history only. Not AI adoption replacement, individual unemployment, or Chinese demand.",
+        "boundary": "BLS Table 1.2 lists 96,100 U.S. jobs in 2025 and projects 92,600 in 2035 for Paper Goods Machine Setters, Operators, and Tenders (51-9196). The published net decline is 3,500 jobs (3.6%), and 9,000 projected average annual openings include replacements.",
         "direct_answer": {
           "$join": [
-            "U.S. precise 51-9196 employed 96,100 people in 2025; over 2025—2035 overall decline is 3.6%, a net decrease of 3,500 people, and an annual average of about 9,000 openings including replacements.",
+            "The U.S. national median in May 2025 was $50,270 a year and $24.17 an hour.",
             {
               "$item": "paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -14867,7 +15209,7 @@
               "type": "prose"
             }
           ],
-          "separator": "；"
+          "separator": "\n"
         },
         "factor_rows": [
           {
@@ -14884,39 +15226,39 @@
           }
         ],
         "factors_heading": "Factors affecting actual offers.",
-        "growth": "Decline 3.6% (net decrease of 3,500 people).",
+        "growth": "BLS Table 1.2 lists 96,100 U.S. jobs in 2025 and projects 92,600 in 2035 for Paper Goods Machine Setters, Operators, and Tenders (51-9196). The published net decline is 3,500 jobs (3.6%), and 9,000 projected average annual openings include replacements.",
         "heading": "U.S. paper goods machine wages and employment.",
-        "industry_heading": "Industry and position differences.",
-        "industry_period": "Verify product position conditions; no industry wage statistics.",
+        "industry_heading": "Employment by industry (2025)",
+        "industry_period": "2025 employment shares",
         "industry_rows": [
           {
-            "industry": "Carton manufacturing.",
-            "median": "Verify the specific position.",
-            "note": "Corrugating and folding processes differ."
+            "industry": "Manufacturing",
+            "median": "95%",
+            "note": "O*NET Details lists top industries for 2025; the industry table gives the rest of the distribution. These are employment shares, not wage estimates."
           },
           {
-            "industry": "Paper cups and boxes.",
-            "median": "Verify the specific position.",
-            "note": "Forming and sealing requirements differ."
+            "industry": "Other industries",
+            "median": "5%",
+            "note": "O*NET Details lists top industries for 2025; the industry table gives the rest of the distribution. These are employment shares, not wage estimates."
           },
           {
-            "industry": "Other paper products.",
-            "median": "Verify the specific position.",
-            "note": "Materials and equipment differ."
+            "industry": "Industry wages",
+            "median": "Not obtained",
+            "note": "O*NET Details lists top industries for 2025; the industry table gives the rest of the distribution. These are employment shares, not wage estimates."
           },
           {
-            "industry": "Other employers.",
-            "median": "Verify the specific position.",
-            "note": "The national median is not a personal offer."
+            "industry": "Compare employers",
+            "median": "—",
+            "note": "O*NET Details lists top industries for 2025; the industry table gives the rest of the distribution. These are employment shares, not wage estimates."
           }
         ],
-        "industry_value_label": "Data status.",
+        "industry_value_label": "Employment share",
         "interpretation_heading": "How to interpret.",
         "interpretation_rows": [
           {
             "answer": {
               "$join": [
-                "The median wage is not starting pay, and it is not a personal income promise.",
+                "It marks the middle of the wage distribution. It does not tell you the starting wage or a specific offer.",
                 {
                   "$item": "paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.5",
                   "block": "us-salary",
@@ -14924,14 +15266,14 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "question": "What does the median wage represent?"
+            "question": "What does the median wage tell you?"
           },
           {
             "answer": {
               "$join": [
-                "The 2025 wage percentiles were obtained; the employment history and the current period are presented separately.",
+                "The national table publishes both measures. Actual income depends on hours, contract and overtime.",
                 {
                   "$item": "paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -14939,35 +15281,35 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "question": "How are wage percentiles distinguished from the employment year?"
+            "question": "What do annual and hourly estimates mean?"
           },
           {
-            "answer": "It is occupational employment stock, not current hiring volume.",
-            "question": "What does employment represent?"
+            "answer": "It counts jobs in this U.S. occupation. It is not the number of roles currently advertised.",
+            "question": "What does the 2025 employment figure measure?"
           },
           {
-            "answer": "The overall net decrease of 3,500 people differs from the annual average of about 9,000 openings including replacements; they cannot be taken as AI adoption, replacement, individual job-loss, or Chinese demand projections.",
-            "question": "How are growth and openings used?"
+            "answer": "The change is an overall U.S. projection. Average annual openings include replacement needs; they are not the net change or a measure of AI effects.",
+            "question": "How should the 2035 forecast be used?"
           }
         ],
         "median": "$50,270",
         "outlook_heading": "Employment outlook.",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
-          "Wage statistical scope.",
-          "Annual wage reference.",
-          "Pay boundaries.",
-          "Explanation."
+          "Wage percentile",
+          "Annual wage",
+          "Hourly wage",
+          "How to read it"
         ],
-        "wage_heading": "Wage data.",
+        "wage_heading": "U.S. national wage percentiles (May 2025)",
         "wage_tiers": [
           {
-            "equivalent": "Not converted.",
+            "equivalent": "$21.60/hour",
             "interpretation": {
               "$join": [
-                "States only the median annual wage fact, not starting pay or a personal quote.",
+                "About one quarter of wages are at or below this point. It is not a starting wage.",
                 {
                   "$item": "paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.2",
                   "block": "us-salary",
@@ -14975,16 +15317,16 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "label": "Median level obtained.",
-            "value": "$50,270"
+            "label": "25th percentile",
+            "value": "$44,920"
           },
           {
-            "equivalent": "Not provided.",
+            "equivalent": "$24.17/hour",
             "interpretation": {
               "$join": [
-                "National percentiles do not equal the offer for a given machine or shift.",
+                "This is the midpoint of the wage distribution. It is not an employer’s offer.",
                 {
                   "$item": "paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.3",
                   "block": "us-salary",
@@ -14992,16 +15334,16 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "label": "Specific position differences.",
-            "value": "The 2025 percentiles for this occupation were obtained."
+            "label": "Median (50th percentile)",
+            "value": "$50,270"
           },
           {
-            "equivalent": "Not provided.",
+            "equivalent": "$28.93/hour",
             "interpretation": {
               "$join": [
-                "The actual wage table for this occupation has been completed, without inference from the median.",
+                "About three quarters of wages are at or below this point. It is not pay for a set number of years on the job.",
                 {
                   "$item": "paper-goods-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.4",
                   "block": "us-salary",
@@ -15009,10 +15351,10 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "label": "National wage percentiles.",
-            "value": "$37,300／44,920／50,270／60,180／70,320"
+            "label": "75th percentile",
+            "value": "$60,180"
           }
         ]
       },
@@ -15032,8 +15374,8 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "summary": "Suited to people who are willing to observe tension, speed, and forming quality and can stop, spot-check, and hand over per procedures.",
-        "title": "Paper goods machine setter and operator."
+        "summary": "This work may suit you if you like matching stock to a job, watching the line and checking a finished sample before handover.",
+        "title": "Could working with paper goods machinery suit you?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -15056,19 +15398,19 @@
         }
       },
       "hero": {
-        "h1": "Paper goods machine setter and operator.",
+        "h1": "Paper goods machine setter and operator",
         "quick_answer": "Set up and operate paper goods equipment per the work order, cutting, corrugating, folding, gluing, forming, or sealing paper or paperboard into products such as cartons and paper cups, monitor the machine, and inspect the finished product.",
-        "title": "Paper goods machine setter and operator."
+        "title": "Paper goods machine setter and operator"
       },
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-us-salary",
+            "label": "See U.S. wage percentiles"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "Compare related occupations"
           }
         ],
         "direct_answer": {
@@ -15104,30 +15446,30 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "Precise occupational employment.",
-            "occupation_scope": "O*NET 51-9196.00 precise occupation.",
+            "metric": "U.S. employment (jobs)",
+            "occupation_scope": "Paper Goods Machine Setters, Operators, and Tenders (51-9196)",
             "source_id": "ep",
-            "value": "96,100 people."
+            "value": "96,100 jobs in 2025; 92,600 projected for 2035"
           },
           {
-            "geography": "United States.",
-            "horizon": "2025—2035",
-            "interpretation": "U.S. precise overall projections are not AI adoption replacement, individual layoffs, or current hiring at paper products plants.",
-            "limitation": "Cannot be extrapolated to individual hiring probability or Chinese demand.",
-            "metric": "Employment change and annual average openings.",
-            "occupation_scope": "O*NET 51-9196.00 precise occupation.",
-            "source_id": "bls",
-            "value": "Decline 3.6%; net decrease of 3,500 people; annual average of about 9,000 openings including replacements."
+            "geography": "United States",
+            "horizon": "2025–2035",
+            "interpretation": "BLS projects overall change and does not isolate the effect of AI.",
+            "limitation": "These national estimates do not measure local hiring or demand in mainland China.",
+            "metric": "Projected job change (2025–2035)",
+            "occupation_scope": "Paper Goods Machine Setters, Operators, and Tenders (51-9196)",
+            "source_id": "ep",
+            "value": "−3.6%; published net decline 3,500 jobs"
           },
           {
-            "geography": "Chinese mainland.",
-            "horizon": "Current materials.",
-            "interpretation": "The NBS manufacturing broad-position wage does not provide a Chinese employment demand projection for this occupation.",
-            "limitation": "Cannot be extrapolated to individual hiring probability or Chinese demand.",
-            "metric": "Same-scope projections.",
-            "occupation_scope": "Chinese positions cannot be directly matched.",
-            "source_id": "nbs",
-            "value": "No data that can be safely used at present."
+            "geography": "United States",
+            "horizon": "2025–2035",
+            "interpretation": "Includes openings due to replacements.",
+            "limitation": "These national estimates do not measure local hiring or demand in mainland China.",
+            "metric": "Projected annual openings",
+            "occupation_scope": "Paper Goods Machine Setters, Operators, and Tenders (51-9196)",
+            "source_id": "ep",
+            "value": "9,000 projected openings per year, including replacements"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15154,14 +15496,14 @@
             "href": "https://www.onetonline.org/link/summary/51-9196.00",
             "id": "onet",
             "label": "O*NET tasks and historical context for this occupation's paper goods equipment.",
-            "scope": "Precise 51-9196 tasks and the 2024—2034 history."
+            "scope": "U.S. occupational profile and machine tasks for 51-9196.00."
           }
         ],
         "transitions": [
           {
             "capability_gaps": "Add hand packing, label sealing, and handling ergonomics.",
             "shared_capabilities": "Materials, quantities, and appearance verification.",
-            "target_href": "/zh/career/jobs/packers-and-packagers-hand",
+            "target_href": "/en/career/jobs/packers-and-packagers-hand",
             "target_slug": "packers-and-packagers-hand",
             "target_title": "Hand packer.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15169,7 +15511,7 @@
           {
             "capability_gaps": "Add filling and packaging products, quantitative sealing, and the target equipment.",
             "shared_capabilities": "Loading, parameters, machine monitoring, and quality records.",
-            "target_href": "/zh/career/jobs/packaging-and-filling-machine-operators-and-tenders",
+            "target_href": "/en/career/jobs/packaging-and-filling-machine-operators-and-tenders",
             "target_slug": "packaging-and-filling-machine-operators-and-tenders",
             "target_title": "Packaging and filling machine operator.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15177,7 +15519,7 @@
           {
             "capability_gaps": "Add mechanical diagnosis, disassembly and repair, and hazardous energy isolation authorization.",
             "shared_capabilities": "Equipment observation, anomaly records, and some maintenance.",
-            "target_href": "/zh/career/jobs/industrial-machinery-mechanics",
+            "target_href": "/en/career/jobs/industrial-machinery-mechanics",
             "target_slug": "industrial-machinery-mechanics",
             "target_title": "Industrial machinery maintenance worker.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15185,7 +15527,7 @@
           {
             "capability_gaps": "Add target material cutting, blade parameters, and protection.",
             "shared_capabilities": "Dimensions, blades, and feeding observation.",
-            "target_href": "/zh/career/jobs/cutting-and-slicing-machine-setters-operators-and-tenders",
+            "target_href": "/en/career/jobs/cutting-and-slicing-machine-setters-operators-and-tenders",
             "target_slug": "cutting-and-slicing-machine-setters-operators-and-tenders",
             "target_title": "Cutting equipment operator.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15193,7 +15535,7 @@
           {
             "capability_gaps": "Add printing plates and inks, registration, printing parameters, and equipment.",
             "shared_capabilities": "Paper stock, feeding, and sample inspection.",
-            "target_href": "/zh/career/jobs/printing-press-operators",
+            "target_href": "/en/career/jobs/printing-press-operators",
             "target_slug": "printing-press-operators",
             "target_title": "Printing press operator.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15201,7 +15543,7 @@
           {
             "capability_gaps": "Add target equipment feeding and unloading, cycle time, and handling procedures.",
             "shared_capabilities": "Paper stock batches, feeding, and finished-product handoff.",
-            "target_href": "/zh/career/jobs/machine-feeders-and-offbearers",
+            "target_href": "/en/career/jobs/machine-feeders-and-offbearers",
             "target_slug": "machine-feeders-and-offbearers",
             "target_title": "Machine feeder and unloader.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15209,7 +15551,7 @@
           {
             "capability_gaps": "Add collating and binding, post-press processes, and the target equipment.",
             "shared_capabilities": "Paper specifications, cutting and folding, and finished-product quality.",
-            "target_href": "/zh/career/jobs/print-binding-and-finishing-workers",
+            "target_href": "/en/career/jobs/print-binding-and-finishing-workers",
             "target_slug": "print-binding-and-finishing-workers",
             "target_title": "Bindery worker.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15217,7 +15559,7 @@
           {
             "capability_gaps": "Add building substrates, adhesives, pattern alignment, and on-site work safety.",
             "shared_capabilities": "Paper material, cut dimensions, and appearance.",
-            "target_href": "/zh/career/jobs/paperhangers",
+            "target_href": "/en/career/jobs/paperhangers",
             "target_slug": "paperhangers",
             "target_title": "Wallpaper installer.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15270,8 +15612,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Explore occupational interests.",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
+            "cta_label": "Explore your career interests",
             "evidence_level": {
               "$item": "paper-goods-machine-setters-operators-and-tenders.fit.personality-fit-block.8",
               "block": "fit",
@@ -15291,8 +15633,8 @@
           },
           {
             "answer": "Reflect on work order versions, parameter records, and anomaly handoff habits; actual performance is verified separately.",
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
-            "cta_label": "Understand personality traits.",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
+            "cta_label": "Explore Big Five traits",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for this occupation has not been verified.",
             "id": "big-five",
             "label": "Big Five personality.",
@@ -15307,8 +15649,8 @@
           },
           {
             "answer": "Record hands-on, detail, and collaboration preferences; do not judge machine capability by type.",
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "cta_label": "Explore occupational interests.",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "Explore MBTI preferences",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for this occupation has not been verified.",
             "id": "mbti",
             "label": "MBTI preferences.",
@@ -15323,8 +15665,8 @@
           },
           {
             "answer": "Can reflect on shutdown and rework pressure; do not replace on-site feedback with a type.",
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
-            "cta_label": "Understand personality traits.",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
+            "cta_label": "Explore the Enneagram",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for this occupation has not been verified.",
             "id": "enneagram",
             "label": "Enneagram.",
@@ -15339,8 +15681,8 @@
           },
           {
             "answer": "Observe the understanding of dimension units, processes, and the paper path; does not replace operation training.",
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
-            "cta_label": "Explore occupational interests.",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
+            "cta_label": "Try a matrix reasoning test",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for this occupation has not been verified.",
             "id": "iq",
             "label": "Cognitive ability assessments.",
@@ -15355,8 +15697,8 @@
           },
           {
             "answer": "Focus on clearly handing over jams, drift, and defects; communication self-assessment does not replace quality feedback.",
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
-            "cta_label": "Understand personality traits.",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "cta_label": "Explore emotional intelligence",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for this occupation has not been verified.",
             "id": "eq",
             "label": "Emotion and communication self-assessment.",
@@ -15590,7 +15932,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Occupational interest and personality exploration."
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -15600,7 +15942,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Occupational interest and personality exploration."
+            "label": "Big Five personality test"
           },
           {
             "href": {
@@ -15610,7 +15952,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Occupational interest and personality exploration."
+            "label": "Enneagram test"
           },
           {
             "href": {
@@ -15620,7 +15962,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Occupational interest and personality exploration."
+            "label": "Emotional intelligence test"
           }
         ]
       },
@@ -15698,6 +16040,20 @@
         "id": "paper-goods-machine-setters-operators-and-tenders.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "paper-goods-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "paper-goods-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -15763,12 +16119,12 @@
       },
       {
         "derivation": null,
-        "display_value": "24.17 U.S. dollars per hour, 50,270 U.S. dollars per year.",
+        "display_value": "$50,270 a year; $24.17 an hour",
         "fact_id": "us-wage",
-        "market": "United States.",
-        "measure": "annual wage measure",
-        "occupation_scope": "Paper Goods Machine Setters, Operators, And Tenders page; scope preserved",
-        "period": "2025",
+        "market": "US",
+        "measure": "National median annual and hourly wages",
+        "occupation_scope": "Paper Goods Machine Setters, Operators, and Tenders",
+        "period": "2025-05",
         "source_refs": [
           "onet-wages"
         ]
@@ -15787,38 +16143,38 @@
       },
       {
         "derivation": null,
-        "display_value": "Decline (-1% or lower).",
+        "display_value": "−3.6%",
         "fact_id": "employment-projection",
         "market": "United States.",
-        "measure": "employment projection measure",
-        "occupation_scope": "Paper Goods Machine Setters, Operators, And Tenders page; scope preserved",
-        "period": "2024—2034",
+        "measure": "Projected job change",
+        "occupation_scope": "Paper Goods Machine Setters, Operators, and Tenders",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "97,500 people.",
+        "display_value": "96,100 jobs",
         "fact_id": "us-employment",
         "market": "United States.",
-        "measure": "Employment.",
-        "occupation_scope": "O*NET 51-9196.00",
-        "period": "2024",
+        "measure": "Employment (jobs)",
+        "occupation_scope": "Paper Goods Machine Setters, Operators, and Tenders",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 8,100 per year.",
+        "display_value": "9,000 projected openings per year",
         "fact_id": "us-openings",
         "market": "United States.",
-        "measure": "Projected annual average openings.",
-        "occupation_scope": "O*NET 51-9196.00",
-        "period": "2024—2034",
+        "measure": "Projected average annual openings",
+        "occupation_scope": "Paper Goods Machine Setters, Operators, and Tenders",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -15835,11 +16191,11 @@
       },
       {
         "derivation": null,
-        "display_value": "96,100 people.",
+        "display_value": "96,100 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States.",
-        "measure": "2025 precise occupational employment.",
-        "occupation_scope": "BLS 51-9196 Paper goods machine setters, operators, and tenders",
+        "measure": "Employment (jobs)",
+        "occupation_scope": "Paper Goods Machine Setters, Operators, and Tenders",
         "period": "2025",
         "source_refs": [
           "bls-ep-2025-2035"
@@ -15847,24 +16203,24 @@
       },
       {
         "derivation": null,
-        "display_value": "Decline 3.6% (net decrease of 3,500 people).",
+        "display_value": "−3.6%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States.",
-        "measure": "Overall employment projection net change.",
-        "occupation_scope": "BLS precise 51-9196.",
-        "period": "2025—2035",
+        "measure": "Projected job change",
+        "occupation_scope": "Paper Goods Machine Setters, Operators, and Tenders",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Annual average of about 9,000 openings (including replacements).",
+        "display_value": "9,000 projected openings per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States.",
-        "measure": "Annual average occupational openings.",
-        "occupation_scope": "BLS precise 51-9196.",
-        "period": "2025—2035",
+        "measure": "Projected average annual openings",
+        "occupation_scope": "Paper Goods Machine Setters, Operators, and Tenders",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ep-2025-2035"
         ]
@@ -15900,31 +16256,31 @@
         "availability": "available",
         "fact_ref": "us-wage",
         "key": "us_pay",
-        "label": "U.S. median wage (2025)."
+        "label": "U.S. median annual and hourly wages (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. overall employment (2025—2035)."
+        "label": "U.S. projected job change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employed (2025)."
+        "label": "U.S. jobs in 2025"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. annual average openings (including replacements)."
+        "label": "U.S. projected annual openings"
       },
       {
-        "availability": "available",
-        "fact_ref": "china-production-2025",
+        "availability": "missing",
+        "fact_ref": null,
         "key": "china_pay",
-        "label": "Above-scale manufacturing production broad position · pre-tax annual average."
+        "label": "Mainland China: exact occupational wage not verified"
       }
     ]
   },
@@ -15932,17 +16288,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Set up and operate paper goods equipment per the work order, cutting, corrugating, folding, gluing, forming, or sealing paper or paperboard into products such as cartons and paper cups, monitor the machine, and inspect the finished product. U.S. O*NET 51-9196.00 data, distinguishing machine operation, hand packing, and machine maintenance."
+      "text": "Explore paper goods machine work, U.S. wages and training, and try a paperboard setup record check."
     },
     "title": {
       "availability": "available",
-      "text": "Paper Goods Machine Setters, Operators, and Tenders: work content, wages, and entry paths."
+      "text": "Paper Goods Machine Setters, Operators, and Tenders: work content, wages, and entry paths"
     }
   },
-  "source_content_sha256": "ec09bebcf46c786271fcd52a99dbfd70bc7f854e5f18d2c3be53be97a798581b",
+  "source_content_sha256": "90035ea45ba2b539f590dc05d7cdb2ca51f527bacd4027a9716395de16532a3e",
   "subject": {
     "canonical_slug": "paper-goods-machine-setters-operators-and-tenders",
-    "name": "Paper goods machine setter and operator.",
+    "name": "Paper goods machine setter and operator",
     "summary": "Set up and operate paper goods equipment per the work order, cutting, corrugating, folding, gluing, forming, or sealing paper or paperboard into products such as cartons and paper cups, monitor the machine, and inspect the finished product."
   }
 }

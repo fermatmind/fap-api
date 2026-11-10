@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "This work turns yarn and product requirements into verifiable fabric, equipment settings and production records. First observe whether you are willing to check batch numbers, pattern versions, density and completed quantities, and to keep original values and report when there is a stoppage, a defect or a record conflict. You also need to check the real shifts, standing, noise and protection conditions; liking knitting alone is not enough to judge."
+              "Paper check | Match a fictional roll-defect sheet to downtime entries by machine. Flag a timestamp mismatch that needs checking against the original records. "
             ]
           },
           "id": "textile-knitting-and-weaving-machine-setters-operators-and-tenders.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24819,13 +24818,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Textile knitting and weaving machine setters, operators and tenders set up, operate or tend textile equipment such as knitting and weaving machines, read specifications and samples, monitor the process, watch for product defects, and record completed quantities, settings and anomalies."
+              "Textile knitting and weaving machine operators tend yarn and equipment, watch for fabric defects or stoppages and log their location and timing for the crew. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "textile-knitting-and-weaving-machine-setters-operators-and-tenders.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-6063.00"
           ],
           "type": "prose"
         }
@@ -25480,12 +25478,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Record drafts, equipment automation and employment outcomes are verified separately. The BLS 2025—2035 overall projection for this occupation shows a 13.7% decline and about 1,300 annual openings including replacements, which cannot be attributed to AI alone. No measured adoption or substitution rate for this occupation was obtained. The separate editorial task-sample estimate does not predict personal unemployment. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Match a fictional roll-defect sheet to downtime entries by machine. Flag a timestamp mismatch that needs checking against the original records."
             ]
           },
           "id": "textile-knitting-and-weaving-machine-setters-operators-and-tenders.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial"
+            "transfer-onet-51-6063.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33101,6 +33100,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-6063.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-6063.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-6063.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38574,10 +38600,10 @@
       "text": "Textile knitting and weaving machine setters, operators and tenders"
     }
   },
-  "source_content_sha256": "01c9985ce946c050806ec0a8b8226e8f4ff3ab2bb1ec6ab3c3869cf10b87a47b",
+  "source_content_sha256": "d456fdd7f662758720f89222be4cef76530d3cab94c4d156628f26c4deac5b1a",
   "subject": {
     "canonical_slug": "textile-knitting-and-weaving-machine-setters-operators-and-tenders",
     "name": "Textile knitting and weaving machine setters, operators and tenders",
-    "summary": "Set up, operate or tend textile equipment such as knitting and weaving machines, check yarn, pattern and specifications, monitor the process, watch for fabric defects and record completed quantities, settings and anomalies. The US identity is 51-6063.00; the related Chinese trade and employer requirements are checked separately, and the paper experience cannot replace equipment training and on-site authorization."
+    "summary": "Textile knitting and weaving machine operators tend yarn and equipment, watch for fabric defects or stoppages and log their location and timing for the crew."
   }
 }

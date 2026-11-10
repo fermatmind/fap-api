@@ -2,9 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:market-employment-2025": {
         "status": "pending_mapping"
       },
@@ -30,6 +27,18 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-median": {
+        "status": "pending_mapping"
+      },
+      "fact:verified-us-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:verified-us-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:verified-us-openings": {
+        "status": "pending_mapping"
+      },
+      "fact:verified-us-pay": {
         "status": "pending_mapping"
       },
       "item:layout-workers-metal-and-plastic.ai-impact.ai-impact-table.1": {
@@ -7239,12 +7248,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全工作样本（一份完全虚构的划线工任务包）：在60分钟内整理金属塑料工件、工程图纸和样板、量具划线工具、执行图纸尺寸解释、基准点定位与划线、尺寸标记复核并形成结果、复核点和升级记录；输入不得含真实个人、客户、患者或雇主机密。"
+              "见「入行、资格与职业发展」的纸面练习《L 图：基准与孔位记录》。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7275,7 +7284,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "划线工对应美国51-4192.00：在金属或塑料板、管、结构件、铸件或机件上建立后续加工的基准点与尺寸，包含船体装配工。职责有计算布局、标曲线孔位和焊接符号、核中心线样板、装配对齐及定位工件；实际吊装、焊接和设备操作分别需雇主训练授权，不由职业标题授予。"
+              "金属与塑料工件划线工读图、找基准，在工件上标出后续加工的位置和轮廓。关键交付是能被下一工序复核的标记与尺寸记录。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.profile.definition-block.1",
@@ -7360,13 +7369,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET兴趣RC（R91/C48/A31/I31/E0/S0）为活动偏好而非能力。任务工具含划针、划线石、冲子、圆规、量角器、量块、高度规和百分表；CAD列AutoCAD，软件清单非熟练度。2025美国行业制造63%、政府18%、行政支持11%，余8%为差额。BLS51-4192典型高中或同等、无相关经验、中期在职训练；不外推中国统一门槛。"
+              "O*NET 51-4192.00 说明本职业任务和工作情境。美国工资采用 OEWS，就业预测采用 BLS 表 1.2。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.profile.onet-structured-fields-block.7",
           "source_refs": [
             "onet-details",
-            "bls-projections"
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7544,7 +7554,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得职业生成AI采用率或提效实测。可在虚构图纸记录中试验整理，人工复核单位、基准和版本；CAD清单不证明生成AI。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "证据不足：本轮未取得职业生成AI采用率或提效实测。可在虚构图纸记录中试验整理，人工复核单位、基准和版本；CAD清单不证明生成AI。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.ai-impact.ai-impact-table.2",
@@ -7737,7 +7747,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国工资参考｜51-4192精确职业，O*NET呈现BLS2025工资；父级金属塑料工或OOH其他岗位不得代填。"
+              "美国全国工资采用 O*NET 展示的 2025 年 5 月 BLS OEWS（51-4192）。"
             ]
           },
           "fact_refs": [
@@ -7754,7 +7764,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本轮O*NET details与BLS精确行核得2025年薪中位63,870美元、时薪中位30.71美元；原登记2025 P10=39,980/P90=93,860本轮未重新取得完整表，P25/P75未建立。旧2024加州页的美国行不能当2025分位。"
+              "2025 年 5 月美国全国年薪中位数 63,870 美元，时薪中位数 30.71 美元。年薪第 10、25、50、75、90 分位依次为 39,980、50,910、63,870、79,470、93,860 美元。"
             ]
           },
           "fact_refs": [
@@ -7762,9 +7772,7 @@
           ],
           "id": "layout-workers-metal-and-plastic.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages",
-            "onet-details",
-            "bls-projections"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -8062,12 +8070,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "雇主证据：用具体工厂对量具、吊装、焊接邻近作业和设备权限的培训要求不同，必须逐岗核验。展示可复核能力，而不是只列课程名称。"
+              "美国 BLS 将高中或同等学历和中期在岗训练列为典型路径。岗位可能要求不同量具、基准和图纸读法，向实际用人单位核实。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.path.career-path-block.2",
           "source_refs": [
-            "onet-details"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8119,12 +8127,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格决策：练习只用纸板、纸图和无危险测量工具；不操作真实机床或锐边金属。证书、录用、授权和签字责任是不同状态。"
+              "纸面练习《L 图：基准与孔位记录》。 虚构图纸 V2 的基准到 H1 和 H2 分别为 20 和 55 mm。V1 把 H2 写成 50 mm。H3 缺尺寸。记录有效版本、两孔间距和 H3 的待核人。变式只把 V2 的 H2 改成 57 mm。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.path.career-path-block.6",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8133,12 +8141,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能力阶梯：先掌握机械制图、尺寸与公差、基础三角计算、测量工具和工件基准。晋级依据是可复核工作，不是保证年限。"
+              "先做原题和变式，保存第一稿。再到「常见问题与资料来源」打开「纸面练习参考解（完成后打开）」。复核能否追溯原值、待核原因和交接对象。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.path.career-path-block.7",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8183,12 +8191,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业人数、增长率、净变化和年度空缺必须分别解释，不能合并成个人就业保证。"
+              "BLS 表 1.2（51-4192）：2025 年美国约 6,200 个岗位，2035 年预计约 5,900 个，变化 −3.4%，年均约 500 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-factors"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8303,7 +8311,7 @@
                 ]
               },
               {
-                "answer": "美国该职业2025年年薪90%分位为93,860美元。",
+                "answer": "2025 年 5 月美国全国年薪中位数 63,870 美元，时薪中位数 30.71 美元。年薪第 10、25、50、75、90 分位依次为 39,980、50,910、63,870、79,470、93,860 美元。",
                 "id": "layout-workers-metal-and-plastic.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.layout-workers-metal-and-plastic.us-pay",
@@ -8312,12 +8320,12 @@
                 ]
               },
               {
-                "answer": "美国典型入门教育为高中或同等学历，无相关经验，接受中期在岗训练。",
+                "answer": "美国 BLS 将高中或同等学历和中期在岗训练列为典型路径。岗位可能要求不同量具、基准和图纸读法，向实际用人单位核实。",
                 "id": "layout-workers-metal-and-plastic.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.layout-workers-metal-and-plastic.education-path",
                 "source_refs": [
-                  "onet-details"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8330,12 +8338,12 @@
                 ]
               },
               {
-                "answer": "可编程流程和设备集成会替代部分划线任务并提高其余人员效率，但不等于岗位在所有行业消失。",
+                "answer": "BLS 表 1.2（51-4192）：2025 年美国约 6,200 个岗位，2035 年预计约 5,900 个，变化 −3.4%，年均约 500 个职位空缺，含人员替补。人数分别取整。",
                 "id": "layout-workers-metal-and-plastic.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.layout-workers-metal-and-plastic.outlook-transition",
                 "source_refs": [
-                  "bls-factors"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8352,6 +8360,15 @@
                 "id": "layout-workers-metal-and-plastic.faq.boundary",
                 "question": "页面使用边界是什么？",
                 "question_key": "career.faq.layout-workers-metal-and-plastic.boundary"
+              },
+              {
+                "answer": "原题孔距 35 mm，变式孔距 37 mm。保留 V1 原值，H3 待图纸负责人确认。纸面记录不授权划线或加工。",
+                "id": "layout-workers-metal-and-plastic.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.layout-workers-metal-and-plastic.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -8549,17 +8566,16 @@
                 "url": "https://www.onetonline.org/link/details/51-4192.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "职业、工资、预测或工业安全边界。",
-                  "限所列市场和职业口径。"
+                  "2025 年 5 月美国全国年薪中位数 63,870 美元，时薪中位数 30.71 美元。年薪第 10、25、50、75、90 分位依次为 39,980、50,910、63,870、79,470、93,860 美元。"
                 ],
                 "evidence_type": "official source",
                 "id": "onet-wages",
-                "limitation": "限所列市场和职业口径。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
                 "name": "O*NET National Wages 51-4192.00",
-                "period": "May 2025",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-4192.00"
@@ -8725,21 +8741,32 @@
                 "url": "https://www.onetonline.org/link/summary/51-4192.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "核图纸版本与计算尺寸基准 — 75/100; weight=1/3; layout-workers-metal-and-plastic.profile.responsibilities-block.4[0]",
-                  "定位划线并复核标记 — 0/100; weight=1/3; layout-workers-metal-and-plastic.profile.responsibilities-block.4[0]",
-                  "规划加工顺序并交付记录 — 50/100; weight=1/3; layout-workers-metal-and-plastic.profile.responsibilities-block.4[0]"
+                  "BLS 表 1.2（51-4192）：2025 年美国约 6,200 个岗位，2035 年预计约 5,900 个，变化 −3.4%，年均约 500 个职位空缺，含人员替补。人数分别取整。",
+                  "美国 BLS 将高中或同等学历和中期在岗训练列为典型路径。岗位可能要求不同量具、基准和图纸读法，向实际用人单位核实。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "51-4192",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "L 图：基准与孔位记录",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -11090,7 +11117,7 @@
             "item": "layout-workers-metal-and-plastic.source-register.published.1"
           }
         },
-        "note": "O*NET51-4192任务/RC/2025行业与BLS精确预测分别核；工资本轮核中位63870/时薪30.71，原2025两端分位未重获、25/75缺口不补。NBS制造业两类2025年均只是行业背景。BLS行业因素为可编程设备，NIST为风险框架，无生成AI职业采用实测。OSHA3170为2007技术指南、3120为能量控制资料，非中国现行法或职业事故率。共享保护源模板说明保留范围冲突，正文不继续展示其泛用宣称。"
+        "note": "O*NET 提供任务信息，OEWS 提供工资，BLS 表 1.2 提供就业预测。"
       },
       "work_context_block": {
         "$item": "layout-workers-metal-and-plastic.profile.work-context-block.5",
@@ -11112,7 +11139,7 @@
     ],
     "path": "/zh/career/jobs/layout-workers-metal-and-plastic",
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与人工复核",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -11238,51 +11265,91 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "划线工",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "derivation": null,
+        "display_value": "63,870 美元/年",
+        "fact_id": "verified-us-pay",
+        "market": "美国",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "51-4192",
+        "period": "2025-05",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "−3.4%",
+        "fact_id": "verified-us-growth",
+        "market": "美国",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "51-4192",
+        "period": "2025–2035",
+        "source_refs": [
+          "bls-ep-2025-2035"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约 6,200 个岗位",
+        "fact_id": "verified-us-employment",
+        "market": "美国",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "51-4192",
+        "period": "2025",
+        "source_refs": [
+          "bls-ep-2025-2035"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均约 500 个",
+        "fact_id": "verified-us-openings",
+        "market": "美国",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "51-4192",
+        "period": "2025–2035",
+        "source_refs": [
+          "bls-ep-2025-2035"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
-    "badges": [],
+    "badges": [
+      "金属与塑料工件划线工",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
+    ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "verified-us-pay",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "verified-us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "verified-us-employment",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业岗位（2025）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "verified-us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11296,17 +11363,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "划线工把划线转化为用量具计算并建立基准点。判断这条职业路径时，应同时验证工作闭环、责任边界、证据口径、风险控制和可观察的入门作品。"
+      "text": "了解金属与塑料工件划线工的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "划线工职业判断：工作、入行与风险边界"
+      "text": "金属与塑料工件划线工做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "1e365c29a1827b3acb9c31025ec4d0cda7f3a1250ad633bf1d80cc2a4e972058",
+  "source_content_sha256": "bc94e0803b4b67539a6437cfe73439541cb991950e29a3cff5f9312d46647e18",
   "subject": {
     "canonical_slug": "layout-workers-metal-and-plastic",
-    "name": "划线工",
-    "summary": "划线工按工程图纸和样板在金属或塑料工件上解释尺寸、选择基准、定位工件并留下可复核标记，让后续加工知道从哪里开始。判断这条职业路径时，应同时核对工作闭环、责任边界、证据口径、安全风险和可观察的入门作品。"
+    "name": "金属与塑料工件划线工",
+    "summary": "金属与塑料工件划线工读图、找基准，在工件上标出后续加工的位置和轮廓。关键交付是能被下一工序复核的标记与尺寸记录。"
   }
 }

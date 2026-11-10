@@ -182,6 +182,9 @@
       "item:nuclear-monitoring-technicians.path.seven-day-trial.6": {
         "status": "pending_mapping"
       },
+      "item:nuclear-monitoring-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nuclear-monitoring-technicians.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13314,6 +13317,21 @@
             "onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two area readings lack different details. One has no instrument ID and one has no calibration record ID. List both gaps for the monitoring lead. Actual response follows site procedures."
+            ]
+          },
+          "id": "nuclear-monitoring-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Trace a radiation monitoring record",
+          "type": "notice"
         }
       ]
     },
@@ -15961,6 +15979,13 @@
         "id": "nuclear-monitoring-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nuclear-monitoring-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16278,7 +16303,7 @@
       "text": "Nuclear monitoring technicians"
     }
   },
-  "source_content_sha256": "60a0a5df4d5fe1169d935243617d6fb6d2f25156d88f0c18c52434bcd088e324",
+  "source_content_sha256": "5db7e23c61a6ecefcf45039378edfc9912614f4f61440ee712e0f8aeb5c8c0d2",
   "subject": {
     "canonical_slug": "nuclear-monitoring-technicians",
     "name": "Nuclear monitoring technicians",

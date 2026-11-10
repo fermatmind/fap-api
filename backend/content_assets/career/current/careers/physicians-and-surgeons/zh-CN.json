@@ -23371,13 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "路径判断：先选具体专科和州或国家，再核医学教育、住院医师训练、执照、机构授权、轮班和费用；不要用29-1229聚合工资代表个人起薪。"
+              "纸面体验｜比较虚构的专科交接单与结果清单，圈出缺少出具时间的一项，写明谁要确认原记录。 "
             ]
           },
           "id": "physicians-and-surgeons.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23668,14 +23667,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "定义：美国SOC 29-1229 Physicians, All Other收纳未单列医师；BLS医师总类可说明共同教育与诊疗性质，但O*NET无该聚合类独立任务资料。"
+              "医生岗位因专科而异。康复医学医师评估功能和康复进展，病理医师解读标本并报告发现，外科岗位则可承担手术及围手术期照护。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "physicians-and-surgeons.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "cnclass"
+            "transfer-onet-29-1229.04",
+            "transfer-onet-29-1222.00"
           ],
           "type": "prose"
         },
@@ -24761,15 +24759,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可辅助整理获授权的病历资料、检索公开指南和拟写患者说明，但文本输出不能独立证明诊断、用药或操作安全。医师须核患者身份、病史、检查、药物、过敏和异常结果，在州执照、具体专科及机构授权内负责判断、沟通和签署。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比较虚构的专科交接单与结果清单，圈出缺少出具时间的一项，写明谁要确认原记录。"
             ]
           },
           "id": "physicians-and-surgeons.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-29-1229.04",
+            "transfer-onet-29-1222.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32503,6 +32500,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-29-1229.04",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 29-1229.04 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/29-1229.04"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-29-1222.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 29-1222.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/29-1222.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37747,10 +37785,10 @@
       "text": "其他医师"
     }
   },
-  "source_content_sha256": "6b1e45f36566d060ad836b9bb24f2aa3267ade308ce0e9748e2c9efe2645f5ba",
+  "source_content_sha256": "9513deb2536f6c0cc1bd5d9f826422bb920632acc0e07ee54439aa26ebb02503",
   "subject": {
     "canonical_slug": "physicians-and-surgeons",
     "name": "其他医师",
-    "summary": "“其他医师”（美国SOC 29-1229）是未在分类中单列的医师聚合类别，不含外科医师及已单列专科；O*NET未为该聚合类发布独立任务调查。执业须完成医学教育、住院医师训练并取得适用州执照，具体诊疗和签署范围以州法、专科训练及机构授权为准。本页用BLS医师总类说明共同工作闭环，用29-1229独立行呈现工资和就业数据。美国资格不自动等于中国医师资格。"
+    "summary": "医生岗位因专科而异。康复医学医师评估功能和康复进展，病理医师解读标本并报告发现，外科岗位则可承担手术及围手术期照护。"
   }
 }

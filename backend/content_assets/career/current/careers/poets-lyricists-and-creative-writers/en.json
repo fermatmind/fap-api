@@ -23011,14 +23011,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Path: start with complete works and revision records, and verify the specific employer's language, subject, and portfolio requirements. US salaried writing roles often prefer a relevant bachelor's degree; it is not a uniform license for all writing activity."
+              "Paper check | Write two endings for four original lines. Read both aloud and explain which revision you would keep and how it affects the rhythm. "
             ]
           },
           "id": "poets-lyricists-and-creative-writers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet",
-            "bls"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23308,14 +23306,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "The core of O*NET 27-3043.05 is creating original writing for publication or performance; the subject may be poetry, lyrics, stories, prose, or scripts. Contracts, income, and rights arrangements differ between employed and freelance work."
+              "Poets, lyricists and creative writers develop themes into poems, lyrics or other texts. Revision shapes rhythm, point of view and wording to fit the form. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "poets-lyricists-and-creative-writers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "cnclass"
+            "transfer-onet-27-3043.05"
           ],
           "type": "prose"
         },
@@ -24406,15 +24402,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence is insufficient: no AI adoption rate, displacement rate, or task-level scoring basis for poets, lyricists, and creative writers was obtained. Theme association, structural variants, rewriting, and format checking can serve as editorial trial suggestions; the author must still decide the intent of the work, verify facts and authorization, and complete the revisions. Task exposure studies cannot produce employment outcomes for a detailed occupation. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Write two endings for four original lines. Read both aloud and explain which revision you would keep and how it affects the rhythm."
             ]
           },
           "id": "poets-lyricists-and-creative-writers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-27-3043.05",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32256,6 +32250,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-27-3043.05",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 27-3043.05 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/27-3043.05"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37501,10 +37522,10 @@
       "text": "Poets, lyricists, and creative writers: works, income, and the entry path"
     }
   },
-  "source_content_sha256": "31512eec086d4c4b5dfd6415e7c13990094c87cb352f1c4353e38bd061755917",
+  "source_content_sha256": "0065ca6eb43b790852f7479f512e251372bb950bbc4809da6929137bb41bfb19",
   "subject": {
     "canonical_slug": "poets-lyricists-and-creative-writers",
     "name": "Poets, Lyricists, and Creative Writers",
-    "summary": "Poets, lyricists, and creative writers (O*NET 27-3043.05) create poetry, lyrics, stories, prose, and scripts for publication or performance. The work includes choosing themes and forms, verifying material, drafting, discussing with editors or producers, and revising over multiple rounds. Work quality, attribution, and authorization need to be verified by the author and the relevant rights holders."
+    "summary": "Poets, lyricists and creative writers develop themes into poems, lyrics or other texts. Revision shapes rhythm, point of view and wording to fit the form."
   }
 }

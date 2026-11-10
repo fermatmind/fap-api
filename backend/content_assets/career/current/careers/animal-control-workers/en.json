@@ -38,9 +38,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1557,7 +1554,7 @@
         "status": "pending_mapping"
       },
       "item:animal-control-workers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:animal-control-workers.sources.source-card.1": {
         "status": "mapped"
@@ -23344,12 +23341,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "A/B/C on this page are complete fictional paper records: A the report received, B the handover of the same case, C the three-sentence report. Only the source of the facts, the two unsupported additions and the unknown fields are checked; there is no contact with animals and no selection of capture tools or design of restraint or medication plans, and the pieces do not establish suitability or confer operating rights."
+              "Try AC-50: keep the call, handover summary and later receipt separate before deciding whether to explore the work."
             ]
           },
           "id": "animal-control-workers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23358,7 +23355,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Editorial self-check: whether you are willing to learn record-keeping, public communication and lawful collaboration, and to check the real physical demands, protection, roster and written conditions; the O*NET context proportions do not predict individual suitability, and specific on-site skills are assessed through lawful training."
+              "Self-check: whether you are willing to learn record-keeping, public communication and lawful collaboration, and to check the real physical demands, protection, roster and written conditions; the O*NET context proportions do not predict individual suitability, and specific on-site skills are assessed through lawful training."
             ]
           },
           "id": "animal-control-workers.quick-decision.fit-decision-checklist.3",
@@ -23372,14 +23369,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no occupational wages or projection for Chinese animal control workers were obtained this round. The U.S. May2025 wages, the EP2025—2035 projection and the Chinese broad industry references must be read separately."
+              "This page does not have a verified mainland national wage or employment projection for the role. Read procurement and broad industry means separately."
             ]
           },
           "id": "animal-control-workers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "oews",
-            "ep",
-            "nbs"
+            "nbs",
+            "control-jingyuan",
+            "control-taizhou"
           ],
           "type": "prose"
         },
@@ -23388,14 +23385,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "U.S. animal control workers (33-9011) deal with abandoned, dangerous or unattended animals, investigate attacks and abuse and record sheltering and handling. Specific duties, enforcement and diagnostic and treatment authority in China are verified according to local rules and the job, and U.S. tasks do not confer authorization directly."
+              "Start with a report: who logs it, who verifies it, and who can accept a handover? U.S. SOC 33-9011 can involve animal control, shelter intake, investigations and enforcement. In mainland China, check local responsibilities, the job and its authority."
             ]
           },
           "id": "animal-control-workers.quick-decision.fermat-decision-card.7",
           "source_refs": [
             "onet",
-            "cnlaw",
-            "cnvet"
+            "control-urumqi"
           ],
           "type": "prose"
         }
@@ -23412,7 +23408,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no occupational projection for Chinese animal control workers was obtained this round. The following U.S. task background does not provide a Chinese projection: the work of animal control workers falls into four categories: responding to reports and on-site handling (answering public enquiries, arriving after receiving and dispatching a call, using nets, snares or tranquilizer darts to capture and remove stray, out-of-control or abused animals, taking captured animals out of vehicles and putting them into shelter cages, providing food, water and daily care for animals, and cleaning kennels, vehicles and other facilities and equipment); investigation and enforcement (investigating reports of animal attacks or abuse, interviewing witnesses, collecting evidence and writing reports, checking animals for injury or malnutrition and arranging treatment, checking animal licences and whether shelters comply, issuing warnings or summonses for violations or contacting the police to report violations and request arrests, and preparing for prosecution and testifying in court); sheltering, placement and handling (writing activity reports and keeping sheltering and handling files for animals, contacting animal owners to tell them their pet is at the shelter, organizing adoptions of unclaimed animals, euthanizing rabid, unclaimed or severely injured animals, collecting dead animals from roads and disposing of carcasses, and transporting injured or sick wild animals to rescue organizations); and public education and collaboration (educating the public about animal welfare and animal control laws and regulations, running animal safety and wildlife-themed education in schools and community activities, training police officers in dog handling and tracking, crowd control, narcotics detection and explosives detection techniques, and working with the police, animal diagnostic and treatment institutions and shelter organizations). These are the ONET20 U.S. tasks, of which 15 are marked core, 1 is supplementary and 4 have no importance score; this does not mean that everyone does them every day. Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this round did not verify a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. Diagnosis and treatment in China are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
+              "Insufficient evidence: no occupational projection for Chinese animal control workers is available on this page. The following U.S. task background does not provide a Chinese projection: the work of animal control workers falls into four categories: responding to reports and on-site handling (answering public enquiries, arriving after receiving and dispatching a call, using nets, snares or tranquilizer darts to capture and remove stray, out-of-control or abused animals, taking captured animals out of vehicles and putting them into shelter cages, providing food, water and daily care for animals, and cleaning kennels, vehicles and other facilities and equipment); investigation and enforcement (investigating reports of animal attacks or abuse, interviewing witnesses, collecting evidence and writing reports, checking animals for injury or malnutrition and arranging treatment, checking animal licences and whether shelters comply, issuing warnings or summonses for violations or contacting the police to report violations and request arrests, and preparing for prosecution and testifying in court); sheltering, placement and handling (writing activity reports and keeping sheltering and handling files for animals, contacting animal owners to tell them their pet is at the shelter, organizing adoptions of unclaimed animals, euthanizing rabid, unclaimed or severely injured animals, collecting dead animals from roads and disposing of carcasses, and transporting injured or sick wild animals to rescue organizations); and public education and collaboration (educating the public about animal welfare and animal control laws and regulations, running animal safety and wildlife-themed education in schools and community activities, training police officers in dog handling and tracking, crowd control, narcotics detection and explosives detection techniques, and working with the police, animal diagnostic and treatment institutions and shelter organizations). These are the ONET20 U.S. tasks, of which 15 are marked core, 1 is supplementary and 4 have no importance score; this does not mean that everyone does them every day. Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this page does not establish a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. Diagnosis and treatment in China are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
             ]
           },
           "id": "animal-control-workers.profile.career-quick-answers-block.1",
@@ -23428,7 +23424,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Animal control workers correspond to U.S. Animal Control Workers (33-9011), dealing with abandoned, dangerous or unattended animals, investigating abuse and attacks, recording sheltering and handling, and public education. The U.S. tasks list capture, summonses or requests for police arrest, court appearances and euthanasia, which do not directly authorize the same-named job in China. Common U.S. job titles are only names such as investigator, enforcement officer and animal services; the RCI interest code is an occupational profile, not a personal diagnosis. Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this round did not verify a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. Diagnosis and treatment in China are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
+              "Animal control workers correspond to U.S. Animal Control Workers (33-9011), dealing with abandoned, dangerous or unattended animals, investigating abuse and attacks, recording sheltering and handling, and public education. The U.S. tasks list capture, summonses or requests for police arrest, court appearances and euthanasia, which do not directly authorize the same-named job in China. Common U.S. job titles are only names such as investigator, enforcement officer and animal services; the RCI interest code is an occupational profile, not a personal diagnosis. Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this page does not establish a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. Diagnosis and treatment in China are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
             ]
           },
           "id": "animal-control-workers.profile.onet-structured-fields-block.1",
@@ -23492,7 +23488,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The U.S. May2025 annual 10/25/50/75/90 percentiles are 33,090/37,750/45,660/57,060/68,070 US dollars, with hourly wages of 15.91/18.15/21.95/27.44/32.72. Percentiles are positions in the distribution, not a starting salary, minimum wage or return to experience. BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025—2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. Education levels O*NET respondents reported for newly hired workers: 65% high school or equivalent, 19% postsecondary non-degree certificate and 12% associate's or another two-year degree; these are not the education distribution of current workers or a Chinese threshold. Job Zone1—2, SVP below 6; the EP route is typically a high school education, no related experience and medium-term on-the-job training."
+              "The U.S. May2025 annual 10/25/50/75/90 percentiles are 33,090/37,750/45,660/57,060/68,070 US dollars, with hourly wages of 15.91/18.15/21.95/27.44/32.72. Percentiles are positions in the distribution, not a starting salary, minimum wage or return to experience. BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025–2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. Education levels O*NET respondents reported for newly hired workers: 65% high school or equivalent, 19% postsecondary non-degree certificate and 12% associate's or another two-year degree; these are not the education distribution of current workers or a Chinese threshold. Job Zone1—2, SVP below 6; the EP route is typically a high school education, no related experience and medium-term on-the-job training."
             ]
           },
           "id": "animal-control-workers.profile.onet-structured-fields-block.2",
@@ -23551,7 +23547,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025—2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. O*NET currently lists 2025 employment of 13,800 and an annual average of 1,500 openings over 2025—2035; the growth is shown as a 3%—4% category, and the exact 4.0% and the official net increase of 600 are checked directly against EP, without mixing statistical categories with exact changes. Openings include growth and replacement and are not the same as net growth; insufficient evidence: no Chinese employment projection for this occupation was obtained this round, and individual employment is not guaranteed."
+              "BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025–2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. O*NET currently lists 2025 employment of 13,800 and an annual average of 1,500 openings over 2025–2035; the growth is shown as a 3%—4% category, and the exact 4.0% and the official net increase of 600 are checked directly against EP, without mixing statistical categories with exact changes. Openings include growth and replacement and are not the same as net growth; insufficient evidence: no Chinese employment projection for this occupation is available on this page, and individual employment is not guaranteed."
             ]
           },
           "id": "animal-control-workers.profile.onet-structured-fields-block.4",
@@ -23581,7 +23577,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "China's Animal Epidemic Prevention Law: Article 30 provides for dog owners to have dogs immunized and registered, for dogs taken outside to wear a tag and be on a leash, and for sub-district and township authorities to coordinate with residents' and villagers' committees in controlling and handling stray dogs and cats; Article 31 distinguishes units and personnel involved in the relevant activities, who must report immediately and promptly bring the situation under control, from other persons who find such situations and must report promptly; Article 32 provides for confirmation at or above county level, confirmation at provincial level for major cases and, when necessary, confirmation by the agriculture and rural affairs department of the State Council. Article 11 covers quarantine by animal health supervision bodies, and Article 12 covers animal disease prevention and control bodies undertaking technical work such as monitoring, testing, diagnosis, epidemiological investigation and reporting. Article 29 lists the situations in which slaughtering, trading and transporting are prohibited, with statutory exceptions for centralized harmless storage and transport. Article 4 lists rabies in category two, and Article 14 concerns work injury insurance and subsidies or compensation for disease prevention personnel. Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this round did not verify a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. Diagnosis and treatment in China are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
+              "China's Animal Epidemic Prevention Law: Article 30 provides for dog owners to have dogs immunized and registered, for dogs taken outside to wear a tag and be on a leash, and for sub-district and township authorities to coordinate with residents' and villagers' committees in controlling and handling stray dogs and cats; Article 31 distinguishes units and personnel involved in the relevant activities, who must report immediately and promptly bring the situation under control, from other persons who find such situations and must report promptly; Article 32 assigns confirmation to agriculture and rural affairs departments of governments at or above county level, and to the provincial department for major outbreaks and, when necessary, confirmation by the agriculture and rural affairs department of the State Council. Article 11 covers quarantine by animal health supervision bodies, and Article 12 covers animal disease prevention and control bodies undertaking technical work such as monitoring, testing, diagnosis, epidemiological investigation and reporting. Article 29 lists restrictions including slaughter, trade and transport. The temporary storage and transport exception applies only when needed for centralized harmless disposal and when the required disease prevention measures are taken. Article 4 lists rabies in category two, and Article 14 concerns work injury insurance and subsidies or compensation for disease prevention personnel. Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this page does not establish a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. Diagnosis and treatment in China are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
             ]
           },
           "id": "animal-control-workers.profile.onet-structured-fields-block.5",
@@ -23964,7 +23960,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Editorially check the training course, assessment and job recognition, and do not estimate the causal effect of certificates on hiring or wages."
+              "Check the training course, assessment and job recognition, and do not estimate the causal effect of certificates on hiring or wages."
             ]
           },
           "id": "animal-control-workers.profile.career-quick-answers-block.29",
@@ -24130,7 +24126,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The O*NET U.S. tasks serve as directional background, and BLS economic statistics do not prove Chinese authority; Chinese duties follow the Animal Epidemic Prevention Law and the veterinary measures, and the full text of the old classification was not obtained this round, so it is not treated as equivalent."
+              "The O*NET U.S. tasks serve as directional background, and BLS economic statistics do not prove Chinese authority; Chinese duties follow the Animal Epidemic Prevention Law and the veterinary measures, and the earlier Chinese classification does not establish equivalence."
             ]
           },
           "id": "animal-control-workers.direction-comparison.adjacent-career-comparison-table.9",
@@ -24551,7 +24547,7 @@
                 "url": "https://www.onetonline.org/link/localwages/33-9011.00"
               },
               {
-                "entity": "EP2025—2035 projection",
+                "entity": "EP2025–2035 projection",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24740,7 +24736,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: before using a tool, check the task, the source of the inputs, the authority and the human review, and do not write the output up as verified on-site fact."
+              "Check this: before using a tool, check the task, the source of the inputs, the authority and the human review, and do not write the output up as verified on-site fact."
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.15",
@@ -24786,11 +24782,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, effect, substitution rate or wage causality has been obtained for this occupation. Record organization, dispatch prompts and document drafts are possible editorial uses only, and it cannot be guaranteed that the occupation will or will not be replaced; the employment projection does not prove AI causality. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Record tools can flag mismatched case IDs, missing handover receipts or open fields. They cannot verify animal identity, injury or authority to act."
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.18",
           "source_refs": [
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -24886,7 +24883,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP2025—2035 projection"
+              "BLS EP2025–2035 projection"
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.25",
@@ -25299,7 +25296,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP2025—2035"
+              "BLS EP2025–2035"
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.54",
@@ -25327,7 +25324,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Growth of 4.0% over EP2025—2035, an official net increase of 600 and an annual average of 1,500 openings. Openings include replacement; the figures are rounded, and subtracting the two ends cannot replace the official net change."
+              "Growth of 4.0% over EP2025–2035, an official net increase of 600 and an annual average of 1,500 openings. Openings include replacement; the figures are rounded, and subtracting the two ends cannot replace the official net change."
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.56",
@@ -25426,7 +25423,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025—2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. Job changes cannot be inferred from technical terms."
+              "BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025–2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. Job changes cannot be inferred from technical terms."
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.63",
@@ -25589,7 +25586,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025—2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. Openings include growth and replacement and are not the same as net growth or a turnover rate; O*NET currently lists 2025 employment of 13,800 and an annual average of 1,500 openings over 2025—2035; the growth is shown as a 3%—4% category, and the exact 4.0% and the official net increase of 600 are checked directly against EP, without mixing statistical categories with exact changes."
+              "BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025–2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. Openings include growth and replacement and are not the same as net growth or a turnover rate; O*NET currently lists 2025 employment of 13,800 and an annual average of 1,500 openings over 2025–2035; the growth is shown as a 3%—4% category, and the exact 4.0% and the official net increase of 600 are checked directly against EP, without mixing statistical categories with exact changes."
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.74",
@@ -25603,7 +25600,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP2025—2035 current detail, not OEWS job openings."
+              "BLS EP2025–2035 current detail, not OEWS job openings."
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.75",
@@ -25617,7 +25614,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "A/B/C on this page are complete fictional paper records: A the report received, B the handover of the same case, C the three-sentence report. Only the source of the facts, the two unsupported additions and the unknown fields are checked; there is no contact with animals and no selection of capture tools or design of restraint or medication plans, and the pieces do not establish suitability or confer operating rights."
+              "AC-50 practices checking a call, a handover summary and a receipt. Keep the source for each field and separate verified facts from open questions."
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.76",
@@ -25812,7 +25809,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial preparation checks: confirm the institution's on-site assessment, support, supervision and reporting procedures; the specific distance, lone working or on-site handling conditions follow the applicable training and real procedures and are not set by this page."
+              "What to check before applyings: confirm the institution's on-site assessment, support, supervision and reporting procedures; the specific distance, lone working or on-site handling conditions follow the applicable training and real procedures and are not set by this page."
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.89",
@@ -26545,7 +26542,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national or city occupational wage distribution or occupational projection for Chinese animal control workers was obtained this round. The NBS2025 national figures of 129441 non-private and 71590 private yuan are pre-tax annual averages; the non-private figures of 119465 for public administration, 70172 for water conservancy and environmental public facilities, 70226 for resident services and 146266 for health and social work are all broad industry averages and cannot be classified by job title or substituted for an occupational median."
+              "This page has no matching national or city occupational wage for mainland China. NBS 2025 pre-tax mean annual wages for urban unit employees nationwide were CNY 129,441 in non-private units and CNY 71,590 in private units. The non-private urban industry figures also cover multiple jobs and cannot estimate pay for this role."
             ]
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.24",
@@ -26641,7 +26638,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorially check the target course, practical training and job recognition, and do not equate a field of study with a U.S. occupation or confer quarantine authority."
+              "Check the target course, practical training and job recognition, and do not equate a field of study with a U.S. occupation or confer quarantine authority."
             ]
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.30",
@@ -26688,7 +26685,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Veterinary medicine, animal medicine or public administration courses are preparation checks; in China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
+              "Veterinary medicine, animal medicine or public administration courses are preparation checks; in China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
             ]
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.33",
@@ -26735,7 +26732,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorially check the target job's training, assessment and actual authority; the typical medium-term OJT in U.S. EP is not a uniform Chinese duration."
+              "Check the target job's training, assessment and actual authority; the typical medium-term OJT in U.S. EP is not a uniform Chinese duration."
             ]
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.36",
@@ -26942,12 +26939,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national or city occupational wage distribution for Chinese animal control workers has been obtained."
+              "A 2025 Taizhou police tender covers intake, observation, care, reclaiming and adoption; the maximum was CNY 462,000 a year and CNY 1.386 million over three years. A 2026 Jingyuan urban management procurement notice lists labor costs for two staff with animal care experience: CNY 15,000 annually per position in the procurement table, CNY 30,000 in all. These are a contract ceiling and a project labor line. Neither establishes take-home pay or a national wage."
             ]
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "nbs"
+            "control-taizhou",
+            "control-jingyuan"
           ],
           "type": "prose"
         },
@@ -27012,7 +27010,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Industries are classified by the unit's actual main activity and are not determined automatically by the job title; this round did not verify a single Chinese occupation corresponding to U.S. 33-9011, and the broad industries listed by NBS do not substitute for occupational wages."
+              "Industries are classified by the unit's actual main activity and are not determined automatically by the job title; this page does not establish a single Chinese occupation corresponding to U.S. 33-9011, and the broad industries listed by NBS do not substitute for occupational wages."
             ]
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.55",
@@ -27040,7 +27038,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "4.0%（2025—2035）"
+              "4.0%（2025–2035）"
             ]
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.58",
@@ -27261,7 +27259,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "4.0%（2025—2035）"
+              "4.0%（2025–2035）"
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.21",
@@ -27303,7 +27301,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The annual average openings over EP2025—2035 include growth and replacement and are not the same as the official net increase of 600.；Current EP employment and projection｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "The annual average openings over EP2025–2035 include growth and replacement and are not the same as the official net increase of 600.；Current EP employment and projection｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.24",
@@ -27317,7 +27315,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The U.S. May2025 annual 10/25/50/75/90 percentiles are 33,090/37,750/45,660/57,060/68,070 US dollars, with hourly wages of 15.91/18.15/21.95/27.44/32.72. Percentiles are positions in the distribution, not a starting salary, minimum wage or return to experience. BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025—2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. O*NET currently lists 2025 employment of 13,800 and an annual average of 1,500 openings over 2025—2035; the growth is shown as a 3%—4% category, and the exact 4.0% and the official net increase of 600 are checked directly against EP, without mixing statistical categories with exact changes."
+              "The U.S. May2025 annual 10/25/50/75/90 percentiles are 33,090/37,750/45,660/57,060/68,070 US dollars, with hourly wages of 15.91/18.15/21.95/27.44/32.72. Percentiles are positions in the distribution, not a starting salary, minimum wage or return to experience. BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025–2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. O*NET currently lists 2025 employment of 13,800 and an annual average of 1,500 openings over 2025–2035; the growth is shown as a 3%—4% category, and the exact 4.0% and the official net increase of 600 are checked directly against EP, without mixing statistical categories with exact changes."
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.25",
@@ -27347,7 +27345,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Editorially check the duties, applicable rules and real openings in the target area, and do not infer demand causality from policy wording."
+              "Check the duties, applicable rules and real openings in the target area, and do not infer demand causality from policy wording."
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.27",
@@ -27375,7 +27373,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Editorially check the area and the actual written pay conditions, and do not derive measured occupational income from the cost of living."
+              "Check the area and the actual written pay conditions, and do not derive measured occupational income from the cost of living."
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.29",
@@ -27403,7 +27401,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Editorially check the institution, duties, authority, hours, allowances and written pay, without treating them as measured main causes of income."
+              "Check the institution, duties, authority, hours, allowances and written pay, without treating them as measured main causes of income."
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.31",
@@ -27432,7 +27430,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "4.0%（2025—2035）"
+              "4.0%（2025–2035）"
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.33",
@@ -27460,7 +27458,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no wage median for 33-9011 within the government industry was obtained this round; BLS has an industry download entry point, and a failed read cannot be described as not published."
+              "Insufficient evidence: no wage median for 33-9011 within the government industry is available on this page; BLS has an industry download entry point, and a failed read cannot be described as not published."
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.35",
@@ -27502,7 +27500,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no occupational wage median within the local government industry was obtained this round; the national median is not used to fill the gap."
+              "Insufficient evidence: no occupational wage median within the local government industry is available on this page; the national median is not used to fill the gap."
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.38",
@@ -27516,7 +27514,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Local government is a wage scenario still to be checked, and this round makes no claim about most posts or a median already obtained."
+              "Local government is a wage scenario still to be checked, and this page makes no claim about most posts or a median already obtained."
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.39",
@@ -27544,7 +27542,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no occupational wage median within the state government industry was obtained this round; the national median is not used to fill the gap."
+              "Insufficient evidence: no occupational wage median within the state government industry is available on this page; the national median is not used to fill the gap."
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.41",
@@ -27642,7 +27640,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wages are May2025 OEWS shown through O*NET, and the current projection is EP2025—2035 including the self-employed; O*NET currently lists 2025 employment of 13,800 and an annual average of 1,500 openings over 2025—2035; the growth is shown as a 3%—4% category, and the exact 4.0% and the official net increase of 600 are checked directly against EP, without mixing statistical categories with exact changes."
+              "Wages are May2025 OEWS shown through O*NET, and the current projection is EP2025–2035 including the self-employed; O*NET currently lists 2025 employment of 13,800 and an annual average of 1,500 openings over 2025–2035; the growth is shown as a 3%—4% category, and the exact 4.0% and the official net increase of 600 are checked directly against EP, without mixing statistical categories with exact changes."
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.48",
@@ -27759,19 +27757,19 @@
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Veterinarian",
@@ -27993,7 +27991,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Use A/B/C to keep records, check the two unsupported additions and write the three-sentence report, and observe paper checking habits; this does not verify on-site capture skills or long-term suitability."
+              "AC-50 practices checking a call, a handover summary and a receipt. Keep the source for each field and separate verified facts from open questions."
             ]
           },
           "id": "animal-control-workers.fit.riasec-fit-block.9",
@@ -28150,7 +28148,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial self-check: review the facts, sources and actual procedures, and do not use type labels to judge the cause of a handling error; this page has not verified the causal effect of such labels on improvement."
+              "Self-check: review the facts, sources and actual procedures, and do not use type labels to judge the cause of a handling error; this page has not verified the causal effect of such labels on improvement."
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.17",
@@ -28337,7 +28335,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
+              "In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.30",
@@ -28704,7 +28702,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "A/B/C on this page are complete fictional paper records: A the report received, B the handover of the same case, C the three-sentence report. Only the source of the facts, the two unsupported additions and the unknown fields are checked; there is no contact with animals and no selection of capture tools or design of restraint or medication plans, and the pieces do not establish suitability or confer operating rights."
+              "AC-50 practices checking a call, a handover summary and a receipt. Keep the source for each field and separate verified facts from open questions."
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.55",
@@ -28732,7 +28730,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorially check whether you are willing to learn record-keeping and collaboration, and check the real job risks and authority; unfinished paper work does not mean unsuitability."
+              "Check whether you are willing to learn record-keeping and collaboration, and check the real job risks and authority; unfinished paper work does not mean unsuitability."
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.57",
@@ -28746,7 +28744,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "First check the real job conditions, then prepare the four pieces through A/B/C record, difference checking and the three-sentence report, without designing on-site restraint plans."
+              "Check the actual job conditions. Then complete the two AC-50 field logs and one handover."
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.58",
@@ -28859,7 +28857,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "China's Animal Epidemic Prevention Law: Article 30 provides for dog owners to have dogs immunized and registered, for dogs taken outside to wear a tag and be on a leash, and for sub-district and township authorities to coordinate with residents' and villagers' committees in controlling and handling stray dogs and cats; Article 31 distinguishes units and personnel involved in the relevant activities, who must report immediately and promptly bring the situation under control, from other persons who find such situations and must report promptly; Article 32 provides for confirmation at or above county level, confirmation at provincial level for major cases and, when necessary, confirmation by the agriculture and rural affairs department of the State Council. Article 11 covers quarantine by animal health supervision bodies, and Article 12 covers animal disease prevention and control bodies undertaking technical work such as monitoring, testing, diagnosis, epidemiological investigation and reporting. Article 29 lists the situations in which slaughtering, trading and transporting are prohibited, with statutory exceptions for centralized harmless storage and transport. Article 4 lists rabies in category two, and Article 14 concerns work injury insurance and subsidies or compensation for disease prevention personnel. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
+              "China's Animal Epidemic Prevention Law: Article 30 provides for dog owners to have dogs immunized and registered, for dogs taken outside to wear a tag and be on a leash, and for sub-district and township authorities to coordinate with residents' and villagers' committees in controlling and handling stray dogs and cats; Article 31 distinguishes units and personnel involved in the relevant activities, who must report immediately and promptly bring the situation under control, from other persons who find such situations and must report promptly; Article 32 assigns confirmation to agriculture and rural affairs departments of governments at or above county level, and to the provincial department for major outbreaks and, when necessary, confirmation by the agriculture and rural affairs department of the State Council. Article 11 covers quarantine by animal health supervision bodies, and Article 12 covers animal disease prevention and control bodies undertaking technical work such as monitoring, testing, diagnosis, epidemiological investigation and reporting. Article 29 lists restrictions including slaughter, trade and transport. The temporary storage and transport exception applies only when needed for centralized harmless disposal and when the required disease prevention measures are taken. Article 4 lists rabies in category two, and Article 14 concerns work injury insurance and subsidies or compensation for disease prevention personnel. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.66",
@@ -29384,7 +29382,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "China's Animal Epidemic Prevention Law: Article 30 provides for dog owners to have dogs immunized and registered, for dogs taken outside to wear a tag and be on a leash, and for sub-district and township authorities to coordinate with residents' and villagers' committees in controlling and handling stray dogs and cats; Article 31 distinguishes units and personnel involved in the relevant activities, who must report immediately and promptly bring the situation under control, from other persons who find such situations and must report promptly; Article 32 provides for confirmation at or above county level, confirmation at provincial level for major cases and, when necessary, confirmation by the agriculture and rural affairs department of the State Council. Article 11 covers quarantine by animal health supervision bodies, and Article 12 covers animal disease prevention and control bodies undertaking technical work such as monitoring, testing, diagnosis, epidemiological investigation and reporting. Article 29 lists the situations in which slaughtering, trading and transporting are prohibited, with statutory exceptions for centralized harmless storage and transport. Article 4 lists rabies in category two, and Article 14 concerns work injury insurance and subsidies or compensation for disease prevention personnel."
+              "China's Animal Epidemic Prevention Law: Article 30 provides for dog owners to have dogs immunized and registered, for dogs taken outside to wear a tag and be on a leash, and for sub-district and township authorities to coordinate with residents' and villagers' committees in controlling and handling stray dogs and cats; Article 31 distinguishes units and personnel involved in the relevant activities, who must report immediately and promptly bring the situation under control, from other persons who find such situations and must report promptly; Article 32 assigns confirmation to agriculture and rural affairs departments of governments at or above county level, and to the provincial department for major outbreaks and, when necessary, confirmation by the agriculture and rural affairs department of the State Council. Article 11 covers quarantine by animal health supervision bodies, and Article 12 covers animal disease prevention and control bodies undertaking technical work such as monitoring, testing, diagnosis, epidemiological investigation and reporting. Article 29 lists restrictions including slaughter, trade and transport. The temporary storage and transport exception applies only when needed for centralized harmless disposal and when the required disease prevention measures are taken. Article 4 lists rabies in category two, and Article 14 concerns work injury insurance and subsidies or compensation for disease prevention personnel."
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.38",
@@ -29429,7 +29427,7 @@
             "column_labels": [
               "Entry direction",
               "Early tasks",
-              "Editorial preparation check",
+              "What to check before applying",
               "Preparation evidence that can be shown without experience",
               "Differences from adjacent roles"
             ],
@@ -29437,36 +29435,36 @@
               [
                 "On-site and sheltering direction",
                 "U.S. tasks include capture and care, and the specific duties and authority in China are checked separately",
-                "Editorially check the training, records and job authority",
-                "A/B review sheet: the two unsupported additions",
+                "Check the training, records and job authority",
+                "Use the two AC-50 versions and handover to review recordkeeping. Ask the employer about actual requirements.",
                 "Ordinary care may overlap, and a name does not confer authority"
               ],
               [
                 "Investigation direction",
                 "U.S. tasks include witness materials, report writing and court appearances, and the specific scope is checked separately",
-                "Editorially check the original values and the source of the information",
-                "The three-sentence report under C retains the unknown",
+                "Check the original values and the source of the information",
+                "Use the two AC-50 versions and handover to review recordkeeping. Ask the employer about actual requirements.",
                 "Tasks may overlap with investigations in other fields"
               ],
               [
                 "Licensing direction",
                 "U.S. tasks include inspection and summonses, and the role in China is checked against the law",
-                "Editorially check the real legal basis and authority",
-                "Qualification matrix status still to be checked",
+                "Check the real legal basis and authority",
+                "Use the two AC-50 versions and handover to review recordkeeping. Ask the employer about actual requirements.",
                 "Enforcement authority is not conferred by the title of animal control worker"
               ],
               [
                 "Records and collaboration",
                 "Record and request checking under the rules",
-                "Editorially check the original values and the feedback",
-                "C1 match / 5 minutes is not a time-limit conclusion",
+                "Check the original values and the feedback",
+                "Use the two AC-50 versions and handover to review recordkeeping. Ask the employer about actual requirements.",
                 "Does not replace medical or legal judgement"
               ],
               [
                 "Disease-related collaboration",
                 "Report and control according to the applicable status under Article 31 of the Chinese law",
-                "Editorially check the real jurisdiction and role",
-                "State that a call is not a diagnosis of infection",
+                "Check the real jurisdiction and role",
+                "Use the two AC-50 versions and handover to review recordkeeping. Ask the employer about actual requirements.",
                 "Statutory quarantine and epidemic confirmation are carried out by the lawful role"
               ]
             ]
@@ -29477,7 +29475,8 @@
             "ep",
             "cnlaw",
             "cnvet",
-            "cnclinic"
+            "cnclinic",
+            "editor"
           ],
           "title": "How do the entry jobs and early tasks of animal control workers compare?",
           "type": "table"
@@ -29499,8 +29498,8 @@
                 "id": "clearance",
                 "values": [
                   "Chinese roles and authority",
-                  "Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this round did not verify a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights.",
-                  "China's Animal Epidemic Prevention Law: Article 30 provides for dog owners to have dogs immunized and registered, for dogs taken outside to wear a tag and be on a leash, and for sub-district and township authorities to coordinate with residents' and villagers' committees in controlling and handling stray dogs and cats; Article 31 distinguishes units and personnel involved in the relevant activities, who must report immediately and promptly bring the situation under control, from other persons who find such situations and must report promptly; Article 32 provides for confirmation at or above county level, confirmation at provincial level for major cases and, when necessary, confirmation by the agriculture and rural affairs department of the State Council. Article 11 covers quarantine by animal health supervision bodies, and Article 12 covers animal disease prevention and control bodies undertaking technical work such as monitoring, testing, diagnosis, epidemiological investigation and reporting. Article 29 lists the situations in which slaughtering, trading and transporting are prohibited, with statutory exceptions for centralized harmless storage and transport. Article 4 lists rabies in category two, and Article 14 concerns work injury insurance and subsidies or compensation for disease prevention personnel. The actual rules and training for dedicated tools are checked separately, and the paper pieces do not confer authorization."
+                  "Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this page does not establish a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights.",
+                  "China's Animal Epidemic Prevention Law: Article 30 provides for dog owners to have dogs immunized and registered, for dogs taken outside to wear a tag and be on a leash, and for sub-district and township authorities to coordinate with residents' and villagers' committees in controlling and handling stray dogs and cats; Article 31 distinguishes units and personnel involved in the relevant activities, who must report immediately and promptly bring the situation under control, from other persons who find such situations and must report promptly; Article 32 assigns confirmation to agriculture and rural affairs departments of governments at or above county level, and to the provincial department for major outbreaks and, when necessary, confirmation by the agriculture and rural affairs department of the State Council. Article 11 covers quarantine by animal health supervision bodies, and Article 12 covers animal disease prevention and control bodies undertaking technical work such as monitoring, testing, diagnosis, epidemiological investigation and reporting. Article 29 lists restrictions including slaughter, trade and transport. The temporary storage and transport exception applies only when needed for centralized harmless disposal and when the required disease prevention measures are taken. Article 4 lists rabies in category two, and Article 14 concerns work injury insurance and subsidies or compensation for disease prevention personnel. The actual rules and training for dedicated tools are checked separately, and the paper pieces do not confer authorization."
                 ]
               },
               {
@@ -29516,7 +29515,7 @@
                 "values": [
                   "Record tool preparation",
                   "O*NET software is an example and cannot be equated with common hardware or deployment by everyone.",
-                  "Editorially check the actual record system, authority and training. A/B/C on this page are complete fictional paper records: A the report received, B the handover of the same case, C the three-sentence report. Only the source of the facts, the two unsupported additions and the unknown fields are checked; there is no contact with animals and no selection of capture tools or design of restraint or medication plans, and the pieces do not establish suitability or confer operating rights."
+                  "AC-50 practices checking a call, a handover summary and a receipt. Keep the source for each field and separate verified facts from open questions."
                 ]
               }
             ]
@@ -29540,40 +29539,40 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional A/B/C inputs",
-                  "A｜Fictional original report record: case C1, 09:00, location L1; the caller said a dog chased a person. Whether there was a bite, the animal's identity or immunization, witnesses, on-site observation, authorization and handling are all not provided. There is no real information about people or animals.",
-                  "B｜At 09:05 the handover summary for the same case C1 states that a bite occurred and that the animal was caught; no new on-site or witness material has been added, and the recipient, the review result and the feedback are not provided. The two texts are not two separate incidents.",
-                  "C｜Checking rules: match the case and the time and retain the original values; a telephone report is not the same as on-site verification, and fields not given remain to be checked. Write three sentences of fact-unknown-report request, and do not diagnose, characterize a violation or arrange capture or medication."
+                  "AC-50 | Three fictional paper inputs",
+                  "A: C1, 09:00, location L1. A caller reports a dog chased a person. A bite and capture have not been verified.",
+                  "B: Same case C1, 09:05. The summary says “bite confirmed, dog captured.” It has no site record or receipt.",
+                  "C: Mark only fields backed by original evidence as verified and retain the original entries. In the revision, add only a 09:12 receipt from shelter R stating it received the C1 dog. The receipt says nothing about a bite or how the dog was caught."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Reference checking and report",
-                  "Reference check: both cases are C1; 09:00 to 09:05 is a gap of 5 minutes, which is only a time difference, and no time limit was given, so no overrun can be found. The two additions in B, a bite occurred and the animal was caught, have no support in A or in any new material; A only has the caller's report that a dog chased a person, which is not on-site verification. Retain A and B and do not rewrite them as confirmed or corrected.",
-                  "Reference three sentences: Fact: C1 called in at 09:00 at L1 to report that a dog chased a person, and at 09:05 the summary added a bite and a capture. Unknown: the bite, the capture, on-site observation, the animal's identity and immunization, witnesses, authority, the recipient and the feedback are to be checked. Request: please check the original record and the basis for the additions under the actual process, retain them as to be checked until feedback is received, and draw no medical or legal conclusion.\nDeliverable: a field review sheet plus the three-sentence report; qualifications not given are retained as to be checked, and no false certificate is filled in."
+                  "Submit two field logs and a handover",
+                  "Calculate elapsed time from A to B in both versions. List the case ID, caller claim, pending fields and verified fields with their sources. R’s time identifies the added receipt only.",
+                  "State facts, open questions, next step and reviewer. Do not infer diagnosis, legality or field events."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Review method",
-                  "First copy A and B verbatim and match C1 and the time. List the two unsupported additions and all the unknowns, retaining the original values.",
-                  "Submit the request under C; without feedback, do not write that it has been corrected or that reporting has been completed."
+                  "Submit independently",
+                  "Submit both versions and a handover on Day 6. On Day 7 open “AC-50 reference (open after submitting)” in the FAQ.",
+                  "Keep original A and B and the separate receipt."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Paper-only boundaries",
-                  "Paper only, with no contact with animals and no designing of restraint tools or medication. The exercise does not confer enforcement, diagnostic and treatment or handling rights and does not judge suitability."
+                  "Paper exercise only",
+                  "Use no animals, real incident data, tools or medicines."
                 ]
               }
             ]
           },
           "id": "animal-control-workers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "Fictional paper exercise: checking the report and the handover",
           "type": "cards"
@@ -29586,40 +29585,40 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Qualification matrix",
-                  "Qualification matrix: the specific job conditions, the local authority and role, the source, the date and the status to be checked; do not invent that conditions are met where no real notice has been given.",
-                  "Proportions of O*NET respondents on the education requirements for newly hired workers: 65% high school or equivalent, 19% postsecondary non-degree certificate and 12% associate's or another two-year degree; these are not the education distribution of current workers or a Chinese threshold. Job Zone1—2, SVP below 6; the EP route is typically a high school education, no related experience and medium-term on-the-job training. Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this round did not verify a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
+                  "Job check",
+                  "Find local rules and an actual role.",
+                  "Check role authority separately."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Record review sheet",
-                  "Review sheet: C1 matches and there is a 5-minute time difference; the two additions in B have no basis, and the call in A has not verified the scene.",
-                  "Retain the original A and B texts, list the unknowns item by item, and do not invent a correction."
+                  "Field log",
+                  "Keep original and revision separate.",
+                  "Retain source and status per field."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "One-page report",
-                  "One-page report: reference three sentences: Fact: C1 called in at 09:00 at L1 to report that a dog chased a person, and at 09:05 the summary added a bite and a capture. Unknown: the bite, the capture, on-site observation, the animal's identity and immunization, witnesses, authority, the recipient and the feedback are to be checked. Request: please check the original record and the basis for the additions under the actual process, retain them as to be checked until feedback is received, and draw no medical or legal conclusion.",
-                  "Attach the A/B/C inputs and the use of the legal and task sources, distinguishing the editorial plan from the actual rules."
+                  "Handover",
+                  "List facts, open issues, next step and reviewer.",
+                  "Do not mark a step complete without evidence."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool notes",
-                  "Tool notes: how the spreadsheet or text matches ID and time, marks the two additions and retains the original text and what is to be checked.",
-                  "Tool output does not replace on-site, disease or legal judgement, and without feedback it is not written up as handled."
+                  "Tools",
+                  "Use paper or a basic spreadsheet.",
+                  "Do not use real data."
                 ]
               }
             ]
           },
           "id": "animal-control-workers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "What checkable portfolio materials can be prepared at entry level?",
           "type": "cards"
@@ -29650,13 +29649,13 @@
               [
                 "Record check",
                 "Whether the case ID, time and original texts can be aligned",
-                "C1, 09:00/09:05, retaining A and B",
-                "5 minutes is not an overrun determination, and there is no operating test"
+                "List case ID, times and field sources.",
+                "Elapsed time does not establish a service breach."
               ],
               [
                 "Three-sentence note",
                 "Whether source facts can be distinguished from unknowns",
-                "The two additions in B, and the reference three-sentence request",
+                "Name open fields, required originals and reviewer.",
                 "Without feedback, do not write corrected or reported"
               ],
               [
@@ -29669,8 +29668,7 @@
           },
           "id": "animal-control-workers.path.interview-probation.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "title": "What might be assessed at interview and during probation, and which conclusions cannot be inferred?",
           "type": "table"
@@ -29683,57 +29681,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1｜Excerpting the inputs",
-                  "Keep A/B/C and list C1 and the time."
+                  "Day 1",
+                  "Read the case and list three inputs."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2｜Qualification matrix",
-                  "Check the use of the legal sources and the U.S. education, and retain as to be checked what no real notice has given."
+                  "Day 2",
+                  "Build a field list and separate caller statements from field evidence."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3｜Record review",
-                  "List the 5-minute time difference, the two unsupported additions and the unknowns, and do not determine an overrun."
+                  "Day 3",
+                  "Calculate elapsed time from A to B and mark the original statuses."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4｜Three-sentence report",
-                  "Write fact, unknown and request under C, and do not invent anything where the recipient or feedback is not given."
+                  "Day 4",
+                  "Add only the supplied receipt and write a separate revision."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5｜Tool notes",
-                  "Explain the ID and time matching, the original values, the unknowns and the human review."
+                  "Day 5",
+                  "Draft the handover: facts, open questions and reviewer."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6｜The four pieces",
-                  "The qualification matrix, review sheet, one-page report and tool notes all use the same A/B/C."
+                  "Day 6",
+                  "Submit both logs and one handover independently before opening the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7｜Review",
-                  "Check that the two additions and the unknowns are complete, then check the real job training, risks and written conditions."
+                  "Day 7",
+                  "Open “AC-50 reference (open after submitting)” in the FAQ, note differences, then check employer duties."
                 ]
               }
             ]
           },
           "id": "animal-control-workers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "Seven-day experience: complete one full cycle of an animal control worker task using fictional materials",
           "type": "timeline"
@@ -29743,18 +29741,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "The A/B/C original values are complete and C1 matches.",
-              "The time difference is 5 minutes, and no overrun is determined.",
-              "Both unsupported additions are identified.",
-              "The unknowns, the recipient and the feedback remain to be checked and nothing is written up as completed.",
-              "The four pieces use the same case and are checkable, and qualifications are not invented as met.",
-              "The real job risks, training, authority and conditions are checked separately.",
-              "The paper pieces do not determine suitability and do not guarantee hiring or promotion."
+              "Keep exploring if you are willing to preserve originals and verify fields.",
+              "Pause to build recordkeeping, handover or communication skills.",
+              "Compare animal care, shelter records or administrative records.",
+              "Keep both versions and the handover, then decide after self-review.",
+              "Check actual job requirements and authority separately.",
+              "Open the reference after submitting.",
+              "A paper exercise does not prove job competence."
             ]
           },
           "id": "animal-control-workers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "How to decide at the end of seven days whether to continue",
           "type": "list"
@@ -29855,9 +29853,9 @@
           "data": {
             "paragraphs": [
               "Proportions of O*NET respondents on the education requirements for newly hired workers: 65% high school or equivalent, 19% postsecondary non-degree certificate and 12% associate's or another two-year degree; these are not the education distribution of current workers or a Chinese threshold. Job Zone1—2, SVP below 6; the EP route is typically a high school education, no related experience and medium-term on-the-job training.",
-              "China's Animal Epidemic Prevention Law: Article 30 provides for dog owners to have dogs immunized and registered, for dogs taken outside to wear a tag and be on a leash, and for sub-district and township authorities to coordinate with residents' and villagers' committees in controlling and handling stray dogs and cats; Article 31 distinguishes units and personnel involved in the relevant activities, who must report immediately and promptly bring the situation under control, from other persons who find such situations and must report promptly; Article 32 provides for confirmation at or above county level, confirmation at provincial level for major cases and, when necessary, confirmation by the agriculture and rural affairs department of the State Council. Article 11 covers quarantine by animal health supervision bodies, and Article 12 covers animal disease prevention and control bodies undertaking technical work such as monitoring, testing, diagnosis, epidemiological investigation and reporting. Article 29 lists the situations in which slaughtering, trading and transporting are prohibited, with statutory exceptions for centralized harmless storage and transport. Article 4 lists rabies in category two, and Article 14 concerns work injury insurance and subsidies or compensation for disease prevention personnel.",
-              "In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights.",
-              "Insufficient evidence: the full text of the old Chinese occupational classification was not obtained this round, and it is not used to judge equivalence with U.S. 33-9011. Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this round did not verify a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights. Those intending to enter should check the official conditions of the real job and lawful training, and no mainstream path, pass rate or uniform certificate is invented."
+              "China's Animal Epidemic Prevention Law: Article 30 provides for dog owners to have dogs immunized and registered, for dogs taken outside to wear a tag and be on a leash, and for sub-district and township authorities to coordinate with residents' and villagers' committees in controlling and handling stray dogs and cats; Article 31 distinguishes units and personnel involved in the relevant activities, who must report immediately and promptly bring the situation under control, from other persons who find such situations and must report promptly; Article 32 assigns confirmation to agriculture and rural affairs departments of governments at or above county level, and to the provincial department for major outbreaks and, when necessary, confirmation by the agriculture and rural affairs department of the State Council. Article 11 covers quarantine by animal health supervision bodies, and Article 12 covers animal disease prevention and control bodies undertaking technical work such as monitoring, testing, diagnosis, epidemiological investigation and reporting. Article 29 lists restrictions including slaughter, trade and transport. The temporary storage and transport exception applies only when needed for centralized harmless disposal and when the required disease prevention measures are taken. Article 4 lists rabies in category two, and Article 14 concerns work injury insurance and subsidies or compensation for disease prevention personnel.",
+              "In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights.",
+              "Insufficient evidence: the earlier Chinese occupational classification does not establish a match with U.S. 33-9011. Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this page does not establish a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights. Those intending to enter should check the official conditions of the real job and lawful training, and no mainstream path, pass rate or uniform certificate is invented."
             ]
           },
           "id": "animal-control-workers.path.credential-boundary.1",
@@ -29904,7 +29902,7 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "entity": "BLS EP2025—2035 detail",
+                "entity": "BLS EP2025–2035 detail",
                 "id": "link-2",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -30113,7 +30111,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The U.S. O*NET tasks and the education of newly hired workers, OEWS wages and the EP2025—2035 projection are supported separately; the Chinese NBS broad wages, the division of duties under the Animal Epidemic Prevention Law and the veterinary and institutional measures are supported separately and cannot substitute for each other."
+              "The U.S. O*NET tasks and the education of newly hired workers, OEWS wages and the EP2025–2035 projection are supported separately; the Chinese NBS broad wages, the division of duties under the Animal Epidemic Prevention Law and the veterinary and institutional measures are supported separately and cannot substitute for each other."
             ]
           },
           "id": "animal-control-workers.path.career-path-block.22",
@@ -30161,7 +30159,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "U.S. wages are May2025 OEWS shown through O*NET, and the current projection is EP2025—2035."
+              "U.S. wages are May2025 OEWS shown through O*NET, and the current projection is EP2025–2035."
             ]
           },
           "id": "animal-control-workers.path.career-path-block.25",
@@ -30190,7 +30188,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "NBS2025 broad industry wages are not occupational statistics; the full text of the old Chinese classification was not obtained this round, and equivalence with U.S. 33-9011 is not claimed."
+              "NBS2025 broad industry wages are not occupational statistics; the earlier Chinese classification does not establish equivalence with U.S. 33-9011 is not claimed."
             ]
           },
           "id": "animal-control-workers.path.career-path-block.27",
@@ -31218,7 +31216,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no occupational projection for Chinese animal control workers was obtained this round. The U.S. materials are as follows: BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025—2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. The current projection on this page uses the BLS EP2025—2035 detail, with statistical precision kept separate from the O*NET category presentation. The current O*NET figure of 83% government is the 2025 employment industry structure and cannot be taken as government wages or demand causality; insufficient evidence: no Chinese projection for this occupation was obtained this round."
+              "Insufficient evidence: no occupational projection for Chinese animal control workers is available on this page. The U.S. materials are as follows: BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025–2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. The current projection on this page uses the BLS EP2025–2035 detail, with statistical precision kept separate from the O*NET category presentation. The current O*NET figure of 83% government is the 2025 employment industry structure and cannot be taken as government wages or demand causality; insufficient evidence: no Chinese projection for this occupation is available on this page."
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.8",
@@ -31345,7 +31343,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.17",
@@ -31359,12 +31357,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS EP growth is 4.0%, with an official net increase of 600; the rounded figures cannot be replaced by subtracting the two ends."
+              "U.S. SOC 33-9011: 2025 median pay was $45,660 annually and $21.95 hourly. The 2025 employment baseline was about 13,800; BLS projects about 14,300 by 2035. BLS separately reports 4.0% growth, a net gain of about 600, and around 1,500 annual openings. The employment endpoints are independently rounded."
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.18",
           "source_refs": [
-            "ep"
+            "ep",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31415,7 +31414,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "4.0%（2025—2035）"
+              "4.0%（2025–2035）"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.22",
@@ -31443,7 +31442,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.24",
@@ -31541,7 +31540,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS EP2025—2035 detail for this occupation, including the self-employed."
+              "BLS EP2025–2035 detail for this occupation, including the self-employed."
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.31",
@@ -31584,7 +31583,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
+              "In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights."
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.34",
@@ -31719,7 +31718,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial comparison: security tasks focus on site order and safety and may overlap in practice with maintaining order in control work; no title confers animal handling or enforcement authority."
+              "For comparison: security tasks focus on site order and safety and may overlap in practice with maintaining order in control work; no title confers animal handling or enforcement authority."
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.43",
@@ -31950,13 +31949,13 @@
           "data": {
             "entries": [
               {
-                "answer": "Animal control workers correspond to U.S. Animal Control Workers (33-9011), dealing with abandoned, dangerous or unattended animals, investigating abuse and attacks, recording sheltering and handling, and public education. The U.S. tasks list capture, summonses or requests for police arrest, court appearances and euthanasia, which do not directly authorize the same-named job in China. The work of animal control workers falls into four categories: responding to reports and on-site handling (answering public enquiries, arriving after receiving and dispatching a call, using nets, snares or tranquilizer darts to capture and remove stray, out-of-control or abused animals, taking captured animals out of vehicles and putting them into shelter cages, providing food, water and daily care for animals, and cleaning kennels, vehicles and other facilities and equipment); investigation and enforcement (investigating reports of animal attacks or abuse, interviewing witnesses, collecting evidence and writing reports, checking animals for injury or malnutrition and arranging treatment, checking animal licences and whether shelters comply, issuing warnings or summonses for violations or contacting the police to report violations and request arrests, and preparing for prosecution and testifying in court); sheltering, placement and handling (writing activity reports and keeping sheltering and handling files for animals, contacting animal owners to tell them their pet is at the shelter, organizing adoptions of unclaimed animals, euthanizing rabid, unclaimed or severely injured animals, collecting dead animals from roads and disposing of carcasses, and transporting injured or sick wild animals to rescue organizations); and public education and collaboration (educating the public about animal welfare and animal control laws and regulations, running animal safety and wildlife-themed education in schools and community activities, training police officers in dog handling and tracking, crowd control, narcotics detection and explosives detection techniques, and working with the police, animal diagnostic and treatment institutions and shelter organizations). Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this round did not verify a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights.",
+                "answer": "Animal control workers correspond to U.S. Animal Control Workers (33-9011), dealing with abandoned, dangerous or unattended animals, investigating abuse and attacks, recording sheltering and handling, and public education. The U.S. tasks list capture, summonses or requests for police arrest, court appearances and euthanasia, which do not directly authorize the same-named job in China. The work of animal control workers falls into four categories: responding to reports and on-site handling (answering public enquiries, arriving after receiving and dispatching a call, using nets, snares or tranquilizer darts to capture and remove stray, out-of-control or abused animals, taking captured animals out of vehicles and putting them into shelter cages, providing food, water and daily care for animals, and cleaning kennels, vehicles and other facilities and equipment); investigation and enforcement (investigating reports of animal attacks or abuse, interviewing witnesses, collecting evidence and writing reports, checking animals for injury or malnutrition and arranging treatment, checking animal licences and whether shelters comply, issuing warnings or summonses for violations or contacting the police to report violations and request arrests, and preparing for prosecution and testifying in court); sheltering, placement and handling (writing activity reports and keeping sheltering and handling files for animals, contacting animal owners to tell them their pet is at the shelter, organizing adoptions of unclaimed animals, euthanizing rabid, unclaimed or severely injured animals, collecting dead animals from roads and disposing of carcasses, and transporting injured or sick wild animals to rescue organizations); and public education and collaboration (educating the public about animal welfare and animal control laws and regulations, running animal safety and wildlife-themed education in schools and community activities, training police officers in dog handling and tracking, crowd control, narcotics detection and explosives detection techniques, and working with the police, animal diagnostic and treatment institutions and shelter organizations). Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this page does not establish a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights.",
                 "id": "animal-control-workers.faq.1",
                 "question": "What do animal control workers do every day?",
                 "question_key": "career.faq.animal-control-workers.daily-work"
               },
               {
-                "answer": "Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this round did not verify a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights.",
+                "answer": "Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this page does not establish a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights.",
                 "id": "animal-control-workers.faq.2",
                 "question": "Where are the boundaries between this occupation and adjacent roles?",
                 "question_key": "career.faq.animal-control-workers.comparison"
@@ -31968,10 +31967,15 @@
                 "question_key": "career.faq.animal-control-workers.ai"
               },
               {
-                "answer": "Insufficient evidence: no national or city occupational wage distribution or occupational projection for Chinese animal control workers was obtained this round. The NBS2025 national figures of 129441 non-private and 71590 private yuan are pre-tax annual averages; the non-private figures of 119465 for public administration, 70172 for water conservancy and environmental public facilities, 70226 for resident services and 146266 for health and social work are all broad industry averages and cannot be classified by job title or substituted for an occupational median.",
+                "answer": "A 2025 Taizhou police tender covers intake, observation, care, reclaiming and adoption; the maximum was CNY 462,000 a year and CNY 1.386 million over three years. A 2026 Jingyuan urban management procurement notice lists labor costs for two staff with animal care experience: CNY 15,000 annually per position in the procurement table, CNY 30,000 in all. These are a contract ceiling and a project labor line. Neither establishes take-home pay or a national wage.",
                 "id": "animal-control-workers.faq.4",
                 "question": "How should wages in mainland China be understood?",
-                "question_key": "career.faq.animal-control-workers.china-pay"
+                "question_key": "career.faq.animal-control-workers.china-pay",
+                "source_refs": [
+                  "control-taizhou",
+                  "control-jingyuan",
+                  "nbs"
+                ]
               },
               {
                 "answer": "The U.S. May2025 annual 10/25/50/75/90 percentiles are 33,090/37,750/45,660/57,060/68,070 US dollars, with hourly wages of 15.91/18.15/21.95/27.44/32.72. Percentiles are positions in the distribution, not a starting salary, minimum wage or return to experience.",
@@ -31980,7 +31984,7 @@
                 "question_key": "career.faq.animal-control-workers.us-pay"
               },
               {
-                "answer": "Proportions of O*NET respondents on the education requirements for newly hired workers: 65% high school or equivalent, 19% postsecondary non-degree certificate and 12% associate's or another two-year degree; these are not the education distribution of current workers or a Chinese threshold. Job Zone1—2, SVP below 6; the EP route is typically a high school education, no related experience and medium-term on-the-job training. Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this round did not verify a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights.",
+                "answer": "Proportions of O*NET respondents on the education requirements for newly hired workers: 65% high school or equivalent, 19% postsecondary non-degree certificate and 12% associate's or another two-year degree; these are not the education distribution of current workers or a Chinese threshold. Job Zone1—2, SVP below 6; the EP route is typically a high school education, no related experience and medium-term on-the-job training. Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this page does not establish a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights.",
                 "id": "animal-control-workers.faq.6",
                 "question": "How can one become an animal control worker?",
                 "question_key": "career.faq.animal-control-workers.education"
@@ -31992,10 +31996,14 @@
                 "question_key": "career.faq.animal-control-workers.risk"
               },
               {
-                "answer": "Insufficient evidence: no occupational projection for Chinese animal control workers was obtained this round. The current and old U.S. periods differ as follows: BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025—2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. O*NET still shows 12,200 in 2024, growth of 3%—4% over 2024—2034 and an annual average of 1,300 openings; this is old-period data, and the current projection on this page uses EP2025—2035 without mixing the two. Individual employment is not guaranteed; insufficient evidence: no Chinese projection for this occupation was obtained this round.",
+                "answer": "U.S. SOC 33-9011: 2025 median pay was $45,660 annually and $21.95 hourly. The 2025 employment baseline was about 13,800; BLS projects about 14,300 by 2035. BLS separately reports 4.0% growth, a net gain of about 600, and around 1,500 annual openings. The employment endpoints are independently rounded.",
                 "id": "animal-control-workers.faq.8",
                 "question": "What are the U.S. employment prospects?",
-                "question_key": "career.faq.animal-control-workers.outlook"
+                "question_key": "career.faq.animal-control-workers.outlook",
+                "source_refs": [
+                  "ep",
+                  "onet-wages"
+                ]
               },
               {
                 "answer": "92% are exposed to all weather conditions outdoors every day and 96% work inside a closed vehicle or operate enclosed equipment every day; 62% are exposed to disease or infection every day, 73% to contaminants every day, 58% to minor burns, cuts, bites or stings every day and 73% to noise every day; 76% wear common protective or safety equipment every day; 96% have face-to-face discussions every day and 100% have telephone conversations every day; 68% must deal with unpleasant, angry or discourteous people every day, 50% encounter conflict situations every day and 20% must deal with violent or aggressive people at least once a week; 50% work more than a 40-hour week and 69% have a regular fixed schedule (O*NET 33-9011.00 respondent percentages). These are surveyed contexts, not everyone's conditions, an accident rate or individual suitability, and a regular schedule is not the same as working only weekdays.",
@@ -32004,10 +32012,19 @@
                 "question_key": "career.faq.animal-control-workers.work-context"
               },
               {
-                "answer": "Editorially check the specific tasks and interests by on-site and care work, investigative evidence work and licensing procedure, then check the local authority, training, real risks and written conditions. A/B/C can only practise paper records and cannot replace on-site training or guarantee hiring.",
+                "answer": "Check the specific tasks and interests by on-site and care work, investigative evidence work and licensing procedure, then check the local authority, training, real risks and written conditions. A/B/C can only practise paper records and cannot replace on-site training or guarantee hiring.",
                 "id": "animal-control-workers.faq.10",
                 "question": "How should one choose between the three directions of on-site capture and sheltering care, abuse and attack investigation, and regulatory enforcement and licensing?",
                 "question_key": "career.faq.animal-control-workers.direction-choice"
+              },
+              {
+                "answer": "A and B refer to C1. The 09:00 to 09:05 gap is five minutes; it does not show a missed deadline. Original: the chase is a caller claim. The bite, capture and shelter intake remain unverified. Revision: R’s 09:12 receipt confirms intake only. A bite and the capture account remain open. Hand the case to the fictional records owner with A, B and the separate receipt. Request original field evidence and draw no diagnosis or enforcement conclusion.",
+                "id": "animal-control-workers.faq.11",
+                "question": "AC-50 reference (open after submitting)",
+                "question_key": "career.faq.animal-control-workers.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -32029,31 +32046,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind career content editorial team"
+              "A 2026 Urumqi municipal response describes local practice: police service stations transfer stray dogs to a holding facility and record capture time, location, distinguishing features and destination."
             ]
           },
           "id": "animal-control-workers.sources.source-card.1",
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.source-card",
-          "data": {
-            "paragraphs": [
-              "ONET2026 U.S. 20 tasks, context and education of newly hired workers, May2025 wages shown by O*NET, the EP2025—2035 current projection, NBS2025 broad wages, the MOA disease prevention law and the 2022 veterinary and institutional measures, and CDC U.S. exposure and prevention materials each support their actual scope. The full text of the old classification was not obtained this round."
-            ]
-          },
-          "id": "animal-control-workers.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "oews",
-            "ep",
-            "nbs",
-            "cnlaw",
-            "cnvet",
-            "cnclinic",
-            "cdc",
-            "cdcprep"
+            "control-urumqi"
           ],
           "type": "prose"
         },
@@ -32062,10 +32060,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "In this window, on 2026-10-09 the O*NET33-9011 detail page and summary, the BLS EP, the Animal Epidemic Prevention Law and the two CDC pages were checked; the national wage web interface failed to read, but a terminal read of the same official wage text then succeeded, and the annual and hourly quintiles were checked. The NBS and veterinary texts in the same edition reuse the October 8 checked materials in this window, and the institutional measures reuse the October 9 checks; the full text of the old code and the occupational wages within industries are still missing."
+              "A 2025 Taizhou police tender covers intake, observation, care, reclaiming and adoption; the maximum was CNY 462,000 a year and CNY 1.386 million over three years. A 2026 Jingyuan urban management procurement notice lists labor costs for two staff with animal care experience: CNY 15,000 annually per position in the procurement table, CNY 30,000 in all. These are a contract ceiling and a project labor line. Neither establishes take-home pay or a national wage."
             ]
           },
-          "id": "animal-control-workers.sources.source-card.3",
+          "id": "animal-control-workers.sources.source-card.2",
+          "source_refs": [
+            "control-taizhou",
+            "control-jingyuan"
+          ],
           "type": "prose"
         },
         {
@@ -32073,7 +32075,25 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The U.S. May2025 annual 10/25/50/75/90 percentiles are 33,090/37,750/45,660/57,060/68,070 US dollars, with hourly wages of 15.91/18.15/21.95/27.44/32.72. Percentiles are positions in the distribution, not a starting salary, minimum wage or return to experience. BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025—2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. The current projection on this page uses the BLS EP2025—2035 detail, with statistical precision kept separate from the O*NET category presentation. Historical queries of industry wages were not obtained and the gap is retained this round, which is not the same as not published. Chinese broad industry averages are not occupational wages; actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this round did not verify a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights. Insufficient evidence: Chinese occupational wages and projections, AI adoption, effects, substitution and wage causality, personality hiring validity, the full text of the old classification, the complete adjacent entry rules and the specific local enforcement and tool conditions were not obtained; broad references are not used to fill the gap."
+              "Check authority for local shelter work, enforcement, animal treatment and human injury separately. AC-50 uses fictional records only."
+            ]
+          },
+          "id": "animal-control-workers.sources.source-card.3",
+          "source_refs": [
+            "cnlaw",
+            "cnvet",
+            "cnclinic",
+            "control-urumqi",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.source-card",
+          "data": {
+            "paragraphs": [
+              "The U.S. May2025 annual 10/25/50/75/90 percentiles are 33,090/37,750/45,660/57,060/68,070 US dollars, with hourly wages of 15.91/18.15/21.95/27.44/32.72. Percentiles are positions in the distribution, not a starting salary, minimum wage or return to experience. BLS EP 33-9011: 13,800 in 2025 and 14,300 in 2035; growth of 4.0% over 2025–2035, an official net increase of 600 and an annual average of 1,500 openings, with the self-employed accounting for 10.2%. Published figures are rounded, and subtracting the two ends cannot replace the official net change. The current projection on this page uses the BLS EP2025–2035 detail, with statistical precision kept separate from the O*NET category presentation. Historical queries of industry wages were not obtained and the gap is retained this page, which is not the same as not published. Chinese broad industry averages are not occupational wages; actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this page does not establish a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in clinical teaching practice, and relevant graduates who lack a veterinary qualification certificate and are doing practical work at an animal diagnostic and treatment institution, assist under the supervision and guidance of a licensed veterinarian, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights. Insufficient evidence: Chinese occupational wages and projections, AI adoption, effects, substitution and wage causality, personality hiring validity, the full text of the old classification, the complete adjacent entry rules and the specific local enforcement and tool conditions were not obtained; broad references are not used to fill the gap."
             ]
           },
           "id": "animal-control-workers.sources.source-card.4",
@@ -32117,19 +32137,19 @@
                 "entity": "MBTI personality test",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "See the animal control worker occupation page",
@@ -32162,11 +32182,11 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "exact",
                 "id": "onet",
-                "limitation": "The 20 U.S. tasks, surveyed context, education of newly hired workers, RCI and software; it currently lists 2025 wages and employment, the 2025—2035 projection and the 83% government employment structure, and the exact 4.0% and the net increase of 600 are checked directly against EP. It confers no Chinese enforcement, diagnostic and treatment or euthanasia authority and is not AI or personality validity research.",
+                "limitation": "The 20 U.S. tasks, surveyed context, education of newly hired workers, RCI and software; it currently lists 2025 wages and employment, the 2025–2035 projection and the 83% government employment structure, and the exact 4.0% and the net increase of 600 are checked directly against EP. It confers no Chinese enforcement, diagnostic and treatment or euthanasia authority and is not AI or personality validity research.",
                 "market": "United States",
                 "name": "O*NET animal control worker detailed information",
                 "period": "Updated in 2026",
@@ -32178,7 +32198,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "exact",
                 "id": "bls",
@@ -32194,14 +32214,14 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "exact",
                 "id": "ep",
                 "limitation": "33-9011 employment including the self-employed, growth, official net change and openings; published figures are rounded and this is not AI causality.",
                 "market": "United States",
                 "name": "BLS EP current occupational projection and characteristics",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32210,7 +32230,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "exact",
                 "id": "oews",
@@ -32225,14 +32245,14 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "industry_proxy",
-                  "Actually read in this window or reused from the same text on 2026-10-08"
+                  "Urban unit statistics; this is not occupational pay.",
+                  "See the source for its date and jurisdiction."
                 ],
-                "evidence_type": "industry_proxy",
+                "evidence_type": "primary_document",
                 "id": "nbs",
                 "limitation": "Pre-tax broad wages and industry averages for urban corporate units with 5 or more employees, excluding sole proprietors and the self-employed, and not this occupation's wages.",
                 "market": "Mainland China",
-                "name": "NBS2025 average annual wages of urban units",
+                "name": "National Bureau of Statistics: 2025 average annual wages for urban unit employees (industry context)",
                 "period": "2025",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
@@ -32242,7 +32262,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "exact",
                 "id": "cnlaw",
@@ -32262,7 +32282,7 @@
                 ],
                 "evidence_type": "contextual",
                 "id": "cnclass",
-                "limitation": "Registered under the old classification, whose full text was not obtained this round, and it is not used to claim that U.S. 33-9011 and a Chinese occupation are equivalent.",
+                "limitation": "Registered under the old classification, which does not establish that U.S. 33-9011 and a Chinese occupation are equivalent.",
                 "market": "Mainland China",
                 "name": "Occupational Classification Code of the People's Republic of China (2022 edition), animal and plant disease prevention personnel (5-05-02)",
                 "period": "2022 edition",
@@ -32274,7 +32294,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "privacy",
@@ -32290,7 +32310,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "facilities",
@@ -32306,7 +32326,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "operations",
@@ -32322,7 +32342,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "hr",
@@ -32338,7 +32358,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "health",
@@ -32354,7 +32374,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "ilo",
@@ -32369,24 +32389,24 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "The case is fictional.",
+                  "The case is fictional."
                 ],
                 "evidence_type": "contextual",
                 "id": "editor",
-                "limitation": "Supports the U.S. 20 tasks, context, education of newly hired workers and RCI or software examples; it is not Chinese authority, psychological validity or AI research.",
-                "market": "United States",
-                "name": "O*NET animal control worker detailed information",
-                "period": "Updated in 2026",
-                "publisher": "O*NET OnLine",
+                "limitation": "Does not authorize real incident handling, intake or enforcement.",
+                "market": "Fictional case",
+                "name": "FermatMind Editorial: AC-50 paper exercise",
+                "period": "FermatMind fictional paper case",
+                "publisher": "FermatMind Editorial",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/details/33-9011.00"
+                "url": "#career-content-path"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "nist",
@@ -32402,7 +32422,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "arxiv",
@@ -32418,7 +32438,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "weforum",
@@ -32434,7 +32454,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "employer",
@@ -32450,7 +32470,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "purchasing-managers",
@@ -32466,7 +32486,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-1",
@@ -32482,7 +32502,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-2",
@@ -32498,7 +32518,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-3",
@@ -32514,7 +32534,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "census",
@@ -32530,7 +32550,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "msresearch",
@@ -32546,7 +32566,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "exact",
                 "id": "onet-wages",
@@ -32562,7 +32582,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "archivists",
@@ -32578,39 +32598,39 @@
                 "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-08"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "cnvet",
-                "limitation": "Checked in the same batch: role qualification and filing, supervised assistance and the provincial rural exception for assistants; not authorization for ordinary posts.",
+                "limitation": "Articles 18–21 and 35 govern filing, role scope, supervised assistance and the provincial rural exception.",
                 "market": "Mainland China",
                 "name": "Measures for the Administration of Licensed Veterinarians and Rural Veterinarians",
                 "period": "2022#6",
                 "publisher": "Ministry of Agriculture and Rural Affairs",
                 "scope": "contextual",
-                "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408942.htm"
+                "url": "https://www.moa.gov.cn/gk/nyncbgzk/gzk/202209/P020220930306068952275.pdf"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "cnclinic",
-                "limitation": "Checked in the same batch for institutional licensing and the scope of activities; not the same as all control duties.",
+                "limitation": "Article 5 covers institutional licensing and the scope of practice.",
                 "market": "Mainland China",
                 "name": "Measures for the Administration of Animal Diagnostic and Treatment Institutions",
                 "period": "2022#5",
                 "publisher": "Ministry of Agriculture and Rural Affairs",
                 "scope": "contextual",
-                "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408940.htm"
+                "url": "https://www.moa.gov.cn/gk/nyncbgzk/gzk/202209/P020221118344793830026.pdf"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "cdc",
@@ -32626,7 +32646,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "Actually read in this window or reused from the same text on 2026-10-09"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "cdcprep",
@@ -32642,11 +32662,11 @@
                 "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "Consulted this round or reused from the same batch on 2026-10-02"
+                  "See the source for its date and jurisdiction."
                 ],
                 "evidence_type": "contextual",
                 "id": "blsindustry",
-                "limitation": "Insufficient evidence: no 33-9011 industry wage median was obtained this round. BLS has a May2025 industry download entry point; a failed read is not the same as not published.",
+                "limitation": "Insufficient evidence: no 33-9011 industry wage median is available on this page. BLS has a May2025 industry download entry point; a failed read is not the same as not published.",
                 "market": "United States",
                 "name": "BLS May2025 industry wage download entry point",
                 "period": "May2025",
@@ -32656,20 +32676,61 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "U.S. tasks｜Responding to reports and on-site handling｜Arriving and capture｜Answering enquiries and arriving after dispatch, using nets, snares or tranquilizer darts to capture and remove stray, out-of-control or abused animals. — 0/100; weight=1/3; animal-control-workers.profile.responsibilities-block.1[0]",
-                  "U.S. tasks｜Investigation and evidence｜Abuse and attacks｜Investigating reports of animal attacks or abuse, interviewing witnesses, collecting evidence and writing reports, and preparing for prosecution and testifying in court. — 50/100; weight=1/3; animal-control-workers.profile.responsibilities-block.1[1]",
-                  "U.S. tasks｜Sheltering and care｜Placement and care｜Taking captured animals out of vehicles and putting them into shelter cages, providing food, water and daily care, and cleaning kennels, vehicles and other facilities and equipment. — 0/100; weight=1/3; animal-control-workers.profile.responsibilities-block.1[2]"
+                  "Record tools can flag mismatched case IDs, missing handover receipts or open fields. They cannot verify animal identity, injury or authority to act."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "Examples do not measure tool adoption.",
+                "name": "O*NET: animal control and record tasks",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "url": "https://www.onetonline.org/link/details/33-9011.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A 2026 Urumqi municipal response describes local practice: police service stations transfer stray dogs to a holding facility and record capture time, location, distinguishing features and destination."
+                ],
+                "evidence_type": "primary_document",
+                "id": "control-urumqi",
+                "limitation": "This is a local practice or project example. It does not establish personal authority, wages or national employment.",
+                "market": "Mainland China",
+                "name": "Urumqi: dog handovers and recordkeeping",
+                "period": "2026",
+                "publisher": "Urumqi municipal government",
+                "scope": "contextual",
+                "url": "https://www.wlmq.gov.cn/wlmqs/c119157/202607/88a647df222e40f296dd833230499ef4.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The police tender covers intake, observation, care, reclaiming and adoption. The ceiling is CNY 462,000 a year and CNY 1.386 million over three years."
+                ],
+                "evidence_type": "primary_document",
+                "id": "control-taizhou",
+                "limitation": "This is a local practice or project example. It does not establish personal authority, wages or national employment.",
+                "market": "Mainland China",
+                "name": "Taizhou police: shelter and observation tender",
+                "period": "2025-09-05",
+                "publisher": "Taizhou Finance Bureau",
+                "scope": "contextual",
+                "url": "https://czj.taizhou.gov.cn/tzzfcgw/cgxx/sjcgxx/fzbcg/jzxcsgg/art/2025/art_ac9f53235acd4b2ca90d670d53c66adb.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The preliminary procurement result lists labor for two staff with animal care experience at CNY 15,000 per year per position, CNY 30,000 in total."
+                ],
+                "evidence_type": "primary_document",
+                "id": "control-jingyuan",
+                "limitation": "This is a local practice or project example. It does not establish personal authority, wages or national employment.",
+                "market": "Mainland China",
+                "name": "Jingyuan urban management: preliminary shelter procurement result",
+                "period": "2026-04-13",
+                "publisher": "Jingyuan Urban Management and Law Enforcement Bureau",
+                "scope": "contextual",
+                "url": "https://www.jingyuan.gov.cn/zfxxgk/fdzdgknr/zfcg/xeyxzfcg/art/2026/art_9b961069c2854a5e99461d9da0cd8ad9.html"
               }
             ]
           },
@@ -36005,9 +36066,9 @@
         }
       },
       "hero": {
-        "h1": "Animal Control Worker",
-        "quick_answer": "Animal control workers correspond to U.S. Animal Control Workers (33-9011), dealing with abandoned, dangerous or unattended animals, investigating abuse and attacks, recording sheltering and handling, and public education. The U.S. tasks list capture, summonses or requests for police arrest, court appearances and euthanasia, which do not directly authorize the same-named job in China. Actual duties in China are verified according to the local statutory division of work, the specific job and its authority; this round did not verify a single Chinese occupation corresponding to U.S. 33-9011, and no claim is made that disease prevention workers or quarantine officers are equivalent. U.S. rabies, unclaimed or severely injured euthanasia tasks do not constitute a lawful basis for handling animals in China. In China, diagnosis and treatment are carried out according to the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; relevant veterinary students or graduates may assist under the supervision of a veterinarian in accordance with the measures, and institutions need a separate diagnostic and treatment licence. Assistants generally cannot prescribe, write diagnostic certificates or issue certificates, and the provincial exception for independent rural diagnosis and treatment is checked separately. A job title or ordinary training does not confer diagnostic and treatment rights.",
-        "title": "Animal Control Worker"
+        "h1": "Animal Control Workers",
+        "quick_answer": "Start with a report: who logs it, who verifies it, and who can accept a handover? U.S. SOC 33-9011 can involve animal control, shelter intake, investigations and enforcement. In mainland China, check local responsibilities, the job and its authority.",
+        "title": "Animal Control Workers"
       },
       "market_signal_card": {
         "context_links": [
@@ -36535,7 +36596,7 @@
           },
           {
             "alternate_value": null,
-            "label": "May2025 wages and the EP2025—2035 projection",
+            "label": "May2025 wages and the EP2025–2035 projection",
             "secondary_value": null,
             "value": {
               "$item": "animal-control-workers.profile.onet-structured-fields-block.2",
@@ -36546,7 +36607,7 @@
           },
           {
             "alternate_value": null,
-            "label": "National Bureau of Statistics 2025 urban unit wages (civilian basis)",
+            "label": "National Bureau of Statistics 2025 average annual wages for urban unit employees",
             "secondary_value": null,
             "value": {
               "$item": "animal-control-workers.profile.onet-structured-fields-block.3",
@@ -36557,7 +36618,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS EP 2025—2035 employment projection for this occupation",
+            "label": "BLS EP 2025–2035 employment projection for this occupation",
             "secondary_value": null,
             "value": {
               "$item": "animal-control-workers.profile.onet-structured-fields-block.4",
@@ -37573,7 +37634,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and case records",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of occupation directions",
       "fit": "Occupational fit guide",
@@ -37681,7 +37742,7 @@
         "market": "United States",
         "measure": "Employment growth and official net change, with rounded figures",
         "occupation_scope": "Animal Control Worker",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -37693,14 +37754,14 @@
         "market": "United States",
         "measure": "Openings including growth and replacement",
         "occupation_scope": "Animal Control Worker",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: no occupational wage median within this industry was obtained this round, and a failed read is not the same as not published",
+        "display_value": "Insufficient evidence: no occupational wage median within this industry is available on this page, and a failed read is not the same as not published",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "United States",
         "measure": "Occupational wage median within an industry (government)",
@@ -37712,7 +37773,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: no occupational wage median within this industry was obtained this round, and a failed read is not the same as not published",
+        "display_value": "Insufficient evidence: no occupational wage median within this industry is available on this page, and a failed read is not the same as not published",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "United States",
         "measure": "Occupational wage median within an industry (local government)",
@@ -37724,7 +37785,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: no occupational wage median within this industry was obtained this round, and a failed read is not the same as not published",
+        "display_value": "Insufficient evidence: no occupational wage median within this industry is available on this page, and a failed read is not the same as not published",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "United States",
         "measure": "Occupational wage median within an industry (state government)",
@@ -37736,7 +37797,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: no occupational wage median within this industry was obtained this round, and a failed read is not the same as not published",
+        "display_value": "Insufficient evidence: no occupational wage median within this industry is available on this page, and a failed read is not the same as not published",
         "fact_id": "us-industry-wage-education-2025",
         "market": "United States",
         "measure": "Occupational wage median within an industry (other industries)",
@@ -37886,7 +37947,7 @@
         "market": "United States",
         "measure": "EP projection, where openings are not net growth",
         "occupation_scope": "Animal Control Worker",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -37898,7 +37959,7 @@
         "market": "United States",
         "measure": "U.S. education of newly hired workers and typical training",
         "occupation_scope": "Animal Control Worker",
-        "period": "Updated in 2026/2025—2035",
+        "period": "Updated in 2026/2025–2035",
         "source_refs": [
           "onet",
           "ep"
@@ -37947,7 +38008,7 @@
         "market": "United States",
         "measure": "U.S. education of newly hired workers and typical training",
         "occupation_scope": "Animal Control Worker",
-        "period": "Updated in 2026/2025—2035",
+        "period": "Updated in 2026/2025–2035",
         "source_refs": [
           "onet",
           "ep"
@@ -37955,41 +38016,29 @@
       },
       {
         "derivation": null,
-        "display_value": "4.0%（2025—2035）",
+        "display_value": "4.0%（2025–2035）",
         "fact_id": "employment-projection",
         "market": "United States",
         "measure": "Current projection for this occupation",
         "occupation_scope": "Animal Control Worker",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "17%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Animal Control Worker",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and case records"
     },
     "badges": [
-      "Public safety and animal management: on-site capture and restraint · investigative evidence and regulatory enforcement · sheltering and handling and public education",
-      "AI: a task-level account of change · no substitution year is given",
-      "U.S. 33-9011 wages and the 2025—2035 projection · Chinese industry references and the boundaries of duties"
+      "Reports | pending checks | shelter handover",
+      "Check local duties and role authority",
+      "U.S. data: SOC 33-9011"
     ],
     "metrics": [
       {
@@ -38002,19 +38051,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (dedicated scope)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. number employed (dedicated scope)"
+        "label": "U.S. baseline employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. annual average job openings (dedicated scope)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -38028,17 +38077,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "The 20 U.S. tasks of animal control workers, May2025 wages and 2025—2035 employment, Chinese duties and the boundaries of diagnosis and treatment, broad industry wages and a complete fictional paper record exercise."
+      "text": "See how reports, shelter handovers and authority differ. Compare three Chinese public sources, check U.S. wages and try the fictional AC-50 case."
     },
     "title": {
       "availability": "available",
-      "text": "Animal Control Workers: tasks, wages and employment prospects (O*NET 33-9011.00)"
+      "text": "Animal Control Workers: Reports, Shelter Intake and Handover"
     }
   },
-  "source_content_sha256": "da6c851f942a942fe522d47d98799b5703d43f0d5b06384fb3d26bb50137c338",
+  "source_content_sha256": "c8f099e62ad8cf9101db294b59035f0c85f95623be50e58d4d0c0686ff0ed44a",
   "subject": {
     "canonical_slug": "animal-control-workers",
-    "name": "Animal Control Worker",
-    "summary": "U.S. animal control workers (33-9011) deal with abandoned, dangerous or unattended animals, investigate attacks and abuse and record sheltering and handling. Specific duties, enforcement and diagnostic and treatment authority in China are verified according to local rules and the job, and U.S. tasks do not confer authorization directly."
+    "name": "Animal Control Workers",
+    "summary": "Start with a report: who logs it, who verifies it, and who can accept a handover? U.S. SOC 33-9011 can involve animal control, shelter intake, investigations and enforcement. In mainland China, check local responsibilities, the job and its authority."
   }
 }

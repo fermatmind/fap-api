@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-roast-jixi": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-roast-taian": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -20127,60 +20133,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-2"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-3"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -20203,7 +20169,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -20231,7 +20197,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23564,7 +23530,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "US wage review | Figures from BLS OEWS May 2025 and 2024—2034 projections through O*NET. Check SOC 51-3091 scope, overtime and benefits (excluded), and national rather than regional or employer coverage."
+              "U.S. pay figures are 2025 OEWS national occupational estimates. They exclude overtime and benefits and do not represent any single employer offer."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.profile.career-quick-answers-block.21",
@@ -23695,7 +23661,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "US wage evidence—period | Wages: May 2025 OEWS; employment, growth and openings: 2024—2034 projections. Different reference points cannot form a single-time conclusion."
+              "Pay comes from May 2025 OEWS; employment, growth and openings come from the 2025–2035 projections. They have different coverage."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.profile.career-quick-answers-block.30",
@@ -24241,7 +24207,7 @@
                 "url": "https://www.onetonline.org/link/details/51-3091.00"
               },
               {
-                "entity": "O*NET presents BLS2024—2034 employment projections",
+                "entity": "BLS 2025–2035 employment projections",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/51-3091.00"
@@ -24519,7 +24485,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET presents BLS2024—2034 employment projections"
+              "BLS employment projections, 2025–2035"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.21",
@@ -25977,12 +25943,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure for annual median"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -25991,7 +25958,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No Chinese sample announcements; US wages and projections not substituted."
+              "One offer cannot establish a national median."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.8",
@@ -26005,12 +25972,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure for 10th percentile"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26019,7 +25987,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No Chinese sample announcements; US wages and projections not substituted."
+              "A low quoted offer is not a population percentile."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.10",
@@ -26033,12 +26001,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure for 25th percentile"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26047,7 +26016,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No Chinese sample announcements; US wages and projections not substituted."
+              "Offers from different locations cannot estimate this percentile."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.12",
@@ -26061,12 +26030,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure for 75th percentile"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26075,7 +26045,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No Chinese sample announcements; US wages and projections not substituted."
+              "A comparable wage distribution is required."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.14",
@@ -26089,12 +26059,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure for 90th percentile"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26103,7 +26074,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No Chinese sample announcements; US wages and projections not substituted."
+              "A high quoted offer is neither a percentile nor a ceiling."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.16",
@@ -26117,12 +26088,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure for national employment"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26131,7 +26103,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No Chinese sample announcements; US wages and projections not substituted."
+              "Individual vacancy counts do not establish national employment."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.18",
@@ -26146,12 +26118,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure for employment growth"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26160,7 +26133,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No Chinese sample announcements; US wages and projections not substituted."
+              "No comparable employment projection series was verified."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.20",
@@ -26174,12 +26147,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure for projected annual openings"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26188,7 +26162,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No Chinese sample announcements; US wages and projections not substituted."
+              "Posting headcounts cannot estimate national annual openings."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.22",
@@ -26638,12 +26612,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Counties and lower-tier markets"
+              "Mainland China oven and drying room postings"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26652,12 +26627,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No city- or region-verifiable Chinese monthly wages; advertised pay, means, and hearsay not substituted."
+              "A Tai’an baking oven post advertises CNY 3,500–5,500 per month and asks for a valid food industry health certificate. A Jixi drying room post lists CNY 4,000–5,000 without specifying a pay period or machine. Ask about independent equipment operation, loading and shift rotation. The food postings do not describe tobacco work or national wages."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26694,7 +26670,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Current 2025—2035 growth 0.4% (essentially unchanged), annual openings 2500; older 2024—2034 historical."
+              "Check whether the role runs the oven independently, checks samples or loads materials, then compare pay terms, shifts and training."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.58",
@@ -26730,7 +26706,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET occupation, wages, 2024—2034 projections | https://www.onetonline.org/link/summary/51-3091.00; BLS OEWS | https://www.bls.gov/oes/; BLS matrix methods | https://www.bls.gov/emp/documentation/data-overview.htm"
+              "O*NET tasks | https://www.onetonline.org/link/summary/51-3091.00; BLS OEWS | https://www.bls.gov/oes/; BLS matrix methods | https://www.bls.gov/emp/documentation/data-overview.htm"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.8",
@@ -26788,7 +26764,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Exact 10th percentile; boundary | Original 33250 not re-obtained; OOH combined 32100 not substituted; not novice, age, or hours group."
+              "Scope | Exact 10th percentile; boundary | The 10th percentile is near the lower end of the wage distribution. It does not represent starting pay."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.12",
@@ -26817,7 +26793,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Exact 25th percentile; boundary | Original 37540 not re-obtained; not entry pay or experience group."
+              "Scope | Exact 25th percentile; boundary | The 25th percentile marks the lower quartile and does not correspond to a tenure band."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.14",
@@ -26845,7 +26821,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Exact 75th percentile; boundary | Original 50680 not re-obtained; not senior or regional group."
+              "Scope | Exact 75th percentile; boundary | The 75th percentile marks the upper quartile and does not describe a particular region or experience level."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.16",
@@ -26874,7 +26850,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Exact 90th percentile; boundary | Original 62680 not re-obtained; OOH combined 57630 cannot substitute; not ceiling or personal probability."
+              "Scope | Exact 90th percentile; boundary | The 90th percentile is near the upper end of the wage distribution and does not cap individual pay."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.18",
@@ -26888,7 +26864,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Employment 20,700 (2024 BLS projection base year through O*NET)"
+              "About 21,600 U.S. jobs in 2025"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.19",
@@ -26917,7 +26893,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Growth below average (about 1%–2%, 2024—2034 BLS through O*NET)"
+              "Projected U.S. employment growth of 0.4% (2025–2035)"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.21",
@@ -26945,7 +26921,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Annual average openings about 2,400 (2024—2034, including replacements)"
+              "About 2,500 projected U.S. openings per year, including replacement needs"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.23",
@@ -26959,7 +26935,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Older 2024—2034 annual 2400 is historical; boundary | Current 2025—2035 annual 2500 includes growth and replacements, not net additions; OOH combined 36600 cannot substitute."
+              "Scope | Annual openings include replacement needs and differ from net growth, current vacancies or a ten-year total; BLS 2025–2035 projections | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.24",
@@ -26974,13 +26950,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Exact 51-3091: May2025 median 44810 dollars / year, 21.54 dollars / hour; 2025 employment 21600, 2025—2035 growth 0.4% (essentially unchanged), annual openings 2500; BLS typically no formal education and moderate-term training. Older shared projections protected; original exact percentiles and industries not re-obtained."
+              "The 2025 U.S. annual wage percentiles (10th, 25th, median, 75th and 90th) were 33,250 / 37,540 / 44,810 / 50,680 / 62,680 dollars."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27089,12 +27064,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Current 2025—2035 growth 0.4% (essentially unchanged), annual 2500; older 2024—2034 historical."
+              "BLS projects U.S. employment for SOC 51-3091 to grow 0.4% from about 21,600 in 2025 to 21,700 in 2035, with about 2,500 annual openings including replacement needs."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27271,7 +27246,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Median not starting pay; exact original percentiles not re-obtained; distribution does not identify experience, shifts, or region as causes."
+              "Percentiles describe wage distribution. They do not explain effects of experience, shifts or region."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.46",
@@ -27406,31 +27381,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Packaging and Filling Machine Operators direction",
@@ -27505,7 +27480,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS Employment Projections 2024—2034",
+                "entity": "BLS Employment Projections 2025–2035",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -28563,7 +28538,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS Employment Projections 2024—2034",
+                "entity": "BLS Employment Projections 2025–2035",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -29505,14 +29480,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Recruitment samples | No verifiable Chinese announcements obtained; no universal factory/labor-channel peak recruitment asserted.",
-              "Check publication date, location, business, employment (full-time, shift, seasonal), shifts and allowances, health or training documents, equipment, protection. Details often reflect reality better than page."
+              "Use the two postings to compare assignments, training and pay terms. Check current listings for vacancies."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "roast-taian",
+            "roast-jixi"
           ],
           "title": "Reading recruitment announcements",
           "type": "notice"
@@ -29535,7 +29509,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS Employment Projections 2024—2034",
+                "entity": "BLS Employment Projections 2025–2035",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -30713,7 +30687,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS Employment Projections 2024—2034",
+                "entity": "BLS Employment Projections 2025–2035",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -30794,7 +30768,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Exact 51-3091: May2025 median 44810 dollars / year, 21.54 dollars / hour; 2025 employment 21600, 2025—2035 growth 0.4% (essentially unchanged), annual 2500; BLS no formal education, moderate-term training. Older shared 2024—2034 protected; Chinese wages/hiring and exact percentiles/industries not re-obtained."
+              "BLS projects little change in U.S. employment from 2025 to 2035, with growth of 0.4%. When comparing local openings, check the equipment, responsibility for independent operation and shifts."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.market-signals.market-signal-card.8",
@@ -30937,12 +30911,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Median not starting pay; exact percentiles not re-obtained; range cannot identify primary regional, shift, experience causes."
+              "A median is not a starting wage. Check the shift, location and duties in each offer."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.market-signals.market-signal-card.18",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025",
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -30994,12 +30970,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Median 44810 dollars / year, 21.54 dollars / hour checked; original 33250 / 37540 / 50680 / 62680 not re-obtained."
+              "U.S. pay uses national OEWS figures for the occupation. Mainland postings give two employers’ historical quotes."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025",
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -31520,13 +31498,12 @@
           "data": {
             "entries": [
               {
-                "answer": "O*NET-SOC 51-3091.00 operates or tends food/tobacco baking, roasting, drying equipment, including ovens, kiln dryers, roasters, charcoal kilns, vacuum dryers. Checks varieties and moisture, sets/starts temperature/time, monitors temperature/humidity/pressure and adjusts valves/feed, observes flow/sounds, samples and measures moisture/color/taste, records output/parameters and cleans. Excludes recipe decisions, cooked-food making, mixing, packaging/filling.",
+                "answer": "Use ovens, dryers or other equipment to process food or tobacco to a work order. Monitor temperature, humidity and samples, and record processing time, temperature and volume. Some jobs include moisture checks.",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.1",
                 "question": "What does this occupation do?",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q1",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "onet-summary"
                 ]
               },
               {
@@ -31540,7 +31517,7 @@
                 ]
               },
               {
-                "answer": "2025 median annual 44,810 dollars, hourly 21.54; 2024 employment 20,700 projection base; 2024—2034 below-average growth about 1%–2%, annual 2,400 including replacements. US O*NET/BLS only, not other jurisdictions.",
+                "answer": "The 2025 U.S. occupational median wage was $21.54 an hour and $44,810 a year. BLS projects U.S. employment for SOC 51-3091 to grow 0.4% from about 21,600 in 2025 to 21,700 in 2035, with about 2,500 annual openings including replacement needs.",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.3",
                 "question": "US wages and employment?",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q3",
@@ -31550,13 +31527,13 @@
                 ]
               },
               {
-                "answer": "Checked Chinese sources yield no precise occupational wages. Industry urban means (manufacturing non-private 113,594 yuan / year, private 76,055 yuan / year) are background, no occupational split. Visible Insufficient evidence: retained, no means, ads, third-party estimates substituted.",
+                "answer": "A Tai’an baking oven post advertises CNY 3,500–5,500 per month and asks for a valid food industry health certificate. A Jixi drying room post lists CNY 4,000–5,000 without specifying a pay period or machine. Ask about independent equipment operation, loading and shift rotation. The food postings do not describe tobacco work or national wages.",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.4",
                 "question": "Chinese corresponding wages?",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q4",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "roast-taian",
+                  "roast-jixi"
                 ]
               },
               {
@@ -31581,13 +31558,13 @@
                 ]
               },
               {
-                "answer": "O*NET high school/equivalent 61%, below 23%, some college no degree 11%, on-the-job learning (Job Zone 1-2, SVP below 6.0). Employers/equipment govern.",
+                "answer": "BLS lists no formal educational credential as typical for entry and moderate-term on-the-job training in the United States. Employers may ask for experience, a food worker health certificate or job training. Check the actual posting and equipment.",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.7",
                 "question": "Education and training?",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q7",
                 "source_refs": [
-                  "onet-summary",
-                  "bls-projections-2025-35"
+                  "bls-projections-2025-35",
+                  "roast-taian"
                 ]
               },
               {
@@ -31611,7 +31588,7 @@
                 ]
               },
               {
-                "answer": "US 2024—2034 below-average growth 1%–2%, replacement openings. Not individual opportunities, dependent on local food/tobacco and automation. Move to batchmaking, cooking, mixing, packaging, baking, inspection/sampling (relearn processes/equipment), maintenance or production management.",
+                "answer": "BLS projects U.S. employment for SOC 51-3091 to grow 0.4% from about 21,600 in 2025 to 21,700 in 2035, with about 2,500 annual openings including replacement needs. Compare food batchmaking if you prefer weighing to a formula, or cooking machine operation if you prefer processes such as steam cooking or frying.",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.10",
                 "question": "Outlook and transitions?",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q10",
@@ -31636,7 +31613,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Source card | Research: Check O*NET-SOC 51-3091.00 scope, tasks and context, then BLS OEWS May 2025 and 2024—2034 projections, finally Chinese 2025 manufacturing industry averages as background. US and Chinese data separate, no combination or conversion."
+              "O*NET describes the tasks. BLS 2025 wages and 2025–2035 projections describe the U.S. occupation. Mainland China postings describe individual jobs."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.sources.source-card.1",
@@ -31666,17 +31643,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Reviewed 2026-10-11: O*NET tasks, context, RC, JobZone1—2, education 61 / 23 / 11, current median and 2025—2035 projections verified; Food Safety Law 44 / 45 scope remains valid. Original percentiles and manufacturing charts not re-obtained."
+              "Use O*NET for the occupation, BLS for U.S. wages and employment, and the local job postings for individual duties and pay."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.sources.source-card.3",
           "source_refs": [
             "onet-summary",
-            "onet-details",
-            "bls-matrix-methods",
-            "ilo-wp96",
-            "nist-ai-rmf",
-            "cn-food-safety-law"
+            "bls-oews-2025",
+            "bls-projections-2025-35",
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -31685,15 +31661,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Nine-module author revision awaits independent review. Exact 51-3091: May2025 median 44810 dollars / year, 21.54 dollars / hour; 2025 employment 21600, 2025—2035 growth 0.4% (essentially unchanged), annual 2500; BLS no formal education, moderate-term training. RC, JobZone1—2, education 61 / 23 / 11 and main contexts retained; repetition 47% changed to very important. US Chinese-hiring substitutions and percentile bindings corrected. No unsafe initial clearing; directory grants no repair/release rights. Hero / FAQ / exercises and older projections protected. Exact percentiles/industries, Chinese wages/hiring, manufacturing charts not re-obtained; personality, AI, complete equipment/dust rules unchecked. Law 44 / 45 not expanded to all tobacco equipment staff. No HTML, review, Git, publication."
+              "U.S. employment projections and wage estimates have different coverage. Two mainland postings cannot establish national wages or an individual hiring outcome."
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.sources.source-card.4",
           "source_refs": [
-            "onet-summary",
             "bls-oews-2025",
-            "nbs-wages-2025",
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         }
@@ -31717,28 +31693,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
-                "id": "navigation-2",
+                "entity": "MBTI",
+                "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
+                "entity": "Big Five",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders career page",
@@ -31778,7 +31742,7 @@
                 "period": "2026 occupational profile",
                 "publisher": "O*NET Resource Center",
                 "scope": "exact occupation",
-                "url": "https://www.onetonline.org/link/summary/51-3091.00"
+                "url": "https://www.onetonline.org/link/details/51-3091.00"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31796,20 +31760,19 @@
                 "url": "https://www.onetonline.org/link/details/51-3091.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Row 51-3091: 2024 employment 20.7 thousand, below-average 1%–2%, annual openings 2.4 thousand.",
-                  "Occupational projections, not personal hiring probability."
+                  "BLS projects U.S. employment for SOC 51-3091 to grow 0.4% from about 21,600 in 2025 to 21,700 in 2035, with about 2,500 annual openings including replacement needs."
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
-                "limitation": "2024—2034 forecasts are not outcomes; matrix includes self-employment, unlike OEWS wage coverage.",
+                "limitation": "2025–2035 forecasts are not outcomes; matrix includes self-employment, unlike OEWS wage coverage.",
                 "market": "US",
-                "name": "O*NET presents exact BLS 51-3091 2024—2034 projections",
-                "period": "2024—2034",
+                "name": "O*NET presents exact BLS 51-3091 2025–2035 projections",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "51-3091 Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders",
-                "url": "https://www.onetonline.org/link/summary/51-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31825,7 +31788,7 @@
                 "period": "May 2025 OEWS",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "51-3091 Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders",
-                "url": "https://www.bls.gov/news.release/archives/ocwage_05152026.pdf"
+                "url": "https://www.onetonline.org/link/localwages/51-3091.00"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31949,6 +31912,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Employer five advertises a baking oven worker at CNY 3,500–5,500 per month and asks for a valid food industry health certificate. Packaging and processing are separate listings."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "roast-taian",
+                "limitation": "A historical posting only, not a current vacancy or national estimate.",
+                "market": "Mainland China",
+                "name": "Shandong Taishan Food Group: baking oven worker",
+                "period": "2026-05",
+                "publisher": "Tai’an Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.taian.gov.cn/art/2026/5/9/art_167727_10321382.html?xxgkhide=1"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Employer ten lists four drying room workers at CNY 4,000–5,000 without stating the pay period or equipment."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "roast-jixi",
+                "limitation": "A historical posting only, not a current vacancy or national estimate.",
+                "market": "Mainland China",
+                "name": "Anhui Weixian Foods: drying room worker",
+                "period": "2026-08",
+                "publisher": "Huayang Town Government, Jixi County",
+                "scope": "recruitment_proxy",
+                "url": "https://www.cnjx.gov.cn/Jczwgk/show/3808494.html"
               }
             ]
           },
@@ -34809,6 +34802,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-roast-taian",
+            "posting-roast-jixi"
+          ],
           "sources_note": {
             "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34818,7 +34815,7 @@
           "ui": {
             "ai_heading": "Will AI affect food and tobacco roasting, baking, and drying wages?",
             "driver_heading": "Which industries and directions use this occupation?",
-            "official_heading": "Public recruitment samples (historical, not official statistics)",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Education, common roles, checks (editorial, not wage statistics)",
             "scenario_heading": "Which starting roles do food and tobacco roasting, baking, and drying workers with different education typically take?",
             "scenario_interpretation_label": "Notes and checks",
@@ -35842,7 +35839,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS projections (2024—2034)",
+            "label": "BLS projections (2025–2035)",
             "secondary_value": null,
             "value": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.profile.onet-structured-fields-block.4",
@@ -36607,7 +36604,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Start checking whether food and tobacco roasting, baking, and drying equipment work suits you",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36681,30 +36678,10 @@
               "$link": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.navigation.links.1",
               "block": "navigation",
               "copy_key": "career.item.navigation-links",
-              "entry": "navigation-2",
-              "field": "url"
-            },
-            "label": "MBTI (English)"
-          },
-          {
-            "href": {
-              "$link": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-3",
-              "field": "url"
-            },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Explore my personality preferences"
           },
           {
             "href": {
@@ -36714,7 +36691,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Explore my Big Five traits"
           }
         ]
       },
@@ -36913,41 +36890,38 @@
       },
       {
         "derivation": null,
-        "display_value": "About 20,700 (2024 BLS base through O*NET; matrix includes self-employment)",
+        "display_value": "21,600 people (2025)",
         "fact_id": "us-employment-2025",
         "market": "US",
-        "measure": "Employment size",
-        "occupation_scope": "Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders; 51-3091.00",
-        "period": "2024",
+        "measure": "U.S. employment (2025 base year)",
+        "occupation_scope": "U.S. SOC 51-3091",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary",
-          "bls-matrix-methods"
+          "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Growth below average (about 1%–2%, 2024—2034 BLS through O*NET)",
+        "display_value": "0.4% (2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
-        "measure": "Employment growth",
-        "occupation_scope": "Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders; 51-3091.00",
-        "period": "2024—2034",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "U.S. SOC 51-3091",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary",
-          "bls-matrix-methods"
+          "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Annual openings about 2,400 (2024—2034, mainly replacements)",
+        "display_value": "2,500 per year (including replacement needs)",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
-        "measure": "Average annual openings",
-        "occupation_scope": "Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders; 51-3091.00",
-        "period": "2024—2034",
+        "measure": "U.S. projected annual openings (2025–2035)",
+        "occupation_scope": "U.S. SOC 51-3091",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary",
-          "bls-matrix-methods"
+          "bls-projections-2025-35"
         ]
       },
       {
@@ -37105,6 +37079,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Employer five advertises a baking oven worker at CNY 3,500–5,500 per month and asks for a valid food industry health certificate. Packaging and processing are separate listings.",
+        "fact_id": "posting-roast-taian",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Shandong Taishan Food Group: baking oven worker",
+        "period": "2026-05",
+        "source_refs": [
+          "roast-taian"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Employer ten lists four drying room workers at CNY 4,000–5,000 without stating the pay period or equipment.",
+        "fact_id": "posting-roast-jixi",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Anhui Weixian Foods: drying room worker",
+        "period": "2026-08",
+        "source_refs": [
+          "roast-jixi"
+        ]
       }
     ]
   },
@@ -37131,19 +37129,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "US growth (2024—2034)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "US employment (2024 base)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "US annual openings (2024—2034)"
+        "label": "U.S. projected annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -37157,14 +37155,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders: duties, entry, boundaries, development. Official information distinguishing statistics, proxies, qualification gaps."
+      "text": "See how food and tobacco roasting, baking and drying operators read gauges and check batches. Compare mainland China food postings and U.S. employment data."
     },
     "title": {
       "availability": "available",
       "text": "Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders"
     }
   },
-  "source_content_sha256": "e72432e326f7237b3830507b6955318c4cc4204897bccf26b2350e0881a12a5f",
+  "source_content_sha256": "180e6af4193c9beccf813220b070cfdefd13923fdab737e28d693d82af092f1c",
   "subject": {
     "canonical_slug": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders",
     "name": "Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders",

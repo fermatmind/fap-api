@@ -1283,6 +1283,9 @@
       "item:physical-therapist-assistants-and-aides.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:physical-therapist-assistants-and-aides.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:physical-therapist-assistants-and-aides.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30441,6 +30444,18 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Role A documents responses under a treatment plan. Role B prepares the room and helps with transport. Identify the supervising role and one duty boundary to confirm for each."
+            ]
+          },
+          "id": "physical-therapist-assistants-and-aides.path.work-sample-draft-20261110.1",
+          "title": "Compare physical therapy assistant and aide duties",
+          "type": "notice"
         }
       ]
     },
@@ -36815,6 +36830,13 @@
         "id": "physical-therapist-assistants-and-aides.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "physical-therapist-assistants-and-aides.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37164,7 +37186,7 @@
       "text": "Physical therapist assistants and aides"
     }
   },
-  "source_content_sha256": "ec05bf6f81e59d6a4bce781f7d6bab2d714e6ef0006ae51163dd3ca466b38aab",
+  "source_content_sha256": "e8b5ae3a6b61b9bf9ac171a33dd9275a79f811850cbe986f0f708c4c20300c1d",
   "subject": {
     "canonical_slug": "physical-therapist-assistants-and-aides",
     "name": "Physical therapist assistants and aides",

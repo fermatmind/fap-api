@@ -1478,6 +1478,9 @@
       "item:command-and-control-center-officers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:command-and-control-center-officers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:command-and-control-center-officers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30998,6 +31001,21 @@
           "id": "command-and-control-center-officers.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。虚构民事演练表有协调任务，却有两个单位都被列为最终负责人。写出应向演练组织者核对的责任分工与版本。"
+            ]
+          },
+          "id": "command-and-control-center-officers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核指挥中心桌面演练的任务分派",
+          "type": "notice"
         }
       ]
     },
@@ -37718,6 +37736,13 @@
         "id": "command-and-control-center-officers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "command-and-control-center-officers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38341,7 +38366,7 @@
       "text": "指挥控制中心军官"
     }
   },
-  "source_content_sha256": "65680ca18a935e2043e83fd4d97cdaa1d704925c9b471e7623aae1b188850ec5",
+  "source_content_sha256": "40699f3f1e7d603770e11134e6f55bde74df597a734c56fdd60c7c20989b1ea0",
   "subject": {
     "canonical_slug": "command-and-control-center-officers",
     "name": "指挥控制中心军官",

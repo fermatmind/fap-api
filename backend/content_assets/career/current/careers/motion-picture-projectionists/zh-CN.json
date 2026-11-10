@@ -173,6 +173,9 @@
       "item:motion-picture-projectionists.path.recruitment-sample.8": {
         "status": "pending_mapping"
       },
+      "item:motion-picture-projectionists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:motion-picture-projectionists.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12322,6 +12325,21 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。场次表写字幕版，设备清单列无字幕版，测试记录未标文件版本。写给放映主管一条清晰的交接提示。"
+            ]
+          },
+          "id": "motion-picture-projectionists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "核放映排期和节目版本",
+          "type": "notice"
         }
       ]
     },
@@ -14707,6 +14725,13 @@
         "id": "motion-picture-projectionists.path.recruitment-sample.8",
         "location": "entry_decisions",
         "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "motion-picture-projectionists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14962,7 +14987,7 @@
       "text": "电影放映员"
     }
   },
-  "source_content_sha256": "1c6322252aa74349134df0a82b0925e3d8ad1228c86a3e9ebc7a6bb975022bd1",
+  "source_content_sha256": "4462bac519883ebf72e8a4eb7739d86d9d6ef991fe0d0b1e883fc6e49cac8596",
   "subject": {
     "canonical_slug": "motion-picture-projectionists",
     "name": "电影放映员",

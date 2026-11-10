@@ -155,6 +155,9 @@
       "item:motorboat-operators.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:motorboat-operators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:motorboat-operators.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12996,6 +12999,21 @@
             "authority"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Trip B4 has a headcount that conflicts with the roster and no shoreside contact. State both discrepancies and the person who should receive them. The trip lead makes actual departure decisions under operator procedures."
+            ]
+          },
+          "id": "motorboat-operators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "employment"
+          ],
+          "title": "Check a motorboat departure record",
+          "type": "notice"
         }
       ]
     },
@@ -15471,6 +15489,13 @@
         "id": "motorboat-operators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "motorboat-operators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15664,7 +15689,7 @@
       "text": "Motorboat Operators"
     }
   },
-  "source_content_sha256": "fda38a140623617059220b8b0c4c1ae625bb90b45bd4b16c3091582093990584",
+  "source_content_sha256": "5e42ed4624627fb7849b23f5d93bfba2186e49692cc999cd66769c2027fe03b7",
   "subject": {
     "canonical_slug": "motorboat-operators",
     "name": "Motorboat Operators",

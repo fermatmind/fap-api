@@ -36,7 +36,7 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-current-2025": {
         "status": "pending_mapping"
@@ -45,7 +45,7 @@
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-current-2025": {
         "status": "pending_mapping"
@@ -69,7 +69,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-current-2025": {
         "status": "pending_mapping"
@@ -1551,7 +1551,7 @@
         "status": "pending_mapping"
       },
       "item:barbers-hairstylists-and-cosmetologists.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:barbers-hairstylists-and-cosmetologists.sources.source-card.1": {
         "status": "mapped"
@@ -1602,7 +1602,7 @@
         "status": "mapped"
       },
       "item:barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.22": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.23": {
         "status": "mapped"
@@ -20980,7 +20980,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "accessed_at"
           ],
@@ -20995,10 +20995,10 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "details",
-            0
+            2
           ],
           "source": "item"
         },
@@ -21011,10 +21011,10 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "details",
-            1
+            3
           ],
           "source": "item"
         },
@@ -21027,7 +21027,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "evidence_type"
           ],
@@ -21042,7 +21042,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "limitation"
           ],
@@ -21070,7 +21070,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "name"
           ],
@@ -21085,7 +21085,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "period"
           ],
@@ -21100,7 +21100,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "publisher"
           ],
@@ -21115,7 +21115,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "scope"
           ],
@@ -21130,7 +21130,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "url"
           ],
@@ -22135,7 +22135,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "accessed_at"
           ],
@@ -22150,10 +22150,10 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "details",
-            0
+            2
           ],
           "source": "item"
         },
@@ -22166,10 +22166,10 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "details",
-            1
+            3
           ],
           "source": "item"
         },
@@ -22182,7 +22182,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "evidence_type"
           ],
@@ -22197,7 +22197,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "limitation"
           ],
@@ -22225,7 +22225,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "name"
           ],
@@ -22240,7 +22240,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "period"
           ],
@@ -22255,7 +22255,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "publisher"
           ],
@@ -22270,7 +22270,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "scope"
           ],
@@ -23225,13 +23225,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "One-sentence judgment: hairdressers, hairstylists, and cosmetologists are not “people who just cut according to the picture,” but salon positions that first communicate with and observe the condition of hair and scalp, analyze hair quality and face shape, and then provide styling and care plans: cutting and trimming and shaping hair, shampooing and rinsing and conditioning and drying, bleaching and dyeing and toning, applying water or setting or straightening or permanent waving solutions and pressing curls with curling irons and hot combs and curling wands, massaging and treating the scalp, combing and spraying to set, shaping eyebrows and removing facial hair, and keeping the workbench clean and disinfecting tools such as scissors and combs and maintaining customer information records; it is not suitable for people who only want to improvise by feel, are unwilling to first confirm customer requirements and ask about skin and allergies, and are unwilling to treat tool disinfection, workstation cleaning, and product label verification as part of the job."
+              "Find HS-71 in section 09 and submit both consultation records first."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.quick-decision.fit-decision-checklist.1",
           "source_refs": [
+            "hs71-editor",
             "onet",
-            "onet"
+            "cn-hairdresser"
           ],
           "type": "prose"
         },
@@ -23240,11 +23241,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: you are willing to first repeat back the effect the customer wants and observe the scalp, hair, and skin; you can stay steady in the rhythm of prolonged standing and fine hand control; you take the initiative to verify product labels and contact times and follow the materials and procedures; you are willing to stop and confirm first when a customer changes requirements or a skin or scalp abnormality appears; and you can truthfully record services, products, and exceptions."
+              "Try a paper consultation if you like confirming what the client wants and can pause when product details or work authority are unclear."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.quick-decision.fit-decision-checklist.2",
           "source_refs": [
+            "hs71-editor",
             "onet"
           ],
           "type": "prose"
@@ -23254,13 +23256,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions for pausing investment first: you have not yet completed a full consultation-and-observation—cutting, dyeing, permanent waving, and styling—disinfection and cleaning—recording loop under any supervised conditions, or you can only explain your interest by saying “I like doing styling”; also do not treat having done hair for family and friends or having dyed hair at home as proof that you can independently mix chemical products, handle a customer's skin or scalp abnormality on your own, or independently bear venue hygiene responsibility. Tool disinfection and skin barrier, chemical product and dyeing and permanent waving and formaldehyde exposure control, product label and contact time verification, customer image and health information handling, and practice and salon authorization must be carried out in accordance with the applicable jurisdiction, the competent authority, and employer systems and must leave traceable records; this page does not provide any cutting, dyeing, or permanent waving formulas, contact times, or work instructions."
+              "Check consultation records and authorization to provide a service separately."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
+            "hs71-editor",
             "onet"
           ],
           "type": "prose"
@@ -23270,12 +23271,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education and practice licensure are two different tracks: O*NET lists 39-5012.00 as Job Zone Three (SVP 6.0 to <7.0), and the page “does not publish the percentage at each education level,” listing only three categories (some jobs require a postsecondary certificate, some require a high school diploma or equivalent, and some require having attended college without a degree); the BLS Occupational Outlook Handbook lists the typical entry-level education for this occupational group as a postsecondary nondegree award, with no related work experience required and no on-the-job training, and notes that every U.S. state requires licensure, usually requiring graduation from a state-approved cosmetology or beauty program and passing an examination. Education, occupational training, state practice licensure, employer hiring and salon authorization, and job-level authorization for chemical product and instrument use are different statuses and must be verified item by item according to state and employer and position; this occupation and barbers 39-5011.00 are separate adjacent codes, and licensing scope varies by jurisdiction."
+              "BLS Table 1.2 lists a postsecondary nondegree award as typical for 39-5012 and no typical related experience or on-the-job training. The handbook separately describes state licensure. Verify the license, schooling, examination and service scope with the state authority."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "ep-table",
+            "nbs",
+            "archivists",
             "onet"
           ],
           "type": "prose"
@@ -23285,12 +23288,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: this is a service position that delivers steadily in a rhythm of first communicating and observing and then working through prolonged standing, fine hand control, and chemical exposure, with the core being cutting, dyeing, permanent waving, styling, scalp care, tool disinfection, and records — not an interest in fashion or an imagination about social media."
+              "Try a paper consultation if you like confirming what the client wants and can pause when product details or work authority are unclear."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
+            "hs71-editor",
             "onet"
           ],
           "type": "prose"
@@ -23313,7 +23316,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23347,7 +23349,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -23381,7 +23382,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.2",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23412,7 +23412,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23442,7 +23441,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23452,11 +23450,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Employment and prospects: the BLS data displayed by O*NET give, under this occupation's 39-5012.00 definition, about 595,000 employed in 2025 and about 640,900 in 2035 (2025—2035 +8%, labeled much faster than average (8%)), with about 73,400 job openings per year over the projection period. The corresponding chapter of the BLS Occupational Outlook Handbook is the combined “Barbers, Hairstylists, and Cosmetologists” definition: 670,800 employed in 2025, 2025—2035 +7% (much faster than average), a change of +48,400, and about 80,300 annual openings (mostly from replacement needs); the combined definition covers the three groups of barbers, hairstylists, and cosmetologists and cannot be treated as this occupation's separate definition."
+              "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.onet-structured-fields-block.4",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -23472,7 +23471,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.5",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23482,12 +23480,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Industry distribution and tool signals: the current O*NET industry distribution gives other services (except public administration) 45% and other industries (including retail trade) 55% — the page publishes under the two categories “other services” and “other industries” and does not give a finer industry category breakdown. Sample job titles include Beautician, Beauty Specialist, Cosmetologist, Hair Artist, Hair Dresser, Hair Stylist, Hairdresser, Hairstylist, Lash Technician, and Stylist. On posting technology signals, O*NET lists 6 technology skills and marks them as hot technologies (Microsoft Office, Microsoft Excel, and Microsoft Word each appear at below 1%; Apple iOS, Facebook, and Intuit QuickBooks have no published rates). These come from job posting text and do not represent job adoption rates or degree of automation."
+              "The O*NET 39-5012.00 industry subtable lists other services except public administration 45% and other industries, including retail, 55%. It does not state a statistical year. The handbook’s 2025 employer table separately lists self-employment at 48% and personal care services at 45%."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.onet-structured-fields-block.5",
           "source_refs": [
             "r2-pay-2",
+            "nbs",
             "hr"
           ],
           "type": "prose"
@@ -23502,7 +23501,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23517,8 +23515,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23533,7 +23529,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23548,7 +23543,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23563,7 +23557,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23578,7 +23571,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23593,8 +23585,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23609,7 +23599,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23624,7 +23613,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23639,7 +23627,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23654,7 +23641,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23669,7 +23655,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23684,7 +23669,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23699,7 +23683,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23709,13 +23692,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET lists 39-5012.00 as Job Zone Three (SVP 6.0 to <7.0) and “does not publish the percentage at each education level,” listing only three categories (some jobs require a postsecondary certificate, some require a high school diploma or equivalent, and some require having attended college without a degree); the BLS Occupational Outlook Handbook lists the typical entry-level education for this occupational group as a postsecondary nondegree award, with no related work experience required and no on-the-job training, and notes that every U.S. state requires licensure, usually requiring graduation from a state-approved cosmetology or beauty program and passing an examination. The O*NET training page shows 2,285 related training programs nationwide (Cosmetology / Cosmetologist, General, Hair Styling, Salon / Beauty Salon Management, Permanent Cosmetics / Makeup and Tattooing, Make-Up Artist / Specialist, and other fields), and the Job Zone notes in the occupation summary also list example apprenticeship job titles (Cosmetologist, Hair Stylist). In mainland China, the official tasks and training background of verifiable hairdresser 4-10-03-02 can be reviewed, and specific employers' pre-job training and mentoring must have their conditions verified and must meet the applicable public place hygiene and worker health management requirements."
+              "BLS Table 1.2 lists a postsecondary nondegree award as typical for 39-5012 and no typical related experience or on-the-job training. The handbook separately describes state licensure. Verify the license, schooling, examination and service scope with the state authority."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
+            "ep-table",
             "nbs",
+            "archivists",
+            "onet",
             "nist",
             "cn-hairdresser",
             "cn-hygiene"
@@ -23732,7 +23717,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23747,7 +23731,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23762,7 +23745,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23786,14 +23768,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The occupational profile of the China Employment Training Technical Instruction Center specifies hairdresser 4-10-03-02: using hairdressing tools to design, trim, and create customer hairstyles, including washing, cutting, dyeing and permanent waving, hair setting, and scalp care. It can be compared with the hair services on this page, but it cannot be used to equate one-to-one with all beauty services of U.S. 39-5012. U.S. wages follow the 39-5012 wage-and-salary definition, and the combined BLS OOH chapter also contains an exact occupational sub-table; precise occupational salaries in China are still insufficient, and the industry average serves only as background."
+              "China’s public employment portal describes hairdressing (4-10-03-02), including cutting, styling and hair care. Beauty services are related work. The hairdresser standard lists five skill grades from Grade 5 through Grade 1. Verify these grades, health certification for staff directly serving customers and the operator’s hygiene permit separately."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.24",
           "source_refs": [
+            "cn-hairdresser",
+            "cn-hygiene",
             "onet",
             "nbs",
-            "cn-hairdresser",
             "cn-wages-current"
           ],
           "type": "prose"
@@ -23817,13 +23800,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "On the U.S. side, O*NET does not publish the percentage at each education level and lists only three categories (some jobs require a postsecondary certificate, some require a high school diploma or equivalent, and some require having attended college without a degree); the BLS Occupational Outlook Handbook lists the typical entry-level education as a postsecondary nondegree award and notes that all states require licensure, usually requiring completion of a state-approved program and passing an examination; O*NET lists 2,285 related training programs and example apprenticeship job titles (Cosmetologist, Hair Stylist). The official profile of the Chinese hairdresser can serve as a task and training comparison; specific employers' pre-job training and mentoring must be verified separately and must meet the applicable public place hygiene and worker health management requirements, and specific education and experience requirements are set by the employer."
+              "BLS Table 1.2 lists a postsecondary nondegree award as typical for 39-5012 and no typical related experience or on-the-job training. The handbook separately describes state licensure. Verify the license, schooling, examination and service scope with the state authority."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
+            "ep-table",
             "nbs",
+            "archivists",
+            "onet",
             "nist",
             "cn-hairdresser",
             "cn-hygiene"
@@ -23854,7 +23839,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23878,12 +23862,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The work environment and tools and chemicals must meet applicable hygiene and safety requirements (cleaning and disinfecting tools, handling contaminated items and chemicals and waste, cleaning workstations and floors, ventilation and lighting, heated tool protection, and protection against prolonged standing and repetitive motions). O*NET work context shows 88% continuously or almost continuously make repetitive motions, 71% continuously or almost continuously stand, 30% continuously or almost continuously bend or twist the body, 94% have face-to-face discussions every day, 88% are in contact with others continuously, 88% work very close (within touching distance) to others, 42% are exposed to contaminants every day, 38% are exposed to minor burns, cuts, bites, or stings every day, 26% are in hazardous conditions every day, 17% are exposed to disease or infections every day, and 74% wear common protective or safety equipment every day; this page does not constitute dyeing or permanent waving prescriptions, disinfection steps, or chemical handling instructions."
+              "China’s public-place hygiene regulation lists barbershops and beauty salons in Article 2. Article 6 assigns hygiene management and training to the operator, Article 7 requires health certification for staff directly serving customers, and Article 8 requires applicable operators to apply for a hygiene permit before opening. These requirements are separate from occupational skill grades."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.30",
           "source_refs": [
-            "onet",
+            "cn-hygiene",
             "onet"
           ],
           "type": "prose"
@@ -23898,7 +23882,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23913,7 +23896,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23928,7 +23910,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23943,7 +23924,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23995,10 +23975,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -24013,8 +23989,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24029,10 +24003,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24047,7 +24017,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24062,7 +24031,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24077,7 +24045,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24092,7 +24059,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24121,7 +24087,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24136,7 +24101,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24151,7 +24115,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24180,7 +24143,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.19",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24195,7 +24157,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24210,7 +24171,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24239,7 +24199,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24254,7 +24213,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24269,7 +24227,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24298,7 +24255,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24313,7 +24269,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24328,7 +24283,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24357,7 +24311,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24372,7 +24325,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24387,7 +24339,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24464,10 +24415,10 @@
                 "url": "https://www.onetonline.org/link/industry/39-5012.00"
               },
               {
-                "entity": "O*NET 39-5012.00 Occupation Summary (Employment and Projections Fields)",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 39-5012.00 National Wage Percentiles",
@@ -24488,22 +24439,22 @@
                 "url": "https://www.onetonline.org/link/details/39-5012.00"
               },
               {
-                "entity": "O*NET 39-5012.00 Technology List (Hot Technology Signals)",
+                "entity": "O*NET job posting tools",
                 "id": "link-10",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/hot_tech/39-5012.00"
               },
               {
-                "entity": "O*NET 39-5012.00 national employment trends 2025—2035",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "International Labour Organization, Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140)",
+                "entity": "O*NET industry subtable",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.onetonline.org/link/industry/39-5012.00"
               },
               {
                 "entity": "O*NET 39-5012.00 Occupation Summary",
@@ -24524,10 +24475,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET 39-5012.00 national employment trends 2025—2035",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "OSHA《Hair Salons: Facts about Formaldehyde in Hair Products》",
@@ -24551,13 +24502,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -24572,7 +24516,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24587,7 +24530,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24602,7 +24544,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24617,7 +24558,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24632,7 +24572,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24647,7 +24586,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24662,8 +24600,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.16",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24678,8 +24614,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24689,7 +24623,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: assistance uses such as appointment drafts, record organization, style references, and inventory summaries can be evaluated, verifying data, permissions, and output first. Insufficient evidence: no AI adoption rate, productivity, or job replacement results for this occupation were obtained this time; task research is not treated as an on-site safety determination. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Editorial suggestion: assistance uses such as appointment drafts, record organization, style references, and inventory summaries can be evaluated, verifying data, permissions, and output first. Insufficient evidence: no AI adoption rate, productivity, or job replacement results for this occupation were obtained this time; task research is not treated as an on-site safety determination. AI task-impact estimate 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.18",
@@ -24737,7 +24671,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24752,7 +24685,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24832,11 +24764,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Used to explain the industry distribution of this occupation; cannot be used to infer industry wages or employment size."
+              "Industry subtable shares are 45% and 55%. No statistical year is given."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.28",
           "source_refs": [
+            "r2-pay-2",
             "onet"
           ],
           "type": "prose"
@@ -24846,11 +24779,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-5012.00 Occupation Summary (Employment and Projections Fields)"
+              "BLS Table 1.2: Employment and projections"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.29",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -24908,7 +24842,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24923,7 +24856,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24938,7 +24870,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24953,7 +24884,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24968,7 +24898,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24983,7 +24912,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24998,7 +24926,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25207,11 +25134,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-5012.00 Occupation Summary (Employment and Projections Fields)"
+              "BLS Table 1.2: Employment and projections for 39-5012"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.54",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -25236,11 +25164,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The BLS data displayed by O*NET give, under this occupation's 39-5012.00 definition, about 595,000 employed in 2025 and about 640,900 in 2035 (2025—2035 +8%, much faster than average (8%)), with about 73,400 job openings per year over the projection period."
+              "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.56",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -25293,11 +25222,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The study combines task data, expert judgment, and model predictions to estimate potential occupational exposure to generative AI; it is not an on-the-job usage rate, a technology effect, or a layoff survey for this occupation."
+              "Industry subtable shares are 45% and 55%. No statistical year is given."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.60",
           "source_refs": [
+            "r2-pay-2",
             "ilo"
           ],
           "type": "prose"
@@ -25337,11 +25267,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Overall employment projections, not AI attribution: U.S. 39-5012 is projected to grow 8% in 2025—2035, with 73,400 annual openings. The ILO task exposure study does not measure this occupation's adoption rate, layoff rate, or individual employment outcomes."
+              "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.63",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "ilo"
           ],
@@ -25372,7 +25303,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25402,7 +25332,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25417,7 +25346,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25441,11 +25369,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The BLS data displayed by O*NET give, under this occupation's 2025—2035 definition, +8% (much faster than average (8%)) and about 73,400 job openings per year over the projection period; this definition describes the occupational group and does not represent individual hiring probability."
+              "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.70",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -25456,12 +25385,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET Occupation Summary (Employment and Projections Fields)"
+              "BLS Table 1.2: Employment and projections"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -25476,7 +25405,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25500,11 +25428,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The sources reviewed on this page do not give a year in which positions disappear. The 2025—2035 overall employment projection is growth of 8%, not an AI attribution; a replacement date cannot be derived from task exposure or projected growth."
+              "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.74",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "ilo"
           ],
@@ -25520,7 +25449,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25535,7 +25463,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25550,7 +25477,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25579,7 +25505,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.79",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25594,7 +25519,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25609,7 +25533,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25624,7 +25547,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.82",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25639,7 +25561,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25654,7 +25575,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.84",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25669,7 +25589,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25684,7 +25603,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.86",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25699,7 +25617,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.87",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25728,7 +25645,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25743,7 +25659,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.90",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25758,7 +25673,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25773,7 +25687,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.92",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25788,7 +25701,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.93",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25845,7 +25757,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25902,7 +25813,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26016,7 +25926,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26073,7 +25982,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26186,7 +26094,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26201,7 +26108,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26418,11 +26324,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: a precise national occupational wage distribution has still not been obtained; the two above items are industry average background."
+              "Historical Mainland job listings: hair care and beauty services"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "cn-wages-current"
           ],
           "type": "prose"
@@ -26432,11 +26340,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The industry averages are listed separately for private and non-private units and do not replace individual wages; comparison must follow the city, contract, employer, and actual compensation conditions."
+              "Mile City’s historical recruitment bulletin No. 26 of 2026 lists ten hair-care workers for Yixin Hair Salon in Mile, with junior secondary education or higher and CNY 3,000–5,000 per month. The notice does not establish haircutting or coloring duties."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "cn-wages-current"
           ],
           "type": "prose"
@@ -26451,7 +26361,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26480,7 +26389,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26495,7 +26403,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26510,7 +26417,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26525,7 +26431,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26540,7 +26445,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26555,7 +26459,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26570,7 +26473,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26585,7 +26487,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26600,7 +26501,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26615,7 +26515,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26630,7 +26529,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26645,7 +26543,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26660,7 +26557,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26690,7 +26586,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26720,7 +26615,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26763,7 +26657,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26773,12 +26666,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scenario comparisons require the employer type and employment arrangement to match; this page does not provide a precise monthly salary range for this occupation."
+              "Tongchuan’s July 2026 employment bulletin lists 20 beauty therapist openings at Meizhikou Salon, with high school or higher and at least one year of experience. It quotes CNY 4,000–6,000 without a pay period in the cell. This is a beauty role, not a hairstylist’s monthly wage."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "onet"
           ],
           "type": "prose"
@@ -26793,7 +26687,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26822,7 +26715,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26846,11 +26738,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national monthly salary distribution for this combined occupation in mainland China was obtained; the official hairdresser occupational entry does not provide national wage percentiles."
+              "These listings cover different salons, jobs and pay definitions. They do not establish national hairstylist wages."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "cn-hairdresser"
           ],
           "type": "prose"
@@ -26902,7 +26796,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no official or verifiable source supports a monthly salary range for hairdressers and cosmetologists in other cities."
+              "This page did not obtain comparable pay quotes from other cities for the same role and pay period."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.54",
@@ -26981,13 +26875,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 39-5012.00 National Wage Percentiles｜https://www.onetonline.org/link/localwages/39-5012.00; O*NET 39-5012.00 Occupation Summary (Employment and Projections Fields)｜https://www.onetonline.org/link/summary/39-5012.00; O*NET 39-5012.00 Industry Distribution｜https://www.onetonline.org/link/industry/39-5012.00"
+              "O*NET 39-5012.00 National Wage Percentiles｜https://www.onetonline.org/link/localwages/39-5012.00; BLS Table 1.2: Employment and projections｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET 39-5012.00 Industry Distribution｜https://www.onetonline.org/link/industry/39-5012.00"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -27154,11 +27047,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The number of people employed in this occupation as given by BLS for 2025 and displayed by O*NET; the page does not state that these data are taken from another occupation.; O*NET 39-5012.00 Occupation Summary (Employment and Projections Fields)｜https://www.onetonline.org/link/summary/39-5012.00"
+              "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%.; BLS Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -27184,11 +27078,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "For 2025—2035, employment in this occupation 39-5012 is projected to grow 8%; although the OOH is organized as a combined chapter, its employment table lists this occupation separately at 595,000 → 640,900. The combined occupational group grows 7%, and the two cannot be mixed."
+              "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%.; BLS Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -27214,11 +27109,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This is the annual job openings definition over the projection period as shown on the O*NET page, mostly from replacement needs (the combined chapter separately gives about 80,300 annual openings); it is not the net increase in positions and does not constitute an individual hiring guarantee.; O*NET 39-5012.00 Occupation Summary (Employment and Projections Fields)｜https://www.onetonline.org/link/summary/39-5012.00"
+              "BLS Table 1.2 projects about 73,400 annual openings for 39-5012, including growth and replacements. The combined group separately has about 80,300 annual openings.; BLS Table 1.2: Employment and projections｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -27244,11 +27140,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Direct answer: the U.S. public data give this occupation's hourly and annual wage percentiles and the 2025—2035 employment and projections; what can be verified are the percentiles, median, and projection figures, along with their respective definitions and data periods."
+              "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -27334,7 +27231,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27373,7 +27269,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "17.39 USD / hour (median, May 2025)"
+              "17.39 USD/hour"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.35",
@@ -27387,7 +27283,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS OOH Pay table lists the hourly median for 39-5012 in the personal care services industry; this is an industry-level statistic for this occupation, not income for all salons or the self-employed."
+              "May 2025 industry median hourly wage for 39-5012."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.36",
@@ -27415,7 +27311,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "14.84 USD / hour (median, May 2025)"
+              "14.84 USD/hour"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.38",
@@ -27429,7 +27325,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS OOH Pay table lists the hourly median for 39-5012 in the retail trade industry, which cannot be generalized to other industries or an individual's take-home wage."
+              "May 2025 industry median hourly wage for 39-5012."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.39",
@@ -27532,7 +27428,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27576,7 +27471,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27605,7 +27499,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27673,19 +27566,19 @@
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Ability Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Shampooers",
@@ -27766,20 +27659,15 @@
                 "url": "https://www.onetonline.org/link/industry/39-5012.00"
               },
               {
-                "entity": "O*NET 39-5012.00 Occupation Summary (Employment and Projections Fields)",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -27794,7 +27682,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.2",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27824,7 +27711,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27883,7 +27769,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27912,7 +27797,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.riasec-fit-block.9",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27969,7 +27853,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28084,7 +27967,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28142,7 +28024,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28173,7 +28054,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -28216,7 +28096,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28231,7 +28110,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28246,7 +28124,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28261,7 +28138,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28276,7 +28152,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28291,7 +28166,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28306,7 +28180,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28321,7 +28194,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28336,7 +28208,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28351,7 +28222,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28366,7 +28236,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28381,7 +28250,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28396,7 +28264,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28411,8 +28278,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28427,8 +28292,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.41",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28443,8 +28306,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.42",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28459,7 +28320,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28474,7 +28334,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28489,7 +28348,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28504,7 +28362,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28519,7 +28376,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28534,7 +28390,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28563,7 +28418,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28592,7 +28446,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28607,7 +28460,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28650,7 +28502,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28665,7 +28516,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.57",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28841,19 +28691,15 @@
                 "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               },
               {
-                "entity": "Regulations on the Administration of Public Place Hygiene, 2016 historical version (the relevant obligations in Articles 2, 6, and 7 are consistent with the 2024 version)",
+                "entity": "China public-place hygiene regulation (third amendment, 2024)",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=785"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1755"
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -28868,8 +28714,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.8",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28884,8 +28728,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28932,7 +28774,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28947,7 +28788,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28962,7 +28802,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28987,12 +28826,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Dyeing, permanent waving, setting, and smoothing products that contain formaldehyde or release it when heated may cause respiratory and eye irritation and skin allergies, and the risk of long-term exposure is higher."
+              "U.S. OSHA warns that some hair-smoothing products contain or can release formaldehyde during use. Exposure can irritate the eyes and airways and can cause skin sensitization."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29021,7 +28859,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29079,7 +28916,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29109,7 +28945,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29138,7 +28973,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29168,7 +29002,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29183,7 +29016,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29198,7 +29030,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29228,7 +29059,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29238,12 +29068,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Carry out services, tool disinfection, and exception handling according to the applicable jurisdiction and the competent authority and employer authorization; on the U.S. side, OSHA requires salons to conduct air testing and provide ventilation, protection, and training under the formaldehyde and hazard communication standards, and the FDA states that legal responsibility for product and ingredient safety rests with the cosmetics company and that products are managed according to the distinction between cosmetics and drugs; when a skin or scalp abnormality occurs or the situation exceeds the scope of practice, escalate according to procedure and advise seeking medical care."
+              "Check shop procedures and your authorization. U.S. OSHA formaldehyde and hazard communication standards apply to covered employers using relevant smoothing products. Pause and refer to the responsible person if a scalp concern arises, product identity is unclear or the request exceeds the service scope."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29258,7 +29087,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29355,7 +29183,7 @@
             "column_labels": [
               "Position direction",
               "Entry tasks",
-              "Verification suggestions for employer requirements",
+              "Ask the employer",
               "Evidence that can be submitted with zero experience",
               "Boundaries that need to be distinguished"
             ],
@@ -29363,36 +29191,36 @@
               [
                 "Hair position in a chain salon",
                 "Under supervision, complete customer communication, cutting, and styling according to salon standards, and complete tool cleaning and disinfection and records according to procedure.",
-                "Editorial verification suggestion: verify requirements confirmation, cutting and styling consistency, and the degree of hygiene and disinfection compliance with the target employer; practice licensure and job eligibility are determined by the jurisdiction and salon rules.",
-                "Submit a service record containing a fictional customer request form, a sectioning diagram, product label verification, and disinfection handling notes, without using real customer data or photographs.",
+                "Ask the employer about training, services and licenses.",
+                "For HS-71, submit two consultation records and a one-page handoff.",
                 "A salon position does not determine hygiene systems or product procurement; matters involving products and contact times and skin abnormalities must be handled by responsible personnel according to procedure."
               ],
               [
                 "Dyeing, permanent waving, and styling specialist position",
                 "Take on bleaching and dyeing, permanent waving, and heated tool styling projects within the authorized scope, operating according to product instructions and contact times and asking about skin and allergies.",
-                "Editorial verification suggestion: verify color and formula theory, skin assessment, and exception handling and process monitoring and recording ability with the target employer.",
-                "Submit a fictional write-up containing the objective, the reasons for product and formula selection, skin and allergy inquiry, process records, and the assessment conclusion.",
+                "Ask the employer about training, services and licenses.",
+                "For HS-71, submit two consultation records and a one-page handoff.",
                 "Chemical product mixing, instrument use, and authorization scope must follow jurisdiction and salon rules; a specialist position does not mean you may handle skin and scalp diseases beyond scope."
               ],
               [
                 "Scalp and skin care position",
                 "Provide scalp massage and treatment and head care treatments as authorized, and advise the customer to seek medical care when chronic or infectious scalp problems are found.",
-                "Editorial verification suggestion: verify observation and assessment, care technique, and referral and recording and customer communication ability with the target employer.",
-                "Submit a fictional care record containing observation items, a care plan, and referral and recording requirements.",
+                "Ask the employer about training, services and licenses.",
+                "For HS-71, submit two consultation records and a one-page handoff.",
                 "Medical treatment must be undertaken by clinically authorized personnel; a care position does not mean you may make a medical diagnosis or provide treatment."
               ],
               [
                 "Salon reception and front desk position",
                 "Arrange appointments and reception and settlement and supply display and inventory, and coordinate with stylists on service order and customer communication.",
-                "Editorial verification suggestion: verify appointment and scheduling, cash register and records, and customer communication and sales coordination ability with the target employer.",
-                "Submit a fictional plan containing appointments and scheduling, charging and refunds and records, and sales coordination.",
+                "Ask the employer about training, services and licenses.",
+                "For HS-71, submit two consultation records and a one-page handoff.",
                 "Prices, promises, and refunds must be within the scope of salon authorization; this page does not provide business instructions."
               ],
               [
                 "Mentoring and salon coordination position",
                 "Arrange shifts and division of labor, mentor new hires, maintain hygiene and disinfection and product and ventilation procedures, and handle customer dissatisfaction and exceptions.",
-                "Editorial verification suggestion: verify scheduling and mentoring and exception handling and record review ability with the target employer.",
-                "Submit a fictional plan containing shift and division of labor, hygiene and product and ventilation checks, exception handling, and improvement suggestions.",
+                "Ask the employer about training, services and licenses.",
+                "For HS-71, submit two consultation records and a one-page handoff.",
                 "Management and scope-of-practice decisions must be made according to jurisdiction and salon procedures; this page does not provide management instructions."
               ]
             ]
@@ -29467,42 +29295,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional materials package: a customer request form, a sectioning diagram and product label verification sheet, a skin and allergy inquiry and stopping conditions record sheet, and a tool cleaning and disinfection record sheet.",
-                  "All materials are fictional and contain no real customer data or photographs, shop client data, or internal standards documents.",
-                  "All materials and scenarios are fictional, and real customer data, photographs, shop client data, or internal standards documents must not be used."
+                  "HS-71 fictional salon consultation. S1 the booking is for a trim; the client also asks about coloring. In this exercise, an added service requires product identification, client confirmation and review by the responsible staff member.",
+                  "S2 the proposed product is described only as “dark brown,” with no verifiable product number. The record contains no authorization or evidence that coloring took place.",
+                  "S3 original: no matching product record. Variant: only S3 changes. A product record supplies a verifiable number; confirmation of the added service and staff review are still missing."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "For a fictional service, write clearly the requirements confirmation and the length and outline baseline, product label and ingredient and contact time verification, skin and allergy inquiry and stopping conditions, process checkpoints and result confirmation, tool cleaning and disinfection and disposable handling and charging and open items, and which steps require review and which require authorization.",
-                  "Complete within 90 minutes; consulting public general hygiene and product safety materials is allowed, but real customer data must not be used and no chemical treatment may be performed on a real person.",
-                  "In the record, write the customer requirements and sectioning and product label and contact time verification, skin and allergy inquiry and stopping conditions, tool cleaning and disinfection handling, and charges and customer feedback separately, and mark the parts that need review."
+                  "Separate the booking and the added request.",
+                  "For each version, list confirmed and open items and the receiver.",
+                  "Submit both consultation records and a one-page handoff citing S1–S3 and naming the receiver."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First confirm the customer requirements and the condition of products, tools, and workstation, then provide the service, disinfect, and record according to procedure, and finally write the conclusions and open items.",
-                  "Write the customer requirements and sectioning, products and contact times, skin and allergy inquiry, and tool cleaning and disinfection handling and result retrospective separately, and mark anything uncertain as requiring review.",
-                  "After completion, ask an experienced person to review the requirements confirmation and the product and contact time and disinfection handling conclusions, and retain the reasons for revisions."
+                  "Complete both versions independently.",
+                  "Separate the request, product identification and authorization.",
+                  "Open “HS-71 reference (open after submitting)” after submitting."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "The exercise does not constitute dyeing or permanent waving prescriptions, contact times, or disinfection step instructions and cannot replace the applicable jurisdiction and salon authorization requirements.",
-                  "Do not come into contact with real customers or operate real dyeing and permanent waving chemicals and heated tools during the exercise; work involving chemicals, ventilation, skin barrier, and abnormal customer conditions must be handled by authorized personnel according to procedure.",
-                  "The exercise does not replace the applicable jurisdiction and salon authorization requirements and does not constitute any dyeing or permanent waving prescriptions, contact times, or disinfection step instructions; no chemical treatment may be performed on a real person during the exercise."
+                  "Use fictional paper records only.",
+                  "Do not handle clients, tools or products.",
+                  "Do not practice mixing, coloring, perming or medical aesthetics."
                 ]
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "hs71-editor"
           ],
-          "title": "Low-risk practice materials and tasks",
+          "title": "HS-71: Salon consultation record check",
           "type": "cards"
         },
         {
@@ -29513,37 +29341,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Job requirements checklist: education, occupational training, state practice license and renewal, salon pre-job training, salon task authorization (including whether it covers bleaching and dyeing, permanent waving, and instrument services), and hygiene and chemicals and ventilation and customer information protection training.",
-                  "Note the source, data period, and jurisdiction for each item; leave items that cannot be verified blank and mark them as insufficient evidence, and do not fill them in with speculation.",
-                  "List “education,” “occupational training,” “state practice license,” “salon task authorization,” and “hygiene and chemicals and information protection training” separately to avoid conflating them."
+                  "Write both consultation records.",
+                  "Cite S1–S3.",
+                  "Mark confirmations still missing."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Ask an experienced person to review your service record, focusing on whether requirements confirmation and sectioning, product label and contact time verification, skin and allergy inquiry and stopping conditions, and tool cleaning and disinfection handling and result retrospective are written clearly item by item.",
-                  "Keep the review comments and the reasons for revisions together as evidence of whether you can accept review."
+                  "Write a one-page handoff.",
+                  "Name the receiver."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "One-page retrospective: write the service and the customer requirements, your own judgments, the parts that were corrected, and the parts that are still uncertain.",
-                  "Hand the retrospective to peers and supervisors for review, and retain the review comments and the reasons for revisions."
+                  "Record which evidence changed.",
+                  "Separate confirmed evidence from authority."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool use note: if appointment, customer management, record, or style visualization tools are used, note the tool name and version, the inputs and basis, and the reasons for manual edits.",
-                  "Handling customer image and health information requires prior authorization, and the access scope, retention period, and destruction arrangements must be recorded."
+                  "Check the reference after submitting.",
+                  "Do not handle products."
                 ]
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "hs71-editor"
           ],
           "title": "Preparation materials that can be submitted",
           "type": "cards"
@@ -29593,7 +29421,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.interview-probation.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "title": "Interview and probation period assessment",
@@ -29607,57 +29434,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Occupational and boundary reading: read O*NET 39-5012.00 and the public materials of the OSHA salon formaldehyde page and the FDA cosmetics Q&A, and write clearly the differences between cutting, dyeing, permanent waving, and styling, tool disinfection and skin barrier, product labels and contact times, and practice and salon authorization.",
-                  "Output: a one-page terminology and process comparison table, noting the source of each item."
+                  "Read S1–S3.",
+                  "Evidence index"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Customer communication exercise: for a fictional customer, write clearly the question sequence for requirements confirmation and hair quality and face shape observation and explanation of the feasible scope.",
-                  "Output: a requirements confirmation and plan recommendation record."
+                  "List both services.",
+                  "Request comparison"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Sectioning and cutting exercise: for a fictional request form, write clearly the sectioning, length baseline, symmetry checks, and basis for adjustments.",
-                  "Output: a cutting and shaping write-up."
+                  "Check the S2 product field.",
+                  "Open item"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Dyeing and permanent waving and product verification exercise: for a fictional case, write clearly product label and ingredient and contact time verification, process monitoring, and stopping conditions.",
-                  "Output: a product verification and process record."
+                  "Compare the S3 versions.",
+                  "Evidence change"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Tool disinfection and workstation cleaning exercise: for a fictional tool list, write clearly the cleaning and disinfection process, handling of contaminated items and chemicals, and ventilation and protection points.",
-                  "Output: a cleaning and disinfection and ventilation record."
+                  "Draft the handoff and name the receiver.",
+                  "Handoff draft"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Review-style self-questioning: ask an experienced person to challenge your requirements confirmation and your product and disinfection conclusions, and record what was corrected.",
-                  "Output: review comments and a revision explanation."
+                  "Submit both consultation records and a one-page handoff first.",
+                  "Both records and handoff"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Final retrospective: decide whether to continue, pause, or change direction, and write clearly the basis and the parts that are still uncertain.",
-                  "Output: a one-page decision write-up with an evidence list attached."
+                  "Open “HS-71 reference (open after submitting)”.",
+                  "Check the difference"
                 ]
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "hs71-editor"
           ],
           "title": "Seven-day experience output",
           "type": "timeline"
@@ -29667,18 +29494,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: you completed the seven-day exercise and found that you can sustain investment in customer communication, cutting, disinfection, and records.",
-              "Continue: you can accept prolonged standing, repetitive fine movements, continuous customer contact, chemical exposure, and evening and weekend schedules, and you are willing to disinfect and ventilate according to procedure and accept review.",
-              "Pause: you only want to improvise by feel and are unwilling to first confirm customer requirements and ask about skin and allergies.",
-              "Pause: you treat “it looks about right” as completing the service, or you skip procedures and authorization on tool disinfection and chemicals and ventilation protection.",
-              "Change direction: if you prefer cutting, shaving, and beard trimming, compare the barber direction.",
-              "Change direction: if you prefer shampooing and preparation and assistance, compare the shampooer direction.",
-              "Insufficient information: if you have no supervised cutting or dyeing and permanent waving experience at all, gain those two first before deciding."
+              "Continue if you can confirm the booking and added request.",
+              "Continue if you can record product evidence and authorization separately.",
+              "Pause if you confuse an inquiry with confirmation.",
+              "Pause if you would proceed with evidence missing.",
+              "Compare basic styling roles.",
+              "Compare nonmedical beauty services.",
+              "Check actual training separately."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "hs71-editor"
           ],
           "title": "Judgment after seven days",
           "type": "list"
@@ -29719,7 +29546,7 @@
                 "Occupational training (Cosmetology / Hair Styling fields)",
                 "People who want to obtain a license and improve their skill starting point",
                 "Determines whether you can meet the prerequisites for a state-approved program and examination.",
-                "The BLS Occupational Outlook Handbook notes that all states require licensure, usually requiring graduation from a state-approved cosmetology or beauty program and passing an examination, so this training is usually a necessary pathway.",
+                "The BLS handbook describes a state-approved course and exam as the usual path. Check with the state where you intend to work.",
                 "The O*NET training page lists 2,285 related training programs nationwide (including certificates of less than one year, certificates of one to two years, and associate degree programs).",
                 "Complete according to the course cycle.",
                 "Completing training does not equal obtaining a license, nor does it equal salon task authorization."
@@ -29729,7 +29556,7 @@
                 "People practicing this occupation in the United States",
                 "Determines whether you can legally practice and provide beauty services to customers.",
                 "This is a statutory requirement: the BLS Occupational Outlook Handbook notes that every U.S. state requires barbers and hair and beauty workers to be licensed.",
-                "Must complete a state-approved program and pass an examination, and renew the license as required by the state.",
+                "Typically, complete a state-approved program and pass an examination. Check renewal and reciprocity routes with the state authority.",
                 "Maintain according to the state authority's arrangements and the license validity period.",
                 "Licenses have state and scope-of-practice restrictions, and practicing across states must be verified separately; the licensing scope of barbers 39-5011.00 may differ from this occupation."
               ],
@@ -29749,7 +29576,7 @@
                 "This page has not obtained evidence of their effect on job level, promotion, or hiring; specific employer recognition must be verified separately.",
                 "The O*NET certification page lists 3: Certified Aesthetic Laser Operator, Certified Laser Hair Removal Supervisor (National Council on Laser Certification), and Cosmetology for Career-Technical Education (Safety and Pollution Prevention).",
                 "Maintain according to the issuing body's arrangements and the certificate validity period.",
-                "A certification does not equal a state practice license or employer appointment and is not recognized by all employers."
+                "Certification does not substitute for a state license. Confirm recognition with the specific employer."
               ],
               [
                 "Mainland China side: venue hygiene and worker health management requirements",
@@ -29799,18 +29626,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Job posting sample note: this section does not cite specific employers' job postings, only the items to focus on when verifying; job titles appearing in public channels include hairdresser, hairstylist, cosmetologist, hair cutter, dyeing and permanent waving specialist, stylist, scalp care specialist, hairdressing assistant, shampooer, and so on.",
-              "Checklist: whether the position is in a chain salon, independent salon, community hair salon, or hotel, resort, and comprehensive beauty establishment; whether a state practice license and salon task authorization are required (and whether they cover bleaching and dyeing and permanent waving and instrument services); the compensation method (base salary, commission, and tips) and shift and weekend arrangements; and the chemicals and ventilation and customer image and health information protection training requirements."
+              "Mile City’s historical recruitment bulletin No. 26 of 2026 lists ten hair-care workers for Yixin Hair Salon in Mile, with junior secondary education or higher and CNY 3,000–5,000 per month. The notice does not establish haircutting or coloring duties.",
+              "Tongchuan’s July 2026 employment bulletin lists 20 beauty therapist openings at Meizhikou Salon, with high school or higher and at least one year of experience. It quotes CNY 4,000–6,000 without a pay period in the cell. This is a beauty role, not a hairstylist’s monthly wage."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "onet"
           ],
-          "title": "Job posting verification",
+          "title": "Historical Mainland China job examples",
           "type": "notice"
         },
         {
@@ -29837,18 +29663,15 @@
                 "url": "https://www.onetonline.org/link/localtraining/39-5012.00"
               },
               {
-                "entity": "Regulations on the Administration of Public Place Hygiene, 2016 historical version (the relevant obligations in Articles 2, 6, and 7 are consistent with the 2024 version)",
+                "entity": "China public-place hygiene regulation (third amendment, 2024)",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=785"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1755"
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -29863,7 +29686,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29878,7 +29700,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29907,7 +29728,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29936,7 +29756,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29965,7 +29784,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30011,8 +29829,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.21",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30115,7 +29931,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30144,7 +29959,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30159,7 +29973,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30188,7 +30001,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30217,7 +30029,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30232,7 +30043,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30261,7 +30071,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30290,7 +30099,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30305,7 +30113,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30334,7 +30141,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30363,7 +30169,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30378,7 +30183,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30407,7 +30211,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30436,7 +30239,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30451,7 +30253,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.51",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30480,7 +30281,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30509,7 +30309,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30524,7 +30323,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30553,7 +30351,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.58",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30582,7 +30379,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.60",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30597,7 +30393,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30626,7 +30421,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.63",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30655,7 +30449,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.65",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30670,7 +30463,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.66",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30699,7 +30491,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30728,7 +30519,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.70",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30743,7 +30533,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.71",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30772,7 +30561,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.73",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30801,7 +30589,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30816,7 +30603,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.76",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30845,7 +30631,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.78",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30874,7 +30659,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30889,7 +30673,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30918,7 +30701,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.83",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30947,7 +30729,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30962,7 +30743,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.86",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31007,19 +30787,19 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 39-5012.00 national employment trends 2025—2035",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 39-5012.00 national employment trends 2025—2035",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "National Bureau of Statistics, Average Annual Wages of Urban Unit Employees in 2025",
+                "entity": "NBS: 2025 average annual wages of urban unit employees",
                 "id": "link-5",
                 "relation": "career.source",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
@@ -31082,9 +30862,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -31094,11 +30871,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Direct answer: the BLS data displayed by O*NET give, under this occupation's 39-5012.00 definition, about 595,000 employed in 2025 and about 640,900 in 2035 (+8%, much faster than average (8%)), with about 73,400 job openings per year over the projection period. The page does not state that these data are taken from another occupation. The corresponding chapter of the BLS Occupational Outlook Handbook is the combined “Barbers, Hairstylists, and Cosmetologists” definition (670,800 employed in 2025, 2025—2035 +7%), and the two cannot be mixed."
+              "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.8",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -31138,11 +30916,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The number of people employed in this occupation as given by BLS for 2025 and displayed by O*NET; the page does not state that these data are taken from another occupation."
+              "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.11",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -31181,11 +30960,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "U.S. hairdressers, hairstylists, and cosmetologists 39-5012"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.14",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -31195,11 +30975,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "595,000 people"
+              "595,000 jobs"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.15",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -31239,11 +31020,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS classifies this occupation under the 39-5012.00 definition as much faster than average (8%), with about 73,400 job openings per year over the projection period; the combined chapter of the BLS Occupational Outlook Handbook separately gives 2025—2035 +7% and about 80,300 annual openings, which is the combined definition for the three groups of barbers, hairstylists, and cosmetologists. Demand is also affected by population, consumption, venue rents, platform customer acquisition, repeat business, fashion cycles, and the self-employment share; employment growth cannot guarantee an individual's customer base, commission, or profit."
+              "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.18",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -31254,11 +31036,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "This is a U.S. overall employment projection, not an AI attribution; it does not represent Chinese demand, individual hiring probability, or salon customer base."
+              "Annual openings include growth and replacements and differ from the net increase."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.19",
           "source_refs": [
+            "ep-table",
             "ep-current"
           ],
           "type": "prose"
@@ -31282,11 +31065,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "U.S. hairdressers, hairstylists, and cosmetologists 39-5012"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.21",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -31296,11 +31080,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Much faster than average (8%; about 73,400 annual job openings)"
+              "7.7%, about 73,400 annual openings"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.22",
           "source_refs": [
+            "ep-table",
             "ep-current"
           ],
           "type": "prose"
@@ -31486,7 +31271,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31529,7 +31313,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31572,7 +31355,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31615,7 +31397,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31658,7 +31439,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31743,7 +31523,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31786,7 +31565,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31831,10 +31609,13 @@
                 "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.2"
               },
               {
-                "answer": "Look at reviewable output: whether you can communicate and observe before starting and adjust to feedback, whether you can complete dyeing and permanent waving according to product instructions and procedures and carry out tool disinfection and ventilation protection, and whether you can stop and report when a skin or scalp abnormality appears or the situation exceeds the scope of practice. The interest code RCS and the knowledge fields only indicate a similar direction and cannot replace this practical evidence.",
+                "answer": "Try HS-71 in section 09. Separate the request, product details and authority to provide the service.",
                 "id": "barbers-hairstylists-and-cosmetologists.faq.3",
                 "question": "How do I judge whether I am suited to this occupation?",
-                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.3"
+                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.3",
+                "source_refs": [
+                  "hs71-editor"
+                ]
               },
               {
                 "answer": "AI and automation can change appointment scheduling, customer record organization, style visualization and style reference searches, and inventory ordering summaries; but judgment during cutting, dyeing, permanent waving, and styling, control of chemical product formulas and contact times, identification of skin and scalp abnormalities and allergic reactions, and the decision whether to stop the service are still borne by you and authorized personnel in accordance with the applicable jurisdiction and employer systems. The degree of task automation does not equal a change in the number of positions.",
@@ -31849,10 +31630,15 @@
                 "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.5"
               },
               {
-                "answer": "Verify under six categories: education; occupational training; state practice license and renewal; salon pre-job training; salon task authorization (including whether it covers bleaching and dyeing and permanent waving and instrument services); and hygiene and chemicals and ventilation and customer information protection training. On the U.S. side, every state requires licensure, usually requiring completion of a state-approved program and passing an examination (BLS Occupational Outlook Handbook); O*NET separately lists 3 national certifications (including laser-related certifications). On the mainland China side, applicable regulations require workers to complete hygiene knowledge training and assessment, and personnel who serve customers directly to hold a health certificate on duty. None of these can be automatically inferred from another.",
+                "answer": "Verify U.S. license categories and permitted services with the state. In Mainland China, check skill grades, health certification for direct service and the shop hygiene permit separately.",
                 "id": "barbers-hairstylists-and-cosmetologists.faq.6",
                 "question": "Which qualifications must be verified to enter this occupation?",
-                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.6"
+                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.6",
+                "source_refs": [
+                  "nbs",
+                  "archivists",
+                  "cn-hygiene"
+                ]
               },
               {
                 "answer": "Work context shows 88% continuously or almost continuously make repetitive motions, 71% continuously or almost continuously stand, 30% continuously or almost continuously bend or twist the body, 54% continuously or almost continuously keep or regain balance, and 88% work very close to others; 42% are exposed to contaminants every day and 38% are exposed to minor burns, cuts, bites, or stings every day; prolonged standing, repetitive fine movements, and chemical contact require a certain level of physical stamina and proper workstation and rotation and protection arrangements.",
@@ -31867,27 +31653,38 @@
                 "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.8"
               },
               {
-                "answer": "The BLS data displayed by O*NET give, under this occupation's 39-5012.00 definition, about 575,200 employed in 2024 and about 607,400 in 2034 (+6%, faster than average (5% to 6%)), with about 75,800 job openings per year over the projection period; the combined chapter of the BLS Occupational Outlook Handbook separately gives 2025—2035 +7% and about 80,300 annual openings, which is the combined definition for the three groups of barbers, hairstylists, and cosmetologists. For transitions, barbers, manicurists and pedicurists, skincare specialists, shampooers, stage makeup artists, and massage therapists can be compared, but all require additional training, licensing, and authorization.",
+                "answer": "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%.",
                 "id": "barbers-hairstylists-and-cosmetologists.faq.9",
                 "question": "How do I judge career prospects and transitions?",
-                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.9"
+                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.9",
+                "source_refs": [
+                  "ep-table"
+                ]
               },
               {
-                "answer": "The U.S. wage percentiles are the 2025 OEWS definition for this occupation 39-5012.00; for mainland China no precise national occupational wage distribution for this occupation was obtained, and this page does not publish mainland China occupational wage figures, nor does it use the residents' services industry average wage to replace base pay and commission and tips or self-employment income. The occupational scope, statistical systems, data periods, and compensation structures (commission and tips and self-employment) differ on both sides, so USD cannot be converted into RMB, and quotes that lack sample and position scope should not be trusted.",
+                "answer": "U.S. figures describe employee wages for 39-5012. The two historical Mainland quotes cover hair care and beauty roles. Currency conversion does not make them comparable.",
                 "id": "barbers-hairstylists-and-cosmetologists.faq.10",
                 "question": "Why can't U.S. wages and mainland China wages be converted into each other?",
-                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.10"
+                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.10",
+                "source_refs": [
+                  "onet-wages",
+                  "mile-hair-care-2026",
+                  "tongchuan-beauty-2026"
+                ]
+              },
+              {
+                "answer": "The trim is the original booking. In the original the added color request is missing the product number, client confirmation and staff review. Only S3 changes in the variant: the product can be identified, but client confirmation and staff review are still open. Refer the record to the responsible person. Neither version authorizes or records coloring. Did you separate the request, product, confirmation and receiver?",
+                "id": "barbers-hairstylists-and-cosmetologists.faq.11",
+                "question": "HS-71 reference (open after submitting)",
+                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.q11",
+                "source_refs": [
+                  "hs71-editor"
+                ]
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.sources.faq.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "faq"
@@ -31897,11 +31694,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The nine sections this round are based on O*NET occupational tasks, wages, and 2025—2035 employment trends, BLS statistical methods and the OOH exact occupational sub-table, the official China hairdresser profile and 2025 urban unit industry wages, and OSHA, FDA, and Chinese hygiene and personal information regulations; editorial suggestions and statistical facts are labeled separately."
+              "FermatMind Editorial"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.sources.source-card.1",
           "source_refs": [
+            "ep-table",
+            "cn-hygiene",
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "onet",
             "onet-wages",
             "ep-current",
@@ -31911,7 +31712,6 @@
             "cn-wages-current",
             "health",
             "msresearch",
-            "cn-hygiene",
             "cn-pipl"
           ],
           "type": "prose"
@@ -31921,11 +31721,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Main sources: O*NET39-5012 occupation summary, detailed tasks and work context, national wages, employment trends, hot technologies, training and certification; BLS OOH and May2025 OEWS methods; ILO Working Paper 140; the China Employment Training Technical Instruction Center hairdresser profile, National Bureau of Statistics 2025 unit wages, public place hygiene regulations, and the Personal Information Protection Law."
+              "U.S. wages and projections separate the occupation and the combined group. Both Mainland examples link to their original listings."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.sources.source-card.2",
           "source_refs": [
+            "ep-table",
+            "cn-hygiene",
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "onet",
             "facilities",
             "onet-wages",
@@ -31938,7 +31742,6 @@
             "ilo",
             "cn-hairdresser",
             "cn-wages-current",
-            "cn-hygiene",
             "cn-pipl"
           ],
           "type": "prose"
@@ -31948,11 +31751,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Verified and read this round on 2026-10-08: the O*NET occupation page updated in 2026, wages May2025, employment 2025—2035, and hot software signals from 2025 U.S. job postings; the China hairdresser profile 2022-04-15, National Bureau of Statistics 2025 data released 2026-05-15, ILO paper 2025-05-20. The industry share page does not list a separate data year; regulations retain their respective jurisdictions."
+              "Projections start in 2025. The Mainland examples are historical 2026 listings."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.sources.source-card.3",
           "source_refs": [
+            "ep-table",
+            "cn-hygiene",
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "onet",
             "onet-wages",
             "ep-current",
@@ -31968,11 +31775,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The U.S. 39-5012 exact sub-table and the 39-5010 combined occupational group are read separately; OEWS wages include commission and tips and exclude self-employment business income. The Chinese hairdresser only corresponds to hairdressing tasks, and the private / non-private industry averages do not equal this occupation's wage. Occupational tasks, AI candidate uses, and overall employment projections cannot substitute for one another; specific services and data handling must be verified against the applicable jurisdiction."
+              "State licensure, shop hygiene and medical aesthetics have separate scopes. HS-71 uses paper records only."
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.sources.source-card.4",
           "source_refs": [
+            "ep-table",
+            "cn-hygiene",
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "onet",
             "nbs",
             "oews-methods",
@@ -32016,13 +31827,13 @@
                 "entity": "Enneagram Personality Test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the hairdresser, hairstylist, and cosmetologist career page",
@@ -32055,6 +31866,8 @@
                 "accessed_at": "2026-09-15",
                 "details": [
                   "official occupation profile",
+                  "Page updated 2026; accessed 2026-09-15",
+                  "official occupation profile",
                   "Page updated 2026; accessed 2026-09-15"
                 ],
                 "evidence_type": "official occupation profile",
@@ -32086,18 +31899,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official outlook",
-                  "2024—2034; accessed 2026-09-15"
+                  "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%.",
+                  "2025—2035; accessed 2026-09-15"
                 ],
                 "evidence_type": "official outlook",
                 "id": "ep",
-                "limitation": "Employment and projections under this occupational definition; cannot be extrapolated to a broader occupational group.",
+                "limitation": "Applies to 39-5012.",
                 "market": "United States",
-                "name": "O*NET 39-5012.00 Occupation Summary (Employment and Projections Fields)",
-                "period": "2024—2034; accessed 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Table 1.2: Hairdressers, hairstylists, and cosmetologists (39-5012)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32107,7 +31920,7 @@
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "oews",
-                "limitation": "The 2025 OEWS wage-and-salary wage distribution includes commission, production bonuses, and tips; it excludes self-employment income and overtime premiums. Percentiles are not seniority levels or income promises; see oews-methods for the coverage definition.",
+                "limitation": "The 2025 OEWS wage-and-salary wage distribution includes commission, production bonuses, and tips; it excludes self-employment income and overtime premiums. Percentiles are not seniority levels or income promises; see BLS OEWS Concepts for the coverage definition.",
                 "market": "United States",
                 "name": "BLS 2025 wage percentiles displayed by O*NET (39-5012.00)",
                 "period": "May 2025 (OEWS); accessed 2026-09-15",
@@ -32123,29 +31936,13 @@
                 ],
                 "evidence_type": "official occupation outlook",
                 "id": "nbs",
-                "limitation": "This chapter uses the combined “Barbers, Hairstylists, and Cosmetologists” definition: 2025 combined median annual salary 35,880 USD, combined median hourly wage 17.25 USD, 670,800 employed in 2025, 2025—2035 +7% (much faster than average), a change of +48,400, and about 80,300 annual openings; the Pay section of the chapter also separately lists the hairdresser, hairstylist, and cosmetologist May 2025 median hourly wage of 17.21 USD (consistent with the 39-5012.00 definition displayed by O*NET). The combined definition must not be treated as the separate definition; the chapter also notes that all states require licensure.",
+                "limitation": "Handbook occupation wages, industry hourly medians and rounded growth. Combined group figures are separate.",
                 "market": "United States",
-                "name": "BLS Occupational Outlook Handbook, Barbers, Hairstylists, and Cosmetologists",
-                "period": "May 2025 wages and 2025—2035 projections; accessed 2026-09-15",
+                "name": "BLS OOH: Hairdressers, hairstylists, and cosmetologists (39-5012)",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "combined_group",
+                "scope": "exact",
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/barbers-hairstylists-and-cosmetologists.htm"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "official wage statistics",
-                  "2024 data, released 2025-05-16; accessed 2026-09-15"
-                ],
-                "evidence_type": "official wage statistics",
-                "id": "cnclass",
-                "limitation": "Publishes urban unit average wages by region and industry category and registration statistical category and broad occupation group, including residents' services, repair, and other services; it does not contain an exact occupational entry for this occupation, and this page does not use the industry average wage to replace base pay and commission and tips or self-employment income, serving only as an evidence boundary note.",
-                "market": "Mainland China",
-                "name": "National Bureau of Statistics, Average Annual Wages of Urban Unit Employees in 2024",
-                "period": "2024 data, released 2025-05-16; accessed 2026-09-15",
-                "publisher": "National Bureau of Statistics of the People's Republic of China",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32182,18 +31979,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official outlook",
-                  "2024—2034; accessed 2026-09-15"
+                  "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%.",
+                  "2025—2035; accessed 2026-09-15"
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
-                "limitation": "Employment and projections under this occupational definition, not individual hiring probability.",
+                "limitation": "Applies to 39-5012.",
                 "market": "United States",
-                "name": "O*NET 39-5012.00 Occupation Summary (Employment and Projections Fields)",
-                "period": "2024—2034; accessed 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Table 1.2: Hairdressers, hairstylists, and cosmetologists (39-5012)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32224,7 +32021,7 @@
                 "name": "OSHA《Hair Salons: Facts about Formaldehyde in Hair Products》",
                 "period": "Current version of the page; accessed 2026-09-15",
                 "publisher": "U.S. Occupational Safety and Health Administration",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/hair-salons"
               },
               {
@@ -32235,29 +32032,13 @@
                 ],
                 "evidence_type": "institutional task research",
                 "id": "ilo",
-                "limitation": "Provides a global research definition of task exposure and job transformation and does not give an adoption rate or replacement date for this occupation.",
+                "limitation": "Global occupational exposure context, not adoption or replacement rates for this occupation.",
                 "market": "Global",
                 "name": "International Labour Organization, Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140)",
                 "period": "2025; accessed 2026-09-15",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "editorial record",
-                  "Accessed 2026-09-15"
-                ],
-                "evidence_type": "editorial record",
-                "id": "editor",
-                "limitation": "Editorial team compilation and definition verification record.",
-                "market": "United States",
-                "name": "FermatMind career content editorial team verification record",
-                "period": "Accessed 2026-09-15",
-                "publisher": "FermatMind career content editorial team",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-5012.00"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32358,34 +32139,34 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "industry distribution",
+                  "Industry subtable shares are 45% and 55%.",
                   "Current page; verified and read 2026-10-08, the page does not list a separate data year"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "Current page industry distribution 45% other services and 55% other industries (including retail); industry wages cannot be inferred, and the page does not list a separate data year.",
+                "limitation": "The subtable does not state a statistical year. The other-industries 55% does not estimate retail alone or self-employment.",
                 "market": "United States",
                 "name": "O*NET 39-5012.00 Industry Distribution",
-                "period": "Current page; verified and read 2026-10-08, the page does not list a separate data year",
+                "period": "No statistical year on subtable",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/39-5012.00"
               },
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "official employment trends",
+                  "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%.",
                   "2025—2035; verified and read 2026-10-08"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "r2-pay-3",
-                "limitation": "This occupation 39-5012: 595,000 in 2025, 640,900 in 2035, growth of 8%, and 73,400 annual openings; an overall employment projection, not an AI attribution, and openings include growth and replacement and are not net growth or individual hiring probability.",
+                "limitation": "Applies to 39-5012.",
                 "market": "United States",
-                "name": "O*NET 39-5012.00 employment trends page (employment and openings)",
-                "period": "2025—2035; verified and read 2026-10-08",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "BLS Table 1.2: Hairdressers, hairstylists, and cosmetologists (39-5012)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32411,12 +32192,12 @@
                 ],
                 "evidence_type": "official product safety guidance",
                 "id": "msresearch",
-                "limitation": "Explains the distinction between cosmetics and drugs: products for cleansing and beautifying purposes are generally regulated as cosmetics (including shampoos, permanent wave solutions, and hair dyes), and, except for color additives (other than coal-tar hair dyes), FDA premarket approval does not apply, with legal responsibility for product and ingredient safety resting with the cosmetics company; products intended to treat or prevent disease or to affect the structure or function of the body are regulated as drugs (such as antidandruff, acne treatment, and sun protection), requiring premarket approval or compliance with an over-the-counter drug monograph; the category of “cosmeceuticals” is not recognized. This is the U.S. product regulation definition and does not equal a conclusion for China or other markets.",
+                "limitation": "The U.S. FDA distinguishes products intended to cleanse or beautify from drug uses that treat or prevent disease or affect body structure or function. Cosmetics companies are responsible for the safety of products and ingredients.",
                 "market": "United States",
                 "name": "U.S. FDA, Cosmetics Safety Q&A: Personal Care Products",
                 "period": "Content updated to 2022-02-25; accessed 2026-09-15",
                 "publisher": "U.S. Food and Drug Administration",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.fda.gov/cosmetics/resources-consumers-cosmetics/cosmetics-safety-qa-personal-care-products"
               },
               {
@@ -32443,13 +32224,13 @@
                 ],
                 "evidence_type": "official state licensing authority",
                 "id": "archivists",
-                "limitation": "U.S. barbering and hairdressing and beauty practice licensure is administered by each state; this body is the competent authority for California, and its licensing and venue and hygiene requirements apply only to that state and cannot be extrapolated to other states or countries; this page does not cite its rule numbers individually.",
+                "limitation": "California service-scope example only. Check rules for other states.",
                 "market": "United States",
-                "name": "California Board of Barbering and Cosmetology",
+                "name": "California Board of Barbering and Cosmetology: regulated services",
                 "period": "The website is the current version; accessed 2026-09-15",
                 "publisher": "California Department of Consumer Affairs",
-                "scope": "jurisdiction_specific",
-                "url": "https://www.barbercosmo.ca.gov/"
+                "scope": "contextual",
+                "url": "https://www.barbercosmo.ca.gov/forms_pubs/publications/faqs.shtml"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32461,27 +32242,27 @@
                 "id": "oews-methods",
                 "limitation": "The Wages definition includes commission and tips and excludes overtime premiums and the self-employed; 2,080 hours is a statistical standardization assumption.",
                 "market": "United States",
-                "name": "BLS May 2025 OEWS technical note",
-                "period": "May 2025",
+                "name": "BLS OEWS: Concepts",
+                "period": "OEWS wage definitions",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
-                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "official employment trends",
+                  "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%.",
                   "2025—2035"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep-current",
-                "limitation": "595,000 → 640,900 people, growth of 8%, and 73,400 annual openings; an overall employment projection, not an AI attribution.",
+                "limitation": "Applies to 39-5012.",
                 "market": "United States",
-                "name": "O*NET 39-5012.00 national employment trends 2025—2035",
-                "period": "2025—2035",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS Table 1.2: Hairdressers, hairstylists, and cosmetologists (39-5012)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32491,17 +32272,19 @@
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "cn-hairdresser",
-                "limitation": "4-10-03-02 corresponds only to hairdressing tasks; it is not a full-scope correspondence to the U.S. combined occupation and does not support a national wage.",
+                "limitation": "China’s public employment portal describes hairdressing (4-10-03-02), including cutting, styling and hair care. Beauty services are related work. The hairdresser standard lists five skill grades from Grade 5 through Grade 1. Verify these grades, health certification for staff directly serving customers and the operator’s hygiene permit separately.",
                 "market": "Mainland China",
-                "name": "China Employment Training Technical Instruction Center, Hairdresser occupational profile",
+                "name": "China Employment: hairdresser occupational profile",
                 "period": "2022-04-15",
                 "publisher": "China Employment Training Technical Instruction Center",
-                "scope": "exact",
-                "url": "https://chinajob.mohrss.gov.cn/h5/c/2022-04-15/347806.shtml"
+                "scope": "contextual",
+                "url": "https://chinajob.mohrss.gov.cn/c/2022-04-15/347806.shtml"
               },
               {
                 "accessed_at": "2026-10-08",
                 "details": [
+                  "official wage statistics",
+                  "2025 data; released 2026-05-15",
                   "official wage statistics",
                   "2025 data; released 2026-05-15"
                 ],
@@ -32523,13 +32306,13 @@
                 ],
                 "evidence_type": "administrative regulation",
                 "id": "cn-hygiene",
-                "limitation": "Scope of barbershops and beauty salons, operating unit hygiene management and training, and health certificates for personnel serving customers directly; this time no penalty amounts or other changing provisions are cited.",
+                "limitation": "China’s public-place hygiene regulation lists barbershops and beauty salons in Article 2. Article 6 assigns hygiene management and training to the operator, Article 7 requires health certification for staff directly serving customers, and Article 8 requires applicable operators to apply for a hygiene permit before opening. These requirements are separate from occupational skill grades.",
                 "market": "Mainland China",
-                "name": "Official regulatory text of the Regulations on the Administration of Public Place Hygiene",
-                "period": "Articles 2, 6, and 7 verified and read this time",
+                "name": "China public-place hygiene regulation (third amendment, 2024)",
+                "period": "2024-12-06",
                 "publisher": "National Administrative Regulations Database of the Ministry of Justice of the People's Republic of China",
-                "scope": "jurisdiction_specific",
-                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=785"
+                "scope": "contextual",
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1755"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32544,7 +32327,7 @@
                 "name": "Personal Information Protection Law of the People's Republic of China",
                 "period": "Effective 2021-11-01",
                 "publisher": "State Administration for Market Regulation",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               },
               {
@@ -32558,11 +32341,71 @@
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "name": "FermatMind AI task-impact estimate estimation method v1",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ep-table",
+                "limitation": "BLS Table 1.2 lists 595,000 jobs in 2025 and projects 640,900 in 2035 for 39-5012: 7.7% growth, 45,900 net new jobs, 73,400 annual openings and 48.1% self-employed. The May 2025 employee medians were $35,790 per year and $17.21 per hour. The handbook rounds growth for this occupation to 8%.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Hairdressers, hairstylists, and cosmetologists (39-5012)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Mile City’s historical recruitment bulletin No. 26 of 2026 lists ten hair-care workers for Yixin Hair Salon in Mile, with junior secondary education or higher and CNY 3,000–5,000 per month. The notice does not establish haircutting or coloring duties."
+                ],
+                "evidence_type": "primary_document",
+                "id": "mile-hair-care-2026",
+                "limitation": "Mile City’s historical recruitment bulletin No. 26 of 2026 lists ten hair-care workers for Yixin Hair Salon in Mile, with junior secondary education or higher and CNY 3,000–5,000 per month. The notice does not establish haircutting or coloring duties.",
+                "market": "Mainland China",
+                "name": "Mile City: historical Yixin Hair Salon posting",
+                "period": "2026",
+                "publisher": "Mile City Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hhml.gov.cn/info/35871/932012.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Tongchuan’s July 2026 employment bulletin lists 20 beauty therapist openings at Meizhikou Salon, with high school or higher and at least one year of experience. It quotes CNY 4,000–6,000 without a pay period in the cell. This is a beauty role, not a hairstylist’s monthly wage."
+                ],
+                "evidence_type": "primary_document",
+                "id": "tongchuan-beauty-2026",
+                "limitation": "Tongchuan’s July 2026 employment bulletin lists 20 beauty therapist openings at Meizhikou Salon, with high school or higher and at least one year of experience. It quotes CNY 4,000–6,000 without a pay period in the cell. This is a beauty role, not a hairstylist’s monthly wage.",
+                "market": "Mainland China",
+                "name": "Tongchuan Employment Service: historical beauty salon listing",
+                "period": "2026-07",
+                "publisher": "Tongchuan Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rs.tongchuan.gov.cn/10/17900.jhtml?role=s"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Fictional paper consultation record created for this page."
+                ],
+                "evidence_type": "editorial_design",
+                "id": "hs71-editor",
+                "limitation": "Fictional paper consultation record created for this page.",
+                "market": "Fictional exercise",
+                "name": "FermatMind HS-71: Salon consultation record check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": null
               }
             ]
           },
@@ -35897,7 +35740,7 @@
       },
       "hero": {
         "h1": "Hairdressers, Hairstylists, and Cosmetologists",
-        "quick_answer": "Hairdressers, hairstylists, and cosmetologists provide beauty services: first communicating with and observing the condition of hair and scalp, analyzing hair quality and face shape and recommending styling and care plans, cutting and trimming and shaping hair or hairpieces according to customer requirements and hair quality and facial features using clippers, scissors, trimmers, and razors, shampooing and rinsing and conditioning and blow-drying with water and shampoo, bleaching and dyeing and toning with applicators or brushes, applying water or setting or straightening or permanent waving solutions and pressing curls with rollers, curling irons, hot combs, and curling wands, massaging and treating the scalp with hands and fingers or vibrating equipment, combing and spraying to set, shaping eyebrows and removing facial hair, and possibly also providing makeup and nail and skin care services; at the same time keeping the workbench clean and disinfecting tools such as scissors and combs, updating and maintaining customer information records, and demonstrating and selling hair care products and cosmetics; their work does not equal medical diagnosis or treatment of skin and scalp diseases, nor does it replace venue hygiene management responsibility or the determination of authorization for chemical products and ventilation and protection, and they stop and escalate when a customer's skin or scalp is abnormal, an allergic reaction appears, the condition of a product is unknown, or the situation exceeds their own scope of practice.",
+        "quick_answer": "Hairdressers and hairstylists discuss client needs, provide haircuts, styling and applicable care, and document services and hygiene requirements. This page uses U.S. occupation 39-5012. Barbers (39-5011) are separate. Check Mainland hairdressing, beauty services, shop hygiene and medical aesthetics separately.",
         "title": "Hairdressers, Hairstylists, and Cosmetologists"
       },
       "market_signal_card": {
@@ -36448,7 +36291,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET employment and projections fields",
+            "label": "BLS Table 1.2: Employment and projections",
             "secondary_value": null,
             "value": {
               "$item": "barbers-hairstylists-and-cosmetologists.profile.onet-structured-fields-block.4",
@@ -37249,7 +37092,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit hairdressers, hairstylists, and cosmetologists",
+        "label": "Explore my career interests with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37371,7 +37214,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which adjacent direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
-      "interface.quick_decision.experiment_heading": "What does this work mainly involve?",
+      "interface.quick_decision.experiment_heading": "How can I try a paper consultation to see if the work fits?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. salary reference",
@@ -37464,7 +37307,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI task-impact estimate",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37554,61 +37397,61 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "575,200 people",
+        "derivation": "Published value.",
+        "display_value": "595,000 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment size (this occupational definition)",
-        "occupation_scope": "Hairdressers, Hairstylists, and Cosmetologists",
-        "period": "2024; accessed 2026-09-15",
+        "measure": "Employment",
+        "occupation_scope": "U.S. hairdressers, hairstylists, and cosmetologists 39-5012",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Faster than average (5% to 6%)",
+        "derivation": "Published value.",
+        "display_value": "7.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Employment growth label (this occupational definition)",
-        "occupation_scope": "Hairdressers, Hairstylists, and Cosmetologists",
-        "period": "2024—2034; accessed 2026-09-15",
+        "measure": "Projected growth",
+        "occupation_scope": "U.S. hairdressers, hairstylists, and cosmetologists 39-5012",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 75,800",
+        "derivation": "Published value.",
+        "display_value": "About 73,400 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Projected annual job openings over the projection period (this occupational definition)",
-        "occupation_scope": "Hairdressers, Hairstylists, and Cosmetologists",
-        "period": "2024—2034; accessed 2026-09-15",
+        "measure": "Projected annual openings",
+        "occupation_scope": "U.S. hairdressers, hairstylists, and cosmetologists 39-5012",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "17.39 USD / hour (May 2025 median)",
+        "derivation": "Published value.",
+        "display_value": "17.39 USD/hour",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "United States",
-        "measure": "Hourly wage median for 39-5012 within the industry",
-        "occupation_scope": "Hairdressers, Hairstylists, and Cosmetologists",
-        "period": "May 2025",
+        "measure": "Industry median hourly wage",
+        "occupation_scope": "U.S. 39-5012",
+        "period": "2025-05",
         "source_refs": [
           "nbs"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "14.84 USD / hour (May 2025 median)",
+        "derivation": "Published value.",
+        "display_value": "14.84 USD/hour",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "United States",
-        "measure": "Hourly wage median for 39-5012 within the industry",
-        "occupation_scope": "Hairdressers, Hairstylists, and Cosmetologists",
-        "period": "May 2025",
+        "measure": "Industry median hourly wage",
+        "occupation_scope": "U.S. 39-5012",
+        "period": "2025-05",
         "source_refs": [
           "nbs"
         ]
@@ -37758,75 +37601,75 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "575,200 people",
+        "derivation": "Published value.",
+        "display_value": "595,000 jobs",
         "fact_id": "us-employment-parent",
         "market": "United States",
-        "measure": "Employment size (this occupational definition)",
-        "occupation_scope": "Hairdressers, Hairstylists, and Cosmetologists",
-        "period": "2024",
-        "source_refs": [
-          "ep"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "Faster than average (5% to 6%)",
-        "fact_id": "us-growth-parent",
-        "market": "United States",
-        "measure": "Employment growth label (this occupational definition)",
-        "occupation_scope": "Hairdressers, Hairstylists, and Cosmetologists",
-        "period": "2024—2034",
-        "source_refs": [
-          "ep"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "About 75,800",
-        "fact_id": "us-openings-parent",
-        "market": "United States",
-        "measure": "Projected annual job openings over the projection period (this occupational definition)",
-        "occupation_scope": "Hairdressers, Hairstylists, and Cosmetologists",
-        "period": "2024—2034",
-        "source_refs": [
-          "ep"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "595,000 people",
-        "fact_id": "us-employment-current-2025",
-        "market": "United States",
-        "measure": "Employment size",
-        "occupation_scope": "39-5012 hairdressers, hairstylists, and cosmetologists",
+        "measure": "Employment",
+        "occupation_scope": "U.S. hairdressers, hairstylists, and cosmetologists 39-5012",
         "period": "2025",
         "source_refs": [
-          "ep-current"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "8%",
+        "derivation": "Published value.",
+        "display_value": "7.7%",
+        "fact_id": "us-growth-parent",
+        "market": "United States",
+        "measure": "Projected growth",
+        "occupation_scope": "U.S. hairdressers, hairstylists, and cosmetologists 39-5012",
+        "period": "2025–2035",
+        "source_refs": [
+          "ep-table"
+        ]
+      },
+      {
+        "derivation": "Published value.",
+        "display_value": "About 73,400 per year",
+        "fact_id": "us-openings-parent",
+        "market": "United States",
+        "measure": "Projected annual openings",
+        "occupation_scope": "U.S. hairdressers, hairstylists, and cosmetologists 39-5012",
+        "period": "2025–2035",
+        "source_refs": [
+          "ep-table"
+        ]
+      },
+      {
+        "derivation": "Published value.",
+        "display_value": "595,000 jobs",
+        "fact_id": "us-employment-current-2025",
+        "market": "United States",
+        "measure": "Employment",
+        "occupation_scope": "U.S. hairdressers, hairstylists, and cosmetologists 39-5012",
+        "period": "2025",
+        "source_refs": [
+          "ep-table"
+        ]
+      },
+      {
+        "derivation": "Published value.",
+        "display_value": "7.7%",
         "fact_id": "us-growth-current-2025",
         "market": "United States",
-        "measure": "Overall employment growth rate, not AI attribution",
-        "occupation_scope": "39-5012 hairdressers, hairstylists, and cosmetologists",
-        "period": "2025—2035",
+        "measure": "Projected growth",
+        "occupation_scope": "U.S. hairdressers, hairstylists, and cosmetologists 39-5012",
+        "period": "2025–2035",
         "source_refs": [
-          "ep-current"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "73,400 per year",
+        "derivation": "Published value.",
+        "display_value": "About 73,400 per year",
         "fact_id": "us-openings-current-2025",
         "market": "United States",
-        "measure": "Annual job openings over the projection period",
-        "occupation_scope": "39-5012 hairdressers, hairstylists, and cosmetologists",
-        "period": "2025—2035",
+        "measure": "Projected annual openings",
+        "occupation_scope": "U.S. hairdressers, hairstylists, and cosmetologists 39-5012",
+        "period": "2025–2035",
         "source_refs": [
-          "ep-current"
+          "ep-table"
         ]
       },
       {
@@ -37834,7 +37677,7 @@
         "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "AI task-impact estimate (editorial estimate)",
         "occupation_scope": "Hairdressers, Hairstylists, and Cosmetologists",
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
@@ -37848,12 +37691,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI task-impact estimate"
     },
     "badges": [
       "O*NET 39-5012.00 · Job Zone Three · Medium preparation · Bright Outlook",
       "Cutting, dyeing, permanent waving, and styling / scalp and skin care / customer communication and salon affairs",
-      "This occupational definition (wages and employment not taken from another occupation) · no precise equivalent occupational entry in mainland China · gaps visibly marked"
+      "Mainland China: historical hair-care and beauty listings, with no comparable national wages in these sources"
     ],
     "metrics": [
       {
@@ -37866,19 +37709,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034)"
+        "label": "U.S. projected growth (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. number employed (2024)"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. projected job openings over the projection period (2024—2034)"
+        "label": "U.S. projected annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37892,17 +37735,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What hairdressers, hairstylists, and cosmetologists do, what training and licensing are required, what U.S. income and prospects look like, which tasks AI will change, and the boundaries of tool disinfection and skin barrier, chemical products and dyeing and permanent waving and formaldehyde exposure, customer image and health information, and scope of practice and venue hygiene responsibility; source scope and data gaps are retained."
+      "text": "Explore hairdressing duties, pay and entry, including client consultations and service boundaries. Try a paper salon consultation."
     },
     "title": {
       "availability": "available",
-      "text": "Hairdressers, Hairstylists, and Cosmetologists"
+      "text": "Hairdresser and Hairstylist: Duties, Pay and Entry | FermatMind"
     }
   },
-  "source_content_sha256": "68b1d62c26369b9b08c35fd3fac792e0946b6411649efa93e5d52e171e8b44fb",
+  "source_content_sha256": "4fef2191a0ec66874206ae3fd822082b714e001332e85dc7d87e8264a4a00179",
   "subject": {
     "canonical_slug": "barbers-hairstylists-and-cosmetologists",
     "name": "Hairdressers, Hairstylists, and Cosmetologists",
-    "summary": "Hairdressers, hairstylists, and cosmetologists provide beauty services: communicating with and observing the condition of hair and scalp, analyzing hair quality and face shape and recommending styling and care plans, cutting and trimming and shaping hair, shampooing and rinsing and conditioning and drying, bleaching and dyeing and toning, applying water or setting or straightening or permanent waving solutions and pressing curls with curling irons and hot combs and curling wands, massaging and treating the scalp, shaping eyebrows and removing facial hair, and keeping the workbench clean and disinfecting tools and maintaining customer information records. The U.S. side corresponds to O*NET 39-5012.00 (Hairdressers, Hairstylists, and Cosmetologists), which is Job Zone Three (SVP 6.0 to <7.0) and is marked by O*NET as Bright Outlook; barbers 39-5011.00 is a separate adjacent code, and licensing scope varies by jurisdiction. Wage, employment, and industry data are all for this occupational definition, and the page does not state that they are taken from another occupation (the BLS Occupational Outlook Handbook chapter is the combined “Barbers, Hairstylists, and Cosmetologists” definition, and this page labels them separately). On the mainland China side, this page has not obtained a public occupational entry precisely corresponding to hairdressers, hairstylists, and cosmetologists, nor a national wage distribution, so the boundary of no data that can be safely used is retained; the residents' services industry average wage cannot replace base pay and commission and tips or self-employment income, and the Chinese page language is not treated as a China equivalent occupation or wage mapping."
+    "summary": "Hairdressers and hairstylists discuss client needs, provide haircuts, styling and applicable care, and document services and hygiene requirements. This page uses U.S. occupation 39-5012. Barbers (39-5011) are separate. Check Mainland hairdressing, beauty services, shop hygiene and medical aesthetics separately."
   }
 }

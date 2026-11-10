@@ -170,6 +170,9 @@
       "item:nannies.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:nannies.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nannies.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -13056,6 +13059,21 @@
             "onet-details"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。家长留言说由 A 接孩子，日程表还写 B。列出应向家长确认的接送人和时间，交班记录保留变更来源。"
+            ]
+          },
+          "id": "nannies.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "核照护交班的接送安排",
+          "type": "notice"
         }
       ]
     },
@@ -15615,6 +15633,13 @@
         "id": "nannies.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nannies.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15868,7 +15893,7 @@
       "text": "保姆"
     }
   },
-  "source_content_sha256": "1c80e4aa30643fd013f8853aed5f20b1a4f6d7bbf61d00fccdbea209fd4aa4e3",
+  "source_content_sha256": "d88754c6fef116bd1f02dc08e04c786c821fecce7c5cdfd8ee0154c71121771f",
   "subject": {
     "canonical_slug": "nannies",
     "name": "保姆",

@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -36,13 +33,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -63,7 +60,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -22846,13 +22843,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "One-line judgment: audiologists are not about \"testing hearing and fitting a hearing aid\", but about closing history and chief complaint, ear canal and eardrum examination, audiological testing (pure-tone audiometry, speech audiometry, acoustic immittance, auditory evoked potentials, and so on), differential diagnosis, intervention plans (hearing aids, cochlear implants, auditory training, and communication guidance), outcome verification, and follow-up records into a traceable clinical chain; people who just want a quick sale and are unwilling to verify test conditions and records item by item are not suited to it."
+              "Open “Getting started, qualifications, and career development” and find “AUD-09 | Hearing record version check”. Use three fictional records for a check list and two-sentence handover, then read the sample."
             ]
           },
           "id": "audiologists.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -22861,11 +22857,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: you can verify equipment status and transducer matching according to protocol and check test conditions and masking, distinguish conductive from sensorineural hearing loss and write clearly the differential points and referral indications, are willing to keep recording test results and outcome verification, and stop and escalate when the diagnosis is unclear, medical devices are involved, or the practice authorization is exceeded."
+              "Explore audiology if you would enjoy checking test conditions, explaining results and following up."
             ]
           },
           "id": "audiologists.quick-decision.fit-decision-checklist.2",
           "source_refs": [
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -22875,14 +22872,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions to pause investment first: you have not yet completed a full intake, testing, and result recording process under any supervised conditions, or you can only explain your interest by \"liking to help people with hearing loss\"; also, do not treat course grades, one volunteer service placement, or knowing one fitting software program as proof that you can independently issue audiological conclusions, write hearing aid prescriptions, or take on diagnostic and treatment responsibility. Diagnosis, prescriptions, cochlear implant programming, and hearing aid fitting must be carried out by personnel with the corresponding qualifications and authorization according to regulations, and this page does not provide diagnostic, prescription, or programming instructions."
+              "If you mainly want to operate equipment or expect a short course to qualify you to issue results independently, check role authorization and clinical training first."
             ]
           },
           "id": "audiologists.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "aud-nhc-outline"
           ],
           "type": "prose"
         },
@@ -22906,13 +22902,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "One line: this is a clinical occupation centered on assessing and intervening in hearing and related disorders, and competence depends on carrying out testing protocols, interpreting results, differential and referral judgments, intervention plans and outcome verification, and holding the practice licensure and record boundaries, rather than an interest in equipment or proficiency with a single software program."
+              "This work may suit people who enjoy checking conditions, reviewing records and talking with others. Try the paper exercise and compare actual local roles."
             ]
           },
           "id": "audiologists.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         }
@@ -23404,13 +23400,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The U.S. side is O*NET 29-1181.00 (Audiologists), and practice usually requires a state license; Mainland China has no practice license corresponding one-to-one to the U.S. \"audiologist plus state license\", and related positions are distributed across hospital ear, nose, and throat departments and hearing centers, rehabilitation institutions, hearing aid fitting organizations, and the special education system, and must be identified by employer nature and position sequence."
+              "All U.S. states require audiologists to be licensed. Mainland healthcare institutions also have audiology and hearing-test roles; verify credentials separately with local authorities and the employer."
             ]
           },
           "id": "audiologists.profile.career-quick-answers-block.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "aud-zju",
+            "aud-jinshan"
           ],
           "type": "prose"
         },
@@ -23433,12 +23430,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The United States usually requires a doctorate or professional degree such as the Au.D.; O*NET's education composition shows 95% doctorate and 5% postdoctoral training. Mainland China mainly trains people in audiology, hearing and speech rehabilitation, and assistive rehabilitation device technology, and specific standards are set by employers."
+              "BLS lists an Au.D. as typical for entry. Asked what education a new hire needs, 95% of O*NET respondents selected a doctoral degree and 5% postdoctoral training. These are survey responses about entry requirements."
             ]
           },
           "id": "audiologists.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -24305,14 +24302,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain measurements of generative AI adoption rates, product effects, or employment causation for this occupation. Scheduling, medical record organization, data statistics, parameter records, and follow-up reminders are editorial trial candidates. The ILO index introduction and extended abstract and the NIST brief are only cross-occupational background, and neither their full text nor this occupation's mapping was read, so they cannot prove that all clinical responsibility will never be replaced. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Use fictional data to test record formats and flag missing fields or units. Handle real hearing records through institution-approved processes. Authorized professionals confirm test conditions, interpret results and decide next steps."
             ]
           },
           "id": "audiologists.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "genai-ilo",
-            "genai-nist",
-            "archivists"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24970,7 +24966,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round did not obtain occupation-level evidence of wholesale replacement or of never being replaced; the duty descriptions do not prove future technology boundaries, and clinical legal qualifications and technical performance are kept separate."
+              "Available sources do not establish occupation-level evidence of wholesale replacement or of never being replaced; the duty descriptions do not prove future technology boundaries, and clinical legal qualifications and technical performance are kept separate."
             ]
           },
           "id": "audiologists.ai-impact.ai-impact-table.64",
@@ -25001,7 +24997,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round did not read the code requirements of specific job postings; the BLS typical coursework includes anatomy and physiology, diagnosis and treatment, statistics, and supervised clinical practice, so one cannot say broadly from this page that no code is needed."
+              "Use this source only for the tasks, statistics or rules it describes."
             ]
           },
           "id": "audiologists.ai-impact.ai-impact-table.66",
@@ -25121,7 +25117,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round did not obtain the year this occupation will disappear; the overall projection does not provide a uniform date or an individual unemployment rate."
+              "Available sources do not establish the year this occupation will disappear; the overall projection does not provide a uniform date or an individual unemployment rate."
             ]
           },
           "id": "audiologists.ai-impact.ai-impact-table.74",
@@ -25862,7 +25858,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain a national occupational income distribution for Chinese audiologists or hearing aid fitters, broad industry and broad position category averages cannot replace it, and no unverified monthly salary is given."
+              "Insufficient evidence: available sources do not establish a national occupational income distribution for Chinese audiologists or hearing aid fitters, broad industry and broad position category averages cannot replace it, and no unverified monthly salary is given."
             ]
           },
           "id": "audiologists.china-salary.career-snapshot-primary-locale.8",
@@ -25946,7 +25942,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. This round did not obtain precise occupational wages and employment for China."
+              "The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. Available sources do not establish precise occupational wages and employment for China."
             ]
           },
           "id": "audiologists.china-salary.career-snapshot-primary-locale.14",
@@ -25975,7 +25971,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. This round did not obtain precise occupational wages and employment for China. The specific wage structure of a hospital or fitting organization is checked against the real contract; this round did not read recruitment pay samples and does not infer a uniform structure for all institutions."
+              "The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. Available sources do not establish precise occupational wages and employment for China. The specific wage structure of a hospital or fitting organization is checked against the real contract;. Check the applicable posting or state requirements."
             ]
           },
           "id": "audiologists.china-salary.career-snapshot-primary-locale.16",
@@ -26046,7 +26042,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain precise occupational income and employment for China, and the industry background is retained as non-occupational wages."
+              "Insufficient evidence: available sources do not establish precise occupational income and employment for China, and the industry background is retained as non-occupational wages."
             ]
           },
           "id": "audiologists.china-salary.career-snapshot-primary-locale.21",
@@ -26420,13 +26416,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "When checking an offer, first confirm the employer nature, position duties, and practice or fitting qualification requirements, and whether pay is by fixed salary, performance, or commission; do not treat industry averages as personal income, and do not convert overseas figures into expected renminbi income."
+              "The Zhejiang and Jinshan postings do not list amounts. Ask about base pay, variable pay and shifts, and check the contract terms."
             ]
           },
           "id": "audiologists.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "aud-zju",
+            "aud-jinshan"
           ],
           "type": "prose"
         },
@@ -26449,13 +26445,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page does not provide a monthly salary range for audiologist or hearing aid fitting positions in Mainland China; similar positions may use fixed salary, performance bonuses, or fitting commissions, and when comparing them the institution type, business direction, qualifications, and scope of responsibility must be included in the written terms."
+              "Neither mainland hospital posting lists pay or supports a national occupation wage. NBS annual averages for urban health and social work in 2025 were CNY 146,266 at non-private units and CNY 75,631 at private units. These are industry averages."
             ]
           },
           "id": "audiologists.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "aud-zju",
+            "aud-jinshan",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26534,7 +26531,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain a verifiable occupational monthly salary range for other cities, and the absence of data is not stated as meaning that all official sources will never have it."
+              "Insufficient evidence: available sources do not establish a verifiable occupational monthly salary range for other cities, and the absence of data is not stated as meaning that all official sources will never have it."
             ]
           },
           "id": "audiologists.china-salary.career-snapshot-primary-locale.54",
@@ -26919,7 +26916,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This round did not obtain measurements showing that cochlear implant work, balance specialty, or managerial responsibility corresponds to higher wages; the actual position and pay conditions are verified separately."
+              "Available sources do not establish measurements showing that cochlear implant work, balance specialty, or managerial responsibility corresponds to higher wages; the actual position and pay conditions are verified separately."
             ]
           },
           "id": "audiologists.us-salary.career-snapshot-secondary-locale.29",
@@ -27309,19 +27306,19 @@
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Speech-language pathologists",
@@ -27499,7 +27496,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain the correlation between personality and job performance, predictive validity, or a comparison of the strength of each assessment method for this occupation."
+              "Insufficient evidence: available sources do not establish the correlation between personality and job performance, predictive validity, or a comparison of the strength of each assessment method for this occupation."
             ]
           },
           "id": "audiologists.fit.personality-fit-block.7",
@@ -27558,7 +27555,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This page does not use MBTI for fit or hiring conclusions; this round did not obtain type prediction evidence for this occupation, and it can only serve as a prompt for self-organizing preferences."
+              "This page does not use MBTI for fit or hiring conclusions; available sources do not establish type prediction evidence for this occupation, and it can only serve as a prompt for self-organizing preferences."
             ]
           },
           "id": "audiologists.fit.personality-fit-block.10",
@@ -27586,7 +27583,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This round did not obtain MBTI predictive validity research for this occupation; the actual O*NET materials do not provide an MBTI hiring threshold, and the absence of materials does not establish that all validity is absent."
+              "Available sources do not establish MBTI predictive validity research for this occupation; the actual O*NET materials do not provide an MBTI hiring threshold, and the absence of materials does not establish that all validity is absent."
             ]
           },
           "id": "audiologists.fit.personality-fit-block.11",
@@ -27658,7 +27655,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The Enneagram label can serve as a self-questioning prompt, and this page does not draw fit or hiring conclusions from it; this round did not obtain prediction evidence for this occupation."
+              "The Enneagram label can serve as a self-questioning prompt, and this page does not draw fit or hiring conclusions from it; available sources do not establish prediction evidence for this occupation."
             ]
           },
           "id": "audiologists.fit.personality-fit-block.14",
@@ -28143,7 +28140,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Introversion or extroversion cannot directly guarantee fit; verify real communication, accurate recording, and clinical training; this round did not obtain type prediction research."
+              "Introversion or extroversion cannot directly guarantee fit; verify real communication, accurate recording, and clinical training; available sources do not establish type prediction research."
             ]
           },
           "id": "audiologists.fit.personality-fit-block.48",
@@ -28158,7 +28155,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This round did not obtain occupational evidence for the best-suited MBTI type, and one cannot claim on this basis that all research has proven that it does not exist; this page does not use type to predict clinical performance."
+              "Available sources do not establish occupational evidence for the best-suited MBTI type, and one cannot claim on this basis that all research has proven that it does not exist; this page does not use type to predict clinical performance."
             ]
           },
           "id": "audiologists.fit.personality-fit-block.49",
@@ -28201,7 +28198,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The typical Au.D. curriculum in BLS includes statistics, anatomy and physiology, and diagnosis and treatment; check the specific mathematics courses with the target program, and this round did not obtain a uniform advanced mathematics threshold or measurement showing that weakness in mathematics limits performance, so no IQ elimination line is set."
+              "The typical Au.D. curriculum in BLS includes statistics, anatomy and physiology, and diagnosis and treatment; check the specific mathematics courses with the target program, and available sources do not establish a uniform advanced mathematics threshold or measurement showing that weakness in mathematics limits performance, so no IQ elimination line is set."
             ]
           },
           "id": "audiologists.fit.personality-fit-block.52",
@@ -28230,7 +28227,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This page does not draw fit conclusions from the Enneagram, and this round did not obtain prediction evidence for this occupation; self-reflection does not equal qualification for the post."
+              "This page does not draw fit conclusions from the Enneagram, and available sources do not establish prediction evidence for this occupation; self-reflection does not equal qualification for the post."
             ]
           },
           "id": "audiologists.fit.personality-fit-block.54",
@@ -28511,7 +28508,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The basis is the O*NET task context, BLS licensure, and the ASHA ear canal and referral recommendations actually read, China's Physicians Law, and the relevant articles of the 2024 device regulation. The consequences are possible scenarios, and not all clinical processes, accident rates, or risk rankings were obtained."
+              "ASHA provides U.S. professional guidance. Mainland China has separate rules for physician practice and device use. Apply the relevant local rules."
             ]
           },
           "id": "audiologists.risk.career-risk-cards.10",
@@ -28985,7 +28982,7 @@
               [
                 "Hospital hearing clinic position",
                 "Take history under supervision, verify equipment and test conditions, complete routine tests such as pure-tone and speech audiometry, and record the results and interpretation points.",
-                "BLS typical Au.D. and state licensure; the specific position is verified separately; no recruitment sample was read.",
+                "BLS typical Au.D. and state licensure; the specific position is verified separately;. Check the applicable posting or state requirements.",
                 "Submit a fictional case record containing the history points, test items and conditions, and results with the basis for interpretation, without using real patient information.",
                 "The U.S. BLS notes that all states require audiologists to be licensed, that conditions are verified by state, and that the typical entry-level Au.D. takes about 4 years with supervised clinical practice. The FDA allows people aged 18 and over with self-perceived mild to moderate hearing loss to buy OTC hearing aids without a professional examination; do not write all hearing aids as requiring a prescription or the individual's signature, and do not extrapolate to China. Articles 13—14 of China's Physicians Law provide that a person who has not registered and obtained a physician practice certificate may not engage in physician practice activities, and after registration must practice according to place, category, and scope; internal institutional authorization cannot replace this. This is a rule for physician activities and does not treat all hearing testing or fitting personnel as physicians. The 2020 hearing aid fitter skill standard sets Level Four/intermediate worker, Level Three/advanced worker, Level Two/technician, and Level One/senior technician; Level Three includes children's play and speech audiometry, Level Two includes visual reinforcement and preschool rehabilitation, and Level One includes individualized fitting for children with special needs. This is graded assessment content and cannot be summarized as a uniform statutory threshold of a certain level for all pediatric fittings, nor does it equal physician registration or a device business qualification."
               ],
@@ -28999,7 +28996,7 @@
               [
                 "School and special education hearing services position",
                 "Participate in hearing screening, classroom communication support, and teacher and parent consultation, and record the service and referral recommendations.",
-                "BLS includes educational services employers; the specific school qualifications and duties are checked against the announcement; no sample was read.",
+                "BLS includes educational services employers; the specific school qualifications and duties are checked against the announcement.",
                 "Submit a fictional service plan containing the screening process, result records, and referral recommendations.",
                 "The U.S. BLS notes that all states require audiologists to be licensed, that conditions are verified by state, and that the typical entry-level Au.D. takes about 4 years with supervised clinical practice. The FDA allows people aged 18 and over with self-perceived mild to moderate hearing loss to buy OTC hearing aids without a professional examination; do not write all hearing aids as requiring a prescription or the individual's signature, and do not extrapolate to China. Articles 13—14 of China's Physicians Law provide that a person who has not registered and obtained a physician practice certificate may not engage in physician practice activities, and after registration must practice according to place, category, and scope; internal institutional authorization cannot replace this. This is a rule for physician activities and does not treat all hearing testing or fitting personnel as physicians. The 2020 hearing aid fitter skill standard sets Level Four/intermediate worker, Level Three/advanced worker, Level Two/technician, and Level One/senior technician; Level Three includes children's play and speech audiometry, Level Two includes visual reinforcement and preschool rehabilitation, and Level One includes individualized fitting for children with special needs. This is graded assessment content and cannot be summarized as a uniform statutory threshold of a certain level for all pediatric fittings, nor does it equal physician registration or a device business qualification."
               ],
@@ -29013,7 +29010,7 @@
               [
                 "Auditory research and teaching assistance position",
                 "Participate in literature organization, experimental data collection, and statistical analysis, and assist in preparing course and training materials.",
-                "Research methods and teaching qualifications are checked with the specific project; a degree does not guarantee an independent appointment; no recruitment sample was read.",
+                "Research methods and teaching qualifications are checked with the specific project; a degree does not guarantee an independent appointment;. Check the applicable posting or state requirements.",
                 "Submit a fictional research plan containing the research question, method, and data statement.",
                 "Research ability does not equal clinical practice qualifications; research involving patients must be carried out according to ethics and compliance requirements."
               ]
@@ -29036,17 +29033,17 @@
               {
                 "id": "education",
                 "values": [
-                  "O*NET Zone5/SVP8 and above, with 95% doctorate / 5% postdoctoral training, are respondent education requirements; the typical BLS Au.D. takes about 4 years, requires a bachelor's for admission, and the curriculum includes anatomy and physiology, diagnosis and treatment, and statistics with supervised clinical practice. Respondent proportions are not uniform licensure conditions, and the actual state rules are verified separately.",
-                  "O*NET Zone5/SVP8 and above, with 95% doctorate / 5% postdoctoral training, are respondent education requirements; the typical BLS Au.D. takes about 4 years, requires a bachelor's for admission, and the curriculum includes anatomy and physiology, diagnosis and treatment, and statistics with supervised clinical practice. Respondent proportions are not uniform licensure conditions, and the actual state rules are verified separately.",
-                  "In the 2022 occupational classification dictionary, 2-02-35-03 hearing specialist belongs to rehabilitation assistive device engineering technicians and covers auditory testing and assessment, rehabilitation plans, assistive device compensation, and hearing protection; 4-14-03-01 hearing aid fitter belongs to rehabilitation and correction services and covers assessment of hearing-impaired persons confirmed by a physician as unresponsive to clinical treatment, amplification plans, programming and evaluation, and follow-up. Both overlap in duties with U.S. Audiologists, and licensure mutual recognition or wages cannot be inferred from the name. Specific professional training and hiring requirements are checked with the target program, without asserting the main national training format."
+                  "U.S. education and licensure",
+                  "U.S. entry typically requires an Au.D. and supervised clinical experience. ASHA’s CCC-A is a professional certification. Apply separately to the target state for a license, and check school or employer requirements.",
+                  "Confirm the license with the target state and CCC-A with ASHA."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "The U.S. BLS notes that all states require audiologists to be licensed, that conditions are verified by state, and that the typical entry-level Au.D. takes about 4 years with supervised clinical practice. The FDA allows people aged 18 and over with self-perceived mild to moderate hearing loss to buy OTC hearing aids without a professional examination; do not write all hearing aids as requiring a prescription or the individual's signature, and do not extrapolate to China.",
-                  "The 2020 hearing aid fitter skill standard sets Level Four/intermediate worker, Level Three/advanced worker, Level Two/technician, and Level One/senior technician; Level Three includes children's play and speech audiometry, Level Two includes visual reinforcement and preschool rehabilitation, and Level One includes individualized fitting for children with special needs. This is graded assessment content and cannot be summarized as a uniform statutory threshold of a certain level for all pediatric fittings, nor does it equal physician registration or a device business qualification.",
-                  "Articles 13—14 of China's Physicians Law provide that a person who has not registered and obtained a physician practice certificate may not engage in physician practice activities, and after registration must practice according to place, category, and scope; internal institutional authorization cannot replace this. This is a rule for physician activities and does not treat all hearing testing or fitting personnel as physicians. China's medical device regulation is now the 2024 amendment: Article 41 provides for Class II business filing with statutory exemptions from filing, and Article 42 for Class III business licensing; the specific product classification is verified separately. Articles 48—52 require use according to the instructions, disinfection for reuse, no reuse of single-use items, and calibration and maintenance of equipment requiring it according to the instructions with records, immediate discontinuation of use and notification for repair when a safety hazard is found, and no continued use below safety standards."
+                  "Mainland in-service training",
+                  "The 2026 National Health Commission outline primarily targets hearing-related technical personnel in healthcare institutions. It sets out 30 teaching hours over five days of theory and 102 over 17 days of clinical practice. Training does not grant a medical license or institutional authorization.",
+                  "Ask the employer which conditions apply to the actual role."
                 ]
               },
               {
@@ -29069,12 +29066,11 @@
           },
           "id": "audiologists.path.employer-evidence.1",
           "source_refs": [
-            "archivists",
-            "cn-classification-2022",
-            "ha-standard-2020",
-            "cn-doctor",
-            "fda-hearing",
-            "cn-devices-current"
+            "bls",
+            "aud-asha",
+            "aud-nhc-outline",
+            "aud-zju",
+            "aud-jinshan"
           ],
           "title": "Preparation evidence that employers value",
           "type": "cards"
@@ -29087,42 +29083,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional material package: a history-taking template, a test items and conditions verification sheet, and a results interpretation and referral points template.",
-                  "All materials are fictional and contain no real patient information, medical records, or device ledgers.",
-                  "All materials and scenarios are fictional; real patient information, medical records, or internal institutional materials must not be used."
+                  "Materials | Three fictional file entries",
+                  "H1: Signed v2 for H-09 lists “right”; calibration status is blank. H2: Unsigned v3 says “left” and notes that it copied a previous entry; no reviewer is listed.",
+                  "H3: The appointment slip shows testing is pending. There is no record of testing completion, equipment status or handover receipt. All three entries are fictional, with no hearing thresholds."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "For one fictional case, complete the history points, test items and condition verification, result records, and interpretation points, stating clearly the basis, the uncertainty, and whether referral indications are present.",
-                  "Complete within 90—120 minutes; public audiological testing process materials may be consulted, but real patient information must not be used.",
-                  "In the record, write observations, interpretation, and conclusions separately and mark the parts that need review."
+                  "Task | Make a check list, then a two-sentence handover",
+                  "List version, side, calibration and completion separately. Identify the two checks that come first and write to the responsible hearing specialist.",
+                  "Use the original entries and leave missing fields unfilled. Read the sample after drafting."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First verify the equipment and test conditions, then record the results and write the basis for interpretation and the uncertain parts, and finally state whether referral is needed.",
-                  "Write observations, interpretation, and conclusions separately, and mark anything uncertain as needing review.",
-                  "After finishing, ask an experienced person to review the history and interpretation records, and keep the reasons for revisions."
+                  "Sample | Two-sentence paper handover",
+                  "Signed v2 for H-09 lists right, unsigned v3 lists left, and neither calibration nor completion is verified. To the hearing specialist: please check side and calibration before confirming a usable record; do not issue results or make device decisions from these entries, and keep receipt unconfirmed.",
+                  "A signature does not resolve the side discrepancy, and a blank field does not establish that equipment failed. Leave both open."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "The exercise does not constitute diagnostic, prescription, or programming instructions, nor can it replace practice licensure and institutional protocols.",
-                  "Do not handle real patient information or operate real devices in the exercise; matters involving diagnosis, prescriptions, and device fitting must be handled by qualified personnel according to protocol.",
-                  "The exercise does not replace practice licensure and institutional protocols, nor does it constitute any diagnostic, prescription, or programming instruction."
+                  "Boundaries and self-check",
+                  "Review paper records only. Do not perform testing, diagnosis, fitting or device adjustment.",
+                  "Trace each statement to H1–H3 and keep unknown fields unknown."
                 ]
               }
             ]
           },
           "id": "audiologists.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "Low-risk practice materials and tasks",
+          "title": "AUD-09 | Hearing record version check",
           "type": "cards"
         },
         {
@@ -29133,37 +29129,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Position requirements checklist: professional degree and core courses, clinical internship and supervision, practice licensure and fitting qualifications, patient information and device compliance requirements, and continuing education mechanisms.",
-                  "Note the source and data period for each item; leave items that cannot be verified blank and mark them as insufficient evidence rather than filling them in with speculation.",
-                  "List \"degree\", \"clinical internship\", \"practice licensure\", \"fitting qualifications\", \"device business requirements\", and \"prescription and referral authority\" separately to avoid conflating them."
+                  "Version comparison",
+                  "List H1 and H2 side by side.",
+                  "Keep their signature status distinct."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Ask an experienced person to review your case records, focusing on whether the equipment and test conditions are recorded, whether the basis for interpretation is written, and whether the uncertain parts are explicitly flagged.",
-                  "Keep the review comments together with the reasons for the revisions, as evidence of whether you can accept case review."
+                  "Verification list",
+                  "List side and calibration separately."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "One-page debrief: state the case points, the basis, your own interpretation, the parts that were corrected, and the parts that remain uncertain.",
-                  "Submit the debrief to a supervisor or peer for review, and keep the review comments and the reasons for revisions."
+                  "Status note",
+                  "A booking does not establish completion."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool use statement: if software is used to assist with records or statistics, note the tool name and version, the input scope, and the reasons for manual modifications.",
-                  "Archiving medical records and test data requires prior authorization, and the access scope, retention period, and destruction arrangements must be recorded."
+                  "Two-sentence handover",
+                  "Address the responsible colleague; leave receipt pending."
                 ]
               }
             ]
           },
           "id": "audiologists.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "Preparatory materials that can be submitted",
           "type": "cards"
@@ -29227,57 +29223,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Occupation and boundary reading: read O*NET 29-1181.00 and public audiological testing process materials, and write clearly the respective meanings of assessment, interpretation, intervention, and referral.",
-                  "Output: a one-page terminology and process reference table noting the source of each item."
+                  "Compare roles",
+                  "Compare audiology, ENT and hearing aid fitting roles."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "History and chief complaint exercise: build a history points and functional needs record for a fictional case and verify the completeness of the information.",
-                  "Output: a history-taking record."
+                  "Read one job posting",
+                  "Read one employer posting and record its training and authorization conditions."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Test condition verification exercise: list the test items and the verification items for equipment status, calibration, and masking.",
-                  "Output: a test condition verification checklist."
+                  "Compare versions and sides",
+                  "Compare versions and sides in H1 and H2."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Result interpretation exercise: for two fictional audiograms, write the interpretation points, differential directions, and uncertain parts.",
-                  "Output: an interpretation record and referral recommendations."
+                  "Separate appointment and completion",
+                  "Use H3 to separate appointment from completion."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Intervention and verification exercise: for a fictional case, write the reasons for device selection, parameter records, and the outcome verification method, and state the authorization boundaries.",
-                  "Output: an intervention and verification statement."
+                  "Draft a handover",
+                  "Write a two-sentence handover; leave receipt unconfirmed."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Review-based self-questioning: ask an experienced person to challenge your interpretation and records, and record what was corrected.",
-                  "Output: a set of review comments and a revision explanation."
+                  "Check your own work",
+                  "Check the sample yourself; ask a peer if you want."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Final debrief: decide whether to continue, pause, or change direction, and write clearly the basis and the parts that remain uncertain.",
-                  "Output: a one-page decision statement with an evidence list."
+                  "Choose a next step",
+                  "Choose test conditions, interpreting data, or communication and follow-up to explore next."
                 ]
               }
             ]
           },
           "id": "audiologists.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "Seven-day experience outputs",
           "type": "timeline"
@@ -29287,18 +29283,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: you can complete all outputs within seven days and are willing to accept item-by-item review and revision of the history records, test condition verification, and interpretation points.",
-              "Pause: you can complete the plan but find it hard to accept others questioning your interpretation, or are unwilling to invest time in equipment and condition verification and records.",
-              "Change direction: if you would rather treat speech and language disorders, compare the speech-language pathologist direction; if you would rather do hearing aid selection and customer service, compare the hearing aid specialist direction.",
-              "Verify the requirements: first check the degree, clinical internship, practice licensure, and fitting qualification requirements before deciding to invest.",
-              "Complete the evidence: organize the seven-day outputs into reviewable case records and interpretation statements.",
-              "Cost assessment: include the program length, internship and licensure examination costs, and continuing education requirements in a written plan.",
-              "Next step: based on the verification results, decide whether to first complete a professional degree and clinical internship, or first enter a supervised hearing clinic or fitting organization position to accumulate practical experience."
+              "Keep both versions.",
+              "Record signature status.",
+              "Check side and calibration separately.",
+              "Separate appointment from completion.",
+              "Leave missing fields unresolved.",
+              "Self-check before comparing with the sample.",
+              "Choose one role and training route to explore."
             ]
           },
           "id": "audiologists.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "Judgment after seven days",
           "type": "list"
@@ -29340,7 +29336,7 @@
                 "Audiologists practicing in the United States",
                 "Determines whether you can practice legally and issue audiological conclusions.",
                 "A statutory requirement for practicing in the United States.",
-                "States require licensure with different conditions; this round did not read all state updates and examination conditions",
+                "States require licensure with different conditions;. Check the applicable posting or state requirements.",
                 "Complete and maintain according to the requirements of the state where you are located.",
                 "Specific state and interstate licensure mechanisms are verified separately, without stating broadly that it is never transferable across jurisdictions"
               ],
@@ -29422,18 +29418,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This round did not read specific recruitment announcements; clinical, school, fitting, device, and research are editorial comparison directions, not claimed as actually read public samples. Verify the coursework, supervised training, statutory qualifications, data permissions, and specific device conditions.",
-              "When reading recruitment information, verify the practice licensure and fitting qualification requirements, device business scope, patient information and compliance requirements, and continuing education mechanisms, and be alert to wording that advertises short courses or sales experience as practice licensure, prescription authority, or device business qualifications."
+              "Zhejiang University First Affiliated Hospital’s 2026 agency-hire ENT posting Y-26-017 listed one audiology job for new graduates with a bachelor’s degree in hearing and speech rehabilitation. The work is in the outpatient hearing room; pay was not listed.",
+              "Jinshan Hospital, Fudan University, lists ENT hearing-test technicians. The posting asks for a bachelor’s degree or higher in a relevant hearing rehabilitation field and gives no exact headcount, pay or publication date. Check availability with the employer."
             ]
           },
           "id": "audiologists.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "aud-zju",
+            "aud-jinshan"
           ],
-          "title": "Recruitment information check",
+          "title": "Mainland examples: audiology and hearing-test roles",
           "type": "notice"
         },
         {
@@ -30754,7 +30748,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 29-1181 this occupation: 14,200 employed in 2025, growth of 11% over 2025—2035, 15,700 employed in 2035, an official net increase of 1,600, and about 600 openings per year. The figures are each rounded, and the net increase is not modified by subtracting the endpoints; openings include growth and replacements, not an individual's hiring rate. The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. This round did not obtain precise occupational wages and employment for China. The eight directions are editorial comparisons, not a guarantee of transfer."
+              "U.S. 29-1181 this occupation: 14,200 employed in 2025, growth of 11% over 2025—2035, 15,700 employed in 2035, an official net increase of 1,600, and about 600 openings per year. The figures are each rounded, and the net increase is not modified by subtracting the endpoints; openings include growth and replacements, not an individual's hiring rate. The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. Available sources do not establish precise occupational wages and employment for China. The eight directions are editorial comparisons, not a guarantee of transfer."
             ]
           },
           "id": "audiologists.market-signals.market-signal-card.8",
@@ -31010,7 +31004,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. This round did not obtain precise occupational wages and employment for China."
+              "The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. Available sources do not establish precise occupational wages and employment for China."
             ]
           },
           "id": "audiologists.market-signals.market-signal-card.26",
@@ -31475,16 +31469,26 @@
                 "question_key": "career.faq.audiologists.1"
               },
               {
-                "answer": "The BLS Occupational Outlook Handbook lists a doctorate or professional degree (Au.D.) as the typical entry-level education and notes that all U.S. states require audiologists to be licensed to practice; O*NET lists 29-1181.00 as Job Zone Five (SVP 8.0 and above), and among respondents 95% believe a doctorate is required and 5% believe postdoctoral training is required. Practicing in the United States also requires meeting the degree, internship, and examination requirements of the relevant jurisdiction and maintaining continuing education.",
+                "answer": "U.S. entry typically requires an Au.D. and supervised clinical experience. ASHA’s CCC-A is a professional certification. Apply separately to the target state for a license, and check school or employer requirements.",
                 "id": "audiologists.faq.2",
                 "question": "What qualifications does this occupation require in the United States?",
-                "question_key": "career.faq.audiologists.2"
+                "question_key": "career.faq.audiologists.2",
+                "source_refs": [
+                  "bls",
+                  "aud-asha"
+                ]
               },
               {
-                "answer": "Mainland China has no practice license corresponding one-to-one to the U.S. \"audiologist plus state license\"; related positions are distributed across hospital ear, nose, and throat departments and hearing centers, rehabilitation institutions, hearing aid fitting organizations, and the special education system. The national occupation related to hearing services is hearing aid fitter (occupation code 4-14-03-01, Ministry of Human Resources and Social Security and National Health Commission General Office Document No. 51 of 2020), and that standard divides fitting into four levels - Level Four/intermediate worker, Level Three/advanced worker, Level Two/technician, and Level One/senior technician - and raises the level threshold for pediatric fitting; hearing aids are medical devices whose sale and use must comply with medical device regulation requirements.",
+                "answer": "Mainland hospitals may advertise audiology or hearing-test technician roles. Check the employer’s actual duties and authorization. The NHC provides training for hearing-related technical personnel; hearing aid fitting has its own skills and role requirements.",
                 "id": "audiologists.faq.3",
                 "question": "What does this occupation correspond to in Mainland China?",
-                "question_key": "career.faq.audiologists.3"
+                "question_key": "career.faq.audiologists.3",
+                "source_refs": [
+                  "aud-zju",
+                  "aud-jinshan",
+                  "aud-nhc-outline",
+                  "ha-standard-2020"
+                ]
               },
               {
                 "answer": "Look at observable behavior: whether you can verify equipment and test conditions according to protocol, record test results truthfully, write clearly the differential points and referral indications, turn professional conclusions into wording the patient can understand, and stop and escalate when authorization or the diagnosis is unclear. O*NET lists the interest code for this occupation as IS (Investigative + Social), but a matching interest only indicates a similar direction and cannot replace anatomical and physiological foundations, interpretation ability, and practice qualifications.",
@@ -31517,16 +31521,27 @@
                 "question_key": "career.faq.audiologists.8"
               },
               {
-                "answer": "The BLS data shown by O*NET give, on this occupation's own definition, about 15,800 people employed in 2024, growth over 2024—2034 much faster than average (7% or higher), and about 700 openings per year on average; the BLS Occupational Outlook Handbook gives, for 2025—2035, about 14,200 employed, growth of 11% (much faster than average), a net increase of about 1,600 positions, and about 600 openings per year on average. Directions one can move into include hearing aid specialists, speech-language pathologists, optometrists, occupational therapists, physical therapists, neurologists, pediatricians, and medical scientists (excluding epidemiologists).",
+                "answer": "For SOC 29-1181, BLS Table 1.2 reports 14,200 jobs in 2025, projected 15,700 in 2035, growth of 11.0%, and about 600 annual openings including replacements. The published net gain is 1,600, with independent rounding. Check separate credentials and duties before moving into hearing aid fitting or speech-language pathology.",
                 "id": "audiologists.faq.9",
                 "question": "How do you judge career prospects and transitions?",
-                "question_key": "career.faq.audiologists.9"
+                "question_key": "career.faq.audiologists.9",
+                "source_refs": [
+                  "ep",
+                  "bls",
+                  "ha-standard-2020"
+                ]
               },
               {
-                "answer": "The 2025 wage percentiles shown by O*NET are on the 29-1181.00 occupation definition and publish both hourly and annual wages: the median hourly wage is 46.05 USD and the median annual wage is 95,780 USD, with the 10th and 90th annual percentiles at 64,610 and 133,120 USD; the same chapter of the BLS Occupational Outlook Handbook gives a May 2025 median annual wage also of 95,780 USD. Mainland China publishes average wages by industry category, does not list this occupation separately, and does not include performance bonuses, fitting commissions, or research project funding, so the statistical definitions, populations covered, and data periods of the two markets all differ.",
+                "answer": "Neither mainland hospital posting lists pay or supports a national occupation wage. NBS annual averages for urban health and social work in 2025 were CNY 146,266 at non-private units and CNY 75,631 at private units. These are industry averages.",
                 "id": "audiologists.faq.10",
                 "question": "Why can U.S. wages and Mainland China wages not be converted into each other?",
-                "question_key": "career.faq.audiologists.10"
+                "question_key": "career.faq.audiologists.10",
+                "source_refs": [
+                  "aud-zju",
+                  "aud-jinshan",
+                  "nbs",
+                  "bls"
+                ]
               }
             ]
           },
@@ -31561,29 +31576,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round actually read the O*NET summary/details/wages/hottech/industry/trends for this occupation and 8 adjacent definitions, the BLS duties, environment, typical education and licensure, wage by industry table, and projections; the 2022 dictionary entries for hearing specialist and fitter, the relevant grading parts of the 2020 fitting skill standard, China's Physicians Law, and the relevant articles of the 2024 device regulation; the FDA rules on buying hearing aids and the ASHA ear canal and referral recommendations. The NBS wage provisions, OEWS methods, the ILO introduction and extended abstract, and the NIST brief reuse the parts read in the same window on the same day. custom, training, and certification and the full text of AI600-1 were not output, and links are not treated as full text."
+              "U.S. wages and projections use BLS 29-1181; duties use O*NET. Mainland roles use employer notices, and training uses the NHC outline. These do not establish a nationwide occupation wage or uniform license."
             ]
           },
           "id": "audiologists.sources.source-card.2",
           "source_refs": [
-            "onet",
             "bls",
-            "oews",
-            "hr",
-            "industry-current",
-            "archivists",
-            "nbs",
-            "cnclass",
-            "oews-method",
-            "cn-classification-2022",
-            "ha-standard-2020",
-            "cn-doctor",
-            "cn-devices-current",
-            "fda-hearing",
-            "asha-cerumen",
-            "asha-referral",
-            "genai-ilo",
-            "genai-nist"
+            "ep",
+            "onet",
+            "aud-zju",
+            "aud-jinshan",
+            "aud-nhc-outline"
           ],
           "type": "prose"
         },
@@ -31592,7 +31595,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Verified 2026-10-09: 2025 wages, recruitment, and employment, and the 2025—2035 projection; China's classification is 2022, the skill standard is 2020, the wage provisions were published in 1990, the Physicians Law took effect in 2022, and the device regulation is the 2024 amendment. Old entry points were not re-read and old dates are not refreshed."
+              "U.S. wage data cover 2025, and projections cover 2025–2035. Zhejiang’s listing belongs to its 2026 recruitment plan; Jinshan’s listing is undated. The mainland technical training outline is the 2026 edition."
             ]
           },
           "id": "audiologists.sources.source-card.3",
@@ -31606,7 +31609,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. This round did not obtain precise occupational wages and employment for China. In the 2022 occupational classification dictionary, 2-02-35-03 hearing specialist belongs to rehabilitation assistive device engineering technicians and covers auditory testing and assessment, rehabilitation plans, assistive device compensation, and hearing protection; 4-14-03-01 hearing aid fitter belongs to rehabilitation and correction services and covers assessment of hearing-impaired persons confirmed by a physician as unresponsive to clinical treatment, amplification plans, programming and evaluation, and follow-up. Both overlap in duties with U.S. Audiologists, and licensure mutual recognition or wages cannot be inferred from the name. Jurisdiction, skill level, and institutional duties are kept separate; the specific state licensure, urgent referral testing protocol, all personal information implementation rules, recruitment pay, AI causal effects, and scale prediction remain unverified. Shared facts/definitions/FAQ and exercises are frozen, and no whole-page consistency or formal acceptance can be signed."
+              "The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. Available sources do not establish precise occupational wages and employment for China. In the 2022 occupational classification dictionary, 2-02-35-03 hearing specialist belongs to rehabilitation assistive device engineering technicians and covers auditory testing and assessment, rehabilitation plans, assistive device compensation, and hearing protection; 4-14-03-01 hearing aid fitter belongs to rehabilitation and correction services and covers assessment of hearing-impaired persons confirmed by a physician as unresponsive to clinical treatment, amplification plans, programming and evaluation, and follow-up. Both overlap in duties with U.S. Audiologists, and licensure mutual recognition or wages cannot be inferred from the name. Jurisdiction, skill level, and institutional duties are kept separate; the specific state licensure, urgent referral testing protocol, all personal information implementation rules, recruitment pay, AI causal effects, and scale prediction remain unverified. Shared facts/definitions/FAQ and exercises are frozen, and no whole-page consistency or formal acceptance can be signed."
             ]
           },
           "id": "audiologists.sources.source-card.4",
@@ -31651,13 +31654,13 @@
                 "entity": "Enneagram test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the audiologist career page",
@@ -31712,11 +31715,11 @@
                 "id": "bls",
                 "limitation": "The task list describes group work and does not mean every position carries out all tasks.",
                 "market": "United States",
-                "name": "O*NET 29-1181.00 detailed information (tasks and work activities)",
-                "period": "Page updated in 2026; accessed 2026-10-09",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Occupational Outlook Handbook: Audiologists",
+                "period": "2025 wages and 2025–2035 projections",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/29-1181.00"
+                "url": "https://www.bls.gov/ooh/healthcare/audiologists.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31728,11 +31731,11 @@
                 "id": "ep",
                 "limitation": "Employment and projection on this occupation's definition, not an individual's probability of being hired.",
                 "market": "United States",
-                "name": "O*NET 29-1181.00 occupation summary (employment and projection fields)",
-                "period": "2025 employment and the 2025—2035 projection; accessed 2026-10-09",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Table 1.2: Audiologists employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/29-1181.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31758,7 +31761,7 @@
                 ],
                 "evidence_type": "national statistics",
                 "id": "nbs",
-                "limitation": "The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. This round did not obtain precise occupational wages and employment for China.",
+                "limitation": "The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. Available sources do not establish precise occupational wages and employment for China.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics, Urban Unit Employment Personnel Average Annual Wage in 2025",
                 "period": "2025; published 2026-05-15",
@@ -31770,11 +31773,11 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "Article Four on wage composition and excluded items, original text",
-                  "Reuse of the version read in the same window on the same day"
+                  "Use this source only for the occupation, rule or method it describes."
                 ],
                 "evidence_type": "wage definition",
                 "id": "cnclass",
-                "limitation": "The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. This round did not obtain precise occupational wages and employment for China.",
+                "limitation": "The National Bureau of Statistics total wage bill may include bonuses, piece-rate or lump-sum wages, allowances and subsidies, and overtime pay paid by the unit, so performance pay or fitting commissions cannot all be excluded. Total research project funding does not equal individual wages, and actual payments are verified by their nature; industry and broad position category averages are not this occupation's income. Available sources do not establish precise occupational wages and employment for China.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics, Provisions on the Composition of the Total Wage Bill (published 1990)",
                 "period": "Published 1990-01-01; accessed 2026-10-09",
@@ -31806,9 +31809,9 @@
                 ],
                 "evidence_type": "occupation profile",
                 "id": "facilities",
-                "limitation": "The education composition is a respondent percentage, not a uniform statutory threshold.",
+                "limitation": "Asked what education a new hire needs, 95% of respondents selected a doctoral degree and 5% postdoctoral training. These responses do not set licensure requirements.",
                 "market": "United States",
-                "name": "O*NET 29-1181.00 occupation summary (education composition)",
+                "name": "O*NET 29-1181.00: Education requirements for new hires",
                 "period": "Page updated in 2026; accessed 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -31854,7 +31857,7 @@
                 ],
                 "evidence_type": "official occupational standard",
                 "id": "health",
-                "limitation": "The 2020 hearing aid fitter skill standard sets Level Four/intermediate worker, Level Three/advanced worker, Level Two/technician, and Level One/senior technician; Level Three includes children's play and speech audiometry, Level Two includes visual reinforcement and preschool rehabilitation, and Level One includes individualized fitting for children with special needs. This is graded assessment content and cannot be summarized as a uniform statutory threshold of a certain level for all pediatric fittings, nor does it equal physician registration or a device business qualification. This round actually read the relevant parts of the 2020 standard PDF, and the old notice page was not re-read and its access date is not refreshed.",
+                "limitation": "Earlier material for historical reference. Check the current official publication for applicable training requirements.",
                 "market": "Mainland China",
                 "name": "Ministry of Human Resources and Social Security and National Health Commission, Notice on Promulgating 2 National Occupational Skill Standards Including Hearing Aid Fitter (Ministry of Human Resources and Social Security General Office Document No. 51 of 2020)",
                 "period": "Published 2020-05-08; accessed 2026-09-15",
@@ -31870,7 +31873,7 @@
                 ],
                 "evidence_type": "official regulation",
                 "id": "ilo",
-                "limitation": "This is the 2021 version of the device regulation, not ILO generative AI material; for the current provisions this round uses the 2024 amendment official record cn-devices-current, and the old version was not re-read or refreshed.",
+                "limitation": "Earlier medical-device regulation; use the amended text for current provisions.",
                 "market": "Mainland China",
                 "name": "Regulations on the Supervision and Administration of Medical Devices (2021 revision)",
                 "period": "2021 revision; accessed 2026-09-15",
@@ -31881,18 +31884,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The actual link is the official summary",
-                  "Does not prove that a separate editorial team original record exists"
+                  "Three fictional records for a paper-only check.",
+                  "Three fictional records for a paper-only check."
                 ],
-                "evidence_type": "Official occupation summary",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "The link is not a separate editorial team original record and is used as the actual occupation summary.",
+                "limitation": "No clinical decisions or device adjustments.",
                 "market": "United States",
-                "name": "O*NET29-1181 summary (editorial verification entry point)",
-                "period": "Accessed 2026-10-09",
-                "publisher": "O*NET",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/29-1181.00"
+                "name": "FermatMind Editorial: fictional AUD-09 exercise",
+                "period": "Fictional paper exercise",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/en/career/jobs/audiologists#career-content-path"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -31902,7 +31905,7 @@
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "Does not constitute practice licensure or device fitting qualifications. This round did not output a complete training or custom report, and old access dates are retained.",
+                "limitation": "Occupation and reference pages do not confer licensure or fitting authority.",
                 "market": "United States",
                 "name": "O*NET 29-1181.00 training and education information",
                 "period": "Page updated in 2026; accessed 2026-09-15",
@@ -31918,7 +31921,7 @@
                 ],
                 "evidence_type": "occupation profile",
                 "id": "arxiv",
-                "limitation": "The official profile provides only occupational identity and duty descriptions. This round did not output a complete training or custom report, and old access dates are retained.",
+                "limitation": "Occupation and reference pages do not confer licensure or fitting authority.",
                 "market": "United States",
                 "name": "O*NET 29-1181.00 custom occupation profile",
                 "period": "Page updated in 2026; accessed 2026-09-15",
@@ -31934,7 +31937,7 @@
                 ],
                 "evidence_type": "official AI risk framework",
                 "id": "weforum",
-                "limitation": "This round did not read the complete AI600-1PDF, and old access dates are not refreshed nor are all health application rules concluded from it; the actual NIST brief is used as background separately.",
+                "limitation": "General technology risk context; does not measure adoption, treatment outcomes or job change in this occupation.",
                 "market": "United States",
                 "name": "National Institute of Standards and Technology, Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile (NIST AI 600-1)",
                 "period": "2024; accessed 2026-09-15",
@@ -31998,9 +32001,9 @@
                 ],
                 "evidence_type": "occupation profile",
                 "id": "r2-pay-2",
-                "limitation": "Education composition does not constitute a uniform licensure standard.",
+                "limitation": "Asked what education a new hire needs, 95% of respondents selected a doctoral degree and 5% postdoctoral training. These responses do not set licensure requirements.",
                 "market": "United States",
-                "name": "O*NET 29-1181.00 occupation summary (education composition)",
+                "name": "O*NET 29-1181.00: Education requirements for new hires",
                 "period": "Page updated in 2026; accessed 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -32089,7 +32092,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this document for the specific tasks or rules it describes.",
                   "Do not claim complete occupational or case-level verification"
                 ],
                 "evidence_type": "Relevant sections of the original official text",
@@ -32105,7 +32108,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "Actually read PDF90—91 and 290—291",
+                  "Classification reference for occupation names and duties.",
                   "2-02-35-03 and 4-14-03-01"
                 ],
                 "evidence_type": "Relevant entry in the official occupational classification document",
@@ -32121,7 +32124,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the 124—125 brief and abstract",
+                  "Use this document for the specific tasks or rules it describes.",
                   "The complete PDF was not read"
                 ],
                 "evidence_type": "Official voluntary risk reference brief and abstract",
@@ -32142,7 +32145,7 @@
                 ],
                 "evidence_type": "institutional task research",
                 "id": "genai-ilo",
-                "limitation": "This round only reused the introduction and extended abstract actually read in the same window on the same day; the complete index or this occupation's mapping was not read, so no measured impact for this occupation can be inferred.",
+                "limitation": "General technology risk context; does not measure adoption, treatment outcomes or job change in this occupation.",
                 "market": "Global",
                 "name": "International Labour Organization, Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140)",
                 "period": "2025; accessed 2026-09-15",
@@ -32153,7 +32156,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this document for the specific tasks or rules it describes.",
                   "Accessed 2026-10-09"
                 ],
                 "evidence_type": "Official industry distribution",
@@ -32169,7 +32172,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this document for the specific tasks or rules it describes.",
                   "Accessed 2026-10-09"
                 ],
                 "evidence_type": "Official occupational skill standard",
@@ -32185,12 +32188,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this document for the specific tasks or rules it describes.",
                   "Accessed 2026-10-09"
                 ],
                 "evidence_type": "Law",
                 "id": "cn-doctor",
-                "limitation": "Articles 13—14 of China's Physicians Law provide that a person who has not registered and obtained a physician practice certificate may not engage in physician practice activities, and after registration must practice according to place, category, and scope; internal institutional authorization cannot replace this. This is a rule for physician activities and does not treat all hearing testing or fitting personnel as physicians. Articles 13—14, 23—24, 33—35, and related articles were actually read, not the complete operating rules for all hearing personnel.",
+                "limitation": "Articles 13–14 govern physician registration and scope. They do not classify all hearing-test or fitting roles as physician roles.",
                 "market": "Mainland China",
                 "name": "Physicians Law of the People's Republic of China",
                 "period": "Enacted 2021, effective 2022-03-01",
@@ -32201,12 +32204,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this document for the specific tasks or rules it describes.",
                   "Accessed 2026-10-09"
                 ],
                 "evidence_type": "Administrative regulation",
                 "id": "cn-devices-current",
-                "limitation": "China's medical device regulation is now the 2024 amendment: Article 41 provides for Class II business filing with statutory exemptions from filing, and Article 42 for Class III business licensing; the specific product classification is verified separately. Articles 48—52 require use according to the instructions, disinfection for reuse, no reuse of single-use items, and calibration and maintenance of equipment requiring it according to the instructions with records, immediate discontinuation of use and notification for repair when a safety hazard is found, and no continued use below safety standards. Articles 40—55 and related articles were actually read, and the specific catalogue classification of hearing aids or all implementation rules were not verified.",
+                "limitation": "Articles 41–42 cover commercial filing or licensing by class. Articles 48–52 cover staff training, disinfection, no reuse of single-use devices, maintenance records and stopping use on a safety hazard. Check which rules apply to the device class.",
                 "market": "Mainland China",
                 "name": "Regulations on the Supervision and Administration of Medical Devices, 2024 amendment",
                 "period": "Second amendment on 2024-12-06",
@@ -32217,12 +32220,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this document for the specific tasks or rules it describes.",
                   "Accessed 2026-10-09"
                 ],
                 "evidence_type": "Official regulatory statement",
                 "id": "fda-hearing",
-                "limitation": "The U.S. BLS notes that all states require audiologists to be licensed, that conditions are verified by state, and that the typical entry-level Au.D. takes about 4 years with supervised clinical practice. The FDA allows people aged 18 and over with self-perceived mild to moderate hearing loss to buy OTC hearing aids without a professional examination; do not write all hearing aids as requiring a prescription or the individual's signature, and do not extrapolate to China. The purchase examination boundary was actually read, and it is not a Chinese rule.",
+                "limitation": "The U.S. FDA OTC category covers adults 18 or older with perceived mild to moderate hearing loss. This is U.S. policy.",
                 "market": "United States",
                 "name": "FDA rules on obtaining hearing aids",
                 "period": "Current page",
@@ -32233,12 +32236,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this document for the specific tasks or rules it describes.",
                   "Accessed 2026-10-09"
                 ],
                 "evidence_type": "Professional association guidance",
                 "id": "asha-cerumen",
-                "limitation": "The ASHA ear canal and cerumen guidance is a professional association recommendation: limited cerumen management requires the corresponding training and supervised experience, and state licensure limits, institutional authority, and insurance must be checked. Whether an anomaly is deferred or referred follows the actual assessment and protocol, and it is not the case that any anomaly stops all activity. The scope, training, prevention, and referral sections were actually read, and this is not state law or complete contemporary infection control.",
+                "limitation": "U.S. professional guidance on ear canal and cerumen management. Check training, state rules and institutional authorization.",
                 "market": "United States",
                 "name": "ASHA ear canal examination and cerumen management",
                 "period": "1992 professional guidance, current web page",
@@ -32249,12 +32252,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this document for the specific tasks or rules it describes.",
                   "Accessed 2026-10-09"
                 ],
                 "evidence_type": "Professional association referral guidance",
                 "id": "asha-referral",
-                "limitation": "The ASHA referral guidance notes that sudden or fluctuating hearing loss requires prompt ear, nose, and throat evaluation; this page does not provide complete urgent referral procedures, and uniform retesting cannot be required in a way that delays care. The referral symptoms section was actually read, and a professional association recommendation is not Chinese law.",
+                "limitation": "U.S. professional guidance on audiology and ENT referral. Authorized professionals follow local referral processes.",
                 "market": "United States",
                 "name": "ASHA referral guidance for audiologists and ENT",
                 "period": "Current web page",
@@ -32265,7 +32268,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the definition",
+                  "Related occupation definition: compare tasks and verify credentials separately.",
                   "Not the complete set of training or mutual recognition"
                 ],
                 "evidence_type": "Official occupation definition",
@@ -32281,7 +32284,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the definition",
+                  "Related occupation definition: compare tasks and verify credentials separately.",
                   "Not the complete set of training or mutual recognition"
                 ],
                 "evidence_type": "Official occupation definition",
@@ -32297,7 +32300,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the definition",
+                  "Related occupation definition: compare tasks and verify credentials separately.",
                   "Not the complete set of training or mutual recognition"
                 ],
                 "evidence_type": "Official occupation definition",
@@ -32313,7 +32316,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the definition",
+                  "Related occupation definition: compare tasks and verify credentials separately.",
                   "Not the complete set of training or mutual recognition"
                 ],
                 "evidence_type": "Official occupation definition",
@@ -32329,7 +32332,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the definition",
+                  "Related occupation definition: compare tasks and verify credentials separately.",
                   "Not the complete set of training or mutual recognition"
                 ],
                 "evidence_type": "Official occupation definition",
@@ -32345,7 +32348,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the definition",
+                  "Related occupation definition: compare tasks and verify credentials separately.",
                   "Not the complete set of training or mutual recognition"
                 ],
                 "evidence_type": "Official occupation definition",
@@ -32361,7 +32364,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the definition",
+                  "Related occupation definition: compare tasks and verify credentials separately.",
                   "Not the complete set of training or mutual recognition"
                 ],
                 "evidence_type": "Official occupation definition",
@@ -32377,7 +32380,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the definition",
+                  "Related occupation definition: compare tasks and verify credentials separately.",
                   "Not the complete set of training or mutual recognition"
                 ],
                 "evidence_type": "Official occupation definition",
@@ -32392,20 +32395,72 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Intake and history | Make the information complete first | Take the history related to hearing and balance, previous interventions, and medication use, record the chief complaint and functional needs, and explain the testing process and precautions. — 25/100; weight=1/3; audiologists.profile.responsibilities-block.1[0]",
-                  "Testing and quality control | Editorial verification suggestions | Record the conditions and results against the actual equipment manual and testing protocol; complete testing and retesting protocols were not obtained for this page and no operating approval is provided. China's medical device regulation is now the 2024 amendment: Article 41 provides for Class II business filing with statutory exemptions from filing, and Article 42 for Class III business licensing; the specific product classification is verified separately. Articles 48—52 require use according to the instructions, disinfection for reuse, no reuse of single-use items, and calibration and maintenance of equipment requiring it according to the instructions with records, immediate discontinuation of use and notification for repair when a safety hazard is found, and no continued use below safety standards. — 25/100; weight=1/3; audiologists.profile.responsibilities-block.1[1]",
-                  "Interpretation and referral | Follow the real clinical protocol | Combine the history and test records with uncertainty, and verify the actual referral division of labor; the ASHA referral guidance notes that sudden or fluctuating hearing loss requires prompt ear, nose, and throat evaluation; this page does not provide complete urgent referral procedures, and uniform retesting cannot be required in a way that delays care. — 50/100; weight=1/3; audiologists.profile.responsibilities-block.1[2]"
+                  "Test formats with fictional material; check units, sources and omissions.",
+                  "Test formats with fictional material; check units, sources and omissions.",
+                  "Test formats with fictional material; check units, sources and omissions.",
+                  "Test formats with fictional material; check units, sources and omissions.",
+                  "Test formats with fictional material; check units, sources and omissions."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "Does not estimate adoption, treatment effect or job displacement.",
+                "name": "FermatMind: documentation tool limits",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Zhejiang University First Affiliated Hospital’s 2026 agency-hire ENT posting Y-26-017 listed one audiology job for new graduates with a bachelor’s degree in hearing and speech rehabilitation. The work is in the outpatient hearing room; pay was not listed."
+                ],
+                "evidence_type": "primary_document",
+                "id": "aud-zju",
+                "name": "Zhejiang University First Affiliated Hospital 2026 audiology posting",
+                "period": "2026",
+                "publisher": "First Affiliated Hospital, Zhejiang University",
+                "scope": "recruitment_proxy",
+                "url": "https://rlzyb.zy91.com/department/detailInfo.action?uuid=4afd4820-5dae-40fb-b98b-6659d5212f2c"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Jinshan Hospital, Fudan University, lists ENT hearing-test technicians. The posting asks for a bachelor’s degree or higher in a relevant hearing rehabilitation field and gives no exact headcount, pay or publication date. Check availability with the employer."
+                ],
+                "evidence_type": "primary_document",
+                "id": "aud-jinshan",
+                "name": "Jinshan Hospital hearing-test technician posting",
+                "period": "Undated",
+                "publisher": "Jinshan Hospital, Fudan University",
+                "scope": "recruitment_proxy",
+                "url": "https://www.jinshanhos.org.cn/ZhaoPin/Member/JobList?categoryid=1007"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The 2026 National Health Commission outline primarily targets hearing-related technical personnel in healthcare institutions. It sets out 30 teaching hours over five days of theory and 102 over 17 days of clinical practice. Training does not grant a medical license or institutional authorization."
+                ],
+                "evidence_type": "primary_document",
+                "id": "aud-nhc-outline",
+                "name": "2026 NHC training outline for hearing medical technical personnel",
+                "period": "2026-05-06",
+                "publisher": "National Health Commission",
+                "scope": "exact",
+                "url": "https://wjw.shanxi.gov.cn/tzgg/sjzcwj/202605/P020260507333281234250.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Describes doctoral training and supervised clinical practice documentation for CCC-A."
+                ],
+                "evidence_type": "primary_document",
+                "id": "aud-asha",
+                "name": "ASHA: Audiology certification application",
+                "period": "Current guidance",
+                "publisher": "ASHA",
+                "scope": "exact",
+                "url": "https://www.asha.org/certification/AudCertification/"
               }
             ]
           },
@@ -33159,7 +33214,7 @@
             }
           }
         ],
-        "heading": "Will AI replace audiologists?",
+        "heading": "What documentation can a tool draft?",
         "method_cards": [
           {
             "含义": {
@@ -37091,7 +37146,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests suit audiology",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37168,7 +37223,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five personality test"
           },
           {
             "href": {
@@ -37178,7 +37233,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -37188,7 +37243,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Enneagram (Chinese)"
+            "label": "Enneagram test"
           },
           {
             "href": {
@@ -37198,7 +37253,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "IQ (Chinese)"
+            "label": "Intelligence and reasoning test"
           }
         ]
       },
@@ -37213,7 +37268,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which adjacent direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
-      "interface.quick_decision.experiment_heading": "What does this job mainly do?",
+      "interface.quick_decision.experiment_heading": "How can I try checking a record?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. salary reference",
@@ -37306,7 +37361,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "Where can AI assist with documentation?",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -37396,87 +37451,90 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "15,800 people",
+        "derivation": "BLS Table 1.2 reports 14.2 thousand.",
+        "display_value": "14,200 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "2024 employment (on the 29-1181.00 occupation definition)",
+        "measure": "Employment level",
         "occupation_scope": "Audiologists",
-        "period": "2024; accessed 2026-09-15",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Much faster than average (7% or higher)",
+        "derivation": "BLS Table 1.2 reports 11.0%; the OOH displays 11%.",
+        "display_value": "11.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "2024—2034 employment growth label",
+        "measure": "Projected employment growth",
         "occupation_scope": "Audiologists",
-        "period": "2024—2034; accessed 2026-09-15",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 700 per year",
+        "derivation": "BLS Table 1.2 reports 0.6 thousand. This is not net growth.",
+        "display_value": "About 600 annually",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "2024—2034 average annual job openings",
+        "measure": "Average annual openings including replacements",
         "occupation_scope": "Audiologists",
-        "period": "2024—2034; accessed 2026-09-15",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish industry-level median wages for this occupation)",
+        "display_value": "$103,700 annually",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "United States",
-        "measure": "Not applicable: the source does not publish this field",
-        "occupation_scope": "Audiologists",
-        "period": "Not applicable: the source does not publish this field",
+        "measure": "Industry median annual wage",
+        "occupation_scope": "U.S. 29-1181 audiologists: Hospitals; state, local and private",
+        "period": "May 2025",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish industry-level median wages for this occupation)",
+        "display_value": "$92,620 annually",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "United States",
-        "measure": "Not applicable: the source does not publish this field",
-        "occupation_scope": "Audiologists",
-        "period": "Not applicable: the source does not publish this field",
+        "measure": "Industry median annual wage",
+        "occupation_scope": "U.S. 29-1181 audiologists: Offices of physicians",
+        "period": "May 2025",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish industry-level median wages for this occupation)",
+        "display_value": "$98,110 annually",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "United States",
-        "measure": "Not applicable: the source does not publish this field",
-        "occupation_scope": "Audiologists",
-        "period": "Not applicable: the source does not publish this field",
+        "measure": "Industry median annual wage",
+        "occupation_scope": "U.S. 29-1181 audiologists: Educational services; state, local and private",
+        "period": "May 2025",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish industry-level median wages for this occupation)",
+        "display_value": "$81,730 annually",
         "fact_id": "us-industry-wage-education-2025",
         "market": "United States",
-        "measure": "Not applicable: the source does not publish this field",
-        "occupation_scope": "Audiologists",
-        "period": "Not applicable: the source does not publish this field",
+        "measure": "Industry median annual wage",
+        "occupation_scope": "U.S. 29-1181 audiologists: Offices of physical, occupational and speech therapists, and audiologists",
+        "period": "May 2025",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
@@ -37600,66 +37658,57 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "15,800 people",
+        "derivation": "BLS Table 1.2 reports 14.2 thousand.",
+        "display_value": "14,200 jobs",
         "fact_id": "us-employment-parent",
         "market": "United States",
-        "measure": "2024 employment (on this occupation's definition)",
+        "measure": "Employment level",
         "occupation_scope": "Audiologists",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Much faster than average (7% or higher)",
+        "derivation": "BLS Table 1.2 reports 11.0%; the OOH displays 11%.",
+        "display_value": "11.0%",
         "fact_id": "us-growth-parent",
         "market": "United States",
-        "measure": "2024—2034 employment growth label",
+        "measure": "Projected employment growth",
         "occupation_scope": "Audiologists",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 700 per year",
+        "derivation": "BLS Table 1.2 reports 0.6 thousand. This is not net growth.",
+        "display_value": "About 600 annually",
         "fact_id": "us-openings-parent",
         "market": "United States",
-        "measure": "2024—2034 average annual job openings",
+        "measure": "Average annual openings including replacements",
         "occupation_scope": "Audiologists",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Audiologists",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "ep",
+          "bls"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and audiology tasks"
     },
     "badges": [
-      "O*NET 29-1181.00 · Job Zone Five · mostly doctorates",
+      "O*NET 29-1181.00 · Au.D. typical for U.S. entry",
       "Assessment and interpretation / intervention and verification / practice licensure and fitting qualifications",
-      "No precise occupational statistics for Mainland China · visible gap marker"
+      "Mainland hospital job requirements vary"
     ],
     "metrics": [
       {
@@ -37672,7 +37721,7 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034)"
+        "label": "U.S. employment growth (2025—2035)"
       },
       {
         "availability": "available",
@@ -37684,7 +37733,7 @@
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024—2034)"
+        "label": "U.S. average annual job openings (2025—2035)"
       },
       {
         "availability": "missing",
@@ -37698,17 +37747,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What audiologists do, what degrees and qualifications are required, how income and prospects look in the United States and China, which tasks AI will change, and the boundaries between practice licensure and hearing aid fitting qualifications; source scope and data gaps are retained."
+      "text": "Learn what audiologists do, compare mainland hospital job examples and U.S. Au.D. and licensure, review pay, and try a fictional test-record check."
     },
     "title": {
       "availability": "available",
       "text": "Audiologists"
     }
   },
-  "source_content_sha256": "7e1233a53e2db6776d8c11194ad6d04c90dc08a8f77926db7c842f98b644b4f6",
+  "source_content_sha256": "cbd7c646d7cd6478e5bb92885f1d2ef28b82bc375e3a9fd5ccd40d26e4998236",
   "subject": {
     "canonical_slug": "audiologists",
     "name": "Audiologists",
-    "summary": "Audiologists assess and treat patients with hearing and related disorders, may fit hearing aids and provide auditory training, and may also conduct hearing-related research. On the U.S. side this corresponds to O*NET 29-1181.00 (Audiologists), in Job Zone Five (SVP 8.0 and above), with education mainly a doctorate or professional degree, and states usually require licensure to practice; Mainland China statistics are aggregated by industry category, do not list this occupation separately, and do not cover performance bonuses, fitting commissions, or project funding."
+    "summary": "Audiologists assess and manage hearing, balance and related problems. Their work includes checking test conditions, explaining results and following up. Mainland employers may advertise audiology or hearing-test technician roles; check the actual duties and authorization for each job."
   }
 }

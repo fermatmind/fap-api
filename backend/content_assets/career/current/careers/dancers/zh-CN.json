@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a24-huadu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a24-linzhou": {
+        "status": "pending_mapping"
       },
       "fact:r5-current-cn-arts": {
         "status": "pending_mapping"
@@ -1707,7 +1713,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -19538,56 +19544,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22564,7 +22534,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "低风险验证：用公开或虚构材料完成一次「写一份虚构角色的动作与节拍分解表—按虚构群舞段落写出走位与配合要点—写出训练中疼痛或不适时暂停与上报的处理流程」练习，只判断工作偏好；练习不进行真实高强度训练、不参与真实演出与试镜，不等同体检合格、演员资格或录用承诺。"
+              "做本页纸面排练交接，记录路线提议、节拍差异与不适处理。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -22578,7 +22548,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "判断中心：能否在编舞要求、音乐节拍、群舞队形与自身身体条件都受约束的前提下，把动作序列、配合走位与演出呈现做成可核对、可复现并可交接的排练与演出记录。"
+              "能否按编舞要求、音乐节拍和队形完成表演，并在排练中根据反馈调整动作与配合？"
             ]
           },
           "id": "actors.display.fermat_decision_card.title",
@@ -26091,7 +26061,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "：未核舞者与中国分类一一对应或全国计酬规律，单场报酬、固定薪酬、自雇营业收入须按合同区分；未取得本职业报价样本。"
+              "。两份历史公告只说明各自条件。中国大陆舞蹈演员的职业工资分布与合同分布仍缺可比资料。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
@@ -26105,12 +26075,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆舞蹈表演岗位招聘或报价统计；个别项目或平台的报价不能代表全国水平"
+              "2023 年 6 月花都公益招聘会列商演舞蹈演员 4 人，4,000–6,000 元/月，含活动演出、路演协作及短期出差。普兰县政府 2026 年 4 月转载林周县艺术团招聘，列基本月薪和场次补贴，未列金额。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "a24-huadu",
+            "a24-linzhou"
           ],
           "type": "prose"
         },
@@ -26209,7 +26180,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业工资背景与职业工资缺口分开；本轮无中国舞者全国中位数、起薪、报价或到手收入，不用行业均值、美国工资或自雇流水代填。"
+              "以下公告用于对照岗位和计薪条件。全国职业工资分布缺少可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -26789,7 +26760,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先用公开或虚构材料完成一次「写一份虚构角色的动作与节拍分解表—按虚构群舞段落写出走位与配合要点—写出训练中疼痛或不适时暂停与上报的处理流程」练习，或一次排练跟做，再判断偏好。"
+              "做本页纸面排练交接，记录路线提议、节拍差异与不适处理。"
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -28595,14 +28566,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮未取得中国真实试镜/演出在招样本；历史/虚构案例不计需求。下列岗位与能力证据为编辑建议，不表示雇主通常采用同一评分。",
+              "花都公告列商演舞蹈演员，林周县艺术团公告列包含舞蹈在内的演职人员。两例可对照岗位内容与计酬构成。 两份历史公告只说明各自条件。中国大陆舞蹈演员的职业工资分布与合同分布仍缺可比资料。",
               "中国营利公众现场表演按营业性演出规则：团体、经纪机构的许可与职业个体演员登记/备案、举办具体演出的审批分别核。实施细则7/9艺术能力证明可为规定毕业证、职称或其他有效证明；不能把中专学历、经纪人员证或单位内部授权写成所有舞者唯一准入。录制是否适用另核具体条件。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
             "r5-cn-performance",
-            "r5-cn-detail"
+            "r5-cn-detail",
+            "a24-huadu",
+            "a24-linzhou"
           ],
           "type": "notice"
         },
@@ -28978,26 +28951,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "虚构排练情景材料（练习输入）",
-                  "虚构情境：一名舞者在同一排练周期遇到四个问题。第一，编舞者在合排前临时调整了群舞段落的队形与走位；第二，一个托举段落在连续排练后，舞伴反映时间点总差半拍；第三，排练中膝盖出现持续不适，但距离首演只剩三天；第四，演出场地的地面比排练厅更滑，走位空间也更窄。",
-                  "已给材料：编舞要求与修改说明；动作与节拍要求；群舞走位与停止信号要求；训练与演出安全流程及上报路径。",
-                  "未给材料：临时修改后队形如何重新确认、托举段落的保护措施由谁安排、身体不适时能否继续参加排练与演出、以及场地条件变化时的调整权限。练习中如需要这些条件，请明确写出你的假设与需要确认的对象。"
+                  "纸面排练记录：八拍组合原路线从 A 到 B，拟改为 A 到 C。地标仍贴旧线，排练负责人尚未批准改线，拟议路线的地标也待舞台监督核对。",
+                  "第 5 拍有双人配合，搭档反映入位晚半拍。另一位演员发出“停”并报告持续膝部不适。",
+                  "题设规则：听到“停”全组暂停；改路线或配合动作前由排练负责人确认，舞台监督核地标。恢复须明确口令并由相应人员处理不适。",
+                  "片段仅可在内部复盘，外发另核授权。只写纸面记录，不尝试托举或继续试跳。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "任务要求",
-                  "请写出一页处置与上报方案：包含临时队形修改的确认方式、托举段落时间点与保护措施的复核安排、身体不适的处理与沟通，以及场地条件变化的应对。",
-                  "方案要写明哪些信息来自题面材料、哪些还是假设，并说明依据的是编舞要求、排练流程还是训练与演出安全规程。"
+                  "先写暂停理由，分别记录改线、晚半拍和不适。",
+                  "标明谁确认线路与配合、何时可恢复、视频外发尚缺什么授权。",
+                  "先写交接初稿，保留待确认事项。第七天再打开参考。 在纸面记录走位提议和不适，不自行改线或做医疗判断。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "参考交付（可从题面推导）",
-                  "方案应包含：临时队形修改（与编舞者确认新走位与时机，合排前先在慢速下复核，明确停止信号后再全速合排）、托举时间点（复核音乐节拍与走位起点，由排练指导安排保护措施并在确认安全后再合排，不勉强完成）、身体不适（如实上报并暂停该动作，按安全流程评估与恢复，不自行决定带伤继续）、场地变化（演出前检查地面与走位空间，必要时调整动作难度或路线并报排练指导确认）、交接（写清四项事项的状态、已采取动作与待确认事项）。",
-                  "参考交付只列应包含的要素，不要求与示例措辞一致；能说明判断依据即可。"
+                  "先完成独立答卷",
+                  "到「常见问题与资料来源」打开「排练交接参考答案（完成第六天后再打开）」。",
+                  "第七天用自核项记录一处差异和修订。"
                 ]
               },
               {
@@ -29027,50 +29000,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "第 1 天：读一份公开材料",
-                  "找一份公开的舞蹈训练或舞台安全科普材料，标出三条关键要求与对应做法，写下你想确认的地方。"
+                  "第 1 天：按本页题面练习",
+                  "纸面排练记录：八拍组合原路线从 A 到 B，拟改为 A 到 C。地标仍贴旧线，排练负责人尚未批准改线，拟议路线的地标也待舞台监督核对。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "第 2 天：做一次动作与节拍分解",
-                  "用虚构音乐与动作，写出一个段落的动作序列与节拍对应表，并注明需确认的条件。"
+                  "第 2 天：按本页题面练习",
+                  "先写暂停理由，分别记录改线、晚半拍和不适。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第 3 天：写一份群舞走位说明",
-                  "用虚构段落，列出队形变化、走位路径、配合时机与停止信号设置。"
+                  "第 3 天：按本页题面练习",
+                  "标明谁确认线路与配合、何时可恢复、视频外发尚缺什么授权。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "第 4 天：做一次训练与恢复安排",
-                  "用虚构一周，写出训练、体能与恢复安排，并标出疼痛或不适时的暂停与上报条件。"
+                  "第 4 天：按本页题面练习",
+                  "先写交接初稿，保留待确认事项。第七天再打开参考。 在纸面记录走位提议和不适，不自行改线或做医疗判断。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "第 5 天：写一次异常处置记录",
-                  "用虚构场景写一份动作失误或队形不齐的复核与上报记录，含判断依据与交接内容。"
+                  "第 5 天：按本页题面练习",
+                  "复查暂停信号、走位确认、恢复授权的接手人与依据。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第 6 天：让他人只凭材料复核",
-                  "让一位同伴只看你的方案复核你的判断，记录对方提出的问题。"
+                  "第六天：独立完成交接",
+                  "交一份写明依据、处置和接手人的纸面记录，先不打开参考。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第 7 天：判断是否继续",
-                  "回到本页的判断清单，写下你愿意继续的三条理由与需要慎重的两条条件。"
+                  "第七天：打开参考并复盘",
+                  "到「常见问题与资料来源」打开「排练交接参考答案（完成第六天后再打开）」。 记下一处差异和修订。 能说明何时暂停、谁接手、什么须授权，可继续了解。仍有漏项先重做。真实岗位条件向雇主核。"
                 ]
               }
             ]
@@ -29095,7 +29068,7 @@
               "材料边界：练习材料均为虚构或以公开资料为基础，不得写入真实项目或未公开的编排信息。",
               "反馈反应：当编舞者或排练指导反复指出你的问题时，你是否愿意回去打磨细节。",
               "过程兴趣：即使重复训练与合排很枯燥，你是否愿意每次都完成热身、复核与记录。",
-              "下一步：如果前六步你都愿意继续，下一步是在合规前提下（如一次排练跟做或试训）完成一次从动作学习、合排到呈现的闭环并请有经验者评阅；如果某一步明显消耗，先缩小方向再验证。"
+              "第七天按折叠参考自核。 能说明何时暂停、谁接手、什么须授权，可继续了解。仍有漏项先重做。真实岗位条件向雇主核。"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -29160,7 +29133,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国自身档案和中国营业性演出条例/实施细则分别适用；未取得中国真实招聘/合同、未完整核未成年人/学校/涉外配套，不称已查公开雇主统一条件。"
+              "中国营业性演出要求按演出性质和主体核对。两份大陆招聘只说明各自岗位。实际合同及未成年人、学校或涉外演出条件须另核。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
@@ -29397,7 +29370,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：按该具体角色/机构公告核训练、经验与适用资格；未取得真实中国招聘样本，不称统一晋级门槛。教学/编创相邻岗位另核。"
+              "按目标团体公告核训练、经验与适用资格。教学或编舞岗位另查。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
@@ -29476,7 +29449,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：按该具体角色/机构公告核训练、经验与适用资格；未取得真实中国招聘样本，不称统一晋级门槛。教学/编创相邻岗位另核。"
+              "按目标团体公告核训练、经验与适用资格。教学或编舞岗位另查。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.credentials",
@@ -29553,7 +29526,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：按该具体角色/机构公告核训练、经验与适用资格；未取得真实中国招聘样本，不称统一晋级门槛。教学/编创相邻岗位另核。"
+              "按目标团体公告核训练、经验与适用资格。教学或编舞岗位另查。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.03.credentials",
@@ -29632,7 +29605,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：按该具体角色/机构公告核训练、经验与适用资格；未取得真实中国招聘样本，不称统一晋级门槛。教学/编创相邻岗位另核。"
+              "按目标团体公告核训练、经验与适用资格。教学或编舞岗位另查。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
@@ -29727,7 +29700,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：按该具体角色/机构公告核训练、经验与适用资格；未取得真实中国招聘样本，不称统一晋级门槛。教学/编创相邻岗位另核。"
+              "按目标团体公告核训练、经验与适用资格。教学或编舞岗位另查。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
@@ -29806,7 +29779,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：按该具体角色/机构公告核训练、经验与适用资格；未取得真实中国招聘样本，不称统一晋级门槛。教学/编创相邻岗位另核。"
+              "按目标团体公告核训练、经验与适用资格。教学或编舞岗位另查。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.02.credentials",
@@ -29885,7 +29858,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：按该具体角色/机构公告核训练、经验与适用资格；未取得真实中国招聘样本，不称统一晋级门槛。教学/编创相邻岗位另核。"
+              "按目标团体公告核训练、经验与适用资格。教学或编舞岗位另查。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.03.credentials",
@@ -29964,7 +29937,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：按该具体角色/机构公告核训练、经验与适用资格；未取得真实中国招聘样本，不称统一晋级门槛。教学/编创相邻岗位另核。"
+              "按目标团体公告核训练、经验与适用资格。教学或编舞岗位另查。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.credentials",
@@ -30059,7 +30032,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：按该具体角色/机构公告核训练、经验与适用资格；未取得真实中国招聘样本，不称统一晋级门槛。教学/编创相邻岗位另核。"
+              "按目标团体公告核训练、经验与适用资格。教学或编舞岗位另查。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -30138,7 +30111,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：按该具体角色/机构公告核训练、经验与适用资格；未取得真实中国招聘样本，不称统一晋级门槛。教学/编创相邻岗位另核。"
+              "按目标团体公告核训练、经验与适用资格。教学或编舞岗位另查。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.02.credentials",
@@ -30217,7 +30190,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：按该具体角色/机构公告核训练、经验与适用资格；未取得真实中国招聘样本，不称统一晋级门槛。教学/编创相邻岗位另核。"
+              "按目标团体公告核训练、经验与适用资格。教学或编舞岗位另查。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.03.credentials",
@@ -30296,7 +30269,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：按该具体角色/机构公告核训练、经验与适用资格；未取得真实中国招聘样本，不称统一晋级门槛。教学/编创相邻岗位另核。"
+              "按目标团体公告核训练、经验与适用资格。教学或编舞岗位另查。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.04.credentials",
@@ -30396,7 +30369,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需求分层：全国预测、实际机构/合同结构和当期试镜样本各回答不同问题；本轮无中国真实在招样本，不宣称市场或项目结构已造成岗位变化。"
+              "美国就业预测与两份大陆招聘公告分别说明不同市场。 历史公告可帮助理解岗位和计酬条件。当期岗位应以雇主信息为准。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30955,7 +30928,7 @@
           "data": {
             "entries": [
               {
-                "answer": "表演舞蹈，可能在舞台上、广播中或视频录制中表演：学习并练习角色所需的舞蹈动作；使身体动作与音乐伴奏的节奏协调一致；通过训练、锻炼与参加舞蹈课程保持技术熟练度、身体能力与体能；与舞伴或舞蹈团体的动作协调配合；培养对自身体能与局限的了解并据此选择舞蹈风格；在演出中表演古典、现代或杂技舞蹈，用身体表达故事、节奏与声音；与编舞者协作完善或修改舞步；参加试镜、服装试穿、摄影与化妆通告；关注舞蹈领域趋势；准备足尖鞋等演出用品；必要时在舞蹈之外演唱或表演；教授舞蹈学生；并为自己或他人设计与编创舞蹈。",
+                "answer": "学习与反复排练动作，在舞台、活动或镜头前完成表演，按编导反馈调整节奏、站位和配合。应聘时核清排练、演出与外地交通怎么计酬。",
                 "id": "actors.faq.1",
                 "question": "舞者每天的具体工作是什么？",
                 "question_key": "career.faq.dancers.1",
@@ -30964,27 +30937,27 @@
                 ]
               },
               {
-                "answer": "本职业按编排用身体执行舞蹈动作并呈现作品；编舞师负责构思与编创舞蹈并指导排练；演员以台词与表演塑造角色；音乐家与歌手以演奏或演唱呈现音乐作品；高校艺术戏剧和音乐教师以教学与研究为核心；运动员与体育竞赛选手以竞技成绩为目标；健身训练师与团体健身指导员以指导他人锻炼为核心。名称相近不代表职责、评价标准或资格可以互换。",
+                "answer": "舞蹈演员重在完成表演，编舞者重在设计动作和组织排练。小团队可能兼任，签约前确认交付和计酬范围。",
                 "id": "actors.faq.2",
-                "question": "这个职业与相邻的编创、表演与体育方向有什么区别？",
+                "question": "舞蹈演员和编舞有什么区别？",
                 "question_key": "career.faq.dancers.2",
                 "source_refs": [
                   "onet"
                 ]
               },
               {
-                "answer": "编舞与动作记录软件、视频回放与动作分析可辅助记录编排、对照走位与复盘修改，社交与视频平台也改变了作品与试镜材料的传播方式，这些可减少部分记录、整理与沟通工作；但角色动作的完成、与音乐节拍的配合、与舞伴和群舞的即时协调、身体状态判断以及现场的临场处理仍依赖人的身体与判断，并受排练与演出安全规程约束。O*NET 显示本职业 91% 表示身体距离极近、85% 表示与他人持续接触、76% 表示持续或几乎持续弯腰或扭转身体；技术暴露不等于组织采用或岗位消失，也不能解释为岗位流失概率。",
+                "answer": "回放和节拍提示可用于复盘动作。临场走位、搭档配合和暂停仍由演员及现场团队判断。实际采用率与就业影响缺少职业级数据。",
                 "id": "actors.faq.3",
                 "question": "AI 会怎样影响或取代舞者？",
                 "question_key": "career.faq.dancers.3",
                 "source_refs": [
-                  "bls"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：编排记录与走位复盘、排练沟通与材料整理、现场呈现的辅助提示三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "视频和节拍工具可帮助记动作、对齐节奏。舞台走位、临场配合和是否能安全继续，仍要由演员与现场团队判断。 这不是对本职业 AI 使用率或岗位替代的测量。",
                 "id": "actors.faq.4",
-                "question": "这个职业哪些任务已有 AI 变化证据？",
+                "question": "哪些工作可能由软件辅助？",
                 "question_key": "career.faq.dancers.4",
                 "source_refs": [
                   "onet"
@@ -30996,53 +30969,60 @@
                 "question": "面对 AI，这个职业仍应重点验证哪些能力？",
                 "question_key": "career.faq.dancers.5",
                 "source_refs": [
-                  "bls"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位时薪 24.80 美元，小时工资分位为 14.88／17.23／24.80／38.36／52.30 美元，为 O*NET-SOC 27-2031.00 本细类口径；该职业工资页未公布年度中位数（年度数值标注为 n/a），因此不能据小时值推算年薪或个人收入，也不能当作个人报价；中国大陆未取得职业级数值，本页按缺口处理，不使用行业均值或项目报价样本代填。",
+                "answer": "美国 2025 年 5 月工资中位数为 24.80 美元/小时，来源未公布年工资中位数。 2023 年 6 月花都公益招聘会列商演舞蹈演员 4 人，4,000–6,000 元/月，含活动演出、路演协作及短期出差。普兰县政府 2026 年 4 月转载林周县艺术团招聘，列基本月薪和场次补贴，未列金额。",
                 "id": "actors.faq.6",
                 "question": "这个职业的工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.dancers.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "a24-huadu",
+                  "a24-linzhou"
                 ]
               },
               {
-                "answer": "美国准备层级为 Job Zone Three（SVP 6.0 至低于 7.0），官方教育调查显示新入职者中 45% 要求高中文凭或同等学历、34% 要求高中以下学历、14% 要求中等后证书；中国大陆多要求舞蹈训练基础与舞台经验，部分岗位要求舞蹈专业学历，具体按目标单位规定。",
+                "answer": "O*NET 将本岗列为 Job Zone 3。受访者回答新聘要求时，45% 选高中或同等学历、34% 选低于高中、14% 选中学后证书，所列回答并不穷尽。BLS 对 27-2031 的典型口径是无正式学历要求、长期在岗训练。具体试演与学历看招聘。",
                 "id": "actors.faq.7",
                 "question": "这个职业需要什么学历，又该怎样训练？",
                 "question_key": "career.faq.dancers.7",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "a24-bls-projections"
                 ]
               },
               {
-                "answer": "O*NET 提供该细分的认证与培训查询入口，但认证不等于许可证、雇主任命、签字权或所在地授权；中国大陆该类岗位多按团体与项目要求通过选拔与训练取得演出机会，特定演出或舞台操作可能另有授权要求；具体条件按目标单位与现行规定核对。",
+                "answer": "在中国大陆，先区分团体聘用与以营业性演出为职业的个体演员。应聘时核试镜、训练和岗位要求。若以个体演员身份从事营业性演出，再向属地文旅主管部门核登记、备案和艺术表演能力证明。具体演出的审批另核。",
                 "id": "actors.faq.8",
                 "question": "做这个职业必须考证吗？",
                 "question_key": "career.faq.dancers.8",
                 "source_refs": [
-                  "cn-rule"
+                  "r5-cn-performance",
+                  "r5-cn-detail"
                 ]
               },
               {
-                "answer": "先用公开或虚构材料完成一次「写一份虚构角色的动作与节拍分解表—按虚构群舞段落写出走位与配合要点—写出训练中疼痛或不适时暂停与上报的处理流程」练习，或一次排练跟做，再核对目标方向的对象、训练要求与安全边界。",
+                "answer": "先做本页纸面排练交接。分开记录走位提议、晚半拍和不适，第七天按折叠参考复盘。",
                 "id": "actors.faq.9",
                 "question": "零基础想尝试这个方向，应该先做什么？",
-                "question_key": "career.faq.dancers.9",
+                "question_key": "career.faq.dancers.9"
+              },
+              {
+                "answer": "美国 BLS 预计 U.S. SOC 27-2031 就业从 2025 年约 13,800 到 2035 年约 14,100（+2.2%）。年均约 1,600 个空缺，包含替补需求。",
+                "id": "actors.faq.10",
+                "question": "美国就业预测怎么读？",
+                "question_key": "career.faq.dancers.10",
                 "source_refs": [
-                  "bls"
+                  "a24-bls-projections"
                 ]
               },
               {
-                "answer": "O*NET 摘要与就业趋势页（基于 BLS 2024—2034 年预测，27-2031.00 本细类口径）显示该口径 2024 年约 12,300 人，预测标签为「快于平均」（5%—6%），年均约 1,800 个含增长与替换的空缺；该预测为职业总量口径且职业规模较小，工作以训练、排练与演出为主，须按本地演出市场、制作结构与项目制用工核对，并优先核对训练与恢复条件、场地与器械安全以及报酬结算与保险安排。",
-                "id": "actors.faq.10",
-                "question": "现在选择这个职业，还应考虑什么？",
-                "question_key": "career.faq.dancers.10",
-                "source_refs": [
-                  "bls"
-                ]
+                "answer": "本题为费马测试编写的虚构纸面练习。 全组先停。记录第 5 拍晚半拍及有人持续不适，通知排练负责人。 地标仍是 A→B；A→C 只是提议。先由排练负责人确认，由舞台监督核对地标。未确认前不改走位或尝试托举。 不适按场所流程交有权人员处理，收到明确恢复口令再继续。视频外发授权未核，先不发。 自核四项：暂停理由与晚半拍、路线与地标核对人、不适处理与恢复口令、录像外发授权。 每项齐全计一项。 恢复前由排练负责人确认第 5 拍的搭档配合，再按题设等明确恢复口令。",
+                "id": "actors.faq.11",
+                "question": "排练交接参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.dancers.11"
               }
             ]
           },
@@ -31058,8 +31038,8 @@
           "data": {
             "entries": [
               "美国27-2031自身2025小时工资与2025—2035含自雇就业预测分别引用，工资排除自雇；无年度工资，不固定小时年化。",
-              "中国NBS2025文化行业税前年均仅背景，职业工资/报价缺口保留；未核真实招聘与合同。",
-              "任务/情境是美国职业调查，Updated非统一年；编辑风险、路径及工具候选非事故、采用、雇主统一制度或资格结论；五份练习和其他范围外内容本轮未改。"
+              "中国文化行业年均工资用于行业背景。花都与林周公告仅说明各自岗位与计酬方式。",
+              "美国任务与工作情境来自职业调查。纸面练习只用于检验交接和判断。"
             ]
           },
           "id": "actors.sources.boundary.1",
@@ -31110,7 +31090,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "更新：2026-10-09（各来源检索日期见来源登记）"
+              "就业预测与招聘样本核对于 2026-11-10。各来源的统计期和公告日期分别列出。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31124,7 +31104,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "区分官方数据、法律条款、编辑建议与真实证据缺口；范围外旧值未改，本轮不代表完整页面或正式发布验收。"
+              "美国资料说明该职业的工作与就业。中国行业工资、商演招聘和艺术团公告分别列出，计酬方式按具体合同核对。"
             ]
           },
           "id": "actors.display.source_card.note",
@@ -31282,21 +31262,21 @@
                 "url": "https://www.onetonline.org/link/summary/25-1121.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "支持该职业的就业与预测口径（本细类）。",
-                  "不含中国大陆信息，不能替代中国大陆数据。",
-                  "本轮核查：旧2024—2034消费者保留；本轮授权模块用当前27-2031自身2025—2035，不用合并27-2030。"
+                  "美国 27-2031 舞蹈演员。",
+                  "年均空缺含替补。",
+                  "用于美国就业与预测。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "旧2024—2034消费者保留；本轮授权模块用当前27-2031自身2025—2035，不用合并27-2030。",
+                "limitation": "美国 27-2031 舞蹈演员。",
                 "market": "美国",
-                "name": "O*NET OnLine：Dancers 27-2031.00 摘要与就业趋势（基于 BLS 2024—2034 年预测）",
-                "period": "2024—2034 年预测期；检索 2026-09-19",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/27-2031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31478,7 +31458,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "支持本职业的任务、工作情境与准备层级。",
                   "不含技术采用与岗位替代数据。"
@@ -31491,7 +31471,7 @@
                 "period": "页面 2026 年更新；检索 2026-09-19",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/27-2031.00"
+                "url": "https://www.onetonline.org/link/details/27-2031.00"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31820,6 +31800,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 预计 U.S. SOC 27-2031 就业从 2025 年约 13,800 到 2035 年约 14,100（+2.2%）。年均约 1,600 个空缺，包含替补需求。"
+                ],
+                "evidence_type": "官方统计",
+                "id": "a24-bls-projections",
+                "limitation": "年均空缺包含替补；不是净增或录用概率。",
+                "market": "美国",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "4 人，4,000–6,000 元/月。出演商演节目，协助路演与外场，需适应短期出差。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a24-huadu",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "商演舞蹈演员",
+                "period": "2023-06-13",
+                "publisher": "花都区人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.huadu.gov.cn/zdlyxxgk/jycy/zpxx/content/post_9044628.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "演职人员 3 人，含舞蹈、曲艺等。基本月薪加场次补贴等，公告未列具体金额。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a24-linzhou",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "林周县艺术团演职人员",
+                "period": "2026-04 转载公告",
+                "publisher": "林周县文化和旅游局",
+                "scope": "recruitment_proxy",
+                "url": "https://pulan.gov.cn/info/2301/199551.htm"
               }
             ]
           },
@@ -34651,7 +34676,7 @@
             },
             {
               "指标": "证据不足",
-              "数值": "未取得中国大陆该类岗位招聘或项目报价统计与工资分位数",
+              "数值": "中国大陆舞蹈演员的职业工资分布与合同分布仍缺可比资料。",
               "说明": "不使用个别项目或平台的报价冒充全国数据，也不插值。"
             }
           ],
@@ -34814,7 +34839,7 @@
               }
             },
             {
-              "城市/区间": "中国大陆（行业门类口径）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34826,13 +34851,14 @@
           "china_soc_row": "美国职业代码O*NET-SOC 27-2031.00；本轮未取得可与之直接比较的中国职业级工资口径。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a24-huadu",
+            "posting-a24-linzhou"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响这个职业的工资吗？",
             "driver_heading": "演出工作怎样按项目与制作周期安排？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "编辑核对项与目标岗位条件，非学历角色分布或工资统计",
             "scenario_heading": "目标舞蹈岗位需要核对哪些训练与任职条件？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36767,7 +36793,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解舞者的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36879,14 +36905,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解我的人格偏好"
@@ -37270,7 +37288,7 @@
         "occupation_scope": "Dancers（27-2031.00）本细类口径；O*NET 全国工资页 2025 年 BLS OEWS 工资数据，该页仅公布小时工资分位，年度数值显示为 n/a，不能据小时值推算年薪或个人收入",
         "period": "2025 年工资数据；检索 2026-09-19",
         "source_refs": [
-          "oews"
+          "r5-wages-current"
         ]
       },
       {
@@ -37298,39 +37316,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约12,300人（2024 年）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "13,800 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模（存量统计）",
-        "occupation_scope": "Dancers（27-2031.00）本细类口径；2024 年就业人数来自 O*NET 摘要页（基于 BLS 2024—2034 年预测）",
-        "period": "2024 年基期；检索 2026-09-19",
+        "occupation_scope": "U.S. SOC 27-2031",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a24-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "快于平均 5%—6%（2024—2034 年，标签「Faster than average」）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "+2.2%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "预测就业变化（职业总量）",
-        "occupation_scope": "27-2031.00 本细类口径；预测标签「快于平均」（5%—6%），属于预测期总量变化，不是个人录用概率；该职业规模小且多为短期项目制，总量变化对个人机会的解释力有限",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "U.S. SOC 27-2031",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a24-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约1,800个（2024—2034 年年均，含增长与替换）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 1,600 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "年均职位空缺（含增长与替换）",
-        "occupation_scope": "27-2031.00 本细类口径；空缺为 2024—2034 年年均，含因增长与替换产生的位置，不是每年净增岗位数",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "U.S. SOC 27-2031",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a24-bls-projections"
         ]
       },
       {
@@ -37418,39 +37436,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约13800人（2025；27-2031自身含自雇）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "13,800 人（2025）",
         "fact_id": "r5-current-employment",
         "market": "美国",
         "measure": "基期就业存量",
-        "occupation_scope": "BLS27-2031自身，不是27-2030合并；非当年招聘数",
-        "period": "2025基期；检索2026-10-09",
+        "occupation_scope": "U.S. SOC 27-2031",
+        "period": "2025",
         "source_refs": [
-          "r5-bls-current"
+          "a24-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2.2%（2025—2035；约13800→14100）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "+2.2%",
         "fact_id": "r5-current-growth",
         "market": "美国",
         "measure": "十年预测就业净变化",
-        "occupation_scope": "BLS自身27-2031；O*NETSlower1–2%为分类非精确百分比，非录用或AI因果",
-        "period": "2025—2035预测；检索2026-10-09",
+        "occupation_scope": "U.S. SOC 27-2031",
+        "period": "2025–2035",
         "source_refs": [
-          "r5-bls-current"
+          "a24-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约1600个/年（2025—2035；含增长与替换）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 1,600 个（含替补）",
         "fact_id": "r5-current-openings",
         "market": "美国",
         "measure": "年均预计空缺",
-        "occupation_scope": "自身27-2031；非每年净增1600或在招样本",
-        "period": "2025—2035预测；检索2026-10-09",
+        "occupation_scope": "U.S. SOC 27-2031",
+        "period": "2025–2035",
         "source_refs": [
-          "r5-bls-current"
+          "a24-bls-projections"
         ]
       },
       {
@@ -37512,6 +37530,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "4 人，4,000–6,000 元/月。出演商演节目，协助路演与外场，需适应短期出差。",
+        "fact_id": "posting-a24-huadu",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "商演舞蹈演员",
+        "period": "2023-06-13",
+        "source_refs": [
+          "a24-huadu"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "演职人员 3 人，含舞蹈、曲艺等。基本月薪加场次补贴等，公告未列具体金额。",
+        "fact_id": "posting-a24-linzhou",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "林周县艺术团演职人员",
+        "period": "2026-04 转载公告",
+        "source_refs": [
+          "a24-linzhou"
+        ]
       }
     ]
   },
@@ -37538,19 +37580,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，快于平均 5%—6%）"
+        "label": "美国预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 12,300 人）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，约 1,800 个，含增长与替换）"
+        "label": "美国预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37564,17 +37606,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "舞者（O*NET-SOC 27-2031.00）表演舞蹈，可能在舞台上、广播中或视频录制中表演：覆盖学习并练习角色舞蹈动作、把身体动作与音乐节奏协调、通过训练锻炼与课程保持技术与体能、与舞伴或团体协调动作、认识体能与局限并选择舞种、在演出中表演古典现代或杂技舞蹈、与编舞者协作修改舞步、参加试镜、参加服装试穿与化妆摄影通告、关注舞蹈趋势、准备足尖鞋等用品、必要时兼演唱或表演、教授舞蹈学生并为自己或他人编创舞蹈等任务；需说明其美国就业与工资口径：该职业 2024 年约 12,300 人在岗、2024—2034 年预测为快于平均（5%—6%）、年均约 1,800 个含增长与替换的空缺；2025 年工资页只公布小时工资分位（14.88／17.23／24.80／38.36／52.30 美元，中位 24.80 美元/时），未公布年度中位数；行业为 艺术、娱乐与休闲 44%／住宿与餐饮服务 24%／其他行业 32%；兴趣代码 ARS、准备层级 Job Zone Three；以及中国大陆该类岗位的职业级工资缺口与动作序列核对、身体能力边界、走位与协调、演出安全与升级的控制点。"
+      "text": "舞蹈演员怎么排练、试演和核报酬？比较花都商演招聘、林周艺术团条件和美国时薪。"
     },
     "title": {
       "availability": "available",
       "text": "舞者"
     }
   },
-  "source_content_sha256": "f510dcbd589a37c1c015d5b7720bf1261bcd3e21762a9a107c3c04cb40054dc6",
+  "source_content_sha256": "84546c6277cb0ba19103aa00d3fd695299a07252b695151566ea22a71f9af0bd",
   "subject": {
     "canonical_slug": "dancers",
     "name": "舞者",
-    "summary": "舞者在美国对应 O*NET-SOC 27-2031.00（Dancers），表演舞蹈，可能在舞台上、广播中或视频录制中表演：学习并练习角色所需的舞蹈动作，使身体动作与音乐伴奏的节奏协调一致；通过训练、锻炼与参加舞蹈课程保持技术熟练度、身体能力与体能；与舞伴或舞蹈团体协调动作；认识自身体能与局限并据此选择舞蹈风格；在演出中表演古典、现代或杂技舞蹈，用身体表达故事、节奏与声音；与编舞者协作完善或修改舞步；为舞蹈角色或舞团成员资格参加试镜；参加与演出相关的服装试穿、摄影与化妆通告；关注舞蹈领域趋势与创新；准备足尖鞋等演出用品；必要时在舞蹈之外演唱或表演；教授舞蹈学生；并为自己或他人设计与编创舞蹈。该职业准备层级为 Job Zone Three（需要中等程度准备，SVP 6.0 至低于 7.0），官方教育调查显示新入职者中 45% 要求高中文凭或同等学历、34% 要求高中以下学历、14% 要求中等后证书。在 O*NET 上，本细类的任务、工作情境与准备层级为自身口径；其工资页只公布小时工资分位，未公布年度中位数。中国侧同类为演出团体、舞团与商业演出中的舞蹈表演岗位，职责、用工与计酬口径与该美国职业细类不是一一对应，不能互换。"
+    "summary": "学习与反复排练动作，在舞台、活动或镜头前完成表演，按编导反馈调整节奏、站位和配合。应聘时核清排练、演出与外地交通怎么计酬。"
   }
 }

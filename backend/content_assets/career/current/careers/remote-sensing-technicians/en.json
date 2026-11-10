@@ -14244,20 +14244,8 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "remote-sensing-technicians.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
         "ref": {
@@ -14632,40 +14620,16 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": {
-          "id": "remote-sensing-technicians.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": {
-          "id": "remote-sensing-technicians.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "remote-sensing-technicians.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
         "ref": {
@@ -23335,7 +23299,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "T1—T5 are entirely fictional and grant no authority over data, surveying, flight, or release of results."
+              "If repeated checks or deferring a conclusion when evidence is missing would be difficult, check the role’s workflow. Confirm authority separately for collection, flight, and publication."
             ]
           },
           "id": "remote-sensing-technicians.quick-decision.fit-decision-checklist.1",
@@ -23350,7 +23314,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "First compute NDVI by hand, then exclude cloud pixels, mark zero denominators, and list scale and independent validation to-dos."
+              "Use the three fictional pixels in section 09 to draft a screening and handoff sheet. Record your decisions before checking the key."
             ]
           },
           "id": "remote-sensing-technicians.quick-decision.fit-decision-checklist.2",
@@ -23364,7 +23328,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Those willing to check equipment, metadata, parameters, and quality, and who keep the original value, recompute when discrepancies appear, and hand over, can explore this role."
+              "Explore technician roles if you enjoy checking equipment and metadata, retaining original values, and documenting revisions."
             ]
           },
           "id": "remote-sensing-technicians.quick-decision.fit-decision-checklist.3",
@@ -23584,7 +23548,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "USGS describes the QA_PIXEL and QA_RADSAT quality bands of Landsat Collection 2; they contain flags such as clouds, but products and bit encodings are checked separately. The T2 cloud contamination is an editorial premise, not an official QA code."
+              "In Landsat Collection 2, QA_PIXEL includes cloud quality flags and QA_RADSAT identifies radiometric saturation by band. Check the USGS bit definitions and masking rules for the exact sensor and product."
             ]
           },
           "id": "remote-sensing-technicians.profile.onet-structured-fields-block.5",
@@ -25818,7 +25782,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Keeps the original 0.50 value on processing slip A and lists the 0.60 recomputation, the reason, the timestamped version, and the reviewer."
+              "Keep the original processing slip. Record the recomputed value, reason for any discrepancy, version time, and reviewer. Work out the result from the inputs in section 09."
             ]
           },
           "id": "remote-sensing-technicians.ai-impact.ai-impact-table.89",
@@ -25848,7 +25812,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Recompute P1=0.60 and P2≈0.333; P2 is excluded, P3 has no value, and the unknown scale of T5 remains to be checked."
+              "Recalculate the fictional pixels in section 09. Separate a computable value, quality exclusion, and no value, and record any unknown scale factor."
             ]
           },
           "id": "remote-sensing-technicians.ai-impact.ai-impact-table.91",
@@ -25998,7 +25962,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Tools can flag the T2 cloud flag; do not pass on appearance."
+              "A tool can extract quality flags. Check the original record and product rules before recording a disposition."
             ]
           },
           "id": "remote-sensing-technicians.ai-impact.ai-impact-table.101",
@@ -26058,7 +26022,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Tools can compute 0.60 and about 0.333, P2 is still excluded, and P3 has no value; keep the 0.50 on processing slip A and raise a 0.60 revision."
+              "Tools can apply the formula, but a reviewer must check quality flags, missing values, scale, and version. Section 09 provides a fictional exercise, not land-cover evidence."
             ]
           },
           "id": "remote-sensing-technicians.ai-impact.ai-impact-table.105",
@@ -27031,13 +26995,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Industry averages, job quotes, and individual contracts have different denominators; do not infer starting pay."
+              "Data collection, image processing, and product preparation overlap with mainland category 2-02-02-03. It is broader than a technician job title. For production openings, check delivery format, QC records, and who accepts the final product."
             ]
           },
           "id": "remote-sensing-technicians.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "editor",
-            "editor"
+            "cn-rs-class"
           ],
           "type": "prose"
         },
@@ -27777,31 +27741,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Cartographers and photogrammetrists",
@@ -28224,8 +28188,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Recomputes T1 as 0.6 and T2 as 1/3, but the latter carries a cloud flag.",
-              "Identifies the zero denominator in T3 and does not produce a valid NDVI."
+              "Can you recompute the fictional pixels and explain how quality flags change which values are retained?",
+              "Can you document when the formula applies, which quality flags matter, and what evidence still needs checking?"
             ]
           },
           "id": "remote-sensing-technicians.fit.personality-fit-block.20",
@@ -28699,7 +28663,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Trainable. First recompute 0.6 and 1/3 and distinguish zero denominators and cloud flags, then study statistics and remote sensing."
+              "This is learnable. Start with the calculations and quality screening in section 09 before studying statistics and remote sensing."
             ]
           },
           "id": "remote-sensing-technicians.fit.personality-fit-block.52",
@@ -29131,7 +29095,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "T2: carries a cloud flag and cannot be interpreted the same as a clear pixel."
+              "Image appearance alone is insufficient. Use product rules and quality records to document whether a pixel can enter later analysis."
             ]
           },
           "id": "remote-sensing-technicians.risk.career-risk-cards.18",
@@ -29191,7 +29155,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "T3: both NIR and RED are 0, so NDVI is undefined."
+              "Keep original band values and quality flags. Use section 09 to check each fictional pixel and document your reasoning."
             ]
           },
           "id": "remote-sensing-technicians.risk.career-risk-cards.22",
@@ -29251,7 +29215,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "T4: the 0.50 on processing slip A differs from the recomputed 0.60; keep the original value and hand over a revision."
+              "If a recomputation differs from the original processing slip, keep the original and submit a proposed change to the reviewer. Section 09 gives fictional inputs to check."
             ]
           },
           "id": "remote-sensing-technicians.risk.career-risk-cards.26",
@@ -29538,7 +29502,7 @@
                 "values": [
                   "Career preparation",
                   "O*NET Job Zone Four; most occupations of this type require a bachelor's degree; specific project requirements are checked separately.",
-                  "Not a uniform Chinese education requirement or license."
+                  "A Suzhou Zhongtian Feiqi production listing includes processing aerial imagery, generating orthophotos or 3D products, quality checks, map production, database ingestion, and delivery of the outputs. The posting groups pilot and technician pay, so it does not establish pay for this processing role. A SouthGIS data processing technician vacancy in Guangzhou, posted on Yunnan University’s careers site, lists GIS, surveying, photogrammetry, and remote sensing among the relevant fields. It describes a broader geospatial role; the title does not establish a remote-sensing-only job."
                 ]
               },
               {
@@ -29570,7 +29534,9 @@
           "id": "remote-sensing-technicians.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "sz-rs-production",
+            "ynu-gis-production"
           ],
           "title": "What do employers usually look for in hiring?",
           "type": "cards"
@@ -29584,10 +29550,10 @@
                 "id": "exercise-materials",
                 "values": [
                   "Premise｜T1—T5 are fictional handover data, not real observations",
-                  "Recompute NDVI and complete the quality handover in 30 minutes per the given procedure; NIR and RED are already comparable reflectance and need no extra scaling.",
+                  "Allow 30 minutes. NIR means near-infrared reflectance and RED means red reflectance. The supplied values already use the same scale.",
                   "T1｜P1: NIR=0.80, RED=0.20, with a premise quality of clear.",
                   "T2｜P2: NIR=0.60, RED=0.30, with a premise quality of cloud-contaminated.",
-                  "T3｜P3: NIR=0, RED=0, the denominator is zero.",
+                  "T3 | P3: NIR=0, RED=0.",
                   "T4｜processing slip A states P1=0.50; a recomputation, a retained old value, and a marked revision are needed, and silent overwriting is not allowed.",
                   "T5｜no coordinates, period, product, pixel area, or ground truth were given; area, change, or classification accuracy cannot be inferred."
                 ]
@@ -29596,24 +29562,22 @@
                 "id": "exercise-task",
                 "values": [
                   "Task and outputs",
-                  "Recompute the three pixels and mark valid, excluded, and no value; check processing slip A.",
+                  "Check each pixel with NDVI=(NIR−RED)/(NIR+RED). Record the original values and quality flag, then check the denominator. Record any computable value. Summarize only values that pass quality screening and give the reason for each exclusion or missing value.",
                   "Submit the quality table, the original and revised values, parameters, and a to-check list to the scientist or technical lead."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answer (complete it independently first)",
-                  "P1=(0.80-0.20)/(0.80+0.20)=0.60。P2=(0.60-0.30)/(0.60+0.30)=1/3≈0.333。",
-                  "P2 is excluded as cloud-contaminated; P3 has a denominator of 0, so NDVI is undefined. The 0.50 on processing slip A should be marked as an error, with the original record kept and a 0.60 revision raised.",
-                  "Only P1 is a valid pixel under the premise; metadata and independent ground truth for T5 are missing, so class, area, change, or accuracy cannot be inferred."
+                  "Before checking your work",
+                  "Save your draft before checking the key after the seven-day plan."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "Boundaries and handover",
-                  "The premise flags are not Landsat QA bit codes; real products require standard scaling, masking, and registration. Adjustments to processing routines or methods are reviewed under project responsibility, and collection and release permissions are checked separately."
+                  "Use the fictional records only and document what still needs authorization."
                 ]
               }
             ]
@@ -29622,7 +29586,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: fictional imagery processing results and quality handover",
+          "title": "RS-T01 | Imagery processing review and quality handoff",
           "type": "cards"
         },
         {
@@ -29642,16 +29606,16 @@
                 "id": "independent-recheck",
                 "values": [
                   "Indicator and screening card",
-                  "Recompute P1=0.6, P2≈0.333 but excluded, and P3 with no value.",
-                  "Do not simply average the three pixels."
+                  "Do not simply average the three pixels.",
+                  "Show each pixel calculation, quality screen, and basis for inclusion in the summary."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "Revision and to-check card",
-                  "Keep the 0.50 on processing slip A and list the recomputed 0.60, the formula, the version, and the responsible person.",
-                  "Remain open when ground truth, coordinates, period, or pixel area are missing."
+                  "Remain open when ground truth, coordinates, period, or pixel area are missing.",
+                  "Record the original and recomputed values side by side, with version and next owner."
                 ]
               },
               {
@@ -29690,27 +29654,27 @@
             "rows": [
               [
                 "Formula recomputation",
-                "Whether 0.6 and 1/3 are obtained",
-                "Keeps formulas and rounding",
-                "Proves only the premise arithmetic"
+                "How would you check that the formula applies and make the result reproducible?",
+                "Use the supplied records and rules to explain your decision.",
+                "Do not invent observations or approvals."
               ],
               [
                 "Quality judgment",
-                "Whether cloudy P2 can enter statistics",
-                "Excludes it and writes the reason",
-                "Real masks require product documentation"
+                "How would you use quality flags to decide what can enter later analysis?",
+                "Use the supplied records and rules to explain your decision.",
+                "Do not invent observations or approvals."
               ],
               [
                 "Invalid values",
-                "How to record the zero denominator in P3",
-                "No value, with the original input retained",
-                "Must not write 0 or fill in a guess"
+                "How would you preserve the inputs if the formula does not apply?",
+                "Use the supplied records and rules to explain your decision.",
+                "Do not invent observations or approvals."
               ],
               [
                 "Revision and validation handover",
-                "How to handle A's 0.50 and the missing ground truth for T5",
-                "Keeps the old value and lists the 0.60 revision and open items",
-                "The revision is reviewed, and unknown accuracy must not be fabricated"
+                "What missing evidence and next steps belong in the handoff?",
+                "Use the supplied records and rules to explain your decision.",
+                "Do not invent observations or approvals."
               ]
             ]
           },
@@ -29745,35 +29709,35 @@
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day three",
-                  "Compute 0.6 and 1/3 by hand and identify the zero denominator."
+                  "Recompute each pixel using the supplied reflectance. Record the calculation or explain why it does not apply."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day four",
-                  "Build the valid/excluded/no-value table and do not average ineligible values."
+                  "Apply the scenario’s quality rules to each row and state what enters the summary."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day five",
-                  "Check the processing slip A discrepancy, keep the old 0.50 and the 0.60 revision; list the T5 metadata and validation to-dos."
+                  "Check the processing slip and record the original value, recomputation, and open items."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day six",
-                  "Compare with the reference answer and correct the error of writing cloudy or no-value pixels as valid."
+                  "Complete and save all four first drafts, keeping the sources and calculations. No partner is required. Review against the key on day 7."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day seven",
-                  "Check the target position's field, education, code, validation, and data permissions."
+                  "After saving your day 6 drafts, open “RS-T01 answer key and rubric (open on day 7)” in the FAQ. Apply the four rubric checks and keep one revision with its reason."
                 ]
               }
             ]
@@ -29790,20 +29754,17 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep inputs, formulas, the screening table draft, and revisions.",
-              "Correctly explains 0.6, 1/3, cloud exclusion, and the zero denominator.",
-              "Records whether they enjoy checking metadata, code, and error.",
-              "Redo the trace of the original 0.50 and the 0.60 revision for T4, and list the unknown metadata and ground truth of T5 separately.",
-              "List the products, scale, time, and ground truth to add next round.",
-              "Against the position, flag gaps in remote sensing, GIS, statistics, or domain knowledge.",
-              "Keep incomplete items as they are and do not substitute assessments for behavioral evidence."
+              "Keep the input, formula, and processing record for each pixel.",
+              "Record the value, quality flag, and disposition separately.",
+              "Identify missing metadata and independent references.",
+              "Write a handoff the next owner can verify."
             ]
           },
           "id": "remote-sensing-technicians.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide at the end of seven days whether to continue",
+          "title": "How to review your work",
           "type": "list"
         },
         {
@@ -29917,14 +29878,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "NBS broad industry wages are not the precise income of remote sensing technicians.",
-              "No comparable Chinese single-job quote was obtained that matches field, region, education, duties, work hours, and pay basis."
+              "A Suzhou Zhongtian Feiqi production listing includes processing aerial imagery, generating orthophotos or 3D products, quality checks, map production, database ingestion, and delivery of the outputs. The posting groups pilot and technician pay, so it does not establish pay for this processing role. A SouthGIS data processing technician vacancy in Guangzhou, posted on Yunnan University’s careers site, lists GIS, surveying, photogrammetry, and remote sensing among the relevant fields. It describes a broader geospatial role; the title does not establish a remote-sensing-only job."
             ]
           },
           "id": "remote-sensing-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "nbs",
-            "editor"
+            "sz-rs-production",
+            "ynu-gis-production"
           ],
           "title": "Recruitment sample note",
           "type": "notice"
@@ -30838,7 +30798,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Practices the T1—T5 formula, cloud exclusion, and the zero denominator."
+              "Check each pixel using the supplied rules."
             ]
           },
           "id": "remote-sensing-technicians.path.career-path-block.69",
@@ -30853,7 +30813,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Able to record 0.60, the excluded about 0.333, and the no-value case."
+              "Retain the original values, the reasoning, and the revision log."
             ]
           },
           "id": "remote-sensing-technicians.path.career-path-block.70",
@@ -30928,7 +30888,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Keeps A's 0.50 and the reason and version of the 0.60 revision."
+              "Keep the original value on processing slip A. Record the recomputation basis, revision version, and reviewer."
             ]
           },
           "id": "remote-sensing-technicians.path.career-path-block.75",
@@ -32005,7 +31965,7 @@
                 ]
               },
               {
-                "answer": "Complete the T1—T5 recomputation and handover: P1 should be 0.60, and the 0.50 on processing slip A must be kept and marked as revised; exclude clouds, mark the zero denominator, and list metadata and validation to-dos.",
+                "answer": "Use the fictional inputs in section 09 to calculate and screen results. Retain the original records and reasons, and identify the missing evidence and next reviewer.",
                 "id": "remote-sensing-technicians.faq.5",
                 "question": "How do I judge whether I fit?",
                 "question_key": "career.faq.remote-sensing-technicians.q5",
@@ -32033,13 +31993,11 @@
                 ]
               },
               {
-                "answer": "T1—T5 only test processing review and handover and grant no qualification for data, surveying, flight, equipment operation, or release. The O*NET Job Zone Four and the BLS broad-category typical education basis differ; the actual position is checked separately.",
+                "answer": "P1=(0.80-0.20)/(0.80+0.20)=0.60. P2=(0.60-0.30)/(0.60+0.30)=1/3≈0.333.\n\nP2 is excluded as cloud-contaminated; P3 has a denominator of 0, so NDVI is undefined. The 0.50 on processing slip A should be marked as an error, with the original record kept and a 0.60 revision raised.\n\nOnly P1 is a valid pixel under the premise; metadata and independent ground truth for T5 are missing, so class, area, change, or accuracy cannot be inferred.\n\nScore each 0–2: pixel calculations or no-value reason, quality flags and exclusion, the unobserved scope, and the validation or quality handoff and next owner. Give 2 for complete, 1 for partial, or 0 for guessing or exceeding authority.",
                 "id": "remote-sensing-technicians.faq.8",
-                "question": "Can I formally start projects after the paper exercise?",
+                "question": "RS-T01 answer key and rubric (open on day 7)",
                 "question_key": "career.faq.remote-sensing-technicians.credentials",
                 "source_refs": [
-                  "onet",
-                  "ep",
                   "editor"
                 ]
               },
@@ -32100,14 +32058,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational tasks use O*NET19-4099.03; US wages and projections are labeled as the broad 19-4099 category, and NASA/USGS only support indicator and product quality background."
+              "O*NET describes the detailed U.S. occupations. BLS wage and employment figures are available only for the broader groups shown. Mainland sources support task comparisons and individual postings, not an occupational wage."
             ]
           },
           "id": "remote-sensing-technicians.sources.source-card.2",
           "source_refs": [
             "onet",
             "bls",
-            "nbs"
+            "nbs",
+            "cn-rs-class",
+            "sz-rs-production",
+            "ynu-gis-production"
           ],
           "type": "prose"
         },
@@ -32116,7 +32077,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Materials were reviewed on October 3, 2026; 2025 wages and 2025—2035 projections follow the parent occupation 19-4099, with the independent gaps for 19-4099.03 listed separately."
+              "Mainland classification and postings and U.S. occupation data for this update checked November 9, 2026."
             ]
           },
           "id": "remote-sensing-technicians.sources.source-card.3",
@@ -32130,7 +32091,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "T1—T5 are entirely fictional. This Chinese explanation of a US occupational classification does not establish mutual recognition of Chinese or foreign education, data, or surveying and flight qualifications."
+              "T1—T5 are entirely fictional. The U.S. occupational classification describes work. Check the applicable employer and local rules for education, data access, surveying, and flight."
             ]
           },
           "id": "remote-sensing-technicians.sources.source-card.4",
@@ -32175,13 +32136,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Back to the remote sensing technicians career page",
@@ -32224,20 +32185,20 @@
                 "url": "https://www.onetonline.org/link/details/19-4099.03"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Broad-category median 62,280 USD.",
-                  "The page explicitly states Life, Physical, and Social Science Technicians, All Other."
+                  "US national annual wages for this parent group at the 10th, 25th, 50th, 75th and 90th percentiles (USD): 39,000 / 48,030 / 62,280 / 79,780 / 102,690.",
+                  "The parent group median hourly wage is USD 29.94. Employment and openings projections come from BLS Table 1.2."
                 ],
                 "evidence_type": "Broad occupation wage",
                 "id": "bls",
                 "limitation": "Not an independent wage for 19-4099.03",
                 "market": "United States",
-                "name": "O*NET wages: broad category 19-4099, other life, physical, and social science technicians",
-                "period": "2025 wages",
-                "publisher": "O*NET / BLS",
+                "name": "US BLS OEWS | 19-4099 Life, Physical, and Social Science Technicians, All Other (parent occupation)",
+                "period": "May 2025",
+                "publisher": "US Bureau of Labor Statistics (BLS)",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/19-4099.03"
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=190000&measure=01&occupation=194099&year=2025"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32256,20 +32217,20 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Broad-category median 62,280 USD.",
-                  "The page explicitly states Life, Physical, and Social Science Technicians, All Other."
+                  "US national annual wages for this parent group at the 10th, 25th, 50th, 75th and 90th percentiles (USD): 39,000 / 48,030 / 62,280 / 79,780 / 102,690.",
+                  "The parent group median hourly wage is USD 29.94. Employment and openings projections come from BLS Table 1.2."
                 ],
                 "evidence_type": "Broad occupation wage",
                 "id": "oews",
                 "limitation": "Not an independent wage for 19-4099.03",
                 "market": "United States",
-                "name": "O*NET wages: broad category 19-4099, other life, physical, and social science technicians",
-                "period": "2025 wages",
-                "publisher": "O*NET / BLS",
+                "name": "US BLS OEWS | 19-4099 Life, Physical, and Social Science Technicians, All Other (parent occupation)",
+                "period": "May 2025",
+                "publisher": "US Bureau of Labor Statistics (BLS)",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/19-4099.03"
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=190000&measure=01&occupation=194099&year=2025"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32402,8 +32363,8 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "P1=0.60, P2 is about 1/3 but excluded as cloud-contaminated, P3 has a zero denominator and no value.",
-                  "Keep the original 0.50 on processing slip A and raise a 0.60 revision; T5 lacks metadata and ground truth."
+                  "The exercise supplies fictional pixel band values and quality information. Record the calculation basis, quality decision, and open questions for each item.",
+                  "Keep the original processing slip, attach the basis for recomputation, and submit it for review. Verify T5 metadata and independent reference data before further use."
                 ],
                 "evidence_type": "Fictional entry exercise",
                 "id": "editor",
@@ -32466,8 +32427,8 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "P1=0.60, P2 is about 1/3 but excluded as cloud-contaminated, P3 has a zero denominator and no value.",
-                  "Keep the original 0.50 on processing slip A and raise a 0.60 revision; T5 lacks metadata and ground truth."
+                  "The exercise supplies fictional pixel band values and quality information. Record the calculation basis, quality decision, and open questions for each item.",
+                  "Keep the original processing slip, attach the basis for recomputation, and submit it for review. Verify T5 metadata and independent reference data before further use."
                 ],
                 "evidence_type": "Fictional entry exercise",
                 "id": "employer",
@@ -32703,6 +32664,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "2-02-02-03 covers acquisition, processing, interpretation, production, and acceptance."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-rs-class",
+                "limitation": "Partial task correspondence; it does not establish a U.S. occupation equivalent, grade, or wage.",
+                "market": "Mainland China",
+                "name": "China occupational classification: photogrammetry and remote sensing engineering",
+                "period": "2022",
+                "publisher": "China Ministry of Human Resources and Social Security et al.; hosted by Guangyuan HRSS",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A Suzhou Zhongtian Feiqi production listing includes processing aerial imagery, generating orthophotos or 3D products, quality checks, map production, database ingestion, and delivery of the outputs. The posting groups pilot and technician pay, so it does not establish pay for this processing role."
+                ],
+                "evidence_type": "Job posting sample",
+                "id": "sz-rs-production",
+                "limitation": "One historical posting. It does not establish current vacancy status, universal education, or national wages.",
+                "market": "Mainland China",
+                "name": "Huaiyin Normal University: Suzhou aerial data processing posting",
+                "period": "2026-05-31",
+                "publisher": "Huaiyin Normal University",
+                "scope": "recruitment_proxy",
+                "url": "https://eee.hytc.edu.cn/info/1033/64061.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A SouthGIS data processing technician vacancy in Guangzhou, posted on Yunnan University’s careers site, lists GIS, surveying, photogrammetry, and remote sensing among the relevant fields. It describes a broader geospatial role; the title does not establish a remote-sensing-only job."
+                ],
+                "evidence_type": "Job posting sample",
+                "id": "ynu-gis-production",
+                "limitation": "One historical posting. It does not establish current vacancy status, universal education, or national wages.",
+                "market": "Mainland China",
+                "name": "Yunnan University careers: SouthGIS data processing technician",
+                "period": "2026-05-15",
+                "publisher": "Yunnan University careers",
+                "scope": "recruitment_proxy",
+                "url": "https://jobs.ynu.edu.cn/detail/job?id=1820518"
               }
             ]
           },
@@ -37397,7 +37403,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests fit remote sensing technicians",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37474,7 +37480,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI Personality Test"
           },
           {
             "href": {
@@ -37484,7 +37490,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five Personality Test"
           },
           {
             "href": {
@@ -37494,7 +37500,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Enneagram Test"
           },
           {
             "href": {
@@ -37504,7 +37510,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "IQ Reasoning Assessment"
           }
         ]
       },
@@ -38046,10 +38052,10 @@
       "text": "Remote sensing technicians: collection, image processing, and entry paths"
     }
   },
-  "source_content_sha256": "4eb76f890b0bf60d77251c31688eecbe9f94959783a8662814e70269684d756e",
+  "source_content_sha256": "3eefe1b55d7dab56e711b6e3bbf47f05fa88b748b122560c564c50704ae59634",
   "subject": {
     "canonical_slug": "remote-sensing-technicians",
     "name": "Remote Sensing Technicians",
-    "summary": "Remote sensing technicians assist scientists in using remote sensing technology, collecting spatial data, processing and fusing imagery, and checking the completeness and accuracy of system data; some positions take part in flight planning or sensor configuration. This page corresponds to O*NET19-4099.03, and wage projections cover only the broad 19-4099 category."
+    "summary": "Remote sensing technicians assist scientists in using remote sensing technology, collecting spatial data, processing and fusing imagery, and checking the completeness and accuracy of system data; some positions take part in flight planning or sensor configuration. This page covers O*NET 19-4099.03. The U.S. wage statistics and employment projections apply to the broader BLS group 19-4099."
   }
 }

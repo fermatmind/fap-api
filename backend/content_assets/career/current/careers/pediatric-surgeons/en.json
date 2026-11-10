@@ -1283,6 +1283,9 @@
       "item:pediatric-surgeons.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:pediatric-surgeons.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:pediatric-surgeons.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30546,6 +30549,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two consultation notes cite different versions of a caregiver’s contact record. Neither is confirmed. List the field and who should verify it."
+            ]
+          },
+          "id": "pediatric-surgeons.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Check a pediatric surgical consultation packet",
+          "type": "notice"
         }
       ]
     },
@@ -36903,6 +36921,13 @@
         "id": "pediatric-surgeons.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "pediatric-surgeons.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37252,7 +37277,7 @@
       "text": "Surgeons"
     }
   },
-  "source_content_sha256": "f1f9d2c02b53aca79a235505d69f7764bc87730e74b8f869c089d3b7653376d5",
+  "source_content_sha256": "121dedff72edc853adaad10b1d0666ad10cc242111734bfea78b283068ebaec0",
   "subject": {
     "canonical_slug": "pediatric-surgeons",
     "name": "Pediatric Surgeons",

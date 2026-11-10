@@ -149,6 +149,9 @@
       "item:mining-and-geological-engineers-including-mining-safety-engineers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:mining-and-geological-engineers-including-mining-safety-engineers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:mining-and-geological-engineers-including-mining-safety-engineers.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -12176,6 +12179,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。检查单中一项整改附照片但无地点编号，另一项有责任人和期限却没有复验记录。写清证据缺口与谁应确认关闭。"
+            ]
+          },
+          "id": "mining-and-geological-engineers-including-mining-safety-engineers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "核矿山安全整改闭环",
+          "type": "notice"
         }
       ]
     },
@@ -14515,6 +14533,13 @@
         "id": "mining-and-geological-engineers-including-mining-safety-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mining-and-geological-engineers-including-mining-safety-engineers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14684,7 +14709,7 @@
       "text": "采矿与地质工程师（含矿山安全工程师）：工作内容、美国工资与安全 | 费马测试"
     }
   },
-  "source_content_sha256": "6823d014114bb7745ae59544bee176f096e73d3927773961f6ce1047b276e52e",
+  "source_content_sha256": "f12aca5be16a15a983a6b36de6c00231e3a133404874731d4bedebf0150f3ec7",
   "subject": {
     "canonical_slug": "mining-and-geological-engineers-including-mining-safety-engineers",
     "name": "采矿与地质工程师（含矿山安全工程师）",

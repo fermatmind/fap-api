@@ -161,6 +161,9 @@
       "item:ophthalmic-medical-technologists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:ophthalmic-medical-technologists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:ophthalmic-medical-technologists.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12954,6 +12957,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。检测单标仪器 E2，质控附表却标 E5。写下无法确认的关联及需请技术负责人复核的凭证。"
+            ]
+          },
+          "id": "ophthalmic-medical-technologists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核眼科设备质控记录",
+          "type": "notice"
         }
       ]
     },
@@ -15475,6 +15493,13 @@
         "id": "ophthalmic-medical-technologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "ophthalmic-medical-technologists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15692,7 +15717,7 @@
       "text": "眼科医疗技术师：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "a3c8eeb5f8b2cf0a2671a5297af7d67caf4c6aef265cb6378e253a48cd270ba4",
+  "source_content_sha256": "86d6e2f2e5cfc4f4b110ede33f07b475225c67bfd26e211cd9ad526ea7108b25",
   "subject": {
     "canonical_slug": "ophthalmic-medical-technologists",
     "name": "眼科医疗技术师",

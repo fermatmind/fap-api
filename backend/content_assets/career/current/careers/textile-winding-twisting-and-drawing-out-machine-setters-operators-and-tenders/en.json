@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Start by experiencing material identity, specification and quantity checking: whether you can match batch numbers, units, readings and records, and keep the original values and ask clear questions after finding an anomaly. On-site work also requires checking shifts, repeated inspection rounds and protection conditions; interest alone or one fast calculation is not enough to judge."
+              "Paper check | Compare fictional spool labels with a shift handoff. Flag an issue with no spool ID and retain its machine, time and any available batch details. "
             ]
           },
           "id": "textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24818,13 +24817,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Set up, operate or tend winding, twisting and drawing equipment, converting yarn or sliver into packages, yarn or sliver that meet specifications, and check batches, completed quantities, product quality and anomalies. The Chinese name is a translated scope title for the US occupation, and specific Chinese jobs are checked by process."
+              "Textile winding, twisting and drawing-out machine operators monitor yarn movement and machine operation. They record batches, stoppages and issues for maintenance to review. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-6064.00"
           ],
           "type": "prose"
         }
@@ -25531,14 +25529,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The priority is information organization: work order checking, count summaries, anomaly summaries and shift handover drafts; on-site status and quality require matching validation. The BLS2025—2035 overall projection for this occupation shows a 10.3% decline and about 2,400 annual openings including replacements, which is not AI causality; this page supplies a separate editorial AI impact estimate, without a measured substitution rate. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare fictional spool labels with a shift handoff. Flag an issue with no spool ID and retain its machine, time and any available batch details."
             ]
           },
           "id": "textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "editorial"
+            "transfer-onet-51-6064.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33138,6 +33135,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-6064.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-6064.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-6064.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38611,10 +38635,10 @@
       "text": "Textile winding, twisting and drawing out machine setters, operators and tenders"
     }
   },
-  "source_content_sha256": "50480b61af63b0d4d97f9ba4c8eb890dfc989945d906ba8f564bf63768fa50d7",
+  "source_content_sha256": "3ced3fab8a82b213d31ba3a8805b62710a726670ce8c50c0e22104e1c27733ab",
   "subject": {
     "canonical_slug": "textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders",
     "name": "Textile winding, twisting and drawing out machine setters, operators and tenders",
-    "summary": "Set up, operate or tend winding, twisting and drawing equipment, converting yarn or sliver into packages, yarn or sliver that meet specifications, and check batches, completed quantities, product quality and anomalies. The Chinese name is a translated scope title for the US occupation, and specific Chinese jobs are checked by process."
+    "summary": "Textile winding, twisting and drawing-out machine operators monitor yarn movement and machine operation. They record batches, stoppages and issues for maintenance to review."
   }
 }

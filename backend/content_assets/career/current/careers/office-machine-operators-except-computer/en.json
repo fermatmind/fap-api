@@ -149,6 +149,9 @@
       "item:office-machine-operators-except-computer.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:office-machine-operators-except-computer.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:office-machine-operators-except-computer.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -12983,6 +12986,21 @@
             "onet-education"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The order calls for 12 pages per copy, but a sample note says 11 and has no batch ID. List the order and batch evidence to check and tell the delivery lead what remains unverified."
+            ]
+          },
+          "id": "office-machine-operators-except-computer.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "Check a copying and binding order",
+          "type": "notice"
         }
       ]
     },
@@ -15485,6 +15503,13 @@
         "id": "office-machine-operators-except-computer.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "office-machine-operators-except-computer.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15654,7 +15679,7 @@
       "text": "Non-computer office machine operators: duties, wages, and outlook"
     }
   },
-  "source_content_sha256": "2841bc1a7cc374c11d8b854f9b20c80450bb90da91d100d937aa171066f002a0",
+  "source_content_sha256": "3110b0d0b8d541bfc5bf004e5c27f142c731b2da67ca9d1dadba42fadd8713a7",
   "subject": {
     "canonical_slug": "office-machine-operators-except-computer",
     "name": "Office machine operators (except computer)",

@@ -83,9 +83,6 @@
       "fact:entry-bachelors-degree": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1617,7 +1614,7 @@
         "status": "pending_mapping"
       },
       "item:actuaries.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actuaries.sources.source-card.1": {
         "status": "mapped"
@@ -23265,12 +23262,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "This career is worth exploring if you enjoy investigating data anomalies, testing assumptions and explaining uncertainty. Strong mathematics is useful, but the work also requires checking calculations and discussing their business consequences."
+              "Explore this work if you enjoy checking denominators, recalculating independently and explaining what a model cannot answer."
             ]
           },
           "id": "actuaries.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -23280,12 +23277,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Observe how you handle a dataset with inconsistent definitions: first clarify the measures and observation period, then check inputs and assumptions when results look unusual. Explain your conclusion, its scope and its limitations to someone without a technical background."
+              "In “Entry, Qualifications, and Career Development”, find “ACT-16 | Recalculate loss cost and explain the limits”. Calculate A, B and the combined result before reading the sample."
             ]
           },
           "id": "actuaries.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23310,13 +23307,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Try a 60-minute experiment with entirely fictional policy and claim-payment records: write a data dictionary, calculate claim frequency and average loss, and compare loss costs under two sets of assumptions. Produce a calculation sheet, assumption notes and an anomaly list. This is an introductory work sample, not professional actuarial training or a real pricing recommendation."
+              "Take about 60 minutes for ACT-16. Use fictional data to recalculate frequency, severity and loss cost, then compare two separate scenarios. Deliver a calculation table and a note on limitations. The seven-day plan adds a data dictionary and anomaly checks."
             ]
           },
           "id": "actuaries.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -24679,12 +24675,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no actuarial task-level adoption rates, time-saving effects, or causal layoff data. Editorial suggestions include AI assistance with data organization, draft code, and initial reports; assumption selection, model validation, and approval responsibilities must still follow organizational authority. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Tools can organize fictional data and draft formulas or code. Check data access before use, then independently verify formulas, denominators and rounding. Authorized staff remain responsible for rates, reserves and sign-off. No occupation-specific automation rate or causal layoff estimate is established."
             ]
           },
           "id": "actuaries.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "actuaries-ilo-2025"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25407,7 +25403,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS projects 9% US employment growth over 2025—2035; this is a national projection and does not establish AI employment causation."
+              "BLS projects 9.2% US employment growth over 2025—2035; this is a national projection and does not establish AI employment causation."
             ]
           },
           "id": "actuaries.ai-impact.ai-impact-table.70",
@@ -25463,7 +25459,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round has no verifiable year in which actuarial jobs will disappear; task exposure is not a timing projection."
+              "Insufficient evidence:  has no verifiable year in which actuarial jobs will disappear; task exposure is not a timing projection."
             ]
           },
           "id": "actuaries.ai-impact.ai-impact-table.74",
@@ -26157,7 +26153,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no comparable national median for actuaries in China."
+              "Insufficient evidence:  obtained no comparable national median for actuaries in China."
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.7",
@@ -26269,12 +26265,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no actuarial recruitment wage sample that could be deduplicated."
+              "The three named postings allow a comparison of job requirements but do not establish a citywide or national wage distribution."
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "actuaries-cn-qualification-2023"
+            "actu-bj",
+            "actu-cs",
+            "actu-tj"
           ],
           "type": "prose"
         },
@@ -26647,7 +26645,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May involve explaining analysis to clients; no comparable sample of Chinese recruitment volumes or offers obtained in this round."
+              "May involve explaining analysis to clients; no comparable sample of Chinese recruitment volumes or offers obtained in ."
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.42",
@@ -26689,12 +26687,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no traceable, deduplicated Chinese actuarial recruitment remuneration sample."
+              "The three named notices let you compare duties. Only Changsha explicitly quotes monthly pay. These examples cannot estimate citywide or national actuarial pay distributions."
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "actuaries-cn-qualification-2023"
+            "actu-bj",
+            "actu-cs",
+            "actu-tj"
           ],
           "type": "prose"
         },
@@ -26703,12 +26703,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Without cities, query periods, experience levels, and deduplication rules, general entry requirements or recruitment frequency cannot be reported."
+              "The three notices are dated employer examples and do not represent typical local pay. Only the Changsha notice explicitly quotes monthly pay."
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "actuaries-cn-qualification-2023"
+            "actu-bj",
+            "actu-cs",
+            "actu-tj"
           ],
           "type": "prose"
         },
@@ -26717,12 +26719,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 urban-unit wages | https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              "2025 urban-unit wages | https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "actuaries-nbs-2025"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26731,12 +26733,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no comparable Chinese actuarial wage distributions by city or experience level. When comparing specific offers, check base pay, bonuses, benefits, working hours, and whether amounts are before or after tax."
+              "NBS 2025 urban finance annual averages were CNY 211,164 at non-private units and CNY 140,451 at private units. They do not isolate actuaries. The vacancy figures below are single-employer examples, not national or city wage distributions."
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "actuaries-nbs-2025"
+            "nbs",
+            "actu-bj",
+            "actu-cs",
+            "actu-tj"
           ],
           "type": "prose"
         },
@@ -26745,12 +26750,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Actuaries nationwide in China"
+              "Beijing | Hongkang Life"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "actuaries-onet-2026"
+            "actu-bj"
           ],
           "type": "prose"
         },
@@ -26759,12 +26764,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no comparable monthly wage sample with matching scope."
+              "The notice does not explicitly state monthly pay. See the entry section for its quoted amount."
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "actuaries-nbs-2025"
+            "actu-bj"
           ],
           "type": "prose"
         },
@@ -26773,12 +26778,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Target city and employer"
+              "Changsha | China Pacific P&C"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "actuaries-onet-2026"
+            "actu-cs"
           ],
           "type": "prose"
         },
@@ -26787,12 +26792,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no comparable monthly wage sample with matching scope."
+              "China Pacific Property Insurance’s Hunan branch posted two insurance actuarial roles in Changsha on September 15, 2026. The notice lists CNY 10,000–12,000 per month and a master’s or higher. Work includes pricing, model maintenance, outstanding claims reserves and reporting. Verify the pay components in an actual offer."
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "actuaries-nbs-2025"
+            "actu-cs"
           ],
           "type": "prose"
         },
@@ -26801,12 +26806,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Experience or examination level"
+              "Tianjin | PICC P&C"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "actuaries-onet-2026"
+            "actu-tj"
           ],
           "type": "prose"
         },
@@ -26815,12 +26820,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no comparable monthly wage sample with matching scope."
+              "The notice does not explicitly state monthly pay. See the entry section for its quoted amount."
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "actuaries-nbs-2025"
+            "actu-tj"
           ],
           "type": "prose"
         },
@@ -26843,12 +26848,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 urban-unit wages | https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              "2025 urban-unit wages | https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "actuaries-nbs-2025"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26857,7 +26862,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "BLS projects 9% US employment growth over 2025—2035; this is a national projection and does not establish AI employment causation."
+              "BLS projects 9.2% US employment growth over 2025—2035; this is a national projection and does not establish AI employment causation."
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.58",
@@ -27049,12 +27054,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "31,200 people"
+              "31,200 in 2025; 34,100 projected in 2035."
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27063,12 +27068,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 US national employment stock, not recruitment count for that year; BLS actuaries occupational handbook | https://www.bls.gov/ooh/math/actuaries.htm"
+              "2025 US national employment stock, not recruitment count for that year; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27077,12 +27082,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "9%"
+              "9.2% growth from 2025 to 2035, about 2,900 additional jobs."
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27091,12 +27096,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 US national employment projections do not establish AI causation; BLS actuaries occupational handbook | https://www.bls.gov/ooh/math/actuaries.htm"
+              "2025—2035 US national employment projections do not establish AI causation; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27105,12 +27110,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "1,500 openings/year"
+              "About 1,500 openings annually, including replacements."
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27119,12 +27124,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 average annual openings include replacement demand, rather than net employment growth; BLS actuaries occupational handbook | https://www.bls.gov/ooh/math/actuaries.htm"
+              "2025—2035 average annual openings include replacement demand, rather than net employment growth; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27248,7 +27253,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS projects 9% US employment growth over 2025—2035; this is a national projection and does not establish AI employment causation."
+              "BLS projects 9.2% US employment growth over 2025—2035; this is a national projection and does not establish AI employment causation."
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.33",
@@ -27346,7 +27351,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Government (excluding state and local hospitals and schools)"
+              "Government (excluding state and local education and hospitals)"
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.40",
@@ -27572,19 +27577,19 @@
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Ability Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Financial Risk Specialists",
@@ -29258,7 +29263,7 @@
                 "values": [
                   "Examinations and qualifications",
                   "Chinese proficiency assessment distinguishes associate actuaries and fully qualified actuaries.",
-                  "Check US occupational examination requirements with target professional organizations and employers; no mutual recognition established."
+                  "Mainland China’s professional qualification has associate and fellow levels. Eligibility to sit exams is separate from obtaining the certificate; verify exams, ethics, education and relevant experience. Passing some exams does not establish the credential or employer signing authority. For U.S. work, verify the current SOA ASA/FSA or CAS ACAS/FCAS pathway for your practice area. For U.S. actuarial opinions, check the applicable qualification standards and employer authority separately. These designations do not establish cross-country recognition."
                 ]
               },
               {
@@ -29282,7 +29287,11 @@
           "id": "actuaries.path.employer-evidence.1",
           "source_refs": [
             "actuaries-cn-qualification-2023",
-            "actuaries-ooh-2025-2035"
+            "actuaries-ooh-2025-2035",
+            "actuaries-cn-qualification-2023",
+            "actu-soa",
+            "actu-cas",
+            "actu-usqs"
           ],
           "title": "Official materials and editorial preparation suggestions",
           "type": "cards"
@@ -29306,16 +29315,16 @@
                 "values": [
                   "Tasks and deliverables",
                   "Calculate frequency = count/exposure, severity = loss/count, and loss cost = loss/exposure separately; then calculate combined values.",
-                  "Increase the combined portfolio's frequency by 10% with severity unchanged; separately increase severity by 10% with frequency unchanged. Produce a recalculation sheet and one page of limitations."
+                  "Raise combined frequency by 10% and separately raise severity by 10%, holding the other constant. Variant: a second file leaves B’s exposure blank. Can you still report a combined result? Deliver a recalculation table and a limitations note."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference recalculation",
-                  "A: frequency 0.2 claims/policy-year, severity 2000 CNY/claim, and loss cost 400 CNY/policy-year. B: 0.3 claims/policy-year, 3000 CNY/claim, and 900 CNY/policy-year.",
-                  "Combined: exposure 1500, count 350, and losses 850000 CNY; frequency 7/30 ≈ 0.233333, severity 17000/7 ≈ 2428.571429, and loss cost 1700/3 ≈ 566.666667.",
-                  "Scenario loss cost when each factor is increased separately by 10%: 1870/3 ≈ 623.333333 CNY/policy-year; do not change both factors simultaneously."
+                  "Complete both versions first",
+                  "Submit the original, variant and written handover or limitations independently on Day 6.",
+                  "On Day 7 open “ACT-16 reference (open after submitting)” in the FAQ.",
+                  "Keep the original table, denominator definitions and calculation reasons."
                 ]
               },
               {
@@ -29323,16 +29332,16 @@
                 "values": [
                   "Boundaries and self-checks",
                   "Not actual product rates, reserves, or investment advice. Single-period data are insufficient to identify trends, development factors, and product differences.",
-                  "Check zero denominators, units, periods, and whether A/B group rates were incorrectly averaged; manual checking is possible without real customer data."
+                  "Flag which values to withhold when an input is missing."
                 ]
               }
             ]
           },
           "id": "actuaries.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "Entry exercise: experience analysis of a fictional portfolio",
+          "title": "ACT-16 | Recalculate loss cost and explain the limits",
           "type": "cards"
         },
         {
@@ -29360,7 +29369,7 @@
                 "id": "report-summary",
                 "values": [
                   "One-page results explanation",
-                  "Explain the meaning of combined loss cost 566.666667 and the two scenarios 623.333333.",
+                  "Explain each independent scenario and its fixed input. Name the missing field to verify. Write before checking the sample.",
                   "Clearly state that data are fictional, results are not rates, and expenses and development factors are excluded."
                 ]
               },
@@ -29440,7 +29449,7 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "Day 1: check scope",
-                  "Read the occupational definition; specify actuarial inputs and outputs and distinctions from underwriting/approval."
+                  "Choose one mainland vacancy or U.S. credential guide. Record duties, qualifications and one authority to check. Separate reserving, pricing and approval."
                 ]
               },
               {
@@ -29475,21 +29484,25 @@
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day 6: business explanation",
-                  "Write one page covering results, assumptions, limitations, and questions that cannot be answered."
+                  "Submit your calculation table and limitations for both versions independently, without opening the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day 7: independent reflection",
-                  "Check against reference results or another person's recalculation, recording differences and willingness to continue practicing."
+                  "Open “ACT-16 reference (open after submitting)” in the FAQ. Check your work and record differences or confirm there were none."
                 ]
               }
             ]
           },
           "id": "actuaries.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor",
+            "actu-bj",
+            "actu-cs",
+            "actu-soa",
+            "actu-cas"
           ],
           "title": "Seven-day experience: complete an actuarial task cycle using fictional materials",
           "type": "timeline"
@@ -29570,7 +29583,7 @@
                 "Job seekers in the target market",
                 "Demonstrates corresponding professional knowledge",
                 "Check with professional organizations and employers",
-                "This page does not presume mutual recognition of Chinese and US qualifications",
+                "For U.S. work, verify the current SOA ASA/FSA or CAS ACAS/FCAS pathway for your practice area. For U.S. actuarial opinions, check the applicable qualification standards and employer authority separately. These designations do not establish cross-country recognition.",
                 "Check current-year official announcements",
                 "One examination is not full certification"
               ],
@@ -29597,7 +29610,11 @@
           "id": "actuaries.path.credential-decision.1",
           "source_refs": [
             "actuaries-cn-qualification-2023",
-            "actuaries-onet-2026"
+            "actuaries-onet-2026",
+            "actuaries-cn-qualification-2023",
+            "actu-soa",
+            "actu-cas",
+            "actu-usqs"
           ],
           "title": "Education, training, and qualifications: what are the actual entry requirements for this occupation?",
           "type": "table"
@@ -29610,7 +29627,7 @@
               "Chinese actuarial qualifications are proficiency assessments with associate actuary and fully qualified actuary tiers.",
               "Check education, examinations, qualifications, and employer task authorization separately; they cannot replace one another.",
               "This page does not establish mutual recognition of Chinese and US qualifications; confirm specific signing and approval responsibilities against work-location rules and role documents.",
-              "Insufficient evidence: this round has not checked all current-year examination fees, application arrangements, or role signing conditions and provides no uniform timeline or cost promises."
+              "Insufficient evidence:  has not checked all current-year examination fees, application arrangements, or role signing conditions and provides no uniform timeline or cost promises."
             ]
           },
           "id": "actuaries.path.credential-boundary.1",
@@ -29625,15 +29642,18 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no actuarial recruitment sample with query time, city, experience levels, and deduplication rules.",
-              "Accordingly, entry and interview materials on this page comprise official occupational materials and editorial preparation suggestions, without claiming general employer requirements or actual recruitment frequency."
+              "Hongkang Life posted one actuary role in Beijing on November 3, 2026. The listing displays CNY 8,000–10,000 without specifying the pay period or separating base and bonus. It specifies a master’s or higher, 0–3 years of experience and at least two exams from listed actuarial systems. Work includes reserves, embedded value and reporting; current availability is unverified.",
+              "China Pacific Property Insurance’s Hunan branch posted two insurance actuarial roles in Changsha on September 15, 2026. The notice lists CNY 10,000–12,000 per month and a master’s or higher. Work includes pricing, model maintenance, outstanding claims reserves and reporting. Verify the pay components in an actual offer.",
+              "PICC P&C’s Tianjin branch posted one actuarial position on September 15, 2026 for a master’s in actuarial science. The header displays CNY 4,500–6,000 without stating the pay period or separating fixed and variable pay. Work includes motor pricing models, non-motor pricing and reserves. This is one posting."
             ]
           },
           "id": "actuaries.path.recruitment-sample.1",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "actu-bj",
+            "actu-cs",
+            "actu-tj"
           ],
-          "title": "Notes on recruitment samples",
+          "title": "Beijing, Changsha and Tianjin vacancy examples",
           "type": "notice"
         },
         {
@@ -30786,22 +30806,22 @@
                 "url": "https://www.bls.gov/ooh/math/actuaries.htm"
               },
               {
-                "entity": "Industries: 15-2011.00 - Actuaries",
+                "entity": "BLS Employment Projections Table 1.2: Actuaries",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/15-2011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "National Certifications: 15-2011.00 - Actuaries",
+                "entity": "NBS: urban finance annual wages",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/15-2011.00"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "entity": "National Training: 15-2011.00 - Actuaries",
+                "entity": "O*NET 15-2011.00: Actuaries",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/15-2011.00"
+                "url": "https://www.onetonline.org/link/summary/15-2011.00"
               },
               {
                 "entity": "Financial Risk Specialists",
@@ -30867,7 +30887,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "US actuarial employment was approximately 31,200 people in 2025; employment is projected to grow by 9% over 2025—2035, with approximately 1,500 average annual openings over the same period. In 2025, about 78% of actuarial employment was in finance and insurance. Employment stock, growth rate, average annual openings, and industry share are different indicators and cannot represent the Chinese market or an individual employment guarantee."
+              "US actuarial employment was approximately 31,200 people in 2025; employment is projected to grow by 9.2% over 2025—2035, with approximately 1,500 average annual openings over the same period. In 2025, about 78% of actuarial employment was in finance and insurance. Employment stock, growth rate, average annual openings, and industry share are different indicators and cannot represent the Chinese market or an individual employment guarantee."
             ]
           },
           "id": "actuaries.market-signals.market-signal-card.8",
@@ -30951,12 +30971,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Actuaries (SOC 15-2011)"
+              "U.S. actuaries, 15-2011"
             ]
           },
           "id": "actuaries.market-signals.market-signal-card.14",
           "source_refs": [
-            "bls-actuaries-ooh-2025"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31049,12 +31069,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Actuaries (SOC 15-2011)"
+              "U.S. actuaries, 15-2011"
             ]
           },
           "id": "actuaries.market-signals.market-signal-card.21",
           "source_refs": [
-            "bls-actuaries-ooh-2025"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31063,7 +31083,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "9%"
+              "9.2%"
             ]
           },
           "id": "actuaries.market-signals.market-signal-card.22",
@@ -31147,12 +31167,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Actuaries (SOC 15-2011)"
+              "U.S. actuaries, 15-2011"
             ]
           },
           "id": "actuaries.market-signals.market-signal-card.28",
           "source_refs": [
-            "bls-actuaries-ooh-2025"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31576,10 +31596,15 @@
           "data": {
             "entries": [
               {
-                "answer": "Typical work starts with organizing experience data and business conditions, proceeds through assumption selection, calculating loss or benefit-payment distributions, and testing model results, then produces pricing, reserve, or risk recommendations and explains limitations to management and relevant professionals.",
+                "answer": "Actuaries use data and models to estimate uncertain costs in insurance and other settings. Pricing compares claim frequency, severity and rating assumptions; reserving estimates unpaid claims and explains changes. Start by trying a reviewable calculation, then verify exams, responsibilities and signing authority separately.",
                 "id": "actuaries.faq.1",
                 "question": "What do actuaries do every day?",
-                "question_key": "career.faq.actuaries.daily-work"
+                "question_key": "career.faq.actuaries.daily-work",
+                "source_refs": [
+                  "onet",
+                  "actu-bj",
+                  "actu-cs"
+                ]
               },
               {
                 "answer": "Actuaries focus on long-term uncertainty, insurance liabilities, and funding adequacy; financial risk specialists focus more on market and investment risks, statisticians on general statistical inference, insurance underwriters on acceptance and terms of individual business, and bioinformatics technicians on life-science data processing.",
@@ -31594,16 +31619,22 @@
                 "question_key": "career.faq.actuaries.fit"
               },
               {
-                "answer": "Software can accelerate data cleaning, scenario calculations, code generation, and result compilation, but entry into production processes depends on data permissions, reproducibility, model validation, and organizational governance.",
+                "answer": "Tools can organize fictional data and draft formulas or code. Check data access before use, then independently verify formulas, denominators and rounding. Authorized staff remain responsible for rates, reserves and sign-off. No occupation-specific automation rate or causal layoff estimate is established.",
                 "id": "actuaries.faq.4",
                 "question": "Which tasks will AI change?",
-                "question_key": "career.faq.actuaries.ai-impact"
+                "question_key": "career.faq.actuaries.ai-impact",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
-                "answer": "Software can accelerate data cleaning, scenario calculations, code generation, and result compilation.",
+                "answer": "Tools can organize fictional data and draft formulas or code. Check data access before use, then independently verify formulas, denominators and rounding. Authorized staff remain responsible for rates, reserves and sign-off. No occupation-specific automation rate or causal layoff estimate is established.",
                 "id": "actuaries.faq.5",
                 "question": "Which actuarial tasks can AI assist with?",
-                "question_key": "career.faq.actuaries.automatable-tasks"
+                "question_key": "career.faq.actuaries.automatable-tasks",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "People with defined responsibilities must still review and explain whether assumptions fit business and regulatory contexts, how anomalous data are handled, and whether model results can support rate or reserve decisions, taking responsibility for escalation.",
@@ -31612,28 +31643,56 @@
                 "question_key": "career.faq.actuaries.human-control"
               },
               {
-                "answer": "Currently verifiable precise occupational wage materials cover US actuaries and do not support claims about mainland Chinese actuaries' national occupational median, uniform starting pay, or individual take-home income.",
+                "answer": "NBS 2025 urban finance annual averages were CNY 211,164 at non-private units and CNY 140,451 at private units. They do not isolate actuaries. The vacancy figures below are single-employer examples, not national or city wage distributions. China Pacific Property Insurance’s Hunan branch posted two insurance actuarial roles in Changsha on September 15, 2026. The notice lists CNY 10,000–12,000 per month and a master’s or higher. Work includes pricing, model maintenance, outstanding claims reserves and reporting. Verify the pay components in an actual offer.",
                 "id": "actuaries.faq.7",
                 "question": "How should actuarial wages in mainland China be interpreted?",
-                "question_key": "career.faq.actuaries.china-pay"
+                "question_key": "career.faq.actuaries.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "actu-cs"
+                ]
               },
               {
-                "answer": "The median US actuarial annual wage in month 5 of 2025 was 130,000 USD; in that year's wage distribution, the lowest 10% earned below 78,570 USD and the highest 10% above 215,100 USD. These statistics describe employed workers' wages; the median is not starting pay for new entrants. Lower percentiles provide comparison references without promising individual entry wages.",
+                "answer": "The May 2025 U.S. median for actuaries (15-2011) was $130,000 annually and $62.50 hourly. Percentiles describe the wage distribution; they are not offers by seniority.",
                 "id": "actuaries.faq.8",
                 "question": "Does the US actuarial median wage represent entry-level income?",
-                "question_key": "career.faq.actuaries.us-pay"
+                "question_key": "career.faq.actuaries.us-pay",
+                "source_refs": [
+                  "actuaries-oews-2025"
+                ]
               },
               {
-                "answer": "US occupational materials list a bachelor's degree as typical actuarial entry-level education and state that becoming a certified professional generally requires passing a series of examinations.",
+                "answer": "For U.S. work, verify the current SOA ASA/FSA or CAS ACAS/FCAS pathway for your practice area. For U.S. actuarial opinions, check the applicable qualification standards and employer authority separately. These designations do not establish cross-country recognition.",
                 "id": "actuaries.faq.9",
                 "question": "What are the typical US actuarial education and examination pathways?",
-                "question_key": "career.faq.actuaries.education-path"
+                "question_key": "career.faq.actuaries.education-path",
+                "source_refs": [
+                  "bls",
+                  "actu-soa",
+                  "actu-cas",
+                  "actu-usqs"
+                ]
               },
               {
-                "answer": "Actuarial examination progress and professional certification may provide evidence of abilities, while employers, professional organizations, and local rules jointly determine specific-role authorization, signing responsibilities, and regulated-business scope.",
+                "answer": "Mainland China’s professional qualification has associate and fellow levels. Eligibility to sit exams is separate from obtaining the certificate; verify exams, ethics, education and relevant experience. Passing some exams does not establish the credential or employer signing authority. For U.S. work, verify the current SOA ASA/FSA or CAS ACAS/FCAS pathway for your practice area. For U.S. actuarial opinions, check the applicable qualification standards and employer authority separately. These designations do not establish cross-country recognition.",
                 "id": "actuaries.faq.10",
                 "question": "Which qualifications should aspiring actuaries check?",
-                "question_key": "career.faq.actuaries.credentials"
+                "question_key": "career.faq.actuaries.credentials",
+                "source_refs": [
+                  "actuaries-cn-qualification-2023",
+                  "actu-soa",
+                  "actu-cas",
+                  "actu-usqs"
+                ]
+              },
+              {
+                "answer": "A: frequency 0.2 claims/policy-year, severity 2000 CNY/claim, and loss cost 400 CNY/policy-year. B: 0.3 claims/policy-year, 3000 CNY/claim, and 900 CNY/policy-year. Combined: exposure 1500, count 350, and losses 850000 CNY; frequency 7/30 ≈ 0.233333, severity 17000/7 ≈ 2428.571429, and loss cost 1700/3 ≈ 566.666667. Scenario loss cost when each factor is increased separately by 10%: 1870/3 ≈ 623.333333 CNY/policy-year; do not change both factors simultaneously. Variant sample: if A and B still use the same period and definitions and claims and losses are complete, combined severity is 850,000 ÷ 350 ≈ CNY 2,428.57 per claim. Without B exposure, withhold B and combined frequency and loss cost. Verify the missing exposure and period; a blank is not zero.",
+                "id": "actuaries.faq.11",
+                "question": "ACT-16 reference (open after submitting)",
+                "question_key": "career.faq.actuaries.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31683,7 +31742,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Materials checked and revised in this round: 2026-10-07; statistical years and projection periods are marked separately in each source."
+              "Materials checked and revised in : 2026-10-07; statistical years and projection periods are marked separately in each source."
             ]
           },
           "id": "actuaries.sources.source-card.3",
@@ -31777,84 +31836,84 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official custom occupation profile",
-                  "current page; accessed 2026-09-04"
+                  "Actuaries use data and models to estimate uncertain costs in insurance and other settings. Pricing compares claim frequency, severity and rating assumptions; reserving estimates unpaid claims and explains changes. Start by trying a reviewable calculation, then verify exams, responsibilities and signing authority separately.",
+                  "Occupation tasks and work context."
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Occupation tasks and work context.",
                 "market": "United States",
-                "name": "15-2011.00 - Actuaries",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 15-2011.00: Actuaries",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/custom/15-2011.00"
+                "url": "https://www.onetonline.org/link/summary/15-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupation details",
-                  "current page; accessed 2026-09-04"
+                  "The May 2025 U.S. median for actuaries (15-2011) was $130,000 annually and $62.50 hourly. Percentiles describe the wage distribution; they are not offers by seniority.",
+                  "See BLS Table 1.2 for precise growth and annual openings."
                 ],
-                "evidence_type": "official occupation details",
+                "evidence_type": "primary_document",
                 "id": "bls",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "See BLS Table 1.2 for precise growth and annual openings.",
                 "market": "United States",
-                "name": "15-2011.00 - Actuaries",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Occupational Outlook Handbook: Actuaries",
+                "period": "2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/15-2011.00"
+                "url": "https://www.bls.gov/ooh/math/actuaries.htm"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official technology profile",
-                  "current page; accessed 2026-09-04"
+                  "BLS projects U.S. actuary employment (15-2011) from 31,200 in 2025 to 34,100 in 2035, up about 2,900 (9.2%), with roughly 1,500 average annual openings including replacement needs.",
+                  "Annual openings include replacement needs."
                 ],
-                "evidence_type": "official technology profile",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Annual openings include replacement needs.",
                 "market": "United States",
-                "name": "Hot Technologies: 15-2011.00 - Actuaries",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Employment Projections Table 1.2: Actuaries",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/hot_tech/15-2011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official industry distribution",
-                  "current page; accessed 2026-09-04"
+                  "The May 2025 U.S. median for actuaries (15-2011) was $130,000 annually and $62.50 hourly. Percentiles describe the wage distribution; they are not offers by seniority.",
+                  "National data, not an entry salary."
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "primary_document",
                 "id": "oews",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "National data, not an entry salary.",
                 "market": "United States",
-                "name": "Industries: 15-2011.00 - Actuaries",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET wage table: Actuaries",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/15-2011.00"
+                "url": "https://www.onetonline.org/link/localwages/15-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "NBS 2025 urban finance annual averages were CNY 211,164 at non-private units and CNY 140,451 at private units. They do not isolate actuaries. The vacancy figures below are single-employer examples, not national or city wage distributions.",
+                  "Industry context only."
                 ],
-                "evidence_type": "official certification discovery",
+                "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "United States",
-                "name": "National Certifications: 15-2011.00 - Actuaries",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localcert/15-2011.00"
+                "limitation": "Industry context only.",
+                "market": "Mainland China",
+                "name": "NBS: urban finance annual wages",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -31969,20 +32028,20 @@
                 "url": "https://www.onetonline.org/link/industry/15-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "Recalculate a fictional A/B portfolio.",
+                  "No actual pricing, reserving or investment conclusion."
                 ],
-                "evidence_type": "official certification discovery",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "No actual pricing, reserving or investment conclusion.",
                 "market": "United States",
-                "name": "National Certifications: 15-2011.00 - Actuaries",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localcert/15-2011.00"
+                "name": "ACT-16 | Recalculate loss cost and explain the limits",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/en/career/jobs/actuaries#career-content-path"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -32145,20 +32204,20 @@
                 "url": "https://www.onetonline.org/link/localwages/15-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupation summary",
-                  "2025 BLS OEWS wage data displayed by O*NET OnLine"
+                  "The May 2025 U.S. median for actuaries (15-2011) was $130,000 annually and $62.50 hourly. Percentiles describe the wage distribution; they are not offers by seniority.",
+                  "National data, not an entry salary."
                 ],
-                "evidence_type": "official occupation summary",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "National data, not an entry salary.",
                 "market": "United States",
-                "name": "15-2011.00 - Actuaries",
-                "period": "Occupational profile; 2025 wages and employment; 2025—2035 employment projections",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET wage table: Actuaries",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/15-2011.00"
+                "url": "https://www.onetonline.org/link/localwages/15-2011.00"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -32177,17 +32236,17 @@
                 "url": "https://www.onetonline.org/link/custom/15-2011.00"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "US actuarial occupational definition, 2025 employment stock, and 2025—2035 employment projections.",
-                  "Average annual openings include replacement demand, rather than equaling net employment growth."
+                  "The May 2025 U.S. median for actuaries (15-2011) was $130,000 annually and $62.50 hourly. Percentiles describe the wage distribution; they are not offers by seniority.",
+                  "See BLS Table 1.2 for precise growth and annual openings."
                 ],
-                "evidence_type": "BLS Occupational Handbook, wage statistics, and employment projections",
+                "evidence_type": "primary_document",
                 "id": "bls-actuaries-ooh-2025",
-                "limitation": "US national occupational statistics do not represent Chinese wages or individual employment guarantees.",
+                "limitation": "See BLS Table 1.2 for precise growth and annual openings.",
                 "market": "United States",
-                "name": "BLS Occupational Outlook Handbook — Actuaries",
-                "period": "2025; 2025–2035",
+                "name": "BLS Occupational Outlook Handbook: Actuaries",
+                "period": "2025",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/math/actuaries.htm"
@@ -32272,49 +32331,49 @@
                 "url": "https://www.onetonline.org/link/summary/15-2011.00"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "US employee wage distribution, not Chinese wages, starting pay, or individual offers."
+                  "The May 2025 U.S. median for actuaries (15-2011) was $130,000 annually and $62.50 hourly. Percentiles describe the wage distribution; they are not offers by seniority."
                 ],
-                "evidence_type": "BLS OEWS occupational wage statistics displayed through O*NET",
+                "evidence_type": "primary_document",
                 "id": "actuaries-oews-2025",
-                "limitation": "US employee wage distribution, not Chinese wages, starting pay, or individual offers.",
+                "limitation": "National data, not an entry salary.",
                 "market": "United States",
-                "name": "National Wages: Actuaries",
-                "period": "2025 OEWS",
-                "publisher": "O*NET OnLine / BLS",
+                "name": "O*NET wage table: Actuaries",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/15-2011.00"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "National projections do not equal recruitment volume or individual hiring."
+                  "The May 2025 U.S. median for actuaries (15-2011) was $130,000 annually and $62.50 hourly. Percentiles describe the wage distribution; they are not offers by seniority."
                 ],
-                "evidence_type": "BLS Occupational Handbook, wage statistics, and employment projections",
+                "evidence_type": "primary_document",
                 "id": "actuaries-ooh-2025-2035",
-                "limitation": "National projections do not equal recruitment volume or individual hiring.",
+                "limitation": "See BLS Table 1.2 for precise growth and annual openings.",
                 "market": "United States",
-                "name": "BLS Actuaries OOH",
-                "period": "2025 wages and employment; 2025—2035 projections",
-                "publisher": "BLS",
+                "name": "BLS Occupational Outlook Handbook: Actuaries",
+                "period": "2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/math/actuaries.htm"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Industry means are not precise actuarial wages."
+                  "NBS 2025 urban finance annual averages were CNY 211,164 at non-private units and CNY 140,451 at private units. They do not isolate actuaries. The vacancy figures below are single-employer examples, not national or city wage distributions."
                 ],
-                "evidence_type": "Official industry average annual wage statistics",
+                "evidence_type": "primary_document",
                 "id": "actuaries-nbs-2025",
-                "limitation": "Industry means are not precise actuarial wages.",
+                "limitation": "Industry context only.",
                 "market": "Mainland China",
-                "name": "2025 annual average wages of employees in urban units",
-                "period": "2025; published 2026-05-15",
+                "name": "NBS: urban finance annual wages",
+                "period": "2025",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "accessed_at": "2026-10-07",
@@ -32377,19 +32436,19 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Chinese proficiency-assessment qualifications cannot replace role signing authorization."
+                  "Mainland China’s professional qualification has associate and fellow levels. Eligibility to sit exams is separate from obtaining the certificate; verify exams, ethics, education and relevant experience. Passing some exams does not establish the credential or employer signing authority."
                 ],
-                "evidence_type": "Official rules for a proficiency-assessment occupational qualification system",
+                "evidence_type": "primary_document",
                 "id": "actuaries-cn-qualification-2023",
-                "limitation": "Chinese proficiency-assessment qualifications cannot replace role signing authorization.",
+                "limitation": "Separate exam eligibility, credential issuance and signing responsibility.",
                 "market": "Mainland China",
-                "name": "Actuarial occupational qualification rules",
+                "name": "Mainland actuarial professional qualification and exam rules",
                 "period": "2023",
-                "publisher": "Relevant official Ministry of Human Resources and Social Security publication",
-                "scope": "exact",
-                "url": "https://chinajob.mohrss.gov.cn/h5/c/2023-07-20/382768.shtml"
+                "publisher": "NFRA / MOHRSS",
+                "scope": "contextual",
+                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98627"
               },
               {
                 "accessed_at": "2026-10-07",
@@ -32482,21 +32541,112 @@
                 "url": null
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Organize experience data | Policies, exposure, and claims | Confirm statistical definitions, observation periods, and applicability, retaining input-check records. — 75/100; weight=1/3; actuaries.profile.responsibilities-block.1[0]",
-                  "Calculate rates and reserves | Experience data and probability models | Produce calculations and explain methods, assumptions, and the basis for recalculation. — 75/100; weight=1/3; actuaries.profile.responsibilities-block.1[2]",
-                  "Collaborate with business functions | Underwriting, claims, finance, and management staff | Explain technical results and limitations clearly, checking business questions against outputs. — 50/100; weight=1/3; actuaries.profile.responsibilities-block.1[4]"
+                  "Tools can organize fictional data and draft formulas or code. Check data access before use, then independently verify formulas, denominators and rounding. Authorized staff remain responsible for rates, reserves and sign-off. No occupation-specific automation rate or causal layoff estimate is established.",
+                  "No displacement rate.",
+                  "No displacement rate.",
+                  "No displacement rate.",
+                  "No displacement rate."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "No displacement rate.",
+                "name": "FermatMind Editorial: tool and review limits",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Hongkang Life posted one actuary role in Beijing on November 3, 2026. The listing displays CNY 8,000–10,000 without specifying the pay period or separating base and bonus. It specifies a master’s or higher, 0–3 years of experience and at least two exams from listed actuarial systems. Work includes reserves, embedded value and reporting; current availability is unverified."
+                ],
+                "evidence_type": "primary_document",
+                "id": "actu-bj",
+                "limitation": "One employer posting, not a market distribution.",
+                "market": "Mainland China",
+                "name": "Hongkang Life: Beijing actuary",
+                "period": "2026-11-03",
+                "publisher": "Nankai University employer posting",
+                "scope": "recruitment_proxy",
+                "url": "https://career.nankai.edu.cn/correcruit/content/id/86089.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "China Pacific Property Insurance’s Hunan branch posted two insurance actuarial roles in Changsha on September 15, 2026. The notice lists CNY 10,000–12,000 per month and a master’s or higher. Work includes pricing, model maintenance, outstanding claims reserves and reporting. Verify the pay components in an actual offer."
+                ],
+                "evidence_type": "primary_document",
+                "id": "actu-cs",
+                "limitation": "One employer posting, not a market distribution.",
+                "market": "Mainland China",
+                "name": "China Pacific P&C: Changsha actuarial role",
+                "period": "2026-09-15",
+                "publisher": "Hunan University employer posting",
+                "scope": "recruitment_proxy",
+                "url": "https://scc.hnu.edu.cn/detail/job?career_id=718142&id=3236731"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "PICC P&C’s Tianjin branch posted one actuarial position on September 15, 2026 for a master’s in actuarial science. The header displays CNY 4,500–6,000 without stating the pay period or separating fixed and variable pay. Work includes motor pricing models, non-motor pricing and reserves. This is one posting."
+                ],
+                "evidence_type": "primary_document",
+                "id": "actu-tj",
+                "limitation": "One employer posting, not a market distribution.",
+                "market": "Mainland China",
+                "name": "PICC P&C: Tianjin actuarial role",
+                "period": "2026-09-15",
+                "publisher": "Tianjin University of Science and Technology employer posting",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.tust.edu.cn/correcruit/content/id/46623.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "ASA has examination, educational and admission requirements."
+                ],
+                "evidence_type": "primary_document",
+                "id": "actu-soa",
+                "limitation": "Does not set all employer requirements.",
+                "market": "United States",
+                "name": "SOA: ASA requirements",
+                "period": "2026",
+                "publisher": "Society of Actuaries",
+                "scope": "contextual",
+                "url": "https://www.soa.org/education/exam-req/edu-asa-req/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Check current society requirements for the property and casualty path."
+                ],
+                "evidence_type": "primary_document",
+                "id": "actu-cas",
+                "limitation": "Does not confer employer signing authority.",
+                "market": "United States",
+                "name": "CAS: ACAS and FCAS requirements",
+                "period": "2026",
+                "publisher": "Casualty Actuarial Society",
+                "scope": "contextual",
+                "url": "https://www.casact.org/credential-requirements"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "For U.S. work, verify the current SOA ASA/FSA or CAS ACAS/FCAS pathway for your practice area. For U.S. actuarial opinions, check the applicable qualification standards and employer authority separately. These designations do not establish cross-country recognition."
+                ],
+                "evidence_type": "primary_document",
+                "id": "actu-usqs",
+                "limitation": "Check applicability by opinion, role and jurisdiction.",
+                "market": "United States",
+                "name": "U.S. standards for Statements of Actuarial Opinion",
+                "period": "effective 2022",
+                "publisher": "American Academy of Actuaries",
+                "scope": "contextual",
+                "url": "https://actuary.org/professionalism/us-qualification-standards/"
               }
             ]
           },
@@ -35863,7 +36013,7 @@
       },
       "hero": {
         "h1": "Actuaries",
-        "quick_answer": "Actuaries use insurance and population experience data to estimate future benefit-payment risks and develop rate, reserve, and risk recommendations. Before choosing this path, test whether you are willing to repeatedly check data and assumptions, explain uncertainty, and continue learning within the limits of exam progress, employer authorization, and responsibility boundaries.",
+        "quick_answer": "Actuaries use data and models to estimate uncertain costs in insurance and other settings. Pricing compares claim frequency, severity and rating assumptions; reserving estimates unpaid claims and explains changes. Start by trying a reviewable calculation, then verify exams, responsibilities and signing authority separately.",
         "title": "Actuaries"
       },
       "market_signal_card": {
@@ -35946,7 +36096,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-actuaries-ooh-2025",
+            "source_id": "ep",
             "value": {
               "$item": "actuaries.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35991,7 +36141,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-actuaries-ooh-2025",
+            "source_id": "ep",
             "value": {
               "$item": "actuaries.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36036,7 +36186,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-actuaries-ooh-2025",
+            "source_id": "ep",
             "value": {
               "$item": "actuaries.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -37215,7 +37365,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit actuarial work",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37292,7 +37442,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five "
           },
           {
             "href": {
@@ -37337,9 +37487,11 @@
     "interface": {
       "interface.fit.directions_heading": "Comparison with adjacent occupations: how do tasks and outputs differ?",
       "interface.fit.interest_code_heading": "How to understand interest codes",
+      "interface.outlook.evidence_heading": "U.S. actuary employment, growth and openings",
       "interface.profile.comparison.dimension_header": "Comparison dimension",
       "interface.profile.comparison.primary_header": "Actuaries (US occupational tasks)",
       "interface.profile.comparison.secondary_header": "Insurance underwriters (US occupational tasks)",
+      "interface.quick_decision.experiment_heading": "How can I try an actuarial calculation?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "US salary reference",
@@ -37432,7 +37584,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and review tasks",
       "china-salary": "Salary reference for mainland China",
       "direction-comparison": "Comparison of career directions",
       "fit": "Career fit guide",
@@ -37463,26 +37615,26 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the actuarial-specific research package does not provide this statistical item)",
+        "display_value": "$78,570 per year",
         "fact_id": "us-wage-low10-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Upper boundary of the 10th wage percentile",
         "occupation_scope": "Actuaries",
         "period": "Material periods follow their sources",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the actuarial-specific research package does not provide this statistical item)",
+        "display_value": "$97,680 per year",
         "fact_id": "us-wage-q25-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "25th wage percentile",
         "occupation_scope": "Actuaries",
         "period": "Material periods follow their sources",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
@@ -37499,26 +37651,26 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the actuarial-specific research package does not provide this statistical item)",
+        "display_value": "$170,650 per year",
         "fact_id": "us-wage-q75-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "75th wage percentile",
         "occupation_scope": "Actuaries",
         "period": "Material periods follow their sources",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the actuarial-specific research package does not provide this statistical item)",
+        "display_value": "$215,100 per year",
         "fact_id": "us-wage-high10-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Lower boundary of the 90th wage percentile",
         "occupation_scope": "Actuaries",
         "period": "Material periods follow their sources",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
@@ -37530,19 +37682,19 @@
         "occupation_scope": "Actuaries",
         "period": "2025 base year (BLS EP employment projections)",
         "source_refs": [
-          "actuaries-ooh-2025-2035"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "9%",
+        "display_value": "9.2%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Projected employment growth rate",
         "occupation_scope": "Actuaries",
-        "period": "2025—2035 (BLS EP employment projections)",
+        "period": "2025–2035",
         "source_refs": [
-          "actuaries-ooh-2025-2035"
+          "ep"
         ]
       },
       {
@@ -37554,7 +37706,7 @@
         "occupation_scope": "Actuaries",
         "period": "2025—2035 (BLS EP employment projections)",
         "source_refs": [
-          "actuaries-ooh-2025-2035"
+          "ep"
         ]
       },
       {
@@ -37611,10 +37763,10 @@
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "National average annual wages of employees in urban non-private units",
-        "occupation_scope": "Actuaries",
+        "occupation_scope": "industry_proxy",
         "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
@@ -37623,10 +37775,10 @@
         "fact_id": "cn-private-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "National average annual wages of employees in urban private units",
-        "occupation_scope": "Actuaries",
+        "occupation_scope": "industry_proxy",
         "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
@@ -37719,10 +37871,10 @@
         "fact_id": "cn-finance-nonprivate-wage",
         "market": "Finance industry in Chinese urban units",
         "measure": "pre-tax annual mean wage",
-        "occupation_scope": "Actuaries",
+        "occupation_scope": "industry_proxy",
         "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
@@ -37731,22 +37883,22 @@
         "fact_id": "cn-finance-private-wage",
         "market": "Finance industry in Chinese urban units",
         "measure": "pre-tax annual mean wage",
-        "occupation_scope": "Actuaries",
+        "occupation_scope": "industry_proxy",
         "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
         "derivation": null,
-        "display_value": "130000 USD/year (median for month 5 of 2025)",
+        "display_value": "$130,000 per year",
         "fact_id": "us-actuary-median",
         "market": "United States",
         "measure": "annual median wage",
         "occupation_scope": "Actuaries",
         "period": "May 2025 wage and 2025-2035 projection; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
@@ -37770,19 +37922,19 @@
         "occupation_scope": "Actuaries",
         "period": "2023 regulation in force; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "actuaries-cn-qualification-2023"
         ]
       },
       {
         "derivation": null,
-        "display_value": "9% growth over 2025–2035; approximately 31200 people in 2025",
+        "display_value": "9.2%",
         "fact_id": "us-actuary-growth",
         "market": "United States",
         "measure": "employment base and projected growth",
         "occupation_scope": "Actuaries",
-        "period": "May 2025 wage and 2025-2035 projection; accessed 2026-08-31",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
@@ -37794,7 +37946,7 @@
         "occupation_scope": "Actuaries",
         "period": "May 2025 wage and 2025-2035 projection; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
@@ -37811,14 +37963,14 @@
       },
       {
         "derivation": null,
-        "display_value": "No data currently available for safe use",
+        "display_value": "$130,000 per year",
         "fact_id": "us-wage",
         "market": "United States",
         "measure": "Career-page wage or availability boundaries",
         "occupation_scope": "Actuaries",
         "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
@@ -37847,14 +37999,14 @@
       },
       {
         "derivation": null,
-        "display_value": "22%",
+        "display_value": "9.2%",
         "fact_id": "employment-projection",
         "market": "United States",
         "measure": "Employment trends or availability boundaries",
         "occupation_scope": "Actuaries",
-        "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
@@ -37871,14 +38023,14 @@
       },
       {
         "derivation": null,
-        "display_value": "130,000 USD",
+        "display_value": "$130,000 per year",
         "fact_id": "us-wage-median-2025",
         "market": "United States",
         "measure": "Median annual wage",
         "occupation_scope": "Actuaries",
         "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
@@ -37914,7 +38066,7 @@
         "occupation_scope": "Actuaries",
         "period": "current page; accessed 2026-09-04",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
@@ -38006,7 +38158,7 @@
         "display_value": "129,650 US dollars/year",
         "fact_id": "actuaries-2025-government",
         "market": "United States",
-        "measure": "Median wage for actuaries in government (excluding schools and hospitals)",
+        "measure": "Government, excluding state and local education and hospitals | occupation annual median",
         "occupation_scope": "Actuaries SOC 15-2011",
         "period": "2025",
         "source_refs": [
@@ -38034,19 +38186,19 @@
         "occupation_scope": "Actuaries SOC 15-2011",
         "period": "2025",
         "source_refs": [
-          "actuaries-ooh-2025-2035"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "9%",
+        "display_value": "9.2%",
         "fact_id": "actuaries-2025-2035-growth",
         "market": "United States",
         "measure": "Projected employment growth",
         "occupation_scope": "Actuaries SOC 15-2011",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
-          "actuaries-ooh-2025-2035"
+          "ep"
         ]
       },
       {
@@ -38058,34 +38210,22 @@
         "occupation_scope": "Actuaries SOC 15-2011",
         "period": "2025—2035",
         "source_refs": [
-          "actuaries-ooh-2025-2035"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Actuaries",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "ep"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and actuarial review"
     },
     "badges": [
-      "Actuarial tasks · Actuaries' model and results review · Actuaries' assumption and version records",
-      "Actuaries' cross-team collaboration / Actuaries' escalation of anomalies / Actuaries' process improvement",
-      "Data gaps retained · Authority boundaries marked"
+      "Insurance pricing and reserving",
+      "Assumptions, denominators and review",
+      "Credentials and signing authority"
     ],
     "metrics": [
       {
@@ -38124,17 +38264,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Learn what actuaries do, skills and exams needed, US salary and outlook, and how to try an actuarial work sample. Official-source dates and limits included."
+      "text": "Compare actuarial pricing and reserving work, mainland hiring examples, U.S. pay and credential routes. Try a fictional loss cost calculation."
     },
     "title": {
       "availability": "available",
-      "text": "Actuary Career: Duties, Salary, Exams and Entry Routes"
+      "text": "Actuaries: Work, Qualifications, Pay and a Loss Cost Exercise"
     }
   },
-  "source_content_sha256": "6f46756e4588a3985304dd1f3db41c1358a503c678223aae65e6df547667be21",
+  "source_content_sha256": "a05c55d4c1d75dfc5fb3e535440622d7b49d2b2e41379a3abbc7d09aef60bf98",
   "subject": {
     "canonical_slug": "actuaries",
     "name": "Actuaries",
-    "summary": "Actuaries use mathematics, statistics and financial theory to estimate risk and financial liabilities. Explore their daily work, US education and examination routes, pay data and a fictional work sample before comparing this career with adjacent roles."
+    "summary": "Actuaries use data and models to estimate uncertain costs in insurance and other settings. Pricing compares claim frequency, severity and rating assumptions; reserving estimates unpaid claims and explains changes. Start by trying a reviewable calculation, then verify exams, responsibilities and signing authority separately."
   }
 }

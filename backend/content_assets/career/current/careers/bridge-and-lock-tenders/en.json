@@ -14,9 +14,6 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24,13 +21,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-2035": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-industry-wage-aerospace-mfg-2025": {
         "status": "pending_mapping"
@@ -48,10 +45,10 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-high10-2025": {
         "status": "pending_mapping"
@@ -23243,10 +23240,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Before entering the field you can first complete the L1 fictional paper exercise on this page: check the conditions, mark unknown states, and fill in the event record and handover sheet. The exercise is only for experiencing observation, recording, and review; real equipment operation requires separate unit training, assessment, and position authorization."
+              "Open “L1 | Review six fictional lock events” in the entry section. Submit the event table and handover independently."
             ]
           },
           "id": "bridge-and-lock-tenders.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23254,7 +23254,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education, qualifications, and position authorization must be checked separately: O*NET lists this occupation as Job Zone 1-2, and among respondents 65% think a high school diploma or equivalent is required, 20% think a postsecondary certificate is required, and 15% think less than high school; related work experience and on-the-job training range from a few days to one year. In mainland China, the operating plan for navigation structures should be agreed with and published by the department responsible for waterway management, and the construction or management unit should maintain navigation structures as required and keep them operating normally; the certification, watch duty, and operating authorization for specific positions are determined by the rules of the employing unit and the competent department."
+              "BLS lists high school or equivalent, no related experience, and short-term on-the-job training as typical U.S. entry requirements. The O*NET 65% / 20% / 15% figures are responses about education for new hires. For mainland locks and ship lifts, check the operating unit’s training, assessment, and role authorization. Engineering postings have their own requirements."
             ]
           },
           "id": "bridge-and-lock-tenders.quick-decision.fermat-decision-card.6",
@@ -23702,7 +23702,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The current O*NET 2025 industry distribution: government 82%, transportation and warehousing 16%, other 2%. This describes the industries in which U.S. 53-6011 employment falls, not the staffing shares, income brackets, or employer adoption rates in China. Chinese waterway management, lock operation, bridge management, and outsourced unit positions are checked separately against actual duties, and this round did not verify one-to-one correspondence with detailed category codes."
+              "O*NET lists two leading U.S. industries for 2025: government 82%, transportation and warehousing 16%. This describes the industries in which U.S. 53-6011 employment falls, not the staffing shares, income brackets, or employer adoption rates in China. Chinese waterway management, lock operation, bridge management, and outsourced unit positions are checked separately against actual duties, and the figures do not establish one-to-one correspondence with detailed category codes."
             ]
           },
           "id": "bridge-and-lock-tenders.profile.career-quick-answers-block.24",
@@ -23808,7 +23808,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "In mainland China, the operation and management of waterways and navigation structures is governed by the Waterway Law of the People's Republic of China: the transportation department of the State Council is in charge of national waterway management; the operation of navigation structures should meet the needs of vessel passage, and the operating plan should be agreed with and published by the department responsible for waterway management; the construction or management unit should maintain navigation structures as required and keep them operating normally; the law also prohibits activities in navigation structures, their approach channels, and vessel dispatch areas that affect their normal operation. Chinese locks and ship lifts are governed by the 2026 amended Measures for the Administration of Navigation Structure Operation: Article 29 requires working only after passing the unit's education and training and clarifying position responsibility; Article 15 requires that adjustments to operating conditions, opening hours, dispatch, and maintenance closures be re-planned and submitted to the original approving department. Bascule bridges and lighthouses cannot be brought directly under these measures merely because the United States groups them in the same occupation."
+              "In mainland China, the operation and management of waterways and navigation structures is governed by the Waterway Law of the People's Republic of China: the transportation department of the State Council is in charge of national waterway management; the operation of navigation structures should meet the needs of vessel passage, and the plan requires approval by the waterway authority and must be made public; the construction or management unit should maintain navigation structures as required and keep them operating normally; the law also prohibits activities in navigation structures, their approach channels, and vessel dispatch areas that affect their normal operation. Chinese locks and ship lifts are governed by the 2026 amended Measures for the Administration of Navigation Structure Operation: Article 29 requires working only after passing the unit's education and training and clarifying position responsibility; Article 15 requires that adjustments to operating conditions, opening hours, dispatch, and maintenance closures be re-planned and submitted to the original approving department. Bascule bridges and lighthouses cannot be brought directly under these measures merely because the United States groups them in the same occupation. For locks and ship lifts covered by the measures, Article 13 requires the waterway authority to post the plan’s main points on its website within five working days of approval. The operator must publish them through a channel readily accessible to vessel operators within five working days of notice."
             ]
           },
           "id": "bridge-and-lock-tenders.profile.career-quick-answers-block.32",
@@ -23895,7 +23895,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS2025—2035 lists this occupation's employment 3.1→3.1 thousand, a net change of -0.1 thousand, growth of -2.3%, and 0.3 thousand annual openings; each column is rounded independently. The O*NET summary has been updated to 2025 employment 3100 and the current projections, and localtrends shows integer growth of -2%; it can no longer be said to still be the old period, nor can zero growth be inferred by subtracting the displayed headcounts."
+              "BLS reports about 3,100 jobs in both 2025 and 2035 after rounding, a net decline of about 100 (−2.3%), and about 300 annual openings. The published headcounts, net change, and percentage are rounded separately."
             ]
           },
           "id": "bridge-and-lock-tenders.profile.onet-structured-fields-block.4",
@@ -23911,7 +23911,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The current O*NET 2025 industry distribution: government 82%, transportation and warehousing 16%, other 2%. This describes the industries in which U.S. 53-6011 employment falls, not the staffing shares, income brackets, or employer adoption rates in China. The Hot Technology page lists six specific products: Excel, Office, Outlook, Word, PeopleSoft, and SAP, and the within-occupation ratios in the 2025 U.S. hiring data are all unpublished; the details page's six software categories additionally include general Email and VPN. The six products and the six categories are different units, and the latter are not all marked Hot; adoption or substitution rates cannot be inferred from the lists."
+              "O*NET lists two leading U.S. industries for 2025: government 82%, transportation and warehousing 16%. This describes the industries in which U.S. 53-6011 employment falls, not the staffing shares, income brackets, or employer adoption rates in China. The Hot Technology page lists six specific products: Excel, Office, Outlook, Word, PeopleSoft, and SAP, and the within-occupation ratios in the 2025 U.S. hiring data are all unpublished; the details page's six software categories additionally include general Email and VPN. The six products and the six categories are different units, and the latter are not all marked Hot; adoption or substitution rates cannot be inferred from the lists."
             ]
           },
           "id": "bridge-and-lock-tenders.profile.onet-structured-fields-block.5",
@@ -24753,10 +24753,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Digital tools can assist with records, ledgers, and work orders, and equipment automation may also change some control and monitoring tasks. The available materials cannot quantify a generative AI substitution rate, net employment impact, or disappearance year for this occupation; the occupational questionnaire, AI task exposure, and employment projections are different kinds of evidence and cannot substitute for one another. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Software can flag missing fields and timing or signal discrepancies. Passage decisions, on-site actions and equipment operations follow facility procedures and role authority. No verified displacement rate is available."
             ]
           },
           "id": "bridge-and-lock-tenders.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -24870,7 +24873,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The current O*NET 2025 industry distribution: government 82%, transportation and warehousing 16%, other 2%. This describes the industries in which U.S. 53-6011 employment falls, not the staffing shares, income brackets, or employer adoption rates in China."
+              "O*NET lists two leading U.S. industries for 2025: government 82%, transportation and warehousing 16%. This describes the industries in which U.S. 53-6011 employment falls, not the staffing shares, income brackets, or employer adoption rates in China."
             ]
           },
           "id": "bridge-and-lock-tenders.ai-impact.ai-impact-table.28",
@@ -24895,7 +24898,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS2025—2035 lists this occupation's employment 3.1→3.1 thousand, a net change of -0.1 thousand, growth of -2.3%, and 0.3 thousand annual openings; each column is rounded independently. The O*NET summary has been updated to 2025 employment 3100 and the current projections, and localtrends shows integer growth of -2%; it can no longer be said to still be the old period, nor can zero growth be inferred by subtracting the displayed headcounts."
+              "BLS reports about 3,100 jobs in both 2025 and 2035 after rounding, a net decline of about 100 (−2.3%), and about 300 annual openings. The published headcounts, net change, and percentage are rounded separately."
             ]
           },
           "id": "bridge-and-lock-tenders.ai-impact.ai-impact-table.30",
@@ -25211,7 +25214,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The whole transportation and material moving occupational group has a 2025 median annual wage of 44350 USD and about 160 ten-thousand annual openings over 2025—2035, made up of growth and replacement of permanent leavers; the overview does not list this occupation separately. It cannot be said from that passage alone that the openings are mainly from replacement, nor can it be taken as the 53-6011 figure."
+              "The whole transportation and material moving occupational group has a 2025 median annual wage of 44350 USD and about 1.6 million annual openings over 2025—2035, made up of growth and replacement of permanent leavers; the overview does not list this occupation separately. It cannot be said from that passage alone that the openings are mainly from replacement, nor can it be taken as the 53-6011 figure."
             ]
           },
           "id": "bridge-and-lock-tenders.ai-impact.ai-impact-table.56",
@@ -25376,7 +25379,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS2025—2035 lists this occupation's employment 3.1→3.1 thousand, a net change of -0.1 thousand, growth of -2.3%, and 0.3 thousand annual openings; each column is rounded independently. The O*NET summary has been updated to 2025 employment 3100 and the current projections, and localtrends shows integer growth of -2%; it can no longer be said to still be the old period, nor can zero growth be inferred by subtracting the displayed headcounts."
+              "BLS reports about 3,100 jobs in both 2025 and 2035 after rounding, a net decline of about 100 (−2.3%), and about 300 annual openings. The published headcounts, net change, and percentage are rounded separately."
             ]
           },
           "id": "bridge-and-lock-tenders.ai-impact.ai-impact-table.70",
@@ -26161,10 +26164,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the National Bureau of Statistics 2025 wage tables consulted this time do not list a national occupational wage distribution for bridge and lock tenders."
+              "A mainland national occupational wage distribution was not available. Neither local sample disclosed pay for these roles."
             ]
           },
           "id": "bridge-and-lock-tenders.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "l1-hlj",
+            "l1-nt"
+          ],
           "type": "prose"
         },
         {
@@ -26172,10 +26179,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "On 2026-10-03 the National Bureau of Statistics 2025 urban unit wage release was checked and no separate value for this occupation was found. This scope of review does not prove that all localities, units, or other surveys lack such data; this page does not fill in a national occupational wage."
+              "In 2025 the Heilongjiang Songhua River Navigation Hub Construction and Operations Center listed four positions in navigation lock and spillway gate dispatch. It required undergraduate education and a bachelor’s degree or higher. The Dadingzishan site listed a rotating schedule covering 24 hours and a five-year minimum service period including probation. The plan gave no pay amount. Nantong’s 2026 public institution posting lists electrical and computing assistant engineer roles at Nantong Lock. These are engineering entry examples, not routine watchkeeping openings. The table gives no pay amount for those roles."
             ]
           },
           "id": "bridge-and-lock-tenders.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "l1-hlj",
+            "l1-nt"
+          ],
           "type": "prose"
         },
         {
@@ -26340,7 +26351,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial analysis: digital tools may assist with records, shift scheduling, and equipment monitoring, and the specific effect must be verified by facility and by actual tool. The NBS2025 release checked this round does not list this occupation's wage separately; software or tool lists cannot make up a precise occupational wage, nor can they be used to judge the cause of the statistical gap or future classifications."
+              "Editorial analysis: digital tools may assist with records, shift scheduling, and equipment monitoring, and the specific effect must be verified by facility and by actual tool. The NBS 2025 wage release does not list this occupation's wage separately; software or tool lists cannot make up a precise occupational wage, nor can they be used to judge the cause of the statistical gap or future classifications."
             ]
           },
           "id": "bridge-and-lock-tenders.china-salary.career-snapshot-primary-locale.23",
@@ -26417,7 +26428,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Operation must comply with the Waterway Law of the People's Republic of China: the operation of navigation structures should meet the needs of vessel passage, and the operating plan should be agreed with and published by the department responsible for waterway management; the construction or management unit should maintain navigation structures as required and keep them operating normally. Locks and ship lifts additionally require checking Article 29 of the 2026 measures on working after passing the unit's education and training, and a technical school diploma is not automatically equal to position operating authorization."
+              "Operation must comply with the Waterway Law of the People's Republic of China: the operation of navigation structures should meet the needs of vessel passage, and the plan requires approval by the waterway authority and must be made public; the construction or management unit should maintain navigation structures as required and keep them operating normally. Locks and ship lifts additionally require checking Article 29 of the 2026 measures on working after passing the unit's education and training, and a technical school diploma is not automatically equal to position operating authorization. For locks and ship lifts covered by the measures, Article 13 requires the waterway authority to post the plan’s main points on its website within five working days of approval. The operator must publish them through a channel readily accessible to vessel operators within five working days of notice."
             ]
           },
           "id": "bridge-and-lock-tenders.china-salary.career-snapshot-primary-locale.30",
@@ -27111,7 +27122,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The current O*NET 2025 industry distribution: government 82%, transportation and warehousing 16%, other 2%. This describes the industries in which U.S. 53-6011 employment falls, not the staffing shares, income brackets, or employer adoption rates in China. When comparing positions, check the written agreement on employer, shift system, and allowances separately, and the shares cannot be used to derive pay."
+              "O*NET lists two leading U.S. industries for 2025: government 82%, transportation and warehousing 16%. This describes the industries in which U.S. 53-6011 employment falls, not the staffing shares, income brackets, or employer adoption rates in China. When comparing positions, check the written agreement on employer, shift system, and allowances separately, and the shares cannot be used to derive pay."
             ]
           },
           "id": "bridge-and-lock-tenders.us-salary.career-snapshot-secondary-locale.29",
@@ -27331,7 +27342,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this review did not obtain a 2025 within-industry median for this occupation. The 2025 national wage percentiles and current employment projections are verifiable; the 2023 within-industry occupational means in the table below are historical references, not the 2025 industry median or a current quote."
+              "The page shows 2025 national occupational percentiles separately from 2023 within-industry occupational means. For a current offer, check industry, location, schedule, and pay components."
             ]
           },
           "id": "bridge-and-lock-tenders.us-salary.career-snapshot-secondary-locale.48",
@@ -27555,19 +27566,19 @@
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional competence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Security guards",
@@ -27600,7 +27611,7 @@
                 "url": "/en/career/jobs/locksmiths-and-safe-repairers"
               },
               {
-                "entity": "Sailors and marine pilots",
+                "entity": "Captains, Mates, and Pilots of Water Vessels",
                 "id": "link-12",
                 "relation": "career.adjacent",
                 "url": "/en/career/jobs/captains-mates-and-pilots-of-water-vessels"
@@ -27892,7 +27903,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial reflection: can you keep clear records and report according to procedures during a navigation peak, an error, or an unusual weather event? O*NET self-control 46 and stress tolerance 36 are occupational descriptions, and this round did not verify the predictive validity of emotional tests or derive safety performance from scores."
+              "Editorial reflection: can you keep clear records and report according to procedures during a navigation peak, an error, or an unusual weather event? O*NET self-control 46 and stress tolerance 36 are occupational descriptions, and the figures do not establish the predictive validity of emotional tests or derive safety performance from scores."
             ]
           },
           "id": "bridge-and-lock-tenders.fit.personality-fit-block.22",
@@ -27918,7 +27929,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Editorial observation suggestion: whether you can refuse to skip confirmation steps during a navigation peak; this round obtained no comparative predictive validity research between that behavior and emotional scale scores.",
+              "Editorial observation suggestion: whether you can refuse to skip confirmation steps during a navigation peak; this page does not provide comparative predictive validity research between that behavior and emotional scale scores.",
               "Being willing to admit operating or recording errors and correct them is part of professional competence."
             ]
           },
@@ -27941,7 +27952,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Boundary: career fit judgments cannot be decided by a personality test, an interest code, or any single test; the signals on this page are only used to raise verification questions. The editorial suggestion is to observe actual watch and record performance under mentoring with the appropriate conditions; this round obtained no comparative predictive validity evidence against personality or a single test."
+              "Boundary: career fit judgments cannot be decided by a personality test, an interest code, or any single test; the signals on this page are only used to raise verification questions. The editorial suggestion is to observe actual watch and record performance under mentoring with the appropriate conditions; this page does not provide comparative predictive validity evidence against personality or a single test."
             ]
           },
           "id": "bridge-and-lock-tenders.fit.personality-fit-block.26",
@@ -28183,7 +28194,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Introversion and extroversion are not used for admission judgments. The editorial suggestion is to observe whether you can transmit signals accurately, repeat instructions, and accept correction; this round did not verify the causal evidence of extroversion for communication in this occupation."
+              "Introversion and extroversion are not used for admission judgments. The editorial suggestion is to observe whether you can transmit signals accurately, repeat instructions, and accept correction; the figures do not establish the causal evidence of extroversion for communication in this occupation."
             ]
           },
           "id": "bridge-and-lock-tenders.fit.personality-fit-block.48",
@@ -28768,7 +28779,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Editorial risk judgment: long watch periods may make continuous checking harder, and missed sightings or misjudgments in the records must be observed; this round did not verify fatigue and accident causality for this occupation. ONet65% 40 hours and 20% more than 40 hours do not prove that everyone works overtime continuously."
+              "Editorial risk judgment: long watch periods may make continuous checking harder, and missed sightings or misjudgments in the records must be observed; the figures do not establish fatigue and accident causality for this occupation. ONet65% 40 hours and 20% more than 40 hours do not prove that everyone works overtime continuously."
             ]
           },
           "id": "bridge-and-lock-tenders.risk.career-risk-cards.20",
@@ -30156,7 +30167,7 @@
                 "Navigation hub joint dispatch assistant position",
                 "Assist at the dispatch position with registering passage plans, tracking queues, and notifying adjacent watch points.",
                 "Editorial verification suggestion: check with the target unit your record accuracy, completeness of information transfer, and multi-position coordination ability.",
-                "Submit the L1 three-vessel six-event queue and time record, for simulation only",
+                "Prepare the L1 event and time log. Count events and distinct vessels separately. For simulation only.",
                 "The final confirmation and issuance of dispatch instructions are exercised by authorized personnel, and assistant positions may not take their place."
               ],
               [
@@ -30198,7 +30209,7 @@
                 "values": [
                   "On-site safety and position authorization",
                   "A real site requires completing unit safety education first; the permits, monitoring, and protection for work at height, near water, or in confined spaces are checked against the actual work type and the applicable rules. This page does not treat these situations as all requiring the same statutory certificate or approval.",
-                  "In mainland China, the operating plan for navigation structures should be agreed with and published by the department responsible for waterway management, and the managing unit should maintain navigation structures as required.",
+                  "In mainland China, the plan requires approval by the waterway authority and must be made public, and the managing unit should maintain navigation structures as required.",
                   "Personal protection (hard hat, protective footwear, reflective vest, and where necessary a life jacket and fall protection) is provided and inspected by the employer."
                 ]
               },
@@ -30235,7 +30246,7 @@
                 "id": "exercise-materials",
                 "values": [
                   "L1 fictional paper record pack",
-                  "The L1 fictional paper record pack uses only pen and paper or a local spreadsheet and takes about 60—90 minutes; no equipment, site, PPE, mentor, or additional materials are needed. The following values are all editorial settings and are not any real bridge or lock standard.",
+                  "Allow 15–25 minutes with paper or a spreadsheet. Everything needed is in the prompt. Figures and states are fictional and do not define real passage or equipment requirements.",
                   "L1 rules: vessel width ≤8 m and vessel height ≤5 m; water level 1.8—2.4 m (endpoints included); visibility ≥500 m; the three conditions of normal equipment, cleared area, and clear communication must all be explicitly confirmed. Meeting all of them can only be recorded as \"simulated conditions complete\", not a release. Any over-limit item or communication failure is recorded as \"pause and report\"; any unknown is recorded as \"to be confirmed\", and an unknown must not be filled in as normal.",
                   "Input six events: 08:00 A (width 7, height 4, water 2.0, visibility 600; equipment normal, area cleared, communication clear); 08:10 B (width 9, height 4, water 2.0, visibility 600, the rest confirmed); 08:20 C (width 8, height 5, water 2.4, visibility 500; equipment unknown, area cleared, communication clear); 08:30 C (same values; equipment confirmed normal, area unknown, communication clear); 08:40 C (same values; all three confirmed); 08:50 A (same dimensions, water level, and visibility as 08:00; communication failed, the rest confirmed). All lengths in m, visibility in m, and the times within the same fictional shift.",
                   "Handover materials: D1 is the problem statement version for L1, and D2 is an additional illustration version marked \"not confirmed\"; the exercise does not need D2 to check the problem statement, but D2 must not be written as matched. The record fields are fixed as time, vessel ID, input conditions, judgment, reason, and next step; unknown items keep the original text."
@@ -30246,32 +30257,33 @@
                 "values": [
                   "What must be submitted",
                   "Make a L1 condition check table and write the judgment and basis for the six events row by row; boundaries equal to the threshold are judged by the rules, and no extra safety margin may be invented.",
-                  "Write three abnormality or missing-item records and distinguish over-limit, unknown, and communication failure; explain why a later correction cannot overwrite the old record.",
-                  "Prepare a handover sheet: list this shift's six events, the number of different vessels involved, the final status, and the unconfirmed D2 version item; count the number of events with \"simulated conditions complete\" and the number of different vessels separately."
+                  "Record a reason for each abnormal or incomplete event, distinguishing a limit violation, unknown information, and communication failure. Explain why a later update must preserve the original record.",
+                  "Count events, distinct vessels, complete events and distinct vessels with at least one complete event. Separately list the latest status of each vessel and the D2 item."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answer and item-by-item self-check",
-                  "Reference answer: 08:00 A simulated conditions complete; 08:10 B pause and report (9>8 width over the limit); 08:20 C to be confirmed (equipment unknown; 8=8, 5=5, 2.4=the upper limit, and 500=the lower limit all meet the numerical conditions).",
-                  "08:30 C is still to be confirmed (equipment being confirmed does not mean the area is also confirmed); 08:40 C simulated conditions complete; 08:50 A pause and report (communication failure), and the old 08:00 status must not be carried over.",
-                  "The abnormality list must cover at least B's width over-limit, C's two different unknown fields, and A's communication failure; keep all the old time points. Handover: six events and three different vessels A/B/C; 2 complete events (08:00 A and 08:40 C) involving 2 vessels. Final status A paused, B paused, C complete; the D2 version is not confirmed, and the missing item must still be retained.",
-                  "Self-check: recalculate from the input from the beginning and check units, equals signs, unknowns, and times cell by cell; check the counts 6 events / 3 vessels / 2 complete events / 2 complete vessels and do not mistake the event count for the vessel count. No external expert signature is needed; keep your own wrong items and the reasons for correction."
+                  "Submit before opening the reference",
+                  "Independently recheck and submit the event table and handover on Day 6.",
+                  "Open “L1 reference (open after submitting)” in the FAQ on Day 7."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries between the exercise and real authority",
-                  "L1 is only a paper record and condition logic exercise; it does not give real gate, valve, light signal, whistle, waterway clearance, or current operating procedures. These thresholds or the \"complete\" label must not be used to guide real releases, equipment control, or accident judgments.",
-                  "Do not enter real near-water, height, or operating facilities, do not issue real signals, and do not pretend to have authorization or training experience; real safety measures and decisions must be based on the facility's procedures, position training, on-site checking, and the authorization chain."
+                  "Paper exercise boundary",
+                  "Use the prompt only. Do not operate equipment, issue signals or authorize passage.",
+                  "Keep originals and unresolved items without filling gaps yourself."
                 ]
               }
             ]
           },
           "id": "bridge-and-lock-tenders.path.entry-work-sample-data.1",
-          "title": "Paper cases and tasks",
+          "source_refs": [
+            "editorial"
+          ],
+          "title": "L1 | Review six fictional lock events",
           "type": "cards"
         },
         {
@@ -30284,7 +30296,7 @@
                 "values": [
                   "L1 condition check table",
                   "L1 check table: list the values, the three statuses, the judgment, and the reason for each of the six events cell by cell; write \"fictional paper exercise, not on-site operation\" at the top of the page.",
-                  "List conditions complete, records complete, and individual authorization separately; write the D2 version as unconfirmed and do not guess to fill it in."
+                  "Keep condition status, record completeness, and personal authority separate. Preserve the version status given in the materials."
                 ]
               },
               {
@@ -30299,7 +30311,7 @@
                 "id": "report-summary",
                 "values": [
                   "Handover review",
-                  "Handover review: list the final status of A/B/C, the different times when C's equipment and area were unknown, A's communication failure, and the unconfirmed D2 version; explain that a later confirmation does not erase the earlier unknown.",
+                  "For the handover, list each vessel’s latest status, the time and reason for each gap, and the document version status. Keep the original entries after a later confirmation.",
                   "A one-page deliverable only proves the exercise process and cannot be written as a real safety release, an on-site record, or a unit assessment certificate."
                 ]
               },
@@ -30372,55 +30384,58 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Read the identity and duties on this page, and distinguish shore-based watch duty, vessel piloting, and maintenance.",
-                  "Output: five task boundaries, recording the U.S. basis and the items to check with the Chinese unit."
+                  "Day 1",
+                  "Read the prompt and distinguish facility watchkeeping from vessel navigation."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Read the whole L1 problem statement, copy the conditions and record fields, and circle the thresholds that include equality and the three confirmation statuses.",
-                  "Output: the L1 check template, noting the fictional thresholds."
+                  "Day 2",
+                  "Copy the six events and exercise rules."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Cover the answer and fill in the six events from 08:00 to 08:50 one by one.",
-                  "Output: the original judgment table, without touching equipment or real signals."
+                  "Day 3",
+                  "Check each row and give a reason."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Check the values, unknowns, and communication failure against the reference answer, and check the three time points for C.",
-                  "Output: an error list and the reasons for corrections, keeping the original table."
+                  "Day 4",
+                  "Keep unknown states and original entries."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Count the events, the number of different vessels, and the complete events and complete vessels; check the D1/D2 status.",
-                  "Output: the 6/3/2/2 counts and the record that D2 is not confirmed."
+                  "Day 5",
+                  "Count events and vessels separately and record their latest states."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Organize the final status of A/B/C and the open items, and independently recheck the handover sheet from the original input.",
-                  "Output: the handover review and the self-check date; external opinions are optional."
+                  "Day 6",
+                  "Submit the event table and handover without reading the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Compile the check table, self-check, handover, and tool note, and assess whether you are willing to continue record-type training.",
-                  "Output: the reason for continuing to explore or pausing; for a formal job search, check unit training, authorization, shift system, and safety measures again."
+                  "Day 7",
+                  "Open “L1 reference (open after submitting)” in the FAQ and review any differences."
                 ]
               }
             ]
           },
           "id": "bridge-and-lock-tenders.path.seven-day-trial.1",
+          "source_refs": [
+            "editorial"
+          ],
           "title": "Seven-day progressive experience",
           "type": "timeline"
         },
@@ -30496,7 +30511,7 @@
                 "Basis for the navigation structure operating plan (mainland China)",
                 "Operating unit and watch personnel",
                 "Determines whether you can open and close, release, and adjust operating arrangements.",
-                "It is a statutory requirement: the operating plan should be agreed with and published by the department responsible for waterway management.",
+                "It is a statutory requirement: the plan requires approval by the waterway authority and must be made public.",
                 "It must be carried out under the Waterway Law of the People's Republic of China and the unit rules.",
                 "Plan preparation, submission, and publication cycle.",
                 "The plan itself does not replace on-site condition confirmation and watch judgment."
@@ -30530,7 +30545,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "Qualification boundaries: training, proficiency, records, authorization, and plan approval are checked separately; the paper exercise does not authorize work on the job. The O*NET education question asks what education new hires need, and 65% answered high school equivalent, 20% a postsecondary certificate, and 15% below high school, which are position education requirement answers rather than the educational composition of workers. The on-the-job training of a few days to one year for Job Zone1—2 and SVP below 6.0 is a cross-occupation summary; related experience has separate descriptions ranging from none to several months or one year, and they cannot be merged into a fixed period for this occupation. The typical BLS entry for this occupation is a high school equivalent, no related experience, and short-term on-the-job training. Chinese locks and ship lifts are governed by the 2026 amended Measures for the Administration of Navigation Structure Operation: Article 29 requires working only after passing the unit's education and training and clarifying position responsibility; Article 15 requires that adjustments to operating conditions, opening hours, dispatch, and maintenance closures be re-planned and submitted to the original approving department. Bascule bridges and lighthouses cannot be brought directly under these measures merely because the United States groups them in the same occupation.",
+              "China’s navigation structure operation rules apply to facilities used for vessel passage, including navigation locks and ship lifts. Use the approved operating plan for scheduling and records. Article 29 requires the operator to assign responsibilities and ensure personnel pass its training before taking up work. Check movable bridges and maintenance separately.",
               "U.S. BLS typically shows a high school diploma or equivalent and short-term on-the-job training for this occupation; the O*NET respondent education 65%/20%/15% is only a U.S. context.",
               "Article twenty-five of the Waterway Law as amended in 2016 provides for approval and publication of the operating plan and for maintenance obligations. It does not provide that passing the exercise on this page is sufficient to work on the job.",
               "For a job search, also check unit training and assessment, position operating authorization, safety measures, shift system, and settlement arrangements, and keep written evidence."
@@ -30551,10 +30566,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained and verified no sample of Chinese job postings matching this occupation with recent, specified employer and position conditions. This section is an editorial position verification suggestion and cannot be called employer statistics or a real hiring sample; the paper exercise cannot replace unit training, on-site assessment, and operating authorization."
+              "In 2025 the Heilongjiang Songhua River Navigation Hub Construction and Operations Center listed four positions in navigation lock and spillway gate dispatch. It required undergraduate education and a bachelor’s degree or higher. The Dadingzishan site listed a rotating schedule covering 24 hours and a five-year minimum service period including probation. The plan gave no pay amount. Nantong’s 2026 public institution posting lists electrical and computing assistant engineer roles at Nantong Lock. These are engineering entry examples, not routine watchkeeping openings. The table gives no pay amount for those roles."
             ]
           },
           "id": "bridge-and-lock-tenders.path.recruitment-sample.1",
+          "source_refs": [
+            "l1-hlj",
+            "l1-nt"
+          ],
           "title": "How to use the hiring samples",
           "type": "notice"
         }
@@ -30737,7 +30756,7 @@
                 "url": "/en/career/jobs/locksmiths-and-safe-repairers"
               },
               {
-                "entity": "Sailors and marine pilots",
+                "entity": "Captains, Mates, and Pilots of Water Vessels",
                 "id": "link-12",
                 "relation": "career.adjacent",
                 "url": "/en/career/jobs/captains-mates-and-pilots-of-water-vessels"
@@ -30764,10 +30783,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. BLS shows about 3,100 employment for this occupation in the 2025 base period, growth of -2.3% over 2025—2035, and about 300 annual openings; the headcount and the net change are each rounded. The National Bureau of Statistics 2025 urban unit wage release for China does not list this occupation separately and publishes only the industry proxy and the precise gap, without claiming that such data does not exist anywhere in the country."
+              "For U.S. SOC 53-6011, May 2025 median pay was $57,700 a year or $27.74 an hour. The 2025 and 2035 endpoints both round to about 3,100 jobs; BLS reports about 100 fewer jobs, a 2.3% decline, and roughly 300 annual openings including replacements."
             ]
           },
           "id": "bridge-and-lock-tenders.market-signals.market-signal-card.8",
+          "source_refs": [
+            "bls-pay",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -30874,7 +30897,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS2025—2035 lists this occupation's employment 3.1→3.1 thousand, a net change of -0.1 thousand, growth of -2.3%, and 0.3 thousand annual openings; each column is rounded independently. The O*NET summary has been updated to 2025 employment 3100 and the current projections, and localtrends shows integer growth of -2%; it can no longer be said to still be the old period, nor can zero growth be inferred by subtracting the displayed headcounts."
+              "BLS reports about 3,100 jobs in both 2025 and 2035 after rounding, a net decline of about 100 (−2.3%), and about 300 annual openings. The published headcounts, net change, and percentage are rounded separately."
             ]
           },
           "id": "bridge-and-lock-tenders.market-signals.market-signal-card.18",
@@ -31026,7 +31049,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The actual link to the O*NET occupational summary: it has been updated to 2025 employment 3100 and the 2025—2035 projections, and is not still the old period."
+              "The O*NET summary gives 2025 U.S. employment and the 2025–2035 projection."
             ]
           },
           "id": "bridge-and-lock-tenders.market-signals.market-signal-card.31",
@@ -31389,10 +31412,13 @@
                 "question_key": "career.faq.bridge-and-lock-tenders.3"
               },
               {
-                "answer": "Traffic records and statistics, water level and weather data organization, equipment ledgers and maintenance work order flow, and shift and handover records can be assisted; lookout judgment, equipment operation, signal issuance, vessel guidance, and abnormality handling still rest with people.",
+                "answer": "Software can flag missing fields and timing or signal discrepancies. Passage decisions, on-site actions and equipment operations follow facility procedures and role authority. No verified displacement rate is available.",
                 "id": "bridge-and-lock-tenders.faq.4",
                 "question": "Which links will AI and automation change?",
-                "question_key": "career.faq.bridge-and-lock-tenders.4"
+                "question_key": "career.faq.bridge-and-lock-tenders.4",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
                 "answer": "Judging visibility and current conditions, whether the bridge deck and lock chamber are obstructed, whether people have evacuated, and whether the equipment shows unusual noises or leakage, as well as the release order and temporary arrangements, must all be confirmed by trained and authorized people.",
@@ -31401,10 +31427,13 @@
                 "question_key": "career.faq.bridge-and-lock-tenders.5"
               },
               {
-                "answer": "Unit training and assessment records, the scope of operating authorization, personal protection provision, and the shift system and settlement method must be checked separately; in mainland China the operating plan for navigation structures must be agreed with and published by the department responsible for waterway management, and the managing unit should maintain them as required.",
+                "answer": "Unit training and assessment records, the scope of operating authorization, personal protection provision, and the shift system and settlement method must be checked separately; in mainland China the plan requires approval by the waterway authority and must be made public, and the managing unit should maintain them as required. For locks and ship lifts covered by the measures, Article 13 requires the waterway authority to post the plan’s main points on its website within five working days of approval. The operator must publish them through a channel readily accessible to vessel operators within five working days of notice.",
                 "id": "bridge-and-lock-tenders.faq.6",
                 "question": "What qualifications must be checked to enter this occupation?",
-                "question_key": "career.faq.bridge-and-lock-tenders.6"
+                "question_key": "career.faq.bridge-and-lock-tenders.6",
+                "source_refs": [
+                  "cn-operation-current"
+                ]
               },
               {
                 "answer": "The O*NET work context shows 79% work indoors in a controlled environment every day, 58% are exposed outdoors to all kinds of weather every day, 58% wear personal protective equipment every day, 45% work at elevated positions every day, and 35% sit more than half the time.",
@@ -31419,10 +31448,14 @@
                 "question_key": "career.faq.bridge-and-lock-tenders.8"
               },
               {
-                "answer": "The current BLS table lists about 3,100 employment for this occupation in both 2025 and 2035, with an independently rounded net change of about -100, growth of -2.3%, and about 300 annual openings. The two headcount columns cannot be subtracted directly to give a precise net change, and the openings cannot be treated as net additions; a transfer requires checking the target position's training and authority separately.",
+                "answer": "For U.S. SOC 53-6011, May 2025 median pay was $57,700 a year or $27.74 an hour. The 2025 and 2035 endpoints both round to about 3,100 jobs; BLS reports about 100 fewer jobs, a 2.3% decline, and roughly 300 annual openings including replacements.",
                 "id": "bridge-and-lock-tenders.faq.9",
                 "question": "How do you judge career prospects and transfers?",
-                "question_key": "career.faq.bridge-and-lock-tenders.9"
+                "question_key": "career.faq.bridge-and-lock-tenders.9",
+                "source_refs": [
+                  "bls-pay",
+                  "bls-outlook"
+                ]
               },
               {
                 "answer": "U.S. 2025 OEWS gives wage percentiles for this occupation; the Chinese 2025 urban unit release consulted this time has only industry average references and does not list this occupation separately. The statistical objects, coverage, and statistics differ, so personal salaries cannot be compared directly or converted by exchange rate.",
@@ -31437,16 +31470,28 @@
                 "question_key": "career.faq.bridge-and-lock-tenders.11"
               },
               {
-                "answer": "The work involves height, proximity to water, mechanical opening and closing, and land traffic: work according to unit safety education and operating procedures, and correctly use a hard hat, protective footwear, a reflective vest, and where necessary a life jacket and fall protection; in mainland China, the operating plan for navigation structures should be agreed with and published by the department responsible for waterway management, and the managing unit should maintain navigation structures as required.",
+                "answer": "The work involves height, proximity to water, mechanical opening and closing, and land traffic: work according to unit safety education and operating procedures, and correctly use a hard hat, protective footwear, a reflective vest, and where necessary a life jacket and fall protection; in mainland China, the plan requires approval by the waterway authority and must be made public, and the managing unit should maintain navigation structures as required. For locks and ship lifts covered by the measures, Article 13 requires the waterway authority to post the plan’s main points on its website within five working days of approval. The operator must publish them through a channel readily accessible to vessel operators within five working days of notice.",
                 "id": "bridge-and-lock-tenders.faq.12",
                 "question": "What should you watch for in watch duty safety and training?",
-                "question_key": "career.faq.bridge-and-lock-tenders.12"
+                "question_key": "career.faq.bridge-and-lock-tenders.12",
+                "source_refs": [
+                  "cn-operation-current"
+                ]
               },
               {
                 "answer": "Mainly a mix of indoor watch duty and outdoor patrols: 79% work indoors in a controlled environment every day, 58% are exposed outdoors to all kinds of weather every day, 58% wear personal protective equipment every day, and 45% work at elevated positions every day; 65% work 40 hours per week but are mostly arranged on duty and shift systems, 60% use email every day, and 55% say they are in continual contact with others.",
                 "id": "bridge-and-lock-tenders.faq.13",
                 "question": "What are the work environment and collaboration style like for bridge and lock tenders?",
                 "question_key": "career.faq.bridge-and-lock-tenders.13"
+              },
+              {
+                "answer": "08:00 A complete; 08:10 B over width, pause and report; 08:20 C equipment unknown, verify; 08:30 C area unknown, verify; 08:40 C complete; 08:50 A communication failed, pause and report. Totals: six events, three distinct vessels, two complete events and two vessels ever complete (A and C). Only C is complete at the latest event for each vessel; A and B are paused. D1 is the prompt version and D2 is unconfirmed. Keep the original rows and reasons.",
+                "id": "bridge-and-lock-tenders.faq.14",
+                "question": "L1 reference (open after submitting)",
+                "question_key": "career.faq.bridge-and-lock-tenders.q14",
+                "source_refs": [
+                  "editorial"
+                ]
               }
             ]
           },
@@ -31534,7 +31579,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Read in this round on 2026-10-09: ONet2026 occupational characteristics, 2025 wages, industry, and hiring, and the 2025—2035 projections; BLS precise -2.3% and 2023 historical industry means; the 2026 lock operation measures. The evidence already read for the same release of NBS2025 wages and for ILO140/NIST AI100-1 was rechecked against the current claims and does not inherit conclusions that passed for other occupations. The training search finding no national program refers only to this catalog."
+              "Before pursuing a role, ask about the facility, schedule, training and assessment, and what you can do during an abnormal handoff. Heilongjiang dispatch and Nantong engineering are different roles. For U.S. pay, distinguish national percentiles from historical industry means."
             ]
           },
           "id": "bridge-and-lock-tenders.sources.source-card.3",
@@ -31585,19 +31630,19 @@
                 "entity": "MBTI personality test",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the bridge and lock tender career page",
@@ -31642,7 +31687,7 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "Supports occupational identity, the original official duties, Job Zone 1-2 (SVP below 6.0), the interest code RC, and the respondents' education composition (high school 65%, postsecondary certificate 20%, below high school 15%), and shows that Bright Outlook is not marked.",
+                  "Supports occupational identity, the original official duties, Job Zone 1-2 (SVP below 6.0), the interest code RC, and responses about education for new hires (high school 65%, postsecondary certificate 20%, below high school 15%), and shows that Bright Outlook is not marked.",
                   "Page updated 2026; accessed 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
@@ -31658,8 +31703,8 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Supports the 2024 industry distribution: government 88%, transportation and warehousing 11%, other industries 1%.",
-                  "2024 distribution; accessed 2026-09-16"
+                  "Government 82%, transportation and warehousing 16%.",
+                  "2025 U.S. industry distribution for this occupation."
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-industry",
@@ -31706,7 +31751,7 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "The transportation and material moving occupational group has a 2025 median annual wage of 44,350 and about 160 ten-thousand annual openings over 2025—2035; this is a group reference.",
+                  "The transportation and material moving occupational group has a 2025 median annual wage of 44,350 and about 1.6 million annual openings over 2025—2035; this is a group reference.",
                   "It is not this occupation's data and does not prove the degree of AI substitution."
                 ],
                 "evidence_type": "primary_document",
@@ -31736,20 +31781,20 @@
                 "url": "https://www.onetonline.org/link/localwages/53-6011.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "The 2024 employment of 2,900 and the old projections are historical material only; the current values for this round are taken from the newly added BLS occupational table.",
-                  "They cannot be mixed with the 2025 base period and the 2025—2035 model as the same data period."
+                  "For U.S. SOC 53-6011, May 2025 median pay was $57,700 a year or $27.74 an hour. The 2025 and 2035 endpoints both round to about 3,100 jobs; BLS reports about 100 fewer jobs, a 2.3% decline, and roughly 300 annual openings including replacements.",
+                  "U.S. statistics."
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-outlook",
-                "limitation": "This occupation is very small (about 3,100 people in 2025), and annual values are sensitive to the statistical basis, so a single year should not be used to infer a long-term trend.",
+                "limitation": "U.S. statistics.",
                 "market": "United States",
-                "name": "O*NET-SOC 53-6011.00 occupational summary (employment and projection fields)",
-                "period": "O*NET still shows the 2024 base period and the old 2024—2034 projections, which are not the current values for this round",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Table 1.2: 53-6011",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -31786,7 +31831,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Article twenty-five provides that the navigation structure operating plan is agreed with and published by the department responsible for waterway management, and that the construction or management unit maintains the structure.",
+                  "Article twenty-five provides that the plan requires approval by the waterway authority and must be made public, and that the construction or management unit maintains the structure.",
                   "The regulations do not set the L1 exercise on this page, personality tests, or a fixed training period as an individual operating qualification."
                 ],
                 "evidence_type": "primary_document",
@@ -31873,7 +31918,7 @@
                 "id": "onet-17-3021",
                 "limitation": "Adjacent occupations must be checked separately against their own tasks, competency qualifications, and safety requirements, and cannot be interchanged by name.",
                 "market": "United States",
-                "name": "O*NET-SOC 53-5021.00 Sailors and Marine Pilots (adjacent occupation)",
+                "name": "O*NET-SOC 53-5021.00 Captains, Mates, and Pilots of Water Vessels (adjacent occupation)",
                 "period": "Page updated 2026; accessed 2026-09-16",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -31962,14 +32007,14 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "O*NET53-6011 industry distribution 82%/16%/2%",
+                  "O*NET 53-6011 leading industries",
                   "2025"
                 ],
                 "evidence_type": "primary_document",
                 "id": "industry-current",
-                "limitation": "Government 82%, transportation and warehousing 16%, other 2%; a U.S. classification, not Chinese staffing shares or wages.",
+                "limitation": "Government 82%, transportation and warehousing 16%; a U.S. classification, not Chinese staffing shares or wages.",
                 "market": "United States",
-                "name": "O*NET53-6011 industry distribution 82%/16%/2%",
+                "name": "O*NET 53-6011 leading industries",
                 "period": "2025",
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "exact",
@@ -32040,20 +32085,20 @@
                 "url": "https://www.onetonline.org/link/localwages/53-6011.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Measures for the Administration of Navigation Structure Operation, 2026 amendment: Articles 2, 13, 15, 17—24, and 27—34",
-                  "Amended 2026-01-14, effective from the date of publication; the official page was made public on 2026-01-20"
+                  "China’s navigation structure operation rules apply to facilities used for vessel passage, including navigation locks and ship lifts. Use the approved operating plan for scheduling and records. Article 29 requires the operator to assign responsibilities and ensure personnel pass its training before taking up work. Check movable bridges and maintenance separately.",
+                  "Check facility and role scope."
                 ],
-                "evidence_type": "regulation",
+                "evidence_type": "primary_document",
                 "id": "cn-operation-current",
-                "limitation": "Applies to navigation structures such as locks and ship lifts and cannot be generalized to bascule bridges and lighthouses; on-the-job training, the main safety responsibility, and responsibility for suspending and resuming navigation cannot be replaced by a contract or a personal checklist.",
+                "limitation": "Check facility and role scope.",
                 "market": "Mainland China",
-                "name": "Measures for the Administration of Navigation Structure Operation, 2026 amendment: Articles 2, 13, 15, 17—24, and 27—34",
-                "period": "Amended 2026-01-14, effective from the date of publication; the official page was made public on 2026-01-20",
-                "publisher": "Ministry of Transport",
+                "name": "Ministry of Transport: navigation structure operation rules",
+                "period": "2026 No. 1",
+                "publisher": "MOT",
                 "scope": "contextual",
-                "url": "https://xxgk.mot.gov.cn/jigou/fgs/202601/t20260120_4198163.html"
+                "url": "https://xxgk.mot.gov.cn/2020/gz/202601/t20260120_4198173.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32296,21 +32341,53 @@
                 "url": "https://www.onetonline.org/link/summary/53-7051.00"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Lookout and identification | Continuously observe the waterway, the bridge area, and approaching vessel movements, and identify vessel types and passage needs | A reviewable lookout and identification record. — 25/100; weight=1/3; bridge-and-lock-tenders.profile.responsibilities-block.1[1]",
-                  "Opening, closing, and release | Operate control levers or valves to open and close bridge spans or gates or adjust the water level, and guide vessels in and out | Passages completed safely with a record kept. — 25/100; weight=1/3; bridge-and-lock-tenders.profile.responsibilities-block.1[3]",
-                  "Recording and maintenance | Register vessel and traffic data, water level, and weather, file and follow maintenance requests, and complete daily maintenance | Complete passage and maintenance records. — 75/100; weight=1/3; bridge-and-lock-tenders.profile.responsibilities-block.1[4]"
+                  "Software can flag missing fields and timing or signal discrepancies. Passage decisions, on-site actions and equipment operations follow facility procedures and role authority. No verified displacement rate is available.",
+                  "Does not estimate displacement.",
+                  "Does not estimate displacement.",
+                  "Does not estimate displacement.",
+                  "Does not estimate displacement."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "primary_document",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "Does not estimate displacement.",
+                "market": "United States",
+                "name": "O*NET: passage and watchkeeping records",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-6011.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "In 2025 the Heilongjiang Songhua River Navigation Hub Construction and Operations Center listed four positions in navigation lock and spillway gate dispatch. It required undergraduate education and a bachelor’s degree or higher. The Dadingzishan site listed a rotating schedule covering 24 hours and a five-year minimum service period including probation. The plan gave no pay amount."
+                ],
+                "evidence_type": "primary_document",
+                "id": "l1-hlj",
+                "limitation": "Page 5, historical role 060201.",
+                "market": "Mainland China",
+                "name": "Heilongjiang transport department: navigation lock and spillway gate dispatch posting",
+                "period": "2025",
+                "publisher": "Heilongjiang Department of Transport",
+                "scope": "recruitment_proxy",
+                "url": "https://jt.hlj.gov.cn/jt/c105088/202502/31810113/files/%E9%99%84%E4%BB%B61.2025%E5%B9%B4%E6%8B%9B%E8%81%98%E8%AE%A1%E5%88%92%E8%A1%A8.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Nantong’s 2026 public institution posting lists electrical and computing assistant engineer roles at Nantong Lock. These are engineering entry examples, not routine watchkeeping openings. The table gives no pay amount for those roles."
+                ],
+                "evidence_type": "primary_document",
+                "id": "l1-nt",
+                "limitation": "Engineering role examples.",
+                "market": "Mainland China",
+                "name": "Nantong: historical assistant engineer postings at locks",
+                "period": "2026",
+                "publisher": "Nantong municipal government",
+                "scope": "recruitment_proxy",
+                "url": "https://dj.nantong.gov.cn/ntdjw/upload/e088790e-8858-4aed-8b15-d09c52463501.pdf"
               }
             ]
           },
@@ -35695,7 +35772,7 @@
       },
       "hero": {
         "h1": "Bridge and Lock Tenders",
-        "quick_answer": "Bridge and lock tenders operate and tend bridges, canal locks, and lighthouses, control the opening and closing sequence according to operating procedures and navigation instructions, confirm clearance and width, issue signals, and guide vessels through safely while recording vessel and water level data; the work routinely involves shift watch duty and outdoor work at elevated positions, and their duties are not the same as navigation rules or structural safety conclusions.",
+        "quick_answer": "Bridge and lock tenders operate or monitor facilities, check passage conditions, communicate signals and record events. Movable bridges, locks, ship lifts, vessel navigation and equipment maintenance have different duties and authorities.",
         "title": "Bridge and Lock Tenders"
       },
       "market_signal_card": {
@@ -36139,7 +36216,7 @@
               "field": "url"
             },
             "target_slug": "captains-mates-and-pilots-of-water-vessels",
-            "target_title": "Sailors and marine pilots",
+            "target_title": "Captains, Mates, and Pilots of Water Vessels",
             "transition_distance": {
               "$item": "bridge-and-lock-tenders.market-signals.market-signal-card.51",
               "block": "market-signals",
@@ -37047,7 +37124,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests suit bridge and lock tender work",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37261,7 +37338,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and passage records",
       "china-salary": "Chinese wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37279,7 +37356,7 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "O*NET-SOC 53-6011.00",
         "fact_id": "occupation-identity",
         "market": "United States",
@@ -37291,7 +37368,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "57,700 USD per year (median)",
         "fact_id": "us-wage-2025",
         "market": "United States",
@@ -37303,7 +37380,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "27.74 USD per hour (median)",
         "fact_id": "us-wage-hourly-2025",
         "market": "United States",
@@ -37315,7 +37392,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "About 3,100 people (2025; the table lists 3.1 thousand)",
         "fact_id": "us-employment-2025",
         "market": "United States",
@@ -37327,7 +37404,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "About 3,100 people (2035; the table lists 3.1 thousand)",
         "fact_id": "us-employment-2035",
         "market": "United States",
@@ -37339,7 +37416,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "A decline of 2.3% (2025—2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
@@ -37351,7 +37428,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "A decrease of about 100 people (the table lists -0.1 thousand)",
         "fact_id": "us-change-2025-2035",
         "market": "United States",
@@ -37363,7 +37440,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "About 300 per year (the table lists 0.3 thousand)",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
@@ -37375,7 +37452,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "Insufficient evidence: no national Chinese occupational wage precisely matching bridge and lock tenders was obtained",
         "fact_id": "cn-industry-science-tech-2024",
         "market": "Mainland China",
@@ -37387,7 +37464,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "Insufficient evidence: industry sector averages such as transportation, storage, and postal services do not list this occupation separately and cannot replace the occupational wage",
         "fact_id": "cn-industry-manufacturing-2024",
         "market": "Mainland China",
@@ -37399,7 +37476,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "133,981 yuan per year (transportation, storage, and postal services, urban non-private units, explicit proxy)",
         "fact_id": "cn-professional-technical-2024",
         "market": "Mainland China",
@@ -37411,7 +37488,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "Insufficient evidence: the urban unit basis does not list this occupation separately, and this page does not publish occupational-level values",
         "fact_id": "cn-urban-nonprivate-2024",
         "market": "Mainland China",
@@ -37423,7 +37500,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "28,090 USD per year (10th percentile)",
         "fact_id": "us-wage-low10-2025",
         "market": "United States",
@@ -37435,7 +37512,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "75,360 USD per year (90th percentile)",
         "fact_id": "us-wage-high10-2025",
         "market": "United States",
@@ -37447,7 +37524,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "64,220 USD per year (2023 within-industry average wage for this occupation)",
         "fact_id": "us-industry-wage-aerospace-mfg-2025",
         "market": "United States",
@@ -37459,7 +37536,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "48,120 USD per year (2023 within-industry average wage for this occupation)",
         "fact_id": "us-industry-wage-engineering-services-2025",
         "market": "United States",
@@ -37471,7 +37548,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "46,090 USD per year (2023 within-industry average wage for this occupation)",
         "fact_id": "us-industry-wage-federal-2025",
         "market": "United States",
@@ -37483,7 +37560,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "33,280 USD per year (2023 within-industry average wage for this occupation)",
         "fact_id": "us-industry-wage-rd-2025",
         "market": "United States",
@@ -37495,7 +37572,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "53,710 USD per year (2023 within-industry average wage for this occupation)",
         "fact_id": "us-industry-wage-instruments-2025",
         "market": "United States",
@@ -37507,7 +37584,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "38,640 USD per year (25th percentile)",
         "fact_id": "us-wage-p25-2025",
         "market": "United States",
@@ -37519,7 +37596,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated scope and period.",
         "display_value": "69,620 USD per year (75th percentile)",
         "fact_id": "us-wage-p75-2025",
         "market": "United States",
@@ -37529,32 +37606,20 @@
         "source_refs": [
           "bls-pay"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Bridge and Lock Tenders",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and passage records"
     },
     "badges": [
       "O*NET 53-6011.00 · navigation watch duty and equipment operation · shift work and outdoor environment",
       "Lookout judgment / bridge span and gate opening and closing / signal issuance and vessel guidance",
-      "The industry is mainly government (88%) · mainland China shows only the explicit industry proxy and the gap"
+      "U.S. employment, 2025: 82% in government"
     ],
     "metrics": [
       {
@@ -37593,17 +37658,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What bridge and lock tenders do, what education and training they need, what wages and prospects are like in the United States and China, and which links AI and automation will change; the Chinese explicit industry proxy and the precise occupational gap are retained."
+      "text": "Learn about movable bridge and lock duties, training and pay. Read historical mainland examples and try a six-event paper exercise."
     },
     "title": {
       "availability": "available",
-      "text": "Bridge and Lock Tenders"
+      "text": "Bridge and Lock Tenders: Duties, Pay and Entry"
     }
   },
-  "source_content_sha256": "8bf1b3c2492606500b41c2025b5c7b878c30bcfa17e175ff39a565e6297ba0ba",
+  "source_content_sha256": "97a6ea8025915abf5f70df45e73f71e48d37b18769e3b6998bba4f355cff2caf",
   "subject": {
     "canonical_slug": "bridge-and-lock-tenders",
     "name": "Bridge and Lock Tenders",
-    "summary": "Bridge and lock tenders operate and tend bridges, canal locks, and lighthouses, control the opening and closing sequence according to operating procedures and navigation instructions, confirm clearance and width, issue signals, and guide vessels through safely while recording vessel and water level data; the work routinely involves shift watch duty and outdoor work at elevated positions, and their duties are not the same as navigation rules or structural safety conclusions."
+    "summary": "Bridge and lock tenders operate or monitor facilities, check passage conditions, communicate signals and record events. Movable bridges, locks, ship lifts, vessel navigation and equipment maintenance have different duties and authorities."
   }
 }

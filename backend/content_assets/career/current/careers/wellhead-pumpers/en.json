@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "From the production records, see whether you are willing to check the well number, time, and counts repeatedly and to return to the original table and hand over after a mismatch. Then learn about real equipment training and field shifts; mechanical interest alone is not enough."
+              "Paper check | If pressure differs between logs for the same time, preserve the time, instrument ID and readings for the shift lead. "
             ]
           },
           "id": "wellhead-pumpers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,13 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Wellhead pumpers operate power pumps and auxiliary equipment within U.S. 53-7073.00 to make oil or natural gas flow from oilfield wells. The work includes observing pump and pipeline status, measuring production, monitoring gauges, operating per specified tasks, performing upkeep, and keeping records. It is not a general term for all pump stations, drilling, or reservoir research jobs; Chinese oil production and wellhead jobs must be compared by equipment and actual task, and operation, repair, engineering design, and emergency authority are checked separately."
+              "Wellhead pumpers monitor pumps, flow, pressure and line conditions, record production and exceptions, and hand off servicing, isolation and restart to authorized staff. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "wellhead-pumpers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-53-7073.00"
           ],
           "type": "prose"
         }
@@ -25455,13 +25453,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This occupation already involves monitoring and gauges, but the existence of technology is not generative AI adoption. Text can help organize handover material, and well numbers and measurements must be checked back manually; unverified scores, time savings, and independent replacement are not filled in. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: If pressure differs between logs for the same time, preserve the time, instrument ID and readings for the shift lead."
             ]
           },
           "id": "wellhead-pumpers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-53-7073.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33027,6 +33025,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-53-7073.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 53-7073.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/53-7073.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38504,10 +38529,10 @@
       "text": "Wellhead Pumpers"
     }
   },
-  "source_content_sha256": "1935f953a1867c2c6313077fe88a2e3461678b8fa0dbc70108011282301dbce4",
+  "source_content_sha256": "bd3b135346c123e4bafee5da3f911efde32fbabcb823777aa0e97265ae29c298",
   "subject": {
     "canonical_slug": "wellhead-pumpers",
     "name": "Wellhead Pumpers",
-    "summary": "Wellhead pumpers operate power pumps and auxiliary equipment within U.S. 53-7073.00 to make oil or natural gas flow from oilfield wells. The work includes observing pump and pipeline status, measuring production, monitoring gauges, operating per specified tasks, performing upkeep, and keeping records. It is not a general term for all pump stations, drilling, or reservoir research jobs; Chinese oil production and wellhead jobs must be compared by equipment and actual task, and operation, repair, engineering design, and emergency authority are checked separately."
+    "summary": "Wellhead pumpers monitor pumps, flow, pressure and line conditions, record production and exceptions, and hand off servicing, isolation and restart to authorized staff."
   }
 }

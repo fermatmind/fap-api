@@ -23020,16 +23020,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Direct judgment: first compare whether you are willing to practice substrate, materials, application, and finish inspection over the long term; the United States 47-2161 typical requirement is no formal educational credential and long-term on-the-job training, and the specific project duties and local requirements require separate verification."
+              "Paper check | Find two finish versions for the same wall on a fictional work order and sample card. Mark the area for the site lead to verify. "
             ]
           },
           "id": "plasterers-and-stucco-masons.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "ep",
-            "facilities",
-            "privacy",
-            "editor-note"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23316,13 +23312,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Definition: 47-2161 is the standalone United States plasterers and stucco masons occupation, focusing on surface coatings, decorative textures, and related components."
+              "Plasterers and stucco masons check substrates, protect adjacent surfaces and apply and finish coats to the job specification. Review includes comparing the finished appearance with the specified sample. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "plasterers-and-stucco-masons.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls"
+            "transfer-onet-47-2161.00"
           ],
           "type": "prose"
         },
@@ -24395,18 +24390,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Generative AI may assist in organizing existing material lists, mock-up records, and shift drafts, with the effect requiring actual testing; digital measurement and image prompts must be validated separately and are not generative text automation. Tools cannot approve platform access, replace on-site substrate inspection, or accept finishes. ILO task exposure is not an actual 47-2161 replacement rate; the BLS overall employment projection does not separate out the AI contribution. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Find two finish versions for the same wall on a fictional work order and sample card. Mark the area for the site lead to verify."
             ]
           },
           "id": "plasterers-and-stucco-masons.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "nist",
-            "onet",
-            "ep",
-            "facilities",
-            "privacy",
-            "editor-note"
+            "transfer-onet-47-2161.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32380,6 +32370,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-47-2161.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 47-2161.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/47-2161.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37624,10 +37641,10 @@
       "text": "Plasterer and stucco mason career guide: substrate, finishes, wages, and entry paths"
     }
   },
-  "source_content_sha256": "00ac196a78a50e8a34acf826d5db24abfad016b626ac6511a7c67a62e0158378",
+  "source_content_sha256": "520bcc8e6dcd27998fa519188c58f29c2cb663dad76b946ca2b928f7ba81cb9f",
   "subject": {
     "canonical_slug": "plasterers-and-stucco-masons",
     "name": "Plasterers and stucco masons",
-    "summary": "Plasterers and stucco masons clean and protect construction surfaces, apply plaster or decorative stucco to walls, ceilings, and partitions with trowels, brushes, or spray equipment, and inspect the finish as the project requires. Working at height and respirable silica dust risks are controlled by on-site safety rules; paper exercises do not constitute construction qualification."
+    "summary": "Plasterers and stucco masons check substrates, protect adjacent surfaces and apply and finish coats to the job specification. Review includes comparing the finished appearance with the specified sample."
   }
 }

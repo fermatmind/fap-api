@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "观察自己能否把同名当事人、不同地块和文书日期分开，并把摘要每句话对应到原记录。喜欢法律或房产可以是起点，但反复检查细节、沟通证据范围和保留未知更贴近日常任务。"
+              "纸面体验｜用两份虚构契据摘要核对地块编号与登记日，标出一处不一致并引用原件编号。 "
             ]
           },
           "id": "title-examiners-abstractors-and-searchers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24807,12 +24806,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "产权审查、摘要与检索员检索房地产记录、核对产权文书并摘要相关法律或保险细节，形成带出处和范围限制的资料交付；实际专业复核、登记和签发权限按岗位与法域确定。"
+              "产权检索与审查人员查阅契据、抵押、限制和地块描述，整理文件链和待澄清问题，供有权限的人员审查。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "title-examiners-abstractors-and-searchers.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-23-2093.00"
           ],
           "type": "prose"
         }
@@ -25474,15 +25473,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职业通用AI采用率、任务评分和净就业因果结果。索引摘要可作辅助设想，原文对应、查询覆盖与专业权限仍须核；BLS2025—2035总体增长2.1%、十年净增约1300人与年均5300空缺含替补分指标，非AI影响。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：用两份虚构契据摘要核对地块编号与登记日，标出一处不一致并引用原件编号。"
             ]
           },
           "id": "title-examiners-abstractors-and-searchers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "editorial",
-            "bls"
+            "transfer-onet-23-2093.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33192,6 +33189,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-23-2093.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 23-2093.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/23-2093.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38672,10 +38696,10 @@
       "text": "产权审查、摘要与检索员"
     }
   },
-  "source_content_sha256": "1bad808605ca67aa31ec3c3a6b9349fe4601092c48664d956c2dc6c2f1f408a0",
+  "source_content_sha256": "777ac77fdd4420c951d7730f8684f476d704de5b28162d5f90e897dc9aa3b8e4",
   "subject": {
     "canonical_slug": "title-examiners-abstractors-and-searchers",
     "name": "产权审查、摘要与检索员",
-    "summary": "产权审查、摘要与检索员检索房地产记录，核查产权相关文书并整理法律或保险信息摘要，常与律师事务所、房地产机构和产权保险公司协作。工作要把地块描述、权利人、抵押及限制事项和来源时间逐一对应，不能把检索摘要当成对真实交易的无条件保证。先用本页虚构文书索引体验时间与对象核对，再分别了解实际岗位、当地规则和专业复核权限。"
+    "summary": "产权检索与审查人员查阅契据、抵押、限制和地块描述，整理文件链和待澄清问题，供有权限的人员审查。"
   }
 }

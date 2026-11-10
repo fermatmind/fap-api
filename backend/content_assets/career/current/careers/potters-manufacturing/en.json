@@ -1283,6 +1283,9 @@
       "item:potters-manufacturing.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:potters-manufacturing.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:potters-manufacturing.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31234,6 +31237,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Review sheet K5 needs a clay-body lot and a firing record ID. A has the correct lot but no firing entry. B has a firing entry for a different lot. Note the gaps. Authorized staff handle actual kilns."
+            ]
+          },
+          "id": "potters-manufacturing.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Check a finished pottery lot",
+          "type": "notice"
         }
       ]
     },
@@ -37742,6 +37760,13 @@
         "id": "potters-manufacturing.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "potters-manufacturing.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38092,7 +38117,7 @@
       "text": "Potters, Manufacturing"
     }
   },
-  "source_content_sha256": "ba998a62248476b1049e7a58a48d13477945d19d8c4db5e15b362b51b424608c",
+  "source_content_sha256": "066e1a52db472e8fe4f37240c9d5bcd018af61406e55ff9d2fffbb03a08478cd",
   "subject": {
     "canonical_slug": "potters-manufacturing",
     "name": "Potters, Manufacturing",

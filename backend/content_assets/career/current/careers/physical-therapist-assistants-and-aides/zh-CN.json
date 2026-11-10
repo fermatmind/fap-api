@@ -1283,6 +1283,9 @@
       "item:physical-therapist-assistants-and-aides.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:physical-therapist-assistants-and-aides.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:physical-therapist-assistants-and-aides.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31071,6 +31074,18 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。甲岗位要求按治疗计划记录活动反应，乙岗位准备治疗区并协助往返。分别标出监督角色和需要向雇主确认的职责边界。"
+            ]
+          },
+          "id": "physical-therapist-assistants-and-aides.path.work-sample-draft-20261110.1",
+          "title": "区分治疗记录与场地支持",
+          "type": "notice"
         }
       ]
     },
@@ -37445,6 +37460,13 @@
         "id": "physical-therapist-assistants-and-aides.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "physical-therapist-assistants-and-aides.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37794,7 +37816,7 @@
       "text": "物理治疗助理与助手"
     }
   },
-  "source_content_sha256": "9614b03d5a347e069b0e5afa4cb5a416c5603e187549e1f9c3d37e1434beecdd",
+  "source_content_sha256": "af3570860e93cc4fdde9d48a7b316b085bbb9b957cac23f1f80b400d5e0daa96",
   "subject": {
     "canonical_slug": "physical-therapist-assistants-and-aides",
     "name": "物理治疗助理与助手",

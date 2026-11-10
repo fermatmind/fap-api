@@ -162,12 +162,24 @@
         "status": "pending_mapping"
       },
       "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.interview-probation.10": {
+        "status": "pending_mapping"
+      },
+      "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.recruitment-sample.1": {
+        "status": "pending_mapping"
+      },
+      "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1": {
         "status": "mapped"
       },
       "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.definition-block.1": {
@@ -228,7 +240,7 @@
         "status": "pending_mapping"
       },
       "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.sources.faq-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -5689,52 +5701,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5965,96 +6115,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -11939,7 +12325,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Multiple machine tool setters, operators, and tenders (O*NET-SOC 51-4081.00) set up, operate, or tend more than one cutting or forming machine tool or robot according to process documents and drawings, delivering metal or plastic parts that meet dimensional and appearance requirements. Their work involves compliant workholding, parameter setup, dimensional inspection, and traceable records of each batch's machining status."
+              "If you prefer uninterrupted work on one station, ask how often jobs change and what you must recheck before handing a piece to the next station."
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.1",
@@ -11953,7 +12339,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "If you willingly check drawings and process sheets item by item, understand dimensional tolerances and surface requirements, and remain alert to abnormal sounds, vibration, temperatures, and alarms while multiple machines run, these are more useful positive signals than simply liking machines."
+              "In 09 Entry, qualifications, and career development, find “MT-27: Review a First-Piece Handover.” Allow about 10 minutes before reading the answer."
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.2",
@@ -11967,7 +12353,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Caution signals include skipping first-piece inspection or measuring instrument calibration to meet production targets, changing parameters from experience without checking process documents, or bypassing safety interlocks to continue operating after alarms. These issues directly create batch scrap, equipment damage, or personal injury."
+              "Consider this work if you like checking that a piece, a drawing revision and an inspection result stay together as the job moves between machines."
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.3",
@@ -11981,7 +12367,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Start with a paper process walkthrough: Using an entirely fictional drawing and process sheet, describe workholding, tool or die selection, critical dimensions and measuring instruments, first-piece inspection items, batch sampling frequency, and three safety confirmation points. Explain the response sequence when dimensions are out of tolerance. Use only fictional or public sample drawings and do not operate real equipment."
+              "Try MT-27 in section 09. Compare the recorded diameter and drawing revision for F2 and F6. Write what the record owner should verify."
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.4",
@@ -12064,12 +12450,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Preparation and training: O*NET places this occupation in Job Zones 1—2 (SVP below 6.0), typically requiring a high school diploma or GED. Related experience ranges from little to several months, with on-the-job training from a few days to one year. The O*NET national training directory lists 315 related programs in machine tool and machining technology."
+              "BLS lists high school or equivalent and moderate-term on-the-job training as typical for this U.S. occupation. In the O*NET survey on new hires, 82% selected high school or equivalent, 8% a postsecondary certificate and 6% some college without a degree. These answers do not describe current workers or set an employer’s rules."
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.definition-block.5",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "onet-trends",
+            "onet-education-027"
           ],
           "type": "prose"
         },
@@ -12805,6 +13192,13 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "Role",
+              "Work",
+              "Authority",
+              "Evidence",
+              "Next step"
+            ],
             "rows": [
               [
                 "Operation assistance",
@@ -12859,30 +13253,36 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "Situation",
+              "What to explain",
+              "Reviewer",
+              "Evidence"
+            ],
             "rows": [
               [
-                "Drawing interpretation and dimensional explanation",
-                "Explain critical dimensions, tolerances, and measuring instrument selection",
-                "Can drawing requirements be translated into actionable inspection items?",
-                "Drawing annotations and inspection checklist"
+                "Drawing revision",
+                "Explain how you would tie a drawing to a first-piece record.",
+                "The record owner confirms the original revision.",
+                "A drawing ID and dated inspection note."
               ],
               [
-                "First-piece trial cutting",
-                "Set parameters and tools and trial-cut the first piece according to process sheets",
-                "Are program versions and measuring instrument calibration checked first?",
-                "First-piece and measuring instrument calibration records"
+                "First piece",
+                "Describe the checks you would make before asking for paper review.",
+                "Authorized staff decide whether real work can proceed.",
+                "Dimension, drawing revision and piece ID."
               ],
               [
-                "Abnormality response",
-                "Stop, record, and report according to symptoms",
-                "Are operations stopped under safety interlock requirements and evidence retained?",
-                "Shutdown records and abnormality explanations"
+                "Abnormal reading",
+                "Explain what you would report and who would handle it.",
+                "The site assigns safety and machine decisions.",
+                "A reading, time and affected order."
               ],
               [
-                "Handover and records",
-                "Complete shift handover and archive batch records",
-                "Are records complete and traceable?",
-                "Handover forms and batch records"
+                "Handover",
+                "Explain how the next station can find each record.",
+                "The receiver confirms which checks are complete.",
+                "A route card with station and work-order IDs."
               ]
             ]
           },
@@ -12890,6 +13290,7 @@
           "source_refs": [
             "onet-details"
           ],
+          "title": "What a reviewer may ask",
           "type": "table"
         },
         {
@@ -12904,6 +13305,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Category",
+              "Evidence",
+              "Authority",
+              "Conditions",
+              "Boundary",
+              "Owner",
+              "Next step"
             ],
             "rows": [
               [
@@ -12926,7 +13336,7 @@
               ],
               [
                 "Machine tool and machining training programs",
-                "Current O*NET434 machine tool/machining education and training programs",
+                "Current O*NET machine tool/machining education and training programs",
                 "Vocational schools and educational institutions",
                 "Verify by program and course",
                 "Program completion does not equal hiring",
@@ -12968,6 +13378,142 @@
             "onet-details"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials (about 10 minutes)",
+                  "A fictional order calls for a measured diameter from 28.00 to 28.10 mm and drawing revision D3 on the record before the first piece can go to paperwork review.",
+                  "Piece F2 measures 28.08 mm and has no drawing revision on the record. Piece F6 measures 28.14 mm and has the required revision D3.",
+                  "Use paper only. Do not measure a real piece, change a machine or approve production."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Decide whether either record can go to paperwork review. Cite the dimension and revision on both.",
+                  "Write one question for the person who owns the first-piece record."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Where to find the reference",
+                  "After your own attempt, open “MT-27 answer key” in the FAQ.",
+                  "Compare it with your notes."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Did I cite both records, explain my decision, and name the person who could verify it?"
+                ]
+              }
+            ]
+          },
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "title": "MT-27: Review a First-Piece Handover",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "Day 1",
+                  "Start W-MT. A separate fictional work order can be handed on only if the route card identifies both completed stations."
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "Day 2",
+                  "Card R4 marks station A2 complete. The second station field is blank. Copy the station and its recorded status."
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "Day 3",
+                  "Card R9 marks stations A2 and B5 complete. Copy both stations and their recorded status."
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "Day 4",
+                  "Work out what is missing and who can verify the original."
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "Day 5",
+                  "Write a handoff decision for both route cards."
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "Day 6",
+                  "Work alone first. Recheck both station fields and the completion status on each card. Peer feedback is optional."
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "Day 7",
+                  "After the Day 6 independent check, open “W-MT answer key (Day 7)” in the FAQ. Compare your note, then choose one habit to practice."
+                ]
+              }
+            ]
+          },
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "title": "Seven-day paper trial: a separate case",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "I read both records.",
+              "I checked both rules.",
+              "I recorded my comparison decision.",
+              "I named the reviewer.",
+              "I used fictional records only.",
+              "I rechecked my work independently.",
+              "I chose one habit to practice."
+            ]
+          },
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "title": "Judgement questions after seven days",
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "This historical Jinan recruitment notice includes a CNC lathe listing that asks for drawing reading and first-piece checks. The employer gives preference to applicants who can cover CNC turning and milling. This is a related example, not evidence of current hiring or a nationwide requirement."
+            ]
+          },
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.recruitment-sample.1",
+          "source_refs": [
+            "cn-recruitment-027"
+          ],
+          "title": "Related recruitment example in China",
+          "type": "notice"
         }
       ]
     },
@@ -12982,7 +13528,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Current US 51-4081: Employment 127100 in 2025; growth category of 1%—2% for 2025—2035; 11600 annual openings. No exact final-year headcount from unread material is supplied."
+              "BLS projects U.S. employment in 51-4081 to rise from 127,100 jobs in 2025 to 127,900 in 2035, a gain of 800 jobs (+0.6%). It projects about 11,600 openings per year, including replacements."
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.market-signals.market-signal-card.1",
@@ -13038,7 +13584,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Projections do not guarantee individual income or hiring. This review uses actually readable current O*NET employment data and does not count the previous author's BLS403 attempt as evidence for this round."
+              "BLS Table 1.2 gives national employment projections for the U.S. 51-4081 occupation. Local hiring depends on the employer and market."
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.market-signals.market-signal-card.5",
@@ -13097,16 +13643,18 @@
                 ]
               },
               {
-                "answer": "O*NET places this occupation in Job Zones 1—2 (SVP below 6.0), typically requiring a high school diploma or GED. Related experience ranges from little to several months, with on-the-job training from a few days to one year. The national training directory lists 315 programs related to machine tool and machining technology.",
+                "answer": "BLS lists high school or equivalent and moderate-term on-the-job training as typical for this U.S. occupation. In the O*NET survey on new hires, 82% selected high school or equivalent, 8% a postsecondary certificate and 6% some college without a degree. These answers do not describe current workers or set an employer’s rules.",
                 "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.5",
                 "question": "What education and training are typically needed to enter?",
                 "question_key": "career.faq.multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.5",
                 "source_refs": [
+                  "onet-trends",
+                  "onet-education-027",
                   "source-pack-onet-localtraining"
                 ]
               },
               {
-                "answer": "No. The O*NET national certification directory lists 3 third-party professional certifications in machining, lubrication, and oil monitoring. Certification can demonstrate specific skills but does not equal a statutory license or employer appointment. Whether it is needed depends on employer requirements.",
+                "answer": "O*NET displays the CareerOneStop certification directory. Check whether a specific job requests a credential and confirm requirements with the issuer or employer. A listing does not grant a license or machine authorization.",
                 "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.6",
                 "question": "Is professional certification required?",
                 "question_key": "career.faq.multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.6",
@@ -13115,7 +13663,7 @@
                 ]
               },
               {
-                "answer": "There is currently no nationwide mainland Chinese occupational wage distribution precisely corresponding to 51-4081.00. This page uses the National Bureau of Statistics' 2025 manufacturing category (113,594 yuan/year in non-private units and 76,055 yuan/year in private units) and production, manufacturing, and related personnel in above-designated-size enterprises (79,182 yuan/year) as references with stated boundaries.",
+                "answer": "This review did not obtain a mainland China nationwide wage distribution for the exact occupation. The 2025 NBS manufacturing averages are 113,594 yuan for urban non-private units and 76,055 yuan for urban private units. In manufacturing enterprises above the designated size, the broad production and related job group averaged 79,182 yuan. These are annual averages for different populations.",
                 "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.7",
                 "question": "What wage data are available for mainland China?",
                 "question_key": "career.faq.multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.7",
@@ -13124,13 +13672,26 @@
                 ]
               },
               {
-                "answer": "2025 BLS OEWS medians are US$22.68/hour and US$47,180/year. The 10th and 90th percentiles are US$35,780 and US$74,450/year respectively. None guarantees starting pay or personal income including overtime.",
+                "answer": "2025 BLS OEWS medians are US$22.68/hour and US$47,180/year. The 10th and 90th percentiles are US$35,780 and US$74,450/year respectively. None guarantees starting pay or personal income including overtime. BLS projects U.S. employment in 51-4081 to rise from 127,100 jobs in 2025 to 127,900 in 2035, a gain of 800 jobs (+0.6%). It projects about 11,600 openings per year, including replacements.",
                 "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.8",
                 "question": "What are US wages?",
                 "question_key": "career.faq.multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.8",
                 "source_refs": [
-                  "onet-wages"
+                  "onet-wages",
+                  "onet-trends"
                 ]
+              },
+              {
+                "answer": "Neither record can go to review under the paper rule. F2 is within the range but its revision is not recorded. F6 has D3 but measures above 28.10 mm. Ask the record owner to check the revision tied to F2. Do not copy the revision from F6.",
+                "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.trial-short-reference",
+                "question": "MT-27 answer key",
+                "question_key": "career.faq.multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.trial-short-reference"
+              },
+              {
+                "answer": "R9 meets the paper rule because A2 and B5 are both marked complete. Keep R4 pending because its second station field is blank. Ask the record owner to check it. The route card does not authorize operating either machine.",
+                "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.trial-week-reference",
+                "question": "W-MT answer key (Day 7)",
+                "question_key": "career.faq.multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.trial-week-reference"
               }
             ]
           },
@@ -13168,37 +13729,37 @@
           "data": {
             "entries": [
               {
-                "entity": "Multiple Machine Tool Setters, Operators, and Tenders",
+                "entity": "Holland career interest test (English)",
                 "id": "navigation-1",
                 "relation": "career.section",
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Multiple Machine Tool Setters, Operators, and Tenders",
+                "entity": "MBTI (English)",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Multiple Machine Tool Setters, Operators, and Tenders",
+                "entity": "Big Five (English)",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Multiple Machine Tool Setters, Operators, and Tenders",
+                "entity": "MBTI (Chinese)",
                 "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Multiple Machine Tool Setters, Operators, and Tenders",
+                "entity": "Big Five (Chinese)",
                 "id": "navigation-5",
                 "relation": "career.section",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Multiple Machine Tool Setters, Operators, and Tenders",
+                "entity": "Career guide",
                 "id": "navigation-6",
                 "relation": "career.section",
                 "url": "/en/career/jobs/multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic"
@@ -13252,19 +13813,19 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Outlook interpretation and adjacent occupation transitions are editorial syntheses. Figures come from BLS 2024—2034 projections relayed by O*NET."
+                  "BLS projects U.S. employment in 51-4081 to rise from 127,100 jobs in 2025 to 127,900 in 2035, a gain of 800 jobs (+0.6%). It projects about 11,600 openings per year, including replacements."
                 ],
                 "evidence_type": "editorial synthesis",
                 "id": "editorial-market",
-                "limitation": "Outlook interpretation and adjacent occupation transitions are editorial syntheses. Figures come from BLS 2024—2034 projections relayed by O*NET.",
+                "limitation": "National occupational projections describe jobs and openings. They do not predict a particular employer’s hiring or attribute change to AI.",
                 "market": "US",
-                "name": "Editorial synthesis of outlook and transition interpretation",
-                "period": "2026-09-25",
-                "publisher": "FermatMind",
-                "scope": "editorial_synthesis",
-                "url": null
+                "name": "BLS Table 1.2: U.S. multiple machine tool operators",
+                "period": "BLS Table 1.2, 2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -13342,19 +13903,19 @@
                 "url": "https://www.onetcenter.org/taxonomy.html"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "131,000 in 2024, 130,300 in 2034, a -1% change (Little or no change), and 12,800 annual openings. National scope, not extrapolated to regions or individual factories."
+                  "BLS projects U.S. employment in 51-4081 to rise from 127,100 jobs in 2025 to 127,900 in 2035, a gain of 800 jobs (+0.6%). It projects about 11,600 openings per year, including replacements."
                 ],
                 "evidence_type": "official employment trends",
                 "id": "onet-trends",
-                "limitation": "131,000 in 2024, 130,300 in 2034, a -1% change (Little or no change), and 12,800 annual openings. National scope, not extrapolated to regions or individual factories.",
+                "limitation": "National occupational projections describe jobs and openings. They do not predict a particular employer’s hiring or attribute change to AI.",
                 "market": "US",
-                "name": "National Employment Trends: Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
-                "period": "BLS 2024—2034 projections via O*NET; accessed 2026-09-25",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS Table 1.2: U.S. multiple machine tool operators",
+                "period": "BLS Table 1.2, 2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/51-4081.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -13419,11 +13980,11 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Provides employment industry shares only (manufacturing 81%, administrative and support services 12%, other industries 7%), not demand projections or industry wages."
+                  "O*NET’s 2025 employment shares are 80% manufacturing, 11% administrative and support services and 9% other industries."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "Provides employment industry shares only (manufacturing 81%, administrative and support services 12%, other industries 7%), not demand projections or industry wages.",
+                "limitation": "These are employment shares and do not show industry wages.",
                 "market": "US",
                 "name": "Industries: Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
                 "period": "current page; accessed 2026-09-25",
@@ -13434,14 +13995,14 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Lists 3 third-party professional certifications, one each from ICML, NIMS, and STLE, which do not equal statutory licenses or employer appointments to a role."
+                  "Use the directory to find entries and check with the provider. It does not establish licensing or hiring rules."
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "source-pack-onet-localcert",
-                "limitation": "Lists 3 third-party professional certifications, one each from ICML, NIMS, and STLE, which do not equal statutory licenses or employer appointments to a role.",
+                "limitation": "Use the directory to find entries and check with the provider. It does not establish licensing or hiring rules.",
                 "market": "US",
                 "name": "National Certifications: Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
-                "period": "Lists 3 certifications; accessed 2026-09-25",
+                "period": "Current directory",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/51-4081.00"
@@ -13449,14 +14010,14 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "The training program directory indicates US education supply, not role entry requirements or Chinese market conclusions."
+                  "Use the directory to find entries and check with the provider. It does not establish licensing or hiring rules."
                 ],
                 "evidence_type": "official local training discovery",
                 "id": "source-pack-onet-localtraining",
-                "limitation": "The training program directory indicates US education supply, not role entry requirements or Chinese market conclusions.",
+                "limitation": "Use the directory to find entries and check with the provider. It does not establish licensing or hiring rules.",
                 "market": "US",
-                "name": "National Training: Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
-                "period": "315 programs; accessed 2026-09-25",
+                "name": "O*NET training directory",
+                "period": "Current directory",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/51-4081.00"
@@ -13522,6 +14083,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. respondent choices about new hires. They do not establish current worker education or a universal hiring rule."
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-education-027",
+                "limitation": "U.S. respondent choices about new hires. They do not establish current worker education or a universal hiring rule.",
+                "market": "US",
+                "name": "O*NET education for new hires",
+                "period": "Checked 2026-11-10",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-4081.00#Education"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "This historical Jinan recruitment notice includes a CNC lathe listing that asks for drawing reading and first-piece checks. The employer gives preference to applicants who can cover CNC turning and milling. This is a related example, not evidence of current hiring or a nationwide requirement."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-recruitment-027",
+                "limitation": "This historical Jinan recruitment notice includes a CNC lathe listing that asks for drawing reading and first-piece checks. The employer gives preference to applicants who can cover CNC turning and milling. This is a related example, not evidence of current hiring or a nationwide requirement.",
+                "market": "CN",
+                "name": "Jinan public recruitment notice",
+                "period": "2026 historical posting",
+                "publisher": "Jinan Starting Zone",
+                "scope": "recruitment_proxy",
+                "url": "https://jnxxq.jinan.gov.cn/col/col71555/art/2026/art_362743ff0660480badcf521e0dbc7bfc.html"
               }
             ]
           },
@@ -13579,8 +14170,8 @@
             "label": "O*NET National Wages（2025 BLS OEWS）"
           },
           {
-            "href": "https://www.onetonline.org/link/localtrends/51-4081.00",
-            "label": "O*NET employment trends (BLS 2024—2034)"
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "label": "BLS Table 1.2: U.S. employment projections"
           },
           {
             "href": "https://www.onetonline.org/link/industry/51-4081.00",
@@ -13648,7 +14239,7 @@
             "职业方向": "Grinding Machine Operators"
           }
         ],
-        "transition": "When choosing an adjacent direction, first compare the responsibilities you prefer (complete-part processes, single-machine precision, dies and tooling, sheet punching and shearing, welded joining, or finished surfaces), then build equipment and process knowledge for that direction."
+        "transition": "When choosing an adjacent direction, first compare the responsibilities you prefer (complete-part processes, single-machine precision, dies and tooling, sheet punching and shearing, welded joining, or finished surfaces), then build equipment and process knowledge for that direction. Try MT-27 in section 09 to compare the fictional first-piece records."
       },
       "ai_impact_table": {
         "action_rows": [
@@ -13776,24 +14367,24 @@
         "evidence_rows": [
           {
             "使用限制": "Describes this occupation only and does not establish adoption or automation levels",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET OnLine · Tasks and Work Context",
             "研究对象": "51-4081.00 tasks and work context",
             "结论": "Defines the occupational scope, 21 tasks, and work-context survey scope",
             "链接": "https://www.onetonline.org/link/details/51-4081.00"
           },
           {
             "使用限制": "The summary covers this US occupation and is not extrapolated to other regions",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET OnLine · Occupational Summary",
             "研究对象": "O*NET summary (including interest code RC)",
             "结论": "Records occupational identification, interest code, and Job Zones 1—2",
             "链接": "https://www.onetonline.org/link/summary/51-4081.00"
           },
           {
             "使用限制": "National projections, not individual hiring probabilities or job trends at a particular factory",
-            "来源": "O*NET / U.S. Bureau of Labor Statistics",
+            "来源": "BLS Table 1.2: employment projections",
             "研究对象": "US 51-4081 current 2025 employment and 2025—2035 projections",
-            "结论": "127100 people; Slower than average (1%—2%); 11600 annual openings",
-            "链接": "https://www.onetonline.org/link/details/51-4081.00#WagesEmployment"
+            "结论": "BLS projects U.S. employment in 51-4081 to rise from 127,100 jobs in 2025 to 127,900 in 2035, a gain of 800 jobs (+0.6%). It projects about 11,600 openings per year, including replacements.",
+            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "使用限制": "OEWS covers employees' pretax regular-hours pay, including piecework/incentive pay/production bonuses and excluding overtime premiums and shift differentials. It does not cover self-employed workers or total take-home income. | https://www.bls.gov/oes/oes_ques.htm",
@@ -13804,7 +14395,7 @@
           },
           {
             "使用限制": "Skills lists are not adoption rates, ability standards, or Chinese hiring requirements",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET OnLine · Technology Skills",
             "研究对象": "O*NET employer technology signals",
             "结论": "Lists 7 software skills, including AutoCAD, SAP, and Office applications, without mention rates",
             "链接": "https://www.onetonline.org/link/hot_tech/51-4081.00"
@@ -13827,7 +14418,7 @@
         ],
         "questions": [
           {
-            "回答": "No occupational AI adoption or causal net employment evidence was obtained. Overall projections of 1%—2% growth and 11600 annual openings cannot establish AI replacement probabilities. Workholding, inspection, abnormality handling, and safety require human verification under on-site authorization.",
+            "回答": "BLS projects total employment, without measuring AI adoption or job displacement. Workholding, inspection and safety decisions still follow site responsibilities.",
             "来源": "O*NET / U.S. Bureau of Labor Statistics",
             "链接": "https://www.onetonline.org/link/details/51-4081.00#WagesEmployment",
             "问题": "Will AI and automation replace this occupation?"
@@ -14035,7 +14626,7 @@
         "locale_requirements": {
           "credential_boundary": "Education, training program completion, third-party professional certification, process change authorization, and safe work permits are distinct statuses. Certification does not equal a statutory license or employer appointment and cannot replace equipment operating procedures, lockout/tagout requirements, or safety interlock management.",
           "jurisdiction": "This page uses US O*NET definitions and BLS data relayed through it to explain occupational facts. In mainland China, equipment operation, special operations, and production safety requirements follow competent authorities' rules and employer procedures.",
-          "summary": "JobZone1—2 describes occupational group preparation, not a uniform duration of a few days to one year for this occupation. New-hire education: 82% high school, 8% postsecondary certificate, 6% college courses without a degree. The current 434 machine tool/machining programs and 3 professional certifications are directory listings, not permits or hiring conditions. Check actual Chinese requirements by role and local rules."
+          "summary": "JobZone1—2 describes occupational group preparation, not a uniform duration of a few days to one year for this occupation. In the O*NET survey about new-hire education, 82% of respondents selected high school or equivalent, 8% selected a postsecondary certificate, and 6% selected some college without a degree. Confirm requirements with the employer. The current machine tool/machining programs and 3 professional certifications are directory listings, not permits or hiring conditions. Check actual Chinese requirements by role and local rules."
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14048,7 +14639,7 @@
           {
             "href": "https://www.onetonline.org/link/localtraining/51-4081.00",
             "id": "source-pack-onet-localtraining",
-            "label": "O*NET National Training (434 programs)",
+            "label": "O*NET National Training directory",
             "scope": "Related education and training directory, not a uniform on-the-job duration"
           },
           {
@@ -14376,7 +14967,8 @@
             },
             "evidence_refs": [
               "onet-details",
-              "onet-summary"
+              "onet-summary",
+              "osha-machine-guarding"
             ],
             "id": "cost-change",
             "mitigation": "Use guards and dedicated tools according to procedures, keeping hands away from cutting and forming areas while equipment runs",
@@ -14388,10 +14980,10 @@
             "consequence": "Editorial risk scenario: Sharp chips, hot chips, splashes, and pooled fluids may cause contact hazards. No occupational incidence rates or respiratory effects were obtained.",
             "evidence_refs": [
               "onet-details",
-              "onet-details"
+              "osha-hazardous-energy"
             ],
             "id": "record-version",
-            "mitigation": "For cleaning/maintenance, confirm shutdown, hazardous energy isolation, and safe conditions under procedures, and use dedicated cleaning tools. Select protection for the exposure, avoiding glove contact with rotating parts. | https://stacks.cdc.gov/view/cdc/216121",
+            "mitigation": "For covered servicing or maintenance at U.S. sites, authorized staff follow the employer’s hazardous-energy control procedure. For normal operation, the employer assesses chip and splash hazards and provides the applicable guards and protection.",
             "scenario": "Cleaning chips or replacing coolant without shutdown, or with guards left open",
             "title": "Chip and coolant splash risks"
           },
@@ -14403,7 +14995,7 @@
               "onet-details"
             ],
             "id": "personal-data",
-            "mitigation": "Check program versions and process documents, verify through first-piece trial cutting before batch production, and retain records",
+            "mitigation": "Authorized site staff check program and drawing revisions, then record the first-piece result before batch release. Use the MT-27 paper exercise to practice reading the record.",
             "scenario": "Selecting the wrong program version, changing parameters without checks, or omitting first-piece verification",
             "title": "Program or parameter error risks"
           },
@@ -14436,10 +15028,10 @@
             "consequence": "Personal injury and equipment damage, with missing records obscuring responsibility",
             "evidence_refs": [
               "onet-details",
-              "onet-details"
+              "osha-machine-guarding"
             ],
             "id": "delivery-acceptance",
-            "mitigation": "Do not operate with interlocks or guards bypassed. Stop for abnormalities, preserve evidence, and report through procedures",
+            "mitigation": "Keep guards and interlocks in service. Authorized operators follow the site’s abnormality procedure. Report alarms or evidence of bypass to the designated lead.",
             "scenario": "Bypassing interlocks to meet production targets, or failing to stop and report through procedures after alarms",
             "title": "Safety interlock and abnormality response risks"
           }
@@ -14475,6 +15067,18 @@
             "id": "nist-ai-rmf",
             "label": "NIST AI RMF 1.0 (voluntary AI risk management framework)",
             "scope": "Responsibility and control boundary descriptions"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.212",
+            "id": "osha-machine-guarding",
+            "label": "U.S. OSHA machine guarding standard",
+            "scope": "Machine guarding at covered U.S. workplaces"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147",
+            "id": "osha-hazardous-energy",
+            "label": "U.S. OSHA hazardous-energy control standard",
+            "scope": "Covered U.S. servicing and maintenance and the role of authorized employees"
           }
         ]
       },
@@ -14587,7 +15191,7 @@
             "scenario_role_label": "Preparation stage",
             "scenario_value_label": "Preparation direction"
           },
-          "us_growth": "Slower than average（1%—2%）（2025—2035）",
+          "us_growth": "+0.6% (2025–2035)",
           "us_median": "US$22.68/hour (US$47,180/year, 2025)"
         }
       },
@@ -14621,18 +15225,18 @@
           },
           {
             "指标": "Employment (2025)",
-            "数值": "127100 people",
-            "说明": "Current US 51-4081.00 overall employment series, not current vacancies, individual probabilities, or AI causation | https://www.onetonline.org/link/details/51-4081.00#WagesEmployment"
+            "数值": "127,100 jobs in 2025",
+            "说明": "National occupational projections describe jobs and openings. They do not predict a particular employer’s hiring or attribute change to AI. | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "指标": "Employment projections (2025—2035)",
-            "数值": "Slower than average（1%—2%）",
-            "说明": "Current US 51-4081.00 overall employment series, not current vacancies, individual probabilities, or AI causation | https://www.onetonline.org/link/details/51-4081.00#WagesEmployment"
+            "数值": "127,900 jobs in 2035, up 800 (+0.6%)",
+            "说明": "National occupational projections describe jobs and openings. They do not predict a particular employer’s hiring or attribute change to AI. | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "指标": "Annual job openings (2025—2035)",
-            "数值": "11600/year",
-            "说明": "Current US 51-4081.00 overall employment series, not current vacancies, individual probabilities, or AI causation | https://www.onetonline.org/link/details/51-4081.00#WagesEmployment"
+            "数值": "11,600 annual openings",
+            "说明": "National occupational projections describe jobs and openings. They do not predict a particular employer’s hiring or attribute change to AI. | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
         "boundary": "US data apply only to the US 51-4081.00 scope and listed periods. They cannot be converted or extrapolated into personal income in mainland China.",
@@ -14663,7 +15267,7 @@
           }
         ],
         "factors_heading": "Factors affecting actual rates",
-        "growth": "Slower than average（1%—2%）（2025—2035）",
+        "growth": "+0.6% (2025–2035)",
         "heading": "US wage and employment data boundaries for multiple machine tool operators",
         "industry_heading": "Industry and role differences",
         "industry_period": "2025",
@@ -14723,7 +15327,7 @@
             "question": "How should percentiles be used?"
           },
           {
-            "answer": "The 2025 occupational employment stock is approximately 127100 people, not current vacancies. Distinguish the OEWS wage series from the EP employment series.",
+            "answer": "BLS projects U.S. employment in 51-4081 to rise from 127,100 jobs in 2025 to 127,900 in 2035, a gain of 800 jobs (+0.6%). It projects about 11,600 openings per year, including replacements. National occupational projections describe jobs and openings. They do not predict a particular employer’s hiring or attribute change to AI.",
             "question": "What does employment represent?"
           },
           {
@@ -14811,7 +15415,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "Use an entirely fictional drawing and process sheet for a paper process walkthrough: Describe workholding, tool or die selection, critical dimensions and measuring instruments, first-piece inspection items, batch sampling frequency, and three safety confirmation points, and explain the response sequence for out-of-tolerance dimensions. Use only fictional or public sample drawings and do not operate real equipment. Practice does not authorize equipment operation, special operations, or production safety responsibilities.",
+        "summary": "Consider this work if you like checking that a piece, a drawing revision and an inspection result stay together as the job moves between machines.",
         "title": "Multiple Machine Tool Setters, Operators, and Tenders"
       },
       "fit_decision_checklist": {
@@ -14842,12 +15446,12 @@
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "Career outlook and transition references"
+            "href": "#career-visual-group-sources",
+            "label": "Check the market sources"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "Career outlook and transition references"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "Compare related career directions"
           }
         ],
         "direct_answer": {
@@ -14886,27 +15490,27 @@
             "metric": "US employment",
             "occupation_scope": "US 51-4081 overall employment, 2025 and 2025—2035 projections",
             "source_id": "ep",
-            "value": "127100 people (2025)"
+            "value": "127,100 jobs in 2025"
           },
           {
             "geography": "United States",
             "horizon": "2025—2035",
-            "interpretation": "Current US national overall occupational employment projections. Categories do not indicate individual opportunities or AI causation. No exact final-year headcount from unread material is supplied.",
+            "interpretation": "National occupational projections describe jobs and openings. They do not predict a particular employer’s hiring or attribute change to AI.",
             "limitation": "Projections are not guarantees; industries and regions vary substantially",
             "metric": "US employment change",
             "occupation_scope": "US 51-4081 overall employment, 2025 and 2025—2035 projections",
             "source_id": "ep",
-            "value": "Slower than average（1%—2%）（2025—2035）"
+            "value": "127,900 jobs in 2035, up 800 (+0.6%)"
           },
           {
             "geography": "United States",
             "horizon": "2025—2035",
-            "interpretation": "Annual average, including growth and net replacement needs",
+            "interpretation": "National occupational projections describe jobs and openings. They do not predict a particular employer’s hiring or attribute change to AI.",
             "limitation": "Includes replacement needs and does not equal an individual's probability of being hired",
             "metric": "US annual job openings",
             "occupation_scope": "US 51-4081 overall employment, 2025 and 2025—2035 projections",
             "source_id": "ep",
-            "value": "11600/year (2025—2035)"
+            "value": "11,600 annual openings"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -14918,10 +15522,10 @@
             "scope": "Occupational scope, source definitions, and responsibility boundaries"
           },
           {
-            "href": "https://www.onetonline.org/link/details/51-4081.00#WagesEmployment",
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "ep",
-            "label": "O*NET-relayed BLS2025—2035 projections",
-            "scope": "Occupational scope, source definitions, and responsibility boundaries"
+            "label": "BLS Table 1.2: employment projections",
+            "scope": "National occupational projections describe jobs and openings. They do not predict a particular employer’s hiring or attribute change to AI."
           },
           {
             "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
@@ -15023,19 +15627,19 @@
             "alternate_value": null,
             "label": "Preparation level",
             "secondary_value": null,
-            "value": "JobZone1—2 describes occupational group preparation, not a uniform training duration. New-hire education for this occupation: 82% high school, 8% postsecondary certificate, 6% college courses without a degree. The training directory's 434 programs do not equal 434 jobs or statutory permissions."
+            "value": "JobZone1—2 describes occupational group preparation, not a uniform training duration. In the O*NET survey about new-hire education, 82% of respondents selected high school or equivalent, 8% selected a postsecondary certificate, and 6% selected some college without a degree. Confirm requirements with the employer. The directory lists training programs and does not establish hiring or licensing requirements."
           },
           {
             "alternate_value": null,
             "label": "US employment (2025)",
             "secondary_value": null,
-            "value": "127100 people"
+            "value": "127,100 jobs in 2025"
           },
           {
             "alternate_value": null,
             "label": "US employment change (2025—2035)",
             "secondary_value": null,
-            "value": "Slower than average（1%—2%）"
+            "value": "127,900 jobs in 2035, up 800 (+0.6%)"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15232,7 +15836,7 @@
             "question": "Are extraverts or introverts better suited?"
           },
           {
-            "answer": "New-hire education for this occupation: 82% high school, 8% postsecondary certificate, 6% college courses without a degree. The 434 training programs and 3 certifications are directory listings, not uniform education/training durations or entry requirements.",
+            "answer": "In the O*NET survey about new-hire education, 82% of respondents selected high school or equivalent, 8% selected a postsecondary certificate, and 6% selected some college without a degree. Confirm requirements with the employer.",
             "question": "What education, training, and qualifications are typically needed to enter?"
           },
           {
@@ -15252,7 +15856,7 @@
             "question": "How can I build reviewable skill evidence?"
           },
           {
-            "answer": "Start with paper process walkthroughs and measuring instrument reading exercises: Use fictional drawings to describe workholding, tools, inspection items, and safety confirmation points, then review against public process materials.",
+            "answer": "Try MT-27 in section 09. Compare the recorded diameter and drawing revision for F2 and F6. Write what the record owner should verify.",
             "question": "What low-cost trial should I start with?"
           }
         ],
@@ -15271,7 +15875,7 @@
             "tone": "caution"
           },
           {
-            "body": "Use an entirely fictional drawing and process sheet for a paper process walkthrough: Describe workholding, tools or dies, critical dimensions and measuring instruments, first-piece and sampling items, three safety confirmation points, and the response sequence for out-of-tolerance dimensions.",
+            "body": "Try MT-27 in section 09. Compare the recorded diameter and drawing revision for F2 and F6. Write what the record owner should verify.",
             "id": "experiment",
             "label": "Low-cost trial",
             "tone": "action"
@@ -15290,7 +15894,7 @@
           },
           {
             "href": "https://www.onetonline.org/link/localtraining/51-4081.00",
-            "label": "O*NET National Training (currently 434 programs)",
+            "label": "O*NET National Training directory",
             "usage": "Related education and training directory, not on-the-job durations or employment opportunities"
           },
           {
@@ -15317,6 +15921,11 @@
             "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
             "label": "National Bureau of Statistics: Average wages of urban employees in 2025",
             "usage": "Chinese manufacturing proxy wage scope"
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/51-4081.00#Education",
+            "label": "O*NET new-hire education survey",
+            "usage": "U.S. respondents’ answers about new-hire education"
           }
         ]
       },
@@ -15356,7 +15965,7 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "O*NET51-4081 definition, 21 Tasks / work context / RC/JobZone1—2, 2025 national wages, 2025 employment 127100 and 2025—2035 growth 1%—2% / 11600, industry80/11/9, 2025 advertisements naming 7 software products with percentages NA, 434 training programs, and 3 certifications. NBS2025 three manufacturing averages are references. BLS FAQ includes piecework and excludes overtime premiums/shift differentials. NIST is voluntary AI management, not machinery safety rules. The CDC archive's glove entanglement warning supports hazard mechanisms and protective boundaries only, not occupational accident rates.",
+          "source": "O*NET occupational tasks, education and wages, BLS employment projections, and National Bureau of Statistics manufacturing wage context.",
           "updated_at": "O*NET profile 2026; wages 2025 / projections 2025—2035; NBS2025 data published 2026-05-15; accessed in this review 2026-10-11."
         },
         "note": "The evidence supports only scoped judgments about multiple machine tool operators within the stated markets and periods. It does not guarantee individual income, hiring, or equipment operation and safety authorization.",
@@ -15442,6 +16051,34 @@
         "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.recruitment-sample.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15555,36 +16192,36 @@
       },
       {
         "derivation": null,
-        "display_value": "131,000 people (2024)",
+        "display_value": "127,100 jobs in 2025",
         "fact_id": "us-employment",
         "market": "United States",
         "measure": "Employment",
         "occupation_scope": "Exact occupational scope: O*NET-SOC 51-4081.00",
-        "period": "BLS 2024 employment (via O*NET); accessed 2026-09-25",
+        "period": "BLS Table 1.2, 2025–2035",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
-        "derivation": "Projected employment of 130,300 in 2034.",
-        "display_value": "-1%（2024—2034，Little or no change）",
+        "derivation": null,
+        "display_value": "127,900 projected jobs in 2035 (+0.6%)",
         "fact_id": "us-outlook",
         "market": "United States",
         "measure": "Projected employment change",
         "occupation_scope": "Exact occupational scope: O*NET-SOC 51-4081.00",
-        "period": "BLS 2024—2034 projections (via O*NET); accessed 2026-09-25",
+        "period": "BLS Table 1.2, 2025–2035",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
-        "derivation": "Includes growth and net replacement needs.",
-        "display_value": "Approximately 12,800/year (2024—2034)",
+        "derivation": "Includes replacements.",
+        "display_value": "11,600 annual openings",
         "fact_id": "us-openings",
         "market": "United States",
         "measure": "Annual job openings",
         "occupation_scope": "Exact occupational scope: O*NET-SOC 51-4081.00",
-        "period": "BLS 2024—2034 projections (via O*NET); accessed 2026-09-25",
+        "period": "BLS Table 1.2, 2025–2035",
         "source_refs": [
           "onet-trends"
         ]
@@ -15688,14 +16325,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Multiple machine tool operators (O*NET-SOC 51-4081.00) set up, operate, or tend more than one cutting or forming machine tool or robot, including CNC, stamping, drilling and boring, turning, milling and planing, grinding, and welding equipment. This page compiles official O*NET tasks and work context, Job Zones 1—2 and high school diploma routes, the US 2025 BLS OEWS median annual wage of US$47,180 and -1% employment change for 2024—2034, mainland Chinese manufacturing industry proxy wages, AI and automation boundaries, fit signals, and entry routes."
+      "text": "See what multiple machine tool operators do, how U.S. pay and employment are measured, and how to try a paper first-piece handover before exploring training."
     },
     "title": {
       "availability": "available",
       "text": "Multiple Machine Tool Setters, Operators, and Tenders"
     }
   },
-  "source_content_sha256": "98e79a717552afacd4b4cdc0d3d83beaa5c4225b5031b55c76e7c040c0555598",
+  "source_content_sha256": "1840efe9ee10ab858367364765e88bf1b66f9a3fafc7a3ad0f75e235474ac092",
   "subject": {
     "canonical_slug": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic",
     "name": "Multiple Machine Tool Setters, Operators, and Tenders",

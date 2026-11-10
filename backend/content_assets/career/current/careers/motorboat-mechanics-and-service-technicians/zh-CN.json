@@ -158,6 +158,9 @@
       "item:motorboat-mechanics-and-service-technicians.path.seven-day-trial.7": {
         "status": "mapped"
       },
+      "item:motorboat-mechanics-and-service-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:motorboat-mechanics-and-service-technicians.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13273,6 +13276,21 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两份舷外机工单的型号相同，序列号尾号不同。一份报振动，一份附无编号保养记录。写下给服务技师的待核项，先把报修与设备一一对应。"
+            ]
+          },
+          "id": "motorboat-mechanics-and-service-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "复核船机送修记录",
+          "type": "notice"
         }
       ]
     },
@@ -15745,6 +15763,13 @@
         "id": "motorboat-mechanics-and-service-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "motorboat-mechanics-and-service-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15962,7 +15987,7 @@
       "text": "摩托艇机械师与服务技师"
     }
   },
-  "source_content_sha256": "18eb5a3096f283a25cc3891f4514a7fa3bc2795329f12514206a6bff3c612346",
+  "source_content_sha256": "61ba14016320d559f8040c6876ca782cbe78bcc91872e4a478ec35354290d160",
   "subject": {
     "canonical_slug": "motorboat-mechanics-and-service-technicians",
     "name": "摩托艇机械师与服务技师",

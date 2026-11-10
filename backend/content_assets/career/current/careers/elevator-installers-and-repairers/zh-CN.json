@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a32-ankang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a32-hechuan": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -1605,7 +1611,7 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1677,7 +1683,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26107,12 +26113,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "建筑业宽口径参考：2025 年全国城镇非私营单位年平均工资92,036元，私营单位66,275元；税前行业均值，非电梯安装维修职业中位数或个人收入区间。"
+              " 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "nbs"
+            "a32-ankang",
+            "a32-hechuan"
           ],
           "type": "prose"
         },
@@ -26222,12 +26229,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "不以行业平均工资或单条招聘报价替代本职业工资。"
+              "公告只用于核对岗位职责和计薪方式。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "nbs"
+            "a32-ankang",
+            "a32-hechuan"
           ],
           "type": "prose"
         }
@@ -28979,25 +28987,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "材料一：虚构图纸与井道条件",
-                  "给出图纸版本、井道尺寸与承载条件，作为练习输入。",
-                  "练习产出：列出安装顺序、关键尺寸与未决项清单。"
+                  "纸面工单材料",
+                  "虚构设备 E6。工单 L12 记录处理完成，复核表 Q07 对 E6 只填写门状态。",
+                  "题设的恢复服务审核须核门状态和运行确认两项，Q07 的运行确认栏空白，签发栏未签。",
+                  "维修负责人补齐复核记录，值班负责人确认恢复服务。练习不接触电梯，不提供故障根因。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "材料二：法规与检查表摘录",
-                  "给出适用条款、检查项与判据。",
-                  "练习产出：写出本次检查的判据来源与适用范围。"
+                  "交件要求",
+                  "交一页交接，写工单及设备、已记录项、缺项、状态和接手人。",
+                  "只做纸面核对，区分完工记录与恢复确认。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "材料三：调试数据表（虚构）",
-                  "给出参数、试验结果与记录，含一处越限与一处缺失。",
-                  "练习产出：标出越限项与缺失项，并写出复测与复核要求。"
+                  "先完成独立答卷",
+                  "到「常见问题与资料来源」打开「维保交接参考答案（完成第六天后再打开）」。",
+                  "用其中的自核项记录一处差异与修订。"
                 ]
               },
               {
@@ -29026,50 +29035,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "第 1 天：读一条安全规程",
-                  "抄录一条适用条款并写出适用范围与不确定处。"
+                  "第 1 天",
+                  "抄录设备号和工单号。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "第 2 天：写安装检查表",
-                  "用虚构图纸整理安装顺序与检查项，标出假设与未决项。"
+                  "第 2 天",
+                  "区分完工和复核。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第 3 天：做一次尺寸核对",
-                  "按摘录核对一项关键尺寸或间隙并记录来源。"
+                  "第 3 天",
+                  "列恢复审核所缺的项目。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "第 4 天：定义试验判据",
-                  "写出通过准则、测量条件与记录要求。"
+                  "第 4 天",
+                  "核复核和恢复的接手人。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "第 5 天：整理维保检查表",
-                  "按虚构法规逐项列出维保与安全装置检查项。"
+                  "第 5 天",
+                  "写完纸面交接。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第 6 天：做两张变体",
-                  "分别改变一处井道条件与一处判据，写清影响范围与复测项。"
+                  "第六天：独立交件",
+                  "先不看参考，检查交件能否独立读懂。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第 7 天：复盘停止条件",
-                  "总结在哪些条件下必须停止并升级，形成一页复盘记录。"
+                  "第七天：打开参考并复盘",
+                  "到「常见问题与资料来源」打开「维保交接参考答案（完成第六天后再打开）」。写下一处差异与修订，再决定继续或暂缓。"
                 ]
               }
             ]
@@ -29088,13 +29097,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第 1 天：能否准确找出条款的适用范围与例外，而不是只抄关键词。",
+              "能用题面完成一页交接，并区分已核、待核和审批。",
               "第 2 天：能否把图纸拆成可核对的安装顺序与检查项，并标出未决项。",
-              "第 3 天：能否说清尺寸核对中的判据、单位与来源。",
+              "用纸面作业记录哪一步最费力，真实工作量另向雇主核对。",
               "第 4 天：能否把「通过」写成可执行的判据而非笼统描述。",
               "第 5 天：能否在不省略安全装置项的前提下形成检查表。",
               "第 6 天：能否判断变更影响范围并列出必须复测的项目。",
-              "第 7 天：能否写出明确的停止与升级条件，并说明由谁确认。"
+              "第七天对照折叠参考检查交件。有关键漏项先重做。真实培训及职责范围另向雇主确认。"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30979,21 +30988,21 @@
           "data": {
             "entries": [
               {
-                "answer": "组装、安装、调试、维修与保养电动或液压的客货电梯、自动扶梯、自动人行道与杂物梯：按图纸定位导轨与轿厢、连接与调试电气控制、排查制动与门机故障，并按法规完成安全检查与维修记录。",
+                "answer": "按工单安装、检查、保养或维修电梯和自动扶梯，记录设备状态、复核结果和交接。上岗前核安装与维保的分工、值班安排和谁确认恢复服务。",
                 "id": "actors.faq.1",
                 "question": "电梯与自动扶梯安装维修人员主要做什么？",
                 "question_key": "career.faq.elevator-installers-and-repairers.1",
                 "source_refs": [
-                  "onet"
+                  "a32-onet"
                 ]
               },
               {
-                "answer": "本职业专做电梯、扶梯等垂直运输设备，涉及井道作业、曳引与安全装置；电工面向建筑与工业电气系统；暖通空调技师面向供暖、通风、空调与制冷设备。",
+                "answer": "电梯安装维保围绕整台升降设备及其机电控制。电工常负责配线和供电，暖通技工负责暖通设备。工程现场的授权和签发须逐项核。",
                 "id": "actors.faq.2",
                 "question": "它和电工、暖通空调技师有什么不同？",
                 "question_key": "career.faq.elevator-installers-and-repairers.2",
                 "source_refs": [
-                  "onet"
+                  "a32-onet"
                 ]
               },
               {
@@ -31006,31 +31015,31 @@
                 ]
               },
               {
-                "answer": "BLS OES／O*NET 显示 2025 年全国中位年薪 109,910 美元（中位时薪 52.84 美元）；五分位为 59,270／79,290／109,910／135,720／158,890 美元。",
+                "answer": "美国 2025 年 5 月该细项年工资中位数为 109,910 美元。",
                 "id": "actors.faq.4",
                 "question": "美国工资是多少？",
                 "question_key": "career.faq.elevator-installers-and-repairers.4",
                 "source_refs": [
-                  "onet"
+                  "a32-bls"
                 ]
               },
               {
-                "answer": "O*NET/BLS 显示 2024 年就业约 24,200 人，2024—2034 年预计增长快于平均（5%—6%），预计空缺约 2,000 个/年；空缺含增长与替补。",
+                "answer": "美国 BLS 47-4021 预计 2025 年约 24,700 人、2035 年约 26,100 人（+5.7%），年均约 1,900 个空缺，含替补。",
                 "id": "actors.faq.5",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.elevator-installers-and-repairers.5",
                 "source_refs": [
-                  "onet"
+                  "a32-bls"
                 ]
               },
               {
-                "answer": "本次所核国家统计局资料只到行业与人员大类口径，未取得与本职业精确对应的全国单职业工资分位；本页据此登记证据不足，不用行业均值或单条招聘报价替代。",
+                "answer": "10 人，4,000–8,000 元/月，依技能定薪。包括巡检、维修、定期保养与记录。 重庆迈高电梯列 2 人，综合月薪 4,000–7,000 元，专科及以上、电梯相关专业。 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。",
                 "id": "actors.faq.6",
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.elevator-installers-and-repairers.6",
                 "source_refs": [
-                  "onet",
-                  "nbs"
+                  "a32-ankang",
+                  "a32-hechuan"
                 ]
               },
               {
@@ -31069,6 +31078,15 @@
                 "source_refs": [
                   "onet"
                 ]
+              },
+              {
+                "answer": "E6 的 L12 完工和 Q07 门状态均已记录，缺运行确认和批准签字，恢复服务待定。维修负责人负责补齐复核记录，由值班负责人核齐后确认。交接记 E6、L12、Q07、缺项和接手人。自核四项：编号、已记录项目、缺项与恢复状态、交接与批准。每项齐全计一项。题设为虚构，来源提供岗位背景。",
+                "id": "actors.faq.11",
+                "question": "维保交接参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.elevator-installers-and-repairers.11",
+                "source_refs": [
+                  "a32-onet"
+                ]
               }
             ]
           },
@@ -31084,7 +31102,7 @@
           "data": {
             "entries": [
               "招聘公告中的学历、学徒经历、执照与作业证要求必须逐条读取；一项可放宽不代表其他条件可替代。",
-              "中国与美国数据分栏：美国为 O*NET-SOC 47-4021.00 单职业统计（2025 年 5 月工资、2024—2034 年展望），中国大陆为行业与人员大类口径，未取得精确职业分位。",
+              "美国就业和工资采用 BLS 47-4021。大陆为两份招聘公告，岗位薪资只说明各自条件。",
               "本页不构成作业许可、检验或合规结论；电梯与扶梯的安装、检验与放行只能由具备资质与授权的个人按适用法规与单位制度作出。"
             ]
           },
@@ -31299,20 +31317,19 @@
                 "url": "https://www.bls.gov/ooh/occupation-finder.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "核对本职业的中位工资、就业规模、增长与年均空缺。",
-                  "只适用于该美国单职业。"
+                  "美国 BLS 47-4021 预计 2025 年约 24,700 人、2035 年约 26,100 人（+5.7%），年均约 1,900 个空缺，含替补。"
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "bls",
-                "limitation": "只适用于美国口径；中位数不是起薪，空缺不等于净新增。",
+                "limitation": "年均空缺包含替补。",
                 "market": "美国",
-                "name": "BLS OOH — 电梯与自动扶梯安装维修人员（elevator and escalator installers and repairers）",
-                "period": "2025 年 5 月工资数据；2025—2035 年预测",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/elevator-installers-and-repairers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -31665,6 +31682,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "按工单安装、检查、保养或维修电梯和自动扶梯，记录设备状态、复核结果和交接。上岗前核安装与维保的分工、值班安排和谁确认恢复服务。"
+                ],
+                "evidence_type": "职业任务原始资料",
+                "id": "a32-onet",
+                "limitation": "仅用于美国任务对照。",
+                "market": "美国",
+                "name": "职业任务细项",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/47-4021.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国 BLS 47-4021 预计 2025 年约 24,700 人、2035 年约 26,100 人（+5.7%），年均约 1,900 个空缺，含替补。"
+                ],
+                "evidence_type": "职业任务原始资料",
+                "id": "a32-bls",
+                "limitation": "仅用于美国任务对照。",
+                "market": "美国",
+                "name": "BLS 表 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "10 人，4,000–8,000 元/月，依技能定薪。包括巡检、维修、定期保养与记录。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a32-ankang",
+                "limitation": "单次公告，只说明该岗位的条件。",
+                "market": "中国大陆",
+                "name": "电梯维保技术人员",
+                "period": "2026 年第一批",
+                "publisher": "安康市人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.ankang.gov.cn/Content-2888848.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "重庆迈高电梯列 2 人，综合月薪 4,000–7,000 元，专科及以上、电梯相关专业。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a32-hechuan",
+                "limitation": "单次公告，只说明该岗位的条件。",
+                "market": "中国大陆",
+                "name": "电梯维保",
+                "period": "2026-02-05",
+                "publisher": "重庆市合川区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hc.gov.cn/bmjd/bm_100475/rlsbj/zwxx_101296/gggs_11/202602/t20260205_15383788.html"
               }
             ]
           },
@@ -34466,7 +34543,7 @@
             },
             {
               "指标": "岗位口径",
-              "数值": "中国大陆的电梯安装、维保与检验岗位与美国单职业口径不是一一对应",
+              "数值": "查看下方有日期的两份岗位样本。",
               "说明": "安装、维保与检验职责边界需按单位核对。"
             },
             {
@@ -34606,7 +34683,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "历史案例状态",
+          "china_open": "下列为有日期的招聘样本，另列全国职业工资口径缺口。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34650,7 +34727,7 @@
               }
             },
             {
-              "城市/区间": "建筑业年平均工资（宽口径参考）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$join": [
                   {
@@ -34680,7 +34757,8 @@
           "china_soc_row": "中国薪资口径",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a32-ankang",
+            "posting-a32-hechuan"
           ],
           "sources_note": {
             "$join": [
@@ -34705,14 +34783,14 @@
           "ui": {
             "ai_heading": "AI 会直接改变本职业的收入吗？",
             "driver_heading": "核对中国大陆同类岗位报酬时应看什么？",
-            "official_heading": "中国大陆公开口径与统计缺口",
+            "official_heading": "行业统计与招聘样本的范围",
             "scenario_caption": "精确全国职业工资仍缺；建筑业税前年平均工资仅供行业参考。",
             "scenario_heading": "中国大陆同类岗位的口径能直接比较吗？",
             "scenario_interpretation_label": "适用范围与缺口",
             "scenario_role_label": "岗位或范围",
             "scenario_value_label": "计酬与披露情况"
           },
-          "us_growth": "美国预测见美国薪资参考板块。",
+          "us_growth": "5.7% (2025–2035)",
           "us_median": "美国工资见美国薪资参考板块。"
         }
       },
@@ -35190,7 +35268,7 @@
         "outlook_evidence": [
           {
             "geography": "美国",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.2",
               "block": "market-signals",
@@ -35205,8 +35283,8 @@
             },
             "metric": "就业增长",
             "occupation_scope": "O*NET-SOC 47-4021.00（电梯与自动扶梯安装维修人员）",
-            "source_id": "onet",
-            "value": "6%"
+            "source_id": "a32-bls",
+            "value": "5.7%"
           },
           {
             "geography": "美国",
@@ -35225,12 +35303,12 @@
             },
             "metric": "就业规模",
             "occupation_scope": "O*NET-SOC 47-4021.00（电梯与自动扶梯安装维修人员）",
-            "source_id": "onet",
-            "value": "24,700人"
+            "source_id": "a32-bls",
+            "value": "24,700"
           },
           {
             "geography": "美国",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -35245,8 +35323,8 @@
             },
             "metric": "预计空缺",
             "occupation_scope": "O*NET-SOC 47-4021.00（电梯与自动扶梯安装维修人员）",
-            "source_id": "onet",
-            "value": "1,900个/年"
+            "source_id": "a32-bls",
+            "value": "1,900"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -36450,7 +36528,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解电梯与自动扶梯安装维修人员的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36981,39 +37059,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 24,200 人（2024 年）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "24,700 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "美国就业规模",
-        "occupation_scope": "小学教师（O*NET-SOC 25-2021.00）",
-        "period": "2024",
+        "occupation_scope": "美国 47-4021",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "a32-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "快于平均（5%—6%，2024—2034）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "5.7%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "美国就业增长",
-        "occupation_scope": "小学教师（O*NET-SOC 25-2021.00）",
-        "period": "2024—2034",
+        "occupation_scope": "美国 47-4021",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a32-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 2,000 个/年（2024—2034）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 1,900 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "美国预计空缺",
-        "occupation_scope": "小学教师（O*NET-SOC 25-2021.00）",
-        "period": "2024—2034",
+        "occupation_scope": "美国 47-4021",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a32-bls"
         ]
       },
       {
@@ -37054,14 +37132,15 @@
       },
       {
         "derivation": "中国精确职业数据未取得；不进行换算。",
-        "display_value": "证据不足：未取得与本职业精确对应的中国大陆全国单职业工资分位",
+        "display_value": "10 人，4,000–8,000 元/月，依技能定薪。包括巡检、维修、定期保养与记录。 重庆迈高电梯列 2 人，综合月薪 4,000–7,000 元，专科及以上、电梯相关专业。",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "中国",
         "measure": "中国大陆口径",
-        "occupation_scope": "小学教师（O*NET-SOC 25-2021.00）",
-        "period": "2026 年查阅",
+        "occupation_scope": "两份历史招聘公告",
+        "period": "2026",
         "source_refs": [
-          "nbs"
+          "a32-ankang",
+          "a32-hechuan"
         ]
       },
       {
@@ -37074,6 +37153,30 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "10 人，4,000–8,000 元/月，依技能定薪。包括巡检、维修、定期保养与记录。",
+        "fact_id": "posting-a32-ankang",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "电梯维保技术人员",
+        "period": "2026 年第一批",
+        "source_refs": [
+          "a32-ankang"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "重庆迈高电梯列 2 人，综合月薪 4,000–7,000 元，专科及以上、电梯相关专业。",
+        "fact_id": "posting-a32-hechuan",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "电梯维保",
+        "period": "2026-02-05",
+        "source_refs": [
+          "a32-hechuan"
         ]
       }
     ]
@@ -37101,19 +37204,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国 47-4021 · 预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国 47-4021 · 就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国预计空缺"
+        "label": "美国 47-4021 · 预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37127,17 +37230,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "美国 O*NET-SOC 47-4021.00：2025 年中位年薪 109,910 美元（中位时薪 52.84 美元），2024 年就业约 24,200 人，2024—2034 年预计增长快于平均（5%—6%）；含学徒路径、特种设备作业资质与中国大陆口径说明。"
+      "text": "了解电梯安装维保的工单、复核和交接，比较安康、合川招聘，并完成纸面恢复服务记录。"
     },
     "title": {
       "availability": "available",
       "text": "电梯与自动扶梯安装维修人员：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "f0d405f6604e8a3cf16cec2f2ea5e2c793a5e270704870e908763081dc868ee2",
+  "source_content_sha256": "fa60a840845b4fe347e75a124d1b39b068d0b5f0fa4b876a6b3781b134ce4ced",
   "subject": {
     "canonical_slug": "elevator-installers-and-repairers",
     "name": "电梯与自动扶梯安装维修人员",
-    "summary": "按美国 O*NET-SOC 47-4021.00，组装、安装、调试、维修与保养电动或液压的客货电梯、自动扶梯、自动人行道与杂物梯：按图纸定位导轨与轿厢、连接与调试电气控制、排查制动与门机故障，并按法规完成安全检查与维修记录。"
+    "summary": "按工单安装、检查、保养或维修电梯和自动扶梯，记录设备状态、复核结果和交接。上岗前核安装与维保的分工、值班安排和谁确认恢复服务。"
   }
 }

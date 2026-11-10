@@ -23015,13 +23015,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Next, verify whether the target role is reservoir, drilling, completion, or production engineering, and the required engineering degree, field training, regional licence, and employer authorization; first complete the fictional data verification, and do not use the practice plan for real operations."
+              "Paper check | Label the periods on two fictional production curves. Explain how a missing day affects the comparison and note what the data owner should check. "
             ]
           },
           "id": "petroleum-engineers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23313,13 +23312,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "The O*NET United States occupational classification is not the same as Chinese engineering qualifications or signing authority; the specific jurisdiction and employer responsibilities are verified separately."
+              "Petroleum engineers use well information and production data to assess recovery and evaluate development or production designs. A proposal needs to identify its observations and assumptions. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "petroleum-engineers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "ep"
+            "transfer-onet-17-2171.00"
           ],
           "type": "prose"
         },
@@ -24417,13 +24415,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verified actual generative AI adoption, overall substitution rate, or disappearance year for this occupation; well data organization, scenario calculation, and report drafts are only approved editorial trials and cannot replace raw well tests, instruments, formations, equipment, well control and environmental conditions, and authorized review. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Label the periods on two fictional production curves. Explain how a missing day affects the comparison and note what the data owner should check."
             ]
           },
           "id": "petroleum-engineers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-onet-17-2171.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32435,6 +32433,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-17-2171.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 17-2171.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/17-2171.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37687,10 +37712,10 @@
       "text": "Petroleum engineers"
     }
   },
-  "source_content_sha256": "71c0866ebe04cb0ef47075eaa8c3ec1b5623ef089d3175230ca9c0171c249e07",
+  "source_content_sha256": "64c4bf6f60bae30a145483be96cb19e83e7f18dd1c2de7158fb63736e823c38a",
   "subject": {
     "canonical_slug": "petroleum-engineers",
     "name": "Petroleum engineers",
-    "summary": "Petroleum engineers (O*NET 17-2171.00) analyze reservoir, wellbore, and production data, design or improve drilling, completion, and recovery plans, monitor output and equipment performance, give technical advice with stated boundaries, and record results. On-site operations, equipment changes, and safety decisions must be reviewed by authorized teams under applicable standards."
+    "summary": "Petroleum engineers use well information and production data to assess recovery and evaluate development or production designs. A proposal needs to identify its observations and assumptions."
   }
 }

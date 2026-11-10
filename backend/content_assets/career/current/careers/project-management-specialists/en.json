@@ -1272,7 +1272,7 @@
         "status": "mapped"
       },
       "item:project-management-specialists.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:project-management-specialists.path.interview-probation.1": {
         "status": "mapped"
@@ -23314,7 +23314,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "If you are willing to break a vague goal into acceptable work packages and continuously check progress, cost, risk, and responsible people, you can learn more about project management specialists."
+              "If frequent priority checks and follow-ups would be hard to sustain, ask about client contact, meeting cadence, and change authority."
             ]
           },
           "id": "project-management-specialists.quick-decision.fit-decision-checklist.1",
@@ -23329,7 +23329,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use 120 fictional project work items to practice spot checks: a six-sample has three pending items; 3/6 cannot be extrapolated to the other 114."
+              "Use the fictional tasks in section 09 to compare milestones before and after a change and write a one-page impact brief."
             ]
           },
           "id": "project-management-specialists.quick-decision.fit-decision-checklist.2",
@@ -23343,7 +23343,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Paper-and-pencil exercise: of a delivery checklist of 20 items, 4 have been confirmed and accepted; list the 16 unaccepted items and mark dependencies and responsible people."
+              "This work may suit you if you like tracking dependencies across teams, documenting decisions, and explaining how changes affect delivery."
             ]
           },
           "id": "project-management-specialists.quick-decision.fit-decision-checklist.3",
@@ -23359,7 +23359,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Submit a one-page project status card: list the goal, scope, 20 deliverables, the R2/R4/R6 gaps, the decision makers, and the 114 unobserved records."
+              "Use the fictional tasks in section 09 to compare milestones before and after a change and write a one-page impact brief."
             ]
           },
           "id": "project-management-specialists.quick-decision.fermat-decision-card.6",
@@ -27738,31 +27738,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Logisticians",
@@ -28185,8 +28185,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Can you mark the six verified records and the 114 unobserved records out of the 120 fictional records?",
-              "Can you distinguish the suspicion proportion among the six samples from the 120-record total?"
+              "Record predecessors and parallel work.",
+              "Show the critical path and finish date for each schedule."
             ]
           },
           "id": "project-management-specialists.fit.personality-fit-block.20",
@@ -28707,7 +28707,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Draw six of the 120 fictional work packages and list the three types of gap and the escalation."
+              "Use the fictional tasks in section 09 to compare milestones before and after a change and write a one-page impact brief."
             ]
           },
           "id": "project-management-specialists.fit.personality-fit-block.55",
@@ -29495,8 +29495,8 @@
                 "id": "education",
                 "values": [
                   "Education and relevant experience",
-                  "BLS lists the United States typical entry-level education as a bachelor's degree, with no related experience required.",
-                  "Check the specific requirements by target region and employer."
+                  "BLS lists a bachelor’s degree as typical and no typical prior experience in a related occupation. Its handbook notes that some positions still require relevant experience.",
+                  "Richinfo’s September 9, 2026 PMO posting in Beijing and Guangdong lists milestones, deliverables, change risks, and logs of assigned owners. It illustrates one employer’s duties and entry conditions."
                 ]
               },
               {
@@ -29519,8 +29519,8 @@
                 "id": "tools",
                 "values": [
                   "Work samples you can show",
-                  "Use a fictional project to show a scope-plan-actual-acceptance comparison.",
-                  "Others can recalculate delivery and trace the three types of gap."
+                  "Use the fictional tasks in section 09 to compare milestones before and after a change and write a one-page impact brief.",
+                  "Check whether someone else could reproduce the result."
                 ]
               }
             ]
@@ -29530,7 +29530,9 @@
             "employer",
             "editor",
             "onet",
-            "bls"
+            "bls",
+            "cn-d007-job",
+            "us-d007-ooh"
           ],
           "title": "Basis for entry checks and editorial preparation suggestions",
           "type": "cards"
@@ -29543,33 +29545,32 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and settings｜all fictional project paper-and-pencil exercises",
-                  "A fictional project has 120 work records; one delivery checklist has 20 items, of which 4 have been confirmed and accepted and the remaining 16 are pending.",
-                  "A1: write the goal, scope, acceptance authority, and budget boundary; do not expand scope without approval.",
-                  "A2: draw six records, R1–R6, from the 120; the sampling is designed by the editors."
+                  "Fictional inputs",
+                  "A fictional project starts on day 0. A (requirements) takes two days. Once A finishes, B (build) takes three days and C (content) takes two, in parallel. D (integration tests) takes two days after B and C finish. E (acceptance) takes one day after D. There are no staffing conflicts.",
+                  "The client requests two more days of work on C. Approval is pending. The current delivery commitment is the end of day 8. The project sponsor approves scope and date changes. The delivery lead checks estimates and the account manager communicates commitments."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task and output",
-                  "A3: the R1, R3, and R5 are complete; R2 is missing the dependency responsible person, R4 is missing acceptance criteria, and R6 has an outdated cost estimate. A4: the other 114 records were not observed.",
-                  "A4: the practitioner only records suspicions and the originals still to be verified; a named responsible person decides whether to expand the check or deliver."
+                  "Task and deliverables",
+                  "Submit baseline and proposed milestone schedules. Show dependencies, the critical path, the delivery impact, and who decides by when.",
+                  "Use paper or a local spreadsheet. Record evidence gaps separately."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference approach (do it independently first)",
-                  "A5: three of the six have pending gaps, and 3/6=50% describes the sample only and cannot derive a problem rate for the 120 items.",
-                  "List the originals and decision makers needed for R2/R4/R6 separately; the scope or budget must not be changed without approval."
+                  "When to check the key",
+                  "Save your draft before checking the key after the seven-day plan.",
+                  "You can complete the exercise independently."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries and review",
-                  "Others can recalculate 20-4=16, 120-6=114, and 3/6 and see that the 4 items must be genuinely accepted."
+                  "Authority in the exercise",
+                  "Keep the approved baseline in force and record the proposal and pending decision separately."
                 ]
               }
             ]
@@ -29578,7 +29579,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: one fictional project requirement document check",
+          "title": "PJ-01 | Assess a change to project milestones",
           "type": "cards"
         },
         {
@@ -29589,31 +29590,31 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Project requirement document and document summary card",
-                  "Write the 20 deliverables, the 4 accepted items, and the 16 pending items.",
-                  "The acceptance evidence can be re-examined."
+                  "Dependency chart",
+                  "Record predecessors and parallel work.",
+                  "Check against the supplied values and approval status."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Suspicion and review card",
-                  "List the R2 responsible person, R4 acceptance criteria, and R6 estimation version gaps.",
-                  "Each item corresponds to its originals and decision maker."
+                  "Milestones before and after",
+                  "Show the critical path and finish date for each schedule.",
+                  "Check against the supplied values and approval status."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Escalation handover card",
-                  "Note that the 114 items were not observed and do not derive an overall problem rate."
+                  "Change record",
+                  "Separate the approved version from the estimates under review."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Method notes card",
-                  "List the change and budget approvers."
+                  "Decision handoff",
+                  "Name the decision maker, deadline, and owner of client communication."
                 ]
               }
             ]
@@ -29645,25 +29646,25 @@
               [
                 "Checking delivery in the interview",
                 "Whether you can recalculate the unaccepted count",
-                "20-4=16, and the 4 items require acceptance evidence.",
+                "Record predecessors and parallel work.",
                 "A self-reported completion must not be counted as acceptance."
               ],
               [
                 "Spot check in the interview",
                 "Whether you can distinguish the sample from the total",
-                "Six items with three gaps, and 114 items unobserved.",
+                "Show the critical path and finish date for each schedule.",
                 "The overall problem rate cannot be derived."
               ],
               [
                 "Project management on the job",
                 "Whether you can check responsible people, criteria, and estimates",
-                "R2/R4/R6 list the originals still to be verified separately.",
+                "Separate the approved version from the estimates under review.",
                 "Must not change the budget beyond your authority."
               ],
               [
                 "Client collaboration",
                 "Whether you can explain the change impact",
-                "Write the time, cost, quality, and approver.",
+                "Name the decision maker, deadline, and owner of client communication.",
                 "Must not commit to delivery on your own."
               ]
             ]
@@ -29684,50 +29685,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day one",
-                  "Day one: check the A1 goal, scope, and acceptance."
+                  "Day 1",
+                  "List the tasks, durations, and current commitment."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day two",
-                  "Day two: check the 20 deliverables and the acceptance evidence for the 4 items."
+                  "Day 2",
+                  "Draw the dependencies and mark parallel work."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day three",
-                  "Day three: draw R1–R6 and compare the plan, dependencies, and budget."
+                  "Day 3",
+                  "Calculate the baseline finish and critical path."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day four",
-                  "Day four: list the R2/R4/R6 gaps and note that the 114 items were not observed."
+                  "Day 4",
+                  "Recalculate the path and date for the proposed change. Keep the original schedule."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day five",
-                  "Day five: per A4/A5, write the three suspicions, the 114 unknowns, and the review request to the responsible person."
+                  "Day 5",
+                  "Log the schedule difference, estimates to verify, and approval deadline."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day six",
-                  "Day six: after sealing the first draft, look at the reference approach and correct the suspicion classification, calculation, or over-reach suggestions."
+                  "Day 6",
+                  "Finish your draft before checking the key and rubric below. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day seven",
-                  "Day seven: hand in the four cards for project requirement document, review, escalation, and method, and record the most effortful step and the next practice."
+                  "Day 7",
+                  "Revise one finding using the evidence and label the work as a simulation."
                 ]
               }
             ]
@@ -29744,20 +29745,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "20 deliverables, 4 accepted, 16 pending; the acceptance authority and evidence must be listed separately.",
-              "The six sample numbers are R1–R6, matching A2.",
-              "R2 is missing the dependency responsible person, R4 is missing acceptance criteria, R6 has an outdated cost estimate; the R1, R3, and R5 are complete.",
-              "3/6 describes only the six samples, the other 114 items are unknown, and the project total cannot be derived.",
-              "The anomaly card must state that work pauses when authority is unclear and that the responsible person decides whether to expand the check.",
-              "Real system access, partner communication, and work package release must first be checked against the applicable scope agreement and institutional authorization.",
-              "The work proves only the paper-and-pencil method and is not equal to employer hiring, position authorization, or system access authorization."
+              "The baseline critical path A→B→D→E takes 2 + 3 + 2 + 1 = 8 days.",
+              "C finishes on day 4 in the baseline and B finishes on day 5. D waits for both, so C has one day of float.",
+              "With the change, C takes four days. A→C→D→E now takes 9 days, one day beyond the commitment.",
+              "The delivery lead verifies the estimate and options. The sponsor decides on scope or date changes before C starts. The account manager communicates the approved decision.",
+              "Day 8 remains the approved baseline. Record day 9 as a proposed scenario pending review and approval.",
+              "Score each of four items 0–2: dependencies, dates before and after, the change record, and approval ownership.",
+              "Award 2 for complete and traceable work, 1 for partial work, and 0 for missing evidence or exceeding authority."
             ]
           },
           "id": "project-management-specialists.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to judge at the end of seven days whether to continue",
+          "title": "Answer key and self-check rubric",
           "type": "list"
         },
         {
@@ -29786,7 +29787,7 @@
               [
                 "United States entry-level education background",
                 "For those considering the United States 13-1082 occupation",
-                "BLS lists a bachelor's degree with no related work experience and no uniform on-the-job training requirement",
+                "BLS lists a bachelor’s degree as typical and no typical prior experience in a related occupation. Its handbook notes that some positions still require relevant experience.",
                 "Not equal to a unified Chinese threshold",
                 "Check the location and employer hiring requirements",
                 "Depends on the individual path",
@@ -29875,16 +29876,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "A1–A5 and the seven-day plan are fictional project exercises and contain no real client data.",
-              "Position salaries, regional position authorization, and hiring status are checked by location and employer; United States statistics cannot be taken as Chinese conditions."
+              "Richinfo’s September 9, 2026 PMO posting in Beijing and Guangdong lists milestones, deliverables, change risks, and logs of assigned owners. It illustrates one employer’s duties and entry conditions.",
+              "The historical posting illustrates employer duties. The exercise is fictional. Check seniority, current availability, and authority with each employer."
             ]
           },
           "id": "project-management-specialists.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "cn-d007-job",
+            "editor"
           ],
           "title": "Recruitment record notes",
           "type": "notice"
@@ -30112,7 +30111,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS lists the United States typical entry-level education for 13-1082 as a bachelor's degree, with no related experience and no uniform on-the-job training requirement."
+              "BLS lists a bachelor’s degree as typical and no typical prior experience in a related occupation. Its handbook notes that some positions still require relevant experience."
             ]
           },
           "id": "project-management-specialists.path.career-path-block.23",
@@ -31938,10 +31937,15 @@
                 "question_key": "career.faq.project-management-specialists.us-pay"
               },
               {
-                "answer": "BLS lists the United States typical entry-level education as a bachelor's degree with no related experience required; Chinese conditions are checked with the employer and the project type.",
+                "answer": "BLS lists a bachelor’s degree as typical and no typical prior experience in a related occupation. Its handbook notes that some positions still require relevant experience. Richinfo’s September 9, 2026 PMO posting in Beijing and Guangdong lists milestones, deliverables, change risks, and logs of assigned owners. It illustrates one employer’s duties and entry conditions.",
                 "id": "project-management-specialists.faq.7",
                 "question": "What is the entry-level education?",
-                "question_key": "career.faq.project-management-specialists.education-path"
+                "question_key": "career.faq.project-management-specialists.education-path",
+                "source_refs": [
+                  "bls",
+                  "cn-d007-job",
+                  "us-d007-ooh"
+                ]
               },
               {
                 "answer": "Project management specialists coordinate scope, schedule, and resources; technical leads are responsible for professional implementation and quality, and authority follows the project division of labor.",
@@ -31971,7 +31975,9 @@
             "nbs",
             "privacy",
             "cnclass",
-            "editor"
+            "editor",
+            "cn-d007-job",
+            "us-d007-ooh"
           ],
           "type": "faq"
         },
@@ -32069,13 +32075,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "path",
@@ -32297,7 +32303,7 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "The 120 fictional project work items and the six-item spot check are editorial exercises.",
+                  "PJ-01 is a fictional exercise written by FermatMind Editorial.",
                   "Six records with three gaps do not derive the whole project's quality rate."
                 ],
                 "evidence_type": "editorial synthesis",
@@ -32562,6 +32568,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Richinfo’s September 9, 2026 PMO posting in Beijing and Guangdong lists milestones, deliverables, change risks, and logs of assigned owners. It illustrates one employer’s duties and entry conditions."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-d007-job",
+                "limitation": "Single employer posting.",
+                "market": "Mainland China",
+                "name": "Nankai University careers portal: Richinfo PMO graduate trainee",
+                "period": "2026-09-09",
+                "publisher": "Nankai University careers portal: Richinfo PMO graduate trainee",
+                "scope": "recruitment_proxy",
+                "url": "https://career.nankai.edu.cn/correcruit/content/id/118395.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS lists a bachelor’s degree as typical and no typical prior experience in a related occupation. Its handbook notes that some positions still require relevant experience."
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-d007-ooh",
+                "limitation": "Typical education and training. Employers set individual criteria.",
+                "market": "United States",
+                "name": "BLS Occupational Outlook Handbook",
+                "period": "2025–2035",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/business-and-financial/project-management-specialists.htm"
               }
             ]
           },
@@ -37259,7 +37295,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit project management specialist work",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37817,14 +37853,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Project management specialists coordinate project scope, schedule, personnel, procurement, budget, and delivery. See the O*NET 13-1082 tasks, 2025 United States wages, the BLS 2025–2035 projection, the Chinese wage gap, and the fictional entry exercises."
+      "text": "Project management specialists track milestones, resources, and changes. Compare PMO duties, U.S. wage data, and a project-change exercise."
     },
     "title": {
       "availability": "available",
       "text": "Project management specialists"
     }
   },
-  "source_content_sha256": "3d55c27be60fd120b359d3cfbb1603ec4d5a574dea7fb59bd5e6f953d584f172",
+  "source_content_sha256": "44c50ed54a8806faab45770a9a3f6063b7ca68cc66c936de8306f2cb9a35f30b",
   "subject": {
     "canonical_slug": "project-management-specialists",
     "name": "Project management specialists",

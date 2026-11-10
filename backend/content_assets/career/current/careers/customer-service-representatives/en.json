@@ -6,7 +6,7 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:employment-2025": {
         "status": "pending_mapping"
@@ -15,7 +15,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:growth-2025": {
         "status": "pending_mapping"
@@ -42,9 +42,15 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:openings-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a22-sh-hotline": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a22-sh-theme": {
         "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
@@ -26066,12 +26072,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain verifiable recruitment or quoted-pay statistics for customer service positions in mainland China; the pay disclosures of individual companies or platforms cannot represent the national level"
+              "A Shanghai 12345 voice-service posting listed CNY 6,500–10,500 a month in gross total income tied to performance, with weekend and holiday rotation. A Shanghai HR bulletin listed CNY 4,000–5,000 a month for English-language theme-park phone inquiries, requiring a junior-college credential and covering bookings and complaints. Both are historical offers for individual jobs."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "a22-sh-hotline",
+            "a22-sh-theme"
           ],
           "type": "prose"
         },
@@ -26164,7 +26171,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The precise wage gap for Chinese customer service is retained; separately, a conditionally matched background of annual average pre-tax industry wages is provided. Private and non-private units are listed separately, and industry averages do not stand in for customer service medians, starting pay, quoted pay or take-home income."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -30923,7 +30930,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Communicate with customers by telephone or in person to provide basic or procedure-based information on routine inquiries about products or services; take inquiries or orders, open and close accounts, and obtain complaint details; record interactions or transactions with customers and note inquiries, complaints, opinions and the actions taken; verify whether customer issues have been resolved through appropriate changes; contact customers to answer inquiries or inform them of claims investigation results and plan adjustments; determine charges, collect deposits or payments and arrange billing; use a computer to fill in contract forms, change address records or issue service disconnection orders; refer unresolved appeals to designated departments; resolve service or billing complaints through exchanges, refunds or bill adjustments; and review insurance terms to determine coverage and recommend services or products as needed.",
+                "answer": "Answer questions, document orders or complaints, resolve issues within policy, and route exceptions to a specialist. Phone, chat and email roles differ in the products and decisions they cover.",
                 "id": "actors.faq.1",
                 "question": "What does the daily work of a customer service representative involve?",
                 "question_key": "career.faq.customer-service-representatives.1",
@@ -30932,9 +30939,9 @@
                 ]
               },
               {
-                "answer": "This occupation centers on taking, recording and resolving customer inquiries and general complaints and does not carry sales targets; management analysts center on organizational process and business analysis; first-line supervisors of non-retail sales workers center on team supervision and performance management; cashiers center on receiving and paying money and settlement; counter and rental clerks center on rental and counter business processing; retail salespersons center on recommending goods and closing sales; insurance sales agents center on sales targets and customer development. Similar titles do not mean duties or authorization can be swapped.",
+                "answer": "Customer service handles issues and follows through. Sales focuses on closing a transaction, while technical support diagnoses and troubleshoots. Ask whether the job includes outbound calls, refund authority, escalation and quality reviews.",
                 "id": "actors.faq.2",
-                "question": "What is the difference between this occupation and adjacent sales, cashiering and counter positions?",
+                "question": "How does customer service differ from sales and technical support?",
                 "question_key": "career.faq.customer-service-representatives.2",
                 "source_refs": [
                   "onet"
@@ -30950,9 +30957,9 @@
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: three types of task — search and information explanation, ticket classification and recording, and reply drafts and scripting — can be partly handled by tools; this page has no occupation-specific adoption or displacement data.",
+                "answer": "Software can retrieve policy articles and draft replies. Representatives still check accounts and policy, verify refund authority and escalate ambiguous or sensitive cases. This is not a measurement of AI adoption or job displacement.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of this occupation is there already evidence of AI-driven change?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.customer-service-representatives.4",
                 "source_refs": [
                   "onet"
@@ -30968,12 +30975,14 @@
                 ]
               },
               {
-                "answer": "In the U.S. 2025 wage data, the median annual wage is 44,770 dollars (21.53 dollars per hour), with percentiles of 31,750 / 36,870 / 44,770 / 51,780 / 63,590 dollars (single-occupation basis 43-4051.00); values broken down by state or area must be looked up on the O*NET local wages page by area and period and cannot be treated as an individual offer; no occupation-level wage figure was obtained for mainland China, and this page treats it as a gap.",
+                "answer": "The May 2025 U.S. median wage was $44,770 per year and $21.53 per hour. A Shanghai 12345 voice-service posting listed CNY 6,500–10,500 a month in gross total income tied to performance, with weekend and holiday rotation. A Shanghai HR bulletin listed CNY 4,000–5,000 a month for English-language theme-park phone inquiries, requiring a junior-college credential and covering bookings and complaints. Both are historical offers for individual jobs.",
                 "id": "actors.faq.6",
                 "question": "What is the typical wage for this occupation, and how should it be compared?",
                 "question_key": "career.faq.customer-service-representatives.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "a22-sh-hotline",
+                  "a22-sh-theme"
                 ]
               },
               {
@@ -31004,12 +31013,12 @@
                 ]
               },
               {
-                "answer": "The O*NET summary and employment trends page (based on BLS 2024—2034 projections) shows about 2,814,000 people in this occupation in 2024, with a projection label of Decline (declining -1% or lower) and about 341,700 openings per year including growth and replacement; an overall projected decline still means many replacement openings, and the work mainly involves seat-based call answering and repetitive handling, which should be verified against local service demand, outsourcing arrangements and automation investment.",
+                "answer": "BLS projects U.S. employment for U.S. SOC 43-4051 to go from about 2,666,000 in 2025 to 2,524,100 in 2035 (−5.3%). It projects about 289,500 openings per year, including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing this occupation now?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.customer-service-representatives.10",
                 "source_refs": [
-                  "bls"
+                  "a22-bls-projections"
                 ]
               }
             ]
@@ -31439,7 +31448,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Supports this occupation's tasks, work context and preparation level.",
                   "Contains no technology adoption or job displacement data."
@@ -31452,7 +31461,7 @@
                 "period": "Page updated in 2026; retrieved 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-4051.00"
+                "url": "https://www.onetonline.org/link/details/43-4051.00"
               },
               {
                 "accessed_at": "2026-09-18",
@@ -31645,6 +31654,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment for U.S. SOC 43-4051 to go from about 2,666,000 in 2025 to 2,524,100 in 2035 (−5.3%). It projects about 289,500 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a22-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Ten voice positions. Secondary vocational school or higher; CNY 6,500–10,500 gross total per month, performance-linked, with weekend and holiday rotations."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a22-sh-hotline",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Shanghai 12345 voice-service representative",
+                "period": "2025-02-06",
+                "publisher": "Shanghai Municipal Government portal (Huangpu notice)",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shanghai.gov.cn/nw17239/20250206/a07f46aa591249cfaa72850fd3cbbb0f.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Yinghuan Network listed five posts at CNY 4,000–5,000 a month, junior college, with ticket inquiries, bookings and complaints."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a22-sh-theme",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "English-language theme park phone inquiries",
+                "period": "2026-09-03",
+                "publisher": "Shanghai Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.sh.gov.cn/dzb/rsj/2026-09-03/aid/03-01.html"
               }
             ]
           },
@@ -34627,7 +34681,7 @@
               "月薪参考": "Industry reference: if the target service outsourcing/call center employer is actually classified under leasing and business services, reference may be made to the National Bureau of Statistics 2025 national urban unit annual average pre-tax wage for that industry: non-private 110162 yuan/year; private 68919 yuan/year. Both figures cover all positions in the industry and are not a customer service wage range or an individual's take-home income."
             },
             {
-              "城市/区间": "Mainland China (recruitment quoted-pay basis)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34639,13 +34693,14 @@
           "china_soc_row": "U.S. occupation code: O*NET-SOC 43-4051.00 (Customer Service Representatives); this page did not obtain comparable occupation-level wage material for China.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a22-sh-hotline",
+            "posting-a22-sh-theme"
           ],
           "sources_note": "Source links are used according to their respective statistical or announcement scopes; when the statistical period, survey population and pay basis differ, cite them separately and do not convert between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect the wages for this occupation?",
             "driver_heading": "How is customer service work arranged around shifts and volume peaks?",
-            "official_heading": "Official statistical basis and gap notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Preparation items and position verification suggestions (editorial compilation, not an education threshold or wage statistics)",
             "scenario_heading": "Which preparation items need to be verified against the target position?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35319,7 +35374,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/management-analysts",
+            "target_href": "/en/career/jobs/management-analysts",
             "target_slug": "management-analysts",
             "target_title": "Management Analysts (adjacent occupation)",
             "transition_distance": {
@@ -35342,7 +35397,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/first-line-supervisors-of-non-retail-sales-workers",
+            "target_href": "/en/career/jobs/first-line-supervisors-of-non-retail-sales-workers",
             "target_slug": "first-line-supervisors-of-non-retail-sales-workers",
             "target_title": "First-Line Supervisors of Non-Retail Sales Workers (adjacent occupation)",
             "transition_distance": {
@@ -35365,7 +35420,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cashiers",
+            "target_href": "/en/career/jobs/cashiers",
             "target_slug": "cashiers",
             "target_title": "Cashiers (adjacent occupation)",
             "transition_distance": {
@@ -35388,7 +35443,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/counter-and-rental-clerks",
+            "target_href": "/en/career/jobs/counter-and-rental-clerks",
             "target_slug": "counter-and-rental-clerks",
             "target_title": "Counter and Rental Clerks (adjacent occupation)",
             "transition_distance": {
@@ -35411,7 +35466,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/insurance-sales-agents",
+            "target_href": "/en/career/jobs/insurance-sales-agents",
             "target_slug": "insurance-sales-agents",
             "target_title": "Insurance Sales Agents (adjacent occupation)",
             "transition_distance": {
@@ -35434,7 +35489,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/retail-salespersons",
+            "target_href": "/en/career/jobs/retail-salespersons",
             "target_slug": "retail-salespersons",
             "target_title": "Retail Salespersons (adjacent occupation)",
             "transition_distance": {
@@ -35457,7 +35512,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/tellers",
+            "target_href": "/en/career/jobs/tellers",
             "target_slug": "tellers",
             "target_title": "Tellers (adjacent occupation)",
             "transition_distance": {
@@ -35480,7 +35535,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/receptionists-and-information-clerks",
+            "target_href": "/en/career/jobs/receptionists-and-information-clerks",
             "target_slug": "receptionists-and-information-clerks",
             "target_title": "Receptionists and Information Clerks (adjacent occupation)",
             "transition_distance": {
@@ -35568,7 +35623,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Learn about my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35617,7 +35672,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Learn about my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35666,7 +35721,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Learn about my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35715,7 +35770,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Learn about my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35764,7 +35819,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Learn about my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35813,7 +35868,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Learn about my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36435,7 +36490,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of customer service representatives",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36549,11 +36604,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -36966,39 +37021,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 2,814,000 people (2024, single-occupation basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "2,666,000 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistics)",
-        "occupation_scope": "43-4051.00; the 2024 employment figure comes from the O*NET summary page (based on BLS 2024—2034 projections)",
-        "period": "2024 base year; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4051",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a22-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Decline of -1% or lower (2024—2034, label \"Decline\")",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "−5.3%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "43-4051.00; projection label Decline (-1% or lower), a change in the total over the projection period, not an individual probability of being hired",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4051",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a22-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 341,700 (annual average 2024—2034, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "289,500 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Annual average job openings (including growth and replacement)",
-        "occupation_scope": "43-4051.00; openings are an annual average for 2024—2034, including positions arising from growth and replacement; even with an overall projected decline there will be many replacement openings",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4051",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a22-bls-projections"
         ]
       },
       {
@@ -37050,39 +37105,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2,666,000 people (United States, 2025 base year)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "2,666,000 jobs (2025)",
         "fact_id": "employment-2025",
         "market": "United States",
         "measure": "Employment",
-        "occupation_scope": "Customer Service Representatives, SOC 43-4051; BLS OOH 2025—2035 employment projections",
-        "period": "2025 base year",
+        "occupation_scope": "U.S. SOC 43-4051",
+        "period": "2025",
         "source_refs": [
-          "bls-ooh-2025"
+          "a22-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Decline of 5% (United States, 2025—2035 total employment projection, not attributed to AI)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "−5.3%",
         "fact_id": "growth-2025",
         "market": "United States",
         "measure": "Projected percentage change in employment",
-        "occupation_scope": "Customer Service Representatives, SOC 43-4051; BLS OOH 2025—2035 employment projections",
-        "period": "2025—2035 projection period",
+        "occupation_scope": "U.S. SOC 43-4051",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-ooh-2025"
+          "a22-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "289,500 per year (United States, annual average replacement openings 2025—2035)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "289,500 annually (including replacements)",
         "fact_id": "openings-2025",
         "market": "United States",
         "measure": "Annual average job openings",
-        "occupation_scope": "Customer Service Representatives, SOC 43-4051; BLS OOH 2025—2035 employment projections",
-        "period": "2025—2035 projection period",
+        "occupation_scope": "U.S. SOC 43-4051",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-ooh-2025"
+          "a22-bls-projections"
         ]
       },
       {
@@ -37095,6 +37150,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Ten voice positions. Secondary vocational school or higher; CNY 6,500–10,500 gross total per month, performance-linked, with weekend and holiday rotations.",
+        "fact_id": "posting-a22-sh-hotline",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Shanghai 12345 voice-service representative",
+        "period": "2025-02-06",
+        "source_refs": [
+          "a22-sh-hotline"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Yinghuan Network listed five posts at CNY 4,000–5,000 a month, junior college, with ticket inquiries, bookings and complaints.",
+        "fact_id": "posting-a22-sh-theme",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "English-language theme park phone inquiries",
+        "period": "2026-09-03",
+        "source_refs": [
+          "a22-sh-theme"
         ]
       }
     ]
@@ -37122,19 +37201,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, declining -1% or lower)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, about 2,814,000 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. annual average job openings (2024—2034, about 341,700, including growth and replacement)"
+        "label": "U.S. projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37148,17 +37227,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Customer Service Representatives (O*NET-SOC 43-4051.00) communicate with customers by telephone or in person to handle routine inquiries and general complaints: covering taking inquiries and orders, opening and closing accounts, recording interaction and complaint details, verifying whether issues have been resolved, contacting customers to answer inquiries or inform them of outcomes, determining charges and collecting payments and arranging billing, completing contracts and change records, referring unresolved appeals, exchanges, refunds or bill adjustments, reviewing insurance terms to determine coverage and recommending services, and more; includes the U.S. median annual wage of 44,770 dollars in 2025 (21.53 dollars/hour), about 2,814,000 people employed in 2024, a projected employment decline for 2024—2034 (-1% or lower), an estimated annual average of about 341,700 openings including growth and replacement, industry employment concentrated in finance and insurance (19%), retail trade (17%) and administrative and support services (14%), the interest code CES, the occupation-level wage gap for mainland China, and control points for verifying order and account information, complaint determination and handling beyond authority, customer communication and record-keeping."
+      "text": "See what customer service representatives handle. Compare two Shanghai phone-service postings, escalation duties, and U.S. wages and employment."
     },
     "title": {
       "availability": "available",
       "text": "Customer Service Representatives"
     }
   },
-  "source_content_sha256": "95403211e7f0ae2635b82de2faec897cd6c1a408edc2ba35b5e5cd8695e05d46",
+  "source_content_sha256": "1499ef32ee9ddd3740fe9291f200356cddf1238d5a869ab05c6b245e989942da",
   "subject": {
     "canonical_slug": "customer-service-representatives",
     "name": "Customer Service Representatives",
-    "summary": "In the United States, customer service representatives correspond to O*NET-SOC 43-4051.00 (Customer Service Representatives), communicating with customers by telephone or in person to provide basic or procedure-based information on routine inquiries about products or services, and also handling and resolving general complaints: taking inquiries or orders and opening and closing accounts, obtaining complaint details, recording interactions or transactions with customers and noting inquiries, complaints, opinions and the actions taken, verifying whether customer issues have been resolved through appropriate changes, contacting customers to answer inquiries or inform them of claims investigation results and plan adjustments, determining charges for requested services, collecting deposits or payments and arranging billing, using a computer to fill in contract forms, change address records or issue service disconnection orders, referring unresolved customer appeals to designated departments for further investigation, resolving service or billing complaints through exchanges, refunds or bill adjustments, reviewing insurance terms to determine whether a loss falls within coverage, and recommending new services or products as needed. The preparation level for this occupation is Job Zone 1-2 (typically requiring a high school diploma or equivalent, SVP below 6.0); the duties do not include positions whose main duties are installation, sales, repair and technical support. Comparable positions in China are customer service seats, call center specialists, and after-sales intake and customer relationship positions; their duties and authorization basis do not correspond one-to-one with this U.S. occupational subcategory and cannot be interchanged."
+    "summary": "Answer questions, document orders or complaints, resolve issues within policy, and route exceptions to a specialist. Phone, chat and email roles differ in the products and decisions they cover."
   }
 }

@@ -1298,6 +1298,9 @@
       "item:patient-representatives.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:patient-representatives.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:patient-representatives.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31339,6 +31342,18 @@
             "privacy"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。记录同时写了费用解释与治疗方案疑问。将两项分别交给合适的服务或临床角色，写出可复核的跟进记录。"
+            ]
+          },
+          "id": "patient-representatives.path.work-sample-draft-20261110.1",
+          "title": "把患者问题交到合适团队",
+          "type": "notice"
         }
       ]
     },
@@ -37838,6 +37853,13 @@
         "id": "patient-representatives.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "patient-representatives.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38257,7 +38279,7 @@
       "text": "患者代表：工作内容、工资口径与服务协调"
     }
   },
-  "source_content_sha256": "84beae5a9403a8483375f81a9fb6d52b1dc6c044362a2efba0dcf09999d7788a",
+  "source_content_sha256": "de143d166b7edef62b725cbe6a8f4d079443938bd409241fc1b9223ba3a80e70",
   "subject": {
     "canonical_slug": "patient-representatives",
     "name": "患者代表",

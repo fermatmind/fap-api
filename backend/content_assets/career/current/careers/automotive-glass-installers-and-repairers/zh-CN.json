@@ -36,13 +36,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -63,7 +63,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -1542,7 +1542,7 @@
         "status": "pending_mapping"
       },
       "item:automotive-glass-installers-and-repairers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:automotive-glass-installers-and-repairers.sources.source-card.1": {
         "status": "mapped"
@@ -21746,7 +21746,7 @@
             "data",
             "entries",
             {
-              "id": "health"
+              "id": "mot-repair-2023"
             },
             "accessed_at"
           ],
@@ -21761,7 +21761,7 @@
             "data",
             "entries",
             {
-              "id": "health"
+              "id": "mot-repair-2023"
             },
             "details",
             0
@@ -21777,7 +21777,7 @@
             "data",
             "entries",
             {
-              "id": "health"
+              "id": "mot-repair-2023"
             },
             "details",
             1
@@ -21793,7 +21793,7 @@
             "data",
             "entries",
             {
-              "id": "health"
+              "id": "mot-repair-2023"
             },
             "evidence_type"
           ],
@@ -21808,7 +21808,7 @@
             "data",
             "entries",
             {
-              "id": "health"
+              "id": "mot-repair-2023"
             },
             "limitation"
           ],
@@ -21836,7 +21836,7 @@
             "data",
             "entries",
             {
-              "id": "health"
+              "id": "mot-repair-2023"
             },
             "name"
           ],
@@ -21851,7 +21851,7 @@
             "data",
             "entries",
             {
-              "id": "health"
+              "id": "mot-repair-2023"
             },
             "period"
           ],
@@ -21866,7 +21866,7 @@
             "data",
             "entries",
             {
-              "id": "health"
+              "id": "mot-repair-2023"
             },
             "publisher"
           ],
@@ -21881,7 +21881,7 @@
             "data",
             "entries",
             {
-              "id": "health"
+              "id": "mot-repair-2023"
             },
             "scope"
           ],
@@ -21896,7 +21896,7 @@
             "data",
             "entries",
             {
-              "id": "health"
+              "id": "mot-repair-2023"
             },
             "url"
           ],
@@ -23166,12 +23166,11 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：汽车玻璃安装工不是「汽车维修技师」，而是更换或修复机动车挡风玻璃与车窗玻璃的作业岗位：拆下破损玻璃、清理与处理粘接面、涂布底涂与聚氨酯密封胶、安装并复位饰条与雨刮等配件、按温度湿度等待固化并检验密封与外观；只想拿现成件、不愿为粘接面处理与固化条件负责的人不适合。"
+              "到 09 做 GS-68，先交两版纸面工单。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23181,7 +23180,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你能按要求选用工具与安全防护与配件，愿意按规程清理与处理粘接面、控制底涂与密封胶的均匀度与厚度，愿意按温度与湿度判断固化时间并逐项复核配件复位，能在玻璃型号或粘接面状态不明时停下来核实。"
+              "如果你喜欢核部件编号、看得出缺证、愿意在交接前记录限制，可以先试做玻璃工单练习。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.quick-decision.fit-decision-checklist.2",
@@ -23195,13 +23194,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停投入的条件：你还没有在任何有监督的条件下完成过一次完整的拆装—清理—粘接—复位—检验闭环，或只能靠「喜欢车」说明兴趣；也不要把会开车或会拆装零件当作可以独立处理结构件玻璃与安全件复位的证明。涉及玻璃安全性能、车辆结构与气囊相关部位的作业必须按适用标准与机构流程执行并留有可追溯的依据；本页不提供安装、维修或现场作业指令。"
+              "维修、校准和放行先核对实际分工。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
+            "gs68-editor",
             "onet"
           ],
           "type": "prose"
@@ -23211,12 +23209,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历与权限必须分开核对：O*NET 把 49-3022.00 列为 Job Zone 1–2（SVP 低于 6.0），页面公布的学历构成中 90% 为要求高中文凭或同等学历、9% 为要求低于高中文凭、1% 为要求高中后证书；BLS 职业展望手册把车身与玻璃维修工章的典型入门学历列为高中文凭或同等学历，并要求无相关工作经验与无在职培训，同时指出行业认证正变得越来越重要。中国大陆侧「汽车玻璃安装工」未在《职业分类大典（2022 年版）》中单列，相关作业归入机动车维修的三类专项维修项目（含汽车玻璃安装及修复）；安全玻璃属强制性国家标准管理的产品。学历、厂商或行业认证、机构内部上岗资格与作业授权、特种作业操作证与产品认证许可是不同状态，须按雇主、岗位与所在地逐项核验。"
+              "BLS 表 1.2 对美国 49-3022 的典型分类是高中或同等学历、通常无需相关工作经验和中等期限在岗培训。O*NET 问卷询问新聘所需学历，90% 的回答为高中或同等，9% 低于高中，1% 为高中后证书。中国大陆可向雇主核对技能培训、师傅带教及岗位授权。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "ep-table",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -23226,12 +23225,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个把破损玻璃安全更换或修复并对粘接与固化质量负责的作业岗位，核心是拆装与清理、粘接面处理与密封、配件复位与检验、以及按规程记录与交接，而不是对车的兴趣或会开车的经验。"
+              "如果你喜欢核部件编号、看得出缺证、愿意在交接前记录限制，可以先试做玻璃工单练习。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
+            "gs68-editor",
             "onet"
           ],
           "type": "prose"
@@ -23249,13 +23248,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "汽车玻璃安装工的工作可分三类：拆装与更换（从车辆上拆下破损的挡风玻璃或车窗玻璃，用工具拆下固定玻璃的框上螺钉；按车型从库存取得挡风玻璃或车窗并检查缺陷后安装；在拼焊面上贴泡沫隔条；在玻璃或框边缘装橡胶导槽条以防漏水或异响；更换或调整电动或手动升降窗机构；按样板切割平板安全玻璃或做精密放样与玻璃切割以定制替换窗，并把切边或不平整边缘靠在自动砂带上修形磨平）；粘接面处理与密封（清除破损区域的所有污物、异物与松散玻璃，沿挡风玻璃或窗边缘涂底涂并晾干；在拼焊面划痕处涂底涂并晾干；检查并清除破损区域的水汽或污染并保持干燥直至修复完成；沿每个拼焊面周边涂布一道聚氨酯密封胶并把多余胶整理到均匀厚度；按温度与湿度给用聚氨酯安装的玻璃留足固化时间；在温度极端时对玻璃降温或加温）；复位与检验（更换或复位先前拆下的饰条、卡扣、雨刮器等零件；安装或修复安全玻璃及相关材料，如后窗玻璃加热元件；按作业要求选用合适的工具、安全防护与配件）。三类任务都以玻璃型号、粘接面状态或固化条件不明时停工核实为前提。"
+              "汽车玻璃安装维修工核对车辆与玻璃规格、评估修复还是更换，并记录装配和检验。带摄像头等配置的车辆，还要核对是否另有校准或交接要求。美国细项 49-3022 与车身钣喷分列。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.1",
           "source_refs": [
             "onet",
-            "onet"
+            "mot-repair-2023"
           ],
           "type": "prose"
         },
@@ -23289,7 +23288,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -23299,7 +23297,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜98% 每天佩戴常规防护或安全装备，95% 每天需要面对面讨论，89% 每天电话交谈，84% 每天在户外暴露于各种天气，84% 每天在封闭车辆内或操作封闭设备，79% 每天面临时间压力，23% 每天暴露于极热或极冷温度，59%每周但非每日处于过亮或照明不足的条件，38%每月但非每周暴露于分散注意或不适的噪音。\n主要装备与工具｜玻璃吸盘与吊装工具、切割与修形工具（自动砂带等）、底涂与聚氨酯密封胶及施胶工具、饰条与卡扣拆装工具、升降窗机构拆装工具、个人防护（手套、护目镜、防割装备）。\n任务节奏｜66% 的工作周为 40 小时；40% 有超过一半时间站立，26% 有超过一半时间用手处理或控制物体与工具，27% 有超过一半时间做重复动作，20% 有少于一半时间弯腰或扭动身体。\n协作对象｜与车主与前台接待、车间主管、配件与库存管理人员协作；43% 认为与外部客户或公众打交道非常重要，36% 认为与工作组或团队合作重要，29% 与他人的接触占大部分时间。\n竞争与压力｜29% 认为错误的后果非常严重，33% 认为决策对同事或公司的结果非常重要，46% 认为决定自由度有限、40% 对任务与优先级与目标有一定自由，25% 从不自行决策。\n合规与安全｜拆装与粘接作业须符合适用的安全与环保要求；GB9656-2021官方元数据状态现行，2021-04-30发布、2023-01-01实施，是机动车玻璃强制性标准；本轮未取得标准全文，不能凭目录说明宣称已核全部指标或作为安装步骤。维修经营者安全教育和废弃物管理见维修规定第23/24条；具体工具、化学品SDS、停工恢复程序须另核。 中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求维修电子档案并上传国家汽车维修健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。\n记录与复盘｜车型与玻璃型号、损伤判断、粘接面处理与固化条件、配件复位与检验结果需要可追溯；13% 认为精确或准确相当重要，27% 认为重复相同任务重要。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能列出沟通表达（Speaking），可迁移技能列出安装（Installation）与设备选择（Equipment Selection）；知识以客户与个人服务、机械、英语、行政与管理为主；能力包含近距离视力、手工灵巧性、多肢协调、静态力量、手臂稳定与控制精度等（详细资料公布Importance；Speaking50、Installation53、Equipment Selection50，知识客户服务77、机械68、英语59、行政管理50）。\n准入与授权｜学历不等于作业授权，行业或厂商认证也不等于可以在任何场所处理结构件玻璃与安全件复位；须按机构流程与适用标准执行。\n行业与雇主｜O*NET当前宽行业分布为其他服务业（公共管理除外）80%、其他行业20%，来源年2025；BLS OOH按本职业细行业列汽车车身、涂装、内饰与玻璃维修77%、自雇10%、建筑2%。两种分类层级不同，不把20%全当零售或把整章车身数据当本职业。 移动服务在OOH明确提及；品牌、连锁、事故车等作为编辑比较场景，具体招聘未核。\n学历培训与许可｜O*NET问卷问新聘人员需何种学历：90%回答高中或同等、9%低于高中、1%高中后证书，并非在岗学历构成。Zone1—2/SVP<6.0是准备程度描述，部分少经验、部分数月至一年，不是所有岗位固定年限。BLS EP本职业典型高中、相关经验None、适度期限在职培训；None不是禁止已有经验，培训不是无。OOH指出玻璃工基础技能可学6个月以上、完全独立通常需培训至1年；车身工2—3年不能移用。 美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。\n安全时间与腐蚀｜AGSC说明最低驶离时间取决于胶粘剂类型品牌、当时大气条件等，车辆应静置至该时间结束；腐蚀可能妨碍玻璃与车身粘接，发现影响安装的腐蚀需先处理，必要时转交专业人员。它是北美行业安全说明，非本轮取得的各车型完整规程或中国法规。"
+              "工作环境｜98% 每天佩戴常规防护或安全装备，95% 每天需要面对面讨论，89% 每天电话交谈，84% 每天在户外暴露于各种天气，84% 每天在封闭车辆内或操作封闭设备，79% 每天面临时间压力，23% 每天暴露于极热或极冷温度，59%每周但非每日处于过亮或照明不足的条件，38%每月但非每周暴露于分散注意或不适的噪音。\n主要装备与工具｜玻璃吸盘与吊装工具、切割与修形工具（自动砂带等）、底涂与聚氨酯密封胶及施胶工具、饰条与卡扣拆装工具、升降窗机构拆装工具、个人防护（手套、护目镜、防割装备）。\n任务节奏｜66% 的工作周为 40 小时；40% 有超过一半时间站立，26% 有超过一半时间用手处理或控制物体与工具，27% 有超过一半时间做重复动作，20% 有少于一半时间弯腰或扭动身体。\n协作对象｜与车主与前台接待、车间主管、配件与库存管理人员协作；43% 认为与外部客户或公众打交道非常重要，36% 认为与工作组或团队合作重要，29% 与他人的接触占大部分时间。\n竞争与压力｜29% 认为错误的后果非常严重，33% 认为决策对同事或公司的结果非常重要，46% 认为决定自由度有限、40% 对任务与优先级与目标有一定自由，25% 从不自行决策。\n合规与安全｜拆装与粘接作业须符合适用的安全与环保要求；GB9656-2021官方元数据状态现行，2021-04-30发布、2023-01-01实施，是机动车玻璃强制性标准；本轮未取得标准全文，不能凭目录说明宣称已核全部指标或作为安装步骤。维修经营者安全教育和废弃物管理见维修规定第23/24条；具体工具、化学品SDS、停工恢复程序须另核。 中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求经营者建立电子化维修档案，并按规定如实填报、及时上传维修电子数据记录至汽车维修电子健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。\n记录与复盘｜车型与玻璃型号、损伤判断、粘接面处理与固化条件、配件复位与检验结果需要可追溯；13% 认为精确或准确相当重要，27% 认为重复相同任务重要。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能列出沟通表达（Speaking），可迁移技能列出安装（Installation）与设备选择（Equipment Selection）；知识以客户与个人服务、机械、英语、行政与管理为主；能力包含近距离视力、手工灵巧性、多肢协调、静态力量、手臂稳定与控制精度等（详细资料公布Importance；Speaking50、Installation53、Equipment Selection50，知识客户服务77、机械68、英语59、行政管理50）。\n准入与授权｜学历不等于作业授权，行业或厂商认证也不等于可以在任何场所处理结构件玻璃与安全件复位；须按机构流程与适用标准执行。\n行业与雇主｜O*NET当前宽行业分布为其他服务业（公共管理除外）80%、其他行业20%，行业子表未单列统计年份；BLS OOH按本职业细行业列汽车车身、涂装、内饰与玻璃维修77%、自雇10%、零售业5%。两种分类层级不同，不把20%全当零售或把整章车身数据当本职业。 移动服务在OOH明确提及；品牌、连锁、事故车等作为编辑比较场景，具体招聘未核。\n学历培训与许可｜O*NET问卷问新聘人员需何种学历：90%回答高中或同等、9%低于高中、1%高中后证书，并非在岗学历构成。Zone1—2/SVP<6.0是准备程度描述，部分少经验、部分数月至一年，不是所有岗位固定年限。BLS EP本职业典型高中、相关经验None、适度期限在职培训；None不是禁止已有经验，培训不是无。OOH指出玻璃工基础技能最快约6个月可学会，达到独立作业可能需要长达1年的培训；车身工2—3年不能移用。 美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。\n安全时间与腐蚀｜AGSC说明最低驶离时间取决于胶粘剂类型品牌、当时大气条件等，车辆应静置至该时间结束；腐蚀可能妨碍玻璃与车身粘接，发现影响安装的腐蚀需先处理，必要时转交专业人员。它是北美行业安全说明，非本轮取得的各车型完整规程或中国法规。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.profile.work-context-block.1",
@@ -23326,7 +23324,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.2",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23357,7 +23354,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23387,7 +23383,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23397,7 +23392,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（OOH/O*NET取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。"
+              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（BLS 职业展望手册取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.profile.onet-structured-fields-block.4",
@@ -23418,7 +23413,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.5",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23428,14 +23422,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET当前宽行业分布为其他服务业（公共管理除外）80%、其他行业20%，来源年2025；BLS OOH按本职业细行业列汽车车身、涂装、内饰与玻璃维修77%、自雇10%、建筑2%。两种分类层级不同，不把20%全当零售或把整章车身数据当本职业。 O*NET软件表4类：维修记录软件、ERP类Workday、操作系统Microsoft Windows、项目管理类估价软件；2项Hot Technology为Windows与Workday。热门数据来自2025美国职业关联唯一招聘，出现比例均Not available，不填零、不证明中国岗位普遍要求、实际使用率或生成AI部署。"
+              "O*NET 49-3022.00 行业子表列其他服务业（公共行政除外）80%、其他行业（含零售）20%。子表未单列统计年份。 职业展望手册另列更细行业，不能把两张表逐行对照。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.profile.onet-structured-fields-block.5",
           "source_refs": [
             "r2-pay-2",
-            "hr",
-            "census"
+            "census",
+            "hr"
           ],
           "type": "prose"
         },
@@ -23449,7 +23443,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23464,8 +23457,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23480,7 +23471,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23495,7 +23485,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23510,7 +23499,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23525,7 +23513,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23540,8 +23527,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23556,7 +23541,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23571,7 +23555,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23586,7 +23569,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23601,7 +23583,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23616,7 +23597,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23631,7 +23611,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23646,7 +23625,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23656,12 +23634,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 49-3022.00 列为 Job Zone 1–2（SVP 低于 6.0），通常需要高中文凭或同等学历，某些职业可能不需先前经验，工作培训从几天到一年；页面公布的学历构成中 90% 为要求高中文凭或同等学历、9% 为要求低于高中文凭、1% 为要求高中后证书。BLS 职业展望手册把该章的典型入门学历列为高中文凭或同等学历，并要求无相关工作经验与无在职培训，同时指出多数雇主偏好完成过车身或玻璃修复培训的人，且行业认证正变得越来越重要。O*NET 另列出注册学徒职位「Glass Installer (Auto Serv)」与两项行业认证。中国大陆侧以机动车维修相关职业技能培训与师傅带教为主，具体要求由用人单位规定。"
+              "BLS 表 1.2 对美国 49-3022 的典型分类是高中或同等学历、通常无需相关工作经验和中等期限在岗培训。O*NET 问卷询问新聘所需学历，90% 的回答为高中或同等，9% 低于高中，1% 为高中后证书。中国大陆可向雇主核对技能培训、师傅带教及岗位授权。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
+            "ep-table",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -23676,7 +23655,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23691,7 +23669,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23706,7 +23683,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23735,7 +23711,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23759,12 +23734,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧以高中文凭或同等学历为主（O*NET 页面公布的学历构成中 90% 为要求高中文凭或同等学历），多数雇主偏好完成过车身或玻璃修复培训的人，并设有注册学徒职位；中国大陆以机动车维修相关职业技能培训与师傅带教为主，具体学历要求由用人单位规定。"
+              "BLS 表 1.2 对美国 49-3022 的典型分类是高中或同等学历、通常无需相关工作经验和中等期限在岗培训。O*NET 问卷询问新聘所需学历，90% 的回答为高中或同等，9% 低于高中，1% 为高中后证书。中国大陆可向雇主核对技能培训、师傅带教及岗位授权。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
+            "ep-table",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -23793,7 +23769,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23817,12 +23792,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "拆装作业须符合适用的安全要求（玻璃破碎与割伤防护、举升与支撑与高处作业防护、手持与电动工具使用、粘接材料与溶剂的通风与个人防护、废弃物处理）。O*NET 工作情境显示98% 每天佩戴常规防护或安全装备、84% 每天在户外暴露于各种天气、84% 每天在封闭车辆内或操作封闭设备、26% 每月一次以上接触危险设备、15% 每月一次以上暴露于轻微烧伤、割伤、咬伤或蜇伤；《机动车玻璃安全技术规范》（GB 9656-2021）对机动车玻璃的视野安全、强度安全、破坏安全与环境耐久性提出强制要求。本页不构成安装、维修或现场作业指令。"
+              "玻璃破损、搬运和粘接材料各有安全条件；入职前确认防护、受训范围和谁能验收。涉及摄像头的玻璃还需核对车型资料及校准交接。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.30",
           "source_refs": [
-            "onet",
+            "fuyao-yidao-service",
+            "mot-repair-2023",
             "onet"
           ],
           "type": "prose"
@@ -23837,7 +23813,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23852,7 +23827,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23867,7 +23841,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23882,7 +23855,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23934,10 +23906,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -23952,8 +23920,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23968,10 +23934,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23986,7 +23948,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24001,7 +23962,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24016,7 +23976,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24031,7 +23990,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24060,7 +24018,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24075,7 +24032,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24090,7 +24046,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24119,7 +24074,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.19",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24134,7 +24088,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24149,7 +24102,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24178,7 +24130,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24193,7 +24144,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24208,7 +24158,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24237,7 +24186,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24252,7 +24200,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24267,7 +24214,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24296,7 +24242,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24311,7 +24256,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24326,7 +24270,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24427,22 +24370,22 @@
                 "url": "https://www.onetonline.org/link/details/49-3022.00"
               },
               {
-                "entity": "BLS 职业展望手册：Automotive Body and Glass Repairers",
+                "entity": "O*NET 招聘工具",
                 "id": "link-10",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/automotive-body-and-glass-repairers.htm"
+                "url": "https://www.onetonline.org/link/hot_tech/49-3022.00"
               },
               {
-                "entity": "BLS 职业展望手册：Automotive Body and Glass Repairers（就业与预测）",
+                "entity": "BLS 表 1.2：就业和预测",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/automotive-body-and-glass-repairers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
+                "entity": "O*NET 汽车玻璃安装维修行业子表",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.onetonline.org/link/industry/49-3022.00"
               },
               {
                 "entity": "O*NET 49-3022.00 职业摘要",
@@ -24490,13 +24433,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -24511,7 +24447,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24526,7 +24461,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24541,7 +24475,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24556,7 +24489,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24571,7 +24503,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24581,7 +24512,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议核工具、配件和资料来源、数据权限、复核及实际人员分工。中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求维修电子档案并上传国家汽车维修健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。"
+              "编辑建议核工具、配件和资料来源、数据权限、复核及实际人员分工。中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求经营者建立电子化维修档案，并按规定如实填报、及时上传维修电子数据记录至汽车维修电子健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.15",
@@ -24600,8 +24531,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.16",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24616,8 +24545,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24627,14 +24554,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得本职业生成式AI采用率、提效、整体替代或就业因果测量。查询、排程、记录与估价是编辑试验候选；职业软件表和任务定义不证明生成AI已部署，也不证明永不替代。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "本轮未取得本职业生成式AI采用率、提效、整体替代或就业因果测量。查询、排程、记录与估价是编辑试验候选；职业软件表和任务定义不证明生成AI已部署，也不证明永不替代。 AI 任务影响估算 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24677,7 +24601,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24692,7 +24615,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24773,7 +24695,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET当前宽行业分布为其他服务业（公共管理除外）80%、其他行业20%，来源年2025；BLS OOH按本职业细行业列汽车车身、涂装、内饰与玻璃维修77%、自雇10%、建筑2%。两种分类层级不同，不把20%全当零售或把整章车身数据当本职业。"
+              "O*NET 49-3022.00 行业子表列其他服务业（公共行政除外）80%、其他行业（含零售）20%。子表未单列统计年份。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.28",
@@ -24851,7 +24773,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24866,7 +24787,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24881,7 +24801,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24896,7 +24815,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24911,7 +24829,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24926,7 +24843,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24941,7 +24857,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25148,11 +25063,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 49-3022.00 职业摘要（就业与预测字段）"
+              "BLS 表 1.2：49-3022 就业与增长预测"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.54",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -25178,7 +25094,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（OOH/O*NET取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。 OOH整章另为185,800人、4%、净增7,400、年均13,900，包含车身和玻璃两职业，不混用。"
+              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（BLS 职业展望手册取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。 OOH整章另为185,800人、4%、净增7,400、年均13,900，包含车身和玻璃两职业，不混用。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.56",
@@ -25236,7 +25152,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET当前宽行业分布为其他服务业（公共管理除外）80%、其他行业20%，来源年2025；BLS OOH按本职业细行业列汽车车身、涂装、内饰与玻璃维修77%、自雇10%、建筑2%。两种分类层级不同，不把20%全当零售或把整章车身数据当本职业。"
+              "O*NET 49-3022.00 行业子表列其他服务业（公共行政除外）80%、其他行业（含零售）20%。子表未单列统计年份。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.60",
@@ -25256,7 +25172,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25271,7 +25186,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25281,7 +25195,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（OOH/O*NET取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。 预测未分离生成AI效应，不把暴露等同减员。"
+              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（BLS 职业展望手册取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。 预测未分离生成AI效应，不把暴露等同减员。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.63",
@@ -25302,7 +25216,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25317,7 +25230,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25347,7 +25259,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25362,7 +25273,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25386,7 +25296,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（OOH/O*NET取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。"
+              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（BLS 职业展望手册取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.70",
@@ -25407,7 +25317,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25422,7 +25331,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25467,7 +25375,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25482,7 +25389,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25497,7 +25403,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25512,7 +25417,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.78",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25527,7 +25431,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.79",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25542,7 +25445,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25557,7 +25459,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25572,7 +25473,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.82",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25605,7 +25505,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.84",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25620,7 +25519,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25635,7 +25533,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.86",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25728,7 +25625,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.92",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25799,7 +25695,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25856,7 +25751,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25913,7 +25807,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.105",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25970,7 +25863,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26027,7 +25919,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26140,7 +26031,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26155,7 +26045,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26371,11 +26260,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：本轮未取得中国精确职业工资分布，行业及岗位类别代理分别展示。"
+              "大陆未见与 49-3022 完全对应的全国职业工资分布。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
+            "nbs",
             "onet"
           ],
           "type": "prose"
@@ -26385,11 +26275,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "缺口在本页以「证据不足」标记，行业代理由居民服务、修理和其他服务业平均工资承担、岗位类别代理由规模以上企业社会生产服务和生活服务人员平均工资承担，两者分别展示、不合并为薪资区间；这不是零收入，而是证据无法支持该精度。"
+              "福耀配件汽车玻璃官网介绍其独立服务合作方易道大咖，将玻璃更换、修复和 ADAS 校准列为服务。AGTSS 是该合作方的培训考核体系，不能推出所有雇主的要求或个人法定执业资格；该页也未发布岗位薪资。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
+            "fuyao-yidao-service",
             "onet"
           ],
           "type": "prose"
@@ -26404,7 +26295,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26434,7 +26324,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26449,7 +26338,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26464,7 +26352,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26479,7 +26366,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26494,7 +26380,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26509,7 +26394,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26524,7 +26408,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26539,7 +26422,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26549,7 +26431,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求维修电子档案并上传国家汽车维修健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。"
+              "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求经营者建立电子化维修档案，并按规定如实填报、及时上传维修电子数据记录至汽车维修电子健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.33",
@@ -26571,7 +26453,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26586,7 +26467,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26617,7 +26497,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26632,7 +26511,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26647,7 +26525,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26662,7 +26539,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26677,7 +26553,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26692,7 +26567,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26721,7 +26595,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26736,7 +26609,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26751,7 +26623,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26780,7 +26651,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26874,7 +26744,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2022职业大典PDF276页的4-12-01-01汽车维修工明确包含汽车玻璃维修工工种，任务涵盖车身等系统零件检查调整更换修理、设备维护、工艺规范和维修记录。相关宽职业有分类，但不等于与美国49-3022.00精确互认、工资分布或个人许可。 中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求维修电子档案并上传国家汽车维修健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。"
+              "2022职业大典PDF276页的4-12-01-01汽车维修工明确包含汽车玻璃维修工工种，任务涵盖车身等系统零件检查调整更换修理、设备维护、工艺规范和维修记录。相关宽职业有分类，但不等于与美国49-3022.00精确互认、工资分布或个人许可。 中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求经营者建立电子化维修档案，并按规定如实填报、及时上传维修电子数据记录至汽车维修电子健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.55",
@@ -26904,7 +26774,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "5.7%（OOH/O*NET取整6%；2025—2035，美国）"
+              "5.7%（BLS 职业展望手册取整6%；2025—2035，美国）"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.china-salary.career-snapshot-primary-locale.58",
@@ -26945,8 +26815,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27115,7 +26983,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（OOH/O*NET取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。 OOH车身与玻璃整章185,800人不能当玻璃工人数。"
+              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（BLS 职业展望手册取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。 OOH车身与玻璃整章185,800人不能当玻璃工人数。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.20",
@@ -27131,7 +26999,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "5.7%（2025—2035；OOH/O*NET取整6%）"
+              "5.7%（2025—2035；BLS 职业展望手册取整6%）"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.21",
@@ -27147,7 +27015,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（OOH/O*NET取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。"
+              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（BLS 职业展望手册取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.22",
@@ -27216,7 +27084,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27306,7 +27173,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27316,7 +27182,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "5.7%（OOH/O*NET取整6%，2025—2035）"
+              "5.7%（BLS 职业展望手册取整6%，2025—2035）"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.33",
@@ -27347,7 +27213,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "47,650美元/年（2025年5月，本职业行业中位数）"
+              "47,650 美元/年（2025 年 5 月）"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.35",
@@ -27362,7 +27228,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH玻璃工专属Pay行业表；非车身工55,920美元，也不是O*NET宽门类80%的工资。"
+              "BLS OOH 汽车玻璃安装维修细项的行业工资。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.36",
@@ -27377,7 +27243,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "建筑业"
+              "零售业"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.37",
@@ -27392,7 +27258,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "45,760美元/年（2025年5月，本职业行业中位数）"
+              "45,830 美元/年（2025 年 5 月）"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.38",
@@ -27407,7 +27273,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH玻璃工专属行业中位数；行业内仍混合地区与资历，非个人承诺。"
+              "BLS OOH 汽车玻璃安装维修细项的行业工资。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.39",
@@ -27450,7 +27316,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本轮未得连锁、移动服务形态单独中位数；O*NET宽行业分布不能填补该精度。"
+              "BLS 手册未按此经营形态单列工资。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.42",
@@ -27493,7 +27359,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS有薪员工工资含基本工资、佣金、生产奖金及小费等，排加班溢价、轮班差额、非生产奖金等；不能把计件、提成全部排除。自雇、非公司制企业所有者和合伙人、无酬家庭劳动者不在工资调查内；有薪公司员工不因门店或上门形式自动排除。 EP本职业自雇占10.2%为就业结构，不是利润或OEWS工资覆盖。"
+              "BLS 手册未按此经营形态单列工资。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.45",
@@ -27515,7 +27381,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27563,7 +27428,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27592,7 +27456,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27621,7 +27484,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27649,7 +27511,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27661,19 +27523,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "汽车车身与玻璃维修工",
@@ -27763,11 +27625,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -27813,7 +27670,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27842,7 +27698,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.6",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27872,7 +27727,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27901,7 +27755,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.riasec-fit-block.9",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27958,7 +27811,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28132,7 +27984,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28164,7 +28015,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -28207,7 +28057,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28222,7 +28071,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28237,7 +28085,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28252,7 +28099,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28267,7 +28113,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28282,7 +28127,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28297,7 +28141,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28312,7 +28155,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28341,7 +28183,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28356,7 +28197,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28386,7 +28226,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28401,8 +28240,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28417,8 +28254,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.41",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28433,8 +28268,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.42",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28449,7 +28282,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28478,7 +28310,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28493,7 +28324,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28554,7 +28384,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28599,7 +28428,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28642,7 +28470,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28657,7 +28484,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.fit.personality-fit-block.57",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28841,10 +28667,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -28916,7 +28738,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28931,7 +28752,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28965,7 +28785,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28980,7 +28799,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28995,7 +28813,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29029,7 +28846,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29067,7 +28883,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑核访问、保存和传输权限，避免未授权发送；维修规定第33条要求电子档案上传及允许托修方查询，不可将保密写成禁止合法上传。"
+              "编辑核访问、保存和传输权限，避免未授权发送；维修规定第33条规定经营者上传维修电子数据记录，并允许托修方查询，不可将保密写成禁止合法上传。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.21",
@@ -29091,7 +28907,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29106,7 +28921,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29121,7 +28935,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29155,7 +28968,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29170,7 +28982,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29185,7 +28996,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29219,7 +29029,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29234,7 +29043,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29249,7 +29057,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29259,7 +29066,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求维修电子档案并上传国家汽车维修健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。 AGSC说明最低驶离时间取决于胶粘剂类型品牌、当时大气条件等，车辆应静置至该时间结束；腐蚀可能妨碍玻璃与车身粘接，发现影响安装的腐蚀需先处理，必要时转交专业人员。它是北美行业安全说明，非本轮取得的各车型完整规程或中国法规。"
+              "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求经营者建立电子化维修档案，并按规定如实填报、及时上传维修电子数据记录至汽车维修电子健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。 AGSC说明最低驶离时间取决于胶粘剂类型品牌、当时大气条件等，车辆应静置至该时间结束；腐蚀可能妨碍玻璃与车身粘接，发现影响安装的腐蚀需先处理，必要时转交专业人员。它是北美行业安全说明，非本轮取得的各车型完整规程或中国法规。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.33",
@@ -29283,7 +29090,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.risk.career-risk-cards.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29385,7 +29191,7 @@
             "column_labels": [
               "岗位方向",
               "起步任务",
-              "雇主依据",
+              "向雇主核对",
               "零经验可提交的证据",
               "需要区分的边界"
             ],
@@ -29393,44 +29199,42 @@
               [
                 "门店玻璃更换助理岗",
                 "在有监督下完成接车记录、配件准备、拆装辅助与清理与复位，按规程提交质检。",
-                "编辑准备方向：核真实岗位培训、作业范围、检验分工及许可；本轮未读该方向雇主招聘或统一录用标准。",
-                "提交一份含虚构车型与玻璃型号、拆装步骤、粘接面处理与检验要点的作业说明，不使用真实企业资料。",
+                "核对岗位培训、所需资格和受授权工作。服务商介绍不代表统一招聘条件。",
+                "练习只交两版 GS-68 证据对照与一页交接；实际操作按雇主授权。",
                 "助理不承担结构件玻璃与安全件的作业决定；相关结论须由有授权的质检人员确认。"
               ],
               [
                 "上门移动更换岗",
                 "按预约上门完成常见车型的玻璃更换与修复，并现场处理密封与复位。",
-                "编辑准备方向：核真实岗位培训、作业范围、检验分工及许可；本轮未读该方向雇主招聘或统一录用标准。",
-                "提交一份含上门条件评估（天气、场地、光线）、作业步骤与异常处置的虚构方案。",
+                "核对岗位培训、所需资格和受授权工作。服务商介绍不代表统一招聘条件。",
+                "练习只交两版 GS-68 证据对照与一页交接；实际操作按雇主授权。",
                 "上门作业不等于可自行扩大作业范围；结构件与安全件相关事项须按机构授权执行。"
               ],
               [
                 "玻璃修复（修补）岗",
                 "按损伤类型判断可修复范围，完成修补与固化与外观处理并记录。",
-                "编辑准备方向：核真实岗位培训、作业范围、检验分工及许可；本轮未读该方向雇主招聘或统一录用标准。",
-                "提交一份含损伤分级、可修复性判断依据与修补步骤与检验标准的虚构记录。",
+                "核对岗位培训、所需资格和受授权工作。服务商介绍不代表统一招聘条件。",
+                "练习只交两版 GS-68 证据对照与一页交接；实际操作按雇主授权。",
                 "可修复性判断有边界；超出范围应更换而非勉强修补，须按标准执行。"
               ],
               [
                 "事故车修复协作岗",
                 "参与事故车玻璃相关作业，与钣金与涂装与机电岗位协作并配合检验。",
-                "编辑准备方向：核真实岗位培训、作业范围、检验分工及许可；本轮未读该方向雇主招聘或统一录用标准。",
-                "提交一份含作业界面划分、交接记录与检验责任的虚构协作说明。",
+                "核对岗位培训、所需资格和受授权工作。服务商介绍不代表统一招聘条件。",
+                "练习只交两版 GS-68 证据对照与一页交接；实际操作按雇主授权。",
                 "涉及车辆结构与气囊相关部位的作业须由有资质与授权的人员确认。"
               ],
               [
                 "配件与库存与质检支持岗",
                 "核对玻璃与配件型号与批次，管理库存与工单，支持检验与返工记录。",
-                "编辑准备方向：核真实岗位培训、作业范围、检验分工及许可；本轮未读该方向雇主招聘或统一录用标准。",
-                "提交一份含型号与批次核对表、库存与工单流程与检验记录模板的虚构文件。",
+                "核对岗位培训、所需资格和受授权工作。服务商介绍不代表统一招聘条件。",
+                "练习只交两版 GS-68 证据对照与一页交接；实际操作按雇主授权。",
                 "支持岗位不等于质检判定权；合格与否由授权人员按标准作出。"
               ]
             ]
           },
           "id": "automotive-glass-installers-and-repairers.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "title": "岗位方向与起步任务比较",
@@ -29444,7 +29248,7 @@
               {
                 "id": "education",
                 "values": [
-                  "O*NET问卷问新聘人员需何种学历：90%回答高中或同等、9%低于高中、1%高中后证书，并非在岗学历构成。Zone1—2/SVP<6.0是准备程度描述，部分少经验、部分数月至一年，不是所有岗位固定年限。BLS EP本职业典型高中、相关经验None、适度期限在职培训；None不是禁止已有经验，培训不是无。OOH指出玻璃工基础技能可学6个月以上、完全独立通常需培训至1年；车身工2—3年不能移用。",
+                  "O*NET问卷问新聘人员需何种学历：90%回答高中或同等、9%低于高中、1%高中后证书，并非在岗学历构成。Zone1—2/SVP<6.0是准备程度描述，部分少经验、部分数月至一年，不是所有岗位固定年限。BLS EP本职业典型高中、相关经验None、适度期限在职培训；None不是禁止已有经验，培训不是无。OOH指出玻璃工基础技能最快约6个月可学会，达到独立作业可能需要长达1年的培训；车身工2—3年不能移用。",
                   "美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。",
                   "编辑准备方向：可向目标机构核对机动车维修相关技能课程与带教安排；当期课程、招生、岗位资格及作业授权条件须分别确认。本轮未取得中国培养路径分布，不宣称以某种形式为主。"
                 ]
@@ -29453,7 +29257,7 @@
                 "id": "clearance",
                 "values": [
                   "拆装、粘接与检验须按机构流程与适用标准执行；涉及车辆结构与安全件与气囊相关部位的作业决定须由具资质与授权的人员作出。",
-                  "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求维修电子档案并上传国家汽车维修健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 GB9656-2021官方元数据状态现行，2021-04-30发布、2023-01-01实施，是机动车玻璃强制性标准；本轮未取得标准全文，不能凭目录说明宣称已核全部指标或作为安装步骤。维修经营者安全教育和废弃物管理见维修规定第23/24条；具体工具、化学品SDS、停工恢复程序须另核。",
+                  "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求经营者建立电子化维修档案，并按规定如实填报、及时上传维修电子数据记录至汽车维修电子健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 GB9656-2021官方元数据状态现行，2021-04-30发布、2023-01-01实施，是机动车玻璃强制性标准；本轮未取得标准全文，不能凭目录说明宣称已核全部指标或作为安装步骤。维修经营者安全教育和废弃物管理见维修规定第23/24条；具体工具、化学品SDS、停工恢复程序须另核。",
                   "客户信息与车辆信息与维修影像可能涉及个人信息，信息安全与保密要求因机构而异，须在入职前确认访问范围与合规义务。"
                 ]
               },
@@ -29497,42 +29301,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份车型与玻璃型号说明、一份损伤与可修复范围记录表、一份拆装与粘接面处理步骤表与一份检验清单模板。",
-                  "全部材料为虚构，不含真实企业作业资料、客户车辆信息、维修影像或内部资料。",
-                  "全部材料与场景为虚构，不得使用真实企业作业资料、客户车辆信息、维修影像或内部资料。"
+                  "GS-68 虚构工单。G1 车辆配置表：需要支持前视摄像头的风挡；接单后按车型资料确认是否需另行校准。",
+                  "G2 候选玻璃标签：A 无摄像头支架；B 有支架，但标签只列通用系列。两件都已有材料批号记录。",
+                  "G3 原版无 B 与该车型配置的对应凭证。变式只改 G3：补入一份可核的车型配置与 B 件号对应表。两版都没有实际装车或校准记录。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构车型写清拆装步骤、粘接面处理与底涂与密封胶用量、固化条件与时间判断、配件复位清单与检验结果，以及需要复核与需要授权的环节。",
-                  "在 60—90 分钟内完成，允许参考公开的标准与通用作业资料，但不使用真实企业资料。",
-                  "记录中把车型与玻璃型号、损伤判断、拆装步骤、粘接面处理与用量与固化条件、检验结果分开书写，并标注需复核的部分。"
+                  "对照 G1 与 G2，逐件记相符或待核。",
+                  "两版各写能否交下一步复核、仍缺什么。",
+                  "交一页记录，注明 G1–G3 与接手角色。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先核对车型与玻璃型号与损伤范围，再写拆卸与清理与施胶步骤，最后写明固化条件与检验要点与未决事项。",
-                  "把型号、损伤判断、处理过程、用量与固化条件与检验结论分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核步骤与固化条件与检验结论，并保留修改理由。"
+                  "先独立完成两版。",
+                  "把部件相符、安装和校准分别记录。",
+                  "交卷后打开「GS-68 参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成安装、维修或现场作业指令，也不能替代机构规程与作业授权。",
-                  "不得在练习中处理真实车辆或操作真实举升与电动工具；涉及结构件与安全件与气囊相关部位的事项须由有权限人员按规程处理。",
-                  "练习不替代机构规程与作业授权，也不构成任何安装、维修或现场处置指令。"
+                  "仅用题内纸面记录。",
+                  "不拆装、不使用胶料或校准设备。",
+                  "不据此决定能否上路。"
                 ]
               }
             ]
           },
           "id": "automotive-glass-installers-and-repairers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "gs68-editor"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "GS-68：风挡玻璃工单核对",
           "type": "cards"
         },
         {
@@ -29543,37 +29347,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：学历、专业培训与实训、注册学徒经历、厂商或行业认证、机构上岗资格与作业授权、以及安全与防护与废弃物处置培训。",
-                  "每项都注明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「专业培训」「厂商或行业认证」「注册学徒经历」「机构上岗资格」「作业授权」「安全与防护培训」分列，避免混为一谈。"
+                  "写 A、B 对照。",
+                  "列 G1–G3。",
+                  "标两版不同之处。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的作业说明，重点检查车型与玻璃型号核对、损伤与可修复范围判断、拆装与粘接面处理步骤、用量与固化条件与检验结果是否逐项写清。",
-                  "把复核意见与修改理由一并保留，作为判断你能否接受现场复核的证据。"
+                  "写一页交接。",
+                  "写明接手角色。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明任务与车型、依据、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给同伴与师傅与质检人员复核，并保留复核意见与修改理由。"
+                  "列仍缺的确认项。",
+                  "记录 G3 版本。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用查询或估价或数据处理工具，须注明工具名称与版本、输入与依据与人工修改理由。",
-                  "客户信息与车辆信息与维修影像处理须先取得授权，并记录访问范围、保留期限与销毁约定。"
+                  "交卷后再比参考。",
+                  "不接触车辆或工具。"
                 ]
               }
             ]
           },
           "id": "automotive-glass-installers-and-repairers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "gs68-editor"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29623,7 +29427,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.interview-probation.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "title": "面试与试用期考察",
@@ -29637,57 +29440,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与边界阅读：读 O*NET 49-3022.00 与公开的机动车玻璃与维修管理规定资料，写清拆装、粘接面处理与固化、配件复位、检验各自的含义。",
-                  "产出：一页术语与流程对照表，标注每项的来源。"
+                  "读 G1–G3。",
+                  "证据索引"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "接车与型号核对练习：为虚构车型写清玻璃型号核对与损伤判断与可修复范围的记录方式。",
-                  "产出：一份接车与损伤确认记录。"
+                  "列车型配置条件。",
+                  "配置清单"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "拆装步骤练习：为虚构车型写清拆卸顺序、配件保护与清理步骤。",
-                  "产出：一份拆装与清理步骤说明。"
+                  "核对两件标签。",
+                  "部件对照"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "粘接与固化练习：为虚构作业写清底涂与密封胶用量、温度与湿度条件与固化时间判断与异常说明。",
-                  "产出：一份粘接与固化记录。"
+                  "比较两版 G3。",
+                  "缺证与补证"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "复位与检验练习：为虚构作业写清配件复位清单、密封与外观与功能检验要点与返工判定依据。",
-                  "产出：一份复位与检验记录。"
+                  "写待核项和接手角色。",
+                  "交接草稿"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的型号核对与固化判断与检验结论，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "先交两版工单和一页交接。",
+                  "两版工单与交接"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "打开「GS-68 参考解（交卷后再打开）」。",
+                  "复核两版差异"
                 ]
               }
             ]
           },
           "id": "automotive-glass-installers-and-repairers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "gs68-editor"
           ],
           "title": "七日体验产出",
           "type": "timeline"
@@ -29697,18 +29500,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你完成了七日练习并发现自己在拆装与清理与粘接与检验与记录上可持续投入。",
-              "继续：你能接受旺季排班与时间压力与较重的体力要求，并愿意按规程记录与复核。",
-              "暂停：你只想尽快交车，不愿按规程核对粘接面与固化条件。",
-              "暂停：你把「看起来装好了」当作已检验合格，或在结构件玻璃与安全件上跳过复核。",
-              "换方向：你更愿意做机械与电气系统诊断维修，可比较汽车维修技师与机械师方向。",
-              "换方向：你更愿意做车身钣金与涂装，可比较汽车车身与玻璃维修工方向。",
-              "信息不足：如果你还没有任何有监督的作业或质检经历，先补这两项再判断。"
+              "继续：能说清每个判断引用了哪份记录。",
+              "继续：能把部件、校准和放行拆开。",
+              "暂停：如果容易把相似型号当作已核。",
+              "暂停：如果写不清接手角色。",
+              "比较汽车车身维修。",
+              "比较汽车机电维修。",
+              "真实训练另核。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "gs68-editor"
           ],
           "title": "七日后的判断",
           "type": "list"
@@ -29786,7 +29589,7 @@
                 "在机动车维修门店从业的人",
                 "决定门店能否合规经营并承接玻璃安装及修复项目。",
                 "属机构合规要求，不是个人证书。",
-                "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求维修电子档案并上传国家汽车维修健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。",
+                "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求经营者建立电子化维修档案，并按规定如实填报、及时上传维修电子数据记录至汽车维修电子健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。",
                 "按主管部门要求更新备案。",
                 "机构备案不等于个人作业授权，也不等于产品认证。"
               ]
@@ -29811,8 +29614,8 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "学历、培训、学徒、行业认证、州执照、门店备案、产品标准与个人作业权限分别核对。O*NET问卷问新聘人员需何种学历：90%回答高中或同等、9%低于高中、1%高中后证书，并非在岗学历构成。Zone1—2/SVP<6.0是准备程度描述，部分少经验、部分数月至一年，不是所有岗位固定年限。BLS EP本职业典型高中、相关经验None、适度期限在职培训；None不是禁止已有经验，培训不是无。OOH指出玻璃工基础技能可学6个月以上、完全独立通常需培训至1年；车身工2—3年不能移用。 美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。",
-              "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求维修电子档案并上传国家汽车维修健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 2022职业大典PDF276页的4-12-01-01汽车维修工明确包含汽车玻璃维修工工种，任务涵盖车身等系统零件检查调整更换修理、设备维护、工艺规范和维修记录。相关宽职业有分类，但不等于与美国49-3022.00精确互认、工资分布或个人许可。",
+              "学历、培训、学徒、行业认证、州执照、门店备案、产品标准与个人作业权限分别核对。O*NET问卷问新聘人员需何种学历：90%回答高中或同等、9%低于高中、1%高中后证书，并非在岗学历构成。Zone1—2/SVP<6.0是准备程度描述，部分少经验、部分数月至一年，不是所有岗位固定年限。BLS EP本职业典型高中、相关经验None、适度期限在职培训；None不是禁止已有经验，培训不是无。OOH指出玻璃工基础技能最快约6个月可学会，达到独立作业可能需要长达1年的培训；车身工2—3年不能移用。 美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。",
+              "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求经营者建立电子化维修档案，并按规定如实填报、及时上传维修电子数据记录至汽车维修电子健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 2022职业大典PDF276页的4-12-01-01汽车维修工明确包含汽车玻璃维修工工种，任务涵盖车身等系统零件检查调整更换修理、设备维护、工艺规范和维修记录。相关宽职业有分类，但不等于与美国49-3022.00精确互认、工资分布或个人许可。",
               "GB9656-2021官方元数据状态现行，2021-04-30发布、2023-01-01实施，是机动车玻璃强制性标准；本轮未取得标准全文，不能凭目录说明宣称已核全部指标或作为安装步骤。维修经营者安全教育和废弃物管理见维修规定第23/24条；具体工具、化学品SDS、停工恢复程序须另核。 AGSC说明最低驶离时间取决于胶粘剂类型品牌、当时大气条件等，车辆应静置至该时间结束；腐蚀可能妨碍玻璃与车身粘接，发现影响安装的腐蚀需先处理，必要时转交专业人员。它是北美行业安全说明，非本轮取得的各车型完整规程或中国法规。",
               "编辑建议按目标岗位逐列核真实法域和条件，未知项留空说明，不用课程、职称或考试通过自动推出全部作业权。"
             ]
@@ -29836,18 +29639,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮未核具体招聘样本。门店更换、移动服务、修补、事故车协作和配件支持是编辑比较方向，不冒公开招聘频率或名单。",
-              "核对清单：岗位属于品牌授权服务中心、连锁玻璃更换门店、综合汽修厂、事故车修复中心还是上门移动更换服务；是否需要上岗资格与作业授权或厂商专项培训；计酬方式（小时工资、计件或月薪加提成）；以及是否提供安全与防护与废弃物处置培训。以上须写入书面条件后再比较。"
+              "福耀配件汽车玻璃官网介绍其独立服务合作方易道大咖，将玻璃更换、修复和 ADAS 校准列为服务。AGTSS 是该合作方的培训考核体系，不能推出所有雇主的要求或个人法定执业资格；该页也未发布岗位薪资。 这是服务介绍，不是岗位公告。",
+              "第31条对二级维护、总成修理和整车修理规定维修前诊断检验、维修过程检验和竣工质量检验。第32条规定竣工质量检验合格，由质量检验人员签发合格证；未签发不得交付。第33条由维修经营者建立并电子化管理档案、按规定上传维修电子数据记录，并对上述三种维修增加规定的记录。单项玻璃工单先由经营者核对实际维修范围。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "fuyao-yidao-service",
+            "mot-repair-2023",
             "onet"
           ],
-          "title": "招聘信息核对",
+          "title": "售后服务与培训样本",
           "type": "notice"
         },
         {
@@ -29883,9 +29685,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -29900,7 +29699,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29915,7 +29713,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29944,7 +29741,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29973,7 +29769,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30002,7 +29797,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30026,7 +29820,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET问卷问新聘人员需何种学历：90%回答高中或同等、9%低于高中、1%高中后证书，并非在岗学历构成。Zone1—2/SVP<6.0是准备程度描述，部分少经验、部分数月至一年，不是所有岗位固定年限。BLS EP本职业典型高中、相关经验None、适度期限在职培训；None不是禁止已有经验，培训不是无。OOH指出玻璃工基础技能可学6个月以上、完全独立通常需培训至1年；车身工2—3年不能移用。 美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。"
+              "O*NET问卷问新聘人员需何种学历：90%回答高中或同等、9%低于高中、1%高中后证书，并非在岗学历构成。Zone1—2/SVP<6.0是准备程度描述，部分少经验、部分数月至一年，不是所有岗位固定年限。BLS EP本职业典型高中、相关经验None、适度期限在职培训；None不是禁止已有经验，培训不是无。OOH指出玻璃工基础技能最快约6个月可学会，达到独立作业可能需要长达1年的培训；车身工2—3年不能移用。 美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.20",
@@ -30068,7 +29862,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求维修电子档案并上传国家汽车维修健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 GB9656-2021官方元数据状态现行，2021-04-30发布、2023-01-01实施，是机动车玻璃强制性标准；本轮未取得标准全文，不能凭目录说明宣称已核全部指标或作为安装步骤。维修经营者安全教育和废弃物管理见维修规定第23/24条；具体工具、化学品SDS、停工恢复程序须另核。 美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。"
+              "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求经营者建立电子化维修档案，并按规定如实填报、及时上传维修电子数据记录至汽车维修电子健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 GB9656-2021官方元数据状态现行，2021-04-30发布、2023-01-01实施，是机动车玻璃强制性标准；本轮未取得标准全文，不能凭目录说明宣称已核全部指标或作为安装步骤。维修经营者安全教育和废弃物管理见维修规定第23/24条；具体工具、化学品SDS、停工恢复程序须另核。 美国BLS建议核州要求：少数州对汽车玻璃安装维修工要求执照；行业认证与州执照不同。AGSC考试条件页要求Master有至少3年行业经验并先通过Technician考试；Certified/Qualified称号取决于所在企业是否AGSC会员，换到非会员企业称号相应变化。实际读到的是考试资格与称号规则，不是统一实操考试、全州许可或独立作业授权。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.22",
@@ -30179,7 +29973,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30208,7 +30001,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30223,7 +30015,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30252,7 +30043,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30281,7 +30071,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30296,7 +30085,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30325,7 +30113,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30354,7 +30141,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30369,7 +30155,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30398,7 +30183,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30427,7 +30211,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30442,7 +30225,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30471,7 +30253,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30500,7 +30281,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30515,7 +30295,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.51",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30544,7 +30323,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30573,7 +30351,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30588,7 +30365,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30617,7 +30393,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.58",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30646,7 +30421,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.60",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30661,7 +30435,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30690,7 +30463,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.63",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30719,7 +30491,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.65",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30734,7 +30505,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.66",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30763,7 +30533,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30792,7 +30561,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.70",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30807,7 +30575,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.71",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30836,7 +30603,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.73",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30865,7 +30631,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30880,7 +30645,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.76",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30909,7 +30673,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.78",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30938,7 +30701,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30953,7 +30715,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30982,7 +30743,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.83",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31011,7 +30771,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31026,7 +30785,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.path.career-path-block.86",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31071,13 +30829,13 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 49-3022.00 职业摘要（就业与预测字段）",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/49-3022.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS职业预测及特点表49-3022",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31146,9 +30904,6 @@
           },
           "id": "automotive-glass-installers-and-repairers.market-signals.market-signal-card.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -31158,7 +30913,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（OOH/O*NET取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。 中国本轮未取得精确职业工资就业，以行业及岗位大类分开对照。"
+              "BLS 表 1.2 的美国汽车玻璃安装维修 49-3022：2025 年 22,600 个岗位，2035 年预计 23,900 个，增长 5.7%，净增 1,300，另预计年均约 1,300 个空缺，自雇占 10.2%。两处 1,300 是不同指标。职业展望手册取整为 6%。2025 年 5 月年薪中位数 47,630 美元。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.market-signals.market-signal-card.8",
@@ -31204,7 +30959,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（OOH/O*NET取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。"
+              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（BLS 职业展望手册取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.market-signals.market-signal-card.11",
@@ -31310,7 +31065,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（OOH/O*NET取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。"
+              "BLS 表 1.2 的美国汽车玻璃安装维修 49-3022：2025 年 22,600 个岗位，2035 年预计 23,900 个，增长 5.7%，净增 1,300，另预计年均约 1,300 个空缺，自雇占 10.2%。两处 1,300 是不同指标。职业展望手册取整为 6%。2025 年 5 月年薪中位数 47,630 美元。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.market-signals.market-signal-card.18",
@@ -31326,7 +31081,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "EP已公布本职业精确增幅5.7%，OOH/O*NET取整6%；预测不是个人录用保证或AI因果。"
+              "EP已公布本职业精确增幅5.7%，BLS 职业展望手册取整6%；预测不是个人录用保证或AI因果。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.market-signals.market-signal-card.19",
@@ -31900,10 +31655,13 @@
                 "question_key": "career.faq.automotive-glass-installers-and-repairers.2"
               },
               {
-                "answer": "更有解释力的信号是：能按规程完成拆装与清理与施胶与复位并如实记录，能判断粘接面与固化条件是否满足要求，能按检验清单逐项核对并在异常或超出授权时停下来升级；只靠「喜欢车」或「会开车」无法判断。霍兰德兴趣代码为 RC（现实型 + 常规型），兴趣一致只说明方向接近。",
+                "answer": "到 09 做 GS-68，试写一张部件证据表和一页交接。",
                 "id": "automotive-glass-installers-and-repairers.faq.3",
                 "question": "怎样判断自己适不适合做汽车玻璃安装工？",
-                "question_key": "career.faq.automotive-glass-installers-and-repairers.3"
+                "question_key": "career.faq.automotive-glass-installers-and-repairers.3",
+                "source_refs": [
+                  "gs68-editor"
+                ]
               },
               {
                 "answer": "AI 与自动化可以改变车型与配件查询、库存与工单排程、测量记录与参数比对、维修记录与估价与结算文本初稿等环节；但没有官方证据表明它会整体取代拆装安全性判断、粘接面处理与干燥确认、施胶与固化条件判断、配件复位与密封检验。官方资料也未给出该职业的自动化替代率或岗位消失年份。",
@@ -31912,16 +31670,23 @@
                 "question_key": "career.faq.automotive-glass-installers-and-repairers.4"
               },
               {
-                "answer": "车型与玻璃型号与损伤范围确认、粘接面清理与干燥处理、底涂与密封胶用量与均匀度、固化条件与时间判断、配件复位与密封与外观检验，以及涉及结构件与安全件的作业决定，都必须由本人与具授权的人员按机构规程承担；系统输出必须先标记为参考，经现场核对与规程确认与检验后才能进入正式工单与检验记录。",
+                "answer": "实际部件与配置、适用材料、校准条件和放行权限由相应人员核实。自动查件或生成记录可辅助整理。",
                 "id": "automotive-glass-installers-and-repairers.faq.5",
                 "question": "哪些环节必须保留人工复核？",
-                "question_key": "career.faq.automotive-glass-installers-and-repairers.5"
+                "question_key": "career.faq.automotive-glass-installers-and-repairers.5",
+                "source_refs": [
+                  "fuyao-yidao-service",
+                  "mot-repair-2023"
+                ]
               },
               {
-                "answer": "美国侧：O*NET 把 49-3022.00 列为 Job Zone 1–2（SVP 低于 6.0），页面公布的学历构成中 90% 为要求高中文凭或同等学历；BLS 职业展望手册把该章的典型入门学历列为高中文凭或同等学历，并要求无相关工作经验与无在职培训，指出多数雇主偏好完成过车身或玻璃修复培训的人，行业认证正变得越来越重要；O*NET 认证页面列出美国汽车玻璃安全委员会的 Certified Auto Glass Technician 与 Certified Auto Glass Master，以及注册学徒职位。中国大陆侧：该职业未在大典中单列，相关作业归入机动车维修的三类专项维修项目；机动车维修经营实行备案管理，维修配件须有可追溯来源，不得使用假冒伪劣配件；机动车玻璃须符合强制性国家标准《机动车玻璃安全技术规范》（GB 9656-2021）。学历、培训、认证、上岗资格与作业授权不可互相替代。",
+                "answer": "第31条对二级维护、总成修理和整车修理规定维修前诊断检验、维修过程检验和竣工质量检验。第32条规定竣工质量检验合格，由质量检验人员签发合格证；未签发不得交付。第33条由维修经营者建立并电子化管理档案、按规定上传维修电子数据记录，并对上述三种维修增加规定的记录。单项玻璃工单先由经营者核对实际维修范围。",
                 "id": "automotive-glass-installers-and-repairers.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.automotive-glass-installers-and-repairers.6"
+                "question_key": "career.faq.automotive-glass-installers-and-repairers.6",
+                "source_refs": [
+                  "mot-repair-2023"
+                ]
               },
               {
                 "answer": "相对高于办公室岗位。O*NET 工作情境显示 98% 每天佩戴常规防护或安全装备、40% 有超过一半时间站立、26% 有超过一半时间用手处理物体与工具、27% 有超过一半时间做重复动作、20% 有少于一半时间弯腰或扭动身体、84% 每天在封闭车辆内或操作封闭设备、23% 每天暴露于极热或极冷温度。核心能力是动手拆装与工艺控制与按规程核对。",
@@ -31936,27 +31701,33 @@
                 "question_key": "career.faq.automotive-glass-installers-and-repairers.8"
               },
               {
-                "answer": "官方就业预测为本职业 2024 年在岗约 20,400 人、2024—2034 年增长为「平均（3% 至 4%）」、年均约 1,400 个空缺；BLS 职业展望手册按 2025—2035 年给出该章（车身与玻璃维修工）在岗约 185,800 人、增长 4%、净增约 7,400 个岗位、年均约 13,900 个空缺，多来自替换需求。预测不等于个人录用概率。转向可比较汽车车身与玻璃维修工、汽车维修技师与机械师、玻璃安装工、轮胎修理与更换工、涂装工与车辆与设备清洁工等方向，但资格与作业授权需逐项核对。",
+                "answer": "BLS 表 1.2 的美国汽车玻璃安装维修 49-3022：2025 年 22,600 个岗位，2035 年预计 23,900 个，增长 5.7%，净增 1,300，另预计年均约 1,300 个空缺，自雇占 10.2%。两处 1,300 是不同指标。职业展望手册取整为 6%。2025 年 5 月年薪中位数 47,630 美元。",
                 "id": "automotive-glass-installers-and-repairers.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.automotive-glass-installers-and-repairers.9"
+                "question_key": "career.faq.automotive-glass-installers-and-repairers.9",
+                "source_refs": [
+                  "ep-table"
+                ]
               },
               {
-                "answer": "美国数字来自 BLS 职业就业与工资统计（OEWS，2025 年，本职业口径，中位年薪 47,630 美元）与 BLS 职业展望手册《Automotive Body and Glass Repairers》（2025—2035 年）；中国大陆没有与 49-3022.00 精确对应的全国职业工资分布，本页仅分别展示居民服务、修理和其他服务业平均工资（行业代理，70,226 元/年）与规模以上企业社会生产服务和生活服务人员平均工资（岗位类别代理，79,857 元/年），不合并为薪资区间。两个市场的统计口径、覆盖人群与资料期不同，不能直接换算。",
+                "answer": "美国工资为 49-3022 细项雇员的分位数；本页未取得大陆相同职业口径的全国工资分布。大陆行业、岗位大类年平均工资与职业分位数的统计人群和指标不同，不能按汇率直接比较。",
                 "id": "automotive-glass-installers-and-repairers.faq.10",
                 "question": "美国工资与中国大陆工资为什么不能互相换算？",
                 "question_key": "career.faq.automotive-glass-installers-and-repairers.10"
+              },
+              {
+                "answer": "A 没有摄像头支架，不符合 G1。B 有支架但通用系列标签不足以确认车型适配；原版留待核，交给配件或技术复核。变式的 G3 使 B 的部件证据可交下一步复核，A 仍不符合。两版都没有装车或校准结果，也不能放行。自核：是否分别写了部件、校准、放行和接手角色？",
+                "id": "automotive-glass-installers-and-repairers.faq.11",
+                "question": "GS-68 参考解（交卷后再打开）",
+                "question_key": "career.faq.automotive-glass-installers-and-repairers.q11",
+                "source_refs": [
+                  "gs68-editor"
+                ]
               }
             ]
           },
           "id": "automotive-glass-installers-and-repairers.sources.faq.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "faq"
@@ -31966,11 +31737,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮九模块作者限定核对，依据实际官方职业统计、分类、规章相关正文与行业条件；不签独立审阅或整页验收。"
+              "美国就业、工资与行业表分别见 BLS 和 O*NET 原件。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.sources.source-card.1",
           "source_refs": [
+            "ep-table",
+            "fuyao-yidao-service",
+            "mot-repair-2023",
             "onet"
           ],
           "type": "prose"
@@ -31980,23 +31754,24 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "实际读O*NET49-3022摘要/详细/工资/热门/行业/趋势、8相邻定义；BLS OOH玻璃专属工资/2行业/就业/培训/少数州许可/伤病及EP表；NBS2025相关行、1990工资组成、OEWS方法和2022职业大典PDF276页汽车维修工/玻璃工工种。MOT2023修正相关正文；GB9656-2021状态元数据（未全文）；AGSC考试资格、称号FAQ、最低驶离、腐蚀与乘员保护说明。ILO/NIST仅背景介绍，O*NET自定义/训练/认证完整输出未得，未冒全部原文支持。"
+              "大陆售后服务样本说明更换、修复与校准的分工；经营项目按交通运输部规定核对。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.sources.source-card.2",
           "source_refs": [
+            "ep-table",
+            "fuyao-yidao-service",
+            "mot-repair-2023",
             "onet",
             "bls",
             "hr",
             "r2-pay-2",
             "oews",
             "census",
-            "ep-table",
             "nbs",
             "cnclass",
             "oews-method",
             "cn-classification-2022",
-            "mot-repair-2023",
             "privacy",
             "agsc-exam",
             "agsc-faq",
@@ -32013,11 +31788,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-09核：工资就业招聘行业2025、预测2025—2035；中国工资2025、职业大典2022、工资组成规定1990；维修规定2023修正；GB9656-2021现行、2023-01-01实施。未成功取得旧公报和完整项目入口不刷新访问日期。"
+              "美国工资为 2025 年 5 月，预测基期为 2025 年。中国行业统计不能换算为该职业工资。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.sources.source-card.3",
           "source_refs": [
+            "ep-table",
+            "fuyao-yidao-service",
+            "mot-repair-2023",
             "onet"
           ],
           "type": "prose"
@@ -32027,12 +31805,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "国家统计局工资总额可包括计时、计件、奖金、津贴补贴和加班工资，不能一概排除提成与浮动报酬；须按款项性质核计入范围。年平均工资非税后到手、门店经营利润或本职业分位。 OEWS有薪员工工资含基本工资、佣金、生产奖金及小费等，排加班溢价、轮班差额、非生产奖金等；不能把计件、提成全部排除。自雇、非公司制企业所有者和合伙人、无酬家庭劳动者不在工资调查内；有薪公司员工不因门店或上门形式自动排除。 中国精确职业全国城市工资就业、真实招聘、全州执照、车型/材料SDS/设备停止恢复、标准全文、AI因果和量表效度/转岗互认未核。共享facts、FAQ及练习内容冻结，不能称全页一致或正式验收。"
+              "工作情境受访回答、职业组统计、企业服务说明及虚构练习各有范围。"
             ]
           },
           "id": "automotive-glass-installers-and-repairers.sources.source-card.4",
           "source_refs": [
-            "onet",
+            "ep-table",
+            "fuyao-yidao-service",
+            "mot-repair-2023",
             "onet"
           ],
           "type": "prose"
@@ -32060,7 +31840,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32072,13 +31852,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看汽车玻璃安装工职业页面",
@@ -32142,18 +31922,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本职业49-3022.00统计",
-                  "访问2026-10-09"
+                  "BLS 表 1.2 的美国汽车玻璃安装维修 49-3022：2025 年 22,600 个岗位，2035 年预计 23,900 个，增长 5.7%，净增 1,300，另预计年均约 1,300 个空缺，自雇占 10.2%。两处 1,300 是不同指标。职业展望手册取整为 6%。2025 年 5 月年薪中位数 47,630 美元。",
+                  "见原表或原文。"
                 ],
                 "evidence_type": "official outlook",
                 "id": "ep",
-                "limitation": "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（OOH/O*NET取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。",
+                "limitation": "就业预测不是个人录用机会。",
                 "market": "美国",
-                "name": "O*NET 49-3022.00 职业摘要（就业与预测字段）",
-                "period": "2025就业及2025—2035预测",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：美国汽车玻璃安装维修 49-3022",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/49-3022.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32198,10 +31978,10 @@
                 "limitation": "国家统计局工资总额可包括计时、计件、奖金、津贴补贴和加班工资，不能一概排除提成与浮动报酬；须按款项性质核计入范围。年平均工资非税后到手、门店经营利润或本职业分位。",
                 "market": "中国大陆",
                 "name": "国家统计局《关于工资总额组成的规定》（工资口径说明）",
-                "period": "1990年工资总额组成规定；现网页访问2026-10-09",
+                "period": "1990 年发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
+                "url": "https://www.stats.gov.cn/gk/tjfg/xzfg/202302/t20230206_1901829.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32227,7 +32007,7 @@
                 ],
                 "evidence_type": "occupation profile",
                 "id": "facilities",
-                "limitation": "O*NET问卷问新聘人员需何种学历：90%回答高中或同等、9%低于高中、1%高中后证书，并非在岗学历构成。Zone1—2/SVP<6.0是准备程度描述，部分少经验、部分数月至一年，不是所有岗位固定年限。BLS EP本职业典型高中、相关经验None、适度期限在职培训；None不是禁止已有经验，培训不是无。OOH指出玻璃工基础技能可学6个月以上、完全独立通常需培训至1年；车身工2—3年不能移用。",
+                "limitation": "O*NET问卷问新聘人员需何种学历：90%回答高中或同等、9%低于高中、1%高中后证书，并非在岗学历构成。Zone1—2/SVP<6.0是准备程度描述，部分少经验、部分数月至一年，不是所有岗位固定年限。BLS EP本职业典型高中、相关经验None、适度期限在职培训；None不是禁止已有经验，培训不是无。OOH指出玻璃工基础技能最快约6个月可学会，达到独立作业可能需要长达1年的培训；车身工2—3年不能移用。",
                 "market": "美国",
                 "name": "O*NET 49-3022.00 职业摘要（学历构成）",
                 "period": "2026 年更新页面；访问 2026-10-09",
@@ -32238,18 +32018,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本职业49-3022.00统计",
-                  "访问2026-10-09"
+                  "BLS 表 1.2 的美国汽车玻璃安装维修 49-3022：2025 年 22,600 个岗位，2035 年预计 23,900 个，增长 5.7%，净增 1,300，另预计年均约 1,300 个空缺，自雇占 10.2%。两处 1,300 是不同指标。职业展望手册取整为 6%。2025 年 5 月年薪中位数 47,630 美元。",
+                  "见原表或原文。"
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
-                "limitation": "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（OOH/O*NET取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。",
+                "limitation": "就业预测不是个人录用机会。",
                 "market": "美国",
-                "name": "O*NET 49-3022.00 职业摘要（就业与预测字段）",
-                "period": "2025就业及2025—2035预测",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：美国汽车玻璃安装维修 49-3022",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/49-3022.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32270,33 +32050,17 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official regulation",
-                  "2023-11-10 修正；访问 2026-09-15"
-                ],
-                "evidence_type": "official regulation",
-                "id": "health",
-                "limitation": "规定机动车维修经营备案与三类专项维修项目（含汽车玻璃安装及修复）与配件来源与追溯要求；不构成安装或维修作业指令。 本輪国务院公报该URL未成功取得，不刷新访问日期；实际MOT正文另登记。",
-                "market": "中国大陆",
-                "name": "交通运输部《机动车维修管理规定》（2023 年令第 14 号第五次修正）",
-                "period": "2023-11-10 修正；访问 2026-09-15",
-                "publisher": "中华人民共和国交通运输部",
-                "scope": "exact",
-                "url": "https://www.gov.cn/gongbao/2024/issue_11146/202402/content_6930538.html"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
                   "institutional task research",
                   "2025 年；访问 2026-09-15"
                 ],
                 "evidence_type": "institutional task research",
                 "id": "ilo",
-                "limitation": "同窗口同日已读研究介绍作为全球背景，非本职业生成AI采用或提效实测。",
+                "limitation": "全球职业暴露研究，不提供本职业的当地采用率或替代率。",
                 "market": "全球",
                 "name": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
                 "period": "2025 年；访问 2026-09-15",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -32309,10 +32073,10 @@
                 "id": "editor",
                 "limitation": "实际职业摘要来源，不冒独立编辑组记录。",
                 "market": "美国",
-                "name": "O*NET49-3022摘要（编辑核对入口）",
+                "name": "O*NET 汽车玻璃安装维修工职业摘要",
                 "period": "访问 2026-10-09",
                 "publisher": "O*NET",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/49-3022.00"
               },
               {
@@ -32414,17 +32178,17 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "宽行业80%及20%",
-                  "来源2025；访问2026-10-09"
+                  "O*NET 49-3022.00 行业子表列其他服务业（公共行政除外）80%、其他行业（含零售）20%。子表未单列统计年份。",
+                  "见原表或原文。"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "O*NET当前宽行业分布为其他服务业（公共管理除外）80%、其他行业20%，来源年2025；BLS OOH按本职业细行业列汽车车身、涂装、内饰与玻璃维修77%、自雇10%、建筑2%。两种分类层级不同，不把20%全当零售或把整章车身数据当本职业。",
+                "limitation": "O*NET 49-3022.00 行业子表列其他服务业（公共行政除外）80%、其他行业（含零售）20%。子表未单列统计年份。",
                 "market": "美国",
                 "name": "O*NET 49-3022.00 行业分布",
-                "period": "2025行业分布",
+                "period": "子表未单列年份",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/49-3022.00"
               },
               {
@@ -32451,29 +32215,13 @@
                 ],
                 "evidence_type": "official outlook",
                 "id": "census",
-                "limitation": "章含车身与玻璃，玻璃专属就业22600、增长6%、净增1300、工资47630，细行业中位47650/45760；有伤病、培训、少数州许可和激励计酬说明，非全州或全操作程序。",
+                "limitation": "手册将 49-3022 细项与合并组分列。细项增长取整为 6%；行业工资见 2025 年 5 月工资表。",
                 "market": "美国",
                 "name": "BLS 职业展望手册：Automotive Body and Glass Repairers",
-                "period": "2025—2035 年；访问 2026-10-09",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/automotive-body-and-glass-repairers.htm"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "official regulation",
-                  "2023-11-10 修正；访问 2026-09-15"
-                ],
-                "evidence_type": "official regulation",
-                "id": "msresearch",
-                "limitation": "用于核对备案与三类专项维修项目与配件来源与追溯要求；不等同于职业工资或就业统计。 本輪国务院公报该URL未成功取得，不刷新访问日期；实际MOT正文另登记。",
-                "market": "中国大陆",
-                "name": "交通运输部《机动车维修管理规定》全文（国务院公报）",
-                "period": "2023-11-10 修正；访问 2026-09-15",
-                "publisher": "中华人民共和国交通运输部",
-                "scope": "market_signal",
-                "url": "https://www.gov.cn/gongbao/2024/issue_11146/202402/content_6930538.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32510,8 +32258,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
-                  "不冒称完整职业或个案验证"
+                  "查看原页的适用范围。",
+                  "查看原页的适用范围。"
                 ],
                 "evidence_type": "官方原文相关章节",
                 "id": "oews-method",
@@ -32542,12 +32290,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮124—125简介摘要实际读",
+                  "查看原页的适用范围。",
                   "未读完整PDF"
                 ],
                 "evidence_type": "官方自愿风险参考简介与摘要",
                 "id": "genai-nist",
-                "limitation": "同日实际介绍背景，未全文或本职业效应测量。",
+                "limitation": "通用生成式 AI 风险管理背景，不测本职业采用率、效率或就业影响。",
                 "market": "美国",
                 "name": "NIST生成式AI风险Profile官方简介",
                 "period": "2024-07-26发布，网页2026-04-08更新，访问2026-10-09",
@@ -32558,39 +32306,39 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际相关正文阅读",
-                  "访问2026-10-09；全文范围按limitation"
+                  "BLS 表 1.2 的美国汽车玻璃安装维修 49-3022：2025 年 22,600 个岗位，2035 年预计 23,900 个，增长 5.7%，净增 1,300，另预计年均约 1,300 个空缺，自雇占 10.2%。两处 1,300 是不同指标。职业展望手册取整为 6%。2025 年 5 月年薪中位数 47,630 美元。",
+                  "见原表或原文。"
                 ],
                 "evidence_type": "官方职业预测及特点",
                 "id": "ep-table",
-                "limitation": "美国本职业49-3022.00：2025年就业22,600人，2035年预测23,900人，2025—2035年增长5.7%（OOH/O*NET取整6%，快于平均），净增1,300人、年均约1,300个空缺、自雇10.2%。空缺含增长与替补，不能当净增或个人录用率，也不是生成式AI的因果预测。 典型高中/相关经验None/适度期限OJT。",
+                "limitation": "就业预测不是个人录用机会。",
                 "market": "美国",
-                "name": "BLS职业预测及特点表49-3022",
-                "period": "2025及2025—2035",
-                "publisher": "BLS",
+                "name": "BLS 表 1.2：美国汽车玻璃安装维修 49-3022",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际相关正文阅读",
-                  "访问2026-10-09；全文范围按limitation"
+                  "第31条对二级维护、总成修理和整车修理规定维修前诊断检验、维修过程检验和竣工质量检验。第32条规定竣工质量检验合格，由质量检验人员签发合格证；未签发不得交付。第33条由维修经营者建立并电子化管理档案、按规定上传维修电子数据记录，并对上述三种维修增加规定的记录。单项玻璃工单先由经营者核对实际维修范围。",
+                  "见原表或原文。"
                 ],
                 "evidence_type": "官方规章正文",
                 "id": "mot-repair-2023",
-                "limitation": "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求维修电子档案并上传国家汽车维修健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 实际相关第1—39条及23/24/30/33，未全设备安全程序。",
+                "limitation": "第31条对二级维护、总成修理和整车修理规定维修前诊断检验、维修过程检验和竣工质量检验。第32条规定竣工质量检验合格，由质量检验人员签发合格证；未签发不得交付。第33条由维修经营者建立并电子化管理档案、按规定上传维修电子数据记录，并对上述三种维修增加规定的记录。单项玻璃工单先由经营者核对实际维修范围。",
                 "market": "中国大陆",
                 "name": "机动车维修管理规定2023第14号修正正文",
-                "period": "2023-11-10修正；页面2023-12-04",
+                "period": "2023-12-08",
                 "publisher": "交通运输部",
                 "scope": "contextual",
-                "url": "https://xxgk.mot.gov.cn/jigou/fgs/202312/t20231204_3961931.html"
+                "url": "https://xxgk.mot.gov.cn/2020/gz/202312/t20231208_3964331.html"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际相关正文阅读",
+                  "核对原页所列范围。",
                   "访问2026-10-09；全文范围按limitation"
                 ],
                 "evidence_type": "行业考试资格及称号规则",
@@ -32606,7 +32354,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际相关正文阅读",
+                  "核对原页所列范围。",
                   "访问2026-10-09；全文范围按limitation"
                 ],
                 "evidence_type": "官方发证FAQ",
@@ -32622,7 +32370,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际相关正文阅读",
+                  "核对原页所列范围。",
                   "访问2026-10-09；全文范围按limitation"
                 ],
                 "evidence_type": "行业安全说明（非完整规程）",
@@ -32638,7 +32386,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际相关正文阅读",
+                  "核对原页所列范围。",
                   "访问2026-10-09；全文范围按limitation"
                 ],
                 "evidence_type": "行业安全说明（非完整规程）",
@@ -32654,7 +32402,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际相关正文阅读",
+                  "核对原页所列范围。",
                   "访问2026-10-09；全文范围按limitation"
                 ],
                 "evidence_type": "行业安全说明",
@@ -32670,7 +32418,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际职业定义",
+                  "核对原页所列范围。",
                   "非全部培养及资格条件"
                 ],
                 "evidence_type": "官方职业定义",
@@ -32686,7 +32434,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际职业定义",
+                  "核对原页所列范围。",
                   "非全部培养及资格条件"
                 ],
                 "evidence_type": "官方职业定义",
@@ -32702,7 +32450,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际职业定义",
+                  "核对原页所列范围。",
                   "非全部培养及资格条件"
                 ],
                 "evidence_type": "官方职业定义",
@@ -32718,7 +32466,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际职业定义",
+                  "核对原页所列范围。",
                   "非全部培养及资格条件"
                 ],
                 "evidence_type": "官方职业定义",
@@ -32734,7 +32482,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际职业定义",
+                  "核对原页所列范围。",
                   "非全部培养及资格条件"
                 ],
                 "evidence_type": "官方职业定义",
@@ -32750,7 +32498,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际职业定义",
+                  "核对原页所列范围。",
                   "非全部培养及资格条件"
                 ],
                 "evidence_type": "官方职业定义",
@@ -32766,7 +32514,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际职业定义",
+                  "核对原页所列范围。",
                   "非全部培养及资格条件"
                 ],
                 "evidence_type": "官方职业定义",
@@ -32782,7 +32530,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际职业定义",
+                  "核对原页所列范围。",
                   "非全部培养及资格条件"
                 ],
                 "evidence_type": "官方职业定义",
@@ -32806,11 +32554,41 @@
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "name": "FermatMind AI 任务影响估算估算方法 v1",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "本页虚构纸面工单。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "gs68-editor",
+                "limitation": "本页虚构纸面工单。",
+                "market": "虚构练习",
+                "name": "FermatMind GS-68：风挡玻璃工单核对",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "福耀配件汽车玻璃官网介绍其独立服务合作方易道大咖，将玻璃更换、修复和 ADAS 校准列为服务。AGTSS 是该合作方的培训考核体系，不能推出所有雇主的要求或个人法定执业资格；该页也未发布岗位薪资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "fuyao-yidao-service",
+                "limitation": "福耀配件汽车玻璃官网介绍其独立服务合作方易道大咖，将玻璃更换、修复和 ADAS 校准列为服务。AGTSS 是该合作方的培训考核体系，不能推出所有雇主的要求或个人法定执业资格；该页也未发布岗位薪资。",
+                "market": "中国大陆",
+                "name": "福耀配件汽车玻璃：易道大咖售后服务",
+                "period": "原页无日期",
+                "publisher": "福耀配件汽车玻璃",
+                "scope": "contextual",
+                "url": "https://www.fygi.com/gyyddk.html"
               }
             ]
           },
@@ -36148,7 +35926,7 @@
       },
       "hero": {
         "h1": "汽车玻璃安装工",
-        "quick_answer": "汽车玻璃安装工更换或修复机动车挡风玻璃与车窗玻璃：拆下破损玻璃与配件、清理与处理粘接面、涂布底涂与聚氨酯密封胶并整理到均匀厚度、按温度与湿度留足固化时间、复位饰条与卡扣与雨刮器等零件，并检验密封与外观与配件功能；其工作不等于汽车维修技师的系统诊断与维修，也不代替配件来源与作业授权与认证相关判定，并在玻璃型号、粘接面状态或固化条件不明时停止升级。",
+        "quick_answer": "汽车玻璃安装维修工核对车辆与玻璃规格、评估修复还是更换，并记录装配和检验。带摄像头等配置的车辆，还要核对是否另有校准或交接要求。美国细项 49-3022 与车身钣喷分列。",
         "title": "汽车玻璃安装工"
       },
       "market_signal_card": {
@@ -36192,7 +35970,7 @@
           "copy_key": "career.item.market-signal-card",
           "type": "prose"
         },
-        "heading": "汽车玻璃安装工的前景如何？可以转向哪些相关职业？",
+        "heading": "市场信号与可迁移技能",
         "outlook_evidence": [
           {
             "geography": {
@@ -36231,7 +36009,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls",
             "value": {
               "$item": "automotive-glass-installers-and-repairers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -37500,7 +37278,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合汽车玻璃安装工",
+        "label": "用 RIASEC 探索职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37622,7 +37400,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
-      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
+      "interface.quick_decision.experiment_heading": "怎么用一次工单练习判断是否适合？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37715,7 +37493,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 任务影响估算",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37805,63 +37583,63 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "20,400人",
+        "derivation": "发布值。",
+        "display_value": "22,600 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
-        "occupation_scope": "汽车玻璃安装工",
-        "period": "2024 年；访问 2026-09-15",
+        "measure": "就业岗位",
+        "occupation_scope": "美国汽车玻璃安装维修 49-3022",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "平均（3% 至 4%）",
+        "derivation": "发布值。",
+        "display_value": "5.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
-        "occupation_scope": "汽车玻璃安装工",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "预计增长",
+        "occupation_scope": "美国汽车玻璃安装维修 49-3022",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 1,400个/年",
+        "derivation": "发布值。",
+        "display_value": "约 1,300 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均岗位空缺（本职业口径）",
-        "occupation_scope": "汽车玻璃安装工",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "预计年均空缺",
+        "occupation_scope": "美国汽车玻璃安装维修 49-3022",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "derivation": "发布值。",
+        "display_value": "47,650 美元/年",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "汽车玻璃安装工",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
+        "occupation_scope": "汽车玻璃安装维修 49-3022",
+        "period": "2025-05",
         "source_refs": [
-          "operations"
+          "census"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "derivation": "发布值。",
+        "display_value": "45,830 美元/年",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "汽车玻璃安装工",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
+        "occupation_scope": "汽车玻璃安装维修 49-3022",
+        "period": "2025-05",
         "source_refs": [
-          "operations"
+          "census"
         ]
       },
       {
@@ -37869,11 +37647,11 @@
         "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "汽车玻璃安装工",
-        "period": "不适用：来源未公布该字段",
+        "measure": "按经营形态的工资中位数",
+        "occupation_scope": "汽车玻璃安装维修 49-3022",
+        "period": "未单列",
         "source_refs": [
-          "operations"
+          "census"
         ]
       },
       {
@@ -37881,11 +37659,11 @@
         "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "汽车玻璃安装工",
-        "period": "不适用：来源未公布该字段",
+        "measure": "按经营形态的工资中位数",
+        "occupation_scope": "汽车玻璃安装维修 49-3022",
+        "period": "未单列",
         "source_refs": [
-          "operations"
+          "census"
         ]
       },
       {
@@ -38009,39 +37787,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "20,400人",
+        "derivation": "发布值。",
+        "display_value": "22,600 个岗位",
         "fact_id": "us-employment-parent",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
-        "occupation_scope": "汽车玻璃安装工",
-        "period": "2024 年",
+        "measure": "就业岗位",
+        "occupation_scope": "美国汽车玻璃安装维修 49-3022",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "平均（3% 至 4%）",
+        "derivation": "发布值。",
+        "display_value": "5.7%",
         "fact_id": "us-growth-parent",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
-        "occupation_scope": "汽车玻璃安装工",
-        "period": "2024—2034 年",
+        "measure": "预计增长",
+        "occupation_scope": "美国汽车玻璃安装维修 49-3022",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 1,400个/年",
+        "derivation": "发布值。",
+        "display_value": "约 1,300 个/年",
         "fact_id": "us-openings-parent",
         "market": "美国",
-        "measure": "年均岗位空缺（本职业口径）",
-        "occupation_scope": "汽车玻璃安装工",
-        "period": "2024—2034 年",
+        "measure": "预计年均空缺",
+        "occupation_scope": "美国汽车玻璃安装维修 49-3022",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
@@ -38049,7 +37827,7 @@
         "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
+        "measure": "AI 任务影响估算（编辑估算）",
         "occupation_scope": "汽车玻璃安装工",
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
@@ -38063,12 +37841,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务影响估算"
     },
     "badges": [
       "O*NET 49-3022.00 · Job Zone 1–2 · 少量准备",
       "挡风玻璃与车窗拆装更换 / 玻璃修复 / 密封与配件复位",
-      "中国大陆无精确职业统计 · 缺口可见标记"
+      "本页未取得对应的中国大陆全国职业工资统计"
     ],
     "metrics": [
       {
@@ -38081,19 +37859,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国预计增长（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均岗位空缺（2024—2034）"
+        "label": "美国预计年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -38107,17 +37885,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "汽车玻璃安装工做什么、需要哪些学历与资格、美国与中国的收入和前景如何、AI 会改变哪些任务，以及玻璃安全性能、配件来源与作业授权边界；保留来源范围与数据缺口。"
+      "text": "看汽车玻璃安装维修工怎样核对玻璃、记录检验及处理交接。了解美国薪酬与大陆岗位线索，并试做纸面工单。"
     },
     "title": {
       "availability": "available",
-      "text": "汽车玻璃安装工"
+      "text": "汽车玻璃安装维修工：工作、薪酬与入行｜FermatMind"
     }
   },
-  "source_content_sha256": "d6bdea9bdda57b28f3e0f0cb94bba71cfeb62931f20ad1c5ebd0ce0d0a8f91ee",
+  "source_content_sha256": "ccc065b83392268f51ebe020a73735695a6c7ac651daedbad3d6be6fe8e69bcf",
   "subject": {
     "canonical_slug": "automotive-glass-installers-and-repairers",
     "name": "汽车玻璃安装工",
-    "summary": "汽车玻璃安装工更换或修复机动车挡风玻璃与车窗玻璃：拆下破损玻璃与配件、清理与处理粘接面、涂布底涂与聚氨酯密封胶、按温度与湿度等待固化、复位饰条与卡扣与雨刮器等零件，核心是拆装与粘接与固化与检验。美国侧对应 O*NET 49-3022.00（Automotive Glass Installers and Repairers），属 Job Zone 1–2（SVP 低于 6.0）；中国大陆统计按行业门类与岗位大类汇总，未单列该职业，相关作业归入机动车维修的三类专项维修项目，行业与岗位类别代理分别展示、不合并为薪资区间。"
+    "summary": "汽车玻璃安装维修工核对车辆与玻璃规格、评估修复还是更换，并记录装配和检验。带摄像头等配置的车辆，还要核对是否另有校准或交接要求。美国细项 49-3022 与车身钣喷分列。"
   }
 }

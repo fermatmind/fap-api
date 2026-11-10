@@ -23371,13 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "路径：核所在地公安机关正式招录公告、资格、体能或专业测评和训练要求。美国 BLS 训练学院路径不等于中国报考条件。"
+              "纸面体验｜给一段虚构事件记录中的句子分别标注亲见、转述或待核推断，写下一条需要回看原记录的问题。 "
             ]
           },
           "id": "police-and-detectives.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23673,12 +23672,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "警察巡逻人员响应社区事件、维护秩序、记录情况并按授权启动后续程序。"
+              "警察与刑侦岗位涵盖现场应对、巡逻、调查和记录。巡逻人员常记录即时观察，调查人员还需对照案卷和证据线索，具体分工依机构而定。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "police-and-detectives.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "transfer-onet-33-3051.00",
+            "transfer-onet-33-3021.00"
           ],
           "type": "prose"
         },
@@ -24777,15 +24777,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得警察及刑事侦查岗位的AI采用率、替代率或任务级评分依据。可把授权系统内转写、检索、记录整理和冲突提示作为编辑试用建议；授权人员仍须核原件、程序、隐私和判断，任务暴露不等于就业结果。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：给一段虚构事件记录中的句子分别标注亲见、转述或待核推断，写下一条需要回看原记录的问题。"
             ]
           },
           "id": "police-and-detectives.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-33-3051.00",
+            "transfer-onet-33-3021.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32586,6 +32585,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-33-3051.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 33-3051.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/33-3051.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-33-3021.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 33-3021.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/33-3021.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37830,10 +37870,10 @@
       "text": "警察与刑事侦查人员：工作任务、薪资口径与入行路径"
     }
   },
-  "source_content_sha256": "b67ac923d8cb22cfb3226516fb04181762c171e5fff4e38be29a1337a12a4d17",
+  "source_content_sha256": "13b4fdf6c85bba4632a2f7cd9b1058d700dd3e802c4e726a46cac71d3d6ad582",
   "subject": {
     "canonical_slug": "police-and-detectives",
     "name": "警察与刑事侦查人员",
-    "summary": "警察与刑事侦查人员在依法授权和机构程序下保护人身与财产安全、响应事件、巡逻、收集并核实线索、形成记录和移交案件。本页以美国BLS Police and Detectives职业手册合并口径作统计参考；该组合还含鱼类与野生动物执法及交通铁路警察。巡逻33-3051与侦查33-3021的任务和工资分别核对，美国条件不能当作中国招录标准。"
+    "summary": "警察与刑侦岗位涵盖现场应对、巡逻、调查和记录。巡逻人员常记录即时观察，调查人员还需对照案卷和证据线索，具体分工依机构而定。"
   }
 }

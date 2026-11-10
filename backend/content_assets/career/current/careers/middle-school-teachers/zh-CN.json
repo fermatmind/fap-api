@@ -155,6 +155,9 @@
       "item:middle-school-teachers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:middle-school-teachers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:middle-school-teachers.profile.career-quick-answers-block.5": {
         "status": "mapped"
       },
@@ -13051,6 +13054,21 @@
             "bls-ooh"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。同一次小测的两道题分别考术语记忆和解释过程。某班多数学生只在解释题失分。写下下一节课要检查的一个理解点。"
+            ]
+          },
+          "id": "middle-school-teachers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "按班级学习证据调整教学",
+          "type": "notice"
         }
       ]
     },
@@ -15537,6 +15555,13 @@
         "id": "middle-school-teachers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "middle-school-teachers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15730,7 +15755,7 @@
       "text": "初中教师：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "76ec4996ef04f8484a49cceefbfc957bb4e2af506e3452130f8cb13b7a515dd6",
+  "source_content_sha256": "c51d011ceca3ecd6a7ac361a17ac23f92132216cc6ca6a23e0a6ad52b2abb73b",
   "subject": {
     "canonical_slug": "middle-school-teachers",
     "name": "初中教师（不含特殊与职业技术教育）",

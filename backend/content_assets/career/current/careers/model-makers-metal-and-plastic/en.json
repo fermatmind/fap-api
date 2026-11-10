@@ -147,12 +147,21 @@
         "status": "pending_mapping"
       },
       "item:model-makers-metal-and-plastic.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:model-makers-metal-and-plastic.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:model-makers-metal-and-plastic.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:model-makers-metal-and-plastic.path.interview-probation.10": {
+        "status": "pending_mapping"
+      },
+      "item:model-makers-metal-and-plastic.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:model-makers-metal-and-plastic.path.seven-day-trial.1": {
         "status": "mapped"
       },
       "item:model-makers-metal-and-plastic.profile.definition-block.1": {
@@ -213,7 +222,7 @@
         "status": "pending_mapping"
       },
       "item:model-makers-metal-and-plastic.sources.faq-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:model-makers-metal-and-plastic.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -5674,52 +5683,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5950,96 +6097,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -11957,7 +12340,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Scope: this page covers only O*NET-SOC 51-4061.00, Model Makers, Metal and Plastic, for career exploration. It excludes wood modelmaking, pattern forming, die and mold making, and ordinary batch machining, and does not authorize machine tool operation, CNC programming, or safety work."
+              "Try the paper exercise if you tend to call a prototype finished before checking which test it was made for."
             ]
           },
           "id": "model-makers-metal-and-plastic.quick-decision.fermat-decision-card.1",
@@ -11971,7 +12354,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "How to assess: use an entirely fictional two-dimensional drawing and dimension table to check whether you can sequence machining operations, choose measuring instruments, record three measurements and tolerance decisions, and explain rework decisions. Perform paper exercises only; do not use powered machine tools."
+              "In 09 Entry, qualifications, and career development, find “MM-22: Choose What to Send to the Prototype Review.” Allow about 10 minutes before reading the answer."
             ]
           },
           "id": "model-makers-metal-and-plastic.quick-decision.fermat-decision-card.2",
@@ -11985,7 +12368,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Who it suits: people willing to interpret drawings into dimensions and operations, repeat measurements and rework, notice small errors, operate tools steadily, and stop equipment to seek verification when dimensions are abnormal or equipment is uncertain. These are behavioral signals, not personality diagnoses."
+              "Consider modelmaking if you like turning a drawing into something a team can test and documenting what the model can demonstrate."
             ]
           },
           "id": "model-makers-metal-and-plastic.quick-decision.fermat-decision-card.3",
@@ -12083,7 +12466,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Occupational judgments: key decisions concern whether tolerances can be met, clamping and operations are appropriate, dimensions are out of tolerance, and models can pass engineering verification. Stop equipment and escalate first when uncertain or beyond authorization."
+              "Occupational judgments: key decisions concern whether tolerances can be met, clamping and operations are appropriate, dimensions are out of tolerance, and models can pass engineering verification. If work is unsafe or outside your authorization, stop the task and alert the responsible person under the site’s procedures."
             ]
           },
           "id": "model-makers-metal-and-plastic.profile.definition-block.5",
@@ -12165,9 +12548,6 @@
             ]
           },
           "id": "model-makers-metal-and-plastic.direction-comparison.adjacent-career-comparison-table.2",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -12175,13 +12555,10 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Adjacent directions support comparisons of task objects, outputs, and responsibility boundaries only, not job recommendations. Check individually who diagnoses, machines, measures, and signs releases."
+              "Adjacent directions support comparisons of task objects, outputs, and responsibility boundaries only, not job recommendations. Check individually who diagnoses, machines, measures, and signs releases. Try MM-22 in section 09 to use fictional prototype records and justify what you would send to the engineer for review. Work on paper only."
             ]
           },
           "id": "model-makers-metal-and-plastic.direction-comparison.adjacent-career-comparison-table.3",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -12193,9 +12570,6 @@
             ]
           },
           "id": "model-makers-metal-and-plastic.direction-comparison.adjacent-career-comparison-table.4",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -12207,9 +12581,6 @@
             ]
           },
           "id": "model-makers-metal-and-plastic.direction-comparison.adjacent-career-comparison-table.5",
-          "source_refs": [
-            "onet-details"
-          ],
           "type": "prose"
         }
       ]
@@ -12828,6 +13199,13 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "Stage",
+              "Tasks",
+              "Scope",
+              "Evidence",
+              "Next step"
+            ],
             "rows": [
               [
                 "Guided entry",
@@ -12882,6 +13260,12 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "Scenario",
+              "Action",
+              "Review",
+              "Deliverable"
+            ],
             "rows": [
               [
                 "Drawing contains unspecified tolerances",
@@ -12896,10 +13280,10 @@
                 "Measured values and rework records"
               ],
               [
-                "First program run",
-                "Validate with simulation and a dry run before trial cutting",
-                "The interviewer confirms safety validation steps",
-                "Simulation and single-block run records"
+                "Prior authorized first-program review",
+                "Describe how an authorized employer team reviewed the first program. For MM-22 and W-MM, compare only the fictional paper records.",
+                "The interviewer verifies the candidate’s prior role and the employer’s authorization.",
+                "A redacted record from prior authorized work, if available"
               ],
               [
                 "Batch deviation discovered",
@@ -12927,6 +13311,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Category",
+              "Evidence",
+              "Verifying party",
+              "Conditions",
+              "Limits",
+              "Responsible party",
+              "Next step"
             ],
             "rows": [
               [
@@ -12990,6 +13383,127 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials (about 10 minutes)",
+                  "A fictional team will use one working model to check whether a latch can open. The test request calls for a movable hinge and identifies drawing B.",
+                  "Card U4: drawing B, fixed hinge; card U8: drawing B, movable hinge.",
+                  "Treat the cards as model records only; do not build or operate anything."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Decide whether either model can go to the latch-motion review. Cite the request and both cards.",
+                  "Write one sentence for the engineer explaining what the chosen record can and cannot establish."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Where to find the reference",
+                  "After your own attempt, open “MM-22 answer key” in the FAQ.",
+                  "Compare it with your notes."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Did I cite both records, explain my decision, and name the person who could verify it?"
+                ]
+              }
+            ]
+          },
+          "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+          "title": "MM-22: Choose What to Send to the Prototype Review",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "Day 1",
+                  "Start W-MM. The new team needs a model for a fit check with panel J and a recorded scale of 1:1. Write both requirements."
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "Day 2",
+                  "Read V2: panel J, 1:2. Make a source note."
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "Day 3",
+                  "Read V5: panel L, 1:1. Make a second source note."
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "Day 4",
+                  "Check both cards against the request and write a question for the engineer."
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "Day 5",
+                  "Draft a handover with your selection decision and two record IDs."
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "Day 6",
+                  "Work alone first. Recheck the panel and scale on both cards before revising your note. A second reader is optional."
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "Day 7",
+                  "After the Day 6 independent check, open “W-MM answer key (Day 7)” in the FAQ. Compare your note, then choose one habit to practice."
+                ]
+              }
+            ]
+          },
+          "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+          "title": "Seven-day paper trial: a separate case",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "I read both records.",
+              "I checked both rules.",
+              "I recorded my comparison decision.",
+              "I named the reviewer.",
+              "I used fictional records only.",
+              "I rechecked my work independently.",
+              "I chose one habit to practice."
+            ]
+          },
+          "id": "model-makers-metal-and-plastic.path.seven-day-decision.1",
+          "title": "Judgement questions after seven days",
+          "type": "list"
         }
       ]
     },
@@ -13110,7 +13624,7 @@
                 ]
               },
               {
-                "answer": "Mainland China has no national occupational wage data matching O*NET-SOC 51-4061.00. This page uses 2025 manufacturing wages (non-private units: 113,594 yuan/year) and the broad production/manufacturing job category (80,739 yuan/year) as industry proxies, not individual wages.",
+                "answer": "This review did not find a national mainland China wage distribution matching O*NET-SOC 51-4061.00. The National Bureau of Statistics gives 113,594 yuan per year for manufacturing in urban non-private units, and 80,739 yuan for the broad production and manufacturing job group in enterprises above the designated size. Neither figure estimates individual pay for this occupation.",
                 "id": "model-makers-metal-and-plastic.faq.4",
                 "question": "How should mainland China's wage data be understood?",
                 "question_key": "career.faq.model-makers-metal-and-plastic.4",
@@ -13119,12 +13633,13 @@
                 ]
               },
               {
-                "answer": "2025 BLS OEWS national figures: median hourly wage 30.45 USD, median annual wage 63,340 USD, and 10th—90th percentiles 39,760—99,010 USD/year. Medians and percentiles are neither starting wages nor individual offers and cannot be converted into mainland Chinese earnings.",
+                "answer": "May 2025 U.S. median annual wage: $63,340. National occupation median, not starting pay or an individual offer. BLS Table 1.2 lists 2,600 U.S. jobs in 2025 and projects 2,200 in 2035 for Metal and Plastic Model Makers (51-4061). Its published net decline is 500 jobs (17.3%) with 200 projected average annual openings, including replacements. BLS rounds the levels and net change separately.",
                 "id": "model-makers-metal-and-plastic.faq.5",
                 "question": "What does U.S. wage data represent?",
                 "question_key": "career.faq.model-makers-metal-and-plastic.5",
                 "source_refs": [
-                  "onet-wages"
+                  "onet-wages",
+                  "ep"
                 ]
               },
               {
@@ -13137,11 +13652,13 @@
                 ]
               },
               {
-                "answer": "In the United States, this occupation generally requires a high school diploma or equivalent and approximately one to two years of on-the-job or apprenticeship training. CNC programming roles often require postsecondary education. Verify job and safety requirements in China or the work jurisdiction against relevant authority and employer rules.",
+                "answer": "BLS Table 1.2 lists high school or equivalent and moderate-term on-the-job training as typical U.S. entry for this occupation. Employer requirements can vary. O*NET lists high school or equivalent, a postsecondary certificate, or some college without a degree for some jobs. Its current education panel gives no shares.",
                 "id": "model-makers-metal-and-plastic.faq.7",
                 "question": "What training and qualifications are needed for entry?",
                 "question_key": "career.faq.model-makers-metal-and-plastic.7",
                 "source_refs": [
+                  "ep",
+                  "onet-education-022",
                   "source-pack-onet-localtraining"
                 ]
               },
@@ -13154,12 +13671,26 @@
                   "osha-guarding",
                   "niosh-mwf"
                 ]
+              },
+              {
+                "answer": "Send U8 for the latch-motion review: it matches drawing B and lists a movable hinge. U4 matches the drawing but lists a fixed hinge. The record only supports selecting a model to test; it does not show that the latch passed.",
+                "id": "model-makers-metal-and-plastic.faq.trial-short-reference",
+                "question": "MM-22 answer key",
+                "question_key": "career.faq.model-makers-metal-and-plastic.trial-short-reference"
+              },
+              {
+                "answer": "Neither record meets both requirements. V2 names panel J but is 1:2; V5 is 1:1 but names panel L. Ask the engineer for a 1:1 model of panel J or a corrected record backed by the source drawing.",
+                "id": "model-makers-metal-and-plastic.faq.trial-week-reference",
+                "question": "W-MM answer key (Day 7)",
+                "question_key": "career.faq.model-makers-metal-and-plastic.trial-week-reference"
               }
             ]
           },
           "id": "model-makers-metal-and-plastic.sources.faq-block.1",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "ep",
+            "onet-wages"
           ],
           "type": "faq"
         },
@@ -13197,25 +13728,25 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Modelmakers",
+                "entity": "MBTI 16-Type Personality Test (English)",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Modelmakers",
+                "entity": "Big Five Personality Test (English)",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Modelmakers",
+                "entity": "MBTI 16-Type Personality Test (Chinese)",
                 "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Modelmakers",
+                "entity": "Big Five Personality Test (Chinese)",
                 "id": "navigation-5",
                 "relation": "career.section",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
@@ -13344,7 +13875,7 @@
                 "limitation": "U.S. scope for this occupation; do not extrapolate to other regions.",
                 "market": "US",
                 "name": "51-4061.00 Model Makers, Metal and Plastic — Summary",
-                "period": "2025 BLS OEWS and 2024—2034 projections; accessed 2026-09-25",
+                "period": "Occupational profile; read 2026-11-10",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-4061.00"
@@ -13425,18 +13956,19 @@
                 "url": "https://www.onetonline.org/link/hot_tech/51-4061.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Main industry distribution for this occupation."
+                  "Manufacturing: 61%; Professional, scientific, and technical services: 31%; Other industries: 8%",
+                  "O*NET Details labels the top industries as 2025. The linked industry table gives the rest of the distribution. These are employment shares, with no wage estimate."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "Industry distribution signals employer contexts, not demand forecasts.",
+                "limitation": "O*NET Details labels the top industries as 2025. The linked industry table gives the rest of the distribution. These are employment shares, with no wage estimate.",
                 "market": "US",
-                "name": "Industries: 51-4061.00 - Model Makers, Metal and Plastic",
-                "period": "current page; accessed 2026-09-25",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "name": "O*NET employment by industry",
+                "period": "2025",
+                "publisher": "O*NET",
+                "scope": "Metal and Plastic Model Makers (51-4061)",
                 "url": "https://www.onetonline.org/link/industry/51-4061.00"
               },
               {
@@ -13515,6 +14047,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS Table 1.2 lists 2,600 U.S. jobs in 2025 and projects 2,200 in 2035 for Metal and Plastic Model Makers (51-4061). Its published net decline is 500 jobs (17.3%) with 200 projected average annual openings, including replacements. BLS rounds the levels and net change separately.",
+                  "BLS Table 1.2 lists high school or equivalent and moderate-term on-the-job training as typical U.S. entry for this occupation. Employer requirements can vary."
+                ],
+                "id": "ep",
+                "limitation": "BLS Table 1.2 lists 2,600 U.S. jobs in 2025 and projects 2,200 in 2035 for Metal and Plastic Model Makers (51-4061). Its published net decline is 500 jobs (17.3%) with 200 projected average annual openings, including replacements. BLS rounds the levels and net change separately.",
+                "market": "US",
+                "name": "BLS Table 1.2: employment outlook and typical entry",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "Metal and Plastic Model Makers (51-4061)",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. education information for new hires. It does not describe the current workforce or set a uniform hiring requirement."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-education-022",
+                "limitation": "U.S. education information for new hires. It does not describe the current workforce or set a uniform hiring requirement.",
+                "market": "US",
+                "name": "O*NET new-hire education",
+                "period": "current page; checked 2026-11-10",
+                "publisher": "O*NET / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-4061.00#Education"
               }
             ]
           },
@@ -13769,16 +14331,16 @@
         "evidence_rows": [
           {
             "使用限制": "Describes this occupation's scope only; does not establish adoption or automation levels",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET occupational tasks",
             "研究对象": "O*NET 51-4061.00 tasks and work context",
             "结论": "Defines occupational scope, tasks, and grounds for judgment",
             "链接": "https://www.onetonline.org/link/details/51-4061.00"
           },
           {
             "使用限制": "Common technologies do not equal adoption rates, automation rates, or job outcomes",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET employer-based hot technologies",
             "研究对象": "O*NET Hot Technologies 51-4061.00",
-            "结论": "Lists common software technologies in current roles (CAD/CAM and office software)",
+            "结论": "The 2025 U.S. postings table lists Excel, Office and Word; percentages are not available.",
             "链接": "https://www.onetonline.org/link/hot_tech/51-4061.00"
           },
           {
@@ -13797,10 +14359,17 @@
           },
           {
             "使用限制": "Industry distribution signals employer contexts, not demand forecasts",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET industry distribution",
             "研究对象": "O*NET Industries 51-4061.00",
             "结论": "Lists this occupation's main industry distribution (manufacturing, professional and technical services)",
             "链接": "https://www.onetonline.org/link/industry/51-4061.00"
+          },
+          {
+            "使用限制": "Examples of occupational software skills, not a count of job postings, a universal requirement, or an adoption rate.",
+            "来源": "O*NET occupational software skills",
+            "研究对象": "O*NET 51-4061.00 Software Skills",
+            "结论": "The occupation’s software skills include PTC Creo Parametric and Mastercam.",
+            "链接": "https://www.onetonline.org/link/details/51-4061.00#SoftwareSkills"
           }
         ],
         "heading": "Modelmaker tasks and AI boundaries",
@@ -13810,7 +14379,7 @@
             "概念": "Technical capability"
           },
           {
-            "含义": "Software mentions in recruitment and O*NET Hot Technologies indicate common work environments and technical requirements only, such as PTC Creo Parametric, Mastercam, and Excel. They do not establish that all roles run automatically or that people have been replaced.",
+            "含义": "O*NET’s U.S. employer-based table lists Excel, Office and Word without percentages. Creo Parametric and Mastercam are examples from the separate occupational software skills list. Neither shows how widely employers use automation.",
             "概念": "Adoption evidence"
           },
           {
@@ -13827,8 +14396,8 @@
           },
           {
             "回答": "Drawing issue lists, draft operations and programs, toolpath simulation, measurement record organization, and variant exploration are more readily assisted.",
-            "来源": "O*NET OnLine",
-            "链接": "https://www.onetonline.org/link/hot_tech/51-4061.00",
+            "来源": "O*NET occupational tasks",
+            "链接": "https://www.onetonline.org/link/details/51-4061.00#Tasks",
             "问题": "Which steps are more likely to be assisted by tools?"
           },
           {
@@ -13838,8 +14407,8 @@
             "问题": "Which steps must remain human responsibilities?"
           },
           {
-            "回答": "Indicates common work environments and technical requirements only, such as PTC Creo Parametric, Mastercam, and Excel; does not establish that all roles are automated.",
-            "来源": "O*NET OnLine",
+            "回答": "The 2025 U.S. posting table lists Excel, Office and Word. It does not show posting percentages or automation rates.",
+            "来源": "O*NET employer-based hot technologies",
             "链接": "https://www.onetonline.org/link/hot_tech/51-4061.00",
             "问题": "What do software requirements in recruitment indicate?"
           },
@@ -13882,7 +14451,7 @@
           },
           {
             "步骤": "Step 5: escalate anomalies",
-            "说明": "Stop equipment and escalate to the responsible person when work is beyond scope, beyond authorization, or uncertain."
+            "说明": "Stop work and report the problem under site procedures when it exceeds your authorization."
           }
         ],
         "risk_rows": [
@@ -14280,7 +14849,7 @@
             }
           },
           {
-            "answer": "Modelmakers handle drawing interpretation, operations, setup, and self-inspection. The corresponding responsible personnel confirm first-article and quality conclusions and safety release according to employer procedures. Stop equipment and escalate when beyond authorization or uncertain.",
+            "answer": "Modelmakers handle drawing interpretation, operations, setup, and self-inspection. The corresponding responsible personnel confirm first-article and quality conclusions and safety release according to employer procedures. If a task exceeds your authorization, stop work and notify the responsible person under site procedures.",
             "key": "qa1",
             "question": "How are modelmaker responsibilities divided?",
             "table": {
@@ -14318,7 +14887,7 @@
                 {
                   "alternate_value": null,
                   "label": "06",
-                  "secondary_value": "Stop equipment and escalate; do not handle independently",
+                  "secondary_value": "Stop work and report the problem; do not intervene beyond your authorization",
                   "value": "Out-of-scope anomalies"
                 }
               ]
@@ -14337,7 +14906,7 @@
         "context_links": [
           {
             "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "label": "Check the employment outlook and related directions"
           }
         ],
         "direct_answer": {
@@ -14546,7 +15115,7 @@
             "type": "prose"
           },
           "china_open": "Public responsibility and skill information can support career exploration but cannot establish individual wages in mainland China.",
-          "china_open_note": "For salary judgments, check the specific city, employer, job level, and published contract conditions.",
+          "china_open_note": "This review did not obtain a Chinese employer notice that verifies this exact occupation or a nationwide occupational wage. For a modelmaking posting, check whether it asks for working prototypes, tooling, or production machining.",
           "china_ref": "National Bureau of Statistics: average annual wages of persons employed in urban units in 2025 | https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
           "china_salary_note": "Insufficient evidence: a national wage distribution for this occupation in mainland China has not been obtained. The 2025 manufacturing and production/manufacturing job group statistics are related references, measured as average wages in yuan/year. Different statistical populations must not be combined into an occupational wage range.",
           "china_salary_table": [
@@ -14585,47 +15154,47 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "Metal and Plastic Machine Workers｜https://www.bls.gov/ooh/production/metal-and-plastic-machine-workers.htm",
+        "authority_sources": "National wages | https://www.onetonline.org/link/localwages/51-4061.00; BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET industry shares | https://www.onetonline.org/link/industry/51-4061.00; O*NET Details, Top industries (2025) | https://www.onetonline.org/link/details/51-4061.00#WagesEmployment",
         "bls_table": [
           {
             "指标": "10th wage percentile",
             "数值": "$39,760/year",
-            "说明": "United States nationwide, Model Makers, Metal and Plastic (51-4061); 2025 BLS OEWS wage percentiles | https://www.onetonline.org/link/localwages/51-4061.00?st=CA"
+            "说明": "United States nationwide, Model Makers, Metal and Plastic (51-4061); 2025 BLS OEWS wage percentiles | https://www.onetonline.org/link/localwages/51-4061.00"
           },
           {
             "指标": "25th wage percentile",
             "数值": "$47,360/year",
-            "说明": "United States nationwide, Model Makers, Metal and Plastic (51-4061); 2025 BLS OEWS wage percentiles | https://www.onetonline.org/link/localwages/51-4061.00?st=CA"
+            "说明": "United States nationwide, Model Makers, Metal and Plastic (51-4061); 2025 BLS OEWS wage percentiles | https://www.onetonline.org/link/localwages/51-4061.00"
           },
           {
             "指标": "Median wage",
             "数值": "$63,340/year",
-            "说明": "United States nationwide, Model Makers, Metal and Plastic (51-4061); 2025 BLS OEWS wage percentiles | https://www.onetonline.org/link/localwages/51-4061.00?st=CA"
+            "说明": "United States nationwide, Model Makers, Metal and Plastic (51-4061); 2025 BLS OEWS wage percentiles | https://www.onetonline.org/link/localwages/51-4061.00"
           },
           {
             "指标": "75th wage percentile",
             "数值": "$86,740/year",
-            "说明": "United States nationwide, Model Makers, Metal and Plastic (51-4061); 2025 BLS OEWS wage percentiles | https://www.onetonline.org/link/localwages/51-4061.00?st=CA"
+            "说明": "United States nationwide, Model Makers, Metal and Plastic (51-4061); 2025 BLS OEWS wage percentiles | https://www.onetonline.org/link/localwages/51-4061.00"
           },
           {
             "指标": "90th wage percentile",
             "数值": "$99,010/year",
-            "说明": "United States nationwide, Model Makers, Metal and Plastic (51-4061); 2025 BLS OEWS wage percentiles | https://www.onetonline.org/link/localwages/51-4061.00?st=CA"
+            "说明": "United States nationwide, Model Makers, Metal and Plastic (51-4061); 2025 BLS OEWS wage percentiles | https://www.onetonline.org/link/localwages/51-4061.00"
           },
           {
-            "指标": "Employment (2025)",
-            "数值": "2,600 people",
-            "说明": "U.S. 51-4061, 2025 employment and 2025—2035 projections; openings include growth and replacement, not the stock of advertised jobs | https://www.onetonline.org/link/details/51-4061.00"
+            "指标": "U.S. employment (jobs)",
+            "数值": "2,600 in 2025; 2,200 projected in 2035",
+            "说明": "BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "Employment outlook 2025—2035",
-            "数值": "Decline (-1% or lower; O*NET classification)",
-            "说明": "U.S. 51-4061, 2025 employment and 2025—2035 projections; openings include growth and replacement, not the stock of advertised jobs | https://www.onetonline.org/link/details/51-4061.00"
+            "指标": "Projected job change (2025–2035)",
+            "数值": "−17.3%; published net decline 500 jobs",
+            "说明": "BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "Job openings (annual average, 2025—2035)",
-            "数值": "Approximately 200 openings/year",
-            "说明": "U.S. 51-4061, 2025 employment and 2025—2035 projections; openings include growth and replacement, not the stock of advertised jobs | https://www.onetonline.org/link/details/51-4061.00"
+            "指标": "Projected average annual openings",
+            "数值": "200 per year, including replacements",
+            "说明": "BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
         "boundary": "U.S. data applies only to the U.S. scope and listed periods for O*NET/BLS 51-4061.00 and cannot be converted or extrapolated into individual earnings in mainland China.",
@@ -14656,33 +15225,33 @@
           }
         ],
         "factors_heading": "Factors affecting actual offers",
-        "growth": "Decline of approximately 1% or lower",
+        "growth": "−17.3%",
         "heading": "U.S. wage and employment data boundaries for modelmakers",
         "industry_heading": "Industry and role differences",
-        "industry_period": "2025",
+        "industry_period": "2025 employment shares",
         "industry_rows": [
           {
             "industry": "Manufacturing",
-            "median": "Insufficient evidence: 2025 wages for this occupation in this industry have not been obtained",
-            "note": "O*NET Top industries (2025) shows manufacturing at 61%. This is an employer industry distribution, not occupation-by-industry wages."
+            "median": "61%",
+            "note": "O*NET Details labels the top industries as 2025. The linked industry table gives the rest of the distribution. These are employment shares, with no wage estimate."
           },
           {
             "industry": "Professional, scientific, and technical services",
-            "median": "Insufficient evidence: 2025 wages for this occupation in this industry have not been obtained",
-            "note": "O*NET Top industries (2025) shows professional, scientific, and technical services at 31%; occupation-by-industry wages have not been obtained from this."
+            "median": "31%",
+            "note": "O*NET Details labels the top industries as 2025. The linked industry table gives the rest of the distribution. These are employment shares, with no wage estimate."
           },
           {
-            "industry": "Other manufacturing and engineering services",
-            "median": "Insufficient evidence: 2025 wages for this occupation in this industry have not been obtained",
-            "note": "Verify project cycles and collaboration methods."
+            "industry": "Other industries",
+            "median": "8%",
+            "note": "O*NET Details labels the top industries as 2025. The linked industry table gives the rest of the distribution. These are employment shares, with no wage estimate."
           },
           {
-            "industry": "Other employers and regions",
-            "median": "Insufficient evidence: 2025 wages for this occupation in this industry have not been obtained",
-            "note": "Location, experience, benefits, and qualifications change actual conditions."
+            "industry": "Industry wage for the exact occupation",
+            "median": "Not obtained",
+            "note": "The employment shares do not establish industry wages."
           }
         ],
-        "industry_value_label": "Job data",
+        "industry_value_label": "Employment share",
         "interpretation_heading": "How to interpret",
         "interpretation_rows": [
           {
@@ -14804,7 +15373,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "Suits people willing to interpret drawings into dimensions and operations, repeat measurements and rework, notice small errors, operate tools steadily, and stop equipment to seek verification when dimensions are abnormal or equipment is uncertain.",
+        "summary": "Consider modelmaking if you like turning a drawing into something a team can test and documenting what the model can demonstrate.",
         "title": "What kinds of people are suited to modelmaking?"
       },
       "fit_decision_checklist": {
@@ -14835,12 +15404,12 @@
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-sources",
+            "label": "Check the market data sources"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "Compare related career directions"
           }
         ],
         "direct_answer": {
@@ -14879,7 +15448,7 @@
             "metric": "U.S. employment count",
             "occupation_scope": "O*NET/BLS 51-4061.00 scope for this occupation",
             "source_id": "ep",
-            "value": "Approximately 2,600 people (2025)"
+            "value": "2,600 in 2025; 2,200 projected in 2035"
           },
           {
             "geography": "United States",
@@ -14888,8 +15457,8 @@
             "limitation": "Projections are not guarantees; industry and regional differences are substantial",
             "metric": "U.S. employment growth",
             "occupation_scope": "O*NET/BLS 51-4061.00 scope for this occupation",
-            "source_id": "bls",
-            "value": "Decline (category: -1% or lower; 2025—2035)"
+            "source_id": "ep",
+            "value": "−17.3%; published net decline 500 jobs"
           },
           {
             "geography": "United States",
@@ -14898,35 +15467,35 @@
             "limitation": "Includes replacement needs, not an individual's probability of being hired",
             "metric": "U.S. average annual job openings",
             "occupation_scope": "O*NET/BLS 51-4061.00 scope for this occupation",
-            "source_id": "nbs",
-            "value": "Approximately 200 openings/year (2025—2035)"
+            "source_id": "ep",
+            "value": "200 per year, including replacements"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/details/51-4061.00",
+            "href": "https://www.onetonline.org/link/localwages/51-4061.00",
             "id": "bls",
-            "label": "O*NET 51-4061.00 Model Makers, Metal and Plastic",
-            "scope": "Exact U.S. occupation: 2025 employment, 2025—2035 projections, and 2025 industry distribution; overall employment projections, not attributed to AI"
+            "label": "O*NET national wage distribution",
+            "scope": "May 2025 U.S. occupational OEWS wages."
           },
           {
-            "href": "https://www.onetonline.org/link/details/51-4061.00",
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "ep",
-            "label": "O*NET 51-4061.00 Model Makers, Metal and Plastic",
-            "scope": "Exact U.S. occupation: 2025 employment, 2025—2035 projections, and 2025 industry distribution; overall employment projections, not attributed to AI"
+            "label": "BLS Table 1.2: U.S. employment projections",
+            "scope": "The exact U.S. 51-4061 line; not a hiring count or an AI estimate."
           },
           {
-            "href": "https://www.onetonline.org/link/details/51-4061.00",
+            "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
             "id": "nbs",
-            "label": "O*NET 51-4061.00 Model Makers, Metal and Plastic",
-            "scope": "Exact U.S. occupation: 2025 employment, 2025—2035 projections, and 2025 industry distribution; overall employment projections, not attributed to AI"
+            "label": "NBS 2025 average wages",
+            "scope": "China manufacturing and broad production job group context only."
           },
           {
             "href": "https://www.onetonline.org/link/details/51-4061.00",
             "id": "onet",
-            "label": "O*NET 51-4061.00 Model Makers, Metal and Plastic",
-            "scope": "Exact U.S. occupation: 2025 employment, 2025—2035 projections, and 2025 industry distribution; overall employment projections, not attributed to AI"
+            "label": "O*NET Model Makers tasks",
+            "scope": "U.S. occupation and work context."
           }
         ],
         "transitions": [
@@ -15022,13 +15591,13 @@
             "alternate_value": null,
             "label": "U.S. employment (2025)",
             "secondary_value": null,
-            "value": "Approximately 2,600 people"
+            "value": "2,600 jobs"
           },
           {
             "alternate_value": null,
             "label": "U.S. growth (2025—2035)",
             "secondary_value": null,
-            "value": "Decline of approximately 1% or lower"
+            "value": "−17.3%"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15042,7 +15611,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the assessment",
             "evidence_level": {
               "$item": "model-makers-metal-and-plastic.fit.riasec-fit-block.8",
@@ -15063,7 +15632,7 @@
           },
           {
             "answer": "This tool is for self-exploration only and does not predict machining competence or safety performance. Judge using real workpieces and mentor feedback.",
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Start the assessment",
             "evidence_level": "Exploratory tool, not qualification or hiring evidence",
             "id": "big-five",
@@ -15079,7 +15648,7 @@
           },
           {
             "answer": "This tool is for self-exploration only and does not predict machining competence or safety performance. Judge using real workpieces and mentor feedback.",
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Start the assessment",
             "evidence_level": "Exploratory tool, not qualification or hiring evidence",
             "id": "mbti",
@@ -15095,7 +15664,7 @@
           },
           {
             "answer": "This tool is for self-exploration only and does not predict machining competence or safety performance. Judge using real workpieces and mentor feedback.",
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Start the assessment",
             "evidence_level": "Exploratory tool, not qualification or hiring evidence",
             "id": "enneagram",
@@ -15111,7 +15680,7 @@
           },
           {
             "answer": "This tool is for self-exploration only and does not predict machining competence or safety performance. Judge using real workpieces and mentor feedback.",
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Start the assessment",
             "evidence_level": "Exploratory tool, not qualification or hiring evidence",
             "id": "iq",
@@ -15127,7 +15696,7 @@
           },
           {
             "answer": "This tool is for self-exploration only and does not predict machining competence or safety performance. Judge using real workpieces and mentor feedback.",
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Start the assessment",
             "evidence_level": "Exploratory tool, not qualification or hiring evidence",
             "id": "eq",
@@ -15229,7 +15798,7 @@
             "question": "Should I continue if I am unhappy with my assessment results?"
           },
           {
-            "answer": "Make machined parts using public or fictional drawings, retaining operations, programs, dimension records, and rework reviews.",
+            "answer": "Use the fictional prototype records in MM-22 to write a paper handover that cites the drawing and explains what you would send to the engineer. Actual machining is limited to trained people working with employer authorization.",
             "question": "How can I build a portfolio?"
           },
           {
@@ -15237,7 +15806,7 @@
             "question": "What additional learning is needed for CNC work?"
           },
           {
-            "answer": "When dimensions are abnormal, equipment makes unusual noises, protection is missing, or work exceeds authorization, first stop equipment and escalate to the responsible person.",
+            "answer": "When dimensions are abnormal, equipment makes unusual noises, protection is missing, or work exceeds authorization, stop the task, follow the site’s emergency procedures when applicable, and notify the responsible person.",
             "question": "When should work stop?"
           },
           {
@@ -15337,7 +15906,7 @@
       },
       "riasec_fit_block": {
         "fit_interest": "Interest codes can only help design trials; they cannot determine machining competence.",
-        "interest": "First observe your interests, stress, and safety experience in real machining and safety inspections.",
+        "interest": "Start with MM-22 on paper to see whether you enjoy checking drawing versions and explaining a review decision. Observe real machining only with site permission and supervision.",
         "riasec": "RC (Realistic + Conventional)",
         "riasec_short": "RC describes activity preferences only and cannot determine qualifications."
       },
@@ -15435,6 +16004,27 @@
         "id": "model-makers-metal-and-plastic.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "model-makers-metal-and-plastic.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "model-makers-metal-and-plastic.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "model-makers-metal-and-plastic.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -15500,38 +16090,38 @@
       },
       {
         "derivation": null,
-        "display_value": "3,200 people (2024)",
+        "display_value": "2,600 jobs",
         "fact_id": "us-employment",
         "market": "United States",
-        "measure": "Employment level",
-        "occupation_scope": "Exact occupational data: Model Makers, Metal and Plastic; O*NET-SOC 51-4061.00",
-        "period": "2024 BLS employment level; accessed 2026-09-25",
+        "measure": "Employment (jobs)",
+        "occupation_scope": "Metal and Plastic Model Makers (51-4061)",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline of approximately 1% or lower (2024—2034)",
+        "display_value": "−17.3%",
         "fact_id": "us-growth",
         "market": "United States",
-        "measure": "Projected employment growth",
-        "occupation_scope": "Exact occupational data: Model Makers, Metal and Plastic; O*NET-SOC 51-4061.00",
-        "period": "2024—2034 BLS employment projection; accessed 2026-09-25",
+        "measure": "Projected employment change",
+        "occupation_scope": "Metal and Plastic Model Makers (51-4061)",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 300 openings (2024—2034)",
+        "display_value": "200 projected openings per year",
         "fact_id": "us-openings",
         "market": "United States",
-        "measure": "Job openings during the projection period",
-        "occupation_scope": "Exact occupational data: Model Makers, Metal and Plastic; O*NET-SOC 51-4061.00",
-        "period": "2024—2034 BLS employment projection; accessed 2026-09-25",
+        "measure": "Projected average annual openings",
+        "occupation_scope": "Metal and Plastic Model Makers (51-4061)",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "ep"
         ]
       },
       {
@@ -15589,31 +16179,31 @@
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "U.S. wage reference"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. projected job change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment",
         "key": "us_employment",
-        "label": "U.S. employment count"
+        "label": "U.S. jobs in 2025"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "U.S. average annual job openings"
+        "label": "U.S. projected annual openings"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China wage reference"
+        "label": "Mainland China: exact occupational wage not verified"
       }
     ]
   },
@@ -15621,17 +16211,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Metal and plastic modelmakers set up and operate machine tools according to drawings to produce measurable working models and prototypes. This page explains task scope, U.S. BLS 2025 wages and employment, Chinese industry proxy wages, AI task boundaries, fit signals, and entry paths."
+      "text": "Explore metal and plastic modelmaking, from drawings to working prototypes. See U.S. pay and training data, and try a short prototype review."
     },
     "title": {
       "availability": "available",
       "text": "Metal and plastic modelmakers"
     }
   },
-  "source_content_sha256": "3bad72838ce8aa41f28a1ca0a7e630b630489579197df51699a8954bee00b808",
+  "source_content_sha256": "6e835cb586ce07638e1e13be8764fd33ce9014d2a9dfab5057847b91e91b3315",
   "subject": {
     "canonical_slug": "model-makers-metal-and-plastic",
     "name": "Modelmakers",
-    "summary": "Metal and plastic modelmakers (O*NET 51-4061.00, Model Makers, Metal and Plastic) set up and operate lathes, milling machines, engraving machines, jig borers, and other machine tools to produce metal or plastic working models and prototypes according to drawings. The scope includes template makers but excludes wood modelmakers, die and mold making, pattern forming, and ordinary batch machining."
+    "summary": "Metal and plastic model makers (O*NET 51-4061.00) use machine tools to make working models, prototypes and templates from drawings. They may also make or adapt tools, dies, molds, jigs and fixtures for that work. Compare neighboring roles by their main deliverable: a testable prototype, a foundry pattern, dedicated production tooling or production parts."
   }
 }

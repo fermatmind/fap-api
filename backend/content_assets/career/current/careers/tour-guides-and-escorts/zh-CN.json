@@ -23676,15 +23676,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "导游和陪同人员需要查资料、解释兴趣点、倾听问题并按确认安排引导参观。先用一次原创纸面任务观察准备与修订过程，再核资格、排班及报酬条件。"
+              "纸面体验｜在虚构场馆地图和团队行程单中找出两个不同的集合点，写一条包含待确认信息的通知草稿。 "
             ]
           },
           "id": "tour-guides-and-escorts.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24932,14 +24929,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "导游和陪同人员在参观活动中引导个人或团体，解释地点与展品，回应问题，并根据已确认资料、游客需求和现场规则组织过程。美国任务身份是O*NET39-7011.00，工资就业另用39-7010合并统计。中国导游活动需按实际职责核资格、导游证和旅行社委派。可先用虚构城市参观简报H1—H3，练习资料纠错、时间表与变更交接。"
+              "导游与陪同人员向游客介绍景点、回答问题并带领团队通过现场路线。人数、集合地点与开放信息会影响现场安排。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "tour-guides-and-escorts.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "cn-rule",
-            "editorial"
+            "transfer-onet-39-7011.00"
           ],
           "type": "prose"
         }
@@ -25652,15 +25647,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职业可比AI采用率、任务效果与就业因果数据，评分保持缺失。资料摘要、草稿和路线比较可作编辑试用建议；事实、开放、许可及游客需求仍人核。美国39-7010合并2025—2035增长6.3%、十年净增约3,900人及年均11,900空缺含替补，非39-7011单列或AI独立影响。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：在虚构场馆地图和团队行程单中找出两个不同的集合点，写一条包含待确认信息的通知草稿。"
             ]
           },
           "id": "tour-guides-and-escorts.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "ratify",
-            "nist",
-            "editorial"
+            "transfer-onet-39-7011.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33772,6 +33765,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-39-7011.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 39-7011.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/39-7011.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39295,10 +39315,10 @@
       "text": "导游和陪同人员"
     }
   },
-  "source_content_sha256": "048052bf9e1dbbddd0e5a223986e6ea6c2c61be2adb70292ce44a7499273f42c",
+  "source_content_sha256": "91e922eb9bd64163cd5a70c57e2a451f77a6bdcad666c2613829350d99f2ee04",
   "subject": {
     "canonical_slug": "tour-guides-and-escorts",
     "name": "导游和陪同人员",
-    "summary": "导游和陪同人员在参观活动中引导个人或团体，解释地点与展品，回应问题，并根据已确认资料、游客需求和现场规则组织过程。美国任务身份是O*NET39-7011.00，工资就业另用39-7010合并统计。中国导游活动需按实际职责核资格、导游证和旅行社委派。可先用虚构城市参观简报H1—H3，练习资料纠错、时间表与变更交接。"
+    "summary": "导游与陪同人员向游客介绍景点、回答问题并带领团队通过现场路线。人数、集合地点与开放信息会影响现场安排。"
   }
 }

@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1497,7 +1494,7 @@
         "status": "pending_mapping"
       },
       "item:helpers-extraction-workers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:helpers-extraction-workers.sources.source-card.1": {
         "status": "mapped"
@@ -10834,7 +10831,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10886,7 +10883,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10938,7 +10935,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -24117,12 +24114,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对岗位胜任度的评价，也不构成任何安全、职业健康或法律意见。本页对应美国 O*NET/SOC 47-5081.00「Helpers--Extraction Workers」（采掘辅助工）这一精确职业：以较低技能要求的作业协助采掘类技工（如土方钻探工、爆破与炸药作业工、井架操作员与采矿机械操作员）：供应设备或清洁作业区。官方范围原文：Help extraction craft workers, such as earth drillers, blasters and explosives workers, derrick operators, and mining machine operators, by performing duties requiring less skill. Duties include supplying equipment or cleaning work area. O*NET 列出的核心任务包括（该页列出 14 项任务，页面默认展示前 5 项）：在采掘过程中观察并监控设备运行以发现异常；驾驶移动设备把材料与部件运至开挖现场；使用手动工具卸下材料与装置与机械部件；安装并调整用于开挖地质材料的设备；整理材料以备使用。常见职位名称包括 Continuous Miner Operator Helper 与 Driller Helper 与 Driller's Assistant 与 Longwall Machine Operator Helper 与 Miner Helper 与 Powderman。口径提示：O*NET 在 47-5081.00 页呈现的美国工资与就业数据未标注取自上级或相邻职业，本页按本职业（47-5081.00）自身口径如实标注；该职业在美国属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；本页不把美国口径外推为中国大陆的岗位名称、资格或工资。"
+              "用纸面记录探索自己是否喜欢反复核对和交接。"
             ]
           },
           "id": "helpers-extraction-workers.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -24131,12 +24129,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一份完全虚构的采掘配合任务包（仅用于练习流程，不代表任何真实企业、场地或数据）。请写出方案草案：（1）如何根据一份虚构的作业任务单与场地条件，按结构化思路协助一次采掘或钻探或设备作业（场地与作业面、设备与机具与钻具、材料与备件、观察与监控设备运行的要点、开挖与装载与搬运、作业前后清洁与场地整理、信号与联络与作业许可），并写明哪些信息不足需要补充（地质与场地条件、设备状态与保养记录、爆破与作业许可与安全要求、材料到货与生产衔接）；（2）如何为一份虚构的设备与作业记录表设计填写与复核要点（字段与口径、场地与设备标识、观察与监控与异常、材料与用量、清洁与整理、异常与返工与遗留项、原始记录与修订留痕）；（3）如何撰写一份可交接的班次与作业摘要（场地与设备—观察与运行—作业内容—异常与处置—清洁与整理—遗留项与建议）；（4）如何记录与保存设备与作业数据，并区分可公开信息与涉及企业与场地与设备厂商的受控资料；（5）如何在发现爆破或机械或高处或粉尘与污染物风险、超出岗位授权或安全风险时暂停并复核与隔离与上报。使用公开资料与模拟数据作答，不使用任何真实企业或场地数据。"
+              "到「入行与M 表：采掘辅助工单复核」做原题和变式，再打开常见问题参考解。"
             ]
           },
           "id": "helpers-extraction-workers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24145,12 +24143,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜美国 O*NET 47-5081.00 的工作活动重要性显示：控制机器与过程（94）与搬运与移动物体（94）与操作车辆、机械化装置或设备（93）与维修与维护机械设备（89）与与主管、同事或下属沟通（87）与检查设备、结构或材料（85）是该职业最重要的活动；工作情境显示：接触危险设备 常见（89% 每天）、接触污染物 常见（81% 每天）、面对面讨论频繁（88% 每天）、决策频率高（68% 每天）、与技工与同事紧密协作（72% 持续与他人接触）、错误的后果较严重（56% 极其严重、12% 非常严重）。若你愿意围绕设备与机具与场地动手配合、能按技工指令与作业规程把观察与监控与搬运与整理与清洁做扎实，并对作业安全与生产秩序负责，本职业的日常要求与你的工作方式更接近。"
+              "做《M 表：采掘辅助工单复核》的原题和单项变式，核对安全状态和任务授权，保留原值并标明复核人。"
             ]
           },
           "id": "helpers-extraction-workers.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24159,7 +24157,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜O*NET 同时显示（47-5081.00，工作情境与任务口径）：接触危险设备 常见（89% 每天）；接触污染物 常见（81% 每天）；常在狭窄或高处与露天或井下作业；错误的后果较严重（56% 极其严重、12% 非常严重）；对他人的健康与安全责任较高（65% 极高责任）；生产衔接与工期带来时间压力（31% 每天）。本职业以采掘设备与钻探与爆破与开挖与场地为对象：一次爆破或点火处置不当、一次设备操作或搬运失误、一次材料堆放或堆载不当、一次观察与监控不到位，都可能造成设备损坏、人身伤害与生产中断与合规风险。O*NET 将该职业列入 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；该页学历部分显示 97% 表示要求高中文凭或同等学历、2% 表示要求高中后证书、2% 表示要求副学士或其他两年制学位（该页列出上述三项）；增长标为 Decline（-2%），该页未标注 Bright Outlook。若你难以在粉尘与污染物与噪声与露天或井下与各种天气环境下作业、难以接受随生产与天气与合同期变化与可能加班的节奏，或不愿对安全与工序配合承担责任，应把这些作为现实成本。"
+              "工作中常需反复核对和交接。先用纸面题看自己是否愿意保留安全状态和任务授权的原始记录。"
             ]
           },
           "id": "helpers-extraction-workers.quick-decision.fermat-decision-card.6",
@@ -24173,7 +24171,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项作业上同时完成三件事：把技术做实（依据作业规程与技工指令完成观察与监控与搬运与安装与整理与清洁，产出可用的设备与作业记录）、把安全与合规与边界管住（按爆破与炸药与作业许可与机械与高处与临边与粉尘与污染物要求工作并留痕、区分可公开信息与涉及企业与场地与设备厂商的受控资料并按制度处理、不在无授权时接触爆破或操作或越界处置）、并承担可界定的岗位责任（对本人观察与搬运与安装与整理与清洁与记录负责，对超出岗位授权或涉及爆破与特种作业与重大安全事项按制度提请相应岗位或机构处理）。建议用一次可核验的体验（为一份虚构任务单完成一份协助作业方案与一份设备与作业记录说明，或一次爆破或机械或粉尘异常的处置复盘）来检验，而不是仅依据兴趣问卷的结论。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.quick-decision.fermat-decision-card.7",
@@ -24195,7 +24193,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜本页的「采掘辅助工」是 O*NET 47-5081.00（Helpers--Extraction Workers）这一精确职业，工作可以分成几类：（一）材料与准备——驾驶移动设备把材料与部件运至开挖现场，使用手动工具卸下材料与装置与机械部件，整理材料以备使用；（二）设备安装与调整——安装并调整用于开挖地质材料的设备，协助拆装采掘与钻探设备；（三）运行观察与监控——在采掘过程中观察并监控设备运行以发现异常，并向技工报告；（四）协助采掘作业——向土方钻探工与井架操作员与采矿机械操作员提供协助，采集并检查地质样本，用信号示意开始采掘或钻进；（五）清洁与整理——作业结束后清理现场并清除杂物，清洁与准备开挖或钻进场地。"
+              "采掘作业助手在班组分工内准备和搬运物料、整理作业区、观察设备或作业状态，并记录和报告异常。设备操作、检修与危险工序分别核培训和授权。 条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.profile.career-quick-answers-block.1",
@@ -24209,12 +24207,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "精确47-5081以较低技能任务协助钻探、爆破、井架和采矿机械技工，供应设备或清洁；当前14任务9Core/5Supplemental：观察82、驾驶77、卸料75、安装73、整理72为Core，协助技工83为Supplemental；原具体任务正确保留。活动控制94、搬运94、车辆93、机械维修89、沟通87、检查85正确保留。美国BLS精确47-5081典型高中或同等学历、无相关经验要求、中期在岗训练，不是短期OJT；O*NET新聘97%高中/2%高中后证书/2%副学士合计101%原值照录，不强行归一或猜原因。保留RC兴趣作探索，当前风格依赖73、谨慎60、细节57，不是人格绩效预测；兴趣具体分值未取得。BLS精确47-5081的2025—2035预测约7,100→7,200人，增长1.7%，年均空缺700个含替换，基期自雇5.5%；不是实时招聘、净增或AI因果。"
+              "美国全国工资采用 O*NET 展示的 2025 年 5 月 BLS OEWS（美国本职业 47-5081）。"
             ]
           },
           "id": "helpers-extraction-workers.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -24284,12 +24282,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "任务与场地核对 → 设备与机具检查 → 材料与备件运料与卸料与整理 → 设备安装与调整 → 观察与监控运行与协助作业 → 清洁与整理与记录与交接"
+              "接收记录 → 核来源编号 → 核当班记录 → 保留差异 → 标记复核人 → 交接"
             ]
           },
           "id": "helpers-extraction-workers.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -24396,12 +24396,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的核心理念｜同组与相邻岗位大多以「在作业规程与安全要求内把采掘或钻探或爆破或装卸作业做到规定质量并留痕」为目标，差异在于对象与产出与授权层级：有的以独立钻探或井架或采矿或爆破作业为对象，有的以现场辅助与配合为对象。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -24424,12 +24426,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的主要对象与依据｜土方钻探工依据钻探工艺与地质要求；井架操作员依据油气钻井与井控规程；爆破工依据爆破设计与民用爆炸物品规程；采矿机械操作员依据采矿设备操作规程；建筑工人依据通用施工与作业规程。它们多以独立钻探或井架或爆破或采矿或通用施工为对象，与本职业的采掘现场配合不同。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -24676,12 +24680,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜美国 O*NET 将 47-5081.00（采掘辅助工）列入 Job Zone 1-2（几乎无需至需要一定准备），SVP 区间为 低于 6.0（SVP Below 6.0）；学历部分显示 97% 表示要求高中文凭或同等学历、2% 表示要求高中后证书、2% 表示要求副学士或其他两年制学位（该页列出上述三项）；增长标为 Decline（-2%），未标注 Bright Outlook；在美国该职业准备通常为短期在岗训练与师徒带教。"
+              "BLS 表 1.2 的美国本职业 47-5081职业行显示，2025 年约 7,100 个岗位，2035 年预计约 7,200 个，表列变化 +1.7%，预计年均约 700 个空缺，含替补。人数分别取整。"
             ]
           },
           "id": "helpers-extraction-workers.profile.career-quick-answers-block.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -24881,12 +24886,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：本职业以采掘设备与机具与场地与现场配合为对象，凭设备与场地与配合能力在技工与岗位授权范围内完成观察与监控与搬运与安装与调整与清洁，对作业安全与生产秩序负责；相邻岗位分别以独立钻探或井架或爆破或杂务或通用施工为对象，专业与授权不同。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -25264,7 +25271,7 @@
                 "url": "https://www.onetonline.org/link/hot_tech/47-5081.00"
               },
               {
-                "entity": "O*NET 47-5081.00 就业趋势（本职业自身口径，BLS 就业预测 2024—2034）",
+                "entity": "2025–2035",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
@@ -25478,12 +25485,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务判断｜可在获准环境试验任务单、材料清单与记录草稿，人工核原始信息与现场判据。未取得本职业生成式AI采用率、实测提效、暴露等级或就业因果，不保证职业整体不替代。O*NET列4类软件技能，5项热门是美国2025招聘提及：Office、Excel各1%，Docs、Outlook、Word占比未提供；没有当前监控/数据采集软件目录证据，招聘比例不推使用、AI采用或提效。BLS精确47-5081的2025—2035预测约7,100→7,200人，增长1.7%，年均空缺700个含替换，基期自雇5.5%；不是实时招聘、净增或AI因果。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "工具可辅助记录比对和汇总。原值冲突、例外处理和最终交接由授权人员复核。BLS 就业预测没有测量生成式 AI 的采用率。"
             ]
           },
           "id": "helpers-extraction-workers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -26956,12 +26965,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025第10分位年工资36,960美元；时薪17.77美元"
+              "36,960 美元／年 · 17.77 美元／时"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -26970,12 +26979,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-5081.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/47-5081.00；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26984,12 +26994,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025第25分位年工资41,430美元；时薪19.92美元"
+              "41,430 美元／年 · 19.92 美元／时"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -26998,12 +27008,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-5081.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/47-5081.00；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27012,12 +27023,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025第50分位年工资47,730美元；时薪22.95美元"
+              "47,730 美元／年 · 22.95 美元／时"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27026,12 +27037,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-5081.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/47-5081.00；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27040,12 +27052,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025第75分位年工资57,920美元；时薪27.84美元"
+              "57,920 美元／年 · 27.84 美元／时"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27054,12 +27066,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-5081.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/47-5081.00；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27068,12 +27081,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025第90分位年工资68,020美元；时薪32.70美元"
+              "68,020 美元／年 · 32.70 美元／时"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27082,12 +27095,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-5081.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/47-5081.00；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27096,12 +27110,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确47-5081的2025—2035预测约7,100→7,200人，增长1.7%，年均空缺700个含替换，基期自雇5.5%；不是实时招聘、净增或AI因果。"
+              "2025 年约 7,100 个岗位，2035 年预计约 7,200 个。"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27110,12 +27124,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025—2035精确职业预测；边界｜就业含自雇、空缺含替换，不是实时招聘、净增或AI因果。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27124,12 +27139,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确47-5081的2025—2035预测约7,100→7,200人，增长1.7%，年均空缺700个含替换，基期自雇5.5%；不是实时招聘、净增或AI因果。"
+              "+1.7%"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27138,12 +27153,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025—2035精确职业预测；边界｜就业含自雇、空缺含替换，不是实时招聘、净增或AI因果。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27152,12 +27168,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确47-5081的2025—2035预测约7,100→7,200人，增长1.7%，年均空缺700个含替换，基期自雇5.5%；不是实时招聘、净增或AI因果。"
+              "年均约 700 个，含替补。"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27166,12 +27182,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025—2035精确职业预测；边界｜就业含自雇、空缺含替换，不是实时招聘、净增或AI因果。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27194,12 +27211,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜本页的采掘辅助工是 O*NET 47-5081.00（Helpers--Extraction Workers）这一精确职业：以较低技能要求的作业协助采掘类技工（如土方钻探工、爆破与炸药作业工、井架操作员与采矿机械操作员）：供应设备或清洁作业区。该职业在美国属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；增长标为 2025—2035精确增长1.7%，该页未标注 Bright Outlook。"
+              "BLS 表 1.2 的美国本职业 47-5081职业行显示，2025 年约 7,100 个岗位，2035 年预计约 7,200 个，表列变化 +1.7%，预计年均约 700 个空缺，含替补。人数分别取整。"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27474,12 +27492,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜采掘辅助工（O*NET/SOC 47-5081.00 Helpers--Extraction Workers；招聘与行业内常称采掘辅助工、钻探工辅助人员、矿山辅助作业人员、土石方作业人员、爆破助手）。"
+              "中国大陆工资参考"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27488,12 +27506,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜中国大陆在采矿与油气与钻探与地质工程领域存在与采掘辅助工相近的岗位，其作业与爆破与钻探与机械与高处与临边与装卸与安全与职业健康与记录受《中华人民共和国安全生产法》与民用爆炸物品与特种作业与职业健康与环境保护等相关法规与标准约束；但公开职业统计未按本职业单列全国工资分布。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27502,12 +27520,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "匹配理由｜采矿采石油气企业采掘辅助匹配采矿业；建筑地质服务雇主归类另核，门类不作职业工资；宽口径参考为采矿业城镇非私营/私营单位2025年年平均工资143,361/79,169元。统计覆盖该行业多种职业与职级，不能代填本职业中位数、起薪或个人收入。本轮未取得该职业全国精确工资分布，保留缺口。"
+              "国家统计局 2025 年城镇采矿业年平均工资，非私营单位 143,361 元、私营单位 79,169 元，覆盖行业内多工种。"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27544,12 +27562,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025年 采矿业／城镇非私营单位（行业参考）"
+              "采矿业 · 城镇非私营单位"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27558,13 +27576,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年平均工资 143,361 元/年；行业全体就业人员平均数，不是本职业工资。"
+              "143,361 元／年"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet",
-            "nbs-wage-release-2025"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27573,12 +27590,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025年 采矿业／城镇私营单位（行业参考）"
+              "采矿业 · 城镇私营单位"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27587,13 +27604,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年平均工资 79,169 元/年；行业全体就业人员平均数，不是本职业工资。"
+              "79,169 元／年"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet",
-            "nbs-wage-release-2025"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27602,12 +27618,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆本职业精确全国职业工资"
+              "全国职业工资资料"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27616,12 +27632,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与 O*NET 47-5081.00（采掘辅助工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27630,12 +27646,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜本页为 O*NET 47-5081.00（采掘辅助工）这一精确职业，与土方钻探工（石油天然气除外）（47-5023.00）、石油天然气井架操作员（47-5012.00）、爆破工与弹药处理专家与爆破员（47-5032.00）、杂务工（石油天然气）（47-5071.00）、建筑工人（47-2061.00）等相邻职业不同；工资与就业须按各自职业代码与统计口径核对，不能互相套用。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27658,12 +27674,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 下降 2025—2035精确增长1.7%（2025—2035，BLS 就业预测，本职业（47-5081.00）自身口径；该页未标注 Bright Outlook）"
+              "BLS 表 1.2 的美国本职业 47-5081职业行显示，2025 年约 7,100 个岗位，2035 年预计约 7,200 个，表列变化 +1.7%，预计年均约 700 个空缺，含替补。人数分别取整。"
             ]
           },
           "id": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27694,12 +27711,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET精确全国工资｜https://www.onetonline.org/link/localwages/47-5081.00；BLS精确2025—2035预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS职业组背景｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/47-5081.00；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS 职业手册｜https://www.ecfr.gov/current/title-30/chapter-I/subchapter-H/part-46/section-46.7"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27708,12 +27727,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025第10分位年工资36,960美元；时薪17.77美元"
+              "36,960 美元／年 · 17.77 美元／时"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27722,12 +27741,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-5081.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/47-5081.00；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27736,12 +27756,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025第25分位年工资41,430美元；时薪19.92美元"
+              "41,430 美元／年 · 19.92 美元／时"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27750,12 +27770,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-5081.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/47-5081.00；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27764,12 +27785,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025第50分位年工资47,730美元；时薪22.95美元"
+              "47,730 美元／年 · 22.95 美元／时"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27778,12 +27799,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-5081.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/47-5081.00；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27792,12 +27814,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025第75分位年工资57,920美元；时薪27.84美元"
+              "57,920 美元／年 · 27.84 美元／时"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27806,12 +27828,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-5081.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/47-5081.00；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27820,12 +27843,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025第90分位年工资68,020美元；时薪32.70美元"
+              "68,020 美元／年 · 32.70 美元／时"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27834,12 +27857,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-5081.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/47-5081.00；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27848,12 +27872,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确47-5081的2025—2035预测约7,100→7,200人，增长1.7%，年均空缺700个含替换，基期自雇5.5%；不是实时招聘、净增或AI因果。"
+              "2025 年约 7,100 个岗位，2035 年预计约 7,200 个。"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27862,12 +27886,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025—2035精确职业预测；边界｜就业含自雇、空缺含替换，不是实时招聘、净增或AI因果。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27876,12 +27901,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确47-5081的2025—2035预测约7,100→7,200人，增长1.7%，年均空缺700个含替换，基期自雇5.5%；不是实时招聘、净增或AI因果。"
+              "+1.7%"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27890,12 +27915,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025—2035精确职业预测；边界｜就业含自雇、空缺含替换，不是实时招聘、净增或AI因果。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27904,12 +27930,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确47-5081的2025—2035预测约7,100→7,200人，增长1.7%，年均空缺700个含替换，基期自雇5.5%；不是实时招聘、净增或AI因果。"
+              "年均约 700 个，含替补。"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27918,12 +27944,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025—2035精确职业预测；边界｜就业含自雇、空缺含替换，不是实时招聘、净增或AI因果。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS 调查口径｜https://www.onetonline.org/link/localwages/47-5081.00"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27946,12 +27973,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国精确47-5081.00 May2025中位年工资47,730美元、时薪22.95美元，五分位已核。BLS精确47-5081的2025—2035预测约7,100→7,200人，增长1.7%，年均空缺700个含替换，基期自雇5.5%；不是实时招聘、净增或AI因果。"
+              "2025 年 5 月美国本职业 47-5081全国工资中位数为 47,730 美元／年、22.95 美元／时。 全国工资覆盖领薪雇员。工资分位和就业预测采用不同原表。"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -28044,12 +28072,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 下降 2025—2035精确增长1.7%（2025—2035，BLS 就业预测，本职业（47-5081.00）自身口径；该页未标注 Bright Outlook）"
+              "BLS 表 1.2 的美国本职业 47-5081职业行显示，2025 年约 7,100 个岗位，2035 年预计约 7,200 个，表列变化 +1.7%，预计年均约 700 个空缺，含替补。人数分别取整。 全国工资覆盖领薪雇员。工资分位和就业预测采用不同原表。"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -28282,12 +28311,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 22.95 美元 / 中位年薪 47,730 美元（2025 年，BLS OEWS，本职业（47-5081.00）自身口径）"
+              "2025 年 5 月美国本职业 47-5081全国工资中位数为 47,730 美元／年、22.95 美元／时。"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -28296,12 +28326,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国分布位置，不能反推经验、职责或起薪；个人工资成因另核。"
+              "2025 年 5 月美国全国职业工资。"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -28310,12 +28340,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位代表分布中点的典型水平，但不代表入职起薪；随地区、场地、工种、技能、资格与职责范围变化上升；为本职业自身口径，不代表相邻职业。"
+              "2025 年 5 月美国全国职业工资。"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -28324,12 +28354,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国分布位置，不能反推经验、职责或起薪；个人工资成因另核。"
+              "2025 年 5 月美国全国职业工资。"
             ]
           },
           "id": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         }
@@ -28356,31 +28386,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
-                "entity": "智力与推理测试",
+                "entity": "矩阵推理",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "情绪智力测试",
+                "entity": "情绪沟通习惯自评",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "爆破工、弹药处理专家与爆破员",
@@ -28593,7 +28623,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "如何理解这一兴趣代码：RC 表示现实型（动手操作设备并使用工具与材料从事体力活动）与常规型（按程序与规章组织信息与数据并保持秩序）；用于理解本职业的偏好方向，不是能力或资格判定。"
+              "O*NET 47-5081.00 的兴趣代码为 RC（现实型、常规型），可用来理解职业任务偏好。"
             ]
           },
           "id": "helpers-extraction-workers.fit.riasec-fit-block.9",
@@ -28678,7 +28708,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "现实型—常规型"
+              "现实型、常规型"
             ]
           },
           "id": "helpers-extraction-workers.fit.riasec-fit-block.12",
@@ -28763,7 +28793,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑建议观察读图、尺寸与数据核对；没有证据比较IQ与实务能力的预测效度。"
+              "工作中的数字核对看实际岗位任务。可先练记录与单位核对。 通过矩阵图形观察自己的推理过程。"
             ]
           },
           "id": "helpers-extraction-workers.fit.personality-fit-block.18",
@@ -28806,7 +28836,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "分数高低不能说明能否学会观察与监控与安装与调整配合；应通过场地跟岗或实习或模拟任务与技工评价来检验。"
+              "测评用于个人探索。岗位培训与授权按实际要求核实。"
             ]
           },
           "id": "helpers-extraction-workers.fit.personality-fit-block.21",
@@ -28820,7 +28850,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑建议观察工期压力下沟通、异常说明与复核；不能由EQ分数推质量或安全。"
+              "实际沟通要能听清差异并准确交接。 通过自评回顾日常情绪沟通习惯。"
             ]
           },
           "id": "helpers-extraction-workers.fit.personality-fit-block.22",
@@ -28863,7 +28893,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪能力可以通过实际工作与带教与刻意练习提升，不必以测评分数自我设限。"
+              "测评用于个人探索。岗位培训与授权按实际要求核实。"
             ]
           },
           "id": "helpers-extraction-workers.fit.personality-fit-block.25",
@@ -29367,7 +29397,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "保留RC兴趣作探索，当前风格依赖73、谨慎60、细节57，不是人格绩效预测；兴趣具体分值未取得。；JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
+              "保留RC 兴趣作探索，当前风格依赖73、谨慎60、细节57，不是人格绩效预测；兴趣具体分值未取得。；JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
             ]
           },
           "id": "helpers-extraction-workers.fit.personality-fit-block.61",
@@ -29381,7 +29411,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "保留RC兴趣作探索，当前风格依赖73、谨慎60、细节57，不是人格绩效预测；兴趣具体分值未取得。；JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
+              "保留RC 兴趣作探索，当前风格依赖73、谨慎60、细节57，不是人格绩效预测；兴趣具体分值未取得。；JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
             ]
           },
           "id": "helpers-extraction-workers.fit.personality-fit-block.62",
@@ -29395,7 +29425,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "保留RC兴趣作探索，当前风格依赖73、谨慎60、细节57，不是人格绩效预测；兴趣具体分值未取得。；JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
+              "保留RC 兴趣作探索，当前风格依赖73、谨慎60、细节57，不是人格绩效预测；兴趣具体分值未取得。；JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
             ]
           },
           "id": "helpers-extraction-workers.fit.personality-fit-block.63",
@@ -29409,7 +29439,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "保留RC兴趣作探索，当前风格依赖73、谨慎60、细节57，不是人格绩效预测；兴趣具体分值未取得。；JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
+              "保留RC 兴趣作探索，当前风格依赖73、谨慎60、细节57，不是人格绩效预测；兴趣具体分值未取得。；JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
             ]
           },
           "id": "helpers-extraction-workers.fit.personality-fit-block.64",
@@ -29466,34 +29496,34 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "O*NET 47-5081.00 详细任务与工作活动",
+                "entity": "O*NET OnLine：采掘辅助工详细资料（47-5081.00）",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/47-5081.00"
               },
               {
-                "entity": "O*NET精确任务与工作情境",
+                "entity": "O*NET OnLine：采掘辅助工详细资料（47-5081.00）",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/47-5081.00"
               },
               {
-                "entity": "O*NET任务与记录线索",
+                "entity": "《中华人民共和国安全生产法》",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/47-5081.00"
+                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
               },
               {
-                "entity": "应急令19号实际目录特种作业",
+                "entity": "《中华人民共和国个人信息保护法》",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
+                "url": "https://www.gov.cn/xinwen/2021-08/20/content_5632486.htm"
               },
               {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
+                "entity": "本站任务与人工复核说明",
                 "id": "link-6",
                 "relation": "career.evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://fermatmind.com"
               }
             ]
           },
@@ -29508,12 +29538,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界｜本页列出的是本职业在观察与监控与搬运与安装与调整与清洁中较常见的失效类型与控制要点，用于帮助识别与管理风险，不构成任何安全、爆破、特种作业、职业健康或法律意见或对个案的结论；凡涉及爆破作业许可、设备安全检验、事故认定、职业病诊断的须由具备相应资格的岗位或机构处理。"
+              "按项目、地区和任务核授权。 中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.8",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29522,12 +29553,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业风险的核心不是「能不能把设备操作好」，而是四类后果较重的失效：安全与人身失效（爆破与炸药与点火、危险设备与机械与挤压、粉尘与污染物与噪声、起重与搬运与材料堆放）；质量与返工失效（观察与安装或调整不到位导致设备故障与生产中断与返工）；设备失效（操作或搬运不当造成设备损坏）；记录与追溯失效（观察与用量数据失真导致责任无法界定）。"
+              "高频核对、差额与权限冲突需保留原件并交接。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.9",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29578,12 +29611,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "爆破相关作业须按作业许可与资质与警戒要求执行，非授权人员不得接触炸药；发现爆破或异常立即停止并撤离与隔离与上报"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.13",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -29592,12 +29627,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜生产紧张时被要求在不完全具备作业许可的情况下先行接触爆破相关物料，手续稍后补办。"
+              "工单的安全状态缺失，或现场状态与工单不同。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.14",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -29634,12 +29671,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按设备操作与维护规程作业并落实隔离与上锁挂牌与防护；发现设备或机械异常立即停止并隔离与上报"
+              "保留现有原件和版本号，交记录负责人。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.17",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -29648,12 +29686,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜人手不足时被要求以未受训人员临时接手设备操作或维护作业。"
+              "报告引用的原件版本无法确认。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -29690,12 +29729,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按通风与除尘与个人防护与物质安全要求作业并使用合适防护用品；发现粉尘或污染物异常立即停止并复核并上报"
+              "按机构制度核允许访问、复制和披露的范围。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "privacy",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29704,12 +29744,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑场景｜通风除尘或个人防护未落实，要求先进入粉尘或污染区域完成供料再补防护。"
+              "接收人未获核实的资料权限。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.22",
           "source_refs": [
-            "onet"
+            "privacy",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29746,12 +29787,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按起重与搬运与堆放规程作业并检查吊具与堆载与固定；发现起重或堆载异常立即撤离并隔离与上报"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.25",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -29760,12 +29803,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜材料堆放点或吊装通道条件被忽略，被要求先完成供料再处理堆载与固定问题。"
+              "所分配任务涉及另行批准或资格。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.26",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -29802,12 +29847,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按作业规程与设备手册完成观察与监控与安装与调整；发现不合格或返工立即隔离并上报与配合返修"
+              "先核作业区、防护和班组分工；发现异常按现场程序停手并报告。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.29",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -29816,12 +29863,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜观察或调整结果边缘不合格，生产压力下被要求先恢复运行并稍后复测或调整。"
+              "在设备与物料周围进行辅助任务。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.30",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -29858,12 +29907,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按制度如实记录并保留原始记录与修订留痕；严禁生成未经核实的内容或越界出具安全或检验结论"
+              "保留交接记录，由有授权的负责人确认。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.33",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -29872,12 +29922,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜发现某设备的观察与用量数据与记录不符，被要求以现有记录先出具质量结论并稍后修订。"
+              "复核或报告签发尚待确认。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.34",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -29886,7 +29937,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对本职业的任务与工作情境，帮助识别观察与监控与搬运与安装与调整与清洁环节的失效类型（美国口径）。"
+              "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.35",
@@ -29900,7 +29951,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "精确职业任务与环境线索，不是逐卡事故率或中国资格。"
+              "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.36",
@@ -29914,12 +29965,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "任务线索，不是所有技术数据保密或所有施工许可的法。"
+              "中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。"
             ]
           },
           "id": "helpers-extraction-workers.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30030,32 +30081,32 @@
               {
                 "id": "education",
                 "values": [
-                  "美国 O*NET 将 47-5081.00（采掘辅助工）列入 Job Zone 1-2（几乎无需至需要一定准备），SVP 区间为 低于 6.0（SVP Below 6.0）；学历部分显示 97% 表示要求高中文凭或同等学历、2% 表示要求高中后证书、2% 表示要求副学士或其他两年制学位（该页列出上述三项）；该描述不取代企业与主管机关对资格与作业许可的要求。",
-                  "能否独立完成观察与监控与安装与调整不取决于学历本身，而取决于是否经过技能训练与取得相应资格并在岗位授权范围内作业。",
+                  "美国典型入行",
+                  "美国 BLS 表 1.2 列高中或同等学历与中期在岗培训为典型准备。实际岗位另核作业区域、危险识别、带教和任务授权。",
                   "学历与训练只影响准入起点，能否熟练完成观察与监控与搬运与安装与调整与清洁主要取决于在岗训练与带教与考核结果。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "中国实际目录特种作业按应急19号培训考核持证及到期换证；实际爆破作业另按民爆条例33条专业培训、设区市公安考核及人员许可证，单位许可与人员资格分开，非所有采掘帮工都要爆破证。；其他培训、防护与健康检查按真实作业危害核。",
-                  "涉及爆破作业许可、设备安全检验、事故认定、职业病诊断的须由具备相应资格的岗位或机构处理。",
+                  "美国方法或规则",
+                  "美国 30 CFR 46.7 规定适用矿山的新任务培训，按条文适用范围及例外。核矿山类型、监管法域和具体设备，危险作业资格与现场授权分别确认。 按项目、地区和任务核授权。",
                   "涉及企业与场地与设备厂商技术资料的数据须按保密与最小必要要求管理，不得外发至未授权环境。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "保留RC兴趣作探索，当前风格依赖73、谨慎60、细节57，不是人格绩效预测；兴趣具体分值未取得。；JobZone1-2，SVP低于6；风格是职业描述，不是个体人格预测。",
-                  "本职业需在粉尘与污染物与噪声与露天或井下环境动手作业，并通过观察与监控与量具判断设备与场地状态。",
+                  "大陆法律边界",
+                  "中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。",
                   "工作情境显示接触危险设备与污染物与噪声常见、决策频率高、错误的后果较严重、对他人的健康与安全责任较高、受生产与工序约束。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "常用工具与设备：移动设备与装载机具、手动工具与专用机具、钻具与采掘设备、通风与除尘与防护装备、信号与联络设备、个人防护装备。",
-                  "O*NET列4类软件技能，5项热门是美国2025招聘提及：Office、Excel各1%，Docs、Outlook、Word占比未提供；没有当前监控/数据采集软件目录证据，招聘比例不推使用、AI采用或提效。",
+                  "实际任务与权限",
+                  "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。 中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。",
                   "技术提及不等同于自动化程度或责任转移。"
                 ]
               }
@@ -30063,7 +30114,12 @@
           },
           "id": "helpers-extraction-workers.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "us-work-standard",
+            "cn-work-example",
+            "onet",
+            "cn-work-example",
+            "cn-work-example"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -30076,41 +30132,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "练习材料（全部虚构）",
-                  "一份作业任务单与一张场地与作业面示意与一份设备与材料清单（设备与机具与钻具与备件规格）、一份设备操作手册与场地条件说明、观察与监控与量具使用说明。",
-                  "一份空白设备与观察与材料与用量记录表。"
+                  "M 表：采掘辅助工单复核",
+                  "虚构纸面练习，只判断记录。安全条件栏标异常，或安全状态缺失，均标“停手”，交安全负责人；安全状态正常但工单无任务授权，交班组长；两项齐备标“记录齐备”。M1 为正常、已授权；M2 为状态缺失、无授权；M3 为正常、无授权。变式只将 M2 的安全状态改为正常。分别写原值、状态和复核人。",
+                  "只使用虚构题面。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "练习任务",
-                  "为一份虚构任务单编制一份协助作业方案并填写一份设备与作业记录。",
-                  "说明材料与运料与卸料与整理、设备安装与调整、观察与监控运行、协助采掘作业、清洁与场地准备与异常预案。"
+                  "要交付的记录",
+                  "分别写原题和变式。每行记录原值、状态和复核人。",
+                  "保留原值与缺失状态，并记复核人。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "做法建议",
-                  "先核对场地与设备与材料与安全条件，再按作业规程与技工指令确定观察与安装与搬运步骤。",
-                  "执行时记录设备与观察与材料与用量数据，完成后清洁与整理并核对；对信息不足处明确标注并说明为何不代填。"
+                  "完成后复核",
+                  "完成两种答案后，到常见问题打开折叠参考解。",
+                  "下方链接可跳到常见问题。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界说明",
-                  "本练习只用于检验流程理解与记录能力，所有企业与场地与数据均为虚构。"
+                  "练习边界",
+                  "只用虚构纸面记录和编号。记录齐备仅指题面的文件状态。"
                 ]
               }
             ]
           },
           "id": "helpers-extraction-workers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "paper-answer-key"
           ],
-          "title": "入行练习：一次完整的观察与监控与安装与搬运与清洁配合任务（虚构材料）",
+          "title": "纸面试做",
           "type": "cards"
         },
         {
@@ -30121,38 +30178,38 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "作品矩阵",
-                  "把一份虚构的协助作业方案、一份设备与观察与监控记录、一份材料与用量记录、一份清洁与场地准备与异常处置说明整理成作品集，逐项对应招聘要求中的观察与监控与安装与调整与搬运与清洁与安全与记录能力。"
+                  "并列原件",
+                  "保留编号和原值。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "独立复核",
-                  "把方案与记录交给他人按作业规程复核，检查观察与安装与调整与清洁是否自洽；能被他人在不看说明的情况下复核，才说明方案与记录可交接。"
+                  "标记差异",
+                  "区分不符与缺失。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "汇报摘要",
-                  "用一页说明本场地与设备的材料与用量—观察与运行—安装与调整—清洁与整理—遗留项，便于面试或带教时展示你如何把设备与依据与记录串起来。"
+                  "指定复核人",
+                  "按题面指定规则交接。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具说明",
-                  "说明你所用观察与监控与量具与设备的读数与误差与状态情况，以及哪些判断依赖经验而非工具，体现对数据与依据边界的把握。"
+                  "区分原题和变式",
+                  "只改变式指定的一项。"
                 ]
               }
             ]
           },
           "id": "helpers-extraction-workers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "入门时可以准备哪些可复核的作品材料？",
+          "title": "练习记录",
           "type": "cards"
         },
         {
@@ -30213,59 +30270,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（接受任务—设备与机具检查—材料运料与整理—设备安装与调整—观察与监控运行与协助采掘—清洁与准备场地与记录）。",
-                  "记录你观察到的爆破与机械与高处与临边与粉尘与污染物安全要求。"
+                  "读题",
+                  "列题面字段。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "随技工观摩一次设备观察与监控与安装，记录步骤与安全动作。",
-                  "整理一份你观察到的观察与监控步骤与判据清单。"
+                  "核第一项",
+                  "保留原值。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "在带教下参与工具与机具准备与记录填写与材料整理。",
-                  "写出你认为最容易出错的三个环节及原因。"
+                  "核第二项",
+                  "核差异或缺项。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "在带教下参与一次设备安装与调整与运行监控。",
-                  "说明如果设备或机械或爆破异常你会如何停止与上报。"
+                  "保留差异",
+                  "写下原值与复核人。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在带教下参与一次材料运料与卸料与场地清洁并填写记录。",
-                  "列出判定合格与否的依据与不合格的隔离处置步骤。"
+                  "做变式",
+                  "只改题面给定的一项。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "整理一份虚构设备的观察与用量与清洁记录说明并与技工核对。",
-                  "记录你与技工在观察或安装或判定上的分歧及处理方式。"
+                  "记结果",
+                  "分别保存原题和变式。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "复盘七天体验：哪一类任务你有把握、哪一类需要更多训练，并据此决定是否继续投入。",
-                  "把复盘结论写成一页，作为是否入行的依据而不是凭兴趣判断。"
+                  "对答案",
+                  "打开常见问题折叠解。"
                 ]
               }
             ]
           },
           "id": "helpers-extraction-workers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天体验：用虚构材料完成一次观察与设备与场地配合闭环",
+          "title": "纸面核对顺序",
           "type": "timeline"
         },
         {
@@ -30273,20 +30330,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能在安全与规程与质量要求下完成观察与监控与安装与调整与搬运与清洁并使过程与依据可复核。",
-              "继续：在生产与工期压力下坚持规程与证据与留痕，不因赶工跳过核对或放宽安全或伪造记录。",
-              "继续：能用一次可核验的配合任务或异常处置复盘证明自己的设备与配合能力。",
-              "继续：愿意在粉尘与污染物与噪声与露天或井下环境中长期动手工作并对作业安全与生产秩序负责。",
-              "谨慎：若七天体验中反复对安全规章或规程核对感到难以坚持，应重新评估适配。",
-              "谨慎：若难以接受随生产与天气与合同期变化的加班与节奏，或难以承受露天或井下环境，应重新评估适配。",
-              "谨慎：若对爆破或机械或粉尘异常倾向先处置后补依据，应重新评估职业适配与风险意识。"
+              "核对原值。",
+              "区分差异和缺项。",
+              "核对复核对象。",
+              "检查变式是否只改一项。",
+              "按题设判断记录状态。",
+              "记录仍未解决的差异。",
+              "想一个可向研究负责人确认的分工问题。"
             ]
           },
           "id": "helpers-extraction-workers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "完成后的复核",
           "type": "list"
         },
         {
@@ -30313,64 +30370,67 @@
             ],
             "rows": [
               [
-                "职业学校训练或相关在岗经验",
-                "多数岗位",
-                "满足入门的设备与场地与安全知识起点",
-                "美国BLS精确47-5081典型高中或同等学历、无相关经验要求、中期在岗训练，不是短期OJT；O*NET新聘97%高中/2%高中后证书/2%副学士合计101%原值照录，不强行归一或猜原因。",
-                "完成职业学校训练或积累在岗经验",
-                "数周至数月",
-                "学历与训练不等于资格或作业授权"
+                "美国岗位准备",
+                "相关岗位",
+                "核实际职责",
+                "查官方资料",
+                "问带教与职责",
+                "按实际岗位",
+                "授权分别核对"
               ],
               [
-                "安全与技能培训与考核",
-                "所有岗位",
-                "满足安全与爆破与机械与高处与临边作业要求",
-                "涉及相应作业的岗位普遍要求",
-                "参加企业或机构的安全与技能培训并通过考核",
-                "数天到数周",
-                "培训与考核不等于爆破或设备安全检验授权"
+                "美国适用规则",
+                "受规则约束的任务",
+                "核适用项目和任务",
+                "见美国来源",
+                "向机构核相应资格",
+                "按适用规则",
+                "范围依实际项目"
               ],
               [
-                "师徒带教或在岗训练",
-                "希望系统入门者",
-                "在带教下系统掌握观察与监控与安装与调整与搬运",
-                "可选路径，目录示例不证明常见或普遍必需。",
-                "参加企业带教或在岗训练并在监督下作业",
-                "数周至数月",
-                "带教经历不等于自动获得岗位或作业授权"
+                "大陆适用范围",
+                "适用岗位",
+                "核机构、职责与权限",
+                "见大陆来源",
+                "向机构核对分工",
+                "按实际岗位",
+                "超权限交负责人"
               ],
               [
-                "爆破与特种作业与高处作业资格",
-                "涉及相应作业岗位",
-                "满足爆破与特种作业与高处作业的法定或合规要求",
-                "中国实际目录特种作业按应急19号培训考核持证及到期换证；实际爆破作业另按民爆条例33条专业培训、设区市公安考核及人员许可证，单位许可与人员资格分开，非所有采掘帮工都要爆破证。",
-                "参加认可培训与考核并取得资格或作业许可",
-                "数天到数周",
-                "资格范围以证书与主管机关与作业许可为准"
+                "大陆适用范围",
+                "适用岗位",
+                "核机构、职责与权限",
+                "见大陆来源",
+                "向机构核对分工",
+                "按实际岗位",
+                "超权限交负责人"
               ],
               [
-                "职业健康检查与防护要求",
-                "涉及粉尘与噪声与井下岗位",
-                "满足职业健康与劳动保护要求",
-                "涉及相应危害因素的岗位通常要求",
-                "接触职业病危害者按规定检查与防护；岗位调整依危害及结果，不固定要求所有人轮岗。",
-                "周期性",
-                "检查与防护不改变作业危害与安全责任"
+                "大陆适用范围",
+                "适用岗位",
+                "核机构、职责与权限",
+                "见大陆来源",
+                "向机构核对分工",
+                "按实际岗位",
+                "超权限交负责人"
               ],
               [
-                "企业岗位与作业授权",
-                "所有独立作业岗位",
-                "取得独立观察与操作与作业配合的权限前提",
-                "按企业生产与安全管理制度要求",
-                "经考核合格并在岗位与作业授权范围内作业",
-                "随岗位安排",
-                "岗位授权不等于爆破或设备安全检验权限"
+                "大陆适用范围",
+                "适用岗位",
+                "核机构、职责与权限",
+                "见大陆来源",
+                "向机构核对分工",
+                "按实际岗位",
+                "超权限交负责人"
               ]
             ]
           },
           "id": "helpers-extraction-workers.path.credential-decision.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -30380,15 +30440,17 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜应聘条件、学历、训练证明、安全与技能培训、爆破与特种作业与高处作业资格、职业健康检查、岗位与作业授权、爆破作业许可与设备安全检验是不同状态：满足招聘条件不等于取得独立接触爆破或操作关键设备或出具检验结论的权限。在美国，该职业属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0）），增长标为 Decline（-2%）。",
-              "美国BLS精确47-5081典型高中或同等学历、无相关经验要求、中期在岗训练，不是短期OJT；O*NET新聘97%高中/2%高中后证书/2%副学士合计101%原值照录，不强行归一或猜原因。；中国实际目录特种作业按应急19号培训考核持证及到期换证；实际爆破作业另按民爆条例33条专业培训、设区市公安考核及人员许可证，单位许可与人员资格分开，非所有采掘帮工都要爆破证。；Miner I（Mine & Quarry）只是当前1个学徒示例，非普遍必需。",
-              "资格边界（三）｜本页列示的准备项不等于授权，也不自动带来爆破作业、设备安全检验、对外披露的权限；真实权限须以企业与主管机关要求为准。",
-              "应急19号目录特种作业按现行有效期及到期换证；民爆人员资格等级与单位项目许可另核，不把旧固定3年复审或同一证种套全部采掘帮工。"
+              "中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。",
+              "美国 30 CFR 46.7 规定适用矿山的新任务培训，按条文适用范围及例外。核矿山类型、监管法域和具体设备，危险作业资格与现场授权分别确认。",
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。",
+              "纸面练习只用虚构资料。"
             ]
           },
           "id": "helpers-extraction-workers.path.credential-boundary.1",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -30398,13 +30460,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本页不引用任何具体招聘公告的数量或薪酬数字。采掘辅助工岗位多通过采矿与采石与油气开采与地质与工程服务与建筑企业与项目渠道招聘，且受地区与场地与工种与项目周期影响，公开渠道的样本难以代表整体市场；招聘要求与授权须以书面招聘信息与聘用合同与岗位说明与生产与安全制度文件为准。",
-              "本页只列核对要点，不构成录用或薪酬承诺。"
+              "中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。",
+              "按实际岗位核任务、机构和授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.recruitment-sample.1",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -30415,10 +30477,10 @@
           "data": {
             "entries": [
               {
-                "entity": "BLS精确职业典型教育训练",
+                "entity": "O*NET OnLine：采掘辅助工详细资料（47-5081.00）",
                 "id": "link-1",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.onetonline.org/link/details/47-5081.00"
               },
               {
                 "entity": "O*NET任务、情境与JobZone",
@@ -30451,12 +30513,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以安全与技能训练与资格与企业授权与考核为准，也不代表取得独立接触爆破或操作关键设备或设备安全检验的权限。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。 中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。 美国 30 CFR 46.7 规定适用矿山的新任务培训，按条文适用范围及例外。核矿山类型、监管法域和具体设备，危险作业资格与现场授权分别确认。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.11",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -30465,12 +30529,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在带教下承担材料与工具准备与观察与搬运协助与清洁与记录协助；不独立接触爆破或操作关键设备或出具检验结论。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.12",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -30577,11 +30643,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国BLS精确47-5081典型高中或同等学历、无相关经验要求、中期在岗训练，不是短期OJT；O*NET新聘97%高中/2%高中后证书/2%副学士合计101%原值照录，不强行归一或猜原因。按实际作业核资格和企业授权；学徒、职业课程或全部专项证种不是普遍必需。发展阶梯为编辑规划，不保证录用或晋升。"
+              "美国 BLS 表 1.2 列高中或同等学历与中期在岗培训为典型准备。实际岗位另核作业区域、危险识别、带教和任务授权。 美国 30 CFR 46.7 规定适用矿山的新任务培训，按条文适用范围及例外。核矿山类型、监管法域和具体设备，危险作业资格与现场授权分别确认。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.20",
           "source_refs": [
+            "bls-ep-2025-2035",
+            "us-work-standard",
             "onet"
           ],
           "type": "prose"
@@ -30591,12 +30659,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜接受职业训练、完成跟岗与实务、取得学历或训练证明、通过安全与技能考核与爆破与特种作业与高处作业资格、并入职业健康管理、取得企业岗位与作业授权是不同状态；本页列示的准备项不等于授权，也不自动带来爆破作业或设备安全检验或对外披露权限。"
+              "美国 30 CFR 46.7 规定适用矿山的新任务培训，按条文适用范围及例外。核矿山类型、监管法域和具体设备，危险作业资格与现场授权分别确认。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.21",
           "source_refs": [
-            "onet"
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30605,14 +30673,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国BLS精确47-5081典型高中或同等学历、无相关经验要求、中期在岗训练，不是短期OJT；O*NET新聘97%高中/2%高中后证书/2%副学士合计101%原值照录，不强行归一或猜原因。；中国实际目录特种作业按应急19号培训考核持证及到期换证；实际爆破作业另按民爆条例33条专业培训、设区市公安考核及人员许可证，单位许可与人员资格分开，非所有采掘帮工都要爆破证。；美国与中国法域分开，不拼接。"
+              "按工作地点和任务核范围"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.22",
           "source_refs": [
-            "onet",
-            "mem-special-operation-2026",
-            "civil-explosives-regulation"
+            "cn-work-example",
+            "us-work-standard",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30621,12 +30689,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "小结｜把路径理解为学习—跟岗与实务—安全与技能与资格—岗位与作业授权—负责的循环：先完成技能训练，再在带教中熟悉观察与监控与安装与调整与搬运与生产安全制度，取得资格与作业授权后独立作业并在方向深化；涉及爆破作业与设备安全检验与重大返工的事项按制度与主管机关要求处理。"
+              "中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30635,7 +30703,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国BLS精确47-5081典型高中或同等学历、无相关经验要求、中期在岗训练，不是短期OJT；O*NET新聘97%高中/2%高中后证书/2%副学士合计101%原值照录，不强行归一或猜原因。"
+              "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.24",
@@ -30691,12 +30759,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "材料与工具基础训练记录；安全与设备基础培训。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.28",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -30705,7 +30775,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "熟悉运料与卸料与机具与安全要点。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.29",
@@ -30719,7 +30789,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "运料协助记录与带教评价；能复述设备与安全与上报要点。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.30",
@@ -30733,12 +30803,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在带教下熟悉材料与运料与卸料与机具与安全，不独立接触爆破或操作关键设备。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.31",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -30761,12 +30834,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "岗位授权与安全与资格；材料与设备经历。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.33",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -30775,7 +30850,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在不同材料与场地条件下积累经验，练习运料与整理与准备方法。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.34",
@@ -30789,7 +30864,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "材料与用量与整理记录及复核意见。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.35",
@@ -30803,12 +30878,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按规程独立完成材料与运料与卸料与整理与记录，发现异常按制度隔离与上报。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.36",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -30831,12 +30909,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应岗位授权与专项资格；复杂场地经验。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.38",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -30845,7 +30925,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习复杂场地材料与运料与工序配合方法。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.39",
@@ -30859,7 +30939,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "复杂场地与材料与异常处置记录。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.40",
@@ -30873,12 +30953,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担复杂场地材料与运料与卸料与带教与工序配合。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.41",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -30901,12 +30984,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理任命或企业授权。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.43",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -30915,7 +31000,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完善材料与运料与追溯管理机制。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.44",
@@ -30929,7 +31014,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹结论；材料与运料与追溯文件。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.45",
@@ -30943,12 +31028,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹材料与运料与质量与安全与会签并指导新人。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.46",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -30971,12 +31059,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "工艺与工具基础训练记录；安全培训。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.48",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -30985,7 +31075,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "熟悉设备与观察与监控与安全要点。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.49",
@@ -30999,7 +31089,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "设备协助记录与带教评价；能复述观察与安全要点。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.50",
@@ -31013,12 +31103,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在带教下承担设备检查与观察与监控协助与工具准备，不独立操作关键设备。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.51",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31041,12 +31134,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "岗位授权与安全与资格；设备与操作经历。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.53",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31055,7 +31150,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在不同设备与场地条件下积累经验，练习安装与调整与监控方法。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.54",
@@ -31069,7 +31164,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "设备与观察与监控记录及复核意见。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.55",
@@ -31083,12 +31178,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按规程完成设备安装与调整与观察与监控与记录，发现异常按制度上报。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.56",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31111,12 +31209,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应岗位授权与专项资格；复杂设备经验。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.58",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31125,7 +31225,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习复杂设备安装与调整与故障初判方法。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.59",
@@ -31139,7 +31239,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "复杂设备与异常处置记录。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.60",
@@ -31153,12 +31253,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担复杂设备安装与调整与故障初判与带教与工序配合。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.61",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31181,12 +31284,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理任命或企业授权。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.63",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31195,7 +31300,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完善班组与工序与生产管理机制。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.64",
@@ -31209,7 +31314,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹结论；班组与工序与生产文件。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.65",
@@ -31223,12 +31328,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹班组与工序与生产与安全与会签并指导新人。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.66",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31251,12 +31359,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "信息与安全基础训练记录；安全与保密培训。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.68",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31265,7 +31375,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "熟悉观察与用量与清洁与场地与安全记录规范要点。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.69",
@@ -31279,7 +31389,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "记录整理与核对与归档协助记录与复核意见。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.70",
@@ -31293,12 +31403,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在带教下承担观察与用量与清洁与场地记录整理与归档协助，不独立判定合规或对外披露。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.71",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31321,12 +31434,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "岗位授权与安全与资格；记录与合规经历。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.73",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31335,7 +31450,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在不同场地与工序条件下积累经验，练习记录与追溯与安全方法。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.74",
@@ -31349,7 +31464,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "观察与用量与清洁与安全记录及复核意见。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.75",
@@ -31363,12 +31478,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按制度如实记录观察与用量与清洁与异常并交接，管理记录的版本与保存。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.76",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31391,12 +31509,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应岗位授权与专项培训；审核与整改记录。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.78",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31405,7 +31525,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习安全与质量与环保与数据质量与审计方法。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.79",
@@ -31419,7 +31539,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "审核与整改与追溯与审计记录。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.80",
@@ -31433,12 +31553,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担安全与质量与环保与数据质量与追溯与整改落实。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.81",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31461,12 +31584,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理任命或企业授权。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.83",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31475,7 +31600,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完善安全与合规与记录与追溯管理机制。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.84",
@@ -31489,7 +31614,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹结论；安全与合规与追溯文件。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.85",
@@ -31503,12 +31628,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹安全与记录与合规与培训与会签，处理复杂与争议事项并指导新人。"
+              "条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。"
             ]
           },
           "id": "helpers-extraction-workers.path.career-path-block.86",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard",
+            "mem-special-operation-2026"
           ],
           "type": "prose"
         },
@@ -31552,28 +31680,28 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET精确工资",
+                "entity": "O*NET OnLine：采掘辅助工详细资料（47-5081.00）",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/47-5081.00"
+                "url": "https://www.onetonline.org/link/details/47-5081.00"
               },
               {
-                "entity": "BLS精确2025—2035预测",
+                "entity": "BLS Employment Projections, Table 1.2",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "NBS2025行业工资",
+                "entity": "国家统计局：城镇单位就业人员平均工资统计口径与发布",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "O*NET 47-5081.00 行业分布",
+                "entity": "O*NET OnLine：采掘辅助工详细资料（47-5081.00）",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/industry/47-5081.00"
+                "url": "https://www.onetonline.org/link/details/47-5081.00"
               },
               {
                 "entity": "土方钻探工（石油天然气除外）",
@@ -31636,12 +31764,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国精确47-5081 May2025中位年工资47,730美元、时薪22.95美元。BLS精确47-5081的2025—2035预测约7,100→7,200人，增长1.7%，年均空缺700个含替换，基期自雇5.5%；不是实时招聘、净增或AI因果。中国精确职业工资就业未取得；NBS采矿2025非私营/私营143,361/79,169元年平均仅门类背景。"
+              "BLS 表 1.2 的美国本职业 47-5081职业行显示，2025 年约 7,100 个岗位，2035 年预计约 7,200 个，表列变化 +1.7%，预计年均约 700 个空缺，含替补。人数分别取整。 全国工资覆盖领薪雇员。工资分位和就业预测采用不同原表。"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31650,12 +31779,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31664,12 +31793,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31678,12 +31807,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位是分布中点，不等于起薪；差异来自地区与场地与工种与技能与资格与职责；数值为本职业自身口径、不代表相邻职业。"
+              "BLS 表 1.2 的美国本职业 47-5081职业行显示，2025 年约 7,100 个岗位，2035 年预计约 7,200 个，表列变化 +1.7%，预计年均约 700 个空缺，含替补。人数分别取整。"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31692,12 +31821,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS 含生产激励奖金，排除福利、加班及非生产奖金；本页按 O*NET 该页未标注取上级或相邻职业的本职业口径呈现；数值取自 2025 年数据，后续更新应以当期查询为准。"
+              "就业人数分别取整。"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31706,12 +31835,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "工资（中位与分位，本职业自身口径）"
+              "就业规模与变化"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31720,12 +31849,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 47-5081.00（OEWS 2025 年，经 O*NET 呈现）"
+              "47-5081"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31734,12 +31863,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位时薪 22.95 美元与中位年薪 47,730 美元；第 10 分位时薪 17.77 与年薪 36,960、第 25 分位时薪 19.92 与年薪 41,430、第 75 分位时薪 27.84 与年薪 57,920、第 90 分位时薪 32.70 与年薪 68,020"
+              "7,100 → 7,200，+1.7%"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31748,12 +31877,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31762,12 +31891,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31776,12 +31905,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该口径为投影，受采矿与油气与基建投资与产量与自动化影响；空缺主要由替换需求构成；数值为本职业自身口径，不等于个人岗位结果。"
+              "预计空缺含人员替补。"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31790,12 +31919,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "与 BLS OEWS 的时点就业估计口径不同，不混用；预测不等于实际招聘数，空缺为期间年均口径、不可读作净新增岗位。"
+              "预计空缺与净增就业是不同指标。"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31804,12 +31933,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业规模与增长与岗位空缺（本职业自身口径）"
+              "预计年均空缺"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31818,12 +31947,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 47-5081.00（BLS 就业预测，经 O*NET 呈现）"
+              "47-5081"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31832,12 +31961,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS精确47-5081的2025—2035预测约7,100→7,200人，增长1.7%，年均空缺700个含替换，基期自雇5.5%；不是实时招聘、净增或AI因果。"
+              "年均约 700 个"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31846,12 +31975,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆"
+              "美国全国"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31860,12 +31989,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025-05"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31874,12 +32003,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆在采矿与油气与钻探与地质工程领域存在相近岗位且其作业与规范由安全生产与民用爆炸物品与特种作业与职业健康与环保制度界定，但公开统计未按本职业单列全国工资分布，不能用行业均值或招聘报价推断。"
+              "全国工资覆盖领薪雇员。工资分位和就业预测采用不同原表。"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31888,12 +32017,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "法律环境与管理制度与统计口径不同，不做拼接与换算；本页中国部分只登记统计口径与可见缺口。"
+              "实际报价按地区、雇主与班次核对。"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31902,12 +32031,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "职业工资与就业（统计口径与缺口）"
+              "工资中位数"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31916,12 +32045,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局城镇单位就业人员平均工资（行业门类口径）与有界检索"
+              "47-5081"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31930,12 +32059,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与 O*NET 47-5081.00（采掘辅助工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "2025 年 5 月美国本职业 47-5081全国工资中位数为 47,730 美元／年、22.95 美元／时。"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31944,7 +32073,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国精确职业May2025工资"
+              "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.30",
@@ -31958,12 +32087,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国精确职业2025—2035预测含自雇与替换"
+              "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31986,7 +32115,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对 O*NET 的本职业任务与就业与行业展示（美国口径，工资与就业为本职业自身口径）。"
+              "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。"
             ]
           },
           "id": "helpers-extraction-workers.market-signals.market-signal-card.33",
@@ -32345,64 +32474,118 @@
           "data": {
             "entries": [
               {
-                "answer": "本页的采掘辅助工是 O*NET 47-5081.00（Helpers--Extraction Workers）这一精确职业：以较低技能要求的作业协助采掘类技工（如土方钻探工、爆破与炸药作业工、井架操作员与采矿机械操作员）：供应设备或清洁作业区。该页列出 14 项任务，最重要的包括在采掘过程中观察并监控设备运行以发现异常、驾驶移动设备把材料与部件运至开挖现场、使用手动工具卸下材料与装置与机械部件、安装并调整用于开挖地质材料的设备、整理材料以备使用。常见职位名称包括 Continuous Miner Operator Helper 与 Driller Helper 与 Driller's Assistant 与 Miner Helper 与 Powderman。",
+                "answer": "原题 M1 记录齐备；M2 保留缺安全状态和无授权，标停手交安全负责人；M3 保留正常和无授权，交班组长。变式 M2 安全状态正常，授权仍缺，改交班组长。M1、M3 不变。纸面齐备仅指记录。",
+                "id": "helpers-extraction-workers.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.helpers-extraction-workers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
+              },
+              {
+                "answer": "采掘作业助手在班组分工内准备和搬运物料、整理作业区、观察设备或作业状态，并记录和报告异常。设备操作、检修与危险工序分别核培训和授权。 条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。",
                 "id": "helpers-extraction-workers.faq.1",
                 "question": "这个职业具体做什么？",
-                "question_key": "career.faq.helpers-extraction-workers.q1"
+                "question_key": "career.faq.helpers-extraction-workers.q1",
+                "source_refs": [
+                  "onet",
+                  "us-work-standard",
+                  "cn-work-example"
+                ]
               },
               {
-                "answer": "美国侧：O*NET 47-5081.00 页呈现的 2025 年工资与就业为本职业自身口径（该页未标注取自上级或相邻职业）；中国大陆侧：公开统计未建立与本职业精确对应的全国职业工资分布，本页登记缺口而不使用代理数字；两侧制度与统计口径不同，不做拼接与换算。",
+                "answer": "美国 O*NET 与 BLS 对应 47-5081。中国大陆按实际采掘工作、场所和任务判断。 中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。",
                 "id": "helpers-extraction-workers.faq.2",
                 "question": "在美国和中国大陆分别是什么口径？",
-                "question_key": "career.faq.helpers-extraction-workers.q2"
+                "question_key": "career.faq.helpers-extraction-workers.q2",
+                "source_refs": [
+                  "onet",
+                  "cn-work-example"
+                ]
               },
               {
-                "answer": "2025 年美国本职业中位时薪 22.95 美元与中位年薪 47,730 美元（BLS OEWS，经 O*NET 呈现，本职业自身口径）；第 10 分位年薪 36,960 美元、第 25 分位 41,430 美元、第 75 分位 57,920 美元、第 90 分位 68,020 美元；不含福利与奖金，中位数不是入职起薪。中国大陆未建立与本职业精确对应的全国职业工资分布。",
+                "answer": "2025 年 5 月美国本职业 47-5081全国工资中位数为 47,730 美元／年、22.95 美元／时。 本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。 国家统计局 2025 年城镇采矿业年平均工资，非私营单位 143,361 元、私营单位 79,169 元，覆盖行业内多工种。",
                 "id": "helpers-extraction-workers.faq.3",
                 "question": "工资是多少？",
-                "question_key": "career.faq.helpers-extraction-workers.q3"
+                "question_key": "career.faq.helpers-extraction-workers.q3",
+                "source_refs": [
+                  "onet-wages",
+                  "nbs"
+                ]
               },
               {
-                "answer": "O*NET 在 47-5081.00 页呈现的 BLS 就业预测显示：就业 2024 年 7,000 人、2034 年预计 6,900 人，2024—2034 年增长为 Decline（-2%，该页未标注 Bright Outlook），期间年均空缺约 700 个（含增长与替补）。预测不等于个人岗位结果；即使总量收缩，因人员流动与替换仍存在招人。",
+                "answer": "BLS 表 1.2 的美国本职业 47-5081职业行显示，2025 年约 7,100 个岗位，2035 年预计约 7,200 个，表列变化 +1.7%，预计年均约 700 个空缺，含替补。人数分别取整。 本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。",
                 "id": "helpers-extraction-workers.faq.4",
                 "question": "就业前景如何？",
-                "question_key": "career.faq.helpers-extraction-workers.q4"
+                "question_key": "career.faq.helpers-extraction-workers.q4",
+                "source_refs": [
+                  "bls-ep-2025-2035",
+                  "nbs"
+                ]
               },
               {
-                "answer": "O*NET 将本职业列入 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；学历部分显示 97% 表示要求高中文凭或同等学历、2% 表示要求高中后证书、2% 表示要求副学士或其他两年制学位（该页列出上述三项）。在中国大陆，涉及爆破与特种作业与高处作业与机械与粉尘的岗位须满足安全生产与民用爆炸物品与职业健康要求并取得相应资格或作业许可；具体以企业与主管机关要求为准。",
+                "answer": "美国 BLS 表 1.2 列高中或同等学历与中期在岗培训为典型准备。实际岗位另核作业区域、危险识别、带教和任务授权。 美国 30 CFR 46.7 规定适用矿山的新任务培训，按条文适用范围及例外。核矿山类型、监管法域和具体设备，危险作业资格与现场授权分别确认。 中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。",
                 "id": "helpers-extraction-workers.faq.5",
                 "question": "需要什么学历和资格？",
-                "question_key": "career.faq.helpers-extraction-workers.q5"
+                "question_key": "career.faq.helpers-extraction-workers.q5",
+                "source_refs": [
+                  "bls-ep-2025-2035",
+                  "us-work-standard",
+                  "cn-work-example"
+                ]
               },
               {
-                "answer": "不需要。本职业使用设备监控与维护记录与项目沟通应用与电子表格与办公工具即可；编程不是本职业的入职要求。",
+                "answer": "BLS 典型入行资料未列编程要求。实际岗位的数字记录与设备界面向雇主核。",
                 "id": "helpers-extraction-workers.faq.6",
                 "question": "入行要会写代码吗？",
-                "question_key": "career.faq.helpers-extraction-workers.q6"
+                "question_key": "career.faq.helpers-extraction-workers.q6",
+                "source_refs": [
+                  "bls-ep-2025-2035",
+                  "onet"
+                ]
               },
               {
-                "answer": "不会整体被取代。任务单与观察与设备与生产与知识检索可被系统辅助，但现场观察与监控与搬运与安装与安全责任仍由有经验人员负责；O*NET 显示本职业 2024—2034 年增长为 Decline -2%，自动化更多改变任务构成而非取消岗位。",
+                "answer": "工具可辅助记录比对和汇总。原值冲突、例外处理和最终交接由授权人员复核。BLS 就业预测没有测量生成式 AI 的采用率。",
                 "id": "helpers-extraction-workers.faq.7",
                 "question": "这个职业会被 AI 或自动化取代吗？",
-                "question_key": "career.faq.helpers-extraction-workers.q7"
+                "question_key": "career.faq.helpers-extraction-workers.q7",
+                "source_refs": [
+                  "bls-ep-2025-2035",
+                  "onet"
+                ]
               },
               {
-                "answer": "O*NET 工作情境显示：接触危险设备 常见（89% 每天）、接触污染物 常见（81% 每天）、面对面讨论频繁（88% 每天）、决策频率高（68% 每天）、错误的后果较严重（56% 极其严重、12% 非常严重）、对他人的健康与安全责任较高（65% 极高责任）。",
+                "answer": "场景可能有粉尘、噪声、搬运和户外作业。向雇主核防护、班次与危险区限制。 条件不明或出现危险时按现场规程停手并报告。操作、检修和恢复由符合适用培训、资格及授权的人员处理。",
                 "id": "helpers-extraction-workers.faq.8",
                 "question": "工作环境怎么样？",
-                "question_key": "career.faq.helpers-extraction-workers.q8"
+                "question_key": "career.faq.helpers-extraction-workers.q8",
+                "source_refs": [
+                  "onet",
+                  "us-work-standard",
+                  "cn-work-example"
+                ]
               },
               {
-                "answer": "相邻职业包括土方钻探工（石油天然气除外）（47-5023.00）、石油天然气井架操作员（47-5012.00）、爆破工与弹药处理专家与爆破员（47-5032.00）、杂务工（石油天然气）（47-5071.00）、建筑工人（47-2061.00）等；转型须补足新岗位的资格与责任证据。",
+                "answer": "助手侧重分配的辅助任务。钻机或采掘设备操作员承担相应设备操作；爆破等特种作业另核资格和授权。",
                 "id": "helpers-extraction-workers.faq.9",
                 "question": "有哪些相邻职业可以比较或转型？",
-                "question_key": "career.faq.helpers-extraction-workers.q9"
+                "question_key": "career.faq.helpers-extraction-workers.q9",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "本页以 O*NET 47-5081.00 与美国 BLS OEWS 2025 与 BLS 就业预测 2024—2034 为主要来源，并引用 ILO 与 NIST 的职业暴露与治理研究；所有数值为美国本职业自身口径，不覆盖中国大陆；中国大陆只登记统计口径与可见缺口；本页不构成安全或特种作业或质量或法律意见。",
+                "answer": "全国工资覆盖领薪雇员。工资分位和就业预测采用不同原表。 本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。 中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。 美国 30 CFR 46.7 规定适用矿山的新任务培训，按条文适用范围及例外。核矿山类型、监管法域和具体设备，危险作业资格与现场授权分别确认。",
                 "id": "helpers-extraction-workers.faq.10",
                 "question": "本页来源与口径边界是什么？",
-                "question_key": "career.faq.helpers-extraction-workers.q10"
+                "question_key": "career.faq.helpers-extraction-workers.q10",
+                "source_refs": [
+                  "onet-wages",
+                  "bls-ep-2025-2035",
+                  "nbs",
+                  "cn-work-example",
+                  "us-work-standard"
+                ]
               }
             ]
           },
@@ -32417,12 +32600,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对美国 O*NET/SOC 47-5081.00（采掘辅助工）的官方范围与任务与工作活动与工作情境与兴趣代码与 Job Zone 与证书与培训机会，再取 BLS OEWS 2025 年工资与 BLS 就业预测 2025—2035 的就业与增长与空缺（均经 O*NET 页面呈现，且该页未标注取自上级或相邻职业，故按本职业自身口径呈现），并对中国大陆按国家统计局与安全生产与民用爆炸物品与特种作业与职业健康与环保制度登记口径与缺口。"
+              "费马测试编辑部"
             ]
           },
           "id": "helpers-extraction-workers.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-wages",
+            "bls-ep-2025-2035",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32431,12 +32617,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜来源登记：本页的来源登记列出 O*NET 47-5081.00 的详细资料与行业分布与职业档案与详细任务与工作活动与工作情境与软件技能与证书目录与详细兴趣，以及 BLS OEWS 与 BLS 就业预测与 ILO 与 NIST 与相关相邻职业条目；来源按职业身份与任务与工资与就业与资格与人工控制用途分别登记。"
+              "O*NET 为任务，OEWS 为美国工资，BLS 表 1.2 为美国就业。"
             ]
           },
           "id": "helpers-extraction-workers.sources.source-card.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-wages",
+            "bls-ep-2025-2035",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32445,12 +32634,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮2026-10-11核精确47-5081的14任务9Core/5Supplemental、原活动94/94/93/89/87、工作情境、97/2/2教育及Zone1-2、4软件类/5热门招聘技能、1学徒示例；May2025五分位、BLS2025—2035矩阵、NBS2025、应急19号与民爆条例31—38条。"
+              "来源核查日期：2026 年 11 月 10 日。"
             ]
           },
           "id": "helpers-extraction-workers.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-wages",
+            "bls-ep-2025-2035",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32459,12 +32651,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "中国精确职业工资就业、美国精确行业地区工资、AI采用实测效果因果与心理测评效度未取得；无精确OOH专页，不混建筑或油气相邻工资；保护面共享旧事实保持，不宣称全页同步。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "helpers-extraction-workers.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -32488,28 +32680,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "大五人格测试",
+                "entity": "大五人格测评",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "MBTI 人格测试",
+                "entity": "MBTI 偏好测评",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "智力与推理测试",
+                "entity": "矩阵推理",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "情绪智力测试",
+                "entity": "情绪沟通习惯自评",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "本职业（采掘辅助工）",
@@ -32547,63 +32739,63 @@
                 "market": "美国",
                 "name": "O*NET OnLine：采掘辅助工详细资料（47-5081.00）",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "47-5081.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/47-5081.00"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于核对官方范围（Help extraction craft workers, such as earth drillers, blasters and explosives workers, derrick operators, and mining machine operators, by performing duties requiring less skill. Duties include supplying equipment or cleaning work area.）与常见职位名称。",
-                  "用于核对兴趣代码（RC）与 Job Zone 1-2（几乎无需至需要一定准备） 与行业分布（采矿、采石与油气开采；建筑业）；该页未标注 Bright Outlook。"
+                  "采掘作业助手在班组分工内准备和搬运物料、整理作业区、观察设备或作业状态，并记录和报告异常。设备操作、检修与危险工序分别核培训和授权。",
+                  "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "bls",
                 "limitation": "职业级描述，不构成安全或特种作业或法律意见。",
                 "market": "美国",
-                "name": "O*NET OnLine：采掘辅助工职业档案与官方范围（47-5081.00）",
+                "name": "O*NET OnLine：采掘辅助工详细资料（47-5081.00）",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "47-5081.00 exact occupation",
-                "url": "https://www.onetonline.org/link/summary/47-5081.00"
+                "url": "https://www.onetonline.org/link/details/47-5081.00"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于核对就业 2024 年 7,000 人与 2034 年 6,900 人与 2024—2034 年增长 -2% 与期间年均空缺约 700 个（含增长与替补）。",
-                  "用于说明就业预测与 OEWS 时点就业估计口径不同，且预测不等于个人岗位结果、空缺主要由替换需求构成。"
+                  "BLS 表 1.2 的美国本职业 47-5081职业行显示，2025 年约 7,100 个岗位，2035 年预计约 7,200 个，表列变化 +1.7%，预计年均约 700 个空缺，含替补。人数分别取整。",
+                  "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
                 "limitation": "为 O*NET 在 47-5081.00 页呈现的本职业口径；增长 Decline -2%，未标注 Bright Outlook。",
                 "market": "美国",
-                "name": "O*NET OnLine：采掘辅助工就业趋势（47-5081.00，本职业自身口径）",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "47-5081.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/47-5081.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于核对中位时薪 22.95 美元与中位年薪 47,730 美元与第 10/25/75/90 分位（时薪 17.77 / 19.92 / 27.84 / 32.70 美元，年薪 36,960 / 41,430 / 57,920 / 68,020 美元）。",
-                  "用于说明工资分位不是经验等级，也不等于个人起薪。"
+                  "2025 年 5 月美国本职业 47-5081全国工资中位数为 47,730 美元／年、22.95 美元／时。",
+                  "全国工资覆盖领薪雇员。工资分位和就业预测采用不同原表。"
                 ],
-                "evidence_type": "official wage display",
+                "evidence_type": "OEWS 全国工资",
                 "id": "oews",
-                "limitation": "O*NET 在该页未标注工资数据取自上级或相邻职业；本页按本职业自身口径呈现，不含福利与奖金。",
+                "limitation": "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。",
                 "market": "美国",
-                "name": "O*NET OnLine：采掘辅助工国家工资（47-5081.00，本职业自身口径）",
-                "period": "2025 BLS OEWS wage data via O*NET",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "47-5081.00 exact occupation",
+                "name": "美国本职业 47-5081全国工资原表",
+                "period": "2025-05",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "47-5081",
                 "url": "https://www.onetonline.org/link/localwages/47-5081.00"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明中国大陆按行业门类公布平均工资、不拆分职业。",
-                  "本页按证据政策展示缺口而不使用代理数字。"
+                  "国家统计局 2025 年城镇采矿业年平均工资，非私营单位 143,361 元、私营单位 79,169 元，覆盖行业内多工种。",
+                  "国家统计局公布行业和岗位大类统计。"
                 ],
                 "evidence_type": "official statistics release",
                 "id": "nbs",
@@ -32613,23 +32805,23 @@
                 "period": "2025 data; accessed 2026-09-22",
                 "publisher": "国家统计局",
                 "scope": "industry-level reference",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明公开企业薪酬调查未建立与本职业精确对应的全国工资分布。",
-                  "不作为本职业工资代理数字使用。"
+                  "中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。",
+                  "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。"
                 ],
                 "evidence_type": "official survey release",
                 "id": "cnclass",
                 "limitation": "为岗位大类聚合口径，未建立与本职业精确对应的统计值。",
                 "market": "中国大陆",
-                "name": "人力资源和社会保障部：企业薪酬调查信息",
+                "name": "《中华人民共和国安全生产法》",
                 "period": "current; accessed 2026-09-22",
-                "publisher": "中华人民共和国人力资源和社会保障部",
+                "publisher": "全国人大常委会",
                 "scope": "occupation major class proxy",
-                "url": "https://www.mohrss.gov.cn/"
+                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32645,39 +32837,39 @@
                 "period": "effective 2021-11-01",
                 "publisher": "全国人民代表大会常务委员会",
                 "scope": "personal information protection",
-                "url": "https://www.gov.cn/xinwen/2021-08/20/content_5632486.htm"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明爆破与炸药与机械与高处与临边等安全生产要求。",
-                  "涉及特种作业的须经安全技术培训与考核并持证作业。"
+                  "中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。",
+                  "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。"
                 ],
                 "evidence_type": "regulator portal",
                 "id": "facilities",
                 "limitation": "以主管机关发布的法规与要求为准。",
                 "market": "中国大陆",
-                "name": "中华人民共和国应急管理部：安全生产与特种作业与危险作业管理",
+                "name": "《中华人民共和国安全生产法》",
                 "period": "current; accessed 2026-09-22",
-                "publisher": "应急管理部",
+                "publisher": "全国人大常委会",
                 "scope": "work safety and special operations",
-                "url": "https://www.mem.gov.cn/"
+                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明起重机械与压力设备与计量与标准要求。",
-                  "设备与计量与安全要求以主管机关与现行标准为准。"
+                  "美国 30 CFR 46.7 规定适用矿山的新任务培训，按条文适用范围及例外。核矿山类型、监管法域和具体设备，危险作业资格与现场授权分别确认。",
+                  "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。"
                 ],
                 "evidence_type": "regulator portal",
                 "id": "operations",
                 "limitation": "以主管机关发布的法规与要求为准。",
                 "market": "中国大陆",
-                "name": "国家市场监督管理总局：特种设备与计量与标准管理",
+                "name": "美国适用矿山的新任务培训",
                 "period": "current; accessed 2026-09-22",
-                "publisher": "国家市场监督管理总局",
+                "publisher": "U.S. Mine Safety and Health Administration",
                 "scope": "special equipment and metrology",
-                "url": "https://www.samr.gov.cn/"
+                "url": "https://www.ecfr.gov/current/title-30/chapter-I/subchapter-H/part-46/section-46.7"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32739,7 +32931,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：采掘辅助工职业范围与工作情境（47-5081.00）",
                 "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "47-5081.00 exact occupation",
                 "url": "https://www.onetonline.org/link/custom/47-5081.00"
               },
@@ -32787,24 +32979,24 @@
                 "market": "美国",
                 "name": "O*NET OnLine：采掘辅助工热门技术（47-5081.00）",
                 "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "47-5081.00 exact occupation",
                 "url": "https://www.onetonline.org/link/hot_tech/47-5081.00"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于字段与证据口径与缺口登记规则。",
-                  "用于跨市场与法域口径边界说明。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "编辑说明",
                 "id": "employer",
-                "limitation": "内部口径规则，非外部事实来源。",
-                "market": "全球",
-                "name": "FermatMind 职业内容字段与证据口径规则",
-                "period": "current authoring rules",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页任务",
                 "url": "https://fermatmind.com"
               },
               {
@@ -32819,7 +33011,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：采掘辅助工证书目录（47-5081.00）",
                 "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "47-5081.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localcert/47-5081.00"
               },
@@ -32835,7 +33027,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：采掘辅助工国家培训（47-5081.00）",
                 "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "47-5081.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localtraining/47-5081.00"
               },
@@ -32851,7 +33043,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：土方钻探工（石油天然气除外）（47-5023.00）",
                 "period": "current; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "47-5023.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/47-5023.00"
               },
@@ -32867,7 +33059,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：石油天然气井架操作员（47-5012.00）",
                 "period": "current; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "47-5012.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/47-5012.00"
               },
@@ -32904,36 +33096,36 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对采矿、采石与油气开采及建筑业为主要行业。",
-                  "用于说明主要用人单位类型。"
+                  "2025 年 5 月美国本职业 47-5081全国工资中位数为 47,730 美元／年、22.95 美元／时。",
+                  "全国工资覆盖领薪雇员。工资分位和就业预测采用不同原表。"
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "OEWS 全国工资",
                 "id": "onet-wages",
-                "limitation": "该口径为美国分布，不建立中国大陆映射。",
+                "limitation": "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。",
                 "market": "美国",
-                "name": "O*NET OnLine：采掘辅助工行业分布（47-5081.00）",
-                "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "47-5081.00 exact occupation",
-                "url": "https://www.onetonline.org/link/industry/47-5081.00"
+                "name": "美国本职业 47-5081全国工资原表",
+                "period": "2025-05",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "47-5081",
+                "url": "https://www.onetonline.org/link/localwages/47-5081.00"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于核对工作活动重要性与工作情境（控制机器与过程 94、搬运与移动物体 94、操作车辆 93；接触危险设备与污染物与噪声常见、决策频率高、错误的后果较严重、对他人的健康与安全责任较高）。",
-                  "用于说明本页正文所引工作活动与工作情境的取值口径。"
+                  "BLS 表 1.2 的美国本职业 47-5081职业行显示，2025 年约 7,100 个岗位，2035 年预计约 7,200 个，表列变化 +1.7%，预计年均约 700 个空缺，含替补。人数分别取整。",
+                  "O*NET 47-5081.00 用于任务，BLS/OEWS 47-5081 用于美国职业统计。"
                 ],
                 "evidence_type": "official occupation long view",
                 "id": "archivists",
                 "limitation": "职业级描述，不等于企业安全或质量或法律结论。",
                 "market": "美国",
-                "name": "O*NET OnLine：采掘辅助工工作情境与详细工作活动（47-5081.00）",
+                "name": "BLS Employment Projections, Table 1.2",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "47-5081.00 exact occupation",
-                "url": "https://www.onetonline.org/link/longview/47-5081.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-11",
@@ -32954,7 +33146,7 @@
               {
                 "accessed_at": "2026-10-11",
                 "details": [
-                  "实际目录作业培训考核持证和到期换证，不套旧固定3年复审。"
+                  "应急管理部令第 19 号第二至四条按适用目录核专门培训与相应资格。"
                 ],
                 "evidence_type": "official regulatory requirements",
                 "id": "mem-special-operation-2026",
@@ -32982,21 +33174,65 @@
                 "url": "https://www.miit.gov.cn/jgsj/aqs/zcfgbz/art/2020/art_0289c6fca85a40929f6802aed437eda0.html"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "设备安装与调整 — 0/100; weight=1/3; helpers-extraction-workers.ai-impact.ai-impact-table.99[0]",
-                  "运行观察与监控 — 25/100; weight=1/3; helpers-extraction-workers.ai-impact.ai-impact-table.103[0]",
-                  "协助采掘作业 — 0/100; weight=1/3; helpers-extraction-workers.ai-impact.ai-impact-table.107[0]"
+                  "BLS 表 1.2 的美国本职业 47-5081职业行显示，2025 年约 7,100 个岗位，2035 年预计约 7,200 个，表列变化 +1.7%，预计年均约 700 个空缺，含替补。人数分别取整。",
+                  "美国 BLS 表 1.2 列高中或同等学历与中期在岗培训为典型准备。实际岗位另核作业区域、危险识别、带教和任务授权。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "47-5081",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "案例不代表全国职业工资、入行或招聘。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国安全生产法》",
+                "period": "2021",
+                "publisher": "全国人大常委会",
+                "scope": "具名工作实例",
+                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "M 表：采掘辅助工单复核",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "前往纸面试做",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国 30 CFR 46.7 规定适用矿山的新任务培训，按条文适用范围及例外。核矿山类型、监管法域和具体设备，危险作业资格与现场授权分别确认。"
+                ],
+                "id": "us-work-standard",
+                "market": "美国方法或法域",
+                "name": "美国适用矿山的新任务培训",
+                "publisher": "U.S. Mine Safety and Health Administration",
+                "url": "https://www.ecfr.gov/current/title-30/chapter-I/subchapter-H/part-46/section-46.7"
+              },
+              {
+                "details": [
+                  "完成原题与变式后打开折叠答案。"
+                ],
+                "id": "paper-answer-key",
+                "name": "纸面练习参考解（常见问题）",
+                "url": "#career-content-sources"
               }
             ]
           },
@@ -34333,8 +34569,8 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
-        "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为采掘辅助工？教育、资格与职业发展路径",
+        "entry_heading": "入行与M 表：采掘辅助工单复核",
+        "heading": "入行与M 表：采掘辅助工单复核",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "helpers-extraction-workers.path.career-path-block.21",
@@ -34448,6 +34684,60 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "id": "cn-work-example",
+            "label": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "scope": "中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。"
+          },
+          {
+            "href": {
+              "$source": "us-work-standard",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "id": "us-work-standard",
+            "label": {
+              "$source": "us-work-standard",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "scope": "美国 30 CFR 46.7 规定适用矿山的新任务培训，按条文适用范围及例外。核矿山类型、监管法域和具体设备，危险作业资格与现场授权分别确认。"
+          },
+          {
+            "href": {
+              "$source": "mem-special-operation-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "id": "mem-special-operation-2026",
+            "label": {
+              "$source": "mem-special-operation-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "scope": "应急管理部令第 19 号第二至四条按适用目录核专门培训与相应资格。"
           }
         ],
         "tracks": [
@@ -35208,8 +35498,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "bls"
+              "cn-work-example",
+              "us-work-standard",
+              "mem-special-operation-2026"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -35224,7 +35515,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "爆破与炸药与点火风险"
+            "title": "作业条件不明或变化"
           },
           {
             "affected_roles": {
@@ -35241,7 +35532,7 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "us-work-standard"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35256,7 +35547,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "危险设备与机械与挤压风险"
+            "title": "版本和原件缺失"
           },
           {
             "affected_roles": {
@@ -35272,8 +35563,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "bls"
+              "privacy",
+              "cn-work-example"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -35288,7 +35579,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "粉尘与污染物与噪声暴露"
+            "title": "访问或披露权限不明"
           },
           {
             "affected_roles": {
@@ -35304,8 +35595,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "bls"
+              "cn-work-example",
+              "us-work-standard",
+              "mem-special-operation-2026"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -35320,7 +35612,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "起重与搬运与材料堆放风险"
+            "title": "超出岗位权限"
           },
           {
             "affected_roles": {
@@ -35337,7 +35629,8 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "cn-work-example",
+              "us-work-standard"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35352,7 +35645,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "设备操作失误与工序返工"
+            "title": "粉尘、噪声与搬运"
           },
           {
             "affected_roles": {
@@ -35369,7 +35662,7 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "us-work-standard"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35384,7 +35677,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "清理与记录不到位与责任不清"
+            "title": "报告交付状态不明"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -35503,6 +35796,60 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "id": "cn-work-example",
+            "label": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "scope": "中国大陆《安全生产法》第 28、30 条涉及上岗培训和适用特种作业资格，第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。具体危险作业按目录、场所与权限核。"
+          },
+          {
+            "href": {
+              "$source": "us-work-standard",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "id": "us-work-standard",
+            "label": {
+              "$source": "us-work-standard",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "scope": "美国 30 CFR 46.7 规定适用矿山的新任务培训，按条文适用范围及例外。核矿山类型、监管法域和具体设备，危险作业资格与现场授权分别确认。"
+          },
+          {
+            "href": {
+              "$source": "mem-special-operation-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "id": "mem-special-operation-2026",
+            "label": {
+              "$source": "mem-special-operation-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "scope": "应急管理部令第 19 号第二至四条按适用目录核专门培训与相应资格。"
           }
         ]
       },
@@ -35510,7 +35857,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "薪资 · 10 分位",
+              "指标": "第 10 百分位",
               "数值": {
                 "$item": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -35525,7 +35872,7 @@
               }
             },
             {
-              "指标": "薪资 · 25 分位",
+              "指标": "第 25 百分位",
               "数值": {
                 "$item": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -35540,7 +35887,7 @@
               }
             },
             {
-              "指标": "薪资 · 中位数",
+              "指标": "第 50 百分位（中位数）",
               "数值": {
                 "$item": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -35555,7 +35902,7 @@
               }
             },
             {
-              "指标": "薪资 · 75 分位",
+              "指标": "第 75 百分位",
               "数值": {
                 "$item": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -35570,7 +35917,7 @@
               }
             },
             {
-              "指标": "薪资 · 90 分位",
+              "指标": "第 90 百分位",
               "数值": {
                 "$item": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.15",
                 "block": "china-salary",
@@ -35812,7 +36159,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35826,7 +36173,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35840,7 +36187,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-extraction-workers.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35863,7 +36210,7 @@
           "ui": {
             "ai_heading": "AI 会影响采掘辅助工的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "中国行业工资背景与精确职业缺口",
+            "official_heading": "2025 年城镇行业年平均工资",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "采掘辅助工在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35894,7 +36241,7 @@
         "bls_table": [
           {
             "fact_ref": "us-wage-low10-2025",
-            "指标": "薪资 · 10 分位",
+            "指标": "第 10 百分位",
             "数值": {
               "$item": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35910,7 +36257,7 @@
           },
           {
             "fact_ref": "us-wage-q25-2025",
-            "指标": "薪资 · 25 分位",
+            "指标": "第 25 百分位",
             "数值": {
               "$item": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.11",
               "block": "us-salary",
@@ -35926,7 +36273,7 @@
           },
           {
             "fact_ref": "us-wage-2025",
-            "指标": "薪资 · 中位数",
+            "指标": "第 50 百分位（中位数）",
             "数值": {
               "$item": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.13",
               "block": "us-salary",
@@ -35942,7 +36289,7 @@
           },
           {
             "fact_ref": "us-wage-q75-2025",
-            "指标": "薪资 · 75 分位",
+            "指标": "第 75 百分位",
             "数值": {
               "$item": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.15",
               "block": "us-salary",
@@ -35958,7 +36305,7 @@
           },
           {
             "fact_ref": "us-wage-high10-2025",
-            "指标": "薪资 · 90 分位",
+            "指标": "第 90 百分位",
             "数值": {
               "$item": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.17",
               "block": "us-salary",
@@ -36081,8 +36428,8 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国采掘辅助工工资多少？",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "heading": "美国本职业工资",
+        "industry_heading": "美国行业工资资料",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
@@ -36218,50 +36565,62 @@
         "outlook_heading": "美国就业前景",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
-          "工资统计位置",
-          "年工资参考",
-          "折算边界",
-          "怎样理解这个位置"
+          "分位",
+          "年薪",
+          "时薪",
+          "统计口径"
         ],
-        "wage_heading": "美国工资分布",
+        "wage_heading": "2025 年 5 月美国全国工资分位",
         "wage_tiers": [
           {
-            "equivalent": "官方年工资，非个人月收入",
+            "equivalent": "17.77 美元／时",
             "interpretation": {
               "$item": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最低 10%",
+            "label": "第 10 百分位",
             "value": {
               "$fact": "us-wage-low10-2025",
               "field": "display_value"
             }
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "19.92 美元／时",
+            "interpretation": "2025 年 5 月美国全国职业工资。",
+            "label": "第 25 百分位",
+            "value": "41,430 美元／年"
+          },
+          {
+            "equivalent": "22.95 美元／时",
             "interpretation": {
               "$item": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "中位数（50%）",
+            "label": "第 50 百分位（中位数）",
             "value": {
               "$fact": "us-wage-2025",
               "field": "display_value"
             }
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "27.84 美元／时",
+            "interpretation": "2025 年 5 月美国全国职业工资。",
+            "label": "第 75 百分位",
+            "value": "57,920 美元／年"
+          },
+          {
+            "equivalent": "32.70 美元／时",
             "interpretation": {
               "$item": "helpers-extraction-workers.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最高 10%",
+            "label": "第 90 百分位",
             "value": {
               "$fact": "us-wage-high10-2025",
               "field": "display_value"
@@ -36409,7 +36768,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "helpers-extraction-workers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36454,7 +36813,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "helpers-extraction-workers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36499,7 +36858,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "onet-wages",
             "value": {
               "$item": "helpers-extraction-workers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36601,6 +36960,42 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "id": "bls-ep-2025-2035",
+            "label": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "scope": "BLS 表 1.2 的美国本职业 47-5081职业行显示，2025 年约 7,100 个岗位，2035 年预计约 7,200 个，表列变化 +1.7%，预计年均约 700 个空缺，含替补。人数分别取整。"
+          },
+          {
+            "href": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "id": "onet-wages",
+            "label": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-extraction-workers.source-register.published.1"
+            },
+            "scope": "2025 年 5 月美国本职业 47-5081全国工资中位数为 47,730 美元／年、22.95 美元／时。"
           }
         ],
         "transitions": [
@@ -36877,7 +37272,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034，本职业自身口径）",
+            "label": "2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "helpers-extraction-workers.profile.onet-structured-fields-block.4",
@@ -37064,7 +37459,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "cta_label": "了解我的智力与推理表现",
+            "cta_label": "矩阵推理",
             "evidence_level": {
               "$item": "helpers-extraction-workers.fit.personality-fit-block.19",
               "block": "fit",
@@ -37072,7 +37467,7 @@
               "type": "prose"
             },
             "id": "iq",
-            "label": "智力商数（IQ）与数理推理",
+            "label": "矩阵推理",
             "question": "数学不好，能做采掘辅助工吗？",
             "signals": {
               "$item": "helpers-extraction-workers.fit.personality-fit-block.20",
@@ -37101,7 +37496,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "cta_label": "了解我的情绪智力能力",
+            "cta_label": "情绪沟通习惯自评",
             "evidence_level": {
               "$item": "helpers-extraction-workers.fit.personality-fit-block.23",
               "block": "fit",
@@ -37109,7 +37504,7 @@
               "type": "prose"
             },
             "id": "eq",
-            "label": "情绪智力（EI，常称“情商”）",
+            "label": "情绪沟通习惯自评",
             "question": "做采掘辅助工需要高情商吗？",
             "signals": {
               "$item": "helpers-extraction-workers.fit.personality-fit-block.24",
@@ -37642,7 +38037,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合采掘辅助工",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37719,7 +38114,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "大五人格（中文）"
+            "label": "大五人格测评"
           },
           {
             "href": {
@@ -37729,7 +38124,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "MBTI 偏好测评"
           },
           {
             "href": {
@@ -37739,7 +38134,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "智力与推理（中文）"
+            "label": "矩阵推理"
           },
           {
             "href": {
@@ -37749,7 +38144,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "情绪智力（中文）"
+            "label": "情绪沟通习惯自评"
           }
         ]
       },
@@ -37927,19 +38322,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资参考",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
       "market-signals": "职业前景与相关职业转向",
       "navigation": "下一步与相关入口",
-      "path": "入行、资格与职业发展",
+      "path": "入行与M 表：采掘辅助工单复核",
       "profile": "职业画像",
       "quick-decision": "快速判断",
       "risk": "工作压力、风险与职业边界",
       "source-register": "资料来源",
       "sources": "常见问题与资料来源",
-      "us-salary": "美国薪资参考"
+      "us-salary": "美国本职业工资"
     }
   },
   "fact_register": {
@@ -37957,92 +38352,92 @@
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-5081.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
-        "display_value": "中位时薪 22.95 美元 / 中位年薪 47,730 美元（2025 年，BLS OEWS，本职业（47-5081.00）自身口径）",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "47,730 美元／年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "工资中位数",
-        "occupation_scope": "本职业：采掘辅助工",
-        "period": "2025",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "47-5081",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "onet-wages"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-5081.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
-        "display_value": "第 10 分位时薪 17.77 美元 / 年薪 36,960 美元（2025 年，BLS OEWS，本职业（47-5081.00）自身口径）",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "36,960 美元／年",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "工资第10分位",
-        "occupation_scope": "本职业：采掘辅助工",
-        "period": "2025",
+        "occupation_scope": "47-5081",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "onet-wages"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-5081.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
-        "display_value": "第 90 分位时薪 32.70 美元 / 年薪 68,020 美元（2025 年，BLS OEWS，本职业（47-5081.00）自身口径）",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "68,020 美元／年",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "工资第90分位",
-        "occupation_scope": "本职业：采掘辅助工",
-        "period": "2025",
+        "occupation_scope": "47-5081",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "onet-wages"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 2024—2034（经 O*NET 在 47-5081.00 页呈现，本职业自身口径，增长标为 Decline -2%、该页未标注 Bright Outlook）；O*NET 该页就业基期为 2024 年 7,000 人、2034 年预计 6,900 人；预测含替换需求、不等于实际招聘或裁员。",
-        "display_value": "增长 下降 Decline（-2%）（2024—2034，BLS 就业预测，本职业（47-5081.00）自身口径；该页未标注 Bright Outlook）",
+        "derivation": "BLS 表 1.2 精确职业行。",
+        "display_value": "+1.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长",
-        "occupation_scope": "本职业：采掘辅助工",
-        "period": "2024—2034",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "47-5081",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测基期（2024 年本职业约 7,000 人，经 O*NET 呈现）；与 BLS OEWS 的时点就业估计口径不同（OEWS 只覆盖被抽样非农机构雇主、不含自雇），本页分别标注不混用。",
-        "display_value": "就业 约 7,000 人（2024，BLS 就业预测基期，本职业（47-5081.00）自身口径）",
+        "derivation": "BLS 表 1.2 精确职业行。",
+        "display_value": "约 7,100 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数",
-        "occupation_scope": "本职业：采掘辅助工",
-        "period": "2024",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "47-5081",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测的期间空缺（2024—2034 本职业年均约 700 个，含增长与替补，经 O*NET 呈现）；为期间年均口径、主要由替换需求构成，即使总量收缩仍存在招人，不可读作净新增岗位。",
-        "display_value": "预计年均岗位空缺约 700 个（2024—2034，BLS 就业预测，本职业（47-5081.00）自身口径，含增长与替补）",
+        "derivation": "BLS 表 1.2 精确职业行。",
+        "display_value": "年均约 700 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺",
-        "occupation_scope": "本职业：采掘辅助工",
-        "period": "2024—2034",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "47-5081",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜中国大陆公开职业统计未建立与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业；采掘与爆破与钻探与机械作业另受安全生产与特种作业与民用爆炸物品与职业健康与环保等法规与标准约束；本页按证据政策登记缺口而不使用代理数字。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与 O*NET 47-5081.00（采掘辅助工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "国家统计局表 2、5 的行业年平均工资。",
+        "display_value": "城镇非私营单位 143,361 元／年，城镇私营单位 79,169 元／年",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：采掘辅助工",
+        "occupation_scope": "行业背景",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
-        "derivation": "口径｜中国大陆公开职业统计未建立与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业；采掘与爆破与钻探与机械作业另受安全生产与特种作业与民用爆炸物品与职业健康与环保等法规与标准约束；本页按证据政策登记缺口而不使用代理数字。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与 O*NET 47-5081.00（采掘辅助工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "国家统计局行业背景和本页职业证据缺口分开。",
+        "display_value": "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
@@ -38053,85 +38448,73 @@
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-5081.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
-        "display_value": "第 25 分位时薪 19.92 美元 / 年薪 41,430 美元（2025 年，BLS OEWS，本职业（47-5081.00）自身口径）",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "41,430 美元／年",
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
         "measure": "工资第25分位",
-        "occupation_scope": "本职业：采掘辅助工",
-        "period": "2025",
+        "occupation_scope": "47-5081",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "onet-wages"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-5081.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
-        "display_value": "第 75 分位时薪 27.84 美元 / 年薪 57,920 美元（2025 年，BLS OEWS，本职业（47-5081.00）自身口径）",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "57,920 美元／年",
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
         "measure": "工资第75分位",
-        "occupation_scope": "本职业：采掘辅助工",
-        "period": "2025",
+        "occupation_scope": "47-5081",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "8%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "采掘辅助工",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "onet-wages"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "采掘辅助工 · 任务、交付与责任边界",
-      "观察与监控与安装 · 材料与场地留痕 · 生产与工序责任",
-      "美国职业资料；中国精确职业工资缺口按来源保留"
+      "采掘作业助手",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国薪资中位数（2025，BLS OEWS，本职业（47-5081.00）自身口径）"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，本职业（47-5081.00）自身口径）"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，本职业（47-5081.00）自身口径）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，本职业（47-5081.00）自身口径）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "cn-urban-nonprivate-2025",
         "key": "china_pay",
-        "label": "中国大陆（暂无精确职业工资）"
+        "label": "中国大陆城镇采矿业平均年工资（行业参照）"
       }
     ]
   },
@@ -38139,17 +38522,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "采掘辅助工做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET 47-5081.00）、Job Zone 1-2（几乎无需至需要一定准备） 与学历说明、美国工资与就业的本职业自身口径与中国大陆数据缺口。"
+      "text": "了解采掘作业助手的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "采掘辅助工"
+      "text": "采掘作业助手做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "13beae2ebf9cf0912bec69fd8021d3fba900773b0a7d19e9cc468420e27e833c",
+  "source_content_sha256": "839cf832fa60c622999e0d53e7f3dfacd3183afefeff96facf5259626a702dab",
   "subject": {
     "canonical_slug": "helpers-extraction-workers",
-    "name": "采掘辅助工",
-    "summary": "采掘辅助工对应 O*NET/SOC 47-5081.00「Helpers--Extraction Workers」这一精确职业：以较低技能要求的作业协助采掘类技工（如土方钻探工、爆破与炸药作业工、井架操作员与采矿机械操作员）：供应设备或清洁作业区。核心任务包括在采掘过程中观察并监控设备运行以发现异常、驾驶移动设备把材料与部件运至开挖现场、使用手动工具卸下材料与装置与机械部件、安装并调整用于开挖地质材料的设备、整理材料以备使用；常见职位名称包括 Continuous Miner Operator Helper 与 Driller Helper 与 Driller's Assistant 与 Miner Helper 与 Powderman。官方范围原文：Help extraction craft workers, such as earth drillers, blasters and explosives workers, derrick operators, and mining machine operators, by performing duties requiring less skill. Duties include supplying equipment or cleaning work area. 口径说明：O*NET 在 47-5081.00 页呈现的美国工资与就业与行业数据未标注取自上级或相邻职业，本页按本职业（47-5081.00）自身口径如实标注；该职业属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0）），2024—2034 年增长为 Decline（-2%）。本页内容不构成安全、爆破、特种作业、职业健康或法律意见。"
+    "name": "采掘作业助手",
+    "summary": "采掘作业助手在班组分工内准备和搬运物料、整理作业区、观察设备或作业状态，并记录和报告异常。设备操作、检修与危险工序分别核培训和授权。"
   }
 }

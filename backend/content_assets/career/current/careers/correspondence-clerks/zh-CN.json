@@ -47,6 +47,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-letter-miyun": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-letter-yantian": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -19424,56 +19430,20 @@
         "status": "unfilled"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19481,7 +19451,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19494,7 +19464,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19507,7 +19477,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19520,7 +19490,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23547,7 +23517,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
+              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降5.6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
@@ -24196,7 +24166,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊療权限。"
+              "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊疗权限。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
@@ -24376,7 +24346,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
+              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降5.6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
@@ -24496,7 +24466,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊療权限。"
+              "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊疗权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -24571,7 +24541,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
+              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降5.6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
@@ -24691,7 +24661,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊療权限。"
+              "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊疗权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
@@ -26057,12 +26027,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆函件与事务性文员岗位招聘报价统计；单条招聘公告不能代表全国水平"
+              "深圳盐田的办公室文员历史招聘列 5,000–6,000 元/月，拟函、签收登记和归档之外还要处理办公室事务。北京密云办公室副主任列 5,000–6,000 元/月，有经验可面谈，要求熟悉公文和函件起草。两条都是混合岗位。看招聘时问清谁核材料、拟回复、批准寄发并记录；不能把报价当作全国函件文员工资。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "letter-yantian",
+            "letter-miyun"
           ],
           "type": "prose"
         },
@@ -26177,7 +26148,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025全国工资与2025—2035预测分别保留本岗口径，组合仅对照。本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。OEWS有薪岗位税前常规货币工资，排除自雇、直接家庭雇员和未付薪家庭人员；官方年值可引用，2080标准折算不保证个人工时，不推到手或加班奖金。"
+              "2025全国工资与2025—2035预测分别保留本岗口径，组合仅对照。本岗43-4021：2025就业4,800人、2035预测4,500人、下降5.6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。OEWS有薪岗位税前常规货币工资，排除自雇、直接家庭雇员和未付薪家庭人员；官方年值可引用，2080标准折算不保证个人工时，不推到手或加班奖金。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
@@ -28299,7 +28270,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国大陆同类岗位多称文员、内勤或客服后台，分属不同单位与外包场景，数据权限、处理流程与合规要求因单位与业务不同而差异明显。"
+              "可用文员、内勤、客服后台等关键词查找；按单位、职责和用工安排核对，数据权限、处理流程与合规要求因单位与业务不同而差异明显。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
@@ -28447,7 +28418,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
+              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降5.6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
@@ -28530,7 +28501,7 @@
           "data": {
             "paragraphs": [
               "本页不引用具体在招公告，也不把历史招聘案例计为在招岗位；招聘与外包条件须按目标单位当年公告核对。",
-              "示例中的情景判断、记录核对与观察方式为编辑设计，用于提供任务观察思路；本页未取得招聘样本，不能称为雇主常用验证流程。"
+              "示例中的情景判断、记录核对与观察方式为编辑设计，用于提供任务观察思路；两则历史样本不说明雇主常用考核方式。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
@@ -28623,7 +28594,7 @@
                 "id": "employer-1",
                 "values": [
                   "办公软件与系统能力",
-                  "编辑准备建议：体验文字处理、表格、邮件和记录系统的准确录入与检索；本页未取得中国招聘样本，具体系统和熟练度要求由目标岗位核实。",
+                  "可在演示环境体验公文、邮件和记录检索；盐田与密云是两条历史招聘，具体系统及熟练度仍按目标岗位核实。",
                   "本页未取得中国大陆全国统一的资格公开条件，须按目标单位当年招聘要求核对；本页不构成资格认定或授权建议。"
                 ]
               },
@@ -28639,7 +28610,7 @@
                 "id": "availability",
                 "values": [
                   "常见工具与系统范围",
-                  "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊療权限。",
+                  "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊疗权限。",
                   "关键词反映所述美国招聘资料中的提及，不能推定中国雇主熟练度偏好或个人胜任；实际要求按目标公告核。"
                 ]
               }
@@ -28823,7 +28794,7 @@
               [
                 "流程与带训能力",
                 "准备承担组长或主管职责的人",
-                "编辑准备线索：核对流程维护、协调与带训任务；本页未取得管理招聘或训练效果证据。",
+                "密云办公室副主任样本可用于核对办公室经验、起草知识和协调任务；不能据此推断管理岗普遍要求或训练效果。",
                 "按目标岗位条件核，未取得中国岗位普及分布",
                 "按单位制度与岗位要求",
                 "费用与实际周期未取得",
@@ -30367,7 +30338,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
+              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降5.6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
@@ -30829,7 +30800,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
+              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降5.6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
@@ -30898,7 +30869,7 @@
           "data": {
             "entries": [
               {
-                "answer": "阅读来信、邮件与表单并判断诉求类别与处置方式，调取并核对订单、账单与账户记录，起草与校对回复和确认函，把来函分派到相应部门，计算应缴费用并发出催款函，记录已收款项并安全保管，从记录中汇总数据编制周期性报告，按挂号或快递准备邮寄材料。",
+                "answer": "阅读来函或电子请求，核对账单、订单或申诉资料，拟书面答复，按流程送审或转交并保存记录。哪些答复可直接发出、哪些要签批，由单位分工决定。",
                 "id": "actors.faq.1",
                 "question": "函件文员每天的具体工作是什么？",
                 "question_key": "career.faq.correspondence-clerks.1",
@@ -30907,12 +30878,13 @@
                 ]
               },
               {
-                "answer": "函件文员以阅读来信、核对记录并起草回复与函件为主，产出是可追溯的函件与台账；客户服务代表以实时对话直接受理并解决客户问题；订单文员受理订单并录入付款方式、跟踪处理进度；档案文员以归档与检索为主；账单过账文员以账款核算与过账为主。",
+                "answer": "函件文员侧重有据可查的书面答复和往来记录；数据录入员侧重把原始资料录到指定字段并复核。两者都可能查资料或填系统，区别在最终交付的是答复还是数据记录。",
                 "id": "actors.faq.2",
-                "question": "函件文员和客户服务代表、订单文员有什么区别？",
+                "question": "函件文员和数据录入员有什么区别？",
                 "question_key": "career.faq.correspondence-clerks.2",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "letter-data-entry"
                 ]
               },
               {
@@ -30925,12 +30897,13 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：来信分类与初步分派、记录与报告汇总、回复起草与格式校验三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "模板和检索可帮助整理来函或起草答复；事实、权限和发送范围须按单位流程复核。这是工具用途，不是该职业的 AI 采用率或效率实测。",
                 "id": "actors.faq.4",
-                "question": "函件文员哪些任务已有 AI 变化证据？",
+                "question": "哪些任务可能由软件辅助？",
                 "question_key": "career.faq.correspondence-clerks.4",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "nist"
                 ]
               },
               {
@@ -30943,29 +30916,34 @@
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位年薪 46,800 美元、时薪 22.50 美元（43-4021.00 单一职业口径），分位为年薪 33,300／38,610／46,800／56,090／64,510 美元；BLS 信息文员组合口径 2025 年中位为 45,430 美元/年；中国大陆未取得职业级工资数值，本页按缺口处理，不用行业均值代填。",
+                "answer": "美国 2025 年工资中位数为 22.50 美元/小时、46,800 美元/年。 深圳盐田的办公室文员历史招聘列 5,000–6,000 元/月，拟函、签收登记和归档之外还要处理办公室事务。北京密云办公室副主任列 5,000–6,000 元/月，有经验可面谈，要求熟悉公文和函件起草。两条都是混合岗位。看招聘时问清谁核材料、拟回复、批准寄发并记录；不能把报价当作全国函件文员工资。",
                 "id": "actors.faq.6",
                 "question": "函件文员工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.correspondence-clerks.6",
                 "source_refs": [
-                  "oews"
+                  "oews",
+                  "letter-yantian",
+                  "letter-miyun"
                 ]
               },
               {
-                "answer": "美国准备层级为 Job Zone 1–2，通常要求高中文凭或同等学历，在职训练从几天到一年；多数岗位在一次入职训练与在职学习中掌握流程与模板。中国大陆同类岗位的录用与培训按目标单位规定。",
+                "answer": "BLS 列美国典型入行为高中或同等学历、短期在岗训练。大陆两个样本是综合文员或办公室副主任，分别核其学历、经验和签发流程；不能把主管岗条件当作普遍门槛。",
                 "id": "actors.faq.7",
                 "question": "函件文员需要什么学历，又该怎样训练？",
                 "question_key": "career.faq.correspondence-clerks.7",
                 "source_refs": [
-                  "onet"
+                  "g04-trends",
+                  "letter-yantian",
+                  "letter-miyun"
                 ]
               },
               {
-                "answer": "美国没有统一的全国证照，多由雇主安排在职培训；中国大陆同类岗位多无全国统一资质要求，具体条件按目标单位招聘公告与现行规定核对。",
+                "answer": "美国 BLS 给出典型教育和在岗培训，未据此判断全国许可。大陆两则历史招聘仅能说明各自要求；按实际岗位、行业与当地规定核资质。",
                 "id": "actors.faq.8",
                 "question": "做函件文员必须考证吗？",
                 "question_key": "career.faq.correspondence-clerks.8",
                 "source_refs": [
+                  "g04-trends",
                   "cn-rule"
                 ]
               },
@@ -30979,12 +30957,13 @@
                 ]
               },
               {
-                "answer": "O*NET 单一职业口径（43-4021.00）显示 2024 年就业约 6,900 人、2024—2034 年预测下降、累计约 700 个空缺；BLS 信息文员组合口径 2025—2035 年下降 2%（-30,100），年均约 125,600 个空缺且全部来自替换需求；总量下降但仍持续产生替换性空缺，且工作以重复阅读与核对为主，须按本地机构实际需求核对。",
+                "answer": "BLS 预计美国 43-4021 就业从 2025 年约 4,800 人降至 2035 年约 4,500 人，下降 5.6%，年均约 500 个空缺（含替补需求）。估计数各自舍入。 申请相邻岗位前核对日常产出是书面答复、投诉流转，还是普通文档处理。",
                 "id": "actors.faq.10",
                 "question": "现在选择函件文员职业，还应考虑什么？",
                 "question_key": "career.faq.correspondence-clerks.10",
                 "source_refs": [
-                  "bls"
+                  "g04-trends",
+                  "onet"
                 ]
               }
             ]
@@ -31218,12 +31197,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。",
-                  "美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。"
+                  "OOH 信息文员组下的 43-4021 行用整数显示 −6%；本页精确口径见 BLS Table 1.2（−5.6%）。组总量仅供对照。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。",
+                "limitation": "典型职责及教育参考；组合口径不代本岗。",
                 "market": "美国",
                 "name": "BLS 职业展望手册：Information Clerks（信息文员，含函件文员）",
                 "period": "2025 年中位工资与 2025—2035 年预测；检索 2026-09-18",
@@ -31423,11 +31401,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊療权限。"
+                  "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊疗权限。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r2-ai",
-                "limitation": "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊療权限。",
+                "limitation": "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊疗权限。",
                 "market": "美国",
                 "name": "O*NET OnLine：Correspondence Clerks 热门技术（43-4021.00）",
                 "period": "2025美国招聘",
@@ -31546,19 +31524,19 @@
                 "url": "https://www.onetonline.org/link/summary/43-3031.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
+                  "BLS 预计美国 43-4021 就业从 2025 年约 4,800 人降至 2035 年约 4,500 人，下降 5.6%，年均约 500 个空缺（含替补需求）。估计数各自舍入。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "g04-trends",
-                "limitation": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。",
+                "limitation": "Table 1.2 精确职业 43-4021；就业基期、终期和净变分别取整。OOH 同职业行的 −6% 是整数显示，OOH 信息文员组合不是本岗。",
                 "market": "美国",
                 "name": "O*NET本岗就业趋势43-4021",
-                "period": "2025—2035预测",
+                "period": "2025–2035",
                 "publisher": "O*NET转引BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/43-4021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "details": [
@@ -31576,6 +31554,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "办公室文员5名，5,000–6,000元/月。工作含拟函、签收登记、催办与归档，也承担办公室和运营资料事务。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "letter-yantian",
+                "limitation": "历史样本，非全国工资或当前空缺。",
+                "market": "中国大陆",
+                "name": "大梅沙奥特莱斯：办公室文员",
+                "period": "2022-04",
+                "publisher": "深圳市盐田区人力资源局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.yantian.gov.cn/cn/service/ldjy/jyzpxx/content/post_9713598.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第3家雇主办公室副主任1名，5,000–6,000元/月，有经验可面谈；要求办公室经验，熟悉公文和往来函件起草。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "letter-miyun",
+                "limitation": "历史样本，非全国工资或当前空缺。",
+                "market": "中国大陆",
+                "name": "北京海王中新药业：办公室副主任",
+                "period": "2026-04",
+                "publisher": "北京市密云区人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.bjmy.gov.cn/zwgk/jy1/202604/t20260415_538113.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "录入并核对字段。"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "letter-data-entry",
+                "limitation": "相邻职业任务参照。",
+                "market": "美国",
+                "name": "数据录入员",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/43-9021.00"
               }
             ]
           },
@@ -34382,7 +34405,7 @@
             },
             {
               "指标": "职业分类",
-              "数值": "中国大陆同类岗位多称文员、内勤或客服后台，分属不同单位与外包场景",
+              "数值": "可用文员、内勤、客服后台等关键词查找；按单位、职责和用工安排核对",
               "说明": "用于中国语境说明；不能把文员岗位直接等同于美国职业代码的职责或工资，也不能据此推定任职资格。"
             },
             {
@@ -34525,7 +34548,7 @@
               "月薪参考": "NBS2025条件匹配背景：金融非私营211,164／私营140,451，租赁商务服务110,162／68,919元税前年均。单位主营分类匹配才引用；规模以上企业办事及有关人员94,936元年均是宽岗位另一覆盖，非本岗职业分位。城镇5人以上法人、不含个体自由职业、含奖金津补贴；中国本岗工资及招聘分布未取得，不换月到手。"
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
+              "城市/区间": "大陆函件相关文职招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34537,20 +34560,21 @@
           "china_soc_row": "本轮43-4021美国职业级工资及预测已取得；中国同类岗位未建立本轮可核精确统计映射，不断言全国不存在分类或数据。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-letter-yantian",
+            "posting-letter-miyun"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响函件文员的工资吗？",
             "driver_heading": "函件与账务场景怎样安排工作周期？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "不同学历与训练背景对应哪些函件事务岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
             "scenario_value_label": "岗位方向"
           },
-          "us_growth": "下降6%（2025—2035本岗）",
+          "us_growth": "下降5.6%（2025—2035本岗）",
           "us_median": "46,800美元/年（中位数，2025 年工资数据）"
         }
       },
@@ -34601,7 +34625,7 @@
               "$fact": "g04-employment-2025",
               "field": "display_value"
             },
-            "说明": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
+            "说明": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降5.6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
           },
           {
             "fact_ref": "g04-growth-2025-2035",
@@ -34610,7 +34634,7 @@
               "$fact": "g04-growth-2025-2035",
               "field": "display_value"
             },
-            "说明": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
+            "说明": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降5.6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
           },
           {
             "fact_ref": "g04-openings-2025-2035",
@@ -34619,7 +34643,7 @@
               "$fact": "g04-openings-2025-2035",
               "field": "display_value"
             },
-            "说明": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
+            "说明": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降5.6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
           }
         ],
         "boundary": {
@@ -36291,7 +36315,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解函件文员的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36403,14 +36427,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解我的人格偏好"
@@ -36826,38 +36842,38 @@
       },
       {
         "derivation": null,
-        "display_value": "约 6,900 人（2024 年，单一职业口径）",
+        "display_value": "4,800 人（2025 年）",
         "fact_id": "employment",
         "market": "美国",
-        "measure": "就业规模",
-        "occupation_scope": "Correspondence Clerks（43-4021.00）2024 年就业估计；BLS 信息文员组合口径 2025 年约 1,287,600 人，属另一口径",
-        "period": "2024 年（O*NET/BLS 单一职业口径）；检索 2026-09-18",
+        "measure": "美国基期就业（2025 年）",
+        "occupation_scope": "U.S. SOC 43-4021",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "g04-trends"
         ]
       },
       {
         "derivation": null,
-        "display_value": "下降（2024—2034 年，标签 Decline，-1% 或更低）",
+        "display_value": "下降 5.6%（2025–2035 年）",
         "fact_id": "growth",
         "market": "美国",
-        "measure": "就业变化率",
-        "occupation_scope": "Correspondence Clerks（43-4021.00）2024—2034 年预测；BLS 信息文员组合口径 2025—2035 年为下降 2%（-30,100），属另一口径",
-        "period": "2024—2034 年预测期（O*NET/BLS 单一职业口径）；检索 2026-09-18",
+        "measure": "美国就业预测（2025–2035 年）",
+        "occupation_scope": "U.S. SOC 43-4021",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "g04-trends"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 700 个（2024—2034 年累计，单一职业口径）",
+        "display_value": "年均 500 个（含替补需求）",
         "fact_id": "openings",
         "market": "美国",
-        "measure": "职位空缺",
-        "occupation_scope": "Correspondence Clerks（43-4021.00）2024—2034 年累计职位空缺；BLS 信息文员组合口径为年均约 125,600 个，属另一口径",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "measure": "美国预计年均职位空缺",
+        "occupation_scope": "U.S. SOC 43-4021",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "g04-trends"
         ]
       },
       {
@@ -36898,7 +36914,7 @@
       },
       {
         "derivation": "中国大陆精确职业工资未取得；不使用行业平均、行业均值或人群均值替代本职业工资。",
-        "display_value": "说明：中国大陆没有与 43-4021.00 一一对应的职业细类，本轮未取得该类岗位单列数值；同类事务性文员岗位散落在不同单位与外包场景，雇佣关系与计酬口径与美国职业不同",
+        "display_value": "本轮未建立中国大陆岗位与 43-4021.00 的一一对应，也没有找到可比的全国独立职业数值。按单位、实际职责及合同核对。",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "中国内地",
         "measure": "未取得的统计位置（中国大陆函件文员职业级工资）",
@@ -36923,7 +36939,7 @@
       },
       {
         "derivation": null,
-        "display_value": "下降6%（2025—2035；净变-300）",
+        "display_value": "下降5.6%（2025—2035；净变-300）",
         "fact_id": "g04-growth-2025-2035",
         "market": "美国",
         "measure": "就业变化率",
@@ -36958,6 +36974,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "办公室文员5名，5,000–6,000元/月。工作含拟函、签收登记、催办与归档，也承担办公室和运营资料事务。",
+        "fact_id": "posting-letter-yantian",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "大梅沙奥特莱斯：办公室文员",
+        "period": "2022-04",
+        "source_refs": [
+          "letter-yantian"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第3家雇主办公室副主任1名，5,000–6,000元/月，有经验可面谈；要求办公室经验，熟悉公文和往来函件起草。",
+        "fact_id": "posting-letter-miyun",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "北京海王中新药业：办公室副主任",
+        "period": "2026-04",
+        "source_refs": [
+          "letter-miyun"
+        ]
       }
     ]
   },
@@ -36984,19 +37024,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，下降）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 6,900 人）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国职位空缺（2024—2034 年，约 700 个）"
+        "label": "美国预计年均职位空缺"
       },
       {
         "availability": "missing",
@@ -37010,14 +37050,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "函件文员（O*NET-SOC 43-4021.00）围绕来信与客户诉求处理函件与记录：覆盖阅读来函判断处置方式、核对订单与账单记录、起草与校对回复、分派来函、催收货款与费用、解释规则与流程、编制周期性报告；含美国 2025 年中位年薪 46,800 美元（时薪 22.50 美元）、2024 年就业约 6,900 人、2024—2034 年就业预测为下降、中国大陆职业级工资缺口，以及重复用眼、久坐与情绪沟通带来的控制点。"
+      "text": "函件文员如何查记录、拟回复和归档？对照大陆函件相关文职招聘、美国数据及数据录入的职责区别。"
     },
     "title": {
       "availability": "available",
       "text": "函件文员"
     }
   },
-  "source_content_sha256": "3d985b262925fb8694f54eb99e77bbfce4ac95a79abd852166c717545b0d8bf0",
+  "source_content_sha256": "eb9c09f13d1180509300761c56aea34fcf28ffe1175f4782e2bfc21872d90b5d",
   "subject": {
     "canonical_slug": "correspondence-clerks",
     "name": "函件文员",

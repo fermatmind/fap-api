@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-db-highgo": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-db-xian": {
+        "status": "pending_mapping"
+      },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
       },
@@ -19498,56 +19504,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19555,7 +19525,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19568,7 +19538,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19581,7 +19551,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19594,7 +19564,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -24331,7 +24301,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025 U.S. deduplicated job-posting text, 112 items: SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%. These are not usage, proficiency or GenAI adoption rates. Under1/Notavailable must not be recorded as 0."
+              "O*NET lists 112 Hot Technologies from U.S. posting data: SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%. These are not usage, proficiency or GenAI adoption rates. Under1/Notavailable must not be recorded as 0."
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
@@ -24626,7 +24596,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025 U.S. deduplicated job-posting text, 112 items: SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%. These are not usage, proficiency or GenAI adoption rates. Under1/Notavailable must not be recorded as 0."
+              "O*NET lists 112 Hot Technologies from U.S. posting data: SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%. These are not usage, proficiency or GenAI adoption rates. Under1/Notavailable must not be recorded as 0."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -26073,7 +26043,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: This round obtained no Chinese DBA occupational wage distribution or actual current recruitment offers. NBS2025 information technology industry annual average pre-tax wages of CNY 248752 for non-private units/128166 for private units are only background for legal-entity units with 5 or more employees actually classified in that industry. They exclude individually operated businesses/freelancers, and non-private does not mean only state-owned enterprises."
+              "Insufficient evidence: No national Chinese DBA wage distribution or current vacancies were established. Historical postings are shown separately. NBS2025 information technology industry annual average pre-tax wages of CNY 248752 for non-private units/128166 for private units are only background for legal-entity units with 5 or more employees actually classified in that industry. They exclude individually operated businesses/freelancers, and non-private does not mean only state-owned enterprises."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
@@ -26175,12 +26145,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: This round obtained no verifiable recruitment or offer statistics for mainland China database management or operations roles. Offers from individual platforms or employers cannot represent the national level."
+              "A Chinasoft International DBA operations posting in Xi’an listed CNY 9,000–20,000 per month with multiple levels and duties in tuning, recovery and access. A HighGo campus posting on Shandong University’s site describes database configuration, monitoring, recovery and incident work in Jinan, without a separate wage in the role-specific field. Ask who is on call, verifies restores, approves access and changes production. These are historical job examples, not national wages."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "db-xian",
+            "db-highgo"
           ],
           "type": "prose"
         },
@@ -26189,7 +26160,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial preparation observation examples: Actual performance in database languages, testing, recovery and permission explanations. Education does not automatically assign a job. Actual Chinese recruitment conditions or uniform certificate requirements have not been verified."
+              "Editorial preparation observation examples: Actual performance in database languages, testing, recovery and permission explanations. Education does not automatically assign a job. Two historical Chinese postings have been checked; broad entry and credential requirements remain unverified."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -26205,7 +26176,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial preparation observation examples: Actual performance in database languages, testing, recovery and permission explanations. Education does not automatically assign a job. Actual Chinese recruitment conditions or uniform certificate requirements have not been verified."
+              "Editorial preparation observation examples: Actual performance in database languages, testing, recovery and permission explanations. Education does not automatically assign a job. Two historical Chinese postings have been checked; broad entry and credential requirements remain unverified."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -26221,7 +26192,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial preparation observation examples: Actual performance in database languages, testing, recovery and permission explanations. Education does not automatically assign a job. Actual Chinese recruitment conditions or uniform certificate requirements have not been verified."
+              "Editorial preparation observation examples: Actual performance in database languages, testing, recovery and permission explanations. Education does not automatically assign a job. Two historical Chinese postings have been checked; broad entry and credential requirements remain unverified."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
@@ -26237,7 +26208,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial preparation observation examples: Actual performance in database languages, testing, recovery and permission explanations. Education does not automatically assign a job. Actual Chinese recruitment conditions or uniform certificate requirements have not been verified."
+              "Editorial preparation observation examples: Actual performance in database languages, testing, recovery and permission explanations. Education does not automatically assign a job. Two historical Chinese postings have been checked; broad entry and credential requirements remain unverified."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26268,7 +26239,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Check actual contractual responsibilities, data boundaries and organizational policies. This round provides no Chinese occupational wage/recruitment sample or causal evidence of tool adoption. For identifiable personal information, check PIPL13 for lawful processing grounds (not always consent), 6 for minimum necessity, and 51 for appropriate operating permissions and regular training. For entrusted processing under 21/59, check scope, security and assistance. De-identification or masking does not automatically mean irreversible anonymization. Test data/accounts do not replace lawful purposes."
+              "Check actual contractual responsibilities, data boundaries and organizational policies. The page includes two historical postings but does not establish national occupational wages or causal effects of tools. For identifiable personal information, check PIPL13 for lawful processing grounds (not always consent), 6 for minimum necessity, and 51 for appropriate operating permissions and regular training. For entrusted processing under 21/59, check scope, security and assistance. De-identification or masking does not automatically mean irreversible anonymization. Test data/accounts do not replace lawful purposes."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
@@ -28661,15 +28632,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This round provides no current Chinese recruitment sample. Entry/development/evidence examples are editorial checks, not uniform education or appointment standards or automatic advancement.",
+              "The two historical postings help compare job duties and pay terms. Check the current listings for vacancies.",
               "U.S. occupation JobZone4/SVP7 to below 8; 89% bachelor's, 4% post-baccalaureate certificate and 3% associate's are respondents' views of education required for new hires, not workforce composition or law. BLS typical bachelor's/no related experience/no on-the-job training categories do not mean no preparation is needed. OOH says some employers prefer a master's and may require certification for the product used. Do not apply these to China or IQ hiring thresholds.",
               "For identifiable personal information, check PIPL13 for lawful processing grounds (not always consent), 6 for minimum necessity, and 51 for appropriate operating permissions and regular training. For entrusted processing under 21/59, check scope, security and assistance. De-identification or masking does not automatically mean irreversible anonymization. Test data/accounts do not replace lawful purposes."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "r5-bls-ooh",
-            "r5-cn-pipl"
+            "db-xian",
+            "db-highgo"
           ],
           "type": "notice"
         },
@@ -28771,7 +28742,7 @@
                 "id": "availability",
                 "values": [
                   "Common objects and tool scope",
-                  "2025 U.S. deduplicated job-posting text, 112 items: SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%. These are not usage, proficiency or GenAI adoption rates. Under1/Notavailable must not be recorded as 0.",
+                  "O*NET lists 112 Hot Technologies from U.S. posting data: SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%. These are not usage, proficiency or GenAI adoption rates. Under1/Notavailable must not be recorded as 0.",
                   "Recruitment mentions do not show proficiency or actual uses. Employers may require product certification, which still does not replace lawful processing grounds/permissions."
                 ]
               }
@@ -31028,21 +30999,22 @@
           "data": {
             "entries": [
               {
-                "answer": "Administer, test and implement computer databases using database management system knowledge: Modify existing databases and database management systems or direct programmers and analysts to make changes; plan, coordinate and implement security measures to protect information in computer files; plan and install database management system upgrades to improve performance; specify users and access levels for each database segment; test changes to database applications or systems; test programs or databases, correct errors and make necessary modifications; train users and answer questions; provide technical support to junior staff or clients; approve, schedule, plan and supervise installation and testing of new products; develop standards and guidance for software use and acquisition and protection of vulnerable information; write logical and physical database descriptions and specify identifiers; develop data models; select and enter code to monitor database performance and create production databases; identify, assess and recommend hardware/software technologies that achieve required performance; consult procedures in database management system manuals; identify and assess industry trends; review workflow charts prepared by programmer analysts; and revise data definitions in corporate data dictionaries.",
+                "answer": "Monitor operations and query performance, test database changes, manage access and verify recovery. On-call, execution and approval duties depend on the employer.",
                 "id": "actors.faq.1",
                 "question": "What exactly do database administrators do each day?",
                 "question_key": "career.faq.database-administrators.1",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "This occupation centers on keeping existing databases available, recoverable and subject to controlled access, supporting business data use through changes and optimization. Database architects center on database structure and data architecture standards; data warehousing specialists on warehouse modeling and loading; computer systems analysts on business requirements analysis and systems design; network and computer systems administrators on server/network operations; information security analysts on security policies and incident response; computer systems engineers/architects on system-level architecture and integration. Similar names do not make responsibilities, assessment criteria or qualifications interchangeable.",
+                "answer": "Administrators primarily keep databases available, recoverable and correctly permissioned. Architects primarily design models, standards and migrations. Both may test or tune systems; ask what each role delivers and who approves production changes.",
                 "id": "actors.faq.2",
-                "question": "How does this occupation differ from adjacent architecture, warehousing and systems directions?",
+                "question": "How do database administrators and database architects differ?",
                 "question_key": "career.faq.database-administrators.2",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "db-neighbor"
                 ]
               },
               {
@@ -31055,12 +31027,13 @@
                 ]
               },
               {
-                "answer": "Verifiable changes are at the task level: Tools can partially handle statement/script drafting, log/alert classification and initial performance/capacity checks. This page provides no occupation-specific adoption or replacement data.",
+                "answer": "Tools may help draft SQL or summarize logs. Validate the output in a test environment and follow normal access and deployment procedures. The page does not measure adoption, quality gains or hours saved.",
                 "id": "actors.faq.4",
-                "question": "Which tasks in this occupation already have evidence of AI-related changes?",
+                "question": "Which tasks could tools help with?",
                 "question_key": "career.faq.database-administrators.4",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "r5-nist-core"
                 ]
               },
               {
@@ -31073,21 +31046,25 @@
                 ]
               },
               {
-                "answer": "U.S. 2025 wage data show a median annual wage of USD 104,620 (median hourly wage USD 50.30), with annual wage percentiles of USD 60,230/79,610/104,620/135,460/163,320. These are for O*NET-SOC 15-1242.00 itself at the detailed occupational level. Percentiles are statistical positions, not personal quotes or take-home income. No mainland China occupational figures were obtained; this page retains the gap and displays only explicitly labeled industry mean proxies.",
+                "answer": "The 2025 U.S. occupational median wage was $50.30 an hour and $104,620 a year. A Chinasoft International DBA operations posting in Xi’an listed CNY 9,000–20,000 per month with multiple levels and duties in tuning, recovery and access. A HighGo campus posting on Shandong University’s site describes database configuration, monitoring, recovery and incident work in Jinan, without a separate wage in the role-specific field. Ask who is on call, verifies restores, approves access and changes production. These are historical job examples, not national wages.",
                 "id": "actors.faq.6",
                 "question": "What are typical wages for this occupation, and how should they be compared?",
                 "question_key": "career.faq.database-administrators.6",
                 "source_refs": [
-                  "oews"
+                  "r5-wages-current",
+                  "db-xian",
+                  "db-highgo"
                 ]
               },
               {
-                "answer": "The U.S. preparation level is Job Zone Four (SVP 7.0 to below 8.0). Official education surveys show 89% require a bachelor's degree for new hires, 4% a post-baccalaureate certificate and 3% an associate's or other two-year degree. Common entry foundations are undergraduate study in computing, software, information management or related disciplines, often with practical experience in systems or technical support roles. Mainland China roles mostly require related academic backgrounds and practical ability; check the target employer's rules.",
+                "answer": "BLS lists a bachelor’s degree as typical for U.S. entry. Check postings for SQL tuning, restore verification, experience with a particular database and on-call duties. Practice in a test environment.",
                 "id": "actors.faq.7",
                 "question": "What education does this occupation require, and how should training proceed?",
                 "question_key": "career.faq.database-administrators.7",
                 "source_refs": [
-                  "onet"
+                  "r5-bls-current",
+                  "db-xian",
+                  "db-highgo"
                 ]
               },
               {
@@ -31109,12 +31086,13 @@
                 ]
               },
               {
-                "answer": "O*NET national employment trends (using BLS data for 2024–2034, detailed occupation 15-1242.00) show about 78,000 employed in 2024, about 77,500 projected in 2034, a projected decline of 1% (label 'Decline'), and about 3,800 average annual openings including growth and replacements. BLS OOH separately reports combined database administrators and architects (2025–2035 growth of 4%, about 7,300 annual openings). The two scopes concern different populations and periods and are cited separately. Work centers on operations, changes and permission controls. Check local industry structure and compliance requirements, prioritizing actual responsibilities, data permissions and change approval procedures.",
+                "answer": "BLS projects U.S. employment for SOC 15-1242 to change −0.1% from about 75,000 in 2025 to 74,900 in 2035, with about 3,300 annual openings including replacements. When comparing roles, check the daily responsibilities, production access and growth path.",
                 "id": "actors.faq.10",
                 "question": "What else should be considered when choosing this occupation now?",
                 "question_key": "career.faq.database-administrators.10",
                 "source_refs": [
-                  "bls"
+                  "r5-bls-current",
+                  "r5-onet-current"
                 ]
               }
             ]
@@ -31130,7 +31108,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "Check U.S. occupation 2025 wages and 2025–2035 employment separately. −0.1% aligns with rounded OOH0 and O*NET little or no change. Combined administrators and architects +4% is a different scope. Chinese occupational wages/current recruitment remain gaps; information technology industry background applies only to matching employers.",
+              "Check U.S. occupation 2025 wages and 2025–2035 employment separately. −0.1% aligns with rounded OOH0 and O*NET little or no change. Combined administrators and architects +4% is a different scope. Chinese two historical postings are shown separately; nationwide occupational wages and current vacancies were not established; information technology industry background applies only to matching employers.",
               "Of 18 tasks, 15 are core and 3 supplemental. Education requirement opinions, 20 work-style Impact scores and six interest scores are not employee proportions/personality thresholds. Editorial risks/tools are not measured adoption/incidents. Separate law, actual organizational permissions and voluntary guidance.",
               "Exercises and development examples do not prove hiring, qualifications or data permissions. Check real job conditions and authorized operating policies; accounts do not replace lawful purposes."
             ]
@@ -31356,21 +31334,19 @@
                 "url": "https://www.onetonline.org/link/summary/15-1211.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Supports this occupation's employment and projection scope (detailed occupation).",
-                  "Contains no mainland China information and cannot replace mainland China data.",
-                  "Checked this round: BLS occupation 15-1242: Approximately 75000 in 2025 → approximately 74900 in 2035, a net decline of about 100/−0.1%, with 3300 average annual openings including replacements and 1.8% self-employed. O*NET says little or no change; OOH0% is rounded. OOH's combined database administrators and architects figures of about 144500/+4%/7300 annual openings concern a different population, not this occupation itself or personal hiring probability, and do not establish AI causation."
+                  "BLS projects U.S. employment for SOC 15-1242 to change −0.1% from about 75,000 in 2025 to 74,900 in 2035, with about 3,300 annual openings including replacements."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "BLS occupation 15-1242: Approximately 75000 in 2025 → approximately 74900 in 2035, a net decline of about 100/−0.1%, with 3300 average annual openings including replacements and 1.8% self-employed. O*NET says little or no change; OOH0% is rounded. OOH's combined database administrators and architects figures of about 144500/+4%/7300 annual openings concern a different population, not this occupation itself or personal hiring probability, and do not establish AI causation.",
+                "limitation": "U.S. projections, not current vacancies or individual hiring odds.",
                 "market": "United States",
-                "name": "O*NET National Employment Trends: Database Administrators (15-1242.00, using BLS data)",
-                "period": "2024–2034 projection period; retrieved 2026-09-19",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "BLS projections for this occupation, 2025–2035",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/15-1242.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31574,11 +31550,11 @@
                 "details": [
                   "Supports explanations of employer technology keywords as market signals.",
                   "Keywords are not adoption rates or capability requirements.",
-                  "Checked this round: 2025 U.S. deduplicated job-posting text, 112 items: SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%. These are not usage, proficiency or GenAI adoption rates. Under1/Notavailable must not be recorded as 0."
+                  "Checked this round: O*NET lists 112 Hot Technologies from U.S. posting data: SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%. These are not usage, proficiency or GenAI adoption rates. Under1/Notavailable must not be recorded as 0."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r2-ai",
-                "limitation": "2025 U.S. deduplicated job-posting text, 112 items: SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%. These are not usage, proficiency or GenAI adoption rates. Under1/Notavailable must not be recorded as 0.",
+                "limitation": "O*NET lists 112 Hot Technologies from U.S. posting data: SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%. These are not usage, proficiency or GenAI adoption rates. Under1/Notavailable must not be recorded as 0.",
                 "market": "United States",
                 "name": "O*NET OnLine: Database Administrators Hot Technologies (15-1242.00)",
                 "period": "Page updated 2026; retrieved 2026-09-19",
@@ -31747,16 +31723,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/15-1242.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Occupation 15-1242: 75.0 → 74.9 thousand, a net decline of 0.1 thousand/−0.1%, 3.3 thousand average annual openings and 1.8% self-employed. Rounded OOH0% and O*NET little or no change are not different projections. These are not OOH's combined database administrators and architects 144.5 thousand/+4%/7.3 thousand. Typical bachelor's/no related experience/no on-the-job training categories do not mean no preparation is needed. Architects' less than 5 years of related experience cannot be transferred to this occupation."
+                  "BLS projects U.S. employment for SOC 15-1242 to change −0.1% from about 75,000 in 2025 to 74,900 in 2035, with about 3,300 annual openings including replacements."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r5-bls-current",
                 "limitation": "Occupation 15-1242: 75.0 → 74.9 thousand, a net decline of 0.1 thousand/−0.1%, 3.3 thousand average annual openings and 1.8% self-employed. Rounded OOH0% and O*NET little or no change are not different projections. These are not OOH's combined database administrators and architects 144.5 thousand/+4%/7.3 thousand. Typical bachelor's/no related experience/no on-the-job training categories do not mean no preparation is needed. Architects' less than 5 years of related experience cannot be transferred to this occupation.",
                 "market": "United States",
                 "name": "BLS table 1.2: 2025–2035 database administrator projections",
-                "period": "2025 base year; 2025–2035 projections; retrieved 2026-10-09",
+                "period": "2025–2035",
                 "publisher": "Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31867,6 +31843,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "CNY 9,000–20,000 per month for three full-time positions in Xi’an. The listing includes different levels and covers database recovery, performance tuning and access control."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "db-xian",
+                "limitation": "A historical posting, not a national wage estimate or current vacancy.",
+                "market": "Mainland China",
+                "name": "Chinasoft International, Xi’an: DBA operations engineer",
+                "period": "2026-02",
+                "publisher": "Qinchuangyuan recruitment platform",
+                "scope": "recruitment_proxy",
+                "url": "https://www.qxwq.org.cn/index.php/work/position/show/28373"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "HighGo’s 2025 graduate database operations role in Jinan covers configuration, monitoring, recovery and troubleshooting. Its role-specific pay field is blank."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "db-highgo",
+                "limitation": "A historical posting, not a national wage estimate or current vacancy.",
+                "market": "Mainland China",
+                "name": "Shandong University posting: HighGo database operations",
+                "period": "2025 graduate recruitment",
+                "publisher": "Shandong University career services",
+                "scope": "recruitment_proxy",
+                "url": "https://jobcareer.sdu.edu.cn/eweb/jygl/index.so?id=H45vc2NfzLqdh22sfV7PPv&modcode=jygl_zpxxck&subsyscode=zpfw&type=ssoViewZpxx"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use the main operational or design deliverable to compare the roles."
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "db-neighbor",
+                "limitation": "Comparison occupation.",
+                "market": "United States",
+                "name": "Adjacent database occupation tasks",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/15-1243.00"
               }
             ]
           },
@@ -34805,7 +34826,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "Actual materials read this round: NBS2025 industry wages and PIPL; occupational wages/current recruitment remain gaps",
+          "china_open": "Actual materials read this round: NBS2025 industry wages and PIPL; two historical postings are shown separately; nationwide occupational wages and current vacancies were not established",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34866,7 +34887,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (recruitment or offer scope)",
+              "城市/区间": "Mainland China database job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34878,13 +34899,14 @@
           "china_soc_row": "U.S. occupation code O*NET-SOC 15-1242.00. This round obtained no clear Chinese classification mapping or separate occupational wages, without asserting that corresponding statistics do not exist.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-db-xian",
+            "posting-db-highgo"
           ],
           "sources_note": "Use source links within their respective statistical or announcement scopes. Cite different statistical periods, survey populations and compensation scopes separately, without converting between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect this occupation's wages?",
             "driver_heading": "How are database operations arranged around on-call duties, change windows and settlement dates?",
-            "official_heading": "Official statistical scope and missing-data explanations",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Education/professional backgrounds, job directions and explanations (editorial compilation, not wage statistics)",
             "scenario_heading": "Which database job directions correspond to different educational and professional backgrounds?",
             "scenario_interpretation_label": "Explanations and check suggestions",
@@ -36782,7 +36804,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand database administrators' task interests and work preferences",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36896,19 +36918,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Explore my personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Understand my personality preferences"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Understand my Big Five traits"
+            "label": "Explore my Big Five traits"
           }
         ]
       },
@@ -37314,38 +37328,38 @@
       },
       {
         "derivation": null,
-        "display_value": "About 78,000 people (2024)",
+        "display_value": "75,000 people (2025)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment size (stock statistics)",
-        "occupation_scope": "Database Administrators (15-1242.00), detailed occupational scope; 2024 employment comes from O*NET national employment trends using BLS data.",
-        "period": "2024 base year; retrieved 2026-09-19",
+        "measure": "U.S. employment (2025 base year)",
+        "occupation_scope": "U.S. SOC 15-1242",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline of 1% (2024–2034, label 'Decline'; about 77,500 people projected in 2034)",
+        "display_value": "−0.1% (2025–2035)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Projected employment change (occupational aggregate)",
-        "occupation_scope": "15-1242.00 detailed occupational scope; O*NET employment trends show a 1% decline during 2024–2034 (Decline), an aggregate change across the projection period, not personal hiring probability. BLS OOH separately reports combined database administrators and architects (about 144,500 people in 2025, 4% growth during 2025–2035). The scopes concern different populations and periods and are cited separately, not combined.",
-        "period": "2024–2034 projection period; retrieved 2026-09-19",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "U.S. SOC 15-1242",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 3,800 annually (2024–2034, including growth and replacement needs)",
+        "display_value": "3,300 per year (including replacement needs)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Average annual job openings in the projection period (including replacement needs)",
-        "occupation_scope": "15-1242.00 detailed occupational scope; O*NET employment trends report about 3,800 average annual openings, including replacement needs from transfers or labor-market exits such as retirement, not annual net new jobs. Replacement needs continue to generate hiring even when total employment is projected to decline.",
-        "period": "2024–2034 projection period; retrieved 2026-09-19",
+        "measure": "U.S. projected annual openings",
+        "occupation_scope": "U.S. SOC 15-1242",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
@@ -37509,7 +37523,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: This round obtained no Chinese DBA occupational wage distribution or actual recruitment offers. Matching employer industry background is listed separately.",
+        "display_value": "Insufficient evidence: No national Chinese DBA wage distribution was established. Historical postings are shown separately. Matching employer industry background is listed separately.",
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "Mainland China",
         "measure": "Chinese occupational wage/recruitment gaps",
@@ -37529,6 +37543,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "CNY 9,000–20,000 per month for three full-time positions in Xi’an. The listing includes different levels and covers database recovery, performance tuning and access control.",
+        "fact_id": "posting-db-xian",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Chinasoft International, Xi’an: DBA operations engineer",
+        "period": "2026-02",
+        "source_refs": [
+          "db-xian"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "HighGo’s 2025 graduate database operations role in Jinan covers configuration, monitoring, recovery and troubleshooting. Its role-specific pay field is blank.",
+        "fact_id": "posting-db-highgo",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Shandong University posting: HighGo database operations",
+        "period": "2025 graduate recruitment",
+        "source_refs": [
+          "db-highgo"
         ]
       }
     ]
@@ -37556,25 +37594,25 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024–2034, decline of 1%, label 'Decline')"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employed population (2024, about 78,000 people)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024–2034, about 3,800 annually, including growth and replacements)"
+        "label": "U.S. projected annual openings"
       },
       {
-        "availability": "available",
-        "fact_ref": "china-jiaojiang-featured-daily-2026",
+        "availability": "missing",
+        "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China industry mean proxy (2025 leasing and business services, see China wage section)"
+        "label": "Mainland China national occupational wages not established"
       }
     ]
   },
@@ -37582,14 +37620,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Database Administrators (O*NET-SOC 15-1242.00) administer, test and implement computer databases using database management system knowledge. Tasks include coordinating database changes, planning and implementing security measures, installing database management system upgrades, specifying users and access levels, testing database application and system changes, testing programs/databases and correcting errors, training and supporting users, setting software use and acquisition standards, writing logical/physical database descriptions, developing data models, monitoring database performance, assessing and recommending hardware/software, consulting manual procedures, assessing industry trends, reviewing workflow charts and revising data dictionaries. U.S. employment and wage scope must be explained: O*NET-SOC 15-1242.00 itself, about 78,000 employed in 2024, 1% projected decline during 2024–2034 (label 'Decline'), about 77,500 projected in 2034, and about 3,800 average annual openings including growth and replacements. 2025 wage data show a median annual wage of USD 104,620 (median hourly USD 50.30), with annual wage percentiles USD 60,230/79,610/104,620/135,460/163,320. Industries are professional, scientific and technical services 23%/finance and insurance 12%/educational services 11%/other industries including government and information 54%. Interest code CI, preparation level Job Zone Four. Also covers mainland China occupational wage gaps, labeled industry mean proxies, and control points for data authorization, change records, backup recoverability and minimum permissions."
+      "text": "See how database administrators monitor performance, test recovery and manage access. Compare DBA job postings, U.S. data and database architecture duties."
     },
     "title": {
       "availability": "available",
       "text": "Database administrators"
     }
   },
-  "source_content_sha256": "6d3dba3f5e73061e942549ee5b9241dddd0cdb42a015f6d411307a04cb58d5d3",
+  "source_content_sha256": "1be289d4512dbd5b3a306a7535108eb39b794db43de3ee622008df523761a5eb",
   "subject": {
     "canonical_slug": "database-administrators",
     "name": "Database administrators",

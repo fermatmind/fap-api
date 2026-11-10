@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a24-huadu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a24-linzhou": {
+        "status": "pending_mapping"
       },
       "fact:r5-current-cn-arts": {
         "status": "pending_mapping"
@@ -1707,7 +1713,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -19538,56 +19544,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22564,7 +22534,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Low-risk verification: using public or fictional materials, complete one exercise—write a fictional role's movement and beat breakdown table, write out the positioning and coordination points for a fictional group dance passage, and write the process for pausing and reporting when pain or discomfort occurs during training—and judge only work preferences; the exercise does not involve real high-intensity training, real performances, or auditions, and does not equal a medical clearance, performer qualification, or hiring promise."
+              "Try the paper rehearsal handoff on this page. Record the proposed route, timing discrepancy and discomfort follow-up."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -22578,7 +22548,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Decision center: whether, with choreographic requirements, musical beat, group formation, and one's own physical condition all acting as constraints, one can turn movement sequences, coordinated positioning, and performance presentation into rehearsal and performance records that are verifiable, reproducible, and handover-ready."
+              "Can you perform the choreography in time and in formation, then adjust your movement and coordination in rehearsal?"
             ]
           },
           "id": "actors.display.fermat_decision_card.title",
@@ -23558,7 +23528,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "In the U.S. context, 30% say decisions have very important results, 30% have a lot of decision freedom, and 27% say decisions occur once or more a month but not weekly; the different items are not the same population. The editorial suggestion is to arrange review of movements/venue and changes according to the specific employer's responsibility setup, and this round obtained no uniform employer signature and archiving policy."
+              "In the U.S. context, 30% say decisions have very important results, 30% have a lot of decision freedom, and 27% say decisions occur once or more a month but not weekly; the figures answer different survey questions and should be read separately. The editorial suggestion is to arrange review of movements/venue and changes according to the specific employer's responsibility setup, and this round obtained no uniform employer signature and archiving policy."
             ]
           },
           "id": "actors.display.work_context_block.review",
@@ -26091,7 +26061,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              ": whether dancers correspond one-to-one with Chinese classifications or nationwide pay patterns was not verified, and per-performance pay, fixed salary, and self-employment business income must be distinguished by contract; no quote sample for this occupation was obtained."
+              " The two historical notices describe individual employers. Comparable mainland occupational wage and contract distributions remain unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
@@ -26105,12 +26075,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no verifiable recruitment or quote statistics for dance performance positions in mainland China; quotes from individual projects or platforms cannot represent the national level"
+              "A June 2023 Huadu job fair listed four commercial dance positions at CNY 4,000–6,000 per month, including performances, roadshows and short trips. An April 2026 Pulan County repost of the Linzhou troupe notice listed base monthly pay and show allowances without amounts."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "a24-huadu",
+            "a24-linzhou"
           ],
           "type": "prose"
         },
@@ -26209,7 +26180,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Industry wage background is kept separate from the occupation wage gap; this round has no national median, starting pay, quote, or take-home income for Chinese dancers, and industry averages, U.S. wages, or self-employment revenue are not used to fill in."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -26789,7 +26760,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "First complete an exercise using public or fictional materials—write a fictional role's movement and beat breakdown table, write out the positioning and coordination points for a fictional group dance passage, and write the process for pausing and reporting when pain or discomfort occurs during training—or one rehearsal shadowing session, then judge your preference."
+              "Try the paper rehearsal handoff on this page. Record the proposed route, timing discrepancy and discomfort follow-up."
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -27310,7 +27281,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "85% of U.S. respondents have continuous contact with others, 84% have daily face-to-face discussions, and 69% say teamwork is extremely important; 29% face conflict more than monthly but not weekly, which is not a probability of any conflict. Emotional tools are for self-observation only and do not replace professional health assessment."
+              "85% of U.S. respondents have continuous contact with others, 84% have daily face-to-face discussions, and 69% say teamwork is extremely important; 29% face conflict at least monthly but less than weekly, which is not a probability of any conflict. Emotional tools are for self-observation only and do not replace professional health assessment."
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.eq.answer",
@@ -28425,7 +28396,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Editorial pressure scenario: in the U.S. context 51% say competition is extremely fierce and 35% say freedom in tasks and goals is very limited; 29% face conflict more than monthly but not weekly and 26% deal with discourteous people more than weekly but not daily. Frequency items are not mental illness or a Chinese incidence rate, and the effect of waiting requires personal observation."
+              "Editorial pressure scenario: in the U.S. context 51% say competition is extremely fierce and 35% say freedom in tasks and goals is very limited; 29% face conflict at least monthly but less than weekly and 26% deal with discourteous people at least weekly but less than daily. Frequency items are not mental illness or a Chinese incidence rate, and the effect of waiting requires personal observation."
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.scenario",
@@ -28595,14 +28566,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This round obtained no real Chinese audition or performance vacancy samples; historical or fictional cases are not counted as demand. The positions and ability evidence below are editorial suggestions and do not mean employers usually apply the same scoring.",
+              "Huadu advertised commercial dance roles, and the Linzhou County troupe advertised broader performance roles that include dance. Use the notices to compare duties and pay terms. The two historical notices describe individual employers. Comparable mainland occupational wage and contract distributions remain unavailable.",
               "In China, profit-making public live performance follows commercial performance rules: the licensing of groups and agencies and the registration/filing of professional individual performers, and the approval for staging a specific performance, are verified separately. Implementation Rules 7/9 on proof of artistic ability may be a specified diploma, professional title, or other valid proof; a secondary vocational diploma, an agent certificate, or internal unit authorization cannot be written as the sole admission requirement for all dancers. Whether recording is covered is verified separately against specific conditions."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
             "r5-cn-performance",
-            "r5-cn-detail"
+            "r5-cn-detail",
+            "a24-huadu",
+            "a24-linzhou"
           ],
           "type": "notice"
         },
@@ -28978,26 +28951,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional rehearsal scenario material (exercise input)",
-                  "Fictional scenario: a dancer encounters four problems in the same rehearsal cycle. First, the choreographer temporarily adjusted the formation and positioning of a group dance passage before joint rehearsal; second, after continuous rehearsal of a lift passage, the partner reports that the timing is always half a beat off; third, persistent knee discomfort appears during rehearsal, but only three days remain until the premiere; fourth, the performance venue floor is more slippery than the rehearsal studio and the positioning space is narrower.",
-                  "Provided materials: choreographic requirements and change notes; movement and beat requirements; group dance positioning and stop signal requirements; training and performance safety procedures and escalation paths.",
-                  "Not provided: how formations are re-confirmed after temporary changes, who arranges protective measures for the lift passage, whether one can continue rehearsing and performing when unwell, and the authority to adjust when venue conditions change. If these conditions are needed in the exercise, state your assumptions and the party you need to confirm with."
+                  "Paper rehearsal log: an eight-count sequence currently travels A to B. The proposed route is A to C. The floor still shows the old tape and the rehearsal lead has yet to approve the change, and the stage supervisor has yet to verify markings for the proposed route.",
+                  "There is a partner cue on count 5 and the partner reports arriving half a beat late. Another dancer calls “stop” and reports persistent knee discomfort.",
+                  "Exercise rules: the group pauses on “stop.” The rehearsal lead approves route or partner changes and the stage supervisor verifies floor marks. Resumption needs an explicit cue after the appropriate person addresses the discomfort.",
+                  "Rehearsal footage is for internal review only. Check authorization before sharing. Use paper only and do not attempt the lift or keep rehearsing."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Task requirements",
-                  "Write a one-page handling and escalation plan: including how temporary formation changes are confirmed, the arrangement for re-checking lift passage timing and protective measures, handling and communication for physical discomfort, and responses to changes in venue conditions.",
-                  "The plan must state which information comes from the prompt materials and which is still an assumption, and explain whether it relies on choreographic requirements, rehearsal procedures, or training and performance safety procedures."
+                  "First say why to pause and record the route, late cue and discomfort separately.",
+                  "Say who confirms the route and partner cue, when work can resume and what approval is missing before sharing footage.",
+                  "Draft the handoff and keep any unresolved items. Open the reference on day seven. Record the proposed route and discomfort on paper. Leave route changes and health decisions to the appropriate people."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference deliverable (derivable from the prompt)",
-                  "The plan should include: temporary formation changes (confirm the new positioning and timing with the choreographer, re-check at slow speed before joint rehearsal, and only go full speed after the stop signals are clear), lift timing (re-check the musical beat and the starting positioning, have the rehearsal director arrange protective measures and only rehearse together after safety is confirmed, without forcing completion), physical discomfort (report honestly and pause that movement, assess and recover per the safety process, and do not decide on your own to continue while injured), venue changes (inspect the floor and positioning space before the performance, and when necessary adjust movement difficulty or routes and report to the rehearsal director for confirmation), and handover (state the status of the four items, the actions taken, and the items pending confirmation).",
-                  "The reference deliverable lists only the elements that should be included; it does not require wording identical to the example, and it is enough to explain the basis for the judgment."
+                  "Finish your own answer first",
+                  "Open “Dance rehearsal handoff reference (open after day six)” under FAQs and sources.",
+                  "On day seven, use the checklist to record one difference and correction."
                 ]
               },
               {
@@ -29027,50 +29000,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: read one public document",
-                  "Find a public educational document on dance training or stage safety, mark three key requirements and the corresponding practices, and write down what you want to confirm."
+                  "Day 1: work from the paper exercise",
+                  "Paper rehearsal log: an eight-count sequence currently travels A to B. The proposed route is A to C. The floor still shows the old tape and the rehearsal lead has yet to approve the change, and the stage supervisor has yet to verify markings for the proposed route."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: do a movement and beat breakdown",
-                  "Using fictional music and movements, write out one passage's movement sequence and beat correspondence table, and note the conditions that need confirmation."
+                  "Day 2: work from the paper exercise",
+                  "First say why to pause and record the route, late cue and discomfort separately."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: write a group dance positioning write-up",
-                  "Using a fictional passage, list the formation changes, positioning paths, coordination timing, and stop signal arrangements."
+                  "Day 3: work from the paper exercise",
+                  "Say who confirms the route and partner cue, when work can resume and what approval is missing before sharing footage."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: do a training and recovery plan",
-                  "Using a fictional week, write out training, fitness, and recovery arrangements, and mark the conditions for pausing and reporting when there is pain or discomfort."
+                  "Day 4: work from the paper exercise",
+                  "Draft the handoff and keep any unresolved items. Open the reference on day seven. Record the proposed route and discomfort on paper. Leave route changes and health decisions to the appropriate people."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: write an anomaly handling record",
-                  "Using a fictional scenario, write a record of review and escalation for a movement error or uneven formation, including the basis for judgment and the handover content."
+                  "Day 5: work from the paper exercise",
+                  "Check the reason and recipient for the stop cue, route confirmation and restart authority."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: have someone else review using only the materials",
-                  "Have a peer review your judgment using only your plan, and record the questions they raise."
+                  "Day 6: finish your own handoff",
+                  "Finish a paper note with the evidence, action and next owner before opening the reference."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: decide whether to continue",
-                  "Return to this page's decision checklist and write down three reasons you are willing to continue and two conditions that require caution."
+                  "Day 7: open the reference and review",
+                  "Open “Dance rehearsal handoff reference (open after day six)” under FAQs and sources. Record one difference and correction. Continue exploring if you can explain when to pause, who takes over and what needs authorization. Repeat if something is missing. Ask the employer about actual work conditions."
                 ]
               }
             ]
@@ -29095,7 +29068,7 @@
               "Material boundaries: the exercise materials are all fictional or based on public information, and real projects or unpublished choreographic information must not be included.",
               "Response to feedback: when the choreographer or rehearsal director points out your problems repeatedly, are you willing to go back and polish the details.",
               "Process interest: even when repeated training and joint rehearsal are tedious, are you willing to complete the warm-up, review, and records every time.",
-              "Next step: if you are willing to continue through the first six steps, the next step is, within compliance (such as a rehearsal shadowing session or a training session), to complete one closed loop from learning movements and joint rehearsal through to presentation, and ask an experienced person to review it; if one step clearly drains you, narrow the direction first and then verify."
+              "Use the collapsed reference to review your note on day seven. Continue exploring if you can explain when to pause, who takes over and what needs authorization. Repeat if something is missing. Ask the employer about actual work conditions."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -29160,7 +29133,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The U.S. occupation profile itself and the Chinese commercial performance regulations and implementation rules apply separately; no real Chinese recruitment or contracts were obtained, and the supporting provisions for minors, schools, and foreign-related matters were not fully verified, so no claim is made that uniform public employer conditions have been checked."
+              "For commercial performances in China, check the rules for the type of performance and organization. The two mainland postings cover individual roles. Verify actual contracts and any conditions for minors, schools or foreign-related events separately."
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
@@ -29397,7 +29370,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify training, experience, and applicable qualifications against that specific role or institution's announcement; no real Chinese recruitment sample was obtained, so no uniform advancement threshold is claimed. Adjacent teaching/choreography positions are verified separately."
+              "Check training, experience and qualifications against the target company’s notice. Check teaching and choreography roles separately."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
@@ -29476,7 +29449,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify training, experience, and applicable qualifications against that specific role or institution's announcement; no real Chinese recruitment sample was obtained, so no uniform advancement threshold is claimed. Adjacent teaching/choreography positions are verified separately."
+              "Check training, experience and qualifications against the target company’s notice. Check teaching and choreography roles separately."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.credentials",
@@ -29553,7 +29526,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify training, experience, and applicable qualifications against that specific role or institution's announcement; no real Chinese recruitment sample was obtained, so no uniform advancement threshold is claimed. Adjacent teaching/choreography positions are verified separately."
+              "Check training, experience and qualifications against the target company’s notice. Check teaching and choreography roles separately."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.03.credentials",
@@ -29632,7 +29605,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify training, experience, and applicable qualifications against that specific role or institution's announcement; no real Chinese recruitment sample was obtained, so no uniform advancement threshold is claimed. Adjacent teaching/choreography positions are verified separately."
+              "Check training, experience and qualifications against the target company’s notice. Check teaching and choreography roles separately."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
@@ -29727,7 +29700,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify training, experience, and applicable qualifications against that specific role or institution's announcement; no real Chinese recruitment sample was obtained, so no uniform advancement threshold is claimed. Adjacent teaching/choreography positions are verified separately."
+              "Check training, experience and qualifications against the target company’s notice. Check teaching and choreography roles separately."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
@@ -29806,7 +29779,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify training, experience, and applicable qualifications against that specific role or institution's announcement; no real Chinese recruitment sample was obtained, so no uniform advancement threshold is claimed. Adjacent teaching/choreography positions are verified separately."
+              "Check training, experience and qualifications against the target company’s notice. Check teaching and choreography roles separately."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.02.credentials",
@@ -29885,7 +29858,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify training, experience, and applicable qualifications against that specific role or institution's announcement; no real Chinese recruitment sample was obtained, so no uniform advancement threshold is claimed. Adjacent teaching/choreography positions are verified separately."
+              "Check training, experience and qualifications against the target company’s notice. Check teaching and choreography roles separately."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.03.credentials",
@@ -29964,7 +29937,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify training, experience, and applicable qualifications against that specific role or institution's announcement; no real Chinese recruitment sample was obtained, so no uniform advancement threshold is claimed. Adjacent teaching/choreography positions are verified separately."
+              "Check training, experience and qualifications against the target company’s notice. Check teaching and choreography roles separately."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.credentials",
@@ -30059,7 +30032,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify training, experience, and applicable qualifications against that specific role or institution's announcement; no real Chinese recruitment sample was obtained, so no uniform advancement threshold is claimed. Adjacent teaching/choreography positions are verified separately."
+              "Check training, experience and qualifications against the target company’s notice. Check teaching and choreography roles separately."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -30138,7 +30111,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify training, experience, and applicable qualifications against that specific role or institution's announcement; no real Chinese recruitment sample was obtained, so no uniform advancement threshold is claimed. Adjacent teaching/choreography positions are verified separately."
+              "Check training, experience and qualifications against the target company’s notice. Check teaching and choreography roles separately."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.02.credentials",
@@ -30217,7 +30190,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify training, experience, and applicable qualifications against that specific role or institution's announcement; no real Chinese recruitment sample was obtained, so no uniform advancement threshold is claimed. Adjacent teaching/choreography positions are verified separately."
+              "Check training, experience and qualifications against the target company’s notice. Check teaching and choreography roles separately."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.03.credentials",
@@ -30296,7 +30269,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify training, experience, and applicable qualifications against that specific role or institution's announcement; no real Chinese recruitment sample was obtained, so no uniform advancement threshold is claimed. Adjacent teaching/choreography positions are verified separately."
+              "Check training, experience and qualifications against the target company’s notice. Check teaching and choreography roles separately."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.04.credentials",
@@ -30396,7 +30369,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Demand is layered: the national projection, the actual institutional/contract structure, and current audition samples each answer different questions; this round has no real Chinese vacancy samples and does not claim that the market or project structure has already caused position changes."
+              "The U.S. projection and the two mainland notices describe separate markets. The historical notices show individual job and pay terms. Check employers’ current listings for openings."
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30955,7 +30928,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Perform dance, possibly on stage, on broadcast, or in video recording: learn and practice the dance movements the role requires; make body movement rhythmically consistent with the musical accompaniment; maintain technical proficiency, physical capability, and fitness through training, exercise, and taking dance classes; coordinate movement with partners or the dance group; develop understanding of one's own fitness and limitations and choose dance styles accordingly; perform classical, modern, or acrobatic dance in performance, expressing story, rhythm, and sound through the body; work with the choreographer to refine or revise steps; attend auditions, costume fittings, photography, and makeup calls; follow trends in the dance field; prepare performance supplies such as pointe shoes; sing or act beyond dance when necessary; teach dance students; and design and create dance for oneself or others.",
+                "answer": "Learn and rehearse movement, perform on stage, at events or on camera, and adjust timing, spacing and coordination from feedback. Ask how rehearsals, performances and travel are paid.",
                 "id": "actors.faq.1",
                 "question": "What does a dancer do in a typical day?",
                 "question_key": "career.faq.dancers.1",
@@ -30964,27 +30937,27 @@
                 ]
               },
               {
-                "answer": "This occupation executes dance movements with the body per the choreography and presents works; choreographers conceive and create dances and direct rehearsals; actors shape characters through lines and performance; musicians and singers present musical works by playing or singing; postsecondary art, drama, and music teachers center on teaching and research; athletes and sports competitors aim at competitive results; exercise trainers and group fitness instructors center on instructing others to exercise. Similar names do not mean duties, evaluation standards, or qualifications are interchangeable.",
+                "answer": "Dancers perform the work. Choreographers create movement and direct rehearsals. Small teams may combine the roles, so ask what you are expected to deliver and how each part is paid.",
                 "id": "actors.faq.2",
-                "question": "What distinguishes this occupation from adjacent choreography, performance, and sports directions?",
+                "question": "How do dancing and choreography differ?",
                 "question_key": "career.faq.dancers.2",
                 "source_refs": [
                   "onet"
                 ]
               },
               {
-                "answer": "Choreography and movement recording software, video playback, and movement analysis can assist with recording choreography, comparing positioning, and reviewing changes, and social and video platforms have also changed how works and audition materials circulate, which can reduce part of the recording, organizing, and communication work; but completing role movements, coordinating with the musical beat, real-time coordination with partners and the group, judging physical condition, and on-site handling still depend on the person's body and judgment and are constrained by rehearsal and performance safety procedures. O*NET shows that in this occupation 91% indicate very close physical proximity, 85% indicate continuous contact with others, and 76% indicate continuous or almost continuous bending or twisting of the body; technical exposure does not equal organizational adoption or job disappearance, and cannot be interpreted as a probability of job loss.",
+                "answer": "Playback and timing cues can help review movement. Performers and crew still judge spacing, partner coordination and when to pause. Occupation-level data on adoption and employment effects remain unavailable.",
                 "id": "actors.faq.3",
                 "question": "How will AI affect or replace dancers?",
                 "question_key": "career.faq.dancers.3",
                 "source_refs": [
-                  "bls"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: three types of tasks—choreography records and positioning review, rehearsal communication and material organization, and auxiliary prompts for live presentation—can be partly taken on by tools; this page has no adoption rate or substitution data for this single occupation.",
+                "answer": "Video and timing tools can help review movement and rhythm. Performers and crew still judge spacing, live coordination and whether it is safe to continue. This is not a measurement of AI adoption or job displacement.",
                 "id": "actors.faq.4",
-                "question": "Which tasks in this occupation already have evidence of AI change?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.dancers.4",
                 "source_refs": [
                   "onet"
@@ -30996,53 +30969,60 @@
                 "question": "In the face of AI, which abilities should still be verified as important for this occupation?",
                 "question_key": "career.faq.dancers.5",
                 "source_refs": [
-                  "bls"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "The 2025 U.S. wage data shows a median hourly wage of 24.80 USD, with hourly wage percentiles of 14.88／17.23／24.80／38.36／52.30 USD, under the O*NET-SOC 27-2031.00 definition for this subcategory itself; that occupation's wage page does not publish an annual median (the annual value is marked n/a), so annual salary or personal income cannot be calculated from the hourly value and it cannot be treated as a personal quote; no occupation-level figure was obtained for mainland China, and this page treats it as a gap rather than filling it with industry averages or project quote samples.",
+                "answer": "The May 2025 U.S. median was $24.80 per hour. The source does not publish an annual median. A June 2023 Huadu job fair listed four commercial dance positions at CNY 4,000–6,000 per month, including performances, roadshows and short trips. An April 2026 Pulan County repost of the Linzhou troupe notice listed base monthly pay and show allowances without amounts.",
                 "id": "actors.faq.6",
                 "question": "What are the typical wages for this occupation, and how should they be compared?",
                 "question_key": "career.faq.dancers.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "a24-huadu",
+                  "a24-linzhou"
                 ]
               },
               {
-                "answer": "The U.S. preparation level is Job Zone Three (SVP 6.0 up to below 7.0), and the official education survey shows that among new entrants 45% require a high school diploma or equivalent, 34% require less than high school, and 14% require a postsecondary certificate; mainland China mostly requires a foundation in dance training and stage experience, with some positions requiring a dance major, verified per the target unit's rules.",
+                "answer": "O*NET lists Job Zone 3. Asked what education a new hire needs, 45% selected high school or equivalent, 34% less than high school and 14% a postsecondary certificate. Other responses are not listed here. BLS lists no formal educational credential as typical for 27-2031, with long-term on-the-job training. Check the actual audition and education requirements.",
                 "id": "actors.faq.7",
                 "question": "What education does this occupation need, and how should one train for it?",
                 "question_key": "career.faq.dancers.7",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "a24-bls-projections"
                 ]
               },
               {
-                "answer": "O*NET provides the certification and training lookup entry point for this subcategory, but certification does not equal a license, an employer appointment, signing authority, or local authorization; in mainland China such positions mostly obtain performance opportunities through selection and training per company and project requirements, and specific performances or stage operations may have additional authorization requirements; specific conditions are verified against the target unit and current regulations.",
+                "answer": "In mainland China, distinguish a company role from working independently as a commercial performer. Check audition, training and job requirements with the employer. Independent commercial performers should check registration, filing and proof of performance ability with the local cultural authority. Approval for a specific show is a separate check.",
                 "id": "actors.faq.8",
                 "question": "Must I obtain a certificate to do this occupation?",
                 "question_key": "career.faq.dancers.8",
                 "source_refs": [
-                  "cn-rule"
+                  "r5-cn-performance",
+                  "r5-cn-detail"
                 ]
               },
               {
-                "answer": "First complete an exercise using public or fictional materials—write a fictional role's movement and beat breakdown table, write out the positioning and coordination points for a fictional group dance passage, and write the process for pausing and reporting when pain or discomfort occurs during training—or one rehearsal shadowing session, then verify the target direction's object, training requirements, and safety boundaries.",
+                "answer": "Start with the paper rehearsal handoff on this page. Record the proposed route, late cue and report of discomfort separately, then use the collapsed reference on day seven.",
                 "id": "actors.faq.9",
                 "question": "What should I do first if I want to try this direction with no background?",
-                "question_key": "career.faq.dancers.9",
+                "question_key": "career.faq.dancers.9"
+              },
+              {
+                "answer": "BLS projects U.S. employment for U.S. SOC 27-2031 to go from about 13,800 in 2025 to 14,100 in 2035 (+2.2%). It projects about 1,600 openings per year, including replacements.",
+                "id": "actors.faq.10",
+                "question": "How should you read the U.S. employment projection?",
+                "question_key": "career.faq.dancers.10",
                 "source_refs": [
-                  "bls"
+                  "a24-bls-projections"
                 ]
               },
               {
-                "answer": "The O*NET summary and employment trends page (based on BLS 2024—2034 projections, under the 27-2031.00 definition for this subcategory itself) shows about 12,300 people under this definition in 2024, a projection label of faster than average (5%—6%), and about 1,800 openings per year including growth and replacement; the projection is an occupation-total measure and the occupation is relatively small, the work centers on training, rehearsal, and performance, and it must be verified against the local performance market, production structure, and project-based employment, with priority given to verifying training and recovery conditions, venue and equipment safety, and pay settlement and insurance arrangements.",
-                "id": "actors.faq.10",
-                "question": "What else should I consider when choosing this occupation now?",
-                "question_key": "career.faq.dancers.10",
-                "source_refs": [
-                  "bls"
-                ]
+                "answer": "This is a fictional paper exercise written by FermatMind. Pause the group. Record the half-beat delay on count 5 and the report of discomfort. Notify the rehearsal lead. The tape still marks A to B. A to C is a proposal. The rehearsal lead must approve it and the stage supervisor verify the marks. Do not switch routes or try the lift first. Refer discomfort under the venue’s procedures and wait for an explicit restart cue. Do not share the video while approval is unverified. Check four items: reason for the pause and late cue, route and floor-mark owners, discomfort follow-up and restart cue, and authorization to share the video. Count each complete item. Before resuming, have the rehearsal lead confirm the partner cue on count 5 and wait for the explicit restart cue.",
+                "id": "actors.faq.11",
+                "question": "Dance rehearsal handoff reference (open after day six)",
+                "question_key": "career.faq.dancers.11"
               }
             ]
           },
@@ -31058,8 +31038,8 @@
           "data": {
             "entries": [
               "The U.S. 27-2031's own 2025 hourly wages and the 2025—2035 employment projection including the self-employed are cited separately, and wages exclude the self-employed; there is no annual wage, and hours are not annualized at a fixed rate.",
-              "China's NBS2025 culture industry pre-tax annual average is background only, and the occupation wage/quote gap is retained; real recruitment and contracts were not verified.",
-              "The tasks and context come from a U.S. occupational survey, and Updated is not a uniform year; the editorial risks, pathways, and tool candidates are not conclusions about accidents, adoption, uniform employer policy, or qualification; the five exercises and other out-of-scope content were not changed this round."
+              "Chinese culture industry averages provide background. The Huadu and Linzhou notices describe individual jobs and pay terms.",
+              "U.S. tasks and work context come from the occupational survey. The paper exercise helps readers practice judgment and handoff."
             ]
           },
           "id": "actors.sources.boundary.1",
@@ -31110,7 +31090,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Updated: 2026-10-09 (search dates for each source are in the source register)"
+              "Employment projections and job notices checked November 10, 2026. Statistical periods and posting dates are listed with each source."
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31124,7 +31104,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Distinguishes official data, legal provisions, editorial suggestions, and genuine evidence gaps; out-of-scope legacy values were not changed, and this round does not represent acceptance of the complete page or a formal release."
+              "U.S. sources describe the occupation and employment outlook. Chinese industry wages, commercial dance recruitment and troupe notices are listed separately. Check payment terms against the specific contract."
             ]
           },
           "id": "actors.display.source_card.note",
@@ -31282,21 +31262,21 @@
                 "url": "https://www.onetonline.org/link/summary/25-1121.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports this occupation's employment and projection definitions (this subcategory).",
-                  "Contains no mainland China information and cannot substitute for mainland China data.",
-                  "Verified this round: the old 2024—2034 is retained for consumers; the modules authorized this round use the current 27-2031's own 2025—2035, not the combined 27-2030."
+                  "U.S. SOC 27-2031 dancers.",
+                  "Annual openings include replacements.",
+                  "Covers U.S. employment and projections."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "The old 2024—2034 is retained for consumers; the modules authorized this round use the current 27-2031's own 2025—2035, not the combined 27-2030.",
+                "limitation": "U.S. SOC 27-2031 dancers.",
                 "market": "United States",
-                "name": "O*NET OnLine: Dancers 27-2031.00 summary and employment trends (based on BLS 2024—2034 projections)",
-                "period": "2024—2034 projection period; searched 2026-09-19",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "name": "U.S. BLS Table 1.2 employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/27-2031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31478,7 +31458,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Supports this occupation's tasks, work context, and preparation level.",
                   "Contains no technology adoption or job substitution data."
@@ -31491,7 +31471,7 @@
                 "period": "Page updated 2026; searched 2026-09-19",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/27-2031.00"
+                "url": "https://www.onetonline.org/link/details/27-2031.00"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31820,6 +31800,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment for U.S. SOC 27-2031 to go from about 13,800 in 2025 to 14,100 in 2035 (+2.2%). It projects about 1,600 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a24-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Four posts at CNY 4,000–6,000 a month. Commercial performances, roadshow support and short trips."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a24-huadu",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Commercial event dancer",
+                "period": "2023-06-13",
+                "publisher": "Huadu District Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.huadu.gov.cn/zdlyxxgk/jycy/zpxx/content/post_9044628.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Three broader performer posts, including dance and other arts. Base pay and show allowances listed as components, with no amount quoted."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a24-linzhou",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Linzhou County arts troupe performer",
+                "period": "April 2026 republication",
+                "publisher": "Linzhou County Culture and Tourism Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://pulan.gov.cn/info/2301/199551.htm"
               }
             ]
           },
@@ -34651,7 +34676,7 @@
             },
             {
               "指标": "Insufficient evidence",
-              "数值": "No recruitment or project quote statistics or wage percentiles for such positions in mainland China were obtained",
+              "数值": "Comparable mainland occupational wage and contract distributions remain unavailable.",
               "说明": "Quotes from individual projects or platforms are not used to pose as national data, and no interpolation is performed."
             }
           ],
@@ -34814,7 +34839,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (industry category definition)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34826,13 +34851,14 @@
           "china_soc_row": "U.S. occupation code O*NET-SOC 27-2031.00; this round obtained no directly comparable Chinese occupation-level wage definition.",
           "edu": "See the entry module for training and qualification",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a24-huadu",
+            "posting-a24-linzhou"
           ],
           "sources_note": "Source links are used according to their own statistical or announcement scope; when the statistical period, survey population, or pay definition differs they are cited separately and no cross-conversion is performed.",
           "ui": {
             "ai_heading": "Will AI or automation affect this occupation's wages?",
             "driver_heading": "How is performance work organized by project and production cycle?",
-            "official_heading": "Official statistical definitions and gap notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Editorial verification items and target position conditions, not an education-role distribution or wage statistic",
             "scenario_heading": "Which training and qualification conditions need to be verified for a target dance position?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35651,7 +35677,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/actors",
+            "target_href": "/en/career/jobs/actors",
             "target_slug": "actors",
             "target_title": "Actors (adjacent occupation)",
             "transition_distance": {
@@ -35674,7 +35700,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/choreographers",
+            "target_href": "/en/career/jobs/choreographers",
             "target_slug": "choreographers",
             "target_title": "Choreographers (adjacent occupation)",
             "transition_distance": {
@@ -35697,7 +35723,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/musicians-and-singers",
+            "target_href": "/en/career/jobs/musicians-and-singers",
             "target_slug": "musicians-and-singers",
             "target_title": "Musicians and singers (adjacent occupation)",
             "transition_distance": {
@@ -35720,7 +35746,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/art-drama-and-music-teachers-postsecondary",
+            "target_href": "/en/career/jobs/art-drama-and-music-teachers-postsecondary",
             "target_slug": "art-drama-and-music-teachers-postsecondary",
             "target_title": "Postsecondary art, drama, and music teachers (adjacent occupation)",
             "transition_distance": {
@@ -35743,7 +35769,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/music-directors-and-composers",
+            "target_href": "/en/career/jobs/music-directors-and-composers",
             "target_slug": "music-directors-and-composers",
             "target_title": "Music directors and composers (adjacent occupation)",
             "transition_distance": {
@@ -35766,7 +35792,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/talent-directors",
+            "target_href": "/en/career/jobs/talent-directors",
             "target_slug": "talent-directors",
             "target_title": "Casting and talent directors (adjacent occupation)",
             "transition_distance": {
@@ -35789,7 +35815,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/models",
+            "target_href": "/en/career/jobs/models",
             "target_slug": "models",
             "target_title": "Models (adjacent occupation)",
             "transition_distance": {
@@ -35812,7 +35838,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/self-enrichment-teachers",
+            "target_href": "/en/career/jobs/self-enrichment-teachers",
             "target_slug": "self-enrichment-teachers",
             "target_title": "Self-enrichment teachers (adjacent occupation)",
             "transition_distance": {
@@ -35900,7 +35926,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35949,7 +35975,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Explore my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35998,7 +36024,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36047,7 +36073,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Explore my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36096,7 +36122,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36145,7 +36171,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Explore my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36767,7 +36793,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore the task interests and work preferences of dancers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36879,14 +36905,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
             "label": "Explore my personality preferences"
@@ -37270,7 +37288,7 @@
         "occupation_scope": "Dancers (27-2031.00) under this subcategory's own definition; 2025 BLS OEWS wage data on the O*NET national wages page, which publishes only hourly wage percentiles with the annual value shown as n/a, so annual salary or personal income cannot be calculated from the hourly value",
         "period": "2025 wage data; searched 2026-09-19",
         "source_refs": [
-          "oews"
+          "r5-wages-current"
         ]
       },
       {
@@ -37298,39 +37316,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 12,300 people (2024)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "13,800 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistics)",
-        "occupation_scope": "Dancers (27-2031.00) under this subcategory's own definition; the 2024 employment figure comes from the O*NET summary page (based on BLS 2024—2034 projections)",
-        "period": "2024 base period; searched 2026-09-19",
+        "occupation_scope": "U.S. SOC 27-2031",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a24-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Faster than average 5%—6% (2024—2034, label Faster than average)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+2.2%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "Under the 27-2031.00 definition for this subcategory itself; the projection label is faster than average (5%—6%), a total change over the projection period, not an individual's probability of being hired; this occupation is small and mostly short-term project work, so total change has limited explanatory power for individual opportunities",
-        "period": "2024—2034 projection period; searched 2026-09-19",
+        "occupation_scope": "U.S. SOC 27-2031",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a24-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 1,800 (annual average for 2024—2034, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "1,600 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Average annual openings (including growth and replacement)",
-        "occupation_scope": "Under the 27-2031.00 definition for this subcategory itself; the openings are an annual average for 2024—2034, including positions arising from growth and replacement, not the number of net new positions each year",
-        "period": "2024—2034 projection period; searched 2026-09-19",
+        "occupation_scope": "U.S. SOC 27-2031",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a24-bls-projections"
         ]
       },
       {
@@ -37418,39 +37436,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 13800 people (2025; 27-2031 itself including the self-employed)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "13,800 jobs (2025)",
         "fact_id": "r5-current-employment",
         "market": "United States",
         "measure": "Base-period employment stock",
-        "occupation_scope": "BLS27-2031 itself, not the combined 27-2030; not that year's hiring number",
-        "period": "2025 base period; searched 2026-10-09",
+        "occupation_scope": "U.S. SOC 27-2031",
+        "period": "2025",
         "source_refs": [
-          "r5-bls-current"
+          "a24-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2.2% (2025—2035; about 13800→14100)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+2.2%",
         "fact_id": "r5-current-growth",
         "market": "United States",
         "measure": "Ten-year projected net employment change",
-        "occupation_scope": "BLS 27-2031 itself; the O*NETSlower1–2% is a classification rather than a precise percentage, and is not hiring or AI causality",
-        "period": "2025—2035 projection; searched 2026-10-09",
+        "occupation_scope": "U.S. SOC 27-2031",
+        "period": "2025–2035",
         "source_refs": [
-          "r5-bls-current"
+          "a24-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 1600 per year (2025—2035; including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "1,600 annually (including replacements)",
         "fact_id": "r5-current-openings",
         "market": "United States",
         "measure": "Average annual projected openings",
-        "occupation_scope": "Its own 27-2031; not a net increase of 1600 per year or a vacancy sample",
-        "period": "2025—2035 projection; searched 2026-10-09",
+        "occupation_scope": "U.S. SOC 27-2031",
+        "period": "2025–2035",
         "source_refs": [
-          "r5-bls-current"
+          "a24-bls-projections"
         ]
       },
       {
@@ -37512,6 +37530,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Four posts at CNY 4,000–6,000 a month. Commercial performances, roadshow support and short trips.",
+        "fact_id": "posting-a24-huadu",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Commercial event dancer",
+        "period": "2023-06-13",
+        "source_refs": [
+          "a24-huadu"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Three broader performer posts, including dance and other arts. Base pay and show allowances listed as components, with no amount quoted.",
+        "fact_id": "posting-a24-linzhou",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Linzhou County arts troupe performer",
+        "period": "April 2026 republication",
+        "source_refs": [
+          "a24-linzhou"
+        ]
       }
     ]
   },
@@ -37538,19 +37580,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, faster than average 5%—6%)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment headcount (2024, about 12,300 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual openings (2024—2034, about 1,800, including growth and replacement)"
+        "label": "U.S. projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37564,17 +37606,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Dancers (O*NET-SOC 27-2031.00) perform dance, possibly on stage, on broadcast, or in video recording: the tasks covered include learning and practicing the role's dance movements, coordinating body movement with the musical rhythm, maintaining technique and fitness through training, exercise, and classes, coordinating movement with partners or the group, understanding fitness and limitations and choosing a dance genre, performing classical, modern, or acrobatic dance in performance, working with the choreographer to revise steps, attending auditions, attending costume fittings and makeup and photography calls, following dance trends, preparing supplies such as pointe shoes, also singing or acting when necessary, teaching dance students, and creating dance for oneself or others; its U.S. employment and wage definitions must be stated: about 12,300 people employed in 2024, a 2024—2034 projection of faster than average (5%—6%), and about 1,800 average annual openings including growth and replacement; the 2025 wage page publishes only hourly wage percentiles (14.88／17.23／24.80／38.36／52.30 USD, median 24.80 USD/hour) and does not publish an annual median; the industries are arts, entertainment, and recreation 44%／accommodation and food services 24%／other industries 32%; the interest code is ARS and the preparation level is Job Zone Three; as well as the occupation-level wage gap for such positions in mainland China and the control points for movement sequence verification, physical ability boundaries, positioning and coordination, and performance safety and escalation."
+      "text": "See how dancers rehearse, audition and compare pay. Read a commercial event posting, a county arts troupe notice and U.S. hourly wages."
     },
     "title": {
       "availability": "available",
       "text": "Dancers"
     }
   },
-  "source_content_sha256": "4bb5113d95607b7ebd31fc2c28609c2bee7596178976e067ddcdbc5a5c842703",
+  "source_content_sha256": "2b3a69f9b4217dacd63dea6b09ca63e5c001b013d9cbf18e9621f9f4b4cc7668",
   "subject": {
     "canonical_slug": "dancers",
     "name": "Dancers",
-    "summary": "In the United States, dancers correspond to O*NET-SOC 27-2031.00 (Dancers), performing dance, possibly on stage, on broadcast, or in video recording: learning and practicing the dance movements the role requires and making body movement rhythmically consistent with the musical accompaniment; maintaining technical proficiency, physical capability, and fitness through training, exercise, and taking dance classes; coordinating movement with partners or the dance group; understanding one's own fitness and limitations and choosing dance styles accordingly; performing classical, modern, or acrobatic dance in performance, expressing story, rhythm, and sound through the body; working with the choreographer to refine or revise steps; auditioning for dance roles or company membership; attending performance-related costume fittings, photography, and makeup calls; following trends and innovations in the dance field; preparing performance supplies such as pointe shoes; singing or acting beyond dance when necessary; teaching dance students; and designing and creating dance for oneself or others. The preparation level for this occupation is Job Zone Three (requiring medium preparation, SVP 6.0 up to below 7.0), and the official education survey shows that among new entrants 45% require a high school diploma or equivalent, 34% require less than high school, and 14% require a postsecondary certificate. On O*NET, this subcategory's tasks, work context, and preparation level are its own definition, while its wage page publishes only hourly wage percentiles and no annual median. Similar positions on the Chinese side are dance performance positions in performance companies, dance troupes, and commercial performances, whose duties and employment and pay definitions are not one-to-one counterparts of this U.S. occupation subcategory and cannot be interchanged."
+    "summary": "Learn and rehearse movement, perform on stage, at events or on camera, and adjust timing, spacing and coordination from feedback. Ask how rehearsals, performances and travel are paid."
   }
 }

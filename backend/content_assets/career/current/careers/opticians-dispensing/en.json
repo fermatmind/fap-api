@@ -158,6 +158,9 @@
       "item:opticians-dispensing.path.seven-day-trial.8": {
         "status": "mapped"
       },
+      "item:opticians-dispensing.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:opticians-dispensing.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -13056,6 +13059,21 @@
             "onet-education"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The order confirms a frame model, but the fitting record lists a different size. Identify the order fields and physical label to check and who should receive the issue."
+            ]
+          },
+          "id": "opticians-dispensing.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "Check a dispensing optician handover",
+          "type": "notice"
         }
       ]
     },
@@ -15567,6 +15585,13 @@
         "id": "opticians-dispensing.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "opticians-dispensing.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15760,7 +15785,7 @@
       "text": "Dispensing optician: work, wages, and entry paths"
     }
   },
-  "source_content_sha256": "eee6948a2ac3d7a673a7a8cd4b8e9efa1fbf5e476ef23bf8a45d81d9cc0d697c",
+  "source_content_sha256": "9ff4fe8e36934dbfd720eff7d6f85b97392bccfbbb8973be319376c804af80bc",
   "subject": {
     "canonical_slug": "opticians-dispensing",
     "name": "Dispensing optician",

@@ -44,9 +44,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1602,7 +1599,7 @@
         "status": "pending_mapping"
       },
       "item:aerospace-engineers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:aerospace-engineers.sources.source-card.1": {
         "status": "mapped"
@@ -23401,12 +23398,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用90分钟只做本页给定虚拟数据的纸面比较：算A/B均值和最小值，逐项核R1–R3，保留失败数据并写异常与复验计划。无需制作或投放滑翔机，也不用于真实飞行判断。"
+              "到「入行、资格与职业发展」找「AE-17｜比较方案，保留失败数据」。先逐项判定，再看题后参考。"
             ]
           },
           "id": "aerospace-engineers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23415,13 +23412,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "你愿意核对单位和模型假设，能用证据解释方案取舍，愿意接受跨专业质疑，并在发现错误后重算和保存记录，可进一步探索实际工程任务。"
+              "如果你愿意保留失败记录、核阈值与单位、交代尚缺证据，可以继续了解。"
             ]
           },
           "id": "aerospace-engineers.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -23431,13 +23427,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先用本页虚拟纸滑翔机数据做90分钟纸面比较，提交要求矩阵、复算表和异常说明；不需要制作或投掷实物。它体验工程取舍与证据意识，不是飞行、设计或批准资格。"
+              "用本页 AE-17 虚拟数据做 90 分钟纸面比较，交一页报告，包含要求矩阵、复算表、异常和纸面复核说明。无需制作或投掷实物；练习不代表设计、飞行或批准资格。"
             ]
           },
           "id": "aerospace-engineers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23607,7 +23602,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025年就业68,700人，预计增长8%、净增5,700人，年均空缺3,800个含替代需求。"
+              "2025年就业68,700人，预计增长8.3%、净增5,700人，年均空缺3,800个含替代需求。"
             ]
           },
           "id": "aerospace-engineers.profile.onet-structured-fields-block.4",
@@ -24665,10 +24660,10 @@
                 "url": "https://www.onetonline.org/link/summary/17-2011.00"
               },
               {
-                "entity": "BLS 航空航天工程师职业展望手册",
+                "entity": "BLS 就业预测表 1.2",
                 "id": "link-9",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "Generative AI and jobs: A refined global index of occupational exposure",
@@ -24689,10 +24684,10 @@
                 "url": "https://www.onetonline.org/link/summary/17-2011.00"
               },
               {
-                "entity": "BLS 航空航天工程师职业展望手册",
+                "entity": "BLS 就业预测表 1.2",
                 "id": "link-13",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 航空航天工程师 17-2011.00",
@@ -24707,10 +24702,10 @@
                 "url": "https://www.onetonline.org/link/summary/17-2011.00"
               },
               {
-                "entity": "BLS 航空航天工程师职业展望手册",
+                "entity": "BLS 就业预测表 1.2",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET航空航天工程师任务",
@@ -24863,14 +24858,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得航空航天工程师单一职业实际AI采用率、裁员比例或中国因果就业数据。 AI 可用于需求检索、分析脚本、参数探索和文档初稿，但输出仍需核单位、假设、工况与验证证据。BLS 预计美国该职业2025–2035年增长8%；这不是AI不会改变岗位的证明。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可以用工具整理虚构要求、生成表格或脚本草稿，再核对输入版本、单位和阈值。保密资料按项目授权处理；工具输出不能替代独立验证、试验许可或适航批准。本页不估计职业替代率。"
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "source-bls-aero-2026-revision",
-            "source-onet-aero-revision",
-            "source-ilo-ai-2025-revision"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25265,12 +25258,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 航空航天工程师职业展望手册"
+              "BLS 就业预测表 1.2"
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25293,12 +25286,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "预计就业由68,700增至74,400，增长8%；年均空缺3,800。"
+              "预计就业由68,700增至74,400，增长8.3%；年均空缺3,800。"
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25520,12 +25513,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现有资料支持任务变化，不能证明整个职业被取代。设计、验证和责任链需要逐项核查；美国总体预测仍是增长8%，不是AI免疫保证。"
+              "现有资料支持任务变化，不能证明整个职业被取代。设计、验证和责任链需要逐项核查；美国总体预测仍是增长8.3%，不是AI免疫保证。"
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25534,12 +25527,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 航空航天工程师职业展望手册；任务准备建议为编辑整理。"
+              "BLS 就业预测表 1.2；任务准备建议为编辑整理。"
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25604,12 +25598,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS预测美国2025–2035年该职业增长8%、净增5,700人；年均空缺3,800个含替代需求。不能外推中国，也不能当AI的因果效应。"
+              "BLS预测美国2025–2035年该职业增长8.3%、净增5,700人；年均空缺3,800个含替代需求。不能外推中国，也不能当AI的因果效应。"
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25618,12 +25612,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 航空航天工程师职业展望手册；任务准备建议为编辑整理。"
+              "BLS 就业预测表 1.2；任务准备建议为编辑整理。"
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26931,12 +26926,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页未提供可比中国招聘报价样本；不能由美国空缺或中国行业工资推算个人录用机会。"
+              "长沙未设置薪资，杭州薪资面议。不能按岗位数量、学历或其他行业工资推算报价。"
             ]
           },
           "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "source-nbs-science-2025-revision"
+            "aero-cs",
+            "aero-hz"
           ],
           "type": "prose"
         },
@@ -26959,12 +26955,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本栏只有宽行业年工资，不是职业月薪。比较offer应核城市、经验、职责、工资项目与工时；不把平均值除12作为个人起薪。"
+              "两个招聘样本没有可比工资。国家统计局 2025 年城镇科学研究和技术服务业年平均工资为非私营 182,064 元、私营 83,560 元，不能当航空航天工程师的起薪或全国工资分布。"
             ]
           },
           "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "source-nbs-science-2025-revision"
+            "nbs",
+            "aero-cs",
+            "aero-hz"
           ],
           "type": "prose"
         },
@@ -27043,7 +27041,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可比职业月薪统计或有效城市招聘报价样本。"
+              "两个招聘样本没有可比工资。国家统计局 2025 年城镇科学研究和技术服务业年平均工资为非私营 182,064 元、私营 83,560 元，不能当航空航天工程师的起薪或全国工资分布。"
             ]
           },
           "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.54",
@@ -27057,7 +27055,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国航空航天工程师单一职业全国工资中位数或可比城市月薪。现有国家统计局行业年平均工资可作宽口径背景，不能代填应届起薪、分位或个人报价。 美国2025–2035年预计增长8%；不代表中国增长率。 美国2025年中位数134,960美元/年；不代表中国工资。"
+              "证据不足：未取得中国航空航天工程师单一职业全国工资中位数或可比城市月薪。现有国家统计局行业年平均工资可作宽口径背景，不能代填应届起薪、分位或个人报价。 美国2025–2035年预计增长8.3%；不代表中国增长率。 美国2025年中位数134,960美元/年；不代表中国工资。"
             ]
           },
           "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.55",
@@ -27086,7 +27084,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国2025–2035年预计增长8%；不代表中国增长率。"
+              "美国2025–2035年预计增长8.3%；不代表中国增长率。"
             ]
           },
           "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.58",
@@ -27278,12 +27276,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "68,700 人"
+              "2025 年 68,700 人；2035 年预计 74,400 人。"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27292,12 +27290,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025年美国职业就业存量，不是招聘职位数量。；BLS 职业就业预测｜https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+              "2025年美国职业就业存量，不是招聘职位数量。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27306,12 +27304,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "8%"
+              "增长 8.3%，净增约 5,700 人。"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27320,12 +27318,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国2025–2035年净就业预测，预计净增5,700人。；BLS 职业就业预测｜https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+              "美国2025–2035年净就业预测，预计净增5,700人。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27334,12 +27332,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3,800 个/年"
+              "年均约 3,800 个空缺，含替代需求。"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27348,12 +27346,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国2025–2035年年均空缺，含增长及退休、转岗等替代需求。；BLS 职业就业预测｜https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+              "美国2025–2035年年均空缺，含增长及退休、转岗等替代需求。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27362,7 +27360,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "数据适用于美国全国航空航天工程师。工资为2025年，预测为2025–2035年；不得外推中国，也不能据此计算个人就业概率。 美国2025–2035年预计增长8%，年均空缺约3,800个；净增与替代需求分开阅读。"
+              "数据适用于美国全国航空航天工程师。工资为2025年，预测为2025–2035年；不得外推中国，也不能据此计算个人就业概率。 美国2025–2035年预计增长8.3%，年均空缺约3,800个；净增与替代需求分开阅读。"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.25",
@@ -27474,7 +27472,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国2025–2035年预计增长8%，年均空缺约3,800个；净增与替代需求分开阅读。"
+              "美国2025–2035年预计增长8.3%，年均空缺约3,800个；净增与替代需求分开阅读。"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.33",
@@ -27572,7 +27570,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "联邦政府"
+              "联邦政府（不含邮政服务）"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.40",
@@ -27786,7 +27784,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27798,19 +27796,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "机械工程师",
@@ -29473,7 +29471,7 @@
               [
                 "结构／载荷分析",
                 "说明载荷与边界条件，提交应力或裕度计算。",
-                "O*NET/BLS有结构设计任务；不代表所有雇主同一岗位门槛。",
+                "杭州酷飞 2026 年 6 月 1 日发布机械结构设计岗，列 3 人、本科及以上、全职或实习、薪资面议；职责含结构方案、分析、符合性验证文件与跨专业协作。是单雇主样本，不等于全国学历或取证要求。",
                 "用简化受力模型给出输入、单位、推导与适用范围。",
                 "不独立批准整机设计；真实签署依授权。"
               ],
@@ -29511,7 +29509,9 @@
           "source_refs": [
             "source-onet-aero-revision",
             "source-bls-aero-2026-revision",
-            "source-nasa-seh-revision"
+            "source-nasa-seh-revision",
+            "aero-hz",
+            "aero-cs"
           ],
           "title": "航空航天工程师的入门岗位与初期任务怎么比较？",
           "type": "table"
@@ -29526,7 +29526,7 @@
                 "values": [
                   "美国典型入行教育",
                   "BLS说明通常为航空航天或相关工程学士。",
-                  "这是美国职业资料；中国具体岗位专业与学历须核当期公告。"
+                  "长沙流体方向样本要求硕士，杭州结构岗本科及以上；各岗位按实际招聘核。"
                 ]
               },
               {
@@ -29558,7 +29558,9 @@
           "id": "aerospace-engineers.path.employer-evidence.1",
           "source_refs": [
             "source-bls-aero-2026-revision",
-            "source-onet-aero-revision"
+            "source-onet-aero-revision",
+            "aero-cs",
+            "aero-hz"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29580,34 +29582,33 @@
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务：保留六条原始数据，计算两方案均值和最小值，逐项判定R1–R3。",
-                  "参考：A均值13.0/3≈4.333m、最小4.2m，质量10g，三项通过；B均值12.8/3≈4.267m、最小3.1m，质量12g，仅R1通过。",
-                  "建议选择A用于本轮纸面要求；不得因B两次较远而删除3.1m，也不能把本轮结论称真实飞机设计结论。"
+                  "先作答：保留六条原始记录，算均值和最小值，逐项判定 R1–R3。变式：A 第三次距离没有记录，能否判 A 全部通过？将两个判断写在矩阵里，交原版与变式。",
+                  "先建要求矩阵：每项列阈值、测量或计算方法、A/B结果与通过状态，先不四舍五入再比较。",
+                  "交一页报告：要求矩阵、两版复算、异常与纸面复核计划。只用题面数据，不做实物测试。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先建要求矩阵：每项列阈值、测量或计算方法、A/B结果与通过状态，先不四舍五入再比较。",
-                  "异常说明：B第二次偏低；可能是测量、操作或方案稳定性问题，现有数据不能确定原因。",
-                  "复验设计：固定同一室内条件、投放与测量方法，每方案再做3次，记录全部结果和版本；本页不提供复验数据，不编造通过结果。"
+                  "两版都独立提交",
+                  "第6天交原版、缺测变式及一页报告。第7天在常见问题展开「纸滑翔机要求矩阵参考解（交卷后再打开）」。",
+                  "只写纸面复核计划：列出需要核的原始记录、统一的记录口径与版本；不开展实物测试，也不预填复核结果。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "交付一张矩阵、一张复算表、一段异常与复验说明、一页报告；可用纸笔或表格，无需CAD或付费软件。",
-                  "仅纸面数据练习，不要求制作、投掷或使用动力装置；不得用于真实航空器、飞行、适航或安全批准。"
+                  "自查：矩阵、复算表和原记录能逐项对上，数值带单位，未删除失败项，复核计划没有预填结果。",
+                  "缺测时标出仍可核及需待核的项目。仅纸面练习，不制作、投掷或测试航空器。"
                 ]
               }
             ]
           },
           "id": "aerospace-engineers.path.entry-work-sample-data.1",
           "source_refs": [
-            "source-onet-aero-revision",
-            "source-nasa-seh-revision"
+            "editor"
           ],
-          "title": "入行练习：一次完整的航空航天工程师任务任务（虚构材料）",
+          "title": "AE-17｜比较方案，保留失败数据",
           "type": "cards"
         },
         {
@@ -29620,7 +29621,7 @@
                 "values": [
                   "需求矩阵",
                   "保留R1质量≤12g、R2均值≥4.3m、R3每次≥4.0m。",
-                  "参考结果：A三项通过；B仅R1通过，R2/R3失败。"
+                  "保留每项的输入和判断依据，参考结果只看题后。"
                 ]
               },
               {
@@ -29628,14 +29629,14 @@
                 "values": [
                   "独立复算表",
                   "列全部原始距离、和、均值、最小值及单位；保留未舍入值。",
-                  "A=13.0/3，B=12.8/3；复核人可从输入重算，不只看截图。"
+                  "保留原始距离、公式和单位，让别人从原记录复算。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "一页报告",
-                  "按要求推荐A，说明有限样本、异常未知与拟议复验；不冒充真实飞行验证。"
+                  "按要求推荐或暂缓，说明异常、缺失记录和待核事项。"
                 ]
               },
               {
@@ -29715,56 +29716,59 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "第1天：把题面转为可测要求",
-                  "抄录质量、六次距离与R1–R3，说明仅纸面比较、不做真实飞行。"
+                  "选长沙或杭州岗位公告，或美国 O*NET 岗位任务；用 NASA 手册的追溯思路把题面写成 R1–R3。资料没说的条件标待核。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "第2天：计算与单位检查",
-                  "算A=13.0/3、B=12.8/3，最小值4.2/3.1m，保留公式及未舍入值。"
+                  "独立算两组平均与最小值，保留单位和未舍入值。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "第3天：比较两个方案",
-                  "逐项写通过状态：A全通过，B只通过质量；按既定要求推荐A。"
+                  "逐项判断两组，写明使用了哪些原始记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "第4天：解释异常边界",
-                  "保留B的3.1m，列测量、操作或稳定性假设，明确尚不能定根因。"
+                  "写异常原因的候选解释和缺失记录变式，不提前归因。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "第5天：拟定复验",
-                  "固定方法，每方案再3次；写测量与版本记录计划，不捏造新结果。"
+                  "列纸面复核要查的记录、条件和版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天：独立复核",
-                  "请同伴重算或隔天独立复算，核阈值、单位和状态，记录意见与修订。"
+                  "第6天：独立提交",
+                  "不看参考，独立交原版、缺测变式和一页报告。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天：提交与复盘",
-                  "交矩阵、复算表、异常说明与一页报告，记录自己更喜欢分析、数据还是追溯。"
+                  "第7天：打开参考",
+                  "展开常见问题「纸滑翔机要求矩阵参考解（交卷后再打开）」，自核后记差异或无差异，再决定是否继续了解相关岗位。"
                 ]
               }
             ]
           },
           "id": "aerospace-engineers.path.seven-day-trial.1",
           "source_refs": [
-            "source-onet-aero-revision",
+            "editor",
+            "aero-cs",
+            "aero-hz",
+            "onet",
             "source-nasa-seh-revision"
           ],
           "title": "七天体验：用虚构材料完成一次航空航天工程师任务闭环",
@@ -29886,13 +29890,16 @@
               "教育、软件技能、项目准入和批准权限是四件不同的事。美国BLS通常列相关工程学士；中国具体岗位应读当期正式条件。",
               "美国入门航空航天岗位不要求PE；有经验者的州许可条件应到目标州核查，不能套给中国。",
               "部分美国国防项目需要安全许可，部分类型和等级需要公民身份；不是全职业门槛。",
-              "工程分析作品不等于监管批准或实际飞行授权。题面仅为纸面数据比较，现场、维修与签署须核真实职责。"
+              "大陆民用航空产品适航审定看现行《民用航空法》及适用的 CCAR-21 条款；美国看 FAA 的适用设计批准流程。工程师可以按项目分工准备计算、试验与符合性资料，个人学历、软件证书或内部复核不等于局方批准。"
             ]
           },
           "id": "aerospace-engineers.path.credential-boundary.1",
           "source_refs": [
             "source-bls-aero-2026-revision",
-            "source-onet-aero-revision"
+            "source-onet-aero-revision",
+            "aero-law",
+            "aero-ccar",
+            "aero-faa"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29902,15 +29909,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本页采用BLS/O*NET公开职业资料说明教育、任务和能力，没有提供可核中国雇主招聘样本或岗位要求占比。前述入口和面试检查是编辑准备建议，不声称来自真实雇主面试、也不构成全部岗位普遍条件。"
+              "上飞院长沙分公司 2026 年 10 月 28 日发布起落架产品设计（流体方向）岗，公告列全职、硕士起、12 人，薪资未设置；要求流体力学背景及制图、仿真等工具能力。页面列有效期至 12 月 30 日，实际招聘状态以雇主为准。",
+              "杭州酷飞 2026 年 6 月 1 日发布机械结构设计岗，列 3 人、本科及以上、全职或实习、薪资面议；职责含结构方案、分析、符合性验证文件与跨专业协作。是单雇主样本，不等于全国学历或取证要求。"
             ]
           },
           "id": "aerospace-engineers.path.recruitment-sample.1",
           "source_refs": [
-            "source-bls-aero-2026-revision",
-            "source-onet-aero-revision"
+            "aero-cs",
+            "aero-hz"
           ],
-          "title": "招聘样本说明",
+          "title": "长沙与杭州岗位样本",
           "type": "notice"
         },
         {
@@ -31184,25 +31192,25 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS 航空航天工程师职业展望手册",
+                "entity": "BLS 职业手册：航空航天工程师",
                 "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
               },
               {
-                "entity": "BLS 航空航天工程师职业展望手册",
+                "entity": "BLS 就业预测表 1.2：航空航天工程师",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国家统计局2025年城镇单位就业人员年平均工资",
+                "entity": "国家统计局：科学研究和技术服务业工资",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "O*NET 航空航天工程师 17-2011.00",
+                "entity": "O*NET 17-2011.00：航空航天工程师",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/17-2011.00"
@@ -31270,7 +31278,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS预计美国2025–2035年航空航天工程师增长8%，年均空缺约3,800个。航空器效率、小型卫星和无人机相关需求是其预测背景，不是个人录用保证。中国精确就业统计尚不足；转向建议按任务比较，不能把相邻职业称同义岗位。"
+              "BLS预计美国2025–2035年航空航天工程师增长8.3%，年均空缺约3,800个。航空器效率、小型卫星和无人机相关需求是其预测背景，不是个人录用保证。中国精确就业统计尚不足；转向建议按任务比较，不能把相邻职业称同义岗位。"
             ]
           },
           "id": "aerospace-engineers.market-signals.market-signal-card.8",
@@ -31355,12 +31363,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "航空航天工程师｜SOC 17-2011"
+              "美国航空航天工程师 17-2011"
             ]
           },
           "id": "aerospace-engineers.market-signals.market-signal-card.14",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31453,12 +31461,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "航空航天工程师｜SOC 17-2011"
+              "美国航空航天工程师 17-2011"
             ]
           },
           "id": "aerospace-engineers.market-signals.market-signal-card.21",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31551,12 +31559,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "航空航天工程师｜SOC 17-2011"
+              "美国航空航天工程师 17-2011"
             ]
           },
           "id": "aerospace-engineers.market-signals.market-signal-card.28",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -32004,10 +32012,15 @@
           "data": {
             "entries": [
               {
-                "answer": "航空航天工程师把飞行任务、载荷、环境和法规约束转成要求、模型、设计与验证证据，并在试验异常和接口冲突中作工程取舍。",
+                "answer": "航空航天工程师把飞行器或航天器的要求变成可分析、可验证的设计。结构、气动、系统和试验岗位的交付不同；例如分析岗位提交有假设和单位的计算，验证岗位把要求和原始证据连起来。设计、制造、维修及适航批准的职责要分开核。",
                 "id": "aerospace-engineers.faq.1",
                 "question": "航空航天工程师每天做什么？",
-                "question_key": "career.faq.aerospace-engineers.daily-work"
+                "question_key": "career.faq.aerospace-engineers.daily-work",
+                "source_refs": [
+                  "onet",
+                  "aero-cs",
+                  "aero-hz"
+                ]
               },
               {
                 "answer": "机械工程师覆盖更广机械与热系统，工程技术员更靠近设备和数据采集，维修技师面向现役航空器检查与恢复。",
@@ -32016,34 +32029,53 @@
                 "question_key": "career.faq.aerospace-engineers.comparison"
               },
               {
-                "answer": "AI 可辅助检索、参数探索和文档检查，但不能自动获得适航接受；安全关键结论仍需独立验证、配置管理和授权审批。",
+                "answer": "可以用工具整理虚构要求、生成表格或脚本草稿，再核对输入版本、单位和阈值。保密资料按项目授权处理；工具输出不能替代独立验证、试验许可或适航批准。本页不估计职业替代率。",
                 "id": "aerospace-engineers.faq.3",
                 "question": "AI会怎样改变航空航天工程师任务？",
-                "question_key": "career.faq.aerospace-engineers.ai"
+                "question_key": "career.faq.aerospace-engineers.ai",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
-                "answer": "本次权威来源未找到中国航空航天工程师单一职业全国中位数；行业平均只能作为宽代理，不能称为该职业起薪。",
+                "answer": "两个招聘样本没有可比工资。国家统计局 2025 年城镇科学研究和技术服务业年平均工资为非私营 182,064 元、私营 83,560 元，不能当航空航天工程师的起薪或全国工资分布。 上飞院长沙分公司 2026 年 10 月 28 日发布起落架产品设计（流体方向）岗，公告列全职、硕士起、12 人，薪资未设置；要求流体力学背景及制图、仿真等工具能力。页面列有效期至 12 月 30 日，实际招聘状态以雇主为准。 杭州酷飞 2026 年 6 月 1 日发布机械结构设计岗，列 3 人、本科及以上、全职或实习、薪资面议；职责含结构方案、分析、符合性验证文件与跨专业协作。是单雇主样本，不等于全国学历或取证要求。",
                 "id": "aerospace-engineers.faq.4",
                 "question": "中国航空航天工程师工资如何查？",
-                "question_key": "career.faq.aerospace-engineers.china-salary"
+                "question_key": "career.faq.aerospace-engineers.china-salary",
+                "source_refs": [
+                  "nbs",
+                  "aero-cs",
+                  "aero-hz"
+                ]
               },
               {
-                "answer": "美国 2025 年工资中位数为 {{fact:us-wage-median-2025}}，但中位数不是入门报价。",
+                "answer": "美国航空航天工程师 17-2011 在 2025 年 5 月的年薪中位数为 134,960 美元，时薪中位数 64.89 美元。工资分位不是新人报价。",
                 "id": "aerospace-engineers.faq.5",
                 "question": "美国航空航天工程师中位数就是起薪吗？",
-                "question_key": "career.faq.aerospace-engineers.us-salary"
+                "question_key": "career.faq.aerospace-engineers.us-salary",
+                "source_refs": [
+                  "oews"
+                ]
               },
               {
-                "answer": "美国资料把学士学位列为典型入门教育；学位不自动授予适航批准或设计签署权。",
+                "answer": "大陆民用航空产品适航审定看现行《民用航空法》及适用的 CCAR-21 条款；美国看 FAA 的适用设计批准流程。工程师可以按项目分工准备计算、试验与符合性资料，个人学历、软件证书或内部复核不等于局方批准。",
                 "id": "aerospace-engineers.faq.6",
                 "question": "入行教育和项目签署权是什么关系？",
-                "question_key": "career.faq.aerospace-engineers.education"
+                "question_key": "career.faq.aerospace-engineers.education",
+                "source_refs": [
+                  "aero-law",
+                  "aero-ccar",
+                  "aero-faa"
+                ]
               },
               {
-                "answer": "作品集应展示可测要求、模型假设、方案取舍、原始试验数据、异常解释和再验证，而不应只有 CAD 图片。",
+                "answer": "先做 AE-17，再交一页报告，包含要求矩阵、复算表、异常和纸面复核说明；保留原始数据。它不代表真实设计经历或批准。",
                 "id": "aerospace-engineers.faq.7",
                 "question": "航空航天工程师作品集应展示什么？",
-                "question_key": "career.faq.aerospace-engineers.portfolio"
+                "question_key": "career.faq.aerospace-engineers.portfolio",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "高风险点是要求遗漏、接口错配、模型失真、试验构型不一致和变更失控；控制依赖追溯、复核、分层验证和授权升级。",
@@ -32062,6 +32094,15 @@
                 "id": "aerospace-engineers.faq.10",
                 "question": "选择工程师、试验技术员或维修方向前应核什么？",
                 "question_key": "career.faq.aerospace-engineers.comparison"
+              },
+              {
+                "answer": "参考：A均值13.0/3≈4.333m、最小4.2m，质量10g，三项通过；B均值12.8/3≈4.267m、最小3.1m，质量12g，仅R1通过。 纸面建议选 A；保留 B 的 3.1 米原记录。这个偏低值的原因仍待核；这些数据不能证明真实航空器性能。 变式参考：A 仍可判质量 R1 通过，但 R2、R3 要求三次记录，留待核，不给 A 全通过；B 原判断不变。仅纸面练习，不制作、投掷或测试航空器。",
+                "id": "aerospace-engineers.faq.11",
+                "question": "纸滑翔机要求矩阵参考解（交卷后再打开）",
+                "question_key": "career.faq.aerospace-engineers.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -32168,7 +32209,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32180,13 +32221,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看航空航天工程师职业页面",
@@ -32216,84 +32257,85 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official custom occupation profile",
-                  "current page; accessed 2026-09-04"
+                  "航空航天工程师把飞行器或航天器的要求变成可分析、可验证的设计。结构、气动、系统和试验岗位的交付不同；例如分析岗位提交有假设和单位的计算，验证岗位把要求和原始证据连起来。设计、制造、维修及适航批准的职责要分开核。",
+                  "职业任务背景。"
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "职业任务背景。",
                 "market": "美国",
-                "name": "17-2011.00 - Aerospace Engineers",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 17-2011.00：航空航天工程师",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/custom/17-2011.00"
+                "url": "https://www.onetonline.org/link/summary/17-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupation details",
-                  "current page; accessed 2026-09-04"
+                  "美国航空航天工程师 17-2011 在 2025 年 5 月的年薪中位数为 134,960 美元，时薪中位数 64.89 美元。工资分位不是新人报价。",
+                  "手册将增长率取整；精确值和空缺见表 1.2。",
+                  "手册所列联邦政府工资不含邮政服务；入门许可、州 PE 路径、部分国防项目准入及展望背景也按手册原文。"
                 ],
-                "evidence_type": "official occupation details",
+                "evidence_type": "primary_document",
                 "id": "bls",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "手册将增长率取整；精确值和空缺见表 1.2。",
                 "market": "美国",
-                "name": "17-2011.00 - Aerospace Engineers",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 职业手册：航空航天工程师",
+                "period": "2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/17-2011.00"
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official technology profile",
-                  "current page; accessed 2026-09-04"
+                  "BLS 17-2011：2025 年就业 68,700 人，2035 年预计 74,400 人，净增约 5,700（8.3%）；年均空缺约 3,800，含替代需求。",
+                  "预测不等于即时招聘。"
                 ],
-                "evidence_type": "official technology profile",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "预测不等于即时招聘。",
                 "market": "美国",
-                "name": "Hot Technologies: 17-2011.00 - Aerospace Engineers",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 就业预测表 1.2：航空航天工程师",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/hot_tech/17-2011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official industry distribution",
-                  "current page; accessed 2026-09-04"
+                  "美国航空航天工程师 17-2011 在 2025 年 5 月的年薪中位数为 134,960 美元，时薪中位数 64.89 美元。工资分位不是新人报价。",
+                  "美国全国职业数据。"
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "primary_document",
                 "id": "oews",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "美国全国职业数据。",
                 "market": "美国",
-                "name": "Industries: 17-2011.00 - Aerospace Engineers",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 工资表：航空航天工程师",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/17-2011.00"
+                "url": "https://www.onetonline.org/link/localwages/17-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "两个招聘样本没有可比工资。国家统计局 2025 年城镇科学研究和技术服务业年平均工资为非私营 182,064 元、私营 83,560 元，不能当航空航天工程师的起薪或全国工资分布。",
+                  "行业平均工资，不是岗位工资。"
                 ],
-                "evidence_type": "official certification discovery",
+                "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "美国",
-                "name": "National Certifications: 17-2011.00 - Aerospace Engineers",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localcert/17-2011.00"
+                "limitation": "行业平均工资，不是岗位工资。",
+                "market": "中国大陆",
+                "name": "国家统计局：科学研究和技术服务业工资",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -32301,7 +32343,7 @@
                   "official local training discovery",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official local training discovery",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32317,7 +32359,7 @@
                   "O*NET display of BLS OEWS wage data",
                   "2025 BLS OEWS wage data displayed by O*NET OnLine"
                 ],
-                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "evidence_type": "primary_document",
                 "id": "privacy",
                 "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
                 "market": "美国",
@@ -32333,7 +32375,7 @@
                   "official occupation summary",
                   "2025 BLS OEWS wage data displayed by O*NET OnLine"
                 ],
-                "evidence_type": "official occupation summary",
+                "evidence_type": "primary_document",
                 "id": "facilities",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32349,7 +32391,7 @@
                   "official custom occupation profile",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "primary_document",
                 "id": "operations",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32365,7 +32407,7 @@
                   "official occupation details",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official occupation details",
+                "evidence_type": "primary_document",
                 "id": "hr",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32381,7 +32423,7 @@
                   "official technology profile",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official technology profile",
+                "evidence_type": "primary_document",
                 "id": "health",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32397,7 +32439,7 @@
                   "official industry distribution",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "primary_document",
                 "id": "ilo",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32408,20 +32450,20 @@
                 "url": "https://www.onetonline.org/link/industry/17-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "虚构的纸面数据比较。",
+                  "不设计或试飞航空器。"
                 ],
-                "evidence_type": "official certification discovery",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "美国",
-                "name": "National Certifications: 17-2011.00 - Aerospace Engineers",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localcert/17-2011.00"
+                "limitation": "不设计或试飞航空器。",
+                "market": "虚构体验",
+                "name": "AE-17｜比较方案，保留失败数据",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/zh/career/jobs/aerospace-engineers#career-content-path"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -32429,7 +32471,7 @@
                   "official local training discovery",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official local training discovery",
+                "evidence_type": "primary_document",
                 "id": "nist",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32445,7 +32487,7 @@
                   "O*NET display of BLS OEWS wage data",
                   "2025 BLS OEWS wage data displayed by O*NET OnLine"
                 ],
-                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "evidence_type": "primary_document",
                 "id": "arxiv",
                 "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
                 "market": "美国",
@@ -32461,7 +32503,7 @@
                   "official occupation summary",
                   "2025 BLS OEWS wage data displayed by O*NET OnLine"
                 ],
-                "evidence_type": "official occupation summary",
+                "evidence_type": "primary_document",
                 "id": "weforum",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32477,7 +32519,7 @@
                   "official custom occupation profile",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "primary_document",
                 "id": "employer",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32493,7 +32535,7 @@
                   "official occupation details",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official occupation details",
+                "evidence_type": "primary_document",
                 "id": "purchasing-managers",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32509,7 +32551,7 @@
                   "official technology profile",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official technology profile",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-1",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32525,7 +32567,7 @@
                   "official industry distribution",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-2",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32541,7 +32583,7 @@
                   "official certification discovery",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official certification discovery",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32557,7 +32599,7 @@
                   "official local training discovery",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official local training discovery",
+                "evidence_type": "primary_document",
                 "id": "census",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32573,7 +32615,7 @@
                   "O*NET display of BLS OEWS wage data",
                   "2025 BLS OEWS wage data displayed by O*NET OnLine"
                 ],
-                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "evidence_type": "primary_document",
                 "id": "msresearch",
                 "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
                 "market": "美国",
@@ -32584,20 +32626,20 @@
                 "url": "https://www.onetonline.org/link/localwages/17-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupation summary",
-                  "2025 BLS OEWS wage data displayed by O*NET OnLine"
+                  "美国航空航天工程师 17-2011 在 2025 年 5 月的年薪中位数为 134,960 美元，时薪中位数 64.89 美元。工资分位不是新人报价。",
+                  "美国全国职业数据。"
                 ],
-                "evidence_type": "official occupation summary",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "美国全国职业数据。",
                 "market": "美国",
-                "name": "17-2011.00 - Aerospace Engineers",
-                "period": "2026职业档案；工资/就业2025年，预测2025—2035年",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 工资表：航空航天工程师",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/17-2011.00"
+                "url": "https://www.onetonline.org/link/localwages/17-2011.00"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -32605,7 +32647,7 @@
                   "official custom occupation profile",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "primary_document",
                 "id": "archivists",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
@@ -32616,89 +32658,90 @@
                 "url": "https://www.onetonline.org/link/custom/17-2011.00"
               },
               {
-                "accessed_at": "2026-10-08",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "历史版本：BLS专题表核实美国2024就业71,600人，2024—2034预计增长6.1%（约6%）；历史年均空缺4,500个尚未复核。当前正文另用2025基期及2025—2035版本，不将不同期间判为数值冲突。",
-                  "预测期增长与年均空缺是不同指标，空缺包含增长和替代需求。"
+                  "BLS 17-2011：2025 年就业 68,700 人，2035 年预计 74,400 人，净增约 5,700（8.3%）；年均空缺约 3,800，含替代需求。",
+                  "预测不等于即时招聘。"
                 ],
-                "evidence_type": "BLS 历史就业预测专题表",
+                "evidence_type": "primary_document",
                 "id": "onet-aerospace-trends-2024",
-                "limitation": "证据不足：已读BLS历史专题表支持2024就业71,600和2024—2034增长6.1%（取整约6%）；该表未列年均空缺。本轮未取得可稳定访问的同版本原表复核历史记录4,500个/年，因此该空缺值仅作尚未复核的历史记录，不用于当前就业判断。",
+                "limitation": "预测不等于即时招聘。",
                 "market": "美国",
-                "name": "BLS 工程职业就业预测：2024—2034历史版本核查",
-                "period": "2024基期、2024—2034预测；专题发表于2026-03-04",
+                "name": "BLS 就业预测表 1.2：航空航天工程师",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/opub/ted/2026/force-mass-mechanisms-and-vectors-employment-projections-and-wages-in-engineering.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "设计、建模、测试、标准符合性、失效调查及技术记录；兴趣 IRC。"
+                  "航空航天工程师把飞行器或航天器的要求变成可分析、可验证的设计。结构、气动、系统和试验岗位的交付不同；例如分析岗位提交有假设和单位的计算，验证岗位把要求和原始证据连起来。设计、制造、维修及适航批准的职责要分开核。"
                 ],
-                "evidence_type": "官方职业任务资料",
+                "evidence_type": "primary_document",
                 "id": "source-onet-aero-revision",
-                "limitation": "美国职业描述，不自动授予中国岗位权限，也不是软件普遍必需的招聘占比。",
+                "limitation": "职业任务背景。",
                 "market": "美国",
-                "name": "O*NET 航空航天工程师 17-2011.00",
-                "period": "访问2026-10-07",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 17-2011.00：航空航天工程师",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-2011.00"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2025年工资中位数134960美元；就业68700人；预测增长8%、净增5700、年均空缺3800。",
-                  "典型入门教育为相关工程学士；入门岗位不要求PE执照。"
+                  "美国航空航天工程师 17-2011 在 2025 年 5 月的年薪中位数为 134,960 美元，时薪中位数 64.89 美元。工资分位不是新人报价。",
+                  "手册将增长率取整；精确值和空缺见表 1.2。",
+                  "手册所列联邦政府工资不含邮政服务；入门许可、州 PE 路径、部分国防项目准入及展望背景也按手册原文。"
                 ],
-                "evidence_type": "官方职业工资与就业预测",
+                "evidence_type": "primary_document",
                 "id": "source-bls-aero-2026-revision",
-                "limitation": "美国职业总体；工资分位不是起薪，空缺不是净增，也不能外推中国。",
+                "limitation": "手册将增长率取整；精确值和空缺见表 1.2。",
                 "market": "美国",
-                "name": "BLS 航空航天工程师职业展望手册",
-                "period": "工资2025年；预测2025–2035；更新2026-08-27",
+                "name": "BLS 职业手册：航空航天工程师",
+                "period": "2025",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "17-2011.00年工资10/25/50/75/90分位为86700/106110/134960/169690/205890美元。"
+                  "美国航空航天工程师 17-2011 在 2025 年 5 月的年薪中位数为 134,960 美元，时薪中位数 64.89 美元。工资分位不是新人报价。"
                 ],
-                "evidence_type": "官方工资表",
+                "evidence_type": "primary_document",
                 "id": "source-onet-aero-wages-2025-revision",
-                "limitation": "全国全体从业者工资分布，不能识别新人或个人晋升阶段；本轮通过官方搜索索引读取完整该行。",
+                "limitation": "美国全国职业数据。",
                 "market": "美国",
-                "name": "O*NET 美国全国职业工资分布（BLS 2025）",
-                "period": "2025年工资；访问2026-10-07",
-                "publisher": "O*NET OnLine / BLS",
+                "name": "O*NET 工资表：航空航天工程师",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/17-2011.00"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "科学研究和技术服务业：非私营182064元/年、私营83560元/年。",
-                  "税前平均工资；调查城镇5人及以上法人单位，排除个体工商户等。"
+                  "两个招聘样本没有可比工资。国家统计局 2025 年城镇科学研究和技术服务业年平均工资为非私营 182,064 元、私营 83,560 元，不能当航空航天工程师的起薪或全国工资分布。",
+                  "行业平均工资，不是岗位工资。"
                 ],
-                "evidence_type": "官方行业工资统计",
+                "evidence_type": "primary_document",
                 "id": "source-nbs-science-2025-revision",
-                "limitation": "行业包含多种职业且不覆盖全部航空航天制造就业；不是单一职业中位数、月薪或个人实发。直连受限，本轮核对官方索引的表2、表5和统计方法。",
+                "limitation": "行业平均工资，不是岗位工资。",
                 "market": "中国大陆",
-                "name": "国家统计局2025年城镇单位就业人员年平均工资",
-                "period": "2025年；发布2026-05-15",
-                "publisher": "国家统计局",
+                "name": "国家统计局：科学研究和技术服务业工资",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-10-07",
                 "details": [
                   "6.2要求管理含双向追溯、变更影响与批准；6.5配置管理控制基线、版本和技术文档一致性。"
                 ],
-                "evidence_type": "官方系统工程手册",
+                "evidence_type": "primary_document",
                 "id": "source-nasa-seh-revision",
                 "limitation": "工程管理参考，不是中国法律、适航批准规则或本职业AI采用率研究。",
                 "market": "美国NASA工程项目",
@@ -32713,7 +32756,7 @@
                 "details": [
                   "官方页面明确标注Proposed Issue 3；用于AI安全与可信性讨论。"
                 ],
-                "evidence_type": "监管机构拟议概念文件",
+                "evidence_type": "primary_document",
                 "id": "source-easa-ai-proposed-3-revision",
                 "limitation": "拟议文件，不声称已生效法规、最终批准版本或中国适用规则；不提供工程师裁员比例。",
                 "market": "欧洲航空安全监管讨论",
@@ -32728,9 +32771,9 @@
                 "details": [
                   "研究任务暴露和可能的工作转变，暴露不等于实际采用、裁员或职业消失。"
                 ],
-                "evidence_type": "国际组织任务暴露研究",
+                "evidence_type": "primary_document",
                 "id": "source-ilo-ai-2025-revision",
-                "limitation": "不是航空航天工程师单一职业的实际采用率或因果就业效应；沿用本批前项已读取的原研究。",
+                "limitation": "跨职业任务暴露，不测本职业的采用率或就业因果。",
                 "market": "全球职业任务研究",
                 "name": "Generative AI and jobs: A refined global index of occupational exposure",
                 "period": "2025",
@@ -32743,7 +32786,7 @@
                 "details": [
                   "54项元分析汇总，尽责性与表现有总体关联。"
                 ],
-                "evidence_type": "学术元分析",
+                "evidence_type": "primary_document",
                 "id": "source-big-five-meta-revision",
                 "limitation": "不是航空航天岗位专属模型或个人录用阈值；不同表现与样本需分开。",
                 "market": "跨职业与学业样本",
@@ -32758,7 +32801,7 @@
                 "details": [
                   "所有类型都可进入所有职业；偏好不等于能力，不应用于人员筛选。"
                 ],
-                "evidence_type": "模型机构使用边界",
+                "evidence_type": "primary_document",
                 "id": "source-mbti-career-revision",
                 "limitation": "不证明某种MBTI更适合航空航天工程师。",
                 "market": "一般职业探索",
@@ -32773,7 +32816,7 @@
                 "details": [
                   "信效度证据混合；九型结构、翼型等不能当作确定职业匹配。"
                 ],
-                "evidence_type": "系统综述",
+                "evidence_type": "primary_document",
                 "id": "source-enneagram-review-revision",
                 "limitation": "不是职业表现或航空航天工程师选拔验证。",
                 "market": "104个独立样本",
@@ -32781,14 +32824,14 @@
                 "period": "2021；本批核对2026-10-07",
                 "publisher": "Journal of Clinical Psychology / Wiley",
                 "scope": "contextual",
-                "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/jclp.23097"
+                "url": "https://pubmed.ncbi.nlm.nih.gov/33332604/"
               },
               {
                 "accessed_at": "2026-10-08",
                 "details": [
                   "试验设备安装、校准、运行和维护，数据采集与记录解释；与工程人员核对程序及结果。"
                 ],
-                "evidence_type": "官方职业定义及任务",
+                "evidence_type": "primary_document",
                 "id": "aerospace-boundary-technicians-2026-10-08",
                 "limitation": "美国邻职任务，不等于航线维修执照、设计批准或中国作业授权。",
                 "market": "美国",
@@ -32803,7 +32846,7 @@
                 "details": [
                   "结合已登记任务、典型教育及要求/配置管理设计具体提问；雇主的实际回答需另核。"
                 ],
-                "evidence_type": "conditional_guidance",
+                "evidence_type": "primary_document",
                 "id": "aerospace-entry-checks-editorial-2026-10-08",
                 "limitation": "非统一准入清单、招聘调查或资格授权；作品使用公开或虚构数据。",
                 "market": "按目标地区、项目与雇主核实",
@@ -32818,7 +32861,7 @@
                 "details": [
                   "支持方向表对应职业任务；选择与补课是编辑比较。"
                 ],
-                "evidence_type": "官方职业定义及任务",
+                "evidence_type": "primary_document",
                 "id": "aerospace-adjacent-49-3011-2026-10-08",
                 "limitation": "不支持中国全国招聘要求、薪资平移或资格互认，实际许可与授权须另核。",
                 "market": "美国",
@@ -32833,7 +32876,7 @@
                 "details": [
                   "支持方向表对应职业任务；选择与补课是编辑比较。"
                 ],
-                "evidence_type": "官方职业定义及任务",
+                "evidence_type": "primary_document",
                 "id": "aerospace-adjacent-17-2141-2026-10-08",
                 "limitation": "不支持中国全国招聘要求、薪资平移或资格互认，实际许可与授权须另核。",
                 "market": "美国",
@@ -32848,7 +32891,7 @@
                 "details": [
                   "支持方向表对应职业任务；选择与补课是编辑比较。"
                 ],
-                "evidence_type": "官方职业定义及任务",
+                "evidence_type": "primary_document",
                 "id": "aerospace-adjacent-17-2072-2026-10-08",
                 "limitation": "不支持中国全国招聘要求、薪资平移或资格互认，实际许可与授权须另核。",
                 "market": "美国",
@@ -32863,7 +32906,7 @@
                 "details": [
                   "支持方向表对应职业任务；选择与补课是编辑比较。"
                 ],
-                "evidence_type": "官方职业定义及任务",
+                "evidence_type": "primary_document",
                 "id": "aerospace-adjacent-15-2051-2026-10-08",
                 "limitation": "不支持中国全国招聘要求、薪资平移或资格互认，实际许可与授权须另核。",
                 "market": "美国",
@@ -32878,7 +32921,7 @@
                 "details": [
                   "支持方向表对应职业任务；选择与补课是编辑比较。"
                 ],
-                "evidence_type": "官方职业定义及任务",
+                "evidence_type": "primary_document",
                 "id": "aerospace-adjacent-15-1211-2026-10-08",
                 "limitation": "不支持中国全国招聘要求、薪资平移或资格互认，实际许可与授权须另核。",
                 "market": "美国",
@@ -32889,21 +32932,98 @@
                 "url": "https://www.onetonline.org/link/summary/15-1211.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "设计分析｜建立和比较模型｜比较气动、结构、推进或控制方案，保留假设、单位和边界条件。 — 75/100; weight=1/3; aerospace-engineers.profile.responsibilities-block.1[1]",
-                  "测试验证｜检查样机与系统｜制定试验方案，核测试条件与分析模型是否对应。 — 25/100; weight=1/3; aerospace-engineers.profile.responsibilities-block.1[2]",
-                  "质量符合性｜评估要求满足情况｜将分析或试验结果连接到要求和适用标准，形成技术报告。 — 50/100; weight=1/3; aerospace-engineers.profile.responsibilities-block.1[4]"
+                  "可以用工具整理虚构要求、生成表格或脚本草稿，再核对输入版本、单位和阈值。保密资料按项目授权处理；工具输出不能替代独立验证、试验许可或适航批准。本页不估计职业替代率。",
+                  "未估计替代率。",
+                  "未估计替代率。",
+                  "未估计替代率。",
+                  "未估计替代率。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "未估计替代率。",
+                "market": "编辑说明",
+                "name": "费马测试编辑部：工具与验证边界",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "上飞院长沙分公司 2026 年 10 月 28 日发布起落架产品设计（流体方向）岗，公告列全职、硕士起、12 人，薪资未设置；要求流体力学背景及制图、仿真等工具能力。页面列有效期至 12 月 30 日，实际招聘状态以雇主为准。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "aero-cs",
+                "limitation": "雇主岗位样本。",
+                "market": "中国大陆",
+                "name": "上飞院长沙：起落架产品设计（流体方向）",
+                "period": "2026-10-28",
+                "publisher": "Sichuan University employer posting",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh5eZmKlLa-ypzddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "杭州酷飞 2026 年 6 月 1 日发布机械结构设计岗，列 3 人、本科及以上、全职或实习、薪资面议；职责含结构方案、分析、符合性验证文件与跨专业协作。是单雇主样本，不等于全国学历或取证要求。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "aero-hz",
+                "limitation": "薪资面议，未给金额。",
+                "market": "中国大陆",
+                "name": "杭州酷飞：机械结构设计",
+                "period": "2026-06-01",
+                "publisher": "Zhejiang University employer posting",
+                "scope": "recruitment_proxy",
+                "url": "https://www.career.zju.edu.cn/jyxt/sczp/zpztgl/ckZpgwXq.zf?zpxxbh=532E323473C599B7E0653A68DD0E9B18"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "大陆民用航空产品适航审定看现行《民用航空法》及适用的 CCAR-21 条款；美国看 FAA 的适用设计批准流程。工程师可以按项目分工准备计算、试验与符合性资料，个人学历、软件证书或内部复核不等于局方批准。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "aero-law",
+                "limitation": "适航权限按实际产品和程序。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国民用航空法》",
+                "period": "effective 2026-07-01",
+                "publisher": "全国人大常委会修订，民航局转载",
+                "scope": "contextual",
+                "url": "https://app.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "规定民用航空产品和零部件的设计、生产及适航审定等程序。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "aero-ccar",
+                "limitation": "征求意见稿不等于现行条款。",
+                "market": "中国大陆",
+                "name": "CCAR-21：民用航空产品和零部件合格审定",
+                "period": "CCAR-21-R4",
+                "publisher": "CAAC",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201707/t20170717_45368.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "申请人按适用要求提交数据；局方依相应程序审核。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "aero-faa",
+                "limitation": "不适用于全部项目和法域。",
+                "market": "美国",
+                "name": "FAA：原始设计批准流程",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/aircraft/air_cert/design_approvals/orig_des_approv_proc"
               }
             ]
           },
@@ -36240,7 +36360,7 @@
       },
       "hero": {
         "h1": "航空航天工程师",
-        "quick_answer": "航空航天工程师把飞行任务与安全约束转成飞机、航天器、卫星或导弹的要求、模型、设计和验证证据，并协调跨分系统接口、试验与异常闭环。",
+        "quick_answer": "航空航天工程师把飞行器或航天器的要求变成可分析、可验证的设计。结构、气动、系统和试验岗位的交付不同；例如分析岗位提交有假设和单位的计算，验证岗位把要求和原始证据连起来。设计、制造、维修及适航批准的职责要分开核。",
         "title": "航空航天工程师"
       },
       "market_signal_card": {
@@ -36323,7 +36443,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "aerospace-engineers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36368,7 +36488,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "aerospace-engineers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36413,7 +36533,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "aerospace-engineers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -37592,7 +37712,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合航空航天工程师",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37669,7 +37789,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI"
           },
           {
             "href": {
@@ -37679,7 +37799,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "Big Five"
           },
           {
             "href": {
@@ -37714,9 +37834,11 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪些工作方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.outlook.evidence_heading": "美国航空航天工程师就业的三个指标",
       "interface.profile.comparison.dimension_header": "比较维度",
       "interface.profile.comparison.primary_header": "航空航天工程师（美国任务）",
       "interface.profile.comparison.secondary_header": "工程与运行技术员（美国任务）",
+      "interface.quick_decision.experiment_heading": "怎样试做一次工程验证？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37809,7 +37931,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与工程验证",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37840,103 +37962,103 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "86,700 美元/年",
         "fact_id": "us-wage-low10-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "工资第 10 分位上界",
         "occupation_scope": "航空航天工程师",
         "period": "资料期以来源为准",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "106,110 美元/年",
         "fact_id": "us-wage-q25-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "工资第 25 分位",
         "occupation_scope": "航空航天工程师",
         "period": "资料期以来源为准",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "134,960 美元/年（64.89 美元/小时）",
+        "display_value": "134,960 美元/年；64.89 美元/小时",
         "fact_id": "us-wage-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "工资中位数",
         "occupation_scope": "航空航天工程师",
         "period": "2025-05",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "169,690 美元/年",
         "fact_id": "us-wage-q75-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "工资第 75 分位",
         "occupation_scope": "航空航天工程师",
         "period": "资料期以来源为准",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "205,890 美元/年",
         "fact_id": "us-wage-high10-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "工资第 90 分位下界",
         "occupation_scope": "航空航天工程师",
         "period": "资料期以来源为准",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "71,600 人",
+        "display_value": "68,700 人",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数",
         "occupation_scope": "航空航天工程师",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "onet-aerospace-trends-2024"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "6%",
+        "display_value": "8.3%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "预测期就业增长率",
         "occupation_scope": "航空航天工程师",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-aerospace-trends-2024"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "4,500 个/年",
+        "display_value": "约 3,800 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "航空航天工程师",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-aerospace-trends-2024"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业内该职业工资中位数",
@@ -37948,7 +38070,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业内该职业工资中位数",
@@ -37960,7 +38082,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业内该职业工资中位数",
@@ -37972,7 +38094,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "us-industry-wage-education-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业内该职业工资中位数",
@@ -37984,7 +38106,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "全国城镇非私营单位就业人员年平均工资",
@@ -37996,7 +38118,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-private-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "全国城镇私营单位就业人员年平均工资",
@@ -38008,7 +38130,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-mid-managers-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "规模以上企业中层及以上管理人员年平均工资",
@@ -38020,7 +38142,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-clerical-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "规模以上企业办事人员和有关人员年平均工资",
@@ -38032,7 +38154,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业门类年平均工资（城镇非私营单位）",
@@ -38044,7 +38166,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-industry-science-tech-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业门类年平均工资（城镇非私营单位）",
@@ -38056,7 +38178,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业门类年平均工资（城镇非私营单位）",
@@ -38068,7 +38190,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（航空航天工程师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-industry-public-admin-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业门类年平均工资（城镇非私营单位）",
@@ -38084,10 +38206,10 @@
         "fact_id": "cn-rd-nonprivate-2025",
         "market": "资料市场",
         "measure": "科学研究和技术服务业就业人员年平均工资",
-        "occupation_scope": "航空航天工程师",
+        "occupation_scope": "industry_proxy",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
@@ -38096,10 +38218,10 @@
         "fact_id": "cn-rd-private-2025",
         "market": "资料市场",
         "measure": "科学研究和技术服务业就业人员年平均工资",
-        "occupation_scope": "航空航天工程师",
+        "occupation_scope": "industry_proxy",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
@@ -38116,14 +38238,14 @@
       },
       {
         "derivation": "O*NET 展示 BLS 2025 工资原值。",
-        "display_value": "134,960 美元/年（64.89 美元/小时）",
+        "display_value": "134,960 美元/年；64.89 美元/小时",
         "fact_id": "us-wage-median-2025",
         "market": "资料市场",
         "measure": "工资中位数",
         "occupation_scope": "航空航天工程师",
         "period": "2025-05",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
@@ -38140,14 +38262,14 @@
       },
       {
         "derivation": "O*NET 展示 BLS 就业与预测；空缺不作净新增。",
-        "display_value": "2024 年就业 71,600；预计增长 6%；预测期内平均每年约 4,500 个职位空缺",
+        "display_value": "BLS 17-2011：2025 年就业 68,700 人，2035 年预计 74,400 人，净增约 5,700（8.3%）；年均空缺约 3,800，含替代需求。",
         "fact_id": "us-outlook-2024-2034",
         "market": "美国",
-        "measure": "就业人数、就业增长与年均职位空缺（2024—2034）",
+        "measure": "BLS 17-2011：2025 年就业 68,700 人，2035 年预计 74,400 人，净增约 5,700（8.3%）；年均空缺约 3,800，含替代需求。",
         "occupation_scope": "航空航天工程师",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
@@ -38164,14 +38286,14 @@
       },
       {
         "derivation": null,
-        "display_value": "暂无可安全使用的数据",
+        "display_value": "134,960 美元/年；64.89 美元/小时",
         "fact_id": "us-wage",
         "market": "美国",
         "measure": "职业页工资或可用性边界",
         "occupation_scope": "航空航天工程师",
         "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
@@ -38200,14 +38322,14 @@
       },
       {
         "derivation": null,
-        "display_value": "6%",
+        "display_value": "8.3%",
         "fact_id": "employment-projection",
         "market": "美国",
         "measure": "就业趋势或可用性边界",
         "occupation_scope": "航空航天工程师",
-        "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
@@ -38219,7 +38341,7 @@
         "occupation_scope": "航空航天工程师（SOC 17-2011）",
         "period": "2025年",
         "source_refs": [
-          "source-onet-aero-wages-2025-revision"
+          "oews"
         ]
       },
       {
@@ -38231,7 +38353,7 @@
         "occupation_scope": "航空航天工程师（SOC 17-2011）",
         "period": "2025年",
         "source_refs": [
-          "source-onet-aero-wages-2025-revision"
+          "oews"
         ]
       },
       {
@@ -38255,7 +38377,7 @@
         "occupation_scope": "航空航天工程师（SOC 17-2011）",
         "period": "2025年",
         "source_refs": [
-          "source-onet-aero-wages-2025-revision"
+          "oews"
         ]
       },
       {
@@ -38267,7 +38389,7 @@
         "occupation_scope": "航空航天工程师（SOC 17-2011）",
         "period": "2025年",
         "source_refs": [
-          "source-onet-aero-wages-2025-revision"
+          "oews"
         ]
       },
       {
@@ -38277,33 +38399,33 @@
         "market": "美国",
         "measure": "职业就业人数",
         "occupation_scope": "航空航天工程师（SOC 17-2011）",
-        "period": "2025年",
+        "period": "2025",
         "source_refs": [
-          "source-bls-aero-2026-revision"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "8%",
+        "display_value": "8.3%",
         "fact_id": "us-growth-2025-2035-revision",
         "market": "美国",
         "measure": "预测期净就业增长率",
         "occupation_scope": "航空航天工程师（SOC 17-2011）",
-        "period": "2025–2035年",
+        "period": "2025–2035",
         "source_refs": [
-          "source-bls-aero-2026-revision"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "3,800 个/年",
+        "display_value": "约 3,800 个/年",
         "fact_id": "us-openings-2025-2035-revision",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "航空航天工程师（SOC 17-2011）",
-        "period": "2025–2035年",
+        "period": "2025–2035",
         "source_refs": [
-          "source-bls-aero-2026-revision"
+          "ep"
         ]
       },
       {
@@ -38336,7 +38458,7 @@
         "fact_id": "us-industry-wage-federal-2025-revision",
         "market": "美国",
         "measure": "行业内本职业年工资中位数",
-        "occupation_scope": "联邦政府内航空航天工程师",
+        "occupation_scope": "美国联邦政府（不含邮政服务）中的航空航天工程师",
         "period": "2025年",
         "source_refs": [
           "source-bls-aero-2026-revision"
@@ -38360,10 +38482,10 @@
         "fact_id": "cn-rd-nonprivate-2025-revision",
         "market": "中国大陆",
         "measure": "行业就业人员年平均工资",
-        "occupation_scope": "科学研究和技术服务业城镇非私营单位就业人员",
+        "occupation_scope": "industry_proxy",
         "period": "2025年",
         "source_refs": [
-          "source-nbs-science-2025-revision"
+          "nbs"
         ]
       },
       {
@@ -38372,37 +38494,25 @@
         "fact_id": "cn-rd-private-2025-revision",
         "market": "中国大陆",
         "measure": "行业就业人员年平均工资",
-        "occupation_scope": "科学研究和技术服务业城镇私营单位就业人员",
+        "occupation_scope": "industry_proxy",
         "period": "2025年",
         "source_refs": [
-          "source-nbs-science-2025-revision"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "航空航天工程师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "nbs"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与工程验证"
     },
     "badges": [
-      "航空航天工程师任务 · 航空航天工程师的模型与结果复核 · 航空航天工程师的假设与版本记录",
-      "航空航天工程师的跨团队协作 / 航空航天工程师的异常升级 / 航空航天工程师的流程改善",
-      "数据缺口保留 · 权限边界标注"
+      "结构、系统与试验",
+      "要求、数据与复核",
+      "适航批准另核"
     ],
     "metrics": [
       {
@@ -38441,17 +38551,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "航空航天工程师做什么、需要哪些能力与资格、薪资和前景如何，以及 AI 会改变哪些任务；保留来源范围与数据缺口。"
+      "text": "比较航空航天工程师的结构、系统和试验任务，读大陆招聘和美国薪资口径，用虚构数据试做一次要求验证。"
     },
     "title": {
       "availability": "available",
-      "text": "航空航天工程师"
+      "text": "航空航天工程师做什么？岗位、薪资与验证试做"
     }
   },
-  "source_content_sha256": "a9eb7513c56203f8ca7bede0997d330290fdb32e8313006405668c5d0044e2d3",
+  "source_content_sha256": "f50370109af7bda8ae8e51c224722c193ae58b2adef66ffdf9c4710a9e253929",
   "subject": {
     "canonical_slug": "aerospace-engineers",
     "name": "航空航天工程师",
-    "summary": "航空航天工程师把飞行任务与安全约束转成飞机、航天器、卫星或导弹的要求、模型、设计和验证证据，并协调跨分系统接口、试验与异常闭环。"
+    "summary": "航空航天工程师把飞行器或航天器的要求变成可分析、可验证的设计。结构、气动、系统和试验岗位的交付不同；例如分析岗位提交有假设和单位的计算，验证岗位把要求和原始证据连起来。设计、制造、维修及适航批准的职责要分开核。"
   }
 }

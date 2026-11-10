@@ -23011,13 +23011,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe the tasks first, then decide how much to invest. If you enjoy verifying numbers, explaining evidence limitations, and tracing handovers, keep checking positions; if you only want to reach “who did it” quickly and are unwilling to record uncertainty, first compare investigation or other directions. Exercise performance cannot prove identification qualifications."
+              "Paper check | Compare two fictional transfer receipts. Flag an item number that is one digit short and retain both original references for the records officer. "
             ]
           },
           "id": "police-identification-and-records-officers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23308,13 +23307,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Police Identification and Records Officers (O*NET 33-3021.02) are responsible for scene evidence collection and records, fingerprint classification and identification, and evidence photographs supporting criminal and civil cases. The core is verifiable original material and records, and technical comparison, custody transfer, and reporting each have their own responsibility boundaries. The corresponding Chinese positions must be checked in their own announcements, and the US occupational code must not be treated as a Chinese appointment qualification."
+              "Police identification and records officers work with evidence identifiers, examination records and transfer information. Records let later staff trace the item ID and time of receipt. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "police-identification-and-records-officers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-onet-33-3021.02"
           ],
           "type": "prose"
         },
@@ -24402,16 +24400,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with record organization and source retrieval; automated fingerprint systems can also offer candidate matches, but the two technologies are not the same kind of tool. NIST states that candidate results are still evaluated by identification personnel. The existing exposure research does not provide an overall displacement rate for this occupation and cannot prove that an agency has adopted it or that the position will disappear. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare two fictional transfer receipts. Flag an item number that is one digit short and retain both original references for the records officer."
             ]
           },
           "id": "police-identification-and-records-officers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls",
-            "r2-pay-3"
+            "transfer-onet-33-3021.02",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32213,6 +32208,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-33-3021.02",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 33-3021.02 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/33-3021.02"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37461,10 +37483,10 @@
       "text": "Police identification and records officers: work tasks, evidence boundaries, and the entry path"
     }
   },
-  "source_content_sha256": "a91c96ae8555308e63169039f7775ccc24afbd16c844dd180ab566ed2a3a4218",
+  "source_content_sha256": "5703ba752a00e54c50b79574887702d6e833af9dccf0807a173bc2826a44b78f",
   "subject": {
     "canonical_slug": "police-identification-and-records-officers",
     "name": "Police Identification and Records Officers",
-    "summary": "Record, preserve, and identify evidence within the authorized scope and produce photographs, reports, and transfer records. This occupation requires continuously checking details, clearly writing out uncertainty, and accepting review; the actual appointment conditions, personnel status, and signing authority follow the specific agency and jurisdiction requirements."
+    "summary": "Police identification and records officers work with evidence identifiers, examination records and transfer information. Records let later staff trace the item ID and time of receipt."
   }
 }

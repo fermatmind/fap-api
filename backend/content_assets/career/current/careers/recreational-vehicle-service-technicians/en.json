@@ -1530,7 +1530,7 @@
         "status": "pending_mapping"
       },
       "item:recreational-vehicle-service-technicians.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:recreational-vehicle-service-technicians.sources.source-card.1": {
         "status": "mapped"
@@ -15972,8 +15972,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -23314,7 +23320,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "It suits people who are willing to read work orders and manufacturer materials repeatedly, measure faults, repair, and retest. Start by completing a diagnosis and handover record on a fictional RV case."
+              "Think twice if you prefer working on a single component or dislike switching systems, documenting work, and explaining scope to customers."
             ]
           },
           "id": "recreational-vehicle-service-technicians.quick-decision.fit-decision-checklist.1",
@@ -23329,7 +23335,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Repairs to gas, electrical, brake, and load-bearing systems require isolating hazards first and verifying training, manufacturer procedures, and employer authorization; stop and escalate when something is abnormal."
+              "In section 09, “Entry, qualifications, and career development,” try RV-01: Review a multi-system RV service handoff. Save a first draft before checking the key."
             ]
           },
           "id": "recreational-vehicle-service-technicians.quick-decision.fit-decision-checklist.2",
@@ -23343,7 +23349,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "If you only like driving or selling RVs and are unwilling to do on-site testing, disassembly and assembly, record-keeping, and explaining to customers, compare adjacent positions instead."
+              "Consider this work if you like tracking work across onboard systems, checking retests, and explaining what was completed."
             ]
           },
           "id": "recreational-vehicle-service-technicians.quick-decision.fit-decision-checklist.3",
@@ -23359,7 +23365,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The typical entry-level education for US 49-3092 is a high school diploma or equivalent, with long-term on-the-job training; Chinese position requirements and specialized work qualifications are verified by location."
+              "Keep authorization, system retests, and vehicle handover separate."
             ]
           },
           "id": "recreational-vehicle-service-technicians.quick-decision.fermat-decision-card.6",
@@ -23374,7 +23380,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "US wages are precise occupational statistics, while Chinese repair industry wages are only broad industry context and provide no guarantee of individual income."
+              "Consider this work if you like tracking work across onboard systems, checking retests, and explaining what was completed."
             ]
           },
           "id": "recreational-vehicle-service-technicians.quick-decision.fermat-decision-card.7",
@@ -25776,7 +25782,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Check the original manual measurement record and list facts, assumptions, and items to verify; the 10:12 stop-work record must not be omitted by a summary."
+              "Keep original work orders, observations, and open items. Check that a summary retains any hold or authorization status."
             ]
           },
           "id": "recreational-vehicle-service-technicians.ai-impact.ai-impact-table.85",
@@ -25851,7 +25857,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "A 12.6V battery, 12.5V at both ends of F7, and 0V at the lamp are different measurement points; confusing them as the same reading mislocates the fault, and amounts and quantities must also be checked."
+              "One system’s retest does not verify another. Read each record by work order, system, and test conditions."
             ]
           },
           "id": "recreational-vehicle-service-technicians.ai-impact.ai-impact-table.90",
@@ -25866,7 +25872,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Label each measurement point, unit, and condition, and recalculate 5+20+5=30 minutes; unknown error and switch states are clearly marked as to be verified."
+              "Record the evidence location, conditions, and systems outside the scope for each check."
             ]
           },
           "id": "recreational-vehicle-service-technicians.ai-impact.ai-impact-table.91",
@@ -26196,7 +26202,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Can organize given measurement points and assumptions but does not produce new readings; the 10:12 stop-work point in the fictional work order must be retained."
+              "A tool can organize technician observations without adding readings. The technician records the actual retest."
             ]
           },
           "id": "recreational-vehicle-service-technicians.ai-impact.ai-impact-table.113",
@@ -27790,31 +27796,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Plumbers",
@@ -27949,7 +27955,7 @@
           "data": {
             "entries": [
               "Willing to read vehicle manuals and retest repeatedly, and to admit when the fault cannot yet be located.",
-              "Willing to follow work order procedures and mark measurement points, conditions, and the 10:12 stop-work."
+              "Use the paper exercise to see how you handle work orders and retesting."
             ]
           },
           "id": "recreational-vehicle-service-technicians.fit.personality-fit-block.4",
@@ -28246,7 +28252,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Can distinguish the 12.6V battery from the different measurement point of 12.5V at both ends of F7.",
+              "Use the paper exercise to see how you handle work orders and retesting.",
               "Can explain that 0V at the lamp still cannot locate the specific connector."
             ]
           },
@@ -28769,7 +28775,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Submit a A1 through A5 fictional fault tree, a list of measurement point conditions, the 10:12 stop-work, and an unrepaired handover sheet; have others check the 30 minutes and the attribution of 12.6/12.5/0V, and do not perform real operations."
+              "Use the paper exercise to see how you handle work orders and retesting."
             ]
           },
           "id": "recreational-vehicle-service-technicians.fit.personality-fit-block.55",
@@ -28814,7 +28820,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Do only a paper analysis of the fictional 12V work order, practicing the 30-minute arrangement, the 10:12 stop, and the unrepaired explanation, without touching a real vehicle."
+              "Use the paper exercise to see how you handle work orders and retesting."
             ]
           },
           "id": "recreational-vehicle-service-technicians.fit.personality-fit-block.58",
@@ -29164,7 +29170,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The work order only says the light does not work or has been fixed, omitting the 0V reading and the 10:12 wear pause."
+              "Keep the discrepancy record. Actual checks and return to service follow shop authorization."
             ]
           },
           "id": "recreational-vehicle-service-technicians.risk.career-risk-cards.18",
@@ -29574,9 +29580,9 @@
               {
                 "id": "clearance",
                 "values": [
-                  "Fictional repair portfolio",
-                  "Write symptoms, measurements, inferences, stop-work, and review using a fully fictional vehicle condition, without touching a real vehicle.",
-                  "Mark which judgments require an authorized technician to retest on site."
+                  "SAIC MAXUS RV after-sales support",
+                  "The manufacturer distinguishes chassis and coach service. Check terms for the specific model.",
+                  "Ask whether the role covers chassis or coach systems, what training it provides, and who handles vehicle handover."
                 ]
               },
               {
@@ -29590,9 +29596,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "Records and customer data",
-                  "The work order retains symptoms, test values, parts, and the responsible person.",
-                  "A public portfolio contains no real license plate, VIN, or customer contact details."
+                  "SAIC MAXUS RV owner manual",
+                  "The manual treats electrical, HVAC, water, and gas systems separately.",
+                  "Ask whether the role covers chassis or coach systems, what training it provides, and who handles vehicle handover."
                 ]
               }
             ]
@@ -29600,7 +29606,10 @@
           "id": "recreational-vehicle-service-technicians.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d018-cn-main",
+            "d018-cn-context",
+            "d018-us-example"
           ],
           "title": "What do employers usually look for in hiring?",
           "type": "cards"
@@ -29613,37 +29622,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and setup｜A1—A5 are all editor-designed fictional work orders",
-                  "The front 12V ceiling light of a fictional travel trailer does not work, while the kitchen light is normal. The exercise analyzes only the given record and does not disconnect or connect wiring or power-test on a real vehicle; on-site procedures and supervision are set by the actual employer.",
-                  "A1｜2026-10-06 10:00—10:30 planned work order check: 5 minutes to confirm symptoms, 20 minutes to check diagrams and verify the supplied test records, 5 minutes to organize the handoff. The vehicle is parked stably, shore power disconnected, generator stopped, and the main gas valve closed.",
-                  "A2｜The fictional authorized technician has recorded: battery at rest 12.6V; the 15A fuse labeled F7 looks intact; the F7 input and output are both 12.5V; the measured input at the front ceiling light is 0V, and the kitchen light is normal. Measurement conditions, instruments, and error are not provided, and the conclusion must be retested.",
-                  "A3｜The work order records only that “the front ceiling light does not work” and does not verify the bulb, the switch, or the specific wiring diagram. An open circuit cannot be asserted at a particular connector directly from A2, nor can the whole circuit be judged sound from the fuse's appearance alone.",
-                  "A4｜At 10:12, insulation wear was found at a visible location near the edge of the cabinet. Stop this inspection immediately, mark the anomaly, and notify the supervisor; do not continue live measurement and do not wire or replace parts on your own.",
-                  "A5｜The supervisor decides that a technician with the corresponding training and authorization will first review the isolation, wiring diagram, and wear location before a repair plan is set. Before handover, write down the on-site decision that the ceiling light is unrepaired and the affected circuit must not be used; do not call it “fixed”."
+                  "Fictional inputs",
+                  "Fictional RV R20 work order W9 authorizes two tasks: investigating inconsistent water flow and repairing a cabin cabinet latch. No other systems are authorized.",
+                  "Record K3 says the latch was repaired and passed a signed function check. P7 says the pump check is still in progress and has no retest entry. Attachment K2 is an old check for R02. A service draft says the vehicle is repaired and ready for collection.",
+                  "The technician signs each retest, the service lead confirms handover, and the owner approves scope changes. Review the paperwork only."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Tasks and deliverables",
-                  "Recalculate the 5+20+5=30 minutes of A1; use A2 to list “known measurements” and “conditions to retest”, and explain that 12.5V at both ends of F7 and 0V at the lamp can only suggest a downstream supply problem and cannot locate the specific fault.",
-                  "Following A4—A5, write the 10:12 stop-work, the supervisor handoff, and the unrepaired handover note; submit the fault tree, the factual record, and the authorization review checklist."
+                  "Task and deliverable",
+                  "Write two system statuses, explain how you handle the other attachment, and draft a handoff status for the service desk.",
+                  "Check customer authorization, recorded outcomes, and final handover separately.",
+                  "Use paper or a local spreadsheet and identify the evidence."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answer (complete it independently first)",
-                  "5+20+5=30 minutes. A normal kitchen light does not prove that the front ceiling light circuit is safe; 12.5V at both ends of F7 with 0V at the lamp suggests a problem between the two measurement points or in the measurement conditions, requiring on-site retesting, the wiring diagram, and switch states.",
-                  "When insulation wear is found at 10:12, stop work, record its location and the facts, and notify the supervisor; A5 states that work will not continue this time and an authorized technician will review and decide the plan later.",
-                  "The handover sheet cites A1—A5 and states that the ceiling light is unrepaired, the measurement conditions are missing, the wear has been marked, the supervisor's decision, and the customer's usage restriction; do not write “fault ruled out”."
+                  "Before checking your work",
+                  "Save your own first draft on day 6. Follow the day 7 instructions to open the key.",
+                  "Work independently.",
+                  "Keep the versions.",
+                  "Leave missing evidence open."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries and review",
-                  "All work orders are fictional and do not instruct real live or gas repair and do not prove qualification. Check the 30 minutes, 12.6V/12.5V/0V, the 10:12 stop-work, and that the unrepaired status in A5 matches the handover note."
+                  "Authority boundaries",
+                  "Use the fictional records only.",
+                  "Do not approve or release real work."
                 ]
               }
             ]
@@ -29652,7 +29661,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: stop-work record for a fictional RV 12V lighting fault",
+          "title": "RV-01 | Review a multi-system RV service handoff",
           "type": "cards"
         },
         {
@@ -29663,33 +29672,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Symptom—measurement—inference matrix",
-                  "Following A1—A3, list the front ceiling light and kitchen light, 12.5V at both ends of F7, 0V at the lamp, and the unknown switch and wiring diagram.",
-                  "Review: make bounded inferences only and do not locate a connector that was not measured."
+                  "Version and material record",
+                  "Identify the original record and current version.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "10:12 stop-work and supervisor handoff sheet",
-                  "Following A4/A5, record the insulation wear, the stop-work, the supervisor's decision, and the subsequent authorized review.",
-                  "Review: do not write it as repaired or as approved for live work."
+                  "Inputs and status",
+                  "Compare source records, targets, and discrepancies.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Complete fictional repair diagnosis portfolio",
-                  "Bring together the work order, fault tree, test record gaps, stop-work decision, and unrepaired handover note.",
-                  "Review: a successor can distinguish facts, inferences, and items to test."
+                  "Open checks and handoff",
+                  "Separate open checks, verified findings, and owners.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Source and safety boundary statement card",
-                  "Note the occupational tasks supported by O*NET, the A1—A5 fictional setup, and the real manufacturer procedures that must be verified separately.",
-                  "Review: contains no real VIN or customer information."
+                  "Delivery boundaries",
+                  "Record physical checks and approval status.",
+                  "Use the supplied records."
                 ]
               }
             ]
@@ -29720,27 +29729,27 @@
             "rows": [
               [
                 "Work order diagnosis",
-                "Whether symptoms, measurements, and inferences can be distinguished",
-                "A2 only suggests that the power supply path needs review",
-                "Do not assess damage from a single reading"
+                "Identify the original record and current version.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Safety isolation",
-                "How to act when insulation wear appears",
-                "Stop work at 10:12 and notify the supervisor",
-                "Do not continue live testing"
+                "Compare source records, targets, and discrepancies.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Technical record",
-                "Whether unknown conditions can be listed",
-                "Wiring diagram, switch state, and measurement error to be verified",
-                "Do not falsify a retest"
+                "Separate open checks, verified findings, and owners.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Customer delivery",
-                "Whether the unrepaired status can be explained",
-                "State that the ceiling light is unrepaired and the supervisor's follow-up arrangements",
-                "Real usage restrictions follow the on-site decision"
+                "Record physical checks and approval status.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ]
             ]
           },
@@ -29760,50 +29769,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day one",
-                  "Read A1—A5 and draw the responsibilities of the customer, the apprentice, the authorized technician, and the supervisor."
+                  "Day 1",
+                  "Record the subject and versions."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day two",
-                  "Write the symptom—measurement—inference matrix and recalculate 5+20+5=30 minutes."
+                  "Day 2",
+                  "Identify the original record and current version."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day three",
-                  "On a paper wiring diagram, mark 12.5V at the F7 input and output and 0V at the lamp, and list the unknown switch and measurement conditions."
+                  "Day 3",
+                  "Compare source records, targets, and discrepancies."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day four",
-                  "Read A4 and write the 10:12 stop-work and insulation wear handoff sheet without performing real work."
+                  "Day 4",
+                  "Separate open checks, verified findings, and owners."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day five",
-                  "Following A5, write the unrepaired handover note and the questions awaiting authorized review."
+                  "Day 5",
+                  "Record physical checks and approval status."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day six",
-                  "Check against the answer whether possibilities were written as confirmed faults, and revise the draft."
+                  "Day 6",
+                  "Finish and save your own first handoff draft with the original records and the reasons for your decisions. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day seven",
-                  "Use public job postings to verify training, gas and electrical scope, warranty sign-off, and hours requirements."
+                  "Day 7",
+                  "After saving your day 6 draft, open “RV-01 answer key and rubric (open on day 7)” in the FAQ. Use the rubric and record one revision with its reason."
                 ]
               }
             ]
@@ -29820,20 +29829,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep the first and revised drafts of the fault tree and write out the conditions missed from A1—A5.",
-              "Review the 30 minutes and the different measurement points corresponding to 12.6V, 12.5V, and 0V.",
-              "Record the time needed to check manuals, organize evidence, and write the handoff, without converting it into a personal fit score.",
-              "Do the fault inference once more and list at least two explanations that need on-site confirmation.",
-              "If still unsure, list specific interview questions for specialist technicians, training, and safety isolation.",
-              "Compare the fictional portfolio with the target employer's published duties and mark the systems not covered.",
-              "Record honestly what was not finished within the week, and do not substitute a conclusion for the process."
+              "Match each item to the work order, vehicle ID, and system in scope.",
+              "Record repair work, retest evidence, and pending items separately.",
+              "Explain which records apply to this vehicle.",
+              "Identify open items and the person who can approve handover.",
+              "Use the fictional records and keep the first draft for review.",
+              "Use the named answer key on day 7.",
+              "Record one revision and the evidence behind it."
             ]
           },
           "id": "recreational-vehicle-service-technicians.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide at the end of seven days whether to continue",
+          "title": "Submission and review checklist",
           "type": "list"
         },
         {
@@ -29934,7 +29943,7 @@
               "The entry exercise uses only a fictional RV work order to practice symptoms and measurement, fault inference, stop-work, retesting, and handover explanation; it does not prove real work qualification.",
               "Chinese job titles and specific electrical, gas, refrigerant, and vehicle work requirements must be verified by location, equipment, and employer, with no automatic reciprocal recognition of US training.",
               "Real vehicle identification, customer data, and repair records are handled per organizational policy; public portfolios use fictional vehicles only.",
-              "RV repair emphasizes onboard living systems, while automotive repair, HVAC, piping, and vehicle electronics have different responsibilities and qualifications."
+              "Ask whether the role covers chassis or coach systems, what training it provides, and who handles vehicle handover."
             ]
           },
           "id": "recreational-vehicle-service-technicians.path.credential-boundary.1",
@@ -29951,16 +29960,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "The National Bureau of Statistics 2025 resident services, repair, and other services industry wage is not the wage of Chinese RV service technicians precisely corresponding to US 49-3092.",
-              "Insufficient evidence: a 2026 recruitment offer in mainland China for the same occupation with verifiable RV systems, repair duties, qualifications, region, posting date, hours, and pay method. Fictional work orders do not support a starting salary or hiring threshold."
+              "SAIC MAXUS RV owner manual. The manual treats electrical, HVAC, water, and gas systems separately.",
+              "Blue Compass RV service technician. The posting covers onboard system service and work-order records for causes, parts, and repairs."
             ]
           },
           "id": "recreational-vehicle-service-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "d018-cn-main",
+            "d018-us-example"
           ],
           "title": "Recruitment sample note",
           "type": "notice"
@@ -30291,7 +30298,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Can recalculate the 30 minutes and distinguish the battery 12.6V, 12.5V at both ends of F7, and 0V at the lamp."
+              "Keep authorization, system retests, and vehicle handover separate."
             ]
           },
           "id": "recreational-vehicle-service-technicians.path.career-path-block.30",
@@ -30883,7 +30890,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The A1 through A5 original records, fault trees, and revisions are traceable, and the 10:12 stop-work is not omitted."
+              "Keep authorization, system retests, and vehicle handover separate."
             ]
           },
           "id": "recreational-vehicle-service-technicians.path.career-path-block.70",
@@ -32121,7 +32128,7 @@
                 ]
               },
               {
-                "answer": "Use only the A1—A5 fictional work order to analyze the 12V lighting readings and unknown conditions and write the 10:12 stop-work and unrepaired handover note; do not touch a real vehicle.",
+                "answer": "In section 09, “Entry, qualifications, and career development,” try RV-01: Review a multi-system RV service handoff. Save a first draft before checking the key.",
                 "id": "recreational-vehicle-service-technicians.faq.9",
                 "question": "How can this occupation be tried safely?",
                 "question_key": "career.faq.recreational-vehicle-service-technicians.risk-boundary",
@@ -32134,6 +32141,15 @@
                 "id": "recreational-vehicle-service-technicians.faq.10",
                 "question": "What should be verified before applying for a position?",
                 "question_key": "career.faq.recreational-vehicle-service-technicians.outlook-transition",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "The latch has a repair record and signed function check, so record its retest as complete under W9.\n\nThe pump check is unfinished and has no retest. Keep the water-system item pending.\n\nK2 is for R02 and cannot establish completion of either item on R20.\n\nAsk the technician for the water-system results and update the draft to show the latch retest complete and the water issue pending.\n\nThe service lead confirms handover. Leave other systems blank or mark them outside scope.\n\nScore each item 0–2: version and evidence, item-by-item decisions, unknown scope, and approval and handoff.\n\nAward 2 for complete and traceable work, 1 for partial work, and 0 for missing evidence or exceeding authority.",
+                "id": "recreational-vehicle-service-technicians.faq.11",
+                "question": "RV-01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.recreational-vehicle-service-technicians.exercise-answer-key",
                 "source_refs": [
                   "editor"
                 ]
@@ -32157,7 +32173,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The occupational explanation, task directions, and fictional work orders are produced by the FermatMind editorial team; official statistics are cited independently. Real manufacturer procedures, qualifications, and authorization are verified against the target system and region."
+              "RV-01 is a fictional exercise for this page."
             ]
           },
           "id": "recreational-vehicle-service-technicians.sources.source-card.1",
@@ -32171,14 +32187,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational identity and tasks come from O*NET 49-3092; wage percentiles come from the BLS 2025 data shown by O*NET, employment from the BLS 2025—2035 standalone line, and China uses only National Bureau of Statistics broad industry context."
+              "The manufacturer distinguishes chassis and coach service. Check terms for the specific model."
             ]
           },
           "id": "recreational-vehicle-service-technicians.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "bls",
-            "nbs"
+            "d018-cn-context"
           ],
           "type": "prose"
         },
@@ -32187,12 +32201,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The verification date for this round is 2026-10-12; the original 2026-10-03 was the historical verification date. US 2025 national wages, 2025—2035 projections, and 2023 historical industry annual averages are kept separate, and Chinese 2025 pre-tax broad industry wages cannot be mapped to this occupation's wages. The fictional work orders do not authorize real work."
+              "The manual treats electrical, HVAC, water, and gas systems separately."
             ]
           },
           "id": "recreational-vehicle-service-technicians.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "d018-cn-main"
           ],
           "type": "prose"
         },
@@ -32201,13 +32215,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This page explains the US occupational scope in Chinese and does not establish mutual recognition of qualifications between China and the United States; the fictional work orders do not represent manufacturer repair procedures or real safety guidance, and customer and vehicle identification data do not enter public portfolios."
+              "Read U.S. wages and employment for the occupation shown. Chinese service documents describe scope and provide no wage estimate."
             ]
           },
           "id": "recreational-vehicle-service-technicians.sources.source-card.4",
           "source_refs": [
             "editor",
-            "privacy"
+            "privacy",
+            "d018-cn-main",
+            "d018-us-example"
           ],
           "type": "prose"
         }
@@ -32246,13 +32262,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the recreational vehicle service technician occupation page",
@@ -32473,8 +32489,8 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "The RV task directions, capability path, and risk examples are editorial suggestions, not manufacturer procedures.",
-                  "A1 through A5 are a fictional 12V lighting work order, a 30-minute paper analysis, and the 10:12 stop-work; real operations are prohibited."
+                  "RV-01 is a fictional paper exercise.",
+                  "Keep authorization, system retests, and vehicle handover separate."
                 ],
                 "evidence_type": "Editorial advice and fictional work orders",
                 "id": "editor",
@@ -32838,6 +32854,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The manual treats electrical, HVAC, water, and gas systems separately."
+                ],
+                "evidence_type": "primary_document",
+                "id": "d018-cn-main",
+                "limitation": "A manufacturer’s model-specific manual identifying electrical, water, HVAC, and gas systems.",
+                "market": "Mainland China",
+                "name": "SAIC MAXUS RV owner manual",
+                "period": "Date shown where available",
+                "publisher": "SAIC MAXUS",
+                "scope": "contextual",
+                "url": "https://www.saicmaxus.com/uploads/month_202406/files/ab57b156e360cf0972caba6ed5ce190c.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The manufacturer distinguishes chassis and coach service. Check terms for the specific model."
+                ],
+                "evidence_type": "primary_document",
+                "id": "d018-cn-context",
+                "limitation": "Manufacturer service information on the division between chassis and coach support.",
+                "market": "Mainland China",
+                "name": "SAIC MAXUS RV after-sales support",
+                "period": "Date shown where available",
+                "publisher": "SAIC MAXUS",
+                "scope": "contextual",
+                "url": "https://wwwcdn.saicmaxus.com/p/maintain.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The posting covers onboard system service and work-order records for causes, parts, and repairs."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d018-us-example",
+                "limitation": "One employer posting in Silsbee, United States, used to compare work orders and coach-system repairs.",
+                "market": "United States",
+                "name": "Blue Compass RV service technician",
+                "period": "Date shown where available",
+                "publisher": "Blue Compass RV",
+                "scope": "recruitment_proxy",
+                "url": "https://careers.hireology.com/exploreusabeaumontnorth/2905842/description"
               }
             ]
           },
@@ -36147,7 +36208,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person suits being a recreational vehicle service technician?"
+        "title": "Would RV service work suit me?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -37529,7 +37590,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit RV service technician",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37651,6 +37712,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which kind of vehicle systems would you rather repair?",
       "interface.fit.interest_code_heading": "How to understand interest codes",
+      "interface.quick_decision.suit_heading": "Who tends to enjoy RV service work?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "US salary reference",
@@ -38087,14 +38149,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What recreational vehicle service technicians do, how to enter, work risks, and development directions. Based on this occupation's local evidence package and official sources, preserving statistical definitions and data gaps."
+      "text": "Explore RV service, onboard systems, and vehicle handover. Compare service roles and U.S. wages, then try a sample work order."
     },
     "title": {
       "availability": "available",
       "text": "Recreational vehicle service technicians"
     }
   },
-  "source_content_sha256": "254a23d1e32f4e1194a7af19376b397c7f391ff82b2d4a75a1b1489fe08b9820",
+  "source_content_sha256": "30c4157c650ffde50de82d084c87c73497f347c0b928e1739ca35f912e92fa4b",
   "subject": {
     "canonical_slug": "recreational-vehicle-service-technicians",
     "name": "Recreational vehicle service technicians",

@@ -1250,6 +1250,9 @@
       "item:patternmakers-wood.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:patternmakers-wood.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:patternmakers-wood.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30479,6 +30482,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The molding team expects the two sections of pattern P8. The checklist names the upper and lower sections, but the record identifies only the upper section and an unversioned spare. Note what is confirmed, what is missing and which original record the pattern lead should check."
+            ]
+          },
+          "id": "patternmakers-wood.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-517032"
+          ],
+          "title": "Check a wood pattern handover",
+          "type": "notice"
         }
       ]
     },
@@ -36993,6 +37011,13 @@
         "id": "patternmakers-wood.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "patternmakers-wood.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37210,7 +37235,7 @@
       "text": "Wood Patternmakers"
     }
   },
-  "source_content_sha256": "adf60f62aa653416a9257c3573aff59e9bc8c36b9e73b92672310e45abca1eab",
+  "source_content_sha256": "fc4848248c74f09db262326058a604a25596612145a08c7b6cb80fb346d9f17a",
   "subject": {
     "canonical_slug": "patternmakers-wood",
     "name": "Wood Patternmakers",

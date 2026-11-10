@@ -696,7 +696,7 @@
         "status": "mapped"
       },
       "item:solar-sales-representatives-and-assessors.fit.personality-fit-block.20": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:solar-sales-representatives-and-assessors.fit.personality-fit-block.21": {
         "status": "mapped"
@@ -1533,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:solar-sales-representatives-and-assessors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:solar-sales-representatives-and-assessors.sources.source-card.1": {
         "status": "mapped"
@@ -23317,7 +23317,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用虚构S1–S4体验需求澄清、报价复算、条件变化与客户说明。先在纸面比较预算和型号，不联系真实客户、不登屋顶操作设备或提出个人投资建议。"
+              "如果你不喜欢反复追问资料、处理价格异议，或希望每次沟通都能马上成交，先用报价试做体验。"
             ]
           },
           "id": "solar-sales-representatives-and-assessors.quick-decision.fit-decision-checklist.1",
@@ -23332,7 +23332,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "销售与评估围绕客户需求和条件性报价，系统工程师承担工程分析设计，安装工做实际装配维护，经理协调现场工序。选择看主要产出，不把口才或纸面报价当专业资格。"
+              "到 09 做 SAS-01「复核光伏报价与组件变更」。先完成初稿，再看七天计划后的参考。"
             ]
           },
           "id": "solar-sales-representatives-and-assessors.quick-decision.fit-decision-checklist.2",
@@ -23347,7 +23347,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "可观察能否听清需求、逐项复算、承认未知并把技术问题交对应人。愿意谈太阳能不等愿意持续跟进和面对销售目标；户外评估范围及训练按真实岗位核。"
+              "如果你愿意听客户讲用电需求、复核报价版本，并能解释哪些问题需交技术方，值得体验。"
             ]
           },
           "id": "solar-sales-representatives-and-assessors.quick-decision.fit-decision-checklist.3",
@@ -25876,7 +25876,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "独立复算42000−1000与+6000以及5400/5300W，核费用范围和单位。"
+              "报价用工具复算后，逐项检查折扣、加固和组件单位是否回到正确版本。"
             ]
           },
           "id": "solar-sales-representatives-and-assessors.ai-impact.ai-impact-table.91",
@@ -27912,31 +27912,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-test"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "销售经理",
@@ -28374,8 +28374,9 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "独立复算41000与47000，分清余5000和超1000。",
-              "解释5.4及5.3kW仅铭牌总量，不是年发电。"
+              "能复核两个报价版本并写明各自适用范围。",
+              "能说清铭牌功率与发电量分别需要什么证据。",
+              "能把技术待核项、费用更新与客户同意分开交接。"
             ]
           },
           "id": "solar-sales-representatives-and-assessors.fit.personality-fit-block.20",
@@ -29232,7 +29233,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "S2加固未知时把41000说成最终全部费用。"
+              "先写清哪些工程费用已经纳入报价，哪些仍需技术核查。"
             ]
           },
           "id": "solar-sales-representatives-and-assessors.risk.career-risk-cards.14",
@@ -29292,7 +29293,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "S4把10A2B算成12A或把5.3kW当年电量。"
+              "核组件型号与铭牌功率。年发电还需要场址、遮挡和气候数据。"
             ]
           },
           "id": "solar-sales-representatives-and-assessors.risk.career-risk-cards.18",
@@ -29532,7 +29533,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "S4只说报价47000，漏型号待核和客户未批准。"
+              "客户沟通稿应明确组件是否已确认、费用是否已重核，以及谁同意变更。"
             ]
           },
           "id": "solar-sales-representatives-and-assessors.risk.career-risk-cards.34",
@@ -29698,33 +29699,33 @@
               {
                 "id": "education",
                 "values": [
-                  "证据不足：未采用完整可核的单一雇主公告",
-                  "未取得地区日期、太阳能职责组合、底薪佣金及录用条件完整可核原文，官方任务不能建统一雇主门槛。",
-                  "核验方式：真实公告须逐项核身份职责、日期地区、待遇及训练。"
+                  "南开就业网｜爱旭股份国内销售",
+                  "2026-10-30 招聘中的国内方向负责分布式组件渠道、客户开发及合同履约。",
+                  "要求按原岗位核对。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "编辑建议：需求与报价说明",
-                  "用S1–S3展示预算、费用包含项、折扣与变更记录，不冒称招聘原文。",
-                  "核验方式：原始题面与算式分别回查，保留初稿修订。"
+                  "Sunrun｜现场销售顾问",
+                  "得州 Tomball 岗到客户家沟通并评估需求，推进销售。",
+                  "要求按原岗位核对。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "官方太阳能任务的用途",
-                  "O*NET支持客户需求、产品选择、成本报价、场地评估和线索记录，不能证明特定雇主薪资要求。",
-                  "核验方式：对照实际职位主产出，不只看销售头衔。"
+                  "核顺能源｜分布式工商业光伏项目开发经理",
+                  "2026-04-21 原岗组织屋顶项目踏勘、起草尽调并参与商务谈判，可对照项目评估的相邻分工。",
+                  "要求按原岗位核对。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "编辑建议：未知与技术交接",
-                  "S4型号码数、发电输入及专业核查未定，交对应人并记录客户说明。",
-                  "核验方式：未知不填零，接手人能找到原依据和待确认事项。"
+                  "真实权限",
+                  "分别记录报价、技术核查与客户批准，发电和节省须有另行证据。",
+                  "按雇主分工与当地规则复核。"
                 ]
               }
             ]
@@ -29732,7 +29733,10 @@
           "id": "solar-sales-representatives-and-assessors.path.employer-evidence.1",
           "source_refs": [
             "editor",
-            "onet"
+            "onet",
+            "d020-cn-job",
+            "d020-us-job",
+            "d020-cn-context"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29749,8 +29753,8 @@
                   "你只为虚构客户做纸面需求、成本和型号对照。金额与规则为练习设定，不是市场报价、太阳能技术标准或个人投资建议。",
                   "S1｜客户预算46000元，需求写12块PV-A组件、每块铭牌450W。用电账单、遮挡、气象、结构电气结论、激励或贷款资格均未提供，不可估年发电量、节省额或回收期。",
                   "S2｜V1报价：12块PV-A每块1600元，逆变器8000元，支撑及安装12000元，纸面手续服务1800元，运输1000元；练习设各已列金额含税，无另行税费，折扣1000元仅适用V1/V2所列方案。屋顶加固不在V1范围，是否需要原先未知。",
-                  "S3｜技术方通知须增屋顶加固6000元（练习给定的含税价），其他列项及1000折扣不变，形成V2；客户未批准超预算。不得继续把V1称全部项目确认总价。",
-                  "S4｜V2附件组件清单实际为10块A450W和2块B400W，与S1的12块A不一致，金额暂未修订，替代适用性和客户确认均未知。销售仅能复算并交问题；型号和结构电气由对应技术方核，折扣超预算及合同由授权人/客户确认，不承诺可施工运行。"
+                  "S3｜技术方通知须增屋顶加固6000元（练习给定的含税价），其他列项及1000折扣不变，形成V2；客户尚未批准 V2。不得继续把V1称全部项目确认总价。",
+                  "S4｜V2附件组件清单实际为10块A450W和2块B400W，金额暂未修订，替代适用性和客户确认均未知。销售仅能复算并交问题；型号和结构电气由对应技术方核，折扣超预算及合同由授权人/客户确认，不承诺可施工运行。"
                 ]
               },
               {
@@ -29758,16 +29762,16 @@
                 "values": [
                   "任务与产出",
                   "按S1/S2列需求和报价逐项算式，算含折扣总额、与预算差额及需求铭牌总功率，区分kW和年发电量。",
-                  "按S3算变更总额和超预算；按S4对比组件清单及铭牌总量，记录未修订费用、未获确认及专业问题。先封存初稿，再打开答案。"
+                  "按S3算变更总额与预算差额；按S4对比组件清单及铭牌总量，记录未修订费用、未获确认及专业问题。先封存初稿，再打开答案。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考答案（先独立完成再看）",
-                  "S2组件12×1600=19200元；原五项19200+8000+12000+1800+1000=42000元，减1000折扣=41000元，比46000预算低5000元。S1需求12×450W=5400W=5.4kW，仅铭牌合计，不能算年发电或节省。",
-                  "S3 V2为42000+6000−1000=47000元，比46000预算超1000元；比V1增6000。记录加固新增、折扣不变及未批状态，交报价授权人和客户，不删费用或自动增加预算。",
-                  "S4清单10×450+2×400=5300W=5.3kW，与S1需求5.4kW少0.1kW且2块型号不同。不能按铭牌合计相近认定可替；V2金额尚未因清单纠正，47000只是S3既定费用条件结果，不是型号修正后的最终报价。交技术方核型号结构电气与产量输入，交授权人核新报价，再向客户解释条件；当前状态待核与待批准。"
+                  "提交前检查",
+                  "先把输入、约束与计算写在初稿上。",
+                  "标清负责人和还需确认的记录。",
+                  "第 6 天保存初稿。第 7 天按指引打开参考。"
                 ]
               },
               {
@@ -29784,7 +29788,7 @@
             "editor",
             "onet"
           ],
-          "title": "纸面练习：太阳能需求、报价与技术交接（虚构）",
+          "title": "SAS-01 | 复核光伏报价与组件变更",
           "type": "cards"
         },
         {
@@ -29795,33 +29799,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "需求与输入表",
-                  "列S1预算46000、12A450及用电气象遮挡结构电气与资金条件未知，分客户需求与专业资料。",
-                  "复核：每项指向S1原文，未知不写成已确认。"
+                  "初版报价复算",
+                  "复算初版项目、折扣与预算差额。",
+                  "保留来源位置和个人复核记录。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "版本与费用复算表",
-                  "列S2五项42000、折扣后41000与预算余5000，S3加固后47000超1000，标V1/V2条件和批准状态。",
-                  "复核：6000增量与1000折扣分别列，接手者能重算。"
+                  "变更核查",
+                  "对比两版报价的费用与尚未确认的变更。",
+                  "保留来源位置和个人复核记录。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "技术与客户交接卡",
-                  "S4标10A2B、5.3对5.4kW及未改报价、未知适用性，交技术、报价授权及客户各待办。",
-                  "复核：不能写相近功率即可替代，不承诺现场合格。"
+                  "组件比对",
+                  "核组件清单与需求，标出技术方待确认项。",
+                  "保留来源位置和个人复核记录。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "客户说明与限制卡",
-                  "用短文解释成本变更超预算、型号待核、年电量及收益条件未给，列下一步确认资料。",
-                  "复核：能回查S1–S4，不把练习成真实报价或成交经历。"
+                  "客户交接",
+                  "写客户沟通稿，注明可承诺内容与还待谁确认。",
+                  "保留来源位置和个人复核记录。"
                 ]
               }
             ]
@@ -29853,27 +29857,27 @@
             "rows": [
               [
                 "面试：费用复算",
-                "能否核五项与折扣预算",
-                "写42000−1000=41000，余5000",
-                "编辑观察点非统一考试"
+                "复算初版项目、折扣与预算差额。",
+                "请解释依据，并记录一项待核。",
+                "以真实岗位要求为准。"
               ],
               [
                 "面试：报价变更",
-                "能否区分V1和V2",
-                "加固增6000，V2为47000超1000待批",
-                "不代真实客户决定预算"
+                "对比两版报价的费用与尚未确认的变更。",
+                "请解释依据，并记录一项待核。",
+                "以真实岗位要求为准。"
               ],
               [
                 "试用：技术交接",
-                "能否说明S4型号不符与未知",
-                "10A2B共5.3kW，型号费用与适用性待核",
-                "纸面核对不证明现场评估能力"
+                "核组件清单与需求，标出技术方待确认项。",
+                "请解释依据，并记录一项待核。",
+                "以真实岗位要求为准。"
               ],
               [
                 "客户沟通：条件解释",
-                "能否说明铭牌与收益差别",
-                "5.4与5.3kW非年电量，资金产量输入未知",
-                "一次练习不预测销售绩效"
+                "写客户沟通稿，注明可承诺内容与还待谁确认。",
+                "请解释依据，并记录一项待核。",
+                "以真实岗位要求为准。"
               ]
             ]
           },
@@ -29901,42 +29905,42 @@
                 "id": "entry-trial-day-2",
                 "values": [
                   "第2日",
-                  "从S1建预算型号和未知资料表，发电节省贷款条件保持未提供。"
+                  "复算初版项目、折扣与预算差额。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "第3日",
-                  "用S2复算五项、折扣后41000与余5000，写每项单位和原条件。"
+                  "对比两版报价的费用与尚未确认的变更。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "第4日",
-                  "应用S3写V2费用47000、超1000与待批变更，旧V1不冒全包价。"
+                  "核组件清单与需求，标出技术方待确认项。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "第5日",
-                  "按S4复算5.3kW，写2块不符与型号价格未修订，交专业及客户确认。"
+                  "写客户沟通稿，注明可承诺内容与还待谁确认。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "第6日",
-                  "先封初稿，再对答案逐项核金额型号功率未知权限，记录修改依据。"
+                  "独立完成并保存初稿，保留算式、判断和依据。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "第7日",
-                  "比较初修稿与投入感受，列需补产品、沟通和工具训练的问题，不算适合概率。"
+                  "保存第 6 天初稿后，在常见问题中展开「SAS-01 参考与自核量规（第 7 天展开）」。按量规复盘两版报价、组件清单和待确认条件，记录一处修订及理由。"
                 ]
               }
             ]
@@ -29954,13 +29958,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "保留初稿修订稿，错误逐项回指S1–S4与修改依据。",
-              "核是否将加固未知或产量资金条件当零，将旧V1当最终全包价。",
-              "记录复算、解释限制和持续跟进的投入感受，不转成职业适合分数。",
-              "再复算41000与47000，核预算差5000与超1000是否分清。",
-              "说明5.4与5.3kW仅铭牌合计，不能推出年电量、收益或替代合格。",
-              "把形成的需求、版本变更和交接结构与真实岗位要求对照，训练权限另核。",
-              "未完成如实列缺口，准备下一轮产品和沟通学习，不伪造客户或成交经历。"
+              "保留两版的逐项算式、折扣和预算差额。",
+              "对照需求与清单，注明型号、数量和铭牌功率。",
+              "写明价格和技术资料还有哪些待核。",
+              "分别列技术复核、报价授权和客户批准。",
+              "仅使用虚构材料。",
+              "第 7 天用具名参考核对。",
+              "保留初稿与修订依据。"
             ]
           },
           "id": "solar-sales-representatives-and-assessors.path.seven-day-decision.1",
@@ -29968,7 +29972,7 @@
             "editor",
             "onet"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "交卷与复盘检查",
           "type": "list"
         },
         {
@@ -30082,15 +30086,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业地区日期、产品职责、底薪佣金与支付追回条件完整可核的雇主招聘公告，未编工资或统一门槛。",
-              "S1–S4均为编辑虚构纸面资料：46000预算、41000基础报价、47000加固变更未批，以及12A需求与10A2B附件不一致。它们供需求提问、复算与技术交接练习，不是招聘样本、真实客户报价或录用证明。"
+              "2026-10-30 招聘中的国内方向负责分布式组件渠道、客户开发及合同履约。",
+              "得州 Tomball 岗到客户家沟通并评估需求，推进销售。"
             ]
           },
           "id": "solar-sales-representatives-and-assessors.path.recruitment-sample.1",
           "source_refs": [
-            "editor"
+            "d020-cn-job",
+            "d020-us-job"
           ],
-          "title": "招聘样本说明",
+          "title": "大陆与美国岗位样本",
           "type": "notice"
         },
         {
@@ -30723,7 +30728,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "42000与折扣后41000独立复算一致"
+              "检查原版小计、折扣和预算对照，写出可复算的算式。"
             ]
           },
           "id": "solar-sales-representatives-and-assessors.path.career-path-block.50",
@@ -30798,7 +30803,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "S3为47000超1000，保留V1/V2"
+              "把变更金额放入新版，同时保留旧版本，注明尚待授权。"
             ]
           },
           "id": "solar-sales-representatives-and-assessors.path.career-path-block.55",
@@ -32265,12 +32270,22 @@
                 ]
               },
               {
-                "answer": "不能。S3报价超46000预算1000未批，S4的10A2B与12A需求不同且费用未修订，专业适用性待核。5.3kW只是铭牌合计，发电节省资金条件未给，不作收益保证或购买建议。",
+                "answer": "还要核屋顶和电气条件、预计发电所需的场址数据、完整价格及客户意愿。纸面报价只能用于复核题设。",
                 "id": "solar-sales-representatives-and-assessors.faq.10",
-                "question": "算对47000元和5.3kW就能推荐购买吗？",
+                "question": "报价和铭牌功率算对了，就能建议购买吗？",
                 "question_key": "career.faq.solar-sales-representatives-and-assessors.outlook-transition",
                 "source_refs": [
                   "editor"
+                ]
+              },
+              {
+                "answer": "S2组件12×1600=19200元；原五项19200+8000+12000+1800+1000=42000元，减1000折扣=41000元，比46000预算低5000元。S1需求12×450W=5400W=5.4kW，仅铭牌合计，不能算年发电或节省。\n\nS3 V2为42000+6000−1000=47000元，比46000预算超1000元；比V1增6000。记录加固新增、折扣不变及未批状态，交报价授权人和客户，不删费用或自动增加预算。\n\nS4清单10×450+2×400=5300W=5.3kW，与S1需求5.4kW少0.1kW且2块型号不同。不能按铭牌合计相近认定可替；V2金额尚未因清单纠正，47000只是S3既定费用条件结果，不是型号修正后的最终报价。交技术方核型号结构电气与产量输入，交授权人核新报价，再向客户解释条件；当前状态待核与待批准。\n\n四项各 0–2 分：两版算式与差额；组件和铭牌功率；未知发电及改价；技术确认、报价授权与客户同意。\n\n每项完整且可复核得 2 分，部分得 1 分，缺失或代替负责人批准得 0 分。\n\n保留初稿和修订稿，在交接里圈出一项仍待核的信息。\n\n找一个带教岗位，核它与纸面试做最不同的职责。",
+                "id": "solar-sales-representatives-and-assessors.faq.11",
+                "question": "SAS-01 参考与自核量规（第 7 天展开）",
+                "question_key": "career.faq.solar-sales-representatives-and-assessors.exercise-answer-key",
+                "source_refs": [
+                  "editor",
+                  "onet"
                 ]
               }
             ]
@@ -32381,13 +32396,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32857,6 +32872,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "2026-10-30 招聘中的国内方向负责分布式组件渠道、客户开发及合同履约。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d020-cn-job",
+                "limitation": "用于单岗任务对照。",
+                "market": "中国大陆",
+                "name": "南开就业网｜爱旭股份国内销售",
+                "period": "2026-10-30",
+                "publisher": "南开就业网｜爱旭股份国内销售",
+                "scope": "recruitment_proxy",
+                "url": "https://career.nankai.edu.cn/correcruit/content/id/120255.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "得州 Tomball 岗到客户家沟通并评估需求，推进销售。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d020-us-job",
+                "limitation": "用于单岗任务对照。",
+                "market": "美国",
+                "name": "Sunrun｜现场销售顾问",
+                "period": "核读见原岗",
+                "publisher": "Sunrun｜现场销售顾问",
+                "scope": "recruitment_proxy",
+                "url": "https://careers.sunrun.com/job/tomball/field-sales-consultant/21632/99494209360"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "2026-04-21 原岗组织屋顶项目踏勘、起草尽调并参与商务谈判，可对照项目评估的相邻分工。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d020-cn-context",
+                "limitation": "用于单岗任务对照。",
+                "market": "中国大陆",
+                "name": "核顺能源｜分布式工商业光伏项目开发经理",
+                "period": "2026-04-21",
+                "publisher": "核顺能源｜分布式工商业光伏项目开发经理",
+                "scope": "recruitment_proxy",
+                "url": "https://hssolarpv.com/default.aspx?pageid=4"
               }
             ]
           },
@@ -36169,7 +36229,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "销售代表评估员适合什么样的人？"
+        "title": "哪些人适合做太阳能销售与评估？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -37551,7 +37611,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合销售代表评估员",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -38122,14 +38182,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解太阳能销售与评估的客户需求、场地资料、报价复算及交接；区分美国41-4011父组统计与本职业缺口，用虚构S1–S4练习体验，不保证发电收益或录用。"
+      "text": "太阳能销售与评估怎样核客户需求、组件和报价？比较渠道销售与现场信息收集，再试做报价复核。"
     },
     "title": {
       "availability": "available",
-      "text": "销售代表评估员"
+      "text": "太阳能销售代表与评估员"
     }
   },
-  "source_content_sha256": "bd398cd9bbb14f1b4163b7da7dbef3690e9fef5bf0d361a306ef25d2171dc323",
+  "source_content_sha256": "bf0ec6c9fe66d9ee9f658500a111709fb41f3ac0d49450e18336ca58ca3c23b3",
   "subject": {
     "canonical_slug": "solar-sales-representatives-and-assessors",
     "name": "销售代表评估员",

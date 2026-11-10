@@ -1454,6 +1454,9 @@
       "item:commercial-pilots.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:commercial-pilots.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:commercial-pilots.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30839,6 +30842,21 @@
           "id": "commercial-pilots.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。虚构包机行程的起飞地一致，但两份任务单的到达地点不同。写下应向排班与机组核对的版本及接收确认。"
+            ]
+          },
+          "id": "commercial-pilots.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核飞行任务单的版本与接收",
+          "type": "notice"
         }
       ]
     },
@@ -37753,6 +37771,13 @@
         "id": "commercial-pilots.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "commercial-pilots.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38263,7 +38288,7 @@
       "text": "商业飞行员"
     }
   },
-  "source_content_sha256": "bcc78a562ca48921b5883bac73c4cc87d9a3e53987a3828eb5904e4ef7a90222",
+  "source_content_sha256": "8283fff80b634907f5bf1229d471093d94922d8d0d1f8fe52e69edd2e32573cf",
   "subject": {
     "canonical_slug": "commercial-pilots",
     "name": "商业飞行员",

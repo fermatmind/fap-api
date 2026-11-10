@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:cn-mfg-hero": {
+        "status": "pending_mapping"
+      },
       "fact:cn-mfg-nonprivate-wage": {
         "status": "pending_mapping"
       },
@@ -14,9 +17,6 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment": {
         "status": "pending_mapping"
       },
@@ -24,6 +24,30 @@
         "status": "pending_mapping"
       },
       "fact:us-openings": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-51-4041-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-51-4041-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-51-4041-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-51-4041-p90": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-51-4111-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-51-4111-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-51-4111-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-51-4111-p90": {
         "status": "pending_mapping"
       },
       "fact:us-wage-machinists": {
@@ -150,6 +174,9 @@
         "status": "pending_mapping"
       },
       "item:machinists-and-tool-and-die-makers.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:machinists-and-tool-and-die-makers.path.entry-work-sample-data.1": {
         "status": "pending_mapping"
       },
       "item:machinists-and-tool-and-die-makers.profile.career-quick-answers-block.8": {
@@ -7228,7 +7255,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "机械加工工的核心是按图纸与规格把金属加工成合格精密零件、仪器、工具与模具：读懂零件图与规格并排工序，计算尺寸与公差，选择金属与合金材料，设置并操作车床、铣床、磨床、钻床等机床与数控设备，编写或调用数控程序，装配与修整工具、模具、夹具与量规，用量具与量块检验，试运行并调整，维护设备并记录结果。"
+              "机加工工主要按图纸加工和检验精密零件。工具与模具制造工侧重制造、装配、试配和修整模具、夹具或量具。常见交付包括首件检验记录、偏差记录和工装试配结果。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.quick-decision.fermat-decision-card.2",
@@ -7243,12 +7270,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "完全虚构的任务包：给出一份虚构的零件图纸与公差要求（含 1 份工艺流程卡与 1 项首件检验记录），要求在 60 分钟内写出加工方法选择、工序顺序、量具选择、首件检验与不合格处置步骤；不使用真实企业、图纸或客户数据。"
+              "到「入行与纸面试做」打开首件复核单，分别核对原题和单项变式。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-tasks"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7257,12 +7284,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "样本输出与反思：检查是否先读懂图纸与公差、是否按基准合理排工序、是否写明量具与检验方法、是否给出不合格的纠正与上报路径；再问自己能否在高精度与时间压力下保持专注与严谨，以及是否愿意为加工精度与检验记录承担责任。"
+              "观察自己是否愿意反复查图纸版本、保留首件读数，并在偏差出现时先记录再交接。O*NET 将机加工工标为 RCI，将工具与模具制造工标为 RC。兴趣代码描述偏好的工作活动。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "onet-tasks"
+            "onet-summary",
+            "onet-interest-tool-die"
           ],
           "type": "prose"
         }
@@ -7370,13 +7398,17 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入：O*NET 51-4041.00 与 51-4111.00 的职业身份、任务、工作活动、工作情境、技能与知识、兴趣代码、教育与 Job Zone；BLS OOH 组合口径提供工资、岗位数与展望，研究结论不据此推定中国大陆的资格、工资或就业口径。"
+              "O*NET 51-4041.00 和 51-4111.00 分别提供两项职业任务。美国合并组总览来自 BLS 职业手册，明细就业来自 BLS 表 1.2，明细工资来自 BLS OEWS。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "onet-summary",
-            "ooh-combined"
+            "onet-tasks",
+            "onet-tooldie",
+            "ooh-combined",
+            "bls-ep-2025-2035",
+            "onet-wages",
+            "onet-wages-tool-die"
           ],
           "type": "prose"
         },
@@ -7559,12 +7591,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试验候选：用虚构尺寸、装配与检验记录整理工艺说明。CAD、CAM及数控自动化不等于生成式AI采用；程序、装夹、首件、模具试用与质量处置由授权人员按目标工艺复核。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "文本工具可以尝试整理虚构工艺或检查记录。数控自动化和生成式 AI 的采用属于不同问题。图纸版本、首件判定、偏差放行及复工须由获授权人员依原件和现场程序确认。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "internal-rubric"
+            "onet-tasks",
+            "onet-tooldie"
           ],
           "type": "prose"
         },
@@ -7615,12 +7648,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先用完全虚构的零件图与公差要求做离线工艺演练，记录工序、装夹、量具与检验边界，不依赖未经核实的自动程序替代首件确认。"
+              "到「入行与纸面试做」打开首件复核单，分别核对原题和单项变式。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "internal-rubric"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7629,12 +7662,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：工具可辅助编程、路径优化、设计与检验数据汇总；当前资料不证明制造企业普遍采用这些系统。"
+              "文本工具可以尝试整理虚构工艺或检查记录。数控自动化和生成式 AI 的采用属于不同问题。图纸版本、首件判定、偏差放行及复工须由获授权人员依原件和现场程序确认。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "internal-rubric"
+            "onet-tasks",
+            "onet-tooldie"
           ],
           "type": "prose"
         },
@@ -7665,12 +7699,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮未建立BLS两个职业组合与中国单列工资对应；NBS2025制造113594/76055、全国非私营129441元为企业行业代理，不等于组合或两子职业中位、起薪或中国行业分布。"
+              "中国大陆工资参照"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "nbs-wages",
+            "jinan-recruitment"
           ],
           "type": "prose"
         },
@@ -7679,12 +7714,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径说明：国家统计局 2025 年制造业就业人员年平均工资，城镇非私营单位为 {{fact:cn-mfg-nonprivate-wage}}、城镇私营单位为 {{fact:cn-mfg-private-wage}}；全国城镇非私营单位合计为 {{fact:cn-national-nonprivate-wage}}。均为行业口径，不等于本职业中位数或起薪。"
+              "本页所核资料未取得中国大陆这两项职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "nbs-wages",
+            "jinan-recruitment"
           ],
           "type": "prose"
         },
@@ -7693,12 +7729,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "类别边界：人力资源社会保障部企业薪酬调查信息按职业/岗位分类发布，可用于查询相关机械加工岗位薪酬，但本页未取得与 BLS OOH 组合口径精确对应的条目，不作为本职业全国中位数；具体以主管部门发布为准。"
+              "本页所核资料未取得中国大陆这两项职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "mohrss-wage"
+            "nbs-wages",
+            "jinan-recruitment"
           ],
           "type": "prose"
         },
@@ -7707,7 +7744,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国大陆机械加工工对应的全国职业工资中位数、统计期与口径；本页仅展示行业代理并标明其为行业口径，不使用代理数字或美国数字填补。"
+              "本页所核资料未取得中国大陆这两项职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.china-salary.career-snapshot-primary-locale.4",
@@ -7743,12 +7780,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册显示，该类组合职业 2025 年中位年薪为 59,620 美元（约 28.66 美元/小时）；2025 年岗位数约 344,900 个，2025—2035 年预计下降约 1%（就业变化约 -2,200），期间年均约 30,400 个职位空缺（均来自替换需求）。分职业中位：机械师 58,750 美元、工具和模具制造工 64,050 美元（2025 年 5 月）。以上为美国全国口径，组合与分职业数字不得混用。"
+              "2025 年 5 月美国全国年薪中位数：BLS OOH 合并组 59,620 美元（时薪中位数 28.66 美元）；机加工工 51-4041 为 58,750 美元；工具与模具制造工 51-4111 为 64,050 美元。 合并组覆盖两个职业，未设单一 SOC 代码。下表逐项列两项明细职业的全国工资分位，合并组只列职业手册公布的中位数。OEWS 覆盖领薪雇员，实际报价按地区和雇主核对。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "ooh-combined"
+            "ooh-combined",
+            "onet-wages",
+            "onet-wages-tool-die"
           ],
           "type": "prose"
         },
@@ -7757,12 +7796,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计位置：以上为美国全国口径；组合中位与分职业中位分别列出，中位数不代表起薪或个人到手收入。"
+              "2025 年 5 月美国全国工资分位"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "ooh-combined"
+            "onet-wages",
+            "onet-wages-tool-die"
           ],
           "type": "prose"
         },
@@ -7877,12 +7917,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作：用完全虚构的零件图与公差要求，完成一次工艺与工序设计、装夹找正、量具选择与首件检验演练，请他人按记录复核。"
+              "到「入行与纸面试做」打开首件复核单，分别核对原题和单项变式。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.fit.riasec-fit-block.5",
           "source_refs": [
-            "onet-tasks"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7891,13 +7931,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "RIASEC 兴趣代码：机械师为 RCI（现实型—常规型—研究型），工具和模具制造工为 RC（现实型—常规型）：偏动手操作机床、按规程精确加工与装配并分析工艺问题；相关标签只描述活动偏好，不能决定胜任或资格。"
+              "观察自己是否愿意反复查图纸版本、保留首件读数，并在偏差出现时先记录再交接。O*NET 将机加工工标为 RCI，将工具与模具制造工标为 RC。兴趣代码描述偏好的工作活动。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.fit.riasec-fit-block.6",
           "source_refs": [
             "onet-summary",
-            "onet-tooldie"
+            "onet-interest-tool-die"
           ],
           "type": "prose"
         },
@@ -7906,12 +7946,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "本轮未取得组合及两子职业人格效度研究；用虚构尺寸与工装试用记录观察核验行为，不用量表判断加工授权或放行。"
+              "用首件复核单观察是否愿意保留读数并追查版本差异。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.fit.riasec-fit-block.7",
           "source_refs": [
-            "onet-summary"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8021,13 +8061,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行路径与能力阶段"
+              "入行与纸面试做"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.path.career-path-block.1",
           "source_refs": [
-            "onet-education",
-            "ooh-combined"
+            "ooh-combined",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8036,13 +8076,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS说明机械师通常高中、工具模具制造工可能需中学后课程，常见在岗训练、学徒或职校路径。O*NET教育是新入职需要调查：机械师36%高中/33%中学后证书/17%部分大学；工具模具41%证书/40%高中/10%低于高中，非在岗学历。JobZone3时长是组别描述。"
+              "BLS 表 1.2 将高中或同等学历列为机加工工典型入门学历，将高等教育非学位证书列为工具与模具制造工典型入门学历。两项职业均列长期在岗培训。BLS 职业手册还列学徒制和职业院校等路径。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.path.career-path-block.2",
           "source_refs": [
             "ooh-combined",
-            "onet-education"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8051,12 +8091,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS所述技能认证是可选能力证明，不等设备操作权限；中国按真实任务、机型与适用规则核技能和许可，本轮未建立两个职业完整对应，不推断无统一资格。"
+              "济南起步区 2026 年 9 月发布的高能锐新数控车工招聘样本列识图、精密量具、首件自检和异常上报，标示 4,000–7,000 元／月。这是单个雇主的历史岗位报价。 中国大陆《安全生产法》第 28、30 条涉及安全培训及适用特种作业资格。第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.path.career-path-block.3",
           "source_refs": [
-            "onet-education"
+            "jinan-recruitment",
+            "china-work-safety"
           ],
           "type": "prose"
         },
@@ -8065,13 +8106,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "培训证明、职业资格与特种作业操作证（如涉及焊接、起重等）是不同状态：认证不自动授予设备操作或特种作业资格；须按雇主与法规要求取得相应授权。"
+              "在适用美国一般工业规则的场所，OSHA 29 CFR 1910.212 涉及加工点、旋转部件和飞屑等的机器防护。 OSHA 29 CFR 1910.147 适用于条文涵盖且存在意外启动或危险能量释放的检修维护。隔离确认、解除隔离及恢复供能按雇主程序，由受训的指定授权人员处理。实际复工依现场授权和通知程序。 防护缺失、设备异常或权限不明时，助手按现场规程停手、退出危险区并报告；操作、检修隔离和复工分别核指定授权。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.path.career-path-block.4",
           "source_refs": [
-            "onet-cert",
-            "onet-education"
+            "osha-machine-guarding",
+            "osha-energy-control",
+            "china-work-safety"
           ],
           "type": "prose"
         },
@@ -8094,12 +8136,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "展示证据：用一份可复核的工艺与检验记录说明（含工序、装夹、量具与首件判定），展示按公差加工并如实记录的能力。"
+              "保留图纸版本、首件读数和复核人，方便交接。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.path.career-path-block.6",
           "source_refs": [
-            "onet-education"
+            "onet-tasks",
+            "onet-tooldie"
           ],
           "type": "prose"
         },
@@ -8108,12 +8151,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "下一步：核对目标雇主的工艺要求、设备与安全规程、检验标准与授权范围，并在受监督的真实加工中验证精度与检验能力。"
+              "防护缺失、设备异常或权限不明时，助手按现场规程停手、退出危险区并报告；操作、检修隔离和复工分别核指定授权。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.path.career-path-block.7",
           "source_refs": [
-            "onet-education"
+            "osha-machine-guarding",
+            "osha-energy-control",
+            "china-work-safety"
           ],
           "type": "prose"
         },
@@ -8130,6 +8175,48 @@
             "onet-summary"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "题面",
+                  "虚构纸面练习。批准图纸为 C 版，孔径接受区间为 19.98–20.02 毫米（含端点）。版本不符时先标“待图纸核实”，交工艺负责人；版本一致但读数超界时标“待质量复核”，交质量负责人；两项均符合时标“纸面记录齐备”，交当班复核人。记录 P1 为 C／20.02，P2 为 B／20.03，P3 为 C／19.97。变式只把 P2 图纸版本改为 C。分别写下两种题面的原值、状态和接手人。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "交付",
+                  "每行保留原值，标状态和复核人。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "做完后复核",
+                  "用下方链接打开常见问题的第一条折叠解。"
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "练习边界",
+                  "题面只判断纸面记录。实际设备操作、隔离、质量放行与复工须按所在场所的分工和授权。"
+                ]
+              }
+            ]
+          },
+          "id": "machinists-and-tool-and-die-makers.path.entry-work-sample-data.1",
+          "source_refs": [
+            "paper-answer-key"
+          ],
+          "title": "首件复核单：核图纸版本和读数",
+          "type": "cards"
         }
       ]
     },
@@ -8158,12 +8245,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册显示，该组合职业 2025 年岗位约 344,900 个，2025—2035 年预计下降约 1%（就业变化约 -2,200），年均空缺约 30,400 个且均来自替换需求；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "BLS OOH 美国合并组 2025 年约 344,900 个岗位，2035 年预计约 342,700 个，预计下降 1%，年均约 30,400 个空缺，均预计来自人员替补。 BLS 表 1.2 的两项明细（2025—2035）：机加工工 51-4041 约 288,300 → 291,200，+1.0%，年均 26,100 个空缺；工具与模具制造工 51-4111 约 56,700 → 51,500，−9.2%，年均 4,300 个空缺。人数分别取整。 本页所核资料未取得中国大陆这两项职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.market-signals.market-signal-card.2",
           "source_refs": [
-            "ooh-combined"
+            "ooh-combined",
+            "bls-ep-2025-2035",
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -8172,12 +8261,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025两子职业均涉及制造业，BLS分别列其雇主份额，不提供本页组合统一份额；行业场景不是需求或工资因果。"
+              "BLS OOH 美国合并组 2025 年约 344,900 个岗位，2035 年预计约 342,700 个，预计下降 1%，年均约 30,400 个空缺，均预计来自人员替补。"
             ]
           },
           "id": "machinists-and-tool-and-die-makers.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-industry"
+            "ooh-combined"
           ],
           "type": "prose"
         },
@@ -8223,116 +8312,148 @@
           "data": {
             "entries": [
               {
-                "answer": "本页机械加工工指 BLS OOH「机械师与工具和模具制造工」组合口径（含 O*NET 51-4041.00 与 51-4111.00）：设置并操作设备生产精密金属零件、仪器、工具与模具；工作包括计算尺寸公差、阅读图纸与规格、装夹找正与设置机床、编写数控程序、加工与装配零件、测量检验、试运行与调整以及维护机床。工作以机加工车间与工厂现场为主，多数全职、常规工作时间，加班与夜班较常见，精确性极重要。它不等同于数控机床程序员、工业机械维修工或机械装配工。",
+                "answer": "原题：P1 为 C／20.02，端点合格，纸面记录齐备，交当班复核人；P2 为 B／20.03，先标待图纸核实，交工艺负责人；P3 为 C／19.97，超界，标待质量复核，交质量负责人。变式：P2 为 C／20.03，版本一致而读数超界，改标待质量复核，交质量负责人。P1 和 P3 的结果保持。",
+                "id": "machinists-and-tool-and-die-makers.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.machinists-and-tool-and-die-makers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
+              },
+              {
+                "answer": "机加工工主要按图纸加工和检验精密零件。工具与模具制造工侧重制造、装配、试配和修整模具、夹具或量具。常见交付包括首件检验记录、偏差记录和工装试配结果。 主要在车间或工厂，通常全职，部分岗位有夜班、周末或加班。",
                 "id": "machinists-and-tool-and-die-makers.faq.1",
                 "question": "日常工作和工时如何？",
                 "question_key": "career.faq.machinists-and-tool-and-die-makers.daily-work",
                 "source_refs": [
-                  "ooh-combined",
                   "onet-tasks",
-                  "onet-tooldie"
+                  "onet-tooldie",
+                  "ooh-combined"
                 ]
               },
               {
-                "answer": "工具和模具制造工负责分析规格、装配与修理模具、夹具、量具与手工具，是本页组合口径的一部分；数控机床程序员负责编写与优化数控程序及工艺文件；车工与磨工负责相应机床加工；工业机械维修工负责设备安装与维修。区分应比较设备、工艺与质量责任。",
+                "answer": "机加工工交付加工件，工具与模具制造工交付或修整工装。CNC 编程人员侧重程序，工业机械维修人员侧重设备故障；具体操作、质量放行和检修权限由工作场所分别确认。",
                 "id": "machinists-and-tool-and-die-makers.faq.2",
                 "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.machinists-and-tool-and-die-makers.role-comparison",
                 "source_refs": [
-                  "ooh-combined",
-                  "onet-summary"
+                  "onet-tasks",
+                  "onet-tooldie",
+                  "ooh-combined"
                 ]
               },
               {
-                "answer": "可观察信号：能读懂图纸与公差、能按基准与工艺排工序、能耐心测量与复核、能遵守安全与设备规程；机械师兴趣代码 RCI、工具和模具制造工 RC 只描述活动偏好，不能决定胜任或资格。",
+                "answer": "观察自己是否愿意反复查图纸版本、保留首件读数，并在偏差出现时先记录再交接。O*NET 将机加工工标为 RCI，将工具与模具制造工标为 RC。兴趣代码描述偏好的工作活动。",
                 "id": "machinists-and-tool-and-die-makers.faq.3",
                 "question": "什么信号说明我可能适合？",
                 "question_key": "career.faq.machinists-and-tool-and-die-makers.fit",
                 "source_refs": [
-                  "onet-tasks"
+                  "onet-summary",
+                  "onet-interest-tool-die"
                 ]
               },
               {
-                "answer": "CAM 编程、刀具路径优化、CAD 设计与在线测量工具可辅助生成程序、排布加工与汇总检验数据，但装夹找正、试切判断、装配修整、精度处置与安全操作仍由人负责；本页只把工具用途写成任务假设，不代表机构普遍采用。",
+                "answer": "文本工具可以尝试整理虚构工艺或检查记录。数控自动化和生成式 AI 的采用属于不同问题。图纸版本、首件判定、偏差放行及复工须由获授权人员依原件和现场程序确认。",
                 "id": "machinists-and-tool-and-die-makers.faq.4",
                 "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.machinists-and-tool-and-die-makers.ai-impact",
                 "source_refs": [
-                  "ilo-genai"
+                  "onet-tasks",
+                  "onet-tooldie",
+                  "ooh-combined"
                 ]
               },
               {
-                "answer": "必须由人负责的包括：确认图纸与规格、选择基准与工序、判定首件与过程检验结果、完成装配修整与试运行、处置偏差与不合格，以及如实记录加工与检验过程。",
+                "answer": "工艺或质量负责人按职责核图纸版本、首件结果与偏差处置。检修隔离和设备复工另按授权。",
                 "id": "machinists-and-tool-and-die-makers.faq.5",
                 "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.machinists-and-tool-and-die-makers.human-control",
                 "source_refs": [
-                  "internal-rubric"
+                  "onet-tasks",
+                  "onet-tooldie",
+                  "osha-energy-control"
                 ]
               },
               {
-                "answer": "国家统计局按行业门类发布城镇单位就业人员年平均工资，未单列本职业，因此无法建立可安全映射的全国职业工资中位数；页面仅展示行业代理并标明其为行业口径：2025 年制造业城镇非私营单位为 113,594 元/年、城镇私营单位为 76,055 元/年，全国城镇非私营单位合计为 129,441 元/年，均不等于本职业中位数或起薪，并使用人力资源社会保障部企业薪酬调查信息作为查询入口。",
+                "answer": "本页所核资料未取得中国大陆这两项职业的全国工资分布或同口径全国就业预测。 国家统计局 2025 年城镇制造业年平均工资：非私营单位 113,594 元，私营单位 76,055 元。行业均值覆盖制造业多工种。 济南起步区 2026 年 9 月发布的高能锐新数控车工招聘样本列识图、精密量具、首件自检和异常上报，标示 4,000–7,000 元／月。这是单个雇主的历史岗位报价。",
                 "id": "machinists-and-tool-and-die-makers.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.machinists-and-tool-and-die-makers.china-pay",
                 "source_refs": [
                   "nbs-wages",
-                  "mohrss-wage"
+                  "jinan-recruitment"
                 ]
               },
               {
-                "answer": "BLS 职业展望手册显示，该组合职业 2025 年中位年薪为 59,620 美元（约 28.66 美元/小时）；分职业中位为机械师 58,750 美元、工具和模具制造工 64,050 美元（2025 年 5 月）。这是美国全国统计口径，组合与分职业数字不得混用，也不含个人到手收入或起薪。",
+                "answer": "2025 年 5 月美国全国年薪中位数：BLS OOH 合并组 59,620 美元（时薪中位数 28.66 美元）；机加工工 51-4041 为 58,750 美元；工具与模具制造工 51-4111 为 64,050 美元。 合并组覆盖两个职业，未设单一 SOC 代码。下表逐项列两项明细职业的全国工资分位，合并组只列职业手册公布的中位数。OEWS 覆盖领薪雇员，实际报价按地区和雇主核对。",
                 "id": "machinists-and-tool-and-die-makers.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.machinists-and-tool-and-die-makers.us-pay",
                 "source_refs": [
-                  "ooh-combined"
+                  "ooh-combined",
+                  "onet-wages",
+                  "onet-wages-tool-die"
                 ]
               },
               {
-                "answer": "美国侧：机械师通常需要高中文凭即可入行，工具和模具制造工可能还需完成高等教育课程，相关职业属 Job Zone 3 并多通过长期在岗训练或学徒学习；认证与培训不等于设备操作或特种作业资格。中国大陆：无与该组合口径精确对应的统一职业资格，岗位多按雇主与行业要求确定。",
+                "answer": "BLS 表 1.2 将高中或同等学历列为机加工工典型入门学历，将高等教育非学位证书列为工具与模具制造工典型入门学历。两项职业均列长期在岗培训。BLS 职业手册还列学徒制和职业院校等路径。 济南起步区 2026 年 9 月发布的高能锐新数控车工招聘样本列识图、精密量具、首件自检和异常上报，标示 4,000–7,000 元／月。这是单个雇主的历史岗位报价。 中国大陆《安全生产法》第 28、30 条涉及安全培训及适用特种作业资格。第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。",
                 "id": "machinists-and-tool-and-die-makers.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.machinists-and-tool-and-die-makers.education-path",
                 "source_refs": [
-                  "onet-education",
-                  "ooh-combined"
+                  "ooh-combined",
+                  "bls-ep-2025-2035",
+                  "jinan-recruitment",
+                  "china-work-safety"
                 ]
               },
               {
-                "answer": "主要风险包括机械与刀具伤害、尺寸公差超差、装夹找正失误、图纸与规格理解偏差以及噪音与危险环境暴露；控制方式是确认图纸与工艺、按基准装夹并复核、按规程测量与防护，并在偏差时停止与上报；具体规则按雇主与适用法规核对。",
+                "answer": "在适用美国一般工业规则的场所，OSHA 29 CFR 1910.212 涉及加工点、旋转部件和飞屑等的机器防护。 OSHA 29 CFR 1910.147 适用于条文涵盖且存在意外启动或危险能量释放的检修维护。隔离确认、解除隔离及恢复供能按雇主程序，由受训的指定授权人员处理。实际复工依现场授权和通知程序。 中国大陆《安全生产法》第 28、30 条涉及安全培训及适用特种作业资格。第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。 防护缺失、设备异常或权限不明时，助手按现场规程停手、退出危险区并报告；操作、检修隔离和复工分别核指定授权。",
                 "id": "machinists-and-tool-and-die-makers.faq.9",
                 "question": "主要风险和控制边界是什么？",
                 "question_key": "career.faq.machinists-and-tool-and-die-makers.risk-boundary",
                 "source_refs": [
-                  "onet-tasks",
-                  "internal-rubric"
+                  "osha-machine-guarding",
+                  "osha-energy-control",
+                  "china-work-safety"
                 ]
               },
               {
-                "answer": "BLS 职业展望手册显示，该组合职业 2025 年岗位约 344,900 个，2025—2035 年预计下降约 1%，年均空缺约 30,400 个且均来自替换需求；这是职业统计，不等于个人录用概率。",
+                "answer": "BLS OOH 美国合并组 2025 年约 344,900 个岗位，2035 年预计约 342,700 个，预计下降 1%，年均约 30,400 个空缺，均预计来自人员替补。 BLS 表 1.2 的两项明细（2025—2035）：机加工工 51-4041 约 288,300 → 291,200，+1.0%，年均 26,100 个空缺；工具与模具制造工 51-4111 约 56,700 → 51,500，−9.2%，年均 4,300 个空缺。人数分别取整。 本页所核资料未取得中国大陆这两项职业的全国工资分布或同口径全国就业预测。 机加工工交付加工件，工具与模具制造工交付或修整工装。CNC 编程人员侧重程序，工业机械维修人员侧重设备故障；具体操作、质量放行和检修权限由工作场所分别确认。",
                 "id": "machinists-and-tool-and-die-makers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.machinists-and-tool-and-die-makers.outlook-transition",
                 "source_refs": [
-                  "ooh-combined"
+                  "ooh-combined",
+                  "bls-ep-2025-2035",
+                  "nbs-wages",
+                  "onet-tasks",
+                  "onet-tooldie"
                 ]
               },
               {
-                "answer": "若能读懂图纸与公差、耐心测量复核并在时间压力下保持精确，值得用一份完全虚构的零件图与公差要求做一次低成本的工艺与检验演练；转向工模具制造、数控编程或质量检测需要补足对应的工艺与责任证据。",
+                "answer": "到「入行与纸面试做」打开首件复核单，分别核对原题和单项变式。 观察自己是否愿意反复查图纸版本、保留首件读数，并在偏差出现时先记录再交接。O*NET 将机加工工标为 RCI，将工具与模具制造工标为 RC。兴趣代码描述偏好的工作活动。",
                 "id": "machinists-and-tool-and-die-makers.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.machinists-and-tool-and-die-makers.career-worth",
                 "source_refs": [
-                  "ooh-combined",
-                  "onet-summary"
+                  "paper-exercise",
+                  "onet-summary",
+                  "onet-interest-tool-die"
                 ]
               },
               {
-                "answer": "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格、安全与 AI 结论不得跨范围拼接。；机械加工工页面提供职业判断与工艺演练信息，不替代所在地法律、安全规程或其他专业意见。；任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。",
+                "answer": "题面只判断纸面记录。实际设备操作、隔离、质量放行与复工须按所在场所的分工和授权。 本页所核资料未取得中国大陆这两项职业的全国工资分布或同口径全国就业预测。",
                 "id": "machinists-and-tool-and-die-makers.faq.boundary",
                 "question": "页面使用边界是什么？",
-                "question_key": "career.faq.machinists-and-tool-and-die-makers.boundary"
+                "question_key": "career.faq.machinists-and-tool-and-die-makers.boundary",
+                "source_refs": [
+                  "paper-exercise",
+                  "nbs-wages",
+                  "china-work-safety",
+                  "osha-machine-guarding",
+                  "osha-energy-control"
+                ]
               }
             ]
           },
@@ -8450,26 +8571,24 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "提供机械师与工具和模具制造工组合口径的 2025 年中位工资、2025 年岗位数与 2025—2035 年展望。",
-                  "组合中位工资与分职业中位工资分别列出；展望为预测而非个人录用概率。"
+                  "BLS OOH 美国合并组 2025 年约 344,900 个岗位，2035 年预计约 342,700 个，预计下降 1%，年均约 30,400 个空缺，均预计来自人员替补。 2025 年 5 月美国全国年薪中位数：BLS OOH 合并组 59,620 美元（时薪中位数 28.66 美元）；机加工工 51-4041 为 58,750 美元；工具与模具制造工 51-4111 为 64,050 美元。"
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "ooh-combined",
                 "limitation": "组合口径含机械师与工具和模具制造工两类；不建立中国映射。",
                 "market": "美国",
-                "name": "Machinists and Tool and Die Makers（BLS 职业展望手册）",
-                "period": "2025 工资与 2025—2035 展望；查阅 2026-09-25",
-                "publisher": "U.S. Bureau of Labor Statistics, Occupational Outlook Handbook",
+                "name": "BLS 职业手册：机加工工与工具及模具制造工合并组",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "combined_group",
                 "url": "https://www.bls.gov/ooh/production/machinists-and-tool-and-die-makers.htm"
               },
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "提供 51-4041.00 的职业身份、官方描述、兴趣代码、Job Zone、技能与知识。",
-                  "该页工资与就业数据为 51-4041.00 口径。"
+                  "O*NET 51-4041.00 的机加工任务和兴趣代码 RCI。"
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "onet-summary",
@@ -8477,15 +8596,14 @@
                 "market": "美国",
                 "name": "O*NET 51-4041.00 机械师（摘要）",
                 "period": "O*NET 2026 职业档案；查阅 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-4041.00"
               },
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "提供计算尺寸公差、加工零件、测量检验、设置与操作机床、编写数控程序、阅读图纸、监控进给与转速、维护机床、装配与找正夹具等任务清单。",
-                  "任务样本不代表每个岗位执行全部任务。"
+                  "机加工工按图纸加工、测量和检验精密零件。"
                 ],
                 "evidence_type": "official occupation task list",
                 "id": "onet-tasks",
@@ -8493,7 +8611,7 @@
                 "market": "美国",
                 "name": "O*NET 51-4041.00 任务（Tasks）",
                 "period": "O*NET 2026 职业档案；查阅 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/51-4041.00#Tasks"
               },
@@ -8509,15 +8627,14 @@
                 "market": "美国",
                 "name": "O*NET 51-4041.00 工作情境（Work Context）",
                 "period": "O*NET 2026 职业档案；查阅 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/51-4041.00#WorkContext"
               },
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "提供工具和模具制造工分析规格、排布金属原料、设置并操作机床、装配与修理模具、夹具、量具与手工具的任务清单。",
-                  "样本职位包括模具机械师、工装修理工等；任务样本不代表每个岗位执行全部任务。"
+                  "工具与模具制造工制造、装配、试配和修整模具、夹具或量具。"
                 ],
                 "evidence_type": "official occupation detail",
                 "id": "onet-tooldie",
@@ -8525,41 +8642,35 @@
                 "market": "美国",
                 "name": "O*NET 51-4111.00 工具和模具制造工（Tasks）",
                 "period": "O*NET 2026 职业档案；查阅 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/51-4111.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "2025 BLS OEWS 机械师中位工资；该页为 51-4041.00 口径。",
-                  "本页未展示分位工资；不以推断值替代。"
+                  "美国全国五档年薪和时薪分位，统计源为 BLS OEWS。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "onet-wages",
-                "limitation": "本页未展示分位工资；中位数不代表起薪或个人到手收入。",
+                "limitation": "适用该明细职业。",
                 "market": "美国",
-                "name": "O*NET 51-4041.00 全国工资（BLS OEWS 展示）",
-                "period": "2025 BLS OEWS 工资数据；查阅 2026-09-25",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
-                "scope": "exact",
+                "name": "机加工工 51-4041 全国工资（BLS OEWS）",
+                "period": "2025-05",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "51-4041",
                 "url": "https://www.onetonline.org/link/localwages/51-4041.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "2024 年就业规模与 2024—2034 年增长与职位空缺预测；该页为 51-4041.00 口径。",
-                  "预测不是录用保证。"
+                  "BLS 表 1.2 的两项明细（2025—2035）：机加工工 51-4041 约 288,300 → 291,200，+1.0%，年均 26,100 个空缺；工具与模具制造工 51-4111 约 56,700 → 51,500，−9.2%，年均 4,300 个空缺。人数分别取整。"
                 ],
-                "evidence_type": "official employment data",
                 "id": "onet-trends",
-                "limitation": "预测不是录用保证；“变化不大”不等于个人机会不变。",
-                "market": "美国",
-                "name": "O*NET 51-4041.00 全国就业趋势",
-                "period": "2024—2034 预测；查阅 2026-09-25",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/51-4041.00"
+                "name": "BLS 表 1.2：两项明细职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8573,7 +8684,7 @@
                 "market": "美国",
                 "name": "Industries: 51-4041.00",
                 "period": "O*NET industry data current 2026; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/51-4041.00"
               },
@@ -8589,7 +8700,7 @@
                 "market": "美国",
                 "name": "O*NET 51-4041.00 教育与职业准备",
                 "period": "O*NET 2026 职业档案；查阅 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/51-4041.00#Education"
               },
@@ -8605,7 +8716,7 @@
                 "market": "美国",
                 "name": "National Certifications: 51-4041.00",
                 "period": "current page; accessed 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/51-4041.00"
               },
@@ -8626,84 +8737,169 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "提供城镇非私营与私营单位分行业门类年平均工资，用于核对中国工资公开口径。",
-                  "行业平均不是职业中位数，且不含个体工商户与自由职业者。"
+                  "国家统计局 2025 年城镇制造业年平均工资：非私营单位 113,594 元，私营单位 76,055 元。行业均值覆盖制造业多工种。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
                 "limitation": "行业平均不是职业中位数，且不含个体工商户与自由职业者；未建立与精确职业对应的全国工资分布。",
                 "market": "中国大陆全国口径",
-                "name": "2025年城镇单位就业人员年平均工资情况",
-                "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+                "name": "国家统计局：2025 年城镇单位就业人员年平均工资",
+                "period": "2025",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。",
-                  "覆盖城镇企业，不含机关事业单位；本页未取得与本职业精确对应的条目。"
+                  "国家统计局 2025 年城镇制造业年平均工资：非私营单位 113,594 元，私营单位 76,055 元。行业均值覆盖制造业多工种。"
                 ],
-                "evidence_type": "official enterprise wage survey",
+                "evidence_type": "official industry wage statistics",
                 "id": "mohrss-wage",
-                "limitation": "覆盖城镇企业，不含机关事业单位；本页未取得与本职业精确对应的条目，不作为全国中位数。",
-                "market": "中国大陆城镇企业",
-                "name": "企业薪酬调查信息（2024年）",
-                "period": "2024 年度；发布 2025-06；查阅 2026-09-25",
-                "publisher": "人力资源和社会保障部",
-                "scope": "parent_occupation_proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
+                "limitation": "行业平均不是职业中位数，且不含个体工商户与自由职业者；未建立与精确职业对应的全国工资分布。",
+                "market": "中国大陆全国口径",
+                "name": "国家统计局：2025 年城镇单位就业人员年平均工资",
+                "period": "2025",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。",
-                  "编辑量表不等于采用率、裁员、法规或证照证据。"
+                  "提供计算尺寸公差、加工零件、测量检验、设置与操作机床、编写数控程序、阅读图纸、监控进给与转速、维护机床、装配与找正夹具等任务清单。"
                 ],
-                "evidence_type": "internal task rubric",
+                "evidence_type": "official occupation task list",
                 "id": "internal-rubric",
-                "limitation": "编辑量表不等于采用率、裁员、法规或证照证据。",
-                "market": "全球任务层面",
-                "name": "FermatMind 机械加工工任务影响量表",
-                "period": "FermatMind task rubric v2026.09; reviewed 2026-09-25",
-                "publisher": "FermatMind",
-                "scope": "editorial_synthesis",
-                "url": null
+                "limitation": "任务样本不代表每个岗位执行全部任务；不建立中国映射。",
+                "market": "美国",
+                "name": "O*NET 51-4041.00 任务（Tasks）",
+                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-4041.00#Tasks"
               },
               {
-                "accessed_at": "2026-10-11",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "适用维修维护的危险能源控制与员工训练"
+                  "OSHA 29 CFR 1910.147 适用于条文涵盖且存在意外启动或危险能量释放的检修维护。隔离确认、解除隔离及恢复供能按雇主程序，由受训的指定授权人员处理。实际复工依现场授权和通知程序。"
                 ],
                 "evidence_type": "official safety standard",
                 "id": "osha-energy-control",
                 "limitation": "适用排除例外另核，不代全部生产、中国或完整机床规程",
                 "market": "美国",
-                "name": "OSHA1910.147 Control of hazardous energy",
-                "period": "当前，2026-10-11核查",
-                "publisher": "OSHA",
+                "name": "美国 OSHA 1910.147 危险能量控制",
+                "period": "29 CFR 1910.147",
+                "publisher": "U.S. Occupational Safety and Health Administration",
                 "scope": "美国受覆盖设备维修",
                 "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "确定工艺与编写数控程序 — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "装夹找正与机床加工 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "装配并修整工具与模具 — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                  "提供计算尺寸公差、加工零件、测量检验、设置与操作机床、编写数控程序、阅读图纸、监控进给与转速、维护机床、装配与找正夹具等任务清单。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "official occupation task list",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "任务样本不代表每个岗位执行全部任务；不建立中国映射。",
+                "market": "美国",
+                "name": "O*NET 51-4041.00 任务（Tasks）",
+                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-4041.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS 表 1.2 的两项明细（2025—2035）：机加工工 51-4041 约 288,300 → 291,200，+1.0%，年均 26,100 个空缺；工具与模具制造工 51-4111 约 56,700 → 51,500，−9.2%，年均 4,300 个空缺。人数分别取整。"
+                ],
+                "id": "bls-ep-2025-2035",
+                "name": "BLS 表 1.2：两项明细职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国全国五档年薪和时薪分位，统计源为 BLS OEWS。"
+                ],
+                "id": "onet-wages-tool-die",
+                "limitation": "适用该明细职业。",
+                "name": "工具与模具制造工 51-4111 全国工资（BLS OEWS）",
+                "period": "2025-05",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "51-4111",
+                "url": "https://www.onetonline.org/link/localwages/51-4111.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "济南起步区 2026 年 9 月发布的高能锐新数控车工招聘样本列识图、精密量具、首件自检和异常上报，标示 4,000–7,000 元／月。这是单个雇主的历史岗位报价。"
+                ],
+                "id": "jinan-recruitment",
+                "name": "济南起步区：2026 年 9 月招聘信息",
+                "period": "2026-09",
+                "publisher": "济南新旧动能转换起步区管理委员会",
+                "url": "https://jnxxq.jinan.gov.cn/col/col71555/art/2026/art_362743ff0660480badcf521e0dbc7bfc.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "在适用美国一般工业规则的场所，OSHA 29 CFR 1910.212 涉及加工点、旋转部件和飞屑等的机器防护。"
+                ],
+                "id": "osha-machine-guarding",
+                "name": "美国 OSHA 1910.212 机器防护",
+                "period": "29 CFR 1910.212",
+                "publisher": "U.S. Occupational Safety and Health Administration",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.212"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "中国大陆《安全生产法》第 28、30 条涉及安全培训及适用特种作业资格。第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。"
+                ],
+                "id": "china-work-safety",
+                "name": "中国大陆《安全生产法》",
+                "period": "2021",
+                "publisher": "全国人大常委会",
+                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "O*NET 51-4111.00 的工具与模具制造工兴趣代码为 RC。"
+                ],
+                "id": "onet-interest-tool-die",
+                "name": "O*NET 工具与模具制造工兴趣代码 RC",
+                "period": "2026-11-10",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "url": "https://www.onetonline.org/link/summary/51-4111.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "题面只判断纸面记录。实际设备操作、隔离、质量放行与复工须按所在场所的分工和授权。"
+                ],
+                "id": "paper-exercise",
+                "name": "打开首件纸面练习",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "做完两个题面后打开常见问题首条。"
+                ],
+                "id": "paper-answer-key",
+                "name": "纸面练习折叠参考解",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "url": "#career-content-sources"
               }
             ]
           },
@@ -9007,7 +9203,7 @@
             "问题": "AI 会取代机械加工工吗？"
           },
           {
-            "回答": "编辑试验候选：用虚构尺寸、装配与检验记录整理工艺说明。CAD、CAM及数控自动化不等于生成式AI采用；程序、装夹、首件、模具试用与质量处置由授权人员按目标工艺复核。",
+            "回答": "文本工具可以尝试整理虚构工艺或检查记录。数控自动化和生成式 AI 的采用属于不同问题。图纸版本、首件判定、偏差放行及复工须由获授权人员依原件和现场程序确认。",
             "来源": {
               "$source": "onet-tasks",
               "block": "source-register",
@@ -9255,12 +9451,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "编辑试验候选：用虚构尺寸、装配与检验记录整理工艺说明。CAD、CAM及数控自动化不等于生成式AI采用；程序、装夹、首件、模具试用与质量处置由授权人员按目标工艺复核。"
+          "到「入行与纸面试做」打开首件复核单，分别核对原题和单项变式。"
         ],
         "heading": "机械加工工的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "三路线为编辑目标非固定晋升，机加工、工具模具及数控编程分别核能力机型与工艺批准；组合页不要求每个人承担两个职业全部任务。",
+        "boundary": "题面只判断纸面记录。实际设备操作、隔离、质量放行与复工须按所在场所的分工和授权。",
         "competence_ladder": [
           {
             "description": "确认图纸、公差与工艺要求。",
@@ -9298,7 +9494,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "美国学徒/职校与在岗培训；中国大陆按雇主与法规要求核对",
+          "jurisdiction": "按中国大陆与美国的实际工作场所分别核对",
           "summary": {
             "$item": "machinists-and-tool-and-die-makers.path.career-path-block.3",
             "block": "path",
@@ -9324,79 +9520,97 @@
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "组合工资岗位与展望；不含个人录用概率。"
+            "scope": "BLS OOH 美国合并组 2025 年约 344,900 个岗位，2035 年预计约 342,700 个，预计下降 1%，年均约 30,400 个空缺，均预计来自人员替补。 2025 年 5 月美国全国年薪中位数：BLS OOH 合并组 59,620 美元（时薪中位数 28.66 美元）；机加工工 51-4041 为 58,750 美元；工具与模具制造工 51-4111 为 64,050 美元。"
           },
           {
             "href": {
-              "$source": "onet-education",
+              "$source": "bls-ep-2025-2035",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "id": "machinists-and-tool-and-die-makers.display.source.onet-education",
+            "id": "machinists-and-tool-and-die-makers.display.source.bls-ep-2025-2035",
             "label": {
-              "$source": "onet-education",
+              "$source": "bls-ep-2025-2035",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "教育与职业准备；不等于统一学历门槛。"
+            "scope": "BLS 表 1.2 的两项明细（2025—2035）：机加工工 51-4041 约 288,300 → 291,200，+1.0%，年均 26,100 个空缺；工具与模具制造工 51-4111 约 56,700 → 51,500，−9.2%，年均 4,300 个空缺。人数分别取整。"
           },
           {
             "href": {
-              "$source": "onet-cert",
+              "$source": "jinan-recruitment",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "id": "machinists-and-tool-and-die-makers.display.source.onet-cert",
+            "id": "machinists-and-tool-and-die-makers.display.source.jinan-recruitment",
             "label": {
-              "$source": "onet-cert",
+              "$source": "jinan-recruitment",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "认证查询入口；不等于设备操作授权。"
+            "scope": "济南起步区 2026 年 9 月发布的高能锐新数控车工招聘样本列识图、精密量具、首件自检和异常上报，标示 4,000–7,000 元／月。这是单个雇主的历史岗位报价。"
           },
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "china-work-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "id": "machinists-and-tool-and-die-makers.display.source.nbs-wages",
+            "id": "machinists-and-tool-and-die-makers.display.source.china-work-safety",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "china-work-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "中国行业工资口径；不等于本职业精确工资。"
+            "scope": "中国大陆《安全生产法》第 28、30 条涉及安全培训及适用特种作业资格。第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。"
           },
           {
             "href": {
-              "$source": "onet-summary",
+              "$source": "osha-machine-guarding",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "id": "machinists-and-tool-and-die-makers.display.source.onet-summary",
+            "id": "machinists-and-tool-and-die-makers.display.source.osha-machine-guarding",
             "label": {
-              "$source": "onet-summary",
+              "$source": "osha-machine-guarding",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "身份与范围。"
+            "scope": "在适用美国一般工业规则的场所，OSHA 29 CFR 1910.212 涉及加工点、旋转部件和飞屑等的机器防护。"
+          },
+          {
+            "href": {
+              "$source": "osha-energy-control",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "id": "machinists-and-tool-and-die-makers.display.source.osha-energy-control",
+            "label": {
+              "$source": "osha-energy-control",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "scope": "OSHA 29 CFR 1910.147 适用于条文涵盖且存在意外启动或危险能量释放的检修维护。隔离确认、解除隔离及恢复供能按雇主程序，由受训的指定授权人员处理。实际复工依现场授权和通知程序。"
           }
         ],
         "tracks": [
@@ -9617,7 +9831,7 @@
             }
           },
           {
-            "answer": "美国侧机械师通常需高中文凭即可入行，工具和模具制造工可能还需高等教育课程，相关职业属 Job Zone 3 并多通过长期在岗训练；认证与培训不等于设备操作或特种作业资格；本页不判断个人是否符合条件。",
+            "answer": "BLS 表 1.2 将高中或同等学历列为机加工工典型入门学历，将高等教育非学位证书列为工具与模具制造工典型入门学历。两项职业均列长期在岗培训。BLS 职业手册还列学徒制和职业院校等路径。 防护缺失、设备异常或权限不明时，助手按现场规程停手、退出危险区并报告；操作、检修隔离和复工分别核指定授权。",
             "key": "qa1",
             "question": "资格边界是什么？",
             "table": {
@@ -9665,14 +9879,14 @@
         "schema_version": "career.quick_answers.v1"
       },
       "career_risk_cards": {
-        "boundary": "最终工艺与质量处置由雇主规程、设备要求与适用法规确定；本页不替代安全规程或专业意见。",
+        "boundary": "中国大陆《安全生产法》第 28、30 条涉及安全培训及适用特种作业资格。第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。 防护缺失、设备异常或权限不明时，助手按现场规程停手、退出危险区并报告；操作、检修隔离和复工分别核指定授权。",
         "context_links": [
           {
             "href": "#career-visual-group-risk",
             "label": "查看风险模块"
           }
         ],
-        "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
+        "direct_answer": "在适用美国一般工业规则的场所，OSHA 29 CFR 1910.212 涉及加工点、旋转部件和飞屑等的机器防护。 OSHA 29 CFR 1910.147 适用于条文涵盖且存在意外启动或危险能量释放的检修维护。隔离确认、解除隔离及恢复供能按雇主程序，由受训的指定授权人员处理。实际复工依现场授权和通知程序。",
         "evidence_scope": "两职业机床、公差、装夹、规格、噪声及异常任务形成编辑风险，非事故率；适用美国维修能源控制核1910.147，设备防护及中国规则另核。",
         "heading": "机械加工工的工作风险与边界",
         "risks": [
@@ -9680,10 +9894,11 @@
             "affected_roles": "机床操作岗位",
             "consequence": "可能造成机械与刀具伤害。",
             "evidence_refs": [
-              "machinists-and-tool-and-die-makers.display.source.onet-context"
+              "machinists-and-tool-and-die-makers.display.source.osha-machine-guarding",
+              "machinists-and-tool-and-die-makers.display.source.china-work-safety"
             ],
             "id": "risk-1",
-            "mitigation": "按规程操作并穿戴防护。",
+            "mitigation": "防护缺失、设备异常或权限不明时，助手按现场规程停手、退出危险区并报告；操作、检修隔离和复工分别核指定授权。",
             "scenario": "未按规程操作机床或未穿戴防护时。",
             "title": {
               "$item": "machinists-and-tool-and-die-makers.risk.career-risk-cards.1",
@@ -9696,10 +9911,11 @@
             "affected_roles": "加工与检验岗位",
             "consequence": "可能导致尺寸超差与报废。",
             "evidence_refs": [
-              "machinists-and-tool-and-die-makers.display.source.onet-tasks"
+              "machinists-and-tool-and-die-makers.display.source.onet-tasks",
+              "machinists-and-tool-and-die-makers.display.source.onet-tooldie"
             ],
             "id": "risk-2",
-            "mitigation": "核对基准、首件检验后再加工。",
+            "mitigation": "保留实测值，交质量负责人按批准图纸复核。",
             "scenario": "未核对基准与参数即加工时。",
             "title": {
               "$item": "machinists-and-tool-and-die-makers.risk.career-risk-cards.2",
@@ -9712,10 +9928,12 @@
             "affected_roles": "装夹与加工岗位",
             "consequence": "可能造成偏差与安全隐患。",
             "evidence_refs": [
-              "machinists-and-tool-and-die-makers.display.source.onet-tasks"
+              "machinists-and-tool-and-die-makers.display.source.osha-machine-guarding",
+              "machinists-and-tool-and-die-makers.display.source.onet-tasks",
+              "machinists-and-tool-and-die-makers.display.source.onet-tooldie"
             ],
             "id": "risk-3",
-            "mitigation": "按基准装夹并复核紧固。",
+            "mitigation": "工装或夹持异常时停手报告，交具备该设备授权的人员核查。",
             "scenario": "装夹或找正不牢时。",
             "title": {
               "$item": "machinists-and-tool-and-die-makers.risk.career-risk-cards.3",
@@ -9728,10 +9946,11 @@
             "affected_roles": "工艺与编程岗位",
             "consequence": "可能批量加工错误。",
             "evidence_refs": [
-              "machinists-and-tool-and-die-makers.display.source.onet-tasks"
+              "machinists-and-tool-and-die-makers.display.source.onet-tasks",
+              "machinists-and-tool-and-die-makers.display.source.onet-tooldie"
             ],
             "id": "risk-4",
-            "mitigation": "读图复核并与工艺确认。",
+            "mitigation": "核对批准图纸版本并保留差异，交工艺负责人。",
             "scenario": "图纸或规格理解偏差时。",
             "title": {
               "$item": "machinists-and-tool-and-die-makers.risk.career-risk-cards.4",
@@ -9744,10 +9963,11 @@
             "affected_roles": "现场作业岗位",
             "consequence": "可能造成人身伤害。",
             "evidence_refs": [
-              "machinists-and-tool-and-die-makers.display.source.onet-context"
+              "machinists-and-tool-and-die-makers.display.source.onet-context",
+              "machinists-and-tool-and-die-makers.display.source.ooh-combined"
             ],
             "id": "risk-5",
-            "mitigation": "遵守防护与作业许可要求。",
+            "mitigation": "按现场噪声与作业区要求核防护。",
             "scenario": "在噪音或危险设备环境未防护时。",
             "title": {
               "$item": "machinists-and-tool-and-die-makers.risk.career-risk-cards.5",
@@ -9760,10 +9980,11 @@
             "affected_roles": "机床操作岗位",
             "consequence": "可能造成批量废品与安全问题。",
             "evidence_refs": [
-              "machinists-and-tool-and-die-makers.display.source.onet-tasks"
+              "machinists-and-tool-and-die-makers.display.source.osha-energy-control",
+              "machinists-and-tool-and-die-makers.display.source.china-work-safety"
             ],
             "id": "risk-6",
-            "mitigation": "按机床批准异常规程停止相关危险作业并报告；维修清堵交目标授权人员核能源控制，不把停机按钮作隔离，不旁路防护。",
+            "mitigation": "防护缺失、设备异常或权限不明时，助手按现场规程停手、退出危险区并报告；操作、检修隔离和复工分别核指定授权。 OSHA 29 CFR 1910.147 适用于条文涵盖且存在意外启动或危险能量释放的检修维护。隔离确认、解除隔离及恢复供能按雇主程序，由受训的指定授权人员处理。实际复工依现场授权和通知程序。",
             "scenario": "发现刀具磨损或设备异常仍继续加工时。",
             "title": "设备或刀具异常未停止即处置"
           }
@@ -9772,39 +9993,57 @@
         "source_links": [
           {
             "href": {
-              "$source": "onet-tasks",
+              "$source": "osha-machine-guarding",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "id": "machinists-and-tool-and-die-makers.display.source.onet-tasks",
+            "id": "machinists-and-tool-and-die-makers.display.source.osha-machine-guarding",
             "label": {
-              "$source": "onet-tasks",
+              "$source": "osha-machine-guarding",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "任务清单；仅用于提出风险假设。"
+            "scope": "在适用美国一般工业规则的场所，OSHA 29 CFR 1910.212 涉及加工点、旋转部件和飞屑等的机器防护。"
           },
           {
             "href": {
-              "$source": "onet-tooldie",
+              "$source": "osha-energy-control",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "id": "machinists-and-tool-and-die-makers.display.source.onet-tooldie",
+            "id": "machinists-and-tool-and-die-makers.display.source.osha-energy-control",
             "label": {
-              "$source": "onet-tooldie",
+              "$source": "osha-energy-control",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "工模具任务与范围；仅用于提出风险假设。"
+            "scope": "OSHA 29 CFR 1910.147 适用于条文涵盖且存在意外启动或危险能量释放的检修维护。隔离确认、解除隔离及恢复供能按雇主程序，由受训的指定授权人员处理。实际复工依现场授权和通知程序。"
+          },
+          {
+            "href": {
+              "$source": "china-work-safety",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "id": "machinists-and-tool-and-die-makers.display.source.china-work-safety",
+            "label": {
+              "$source": "china-work-safety",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "scope": "中国大陆《安全生产法》第 28、30 条涉及安全培训及适用特种作业资格。第 55 条规定直接危及人身安全的紧急情形下停工或撤离的权利。"
           },
           {
             "href": {
@@ -9822,7 +10061,43 @@
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "工作情境；仅用于提出风险假设。"
+            "scope": "描述防护装备使用、手部操作、精确性要求、站立、设备节拍、时间压力、危险设备与噪音等情境。"
+          },
+          {
+            "href": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "id": "machinists-and-tool-and-die-makers.display.source.onet-tasks",
+            "label": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "scope": "机加工工按图纸加工、测量和检验精密零件。"
+          },
+          {
+            "href": {
+              "$source": "onet-tooldie",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "id": "machinists-and-tool-and-die-makers.display.source.onet-tooldie",
+            "label": {
+              "$source": "onet-tooldie",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "scope": "工具与模具制造工制造、装配、试配和修整模具、夹具或量具。"
           },
           {
             "href": {
@@ -9840,7 +10115,7 @@
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "组合工资就业；不替代安全规程。"
+            "scope": "BLS OOH 美国合并组 2025 年约 344,900 个岗位，2035 年预计约 342,700 个，预计下降 1%，年均约 30,400 个空缺，均预计来自人员替补。 2025 年 5 月美国全国年薪中位数：BLS OOH 合并组 59,620 美元（时薪中位数 28.66 美元）；机加工工 51-4041 为 58,750 美元；工具与模具制造工 51-4111 为 64,050 美元。"
           }
         ]
       },
@@ -9848,19 +10123,308 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "中国大陆职业工资",
-              "数值": "证据不足：未单列",
-              "说明": "当前NBS行业资料未建立组合职业单列对应，不表示所有公开渠道无数据。"
+              "指标": "第 10 百分位",
+              "数值": "机加工工 51-4041 · 39,200 美元／年 · 18.85 美元／时 / 工具与模具制造工 51-4111 · 44,680 美元／年 · 21.48 美元／时",
+              "说明": {
+                "$join": [
+                  {
+                    "$source": "onet-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "onet-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "；",
+                  {
+                    "$source": "onet-wages-tool-die",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "onet-wages-tool-die",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  }
+                ],
+                "separator": ""
+              }
             },
             {
-              "指标": "中国大陆行业代理",
-              "数值": "见行业表",
-              "说明": "制造业为宽行业代理，不等于本职业工资。"
+              "指标": "第 25 百分位",
+              "数值": "机加工工 51-4041 · 47,570 美元／年 · 22.87 美元／时 / 工具与模具制造工 51-4111 · 51,490 美元／年 · 24.75 美元／时",
+              "说明": {
+                "$join": [
+                  {
+                    "$source": "onet-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "onet-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "；",
+                  {
+                    "$source": "onet-wages-tool-die",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "onet-wages-tool-die",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  }
+                ],
+                "separator": ""
+              }
             },
             {
-              "指标": "美国职业统计",
-              "数值": "见美国工资表",
-              "说明": "为组合口径，不能跨市场或跨分职业拼接。"
+              "指标": "第 50 百分位（中位数）",
+              "数值": "机加工工 51-4041 · 58,750 美元／年 · 28.24 美元／时 / 工具与模具制造工 51-4111 · 64,050 美元／年 · 30.79 美元／时",
+              "说明": {
+                "$join": [
+                  {
+                    "$source": "onet-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "onet-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "；",
+                  {
+                    "$source": "onet-wages-tool-die",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "onet-wages-tool-die",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  }
+                ],
+                "separator": ""
+              }
+            },
+            {
+              "指标": "第 75 百分位",
+              "数值": "机加工工 51-4041 · 67,700 美元／年 · 32.55 美元／时 / 工具与模具制造工 51-4111 · 78,770 美元／年 · 37.87 美元／时",
+              "说明": {
+                "$join": [
+                  {
+                    "$source": "onet-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "onet-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "；",
+                  {
+                    "$source": "onet-wages-tool-die",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "onet-wages-tool-die",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  }
+                ],
+                "separator": ""
+              }
+            },
+            {
+              "指标": "第 90 百分位",
+              "数值": "机加工工 51-4041 · 80,010 美元／年 · 38.47 美元／时 / 工具与模具制造工 51-4111 · 92,680 美元／年 · 44.56 美元／时",
+              "说明": {
+                "$join": [
+                  {
+                    "$source": "onet-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "onet-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "；",
+                  {
+                    "$source": "onet-wages-tool-die",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "onet-wages-tool-die",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  }
+                ],
+                "separator": ""
+              }
+            },
+            {
+              "指标": "合并组就业与空缺",
+              "数值": "BLS OOH 美国合并组 2025 年约 344,900 个岗位，2035 年预计约 342,700 个，预计下降 1%，年均约 30,400 个空缺，均预计来自人员替补。",
+              "说明": {
+                "$join": [
+                  {
+                    "$source": "ooh-combined",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "ooh-combined",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  }
+                ],
+                "separator": ""
+              }
+            },
+            {
+              "指标": "明细职业就业与空缺",
+              "数值": "BLS 表 1.2 的两项明细（2025—2035）：机加工工 51-4041 约 288,300 → 291,200，+1.0%，年均 26,100 个空缺；工具与模具制造工 51-4111 约 56,700 → 51,500，−9.2%，年均 4,300 个空缺。人数分别取整。",
+              "说明": {
+                "$join": [
+                  {
+                    "$source": "bls-ep-2025-2035",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "bls-ep-2025-2035",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  }
+                ],
+                "separator": ""
+              }
+            },
+            {
+              "指标": "合并组工资中位数",
+              "数值": "2025 年 5 月美国全国年薪中位数：BLS OOH 合并组 59,620 美元（时薪中位数 28.66 美元）；机加工工 51-4041 为 58,750 美元；工具与模具制造工 51-4111 为 64,050 美元。",
+              "说明": {
+                "$join": [
+                  {
+                    "$source": "ooh-combined",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "ooh-combined",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "；",
+                  {
+                    "$source": "onet-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "onet-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "；",
+                  {
+                    "$source": "onet-wages-tool-die",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "onet-wages-tool-die",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                  }
+                ],
+                "separator": ""
+              }
             }
           ],
           "china_ai_row": {
@@ -9937,40 +10501,21 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "本轮未建立本组合中国单列工资对应；制造行业代理不等于职业中位或到手。",
-          "china_ref": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
-          "china_salary_note": "中国大陆行业口径与美国组合统计分开，不能跨市场拼接。",
+          "china_open": "本页所核资料未取得中国大陆这两项职业的全国工资分布或同口径全国就业预测。",
+          "china_ref": "国家统计局 2025 年城镇制造业年平均工资：非私营单位 113,594 元，私营单位 76,055 元。行业均值覆盖制造业多工种。",
+          "china_salary_note": "国家统计局 2025 年城镇制造业年平均工资：非私营单位 113,594 元，私营单位 76,055 元。行业均值覆盖制造业多工种。 济南起步区 2026 年 9 月发布的高能锐新数控车工招聘样本列识图、精密量具、首件自检和异常上报，标示 4,000–7,000 元／月。这是单个雇主的历史岗位报价。",
           "china_salary_table": [
             {
-              "城市/区间": "全国·制造业（非私营）",
-              "月薪参考": "仅发布年平均工资"
+              "城市/区间": "制造业 · 城镇非私营",
+              "年工资参照（行业/岗位大类）": "113,594 元／年"
             },
             {
-              "城市/区间": "全国·制造业（私营）",
-              "月薪参考": "仅发布年平均工资"
+              "城市/区间": "制造业 · 城镇私营",
+              "年工资参照（行业/岗位大类）": "76,055 元／年"
             },
             {
-              "城市/区间": "本职业精确工资",
-              "月薪参考": "证据不足：未单列"
+              "城市/区间": "全国职业分布",
+              "年工资参照（行业/岗位大类）": "本页所核资料未取得中国大陆这两项职业的全国工资分布或同口径全国就业预测。"
             }
           ],
           "china_soc_row": {
@@ -9979,43 +10524,72 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": {
-            "$join": [
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-              },
-              "｜",
-              {
-                "$source": "nbs-wages",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-              }
-            ],
-            "separator": ""
-          },
+          "sources_note": "本页所核资料未取得中国大陆这两项职业的全国工资分布或同口径全国就业预测。",
           "ui": {
             "ai_heading": "AI 与薪资判断边界",
             "driver_heading": "影响因素",
-            "official_heading": "官方统计口径",
+            "official_heading": "2025 年城镇制造业年平均工资",
             "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
             "scenario_heading": "情景化参考",
             "scenario_interpretation_label": "解释",
             "scenario_role_label": "岗位范围",
             "scenario_value_label": "参考值"
           },
-          "us_growth": "不适用本地口径",
-          "us_median": "不适用本地口径"
+          "us_growth": "BLS OOH 美国合并组 2025 年约 344,900 个岗位，2035 年预计约 342,700 个，预计下降 1%，年均约 30,400 个空缺，均预计来自人员替补。 BLS 表 1.2 的两项明细（2025—2035）：机加工工 51-4041 约 288,300 → 291,200，+1.0%，年均 26,100 个空缺；工具与模具制造工 51-4111 约 56,700 → 51,500，−9.2%，年均 4,300 个空缺。人数分别取整。",
+          "us_median": "2025 年 5 月美国全国年薪中位数：BLS OOH 合并组 59,620 美元（时薪中位数 28.66 美元）；机加工工 51-4041 为 58,750 美元；工具与模具制造工 51-4111 为 64,050 美元。"
         }
       },
       "career_snapshot_secondary_locale": {
         "authority_sources": {
           "$join": [
+            {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "；",
+            {
+              "$source": "onet-wages-tool-die",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "onet-wages-tool-die",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "；",
+            {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "；",
             {
               "$source": "ooh-combined",
               "block": "source-register",
@@ -10036,8 +10610,208 @@
         },
         "bls_table": [
           {
-            "指标": "薪资 · 组合中位",
-            "数值": "$59,620/年（2025）",
+            "指标": "第 10 百分位",
+            "数值": "机加工工 51-4041 · 39,200 美元／年 · 18.85 美元／时 / 工具与模具制造工 51-4111 · 44,680 美元／年 · 21.48 美元／时",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "onet-wages-tool-die",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages-tool-die",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "第 25 百分位",
+            "数值": "机加工工 51-4041 · 47,570 美元／年 · 22.87 美元／时 / 工具与模具制造工 51-4111 · 51,490 美元／年 · 24.75 美元／时",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "onet-wages-tool-die",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages-tool-die",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "第 50 百分位（中位数）",
+            "数值": "机加工工 51-4041 · 58,750 美元／年 · 28.24 美元／时 / 工具与模具制造工 51-4111 · 64,050 美元／年 · 30.79 美元／时",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "onet-wages-tool-die",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages-tool-die",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "第 75 百分位",
+            "数值": "机加工工 51-4041 · 67,700 美元／年 · 32.55 美元／时 / 工具与模具制造工 51-4111 · 78,770 美元／年 · 37.87 美元／时",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "onet-wages-tool-die",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages-tool-die",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "第 90 百分位",
+            "数值": "机加工工 51-4041 · 80,010 美元／年 · 38.47 美元／时 / 工具与模具制造工 51-4111 · 92,680 美元／年 · 44.56 美元／时",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "onet-wages-tool-die",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages-tool-die",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "合并组就业与空缺",
+            "数值": "BLS OOH 美国合并组 2025 年约 344,900 个岗位，2035 年预计约 342,700 个，预计下降 1%，年均约 30,400 个空缺，均预计来自人员替补。",
             "说明": {
               "$join": [
                 {
@@ -10060,8 +10834,32 @@
             }
           },
           {
-            "指标": "薪资 · 组合小时中位",
-            "数值": "$28.66/小时（2025）",
+            "指标": "明细职业就业与空缺",
+            "数值": "BLS 表 1.2 的两项明细（2025—2035）：机加工工 51-4041 约 288,300 → 291,200，+1.0%，年均 26,100 个空缺；工具与模具制造工 51-4111 约 56,700 → 51,500，−9.2%，年均 4,300 个空缺。人数分别取整。",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "bls-ep-2025-2035",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-ep-2025-2035",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "合并组工资中位数",
+            "数值": "2025 年 5 月美国全国年薪中位数：BLS OOH 合并组 59,620 美元（时薪中位数 28.66 美元）；机加工工 51-4041 为 58,750 美元；工具与模具制造工 51-4111 为 64,050 美元。",
             "说明": {
               "$join": [
                 {
@@ -10078,18 +10876,10 @@
                   "copy_key": "career.item.published-sources",
                   "field": "url",
                   "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
-          },
-          {
-            "指标": "薪资 · 机械师中位",
-            "数值": "$58,750/年（2025）",
-            "说明": {
-              "$join": [
+                },
+                "；",
                 {
-                  "$source": "ooh-combined",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10097,23 +10887,15 @@
                 },
                 "｜",
                 {
-                  "$source": "ooh-combined",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
                   "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
-          },
-          {
-            "指标": "薪资 · 工具和模具制造工中位",
-            "数值": "$64,050/年（2025）",
-            "说明": {
-              "$join": [
+                },
+                "；",
                 {
-                  "$source": "ooh-combined",
+                  "$source": "onet-wages-tool-die",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10121,103 +10903,7 @@
                 },
                 "｜",
                 {
-                  "$source": "ooh-combined",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
-          },
-          {
-            "指标": "薪资 · 组合分位",
-            "数值": "本轮未取得组合分位，两子职业分位不可混用",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "ooh-combined",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "ooh-combined",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
-          },
-          {
-            "指标": "就业 · 规模",
-            "数值": "344,900 人（2025）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "ooh-combined",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "ooh-combined",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
-          },
-          {
-            "指标": "就业 · 展望",
-            "数值": "下降约 1%（2025—2035）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "ooh-combined",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "ooh-combined",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
-          },
-          {
-            "指标": "就业 · 空缺",
-            "数值": "约 30,400 个/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "ooh-combined",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "ooh-combined",
+                  "$source": "onet-wages-tool-die",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10228,7 +10914,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资与就业来自 BLS 职业展望手册的「机械师与工具和模具制造工」组合（2025 工资、2025—2035 展望），分职业中位单列；不含个人到手收入、起薪或录用结论。",
+        "boundary": "合并组覆盖两个职业，未设单一 SOC 代码。下表逐项列两项明细职业的全国工资分位，合并组只列职业手册公布的中位数。OEWS 覆盖领薪雇员，实际报价按地区和雇主核对。",
         "direct_answer": {
           "$item": "machinists-and-tool-and-die-makers.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10255,7 +10941,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "下降约 1%（2025—2035）",
+        "growth": "BLS OOH 美国合并组 2025 年约 344,900 个岗位，2035 年预计约 342,700 个，预计下降 1%，年均约 30,400 个空缺，均预计来自人员替补。 BLS 表 1.2 的两项明细（2025—2035）：机加工工 51-4041 约 288,300 → 291,200，+1.0%，年均 26,100 个空缺；工具与模具制造工 51-4111 约 56,700 → 51,500，−9.2%，年均 4,300 个空缺。人数分别取整。",
         "heading": {
           "$item": "machinists-and-tool-and-die-makers.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10300,30 +10986,30 @@
         },
         "interpretation_rows": [
           {
-            "answer": "2025组合中位59620；机械师58750、工具模具64050分别使用。两子职业分位已公开，本轮未取得组合分位，不能混用。",
+            "answer": "2025 年 5 月美国全国年薪中位数：BLS OOH 合并组 59,620 美元（时薪中位数 28.66 美元）；机加工工 51-4041 为 58,750 美元；工具与模具制造工 51-4111 为 64,050 美元。",
             "question": "工资"
           },
           {
-            "answer": "2025 年组合岗位数，不是招聘职位数。",
+            "answer": "BLS OOH 美国合并组 2025 年约 344,900 个岗位，2035 年预计约 342,700 个，预计下降 1%，年均约 30,400 个空缺，均预计来自人员替补。",
             "question": "就业"
           },
           {
-            "answer": "2025—2035 预测下降约 1%，是职业统计，不是个人录用结果。",
+            "answer": "BLS 表 1.2 的两项明细（2025—2035）：机加工工 51-4041 约 288,300 → 291,200，+1.0%，年均 26,100 个空缺；工具与模具制造工 51-4111 约 56,700 → 51,500，−9.2%，年均 4,300 个空缺。人数分别取整。",
             "question": "展望"
           },
           {
-            "answer": "相关职业按 O*NET/BLS 行业口径列为制造业，不等于全部从业者收入。",
+            "answer": "行业工资按职业和行业分别列示。",
             "question": "行业"
           }
         ],
-        "median": "$59,620/年（2025）",
+        "median": "2025 年 5 月美国全国年薪中位数：BLS OOH 合并组 59,620 美元（时薪中位数 28.66 美元）；机加工工 51-4041 为 58,750 美元；工具与模具制造工 51-4111 为 64,050 美元。",
         "outlook_heading": "就业展望与职位空缺",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
           "分位",
-          "年度参考",
-          "小时等值",
-          "解释"
+          "机加工工 51-4041",
+          "工具与模具制造工 51-4111",
+          "统计口径"
         ],
         "wage_heading": {
           "$item": "machinists-and-tool-and-die-makers.us-salary.career-snapshot-secondary-locale.3",
@@ -10333,22 +11019,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "—",
-            "interpretation": "机械师及工具模具制造工单独分位已公开，不能填入组合。",
-            "label": "第10百分位",
-            "value": "组合分位本轮未取得"
+            "equivalent": "44,680 美元／年 · 21.48 美元／时",
+            "interpretation": "BLS OEWS 两项明细职业全国分布",
+            "label": "第 10 百分位",
+            "value": "39,200 美元／年 · 18.85 美元／时"
           },
           {
-            "equivalent": "$28.66/小时",
-            "interpretation": "BLS OOH 2025 组合年薪中位（机械师与工具和模具制造工）。",
-            "label": "中位数（50%）",
-            "value": "$59,620/年"
+            "equivalent": "51,490 美元／年 · 24.75 美元／时",
+            "interpretation": "BLS OEWS 两项明细职业全国分布",
+            "label": "第 25 百分位",
+            "value": "47,570 美元／年 · 22.87 美元／时"
           },
           {
-            "equivalent": "—",
-            "interpretation": "机械师及工具模具制造工单独分位已公开，不能填入组合。",
-            "label": "第90百分位",
-            "value": "组合分位本轮未取得"
+            "equivalent": "64,050 美元／年 · 30.79 美元／时",
+            "interpretation": "BLS OEWS 两项明细职业全国分布",
+            "label": "第 50 百分位（中位数）",
+            "value": "58,750 美元／年 · 28.24 美元／时"
+          },
+          {
+            "equivalent": "78,770 美元／年 · 37.87 美元／时",
+            "interpretation": "BLS OEWS 两项明细职业全国分布",
+            "label": "第 75 百分位",
+            "value": "67,700 美元／年 · 32.55 美元／时"
+          },
+          {
+            "equivalent": "92,680 美元／年 · 44.56 美元／时",
+            "interpretation": "BLS OEWS 两项明细职业全国分布",
+            "label": "第 90 百分位",
+            "value": "80,010 美元／年 · 38.47 美元／时"
           }
         ]
       },
@@ -10382,7 +11080,7 @@
         "title": "机械加工工适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是完全虚构的零件加工情境核对，不是人格诊断、录用结论或资格评估。",
+        "boundary": "题面只判断纸面记录。实际设备操作、隔离、质量放行与复工须按所在场所的分工和授权。",
         "how": {
           "$item": "machinists-and-tool-and-die-makers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10433,7 +11131,8 @@
             "interpretation": "岗位规模、展望与空缺必须分别解释。",
             "limitation": "为职业统计，不能作为个人就业保证。",
             "metric": "岗位规模与展望",
-            "occupation_scope": "组合口径：Machinists and Tool and Die Makers",
+            "occupation_scope": "BLS OOH 美国合并组",
+            "source_id": "machinists-and-tool-and-die-makers.display.source.ooh-combined",
             "value": {
               "$item": "machinists-and-tool-and-die-makers.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -10447,8 +11146,9 @@
             "interpretation": "为 2025—2035 年年均合计，均来自替换需求，不等于在招岗位数。",
             "limitation": "不能作为个人录用概率。",
             "metric": "职位空缺（年均）",
-            "occupation_scope": "组合口径：Machinists and Tool and Die Makers",
-            "value": "约 30,400 个/年"
+            "occupation_scope": "BLS OOH 美国合并组",
+            "source_id": "machinists-and-tool-and-die-makers.display.source.ooh-combined",
+            "value": "约 30,400 个／年"
           },
           {
             "geography": "美国全国",
@@ -10456,8 +11156,9 @@
             "interpretation": "为 BLS OOH 2025 组合中位，不代表起薪或到手收入。",
             "limitation": "本轮未取得组合分位；子职业分位不得混用，不含个人到手。",
             "metric": "组合年薪中位",
-            "occupation_scope": "组合口径：Machinists and Tool and Die Makers",
-            "value": "$59,620/年"
+            "occupation_scope": "BLS OOH 美国合并组",
+            "source_id": "machinists-and-tool-and-die-makers.display.source.ooh-combined",
+            "value": "59,620 美元／年"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -10478,61 +11179,97 @@
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "组合工资岗位与展望；不提供个人录用概率。"
+            "scope": "BLS OOH 美国合并组 2025 年约 344,900 个岗位，2035 年预计约 342,700 个，预计下降 1%，年均约 30,400 个空缺，均预计来自人员替补。 2025 年 5 月美国全国年薪中位数：BLS OOH 合并组 59,620 美元（时薪中位数 28.66 美元）；机加工工 51-4041 为 58,750 美元；工具与模具制造工 51-4111 为 64,050 美元。"
           },
           {
             "href": {
-              "$source": "onet-industry",
+              "$source": "bls-ep-2025-2035",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "id": "machinists-and-tool-and-die-makers.display.source.onet-industry",
+            "id": "machinists-and-tool-and-die-makers.display.source.bls-ep-2025-2035",
             "label": {
-              "$source": "onet-industry",
+              "$source": "bls-ep-2025-2035",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "行业分布；不等于需求预测。"
+            "scope": "BLS 表 1.2 的两项明细（2025—2035）：机加工工 51-4041 约 288,300 → 291,200，+1.0%，年均 26,100 个空缺；工具与模具制造工 51-4111 约 56,700 → 51,500，−9.2%，年均 4,300 个空缺。人数分别取整。"
           },
           {
             "href": {
-              "$source": "onet-summary",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "id": "machinists-and-tool-and-die-makers.display.source.onet-summary",
+            "id": "machinists-and-tool-and-die-makers.display.source.onet-wages",
             "label": {
-              "$source": "onet-summary",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "身份与范围；不提供个人录用概率。"
+            "scope": "美国全国五档年薪和时薪分位，统计源为 BLS OEWS。"
           },
           {
             "href": {
-              "$source": "onet-tasks",
+              "$source": "onet-wages-tool-die",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "id": "machinists-and-tool-and-die-makers.display.source.onet-tasks",
+            "id": "machinists-and-tool-and-die-makers.display.source.onet-wages-tool-die",
             "label": {
-              "$source": "onet-tasks",
+              "$source": "onet-wages-tool-die",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "machinists-and-tool-and-die-makers.source-register.published.1"
             },
-            "scope": "任务与工作情境；仅用于提出转型假设。"
+            "scope": "美国全国五档年薪和时薪分位，统计源为 BLS OEWS。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "id": "machinists-and-tool-and-die-makers.display.source.nbs-wages",
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "scope": "国家统计局 2025 年城镇制造业年平均工资：非私营单位 113,594 元，私营单位 76,055 元。行业均值覆盖制造业多工种。"
+          },
+          {
+            "href": {
+              "$source": "jinan-recruitment",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "id": "machinists-and-tool-and-die-makers.display.source.jinan-recruitment",
+            "label": {
+              "$source": "jinan-recruitment",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machinists-and-tool-and-die-makers.source-register.published.1"
+            },
+            "scope": "济南起步区 2026 年 9 月发布的高能锐新数控车工招聘样本列识图、精密量具、首件自检和异常上报，标示 4,000–7,000 元／月。这是单个雇主的历史岗位报价。"
           }
         ],
         "transitions": [
@@ -10624,10 +11361,10 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
+            "cta_label": "职业兴趣",
             "evidence_level": "工作样本",
             "id": "riasec",
-            "label": "RIASEC",
+            "label": "职业兴趣",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
               "可观察任务",
@@ -10642,11 +11379,11 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
+            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_label": "大五人格测评",
             "evidence_level": "工作样本",
             "id": "big-five",
-            "label": "大五人格",
+            "label": "大五人格测评",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
               "可观察任务",
@@ -10661,11 +11398,11 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
+            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "MBTI 偏好测评",
             "evidence_level": "工作样本",
             "id": "mbti",
-            "label": "MBTI",
+            "label": "MBTI 偏好测评",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
               "可观察任务",
@@ -10675,11 +11412,11 @@
           },
           {
             "answer": "需要结合真实任务、精度边界和可复核交付继续核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
+            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_label": "九型动机探索",
             "evidence_level": "工作样本",
             "id": "enneagram",
-            "label": "九型人格",
+            "label": "九型动机探索",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
               "可观察任务",
@@ -10688,12 +11425,12 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "需要结合真实任务、精度边界和可复核交付继续核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
+            "answer": "用矩阵题体验图形规律推理。",
+            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_label": "矩阵推理",
             "evidence_level": "工作样本",
             "id": "iq",
-            "label": "认知能力",
+            "label": "矩阵推理",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
               "可观察任务",
@@ -10702,12 +11439,12 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "需要结合真实任务、精度边界和可复核交付继续核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
+            "answer": "回顾自己在交接、反馈时的情绪沟通习惯。",
+            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_label": "情绪沟通习惯自评",
             "evidence_level": "工作样本",
             "id": "eq",
-            "label": "情绪能力",
+            "label": "情绪沟通习惯自评",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
               "可观察任务",
@@ -10791,7 +11528,7 @@
             "question": "你的工作如何被复核？"
           },
           {
-            "answer": "用完全虚构的零件图完成一次工艺与检验练习。",
+            "answer": "到「入行与纸面试做」打开首件复核单，分别核对原题和单项变式。",
             "question": "下一步如何试验？"
           }
         ],
@@ -11013,7 +11750,7 @@
           "entry": "machinists-and-tool-and-die-makers.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合机械加工工",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11059,29 +11796,17 @@
       ],
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
-        "interest": "先观察真实读图、机床操作、装配与检验中的兴趣、压力与体验。",
-        "riasec": "机械师 RCI；工具和模具制造工 RC",
+        "interest": "观察自己是否愿意反复查图纸版本、保留首件读数，并在偏差出现时先记录再交接。O*NET 将机加工工标为 RCI，将工具与模具制造工标为 RC。兴趣代码描述偏好的工作活动。",
+        "riasec": "机加工工 RCI，工具与模具制造工 RC",
         "riasec_short": "不以单一代码决定职业。"
       },
       "source_card": {
         "eeat_signals": {
-          "author": "FermatMind research workflow",
-          "source": {
-            "$source": "ooh-combined",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "name",
-            "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-          },
-          "updated_at": {
-            "$source": "ooh-combined",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "period",
-            "item": "machinists-and-tool-and-die-makers.source-register.published.1"
-          }
+          "author": "费马测试编辑部",
+          "source": "O*NET 任务、BLS OOH 合并统计、BLS 明细就业和 OEWS 工资、国家统计局行业工资",
+          "updated_at": "2026 年 11 月 10 日核查"
         },
-        "note": "本页BLS两职业组合：2025中位59620/小时28.66，就业344900→2035为342700、2025—2035 -1%、年均空缺30400为替补，当前核实保留。机械师/工具模具分别中位58750/64050；两职业分位公开，本轮未取得组合分位，不混用。2025子职业×行业工资四例为机械师运输61920/机械59590、工具模具运输78200/机械62780。兴趣分别RCI/RC、教育新入职需要分开核，JobZone非固定训练。NBS制造仅代理；OSHA1910.147仅美国适用维修范围。原共享来源与保护FAQ仍有旧子职业预测、行业、分位和资格说法，待独立复核；中国工资准入、AI人格与组合细行业工资仍有缺口。"
+        "note": "本页所核资料未取得中国大陆这两项职业的全国工资分布或同口径全国就业预测。"
       },
       "work_context_block": {
         "$item": "machinists-and-tool-and-die-makers.profile.work-context-block.5",
@@ -11103,17 +11828,24 @@
         "id": "machinists-and-tool-and-die-makers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "machinists-and-tool-and-die-makers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
       }
     ],
     "path": "/zh/career/jobs/machinists-and-tool-and-die-makers",
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与人工复核",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
       "market-signals": "市场信号",
       "navigation": "页面导航",
-      "path": "入行路径",
+      "path": "入行与纸面试做",
       "profile": "职业定义与职责",
       "quick-decision": "快速判断",
       "risk": "风险与边界",
@@ -11126,76 +11858,74 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "59,620 美元/年",
+        "display_value": "59,620 美元／年",
         "fact_id": "us-wage-median",
         "market": "美国",
-        "measure": "组合 2025 年年薪中位（约 28.66 美元/小时）",
-        "occupation_scope": "BLS OOH 组合口径：Machinists and Tool and Die Makers（含 51-4041.00 与 51-4111.00）",
-        "period": "2025 年工资；查阅 2026-09-25",
+        "measure": "美国合并组年薪中位数（2025 年 5 月）",
+        "occupation_scope": "BLS OOH 美国合并组",
+        "period": "2025-05",
         "source_refs": [
           "ooh-combined"
         ]
       },
       {
         "derivation": null,
-        "display_value": "344,900 人",
+        "display_value": "344,900",
         "fact_id": "us-employment",
         "market": "美国",
-        "measure": "2025 年组合岗位数",
-        "occupation_scope": "BLS OOH 组合口径：Machinists and Tool and Die Makers（含 51-4041.00 与 51-4111.00）",
-        "period": "2025；查阅 2026-09-25",
-        "source_refs": [
-          "ooh-combined"
-        ]
-      },
-      {
-        "derivation": "BLS OOH 显示 2025—2035 组合就业预计下降 1 percent；对应就业变化 -2,200。",
-        "display_value": "下降约 1%（Decline，2025—2035）",
-        "fact_id": "us-growth",
-        "market": "美国",
-        "measure": "组合就业展望",
-        "occupation_scope": "BLS OOH 组合口径：Machinists and Tool and Die Makers（含 51-4041.00 与 51-4111.00）",
-        "period": "2025—2035；查阅 2026-09-25",
-        "source_refs": [
-          "ooh-combined"
-        ]
-      },
-      {
-        "derivation": "BLS OOH 显示 2025—2035 年均约 30,400 个空缺，均来自替换需求（转岗或退出劳动力）。",
-        "display_value": "约 30,400 个/年（2025—2035 年均）",
-        "fact_id": "us-openings",
-        "market": "美国",
-        "measure": "组合年均职位空缺",
-        "occupation_scope": "BLS OOH 组合口径：Machinists and Tool and Die Makers（含 51-4041.00 与 51-4111.00）",
-        "period": "2025—2035；查阅 2026-09-25",
+        "measure": "美国合并组就业（2025 年）",
+        "occupation_scope": "BLS OOH 美国合并组",
+        "period": "2025",
         "source_refs": [
           "ooh-combined"
         ]
       },
       {
         "derivation": null,
-        "display_value": "58,750 美元/年（机械师）",
+        "display_value": "−1%",
+        "fact_id": "us-growth",
+        "market": "美国",
+        "measure": "美国合并组预计就业变化",
+        "occupation_scope": "BLS OOH 美国合并组",
+        "period": "2025–2035",
+        "source_refs": [
+          "ooh-combined"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "30,400",
+        "fact_id": "us-openings",
+        "market": "美国",
+        "measure": "美国合并组预计年均空缺",
+        "occupation_scope": "BLS OOH 美国合并组",
+        "period": "2025–2035",
+        "source_refs": [
+          "ooh-combined"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "58,750 美元／年 · 28.24 美元／时",
         "fact_id": "us-wage-machinists",
         "market": "美国",
-        "measure": "机械师分职业年薪中位",
-        "occupation_scope": "Machinists（51-4041.00）",
-        "period": "2025 年 5 月工资；查阅 2026-09-25",
+        "measure": "机加工工第 50 百分位",
+        "occupation_scope": "51-4041",
+        "period": "2025-05",
         "source_refs": [
-          "ooh-combined",
           "onet-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "64,050 美元/年（工具和模具制造工）",
+        "display_value": "64,050 美元／年 · 30.79 美元／时",
         "fact_id": "us-wage-tooldie",
         "market": "美国",
-        "measure": "工具和模具制造工分职业年薪中位",
-        "occupation_scope": "Tool and Die Makers（51-4111.00）",
-        "period": "2025 年 5 月工资；查阅 2026-09-25",
+        "measure": "工具与模具制造工第 50 百分位",
+        "occupation_scope": "51-4111",
+        "period": "2025-05",
         "source_refs": [
-          "ooh-combined",
-          "onet-tooldie"
+          "onet-wages-tool-die"
         ]
       },
       {
@@ -11236,7 +11966,7 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得中国大陆机械加工工的全国职业工资中位数（2025 官方公开口径）",
+        "display_value": "本页所核资料未取得中国大陆这两项职业的全国工资分布或同口径全国就业预测。",
         "fact_id": "cn-wage-gap",
         "market": "中国大陆全国口径",
         "measure": "occupation wage availability",
@@ -11247,61 +11977,157 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "25%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "机械加工工",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "derivation": null,
+        "display_value": "城镇非私营 113,594 元／年；城镇私营 76,055 元／年",
+        "fact_id": "cn-mfg-hero",
+        "market": "中国大陆",
+        "measure": "中国大陆制造业年平均工资（行业）",
+        "occupation_scope": "制造业行业均值",
+        "period": "2025",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "39,200 美元／年 · 18.85 美元／时",
+        "fact_id": "us-wage-51-4041-p10",
+        "market": "美国",
+        "measure": "机加工工第 10 百分位",
+        "occupation_scope": "51-4041",
+        "period": "2025-05",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "47,570 美元／年 · 22.87 美元／时",
+        "fact_id": "us-wage-51-4041-p25",
+        "market": "美国",
+        "measure": "机加工工第 25 百分位",
+        "occupation_scope": "51-4041",
+        "period": "2025-05",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "67,700 美元／年 · 32.55 美元／时",
+        "fact_id": "us-wage-51-4041-p75",
+        "market": "美国",
+        "measure": "机加工工第 75 百分位",
+        "occupation_scope": "51-4041",
+        "period": "2025-05",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "80,010 美元／年 · 38.47 美元／时",
+        "fact_id": "us-wage-51-4041-p90",
+        "market": "美国",
+        "measure": "机加工工第 90 百分位",
+        "occupation_scope": "51-4041",
+        "period": "2025-05",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "44,680 美元／年 · 21.48 美元／时",
+        "fact_id": "us-wage-51-4111-p10",
+        "market": "美国",
+        "measure": "工具与模具制造工第 10 百分位",
+        "occupation_scope": "51-4111",
+        "period": "2025-05",
+        "source_refs": [
+          "onet-wages-tool-die"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "51,490 美元／年 · 24.75 美元／时",
+        "fact_id": "us-wage-51-4111-p25",
+        "market": "美国",
+        "measure": "工具与模具制造工第 25 百分位",
+        "occupation_scope": "51-4111",
+        "period": "2025-05",
+        "source_refs": [
+          "onet-wages-tool-die"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "78,770 美元／年 · 37.87 美元／时",
+        "fact_id": "us-wage-51-4111-p75",
+        "market": "美国",
+        "measure": "工具与模具制造工第 75 百分位",
+        "occupation_scope": "51-4111",
+        "period": "2025-05",
+        "source_refs": [
+          "onet-wages-tool-die"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "92,680 美元／年 · 44.56 美元／时",
+        "fact_id": "us-wage-51-4111-p90",
+        "market": "美国",
+        "measure": "工具与模具制造工第 90 百分位",
+        "occupation_scope": "51-4111",
+        "period": "2025-05",
+        "source_refs": [
+          "onet-wages-tool-die"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "机床设置与操作",
-      "精密零件加工与检验",
-      "工模具制造与装配"
+      "机加工工",
+      "工具与模具制造工",
+      "首件检验与工装试配"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国合并组年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业变化"
+        "label": "美国合并组预计就业变化"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国合并组就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国职位空缺（年均）"
+        "label": "美国合并组预计年均空缺"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "cn-mfg-hero",
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆制造业年平均工资（行业）"
       }
     ]
   },
@@ -11316,7 +12142,7 @@
       "text": "机械加工工职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "403e2bf58a4e9dafc0ae28a47693944852c7f08f9e102ed2bc4949595d56f1ff",
+  "source_content_sha256": "7cc0af126d78c1336dcf833f630b90da0a2f4c4e775316c64d975ce175444e21",
   "subject": {
     "canonical_slug": "machinists-and-tool-and-die-makers",
     "name": "机械加工工",

@@ -1289,6 +1289,9 @@
       "item:paving-surfacing-and-tamping-equipment-operators.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:paving-surfacing-and-tamping-equipment-operators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:paving-surfacing-and-tamping-equipment-operators.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30898,6 +30901,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。施工段 P2 的记录有标高，厚度复核栏空白；邻段 P3 的厚度单被误附。写下交接给现场负责人的待查项。"
+            ]
+          },
+          "id": "paving-surfacing-and-tamping-equipment-operators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "核摊铺段交接",
+          "type": "notice"
         }
       ]
     },
@@ -37284,6 +37302,13 @@
         "id": "paving-surfacing-and-tamping-equipment-operators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "paving-surfacing-and-tamping-equipment-operators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37657,7 +37682,7 @@
       "text": "设备操作员"
     }
   },
-  "source_content_sha256": "287a6a3f209f7961ab60381c610ef2e0e13e3b0f75137942cb3fc7b77282e690",
+  "source_content_sha256": "5dbc6d0fe253e01438ef661e50c23504f804855b9c67ce14f55dd1c958bc2fba",
   "subject": {
     "canonical_slug": "paving-surfacing-and-tamping-equipment-operators",
     "name": "铺路与压实设备操作员",

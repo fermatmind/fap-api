@@ -170,6 +170,9 @@
       "item:meter-readers-utilities.path.seven-day-trial.8": {
         "status": "mapped"
       },
+      "item:meter-readers-utilities.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:meter-readers-utilities.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -13074,6 +13077,21 @@
             "source-pack-onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Order U5 needs a meter reading. One photo shows 1083 on meter U8, and the U5 photo is unreadable. Identify what cannot be posted and who should recheck it."
+            ]
+          },
+          "id": "meter-readers-utilities.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "Match a utility reading to its meter",
+          "type": "notice"
         }
       ]
     },
@@ -15537,6 +15555,13 @@
         "id": "meter-readers-utilities.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "meter-readers-utilities.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15778,7 +15803,7 @@
       "text": "Meter Readers, Utilities: Duties, U.S. Wages, and Entry"
     }
   },
-  "source_content_sha256": "66e44db8039560e12612846219242c74e3928045e6da9db393f76c44aeb1c33f",
+  "source_content_sha256": "58d382188b84bb227f914a5d1da6703f789efcc38de8104cecd3f0775d09c124",
   "subject": {
     "canonical_slug": "meter-readers-utilities",
     "name": "Meter Readers",

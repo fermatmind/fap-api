@@ -188,6 +188,9 @@
       "item:nuclear-technicians.path.seven-day-trial.8": {
         "status": "pending_mapping"
       },
+      "item:nuclear-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nuclear-technicians.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -13191,6 +13194,21 @@
             "onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two measurement results have different lot IDs but share one custody sheet. State how to verify sample identity, measurement records and receipt with the technical lead."
+            ]
+          },
+          "id": "nuclear-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "Check a nuclear sample handover",
+          "type": "notice"
         }
       ]
     },
@@ -15820,6 +15838,13 @@
         "id": "nuclear-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nuclear-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16139,7 +16164,7 @@
       "text": "Nuclear Technicians"
     }
   },
-  "source_content_sha256": "82260d008b618159219776ec0d07885f6f06ef578a6f5290a32a058194b9cd96",
+  "source_content_sha256": "2edb9ded36e98851c25550ae805f11b988733dd942270dc7b18c5d0a6696be57",
   "subject": {
     "canonical_slug": "nuclear-technicians",
     "name": "Nuclear Technicians",

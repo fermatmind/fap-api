@@ -1430,6 +1430,9 @@
       "item:concierges.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:concierges.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:concierges.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30001,6 +30004,21 @@
           "id": "concierges.path.recruitment-sample.1",
           "title": "Recruitment Sample Usage Notes",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The guest confirmed only a departure time, but the shift sheet says a car is booked. Identify the reservation proof to check and who should update the guest."
+            ]
+          },
+          "id": "concierges.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check a concierge booking handover",
+          "type": "notice"
         }
       ]
     },
@@ -36225,6 +36243,13 @@
         "id": "concierges.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "concierges.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -36637,7 +36662,7 @@
       "text": "Concierge"
     }
   },
-  "source_content_sha256": "153307794236b1c3e106d346f5d65a0ae8e470837271af2688621b17e987b5df",
+  "source_content_sha256": "638984358fcd23df0e24150aa2a4cb2b25a693c0f3e72e8186203d8c6b04f9f0",
   "subject": {
     "canonical_slug": "concierges",
     "name": "Concierge",

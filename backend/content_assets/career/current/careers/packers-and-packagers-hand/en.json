@@ -144,25 +144,31 @@
         "status": "mapped"
       },
       "item:packers-and-packagers-hand.path.credential-decision.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.path.employer-evidence.3": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.path.entry-portfolio.4": {
         "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.path.entry-role-comparison.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:packers-and-packagers-hand.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.path.interview-probation.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.path.recruitment-sample.1": {
         "status": "pending_mapping"
       },
-      "item:packers-and-packagers-hand.path.seven-day-trial.6": {
+      "item:packers-and-packagers-hand.path.seven-day-decision.1": {
         "status": "mapped"
+      },
+      "item:packers-and-packagers-hand.path.seven-day-trial.6": {
+        "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.profile.career-quick-answers-block.4": {
         "status": "mapped"
@@ -219,7 +225,7 @@
         "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.sources.faq-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -5808,52 +5814,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -6084,36 +6228,98 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
         "ref": {
@@ -12184,7 +12390,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: a same-basis Chinese national occupational wage distribution was not obtained. This is a position that turns products into deliverable parcels through manual sorting, metering, boxing, sealing, and labeling. U.S. precise occupational wages are available; for China, only 2025 industry or broad production pre-tax annual references are shown by actual employer, not as this occupation's wage."
+              "Use this to explore the work. A paper order does not assess job readiness or authorize a live shipment."
             ]
           },
           "id": "packers-and-packagers-hand.quick-decision.fermat-decision-card.1",
@@ -12198,7 +12404,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Suited to those who can continuously verify orders, quantities, product status, and labels and stay accurate during repetitive work."
+              "If you can keep track of item codes through repeated packing steps and flag a mismatch before sealing, try the fictional order."
             ]
           },
           "id": "packers-and-packagers-hand.quick-decision.fit-decision-checklist.2",
@@ -12212,7 +12418,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "If you tend to skip damage checks, mix batches, or ignore load and posture during lifting, choose carefully."
+              "Manual packing can involve standing and repeating the same lift, count and seal steps for much of a shift. Ask how the site handles task rotation and heavy cartons."
             ]
           },
           "id": "packers-and-packagers-hand.quick-decision.fit-decision-checklist.3",
@@ -12226,7 +12432,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use simulated orders for small-batch practice: inspect products, count and box, label, and record shortages, damage, and mislabeling."
+              "Open “HP-26: Check a Hand-Packed Order” in section 09. Count the right item in both cartons and write the correction. Did the overall count distract you from the item code? Can a reviewer see how you counted?"
             ]
           },
           "id": "packers-and-packagers-hand.quick-decision.fermat-decision-card.4",
@@ -12324,13 +12530,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "U.S. 2024 employment for this precise occupation was about 591,800 people, not the number of current job openings. This is history; 2025 U.S. precise 53-7064 employment is 555,500 falling to 528,000 in 2035; over 2025—2035 overall -5.0%, an official net decrease of 27,500 people, and annual average openings of 61,800 including replacements, not AI adoption replacement, individual unemployment, current hiring, or Chinese demand."
+              "The handoff shows quantities by item, cartons labeled to the order, and an exception record for damaged, missing or mismatched units."
             ]
           },
           "id": "packers-and-packagers-hand.profile.definition-block.6",
           "source_refs": [
-            "onet-summary",
-            "bls-ep-53-7064"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -12645,12 +12850,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 53-7064.00 shows a U.S. 2025 median hourly wage of 17.44 U.S. dollars and annual wage of 36,280 U.S. dollars."
+              "The original table shows five percentiles for both annual and hourly wages."
             ]
           },
           "id": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12659,12 +12864,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This median is not starting pay, a current job offer, or a personal income promise."
+              "Source: May 2025 national wage estimates."
             ]
           },
           "id": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12673,12 +12878,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Comparing positions requires verifying region, industry, shifts, contract hours, piece rate, and benefits."
+              "Source: May 2025 national wage estimates."
             ]
           },
           "id": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12687,12 +12892,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 U.S. precise 53-7064 annual wages at the 10th/25th/50th/75th/90th percentiles are 27,890/32,220/36,280/43,060/47,100 U.S. dollars; hourly 13.41/15.49/17.44/20.70/22.65, not seniority, starting pay, or individual offers, and not converted into Chinese wages."
+              "Source: May 2025 national wage estimates."
             ]
           },
           "id": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12701,13 +12906,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. 2024 employment of about 591,800 people and wages and annual average openings are different indicators. The above 2024 is history; 2025 U.S. precise 53-7064 employment is 555,500 falling to 528,000 in 2035; over 2025—2035 overall -5.0%, an official net decrease of 27,500 people, and annual average openings of 61,800 including replacements, not AI adoption replacement, individual unemployment, current hiring, or Chinese demand."
+              "It does not establish a starting wage or a specific employer’s offer."
             ]
           },
           "id": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-summary",
-            "bls-ep-53-7064"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12716,12 +12920,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. data cannot be directly converted into Chinese position wages."
+              "Actual pay also depends on hours, contract and overtime."
             ]
           },
           "id": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         }
@@ -12945,12 +13149,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Entry can use fictional orders and safe samples to demonstrate manual inspection, metering, boxing, labeling, and anomaly handover, without using real customer data."
+              "One January 2026 Tai’an recruitment notice lists a packing role handling finished garments after production.",
+              "Historical example from one employer; it does not establish national wages, hiring requirements or a current vacancy."
             ]
           },
           "id": "packers-and-packagers-hand.path.recruitment-sample.1",
           "source_refs": [
-            "onet-cert"
+            "cn-example-026"
           ],
           "type": "notice"
         },
@@ -12964,6 +13169,13 @@
               "career.column.boundary",
               "career.column.evidence",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Stage",
+              "Tasks",
+              "Authority limits",
+              "Evidence",
+              "Next step"
             ],
             "rows": [
               [
@@ -13005,8 +13217,10 @@
           },
           "id": "packers-and-packagers-hand.path.entry-role-comparison.2",
           "source_refs": [
-            "onet-cert"
+            "onet-details",
+            "editorial-hand-09"
           ],
+          "title": "Entry roles and tasks",
           "type": "table"
         },
         {
@@ -13017,30 +13231,31 @@
               {
                 "id": "packers-and-packagers-hand.employer-evidence.1",
                 "values": [
-                  "Process samples",
-                  "Inputs and outputs are traceable"
+                  "Order checklist (example)",
+                  "Use a fictional order. Show which codes and counts you checked before packing."
                 ]
               },
               {
                 "id": "packers-and-packagers-hand.employer-evidence.2",
                 "values": [
-                  "Quality checklist",
-                  "Can find errors"
+                  "Quality note (example)",
+                  "Note the carton or item condition and what a reviewer should verify."
                 ]
               },
               {
                 "id": "packers-and-packagers-hand.employer-evidence.3",
                 "values": [
-                  "Handover notes",
-                  "Boundaries and escalation are clear"
+                  "Handover note (example)",
+                  "List any discrepancy and identify who needs to check it."
                 ]
               }
             ]
           },
           "id": "packers-and-packagers-hand.path.employer-evidence.3",
           "source_refs": [
-            "onet-cert"
+            "editorial-hand-09"
           ],
+          "title": "Practice records you can use to show your work",
           "type": "cards"
         },
         {
@@ -13051,24 +13266,24 @@
               {
                 "id": "packers-and-packagers-hand.portfolio.one",
                 "values": [
-                  "Packer, hand",
-                  "Public or simulated materials",
-                  "Process and quality records"
+                  "Order and carton reconciliation",
+                  "Use a fictional order and carton label. Mark the expected count, what you counted and the matching item code.",
+                  "Bring the marked checklist and one sentence explaining a mismatch."
                 ]
               },
               {
                 "id": "packers-and-packagers-hand.portfolio.two",
                 "values": [
-                  "Packer, hand",
-                  "Anomaly scenarios",
-                  "Escalation and review"
+                  "Exception handover note",
+                  "Use a fictional damaged or short carton. Record its ID, the observation and whom you would ask to review it.",
+                  "Show the original entry and the follow-up question. Leave release to the assigned reviewer."
                 ]
               }
             ]
           },
           "id": "packers-and-packagers-hand.path.entry-portfolio.4",
           "source_refs": [
-            "onet-cert"
+            "editorial-hand-09"
           ],
           "type": "cards"
         },
@@ -13081,6 +13296,12 @@
               "career.column.action",
               "career.column.review",
               "career.column.evidence"
+            ],
+            "column_labels": [
+              "Situation",
+              "Response",
+              "Review points",
+              "Evidence"
             ],
             "rows": [
               [
@@ -13111,8 +13332,10 @@
           },
           "id": "packers-and-packagers-hand.path.interview-probation.5",
           "source_refs": [
-            "onet-cert"
+            "onet-details",
+            "editorial-hand-09"
           ],
+          "title": "Fictional quality scenarios for discussion",
           "type": "table"
         },
         {
@@ -13124,29 +13347,55 @@
                 "id": "packers-and-packagers-hand.trial.day1",
                 "values": [
                   "Day 1",
-                  "Define the object and output"
+                  "Start W-HP. A separate paper order needs carton label N6 and a completed damage check on the same carton."
                 ]
               },
               {
                 "id": "packers-and-packagers-hand.trial.day3",
                 "values": [
-                  "Day 3",
-                  "Complete the simulation and inspection"
+                  "Day 2",
+                  "Carton J3: label N6, damage check blank. Record both fields."
                 ]
               },
               {
                 "id": "packers-and-packagers-hand.trial.day7",
                 "values": [
+                  "Day 3",
+                  "Carton J7: label N9, damage check recorded. Record both fields."
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "Day 4",
+                  "Compare the notes to the order and write one verification question."
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "Day 5",
+                  "Write whether either carton meets the paper rule."
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "Day 6",
+                  "Work alone first. Recheck both labels and damage records. Peer feedback is optional."
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
                   "Day 7",
-                  "Review errors and improvements"
+                  "After the Day 6 independent check, open “W-HP answer key (Day 7)” in the FAQ. Compare your note, then choose one habit to practice."
                 ]
               }
             ]
           },
           "id": "packers-and-packagers-hand.path.seven-day-trial.6",
-          "source_refs": [
-            "onet-cert"
-          ],
+          "title": "Seven-day paper trial: a separate case",
           "type": "timeline"
         },
         {
@@ -13161,6 +13410,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Topic",
+              "Evidence",
+              "Verifier",
+              "Condition",
+              "Limit",
+              "Responsible party",
+              "Next step"
             ],
             "rows": [
               [
@@ -13221,8 +13479,9 @@
           },
           "id": "packers-and-packagers-hand.path.credential-decision.7",
           "source_refs": [
-            "onet-cert"
+            "editorial-hand-09"
           ],
+          "title": "Training and authorization by duty",
           "type": "table"
         },
         {
@@ -13230,7 +13489,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "Courses or certifications for ordinary hand packaging positions do not automatically grant authority for equipment maintenance, forklifts, hazardous material handling, or quality release; verify local and employer requirements."
+              "The O*NET directory is a U.S. certification lookup. It does not establish an employer’s requirements. Ask the employer what training or authorization is needed for the specific tools, powered equipment or release tasks in the posting."
             ]
           },
           "id": "packers-and-packagers-hand.path.credential-boundary.8",
@@ -13249,9 +13508,71 @@
           },
           "id": "packers-and-packagers-hand.path.career-path-block.9",
           "source_refs": [
-            "onet-cert"
+            "onet-details",
+            "editorial-hand-09"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials (about 10 minutes)",
+                  "Fictional order H8 requires 12 units of item K4.",
+                  "Carton A: 7 units of K4. Carton B: 4 units of K4 and 1 unit of K9. Both cartons are labeled H8.",
+                  "Use paper only. Do not pack or approve a live shipment."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Write the count of the ordered item and explain whether the two cartons can be handed over for shipment review.",
+                  "Record the correction to ask the packing lead to verify."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Where to find the reference",
+                  "After your own attempt, open “HP-26 answer key” in the FAQ.",
+                  "Compare it with your notes."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Did I cite both records, explain my decision, and name the person who could verify it?"
+                ]
+              }
+            ]
+          },
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "title": "HP-26: Check a Hand-Packed Order",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "I read both records.",
+              "I checked both rules.",
+              "I recorded my comparison decision.",
+              "I named the reviewer.",
+              "I used fictional records only.",
+              "I rechecked my work independently.",
+              "I chose one habit to practice."
+            ]
+          },
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "title": "Judgement questions after seven days",
+          "type": "list"
         }
       ]
     },
@@ -13266,12 +13587,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The U.S. O*NET 53-7064.00 2024—2034 employment projection was a decline (-1% or lower); this is a national projection. The above 2024 or 2024—2034 is history; 2025 U.S. precise 53-7064 employment is 555,500 falling to 528,000 in 2035; over 2025—2035 overall -5.0%, an official net decrease of 27,500 people, and annual average openings of 61,800 including replacements, not AI adoption replacement, individual layoffs, current hiring, or Chinese demand."
+              "BLS Table 1.2 counts 555,500 U.S. jobs in 2025 and projects 528,000 in 2035 for this occupation (53-7064), a published decline of 27,500 jobs (5.0%). Average annual openings are projected at 61,800, including replacements."
             ]
           },
           "id": "packers-and-packagers-hand.market-signals.market-signal-card.1",
           "source_refs": [
-            "onet-summary",
             "bls-ep-53-7064"
           ],
           "type": "prose"
@@ -13281,12 +13601,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 2024 employment for this precise occupation was about 591,800 people, not the real-time number of hires. The above 2024 or 2024—2034 is history; 2025 U.S. precise 53-7064 employment is 555,500 falling to 528,000 in 2035; over 2025—2035 overall -5.0%, an official net decrease of 27,500 people, and annual average openings of 61,800 including replacements, not AI adoption replacement, individual layoffs, current hiring, or Chinese demand."
+              "United States"
             ]
           },
           "id": "packers-and-packagers-hand.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-summary",
             "bls-ep-53-7064"
           ],
           "type": "prose"
@@ -13296,12 +13615,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The 2024—2034 annual average of about 74,000 job openings includes staff turnover and cannot be treated as net new jobs. The above 2024 or 2024—2034 is history; 2025 U.S. precise 53-7064 employment is 555,500 falling to 528,000 in 2035; over 2025—2035 overall -5.0%, an official net decrease of 27,500 people, and annual average openings of 61,800 including replacements, not AI adoption replacement, individual layoffs, current hiring, or Chinese demand."
+              "2025 baseline; 2035 forecast"
             ]
           },
           "id": "packers-and-packagers-hand.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-summary",
             "bls-ep-53-7064"
           ],
           "type": "prose"
@@ -13311,12 +13629,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Automation may change some sorting and recording tasks, but the occupational materials cannot prove a specific employer's replacement rate."
+              "The later figure is a projection."
             ]
           },
           "id": "packers-and-packagers-hand.market-signals.market-signal-card.4",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-53-7064"
           ],
           "type": "prose"
         },
@@ -13325,12 +13643,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Crossing to equipment operation, quality inspection, or warehousing positions requires adding equipment, inspection, or logistics skills, and knowing how to pack cannot simply be transferred."
+              "National U.S. data do not establish local hiring or Chinese demand."
             ]
           },
           "id": "packers-and-packagers-hand.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-53-7064"
           ],
           "type": "prose"
         }
@@ -13403,7 +13721,7 @@
                 ]
               },
               {
-                "answer": "2025 precise median of 17.44 U.S. dollars/hour and 36,280 U.S. dollars/year. 2025 U.S. precise 53-7064 employment is 555,500 falling to 528,000 in 2035; over 2025—2035 overall -5.0%, an official net decrease of 27,500 people, and annual average openings of 61,800 including replacements, not AI adoption replacement, individual layoffs, current hiring, or Chinese demand. The old 2024 employment of 591800 keeps the history.",
+                "answer": "May 2025 U.S. national medians: $36,280 per year and $17.44 per hour. BLS Table 1.2 counts 555,500 U.S. jobs in 2025 and projects 528,000 in 2035 for this occupation (53-7064), a published decline of 27,500 jobs (5.0%). Average annual openings are projected at 61,800, including replacements.",
                 "id": "packers-and-packagers-hand.faq.7",
                 "question": "What are the U.S. wages and employment?",
                 "question_key": "career.faq.packers-and-packagers-hand.7",
@@ -13421,12 +13739,26 @@
                 "source_refs": [
                   "onet-details"
                 ]
+              },
+              {
+                "answer": "There are 11 units of K4, not 12. The K9 unit does not count toward the order, even though both cartons carry H8. Hold both cartons in the paper record and ask the packing lead to verify that K9 is replaced with one K4.",
+                "id": "packers-and-packagers-hand.faq.trial-short-reference",
+                "question": "HP-26 answer key",
+                "question_key": "career.faq.packers-and-packagers-hand.trial-short-reference"
+              },
+              {
+                "answer": "Neither carton meets both conditions. J3 has the correct label but no recorded damage check; J7 has a check but label N9. Ask for the original damage-check record for J3; do not copy a check between cartons.",
+                "id": "packers-and-packagers-hand.faq.trial-week-reference",
+                "question": "W-HP answer key (Day 7)",
+                "question_key": "career.faq.packers-and-packagers-hand.trial-week-reference"
               }
             ]
           },
           "id": "packers-and-packagers-hand.sources.faq-block.1",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "source-pack-onet-localwages",
+            "bls-ep-53-7064"
           ],
           "type": "faq"
         },
@@ -13479,13 +13811,13 @@
                 "entity": "Hand packer",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Hand packer",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Hand packer",
@@ -13587,16 +13919,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/53-7064.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "12 tasks: inspection, metering, records, sealing, boxing, sorting, labeling, cleaning, rejection, filling, feeding, and transport; historical 591800 / decline of -1% or lower / annual average 74000 including replacements."
+                  "The U.S. task profile covers checking, measuring, sorting, packing, sealing, labeling and keeping records. Use the separately cited BLS table for employment projections."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
-                "limitation": "US occupation evidence; China mapping and authorization require separate review.",
+                "limitation": "This task profile does not establish wages or entry requirements in mainland China.",
                 "market": "US",
                 "name": "53-7064.00 Packers And Packagers, Hand",
-                "period": "2026 tasks; 2025 wages; 2024 employment and the 2024—2034 historical trend",
+                "period": "Occupation profile, updated 2026",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/53-7064.00"
@@ -13619,7 +13951,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "Quintile annual wages 27890/32220/36280/43060/47100; hourly 13.41/15.49/17.44/20.70/22.65."
+                  "May 2025 U.S. national wages at the 10th, 25th, 50th, 75th and 90th percentiles: annual $27,890 / $32,220 / $36,280 / $43,060 / $47,100; hourly $13.41 / $15.49 / $17.44 / $20.70 / $22.65."
                 ],
                 "evidence_type": "official wage data",
                 "id": "onet-wages",
@@ -13634,14 +13966,14 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Describes this U.S. occupation or a U.S. directory. It does not establish wages or qualifications in China."
                 ],
                 "evidence_type": "official custom occupation profile",
                 "id": "source-pack-onet-custom",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Describes this U.S. occupation or a U.S. directory. It does not establish wages or qualifications in China.",
                 "market": "US",
-                "name": "53-7064.00 - Packers and Packagers, Hand",
-                "period": "current page; accessed 2026-09-02",
+                "name": "O*NET Occupation data fields",
+                "period": "U.S. occupation information",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/53-7064.00"
@@ -13649,14 +13981,14 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Describes this U.S. occupation or a U.S. directory. It does not establish wages or qualifications in China."
                 ],
                 "evidence_type": "official occupation details",
                 "id": "source-pack-onet-details",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Describes this U.S. occupation or a U.S. directory. It does not establish wages or qualifications in China.",
                 "market": "US",
-                "name": "53-7064.00 - Packers and Packagers, Hand",
-                "period": "current page; accessed 2026-09-02",
+                "name": "O*NET Occupation details",
+                "period": "U.S. occupation information",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-7064.00"
@@ -13664,44 +13996,45 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Describes this U.S. occupation or a U.S. directory. It does not establish wages or qualifications in China."
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Describes this U.S. occupation or a U.S. directory. It does not establish wages or qualifications in China.",
                 "market": "US",
-                "name": "Hot Technologies: 53-7064.00 - Packers and Packagers, Hand",
-                "period": "current page; accessed 2026-09-02",
+                "name": "O*NET Technology tools",
+                "period": "U.S. occupation information",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/53-7064.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Retail trade 26%；Manufacturing 24%；Administrative and support services 19%；Transportation and warehousing 16%；Other industries 15%",
+                  "Shares of U.S. jobs in this occupation, not industry wage figures."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Shares of U.S. jobs in this occupation, not industry wage figures.",
                 "market": "US",
-                "name": "Industries: 53-7064.00 - Packers and Packagers, Hand",
-                "period": "current page; accessed 2026-09-02",
+                "name": "O*NET employment by industry",
+                "period": "2025",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "Packers and Packagers, Hand",
                 "url": "https://www.onetonline.org/link/industry/53-7064.00"
               },
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Describes this U.S. occupation or a U.S. directory. It does not establish wages or qualifications in China."
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "source-pack-onet-localcert",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Describes this U.S. occupation or a U.S. directory. It does not establish wages or qualifications in China.",
                 "market": "US",
-                "name": "National Certifications: 53-7064.00 - Packers and Packagers, Hand",
-                "period": "current page; accessed 2026-09-02",
+                "name": "O*NET Certification lookup",
+                "period": "U.S. occupation information",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/53-7064.00"
@@ -13709,61 +14042,63 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Describes this U.S. occupation or a U.S. directory. It does not establish wages or qualifications in China."
                 ],
                 "evidence_type": "official local training discovery",
                 "id": "source-pack-onet-localtraining",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Describes this U.S. occupation or a U.S. directory. It does not establish wages or qualifications in China.",
                 "market": "US",
-                "name": "National Training: 53-7064.00 - Packers and Packagers, Hand",
-                "period": "current page; accessed 2026-09-02",
+                "name": "O*NET Training lookup",
+                "period": "U.S. occupation information",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/53-7064.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Quintile annual wages 27890/32220/36280/43060/47100; hourly 13.41/15.49/17.44/20.70/22.65."
+                  "May 2025 U.S. national medians: $36,280 per year and $17.44 per hour.",
+                  "The table gives annual and hourly estimates at five national wage percentiles."
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "Precise occupation national percentiles, not starting pay, seniority levels, or individual employer offers, and not converted into Chinese wages.",
+                "limitation": "National occupational estimates cannot establish a specific offer or pay in mainland China.",
                 "market": "US",
-                "name": "National Wages: 53-7064.00 - Packers and Packagers, Hand",
-                "period": "2025 precise 53-7064 wages",
+                "name": "O*NET national wage table",
+                "period": "May 2025 (BLS OEWS)",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "Packers and Packagers, Hand",
                 "url": "https://www.onetonline.org/link/localwages/53-7064.00"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "12 tasks: inspection, metering, records, sealing, boxing, sorting, labeling, cleaning, rejection, filling, feeding, and transport; historical 591800 / decline of -1% or lower / annual average 74000 including replacements."
+                  "Describes this U.S. occupation or a U.S. directory. It does not establish wages or qualifications in China."
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "source-pack-onet-summary",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Describes this U.S. occupation or a U.S. directory. It does not establish wages or qualifications in China.",
                 "market": "US",
-                "name": "53-7064.00 - Packers and Packagers, Hand",
-                "period": "2026 tasks; 2025 wages; 2024 employment and the 2024—2034 historical trend",
+                "name": "O*NET Occupation summary",
+                "period": "U.S. occupation information",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/53-7064.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "2025 employment of 555500 falling to 528000 in 2035; overall -5.0, an official net decrease of 27500; annual average openings of 61800 including replacements."
+                  "BLS Table 1.2 counts 555,500 U.S. jobs in 2025 and projects 528,000 in 2035 for this occupation (53-7064), a published decline of 27,500 jobs (5.0%). Average annual openings are projected at 61,800, including replacements.",
+                  "BLS lists no formal educational credential and short-term on-the-job training as typical in the U.S. Employers may set different requirements."
                 ],
                 "evidence_type": "official occupational statistics",
                 "id": "bls-ep-53-7064",
-                "limitation": "Not AI adoption replacement, individual layoffs, current hiring, or Chinese demand.",
+                "limitation": "Average annual openings include replacements; the forecast is not a measure of AI effects or local hiring.",
                 "market": "US",
-                "name": "BLS 53-7064 Occupational projections",
-                "period": "2025 employment and wages; 2025—2035 projection",
+                "name": "BLS Table 1.2: U.S. occupation projections",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "Packers and Packagers, Hand",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
@@ -13812,10 +14147,11 @@
                 "url": "https://www.osha.gov/etools/machine-guarding/introduction/general-requirements"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Three representative tasks are weighted equally: floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-11-10. This editorial estimate does not measure working time or job loss.",
                   "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Confirm the product, quantity, and packaging requirements — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "Confirm the product, quantity, and packaging requirements — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
                   "Select the correct product and count — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
                   "Seal and mark the destination — 0/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
                 ],
@@ -13823,10 +14159,40 @@
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
                 "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "period": "2026-11-10",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "One January 2026 Tai’an recruitment notice lists a packing role handling finished garments after production."
+                ],
+                "evidence_type": "Historical local recruitment notice",
+                "id": "cn-example-026",
+                "limitation": "Historical example from one employer; it does not establish national wages, hiring requirements or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Tai’an January 2026 recruitment notice",
+                "period": "2026-01",
+                "publisher": "Tai’an Human Resources and Social Security Bureau",
+                "scope": "Packers and Packagers, Hand",
+                "url": "https://rsj.taian.gov.cn/art/2026/1/30/art_167727_10320176.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Examples use fictional order, quality and handoff records to demonstrate how to document work."
+                ],
+                "evidence_type": "Editorial exercise",
+                "id": "editorial-hand-09",
+                "limitation": "Fictional examples for career exploration. They do not show what all employers prefer or grant training or authorization.",
+                "market": "Paper exercise",
+                "name": "FermatMind hand packing practice examples",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Editorial examples",
+                "url": null
               }
             ]
           },
@@ -14014,7 +14380,7 @@
             }
           }
         ],
-        "answer": "Scanning, electronic scales, and order matching can assist verification; real products, errors and omissions, damage, weight, and final handover still require human review. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
+        "answer": "A tool can flag a discrepancy between order records. The packer still checks actual items, counts, cartons and labels. The 8% estimate covers three selected tasks and does not measure adoption or job loss.",
         "authority_links": [
           {
             "来源": "O*NET 53-7064.00 occupational information",
@@ -14290,19 +14656,19 @@
         },
         "competence_ladder": [
           {
-            "description": "Verify with the accuracy and records of simulated or actually supervised tasks.",
+            "description": "Read the item code and expected count from an order, and point to where each appears.",
             "stage": "Order recognition."
           },
           {
-            "description": "Verify with the accuracy and records of simulated or actually supervised tasks.",
+            "description": "For a sample carton, compare the actual count and label with the work instruction.",
             "stage": "Measuring and boxing."
           },
           {
-            "description": "Verify with the accuracy and records of simulated or actually supervised tasks.",
+            "description": "Write down the carton ID, what differed and whom to ask before release.",
             "stage": "Anomaly isolation"
           },
           {
-            "description": "Verify with the accuracy and records of simulated or actually supervised tasks.",
+            "description": "Hand over an open discrepancy so the next shift can locate the carton and follow up.",
             "stage": "Team coordination."
           }
         ],
@@ -14312,7 +14678,7 @@
         "locale_requirements": {
           "credential_boundary": "Ordinary training does not automatically grant equipment maintenance, forklift, or quality release authority.",
           "jurisdiction": "Keep U.S. occupational materials separate from Chinese position requirements.",
-          "summary": "Verify employer coaching, tool use, lifting limits, and product requirements."
+          "summary": "BLS lists no formal educational credential and short-term on-the-job training as typical in the U.S. The O*NET new-hire survey records choices of high school or equivalent (54%), less than high school (33%) and some college without a degree (14%). The percentages are rounded; ask each employer about actual training."
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14346,103 +14712,103 @@
             "id": "office-support",
             "stages": [
               {
-                "credentials": "Verify job training and tool permits.",
-                "next_moves": "Add equipment and quality skills.",
-                "readiness_evidence": "Observation notes, input lists, and unknowns.",
-                "responsibility": "In approved observation or simulation, learn the inputs, deliverables, and responsibilities of foundational learning without independently handling real objects.",
-                "role": "Career explorer."
+                "credentials": "Use sample records only.",
+                "next_moves": "Add a second item and check for swapped codes.",
+                "readiness_evidence": "A checklist with both fields marked.",
+                "responsibility": "Use a fictional order to match the item code and quantity.",
+                "role": "Explorer"
               },
               {
-                "credentials": "Verify job training and tool permits.",
-                "next_moves": "Add equipment and quality skills.",
-                "readiness_evidence": "Supervisory feedback, checklists, and correction records.",
-                "responsibility": "Practice foundational learning during job training and supervision, verifying original inputs and recording feedback and anomalies.",
-                "role": "Trainee."
+                "credentials": "Use the assigned station during training.",
+                "next_moves": "Ask which differences must be reported before packing.",
+                "readiness_evidence": "A marked mismatch and the trainer’s correction.",
+                "responsibility": "Check the order against staged goods with a trainer.",
+                "role": "Trainee"
               },
               {
-                "credentials": "Verify job training and tool permits.",
-                "next_moves": "Add equipment and quality skills.",
-                "readiness_evidence": "Corresponding training authorization, task records, and recipients.",
-                "responsibility": "After completing training and obtaining the corresponding authorization, take on foundational learning responsibilities and keep execution and handoff records; equipment, forklift, hazardous-materials, and quality release authority are verified separately.",
-                "role": "In-post packer."
+                "credentials": "Report unresolved discrepancies to the assigned reviewer.",
+                "next_moves": "Add label verification after the count.",
+                "readiness_evidence": "An order record that explains any count difference.",
+                "responsibility": "Reconcile item codes and counts for assigned orders.",
+                "role": "Packer"
               },
               {
-                "credentials": "Verify job training and tool permits.",
-                "next_moves": "Add equipment and quality skills.",
-                "readiness_evidence": "Anomaly review and revision feedback; does not automatically expand authority.",
-                "responsibility": "Within the corresponding responsibilities, review complex anomalies in foundational learning and improve handoffs; verify capability and authority separately before taking on new tasks.",
-                "role": "In-post packer."
+                "credentials": "Coordinate only within the assigned role.",
+                "next_moves": "Ask whether the team needs a clearer verification field.",
+                "readiness_evidence": "A handover note that identifies the recurring mismatch.",
+                "responsibility": "Compare repeated order discrepancies across shifts.",
+                "role": "Experienced packer"
               }
             ],
-            "title": "Foundational learning."
+            "title": "Verify the order"
           },
           {
             "id": "supplier-cost",
             "stages": [
               {
-                "credentials": "Verify job training and tool permits.",
-                "next_moves": "Add equipment and quality skills.",
-                "readiness_evidence": "Observation notes, input lists, and unknowns.",
-                "responsibility": "In approved observation or simulation, learn the inputs, deliverables, and responsibilities of supervised packing without independently handling real objects.",
-                "role": "Career explorer."
+                "credentials": "Do not use production materials or tools.",
+                "next_moves": "Compare two example specifications.",
+                "readiness_evidence": "A note identifying the box, fill and label called for.",
+                "responsibility": "Match a fictional item to a supplied packing specification.",
+                "role": "Explorer"
               },
               {
-                "credentials": "Verify job training and tool permits.",
-                "next_moves": "Add equipment and quality skills.",
-                "readiness_evidence": "Supervisory feedback, checklists, and correction records.",
-                "responsibility": "Practice supervised packing during job training and supervision, verifying original inputs and recording feedback and anomalies.",
-                "role": "Trainee."
+                "credentials": "Use only tools covered by site training.",
+                "next_moves": "Correct a label mismatch with the trainer.",
+                "readiness_evidence": "The trainer checks one finished carton and its label.",
+                "responsibility": "Practice counting, sealing and labeling at the assigned station.",
+                "role": "Trainee"
               },
               {
-                "credentials": "Verify job training and tool permits.",
-                "next_moves": "Add equipment and quality skills.",
-                "readiness_evidence": "Corresponding training authorization, task records, and recipients.",
-                "responsibility": "After completing training and obtaining the corresponding authorization, take on supervised packing responsibilities and keep execution and handoff records; equipment, forklift, hazardous-materials, and quality release authority are verified separately.",
-                "role": "In-post packer."
+                "credentials": "Do not change specifications or release orders without authority.",
+                "next_moves": "Ask how the team records damaged cartons.",
+                "readiness_evidence": "A carton count that can be reconciled with the order.",
+                "responsibility": "Pack assigned orders to the work instruction and record completed cartons.",
+                "role": "Packer"
               },
               {
-                "credentials": "Verify job training and tool permits.",
-                "next_moves": "Add equipment and quality skills.",
-                "readiness_evidence": "Anomaly review and revision feedback; does not automatically expand authority.",
-                "responsibility": "Within the corresponding responsibilities, review complex anomalies in supervised packing and improve handoffs; verify capability and authority separately before taking on new tasks.",
-                "role": "In-post packer."
+                "credentials": "Have the team lead verify any change to the work instruction.",
+                "next_moves": "Propose a check at the point where the error appears.",
+                "readiness_evidence": "A short account that links the error to the order and carton IDs.",
+                "responsibility": "Compare two packing records to spot a repeat labeling error.",
+                "role": "Experienced packer"
               }
             ],
-            "title": "Supervised packing."
+            "title": "Pack and record"
           },
           {
             "id": "records-information",
             "stages": [
               {
-                "credentials": "Verify job training and tool permits.",
-                "next_moves": "Add equipment and quality skills.",
-                "readiness_evidence": "Observation notes, input lists, and unknowns.",
-                "responsibility": "In approved observation or simulation, learn the inputs, deliverables, and responsibilities of independent work and development without independently handling real objects.",
-                "role": "Career explorer."
+                "credentials": "Do not decide whether a real shipment can leave.",
+                "next_moves": "Name who should review the report.",
+                "readiness_evidence": "A report with carton ID, observation and question.",
+                "responsibility": "Compare two fictional carton records for damage and shortages.",
+                "role": "Explorer"
               },
               {
-                "credentials": "Verify job training and tool permits.",
-                "next_moves": "Add equipment and quality skills.",
-                "readiness_evidence": "Supervisory feedback, checklists, and correction records.",
-                "responsibility": "Practice independent work and development during job training and supervision, verifying original inputs and recording feedback and anomalies.",
-                "role": "Trainee."
+                "credentials": "Follow the site’s rules for holding affected goods.",
+                "next_moves": "Check that the trainer can locate the carton from the note.",
+                "readiness_evidence": "A handover note with the item and the observed difference.",
+                "responsibility": "Show the trainer which carton differs from the order.",
+                "role": "Trainee"
               },
               {
-                "credentials": "Verify job training and tool permits.",
-                "next_moves": "Add equipment and quality skills.",
-                "readiness_evidence": "Corresponding training authorization, task records, and recipients.",
-                "responsibility": "After completing training and obtaining the corresponding authorization, take on independent work and development responsibilities and keep execution and handoff records; equipment, forklift, hazardous-materials, and quality release authority are verified separately.",
-                "role": "In-post packer."
+                "credentials": "Leave disposal and quality release to authorized staff.",
+                "next_moves": "Check who tracks the unresolved report at shift change.",
+                "readiness_evidence": "A report with the count, condition and receiving role.",
+                "responsibility": "Log a damaged or short item and route it for review.",
+                "role": "Packer"
               },
               {
-                "credentials": "Verify job training and tool permits.",
-                "next_moves": "Add equipment and quality skills.",
-                "readiness_evidence": "Anomaly review and revision feedback; does not automatically expand authority.",
-                "responsibility": "Within the corresponding responsibilities, review complex anomalies in independent work and development and improve handoffs; verify capability and authority separately before taking on new tasks.",
-                "role": "In-post packer."
+                "credentials": "A team handover does not grant quality release or equipment authority.",
+                "next_moves": "If interested in quality work, ask about separate training and authorization.",
+                "readiness_evidence": "A handover showing carton, status and next owner.",
+                "responsibility": "Summarize open exceptions for the next shift.",
+                "role": "Experienced packer"
               }
             ],
-            "title": "Independent work and development."
+            "title": "Flag exceptions and hand them over"
           }
         ]
       },
@@ -14508,7 +14874,7 @@
             }
           },
           {
-            "answer": "Hand packers can use tools to assist with information organization, but actual adoption, authority, result release, and anomaly escalation still require verification by responsible people.",
+            "answer": "May 2025 U.S. medians were $36,280 a year and $17.44 an hour. BLS counts 555,500 jobs in 2025 and projects 528,000 in 2035, with an average of 61,800 openings a year including replacements.",
             "key": "qa2",
             "question": "What are the U.S. official data about?",
             "table": {
@@ -14534,32 +14900,32 @@
                 {
                   "alternate_value": null,
                   "label": "U.S. median annual wage",
-                  "secondary_value": "U.S. national occupational data",
-                  "value": "$36,280（2025）"
+                  "secondary_value": "U.S. national occupational wage",
+                  "value": "$36,280 (May 2025)"
                 },
                 {
                   "alternate_value": null,
-                  "label": "2025 employment",
-                  "secondary_value": "U.S. 2025 precise base period, not real-time hiring",
-                  "value": "555,500 people"
+                  "label": "U.S. employment, 2025",
+                  "secondary_value": "BLS national baseline",
+                  "value": "555,500 jobs"
                 },
                 {
                   "alternate_value": null,
-                  "label": "Employment projection",
-                  "secondary_value": "Official net decrease of 27500, not an AI replacement probability",
-                  "value": "2025—2035 overall -5.0%"
+                  "label": "Projected change, 2025–35",
+                  "secondary_value": "2035 forecast: 528,000 jobs",
+                  "value": "−5.0%; 27,500 fewer jobs"
                 },
                 {
                   "alternate_value": null,
-                  "label": "Annual average openings",
-                  "secondary_value": "Includes replacements, not a net decrease of 27500",
-                  "value": "About 61,800/year"
+                  "label": "Projected average annual openings",
+                  "secondary_value": "Includes replacements",
+                  "value": "61,800 per year"
                 }
               ]
             }
           },
           {
-            "answer": "Hand packers can use tools to assist with information organization, but actual adoption, authority, result release, and anomaly escalation still require verification by responsible people.",
+            "answer": "Start under supervision: match item codes and counts to the order, use the assigned tools, and ask how to handle damaged or heavy items. Report an exception before the carton is handed on.",
             "key": "qa1",
             "question": "How to enter safely?",
             "table": {
@@ -14616,7 +14982,7 @@
         "context_links": [
           {
             "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "label": "See job outlook and related roles"
           }
         ],
         "direct_answer": {
@@ -14845,7 +15211,7 @@
           "china_intl": "O*NET hand packing tasks and the China mapping boundary｜https://www.onetonline.org/link/details/53-7064.00; the U.S. certification directory does not prove Chinese occupational wages.",
           "china_name_row": "China wages: broad references distinguished by the actual employer.",
           "china_open": "Public duty and skill information can be used for career exploration, but Chinese market wages cannot be derived from it.",
-          "china_open_note": "For salary judgments, return to verifying the specific city, employer, position level, and public job posting terms.",
+          "china_open_note": "One January 2026 Tai’an recruitment notice lists a packing role handling finished garments after production. Historical example from one employer; it does not establish national wages, hiring requirements or a current vacancy.",
           "china_ref": "NBS average annual wages of urban unit employees in 2025｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "china_salary_note": {
             "$join": [
@@ -14900,53 +15266,53 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "O*NET wage percentiles｜https://www.onetonline.org/link/localwages/53-7064.00; BLS precise occupational overall projections｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+        "authority_sources": "National wages｜https://www.onetonline.org/link/localwages/53-7064.00；BLS projections｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；Employment by industry｜https://www.onetonline.org/link/industry/53-7064.00",
         "bls_table": [
           {
             "指标": "Salary 10th percentile.",
-            "数值": "$27,890",
-            "说明": "2025 U.S. precise 53-7064 annual wage percentiles, not seniority, starting pay, individual contracts, or Chinese conversions."
+            "数值": "$27,890 per year; $13.41 per hour",
+            "说明": "U.S. national May 2025 wage estimate."
           },
           {
             "指标": "Salary 25th percentile.",
-            "数值": "$32,220",
-            "说明": "2025 U.S. precise 53-7064 annual wage percentiles, not seniority, starting pay, individual contracts, or Chinese conversions."
+            "数值": "$32,220 per year; $15.49 per hour",
+            "说明": "U.S. national May 2025 wage estimate."
           },
           {
             "指标": "Salary median.",
-            "数值": "$36,280",
-            "说明": "2025 U.S. precise 53-7064 annual wage percentiles, not seniority, starting pay, individual contracts, or Chinese conversions."
+            "数值": "$36,280 per year; $17.44 per hour",
+            "说明": "U.S. national May 2025 wage estimate."
           },
           {
             "指标": "Salary 75th percentile.",
-            "数值": "$43,060",
-            "说明": "2025 U.S. precise 53-7064 annual wage percentiles, not seniority, starting pay, individual contracts, or Chinese conversions."
+            "数值": "$43,060 per year; $20.70 per hour",
+            "说明": "U.S. national May 2025 wage estimate."
           },
           {
             "指标": "Salary 90th percentile.",
-            "数值": "$47,100",
-            "说明": "2025 U.S. precise 53-7064 annual wage percentiles, not seniority, starting pay, individual contracts, or Chinese conversions."
+            "数值": "$47,100 per year; $22.65 per hour",
+            "说明": "U.S. national May 2025 wage estimate."
           },
           {
-            "指标": "Employment",
-            "数值": "555,500",
-            "说明": "2025 precise 53-7064 employment stock, not current hiring."
+            "指标": "U.S. employment (jobs)",
+            "数值": "555,500 U.S. jobs in 2025; 528,000 projected for 2035",
+            "说明": "BLS Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "Employment outlook 2025—2035.",
-            "数值": "-5.0%",
-            "说明": "Overall decline; an official net decrease of 27500, not AI attribution or individual unemployment."
+            "指标": "Projected job change, 2025–35",
+            "数值": "−5.0%; 27,500 fewer U.S. jobs",
+            "说明": "BLS Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "Job openings (annual average).",
-            "数值": "About 61,800 per year.",
-            "说明": "2025—2035 annual average openings including replacements, not the 27500 net decrease."
+            "指标": "Projected average annual openings",
+            "数值": "61,800 projected annual openings, including replacements",
+            "说明": "BLS Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
-        "boundary": "2025 wages and employment and the 2025—2035 overall projection each use the current precise scope; 2024 and 2024—2034 keep their historical basis without mixing periods.",
+        "boundary": "Wages are May 2025 national estimates. The forecast is for overall U.S. employment in this occupation. Neither tells you current local vacancies, an individual offer or the effect of AI.",
         "direct_answer": {
           "$join": [
-            "2025 U.S. precise 53-7064 employment 555,500 falling to 528,000 in 2035; over 2025—2035 overall -5.0%, an official net decrease of 27,500 people, and annual average openings of 61,800 including replacements, not AI adoption replacement, individual unemployment, current hiring, or Chinese demand.",
+            "May 2025 U.S. national medians: $36,280 per year and $17.44 per hour.",
             {
               "$item": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -14954,7 +15320,7 @@
               "type": "prose"
             }
           ],
-          "separator": "；"
+          "separator": "\n"
         },
         "factor_rows": [
           {
@@ -14971,39 +15337,44 @@
           }
         ],
         "factors_heading": "Factors affecting actual offers.",
-        "growth": "-5.0%",
+        "growth": "BLS Table 1.2 counts 555,500 U.S. jobs in 2025 and projects 528,000 in 2035 for this occupation (53-7064), a published decline of 27,500 jobs (5.0%). Average annual openings are projected at 61,800, including replacements.",
         "heading": "U.S. hand packing wages and employment.",
-        "industry_heading": "Industry and position differences.",
-        "industry_period": "Verify employer terms; no industry wage statistics.",
+        "industry_heading": "Employment by industry (2025)",
+        "industry_period": "2025 employment shares",
         "industry_rows": [
           {
-            "industry": "Retail trade.",
-            "median": "Verify the specific position.",
-            "note": "Order types and shifts differ."
+            "industry": "Retail trade",
+            "median": "26%",
+            "note": "Shares of U.S. jobs in this occupation, not industry wage figures."
           },
           {
-            "industry": "Manufacturing.",
-            "median": "Verify the specific position.",
-            "note": "Product and quality requirements differ."
+            "industry": "Manufacturing",
+            "median": "24%",
+            "note": "Shares of U.S. jobs in this occupation, not industry wage figures."
           },
           {
-            "industry": "Warehouse fulfillment.",
-            "median": "Verify the specific position.",
-            "note": "Picking and packing duties may be combined."
+            "industry": "Administrative and support services",
+            "median": "19%",
+            "note": "Shares of U.S. jobs in this occupation, not industry wage figures."
           },
           {
-            "industry": "Other employers.",
-            "median": "Verify the specific position.",
-            "note": "The national median is not a personal offer."
+            "industry": "Transportation and warehousing",
+            "median": "16%",
+            "note": "Shares of U.S. jobs in this occupation, not industry wage figures."
+          },
+          {
+            "industry": "Other industries",
+            "median": "15%",
+            "note": "Shares of U.S. jobs in this occupation, not industry wage figures."
           }
         ],
-        "industry_value_label": "Data status.",
+        "industry_value_label": "Employment share",
         "interpretation_heading": "How to interpret.",
         "interpretation_rows": [
           {
             "answer": {
               "$join": [
-                "The median wage is not starting pay, and it is not a personal income promise.",
+                "It marks the midpoint of the wage distribution.",
                 {
                   "$item": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.5",
                   "block": "us-salary",
@@ -15011,14 +15382,14 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "question": "What does the median wage represent?"
+            "question": "What does the median tell you?"
           },
           {
             "answer": {
               "$join": [
-                "2025 U.S. precise 53-7064 annual wages at the 10th/25th/50th/75th/90th percentiles are 27,890/32,220/36,280/43,060/47,100 U.S. dollars; hourly 13.41/15.49/17.44/20.70/22.65, not seniority, starting pay, or individual offers, and not converted into Chinese wages.",
+                "The national table publishes both measures.",
                 {
                   "$item": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -15026,35 +15397,35 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "question": "How are percentile wages used?"
+            "question": "What do hourly and annual estimates mean?"
           },
           {
-            "answer": "It is occupational employment stock, not current hiring volume.",
-            "question": "What does employment represent?"
+            "answer": "It counts jobs in this U.S. occupation. It is not the number of roles currently advertised.",
+            "question": "What does the 2025 employment number show?"
           },
           {
-            "answer": "2025 U.S. precise 53-7064 employment 555,500 falling to 528,000 in 2035; over 2025—2035 overall -5.0%, an official net decrease of 27,500 people, and annual average openings of 61,800 including replacements, not AI adoption replacement, individual unemployment, current hiring, or Chinese demand.",
-            "question": "How are growth and openings used?"
+            "answer": "The forecast covers overall U.S. employment change. Average annual openings include replacements and do not measure AI effects.",
+            "question": "How should I read the forecast?"
           }
         ],
-        "median": "$36,280",
+        "median": "$36,280 per year; $17.44 per hour",
         "outlook_heading": "Employment outlook.",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
-          "Wage statistical scope.",
-          "Annual wage reference.",
-          "Pay boundaries.",
-          "Explanation."
+          "Wage percentile",
+          "Annual wage",
+          "Hourly wage",
+          "How to read it"
         ],
         "wage_heading": "Wage data.",
         "wage_tiers": [
           {
-            "equivalent": "Not converted.",
+            "equivalent": "$15.49/hour",
             "interpretation": {
               "$join": [
-                "States only the median annual wage fact, not starting pay or a personal quote.",
+                "About a quarter of wages are at or below this point. It is not a starting wage.",
                 {
                   "$item": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.2",
                   "block": "us-salary",
@@ -15062,16 +15433,16 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "label": "Median level obtained.",
-            "value": "$36,280"
+            "label": "25th percentile",
+            "value": "$32,220"
           },
           {
-            "equivalent": "Not provided.",
+            "equivalent": "$17.44/hour",
             "interpretation": {
               "$join": [
-                "National percentiles cannot replace regional employer offers.",
+                "This is the midpoint of the distribution. An employer’s offer can differ.",
                 {
                   "$item": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.3",
                   "block": "us-salary",
@@ -15079,16 +15450,16 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "label": "Position and regional differences.",
-            "value": "Verify separately by specific region and employer."
+            "label": "Median (50th percentile)",
+            "value": "$36,280"
           },
           {
-            "equivalent": "Not provided.",
+            "equivalent": "$20.70/hour",
             "interpretation": {
               "$join": [
-                "Same-occupation 2025 percentiles, not corresponding to seniority levels.",
+                "About three quarters of wages are at or below this point. It is not tied to years of experience.",
                 {
                   "$item": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.4",
                   "block": "us-salary",
@@ -15096,10 +15467,10 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "label": "2025 wage percentiles.",
-            "value": "$27,890 / $32,220 / $36,280 / $43,060 / $47,100"
+            "label": "75th percentile",
+            "value": "$43,060"
           }
         ]
       },
@@ -15119,8 +15490,8 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "summary": "If you can accurately verify products, quantities, labels, and damage status during repetitive operations and follow lifting and tool safety, you can learn more about this position.",
-        "title": "Hand packer"
+        "summary": "This work may suit you if you like matching item codes and counts to an order, then checking cartons and labels before handoff.",
+        "title": "Could hand packing suit you?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -15150,12 +15521,12 @@
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-us-salary",
+            "label": "See U.S. wage percentiles"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "Compare related occupations"
           }
         ],
         "direct_answer": {
@@ -15191,30 +15562,30 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "Precise occupational employment.",
-            "occupation_scope": "O*NET 53-7064.00 precise occupation.",
+            "metric": "U.S. employment (jobs)",
+            "occupation_scope": "Packers and Packagers, Hand (53-7064)",
             "source_id": "ep",
-            "value": "555,500 people (2025)"
+            "value": "555,500 U.S. jobs in 2025; 528,000 projected for 2035"
           },
           {
             "geography": "United States",
-            "horizon": "2025—2035",
-            "interpretation": "Overall change differs from openings including replacements; not AI adoption replacement, individual layoffs, or Chinese demand.",
-            "limitation": "Cannot be extrapolated to individual hiring probability or the Chinese market.",
-            "metric": "Decline and annual average openings.",
-            "occupation_scope": "O*NET 53-7064.00 precise occupation.",
-            "source_id": "bls",
-            "value": "Overall -5.0%; net decrease 27500; annual average 61800 including replacements."
+            "horizon": "2025 baseline; 2035 forecast",
+            "interpretation": "The overall change does not isolate AI effects.",
+            "limitation": "National U.S. data do not establish local hiring or Chinese demand.",
+            "metric": "Projected job change, 2025–35",
+            "occupation_scope": "Packers and Packagers, Hand (53-7064)",
+            "source_id": "ep",
+            "value": "−5.0%; 27,500 fewer U.S. jobs"
           },
           {
-            "geography": "Chinese mainland",
-            "horizon": "Current materials.",
-            "interpretation": "National projections cannot represent hiring at a specific enterprise.",
-            "limitation": "Cannot be extrapolated to individual hiring probability or the Chinese market.",
-            "metric": "Same-scope employment projections.",
-            "occupation_scope": "Chinese positions cannot be directly matched.",
-            "source_id": "nbs",
-            "value": "No data that can be safely used at present."
+            "geography": "United States",
+            "horizon": "2025 baseline; 2035 forecast",
+            "interpretation": "Includes replacement needs when people switch occupations or leave the labor force. A change of employer within this occupation does not count.",
+            "limitation": "National U.S. data do not establish local hiring or Chinese demand.",
+            "metric": "Projected average annual openings",
+            "occupation_scope": "Packers and Packagers, Hand (53-7064)",
+            "source_id": "ep",
+            "value": "61,800 projected annual openings, including replacements"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15240,15 +15611,15 @@
           {
             "href": "https://www.onetonline.org/link/summary/53-7064.00",
             "id": "onet",
-            "label": "O*NET hand packing tasks and historical trends.",
-            "scope": "12 tasks and the older 2024—2034 period; not a current forecast."
+            "label": "O*NET occupational profile: hand packers (53-7064.00)",
+            "scope": "U.S. occupational profile and manual packing tasks."
           }
         ],
         "transitions": [
           {
             "capability_gaps": "Add equipment feeding, first-piece, alarm, and parameter safety authorization.",
             "shared_capabilities": "Label counts and packaging defect records.",
-            "target_href": "/zh/career/jobs/packaging-and-filling-machine-operators-and-tenders",
+            "target_href": "/en/career/jobs/packaging-and-filling-machine-operators-and-tenders",
             "target_slug": "packaging-and-filling-machine-operators-and-tenders",
             "target_title": "Packaging and filling machine operator",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15256,7 +15627,7 @@
           {
             "capability_gaps": "Add inspection standards, sampling, measuring tools, and quality decision authority.",
             "shared_capabilities": "Product inspection, weighing, and defect records.",
-            "target_href": "/zh/career/jobs/inspectors-testers-sorters-samplers-and-weighers",
+            "target_href": "/en/career/jobs/inspectors-testers-sorters-samplers-and-weighers",
             "target_slug": "inspectors-testers-sorters-samplers-and-weighers",
             "target_title": "Quality inspector",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15264,7 +15635,7 @@
           {
             "capability_gaps": "Add the target production helper processes and protection.",
             "shared_capabilities": "Material organizing, feeding, and collaboration.",
-            "target_href": "/zh/career/jobs/helpers-production-workers",
+            "target_href": "/en/career/jobs/helpers-production-workers",
             "target_slug": "helpers-production-workers",
             "target_title": "Production helper",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15272,7 +15643,7 @@
           {
             "capability_gaps": "Add material transport, routing, and ergonomics training; mover positions differ from packer duties.",
             "shared_capabilities": "Product lifting, quantities, and handoffs.",
-            "target_href": "/zh/career/jobs/laborers-and-freight-stock-and-material-movers-hand",
+            "target_href": "/en/career/jobs/laborers-and-freight-stock-and-material-movers-hand",
             "target_slug": "laborers-and-freight-stock-and-material-movers-hand",
             "target_title": "Hand material mover.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15280,7 +15651,7 @@
           {
             "capability_gaps": "Add recipe mixing, food hygiene, and batching equipment training.",
             "shared_capabilities": "Weighing, batch numbers, and cleanliness awareness.",
-            "target_href": "/zh/career/jobs/food-batchmakers",
+            "target_href": "/en/career/jobs/food-batchmakers",
             "target_slug": "food-batchmakers",
             "target_title": "Food batchmaker.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15288,7 +15659,7 @@
           {
             "capability_gaps": "Add adhesive curing, equipment control, and material protection processes.",
             "shared_capabilities": "Seal quality and anomaly records.",
-            "target_href": "/zh/career/jobs/adhesive-bonding-machine-operators-and-tenders",
+            "target_href": "/en/career/jobs/adhesive-bonding-machine-operators-and-tenders",
             "target_slug": "adhesive-bonding-machine-operators-and-tenders",
             "target_title": "Adhesive equipment operator.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15296,7 +15667,7 @@
           {
             "capability_gaps": "Add paper die cutting and forming, blade tension, and changeover processes.",
             "shared_capabilities": "Verify carton materials, dimensions, and quality.",
-            "target_href": "/zh/career/jobs/paper-goods-machine-setters-operators-and-tenders",
+            "target_href": "/en/career/jobs/paper-goods-machine-setters-operators-and-tenders",
             "target_slug": "paper-goods-machine-setters-operators-and-tenders",
             "target_title": "Paper goods machine operator.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15304,7 +15675,7 @@
           {
             "capability_gaps": "Add mechanical diagnostic disassembly and repair, hazardous energy training, and maintenance authorization.",
             "shared_capabilities": "Equipment anomaly observation and handoffs.",
-            "target_href": "/zh/career/jobs/industrial-machinery-mechanics",
+            "target_href": "/en/career/jobs/industrial-machinery-mechanics",
             "target_slug": "industrial-machinery-mechanics",
             "target_title": "Industrial machinery maintenance technician.",
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
@@ -15357,8 +15728,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Explore occupational interests",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
+            "cta_label": "Explore your career interests",
             "evidence_level": {
               "$item": "packers-and-packagers-hand.fit.personality-fit-block.8",
               "block": "fit",
@@ -15378,8 +15749,8 @@
           },
           {
             "answer": "Reflect on verification and anomaly-recording habits under repetitive tasks, and verify coaching feedback separately.",
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
-            "cta_label": "Understand personality traits.",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
+            "cta_label": "Explore Big Five traits",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for the occupation has not been verified.",
             "id": "big-five",
             "label": "Big Five personality.",
@@ -15394,8 +15765,8 @@
           },
           {
             "answer": "Record hands-on, rule-following, and collaboration preferences; do not decide physical capacity or ability from a type.",
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "cta_label": "Explore occupational interests",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "Explore MBTI preferences",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for the occupation has not been verified.",
             "id": "mbti",
             "label": "MBTI preferences.",
@@ -15410,8 +15781,8 @@
           },
           {
             "answer": "Can reflect on rework and pace pressure; the types have not been validated for occupational validity.",
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
-            "cta_label": "Understand personality traits.",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
+            "cta_label": "Explore the Enneagram",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for the occupation has not been verified.",
             "id": "enneagram",
             "label": "Enneagram.",
@@ -15426,8 +15797,8 @@
           },
           {
             "answer": "Observe how quantity units and order rules are understood; does not replace weighing-tool training.",
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
-            "cta_label": "Explore occupational interests",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
+            "cta_label": "Try a matrix reasoning test",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for the occupation has not been verified.",
             "id": "iq",
             "label": "Cognitive ability assessments.",
@@ -15442,8 +15813,8 @@
           },
           {
             "answer": "Focus on accurately describing wrong items, shortages, and unresolved handoff items; do not replace work feedback with self-assessment.",
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
-            "cta_label": "Understand personality traits.",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "cta_label": "Explore emotional intelligence",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for the occupation has not been verified.",
             "id": "eq",
             "label": "Emotion and communication self-assessment.",
@@ -15637,7 +16008,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Take the Holland occupational interest assessment",
+        "label": "Explore your career interests (RIASEC)",
         "source_page_type": "Occupational detail page",
         "subject_key": "packers-and-packagers-hand",
         "subject_kind": "Occupation",
@@ -15677,7 +16048,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Occupational interest and personality exploration."
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -15687,7 +16058,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Occupational interest and personality exploration."
+            "label": "Big Five personality test"
           },
           {
             "href": {
@@ -15697,7 +16068,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Occupational interest and personality exploration."
+            "label": "Enneagram test"
           },
           {
             "href": {
@@ -15707,7 +16078,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Occupational interest and personality exploration."
+            "label": "Emotional intelligence test"
           }
         ]
       },
@@ -15785,6 +16156,20 @@
         "id": "packers-and-packagers-hand.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -15850,14 +16235,14 @@
       },
       {
         "derivation": null,
-        "display_value": "17.44 U.S. dollars/hour, 36,280 U.S. dollars/year",
+        "display_value": "$36,280 per year; $17.44 per hour",
         "fact_id": "us-wage",
         "market": "United States",
-        "measure": "annual wage measure",
-        "occupation_scope": "Packers And Packagers, Hand page; scope preserved",
-        "period": "2025",
+        "measure": "U.S. annual and hourly wages",
+        "occupation_scope": "Packers and Packagers, Hand",
+        "period": "2025-05",
         "source_refs": [
-          "onet-summary"
+          "source-pack-onet-localwages"
         ]
       },
       {
@@ -15874,38 +16259,38 @@
       },
       {
         "derivation": null,
-        "display_value": "2024—2034 projected decline (-1% or lower)",
+        "display_value": "−5.0%",
         "fact_id": "employment-projection",
         "market": "United States",
-        "measure": "employment projection measure",
-        "occupation_scope": "Packers And Packagers, Hand page; scope preserved",
-        "period": "2024—2034",
+        "measure": "Projected job change, 2025–35",
+        "occupation_scope": "Packers and Packagers, Hand",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-53-7064"
         ]
       },
       {
         "derivation": null,
-        "display_value": "591,800 people",
+        "display_value": "555,500 jobs",
         "fact_id": "us-employment",
         "market": "United States",
-        "measure": "Employment",
-        "occupation_scope": "O*NET 53-7064.00",
-        "period": "2024",
+        "measure": "U.S. employment (jobs)",
+        "occupation_scope": "Packers and Packagers, Hand",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-53-7064"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 74,000/year",
+        "display_value": "61,800 openings per year",
         "fact_id": "us-openings",
         "market": "United States",
-        "measure": "Projected annual average openings",
-        "occupation_scope": "O*NET 53-7064.00",
-        "period": "2024—2034",
+        "measure": "Projected average annual openings",
+        "occupation_scope": "Packers and Packagers, Hand",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-53-7064"
         ]
       },
       {
@@ -15922,11 +16307,11 @@
       },
       {
         "derivation": null,
-        "display_value": "555,500 people (2025)",
+        "display_value": "555,500 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment",
-        "occupation_scope": "53-7064 precise occupation",
+        "measure": "U.S. employment (jobs)",
+        "occupation_scope": "Packers and Packagers, Hand",
         "period": "2025",
         "source_refs": [
           "bls-ep-53-7064"
@@ -15934,36 +16319,36 @@
       },
       {
         "derivation": null,
-        "display_value": "-5.0%",
+        "display_value": "−5.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Overall employment change; official net decrease of 27500",
-        "occupation_scope": "53-7064 precise occupation; not AI, individual unemployment, or Chinese demand",
-        "period": "2025—2035",
+        "measure": "Projected job change, 2025–35",
+        "occupation_scope": "Packers and Packagers, Hand",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ep-53-7064"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 61,800/year",
+        "display_value": "61,800 openings per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Annual average openings include replacements; not a net decrease of 27500",
-        "occupation_scope": "53-7064 precise occupation",
-        "period": "2025—2035",
+        "measure": "Projected average annual openings",
+        "occupation_scope": "Packers and Packagers, Hand",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ep-53-7064"
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "17%",
+        "derivation": "Three representative tasks are weighted equally: floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-11-10. This editorial estimate does not measure working time or job loss.",
+        "display_value": "8%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
         "measure": "AI Impact Score (editorial estimate)",
         "occupation_scope": "Hand packer",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "period": "Assessed 2026-11-10",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -15987,31 +16372,31 @@
         "availability": "available",
         "fact_ref": "us-wage",
         "key": "us_pay",
-        "label": "U.S. median wage (2025)"
+        "label": "U.S. median annual and hourly wages (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. overall employment change"
+        "label": "Projected job change, 2025–35"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. 2025 employment"
+        "label": "U.S. employment in 2025"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "Annual average openings (including replacements)"
+        "label": "Projected average annual openings"
       },
       {
-        "availability": "available",
-        "fact_ref": "cn-manufacturing-production-2025",
+        "availability": "missing",
+        "fact_ref": null,
         "key": "china_pay",
-        "label": "Above-scale manufacturing · broad production position"
+        "label": "Mainland China: exact occupational wage not verified"
       }
     ]
   },
@@ -16019,14 +16404,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "According to orders and packaging specifications, manually inspect, meter, sort, box, seal, and label products, record quantities and anomalies, and deliver verifiable parcels or batches. Corresponds to U.S. O*NET 53-7064.00; U.S. wages and Chinese position requirements are explained separately."
+      "text": "Explore hand packing, U.S. wages and job outlook, and try checking a paper order before shipment."
     },
     "title": {
       "availability": "available",
       "text": "Hand packer: work content, wages, and entry path"
     }
   },
-  "source_content_sha256": "f8e7a9afe012d228316bc1a33a26aa98ab109b2f37e378ba3daba8d1c1e4054b",
+  "source_content_sha256": "48a7e05e4da6bb73640d9377c357d44afe55719bda0e42cd8b8f3fedc53c8e79",
   "subject": {
     "canonical_slug": "packers-and-packagers-hand",
     "name": "Hand packer",

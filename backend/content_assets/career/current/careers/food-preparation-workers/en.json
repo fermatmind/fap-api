@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-prep-huangpu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-prep-zhaoyuan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -19742,60 +19748,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "id": "food-preparation-workers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-2"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "id": "food-preparation-workers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-3"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19818,7 +19784,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19846,7 +19812,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -22691,7 +22657,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Practice scenario | An entirely fictional canteen needs to prepare a batch of cold foods and side dishes for service. Draft preparation and hygiene records explaining: (1) how to check ingredient names, quantities, and condition against orders or instructions and check storage temperatures; (2) how to wash, peel, slice, and cut ingredients with manual or powered utensils; (3) how to prepare cold foods, salads, and beverages using approved procedures, then portion, package, and plate them; (4) how to record ingredient usage and refrigerator and freezer temperatures and identify abnormalities; (5) how to clean and sanitize work areas, equipment, and tableware before and after work and report equipment faults or abnormal ingredients. Answer using public information and simulated data, without any real company, product, or customer information."
+              "Paper exercise: use the fictional order in the entry section to calculate quantities, check refrigeration and allergens, and write a short escalation note. Finish your record before reading the example. No food or equipment is needed."
             ]
           },
           "id": "food-preparation-workers.quick-decision.fit-decision-checklist.2",
@@ -22705,7 +22671,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Fit signals | O*NET highlights working indoors in an environmentally controlled setting daily (88%), wearing common protective or safety equipment daily (74%), constant contact with others (42%), daily face-to-face discussions with individuals and teams (62%), daily telephone communication (46%), the importance of repeating the same tasks (47% rate it extremely important), the importance of exactness or accuracy (46% rate it extremely important), standing more than half the time (36%), walking or running more than half the time (35%), and using hands more than half the time (34%). If you are willing to follow procedures for washing, cutting, portioning, and hygiene while maintaining a steady pace, this occupation's everyday demands may align more closely with your working style."
+              "Fit signals | O*NET highlights working indoors in an environmentally controlled setting daily (88%), wearing common protective or safety equipment daily (74%), constant contact with others (42%), daily face-to-face discussions with individuals and teams (62%), daily telephone communication (46%), the importance of repeating the same tasks (47% rate it very important), the importance of exactness or accuracy (46% rate it very important), standing more than half the time (36%), walking or running more than half the time (35%), and using hands more than half the time (34%). If you are willing to follow procedures for washing, cutting, portioning, and hygiene while maintaining a steady pace, this occupation's everyday demands may align more closely with your working style."
             ]
           },
           "id": "food-preparation-workers.quick-decision.fit-decision-checklist.3",
@@ -22758,7 +22724,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Safe work sample (an entirely fictional task package): Given a simulated cold-food and side-dish preparation list with one salad, one cold platter, two beverages, an allergen warning, and refrigeration temperature requirements, spend 60 minutes drafting preparation and hygiene records. Include ingredient checks (names, quantities, condition, and shelf life), a washing and cutting plan (utensils and sequence), a preparation and portioning plan (orders or instructions, portions, and plating), hygiene and sanitizing procedures (hands, utensils, and worktops), temperature and storage records (refrigerator and freezer readings), and abnormality handling and reporting procedures. Specify situations requiring work to stop and be reported rather than handled independently, such as spoiled ingredients, temperatures outside limits, equipment faults, and allergen contamination."
+              "The entry section provides a fictional order for four cold items and drinks, stock, readings and exercise rules. Write your prep, exception and handoff notes before checking the example. This is a paper exercise; do not operate equipment or make food for service."
             ]
           },
           "id": "food-preparation-workers.profile.career-quick-answers-block.1",
@@ -23366,7 +23332,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Estimates and gaps | The 2025 BLS projections matrix has base-year employment of 908,500 including the self-employed, a different program from OEWS. The original national percentile table and occupational wages by industry were not obtained in this round. Publication status is not inferred from employment size, and older OEWS employment counts are not mixed in."
+              "Estimates and gaps | BLS counted 908,500 jobs in its 2025 projection base, including the self-employed. The separate May 2025 wage table covers employees and supplies the five national percentiles shown here. Comparable industry medians were not verified."
             ]
           },
           "id": "food-preparation-workers.profile.career-quick-answers-block.34",
@@ -25666,7 +25632,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "75th percentile: $38,540 per year (2025, BLS OEWS)"
+              "75th percentile: $38,550 per year (2025, BLS OEWS)"
             ]
           },
           "id": "food-preparation-workers.china-salary.career-snapshot-primary-locale.13",
@@ -26245,12 +26211,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "County-level and lower-tier markets"
+              "Mainland job postings (different job settings)"
             ]
           },
           "id": "food-preparation-workers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "prep-huangpu",
+            "prep-zhaoyuan"
           ],
           "type": "prose"
         },
@@ -26259,12 +26226,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No monthly wage data for this occupation in mainland China verifiable by city or region have been obtained. Recruitment offers, industry averages, and secondhand accounts are not substituted."
+              "A Huangpu cutting-station assistant listing shows five jobs at CNY 5,000–5,500 per month, with cutting, storage and station cleaning. A Zhaoyuan vegetable prep and plating listing shows two jobs at CNY 3,000–4,000 per month and mentions base and performance pay. Ask about slicers, cold prep, labeling and storage. The listings do not establish a national wage range."
             ]
           },
           "id": "food-preparation-workers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "prep-huangpu",
+            "prep-zhaoyuan"
           ],
           "type": "prose"
         },
@@ -26273,12 +26241,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Classification comparison | U.S. SOC 35-2021 / O*NET-SOC 35-2021.00 covers food preparation workers performing duties other than cooking. Mainland China uses national economic industry classifications and relevant categories such as accommodation and food services. The classifications and statistical definitions differ; no numerical conversion is made."
+              "A corresponding national occupation wage distribution for mainland China was not verified. Compare the listed examples by actual duties and service scope."
             ]
           },
           "id": "food-preparation-workers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "internal-rubric"
+            "prep-huangpu",
+            "prep-zhaoyuan"
           ],
           "type": "prose"
         },
@@ -26577,7 +26546,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "On 2026-10-11, the functioning May2025 Profiles national percentile and industry tables for this occupation were obtained: employees 893600 / RSE1.7%; mean annual wage 35290 / hourly 16.96; annual P10/P25/P50/P75/P90 = 25810 / 29950 / 35320 / 38550 / 45340; hourly = 12.41 / 14.40 / 16.98 / 18.53 / 21.80. Selected industries in the table come from the highest annual median industry table, not a ranking of main employers or wages for all occupations in those industries. EP employment belongs to a separate program; OEWS employee counts do not replace EP figures. Shared historical Hero/FAQ facts are preserved, with conflicts listed separately."
+              "O*NET’s 2025 U.S. national wage table lists annual P10/P25/P50/P75/P90 of $25,810 / $29,950 / $35,320 / $38,550 / $45,340. Wage survey coverage is separate from projected employment."
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.25",
@@ -26591,7 +26560,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 median annual wage of $35,320 and hourly wage of $16.98 have been verified. The original percentiles 25,810 / 29,950 / 38,540 / 45,340 were not obtained from official tables this round and remain pending verification. Percentiles do not establish experience, region, or working hours."
+              "These percentiles do not establish pay for particular experience levels, regions, shifts or job offers."
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.26",
@@ -26694,12 +26663,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Growth: declining (-3.0%, 2025—2035, BLS projections presented through O*NET)"
+              "BLS projects U.S. employment in SOC 35-2021 to change by −3.0%, from 908,500 in 2025 to 881,300 in 2035, with 135,700 openings per year on average, including replacement needs."
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26722,7 +26691,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$60,990 per year (May2025, median for this occupation in the industry)"
+              "No verified figure available"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.35",
@@ -26736,7 +26705,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Selected from the official table of industries with the highest annual medians; does not indicate major employer size, individual wages, or job demand."
+              "Check U.S. OEWS by occupation 35-2021 and industry. National figures do not substitute."
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.36",
@@ -26764,7 +26733,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$48,090 per year (May2025, median for this occupation in the industry)"
+              "No verified figure available"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.38",
@@ -26778,7 +26747,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Selected from the official table of industries with the highest annual medians; does not indicate major employer size, individual wages, or job demand."
+              "Check U.S. OEWS by occupation 35-2021 and industry. National figures do not substitute."
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.39",
@@ -26806,7 +26775,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$46,960 per year (May2025, median for this occupation in the industry)"
+              "No verified figure available"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.41",
@@ -26820,7 +26789,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Selected from the official table of industries with the highest annual medians; does not indicate major employer size, individual wages, or job demand."
+              "Check U.S. OEWS by occupation 35-2021 and industry. National figures do not substitute."
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.42",
@@ -26848,7 +26817,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$45,490 per year (May2025, median for this occupation in the industry)"
+              "No verified figure available"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.44",
@@ -26862,7 +26831,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Selected from the official table of industries with the highest annual medians; does not indicate major employer size, individual wages, or job demand."
+              "Check U.S. OEWS by occupation 35-2021 and industry. National figures do not substitute."
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.45",
@@ -27013,31 +26982,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Dishwasher direction",
@@ -28690,7 +28659,7 @@
                 "Assist with ingredient preparation and supplies, heating and finishing food, and plating",
                 "Food safety and cooking training records and evidence of job shadowing",
                 "A fictional dish's heating parameters and production record",
-                "Responsible for heating and cooking and deciding doneness and finished output; this occupation does not perform heat processing"
+                "Fast-food cooks focus on cooking and getting finished items out. Food preparation workers mainly check, cut, measure and portion ingredients, but may prepare hot drinks or help heat food depending on the station."
               ],
               [
                 "Fast food and counter workers",
@@ -28786,38 +28755,38 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "An entirely fictional cold-food and side-dish preparation list: one salad, one cold platter, two beverages, an allergen warning, and refrigeration temperature requirements.",
-                  "A blank ingredient-check and shelf-life record form.",
-                  "A blank washing and cutting plan form covering utensils, sequence, and raw/cooked separation.",
-                  "A blank preparation and portioning record form covering portions and plating.",
-                  "A blank temperature and storage record form for refrigerator and freezer readings.",
-                  "A process flowchart: ingredient checks—washing and cutting—cold-food and beverage preparation—portioning and plating—temperature and usage records—cleaning and sanitizing.",
-                  "A pen and calculator for trial portion and usage calculations.",
-                  "A timer with a 60-minute limit."
+                  "Scenario: a fictional canteen serves at 11:30. Order: 12 cucumber-carrot salads, each with 80 g cucumber and 30 g carrot.",
+                  "Eight tofu plates, each with 50 g cucumber and 70 g tofu. Ticket C8 specifies a soy allergy. No soy-free alternative appears on the approved menu.",
+                  "Ten apple juices and ten barley teas, each 150 mL. The tofu label lists soy and the tea label lists barley. Refer substitutions to the supervisor.",
+                  "Stock: 1.50 kg cucumber, 0.45 kg carrot, 0.65 kg tofu and 2.00 L of each drink. Packages are intact and within date.",
+                  "At 11:00, refrigerator A reads 3°C and holds unopened ingredients. Refrigerator B reads 8°C and holds four salads from the previous shift; time above limit is unknown. The freezer reads −19°C.",
+                  "Exercise rules only: refrigerate at 0–4°C and freeze at −18°C or colder. Hold and label any affected batch, record time, reading and batch, and notify the supervisor. Do not release it yourself.",
+                  "Allergen rule: do not serve a meal from a menu containing the flagged allergen. Hold the ticket and alert the supervisor. Wait for an approved replacement and a cross-contact check.",
+                  "Use paper or a spreadsheet. These temperature limits and reporting steps are exercise assumptions, not rules for a real kitchen."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Within 60 minutes, complete ingredient-check records, washing and cutting plans, preparation and portioning plans, and hygiene, temperature, and storage plans.",
-                  "Complete trial portion and usage calculations and describe at least two situations that could create food safety risks, with corresponding measures.",
-                  "Specify situations requiring work to stop and be reported rather than handled independently, such as spoiled ingredients, temperatures beyond limits, allergen contamination, and equipment faults."
+                  "First, calculate the amounts on the original order and compare them with stock. Mark C8 pending; the calculation does not authorize issuing ingredients for that ticket.",
+                  "Record the three readings and their status. Identify the two items to hold and say what to isolate, whom to notify and what remains unresolved.",
+                  "Finish with two lines on hygiene sequence and a short handoff. Complete your version before reading the reference below."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First list the ingredient-check sequence and mandatory items, then record each confirmation method and result.",
-                  "Specify utensils, sequence, and raw/cooked separation arrangements for washing and cutting.",
-                  "For abnormalities, specify warning signs, response steps, and reporting recipients.",
-                  "End with a reflection on the consequences of shortening particular steps."
+                  "Reference, after you finish: 1.36 kg cucumber, 0.36 kg carrot, 0.56 kg tofu on the original order, and 1.50 L each of juice and tea. Stock covers the original quantities.",
+                  "Temperature check: A and the freezer meet the exercise limits. At 11:00, B is at 8°C. Hold all four salads, record the unknown duration and notify the supervisor.",
+                  "Allergen check: hold C8 because the tofu contains soy. Removing tofu from the same plate is insufficient. Wait for an approved replacement and a cross-contact check.",
+                  "Example handoff: “At 11:00, four salads in B were held at 8°C; duration unknown. C8 is on hold pending an approved replacement.” Start with clean hands and work surfaces and segregate tools. Clean, sanitize and record the handoff at the end."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Exclude cooking and heating, recipe decisions, and equipment repairs. For abnormal ingredients or temperatures beyond limits, always specify isolation, withdrawal from use, and reporting to the supervisor first.",
-                  "The sample only demonstrates your ability to organize tasks and records in this occupation's working style; it does not prove qualifications or competence."
+                  "This paper exercise does not involve food, knives or equipment. On the job, follow the site’s procedures and authorization.",
+                  "The supervisor decides what happens to the held batch and which replacement is approved. The learner records, holds and reports; they do not authorize release."
                 ]
               }
             ]
@@ -28845,9 +28814,9 @@
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Ask an experienced preparation worker or food safety lead to review your hygiene, temperature, and abnormality-response plans and identify problems in writing.",
-                  "Record review comments, dates, and supporting grounds for later reflection.",
-                  "Show the process and records from ingredient checks through cleaning and handover, along with the finished output."
+                  "Compare your work with the reference answer on your own.",
+                  "Recalculate the quantities and check that you held both the four salads in B and C8, with a named role to take over.",
+                  "Record one omission and one change. A trained colleague can review it later, but that is optional."
                 ]
               },
               {
@@ -28935,7 +28904,7 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "Understand this occupation's materials and workflow: ingredient checks—washing and cutting—cold-food and beverage preparation—portioning and plating—temperature and usage records—cleaning and sanitizing.",
-                  "Record the preparation-area environment, utensil types, and peak-period pace you observe."
+                  "Use this page and public job materials to note workspace, tools and peak periods. Kitchen access is not required."
                 ]
               },
               {
@@ -28948,29 +28917,29 @@
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Complete a sample ingredient-check, shelf-life, and temperature record.",
-                  "List key requirements under the shift's procedures: water temperature and sanitizing, raw/cooked separation, refrigeration and freezing temperature ranges, and allergen warnings."
+                  "Record the three 11:00 readings and their batches from the fictional exercise.",
+                  "Use the exercise limits to mark which are in range and which need action."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Use a fictional list for trial portion and usage calculations and label assumed values.",
-                  "Describe responses and reporting recipients for two typical risks: spoiled ingredients and raw/cooked cross-contamination."
+                  "Calculate cucumber, carrot, tofu and both drinks from the order.",
+                  "Compare stock and separate the calculation from what can be issued."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Complete a simulated washing, cutting, and cold-food or beverage preparation exercise.",
-                  "Use the hygiene checklist to identify at least two nonconformities and record corrective measures."
+                  "Independently identify the temperature and allergy exceptions in the entry exercise.",
+                  "Write the hold, isolation and reporting steps before consulting the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Ask an experienced person to challenge your hygiene and temperature judgments.",
-                  "Record their objections and your responses without avoiding counterexamples."
+                  "Read the reference and check quantities, temperatures, the allergy ticket and your handoff.",
+                  "Mark and correct one omission. No second person is required."
                 ]
               },
               {
@@ -28994,11 +28963,11 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: You can follow procedures for washing, cutting, preparing, and portioning while maintaining accurate hygiene and temperature records.",
-              "Continue: You retain raw/cooked separation, sanitizing, and recordkeeping during peaks and last-minute changes without omitting critical steps.",
-              "Continue: You are willing to start as a preparation assistant or cleaner and thoroughly learn food safety and hygiene requirements.",
-              "Stop: You clearly cannot adjust to prolonged standing and walking, repetitive washing and cutting, or hygiene requirements, and cannot improve this in the short term.",
-              "Stop: You lack alertness to ingredient, temperature, and hygiene requirements and repeatedly make food safety errors.",
+              "Continue exploring: Recalculate the quantities in the fictional order and show that the stock covers the theoretical total. Keep the theoretical quantities separate from what can be issued.",
+              "Continue exploring: On paper, identify the out-of-range reading in B and the soy flag on C8. Record what to hold, the reading or allergen, and who takes over. Write a short shift handoff.",
+              "Before applying, ask the employer how the team handles washing, cutting, portioning, hygiene and recordkeeping during a busy shift, and what training and supervision they provide.",
+              "Pause and repeat the paper exercise if you cannot explain a calculation or if your record omits a reading, ticket or next step. Compare your answer with the reference before deciding.",
+              "Pause if you repeatedly miss the temperature or allergen hold after checking the reference. Record the missed step and try the exercise again before deciding whether to explore this role.",
               "Change direction: Consider fast-food cooking if you prefer heating and finished-food production, or fast food and counter service if you prefer customer interaction.",
               "Change direction: Consider dishwashing if you prefer cleaning and repetitive physical work, butchery and meat cutting if you prefer knives, breakdown and grading, or barista work if you prefer beverage techniques. Separate preparation is required."
             ]
@@ -29122,7 +29091,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Recruitment checking suggestion | No specific recruitment samples were obtained; national channels, seasonal patterns, and representativeness are not inferred. Compare vacancy locations, business formats, employment hours, shifts, tips, health and training conditions, and protective arrangements."
+              "The Huangpu cutting-station and Zhaoyuan plating postings illustrate different jobs. Check location, tasks, shifts and health requirements. These examples do not establish current vacancies or national patterns."
             ]
           },
           "id": "food-preparation-workers.path.recruitment-sample.1",
@@ -30549,7 +30518,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The median is not starting pay. Original percentiles were not obtained from official tables this round and await verification. Experience, region, or shifts cannot be listed as measured causes of differences."
+              "Median wages are not starting pay. National percentiles describe a distribution, not individual pay by experience, location or hours."
             ]
           },
           "id": "food-preparation-workers.market-signals.market-signal-card.18",
@@ -30606,7 +30575,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Median annual wage: $35,320 (median hourly wage: $16.98); percentiles: $25,810 / $29,950 / $38,540 / $45,340"
+              "Median annual wage: $35,320 (median hourly wage: $16.98); percentiles: $25,810 / $29,950 / $38,550 / $45,340"
             ]
           },
           "id": "food-preparation-workers.market-signals.market-signal-card.22",
@@ -31129,7 +31098,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Under O*NET-SOC 35-2021.00, workers perform various food preparation duties other than cooking, such as preparing cold foods and shellfish, slicing meat, and brewing coffee or tea. Duties include checking ingredients and shelf life; washing, peeling, slicing, and cutting while separating raw and cooked foods; preparing cold foods, salads, sauces, and drinks to order or instruction; portioning, packaging, plating, and distributing according to menus; measuring and recording food, refrigerator and freezer temperatures and ingredient usage; and cleaning and sanitizing work areas, utensils, and tableware and disposing of waste. Excluded are cooking and heating, recipe and dish decisions, food ingredient and mixing equipment operation, cooking-equipment parameter control, dedicated dishwashing, and general cleaning unrelated to food service.",
+                "answer": "Food preparation centers on washing, cutting, cold items and drinks, portioning, temperature logs and sanitation. Duties may include using manual or electric tools, mixing salads or using warming equipment. Check whether the particular station also handles heating or primary cooking.",
                 "id": "food-preparation-workers.faq.1",
                 "question": "What exactly does this occupation do?",
                 "question_key": "career.faq.food-preparation-workers.q1",
@@ -31149,23 +31118,24 @@
                 ]
               },
               {
-                "answer": "The 2025 median annual wage was $35,320 (median hourly wage $16.98). Employment was approximately 902,700 in 2024 (BLS projections base year; OEWS May 2025 shows approximately 893,600). Total employment is projected to decline over 2024—2034 (approximately -1% or lower), while average annual openings remain around 148,000, almost entirely from replacement needs. These figures use U.S. O*NET/BLS definitions and do not apply to other jurisdictions. OEWS excludes tips.",
+                "answer": "The 2025 U.S. median wage for this occupation was $16.98 an hour and $35,320 a year. OEWS wages include tips and exclude overtime and similar premium pay. BLS projects U.S. employment in SOC 35-2021 to change by −3.0%, from 908,500 in 2025 to 881,300 in 2035, with 135,700 openings per year on average, including replacement needs.",
                 "id": "food-preparation-workers.faq.3",
                 "question": "What are U.S. wages and employment like?",
                 "question_key": "career.faq.food-preparation-workers.q3",
                 "source_refs": [
                   "bls-oews-2025",
-                  "bls-projections-2025-35"
+                  "bls-projections-2025-35",
+                  "bls-oews-methods"
                 ]
               },
               {
-                "answer": "Mainland China has not established public occupational wage statistics precisely matching this occupation. NBS publishes average wages of urban-unit employees by industry category, such as accommodation and food services: 62,461 yuan per year for urban non-private units and 55,123 for urban private units. These are industry figures without occupational distinctions and serve only as background proxies. This page retains a visible Insufficient evidence marker in the mainland China section and does not substitute industry averages, recruitment offers, or third-party estimates.",
+                "answer": "A Huangpu cutting-station assistant listing shows five jobs at CNY 5,000–5,500 per month, with cutting, storage and station cleaning. A Zhaoyuan vegetable prep and plating listing shows two jobs at CNY 3,000–4,000 per month and mentions base and performance pay. Ask about slicers, cold prep, labeling and storage. The listings do not establish a national wage range.",
                 "id": "food-preparation-workers.faq.4",
                 "question": "Are corresponding wage data available for mainland China?",
                 "question_key": "career.faq.food-preparation-workers.q4",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "prep-huangpu",
+                  "prep-zhaoyuan"
                 ]
               },
               {
@@ -31189,7 +31159,7 @@
                 ]
               },
               {
-                "answer": "O*NET places this occupation in Job Zone 1-2 (SVP below 6.0). Upper-secondary education or equivalent is usually sufficient, some positions do not require formal educational credentials, and skills are mainly learned through short-term on-the-job training. Actual employer recruitment conditions and local worker health management requirements apply.",
+                "answer": "BLS lists no formal education and short-term on-the-job training as typical. O*NET Job Zone 1–2 is a preparation group, not a high-school requirement. Check the posting for actual education and health requirements.",
                 "id": "food-preparation-workers.faq.7",
                 "question": "What education and training are needed?",
                 "question_key": "career.faq.food-preparation-workers.q7",
@@ -31199,13 +31169,12 @@
                 ]
               },
               {
-                "answer": "Being trained, certified, health-certified, and appointed by an employer are four distinct statuses. Food safety and hygiene training is generally required. Positions handling ready-to-eat foods often require worker health management and health certification under local rules. Utensil and equipment operation and allergen management may require specialized training. Preparation items on this page are not any institution's formal qualification list.",
+                "answer": "In mainland China, food production or business staff who handle ready-to-eat food need an annual health check and health certificate before that work. Check employer training and equipment authorization separately.",
                 "id": "food-preparation-workers.faq.8",
                 "question": "Are certifications or qualifications required?",
                 "question_key": "career.faq.food-preparation-workers.q8",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "cn-food-safety-law"
                 ]
               },
               {
@@ -31219,7 +31188,7 @@
                 ]
               },
               {
-                "answer": "Under U.S. definitions, total employment is projected to decline over 2024—2034 (approximately -1% or lower), while average annual openings remain large and almost entirely reflect replacement needs. Projections are not individual opportunities; actual opportunities depend on local food-service formats and automation levels. Adjacent directions include fast-food cook, barista, dishwasher, butcher and meat cutter, fast food and counter worker, waiter or waitress, and first-line food preparation and serving supervisor, requiring new processes and utensils to be learned. Food safety and store operations management are also possible directions.",
+                "answer": "BLS projects U.S. employment in SOC 35-2021 to change by −3.0%, from 908,500 in 2025 to 881,300 in 2035, with 135,700 openings per year on average, including replacement needs. For local work, ask whether the role is washing, cutting, cold prep or also cooking, and who handles labels, refrigeration and peak handoffs. If you want to cook at a hot station or serve customers directly, compare fast food cooks and counter workers respectively.",
                 "id": "food-preparation-workers.faq.10",
                 "question": "What is the outlook, and what other directions are possible?",
                 "question_key": "career.faq.food-preparation-workers.q10",
@@ -31244,7 +31213,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Source card | Research process: First check O*NET-SOC 35-2021.00 occupational scope, tasks, and work context; then obtain wage and employment data from BLS OEWS May 2025 and BLS 2025—2035 employment projections; finally use NBS 2025 industry-category average wages for accommodation and food services as mainland China background proxies. U.S. and mainland China data are shown separately without combination or conversion. On 2026-10-11, functioning May2025 Profiles national five-percentile data and precise industry selections were added; the previous access restriction had been lifted."
+              "Source card | O*NET presents the BLS May 2025 national wages for 35-2021. BLS Table 1.2 is a separate source for employment. Comparable wage medians for the individual industries listed here could not be verified."
             ]
           },
           "id": "food-preparation-workers.sources.source-card.1",
@@ -31275,7 +31244,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round on 2026-10-11 checked O*NET35-2021 tasks, context, interests and median wages, the exact BLS2025—2035 row, and OEWS methodology. NBS industry proxies and China's Food Safety Law are used within their scope. Shared older projections and wage percentiles received additional checks; historical review conclusions were not inherited. On 2026-10-11, functioning May2025 Profiles national five-percentile data and precise industry selections were added; the previous access restriction had been lifted."
+              "O*NET presents the BLS May 2025 national wages for 35-2021. BLS Table 1.2 is a separate source for employment. Comparable wage medians for the individual industries listed here could not be verified."
             ]
           },
           "id": "food-preparation-workers.sources.source-card.3",
@@ -31292,12 +31261,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Remaining gaps: precise mainland Chinese occupational and regional wage and employment data, specific recruitment samples, and causal evidence on AI adoption were not obtained. U.S. national five-percentile and specific industry wage data for this occupation have now been checked. These do not provide combined wages for older broad industry scenarios, which were replaced with selections from explicit official categories. Conflicts involving shared source metadata and protected Hero and FAQ facts are listed in the report. This round does not establish full-page consistency or independent acceptance."
+              "U.S. wage and employment figures come from OEWS and the BLS projections respectively. Mainland industry averages are background, and job postings describe particular stations and terms. This page did not verify a national occupational wage distribution in mainland China or a causal effect of AI adoption on this occupation."
             ]
           },
           "id": "food-preparation-workers.sources.source-card.4",
           "source_refs": [
-            "oews-profile-2025"
+            "bls-projections-2025-35",
+            "bls-oews-2025",
+            "nbs-wages-2025"
           ],
           "type": "prose"
         }
@@ -31321,28 +31292,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
-                "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (English)",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
                 "entity": "MBTI (Chinese)",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Big Five (Chinese)",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Return to the Food Preparation Workers career page",
@@ -31400,17 +31359,16 @@
                 "url": "https://www.onetonline.org/link/details/35-2021.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Table row 35-2021: Approximately 902.7 thousand employed in 2024, declining growth (approximately -1% or lower), and approximately 148 thousand average annual openings.",
-                  "Projections are occupational statistics, not an individual's probability of being hired."
+                  "BLS projects U.S. employment in SOC 35-2021 to change by −3.0%, from 908,500 in 2025 to 881,300 in 2035, with 135,700 openings per year on average, including replacement needs."
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
-                "limitation": "Projected increases or average annual openings must not be interpreted directly as individual income or hiring guarantees.",
+                "limitation": "U.S. occupation only. Average annual openings differ from net employment change over the decade.",
                 "market": "US",
-                "name": "U.S. Bureau of Labor Statistics：2024—2034 Occupational Projections and Characteristics",
-                "period": "2024—2034",
+                "name": "BLS: Occupational Projections and Characteristics, 2025–2035, Table 1.2",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "35-2021 Food Preparation Workers",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31456,11 +31414,11 @@
                 "id": "internal-rubric",
                 "limitation": "Not an external source of occupational facts and does not replace official statistics or jurisdictional rules.",
                 "market": "CN/US",
-                "name": "FermatMind Career Content Field and Evidence Scope Rules",
+                "name": "Sources and methods on this page",
                 "period": "current authoring rules",
                 "publisher": "FermatMind",
-                "scope": "field review and source disclosure",
-                "url": "https://fermatmind.com"
+                "scope": "Editorial methods",
+                "url": "https://fermatmind.com/en/career/jobs/food-preparation-workers#career-content-sources"
               },
               {
                 "accessed_at": "2026-10-11",
@@ -31530,7 +31488,7 @@
                 ],
                 "evidence_type": "official primary source",
                 "id": "oews-profile-2025",
-                "limitation": "Highest-paying industry selections are not a ranking of main employers, EP employment, or individual income",
+                "limitation": "National occupational wage percentiles are separate from industry pay or employment.",
                 "market": "United States",
                 "name": "BLS May2025 national and industry wage Profiles for this occupation",
                 "period": "May2025",
@@ -31554,6 +31512,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Listing 5: five jobs at CNY 5,000–5,500 per month for sorting, washing, cutting to size, storing and cleaning the station."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "prep-huangpu",
+                "limitation": "One posting; not a national wage estimate or confirmation the vacancy is still open.",
+                "market": "Mainland China",
+                "name": "Huangpu: kitchen assistant, cutting station",
+                "period": "2026-08-18",
+                "publisher": "Huangpu District Employment Service Center, Guangzhou",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzjg/qt/ldjyfwzx/kljy/content/post_10969476.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Two vegetable prep and plating jobs at CNY 3,000–4,000 per month; the listing mentions base and performance pay. The duties differ from the Huangpu cutting station."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "prep-zhaoyuan",
+                "limitation": "One posting; not a national wage estimate or confirmation the vacancy is still open.",
+                "market": "Mainland China",
+                "name": "Zhaoyuan: vegetable prep and plating",
+                "period": "2026 posting / accessed November 9, 2026",
+                "publisher": "Zhaoyuan Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhaoyuan.gov.cn/col/col102041/art/2026/art_07b32b58c83a459586daa25511972702.html"
               }
             ]
           },
@@ -34420,6 +34408,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-prep-huangpu",
+            "posting-prep-zhaoyuan"
+          ],
           "sources_note": {
             "$item": "food-preparation-workers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34429,7 +34421,7 @@
           "ui": {
             "ai_heading": "Will AI affect food preparation workers' wages?",
             "driver_heading": "Which industries and directions employ this occupation?",
-            "official_heading": "Public recruitment samples (historical announcements, not official statistics)",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Educational backgrounds, common role directions, and checking suggestions (editorial compilation, not wage statistics)",
             "scenario_heading": "Which starting roles are typical for food preparation workers with different educational backgrounds?",
             "scenario_interpretation_label": "Notes and checking suggestions",
@@ -34459,7 +34451,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "us-wage-low10-2025",
+            "fact_ref": "us-wage-2025",
             "指标": "Wages · Median annual wage",
             "数值": {
               "$item": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.9",
@@ -34475,7 +34467,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-q25-2025",
+            "fact_ref": "us-wage-low10-2025",
             "指标": "Wages · 10th percentile",
             "数值": {
               "$item": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.11",
@@ -34491,7 +34483,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-2025",
+            "fact_ref": "us-wage-q25-2025",
             "指标": "Wages · 25th percentile",
             "数值": {
               "$item": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.13",
@@ -34648,7 +34640,7 @@
           "type": "prose"
         },
         "heading": "How much do U.S. food preparation workers earn?",
-        "industry_heading": "How do U.S. wages differ across industries?",
+        "industry_heading": "Where can you check U.S. wages by industry?",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
@@ -34739,7 +34731,7 @@
             }
           }
         ],
-        "industry_value_label": "Median wage for this occupation within the industry",
+        "industry_value_label": "Occupational median by industry",
         "interpretation_heading": "How should these U.S. wage figures be understood?",
         "interpretation_rows": [
           {
@@ -34796,7 +34788,7 @@
         "wage_heading": "U.S. wage distribution",
         "wage_tiers": [
           {
-            "equivalent": "Originally registered percentile; official table verification pending this round",
+            "equivalent": "National wage percentile, not a specific experience level.",
             "interpretation": {
               "$item": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
@@ -34824,7 +34816,7 @@
             }
           },
           {
-            "equivalent": "Originally registered percentile; official table verification pending this round",
+            "equivalent": "National wage percentile, not a specific experience level.",
             "interpretation": {
               "$item": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
@@ -36212,7 +36204,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Start exploring whether Food Preparation Workers suits you",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36286,30 +36278,10 @@
               "$link": "food-preparation-workers.navigation.links.1",
               "block": "navigation",
               "copy_key": "career.item.navigation-links",
-              "entry": "navigation-2",
-              "field": "url"
-            },
-            "label": "MBTI (English)"
-          },
-          {
-            "href": {
-              "$link": "food-preparation-workers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-3",
-              "field": "url"
-            },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "food-preparation-workers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Explore my personality preferences"
           },
           {
             "href": {
@@ -36319,7 +36291,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Explore my Big Five traits"
           }
         ]
       },
@@ -36445,7 +36417,7 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "Performs various food preparation duties other than cooking, such as preparing cold foods and shellfish, slicing meat, and brewing coffee or tea. Checks ingredients and orders, washes and cuts, prepares cold foods, salads, and beverages as instructed, portions and plates, measures and records temperatures and usage, and cleans and sanitizes while maintaining hygiene, producing foods and ingredients ready for cooking or direct service. Excludes cooking and heating, recipe and dish decisions, food ingredient and mixing equipment operation, cooking-equipment parameter control, dedicated dishwashing, and general cleaning unrelated to food service.",
+        "display_value": "Food preparation centers on washing, cutting, cold items and drinks, portioning, temperature logs and sanitation. Duties may include using manual or electric tools, mixing salads or using warming equipment. Check whether the particular station also handles heating or primary cooking.",
         "fact_id": "identity",
         "market": "US",
         "measure": "Occupational identity and duties",
@@ -36494,7 +36466,7 @@
       },
       {
         "derivation": null,
-        "display_value": "75th percentile: $38,540 per year (2025, BLS OEWS)",
+        "display_value": "75th percentile: $38,550 per year (2025, BLS OEWS)",
         "fact_id": "us-wage-q75-2025",
         "market": "US",
         "measure": "Exact occupation's 75th-percentile annual wage",
@@ -36518,36 +36490,36 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 902,700 employed (2024, BLS projections base year, presented through O*NET; approximately 893,600 under OEWS presentation definitions)",
+        "display_value": "908,500 people (2025 BLS projections base year)",
         "fact_id": "us-employment-2025",
         "market": "US",
-        "measure": "Employment size",
-        "occupation_scope": "Food Preparation Workers; 35-2021.00",
-        "period": "2025",
+        "measure": "2025 base-year employment",
+        "occupation_scope": "U.S. SOC 35-2021",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Growth: declining (approximately -1% or lower, 2024—2034, BLS projections presented through O*NET)",
+        "display_value": "−3.0% (projected employment change, 2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
-        "measure": "Employment growth rate",
-        "occupation_scope": "Food Preparation Workers; 35-2021.00",
-        "period": "2024—2034",
+        "measure": "Projected employment change",
+        "occupation_scope": "U.S. SOC 35-2021",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 148,000 average annual job openings (2024—2034, mainly from replacement needs)",
+        "display_value": "135,700 per year (including replacement needs)",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
-        "measure": "Average annual job openings",
-        "occupation_scope": "Food Preparation Workers; 35-2021.00",
-        "period": "2024—2034",
+        "measure": "Average annual openings",
+        "occupation_scope": "U.S. SOC 35-2021",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -36707,6 +36679,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Listing 5: five jobs at CNY 5,000–5,500 per month for sorting, washing, cutting to size, storing and cleaning the station.",
+        "fact_id": "posting-prep-huangpu",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Huangpu: kitchen assistant, cutting station",
+        "period": "2026-08-18",
+        "source_refs": [
+          "prep-huangpu"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Two vegetable prep and plating jobs at CNY 3,000–4,000 per month; the listing mentions base and performance pay. The duties differ from the Huangpu cutting station.",
+        "fact_id": "posting-prep-zhaoyuan",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Zhaoyuan: vegetable prep and plating",
+        "period": "2026 posting / accessed November 9, 2026",
+        "source_refs": [
+          "prep-zhaoyuan"
+        ]
       }
     ]
   },
@@ -36733,19 +36729,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment size (2024 projections base year)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual openings (2024—2034)"
+        "label": "U.S. projected annual job openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -36759,14 +36755,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What food preparation workers do, how to enter the occupation, work boundaries, and development directions. Based on official occupational information, distinguishing occupational statistics, industry proxies, and qualification gaps."
+      "text": "See what food prep workers do: wash, cut and portion ingredients, prepare cold foods and hand off supplies. Compare U.S. data and mainland China prep listings."
     },
     "title": {
       "availability": "available",
       "text": "Food Preparation Workers"
     }
   },
-  "source_content_sha256": "fbe15bdd0b9434d4b0081e08bbea220c9a48756fb09ecb8d8462a8d730a7d037",
+  "source_content_sha256": "59b1f85e0fc60cf86b3cf6424d72233bc0d3c3616bab470821fcb59d1ee729c8",
   "subject": {
     "canonical_slug": "food-preparation-workers",
     "name": "Food Preparation Workers",

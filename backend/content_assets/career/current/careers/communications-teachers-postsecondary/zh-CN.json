@@ -1442,6 +1442,9 @@
       "item:communications-teachers-postsecondary.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:communications-teachers-postsecondary.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:communications-teachers-postsecondary.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30573,6 +30576,21 @@
           "id": "communications-teachers-postsecondary.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。课程要求学生比较两种媒体框架，旧量表只给演讲表现打分。写下该保留的评价证据和需要增设的评分项。"
+            ]
+          },
+          "id": "communications-teachers-postsecondary.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核传播课作业是否能评价目标",
+          "type": "notice"
         }
       ]
     },
@@ -37335,6 +37353,13 @@
         "id": "communications-teachers-postsecondary.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "communications-teachers-postsecondary.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37797,7 +37822,7 @@
       "text": "传播学教师（高等教育）"
     }
   },
-  "source_content_sha256": "149356ab2e981043111da15dbf051b599a6c92f7ad3cc6194fe5e6088e228a2c",
+  "source_content_sha256": "09c32b278226d90fe6f8ed1d374ed6a398eaf0d6442e75fca22a28796e302b9c",
   "subject": {
     "canonical_slug": "communications-teachers-postsecondary",
     "name": "传播学教师（高等教育）",

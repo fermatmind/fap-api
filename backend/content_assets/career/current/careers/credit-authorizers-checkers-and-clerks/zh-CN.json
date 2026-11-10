@@ -9,7 +9,7 @@
         "status": "pending_mapping"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:employment-g04-current": {
         "status": "pending_mapping"
@@ -18,7 +18,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:growth-g04-current": {
         "status": "pending_mapping"
@@ -57,9 +57,15 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:openings-g04-current": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-authorizer-jlbank": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-authorizer-scu": {
         "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
@@ -26140,12 +26146,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆信贷授权与信用核查岗位招聘或报价统计；个别单位的岗位薪酬披露不能代表全国水平"
+              "吉林银行总行信用卡审查招聘列贷前核查、识别信用和欺诈风险、出具审查意见，未列金额。川大就业平台的招行成都征信岗列年收入 110,000–140,000 元；另有无周期的 6,000–8,000 栏，不能当成月薪或固定底薪。该岗按授信政策判断发卡、退件和额度。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "authorizer-jlbank",
+            "authorizer-scu"
           ],
           "type": "prose"
         },
@@ -26241,7 +26248,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国大陆薪资板块只保留证据边界：不把行业均值当作职业工资、不用美国数据替代，也不陈述本职业的全国中位数、起薪或分位数。"
+              "以下公告用于对照岗位和计薪条件。全国职业工资分布缺少可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -30998,7 +31005,7 @@
           "data": {
             "entries": [
               {
-                "answer": "接收邮寄或电话传来的信贷申请与签购单，通过面谈或电话访谈申请人收集个人与财务数据，向银行、征信机构与其他信用服务机构获取并按请求互提供信息，查阅公开资料核实居住与产权、破产、留置、债务或欠税等事项，按预定标准评估计算机化的信用记录与还款历史以决定是否批准新信贷，汇总并分析调查所得信用信息、编制调查结果与建议报告，处理申请并通知接受或拒绝，记录客户的收费与付款、寄送账单并把签购单归档，审阅客户档案识别并挑选逾期账户、电话催收逾期账款，与客户沟通解决投诉或核实财务与信贷交易。",
+                "answer": "按流程核查信用申请、交易或账户资料，补记证据并标记异常。可在授予的限额和规则内办理，超限或高风险情况交给有权人员。",
                 "id": "actors.faq.1",
                 "question": "信贷授权员、核查员、文员每天的具体工作是什么？",
                 "question_key": "career.faq.credit-authorizers-checkers-and-clerks.1",
@@ -31007,9 +31014,9 @@
                 ]
               },
               {
-                "answer": "信贷授权员、核查员、文员按预定标准处理和授权具体信贷申请并调查申请人历史与信用状况；信贷分析师对单笔授信做更深入的信用风险分析并编制风险报告；信贷专员与客户接洽并推动贷款申请落地；会计师和审计师编制与审计财务信息；财务经理统筹财务活动与团队；簿记会计与审计文员记录与核对账务；银行柜员办理柜台交易。",
+                "answer": "授信核验人员重在资料与授权流程；信用分析师深入评估偿还能力和经营风险；审批负责人拥有的签批权限由机构明确。",
                 "id": "actors.faq.2",
-                "question": "这个职业和信贷分析师、信贷专员有什么区别？",
+                "question": "授信核验与信用分析、正式审批有什么区别？",
                 "question_key": "career.faq.credit-authorizers-checkers-and-clerks.2",
                 "source_refs": [
                   "onet"
@@ -31025,9 +31032,9 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：材料分类与缺项提示、记录比对与一致性核查、通知与信函草案三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "系统可协助查缺项和标异常；原始材料核验、隐私保护、规则例外与正式决定仍按岗位授权处理。 这不是对本职业 AI 使用率或岗位替代的测量。",
                 "id": "actors.faq.4",
-                "question": "这个职业哪些任务已有 AI 变化证据？",
+                "question": "哪些工作可能由软件辅助？",
                 "question_key": "career.faq.credit-authorizers-checkers-and-clerks.4",
                 "source_refs": [
                   "onet"
@@ -31043,12 +31050,14 @@
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位年薪 50,080 美元、时薪 24.08 美元（43-4041.00 单一职业口径），分位为年薪 30,260／40,520／50,080／60,860／72,700 美元；中国大陆未取得职业级工资数值，本页按缺口处理，不用行业均值代填。",
+                "answer": "美国 2025 年 5 月工资中位数为 50,080 美元/年、24.08 美元/小时。 吉林银行总行信用卡审查招聘列贷前核查、识别信用和欺诈风险、出具审查意见，未列金额。川大就业平台的招行成都征信岗列年收入 110,000–140,000 元；另有无周期的 6,000–8,000 栏，不能当成月薪或固定底薪。该岗按授信政策判断发卡、退件和额度。",
                 "id": "actors.faq.6",
                 "question": "这个职业的工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.credit-authorizers-checkers-and-clerks.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "authorizer-jlbank",
+                  "authorizer-scu"
                 ]
               },
               {
@@ -31079,12 +31088,12 @@
                 ]
               },
               {
-                "answer": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 12,000 人，预测标签为 Decline（-1% 或更低，约 -6%），年均约 1,000 个含增长与替换的空缺；工作以办公环境中的资料处理、标准应用与高频沟通为主，须按本地金融业结构与合规要求核对。",
+                "answer": "美国 BLS 预计 43-4041 就业从 2025 年约 12,200 到 2035 年约 11,300（−7.4%）。年均约 900 个空缺，包含替补需求。",
                 "id": "actors.faq.10",
-                "question": "现在选择这个职业，还应考虑什么？",
+                "question": "美国就业预测怎么读？",
                 "question_key": "career.faq.credit-authorizers-checkers-and-clerks.10",
                 "source_refs": [
-                  "bls"
+                  "a20-bls-projections"
                 ]
               }
             ]
@@ -31505,7 +31514,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "当前部分档案仍在补充；55项Context是0—100评分而非响应百分比。"
                 ],
@@ -31517,7 +31526,7 @@
                 "period": "页面 2026 年更新；检索 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-4041.00"
+                "url": "https://www.onetonline.org/link/details/43-4041.00"
               },
               {
                 "accessed_at": "2026-09-18",
@@ -31811,6 +31820,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 预计 43-4041 就业从 2025 年约 12,200 到 2035 年约 11,300（−7.4%）。年均约 900 个空缺，包含替补需求。"
+                ],
+                "evidence_type": "官方统计",
+                "id": "a20-bls-projections",
+                "limitation": "年均空缺包含替补；不是净增或录用概率。",
+                "market": "美国",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "信用卡贷前核查与审查意见；未列金额。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "authorizer-jlbank",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "总行信用卡业务审查岗",
+                "period": "2025-05",
+                "publisher": "吉林银行",
+                "scope": "recruitment_proxy",
+                "url": "https://www.jlbank.com.cn/jlbank/gyjx/rczp/shzp/2025050915475127855/index.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "公告正文年收入 110,000–140,000 元；另列 6,000–8,000 未标周期。成都武侯，10 人，本科及以上。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "authorizer-scu",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "招商银行信用卡成都征信岗",
+                "period": "2026-06-12",
+                "publisher": "四川大学就业指导中心",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh4Y9yKu9Sqyobddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E"
               }
             ]
           },
@@ -34992,7 +35046,7 @@
               }
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -35004,13 +35058,14 @@
           "china_soc_row": "美国43-4041.00；中国本轮未取得一一职业映射和全国职业工资，非断言不存在。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026-g04-current"
+            "posting-authorizer-jlbank",
+            "posting-authorizer-scu"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响这个职业的工资吗？",
             "driver_heading": "信贷授权与核查工作怎样安排申请与账单周期？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "编辑准备方向，非中国学历门槛、招聘或薪资统计",
             "scenario_heading": "准备能力与岗位方向怎样核对？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36770,7 +36825,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解信贷授权员、核查员、文员的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36883,12 +36938,12 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "label": "Personality preferences"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "label": "Big Five traits"
           },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
@@ -37301,39 +37356,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 12,000 人（2024 年，单一职业口径）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "12,200 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模",
-        "occupation_scope": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）该细分的 2024 年就业估计",
-        "period": "2024 年（O*NET/BLS）；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4041",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a20-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "下降 -1% 或更低（2024—2034 年，标签 Decline；该口径预测变化约 -6%）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "−7.4%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "就业变化率",
-        "occupation_scope": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）该细分的预测标签「下降」；是区间标签，不是个人就业保证",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4041",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a20-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "年均约 1,000 个（2024—2034 年，含增长与替换）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 900 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "年均职位空缺",
-        "occupation_scope": "O*NET 就业趋势页该细分 2024—2034 年空缺，说明含增长与替换需求，不等于净新增",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4041",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a20-bls-projections"
         ]
       },
       {
@@ -37491,6 +37546,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "信用卡贷前核查与审查意见；未列金额。",
+        "fact_id": "posting-authorizer-jlbank",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "总行信用卡业务审查岗",
+        "period": "2025-05",
+        "source_refs": [
+          "authorizer-jlbank"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "公告正文年收入 110,000–140,000 元；另列 6,000–8,000 未标周期。成都武侯，10 人，本科及以上。",
+        "fact_id": "posting-authorizer-scu",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "招商银行信用卡成都征信岗",
+        "period": "2026-06-12",
+        "source_refs": [
+          "authorizer-scu"
+        ]
       }
     ]
   },
@@ -37517,19 +37596,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，下降 -1% 或更低）"
+        "label": "美国预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 12,000 人）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，约 1,000 个）"
+        "label": "美国预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37543,17 +37622,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "信贷授权员、核查员、文员（O*NET-SOC 43-4041.00）授权客户账户的信贷交易并调查申请人的历史与信用状况：覆盖接收信贷申请、访谈收集个人与财务数据、获取并交换征信信息、查阅公开记录核实、按预定标准评估信用记录与还款历史、编制调查结果与建议报告、处理申请并通知接受或拒绝、记录收费与付款、挑选逾期账户与电话催收；含美国 2025 年中位年薪 50,080 美元（时薪 24.08 美元）、2024 年约 12,000 人在岗、2024—2034 年就业预测下降（-1% 或更低，约 -6%）、中国大陆职业级工资与用工口径缺口，以及信用信息保护与查询权限、授权与审批边界、决定可解释与不利行动通知的控制点。"
+      "text": "信用授权、核验与文员怎样查申请、留记录、按权限处理？看吉林和成都招聘以及美国统计。"
     },
     "title": {
       "availability": "available",
       "text": "信贷授权员、核查员、文员"
     }
   },
-  "source_content_sha256": "ddccf3daf70673a995a5504e9e66a8cd186e7f71e4f1a2ec4f983604845a7cde",
+  "source_content_sha256": "0e1993db34954fbaef349160f2e8678f1bcec1e5022a3fc16a63c822e1d24c0b",
   "subject": {
     "canonical_slug": "credit-authorizers-checkers-and-clerks",
     "name": "信贷授权员、核查员、文员",
-    "summary": "信贷授权员、核查员、文员在美国对应 O*NET-SOC 43-4041.00（Credit Authorizers, Checkers, and Clerks）。核心是授权客户账户的信贷交易，并调查个人或企业申请人的历史与信用状况：接收邮寄或电话传来的信贷申请与签购单，通过面谈或电话收集完成信用报告所需的个人与财务数据，向银行、征信机构与其他信用服务机构获取信息并按请求互提供信息，查阅公开记录核实居住与产权、破产、留置、债务或欠税等事项，按预定标准评估计算机化的信用记录与还款历史决定是否批准新信贷，汇总并分析调查所得信用信息、编制调查结果与建议报告，处理申请并通知接受或拒绝，向客户寄送账单、记录收费与付款，在客户档案中挑选逾期账户并电话催收，与客户沟通解决投诉或核实财务与信贷交易。美国口径为单一职业细分，中国侧同类岗位分散在银行信贷前台、消费金融与征信服务等方向，与该美国职业细类不是一一对应，任职、授权与计酬口径不能互换。"
+    "summary": "按流程核查信用申请、交易或账户资料，补记证据并标记异常。可在授予的限额和规则内办理，超限或高风险情况交给有权人员。"
   }
 }

@@ -149,6 +149,9 @@
       "item:middle-school-teachers-except-special-and-career-technical-education.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:middle-school-teachers-except-special-and-career-technical-education.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:middle-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13121,6 +13124,21 @@
             "onet-cert"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两则招聘均写初中，其中一则负责普通学科单元教学，另一则以职业实训为主。用职责选出更匹配的一则，再写一个关于课程与评价的提问。"
+            ]
+          },
+          "id": "middle-school-teachers-except-special-and-career-technical-education.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核普通学科岗位的教学交付",
+          "type": "notice"
         }
       ]
     },
@@ -15530,6 +15548,13 @@
         "id": "middle-school-teachers-except-special-and-career-technical-education.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "middle-school-teachers-except-special-and-career-technical-education.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15723,7 +15748,7 @@
       "text": "初中教师：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "4930aa3ebd4409cebecd7be636a7524190953dc550759419a2bc008d522d153b",
+  "source_content_sha256": "44df4a75f10109ab479fddedbc86ec5b988f2a389dd23a31ed54b7eac7283116",
   "subject": {
     "canonical_slug": "middle-school-teachers-except-special-and-career-technical-education",
     "name": "初中教师",

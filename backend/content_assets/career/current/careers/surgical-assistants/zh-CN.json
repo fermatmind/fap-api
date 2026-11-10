@@ -23678,16 +23678,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "重点观察准确核对、团队回应、责任边界和持续改错。美国职业负责在外科医生监督下协助手术；中国先核具体医师、护士或辅助岗位身份。纸面试做只能帮助探索兴趣。"
+              "纸面体验｜比对虚构排班表和术前角色卡，标出一项职责的两种归属，写下交给手术团队负责人的确认问题。 "
             ]
           },
           "id": "surgical-assistants.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "cn-rule",
-            "ratify",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -25040,16 +25036,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "手术助理在外科医生监督与适用法律范围内协助手术团队，核信息、配合准备与任务并准确沟通记录。美国29-9093.00为身份基准；中国近名岗位按实际任务、资格注册及机构范围另核。"
+              "手术助理在手术团队分工下直接协助手术，并配合维护无菌环境。实际承担哪些协助任务取决于训练、授权和所在机构。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "surgical-assistants.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "cn-rule",
-            "ratify",
-            "editor"
+            "transfer-onet-29-9093.00"
           ],
           "type": "prose"
         }
@@ -25873,19 +25865,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可讨论资料整理与信息表达，但不能用文字生成替代受监督临床协作。没有本職代表性采用或替代比例；以下任务例子是仅用虚构纸面输入的编辑探索。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比对虚构排班表和术前角色卡，标出一项职责的两种归属，写下交给手术团队负责人的确认问题。"
             ]
           },
           "id": "surgical-assistants.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "sag",
-            "sag-moa",
-            "ratify",
-            "bls-ors",
-            "nist",
-            "editor"
+            "transfer-onet-29-9093.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -34079,6 +34065,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-29-9093.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 29-9093.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/29-9093.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39667,10 +39680,10 @@
       "text": "手术助理"
     }
   },
-  "source_content_sha256": "6d385fd1a82d6d7c4d595ad8bb809cec4cc58cc4e86ac73754246af5be4266d3",
+  "source_content_sha256": "df5d0f300e78f158ee1437250e2f8c4b1abeacc3a1c2fb7513f7f3e642965fba",
   "subject": {
     "canonical_slug": "surgical-assistants",
     "name": "手术助理",
-    "summary": "手术助理在外科医生监督及适用法律范围内协助手术团队，核信息、配合材料准备与任务并准确沟通记录。美国29-9093.00为身份基准，中国近名岗位按真实任务、医师护士资格注册及机构范围另核。可先用完整虚构纸面资料观察核对和改错，不代临床训练或授权。"
+    "summary": "手术助理在手术团队分工下直接协助手术，并配合维护无菌环境。实际承担哪些协助任务取决于训练、授权和所在机构。"
   }
 }

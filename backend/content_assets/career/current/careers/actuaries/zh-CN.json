@@ -83,9 +83,6 @@
       "fact:entry-bachelors-degree": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1617,7 +1614,7 @@
         "status": "pending_mapping"
       },
       "item:actuaries.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actuaries.sources.source-card.1": {
         "status": "mapped"
@@ -23265,12 +23262,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "精算师把保单、理赔和人口经验数据转化为可解释的费率、准备金与风险判断。适合继续探索的信号不是单纯数学成绩，而是愿意追查异常、质疑假设并把不确定性讲清楚。"
+              "如果你愿意追分母、独立复算，并能解释模型回答不了什么，可以继续了解。"
             ]
           },
           "id": "actuaries.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -23280,12 +23277,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "观察自己面对口径混乱的数据时，是否先整理定义和观察期间；结果异常时是否回查输入与假设；向非技术同事说明时，是否同时给出结论、范围和限制。"
+              "到「入行、资格与职业发展」找「ACT-16｜复算损失成本，写清限制」。先算 A、B 和合并值，再看参考。"
             ]
           },
           "id": "actuaries.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23310,13 +23307,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "用60分钟做一次入门试验：给一组完全虚构的保单与赔付记录，写数据字典，计算赔付频率和平均损失，再比较两组假设下的损失成本。交付计算表、假设说明和异常清单，复盘自己能否解释每个口径。这是探索性工作样例，不是专业精算训练或实际定价建议。"
+              "用约 60 分钟做 ACT-16：按虚构数据复算频率、严重度、损失成本及两个单独情景。交一张复算表和一段限制说明。数据字典及异常核对放到后面的七天体验。"
             ]
           },
           "id": "actuaries.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -24679,12 +24675,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得精算任务级采用率、节时效果或裁员因果数据。编辑建议可用AI辅助数据整理、代码草案和报告初稿；假设选择、模型验证和批准责任仍须按组织权限完成。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "工具可辅助整理虚构数据、生成表格或代码草稿。使用前核数据权限；逐项复算公式、分母和舍入。费率、准备金与签署责任仍由获授权人员复核。本页没有本职业的自动化比例或裁员因果估计。"
             ]
           },
           "id": "actuaries.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "actuaries-ilo-2025"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25407,7 +25403,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS预计2025—2035年美国就业增长9%；这是全国预测，不证明AI就业因果。"
+              "BLS预计2025—2035年美国就业增长9.2%；这是全国预测，不证明AI就业因果。"
             ]
           },
           "id": "actuaries.ai-impact.ai-impact-table.70",
@@ -25463,7 +25459,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮没有可核实的精算岗位消失年份；任务暴露不是时间预测。"
+              "证据不足：没有可核实的精算岗位消失年份；任务暴露不是时间预测。"
             ]
           },
           "id": "actuaries.ai-impact.ai-impact-table.74",
@@ -26157,7 +26153,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国精算师全国可比中位数。"
+              "证据不足：未取得中国精算师全国可比中位数。"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.7",
@@ -26269,12 +26265,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可去重的精算招聘工资样本。"
+              "三则具名招聘可对照岗位条件，但不足以估计城市或全国工资分布。"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "actuaries-cn-qualification-2023"
+            "actu-bj",
+            "actu-cs",
+            "actu-tj"
           ],
           "type": "prose"
         },
@@ -26647,7 +26645,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可能面向客户解释分析；中国招聘数量和报价没有本轮可比样本。"
+              "可能面向客户解释分析；中国招聘数量和报价没有可比样本。"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.42",
@@ -26689,12 +26687,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可定位、去重的中国精算招聘薪酬样本。"
+              "三份具名招聘可比较岗位任务；只有长沙公告明确按月。样本不足以估计城市或全国的精算师工资分布。"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "actuaries-cn-qualification-2023"
+            "actu-bj",
+            "actu-cs",
+            "actu-tj"
           ],
           "type": "prose"
         },
@@ -26703,12 +26703,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "没有城市、查询期、经验层级和去重规则，不能报告普遍门槛或招聘频次。"
+              "北京、长沙、天津样本对应三家雇主及具体日期，不能代表当地常见报价。仅长沙公告明确按月。"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "actuaries-cn-qualification-2023"
+            "actu-bj",
+            "actu-cs",
+            "actu-tj"
           ],
           "type": "prose"
         },
@@ -26717,12 +26719,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025城镇单位工资｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              "2025城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "actuaries-nbs-2025"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26731,12 +26733,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国精算师按城市或经验层级的可比工资分布。比较具体报价时核基本工资、奖金、福利、工时及税前税后。"
+              "国家统计局 2025 年城镇金融业年平均工资为非私营 211,164 元、私营 140,451 元。行业平均不单列精算师。下面的招聘是单岗位区间，不能拼成全国或城市工资分布。"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "actuaries-nbs-2025"
+            "nbs",
+            "actu-bj",
+            "actu-cs",
+            "actu-tj"
           ],
           "type": "prose"
         },
@@ -26745,12 +26750,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国全国精算师"
+              "北京｜弘康人寿"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "actuaries-onet-2026"
+            "actu-bj"
           ],
           "type": "prose"
         },
@@ -26759,12 +26764,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得对应口径的可比月薪样本。"
+              "公告未明确按月计薪，见入行章节原始报价。"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "actuaries-nbs-2025"
+            "actu-bj"
           ],
           "type": "prose"
         },
@@ -26773,12 +26778,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "目标城市与雇主"
+              "长沙｜太保产险"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "actuaries-onet-2026"
+            "actu-cs"
           ],
           "type": "prose"
         },
@@ -26787,12 +26792,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得对应口径的可比月薪样本。"
+              "长沙太保产险湖南分公司 2026 年 9 月 15 日发布保险精算岗 2 名，页面明列 10,000–12,000 元/月、硕士及以上，工作有费率厘定、模型维护、未决赔款准备金与报表。金额是公告单条口径，实际计薪组成须核合同。"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "actuaries-nbs-2025"
+            "actu-cs"
           ],
           "type": "prose"
         },
@@ -26801,12 +26806,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "经验或考试层级"
+              "天津｜人保财险"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "actuaries-onet-2026"
+            "actu-tj"
           ],
           "type": "prose"
         },
@@ -26815,12 +26820,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得对应口径的可比月薪样本。"
+              "公告未明确按月计薪，见入行章节原始报价。"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "actuaries-nbs-2025"
+            "actu-tj"
           ],
           "type": "prose"
         },
@@ -26843,12 +26848,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025城镇单位工资｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              "2025城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "actuaries-nbs-2025"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26857,7 +26862,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "BLS预计2025—2035年美国就业增长9%；这是全国预测，不证明AI就业因果。"
+              "BLS预计2025—2035年美国就业增长9.2%；这是全国预测，不证明AI就业因果。"
             ]
           },
           "id": "actuaries.china-salary.career-snapshot-primary-locale.58",
@@ -27049,12 +27054,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "31,200 人"
+              "2025 年 31,200 人；2035 年预计 34,100 人。"
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27063,12 +27068,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025美国全国就业存量，不是当年招聘人数；BLS精算师职业手册｜https://www.bls.gov/ooh/math/actuaries.htm"
+              "2025美国全国就业存量，不是当年招聘人数；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27077,12 +27082,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "9%"
+              "2025–2035 年增长 9.2%，净增约 2,900。"
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27091,12 +27096,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035美国全国就业预测，不证明AI因果；BLS精算师职业手册｜https://www.bls.gov/ooh/math/actuaries.htm"
+              "2025—2035美国全国就业预测，不证明AI因果；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27105,12 +27110,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "1,500 个/年"
+              "年均约 1,500 个空缺，含替代需求。"
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27119,12 +27124,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035年均空缺包含替代需求，不是就业净增长；BLS精算师职业手册｜https://www.bls.gov/ooh/math/actuaries.htm"
+              "2025—2035年均空缺包含替代需求，不是就业净增长；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27248,7 +27253,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS预计2025—2035年美国就业增长9%；这是全国预测，不证明AI就业因果。"
+              "BLS预计2025—2035年美国就业增长9.2%；这是全国预测，不证明AI就业因果。"
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.33",
@@ -27346,7 +27351,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "政府（不含州和地方医院、学校）"
+              "政府（不含州和地方教育及医院）"
             ]
           },
           "id": "actuaries.us-salary.career-snapshot-secondary-locale.40",
@@ -27560,7 +27565,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27572,19 +27577,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "金融风险专员",
@@ -29258,7 +29263,7 @@
                 "values": [
                   "考试与资格",
                   "中国水平评价分准精算师和正精算师。",
-                  "美国职业考试要求按目标专业组织与雇主核；不建立互认。"
+                  "大陆职业资格是水平评价，有准精算师与正精算师两级。可报考不等于能申领证书；考核、职业道德、学历和相关经历等条件分开核。通过部分考试不等于持证，也不等于有岗位签署权。 美国按目标方向查 SOA 的 ASA/FSA 或 CAS 的 ACAS/FCAS 现行路径。需要出具美国精算意见时另核适用的专业资格标准与组织授权。不能用任一认证推断中美互认。"
                 ]
               },
               {
@@ -29282,7 +29287,11 @@
           "id": "actuaries.path.employer-evidence.1",
           "source_refs": [
             "actuaries-cn-qualification-2023",
-            "actuaries-ooh-2025-2035"
+            "actuaries-ooh-2025-2035",
+            "actuaries-cn-qualification-2023",
+            "actu-soa",
+            "actu-cas",
+            "actu-usqs"
           ],
           "title": "官方资料与编辑准备建议",
           "type": "cards"
@@ -29306,16 +29315,16 @@
                 "values": [
                   "任务与交付",
                   "分别计算频率=次数/暴露量、严重度=损失/次数、损失成本=损失/暴露量；再算合并值。",
-                  "合并组合频率上升10%而严重度不变；另算严重度上升10%而频率不变。输出一张复算表和一页限制。"
+                  "合并频率单独升 10%，再算严重度单独升 10%；另一项保持原值。变式：B 组暴露量在另一版为空，能否继续给出两组合并结果？交一张复算表和一段限制。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考复算",
-                  "A：频率0.2次/保单年，严重度2000元/次，损失成本400元/保单年。B：0.3次/保单年、3000元/次、900元/保单年。",
-                  "合并：暴露1500、次数350、损失850000元；频率7/30≈0.233333，严重度17000/7≈2428.571429，损失成本1700/3≈566.666667。",
-                  "每次单独增加10%的情景损失成本1870/3≈623.333333元/保单年；不同时改变两个因素。"
+                  "先完成两版",
+                  "第六天独立交主问题、变式和书面交接或限制说明。",
+                  "第七天展开常见问题「ACT-16 参考解（交卷后再打开）」。",
+                  "保留原表、分母定义和复算理由。"
                 ]
               },
               {
@@ -29323,16 +29332,16 @@
                 "values": [
                   "边界与自检",
                   "这不是实际产品费率、准备金或投资建议。单期数据不足以识别趋势、发展因子和产品差异。",
-                  "检查零分母、单位、期间及是否错误平均A/B两组比率；可手算复核，无需真实客户数据。"
+                  "缺少输入时标出哪些值须暂停报告。"
                 ]
               }
             ]
           },
           "id": "actuaries.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "入行练习：虚构组合的经验分析",
+          "title": "ACT-16｜复算损失成本，写清限制",
           "type": "cards"
         },
         {
@@ -29360,7 +29369,7 @@
                 "id": "report-summary",
                 "values": [
                   "一页结果说明",
-                  "解释合并损失成本566.666667及两个情景623.333333的含义。",
+                  "说明两个独立情景的结果及固定量，记录会要求补齐哪个字段；先独立写再对照。",
                   "写清虚构、非费率、未包含费用和发展因素。"
                 ]
               },
@@ -29440,7 +29449,7 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "第1天：核范围",
-                  "读职业定义；写明精算输入、输出及与核保/审批的区别。"
+                  "选一份大陆招聘或美国资格指南，记职责、资格和一项待核权限；区分准备金、定价与审批。"
                 ]
               },
               {
@@ -29475,21 +29484,25 @@
                 "id": "entry-trial-day-6",
                 "values": [
                   "第6天：业务说明",
-                  "写一页结果、假设、限制与不能回答的问题。"
+                  "不看参考，独立完成原版与变式，交复算表和限制说明。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "第7天：独立复盘",
-                  "用参考结果或他人复算校核，记录差异和是否愿意继续练习。"
+                  "展开常见问题「ACT-16 参考解（交卷后再打开）」，自核后记录差异或无差异。"
                 ]
               }
             ]
           },
           "id": "actuaries.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor",
+            "actu-bj",
+            "actu-cs",
+            "actu-soa",
+            "actu-cas"
           ],
           "title": "七天体验：用虚构材料完成一次精算师任务闭环",
           "type": "timeline"
@@ -29570,7 +29583,7 @@
                 "目标市场求职者",
                 "证明相应专业知识",
                 "按专业组织及雇主核",
-                "本页不推定中美资格互认",
+                "美国按目标方向查 SOA 的 ASA/FSA 或 CAS 的 ACAS/FCAS 现行路径。需要出具美国精算意见时另核适用的专业资格标准与组织授权。不能用任一认证推断中美互认。",
                 "以当年官方公告核",
                 "单门考试不是完整认证"
               ],
@@ -29597,7 +29610,11 @@
           "id": "actuaries.path.credential-decision.1",
           "source_refs": [
             "actuaries-cn-qualification-2023",
-            "actuaries-onet-2026"
+            "actuaries-onet-2026",
+            "actuaries-cn-qualification-2023",
+            "actu-soa",
+            "actu-cas",
+            "actu-usqs"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29610,7 +29627,7 @@
               "中国精算师资格属于水平评价，准精算师与正精算师分级。",
               "学历、考试、资格及雇主任务授权分别核，不能互相替代。",
               "本页不建立中美资格互认；具体签署和批准责任按工作地制度及岗位文件确认。",
-              "证据不足：本轮未核当年各考试费用、全部报考安排和岗位签署条件，不提供统一周期与费用承诺。"
+              "证据不足：未核当年各考试费用、全部报考安排和岗位签署条件，不提供统一周期与费用承诺。"
             ]
           },
           "id": "actuaries.path.credential-boundary.1",
@@ -29625,15 +29642,18 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得含查询时间、城市、经验层级与去重规则的精算招聘样本。",
-              "因此本页入口及面试材料为官方职业资料与编辑准备建议，不声明普遍雇主门槛或实际招聘频次。"
+              "北京弘康人寿 2026 年 11 月 3 日发布 1 名精算师，页面列 8,000–10,000 元；硕士及以上、0–3 年经验、至少通过 2 门认可体系的精算考试。工作含准备金、内含价值和报告。页首未标计薪周期，也未拆基本薪资或奖金；是否仍在招需另核。",
+              "长沙太保产险湖南分公司 2026 年 9 月 15 日发布保险精算岗 2 名，页面明列 10,000–12,000 元/月、硕士及以上，工作有费率厘定、模型维护、未决赔款准备金与报表。金额是公告单条口径，实际计薪组成须核合同。",
+              "天津人保财险分公司 2026 年 9 月 15 日发布精算岗 1 名，精算学硕士；页首 4,500–6,000 元，未标计薪周期，未拆固定与浮动。职责含车险模型、非车险测算与准备金；不能把这一条当天津统一工资。"
             ]
           },
           "id": "actuaries.path.recruitment-sample.1",
           "source_refs": [
-            "actuaries-ooh-2025-2035"
+            "actu-bj",
+            "actu-cs",
+            "actu-tj"
           ],
-          "title": "招聘样本说明",
+          "title": "北京、长沙与天津招聘样本",
           "type": "notice"
         },
         {
@@ -30786,22 +30806,22 @@
                 "url": "https://www.bls.gov/ooh/math/actuaries.htm"
               },
               {
-                "entity": "Industries: 15-2011.00 - Actuaries",
+                "entity": "BLS 就业预测表 1.2：精算师",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/15-2011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "National Certifications: 15-2011.00 - Actuaries",
+                "entity": "国家统计局：城镇金融业年平均工资",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/15-2011.00"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "National Training: 15-2011.00 - Actuaries",
+                "entity": "O*NET 15-2011.00：精算师",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/15-2011.00"
+                "url": "https://www.onetonline.org/link/summary/15-2011.00"
               },
               {
                 "entity": "金融风险专员",
@@ -30867,7 +30887,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国精算师 2025 年就业约 31,200 人；2025—2035 年就业预计增长 9%，同期年均约有 1,500 个职位空缺。2025 年约 78% 的精算师就业位于金融和保险业。就业存量、增长率、年均空缺和行业占比是不同指标，均不能代表中国市场或个人就业保证。"
+              "美国精算师 2025 年就业约 31,200 人；2025—2035 年就业预计增长 9.2%，同期年均约有 1,500 个职位空缺。2025 年约 78% 的精算师就业位于金融和保险业。就业存量、增长率、年均空缺和行业占比是不同指标，均不能代表中国市场或个人就业保证。"
             ]
           },
           "id": "actuaries.market-signals.market-signal-card.8",
@@ -30951,12 +30971,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精算师（SOC 15-2011）"
+              "美国精算师 15-2011"
             ]
           },
           "id": "actuaries.market-signals.market-signal-card.14",
           "source_refs": [
-            "bls-actuaries-ooh-2025"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31049,12 +31069,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精算师（SOC 15-2011）"
+              "美国精算师 15-2011"
             ]
           },
           "id": "actuaries.market-signals.market-signal-card.21",
           "source_refs": [
-            "bls-actuaries-ooh-2025"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31063,7 +31083,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "9%"
+              "9.2%"
             ]
           },
           "id": "actuaries.market-signals.market-signal-card.22",
@@ -31147,12 +31167,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精算师（SOC 15-2011）"
+              "美国精算师 15-2011"
             ]
           },
           "id": "actuaries.market-signals.market-signal-card.28",
           "source_refs": [
-            "bls-actuaries-ooh-2025"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31576,10 +31596,15 @@
           "data": {
             "entries": [
               {
-                "answer": "典型工作从整理经验数据和业务条件开始，经由选择假设、计算损失或给付分布、测试模型结果，最终形成定价、准备金或风险建议并向管理层及相关专业人员解释限制。",
+                "answer": "精算师用数据和模型估计保险等业务的不确定成本。定价常比较出险频率、损失严重度和费率假设；准备金工作会估计未决赔款并解释变动。入行先看你愿不愿意复算和说明限制，再分开核考试、岗位职责与签署权限。",
                 "id": "actuaries.faq.1",
                 "question": "精算师每天做什么？",
-                "question_key": "career.faq.actuaries.daily-work"
+                "question_key": "career.faq.actuaries.daily-work",
+                "source_refs": [
+                  "onet",
+                  "actu-bj",
+                  "actu-cs"
+                ]
               },
               {
                 "answer": "精算师以长期不确定性、保险负债和资金充足性为核心；金融风险专员更偏市场与投资风险，统计师更偏通用统计推断，保险承保人侧重单笔业务接受与条款，生物信息技术员侧重生命科学数据处理。",
@@ -31594,16 +31619,22 @@
                 "question_key": "career.faq.actuaries.fit"
               },
               {
-                "answer": "软件可加速数据清洗、情景计算、代码生成和结果汇总，但是否能进入生产流程取决于数据权限、可复现性、模型验证和组织治理。",
+                "answer": "工具可辅助整理虚构数据、生成表格或代码草稿。使用前核数据权限；逐项复算公式、分母和舍入。费率、准备金与签署责任仍由获授权人员复核。本页没有本职业的自动化比例或裁员因果估计。",
                 "id": "actuaries.faq.4",
                 "question": "AI 会改变哪些任务？",
-                "question_key": "career.faq.actuaries.ai-impact"
+                "question_key": "career.faq.actuaries.ai-impact",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
-                "answer": "软件可加速数据清洗、情景计算、代码生成和结果汇总。",
+                "answer": "工具可辅助整理虚构数据、生成表格或代码草稿。使用前核数据权限；逐项复算公式、分母和舍入。费率、准备金与签署责任仍由获授权人员复核。本页没有本职业的自动化比例或裁员因果估计。",
                 "id": "actuaries.faq.5",
                 "question": "AI 可以辅助精算师的哪些任务？",
-                "question_key": "career.faq.actuaries.automatable-tasks"
+                "question_key": "career.faq.actuaries.automatable-tasks",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "假设是否符合业务与监管语境、异常数据如何处置、模型结果能否用于费率或准备金决策，仍需由有责任边界的人复核、解释并承担升级责任。",
@@ -31612,28 +31643,56 @@
                 "question_key": "career.faq.actuaries.human-control"
               },
               {
-                "answer": "当前可核实的精确职业工资资料覆盖美国精算师，不支持陈述中国大陆精算师的全国职业中位数、统一起薪或个人到手收入。",
+                "answer": "国家统计局 2025 年城镇金融业年平均工资为非私营 211,164 元、私营 140,451 元。行业平均不单列精算师。下面的招聘是单岗位区间，不能拼成全国或城市工资分布。 长沙太保产险湖南分公司 2026 年 9 月 15 日发布保险精算岗 2 名，页面明列 10,000–12,000 元/月、硕士及以上，工作有费率厘定、模型维护、未决赔款准备金与报表。金额是公告单条口径，实际计薪组成须核合同。",
                 "id": "actuaries.faq.7",
                 "question": "中国大陆的精算师工资如何理解？",
-                "question_key": "career.faq.actuaries.china-pay"
+                "question_key": "career.faq.actuaries.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "actu-cs"
+                ]
               },
               {
-                "answer": "美国精算师 2025 年 5 月年薪中位数为 130,000 美元；同年工资分布中，最低 10% 低于 78,570 美元，最高 10% 高于 215,100 美元。这些统计描述受雇者的工资分布，中位数不等于新人起薪；低分位数可作比较参考，不能承诺个人入职工资。",
+                "answer": "美国精算师 15-2011 的 2025 年 5 月年薪中位数是 130,000 美元，时薪中位数 62.50 美元。分位数描述工资分布，不等于不同年资的报价。",
                 "id": "actuaries.faq.8",
                 "question": "美国精算师工资中位数代表新人收入吗？",
-                "question_key": "career.faq.actuaries.us-pay"
+                "question_key": "career.faq.actuaries.us-pay",
+                "source_refs": [
+                  "actuaries-oews-2025"
+                ]
               },
               {
-                "answer": "美国职业资料把学士学位列为精算师的典型入门教育，并说明成为认证专业人员通常需要通过一系列考试。",
+                "answer": "美国按目标方向查 SOA 的 ASA/FSA 或 CAS 的 ACAS/FCAS 现行路径。需要出具美国精算意见时另核适用的专业资格标准与组织授权。不能用任一认证推断中美互认。",
                 "id": "actuaries.faq.9",
                 "question": "美国精算师的典型教育和考试路径是什么？",
-                "question_key": "career.faq.actuaries.education-path"
+                "question_key": "career.faq.actuaries.education-path",
+                "source_refs": [
+                  "bls",
+                  "actu-soa",
+                  "actu-cas",
+                  "actu-usqs"
+                ]
               },
               {
-                "answer": "精算考试进度和专业认证可作为能力证据，但具体岗位授权、签字责任与受监管业务范围仍由雇主、专业组织及所在地规则共同决定。",
+                "answer": "大陆职业资格是水平评价，有准精算师与正精算师两级。可报考不等于能申领证书；考核、职业道德、学历和相关经历等条件分开核。通过部分考试不等于持证，也不等于有岗位签署权。 美国按目标方向查 SOA 的 ASA/FSA 或 CAS 的 ACAS/FCAS 现行路径。需要出具美国精算意见时另核适用的专业资格标准与组织授权。不能用任一认证推断中美互认。",
                 "id": "actuaries.faq.10",
                 "question": "入行精算师需要核对哪些资格？",
-                "question_key": "career.faq.actuaries.credentials"
+                "question_key": "career.faq.actuaries.credentials",
+                "source_refs": [
+                  "actuaries-cn-qualification-2023",
+                  "actu-soa",
+                  "actu-cas",
+                  "actu-usqs"
+                ]
+              },
+              {
+                "answer": "A：频率0.2次/保单年，严重度2000元/次，损失成本400元/保单年。B：0.3次/保单年、3000元/次、900元/保单年。 合并：暴露1500、次数350、损失850000元；频率7/30≈0.233333，严重度17000/7≈2428.571429，损失成本1700/3≈566.666667。 每次单独增加10%的情景损失成本1870/3≈623.333333元/保单年；不同时改变两个因素。 变式参考：若 A、B 仍是同一期间和口径，且次数与损失完整，合并严重度仍为 850,000 ÷ 350 ≈ 2,428.57 元/次。缺 B 暴露量时，暂不报告 B 组及合并频率、损失成本；请补暴露量和期间，不能把空白当零。",
+                "id": "actuaries.faq.11",
+                "question": "ACT-16 参考解（交卷后再打开）",
+                "question_key": "career.faq.actuaries.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31729,7 +31788,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -31777,84 +31836,84 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official custom occupation profile",
-                  "current page; accessed 2026-09-04"
+                  "精算师用数据和模型估计保险等业务的不确定成本。定价常比较出险频率、损失严重度和费率假设；准备金工作会估计未决赔款并解释变动。入行先看你愿不愿意复算和说明限制，再分开核考试、岗位职责与签署权限。",
+                  "职业任务与工作情境。"
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "职业任务与工作情境。",
                 "market": "美国",
-                "name": "15-2011.00 - Actuaries",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 15-2011.00：精算师",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/custom/15-2011.00"
+                "url": "https://www.onetonline.org/link/summary/15-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupation details",
-                  "current page; accessed 2026-09-04"
+                  "美国精算师 15-2011 的 2025 年 5 月年薪中位数是 130,000 美元，时薪中位数 62.50 美元。分位数描述工资分布，不等于不同年资的报价。",
+                  "精确就业增幅及年均空缺见 BLS 表 1.2。"
                 ],
-                "evidence_type": "official occupation details",
+                "evidence_type": "primary_document",
                 "id": "bls",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "精确就业增幅及年均空缺见 BLS 表 1.2。",
                 "market": "美国",
-                "name": "15-2011.00 - Actuaries",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 职业手册：精算师",
+                "period": "2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/15-2011.00"
+                "url": "https://www.bls.gov/ooh/math/actuaries.htm"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official technology profile",
-                  "current page; accessed 2026-09-04"
+                  "BLS 15-2011：2025 年就业 31,200 人，2035 年预计 34,100 人，净增约 2,900（9.2%）；十年内年均空缺约 1,500，含替代需求。",
+                  "年均空缺包含替代需求。"
                 ],
-                "evidence_type": "official technology profile",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "年均空缺包含替代需求。",
                 "market": "美国",
-                "name": "Hot Technologies: 15-2011.00 - Actuaries",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 就业预测表 1.2：精算师",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/hot_tech/15-2011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official industry distribution",
-                  "current page; accessed 2026-09-04"
+                  "美国精算师 15-2011 的 2025 年 5 月年薪中位数是 130,000 美元，时薪中位数 62.50 美元。分位数描述工资分布，不等于不同年资的报价。",
+                  "全国数据，不估起薪。"
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "primary_document",
                 "id": "oews",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "全国数据，不估起薪。",
                 "market": "美国",
-                "name": "Industries: 15-2011.00 - Actuaries",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 工资表：精算师",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/15-2011.00"
+                "url": "https://www.onetonline.org/link/localwages/15-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "国家统计局 2025 年城镇金融业年平均工资为非私营 211,164 元、私营 140,451 元。行业平均不单列精算师。下面的招聘是单岗位区间，不能拼成全国或城市工资分布。",
+                  "仅行业背景。"
                 ],
-                "evidence_type": "official certification discovery",
+                "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "美国",
-                "name": "National Certifications: 15-2011.00 - Actuaries",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localcert/15-2011.00"
+                "limitation": "仅行业背景。",
+                "market": "中国大陆",
+                "name": "国家统计局：城镇金融业年平均工资",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -31969,20 +32028,20 @@
                 "url": "https://www.onetonline.org/link/industry/15-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "虚构 A/B 组合复算。",
+                  "不作实际定价、准备金或投资结论。"
                 ],
-                "evidence_type": "official certification discovery",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "不作实际定价、准备金或投资结论。",
                 "market": "美国",
-                "name": "National Certifications: 15-2011.00 - Actuaries",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localcert/15-2011.00"
+                "name": "ACT-16｜复算损失成本，写清限制",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/zh/career/jobs/actuaries#career-content-path"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -32145,20 +32204,20 @@
                 "url": "https://www.onetonline.org/link/localwages/15-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupation summary",
-                  "2025 BLS OEWS wage data displayed by O*NET OnLine"
+                  "美国精算师 15-2011 的 2025 年 5 月年薪中位数是 130,000 美元，时薪中位数 62.50 美元。分位数描述工资分布，不等于不同年资的报价。",
+                  "全国数据，不估起薪。"
                 ],
-                "evidence_type": "official occupation summary",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "全国数据，不估起薪。",
                 "market": "美国",
-                "name": "15-2011.00 - Actuaries",
-                "period": "职业档案；2025工资与就业；2025—2035就业预测",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 工资表：精算师",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/15-2011.00"
+                "url": "https://www.onetonline.org/link/localwages/15-2011.00"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -32177,17 +32236,17 @@
                 "url": "https://www.onetonline.org/link/custom/15-2011.00"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "美国精算师职业定义、2025 年就业存量及 2025—2035 年就业预测。",
-                  "年均职位空缺包含替代需求，不等于就业净增长。"
+                  "美国精算师 15-2011 的 2025 年 5 月年薪中位数是 130,000 美元，时薪中位数 62.50 美元。分位数描述工资分布，不等于不同年资的报价。",
+                  "精确就业增幅及年均空缺见 BLS 表 1.2。"
                 ],
-                "evidence_type": "BLS职业手册、工资统计与就业预测",
+                "evidence_type": "primary_document",
                 "id": "bls-actuaries-ooh-2025",
-                "limitation": "美国全国职业统计，不代表中国工资或个人就业保证。",
+                "limitation": "精确就业增幅及年均空缺见 BLS 表 1.2。",
                 "market": "美国",
-                "name": "BLS Occupational Outlook Handbook — Actuaries",
-                "period": "2025; 2025–2035",
+                "name": "BLS 职业手册：精算师",
+                "period": "2025",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/math/actuaries.htm"
@@ -32272,49 +32331,49 @@
                 "url": "https://www.onetonline.org/link/summary/15-2011.00"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "美国雇员工资分布，不是中国、起薪或个人报价。"
+                  "美国精算师 15-2011 的 2025 年 5 月年薪中位数是 130,000 美元，时薪中位数 62.50 美元。分位数描述工资分布，不等于不同年资的报价。"
                 ],
-                "evidence_type": "BLS OEWS职业工资统计，经O*NET展示",
+                "evidence_type": "primary_document",
                 "id": "actuaries-oews-2025",
-                "limitation": "美国雇员工资分布，不是中国、起薪或个人报价。",
+                "limitation": "全国数据，不估起薪。",
                 "market": "美国",
-                "name": "National Wages: Actuaries",
-                "period": "2025 OEWS",
-                "publisher": "O*NET OnLine / BLS",
+                "name": "O*NET 工资表：精算师",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/15-2011.00"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "全国预测不等于招聘量或个人录用。"
+                  "美国精算师 15-2011 的 2025 年 5 月年薪中位数是 130,000 美元，时薪中位数 62.50 美元。分位数描述工资分布，不等于不同年资的报价。"
                 ],
-                "evidence_type": "BLS职业手册、工资统计与就业预测",
+                "evidence_type": "primary_document",
                 "id": "actuaries-ooh-2025-2035",
-                "limitation": "全国预测不等于招聘量或个人录用。",
+                "limitation": "精确就业增幅及年均空缺见 BLS 表 1.2。",
                 "market": "美国",
-                "name": "BLS Actuaries OOH",
-                "period": "2025工资与就业；2025—2035预测",
-                "publisher": "BLS",
+                "name": "BLS 职业手册：精算师",
+                "period": "2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/math/actuaries.htm"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "行业均值不是精算师精确工资。"
+                  "国家统计局 2025 年城镇金融业年平均工资为非私营 211,164 元、私营 140,451 元。行业平均不单列精算师。下面的招聘是单岗位区间，不能拼成全国或城市工资分布。"
                 ],
-                "evidence_type": "官方行业年平均工资统计",
+                "evidence_type": "primary_document",
                 "id": "actuaries-nbs-2025",
-                "limitation": "行业均值不是精算师精确工资。",
+                "limitation": "仅行业背景。",
                 "market": "中国大陆",
-                "name": "2025年城镇单位就业人员年平均工资情况",
-                "period": "2025；2026-05-15发布",
-                "publisher": "国家统计局",
+                "name": "国家统计局：城镇金融业年平均工资",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-10-07",
@@ -32377,19 +32436,19 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "中国水平评价资格；不能代替岗位签署授权。"
+                  "大陆职业资格是水平评价，有准精算师与正精算师两级。可报考不等于能申领证书；考核、职业道德、学历和相关经历等条件分开核。通过部分考试不等于持证，也不等于有岗位签署权。"
                 ],
-                "evidence_type": "官方水平评价职业资格制度规定",
+                "evidence_type": "primary_document",
                 "id": "actuaries-cn-qualification-2023",
-                "limitation": "中国水平评价资格；不能代替岗位签署授权。",
+                "limitation": "报考、申领与签署责任分别核。",
                 "market": "中国大陆",
-                "name": "精算师职业资格规定",
+                "name": "《精算师职业资格规定》与实施办法",
                 "period": "2023",
-                "publisher": "人力资源社会保障部相关官方发布",
-                "scope": "exact",
-                "url": "https://chinajob.mohrss.gov.cn/h5/c/2023-07-20/382768.shtml"
+                "publisher": "NFRA / MOHRSS",
+                "scope": "contextual",
+                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=98627"
               },
               {
                 "accessed_at": "2026-10-07",
@@ -32482,21 +32541,112 @@
                 "url": null
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "整理经验数据｜保单、暴露量和理赔｜确认统计定义、观察期和适用范围，保留输入检查记录。 — 75/100; weight=1/3; actuaries.profile.responsibilities-block.1[0]",
-                  "计算费率与准备金｜经验数据与概率模型｜形成计算结果，解释方法、假设和复算依据。 — 75/100; weight=1/3; actuaries.profile.responsibilities-block.1[2]",
-                  "与业务协作｜核保、理赔、财务与管理人员｜清楚说明技术结果及限制，核对业务问题与产出。 — 50/100; weight=1/3; actuaries.profile.responsibilities-block.1[4]"
+                  "工具可辅助整理虚构数据、生成表格或代码草稿。使用前核数据权限；逐项复算公式、分母和舍入。费率、准备金与签署责任仍由获授权人员复核。本页没有本职业的自动化比例或裁员因果估计。",
+                  "没有岗位替代率。",
+                  "没有岗位替代率。",
+                  "没有岗位替代率。",
+                  "没有岗位替代率。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "没有岗位替代率。",
+                "name": "费马测试编辑部：工具与复算边界",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "北京弘康人寿 2026 年 11 月 3 日发布 1 名精算师，页面列 8,000–10,000 元；硕士及以上、0–3 年经验、至少通过 2 门认可体系的精算考试。工作含准备金、内含价值和报告。页首未标计薪周期，也未拆基本薪资或奖金；是否仍在招需另核。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "actu-bj",
+                "limitation": "一条雇主公告，不是市场分布。",
+                "market": "中国大陆",
+                "name": "北京弘康人寿：精算师",
+                "period": "2026-11-03",
+                "publisher": "Nankai University employer posting",
+                "scope": "recruitment_proxy",
+                "url": "https://career.nankai.edu.cn/correcruit/content/id/86089.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "长沙太保产险湖南分公司 2026 年 9 月 15 日发布保险精算岗 2 名，页面明列 10,000–12,000 元/月、硕士及以上，工作有费率厘定、模型维护、未决赔款准备金与报表。金额是公告单条口径，实际计薪组成须核合同。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "actu-cs",
+                "limitation": "一条雇主公告，不是市场分布。",
+                "market": "中国大陆",
+                "name": "长沙太保产险：保险精算",
+                "period": "2026-09-15",
+                "publisher": "Hunan University employer posting",
+                "scope": "recruitment_proxy",
+                "url": "https://scc.hnu.edu.cn/detail/job?career_id=718142&id=3236731"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "天津人保财险分公司 2026 年 9 月 15 日发布精算岗 1 名，精算学硕士；页首 4,500–6,000 元，未标计薪周期，未拆固定与浮动。职责含车险模型、非车险测算与准备金；不能把这一条当天津统一工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "actu-tj",
+                "limitation": "一条雇主公告，不是市场分布。",
+                "market": "中国大陆",
+                "name": "天津人保财险：精算岗",
+                "period": "2026-09-15",
+                "publisher": "Tianjin University of Science and Technology employer posting",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.tust.edu.cn/correcruit/content/id/46623.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "ASA 有考试、课程及获准入会要求。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "actu-soa",
+                "limitation": "不代表所有岗位要求。",
+                "market": "美国",
+                "name": "SOA：ASA 资格路径",
+                "period": "2026",
+                "publisher": "Society of Actuaries",
+                "scope": "contextual",
+                "url": "https://www.soa.org/education/exam-req/edu-asa-req/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "按协会现行要求核产险方向资格。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "actu-cas",
+                "limitation": "不授予雇主签署权。",
+                "market": "美国",
+                "name": "CAS：ACAS 与 FCAS 路径",
+                "period": "2026",
+                "publisher": "Casualty Actuarial Society",
+                "scope": "contextual",
+                "url": "https://www.casact.org/credential-requirements"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国按目标方向查 SOA 的 ASA/FSA 或 CAS 的 ACAS/FCAS 现行路径。需要出具美国精算意见时另核适用的专业资格标准与组织授权。不能用任一认证推断中美互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "actu-usqs",
+                "limitation": "适用性看意见类型、角色和法规。",
+                "market": "美国",
+                "name": "美国精算意见资格标准",
+                "period": "effective 2022",
+                "publisher": "American Academy of Actuaries",
+                "scope": "contextual",
+                "url": "https://actuary.org/professionalism/us-qualification-standards/"
               }
             ]
           },
@@ -35863,7 +36013,7 @@
       },
       "hero": {
         "h1": "精算师",
-        "quick_answer": "精算师用保险与人口经验数据估计未来给付风险，形成费率、准备金和风险建议。选择这条路径前，应验证自己是否愿意反复检查数据与假设、解释不确定性，并在考试进度、雇主授权和责任边界内持续学习。",
+        "quick_answer": "精算师用数据和模型估计保险等业务的不确定成本。定价常比较出险频率、损失严重度和费率假设；准备金工作会估计未决赔款并解释变动。入行先看你愿不愿意复算和说明限制，再分开核考试、岗位职责与签署权限。",
         "title": "精算师"
       },
       "market_signal_card": {
@@ -35946,7 +36096,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-actuaries-ooh-2025",
+            "source_id": "ep",
             "value": {
               "$item": "actuaries.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35991,7 +36141,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-actuaries-ooh-2025",
+            "source_id": "ep",
             "value": {
               "$item": "actuaries.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36036,7 +36186,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-actuaries-ooh-2025",
+            "source_id": "ep",
             "value": {
               "$item": "actuaries.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -37215,7 +37365,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合精算师",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37292,7 +37442,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "Big Five"
           },
           {
             "href": {
@@ -37337,9 +37487,11 @@
     "interface": {
       "interface.fit.directions_heading": "相邻职业比较：任务与产出有何不同？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.outlook.evidence_heading": "美国精算师就业：人数、增幅和空缺",
       "interface.profile.comparison.dimension_header": "比较维度",
       "interface.profile.comparison.primary_header": "精算师（美国职业任务）",
       "interface.profile.comparison.secondary_header": "保险承保人（美国职业任务）",
+      "interface.quick_decision.experiment_heading": "怎样试做一次精算复算？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37432,7 +37584,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与复算任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37463,26 +37615,26 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "78,570 美元/年",
         "fact_id": "us-wage-low10-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "工资第 10 分位上界",
         "occupation_scope": "精算师",
         "period": "资料期以来源为准",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "97,680 美元/年",
         "fact_id": "us-wage-q25-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "工资第 25 分位",
         "occupation_scope": "精算师",
         "period": "资料期以来源为准",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
@@ -37499,26 +37651,26 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "170,650 美元/年",
         "fact_id": "us-wage-q75-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "工资第 75 分位",
         "occupation_scope": "精算师",
         "period": "资料期以来源为准",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "215,100 美元/年",
         "fact_id": "us-wage-high10-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "工资第 90 分位下界",
         "occupation_scope": "精算师",
         "period": "资料期以来源为准",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
@@ -37530,19 +37682,19 @@
         "occupation_scope": "精算师",
         "period": "2025年基期（BLS EP就业预测）",
         "source_refs": [
-          "actuaries-ooh-2025-2035"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "9%",
+        "display_value": "9.2%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "预计就业增长率",
         "occupation_scope": "精算师",
-        "period": "2025—2035年（BLS EP就业预测）",
+        "period": "2025–2035",
         "source_refs": [
-          "actuaries-ooh-2025-2035"
+          "ep"
         ]
       },
       {
@@ -37554,12 +37706,12 @@
         "occupation_scope": "精算师",
         "period": "2025—2035年（BLS EP就业预测）",
         "source_refs": [
-          "actuaries-ooh-2025-2035"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业内该职业工资中位数",
@@ -37571,7 +37723,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业内该职业工资中位数",
@@ -37583,7 +37735,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业内该职业工资中位数",
@@ -37595,7 +37747,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "us-industry-wage-education-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业内该职业工资中位数",
@@ -37611,10 +37763,10 @@
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "全国城镇非私营单位就业人员年平均工资",
-        "occupation_scope": "精算师",
+        "occupation_scope": "industry_proxy",
         "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
@@ -37623,15 +37775,15 @@
         "fact_id": "cn-private-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "全国城镇私营单位就业人员年平均工资",
-        "occupation_scope": "精算师",
+        "occupation_scope": "industry_proxy",
         "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-mid-managers-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "规模以上企业中层及以上管理人员年平均工资",
@@ -37643,7 +37795,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-clerical-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "规模以上企业办事人员和有关人员年平均工资",
@@ -37655,7 +37807,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业门类年平均工资（城镇非私营单位）",
@@ -37667,7 +37819,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-industry-science-tech-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业门类年平均工资（城镇非私营单位）",
@@ -37679,7 +37831,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业门类年平均工资（城镇非私营单位）",
@@ -37691,7 +37843,7 @@
       },
       {
         "derivation": null,
-        "display_value": "未取得（精算师专属研究包未提供该统计项）",
+        "display_value": "该项暂无可比公开统计。",
         "fact_id": "cn-industry-public-admin-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业门类年平均工资（城镇非私营单位）",
@@ -37719,10 +37871,10 @@
         "fact_id": "cn-finance-nonprivate-wage",
         "market": "中国城镇单位金融业",
         "measure": "pre-tax annual mean wage",
-        "occupation_scope": "精算师",
+        "occupation_scope": "industry_proxy",
         "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
@@ -37731,22 +37883,22 @@
         "fact_id": "cn-finance-private-wage",
         "market": "中国城镇单位金融业",
         "measure": "pre-tax annual mean wage",
-        "occupation_scope": "精算师",
+        "occupation_scope": "industry_proxy",
         "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
         "derivation": null,
-        "display_value": "130000 美元/年（2025 年 5 月中位数）",
+        "display_value": "130,000 美元/年",
         "fact_id": "us-actuary-median",
         "market": "美国",
         "measure": "annual median wage",
         "occupation_scope": "精算师",
         "period": "May 2025 wage and 2025-2035 projection; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
@@ -37770,19 +37922,19 @@
         "occupation_scope": "精算师",
         "period": "2023 regulation in force; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "actuaries-cn-qualification-2023"
         ]
       },
       {
         "derivation": null,
-        "display_value": "2025–2035 年增长 9%；2025 年约 31200 人",
+        "display_value": "9.2%",
         "fact_id": "us-actuary-growth",
         "market": "美国",
         "measure": "employment base and projected growth",
         "occupation_scope": "精算师",
-        "period": "May 2025 wage and 2025-2035 projection; accessed 2026-08-31",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
@@ -37794,7 +37946,7 @@
         "occupation_scope": "精算师",
         "period": "May 2025 wage and 2025-2035 projection; accessed 2026-08-31",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
@@ -37811,14 +37963,14 @@
       },
       {
         "derivation": null,
-        "display_value": "暂无可安全使用的数据",
+        "display_value": "130,000 美元/年",
         "fact_id": "us-wage",
         "market": "美国",
         "measure": "职业页工资或可用性边界",
         "occupation_scope": "精算师",
         "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
@@ -37847,14 +37999,14 @@
       },
       {
         "derivation": null,
-        "display_value": "22%",
+        "display_value": "9.2%",
         "fact_id": "employment-projection",
         "market": "美国",
         "measure": "就业趋势或可用性边界",
         "occupation_scope": "精算师",
-        "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
@@ -37871,14 +38023,14 @@
       },
       {
         "derivation": null,
-        "display_value": "130,000 美元",
+        "display_value": "130,000 美元/年",
         "fact_id": "us-wage-median-2025",
         "market": "美国",
         "measure": "年薪中位数",
         "occupation_scope": "精算师",
         "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
         "source_refs": [
-          "onet"
+          "actuaries-oews-2025"
         ]
       },
       {
@@ -37914,7 +38066,7 @@
         "occupation_scope": "精算师",
         "period": "current page; accessed 2026-09-04",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
@@ -38006,7 +38158,7 @@
         "display_value": "129,650 美元/年",
         "fact_id": "actuaries-2025-government",
         "market": "美国",
-        "measure": "政府内精算师中位数（排除学校医院）",
+        "measure": "政府（不含州和地方教育及医院）｜职业年薪中位数",
         "occupation_scope": "Actuaries SOC 15-2011",
         "period": "2025",
         "source_refs": [
@@ -38034,19 +38186,19 @@
         "occupation_scope": "Actuaries SOC 15-2011",
         "period": "2025",
         "source_refs": [
-          "actuaries-ooh-2025-2035"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "9%",
+        "display_value": "9.2%",
         "fact_id": "actuaries-2025-2035-growth",
         "market": "美国",
         "measure": "就业增长预测",
         "occupation_scope": "Actuaries SOC 15-2011",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
-          "actuaries-ooh-2025-2035"
+          "ep"
         ]
       },
       {
@@ -38058,34 +38210,22 @@
         "occupation_scope": "Actuaries SOC 15-2011",
         "period": "2025—2035",
         "source_refs": [
-          "actuaries-ooh-2025-2035"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "精算师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "ep"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与精算复算"
     },
     "badges": [
-      "精算师任务 · 精算师的模型与结果复核 · 精算师的假设与版本记录",
-      "精算师的跨团队协作 / 精算师的异常升级 / 精算师的流程改善",
-      "数据缺口保留 · 权限边界标注"
+      "保险定价与准备金",
+      "假设、分母和复算",
+      "考试与签署权限分开"
     ],
     "metrics": [
       {
@@ -38124,17 +38264,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "精算师做什么、需要哪些技能与考试准备？查看实际任务、美国薪资和就业前景，再用虚构保单任务探索兴趣。数据注明来源年份，不代表中国薪资或执业资格。"
+      "text": "了解精算师定价与准备金工作、大陆招聘和中美考试路径、美国工资口径，并用虚构数据试算损失成本。"
     },
     "title": {
       "availability": "available",
-      "text": "精算师职业指南：工作内容、薪资、考试与入行路径"
+      "text": "精算师做什么？大陆招聘、资格路径与损失成本试做"
     }
   },
-  "source_content_sha256": "1600ef4dcb802d6158230a33e5968d49322f0b1f4bc1ed3e01624bd39651a107",
+  "source_content_sha256": "33d06b1ea07c5bc7f8ee961916ff8f95d9a220e96d716baee679ae7111719e0d",
   "subject": {
     "canonical_slug": "actuaries",
     "name": "精算师",
-    "summary": "精算师运用数学、统计与金融知识评估风险和未来给付责任。了解实际任务、学习与考试路径，再用虚构工作样例验证探索兴趣；页内薪资与前景数据按美国来源阅读，不能直接当作中国市场或执业资格结论。"
+    "summary": "精算师用数据和模型估计保险等业务的不确定成本。定价常比较出险频率、损失严重度和费率假设；准备金工作会估计未决赔款并解释变动。入行先看你愿不愿意复算和说明限制，再分开核考试、岗位职责与签署权限。"
   }
 }

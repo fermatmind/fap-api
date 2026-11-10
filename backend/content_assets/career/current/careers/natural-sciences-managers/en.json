@@ -176,6 +176,9 @@
       "item:natural-sciences-managers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:natural-sciences-managers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:natural-sciences-managers.profile.definition-block.1": {
         "status": "pending_mapping"
       },
@@ -12202,6 +12205,21 @@
             "source-pack-onet-custom"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Project A is near a milestone with a repeat test unfinished. B completed its repeat but faces an instrument scheduling conflict. Explain one allocation and what to verify with a project lead."
+            ]
+          },
+          "id": "natural-sciences-managers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Allocate research resources using project evidence",
+          "type": "notice"
         }
       ]
     },
@@ -14663,6 +14681,13 @@
         "id": "natural-sciences-managers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "natural-sciences-managers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14940,7 +14965,7 @@
       "text": "Natural sciences managers"
     }
   },
-  "source_content_sha256": "ca82b0484fd6feb591331d62fb216c24ff8544cf77eee933f08e8b14f366d675",
+  "source_content_sha256": "332616fb500a830737c6570caedb2ab26799eb8dd2833a1aa8ae6b70439775f3",
   "subject": {
     "canonical_slug": "natural-sciences-managers",
     "name": "Natural sciences managers",

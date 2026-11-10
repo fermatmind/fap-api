@@ -1717,6 +1717,9 @@
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.6": {
         "status": "mapped"
+      },
+      "item:cooks.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -30336,6 +30339,21 @@
             "cn-rule"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。订单换了配菜，出餐单仍沿用旧版。指出需回查的订单、应通知的厨房角色和应保留的变更记录。"
+            ]
+          },
+          "id": "cooks.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "sag-moa"
+          ],
+          "title": "核厨房工单与出餐记录",
+          "type": "notice"
         }
       ]
     },
@@ -36989,6 +37007,13 @@
         "id": "actors.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "cooks.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/zh/career/jobs/cooks",
@@ -37381,7 +37406,7 @@
       "text": "厨师（职业家族）"
     }
   },
-  "source_content_sha256": "b3638609fb0c185bdf78de821b21f2310f9e3f194a49e167fa4d88f9aceec6f4",
+  "source_content_sha256": "b0fac382765d025288c44e4de2c9a7ed149fdd2ee52ae88435ffd5e15dc9d8e7",
   "subject": {
     "canonical_slug": "cooks",
     "name": "厨师（职业家族）",

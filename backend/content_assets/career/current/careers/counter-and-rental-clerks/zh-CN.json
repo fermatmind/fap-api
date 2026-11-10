@@ -6,7 +6,7 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
@@ -30,7 +30,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -54,7 +54,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-counter-dafang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-counter-ehi": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -26043,12 +26049,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆柜台与租赁岗位招聘报价统计；单条招聘公告不能代表全国水平"
+              "一嗨高校招聘示例列实习综合 3,000–4,500 元/月、转正综合 4,500–6,000 元/月，岗位也包括验车与车辆整备。大方租车武汉、长沙门店示例列会员接待、租还和结算，未列薪资。 一嗨公告列西安等地，实习 3–6 个月，要求大专及以上在读、C1 或以上驾照（或在考）；大方两地公告要求 C 类及以上驾照、至少一年驾龄。驾驶条件仅属于这两家汽车租赁岗位。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "counter-ehi",
+            "counter-dafang"
           ],
           "type": "prose"
         },
@@ -26141,7 +26148,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025条件匹配行业背景，非私营/私营税前年均：租赁商务110,162/68,919，批发零售135,749/69,622，居民服务修理其他70,226/52,059元。按法人主营行业及私营分类匹配；不是柜台租赁职业中位、月到手或兼职单价。城镇5人及以上法人，不含个体自由职业；中国本岗工资分布、报价样本、用工比例及中美精确映射未取得。"
+              "以下公告用于对照岗位和计薪条件。全国职业工资分布缺少可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -28514,7 +28521,7 @@
           "data": {
             "paragraphs": [
               "本页不引用具体在招公告，也不把历史招聘案例计为在招岗位；招聘与用工条件须按目标单位当年公告核对。",
-              "情景判断和单据核对为编辑设计的任务观察思路，本页未取得招聘样本，不证明雇主常用考核流程。"
+              "情景判断和单据核对为编辑设计的任务观察思路，本页历史招聘不证明雇主常用考核流程。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
@@ -30878,7 +30885,7 @@
           "data": {
             "entries": [
               {
-                "answer": "迎接到店与来电客户、了解所需租赁或服务的类型质量与数量，说明租赁费用与政策程序，介绍租赁物品的可用性与操作方法并建议使用与保养，受理租赁维修干洗与寄存等订单，计算费用与押金并收款、准备租赁表格并取得签名与证照信息，检查并调整租赁物品、登记并标记待处理物品、预留并登记租出记录，布置陈列并为活动分配器材。",
+                "answer": "受理租赁、维修或其他服务订单，说明可用选项、费用和条款，完成登记、交付和结算。租赁岗位还可能核对退还状态并把损坏争议转给有权限的同事。",
                 "id": "actors.faq.1",
                 "question": "柜台租赁文员每天的具体工作是什么？",
                 "question_key": "career.faq.counter-and-rental-clerks.1",
@@ -30887,7 +30894,7 @@
                 ]
               },
               {
-                "answer": "柜台租赁文员受理租赁与服务订单，承担费用押金计算、单据与物品检查责任；收银员以结算与收款为主，通常不承担物品检查与租出登记；零售销售员以推荐与销售商品为主；银行柜员办理账户与凭证业务；前台接待以接待与转接为主；订单文员受理订单并录入付款方式。",
+                "answer": "收银员主要结账，零售销售员主要协助选购商品。租赁柜台还要管理可借物品、期限、交还记录和额外费用。",
                 "id": "actors.faq.2",
                 "question": "柜台租赁文员和收银员、零售销售员有什么区别？",
                 "question_key": "career.faq.counter-and-rental-clerks.2",
@@ -30905,9 +30912,9 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：受理计费与登记、库存与可用性查询、身份核验与合同三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "系统可协助核库存、计算规则内费用或起草回复；争议费用、损坏、隐私和授权例外仍需人工核对。 这不是对本职业 AI 使用率或岗位替代的测量。",
                 "id": "actors.faq.4",
-                "question": "柜台租赁文员哪些任务已有 AI 变化证据？",
+                "question": "哪些工作可能由软件辅助？",
                 "question_key": "career.faq.counter-and-rental-clerks.4",
                 "source_refs": [
                   "onet"
@@ -30923,16 +30930,18 @@
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位年薪 41,300 美元、时薪 19.86 美元（41-2021.00 单一职业口径），分位为年薪 29,800／35,630／41,300／50,190／65,370 美元；中国大陆未取得职业级工资数值，本页按缺口处理，不用行业均值代填。",
+                "answer": "美国 2025 年 5 月工资中位数为 41,300 美元/年、19.86 美元/小时。 一嗨高校招聘示例列实习综合 3,000–4,500 元/月、转正综合 4,500–6,000 元/月，岗位也包括验车与车辆整备。大方租车武汉、长沙门店示例列会员接待、租还和结算，未列薪资。 一嗨公告列西安等地，实习 3–6 个月，要求大专及以上在读、C1 或以上驾照（或在考）；大方两地公告要求 C 类及以上驾照、至少一年驾龄。驾驶条件仅属于这两家汽车租赁岗位。",
                 "id": "actors.faq.6",
                 "question": "柜台租赁文员工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.counter-and-rental-clerks.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "counter-ehi",
+                  "counter-dafang"
                 ]
               },
               {
-                "answer": "美国准备层级为 Job Zone 1–2（SVP 低于 6.0），通常要求高中文凭或同等学历，在职训练从几天到一年；多数岗位在一次入职训练与在职学习中掌握流程与系统。中国大陆同类岗位的录用与培训按目标单位规定。",
+                "answer": "美国 BLS 对这项职业的典型入门分类是无需正式学历凭证、短期在岗培训。O*NET 的 Job Zone 1–2 描述的是一组职业，一些雇主可要求高中或同等学历。大陆两家汽车租赁公告要求不同，按门店职责和实际公告核实。",
                 "id": "actors.faq.7",
                 "question": "柜台租赁文员需要什么学历，又该怎样训练？",
                 "question_key": "career.faq.counter-and-rental-clerks.7",
@@ -30959,12 +30968,12 @@
                 ]
               },
               {
-                "answer": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 408,200 人，预测标签为 Average（3% 至 4%），累计约 45,900 个含增长与替换的空缺；工作以站立走动与高频沟通为主，且周末与节假日排班集中，须按本地门店与业务需求核对。",
+                "answer": "美国 BLS 预计 41-2021 就业从 2025 年约 409,400 到 2035 年约 421,900（+3.0%）。年均约 46,100 个空缺，包含替补需求。",
                 "id": "actors.faq.10",
-                "question": "现在选择柜台租赁文员职业，还应考虑什么？",
+                "question": "美国就业预测怎么读？",
                 "question_key": "career.faq.counter-and-rental-clerks.10",
                 "source_refs": [
-                  "bls"
+                  "a18-bls-projections"
                 ]
               }
             ]
@@ -30980,7 +30989,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "美国与中国大陆数据分栏：美国工资为 41-2021.00 单一职业口径（OEWS 2025 年工资数据），就业与预测取自 O*NET 就业趋势页（基于 BLS 2024—2034 年预测）；中国大陆按缺口处理，两者不互相替代。",
+              "美国与中国大陆数据分栏：美国工资为 41-2021.00 单一职业口径（OEWS 2025 年工资数据），就业与预测取自 O*NET 就业趋势页（基于 BLS 2025–2035 年预测）；中国大陆按缺口处理，两者不互相替代。",
               "统计期、调查对象与计酬口径不同时分别引用；不插值、不用相邻职业或行业均值代填。",
               "练习材料均为虚构或以公开资料为基础，不构成培训证明、授权或录用承诺。"
             ]
@@ -31382,7 +31391,7 @@
                 "url": "https://www.onetonline.org/link/localwages/41-2021.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "美国O*NET16任务：15Core含计费收款、租赁维修干洗寄存订单、费用政策说明、物品信息及使用养护建议、迎客与电话、检查调整物件、表格签名及所需证照、出租服务与归还、交易及进店人数记录、接收检查标记待处理物、预留租出记录、准备陈列或购买租赁物品、广泛产品服务推荐；活动器材分配为1Supplemental。分类不是每天频率，不把每岗工作面一概称高频交替。美国O*NET2025行业就业：房地产与租赁44%、零售22%、其他服务（公共行政除外）14%、其他行业20%含批发和行政支持；不细分剩余比例为自雇，不等工资或中国用人分布。"
                 ],
@@ -31394,7 +31403,7 @@
                 "period": "页面更新2026，行业2025；调查不同",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/41-2021.00"
+                "url": "https://www.onetonline.org/link/details/41-2021.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31535,6 +31544,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 预计 41-2021 就业从 2025 年约 409,400 到 2035 年约 421,900（+3.0%）。年均约 46,100 个空缺，包含替补需求。"
+                ],
+                "evidence_type": "官方统计",
+                "id": "a18-bls-projections",
+                "limitation": "年均空缺包含替补；不是净增或录用概率。",
+                "market": "美国",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "实习综合 3,000–4,500 元/月；转正综合 4,500–6,000 元/月。 公告列西安等地，实习期 3–6 个月；要求大专及以上在读和 C1 或以上驾照（可在考）。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "counter-ehi",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "一嗨门店代表",
+                "period": "未注明",
+                "publisher": "陕西工业职业技术大学招聘平台",
+                "scope": "recruitment_proxy",
+                "url": "https://51uns.bysjy.com.cn/Position/Details/1714734?schoolCode=10828"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "武汉、长沙等门店办理租还与结算，未列金额。 武汉、长沙示例要求 C 类及以上驾照、至少一年驾龄。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "counter-dafang",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "大方门店租车服务代表",
+                "period": "未注明",
+                "publisher": "大方租车",
+                "scope": "recruitment_proxy",
+                "url": "https://www.dafang24.com/helpdetails/22"
               }
             ]
           },
@@ -34478,10 +34532,10 @@
             },
             {
               "城市/区间": "行业背景（税前年均，非月薪）",
-              "月薪参考": "NBS2025条件匹配行业背景，非私营/私营税前年均：租赁商务110,162/68,919，批发零售135,749/69,622，居民服务修理其他70,226/52,059元。按法人主营行业及私营分类匹配；不是柜台租赁职业中位、月到手或兼职单价。城镇5人及以上法人，不含个体自由职业；中国本岗工资分布、报价样本、用工比例及中美精确映射未取得。"
+              "月薪参考": "国家统计局按单位所属行业公布城镇单位年平均工资，可作行业背景。不能由行业均值推出具体岗位工资。"
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34493,13 +34547,14 @@
           "china_soc_row": "美国O*NET41-2021.00/OEWS41-2021本岗；中国精确实体映射本轮未完成。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-counter-ehi",
+            "posting-counter-dafang"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响柜台租赁文员的工资吗？",
             "driver_heading": "柜台与门店场景怎样安排排班？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历与训练背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "不同任务方向需要核对哪些准备条件？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36259,7 +36314,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解柜台租赁文员的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36372,12 +36427,12 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "label": "人格偏好"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "label": "大五人格特质"
           },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
@@ -36793,39 +36848,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 408,200 人（2024 年，单一职业口径）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "409,400 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模",
-        "occupation_scope": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）该细分的 2024 年就业估计",
-        "period": "2024 年（O*NET/BLS）；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 41-2021",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "增长 3%—4%（2024—2034 年，标签 Average）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "+3.0%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "就业变化率",
-        "occupation_scope": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）该细分的预测标签「平均」",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 41-2021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 45,900 个（2024—2034 年累计，含增长与替换）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 46,100 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "职位空缺",
-        "occupation_scope": "O*NET 就业趋势页该细分 2024—2034 年累计空缺，说明含增长与替换需求",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 41-2021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
@@ -36877,39 +36932,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "409,400人（2025就业）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "409,400 人（2025）",
         "fact_id": "g04-employment-2025",
         "market": "美国",
         "measure": "就业规模",
-        "occupation_scope": "美国41-2021本岗，年均空缺非累计，行业份额非工资",
-        "period": "2025行业就业／2025—2035预测；核2026-10-09",
+        "occupation_scope": "U.S. SOC 41-2021",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "增长3%（2025—2035）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "+3.0%",
         "fact_id": "g04-growth-2025",
         "market": "美国",
         "measure": "就业变化率",
-        "occupation_scope": "美国41-2021本岗，年均空缺非累计，行业份额非工资",
-        "period": "2025行业就业／2025—2035预测；核2026-10-09",
+        "occupation_scope": "U.S. SOC 41-2021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "年均46,100个（2025—2035含增长与替换）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 46,100 个（含替补）",
         "fact_id": "g04-openings-2025",
         "market": "美国",
         "measure": "职位空缺",
-        "occupation_scope": "美国41-2021本岗，年均空缺非累计，行业份额非工资",
-        "period": "2025行业就业／2025—2035预测；核2026-10-09",
+        "occupation_scope": "U.S. SOC 41-2021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
@@ -36959,6 +37014,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "实习综合 3,000–4,500 元/月；转正综合 4,500–6,000 元/月。 公告列西安等地，实习期 3–6 个月；要求大专及以上在读和 C1 或以上驾照（可在考）。",
+        "fact_id": "posting-counter-ehi",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "一嗨门店代表",
+        "period": "未注明",
+        "source_refs": [
+          "counter-ehi"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "武汉、长沙等门店办理租还与结算，未列金额。 武汉、长沙示例要求 C 类及以上驾照、至少一年驾龄。",
+        "fact_id": "posting-counter-dafang",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "大方门店租车服务代表",
+        "period": "未注明",
+        "source_refs": [
+          "counter-dafang"
+        ]
       }
     ]
   },
@@ -36985,19 +37064,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，增长 3%—4%，平均）"
+        "label": "美国预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 408,200 人）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国职位空缺（2024—2034 年，约 45,900 个）"
+        "label": "美国预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37011,17 +37090,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "柜台租赁文员（O*NET-SOC 41-2021.00）在柜台受理租赁、维修、干洗与寄存等服务并为客户提供咨询：覆盖说明费用与政策、介绍租赁物品、计算费用与收款、检查并调整租赁物品、准备租赁表格与签名证照、登记并标记待处理物品、预留与登记租出记录、布置陈列；含美国 2025 年中位年薪 41,300 美元（时薪 19.86 美元）、2024 年约 408,200 人在岗、2024—2034 年就业预测平均（3%—4%）、中国大陆职业级工资与用工口径缺口，以及久站久坐交替、情绪沟通与现金责任的控制点。"
+      "text": "柜台与租赁服务员怎样接单、核价、交还和结算？看中国汽车租赁门店例子、美国工资与职业区别。"
     },
     "title": {
       "availability": "available",
       "text": "柜台租赁文员"
     }
   },
-  "source_content_sha256": "460193cc327601f8181b88f874708226a53376e0d25ea676a037be567b345571",
+  "source_content_sha256": "718cf48c3930bc961fe74b2122065e2fadc5228fad4b94f127392655714587d9",
   "subject": {
     "canonical_slug": "counter-and-rental-clerks",
     "name": "柜台租赁文员",
-    "summary": "柜台租赁文员在美国对应 O*NET-SOC 41-2021.00（Counter and Rental Clerks）。核心是在柜台或门店面向到店与来电客户，受理租赁、维修、干洗与寄存等服务订单：说明租赁费用与政策、介绍租赁物品的可用性与操作方法、计算费用并收款、检查并调整租赁物品、准备租赁表格并取得客户签名与证照信息、登记并标记待修改清洗寄存或维修的物品、预留并登记租出记录、布置陈列，以及为体育活动或休闲活动分配器材。中国侧，柜台与租赁文员岗位分属零售、租赁与服务业，与该美国职业细类不是一一对应，任职与计酬口径不能互换。"
+    "summary": "受理租赁、维修或其他服务订单，说明可用选项、费用和条款，完成登记、交付和结算。租赁岗位还可能核对退还状态并把损坏争议转给有权限的同事。"
   }
 }

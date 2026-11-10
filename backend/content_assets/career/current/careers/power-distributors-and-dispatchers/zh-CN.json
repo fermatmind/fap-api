@@ -23371,13 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "偏好电力系统、程序通信和轮班监视者可继续核调度岗位；与电厂操作、现场检修和电气工程比较。"
+              "纸面体验｜比对虚构调度日志和交班清单，标出许可编号相同而状态不同的一行，留下两个时点供值班负责人核对。 "
             ]
           },
           "id": "power-distributors-and-dispatchers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23665,13 +23664,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "电力调度员51-8012与电厂操作员51-8013、核电反应堆操作员51-8011和电气工程师17-2071职责不同；各自操作权限与资格不能互借。"
+              "电力输配调度员监视系统状态，协调输配运行及工作许可交接。状态记录要让下一班知道哪些事项已确认、哪些仍待复核。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "power-distributors-and-dispatchers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "ep"
+            "transfer-onet-51-8012.00"
           ],
           "type": "prose"
         },
@@ -24757,15 +24755,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职智能电网和自动化可改变部分监视与协调任务。生成式工具用于日志或信息整理仅为本页待验证设想，未核效果、采用率或裁员；系统状态、故障与切换依获授权人员和规程。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比对虚构调度日志和交班清单，标出许可编号相同而状态不同的一行，留下两个时点供值班负责人核对。"
             ]
           },
           "id": "power-distributors-and-dispatchers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-51-8012.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32596,6 +32592,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-8012.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-8012.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-8012.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37841,10 +37864,10 @@
       "text": "电力调度员"
     }
   },
-  "source_content_sha256": "9e31e88926d58e89b000964eaff7dd73c8c96fd2f73fc80c55d2bf3fa04170db",
+  "source_content_sha256": "1439a82359034f30202b1cbbd205b2524378cb93bddeaa4b27e7dc23adbbd48c",
   "subject": {
     "canonical_slug": "power-distributors-and-dispatchers",
     "name": "电力调度员",
-    "summary": "电力调度员在控制室监视电力系统状态、负荷与设备告警，按授权程序协调发电、输电和配电，处理故障并记录调度指令。O*NET 51-8012.00列设备监控、切换单、停电绕供和与现场人员通信为任务；真实控制指令必须由获授权人员依调度规程执行。"
+    "summary": "电力输配调度员监视系统状态，协调输配运行及工作许可交接。状态记录要让下一班知道哪些事项已确认、哪些仍待复核。"
   }
 }

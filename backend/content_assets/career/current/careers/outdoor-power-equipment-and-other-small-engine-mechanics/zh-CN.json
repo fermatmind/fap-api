@@ -173,6 +173,9 @@
       "item:outdoor-power-equipment-and-other-small-engine-mechanics.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:outdoor-power-equipment-and-other-small-engine-mechanics.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:outdoor-power-equipment-and-other-small-engine-mechanics.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12989,6 +12992,21 @@
             "onet-summary"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两台外观相同的修剪机分别报无法启动和运转后熄火。受理单混用了两个序列号。写下先核的设备、报修原话和要交给维修技师的问题。"
+            ]
+          },
+          "id": "outdoor-power-equipment-and-other-small-engine-mechanics.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核小型动力设备送修线索",
+          "type": "notice"
         }
       ]
     },
@@ -15526,6 +15544,13 @@
         "id": "outdoor-power-equipment-and-other-small-engine-mechanics.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "outdoor-power-equipment-and-other-small-engine-mechanics.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15791,7 +15816,7 @@
       "text": "小型发动机维修技师｜职责、薪资与入行"
     }
   },
-  "source_content_sha256": "782eb6e49aee6b53bb4c3c121c31dd05831d90e14636ee997d4a53aca5866baf",
+  "source_content_sha256": "405887efe14396368eaf1a6c8d4c0dd8af1448efe28d34d7856ef9df401c62e1",
   "subject": {
     "canonical_slug": "outdoor-power-equipment-and-other-small-engine-mechanics",
     "name": "户外动力设备其他小型发动机机械师",

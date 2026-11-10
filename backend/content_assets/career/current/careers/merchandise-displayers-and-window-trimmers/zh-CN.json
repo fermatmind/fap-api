@@ -167,6 +167,9 @@
       "item:merchandise-displayers-and-window-trimmers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:merchandise-displayers-and-window-trimmers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:merchandise-displayers-and-window-trimmers.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12294,6 +12297,21 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。新陈列图把展架放到通道边，但现场记录没有通道复核。标出改图或请场地负责人复核前要确认的两项信息。"
+            ]
+          },
+          "id": "merchandise-displayers-and-window-trimmers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "核陈列图与现场位置",
+          "type": "notice"
         }
       ]
     },
@@ -14618,6 +14636,13 @@
         "id": "merchandise-displayers-and-window-trimmers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "merchandise-displayers-and-window-trimmers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14859,7 +14884,7 @@
       "text": "商品陈列员橱窗布置员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "2cb69211797e55c61eb0a9a4a000abaf5c1ef4646e1e9d8e3f0df6765189ec96",
+  "source_content_sha256": "d6025b772aeabf4e680c6c9d62abccf0318059902478c47ac1e0064bb4d0b989",
   "subject": {
     "canonical_slug": "merchandise-displayers-and-window-trimmers",
     "name": "商品陈列员橱窗布置员",

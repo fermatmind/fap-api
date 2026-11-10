@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "可观察自己能否把服务请求、对象标识和检查记录逐项对应，并在记录冲突时清楚说明。轮胎服务需要动手与协作；纸面体验只提供对核对习惯的线索，实际体力、操作培训和客户沟通仍需分别了解。"
+              "纸面体验｜对照虚构接车单和工位卡，找出车轮位置标反的一条记录，保留原值并写清需找谁核实。 "
             ]
           },
           "id": "tire-repairers-and-changers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24806,13 +24805,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "轮胎修理与更换工修理或更换车辆轮胎，任务涉及车轮拆装、平衡、轮胎修补、检查和服务记录，也可能外出服务。美国O*NET49-3093.00的清单还含部分翻修处理；与设备造胎、整车和柴油机维修的独立职业分别理解，具体操作与放行依实际训练和分工。"
+              "轮胎维修与更换人员检查轮胎和车轮，按工单拆装或做平衡检查。交车记录要对应具体车轮位置和已完成工作。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "tire-repairers-and-changers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-49-3093.00"
           ],
           "type": "prose"
         }
@@ -25580,13 +25578,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职业可复核任务评分、全国AI采用和净就业因果结果。已核案例限车牌与客户记录匹配，维修安全仍需专业确认；BLS2025—2035总体增长3.4%、十年净增约3800人与年均12900空缺含替补分指标，不代表AI影响。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构接车单和工位卡，找出车轮位置标反的一条记录，保留原值并写清需找谁核实。"
             ]
           },
           "id": "tire-repairers-and-changers.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial",
-            "nist"
+            "transfer-onet-49-3093.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33072,6 +33070,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-49-3093.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 49-3093.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/49-3093.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38543,10 +38568,10 @@
       "text": "轮胎修理与更换工"
     }
   },
-  "source_content_sha256": "328c7551b916e63262ab4a5c3b3f12ddbbc5cf434fc1a7d99d7442e655a62e0a",
+  "source_content_sha256": "ad43abdfd9d942f815eca6965b34399bf7a23ce202188b9d6c5f01bba69049dd",
   "subject": {
     "canonical_slug": "tire-repairers-and-changers",
     "name": "轮胎修理与更换工",
-    "summary": "轮胎修理与更换工修理或更换车辆轮胎，涉及车轮拆装、轮胎平衡、修补、轮胎状况检查及服务记录，也可能到现场提供服务。工作要求不只在动手速度，还在对象识别、记录准确、协作与受训范围。先用本页虚构接车记录辨认缺项和冲突，了解自己是否愿意反复核对，再核实际门店的培训、班次和薪资条件。"
+    "summary": "轮胎维修与更换人员检查轮胎和车轮，按工单拆装或做平衡检查。交车记录要对应具体车轮位置和已完成工作。"
   }
 }

@@ -44,9 +44,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1602,7 +1599,7 @@
         "status": "pending_mapping"
       },
       "item:aerospace-engineers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:aerospace-engineers.sources.source-card.1": {
         "status": "mapped"
@@ -23401,12 +23398,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Spend 90 minutes making only a paper comparison using the fictional data supplied on this page: calculate the A/B means and minimums, check R1–R3 individually, retain failed data, and write an anomaly and retest plan. No glider construction or launching is needed, and this is not for actual flight decisions."
+              "In “Entry, Qualifications, and Career Development”, find “AE-17 | Compare concepts and keep failed observations”. Make a decision for each requirement before checking the sample."
             ]
           },
           "id": "aerospace-engineers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23415,13 +23412,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "If you are willing to check units and model assumptions, explain design trade-offs with evidence, accept questions from other disciplines, and recalculate and keep records after finding errors, you can explore actual engineering tasks further."
+              "Explore the work if you enjoy retaining failed observations, checking thresholds and units and explaining missing evidence."
             ]
           },
           "id": "aerospace-engineers.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -23431,13 +23427,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Start with a 90-minute paper comparison using this page's fictional paper-glider data, submitting a requirements matrix, recalculation table, and anomaly explanation. No physical construction or throwing is needed. This explores engineering trade-offs and evidence awareness, not qualification for flight, design, or approval."
+              "Use the fictional AE-17 data for a 90-minute paper comparison. Produce a one-page report with the requirements matrix, recalculation table, anomaly note and paper review plan. There is no hardware to build or launch. This exercise does not confer design, flight or approval authority."
             ]
           },
           "id": "aerospace-engineers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23607,7 +23602,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Employment in 2025: 68,700 people, with projected growth of 8%, a net increase of 5,700 people, and 3,800 average annual openings including replacement demand."
+              "Employment in 2025: 68,700 people, with projected growth of 8.3%, a net increase of 5,700 people, and 3,800 average annual openings including replacement demand."
             ]
           },
           "id": "aerospace-engineers.profile.onet-structured-fields-block.4",
@@ -24665,10 +24660,10 @@
                 "url": "https://www.onetonline.org/link/summary/17-2011.00"
               },
               {
-                "entity": "BLS Occupational Outlook Handbook: aerospace engineers",
+                "entity": "BLS Employment Projections Table 1.2",
                 "id": "link-9",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "Generative AI and jobs: A refined global index of occupational exposure",
@@ -24689,10 +24684,10 @@
                 "url": "https://www.onetonline.org/link/summary/17-2011.00"
               },
               {
-                "entity": "BLS Occupational Outlook Handbook: aerospace engineers",
+                "entity": "BLS Employment Projections Table 1.2",
                 "id": "link-13",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET aerospace engineers 17-2011.00",
@@ -24707,10 +24702,10 @@
                 "url": "https://www.onetonline.org/link/summary/17-2011.00"
               },
               {
-                "entity": "BLS Occupational Outlook Handbook: aerospace engineers",
+                "entity": "BLS Employment Projections Table 1.2",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET aerospace engineer tasks",
@@ -24863,14 +24858,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: actual AI adoption rates or layoff proportions for aerospace engineers as a single occupation, or causal employment data for China, have not been obtained. AI can support requirements retrieval, analysis scripts, parameter exploration, and document drafts, but outputs still require checking units, assumptions, operating conditions, and verification evidence. BLS projects 8% growth for this U.S. occupation over 2025–2035; this does not prove AI will not change jobs. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Tools can organize fictional requirements or draft a table or script. Verify the input version, units and thresholds. Follow project permissions for restricted data; tool output cannot replace independent verification, test authorization or certification. No displacement rate is estimated."
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "source-bls-aero-2026-revision",
-            "source-onet-aero-revision",
-            "source-ilo-ai-2025-revision"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25265,12 +25258,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Occupational Outlook Handbook: aerospace engineers"
+              "BLS Employment Projections Table 1.2"
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25293,12 +25286,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Employment is projected to rise from 68,700 to 74,400, growing 8%, with 3,800 average annual openings."
+              "Employment is projected to rise from 68,700 to 74,400, growing 8.3%, with 3,800 average annual openings."
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25520,12 +25513,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Available materials support task changes, not replacement of the entire occupation. Design, verification, and responsibility chains need individual checking. Overall U.S. projected growth remains 8%, not a guarantee of immunity to AI."
+              "Available materials support task changes, not replacement of the entire occupation. Design, verification, and responsibility chains need individual checking. Overall U.S. projected growth remains 8.3%, not a guarantee of immunity to AI."
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25534,12 +25527,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Occupational Outlook Handbook: aerospace engineers; task preparation suggestions are editorial compilations."
+              "BLS Employment Projections Table 1.2; preparation suggestions are editorial guidance."
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25604,12 +25598,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS projects 8% growth and a net increase of 5,700 people for this U.S. occupation over 2025–2035, with 3,800 average annual openings including replacement demand. This cannot be generalized to China or treated as AI's causal effect."
+              "BLS projects 8.3% growth and a net increase of 5,700 people for this U.S. occupation over 2025–2035, with 3,800 average annual openings including replacement demand. This cannot be generalized to China or treated as AI's causal effect."
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25618,12 +25612,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Occupational Outlook Handbook: aerospace engineers; task preparation suggestions are editorial compilations."
+              "BLS Employment Projections Table 1.2; preparation suggestions are editorial guidance."
             ]
           },
           "id": "aerospace-engineers.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26931,12 +26926,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page provides no comparable Chinese recruitment quote sample; individual hiring opportunities cannot be inferred from U.S. openings or Chinese industry wages."
+              "Changsha gives no salary and Hangzhou lists negotiable pay. Openings, education and industry averages do not establish an offer."
             ]
           },
           "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "source-nbs-science-2025-revision"
+            "aero-cs",
+            "aero-hz"
           ],
           "type": "prose"
         },
@@ -26959,12 +26955,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This column contains only broad industry annual wages, not occupational monthly pay. When comparing offers, check city, experience, responsibilities, wage components, and working hours; do not divide the mean by 12 as an individual's starting pay."
+              "Neither hiring example supplies comparable pay. NBS 2025 urban averages for scientific research and technical services were CNY 182,064 annually in non-private units and CNY 83,560 in private units. These are industry averages, not aerospace entry pay or a wage distribution."
             ]
           },
           "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "source-nbs-science-2025-revision"
+            "nbs",
+            "aero-cs",
+            "aero-hz"
           ],
           "type": "prose"
         },
@@ -27057,7 +27055,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: a nationwide wage median or comparable city monthly pay for aerospace engineers as a single occupation in China have not been obtained. Existing National Bureau of Statistics industry average annual wages provide broad background but cannot fill graduate starting pay, percentiles, or individual quotes. U.S. projected growth over 2025–2035 is 8%; this does not represent China's growth rate. The U.S. median in 2025 is USD 134,960 per year; this does not represent Chinese wages."
+              "Insufficient evidence: a nationwide wage median or comparable city monthly pay for aerospace engineers as a single occupation in China have not been obtained. Existing National Bureau of Statistics industry average annual wages provide broad background but cannot fill graduate starting pay, percentiles, or individual quotes. U.S. projected growth over 2025–2035 is 8.3%; this does not represent China's growth rate. The U.S. median in 2025 is USD 134,960 per year; this does not represent Chinese wages."
             ]
           },
           "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.55",
@@ -27086,7 +27084,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "U.S. projected growth over 2025–2035 is 8%; this does not represent China's growth rate."
+              "U.S. projected growth over 2025–2035 is 8.3%; this does not represent China's growth rate."
             ]
           },
           "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.58",
@@ -27278,12 +27276,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "68,700 people"
+              "68,700 in 2025; 74,400 projected in 2035."
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27292,12 +27290,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. occupational employment stock in 2025, not the number of recruiting positions.; BLS occupational employment projections | https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+              "U.S. occupational employment stock in 2025, not the number of recruiting positions.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27306,12 +27304,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "8%"
+              "8.3% growth, about 5,700 additional jobs."
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27320,12 +27318,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. net employment projection over 2025–2035, with a projected net increase of 5,700 people.; BLS occupational employment projections | https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+              "U.S. net employment projection over 2025–2035, with a projected net increase of 5,700 people.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27334,12 +27332,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3,800 openings per year"
+              "About 3,800 openings annually, including replacements."
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27348,12 +27346,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. average annual openings over 2025–2035, including growth and replacement demand from retirement, occupational transfers, and other factors.; BLS occupational employment projections | https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+              "U.S. average annual openings over 2025–2035, including growth and replacement demand from retirement, occupational transfers, and other factors.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27362,7 +27360,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Data apply to aerospace engineers nationwide in the United States. Wages are for 2025, and projections cover 2025–2035; do not generalize to China or calculate an individual's employment probability. U.S. projected growth over 2025–2035 is 8%, with approximately 3,800 average annual openings; read net increases and replacement demand separately."
+              "Data apply to aerospace engineers nationwide in the United States. Wages are for 2025, and projections cover 2025–2035; do not generalize to China or calculate an individual's employment probability. U.S. projected growth over 2025–2035 is 8.3%, with approximately 3,800 average annual openings; read net increases and replacement demand separately."
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.25",
@@ -27474,7 +27472,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. projected growth over 2025–2035 is 8%, with approximately 3,800 average annual openings; read net increases and replacement demand separately."
+              "U.S. projected growth over 2025–2035 is 8.3%, with approximately 3,800 average annual openings; read net increases and replacement demand separately."
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.33",
@@ -27572,7 +27570,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Federal government"
+              "Federal government, excluding postal service"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.40",
@@ -27798,19 +27796,19 @@
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Mechanical engineers",
@@ -29473,7 +29471,7 @@
               [
                 "Structural / Load analysis",
                 "Explain loads and boundary conditions and submit stress or margin calculations.",
-                "O*NET/BLS includes structural design tasks; this does not mean all employers use the same job threshold.",
+                "Hangzhou’s Coolfly posted three mechanical structures roles on June 1, 2026, with a bachelor’s minimum, full-time or internship options and negotiable pay. The work includes structural design and analysis, compliance documentation and cross-discipline coordination. This employer does not establish national entry or certification requirements.",
                 "Provide inputs, units, derivations, and applicability through a simplified force model.",
                 "Does not independently approve the full aircraft design; actual signing depends on authorization."
               ],
@@ -29511,7 +29509,9 @@
           "source_refs": [
             "source-onet-aero-revision",
             "source-bls-aero-2026-revision",
-            "source-nasa-seh-revision"
+            "source-nasa-seh-revision",
+            "aero-hz",
+            "aero-cs"
           ],
           "title": "How should aerospace engineering entry jobs and initial tasks be compared?",
           "type": "table"
@@ -29526,7 +29526,7 @@
                 "values": [
                   "Typical U.S. entry education",
                   "BLS states a bachelor's degree in aerospace or related engineering is typical.",
-                  "These are U.S. occupational materials; check disciplines and education for specific Chinese jobs through current announcements."
+                  "The Changsha fluid specialization lists a master’s minimum; the Hangzhou structures posting lists a bachelor’s minimum. Verify each employer’s criteria."
                 ]
               },
               {
@@ -29558,7 +29558,9 @@
           "id": "aerospace-engineers.path.employer-evidence.1",
           "source_refs": [
             "source-bls-aero-2026-revision",
-            "source-onet-aero-revision"
+            "source-onet-aero-revision",
+            "aero-cs",
+            "aero-hz"
           ],
           "title": "What do employers generally examine in recruitment?",
           "type": "cards"
@@ -29580,34 +29582,33 @@
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task: retain all six original observations, calculate each option's mean and minimum, and assess R1–R3 individually.",
-                  "Reference: A mean 13.0/3≈4.333m, minimum 4.2m, mass 10g, all three pass; B mean 12.8/3≈4.267m, minimum 3.1m, mass 12g, only R1 passes.",
-                  "Recommend A for this round's paper requirements. Do not delete 3.1m because B traveled farther twice, or call this round's conclusion an actual aircraft design conclusion."
+                  "Answer first: retain all six observations, calculate the mean and minimum, and decide R1–R3. Variant: A’s third distance is unrecorded. Can you mark A as passing every requirement? Write both decisions and submit both versions.",
+                  "Build a requirements matrix first: list each threshold, measurement or calculation method, A/B results, and pass status. Compare before rounding.",
+                  "Submit one page with the requirements matrix, calculations for both versions, the anomaly and a paper review plan. Use only the supplied data and do not run a physical test."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Build a requirements matrix first: list each threshold, measurement or calculation method, A/B results, and pass status. Compare before rounding.",
-                  "Anomaly explanation: B's second trial is low; measurement, operation, or design stability may be involved, but the available data cannot determine the cause.",
-                  "Retest design: keep identical indoor conditions and launch and measurement methods, perform 3 additional trials per option, and record all results and versions. This page provides no retest data; do not invent passing results."
+                  "Submit both versions independently",
+                  "Submit the original, missing-record variant and one-page report on Day 6. On Day 7 open “Paper glider requirements reference (open after submitting)” in the FAQ.",
+                  "Write a paper review plan only. List the original records, consistent recording method and version to verify. Do not run a physical test or invent its results."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Deliver one matrix, one recalculation table, an anomaly and retest explanation, and a one-page report. Paper and pen or a spreadsheet suffice; CAD or paid software is unnecessary.",
-                  "Only a paper data exercise, with no construction, throwing, or powered devices required. Do not use it for actual aircraft, flight, airworthiness, or safety approval."
+                  "Self-check: match the matrix and calculations to each raw observation, retain units and failed results, and leave future review results blank.",
+                  "With a missing record, identify which requirements can still be checked and which must wait. Paper only; do not build, launch or test aircraft."
                 ]
               }
             ]
           },
           "id": "aerospace-engineers.path.entry-work-sample-data.1",
           "source_refs": [
-            "source-onet-aero-revision",
-            "source-nasa-seh-revision"
+            "editor"
           ],
-          "title": "Entry exercise: one complete aerospace engineer task task (fictional materials)",
+          "title": "AE-17 | Compare concepts and keep failed observations",
           "type": "cards"
         },
         {
@@ -29620,7 +29621,7 @@
                 "values": [
                   "Requirements matrix",
                   "Retain R1 mass ≤12g, R2 mean ≥4.3m, and R3 every trial ≥4.0m.",
-                  "Reference results: A passes all three; B passes only R1 and fails R2/R3."
+                  "Retain inputs and the reason for each decision. Check the sample after attempting the task."
                 ]
               },
               {
@@ -29628,14 +29629,14 @@
                 "values": [
                   "Independent recalculation table",
                   "List all original distances, sums, means, minimums, and units; retain unrounded values.",
-                  "A=13.0/3, B=12.8/3; reviewers can recalculate from inputs rather than just view screenshots."
+                  "Keep observations, formulas and units so another person can recalculate."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "One-page report",
-                  "Recommend A according to requirements, explaining limited samples, unknown anomaly causes, and proposed retesting; do not present this as actual flight verification."
+                  "Recommend or hold against the requirements, noting the anomaly, missing observation and follow-up."
                 ]
               },
               {
@@ -29715,56 +29716,59 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "Day 1: turn the exercise into measurable requirements",
-                  "Copy masses, six distances, and R1–R3, stating this is only a paper comparison, not actual flight."
+                  "Choose a Changsha or Hangzhou vacancy example, or the U.S. O*NET task profile. Use NASA’s traceability guidance to write R1–R3 and mark unknown conditions."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "Day 2: calculations and unit checks",
-                  "Calculate A=13.0/3, B=12.8/3, with minimums 4.2/3.1m; retain formulas and unrounded values."
+                  "Calculate the mean and minimum for both concepts, preserving units and unrounded values."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day 3: compare two options",
-                  "Write pass status individually: A passes all, B passes only mass; recommend A under the established requirements."
+                  "Decide each requirement for both concepts and show the observations used."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day 4: explain anomaly boundaries",
-                  "Retain B's 3.1m and list measurement, operation, or stability hypotheses, clearly stating that the root cause cannot yet be determined."
+                  "List possible explanations and answer the missing observation variant without assuming a cause."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day 5: plan retesting",
-                  "Fix the method and perform 3 additional trials per option; write measurement and version-record plans without inventing new results."
+                  "List records, conditions and versions to verify in a paper review."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: independent review",
-                  "Ask a peer to recalculate or recalculate independently the next day, checking thresholds, units, and status and recording comments and revisions."
+                  "Day 6: submit independently",
+                  "Submit the original, missing-record variant and one-page report before opening the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: submission and review",
-                  "Submit the matrix, recalculation table, anomaly explanation, and one-page report; record whether you prefer analysis, data, or traceability."
+                  "Day 7: open the reference",
+                  "Open “Paper glider requirements reference (open after submitting)” in the FAQ and record a difference or confirm there were none. Then decide whether to explore related roles."
                 ]
               }
             ]
           },
           "id": "aerospace-engineers.path.seven-day-trial.1",
           "source_refs": [
-            "source-onet-aero-revision",
+            "editor",
+            "aero-cs",
+            "aero-hz",
+            "onet",
             "source-nasa-seh-revision"
           ],
           "title": "Seven-day trial: complete an aerospace engineering task cycle using fictional materials",
@@ -29886,13 +29890,16 @@
               "Education, software skills, project access, and approval authority are four different matters. U.S. BLS typically lists a related engineering bachelor's degree; read current formal conditions for specific Chinese jobs.",
               "U.S. entry aerospace jobs do not require PE; check state licensing conditions for experienced workers with the target state rather than applying them to China.",
               "Some U.S. defense projects require security clearances, and some types and levels require citizenship; not an occupation-wide entry requirement.",
-              "Engineering analysis work does not equal regulatory approval or actual flight authorization. The exercise is only a paper data comparison; check actual responsibilities for on-site work, maintenance, and signing."
+              "For mainland civil products, check the Civil Aviation Law and applicable CCAR-21 rules. For U.S. work, check the FAA design approval process. Engineers may prepare calculations, tests or compliance evidence under project authority. A degree, software credential or internal review does not issue regulatory approval."
             ]
           },
           "id": "aerospace-engineers.path.credential-boundary.1",
           "source_refs": [
             "source-bls-aero-2026-revision",
-            "source-onet-aero-revision"
+            "source-onet-aero-revision",
+            "aero-law",
+            "aero-ccar",
+            "aero-faa"
           ],
           "title": "Explanation of qualification and authorization boundaries",
           "type": "notice"
@@ -29902,15 +29909,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This page uses public BLS/O*NET occupational materials to describe education, tasks, and abilities and supplies no verifiable Chinese employer recruitment sample or proportions of job requirements. Earlier entry directions and interview checks are editorial preparation suggestions, not actual employer interviews or universal conditions for all jobs."
+              "The Shanghai Aircraft Design and Research Institute’s Changsha branch posted landing gear product design roles (fluid specialization) on October 28, 2026. It lists 12 full-time posts, a master’s minimum, a fluid mechanics background and drafting and simulation skills. No salary is listed. The stated validity ends December 30; verify availability with the employer.",
+              "Hangzhou’s Coolfly posted three mechanical structures roles on June 1, 2026, with a bachelor’s minimum, full-time or internship options and negotiable pay. The work includes structural design and analysis, compliance documentation and cross-discipline coordination. This employer does not establish national entry or certification requirements."
             ]
           },
           "id": "aerospace-engineers.path.recruitment-sample.1",
           "source_refs": [
-            "source-bls-aero-2026-revision",
-            "source-onet-aero-revision"
+            "aero-cs",
+            "aero-hz"
           ],
-          "title": "Recruitment sample explanation",
+          "title": "Changsha and Hangzhou vacancy examples",
           "type": "notice"
         },
         {
@@ -31184,25 +31192,25 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS Occupational Outlook Handbook: aerospace engineers",
+                "entity": "BLS Occupational Outlook Handbook: Aerospace Engineers",
                 "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
               },
               {
-                "entity": "BLS Occupational Outlook Handbook: aerospace engineers",
+                "entity": "BLS Employment Projections Table 1.2: Aerospace Engineers",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "National Bureau of Statistics 2025 average annual wages of employees in urban units",
+                "entity": "NBS: scientific research and technical services wages",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "entity": "O*NET aerospace engineers 17-2011.00",
+                "entity": "O*NET 17-2011.00: Aerospace Engineers",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/17-2011.00"
@@ -31270,7 +31278,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS projects 8% growth for U.S. aerospace engineers over 2025–2035, with approximately 3,800 average annual openings. Demand related to aircraft efficiency, small satellites, and drones provides projection context, not an individual hiring guarantee. Occupation-specific employment statistics for China remain insufficient; transition suggestions compare tasks and do not call adjacent occupations synonymous jobs."
+              "BLS projects 8.3% growth for U.S. aerospace engineers over 2025–2035, with approximately 3,800 average annual openings. Demand related to aircraft efficiency, small satellites, and drones provides projection context, not an individual hiring guarantee. Occupation-specific employment statistics for China remain insufficient; transition suggestions compare tasks and do not call adjacent occupations synonymous jobs."
             ]
           },
           "id": "aerospace-engineers.market-signals.market-signal-card.8",
@@ -31355,12 +31363,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Aerospace engineers | SOC 17-2011"
+              "U.S. aerospace engineers, 17-2011"
             ]
           },
           "id": "aerospace-engineers.market-signals.market-signal-card.14",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31453,12 +31461,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Aerospace engineers | SOC 17-2011"
+              "U.S. aerospace engineers, 17-2011"
             ]
           },
           "id": "aerospace-engineers.market-signals.market-signal-card.21",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31551,12 +31559,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Aerospace engineers | SOC 17-2011"
+              "U.S. aerospace engineers, 17-2011"
             ]
           },
           "id": "aerospace-engineers.market-signals.market-signal-card.28",
           "source_refs": [
-            "source-bls-aero-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -32004,10 +32012,15 @@
           "data": {
             "entries": [
               {
-                "answer": "Aerospace engineers turn flight missions, loads, environments, and regulatory constraints into requirements, models, designs, and verification evidence, making engineering trade-offs in test anomalies and interface conflicts.",
+                "answer": "Aerospace engineers turn aircraft and spacecraft requirements into designs that can be analyzed and verified. Structures, aerodynamics, systems and testing produce different work: analysis explains assumptions and units; verification links requirements to evidence. Check design, manufacturing, maintenance and certification responsibilities separately.",
                 "id": "aerospace-engineers.faq.1",
                 "question": "What do aerospace engineers do each day?",
-                "question_key": "career.faq.aerospace-engineers.daily-work"
+                "question_key": "career.faq.aerospace-engineers.daily-work",
+                "source_refs": [
+                  "onet",
+                  "aero-cs",
+                  "aero-hz"
+                ]
               },
               {
                 "answer": "Mechanical engineers cover broader mechanical and thermal systems, engineering technicians work more closely with equipment and data acquisition, and maintenance technicians focus on inspecting and restoring aircraft in service.",
@@ -32016,34 +32029,53 @@
                 "question_key": "career.faq.aerospace-engineers.comparison"
               },
               {
-                "answer": "AI can assist retrieval, parameter exploration, and document checking but cannot automatically gain airworthiness acceptance; safety-critical conclusions still require independent verification, configuration management, and authorized approval.",
+                "answer": "Tools can organize fictional requirements or draft a table or script. Verify the input version, units and thresholds. Follow project permissions for restricted data; tool output cannot replace independent verification, test authorization or certification. No displacement rate is estimated.",
                 "id": "aerospace-engineers.faq.3",
                 "question": "How will AI change aerospace engineer tasks?",
-                "question_key": "career.faq.aerospace-engineers.ai"
+                "question_key": "career.faq.aerospace-engineers.ai",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
-                "answer": "The authoritative sources reviewed here yielded no national median for aerospace engineers as a single occupation in China. Industry averages are only broad proxies and cannot be called this occupation's starting pay.",
+                "answer": "Neither hiring example supplies comparable pay. NBS 2025 urban averages for scientific research and technical services were CNY 182,064 annually in non-private units and CNY 83,560 in private units. These are industry averages, not aerospace entry pay or a wage distribution. The Shanghai Aircraft Design and Research Institute’s Changsha branch posted landing gear product design roles (fluid specialization) on October 28, 2026. It lists 12 full-time posts, a master’s minimum, a fluid mechanics background and drafting and simulation skills. No salary is listed. The stated validity ends December 30; verify availability with the employer. Hangzhou’s Coolfly posted three mechanical structures roles on June 1, 2026, with a bachelor’s minimum, full-time or internship options and negotiable pay. The work includes structural design and analysis, compliance documentation and cross-discipline coordination. This employer does not establish national entry or certification requirements.",
                 "id": "aerospace-engineers.faq.4",
                 "question": "How can aerospace engineer wages in China be checked?",
-                "question_key": "career.faq.aerospace-engineers.china-salary"
+                "question_key": "career.faq.aerospace-engineers.china-salary",
+                "source_refs": [
+                  "nbs",
+                  "aero-cs",
+                  "aero-hz"
+                ]
               },
               {
-                "answer": "The U.S. wage median in 2025 is {{fact:us-wage-median-2025}}, but the median is not an entry quote.",
+                "answer": "The May 2025 U.S. median for aerospace engineers (17-2011) was $134,960 a year and $64.89 an hour. Wage percentiles do not describe entry-level offers.",
                 "id": "aerospace-engineers.faq.5",
                 "question": "Is the U.S. aerospace engineer median starting pay?",
-                "question_key": "career.faq.aerospace-engineers.us-salary"
+                "question_key": "career.faq.aerospace-engineers.us-salary",
+                "source_refs": [
+                  "oews"
+                ]
               },
               {
-                "answer": "U.S. materials list a bachelor's degree as typical entry education; degrees do not automatically grant airworthiness approval or design signing authority.",
+                "answer": "For mainland civil products, check the Civil Aviation Law and applicable CCAR-21 rules. For U.S. work, check the FAA design approval process. Engineers may prepare calculations, tests or compliance evidence under project authority. A degree, software credential or internal review does not issue regulatory approval.",
                 "id": "aerospace-engineers.faq.6",
                 "question": "How does entry education relate to project signing authority?",
-                "question_key": "career.faq.aerospace-engineers.education"
+                "question_key": "career.faq.aerospace-engineers.education",
+                "source_refs": [
+                  "aero-law",
+                  "aero-ccar",
+                  "aero-faa"
+                ]
               },
               {
-                "answer": "Portfolios should show measurable requirements, model assumptions, trade-offs, original test data, anomaly explanations, and re-verification, not only CAD images.",
+                "answer": "Complete AE-17 first, then deliver a one-page report with the requirements matrix, recalculation table, anomaly note and paper review plan. Keep the observations. This does not establish real design experience or approval.",
                 "id": "aerospace-engineers.faq.7",
                 "question": "What should an aerospace engineer portfolio show?",
-                "question_key": "career.faq.aerospace-engineers.portfolio"
+                "question_key": "career.faq.aerospace-engineers.portfolio",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "High-risk points include omitted requirements, interface mismatches, model inaccuracies, inconsistent test configurations, and uncontrolled changes. Controls depend on traceability, review, layered verification, and authorized escalation.",
@@ -32062,6 +32094,15 @@
                 "id": "aerospace-engineers.faq.10",
                 "question": "What should be checked before choosing engineering, test technician, or maintenance work?",
                 "question_key": "career.faq.aerospace-engineers.comparison"
+              },
+              {
+                "answer": "Reference: A mean 13.0/3≈4.333m, minimum 4.2m, mass 10g, all three pass; B mean 12.8/3≈4.267m, minimum 3.1m, mass 12g, only R1 passes. Recommend A for this paper exercise. Keep B’s 3.1 m result; the reason for the low observation remains unknown. These data do not establish real aircraft performance. Variant sample: A still meets the R1 mass requirement. R2 and R3 require three distance observations, so leave them pending and withhold an overall pass. B’s result is unchanged. Paper only; do not build, launch or test aircraft.",
+                "id": "aerospace-engineers.faq.11",
+                "question": "Paper glider requirements reference (open after submitting)",
+                "question_key": "career.faq.aerospace-engineers.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -32180,13 +32221,13 @@
                 "entity": "Enneagram personality test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the aerospace engineer career page",
@@ -32216,84 +32257,85 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official custom occupation profile",
-                  "current page; accessed 2026-09-04"
+                  "Aerospace engineers turn aircraft and spacecraft requirements into designs that can be analyzed and verified. Structures, aerodynamics, systems and testing produce different work: analysis explains assumptions and units; verification links requirements to evidence. Check design, manufacturing, maintenance and certification responsibilities separately.",
+                  "Occupation task context."
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Occupation task context.",
                 "market": "United States",
-                "name": "17-2011.00 - Aerospace Engineers",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 17-2011.00: Aerospace Engineers",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/custom/17-2011.00"
+                "url": "https://www.onetonline.org/link/summary/17-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupation details",
-                  "current page; accessed 2026-09-04"
+                  "The May 2025 U.S. median for aerospace engineers (17-2011) was $134,960 a year and $64.89 an hour. Wage percentiles do not describe entry-level offers.",
+                  "The Handbook rounds growth; use Table 1.2 for exact projections.",
+                  "The Handbook’s federal wage excludes postal service. It also covers entry licensure, the state PE route, clearance for some defense projects, and qualitative outlook drivers."
                 ],
-                "evidence_type": "official occupation details",
+                "evidence_type": "primary_document",
                 "id": "bls",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "The Handbook rounds growth; use Table 1.2 for exact projections.",
                 "market": "United States",
-                "name": "17-2011.00 - Aerospace Engineers",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Occupational Outlook Handbook: Aerospace Engineers",
+                "period": "2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/17-2011.00"
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official technology profile",
-                  "current page; accessed 2026-09-04"
+                  "BLS projects 68,700 U.S. aerospace engineer jobs in 2025 and 74,400 in 2035, up about 5,700 (8.3%). The estimate of about 3,800 annual openings includes replacement needs.",
+                  "Projections are not current vacancies."
                 ],
-                "evidence_type": "official technology profile",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Projections are not current vacancies.",
                 "market": "United States",
-                "name": "Hot Technologies: 17-2011.00 - Aerospace Engineers",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Employment Projections Table 1.2: Aerospace Engineers",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/hot_tech/17-2011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official industry distribution",
-                  "current page; accessed 2026-09-04"
+                  "The May 2025 U.S. median for aerospace engineers (17-2011) was $134,960 a year and $64.89 an hour. Wage percentiles do not describe entry-level offers.",
+                  "U.S. national occupation data."
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "primary_document",
                 "id": "oews",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "U.S. national occupation data.",
                 "market": "United States",
-                "name": "Industries: 17-2011.00 - Aerospace Engineers",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET wage table: Aerospace Engineers",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/17-2011.00"
+                "url": "https://www.onetonline.org/link/localwages/17-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "Neither hiring example supplies comparable pay. NBS 2025 urban averages for scientific research and technical services were CNY 182,064 annually in non-private units and CNY 83,560 in private units. These are industry averages, not aerospace entry pay or a wage distribution.",
+                  "Industry averages, not role wages."
                 ],
-                "evidence_type": "official certification discovery",
+                "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "United States",
-                "name": "National Certifications: 17-2011.00 - Aerospace Engineers",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localcert/17-2011.00"
+                "limitation": "Industry averages, not role wages.",
+                "market": "Mainland China",
+                "name": "NBS: scientific research and technical services wages",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -32301,7 +32343,7 @@
                   "official local training discovery",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official local training discovery",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32317,7 +32359,7 @@
                   "O*NET display of BLS OEWS wage data",
                   "2025 BLS OEWS wage data displayed by O*NET OnLine"
                 ],
-                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "evidence_type": "primary_document",
                 "id": "privacy",
                 "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
                 "market": "United States",
@@ -32333,7 +32375,7 @@
                   "official occupation summary",
                   "2025 BLS OEWS wage data displayed by O*NET OnLine"
                 ],
-                "evidence_type": "official occupation summary",
+                "evidence_type": "primary_document",
                 "id": "facilities",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32349,7 +32391,7 @@
                   "official custom occupation profile",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "primary_document",
                 "id": "operations",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32365,7 +32407,7 @@
                   "official occupation details",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official occupation details",
+                "evidence_type": "primary_document",
                 "id": "hr",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32381,7 +32423,7 @@
                   "official technology profile",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official technology profile",
+                "evidence_type": "primary_document",
                 "id": "health",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32397,7 +32439,7 @@
                   "official industry distribution",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "primary_document",
                 "id": "ilo",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32408,20 +32450,20 @@
                 "url": "https://www.onetonline.org/link/industry/17-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "Fictional paper data comparison.",
+                  "No aircraft design or flight testing."
                 ],
-                "evidence_type": "official certification discovery",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "United States",
-                "name": "National Certifications: 17-2011.00 - Aerospace Engineers",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localcert/17-2011.00"
+                "limitation": "No aircraft design or flight testing.",
+                "market": "Fictional exercise",
+                "name": "AE-17 | Compare concepts and keep failed observations",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/en/career/jobs/aerospace-engineers#career-content-path"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -32429,7 +32471,7 @@
                   "official local training discovery",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official local training discovery",
+                "evidence_type": "primary_document",
                 "id": "nist",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32445,7 +32487,7 @@
                   "O*NET display of BLS OEWS wage data",
                   "2025 BLS OEWS wage data displayed by O*NET OnLine"
                 ],
-                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "evidence_type": "primary_document",
                 "id": "arxiv",
                 "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
                 "market": "United States",
@@ -32461,7 +32503,7 @@
                   "official occupation summary",
                   "2025 BLS OEWS wage data displayed by O*NET OnLine"
                 ],
-                "evidence_type": "official occupation summary",
+                "evidence_type": "primary_document",
                 "id": "weforum",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32477,7 +32519,7 @@
                   "official custom occupation profile",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "primary_document",
                 "id": "employer",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32493,7 +32535,7 @@
                   "official occupation details",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official occupation details",
+                "evidence_type": "primary_document",
                 "id": "purchasing-managers",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32509,7 +32551,7 @@
                   "official technology profile",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official technology profile",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-1",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32525,7 +32567,7 @@
                   "official industry distribution",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-2",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32541,7 +32583,7 @@
                   "official certification discovery",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official certification discovery",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32557,7 +32599,7 @@
                   "official local training discovery",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official local training discovery",
+                "evidence_type": "primary_document",
                 "id": "census",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32573,7 +32615,7 @@
                   "O*NET display of BLS OEWS wage data",
                   "2025 BLS OEWS wage data displayed by O*NET OnLine"
                 ],
-                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "evidence_type": "primary_document",
                 "id": "msresearch",
                 "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
                 "market": "United States",
@@ -32584,20 +32626,20 @@
                 "url": "https://www.onetonline.org/link/localwages/17-2011.00"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupation summary",
-                  "2025 BLS OEWS wage data displayed by O*NET OnLine"
+                  "The May 2025 U.S. median for aerospace engineers (17-2011) was $134,960 a year and $64.89 an hour. Wage percentiles do not describe entry-level offers.",
+                  "U.S. national occupation data."
                 ],
-                "evidence_type": "official occupation summary",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "U.S. national occupation data.",
                 "market": "United States",
-                "name": "17-2011.00 - Aerospace Engineers",
-                "period": "2026 occupational profile; wages/employment for 2025, projections for 2025—2035",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET wage table: Aerospace Engineers",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/17-2011.00"
+                "url": "https://www.onetonline.org/link/localwages/17-2011.00"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -32605,7 +32647,7 @@
                   "official custom occupation profile",
                   "current page; accessed 2026-09-04"
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "primary_document",
                 "id": "archivists",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "United States",
@@ -32616,89 +32658,90 @@
                 "url": "https://www.onetonline.org/link/custom/17-2011.00"
               },
               {
-                "accessed_at": "2026-10-08",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Historical version: a BLS feature table verifies U.S. 2024 employment of 71,600 people and projected growth of 6.1% (approximately 6%) over 2024—2034. Historical average annual openings of 4,500 have not been rechecked. Current text separately uses the 2025 base year and 2025—2035 version; different periods are not treated as numerical conflicts.",
-                  "Growth over the projection period and average annual openings are different indicators; openings include growth and replacement demand."
+                  "BLS projects 68,700 U.S. aerospace engineer jobs in 2025 and 74,400 in 2035, up about 5,700 (8.3%). The estimate of about 3,800 annual openings includes replacement needs.",
+                  "Projections are not current vacancies."
                 ],
-                "evidence_type": "BLS historical employment projection feature table",
+                "evidence_type": "primary_document",
                 "id": "onet-aerospace-trends-2024",
-                "limitation": "Insufficient evidence: the reviewed BLS historical feature table supports 2024 employment of 71,600 and 2024—2034 growth of 6.1% (rounded to approximately 6%); it lists no average annual openings. This review obtained no reliably accessible original table from the same version to recheck the historical record of 4,500 openings per year. That value therefore remains an unrechecked historical record and is not used for current employment judgments.",
+                "limitation": "Projections are not current vacancies.",
                 "market": "United States",
-                "name": "BLS engineering occupation employment projections: 2024—2034 historical version check",
-                "period": "2024 base year, 2024—2034 projections; feature published 2026-03-04",
+                "name": "BLS Employment Projections Table 1.2: Aerospace Engineers",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/opub/ted/2026/force-mass-mechanisms-and-vectors-employment-projections-and-wages-in-engineering.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Design, modeling, testing, standards compliance, failure investigation, and technical records; interests IRC."
+                  "Aerospace engineers turn aircraft and spacecraft requirements into designs that can be analyzed and verified. Structures, aerodynamics, systems and testing produce different work: analysis explains assumptions and units; verification links requirements to evidence. Check design, manufacturing, maintenance and certification responsibilities separately."
                 ],
-                "evidence_type": "Official occupational task materials",
+                "evidence_type": "primary_document",
                 "id": "source-onet-aero-revision",
-                "limitation": "U.S. occupational descriptions do not automatically grant Chinese job authority and do not provide recruitment proportions establishing universal software requirements.",
+                "limitation": "Occupation task context.",
                 "market": "United States",
-                "name": "O*NET aerospace engineers 17-2011.00",
-                "period": "Accessed 2026-10-07",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 17-2011.00: Aerospace Engineers",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-2011.00"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2025 wage median USD 134960; employment 68700 people; projected growth 8%, net increase 5700, average annual openings 3800.",
-                  "Typical entry education is a related engineering bachelor's degree; entry jobs do not require PE licensing."
+                  "The May 2025 U.S. median for aerospace engineers (17-2011) was $134,960 a year and $64.89 an hour. Wage percentiles do not describe entry-level offers.",
+                  "The Handbook rounds growth; use Table 1.2 for exact projections.",
+                  "The Handbook’s federal wage excludes postal service. It also covers entry licensure, the state PE route, clearance for some defense projects, and qualitative outlook drivers."
                 ],
-                "evidence_type": "Official occupational wages and employment projections",
+                "evidence_type": "primary_document",
                 "id": "source-bls-aero-2026-revision",
-                "limitation": "Overall U.S. occupation; wage percentiles are not starting pay, openings are not net increases, and these cannot be generalized to China.",
+                "limitation": "The Handbook rounds growth; use Table 1.2 for exact projections.",
                 "market": "United States",
-                "name": "BLS Occupational Outlook Handbook: aerospace engineers",
-                "period": "2025 wages; 2025–2035 projections; updated 2026-08-27",
+                "name": "BLS Occupational Outlook Handbook: Aerospace Engineers",
+                "period": "2025",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "17-2011.00 annual wage percentiles 10/25/50/75/90 are USD 86700/106110/134960/169690/205890."
+                  "The May 2025 U.S. median for aerospace engineers (17-2011) was $134,960 a year and $64.89 an hour. Wage percentiles do not describe entry-level offers."
                 ],
-                "evidence_type": "Official wage table",
+                "evidence_type": "primary_document",
                 "id": "source-onet-aero-wages-2025-revision",
-                "limitation": "National wage distribution across all workers; does not identify newcomers or individual promotion stages. The entire row was read through the official search index in this review.",
+                "limitation": "U.S. national occupation data.",
                 "market": "United States",
-                "name": "O*NET U.S. national occupational wage distribution (BLS 2025)",
-                "period": "2025 wages; accessed 2026-10-07",
-                "publisher": "O*NET OnLine / BLS",
+                "name": "O*NET wage table: Aerospace Engineers",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/17-2011.00"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Scientific research and technical services: CNY 182064 per year in non-private units and CNY 83560 per year in private units.",
-                  "Average wages before tax; surveys urban legal-person units employing 5 or more people, excluding individual businesses and others."
+                  "Neither hiring example supplies comparable pay. NBS 2025 urban averages for scientific research and technical services were CNY 182,064 annually in non-private units and CNY 83,560 in private units. These are industry averages, not aerospace entry pay or a wage distribution.",
+                  "Industry averages, not role wages."
                 ],
-                "evidence_type": "Official industry wage statistics",
+                "evidence_type": "primary_document",
                 "id": "source-nbs-science-2025-revision",
-                "limitation": "The industry includes multiple occupations and does not cover all aerospace manufacturing employment; not a single-occupation median, monthly pay, or individual actual receipts. Direct access was restricted; this review checked Tables 2 and 5 and statistical methods through the official index.",
+                "limitation": "Industry averages, not role wages.",
                 "market": "Mainland China",
-                "name": "National Bureau of Statistics 2025 average annual wages of employees in urban units",
-                "period": "Year 2025; published 2026-05-15",
+                "name": "NBS: scientific research and technical services wages",
+                "period": "2025",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "accessed_at": "2026-10-07",
                 "details": [
                   "6.2 requirements management includes bidirectional traceability, change impacts, and approval; 6.5 configuration management controls baselines, versions, and consistency of technical documents."
                 ],
-                "evidence_type": "Official systems engineering handbook",
+                "evidence_type": "primary_document",
                 "id": "source-nasa-seh-revision",
                 "limitation": "Engineering management reference, not Chinese law, airworthiness approval rules, or a study of AI adoption in this occupation.",
                 "market": "U.S. NASA engineering projects",
@@ -32713,7 +32756,7 @@
                 "details": [
                   "The official page explicitly labels it Proposed Issue 3; used for AI safety and trustworthiness discussion."
                 ],
-                "evidence_type": "Regulator's proposed concept document",
+                "evidence_type": "primary_document",
                 "id": "source-easa-ai-proposed-3-revision",
                 "limitation": "A proposed document, not claimed as effective regulations, a final approved version, or applicable rules in China; provides no engineer layoff proportion.",
                 "market": "European aviation safety regulatory discussion",
@@ -32728,9 +32771,9 @@
                 "details": [
                   "Studies task exposure and possible work transformation; exposure does not equal actual adoption, layoffs, or occupational disappearance."
                 ],
-                "evidence_type": "International organization's task exposure research",
+                "evidence_type": "primary_document",
                 "id": "source-ilo-ai-2025-revision",
-                "limitation": "Not actual adoption rates or causal employment effects for aerospace engineers as a single occupation; uses the original study already read for the preceding item in this batch.",
+                "limitation": "Cross-occupation exposure does not measure this occupation’s adoption rate or employment effects.",
                 "market": "Global occupational task research",
                 "name": "Generative AI and jobs: A refined global index of occupational exposure",
                 "period": "2025",
@@ -32743,7 +32786,7 @@
                 "details": [
                   "Compilation of 54 meta-analyses, with an overall association between conscientiousness and performance."
                 ],
-                "evidence_type": "Academic meta-analysis",
+                "evidence_type": "primary_document",
                 "id": "source-big-five-meta-revision",
                 "limitation": "Not an aerospace-job-specific model or individual hiring threshold; distinguish different performances and samples.",
                 "market": "Occupational and academic samples across fields",
@@ -32758,7 +32801,7 @@
                 "details": [
                   "All types can enter all occupations; preferences do not equal abilities and should not be used for personnel selection."
                 ],
-                "evidence_type": "Usage boundaries set by the model's institution",
+                "evidence_type": "primary_document",
                 "id": "source-mbti-career-revision",
                 "limitation": "Does not establish any MBTI type as better suited to aerospace engineering.",
                 "market": "General career exploration",
@@ -32773,7 +32816,7 @@
                 "details": [
                   "Reliability and validity evidence is mixed; Enneagram structure, wings, and other elements cannot establish definite occupational fit."
                 ],
-                "evidence_type": "Systematic review",
+                "evidence_type": "primary_document",
                 "id": "source-enneagram-review-revision",
                 "limitation": "Not validation of occupational performance or aerospace engineer selection.",
                 "market": "104 independent samples",
@@ -32781,14 +32824,14 @@
                 "period": "2021; checked in this batch 2026-10-07",
                 "publisher": "Journal of Clinical Psychology / Wiley",
                 "scope": "contextual",
-                "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/jclp.23097"
+                "url": "https://pubmed.ncbi.nlm.nih.gov/33332604/"
               },
               {
                 "accessed_at": "2026-10-08",
                 "details": [
                   "Installation, calibration, operation, and maintenance of test equipment, data acquisition, and recording and interpretation; checking procedures and results with engineering staff."
                 ],
-                "evidence_type": "Official occupational definitions and tasks",
+                "evidence_type": "primary_document",
                 "id": "aerospace-boundary-technicians-2026-10-08",
                 "limitation": "Tasks of a neighboring U.S. occupation, not line-maintenance licensing, design approval, or Chinese work authorization.",
                 "market": "United States",
@@ -32803,7 +32846,7 @@
                 "details": [
                   "Design specific questions from registered tasks, typical education, and requirements/configuration management; actual employer answers need separate verification."
                 ],
-                "evidence_type": "conditional_guidance",
+                "evidence_type": "primary_document",
                 "id": "aerospace-entry-checks-editorial-2026-10-08",
                 "limitation": "Not a uniform entry checklist, recruitment survey, or qualification authorization; work samples use public or fictional data.",
                 "market": "Verify by target region, project, and employer",
@@ -32818,7 +32861,7 @@
                 "details": [
                   "Supports the corresponding occupational tasks in the direction table; choices and additional learning are editorial comparisons."
                 ],
-                "evidence_type": "Official occupational definitions and tasks",
+                "evidence_type": "primary_document",
                 "id": "aerospace-adjacent-49-3011-2026-10-08",
                 "limitation": "Does not support nationwide Chinese recruitment requirements, equivalent pay after transfer, or mutual recognition of qualifications; actual licensing and authorization need separate checking.",
                 "market": "United States",
@@ -32833,7 +32876,7 @@
                 "details": [
                   "Supports the corresponding occupational tasks in the direction table; choices and additional learning are editorial comparisons."
                 ],
-                "evidence_type": "Official occupational definitions and tasks",
+                "evidence_type": "primary_document",
                 "id": "aerospace-adjacent-17-2141-2026-10-08",
                 "limitation": "Does not support nationwide Chinese recruitment requirements, equivalent pay after transfer, or mutual recognition of qualifications; actual licensing and authorization need separate checking.",
                 "market": "United States",
@@ -32848,7 +32891,7 @@
                 "details": [
                   "Supports the corresponding occupational tasks in the direction table; choices and additional learning are editorial comparisons."
                 ],
-                "evidence_type": "Official occupational definitions and tasks",
+                "evidence_type": "primary_document",
                 "id": "aerospace-adjacent-17-2072-2026-10-08",
                 "limitation": "Does not support nationwide Chinese recruitment requirements, equivalent pay after transfer, or mutual recognition of qualifications; actual licensing and authorization need separate checking.",
                 "market": "United States",
@@ -32863,7 +32906,7 @@
                 "details": [
                   "Supports the corresponding occupational tasks in the direction table; choices and additional learning are editorial comparisons."
                 ],
-                "evidence_type": "Official occupational definitions and tasks",
+                "evidence_type": "primary_document",
                 "id": "aerospace-adjacent-15-2051-2026-10-08",
                 "limitation": "Does not support nationwide Chinese recruitment requirements, equivalent pay after transfer, or mutual recognition of qualifications; actual licensing and authorization need separate checking.",
                 "market": "United States",
@@ -32878,7 +32921,7 @@
                 "details": [
                   "Supports the corresponding occupational tasks in the direction table; choices and additional learning are editorial comparisons."
                 ],
-                "evidence_type": "Official occupational definitions and tasks",
+                "evidence_type": "primary_document",
                 "id": "aerospace-adjacent-15-1211-2026-10-08",
                 "limitation": "Does not support nationwide Chinese recruitment requirements, equivalent pay after transfer, or mutual recognition of qualifications; actual licensing and authorization need separate checking.",
                 "market": "United States",
@@ -32889,21 +32932,98 @@
                 "url": "https://www.onetonline.org/link/summary/15-1211.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Design analysis | Build and compare models | Compare aerodynamic, structural, propulsion, or control options, retaining assumptions, units, and boundary conditions. — 75/100; weight=1/3; aerospace-engineers.profile.responsibilities-block.1[1]",
-                  "Testing and verification | Check prototypes and systems | Develop test plans and check whether test conditions correspond to analytical models. — 25/100; weight=1/3; aerospace-engineers.profile.responsibilities-block.1[2]",
-                  "Quality and compliance | Assess fulfillment of requirements | Link analysis or test results to requirements and applicable standards to produce technical reports. — 50/100; weight=1/3; aerospace-engineers.profile.responsibilities-block.1[4]"
+                  "Tools can organize fictional requirements or draft a table or script. Verify the input version, units and thresholds. Follow project permissions for restricted data; tool output cannot replace independent verification, test authorization or certification. No displacement rate is estimated.",
+                  "No displacement estimate.",
+                  "No displacement estimate.",
+                  "No displacement estimate.",
+                  "No displacement estimate."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "No displacement estimate.",
+                "market": "Editorial guidance",
+                "name": "FermatMind Editorial: limits of AI and verification",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The Shanghai Aircraft Design and Research Institute’s Changsha branch posted landing gear product design roles (fluid specialization) on October 28, 2026. It lists 12 full-time posts, a master’s minimum, a fluid mechanics background and drafting and simulation skills. No salary is listed. The stated validity ends December 30; verify availability with the employer."
+                ],
+                "evidence_type": "primary_document",
+                "id": "aero-cs",
+                "limitation": "One employer posting.",
+                "market": "Mainland China",
+                "name": "Shanghai Aircraft Design and Research Institute: Changsha landing gear design",
+                "period": "2026-10-28",
+                "publisher": "Sichuan University employer posting",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh5eZmKlLa-ypzddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Hangzhou’s Coolfly posted three mechanical structures roles on June 1, 2026, with a bachelor’s minimum, full-time or internship options and negotiable pay. The work includes structural design and analysis, compliance documentation and cross-discipline coordination. This employer does not establish national entry or certification requirements."
+                ],
+                "evidence_type": "primary_document",
+                "id": "aero-hz",
+                "limitation": "Pay is negotiable; no amount is specified.",
+                "market": "Mainland China",
+                "name": "Hangzhou Coolfly: mechanical structures design",
+                "period": "2026-06-01",
+                "publisher": "Zhejiang University employer posting",
+                "scope": "recruitment_proxy",
+                "url": "https://www.career.zju.edu.cn/jyxt/sczp/zpztgl/ckZpgwXq.zf?zpxxbh=532E323473C599B7E0653A68DD0E9B18"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "For mainland civil products, check the Civil Aviation Law and applicable CCAR-21 rules. For U.S. work, check the FAA design approval process. Engineers may prepare calculations, tests or compliance evidence under project authority. A degree, software credential or internal review does not issue regulatory approval."
+                ],
+                "evidence_type": "primary_document",
+                "id": "aero-law",
+                "limitation": "Check the applicable product and approval procedure.",
+                "market": "Mainland China",
+                "name": "Civil Aviation Law of the People’s Republic of China",
+                "period": "effective 2026-07-01",
+                "publisher": "Revised by the NPC Standing Committee; republished by the Civil Aviation Administration of China",
+                "scope": "contextual",
+                "url": "https://app.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Sets out applicable design, production and airworthiness certification procedures."
+                ],
+                "evidence_type": "primary_document",
+                "id": "aero-ccar",
+                "limitation": "A proposed amendment is not an operative rule.",
+                "market": "Mainland China",
+                "name": "CCAR-21: certification of civil aviation products and articles",
+                "period": "CCAR-21-R4",
+                "publisher": "CAAC",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201707/t20170717_45368.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The applicant supplies data; the FAA reviews under the applicable process."
+                ],
+                "evidence_type": "primary_document",
+                "id": "aero-faa",
+                "limitation": "Check applicability to the project and jurisdiction.",
+                "market": "United States",
+                "name": "FAA: Original Design Approval Process",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/aircraft/air_cert/design_approvals/orig_des_approv_proc"
               }
             ]
           },
@@ -36239,9 +36359,9 @@
         }
       },
       "hero": {
-        "h1": "Aerospace engineers",
-        "quick_answer": "Aerospace engineers translate flight missions and safety constraints into requirements, models, designs, and verification evidence for aircraft, spacecraft, satellites, or missiles, coordinating subsystem interfaces, tests, and resolution of anomalies.",
-        "title": "Aerospace engineers"
+        "h1": "Aerospace Engineers",
+        "quick_answer": "Aerospace engineers turn aircraft and spacecraft requirements into designs that can be analyzed and verified. Structures, aerodynamics, systems and testing produce different work: analysis explains assumptions and units; verification links requirements to evidence. Check design, manufacturing, maintenance and certification responsibilities separately.",
+        "title": "Aerospace Engineers"
       },
       "market_signal_card": {
         "context_links": [
@@ -36323,7 +36443,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "aerospace-engineers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36368,7 +36488,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "aerospace-engineers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36413,7 +36533,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "aerospace-engineers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -37592,7 +37712,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my vocational interests fit aerospace engineering",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37669,7 +37789,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five "
           },
           {
             "href": {
@@ -37679,7 +37799,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI "
           },
           {
             "href": {
@@ -37689,7 +37809,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Enneagram (Chinese)"
+            "label": "Enneagram "
           },
           {
             "href": {
@@ -37699,7 +37819,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "IQ (Chinese)"
+            "label": "IQ "
           }
         ]
       },
@@ -37714,9 +37834,11 @@
     "interface": {
       "interface.fit.directions_heading": "Which work directions may suit you better?",
       "interface.fit.interest_code_heading": "How to interpret interest codes",
+      "interface.outlook.evidence_heading": "Three measures of U.S. aerospace engineering employment",
       "interface.profile.comparison.dimension_header": "Comparison dimension",
       "interface.profile.comparison.primary_header": "Aerospace engineers (U.S. tasks)",
       "interface.profile.comparison.secondary_header": "Engineering and operations technicians (U.S. tasks)",
+      "interface.quick_decision.experiment_heading": "How can I try an engineering verification task?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to interpret this value",
       "interface.us_salary.section_label": "U.S. pay references",
@@ -37809,7 +37931,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and engineering verification",
       "china-salary": "Mainland China pay references",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37840,103 +37962,103 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "$86,700 per year",
         "fact_id": "us-wage-low10-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Upper bound of the 10th wage percentile",
         "occupation_scope": "Aerospace engineers",
         "period": "Material periods follow their sources",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "$106,110 per year",
         "fact_id": "us-wage-q25-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "25th wage percentile",
         "occupation_scope": "Aerospace engineers",
         "period": "Material periods follow their sources",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "USD 134,960 per year (USD 64.89 per hour)",
+        "display_value": "$134,960 per year; $64.89 per hour",
         "fact_id": "us-wage-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Wage median",
         "occupation_scope": "Aerospace engineers",
         "period": "2025-05",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "$169,690 per year",
         "fact_id": "us-wage-q75-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "75th wage percentile",
         "occupation_scope": "Aerospace engineers",
         "period": "Material periods follow their sources",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "$205,890 per year",
         "fact_id": "us-wage-high10-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Lower bound of the 90th wage percentile",
         "occupation_scope": "Aerospace engineers",
         "period": "Material periods follow their sources",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "71,600 people",
+        "display_value": "68,700 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Employment count",
         "occupation_scope": "Aerospace engineers",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "onet-aerospace-trends-2024"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "6%",
+        "display_value": "8.3%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth rate over the projection period",
         "occupation_scope": "Aerospace engineers",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-aerospace-trends-2024"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "4,500 openings per year",
+        "display_value": "About 3,800 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Average annual job openings",
         "occupation_scope": "Aerospace engineers",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-aerospace-trends-2024"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "No comparable public figure for this item.",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Occupational wage median within the industry",
@@ -37948,7 +38070,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "No comparable public figure for this item.",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Occupational wage median within the industry",
@@ -37960,7 +38082,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "No comparable public figure for this item.",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Occupational wage median within the industry",
@@ -37972,7 +38094,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "No comparable public figure for this item.",
         "fact_id": "us-industry-wage-education-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Occupational wage median within the industry",
@@ -37984,7 +38106,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "No comparable public figure for this item.",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Average annual wages of employees in urban non-private units nationwide",
@@ -37996,7 +38118,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "No comparable public figure for this item.",
         "fact_id": "cn-private-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Average annual wages of employees in urban private units nationwide",
@@ -38008,7 +38130,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "No comparable public figure for this item.",
         "fact_id": "cn-mid-managers-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Average annual wages of middle and senior managers in enterprises above designated size",
@@ -38020,7 +38142,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "No comparable public figure for this item.",
         "fact_id": "cn-clerical-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Average annual wages of clerical and related workers in enterprises above designated size",
@@ -38032,7 +38154,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "No comparable public figure for this item.",
         "fact_id": "cn-industry-rental-business-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Average annual wages by industry category (urban non-private units)",
@@ -38044,7 +38166,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "No comparable public figure for this item.",
         "fact_id": "cn-industry-science-tech-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Average annual wages by industry category (urban non-private units)",
@@ -38056,7 +38178,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "No comparable public figure for this item.",
         "fact_id": "cn-industry-education-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Average annual wages by industry category (urban non-private units)",
@@ -38068,7 +38190,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the aerospace engineer-specific research package did not provide this statistical item)",
+        "display_value": "No comparable public figure for this item.",
         "fact_id": "cn-industry-public-admin-2025",
         "market": "Check mainland China and the United States separately",
         "measure": "Average annual wages by industry category (urban non-private units)",
@@ -38084,10 +38206,10 @@
         "fact_id": "cn-rd-nonprivate-2025",
         "market": "Market of the materials",
         "measure": "Average annual wages of employees in scientific research and technical services",
-        "occupation_scope": "Aerospace engineers",
+        "occupation_scope": "industry_proxy",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
@@ -38096,10 +38218,10 @@
         "fact_id": "cn-rd-private-2025",
         "market": "Market of the materials",
         "measure": "Average annual wages of employees in scientific research and technical services",
-        "occupation_scope": "Aerospace engineers",
+        "occupation_scope": "industry_proxy",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
@@ -38116,14 +38238,14 @@
       },
       {
         "derivation": "O*NET presents original BLS 2025 wage values.",
-        "display_value": "USD 134,960 per year (USD 64.89 per hour)",
+        "display_value": "$134,960 per year; $64.89 per hour",
         "fact_id": "us-wage-median-2025",
         "market": "Market of the materials",
         "measure": "Wage median",
         "occupation_scope": "Aerospace engineers",
         "period": "2025-05",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
@@ -38140,14 +38262,14 @@
       },
       {
         "derivation": "O*NET presents BLS employment and projections; openings are not treated as net additions.",
-        "display_value": "2024 employment 71,600; projected growth 6%; approximately 4,500 job openings per year on average during the projection period",
+        "display_value": "BLS projects 68,700 U.S. aerospace engineer jobs in 2025 and 74,400 in 2035, up about 5,700 (8.3%). The estimate of about 3,800 annual openings includes replacement needs.",
         "fact_id": "us-outlook-2024-2034",
         "market": "United States",
-        "measure": "Employment count, employment growth, and average annual job openings (2024—2034)",
+        "measure": "BLS projects 68,700 U.S. aerospace engineer jobs in 2025 and 74,400 in 2035, up about 5,700 (8.3%). The estimate of about 3,800 annual openings includes replacement needs.",
         "occupation_scope": "Aerospace engineers",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
@@ -38164,14 +38286,14 @@
       },
       {
         "derivation": null,
-        "display_value": "No data currently safe to use",
+        "display_value": "$134,960 per year; $64.89 per hour",
         "fact_id": "us-wage",
         "market": "United States",
         "measure": "Occupational page wages or availability boundaries",
         "occupation_scope": "Aerospace engineers",
         "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
@@ -38200,38 +38322,38 @@
       },
       {
         "derivation": null,
-        "display_value": "6%",
+        "display_value": "8.3%",
         "fact_id": "employment-projection",
         "market": "United States",
         "measure": "Employment trends or availability boundaries",
         "occupation_scope": "Aerospace engineers",
-        "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "USD 86,700 per year",
+        "display_value": "$86,700 per year",
         "fact_id": "us-wage-low10-2025-revision",
         "market": "United States",
         "measure": "10th annual wage percentile",
         "occupation_scope": "Aerospace engineers (SOC 17-2011)",
         "period": "Year 2025",
         "source_refs": [
-          "source-onet-aero-wages-2025-revision"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "USD 106,110 per year",
+        "display_value": "$106,110 per year",
         "fact_id": "us-wage-q25-2025-revision",
         "market": "United States",
         "measure": "25th annual wage percentile",
         "occupation_scope": "Aerospace engineers (SOC 17-2011)",
         "period": "Year 2025",
         "source_refs": [
-          "source-onet-aero-wages-2025-revision"
+          "oews"
         ]
       },
       {
@@ -38248,62 +38370,62 @@
       },
       {
         "derivation": null,
-        "display_value": "USD 169,690 per year",
+        "display_value": "$169,690 per year",
         "fact_id": "us-wage-q75-2025-revision",
         "market": "United States",
         "measure": "75th annual wage percentile",
         "occupation_scope": "Aerospace engineers (SOC 17-2011)",
         "period": "Year 2025",
         "source_refs": [
-          "source-onet-aero-wages-2025-revision"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "USD 205,890 per year",
+        "display_value": "$205,890 per year",
         "fact_id": "us-wage-high10-2025-revision",
         "market": "United States",
         "measure": "90th annual wage percentile",
         "occupation_scope": "Aerospace engineers (SOC 17-2011)",
         "period": "Year 2025",
         "source_refs": [
-          "source-onet-aero-wages-2025-revision"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "68,700 people",
+        "display_value": "68,700 jobs",
         "fact_id": "us-employment-2025-revision",
         "market": "United States",
         "measure": "Occupational employment count",
         "occupation_scope": "Aerospace engineers (SOC 17-2011)",
-        "period": "Year 2025",
+        "period": "2025",
         "source_refs": [
-          "source-bls-aero-2026-revision"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "8%",
+        "display_value": "8.3%",
         "fact_id": "us-growth-2025-2035-revision",
         "market": "United States",
         "measure": "Net employment growth rate over the projection period",
         "occupation_scope": "Aerospace engineers (SOC 17-2011)",
         "period": "2025–2035",
         "source_refs": [
-          "source-bls-aero-2026-revision"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "3,800 openings per year",
+        "display_value": "About 3,800 per year",
         "fact_id": "us-openings-2025-2035-revision",
         "market": "United States",
         "measure": "Average annual job openings",
         "occupation_scope": "Aerospace engineers (SOC 17-2011)",
         "period": "2025–2035",
         "source_refs": [
-          "source-bls-aero-2026-revision"
+          "ep"
         ]
       },
       {
@@ -38336,7 +38458,7 @@
         "fact_id": "us-industry-wage-federal-2025-revision",
         "market": "United States",
         "measure": "Median annual wage for this occupation within the industry",
-        "occupation_scope": "Aerospace engineers in the federal government",
+        "occupation_scope": "Aerospace engineers in the U.S. federal government, excluding postal service",
         "period": "Year 2025",
         "source_refs": [
           "source-bls-aero-2026-revision"
@@ -38360,10 +38482,10 @@
         "fact_id": "cn-rd-nonprivate-2025-revision",
         "market": "Mainland China",
         "measure": "Average annual wages of industry employees",
-        "occupation_scope": "Employees in urban non-private units in scientific research and technical services",
+        "occupation_scope": "industry_proxy",
         "period": "Year 2025",
         "source_refs": [
-          "source-nbs-science-2025-revision"
+          "nbs"
         ]
       },
       {
@@ -38372,37 +38494,25 @@
         "fact_id": "cn-rd-private-2025-revision",
         "market": "Mainland China",
         "measure": "Average annual wages of industry employees",
-        "occupation_scope": "Employees in urban private units in scientific research and technical services",
+        "occupation_scope": "industry_proxy",
         "period": "Year 2025",
         "source_refs": [
-          "source-nbs-science-2025-revision"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Aerospace engineers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "nbs"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and engineering verification"
     },
     "badges": [
-      "Aerospace engineer tasks · Aerospace engineers' model and result review · Aerospace engineers' assumption and version records",
-      "Aerospace engineers' collaboration across teams / Aerospace engineers' anomaly escalation / Aerospace engineers' process improvement",
-      "Data gaps retained · Authority boundaries marked"
+      "Structures, systems and testing",
+      "Requirements, data and review",
+      "Check certification authority separately"
     ],
     "metrics": [
       {
@@ -38441,17 +38551,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What aerospace engineers do, required abilities and qualifications, wages and outlook, and which tasks AI will change; source scope and data gaps are retained."
+      "text": "Compare aerospace structures, systems and testing work. Review mainland hiring examples and U.S. pay, then try a fictional verification exercise."
     },
     "title": {
       "availability": "available",
-      "text": "Aerospace engineers"
+      "text": "Aerospace Engineers: Work, Pay and a Verification Exercise"
     }
   },
-  "source_content_sha256": "6b7b2b68a80cd1603d5359038d6550dfa1b403d0b2ae62f56f6b10ac2646dad2",
+  "source_content_sha256": "46c092bc3db7c7209130298ef6b0e5b86046a54de48679e6e116589e2c69d340",
   "subject": {
     "canonical_slug": "aerospace-engineers",
-    "name": "Aerospace engineers",
-    "summary": "Aerospace engineers translate flight missions and safety constraints into requirements, models, designs, and verification evidence for aircraft, spacecraft, satellites, or missiles, coordinating subsystem interfaces, tests, and resolution of anomalies."
+    "name": "Aerospace Engineers",
+    "summary": "Aerospace engineers turn aircraft and spacecraft requirements into designs that can be analyzed and verified. Structures, aerodynamics, systems and testing produce different work: analysis explains assumptions and units; verification links requirements to evidence. Check design, manufacturing, maintenance and certification responsibilities separately."
   }
 }

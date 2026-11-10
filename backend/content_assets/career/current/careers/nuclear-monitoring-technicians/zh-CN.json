@@ -182,6 +182,9 @@
       "item:nuclear-monitoring-technicians.path.seven-day-trial.6": {
         "status": "pending_mapping"
       },
+      "item:nuclear-monitoring-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nuclear-monitoring-technicians.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13314,6 +13317,21 @@
             "onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。同一区域有两条监测记录，一条没有仪器号，另一条没有校准记录号。写下要给监测负责人复核的两项，真实处置依站点程序。"
+            ]
+          },
+          "id": "nuclear-monitoring-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核监测读数和仪器状态",
+          "type": "notice"
         }
       ]
     },
@@ -15961,6 +15979,13 @@
         "id": "nuclear-monitoring-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nuclear-monitoring-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16278,7 +16303,7 @@
       "text": "核监测技术员"
     }
   },
-  "source_content_sha256": "2cdb4f2d441feb547c33a4b2d4fd821596b2df336b6510e6f8c716f1132bf43b",
+  "source_content_sha256": "1f642b425a5d4bad6f67e40663501373a2a5eb96c8e6b4b4b4fc0270f9ba518c",
   "subject": {
     "canonical_slug": "nuclear-monitoring-technicians",
     "name": "核监测技术员",

@@ -23371,13 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "适配的关键是准确倾听、简洁表达、受控任务切换和轮班可持续性。先看虚构交接样本的漏项与更正，再结合正式岗位要求决定是否申请。"
+              "纸面体验｜在虚构通话记录中找到一条地址更正，把它与最初地址并列，分别标明来源和更新时点。 "
             ]
           },
           "id": "police-fire-and-ambulance-dispatchers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23667,13 +23666,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "公共安全接警调度员接听紧急及非紧急呼叫，核对事件与地点，按机构程序协调警察、消防或急救资源，并持续维护单位状态、现场回报和事件记录。核心产出是准确、及时、可追溯的信息；不等同于到场执法或医疗处置。"
+              "警务、消防与急救调度员接收求助信息，确认地点与事件要点，按本地流程调派资源并更新状态。交班时要注明已确认和待确认的信息。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "police-fire-and-ambulance-dispatchers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-onet-43-5031.00"
           ],
           "type": "prose"
         },
@@ -24788,14 +24786,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得接警调度员AI采用率、整体替代率或任务级评分依据。文字整理为编辑试用建议；地点确认、响应协议、资源协调与异常升级仍须有权人员负责。ILO和论文衡量潜在任务暴露，BLS总体预测不识别AI因果，不提供消失年份或裁员率。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：在虚构通话记录中找到一条地址更正，把它与最初地址并列，分别标明来源和更新时点。"
             ]
           },
           "id": "police-fire-and-ambulance-dispatchers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor",
-            "onet",
-            "nist"
+            "transfer-onet-43-5031.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32919,6 +32916,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-43-5031.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 43-5031.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/43-5031.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38164,10 +38188,10 @@
       "text": "公共安全接警调度员：工作任务、美国薪资与入行路径"
     }
   },
-  "source_content_sha256": "d51a2463de167252948c6903b1c1678368b4c65a434c06e701d69df8b7b59908",
+  "source_content_sha256": "7415652220a6f024eea1355ed25a33cd85c4bc3de322370df9b2624971062ad9",
   "subject": {
     "canonical_slug": "police-fire-and-ambulance-dispatchers",
     "name": "公共安全接警调度员",
-    "summary": "公共安全接警调度员接听 911、非紧急和机构热线，确认事件类型与地点，按机构程序调度警察、消防或急救资源，并持续记录、转接、更新和协调信息。工作需要在噪声、时间压力、轮班和隐私约束下保持准确；具体权限和认证要求取决于法域、雇主与正式岗位公告。"
+    "summary": "警务、消防与急救调度员接收求助信息，确认地点与事件要点，按本地流程调派资源并更新状态。交班时要注明已确认和待确认的信息。"
   }
 }

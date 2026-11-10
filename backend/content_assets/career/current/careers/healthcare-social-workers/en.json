@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1497,7 +1494,7 @@
         "status": "pending_mapping"
       },
       "item:healthcare-social-workers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:healthcare-social-workers.sources.source-card.1": {
         "status": "mapped"
@@ -24117,25 +24114,10 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Self-questioning | Are you willing to listen to illness-related social and family difficulties, verify resource conditions, coordinate handovers, and record truthfully? This checklist is not an ability score or hiring standard. Start by using the fictional paper materials of H01 to experience record-keeping and referral preparation, without touching real medical records or service recipients."
+              "Under time pressure or disagreement, verify eligibility and capacity, document open questions and hand them to the authorized person."
             ]
           },
           "id": "healthcare-social-workers.quick-decision.fit-decision-checklist.1",
-          "source_refs": [
-            "onet",
-            "employer"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.fit-decision-checklist",
-          "data": {
-            "paragraphs": [
-              "Exercise prompt | A completely fictional healthcare psychosocial support and case management task package (for practice workflow only; it does not represent any real institution, service recipient, family, or data). Write a draft plan: (1) how, based on a fictional referral form along with a medical record summary and psychosocial assessment key points, to arrange a case in a structured way (service recipient and family circumstances, needs and risk identification, accessible resources and referral list, care and intervention goals and plan, crisis contingency and safety plan, confidentiality and consent and information disclosure boundaries, records and review, and evaluation and case closure), and state which information is insufficient and needs to be supplemented (disease diagnosis and prognosis and treatment plan, family caregiving resources and financial situation, needs such as housing and legal aid and employment, substance misuse and mental health and safety risks, language and cultural differences, and consent capacity and ethics and confidentiality exception requirements); (2) how to design the completion and review points for a fictional case record and progress and referral and cost record table (fields and definitions, service recipients and families, assessment and goals and intervention, progress and referrals and outcomes, exceptions and review and corrections, and original records and revision audit trails); (3) how to write a handover-ready case summary (service recipient—needs and basis—intervention and referrals—crisis and safety—confidentiality and consent—evaluation and case closure—open items); (4) how to record and preserve case and health and family information, and distinguish disclosable information from controlled materials or materials involving service recipients' and families' sensitive information; (5) how to pause, review, and escalate upon finding safety risks or suspected abuse or neglect or a confidentiality exception or exceeding the position's authorization. Answer using public materials and simulated data; do not use any real service recipient or family data."
-            ]
-          },
-          "id": "healthcare-social-workers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
             "onet"
           ],
@@ -24146,7 +24128,21 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Fit signals | The work activity importance scores for U.S. O*NET 21-1022.00 show that Assisting and Caring for Others (93), Establishing and Maintaining Interpersonal Relationships (88), Getting Information (87), Communicating with Supervisors, Peers, or Subordinates (86), Communicating with People Outside the Organization (83), Documenting/Recording Information (83), Making Decisions and Solving Problems (81), Resolving Conflicts and Negotiating with Others (81), Organizing, Planning, and Prioritizing Work (79), and Performing for or Working Directly with the Public (76) are the most important activities for this occupation; the work context (percentage response scope) shows telephone conversations 100% every day, face-to-face discussions 96% every day, electronic mail 93% every day, contact with others 85%, indoors, environmentally controlled 93% every day, work with a work group or team 73% extremely important, decision freedom 41% a lot of freedom, dealing with external customers or the public 44% extremely important, exposure to disease or infections 41% every day, conflict situations 19% every day and 59% once a week or more, consequence of error 11% extremely serious and 37% serious, and work schedule 96% regular. If you are willing to keep communicating with people in illness and crisis and their families, can make cases and records solid under multiple resource and institutional constraints, and are willing to take responsibility for service recipients' safety and privacy, the daily requirements of this occupation are closer to the way you work."
+              "Find “Entry and H01: Community resources and budget” to compare costs, unverified eligibility and handoff responsibilities."
+            ]
+          },
+          "id": "healthcare-social-workers.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "paper-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "Try separating confirmed resources from conditions that still need checking."
             ]
           },
           "id": "healthcare-social-workers.quick-decision.fit-decision-checklist.3",
@@ -24160,12 +24156,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Caution signals | O*NET also shows (21-1022.00, work activity importance scope and work context percentage response scope): Assisting and Caring for Others (93), Establishing and Maintaining Interpersonal Relationships (88), and Getting Information (87) are the highest activities; contact with others 85%, telephone conversations 100% every day, face-to-face discussions 96% every day, electronic mail 93% every day; exposure to disease or infections 41% every day and 30% once a week or more; time pressure 41% every day and 33% once a week or more; conflict situations 19% every day and 59% once a week or more; dealing with unpleasant or angry or discourteous people 22% every day and 52% once a week or more; facing violent or physically aggressive people 15% once a week or more and 22% once a month or more; consequence of error 11% extremely serious and 37% serious; working more than 40 hours per week 46%; responsibility for others' work outcomes 15% very high and 33% moderate; responsibility for others' health and safety 19% extremely high and 26% high. This occupation takes crisis intervention and case management and referral and recording as its subject matter, and a single improper crisis assessment or safety response, a single referral or resource linkage error, a single distorted case or progress or cost record, a single improper handling of a confidentiality exception or information disclosure, or a single out-of-bounds provision of clinical or psychological diagnosis and treatment advice can all harm service recipients' rights and safety and create institutional compliance and ethics risk. O*NET places this occupation in Job Zone Five (extensive preparation needed, SVP 8.0 and above); the education section of that page shows 70% master's degree, 15% bachelor's degree, and 11% post-master's certificate. If you find it hard to keep communicating with people in illness and trauma and crisis over the long term, hard to bear high conflict and emotional pressure, or unwilling to take responsibility for the truthfulness of privacy and confidentiality exceptions and ethics and records, you should treat these as real costs that need careful weighing."
+              "The exercise uses fictional records."
             ]
           },
           "id": "healthcare-social-workers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24174,7 +24170,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Ownership judgment | Real fit comes from whether you can do three things at once on the same case and support task: do the profession properly (based on psychosocial assessment and care plans and accessible resources, complete needs and risk identification, intervention and referral and coordination, and progress monitoring and recording, and produce usable case and referral and progress and cost records), keep ethics and boundaries under control (work and keep an audit trail in line with confidentiality and informed consent and confidentiality exceptions and service recipient privacy and health information protection requirements; distinguish disclosable information from controlled materials or materials involving service recipients' and families' sensitive information and handle them according to policy; and do not overstep by providing clinical or psychological diagnosis and treatment advice or substituting for medical staff and judicial processes), and take on definable position responsibility (be accountable for the assessment and intervention and referral and records you personally perform, and refer matters beyond authorization or involving clinical judgment and diagnosis and treatment and placement and protection decisions and external disclosure to the appropriate position or institution according to policy). It is recommended to test this with one verifiable experience (completing a needs and resource assessment and a case and referral record note for a fictional case, or a retrospective review of handling one safety risk or confidentiality exception risk) rather than relying only on the conclusions of an interest questionnaire."
+              "This work may suit people who listen closely to practical concerns, verify referral conditions and follow up on handoffs."
             ]
           },
           "id": "healthcare-social-workers.quick-decision.fermat-decision-card.7",
@@ -24196,7 +24192,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Direct answer | The \"Healthcare Social Workers\" on this page is the exact occupation O*NET 21-1022.00 (Healthcare Social Workers), and the work can be divided into several categories: first, crisis and advocacy — advocating for clients or patients to resolve crises (importance 94), and investigating child abuse or neglect cases and taking authorized protective action when necessary (88); second, assessment and care planning — collaborating with other professionals to assess patients' medical or physical condition and assess client needs (90), using consultation data and social work experience to plan and coordinate clients' or patients' care and rehabilitation and follow up to ensure services are effective (83), and modifying treatment plans as clients' conditions change (77); third, counseling and education — explaining terminal symptoms and available options to clients to help them make informed decisions (90), providing counseling to clients and patients individually and in groups to help them overcome dependencies and recover from illness and adjust to life (79), and organizing support groups or providing counseling to family members (77); fourth, referral and resource linkage — referring patients, clients, or families to community resources to assist their recovery and obtain services such as financial assistance and legal aid and housing and job placement or education (88), and identifying environmental barriers that impede clients' or patients' progress (81); fifth, monitoring and recording — monitoring, evaluating, and recording client progress against measurable goals in treatment and care plans (83), and overseeing Medicaid and Medicare related documentation and record work in hospitals (63); sixth, discharge and teams and programs — planning discharge arrangements for returning home from a care facility or to another care facility (77), supervising and guiding other staff who provide services to clients or patients (67), planning and conducting programs to address social problems, prevent substance misuse, or improve community health and counseling services (60), developing social policy recommendations or assisting community development (54), and conducting social research in the social work field to advance knowledge (50). Work cycle links: referral and needs and risk identification—psychosocial assessment and care planning—intervention and counseling and support—referral and resource linkage and coordination—progress monitoring and recording and review—discharge or case closure and handover and follow-up. This page does not conflate this occupation with adjacent ones such as mental health and substance abuse social workers, child and family and school social workers, community health workers, health education specialists, or social and human service assistants, nor does it expand case and support duties to the point of replacing clinical diagnosis, treatment, medication, or judicial decisions."
+              "Healthcare social workers identify practical needs, coordinate with teams, and document referrals and handoffs. Their work can include helping families navigate care and connecting patients with community support after discharge."
             ]
           },
           "id": "healthcare-social-workers.profile.career-quick-answers-block.1",
@@ -24210,7 +24206,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET and BLS profile highlights | This page corresponds to the exact occupation O*NET/SOC 21-1022.00 \"Healthcare Social Workers\" (Healthcare Social Workers). Official scope text: Provide individuals, families, and groups with the psychosocial support needed to cope with chronic, acute, or terminal illnesses. Services include advising family caregivers. Provide patients with information and counseling, and make referrals for other services. May also provide case and care management or interventions designed to promote health, prevent disease, and address barriers to access to healthcare. Common job titles include Clinical Social Worker and Hospice Social Worker and LMSW and Medical Social Worker and Nephrology Social Worker and Oncology Social Worker and Psychosocial Coordinator and Renal Social Worker and Social Work Case Manager and Social Worker. The listed tasks given by O*NET include (currently 18 tasks: 15 Core, 2 Supplemental, 1 New): advocating for clients or patients to resolve crises (94); explaining terminal symptoms and available options to clients to help them make informed decisions (90); collaborating with other professionals to assess patients' medical or physical condition and assess client needs (90); referring patients, clients, or families to community resources to assist their recovery and obtain services such as financial assistance and legal aid and housing and job placement or education (88); using consultation data and social work experience to plan and coordinate care and rehabilitation and follow up (83); monitoring, evaluating, and recording client progress against measurable goals in treatment and care plans (83); identifying environmental barriers that impede clients' or patients' progress through interviews and reviewing medical records (81); providing counseling individually and in groups (79); planning discharge arrangements (77); organizing support groups or providing counseling to family members (77); modifying treatment plans as clients' conditions change (77); supervising and guiding other staff (67); planning and conducting programs (60); developing social policy recommendations or assisting community development (54); conducting social research (50); investigating child abuse or neglect cases and taking authorized protective action (88); and overseeing Medicaid and Medicare related documentation and record work in hospitals (63). The highest work activity importance scores are Assisting and Caring for Others (93), Establishing and Maintaining Interpersonal Relationships (88), Getting Information (87), Communicating with Supervisors, Peers, or Subordinates (86), and Communicating with People Outside the Organization (83). Wage and employment scope note for this page: the U.S. wage and employment and industry data presented by O*NET on the 21-1022.00 page are not marked as taken from a parent occupation; this page adopts them faithfully and labels them in each section as this occupation's (21-1022.00) own scope without substituting values from adjacent occupations. It should also be noted that the page shows a projected 2025—2035 growth of \"Much faster than average (7% or higher)\" (much faster than average) with a Bright Outlook marker, and O*NET places this occupation in Job Zone Five (extensive preparation needed, SVP 8.0 and above), and the education section shows 70% master's degree, 15% bachelor's degree, and 11% post-master's certificate. Currently added task | Conduct psychological assessment of clients is marked New, with no importance provided; task registration does not automatically confer psychological or clinical practice authority."
+              "O*NET and BLS profile highlights | This page corresponds to the exact occupation O*NET/SOC 21-1022.00 \"Healthcare Social Workers\" (Healthcare Social Workers). Official scope text: Provide individuals, families, and groups with the psychosocial support needed to cope with chronic, acute, or terminal illnesses. Services include advising family caregivers. Provide patients with information and counseling, and make referrals for other services. May also provide case and care management or interventions designed to promote health, prevent disease, and address barriers to access to healthcare. Common job titles include Clinical Social Worker and Hospice Social Worker and LMSW and Medical Social Worker and Nephrology Social Worker and Oncology Social Worker and Psychosocial Coordinator and Renal Social Worker and Social Work Case Manager and Social Worker. The listed tasks given by O*NET include (currently 18 tasks: 15 Core, 2 Supplemental, 1 New): advocating for clients or patients to resolve crises (94); explaining terminal symptoms and available options to clients to help them make informed decisions (90); collaborating with other professionals to assess patients' medical or physical condition and assess client needs (90); referring patients, clients, or families to community resources to assist their recovery and obtain services such as financial assistance and legal aid and housing and job placement or education (88); using consultation data and social work experience to plan and coordinate care and rehabilitation and follow up (83); monitoring, evaluating, and recording client progress against measurable goals in treatment and care plans (83); identifying environmental barriers that impede clients' or patients' progress through interviews and reviewing medical records (81); providing counseling individually and in groups (79); planning discharge arrangements (77); organizing support groups or providing counseling to family members (77); modifying treatment plans as clients' conditions change (77); supervising and guiding other staff (67); planning and conducting programs (60); developing social policy recommendations or assisting community development (54); conducting social research (50). O*NET classifies child abuse or neglect investigation and authorized protective action (88) and hospital oversight of Medicaid and Medicare documentation (63) as supplemental tasks. Assignment and authority depend on the position.  The highest work activity importance scores are Assisting and Caring for Others (93), Establishing and Maintaining Interpersonal Relationships (88), Getting Information (87), Communicating with Supervisors, Peers, or Subordinates (86), and Communicating with People Outside the Organization (83). Wage and employment scope note for this page: the U.S. wage and employment and industry data presented by O*NET on the 21-1022.00 page are not marked as taken from a parent occupation; this page adopts them faithfully and labels them in each section as this occupation's (21-1022.00) own scope without substituting values from adjacent occupations. It should also be noted that the page shows a projected 2025—2035 growth of \"Much faster than average (7% or higher)\" (much faster than average) with a Bright Outlook marker, and O*NET places this occupation in Job Zone Five (extensive preparation needed, SVP 8.0 and above), and the education section shows 70% master's degree, 15% bachelor's degree, and 11% post-master's certificate. Currently added task | Conduct psychological assessment of clients is marked New, with no importance provided; task registration does not automatically confer psychological or clinical practice authority."
             ]
           },
           "id": "healthcare-social-workers.profile.onet-structured-fields-block.1",
@@ -24224,11 +24220,11 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Crisis and advocacy | Safety and protection | Advocate for clients or patients to resolve crises, investigate child abuse or neglect cases and take authorized protective action when necessary, and handle conflict and crisis-intervention risk.",
+              "Crisis and advocacy | Safety and protection | Help resolve crises. Protective investigation is a supplemental duty for authorized assignments.",
               "Assessment and care planning | Needs and goals | Collaborate with other professionals to assess patients' medical or physical condition and assess client needs, use consultation data to plan and coordinate care and rehabilitation and follow up, and modify treatment plans as clients' conditions change.",
               "Counseling and education | Being informed and support | Explain terminal symptoms and available options to clients to help them make informed decisions, provide counseling individually and in groups, and organize support groups or provide counseling to family members.",
               "Referral and resource linkage | Community resources | Refer patients, clients, or families to community resources and help them obtain services such as financial assistance and legal aid and housing and job placement or education, and identify environmental barriers that impede progress.",
-              "Monitoring and recording | Progress and costs | Monitor, evaluate, and record client progress against measurable goals in treatment and care plans, and oversee Medicaid and Medicare related documentation and record work in hospitals.",
+              "Monitoring and records | Progress and costs | Document progress. Oversight of hospital Medicaid and Medicare documentation is supplemental and assignment-specific.",
               "Discharge and teams and programs | Coordination and governance | Plan discharge arrangements, supervise and guide other staff, plan and conduct programs, develop social policy recommendations or assist community development, and conduct social research in the social work field."
             ]
           },
@@ -24373,7 +24369,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Recording and collaboration | Record, in accordance with institutional case and ethics and data management policies, the referral and needs and risk identification, psychosocial assessment and care planning, intervention and counseling and support, referral and resource linkage and coordination, progress and outcomes and costs and review, and confidentiality and consent and information disclosure and original records and revision audit trails, and complete them using the prescribed templates and time limits; upon finding safety risks or suspected abuse or neglect or a confidentiality exception or inconsistency between records and the actual situation, pause immediately, report according to authorization, and ask superiors and clinical and ethics and compliance positions to review, and do not modify records without authorization or make retrospective entries."
+              "Document referral eligibility, consent, contact status and pending items. If records conflict, preserve the original and ask the responsible person to review corrections. Use the applicable emergency procedure for urgent safety concerns."
             ]
           },
           "id": "healthcare-social-workers.profile.career-quick-answers-block.6",
@@ -24387,7 +24383,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Boundary conclusion | This page corresponds to O*NET 21-1022.00 (Healthcare Social Workers), and the core difference from adjacent positions lies in \"subject matter, output, and authorization level\": this occupation takes psychosocial support and case and care and referral for patients and families as its subject matter, and its output is psychosocial assessment and case and care and referral and progress and cost records; Mental Health and Substance Abuse Social Workers (21-1023.00) take mental health and substance abuse treatment as their subject matter; Child, Family, and School Social Workers (21-1021.00) take child and family and school settings as their subject matter; Community Health Workers (21-1094.00) take community health promotion and navigation as their subject matter; Health Education Specialists (21-1091.00) take population health education and promotion programs as their subject matter; and Social and Human Service Assistants (21-1093.00) take providing social service support under professional supervision as their subject matter. Subject matter, output, and authorization level all differ, and the authority for clinical diagnosis, treatment, medication, placement and protection decisions, and judicial decisions cannot be carried over across positions."
+              "Healthcare social work centers on connecting patients and families to resources. Health education specialists design and evaluate programmes for groups. Qualified clinicians retain responsibility for clinical care."
             ]
           },
           "id": "healthcare-social-workers.profile.career-quick-answers-block.7",
@@ -24457,7 +24453,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Occupational profile | The Healthcare Social Workers on this page is the exact occupation O*NET 21-1022.00 (Healthcare Social Workers), which in hospitals and hospice and kidney and oncology and community health and rehabilitation settings carries out psychosocial support and case and care and referral work for patients and families: advocating for clients or patients to resolve crises, assessing needs and planning and coordinating care, providing counseling and organizing support groups, referring to community resources and helping obtain financial and legal and housing and employment services, monitoring and recording progress, and planning discharge and follow-up. Common job titles include Clinical Social Worker and Hospice Social Worker and LMSW and Medical Social Worker and Nephrology Social Worker and Oncology Social Worker and Psychosocial Coordinator and Renal Social Worker and Social Work Case Manager and Social Worker; on the 21-1022.00 page, O*NET shows that the main industry for this occupation in the United States is healthcare and social assistance. The work has Assisting and Caring for Others (importance 93), Establishing and Maintaining Interpersonal Relationships (88), Getting Information (87), Communicating with Supervisors, Peers, or Subordinates (86), and Communicating with People Outside the Organization (83) as the highest activities, accompanied by telephone conversations 100% every day and face-to-face discussions 96% every day and electronic mail 93% every day and constant contact with others 85%; exposure to disease or infections 41% every day; conflict situations 19% every day and 59% once a week or more; and consequence of error 11% extremely serious and 37% serious. O*NET places this occupation in Job Zone Five (extensive preparation needed, SVP 8.0 and above); the education section shows 70% master's degree, 15% bachelor's degree, and 11% post-master's certificate. The U.S. wages and employment presented by O*NET on the 21-1022.00 page follow this occupation's own scope (2025 median hourly wage $32.63 and median annual wage $67,880, 2025 employment 194,800, projected growth of 7% or higher for 2025—2035, and about 16,900 average annual openings during the period)."
+              "Healthcare social workers identify practical needs, coordinate with teams, and document referrals and handoffs. Their work can include helping families navigate care and connecting patients with community support after discharge."
             ]
           },
           "id": "healthcare-social-workers.profile.definition-block.11",
@@ -25268,7 +25264,7 @@
                 "url": "https://www.onetonline.org/link/localwages/21-1022.00"
               },
               {
-                "entity": "O*NET presentation of the 2024—2034 projection",
+                "entity": "BLS Table 1.2 shows about 194,800 U.S. jobs in 21-1022 in 2025 and projects 211,300 in 2035 (8.5%), with about 16,900 openings per year including replacements.",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -25346,7 +25342,7 @@
                 "url": "https://www.onetonline.org/link/details/21-1022.00"
               },
               {
-                "entity": "O*NET2024—2034 projection",
+                "entity": "2025–2035",
                 "id": "link-16",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -25494,7 +25490,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page recommends treating resource retrieval, record organization, and cost reconciliation as controlled assistance trials; there is no measured AI exposure level, general institutional adoption rate, or substitution rate for this occupation. O*NET describes psychosocial support and collaboration tasks; the ILO2025 study concerns potential task exposure and cannot prove that case services have already been replaced. Psychosocial assessment, crisis judgment, counseling, and referral must still be subject to professional qualifications, systems, and human responsibility. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "This page recommends treating resource retrieval, record organization, and cost reconciliation as controlled assistance trials; there is no measured AI exposure level, general institutional adoption rate, or substitution rate for this occupation. O*NET describes psychosocial support and collaboration tasks; the ILO2025 study concerns potential task exposure and cannot prove that case services have already been replaced. Psychosocial assessment, crisis judgment, counseling, and referral must still be subject to professional qualifications, systems, and human responsibility."
             ]
           },
           "id": "healthcare-social-workers.ai-impact.ai-impact-table.18",
@@ -26440,7 +26436,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Changes and disclosure: changes to cases and care plans and information disclosure and reporting and handling must be carried out within the scope of authorization and ethics requirements, and when safety risks or suspected abuse or neglect or a confidentiality exception or an ethics conflict is found, work must pause and be reported according to policy."
+              "Check role authority and consent before acting on a tool’s recommendation about disclosure or referral commitments. Hold the affected action when authority is unclear. Use the applicable emergency procedure for an actual urgent risk."
             ]
           },
           "id": "healthcare-social-workers.ai-impact.ai-impact-table.83",
@@ -27184,7 +27180,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 growth 8.5% (OOH about 8%; the precise rate follows EP)"
+              "2025—2035 growth 8.5% (BLS Table 1.2)"
             ]
           },
           "id": "healthcare-social-workers.china-salary.career-snapshot-primary-locale.19",
@@ -27542,7 +27538,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupational title cross-reference | Healthcare Social Workers (O*NET/SOC 21-1022.00 Healthcare Social Workers; commonly called hospital medical social worker, hospice social worker, oncology or nephrology specialty social worker, case management social worker, and medical social worker, etc. in job postings and the industry; it differs from Mental Health and Substance Abuse Social Workers, Child, Family, and School Social Workers, Community Health Workers, Health Education Specialists, and Social and Human Service Assistants in subject matter and authorization level)"
+              "Mainland China wage reference"
             ]
           },
           "id": "healthcare-social-workers.china-salary.career-snapshot-primary-locale.44",
@@ -27980,7 +27976,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 growth 8.5% (OOH about 8%; the precise rate follows EP)"
+              "2025—2035 growth 8.5% (BLS Table 1.2)"
             ]
           },
           "id": "healthcare-social-workers.us-salary.career-snapshot-secondary-locale.21",
@@ -28496,31 +28492,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Child, Family, and School Social Worker direction",
@@ -28595,7 +28591,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS employment projections (2024—2034)",
+                "entity": "2025–2035",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/"
@@ -29428,7 +29424,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "First complete H01: A64 yuan balance 36, B90 yuan balance 10, and record the region/accessibility, remaining places, acceptance, and unknown authorization; then process v2B106 exceeding 6 yuan, and do not approve A by default. Use the cost table, gaps, and version records to reflect on patience and preparation for communication and awareness of authority; this is not a clinical ability score, and real practice requires verification of qualifications and mentoring."
+              "Try the paper exercise under “Entry and H01: Community resources and budget.”"
             ]
           },
           "id": "healthcare-social-workers.fit.personality-fit-block.55",
@@ -30226,27 +30222,27 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "H01 fictional materials and conditions",
-                  "Fictional adult A wants to compare two community support activities; the only known needs are transportation costs and accessibility arrangements, and no diagnosis, medical record, name, address, or real service record is provided. The budget cap is 100 yuan.",
-                  "Fictional resource A: 20 yuan per activity for two activities, 12 yuan per round trip, requiring residents of region R; whether A is a resident of R is unknown. Resource B: 35 yuan per activity for two activities, 10 yuan per round trip, not limited to R, but accessibility arrangements are unknown. The remaining places and acceptance of both resources are unconfirmed.",
-                  "Record v1: price inquiry at 09:00, planning to contact resource A at 09:20, with no record of the recipient or consent or disclosure authorization. The prompt contains no emergency risk information; missing information does not mean safety has been confirmed."
+                  "Fictional H01 has a CNY 100 budget for two activities and one round trip per activity. A charges CNY 20 per activity and 12 per round trip, with residency eligibility pending. B charges CNY 35 per activity and 10 per round trip, with accessibility pending. Compare costs, balances and handoffs. In the variant, change only B’s round-trip cost to CNY 18.",
+                  "Keep the inputs on paper or in a spreadsheet.",
+                  "Set up the original and variant separately.",
+                  "List unknown conditions separately."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "H01 deliverables and 90-minute schedule",
-                  "20 minutes to list needs and original records and gaps; 25 minutes to independently calculate costs; 25 minutes to write the resource comparison and the pending-confirmation handover form; 20 minutes to review and mark the version and reflect; 90 minutes in total.",
-                  "Submit the A/B cost table, the list of unknown conditions, and a fictional handover draft that does not disclose personal information; do not write it as already referred or already consented or already placed."
+                  "Submit both calculations, the open checks and a short handoff.",
+                  "Name the denominator or cost units and the single input that changes.",
+                  "Keep the first draft and identify the next reviewer."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "H01 reference deliverable",
-                  "Activity fee for A is 2×20=40 yuan and transportation 2×12=24 yuan, a total of 64 yuan, leaving a budget balance of 36 yuan; activity fee for B is 70 yuan and transportation 20 yuan, a total of 90 yuan, leaving 10 yuan. Neither exceeds 100 yuan on paper, which does not mean A is eligible or can participate.",
-                  "09:00 to 09:20 is a 20-minute record interval, not a service duration or completion of acceptance or proof of consent. A's regional eligibility is unknown and B's accessibility conditions are unknown; the remaining places and acceptance and disclosure authorization of both are pending confirmation, and a referral cannot be approved merely because A is cheaper.",
-                  "The handover draft records only the code H01 and the needs and the costs and the conditions to be verified; when acceptance or authorization evidence is missing, it remains pending confirmation. Risks: fictional resource conditions generated as facts, planned contact written as already accepted, and unauthorized external sending; verify the source text separately, retain status, and use purely fictional materials."
+                  "Check inputs and units.",
+                  "Keep the calculations and any corrections.",
+                  "Complete both cases independently on day 6.",
+                  "Then open the answer key in the FAQ."
                 ]
               },
               {
@@ -30261,10 +30257,9 @@
           },
           "id": "healthcare-social-workers.path.entry-work-sample-data.1",
           "source_refs": [
-            "employer",
-            "onet"
+            "paper-exercise"
           ],
-          "title": "H01 fictional exercise: resource conditions, costs, and pending-confirmation handover",
+          "title": "H01: Community resources and budget",
           "type": "cards"
         },
         {
@@ -30275,28 +30270,28 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "H01 resource conditions and cost table",
-                  "List A64 yuan balance 36, B90 yuan balance 10, and the calculations and units; A's regional eligibility and B's accessibility are unknown, and the remaining places and acceptance and authorization of both are pending confirmation."
+                  "List original values, calculation basis and pending conditions.",
+                  "List original values, calculation basis and pending conditions."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "H01 review and version records",
+                  "List original values, calculation basis and pending conditions.",
                   "Recalculate independently from the prompt, noting the author and time and v1/v2; you may ask others to comment, and if no comment was obtained, write that none was obtained, without fabricating professional approval."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "H01 handover draft and gaps",
-                  "Use only the code H01, and distinguish price inquiry and planned contact and actual acceptance; a planned contact at 09:20 is not a completed referral, and unknown conditions remain pending confirmation."
+                  "List original values, calculation basis and pending conditions.",
+                  "List original values, calculation basis and pending conditions."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "H01 tool use statement",
+                  "List original values, calculation basis and pending conditions.",
                   "State whether spreadsheets or generation tools were used and where you checked and revised; if none were used, state that clearly, and do not treat a generated draft as a real service record."
                 ]
               }
@@ -30368,50 +30363,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read the H01 source materials",
-                  "List the budget of 100 and the A/B prices and the unknown conditions and the v1 planned contact status; do not fabricate real cases."
+                  "Read the fictional exercise and list inputs.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: calculate costs",
-                  "A64/36, B90/10, review the counts and transportation units, and save the calculations."
+                  "Define cost units or denominators and keep the original values.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: compare conditions",
-                  "A's regional eligibility, B's accessibility, and the remaining places and acceptance and authorization of both are unknown; write the confirmation questions to be asked, without actually contacting anyone."
+                  "List pending checks and the records to hand off.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: do the 90-minute paper deliverable",
-                  "Complete the cost table, gap list, handover draft, and review in the 20+25+25+20 pattern."
+                  "Prepare a separate result sheet for each case.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: process the v2 change",
-                  "Change only B's transportation to 18 yuan per round trip, with all other conditions unchanged; B70+36=106 yuan, exceeding the budget by 6 yuan; A is still 64 yuan but its eligibility and acceptance remain unknown, so do not switch to A by default or add to the budget."
+                  "Verify that only one input changes in the variant.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: independent review",
-                  "Recalculate against v1/v2 and note the changes; comments are optional, and without a professional review do not write approved."
+                  "Complete the original and variant independently and save your first draft.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: record the experience judgment",
-                  "Choose to continue, pause, or change direction based on patience in checking and preparation for communication and awareness of authority; the seven-day paper experience does not prove the ability to provide clinical services."
+                  "Open the answer key in the FAQ, then plan any further checks.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               }
             ]
@@ -30561,13 +30556,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Recruitment sample note | This page has no representative recruitment sample and does not use one to judge national numbers or compensation or hiring conditions. U.S. occupational statistics are not a recruitment sample for China; the 2025 wages and the 2024—2034 projection are labeled as separate periods.",
+              "Mabian County’s 2026 recruitment lists four healthcare social work posts and specifies eligible degrees, subject areas and graduation cohorts for that recruitment round.",
               "Verification advice | Record the region and institution and service recipients and duties and working hours and contract and pay composition and education and state licensure or local occupational proficiency requirements and supervision and material permissions; verify against real announcements and hiring conditions, and do not infer authority from the title."
             ]
           },
           "id": "healthcare-social-workers.path.recruitment-sample.1",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "title": "Recruitment sample note",
           "type": "notice"
@@ -30578,7 +30573,7 @@
           "data": {
             "entries": [
               {
-                "entity": "BLS social workers: clinical and non-clinical preparation",
+                "entity": "BLS Occupational Outlook Handbook on social workers",
                 "id": "link-1",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/ooh/community-and-social-service/social-workers.htm"
@@ -30743,15 +30738,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Direct answer | First determine the locality and the clinical or non-clinical duties, verify the real recruitment and legal qualifications, and then prepare communication and resource retrieval and recording and supervised practice; the H01 on this page lets you experience paper checking first. U.S. BLS explains that clinical social workers need a master's degree, supervised clinical experience, and a license in the state where they practice, and may diagnose and treat mental, behavioral, and emotional problems within the legal scope; some states also require licensure for non-clinical positions. Positions in China should be verified against local systems and employer conditions, and the U.S. state license cannot be applied universally. Beijing document Jing Wei Quan Yi [2020] No. 4 specifies medical social work services and positions and the correspondence between occupational proficiency certificates and appointment; it is a Beijing policy and does not prove a nationwide uniform license or that all positions require a master's degree."
+              "BLS Table 1.2 lists a master’s degree and internship or residency as typical preparation for 21-1022. Its Social Workers Handbook separates clinical and nonclinical routes: clinical practice requires a social work master’s, supervised clinical experience and a state license. A social work bachelor’s is common for nonclinical entry, and some states require nonclinical credentials. Mabian County’s 2026 recruitment covered four healthcare social work positions with specified education, majors and graduation cohorts. The sample covers that recruitment round. Beijing’s local medical social work policy applies in Beijing."
             ]
           },
           "id": "healthcare-social-workers.path.career-path-block.20",
           "source_refs": [
-            "onet",
+            "ep",
             "bls-social-workers",
-            "beijing-medical-social-work",
-            "employer"
+            "cn-work-example",
+            "beijing-medical-social-work"
           ],
           "type": "prose"
         },
@@ -30811,7 +30806,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "U.S. clinical positions require a master's degree and supervised experience and state licensure; some states require licensure for non-clinical positions as well, and this does not apply to China."
+              "U.S. preparation and credential scope"
             ]
           },
           "id": "healthcare-social-workers.path.career-path-block.24",
@@ -32528,7 +32523,7 @@
           "data": {
             "entries": [
               {
-                "answer": "The Healthcare Social Workers on this page is the exact occupation O*NET 21-1022.00 (Healthcare Social Workers): provide individuals, families, and groups with the psychosocial support needed to cope with chronic, acute, or terminal illnesses; services include advising family caregivers; provide patients with information and counseling and make referrals for other services; may also provide case and care management or interventions. Core tasks include advocating for clients or patients to resolve crises (importance 94), explaining terminal symptoms and available options to clients to help them make informed decisions (90), collaborating with other professionals to assess patients' medical or physical condition and assess client needs (90), referring patients and clients or families to community resources (88), using consultation data to plan and coordinate care and rehabilitation and follow up (83), monitoring and evaluating and recording client progress against measurable goals (83), identifying environmental barriers through interviews and reviewing medical records (81), providing counseling individually and in groups (79), planning discharge arrangements (77), organizing support groups or providing counseling to family members (77), investigating child abuse or neglect cases and taking authorized protective action (88), and handling hospital oversight and Medicaid and Medicare related documentation and record work (63). Common job titles include Clinical Social Worker and Hospice Social Worker and LMSW and Medical Social Worker and Nephrology Social Worker and Oncology Social Worker and Psychosocial Coordinator and Renal Social Worker and Social Work Case Manager and Social Worker; on the 21-1022.00 page, O*NET shows that the main industry for this occupation in the United States is healthcare and social assistance. What is described on this page is the U.S. occupational classification scope, and wages and employment follow this occupation's (21-1022.00) own scope; the content on this page does not constitute any medical, diagnostic, treatment, medication, psychological, or legal advice.",
+                "answer": "The Healthcare Social Workers on this page is the exact occupation O*NET 21-1022.00 (Healthcare Social Workers): provide individuals, families, and groups with the psychosocial support needed to cope with chronic, acute, or terminal illnesses; services include advising family caregivers; provide patients with information and counseling and make referrals for other services; may also provide case and care management or interventions. Core tasks include advocating for clients or patients to resolve crises (importance 94), explaining terminal symptoms and available options to clients to help them make informed decisions (90), collaborating with other professionals to assess patients' medical or physical condition and assess client needs (90), referring patients and clients or families to community resources (88), using consultation data to plan and coordinate care and rehabilitation and follow up (83), monitoring and evaluating and recording client progress against measurable goals (83), identifying environmental barriers through interviews and reviewing medical records (81), providing counseling individually and in groups (79), planning discharge arrangements (77), organizing support groups or providing counseling to family members (77). O*NET classifies child abuse or neglect investigation and authorized protective action (88) and hospital oversight of Medicaid and Medicare documentation (63) as supplemental tasks. Assignment and authority depend on the position.  Common job titles include Clinical Social Worker and Hospice Social Worker and LMSW and Medical Social Worker and Nephrology Social Worker and Oncology Social Worker and Psychosocial Coordinator and Renal Social Worker and Social Work Case Manager and Social Worker; on the 21-1022.00 page, O*NET shows that the main industry for this occupation in the United States is healthcare and social assistance. What is described on this page is the U.S. occupational classification scope, and wages and employment follow this occupation's (21-1022.00) own scope; the content on this page does not constitute any medical, diagnostic, treatment, medication, psychological, or legal advice.",
                 "id": "healthcare-social-workers.faq.1",
                 "question": "What exactly does this occupation do?",
                 "question_key": "career.faq.healthcare-social-workers.q1",
@@ -32549,16 +32544,13 @@
                 ]
               },
               {
-                "answer": "In 2025 the U.S. median hourly wage for this occupation is $32.63 and the annual wage is $67,880; the 10th percentile is 22.22/46,220, the 25th percentile 27.27/56,710, the 75th percentile 39.54/82,240, and the 90th percentile 48.25/100,360 (USD/hour, USD/year). Percentiles are national distribution positions and do not identify seniority or an individual's starting salary. OEWS includes production bonuses and excludes overtime and shift differentials and non-production bonuses and benefit costs, covers employed full-time and part-time workers, and excludes the self-employed and others; the employment matrix includes self-employment, and the two are not mixed. O*NET presents 2024 employment for this occupation of 193,200, a 2024—2034 growth category of 7% or higher, and 18,400 average annual openings (including growth and replacement); these are not 2035 data or actual hiring or individual opportunities.",
+                "answer": "The May 2025 U.S. median wage for 21-1022 was USD 67,880 a year and USD 32.63 an hour. Annual wage percentiles (10th, 25th, 50th, 75th and 90th) were USD 46,220, 56,710, 67,880, 82,240, 100,360. BLS Table 1.2 shows about 194,800 U.S. jobs in 21-1022 in 2025 and projects 211,300 in 2035 (8.5%), with about 16,900 openings per year including replacements.",
                 "id": "healthcare-social-workers.faq.3",
                 "question": "What are the U.S. wages and employment like?",
                 "question_key": "career.faq.healthcare-social-workers.q3",
                 "source_refs": [
-                  "onet",
                   "oews",
-                  "ep",
-                  "bls-oews-methods",
-                  "bls-matrix-methods"
+                  "ep"
                 ]
               },
               {
@@ -32584,27 +32576,25 @@
                 ]
               },
               {
-                "answer": "This page recommends trialing resource retrieval, summaries, and cost aggregation on approved or fictional materials and does not describe potential research or a software list as moderate measured exposure or general adoption or a substitution rate. ILO2025 Working Paper 140 discusses potential task exposure and NIST provides voluntary governance; professional services and sensitive materials are verified against qualifications and authorization. O*NET presents 2024 employment for this occupation of 193,200, a 2024—2034 growth category of 7% or higher, and 18,400 average annual openings (including growth and replacement); these are not 2035 data or actual hiring or individual opportunities. A growth category cannot prove AI causality.",
+                "answer": "Within approved workflows, tools may organize resource directories and draft notes. Social workers verify eligibility, capacity and referral conditions and follow consent and access rules. Qualified staff handle high-risk decisions. ILO’s global task-exposure data do not measure hospital adoption or staffing effects.",
                 "id": "healthcare-social-workers.faq.6",
                 "question": "Will AI affect this occupation?",
                 "question_key": "career.faq.healthcare-social-workers.q6",
                 "source_refs": [
                   "onet",
-                  "ilo",
-                  "nist",
-                  "employer"
+                  "ilo"
                 ]
               },
               {
-                "answer": "The U.S. O*NET survey of education requirements for newly hired personnel is master's 70%, bachelor's 15%, post-master's certificate 11%, and Zone Five/SVP8.0 and above is a preparation description, not a legal threshold for all positions or the education composition of incumbents. U.S. clinical social workers need a master's degree, supervised experience, and the applicable state license; some states require licensure for non-clinical positions as well. Conditions in China should be verified against local systems and real positions, and Beijing document Jing Wei Quan Yi [2020] No. 4 only supports the relationship between local medical social work occupational proficiency certificates and appointment and does not prove a nationwide uniform license. H01 is only paper preparation and does not prove clinical ability.",
+                "answer": "BLS Table 1.2 lists a master’s degree and internship or residency as typical preparation for 21-1022. Its Social Workers Handbook separates clinical and nonclinical routes: clinical practice requires a social work master’s, supervised clinical experience and a state license. A social work bachelor’s is common for nonclinical entry, and some states require nonclinical credentials. Mabian County’s 2026 recruitment covered four healthcare social work positions with specified education, majors and graduation cohorts. The sample covers that recruitment round. Beijing’s local medical social work policy applies in Beijing.",
                 "id": "healthcare-social-workers.faq.7",
                 "question": "What education and training are needed?",
                 "question_key": "career.faq.healthcare-social-workers.q7",
                 "source_refs": [
-                  "onet",
+                  "ep",
                   "bls-social-workers",
-                  "beijing-medical-social-work",
-                  "employer"
+                  "cn-work-example",
+                  "beijing-medical-social-work"
                 ]
               },
               {
@@ -32620,7 +32610,7 @@
                 ]
               },
               {
-                "answer": "Common failures include: improper crisis assessment or safety response or case and care and referral, or out-of-bounds provision of clinical or diagnostic and medication or psychotherapy judgments; improper handling of service recipients' or families' sensitive information and health information or case data, or improper informed consent or confidentiality exceptions or mandatory reporting or out-of-bounds sharing; distorted or version-uncontrolled assessment or progress or referral or cost records, or improper handling of conflicts of interest and dual relationships; making clinical judgments or placement and protection decisions or external disclosures beyond authorization; critical crisis intervention or specialty or referral resource capability resting on a single point; and insufficient adaptation of cases and referrals or accessibility and language and culture, or insufficient safety protection for service recipients and staff. The control points are to verify and review and document according to social work ethics and confidentiality and informed consent and privacy requirements, and to pause and report immediately in the event of safety risks or suspected abuse or neglect or confidentiality exceptions or ethics conflicts or matters exceeding authorization. The content on this page does not constitute medical, diagnostic, treatment, medication, psychological, or legal advice.",
+                "answer": "For urgent safety concerns or suspected abuse or neglect, follow applicable emergency and mandated reporting procedures. If records conflict or authority is unclear, hold the affected correction, disclosure or commitment, preserve the original and seek review. Follow applicable rules for confidentiality exceptions.",
                 "id": "healthcare-social-workers.faq.9",
                 "question": "What are the main risks of this occupation?",
                 "question_key": "career.faq.healthcare-social-workers.q9",
@@ -32630,14 +32620,21 @@
                 ]
               },
               {
-                "answer": "O*NET presents 2024 employment for this occupation of 193,200, a 2024—2034 growth category of 7% or higher, and 18,400 average annual openings (including growth and replacement); these are not 2035 data or actual hiring or individual opportunities. Actual hiring must be verified separately, and changes are not attributed to population policy or AI. Adjacent directions such as child and family and school, mental health and substance abuse, community health, health education, and counseling and rehabilitation can be compared by subject matter and output; education, qualifications, practice, and authority must be re-verified, and a successful transfer is not promised.",
+                "answer": "BLS Table 1.2 shows about 194,800 U.S. jobs in 21-1022 in 2025 and projects 211,300 in 2035 (8.5%), with about 16,900 openings per year including replacements. Adjacent paths include community resource coordination, case management and mental health social work. Check the client population, supervised experience and local qualifications, especially for clinical work.",
                 "id": "healthcare-social-workers.faq.10",
                 "question": "What are the prospects, and which directions can one move to?",
                 "question_key": "career.faq.healthcare-social-workers.q10",
                 "source_refs": [
-                  "onet",
-                  "ep",
-                  "employer"
+                  "ep"
+                ]
+              },
+              {
+                "answer": "A totals CNY 64 with 36 left. B totals CNY 90 with 10 left. In the variant B totals CNY 106, or 6 over budget, while A is unchanged. A’s residency eligibility, B’s accessibility and available places for both are still pending. For handoff, ask the providers to confirm residency eligibility, accessibility and available places. Record pending items for the next staff member.",
+                "id": "healthcare-social-workers.faq.paper-exercise",
+                "question": "paper exercise answer key (open after day 6)",
+                "question_key": "career.faq.healthcare-social-workers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
                 ]
               }
             ]
@@ -32695,18 +32692,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Precise gaps: China occupational wages and employment, U.S. industry and regional wages for this occupation, AI adoption and measurement and causality, and occupational validation of the psychological assessments were not obtained. The four U.S. industries are the background for all social workers under 21-1020, and the NBS2025 health and social work figure is an industry annual average and is not filled in as a substitute. Beijing's policy is limited to Beijing, and H01 is a protected fictional exercise and is unchanged. Shared old facts and protected modules are retained."
+              "Mabian County’s 2026 recruitment lists four healthcare social work posts and specifies eligible degrees, subject areas and graduation cohorts for that recruitment round."
             ]
           },
           "id": "healthcare-social-workers.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "nbs",
-            "ilo",
-            "nist",
-            "bls-social-workers",
-            "beijing-medical-social-work",
-            "employer"
+            "cn-work-example"
           ],
           "type": "prose"
         }
@@ -32733,25 +32724,25 @@
                 "entity": "Big Five Personality Test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "This occupation (Healthcare Social Workers)",
@@ -32796,7 +32787,7 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to check the official scope (provide individuals and families and groups with the psychosocial support needed to cope with chronic and acute or terminal illnesses, with services including advising family caregivers and providing patients with information and counseling and referrals for other services, and possibly case and care management or interventions) and common job titles.",
+                  "The O*NET profile identifies the occupation and task scope.",
                   "Used to check the interest code (SI) and Job Zone Five and the education distribution (70%/15%/11%) and the industry distribution (healthcare and social assistance)."
                 ],
                 "evidence_type": "official occupation profile",
@@ -32810,33 +32801,32 @@
                 "url": "https://www.onetonline.org/link/summary/21-1022.00"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Used to check employment of 193,200 in 2024, projected growth of 7% or higher for 2024—2034, and about 18,400 average annual openings during the period (including growth and replacements).",
-                  "Used to explain that the employment projection and the OEWS point-in-time employment estimate differ in scope, and that projections are not equal to individual job outcomes and the openings consist mainly of replacement needs."
+                  "BLS Table 1.2 shows about 194,800 U.S. jobs in 21-1022 in 2025 and projects 211,300 in 2035 (8.5%), with about 16,900 openings per year including replacements.",
+                  "BLS Table 1.2 lists a master’s degree and internship or residency as typical preparation for 21-1022. Its Social Workers Handbook separates clinical and nonclinical routes: clinical practice requires a social work master’s, supervised clinical experience and a state license. A social work bachelor’s is common for nonclinical entry, and some states require nonclinical credentials."
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
-                "limitation": "This occupation's scope as presented by O*NET on the 21-1022.00 page; projected growth of 7% or higher with a Bright Outlook marker.",
+                "limitation": "U.S. national projections and typical preparation categories. Check requirements and authorization for the actual position separately.",
                 "market": "United States",
-                "name": "O*NET OnLine: Healthcare Social Workers employment trends (21-1022.00, this occupation's own scope)",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "21-1022.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/21-1022.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Used to check the median hourly wage of $32.63 / median annual wage of $67,880 and the 10th/25th/75th/90th percentiles (hourly wages 22.22/27.27/39.54/48.25 USD and annual wages 46,220/56,710/82,240/100,360 USD).",
-                  "Used to explain that wage percentiles are not experience levels and are not equal to an individual's starting salary."
+                  "The May 2025 U.S. median wage for 21-1022 was USD 67,880 a year and USD 32.63 an hour. Annual wage percentiles (10th, 25th, 50th, 75th and 90th) were USD 46,220, 56,710, 67,880, 82,240, 100,360."
                 ],
                 "evidence_type": "official wage display",
                 "id": "oews",
                 "limitation": "O*NET does not mark the wage data on that page as taken from a parent occupation; this page presents them according to this occupation's own scope, including production bonuses and excluding overtime and shift differentials and non-production bonuses and employer benefit costs.",
                 "market": "United States",
                 "name": "O*NET OnLine: Healthcare Social Workers national wages (21-1022.00, this occupation's own scope)",
-                "period": "2025 BLS OEWS wage data via O*NET",
+                "period": "2025-05",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "21-1022.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localwages/21-1022.00"
@@ -33036,17 +33026,17 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used for field and evidence scope and gap registration rules.",
-                  "Used for cross-market and cross-jurisdiction scope boundary notes."
+                  "Use the original sources for tasks and data scope.",
+                  "Use the original sources for tasks and data scope."
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "Editorial explanation",
                 "id": "employer",
-                "limitation": "Internal scope rules, not an external factual source.",
+                "limitation": "Explains sources on this page.",
                 "market": "Global",
-                "name": "FermatMind career content field and evidence scope rules",
-                "period": "current authoring rules",
+                "name": "FermatMind source scope notes",
+                "period": "This page",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "This page",
                 "url": "https://fermatmind.com"
               },
               {
@@ -33146,20 +33136,20 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Used to check the healthcare and social assistance industry.",
-                  "Used to explain the main employer types."
+                  "The May 2025 U.S. median wage for 21-1022 was USD 67,880 a year and USD 32.63 an hour. Annual wage percentiles (10th, 25th, 50th, 75th and 90th) were USD 46,220, 56,710, 67,880, 82,240, 100,360.",
+                  "The May 2025 U.S. median wage for 21-1022 was USD 67,880 a year and USD 32.63 an hour. Annual wage percentiles (10th, 25th, 50th, 75th and 90th) were USD 46,220, 56,710, 67,880, 82,240, 100,360."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "onet-wages",
                 "limitation": "This scope is the U.S. distribution and does not establish a mainland China mapping.",
                 "market": "United States",
                 "name": "O*NET OnLine: Healthcare Social Workers industry distribution (21-1022.00)",
-                "period": "current page; accessed 2026-09-22",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "21-1022.00 exact occupation",
-                "url": "https://www.onetonline.org/link/industry/21-1022.00"
+                "url": "https://www.onetonline.org/link/localwages/21-1022.00"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -33254,21 +33244,28 @@
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Crisis and rights advocacy — 25/100; weight=1/3; healthcare-social-workers.ai-impact.ai-impact-table.95[0]",
-                  "Assessment and care planning — 50/100; weight=1/3; healthcare-social-workers.ai-impact.ai-impact-table.99[0]",
-                  "Monitoring and recording — 75/100; weight=1/3; healthcare-social-workers.ai-impact.ai-impact-table.111[0]"
+                  "Mabian County’s 2026 recruitment lists four healthcare social work posts and specifies eligible degrees, subject areas and graduation cohorts for that recruitment round."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "cn-work-example",
+                "limitation": "A named historical vacancy. Check other employers separately.",
+                "market": "Mainland China",
+                "name": "Mabian County: 2026 social work recruitment",
+                "period": "2026-07",
+                "publisher": "Mabian County government portal",
+                "url": "https://www.mabian.gov.cn/mbyzzzx/openInfoPersonnelRecruitment/32335960/831430823526469.html"
+              },
+              {
+                "details": [
+                  "The records and measurements are fictional."
+                ],
+                "id": "paper-exercise",
+                "market": "This page",
+                "name": "H01: Community resources and budget",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -34606,7 +34603,7 @@
           "type": "prose"
         },
         "entry_heading": "How new graduates or career changers can verify and get started",
-        "heading": "How to become a Healthcare Social Worker: education, qualifications, and career development paths",
+        "heading": "Entry and H01: Community resources and budget",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "healthcare-social-workers.path.career-path-block.21",
@@ -37149,7 +37146,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS employment projections (2024—2034, this occupation's (21-1022.00) own scope)",
+            "label": "BLS Table 1.2 shows about 194,800 U.S. jobs in 21-1022 in 2025 and projects 211,300 in 2035 (8.5%), with about 16,900 openings per year including replacements.",
             "secondary_value": null,
             "value": {
               "$item": "healthcare-social-workers.profile.onet-structured-fields-block.4",
@@ -38199,13 +38196,13 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI tools and human review",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
       "market-signals": "Career prospects and moving to related occupations",
       "navigation": "Next steps and related entry points",
-      "path": "Entry, qualifications, and career development",
+      "path": "Entry and H01: Community resources and budget",
       "profile": "Occupational profile",
       "quick-decision": "Quick assessment",
       "risk": "Work pressure, risks, and occupational boundaries",
@@ -38265,63 +38262,63 @@
         ]
       },
       {
-        "derivation": "The 2024—2034 U.S. growth category for this occupation is 7% or higher, as presented by O*NET; the category does not identify AI or other causal factors, nor is it an individual outcome.",
-        "display_value": "Growth Much faster than average, 7% or higher (2024—2034, BLS employment projections, this occupation's (21-1022.00) own scope)",
+        "derivation": "BLS Table 1.2 shows about 194,800 U.S. jobs in 21-1022 in 2025 and projects 211,300 in 2035 (8.5%), with about 16,900 openings per year including replacements.",
+        "display_value": "8.5%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth",
-        "occupation_scope": "This occupation: Healthcare Social Workers",
-        "period": "2024—2034",
+        "occupation_scope": "21-1022",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "193,200 for this occupation in the United States in 2024, presented by O*NET as the BLS projection base period; the employment matrix includes self-employment, unlike the OEWS wage-and-salary estimate.",
-        "display_value": "Employment about 193,200 (2024, BLS employment projection base period, this occupation's (21-1022.00) own scope)",
+        "derivation": "BLS Table 1.2 shows about 194,800 U.S. jobs in 21-1022 in 2025 and projects 211,300 in 2035 (8.5%), with about 16,900 openings per year including replacements.",
+        "display_value": "About 194,800 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Employment figure",
-        "occupation_scope": "This occupation: Healthcare Social Workers",
-        "period": "2024",
+        "occupation_scope": "21-1022",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "Average annual openings of 18,400 for this occupation in the United States in 2024—2034, including growth and replacement; not net additions or actual hiring numbers or individual opportunities.",
-        "display_value": "Projected average annual job openings of about 18,400 (2024—2034, BLS employment projections, this occupation's (21-1022.00) own scope, including growth and replacements)",
+        "derivation": "BLS Table 1.2 shows about 194,800 U.S. jobs in 21-1022 in 2025 and projects 211,300 in 2035 (8.5%), with about 16,900 openings per year including replacements.",
+        "display_value": "About 16,900 a year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Average annual job openings",
-        "occupation_scope": "This occupation: Healthcare Social Workers",
-        "period": "2024—2034",
+        "occupation_scope": "21-1022",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "Evidence insufficient: the China materials consulted for this page did not obtain a national occupational wage distribution precisely corresponding to 21-1022.00, and industry averages are not filled in.",
-        "display_value": "Evidence insufficient: the China materials consulted for this page did not obtain a national occupational wage distribution precisely corresponding to 21-1022.00, and industry averages are not filled in.",
+        "derivation": "The mainland China sources checked for this page did not provide a national wage distribution for this exact occupation. National Bureau of Statistics industry averages provide industry context.",
+        "display_value": "The mainland China sources checked for this page did not provide a national wage distribution for this exact occupation. National Bureau of Statistics industry averages provide industry context.",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "Mainland China",
-        "measure": "Precise occupational wage in mainland China",
-        "occupation_scope": "This occupation: Healthcare Social Workers",
+        "measure": "Mainland China industry wage reference",
+        "occupation_scope": "Mainland China urban units: health and social work industry",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs-wage-release-2025"
         ]
       },
       {
-        "derivation": "Evidence insufficient: the China materials consulted for this page did not obtain a national occupational wage distribution precisely corresponding to 21-1022.00, and industry averages are not filled in.",
-        "display_value": "Evidence insufficient: the China materials consulted for this page did not obtain a national occupational wage distribution precisely corresponding to 21-1022.00, and industry averages are not filled in.",
+        "derivation": "The mainland China sources checked for this page did not provide a national wage distribution for this exact occupation. National Bureau of Statistics industry averages provide industry context.",
+        "display_value": "The mainland China sources checked for this page did not provide a national wage distribution for this exact occupation. National Bureau of Statistics industry averages provide industry context.",
         "fact_id": "cn-private-2025",
         "market": "Mainland China",
-        "measure": "Precise occupational wage in mainland China",
-        "occupation_scope": "This occupation: Healthcare Social Workers",
+        "measure": "Mainland China industry wage reference",
+        "occupation_scope": "Mainland China urban units: health and social work industry",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs-wage-release-2025"
         ]
       },
       {
@@ -38347,27 +38344,15 @@
         "source_refs": [
           "onet"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Healthcare Social Workers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
       "Healthcare Social Workers · tasks, deliverables, and responsibility boundaries",
@@ -38385,19 +38370,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034, this occupation's (21-1022.00) own scope)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment (2024, this occupation's (21-1022.00) own scope)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024—2034, this occupation's (21-1022.00) own scope)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -38418,10 +38403,10 @@
       "text": "Healthcare Social Workers"
     }
   },
-  "source_content_sha256": "cdc93b6ec79da2cd079d916e35ddb5a6c2f0c90d085ae041757b8ebf3933179e",
+  "source_content_sha256": "9909cbbd7ad2b58b3dc3c6f0d7e46153cf516329c0bcec4fd6925b44249d3809",
   "subject": {
     "canonical_slug": "healthcare-social-workers",
     "name": "Healthcare Social Workers",
-    "summary": "Healthcare Social Workers provide psychosocial support to individuals, families, and groups coping with acute, chronic, or terminal illness, coordinate care and community resources and service referrals, and record needs and progress. U.S. occupation code 21-1022.00; clinical services and data handling and disclosure authority must be verified against local law, qualifications, and institutional authorization."
+    "summary": "Healthcare social workers identify practical needs, coordinate with teams, and document referrals and handoffs. Their work can include helping families navigate care and connecting patients with community support after discharge."
   }
 }

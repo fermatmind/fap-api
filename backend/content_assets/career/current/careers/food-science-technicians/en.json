@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-tech-mile": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-tech-xuanzhou": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -11233,12 +11239,52 @@
         "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.10",
+          "parts": [
+            [
+              ";",
+              1,
+              2
+            ],
+            [
+              "|",
+              1,
+              2
+            ]
+          ],
+          "path": [
+            "data",
+            "paragraphs",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.10",
+          "parts": [
+            [
+              ";",
+              1,
+              2
+            ],
+            [
+              "|",
+              0,
+              2
+            ]
+          ],
+          "path": [
+            "data",
+            "paragraphs",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.headers.explanation": {
         "ref": {
@@ -19907,60 +19953,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "id": "food-science-technicians.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-2"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "id": "food-science-technicians.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-3"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19983,7 +19989,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -20011,7 +20017,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23532,13 +23538,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Programs and gaps | The 2025 BLS projections matrix base-year count of 20,800 includes self-employment and is not OEWS employee employment. Original national percentile tables and occupational wages by industry were not obtained this round. Do not mix in the older 14,600 count or infer nonpublication from size."
+              "The 2025 BLS projections start from about 20,800 jobs, including self-employment. May 2025 OEWS estimates 14,600 wage and salary jobs. The programs differ in coverage."
             ]
           },
           "id": "food-science-technicians.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet-details",
-            "bls-oews-methods"
+            "bls-projections-2025-35",
+            "oews-profile-2025"
           ],
           "type": "prose"
         }
@@ -23599,13 +23605,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Conclusion | The core distinctions from adjacent occupations are what is tested, whose methods are followed, and who makes assessments. This occupation performs standardized physical, chemical, sensory, and microbiological food and beverage tests and provides data. Microbiologists and chemists make specialist method and conclusion judgments; food scientists and technologists decide formulations and processes; chemical technicians perform general chemical analysis; quality control analysts focus on process and systems control; and agricultural and food science technicians address agricultural and food production, field work, and raw-material tests. Methods, assessment authority, and compliance responsibilities differ; conclusions and sign-offs cannot simply carry over between roles."
+              "Conclusion | The core distinctions from adjacent occupations are what is tested, whose methods are followed, and who makes assessments. This occupation performs standardized physical, chemical, sensory, and microbiological food and beverage tests and provides data. Microbiologists and chemists make specialist method and conclusion judgments; food scientists and technologists decide formulations and processes; chemical technicians perform general chemical analysis; quality control analysts also perform laboratory quality tests; and agricultural and food science technicians address agricultural and food production, field work, and raw-material tests. Methods, assessment authority, and compliance responsibilities differ; conclusions and sign-offs cannot simply carry over between roles."
             ]
           },
           "id": "food-science-technicians.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
             "internal-rubric",
-            "onet-summary"
+            "onet-summary",
+            "onet-qc-details"
           ],
           "type": "prose"
         },
@@ -25762,12 +25769,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. national median. Boundary | The median is the distribution midpoint, not starting pay or a figure representing every region or employer."
+              "50th percentile (median) · USD 52,130 per year · May 2025 OEWS; United States row in the O*NET wage table | https://www.onetonline.org/link/localwages/19-4013.00?st=MA"
             ]
           },
           "id": "food-science-technicians.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "nbs-wages-2025"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25790,12 +25797,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Originally registered 10th percentile; official original table not obtained this round, pending verification. Boundary | A wage-distribution position is not experience, education, hours, or an individual's probability of earning that wage."
+              "10th percentile · USD 39,820 per year · May 2025 OEWS; United States row in the O*NET wage table | https://www.onetonline.org/link/localwages/19-4013.00?st=MA"
             ]
           },
           "id": "food-science-technicians.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "bls-oews-methods"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25818,12 +25825,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Originally registered 25th percentile; official original table not obtained this round, pending verification. Boundary | A wage-distribution position is not experience, education, hours, or an individual's probability of earning that wage."
+              "25th percentile · USD 46,020 per year · May 2025 OEWS; United States row in the O*NET wage table | https://www.onetonline.org/link/localwages/19-4013.00?st=MA"
             ]
           },
           "id": "food-science-technicians.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "bls-oews-methods"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25846,12 +25853,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Originally registered 75th percentile; official original table not obtained this round, pending verification. Boundary | A wage-distribution position is not experience, education, hours, or an individual's probability of earning that wage."
+              "75th percentile · USD 63,270 per year · May 2025 OEWS; United States row in the O*NET wage table | https://www.onetonline.org/link/localwages/19-4013.00?st=MA"
             ]
           },
           "id": "food-science-technicians.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "bls-oews-methods"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25874,12 +25881,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Originally registered 90th percentile; official original table not obtained this round, pending verification. Boundary | A wage-distribution position is not experience, education, hours, or an individual's probability of earning that wage."
+              "90th percentile · USD 78,820 per year · May 2025 OEWS; United States row in the O*NET wage table | https://www.onetonline.org/link/localwages/19-4013.00?st=MA"
             ]
           },
           "id": "food-science-technicians.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "bls-oews-methods"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25902,12 +25909,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025 projections matrix employment of 20,800 includes self-employment, at 1.8%. Boundary | Not OEWS employee employment; do not mix in the older 14,600 count."
+              "The 2025 BLS projections start from about 20,800 jobs, including self-employment. May 2025 OEWS estimates 14,600 wage and salary jobs. The programs differ in coverage."
             ]
           },
           "id": "food-science-technicians.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet-details"
+            "bls-projections-2025-35",
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -26338,7 +26346,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Contract checking suggestion | Compare regions, institutions, projects, and duties, and check base pay, performance pay, project bonuses, hours, and benefits. Without occupational samples, do not claim typical pay structures or effects of individual factors on income."
+              "Contract checking suggestion | Compare regions, institutions, projects, and duties, and check base pay, performance pay, project bonuses, hours, and benefits. With only two example postings, do not claim typical pay structures or effects of individual factors on income."
             ]
           },
           "id": "food-science-technicians.china-salary.career-snapshot-primary-locale.48",
@@ -26408,12 +26416,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "County-level and lower-tier markets"
+              "Mainland China job postings"
             ]
           },
           "id": "food-science-technicians.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "tech-mile",
+            "tech-xuanzhou"
           ],
           "type": "prose"
         },
@@ -26422,12 +26431,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No monthly occupational wage data for mainland China verifiable by city or region have been obtained. Recruitment offers, industry averages, and secondhand accounts are not substituted."
+              "A Mile food producer advertises two lab QC jobs with a stated minimum of CNY 4,000 per month for sampling, testing and recording from ingredients to finished products. A Xuanzhou testing post advertises CNY 4,000–6,000 per month and asks for microbiology culture skills. Ask which methods you will run, who reviews results, and how shifts and exceptions are handled. The two posts do not establish national wages."
             ]
           },
           "id": "food-science-technicians.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "tech-mile",
+            "tech-xuanzhou"
           ],
           "type": "prose"
         },
@@ -26500,7 +26510,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 19-4013.00 occupational and wage data | https://www.onetonline.org/link/summary/19-4013.00; BLS Occupational Employment and Wage Statistics (OEWS) | https://www.bls.gov/oes/; BLS Employment Projections 2025—2035 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "O*NET 19-4013.00 occupational and wage data | https://www.onetonline.org/link/summary/19-4013.00; BLS Occupational Employment and Wage Statistics (OEWS) | https://www.onetonline.org/link/localwages/19-4013.00?st=MA; BLS Employment Projections 2025—2035 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.8",
@@ -26529,12 +26539,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. national median. Boundary | The median is the distribution midpoint, not starting pay or a figure representing every region or employer."
+              "50th percentile (median) · USD 52,130 per year · May 2025 OEWS; United States row in the O*NET wage table | https://www.onetonline.org/link/localwages/19-4013.00?st=MA"
             ]
           },
           "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26557,12 +26567,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Originally registered 10th percentile; official original table not obtained this round, pending verification. Boundary | A wage-distribution position is not experience, education, hours, or an individual's probability of earning that wage."
+              "10th percentile · USD 39,820 per year · May 2025 OEWS; United States row in the O*NET wage table | https://www.onetonline.org/link/localwages/19-4013.00?st=MA"
             ]
           },
           "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "bls-oews-methods"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26585,12 +26595,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Originally registered 25th percentile; official original table not obtained this round, pending verification. Boundary | A wage-distribution position is not experience, education, hours, or an individual's probability of earning that wage."
+              "25th percentile · USD 46,020 per year · May 2025 OEWS; United States row in the O*NET wage table | https://www.onetonline.org/link/localwages/19-4013.00?st=MA"
             ]
           },
           "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "bls-oews-methods"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26613,12 +26623,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Originally registered 75th percentile; official original table not obtained this round, pending verification. Boundary | A wage-distribution position is not experience, education, hours, or an individual's probability of earning that wage."
+              "75th percentile · USD 63,270 per year · May 2025 OEWS; United States row in the O*NET wage table | https://www.onetonline.org/link/localwages/19-4013.00?st=MA"
             ]
           },
           "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "bls-oews-methods"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26641,12 +26651,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Originally registered 90th percentile; official original table not obtained this round, pending verification. Boundary | A wage-distribution position is not experience, education, hours, or an individual's probability of earning that wage."
+              "90th percentile · USD 78,820 per year · May 2025 OEWS; United States row in the O*NET wage table | https://www.onetonline.org/link/localwages/19-4013.00?st=MA"
             ]
           },
           "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "bls-oews-methods"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26669,12 +26679,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025 projections matrix employment of 20,800 includes self-employment, at 1.8%. Boundary | Not OEWS employee employment; do not mix in the older 14,600 count."
+              "The 2025 BLS projections start from about 20,800 jobs, including self-employment. May 2025 OEWS estimates 14,600 wage and salary jobs. The programs differ in coverage."
             ]
           },
           "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet-details"
+            "bls-projections-2025-35",
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -26740,12 +26751,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "On 2026-10-11, functioning May2025 Profiles national percentile and industry tables were obtained: employees 14600 / RSE2.5%; mean annual wage 56660 / hourly 27.24; annual P10/P25/P50/P75/P90 = 39820 / 46020 / 52130 / 63270 / 78820; hourly = 19.14 / 22.12 / 25.06 / 30.42 / 37.89. Industry selections come from the highest annual median industry table, not a ranking of main employers or all-occupation wages within industries. EP employment is a separate program; OEWS employee counts do not replace EP. Conflicts with protected shared historical Hero/FAQ facts are listed separately."
+              "The industry figures compare this occupation in selected industries. They are not wages for all jobs in the industry or a ranking of employers by size. OEWS wage employment and the employment projections have different coverage."
             ]
           },
           "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "oews-profile-2025"
+            "oews-profile-2025",
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26754,13 +26766,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 median of $52,130 annually and $25.06 hourly has been verified. Original percentiles 39,820 / 46,020 / 63,270 / 78,820 were not obtained from official tables this round and await verification. The distribution does not establish causal effects of region, industry, education, or experience."
+              "National percentiles describe the distribution of wages for this occupation. The 50th percentile is the median, not a starting wage. The figures do not explain differences by region, experience or shift."
             ]
           },
           "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "bls-oews-methods",
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26857,12 +26868,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Growth: 4.8% (2025—2035, BLS projections presented through O*NET)"
+              "BLS projects U.S. employment for SOC 19-4013 to rise 4.8% from 20,800 in 2025 to 21,800 in 2035, with about 3,000 annual openings including replacement needs."
             ]
           },
           "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27039,7 +27050,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The median is the distribution midpoint; original percentiles await verification. The distribution cannot explain causes of experience, regional, educational, or industry differences."
+              "The median is the distribution midpoint; national percentiles describe wage distribution. The distribution cannot explain causes of experience, regional, educational, or industry differences."
             ]
           },
           "id": "food-science-technicians.us-salary.career-snapshot-secondary-locale.46",
@@ -27176,31 +27187,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Chemical technician direction",
@@ -29291,12 +29302,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Recruitment checking suggestion | No specific recruitment samples were obtained; national channels and publication patterns are not inferred. Check each announcement's date, location, entity, methods and instruments, hours, safety training, institutional requirements, and personal authorization."
+              "Use the two historical postings to compare the duties. When applying, check the current listing, location, hours and training. These examples do not establish national wages or hiring channels."
             ]
           },
           "id": "food-science-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "internal-rubric"
+            "tech-mile",
+            "tech-xuanzhou"
           ],
           "title": "Food Science Technicians | path",
           "type": "notice"
@@ -30636,13 +30648,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The projections matrix includes self-employment, at 1.8% in this occupation, unlike OEWS employee wage coverage. Do not mix in the older 14,600 count."
+              "The 2025 BLS projections start from about 20,800 jobs, including self-employment. May 2025 OEWS estimates 14,600 wage and salary jobs. The programs differ in coverage."
             ]
           },
           "id": "food-science-technicians.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet-details",
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -31319,17 +31331,20 @@
                 ]
               },
               {
-                "answer": "Food scientists and technologists decide formulations and processes and take product-design responsibility; microbiologists design methods and interpret and assess microbiological results; chemical technicians work in general chemical analysis, materials, and chemical-industry settings; quality control analysts focus on process and system auditing and improvement; and agricultural and food science technicians focus on agriculture, raw materials, and field testing. This occupation performs standardized physical, chemical, sensory, and microbiological food and beverage tests and provides reviewable data and reports. Methods and assessment authority differ.",
+                "answer": "Food science technicians test food or beverages and document results. Food scientists and technologists may also test products, but their work includes developing formulations or processes and studying preservation. Microbiologists study microorganisms; chemical technicians work with materials beyond food. Quality control analysts also perform lab tests, so check the materials, methods and sign-off duties.",
                 "id": "food-science-technicians.faq.2",
                 "question": "How does it differ from food scientists and technologists, microbiologists, and chemical technicians?",
                 "question_key": "career.faq.food-science-technicians.q2",
                 "source_refs": [
                   "onet-summary",
-                  "internal-rubric"
+                  "onet-qc-details",
+                  "onet-comparison-micro",
+                  "onet-comparison-chem",
+                  "onet-comparison-food"
                 ]
               },
               {
-                "answer": "The 2025 median annual wage was $52,130 (median hourly wage $25.06). Employment was approximately 20,400 in 2024 (BLS projections base year; OEWS May 2025 shows approximately 14,600). Projected growth for 2024—2034 is above average (approximately 5%–6%), with around 3,200 average annual openings including replacements. These U.S. O*NET/BLS definitions do not apply to other jurisdictions.",
+                "answer": "The 2025 U.S. occupational median wage was $25.06 an hour and $52,130 a year. BLS projects U.S. employment for SOC 19-4013 to rise 4.8% from 20,800 in 2025 to 21,800 in 2035, with about 3,000 annual openings including replacement needs.",
                 "id": "food-science-technicians.faq.3",
                 "question": "What are U.S. wages and employment like?",
                 "question_key": "career.faq.food-science-technicians.q3",
@@ -31339,13 +31354,13 @@
                 ]
               },
               {
-                "answer": "Mainland China has not established public occupational wage statistics precisely matching this occupation. NBS industry-category averages for urban-unit employees, such as manufacturing at 113,594 yuan per year in urban non-private units and 76,055 in urban private units, do not distinguish occupations and serve only as background proxies. This page retains a visible Insufficient evidence marker in its mainland China section and does not substitute industry averages, recruitment offers, or third-party estimates.",
+                "answer": "A Mile food producer advertises two lab QC jobs with a stated minimum of CNY 4,000 per month for sampling, testing and recording from ingredients to finished products. A Xuanzhou testing post advertises CNY 4,000–6,000 per month and asks for microbiology culture skills. Ask which methods you will run, who reviews results, and how shifts and exceptions are handled. The two posts do not establish national wages.",
                 "id": "food-science-technicians.faq.4",
                 "question": "Are corresponding mainland Chinese wage data available?",
                 "question_key": "career.faq.food-science-technicians.q4",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "tech-mile",
+                  "tech-xuanzhou"
                 ]
               },
               {
@@ -31369,13 +31384,13 @@
                 ]
               },
               {
-                "answer": "O*NET shows 32% of new entrants with bachelor's degrees, 23% with associate or two-year degrees, and 17% with upper-secondary education or equivalent. The occupation is in Job Zone 3 (SVP 6.0 to below 7.0), usually requiring on-the-job training and possibly apprenticeship-style preparation. Actual employer recruitment requirements apply.",
+                "answer": "U.S. BLS lists an associate degree and moderate-term on-the-job training as typical. Mainland China’s Food Testing and Inspection Technology standard describes training in testing and laboratory work. Check each employer’s education, methods and report authorization separately.",
                 "id": "food-science-technicians.faq.7",
                 "question": "What education and training are needed?",
                 "question_key": "career.faq.food-science-technicians.q7",
                 "source_refs": [
-                  "onet-summary",
-                  "bls-projections-2025-35"
+                  "bls-projections-2025-35",
+                  "tech-moe-training"
                 ]
               },
               {
@@ -31399,7 +31414,7 @@
                 ]
               },
               {
-                "answer": "Under U.S. definitions, projected 2024—2034 growth is above average (approximately 5%–6%), with openings including replacement needs. Projections are not individual opportunities; actual opportunities depend on local food and testing industry structures and instrument automation. Adjacent directions include food scientist and technologist, microbiologist, chemical technician, quality control analyst, agricultural and food science technician, and biological technician, requiring new methods and standards to be learned. Laboratory, quality, and compliance management are also possible directions.",
+                "answer": "BLS projects U.S. employment for SOC 19-4013 to rise 4.8% from 20,800 in 2025 to 21,800 in 2035, with about 3,000 annual openings including replacement needs. If you want to design experiments or develop formulations, compare food scientist and technologist roles. For a focus on instruments and routine chemistry, compare chemical technician jobs and check what additional training is needed.",
                 "id": "food-science-technicians.faq.10",
                 "question": "What is the outlook, and which other directions are possible?",
                 "question_key": "career.faq.food-science-technicians.q10",
@@ -31455,16 +31470,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round on 2026-10-11 checked O*NET19-4013 tasks, education questions, interests and median wages, the exact BLS2025—2035 row, OEWS methodology, NBS industry proxies, and OSHA laboratory chemical coverage. Shared older projections retain protection conflicts; wage percentiles have received additional checks. Historical review conclusions are not inherited. On 2026-10-11, functioning May2025 Profiles national five-percentile data and precise industry selections were added; previous access restrictions had been lifted."
+              "O*NET describes the work. BLS publishes separate U.S. wage and employment projection estimates. Mainland industry figures and individual postings are shown separately."
             ]
           },
           "id": "food-science-technicians.sources.source-card.3",
           "source_refs": [
-            "onet-details",
-            "bls-oews-methods",
-            "osha-lab-chemistry",
-            "internal-rubric",
-            "oews-profile-2025"
+            "onet-summary",
+            "bls-oews-2025",
+            "bls-projections-2025-35",
+            "tech-mile",
+            "tech-xuanzhou"
           ],
           "type": "prose"
         },
@@ -31473,7 +31488,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Remaining gaps: precise mainland Chinese occupational and regional wage and employment data, specific recruitment samples, and causal AI adoption evidence were not obtained. U.S. occupational national five-percentile and explicit industry wages have now been checked. These do not provide combined wages for older broad industry scenarios, which were replaced with explicit official categories. Shared source metadata and protected Hero and FAQ fact conflicts are listed in the report. This round does not establish full-page consistency or independent acceptance."
+              "U.S. national percentiles and industry figures have different scopes. The mainland China postings show individual employers’ terms at the time. Comparable national occupational pay and employment figures are unavailable."
             ]
           },
           "id": "food-science-technicians.sources.source-card.4",
@@ -31502,28 +31517,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
-                "id": "navigation-2",
+                "entity": "MBTI",
+                "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
+                "entity": "Big Five",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Return to the Food Science Technicians career page",
@@ -31581,17 +31584,16 @@
                 "url": "https://www.onetonline.org/link/details/19-4013.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Table row 19-4013: Approximately 20.4 thousand employed in 2024, above-average growth (approximately 5%–6%), and approximately 3.2 thousand average annual openings.",
-                  "Projections are occupational statistics, not individual hiring probabilities."
+                  "BLS projects U.S. employment for SOC 19-4013 to rise 4.8% from 20,800 in 2025 to 21,800 in 2035, with about 3,000 annual openings including replacement needs."
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
                 "limitation": "Projected increases or average annual openings must not be interpreted directly as individual income or hiring guarantees.",
                 "market": "US",
-                "name": "U.S. Bureau of Labor Statistics：2024—2034 Occupational Projections and Characteristics",
-                "period": "2024—2034",
+                "name": "BLS: Occupational Projections Table 1.2 (2025–2035)",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "19-4013 Food Science Technicians",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31606,11 +31608,11 @@
                 "id": "bls-oews-2025",
                 "limitation": "Wage statistics and employment projections are separate programs and cannot be combined into individual starting pay or income guarantees.",
                 "market": "US",
-                "name": "U.S. Bureau of Labor Statistics：May 2025 Occupational Employment and Wage Statistics",
+                "name": "United States row in the O*NET wage table",
                 "period": "May 2025 OEWS",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "19-4013 Food Science Technicians",
-                "url": "https://www.bls.gov/news.release/archives/ocwage_05152026.pdf"
+                "url": "https://www.onetonline.org/link/localwages/19-4013.00?st=MA"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31750,6 +31752,96 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In listings 49–54, the food company advertises two QC technicians at a stated minimum of CNY 4,000 a month. It asks for postsecondary education and covers sampling, testing and recording from ingredients to finished products."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "tech-mile",
+                "limitation": "One posting only; not national wages or confirmation of a current vacancy.",
+                "market": "Mainland China",
+                "name": "Huayu Tianye Foods: laboratory QC technician",
+                "period": "2026",
+                "publisher": "Mile Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hhml.gov.cn/info/35871/922992.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Advertised CNY 4,000–6,000 per month. The listing asks for a related postsecondary field and microbiology culture skills, and prefers testing experience or independent use of instruments."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "tech-xuanzhou",
+                "limitation": "One posting only; not national wages or confirmation of a current vacancy.",
+                "market": "Mainland China",
+                "name": "Anhui Tianyun: food testing technician",
+                "period": "2026",
+                "publisher": "Xuanzhou District Government, Anhui",
+                "scope": "recruitment_proxy",
+                "url": "https://www.xuanzhou.gov.cn/OpennessContent/show/3808983.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The program description cites the Ministry of Education’s 2025 teaching standard and lists food testing and laboratory management among training areas."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "tech-moe-training",
+                "limitation": "Education standard, not a professional license.",
+                "market": "Mainland China",
+                "name": "CHSI: Food Testing and Inspection Technology (490104)",
+                "period": "2025",
+                "publisher": "CHSI career platform (citing the 2025 Ministry of Education teaching standard)",
+                "scope": "exact",
+                "url": "https://xz.chsi.com.cn/speciality/detail/zyjy.action?specId=eqyx30nbab0cixue"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Microbiologists"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "onet-comparison-micro",
+                "limitation": "U.S. task comparison",
+                "market": "United States",
+                "name": "Microbiologists",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/19-1022.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Chemical Technicians"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "onet-comparison-chem",
+                "limitation": "U.S. task comparison",
+                "market": "United States",
+                "name": "Chemical Technicians",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/19-4031.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Adjacent food science occupation"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "onet-comparison-food",
+                "limitation": "U.S. task comparison",
+                "market": "United States",
+                "name": "Adjacent food science occupation",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/19-1012.00"
               }
             ]
           },
@@ -34616,6 +34708,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-tech-mile",
+            "posting-tech-xuanzhou"
+          ],
           "sources_note": {
             "$item": "food-science-technicians.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34625,7 +34721,7 @@
           "ui": {
             "ai_heading": "Will AI affect food science technicians' wages?",
             "driver_heading": "Which industries and directions employ this occupation?",
-            "official_heading": "Public recruitment samples (historical announcements, not official statistics)",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Educational backgrounds, common role directions, and checking suggestions (editorial compilation, not wage statistics)",
             "scenario_heading": "Which starting roles are typical for food science technicians with different educational backgrounds?",
             "scenario_interpretation_label": "Notes and checking suggestions",
@@ -36408,7 +36504,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Start exploring whether Food Science Technicians suits you",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36482,30 +36578,10 @@
               "$link": "food-science-technicians.navigation.links.1",
               "block": "navigation",
               "copy_key": "career.item.navigation-links",
-              "entry": "navigation-2",
-              "field": "url"
-            },
-            "label": "MBTI (English)"
-          },
-          {
-            "href": {
-              "$link": "food-science-technicians.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-3",
-              "field": "url"
-            },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "food-science-technicians.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Explore my personality preferences"
           },
           {
             "href": {
@@ -36515,7 +36591,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Explore my Big Five traits"
           }
         ]
       },
@@ -36714,36 +36790,36 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 20,400 employed (2024, BLS projections base year, presented through O*NET; approximately 14,600 under OEWS presentation definitions)",
+        "display_value": "20,800 people (2025)",
         "fact_id": "us-employment-2025",
         "market": "US",
-        "measure": "Employment size",
-        "occupation_scope": "Food Science Technicians; 19-4013.00",
-        "period": "2025",
+        "measure": "Base-year employment",
+        "occupation_scope": "U.S. SOC 19-4013",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Growth: above average (approximately 5%–6%, 2024—2034, BLS projections presented through O*NET)",
+        "display_value": "Growth of 4.8% (2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
-        "measure": "Employment growth rate",
-        "occupation_scope": "Food Science Technicians; 19-4013.00",
-        "period": "2024—2034",
+        "measure": "Projected employment change",
+        "occupation_scope": "U.S. SOC 19-4013",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 3,200 average annual job openings (2024—2034, including replacement needs)",
+        "display_value": "3,000 per year (including replacement needs)",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
-        "measure": "Average annual job openings",
-        "occupation_scope": "Food Science Technicians; 19-4013.00",
-        "period": "2024—2034",
+        "measure": "Average annual openings",
+        "occupation_scope": "U.S. SOC 19-4013",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -36903,6 +36979,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "In listings 49–54, the food company advertises two QC technicians at a stated minimum of CNY 4,000 a month. It asks for postsecondary education and covers sampling, testing and recording from ingredients to finished products.",
+        "fact_id": "posting-tech-mile",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Huayu Tianye Foods: laboratory QC technician",
+        "period": "2026",
+        "source_refs": [
+          "tech-mile"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Advertised CNY 4,000–6,000 per month. The listing asks for a related postsecondary field and microbiology culture skills, and prefers testing experience or independent use of instruments.",
+        "fact_id": "posting-tech-xuanzhou",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Anhui Tianyun: food testing technician",
+        "period": "2026",
+        "source_refs": [
+          "tech-xuanzhou"
+        ]
       }
     ]
   },
@@ -36929,19 +37029,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment size (2024 projections base year)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual openings (2024—2034)"
+        "label": "U.S. projected annual job openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -36955,14 +37055,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What food science technicians do, how to enter, work boundaries, and development directions. Based on official occupational information, distinguishing occupational statistics, industry proxies, and qualification gaps."
+      "text": "See how food science technicians sample, test and document results. Compare mainland China lab postings and training with U.S. occupational data."
     },
     "title": {
       "availability": "available",
       "text": "Food Science Technicians"
     }
   },
-  "source_content_sha256": "c80af400d9531cb154720bb49a76f0ba8b233a2c46af08554b9ffff01ba6d67c",
+  "source_content_sha256": "c4d4a1ab2892b520e041fd2242ccf42026c3c90f7e25f3636f2d37f7fbf39774",
   "subject": {
     "canonical_slug": "food-science-technicians",
     "name": "Food Science Technicians",

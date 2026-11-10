@@ -1283,6 +1283,9 @@
       "item:pile-driver-operators.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:pile-driver-operators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:pile-driver-operators.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31514,6 +31517,21 @@
             "editor-note"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。桩位图标 D9，交接单记 D6；还有一条无班次的异常记录。指出不能合并的凭证和需通知的人，真实桩机操作按现场指挥。"
+            ]
+          },
+          "id": "pile-driver-operators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "核桩号与班次记录",
+          "type": "notice"
         }
       ]
     },
@@ -38084,6 +38102,13 @@
         "id": "pile-driver-operators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "pile-driver-operators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38433,7 +38458,7 @@
       "text": "打桩机操作员职业指南：工作任务、工资与入行路径"
     }
   },
-  "source_content_sha256": "a67e498b19079a280dcbf1321f101c8c1b0036b9bac561269ed06e4ef5249948",
+  "source_content_sha256": "f76a382ab232a4c321b336ee8a1dc1c6e69c3ace49c70e4e553420167342dec6",
   "subject": {
     "canonical_slug": "pile-driver-operators",
     "name": "打桩机操作员",

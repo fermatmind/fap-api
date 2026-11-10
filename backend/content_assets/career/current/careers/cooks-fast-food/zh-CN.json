@@ -53,6 +53,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-fast-hangzhou": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-fast-loudi": {
+        "status": "pending_mapping"
+      },
       "fact:retail-employment-share-gap": {
         "status": "pending_mapping"
       },
@@ -1695,7 +1701,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -19506,56 +19512,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19563,7 +19533,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19576,7 +19546,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19589,7 +19559,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19602,7 +19572,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -22584,7 +22554,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "低风险验证：用虚构点单条与快餐配方做一次「点单—备料—加热—装盒—记录」练习，只判断工作偏好，不等同资格、培训或录用。"
+              "先用本页四张虚构工单做一页纸面交接，看看自己是否愿意核对数量、限制和当班记录。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -22830,7 +22800,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "读取点单条或接收口头指令 → 接受点单并按门店程序收款 → 按快餐配方称量原料 → 清洗与切割待烹食材 → 隔离并标注过敏原相关原料 → 标注制作顺序与批次"
+              "读取订单或工位指令，按配方备料，核对用量和批次。接单、收款是否同岗要看门店。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.camera.steps",
@@ -23054,7 +23024,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "接受点单与收款 → 称量切配与备料 → 按设备程序加热 → 核对熟度与数量 → 装盒或保温 → 交付并清洁补货。"
+              "按订单备料 → 使用工位设备烹制 → 核对数量和熟度 → 分装交接 → 清洁补货。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.primary",
@@ -23376,12 +23346,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "异常按实际程序停止受影响作业、隔离及升级，记录待核条件；食品安全法第47条规定存在事故潜在风险时生产经营者须停止经营并报告监管部门，不能仅内部报告替代。交接方式按单位程序。"
+              "发现异常时暂停受影响作业，记录待核条件并立即交值班负责人。经营者的对外报告义务见风险区的食品安全法原文及本页证书 FAQ。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
           "source_refs": [
-            "onet"
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -23390,7 +23360,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "点单与收款｜读取点单并核对收款｜读取点单条或接收口头指令，接受点单并按门店程序收款与找零，同时处理多张订单并说明等待时间；发现点单不清或临时变更时，先与柜台或顾客确认再制作。"
+              "核对订单｜读取票单与工位指令｜有变化先找负责接单的同事确认；接单和收款由门店另行分工。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
@@ -23642,7 +23612,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国快餐厨师Zone1–2/SVP低于6；几天至一年训练是层级概述，不是统一课程。受访教育63%低于高中、21%高中或同等、12%部分大学课程且未获学位，是部分响应，非中国门槛。BLS本职业典型无正式学历、无相关职业经验、短期在职训练，不等于免食安训练或任职资格核对。当前R89/C55/E39/S24/A14/I6，前三RCE，原代码正确。现实型对应设备食材、常规型对应程序核对、企业型对应工作协调；分数为职业活动轮廓，非人员比例、人格能力或录用阈值。当前行业97%住宿餐饮3%其他，未明年度。"
+              "美国快餐厨师Zone1–2/SVP低于6；几天至一年训练是层级概述，不是统一课程。针对新员工完成工作所需学历的调查，受访者回答为 63%低于高中、21%高中或同等、12%部分大学课程且未获学位，是部分响应，非中国门槛。BLS本职业典型无正式学历、无相关职业经验、短期在职训练，不等于免食安训练或任职资格核对。当前R89/C55/E39/S24/A14/I6，前三RCE，原代码正确。现实型对应设备食材、常规型对应程序核对、企业型对应工作协调；分数为职业活动轮廓，非人员比例、人格能力或录用阈值。O*NET 2025 年的美国快餐厨师主要行业为住宿与餐饮服务，就业占比 97%。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
@@ -23670,12 +23640,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "NBS2025住宿餐饮业城镇单位税前年均工资非私营62,461／私营55,123元，原数正确；覆盖5人及以上法人全岗位、含奖金津补贴，不含个体及自由职业，非快餐厨师中位或到手。另有该行业农民工月均4,208元、同比1.6%，人口口径不同，不合成工资区间或互相折算。精确职业工资、分位与招聘统计缺口保留。"
+              "2025 年，住宿和餐饮业城镇单位就业人员年平均工资为非私营单位 62,461 元、私营单位 55,123 元。同年，另一项调查的住宿和餐饮业农民工月均收入为 4,208 元，同比增长 1.6%。两表的调查人群与时间单位不同，均为行业背景。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "r2-pay-1",
+            "nbs-migrant-context"
           ],
           "type": "prose"
         },
@@ -23684,7 +23655,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "快餐厨师（Cooks, Fast Food）是在菜单有限的快餐店准备与烹饪食品的职业，对应美国 O*NET-SOC 35-2011.00：职责限于少数基础品项，通常操作大容量单一用途的烹饪设备（烤架、油炸锅、煎板）。工作内容包括读取点单条或口头指令、接受点单与收款、按快餐配方称量与切配、按订单数量批量烹制与装盒、核对质量与数量、在窗口或柜台交付，以及清洁补货与记录。本页中国部分以中式烹调师（职业编码 4-03-02-01）等可核实实体为线索：中美两套职业分类不是一一对应，本页不把美国的准备层级、资格或工资直接套用到中国大陆，也不把餐厅厨师、食品柜台工人、食品制备人员或洗碗工的职责并入本职业。"
+              "快餐厨师按限定菜单和标准配方烹制，在不同门店可负责备料、装盒和清洁，也可能兼接单、收款或交付。查看实际工位和培训，不能把美国职业说明直接当成大陆招聘条件。"
             ]
           },
           "id": "actors.display.definition_block.definition",
@@ -23711,7 +23682,7 @@
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet"
+            "adjacent-details-35-3023"
           ],
           "type": "prose"
         },
@@ -23725,7 +23696,7 @@
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet"
+            "adjacent-details-35-2021"
           ],
           "type": "prose"
         },
@@ -23739,7 +23710,7 @@
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet"
+            "adjacent-details-35-9021"
           ],
           "type": "prose"
         },
@@ -23753,7 +23724,7 @@
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet"
+            "adjacent-details-35-1011"
           ],
           "type": "prose"
         },
@@ -23813,12 +23784,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "在餐厅后厨按菜单与订单连续出餐：菜品范围更广、工位更多，既要按配方复现口味，也要在高峰时段与打荷、传菜对齐出餐时点。"
+              "在餐厅厨房按菜单和订单烹制菜品。有明确工位分工的厨房，按分配的菜品或工序配合出餐。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.work",
           "source_refs": [
-            "onet"
+            "editor",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23827,12 +23799,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与快餐厨师的关键区别是菜单宽度与工位数量：餐厅厨师需要掌握更多菜式与加热方式；2024 年就业 1,460,200 人，O*NET 增速类别为「远快于平均（7% 或更高）」。"
+              "餐厅菜单通常比快餐菜单更广；在有明确工位分工的厨房，厨师各自负责特定菜品。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
           "source_refs": [
-            "onet"
+            "editor",
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23841,12 +23815,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "更适合愿意在较高节奏、多菜品环境中协作出餐，并能接受晚班与周末排班的人。"
+              "可先向目标餐厅核对菜单范围、工位分工、协作要求及晚间或周末排班。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.choice",
           "source_refs": [
-            "onet"
+            "editor",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23874,7 +23849,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.work",
           "source_refs": [
-            "onet"
+            "cook-adjacent-short-order"
           ],
           "type": "prose"
         },
@@ -23883,11 +23858,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与快餐厨师的差别在菜单更窄、出品更快而点单更随机；2024 年就业 151,100 人，O*NET 增速为「下降（-1% 或更低）」。"
+              "按短单现做，可能直接收单，重点是让同单品项同步完成。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
           "source_refs": [
+            "cook-adjacent-short-order",
             "onet"
           ],
           "type": "prose"
@@ -23925,11 +23901,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别是重心在前台服务与装配，而不是按配方加热与装盒；2024 年就业 3,796,000 人，O*NET 增速类别为「快于平均（5% 至 6%）」。"
+              "更常负责接单、配餐和交付；是否上烹饪工位由雇主决定。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
           "source_refs": [
+            "dancing",
             "onet"
           ],
           "type": "prose"
@@ -23967,11 +23944,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别是不承担按订单加热与出品责任；2024 年就业 902,700 人，O*NET 增速为「下降（-1% 或更低）」，常作为进入厨房体系的起点。"
+              "重在洗切、称量和配料等备制，是否上灶看厨房分工。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.difference",
           "source_refs": [
+            "enrichment",
             "onet"
           ],
           "type": "prose"
@@ -24009,11 +23987,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别是不接触食品制备与出品，属支持性岗位；2024 年就业 477,700 人，O*NET 增速为「变化不大」。"
+              "主要清洁餐具和设备，可能兼顾其他辅助任务。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
           "source_refs": [
+            "announcing",
             "onet"
           ],
           "type": "prose"
@@ -24051,11 +24030,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是管理责任：承担菜单设计与成本核算、人员排班与培训、出品标准制定；准备层级为 Job Zone 3，2024 年就业 197,300 人。"
+              "常管理菜单、标准和人员；与按既定菜单执行的快餐工位分开核对。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.difference",
           "source_refs": [
+            "agent",
             "onet"
           ],
           "type": "prose"
@@ -24093,11 +24073,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表把快餐厨师与五个相邻方向，按职业方向、核心工作与产出、关键区别和更适合什么选择四项对照；就业与增速为美国 O*NET-SOC 口径（2024 年就业、2024—2034 年预测）。"
+              "把快餐烹制与柜台交付、切配、简餐出品和厨房带班分开比较。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.intro",
           "source_refs": [
+            "bls-family-context",
             "onet"
           ],
           "type": "prose"
@@ -24121,7 +24102,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "依据：O*NET OnLine 35-2011.00 与相邻职业的摘要页、就业趋势页（2026 年更新）；就业为 2024 年、增速为 2024—2034 年预测期口径，不用于推断个人录用机会或收入。"
+              "职责对照来自 O*NET 职业档案；各行注明的数据只适用于美国及其标注年份。比较岗位时以工位实际职责为准。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.evidence_note",
@@ -24135,7 +24116,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下一步：用本页的练习材料或一次跟班体验，核对目标方向的真实排班、温控与协作要求，再决定方向。"
+              "先用本页纸面练习核对排班、温控记录和协作要求。也可经门店同意后跟班观察，由门店人员操作设备并决定放行。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.transition",
@@ -24232,13 +24213,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有可核对的本职业因果数据。技术能力、组织采用与用工数量是三个不同层次，本页不把其中任何一层写成结论。"
+              "本页所核资料未提供这个职业的采用率或就业因果数据。O*NET 用于核对任务和工作情境。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26073,7 +26053,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "sag-moa"
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -26082,12 +26062,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025住宿餐饮业城镇单位税前年均工资非私营62,461／私营55,123元，原数正确；覆盖5人及以上法人全岗位、含奖金津补贴，不含个体及自由职业，非快餐厨师中位或到手。另有该行业农民工月均4,208元、同比1.6%，人口口径不同，不合成工资区间或互相折算。精确职业工资、分位与招聘统计缺口保留。"
+              "国家统计局的住宿和餐饮业城镇单位平均工资覆盖行业内多种岗位，只用于行业背景。农民工调查采用另一人口口径，不与城镇单位数据换算。全国职业工资与报价分布仍未核到；本页招聘个案单列。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "sag-moa"
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -26129,7 +26109,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -26138,12 +26118,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的快餐厨师招聘报价统计；单条单位或平台报价不能代表全国水平"
+              "娄底通程店的一条肯德基兼职招聘把内场食品制作、器具清洁与外场服务分开，列综合薪资 3,000–3,500 元，按时薪月结，含全勤奖及早晚班、节假日补贴。杭州余杭的一条后厨总配兼职同样列出制作和设备消杀，职位正文的薪资栏未显示具体金额。比较邀约时，先确认总配负责哪些餐品制作、装配和清洁任务，再问基础时薪、可排班小时数和补贴条件。这两条样本不能得出全国职业工资。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "fast-loudi",
+            "fast-hangzhou"
           ],
           "type": "prose"
         },
@@ -26152,7 +26133,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：美国口径下快餐厨师多数岗位不要求正式学历，准备层级为 Job Zone 1–2（SVP 低于 6.0）；O*NET 摘要页的教育需求受访比例显示 63% 表示低于高中文凭、21% 表示高中或同等学历、12% 表示部分大学无学位。美国口径与国内要求不可直接等同，具体以目标单位当年招聘与培训要求为准。"
+              "编辑整理：美国口径下快餐厨师多数岗位不要求正式学历，准备层级为 Job Zone 1–2（SVP 低于 6.0）；O*NET 摘要页的新员工所需学历的回答比例显示 63% 表示低于高中文凭、21% 表示高中或同等学历、12% 表示部分大学无学位。美国口径与国内要求不可直接等同，具体以目标单位当年招聘与培训要求为准。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -26171,6 +26152,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
+            "cn-food-law",
             "sag-moa"
           ],
           "type": "prose"
@@ -26236,12 +26218,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025住宿餐饮业城镇单位税前年均工资非私营62,461／私营55,123元，原数正确；覆盖5人及以上法人全岗位、含奖金津补贴，不含个体及自由职业，非快餐厨师中位或到手。另有该行业农民工月均4,208元、同比1.6%，人口口径不同，不合成工资区间或互相折算。精确职业工资、分位与招聘统计缺口保留。"
+              "2025 年，住宿和餐饮业城镇单位就业人员年平均工资为非私营单位 62,461 元、私营单位 55,123 元。同年，另一项调查的住宿和餐饮业农民工月均收入为 4,208 元，同比增长 1.6%。两表的调查人群与时间单位不同，均为行业背景。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "r2-pay-1",
+            "nbs-migrant-context"
           ],
           "type": "prose"
         }
@@ -26453,13 +26436,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前O*NET快餐97%住宿餐饮、3%其他，为就业行业占比且未明年度，不是工资。具体便利店或团餐是否该职业，须核实际任务。"
+              "O*NET 2025 年的美国快餐厨师主要行业为住宿与餐饮服务，就业占比 97%。具体便利店或团餐是否该职业，须核实际任务。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26468,13 +26450,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业合计占 3%，O*NET 未进一步细分；该行不是工资中位数，只是就业分布。"
+              "其余行业合计约 3%，来自未单列年份的 O*NET 分行业表。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -26483,7 +26464,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "便利店热食可作任务场景，但当前行业页未进一步拆分其他3%；本轮未取得快餐按行业工资，不由家族行业时薪代填。"
+              "便利店热食岗位是否属于本职业，须核岗位职责。现有来源缺本职业分行业工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
@@ -27871,7 +27852,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用本页虚构练习或一次跟班体验核对真实条件，并把观察结果与目标门店的排班、设备与协作要求逐项对照。"
+              "先用本页的虚构工单，观察自己是否愿意反复核记录、写交接。真实排班、设备和协作方式，可以向目标门店询问，或在门店允许时跟班观察。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.next.answer",
@@ -28513,13 +28494,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期暴露可能造成皮肤、听力与关节问题，并影响持续出勤。"
+              "当班留意高温、噪声和重复动作的暴露情境。现场措施和异常报告按门店程序执行。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28528,13 +28508,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS表1.2快餐厨师35-2011：2025就业640,500人、2035预测644,100人，公布净增3,600人、增长0.6%，年均空缺86,400个（含转职业及退出劳动市场等替换）。OOH及O*NET将增速四舍五入为1%。不是家族增长7%或简餐下降5%，空缺不是净增、当前招聘或个人录用率；自雇比例表中为未提供，不能解释为零。不提供伤害排名或诊断。"
+              "发现食品安全事故潜在风险时，员工立即按门店流程上报。依据《食品安全法》第 47 条，食品生产经营者应立即停止食品生产经营活动，并向所在地县级人民政府食品安全监督管理部门报告。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -28611,15 +28590,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本页不引用具体在招公告，也不把历史招聘案例计为在招岗位；中国大陆的招聘条件须按目标单位当年公告核对。",
+              "本页引用娄底与杭州两条招聘样本。岗位是否仍在招聘，及具体条件，以目标门店最新公告为准。",
               "问答与情景观察为编辑设计的候选核查方式，本页没有真实雇主验证流程分布，不称常见或统一招聘方式。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "fast-loudi",
+            "fast-hangzhou"
           ],
           "type": "notice"
         },
@@ -28698,7 +28676,7 @@
                 "values": [
                   "学历与专业背景要求",
                   "BLS本岗典型无正式学历；国内初中高中偏好或中职优势比例未取得，按实际公告核，不由美国教育分布外推。",
-                  "美国快餐厨师Zone1–2/SVP低于6；几天至一年训练是层级概述，不是统一课程。受访教育63%低于高中、21%高中或同等、12%部分大学课程且未获学位，是部分响应，非中国门槛。BLS本职业典型无正式学历、无相关职业经验、短期在职训练，不等于免食安训练或任职资格核对。"
+                  "美国快餐厨师Zone1–2/SVP低于6；几天至一年训练是层级概述，不是统一课程。针对新员工完成工作所需学历的调查，受访者回答为 63%低于高中、21%高中或同等、12%部分大学课程且未获学位，是部分响应，非中国门槛。BLS本职业典型无正式学历、无相关职业经验、短期在职训练，不等于免食安训练或任职资格核对。"
                 ]
               },
               {
@@ -28729,6 +28707,7 @@
           },
           "id": "actors.path.employer-evidence.1",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -28915,6 +28894,7 @@
           },
           "id": "actors.path.credential-decision.1",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -28928,13 +28908,14 @@
           "data": {
             "paragraphs": [
               "健康证明、食品安全知识培训、技能评价和设备训练分别核；单位制度不能替代適用法定健康与食品安全要求，学历不代表食品安全技能。",
-              "美国快餐厨师Zone1–2/SVP低于6；几天至一年训练是层级概述，不是统一课程。受访教育63%低于高中、21%高中或同等、12%部分大学课程且未获学位，是部分响应，非中国门槛。BLS本职业典型无正式学历、无相关职业经验、短期在职训练，不等于免食安训练或任职资格核对。",
+              "美国快餐厨师Zone1–2/SVP低于6；几天至一年训练是层级概述，不是统一课程。针对新员工完成工作所需学历的调查，受访者回答为 63%低于高中、21%高中或同等、12%部分大学课程且未获学位，是部分响应，非中国门槛。BLS本职业典型无正式学历、无相关职业经验、短期在职训练，不等于免食安训练或任职资格核对。",
               "中国食品安全法2025修正第44条要求食品生产经营企业对职工开展食品安全知识培训；第45条要求从事接触直接入口食品工作的食品生产经营人员每年健康检查、取得健康证明后上岗，并规定有碍食品安全疾病的岗位限制。健康证明、技能等级、食品安全培训与设备训练分别核，单位规定不能替代适用法定要求。技能评价现行报名与设备训练另核，不称所有全国条件均未取得。",
               "任何资格与任职要求都应以雇主与主管部门的现行规定为准；本页不构成录用承诺、资格意见或作业授权建议。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -28947,14 +28928,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行通常不要求正式学历：快餐门店多从备料、煎炸与装配岗做起；能独立值守哪个工位、是否守住份量与温控标准、能否按格式记录，是比证书更可核对的准备证据。"
+              "美国劳工统计局把典型入行教育列为无需正式学历，并列短期在岗训练。大陆门店应另核安排到备料、烹制还是总配，接受过带教并获门店允许后，再承担独立操作。"
             ]
           },
           "id": "actors.path.career-path-block.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "bls-projections",
+            "fast-loudi",
+            "fast-hangzhou"
           ],
           "type": "prose"
         },
@@ -28963,7 +28944,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国快餐厨师Zone1–2/SVP低于6；几天至一年训练是层级概述，不是统一课程。受访教育63%低于高中、21%高中或同等、12%部分大学课程且未获学位，是部分响应，非中国门槛。BLS本职业典型无正式学历、无相关职业经验、短期在职训练，不等于免食安训练或任职资格核对。"
+              "美国快餐厨师Zone1–2/SVP低于6；几天至一年训练是层级概述，不是统一课程。针对新员工完成工作所需学历的调查，受访者回答为 63%低于高中、21%高中或同等、12%部分大学课程且未获学位，是部分响应，非中国门槛。BLS本职业典型无正式学历、无相关职业经验、短期在职训练，不等于免食安训练或任职资格核对。"
             ]
           },
           "id": "actors.path.career-path-block.2",
@@ -28984,6 +28965,7 @@
           },
           "id": "actors.path.career-path-block.3",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -28998,34 +28980,35 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "虚构工单材料（练习输入）",
-                  "虚构情境：一家虚构快餐门店周五晚市前收到四张订单——两份双层牛肉汉堡套餐、一份炸鸡套餐（顾客注明对花生过敏）、一份素食卷（不含乳制品）；当班油炸锅温度记录显示午间有一次 35 分钟异常升高，值班记录只写「已处理」。",
-                  "已给材料：四张订单的配方与份量标准；当班油炸锅与保温柜温度记录；食材批次与保质期台账；过敏原原料清单；清洁消毒程序摘要。",
-                  "未给材料：温度异常的具体原因、涉事食材与炸油是否已使用、是否需要报废的报批流程、当班人员配置。练习中如需要这些条件，请明确写出你的假设与需要确认的对象。"
+                  "四张虚构订单与当班记录",
+                  "B1、B2 各点一份双层牛肉汉堡，每份用两片牛肉饼。库存记录列四片已分配给本工位的牛肉饼。",
+                  "C1 是炸鸡套餐，订单注明花生过敏。F2 油炸锅午间有 35 分钟异常，交班只写「已处理」，无复核签名。C1 用的器具没有单独核对记录。",
+                  "V1 是素食卷，订单注明不含乳制品，酱料配料栏为空。值班负责人核配料、器具及 F2 状态，并决定补货、订单调整、替代与放行。柜台只转达已确认的信息。",
+                  "单项变式：库存记录从四片牛肉饼改为三片。四张订单、器具和 F2 记录都保持原样。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "任务要求",
-                  "请写出一页当班处置与出餐方案：包含订单与过敏原核对、涉事食材与炸油的判断与处置、设备加热与保温要求、装盒与交付安排、需要停出或上报的情形，以及交接给下一班的事项。",
-                  "方案要写明哪些数据来自题面材料、哪些还是假设，并说明依据的是配方、温控记录还是程序摘要。"
+                  "一页交接",
+                  "逐单记录需求、限制、证据、状态和接手人。B1/B2 的共用库存与 F2 各自单列。",
+                  "保留两版，另写变式的共用库存行及变化依据。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "参考交付（可从题面推导）",
-                  "方案应包含：核对（四张订单的过敏原与饮食限制分别标注，炸鸡套餐排除花生交叉接触）、食材与炸油判断（午间温度异常期间的炸油与涉事食材须暂缓使用并上报，不能仅凭「已处理」记录放行）、设备加热与保温（汉堡肉与炸鸡按品项要求核对中心温度与保温时间）、装盒与交付（过敏原专用器具与工位隔离，外卖订单核对批次与时效）、异常处置（温度异常未定性前停止使用涉事炸油与食材并上报，由授权人员决定报废或放行）、记录与交接（写清温度异常时段、涉事批次、已采取处置与待确认事项）。",
-                  "参考交付只列应包含的要素，不要求与示例措辞一致；能说明判断依据即可。"
+                  "先独立完成",
+                  "完成第六天交接前先保留自己的判断。",
+                  "第七天到「常见问题与资料来源」打开「快餐厨师晚市工单参考答案（完成第六天后再打开）」。"
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "边界与不可推断的结论",
-                  "本题只检验卫生与温控意识、过敏原核对与记录组织能力，不评价真实门店的安全性，也不构成录用、资格判断或真实食品安全处置建议。",
-                  "不得使用真实门店的顾客信息、经营数据或事故资料；涉及真实食品安全判断时须按所在单位与主管部门规定执行。"
+                  "练习边界",
+                  "只在纸面比较工单和记录。实际门店按所在地要求与机构规程操作。",
+                  "你负责记录、标待核并交接。"
                 ]
               }
             ]
@@ -29036,7 +29019,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "虚构练习材料：门店晚市订单处置",
+          "title": "虚构晚市工单：出餐前核对",
           "type": "cards"
         },
         {
@@ -29047,50 +29030,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "第 1 天：读一份公开食品安全材料",
-                  "找一份公开的食品处理与卫生要求材料（例如官方食品安全指导材料），标出三条与温度控制、生熟分区或过敏原有关的要求，写下你想确认的地方。"
+                  "第 1 天",
+                  "抄录 B1、B2、C1 和 V1 的限制。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "第 2 天：整理一份份量核对清单",
-                  "用虚构快餐配方，把验收、称量、分份与装盒整理成一份可执行清单，并注明发现变质、异物或过敏原污染时的动作与上报对象。"
+                  "第 2 天",
+                  "算牛肉饼需求并对照库存。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第 3 天：做一次设备温控判读",
-                  "用虚构的冷藏、油炸与保温温度记录，判断哪一时段的读数异常、可能的原因方向，并说明依据。"
+                  "第 3 天",
+                  "检查 F2 的交班和复核字段。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "第 4 天：写一次异常处置",
-                  "写出一次设备温度异常或异物处置的顺序：停出、隔离、上报、复核与恢复条件，并注明哪些步骤必须由授权人员确认。"
+                  "第 4 天",
+                  "比对 C1 的器具记录与 V1 的配料栏。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "第 5 天：写一次过敏原核对",
-                  "用一个虚构点单，写出过敏原原料、器具与工位的隔离方案，以及如何向柜台或顾客说明。"
+                  "第 5 天",
+                  "为待核项写接手人和原记录。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第 6 天：写一次收档交接",
-                  "用虚构数据写一份收档记录，包含产量、废弃与温控数据、未处理异常与需要下一班确认的事项。"
+                  "第 6 天",
+                  "独立交一页，写原题四单、F2 和 B1/B2 共用库存，另列变式的共用库存行、证据、状态和接手人。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第 7 天：判断是否继续",
-                  "回到本页的判断清单，写下你愿意继续的三条理由与需要慎重的两条条件。"
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「快餐厨师晚市工单参考答案（完成第六天后再打开）」。 记一处修订。"
                 ]
               }
             ]
@@ -29109,13 +29092,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "具体变化：你是否能在给定订单与设备温控条件下写清停出、隔离与恢复条件，而不是只写「注意卫生」。",
-              "事实与选择：你更愿意做连锁快餐门店、便利店热食，还是外卖集中门店与团餐窗口方向。",
-              "练习消耗：长时间站立、热与油、重复的称量与装盒、按格式填写记录，哪一步最消耗你，你能否接受它在每个班次中反复出现。",
-              "材料边界：练习材料均为虚构或以公开资料为基础，不得写入真实门店的顾客信息、经营数据或事故资料。",
-              "反馈反应：当你的方案被指出遗漏过敏原隔离或温控记录项目时，你是否愿意回到配方与程序依据补齐。",
-              "过程兴趣：即使流程重复，你是否愿意每次都完成点单核对、份量核对与记录，而不是凭经验跳过确认步骤。",
-              "下一步：如果前六步你都愿意继续，下一步是在合规前提下（如门店内训、食品安全课程或开放式厨房体验）完成一次从点单、备料、加热到装盒与收档记录的闭环并请有经验的门店人员评阅；如果某一步明显消耗，先缩小方向再验证。"
+              "用参考核用量、待核字段和交接。",
+              "区分数量齐全与取得出餐授权。",
+              "记下哪个记录最容易漏看。",
+              "练习使用虚构订单和记录。",
+              "改写一条待核事项的依据。",
+              "确认原题和变式的判断都留有记录。",
+              "把排班、培训和实际岗位条件留给雇主核实。"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -29217,6 +29200,7 @@
           },
           "id": "actors.display.career_path_block.locale.credentials",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -29425,6 +29409,7 @@
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -29761,6 +29746,7 @@
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -30097,6 +30083,7 @@
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -30257,6 +30244,7 @@
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.03.credentials",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -30364,14 +30352,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS表1.2快餐厨师35-2011：2025就业640,500人、2035预测644,100人，公布净增3,600人、增长0.6%，年均空缺86,400个（含转职业及退出劳动市场等替换）。OOH及O*NET将增速四舍五入为1%。不是家族增长7%或简餐下降5%，空缺不是净增、当前招聘或个人录用率；自雇比例表中为未提供，不能解释为零。典型教育训练核BLS；Zone及受访教育另核O*NET。"
+              "BLS表1.2快餐厨师35-2011：2025就业640,500人、2035预测644,100人，公布净增3,600人、增长0.6%，年均空缺86,400个（含转职业及退出劳动市场等替换）。OOH及O*NET将增速四舍五入为1%。不是家族增长7%或简餐下降5%，空缺不是净增、当前招聘或个人录用率；自雇比例表中为未提供，不能解释为零。典型教育训练核BLS；Zone及新员工所需学历调查另核O*NET。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -31000,7 +30986,7 @@
           "data": {
             "entries": [
               {
-                "answer": "读取点单条或口头指令、接受点单与收款、按快餐配方称量与切配、操作大容量设备按订单批量烹制与装盒、核对质量与数量、在窗口或柜台交付，随后清洁补货并记录；连锁门店、便利店热食与团餐窗口的侧重不同。",
+                "answer": "根据点单或工位指令按配方备料，用专用设备烹制并核对份量。分装、清洁和补货也可能在同一班次；部分门店另要求接单、收款或交付，先核岗位分工。",
                 "id": "actors.faq.1",
                 "question": "快餐厨师每天的具体工作是什么？",
                 "question_key": "career.faq.cooks-fast-food.1",
@@ -31009,85 +30995,95 @@
                 ]
               },
               {
-                "answer": "餐厅厨师的菜品范围与工位更多；食品柜台工人以前台点单、装配与交付为主；快餐厨师的职责限于菜单有限的少数基础品项，通常操作大容量单一用途设备。",
+                "answer": "快餐厨师围绕门店限定菜单烹制；餐厅厨师按菜单备料和烹调，大型餐厅可能有专门工位；柜台员工可接单、装配和交付。快餐厨师也可能接单或交付，分工以门店为准。",
                 "id": "actors.faq.2",
                 "question": "快餐厨师与餐厅厨师、食品柜台工人有什么区别？",
                 "question_key": "career.faq.cooks-fast-food.2",
+                "source_refs": [
+                  "onet",
+                  "editor",
+                  "adjacent-details-35-3023"
+                ]
+              },
+              {
+                "answer": "编辑判断：点单汇总、备料预测、库存提示与设备定时是可能的辅助用法。食材状态、设备异常、过敏原、份量与温控记录仍由门店人员按流程核验。现有职业档案可用来核对任务，本职业的采用率和就业影响仍待实测。 O*NET 仅用于核对职业任务背景。",
+                "id": "actors.faq.3",
+                "question": "AI 会怎样影响或取代快餐厨师？",
+                "question_key": "career.faq.cooks-fast-food.3",
                 "source_refs": [
                   "onet"
                 ]
               },
               {
-                "answer": "点单汇总、备料预测、库存提示与设备定时可由软件与程序化设备承担，自助点单与出餐传送也可能改变部分门店的分工；但食材状态判断、设备异常处置、过敏原隔离、装盒份量核对与温控记录仍依赖现场人员。技术暴露不等于组织采用或岗位消失。",
-                "id": "actors.faq.3",
-                "question": "AI 会怎样影响或取代快餐厨师？",
-                "question_key": "career.faq.cooks-fast-food.3",
-                "source_refs": [
-                  "bls"
-                ]
-              },
-              {
-                "answer": "可核对的是任务层面的变化：点单与库存信息、设备加热节拍、温控与记录三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "编辑示例：软件可整理点单、提示库存，设备可辅助计时。门店人员仍须核对设备状态、记录和异常处理。 O*NET 仅用于核对职业任务背景。",
                 "id": "actors.faq.4",
-                "question": "快餐厨师哪些任务已有 AI 变化证据？",
+                "question": "哪些任务可能由软件或设备辅助？",
                 "question_key": "career.faq.cooks-fast-food.4",
                 "source_refs": [
                   "onet"
                 ]
               },
               {
-                "answer": "设备操作与份量核对、过敏原隔离、温控记录、异常处置与交接，以及使用点单、库存与温控系统的基本操作。",
+                "answer": "编辑建议：练习核对份量、过敏原与温控记录，遇到异常时按门店流程交接。再向目标门店确认实际用到哪些点单、库存与温控系统。 O*NET 仅用于核对职业任务背景。",
                 "id": "actors.faq.5",
                 "question": "面对 AI，快餐厨师仍应重点验证哪些能力？",
                 "question_key": "career.faq.cooks-fast-food.5",
-                "source_refs": [
-                  "bls"
-                ]
-              },
-              {
-                "answer": "美国 2025 年中位时薪 14.85 美元、年薪 30,890 美元（35-2011.00 单一职业口径），分位为年薪 22,580／27,260／30,890／37,260／42,910 美元；中国大陆未取得职业级工资数值，本页按缺口处理，不用行业均值代填。",
-                "id": "actors.faq.6",
-                "question": "快餐厨师工资一般多少，应该怎样比较？",
-                "question_key": "career.faq.cooks-fast-food.6",
-                "source_refs": [
-                  "oews"
-                ]
-              },
-              {
-                "answer": "美国多数岗位不要求正式学历，准备层级为 Job Zone 1–2，技能主要靠在职训练；国内门店多从备料与装配岗做起，部分连锁企业要求完成企业内训或食品安全培训。",
-                "id": "actors.faq.7",
-                "question": "快餐厨师需要什么学历，又该怎样训练？",
-                "question_key": "career.faq.cooks-fast-food.7",
                 "source_refs": [
                   "onet"
                 ]
               },
               {
-                "answer": "美国没有统一的强制证照；国内健康管理与食品安全培训是常见前置条件，中式烹调师技能等级通常不是快餐门店一线岗位的门槛，具体要求按目标单位与主管部门规定。",
+                "answer": "美国 2025 年中位时薪为 14.85 美元、年工资中位数为 30,890 美元。中国大陆未取得这一职业全国工资分布；页面另列两条招聘样本。比较时先核岗位职责、基本工资和补贴，不能用样本推算全国工资。",
+                "id": "actors.faq.6",
+                "question": "快餐厨师工资一般多少，应该怎样比较？",
+                "question_key": "career.faq.cooks-fast-food.6",
+                "source_refs": [
+                  "r2-pay-3",
+                  "fast-loudi",
+                  "fast-hangzhou"
+                ]
+              },
+              {
+                "answer": "美国劳工统计局将本岗位的典型入行教育列为无需正式学历，并列在岗训练。中国大陆岗位应查实际招聘、门店带教和法定食品安全条件，不把美国统计当国内录用标准。",
+                "id": "actors.faq.7",
+                "question": "快餐厨师需要什么学历，又该怎样训练？",
+                "question_key": "career.faq.cooks-fast-food.7",
+                "source_refs": [
+                  "bls-projections",
+                  "cn-food-law"
+                ]
+              },
+              {
+                "answer": "中国大陆《食品安全法》第44条要求食品生产经营企业对职工开展食品安全知识培训，第45条要求接触直接入口食品的从业人员每年体检、取得健康证明后方可上岗。健康证明与中式烹调师技能等级不同；用人单位是否要求后者，须核对该岗位。美国食品从业认证因州和地方而异。 发现食品安全事故潜在风险时，员工立即按门店流程上报。依据《食品安全法》第 47 条，食品生产经营者应立即停止食品生产经营活动，并向所在地县级人民政府食品安全监督管理部门报告。",
                 "id": "actors.faq.8",
                 "question": "做快餐厨师必须考证吗？",
                 "question_key": "career.faq.cooks-fast-food.8",
                 "source_refs": [
-                  "cn-rule"
+                  "cn-food-law",
+                  "cn-cook-profile-2022",
+                  "bls-family-context"
                 ]
               },
               {
-                "answer": "先用本页虚构点单完成一次「点单—备料—加热—装盒—记录」练习，或到门店做一次跟班体验，再核对目标门店的排班、设备与卫生要求。",
+                "answer": "先用本页的虚构晚市工单完成一页纸面交接，核对数量、订单限制与当班记录。再向目标门店了解排班、设备和卫生要求。",
                 "id": "actors.faq.9",
                 "question": "零基础想尝试快餐厨师工作，应该先做什么？",
-                "question_key": "career.faq.cooks-fast-food.9",
-                "source_refs": [
-                  "bls"
-                ]
+                "question_key": "career.faq.cooks-fast-food.9"
               },
               {
-                "answer": "美国官方预测显示 2024—2034 年该职业就业下降 -14%，但同期仍有约 82,100 个年均空缺，主要来自替换需求；择业时要按目标门店类型与本地招聘核对。",
+                "answer": "美国劳工统计局预计，快餐厨师就业在 2025–2035 年增长 0.6%，每年平均约有 86,400 个空缺，包含替补需求。这是美国全国预测；看大陆机会时，要分清实际负责烹制的工位、兼顾前台的门店岗位和单纯备料岗。",
                 "id": "actors.faq.10",
                 "question": "现在选择快餐厨师职业，还应考虑什么？",
                 "question_key": "career.faq.cooks-fast-food.10",
                 "source_refs": [
-                  "bls"
+                  "bls-projections"
                 ]
+              },
+              {
+                "answer": "B1/B2 共用库存行：原题两单共需四片，分配四片，数量够用，放行仍由值班负责人决定。变式分配三片，短一片。两单均标待负责人决定，不自行分配或换料。值班负责人决定补货、订单调整、替代和放行。 F2 的「已处理」缺复核签名，保留记录，把该工位和相关批次标为待核，交值班负责人。C1 有花生过敏备注、器具待核；V1 要求不含乳制品、酱料配料待核。两单先保留待确认状态，值班负责人核，柜台转达已确认信息。自核四项：两版数量差、F2 依据、C1 与 V1 分别待核、状态和接手人。每项齐全计一项。",
+                "id": "actors.faq.11",
+                "question": "快餐厨师晚市工单参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.cooks-fast-food.11"
               }
             ]
           },
@@ -31132,7 +31128,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "当前快餐任务情境、招聘技术及行业核O*NET；2025—2035预测核BLS表1.2与O*NET同期间，2025工资核全国五分位；中国背景核NBS，健康食安核2025修正食品安全法；ILO/NIST为方法及自愿治理，相邻任务仅用于对应转向。"
+              "当前快餐任务情境、招聘技术及行业核O*NET；2025—2035预测核BLS表1.2与O*NET同期间，2025工资核全国工资分位数；中国背景核NBS，健康食安核2025修正食品安全法；ILO/NIST为方法及自愿治理，相邻任务仅用于对应转向。"
             ]
           },
           "id": "actors.display.source_card.source",
@@ -31421,7 +31417,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "employer",
-                "limitation": "支持快餐厨师的准备层级（Job Zone 1–2）、教育需求受访比例（63% 低于高中文凭、21% 高中或同等学历、12% 部分大学无学位）与兴趣代码（RCE）；不代表具体雇主的招聘条件，也不等同于中国大陆的要求。",
+                "limitation": "支持快餐厨师的准备层级（Job Zone 1–2）、新员工所需学历的回答比例（63% 低于高中文凭、21% 高中或同等学历、12% 部分大学无学位）与兴趣代码（RCE）；不代表具体雇主的招聘条件，也不等同于中国大陆的要求。",
                 "market": "美国",
                 "name": "O*NET OnLine：Cooks, Fast Food 摘要（35-2011.00）",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31510,14 +31506,14 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "支持本职业的任务、工作情境与准备层级。",
                   "不含技术采用与岗位替代数据。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "快餐摘要支持身份与任务概述；细分类别、情境与兴趣核详细页，行业97/3当前未明年度；不含本岗AI采用或就业因果。",
+                "limitation": "职业档案支持职业身份、任务、工作情境和培训分区。该页列出新员工所需学历的部分调查回答：低于高中 63%、高中或同等 21%、部分大学课程且未获学位 12%。这些回答属于美国调查。本职业的 AI 采用率与就业影响仍待实测。",
                 "market": "美国",
                 "name": "O*NET OnLine：Cooks, Fast Food（35-2011.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31549,7 +31545,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "NBS2025住宿餐饮业城镇单位税前年均工资非私营62,461／私营55,123元，原数正确；覆盖5人及以上法人全岗位、含奖金津补贴，不含个体及自由职业，非快餐厨师中位或到手。另有该行业农民工月均4,208元、同比1.6%，人口口径不同，不合成工资区间或互相折算。精确职业工资、分位与招聘统计缺口保留。另有批发零售2025非私营135749／私营69622元年均，按主营选择，非职业工资。",
+                "limitation": "表 2 和表 5 提供 2025 年住宿和餐饮业城镇非私营、私营单位年平均工资，覆盖行业内多个岗位。快餐厨师职业工资需单独查证。 表 2 和表 5 也分别列出批发和零售业。",
                 "market": "中国内地",
                 "name": "2025 年城镇单位就业人员年平均工资情况（住宿和餐饮业）",
                 "period": "2025工资；同批次同版查读2026-10-09",
@@ -31826,7 +31822,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls-projections",
-                "limitation": "BLS表1.2快餐厨师35-2011：2025就业640,500人、2035预测644,100人，公布净增3,600人、增长0.6%，年均空缺86,400个（含转职业及退出劳动市场等替换）。OOH及O*NET将增速四舍五入为1%。不是家族增长7%或简餐下降5%，空缺不是净增、当前招聘或个人录用率；自雇比例表中为未提供，不能解释为零。美国快餐厨师Zone1–2/SVP低于6；几天至一年训练是层级概述，不是统一课程。受访教育63%低于高中、21%高中或同等、12%部分大学课程且未获学位，是部分响应，非中国门槛。BLS本职业典型无正式学历、无相关职业经验、短期在职训练，不等于免食安训练或任职资格核对。",
+                "limitation": "BLS 表 1.2 列出美国 35-2011 的就业基期、预测及年均空缺。空缺包含增长与替补。该表也列出典型入行学历、相关经验和在职训练。",
                 "market": "美国",
                 "name": "BLS表1.2快餐厨师35-2011",
                 "period": "2025—2035预测及2025典型准备；查读2026-10-09",
@@ -31835,16 +31831,16 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "页面更新日不自动等于统计年。"
+                  "其余行业合计约 3%，来自未单列年份的 O*NET 分行业表。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet-industry",
-                "limitation": "97%住宿餐饮、3%其他是本职业行业就业占比；非工资，未进一步拆分其他。",
+                "limitation": "独立分行业表未标年份。97% 和 2025 年见同职业详细页。",
                 "market": "美国",
                 "name": "O*NET快餐行业就业分布",
-                "period": "当前页面未明年度；查读2026-10-09",
+                "period": "分行业表未标数据年",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/35-2011.00"
@@ -31896,6 +31892,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "公开正文列娄星区、10 人，内场制作食品、清洁器具；时薪月结，综合 3,000–3,500 元，含全勤奖和早晚班、节假日补贴。公告是否仍在招未核。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "fast-loudi",
+                "limitation": "仅该条招聘；不代表职业工资或仍有空缺。",
+                "market": "中国大陆",
+                "name": "通程店兼职后厨、总配",
+                "period": "2026-11-09 查阅；不以动态发布日期判断有效性",
+                "publisher": "娄底人才网／肯德基有限公司娄底分公司",
+                "scope": "recruitment_proxy",
+                "url": "https://www.ldrcw.com/post/3035736.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "兼职岗位说明分列前台点餐配餐和后厨制作、设备清洁消杀；工资栏未公开具体金额。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "fast-hangzhou",
+                "limitation": "仅该条招聘；不代表职业工资或仍有空缺。",
+                "market": "中国大陆",
+                "name": "杭州余杭肯德基后厨总配服务员",
+                "period": "2026-11-09 查阅；未见发布日期",
+                "publisher": "智联招聘／杭州肯德基有限公司",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhaopin.com/jobdetail/CC140408480J40949214808.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Tasks：安排同一订单的各品项同步完成。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "cook-adjacent-short-order",
+                "limitation": "用于相邻职业任务对照。",
+                "market": "美国",
+                "name": "O*NET：简餐厨师（35-2015.00）",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2015.00"
               }
             ]
           },
@@ -31963,6 +32004,14 @@
           {
             "href": "https://www.onetonline.org/link/summary/35-1011.00",
             "label": "O*NET：厨师长与主厨 35-1011.00"
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/35-2021.00",
+            "label": "O*NET 食品制备人员 35-2021"
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/35-9021.00",
+            "label": "O*NET 洗碗工 35-9021"
           }
         ],
         "evidence_note": {
@@ -32808,13 +32857,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "来源": {
-              "$source": "sag-moa",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "actors.source-register.published.1"
-            },
+            "来源": "O*NET 职业任务与工作情境",
             "链接": {
               "$source": "sag-moa",
               "block": "source-register",
@@ -33423,15 +33466,15 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
-            "id": "bls",
+            "id": "bls-projections",
             "label": {
-              "$source": "bls",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34565,15 +34608,15 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "cn-food-law",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
-            "id": "bls",
+            "id": "cn-food-law",
             "label": {
-              "$source": "bls",
+              "$source": "cn-food-law",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34677,24 +34720,6 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
-          },
-          {
-            "href": {
-              "$source": "cn-food-law",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            },
-            "id": "food-law",
-            "label": {
-              "$source": "cn-food-law",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "actors.source-register.published.1"
-            },
-            "scope": "中国适用食品经营活动：食品安全法44/45/55/56/57相关法定义务，经营主体与岗位分工另核"
           }
         ]
       },
@@ -34840,7 +34865,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_ref": "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_ref": "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；国家统计局《2025 年农民工监测调查报告》｜https://www.stats.gov.cn/sj/zxfb/202604/t20260430_1963472.html",
           "china_salary_note": {
             "$item": "actors.display.career_snapshot_primary_locale.boundary",
             "block": "china-salary",
@@ -34885,16 +34910,17 @@
               }
             }
           ],
-          "china_soc_row": "美国职业代码：O*NET-SOC 35-2011.00（Cooks, Fast Food）；美国工资与就业数值为该单一职业口径，中国大陆未建立与之对应的职业级工资口径。",
+          "china_soc_row": "国内近源按门店和工位理解，本页未核得中国大陆这一职业的全国工资分布；美国工资及就业只适用于相应美国职业。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-fast-loudi",
+            "posting-fast-hangzhou"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响快餐厨师的工资吗？",
             "driver_heading": "哪些行业与场景会用到快餐厨师？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "准备方向与岗位任务怎样核对？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36654,7 +36680,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解快餐厨师的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36766,14 +36792,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解我的人格偏好"
@@ -37186,60 +37204,63 @@
       },
       {
         "derivation": null,
-        "display_value": "约 669,500 人（2024 年）",
+        "display_value": "640,500人（2025）",
         "fact_id": "employment",
         "market": "美国",
-        "measure": "就业规模（单一职业口径）",
-        "occupation_scope": "Cooks, Fast Food（O*NET-SOC 35-2011.00）",
-        "period": "2024 年；检索 2026-09-18",
+        "measure": "基期就业",
+        "occupation_scope": "35-2011快餐厨师精确行，非家族",
+        "period": "2025—2035（2025基年）；查读2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "下降 -14%（2024—2034 年；就业由 669,500 人降至 579,200 人，净变化约 -90,300 人）",
+        "display_value": "+0.6%（2025—2035；OOH/O*NET整数1%）",
         "fact_id": "growth",
         "market": "美国",
-        "measure": "就业变化率（单一职业口径）",
-        "occupation_scope": "Cooks, Fast Food（O*NET-SOC 35-2011.00）；O*NET 分类标签为「Decline（-1% 或更低）」",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "measure": "变化百分比",
+        "occupation_scope": "35-2011快餐厨师精确行，非家族",
+        "period": "2025—2035（2025基年）；查读2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 82,100 个/年（2024—2034 年年均职位空缺，含增长与替换需求）",
+        "display_value": "86,400个/年（2025—2035年均，含替换）",
         "fact_id": "openings",
         "market": "美国",
-        "measure": "年均职位空缺（单一职业口径）",
-        "occupation_scope": "Cooks, Fast Food（O*NET-SOC 35-2011.00）；O*NET 说明年均空缺包含增长需求与替换需求",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "measure": "年均空缺",
+        "occupation_scope": "35-2011快餐厨师精确行，非家族",
+        "period": "2025—2035（2025基年）；查读2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "住宿餐饮97%（当前快餐行业就业占比，未明年度）",
+        "display_value": "住宿与餐饮服务 97%",
         "fact_id": "industry-theater",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
         "occupation_scope": "35-2011快餐当前行业分布，非工资",
-        "period": "当前未明年度；查读2026-10-09",
+        "period": "2025",
         "source_refs": [
-          "onet-industry"
+          "sag-moa"
         ]
       },
       {
         "derivation": null,
-        "display_value": "其他行业3%（当前快餐就业占比，未明年度）",
+        "display_value": "其余行业 3%（独立表未单标年份）",
         "fact_id": "industry-education",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
         "occupation_scope": "35-2011快餐当前行业分布，非工资",
-        "period": "当前未明年度；查读2026-10-09",
+        "period": "分行业表未标数据年",
         "source_refs": [
           "onet-industry"
         ]
@@ -37347,7 +37368,7 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "derivation": "按三项选定任务等权汇总的编辑估算（0–100），不表示被替代概率。 三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
         "display_value": "25%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
@@ -37357,6 +37378,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "公开正文列娄星区、10 人，内场制作食品、清洁器具；时薪月结，综合 3,000–3,500 元，含全勤奖和早晚班、节假日补贴。公告是否仍在招未核。",
+        "fact_id": "posting-fast-loudi",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "通程店兼职后厨、总配",
+        "period": "2026-11-09 查阅；不以动态发布日期判断有效性",
+        "source_refs": [
+          "fast-loudi"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "兼职岗位说明分列前台点餐配餐和后厨制作、设备清洁消杀；工资栏未公开具体金额。",
+        "fact_id": "posting-fast-hangzhou",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "杭州余杭肯德基后厨总配服务员",
+        "period": "2026-11-09 查阅；未见发布日期",
+        "source_refs": [
+          "fast-hangzhou"
+        ]
       }
     ]
   },
@@ -37365,7 +37410,7 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 影响编辑指数：25/100，基于三项任务"
     },
     "badges": [
       "服务与运营 · 快餐食品制备与出餐",
@@ -37383,19 +37428,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，下降 -14%；净变化约 -90,300 人）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 669,500 人）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，约 82,100 个）"
+        "label": "美国预计年均职位空缺（2025–2035 年）"
       },
       {
         "availability": "missing",
@@ -37409,14 +37454,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "快餐厨师（O*NET-SOC 35-2011.00）在菜单有限的快餐店准备与烹饪食品：按点单条或口头指令称量、切配、加热与装盒，操作大容量单一用途设备，核对质量与数量，装盒交付并清洁补货；含美国 2025 年中位时薪 14.85 美元、2024—2034 年就业预测下降 -14% 与年均空缺约 82,100 个、中国大陆职业级工资缺口、灼伤割伤与食品安全风险控制及虚构练习边界。"
+      "text": "快餐厨师怎样按单备料、批量烹制和交付？对照大陆连锁门店的后厨与总配招聘样本，了解轮班、健康证明和美国工资与就业数据。"
     },
     "title": {
       "availability": "available",
       "text": "快餐厨师"
     }
   },
-  "source_content_sha256": "df0da73e55c611fb92c09af2055e1c2daa6594187f48f478bff0f429eaf8d058",
+  "source_content_sha256": "76da03b7047cb92005e47c5c0669806a14196bbb67255115e23a9868c0f2eb45",
   "subject": {
     "canonical_slug": "cooks-fast-food",
     "name": "快餐厨师",

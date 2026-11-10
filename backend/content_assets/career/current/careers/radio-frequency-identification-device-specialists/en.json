@@ -1269,7 +1269,7 @@
         "status": "mapped"
       },
       "item:radio-frequency-identification-device-specialists.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:radio-frequency-identification-device-specialists.path.interview-probation.1": {
         "status": "mapped"
@@ -23036,7 +23036,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "The checklists on this page are prompts for self-reflection only, not hiring criteria, personality evaluations or conclusions about ability. Authorization and boundaries vary considerably for RFID specialists: authority over site surveys, tag selection, tag data writing and system launch approval belongs to different roles. No checklist replaces checking the actual authority and project scope of the target position."
+              "Ask whether the job focuses on selection, integration, testing, or deployment. Read pilot results within the tested conditions."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.quick-decision.fit-decision-checklist.1",
@@ -23051,7 +23051,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "First observe whether you can break vague tracking requirements into objects, processes, tags and environmental conditions, and determine whether existing systems can be reused. Then complete a full exercise using fictional materials F1—F5 in the entry module: check tag selection, read rates and data fields, and flag items requiring confirmation or escalation. The exercise requires only paper and text files, with no real tags, readers or customer systems needed."
+              "In section 09, “Entry, qualifications, and career development,” try RF-I01: Check RFID pilot read rates and duplicate events. Save a first draft before checking the key."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.quick-decision.fit-decision-checklist.2",
@@ -23065,7 +23065,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals worth considering include willingness to repeatedly test read rates under site conditions, accurately record failures and boundaries, and accept that business and project leads decide launches. Reasons for caution include treating one experiment's read rate as a universal conclusion or changing site configurations and production data without authorization."
+              "Consider this work if you like tracing read behavior across tags, readers, and system events."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.quick-decision.fit-decision-checklist.3",
@@ -23081,7 +23081,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "This card's conclusions come from public occupational task information and editorial synthesis. They are not your personal assessment results and do not predict employment outcomes. RFID specialists' actual tasks depend on the employer, industry and project boundaries; the same Chinese title may involve entirely different duties and authority at different companies."
+              "Check reads, events, and business records by object and test condition."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.quick-decision.fermat-decision-card.6",
@@ -23096,7 +23096,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "If you are willing to connect physical sites with information systems and use experiments and data to assess feasibility, this work is worth exploring. First clarify three matters when assessing a position: whether you can independently conduct site surveys and recommend tag selection, who approves system configuration and production data changes, and to whom you escalate inadequate read rates."
+              "Consider this work if you like tracing read behavior across tags, readers, and system events."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.quick-decision.fermat-decision-card.7",
@@ -27443,31 +27443,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Computer Hardware Engineer",
@@ -28412,7 +28412,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Compare deliverables: requirements and selection explanations, read-rate test records, and interface and field definitions. Use F1—F5 for validation."
+              "Check reads, events, and business records by object and test condition."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.fit.personality-fit-block.55",
@@ -28456,7 +28456,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Try an entry exercise: use F1—F5 to review selection and test records for a fictional site and compare them with reference deliverables."
+              "Check reads, events, and business records by object and test condition."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.fit.personality-fit-block.58",
@@ -29152,7 +29152,7 @@
                 "System Integration Support Role",
                 "Assist with connecting interfaces and fields and checking data flow between systems.",
                 "Can you explain field meanings and interface boundaries and accurately record discrepancies?",
-                "Use the F3—F5 exercise to explain field and data verification.",
+                "Check reads, events, and business records by object and test condition.",
                 "Focused on interfaces and data, differing from on-site implementation roles."
               ],
               [
@@ -29203,9 +29203,9 @@
               {
                 "id": "clearance",
                 "values": [
-                  "Project and Information Security Checks",
-                  "Basic awareness of network and data permissions is often required; employers and customers agree access and change permissions for customer systems and production data.",
-                  "How to check: confirm employer account permissions, change processes and the scope of independent operation."
+                  "Henan procurement file: library RFID",
+                  "The technical requirements illustrate a library deployment with tags and reader equipment.",
+                  "Ask whether the job focuses on selection, integration, testing, or deployment. Read pilot results within the tested conditions."
                 ]
               },
               {
@@ -29219,9 +29219,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "Project Records You Can Show",
-                  "Editorial advice is to prepare requirements and selection notes, read-rate test records and interface field definitions for a fictional project, labeling test conditions and versions.",
-                  "How to check: ask someone to judge whether the basis for conclusions is complete using only the materials, rather than just the conclusion."
+                  "Tianjin Kunpeng RFID test engineer",
+                  "The 2021 posting archived by Hebei University of Technology lists reader and tag performance, consistency testing, and reports.",
+                  "The North American co-op lists automated tests, reader systems, and test reporting."
                 ]
               }
             ]
@@ -29229,7 +29229,10 @@
           "id": "radio-frequency-identification-device-specialists.path.employer-evidence.1",
           "source_refs": [
             "employer",
-            "editor"
+            "editor",
+            "d015-cn-main",
+            "d015-cn-context",
+            "d015-us-example"
           ],
           "title": "What Do Employers Usually Look for When Hiring?",
           "type": "cards"
@@ -29242,32 +29245,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and Scenario | All Data Are Fictional and Editorially Designed",
-                  "You are a project engineer at the fictional Yuansu Supply Chain Technology company. Review selection and test records for distribution center project P-3110 and recommend launch, corrective action or review. All materials and values below are entirely fictional, not real customers, equipment or test results.",
-                  "F1 Requirements and process: the distribution center handles about 8,000 shipping boxes daily and needs automatic records at receiving, sorting and shipping; the existing WMS accepts interface data. F2 Objects and environment: three categories—cardboard boxes, plastic totes and metal pallets; the sorting area has metal shelving and forklift aisles; ambient temperature is 5—35 ℃. F3 Tags and equipment: candidate ultra-high-frequency tags A (cardboard boxes), B (plastic totes) and C (metal pallets); 4 fixed readers and 2 handheld readers. F4 Test data: read rates of 99.2% for cardboard boxes, 98.7% for plastic totes and 82.4% for metal pallets (project requirement ≥ 95%); near metal shelving, the rate drops to 76%. F5 Conclusion and approval section: the draft says Overall requirements met; ready for launch, but retest and business confirmation fields are blank."
+                  "Fictional inputs",
+                  "Fictional pilot P6 counts passes rather than system events. Lane A has 40 passes, 39 with at least one matched event and 46 matched events in total. Lane B has 40 passes, 37 with at least one matched event and 37 matched events in total.",
+                  "Each lane requires at least a 95% read rate. Keep the pass-level log. The trial covers cartons only. Metal racks are untested and business-side deduplication is unverified.",
+                  "The test lead reviews the pilot, the system owner checks deduplication, and business acceptance decides whether to expand."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task",
-                  "Check F1—F5 item by item and state which results meet requirements, which need correction, which information is insufficient, and which unconfirmed items and approver must be included in the launch recommendation.",
-                  "Do not add equipment models, read rates or authorization information absent from the scenario; list unknowns separately."
+                  "Task and deliverable",
+                  "Submit two lane results and a retest recommendation. Include numerators, denominators, duplicates, missing coverage, and owners.",
+                  "Calculate pass-level read rate separately from event volume.",
+                  "Use paper or a local spreadsheet and identify the evidence."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference Deliverables",
-                  "Meets requirements: cardboard boxes at 99.2% and plastic totes at 98.7% both meet the project requirement (≥ 95%). Requires correction: metal pallets at 82.4% fall below the requirement, and the rate drops to 76% near metal shelving; adjust tag types or mounting locations and add readers if necessary before retesting. Requires verification: whether tag C is optimized for metal, the extent of metal-related interference with reading, and business confirmation of data fields and processes.",
-                  "The launch recommendation must state that metal pallets fail requirements and retest and business confirmation fields are blank, and must be approved by an authorized role. The engineer only submits recommendations."
+                  "Before checking your work",
+                  "Save your draft before checking the key after the seven-day plan.",
+                  "Work independently.",
+                  "Keep the versions.",
+                  "Leave missing evidence open."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries",
-                  "This exercise involves no real customers, real equipment or real production data. Actual selection, testing and launch follow employer and customer procedures. If you cannot judge, you may write Insufficient basis to judge and explain what evidence is missing."
+                  "Authority boundaries",
+                  "Use the fictional records only.",
+                  "Do not approve or release real work."
                 ]
               }
             ]
@@ -29276,7 +29284,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry Exercise: A Complete Office Support Task (Fictional Materials)",
+          "title": "RF-I01 | Check RFID pilot read rates and duplicate events",
           "type": "cards"
         },
         {
@@ -29287,33 +29295,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Requirements and Objects Comparison Package",
-                  "Use F1—F3 to complete a comparison table of processes, objects, environment and candidate tags and equipment, flagging unknowns and questions requiring clarification.",
-                  "Review method: another person should be able to identify which information is insufficient and why from the table alone."
+                  "Version and material record",
+                  "Identify the original record and current version.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Independent Review Notes",
-                  "For each item in F4, state the read rate, project requirement, test conditions and judgment.",
-                  "Review method: conclusions match original data and requirements, with applicable scope identified."
+                  "Inputs and status",
+                  "Compare source records, targets, and discrepancies.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Corrective Action and Risk Record",
-                  "Use F4 to write a corrective action record covering the event, impact, open questions and escalation contact; the record must be traceable to objects and equipment.",
-                  "Review method: the corrective action scope and next step are clear."
+                  "Open checks and handoff",
+                  "Separate open checks, verified findings, and owners.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Draft Launch Recommendation",
-                  "Use F5 to recommend launch, listing passing items, items requiring correction, unconfirmed items and the approver; do not launch independently or sign on another's behalf.",
-                  "Review method: the recommendation matches the evidence and does not exceed authority."
+                  "Delivery boundaries",
+                  "Record physical checks and approval status.",
+                  "Use the supplied records."
                 ]
               }
             ]
@@ -29344,27 +29352,27 @@
             "rows": [
               [
                 "Check Requirements and Objects",
-                "Can you identify inconsistencies in object categories and processes?",
-                "Explain that all three object categories and three stages need coverage and list items awaiting confirmation",
-                "One customer's verification method cannot be generalized into an industry-wide examination"
+                "Identify the original record and current version.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Check Test Conditions",
-                "Can you identify how test conditions affect conclusions?",
-                "Explain that metal environments reduce read rates and require stratified testing",
-                "Test methods vary by objects and frequency bands"
+                "Compare source records, targets, and discrepancies.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Check Read-Rate Judgments",
-                "Can you judge compliance against project requirements?",
-                "Identify that metal pallets at 82.4% fail the ≥95% requirement",
-                "Requirement values vary by project; thresholds from elsewhere cannot be reused"
+                "Separate open checks, verified findings, and owners.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Check Launch and Authorization",
-                "Can you distinguish recommendations from approval?",
-                "Identify blank retest and business confirmation fields and explain that launch requires authorized approval",
-                "Employer and customer determine launch authority; assumptions from elsewhere cannot be reused"
+                "Record physical checks and approval status.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ]
             ]
           },
@@ -29384,50 +29392,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Read the Materials and Write a Role Boundary Card",
-                  "Read F1—F5 and write a role boundary card: permitted actions (testing according to the solution and documenting), actions requiring review (selection and correction recommendations), and prohibited actions (independently changing production data or launching). Confirm no real deployment will occur."
+                  "Day 1",
+                  "Record the subject and versions."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Use F1—F2 to Complete an Objects and Environment Comparison Table",
-                  "Use F1—F2 to check processes, objects and environment, flagging site conditions affecting reading."
+                  "Day 2",
+                  "Identify the original record and current version."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Use F3 to Organize Candidate Solutions",
-                  "Use F3 to list candidate tags and readers and identify applicable objects and limitations for each."
+                  "Day 3",
+                  "Compare source records, targets, and discrepancies."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Use F4 to Judge Each Item",
-                  "State read rates, project requirements and conclusions item by item, flagging failures and items requiring retesting."
+                  "Day 4",
+                  "Separate open checks, verified findings, and owners."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Write Corrective Action and Risk Records",
-                  "Use F4 to write a corrective action record: event, impact, open questions and escalation contact."
+                  "Day 5",
+                  "Record physical checks and approval status."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Use F5 to Draft a Launch Recommendation",
-                  "List passing items, items requiring correction, unconfirmed items and the approver; do not launch independently."
+                  "Day 6",
+                  "Finish the handoff before checking the key and rubric below, then make one revision. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Compare With the Reference and Revise",
-                  "Compare the outputs from the first six days with the reference deliverables and revise them. Record the step most easily overlooked and your next exercise."
+                  "Day 7",
+                  "Organize your four practice outputs. Keep the source records and review status."
                 ]
               }
             ]
@@ -29444,20 +29452,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Items to check during the seven-day assessment: occupational scope (U.S. O*NET 17-2072.01), project and information security requirements, education and experience, local requirements and supervised tasks.",
-              "Use Which step most needs external confirmation? as a decision point: test conditions, project requirements and launch authority usually require employer and customer confirmation.",
-              "Distinguish verifiable facts from editorial judgments: read rates and requirements are project facts; suitability is an editorial judgment. Conclusions must refer back to original records.",
-              "Estimated commitment: 30—60 minutes daily, mainly reading materials and recalculating; no tag or reader purchase is needed.",
-              "If you repeatedly get stuck at the same step during the seven days, such as stratifying conditions, make it a priority for your next practice.",
-              "If you cannot judge a step, write Insufficient basis to judge and explain what evidence is missing; do not guess.",
-              "After completion, compare your outputs with real project testing and acceptance formats and observe the gaps."
+              "A is 39 ÷ 40 = 97.5%, meeting the lane’s pilot target.",
+              "B is 37 ÷ 40 = 92.5%, below the lane’s pilot target.",
+              "A has 46 − 39 = 7 extra matched events. Do not treat 46 as the count of successful passes.",
+              "Ask the test lead to retest B and cover metal racks. Ask the system owner to verify deduplication.",
+              "Keep the pass-level log. Record lane performance, deduplication, and business acceptance separately. Expansion remains pending.",
+              "Score each item 0–2: version and evidence, item-by-item decisions, unknown scope, and approval and handoff.",
+              "Award 2 for complete and traceable work, 1 for partial work, and 0 for missing evidence or exceeding authority."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to Decide Whether to Continue After Seven Days",
+          "title": "Answer key and self-check rubric",
           "type": "list"
         },
         {
@@ -29558,7 +29566,7 @@
               "Proof of training, hiring eligibility and project authorization are three different things. A degree, certificate or vendor training does not mean receiving employer authorization for configuration, data and launch, nor does it promise signing authority.",
               "U.S. O*NET education data are self-reported requirements and Job Zone is a general preparation range. Without current Chinese postings, no uniform route can be inferred. Check telecommunications professional competency, internal project authorization and education separately; no mutual recognition of qualifications is established.",
               "Employers and customers bear obligations regarding customer materials, inventory and production data, implemented under contracts and authorization; this page is not legal advice on personal information protection or information security.",
-              "Requirements for data permissions, production data writes and system launches follow employer and customer procedures. Applicability depends on project and industry; this page does not replace project procedures or contract terms."
+              "Ask whether the job focuses on selection, integration, testing, or deployment. Read pilot results within the tested conditions."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.path.credential-boundary.1",
@@ -29575,16 +29583,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain original Chinese public recruitment postings with verified status and matching duties, industries and project scope.",
-              "This round did not obtain original Chinese public recruitment postings with verified status and matching duties, industries and project scope. The gap remains; adjacent-level samples are not substitutes."
+              "The 2021 posting archived by Hebei University of Technology lists reader and tag performance, consistency testing, and reports.",
+              "The North American co-op lists automated tests, reader systems, and test reporting."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "d015-cn-main",
+            "d015-us-example"
           ],
           "title": "Recruitment Sample Notes",
           "type": "notice"
@@ -31612,7 +31618,7 @@
                 "question_key": "career.faq.radio-frequency-identification-device-specialists.comparison"
               },
               {
-                "answer": "Look at observable behaviors: breaking requirements into testable conditions, accurately recording tests and failures, driving issues through correction, and accepting that authorized roles determine configuration and launch. Use the F1—F5 exercise and O*NET CRI interests for exploration; assessments and a single performance cannot determine appointment eligibility or suitability.",
+                "answer": "Consider this work if you like tracing read behavior across tags, readers, and system events. In section 09, “Entry, qualifications, and career development,” try RF-I01: Check RFID pilot read rates and duplicate events. Save a first draft before checking the key.",
                 "id": "radio-frequency-identification-device-specialists.faq.3",
                 "question": "How Can I Judge Whether RFID Specialist Work Suits Me?",
                 "question_key": "career.faq.radio-frequency-identification-device-specialists.fit"
@@ -31648,7 +31654,7 @@
                 "question_key": "career.faq.radio-frequency-identification-device-specialists.credentials"
               },
               {
-                "answer": "Key boundaries include unauthorized system configuration or production data changes, loss of control over solution and test versions, read-rate conclusions inconsistent with site conditions, unsuitable tag selection and installation, external sharing of customer materials and interrupted single-person site coverage. See the risks section.",
+                "answer": "Ask whether the job focuses on selection, integration, testing, or deployment. Read pilot results within the tested conditions.",
                 "id": "radio-frequency-identification-device-specialists.faq.9",
                 "question": "Where Is This Work Most Likely to Go Wrong?",
                 "question_key": "career.faq.radio-frequency-identification-device-specialists.risk-boundary"
@@ -31678,7 +31684,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind Career Content Team (Editorial Compilation, Not Reviewed by Practitioners in This Occupation)"
+              "RF-I01 is a fictional exercise for this page."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.sources.source-card.1",
@@ -31692,14 +31698,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational identity and tasks are based on O*NET 17-2072.01. U.S. wages and employment use the officially indicated parent Electronics Engineers, Except Computer (17-2072.00) and public BLS information. The China section uses National Bureau of Statistics information, retaining insufficient-evidence labels."
+              "The technical requirements illustrate a library deployment with tags and reader equipment."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "bls",
-            "nbs"
+            "d015-cn-context"
           ],
           "type": "prose"
         },
@@ -31708,12 +31712,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Original compilation checked on 2026-09-30; this round checked O*NET tasks / context / CRI / education, current BLS EP and OOH, and TX national wages on 2026-10-12. Current recruitment gaps remain; other source dates were not uniformly changed to this round."
+              "The 2021 posting archived by Hebei University of Technology lists reader and tag performance, consistency testing, and reports."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "d015-cn-main"
           ],
           "type": "prose"
         },
@@ -31722,13 +31726,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The Chinese content on this page explains the official U.S. occupational scope and does not establish mutual recognition of domestic and foreign qualifications. All fictional exercise materials are editorially designed and do not represent employer standards or customer requirements. Customer and business data are not included on public pages."
+              "U.S. 17-2072 is a broader group. Job and procurement documents illustrate particular tasks."
             ]
           },
           "id": "radio-frequency-identification-device-specialists.sources.source-card.4",
           "source_refs": [
             "editor",
-            "privacy"
+            "privacy",
+            "d015-cn-main",
+            "d015-us-example"
           ],
           "type": "prose"
         }
@@ -31767,13 +31773,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "path",
@@ -31994,8 +32000,8 @@
               {
                 "accessed_at": "2026-09-30",
                 "details": [
-                  "Exercise materials, portfolio suggestions and the seven-day plan are editorially designed and do not represent real customers, equipment or test results.",
-                  "See the source entry for publisher, original link and applicable scope."
+                  "RF-I01 is a fictional paper exercise.",
+                  "Check reads, events, and business records by object and test condition."
                 ],
                 "evidence_type": "editorial design",
                 "id": "editor",
@@ -32215,6 +32221,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The 2021 posting archived by Hebei University of Technology lists reader and tag performance, consistency testing, and reports."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d015-cn-main",
+                "limitation": "For task and pathway comparison.",
+                "market": "Mainland China",
+                "name": "Tianjin Kunpeng RFID test engineer",
+                "period": "Date shown where available",
+                "publisher": "Tianjin Kunpeng RFID test engineer",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/home/correcruit/content/id/27771.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The technical requirements illustrate a library deployment with tags and reader equipment."
+                ],
+                "evidence_type": "primary_document",
+                "id": "d015-cn-context",
+                "limitation": "For task and pathway comparison.",
+                "market": "Mainland China",
+                "name": "Henan procurement file: library RFID",
+                "period": "Date shown where available",
+                "publisher": "Henan procurement file: library RFID",
+                "scope": "contextual",
+                "url": "https://zfcg.henan.gov.cn/cmsweb81e27e/huaxian/rootfiles/2025/12/17/719df3eba8764b2ba641e311baa747f6.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The North American co-op lists automated tests, reader systems, and test reporting."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d015-us-example",
+                "limitation": "For task and pathway comparison.",
+                "market": "United States",
+                "name": "Avery Dennison RFID applications engineering co-op",
+                "period": "Date shown where available",
+                "publisher": "Avery Dennison RFID applications engineering co-op",
+                "scope": "recruitment_proxy",
+                "url": "https://jobs.smartrecruiters.com/averydennison/744000144595999"
               }
             ]
           },
@@ -35524,7 +35575,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What Kind of Person Does RFID Specialist Work Suit?"
+        "title": "Would RFID systems work suit me?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36906,7 +36957,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test Whether My Career Interests Fit RFID Specialist Work",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37452,14 +37503,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Requirements analysis, site surveys, tag selection, read-rate testing and system integration tasks for RFID Specialists 17-2072.01; check U.S. parent 17-2072.00 wage percentiles and 2024—2034 projections, Chinese evidence gaps, entry paths and a paper selection and test verification exercise you can complete independently."
+      "text": "Explore RFID tags, readers, and system integration, compare job examples, and try a read-rate and duplicate-event exercise."
     },
     "title": {
       "availability": "available",
       "text": "Radio Frequency Identification Device Specialist"
     }
   },
-  "source_content_sha256": "d1f39872e3b641be670669c04105f2b2b19067fd0874776bf7a00f5a9a72a6d6",
+  "source_content_sha256": "119b48541061e8b2a4b910e4d3f9f57ce9db03d41fe68ac073f58ee65dc758c3",
   "subject": {
     "canonical_slug": "radio-frequency-identification-device-specialists",
     "name": "Radio Frequency Identification Device Specialist",

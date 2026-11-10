@@ -23920,7 +23920,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Direct answer | Highway Maintenance Workers on this page is the exact O*NET occupation 47-4051.00. The work falls into several categories: (i) Traffic management and work zones—placing signs and cones around work areas to divert traffic, flagging motorists or warning them of obstacles or repairs ahead, arranging diversions, and maintaining work-zone safety. (ii) Pavement and ancillary-structure maintenance—patching broken or eroded pavement and erecting, installing, or repairing guardrails, shoulders, slope protection, highway signs, warning signals, and highway lighting. (iii) Equipment and transport—driving trucks to transport crews and equipment to worksites, performing preventive maintenance on vehicles and heavy equipment, and operating construction machinery and tools. (iv) Rights-of-way, vegetation, and snow removal—mowing or clearing brush along roads or plowing snow from roadways. (v) Records and coordination—recording maintenance, work, materials, and traffic management, coordinating with crews, traffic police, and dispatch, and reporting exceptions."
+              "Sketch a fictional stretch of road. Log the location, time and effect of each issue and name who should receive the report. Leave real roadside work to an authorized crew."
             ]
           },
           "id": "highway-maintenance-workers.profile.career-quick-answers-block.1",
@@ -24051,12 +24051,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "U.S. employment in this occupation, 47-4051.00, was 161,800 in 2025. Overall projected growth for 2025–2035 is Average (3% to 4%), with 11,800 average annual openings from growth and replacement. These are not net new jobs, current vacancies, or evidence of AI causation; the replacement share has not been verified."
+              "BLS Table 1.2 for 47-4051: about 161,800 U.S. jobs in 2025, about 167,300 projected in 2035 (+3.4%), and about 11,800 projected openings per year. Openings include replacements."
             ]
           },
           "id": "highway-maintenance-workers.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -24107,7 +24107,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Boundary conclusion | This page covers O*NET 47-4051.00, Highway Maintenance Workers. The core differences from adjacent roles concern the objects of work, outputs, and authority levels. This occupation works on highways, municipal and rural roads, airports, rights-of-way, and traffic management. Outputs are maintenance completed under maintenance plans—pavement patching, ancillary-structure maintenance, and right-of-way maintenance—and traceable maintenance, work, and traffic-management records. Workers use maintenance, traffic-management, and equipment-operation skills within their role's authority and are responsible for work safety, traffic safety, and site order. Construction laborers, paving-equipment operators, industrial-truck operators, general maintenance workers, and construction-equipment operators produce work in their own specialties, with different responsibilities and authority levels."
+              "Maintenance keeps existing roads and features usable. Construction often builds or substantially rebuilds them. Some repair tasks overlap depending on the project."
             ]
           },
           "id": "highway-maintenance-workers.profile.career-quick-answers-block.7",
@@ -24177,7 +24177,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Occupational profile | Highway Maintenance Workers on this page is the exact O*NET occupation 47-4051.00, Highway Maintenance Workers. Workers undertake pavement and ancillary-structure maintenance, traffic management, and right-of-way maintenance in highway, municipal, transport, airport, and other maintenance organizations. The work centers on physical fieldwork, equipment, and traffic management, alongside materials, equipment operation, traffic diversion, records, and collaboration. It often involves outdoor work in all weather and traffic conditions, on shoulders and at heights, organized around maintenance plans and weather windows."
+              "Highway maintenance workers inspect and maintain roads and roadside features. Duties can include cleaning, minor repairs, drainage work and reporting hazards to a supervisor. Assignments vary by crew and season."
             ]
           },
           "id": "highway-maintenance-workers.profile.definition-block.11",
@@ -28079,13 +28079,13 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
@@ -28097,13 +28097,13 @@
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Industrial Truck and Tractor Operators",
@@ -32084,10 +32084,13 @@
                 "question_key": "career.faq.highway-maintenance-workers.q3"
               },
               {
-                "answer": "BLS Employment Projections presented on O*NET's 47-4051.00 page show employment of 159,100 in 2024 and projected employment of 163,900 in 2034, with Average growth (3% to 4%, no Bright Outlook label) for 2024–2034 and approximately 12,300 average annual openings over the period, including growth and replacement. Projections are not individual job outcomes.",
+                "answer": "BLS Table 1.2: U.S. occupation 47-4051 had about 161,800 jobs in 2025 and is projected to have about 167,300 in 2035 (+3.4%), with about 11,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. Projections are not individual job outcomes.",
                 "id": "highway-maintenance-workers.faq.4",
                 "question": "What is the employment outlook?",
-                "question_key": "career.faq.highway-maintenance-workers.q4"
+                "question_key": "career.faq.highway-maintenance-workers.q4",
+                "source_refs": [
+                  "bls-design-ep"
+                ]
               },
               {
                 "answer": "O*NET places this occupation in Job Zone 1-2 (little or no to some preparation needed), below 6.0 (SVP Below 6.0). The education section reports 88% requiring a high school diploma or equivalent, 5% less than a high school diploma, and 5% an associate's or other two-year degree (the page lists these three items); growth is labeled Average. In mainland China, roles involving work-zone setup, machinery, and work at heights must meet highway-maintenance safety, road-traffic, and occupational-health requirements and obtain relevant qualifications or work permits, subject to organizational and competent-authority requirements.",
@@ -32102,10 +32105,13 @@
                 "question_key": "career.faq.highway-maintenance-workers.q6"
               },
               {
-                "answer": "It will not be replaced in its entirety. Systems can assist with work orders, quantities, materials, progress, and knowledge retrieval, but experienced personnel remain responsible for field work-zone setup, maintenance, traffic management, machinery, and safety. O*NET shows Average growth of 3% to 4% for 2024–2034; automation is more likely to change the task mix than eliminate jobs.",
+                "answer": "It will not be replaced in its entirety. Systems can assist with work orders, quantities, materials, progress, and knowledge retrieval, but experienced personnel remain responsible for field work-zone setup, maintenance, traffic management, machinery, and safety. BLS Table 1.2: U.S. occupation 47-4051 had about 161,800 jobs in 2025 and is projected to have about 167,300 in 2035 (+3.4%), with about 11,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
                 "id": "highway-maintenance-workers.faq.7",
                 "question": "Will AI or automation replace this occupation?",
-                "question_key": "career.faq.highway-maintenance-workers.q7"
+                "question_key": "career.faq.highway-maintenance-workers.q7",
+                "source_refs": [
+                  "bls-design-ep"
+                ]
               },
               {
                 "answer": "O*NET work context shows common outdoor exposure to all weather conditions (94% daily); mostly irregular schedules (72% irregular); close work with crews and colleagues (68% constant contact with others); frequent face-to-face discussions (86% daily); common contaminant exposure (76% daily); serious consequences of error (55% extremely serious, 21% very serious); and substantial responsibility for others' health and safety (30% extremely high responsibility, 46% high responsibility).",
@@ -32120,10 +32126,13 @@
                 "question_key": "career.faq.highway-maintenance-workers.q9"
               },
               {
-                "answer": "This page mainly uses O*NET 47-4051.00, U.S. BLS OEWS 2025, and BLS Employment Projections 2024–2034, alongside ILO and NIST occupational-exposure and governance research. All figures cover this U.S. occupation itself and do not cover mainland China, for which only statistical coverage and visible gaps are recorded. This page does not constitute safety, traffic, special-operations, quality, or legal advice.",
+                "answer": "This page mainly uses O*NET 47-4051.00, U.S. BLS Table 1.2: U.S. occupation 47-4051 had about 161,800 jobs in 2025 and is projected to have about 167,300 in 2035 (+3.4%), with about 11,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. All figures cover this U.S. occupation itself and do not cover mainland China, for which only statistical coverage and visible gaps are recorded. This page does not constitute safety, traffic, special-operations, quality, or legal advice.",
                 "id": "highway-maintenance-workers.faq.10",
                 "question": "What are this page's sources and coverage boundaries?",
-                "question_key": "career.faq.highway-maintenance-workers.q10"
+                "question_key": "career.faq.highway-maintenance-workers.q10",
+                "source_refs": [
+                  "bls-design-ep"
+                ]
               }
             ]
           },
@@ -32180,12 +32189,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round did not obtain an exact national occupational wage distribution for highway maintenance workers in China. The U.S. Government employment classification cannot directly map to China's public-facilities industry. Verify Chinese jobs' industries against actual organizations and economic activities; industry averages are not occupational medians. U.S. industry-segment or organization-type medians and measured AI adoption, efficiency, and causal replacement evidence remain missing. Quick answers, FAQ/Hero, and protected shared facts retain old 159100 / 12300 figures, 2024–2034 coverage, and bonus explanations within their scope; the entire page is not consistent."
+              "This round did not obtain an exact national occupational wage distribution for highway maintenance workers in China. The U.S. Government employment classification cannot directly map to China's public-facilities industry. Verify Chinese jobs' industries against actual organizations and economic activities; industry averages are not occupational medians. U.S. industry-segment or organization-type medians and measured AI adoption, efficiency, and causal replacement evidence remain missing. BLS Table 1.2: U.S. occupation 47-4051 had about 161,800 jobs in 2025 and is projected to have about 167,300 in 2035 (+3.4%), with about 11,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring."
             ]
           },
           "id": "highway-maintenance-workers.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-design-ep"
           ],
           "type": "prose"
         }
@@ -32212,25 +32222,25 @@
                 "entity": "Big Five Personality Test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Intelligence and Reasoning Test",
+                "entity": "Heavy and Tractor-Trailer Truck Drivers",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/career/jobs/heavy-and-tractor-trailer-truck-drivers"
               },
               {
-                "entity": "Emotional Intelligence Test",
+                "entity": "Mobile Heavy Equipment Mechanics",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/en/career/jobs/heavy-vehicle-and-mobile-equipment-service-technicians"
               },
               {
                 "entity": "This occupation (Highway Maintenance Workers)",
@@ -32291,18 +32301,18 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to check employment of 159,100 in 2024 and 163,900 in 2034, growth of 3% to 4% for 2024–2034, and approximately 12,300 average annual openings over the period, including growth and replacement.",
+                  "BLS Table 1.2: U.S. occupation 47-4051 had about 161,800 jobs in 2025 and is projected to have about 167,300 in 2035 (+3.4%), with about 11,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
                   "Used to explain that Employment Projections differ from OEWS point-in-time employment estimates, projections are not individual job outcomes, and openings mainly reflect replacement demand."
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
                 "limitation": "Covers this occupation as presented on O*NET's 47-4051.00 page; Average growth of 3% to 4%, with no Bright Outlook label.",
                 "market": "United States",
-                "name": "O*NET OnLine: Highway Maintenance Workers employment trends (47-4051.00, this occupation itself)",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "U.S. BLS Table 1.2: Occupational projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "47-4051.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/47-4051.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32717,6 +32727,18 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS Table 1.2: U.S. occupation 47-4051 had about 161,800 jobs in 2025 and is projected to have about 167,300 in 2035 (+3.4%), with about 11,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring."
+                ],
+                "id": "bls-design-ep",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -34587,7 +34609,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "What categories of work do highway maintenance workers perform?",
+            "question": "How can you try a road maintenance task on paper?",
             "table": {
               "rows": [
                 {
@@ -34644,7 +34666,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "Where are the boundaries between highway maintenance workers and adjacent roles?",
+            "question": "How does highway maintenance differ from road construction?",
             "table": {
               "rows": [
                 {
@@ -36600,7 +36622,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Employment Projections (2024–2034, this occupation itself)",
+            "label": "U.S. BLS employment projections (2025–2035)",
             "secondary_value": null,
             "value": {
               "$item": "highway-maintenance-workers.profile.onet-structured-fields-block.4",
@@ -37365,7 +37387,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit highway maintenance work",
+        "label": "Explore work activities with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37462,7 +37484,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "IQ (Chinese)"
+            "label": "Heavy and Tractor-Trailer Truck Drivers"
           },
           {
             "href": {
@@ -37472,7 +37494,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Mobile Heavy Equipment Mechanics"
           }
         ]
       },
@@ -37716,39 +37738,39 @@
         ]
       },
       {
-        "derivation": "Coverage | BLS Employment Projections 2024–2034, presented on O*NET's 47-4051.00 page for this occupation itself, with Average growth of 3% to 4% and no Bright Outlook label. The page gives base-year employment of 159,100 in 2024 and projected employment of 163,900 in 2034. Projections include replacement demand and are not actual recruitment or layoffs.",
-        "display_value": "Average growth (3% to 4%) (2024–2034, BLS Employment Projections, this occupation itself, 47-4051.00; no Bright Outlook label on the page)",
+        "derivation": "BLS Table 1.2: U.S. occupation 47-4051 had about 161,800 jobs in 2025 and is projected to have about 167,300 in 2035 (+3.4%), with about 11,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "+3.4%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth",
         "occupation_scope": "This occupation: Highway Maintenance Workers",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "Coverage | BLS Employment Projections base year, approximately 159,100 in this occupation in 2024, presented through O*NET. This differs from BLS OEWS point-in-time employment estimates: OEWS covers only sampled nonfarm establishment employers and excludes self-employment. This page labels them separately without mixing.",
-        "display_value": "Employment: approximately 159,100 (2024, BLS Employment Projections base year, this occupation itself, 47-4051.00)",
+        "derivation": "BLS Table 1.2: U.S. occupation 47-4051 had about 161,800 jobs in 2025 and is projected to have about 167,300 in 2035 (+3.4%), with about 11,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 161,800 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Number employed",
         "occupation_scope": "This occupation: Highway Maintenance Workers",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "Coverage | BLS Employment Projections period openings: approximately 12,300 annually for this occupation in 2024–2034, including growth and replacement, presented through O*NET. These are period-average annual figures, mainly reflecting replacement demand, not net new jobs.",
-        "display_value": "Projected average annual openings: approximately 12,300 (2024–2034, BLS Employment Projections, this occupation itself, 47-4051.00, including growth and replacement)",
+        "derivation": "BLS Table 1.2: U.S. occupation 47-4051 had about 161,800 jobs in 2025 and is projected to have about 167,300 in 2035 (+3.4%), with about 11,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 11,800 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Average annual job openings",
         "occupation_scope": "This occupation: Highway Maintenance Workers",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-design-ep"
         ]
       },
       {
@@ -37836,19 +37858,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024–2034, this occupation itself, 47-4051.00)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment (2024, this occupation itself, 47-4051.00)"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024–2034, this occupation itself, 47-4051.00)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -37862,17 +37884,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What highway maintenance workers do, the skills and qualifications needed, pay and outlook, and tasks AI may change. Retains occupational scope (O*NET 47-4051.00), Job Zone 1-2 (little or no to some preparation needed) and education notes, U.S. wage and employment coverage for this occupation itself, and mainland China data gaps."
+      "text": "See what highway maintenance crews look for and how upkeep differs from building or rebuilding a road."
     },
     "title": {
       "availability": "available",
-      "text": "Highway Maintenance Workers"
+      "text": "Highway Maintenance Worker: Inspections, Repairs and Reporting"
     }
   },
-  "source_content_sha256": "d1128478667af2112df54327575a2c74e38d9cb4c9ac055a4180dcd23b49fe4b",
+  "source_content_sha256": "9e3e868bbac0d6983fe65c2358334e95613792858297267eb6b3caaafa5269f4",
   "subject": {
     "canonical_slug": "highway-maintenance-workers",
-    "name": "Highway Maintenance Workers",
-    "summary": "Highway Maintenance Workers corresponds to the exact O*NET/SOC occupation 47-4051.00, Highway Maintenance Workers: maintaining highways, municipal and rural roads, airport runways, and rights-of-way. Duties include patching broken or eroded pavement and repairing guardrails, highway markers, and snow fences; workers may also mow or clear brush along roads or plow snow from roadways. Core tasks include placing signs and cones around work areas to divert traffic; flagging motorists or warning them of obstacles or repairs ahead; performing preventive maintenance on vehicles and heavy equipment; driving trucks to transport crews and equipment to worksites; and using hand and power tools to erect, install, or repair guardrails, shoulders, slope protection, highway signs, warning signals, and highway lighting. Common job titles include Highway Maintenance Worker, Highway Maintainer, Highway Maintenance Technician, and Equipment Operator. Official scope: Maintain highways, municipal and rural roads, airport runways, and rights-of-way. Duties include patching broken or eroded pavement and repairing guard rails, highway markers, and snow fences. May also mow or clear brush from along road, or plow snow from roadway. Coverage note: the U.S. wage, employment, and industry data presented on O*NET's 47-4051.00 page are not identified as coming from a broader or adjacent occupation; this page accurately labels them as data for this occupation itself (47-4051.00). The occupation is in Job Zone 1-2 (little or no to some preparation needed), below 6.0 (SVP Below 6.0), with Average growth (3% to 4%) for 2024–2034. This page does not constitute safety, traffic, special operations, occupational health, or legal advice."
+    "name": "Highway Maintenance Worker",
+    "summary": "Highway maintenance workers inspect and maintain roads and roadside features. Duties can include cleaning, minor repairs, drainage work and reporting hazards to a supervisor. Assignments vary by crew and season."
   }
 }

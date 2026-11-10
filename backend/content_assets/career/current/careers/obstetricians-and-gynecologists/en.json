@@ -206,6 +206,9 @@
       "item:obstetricians-and-gynecologists.path.recruitment-sample.8": {
         "status": "pending_mapping"
       },
+      "item:obstetricians-and-gynecologists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:obstetricians-and-gynecologists.profile.definition-block.1": {
         "status": "pending_mapping"
       },
@@ -12351,6 +12354,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The appointment says postnatal follow-up, but the referral uses an antenatal template. Identify the visit type and records to confirm with the referring team."
+            ]
+          },
+          "id": "obstetricians-and-gynecologists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Check an obstetric follow-up packet",
+          "type": "notice"
         }
       ]
     },
@@ -14762,6 +14780,13 @@
         "id": "obstetricians-and-gynecologists.path.recruitment-sample.8",
         "location": "entry_decisions",
         "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "obstetricians-and-gynecologists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15151,7 +15176,7 @@
       "text": "Obstetricians and Gynecologists career profile｜tasks, wages, access, and boundaries"
     }
   },
-  "source_content_sha256": "c3bd67035f65464fd472b81bdadf8a7e16f9421ee5baa2fe85bbc68f7623fb70",
+  "source_content_sha256": "eb2b6f66532ee52b06fa9d57269e72ae713f73beb40cf16dec363e28740a94e8",
   "subject": {
     "canonical_slug": "obstetricians-and-gynecologists",
     "name": "Obstetricians and gynecologists",

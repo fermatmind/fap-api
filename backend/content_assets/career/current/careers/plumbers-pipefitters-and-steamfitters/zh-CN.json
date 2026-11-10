@@ -1283,6 +1283,9 @@
       "item:plumbers-pipefitters-and-steamfitters.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:plumbers-pipefitters-and-steamfitters.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:plumbers-pipefitters-and-steamfitters.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31002,6 +31005,21 @@
             "editor-note"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。管线 S4 更换阀门后，维修单有阀号，但附的复测表写 S6。写出可确认和待核项，实际带压或复测由获授权人员处理。"
+            ]
+          },
+          "id": "plumbers-pipefitters-and-steamfitters.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "区分管路更换记录与复测凭证",
+          "type": "notice"
         }
       ]
     },
@@ -37517,6 +37535,13 @@
         "id": "plumbers-pipefitters-and-steamfitters.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "plumbers-pipefitters-and-steamfitters.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37866,7 +37891,7 @@
       "text": "管道工、配管工与蒸汽管安装工职业指南：任务、工资、学徒路径"
     }
   },
-  "source_content_sha256": "24feee1ae1e41bf0df697283cb1008faee35a380e9f0562a78ecfb77cd337d4f",
+  "source_content_sha256": "bcd5c0a5b7a8e7e30c1eb701323199367b3c1a1ebc495d3e6ca60a990f05fc36",
   "subject": {
     "canonical_slug": "plumbers-pipefitters-and-steamfitters",
     "name": "管道工、配管工与蒸汽管安装工",

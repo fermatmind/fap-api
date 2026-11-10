@@ -15972,8 +15972,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -22954,7 +22960,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use fictional drawings, device points and test sheets to practice circuit labeling, function checks, failed items and handoff; do not touch real fire alarm systems."
+              "If travel between sites, long periods on your feet, or repeated checks would be difficult, ask how the employer schedules fieldwork."
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.quick-decision.fit-decision-checklist.1",
@@ -22969,7 +22975,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Suited to people willing to work to drawings, verify circuits and points, communicate on site and respect safety boundaries; a personality type is not a qualification."
+              "Try FA-01 in section 09 on paper. Check the records and plan a handoff before opening the key."
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.quick-decision.fit-decision-checklist.2",
@@ -22983,7 +22989,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Security installation, fire alarm acceptance, general electrical work and security patrol have different duties; job seekers must first verify the target role."
+              "This work may suit you if you enjoy matching point identifiers, logs, and drawings and documenting each test."
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.quick-decision.fit-decision-checklist.3",
@@ -28716,7 +28722,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Point S2 is wired to circuit S3, and the test label does not match reality."
+              "Keep the original logs and flag any discrepancy between point labels and test records."
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.risk.career-risk-cards.18",
@@ -28953,7 +28959,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "AI marks the untested detector S4 as passed."
+              "A test conclusion drafted by a tool needs traceable supporting records."
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.risk.career-risk-cards.34",
@@ -29115,17 +29121,17 @@
               {
                 "id": "education",
                 "values": [
-                  "No single Chinese employer announcement adopted",
-                  "This round obtained no announcement in which the job identity, qualifications, construction scope and pay are all verifiable; no national threshold is inferred.",
-                  "Verify region, system type, wiring, standby duty, testing and acceptance responsibility item by item."
+                  "Mainland China maintenance and monitoring",
+                  "Qinxia’s historical maintenance posting lists alarm panel operation and commissioning, with experience in low-voltage installation and repair or facility maintenance.",
+                  "The Nanjing station notice covers rotating control-room shifts, alarm handling, and inspection logs. It illustrates how monitoring duties differ from installation and maintenance."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "Purpose of the fictional work",
-                  "M1–M6 only demonstrate point and test status checking and do not prove that construction or fire acceptance is permitted.",
-                  "Building, equipment and test results are entirely fictional."
+                  "Two US facilities roles",
+                  "The historical Fairfax posting covers testing, troubleshooting, repair, and preventive maintenance of commercial fire detection and suppression systems.",
+                  "The historical Contra Costa posting covers both fire alarm and electronic security systems. It asks for relevant installation, testing, and repair experience and lists qualification substitutions."
                 ]
               },
               {
@@ -29149,7 +29155,11 @@
           "id": "security-and-fire-alarm-systems-installers.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d024-shanghai",
+            "d024-nanjing",
+            "d024-fairfax",
+            "d024-contra"
           ],
           "title": "What do employers usually look for in recruitment?",
           "type": "cards"
@@ -29162,37 +29172,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional materials: four points and backup power",
-                  "M1 | Fully fictional floor F. The work order lists fire alarm detection points S1, S2, S3 and S4 and backup battery B; this exercise connects no real wiring.",
-                  "M2 | Fictional test record: S1 and S2 triggered and the control panel displayed them correctly, so the status is pass.",
-                  "M3 | After S3 triggered, the control panel showed no signal; inspection found an open circuit. The status is fail and authorized staff must troubleshoot and retest.",
-                  "M4 | S4 has not been trigger-tested; the status is untested and cannot be presumed passed because an adjacent point passed.",
-                  "M5 | The simulated mains-disconnect test of B did not keep the control panel running; the status is fail and repair and retest are required.",
-                  "M6 | The client asks for immediate handover. When S3 and B have failed and S4 is untested, the system must not be marked as passed; record the faults, isolation and follow-up retest responsibility, and formal acceptance is by authorized staff."
+                  "Fictional work order and test records",
+                  "M1 | The work order lists points A-11 through A-14 and backup power record R-1. Work from the paper records only.",
+                  "M2 | At 10:10 and 10:14, the panel log displays the expected identifiers for A-11 and A-12. The fictional criterion requires a match with the work order.",
+                  "M3 | At 10:21, the action log names A-13, while the panel log displays a different identifier.",
+                  "M4 | A-14 appears on the work order, with no test timestamp or panel entry.",
+                  "M5 | At 10:28, report R-1 shows a recording interruption. The fictional criterion requires a complete record.",
+                  "M6 | The signoff field is blank. The project lead schedules follow-up tests, and the designated reviewer checks the updated records."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Tasks: status, faults and handoff",
-                  "T1 | List the status of S1–S4 and B: pass, fail or untested, and state which points need retesting.",
-                  "T2 | Judge whether it can be written as accepted, and list the handoff checklist and the approvals required."
+                  "Submit a status table and handoff",
+                  "T1 | Record the evidence, time, and status for each line.",
+                  "T2 | List any first test, retest, or record review needed. Name the next owner and what can be handed over."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answers and boundaries",
-                  "S1 and S2 pass; S3 fails (open circuit); S4 is untested; B fails (backup power did not hold).",
-                  "S3 and B need retesting after repair, and S4 needs a first trigger test; all-pass must not be written before the results are clear.",
-                  "A client request for immediate handover does not equal acceptance authority. Record the points, symptoms, isolation status, responsible person, retest and the authorized signature; the exercise involves no real operations."
+                  "Before submitting",
+                  "Trace each line to its source record.",
+                  "Keep evidence and status in separate columns.",
+                  "Compare your first draft with the designated key on day 7."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Review checklist",
-                  "Use fictional materials only; verify two passes, two failures and one untested and avoid writing \"untested\" as \"passed\"."
+                  "Exercise boundary",
+                  "This exercise uses paperwork. Site installation, testing, isolation, and acceptance follow project procedures and assigned authority."
                 ]
               }
             ]
@@ -29201,7 +29211,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: fictional detection points and backup power testing",
+          "title": "FA-01 | Review point-test records and write a retest handoff",
           "type": "cards"
         },
         {
@@ -29213,7 +29223,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Work order and point cards",
-                  "List the models, locations and test requirements of floor F S1–S4 and B.",
+                  "Match each point to its work order, source record, and time.",
                   "Contains no real building drawings."
                 ]
               },
@@ -29221,7 +29231,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "Test status table",
-                  "S1/S2 passed, S3/B failed, S4 untested.",
+                  "Separate recorded tests, discrepancies, and missing records. State the evidence for each decision.",
                   "Untested does not equal passed."
                 ]
               },
@@ -29229,7 +29239,7 @@
                 "id": "report-summary",
                 "values": [
                   "Fault and retest page",
-                  "S3 open circuit and B backup power did not hold; list the troubleshooting and retest responsibilities.",
+                  "Name the follow-up record and reviewer for each open item.",
                   "Do not modify real wiring on your own."
                 ]
               },
@@ -29237,7 +29247,7 @@
                 "id": "tooling-note",
                 "values": [
                   "Handoff minutes",
-                  "List facts, failed items, untested items, the approver and pending formal acceptance separately.",
+                  "Separate the test conclusion and signoff status in the handoff.",
                   "A client urging handover does not equal acceptance."
                 ]
               }
@@ -29269,26 +29279,26 @@
             "rows": [
               [
                 "Interview: status judgment",
-                "Which have passed",
-                "S1、S2",
+                "How do you assign a test status?",
+                "Match each point to its work order, source record, and time.",
                 "Fictional records only"
               ],
               [
                 "Interview: untested",
-                "Can S4 be written as passed",
-                "No, it has not been trigger-tested",
-                "Needs a first test"
+                "How do you document a gap in the log?",
+                "Separate recorded tests, discrepancies, and missing records. State the evidence for each decision.",
+                "Use the available records"
               ],
               [
                 "Job trial: faults",
-                "How should S3 and B be handled",
-                "Mark as failed, hand to authorized staff to troubleshoot and retest",
-                "Must not falsely record a pass"
+                "How do you hand off conflicting records?",
+                "Name the follow-up record and reviewer for each open item.",
+                "Keep both original records"
               ],
               [
                 "Handoff: acceptance",
-                "Can it be written as accepted immediately",
-                "No; the failed and untested items are unresolved",
+                "What belongs in a handoff?",
+                "Separate the test conclusion and signoff status in the handoff.",
                 "Formal signing is verified separately"
               ]
             ]
@@ -29310,49 +29320,49 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "Day one",
-                  "Read M1–M6 and list the points, work order and authorization."
+                  "Read M1–M6. Identify the work order, fictional criteria, and review roles."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "Day two",
-                  "Draw the point table for fictional floor F S1–S4 and B."
+                  "Match each point to its work order, source record, and time."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day three",
-                  "Organize the evidence that S1/S2 passed."
+                  "Separate recorded tests, discrepancies, and missing records. State the evidence for each decision."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day four",
-                  "Mark the S3 open circuit and the B backup power failure."
+                  "Name the follow-up record and reviewer for each open item."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day five",
-                  "Mark S4 as untested and do not presume a result."
+                  "Separate the test conclusion and signoff status in the handoff."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day six",
-                  "Write the fault, isolation and retest responsibility handoff card."
+                  "Finish and save the point table and handoff. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day seven",
-                  "Organize the fictional work and verify the target role's qualifications, standby duty and acceptance boundaries."
+                  "After saving your day 6 drafts, open “FA-01 answer key and rubric (open on day 7)” in the FAQ. Apply the four checks and record one revision."
                 ]
               }
             ]
@@ -29369,13 +29379,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep the first test draft and the revision and explain the status differences.",
-              "Verify that S1/S2 passed, S3/B failed and S4 is untested.",
-              "State that neither failures nor untested items may be written as passed.",
-              "List the repair and retest for S3 and B and the first test responsibility for S4.",
-              "All practice materials are fictional and contain no real building configuration.",
-              "Verify the target role's construction, programming, testing and acceptance authority.",
-              "Formal fire and electrical signing is borne by authorized staff."
+              "Match each point to its work order, source record, and time.",
+              "Separate recorded tests, discrepancies, and missing records. State the evidence for each decision.",
+              "Name the follow-up record and reviewer for each open item.",
+              "Separate the test conclusion and signoff status in the handoff.",
+              "Keep the first draft, change log, and reason for each revision.",
+              "Use fictional identifiers and omit real building or customer records.",
+              "Ask the employer about work orders, field supervision, and signoff."
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.path.seven-day-decision.1",
@@ -29500,15 +29510,19 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no Chinese precise announcement in which identity, qualifications, construction scope and pay are all verifiable was adopted; a uniform threshold is not inferred from a single role.",
-              "M1–M6 are not employer exam questions; a real role must be verified for equipment, on-site safety, standby duty, testing, acceptance and pay."
+              "Qinxia’s historical maintenance posting lists alarm panel operation and commissioning, with experience in low-voltage installation and repair or facility maintenance.",
+              "The Nanjing station notice covers rotating control-room shifts, alarm handling, and inspection logs. It illustrates how monitoring duties differ from installation and maintenance.",
+              "The historical Fairfax posting covers testing, troubleshooting, repair, and preventive maintenance of commercial fire detection and suppression systems.",
+              "The historical Contra Costa posting covers both fire alarm and electronic security systems. It asks for relevant installation, testing, and repair experience and lists qualification substitutions.",
+              "Ask what equipment is covered, how field supervision works, who reviews test records, and who signs acceptance."
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
+            "d024-shanghai",
+            "d024-nanjing",
+            "d024-fairfax",
+            "d024-contra",
             "editor"
           ],
           "title": "Note on the recruitment sample",
@@ -29690,7 +29704,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "First verify the target role's security or fire alarm scope; demonstrate testing and handoff using the fictional M1–M6 records where S1/S2 passes, S3/B fails and S4 is untested."
+              "Check the system scope of the role. Use the FA-01 point table and handoff to show how you reconcile records and assign follow-up."
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.path.career-path-block.20",
@@ -31594,10 +31608,13 @@
                 "question_key": "career.faq.security-and-fire-alarm-systems-installers.credentials"
               },
               {
-                "answer": "S1/S2 passes, S3 fails with an open circuit, S4 is untested and backup battery B fails; neither failures nor untested items may be written as passed and the system cannot be marked as accepted.",
+                "answer": "A-11 and A-12 meet the fictional identifier criterion, based on the matching panel entries at 10:10 and 10:14. The A-13 identifiers conflict at 10:21. A-14 has no test record, so whether it was tested is unconfirmed. The interrupted 10:28 entry for R-1 fails the record-completeness criterion. Backup power function remains unconfirmed.\n\nAsk the project lead to schedule an A-13 retest and obtain a complete R-1 record or schedule a retest. Check whether an original A-14 test record exists. Arrange a first test if the lead confirms none took place. The designated reviewer checks the updated records. The signoff field is blank. Record signoff as unconfirmed and ask the project lead who is authorized to sign.\n\nScore four items from 0 to 2: all five items have a status; each status traces to a source and time or missing record; retests, original-record checks, and first tests are distinct; and the next owner and signoff boundary are clear. Give 2 for complete, 1 for partial, or 0 for guessing or exceeding authority.",
                 "id": "security-and-fire-alarm-systems-installers.faq.9",
-                "question": "How is the status judged in the fictional exercise?",
-                "question_key": "career.faq.security-and-fire-alarm-systems-installers.risk-boundary"
+                "question": "FA-01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.security-and-fire-alarm-systems-installers.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "Electricians, security, electronic equipment repair, telecommunications equipment installation and fire inspection share skills; their own licensing and responsibilities are verified separately.",
@@ -31713,13 +31730,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the Security and Fire Alarm Systems Installers career page",
@@ -32252,6 +32269,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Qinxia’s historical maintenance posting lists alarm panel operation and commissioning, with experience in low-voltage installation and repair or facility maintenance."
+                ],
+                "evidence_type": "Original recruitment notice",
+                "id": "d024-shanghai",
+                "limitation": "One historical posting for comparing duties and employer requirements.",
+                "market": "Shanghai, China",
+                "name": "Shanghai HRSS posting | Qinxia fire system maintenance",
+                "period": "2026-05-21",
+                "publisher": "Shanghai HRSS posting",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.sh.gov.cn/dzb/rsj/2026-05-21/aid/03-01.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Nanjing station notice covers rotating control-room shifts, alarm handling, and inspection logs. It illustrates how monitoring duties differ from installation and maintenance."
+                ],
+                "evidence_type": "Original recruitment notice",
+                "id": "d024-nanjing",
+                "limitation": "One historical posting for comparing duties and employer requirements.",
+                "market": "Nanjing, China",
+                "name": "Nanjing military supply station | fire systems monitoring operator",
+                "period": "2026-09-02",
+                "publisher": "Nanjing military supply station",
+                "scope": "recruitment_proxy",
+                "url": "https://tyjrswj.nanjing.gov.cn/sjb/xxgk/gsgg/202609/t20260902_5903918.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The historical Fairfax posting covers testing, troubleshooting, repair, and preventive maintenance of commercial fire detection and suppression systems."
+                ],
+                "evidence_type": "Original recruitment notice",
+                "id": "d024-fairfax",
+                "limitation": "One historical posting for comparing duties and employer requirements.",
+                "market": "Virginia, US",
+                "name": "Fairfax County, Virginia | Fire Alarm Technician",
+                "period": "2026-09-05",
+                "publisher": "Fairfax County, Virginia",
+                "scope": "recruitment_proxy",
+                "url": "https://www.governmentjobs.com/careers/fairfaxcounty/jobs/newprint/5415526"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The historical Contra Costa posting covers both fire alarm and electronic security systems. It asks for relevant installation, testing, and repair experience and lists qualification substitutions."
+                ],
+                "evidence_type": "Original recruitment notice",
+                "id": "d024-contra",
+                "limitation": "One historical posting for comparing duties and employer requirements.",
+                "market": "California, US",
+                "name": "Contra Costa County, California | Fire Alarm and Security Systems Technician",
+                "period": "2026-02-25",
+                "publisher": "Contra Costa County, California",
+                "scope": "recruitment_proxy",
+                "url": "https://www.governmentjobs.com/careers/contracosta/jobs/newprint/5221865"
               }
             ]
           },
@@ -37068,6 +37145,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which work direction within this occupation are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand interest codes",
+      "interface.quick_decision.suit_heading": "Who tends to enjoy alarm installation and service work?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. wage reference",
@@ -37511,7 +37589,7 @@
       "text": "Security and Fire Alarm Systems Installers"
     }
   },
-  "source_content_sha256": "49f5cce4ceb3174a5890e51164f2c322d0b2ee4dfdfbbaa6aedf188315cc362f",
+  "source_content_sha256": "d79bdddef5af5a3c8373ee9fcf58e7d083b4b70b8f3b27505f6d0a102e6d82e6",
   "subject": {
     "canonical_slug": "security-and-fire-alarm-systems-installers",
     "name": "Security and Fire Alarm Systems Installers",

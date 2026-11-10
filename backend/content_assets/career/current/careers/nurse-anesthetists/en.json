@@ -185,6 +185,9 @@
       "item:nurse-anesthetists.path.seven-day-trial.6": {
         "status": "pending_mapping"
       },
+      "item:nurse-anesthetists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nurse-anesthetists.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13370,6 +13373,21 @@
             "onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The operation name matches on both forms, but one says left and the other right. Record the discrepancy and the anesthesia team role to notify. The clinical team makes actual decisions."
+            ]
+          },
+          "id": "nurse-anesthetists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Flag an anesthesia handover discrepancy",
+          "type": "notice"
         }
       ]
     },
@@ -15937,6 +15955,13 @@
         "id": "nurse-anesthetists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nurse-anesthetists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16265,7 +16290,7 @@
       "text": "Nurse Anesthetists"
     }
   },
-  "source_content_sha256": "10a62a14cbdd32c450aba8cd8fe34562bf161d9753301efc5141544a5def089f",
+  "source_content_sha256": "2728394824c43b67aa1877b31350ac7f100eb900fc4b7b950636c5b0e81bf858",
   "subject": {
     "canonical_slug": "nurse-anesthetists",
     "name": "Nurse Anesthetists",

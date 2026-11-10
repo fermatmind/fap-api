@@ -185,6 +185,9 @@
       "item:nuclear-power-reactor-operators.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:nuclear-power-reactor-operators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nuclear-power-reactor-operators.profile.career-quick-answers-block.5": {
         "status": "mapped"
       },
@@ -12252,6 +12255,21 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两条交接记录对同一告警分别写“已复核”和“待核”，时间栏不一致。原样保留冲突，写下交给当班负责人的问题。"
+            ]
+          },
+          "id": "nuclear-power-reactor-operators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "区分反应堆日志的状态与待核项",
+          "type": "notice"
         }
       ]
     },
@@ -14701,6 +14719,13 @@
         "id": "nuclear-power-reactor-operators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nuclear-power-reactor-operators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15018,7 +15043,7 @@
       "text": "电力操作员"
     }
   },
-  "source_content_sha256": "c83ded1bc0726a8b5d626bc7baab07de0a0b155db303341be132abddf285afe1",
+  "source_content_sha256": "7a9fe0466d59950174a4bb46c682595609608807edd55e464309ad0aca283cb7",
   "subject": {
     "canonical_slug": "nuclear-power-reactor-operators",
     "name": "电力操作员",

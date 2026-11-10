@@ -1283,6 +1283,9 @@
       "item:physicians-pathologists.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:physicians-pathologists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:physicians-pathologists.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30691,6 +30694,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The list names containers A and B, but only A is identified in the original image and B has no traceable ID. Write the gaps for accessioning or pathology review."
+            ]
+          },
+          "id": "physicians-pathologists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Review a pathology specimen handover",
+          "type": "notice"
         }
       ]
     },
@@ -37051,6 +37069,13 @@
         "id": "physicians-pathologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "physicians-pathologists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37400,7 +37425,7 @@
       "text": "Pathologists"
     }
   },
-  "source_content_sha256": "2bb8e5ff4aceebe319abf1692bfaedb7f38f867e60c5d5e5e5b81469ff5a34cd",
+  "source_content_sha256": "79dd33cd673590ab4c61d54bcfc25e8b7dab589fb11ba634fed039cf8d71ca99",
   "subject": {
     "canonical_slug": "physicians-pathologists",
     "name": "Pathologists",

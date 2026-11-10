@@ -1269,7 +1269,7 @@
         "status": "mapped"
       },
       "item:radio-frequency-identification-device-specialists.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:radio-frequency-identification-device-specialists.path.interview-probation.1": {
         "status": "mapped"
@@ -23311,7 +23311,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本页的判断清单只用于自我提问，不构成录用标准、人格评价或能力结论。射频识别设备专员的授权与边界差异很大：现场勘察、标签选型、标签数据写入与系统上线批准的权限分属不同角色，任何一条清单都不能替代对目标岗位实际授权与项目范围的核对。"
+              "核岗位更偏选型、集成、测试还是现场实施；试点结果按测试条件阅读。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.quick-decision.fit-decision-checklist.1",
@@ -23326,7 +23326,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先观察自己能否把模糊的追踪需求拆成对象、流程、标签与环境条件，并判断现有系统能否复用。再用入行模块的虚构材料 F1—F5 做一次完整练习：核对标签选型、读取率与数据字段，标出待确认与需升级事项；练习只需纸面和文本文件，不需要真实标签、读写器或客户系统。"
+              "在 09「入行、资格与职业发展」做 RF-I01｜核 RFID 试点的识读与重复事件，先完成初稿再看参考。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.quick-decision.fit-decision-checklist.2",
@@ -23340,7 +23340,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "更值得考虑的信号是：你愿意按现场条件反复测试读取率、如实记录失败与边界，并能接受上线决定由业务与项目负责人作出。需要慎重的信号是：把一次试验的读取率当作普遍结论，或在未获授权时改动现场配置与生产数据。"
+              "适合愿意从标签、读写器与系统事件追查识读差异的人。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.quick-decision.fit-decision-checklist.3",
@@ -23356,7 +23356,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本卡结论来自公开职业任务资料与编辑归纳，不是对你个人的测评结果，也不预测就业结果。射频识别设备专员的实际任务范围取决于雇主、行业与项目边界；同一中文头衔在不同公司可能对应完全不同的职责与权限。"
+              "按对象和测试条件分别核识读、事件和业务记录。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.quick-decision.fermat-decision-card.6",
@@ -23371,7 +23371,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "若你愿意把物理现场与信息系统连起来、用实验与数据判断方案是否可行，这份工作值得进一步了解。判断岗位时先问清三件事：你能否独立完成现场勘察与标签选型建议、谁能批准系统配置与生产数据变更、出现读取率不达标时向谁升级。"
+              "适合愿意从标签、读写器与系统事件追查识读差异的人。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.quick-decision.fermat-decision-card.7",
@@ -27718,31 +27718,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "计算机硬件工程师",
@@ -28687,7 +28687,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用可交付物比较：需求与选型说明、读取率测试记录、接口与字段定义；可用 F1—F5 验证。"
+              "按对象和测试条件分别核识读、事件和业务记录。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.fit.personality-fit-block.55",
@@ -28731,7 +28731,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做一次入行练习：用 F1—F5 复核一次虚构站点的选型与测试记录并与参考交付对照。"
+              "按对象和测试条件分别核识读、事件和业务记录。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.fit.personality-fit-block.58",
@@ -29427,7 +29427,7 @@
                 "系统集成协助岗",
                 "协助对接接口与字段，核对数据在系统间的流转。",
                 "能否说明字段含义与接口边界，如实记录差异。",
-                "用 F3—F5 练习说明如何核对字段与数据。",
+                "按对象和测试条件分别核识读、事件和业务记录。",
                 "偏接口与数据，与现场实施岗的关注点不同。"
               ],
               [
@@ -29478,9 +29478,9 @@
               {
                 "id": "clearance",
                 "values": [
-                  "项目与信息安全核查",
-                  "常要求基本的网络与数据权限意识；涉及客户系统与生产数据时，雇主与客户会约定访问与变更权限。",
-                  "核对方式：确认雇主的账号权限、变更流程与可独立操作的范围。"
+                  "河南采购原件：图书馆 RFID",
+                  "技术文件可核图书馆标签与读写设备工作场景，属于项目需求。",
+                  "核岗位更偏选型、集成、测试还是现场实施；试点结果按测试条件阅读。"
                 ]
               },
               {
@@ -29494,9 +29494,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "可展示的项目记录",
-                  "编辑建议准备一份虚构项目的需求与选型说明、读取率测试记录与接口字段定义，并标注测试条件与版本。",
-                  "核对方式：由他人仅凭材料判断结论依据是否完整，而不是只看结论。"
+                  "天津鲲鹏 RFID 测试工程师",
+                  "河北工大留存的 2021 原岗列读写器和标签性能、一致性及报告，作历史职责例。",
+                  "原岗列自动测试系统、读写器和测试报告，属于北美学习岗位。"
                 ]
               }
             ]
@@ -29504,7 +29504,10 @@
           "id": "radio-frequency-identification-device-specialists.path.employer-evidence.1",
           "source_refs": [
             "employer",
-            "editor"
+            "editor",
+            "d015-cn-main",
+            "d015-cn-context",
+            "d015-us-example"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29517,32 +29520,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料与设定｜全部为编辑设计的虚构数据",
-                  "你是虚构企业「远溯供应链科技」的项目工程师，需要复核配送中心项目 P-3110 的选型与测试记录并给出上线、整改或复核建议。以下材料与数值完全虚构，不是真实客户、设备或测试结果。",
-                  "F1 需求与流程：配送中心日处理约 8,000 个货箱，需在入库、分拣与出库三个环节自动记录；现有 WMS 可接收接口数据。F2 对象与环境：货箱含纸箱、塑料周转箱与金属托盘三类；分拣区有金属货架与叉车通道；环境温度 5—35 ℃。F3 标签与设备：候选超高频标签 A（纸箱用）、B（塑料箱用）、C（金属托盘用）；固定读写器 4 台、手持 2 台。F4 测试数据：纸箱读取率 99.2%，塑料周转箱 98.7%，金属托盘 82.4%（项目要求 ≥ 95%）；金属货架旁读取率降至 76%。F5 结论与批准栏：初稿写「整体满足要求，可上线」，复测栏与业务确认栏为空。"
+                  "虚构材料",
+                  "虚构试点 P6 按通过次数计，不按系统事件计。A 通道测试 40 次，39 次有至少一条匹配事件，共 46 条匹配事件。B 通道测试 40 次，37 次有至少一条匹配事件，共 37 条匹配事件。",
+                  "每通道识读率要求至少 95%；逐次记录保留。测试只覆盖纸箱，未测金属周转架，业务端去重处理未获验证。",
+                  "题设由测试负责人复核试点，系统负责人检查事件去重，业务验收角色决定是否扩大。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务",
-                  "逐项核 F1—F5，写出：哪些结果达到要求、哪些须整改、哪些信息不足，以及上线建议应包含的未确认项与批准人。",
-                  "不得新增题面未给的设备型号、读取率或授权信息；未知项单列。"
+                  "任务与交付",
+                  "交两行通道结果及一条复测建议。列分子分母、重复事件、未覆盖范围和责任人。",
+                  "识读率和事件数量分别计算。",
+                  "用纸或本地表格，明确证据出处。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考交付",
-                  "达到要求：纸箱 99.2% 与塑料周转箱 98.7% 均达到项目要求（≥ 95%）。须整改：金属托盘 82.4% 低于要求，且金属货架旁读取率降至 76%，须调整标签类型或安装位置、必要时增加读写器后复测。须核实：标签 C 是否针对金属优化、金属环境对读取的影响范围，以及业务侧对数据字段与流程的确认。",
-                  "上线建议须写明金属托盘未达标、复测栏与业务确认栏为空，并由授权角色批准；工程师只提交建议。"
+                  "提交前提示",
+                  "先保存初稿，再看七天计划之后的参考。",
+                  "无需同伴协助。",
+                  "记录版本。",
+                  "未给的资料留待核。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界",
-                  "本练习不涉及真实客户、真实设备或真实生产数据；实际选型、测试与上线按雇主与客户规程执行。若无法判断，允许写「不足以判断」并说明缺少什么证据。"
+                  "权限边界",
+                  "使用虚构记录。",
+                  "不实际批准或对外交付。"
                 ]
               }
             ]
@@ -29551,7 +29559,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：一次完整的办公支持任务（虚构材料）",
+          "title": "RF-I01 | 核 RFID 试点的识读与重复事件",
           "type": "cards"
         },
         {
@@ -29562,33 +29570,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "需求与对象对照包",
-                  "用 F1—F3 填写流程、对象、环境与候选标签设备对照表，标出未知项与需澄清问题。",
-                  "复核方式：他人仅凭该表即可判断哪一项信息不足及原因。"
+                  "版本和材料记录",
+                  "确认原记录和生效版本。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "独立复核说明",
-                  "对 F4 逐项写出读取率、项目要求、测试条件与判定结论。",
-                  "复核方式：结论与原始数据、要求一致，且标明适用范围。"
+                  "输入与状态核对",
+                  "核对原记录、目标与差异。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "整改与风险记录",
-                  "用 F4 写一份整改记录：事件、影响、待答问题与升级对象；记录可追溯到对象与设备。",
-                  "复核方式：能看出整改范围与下一步。"
+                  "待核交接",
+                  "分待核项目、已知结果和下一责任人。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "上线建议草稿",
-                  "用 F5 写上线建议，列出达标项、须整改项、未确认项与批准人；不出现自行上线或代签。",
-                  "复核方式：建议与证据一致且无越权。"
+                  "交付边界",
+                  "标实际检查与批准状态。",
+                  "用题设原始记录核对。"
                 ]
               }
             ]
@@ -29619,27 +29627,27 @@
             "rows": [
               [
                 "核需求与对象",
-                "能否发现对象类别与流程不一致",
-                "能指出三类对象与三环节均需覆盖并列出待确认项",
-                "单个客户的核对方式不能推广为行业统一考试"
+                "确认原记录和生效版本。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "核测试条件",
-                "能否识别测试条件对结论的影响",
-                "能指出金属环境会降低读取率，须分层测试",
-                "测试方法随对象与频段不同"
+                "核对原记录、目标与差异。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "核读取率判定",
-                "能否用项目要求判断达标",
-                "能指出金属托盘 82.4% 未达 ≥95% 要求",
-                "要求值随项目不同，不能沿用他处阈值"
+                "分待核项目、已知结果和下一责任人。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "核上线与授权",
-                "能否区分建议与批准",
-                "能指出复测与业务确认栏为空，上线须授权角色批准",
-                "上线授权由雇主与客户决定，不能沿用他处假设"
+                "标实际检查与批准状态。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ]
             ]
           },
@@ -29659,50 +29667,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "读材料并写角色边界卡",
-                  "读 F1—F5，写一张角色边界卡：可做（按方案测试与记录）、须复核（选型与整改建议）、禁止动作（自行改动生产数据或上线）；确认不做真实部署。"
+                  "第 1 天",
+                  "记录对象和版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "用 F1—F2 完成对象与环境对照表",
-                  "用 F1—F2 核对流程、对象与环境，标出影响读取的现场条件。"
+                  "第 2 天",
+                  "确认原记录和生效版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "用 F3 整理候选方案",
-                  "用 F3 列出候选标签与读写器并标出每项的适用对象与限制。"
+                  "第 3 天",
+                  "核对原记录、目标与差异。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "用 F4 逐项判定",
-                  "逐项写出读取率、项目要求与结论，标出未达标项与须复测项。"
+                  "第 4 天",
+                  "分待核项目、已知结果和下一责任人。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "写整改与风险记录",
-                  "用 F4 写一份整改记录：事件、影响、待答问题与升级对象。"
+                  "第 5 天",
+                  "标实际检查与批准状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "用 F5 写上线建议草稿",
-                  "写出达标项、须整改项、未确认项与批准人；不自行上线。"
+                  "第 6 天",
+                  "先独立完成交接稿，再按下方参考和量规核对并修订一处。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "对照参考并修订",
-                  "对照参考交付修订前六天输出，记录最易遗漏的一步与下一步练习。"
+                  "第 7 天",
+                  "整理四份练习成果，保留原件和待审状态。"
                 ]
               }
             ]
@@ -29719,20 +29727,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "七天判断要核对的项：职业范围（美国 O*NET 17-2072.01）、项目与信息安全要求、教育与经验、所在地要求、受监督任务。",
-              "以「哪一步最需外部确认」为判断点：测试条件、项目要求和上线授权通常需要雇主与客户确认。",
-              "区分可核事实与编辑判断：读取率与要求是项目事实，适合度是编辑判断；结论须回指原始记录。",
-              "投入估算：每天 30—60 分钟，以读材料与复算为主，无需购买标签或读写器。",
-              "若七天中反复卡在同一环节（如条件分层），把它列为下一步优先练习项。",
-              "若无法判断某一步，写「不足以判断」并说明缺少什么证据，不猜测。",
-              "完成后，把输出与真实项目的测试与验收格式对照，观察差额。"
+              "A 为 39 ÷ 40＝97.5%，满足该通道试点要求。",
+              "B 为 37 ÷ 40＝92.5%，低于该通道目标。",
+              "A 有 46 − 39＝7 条额外匹配事件，不能把 46 作通过次数。",
+              "请测试负责人安排 B 复测及金属周转架验证，系统负责人核去重。",
+              "保留原始逐次记录；通道达标、去重和业务验收分别记，扩大仍待决定。",
+              "四项各 0–2 分：版本与原件、逐项判断、未知范围、权限交接。",
+              "完整可追溯为 2，部分为 1，缺失或越权为 0。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "题后参考与自核量规",
           "type": "list"
         },
         {
@@ -29833,7 +29841,7 @@
               "培训证明、录用资格与项目授权是三件事：拿到学历、证书或厂商培训不等于获得雇主的配置、数据与上线授权，也不承诺签字权。",
               "美国O*NET教育为自报需求、Job Zone为通用准备区间；中国岗位要求缺当前公告，不能推统一路径。通信职业水平、项目内部授权与学历分别核，不建立资格互认。",
               "客户资料、库存与生产数据义务由雇主与客户承担，须依合同与授权执行；本页不构成个人信息保护或信息安全法律意见。",
-              "涉及数据权限、生产数据写入与系统上线的要求由雇主与客户规程规定，是否适用取决于项目与行业，本页不替代项目规程与合同条款。"
+              "核岗位更偏选型、集成、测试还是现场实施；试点结果按测试条件阅读。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.path.credential-boundary.1",
@@ -29850,16 +29858,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得职责、行业与项目范围匹配且状态已核实的中国公开招聘原文。",
-              "本轮未取得职责、行业与项目范围匹配且状态已核实的中国公开招聘原文；保留缺口，不用相邻层级样本替代。"
+              "河北工大留存的 2021 原岗列读写器和标签性能、一致性及报告，作历史职责例。",
+              "原岗列自动测试系统、读写器和测试报告，属于北美学习岗位。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "d015-cn-main",
+            "d015-us-example"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -31887,7 +31893,7 @@
                 "question_key": "career.faq.radio-frequency-identification-device-specialists.comparison"
               },
               {
-                "answer": "看可观察行为：能否把需求拆成可测试条件、如实记录测试与失败、把问题推动到整改，并接受配置与上线由授权角色决定；可用 F1—F5 练习与 O*NET CRI 兴趣核对，测评与单次表现不能决定任职或适合度。",
+                "answer": "适合愿意从标签、读写器与系统事件追查识读差异的人。 在 09「入行、资格与职业发展」做 RF-I01｜核 RFID 试点的识读与重复事件，先完成初稿再看参考。",
                 "id": "radio-frequency-identification-device-specialists.faq.3",
                 "question": "怎样判断自己适不适合做射频识别设备专员？",
                 "question_key": "career.faq.radio-frequency-identification-device-specialists.fit"
@@ -31923,7 +31929,7 @@
                 "question_key": "career.faq.radio-frequency-identification-device-specialists.credentials"
               },
               {
-                "answer": "主要边界是未获授权改动系统配置或生产数据、方案与测试版本失控、读取率结论与现场条件不符、标签选型与现场安装不合格、客户资料外发与单人驻场中断；详见风险板块。",
+                "answer": "核岗位更偏选型、集成、测试还是现场实施；试点结果按测试条件阅读。",
                 "id": "radio-frequency-identification-device-specialists.faq.9",
                 "question": "这份工作最容易出问题的地方是什么？",
                 "question_key": "career.faq.radio-frequency-identification-device-specialists.risk-boundary"
@@ -31953,7 +31959,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind 职业内容团队（编辑整理，非本职业从业者评审）"
+              "RF-I01 为本页虚构试做。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.sources.source-card.1",
@@ -31967,14 +31973,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业身份与任务依据 O*NET 17-2072.01；美国工资与就业依据官方标注的父级职业 Electronics Engineers, Except Computer（17-2072.00）与 BLS 公开资料；中国部分依据国家统计局并保留证据不足。"
+              "技术文件可核图书馆标签与读写设备工作场景，属于项目需求。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "bls",
-            "nbs"
+            "d015-cn-context"
           ],
           "type": "prose"
         },
@@ -31983,12 +31987,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "原编制核读2026-09-30；本轮2026-10-12核O*NET任务/情境/CRI/教育、BLS当前EP与OOH及TX全国工资。当前招聘缺口保留，未把其他来源日期统一改成本轮。"
+              "河北工大留存的 2021 原岗列读写器和标签性能、一致性及报告，作历史职责例。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "d015-cn-main"
           ],
           "type": "prose"
         },
@@ -31997,13 +32001,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页中文用于解释美国官方职业范围，不建立中外资格互认；所有虚构练习材料均为编辑设计，不代表雇主标准或客户要求。客户与业务数据不进入公开页面。"
+              "美国 17-2072 是宽组。原岗和采购资料只说明部分实际任务。"
             ]
           },
           "id": "radio-frequency-identification-device-specialists.sources.source-card.4",
           "source_refs": [
             "editor",
-            "privacy"
+            "privacy",
+            "d015-cn-main",
+            "d015-us-example"
           ],
           "type": "prose"
         }
@@ -32030,13 +32036,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32269,8 +32275,8 @@
               {
                 "accessed_at": "2026-09-30",
                 "details": [
-                  "练习材料、作品建议与七日计划均为编辑设计，不代表真实客户、设备或测试结果。",
-                  "发布方、原始链接与适用范围见来源条目。"
+                  "RF-I01 为虚构纸笔试做。",
+                  "按对象和测试条件分别核识读、事件和业务记录。"
                 ],
                 "evidence_type": "editorial design",
                 "id": "editor",
@@ -32490,6 +32496,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "河北工大留存的 2021 原岗列读写器和标签性能、一致性及报告，作历史职责例。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d015-cn-main",
+                "limitation": "仅用于任务和路径对照。",
+                "market": "中国大陆",
+                "name": "天津鲲鹏 RFID 测试工程师",
+                "period": "日期见原件",
+                "publisher": "天津鲲鹏 RFID 测试工程师",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/home/correcruit/content/id/27771.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "技术文件可核图书馆标签与读写设备工作场景，属于项目需求。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "d015-cn-context",
+                "limitation": "仅用于任务和路径对照。",
+                "market": "中国大陆",
+                "name": "河南采购原件：图书馆 RFID",
+                "period": "日期见原件",
+                "publisher": "河南采购原件：图书馆 RFID",
+                "scope": "contextual",
+                "url": "https://zfcg.henan.gov.cn/cmsweb81e27e/huaxian/rootfiles/2025/12/17/719df3eba8764b2ba641e311baa747f6.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "原岗列自动测试系统、读写器和测试报告，属于北美学习岗位。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d015-us-example",
+                "limitation": "仅用于任务和路径对照。",
+                "market": "美国",
+                "name": "Avery Dennison RFID 应用工程实习",
+                "period": "日期见原件",
+                "publisher": "Avery Dennison RFID 应用工程实习",
+                "scope": "recruitment_proxy",
+                "url": "https://jobs.smartrecruiters.com/averydennison/744000144595999"
               }
             ]
           },
@@ -35799,7 +35850,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "射频识别设备专员适合什么样的人？"
+        "title": "哪些人适合做 RFID 系统工作？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -37181,7 +37232,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合射频识别设备专员工作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37727,14 +37778,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "射频识别设备专员 17-2072.01 的需求分析、现场勘察、标签选型、读取率测试与系统集成任务；核对美国父级 17-2072.00 的工资分位与 2024—2034 预测、中国证据缺口、入行路径，以及可独立完成的纸面选型与测试核对练习。"
+      "text": "了解 RFID 专员怎样联调标签、读写器和业务系统。核中美任务场景并做一次识读率与重复事件试做。"
     },
     "title": {
       "availability": "available",
       "text": "射频识别设备专员"
     }
   },
-  "source_content_sha256": "941a9a5dd1631d389802c4e58400e75f1bf61297bc9ebc8d0a0734a21b01d902",
+  "source_content_sha256": "a65d0c3370ba3d82cee61fd42154ed09a398acc65444f68307fab78840b324b5",
   "subject": {
     "canonical_slug": "radio-frequency-identification-device-specialists",
     "name": "射频识别设备专员",

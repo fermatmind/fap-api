@@ -179,6 +179,9 @@
       "item:nuclear-medicine-technologists.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:nuclear-medicine-technologists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nuclear-medicine-technologists.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13400,6 +13403,21 @@
             "nmpa-reform-2025"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。检查单与设备记录日期一致但检查编号不同。列出必须核对的字段，真实操作交由获授权的检查团队。"
+            ]
+          },
+          "id": "nuclear-medicine-technologists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-profile"
+          ],
+          "title": "核核医学检查记录编号",
+          "type": "notice"
         }
       ]
     },
@@ -16017,6 +16035,13 @@
         "id": "nuclear-medicine-technologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nuclear-medicine-technologists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16311,7 +16336,7 @@
       "text": "核医学技师"
     }
   },
-  "source_content_sha256": "d94b8f117b5ce7a3ec2455c85e75b302e1e33d17e8ef1b6c808327619d87712d",
+  "source_content_sha256": "26c8c371cfd28961cf1a54df1999df7eb14b048bf903139624050a9b6e541b78",
   "subject": {
     "canonical_slug": "nuclear-medicine-technologists",
     "name": "核医学技师",

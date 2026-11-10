@@ -158,6 +158,9 @@
       "item:midwives.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:midwives.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:midwives.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12176,6 +12179,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Form P4 lists an appointment date but does not confirm whether the referral was received. Record what is known and one question for the follow-up or referral owner."
+            ]
+          },
+          "id": "midwives.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Review a maternity follow-up record",
+          "type": "notice"
         }
       ]
     },
@@ -14530,6 +14548,13 @@
         "id": "midwives.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "midwives.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14735,7 +14760,7 @@
       "text": "Midwives: Duties, U.S. Wages, and Employment"
     }
   },
-  "source_content_sha256": "1fa93108374793c8419b3106fe37a1215da58221b878d5309e6bf2dc6ee7b7b0",
+  "source_content_sha256": "56978277fd59d98722cd611fb9f93ca243b8a6b6a58d752c2e1ca4f475464897",
   "subject": {
     "canonical_slug": "midwives",
     "name": "Midwives",

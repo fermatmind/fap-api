@@ -191,6 +191,9 @@
       "item:occupational-health-and-safety-specialists.path.seven-day-trial.6": {
         "status": "pending_mapping"
       },
+      "item:occupational-health-and-safety-specialists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:occupational-health-and-safety-specialists.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12878,6 +12881,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。一项整改有现场照片无复验记录，另一项复验完成但地点写错。分别列出能支持的结论和应请谁复核。"
+            ]
+          },
+          "id": "occupational-health-and-safety-specialists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "复核安全改进证据",
+          "type": "notice"
         }
       ]
     },
@@ -15278,6 +15296,13 @@
         "id": "occupational-health-and-safety-specialists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-health-and-safety-specialists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15632,7 +15657,7 @@
       "text": "作业健康专员（Occupational Health and Safety Specialists）职业画像｜任务、薪资、准入与边界"
     }
   },
-  "source_content_sha256": "a2d15eaf3e27d7d4292bcdc9d54a2f0f6498a7e388ff7a0685c89109c5bf2f77",
+  "source_content_sha256": "165f88ef7dab96f90d0a56aec84ede119a3f469d9a6a8264540c474d24543833",
   "subject": {
     "canonical_slug": "occupational-health-and-safety-specialists",
     "name": "作业健康专员",

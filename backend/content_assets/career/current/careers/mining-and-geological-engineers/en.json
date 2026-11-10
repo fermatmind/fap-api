@@ -146,6 +146,9 @@
       "item:mining-and-geological-engineers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:mining-and-geological-engineers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:mining-and-geological-engineers.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -13013,6 +13016,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. A site comparison includes two surveys. One omits the survey date, and the other labels preliminary findings as verified. State which comparison should wait and what the survey lead should confirm."
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "employment"
+          ],
+          "title": "Review evidence for a mine site comparison",
+          "type": "notice"
         }
       ]
     },
@@ -15523,6 +15541,13 @@
         "id": "mining-and-geological-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mining-and-geological-engineers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15680,7 +15705,7 @@
       "text": "Mining and Geological Engineers: Duties, U.S. Wages, and Safety"
     }
   },
-  "source_content_sha256": "1064367492bde827539ce7d198e6a14f8a9ca17e18d5abc976dd08a3911d438d",
+  "source_content_sha256": "79cffa2cbb52f2135b53aa9da204d967f28a2f2bc497e3a2f4cb57f871a94985",
   "subject": {
     "canonical_slug": "mining-and-geological-engineers",
     "name": "Mining and Geological Engineers",

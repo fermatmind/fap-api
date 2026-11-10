@@ -188,6 +188,9 @@
       "item:neurodiagnostic-technologists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:neurodiagnostic-technologists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:neurodiagnostic-technologists.profile.definition-block.1": {
         "status": "pending_mapping"
       },
@@ -12986,6 +12989,21 @@
             "china-law-current"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。事件日志和检查记录的时钟相差五分钟，且无对时说明。写下保留哪两个时间值、由谁核原始设备日志。"
+            ]
+          },
+          "id": "neurodiagnostic-technologists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核神经诊断记录的时间标记",
+          "type": "notice"
         }
       ]
     },
@@ -15595,6 +15613,13 @@
         "id": "neurodiagnostic-technologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "neurodiagnostic-technologists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15922,7 +15947,7 @@
       "text": "神经诊断技师"
     }
   },
-  "source_content_sha256": "ed10df079ee703b31bc2c13cfe5f85ebcec65ef756b9633447fa421d4b847e79",
+  "source_content_sha256": "ff55e55e10a0cf8e2192c8fc3dddcc05b6f496f17c973043bbb583b5c990d9de",
   "subject": {
     "canonical_slug": "neurodiagnostic-technologists",
     "name": "神经诊断技师",

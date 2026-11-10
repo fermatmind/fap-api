@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-a42-changde": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a42-huizhou": {
+        "status": "pending_mapping"
+      },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
       },
@@ -1632,13 +1638,13 @@
         "status": "mapped"
       },
       "item:actors.path.entry-portfolio.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.entry-role-comparison.1": {
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1710,7 +1716,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -19573,56 +19579,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22599,7 +22569,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Low-risk verification: using the fictional drawings, work orders, process cards, and measuring tool readings provided on this page, complete a paper exercise that 'arranges the drilling and boring sequence according to the drawings and work orders — writes out tool selection, fixturing, and alignment notes according to the cutting parameters — and fills in one dimensional measurement, self-inspection, and equipment and tool inspection record', only to verify whether you are willing to check item by item according to the drawings, tolerances, and process and to record truthfully. The exercise uses fictional materials and does not involve real machine tools, cutting tools, or workpieces, and it does not constitute a quality system, process, or safety compliance conclusion, nor is it equivalent to job training, a skill level, or machine tool operation authorization."
+              "Use the three fictional first-piece records on this page to write a one-page handoff. Check the diameter range, gauge calibration status and hole ID. Record what changes in the variant."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -24167,7 +24137,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "To compare this page's occupation further with adjacent positions, first write one sentence for each of the columns 'object — basis and authorization — outputs and responsibility', then look back at this table to see whether they agree."
+              "Ask whether the role handles drilling, boring or multiple machining operations, and who checks the first piece."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.transition",
@@ -26077,7 +26047,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted."
+              "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
@@ -26175,12 +26145,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national single-occupation wage definition was obtained."
+              "One posting is for an apprentice and the other for experienced piece-rate work. These are advertised rates. Check with the employers for current openings."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "a42-huizhou",
+            "a42-changde"
           ],
           "type": "prose"
         },
@@ -26203,7 +26174,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted."
+              "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -26231,7 +26202,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted."
+              "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26856,7 +26827,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Verification action: complete one machining sequence and parameter and self-inspection record exercise using the fictional drawings, work orders, measuring tool readings, and equipment inspection materials on this page, and participate in one complete cycle of drawing reading, fixturing, machining, measurement, and maintenance in a supervised position or training, observing your own reactions to the workshop and noise and oil mist and quota rhythm."
+              "Use the three fictional first-piece records on this page to write a one-page handoff. Check the diameter range, gauge calibration status and hole ID. Record what changes in the variant."
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -27908,7 +27879,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Complete the paper exercise on this page and seek one supervised position or training experience, recording your true feelings about the workshop and noise and oil mist and quota rhythm."
+              "Use the paper records to see how you feel about repeated checks. Ask the employer about actual workpieces, setup authority and inspection responsibilities."
             ]
           },
           "id": "actors.display.personality_fit_block.questions.next.answer",
@@ -28657,14 +28628,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "The O*NET new-hire education feedback is high school or equivalent 57%, some college no degree 12%, and associate degree 12%, and the remaining options are not shown; these are not advertisement proportions. Job Zone1—2/SVP below 6 is a preparation group, and group descriptions such as several days to one year of on-the-job training cannot be turned into a mandatory several-weeks-to-several-months course for everyone. The BLS typical entry is high school or equivalent, related experience None, and medium-term on-the-job training; None does not mean training is unnecessary. China's exact boring machine operator standard partially corresponds to the U.S. metal and plastic drilling and boring classification but is not fully equivalent. Actual Chinese recruitment samples were not obtained, so it cannot be said that most positions rely on mentoring or generally take several weeks to several months."
+              "An employment list published by the Ankang bureau listed one drill press operator apprentice at Ansmann Electronics in Huizhou, Guangdong, at CNY 2,800–3,500 per month. It listed related experience and no education requirement. Hunan Xiangjian Heavy Industry listed one drilling worker with at least one year of radial drill experience, quoting piece-rate pay of CNY 6,000–8,000 per month. It listed CNC boring separately. One posting is for an apprentice and the other for experienced piece-rate work. These are advertised rates. Check with the employers for current openings."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "r5-bls-projections",
-            "r5-boring-2023"
+            "a42-huizhou",
+            "a42-changde"
           ],
           "type": "notice"
         },
@@ -28783,8 +28753,9 @@
               {
                 "id": "scene",
                 "values": [
-                  "A one-page machining flow summary",
-                  "Use one page to write out the steps and checkpoints of drawing reading and preparation — fixturing and alignment — drilling, boring, reaming, milling, and countersinking — verification with measuring tools — tool changing and maintenance and records and anomaly reporting."
+                  "Work sample one: drilling and boring handoff",
+                  "Keep the original and B22 variant.",
+                  "Show evidence, status and next owner."
                 ]
               },
               {
@@ -29040,32 +29011,34 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional materials",
-                  "1 set of fictional drawings, work orders, and process cards (including dimensions, tolerances, surfaces, operations, fixturing, and tool requirements), 1 measuring tool reading record, an equipment and tool inspection sheet and a dimensional measurement and self-inspection and anomaly reporting and handover form template, and 3 items on a material and tool anomaly list.",
-                  "All materials are fictional and contain no real enterprise, workpiece, or drawing information."
+                  "Three fictional first-piece records",
+                  "D21: the drilled hole is specified at 9.95–10.05 mm and measures 10.08 mm. Gauge calibration is valid and the hole ID matches.",
+                  "B22: the bore measures within the work order range. The gauge calibration field is blank and the hole ID matches.",
+                  "B23: the bore measures within the work order range and gauge calibration is valid. The work order shows hole H2 and the measurement sheet shows H3."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Portfolio task",
-                  "Within 40 minutes, arrange the drilling and boring sequence according to the drawings and work orders, write a paragraph on tool selection and cutting parameters and fixturing and alignment according to the material and requirements, and fill in one dimensional measurement and self-inspection and equipment and tool inspection record.",
-                  "Do only paper verification and plan design, without contact with real machine tools, tools, or workpieces, and without a quality system, process, or safety compliance conclusion."
+                  "One-page handoff",
+                  "For each record, list evidence, status and next owner. Quality checks dimensions and gauge records. The process lead checks hole IDs. Quality signs off on first-piece release.",
+                  "Single-change variant: change B22 calibration status to “valid.” Leave the other records as given. Show the row that changes."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference result",
-                  "The machining sequence is sorted by dimensions and tolerances and operations and fixturing and 3 material and tool anomalies are marked; the parameter note includes cutting speed and feed and depth of cut and tools and cooling and alignment key points; the inspection and records include equipment and tool defects and measuring tool calibration and dimensional out-of-tolerance and anomaly reporting items.",
-                  "The reference result is for self-checking and is not the only correct answer."
+                  "Finish independently",
+                  "Submit the original and variant on day six.",
+                  "On day seven, open “Drilling and boring handoff reference (open after day six)” under Common questions and data sources."
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "Boundary statement",
-                  "The exercise is for career exploration and does not constitute job training, a skill level, machine tool operation authorization, or safety authorization; real machine tool operation and process and quality and work safety and occupational health must be undertaken by organizations and personnel with the corresponding position training that follow the regulations and standards of the relevant jurisdiction and this enterprise's systems."
+                  "Exercise boundary",
+                  "Use the paper records for the handoff.",
+                  "Follow workplace procedures for actual setup, remeasurement and first-piece release."
                 ]
               }
             ]
@@ -29076,7 +29049,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "Entry case material: one fictional machining and self-inspection and equipment inspection verification",
+          "title": "Fictional drilling and boring handoff",
           "type": "cards"
         },
         {
@@ -29087,50 +29060,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: understand the material",
-                  "Read the fictional drawings, work orders, process, and measuring tool materials, circle uncertain items, and write a question list."
+                  "Day 1",
+                  "Copy the record IDs."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: machining sequence",
-                  "Arrange the drilling and boring machining sequence by dimensions, tolerances, and operations and mark items to be confirmed."
+                  "Day 2",
+                  "Compare diameters and ranges."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: parameters and tools",
-                  "Write the tool selection and cutting parameters and fixturing and alignment key points according to the material and requirements."
+                  "Day 3",
+                  "Check the gauge calibration field."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: measurement and self-inspection",
-                  "Write a paragraph on dimensional and tolerance judgment and out-of-tolerance handling based on the measuring tool readings."
+                  "Day 4",
+                  "Compare hole IDs."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: equipment and records",
-                  "Fill in one equipment and tool inspection and dimensional measurement and self-inspection record and anomaly reporting and handover form."
+                  "Day 5",
+                  "Record three statuses and owners."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: repeat under time limits",
-                  "Redo it under time limits and record your energy and the types of errors."
+                  "Day 6",
+                  "Submit one page on your own with the original three records and a separate row for the changed record in the variant."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: compare and decide",
-                  "Compare the two versions of the plan and write down continue / caution / stop and the reasons."
+                  "Day 7",
+                  "On day seven, open “Drilling and boring handoff reference (open after day six)” under Common questions and data sources. Record one correction."
                 ]
               }
             ]
@@ -29149,13 +29122,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1 judgment: whether uncertain items in the material were honestly marked rather than guessed and filled in.",
-              "Day 2 judgment: whether the machining sequence was checked against dimensions and tolerances and operations rather than by impression.",
-              "Day 3 judgment: whether the parameter and tool and fixturing and alignment key points were written clearly according to the material and requirements.",
-              "Day 4 judgment: whether the dimensional and tolerance judgment is supported by measuring tool readings and self-inspection and states the out-of-tolerance handling.",
-              "Day 5 judgment: whether the equipment and tool inspection and measurement and self-inspection records are verifiable.",
-              "Day 6 judgment: whether you can still hold to the drawings and safety and self-inspection requirements under time limits.",
-              "Day 7 judgment: combining the two versions of performance, judge whether you are willing to continue investing in the drilling and boring machining direction."
+              "Keep the original and variant.",
+              "Give evidence that can be checked.",
+              "Distinguish gauge records from first-piece approval.",
+              "Name the next owner.",
+              "Compare with the reference and note one correction.",
+              "Ask the employer about actual duties.",
+              "Save the handoff as a work sample."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -31052,13 +31025,14 @@
                 ]
               },
               {
-                "answer": "In the U.S. BLS 2025 wage data, the median is 49,080 USD per year (23.60 USD per hour), annual percentiles are 36,300 / 41,710 / 49,080 / 57,940 / 68,410 USD, and hourly percentiles are 17.45 / 20.05 / 23.60 / 27.85 / 32.89 USD. Mainland China has no corresponding national single-occupation definition, so no median or percentiles are given. When comparing real positions, verify the city and industry, unit type and size, whether it is general drilling and boring machine tools or CNC machine tool operation, whether it includes skill level and night shift and overtime and piece-rate allowances, and the pre-tax and post-tax definitions.",
+                "answer": "In 2025 the U.S. median was $49,080 per year or $23.60 per hour. The mainland China figures are quotes from individual postings. An employment list published by the Ankang bureau listed one drill press operator apprentice at Ansmann Electronics in Huizhou, Guangdong, at CNY 2,800–3,500 per month. It listed related experience and no education requirement. Hunan Xiangjian Heavy Industry listed one drilling worker with at least one year of radial drill experience, quoting piece-rate pay of CNY 6,000–8,000 per month. It listed CNC boring separately.",
                 "id": "actors.faq.6",
                 "question": "What is the typical wage, and how should it be compared?",
                 "question_key": "career.faq.drilling-and-boring-machine-tool-setters-operators-and-tenders-metal-and-plastic.6",
                 "source_refs": [
-                  "oews",
-                  "r2-pay-1"
+                  "r5-wages",
+                  "a42-huizhou",
+                  "a42-changde"
                 ]
               },
               {
@@ -31082,7 +31056,7 @@
                 ]
               },
               {
-                "answer": "First do the paper exercise on this page (arrange the machining sequence according to the drawings and work orders, write tool selection and fixturing and alignment notes, and fill in dimensional measurement and self-inspection and equipment and tool inspection records), then seek a supervised position or training experience; at the same time confirm that you can accept the workshop and noise and oil mist and shift rhythm, and confirm safety guard and self-inspection boundaries per the enterprise and team and standard requirements.",
+                "answer": "Use the three fictional first-piece records on this page to write a one-page handoff. Check the diameter range, gauge calibration status and hole ID. Record what changes in the variant.",
                 "id": "actors.faq.9",
                 "question": "If I have zero experience and want to try, what should I do first?",
                 "question_key": "career.faq.drilling-and-boring-machine-tool-setters-operators-and-tenders-metal-and-plastic.9",
@@ -31092,14 +31066,19 @@
                 ]
               },
               {
-                "answer": "Consider the site and safety load (exposure to hazardous equipment every day 54%, exposure to contaminants every day 61%, exposure to noise every day 56%, wearing common protective or safety equipment 'every day' 93%, exposure to extreme heat or extreme cold 'weekly or more' 29%, standing continuously 25% + more than half 50%, continuous use of hands 57% + more than half 33%) and the consequences of error (extremely serious 29%, very serious 27%, serious 26%), as well as safety guards and occupational health and quality responsibilities.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 51-4032 to fall from about 4,700 in 2025 to 4,200 in 2035, a decline of 9.5%. It projects about 400 openings per year on average, including replacements. Employment totals are rounded separately.",
                 "id": "actors.faq.10",
                 "question": "What else should be considered when choosing this occupation?",
                 "question_key": "career.faq.drilling-and-boring-machine-tool-setters-operators-and-tenders-metal-and-plastic.10",
                 "source_refs": [
-                  "onet",
-                  "nist"
+                  "r5-bls-projections"
                 ]
+              },
+              {
+                "answer": "D21 at 10.08 mm exceeds the 10.05 mm limit. Flag it for quality. B22 lacks calibration status. Refer it to quality for a gauge record check. B23 shows H2 and H3 on different records. Ask the process lead to check which hole the reading belongs to. In the variant, B22 has valid calibration. Send the complete record to quality for sign-off. Valid calibration does not authorize first-piece release. D21 and B23 stay the same. Check diameter, gauge, hole ID, and the handoff and authority in both versions.",
+                "id": "actors.faq.11",
+                "question": "Drilling and boring handoff reference (open after day six)",
+                "question_key": "career.faq.drilling-and-boring-machine-tool-setters-operators-and-tenders-metal-and-plastic.11"
               }
             ]
           },
@@ -31114,9 +31093,9 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "The exact U.S. occupation 51-4032 shows 2025 national 10/25/50/75/90 percentiles of 36,300 / 41,710 / 49,080 / 57,940 / 68,410 USD annual and 17.45 / 20.05 / 23.60 / 27.85 / 32.89 USD hourly, with the original figures retained correctly. OEWS is straight-time pre-tax wages for employed workers, including applicable production bonuses, commissions, and specified allowances, and excluding self-employment, overtime premiums, shift differentials, and non-production bonuses and the like; project-based, outsourced, or dispatched employees are not excluded across the board because of an employment label. Percentiles are not starting pay, seniority levels, or personal caps.",
+              "U.S. wages and employment use occupation 51-4032. The two mainland China job notices illustrate individual roles. Comparable occupation-level wage data remain unavailable.",
               "BLS51-4032: 2025 employment 4.7 thousand → 2035 projected 4.2 thousand, official net change -0.4 thousand and change -9.5%; each figure is rounded to the published precision, and the endpoints cannot be subtracted to claim a precise reduction of 500 people. 2025—2035 annual average openings 0.4 thousand, about 400, including growth and replacement, and not a ten-year total or a net increase. O*NET rounds to -10%, which is distinguished from the BLS precise value. The self-employment share is —, not provided, and is not filled in as 0 or described as very low. Projections are not Chinese demand, individual hiring probability, or AI causality; OOH is the parent page for Metal and Plastic Machine Workers.",
-              "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted.",
+              "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable.",
               "The National Occupational Standard for Boring Machine Operators (2023 edition), 6-18-01-05, promulgated and effective 2023-08-31 by Ren She Ting Fa [2023] No. 32, refers to operating boring machines to drill, enlarge, and bore holes and to machine end faces / other profile surfaces. 1.4 Level five/junior to level one/senior technician; 1.7 the ordinary education level is junior middle school graduation, which is not the threshold for all employers. 1.8.1 the training reference for each level is not less than 500/400/300/300/200 standard hours, not the general few weeks to several months. 1.9.1 for the junior level, having reached 16 and intending to engage in or engaging in the work; for the intermediate level, alternatives include 5 years of work, junior level +3 years, or a related graduation; the advanced level and technician level have additional multiple paths. 1.9.2 theoretical/skills assessment and, for technicians/senior technicians, a comprehensive review, with passing at 60 points or above in each. Here only PDF1—8 pages and clauses 1.1—1.9 were actually verified, without claiming to cover the full text on safety and process. It corresponds to boring machine operators and does not stand in for standards for all drilling machines/plastics or for turning, milling, and grinding.",
               "GB15760-2025 General Technical Specifications for Safety Guards of Metal Cutting Machine Tools, official metadata currently in force, published 2025-08-01 and implemented 2026-08-01. In practice only the metadata was obtained, not the standard's full-text scope of application, item-by-item guard/verification clauses, or replacement list; the name alone does not give all drilling and boring equipment a single operating procedure, and specifics must be verified against the full standard text and equipment documentation.",
               "Article 4 of the 2021 revision of the Work Safety Law covers all-staff responsibility / risk grading and the dual prevention of hidden dangers; Article 28 covers being trained and qualified before taking a post, with dispatch and internship management training listed separately; Article 36 covers equipment maintenance, inspection, and records and prohibits shutting down or damaging guards; Article 43 requires dedicated on-site safety management for lifting operations and similar; Articles 44/45 require the organization to inform workers of hazards and emergency response and to provide protective equipment meeting standards and supervise its use per the rules; Article 54 allows refusal of illegal commands or forced risk-taking; Article 55 allows stopping work or taking possible emergency measures and then evacuating in situations that directly endanger personal safety; Articles 57/59 require workers to follow procedures and protection and to report hidden dangers immediately to the on-site safety management personnel or responsible person. Articles 5—7 of the 2018 revision of the Occupational Disease Prevention and Control Law cover the employer responsibility system and the unit's hazard responsibility, the full responsibility of the principal person in charge, and participation in work injury insurance according to law. Stopping, handling, and restarting after general quality anomalies must be verified against the specific equipment/unit procedures, and this page grants no general recovery authority.",
@@ -31501,11 +31480,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted. The original homepage is only an entry point."
+                  "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable. The original homepage is only an entry point."
                 ],
                 "evidence_type": "official navigation entry",
                 "id": "nbs",
-                "limitation": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted. The original homepage is only an entry point.",
+                "limitation": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable. The original homepage is only an entry point.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics public channels (wage statistical definitions by industry and unit type)",
                 "period": "accessed 2026-09-19",
@@ -31577,11 +31556,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted. The original human resources homepage is not a wage sample."
+                  "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable. The original human resources homepage is not a wage sample."
                 ],
                 "evidence_type": "official navigation entry",
                 "id": "r2-pay-1",
-                "limitation": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted. The original human resources homepage is not a wage sample.",
+                "limitation": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable. The original human resources homepage is not a wage sample.",
                 "market": "Mainland China",
                 "name": "Entry point for verifying Chinese public recruitment and pay definitions (editorial synthesis)",
                 "period": "accessed 2026-09-19",
@@ -31757,7 +31736,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "BLS51-4032: 2025 employment 4.7 thousand → 2035 projected 4.2 thousand, official net change -0.4 thousand and change -9.5%; each figure is rounded to the published precision, and the endpoints cannot be subtracted to claim a precise reduction of 500 people. 2025—2035 annual average openings 0.4 thousand, about 400, including growth and replacement, and not a ten-year total or a net increase. O*NET rounds to -10%, which is distinguished from the BLS precise value. The self-employment share is —, not provided, and is not filled in as 0 or described as very low. Projections are not Chinese demand, individual hiring probability, or AI causality; OOH is the parent page for Metal and Plastic Machine Workers. The O*NET new-hire education feedback is high school or equivalent 57%, some college no degree 12%, and associate degree 12%, and the remaining options are not shown; these are not advertisement proportions. Job Zone1—2/SVP below 6 is a preparation group, and group descriptions such as several days to one year of on-the-job training cannot be turned into a mandatory several-weeks-to-several-months course for everyone. The BLS typical entry is high school or equivalent, related experience None, and medium-term on-the-job training; None does not mean training is unnecessary. China's exact boring machine operator standard partially corresponds to the U.S. metal and plastic drilling and boring classification but is not fully equivalent."
+                  "BLS Table 1.2 projects U.S. employment in occupation 51-4032 to fall from about 4,700 in 2025 to 4,200 in 2035, a decline of 9.5%. It projects about 400 openings per year on average, including replacements."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "r5-bls-projections",
@@ -31772,11 +31751,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted."
+                  "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable."
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "r5-nbs-current",
-                "limitation": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted.",
+                "limitation": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 urban unit wages",
                 "period": "2025",
@@ -31890,6 +31869,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "An employment list published by the Ankang bureau listed one drill press operator apprentice at Ansmann Electronics in Huizhou, Guangdong, at CNY 2,800–3,500 per month. It listed related experience and no education requirement."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a42-huizhou",
+                "limitation": "One employer’s quoted pay. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Drill press job posting",
+                "period": "2026",
+                "publisher": "Ankang Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.ankang.gov.cn/Content-2942059.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Hunan Xiangjian Heavy Industry listed one drilling worker with at least one year of radial drill experience, quoting piece-rate pay of CNY 6,000–8,000 per month. It listed CNC boring separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a42-changde",
+                "limitation": "One employer’s quoted pay. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Drill press job posting",
+                "period": "2026",
+                "publisher": "Changde High-Tech Zone Administration",
+                "scope": "recruitment_proxy",
+                "url": "https://cdgxq.changde.gov.cn/slzq/gxdt__xxyw/gzdt/content_78204507"
               }
             ]
           },
@@ -34688,7 +34697,7 @@
             {
               "指标": "Data type",
               "数值": "Exact occupation wage gap; industry annual averages listed separately",
-              "说明": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted."
+              "说明": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable."
             },
             {
               "指标": "Machine tool safety guards",
@@ -34718,12 +34727,12 @@
             {
               "指标": "Sample boundaries",
               "数值": "Industry averages are not occupational wages",
-              "说明": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted."
+              "说明": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable."
             },
             {
-              "指标": "Regional comparison",
-              "数值": "Chinese and U.S. samples used separately",
-              "说明": "The exact U.S. occupation 51-4032 shows 2025 national 10/25/50/75/90 percentiles of 36,300 / 41,710 / 49,080 / 57,940 / 68,410 USD annual and 17.45 / 20.05 / 23.60 / 27.85 / 32.89 USD hourly, with the original figures retained correctly. OEWS is straight-time pre-tax wages for employed workers, including applicable production bonuses, commissions, and specified allowances, and excluding self-employment, overtime premiums, shift differentials, and non-production bonuses and the like; project-based, outsourced, or dispatched employees are not excluded across the board because of an employment label. Percentiles are not starting pay, seniority levels, or personal caps. National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted."
+              "指标": "Job postings",
+              "数值": "An employment list published by the Ankang bureau listed one drill press operator apprentice at Ansmann Electronics in Huizhou, Guangdong, at CNY 2,800–3,500 per month. It listed related experience and no education requirement. Hunan Xiangjian Heavy Industry listed one drilling worker with at least one year of radial drill experience, quoting piece-rate pay of CNY 6,000–8,000 per month. It listed CNC boring separately.",
+              "说明": "One posting is for an apprentice and the other for experienced piece-rate work. These are advertised rates. Check with the employers for current openings."
             }
           ],
           "china_ai_row": {
@@ -34735,7 +34744,7 @@
           "china_class_row": "Official and institutional materials from mainland China",
           "china_edu_table": [
             {
-              "学历段": "Machine tool safety guards",
+              "学历段": "Huizhou apprentice: no education requirement in the notice",
               "岗位方向": "The National Occupational Standard for Boring Machine Operators (2023 edition), 6-18-01-05, promulgated and effective 2023-08-31 by Ren She Ting Fa [2023] No. 32, refers to operating boring machines to drill, enlarge, and bore holes and to machine end faces / other profile surfaces. 1.4 Level five/junior to level one/senior technician; 1.7 the ordinary education level is junior middle school graduation, which is not the threshold for all employers. 1.8.1 the training reference for each level is not less than 500/400/300/300/200 standard hours, not the general few weeks to several months. 1.9.1 for the junior level, having reached 16 and intending to engage in or engaging in the work; for the intermediate level, alternatives include 5 years of work, junior level +3 years, or a related graduation; the advanced level and technician level have additional multiple paths. 1.9.2 theoretical/skills assessment and, for technicians/senior technicians, a comprehensive review, with passing at 60 points or above in each. Here only PDF1—8 pages and clauses 1.1—1.9 were actually verified, without claiming to cover the full text on safety and process. It corresponds to boring machine operators and does not stand in for standards for all drilling machines/plastics or for turning, milling, and grinding.",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -34745,7 +34754,7 @@
               }
             },
             {
-              "学历段": "Occupational skill level",
+              "学历段": "Changde drilling worker: at least one year of radial drill experience",
               "岗位方向": "GB15760-2025 General Technical Specifications for Safety Guards of Metal Cutting Machine Tools, official metadata currently in force, published 2025-08-01 and implemented 2026-08-01. In practice only the metadata was obtained, not the standard's full-text scope of application, item-by-item guard/verification clauses, or replacement list; the name alone does not give all drilling and boring equipment a single operating procedure, and specifics must be verified against the full standard text and equipment documentation.",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34890,19 +34899,33 @@
               }
             },
             {
-              "城市/区间": "Recruitment quotes (not a substitute for actual pay)",
+              "城市/区间": "Huizhou and Changde job postings",
               "月薪参考": {
-                "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
-                "block": "china-salary",
-                "copy_key": "career.item.career-snapshot-primary-locale",
-                "type": "prose"
+                "$join": [
+                  {
+                    "$fact": "posting-a42-huizhou",
+                    "field": "display_value"
+                  },
+                  {
+                    "$fact": "posting-a42-changde",
+                    "field": "display_value"
+                  },
+                  {
+                    "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
+                    "block": "china-salary",
+                    "copy_key": "career.item.career-snapshot-primary-locale",
+                    "type": "prose"
+                  }
+                ],
+                "separator": "\n"
               }
             }
           ],
           "china_soc_row": "Mainland China wage definition",
           "edu": "See the entry module for training and skill level and safety guards",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-a42-huizhou",
+            "posting-a42-changde"
           ],
           "sources_note": "Source links are used within their respective scopes of application.",
           "ui": {
@@ -35588,7 +35611,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Lathe operators: differences from this occupation in rotating body turning",
             "transition_distance": {
@@ -35611,7 +35634,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Metal milling and planing machine tool operators: differences from this occupation in flat surface and groove machining",
             "transition_distance": {
@@ -35634,7 +35657,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Grinding, lapping, polishing, and deburring machine operators: machining task differences",
             "transition_distance": {
@@ -35657,7 +35680,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/forging-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/forging-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "forging-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Forging machine operators: differences from this occupation in pressure forming",
             "transition_distance": {
@@ -35680,7 +35703,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/industrial-machinery-mechanics",
+            "target_href": "/en/career/jobs/industrial-machinery-mechanics",
             "target_slug": "industrial-machinery-mechanics",
             "target_title": "Industrial machinery mechanics: differences from this occupation in equipment repair",
             "transition_distance": {
@@ -35703,7 +35726,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/earth-drillers-except-oil-and-gas",
+            "target_href": "/en/career/jobs/earth-drillers-except-oil-and-gas",
             "target_slug": "earth-drillers-except-oil-and-gas",
             "target_title": "Extruding and drawing machine setters, operators, and tenders: extrusion and drawing forming task differences",
             "transition_distance": {
@@ -35726,7 +35749,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Welders, cutters, and brazers: joining and cutting task differences",
             "transition_distance": {
@@ -35749,7 +35772,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/welders-cutters-solderers-and-brazers",
+            "target_href": "/en/career/jobs/welders-cutters-solderers-and-brazers",
             "target_slug": "welders-cutters-solderers-and-brazers",
             "target_title": "Earth drillers, except oil and gas",
             "transition_distance": {
@@ -35837,7 +35860,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35886,7 +35909,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Explore my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35935,7 +35958,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35984,7 +36007,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Explore my motivation cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36033,7 +36056,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36082,7 +36105,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Explore my communication cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36818,19 +36841,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Explore the task interests and work preferences of drilling and boring machine tool setters, operators, and tenders"
+            "label": "MBTI personality test"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Explore the task interests and work preferences of drilling and boring machine tool setters, operators, and tenders"
-          },
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Explore the task interests and work preferences of drilling and boring machine tool setters, operators, and tenders"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Explore the task interests and work preferences of drilling and boring machine tool setters, operators, and tenders"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -37236,74 +37251,75 @@
       },
       {
         "derivation": null,
-        "display_value": "About 5,300 people (2024, O*NET summary page definition)",
+        "display_value": "2025 employment 4.7 thousand (published precision)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment size (stock statistic)",
-        "occupation_scope": "For this occupation (51-4032.00); the size is relatively small and changes with manufacturing conditions and the degree of equipment automation; the national total does not indicate specific opportunities in a given industry or enterprise, and statistics fluctuate considerably",
-        "period": "2024 base period; searched 2026-09-19",
+        "measure": "Employment stock",
+        "occupation_scope": "BLS51-4032: 2025 employment 4.7 thousand → 2035 projected 4.2 thousand, official net change -0.4 thousand and change -9.5%; each figure is rounded to the published precision, and the endpoints cannot be subtracted to claim a precise reduction of 500 people. 2025—2035 annual average openings 0.4 thousand, about 400, including growth and replacement, and not a ten-year total or a net increase. O*NET rounds to -10%, which is distinguished from the BLS precise value. The self-employment share is —, not provided, and is not filled in as 0 or described as very low. Projections are not Chinese demand, individual hiring probability, or AI causality; OOH is the parent page for Metal and Plastic Machine Workers.",
+        "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "r5-bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "The 2024—2034 projection is 'decline (Decline, -1% or lower)' (the category noted on the O*NET summary page; that page does not give a single precise percentage)",
+        "display_value": "Decline of 9.5%",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "For this occupation, projection period 2024—2034; this projection is a change in the occupation total and not an individual's chance of being hired; that page gives only the 'decline (-1% or lower)' category rather than a single precise percentage, and this page follows the source wording instead of converting percentages itself; this page did not obtain a first-hand BLS occupational outlook page definition for this occupation",
-        "period": "2024—2034 projection period; searched 2026-09-19",
+        "measure": "Projected change",
+        "occupation_scope": "BLS51-4032: 2025 employment 4.7 thousand → 2035 projected 4.2 thousand, official net change -0.4 thousand and change -9.5%; each figure is rounded to the published precision, and the endpoints cannot be subtracted to claim a precise reduction of 500 people. 2025—2035 annual average openings 0.4 thousand, about 400, including growth and replacement, and not a ten-year total or a net increase. O*NET rounds to -10%, which is distinguished from the BLS precise value. The self-employment share is —, not provided, and is not filled in as 0 or described as very low. Projections are not Chinese demand, individual hiring probability, or AI causality; OOH is the parent page for Metal and Plastic Machine Workers.",
+        "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "r5-bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 400 (2024—2034, including replacement needs; O*NET summary page definition)",
+        "display_value": "2025—2035 annual average openings about 400 (including replacement)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Projected period job openings (including replacement needs)",
-        "occupation_scope": "For this occupation; this is the total openings formed by growth and replacement during the projection period, not annual net new positions and not a direct measure of individual opportunity; the period noted on that O*NET page is 2024—2034, and this page cites that definition without converting to annual figures",
-        "period": "2024—2034 projection period; searched 2026-09-19",
+        "measure": "Annual average openings",
+        "occupation_scope": "BLS51-4032: 2025 employment 4.7 thousand → 2035 projected 4.2 thousand, official net change -0.4 thousand and change -9.5%; each figure is rounded to the published precision, and the endpoints cannot be subtracted to claim a precise reduction of 500 people. 2025—2035 annual average openings 0.4 thousand, about 400, including growth and replacement, and not a ten-year total or a net increase. O*NET rounds to -10%, which is distinguished from the BLS precise value. The self-employment share is —, not provided, and is not filled in as 0 or described as very low. Projections are not Chinese demand, individual hiring probability, or AI causality; OOH is the parent page for Metal and Plastic Machine Workers.",
+        "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "r5-bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Manufacture of general-purpose and special-purpose equipment and fabricated metal products and automobile and electronics and similar manufacturing scenarios | main industry directions for this occupation (O*NET summary page and task description; no industry category shares or headcounts attached)",
+        "display_value": "O*NET, citing 2025 industry employment shares for this occupation: manufacturing 87%, which is not industry wages or the share of all manufacturing positions nationwide; more detailed industry wages were not obtained, and the self-employment proportion is not provided.",
         "fact_id": "industry-theater",
         "market": "United States",
-        "measure": "Main industries (not employment shares)",
-        "occupation_scope": "Positions in this occupation are distributed across manufacturing scenarios such as general-purpose and special-purpose equipment, fabricated metal products, automobiles, and electronics; the O*NET page captured this round does not provide industry employment shares or industry wage figures, and this page does not infer income from industry categorization",
-        "period": "2024 base period definition; searched 2026-09-19",
+        "measure": "Industry employment share, not wages",
+        "occupation_scope": "O*NET, citing 2025 industry employment shares for this occupation: manufacturing 87%, which is not industry wages or the share of all manufacturing positions nationwide; more detailed industry wages were not obtained, and the self-employment proportion is not provided.",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Work environment characteristics: teamwork 'extremely important' 56%; face-to-face discussions every day 52%; continuous contact with others 51%; telephone conversations every day 21% (another 44% never); email use every day 35% (another 42% never); decision freedom 'very large' 40% (another 40% some); precision or accuracy 'extremely important' 70% (another 30% very important); time pressure every day 51%; work hours 'regular' 80% (another 20% irregular); standing continuously 25% (another 50% more than half); continuous use of hands 57% (another 33% more than half); exposure to hazardous equipment every day 54%; exposure to contaminants every day 61%; wearing common protective or safety equipment every day 93%; exposure to noise every day 56% (another 31% weekly or more); exposure to extreme heat or extreme cold 'weekly or more' 29%; pace determined by equipment speed 'extremely important' 52%; automation level 'moderately automated' 43%; repeating the same tasks 'extremely important' 26%; consequences of error 'extremely serious' 29% (another 27% very serious, 26% serious)",
+        "display_value": "U.S. respondent feedback on 57 work context items: common protective equipment every day 93%, accuracy extremely important 70% / very important 30%; typical week more than 40 hours 79% / 40 hours 21%, regular 80% / irregular 20%; face-to-face every day 52% / weekly but not every day 41%, continuous use of hands 57% / more than half 33%, deadlines every day 51% / weekly but not every day 32% / monthly but not weekly 15%, teamwork extremely important 56% / very important 23%. Noise every day 56% / weekly but not every day 31%, contaminants every day 61%, hazardous equipment every day 54% / weekly but not every day 26%; standing continuously 25% / more than half 50%. Pace determined by equipment speed extremely important 52%, error extremely serious 29% / very serious 27% / serious 26%. Email every day 35% / never 42%, telephone every day 21% / never 44%, continuous contact 51%, decision freedom very large 40% / some 40%. Extreme heat or extreme cold weekly but not every day 29%; whole-body vibration never 85%. Moderate automation 43%, high 14%, slight 24%, none 15% are conventional automation feedback, not a GenAI adoption rate or accident probability.",
         "fact_id": "industry-education",
         "market": "United States",
-        "measure": "Work context (worker feedback proportions)",
-        "occupation_scope": "O*NET work context data reflects the overall situation of the worker survey; it is not the workload of a particular enterprise or individual, and it cannot replace the safety, protection, schedule, and shift arrangements of a specific position; the same group of data shows level of competition 'light competition' 29% and 'no competition at all' 25%",
-        "period": "Page updated 2026; searched 2026-09-19",
+        "measure": "Context, not industry wages",
+        "occupation_scope": "U.S. respondent feedback on 57 work context items: common protective equipment every day 93%, accuracy extremely important 70% / very important 30%; typical week more than 40 hours 79% / 40 hours 21%, regular 80% / irregular 20%; face-to-face every day 52% / weekly but not every day 41%, continuous use of hands 57% / more than half 33%, deadlines every day 51% / weekly but not every day 32% / monthly but not weekly 15%, teamwork extremely important 56% / very important 23%. Noise every day 56% / weekly but not every day 31%, contaminants every day 61%, hazardous equipment every day 54% / weekly but not every day 26%; standing continuously 25% / more than half 50%. Pace determined by equipment speed extremely important 52%, error extremely serious 29% / very serious 27% / serious 26%. Email every day 35% / never 42%, telephone every day 21% / never 44%, continuous contact 51%, decision freedom very large 40% / some 40%. Extreme heat or extreme cold weekly but not every day 29%; whole-body vibration never 85%. Moderate automation 43%, high 14%, slight 24%, none 15% are conventional automation feedback, not a GenAI adoption rate or accident probability.",
+        "period": "2026 page",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Note: O*NET does not provide a more detailed industry distribution or industry wages for this occupation; the work context ratios are the overall situation of worker feedback and do not represent the specific arrangements of a particular enterprise or operation; machine tool safety guard, work safety, and occupational health requirements must be implemented according to this enterprise's systems and the standards of the relevant jurisdiction",
+        "display_value": "The O*NET new-hire education feedback is high school or equivalent 57%, some college no degree 12%, and associate degree 12%, and the remaining options are not shown; these are not advertisement proportions. Job Zone1—2/SVP below 6 is a preparation group, and group descriptions such as several days to one year of on-the-job training cannot be turned into a mandatory several-weeks-to-several-months course for everyone. The BLS typical entry is high school or equivalent, related experience None, and medium-term on-the-job training; None does not mean training is unnecessary. China's exact boring machine operator standard partially corresponds to the U.S. metal and plastic drilling and boring classification but is not fully equivalent. BLS51-4032: 2025 employment 4.7 thousand → 2035 projected 4.2 thousand, official net change -0.4 thousand and change -9.5%; each figure is rounded to the published precision, and the endpoints cannot be subtracted to claim a precise reduction of 500 people. 2025—2035 annual average openings 0.4 thousand, about 400, including growth and replacement, and not a ten-year total or a net increase. O*NET rounds to -10%, which is distinguished from the BLS precise value. The self-employment share is —, not provided, and is not filled in as 0 or described as very low. Projections are not Chinese demand, individual hiring probability, or AI causality; OOH is the parent page for Metal and Plastic Machine Workers.",
         "fact_id": "industry-amusement",
         "market": "United States",
-        "measure": "Availability boundaries of industry and context information",
-        "occupation_scope": "Both under the O*NET summary page and details page definition; this page does not infer income or position structure from scenario categorization, nor individual risk from work context ratios",
-        "period": "2024 base period and page updated 2026; searched 2026-09-19",
+        "measure": "Education feedback / self-employment gap",
+        "occupation_scope": "The O*NET new-hire education feedback is high school or equivalent 57%, some college no degree 12%, and associate degree 12%, and the remaining options are not shown; these are not advertisement proportions. Job Zone1—2/SVP below 6 is a preparation group, and group descriptions such as several days to one year of on-the-job training cannot be turned into a mandatory several-weeks-to-several-months course for everyone. The BLS typical entry is high school or equivalent, related experience None, and medium-term on-the-job training; None does not mean training is unnecessary. China's exact boring machine operator standard partially corresponds to the U.S. metal and plastic drilling and boring classification but is not fully equivalent.",
+        "period": "2025/2026",
         "source_refs": [
-          "onet"
+          "onet",
+          "r5-bls-projections"
         ]
       },
       {
@@ -37371,7 +37387,7 @@
       },
       {
         "derivation": null,
-        "display_value": "2025—2035 change -9.5%; official net change -0.4 thousand",
+        "display_value": "Decline of 9.5%",
         "fact_id": "r5-current-growth",
         "market": "United States",
         "measure": "Projected change",
@@ -37444,11 +37460,11 @@
       },
       {
         "derivation": null,
-        "display_value": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted. The National Occupational Standard for Boring Machine Operators (2023 edition), 6-18-01-05, promulgated and effective 2023-08-31 by Ren She Ting Fa [2023] No. 32, refers to operating boring machines to drill, enlarge, and bore holes and to machine end faces / other profile surfaces. 1.4 Level five/junior to level one/senior technician; 1.7 the ordinary education level is junior middle school graduation, which is not the threshold for all employers. 1.8.1 the training reference for each level is not less than 500/400/300/300/200 standard hours, not the general few weeks to several months. 1.9.1 for the junior level, having reached 16 and intending to engage in or engaging in the work; for the intermediate level, alternatives include 5 years of work, junior level +3 years, or a related graduation; the advanced level and technician level have additional multiple paths. 1.9.2 theoretical/skills assessment and, for technicians/senior technicians, a comprehensive review, with passing at 60 points or above in each. Here only PDF1—8 pages and clauses 1.1—1.9 were actually verified, without claiming to cover the full text on safety and process. It corresponds to boring machine operators and does not stand in for standards for all drilling machines/plastics or for turning, milling, and grinding. GB15760-2025 General Technical Specifications for Safety Guards of Metal Cutting Machine Tools, official metadata currently in force, published 2025-08-01 and implemented 2026-08-01. In practice only the metadata was obtained, not the standard's full-text scope of application, item-by-item guard/verification clauses, or replacement list; the name alone does not give all drilling and boring equipment a single operating procedure, and specifics must be verified against the full standard text and equipment documentation. Article 4 of the 2021 revision of the Work Safety Law covers all-staff responsibility / risk grading and the dual prevention of hidden dangers; Article 28 covers being trained and qualified before taking a post, with dispatch and internship management training listed separately; Article 36 covers equipment maintenance, inspection, and records and prohibits shutting down or damaging guards; Article 43 requires dedicated on-site safety management for lifting operations and similar; Articles 44/45 require the organization to inform workers of hazards and emergency response and to provide protective equipment meeting standards and supervise its use per the rules; Article 54 allows refusal of illegal commands or forced risk-taking; Article 55 allows stopping work or taking possible emergency measures and then evacuating in situations that directly endanger personal safety; Articles 57/59 require workers to follow procedures and protection and to report hidden dangers immediately to the on-site safety management personnel or responsible person. Articles 5—7 of the 2018 revision of the Occupational Disease Prevention and Control Law cover the employer responsibility system and the unit's hazard responsibility, the full responsibility of the principal person in charge, and participation in work injury insurance according to law. Stopping, handling, and restarting after general quality anomalies must be verified against the specific equipment/unit procedures, and this page grants no general recovery authority.",
+        "display_value": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable. The National Occupational Standard for Boring Machine Operators (2023 edition), 6-18-01-05, promulgated and effective 2023-08-31 by Ren She Ting Fa [2023] No. 32, refers to operating boring machines to drill, enlarge, and bore holes and to machine end faces / other profile surfaces. 1.4 Level five/junior to level one/senior technician; 1.7 the ordinary education level is junior middle school graduation, which is not the threshold for all employers. 1.8.1 the training reference for each level is not less than 500/400/300/300/200 standard hours, not the general few weeks to several months. 1.9.1 for the junior level, having reached 16 and intending to engage in or engaging in the work; for the intermediate level, alternatives include 5 years of work, junior level +3 years, or a related graduation; the advanced level and technician level have additional multiple paths. 1.9.2 theoretical/skills assessment and, for technicians/senior technicians, a comprehensive review, with passing at 60 points or above in each. Here only PDF1—8 pages and clauses 1.1—1.9 were actually verified, without claiming to cover the full text on safety and process. It corresponds to boring machine operators and does not stand in for standards for all drilling machines/plastics or for turning, milling, and grinding. GB15760-2025 General Technical Specifications for Safety Guards of Metal Cutting Machine Tools, official metadata currently in force, published 2025-08-01 and implemented 2026-08-01. In practice only the metadata was obtained, not the standard's full-text scope of application, item-by-item guard/verification clauses, or replacement list; the name alone does not give all drilling and boring equipment a single operating procedure, and specifics must be verified against the full standard text and equipment documentation. Article 4 of the 2021 revision of the Work Safety Law covers all-staff responsibility / risk grading and the dual prevention of hidden dangers; Article 28 covers being trained and qualified before taking a post, with dispatch and internship management training listed separately; Article 36 covers equipment maintenance, inspection, and records and prohibits shutting down or damaging guards; Article 43 requires dedicated on-site safety management for lifting operations and similar; Articles 44/45 require the organization to inform workers of hazards and emergency response and to provide protective equipment meeting standards and supervise its use per the rules; Article 54 allows refusal of illegal commands or forced risk-taking; Article 55 allows stopping work or taking possible emergency measures and then evacuating in situations that directly endanger personal safety; Articles 57/59 require workers to follow procedures and protection and to report hidden dangers immediately to the on-site safety management personnel or responsible person. Articles 5—7 of the 2018 revision of the Occupational Disease Prevention and Control Law cover the employer responsibility system and the unit's hazard responsibility, the full responsibility of the principal person in charge, and participation in work injury insurance according to law. Stopping, handling, and restarting after general quality anomalies must be verified against the specific equipment/unit procedures, and this page grants no general recovery authority.",
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "Mainland China",
         "measure": "Wage gap / standards and laws for selected trades",
-        "occupation_scope": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Insufficient evidence: this round did not obtain China's national exact occupational wage distribution or real pay samples, so it is not claimed that the country has never published them, nor is a general allowance structure or a guaranteed peak-season raise asserted.",
+        "occupation_scope": "National Bureau of Statistics 2025 urban unit wages: manufacturing non-private 113,594 yuan per year and private 76,055 yuan per year, pre-tax annual averages, for matching industry background only, and not the exact median, percentiles, or monthly wage for the drilling and boring occupation. They cover employed persons in legal entity units with 5 or more people and exclude self-employment and freelance work, and cannot exclude project, outsourced, or dispatched employees within statistical units across the board. Comparable national occupation-level wage data remain unavailable.",
         "period": "2025/2023/2026",
         "source_refs": [
           "r5-nbs-current",
@@ -37469,6 +37485,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "An employment list published by the Ankang bureau listed one drill press operator apprentice at Ansmann Electronics in Huizhou, Guangdong, at CNY 2,800–3,500 per month. It listed related experience and no education requirement.",
+        "fact_id": "posting-a42-huizhou",
+        "market": "Mainland China",
+        "measure": "Advertised monthly pay",
+        "occupation_scope": "Drill press job posting",
+        "period": "2026",
+        "source_refs": [
+          "a42-huizhou"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Hunan Xiangjian Heavy Industry listed one drilling worker with at least one year of radial drill experience, quoting piece-rate pay of CNY 6,000–8,000 per month. It listed CNC boring separately.",
+        "fact_id": "posting-a42-changde",
+        "market": "Mainland China",
+        "measure": "Advertised monthly pay",
+        "occupation_scope": "Drill press job posting",
+        "period": "2026",
+        "source_refs": [
+          "a42-changde"
+        ]
       }
     ]
   },
@@ -37482,7 +37522,7 @@
     "badges": [
       "Drilling and boring machine tool operation · drawings and tolerances · measuring tools and self-inspection",
       "O*NET-SOC 51-4032.00 · 2025 wage data",
-      "Job Zone 1-2 · interest code RC · 2024—2034 'decline (-1% or lower)'"
+      "Job Zone 1–2 · interest code RC · U.S. outlook 2025–2035"
     ],
     "metrics": [
       {
@@ -37495,19 +37535,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034 'decline (-1% or lower)'; the source gives only the category)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (about 5,300 people in 2024)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. projected job openings (about 400 in 2024—2034, including replacement needs)"
+        "label": "U.S. average annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37521,17 +37561,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Drilling and boring machine tool setters, operators, and tenders (O*NET-SOC 51-4032.00) set up and operate or tend drilling machines and boring machines in a machining workshop: they study the machining instructions and work orders and drawings to determine dimensions, tolerances, operations, fixturing, and tool requirements, establish a zero reference point and lay out lines, select and set cutting speed, feed, depth of cut, and tools according to the material and requirements, position and clamp and align the workpiece, operate the machine to engage the automatic feed to complete drilling, boring, reaming, milling, and countersinking and direct coolant, use calipers and micrometers and gauges to verify dimensions and tolerances and handle out-of-tolerance, replace and sharpen tools and perform equipment and tooling maintenance, and report when anomalies occur. U.S. definition: the BLS 2025 wage data median is 49,080 USD per year (23.60 USD per hour), with annual percentiles of 36,300 / 41,710 / 49,080 / 57,940 / 68,410 USD; 2024 employment was about 5,300, and the 2024—2034 projection is 'decline (-1% or lower)' with about 400 projected openings; the preparation level is Job Zone 1-2 and the interest code is RC. Mainland China: machining positions work under the mandatory national standard for machine tool safety guards (GB 15760-2025) and work safety and occupational health regulations, and the occupational levels of mechanical cold working are divided from level five/junior worker to level one/senior technician under national vocational skill standards (Ren She Ting Fa [2018] No. 145); public statistics have not established an occupation-level wage definition, and this page visibly marks the gap in the relevant places."
+      "text": "Explore metal and plastic drilling and boring machine work, U.S. wages and outlook, and mainland China job examples. Practice a first-piece measurement handoff."
     },
     "title": {
       "availability": "available",
       "text": "Drilling and boring machine tool setters, operators, and tenders"
     }
   },
-  "source_content_sha256": "f45a71890ec3f0157fff31af2021549fd51b8d52173a61ebc64976bc123a82fc",
+  "source_content_sha256": "5d643be378c35f40bccdb018329d8630eb2cecff35e4161518d6a7a0fc8a722f",
   "subject": {
     "canonical_slug": "drilling-and-boring-machine-tool-setters-operators-and-tenders-metal-and-plastic",
     "name": "Drilling and boring machine tool setters, operators, and tenders",
-    "summary": "Drilling and boring machine tool setters, operators, and tenders (U.S. side O*NET-SOC 51-4032.00, Drilling and Boring Machine Tool Setters, Operators, and Tenders, Metal and Plastic) are the drilling and boring machine tool setup and operation positions in a machining workshop: they set up and operate or tend drilling machines and boring machines to drill, bore, ream, mill, and countersink metal or plastic workpieces; the work includes studying the machining instructions and work orders and drawings to determine dimensions, tolerances, operations, fixturing, and tool requirements, establishing a zero reference point and laying out lines, selecting and setting cutting speed, feed, depth of cut, and tools according to the material and requirements and installing the tools into the spindle, positioning and securing the workpiece with fixtures and clamps, operating the machine controller to lower the tool and engage the automatic feed, using a dial indicator mounted on the spindle to verify that the reference line is parallel to the worktable's axis of rotation, turning valves to direct coolant or cutting oil, and observing drilling or boring machine operation to find problems; and they use calipers and micrometers and gauges to verify dimensions and tolerances, replace and sharpen worn tools, perform equipment and tooling maintenance, and record and report anomalies. U.S. definition: the BLS 2025 wage data median is 49,080 USD per year (23.60 USD per hour), with annual percentiles of 36,300 / 41,710 / 49,080 / 57,940 / 68,410 USD (hourly percentiles 17.45 / 20.05 / 23.60 / 27.85 / 32.89); the O*NET summary page gives 2024 employment of about 5,300, a 2024—2034 projection of 'decline (Decline, -1% or lower)', and about 400 projected job openings (that source gives only the category rather than a single precise percentage, and this page follows the source wording); the preparation level is Job Zone 1-2 (SVP below 6.0), the education feedback is 57% high school or equivalent and 12% some college no degree and 12% associate degree, the interest code is RC, and there are 17 tasks; the work context includes teamwork 'extremely important' 56%, face-to-face discussions every day 52%, continuous contact with others 51%, telephone conversations every day 21% (another 44% never), email use every day 35% (another 42% never), decision freedom 'very large' 40%, precision or accuracy 'extremely important' 70%, time pressure every day 51%, work hours 'regular' 80%, standing continuously 25% + more than half 50%, continuous use of hands 57% + more than half 33%, exposure to hazardous equipment every day 54%, exposure to contaminants every day 61%, wearing common protective or safety equipment every day 93%, exposure to noise every day 56%, exposure to extreme heat or extreme cold 'weekly or more' 29%, pace determined by equipment speed 'extremely important' 52%, automation level 'moderately automated' 43%, repeating the same tasks 'extremely important' 26%, and consequences of error 'extremely serious' 29% (another 27% very serious, 26% serious). Mainland China definition: safety guards for metal cutting machine tools follow the current mandatory national standard General Technical Specifications for Safety Guards of Metal Cutting Machine Tools (GB 15760-2025, published 2025-08-01 and implemented 2026-08-01, fully replacing 8 old standards including GB 15760-2004); the occupational levels of mechanical cold working personnel are divided from level five/junior worker to level one/senior technician under national vocational skill standards (such as lathe operator 6-18-01-01, milling machine operator 6-18-01-02, grinding machine operator 6-18-01-04, and so on, Ren She Ting Fa [2018] No. 145); production and business units should implement the all-staff work safety responsibility system and the dual prevention mechanism of graded safety risk control and hidden danger investigation and treatment (Work Safety Law of the People's Republic of China, amendments effective from 2021-09-01); employers should establish and improve the occupational disease prevention responsibility system and bear responsibility for the occupational disease hazards generated by their unit and participate in work injury insurance according to law (Occupational Disease Prevention and Control Law of the People's Republic of China, fourth amendment on 2018-12-29). The above is cited by standard and regulation name and general requirements, and article numbers were not verified one by one. This occupation has no unified access-type occupational qualification in mainland China. Public statistics have not established an occupation-level wage definition corresponding to this occupation, and this page preserves the gap as it stands."
+    "summary": "Drilling and boring machine workers use drawings and work orders to check hole diameter, location and tolerances. They operate drilling or boring machines for metal and plastic workpieces and record first-piece measurements. Setup, operation and inspection may be split between roles. Check the employer’s process and sign-off responsibilities."
   }
 }

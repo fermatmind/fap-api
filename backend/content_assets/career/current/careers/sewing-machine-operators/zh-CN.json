@@ -23314,7 +23314,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一次小样不能证明长期产量、手部耐受或设备维修能力；岗位若包含裁剪、烫整、制版或客户定制，应分别核对培训和责任，不把相邻工作默认并入缝纫机操作。"
+              "核机型、工序、计件或计时方式及现场培训。设备异常交有权人员处理。"
             ]
           },
           "id": "sewing-machine-operators.quick-decision.fit-decision-checklist.1",
@@ -23329,7 +23329,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用废布在受训和断电检查条件下，按给定缝线完成直线与转角试缝；记录装线、定位、线迹缺陷、返工及工具归位。未受训时先做纸面工序和手动定位练习。"
+              "在 09「入行、资格与职业发展」做 SW-01｜核对工序卡与抽查记录，先完成初稿再看参考。"
             ]
           },
           "id": "sewing-machine-operators.quick-decision.fit-decision-checklist.2",
@@ -23343,7 +23343,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "若愿意按标记对齐材料、稳定导引缝纫机、持续观察线迹并及时停机报告异常，可从受训的小样练习验证兴趣。实际速度、设备及安全要求按岗位确认。"
+              "适合愿意按工序重复作业，持续核对工单、尺寸和线迹的人。"
             ]
           },
           "id": "sewing-machine-operators.quick-decision.fit-decision-checklist.3",
@@ -23359,7 +23359,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本卡仅供职业探索；兴趣测试和短时试缝都不能替代雇主实操、培训及安全要求，也不保证收入或就业。"
+              "对照现行工序单，分别记录尺寸、线迹和异常交接。"
             ]
           },
           "id": "sewing-machine-operators.quick-decision.fermat-decision-card.6",
@@ -23374,7 +23374,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "操作或照看缝纫机，在服装或非服装制品制造中缝合、加固、装饰；按岗位核机种、材料和质量要求。"
+              "适合愿意按工序重复作业，持续核对工单、尺寸和线迹的人。"
             ]
           },
           "id": "sewing-machine-operators.quick-decision.fermat-decision-card.7",
@@ -27719,31 +27719,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "纺织裁剪设备操作员",
@@ -29474,7 +29474,7 @@
                 "values": [
                   "美国官方入职口径",
                   "BLS对51-6031列出无正式学历要求、短期在岗培训；仅描述美国典型路径。",
-                  "核对中国目标岗位的培训、设备和具体录用公告。"
+                  "清流县招聘表把平车、锁边分列，相关经验优先，也列培训途径。"
                 ]
               },
               {
@@ -29497,8 +29497,8 @@
                 "id": "tools",
                 "values": [
                   "岗位条件核对",
-                  "确认产品、面料、设备、班次、计时计件、返工与个人防护。",
-                  "招聘名称相似但工序可能不同；保留公告和工艺说明。"
+                  "在 09「入行、资格与职业发展」做 SW-01｜核对工序卡与抽查记录，先完成初稿再看参考。",
+                  "对照现行工序单，分别记录尺寸、线迹和异常交接。"
                 ]
               }
             ]
@@ -29506,7 +29506,9 @@
           "id": "sewing-machine-operators.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "cn-d011-main",
+            "cn-d011-context"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29519,37 +29521,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料与设定｜只用废布和虚构工序",
-                  "练习用两块废布、不同颜色线、纸面工艺单和样板线；机具仅在具备培训与监督的安全场所使用。",
-                  "A1｜虚构工艺单：将两块同尺寸布片按标记对齐，完成一条直线缝，针距以培训者指定样板为准。",
-                  "A2｜材料卡：布片编号、正反面、线色和批次均为练习设定，不代表商品订单。",
-                  "A3｜缺陷卡：一处跳针、一处缝位偏移、一处断线；由培训者示范如何识别，不需自行制造机器故障。",
-                  "A4｜角色卡：操作者负责准备、缝合与记录；培训者负责设备确认和安全监督，维修由授权人员执行。",
-                  "A5｜交付卡：留存工序单、正反面照片、尺寸记录、缺陷位置和返工结论。"
+                  "虚构材料",
+                  "虚构工序卡 C3 当前有效。缝份须为 9–11 mm（含边界），且记录无断线。若工序卡版本缺失或待核，样本暂不判。只检查纸面。",
+                  "抽查四件。S31：C3、9 mm、无断线。S32：C3、12 mm、无断线。S33：C3、10 mm、有断线记录。S34：工序卡未记版本、10 mm、无断线。",
+                  "批次共有 30 件。只记录这四件，未给其他工序、整件检查和批准。质量负责人复核后续处置。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "练习目标",
-                  "识别材料和标记，完成安全操作下的车缝小样，再用样板逐项检查线迹和尺寸。",
-                  "输出一页工序记录和实物；不把练习当职业资格或雇主录用。"
+                  "任务与交付",
+                  "交四行工序核对和一页待核交接。逐行说明尺寸、断线、版本及下一步。",
+                  "分开尺寸、外观与版本。标出未抽查范围及签批状态。",
+                  "用纸或本地表格，明确证据出处。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "练习方法",
-                  "第一步核对机种、材料、线色和针区防护。",
-                  "第二步由培训者示范装线和试缝，学员在监督下重复。",
-                  "第三步记录跳针、错位和返工，对照样板复核实物并交接异常。"
+                  "提交前提示",
+                  "先保存初稿，再看七天计划之后的参考。",
+                  "无需同伴协助。",
+                  "记录版本。",
+                  "未给的资料留待核。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习边界",
-                  "未受训者只做纸面工艺单和缺陷识别；不得拆除防护、模拟危险故障或使用真实客户订单。"
+                  "权限边界",
+                  "使用虚构记录。",
+                  "不实际批准或对外交付。"
                 ]
               }
             ]
@@ -29558,7 +29560,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：受训条件下的机器车缝小样",
+          "title": "SW-01 | 核对工序卡与抽查记录",
           "type": "cards"
         },
         {
@@ -29569,33 +29571,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "工艺与样板对照表",
-                  "列材料、机种、线色、目标缝位、针距、尺寸和验收方法；标出未知要求。",
-                  "他人能据表格重做检查，且不会把未说明参数视为已获批准。"
+                  "版本和材料记录",
+                  "确认原记录和生效版本。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "首件与返工记录",
-                  "保留首件正反面、缺陷位置、返工前后差异及原因。",
-                  "培训者能指出线迹、尺寸和牢度是否符合给定样板。"
+                  "尺寸与状态核对",
+                  "写尺寸区间、偏差和依据。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "岗位说明卡",
-                  "说明自己完成的装线、定位、导引与检查，以及停机和维修权限边界。",
-                  "不把裁剪、制版、设备维修或质量签字冒写成已具备能力。"
+                  "待核交接",
+                  "分待核项目、已知结果和下一责任人。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明",
-                  "照片或电子表格可辅助记录，AI生成文字须对照实物和工艺单复核。",
-                  "原始样品、版本和培训者反馈保留，不用自动摘要替代。"
+                  "交付边界",
+                  "标实际检查与批准状态。",
+                  "用题设原始记录核对。"
                 ]
               }
             ]
@@ -29626,27 +29628,27 @@
             "rows": [
               [
                 "面试追问机种与材料",
-                "能否说清已训练机型、布料厚度和针线要求",
-                "出示实际小样、机种培训记录和适用范围",
-                "一次小样不代表所有材料与机型"
+                "确认原记录和生效版本。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "面试追问线迹缺陷",
-                "如何识别断线、跳针和错位",
-                "指出实物缺陷位置与返工过程",
-                "照片不能代替背面线迹和牢度检查"
+                "写尺寸区间、偏差和依据。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "试用期观察节拍",
-                "能否在目标工位保持安全和稳定质量",
-                "按批次记录完成量、缺陷与停机原因",
-                "速度不能以牺牲安全或质量为代价"
+                "分待核项目、已知结果和下一责任人。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "异常处理与交接",
-                "卡料或断针时是否知道停止和升级对象",
-                "演示报告内容：设备、批次、受影响制品、时间",
-                "未经授权不做维修或复工放行"
+                "标实际检查与批准状态。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ]
             ]
           },
@@ -29666,50 +29668,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天｜读工艺单",
-                  "用纸面虚构工艺单标出材料、线色、尺寸、目标线迹和未知项。"
+                  "第 1 天",
+                  "记录对象和版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天｜看设备与防护",
-                  "在培训者指导下认识机针、压脚、踏板、梭芯和停机按钮；未受训不启动。"
+                  "第 2 天",
+                  "确认原记录和生效版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天｜装线与试缝",
-                  "培训者示范后在监督下试缝废布，记录机种与材料条件。"
+                  "第 3 天",
+                  "写尺寸区间、偏差和依据。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4天｜定位和导引",
-                  "练直线、转角与连接小样；比较缝位偏差。"
+                  "第 4 天",
+                  "分待核项目、已知结果和下一责任人。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5天｜质量检查",
-                  "看线迹正反面、尺寸和牢度，标记跳针、断线或错位。"
+                  "第 5 天",
+                  "标实际检查与批准状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天｜返工与交接",
-                  "按培训者指导返工一处缺陷，写清原因、影响批次与复核人。"
+                  "第 6 天",
+                  "先独立完成交接稿，再按下方参考和量规核对并修订一处。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天｜复盘岗位条件",
-                  "比较自己对重复动作、注意力负荷和车间节拍的感受；核对目标招聘条件。"
+                  "第 7 天",
+                  "整理四份练习成果，保留原件和待审状态。"
                 ]
               }
             ]
@@ -29726,20 +29728,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "保留工艺单、首件、返工前后照片、培训记录与反馈；注明设备、材料和监督条件。",
-              "核对是否把目标机种或材料外的经验夸成通用能力。",
-              "观察七天练习中注意力、手部负荷和对重复质量检查的耐受，不换算为人格分数。",
-              "再次做同类小样，比较线迹、尺寸、返工次数与安全操作是否改善。",
-              "若仍不确定，列出需要向目标雇主核实的机种、班次、培训与计酬问题。",
-              "把作品与目标岗位实操要求对照；缺制版、裁剪或维修能力就明确列为下一步训练。",
-              "未完成的项目如实标记，不用文字承诺代替实物样品。"
+              "S31 在下边界 9 mm，且无断线，符合题设的本工序检查。",
+              "S32 的 12 mm 超上限。S33 尺寸在限内，但有断线。两件需分别登记异常。",
+              "S34 缺版本，不能凭 10 mm 和无断线判合格。核原工序单后复判。",
+              "未抽查 26 件，不能用四件推整批合格率。",
+              "交质量负责人核处置，记录版本与复查。没有整件检查或授权，不写成品放行。",
+              "四项各 0–2 分：版本与原件、逐项判断、未知范围、权限交接。",
+              "完整可追溯为 2，部分为 1，缺失或越权为 0。"
             ]
           },
           "id": "sewing-machine-operators.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "题后参考与自核量规",
           "type": "list"
         },
         {
@@ -29857,16 +29859,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本页将美国O*NET51-6031作为任务参考，中国车缝或平车工须按实际工序匹配。",
-              "证据不足：未取得身份日期、机器缝制职责、地区工时计酬均可核的中国招聘样本。虚构练习不能代报价或统一录用门槛。"
+              "清流县招聘表把平车、锁边分列，相关经验优先，也列培训途径。",
+              "职业画像把缝制设备和裁片加工放在岗位核心，旧就业判断不用于本页。"
             ]
           },
           "id": "sewing-machine-operators.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "cn-d011-main",
+            "cn-d011-context"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -31901,13 +31901,15 @@
                 ]
               },
               {
-                "answer": "BLS对美国51-6031的典型入职教育列为无正式学历要求、短期在岗培训；这不是中国统一要求。应逐一核对目标雇主的设备训练、安全培训和录用条件。",
+                "answer": "BLS对美国51-6031的典型入职教育列为无正式学历要求、短期在岗培训；这不是中国统一要求。应逐一核对目标雇主的设备训练、安全培训和录用条件。 清流县招聘表把平车、锁边分列，相关经验优先，也列培训途径。 职业画像把缝制设备和裁片加工放在岗位核心，旧就业判断不用于本页。",
                 "id": "sewing-machine-operators.faq.3",
                 "question": "入行一定需要学历或证书吗？",
                 "question_key": "career.faq.sewing-machine-operators.q3",
                 "source_refs": [
                   "ep",
-                  "editor"
+                  "editor",
+                  "cn-d011-main",
+                  "cn-d011-context"
                 ]
               },
               {
@@ -31955,7 +31957,7 @@
                 "question_key": "career.faq.sewing-machine-operators.credentials"
               },
               {
-                "answer": "在安全培训与监督下，用废布完成带标记的直线、转角和简单连接小样；记录装线、对齐、线迹缺陷与返工。观察对重复操作、手部控制和品质检查的耐受，不用人格标签下结论。",
+                "answer": "在 09「入行、资格与职业发展」做 SW-01｜核对工序卡与抽查记录，先完成初稿再看参考。",
                 "id": "sewing-machine-operators.faq.9",
                 "question": "怎样判断自己是否适合机器缝纫？",
                 "question_key": "career.faq.sewing-machine-operators.risk-boundary"
@@ -31976,7 +31978,9 @@
             "nbs",
             "privacy",
             "editor",
-            "editor"
+            "editor",
+            "cn-d011-main",
+            "cn-d011-context"
           ],
           "type": "faq"
         },
@@ -32062,13 +32066,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32302,8 +32306,8 @@
               {
                 "accessed_at": "本页编辑时点",
                 "details": [
-                  "用于组织缝纫机操作员任务拆分、练习边界与决策提示；事实仍以官方原始来源为准。",
-                  "编辑建议不表示职业平均产量、工资或职业资格。"
+                  "SW-01 为虚构纸笔试做。",
+                  "对照现行工序单，分别记录尺寸、线迹和异常交接。"
                 ],
                 "evidence_type": "editorial_reasoning",
                 "id": "editor",
@@ -32539,6 +32543,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "清流县招聘表把平车、锁边分列，相关经验优先，也列培训途径。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-d011-main",
+                "limitation": "用于职业任务和路径对照。",
+                "market": "中国大陆",
+                "name": "清流县原招聘：平车与锁边",
+                "period": "原帖及课程日期见来源",
+                "publisher": "清流县原招聘：平车与锁边",
+                "scope": "recruitment_proxy",
+                "url": "https://www.fjql.gov.cn/zwgk/gggs/202606/t20260624_2231606.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "职业画像把缝制设备和裁片加工放在岗位核心，旧就业判断不用于本页。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-d011-context",
+                "limitation": "用于职业任务和路径对照。",
+                "market": "中国大陆",
+                "name": "中国就业网缝纫工职业画像",
+                "period": "原帖及课程日期见来源",
+                "publisher": "中国就业网缝纫工职业画像",
+                "scope": "contextual",
+                "url": "https://chinajob.mohrss.gov.cn/c/2022-06-08/352031.shtml"
               }
             ]
           },
@@ -37233,7 +37267,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的兴趣是否适合缝纫机操作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37791,14 +37825,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "缝纫机操作员做什么、如何受训入行、美国工资与就业趋势、工作风险及相邻工序。按O*NET 51-6031、BLS和国家统计局资料说明适用范围与中国职业工资缺口。"
+      "text": "缝纫机工按工序卡缝制并核尺寸、线迹和设备状态。比较大陆原岗、美国工资与四件抽查试做。"
     },
     "title": {
       "availability": "available",
       "text": "缝纫机操作员"
     }
   },
-  "source_content_sha256": "5ef461a0612ee4876c8cee8a156d20b8acb2a68f9db67794649dd1a28c3ec7af",
+  "source_content_sha256": "244637d76b754216c17ffb292563aaddeed92a409e426a65de1cdb5c102563f4",
   "subject": {
     "canonical_slug": "sewing-machine-operators",
     "name": "缝纫机操作员",

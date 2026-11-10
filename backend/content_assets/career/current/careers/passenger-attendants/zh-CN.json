@@ -1298,6 +1298,9 @@
       "item:passenger-attendants.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:passenger-attendants.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:passenger-attendants.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31381,6 +31384,18 @@
             "onet"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。站点记录写登乘需协助，交班单只列座位号。写下要向旅客服务负责人确认的协助环节和接收人。"
+            ]
+          },
+          "id": "passenger-attendants.path.work-sample-draft-20261110.1",
+          "title": "核旅客协助交接",
+          "type": "notice"
         }
       ]
     },
@@ -37850,6 +37865,13 @@
         "id": "passenger-attendants.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "passenger-attendants.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38269,7 +38291,7 @@
       "text": "乘客服务员：工作内容、工资与旅客安全职责"
     }
   },
-  "source_content_sha256": "6132d463da55c9212cb66af36312bd1a82f97d181a537349ae24857fce020d0c",
+  "source_content_sha256": "173b4ec908babc7f3a33cb592fde7c7d609f6e44042663e8a1998df33cbf276a",
   "subject": {
     "canonical_slug": "passenger-attendants",
     "name": "乘客服务员",

@@ -152,6 +152,9 @@
       "item:occupational-health-and-safety-technicians.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:occupational-health-and-safety-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:occupational-health-and-safety-technicians.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12946,6 +12949,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。采样单缺时间，仪器记录却有时间和位置。写出可直接引用的凭证与需请采样人补核的字段。"
+            ]
+          },
+          "id": "occupational-health-and-safety-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核工作场所采样记录",
+          "type": "notice"
         }
       ]
     },
@@ -15475,6 +15493,13 @@
         "id": "occupational-health-and-safety-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-health-and-safety-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15656,7 +15681,7 @@
       "text": "职业健康与安全技术员：职责、工资与入门路径"
     }
   },
-  "source_content_sha256": "d22323bc1ac1833fe84bbe10795d3db9b052ea19ff7e19265e5833e021319905",
+  "source_content_sha256": "d8cb42a236d6e849baeafc638e7ef6fac84d64c5cb62654c06785cd5991ef685",
   "subject": {
     "canonical_slug": "occupational-health-and-safety-technicians",
     "name": "职业健康与安全技术员",

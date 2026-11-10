@@ -32,9 +32,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -1560,7 +1557,7 @@
         "status": "pending_mapping"
       },
       "item:amusement-and-recreation-attendants.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:amusement-and-recreation-attendants.sources.source-card.1": {
         "status": "mapped"
@@ -23351,12 +23348,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Three paper tasks: using this page's entry-exercise materials A/B/C, build a state verification table, two customer notices, and two anomaly records. Record only from the given information; where the suspension reason, restoration time, or recipient's name is not given, keep it unknown; do not operate equipment or make safety releases. Observe your own reactions to information conflicts, customer questions, and truthful recording; the exercise results are not proof of hiring or qualification."
+              "Try AR-53: compare posted ride status and a digital notice, then tell the next shift what needs escalation."
             ]
           },
           "id": "amusement-and-recreation-attendants.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23381,17 +23378,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no China national wage distribution for this occupation was obtained on this page, and industry-sector figures serve only as reference. US wages come from the BLS2025 percentiles for month 5 (May), shown by O*NET: the 39-3091 median annual wage is 32,150 USD (15.46 USD per hour), and the 10/25/75/90 percentiles are 22,350/27,660/36,590/42,490 USD. Employment comes separately from BLS EP: about 408,400 persons in 2025, 2025–2035 growth 3.7%, and about 100,400 average annual openings (including growth and replacement demand), from which high turnover or seasonality cannot be attributed. O*NET describes the main industries as arts, entertainment, recreation, and government, with 93% of respondents working weeks under 40 hours; this round's O*NET summary already displays the 2025–2035 cycle, and the precise growth rate still follows the BLS EP detailed tables. China requires qualification for large amusement-facility operation, and operating units must implement daily test runs and routine inspections."
+              "There is no matching mainland national occupational wage here. Use the Hangzhou notice for shifts and applications and the combined Beijing listing to identify role families."
             ]
           },
           "id": "amusement-and-recreation-attendants.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet",
-            "cnlaw",
-            "cnride",
-            "ep",
-            "oews"
+            "nbs",
+            "ride-hangzhou",
+            "ride-beijing"
           ],
           "type": "prose"
         },
@@ -23400,14 +23394,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: an on-site service position that sells and verifies tickets, guides customers, operates rides and secures safety devices, monitors rule enforcement, and cleans, inspects, and records inventory at amusement parks and recreation facilities."
+              "Recreation attendants check tickets, guide visitors, manage lines and help with facilities. Ask whether the job gives visitor information or operates equipment. In mainland China, requirements for operating regulated large rides depend on the equipment and task."
             ]
           },
           "id": "amusement-and-recreation-attendants.quick-decision.fermat-decision-card.7",
           "source_refs": [
             "onet",
-            "onet",
-            "cnlaw",
             "cnride"
           ],
           "type": "prose"
@@ -23524,7 +23516,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Start-up preparation and test runs: confirm equipment, safety devices, and warning signs per the checklist. → Ticketing and admission: sell tickets, verify tickets, and guide customers in. → Safety-device confirmation: fasten customers' safety devices or direct them to, and note contraindications. → Operation and monitoring: operate equipment and monitor compliance with rules and safety procedures. → Anomalies and evacuation: handle anomalies per procedure and be familiar with shutdown and emergency evacuation. → Cleaning and records: clean equipment and grounds, restock consumables, and record sales and repair activities."
+              "Confirm the employer’s assignments → Ticketing and admission checks → Visitor warnings and directions → Ride operation and restraint checks by authorized staff → Role-specific reporting and response → Site cleaning and records."
             ]
           },
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.3",
@@ -23859,7 +23851,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Operating procedures and operator codes must be strictly executed; safety protection devices and measures must not be arbitrarily changed or removed; passengers must be informed of safety precautions before each run and safety devices confirmed; on discovering equipment anomalies or serious accident hazards, use must stop and reports made — operating with known defects is forbidden; emergencies are handled per the emergency plan and reported per regulations."
+              "Large-ride operators act within their certification, assignment and operating procedures. Before each run they inform passengers of safety precautions and confirm safety devices as required, and must not alter or remove protective devices without authorization. Admission and ticketing staff warn and guide visitors and notify the duty lead as assigned."
             ]
           },
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.19",
@@ -23876,7 +23868,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Unusual equipment sounds, failed safety devices, customer violations, or other unsafe factors must trigger immediate stoppage and reporting per procedure; visitor pressure never justifies simplifying checks or concealing anomalies."
+              "Admission and ticketing staff flag anomalies to the duty lead and warn or guide visitors under venue procedures. The operating entity is responsible for daily test runs and routine safety checks. If the authorized, certified ride operator finds an abnormal condition during operation, they must take effective action immediately to remove the hazard. If a fault or sudden incident occurs, they must immediately stop operation or take emergency action to protect riders, and must immediately notify on-site safety management staff. After a fault or abnormal condition, the operating entity must fully inspect the equipment and eliminate accident hazards before use resumes."
             ]
           },
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.20",
@@ -24786,7 +24778,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Treat prompts from ticketing and monitoring systems separately from on-scene confirmation; execute daily test runs and routine safety checks per operating procedures and checklists, take equipment out of service and report anomalies per procedure, and never simplify the process under visitor pressure."
+              "Admission and ticketing staff flag anomalies to the duty lead and warn or guide visitors under venue procedures. The operating entity is responsible for daily test runs and routine safety checks. If the authorized, certified ride operator finds an abnormal condition during operation, they must take effective action immediately to remove the hazard. If a fault or sudden incident occurs, they must immediately stop operation or take emergency action to protect riders, and must immediately notify on-site safety management staff. After a fault or abnormal condition, the operating entity must fully inspect the equipment and eliminate accident hazards before use resumes."
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.13",
@@ -24869,18 +24861,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, position substitution rate, or wage causal estimates for this occupation were obtained on this page. Ticketing organization, record summarization, and anomaly alerts are only editorially suggested possible uses; on-scene confirmation, operating authorization, and emergency responsibility still follow applicable procedures. The BLS2025–2035 projected growth of 3.7% and about 100,400 average annual openings cannot be used to infer AI-caused job gains or losses. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Digital displays can share visitor information or flag conflicts with posted signs. Check ride status under site procedures. A message on a screen does not authorize operation or reopening."
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "cnlaw",
-            "cnride",
-            "ep"
+            "editor",
+            "onet"
           ],
           "type": "prose"
         },
@@ -25920,7 +25907,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Strictly execute daily test runs and routine safety checks per operating procedures and checklists, taking equipment out of service and reporting anomalies per procedure."
+              "The operating entity arranges test runs and routine checks. Authorized, certified operators follow the procedure for equipment anomalies."
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.85",
@@ -25983,7 +25970,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "On discovering anomalies, stop use, inspect, and report immediately; operating with known defects is strictly forbidden."
+              "Admission and ticketing staff flag anomalies to the duty lead and warn or guide visitors under venue procedures. The operating entity is responsible for daily test runs and routine safety checks. If the authorized, certified ride operator finds an abnormal condition during operation, they must take effective action immediately to remove the hazard. If a fault or sudden incident occurs, they must immediately stop operation or take emergency action to protect riders, and must immediately notify on-site safety management staff. After a fault or abnormal condition, the operating entity must fully inspect the equipment and eliminate accident hazards before use resumes."
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.89",
@@ -26427,7 +26414,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Record attendance, sales, receipts, and repair activities, and on discovering anomalies, take equipment out of service and report per procedure."
+              "Record attendance, sales or incidents as appropriate for the assignment. Admission and ticketing staff flag anomalies to the duty lead and warn or guide visitors under venue procedures."
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.119",
@@ -27175,12 +27162,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no nationwide or city-by-city wage distribution for the exact occupation amusement and recreation attendants was obtained"
+              "On July 28, 2026, Hangzhou Youth Activity Center advertised five amusement activity operators for its Banshan branch. Shifts follow a five-days-on, two-days-off schedule with weekend and public holiday work. Applications ran July 29–August 4. The notice body gives no pay amount. An online college recruitment fair listing published May 12, 2026 combined Beijing Happy Valley ride, admission and food service roles. The 100 positions and “2.2k+” apply to the combined listing, which gives no role-specific headcounts, pay or shifts and no pay period."
             ]
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "ride-hangzhou",
+            "ride-beijing"
           ],
           "type": "prose"
         },
@@ -28026,19 +28014,19 @@
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional competence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Amusement and recreation managers (excluding gambling)",
@@ -29336,7 +29324,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Strictly execute daily test runs and routine safety checks per operating procedures and checklists, taking equipment out of service and reporting anomalies per procedure."
+              "The operating entity arranges test runs and routine checks. Authorized, certified operators follow the procedure for equipment anomalies."
             ]
           },
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.13",
@@ -29458,7 +29446,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "On discovering anomalies, stop use, inspect, and report immediately; operating with known defects is strictly forbidden."
+              "Admission and ticketing staff flag anomalies to the duty lead and warn or guide visitors under venue procedures. The operating entity is responsible for daily test runs and routine safety checks. If the authorized, certified ride operator finds an abnormal condition during operation, they must take effective action immediately to remove the hazard. If a fault or sudden incident occurs, they must immediately stop operation or take emergency action to protect riders, and must immediately notify on-site safety management staff. After a fault or abnormal condition, the operating entity must fully inspect the equipment and eliminate accident hazards before use resumes."
             ]
           },
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.21",
@@ -29769,36 +29757,36 @@
               [
                 "Ride operation direction",
                 "First complete the corresponding qualification, pre-job training, and authorization, then participate in large amusement-facility operation under mentoring per procedures; without qualification, no operation duties are undertaken.",
-                "Standardized test-run inspections and safety-device confirmation, with anomalies taken out of service and reported per procedure.",
-                "A publicly sourced daily pre-operation inspection and test-run checklist.",
+                "The operating entity arranges test runs and routine checks. Authorized, certified operators follow the procedure for equipment anomalies.",
+                "Two AR-53 status logs and a handover.",
                 "Different from amusement and recreation managers: performs front-line equipment operation and safety confirmation, not scheduling or business decisions."
               ],
               [
                 "Ticketing and admission service direction",
                 "Complete ticketing-system and customer-service training and start work.",
                 "Proper order maintenance, special situations escalated and recorded per procedure.",
-                "A safety-notice and prohibition announcement script (riding rules, contraindications, and emergency guidance).",
+                "Two AR-53 status logs and a handover.",
                 "Different from cashiers: also undertakes admission guidance and on-site order maintenance."
               ],
               [
                 "Facility and grounds support direction",
                 "Complete equipment-inspection, cleaning, and safety-protection training and start work.",
                 "Complete inspection and repair records, with anomalies reported per procedure.",
-                "An equipment and grounds inspection record template with check items, criteria, and handling.",
+                "Two AR-53 status logs and a handover.",
                 "Different from parking attendants: faces rides and recreation grounds, with higher equipment and safety requirements."
               ],
               [
                 "Equipment operation and safety confirmation",
                 "Operate equipment per procedures and confirm customers' safety devices.",
                 "Standardized operation, seat-by-seat safety-device confirmation, complete records.",
-                "A safety-device confirmation and notice procedure description in a fictional scenario.",
+                "Two AR-53 status logs and a handover.",
                 "Different from ushers: undertakes equipment operation and safety-device confirmation, not limited to admission guidance."
               ],
               [
                 "Anomaly handling and records",
-                "Take equipment out of service on discovering anomalies and report and record per procedure.",
-                "Timely out-of-service status and reporting, truthful and traceable records.",
-                "A handling and reporting record framework for one equipment anomaly (unusual sounds or failed safety devices).",
+                "Admission and ticketing staff flag anomalies to the duty lead and warn or guide visitors under venue procedures.",
+                "Keep a traceable record of whom you notified, when and what was confirmed.",
+                "Two AR-53 status logs and a handover.",
                 "Different from lifeguards: does not undertake water-area or ski-slope personal rescue duties."
               ]
             ]
@@ -29868,45 +29856,43 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials: roles, states, and rules",
-                  "Material A (entirely fictional): you are an entrance-service exercise participant with no equipment-operation authorization. The park sample states: facility R is suspended today; facility S's notice requires a height of at least 1.20 meters and following on-site staff guidance. You must not judge safety yourself based on height or change the facility's status.",
-                  "Material B (fictional observation table): 09:00 facility R's status board shows \"suspended\", but the electronic guide still shows \"open\"; 09:05 a customer asks whether R can be entered; 09:08 another customer asks whether someone 1.18 meters tall can ride S. No supervisor's reopening notice has been received.",
-                  "Material C (fictional procedure): service staff verify notices and answer general information; status-information conflicts go to the duty supervisor for confirmation; record the time, facility, exact words or observations, actions taken, recipient, and items to be confirmed. Do not invent equipment inspections, suspension reasons, or restoration times."
+                  "AR-53 | Fictional park records",
+                  "A: At 09:00 the sign at R says “suspended” and the digital guide says “open.” No duty supervisor confirmation is available.",
+                  "B: At 09:05 a visitor asks whether R can be entered. You work at the entrance and have no authority to operate, admit riders to, or reopen the ride.",
+                  "Revision: add only C, a 09:12 guide receipt changing the digital guide to “suspended.” There is no reopening notice. Paper rule: send conflicting status to the duty supervisor and distinguish known facts from open items."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Tasks: verify, notify, and record",
-                  "Task 1: build R's state verification table, listing the on-site board, electronic guide, conflict, the person to consult, and still-unknown items; do not write \"inspection passed\".",
-                  "Task 2: write two-sentence notices to each of the two customers, stating the known rules and the items handed to on-site staff for verification; do not promise opening times or make safety releases.",
-                  "Task 3: fill in the 09:05 and 09:08 records per material C, and write the follow-up actions if the duty supervisor does not respond."
+                  "Submit two status logs and one handover",
+                  "For each version record the sign, digital guide, whether they conflict and the source for each.",
+                  "Write a one-sentence visitor message for each version. Name open issues and the next reviewer.",
+                  "Keep the original entry and source."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answers: point back to the exercise items",
-                  "Reference 1: R's on-site board shows suspended and the electronic guide open — an information conflict; verify with the duty supervisor and record, with the suspension reason, inspection results, and restoration time all unknown. Customers must not be admitted based on the electronic guide.",
-                  "Reference 2: to the R customer one may say \"the on-site sign shows suspended; the opening information is being verified with the supervisor, please follow on-site guidance\"; to the S customer one may say \"the sample notice requires at least 1.20 meters, and 1.18 meters does not meet that value; please check the applicable notice with on-site staff\". No other health or qualification conditions are inferred.",
-                  "Reference 3: 09:05 records R's opening inquiry and the information conflict between the two sources, with the action of noting the on-site status and handing to the duty supervisor; 09:08 records that 1.18 meters does not meet the sample's 1.20-meter condition, handed to on-site staff. The recipient's name is not given, recorded as \"to be confirmed\", with no invented receipts or completed handling."
+                  "Submit independently",
+                  "Submit both versions and a handover on Day 6. Open “AR-53 reference (open after submitting)” on Day 7.",
+                  "Keep the original entry and source.",
+                  "Keep the original entry and source."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries: paper versus on-site authority",
-                  "Only paper information, communication, and record exercises are done; the fictional height threshold does not apply to real equipment, and no operations or releases may be performed based on it.",
-                  "Real safety checks, test runs, out-of-service status, or restorations follow qualifications, the use and maintenance instructions, and on-site authorization; preparation works cannot replace qualifications and training."
+                  "Do not operate equipment",
+                  "Use no real equipment or visitors. Do not infer inspection results, reasons for suspension or reopening times.",
+                  "Keep the original entry and source."
                 ]
               }
             ]
           },
           "id": "amusement-and-recreation-attendants.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet",
-            "cnlaw",
-            "cnride"
+            "editor"
           ],
           "title": "Entry exercise: service notices and anomaly records with fully fictional materials",
           "type": "cards"
@@ -29919,38 +29905,36 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "State verification table",
-                  "Following materials A/B, list R's on-site board and electronic guide, the contradiction, the person to consult, and unknown items; for S, only compare the given height condition and do not write \"inspection passed\"."
+                  "Qualification and role check",
+                  "Separate admission duties from ride operation that requires qualification and authorization."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Two service notices",
-                  "Answer R's opening inquiry and S's height question separately, distinguishing known information from items to hand to on-site staff, without promising reopening."
+                  "Two status tables",
+                  "Record the status, evidence and next owner for each version."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Two anomaly records",
-                  "Per material C, record the observations, actions, recipients, and items to be confirmed for 09:05 and 09:08; without real feedback, do not fill in completed handling."
+                  "One handover for the duty lead",
+                  "List what still cannot be verified."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "One-page review",
-                  "Check that every conclusion points back to A/B/C; list unknowns such as the suspension reason, restoration time, and recipient's name, and explain the difference between paper exercises and operating qualifications."
+                  "One visitor message per version",
+                  "Write one sentence using the evidence in each version."
                 ]
               }
             ]
           },
           "id": "amusement-and-recreation-attendants.path.entry-portfolio.1",
           "source_refs": [
-            "onet",
-            "cnlaw",
-            "cnride"
+            "editor"
           ],
           "title": "What verifiable work materials can be prepared at entry?",
           "type": "cards"
@@ -29974,36 +29958,33 @@
             "rows": [
               [
                 "Application and conditions verification",
-                "Whether basic conditions such as the hiring age, education, and health are met.",
-                "Can provide the employer-required supporting materials and fill in truthfully.",
-                "Falsification or applying through unofficial intermediaries directly affects qualification."
+                "Check posted and digital information.",
+                "Retain originals, evidence and reviewer.",
+                "This does not authorize equipment operation or visitor admission."
               ],
               [
                 "Pre-job safety training and assessment",
-                "Whether operating procedures, safety-device confirmation, warning, and evacuation requirements can be mastered.",
-                "Training and assessment records are complete, and safety points and reporting procedures can be restated.",
-                "No independent work before passing pre-job training and assessment."
+                "Check posted and digital information.",
+                "Retain originals, evidence and reviewer.",
+                "This does not authorize equipment operation or visitor admission."
               ],
               [
                 "Operating qualifications (operation-type positions)",
-                "Whether the special-equipment operation certificate such as large amusement-facility operation has been obtained.",
-                "Qualification records are complete, and the operating scope is clear.",
-                "No corresponding equipment operation without the operating qualification."
+                "Check posted and digital information.",
+                "Retain originals, evidence and reviewer.",
+                "This does not authorize equipment operation or visitor admission."
               ],
               [
                 "Inspection and record review",
-                "Whether test-run inspections, maintenance, and records are completed per rules and the review passed.",
-                "Inspection, maintenance, and event records are complete, with anomalies handled per procedure.",
-                "Untruthful records or concealed anomalies lead to accountability and affect position qualification."
+                "Check posted and digital information.",
+                "Retain originals, evidence and reviewer.",
+                "This does not authorize equipment operation or visitor admission."
               ]
             ]
           },
           "id": "amusement-and-recreation-attendants.path.interview-probation.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "cnlaw",
-            "cnride"
+            "editor"
           ],
           "title": "What may interviews and probation examine, and which conclusions cannot be inferred?",
           "type": "table"
@@ -30016,57 +29997,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1｜clarify the role and authorization",
-                  "Read A/B/C and state that the entrance-service role has no equipment-operation authorization."
+                  "Day 1",
+                  "Separate visitor service from operating authority."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2｜organize material conditions and record fields",
-                  "Extract sample R's suspension, S's minimum of 1.20 meters, and C's record fields; additionally check the intended use of Law Articles 14 and 41–43."
+                  "Day 2",
+                  "Copy both statuses and the visitor question."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3｜complete the state verification table",
-                  "Complete R's state verification table, keeping the on-site board versus electronic-guide conflict and the unknown items."
+                  "Day 3",
+                  "Write original statuses and any conflict."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4｜safety-notice announcements",
-                  "Complete the two service notices for R and S, noting that 1.18 meters does not meet the sample's 1.20 meters; no safety releases are made."
+                  "Day 4",
+                  "Add receipt C only and write a separate revision."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5｜customer-communication practice",
-                  "Simulate customers asking about opening times, practice stating that no supervisor feedback has been received, and hand off per procedure."
+                  "Day 5",
+                  "Write one visitor message per version and one handover."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6｜anomaly-handling records",
-                  "Complete the 09:05 and 09:08 records; mark 'to be confirmed' where the recipient's name or receipt is not given."
+                  "Day 6",
+                  "Submit both versions and a handover before opening the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7｜review and decision",
-                  "Review the table, notices, and records against the reference answers, judging your tolerance for accurate recording and customer communication; check the next training requirements."
+                  "Day 7",
+                  "Open “AR-53 reference (open after submitting)” in the FAQ and note any differences."
                 ]
               }
             ]
           },
           "id": "amusement-and-recreation-attendants.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "Seven-day experience: complete one full task loop of an amusement and recreation attendant with fictional materials",
           "type": "timeline"
@@ -30076,20 +30057,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "After the week's preparation, first answer: am I willing to execute per procedures and checklists long term, serve through outdoor weather and peak crowds, and take responsibility for customer safety?",
-              "Judge the direction: ride operation, ticketing and admission service, or facility and grounds support.",
-              "Judge the preparation: whether pre-job training and assessments, operating qualifications (operation-type positions), and health conditions are met or can be met; whether customer communication and safety awareness need strengthening.",
-              "Judge the boundary: whether it is clear that large amusement-facility operation is special-equipment work requiring certified on-duty service, and that equipment maintenance and periodic inspection are performed by qualified units.",
-              "Judge the tolerance: whether one can adapt to long standing, outdoor weather, short work weeks, and seasonal or temporary arrangements.",
-              "After entry, develop per the pre-job training and operating qualification system: undertake multi-equipment operation and mentoring duties, or move to safety-officer and operations management positions.",
-              "Continuously organizing publicly sourced materials, checklists, and safety-announcement exercises into verifiable preparation experience is more reliable than believing unofficial promises."
+              "Continue if you are willing to retain records, answer politely and escalate.",
+              "Pause to practice status records and handovers.",
+              "Compare ticketing, grounds service and regulated operation.",
+              "Continue if you are willing to retain records, answer politely and escalate.",
+              "Pause to practice status records and handovers.",
+              "Compare ticketing, grounds service and regulated operation.",
+              "Continue if you are willing to retain records, answer politely and escalate."
             ]
           },
           "id": "amusement-and-recreation-attendants.path.seven-day-decision.1",
           "source_refs": [
-            "onet",
-            "cnlaw",
-            "cnride"
+            "editor"
           ],
           "title": "How to decide whether to continue after seven days",
           "type": "list"
@@ -30214,19 +30193,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Sample applicability: this page cites no hiring announcements as wage or demand evidence; hiring conditions and training and qualification requirements vary by employer and region — follow official publications by competent authorities and employers.",
-              "This page provides no city-by-city wage distribution or training pass rates for this occupation: the US side gives O*NET and BLS wages, employment, and projections, and the mainland China side gives industry-sector broad-scope references and the special-equipment qualification framework; the two are not the same statistical scope.",
-              "To judge whether a position belongs to this occupation, look at the task description rather than the title: whether it involves ticketing and admission service, customer guidance, ride operation and safety-device confirmation, monitoring rules and safety procedures, and equipment inspection, cleaning, and records; if the position mainly undertakes scheduling, safety systems, and business decisions, it belongs to a different occupation such as amusement and recreation managers."
+              "On July 28, 2026, Hangzhou Youth Activity Center advertised five amusement activity operators for its Banshan branch. Shifts follow a five-days-on, two-days-off schedule with weekend and public holiday work. Applications ran July 29–August 4. The notice body gives no pay amount. An online college recruitment fair listing published May 12, 2026 combined Beijing Happy Valley ride, admission and food service roles. The 100 positions and “2.2k+” apply to the combined listing, which gives no role-specific headcounts, pay or shifts and no pay period."
             ]
           },
           "id": "amusement-and-recreation-attendants.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "cnlaw",
-            "cnride"
+            "ride-hangzhou",
+            "ride-beijing"
           ],
           "title": "Hiring-sample note",
           "type": "notice"
@@ -30660,7 +30633,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Standardized test-run inspections and safety-device confirmation, with anomalies taken out of service and reported per procedure."
+              "The operating entity arranges test runs and routine checks. Authorized, certified operators follow the procedure for equipment anomalies."
             ]
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.35",
@@ -31695,12 +31668,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "A US national employment projection including the self-employed; not an employer commitment and cannot be extrapolated to mainland China."
+              "U.S. SOC 39-3091 median pay in 2025 was $32,150 a year or $15.46 an hour. The baseline was about 408,400 jobs; BLS projects about 423,600 in 2035, growth of 3.7%, a net gain of about 15,200, and 100,400 annual openings."
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "ep",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -32337,10 +32311,14 @@
                 "question_key": "career.faq.amusement-and-recreation-attendants.ai"
               },
               {
-                "answer": "The NBS wage materials used on this page do not list \"amusement and recreation attendants\"; this page gives only the NBS 2025 industry-sector and unit-type broad-scope references (such as culture, sports, and entertainment non-private 129,447 yuan/year and public administration, social security, and social organizations non-private 119,465 yuan/year); these sectors cover many non-occupation positions and cannot be taken as this occupation's wage.",
+                "answer": "On July 28, 2026, Hangzhou Youth Activity Center advertised five amusement activity operators for its Banshan branch. Shifts follow a five-days-on, two-days-off schedule with weekend and public holiday work. Applications ran July 29–August 4. The notice body gives no pay amount. An online college recruitment fair listing published May 12, 2026 combined Beijing Happy Valley ride, admission and food service roles. The 100 positions and “2.2k+” apply to the combined listing, which gives no role-specific headcounts, pay or shifts and no pay period.",
                 "id": "amusement-and-recreation-attendants.faq.4",
                 "question": "How should mainland China wages be understood?",
-                "question_key": "career.faq.amusement-and-recreation-attendants.china-pay"
+                "question_key": "career.faq.amusement-and-recreation-attendants.china-pay",
+                "source_refs": [
+                  "ride-hangzhou",
+                  "ride-beijing"
+                ]
               },
               {
                 "answer": "US scope: the 2025, month 5 (May) 39-3091 median annual wage is 32,150 USD (15.46 USD per hour), the 10th percentile 22,350 USD, the 25th percentile 27,660 USD, the 75th percentile 36,590 USD, and the 90th percentile 42,490 USD (BLS Occupational Employment and Wage Statistics, OEWS, shown via O*NET). This occupation's work weeks are mostly under 40 hours, and actual annual income is affected by hours and seasonality; percentiles do not represent starting salaries.",
@@ -32349,22 +32327,32 @@
                 "question_key": "career.faq.amusement-and-recreation-attendants.us-pay"
               },
               {
-                "answer": "US side: the education threshold is low (64% of respondents below a high school diploma), with post-entry service per the employer's pre-job safety training and position requirements. Mainland China side: general on-site service positions rely mainly on pre-job safety training; large amusement-facility operation positions are special-equipment operation positions and require the special-equipment operation certificate (operation item \"large amusement facilities operation\", item code Y2) under the Special Equipment Safety Law of the People's Republic of China before operating; operating units must staff certified operators and implement daily test runs and routine safety checks. Specific requirements follow official information from competent authorities and employers.",
+                "answer": "First ask whether the job actually operates a regulated large ride. Check the matching operator certificate; Shanghai’s guidance identifies the Y2 category. Check ticketing, visitor service and repair separately. The operating entity is responsible for daily test runs and routine safety checks.",
                 "id": "amusement-and-recreation-attendants.faq.6",
                 "question": "How can one become an attendant or operator in this occupation?",
-                "question_key": "career.faq.amusement-and-recreation-attendants.education"
+                "question_key": "career.faq.amusement-and-recreation-attendants.education",
+                "source_refs": [
+                  "cnlaw",
+                  "ride-shanghai",
+                  "ride-hangzhou",
+                  "ride-beijing"
+                ]
               },
               {
-                "answer": "Mainly skipping pre-operation checks and safety-device confirmation, customer violations and loss of order, operating equipment with known defects, unfamiliarity with emergency handling and evacuation, inadequate cleaning and inventory, and incomplete records and reports. Strictly executing daily test runs and routine safety checks per operating procedures and checklists, promptly stopping and escalating customer violations, stopping and reporting immediately on anomalies, knowing the emergency plan and evacuation, and completing cleaning-restocking and records per rules are the basic control measures; specific rules follow special-equipment safety laws and regulations and operating-unit rules.",
+                "answer": "Admission and ticketing staff flag anomalies to the duty lead and warn or guide visitors under venue procedures. The operating entity is responsible for daily test runs and routine safety checks. If the authorized, certified ride operator finds an abnormal condition during operation, they must take effective action immediately to remove the hazard. If a fault or sudden incident occurs, they must immediately stop operation or take emergency action to protect riders, and must immediately notify on-site safety management staff. After a fault or abnormal condition, the operating entity must fully inspect the equipment and eliminate accident hazards before use resumes.",
                 "id": "amusement-and-recreation-attendants.faq.7",
                 "question": "What are this occupation's main risks?",
                 "question_key": "career.faq.amusement-and-recreation-attendants.risk"
               },
               {
-                "answer": "BLS EP directly provides 39-3091: about 408,400 persons in 2025 and about 423,600 persons in 2035, a net increase of about 15,200 persons (3.7%); about 100,400 average annual openings, including growth and replacement demand, which are not net new jobs or a guarantee of individual employment. O*NET still displays the old projection, and its short-hours share cannot explain the causes of openings. Not extrapolated to China.",
+                "answer": "U.S. SOC 39-3091 median pay in 2025 was $32,150 a year or $15.46 an hour. The baseline was about 408,400 jobs; BLS projects about 423,600 in 2035, growth of 3.7%, a net gain of about 15,200, and 100,400 annual openings.",
                 "id": "amusement-and-recreation-attendants.faq.8",
                 "question": "What are the US employment prospects?",
-                "question_key": "career.faq.amusement-and-recreation-attendants.outlook"
+                "question_key": "career.faq.amusement-and-recreation-attendants.outlook",
+                "source_refs": [
+                  "ep",
+                  "onet-wages"
+                ]
               },
               {
                 "answer": "Mainly on site at amusement and recreation facilities: 99% have face-to-face discussions daily, 96% are in continuous contact with others, and 91% consider dealing with external customers or the public extremely important; 64% are outdoors in all kinds of weather daily, 55% stand continuously or almost continuously, and 29% walk or run continuously or almost continuously; 28% are exposed to distracting noise daily and 74% never wear common protective equipment; 46% must deal with unpleasant or angry people at least once a week; 93% have work weeks under 40 hours, with 45% irregular schedules and 17% seasonal (O*NET 39-3091.00 respondent shares).",
@@ -32377,6 +32365,15 @@
                 "id": "amusement-and-recreation-attendants.faq.10",
                 "question": "How to choose among the ride operation, ticketing and admission service, and facility and grounds support directions?",
                 "question_key": "career.faq.amusement-and-recreation-attendants.direction-choice"
+              },
+              {
+                "answer": "In the original, R’s sign says suspended and the digital guide says open. Tell the visitor to follow the posted suspension and refer the conflict to the duty supervisor. Do not promise a reopening. In the revision, the digital guide now says suspended and the conflict is gone, but no reopening notice has arrived. Continue to follow the posted suspension. Retain A, B and C and hand open questions about inspection, cause and reopening to the duty supervisor.",
+                "id": "amusement-and-recreation-attendants.faq.11",
+                "question": "AR-53 reference (open after submitting)",
+                "question_key": "career.faq.amusement-and-recreation-attendants.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -32403,12 +32400,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Fermat Test career content editorial team"
+              "FermatMind Editorial"
             ]
           },
           "id": "amusement-and-recreation-attendants.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -32417,19 +32414,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 Amusement and Recreation Attendants occupational summary and details (bright outlook); BLS Occupational Employment and Wage Statistics (OEWS): 39-3091 and the 2025–2035 employment projections; the Special Equipment Safety Law of the People's Republic of China; the Large Amusement Facilities Safety Supervision Regulations and the Large Amusement Facilities Safety Technical Regulations (TSG 71-2023); NBS \"2025 Average Annual Wages of Employees in Urban Units\"."
+              "On July 28, 2026, Hangzhou Youth Activity Center advertised five amusement activity operators for its Banshan branch. Shifts follow a five-days-on, two-days-off schedule with weekend and public holiday work. Applications ran July 29–August 4. The notice body gives no pay amount. An online college recruitment fair listing published May 12, 2026 combined Beijing Happy Valley ride, admission and food service roles. The 100 positions and “2.2k+” apply to the combined listing, which gives no role-specific headcounts, pay or shifts and no pay period."
             ]
           },
           "id": "amusement-and-recreation-attendants.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "cnlaw",
-            "cnride",
-            "cn-tsg",
-            "ep",
-            "nbs"
+            "ride-hangzhou",
+            "ride-beijing"
           ],
           "type": "prose"
         },
@@ -32438,13 +32429,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Materials checked on 2026-10-08; wages as of month 5 (May), 2025; employment projections 2025–2035; laws, technical regulations, and China background materials' periods noted separately."
+              "U.S. SOC 39-3091 median pay in 2025 was $32,150 a year or $15.46 an hour. The baseline was about 408,400 jobs; BLS projects about 423,600 in 2035, growth of 3.7%, a net gain of about 15,200, and 100,400 annual openings."
             ]
           },
           "id": "amusement-and-recreation-attendants.sources.source-card.3",
           "source_refs": [
-            "onet",
-            "ep"
+            "ep",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -32496,19 +32487,19 @@
                 "entity": "MBTI personality test",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram personality test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the amusement and recreation attendants occupation page",
@@ -32540,10 +32531,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet",
                 "limitation": "Used for occupational identity, tasks, and interest profile (CSR); US single-occupation scope.",
                 "market": "United States",
@@ -32556,10 +32547,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "bls",
                 "limitation": "Employee wage coverage and the 2,080-hour annualization method; does not support the EP employment size.",
                 "market": "United States",
@@ -32572,10 +32563,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "ep",
                 "limitation": "2025 and 2035 employment, net change, and average annual openings; includes the self-employed and differs from OEWS wage coverage.",
                 "market": "United States",
@@ -32588,10 +32579,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "oews",
                 "limitation": "Used for the hourly and annual wage percentile values at 10/25/50/75/90 and the data period.",
                 "market": "United States",
@@ -32604,10 +32595,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "industry_proxy",
+                  "Urban unit industry figures provide context.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "industry_proxy",
+                "evidence_type": "primary_document",
                 "id": "nbs",
                 "limitation": "Used for mainland China civilian industry-sector and unit-type annual average wages; contains no occupation-specific wage.",
                 "market": "Mainland China",
@@ -32615,36 +32606,36 @@
                 "period": "2025 wages; published 2026-05-15",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnse",
-                "limitation": "Used for the framework of mainland China's large amusement facilities' pre-service daily test runs and routine safety checks and certified on-duty operation requirements (applicable in parallel with the Special Equipment Safety Law of the People's Republic of China).",
+                "limitation": "Operating entities conduct post-fault inspections, eliminate hazards and arrange daily pre-use checks.",
                 "market": "Mainland China",
-                "name": "\"Special Equipment Safety Supervision Regulations\" (State Council, including daily test runs for large amusement facilities and certified-operation requirements)",
-                "period": "Issued 2003; revised 2009",
-                "publisher": "State Council",
+                "name": "Special Equipment Safety Law: daily checks by operating entities",
+                "period": "Articles 42 and 43",
+                "publisher": "Adopted by the NPC Standing Committee; republished by SAMR",
                 "scope": "contextual",
-                "url": "https://big5.www.gov.cn/gate/big5/www.gov.cn/flfg/2009-02/06/content_1225116.htm"
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2019/art_39715c5a62f64e32aa522fcc2afd6298.html"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnride",
-                "limitation": "Mainland China operations, personnel training, test-run inspections, passenger notices, and emergency management; TSG listed separately.",
+                "limitation": "Article 28 distinguishes operator duties for abnormal running conditions from duties for faults or sudden incidents.",
                 "market": "Mainland China",
-                "name": "\"Large Amusement Facilities Safety Supervision Regulations\" (2021 revision)",
-                "period": "Issued 2013; revised 2021",
+                "name": "Large Amusement Facilities Safety Supervision Regulations (second revision, 2025)",
+                "period": "Second revision, March 18, 2025 (SAMR Order No. 101)",
                 "publisher": "State Administration for Market Regulation (formerly AQSIQ)",
                 "scope": "contextual",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_9956bbbb4120480db071119c3957f81e.html"
@@ -32652,10 +32643,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
                 "limitation": "Used for mainland China related service-position classification; the Dictionary does not list \"amusement and recreation attendants\" separately.",
                 "market": "Mainland China",
@@ -32668,10 +32659,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "privacy",
                 "limitation": "Used for work-context shares (customer contact, outdoor weather, standing, and work week).",
                 "market": "United States",
@@ -32684,10 +32675,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "facilities",
                 "limitation": "Used for the occupation's common tools and technology entries; does not indicate technology adoption rates.",
                 "market": "United States",
@@ -32700,10 +32691,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "operations",
                 "limitation": "Used for the task list and work activities.",
                 "market": "United States",
@@ -32716,10 +32707,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "hr",
                 "limitation": "Used for shares such as work-week length, schedule regularity, and conflict and weather exposure.",
                 "market": "United States",
@@ -32732,10 +32723,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "health",
                 "limitation": "Used to explain that the civilian total wage is a pre-tax scope and its composition range.",
                 "market": "Mainland China",
@@ -32748,10 +32739,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "ilo",
                 "limitation": "Used for the CSR (Conventional, Social, Realistic) interest-code explanation.",
                 "market": "United States",
@@ -32764,26 +32755,26 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "Accessed 2026-09-15"
+                  "Fictional case.",
+                  "Fictional case."
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "editorial_design",
                 "id": "editor",
                 "limitation": "Used for the entry-education respondent shares and job-preparation level.",
-                "market": "United States",
-                "name": "O*NET OnLine 39-3091.00 details (education and training requirements)",
-                "period": "Occupation page updated 2026; reviewed this round on 2026-10-02",
-                "publisher": "O*NET OnLine",
+                "market": "Fictional case",
+                "name": "FermatMind Editorial: AR-53",
+                "period": "Paper exercise",
+                "publisher": "FermatMind Editorial",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/details/39-3091.00"
+                "url": "#career-content-path"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "nist",
                 "limitation": "Used for the occupation overview and related occupation entries.",
                 "market": "United States",
@@ -32796,10 +32787,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "arxiv",
                 "limitation": "Used for task and duty reference.",
                 "market": "United States",
@@ -32812,10 +32803,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "weforum",
                 "limitation": "Used for task and on-site service procedure explanations.",
                 "market": "United States",
@@ -32828,10 +32819,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "employer",
                 "limitation": "Used for ticketing, inspection, and event record requirements.",
                 "market": "United States",
@@ -32844,10 +32835,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "purchasing-managers",
                 "limitation": "Used for task-list reference.",
                 "market": "United States",
@@ -32860,10 +32851,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "r2-pay-1",
                 "limitation": "Used for task descriptions and duty boundaries.",
                 "market": "United States",
@@ -32876,10 +32867,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "r2-pay-2",
                 "limitation": "Used for occupation-attribute explanations.",
                 "market": "United States",
@@ -32892,10 +32883,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "r2-pay-3",
                 "limitation": "Used for data-scope explanations.",
                 "market": "United States",
@@ -32908,10 +32899,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "census",
                 "limitation": "Used for the main industries (arts, entertainment, and recreation; government).",
                 "market": "United States",
@@ -32924,10 +32915,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "msresearch",
                 "limitation": "Used for task and duty reference.",
                 "market": "United States",
@@ -32940,10 +32931,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
                 "limitation": "Used for national wage percentile values and the data period.",
                 "market": "United States",
@@ -32956,10 +32947,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "archivists",
                 "limitation": "Used for inspection, cleaning, and record processes.",
                 "market": "United States",
@@ -32972,10 +32963,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-10-02"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnlaw",
                 "limitation": "Articles 14, 41–43, and 69: qualifications, anomaly handling, daily inspections, and emergencies.",
                 "market": "Mainland China",
@@ -32988,26 +32979,26 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-10-02"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cn-tsg",
-                "limitation": "Large amusement facilities' technical and use-management requirements; not a general paper operation guide.",
+                "limitation": "The explanation describes key staffing and fault record requirements. Check the applicable rules and operator procedures for the specific equipment.",
                 "market": "Mainland China",
-                "name": "\"Large Amusement Facilities Safety Technical Regulations\" (TSG71–2023)",
+                "name": "SAMR explanation of TSG 71-2023",
                 "period": "Issued 2023; effective 2024-03-01",
                 "publisher": "State Administration for Market Regulation",
                 "scope": "contextual",
-                "url": "https://www.samr.gov.cn/tzsbj/zcfg/aqjsgf/art/2025/art_18ed3bbd68a445cc8f8896924d70ca71.html"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/xwxcs/art/2023/art_506e03269ff64ebda3785e7cf1880b1b.html"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-10-02"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cn-qual",
                 "limitation": "Used for the Y2 operation, Y1 repair, and A safety management item distinctions; certificate handling follows the current competent authority's procedures.",
                 "market": "Mainland China",
@@ -33020,10 +33011,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "Context for the role.",
                   "Accessed 2026-10-02"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Context source",
                 "id": "oews-method",
                 "limitation": "Annual wages are usually annualized on 2,080 hours, not part-time workers' actual full-year income.",
                 "market": "United States",
@@ -33050,20 +33041,61 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Ticketing and admission | verification and fees | sell tickets and collect fees, and admit customers after verifying, collecting, or punching tickets. — 75/100; weight=1/3; amusement-and-recreation-attendants.profile.responsibilities-block.1[0]",
-                  "Equipment operation | rides and devices | operate, drive, or explain mechanical rides and automated equipment, and perform test runs and inspections as required. — 25/100; weight=1/3; amusement-and-recreation-attendants.profile.responsibilities-block.1[2]",
-                  "Customer safety | safety devices and evacuation | fasten customers' safety devices or direct them to fasten them, assist customers on and off rides or animals, and know shutdown and emergency-evacuation procedures. — 0/100; weight=1/3; amusement-and-recreation-attendants.profile.responsibilities-block.1[3]"
+                  "Digital displays can share visitor information or flag conflicts with posted signs. Check ride status under site procedures. A message on a screen does not authorize operation or reopening."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "name": "O*NET: amusement and recreation tasks",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "url": "https://www.onetonline.org/link/details/39-3091.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "On July 28, 2026, Hangzhou Youth Activity Center advertised five amusement activity operators for its Banshan branch. Shifts follow a five-days-on, two-days-off schedule with weekend and public holiday work. Applications ran July 29–August 4. The notice body gives no pay amount."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ride-hangzhou",
+                "limitation": "A historical example from one employer. It does not establish current openings or national occupational pay.",
+                "market": "Mainland China",
+                "name": "Hangzhou Youth Activity Center operator notice",
+                "period": "2026-07-28",
+                "publisher": "Hangzhou Youth Activity Center",
+                "scope": "recruitment_proxy",
+                "url": "https://job.hzqsn.com/rms/apply/getNotice.action?keycode=d5684ea3-db6a-447c-b4dc-b28b6c8efa88"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "An online college recruitment fair listing published May 12, 2026 combined Beijing Happy Valley ride, admission and food service roles. The 100 positions and “2.2k+” apply to the combined listing, which gives no role-specific headcounts, pay or shifts and no pay period."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ride-beijing",
+                "limitation": "A historical example from one employer. It does not establish current openings or national occupational pay.",
+                "market": "Mainland China",
+                "name": "College tourism recruitment fair: Beijing Happy Valley",
+                "period": "Listing published 2026-05-12",
+                "publisher": "Zhengzhou Tourism College jobs portal",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zztrc.edu.cn/jy/info/1028/4634.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The large ride operation certificate code is Y2. Check duties for general ticketing jobs separately."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ride-shanghai",
+                "limitation": "Shanghai guidance; check the specific site and equipment.",
+                "market": "Shanghai, China",
+                "name": "Shanghai market regulator: operating guidance for large rides",
+                "period": "Local guidance",
+                "publisher": "Shanghai Municipal Administration for Market Regulation",
+                "scope": "contextual",
+                "url": "https://www.shanghai.gov.cn/gwk/search/content/2c984a7297a668ba0197af9e44882493"
               }
             ]
           },
@@ -36399,7 +36431,7 @@
       },
       "hero": {
         "h1": "Amusement and Recreation Attendants",
-        "quick_answer": "Amusement and recreation attendants sell and verify tickets, guide customers, and introduce facilities and rules at amusement parks and recreation facilities; operate rides and other automated equipment and confirm customers' safety devices; monitor rules and safety procedures and escalate when necessary; inspect equipment and make minor repairs and adjustments, clean equipment and grounds, and maintain inventory; and record attendance, sales, and repair activities. This page gives US OEWS wage percentiles and BLS employment projections (average growth, about 100,400 ten-thousand average annual openings); the China side provides only the industry scope and the special-equipment qualification framework as reference.",
+        "quick_answer": "Recreation attendants check tickets, guide visitors, manage lines and help with facilities. Ask whether the job gives visitor information or operates equipment. In mainland China, requirements for operating regulated large rides depend on the equipment and task.",
         "title": "Amusement and Recreation Attendants"
       },
       "market_signal_card": {
@@ -37965,7 +37997,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and visitor information",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -38332,7 +38364,7 @@
       },
       {
         "derivation": null,
-        "display_value": "3.7%（2025—2035）",
+        "display_value": "3.7%（2025–2035）",
         "fact_id": "employment-projection",
         "market": "United States",
         "measure": "Employment projection scope",
@@ -38341,32 +38373,20 @@
         "source_refs": [
           "ep"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Amusement and Recreation Attendants",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and visitor information"
     },
     "badges": [
-      "Recreation-facility on-site service: ticketing and customer guidance · ride operation and safety confirmation · inspection, cleaning, and records",
-      "AI: task-level change explanations · no substitution year given",
-      "US OEWS wage percentiles and BLS projections · mainland China industry scope and special-equipment qualification framework · data gaps labeled"
+      "Ticketing | visitor information | handover",
+      "Ride operation and general service are separate",
+      "U.S. SOC 39-3091"
     ],
     "metrics": [
       {
@@ -38405,17 +38425,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What amusement and recreation attendants do, which pre-job training and operating qualifications are needed, how to understand the US wage percentiles and the average-growth employment projections with about 10.24 ten-thousand average annual openings, and the mainland China counterpart positions' special-equipment qualification and daily test-run inspection requirements; explains data scopes and gaps."
+      "text": "Separate ticketing and visitor information from regulated ride operation. Compare two Chinese job notices, U.S. wages and a fictional status handover."
     },
     "title": {
       "availability": "available",
-      "text": "Amusement and recreation attendants: tasks, wages, and employment outlook (O*NET 39-3091, bright outlook)"
+      "text": "Amusement Attendants: Guest Service, Ride Status and Entry"
     }
   },
-  "source_content_sha256": "a8e476d1c259bea1a01ea631eebbc3be3f1ee5c4a26003034c06fa911b03e5d3",
+  "source_content_sha256": "ec57fa1c89fce906244c48d6b4b729fb5275601d4610f1d98250a7ff32a5a3c2",
   "subject": {
     "canonical_slug": "amusement-and-recreation-attendants",
     "name": "Amusement and Recreation Attendants",
-    "summary": "Amusement and recreation attendants sell and verify tickets, guide customers, and introduce facilities and rules at amusement parks and recreation facilities; they operate rides and automated equipment and secure customers' safety devices, monitor rules and safety procedures, inspect and maintain equipment, clean grounds, and record attendance and sales. On the mainland China side, large amusement-facility operators are special-equipment operation personnel who must obtain the corresponding qualification and complete daily test runs and routine safety inspections per procedures."
+    "summary": "Recreation attendants check tickets, guide visitors, manage lines and help with facilities. Ask whether the job gives visitor information or operates equipment. In mainland China, requirements for operating regulated large rides depend on the equipment and task."
   }
 }

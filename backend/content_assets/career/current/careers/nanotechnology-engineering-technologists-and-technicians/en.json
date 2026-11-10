@@ -182,6 +182,9 @@
       "item:nanotechnology-engineering-technologists-and-technicians.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:nanotechnology-engineering-technologists-and-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nanotechnology-engineering-technologists-and-technicians.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -12326,6 +12329,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The N4 image has magnification but no lot ID. N6 has a lot ID but no instrument setting. State what the technical reviewer needs for each."
+            ]
+          },
+          "id": "nanotechnology-engineering-technologists-and-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Trace a nanomaterials test sample",
+          "type": "notice"
         }
       ]
     },
@@ -14839,6 +14857,13 @@
         "id": "nanotechnology-engineering-technologists-and-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nanotechnology-engineering-technologists-and-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15140,7 +15165,7 @@
       "text": "Nanotechnology engineering technologists and technicians"
     }
   },
-  "source_content_sha256": "d5f0d8c911ab4cac98a117916944a27da356241f2cdea5a7b0b55c2b99a293e0",
+  "source_content_sha256": "535e1e131c7eca1a23c36a9772ed42e68aae02c8892b2043193f5d87e5f89fdf",
   "subject": {
     "canonical_slug": "nanotechnology-engineering-technologists-and-technicians",
     "name": "Nanotechnology engineering technologists and technicians",

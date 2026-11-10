@@ -7274,14 +7274,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "This page uses the BLS Occupational Outlook Handbook's combined scope for mathematicians and statisticians, including O*NET 15-2021.00 Mathematicians and 15-2041.00 Statisticians, with directions such as computational mathematics, cryptography research, statistical analysis, and biostatistics. Work includes fundamental mathematics research and mathematical applications across fields, or designing and evaluating statistical methods and sampling, preparing and organizing data, analyzing and interpreting data, judging method applicability, presenting results through charts and papers, developing modeling and graphical analysis programs, and guiding data collectors. Work is mainly in offices and computing environments; major employers are government and R&D institutions. This page excludes adjacent roles such as financial quantitative analysts, computer and information research scientists, and operations research analysts. Statisticians are a constituent occupation of this combined group, and biostatistics is a statistical specialty; neither should be listed as excluded from the group."
+              "Mathematicians often study formal structures or mathematical models. Statisticians often plan how to collect and analyze data and explain uncertainty. This page compares both roles and labels combined U.S. statistics separately."
             ]
           },
           "id": "mathematicians-and-statisticians.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
-            "onet-stat-summary",
-            "bls-ooh"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7379,12 +7377,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Check first: Problems and assumptions, research and sampling designs, data sources and definitions, method and model applicability conditions, error and verification requirements, and academic standards and funding boundaries."
+              "Use one fictional question. For a mathematical approach, write assumptions and a derivation. For a statistical approach, propose sampling, an estimate and an uncertainty check."
             ]
           },
           "id": "mathematicians-and-statisticians.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-stat-tasks"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7393,12 +7391,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Work cycle: Define problems and assumptions, design research or select methods, organize and analyze data, model or prove, verify results, present findings, and undergo review. Do not draw conclusions before confirming all data definitions and method applicability conditions, or submit for publication before checking citations and output boundaries."
+              "Combined BLS figures describe the two occupations together. For separate pay and growth, read the relevant mathematician or statistician data row."
             ]
           },
           "id": "mathematicians-and-statisticians.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-stat-tasks"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -8566,8 +8564,8 @@
                 "id": "bls-ooh",
                 "limitation": "Combined scope for mathematicians and statisticians, not precise single-occupation values; does not automatically map to other jurisdictions.",
                 "market": "United States",
-                "name": "BLS Occupational Outlook Handbook: Mathematicians and Statisticians (combined scope)",
-                "period": "2025 median wages and 2025–2035 outlook; accessed 2026-09-25",
+                "name": "BLS Occupational Outlook Handbook: Mathematicians and Statisticians",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm"
@@ -9564,7 +9562,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "What should be checked first in this work?",
+            "question": "How can you try a project that compares the two roles?",
             "table": {
               "rows": [
                 {
@@ -9596,7 +9594,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "How can the complete work cycle be assessed?",
+            "question": "How should you read combined employment statistics?",
             "table": {
               "rows": [
                 {
@@ -10990,7 +10988,7 @@
           "entry": "mathematicians-and-statisticians.navigation.1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit mathematics and statistics",
+        "label": "Explore work activities with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11114,37 +11112,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "33,500 people",
+        "derivation": "BLS OOH: U.S. occupation 15-2021 and 15-2041 had about 33,500 jobs in 2025 and is projected to have about 36,900 in 2035 (+10%), with about 2,000 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 33,500 jobs",
         "fact_id": "us-employment-2024",
         "market": "United States (combined scope)",
         "measure": "Employment size in 2025 (combined scope)",
         "occupation_scope": "BLS display scope: Mathematicians and Statisticians (15-2021.00 and 15-2041.00 combined)",
-        "period": "2025 BLS OOH; accessed 2026-09-25",
+        "period": "2025",
         "source_refs": [
           "bls-ooh"
         ]
       },
       {
-        "derivation": "BLS OOH shows projected combined employment growth of 10% in 2025–2035 (Much faster than average), with employment change of about +3,400.",
-        "display_value": "Much faster than average (10%, 2025–2035)",
+        "derivation": "BLS OOH: U.S. occupation 15-2021 and 15-2041 had about 33,500 jobs in 2025 and is projected to have about 36,900 in 2035 (+10%), with about 2,000 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "+10%",
         "fact_id": "us-growth",
         "market": "United States (combined scope)",
         "measure": "Projected employment growth (combined scope)",
         "occupation_scope": "BLS display scope: Mathematicians and Statisticians (15-2021.00 and 15-2041.00 combined)",
-        "period": "2025–2035; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ooh"
         ]
       },
       {
-        "derivation": "BLS OOH shows about 2,000 per year, averaged over the decade; this is an annual average, not a period total.",
-        "display_value": "About 2,000 per year (2025–2035 annual average)",
+        "derivation": "BLS OOH: U.S. occupation 15-2021 and 15-2041 had about 33,500 jobs in 2025 and is projected to have about 36,900 in 2035 (+10%), with about 2,000 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 2,000 per year",
         "fact_id": "us-openings",
         "market": "United States (combined scope)",
         "measure": "Projected job openings (annual average, combined scope)",
         "occupation_scope": "BLS display scope: Mathematicians and Statisticians (15-2021.00 and 15-2041.00 combined)",
-        "period": "2025–2035; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ooh"
         ]
@@ -11234,19 +11232,19 @@
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "U.S. employment change (combined)"
+        "label": "U.S. projected employment change (2025–2035) (combined)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "U.S. employment count (combined)"
+        "label": "U.S. jobs (2025) (combined)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "U.S. job openings (annual average, combined)"
+        "label": "U.S. annual openings (2025–2035) (combined)"
       },
       {
         "availability": "missing",
@@ -11260,17 +11258,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "This page uses the BLS Occupational Outlook Handbook's combined scope for mathematicians and statisticians: conducting mathematical research and applying mathematical techniques across fields, or designing and evaluating statistical methods, organizing and analyzing data, and presenting results through charts and papers. To assess this career path, verify the work cycle, responsibility and evidence boundaries, evidence definitions, risk controls, and observable entry-level work samples together."
+      "text": "Compare how mathematicians and statisticians approach questions, and learn when U.S. combined figures apply."
     },
     "title": {
       "availability": "available",
-      "text": "Assessing a Career in Mathematics and Statistics: Work, Entry, and Risk Boundaries"
+      "text": "Mathematicians and Statisticians: Comparing the Two Careers"
     }
   },
-  "source_content_sha256": "124a7b273787163eb8d95c8280fa804f37952b19e5c0fa60453f438f3ac1a190",
+  "source_content_sha256": "ad52d0ea8d21e1758853f4ffc0d4ccd5edde8354a76fa3813ab015f474bf43e8",
   "subject": {
     "canonical_slug": "mathematicians-and-statisticians",
     "name": "Mathematicians and Statisticians",
-    "summary": "This page uses the BLS Occupational Outlook Handbook's combined scope for mathematicians and statisticians. Mathematicians (O*NET 15-2021.00) research fundamental mathematics or applications of mathematical techniques to science, management, and other fields. Statisticians (O*NET 15-2041.00) develop or apply mathematical and statistical theories and methods to collect, organize, interpret, and summarize numerical data into useful information."
+    "summary": "Mathematicians often study formal structures or mathematical models. Statisticians often plan how to collect and analyze data and explain uncertainty. This page compares both roles and labels combined U.S. statistics separately."
   }
 }

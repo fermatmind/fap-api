@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Use the fictional old draft and the V5 revision to form a notice pending recheck, listing two changes, one kept item, and one unknown, and observe patience with detail."
+              "Paper check | If two files share a name, compare their revision history and approval markers before recording the delivery version. Preserve the other copy. "
             ]
           },
           "id": "word-processors-and-typists.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,13 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Word processors and typists correspond to O*NET43-9022.00, using word processing equipment or computers to form letters, reports, and tables from drafts, revisions, recordings, or earlier versions, checking spelling, punctuation, and format, adjusting layout, saving, retrieving, and passing on files, and possibly taking on other clerical tasks. The focus is faithful correspondence to the source and version, not original writing, all office affairs, or all data entry. Word and Office requirements are not generative AI adoption. The paper revision problem uses a fictional notice only and does not handle real personnel or files, send anything, or approve on behalf of the business."
+              "Word processors and typists format incoming material, check revisions, styles and filenames, and archive or send the files through the assigned process. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "word-processors-and-typists.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-43-9022.00"
           ],
           "type": "prose"
         }
@@ -25455,13 +25453,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Exploring transcription and revision lists for approved materials is possible, checking each item against the original; Word requirements do not prove generative adoption. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: If two files share a name, compare their revision history and approval markers before recording the delivery version. Preserve the other copy."
             ]
           },
           "id": "word-processors-and-typists.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-43-9022.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33098,6 +33096,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-43-9022.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 43-9022.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/43-9022.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38615,10 +38640,10 @@
       "text": "Word processors and typists"
     }
   },
-  "source_content_sha256": "e6755c39c2aaa23d4589bef0d70d170c0150d67dcfe0e1e4cf541252aa64dbdc",
+  "source_content_sha256": "ea66e0da40adde7353995dd3ea75b7c6b63e84dd7e16a675596dcbb8c194f2e1",
   "subject": {
     "canonical_slug": "word-processors-and-typists",
     "name": "Word processors and typists",
-    "summary": "Word processors and typists correspond to O*NET43-9022.00, using word processing equipment or computers to form letters, reports, and tables from drafts, revisions, recordings, or earlier versions, checking spelling, punctuation, and format, adjusting layout, saving, retrieving, and passing on files, and possibly taking on other clerical tasks. The focus is faithful correspondence to the source and version, not original writing, all office affairs, or all data entry. Word and Office requirements are not generative AI adoption. The paper revision problem uses a fictional notice only and does not handle real personnel or files, send anything, or approve on behalf of the business."
+    "summary": "Word processors and typists format incoming material, check revisions, styles and filenames, and archive or send the files through the assigned process."
   }
 }

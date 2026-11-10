@@ -173,6 +173,9 @@
       "item:non-destructive-testing-specialists.path.seven-day-trial.7": {
         "status": "mapped"
       },
+      "item:non-destructive-testing-specialists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:non-destructive-testing-specialists.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13371,6 +13374,21 @@
             "samr-ndt-amend-2025"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。检验单 T8 需工件编号及原始检测记录。报告甲有指示位置但未标工件，报告乙工件正确但原始附件空缺。指出缺项，准备交给获授权的检测复核人。"
+            ]
+          },
+          "id": "non-destructive-testing-specialists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-17302901"
+          ],
+          "title": "核无损检测记录能否追溯",
+          "type": "notice"
         }
       ]
     },
@@ -15940,6 +15958,13 @@
         "id": "non-destructive-testing-specialists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "non-destructive-testing-specialists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16220,7 +16245,7 @@
       "text": "无损检测专员"
     }
   },
-  "source_content_sha256": "7512ca06faf6038cb7c9a482a4ac4935e4970f129f3aeef75631b5a9857c97f9",
+  "source_content_sha256": "dbf3304bce1342aead0ad1b951a4533fed5d1ce1e395d96b838f9ed5c57ed993",
   "subject": {
     "canonical_slug": "non-destructive-testing-specialists",
     "name": "无损检测专员",

@@ -7274,15 +7274,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "园林绿化工对应美国 O*NET-SOC 37-3011.00「Landscaping and Groundskeeping Workers」。官方范围为：使用手工或动力工具与设备对物业场地进行景观营造或养护，任务可包括铺草皮、割草、修剪、种植、浇水、施肥、挖掘、耙整、安装灌溉设施与安装无砂浆拼装式混凝土砌块墙。典型工作链是查看场地和任务单、识别植物与地面状态、安排割草修剪或栽植、检查工具和防护、执行浇灌施肥与清障、清理废料、复查草坪边界和设施、记录异常并维护设备。中国「园林绿化工」为 4-09-10-01，但两套职业代码不是官方一一跨国映射。本页美国数值取 BLS新期就业及O*NET呈现的BLS OEWS工资（2025 年就业约 1,188,600 人；2025—2035 增长约 4.7%、预计年均空缺约 149,500 个；2025 年年薪第 10 分位 31,150 美元、中位 39,150 美元、第 90 分位 56,730 美元，小时中位 18.82 美元；主要行业行政与支持服务）；中国大陆精确职业工资未取得，按可见缺口登记。"
+              "园林绿化作业工按方案和现场安排完成栽植、草坪和苗木养护、修剪及绿化清理。栽植项目和既有绿地的日常养护，工作重点不同。"
             ]
           },
           "id": "landscaping-and-groundskeeping-workers.profile.definition-block.1",
           "source_refs": [
-            "onet-details",
-            "onet-wages",
-            "bls-projections",
-            "osta-skill"
+            "source-pack-onet-summary",
+            "cn-ml-landscape",
+            "cn-bj-parks"
           ],
           "type": "prose"
         },
@@ -7364,7 +7363,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入｜官方RC、detail R100/C39/A15/E14/I10/S8不重造RCA；Bright Outlook保留。O*NET Job Zone1—2通用描述：通常高中/GED、部分职业不要求；经验从很少到数月或一年，OJT数日至一年。BLS本职业典型无正式学历门槛、短期在职训练，不能把通用区间当所有岗位必训一年。2025精确职业行政支持49%；其余51%是差额，不建立其中政府占比；不是行业工资。2025美国年薪10/25/50/75/90分位31,150、36,190、39,150、46,830、56,730美元；官方时薪14.98、17.40、18.82、22.52、27.28美元。BLS精确37-3011新期2025就业1,188,600→2035年1,244,200，增长4.7%、净增55,600；年均空缺149,500含增长与替换。OOH详细行增长取整5%，不套组合37-3000年均162,500。O*NET当前已为2025—2035同口径：就业1,188,600→1,244,200人，取整增长5%，年均空缺149,500；4.7%为BLS详细表未取整值，不重复相加。"
+              "研究输入｜官方RC、detail R100/C39/A15/E14/I10/S8不重造RCA；Bright Outlook保留。O*NET Job Zone1—2通用描述：通常高中/GED、部分职业不要求；经验从很少到数月或一年，OJT数日至一年。BLS本职业典型无正式学历门槛、短期在职训练，不能把通用区间当所有岗位必训一年。2025精确职业行政支持49%；其余51%是差额，不建立其中政府占比；不是行业工资。2025美国年薪10/25/50/75/90分位31,150、36,190、39,150、46,830、56,730美元；官方时薪14.98、17.40、18.82、22.52、27.28美元。BLS精确37-3011新期2025就业1,188,600→2035年1,244,200，增长4.7%、净增55,600；年均空缺149,500含增长与替换。OOH详细行增长取整5%，不套组合37-3000年均162,500。"
             ]
           },
           "id": "landscaping-and-groundskeeping-workers.profile.onet-structured-fields-block.7",
@@ -7383,12 +7382,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "这份工作先核对的是：对象（草坪与植物、灌溉与场地设施、手工与动力设备）、输入（任务单与养护周期、植物与地面状态、设备与防护检查结果、许可与安全要求）、交付（作业与栽植结果、设备检查与维护记录、清障与验收记录）。任何一项未核实都应按待核查处理，不能用经验感觉替代场地状态与设备检查。"
+              "用虚构绿地写下区域、植物状态、计划工作和检查结果，说明哪些情况要报告带班人。弥勒具名岗位列除草、补种和草坪管理。"
             ]
           },
           "id": "landscaping-and-groundskeeping-workers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-details"
+            "source-pack-onet-summary",
+            "cn-ml-landscape",
+            "cn-bj-parks"
           ],
           "type": "prose"
         },
@@ -7397,12 +7398,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "判断工作闭环看四步：输入核对（确认任务单、场地状态与设备防护）→任务限定（在许可与授权范围内作业，不擅自施药或攀树）→执行并记录（按安全方法完成养护、栽植与清运并留痕）→复核与升级（设备异常、危险场地、植物病害或超出授权立即停机并报告）。闭环成立的前提是场地、设备与许可范围可核验，而不是只看作业面积是否完成。"
+              "绿化作业人员栽植、修剪和维护。景观设计人员形成场地方案和图纸；施工、复核或养护职责因项目分配。"
             ]
           },
           "id": "landscaping-and-groundskeeping-workers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-details"
+            "source-pack-onet-summary",
+            "cn-ml-landscape"
           ],
           "type": "prose"
         },
@@ -8223,7 +8225,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS精确37-3011新期2025就业1,188,600→2035年1,244,200，增长4.7%、净增55,600；年均空缺149,500含增长与替换。OOH详细行增长取整5%，不套组合37-3000年均162,500。O*NET当前已为2025—2035同口径：就业1,188,600→1,244,200人，取整增长5%，年均空缺149,500；4.7%为BLS详细表未取整值，不重复相加。中国农业大学2026-03-18公告：校园绿化工4人、≤50岁、性别学历不限，有绿化养护施工经验，工作含温室绿植和校园养护；工资面议、签劳动合同及五险一金。长期有效至招满，本轮未确认剩余空岗；非全国门槛或全国工资。中国全国精确需求未建立，见中国证据边界。"
+              "BLS精确37-3011新期2025就业1,188,600→2035年1,244,200，增长4.7%、净增55,600；年均空缺149,500含增长与替换。OOH详细行增长取整5%，不套组合37-3000年均162,500。中国农业大学2026-03-18公告：校园绿化工4人、≤50岁、性别学历不限，有绿化养护施工经验，工作含温室绿植和校园养护；工资面议、签劳动合同及五险一金。长期有效至招满，本轮未确认剩余空岗；非全国门槛或全国工资。中国全国精确需求未建立，见中国证据边界。"
             ]
           },
           "id": "landscaping-and-groundskeeping-workers.market-signals.market-signal-card.2",
@@ -8239,7 +8241,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "新期就业展望｜BLS精确37-3011新期2025就业1,188,600→2035年1,244,200，增长4.7%、净增55,600；年均空缺149,500含增长与替换。OOH详细行增长取整5%，不套组合37-3000年均162,500。O*NET当前同口径，不能相加为招聘规模。"
+              "新期就业展望｜BLS精确37-3011新期2025就业1,188,600→2035年1,244,200，增长4.7%、净增55,600；年均空缺149,500含增长与替换。OOH详细行增长取整5%，不套组合37-3000年均162,500。"
             ]
           },
           "id": "landscaping-and-groundskeeping-workers.market-signals.market-signal-card.3",
@@ -8389,7 +8391,7 @@
                 ]
               },
               {
-                "answer": "BLS精确37-3011新期2025就业1,188,600→2035年1,244,200，增长4.7%、净增55,600；年均空缺149,500含增长与替换。OOH详细行增长取整5%，不套组合37-3000年均162,500。O*NET旧期2024就业1,192,500→2034年1,235,000，增长4%、年均空缺158,200；与新期分别解释。中国农业大学2026-03-18公告：校园绿化工4人、≤50岁、性别学历不限，有绿化养护施工经验，工作含温室绿植和校园养护；工资面议、签劳动合同及五险一金。长期有效至招满，本轮未确认剩余空岗；非全国门槛或全国工资。",
+                "answer": "BLS精确37-3011新期2025就业1,188,600→2035年1,244,200，增长4.7%、净增55,600；年均空缺149,500含增长与替换。OOH详细行增长取整5%，不套组合37-3000年均162,500。美国 BLS 表1.2：37-3011 2025 年就业约 1,188,600 人，预计 2035 年约 1,244,200 人，2025—2035 年变化 +4.7%，年均约 149,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。中国农业大学2026-03-18公告：校园绿化工4人、≤50岁、性别学历不限，有绿化养护施工经验，工作含温室绿植和校园养护；工资面议、签劳动合同及五险一金。长期有效至招满，本轮未确认剩余空岗；非全国门槛或全国工资。",
                 "id": "landscaping-and-groundskeeping-workers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.landscaping-and-groundskeeping-workers.outlook-transition",
@@ -8785,10 +8787,10 @@
                 "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或资质结论。",
                 "market": "美国",
                 "name": "37-3011.00 - Landscaping and Groundskeeping Workers",
-                "period": "当前身份/RC/JobZone；2025工资与2024—2034旧期预测分开",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/37-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -8841,7 +8843,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "2024就业1192500至20341235000，增长4%，年均空缺158200。",
+                  "美国 BLS 表1.2：37-3011 2025 年就业约 1,188,600 人，预计 2035 年约 1,244,200 人，2025—2035 年变化 +4.7%，年均约 149,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                   "不支持BLS新期2025—2035数值。"
                 ],
                 "evidence_type": "official source",
@@ -8849,10 +8851,10 @@
                 "limitation": "不支持BLS新期2025—2035数值。",
                 "market": "美国",
                 "name": "O*NET园林绿化工旧期就业预测",
-                "period": "2024—2034，本轮原页核",
+                "period": "2025–2035",
                 "publisher": "O*NET / BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/37-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -8966,6 +8968,34 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "具名园林绿化招聘列植物浇水、除草、补种和草坪管理。"
+                ],
+                "id": "cn-ml-landscape",
+                "limitation": "历史岗位样本，不外推资格。",
+                "market": "中国大陆",
+                "name": "弥勒市第二十期招聘",
+                "period": "2026",
+                "publisher": "弥勒市人民政府",
+                "scope": "具名岗位或制度",
+                "url": "https://www.hhml.gov.cn/info/35871/923002.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "按园区划分养护任务，列浇水、清扫绿化垃圾和季节性维护。"
+                ],
+                "id": "cn-bj-parks",
+                "limitation": "项目采购范围，不能推单个工人职责或准入。",
+                "market": "中国大陆",
+                "name": "北京公园绿化用工采购",
+                "period": "2026",
+                "publisher": "北京市公共资源交易服务平台",
+                "scope": "具名岗位或制度",
+                "url": "https://ggzyfw.beijing.gov.cn/jyxxcggg/20260408/5487858.html"
               }
             ]
           },
@@ -9887,7 +9917,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这份工作先核对什么？",
+            "question": "没有园林项目经验怎么准备入门面试？",
             "table": {
               "rows": [
                 {
@@ -9919,7 +9949,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "怎样判断工作闭环？",
+            "question": "绿化作业与景观设计有什么区别？",
             "table": {
               "rows": [
                 {
@@ -10869,7 +10899,7 @@
             "question": "这是否覆盖精确职业？"
           },
           {
-            "answer": "2025工资、2025—2035预测；O*NET当前同一期，详细增长与取整分别。",
+            "answer": "2025工资、2025—2035预测；",
             "question": "时期是什么？"
           },
           {
@@ -11005,11 +11035,11 @@
           {
             "geography": "美国",
             "horizon": "2025—2035",
-            "interpretation": "O*NET当前已为2025—2035同口径：就业1,188,600→1,244,200人，取整增长5%，年均空缺149,500；4.7%为BLS详细表未取整值，不重复相加。共享旧期登记由保护FAQ消费，当前局部值核https://www.onetonline.org/link/localtrends/37-3011.00。",
+            "interpretation": "美国职业就业预测采用 BLS 表1.2。",
             "limitation": "不同期不混、单公告不代全国需求或本轮空岗。",
             "metric": "当前O*NET精确预测",
             "occupation_scope": "37-3011精确职业",
-            "value": "O*NET当前已为2025—2035同口径：就业1,188,600→1,244,200人，取整增长5%，年均空缺149,500；4.7%为BLS详细表未取整值，不重复相加。"
+            "value": "美国职业就业预测采用 BLS 表1.2。"
           },
           {
             "geography": "中国北京",
@@ -11472,7 +11502,7 @@
           "entry": "landscaping-and-groundskeeping-workers.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合园林绿化工",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11540,7 +11570,7 @@
             "item": "landscaping-and-groundskeeping-workers.source-register.published.1"
           }
         },
-        "note": "来源说明｜官方RC、Bright与JobZone1—2、2025工资五分位及官方时薪、2025行政支持49%及其余差额51%；BLS与O*NET当前预测同2025—2035，4.7%与取整5%分别。共享旧期登记和保护FAQ未同步；未取得精确行业工资。NBS非私70172/私49527行业税前年均为代理，复用本轮0557已取得同页原文，不代全国职业分位。三峡2025—2027机构认定范围不是全国准入；农大2026公告工资面议、至招满不证明当前空岗。中国经营许可与农药使用要求分别，美国州许可另核。ILO/NIST通用研究风险，Office提及非AI采用；AA纸面96任务面积/真实完成0、暂停及待核四作品七日，不授现场能力与许可。"
+        "note": "美国就业预测采用 BLS 表1.2 的 37-3011；工资使用 2025 年 OEWS。中国大陆来源为行业或具名项目，不能代替全国职业工资。岗位范围、培训及许可要求请按地点和实际任务核对。"
       },
       "work_context_block": {
         "$item": "landscaping-and-groundskeeping-workers.profile.work-context-block.5",
@@ -11608,37 +11638,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "就业 约 1,188,600 人（2025 年，BLS就业预测表，37-3011.00 精确职业）",
+        "derivation": "美国 BLS 表1.2：37-3011 2025 年就业约 1,188,600 人，预计 2035 年约 1,244,200 人，2025—2035 年变化 +4.7%，年均约 149,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 1,188,600 人",
         "fact_id": "us-employment",
         "market": "US",
         "measure": "就业人数",
         "occupation_scope": "园林绿化与场地养护工 37-3011",
-        "period": "2025—2035 BLS精确37-3011预测，本轮原表核",
+        "period": "2025",
         "source_refs": [
           "bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "增长 约 4.7%（2025—2035，至约 1,244,200 人，BLS就业预测表，37-3011.00 精确职业）",
+        "derivation": "美国 BLS 表1.2：37-3011 2025 年就业约 1,188,600 人，预计 2035 年约 1,244,200 人，2025—2035 年变化 +4.7%，年均约 149,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "+4.7%",
         "fact_id": "us-growth",
         "market": "US",
         "measure": "就业增长预测",
         "occupation_scope": "园林绿化与场地养护工 37-3011",
-        "period": "2025—2035 BLS精确37-3011预测，本轮原表核",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "预计年均职位空缺 约 149,500 个（2025—2035，BLS 就业预测，37-3011.00 精确职业，含增长与替换）",
+        "derivation": "美国 BLS 表1.2：37-3011 2025 年就业约 1,188,600 人，预计 2035 年约 1,244,200 人，2025—2035 年变化 +4.7%，年均约 149,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 149,500 个",
         "fact_id": "us-openings",
         "market": "US",
         "measure": "年均职位空缺",
         "occupation_scope": "园林绿化与场地养护工 37-3011",
-        "period": "2025-2035 projections; accessed 2026-08-30",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections"
         ]
@@ -11704,19 +11734,19 @@
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长（2025—2035，约 4.7%）"
+        "label": "美国就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2025，精确职业口径）"
+        "label": "美国就业规模（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2025—2035）"
+        "label": "美国年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11730,17 +11760,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "园林绿化工做什么、如何入行与训练、有哪些设备与许可边界，以及 AI 会改变哪些任务。本页对应 O*NET-SOC 37-3011.00，兴趣代码 RC、Job Zone 1—2 级、Bright Outlook；美国数值取 BLS OOH 与 O*NET 呈现的精确职业口径，中国大陆工资缺口按证据登记。"
+      "text": "了解园林绿化工怎样从栽植任务转到日常养护，并区分作业与景观设计。"
     },
     "title": {
       "availability": "available",
-      "text": "园林绿化工职业判断：养护作业、设备与户外安全"
+      "text": "园林绿化作业工做什么：栽植、修剪和苗木养护"
     }
   },
-  "source_content_sha256": "bd1824ba2c3882926a24ee5c7aa92bd9dc958e9309e83086b9816c191962aaf2",
+  "source_content_sha256": "e68a0daae9b8f5932f6c32424c4e7dd98a1cd4f6fe5c3a18d584e201b58f5f23",
   "subject": {
     "canonical_slug": "landscaping-and-groundskeeping-workers",
-    "name": "园林绿化工",
-    "summary": "园林绿化工（O*NET 37-3011.00）用工具与设备割草、修剪、栽植和浇灌，养护草坪、植物与场地设施并检查设备。"
+    "name": "园林绿化作业工",
+    "summary": "园林绿化作业工按方案和现场安排完成栽植、草坪和苗木养护、修剪及绿化清理。栽植项目和既有绿地的日常养护，工作重点不同。"
   }
 }

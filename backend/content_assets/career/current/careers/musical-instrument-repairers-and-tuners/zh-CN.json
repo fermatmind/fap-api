@@ -167,6 +167,9 @@
       "item:musical-instrument-repairers-and-tuners.path.seven-day-trial.8": {
         "status": "mapped"
       },
+      "item:musical-instrument-repairers-and-tuners.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:musical-instrument-repairers-and-tuners.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -13084,6 +13087,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两件同型号乐器一件报按键卡住，一件报音准漂移。受理表交换了序列号。写下重新配对时要核实的凭证。"
+            ]
+          },
+          "id": "musical-instrument-repairers-and-tuners.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "把乐器故障与送修记录对应",
+          "type": "notice"
         }
       ]
     },
@@ -15638,6 +15656,13 @@
         "id": "musical-instrument-repairers-and-tuners.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "musical-instrument-repairers-and-tuners.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15867,7 +15892,7 @@
       "text": "乐器维修工"
     }
   },
-  "source_content_sha256": "6fc160ba1efd924bff400f65ca27812ef16aefe94bdba1b1fa273cf470c46634",
+  "source_content_sha256": "6b298360660c0a1462f0f1a0ab2245ee1a3c232d4d0be04785ee90cfb3830bac",
   "subject": {
     "canonical_slug": "musical-instrument-repairers-and-tuners",
     "name": "乐器维修工",

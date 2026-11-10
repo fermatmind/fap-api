@@ -159,12 +159,21 @@
         "status": "pending_mapping"
       },
       "item:mental-health-and-substance-abuse-social-workers.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:mental-health-and-substance-abuse-social-workers.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:mental-health-and-substance-abuse-social-workers.path.interview-probation.10": {
+        "status": "pending_mapping"
+      },
+      "item:mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1": {
         "status": "mapped"
       },
       "item:mental-health-and-substance-abuse-social-workers.profile.definition-block.1": {
@@ -5686,52 +5695,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5962,96 +6109,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -11315,7 +11698,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "直接判断：若你愿意在高压与危机情境中稳定回应、按评估与保密规范记录并帮助他人，这个方向值得进一步试验。安全试做只用完全虚构的服务案例，不接触真实当事人信息或受限数据。"
+              "如果你希望一次沟通就解决问题，选择时要谨慎：服务能否落实还常取决于其他机构和后续跟进。"
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.quick-decision.fermat-decision-card.1",
@@ -11329,7 +11712,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "可观察信号：能否按评估与风险筛查流程工作、能否严守保密与记录规范、能否在安全风险出现时立即升级；人格标签不能决定适配或资格。"
+              "到目录「09 入行、资格与职业发展」找《SW-16：核对社区服务转介》，用约 10 分钟核虚构记录，再读题后参考。"
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.quick-decision.fermat-decision-card.2",
@@ -11343,7 +11726,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合条件：愿意长期处理情绪负荷与危机情境，能在督导与规范下稳定工作并持续学习。谨慎条件：若难以承受高情绪负荷与安全责任、对保密要求不适，可先比较心理咨询或个案管理等相邻方向。"
+              "如果你愿意核对服务可及性、和多方协调，并跟踪转介是否落实，可以进一步了解心理健康社工。"
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.quick-decision.fermat-decision-card.3",
@@ -11357,7 +11740,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全工作样本（完全虚构的服务案例）：针对一份虚构的转介案例，在 60 分钟内写出需求与风险评估、服务计划目标、干预与记录要点、保密与升级情形，以及须交有资质者或机构确认的事项；不使用真实当事人信息或受限数据。"
+              "只使用虚构记录。涉及评估、照护决定或资料披露，按适用流程交具资质或有授权的人处理。"
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.quick-decision.fermat-decision-card.4",
@@ -11436,7 +11819,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入：O*NET 21-1023.00 的官方描述、任务、工作情境、兴趣代码（SI）与 Job Zone Five，以及 BLS 2025 年工资与 2024—2034 年就业预测（本职业口径）；不据此推定中国大陆的资格、工资或就业口径。"
+              "研究输入：O*NET 21-1023.00 的官方描述、任务、工作情境、兴趣代码（SI）与 Job Zone Five，以及 BLS 2025 年工资与 2025—2035 年就业预测（本职业口径）；不据此推定中国大陆的资格、工资或就业口径。"
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.profile.definition-block.5",
@@ -11500,7 +11883,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "相邻关系只用于方向比较：本职业以评估、干预与个案管理为核心，临床与咨询心理学家侧重心理评估与治疗，物质滥用咨询师侧重成瘾咨询，婚姻与家庭治疗师侧重要庭系统，精神健康咨询师侧重咨询与支持，各岗位资格与执照不得互换。"
+              "相邻关系只用于方向比较：本职业以评估、干预与个案管理为核心，临床与咨询心理学家侧重心理评估与治疗，物质滥用咨询师侧重成瘾咨询，婚姻与家庭治疗师侧重家庭系统，精神健康咨询师侧重咨询与支持，各岗位资格与执照不得互换。"
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.direction-comparison.adjacent-career-comparison-table.1",
@@ -11791,7 +12174,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国21-1023本职业2025—2035就业138,900→153,200人，增长10%、净增14,300；O*NET年均空缺12,500含增长与替换，空缺非净增、非当前招聘或AI因果。"
+              "美国21-1023本职业2025—2035就业138,900→153,200 个岗位，增长10.3%、净增14,300；BLS 预计年均空缺12,500含增长与替换，空缺非净增、非当前招聘或AI因果。"
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.us-salary.career-snapshot-secondary-locale.3",
@@ -11959,7 +12342,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "下一步试验：用完全虚构的服务案例完成一次评估—计划—记录演练，再决定是否继续。"
+              "到第 09 节用 SW-16 核虚构的共享许可和接收回执，拟给协调员的交接。独立的 W-SW 核可联系时段和预约确认。"
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.fit.riasec-fit-block.8",
@@ -11981,7 +12364,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "法域与岗位范围分别核：中国精神卫生法区分咨询、治疗与精神障碍诊断；美国临床社工需州执照且可在范围内诊断。职业名称、量表或AI输出不授予权力。｜https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992810.html｜https://www.bls.gov/ooh/community-and-social-service/social-workers.htm"
+              "作出判断或升级前，先核任务、适用法律和岗位分工。入行资格 FAQ 分别给出美国和中国大陆的例子及原件。工具不授予执业权限。"
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.risk.career-risk-cards.1",
@@ -12129,7 +12512,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入门工作样本：在督导下针对完全虚构案例完成一次评估与记录，展示风险筛查、计划目标与升级判断，不接触真实当事人。"
+              "到第 09 节独立完成 SW-16：核两条虚构转介的共享许可与接收回执，再写清有权处理的协调员。"
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.path.career-path-block.6",
@@ -12177,12 +12560,19 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "阶段",
+              "任务",
+              "权限边界",
+              "证明材料：纸面练习或获准实务",
+              "下一步"
+            ],
             "rows": [
               [
                 "基础观察",
                 "在督导下参与评估与个案管理",
                 "不得独立处置危机或作诊断",
-                "评估与记录练习",
+                "纸面可做 SW-16 许可和回执便笺，或 W-SW 联系及预约凭证。",
                 "按执照及督导评价扩展任务"
               ],
               [
@@ -12231,12 +12621,18 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "情境",
+              "行动",
+              "复核要点",
+              "交付"
+            ],
             "rows": [
               [
                 "面试前准备",
-                "整理一段虚构案例的评估与计划案例",
-                "请他人挑战风险与保密判断",
-                "评估与计划样本"
+                "到第 09 节用 SW-16 核虚构的共享许可和接收回执，拟给协调员的交接。独立的 W-SW 核可联系时段和预约确认。",
+                "按 SW-16 题后量规独立回核，同伴复核可选。",
+                "虚构凭证便笺、待核项与纸面交接。"
               ],
               [
                 "面试现场",
@@ -12276,6 +12672,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "类别",
+              "证明材料",
+              "核验方",
+              "核验条件",
+              "权限边界",
+              "责任方",
+              "下一步"
             ],
             "rows": [
               [
@@ -12339,6 +12744,127 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "虚构材料：SW-16（约 10 分钟）",
+                  "虚构社区团队要求：转介须有信息共享许可记录及接收机构回执，才能标为已交接。",
+                  "R4 有许可记录和接收回执；R5 有许可记录与发出邮件的副本。",
+                  "仅指定协调员可结束转介；不使用真人记录。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "任务与交付",
+                  "每份各写一行交接，列已有证据和待办。",
+                  "给服务协调员写一个待核问题。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "题后参考",
+                  "R4 两种凭证齐全；R5 的发出邮件副本不是接收回执。",
+                  "R5 保留待办，请协调员向接收机构确认。"
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "独立自核量规",
+                  "核两个编号、两类凭证和有权关闭转介的人。"
+                ]
+              }
+            ]
+          },
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "title": "SW-16：核对社区服务转介",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "第 1 天",
+                  "开始新题 W-SW。虚构服务机构要求 T6、T7 都有可联系时间和预约确认。抄下两项条件。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "第 2 天",
+                  "T6 可在周三上午联系；T7 无已确认联系时段。列已知信息。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "第 3 天",
+                  "T6 有预约确认；T7 只发出申请，还没收到回复。区分确认与申请。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "第 4 天",
+                  "给协调员写一条中性问题，核 T7 联系时段和预约。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "第 5 天",
+                  "写两行转介跟进，列依据和下一责任人，不自行关档。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "第 6 天",
+                  "独立对照第 1 天规则和第 2–3 天的两份记录；完成后可选请同伴核对。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "第 7 天",
+                  "写下你愿意反复做的一项工作，以及哪种资源缺口会让你觉得协调困难。"
+                ]
+              }
+            ]
+          },
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "title": "七天纸面体验：独立新题",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "我列了两个编号。",
+              "我核了两项条件。",
+              "我没有猜测缺失资料。",
+              "我写清了下一责任人。",
+              "我只使用虚构材料。",
+              "我可以独立再核一遍。",
+              "我确定了一项要练的能力。"
+            ]
+          },
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "title": "七天后的判断问题",
+          "type": "list"
         }
       ]
     },
@@ -12353,7 +12879,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国21-1023本职业2025—2035就业138,900→153,200人，增长10%、净增14,300；O*NET年均空缺12,500含增长与替换，空缺非净增、非当前招聘或AI因果。"
+              "美国21-1023本职业2025—2035就业138,900→153,200 个岗位，增长10.3%、净增14,300；BLS 预计年均空缺12,500含增长与替换，空缺非净增、非当前招聘或AI因果。"
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.market-signals.market-signal-card.1",
@@ -12441,7 +12967,7 @@
                 ]
               },
               {
-                "answer": "本职业以评估、干预与个案管理为核心；临床与咨询心理学家通常需博士学位与执照；物质滥用咨询师聚焦成瘾咨询；婚姻与家庭治疗师侧重要庭系统；精神健康咨询师侧重咨询与支持。名称相近不等于资格与授权可互换。",
+                "answer": "本职业以评估、干预与个案管理为核心；临床与咨询心理学家通常需博士学位与执照；物质滥用咨询师聚焦成瘾咨询；婚姻与家庭治疗师侧重家庭系统；精神健康咨询师侧重咨询与支持。名称相近不等于资格与授权可互换。",
                 "id": "mental-health-and-substance-abuse-social-workers.faq.2",
                 "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.mental-health-and-substance-abuse-social-workers.role-comparison",
@@ -12468,12 +12994,14 @@
                 ]
               },
               {
-                "answer": "心理社会评估、风险筛查与处置、干预方案、保密与披露判断、转介与危机升级，必须由有资格与执照的人按职责负责；工具输出不得作为诊断或处置结论。",
+                "answer": "评估、干预、保密、转介与升级由适用法律和机构流程指定的有权人员按任务负责。受监管的临床工作另核所需执照。工具输出不能作为诊断或处置结论。",
                 "id": "mental-health-and-substance-abuse-social-workers.faq.5",
                 "question": "哪些关键判断必须由专业人员负责？",
                 "question_key": "career.faq.mental-health-and-substance-abuse-social-workers.human-control",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "source-pack-onet-details",
+                  "bls-ooh-licensure",
+                  "cn-community-rehab-policy"
                 ]
               },
               {
@@ -12487,21 +13015,25 @@
                 ]
               },
               {
-                "answer": "BLS 2025 年工资数据：中位年薪 60,280 美元（约 28.98 美元/小时），10 分位 39,740、25 分位 47,070、75 分位 79,730、90 分位 104,170 美元；为 O*NET 21-1023.00 本职业口径，分位不含个人到手收入。",
+                "answer": "BLS 表 1.2 的心理健康与物质使用问题社会工作者（21-1023）：2025 年 5 月年工资中位数 60,280 美元；2025 年美国有 138,900 个岗位，2035 年预计 153,200 个（+10.3%），预计年均空缺 12,500 个，含替换需求。",
                 "id": "mental-health-and-substance-abuse-social-workers.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.mental-health-and-substance-abuse-social-workers.us-pay",
                 "source_refs": [
-                  "source-pack-onet-localwages"
+                  "source-pack-onet-localwages",
+                  "source-pack-onet-localtrends"
                 ]
               },
               {
-                "answer": "美国 Job Zone Five：通常需要研究生教育（硕士或以上）并多需执照或注册，实习与督导时数是常见要求；中国大陆的学历、执业与监督边界按主管部门规则确定。学位不等于执业授权。",
+                "answer": "美国临床社工须取得社会工作硕士学位、完成受督导临床实务、通过考试并取得州执照；非临床岗位是否需执照或资格依各州规定。O*NET Job Zone 5 是职业准备分组，不是法定要求。中国大陆社区康复政策提出由精神科医师、社会工作者及其他专业人员组成服务团队。社工可参与服务协调和康复支持，团队分工不赋予精神障碍诊疗权。 第 29 条规定，中国大陆精神障碍诊断由精神科执业医师作出。",
                 "id": "mental-health-and-substance-abuse-social-workers.faq.8",
                 "question": "入行和训练路径通常是什么样的？",
                 "question_key": "career.faq.mental-health-and-substance-abuse-social-workers.education-path",
                 "source_refs": [
-                  "source-pack-onet-localcert"
+                  "source-pack-onet-localcert",
+                  "bls-ooh-licensure",
+                  "cn-community-rehab-policy",
+                  "cn-mental-health-law-article29"
                 ]
               },
               {
@@ -12514,7 +13046,7 @@
                 ]
               },
               {
-                "answer": "O*NET 21-1023.00 本职业口径：2024 年就业约 136,800 人，2034 年预计约 150,100 人，增长约 10%，年均空缺约 13,500 个；行业分布医疗与社会援助约 75%、政府约 14%。不等于个人录用概率。",
+                "answer": "O*NET 行业分布为医疗保健和社会援助 76%、政府 15%、其他行业 9%。BLS 预计美国年均空缺 12,500 个，含替换需求。",
                 "id": "mental-health-and-substance-abuse-social-workers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.mental-health-and-substance-abuse-social-workers.outlook-transition",
@@ -12524,7 +13056,7 @@
                 ]
               },
               {
-                "answer": "若能在督导下用完全虚构案例完成一次评估—计划—记录演练，并能按规范核对、在安全或保密疑问时先停下并升级，值得进一步试验；具体执照与督导要求以所在地与机构为准。",
+                "answer": "到第 09 节独立完成 SW-16：核两条虚构转介的共享许可与接收回执，再写清有权处理的协调员。",
                 "id": "mental-health-and-substance-abuse-social-workers.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.mental-health-and-substance-abuse-social-workers.career-worth",
@@ -12574,28 +13106,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "心理健康与物质滥用社会工作者",
+                "entity": "MBTI 人格测试",
                 "id": "navigation-2",
-                "relation": "career.section",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "心理健康与物质滥用社会工作者",
-                "id": "navigation-3",
-                "relation": "career.section",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "心理健康与物质滥用社会工作者",
-                "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "心理健康与物质滥用社会工作者",
-                "id": "navigation-5",
+                "entity": "大五人格测试",
+                "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
+              },
+              {
+                "entity": "心理咨询师",
+                "id": "navigation-4",
+                "relation": "career.section",
+                "url": "/zh/career/jobs/mental-health-counselors"
+              },
+              {
+                "entity": "临床与咨询心理学家",
+                "id": "navigation-5",
+                "relation": "career.section",
+                "url": "/zh/career/jobs/clinical-and-counseling-psychologists"
               },
               {
                 "entity": "心理健康与物质滥用社会工作者",
@@ -12753,23 +13285,23 @@
                 "name": "人社部劳动关系·工资福利栏目（工资信息有界检索）",
                 "period": "bounded search; accessed 2026-09-28",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "parent_occupation_proxy",
+                "scope": "人社部劳动关系·工资福利栏目（工资信息有界检索）",
                 "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/"
               },
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "O*NET 展示 BLS 2024—2034 年就业预测：2024 年就业 136,800 人、2034 年预计 150,100 人、增长 10%（远高于平均）、年均空缺 13,500 个。"
+                  "BLS 表 1.2 的心理健康与物质使用问题社会工作者（21-1023）：2025 年 5 月年工资中位数 60,280 美元；2025 年美国有 138,900 个岗位，2035 年预计 153,200 个（+10.3%），预计年均空缺 12,500 个，含替换需求。"
                 ],
                 "evidence_type": "official employment trends and projections",
                 "id": "source-pack-onet-localtrends",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "BLS 表 1.2 的心理健康与物质使用问题社会工作者（21-1023）：2025 年 5 月年工资中位数 60,280 美元；2025 年美国有 138,900 个岗位，2035 年预计 153,200 个（+10.3%），预计年均空缺 12,500 个，含替换需求。",
                 "market": "US",
-                "name": "National Employment Trends: 21-1023.00 - Mental Health and Substance Abuse Social Workers",
-                "period": "2024—2034 BLS Employment Projections displayed by O*NET OnLine; accessed 2026-09-28",
+                "name": "BLS 表 1.2（21-1023）",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/21-1023.00"
+                "scope": "心理健康与物质使用问题社会工作者（21-1023）",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-28",
@@ -12781,9 +13313,9 @@
                 "limitation": "行业门类平均工资，未单列心理健康与物质滥用社会工作者；调查对象不含个体工商户与自由职业者。",
                 "market": "CN",
                 "name": "2025年城镇单位就业人员平均工资情况",
-                "period": "2025 年数据，2026-05-15 发布；accessed 2026-09-28",
+                "period": "2025 年数据（2026 年 5 月 15 日发布）",
                 "publisher": "国家统计局",
-                "scope": "industry_proxy",
+                "scope": "2025年城镇单位就业人员平均工资情况",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
@@ -12802,6 +13334,75 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "details": [
+                  "2026 年 7 月课程把社会工作者列为多类培训对象之一，是培训场景样本，不是招聘、执业授权或工资。"
+                ],
+                "id": "cn-shanghai-community-training",
+                "limitation": "2026 年 7 月课程把社会工作者列为多类培训对象之一，是培训场景样本，不是招聘、执业授权或工资。",
+                "market": "CN",
+                "name": "上海市精神卫生中心社区康复培训",
+                "period": "2026",
+                "publisher": "上海市精神卫生中心社区康复培训",
+                "scope": "上海市精神卫生中心社区康复培训",
+                "url": "https://www.smhc.org.cn/info/1009/20961.htm"
+              },
+              {
+                "details": [
+                  "2026 年 10 月 27 日公告是医疗集团采购社区精神卫生社工服务的样本，不是面向个人招聘。"
+                ],
+                "id": "cn-nanshan-community-services",
+                "limitation": "政府采购索引和采购方公告栏可核 2026-10-27 服务采购公告；公告全文未核。仅作机构采购样本，不是个人招聘或资质来源。",
+                "market": "CN",
+                "name": "南山区社区精神卫生社工服务采购",
+                "period": "2026",
+                "publisher": "南山区社区精神卫生社工服务采购",
+                "scope": "南山区社区精神卫生社工服务采购",
+                "url": "https://www.ccgp.gov.cn/cggg/dfgg/gkzb/202610/t20261027_27565467.htm"
+              },
+              {
+                "details": [
+                  "大陆社区康复政策提出由精神科医师、社会工作者及其他专业人员组成服务团队。社工参与协调和康复支持；团队分工不赋予精神障碍诊疗权。"
+                ],
+                "id": "cn-community-rehab-policy",
+                "limitation": "大陆社区康复政策提出由精神科医师、社会工作者及其他专业人员组成服务团队。社工参与协调和康复支持；团队分工不赋予精神障碍诊疗权。",
+                "market": "CN",
+                "name": "民政部等部门：精神障碍社区康复服务意见",
+                "period": "2017",
+                "publisher": "民政部等部门：精神障碍社区康复服务意见",
+                "scope": "民政部等部门：精神障碍社区康复服务意见",
+                "url": "https://app.www.gov.cn/govdata/gov/201711/14/414987/article.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国执照、学历和受督导经验；实际条件看适用州主管部门。"
+                ],
+                "evidence_type": "官方职业手册",
+                "id": "bls-ooh-licensure",
+                "limitation": "美国执照、学历和受督导经验；实际条件看适用州主管部门。",
+                "market": "US",
+                "name": "BLS 职业展望手册：入行与执照",
+                "period": "2026-11-10 实读",
+                "publisher": "美国劳工统计局",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/community-and-social-service/social-workers.htm#tab-4"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "第 29 条规定，中国大陆精神障碍诊断由精神科执业医师作出。"
+                ],
+                "evidence_type": "官方法规原文",
+                "id": "cn-mental-health-law-article29",
+                "limitation": "第 29 条规定，中国大陆精神障碍诊断由精神科执业医师作出。",
+                "market": "CN",
+                "name": "《中华人民共和国精神卫生法》第 29 条",
+                "period": "2018 年修正",
+                "publisher": "北京市卫生健康委员会转载",
+                "scope": "contextual",
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992810.html"
               }
             ]
           },
@@ -13119,7 +13720,7 @@
             "问题": "个案记录能自动完成吗？"
           },
           {
-            "回答": "风险信号判断、危机处置与保密判断必须由有资格与执照的人按职责负责。",
+            "回答": "风险判断、危机处置与保密由适用法律和机构流程指定的有权人员分工。受监管的临床工作另核执照要求。",
             "来源": "21-1023.00 - Mental Health and Substance Abuse Social Workers",
             "链接": "https://www.onetonline.org/link/details/21-1023.00",
             "问题": "风险评估能交给工具吗？"
@@ -13313,7 +13914,7 @@
         "entry_heading": "入行路径与可检查证据",
         "heading": "心理健康与物质滥用社会工作者的入行路径、资格边界与职业发展",
         "locale_requirements": {
-          "credential_boundary": "学历、注册、执照和机构权限分别核；美国临床社工可在执照范围内诊断，中国精神障碍诊断由精神科执业医师作出。",
+          "credential_boundary": "学历、注册、执照和机构权限分别核；美国临床社工可在执照范围内诊断，中国精神障碍诊断由精神科执业医师作出。 大陆社区康复政策提出由精神科医师、社会工作者及其他专业人员组成服务团队。社工参与协调和康复支持；团队分工不赋予精神障碍诊疗权。",
           "jurisdiction": "美国州执照规则；中国精神卫生法及具体岗位要求分别核",
           "summary": "美国BLS：本职业人员常为临床社工；临床执业需硕士、毕业后督导经验和州执照，具体要求随州而异。Job Zone Five是群组准备信息，不规定本职业统一年限。中国按实际服务类别、机构及法律核。"
         },
@@ -13342,6 +13943,24 @@
             "id": "faa",
             "label": "21-1023.00 - Mental Health and Substance Abuse Social Workers",
             "scope": "职业范围、来源口径与责任边界"
+          },
+          {
+            "href": "https://www.smhc.org.cn/info/1009/20961.htm",
+            "id": "cn-shanghai-community-training",
+            "label": "上海市精神卫生中心社区康复培训",
+            "scope": "2026 年 7 月课程把社会工作者列为多类培训对象之一，是培训场景样本，不是招聘、执业授权或工资。"
+          },
+          {
+            "href": "https://www.ccgp.gov.cn/cggg/dfgg/gkzb/202610/t20261027_27565467.htm",
+            "id": "cn-nanshan-community-services",
+            "label": "南山区社区精神卫生社工服务采购",
+            "scope": "2026 年 10 月 27 日公告是医疗集团采购社区精神卫生社工服务的样本，不是面向个人招聘。"
+          },
+          {
+            "href": "https://app.www.gov.cn/govdata/gov/201711/14/414987/article.html",
+            "id": "cn-community-rehab-policy",
+            "label": "民政部等部门：精神障碍社区康复服务意见",
+            "scope": "大陆社区康复政策提出由精神科医师、社会工作者及其他专业人员组成服务团队。社工参与协调和康复支持；团队分工不赋予精神障碍诊疗权。"
           }
         ],
         "tracks": [
@@ -13904,18 +14523,18 @@
           },
           {
             "指标": "就业2025→2035",
-            "数值": "138,900→153,200人",
-            "说明": "O*NET美国本职业总体预测；空缺含替换，非AI因果｜https://www.onetonline.org/link/localtrends/21-1023.00"
+            "数值": "138,900→153,200 个岗位",
+            "说明": "BLS 表 1.2；预计年均空缺含替换需求｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "指标": "就业变化2025—2035",
-            "数值": "10%；净增14,300人",
-            "说明": "O*NET美国本职业总体预测；空缺含替换，非AI因果｜https://www.onetonline.org/link/localtrends/21-1023.00"
+            "数值": "10.3%；净增14,300 个岗位",
+            "说明": "BLS 表 1.2；预计年均空缺含替换需求｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "指标": "年均职位空缺2025—2035",
             "数值": "12,500个/年",
-            "说明": "O*NET美国本职业总体预测；空缺含替换，非AI因果｜https://www.onetonline.org/link/localtrends/21-1023.00"
+            "说明": "BLS 表 1.2；预计年均空缺含替换需求｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
         "boundary": "美国数据只适用于 mental-health-and-substance-abuse-social-workers 的标注期间；不外推中国，也不构成个人收入或录用保证。",
@@ -13946,7 +14565,7 @@
           }
         ],
         "factors_heading": "影响实际工资水平的主要因素",
-        "growth": "10%（2025—2035）",
+        "growth": "10.3%，2025–2035 年预计岗位增幅",
         "heading": "心理健康与物质滥用社会工作者的美国薪资与就业数据边界",
         "industry_heading": "行业与岗位差异",
         "industry_period": "当前O*NET行业页，年份需沿原表核",
@@ -14094,8 +14713,8 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "适合能在高压与危机情境中保持稳定、按评估与保密规范记录、并在安全风险出现时立即升级的人。",
-        "title": "心理健康与物质滥用社会工作者适合什么样的人？"
+        "summary": "如果你愿意核对服务可及性、和多方协调，并跟踪转介是否落实，可以进一步了解心理健康社工。",
+        "title": "谁可能适合做心理健康与物质使用问题社会工作者？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -14125,12 +14744,12 @@
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-sources",
+            "label": "查市场数据来源"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "比较相关职业方向"
           }
         ],
         "direct_answer": {
@@ -14189,7 +14808,7 @@
             "metric": "就业规模与变化",
             "occupation_scope": "展示口径：21-1023.00",
             "source_id": "bls",
-            "value": "138,900→153,200人；10%；净增14,300"
+            "value": "138,900→153,200 个岗位；10.3%；净增14,300"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -14312,13 +14931,13 @@
             "alternate_value": null,
             "label": "美国就业（2025）",
             "secondary_value": null,
-            "value": "138,900人"
+            "value": "138,900 个岗位"
           },
           {
             "alternate_value": null,
             "label": "美国增长（2025—2035）",
             "secondary_value": null,
-            "value": "10%，总体预测，非AI归因"
+            "value": "10.3%：BLS 表 1.2 职业总体预测，不归因于 AI。"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -14499,44 +15118,44 @@
         "heading": "适配信号、人格工具边界与实际使用方法",
         "questions": [
           {
-            "answer": "心理健康与物质滥用社会工作者可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做心理健康与物质滥用社会工作者需要怎样的能力与工作方式？"
+            "answer": "用 SW-16 核题给共享许可和接收回执，拟交指定协调员；也可用 W-SW 单独核联系时段与预约凭证。",
+            "question": "选择这个方向前可以先试什么？"
           },
           {
-            "answer": "心理健康与物质滥用社会工作者可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做心理健康与物质滥用社会工作者需要怎样的能力与工作方式？"
+            "answer": "分别核两条虚构转介是否有共享许可和接收回执。",
+            "question": "两行转介记录核什么？"
           },
           {
-            "answer": "心理健康与物质滥用社会工作者可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做心理健康与物质滥用社会工作者需要怎样的能力与工作方式？"
+            "answer": "按题给凭证区分已发与已接收；缺少确认就列给协调员待核。",
+            "question": "已发消息能证明接收吗？"
           },
           {
-            "answer": "心理健康与物质滥用社会工作者可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做心理健康与物质滥用社会工作者需要怎样的能力与工作方式？"
+            "answer": "由指定协调员决定。纸面交接只写已见凭证和待核项。",
+            "question": "题内由谁关闭转介？"
           },
           {
-            "answer": "心理健康与物质滥用社会工作者可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做心理健康与物质滥用社会工作者需要怎样的能力与工作方式？"
+            "answer": "对照题给可联系时段与预约记录，将缺证与可确认项分开。",
+            "question": "W-SW 要核什么？"
           },
           {
-            "answer": "心理健康与物质滥用社会工作者可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做心理健康与物质滥用社会工作者需要怎样的能力与工作方式？"
+            "answer": "第 6 天重看题内规则及原始记录，对照两项条件和指定收件角色回核交接。",
+            "question": "七天题如何自行回核？"
           },
           {
-            "answer": "心理健康与物质滥用社会工作者可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做心理健康与物质滥用社会工作者需要怎样的能力与工作方式？"
+            "answer": "只用本页提供的虚构记录，不联系服务对象，也不处理真实个案资料。",
+            "question": "需要真实个案记录吗？"
           },
           {
-            "answer": "心理健康与物质滥用社会工作者可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做心理健康与物质滥用社会工作者需要怎样的能力与工作方式？"
+            "answer": "可作为你对协调与留痕有兴趣的线索；它不评估临床能力或执业资格。",
+            "question": "喜欢交接任务说明什么？"
           },
           {
-            "answer": "心理健康与物质滥用社会工作者可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做心理健康与物质滥用社会工作者需要怎样的能力与工作方式？"
+            "answer": "把它当成探索线索，对照真实工作任务和你在纸面练习中喜欢的环节。",
+            "question": "怎么理解兴趣画像？"
           },
           {
-            "answer": "心理健康与物质滥用社会工作者可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做心理健康与物质滥用社会工作者需要怎样的能力与工作方式？"
+            "answer": "核具体岗位、督导和适用授权；美国与中国大陆原件见入行资格 FAQ。",
+            "question": "真实岗位要核哪些条件？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -14554,7 +15173,7 @@
             "tone": "caution"
           },
           {
-            "body": "用完全虚构的服务案例完成一次评估—计划—记录演练，再决定是否继续。",
+            "body": "到第 09 节独立完成 SW-16：核两条虚构转介的共享许可与接收回执，再写清有权处理的协调员。",
             "id": "experiment",
             "label": "下一步试验动作",
             "tone": "action"
@@ -14652,7 +15271,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI 人格测试（英文）"
+            "label": "MBTI 人格测试"
           },
           {
             "href": {
@@ -14662,7 +15281,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "大五人格模型测试（英文）"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -14672,7 +15291,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI 中文测评"
+            "label": "心理咨询师"
           },
           {
             "href": {
@@ -14682,7 +15301,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "大五人格中文测评"
+            "label": "临床与咨询心理学家"
           }
         ]
       },
@@ -14725,6 +15344,27 @@
         "id": "mental-health-and-substance-abuse-social-workers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -14818,7 +15458,7 @@
         "fact_id": "us-median",
         "market": "美国（Mental Health and Substance Abuse Social Workers 21-1023.00）",
         "measure": "2025 年年薪中位数",
-        "occupation_scope": "O*NET 21-1023.00 本职业口径",
+        "occupation_scope": "心理健康与物质使用问题社会工作者（21-1023）",
         "period": "2025 年工资数据；查阅 2026-09-25",
         "source_refs": [
           "source-pack-onet-localwages"
@@ -14850,36 +15490,36 @@
       },
       {
         "derivation": null,
-        "display_value": "136,800 人（2024）",
+        "display_value": "138,900 个岗位 — 心理健康与物质使用问题社会工作者（21-1023）",
         "fact_id": "employment",
         "market": "美国",
-        "measure": "2024 年就业规模",
-        "occupation_scope": "O*NET 21-1023.00 本职业口径",
-        "period": "2024；查阅 2026-09-25",
+        "measure": "138,900 个岗位",
+        "occupation_scope": "心理健康与物质使用问题社会工作者（21-1023）",
+        "period": "2025",
         "source_refs": [
           "source-pack-onet-localtrends"
         ]
       },
       {
-        "derivation": "O*NET 全国就业趋势页：2024—2034 年预计增长约 10%。",
-        "display_value": "远高于平均（约 10%，2024—2034）",
+        "derivation": null,
+        "display_value": "10.3% 预计岗位增幅 — 心理健康与物质使用问题社会工作者（21-1023）",
         "fact_id": "growth",
         "market": "美国",
-        "measure": "就业增长预测",
-        "occupation_scope": "O*NET 21-1023.00 本职业口径",
-        "period": "2024—2034；查阅 2026-09-25",
+        "measure": "10.3% 预计岗位增幅",
+        "occupation_scope": "心理健康与物质使用问题社会工作者（21-1023）",
+        "period": "2025–2035",
         "source_refs": [
           "source-pack-onet-localtrends"
         ]
       },
       {
-        "derivation": "含替换需求。",
-        "display_value": "约 13,500 个/年（2024—2034）",
+        "derivation": null,
+        "display_value": "12,500 个预计年均空缺 — 心理健康与物质使用问题社会工作者（21-1023）",
         "fact_id": "openings",
         "market": "美国",
-        "measure": "预计职位空缺（年均）",
-        "occupation_scope": "O*NET 21-1023.00 本职业口径",
-        "period": "2024—2034；查阅 2026-09-25",
+        "measure": "12,500 个预计年均空缺",
+        "occupation_scope": "心理健康与物质使用问题社会工作者（21-1023）",
+        "period": "2025–2035",
         "source_refs": [
           "source-pack-onet-localtrends"
         ]
@@ -14927,31 +15567,31 @@
         "availability": "available",
         "fact_ref": "us-median",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国 21-1023 年工资中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国 21-1023 预计岗位增幅（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国 21-1023 2025 年岗位数"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国 21-1023 预计年均空缺（2025–2035 年）"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆：未核实本职业全国精确工资"
       }
     ]
   },
@@ -14959,14 +15599,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "心理健康与物质滥用社会工作者（O*NET 21-1023.00）评估并帮助有心理或物质使用问题的人，开展个案管理、危机介入与预防教育。美国 BLS 2025 年中位年薪 60,280 美元，2024 年就业约 136,800 人。含工作情境、风险与入行路径。"
+      "text": "了解心理健康社会工作的服务协调、美国工资与岗位数据，并用纸面题核对转介交接。"
     },
     "title": {
       "availability": "available",
       "text": "心理健康与物质滥用社会工作者：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "8a75c8b1a3b9950bcf83a3d26cc8cc8d36fdd4fe4a11a04db796142a024107c5",
+  "source_content_sha256": "34225560d73b522330e29881a8a077bc2b51241883c9669b3db9dd5a08a1cc9f",
   "subject": {
     "canonical_slug": "mental-health-and-substance-abuse-social-workers",
     "name": "心理健康与物质滥用社会工作者",

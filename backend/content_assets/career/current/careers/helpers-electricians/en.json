@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1497,7 +1494,7 @@
         "status": "pending_mapping"
       },
       "item:helpers-electricians.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:helpers-electricians.sources.source-card.1": {
         "status": "mapped"
@@ -10834,7 +10831,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10886,7 +10883,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10938,7 +10935,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -23757,12 +23754,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "This checklist is only for self-questioning and does not constitute hiring criteria, a capability score, an evaluation of job competence, or any safety, occupational health, or legal advice. This page corresponds to the exact occupation O*NET/SOC 47-3013.00 \"Helpers--Electricians\" (Helpers--Electricians): help electricians by performing duties requiring less skill: using, supplying, or delivering materials and tools, and cleaning the work area and equipment. Official scope text: Help electricians by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment. The core tasks listed by O*NET include (that page lists 25 tasks and displays the 5 most important by default): stripping insulation from wire ends with wire strippers and connecting conductors to wiring terminals for subsequent soldering; using test instruments to troubleshoot short circuits in wiring; measuring and cutting and bending wire and conduit with measuring instruments and hand tools; checking electrical equipment for loose connections and damaged insulation and tightening connections with hand tools; and maintaining tools, vehicles, and equipment and keeping parts and supplies orderly. Common job titles include Electrical Helper and Electrician Helper and Electrician Apprentice and Electrical Apprentice and Inside Wireman Apprentice. Scope note: the U.S. wage and employment data presented by O*NET on the 47-3013.00 page are not marked as taken from a parent or adjacent occupation, and this page labels them faithfully according to this occupation's (47-3013.00) own scope; in the United States this occupation is Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)); this page does not extrapolate the U.S. scope to mainland China's job titles, qualifications, or wages."
+              "If lifting, prolonged standing, site noise or repeated checks would be difficult, ask about material weights, task rotation and crew assignments."
             ]
           },
           "id": "helpers-electricians.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -23771,12 +23769,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Practice prompt | a completely fictitious electrical coordination task package (for practicing the process only, and not representing any real company, project, or data). Please write a draft plan: (1) how to assist one electrical installation or servicing operation in a structured way based on a fictitious construction task sheet and electrical drawings (project location and drawing number, wire and conduit and distribution equipment specifications, stripping and wiring and terminals, measuring and cutting and bending, de-energization and voltage verification and isolation, working at height and in ceilings and pipe shafts, tool and material handling and counting, post-work cleaning and restoration), and state which information is insufficient and needs to be supplemented (drawing version and circuit number, site conditions and power supply status and access requirements, safety and de-energization and voltage verification arrangements, material arrival and outage windows and schedule interfaces); (2) how to design filling-in and review points for a fictitious material and work record form (fields and definitions, location and circuit identifiers, wire and conduit and terminal and usage, break points and voltage verification and grounding, testing and inspection, anomalies and rework and outstanding items, original records and revision trail); (3) how to write a handover-ready shift and work summary (location and circuit — materials and specifications — wiring and measurement — break points and voltage verification — cleaning and restoration — outstanding items and recommendations); (4) how to record and retain material and work data, and distinguish publicly shareable information from controlled materials involving the project and the power supplier and manufacturers; (5) how to pause and review and isolate and report when a live or short circuit or height or machinery and cutting risk, or going beyond job authorization or a safety risk is found. Use public materials and simulated data to answer, and do not use any real company or project data."
+              "Try the original and variant under “Entry and Sheet E: Conduit inventory label check,” then open the folded answer."
             ]
           },
           "id": "helpers-electricians.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -23785,12 +23783,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Fit signals | The work activity importance for U.S. O*NET 47-3013.00 shows: making decisions and solving problems (88) and inspecting equipment, structures, or materials (84) and performing general physical activities (82) and processing information (81) and obtaining information (80) and handling and moving objects (80) and communicating with supervisors, peers, or subordinates (79) are this occupation's most important activities; the work context shows: frequent face-to-face discussions (89% every day), high decision frequency (65% every day), exposure to hazardous equipment is common (51% every day), exposure to contaminants is common (55% every day), close collaboration with electricians and colleagues (56% continuous contact with others), and high precision and coordination requirements (56% extremely important). If you are willing to work hands-on around wire and conduit and electrical equipment, can do measurement and stripping and wiring and inspection solidly according to the electrician's instructions and drawings, and take responsibility for work safety and process quality and site order, this occupation's daily requirements are closer to your way of working."
+              "Use Sheet E: Conduit inventory label check to check conduit models and counts. Retain conflicting entries and name the reviewer for each difference."
             ]
           },
           "id": "helpers-electricians.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -23799,12 +23797,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Caution signals | O*NET also shows (47-3013.00, work context and task scope): exposure to hazardous equipment is common (51% every day); exposure to contaminants is common (55% every day); often working in narrow or elevated spaces and in ceilings and pipe shafts; relatively serious consequences of error (17% extremely serious and 22% very serious); relatively high responsibility for others' health and safety (37% extremely high responsibility and 20% high responsibility); and time pressure from process interfaces and schedules (19% every day and 52% once a week or more). This occupation deals with wire and conduit and distribution and electrical equipment and power supply status: one instance of working without de-energizing or verifying voltage, one inadequate wiring or terminal tightening, one measurement or cutting mistake, or one inadequate protection when working at height or in ceilings can all cause electric shock, short circuits, fire, equipment damage, and schedule and compliance risk. O*NET places this occupation in Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)); the education section on that page shows 71% requiring a high school diploma or equivalent, 13% requiring a post-secondary certificate, and 11% below a high school diploma (the page does not account for the remaining 5%); growth is labeled Little or no change (0%), and that page is not marked Bright Outlook. If you find it hard to work amid dust and contaminants and noise and elevated and narrow conditions, find it hard to accept a rhythm that changes with the project and processes and outage windows and possible overtime, or are unwilling to take responsibility for safety and process coordination, you should treat these as real costs."
+              "Construction sites may involve equipment and electrical hazards. Wiring, testing and energizing belong with personnel who meet local requirements and have site authorization."
             ]
           },
           "id": "helpers-electricians.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -23813,7 +23812,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Taking on judgment | Real fit comes from whether you can do three things at the same time on one task: do the technical work solidly (complete measurement and stripping and wiring and inspection and cleaning according to drawings and the electrician's instructions and procedures, producing usable material and work records), keep safety and compliance and boundaries under control (work and keep records according to de-energization and voltage verification and isolation and lockout-tagout and height and edge and machinery and cutting and occupational health requirements, distinguish publicly shareable information from controlled materials involving the project and the power supplier and manufacturers and handle them according to policy, and do not perform live work or handle out of bounds without authorization), and take on definable job responsibility (be responsible for your own measurement and stripping and wiring and fastening and inspection and records, and refer matters beyond job authorization or involving special operations and live work and major safety matters to the appropriate position or organization according to policy). It is suggested to test this with one verifiable experience (completing an assisted work plan and an explanation of material and work records for a fictitious task sheet, or a review of handling a live or short circuit or cutting anomaly), rather than relying only on the conclusion of an interest questionnaire."
+              "This work may suit people who can repeatedly check conduit models and counts, handle and record materials, and report unresolved differences promptly."
             ]
           },
           "id": "helpers-electricians.quick-decision.fermat-decision-card.7",
@@ -23835,7 +23834,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Direct answer | The \"Helpers--Electricians\" on this page is the exact occupation O*NET 47-3013.00 (Helpers--Electricians), and the work can be divided into several categories: first, materials and preparation — selecting tools and equipment and materials from storage and delivering them to the work site, and maintaining tools and vehicles and equipment and keeping parts and supplies orderly; second, measuring and processing — measuring and cutting and bending wire and conduit with measuring instruments and hand tools, and stripping insulation from wire ends with wire strippers; third, wiring and inspection — connecting conductors to wiring terminals for subsequent soldering, and checking electrical equipment for loose connections and damaged insulation and tightening connections with hand tools; fourth, troubleshooting and testing — using test instruments to troubleshoot short circuits in wiring and assisting with testing and checking circuit and equipment status; fifth, cleaning and restoration — cleaning work areas and equipment and tools, restoring protection and covers, and assisting with recording usage and break points and anomalies."
+              "Electrician helpers stage tools, conduit and other materials, assist with positioning and handling as assigned, and report discrepancies in labels, counts or locations. Check local qualifications and site authorization for wiring, testing and energizing."
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.1",
@@ -23896,12 +23895,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Records and collaboration notes | Start from the construction task sheet and electrical drawings and material list, first checking the project location and drawing number and circuit number, wire and conduit and distribution equipment specifications, stripping and wiring and terminals, measuring and cutting and bending, de-energization and voltage verification and isolation and lockout-tagout, working at height and in ceilings and pipe shafts, material handling and counting, and post-work cleaning and restoration, then assist with the work according to electrician and process requirements and hand over by shift. Matters involving live work and height and machinery and cutting and confined spaces must be carried out according to qualifications and policy, and traceable material and work and test records must be retained."
+              "The U.S. O*NET profile for 47-3013 lists tasks such as stripping, terminal connections and testing. Helpers support materials, labels and records. On-site wiring, testing and circuit handling depend on the assignment, local qualifications and site authorization. Stop, step clear and report if power status is unclear or the assignment exceeds your authority."
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-circuit"
           ],
           "type": "prose"
         },
@@ -23924,7 +23924,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Task sheet and drawing checking → Materials and selection and moving → De-energization and voltage verification and isolation → Measuring and cutting and stripping → Wiring and inspection and fastening → Cleaning and restoration and records and handover"
+              "Receive the work order → Check assignments → Verify materials and records → Report discrepancies → Assist with assigned tasks → Hand off records"
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.3",
@@ -23952,12 +23952,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Safety and compliance notes | Organize work according to building construction safety and electrical safety and de-energization and voltage verification and isolation and lockout-tagout and height and edge and machinery and cutting and occupational health and record requirements: measuring and stripping and wiring and fastening and testing must be consistent with drawings and procedures and current standards and must indicate sources and limitations, and must not replace electrical safety testing, energization acceptance, or safety permit requirements; operations involving live work and working at height and in ceilings and pipe shafts and machinery and cutting must be handled with work permits and personal protection as required; the collection and use and external provision of project and power supplier and manufacturer drawings and technical materials must have a lawful basis, be limited to the minimum necessary scope, and be approved and documented according to policy."
+              "The U.S. O*NET profile for 47-3013 lists tasks such as stripping, terminal connections and testing. Helpers support materials, labels and records. On-site wiring, testing and circuit handling depend on the assignment, local qualifications and site authorization. Stop, step clear and report if power status is unclear or the assignment exceeds your authority."
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-circuit"
           ],
           "type": "prose"
         },
@@ -23980,7 +23981,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Accepting the task and checking drawings → Materials and selection and moving → De-energization and voltage verification and isolation → Measuring and processing and stripping → Wiring and fastening and inspection → Testing and troubleshooting and cleaning and restoration and records"
+              "Confirm task and supervision → Prepare materials in the assigned area → Check labels and counts → Record differences → Refer technical questions to the electrician → Hand off unresolved items"
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.5",
@@ -24008,12 +24009,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Records and collaboration | According to the enterprise's construction and quality and safety management systems, record task sheets, materials and specifications and usage, measuring and cutting and stripping and wiring, de-energization and voltage verification and isolation and lockout-tagout, testing and inspection and cleaning and restoration, anomalies and rework and outstanding items and shift handover and original records and revision trail, and check locations and circuits with electricians and crews and material and safety personnel; anomalies must be isolated and reported promptly."
+              "The U.S. O*NET profile for 47-3013 lists tasks such as stripping, terminal connections and testing. Helpers support materials, labels and records. On-site wiring, testing and circuit handling depend on the assignment, local qualifications and site authorization. Stop, step clear and report if power status is unclear or the assignment exceeds your authority."
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-circuit"
           ],
           "type": "prose"
         },
@@ -24316,7 +24318,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Checklist point notes | U.S. O*NET places 47-3013.00 (Helpers--Electricians) in Job Zone 1-2 (little or no preparation needed to some preparation needed), with an SVP range of below 6.0 (SVP Below 6.0); the education section shows 71% requiring a high school diploma or equivalent, 13% requiring a post-secondary certificate, and 11% below a high school diploma (the page does not account for the remaining 5%); growth is labeled Little or no change (0%) and Bright Outlook is not marked; in the United States preparation for this occupation is usually short-term on-the-job training and mentor-based training, or vocational school training and electrical registered apprenticeship."
+              "U.S. employment projections use the 47-3013 occupation row in BLS Table 1.2."
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.27",
@@ -24549,12 +24551,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Core work and outputs: selecting tools and materials from storage and delivering them to the site, measuring and cutting and bending wire and conduit, stripping insulation from wire ends and connecting them to terminals, checking for loose connections and damaged insulation and tightening, using test instruments to troubleshoot short circuits, and maintaining tools and vehicles and equipment; the outputs are assisted work completed according to drawings and procedures together with material and work records."
+              "The U.S. O*NET profile for 47-3013 lists tasks such as stripping, terminal connections and testing. Helpers support materials, labels and records. On-site wiring, testing and circuit handling depend on the assignment, local qualifications and site authorization. Stop, step clear and report if power status is unclear or the assignment exceeds your authority."
             ]
           },
           "id": "helpers-electricians.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-circuit"
           ],
           "type": "prose"
         },
@@ -24904,7 +24907,7 @@
                 "url": "https://www.onetonline.org/link/hot_tech/47-3013.00"
               },
               {
-                "entity": "O*NET 47-3013.00 employment trend (this occupation's own scope, BLS employment projections 2024—2034)",
+                "entity": "BLS Table 1.2 for U.S. occupation 47-3013 shows about 65,000 jobs in 2025 and projects 65,400 in 2035 (+0.6%), with about 6,100 openings per year including replacements. Counts are rounded independently.",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
@@ -25118,7 +25121,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task judgment | Trials of task sheets, material lists, and record drafts may be conducted in an approved environment, manually checking the original information and on-site criteria. No evidence has been obtained on this occupation's generative AI adoption rate, measured efficiency gains, exposure level, or employment causality, and it is not guaranteed that the occupation as a whole will not be substituted. O*NET lists 5 software skill categories; the hot technologies page lists only Excel and Office as U.S. 2025 recruitment skills, with all shares not provided; CAD, record, and reporting software directories do not prove general use, and Outlook is not listed on the current hot technologies page; AI adoption or efficiency gains are not inferred. The precise BLS 47-3013 projection for 2025—2035 is about 65,000 → 65,400 people, growth 0.6%, average annual openings 6,100 including replacements, and self-employment in the base period 1.7%; the O*NET display of Slower than average (1% to 2%) is a classification label and cannot replace the precise matrix figure of 0.6%, and this is not hiring net growth or AI causality. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Editorial task judgment | Trials of task sheets, material lists, and record drafts may be conducted in an approved environment, manually checking the original information and on-site criteria. No evidence has been obtained on this occupation's generative AI adoption rate, measured efficiency gains, exposure level, or employment causality, and it is not guaranteed that the occupation as a whole will not be substituted. O*NET lists 5 software skill categories; the hot technologies page lists only Excel and Office as U.S. 2025 recruitment skills, with all shares not provided; CAD, record, and reporting software directories do not prove general use, and Outlook is not listed on the current hot technologies page; AI adoption or efficiency gains are not inferred. The precise BLS 47-3013 projection for 2025—2035 is about 65,000 → 65,400 people, growth 0.6%, average annual openings 6,100 including replacements, and self-employment in the base period 1.7%; the O*NET display of Slower than average (1% to 2%) is a classification label and cannot replace the precise matrix figure of 0.6%, and this is not hiring net growth or AI causality."
             ]
           },
           "id": "helpers-electricians.ai-impact.ai-impact-table.18",
@@ -26518,7 +26521,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Anomaly identification and isolation and reporting and rework requests are completed by the person according to authorization (human control point)"
+              "Helpers prepare assigned materials and record discrepancies. If electrical or safety conditions are unclear, stop, step clear and report. Circuit isolation belongs to qualified and site-authorized personnel."
             ]
           },
           "id": "helpers-electricians.ai-impact.ai-impact-table.118",
@@ -26596,12 +26599,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025 10th percentile annual wage $33,020; hourly wage $15.88"
+              "10th percentile: USD 33,020 per year and USD 15.88 per hour."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26610,12 +26613,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3013.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26624,12 +26627,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025 25th percentile annual wage $36,830; hourly wage $17.71"
+              "25th percentile: USD 36,830 per year and USD 17.71 per hour."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26638,12 +26641,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3013.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26652,12 +26655,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025 50th percentile annual wage $42,670; hourly wage $20.51"
+              "50th percentile: USD 42,670 per year and USD 20.51 per hour."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26666,12 +26669,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3013.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26680,12 +26683,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025 75th percentile annual wage $48,470; hourly wage $23.30"
+              "75th percentile: USD 48,470 per year and USD 23.3 per hour."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26694,12 +26697,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3013.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26708,12 +26711,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025 90th percentile annual wage $58,340; hourly wage $28.05"
+              "90th percentile: USD 58,340 per year and USD 28.05 per hour."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26722,12 +26725,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3013.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26736,12 +26739,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3013 projection for 2025—2035 is about 65,000 → 65,400 people, growth 0.6%, average annual openings 6,100 including replacements, and self-employment in the base period 1.7%; the O*NET display of Slower than average (1% to 2%) is a classification label and cannot replace the precise matrix figure of 0.6%, and this is not hiring net growth or AI causality."
+              "About 65,000 jobs (2025)"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26750,12 +26753,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025—2035 precise occupational projection; boundaries | employment includes self-employment and openings include replacements, and this is not real-time hiring, net new jobs, or AI causality."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26764,12 +26767,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3013 projection for 2025—2035 is about 65,000 → 65,400 people, growth 0.6%, average annual openings 6,100 including replacements, and self-employment in the base period 1.7%; the O*NET display of Slower than average (1% to 2%) is a classification label and cannot replace the precise matrix figure of 0.6%, and this is not hiring net growth or AI causality."
+              "+0.6%"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26778,12 +26781,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025—2035 precise occupational projection; boundaries | employment includes self-employment and openings include replacements, and this is not real-time hiring, net new jobs, or AI causality."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26792,12 +26795,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3013 projection for 2025—2035 is about 65,000 → 65,400 people, growth 0.6%, average annual openings 6,100 including replacements, and self-employment in the base period 1.7%; the O*NET display of Slower than average (1% to 2%) is a classification label and cannot replace the precise matrix figure of 0.6%, and this is not hiring net growth or AI causality."
+              "About 6,100 projected per year"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26806,12 +26809,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025—2035 precise occupational projection; boundaries | employment includes self-employment and openings include replacements, and this is not real-time hiring, net new jobs, or AI causality."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26834,7 +26837,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupational definition | The Helpers--Electricians on this page is the exact occupation O*NET 47-3013.00 (Helpers--Electricians): help electricians by performing duties requiring less skill: using, supplying, or delivering materials and tools, and cleaning the work area and equipment. In the United States this occupation is Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)); growth is labeled 2025—2035 precise growth 0.6%, and that page is not marked Bright Outlook."
+              "Identify support roles by assigned duties. Verify trade and helper responsibilities and authorization separately."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.24",
@@ -26848,7 +26851,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Electrical or building construction related education and training"
+              "Duties"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.25",
@@ -26862,7 +26865,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Most positions"
+              "Check support scope"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.26",
@@ -26876,7 +26879,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Meets the electrical and tool and safety knowledge starting point for entry; the education section on that page shows 71% requiring a high school diploma or equivalent, 13% requiring a post-secondary certificate, and 11% below a high school diploma (the page does not account for the remaining 5%)"
+              "Ask who reviews preparation, handling and handoff."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.27",
@@ -26890,7 +26893,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Materials and measuring and stripping and wiring and inspection ability"
+              "Training and protection"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.28",
@@ -26904,7 +26907,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "All positions"
+              "Check supervision"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.29",
@@ -26918,7 +26921,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Positions usually require the ability to measure and cut and strip and wire and inspect and fasten according to procedures, and to comply with de-energization and voltage verification and live work and height and machinery and cutting safety requirements"
+              "Ask about site training and any tasks requiring separate authorization."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.30",
@@ -26932,7 +26935,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Low-voltage electrical work and working-at-height qualifications"
+              "Base pay"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.31",
@@ -26946,7 +26949,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Positions involving the corresponding operations"
+              "Check pay units"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.32",
@@ -26960,7 +26963,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "In China, actual building construction special operations in building and municipal engineering follow MOHURD Order 60; other actual electrical work is trained, assessed, and certified according to Emergency Order 19 and its catalog, and the two certificate types are not mixed; not all electrical helpers require all qualifications at the same time; apprenticeship is not listed as universally required or common."
+              "Distinguish day, hourly and monthly rates."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.33",
@@ -26974,7 +26977,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupational health and labor protection requirements"
+              "Additional pay"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.34",
@@ -26988,7 +26991,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Positions involving electrical work and heights and contaminants"
+              "Check payment terms"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.35",
@@ -27002,7 +27005,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Those exposed to occupational disease hazards are examined and protected as required; position adjustment depends on the actual hazards and results, and rotation is not a fixed requirement for everyone."
+              "Ask how overtime, stoppages and probation are paid."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.36",
@@ -27114,7 +27117,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Job title mapping | Helpers--Electricians (O*NET/SOC 47-3013.00 Helpers--Electricians; commonly called in recruitment and in the industry electrical installer, building electrician assistant, low-voltage electrician assistant, mechanical and electrical installer, electrician apprentice)."
+              "Mainland China wage references"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.44",
@@ -27128,12 +27131,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China section | In mainland China there are positions in electrical installation and servicing and building mechanical and electrical field similar to Helpers--Electricians, and their work and de-energization and voltage verification and height and edges and machinery and cutting and electrical and safety and occupational health and records are governed by the Work Safety Law of the People's Republic of China and related regulations and standards on special operations (low-voltage electrical work, etc.) and occupational health and environmental protection; however, public occupational statistics do not list a national wage distribution separately for this occupation."
+              "China’s National Bureau of Statistics reports average annual wages for urban construction. A nationwide wage distribution for this helper occupation is unavailable."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27142,7 +27145,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Matching rationale | Building electrical installation assistant positions match the construction industry; other employers such as industrial equipment servicing are classified separately, and the category is not used as an occupational wage; the broad reference is the 2025 annual average wage of 92,036/66,275 yuan for urban non-private/private units in construction. The statistics cover multiple occupations and levels in that industry and cannot be filled in for this occupation's median, starting wage, or personal income. This round has not obtained a precise national wage distribution for this occupation, and the gap is retained."
+              "Verify hours, pay units and task authorization for the actual contract and site."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.46",
@@ -27184,7 +27187,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 construction industry / urban non-private units (industry reference)"
+              "Urban non-private units · construction"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.49",
@@ -27198,7 +27201,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Average annual wage 92,036 yuan/year; the average for all employed persons in the industry, not this occupation's wage."
+              "92,036 CNY per year"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.50",
@@ -27213,7 +27216,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 construction industry / urban private units (industry reference)"
+              "Urban private units · construction"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.51",
@@ -27227,7 +27230,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Average annual wage 66,275 yuan/year; the average for all employed persons in the industry, not this occupation's wage."
+              "66,275 CNY per year"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.52",
@@ -27242,7 +27245,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China precise national occupational wage for this occupation"
+              "National urban non-private units · all industries"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.53",
@@ -27256,7 +27259,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: public occupational statistics in mainland China have not established a national occupational wage distribution precisely corresponding to O*NET 47-3013.00 (Helpers--Electricians); the National Bureau of Statistics publishes average wages of urban unit employees by industry category without distinguishing occupations, and this page does not fill in the gap with industry averages, recruitment offers, or U.S. data."
+              "129,441 CNY per year"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.54",
@@ -27270,12 +27273,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Classification mapping note | This page is the exact occupation O*NET 47-3013.00 (Helpers--Electricians), which differs from adjacent occupations such as electricians (47-2111.00), helpers--carpenters (47-3012.00), helpers--pipelayers and plumbers and pipefitters and steamfitters (47-3015.00), helpers--painters and paperhangers and plasterers and stucco masons (47-3014.00), and helpers--roofers (47-3016.00); wages and employment must be checked according to each occupation's own code and statistical scope and cannot be applied to one another."
+              "A nationwide mainland China wage distribution for this helper occupation is unavailable. The 2025 NBS construction averages were CNY 92,036 a year in urban non-private units and CNY 66,275 in urban private units."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27298,7 +27301,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Growth Little or no change 2025—2035 precise growth 0.6% (2025—2035, BLS employment projections, this occupation's (47-3013.00) own scope; that page is not marked Bright Outlook)"
+              "U.S. employment projections use the 47-3013 occupation row in BLS Table 1.2."
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.58",
@@ -27334,12 +27337,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET precise national wages | https://www.onetonline.org/link/localwages/47-3013.00; BLS precise 2025—2035 projection | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; BLS occupational group background | https://www.bls.gov/ooh/construction-and-extraction/construction-laborers-and-helpers.htm"
+              "O*NET national occupational wages | https://www.onetonline.org/link/localwages/47-3013.00; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; MOHURD Order 60 on special operations in construction | https://www.mohurd.gov.cn/tsgb/gzk/art/2025/art_33002693.html"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -27348,12 +27353,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025 10th percentile annual wage $33,020; hourly wage $15.88"
+              "10th percentile: USD 33,020 per year and USD 15.88 per hour."
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27362,12 +27367,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3013.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27376,12 +27381,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025 25th percentile annual wage $36,830; hourly wage $17.71"
+              "25th percentile: USD 36,830 per year and USD 17.71 per hour."
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27390,12 +27395,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3013.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27404,12 +27409,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025 50th percentile annual wage $42,670; hourly wage $20.51"
+              "50th percentile: USD 42,670 per year and USD 20.51 per hour."
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27418,12 +27423,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3013.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27432,12 +27437,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025 75th percentile annual wage $48,470; hourly wage $23.30"
+              "75th percentile: USD 48,470 per year and USD 23.3 per hour."
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27446,12 +27451,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3013.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27460,12 +27465,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025 90th percentile annual wage $58,340; hourly wage $28.05"
+              "90th percentile: USD 58,340 per year and USD 28.05 per hour."
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27474,12 +27479,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3013.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27488,12 +27493,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3013 projection for 2025—2035 is about 65,000 → 65,400 people, growth 0.6%, average annual openings 6,100 including replacements, and self-employment in the base period 1.7%; the O*NET display of Slower than average (1% to 2%) is a classification label and cannot replace the precise matrix figure of 0.6%, and this is not hiring net growth or AI causality."
+              "About 65,000 jobs (2025)"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27502,12 +27507,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025—2035 precise occupational projection; boundaries | employment includes self-employment and openings include replacements, and this is not real-time hiring, net new jobs, or AI causality."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27516,12 +27521,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3013 projection for 2025—2035 is about 65,000 → 65,400 people, growth 0.6%, average annual openings 6,100 including replacements, and self-employment in the base period 1.7%; the O*NET display of Slower than average (1% to 2%) is a classification label and cannot replace the precise matrix figure of 0.6%, and this is not hiring net growth or AI causality."
+              "+0.6%"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27530,12 +27535,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025—2035 precise occupational projection; boundaries | employment includes self-employment and openings include replacements, and this is not real-time hiring, net new jobs, or AI causality."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27544,12 +27549,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3013 projection for 2025—2035 is about 65,000 → 65,400 people, growth 0.6%, average annual openings 6,100 including replacements, and self-employment in the base period 1.7%; the O*NET display of Slower than average (1% to 2%) is a classification label and cannot replace the precise matrix figure of 0.6%, and this is not hiring net growth or AI causality."
+              "About 6,100 projected per year"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27558,12 +27563,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025—2035 precise occupational projection; boundaries | employment includes self-employment and openings include replacements, and this is not real-time hiring, net new jobs, or AI causality."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27572,7 +27577,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The precise national five wage percentiles and employment projection have been checked; regional and precise industry wages have not been obtained. The industry background is scoped separately; shared old facts and protected surfaces are retained, and full-page synchronization is not claimed."
+              "U.S. wage percentiles and employment projections come from OEWS and BLS Table 1.2. Industry wages cover the broader construction laborers and helpers group. Check local and role-specific pay separately."
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.25",
@@ -27586,12 +27591,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. precise 47-3013.00 May2025 median annual wage $42,670 and hourly wage $20.51, with the five wage percentiles checked. The precise BLS 47-3013 projection for 2025—2035 is about 65,000 → 65,400 people, growth 0.6%, average annual openings 6,100 including replacements, and self-employment in the base period 1.7%; the O*NET display of Slower than average (1% to 2%) is a classification label and cannot replace the precise matrix figure of 0.6%, and this is not hiring net growth or AI causality."
+              "In May 2025, the U.S. national median for electrical helpers (47-3013) was USD 42,670 a year and USD 20.51 an hour."
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27684,7 +27689,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Growth Little or no change 2025—2035 precise growth 0.6% (2025—2035, BLS employment projections, this occupation's (47-3013.00) own scope; that page is not marked Bright Outlook)"
+              "U.S. employment projections use the 47-3013 occupation row in BLS Table 1.2."
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.33",
@@ -27936,12 +27941,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "A national distribution position; experience, duties, or starting wages cannot be inferred backwards from it; the causes of individual wages must be checked separately."
+              "The 10th percentile of the U.S. national occupational wage distribution."
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27950,12 +27955,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The median represents the typical level at the midpoint of the distribution, but does not represent the entry-level starting wage; it rises with region, project, trade, skills, qualifications, and scope of duties; it is this occupation's own scope and does not represent adjacent occupations."
+              "The 50th percentile of the U.S. national occupational wage distribution."
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27964,12 +27969,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "A national distribution position; experience, duties, or starting wages cannot be inferred backwards from it; the causes of individual wages must be checked separately."
+              "The 90th percentile of the U.S. national occupational wage distribution."
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27996,31 +28001,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters",
@@ -28559,7 +28564,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Able to independently complete measuring and stripping and wiring and inspection and cleaning and records within the scope of the electrician and job authorization and procedures"
+              "If power status is unclear, conductors are exposed, or the task exceeds your authorization, stop, step clear and tell the site lead. A person with the required local qualifications and site authorization handles circuit status, isolation, testing or wiring under site procedures. Helpers leave energization and sign-off to the responsible person."
             ]
           },
           "id": "helpers-electricians.fit.personality-fit-block.29",
@@ -28937,7 +28942,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Fit signals: willing to be responsible for work safety and process quality under de-energization and voltage verification and isolation and lockout-tagout and height and machinery and cutting requirements, able to switch between measuring and stripping and wiring and inspection and testing and cleaning while keeping attention on evidence and records, able to maintain procedures and evidence and review under outage window and schedule pressure, and to isolate and report according to policy when there is an on-site or electrical anomaly or authorization is exceeded."
+              "Repeatedly compare materials and work orders, preserve discrepancies, and stop and refer unclear conditions to the responsible person."
             ]
           },
           "id": "helpers-electricians.fit.personality-fit-block.56",
@@ -28965,7 +28970,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Verification suggestion: first test reading drawings and measuring and stripping and wiring and writing records with one simulated or real coordination task, and understand the target enterprise's and jurisdiction's requirements for safety and occupational health and low-voltage electrical work and working-at-height qualifications, before deciding whether to invest long term."
+              "Use Sheet E: Conduit inventory label check to check conduit models and counts. Retain conflicting entries and name the reviewer for each difference."
             ]
           },
           "id": "helpers-electricians.fit.personality-fit-block.58",
@@ -29148,7 +29153,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Boundaries | What this page lists are the failure types and control points relatively common in this occupation's measuring and stripping and wiring and inspection and testing, used to help identify and manage risks, and they do not constitute any electrical safety, special operations, occupational health, or legal advice or a conclusion on an individual case; anything involving electrical safety testing, energization acceptance, accident determinations, or occupational disease diagnosis must be handled by a position or organization holding the corresponding qualifications."
+              "If power status is unclear, conductors are exposed, or the task exceeds your authorization, stop, step clear and tell the site lead. A person with the required local qualifications and site authorization handles circuit status, isolation, testing or wiring under site procedures. Helpers leave energization and sign-off to the responsible person."
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.8",
@@ -29176,7 +29181,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET precise tasks and context and the BLS occupational group environment support risk clues; the six cards are editorial scenarios and are not per-card accident rates or statutory qualification determinations. In China, actual building construction special operations in building and municipal engineering follow MOHURD Order 60; other actual electrical work is trained, assessed, and certified according to Emergency Order 19 and its catalog, and the two certificate types are not mixed; not all electrical helpers require all qualifications at the same time."
+              "Check MOHURD Order 60 for covered building and municipal construction work and MEM Order 19 for other applicable special operations. Verify the relevant credential, any recognition under the joint directory and site authorization with the project and competent authority."
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.10",
@@ -29218,7 +29223,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Work according to de-energization and voltage verification and isolation and lockout-tagout and voltage confirmation requirements and use insulating protection; if live conditions or anomalies are found, stop immediately and review and isolate and report"
+              "If power status is unclear, conductors are exposed, or the task exceeds your authorization, stop, step clear and tell the site lead. A person with the required local qualifications and site authorization handles circuit status, isolation, testing or wiring under site procedures. Helpers leave energization and sign-off to the responsible person."
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.13",
@@ -29274,7 +29279,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Work according to scaffolding and ladder and edge and opening protection requirements and check the securement; if a scaffold or protection anomaly is found, stop work immediately and isolate and report"
+              "Do not take over while training, authorization, scaffold or edge protection, or electrical hazard controls are unconfirmed. Stop, move to a safe area and tell the site lead. Leave inspection and corrective work to the responsible personnel, and keep the task on hold until the site clears it."
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.17",
@@ -29330,7 +29335,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Cutting and machinery work must be carried out according to protection and de-energization and isolation requirements; if a machinery or cutting anomaly is found, stop immediately and isolate and report"
+              "Leave the tool out of use if guards are missing or faulty, or if required energy isolation is unconfirmed. Stop, move to a safe area and report it. Authorized personnel inspect and resolve the issue under site procedures before work resumes."
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.21",
@@ -29442,7 +29447,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Complete measuring and stripping and wiring and fastening and testing according to drawings and procedures; when nonconformity or rework is found, isolate immediately and report and cooperate with rework"
+              "If power status is unclear, conductors are exposed, or the task exceeds your authorization, stop, step clear and tell the site lead. A person with the required local qualifications and site authorization handles circuit status, isolation, testing or wiring under site procedures. Helpers leave energization and sign-off to the responsible person."
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.29",
@@ -29568,7 +29573,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "In China, actual building construction special operations in building and municipal engineering follow MOHURD Order 60; other actual electrical work is trained, assessed, and certified according to Emergency Order 19 and its catalog, and the two certificate types are not mixed; not all electrical helpers require all qualifications at the same time."
+              "Check MOHURD Order 60 for covered building and municipal construction work and MEM Order 19 for other applicable special operations. Verify the relevant credential, any recognition under the joint directory and site authorization with the project and competent authority."
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.38",
@@ -29671,15 +29676,15 @@
                 "id": "education",
                 "values": [
                   "U.S. O*NET places 47-3013.00 (Helpers--Electricians) in Job Zone 1-2 (little or no preparation needed to some preparation needed), with an SVP range of below 6.0 (SVP Below 6.0); the education section shows 71% requiring a high school diploma or equivalent, 13% requiring a post-secondary certificate, and 11% below a high school diploma (the page does not account for the remaining 5%); this description does not replace the enterprise's and competent authority's requirements for qualifications and work permits.",
-                  "Whether one can independently complete measuring and stripping and wiring and inspection does not depend on education itself, but on whether skills training has been completed and the corresponding qualifications obtained and whether the work is performed within the scope of job authorization.",
+                  "BLS lists high school or equivalent as typical for U.S. entry, with short-term on-the-job training. Ask the employer about helper duties, training and local rules for work requiring a credential.",
                   "Education and training only affect the entry starting point; whether one can skillfully complete measuring and stripping and wiring and inspection and troubleshooting mainly depends on on-the-job training and mentoring and assessment results."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "In China, actual building construction special operations in building and municipal engineering follow MOHURD Order 60; other actual electrical work is trained, assessed, and certified according to Emergency Order 19 and its catalog, and the two certificate types are not mixed; not all electrical helpers require all qualifications at the same time; other training, protection, and health examinations are checked according to the real work hazards.",
-                  "Matters involving electrical safety testing, energization acceptance, accident determinations, or occupational disease diagnosis must be handled by a position or organization holding the corresponding qualifications.",
+                  "Check MOHURD Order 60 for covered building and municipal construction work and MEM Order 19 for other applicable special operations. Verify the relevant credential, any recognition under the joint directory and site authorization with the project and competent authority.",
+                  "For covered special operations on building and municipal projects in mainland China, Order 60 requires the applicable training, assessment and credential. Covered work categories are set separately. Confirm the assigned tasks with the project and competent authority.",
                   "Data involving project and power supplier and manufacturer drawings and technical materials must be managed under confidentiality and minimum necessity requirements and must not be sent to unauthorized environments."
                 ]
               },
@@ -29703,7 +29708,8 @@
           },
           "id": "helpers-electricians.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "title": "What do employers usually look at in recruitment?",
           "type": "cards"
@@ -29716,41 +29722,41 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Practice materials (all fictitious)",
-                  "A construction task sheet and an electrical drawing and circuit diagram and a material list (wire and conduit and terminal and distribution equipment specifications), a legend and circuit numbering diagram, and instructions for using stripping and measuring and testing equipment.",
-                  "A blank material and measuring and wiring and testing and break point record form."
+                  "Sheet E: Conduit inventory label check",
+                  "Fictional paper exercise. The list calls for E1: two C20s, E2: three C25s and E3: one C32. The delivery record shows E1: two C20s, E2: three C52s and E3: two C32s. Confirm a row on paper only if its model and count match. Send model discrepancies to the electrician and counts to the receiver. In the variant, change only E2's delivered model to C25. List confirmed rows, original entries and the review owners.",
+                  "Use the two records in the prompt. No site access or tools are needed."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Practice task",
-                  "Prepare an assisted work plan for a fictitious task sheet and fill in a material and work record.",
-                  "Explain the materials and selection and moving, the de-energization and voltage verification and isolation, the measuring and cutting and stripping, the wiring and fastening and inspection, the testing and short circuit troubleshooting, and the cleaning and restoration and anomaly contingency plan."
+                  "What to hand over",
+                  "Record both cases. Keep the original values, status and review owner for each row.",
+                  "Retain discrepant values through review."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Suggested approach",
-                  "First check the location and drawings and circuits and materials and safety conditions, then determine the de-energization and voltage verification and measuring and wiring steps according to drawings and procedures.",
-                  "During execution, record material and specification and usage and test and break point data, and after completion check and restore; clearly mark where information is insufficient and explain why it is not filled in."
+                  "Check after finishing",
+                  "Save both answers before opening the folded answer key in the FAQ.",
+                  "Check discrepancies and handoff owners."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundary note",
-                  "This practice is only for testing process understanding and record-keeping ability; all projects and companies and data are fictitious."
+                  "Exercise scope",
+                  "Check the paper records only."
                 ]
               }
             ]
           },
           "id": "helpers-electricians.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "Entry practice: one complete measuring and stripping and wiring and inspection and cleaning coordination task (fictitious materials)",
+          "title": "Sheet E: Conduit inventory label check",
           "type": "cards"
         },
         {
@@ -29762,28 +29768,28 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Work matrix",
-                  "Organize a fictitious assisted work plan, a material and specification and usage record, a measuring and stripping and wiring record, and a de-energization and voltage verification and testing and anomaly handling explanation into a portfolio, mapping item by item to the measuring and stripping and wiring and inspection and troubleshooting and safety and recording abilities in the job requirements."
+                  "Put the original records side by side and mark differences."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "Independent review",
-                  "Give the plan and records to others to review according to drawings and procedures, and check whether measuring and wiring and fastening and inspection are self-consistent; only if others can review them without reading the explanation does it show the plan and records are handover-ready."
+                  "Keep the pending items and their review owners."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "Briefing summary",
-                  "Use one page to explain this location and circuit's materials and specifications — measuring and usage — wiring and fastening and inspection — break points and voltage verification — cleaning and restoration — outstanding items, so it is easy to show in an interview or mentoring session how you connect materials with evidence and records."
+                  "Write a one-line summary for each case."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "Tool description",
-                  "Explain the readings and errors and calibration status of the measuring instruments and test instruments and measuring tools you used, and which judgments depend on experience rather than tools, demonstrating your grasp of the boundaries of data and evidence."
+                  "Check with paper and pencil, then open the answer key."
                 ]
               }
             ]
@@ -29853,59 +29859,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Understand this occupation's work objects and processes (accepting the task — materials and selection and moving — de-energization and voltage verification and isolation — measuring and cutting and stripping — wiring and fastening and inspection — testing and cleaning and restoration and records).",
-                  "Record the de-energization and voltage verification and isolation and height and machinery and cutting safety requirements you observe."
+                  "Read the records",
+                  "Read the order and list the fields to check."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Observe one round of measuring and stripping and wiring with an electrician, recording the steps and usage and safety actions.",
-                  "Organize a list of the measuring and stripping and wiring steps and criteria you observed."
+                  "Check the fields",
+                  "Compare the original records row by row."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Under mentoring, take part in preparing tools and measuring tools and test instruments and filling in records and organizing materials.",
-                  "Write out the three steps you think are most prone to error and the reasons."
+                  "Route discrepancies",
+                  "Send discrepancies to the review owners given in the prompt."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Under mentoring, take part in one round of circuit measuring and short circuit troubleshooting.",
-                  "Explain how you would stop and report if there is a live or short circuit or test anomaly."
+                  "Try the variant",
+                  "Change only the specified input and reevaluate the rows."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Under mentoring, take part in one round of wiring and fastening and inspection and fill in the record.",
-                  "List the basis for determining conformity and the isolation and disposition steps for nonconforming items."
+                  "Keep original values",
+                  "Keep records for both cases."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Organize an explanation of the measuring and wiring and test records for a fictitious circuit and check it with the electrician.",
-                  "Record any disagreement with the electrician on measuring or wiring or determination and how it was handled."
+                  "Check the answer key",
+                  "Open the folded answer key to check."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Review the seven days: which types of tasks you are confident about, which need more training, and use this to decide whether to continue investing.",
-                  "Write the review conclusion on one page and use it as the basis for whether to enter the field, rather than judging by interest."
+                  "Check the actual assignment",
+                  "Write one question about work assignments to ask an employer."
                 ]
               }
             ]
           },
           "id": "helpers-electricians.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "Seven-day experience: complete a measuring and stripping and wiring and inspection loop with fictitious materials",
+          "title": "Paper exercise steps",
           "type": "timeline"
         },
         {
@@ -29913,20 +29919,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: able to complete measuring and stripping and wiring and inspection and testing and cleaning under safety and procedural and quality requirements and make the process and basis reviewable.",
-              "Continue: maintaining procedures and evidence and records under outage window and schedule pressure, and not skipping checks or relaxing safety or falsifying records to rush the job.",
-              "Continue: able to prove your electrical and coordination ability with one verifiable coordination task or anomaly handling review.",
-              "Continue: willing to do hands-on work long term in dusty and contaminant and noisy and elevated environments and to be responsible for work safety and process quality.",
-              "Caution: if during the seven-day experience you repeatedly find it hard to keep up with safety rules or procedural checks, reassess your fit.",
-              "Caution: if you find it hard to accept overtime and a rhythm that changes with project processes and outage windows, or hard to endure elevated and narrow environments, reassess your fit.",
-              "Caution: if you tend to act first and supply the basis later when there is a live or short circuit or machinery or height anomaly, reassess your occupational fit and risk awareness."
+              "Check that every row retains its source values.",
+              "Separate specification mismatches from count mismatches.",
+              "Preserve both records when they conflict.",
+              "Check who receives each pending item.",
+              "Change only the specified field in the variant.",
+              "Open the folded answer after completing both cases.",
+              "Ask the target crew how it reviews discrepancies."
             ]
           },
           "id": "helpers-electricians.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "How to judge whether to continue at the end of the seven days",
+          "title": "What to review afterward",
           "type": "list"
         },
         {
@@ -29962,13 +29968,13 @@
                 "Education and training are not equal to qualifications or work authorization"
               ],
               [
-                "Safety and skills training and assessment",
-                "All positions",
-                "Meets safety and de-energization and voltage verification and height and machinery and cutting operation requirements",
-                "Generally required for positions involving the corresponding operations",
-                "Attend enterprise or institutional safety and skills training and pass the assessment",
-                "Several days to several weeks",
-                "Training and assessment are not equal to energization or live work authorization"
+                "Site safety induction",
+                "Workers entering a construction site to work",
+                "Recognize hazard areas and follow stop-work and reporting rules",
+                "Follow applicable site training. Check separate qualifications and authorization for testing or isolation.",
+                "Ask the crew which training and reporting procedures apply",
+                "Check with the project",
+                "Check qualifications and authorization separately for actual electrical work"
               ],
               [
                 "Electrical registered apprenticeship or mentor-based training",
@@ -29980,13 +29986,13 @@
                 "Apprenticeship experience is not equal to automatically obtaining a position or work authorization"
               ],
               [
-                "Low-voltage electrical work and working-at-height qualifications",
-                "Positions involving the corresponding operations",
-                "Meets the statutory or compliance requirements for live work and working-at-height operations",
-                "In China, actual building construction special operations in building and municipal engineering follow MOHURD Order 60; other actual electrical work is trained, assessed, and certified according to Emergency Order 19 and its catalog, and the two certificate types are not mixed; not all electrical helpers require all qualifications at the same time.",
-                "Attend recognized training and assessment and obtain the qualification or work permit",
-                "Several days to several weeks",
-                "The scope of qualification is governed by the certificate and the competent authority and the work permit"
+                "Credentials for regulated work",
+                "Workers assigned a task covered by the directory",
+                "Check the valid credential for the specific task and any applicable recognition. A credential alone does not authorize live work, energization or other site operations.",
+                "Check the project, task category and joint directory. It sets conditions for recognition or avoiding duplicate credentials in some cases.",
+                "Ask the competent authority whether an existing credential applies and whether training or assessment is required. Verify site authorization, approvals and safety conditions with the project.",
+                "As required by the authority and site",
+                "Confirm credential scope, site authorization and safety conditions separately."
               ],
               [
                 "Occupational health examination and protection requirements",
@@ -30000,7 +30006,7 @@
               [
                 "Enterprise position and work authorization",
                 "All independent work positions",
-                "The prerequisite for obtaining the authority to independently measure and wire and support energization",
+                "Verify site induction, qualifications for restricted work and site authorization separately. Qualified and authorized personnel handle wiring, testing and energization.",
                 "According to the requirements of the enterprise's construction and safety management systems",
                 "Work after passing the assessment and within the scope of the position and work authorization",
                 "Depends on position arrangements",
@@ -30010,7 +30016,12 @@
           },
           "id": "helpers-electricians.path.credential-decision.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035",
+            "mohurd-special-operation-2026",
+            "cn-work-example",
+            "mem-special-operation-2026",
+            "special-work-directory-2026"
           ],
           "title": "Education, training, and qualifications: which are the real thresholds for this occupation?",
           "type": "table"
@@ -30020,15 +30031,20 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "Qualification boundaries, first | Application conditions, education, training certificates, safety and skills training, low-voltage electrical work and working-at-height qualifications, occupational health examinations, position and work authorization, and electrical safety testing and energization acceptance are different statuses: meeting recruitment conditions is not the same as obtaining the authority to independently perform live work or energize or issue testing conclusions. In the United States, this occupation is Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)), with growth labeled Little or no change (0%).",
-              "The typical U.S. BLS precise 47-3013 requires a high school diploma or equivalent, no relevant experience, and short-term on-the-job training; the O*NET new-hire figures of 71% high school / 13% post-secondary certificate / 11% below high school are a different measure, and the remaining 5% is not guessed; in China, actual building construction special operations in building and municipal engineering follow MOHURD Order 60; other actual electrical work is trained, assessed, and certified according to Emergency Order 19 and its catalog, and the two certificate types are not mixed; not all electrical helpers require all qualifications at the same time; safety training, qualifications, and enterprise work authorization are kept separate.",
+              "U.S. employment projections use the 47-3013 occupation row in BLS Table 1.2.",
+              "Check MOHURD Order 60 for covered building and municipal construction work and MEM Order 19 for other applicable special operations. Verify the relevant credential, any recognition under the joint directory and site authorization with the project and competent authority.",
               "Qualification boundaries, third | The preparation items listed on this page are not equal to authorization and do not automatically bring live work, energization, or external disclosure authority; real authority is governed by the requirements of the enterprise and the competent authority.",
               "A MOHURD Order 60 construction special operations certificate is valid for 3 years with extension review; Emergency Order 19 certificate types are renewed upon expiry and according to the actual catalog requirements; they are not the same certificate type, and the old fixed 3-year review cannot be applied to all electrical helpers."
             ]
           },
           "id": "helpers-electricians.path.credential-boundary.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035",
+            "mohurd-special-operation-2026",
+            "cn-work-example",
+            "mem-special-operation-2026",
+            "special-work-directory-2026"
           ],
           "title": "Notes on qualification and authorization boundaries",
           "type": "notice"
@@ -30091,7 +30107,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Boundaries | The preparation paths and capability ladder on this page are used to help you plan learning and accumulate evidence, and do not constitute hiring, promotion, or qualification determinations. Real admission is governed by safety and skills training and qualifications and enterprise authorization and assessment, and also does not mean obtaining the authority to independently perform live work or energize or conduct electrical safety testing."
+              "If power status is unclear, conductors are exposed, or the task exceeds your authorization, stop, step clear and tell the site lead. A person with the required local qualifications and site authorization handles circuit status, isolation, testing or wiring under site procedures. Helpers leave energization and sign-off to the responsible person."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.11",
@@ -30105,7 +30121,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Under mentoring, take on material and tool preparation and measuring and stripping assistance and handling and cleaning and record assistance; do not independently perform live work or energize or issue testing conclusions."
+              "Confirm which support tasks are assigned and who receives a report."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.12",
@@ -30119,7 +30135,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Job shadowing and assistant position"
+              "Confirm assignment and supervision"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.13",
@@ -30133,7 +30149,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Able to independently complete measuring and stripping and wiring and inspection and cleaning and records within the scope of the electrician and job authorization and procedures, and isolate and report according to policy when there is an anomaly or safety issue or authorization is exceeded."
+              "Check materials against the list in the assigned area and record source values."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.14",
@@ -30147,7 +30163,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Independent coordination position"
+              "Prepare and label materials"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.15",
@@ -30161,7 +30177,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Able to take on live work and complex circuit coordination and testing and troubleshooting and mentoring and process coordination."
+              "Keep the original record of any specification or count mismatch and refer it for review."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.16",
@@ -30175,7 +30191,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Skilled and specialist position"
+              "Preserve discrepancies"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.17",
@@ -30189,7 +30205,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Able to take on crew and process arrangements and quality and safety and materials and progress implementation and evaluation and anomaly sign-off and multi-party coordination."
+              "If power status is unclear, conductors are exposed, or the task exceeds your authorization, stop, step clear and tell the site lead. A person with the required local qualifications and site authorization handles circuit status, isolation, testing or wiring under site procedures. Helpers leave energization and sign-off to the responsible person."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.18",
@@ -30203,7 +30219,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Team leader and site management position"
+              "Report and hand off"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.19",
@@ -30217,12 +30233,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The typical U.S. BLS precise 47-3013 requires a high school diploma or equivalent, no relevant experience, and short-term on-the-job training; the O*NET new-hire figures of 71% high school / 13% post-secondary certificate / 11% below high school are a different measure, and the remaining 5% is not guessed. Check qualifications and enterprise authorization according to the actual work; apprenticeship, vocational courses, or all specialty certificate types are not universally required. The development ladder is an editorial plan and does not guarantee hiring or promotion."
+              "BLS Table 1.2 lists high school or equivalent and short-term on-the-job training as typical U.S. preparation.Ask the employer about supervision, assigned duties, stop-work conditions and reporting."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -30231,7 +30247,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Qualification boundaries | Receiving vocational training, completing job shadowing and practical work, obtaining education or training certificates, passing safety and skills assessment and low-voltage electrical work and working-at-height qualifications, entering occupational health management, and obtaining enterprise position and work authorization are different statuses; the preparation items listed on this page are not equal to authorization and do not automatically bring live work or energization or external disclosure authority."
+              "Verify assigned duties, supervision and site authorization. Check separate credentials for regulated work."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.21",
@@ -30245,7 +30261,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The typical U.S. BLS precise 47-3013 requires a high school diploma or equivalent, no relevant experience, and short-term on-the-job training; the O*NET new-hire figures of 71% high school / 13% post-secondary certificate / 11% below high school are a different measure, and the remaining 5% is not guessed; in China, actual building construction special operations in building and municipal engineering follow MOHURD Order 60; other actual electrical work is trained, assessed, and certified according to Emergency Order 19 and its catalog, and the two certificate types are not mixed; not all electrical helpers require all qualifications at the same time; the U.S. and Chinese jurisdictions are kept separate and not combined."
+              "Mainland China construction and regulated operations"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.22",
@@ -30261,12 +30277,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Summary | Understand the path as a cycle of learning — job shadowing and practical work — safety and skills and qualifications — position and work authorization — responsibility: first complete skills training, then become familiar with measuring and stripping and wiring and troubleshooting and electrical safety systems under mentoring, and after obtaining qualifications and work authorization work independently and deepen in a direction; matters involving live work and energization acceptance and major rework are handled according to policy and the requirements of the competent authority."
+              "For mainland China, ask the project about supervised material preparation, conduit checks and handoff. Confirm whether the actual work falls under building and municipal construction special operations or the emergency management rules, and verify the applicable credential with the project and authority."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "mem-special-operation-2026",
+            "special-work-directory-2026"
           ],
           "type": "prose"
         },
@@ -30415,7 +30433,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Accumulate experience under different material and circuit conditions and practice measuring and stripping and material layout methods."
+              "Under supervision, organize the materials list, check labels and counts, and record discrepancies for review."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.34",
@@ -30443,7 +30461,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Independently complete materials and selection and moving and preparation and records according to procedures, and isolate and report according to policy when anomalies are found."
+              "Helpers prepare assigned materials and record discrepancies. If electrical or safety conditions are unclear, stop, step clear and report. Circuit isolation belongs to qualified and site-authorized personnel."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.36",
@@ -30611,7 +30629,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Process and tool basic training record; safety training."
+              "Verify the task scope with the supervisor."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.48",
@@ -30625,7 +30643,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Familiarity with conduit and stripping and wiring and safety points."
+              "Refer unresolved items to the responsible person."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.49",
@@ -30639,7 +30657,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Wiring assistance records and mentoring evaluation; able to restate wiring and safety points."
+              "Original list, material labels and review record."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.50",
@@ -30653,7 +30671,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Under mentoring, take on conduit cutting and stripping and wiring assistance and tool preparation, and do not independently energize or work live on key circuits."
+              "Organize listed materials in the assigned area."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.51",
@@ -30667,7 +30685,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Wiring and conduit job shadowing position"
+              "Prepare materials"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.52",
@@ -30681,7 +30699,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Job authorization and safety and qualifications; wiring and conduit experience."
+              "Verify the task scope with the supervisor."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.53",
@@ -30695,7 +30713,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Accumulate experience under different circuit and process conditions and practice wiring and fastening and troubleshooting methods."
+              "Refer unresolved items to the responsible person."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.54",
@@ -30709,7 +30727,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Wiring and fastening and testing records and review opinions."
+              "Original list, material labels and review record."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.55",
@@ -30723,7 +30741,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Complete measuring and cutting and stripping and wiring and fastening and inspection and records according to procedures, and report according to policy when anomalies are found."
+              "Compare labels with the task list and record discrepancies."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.56",
@@ -30737,7 +30755,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Wiring and conduit position"
+              "Check specifications"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.57",
@@ -30751,7 +30769,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Corresponding job authorization and specialty qualifications; complex troubleshooting experience."
+              "Verify the task scope with the supervisor."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.58",
@@ -30765,7 +30783,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Learn complex circuit troubleshooting and testing and process coordination methods."
+              "Refer unresolved items to the responsible person."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.59",
@@ -30779,7 +30797,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Complex troubleshooting and anomaly handling records."
+              "Original list, material labels and review record."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.60",
@@ -30793,7 +30811,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Take on complex circuit wiring and short circuit troubleshooting and testing and mentoring and process coordination."
+              "Keep original specifications and counts pending review."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.61",
@@ -30807,7 +30825,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Wiring and troubleshooting backbone position"
+              "Retain discrepancies"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.62",
@@ -30821,7 +30839,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Corresponding management appointment or enterprise authorization."
+              "Verify the task scope with the supervisor."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.63",
@@ -30835,7 +30853,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Improve crew and process and quality management mechanisms."
+              "Refer unresolved items to the responsible person."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.64",
@@ -30849,7 +30867,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Overall conclusions; crew and process and quality documents."
+              "Original list, material labels and review record."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.65",
@@ -30863,7 +30881,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Coordinate crew and process and quality and safety and sign-off, and guide newcomers."
+              "If power status is unclear, conductors are exposed, or the task exceeds your authorization, stop, step clear and tell the site lead. A person with the required local qualifications and site authorization handles circuit status, isolation, testing or wiring under site procedures. Helpers leave energization and sign-off to the responsible person."
             ]
           },
           "id": "helpers-electricians.path.career-path-block.66",
@@ -30877,7 +30895,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Crew and process supervisor position"
+              "Hand off unresolved items"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.67",
@@ -31276,12 +31294,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. precise 47-3013 May2025 median annual wage $42,670 and hourly wage $20.51. The precise BLS 47-3013 projection for 2025—2035 is about 65,000 → 65,400 people, growth 0.6%, average annual openings 6,100 including replacements, and self-employment in the base period 1.7%; the O*NET display of Slower than average (1% to 2%) is a classification label and cannot replace the precise matrix figure of 0.6%, and this is not hiring net growth or AI causality. Precise occupational wages and employment in China have not been obtained; the NBS 2025 construction non-private/private annual average of 92,036/66,275 yuan is only background."
+              "BLS Table 1.2 for U.S. occupation 47-3013 shows about 65,000 jobs in 2025 and projects 65,400 in 2035 (+0.6%), with about 6,100 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31295,7 +31313,7 @@
           },
           "id": "helpers-electricians.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31304,12 +31322,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31346,12 +31364,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Wages (median and percentiles, this occupation's own scope)"
+              "Employment and projected change"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31360,12 +31378,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 47-3013.00 (OEWS 2025, as presented by O*NET)"
+              "47-3013"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31374,12 +31392,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Median hourly wage $20.51 and median annual wage $42,670; 10th percentile hourly wage 15.88 and annual wage 33,020, 25th percentile hourly wage 17.71 and annual wage 36,830, 75th percentile hourly wage 23.30 and annual wage 48,470, 90th percentile hourly wage 28.05 and annual wage 58,340"
+              "BLS Table 1.2 for U.S. occupation 47-3013 shows about 65,000 jobs in 2025 and projects 65,400 in 2035 (+0.6%), with about 6,100 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31393,7 +31411,7 @@
           },
           "id": "helpers-electricians.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31402,12 +31420,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31444,12 +31462,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Employment size and growth and job openings (this occupation's own scope)"
+              "Projected annual openings"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31458,12 +31476,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 47-3013.00 (BLS employment projections, as presented by O*NET)"
+              "47-3013"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31472,12 +31490,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3013 projection for 2025—2035 is about 65,000 → 65,400 people, growth 0.6%, average annual openings 6,100 including replacements, and self-employment in the base period 1.7%; the O*NET display of Slower than average (1% to 2%) is a classification label and cannot replace the precise matrix figure of 0.6%, and this is not hiring net growth or AI causality."
+              "About 6,100 projected per year, including replacements."
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31486,12 +31504,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Mainland China"
+              "United States"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31500,12 +31518,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025-05"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31542,12 +31560,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Occupational wages and employment (statistical scope and gaps)"
+              "Median annual wage"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31556,12 +31574,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics average wages of urban unit employees (industry category scope) and bounded search"
+              "47-3013"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31570,12 +31588,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: public occupational statistics in mainland China have not established a national occupational wage distribution precisely corresponding to O*NET 47-3013.00 (Helpers--Electricians); the National Bureau of Statistics publishes average wages of urban unit employees by industry category without distinguishing occupations, and this page does not fill in the gap with industry averages, recruitment offers, or U.S. data."
+              "USD 42,670/year"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31997,22 +32015,32 @@
                 "question_key": "career.faq.helpers-electricians.q2"
               },
               {
-                "answer": "In 2025, in the United States this occupation's median hourly wage was $20.51 and median annual wage $42,670 (BLS OEWS, as presented by O*NET, this occupation's own scope); 10th percentile annual wage $33,020, 25th percentile $36,830, 75th percentile $48,470, 90th percentile $58,340; benefits and bonuses are excluded, and the median is not an entry-level starting wage. Mainland China has not established a national occupational wage distribution precisely corresponding to this occupation.",
+                "answer": "The May 2025 national median for U.S. occupation 47-3013 was USD 42,670 a year and USD 20.51 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 33,020, 36,830, 42,670, 48,470, 58,340.",
                 "id": "helpers-electricians.faq.3",
                 "question": "What is the wage?",
-                "question_key": "career.faq.helpers-electricians.q3"
+                "question_key": "career.faq.helpers-electricians.q3",
+                "source_refs": [
+                  "onet-wages"
+                ]
               },
               {
-                "answer": "The BLS employment projections presented by O*NET on the 47-3013.00 page show: employment of 66,600 in 2024 and a projected 66,700 in 2034, 2024—2034 growth of Little or no change (0%, and that page is not marked Bright Outlook), with average annual openings of about 6,800 during the period (including growth and replacements). A projection is not equal to an individual job outcome; even with almost no change in the total, hiring still occurs because of turnover and replacements.",
+                "answer": "BLS Table 1.2 for U.S. occupation 47-3013 shows about 65,000 jobs in 2025 and projects 65,400 in 2035 (+0.6%), with about 6,100 openings per year including replacements. Counts are rounded independently.",
                 "id": "helpers-electricians.faq.4",
                 "question": "What are the employment prospects?",
-                "question_key": "career.faq.helpers-electricians.q4"
+                "question_key": "career.faq.helpers-electricians.q4",
+                "source_refs": [
+                  "bls-ep-2025-2035"
+                ]
               },
               {
-                "answer": "O*NET places this occupation in Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)); the education section shows 71% requiring a high school diploma or equivalent, 13% requiring a post-secondary certificate, and 11% below a high school diploma (the page does not account for the remaining 5%). In mainland China, positions involving low-voltage electrical work and working at height and machinery and cutting must meet work safety and occupational health requirements and obtain the corresponding qualifications or work permits; the specifics are governed by the requirements of the enterprise and the competent authority.",
+                "answer": "BLS lists high school or equivalent as typical for U.S. entry, with short-term on-the-job training. Ask the employer about helper duties, training and local rules for work requiring a credential. For covered special operations on building and municipal projects in mainland China, Order 60 requires the applicable training, assessment and credential. Covered work categories are set separately. Confirm the assigned tasks with the project and competent authority.",
                 "id": "helpers-electricians.faq.5",
                 "question": "What education and qualifications are needed?",
-                "question_key": "career.faq.helpers-electricians.q5"
+                "question_key": "career.faq.helpers-electricians.q5",
+                "source_refs": [
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
+                ]
               },
               {
                 "answer": "No. This occupation only needs materials and work hours records and project communication applications and spreadsheets and office tools; programming is not an entry requirement for this occupation.",
@@ -32021,7 +32049,7 @@
                 "question_key": "career.faq.helpers-electricians.q6"
               },
               {
-                "answer": "It will not be replaced as a whole. Task sheets and usage and materials and progress and knowledge retrieval can be assisted by systems, but on-site measuring and stripping and wiring and inspection and de-energization and voltage verification and safety responsibility remain with experienced personnel; O*NET shows this occupation's 2024—2034 growth is Little or no change (0%), and automation changes the composition of tasks more than it eliminates positions.",
+                "answer": "BLS Table 1.2 for U.S. occupation 47-3013 shows about 65,000 jobs in 2025 and projects 65,400 in 2035 (+0.6%), with about 6,100 openings per year including replacements. Counts are rounded independently.",
                 "id": "helpers-electricians.faq.7",
                 "question": "Will this occupation be replaced by AI or automation?",
                 "question_key": "career.faq.helpers-electricians.q7"
@@ -32039,10 +32067,19 @@
                 "question_key": "career.faq.helpers-electricians.q9"
               },
               {
-                "answer": "This page uses O*NET 47-3013.00 and U.S. BLS OEWS 2025 and BLS employment projections 2024—2034 as its main sources, and cites ILO and NIST research on occupational exposure and governance; all values are the U.S. this occupation's own scope and do not cover mainland China; for mainland China only the statistical scope and visible gaps are registered; this page does not constitute safety or special operations or quality or legal advice.",
+                "answer": "BLS Table 1.2 for U.S. occupation 47-3013 shows about 65,000 jobs in 2025 and projects 65,400 in 2035 (+0.6%), with about 6,100 openings per year including replacements. Counts are rounded independently.",
                 "id": "helpers-electricians.faq.10",
                 "question": "What are the sources and scope boundaries of this page?",
                 "question_key": "career.faq.helpers-electricians.q10"
+              },
+              {
+                "answer": "Only E1 can be confirmed in the original. Keep E2's C25 and C52 and send them to the electrician. Keep E3's counts of one and two and send them to the receiver. In the variant, E1 and E2 can be confirmed. E3 remains pending.",
+                "id": "helpers-electricians.faq.paper-exercise",
+                "question": "Paper exercise answer key (open after completing)",
+                "question_key": "career.faq.helpers-electricians.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -32057,7 +32094,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Source card | Research process: first check the official scope and tasks and work activities and work context and interest code and Job Zone and certification and training opportunities of U.S. O*NET/SOC 47-3013.00 (Helpers--Electricians), then take the BLS OEWS 2025 wages and the employment and growth and openings of the BLS employment projections 2025—2035 (all as presented on the O*NET page, and that page does not mark them as taken from a parent or adjacent occupation, so they are presented according to this occupation's own scope), and register the scope and gaps for mainland China according to the National Bureau of Statistics and work safety and special operations and occupational health and environmental protection systems."
+              "O*NET describes the work. OEWS and BLS Table 1.2 supply U.S. wages and employment. NBS data provide mainland China industry context, and site qualifications depend on the applicable rules and actual task."
             ]
           },
           "id": "helpers-electricians.sources.source-card.1",
@@ -32085,12 +32122,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round, checked on 2026-10-11: the precise 47-3013 25 tasks 18Core/7Supplemental and activities and context, the new-hire education 71/13/11, RC and Zone1-2, 5 software categories / 2 hot recruitment skills with shares not provided; May2025 quintiles, the 2025—2035 matrix, the OOH group background, NBS2025, and MOHURD Order 60 / Emergency Order 19."
+              "Use O*NET for U.S. tasks and work context and BLS Table 1.2 for employment projections and typical preparation. Verify mainland China site requirements under applicable rules and project procedures."
             ]
           },
           "id": "helpers-electricians.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -32099,7 +32138,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Precise occupational wages and employment for China and precise industry and regional wages in the United States, AI adoption measured effects and causality, and psychological assessment validity have not been obtained; the four industries are only the OOH occupational group background, and the O*NET growth classification and the precise BLS figure of 0.6% are kept separate. Protected surfaces and shared old facts are retained, and full-page synchronization is not claimed."
+              "U.S. wage percentiles and employment projections come from OEWS and BLS Table 1.2. Industry wages cover the broader construction laborers and helpers group. Check local and role-specific pay separately."
             ]
           },
           "id": "helpers-electricians.sources.source-card.4",
@@ -32131,25 +32170,25 @@
                 "entity": "Big Five personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "This occupation (Helpers--Electricians)",
@@ -32195,7 +32234,7 @@
                 "accessed_at": "2026-09-22",
                 "details": [
                   "Used to check the official scope (Help electricians by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment.) and common job titles.",
-                  "Used to check the interest code (RC) and Job Zone 1-2 (little or no preparation needed to some preparation needed) and industry distribution (construction); that page is not marked Bright Outlook."
+                  "U.S. employment projections use BLS Table 1.2. O*NET describes the occupation and its work."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "bls",
@@ -32210,15 +32249,15 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to check employment of 66,600 in 2024 and 66,700 in 2034, 2024—2034 growth of 0%, and average annual openings of about 6,800 during the period (including growth and replacements).",
-                  "Used to explain that employment projections and OEWS point-in-time employment estimates have different scopes, and that a projection is not equal to an individual job outcome and openings consist mainly of replacement needs."
+                  "The employment projections shown here come from BLS Table 1.2.",
+                  "The employment projections shown here come from BLS Table 1.2."
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
-                "limitation": "This is the occupation's scope as presented by O*NET on the 47-3013.00 page; growth Little or no change 0%, and Bright Outlook is not marked.",
+                "limitation": "U.S. employment projections use the 47-3013 occupation row in BLS Table 1.2.",
                 "market": "United States",
                 "name": "O*NET OnLine: Helpers--Electricians employment trend (47-3013.00, this occupation's own scope)",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
+                "period": "Occupational profile or live lookup",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "47-3013.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localtrends/47-3013.00"
@@ -32229,11 +32268,11 @@
                   "Used to check the median hourly wage of $20.51 and median annual wage of $42,670 and the 10th/25th/75th/90th percentiles (hourly wage 15.88 / 17.71 / 23.30 / 28.05 dollars, annual wage 33,020 / 36,830 / 48,470 / 58,340 dollars).",
                   "Used to explain that wage percentiles are not experience levels and are not equal to an individual's starting wage."
                 ],
-                "evidence_type": "official wage display",
+                "evidence_type": "OEWS national occupational wages",
                 "id": "oews",
                 "limitation": "O*NET does not mark the wage data on that page as taken from a parent or adjacent occupation; this page presents them according to this occupation's own scope, excluding benefits and bonuses.",
                 "market": "United States",
-                "name": "O*NET OnLine: Helpers--Electricians national wages (47-3013.00, this occupation's own scope)",
+                "name": "U.S. national wages for electrical helpers (47-3013)",
                 "period": "2025 BLS OEWS wage data via O*NET",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "47-3013.00 exact occupation",
@@ -32290,18 +32329,18 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to explain work safety requirements for low-voltage electrical work and working at height and machinery and cutting.",
-                  "Operations involving special operations must undergo safety technology training and assessment and be performed with a certificate."
+                  "Articles 2–4 address scope, training, assessment and credentials.",
+                  "Verify the rule for the actual task with the competent authority."
                 ],
-                "evidence_type": "regulator portal",
+                "evidence_type": "Departmental regulation",
                 "id": "facilities",
-                "limitation": "The regulations and requirements issued by the competent authority prevail.",
+                "limitation": "Verify requirements for the actual assignment.",
                 "market": "Mainland China",
-                "name": "Ministry of Emergency Management of the People's Republic of China: work safety and special operations and dangerous operations management",
+                "name": "MEM Order 19 on special operations",
                 "period": "current; accessed 2026-09-22",
                 "publisher": "Ministry of Emergency Management",
-                "scope": "work safety and special operations",
-                "url": "https://www.mem.gov.cn/"
+                "scope": "Mainland China special operations in scope",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32434,24 +32473,24 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used for field and evidence scope and gap registration rules.",
-                  "Used to explain cross-market and cross-jurisdiction scope boundaries."
+                  "Tools may help organize records. Verify key information against the original.",
+                  "Tools may help organize records. Verify key information against the original."
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "Editorial explanation",
                 "id": "employer",
-                "limitation": "Internal scope rules, not an external factual source.",
-                "market": "Global",
-                "name": "FermatMind career content field and evidence scope rules",
-                "period": "current authoring rules",
+                "limitation": "This explanation does not measure adoption or work outcomes.",
+                "market": "This page",
+                "name": "FermatMind task and human review notes",
+                "period": "This page",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "Tasks on this page",
                 "url": "https://fermatmind.com"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to check certification and specialty qualification search entry points related to this occupation.",
-                  "In mainland China, matters involving low-voltage electrical work and working at height require qualifications or work permits recognized by the competent authority; the specifics are governed by the requirements of the enterprise and the competent authority."
+                  "O*NET lists credentials related to this U.S. occupation.",
+                  "Use the directory to find U.S. issuers. Check state, employer and task requirements separately."
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "purchasing-managers",
@@ -32544,20 +32583,19 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Used to check that construction is the main industry.",
-                  "Used to explain the main employer types."
+                  "The May 2025 national median for U.S. occupation 47-3013 was USD 42,670 a year and USD 20.51 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 33,020, 36,830, 42,670, 48,470, 58,340."
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "OEWS national occupational wages",
                 "id": "onet-wages",
-                "limitation": "This scope is the U.S. distribution and does not establish a mainland China mapping.",
+                "limitation": "National occupational distribution. Local wages and individual offers vary.",
                 "market": "United States",
-                "name": "O*NET OnLine: Helpers--Electricians industry distribution (47-3013.00)",
-                "period": "current page; accessed 2026-09-22",
+                "name": "U.S. national wages for electrical helpers (47-3013)",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "47-3013.00 exact occupation",
-                "url": "https://www.onetonline.org/link/industry/47-3013.00"
+                "url": "https://www.onetonline.org/link/localwages/47-3013.00"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32613,7 +32651,7 @@
                 ],
                 "evidence_type": "official regulatory requirements",
                 "id": "mem-special-operation-2026",
-                "limitation": "Not mixed with the MOHURD building and municipal construction certificate types, and the helper title is not treated as the scope of qualifications.",
+                "limitation": "Verify the applicable rules for the actual task. The joint directory appendix and related policies set the conditions for credential recognition, equivalent coverage or avoiding duplicate credentials.",
                 "market": "Mainland China",
                 "name": "Regulations on the safety technology training and assessment of special operations personnel (Emergency Order 19)",
                 "period": "Effective 2026-06-01",
@@ -32622,21 +32660,111 @@
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Measuring and processing — 25/100; weight=1/3; helpers-electricians.ai-impact.ai-impact-table.99[0]",
-                  "Wiring and inspection — 0/100; weight=1/3; helpers-electricians.ai-impact.ai-impact-table.103[0]",
-                  "Troubleshooting and testing — 25/100; weight=1/3; helpers-electricians.ai-impact.ai-impact-table.107[0]"
+                  "BLS Table 1.2 for U.S. occupation 47-3013 shows about 65,000 jobs in 2025 and projects 65,400 in 2035 (+0.6%), with about 6,100 openings per year including replacements. Counts are rounded independently.",
+                  "BLS lists high school or equivalent as typical for U.S. entry, with short-term on-the-job training. Ask the employer about helper duties, training and local rules for work requiring a credential."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "47-3013",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "For covered special operations on building and municipal projects in mainland China, Order 60 requires the applicable training, assessment and credential. Covered work categories are set separately. Confirm the assigned tasks with the project and competent authority."
+                ],
+                "id": "cn-work-example",
+                "limitation": "This rule distinguishes regulated operations from helper assignments. Individual hiring conditions depend on the actual role.",
+                "market": "Mainland China",
+                "name": "MOHURD Order 60 on special operations in construction",
+                "period": "2026-06-01",
+                "publisher": "Ministry of Housing and Urban-Rural Development",
+                "scope": "Mainland China construction-site requirements",
+                "url": "https://www.mohurd.gov.cn/tsgb/gzk/art/2025/art_33002693.html"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks the paper records only.",
+                "market": "This page",
+                "name": "Sheet E: Conduit inventory label check",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "scope": "Paper exercise",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Protection from contact with electrical circuits."
+                ],
+                "id": "osha-circuit",
+                "limitation": "For applicable U.S. construction sites.",
+                "market": "United States",
+                "name": "OSHA 1926.416",
+                "period": "29 CFR 1926",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.416"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Deactivation and tagging of construction circuits."
+                ],
+                "id": "osha-tagging",
+                "limitation": "For applicable U.S. construction sites.",
+                "market": "United States",
+                "name": "OSHA 1926.417",
+                "period": "29 CFR 1926",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.417"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The directory and its appendix identify covered tasks and the conditions for credential coverage and recognition."
+                ],
+                "id": "special-work-directory-2026",
+                "limitation": "Verify the applicable scope under the appendix and relevant policies. Check site authorization and safety conditions separately.",
+                "market": "Mainland China",
+                "name": "Joint special operations directory (2026 No. 45)",
+                "period": "2026-06-01",
+                "publisher": "MEM, MOHURD and National Mine Safety Administration",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202605/W020260526532904903760.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Supervision and worker requirements for scaffolds on applicable U.S. construction sites."
+                ],
+                "id": "osha-scaffold",
+                "limitation": "Applies to covered U.S. construction sites.",
+                "market": "United States",
+                "name": "OSHA 1926.451",
+                "period": "29 CFR 1926",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.451"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Tool safety and guards on applicable U.S. construction sites."
+                ],
+                "id": "osha-tool-guards",
+                "limitation": "Applies to covered U.S. construction sites.",
+                "market": "United States",
+                "name": "OSHA 1926.300",
+                "period": "29 CFR 1926",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.300"
               }
             ]
           },
@@ -33973,8 +34101,8 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
-        "entry_heading": "How new graduates or career changers can verify and get started",
-        "heading": "How to become a Helper--Electrician: education, qualifications, and career development paths",
+        "entry_heading": "Entry and Sheet E: Conduit inventory label check",
+        "heading": "Entry and Sheet E: Conduit inventory label check",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "helpers-electricians.path.career-path-block.21",
@@ -34088,6 +34216,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "special-work-directory-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "id": "special-work-directory-2026",
+            "label": {
+              "$source": "special-work-directory-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "scope": "For mainland China, check the actual task against the directory."
           }
         ],
         "tracks": [
@@ -34357,7 +34503,7 @@
                 }
               }
             ],
-            "title": "Wiring and conduit coordination direction"
+            "title": "Conduit materials and handoff"
           },
           {
             "id": "safety-and-cleanup",
@@ -34849,7 +34995,9 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "bls",
+              "osha-circuit",
+              "osha-tagging"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34881,7 +35029,8 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "bls",
+              "osha-scaffold"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34913,7 +35062,8 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "bls",
+              "osha-tool-guards"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34977,7 +35127,9 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "bls",
+              "osha-circuit",
+              "osha-tagging"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35143,6 +35295,78 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "osha-circuit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "id": "osha-circuit",
+            "label": {
+              "$source": "osha-circuit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "scope": "Protection from contact with electrical circuits."
+          },
+          {
+            "href": {
+              "$source": "osha-tagging",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "id": "osha-tagging",
+            "label": {
+              "$source": "osha-tagging",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "scope": "Deactivation and tagging of construction circuits."
+          },
+          {
+            "href": {
+              "$source": "osha-scaffold",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "id": "osha-scaffold",
+            "label": {
+              "$source": "osha-scaffold",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "scope": "Supervision and worker requirements for scaffolds on applicable U.S. construction sites."
+          },
+          {
+            "href": {
+              "$source": "osha-tool-guards",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "id": "osha-tool-guards",
+            "label": {
+              "$source": "osha-tool-guards",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "scope": "Tool safety and guards on applicable U.S. construction sites."
           }
         ]
       },
@@ -35452,7 +35676,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-electricians.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35466,7 +35690,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-electricians.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35480,7 +35704,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-electricians.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35503,12 +35727,12 @@
           "ui": {
             "ai_heading": "Will AI affect the wages of Helpers--Electricians?",
             "driver_heading": "Which industries and directions use this occupation?",
-            "official_heading": "China industry wage background and precise occupational gap",
-            "scenario_caption": "Education background, common position directions, and verification advice (editorial compilation, not wage statistics)",
-            "scenario_heading": "With different education backgrounds, which position directions do Helpers--Electricians usually start from?",
-            "scenario_interpretation_label": "Notes and verification advice",
-            "scenario_role_label": "Education background",
-            "scenario_value_label": "Common position directions"
+            "official_heading": "2025 annual wage context for urban units",
+            "scenario_caption": "Role and pay checks",
+            "scenario_heading": "What should you check in a job posting?",
+            "scenario_interpretation_label": "Ask the employer",
+            "scenario_role_label": "Scope",
+            "scenario_value_label": "Check"
           },
           "us_growth": {
             "$item": "helpers-electricians.china-salary.career-snapshot-primary-locale.58",
@@ -35714,15 +35938,15 @@
             }
           }
         ],
-        "factors_heading": "Which factors affect U.S. wages for Helpers--Electricians?",
+        "factors_heading": "What affects pay",
         "growth": {
           "$item": "helpers-electricians.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "What are the U.S. wages for Helpers--Electricians?",
-        "industry_heading": "How much do U.S. wages differ across industries?",
+        "heading": "U.S. electrical helper wages",
+        "industry_heading": "Industry wages for U.S. construction laborers and helpers",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
@@ -35810,7 +36034,7 @@
           }
         ],
         "industry_value_label": "Median wage for the construction laborers and helpers occupational group within the industry (background)",
-        "interpretation_heading": "How should this set of U.S. wage figures be understood?",
+        "interpretation_heading": "How to read the percentiles",
         "interpretation_rows": [
           {
             "answer": {
@@ -35860,52 +36084,55 @@
         "wage_column_labels": [
           "Wage statistical position",
           "Annual wage reference",
-          "Conversion boundaries",
+          "Hourly wage",
           "How to understand this position"
         ],
-        "wage_heading": "U.S. wage distribution",
+        "wage_heading": "National wage percentiles",
         "wage_tiers": [
           {
-            "equivalent": "Official annual wage, not individual monthly income",
+            "equivalent": "USD 15.88/hour",
             "interpretation": {
               "$item": "helpers-electricians.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Lowest 10%",
-            "value": {
-              "$fact": "us-wage-low10-2025",
-              "field": "display_value"
-            }
+            "label": "10th percentile",
+            "value": "USD 33,020/year"
           },
           {
-            "equivalent": "Official annual wage, not an individual's actual take-home pay",
+            "equivalent": "USD 17.71/hour",
+            "interpretation": "May 2025 U.S. national wage.",
+            "label": "25th percentile",
+            "value": "USD 36,830/year"
+          },
+          {
+            "equivalent": "USD 20.51/hour",
             "interpretation": {
               "$item": "helpers-electricians.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Median (50%)",
-            "value": {
-              "$fact": "us-wage-2025",
-              "field": "display_value"
-            }
+            "label": "50th percentile",
+            "value": "USD 42,670/year"
           },
           {
-            "equivalent": "Official annual wage, not an individual's actual take-home pay",
+            "equivalent": "USD 23.30/hour",
+            "interpretation": "May 2025 U.S. national wage.",
+            "label": "75th percentile",
+            "value": "USD 48,470/year"
+          },
+          {
+            "equivalent": "USD 28.05/hour",
             "interpretation": {
               "$item": "helpers-electricians.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Highest 10%",
-            "value": {
-              "$fact": "us-wage-high10-2025",
-              "field": "display_value"
-            }
+            "label": "90th percentile",
+            "value": "USD 58,340/year"
           }
         ]
       },
@@ -35936,7 +36163,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person suits Helpers--Electricians?"
+        "title": "What work preferences fit an electrician helper role?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36049,7 +36276,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "helpers-electricians.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36094,7 +36321,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "helpers-electricians.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36139,7 +36366,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "oews",
             "value": {
               "$item": "helpers-electricians.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36517,7 +36744,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS employment projections (2024—2034, this occupation's own scope)",
+            "label": "2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "helpers-electricians.profile.onet-structured-fields-block.4",
@@ -37458,14 +37685,14 @@
       "interface.path.credential_boundary_label": "Qualification boundaries",
       "interface.path.entry_decisions_heading": "What to verify before entering the field",
       "interface.path.next_step_label": "Next steps",
-      "interface.path.promotion_evidence_label": "Promotion evidence",
+      "interface.path.promotion_evidence_label": "Stage records and exploration exercises",
       "interface.path.responsibilities_label": "Typical duties",
       "interface.profile.comparison.dimension_header": "Dimension",
       "interface.profile.comparison.primary_header": "Main direction",
       "interface.profile.comparison.secondary_header": "Comparison direction",
       "interface.profile.responsibilities_heading": "Core work",
       "interface.quick_decision.caution_heading": "In what situations should choosing Helpers--Electricians be approached with caution?",
-      "interface.quick_decision.experiment_heading": "How can a small experiment help judge whether you suit Helpers--Electricians?",
+      "interface.quick_decision.experiment_heading": "What can you learn from a short paper exercise?",
       "interface.quick_decision.suit_heading": "What kind of person is more likely suited to Helpers--Electricians?",
       "interface.risk.affected_roles_label": "Main positions",
       "interface.risk.consequence_label": "Possible consequences",
@@ -37567,19 +37794,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
-      "china-salary": "Mainland China salary reference",
+      "ai-impact": "AI tools and human review",
+      "china-salary": "Mainland China wage references",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
       "market-signals": "Career prospects and moving to related occupations",
       "navigation": "Next steps and related entry points",
-      "path": "Entry, qualifications, and career development",
+      "path": "Entry and Sheet E: Conduit inventory label check",
       "profile": "Occupational profile",
       "quick-decision": "Quick assessment",
       "risk": "Work pressure, risks, and occupational boundaries",
       "source-register": "Sources",
       "sources": "Frequently asked questions and sources",
-      "us-salary": "U.S. salary reference"
+      "us-salary": "U.S. electrical helper wages"
     }
   },
   "fact_register": {
@@ -37597,15 +37824,15 @@
         ]
       },
       {
-        "derivation": "Scope | 2025 BLS OEWS national wages, as presented by O*NET on the 47-3013.00 page; the page does not mark the data as taken from a parent or adjacent occupation, and this page labels it faithfully according to this occupation's own scope; benefits and bonuses are excluded; the median is the midpoint of the distribution and percentiles are distribution positions, and neither corresponds to an individual's starting salary; later updates are subject to a query for the current period on the official page.",
-        "display_value": "Median hourly wage $20.51 / median annual wage $42,670 (2025, BLS OEWS, this occupation's (47-3013.00) own scope)",
+        "derivation": "Direct national annual median from BLS OEWS.",
+        "display_value": "USD 42,670/year",
         "fact_id": "us-wage-2025",
         "market": "United States",
-        "measure": "Median wage",
-        "occupation_scope": "This occupation: Helpers--Electricians",
-        "period": "2025",
+        "measure": "U.S. median annual wage (May 2025)",
+        "occupation_scope": "47-3013",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "onet-wages"
         ]
       },
       {
@@ -37633,39 +37860,39 @@
         ]
       },
       {
-        "derivation": "Scope | BLS employment projections 2024—2034 (as presented by O*NET on the 47-3013.00 page, this occupation's own scope, with growth labeled Little or no change 0% and that page not marked Bright Outlook); the employment base period on that O*NET page is 66,600 in 2024 and a projected 66,700 in 2034; the projection includes replacement needs and is not equal to actual hiring or layoffs.",
-        "display_value": "Growth Little or no change (0%) (2024—2034, BLS employment projections, this occupation's (47-3013.00) own scope; that page is not marked Bright Outlook)",
+        "derivation": "Directly from the matching occupation row of BLS Table 1.2.",
+        "display_value": "+0.6%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Employment growth",
-        "occupation_scope": "This occupation: Helpers--Electricians",
-        "period": "2024—2034",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "47-3013",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "Scope | BLS employment projection base period (about 66,600 for this occupation in 2024, as presented by O*NET); this differs in scope from the BLS OEWS point-in-time employment estimate (OEWS covers only sampled non-farm establishment employers and excludes self-employment), and this page labels them separately without mixing them.",
-        "display_value": "Employment about 66,600 (2024, BLS employment projection base period, this occupation's (47-3013.00) own scope)",
+        "derivation": "Directly from the matching occupation row of BLS Table 1.2.",
+        "display_value": "About 65,000 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment figure",
-        "occupation_scope": "This occupation: Helpers--Electricians",
-        "period": "2024",
+        "measure": "U.S. employment (2025)",
+        "occupation_scope": "47-3013",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "Scope | Period openings in the BLS employment projections (about 6,800 per year on average for this occupation in 2024—2034, including growth and replacements, as presented by O*NET); this is a period annual average scope consisting mainly of replacement needs, and even with almost no change in the total hiring still occurs, so it cannot be read as net new positions.",
-        "display_value": "Projected average annual job openings of about 6,800 (2024—2034, BLS employment projections, this occupation's (47-3013.00) own scope, including growth and replacements)",
+        "derivation": "Directly from the matching occupation row of BLS Table 1.2.",
+        "display_value": "About 6,100 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Average annual job openings",
-        "occupation_scope": "This occupation: Helpers--Electricians",
-        "period": "2024—2034",
+        "measure": "U.S. annual openings (2025–2035)",
+        "occupation_scope": "47-3013",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -37715,57 +37942,45 @@
         "source_refs": [
           "onet"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "17%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Helpers--Electricians",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
-      "Helpers--Electricians · tasks, deliverables, and responsibility boundaries",
-      "Measuring and stripping and wiring · break points and testing documentation · site and process responsibility",
-      "U.S. occupational materials; the precise occupational wage gap for China is retained according to the source"
+      "Electrician Helpers",
+      "Wages and projections use separate tables",
+      "China occupational wage distribution unavailable"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "U.S. median salary (2025, BLS OEWS, this occupation's (47-3013.00) own scope)"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034, this occupation's (47-3013.00) own scope)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment (2024, this occupation's (47-3013.00) own scope)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024—2034, this occupation's (47-3013.00) own scope)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -37779,17 +37994,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What Helpers--Electricians do, what capabilities and qualifications are needed, what the wages and prospects are, and which tasks AI will change. Retains the occupational scope (O*NET 47-3013.00), Job Zone 1-2 (little or no preparation needed to some preparation needed) and the education note, the U.S. wages and employment under this occupation's own scope, and the mainland China data gap."
+      "text": "Explore electrician helpers tasks, U.S. wage percentiles and employment projections, with a paper exercise on checking records."
     },
     "title": {
       "availability": "available",
-      "text": "Helpers--Electricians"
+      "text": "Electrician Helpers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "6e64a651f0b9a1de37a850c28dc684192abdf6e1c04dd54b0a60f5564965680f",
+  "source_content_sha256": "766a4748c3fe8b2d4888bfb64eb97697b930d1b49ebbfa817541928b42eb7f8c",
   "subject": {
     "canonical_slug": "helpers-electricians",
-    "name": "Helpers--Electricians",
-    "summary": "Helpers--Electricians corresponds to the exact occupation O*NET/SOC 47-3013.00 \"Helpers--Electricians\": help electricians by performing duties requiring less skill: using, supplying, or delivering materials and tools, and cleaning the work area and equipment. Core tasks include stripping insulation from wire ends with wire strippers and connecting conductors to terminals for subsequent soldering, using test instruments to troubleshoot short circuits in wiring, measuring and cutting and bending wire and conduit with measuring instruments and hand tools, checking electrical equipment for loose connections and damaged insulation and tightening connections with hand tools, and maintaining tools and vehicles and equipment and keeping parts and supplies orderly; common job titles include Electrical Helper and Electrician Helper and Electrician Apprentice and Electrical Apprentice. Official scope text: Help electricians by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment. Scope note: the U.S. wage and employment and industry data presented by O*NET on the 47-3013.00 page are not marked as taken from a parent or adjacent occupation, and this page labels them faithfully according to this occupation's (47-3013.00) own scope; this occupation is Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)), with 2024—2034 growth of Little or no change (0%). The content of this page does not constitute safety, special operations, occupational health, or legal advice."
+    "name": "Electrician Helpers",
+    "summary": "Electrician helpers stage tools, conduit and other materials, assist with positioning and handling as assigned, and report discrepancies in labels, counts or locations. Check local qualifications and site authorization for wiring, testing and energizing."
   }
 }

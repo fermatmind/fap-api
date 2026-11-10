@@ -143,6 +143,9 @@
       "item:medical-scientists-except-epidemiologists.path.entry-role-comparison.10": {
         "status": "pending_mapping"
       },
+      "item:medical-scientists-except-epidemiologists.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
       "item:medical-scientists-except-epidemiologists.path.interview-probation.11": {
         "status": "pending_mapping"
       },
@@ -169,6 +172,12 @@
       },
       "item:medical-scientists-except-epidemiologists.path.recruitment-sample.8": {
         "status": "pending_mapping"
+      },
+      "item:medical-scientists-except-epidemiologists.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:medical-scientists-except-epidemiologists.path.seven-day-trial.1": {
+        "status": "mapped"
       },
       "item:medical-scientists-except-epidemiologists.profile.definition-block.1": {
         "status": "mapped"
@@ -5689,52 +5698,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5965,96 +6112,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -11972,7 +12355,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Direct assessment: If you are willing to ask questions about disease and health, repeatedly check methods and data, and report limitations honestly, explore further. The safe trial uses only this page's four entirely fictional rows of numbers. Public or de-identified data do not automatically carry research permission."
+              "Be cautious if you need quick certainty or want to focus on patient care. Research often involves revisiting methods and waiting for stronger evidence."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.quick-decision.fermat-decision-card.1",
@@ -11983,7 +12366,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe behavior: Can you retain original values, recalculate, and acknowledge unknown conditions? Actual research also requires training, supervisor feedback, and institutional permissions. This exercise checks only one paper assignment."
+              "In 09 Entry, qualifications, and career development, find “MS-15: Check Two Research Comparisons.” Spend about 10 minutes on the fictional records before reading the answer."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.quick-decision.fermat-decision-card.2",
@@ -11994,7 +12377,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Continue if you are willing to train over the long term and accept challenges to methods. If you are unwilling to check data or face uncertain conclusions, first compare methods, coordination, or engineering directions. Interest is neither hiring nor permission."
+              "Explore medical research if you enjoy separating observations from explanations, tracing method changes, and revising a claim after review."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.quick-decision.fermat-decision-card.3",
@@ -12005,7 +12388,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "60-minute paper exercise (editor-created fiction): Four nonrandom observational records A1: X=1, Y=3; A2: X=3, Y=7; B1: X=1, Y=2; B2: X=3, Y=4. X and Y are unitless, not patients, samples, or clinical measures. Calculate the two groups' mean Y and mean difference A minus B, and decide whether you can state that A causes Y to rise. Retain original values and calculations, two limitations, and required additional design information. There are no missing values; do not collect data or calculate significance or power. Reference answer: A mean (3+7)/2=5, B mean (2+4)/2=3, A minus B=2. Only these four fictional records can be described. Grouping is nonrandom, each group has only 2 records, and sampling, temporal order, and confounding are unspecified; causation, efficacy, and significance cannot be established. Request grouping rules, measurement meanings, and study design without inventing conditions. Spend 10 minutes reading, 20 minutes calculating, 20 minutes writing limitations and requests, and 10 minutes recalculating with the answer hidden and recording corrections."
+              "Use only the fictional MS-15 exercise in section 09 and the separate seven-day W-MS case. Neither uses participant records, real clinical results or an experiment."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.quick-decision.fermat-decision-card.4",
@@ -12079,7 +12462,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Information inputs: Official 19-1042 tasks / context / IR/JobZone5 and 2025 wages. Display O*NET2024–2034 and BLS2025–2035 projections separately; do not mix periods."
+              "The current U.S. projection on this page is BLS Table 1.2, 2025–2035. This is an occupational projection, not a personal outcome or an AI attribution."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.profile.definition-block.5",
@@ -12096,7 +12479,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Research questions, lawful data, and methods; the teaching exercise uses fictional numbers only."
+              "Research questions, lawful data, and methods; the teaching exercise uses fictional records only."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.profile.definition-block.6",
@@ -12239,7 +12622,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: Practice design and analysis with an entirely fictional dataset. Recalculate 5 / 3 / 2 using only the fictional exercise; do not call this measured adoption."
+              "Use the fictional MS-15 records in section 09 to check whether comparison requirements are met. Keep missing evidence unresolved and do not infer effects."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.ai-impact.ai-impact-table.2",
@@ -12388,7 +12771,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The exact U.S. nationwide scope is 19-1042, excluding epidemiology. Label 2025 wages and current 2025–2035 employment projections separately."
+              "For U.S. medical scientists, except epidemiologists (19-1042), the May 2025 median annual wage was $103,410. BLS Table 1.2 lists 181,000 jobs in 2025 and projects 203,700 jobs in 2035 (12.6% growth), with 10,500 average annual openings. Openings include replacement needs."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.us-salary.career-snapshot-secondary-locale.1",
@@ -12418,7 +12801,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Current O*NET and BLS both cover 2025–2035: 19-1042 employment from 181,000 to 203,700, official growth 13%, net increase 22,700, and average annual openings 10,500. This is an overall occupational projection, not AI attribution. Openings include growth and replacement, not current vacancies or individual hiring probabilities. Do not guess why the baseline changed."
+              "Current O*NET and BLS both cover 2025–2035: 19-1042 employment from 181,000 to 203,700, 12.6% (BLS Table 1.2; OOH rounds to 13%), net increase 22,700, and average annual openings 10,500. This is an overall occupational projection, not AI attribution. Openings include growth and replacement, not current vacancies or individual hiring probabilities. Do not guess why the baseline changed."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.us-salary.career-snapshot-secondary-locale.3",
@@ -12570,7 +12953,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "60-minute paper exercise (editor-created fiction): Four nonrandom observational records A1: X=1, Y=3; A2: X=3, Y=7; B1: X=1, Y=2; B2: X=3, Y=4. X and Y are unitless, not patients, samples, or clinical measures. Calculate the two groups' mean Y and mean difference A minus B, and decide whether you can state that A causes Y to rise. Retain original values and calculations, two limitations, and required additional design information. There are no missing values; do not collect data or calculate significance or power. Reference answer: A mean (3+7)/2=5, B mean (2+4)/2=3, A minus B=2. Only these four fictional records can be described. Grouping is nonrandom, each group has only 2 records, and sampling, temporal order, and confounding are unspecified; causation, efficacy, and significance cannot be established. Request grouping rules, measurement meanings, and study design without inventing conditions. Spend 10 minutes reading, 20 minutes calculating, 20 minutes writing limitations and requests, and 10 minutes recalculating with the answer hidden and recording corrections."
+              "Use only the fictional MS-15 exercise in section 09 and the separate seven-day W-MS case. Neither uses participant records, real clinical results or an experiment."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.fit.riasec-fit-block.8",
@@ -12617,7 +13000,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Interpretation risks: The four exercise records support descriptions of 5 / 3 / difference 2 only, not causation, significance, or efficacy. Actual results require separate design checks."
+              "Interpretation risk: MS-15 checks whether the comparison is documented. It cannot establish cause and effect, statistical significance or clinical efficacy. Actual results require a separate review of the study design."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.risk.career-risk-cards.3",
@@ -12742,7 +13125,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Work sample (editorial suggestion): Save the four-row exercise, original values, calculations for means 5 / 3 / difference 2, two limitations and design requests, and first and corrected drafts. Add a 60-minute task log; do not present it as real research output or ethical approval."
+              "Use only the fictional MS-15 exercise in section 09 and the separate seven-day W-MS case. Neither uses participant records, real clinical results or an experiment."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.path.recruitment-sample.7",
@@ -12753,7 +13136,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Seven-day exploration (30–60 minutes daily, reusing only the same fictional exercise): Day 1, read the 19-1042 definition and note classification boundaries; day 2, calculate 5 / 3 / 2 by hand; day 3, state nonrandom and small-sample limitations; day 4, list additional design information needed; day 5, recalculate with the answer hidden and record errors; day 6, have someone check original values / calculations / causal limits; day 7, organize the work sample, list training and permission questions, and decide the next step. This page supports career exploration only. A research degree does not automatically confer clinical, sign-off, or research approval authority. Research-focused work typically requires no licensure or certification, while actual medical practice or treatment of trial patients requires appropriate medical licensure. Verify real activities against jurisdiction, institution, materials, and funding conditions."
+              "Use only the fictional MS-15 exercise in section 09 and the separate seven-day W-MS case. Neither uses participant records, real clinical results or an experiment."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.path.recruitment-sample.8",
@@ -12848,9 +13231,9 @@
             "rows": [
               [
                 "Before the interview",
-                "Use only this page's four fictional rows to show 5 / 3 / 2 and noncausal limitations",
-                "Ask someone to challenge methods and interpretation",
-                "Original values, calculations, limitations, and corrected draft"
+                "Use the fictional MS-15 records in section 09 to check whether comparison requirements are met. Keep missing evidence unresolved and do not infer effects.",
+                "Recheck independently using the rubric after MS-15. Peer review is optional.",
+                "Fictional source record, evidence notes, one question for the project lead and revised handoff"
               ],
               [
                 "During the interview",
@@ -12961,6 +13344,127 @@
             "nih-dms"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials: MS-15 (about 10 minutes)",
+                  "A toy protocol compares training datasets only when the outcome definition matches and the method version is recorded.",
+                  "A: same outcome definition, method v2 recorded. B: same definition, method version blank.",
+                  "The project lead decides whether a result can enter the summary. The files contain no participant records."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Write two lines with the evidence, the comparison you would propose, and anything to hold.",
+                  "Add one question for the project lead."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Answer key",
+                  "A meets the two stated documentation conditions. B lacks a method version; hold the comparison.",
+                  "Ask the project lead to check B’s version in the original method log."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Check both IDs and both conditions, and keep a proposed comparison distinct from an approved result."
+                ]
+              }
+            ]
+          },
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "title": "MS-15: Check Two Research Comparisons",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "Day 1",
+                  "Start W-MS. A new fictional team requires the analysis plan date and the same outcome unit before comparing K6 and K7. List the two conditions."
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "Day 2",
+                  "K6 is recorded in minutes; K7 is recorded in seconds. Copy the units and flag any unit conversion for review."
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "Day 3",
+                  "K6 has a dated plan. K7 has a plan file with no date. Record the available evidence without guessing the date."
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "Day 4",
+                  "In this case the designated methods reviewer handles evidence checks. Draft two questions for that reviewer: one about K7’s plan date and one about the conversion rule."
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "Day 5",
+                  "Draft a handoff to the designated methods reviewer. Separate observations, open questions, and what would make comparison possible."
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "Day 6",
+                  "Work alone: check the Day 1 rules, the evidence from Days 2–3, and the Day 4 recipient against your note. Peer feedback is optional."
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "Day 7",
+                  "Write whether you enjoyed tracking the method and holding the claim open, and name one skill to practice next."
+                ]
+              }
+            ]
+          },
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "title": "Seven-day paper trial: a separate case",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "I recorded both IDs.",
+              "I checked both stated conditions.",
+              "I kept missing evidence unresolved.",
+              "I identified who should review the record.",
+              "I used no real samples or records.",
+              "I could complete Day 6 independently.",
+              "I identified one skill to practice next."
+            ]
+          },
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "title": "Judgment questions after seven days",
+          "type": "list"
         }
       ]
     },
@@ -12975,7 +13479,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS new period 2025–2035: 181,000 → 203,700 employed, net increase 22,700, official growth 13%, and average annual openings 10,500. An overall employment projection, not AI attribution. Net increase subtracts endpoints; the official integer percentage is separate. Openings include growth and replacement, not current recruitment or hiring probabilities."
+              "BLS new period 2025–2035: 181,000 jobs in 2025 to 203,700 projected jobs in 2035, a net gain of 22,700 jobs, 12.6% (BLS Table 1.2; OOH rounds to 13%), and average annual openings 10,500. An overall employment projection, not AI attribution. Net increase subtracts endpoints; the percentage before handbook rounding is separate. Openings include growth and replacement, not current recruitment or hiring probabilities."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.market-signals.market-signal-card.1",
@@ -12989,7 +13493,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Current O*NET and BLS cover the same 2025–2035 projection. The older 2024–2034 period is historical within frozen shared records only; selected modules do not splice periods into a continuous series or personal guarantee."
+              "The current U.S. projection on this page is BLS Table 1.2, 2025–2035. This is an occupational projection, not a personal outcome or an AI attribution."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.market-signals.market-signal-card.2",
@@ -13014,7 +13518,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial tool trial suggestion: Give a tool only this page's four fictional rows to show calculations and limitations, then manually recalculate 5 / 3 / 2 and reject causal overstatement. O*NET duties and software mentions in recruitment supply task background only. ILO2025 global task exposure and the WHO2021 health AI governance overview do not establish institutional adoption rates, layoff proportions, or replacement dates for this occupation. For actual research, first check institutional tool permissions and data rules."
+              "For a paper tool exercise, use the fictional MS-15 materials only. Check the source log and distinguish a documented comparison from an unsupported causal claim. O*NET duties and software mentions in recruitment supply task background only. ILO2025 global task exposure and the WHO2021 health AI governance overview do not establish institutional adoption rates, layoff proportions, or replacement dates for this occupation. For actual research, first check institutional tool permissions and data rules."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.market-signals.market-signal-card.4",
@@ -13079,7 +13583,7 @@
                 ]
               },
               {
-                "answer": "Editorial tool trial suggestion: Give a tool only this page's four fictional rows to show calculations and limitations, then manually recalculate 5 / 3 / 2 and reject causal overstatement. O*NET duties and software mentions in recruitment supply task background only. ILO2025 global task exposure and the WHO2021 health AI governance overview do not establish institutional adoption rates, layoff proportions, or replacement dates for this occupation. For actual research, first check institutional tool permissions and data rules.",
+                "answer": "AI can assist with literature organization, draft code or summaries, and checks for missing documentation. Researchers still verify sources, choose and document a valid comparison, and remain responsible for the interpretation and applicable review. Do not upload sensitive study data to an unapproved tool.",
                 "id": "medical-scientists-except-epidemiologists.faq.4",
                 "question": "How will AI affect work in this occupation?",
                 "question_key": "career.faq.medical-scientists-except-epidemiologists.4",
@@ -13110,12 +13614,13 @@
                 ]
               },
               {
-                "answer": "U.S. nationwide 19-1042 five annual / hourly wage percentiles for 2025: 10th, 64,800 / 31.15; 25th, 79,840 / 38.39; median, 103,410 / 49.72; 75th, 139,380 / 67.01; 90th, $177,780 / $85.47. Percentiles are statistical positions, not starting pay, take-home income, or personal guarantees. Hourly wages come from the official display, not calculations using personal working hours.",
+                "answer": "For U.S. medical scientists, except epidemiologists (19-1042), the May 2025 median annual wage was $103,410. BLS Table 1.2 lists 181,000 jobs in 2025 and projects 203,700 jobs in 2035 (12.6% growth), with 10,500 average annual openings. Openings include replacement needs.",
                 "id": "medical-scientists-except-epidemiologists.faq.7",
                 "question": "What wage evidence is available for the United States?",
                 "question_key": "career.faq.medical-scientists-except-epidemiologists.7",
                 "source_refs": [
-                  "onet-wages"
+                  "onet-wages",
+                  "bls-table-1-2"
                 ]
               },
               {
@@ -13143,7 +13648,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "This round checked 19-1042's 14 tasks / full context / IR/JobZone5, 36 / 25 / 25 education responses, all five 2025 national annual / hourly wage percentiles, and BLS wages in five detailed industries. Correct content was retained and the fifth industry row added. Current O*NET now shares BLS's 2025–2035 period: 181000 to 203700 / 13% / net increase 22700 / annual average 10500; industry shares updated to 35 / 33 / 21 / 11. The 15 software mentions, 15 certifications, and 3116 mixed programs matched; program data years were obtained this round. None establishes GenAI adoption / job outcomes or qualification recognition. Six NBS related industry means were checked in this batch, solely as pretax annual mean references; the exact occupational gap remains. This round's readings of WHO / CDC overviews, NIH applicability overview, and relevant 45CFR46 provisions were reused, without claiming complete guidelines were read. The original 5 / 3 / 2 four-row exercise / answer / work samples / seven-day trial were retained. Shared earlier-period facts and sources are protected and were not independently reviewed."
+              "FermatMind Editorial: source scopes and examples were checked on 9 November 2026. The exercises use fictional materials."
             ]
           },
           "id": "medical-scientists-except-epidemiologists.sources.boundary-notice.2",
@@ -13178,28 +13683,28 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Medical Scientists, Except Epidemiologists",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Medical Scientists, Except Epidemiologists",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Medical Scientists, Except Epidemiologists",
+                "entity": "Clinical laboratory technologists and technicians",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/career/jobs/clinical-laboratory-technologists-and-technicians"
               },
               {
-                "entity": "Medical Scientists, Except Epidemiologists",
+                "entity": "Clinical research coordinators",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/career/jobs/clinical-research-coordinators"
               },
               {
                 "entity": "Medical Scientists, Except Epidemiologists",
@@ -13237,7 +13742,7 @@
                 "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
                 "period": "ILO Working Paper 140, 2025; accessed 2026-08-31",
                 "publisher": "International Labour Organization",
-                "scope": "contextual",
+                "scope": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -13252,7 +13757,7 @@
                 "name": "Enterprise compensation survey information",
                 "period": "2024 enterprise wage survey information published 2025; accessed 2026-08-31",
                 "publisher": "Ministry of Human Resources and Social Security of the People's Republic of China",
-                "scope": "parent_occupation_proxy",
+                "scope": "Enterprise compensation survey information",
                 "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
               },
               {
@@ -13406,16 +13911,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/19-1042.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Professional, scientific, and technical services 37%, healthcare and social assistance 33%, education 19%, other industries 11%. Employment distribution, not wages"
+                  "O*NET industry distribution: professional, scientific and technical services 35%; health care and social assistance 33%; educational services 21%; other industries, including manufacturing, 11%. This is employment distribution, not pay."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "O*NET industry distribution: professional, scientific and technical services 35%; health care and social assistance 33%; educational services 21%; other industries, including manufacturing, 11%. This is employment distribution, not pay.",
                 "market": "US",
                 "name": "Industries: 19-1042.00 - Medical Scientists, Except Epidemiologists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Read November 9, 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-1042.00"
@@ -13498,16 +14003,16 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "O*NET earlier period 2024–2034: 165,300 → 179,600 employed, net increase 14,300, official growth 9%, average annual openings 9,600."
+                  "O*NET links to U.S. employment trends for 19-1042. Use BLS Table 1.2 for the exact 2025–2035 values displayed here."
                 ],
                 "evidence_type": "official occupation and labor-market source",
                 "id": "onet-old-trends",
-                "limitation": "O*NET earlier period 2024–2034: 165,300 → 179,600 employed, net increase 14,300, official growth 9%, average annual openings 9,600.",
+                "limitation": "O*NET links to U.S. employment trends for 19-1042. Use BLS Table 1.2 for the exact 2025–2035 values displayed here.",
                 "market": "US",
-                "name": "O*NET19-1042 earlier-period trends",
-                "period": "2024—2034",
+                "name": "O*NET national employment trends (19-1042)",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "O*NET links to U.S. employment trends for 19-1042. Use BLS Table 1.2 for the exact 2025–2035 values displayed here.",
                 "url": "https://www.onetonline.org/link/localtrends/19-1042.00"
               },
               {
@@ -13520,9 +14025,9 @@
                 "limitation": "Table 2 non-private units, Table 5 private units, and notes on statistical coverage / wage definitions. R&D, hospital, and educational employer settings align; pretax industry means only",
                 "market": "CN",
                 "name": "National Bureau of Statistics 2025 related industry wages",
-                "period": "2025; released in 2026",
+                "period": "2025 data (published May 15, 2026)",
                 "publisher": "National Bureau of Statistics of China",
-                "scope": "industry_proxy",
+                "scope": "National Bureau of Statistics 2025 related industry wages",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
@@ -13537,7 +14042,7 @@
                 "name": "CDC BMBL overview",
                 "period": "6th edition; overview page updated 2026-03-18",
                 "publisher": "Centers for Disease Control and Prevention",
-                "scope": "contextual",
+                "scope": "CDC BMBL overview",
                 "url": "https://www.cdc.gov/labs/bmbl/index.html"
               },
               {
@@ -13552,7 +14057,7 @@
                 "name": "45 CFR46 applicability and consent provisions",
                 "period": "Current 45 CFR46; accessed 2026-10-03",
                 "publisher": "eCFR / U.S. Department of Health and Human Services",
-                "scope": "contextual",
+                "scope": "45 CFR46 applicability and consent provisions",
                 "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-A/part-46"
               },
               {
@@ -13567,7 +14072,7 @@
                 "name": "NIH DMS policy overview",
                 "period": "Policy effective 2023-01-25; applies by application / agreement dates",
                 "publisher": "National Institutes of Health",
-                "scope": "contextual",
+                "scope": "NIH DMS policy overview",
                 "url": "https://grants.nih.gov/policy-and-compliance/policy-topics/sharing-policies/dms/policy-overview"
               },
               {
@@ -13582,7 +14087,7 @@
                 "name": "WHO health AI governance overview",
                 "period": "2021 publication overview",
                 "publisher": "World Health Organization",
-                "scope": "contextual",
+                "scope": "WHO health AI governance overview",
                 "url": "https://www.who.int/publications/i/item/9789240029200"
               },
               {
@@ -13736,6 +14241,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "details": [
+                  "U.S. medical scientists, except epidemiologists (19-1042)"
+                ],
+                "id": "bls-table-1-2",
+                "limitation": "U.S. medical scientists, except epidemiologists (19-1042)",
+                "market": "US",
+                "name": "BLS Table 1.2 (19-1042)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "U.S. medical scientists, except epidemiologists (19-1042)",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "The associate or assistant researcher notice asks for a doctorate and lists research, teaching, project and supervision duties. This describes one employer."
+                ],
+                "id": "cn-shu-medical-research-position",
+                "limitation": "The associate or assistant researcher notice asks for a doctorate and lists research, teaching, project and supervision duties. This describes one employer.",
+                "market": "CN",
+                "name": "Shanghai University School of Medicine research vacancy",
+                "period": "2026",
+                "publisher": "Shanghai University",
+                "scope": "Shanghai University School of Medicine research vacancy",
+                "url": "https://jobs.shu.edu.cn/Ads/Ads?a=921ef790-92ec-4eac-b670-b2d098959bd3"
               }
             ]
           },
@@ -13817,17 +14348,12 @@
         "rows": [
           {
             "关键区别": {
-              "$item": "medical-scientists-except-epidemiologists.direction-comparison.adjacent-career-comparison-table.4",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
               "$item": "medical-scientists-except-epidemiologists.direction-comparison.adjacent-career-comparison-table.5",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
+            "更适合什么选择": "Explore this direction if you want to study patterns of disease and injury across populations.",
             "核心工作与产出": "Investigate the distribution and causes of disease and injury in populations, producing surveillance and epidemiological research reports.",
             "职业方向": "Epidemiologists"
           },
@@ -13858,7 +14384,18 @@
           {
             "关键区别": "Similar names do not make duties, qualifications, and authorization interchangeable.",
             "更适合什么选择": "Check qualifications and authorization chains individually.",
-            "核心工作与产出": "Biochemical / physical mechanisms, routine medical testing, and other directions each have official scopes. Check training and permissions separately",
+            "核心工作与产出": {
+              "$join": [
+                "Biochemical / physical mechanisms, routine medical testing, and other directions each have official scopes. Check training and permissions separately",
+                {
+                  "$item": "medical-scientists-except-epidemiologists.direction-comparison.adjacent-career-comparison-table.4",
+                  "block": "direction-comparison",
+                  "copy_key": "career.item.adjacent-career-comparison-table",
+                  "type": "prose"
+                }
+              ],
+              "separator": "\n"
+            },
             "职业方向": "Associated and related occupations"
           }
         ],
@@ -13923,7 +14460,7 @@
             }
           }
         ],
-        "answer": "Editorial tool trial suggestion: Give a tool only this page's four fictional rows to show calculations and limitations, then manually recalculate 5 / 3 / 2 and reject causal overstatement. O*NET duties and software mentions in recruitment supply task background only. ILO2025 global task exposure and the WHO2021 health AI governance overview do not establish institutional adoption rates, layoff proportions, or replacement dates for this occupation. For actual research, first check institutional tool permissions and data rules. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
+        "answer": "For a paper tool exercise, use the fictional MS-15 materials only. Check the source log and distinguish a documented comparison from an unsupported causal claim. O*NET duties and software mentions in recruitment supply task background only. ILO2025 global task exposure and the WHO2021 health AI governance overview do not establish institutional adoption rates, layoff proportions, or replacement dates for this occupation. For actual research, first check institutional tool permissions and data rules. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "O*NET19-1042 summary",
@@ -14006,7 +14543,7 @@
             "使用限制": "Overall employment projection, not AI attribution",
             "来源": "BLS exact occupational projection",
             "研究对象": "2025–2035 U.S. 19-1042",
-            "结论": "181,000 → 203,700; official growth 13%; average annual openings 10,500",
+            "结论": "181,000 → 203,700; 12.6% (BLS Table 1.2; OOH rounds to 13%); average annual openings 10,500",
             "链接": "https://www.bls.gov/ooh/life-physical-and-social-science/medical-scientists.htm"
           },
           {
@@ -14020,14 +14557,14 @@
             "使用限制": "Overall employment projection covering the same period as BLS, not AI attribution or personal probabilities",
             "来源": "O*NET current national trends",
             "研究对象": "2025–2035 U.S. 19-1042",
-            "结论": "181,000 to 203,700; 13%; net increase 22,700; average annual openings 10,500",
+            "结论": "181,000 to 203,700; 12.6% (BLS Table 1.2; OOH rounds to 13%); net increase 22,700; average annual openings 10,500",
             "链接": "https://www.onetonline.org/link/localtrends/19-1042.00"
           }
         ],
         "heading": "Medical scientists' research tasks and AI boundaries",
         "method_cards": [
           {
-            "含义": "Editorial plan: Tools assist with calculations, comparison, or drafts for this page's fictional exercise. For actual research, first confirm tool capabilities and institutional permissions; no claim of widespread adoption is made.",
+            "含义": "Editorial plan: Tools can help organize the two fictional records or flag missing method notes for review. For actual research, first confirm tool capabilities and institutional permissions; no claim of widespread adoption is made.",
             "概念": "Potential task-level assistance"
           },
           {
@@ -14053,13 +14590,13 @@
             "问题": "Are software percentages adoption rates?"
           },
           {
-            "回答": "Four editor-created fictional nonrandom rows describe only 5 / 3 / 2 and cannot establish efficacy",
+            "回答": "A comparison can be documented without establishing cause and effect. MS-15 only checks two documentation conditions; it contains no clinical evidence.",
             "来源": "Listed occupational sources; application judgments are editorial suggestions",
             "链接": "https://www.onetonline.org/link/summary/19-1042.00",
-            "问题": "Can the exercise's difference of 2 establish causation?"
+            "问题": "Can a documented comparison establish cause and effect?"
           },
           {
-            "回答": "13% is an overall occupational projection, not AI attribution",
+            "回答": "12.6% (BLS Table 1.2; OOH rounds to 13%) is an overall occupational projection, not AI attribution",
             "来源": "Listed occupational sources; application judgments are editorial suggestions",
             "链接": "https://www.bls.gov/ooh/life-physical-and-social-science/medical-scientists.htm",
             "问题": "Is projected growth an AI effect?"
@@ -14077,7 +14614,7 @@
             "问题": "Can a tool grant research permission?"
           },
           {
-            "回答": "Use only the fictional exercise and recalculate manually; check institutional permissions and applicable rules separately for actual research",
+            "回答": "Use only fictional records and verify the comparison requirements against the source log; check institutional permissions and applicable rules separately for actual research",
             "来源": "Listed occupational sources; application judgments are editorial suggestions",
             "链接": "https://www.onetonline.org/link/summary/19-1042.00",
             "问题": "How can a tool exercise begin?"
@@ -14198,7 +14735,7 @@
         },
         "competence_ladder": [
           {
-            "description": "Check questions, data sources, and usage conditions; the teaching exercise uses fictional numbers only",
+            "description": "Check questions, data sources, and usage conditions; the teaching exercise uses fictional records only",
             "stage": "Check inputs"
           },
           {
@@ -14295,6 +14832,12 @@
               "item": "medical-scientists-except-epidemiologists.source-register.published.1"
             },
             "scope": "NIH-covered scientific data research; check policy dates / sharing restrictions"
+          },
+          {
+            "href": "https://jobs.shu.edu.cn/Ads/Ads?a=921ef790-92ec-4eac-b670-b2d098959bd3",
+            "id": "cn-shu-medical-research-position",
+            "label": "Shanghai University School of Medicine research vacancy",
+            "scope": "The associate or assistant researcher notice asks for a doctorate and lists research, teaching, project and supervision duties. This describes one employer."
           }
         ],
         "tracks": [
@@ -14958,12 +15501,12 @@
           },
           {
             "指标": "Employment (2025 → 2035)",
-            "数值": "181,000 → 203,700 employed",
+            "数值": "181,000 jobs in 2025; 203,700 projected in 2035",
             "说明": "BLS overall employment projection, not AI attribution; does not represent current recruitment or personal probabilities"
           },
           {
             "指标": "Employment growth and net increase (2025–2035)",
-            "数值": "Official growth 13%; net increase 22,700 employed",
+            "数值": "12.6% (BLS Table 1.2; OOH rounds to 13%); net gain of 22,700 jobs",
             "说明": "BLS overall employment projection, not AI attribution; does not represent current recruitment or personal probabilities"
           },
           {
@@ -15017,7 +15560,7 @@
           }
         ],
         "factors_heading": "Factors affecting actual offers",
-        "growth": "13% (2025–2035); not AI attribution or a personal guarantee",
+        "growth": "12.6% projected growth, 2025–2035",
         "heading": "Boundaries of U.S. Wage and Employment Data for Medical Scientists, Except Epidemiologists",
         "industry_heading": "Industry and job differences",
         "industry_period": "May 2025",
@@ -15126,7 +15669,7 @@
           "type": "prose"
         },
         "summary": "May suit people willing to form testable questions, design and conduct research, uphold data and ethical standards amid uncertainty, and invest in papers and grant work over the long term.",
-        "title": "Who may be suited to medical science?"
+        "title": "Who may enjoy being a medical scientist, except in epidemiology?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -15160,7 +15703,7 @@
             "label": "Employment projections and statistical boundaries"
           },
           {
-            "href": "#career-visual-group-market-signals",
+            "href": "#career-visual-group-direction-comparison",
             "label": "Compare related career directions"
           }
         ],
@@ -15224,12 +15767,12 @@
           {
             "geography": "United States, nationwide",
             "horizon": "2025—2035",
-            "interpretation": "Overall employment projection, not AI attribution; explain net increase 22,700 and official growth 13% separately",
+            "interpretation": "Overall employment projection, not AI attribution; explain net increase 22,700 and 12.6% (BLS Table 1.2; OOH rounds to 13%) separately",
             "limitation": "Exact occupational statistics do not establish personal probabilities; projections are not AI attribution",
             "metric": "Employment size and change",
             "occupation_scope": "19-1042 Medical Scientists, Except Epidemiologists",
             "source_id": "bls",
-            "value": "Approximately 181,000 employed in 2025, projected approximately 203,700 in 2035"
+            "value": "181,000 jobs in 2025; 203,700 projected in 2035"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15352,13 +15895,13 @@
             "alternate_value": null,
             "label": "U.S. employment (2025)",
             "secondary_value": null,
-            "value": "181,000 employed (this occupation)"
+            "value": "181,000 jobs in this occupation"
           },
           {
             "alternate_value": null,
             "label": "U.S. growth (2025–2035)",
             "secondary_value": null,
-            "value": "Officially 13%; net increase 22,700; not a personal hiring guarantee"
+            "value": "Officially 12.6% (BLS Table 1.2; OOH rounds to 13%); net increase 22,700; not a personal hiring guarantee"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15433,7 +15976,7 @@
             "watchout": "Type labels do not establish research collaboration or ethical judgment ability."
           },
           {
-            "answer": "Look at exercise calculations and methodological limitations; do not set an occupational IQ threshold",
+            "answer": "Review how you tracked the evidence and named the comparison limits in MS-15. This does not establish an IQ threshold for the occupation.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest trial and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
@@ -15543,11 +16086,11 @@
         "heading": "Fit signals, personality tool boundaries, and practical use",
         "questions": [
           {
-            "answer": "60-minute paper exercise (editor-created fiction): Four nonrandom observational records A1: X=1, Y=3; A2: X=3, Y=7; B1: X=1, Y=2; B2: X=3, Y=4. X and Y are unitless, not patients, samples, or clinical measures. Calculate the two groups' mean Y and mean difference A minus B, and decide whether you can state that A causes Y to rise. Retain original values and calculations, two limitations, and required additional design information. There are no missing values; do not collect data or calculate significance or power.",
+            "answer": "Use only the fictional MS-15 exercise in section 09 and the separate seven-day W-MS case. Neither uses participant records, real clinical results or an experiment.",
             "question": "How should I begin?"
           },
           {
-            "answer": "Reference answer: A mean (3+7)/2=5, B mean (2+4)/2=3, A minus B=2. Only these four fictional records can be described. Grouping is nonrandom, each group has only 2 records, and sampling, temporal order, and confounding are unspecified; causation, efficacy, and significance cannot be established. Request grouping rules, measurement meanings, and study design without inventing conditions. Spend 10 minutes reading, 20 minutes calculating, 20 minutes writing limitations and requests, and 10 minutes recalculating with the answer hidden and recording corrections.",
+            "answer": "For each fictional record, recheck whether the outcome definition matches and whether a method version is recorded. Then compare your handoff with the answer key in section 09 and verify who approves a result.",
             "question": "How should the answer be checked?"
           },
           {
@@ -15555,7 +16098,7 @@
             "question": "Does the paper exercise establish competence?"
           },
           {
-            "answer": "Public availability does not automatically confer permission; this exercise uses fictional numbers only",
+            "answer": "Public availability does not automatically confer permission; this exercise uses fictional records only",
             "question": "Can public data be used?"
           },
           {
@@ -15567,7 +16110,7 @@
             "question": "Is postdoctoral work universally required?"
           },
           {
-            "answer": "Retain original values, 5 / 3 / 2, limitations, design requests, and corrected drafts",
+            "answer": "Keep the fictional source log, your initial comparison notes, the open verification question and a revised version. Label it as a paper practice sample and use no real participant records.",
             "question": "How should the work sample be organized?"
           },
           {
@@ -15717,7 +16260,7 @@
             "type": "prose"
           },
           "source": "O*NET19-1042; BLS exact occupation; National Bureau of Statistics related industry means; rules within applicable scope",
-          "updated_at": "Accessed in this round on 2026-10-11"
+          "updated_at": "Reviewed November 9, 2026"
         },
         "note": "Evidence supports scoped judgments about medical scientists, except epidemiologists, only within the labeled market and period. It does not guarantee personal income, hiring, or fit.",
         "secondary_links": [
@@ -15729,7 +16272,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Explore MBTI in English"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -15739,7 +16282,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Explore the Big Five in English"
+            "label": "Big Five personality test"
           },
           {
             "href": {
@@ -15749,7 +16292,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Explore MBTI in Chinese"
+            "label": "Clinical laboratory technologists and technicians"
           },
           {
             "href": {
@@ -15759,7 +16302,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Explore the Big Five in Chinese"
+            "label": "Clinical research coordinators"
           }
         ]
       },
@@ -15858,6 +16401,27 @@
         "id": "medical-scientists-except-epidemiologists.path.recruitment-sample.8",
         "location": "entry_decisions",
         "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -15985,38 +16549,38 @@
       },
       {
         "derivation": null,
-        "display_value": "165,300 employed (2024)",
+        "display_value": "181,000 jobs — U.S. medical scientists, except epidemiologists (19-1042)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "2024 employment size",
-        "occupation_scope": "O*NET 19-1042.00 occupation-specific scope",
-        "period": "2024; accessed 2026-09-25",
+        "measure": "181,000 jobs",
+        "occupation_scope": "U.S. medical scientists, except epidemiologists (19-1042)",
+        "period": "2025",
         "source_refs": [
-          "onet-old-trends"
+          "bls-table-1-2"
         ]
       },
       {
-        "derivation": "O*NET national employment trends page: approximately 9% projected growth during 2024–2034.",
-        "display_value": "Much faster than average (approximately 9%, 2024–2034)",
+        "derivation": null,
+        "display_value": "12.6% projected growth — U.S. medical scientists, except epidemiologists (19-1042)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Projected employment growth",
-        "occupation_scope": "O*NET 19-1042.00 occupation-specific scope",
-        "period": "2024–2034; accessed 2026-09-25",
+        "measure": "12.6% projected growth",
+        "occupation_scope": "U.S. medical scientists, except epidemiologists (19-1042)",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-old-trends"
+          "bls-table-1-2"
         ]
       },
       {
-        "derivation": "Includes replacement needs.",
-        "display_value": "Approximately 9,600 / year (2024–2034)",
+        "derivation": null,
+        "display_value": "10,500 projected annual openings — U.S. medical scientists, except epidemiologists (19-1042)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Projected openings (annual average)",
-        "occupation_scope": "O*NET 19-1042.00 occupation-specific scope",
-        "period": "2024–2034; accessed 2026-09-25",
+        "measure": "10,500 projected annual openings",
+        "occupation_scope": "U.S. medical scientists, except epidemiologists (19-1042)",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-old-trends"
+          "bls-table-1-2"
         ]
       },
       {
@@ -16062,31 +16626,31 @@
         "availability": "available",
         "fact_ref": "us-median",
         "key": "us_pay",
-        "label": "U.S. wage reference"
+        "label": "U.S. 19-1042 annual wage median (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. 19-1042 projected job growth (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment"
+        "label": "U.S. 19-1042 jobs in 2025"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual openings"
+        "label": "U.S. 19-1042 projected annual openings (2025–2035)"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China wage reference"
+        "label": "Mainland China: exact occupational wage not verified"
       }
     ]
   },
@@ -16094,14 +16658,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Medical scientists, except epidemiologists (O*NET 19-1042.00), conduct clinical investigations and experimental research into human disease and health and analyze data. U.S. BLS median annual pay was $103,410 in 2025, with approximately 165,300 employed in 2024. Includes work context, risks, and entry paths."
+      "text": "Explore what medical scientists do, U.S. wage and jobs data, a mainland China research role, and a paper exercise on comparing evidence."
     },
     "title": {
       "availability": "available",
       "text": "Medical Scientists, Except Epidemiologists: Duties, U.S. Pay, and Entry"
     }
   },
-  "source_content_sha256": "e59d29cb811a196f8df792ca29f534112a17bb7637174ce75b422bb133201836",
+  "source_content_sha256": "39819e0e90bdbc014907d88f171bb70a0953e87a0cb2b3361269afa015fddecb",
   "subject": {
     "canonical_slug": "medical-scientists-except-epidemiologists",
     "name": "Medical Scientists, Except Epidemiologists",

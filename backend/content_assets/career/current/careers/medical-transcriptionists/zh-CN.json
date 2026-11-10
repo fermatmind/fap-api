@@ -149,6 +149,9 @@
       "item:medical-transcriptionists.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:medical-transcriptionists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:medical-transcriptionists.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13201,6 +13204,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两段录音对同一术语的读音不清，旧模板有一个看似匹配的词。保留时间点与待核标记，写给签审人。"
+            ]
+          },
+          "id": "medical-transcriptionists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "标记转录中的听写疑点",
+          "type": "notice"
         }
       ]
     },
@@ -15802,6 +15820,13 @@
         "id": "medical-transcriptionists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "medical-transcriptionists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15995,7 +16020,7 @@
       "text": "医疗文书转录员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "92c4a14bdbbf399d5f8dbade4ca406c45e473a1c32ba1ddf8974cf2bde7387c7",
+  "source_content_sha256": "74c6e5ad46a73ece0d4848797c6360b12097a418f8d2a1d974928f35e0c3c19a",
   "subject": {
     "canonical_slug": "medical-transcriptionists",
     "name": "医疗文书转录员",

@@ -1269,7 +1269,7 @@
         "status": "mapped"
       },
       "item:quality-control-inspectors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:quality-control-inspectors.path.interview-probation.1": {
         "status": "mapped"
@@ -23326,7 +23326,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use E1—E5 to independently review a set of fictional sampling inspection records and write an accept or reject recommendation, seal it first and then compare with the reference; observe whether you can cite the original records, recalculate readings and tolerance direction, check gauge status, and give specific rework feedback."
+              "Under 09 “Entry, qualifications, and career development,” try “QC-I01 | Inspect dimensions and document a hold.” Separate dimensions, appearance, and remeasurement. Record the lot status and handoff."
             ]
           },
           "id": "quality-control-inspectors.quick-decision.fit-decision-checklist.2",
@@ -26954,12 +26954,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET-SOC 51-9061.00 does not automatically map to Chinese occupational codes, qualifications, or wages; the actual responsibility of a Chinese target position should be checked against inspection items, methods, and acceptance authorization."
+              "Mainland quality inspectors (6-31-03-05) overlap in sampling, gauge or visual checks, results, and quality marks. The category can also include in-line instrumental checks. Verify the assignment and authority at the employer."
             ]
           },
           "id": "quality-control-inspectors.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "editor"
+            "editor",
+            "cn-qc-class"
           ],
           "type": "prose"
         },
@@ -27201,7 +27202,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Growth of 3%, a net increase of about 15,200 people.; BLS 2025—2035 occupational projections and characteristics table | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "Growth of 3% (rounded from 2.5%), a net increase of about 15,200 people.; BLS 2025—2035 occupational projections and characteristics table | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "quality-control-inspectors.us-salary.career-snapshot-secondary-locale.21",
@@ -27215,7 +27216,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The exact EP table change rate is 2.5%, while OOH and the overview on this page round it to 3%; the net increase of 15,200 and the annual average openings of 66,700 are different measures.; BLS EP 2025—2035 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "The exact EP table change rate is 2.5%, while OOH and the overview on this page round it to 3% (rounded from 2.5%); the net increase of 15,200 and the annual average openings of 66,700 are different measures.; BLS EP 2025—2035 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "quality-control-inspectors.us-salary.career-snapshot-secondary-locale.22",
@@ -27257,7 +27258,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This section explains only the wage and employment basis of the US SOC 51-9061 combined occupation: wages are May 2025 and projections are 2025—2035, so the periods differ; do not treat a combined-occupation value as a narrower single-occupation value, and do not convert it into Chinese pay or personal take-home income. The US SOC 51-9061 combined occupation is projected to grow 3% in 2025—2035, with an official net increase of about 15,200 people and about 66,700 annual average openings (including replacement); US statistics only, with no projection of Chinese employment. The US SOC 51-9061 combined occupation May 2025 median is 48,570 US dollars per year (23.35 US dollars per hour); it is not a narrower single-occupation value and cannot be converted into Chinese pay or personal take-home income."
+              "This section explains only the wage and employment basis of the US SOC 51-9061 combined occupation: wages are May 2025 and projections are 2025—2035, so the periods differ; do not treat a combined-occupation value as a narrower single-occupation value, and do not convert it into Chinese pay or personal take-home income. The US SOC 51-9061 combined occupation is projected to grow 3% (rounded from 2.5%) in 2025—2035, with an official net increase of about 15,200 people and about 66,700 annual average openings (including replacement); US statistics only, with no projection of Chinese employment. The US SOC 51-9061 combined occupation May 2025 median is 48,570 US dollars per year (23.35 US dollars per hour); it is not a narrower single-occupation value and cannot be converted into Chinese pay or personal take-home income."
             ]
           },
           "id": "quality-control-inspectors.us-salary.career-snapshot-secondary-locale.25",
@@ -27271,7 +27272,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The US SOC 51-9061 combined occupation May 2025 wage median is 48,570 US dollars per year, with 3% projected growth in 2025—2035; these two figures come from a wage survey and an employment projection respectively, with different bases and periods."
+              "The US SOC 51-9061 combined occupation May 2025 wage median is 48,570 US dollars per year, with 3% (rounded from 2.5%) projected growth in 2025—2035; these two figures come from a wage survey and an employment projection respectively, with different bases and periods."
             ]
           },
           "id": "quality-control-inspectors.us-salary.career-snapshot-secondary-locale.26",
@@ -27370,7 +27371,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The US SOC 51-9061 combined occupation is projected to grow 3% in 2025—2035, with an official net increase of about 15,200 people and about 66,700 annual average openings (including replacement); US statistics only, with no projection of Chinese employment."
+              "The US SOC 51-9061 combined occupation is projected to grow 3% (rounded from 2.5%) in 2025—2035, with an official net increase of about 15,200 people and about 66,700 annual average openings (including replacement); US statistics only, with no projection of Chinese employment."
             ]
           },
           "id": "quality-control-inspectors.us-salary.career-snapshot-secondary-locale.33",
@@ -27682,31 +27683,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Weighing, measuring, checking, and sampling recorders",
@@ -28105,7 +28106,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This occupation does not use IQ tests as a threshold, but it requires numerical checking and logical ordering (tolerance upper and lower limits, units, sample size), which is a work method that can be practiced."
+              "The occupational sources and job sample here do not list an IQ score. Check each employer’s requirements. Use the exercise to observe how you check numbers, document findings, and hand them off."
             ]
           },
           "id": "quality-control-inspectors.fit.personality-fit-block.18",
@@ -28979,7 +28980,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "E2 the micrometer is valid until 2026-05-31, and the outer diameter in E3 was measured on 2026-06-02; the calibration expiry and the use of the reading must be checked, and the scenario does not say that the log registered it as valid."
+              "Check gauge ID, range, and current status before inspection. Preserve the original reading and arrange a recheck when evidence is missing."
             ]
           },
           "id": "quality-control-inspectors.risk.career-risk-cards.14",
@@ -29093,7 +29094,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "E1 the sample log-in and batch record numbers are not fully consistent; listing 01 to 03 does not confirm the actual sampling quantity, the traceability relationship, or that the whole batch is acceptable, and unknown items are listed separately."
+              "Tie each inspected item to its lot and record the uninspected scope separately."
             ]
           },
           "id": "quality-control-inspectors.risk.career-risk-cards.22",
@@ -29150,7 +29151,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Scenario: the draft acceptance recommendation in E5 says \"recommend acceptance\", but the approval column is empty."
+              "Explain the reason for a hold, remeasurement, or disposition referral. Record approval status separately."
             ]
           },
           "id": "quality-control-inspectors.risk.career-risk-cards.26",
@@ -29425,14 +29426,14 @@
                 "values": [
                   "Education and experience requirements",
                   "Education and experience in recruitment requirements; O*NET Job Zone 1-2 and the BLS typical entry-level education are a high school diploma or equivalent, with related experience usually not required; this is the typical US background, not a uniform Chinese threshold, and does not represent any single employer's combination of requirements.",
-                  "How to check: match each requirement in the target posting to a demonstrable ability or experience."
+                  "A Beijing Haochuang Ruitong inspector posting covers incoming and in-process checks, assembly process cards, and recording nonconforming items. It focuses on products and production records. Henan University of Technology lists one Tailiang Rice inspector opening, a food production example. Check the product and requirements on the original posting before applying them elsewhere."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
                   "Training and job-entry verification",
-                  "O*NET states that the occupation usually requires only a few days to one year of on-the-job training; the specific form and job-entry authorization vary with the employer and production line.",
+                  "O*NET Job Zone 1–2 is a preparation category. Separately, BLS lists moderate-term on-the-job training as typical for the broader 51-9061 group. Check requirements for the actual workstation.",
                   "How to check: confirm the employer's training arrangements, the mentoring approach, and the authorized scope for independent inspection."
                 ]
               },
@@ -29457,7 +29458,9 @@
           "id": "quality-control-inspectors.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "employer"
+            "employer",
+            "cn-haochuang-inspect",
+            "cn-tailiang-inspect"
           ],
           "title": "What evidence employers usually look at",
           "type": "cards"
@@ -29470,32 +29473,33 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and setup | all editorially designed fictional data",
-                  "You are a quality control inspector at the fictional company \"Hengchuan Precision Components\" and need to review the inspection records of sampling batch A-3307 and give an accept or reject recommendation. The following materials and values are entirely fictional and are not real inspection results or tolerance standards.",
-                  "E1 Sample log-in and batch record: A-3307 is divided into A-3307-01 to 03, and the inspection items are outer diameter, length, and appearance; the numbers in the log-in sheet and the batch record are not fully consistent. E2 Gauge and equipment log: the outer diameter micrometer calibration is valid until 2026-05-31, and the vernier caliper and the inspection platform are within their validity periods. E3 Original readings and specifications: outer diameter 20.03 mm (specification 20.00±0.05 mm), length 49.8 mm (specification 50.0±0.5 mm), appearance free of scratches; the outer diameter was measured on 2026-06-02. E4 Non-conformance record: one sample has an outer diameter of 20.11 mm, above the upper limit, which was registered but no handling was started, and the inconsistent sample identification is recorded as pending confirmation. E5 Acceptance recommendation and approval column: the draft says \"recommend acceptance\" and the approval column is empty."
+                  "Fictional inputs",
+                  "Use the records provided here.",
+                  "E1 | Fictional lot I-3307 contains 40 units. Sample IDs are 03, 11, 19, 27, and 35. Diameter specification is 20.00 ± 0.05 mm and the visual requirement is no scratches. E2 | Measurements were taken June 2. M1 calibration runs through June 30 and M2 calibration ran through May 31.",
+                  "E3 | Diameter readings in mm: 03: 20.03 (M1), 11: 20.11 (M1), 19: 19.98 (M2), 27: 20.05 (M1), 35: 20.02 (M1). E4 | 35 has a scratch. The other four visual records show no scratches. E5 | The lot location is recorded in the hold area. Release approval is absent."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task",
-                  "Check E1—E5 item by item and write out: which items are acceptable, which must not be accepted, which data are unusable, and the unconfirmed items and the approver that the acceptance recommendation should include.",
-                  "Do not add readings, tolerances, authorizations, or customer information that the scenario does not give; list unknown items separately."
+                  "Task and deliverable",
+                  "Submit a five-row inspection log with separate diameter, appearance, and remeasurement status. Record the lot status, uninspected units, and handoff owner.",
+                  "List evidence gaps. Do not invent readings or approvals."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference deliverable",
-                  "Acceptable: the outer diameter 20.03 mm and the length 49.8 mm are within specification, and the appearance is free of scratches. Must not be accepted: one outer diameter of 20.11 mm is above the upper limit of 20.05 mm, which should be judged non-conforming and trigger non-conformance handling. Unusable data: the outer diameter was measured on 2026-06-02, while the micrometer calibration expired on 2026-05-31, so recalibration and remeasurement are required.",
-                  "The acceptance recommendation must state that the sample identification is pending confirmation and the non-conformance handling is not complete, and it must be approved by a role authorized by the organization; the inspector submits only a recommendation."
+                  "Before checking your work",
+                  "Save your draft before checking the key after the seven-day plan.",
+                  "You need no equipment, physical samples, or partner."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries",
-                  "This exercise does not involve real inspection, sample retention, or acceptance; actual inspection, decisions, rejection, and isolation follow the quality system and authorization of the organization concerned. If you cannot judge, you are allowed to write \"insufficient to judge\" and explain what evidence is missing."
+                  "Authority boundaries",
+                  "This is a paper exercise. Do not operate equipment, approve release, or restart production."
                 ]
               }
             ]
@@ -29505,7 +29509,7 @@
             "editor",
             "onet"
           ],
-          "title": "Entry exercise: a complete sampling record review task (fictional materials)",
+          "title": "QC-I01 | Inspect dimensions and document a hold",
           "type": "cards"
         },
         {
@@ -29516,33 +29520,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Scope comparison package",
-                  "Use E1—E3 to fill in a comparison table of sample identification, inspection items, gauges, and specification versions, marking unknown items and questions that need clarification.",
-                  "How to review: from this table alone, another person can judge which data item is unusable and why."
+                  "Scope and evidence sheet",
+                  "Record the subject and scope from E1.",
+                  "Verify against the supplied inputs."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Independent review statement",
-                  "For E3, write out the reading, the tolerance direction, and the decision conclusion item by item, and note the gauge status.",
-                  "How to review: the conclusion is consistent with the original readings and the specification version and states the basis."
+                  "Comparison record",
+                  "Use E3 to make the comparison and show the denominator or limits.",
+                  "Verify against the supplied inputs."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Non-conformance and escalation record",
-                  "Use E4 to write a non-conformance record: event, impact, open questions, and escalation target; the record can be traced back to the sample and gauge, and the disposition responsibility is clear.",
-                  "How to review: the isolation scope and the next step can be seen."
+                  "Exception handoff",
+                  "Use E4 and E5 to record open items, the proposed disposition, and its owner.",
+                  "Verify against the supplied inputs."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Draft acceptance recommendation",
-                  "Use E5 to write an acceptance recommendation listing acceptable items, items that must not be accepted, unconfirmed items, and the approver; no self-approval or signing on behalf of others may appear.",
-                  "How to review: the recommendation is consistent with the evidence and does not exceed authority."
+                  "Decision draft",
+                  "Submit a five-row inspection log with separate diameter, appearance, and remeasurement status. Record the lot status, uninspected units, and handoff owner.",
+                  "Verify against the supplied inputs."
                 ]
               }
             ]
@@ -29574,25 +29578,25 @@
               [
                 "Check sample identification and status",
                 "Whether inconsistency between the number and the handover can be found",
-                "Can point out the inconsistency and explain that isolation comes before reporting",
+                "Identify the record, version, and scope.",
                 "A single employer's questioning approach cannot be generalized into a uniform industry exam"
               ],
               [
                 "Confirming calibration status",
                 "Whether an expired gauge calibration can be identified",
-                "Can point out that the calibration has expired and require recalibration and remeasurement",
+                "Explain whether the evidence supports a decision.",
                 "Gauge and calibration requirements vary with the laboratory and production line system"
               ],
               [
                 "Judging tolerance direction",
                 "Whether the direction of the tolerance upper and lower limits can be judged",
-                "Can read the specification and judge above the upper limit and below the lower limit",
+                "Show the calculation or specification comparison.",
                 "Limits and specifications vary with product and regulation"
               ],
               [
                 "Acceptance and rejection boundary",
                 "Whether a recommendation can be distinguished from an approval",
-                "Can point out that the approval column is empty and acceptance must be decided by an authorized role",
+                "Name the disposition authority and reviewer.",
                 "The scope of authority is determined by the organization and cannot be carried over from assumptions made elsewhere"
               ]
             ]
@@ -29613,50 +29617,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Read the materials and write a role boundary card",
-                  "Read E1—E5 and write a role boundary card: what you may do (measure and record per method), what must be reviewed (decisions and handling of out-of-tolerance items), and prohibited actions (approving acceptance on your own); confirm that you will not do real inspection or release."
+                  "Day 1",
+                  "Read E1–E5 and identify records and authority."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Use E1 to complete a sample log-in check sheet",
-                  "Use E1 to check the sample numbers, inspection items, and quantities, marking inconsistencies and pending items."
+                  "Day 2",
+                  "Record the subject and scope from E1."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Use E2 to check gauge status",
-                  "Use E2 to check the gauge calibration dates and valid status, and write down which gauge's reading cannot be used for a decision."
+                  "Day 3",
+                  "Check the status and evidence in E2."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Use E3 to complete the reading and tolerance comparison",
-                  "Write out the reading, tolerance direction, and conclusion item by item, marking items above the upper limit and items with unusable data."
+                  "Day 4",
+                  "Use E3 to make the comparison and show the denominator or limits."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Use E4 to write a non-conformance record",
-                  "Use E4 to write a non-conformance record: event, impact, open questions, and escalation target."
+                  "Day 5",
+                  "Use E4 and E5 to record open items, the proposed disposition, and its owner."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Use E5 to write a draft acceptance recommendation",
-                  "Write out acceptable items, items that must not be accepted, unconfirmed items, and the approver; do not approve on your own."
+                  "Day 6",
+                  "Finish and save your first draft with the evidence behind your judgments. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Compare with the reference and revise",
-                  "Revise the first six days' output against the reference deliverable, and record the step most easily missed and the practice step for next time."
+                  "Day 7",
+                  "After saving your day 6 draft, open “QC-I01 answer key and rubric (open on day 7)” in the FAQ. Apply the four rubric checks and record one revision and its reason."
                 ]
               }
             ]
@@ -29665,7 +29669,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Seven-day experience: complete one sampling record review loop with fictional materials",
+          "title": "Seven-day practice and self-check",
           "type": "timeline"
         },
         {
@@ -29673,8 +29677,8 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Items to check in the seven-day judgment: occupational scope (SOC 51-9061 combined-occupation proxy), employer requirements, education and training, local qualifications, and supervised tasks.",
-              "Use \"which step most needs external confirmation\" as the judgment point: sample identification, gauge status, and acceptance authorization usually need organizational confirmation.",
+              "Separate dimensional, visual, and gauge evidence.",
+              "Identify the records needed for review and the sampling scope.",
               "Distinguish verifiable facts from editorial judgments: readings and tolerances are verifiable facts, while fit is an editorial judgment; conclusions must point back to the raw data.",
               "Investment estimate: 30—60 minutes per day, mainly reading materials and recalculating, with no need to buy gauges or equipment.",
               "If you keep getting stuck at the same step during the seven days (such as judging tolerance direction), list it as the priority practice item for the next step.",
@@ -29686,7 +29690,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Judgment after seven days and the investment estimate",
+          "title": "Submission and review checklist",
           "type": "list"
         },
         {
@@ -29800,13 +29804,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "The editorial suggestion is to read the current target posting and check the inspection items, shifts, gauges, duties, and authorization; this page obtained no current Chinese recruitment sample and does not claim which conditions postings commonly list.",
-              "This page obtained no verifiable current Chinese recruitment sample and retains the gap; do not infer uniform industry conditions from a single posting."
+              "A Beijing Haochuang Ruitong inspector posting covers incoming and in-process checks, assembly process cards, and recording nonconforming items. It focuses on products and production records. Henan University of Technology lists one Tailiang Rice inspector opening, a food production example. Check the product and requirements on the original posting before applying them elsewhere."
             ]
           },
           "id": "quality-control-inspectors.path.recruitment-sample.1",
           "source_refs": [
-            "editor"
+            "editor",
+            "cn-haochuang-inspect",
+            "cn-tailiang-inspect"
           ],
           "title": "Boundaries of use for public recruitment samples",
           "type": "notice"
@@ -31110,7 +31115,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The US SOC 51-9061 combined occupation is projected to grow 3% in 2025—2035 (a net increase of about 15,200 people), with about 66,700 annual average openings (including replacement); the wage median of 48,570 US dollars per year is on the May 2025 basis, and the two have different bases and periods. No exact wage for this occupation was obtained for China."
+              "The US SOC 51-9061 combined occupation is projected to grow 3% (rounded from 2.5%) in 2025—2035 (a net increase of about 15,200 people), with about 66,700 annual average openings (including replacement); the wage median of 48,570 US dollars per year is on the May 2025 basis, and the two have different bases and periods. No exact wage for this occupation was obtained for China."
             ]
           },
           "id": "quality-control-inspectors.market-signals.market-signal-card.8",
@@ -31154,7 +31159,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The 3% growth is an official projection, not a promise; net increase, growth rate, and annual average openings are three different measures."
+              "The 3% (rounded from 2.5%) growth is an official projection, not a promise; net increase, growth rate, and annual average openings are three different measures."
             ]
           },
           "id": "quality-control-inspectors.market-signals.market-signal-card.11",
@@ -31211,7 +31216,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Growth 3%, net increase about 15,200 people"
+              "Growth 3% (rounded from 2.5%), net increase about 15,200 people"
             ]
           },
           "id": "quality-control-inspectors.market-signals.market-signal-card.15",
@@ -31835,61 +31840,98 @@
                 "answer": "Inspect, test, or measure raw materials, parts, or finished products per drawings, specifications, and sampling requirements, decide accept or reject after comparing with tolerances, mark status, and record data; isolate and report non-conformances. O*NET 51-9061.00 is on the US basis, and actual duties are determined by position authorization.",
                 "id": "quality-control-inspectors.faq.1",
                 "question": "What does a quality control inspector do every day?",
-                "question_key": "career.faq.quality-control-inspectors.daily-work"
+                "question_key": "career.faq.quality-control-inspectors.daily-work",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "Quality control inspectors focus on inspection and conformity decisions with established methods and specifications; weighing, measuring, checking, and sampling recorders focus on measurement and records and generally do not make conformity decisions, so the objects and responsibilities differ.",
+                "answer": "Inspectors often submit inspection and nonconformance records; lab analysts submit test results and deviation documentation; systems managers oversee rules, review, and follow-up across processes. Exact authority varies by employer and industry.",
                 "id": "quality-control-inspectors.faq.2",
                 "question": "How is a quality control inspector different from adjacent positions?",
-                "question_key": "career.faq.quality-control-inspectors.comparison"
+                "question_key": "career.faq.quality-control-inspectors.comparison",
+                "source_refs": [
+                  "onet",
+                  "editor",
+                  "cn-qc-class"
+                ]
               },
               {
-                "answer": "Look at observable behavior: whether you can follow methods, record truthfully, and stop use and escalate when gauges are unreliable; E1—E5 exercises and the O*NET RCI interest can be used to check, and assessments or a single performance cannot determine employment or fit.",
+                "answer": "Key: the interval is 19.95–20.05 mm. Both checks pass for 03 and 27. The diameter of 11 is out of tolerance. The diameter of 35 passes but it is scratched. Remeasure 19 using a valid gauge. The other 35 units were not inspected. Keep the lot on hold and refer remeasurement and disposition to authorized staff.\n\nScore each item 0–2: tolerance and boundary, the two defect types, gauge validity and unknown scope, and hold handoff. Award 2 for complete and traceable, 1 for partial, and 0 for missing evidence or exceeding authority.",
                 "id": "quality-control-inspectors.faq.3",
-                "question": "How do I judge whether I am suited to being a quality control inspector?",
-                "question_key": "career.faq.quality-control-inspectors.fit"
+                "question": "QC-I01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.quality-control-inspectors.fit",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "The research supports that specification and record text tasks are more affected and does not support replacement of the whole occupation; ILO, GPTs are GPTs, and WEF provide potential exposure and employer expectations and cannot be used to calculate job replacement for this occupation.",
                 "id": "quality-control-inspectors.faq.4",
                 "question": "Will AI reduce quality control inspector positions?",
-                "question_key": "career.faq.quality-control-inspectors.ai-impact"
+                "question_key": "career.faq.quality-control-inspectors.ai-impact",
+                "source_refs": [
+                  "ilo",
+                  "editor"
+                ]
               },
               {
                 "answer": "This round did not obtain a national or city wage for the exact occupation quality control inspector in mainland China; the National Bureau of Statistics industry average wage serves only as statistical background, and US values are not used for conversion.",
                 "id": "quality-control-inspectors.faq.5",
                 "question": "What is the wage of quality control inspectors in mainland China?",
-                "question_key": "career.faq.quality-control-inspectors.china-pay"
+                "question_key": "career.faq.quality-control-inspectors.china-pay",
+                "source_refs": [
+                  "nbs"
+                ]
               },
               {
                 "answer": "The US SOC 51-9061 combined occupation May 2025 median of 48,570 US dollars per year is the midpoint of the distribution, not entry-level income; the 10th percentile 35,510 and the 90th percentile 77,860 also do not correspond to job grades.",
                 "id": "quality-control-inspectors.faq.6",
                 "question": "Does the US median wage represent entry-level income?",
-                "question_key": "career.faq.quality-control-inspectors.us-pay"
+                "question_key": "career.faq.quality-control-inspectors.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
               },
               {
-                "answer": "O*NET shows a typical entry-level education of a high school diploma or equivalent (70%), Job Zone 1-2, related work experience usually not required, and on-the-job training from a few days to one year; this is the typical US background, and China follows the target posting.",
+                "answer": "O*NET Job Zone 1–2 is a preparation category. Separately, BLS lists moderate-term on-the-job training as typical for the broader 51-9061 group. Check requirements for the actual workstation. A Beijing Haochuang Ruitong inspector posting covers incoming and in-process checks, assembly process cards, and recording nonconforming items. It focuses on products and production records.",
                 "id": "quality-control-inspectors.faq.7",
                 "question": "What education and experience are needed to enter the field?",
-                "question_key": "career.faq.quality-control-inspectors.education-path"
+                "question_key": "career.faq.quality-control-inspectors.education-path",
+                "source_refs": [
+                  "bls",
+                  "onet",
+                  "cn-haochuang-inspect"
+                ]
               },
               {
                 "answer": "This round did not verify a uniform mandatory qualification certificate in China; O*NET and BLS describe typical US education and training. Training proof, hiring eligibility, and acceptance approval authority are three different things, and a certificate does not equal signing authority.",
                 "id": "quality-control-inspectors.faq.8",
                 "question": "Do I need to take any certification exams?",
-                "question_key": "career.faq.quality-control-inspectors.credentials"
+                "question_key": "career.faq.quality-control-inspectors.credentials",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
-                "answer": "Six editorial risks: expired gauge calibration, using an outdated specification, sample identification and sampling errors, exceeding rejection authority, hazardous energy exposure, and untraceable records. Taking E1—E5 as an example, the reading after the micrometer calibration expired on 2026-05-31 is unusable, and the outer diameter of 20.11 mm exceeds the upper limit of 20.05 mm.",
+                "answer": "Check the drawing version, gauge status, sample scope, and authority. Preserve the original value when evidence is missing and arrange a recheck or hold with the authorized person.",
                 "id": "quality-control-inspectors.faq.9",
                 "question": "What is the most error-prone part of this work?",
-                "question_key": "career.faq.quality-control-inspectors.risk-boundary"
+                "question_key": "career.faq.quality-control-inspectors.risk-boundary",
+                "source_refs": [
+                  "onet",
+                  "editor"
+                ]
               },
               {
-                "answer": "The US SOC 51-9061 combined occupation is projected to grow 3% in 2025—2035, with a net increase of about 15,200 people and about 66,700 annual average openings (including replacement); openings do not equal net additions or the number of hires in China. Adjacent occupations such as calibration technologists and technicians, mechanical engineering technologists and technicians, and quality control systems managers can be explored.",
+                "answer": "The US SOC 51-9061 combined occupation is projected to grow 3% (rounded from 2.5%) in 2025—2035, with a net increase of about 15,200 people and about 66,700 annual average openings (including replacement); openings do not equal net additions or the number of hires in China. Adjacent occupations such as calibration technologists and technicians, mechanical engineering technologists and technicians, and quality control systems managers can be explored.",
                 "id": "quality-control-inspectors.faq.10",
                 "question": "What is the outlook for this occupation? Where can I move?",
-                "question_key": "career.faq.quality-control-inspectors.outlook-transition"
+                "question_key": "career.faq.quality-control-inspectors.outlook-transition",
+                "source_refs": [
+                  "ep",
+                  "editor"
+                ]
               }
             ]
           },
@@ -31899,7 +31941,11 @@
             "onet",
             "bls",
             "ep",
-            "nbs"
+            "nbs",
+            "cn-qc-class",
+            "ilo",
+            "onet-wages",
+            "cn-haochuang-inspect"
           ],
           "type": "faq"
         },
@@ -31994,13 +32040,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "path",
@@ -32045,7 +32091,7 @@
               {
                 "accessed_at": "2026-09-30",
                 "details": [
-                  "2025 median wage 48,570 US dollars per year (23.35 US dollars per hour); 2025 employment 602,000; 2025—2035 growth 3%, net increase 15,200, annual average openings about 66,700.",
+                  "2025 median wage 48,570 US dollars per year (23.35 US dollars per hour); 2025 employment 602,000; 2025—2035 growth 3% (rounded from 2.5%), net increase 15,200, annual average openings about 66,700.",
                   "Typical entry-level education is a high school diploma or equivalent, related work experience None, and on-the-job training of medium duration."
                 ],
                 "evidence_type": "official occupational outlook and wage statistics",
@@ -32066,7 +32112,7 @@
                 ],
                 "evidence_type": "official employment projections",
                 "id": "ep",
-                "limitation": "51-9061 row: base year 602,000, 2035 617,200, net increase 15,200, growth 3%, annual average openings about 66,700; a different program from OEWS survey employment.",
+                "limitation": "51-9061 row: base year 602,000, 2035 617,200, net increase 15,200, growth 3% (rounded from 2.5%), annual average openings about 66,700; a different program from OEWS survey employment.",
                 "market": "United States",
                 "name": "BLS 2025—2035 employment projections and occupational characteristics table (table 1.2)",
                 "period": "2025—2035",
@@ -32226,7 +32272,7 @@
                 ],
                 "evidence_type": "editorial design and interpretation",
                 "id": "editor",
-                "limitation": "The fictional company \"Hengchuan Precision Components\", sampling batch A-3307, and materials E1—E5 are editorial designs, not employer samples, official question banks, real inspection records, or acceptance authorizations.",
+                "limitation": "The fictional company \"Hengchuan Precision Components\", sampling batch I-3307, and materials E1—E5 are editorial designs, not employer samples, official question banks, real inspection records, or acceptance authorizations.",
                 "market": "Does not represent the real market",
                 "name": "Editorially designed quality control paper inspection exercises and checking suggestions",
                 "period": "2026-09-30; the exercise scenario is entirely fictional",
@@ -32442,6 +32488,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Mainland quality inspectors (6-31-03-05) overlap in sampling, gauge or visual checks, results, and quality marks. The category can also include in-line instrumental checks. Verify the assignment and authority at the employer."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-qc-class",
+                "limitation": "Task overlap does not establish a grade, authority, or wage.",
+                "market": "Mainland China",
+                "name": "China occupational classification: Quality inspector",
+                "period": "2022",
+                "publisher": "China Ministry of Human Resources and Social Security et al.; government-hosted copy",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A Beijing Haochuang Ruitong inspector posting covers incoming and in-process checks, assembly process cards, and recording nonconforming items. It focuses on products and production records."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-haochuang-inspect",
+                "limitation": "One posting for task comparison. It does not establish current availability, market pay, or national requirements.",
+                "market": "Mainland China",
+                "name": "Beijing Haochuang Ruitong: quality inspector",
+                "period": "2026-03-18",
+                "publisher": "Beijing Haochuang Ruitong",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/home/correcruit/content/id/77555.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Henan University of Technology lists one Tailiang Rice inspector opening, a food production example. Check the product and requirements on the original posting before applying them elsewhere."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-tailiang-inspect",
+                "limitation": "One posting for task comparison. It does not establish current availability, market pay, or national requirements.",
+                "market": "Mainland China",
+                "name": "Tailiang Rice: quality inspector",
+                "period": "2026-09-24",
+                "publisher": "Tailiang Rice",
+                "scope": "recruitment_proxy",
+                "url": "https://job.haut.edu.cn/module/position_details/id-474087/nid-8781"
               }
             ]
           },
@@ -33210,7 +33301,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "概念": "Which links will actually be adopted?"
+            "概念": "Which inspection steps might use these tools?"
           },
           {
             "含义": {
@@ -37133,7 +37224,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit quality control inspector work",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37210,7 +37301,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI Personality Test"
           },
           {
             "href": {
@@ -37220,7 +37311,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five Personality Test"
           },
           {
             "href": {
@@ -37230,7 +37321,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Enneagram Test"
           },
           {
             "href": {
@@ -37240,7 +37331,11 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "IQ Reasoning Assessment"
+          },
+          {
+            "href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "label": "EQ Assessment"
           }
         ]
       },
@@ -37679,14 +37774,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Inspection, measurement, sampling, marking, and record tasks of quality control inspector 51-9061.00; checks the US SOC 51-9061 combined-occupation wage percentiles and the 2025—2035 projection, the Chinese evidence gap, entry paths, and paper inspection exercises that can be completed independently."
+      "text": "Quality control inspectors check parts and products against specifications and record nonconformities. Explore hiring examples, U.S. pay scope, and an inspection exercise."
     },
     "title": {
       "availability": "available",
       "text": "Quality control inspector"
     }
   },
-  "source_content_sha256": "5c0c98c52135bd3140c3578244201e158199ac00b4f650be16c21978a09f77de",
+  "source_content_sha256": "ed05e4513284932caa554d7682b470ab8889187787edc756d9b20196e673a989",
   "subject": {
     "canonical_slug": "quality-control-inspectors",
     "name": "Quality control inspector",

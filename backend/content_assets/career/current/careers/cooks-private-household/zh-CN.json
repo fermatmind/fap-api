@@ -53,6 +53,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-house-huangpu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-house-nanjing": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -1692,7 +1698,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -9150,7 +9156,7 @@
             "data",
             "entries",
             {
-              "id": "bls"
+              "id": "onet"
             },
             "url"
           ],
@@ -9165,7 +9171,7 @@
             "data",
             "entries",
             {
-              "id": "bls"
+              "id": "onet"
             },
             "name"
           ],
@@ -19503,56 +19509,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19560,7 +19530,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19573,7 +19543,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19586,7 +19556,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19599,7 +19569,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -22687,7 +22657,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "私人家庭厨师的工作对象是一个雇主家庭的口味偏好、膳食限制与作息安排，产出是按约定时间送达、符合口味与限制的餐食，以及可核对的菜单、采购与费用记录。"
+              "私人家庭厨师按每户客户的口味、膳食限制和用餐安排备餐，可服务一户或多户。约定交付可包括餐食、采购与费用记录。"
             ]
           },
           "id": "actors.profile.work-context-block.1",
@@ -22869,12 +22839,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "清洗切配蔬菜、肉类与水产 → 按雇主配方与口味烹制与烘焙 → 处理特殊膳食与拿手菜 → 核对成熟度与调味 → 向雇主家庭及其客人上菜与供应点心 → 记录出品与反馈"
+              "清洗蔬果并切配，生肉、禽肉、蛋和海鲜另行处理，不冲洗 → 按菜单烹调、烘焙并核对熟度和调味 → 上菜 → 记录出品和反馈"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.stage.steps",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-home-food-safety"
           ],
           "type": "prose"
         },
@@ -23051,12 +23022,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "拟定菜单与估算份数 → 采购并按批次核对 → 清洗切配与烹制烘焙 → 调味与装盘上菜 → 整理厨房与储存冷冻 → 记录菜单、费用与交接。"
+              "拟菜单、估份量 → 采购与核对 → 蔬果清洗、食材分开切配 → 烹制、装盘和上菜 → 整理、储存并记录交接"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-home-food-safety"
           ],
           "type": "prose"
         },
@@ -23415,12 +23387,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "Core修整切配烹制蔬菜肉类、烘焙及探索新菜；“wash”任务字面不等于要求冲洗所有生肉。美国FoodSafety.gov家庭指导列清洁、分开、温度计确认烹熟及及时冷藏；明确不清洗生肉禽蛋海鲜以免传播污染。是美国家庭食品安全指导，不是中国法律；本页无完整各菜品温度处置程序，异常暂缓并取得适用依据，雇主同意不能证明食品安全。"
+              "核心任务包括切配、烹调和烘焙。美国 FoodSafety.gov 家庭指南建议清洗蔬果，避免冲洗生肉、禽肉、蛋和海鲜，并将生熟食分开。"
             ]
           },
           "id": "actors.display.responsibilities_block.03",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-home-food-safety"
           ],
           "type": "prose"
         },
@@ -23527,12 +23500,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "再按菜单顺序清洗切配、烹制与烘焙并核对成熟度，按约定时间上菜；出现食材异常、过敏风险或设备故障时停止使用并与雇主确认替代方案；餐后整理厨房、储存或冷冻食品并记录菜单与费用。"
+              "按菜单分开备料，核对熟度，按约定时间上菜。疑似污染的食材不要使用或上桌；有过敏风险或设备故障，暂停受影响的操作，再商量安全的替代方案。餐后整理和储存，记录菜单与费用。"
             ]
           },
           "id": "actors.display.work_context_block.organization",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-home-food-safety"
           ],
           "type": "prose"
         },
@@ -23583,7 +23557,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "当前44%每日常规防护、准确19%极重要/42%非常重要/23%重要、50%从不坐；23%每日烧割蜇伤暴露、12%每日噪声。多题美国受访响应不是实际受伤率或中国条件，用品类别不要求每人全套；实际选配按工位评估。"
+              "当前44%每日常规防护、准确19%极重要/42%非常重要/23%重要、50%从不坐；23%每日轻微烧烫伤、割伤、咬伤或蜇伤类暴露、12%每日噪声。多题美国受访响应不是实际受伤率或中国条件，用品类别不要求每人全套；实际选配按工位评估。"
             ]
           },
           "id": "actors.display.work_context_block.quality",
@@ -23625,7 +23599,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
+              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
@@ -23639,7 +23613,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国私人家庭厨师Zone3/SVP6至低于7，层级通常1—2年经验及非正式训练是概述，不是统一课程；受访教育38%中等后证书/31%高中/15%低于高中，部分响应非中国门槛。BLS本岗典型中等后非学位证书、少于5年相关经验、无在职训练指标；典型与层级是不同分类，不等于无需学习或训练。当前兴趣R66/A46/S46/C45/E43/I7；R领先而A/S并列，以R＋A/S并列概括，不规定A/S的唯一先后。活动轮廓对应食材设备、菜式和服务，非人格能力、人群比例或录用阈值。当前行业13%其他服务（除政府）/87%其他（含农林渔猎），行业页未明年度，非家庭雇主占比。"
+              "美国私人家庭厨师Zone3/SVP6至低于7，层级通常1—2年经验及非正式训练是概述，不是统一课程；受访教育38%中等后证书/31%高中/15%低于高中，部分响应非中国门槛。BLS本岗典型中等后非学位证书、少于5年相关经验、无在职训练指标；典型与层级是不同分类，不等于无需学习或训练。当前兴趣R66/A46/S46/C45/E43/I7；R领先而A/S并列，以R＋A/S并列概括，不规定A/S的唯一先后。活动轮廓对应食材设备、菜式和服务，非人格能力、人群比例或录用阈值。职业主档列出 2025 年其他服务（公共行政除外）占 13%。行业子页列其他行业占 87%，子页未单列年度。这些是行业就业占比。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
@@ -23824,7 +23798,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与私人家庭厨师的关键区别是面向公众顾客、菜单与出品节奏由餐厅决定；2024 年就业 1,460,200 人，O*NET 增速类别为「远快于平均（7% 或更高）」。"
+              "与私人家庭厨师的关键区别是面向公众顾客、菜单与出品节奏由餐厅决定。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
@@ -23880,7 +23854,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别是按周期菜单服务固定人群、以批量出餐为主，服务对象不是一个家庭；2024 年就业 466,100 人，O*NET 增速为「慢于平均（1% 至 2%）」。"
+              "关键区别是按周期菜单服务固定人群、以批量出餐为主，服务对象不是一个家庭。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
@@ -23922,7 +23896,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别是按顾客点单现做、菜单固定而份数随机；2024 年就业 669,500 人，O*NET 增速为「下降（-14%）」。"
+              "关键区别是按顾客点单现做、菜单固定而份数随机。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
@@ -23964,11 +23938,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别是不承担菜单计划与费用记录责任；2024 年就业 902,700 人，O*NET 增速为「下降（-1% 或更低）」，常作为进入餐饮体系的起点。"
+              "食品制备人员多负责洗切、称量和备料，通常不与家庭商定菜单与采购费用。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.difference",
           "source_refs": [
+            "adjacent-details-35-2021",
             "onet"
           ],
           "type": "prose"
@@ -24006,7 +23981,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是管理责任与菜单主导权：承担菜单设计与成本核算、人员排班与培训、出品标准制定；准备层级为 Job Zone 3，2024 年就业 197,300 人。"
+              "与本职业的关键区别是管理责任与菜单主导权：承担菜单设计与成本核算、人员排班与培训、出品标准制定。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
@@ -24048,11 +24023,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是经营与人员管理责任：中位年薪 69,390 美元（2025 年），2024 年就业 352,800 人，O*NET 增速类别为「远快于平均（5% 至 6%）」。"
+              "餐饮服务经理负责门店或餐饮场所的运营、排班和人员管理；家庭厨师主要按家庭约定采购、备餐和交接。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.difference",
           "source_refs": [
+            "teacher",
             "onet"
           ],
           "type": "prose"
@@ -24090,12 +24066,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表把私人家庭厨师与五个相邻方向，按职业方向、核心工作与产出、关键区别和更适合什么选择四项对照；就业与增速为美国 O*NET-SOC 口径（2024 年就业、2024—2034 年预测）。"
+              "按备餐地点、菜单决定权和交接责任比较相邻岗位。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.intro",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -24118,12 +24095,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "依据：O*NET OnLine 35-2013.00 与相邻职业的摘要页、就业趋势页（2026 年更新）；就业为 2024 年、增速为 2024—2034 年预测期口径，不用于推断个人录用机会或收入。"
+              "任务参照各自的美国职业档案；家政或私厨的实际服务范围按合同核对。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.evidence_note",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -24304,7 +24282,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "菜单整理、采购提醒、记账和排期是待验证用途；传感、程序加热与生成式文本分别核，净效果须测。2025美国Lightcast私人家庭厨师招聘仅列Intuit QuickBooks和WordPress，两项比例Not available，不能填0或低于1%。是记账和网站软件招聘信号，非厨房采购软件清单、AI率或采用率。本轮没有本岗采用率、效率或就业因果；人依实际职责核膳食限制、温控及异常。BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "菜单整理、采购提醒、记账和排期是待验证用途；传感、程序加热与生成式文本分别核，净效果须测。2025美国Lightcast私人家庭厨师招聘仅列Intuit QuickBooks和WordPress，两项比例Not available，不能填0或低于1%。是记账和网站软件招聘信号，非厨房采购软件清单、AI率或采用率。本轮没有本岗采用率、效率或就业因果；人依实际职责核膳食限制、温控及异常。BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24454,7 +24432,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
+              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
@@ -24649,7 +24627,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
+              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
@@ -24889,7 +24867,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
+              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
@@ -25114,13 +25092,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "清洗修整切配蔬菜、肉类与水产"
+              "清洗蔬果并切配；生肉、禽肉、蛋和海鲜分开处理"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.task",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "us-home-food-safety"
           ],
           "type": "prose"
         },
@@ -25144,13 +25122,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断食材状态、修正切配规格并单独处理过敏原原料。"
+              "核对食材状态和切配规格，分开处理生熟及含过敏原食材。不要冲洗生肉、禽肉、蛋和海鲜。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "us-home-food-safety"
           ],
           "type": "prose"
         },
@@ -26135,12 +26113,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的私人家庭餐食服务报价统计；单条家庭或平台的报价不能代表全国水平"
+              "黄埔一条家政钟点工招聘列 2,500–5,000 元/月，要求会做饭及简单家务；南京雨花台另一条做饭钟点工招聘列 30–80 元/小时、无经验可培训。前者是做饭兼家务的月报价，后者按小时，不能直接换算。签约前分别核对做几餐、谁买菜、空档是否计费和清洁范围，不能从这两例推出全国私厨工资。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "house-huangpu",
+            "house-nanjing"
           ],
           "type": "prose"
         },
@@ -26255,7 +26234,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025全国工资五分位采用35-2013公布值，35-2013工资与2025—2035就业均标同一职业代码，但统计覆盖不同。OEWS方法明确排除自雇者、私人家庭直接雇用员工及未付薪家庭人员。当前O*NET仍公布35-2013的2025工资，只可按该调查覆盖工资岗位读，不代全部私人家庭直接聘用、个人自雇接单报价、利润或全部就业收入；按次服务不自动等于自雇，须核实际用工身份。BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
+              "2025全国工资的五个百分位采用35-2013公布值，35-2013工资与2025—2035就业均标同一职业代码，但统计覆盖不同。OEWS方法明确排除自雇者、私人家庭直接雇用员工及未付薪家庭人员。当前O*NET仍公布35-2013的2025工资，只可按该调查覆盖工资岗位读，不代全部私人家庭直接聘用、个人自雇接单报价、利润或全部就业收入；按次服务不自动等于自雇，须核实际用工身份。BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
@@ -26450,13 +26429,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前O*NET行业页13%其他服务（除政府）、87%其他（含农林渔猎），未明年度。不是所有就业归其他100%，不是工资或家庭雇主比例。"
+              "O*NET 职业主档列出 2025 年其他服务（公共行政除外）占 13%。行业子页另列其他行业占 87%（含农林渔猎），子页未单列年度。两者均为行业就业占比，不能据此推算家庭雇主占比或工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -27056,7 +27035,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑自问：分别核住家和按次服务的作息、隐私及采购沟通要求，记录感受；没有人格类型分配岗位的实测。"
+              "分别记录住家和按次服务的作息要求，再比较哪种安排与你的时间表相容。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.1",
@@ -27070,7 +27049,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑自问：分别核住家和按次服务的作息、隐私及采购沟通要求，记录感受；没有人格类型分配岗位的实测。"
+              "向雇主分别核实隐私界线、采购决定由谁确认。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.2",
@@ -28017,13 +27996,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "保持通道与操作区干燥、穿防滑鞋、按体力分次搬运并借助推车或分装；发现地面持续积水、照明不足或储物位置不安全时先处理再作业。"
+              "试岗时先走一遍取放和端送路线，问清地面清洁、重物协助和异常上报。"
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28077,13 +28055,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "使用隔热与皮肤防护、保持通风、安排作业间歇并轮换用具位置；出现持续不适时按用工约定报告并及时就医。"
+              "试岗时问清休息间隔、通风、防护用品和如何调整常用器具的位置。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.mitigation",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28227,13 +28204,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "家庭厨房空间受限造成的滑倒与搬运拉伤"
+              "地面、通道和取放重物"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.title",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28242,13 +28218,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "清洗区、储物间与食材搬运环节"
+              "清洗、储存和搬运食材的工位"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.roles",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28257,13 +28232,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "空间受限、储物分散与湿地可作为检查情境，实际住所面积未取得，不称所有家庭厨房通常狭小；搬运和取物按工位评估。"
+              "试岗观察：检查湿滑地面、狭窄通道和需要搬动的重物。厨房实际空间、设备和储存位置以现场为准。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28272,13 +28246,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "滑倒及搬运伤害可能影响接单出勤，本轮未取得本岗或家政餐饮伤害发生率和排名，不能称普遍常见。"
+              "用作现场风险判断；现有职业原档未提供此类伤害发生率。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28465,13 +28438,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长时间站立、油烟与噪声的长期影响"
+              "长期站立、重复用手与厨房暴露"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.title",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28480,13 +28452,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期在同一家庭厨房作业的岗位"
+              "经常在同一家庭厨房备餐的人员"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.roles",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28495,13 +28466,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "当前站立81%几乎一直/15%超半、用手81%几乎一直、23%每日烧割蜇伤暴露、12%每日干扰噪声。污染物只显示23%每年而非每月/62%从不，每日完整响应未显示，不补8%；比例不是受伤率或中国条件。"
+              "O*NET 美国受访者中，81% 报告几乎持续站立，15% 报告超过一半时间站立；23% 报告每天面临轻微烫伤、割伤、咬伤或蜇伤类暴露，12% 报告每天面临干扰性噪声。这些是工作情境回答，不是伤害发生率。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28510,13 +28480,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期暴露可能造成皮肤、听力与关节问题，并影响持续出勤。"
+              "站立、重复用手和设备暴露是否构成实际负担，取决于排班、通风和工位安排。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28525,13 +28494,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。不提供伤害排名或家庭健康诊断。"
+              "O*NET 职业主档 Work Context 是美国受访者工作情境；不提供家庭厨房滑倒或搬运伤害率。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28608,15 +28576,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本页不引用具体在招公告或派单信息，也不把历史案例计为在招岗位；中国大陆的用工条件须按具体家庭或机构的当年约定核对。",
-              "问答、情景观察为编辑设计的候选核查方式；本页无雇主验证频率，不称常见或统一招聘流程。"
+              "本页引用黄埔和南京两则历史招聘公告作岗位对照。应聘时向当前雇主或机构确认排班、计薪、工作边界及合同关系。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "house-huangpu",
+            "house-nanjing"
           ],
           "type": "notice"
         },
@@ -28995,26 +28961,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "虚构工单材料（练习输入）",
-                  "虚构情境：一个虚构家庭周五晚家宴共 8 人，其中 1 位家庭成员对坚果过敏、1 位需低盐软食、1 位不吃动物内脏；当周采购记录中有一批冷藏禽肉标注的到货日为周二、保质期至下周一，但冰箱温度记录本周有两次高于 4 摄氏度且只写「已调整」。",
-                  "已给材料：本周菜单与口味偏好清单；家庭成员过敏与膳食限制说明；用餐人数与时间安排；采购批次与保质期台账；冰箱与成品温度记录；厨房器具与砧板分区说明。",
-                  "未给材料：温度偏高的具体时长与原因、涉事禽肉是否已用于此前餐食、是否需要报废的确认流程、雇主对替代菜单的偏好。练习中如需要这些条件，请明确写出你的假设与需要确认的对象。"
+                  "纸面题面：周五 18:30 家宴，8 人。",
+                  "拟供燕麦饭、烤禽肉和拌软豆腐。甲对花生过敏，乙需要少盐软食，丙不吃内脏。原豆腐调味包标含花生。",
+                  "燕麦饭和软豆腐各足 8 份，另行存放且已有合格核收记录。16:00 冰箱为 7°C，超限多久未知，T1 禽肉 8 份在该柜。本题冷藏上限 4°C。供应商可另送 8 份替代原料，待验收。",
+                  "本题规则：超限时长无法核实就继续隔离，不使用该批。过敏餐仅用已核对标签和分开器具的方案。只做纸面计划。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "任务要求",
-                  "请写出一页当周处置与家宴方案：包含菜单与膳食限制核对、涉事食材的判断与处置、采购补充与库存轮换、烹制与成品温度要求、上菜时点与份数安排、需要停用或与雇主确认的情形，以及需要记录与交接的事项。",
-                  "方案要写明哪些数据来自题面材料、哪些还是假设，并说明依据的是菜单、温度记录还是器具分区说明。"
+                  "先做：写一份 8 人家宴纸面计划。逐项匹配三位客户的限制，写清 T1 是否使用、替代批次怎么核收及 18:30 出餐安排。",
+                  "按题面 16:00 读数写交接，把超限开始、时长及成品温度标为未知。列出拟采用的分开器具和核标签措施。",
+                  "先完成独立答卷，再打开资料区的参考。题面未给成品温度阈值或器具分区记录，现场需按适用规程另核。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "参考交付（可从题面推导）",
-                  "方案应包含：核对（3 项限制分别落到具体餐次与器具，8 人份数与菜式一一对应）、食材判断（温度异常期间的冷藏禽肉须暂缓使用并与雇主确认，不能仅凭「已调整」记录放行）、采购补充（按家宴人数与已有库存确定补充清单并保留票据与批次）、烹制与温度（核对成品中心温度与冷却冷冻时间，过敏原餐食单独器具与工位）、上菜与记录（按时间安排上菜，写清菜单、采购、费用与损耗，并登记待确认事项）。",
-                  "参考交付只列应包含的要素，不要求与示例措辞一致；能说明判断依据即可。"
+                  "先完成独立答卷",
+                  "完成第六天后，到「常见问题与资料来源」打开「家宴工单参考答案（完成第六天后再打开）」。",
+                  "按其中的自核项记下一处差异与修订。"
                 ]
               },
               {
@@ -29051,22 +29017,22 @@
               {
                 "id": "day-2",
                 "values": [
-                  "第 2 天：整理一份一周菜单与人数清单",
-                  "用虚构家庭成员与用餐人数，把口味偏好、膳食限制与每人菜式整理成一周菜单，并注明发现食材不足或限制冲突时的动作与确认对象。"
+                  "第二天：写八人家宴餐单",
+                  "按题面三位客户的限制安排餐食，记下替代调味的核对。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第 3 天：做一次采购与批次核对",
-                  "用虚构采购台账，写出如何按批次核对保质期、如何安排先进先出，以及发现标签缺失或到货异常时的处置方式。"
+                  "第三天：核用量和替代批次",
+                  "根据库存列出八份用量覆盖情况，写清替代批次何时还不能用。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "第 4 天：做一次温度判读",
-                  "用虚构的冷藏、烹制与冷却温度记录，判断哪一时段的读数异常、可能的原因方向，并说明依据。"
+                  "第四天：核 16:00 读数",
+                  "用题设上限核对 16:00 读数。交接中区分已知信息和需要标为未知的三项信息。"
                 ]
               },
               {
@@ -29079,15 +29045,15 @@
               {
                 "id": "day-6",
                 "values": [
-                  "第 6 天：写一次菜单与费用记录",
-                  "用虚构数据写一份当周记录，包含菜单、采购、费用与损耗、库存轮换要点、未处理的异常与需要确认的事项。"
+                  "第六天：完成独立答卷",
+                  "不打开参考，复查计算、异常判断、各项膳食要求与交接是否完整。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第 7 天：判断是否继续",
-                  "回到本页的判断清单，写下你愿意继续的三条理由与需要慎重的两条条件。"
+                  "第七天：打开参考并复盘",
+                  "到「常见问题与资料来源」打开「家宴工单参考答案（完成第六天后再打开）」。按自核项记录差异和修订，再决定继续或暂缓。真实工作条件另问雇主。"
                 ]
               }
             ]
@@ -29108,11 +29074,11 @@
             "entries": [
               "具体变化：你是否能在给定口味与膳食限制下写清菜单、采购、温度与停用条件，而不是只写「注意卫生」。",
               "事实与选择：你更愿意做住家与固定家庭服务、按次上门与钟点服务，还是家宴与私宴服务方向。",
-              "练习消耗：长时间站立与频繁用手、独自作业、重复的厨房整理与记录，哪一步最消耗你，你能否接受它在每一餐反复出现。",
+              "现实条件：向雇主问清站立、洗切、独立工作和重复清洁的时间与安排。纸面练习不能观察这些现场条件。",
               "材料边界：练习材料均为虚构或以公开资料为基础，不得写入真实家庭的成员信息、健康信息与家庭事务。",
               "反馈反应：当你的菜单或做法被指出不符合口味或限制时，你是否愿意回到菜单与确认记录补齐。",
               "过程兴趣：即使家常菜重复，你是否愿意每次都完成口味确认、采购核对与记录，而不是凭经验跳过确认步骤。",
-              "下一步：如果前六步你都愿意继续，下一步是在合规前提下（如跟班体验、食品卫生培训或为亲友做一次完整的家庭餐食闭环）完成一次从菜单计划、采购核对到上菜与记录的全流程，并请有经验的人评阅；如果某一步明显消耗，先缩小方向再验证。"
+              "下一步：完成计算、异常处置、膳食要求和交接，再按第七天的折叠参考自核。关键项漏记先重做。真实实作与培训另向雇主确认。"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -29833,7 +29799,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "自雇或签约形式，须自行处理卫生与责任边界。"
+              "按次服务可由机构派单、由家庭直接聘用或自行接单。接单前核对谁签约、谁提供器具，以及卫生和交接由谁负责。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.02.credentials",
@@ -30361,7 +30327,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。美国私人家庭厨师Zone3/SVP6至低于7，层级通常1—2年经验及非正式训练是概述，不是统一课程；受访教育38%中等后证书/31%高中/15%低于高中，部分响应非中国门槛。BLS本岗典型中等后非学位证书、少于5年相关经验、无在职训练指标；典型与层级是不同分类，不等于无需学习或训练。"
+              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。美国私人家庭厨师Zone3/SVP6至低于7，层级通常1—2年经验及非正式训练是概述，不是统一课程；受访教育38%中等后证书/31%高中/15%低于高中，部分响应非中国门槛。BLS本岗典型中等后非学位证书、少于5年相关经验、无在职训练指标；典型与层级是不同分类，不等于无需学习或训练。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
@@ -30409,7 +30375,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "2025本岗全国工资五分位；OEWS方法明确排除自雇者、私人家庭直接雇用员工及未付薪家庭人员。当前O*NET仍公布35-2013的2025工资，只可按该调查覆盖工资岗位读，不代全部私人家庭直接聘用、个人自雇接单报价、利润或全部就业收入；按次服务不自动等于自雇，须核实际用工身份。官方年值可引用，不外推个人月到手。"
+              "2025本岗全国工资的五个百分位；OEWS方法明确排除自雇者、私人家庭直接雇用员工及未付薪家庭人员。当前O*NET仍公布35-2013的2025工资，只可按该调查覆盖工资岗位读，不代全部私人家庭直接聘用、个人自雇接单报价、利润或全部就业收入；按次服务不自动等于自雇，须核实际用工身份。官方年值可引用，不外推个人月到手。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
@@ -30448,7 +30414,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
+              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
@@ -30928,7 +30894,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
+              "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
@@ -30997,7 +30963,7 @@
           "data": {
             "entries": [
               {
-                "answer": "按雇主口味与膳食或营养限制计划菜单、采购或订食材与厨房用品、清洗切配蔬菜与肉类并烘焙面包与糕点、在私人家庭烹制与上菜、为家宴与节日餐食备餐、储存整理与清洁厨房与炊具、冷却包装标注与冷冻食品并提供再加热说明、记录菜单与费用等事务性事项，按需随雇主前往度假住所供餐。",
+                "answer": "按雇主口味与膳食或营养限制计划菜单、采购或订食材与厨房用品、清洗切配蔬果，另行切配肉类并烘焙面包与糕点、在私人家庭烹制与上菜、为家宴与节日餐食备餐、储存整理与清洁厨房与炊具、冷却包装标注与冷冻食品并提供再加热说明、记录菜单与费用等事务性事项，按需随雇主前往度假住所供餐。",
                 "id": "actors.faq.1",
                 "question": "私人家庭厨师每天的具体工作是什么？",
                 "question_key": "career.faq.cooks-private-household.1",
@@ -31006,7 +30972,7 @@
                 ]
               },
               {
-                "answer": "私人家庭厨师服务一个家庭，菜单按雇主口味与膳食限制确定，并常承担采购与费用记录；餐厅厨师面向公众顾客、菜品范围更广、按点单出餐；机构与食堂厨师面向固定人群按周期菜单批量供餐。",
+                "answer": "家庭厨师可为一个或多个家庭按约定菜单和时间备餐；餐厅厨师面向公众顾客，机构厨师主要按餐单批量供餐。比较时问清是否兼采购、费用记录或清洁。",
                 "id": "actors.faq.2",
                 "question": "私人家庭厨师与餐厅厨师、机构食堂厨师有什么区别？",
                 "question_key": "career.faq.cooks-private-household.2",
@@ -31017,19 +30983,21 @@
               {
                 "answer": "菜单与菜谱整理、采购清单与库存提醒、费用记录与排程可由系统辅助，程序化设备与温度记录也能减少手工环节；但口味与膳食限制落实、采购核对、火候与调味判断、过敏原隔离、食材异常处置与家庭沟通仍依赖现场人员。技术暴露不等于组织采用或岗位消失。",
                 "id": "actors.faq.3",
-                "question": "AI 会怎样影响或取代私人家庭厨师？",
+                "question": "AI 和软件可能协助哪些家庭备餐工作？",
                 "question_key": "career.faq.cooks-private-household.3",
                 "source_refs": [
-                  "bls"
+                  "onet",
+                  "r2-ai"
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：菜单、采购与费用信息，烹制与出餐节拍，温度、储存与记录三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "可以尝试用软件整理菜单、购物清单与开支，或用温度计和计时器记录过程。食材异常、过敏原隔离和出餐仍需现场核对。此处为按任务推断，未测职业使用率或岗位替代。",
                 "id": "actors.faq.4",
-                "question": "私人家庭厨师哪些任务已有 AI 变化证据？",
+                "question": "家庭厨师哪些任务可能用到软件？",
                 "question_key": "career.faq.cooks-private-household.4",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "r2-ai"
                 ]
               },
               {
@@ -31038,52 +31006,67 @@
                 "question": "面对 AI，私人家庭厨师仍应重点验证哪些能力？",
                 "question_key": "career.faq.cooks-private-household.5",
                 "source_refs": [
-                  "bls"
+                  "onet",
+                  "r2-ai"
                 ]
               },
               {
-                "answer": "美国 2025 年中位时薪 23.05 美元、年薪 47,940 美元（35-2013.00 单一职业口径），分位为年薪 36,090／40,630／47,940／55,450／91,130 美元；该口径不含自雇的个人厨师。中国大陆未取得职业级工资数值，本页按缺口处理，不用行业均值代填。",
+                "answer": "2025 年美国本职业中位时薪为 23.05 美元，年工资中位数为 47,940 美元。 OEWS 工资调查不覆盖自雇和私人家庭雇主；就业预测另含自雇。 大陆仅列招聘个案，无法据此推算全国工资。",
                 "id": "actors.faq.6",
                 "question": "私人家庭厨师工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.cooks-private-household.6",
                 "source_refs": [
-                  "oews"
+                  "r2-pay-3",
+                  "r2-pay-2",
+                  "bls-projections",
+                  "house-huangpu",
+                  "house-nanjing"
                 ]
               },
               {
-                "answer": "美国准备层级为 Job Zone 3，教育需求受访比例显示 38% 表示需要中等后教育证书、31% 表示需要高中或同等学历、15% 表示低于高中，技能主要来自相关工作经验与在职训练；中国大陆家庭餐食服务常见起点是初中或高中，部分要求健康管理与卫生培训。",
+                "answer": "美国 O*NET 的该职业受访者给出不同教育要求；Job Zone 3 只是准备等级。大陆黄埔的一条钟点工样本接受小学及以上。招聘、实际做饭能力、健康和服务关系按具体岗位核，不能由单条样本推全国门槛。",
                 "id": "actors.faq.7",
                 "question": "私人家庭厨师需要什么学历，又该怎样训练？",
                 "question_key": "career.faq.cooks-private-household.7",
+                "source_refs": [
+                  "onet",
+                  "house-huangpu"
+                ]
+              },
+              {
+                "answer": "商务部推荐性行业标准 SB/T 11239-2023 适用于家政服务组织提供的家庭烹饪服务。它不等于所有私人家庭做饭人员的全国执业许可。向雇主或平台核对服务合同、健康材料、培训及实际职责。",
+                "id": "actors.faq.8",
+                "question": "做私人家庭厨师必须考证吗？",
+                "question_key": "career.faq.cooks-private-household.8",
+                "source_refs": [
+                  "house-cooking-standard"
+                ]
+              },
+              {
+                "answer": "练习建议：用虚构的家庭菜单完成一次购物核对、备餐、交接和记录，再问目标岗位的就餐频率、饮食偏好和雇用安排。这个练习不是岗位资格。",
+                "id": "actors.faq.9",
+                "question": "零基础想尝试私人家庭厨师工作，应该先做什么？",
+                "question_key": "career.faq.cooks-private-household.9",
                 "source_refs": [
                   "onet"
                 ]
               },
               {
-                "answer": "美国没有统一的强制证照；中国大陆健康管理与卫生培训是常见前置条件，中式烹调师职业技能等级通常不是家庭餐食服务的门槛，具体要求按用工约定与主管部门规定。",
-                "id": "actors.faq.8",
-                "question": "做私人家庭厨师必须考证吗？",
-                "question_key": "career.faq.cooks-private-household.8",
-                "source_refs": [
-                  "cn-rule"
-                ]
-              },
-              {
-                "answer": "先用本页虚构材料完成一次「菜单计划—采购核对—烹制—上菜与记录」练习，或做一次家庭餐食跟班体验，再核对目标家庭的口味要求、用餐频次与用工约定。",
-                "id": "actors.faq.9",
-                "question": "零基础想尝试私人家庭厨师工作，应该先做什么？",
-                "question_key": "career.faq.cooks-private-household.9",
-                "source_refs": [
-                  "bls"
-                ]
-              },
-              {
-                "answer": "美国官方预测显示 2024—2034 年该职业增速为「远快于平均（5% 至 6%）」，预测期职位空缺约 5,300 个；但该职业规模较小、家庭用工多依赖直接约定，作息与收入随雇主家庭变化，须按本地实际需求核对。",
+                "answer": "美国劳工统计局：35-2013 在 2025 年的基期就业为 35,400 人，预计 2035 年为 37,200 人，变化 +5.1%；2025–2035 年年均空缺 5,000 个，含替补需求。 看本地岗位时，先确认每次做几餐、谁采购、报价按小时还是按单，以及保洁、照护和食材费用是否另算。",
                 "id": "actors.faq.10",
                 "question": "现在选择私人家庭厨师职业，还应考虑什么？",
                 "question_key": "career.faq.cooks-private-household.10",
                 "source_refs": [
-                  "bls"
+                  "bls-projections"
+                ]
+              },
+              {
+                "answer": "T1 隔离停用，记 16:00、7°C、超限起点、时长和成品温度均未知。向客户说明并协调补货，另行验收替代批次后安排 8 份。甲的豆腐不用含花生调味包，核实替代调味及交叉接触，分开器具。乙用少盐软食方案，丙不供内脏。 交接记下 T1 状态、替代批次与待确认事项。按 18:30 倒排备餐。客户确认菜单用于协调替代，不能放行有疑点的原料。 自核四项：八份安排、温度异常处置、三位客人的限制及替代、交接记录及三项未知信息。每项齐全计一项。关键项漏记先重做。 4°C 是本题设定的上限。来源链接提供一般食品安全背景。",
+                "id": "actors.faq.11",
+                "question": "家宴工单参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.cooks-private-household.11",
+                "source_refs": [
+                  "us-home-food-safety"
                 ]
               }
             ]
@@ -31099,14 +31082,15 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "美国与中国大陆数据分栏：美国工资、就业与预测为私人家庭厨师（35-2013.00）单一职业口径，且不含自雇岗位；中国大陆按缺口处理，两者不互相替代。",
+              "美国两套统计都指私人家庭厨师 35-2013。BLS 就业和预测纳入自雇。OEWS 工资调查排除自雇、私人家庭直接雇员和未付薪家庭成员。大陆招聘样本另列，暂无可比全国职业工资。",
               "统计期、调查对象与计酬口径不同时分别引用；不插值、不用相邻职业或行业均值代填。",
               "练习材料均为虚构或以公开资料为基础，不构成资格、许可、用工或安全作业授权。"
             ]
           },
           "id": "actors.sources.boundary.1",
           "source_refs": [
-            "onet"
+            "bls-projections",
+            "r2-pay-2"
           ],
           "type": "list"
         },
@@ -31322,7 +31306,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。",
+                "limitation": "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。",
                 "market": "美国",
                 "name": "O*NET私人家庭厨师全国就业趋势（BLS2025—2035）",
                 "period": "BLS2025—2035；查读2026-10-09",
@@ -31494,7 +31478,8 @@
                 "accessed_at": "2026-09-18",
                 "details": [
                   "用于说明工资统计的覆盖与折算口径。",
-                  "不提供本职业数值，不能用于推算个人收入。"
+                  "不提供本职业数值，不能用于推算个人收入。",
+                  "OEWS 不覆盖私人家庭雇主和自雇人员。家庭厨师美国预测就业含自雇，工资不代表全部从业者。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "oews",
@@ -31514,13 +31499,13 @@
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "私人家庭厨师身份与概述，详细任务情境兴趣另核；当前行业13%其他服务除政府/87%其他未明年。工资与就业覆盖不同，不含AI采用或就业因果。",
+                "limitation": "职业主档列出 2025 年其他服务（公共行政除外）占就业的 13%。87% 的其他行业来自未单列年度的行业子页。就业与工资统计覆盖不同。",
                 "market": "美国",
                 "name": "O*NET OnLine：Cooks, Private Household（35-2013.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/35-2013.00"
+                "url": "https://www.onetonline.org/link/details/35-2013.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31808,7 +31793,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls-projections",
-                "limitation": "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。美国私人家庭厨师Zone3/SVP6至低于7，层级通常1—2年经验及非正式训练是概述，不是统一课程；受访教育38%中等后证书/31%高中/15%低于高中，部分响应非中国门槛。BLS本岗典型中等后非学位证书、少于5年相关经验、无在职训练指标；典型与层级是不同分类，不等于无需学习或训练。OEWS方法明确排除自雇者、私人家庭直接雇用员工及未付薪家庭人员。当前O*NET仍公布35-2013的2025工资，只可按该调查覆盖工资岗位读，不代全部私人家庭直接聘用、个人自雇接单报价、利润或全部就业收入；按次服务不自动等于自雇，须核实际用工身份。",
+                "limitation": "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。美国私人家庭厨师Zone3/SVP6至低于7，层级通常1—2年经验及非正式训练是概述，不是统一课程；受访教育38%中等后证书/31%高中/15%低于高中，部分响应非中国门槛。BLS本岗典型中等后非学位证书、少于5年相关经验、无在职训练指标；典型与层级是不同分类，不等于无需学习或训练。OEWS方法明确排除自雇者、私人家庭直接雇用员工及未付薪家庭人员。当前O*NET仍公布35-2013的2025工资，只可按该调查覆盖工资岗位读，不代全部私人家庭直接聘用、个人自雇接单报价、利润或全部就业收入；按次服务不自动等于自雇，须核实际用工身份。",
                 "market": "美国",
                 "name": "BLS表1.2私人家庭厨师35-2013",
                 "period": "2025—2035预测及2025典型准备；查读2026-10-09",
@@ -31838,7 +31823,7 @@
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet-industry",
-                "limitation": "当前13%其他服务除政府/87%其他含农林渔猎，行业页未明年；不是家庭雇主或自雇比例，不是工资。",
+                "limitation": "行业子页列 13% 和 87%，但未单列年度；职业主档在 2025 年行业中列出 13%。两项都不是家庭雇主占比或工资。",
                 "market": "美国",
                 "name": "O*NET私人家庭厨师行业就业分布",
                 "period": "当前页面未明年度；查读2026-10-09",
@@ -31892,6 +31877,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "文慧家政钟点工 10 人、2,500–5,000 元/月，要求会做饭和简单家务，列健康证；是兼岗报价。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "house-huangpu",
+                "limitation": "仅个案；不证明全国工资或当前仍在招。",
+                "market": "中国大陆",
+                "name": "黄埔家政招聘：做饭兼家务钟点工",
+                "period": "2026-01-27",
+                "publisher": "广州市黄埔区劳动就业服务管理中心",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/zwgk/mszd/cjjy/content/post_10689110.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第12项爱妈妈家政列做饭钟点工10名、30–80元/小时，无经验可培训；不提供保证工时。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "house-nanjing",
+                "limitation": "仅个案；不证明全国工资或当前仍在招。",
+                "market": "中国大陆",
+                "name": "南京雨花台：做饭钟点工",
+                "period": "2026-03-02",
+                "publisher": "南京市雨花台区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.njyh.gov.cn/yhtqrmzf/202603/t20260302_5798900.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "现行推荐性国内贸易行业标准，适用于家政服务组织提供的家庭烹饪服务。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "house-cooking-standard",
+                "limitation": "服务组织适用范围，不是全国个人执业许可。",
+                "market": "中国大陆",
+                "name": "SB/T 11239-2023 家庭烹饪服务规范",
+                "period": "2024-06-01",
+                "publisher": "全国标准信息公共服务平台",
+                "scope": "exact",
+                "url": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=0AB4989945FF2E5FE06397BE0A0ACB4E"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "家政服务员 4-10-01-06 列烹调饭菜、采购等工作。"
+                ],
+                "evidence_type": "职业画像",
+                "id": "house-cn-domestic-profile",
+                "limitation": "不能建立与美国职业的一一映射或推断所有岗位条件。",
+                "market": "中国大陆",
+                "name": "家政服务员职业画像",
+                "period": "2022-04-15",
+                "publisher": "中国就业培训技术指导中心",
+                "scope": "occupation_context",
+                "url": "https://chinajob.mohrss.gov.cn/h5/c/2022-04-15/347805.shtml"
               }
             ]
           },
@@ -34388,7 +34433,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls"
+              "onet"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34533,7 +34578,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
+              "onet",
               "employer"
             ],
             "id": "audition-feedback",
@@ -34561,15 +34606,15 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
-            "id": "bls",
+            "id": "onet",
             "label": {
-              "$source": "bls",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34890,7 +34935,7 @@
               }
             },
             {
-              "城市/区间": "中国大陆（家庭直接用工与自雇口径）",
+              "城市/区间": "中国大陆家政招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34899,16 +34944,17 @@
               }
             }
           ],
-          "china_soc_row": "美国35-2013包含个人厨师；中国相关职业与经营用工形式另核，本轮未取得一一匹配的精确职业工资。",
+          "china_soc_row": "中国大陆未核得与该美国职业一一对应的全国职业工资分布。对照下方招聘样本时，先核实际工位与服务范围。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-house-huangpu",
+            "posting-house-nanjing"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响私人家庭厨师的收入吗？",
             "driver_heading": "哪些场景会用到私人家庭厨师？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "准备方向与实际家庭服务要求怎样核对？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -34966,7 +35012,7 @@
               "$fact": "current-employment-2025-2035",
               "field": "display_value"
             },
-            "说明": "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。OOH/O*NET增速四舍五入5%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。OEWS方法明确排除自雇者、私人家庭直接雇用员工及未付薪家庭人员。当前O*NET仍公布35-2013的2025工资，只可按该调查覆盖工资岗位读，不代全部私人家庭直接聘用、个人自雇接单报价、利润或全部就业收入；按次服务不自动等于自雇，须核实际用工身份。"
+            "说明": "BLS表1.2私人家庭厨师35-2013：2025就业35,400人→2035预测37,200人，公布净增1,800人、增长5.1%，年均空缺5,000个（含增长替换），自雇占79.7%。就业预测含自雇，工资覆盖不同；空缺非十年合计、净增、当前招聘或录用概率。OEWS方法明确排除自雇者、私人家庭直接雇用员工及未付薪家庭人员。当前O*NET仍公布35-2013的2025工资，只可按该调查覆盖工资岗位读，不代全部私人家庭直接聘用、个人自雇接单报价、利润或全部就业收入；按次服务不自动等于自雇，须核实际用工身份。"
           },
           {
             "fact_ref": "current-growth-2025-2035",
@@ -36668,7 +36714,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解私人家庭厨师的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36780,14 +36826,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解我的人格偏好"
@@ -37203,49 +37241,50 @@
       },
       {
         "derivation": null,
-        "display_value": "约 34,200 人（2024 年）",
+        "display_value": "35,400 人（2025 年；BLS 职业预测基期）",
         "fact_id": "employment",
         "market": "美国",
-        "measure": "就业规模（单一职业口径）",
-        "occupation_scope": "Cooks, Private Household（O*NET-SOC 35-2013.00）",
-        "period": "2024 年；检索 2026-09-18",
+        "measure": "2025 年基期就业",
+        "occupation_scope": "U.S. SOC 35-2013",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "远快于平均（2024—2034 年，5% 至 6%）",
+        "display_value": "+5.1%（2025–2035 年就业变化）",
         "fact_id": "growth",
         "market": "美国",
-        "measure": "就业变化率（单一职业口径）",
-        "occupation_scope": "Cooks, Private Household（O*NET-SOC 35-2013.00）；O*NET 分类标签为「Faster than average」",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "measure": "就业变化率",
+        "occupation_scope": "U.S. SOC 35-2013",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 5,300 个（2024—2034 年预测期内的职位空缺，含增长与替换需求）",
+        "display_value": "5,000 个/年（含替补需求）",
         "fact_id": "openings",
         "market": "美国",
-        "measure": "职位空缺（单一职业口径）",
-        "occupation_scope": "Cooks, Private Household（O*NET-SOC 35-2013.00）；O*NET 说明空缺包含增长需求与替换需求",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "measure": "年均职位空缺",
+        "occupation_scope": "U.S. SOC 35-2013",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "其他服务（除政府）13%（当前就业行业占比，未明年度）",
+        "display_value": "其他服务（公共行政除外）13%（2025 年就业行业占比）",
         "fact_id": "industry-theater",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
         "occupation_scope": "35-2013行业就业分布，非工资或家庭雇主比例",
-        "period": "当前行业页未明年度；同版查读2026-10-09",
+        "period": "2025",
         "source_refs": [
+          "onet",
           "onet-industry"
         ]
       },
@@ -37362,6 +37401,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "文慧家政钟点工 10 人、2,500–5,000 元/月，要求会做饭和简单家务，列健康证；是兼岗报价。",
+        "fact_id": "posting-house-huangpu",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "黄埔家政招聘：做饭兼家务钟点工",
+        "period": "2026-01-27",
+        "source_refs": [
+          "house-huangpu"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第12项爱妈妈家政列做饭钟点工10名、30–80元/小时，无经验可培训；不提供保证工时。",
+        "fact_id": "posting-house-nanjing",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "南京雨花台：做饭钟点工",
+        "period": "2026-03-02",
+        "source_refs": [
+          "house-nanjing"
+        ]
       }
     ]
   },
@@ -37388,19 +37451,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，远快于平均 5% 至 6%）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 34,200 人）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国职位空缺（2024—2034 年，约 5,300 个）"
+        "label": "美国预计年均职位空缺（2025–2035 年）"
       },
       {
         "availability": "missing",
@@ -37414,17 +37477,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "私人家庭厨师（O*NET-SOC 35-2013.00）在私人家庭按雇主口味与膳食限制计划菜单、采购、烹制与上菜：覆盖菜单与采购、膳食与营养限制、家庭宴会与节日餐食、厨房整理与库存、冷冻储存与再加热说明、菜单与费用记录；含美国 2025 年中位时薪 23.05 美元、2024—2034 年增速「远快于平均（5% 至 6%）」与预测期职位空缺约 5,300 个、中国大陆职业级工资缺口与行业代理边界、灼伤烫伤与食品安全风险控制及虚构练习边界。"
+      "text": "私人家庭厨师怎样核对菜单、采购、过敏原和用餐交接？看大陆家政样本与美国统计，区分上门做饭、保洁兼岗和专职私厨。"
     },
     "title": {
       "availability": "available",
       "text": "私人家庭厨师"
     }
   },
-  "source_content_sha256": "a0498db17445035d23e8204a043f436b576192aa91740f14034ec78ae3fc70cb",
+  "source_content_sha256": "60c6ab3491ebe66a9e6a70236689b68f35e40973519095ec1e5cf690d4788eb5",
   "subject": {
     "canonical_slug": "cooks-private-household",
     "name": "私人家庭厨师",
-    "summary": "私人家庭厨师（Cooks, Private Household）在美国对应 O*NET-SOC 35-2013.00：在私人家庭里按雇主的口味、膳食与营养限制计划菜单、采购食材、烹制与上菜，可能同时负责家庭宴会与节日餐食、厨房与餐具整理、库存与采购、冷冻储存与再加热说明，以及菜单与费用记录；既包括受雇于单一家庭的住家厨师，也包括按次上门的个人厨师（后者常为自雇或签约，统计口径另算）；中国侧没有与之对应的职业细类，须按家政服务与技能等级实体另行核对。"
+    "summary": "私人家庭厨师在客户家中按约定规划菜单、采购、备餐和交接。大陆家政服务员职业画像包含烹调和采购。选岗时区分住家专职、按次备餐、兼家务和经营性私宴，并核对服务关系和职责。"
   }
 }

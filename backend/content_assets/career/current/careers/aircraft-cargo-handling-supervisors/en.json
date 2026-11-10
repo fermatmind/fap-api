@@ -35,9 +35,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -1569,7 +1566,7 @@
         "status": "pending_mapping"
       },
       "item:aircraft-cargo-handling-supervisors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:aircraft-cargo-handling-supervisors.sources.source-card.1": {
         "status": "mapped"
@@ -23278,13 +23275,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "An editorial caution on this choice: reassess first if you are unwilling to re-check loading data and versions item by item, are used to skipping procedure on experience, or are unwilling to carry crew coordination, anomaly reporting and handover responsibility. If apron weather, noise, protective equipment or the shift pattern concern you, check the target post's actual conditions first. The duties may include weight and centre-of-gravity calculation, ground supervision or in-flight monitoring; the training and authority are checked against the specific post, and a job title or a paper exercise cannot establish that you hold the practical qualification. See the occupation profile below for the full definition; these notes are not a fitness diagnosis or a hiring standard."
+              "Use fictional records to practice revision checks and handover. Actual loading, load control and signing require the appropriate authority."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "cargo-caac"
           ],
           "type": "prose"
         },
@@ -23293,12 +23290,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Author exercise CH32: use only the 4 cards, the fictional figures, the groupings, the version messages and the formulas already given in the pathway section to complete the recalculation, the error check and the handover; the reference answers and the eight-point scoring can be verified independently. Observe your own verification, recording and communication; this is not an aviation practical, a licence or a hiring test."
+              "Open “CH32 | How do you hand over two versions of the same cargo records?” in “Entry, qualifications and career development”. Recalculate independently and write a one-page revision handover."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23307,14 +23304,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "People more likely to adapt: those who can work step by step to the procedure and the manual without skipping steps, who are willing to re-check repeatedly with weight and balance data, who can accept apron weather, noise and shift pressure and wear protective equipment as required, and who respect loading safety and handover responsibility. The risk is usually greater for those unwilling to follow procedure, inclined to estimate loads on experience, or uncomfortable leading a crew and escalating an anomaly."
+              "Explore loading supervision and station operations if you like checking original plans, flagging unresolved differences and handing them over."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.quick-decision.fit-decision-checklist.3",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23323,13 +23319,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no precise wage distribution for this occupation in China was obtained. The U.S. median wage in 2025 is 58,170 U.S. dollars, and the percentiles and the hourly wage are in the U.S. section; BLS U.S. 53-1041: about 9,700 posts in 2025, about 10,600 in 2035, growth of 9.2% over 2025—2035 and a net gain of about 900, with about 900 openings a year; the headcounts in the table are in thousands and the values are rounded, and openings are not net new posts. No precise occupational wage distribution for China was obtained, and the NBS figures serve only as a broad-basis background."
+              "Explore this work if you can check identifiers, revisions and records against the original plan and report unresolved issues clearly under time pressure."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.quick-decision.fermat-decision-card.6",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23529,7 +23525,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "China 2024 No. 4: Article 10 places the transport permit with the carrier; Articles 59/63 require the relevant staff to be trained and assessed as competent for their duties and to work to the manual. An individual's training certificate, the carrier's permit and the actual post authorisation must not be conflated into one personal licence."
+              "Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.profile.onet-structured-fields-block.5",
@@ -23754,13 +23750,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "China 2024 No. 4: Article 10 places the transport permit with the carrier; Articles 59/63 require the relevant staff to be trained and assessed as competent for their duties and to work to the manual. An individual's training certificate, the carrier's permit and the actual post authorisation must not be conflated into one personal licence. CCAR121.697 requires the load sheet to record the weight and the evidence that the loading was within the approved range; the actual plan follows the manual in force, and this page confers no authority to change or release anything."
+              "Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately. For operations covered by the 2024 large-airplane carrier rule, section 121.697 governs weight and loading evidence on the load manifest. Section 121.699 concerns carriage and retention for domestic and international scheduled passenger operations. A job title alone confers no signing authority."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.profile.career-quick-answers-block.19",
           "source_refs": [
             "ilo",
-            "editor"
+            "cargo-ccar121",
+            "cargo-mot",
+            "cargo-caac"
           ],
           "type": "prose"
         },
@@ -24489,7 +24487,7 @@
                 "url": "https://www.onetonline.org/link/summary/53-1041.00"
               },
               {
-                "entity": "ONet2025 job-posting HotTech5 software entries",
+                "entity": "O*NET software listed in job postings",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/hot_tech/53-1041.00"
@@ -24525,7 +24523,7 @@
                 "url": "https://www.onetonline.org/link/summary/53-1041.00"
               },
               {
-                "entity": "ONet2025 job-posting HotTech5 software entries",
+                "entity": "O*NET software listed in job postings",
                 "id": "link-10",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/hot_tech/53-1041.00"
@@ -24726,12 +24724,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, effect, substitution ratio or wage/establishment causal study for this occupation was obtained. The following are editorial conditional scenarios; ONet duties, the software list and the BLS projection do not demonstrate actual deployment or a technology effect. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Tools can compare IDs and revisions or flag differences in fictional records. Actual loading, load control and authorized handover still follow approved procedures. The sources here provide no AI displacement rate for the occupation."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ep"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24839,12 +24837,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "HotTech has 5 software entries mentioned in 2025 U.S. unique job-posting text, and each share is Not available; the summary also lists 7 technology classes, including cargo tracking and a WMS, which is not an adoption rate."
+              "The O*NET occupation summary lists tools such as cargo tracking and warehouse management. Its separate posting-based list does not establish employer adoption rates."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25210,12 +25209,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "HotTech has Facebook, Excel, Office, Outlook and Word, 5 entries, none with an available mention share, in 2025 job-posting text. The summary lists cargo tracking and a WMS among 7 classes separately, and the lists are not mixed."
+              "The O*NET occupation summary lists tools such as cargo tracking and warehouse management. Its separate posting-based list does not establish employer adoption rates."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -26513,13 +26513,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "On-site work preparation (editorial example)"
+              "Historical Changsha handling monitor example"
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "hunan"
           ],
           "type": "prose"
         },
@@ -26528,13 +26527,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the original 2022 skill standard was not obtained, so no junior-worker grade or uniform high-school threshold is filled in. Editorial advice: first check the post's duties, the recruitment education and experience, and the safety and equipment training."
+              "In December 2023, Hunan Airport Logistics advertised three domestic loading and unloading monitors in Changsha. The role required junior college or higher and covered supervision, inspection and verification of cargo, mail and baggage handling. The original table listed CNY 60,000–100,000 per year inclusive of social insurance and housing fund, with performance assessment. This is one historical posting’s pay basis."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "hunan"
           ],
           "type": "prose"
         },
@@ -26558,13 +26556,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Loading supervision preparation (editorial example)"
+              "Wuhan cargo supervisor example"
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "cathay"
           ],
           "type": "prose"
         },
@@ -26573,13 +26570,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial advice: check the supervisory responsibility, the post training and the authorisation; education alone does not decide eligibility for an intermediate grade or independent supervision."
+              "Cathay Pacific’s Wuhan cargo supervisor posting covers rostering, oversight of handling agents, quality checks and coaching alongside cargo services and sales support. It lists a college degree or equivalent, at least four years in cargo operations, cargo sales or cargo customer service, and supervisory experience with third-party handlers. No pay is listed."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "cathay"
           ],
           "type": "prose"
         },
@@ -26663,7 +26659,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "China 2024 No. 4: Article 10 places the transport permit with the carrier; Articles 59/63 require the relevant staff to be trained and assessed as competent for their duties and to work to the manual. An individual's training certificate, the carrier's permit and the actual post authorisation must not be conflated into one personal licence."
+              "Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.china-salary.career-snapshot-primary-locale.36",
@@ -26767,7 +26763,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The BLS2025 U.S. national wage row shown by ONet｜https://www.onetonline.org/link/localwages/53-1041.00?st=TX"
+              "The BLS2025 U.S. national wage row shown by ONet｜https://www.onetonline.org/link/localwages/53-1041.00"
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.china-salary.career-snapshot-primary-locale.43",
@@ -26796,13 +26792,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "A like-for-like comparison needs the employer type, the aircraft type and cargo class, whether dangerous goods are involved and the shift arrangements to match; an industry proxy cannot replace the written pay terms."
+              "Annual pay in the original employer table"
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "hunan"
           ],
           "type": "prose"
         },
@@ -26811,13 +26806,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "When checking your own expectations, first confirm the employer type (airline / airport ground handling / freight forwarder / express), the scope of work (belly hold / freighter / in-flight loading), the aircraft type and cargo class, and the shift and overtime arrangements; do not use an industry proxy in place of the written pay terms."
+              "In December 2023, Hunan Airport Logistics advertised three domestic loading and unloading monitors in Changsha. The role required junior college or higher and covered supervision, inspection and verification of cargo, mail and baggage handling. The original table listed CNY 60,000–100,000 per year inclusive of social insurance and housing fund, with performance assessment. This is one historical posting’s pay basis. Cathay Pacific’s Wuhan cargo supervisor posting covers rostering, oversight of handling agents, quality checks and coaching alongside cargo services and sales support. It lists a college degree or equivalent, at least four years in cargo operations, cargo sales or cargo customer service, and supervisory experience with third-party handlers. No pay is listed."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "hunan",
+            "cathay"
           ],
           "type": "prose"
         },
@@ -26840,7 +26835,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics data cover urban corporate units with 5 or more persons and exclude sole proprietors and the self-employed; the wage is gross pay before tax and includes the individual's social insurance, housing fund and income tax contributions. A sector figure is not the wage for this occupation. Loading staff pay follows the employer's own rules."
+              "NBS reports a CNY 133,981 annual average for 2025 urban non-private transportation, storage and postal units. This is an industry average, not national pay for cargo supervisors."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.china-salary.career-snapshot-primary-locale.48",
@@ -26868,12 +26863,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national or city-level wage distribution was obtained for the exact occupation of aircraft cargo handling supervisors"
+              "NBS reports a CNY 133,981 annual average for 2025 urban non-private transportation, storage and postal units. This is an industry average, not national pay for cargo supervisors."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26896,12 +26891,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this occupation is not listed separately; the nearby transport, storage and postal services (non-private) figure for 2025 is 133,981 yuan/year, which serves only as a broad-basis reference"
+              "One historical Changsha posting cannot establish city pay rankings."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "nbs"
+            "hunan"
           ],
           "type": "prose"
         },
@@ -27002,7 +26997,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS2025 wage shown by ONet: the United States national row｜https://www.onetonline.org/link/localwages/53-1041.00?st=TX ; the BLS2025—2035 occupational projection｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm ; the ONet53-1041 occupation summary｜https://www.onetonline.org/link/summary/53-1041.00"
+              "The BLS2025 wage shown by ONet: the United States national row｜https://www.onetonline.org/link/localwages/53-1041.00 ; the BLS2025—2035 occupational projection｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm ; the ONet53-1041 occupation summary｜https://www.onetonline.org/link/summary/53-1041.00"
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.us-salary.career-snapshot-secondary-locale.8",
@@ -27032,7 +27027,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 U.S. national P10, hourly wage 20.04; a statistical percentile is not a starting wage or a minimum wage.; the BLS2025 U.S. national wage row shown by ONet｜https://www.onetonline.org/link/localwages/53-1041.00?st=TX"
+              "2025 U.S. national P10, hourly wage 20.04; a statistical percentile is not a starting wage or a minimum wage.; the BLS2025 U.S. national wage row shown by ONet｜https://www.onetonline.org/link/localwages/53-1041.00"
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.us-salary.career-snapshot-secondary-locale.10",
@@ -27060,7 +27055,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 U.S. national P25, hourly wage 23.95; the BLS2025 U.S. national wage row shown by ONet｜https://www.onetonline.org/link/localwages/53-1041.00?st=TX"
+              "2025 U.S. national P25, hourly wage 23.95; the BLS2025 U.S. national wage row shown by ONet｜https://www.onetonline.org/link/localwages/53-1041.00"
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.us-salary.career-snapshot-secondary-locale.12",
@@ -27088,7 +27083,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 U.S. national median annual wage 58,170, hourly wage 27.97; the BLS2025 U.S. national wage row shown by ONet｜https://www.onetonline.org/link/localwages/53-1041.00?st=TX"
+              "2025 U.S. national median annual wage 58,170, hourly wage 27.97; the BLS2025 U.S. national wage row shown by ONet｜https://www.onetonline.org/link/localwages/53-1041.00"
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.us-salary.career-snapshot-secondary-locale.14",
@@ -27116,7 +27111,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 U.S. national P75, hourly wage 37.75; the BLS2025 U.S. national wage row shown by ONet｜https://www.onetonline.org/link/localwages/53-1041.00?st=TX"
+              "2025 U.S. national P75, hourly wage 37.75; the BLS2025 U.S. national wage row shown by ONet｜https://www.onetonline.org/link/localwages/53-1041.00"
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.us-salary.career-snapshot-secondary-locale.16",
@@ -27144,7 +27139,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 U.S. national P90, hourly wage 44.31; the source does not show the cause of high earnings.; the BLS2025 U.S. national wage row shown by ONet｜https://www.onetonline.org/link/localwages/53-1041.00?st=TX"
+              "2025 U.S. national P90, hourly wage 44.31; the source does not show the cause of high earnings.; the BLS2025 U.S. national wage row shown by ONet｜https://www.onetonline.org/link/localwages/53-1041.00"
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.us-salary.career-snapshot-secondary-locale.18",
@@ -27384,12 +27379,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the OEWS entry point was unreadable this round, so no per-industry occupational median was obtained. The ONet employment share for transport and warehousing is 97%, which is not a wage."
+              "This page does not give a wage median by industry. Employment shares are not wages."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "onet"
+            "oews",
+            "operations"
           ],
           "type": "prose"
         },
@@ -27683,19 +27679,19 @@
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "First-line supervisors of mobile machinery and vehicle operators",
@@ -27749,7 +27745,7 @@
                 "entity": "The BLS2025 U.S. national wage shown by ONet",
                 "id": "link-15",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/53-1041.00?st=TX"
+                "url": "https://www.onetonline.org/link/localwages/53-1041.00"
               },
               {
                 "entity": "ONet53-1041 work context",
@@ -28783,7 +28779,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "China's dangerous-goods 2024 No. 4 covers the enterprise permit and personnel training; the readable original of the 2022 skill standard was not obtained, and it is not used for personality or a uniform entry threshold."
+              "Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.fit.personality-fit-block.65",
@@ -28835,7 +28831,7 @@
                 "entity": "The BLS2025 U.S. national wage percentiles shown by O*NET",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/53-1041.00?st=TX"
+                "url": "https://www.onetonline.org/link/localwages/53-1041.00"
               },
               {
                 "entity": "O*NET 53-1041.00 work context (Work Context)",
@@ -28847,7 +28843,7 @@
                 "entity": "The Rules on the Certification of Large Aeroplane Public Air Transport Carrier Operations (Ministry of Transport Order No. 7 of 2024)",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://xxgk.mot.gov.cn/gz/202404/t20240416_4128400.html"
+                "url": "https://xxgk.mot.gov.cn/2020/gz/202404/t20240416_4128400.html"
               },
               {
                 "entity": "China's 2024 No. 4 dangerous-goods transport rules",
@@ -28904,15 +28900,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Evidence scope: O*NET 53-1041.00 provides the tasks and the work context (86% indoors in a non-environmentally-controlled setting every day, 78% outdoors exposed to all kinds of weather every day, 66% consider precision or accuracy extremely important, 49% exposed to hazardous equipment every day); the BLS Occupational Employment and Wage Statistics provides the wages and employment; the Rules on the Certification of Large Aeroplane Public Air Transport Carrier Operations and the Provisions on the Administration of the Transport of Dangerous Goods by Civil Aircraft provide the framework requirements for weight and balance control, the load sheet and dangerous-goods loading in mainland China. The risk list is an editorial summary and contains no probability of occurrence."
+              "O*NET provides duties and work context. Wages come from the national OEWS figures shown by O*NET, and employment projections come from BLS Table 1.2. The mainland cargo rules and loading guidance address carrier manuals, assigned duties and personnel training. The risk notes give no probability estimates."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.risk.career-risk-cards.10",
           "source_refs": [
             "onet",
             "oews",
-            "editor",
-            "ilo"
+            "ep",
+            "cargo-mot",
+            "cargo-caac"
           ],
           "type": "prose"
         },
@@ -29320,12 +29317,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "China CCAR121.697/699: the framework for recording, carrying and keeping the load sheet, not an editorial uniform procedure."
+              "For operations covered by the 2024 large-airplane carrier rule, section 121.697 governs weight and loading evidence on the load manifest. Section 121.699 concerns carriage and retention for domestic and international scheduled passenger operations. A job title alone confers no signing authority."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.risk.career-risk-cards.38",
           "source_refs": [
-            "editor"
+            "cargo-ccar121"
           ],
           "type": "prose"
         },
@@ -29334,7 +29331,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "China 2024 No. 4: the enterprise transport permit and the training, assessment and performance of duties by the personnel, not ONet."
+              "Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.risk.career-risk-cards.39",
@@ -29425,7 +29422,7 @@
                 "id": "education",
                 "values": [
                   "Education survey and recruitment conditions",
-                  "The U.S. ONet new-entrant education respondents: 64% high school or equivalent, 18% a bachelor's degree and 10% below high school; this is not a statutory threshold or a hiring probability. The BLS2025—2035 table lists a typical high school diploma or equivalent, less than 5 years of related experience and a typical on-the-job training of None; it does not guarantee becoming a supervisor directly without experience. Insufficient evidence: this round obtained neither the readable original of the Chinese 2022 skill standard nor the target post's recruitment for the current year nor the specific in-flight status and medical conditions, so no uniform high-school threshold, mandatory five-to-one grade path or medical requirement for all loadmasters is generalised.",
+                  "BLS lists high school or equivalent and less than five years of related experience as typical for this U.S. occupation. The Changsha and Wuhan postings set their own requirements.",
                   "The recruitment and the skill-assessment conditions are checked separately; the paper exercise on this page is not the actual selection assessment."
                 ]
               },
@@ -29433,7 +29430,7 @@
                 "id": "clearance",
                 "values": [
                   "Training, the enterprise permit and the post authority",
-                  "Check the safety and equipment training and the actual operating authorisation against the target post; the in-flight status and the medical conditions were not verified. China 2024 No. 4: Article 10 places the transport permit with the carrier; Articles 59/63 require the relevant staff to be trained and assessed as competent for their duties and to work to the manual. An individual's training certificate, the carrier's permit and the actual post authorisation must not be conflated into one personal licence.",
+                  "Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately.",
                   "Chinese personnel work to the manual and the training corresponding to their duties, and an enterprise permit is not treated as an individual certificate."
                 ]
               },
@@ -29449,7 +29446,7 @@
                 "id": "tools",
                 "values": [
                   "The boundary between the two software lists",
-                  "The ONet summary lists cargo tracking and a WMS among 7 software classes; HotTech2025 postings list only 5 entries, and none of the shares is available. The two lists cover different objects, so it cannot be said that no dedicated system is published; neither shows an employer adoption rate.",
+                  "The O*NET occupation summary lists tools such as cargo tracking and warehouse management. Its separate posting-based list does not establish employer adoption rates.",
                   "Editorial preparation: check the data and the record with the CH32 exercise data, and use a specific loading system only under real training and authorisation."
                 ]
               }
@@ -29460,7 +29457,9 @@
             "onet",
             "ep",
             "ilo",
-            "facilities"
+            "facilities",
+            "hunan",
+            "cathay"
           ],
           "title": "What do employers usually look at in recruitment?",
           "type": "cards"
@@ -29474,25 +29473,25 @@
                 "id": "exercise-materials",
                 "values": [
                   "CH32 task and material",
-                  "CH32 was designed by this page's author, its units are fictional points and it is not a kg or aircraft load/centre-of-gravity standard. Only pen and paper or a spreadsheet are used. V1 has 4 cards: A weighs 2 at position 1, B weighs 3 at position 2, C weighs 4 at position 3 and D weighs 1 at position 4; simulated group P plans A+B and Q plans C+D, and both groups' practice capacity is 6 points. Exercise rule: compute only the simulated total weight and weighted position (Σweight×position÷Σweight), and do not assess aircraft safety. The register records P=5, Q=4, total 9 and weighted position 2.4, version V1; verifier B only signed for receipt of V1 and did not sign off the content.",
-                  " 10:10 the author updates D's weight 1→3 to form V2, the other cards are unchanged, and the grouping plan is still P=A+B/Q=C+D. A practice group over 6 points is recorded as over the exercise capacity and must be marked for revision, not written as confirmed. A 10:12 received only V2 and did not verify the data, and B still has only V1.",
-                  "Task: independently compute V1 and find the two numerical errors in the register; compute V2 and judge the grouping; propose one paper regrouping that brings both groups to ≤6 and recompute the weighted position, listing the versions, the confirmations and the unknowns. These are the author's rules, not a loading authorisation, an isolation or a release procedure."
+                  "CH32 was designed by this page's author, its units are fictional points and it is not a kg or aircraft load/centre-of-gravity standard. Only pen and paper or a spreadsheet are used. V1 has 4 cards: A weighs 2 at position 1, B weighs 3 at position 2, C weighs 4 at position 3 and D weighs 1 at position 4; simulated group P plans A+B and Q plans C+D, and both groups' practice capacity is 6 points. Exercise rule: compute only the simulated total weight and weighted position (Σweight×position÷Σweight), and do not assess aircraft safety. The register records P=5, Q=4, total 9 and weighted position 2.4, version V1; Reviewer 2 only signed for receipt of V1 and did not sign off the content.",
+                  " 10:10 the author updates D's weight 1→3 to form V2, the other cards are unchanged, and the grouping plan is still P=A+B/Q=C+D. A practice group over 6 points is recorded as over the exercise capacity and must be marked for revision, not written as confirmed. At 10:12, Reviewer 1 received V2 and did not verify the data, and Reviewer 2 confirmed receipt of V1 only; there is no receipt for V2 or V2a.",
+                  "Task: independently compute V1 and find the two numerical errors in the register; compute V2 and judge the grouping; propose one paper regrouping that brings both groups to ≤6 and recompute the weighted position, listing the versions, the confirmations and the unknowns. These are the author's rules, not a loading authorisation, an isolation or a release procedure. Variant: add only one message: Reviewer 2 received V2a but has not checked or signed it. Which statuses change? Complete both tasks before reading the reference."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Reference answers｜the two-version recalculation and the handover",
-                  "Reference V1: P=2+3=5, Q=4+1=5, total 10; weighted position=(2×1+3×2+4×3+1×4)/10=24/10=2.4. The two errors are the Q entry 4 and the total 9; the weighted position 2.4 is correct. Reference V2 on the original plan: P=5, Q=7, total 12, weighted position=(2+6+12+12)/12=32/12≈2.667. Q exceeds the practice capacity by 1 points; the V1 total and confirmation must not be carried over. The paper grouping can be changed to P=A+C=6, Q=B+D=6, the total still 12 and the weighted position still 32/12, marked candidate V2a.",
-                  "Reference handover: V1 has been affected by the new data; V2a is only a candidate, A's receipt of V2 alone is not a confirmation, and whether B received, computed or confirmed V2/V2a is unknown. The handover records CH32, V1→V2→V2a, D1→3, the two old errors, the original Q exceeding 1, the candidates 6/6 and the items still to be confirmed one by one, without claiming that a real load could proceed."
+                  "Submit two recalculations and a one-page handover",
+                  "Record the grouping, total points and weighted position under both original plans. Preserve the original register, then show your candidate grouping.",
+                  "Separate receipt, review and signoff by revision. State what changed in the variant."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Eight-point scoring｜A and B compared",
-                  "Scoring 8 points, 1 each: ①V1's two groups 5/5; ②the total 10 and the weighting 2.4; ③naming the old Q=4 as wrong; ④naming the old total 9 as wrong; ⑤V2's original 5/7 and total 12; ⑥32/12≈2.667; ⑦the candidates 6/6 marked for revision or unconfirmed; ⑧A received only and B is unknown, and the versions must not be mixed. Sample A answered 'V1 total 10, weighting 2.4; carry over the original registered groups 5/4; V2's total 12 can be confirmed directly, and both A and B confirm it'. This satisfies only ②, scoring 1/8; ⑤ lacks 5/7, ⑦ has no correct candidate and ⑧ is wrong, and the rest are not met either.",
-                  "Sample B answered 'V1=5/5, total 10, weighting 2.4; the old Q4 and the total 9 are wrong. V2=5/7, total 12, weighting 32/12; candidate V2a P=A+C6/Q=B+D6 marked for revision or unconfirmed, A received only and B is unknown'. This satisfies ①—⑧ item by item, scoring 8/8. The scoring checks this exercise only and demonstrates neither recruitment nor fitness."
+                  "Check after submitting",
+                  "Day 6: submit independently. On Day 7, open “CH32 reference and scoring (open after submitting)” in the FAQ.",
+                  "Record differences in calculations and handover separately. Keep your original answer and attach any corrections."
                 ]
               },
               {
@@ -29506,9 +29505,9 @@
           },
           "id": "aircraft-cargo-handling-supervisors.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "Entry exercise: CH32 fictional record verification and handover",
+          "title": "CH32 | How do you hand over two versions of the same cargo records?",
           "type": "cards"
         },
         {
@@ -29519,38 +29518,38 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Deliverable one: the CH32 requirements matrix, listing the author's rules, the real post requirements still to be checked and the corresponding sources, with the personal and enterprise requirements listed separately.",
-                  "Record the jurisdiction, the time and what is checked or still to be checked item by item; keep the dangerous-goods carrier permit and the employee training apart.",
-                  "List the 2022 standard, the target recruitment and the in-flight status as still to be checked, and do not fill in a qualification from the author's task setup."
+                  "List the rules and original data.",
+                  "Mark the revision, source and role.",
+                  "Keep the paper task separate from operating authority."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Deliverable two: the CH32 independent recalculation table, keeping V1's 5/5 total 10 position 2.4 and V2's 5/7 total 12 position 32/12.",
-                  "List the two errors, the old Q4 and the total 9, and the unconfirmed candidates V2a6/6; keep the formulas and the revision trail.",
-                  "Score A's 1/8 and B's 8/8 with the eight-point scheme, and explain exactly which item each error falls under."
+                  "Submit both recalculation tables.",
+                  "Flag original discrepancies and a candidate grouping.",
+                  "Record receipt, review and signoff separately."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Deliverable three: the CH32 handover record, writing the version changes, the two old errors, the original Q exceeding the capacity by 1, the candidates and what remains unknown or unconfirmed about A and B.",
-                  "Deliverable four: a one-page preparation decision, listing the observed exercise behaviour, the target direction and the real training and post conditions still to be checked, with the source dates attached."
+                  "Submit a one-page handover and the variant.",
+                  "List open items, the reviewer and the next evidence needed."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "The references and capability boundaries of the four deliverables",
-                  "The four deliverables show only the paper verification, the version handling and the communication method, and demonstrate neither the aviation practical nor a pass in recruitment. The author's CH32 parameters are kept apart from the aviation rules, and any reference to real material must correspond to the original claim."
+                  "Use only the paper records.",
+                  "Check the manual and authorization for actual work."
                 ]
               }
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "What verifiable portfolio material can be prepared when entering the field?",
           "type": "cards"
@@ -29614,57 +29613,60 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1｜Requirements matrix",
-                  "Complete deliverable one, recording the U.S. statistics, the Chinese personnel training and the enterprise permit, with the actual post recruitment still to be checked."
+                  "Day 1",
+                  "Read the Changsha and Wuhan postings or O*NET. Note two differences in duties."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2｜V1 recalculation",
-                  "Using only the CH32 task, compute 5/5, the total 10 and the position 2.4, keeping the formulas."
+                  "Day 2",
+                  "Recalculate V1 independently."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3｜Error check",
-                  "Independently point out the two errors, the old Q4 and the total 9, compare the correct position value, and do not change 2.4 to something wrong just to make an error."
+                  "Day 3",
+                  "Find the discrepancies and preserve the original figures."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4｜V2 and the candidate",
-                  "Compute 5/7, the total 12 and 32/12; propose P=A+C6/Q=B+D6 as candidate V2a, unconfirmed, and complete deliverable two."
+                  "Day 4",
+                  "Recalculate V2 and propose a candidate grouping."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5｜Handover",
-                  "Write, from the CH32 messages, that A received only, B is unknown, the version changes and the items still to be confirmed, and complete deliverable three."
+                  "Day 5",
+                  "Separate receipt, checking and signoff. Complete the message variant."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6｜Scoring and boundaries",
-                  "Check A's 1/8 and B's 8/8 item by item against the eight points; explain that the points and the weighted position are not an aircraft standard, and do not do the practical."
+                  "Day 6",
+                  "Without looking at the reference, submit both calculations and a one-page handover."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7｜Preparation decision",
-                  "Complete deliverable four, reviewing your own verification, recording and communication and the real recruitment and training still to be checked, and no score guarantees being hired."
+                  "Day 7",
+                  "Open “CH32 reference and scoring (open after submitting)” in the FAQ. Record differences or note none. Choose ramp supervision, cargo station work or record skills to explore next."
                 ]
               }
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor",
+            "onet",
+            "hunan",
+            "cathay"
           ],
           "title": "Seven-day experience: close the loop on one aircraft cargo handling supervisors task with fictional material",
           "type": "timeline"
@@ -29732,13 +29734,13 @@
                 "The carrier's transport permit is not an individual certificate, and training does not replace the post authorisation"
               ],
               [
-                "Skill assessment standard (original to be checked)",
-                "Intended as a reference for the Chinese target post",
-                "The role in assessment and recruitment is checked against the specific announcement",
-                "A general threshold or a recognition rate was not checked",
-                "The 2022 official publication entry point exists, but the original is not readable",
-                "Insufficient evidence: the grade, duration and cost are to be checked",
-                "No mandatory five-to-one grade path is filled in, and it does not replace the authority"
+                "Cargo handling supervision training",
+                "Roles with handling oversight",
+                "Check handling and handover records",
+                "Check assigned duties",
+                "Follow the provider’s training and applicable manual",
+                "Ask the provider about training and duration",
+                "Training does not expand the assigned authority"
               ],
               [
                 "In-flight status, training and medical examination (to be checked)",
@@ -29773,7 +29775,7 @@
           "source_refs": [
             "ilo",
             "editor",
-            "cnclass"
+            "cargo-caac"
           ],
           "title": "Education, training and qualifications: which are real thresholds for this occupation?",
           "type": "table"
@@ -29783,17 +29785,19 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "The U.S. ONet new-entrant education respondents: 64% high school or equivalent, 18% a bachelor's degree and 10% below high school; this is not a statutory threshold or a hiring probability. The BLS2025—2035 table lists a typical high school diploma or equivalent, less than 5 years of related experience and a typical on-the-job training of None; it does not guarantee becoming a supervisor directly without experience.",
-              "The Chinese load sheet follows CCAR121.697/699 and the actual manual; the dangerous-goods enterprise permit and the personnel training follow rule No. 4, and this page confers no authority.",
-              "The U.S. new-entrant education survey and the BLS typical experience are checked; the readable original of the Chinese 2022 standard and the target post conditions were not obtained, and the jurisdictions are not extrapolated from each other.",
-              "Insufficient evidence: the target recruitment, the trade and grade of the skill assessment and the specific in-flight status and medical requirements were not checked; check them item by item against the formal sources, and do not obtain a qualification from a paper exercise."
+              "BLS classifies typical U.S. entry education as high school or equivalent and related experience as less than five years. The classification does not replace employer requirements.",
+              "Mainland cargo rules require carriers to establish and apply procedures for ground transfer and loading. Check the carrier manual, assigned duties and authorization. Loading supervision reports discrepancies through the established process; load control, weight-and-balance documents, dangerous goods and flight signoff have separate requirements.",
+              "In December 2023, Hunan Airport Logistics advertised three domestic loading and unloading monitors in Changsha. The role required junior college or higher and covered supervision, inspection and verification of cargo, mail and baggage handling. The original table listed CNY 60,000–100,000 per year inclusive of social insurance and housing fund, with performance assessment. This is one historical posting’s pay basis.",
+              "Cathay Pacific’s Wuhan cargo supervisor posting covers rostering, oversight of handling agents, quality checks and coaching alongside cargo services and sales support. It lists a college degree or equivalent, at least four years in cargo operations, cargo sales or cargo customer service, and supervisory experience with third-party handlers. No pay is listed."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "ep",
+            "cargo-mot",
+            "cargo-caac",
+            "hunan",
+            "cathay"
           ],
           "title": "Notes on qualification and authorisation boundaries",
           "type": "notice"
@@ -29803,16 +29807,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained neither the readable original of the Chinese 2022 skill standard nor the target post's recruitment for the current year nor the specific in-flight status and medical conditions; no uniform high-school threshold, mandatory five-to-one grade path or medical requirement for all loadmasters is generalised.",
-              "To judge whether a post belongs to this occupation, look at the task description rather than the title: whether it involves determining the cargo quantity and orientation, calculating the centre of gravity, supervising the loading, unloading, securing and placing of air cargo and baggage and completing the loading documents."
+              "In December 2023, Hunan Airport Logistics advertised three domestic loading and unloading monitors in Changsha. The role required junior college or higher and covered supervision, inspection and verification of cargo, mail and baggage handling. The original table listed CNY 60,000–100,000 per year inclusive of social insurance and housing fund, with performance assessment. This is one historical posting’s pay basis.",
+              "Cathay Pacific’s Wuhan cargo supervisor posting covers rostering, oversight of handling agents, quality checks and coaching alongside cargo services and sales support. It lists a college degree or equivalent, at least four years in cargo operations, cargo sales or cargo customer service, and supervisory experience with third-party handlers. No pay is listed."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "hunan",
+            "cathay"
           ],
           "title": "Notes on the recruitment sample",
           "type": "notice"
@@ -29829,16 +29831,16 @@
                 "url": "https://www.onetonline.org/link/summary/53-1041.00"
               },
               {
-                "entity": "National Vocational Skill Standard for Ground Service Personnel in Air Transport (Ministry of Human Resources and Social Security Office Letter No. 37 of 2022)",
+                "entity": "CAAC: Aircraft Cargo Loading and Unloading Guidance",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/rencairenshi/zcwj/jinengrencai/202210/t20221018_488683.html"
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202308/P020230822523273632081.pdf"
               },
               {
                 "entity": "The Rules on the Certification of Large Aeroplane Public Air Transport Carrier Operations (Ministry of Transport Order No. 7 of 2024)",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://xxgk.mot.gov.cn/gz/202404/t20240416_4128400.html"
+                "url": "https://xxgk.mot.gov.cn/2020/gz/202404/t20240416_4128400.html"
               },
               {
                 "entity": "Provisions on the Administration of the Transport of Dangerous Goods by Civil Aircraft (Ministry of Transport Order No. 4 of 2024)",
@@ -29851,9 +29853,9 @@
           "id": "aircraft-cargo-handling-supervisors.path.career-path-block.10",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "cargo-caac",
+            "cargo-ccar121",
+            "ilo"
           ],
           "type": "links"
         },
@@ -29862,13 +29864,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The following three tracks and four stages are an editorial development example, not a uniform promotion system. The U.S. ONet new-entrant education respondents: 64% high school or equivalent, 18% a bachelor's degree and 10% below high school; this is not a statutory threshold or a hiring probability. The BLS2025—2035 table lists a typical high school diploma or equivalent, less than 5 years of related experience and a typical on-the-job training of None; it does not guarantee becoming a supervisor directly without experience. The specific conditions of the Chinese recruitment and the 2022 standard are to be checked; China 2024 No. 4: Article 10 places the transport permit with the carrier; Articles 59/63 require the relevant staff to be trained and assessed as competent for their duties and to work to the manual. An individual's training certificate, the carrier's permit and the actual post authorisation must not be conflated into one personal licence."
+              "BLS lists high school or equivalent and less than five years of related experience as typical for this U.S. occupation. The Changsha and Wuhan postings set their own requirements. Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.path.career-path-block.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep",
+            "hunan",
+            "cathay",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -29993,13 +29997,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The U.S. ONet new-entrant education respondents: 64% high school or equivalent, 18% a bachelor's degree and 10% below high school; this is not a statutory threshold or a hiring probability. The BLS2025—2035 table lists a typical high school diploma or equivalent, less than 5 years of related experience and a typical on-the-job training of None; it does not guarantee becoming a supervisor directly without experience. In China, check against the real recruitment, the post and the training; China 2024 No. 4: Article 10 places the transport permit with the carrier; Articles 59/63 require the relevant staff to be trained and assessed as competent for their duties and to work to the manual. An individual's training certificate, the carrier's permit and the actual post authorisation must not be conflated into one personal licence."
+              "BLS lists high school or equivalent and less than five years of related experience as typical for this U.S. occupation. The Changsha and Wuhan postings set their own requirements. Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.path.career-path-block.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep",
+            "hunan",
+            "cathay",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -30008,14 +30014,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "China 2024 No. 4: Article 10 places the transport permit with the carrier; Articles 59/63 require the relevant staff to be trained and assessed as competent for their duties and to work to the manual. An individual's training certificate, the carrier's permit and the actual post authorisation must not be conflated into one personal licence. A vocational skill assessment does not automatically confer operating authority, and this round did not obtain the readable original of the 2022 standard."
+              "Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.path.career-path-block.21",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -30069,12 +30073,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The 2022 air transport ground service personnel skill standard: the official publication entry point has been found, the text is not readable, and the specific trades, grades and conditions are to be checked."
+              "Sections 10–12 of CAAC’s cargo handling guidance cover loading and unloading, supervision and training by service providers. Ask employers about duties, supervised practice and clearance for the role."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.path.career-path-block.25",
           "source_refs": [
-            "cnclass"
+            "cargo-caac"
           ],
           "type": "prose"
         },
@@ -30083,12 +30087,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The Chinese CCAR121.697/699 framework for the content, carriage and keeping of the load sheet; it is not an individual licence for this occupation or a uniform recruitment threshold."
+              "For operations covered by the 2024 large-airplane carrier rule, section 121.697 governs weight and loading evidence on the load manifest. Section 121.699 concerns carriage and retention for domestic and international scheduled passenger operations. A job title alone confers no signing authority."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.path.career-path-block.26",
           "source_refs": [
-            "ilo"
+            "cargo-ccar121"
           ],
           "type": "prose"
         },
@@ -30097,12 +30101,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "China 2024 No. 4 dangerous-goods rules: the carrier's permit, the training and assessment of the relevant personnel for their duties, and the manual responsibility."
+              "Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.path.career-path-block.27",
           "source_refs": [
-            "nbs"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -31011,7 +31015,7 @@
                 "entity": "The BLS2025 wage shown by ONet: the United States national row",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/53-1041.00?st=TX"
+                "url": "https://www.onetonline.org/link/localwages/53-1041.00"
               },
               {
                 "entity": "BLS2025—2035 occupational projection: the post base and growth",
@@ -31095,7 +31099,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS U.S. 53-1041: about 9,700 posts in 2025, about 10,600 in 2035, growth of 9.2% over 2025—2035 and a net gain of about 900, with about 900 openings a year; the headcounts in the table are in thousands and the values are rounded, and openings are not net new posts. A U.S. projection does not guarantee an individual's employment and is not extrapolated to China."
+              "U.S. SOC 53-1041: about 9,700 jobs in 2025 and 10,600 projected in 2035, up 9.2%, with a net gain of about 900 and 900 openings annually including replacements."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.market-signals.market-signal-card.8",
@@ -31826,10 +31830,13 @@
           "data": {
             "entries": [
               {
-                "answer": "Determine the cargo quantity, weight and orientation within the waybill and the aircraft type's hold limits, calculate each hold's load with charts and computers and calculate the aircraft's centre of gravity, and distribute the cargo within the weight and balance limits; direct ground staff loading, unloading, securing and placing on the apron and in the cargo hold and check the unit load devices and tie-downs; identify an overload, an off-centre load, damage, leakage or a dangerous-goods anomaly, stop the loading to procedure and escalate; train new staff in safety procedures and equipment operation, and complete the loading notice and weight and balance documents and finish the handover.",
+                "answer": "Aircraft cargo handling supervisors coordinate crews, check the loading plan against handling records and escalate discrepancies to the appropriate load-control or review staff. Ramp supervision, cargo station management and onboard load duties have different responsibilities and authority.",
                 "id": "aircraft-cargo-handling-supervisors.faq.1",
                 "question": "What do aircraft cargo handling supervisors do every day?",
-                "question_key": "career.faq.aircraft-cargo-handling-supervisors.daily-work"
+                "question_key": "career.faq.aircraft-cargo-handling-supervisors.daily-work",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
                 "answer": "The ONet scope for this occupation may include the load and centre-of-gravity calculation and in-flight monitoring; the actual on-site work, calculation, documents and decision authority are checked against the organisation's division of work. A freight forwarder may also take part in loading, so an adjacent occupation cannot be uniformly excluded from the on-site work; post responsibility and permits do not transfer automatically from an overlap of tasks.",
@@ -31844,10 +31851,13 @@
                 "question_key": "career.faq.aircraft-cargo-handling-supervisors.fit"
               },
               {
-                "answer": "Insufficient evidence: this round did not check this occupation's AI adoption rate, effect or substitution causation. That calculation, records and information preparation may be assisted by a tool is an editorial conditional scenario and does not mean a system is deployed; the actual operation and the authority to confirm follow the real manual.",
+                "answer": "Tools can compare IDs and revisions or flag differences in fictional records. Actual loading, load control and authorized handover still follow approved procedures. The sources here provide no AI displacement rate for the occupation.",
                 "id": "aircraft-cargo-handling-supervisors.faq.4",
                 "question": "Which tasks will AI change?",
-                "question_key": "career.faq.aircraft-cargo-handling-supervisors.ai-impact"
+                "question_key": "career.faq.aircraft-cargo-handling-supervisors.ai-impact",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
                 "answer": "Editorial check item: the differences between the weight, the documents, the on-site state and the tool should be reviewed against the organisation's actual manual and authorisation; this page prescribes no uniform five steps, isolation or release procedure, and no authority is obtained from a tool output.",
@@ -31856,16 +31866,24 @@
                 "question_key": "career.faq.aircraft-cargo-handling-supervisors.human-control"
               },
               {
-                "answer": "The U.S. ONet new-entrant education respondents: 64% high school or equivalent, 18% a bachelor's degree and 10% below high school; this is not a statutory threshold or a hiring probability. The BLS2025—2035 table lists a typical high school diploma or equivalent, less than 5 years of related experience and a typical on-the-job training of None; it does not guarantee becoming a supervisor directly without experience. The specific Chinese recruitment, the readable original of the 2022 skill standard and the in-flight status and medical examination were not checked, so no uniform high-school requirement or the same requirement for all loadmasters is generalised.",
+                "answer": "In December 2023, Hunan Airport Logistics advertised three domestic loading and unloading monitors in Changsha. The role required junior college or higher and covered supervision, inspection and verification of cargo, mail and baggage handling. The original table listed CNY 60,000–100,000 per year inclusive of social insurance and housing fund, with performance assessment. This is one historical posting’s pay basis. Cathay Pacific’s Wuhan cargo supervisor posting covers rostering, oversight of handling agents, quality checks and coaching alongside cargo services and sales support. It lists a college degree or equivalent, at least four years in cargo operations, cargo sales or cargo customer service, and supervisory experience with third-party handlers. No pay is listed.",
                 "id": "aircraft-cargo-handling-supervisors.faq.6",
                 "question": "What are the entry education and training paths?",
-                "question_key": "career.faq.aircraft-cargo-handling-supervisors.education-path"
+                "question_key": "career.faq.aircraft-cargo-handling-supervisors.education-path",
+                "source_refs": [
+                  "hunan",
+                  "cathay"
+                ]
               },
               {
-                "answer": "China 2024 No. 4: Article 10 places the transport permit with the carrier; Articles 59/63 require the relevant staff to be trained and assessed as competent for their duties and to work to the manual. An individual's training certificate, the carrier's permit and the actual post authorisation must not be conflated into one personal licence. The skill assessment and the post operating authority are kept apart, and the specific grade and the target post conditions were not checked.",
+                "answer": "Mainland cargo rules require carriers to establish and apply procedures for ground transfer and loading. Check the carrier manual, assigned duties and authorization. Loading supervision reports discrepancies through the established process; load control, weight-and-balance documents, dangerous goods and flight signoff have separate requirements.",
                 "id": "aircraft-cargo-handling-supervisors.faq.7",
                 "question": "Which qualifications and authorisations must be checked on entry?",
-                "question_key": "career.faq.aircraft-cargo-handling-supervisors.credentials"
+                "question_key": "career.faq.aircraft-cargo-handling-supervisors.credentials",
+                "source_refs": [
+                  "cargo-mot",
+                  "cargo-caac"
+                ]
               },
               {
                 "answer": "Mainly estimating the load on experience, skipping the securing and tie-down re-check, failing to escalate an abnormal load in time, dangerous-goods loading that does not meet the rules, untrue or missing loading documents, and the occupational-health risk from apron weather, noise and repeated manual handling. Calculating to the weight-limit manual, re-checking the securing against the checklist, escalating an anomaly promptly and completing the documents faithfully are the basic controls.",
@@ -31874,16 +31892,29 @@
                 "question_key": "career.faq.aircraft-cargo-handling-supervisors.risk-boundary"
               },
               {
-                "answer": "BLS U.S. 53-1041: about 9,700 posts in 2025, about 10,600 in 2035, growth of 9.2% over 2025—2035 and a net gain of about 900, with about 900 openings a year; the headcounts in the table are in thousands and the values are rounded, and openings are not net new posts. Adjacent posts can be explored, but the capabilities, training and authority required are checked separately, and no direct transfer or promotion is guaranteed.",
+                "answer": "U.S. SOC 53-1041: about 9,700 jobs in 2025 and 10,600 projected in 2035, up 9.2%, with a net gain of about 900 and 900 openings annually including replacements. The May 2025 U.S. national median was $58,170 a year and $27.97 an hour.",
                 "id": "aircraft-cargo-handling-supervisors.faq.9",
                 "question": "What are the U.S. employment prospects, and which directions can I move into?",
-                "question_key": "career.faq.aircraft-cargo-handling-supervisors.outlook-transition"
+                "question_key": "career.faq.aircraft-cargo-handling-supervisors.outlook-transition",
+                "source_refs": [
+                  "ep",
+                  "oews"
+                ]
               },
               {
                 "answer": "The ONet U.S. context: 86% indoors in a non-environmentally-controlled setting every day, 78% outdoors in all kinds of weather every day, 71% wear common PPE every day, 66% consider precision extremely important, 81% face time pressure every day, and 60% work a 40-hour week. These are respondent answers, and no conclusion about all employers' shifts or an individual's harm is drawn from these shares.",
                 "id": "aircraft-cargo-handling-supervisors.faq.10",
                 "question": "What is the working environment like?",
                 "question_key": "career.faq.aircraft-cargo-handling-supervisors.work-context"
+              },
+              {
+                "answer": "Reference V1: P=2+3=5, Q=4+1=5, total 10; weighted position=(2×1+3×2+4×3+1×4)/10=24/10=2.4. The two errors are the Q entry 4 and the total 9; the weighted position 2.4 is correct. Reference V2 on the original plan: P=5, Q=7, total 12, weighted position=(2+6+12+12)/12=32/12≈2.667. Q exceeds the practice capacity by 1 point; the V1 total and confirmation must not be carried over. The paper grouping can be changed to P=A+C=6, Q=B+D=6, the total still 12 and the weighted position still 32/12, marked candidate V2a. Reference handover: V1 has been affected by the new data; V2a is only a candidate, Reviewer 1’s receipt of V2 alone is not a confirmation, and whether Reviewer 2 received, computed or confirmed V2/V2a is unknown. The handover records CH32, V1→V2→V2a, D1→3, the two old errors, the original Q exceeding 1, the candidates 6/6 and the items still to be confirmed one by one, without claiming that a real load could proceed. In the variant, update Reviewer 2’s receipt of V2a only. Calculation review and signoff remain incomplete; V2a is still unconfirmed. Scoring 8 points, 1 each: ①V1's two groups 5/5; ②the total 10 and the weighting 2.4; ③naming the old Q=4 as wrong; ④naming the old total 9 as wrong; ⑤V2's original 5/7 and total 12; ⑥32/12≈2.667; ⑦the candidates 6/6 marked for revision or unconfirmed; ⑧Reviewer 1 confirmed receipt of V2 only; Reviewer 2 confirmed receipt of V1 only, with later receipt unknown, and the versions must not be mixed. Low-scoring answer 'V1 total 10, weighting 2.4; carry over the original registered groups 5/4; V2's total 12 can be confirmed directly, and both reviewers confirm it'. This satisfies only ②, scoring 1/8; ⑤ lacks 5/7, ⑦ has no correct candidate and ⑧ is wrong, and the rest are not met either. Full-credit answer 'V1=5/5, total 10, weighting 2.4; the old Q4 and the total 9 are wrong. V2=5/7, total 12, weighting 32/12; candidate V2a P=A+C6/Q=B+D6 marked for revision or unconfirmed, Reviewer 1 confirmed receipt of V2 only; Reviewer 2 confirmed receipt of V1 only, with later receipt unknown'. This satisfies ①—⑧ item by item, scoring 8/8. The scoring checks this exercise only and demonstrates neither recruitment nor fitness.",
+                "id": "aircraft-cargo-handling-supervisors.faq.11",
+                "question": "CH32 reference and scoring (open after submitting)",
+                "question_key": "career.faq.aircraft-cargo-handling-supervisors.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31918,14 +31949,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET supports this occupation's tasks, context, interests, the 2025 job-posting software and the industry shares; the BLS2025 wage and the 2025—2035 projection are labelled with their own scope; the Chinese dangerous-goods rules and CCAR121 support the corresponding duties and the document framework, and NBS2025 serves only as civilian wage background. The readable original of the 2022 skill standard and some extension entry points were not obtained."
+              "O*NET supports job duties, OEWS supplies wages, and BLS Table 1.2 supplies projections. The Changsha and Wuhan postings show their own duties and hiring requirements."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.sources.source-card.2",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "oews",
+            "ep",
+            "hunan",
+            "cathay"
           ],
           "type": "prose"
         },
@@ -31934,12 +31967,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The statistical, legal and occupational-description uses are stated separately; the CH32 on this page is the author's fictional paper exercise and confers no real loading authority. The source access record is in the register."
+              "U.S. wages are May 2025; projections cover 2025–2035. The Changsha table is from 2023; read Wuhan on the employer’s stated scope."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep",
+            "hunan",
+            "cathay"
           ],
           "type": "prose"
         },
@@ -31948,13 +31984,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The U.S. wage is the BLS2025 national row shown by ONet; the current employment projection is BLS2025—2035, and the ONet2024—2034 figures are listed separately and must not be mixed. The Chinese NBS data serve only as industry and unit-type background; the personnel training, the carrier's permit and the post authority are kept apart, and the actual work follows the regulations and the manual."
+              "The U.S. SOC 53-1041 wage does not translate directly into a mainland offer. Check individual training, carrier responsibilities and assigned authority separately under applicable rules and manuals."
             ]
           },
           "id": "aircraft-cargo-handling-supervisors.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "hunan",
+            "cathay",
+            "cargo-mot",
+            "cargo-caac"
           ],
           "type": "prose"
         }
@@ -31987,19 +32026,19 @@
                 "entity": "MBTI personality test",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram personality test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the aircraft cargo handling supervisors occupation page",
@@ -32029,129 +32068,129 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "Accessed 2026-10-02"
+                  "Aircraft cargo handling supervisors coordinate crews, check the loading plan against handling records and escalate discrepancies to the appropriate load-control or review staff. Ramp supervision, cargo station management and onboard load duties have different responsibilities and authority.",
+                  "U.S. occupational tasks."
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "The occupational definition, the possible load and centre-of-gravity calculation, the loading supervision, the in-flight monitoring and the ECR interest; a U.S. basis, not evidence of a statutory qualification or an AI effect.",
+                "limitation": "U.S. occupational tasks.",
                 "market": "United States",
-                "name": "O*NET OnLine 53-1041.00 Aircraft Cargo Handling Supervisors occupation summary",
-                "period": "Accessed 2026-10-02; the task survey year is not uniformly labelled",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 53-1041.00 Aircraft Cargo Handling Supervisors",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-1041.00"
+                "url": "https://www.onetonline.org/link/details/53-1041.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "The 2026-10-02 entry point was not obtained"
+                  "U.S. SOC 53-1041: about 9,700 jobs in 2025 and 10,600 projected in 2035, up 9.2%, with a net gain of about 900 and 900 openings annually including replacements.",
+                  "National occupational projection."
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls",
-                "limitation": "The current OEWS and the 2025 occupational entry point were unreadable this round; that does not show that no industry median was ever published. The wage is carried by the verified OEWS and ONet national rows and the projection by the ep page.",
+                "limitation": "National occupational projection.",
                 "market": "United States",
-                "name": "U.S. BLS Occupational Employment and Wage Statistics (OEWS): 53-1041",
-                "period": "Accessed 2026-10-02; the entry point failed to read",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
-                "url": "https://www.bls.gov/oes/current/oes531041.htm"
-              },
-              {
-                "accessed_at": "2026-10-02",
-                "details": [
-                  "exact",
-                  "Accessed 2026-10-02"
-                ],
-                "evidence_type": "primary_document",
-                "id": "ep",
-                "limitation": "Base 9.7 thousand, 2035 10.6 thousand, growth 9.2%, net 0.9 thousand and average annual openings 0.9 thousand; all rounded and not an AI causal claim.",
-                "market": "United States",
-                "name": "BLS2025—2035 occupational projection table: 53-1041",
-                "period": "The 2025—2035 projection; the table's 2025 median wage",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "name": "BLS Employment Projections Table 1.2: 53-1041",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "Accessed 2026-10-02"
+                  "U.S. SOC 53-1041: about 9,700 jobs in 2025 and 10,600 projected in 2035, up 9.2%, with a net gain of about 900 and 900 openings annually including replacements.",
+                  "National occupational projection."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ep",
+                "limitation": "National occupational projection.",
+                "market": "United States",
+                "name": "BLS Employment Projections Table 1.2: 53-1041",
+                "period": "2025–2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The May 2025 U.S. national median was $58,170 a year and $27.97 an hour.",
+                  "U.S. national percentiles, not offers."
                 ],
                 "evidence_type": "primary_document",
                 "id": "oews",
-                "limitation": "This round read the United States national annual-wage and hourly-wage percentile rows; the state rows such as Texas on the same page are listed separately and are not mixed. It does not support the employment projection.",
+                "limitation": "U.S. national percentiles, not offers.",
                 "market": "United States",
-                "name": "The BLS OEWS 2025, month 5 (May) wage percentiles shown by O*NET: 53-1041.00",
-                "period": "The 2025, month 5 (May) U.S. national wage",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "name": "O*NET wage table (BLS OEWS)",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/53-1041.00?st=TX"
+                "url": "https://www.onetonline.org/link/localwages/53-1041.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "industry_proxy",
-                  "This round reuses the NBS full text already read on the same day"
+                  "NBS reports a CNY 133,981 annual average for 2025 urban non-private transportation, storage and postal units. This is an industry average, not national pay for cargo supervisors.",
+                  "Industry averages."
                 ],
                 "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "Annual average wage background by urban unit industry and unit type and by above-scale position category, not this occupation's median.",
+                "limitation": "Industry averages.",
                 "market": "Mainland China",
-                "name": "National Bureau of Statistics, 'Average Annual Wages of Employed Persons in Urban Units in 2025'",
-                "period": "2025, published 2026-05-15",
-                "publisher": "National Bureau of Statistics",
+                "name": "NBS 2025 Urban Unit Wages",
+                "period": "2025",
+                "publisher": "NBS",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "The 2026-10-02 text was not obtained"
+                  "Mainland cargo rules require carriers to establish and apply procedures for ground transfer and loading. Check the carrier manual, assigned duties and authorization. Loading supervision reports discrepancies through the established process; load control, weight-and-balance documents, dangerous goods and flight signoff have separate requirements.",
+                  "Apply the relevant manual and assigned authority."
                 ],
                 "evidence_type": "primary_document",
                 "id": "cnclass",
-                "limitation": "The official notice and the 2022 PDF were searched and the access returned an empty text; the specific trades, education, grades and medical examination were not checked, and no uniform threshold is filled in.",
+                "limitation": "Apply the relevant manual and assigned authority.",
                 "market": "Mainland China",
-                "name": "National Vocational Skill Standard for Ground Service Personnel in Air Transport (Ministry of Human Resources and Social Security Office Letter No. 37 of 2022)",
-                "period": "The official publication entry point of the 2022 standard; the 2026-10-02 text was not obtained",
-                "publisher": "Ministry of Human Resources and Social Security of the People's Republic of China and the Civil Aviation Administration of China",
-                "scope": "parent",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/rencairenshi/zcwj/jinengrencai/202210/t20221018_488683.html"
+                "name": "CAAC: Aircraft Cargo Loading and Unloading Guidance",
+                "period": "2023",
+                "publisher": "CAAC",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202308/P020230822523273632081.pdf"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Used for respondent shares such as weather, noise, precision requirements, and physical effort and posture.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
                 "id": "privacy",
-                "limitation": "Used for respondent shares such as weather, noise, precision requirements, and physical effort and posture. This round did not re-check this extension entry point, and no new claim is made from it.",
+                "limitation": "Used for respondent shares such as weather, noise, precision requirements, and physical effort and posture.",
                 "market": "United States",
                 "name": "O*NET OnLine 53-1041.00 work context (Work Context)",
-                "period": "The original page access record 2026-09-15; this round did not re-check that extension entry point",
+                "period": "Further reading",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-1041.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "Accessed 2026-10-02"
+                  "The O*NET occupation summary lists tools such as cargo tracking and warehouse management. Its separate posting-based list does not establish employer adoption rates.",
+                  "The O*NET occupation summary lists tools such as cargo tracking and warehouse management. Its separate posting-based list does not establish employer adoption rates."
                 ],
                 "evidence_type": "recruitment",
                 "id": "facilities",
-                "limitation": "Facebook, Excel, Office, Outlook and Word, 5 entries, all with the share Not available; the summary's 7 software classes are listed separately and do not represent an adoption rate or an effect.",
+                "limitation": "The O*NET occupation summary lists tools such as cargo tracking and warehouse management. Its separate posting-based list does not establish employer adoption rates.",
                 "market": "United States",
                 "name": "O*NET OnLine 53-1041.00 technologies list (Hot Technologies)",
-                "period": "The U.S. unique job-posting text 2025-01-01 to 2025-12-31",
+                "period": "Software listed in postings",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/53-1041.00"
@@ -32159,7 +32198,7 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "exact",
+                  "Transport and warehousing 97% and other 3%; a broad-category employment share is not a fine industry wage or a job opportunity.",
                   "Accessed 2026-10-02"
                 ],
                 "evidence_type": "primary_document",
@@ -32175,15 +32214,15 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Used for optional certification information; it does not constitute a mandatory qualification for this occupation.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
                 "id": "hr",
-                "limitation": "Used for optional certification information; it does not constitute a mandatory qualification for this occupation. This round did not re-check this extension entry point, and no new claim is made from it.",
+                "limitation": "Used for optional certification information; it does not constitute a mandatory qualification for this occupation.",
                 "market": "United States",
                 "name": "O*NET OnLine 53-1041.00 certification directory",
-                "period": "The original page access record 2026-09-15; this round did not re-check that extension entry point",
+                "period": "Further reading",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/53-1041.00"
@@ -32191,79 +32230,79 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Used for optional training information.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
                 "id": "health",
-                "limitation": "Used for optional training information. This round did not re-check this extension entry point, and no new claim is made from it.",
+                "limitation": "Used for optional training information.",
                 "market": "United States",
                 "name": "O*NET OnLine 53-1041.00 training directory",
-                "period": "The original page access record 2026-09-15; this round did not re-check that extension entry point",
+                "period": "Further reading",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/53-1041.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "Accessed 2026-10-02"
+                  "Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately.",
+                  "Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately."
                 ],
                 "evidence_type": "primary_document",
                 "id": "ilo",
-                "limitation": "Article 10 the carrier's transport permit, Articles 59/63 the training and assessment of the relevant personnel for their duties and the manual responsibility; not a general individual dangerous-goods certificate.",
+                "limitation": "Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately.",
                 "market": "Mainland China",
                 "name": "Provisions on the Administration of the Transport of Dangerous Goods by Civil Aircraft (Ministry of Transport No. 4 of 2024)",
-                "period": "The 2024 rules; accessed 2026-10-02",
+                "period": "2024",
                 "publisher": "Ministry of Transport",
-                "scope": "parent",
+                "scope": "contextual",
                 "url": "https://xxgk.mot.gov.cn/jigou/fgs/202402/t20240204_4006984.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "Accessed 2026-10-02"
+                  "CH32 | How do you hand over two versions of the same cargo records?",
+                  "Fictional paper records only."
                 ],
-                "evidence_type": "primary_document",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "Verified the 121.697/699 framework for recording, carrying and keeping the load sheet; it does not show a permit for every individual or a uniform employer division of work.",
-                "market": "Mainland China",
-                "name": "The Rules on the Certification of Large Aeroplane Public Air Transport Carrier Operations (Ministry of Transport Order No. 7 of 2024)",
-                "period": "No. 7 of 2024; accessed 2026-10-02",
-                "publisher": "Ministry of Transport (full text republished on the government website)",
-                "scope": "parent",
-                "url": "https://xxgk.mot.gov.cn/gz/202404/t20240416_4128400.html"
+                "limitation": "Fictional paper records only.",
+                "market": "Fictional case",
+                "name": "CH32 | How do you hand over two versions of the same cargo records?",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/en/career/jobs/aircraft-cargo-handling-supervisors#career-content-path"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "Accessed 2026-09-15"
+                  "NBS reports a CNY 133,981 annual average for 2025 urban non-private transportation, storage and postal units. This is an industry average, not national pay for cargo supervisors.",
+                  "Industry averages."
                 ],
                 "evidence_type": "primary_document",
                 "id": "nist",
-                "limitation": "Used to explain that the total wage bill is on a before-tax basis and what it comprises. This round did not re-check this extension entry point, and no new claim is made from it.",
+                "limitation": "Industry averages.",
                 "market": "Mainland China",
-                "name": "National Bureau of Statistics, 'Provisions on the Composition of the Total Wage Bill'",
-                "period": "The original page access record 2026-09-15; this round did not re-check that extension entry point",
-                "publisher": "National Bureau of Statistics",
-                "scope": "parent",
-                "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
+                "name": "NBS 2025 Urban Unit Wages",
+                "period": "2025",
+                "publisher": "NBS",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Used for the job preparation level and the education requirement description.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
                 "id": "arxiv",
-                "limitation": "Used for the job preparation level and the education requirement description. This round did not re-check this extension entry point, and no new claim is made from it.",
+                "limitation": "Used for the job preparation level and the education requirement description.",
                 "market": "United States",
                 "name": "O*NET OnLine 53-1041.00 education requirements (Job Zone 1-2)",
-                "period": "The original page access record 2026-09-15; this round did not re-check that extension entry point",
+                "period": "Further reading",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-1041.00"
@@ -32271,15 +32310,15 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Used for the work activities and their importance levels.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
                 "id": "weforum",
-                "limitation": "Used for the work activities and their importance levels. This round did not re-check this extension entry point, and no new claim is made from it.",
+                "limitation": "Used for the work activities and their importance levels.",
                 "market": "United States",
                 "name": "O*NET OnLine 53-1041.00 occupation details (importance of work activities)",
-                "period": "The original page access record 2026-09-15; this round did not re-check that extension entry point",
+                "period": "Further reading",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-1041.00"
@@ -32287,15 +32326,15 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Used for the occupation overview and related-occupation entries.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
                 "id": "employer",
-                "limitation": "Used for the occupation overview and related-occupation entries. This round did not re-check this extension entry point, and no new claim is made from it.",
+                "limitation": "Used for the occupation overview and related-occupation entries.",
                 "market": "United States",
                 "name": "O*NET OnLine 53-1041.00 custom occupation profile",
-                "period": "The original page access record 2026-09-15; this round did not re-check that extension entry point",
+                "period": "Further reading",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/53-1041.00"
@@ -32303,7 +32342,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "The occupational definition, the possible load and centre-of-gravity calculation, the loading supervision, the in-flight monitoring and the ECR interest; a U.S. basis, not evidence of a statutory qualification or an AI effect.",
                   "Accessed 2026-10-02"
                 ],
                 "evidence_type": "primary_document",
@@ -32319,15 +32358,15 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Used for task material.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
                 "id": "r2-pay-1",
-                "limitation": "Used for task material. This round did not re-check this extension entry point, and no new claim is made from it.",
+                "limitation": "Used for task material.",
                 "market": "United States",
                 "name": "O*NET OnLine 53-1041.00 tasks and work activities",
-                "period": "The original page access record 2026-09-15; this round did not re-check that extension entry point",
+                "period": "Further reading",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-1041.00"
@@ -32335,7 +32374,7 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "exact",
+                  "Transport and warehousing 97% and other 3%; a broad-category employment share is not a fine industry wage or a job opportunity.",
                   "Accessed 2026-10-02"
                 ],
                 "evidence_type": "primary_document",
@@ -32349,33 +32388,33 @@
                 "url": "https://www.onetonline.org/link/industry/53-1041.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "Accessed 2026-10-02"
+                  "The May 2025 U.S. national median was $58,170 a year and $27.97 an hour.",
+                  "U.S. national percentiles, not offers."
                 ],
                 "evidence_type": "primary_document",
                 "id": "r2-pay-3",
-                "limitation": "This round read the United States national annual-wage and hourly-wage percentile rows; the state rows such as Texas on the same page are listed separately and are not mixed. It does not support the employment projection.",
+                "limitation": "U.S. national percentiles, not offers.",
                 "market": "United States",
-                "name": "The BLS OEWS 2025, month 5 (May) wage percentiles shown by O*NET: 53-1041.00",
-                "period": "The 2025, month 5 (May) U.S. national wage",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "name": "O*NET wage table (BLS OEWS)",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/53-1041.00?st=TX"
+                "url": "https://www.onetonline.org/link/localwages/53-1041.00"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Used for the respondent shares of the new-entrant education requirement (64% with a high school diploma and so on).",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
                 "id": "census",
-                "limitation": "Used for the respondent shares of the new-entrant education requirement (64% with a high school diploma and so on). This round did not re-check this extension entry point, and no new claim is made from it.",
+                "limitation": "Used for the respondent shares of the new-entrant education requirement (64% with a high school diploma and so on).",
                 "market": "United States",
                 "name": "O*NET OnLine 53-1041.00 education requirements (Education)",
-                "period": "The original page access record 2026-09-15; this round did not re-check that extension entry point",
+                "period": "Further reading",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-1041.00"
@@ -32383,7 +32422,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "The occupational definition, the possible load and centre-of-gravity calculation, the loading supervision, the in-flight monitoring and the ECR interest; a U.S. basis, not evidence of a statutory qualification or an AI effect.",
                   "Accessed 2026-10-02"
                 ],
                 "evidence_type": "primary_document",
@@ -32397,53 +32436,130 @@
                 "url": "https://www.onetonline.org/link/summary/53-1041.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "Accessed 2026-10-02"
+                  "The May 2025 U.S. national median was $58,170 a year and $27.97 an hour.",
+                  "U.S. national percentiles, not offers."
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "This round read the United States national annual-wage and hourly-wage percentile rows; the state rows such as Texas on the same page are listed separately and are not mixed. It does not support the employment projection.",
+                "limitation": "U.S. national percentiles, not offers.",
                 "market": "United States",
-                "name": "The BLS Occupational Employment and Wage Statistics shown by O*NET (53-1041.00)",
-                "period": "The 2025, month 5 (May) U.S. national wage",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "name": "O*NET wage table (BLS OEWS)",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/53-1041.00?st=TX"
+                "url": "https://www.onetonline.org/link/localwages/53-1041.00"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Used for process material on records, loading documents and anomaly reporting.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
                 "id": "archivists",
-                "limitation": "Used for process material on records, loading documents and anomaly reporting. This round did not re-check this extension entry point, and no new claim is made from it.",
+                "limitation": "Used for process material on records, loading documents and anomaly reporting.",
                 "market": "United States",
                 "name": "O*NET OnLine 53-1041.00 detailed work activities and record requirements",
-                "period": "The original page access record 2026-09-15; this round did not re-check that extension entry point",
+                "period": "Further reading",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-1041.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Load plan｜Holds and weights｜Determine the quantity, weight and orientation of the cargo within the waybill and the aircraft type's hold limits, and calculate each hold's load using charts and computers. — 75/100; weight=1/3; aircraft-cargo-handling-supervisors.profile.responsibilities-block.1[0]",
-                  "Load planning｜Centre of gravity and balance｜Calculate the aircraft's centre of gravity, distribute the cargo within the weight and balance limits, avoid overload and off-centre loading, and make the best use of the space. — 75/100; weight=1/3; aircraft-cargo-handling-supervisors.profile.responsibilities-block.1[1]",
-                  "On-site supervision｜Loading, unloading and securing｜Direct ground staff loading, unloading, securing or placing cargo and baggage, and check the condition of the unit load devices and the tie-downs. — 25/100; weight=1/3; aircraft-cargo-handling-supervisors.profile.responsibilities-block.1[2]"
+                  "Tools can compare IDs and revisions or flag differences in fictional records. Actual loading, load control and authorized handover still follow approved procedures. The sources here provide no AI displacement rate for the occupation.",
+                  "No displacement estimate.",
+                  "No displacement estimate.",
+                  "No displacement estimate.",
+                  "No displacement estimate."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "No displacement estimate.",
+                "market": "Editorial guidance",
+                "name": "Editorial note: AI and cargo records",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In December 2023, Hunan Airport Logistics advertised three domestic loading and unloading monitors in Changsha. The role required junior college or higher and covered supervision, inspection and verification of cargo, mail and baggage handling. The original table listed CNY 60,000–100,000 per year inclusive of social insurance and housing fund, with performance assessment. This is one historical posting’s pay basis."
+                ],
+                "evidence_type": "primary_document",
+                "id": "hunan",
+                "limitation": "Historical pay on the employer’s stated basis.",
+                "market": "Mainland China",
+                "name": "Hunan Airport Logistics: Changsha loading and unloading monitors",
+                "period": "2023-12-11",
+                "publisher": "Hunan Airport Logistics",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hunanairport.cn/content/646756/55/13342221.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Cathay Pacific’s Wuhan cargo supervisor posting covers rostering, oversight of handling agents, quality checks and coaching alongside cargo services and sales support. It lists a college degree or equivalent, at least four years in cargo operations, cargo sales or cargo customer service, and supervisory experience with third-party handlers. No pay is listed."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cathay",
+                "limitation": "Single employer; no pay figure.",
+                "market": "Mainland China",
+                "name": "Cathay Pacific: Wuhan cargo supervisor",
+                "period": "2026",
+                "publisher": "Cathay Pacific",
+                "scope": "recruitment_proxy",
+                "url": "https://careers.cathaypacific.com/cn/careers/jobs/china/cargo-supervisor-wuhan-32594"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Mainland cargo rules require carriers to establish and apply procedures for ground transfer and loading. Check the carrier manual, assigned duties and authorization. Loading supervision reports discrepancies through the established process; load control, weight-and-balance documents, dangerous goods and flight signoff have separate requirements."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cargo-mot",
+                "limitation": "Applies to the entities in the rule.",
+                "market": "Mainland China",
+                "name": "MOT: Civil Air Cargo Transport Rules",
+                "period": "2024",
+                "publisher": "Ministry of Transport",
+                "scope": "contextual",
+                "url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202407/t20240708_4144061.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Mainland cargo rules require carriers to establish and apply procedures for ground transfer and loading. Check the carrier manual, assigned duties and authorization. Loading supervision reports discrepancies through the established process; load control, weight-and-balance documents, dangerous goods and flight signoff have separate requirements."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cargo-caac",
+                "limitation": "Apply the relevant manual and assigned authority.",
+                "market": "Mainland China",
+                "name": "CAAC: Aircraft Cargo Loading and Unloading Guidance",
+                "period": "2023",
+                "publisher": "CAAC",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202308/P020230822523273632081.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "For operations covered by the 2024 large-airplane carrier rule, section 121.697 governs weight and loading evidence on the load manifest. Section 121.699 concerns carriage and retention for domestic and international scheduled passenger operations. A job title alone confers no signing authority."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cargo-ccar121",
+                "limitation": "Check the operations and sections covered.",
+                "market": "Mainland China",
+                "name": "MOT: Large Airplane Air Carrier Operations Rules",
+                "period": "2024",
+                "publisher": "Ministry of Transport",
+                "scope": "contextual",
+                "url": "https://xxgk.mot.gov.cn/2020/gz/202404/t20240416_4128400.html"
               }
             ]
           },
@@ -35779,9 +35895,9 @@
         }
       },
       "hero": {
-        "h1": "Aircraft cargo handling supervisors",
-        "quick_answer": "Aircraft cargo handling supervisors supervise the loading, unloading, securing and placing of air cargo and baggage on the apron, at the cargo terminal and in the cargo hold within the weight and balance limits, calculate each hold's load and the aircraft's centre of gravity, complete the loading documents and finish the handover; it suits people who first test, with one load sheet and load estimate exercise, whether they accept leading a crew by procedure and repeatedly verifying the load and the loading-safety responsibility.",
-        "title": "Aircraft cargo handling supervisors"
+        "h1": "Aircraft Cargo Handling Supervisors",
+        "quick_answer": "Aircraft cargo handling supervisors coordinate crews, check the loading plan against handling records and escalate discrepancies to the appropriate load-control or review staff. Ramp supervision, cargo station management and onboard load duties have different responsibilities and authority.",
+        "title": "Aircraft Cargo Handling Supervisors"
       },
       "market_signal_card": {
         "context_links": [
@@ -37132,7 +37248,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my vocational interests suit aircraft cargo handling supervisors",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37209,7 +37325,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five personality (English)"
+            "label": "Big Five personality test"
           },
           {
             "href": {
@@ -37219,7 +37335,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -37229,7 +37345,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Enneagram (Chinese)"
+            "label": "Enneagram test"
           },
           {
             "href": {
@@ -37239,7 +37355,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Intelligence and reasoning (Chinese)"
+            "label": "Intelligence and reasoning test"
           }
         ]
       },
@@ -37346,7 +37462,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and cargo records",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of work directions",
       "fit": "Occupation fit guide",
@@ -37689,7 +37805,7 @@
       },
       {
         "derivation": null,
-        "display_value": "China 2024 No. 4: Article 10 places the transport permit with the carrier; Articles 59/63 require the relevant staff to be trained and assessed as competent for their duties and to work to the manual. An individual's training certificate, the carrier's permit and the actual post authorisation must not be conflated into one personal licence.",
+        "display_value": "Under the 2024 dangerous goods rule, Article 10 concerns the carrier’s transport permit. Articles 59 and 63 concern staff training and assessment for covered mainland entities and a syllabus based on duties. Check training and operating authorization separately.",
         "fact_id": "path-boundary",
         "market": "Mainland China",
         "measure": "Entry qualification boundary",
@@ -37749,7 +37865,7 @@
       },
       {
         "derivation": null,
-        "display_value": "HotTech2025 job-posting software, 5 entries with no share; the summary lists 7 software classes separately",
+        "display_value": "The O*NET occupation summary lists tools such as cargo tracking and warehouse management. Its separate posting-based list does not establish employer adoption rates.",
         "fact_id": "technology-context",
         "market": "United States",
         "measure": "Technology page availability",
@@ -37783,27 +37899,15 @@
         "source_refs": [
           "ep"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "58%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Aircraft cargo handling supervisors",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and cargo records"
     },
     "badges": [
       "Tasks: load planning and load distribution · on-site loading supervision · escalation of anomalies and handover",
@@ -37847,17 +37951,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What aircraft cargo handling supervisors do, what training and qualifications they need, how pay and employment prospects look in the United States and mainland China, and which tasks AI will change; source scope and data gaps are retained."
+      "text": "Compare ramp supervision, cargo station work and load control. Review Changsha and Wuhan hiring, U.S. pay and a fictional handover exercise."
     },
     "title": {
       "availability": "available",
-      "text": "Aircraft cargo handling supervisors: occupational content, pay and employment prospects"
+      "text": "Aircraft Cargo Handling Supervisors: Work, Pay and a Handover Exercise"
     }
   },
-  "source_content_sha256": "922e78f753f87dd0e4139543c30a8f2778f5e99fbf6fc2dbe7eac0da1884f2e8",
+  "source_content_sha256": "a1bc3dbd044f18d922b0f245eb1f33360ad8ae366f1db506f48e9a86a388b96f",
   "subject": {
     "canonical_slug": "aircraft-cargo-handling-supervisors",
-    "name": "Aircraft cargo handling supervisors",
-    "summary": "Supervise ground staff loading, unloading, securing and placing aircraft cargo and baggage, possibly take part in weight and centre-of-gravity calculations, and in some posts monitor cargo aboard the aircraft; the actual duties, training and authority are checked against the jurisdiction, the operator's manual and the post."
+    "name": "Aircraft Cargo Handling Supervisors",
+    "summary": "Aircraft cargo handling supervisors coordinate crews, check the loading plan against handling records and escalate discrepancies to the appropriate load-control or review staff. Ramp supervision, cargo station management and onboard load duties have different responsibilities and authority."
   }
 }

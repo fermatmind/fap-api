@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1497,7 +1494,7 @@
         "status": "pending_mapping"
       },
       "item:healthcare-social-workers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:healthcare-social-workers.sources.source-card.1": {
         "status": "mapped"
@@ -24117,25 +24114,10 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "自我提问｜愿不愿意倾听疾病相关的社会与家庭困难，查证资源条件，协调交接并如实记录？本清单不是能力评分或录用标准。先用H01虚构纸面材料体验记录与转介准备，不接触真实病历或服务对象。"
+              "时间紧或家属意见不一时，仍要核实名额和资格，记录未决项并交接给有权限的人员。"
             ]
           },
           "id": "healthcare-social-workers.quick-decision.fit-decision-checklist.1",
-          "source_refs": [
-            "onet",
-            "employer"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.fit-decision-checklist",
-          "data": {
-            "paragraphs": [
-              "演练题面｜一份完全虚构的医疗社会心理支持与个案管理任务包（仅用于练习流程，不代表任何真实机构、服务对象、家庭或数据）。请写出方案草案：（1）如何根据一份虚构的转介单与病历摘要与社会心理评估要点，按结构化思路安排一个个案（服务对象与家庭状况、需求与风险识别、可及资源与转介清单、照护与干预目标与计划、危机预案与安全计划、保密与同意与信息披露边界、记录与复核、评估与结案），并写明哪些信息不足需要补充（疾病诊断与预后与治疗计划、家庭照护资源与经济状况、住房与法律援助与就业等需求、物质滥用与心理健康与安全风险、语言与文化差异、同意能力与伦理与保密例外要求）；（2）如何为一份虚构的个案记录与进展与转介与费用记录表设计填写与复核要点（字段与口径、服务对象与家庭、评估与目标与干预、进展与转介与结果、异常与复核与更正、原始记录与修订留痕）；（3）如何撰写一份可交接的个案摘要（服务对象—需求与依据—干预与转介—危机与安全—保密与同意—评估与结案—遗留项）；（4）如何记录与保存个案与健康与家庭信息，并区分可披露信息与受控或涉及服务对象与家庭敏感信息的资料；（5）如何在发现安全风险或疑似虐待或忽视或保密例外或超出岗位授权时暂停并复核与上报。使用公开资料与模拟数据作答，不使用任何真实服务对象或家庭数据。"
-            ]
-          },
-          "id": "healthcare-social-workers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
             "onet"
           ],
@@ -24146,7 +24128,21 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜美国 O*NET 21-1022.00 的工作活动重要性显示：协助与照护他人（93）与建立与维护人际关系（88）与获取信息（87）与与上级同事或下属沟通（86）与与组织外的人沟通（83）与记录与记录信息（83）与决策与解决问题（81）与化解冲突与协商（81）与组织、计划与排定优先（79）与直接面向公众工作（76）是该职业最重要的活动；工作情境（百分比响应口径）显示电话交谈 100% 表示每天、面对面讨论 96% 表示每天、电子邮件 93% 表示每天、与他人持续接触 85%、室内环境受控 93% 表示每天、与工作组或团队合作或贡献 73% 表示极为重要、决策自由 41% 表示很大自由、与外部客户或公众打交道 44% 表示极为重要、暴露于疾病或感染 41% 表示每天、冲突情境 19% 表示每天与 59% 表示每周一次或以上、错误的后果 11% 表示极为严重与 37% 表示严重、工作日程 96% 表示常规。若你愿意持续与处于疾病与危机中的人及其家庭沟通、能在多方资源与制度约束下把个案与记录做扎实、并愿意为服务对象的安全与隐私承担责任，本职业的日常要求与你的工作方式更接近。"
+              "到「入行与 H01：社区资源与预算」比较费用、待核资格和交接对象。"
+            ]
+          },
+          "id": "healthcare-social-workers.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "paper-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "观察自己能否把已确认的资源和仍待核对的条件分开记录。"
             ]
           },
           "id": "healthcare-social-workers.quick-decision.fit-decision-checklist.3",
@@ -24160,12 +24156,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜O*NET 同时显示（21-1022.00，工作活动重要性口径与工作情境百分比响应口径）：协助与照护他人（93）与建立与维护人际关系（88）与获取信息（87）为最高活动；与他人持续接触 85%，电话交谈 100% 表示每天、面对面讨论 96% 表示每天、电子邮件 93% 表示每天；暴露于疾病或感染 41% 表示每天、30% 表示每周一次或以上；时间压力 41% 表示每天、33% 表示每周一次或以上；冲突情境 19% 表示每天与 59% 表示每周一次或以上；处理不愉快或愤怒或不礼貌的人 22% 表示每天、52% 表示每周一次或以上；面对暴力或身体攻击性人员 15% 表示每周一次或以上、22% 表示每月一次或以上；错误的后果 11% 表示极为严重、37% 表示严重；每周工作时间超过 40 小时 46%；对他人工作结果的责任 15% 表示很高、33% 表示中等；对他人的健康与安全责任 19% 表示极高、26% 表示高。本职业以危机干预与个案管理与转介与记录为对象，一次危机评估或安全处置不当、一次转介或资源对接失误、一次个案或进展或费用记录失真、一次保密例外或信息披露处理不当、一次越界提供临床或心理诊断与治疗建议，都可能造成服务对象权益与安全受损与机构合规与伦理风险。O*NET 将该职业列入 Job Zone Five（需要大量准备，SVP 8.0 及以上）；该页学历部分显示 70% 表示硕士学位、15% 表示学士学位、11% 表示硕士后证书。若你难以长期与处于疾病与创伤与危机中的人沟通、难以承受高冲突与情绪压力，或不愿对隐私与保密例外与伦理与记录的真实性承担责任，应把这些作为需要认真权衡的现实成本。"
+              "练习用虚构记录。"
             ]
           },
           "id": "healthcare-social-workers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24174,7 +24170,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项个案与支持任务上同时完成三件事：把专业做实（依据社会心理评估与照护计划与可及资源，完成需求与风险识别、干预与转介与协调、进展监测与记录，产出可用的个案与转介与进展与费用记录）、把伦理与边界管住（按保密与知情同意与保密例外与服务对象隐私与健康信息保护要求工作并留痕、区分可披露信息与受控或涉及服务对象与家庭的敏感信息并按制度处理、不越界提供临床或心理诊断与治疗建议或替代医护人员与司法程序）、并承担可界定的岗位责任（对本人执行的评估与干预与转介与记录负责，对超出授权或涉及临床判断与诊断与治疗与安置与保护决定与对外披露等事项按制度提请相应岗位或机构处理）。建议用一次可核验的体验（为虚构个案完成一份需求与资源评估与一份个案与转介记录说明，或一次安全风险或保密例外风险的处置复盘）来检验，而不是仅依据兴趣问卷的结论。"
+              "适合愿意听清患者和家庭的实际困难、逐项核实转介条件并跟进交接的人。"
             ]
           },
           "id": "healthcare-social-workers.quick-decision.fermat-decision-card.7",
@@ -24196,7 +24192,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜本页的「医疗社会工作者」是 O*NET 21-1022.00（Healthcare Social Workers）这一精确职业，工作可以分成几类：（一）危机与权益倡导——为客户或患者争取权益以化解危机（重要性 94），调查儿童虐待或忽视案件并在必要时采取经授权的保护行动（88）；（二）评估与照护计划——与其他专业人员协作评估患者的医疗或身体状况并评估客户需求（90），运用会诊数据与社会工作经验规划并协调客户或患者的照护与康复并跟进确保服务有效（83），随客户状况变化修改治疗计划（77）；（三）咨询与教育——向客户讲解临终症状与可选方案以帮助其作出知情决定（90），以个别与小组形式为客户端与患者提供咨询帮助其克服依赖从疾病中恢复并适应生活（79），组织支持小组或为家庭成员提供咨询（77）；（四）转介与资源对接——把患者、客户或家庭转介到社区资源以协助其恢复，并获得经济援助与法律援助与住房与就业安置或教育等服务（88），识别阻碍客户或患者进展的环境障碍（81）；（五）监测与记录——按治疗与照护计划中的可衡量目标监测、评估并记录客户进展（83），在医院监督与医保（Medicaid 与 Medicare）相关的文书与记录工作（63）；（六）出院与团队与项目——规划从照护机构返回家庭或其他照护机构的出院安排（77），监督并指导为客户端或患者提供服务的其他工作人员（67），规划并开展项目以应对社会问题、预防物质滥用或改善社区健康与咨询服务（60），制定社会政策建议或协助社区发展（54），开展社会工作领域的社会研究以推进知识（50）。工作循环衔接：转介与需求与风险识别—社会心理评估与照护计划—干预与咨询与支持—转介与资源对接与协调—进展监测与记录与复核—出院或结案与交接与随访。本页不把该职业与相邻的心理健康与物质滥用社会工作者、儿童家庭与学校社会工作者、社区健康工作者、健康教育专员、社会与人类服务助理等混为一谈，也不把个案与支持职责扩大到代替临床诊断、治疗、用药与司法决定的范围。"
+              "医务社工了解患者和家庭的实际困难，与团队协调服务资源并记录转介和交接。常见任务包括适应就医过程、出院后的社区衔接和服务条件核对。"
             ]
           },
           "id": "healthcare-social-workers.profile.career-quick-answers-block.1",
@@ -24210,7 +24206,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 与 BLS 职业档案要点｜本页对应 O*NET/SOC 21-1022.00「Healthcare Social Workers」（医疗社会工作者）这一精确职业，官方范围原文：Provide individuals, families, and groups with the psychosocial support needed to cope with chronic, acute, or terminal illnesses. Services include advising family caregivers. Provide patients with information and counseling, and make referrals for other services. May also provide case and care management or interventions designed to promote health, prevent disease, and address barriers to access to healthcare. 常见职位名称包括 Clinical Social Worker 与 Hospice Social Worker 与 LMSW 与 Medical Social Worker 与 Nephrology Social Worker 与 Oncology Social Worker 与 Psychosocial Coordinator 与 Renal Social Worker 与 Social Work Case Manager 与 Social Worker。O*NET 列出的列示任务包括（当前18项：15Core、2Supplemental、1New）：为客户或患者争取权益以化解危机（94）；向客户讲解临终症状与可选方案以帮助其作出知情决定（90）；与其他专业人员协作评估患者的医疗或身体状况并评估客户需求（90）；把患者、客户或家庭转介到社区资源以协助其恢复并获得经济援助与法律援助与住房与就业安置或教育等服务（88）；运用会诊数据与社会工作经验规划并协调照护与康复并跟进（83）；按治疗与照护计划中的可衡量目标监测、评估并记录客户进展（83）；通过访谈与查阅病历识别阻碍客户或患者进展的环境障碍（81）；以个别与小组形式提供咨询（79）；规划出院安排（77）；组织支持小组或为家庭成员提供咨询（77）；随客户状况变化修改治疗计划（77）；监督并指导其他工作人员（67）；规划并开展项目（60）；制定社会政策建议或协助社区发展（54）；开展社会研究（50）；调查儿童虐待或忽视案件并采取经授权的保护行动（88）；在医院监督与医保相关的文书与记录工作（63）。工作活动重要性最高为协助与照护他人（93）与建立与维护人际关系（88）与获取信息（87）与与上级同事或下属沟通（86）与与组织外的人沟通（83）。本页的工资与就业口径说明：O*NET 在 21-1022.00 页面呈现的美国工资与就业与行业数据未标注取自上级职业；本页如实采用并在各板块标注为本职业（21-1022.00）自身口径，不以相邻职业数值替代。需一并说明：该页显示 2025—2035 年预测增长为「Much faster than average (7% or higher)」（远快于平均）并标注 Bright Outlook，且 O*NET 将该职业列入 Job Zone Five（需要大量准备，SVP 8.0 及以上），学历部分显示 70% 表示硕士学位、15% 表示学士学位、11% 表示硕士后证书。 当前新增任务｜Conduct psychological assessment of clients标New，重要性未提供；任务登记不自动授予心理或临床执业权限。"
+              "O*NET 与 BLS 职业档案要点｜本页对应 O*NET/SOC 21-1022.00「Healthcare Social Workers」（医疗社会工作者）这一精确职业，官方范围原文：Provide individuals, families, and groups with the psychosocial support needed to cope with chronic, acute, or terminal illnesses. Services include advising family caregivers. Provide patients with information and counseling, and make referrals for other services. May also provide case and care management or interventions designed to promote health, prevent disease, and address barriers to access to healthcare. 常见职位名称包括 Clinical Social Worker 与 Hospice Social Worker 与 LMSW 与 Medical Social Worker 与 Nephrology Social Worker 与 Oncology Social Worker 与 Psychosocial Coordinator 与 Renal Social Worker 与 Social Work Case Manager 与 Social Worker。O*NET 列出的列示任务包括（当前18项：15Core、2Supplemental、1New）：为客户或患者争取权益以化解危机（94）；向客户讲解临终症状与可选方案以帮助其作出知情决定（90）；与其他专业人员协作评估患者的医疗或身体状况并评估客户需求（90）；把患者、客户或家庭转介到社区资源以协助其恢复并获得经济援助与法律援助与住房与就业安置或教育等服务（88）；运用会诊数据与社会工作经验规划并协调照护与康复并跟进（83）；按治疗与照护计划中的可衡量目标监测、评估并记录客户进展（83）；通过访谈与查阅病历识别阻碍客户或患者进展的环境障碍（81）；以个别与小组形式提供咨询（79）；规划出院安排（77）；组织支持小组或为家庭成员提供咨询（77）；随客户状况变化修改治疗计划（77）；监督并指导其他工作人员（67）；规划并开展项目（60）；制定社会政策建议或协助社区发展（54）；开展社会研究（50）。O*NET 将调查儿童虐待或忽视并采取经授权的保护行动（88）、在医院监督 Medicaid 和 Medicare 文书（63）列为补充任务。是否承担取决于分工和授权。工作活动重要性最高为协助与照护他人（93）与建立与维护人际关系（88）与获取信息（87）与与上级同事或下属沟通（86）与与组织外的人沟通（83）。本页的工资与就业口径说明：O*NET 在 21-1022.00 页面呈现的美国工资与就业与行业数据未标注取自上级职业；本页如实采用并在各板块标注为本职业（21-1022.00）自身口径，不以相邻职业数值替代。需一并说明：该页显示 2025—2035 年预测增长为「Much faster than average (7% or higher)」（远快于平均）并标注 Bright Outlook，且 O*NET 将该职业列入 Job Zone Five（需要大量准备，SVP 8.0 及以上），学历部分显示 70% 表示硕士学位、15% 表示学士学位、11% 表示硕士后证书。 当前新增任务｜Conduct psychological assessment of clients标New，重要性未提供；任务登记不自动授予心理或临床执业权限。"
             ]
           },
           "id": "healthcare-social-workers.profile.onet-structured-fields-block.1",
@@ -24224,11 +24220,11 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "危机与权益倡导｜安全与保护｜为客户或患者争取权益以化解危机，调查儿童虐待或忽视案件并在必要时采取经授权的保护行动，处理冲突与干预性风险。",
+              "危机与权益倡导｜安全与保护｜协助化解危机；保护调查只在具体岗位获授权时承担。",
               "评估与照护计划｜需求与目标｜与其他专业人员协作评估患者的医疗或身体状况并评估客户需求，运用会诊数据规划并协调照护与康复并跟进，随客户状况变化修改治疗计划。",
               "咨询与教育｜知情与支持｜向客户讲解临终症状与可选方案以帮助其作出知情决定，以个别与小组形式提供咨询，组织支持小组或为家庭成员提供咨询。",
               "转介与资源对接｜社区资源｜把患者、客户或家庭转介到社区资源并协助获得经济援助与法律援助与住房与就业安置或教育等服务，识别阻碍进展的环境障碍。",
-              "监测与记录｜进展与费用｜按治疗与照护计划中的可衡量目标监测、评估并记录客户进展，在医院监督与医保（Medicaid 与 Medicare）相关的文书与记录工作。",
+              "监测与记录｜进展与费用｜记录客户进展；医院 Medicaid 和 Medicare 文书监督是特定分工下的补充职责。",
               "出院与团队与项目｜协调与治理｜规划出院安排，监督并指导其他工作人员，规划并开展项目，制定社会政策建议或协助社区发展，开展社会工作领域的社会研究。"
             ]
           },
@@ -24373,7 +24369,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录与协作｜按机构个案与伦理与数据管理制度记录转介与需求与风险识别、社会心理评估与照护计划、干预与咨询与支持、转介与资源对接与协调、进展与结果与费用与复核、保密与同意与信息披露与原始记录与修订留痕，并使用规定模板与时限完成；发现安全风险或疑似虐待或忽视或保密例外或记录与现场不一致时立即暂停并按授权上报并请上级与临床与伦理与合规岗位复核，不擅自修改记录或事后补记。"
+              "记录转介资格、同意、联系状态和未决事项。记录错配时保留原件并请负责人复核更正。紧急安全风险按适用危机流程处理。"
             ]
           },
           "id": "healthcare-social-workers.profile.career-quick-answers-block.6",
@@ -24387,7 +24383,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本页对应 O*NET 21-1022.00（医疗社会工作者），与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以医患与家庭的社会心理支持与个案与照护与转介为对象，产出为社会心理评估与个案与照护与转介与进展与费用记录；心理健康与物质滥用社会工作者（21-1023.00）以心理健康与物质滥用治疗为对象；儿童家庭与学校社会工作者（21-1021.00）以儿童与家庭与学校情境为对象；社区健康工作者（21-1094.00）以社区健康促进与导航为对象；健康教育专员（21-1091.00）以人群健康教育与促进项目为对象；社会与人类服务助理（21-1093.00）以在专业指导下提供社会服务支持为对象。对象与产出与授权层级各不相同，不能跨岗位沿用临床诊断、治疗、用药与安置与保护决定与司法决定的权限。"
+              "医务社工围绕患者及家庭做资源和服务衔接。健康教育专员通常面向一群人设计和评估教育项目；临床诊疗仍由有相应资质的专业人员负责。"
             ]
           },
           "id": "healthcare-social-workers.profile.career-quick-answers-block.7",
@@ -24457,7 +24453,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业画像｜本页的医疗社会工作者是 O*NET 21-1022.00（Healthcare Social Workers）这一精确职业，在医院与临终关怀与肾脏与肿瘤与社区卫生与康复等场景承担医患与家庭的社会心理支持与个案与照护与转介工作：为客户或患者争取权益以化解危机、评估需求并规划协调照护、提供咨询与组织支持小组、转介社区资源并协助获得经济与法律与住房与就业等服务、监测并记录进展、规划出院与随访。常见职位名称包括 Clinical Social Worker 与 Hospice Social Worker 与 LMSW 与 Medical Social Worker 与 Nephrology Social Worker 与 Oncology Social Worker 与 Psychosocial Coordinator 与 Renal Social Worker 与 Social Work Case Manager 与 Social Worker；O*NET 在 21-1022.00 页显示该职业在美国的主要行业为医疗保健与社会援助。工作以协助与照护他人（重要性 93）与建立与维护人际关系（88）与获取信息（87）与与上级同事或下属沟通（86）与与组织外的人沟通（83）为最高活动，并伴随电话交谈 100% 表示每天与面对面讨论 96% 表示每天与电子邮件 93% 表示每天与与他人持续接触 85%；暴露于疾病或感染 41% 表示每天；冲突情境 19% 表示每天与 59% 表示每周一次或以上；错误的后果 11% 表示极为严重与 37% 表示严重。O*NET 将该职业列入 Job Zone Five（需要大量准备，SVP 8.0 及以上）；学历部分显示 70% 表示硕士学位、15% 表示学士学位、11% 表示硕士后证书。O*NET 在 21-1022.00 页面呈现的美国工资与就业为本职业自身口径（2025 年中位时薪 $32.63 与中位年薪 $67,880、2025 年就业 194,800 人、2025—2035 年预测增长 7% 或更高、期间年均空缺约 16,900 个）。"
+              "医务社工了解患者和家庭的实际困难，与团队协调服务资源并记录转介和交接。常见任务包括适应就医过程、出院后的社区衔接和服务条件核对。"
             ]
           },
           "id": "healthcare-social-workers.profile.definition-block.11",
@@ -25268,7 +25264,7 @@
                 "url": "https://www.onetonline.org/link/localwages/21-1022.00"
               },
               {
-                "entity": "O*NET呈现2024—2034预测",
+                "entity": "2025–2035",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -25346,7 +25342,7 @@
                 "url": "https://www.onetonline.org/link/details/21-1022.00"
               },
               {
-                "entity": "O*NET2024—2034预测",
+                "entity": "2025–2035",
                 "id": "link-16",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -25494,7 +25490,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页建议把资源检索、记录整理和费用核对作为受控辅助试验；没有本职业实测AI暴露等级、普遍机构采用率或替代率。O*NET描述社会心理支持与协作任务；ILO2025研究潜在任务暴露，不能证明个案服务已被替代。社会心理评估、危机判断、咨询与转介仍须核专业资格、制度和人工责任。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "本页建议把资源检索、记录整理和费用核对作为受控辅助试验；没有本职业实测AI暴露等级、普遍机构采用率或替代率。O*NET描述社会心理支持与协作任务；ILO2025研究潜在任务暴露，不能证明个案服务已被替代。社会心理评估、危机判断、咨询与转介仍须核专业资格、制度和人工责任。"
             ]
           },
           "id": "healthcare-social-workers.ai-impact.ai-impact-table.18",
@@ -26440,7 +26436,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "变更与披露：个案与照护计划与信息披露与报告与处置变更须在授权与伦理要求范围内进行，发现安全风险或疑似虐待或忽视或保密例外或伦理冲突时按制度暂停与上报。"
+              "工具建议涉及披露或转介承诺时，先核角色权限及同意范围。权限不清时只暂缓对应操作；实际紧急风险按适用危机流程处理。"
             ]
           },
           "id": "healthcare-social-workers.ai-impact.ai-impact-table.83",
@@ -27184,7 +27180,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035增长8.5%（OOH约8%；精确率以EP为准）"
+              "2025—2035增长8.5%（BLS 表 1.2）"
             ]
           },
           "id": "healthcare-social-workers.china-salary.career-snapshot-primary-locale.19",
@@ -27542,7 +27538,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜医疗社会工作者（O*NET/SOC 21-1022.00 Healthcare Social Workers；招聘与行业内常称医院医务社会工作者、安宁疗护社会工作者、肿瘤或肾脏专科社会工作者、个案管理社会工作者、医疗社会工作者等；与心理健康与物质滥用社会工作者、儿童家庭与学校社会工作者、社区健康工作者、健康教育专员、社会与人类服务助理分属不同对象与授权层级）"
+              "中国大陆工资：行业参考与职业数据缺口"
             ]
           },
           "id": "healthcare-social-workers.china-salary.career-snapshot-primary-locale.44",
@@ -27980,7 +27976,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035增长8.5%（OOH约8%；精确率以EP为准）"
+              "2025—2035增长8.5%（BLS 表 1.2）"
             ]
           },
           "id": "healthcare-social-workers.us-salary.career-snapshot-secondary-locale.21",
@@ -28496,31 +28492,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "儿童、家庭与学校社会工作者方向",
@@ -28595,7 +28591,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS 就业预测（2024—2034）",
+                "entity": "2025–2035",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/"
@@ -29428,7 +29424,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先完成H01：A64元余额36、B90元余额10，并记录地区/无障碍、余位、接收及授权未知；再处理v2B106元超6元，不默认批准A。用费用表、缺口和版本记录反思耐心、沟通准备与权限意识；这不是临床能力评分，真实实务另核资格和带教。"
+              "到「入行与 H01：社区资源与预算」做纸面练习。"
             ]
           },
           "id": "healthcare-social-workers.fit.personality-fit-block.55",
@@ -30226,27 +30222,27 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "H01虚构材料与条件",
-                  "虚构成年人甲希望比较两次社区支持活动；只知需求是交通费用与无障碍安排，不提供诊断、病历、姓名地址或真实服务记录。预算上限100元。",
-                  "虚构资源A：两次活动各20元，往返交通每次12元，要求地区R居民；甲是否为R居民未知。资源B：两次活动各35元，往返交通每次10元，不限R，但无障碍安排未知。两资源余位及接收均未确认。",
-                  "记录v1：09:00询价，09:20拟联系资源A，未记录接收人、同意或披露授权。题面无紧急风险信息；信息缺失不表示安全已确认。"
+                  "H01 虚构来访者有 100 元预算，拟参加两次活动且各往返一次。A 每次活动 20 元、往返 12 元，地区资格待核；B 每次活动 35 元、往返 10 元，无障碍安排待核。分别列成本、余款和交接。变式只将 B 的往返费改为 18 元。",
+                  "使用纸笔或表格保留题设原值。",
+                  "分别列出原题与变式。",
+                  "将未知条件单列。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "H01交付与90分钟安排",
-                  "20分钟列需求、原记录与缺口；25分钟独立算费用；25分钟写资源比较及待确认交接单；20分钟复核、标版本和反思，合计90分钟。",
-                  "提交A/B费用表、未知条件清单及不披露个人信息的虚构交接草案；不写成已转介、已获同意或已安置。"
+                  "提交两套计算、逐项待核条件和简短交接。",
+                  "写清分母或费用单位，以及变式只改哪一项。",
+                  "保留第一稿并指定下一位复核人。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "H01参考交付",
-                  "A活动费2×20=40元、交通2×12=24元，总64元，预算余额36元；B活动费70元、交通20元，总90元，余额10元。两者账面均未超100元，不代表甲符合资格或可参加。",
-                  "09:00至09:20为20分钟记录间隔，不是服务时长、接收完成或同意证明。A地区资格未知，B无障碍条件未知；二者余位、接收和披露授权均待确认，不能仅因A便宜就批准转介。",
-                  "交接草案只写编号H01、需求、费用与待核条件；缺接收/授权证据时保持待确认。风险：虚构资源条件生成成事实、把拟联系写成已接收、未授权外发；分别核原文、保留状态与使用纯虚构材料。"
+                  "先核输入和单位。",
+                  "保留计算过程和更正记录。",
+                  "第 6 天独立完成两题。",
+                  "再打开常见问题的参考解。"
                 ]
               },
               {
@@ -30261,10 +30257,9 @@
           },
           "id": "healthcare-social-workers.path.entry-work-sample-data.1",
           "source_refs": [
-            "employer",
-            "onet"
+            "paper-exercise"
           ],
-          "title": "H01虚构练习：资源条件、费用与待确认交接",
+          "title": "H01：社区资源与预算",
           "type": "cards"
         },
         {
@@ -30275,28 +30270,28 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "H01资源条件与费用表",
-                  "列A64元余额36、B90元余额10及算式、单位；A地区资格与B无障碍未知，二者余位、接收和授权待确认。"
+                  "列原值、计算依据和待核条件。",
+                  "列原值、计算依据和待核条件。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "H01复核与版本记录",
+                  "列原值、计算依据和待核条件。",
                   "自行按题面独立复算，注明作者、时间与v1/v2；可请他人评论，未取得评论就写未取得，不伪造专业批准。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "H01交接草案与缺口",
-                  "只用H01编号，区分询价、拟联系、实际接收；09:20拟联系不是已转介，未知条件保留待确认。"
+                  "列原值、计算依据和待核条件。",
+                  "列原值、计算依据和待核条件。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "H01工具使用说明",
+                  "列原值、计算依据和待核条件。",
                   "说明是否使用表格或生成工具、本人核对与修订位置；未用就明确未用，不把生成草案当真实服务记录。"
                 ]
               }
@@ -30368,50 +30363,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天：读H01原材料",
-                  "列预算100、A/B价格、未知条件及v1拟联系状态；不补造真实病例。"
+                  "读入行区虚构题面并记录输入。",
+                  "记录依据、待核项与交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天：算费用",
-                  "A64/36、B90/10，复核次数与交通单位，保存算式。"
+                  "定义费用单位或分母，保留原值。",
+                  "记录依据、待核项与交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天：比条件",
-                  "A地区资格、B无障碍、二者余位接收授权均未知；拟写确认问题，实际不外联。"
+                  "列待核条件和可交接的记录。",
+                  "记录依据、待核项与交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4天：做90分钟纸面交付",
-                  "按20+25+25+20完成费用表、缺口清单、交接草案和复核。"
+                  "为原题和变式各准备一张结果表。",
+                  "记录依据、待核项与交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5天：处理v2变更",
-                  "只改B交通为每次往返18元，其他条件不变；B70+36=106元，超预算6元；A仍64元但资格与接收等未知，不默认改选A或追加预算。"
+                  "检查原题与变式只有一项输入变化。",
+                  "记录依据、待核项与交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天：独立复核",
-                  "对照v1/v2重新算，注明变化；评论可选，未获专业复核不写已批准。"
+                  "独立完成原题和变式，保存第一稿。",
+                  "记录依据、待核项与交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天：记录体验判断",
-                  "依据耐心核对、沟通准备与权限意识选择继续、暂停或换方向；七日纸面体验不证明能开展临床服务。"
+                  "到常见问题打开参考解，再写后续核实计划。",
+                  "记录依据、待核项与交接对象。"
                 ]
               }
             ]
@@ -30561,13 +30556,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本页没有代表性招聘样本，不据此判断全国数量、薪酬或录用条件。美国职业统计不是中国招聘样本；工资2025与预测2024—2034分期标注。",
+              "马边县 2026 年招募含 4 个医务社会工作服务岗，公告列具名项目的学历、专业和毕业届次条件。地区、批次及用工条件按公告理解。",
               "核对建议｜记录地区、机构、服务对象、职责、工时、合同、工资组成、学历、州执照或当地职业水平要求、督导与资料权限；以真实公告和聘用条件核，不从名称推授权。"
             ]
           },
           "id": "healthcare-social-workers.path.recruitment-sample.1",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -30578,7 +30573,7 @@
           "data": {
             "entries": [
               {
-                "entity": "BLS社会工作者：临床与非临床准备",
+                "entity": "BLS社会工作者职业展望手册",
                 "id": "link-1",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/ooh/community-and-social-service/social-workers.htm"
@@ -30743,15 +30738,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜先定所在地与临床/非临床职责，核真实招聘和法定资格，再准备沟通、资源检索、记录与受督导实务；本页H01可先体验纸面核对。美国BLS说明临床社会工作者需硕士、受督导临床经历与所在州执照，可在法定范围诊断、治疗心理行为情绪问题；部分州也要求非临床岗位持证。中国岗位另核本地制度和雇主条件，不能套美国州执照。北京京卫权益〔2020〕4号规定医务社工服务、岗位及职业水平证书与聘任对应，是北京政策，不证明全国统一执照或所有岗位必须硕士。"
+              "在中国大陆，先查医院或项目的医务社工岗位。马边县 2026 年四个医务社工服务岗列相关专业、学历和毕业届次条件，职责含出入院适应及社区资源对接。具体用工资格以当地和当批公告为准。北京京卫权益〔2020〕4号涉及当地岗位与聘任，适用范围为北京。 美国 BLS 表 1.2 将硕士及实习或受督导训练列为 21-1022 的典型准备。具体岗位另核：BLS 社工手册区分临床和非临床路径；临床通常需社工硕士、受督导临床经历及所在州执照，非临床入行常见社工本科，部分州也要求凭证。"
             ]
           },
           "id": "healthcare-social-workers.path.career-path-block.20",
           "source_refs": [
-            "onet",
+            "ep",
             "bls-social-workers",
-            "beijing-medical-social-work",
-            "employer"
+            "cn-work-example",
+            "beijing-medical-social-work"
           ],
           "type": "prose"
         },
@@ -30811,7 +30806,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国临床岗位硕士、受督导经历及州执照；部分州非临床也要求持证，不套中国。"
+              "美国入行与资格口径"
             ]
           },
           "id": "healthcare-social-workers.path.career-path-block.24",
@@ -32528,7 +32523,7 @@
           "data": {
             "entries": [
               {
-                "answer": "本页的医疗社会工作者是 O*NET 21-1022.00（Healthcare Social Workers）这一精确职业：为个人、家庭与群体提供应对慢性、急性或终末期疾病所需的社会心理支持；服务包括为家庭照护者提供建议；向患者提供信息与咨询并转介其他服务；也可能提供个案管理与照护管理或干预。核心任务包括为客户或患者争取权益以化解危机（重要性 94）、向客户讲解临终症状与可选方案以帮助其作出知情决定（90）、与其他专业人员协作评估患者的医疗或身体状况并评估客户需求（90）、把患者与客户或家庭转介到社区资源（88）、运用会诊数据规划并协调照护与康复并跟进（83）、按可衡量目标监测与评估与记录客户进展（83）、通过访谈与查阅病历识别环境障碍（81）、以个别与小组形式提供咨询（79）、规划出院安排（77）、组织支持小组或为家庭成员提供咨询（77）、调查儿童虐待或忽视案件并采取经授权的保护行动（88）、在医院监督与医保（Medicaid 与 Medicare）相关的文书与记录工作（63）。常见职位名称包括 Clinical Social Worker 与 Hospice Social Worker 与 LMSW 与 Medical Social Worker 与 Nephrology Social Worker 与 Oncology Social Worker 与 Psychosocial Coordinator 与 Renal Social Worker 与 Social Work Case Manager 与 Social Worker；O*NET 在 21-1022.00 页显示该职业在美国的主要行业为医疗保健与社会援助。本页所述为美国职业分类口径，工资与就业为本职业（21-1022.00）自身口径；本页内容不构成任何医疗、诊断、治疗、用药、心理或法律意见。",
+                "answer": "本页的医疗社会工作者是 O*NET 21-1022.00（Healthcare Social Workers）这一精确职业：为个人、家庭与群体提供应对慢性、急性或终末期疾病所需的社会心理支持；服务包括为家庭照护者提供建议；向患者提供信息与咨询并转介其他服务；也可能提供个案管理与照护管理或干预。核心任务包括为客户或患者争取权益以化解危机（重要性 94）、向客户讲解临终症状与可选方案以帮助其作出知情决定（90）、与其他专业人员协作评估患者的医疗或身体状况并评估客户需求（90）、把患者与客户或家庭转介到社区资源（88）、运用会诊数据规划并协调照护与康复并跟进（83）、按可衡量目标监测与评估与记录客户进展（83）、通过访谈与查阅病历识别环境障碍（81）、以个别与小组形式提供咨询（79）、规划出院安排（77）、组织支持小组或为家庭成员提供咨询（77）。O*NET 将调查儿童虐待或忽视并采取经授权的保护行动（88）、在医院监督 Medicaid 和 Medicare 文书（63）列为补充任务。是否承担取决于分工和授权。常见职位名称包括 Clinical Social Worker 与 Hospice Social Worker 与 LMSW 与 Medical Social Worker 与 Nephrology Social Worker 与 Oncology Social Worker 与 Psychosocial Coordinator 与 Renal Social Worker 与 Social Work Case Manager 与 Social Worker；O*NET 在 21-1022.00 页显示该职业在美国的主要行业为医疗保健与社会援助。本页所述为美国职业分类口径，工资与就业为本职业（21-1022.00）自身口径；本页内容不构成任何医疗、诊断、治疗、用药、心理或法律意见。",
                 "id": "healthcare-social-workers.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.healthcare-social-workers.q1",
@@ -32549,16 +32544,13 @@
                 ]
               },
               {
-                "answer": "2025美国本职业中位时薪32.63美元、年薪67,880美元；10分位22.22/46,220，25分位27.27/56,710，75分位39.54/82,240，90分位48.25/100,360（美元/小时、美元/年）。分位是全国分布位置，不识别资历或个人起薪。OEWS含生产性奖金，排除加班、轮班差额、非生产性奖金和福利成本，统计受雇全兼职，排除自雇等；就业矩阵含自雇，两者不混。O*NET呈现2024年本职业就业193,200、2024—2034增长类别7%或更高、年均空缺18,400（含增长与更替）；不是2035数据、实际招聘或个人机会。",
+                "answer": "2025 年 5 月，美国 21-1022 年薪中位数 67,880 美元，时薪中位数 32.63 美元。年薪第 10、25、50、75、90 分位依次为 46,220、56,710、67,880、82,240、100,360 美元。 BLS 表 1.2（美国 21-1022）：2025 年约 194,800 个岗位，2035 年预计约 211,300 个，变化 8.5%，年均约 16,900 个空缺，含替补。",
                 "id": "healthcare-social-workers.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.healthcare-social-workers.q3",
                 "source_refs": [
-                  "onet",
                   "oews",
-                  "ep",
-                  "bls-oews-methods",
-                  "bls-matrix-methods"
+                  "ep"
                 ]
               },
               {
@@ -32584,27 +32576,25 @@
                 ]
               },
               {
-                "answer": "本页建议试验资源检索、摘要和费用汇总等获准或虚构资料辅助，不把潜在研究或软件清单写成中等实测暴露、普遍采用或替代率。ILO2025工作论文140讨论潜在任务暴露，NIST提供自愿治理；专业服务和敏感资料按资格及授权核。O*NET呈现2024年本职业就业193,200、2024—2034增长类别7%或更高、年均空缺18,400（含增长与更替）；不是2035数据、实际招聘或个人机会。不能据增长类别证明AI因果。",
+                "answer": "在机构允许的范围内，工具可帮助整理资源目录和生成记录草稿。社工要核实资格、服务名额和转介条件，并按规定处理同意与资料权限。高风险处置交由具备相应资格的人员。ILO 全球任务暴露数据不说明医院已经采用或岗位会减少。",
                 "id": "healthcare-social-workers.faq.6",
                 "question": "AI 会影响这个职业吗？",
                 "question_key": "career.faq.healthcare-social-workers.q6",
                 "source_refs": [
                   "onet",
-                  "ilo",
-                  "nist",
-                  "employer"
+                  "ilo"
                 ]
               },
               {
-                "answer": "美国O*NET新聘者学历要求调查为硕士70%、学士15%、硕士后证书11%，Zone Five/SVP8.0以上是准备描述，不是所有岗位法定门槛或在岗学历构成。美国临床社会工作者需硕士、受督导经历和适用州执照；部分州非临床也需持证。中国条件按当地制度与真实岗位核，北京京卫权益〔2020〕4号只支持本地医务社工职业水平证书与聘任关系，不证明全国统一执照。H01仅纸面准备，不证明临床能力。",
+                "answer": "在中国大陆，先查医院或项目的医务社工岗位。马边县 2026 年四个医务社工服务岗列相关专业、学历和毕业届次条件，职责含出入院适应及社区资源对接。具体用工资格以当地和当批公告为准。北京京卫权益〔2020〕4号涉及当地岗位与聘任，适用范围为北京。 美国 BLS 表 1.2 将硕士及实习或受督导训练列为 21-1022 的典型准备。具体岗位另核：BLS 社工手册区分临床和非临床路径；临床通常需社工硕士、受督导临床经历及所在州执照，非临床入行常见社工本科，部分州也要求凭证。",
                 "id": "healthcare-social-workers.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.healthcare-social-workers.q7",
                 "source_refs": [
-                  "onet",
+                  "ep",
                   "bls-social-workers",
-                  "beijing-medical-social-work",
-                  "employer"
+                  "cn-work-example",
+                  "beijing-medical-social-work"
                 ]
               },
               {
@@ -32620,7 +32610,7 @@
                 ]
               },
               {
-                "answer": "常见失效包括：危机评估或安全处置或个案与照护与转介不当或越界提供临床或诊断与用药或心理治疗判断；服务对象或家庭敏感信息与健康信息或个案数据处理不当、知情同意或保密例外或强制报告或共享越界；评估或进展或转介或费用记录失真或版本失控，或利益冲突与双重关系处理不当；超出授权自行作出临床判断或安置与保护决定或对外披露；关键危机干预或专科或转介资源能力由单一点承担；个案与转介或无障碍与语言与文化适配不足或服务对象与工作人员安全防护不足。控制要点是按社会工作伦理与保密与知情同意与隐私要求核对与复核与留痕，安全风险或疑似虐待或忽视或保密例外或伦理冲突或超授权事项立即暂停与上报。本页内容不构成医疗、诊断、治疗、用药、心理或法律意见。",
+                "answer": "遇紧急安全风险或疑似虐待、忽视，按适用危机处置和法定报告规则行动。记录不一致或权限不清时，暂缓对应的更正、披露或承诺，保留原记录并交负责人核对。保密例外按适用规定处理。",
                 "id": "healthcare-social-workers.faq.9",
                 "question": "这个职业有哪些主要风险？",
                 "question_key": "career.faq.healthcare-social-workers.q9",
@@ -32630,14 +32620,21 @@
                 ]
               },
               {
-                "answer": "O*NET呈现2024年本职业就业193,200、2024—2034增长类别7%或更高、年均空缺18,400（含增长与更替）；不是2035数据、实际招聘或个人机会。实际招聘另核，不将变化归因人口政策或AI。可按对象与产出比较儿童家庭学校、心理健康物质滥用、社区健康、健康教育、咨询与康复等相邻方向；应重新核学历、资格、实务与权限，不承诺转岗成功。",
+                "answer": "BLS 表 1.2（美国 21-1022）：2025 年约 194,800 个岗位，2035 年预计约 211,300 个，变化 8.5%，年均约 16,900 个空缺，含替补。 相邻方向包括社区资源协调、个案管理或心理健康社会工作。按岗位核对服务对象、受督导经历和执业地资格，临床服务另核授权。",
                 "id": "healthcare-social-workers.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.healthcare-social-workers.q10",
                 "source_refs": [
-                  "onet",
-                  "ep",
-                  "employer"
+                  "ep"
+                ]
+              },
+              {
+                "answer": "原题 A 共 64 元，余 36 元；B 共 90 元，余 10 元。变式 B 共 106 元，超 6 元，A 成本不变。A 的地区资格、B 的无障碍安排及两方可用名额仍待核。 交接时请资源方核对地区资格、无障碍及可用名额，并把未确认项写进给接手同事的记录。",
+                "id": "healthcare-social-workers.faq.paper-exercise",
+                "question": "纸面练习参考解（完成第 6 天后打开）",
+                "question_key": "career.faq.healthcare-social-workers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
                 ]
               }
             ]
@@ -32695,18 +32692,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "精确缺口：中国职业工资/就业，美国本职业行业及地区工资，AI采用/实测/因果和心理测评职业验证未取得。四美国行业为全部社工21-1020背景，NBS2025卫生和社会工作为行业年平均，不代填。北京政策限北京，H01为受保护虚构练习，未改。共享旧事实和保护模块保留。"
+              "马边县 2026 年招募含 4 个医务社会工作服务岗，公告列具名项目的学历、专业和毕业届次条件。地区、批次及用工条件按公告理解。"
             ]
           },
           "id": "healthcare-social-workers.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "nbs",
-            "ilo",
-            "nist",
-            "bls-social-workers",
-            "beijing-medical-social-work",
-            "employer"
+            "cn-work-example"
           ],
           "type": "prose"
         }
@@ -32733,25 +32724,25 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "本职业（医疗社会工作者）",
@@ -32796,7 +32787,7 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于核对官方范围（为个人与家庭与群体提供应对慢性与急性或终末期疾病所需的社会心理支持，服务包括为家庭照护者提供建议，向患者提供信息与咨询并转介其他服务，也可能提供个案管理与照护管理或干预）与常见职位名称。",
+                  "O*NET 职业档案用于核职业身份和任务范围。",
                   "用于核对兴趣代码（SI）与 Job Zone Five 与学历分布（70%／15%／11%）与行业分布（医疗保健与社会援助）。"
                 ],
                 "evidence_type": "official occupation profile",
@@ -32810,33 +32801,32 @@
                 "url": "https://www.onetonline.org/link/summary/21-1022.00"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "用于核对就业 2024 年 193,200 人、2024—2034 年预测增长 7% 或更高与期间年均岗位空缺约 18,400 个（含增长与替补）。",
-                  "用于说明就业预测与 OEWS 时点就业估计口径不同，且预测不等于个人岗位结果、空缺主要由替换需求构成。"
+                  "BLS 表 1.2（美国 21-1022）：2025 年约 194,800 个岗位，2035 年预计约 211,300 个，变化 8.5%，年均约 16,900 个空缺，含替补。",
+                  "美国 BLS 表 1.2 将硕士及实习或受督导训练列为 21-1022 的典型准备。具体岗位另核：BLS 社工手册区分临床和非临床路径；临床通常需社工硕士、受督导临床经历及所在州执照，非临床入行常见社工本科，部分州也要求凭证。"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
-                "limitation": "为 O*NET 在 21-1022.00 页呈现的本职业口径；预测增长 7% 或更高并标注 Bright Outlook。",
+                "limitation": "美国国家就业预测和典型准备分类，具体岗位条件及执业授权须单独核对。",
                 "market": "美国",
-                "name": "O*NET OnLine：医疗社会工作者就业趋势（21-1022.00，本职业自身口径）",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "21-1022.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/21-1022.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "用于核对中位时薪 32.63 美元 / 中位年薪 67,880 美元与第 10/25/75/90 分位（时薪 22.22 / 27.27 / 39.54 / 48.25 美元，年薪 46,220 / 56,710 / 82,240 / 100,360 美元）。",
-                  "用于说明工资分位不是经验等级，也不等于个人起薪。"
+                  "2025 年 5 月，美国 21-1022 年薪中位数 67,880 美元，时薪中位数 32.63 美元。年薪第 10、25、50、75、90 分位依次为 46,220、56,710、67,880、82,240、100,360 美元。"
                 ],
                 "evidence_type": "official wage display",
                 "id": "oews",
                 "limitation": "O*NET 在该页未标注工资数据取自上级职业；本页按本职业自身口径呈现，包含生产性奖金，不含加班、轮班差额、非生产性奖金及雇主福利成本。",
                 "market": "美国",
                 "name": "O*NET OnLine：医疗社会工作者国家工资（21-1022.00，本职业自身口径）",
-                "period": "2025 BLS OEWS wage data via O*NET",
+                "period": "2025-05",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "21-1022.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localwages/21-1022.00"
@@ -33036,17 +33026,17 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于字段与证据口径与缺口登记规则。",
-                  "用于跨市场与法域口径边界说明。"
+                  "以原证解释职业任务与数据口径。",
+                  "以原证解释职业任务与数据口径。"
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "编辑说明",
                 "id": "employer",
-                "limitation": "内部口径规则，非外部事实来源。",
+                "limitation": "只说明本页所用来源。",
                 "market": "全球",
-                "name": "FermatMind 职业内容字段与证据口径规则",
-                "period": "current authoring rules",
+                "name": "本站资料口径说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页",
                 "url": "https://fermatmind.com"
               },
               {
@@ -33146,20 +33136,20 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "用于核对医疗保健与社会援助行业。",
-                  "用于说明主要用人单位类型。"
+                  "2025 年 5 月，美国 21-1022 年薪中位数 67,880 美元，时薪中位数 32.63 美元。年薪第 10、25、50、75、90 分位依次为 46,220、56,710、67,880、82,240、100,360 美元。",
+                  "2025 年 5 月，美国 21-1022 年薪中位数 67,880 美元，时薪中位数 32.63 美元。年薪第 10、25、50、75、90 分位依次为 46,220、56,710、67,880、82,240、100,360 美元。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "onet-wages",
                 "limitation": "该口径为美国分布，不建立中国大陆映射。",
                 "market": "美国",
                 "name": "O*NET OnLine：医疗社会工作者行业分布（21-1022.00）",
-                "period": "current page; accessed 2026-09-22",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "21-1022.00 exact occupation",
-                "url": "https://www.onetonline.org/link/industry/21-1022.00"
+                "url": "https://www.onetonline.org/link/localwages/21-1022.00"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -33254,21 +33244,28 @@
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "危机与权益倡导 — 25/100; weight=1/3; healthcare-social-workers.ai-impact.ai-impact-table.95[0]",
-                  "评估与照护计划 — 50/100; weight=1/3; healthcare-social-workers.ai-impact.ai-impact-table.99[0]",
-                  "监测与记录 — 75/100; weight=1/3; healthcare-social-workers.ai-impact.ai-impact-table.111[0]"
+                  "马边县 2026 年招募含 4 个医务社会工作服务岗，公告列具名项目的学历、专业和毕业届次条件。地区、批次及用工条件按公告理解。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "cn-work-example",
+                "limitation": "具名历史招聘，通用雇主要求另核。",
+                "market": "中国大陆",
+                "name": "马边县：2026 年社会工作服务岗招募",
+                "period": "2026-07",
+                "publisher": "马边彝族自治县人民政府门户网站",
+                "url": "https://www.mabian.gov.cn/mbyzzzx/openInfoPersonnelRecruitment/32335960/831430823526469.html"
+              },
+              {
+                "details": [
+                  "记录和读数均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "market": "适用于本页",
+                "name": "H01：社区资源与预算",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -34606,7 +34603,7 @@
           "type": "prose"
         },
         "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为医疗社会工作者？教育、资格与职业发展路径",
+        "heading": "入行与 H01：社区资源与预算",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "healthcare-social-workers.path.career-path-block.21",
@@ -34720,6 +34717,42 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "beijing-medical-social-work",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "healthcare-social-workers.source-register.published.1"
+            },
+            "id": "beijing-medical-social-work",
+            "label": {
+              "$source": "beijing-medical-social-work",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "healthcare-social-workers.source-register.published.1"
+            },
+            "scope": "当地历史案例或政策"
+          },
+          {
+            "href": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "healthcare-social-workers.source-register.published.1"
+            },
+            "id": "cn-work-example",
+            "label": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "healthcare-social-workers.source-register.published.1"
+            },
+            "scope": "当地历史案例或政策"
           }
         ],
         "tracks": [
@@ -37149,7 +37182,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034，本职业（21-1022.00）自身口径）",
+            "label": "2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "healthcare-social-workers.profile.onet-structured-fields-block.4",
@@ -38199,13 +38232,13 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与人工复核",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
       "market-signals": "职业前景与相关职业转向",
       "navigation": "下一步与相关入口",
-      "path": "入行、资格与职业发展",
+      "path": "入行与 H01：社区资源与预算",
       "profile": "职业画像",
       "quick-decision": "快速判断",
       "risk": "工作压力、风险与职业边界",
@@ -38265,63 +38298,63 @@
         ]
       },
       {
-        "derivation": "2024—2034美国本职业增长类别7%或更高，O*NET呈现；类别不识别AI或其他因素因果，也不是个人结果。",
-        "display_value": "增长 远快于平均 7% 或更高（2024—2034，BLS 就业预测，本职业（21-1022.00）自身口径）",
+        "derivation": "BLS 表 1.2（美国 21-1022）：2025 年约 194,800 个岗位，2035 年预计约 211,300 个，变化 8.5%，年均约 16,900 个空缺，含替补。",
+        "display_value": "8.5%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长",
-        "occupation_scope": "本职业：医疗社会工作者",
-        "period": "2024—2034",
+        "occupation_scope": "21-1022",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "2024年美国本职业193,200人，O*NET呈现BLS预测基期；就业矩阵含自雇，与OEWS受雇估计不同。",
-        "display_value": "就业 约 193,200 人（2024，BLS 就业预测基期，本职业（21-1022.00）自身口径）",
+        "derivation": "BLS 表 1.2（美国 21-1022）：2025 年约 194,800 个岗位，2035 年预计约 211,300 个，变化 8.5%，年均约 16,900 个空缺，含替补。",
+        "display_value": "约 194,800 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数",
-        "occupation_scope": "本职业：医疗社会工作者",
-        "period": "2024",
+        "occupation_scope": "21-1022",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "2024—2034美国本职业年均空缺18,400，含增长与更替；不是净新增、招聘实数或个人机会。",
-        "display_value": "预计年均岗位空缺约 18,400 个（2024—2034，BLS 就业预测，本职业（21-1022.00）自身口径，含增长与替补）",
+        "derivation": "BLS 表 1.2（美国 21-1022）：2025 年约 194,800 个岗位，2035 年预计约 211,300 个，变化 8.5%，年均约 16,900 个空缺，含替补。",
+        "display_value": "年均约 16,900 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
-        "occupation_scope": "本职业：医疗社会工作者",
-        "period": "2024—2034",
+        "occupation_scope": "21-1022",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "证据不足：本页所核中国资料未取得与21-1022.00精确对应的全国职业工资分布，行业均值不代填。",
-        "display_value": "证据不足：本页所核中国资料未取得与21-1022.00精确对应的全国职业工资分布，行业均值不代填。",
+        "derivation": "本页所核资料未取得与该职业精确对应的中国大陆全国工资分布。国家统计局公布的行业平均工资仅作行业背景。",
+        "display_value": "本页所核资料未取得与该职业精确对应的中国大陆全国工资分布。国家统计局公布的行业平均工资仅作行业背景。",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
-        "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：医疗社会工作者",
+        "measure": "中国大陆行业工资参考",
+        "occupation_scope": "中国大陆城镇单位：卫生和社会工作行业",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs-wage-release-2025"
         ]
       },
       {
-        "derivation": "证据不足：本页所核中国资料未取得与21-1022.00精确对应的全国职业工资分布，行业均值不代填。",
-        "display_value": "证据不足：本页所核中国资料未取得与21-1022.00精确对应的全国职业工资分布，行业均值不代填。",
+        "derivation": "本页所核资料未取得与该职业精确对应的中国大陆全国工资分布。国家统计局公布的行业平均工资仅作行业背景。",
+        "display_value": "本页所核资料未取得与该职业精确对应的中国大陆全国工资分布。国家统计局公布的行业平均工资仅作行业背景。",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
-        "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：医疗社会工作者",
+        "measure": "中国大陆行业工资参考",
+        "occupation_scope": "中国大陆城镇单位：卫生和社会工作行业",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs-wage-release-2025"
         ]
       },
       {
@@ -38347,27 +38380,15 @@
         "source_refs": [
           "onet"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "医疗保健工人",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
       "医疗社会工作者 · 任务、交付与责任边界",
@@ -38385,19 +38406,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，本职业（21-1022.00）自身口径）"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，本职业（21-1022.00）自身口径）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，本职业（21-1022.00）自身口径）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "available",
@@ -38418,10 +38439,10 @@
       "text": "医疗社会工作者"
     }
   },
-  "source_content_sha256": "e717923c2d7ce573c369b792b27ae8e254c24273a483de3b128da88762a082ef",
+  "source_content_sha256": "05061ff4ee2747360a5f6f46b034f7d49457213dab73357282b8a09302748349",
   "subject": {
     "canonical_slug": "healthcare-social-workers",
     "name": "医疗社会工作者",
-    "summary": "医疗社会工作者为应对急性、慢性或终末期疾病的个人、家庭与群体提供社会心理支持，协调照护、社区资源和服务转介，记录需求与进展。美国职业代码21-1022.00；临床服务、资料处理和披露权限须核所在地法律、资格与机构授权。"
+    "summary": "医疗社会工作者（医务社工）了解患者和家庭的实际困难，与团队协调服务资源并记录转介和交接。常见任务包括适应就医过程、出院后的社区衔接和服务条件核对。"
   }
 }

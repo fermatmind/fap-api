@@ -7272,13 +7272,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "This page covers O*NET29-2035.00 MRI technologists: acquiring images under medical orders and approved protocols, checking technical image quality and patient safety, communicating, and documenting. O*NET explicitly limits medication administration tasks to scope of practice. Technologists are not diagnostic radiologists, and a job title does not confer authority to administer medication or sedation or sign diagnostic reports."
+              "MRI technologists prepare patients, follow institutional safety checks and acquire magnetic resonance images. They document and transfer images for review. Clinical interpretation belongs to the designated clinician."
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
-            "arrt-mri-postprimary"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7373,12 +7372,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Check first: physician orders and examination sites, contraindications and safety screening, patient identity and informed communication, coils and imaging techniques, contrast and monitoring requirements, image quality and equipment condition, and abnormality reporting and documentation requirements."
+              "Use a fictional appointment to record status, questions that need review and the next owner. Do not try to make a real screening decision."
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-tasks"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7387,12 +7386,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Work cycle: check orders, identity, and institutional screening materials, then complete positioning, image acquisition, monitoring, and quality records under approved protocols. Escalate unclear safety conditions or patient abnormalities under institutional procedures; do not insist on continuing an examination for image quality. Technical quality checks are not disease diagnosis."
+              "The technologist prepares and acquires images under the assigned protocol. The radiologist interprets images for diagnosis. Local procedures define the handoff."
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-tasks"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -8160,12 +8159,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2025 reports that 94% of MRI technologist employment is in health and social work. This is a US industry employment composition, not China's composition, industry pay, or demand growth."
+              "BLS Table 1.2 for 29-2035: about 43,900 U.S. jobs in 2025, about 47,300 projected in 2035 (+7.7%), and about 2,300 annual openings including replacements."
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-industry"
+            "onet-trends"
           ],
           "type": "prose"
         },
@@ -8298,12 +8297,13 @@
                 ]
               },
               {
-                "answer": "O*NET cites BLS data showing about 44,100 workers in this occupation in 2024, projected growth much faster than average, at 7% or higher, during 2024–2034, and about 2,600 openings during that period. These are occupational statistics, not individual hiring probabilities.",
+                "answer": "BLS Table 1.2: U.S. occupation 29-2035 had about 43,900 jobs in 2025 and is projected to have about 47,300 in 2035 (+7.7%), with about 2,300 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. These are occupational statistics, not individual hiring probabilities.",
                 "id": "magnetic-resonance-imaging-technologists.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.magnetic-resonance-imaging-technologists.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "onet-trends",
+                  "bls-design-ep"
                 ]
               },
               {
@@ -8519,18 +8519,17 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "2024 employment and projections for growth and openings during 2024–2034; the page covers this occupation, 29-2035.00.",
-                  "Projections do not guarantee hiring."
+                  "BLS Table 1.2 for 29-2035: about 43,900 U.S. jobs in 2025, about 47,300 projected in 2035 (+7.7%), and about 2,300 annual openings including replacements."
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
                 "limitation": "Projections do not guarantee hiring; much faster than average does not mean individual opportunities necessarily increase.",
                 "market": "United States",
-                "name": "O*NET 29-2035.00 National Employment Trends",
-                "period": "2024–2034 projections; accessed 2026-09-25",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "U.S. BLS Table 1.2: Occupational projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/29-2035.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8750,6 +8749,18 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS Table 1.2: U.S. occupation 29-2035 had about 43,900 jobs in 2025 and is projected to have about 47,300 in 2035 (+7.7%), with about 2,300 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring."
+                ],
+                "id": "bls-design-ep",
+                "market": "United States",
+                "name": "U.S. BLS Table 1.2: Occupational projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -9582,7 +9593,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "What should be checked first in this work?",
+            "question": "How can you learn about an MRI workflow without operating a scanner?",
             "table": {
               "rows": [
                 {
@@ -9614,7 +9625,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "How can the work cycle be assessed?",
+            "question": "How does an MRI technologist differ from a radiologist?",
             "table": {
               "rows": [
                 {
@@ -10223,7 +10234,7 @@
           },
           {
             "指标": "Employment · Size",
-            "数值": "43,900 workers (2025)",
+            "数值": "About 43,900 jobs (2025)",
             "说明": {
               "$join": [
                 {
@@ -10247,7 +10258,7 @@
           },
           {
             "指标": "Employment · Change",
-            "数值": "8%（2025—2035）",
+            "数值": "+7.7%; about 47,300 jobs in 2035",
             "说明": {
               "$join": [
                 {
@@ -10271,7 +10282,7 @@
           },
           {
             "指标": "Employment · Openings",
-            "数值": "2,300 per year, growth and replacement during 2025–2035",
+            "数值": "About 2,300 per year",
             "说明": {
               "$join": [
                 {
@@ -10294,7 +10305,7 @@
             }
           }
         ],
-        "boundary": "US national scope: explain 2025 OEWS pay and 2025–2035 employment projections separately. Do not splice across occupations / jurisdictions or use as an individual pay quote.",
+        "boundary": "Pay and jobs use the U.S. occupational scope; projections do not measure current recruitment or individual outcomes.",
         "direct_answer": {
           "$item": "magnetic-resonance-imaging-technologists.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10321,7 +10332,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "8%（2025—2035）",
+        "growth": "+7.7%",
         "heading": {
           "$item": "magnetic-resonance-imaging-technologists.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10370,11 +10381,11 @@
             "question": "Pay"
           },
           {
-            "answer": "2025 employment, not current recruitment vacancies.",
+            "answer": "The 2025 base measures jobs, not vacancies.",
             "question": "Employment"
           },
           {
-            "answer": "8% growth during 2025–2035; does not establish individual hiring probabilities or AI causation.",
+            "answer": "BLS Table 1.2 for 29-2035: about 43,900 U.S. jobs in 2025, about 47,300 projected in 2035 (+7.7%), and about 2,300 annual openings including replacements.",
             "question": "Outlook"
           },
           {
@@ -10384,7 +10395,7 @@
         ],
         "median": "$95,480 per year (2025)",
         "outlook_heading": "Employment outlook and openings",
-        "outlook_period": "2025—2035",
+        "outlook_period": "2025–2035",
         "wage_column_labels": [
           "Percentile",
           "Annual reference",
@@ -10495,9 +10506,9 @@
         "outlook_evidence": [
           {
             "geography": "US national scope",
-            "horizon": "2025—2035",
-            "interpretation": "Employment size, change, and openings must be explained separately.",
-            "limitation": "Occupational statistics cannot serve as individual employment guarantees.",
+            "horizon": "2025–2035",
+            "interpretation": "BLS Table 1.2 for 29-2035: about 43,900 U.S. jobs in 2025, about 47,300 projected in 2035 (+7.7%), and about 2,300 annual openings including replacements.",
+            "limitation": "Pay and jobs use the U.S. occupational scope; projections do not measure current recruitment or individual outcomes.",
             "metric": "Employment size and change",
             "occupation_scope": "Display scope: MRI Technologists (29-2035.00)",
             "value": {
@@ -10509,12 +10520,12 @@
           },
           {
             "geography": "US national scope",
-            "horizon": "2025—2035",
-            "interpretation": "Annual average growth and replacement during 2025–2035, not a ten-year total, net new jobs, or current recruitment vacancies.",
-            "limitation": "Cannot serve as an individual hiring probability.",
+            "horizon": "2025–2035",
+            "interpretation": "Annual openings include replacements.",
+            "limitation": "Pay and jobs use the U.S. occupational scope; projections do not measure current recruitment or individual outcomes.",
             "metric": "Projected average annual openings",
             "occupation_scope": "Display scope: MRI Technologists (29-2035.00)",
-            "value": "2,300 per year, growth and replacement"
+            "value": "About 2,300 per year"
           },
           {
             "geography": "US national scope",
@@ -11079,7 +11090,7 @@
           "entry": "magnetic-resonance-imaging-technologists.navigation.1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit magnetic resonance imaging technology",
+        "label": "Explore work activities with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11147,7 +11158,7 @@
             "item": "magnetic-resonance-imaging-technologists.source-register.published.1"
           }
         },
-        "note": "MRI29-2035.00: the five 2025 pay percentiles are 68890/81040/95480/106340/127670 dollars, with hourly median pay of 45.91; employment during 2025–2035 is 43900→47300, with 8% growth and 2300 annual openings, and health accounts for 94% of industry employment. Education figures of 65/13/9 reflect views on new entrant requirements, and RCI74/66/63 describes interest preferences. ARRT has primary and postprimary certification pathways; certification does not equal state licensure or medication administration authority. FDA sources verify screening, heating / hearing, and implant condition risks. The ACR2026 manual entry point is confirmed, but the large PDF was not read in full, so verification against its complete text cannot be claimed. The NBS health proxy is not an occupational wage. Older periods, totals, and qualification statements in the original shared facts and protected FAQ are retained as scope conflicts. Precise Chinese entry requirements, state / institutional medication supervision, and complete safety rules still require verification."
+        "note": "Pay and jobs use the U.S. occupational scope; projections do not measure current recruitment or individual outcomes."
       },
       "work_context_block": {
         "$item": "magnetic-resonance-imaging-technologists.profile.work-context-block.5",
@@ -11203,39 +11214,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "44,100 workers",
+        "derivation": "BLS Table 1.2: U.S. occupation 29-2035 had about 43,900 jobs in 2025 and is projected to have about 47,300 in 2035 (+7.7%), with about 2,300 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 43,900 jobs",
         "fact_id": "us-employment-2024",
         "market": "United States",
         "measure": "2024 employment",
         "occupation_scope": "O*NET display scope: the individual occupation Magnetic Resonance Imaging Technologists (29-2035.00)",
-        "period": "2024; accessed 2026-09-25",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET lists Projected growth (2024-2034) as Much faster than average (7% or higher); the display covers occupation 29-2035.00.",
-        "display_value": "Much faster than average, 7% or higher (2024–2034)",
+        "derivation": "BLS Table 1.2: U.S. occupation 29-2035 had about 43,900 jobs in 2025 and is projected to have about 47,300 in 2035 (+7.7%), with about 2,300 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "+7.7%",
         "fact_id": "us-growth",
         "market": "United States",
         "measure": "Projected employment growth",
         "occupation_scope": "O*NET display scope: the individual occupation Magnetic Resonance Imaging Technologists (29-2035.00)",
-        "period": "2024–2034; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET lists Projected job openings (2024-2034) as 2,600; this figure is a period total rather than an annual average.",
-        "display_value": "About 2,600 openings, 2024–2034 total",
+        "derivation": "BLS Table 1.2: U.S. occupation 29-2035 had about 43,900 jobs in 2025 and is projected to have about 47,300 in 2035 (+7.7%), with about 2,300 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 2,300 per year",
         "fact_id": "us-openings",
         "market": "United States",
         "measure": "Projected openings, period total",
         "occupation_scope": "O*NET display scope: the individual occupation Magnetic Resonance Imaging Technologists (29-2035.00)",
-        "period": "2024–2034; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
@@ -11323,19 +11334,19 @@
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "US employment change"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "US employment"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "US openings, period total"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11349,17 +11360,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "This page covers O*NET 29-2035.00 magnetic resonance imaging technologists: operating MRI scanners for diagnostic imaging, screening for contraindications, positioning patients, selecting coils and imaging techniques, using gadolinium contrast within scope of practice when needed and connecting physiological monitoring, checking image quality, calibrating equipment, documenting, and reporting. To assess this career path, verify the work cycle, patient safety and practice boundaries, evidence scope, risk controls, and observable beginner work samples together."
+      "text": "Learn what MRI technologists do during an exam and how the work differs from interpretation or equipment repair."
     },
     "title": {
       "availability": "available",
-      "text": "Assessing Magnetic Resonance Imaging Technologists: Work, Entry Paths, and Risk Boundaries"
+      "text": "MRI Technologist: Exam Preparation, Image Acquisition and Handoffs"
     }
   },
-  "source_content_sha256": "a690d7a46e566acbe6089c935524ccfc222a12b3ebc80f8622d52bd8c97e422a",
+  "source_content_sha256": "163de0715772200ea58e4534e0a7c3e31959b5a0c65aec92498ff0a4b2ade38f",
   "subject": {
     "canonical_slug": "magnetic-resonance-imaging-technologists",
-    "name": "Magnetic Resonance Imaging Technologist",
-    "summary": "This page covers O*NET 29-2035.00 magnetic resonance imaging technologists: operating magnetic resonance imaging (MRI) scanners, monitoring patient safety and comfort and ensuring image quality, potentially administering intravenous gadolinium contrast, explaining procedures according to orders, positioning patients, and entering examination data."
+    "name": "MRI Technologist",
+    "summary": "MRI technologists prepare patients, follow institutional safety checks and acquire magnetic resonance images. They document and transfer images for review. Clinical interpretation belongs to the designated clinician."
   }
 }

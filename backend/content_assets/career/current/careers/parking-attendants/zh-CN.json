@@ -170,6 +170,9 @@
       "item:parking-attendants.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:parking-attendants.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:parking-attendants.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12476,6 +12479,21 @@
             "source-pack-onet-summary"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两台同色车的票据尾号不同，钥匙标签未标票号。写下应核的车位和票据，交给当班负责人后再走交还流程。"
+            ]
+          },
+          "id": "parking-attendants.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "核车辆交还凭证",
+          "type": "notice"
         }
       ]
     },
@@ -14877,6 +14895,13 @@
         "id": "parking-attendants.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "parking-attendants.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15144,7 +15169,7 @@
       "text": "停车服务员：工作内容、工资与车辆交接边界"
     }
   },
-  "source_content_sha256": "82addbaaa238a4dae929b141e2531922322bd233bc0597c5d094ff4983414db8",
+  "source_content_sha256": "7068e41342ca1fe79f8c59e18c1aabe147ebf9f0da56d376d35357c3cc4c531f",
   "subject": {
     "canonical_slug": "parking-attendants",
     "name": "停车服务员",

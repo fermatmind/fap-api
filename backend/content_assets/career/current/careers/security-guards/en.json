@@ -15972,8 +15972,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -22954,7 +22960,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use fictional gatehouse and patrol scenarios to practice identity verification, factual recording, escalation and shift handover; do not contact real visitors or dangerous sites."
+              "If long periods on your feet, nights, or repeated access checks would be difficult, ask about the schedule and post before committing."
             ]
           },
           "id": "security-guards.quick-decision.fit-decision-checklist.1",
@@ -22969,7 +22975,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Suited to people willing to observe continuously, record accurately, communicate clearly and stay within their response authority; a personality type is not proof of suitability."
+              "Try SG-01 in section 09 on paper. Keep an access log, patrol record, and handoff before opening the key."
             ]
           },
           "id": "security-guards.quick-decision.fit-decision-checklist.2",
@@ -22983,7 +22989,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Gatehouse duty, patrol, police enforcement and electronic security installation have different tasks and authority; job seekers must verify the role."
+              "This work may suit you if you like verifying access, following a patrol route, and documenting exceptions for the next shift."
             ]
           },
           "id": "security-guards.quick-decision.fit-decision-checklist.3",
@@ -28657,7 +28663,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Fictional visitor V2 claims to be approved by a manager, but there is no record on the list."
+              "Separate a visitor’s verbal claim from traceable approval."
             ]
           },
           "id": "security-guards.risk.career-risk-cards.14",
@@ -28835,7 +28841,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "After the fictional smoke alarm, it was only mentioned verbally at handover."
+              "Log the time, location, evidence, and next owner when handing off an incident."
             ]
           },
           "id": "security-guards.risk.career-risk-cards.26",
@@ -28956,7 +28962,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "AI marks the pending visitor V2 as authorized."
+              "Check whether the access status suggested by a tool has supporting records."
             ]
           },
           "id": "security-guards.risk.career-risk-cards.34",
@@ -29118,17 +29124,17 @@
               {
                 "id": "education",
                 "values": [
-                  "No single Chinese employer announcement adopted",
-                  "This round obtained no announcement in which the job identity, licensing, premises scope and pay are all verifiable; no national threshold is inferred.",
-                  "Verify region, premises, shifts, equipment, patrol and emergency authority item by item."
+                  "Mainland China access control and patrol",
+                  "The historical Tongyi Weishi posting covers patrol, access control, and checking for safety hazards. The application window has closed.",
+                  "The museum notice covers patrols in galleries, public areas, and entrances, plus crowd guidance during busy events."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "Purpose of the fictional work",
-                  "M1–M6 only demonstrate gatehouse verification, patrol, recording and handover and do not prove you can keep watch independently or handle conflict.",
-                  "Visitors, premises and incidents are entirely fictional."
+                  "US public-facility roles",
+                  "The historical county posting lists facility patrols, visitor and employee access checks, and incident reporting.",
+                  "The historical county posting covers foot or vehicle patrols of county facilities and possible transport duties."
                 ]
               },
               {
@@ -29152,7 +29158,11 @@
           "id": "security-guards.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d023-chongqing",
+            "d023-museum",
+            "d023-pgc",
+            "d023-clark"
           ],
           "title": "What do employers usually look for in recruitment?",
           "type": "cards"
@@ -29165,37 +29175,36 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional materials: visitors and patrol",
-                  "M1 | A fully fictional office building F. The gatehouse list has visitor V1 and employee E1; V2 has no appointment. The patrol route covers east gate D, north passage N and outside the server room M.",
-                  "M2 | V1 matches the identity and appointment and is registered in; E1 has valid credentials and passes per the rules.",
-                  "M3 | V2 claims verbal approval by a manager, but the list has no record; the status is pending and cannot be granted access on a self-report alone.",
-                  "M4 | The patrol record shows D door lock intact and N passage clear; M was not patrolled, so the status is unverified and must not be written as normal.",
-                  "M5 | There is a smoke alarm near D. Secure safety first, notify authorized staff per emergency procedures and record the time; do not decide on your own that it is a false alarm.",
-                  "M6 | At handover, V2 is still pending, M was not patrolled and the smoke alarm outcome has not come back; list the responsible person and follow-up checks and do not write that everything is cleared."
+                  "Fictional building F duty records",
+                  "M1 | Access rule: visitors need a matching appointment and ID check. Employees need a valid badge. Refer exceptions to the duty lead.",
+                  "M2 | 14:02, V1’s ID matches the appointment. 14:04, employee E1 presents a valid badge.",
+                  "M3 | 14:08, V2 reports verbal approval from a manager. The appointment list has no matching entry, and the duty lead has given no confirmation by handoff.",
+                  "M4 | Patrol log: 14:11, east gate D lock intact. 14:14, north passage N clear. The route lists server-room exterior M, with no recorded visit.",
+                  "M5 | An alarm sounds near the east gate at 14:18. The fictional site procedure calls for staying in a safe place, notifying the duty lead, and logging the time. The lead coordinates the check.",
+                  "M6 | Handoff at 14:20. The log records the alarm time and location. The response field is blank."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Tasks: status, incidents and handover",
-                  "T1 | List the status of V1, E1, V2 and D, N, M, separating verified, pending and unpatrolled.",
-                  "T2 | Write the smoke alarm notification and the unresolved-items handover card and judge whether all-safe can be written."
+                  "Submit four short records",
+                  "T1 | Make an access table for the three people and a patrol table for the three locations. Record the time, evidence, and next step for each row.",
+                  "T2 | Draft a one-sentence internal alarm notice and a handoff card. Separate known facts and open items, and name who takes over."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answers and boundaries",
-                  "V1 and E1 are verified and cleared; V2 is pending; D and N have been patrolled and M has not.",
-                  "The smoke alarm is notified to authorized staff per procedure with the time recorded; it must not be guessed as a false alarm or as risk cleared.",
-                  "The handover lists V2, M and the alarm follow-up, with observed facts, notified parties, pending owners and times; the exercise involves no real on-site response."
+                  "Before you submit",
+                  "Keep each row’s evidence and time. Save your draft before opening the key on day 7.",
+                  "Use a short note to show where each observation came from."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Review checklist",
-                  "Use fictional materials only; verify two cleared, one pending, two patrolled, one unpatrolled and the alarm not cleared."
+                  "Exercise boundary",
+                  "Use fictional records only. Leave personal data collection and live response outside the exercise."
                 ]
               }
             ]
@@ -29204,7 +29213,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: fictional visitor verification and patrol handover",
+          "title": "SG-01 | Check an access log and hand off open items",
           "type": "cards"
         },
         {
@@ -29216,7 +29225,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Gatehouse registration card",
-                  "List V1/E1 as verified and V2 as pending with the confirming party.",
+                  "Record the list, credential, time, and source separately.",
                   "Contains no real identity materials."
                 ]
               },
@@ -29224,7 +29233,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "Patrol status table",
-                  "D and N have been patrolled and M has not; mark the time and route.",
+                  "Record patrol observations and gaps by location and time.",
                   "Unpatrolled does not equal normal."
                 ]
               },
@@ -29232,7 +29241,7 @@
                 "id": "report-summary",
                 "values": [
                   "Alarm report page",
-                  "List the observed facts, notification time, notified party and pending information.",
+                  "Record the alarm time, location, and notification recipient.",
                   "Do not decide on your own that it is a false alarm."
                 ]
               },
@@ -29240,7 +29249,7 @@
                 "id": "tooling-note",
                 "values": [
                   "Handover minutes",
-                  "List V2, M and the alarm as pending separately and assign follow-up responsibility.",
+                  "Assign each item a status and next reviewer based on the evidence.",
                   "A verbal assurance is not authorization."
                 ]
               }
@@ -29273,26 +29282,26 @@
               [
                 "Interview: access verification",
                 "Who may pass",
-                "V1/E1 is verified; V2 is pending",
+                "Record the list, credential, time, and source separately.",
                 "Fictional records only"
               ],
               [
                 "Interview: not patrolled",
-                "Can M be written as normal",
-                "No, it has not been patrolled",
+                "How do you handle a gap in a patrol log?",
+                "Record patrol observations and gaps by location and time.",
                 "Needs a follow-up check"
               ],
               [
                 "Job trial: alarm",
                 "How should the smoke be handled",
-                "Secure safety, notify per procedure and record",
+                "Record the alarm time, location, and notification recipient.",
                 "Do not guess a false alarm"
               ],
               [
                 "Handoff: unresolved incidents",
                 "Can all-safe be written",
-                "No; V2, M and the alarm are still pending",
-                "Hand to authorized staff for follow-up"
+                "Assign each item a status and next reviewer based on the evidence.",
+                "Separate the recorder and reviewer"
               ]
             ]
           },
@@ -29313,49 +29322,49 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "Day one",
-                  "Read M1–M6 and list the post rules and response boundaries."
+                  "Read M1–M6. List the fictional rules and information sources."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "Day two",
-                  "Complete the fictional V1/E1/V2 access register."
+                  "Record the list, credential, time, and source separately."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day three",
-                  "Organize the evidence that D and N were patrolled."
+                  "Record patrol observations and gaps by location and time."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day four",
-                  "Mark M as unpatrolled and do not presume it is normal."
+                  "Record the alarm time, location, and notification recipient."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day five",
-                  "Write the smoke alarm facts and the notification time."
+                  "Assign each item a status and next reviewer based on the evidence."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day six",
-                  "Write the three pending items and the follow-up responsibility handover card."
+                  "Finish and save the access table, patrol table, alarm notice, and handoff card. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day seven",
-                  "Organize the fictional work and verify the target role's licensing, shifts and emergency procedures."
+                  "After saving your day 6 drafts, open “SG-01 answer key and rubric (open on day 7)” in the FAQ. Apply the four checks and keep one revision with its reason."
                 ]
               }
             ]
@@ -29372,13 +29381,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep the first registration draft and the revision and explain the status differences.",
-              "Verify that V1/E1 is cleared and V2 is pending, and that D and N were patrolled while M was not.",
-              "State that neither pending nor unpatrolled items may be written as passed.",
-              "List the smoke alarm notification and the follow-up responsibility.",
-              "All practice materials are fictional and contain no real visitor or camera materials.",
-              "Verify the target role's gatehouse, patrol, monitoring and emergency authority.",
-              "Coercive response and enforcement are borne by authorized staff."
+              "Record the list, credential, time, and source separately.",
+              "Record patrol observations and gaps by location and time.",
+              "Record the alarm time, location, and notification recipient.",
+              "Assign each item a status and next reviewer based on the evidence.",
+              "Keep the original records, first draft, and reasons for changes.",
+              "Use fictional identifiers and omit real credentials.",
+              "When applying, ask about shifts, training, and who reviews your work."
             ]
           },
           "id": "security-guards.path.seven-day-decision.1",
@@ -29503,15 +29512,19 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no Chinese precise announcement in which identity, qualifications, duty scope and pay are all verifiable was adopted; a uniform threshold is not inferred from a single role.",
-              "M1–M6 are not employer exam questions; a real role must be verified for premises, shifts, training, equipment, emergency response and pay."
+              "The historical Tongyi Weishi posting covers patrol, access control, and checking for safety hazards. The application window has closed.",
+              "The museum notice covers patrols in galleries, public areas, and entrances, plus crowd guidance during busy events.",
+              "The historical county posting lists facility patrols, visitor and employee access checks, and incident reporting.",
+              "The historical county posting covers foot or vehicle patrols of county facilities and possible transport duties.",
+              "Ask who verifies entry, how patrols are scheduled, when the duty lead takes over, and how the employer pays for the work."
             ]
           },
           "id": "security-guards.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
+            "d023-chongqing",
+            "d023-museum",
+            "d023-pgc",
+            "d023-clark",
             "editor"
           ],
           "title": "Note on the recruitment sample",
@@ -29694,7 +29707,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "First verify the target role's gatehouse, patrol or monitoring scope; demonstrate factual recording and handover using the fictional M1–M6 V2 pending check, M unpatrolled and the smoke alarm."
+              "Check whether the role covers access, patrols, or monitoring. Use the SG-01 access log and handoff to show how you trace records and pass on unresolved items."
             ]
           },
           "id": "security-guards.path.career-path-block.20",
@@ -31598,10 +31611,13 @@
                 "question_key": "career.faq.security-guards.credentials"
               },
               {
-                "answer": "V1/E1 is verified and V2 is pending; D and N have been patrolled and M has not; the smoke alarm outcome has not come back, so the risk cannot be written as cleared.",
+                "answer": "Access table: two people meet the access rule, V1 and E1. V2 remains pending. Refer the claimed exception to the duty lead.\n\nPatrol table: two stops have records, D and N. M has no logged arrival, so whether it was patrolled is unconfirmed. Give the next shift the location to check.\n\nAlarm and handoff: In the draft notice, record 14:18 near the east gate and name the duty lead as the recipient. At handoff, the response field is blank, so record the response as unconfirmed. List V2, M, and the alarm separately with the next reviewer for each.\n\nScore four items from 0 to 2: sourced access status; patrol location and time; alarm time, location and recipient; and a named reviewer for each open item. Give 2 for complete, 1 for partial, or 0 for guessing or exceeding authority.",
                 "id": "security-guards.faq.9",
-                "question": "How is the status judged in the fictional exercise?",
-                "question_key": "career.faq.security-guards.risk-boundary"
+                "question": "SG-01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.security-guards.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "Police work, private investigation, alarm system installation, gambling surveillance and security supervision share tasks; their own licensing and authority are verified separately.",
@@ -31717,13 +31733,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the Security Guards career page",
@@ -32272,6 +32288,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The historical Tongyi Weishi posting covers patrol, access control, and checking for safety hazards. The application window has closed."
+                ],
+                "evidence_type": "Employer recruitment notice",
+                "id": "d023-chongqing",
+                "limitation": "Historical example limited to this employer, site, and posting period. Verify wages and entry requirements separately.",
+                "market": "Chongqing, China",
+                "name": "Chongqing SASAC notice | Tongyi Weishi security guard",
+                "period": "2026-04-24",
+                "publisher": "Chongqing SASAC notice",
+                "scope": "recruitment_proxy",
+                "url": "https://gzw.cq.gov.cn/gqzp/202604/t20260424_15636090.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The museum notice covers patrols in galleries, public areas, and entrances, plus crowd guidance during busy events."
+                ],
+                "evidence_type": "Employer recruitment notice",
+                "id": "d023-museum",
+                "limitation": "Historical example limited to this employer, site, and posting period. Verify wages and entry requirements separately.",
+                "market": "Guangdong, China",
+                "name": "Liannan Yao Museum | security guard",
+                "period": "2026-05-21",
+                "publisher": "Liannan Yao Museum",
+                "scope": "recruitment_proxy",
+                "url": "https://www.liannan.gov.cn/zwgk/zpxx/content/mpost_2149223.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The historical county posting lists facility patrols, visitor and employee access checks, and incident reporting."
+                ],
+                "evidence_type": "Employer recruitment notice",
+                "id": "d023-pgc",
+                "limitation": "Historical example limited to this employer, site, and posting period. Verify wages and entry requirements separately.",
+                "market": "Maryland, US",
+                "name": "Prince George’s County, Maryland | Security Officer I",
+                "period": "2026-07-22",
+                "publisher": "Prince George’s County, Maryland",
+                "scope": "recruitment_proxy",
+                "url": "https://www.governmentjobs.com/careers/pgc/jobs/newprint/5420096"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The historical county posting covers foot or vehicle patrols of county facilities and possible transport duties."
+                ],
+                "evidence_type": "Employer recruitment notice",
+                "id": "d023-clark",
+                "limitation": "Historical example limited to this employer, site, and posting period. Verify wages and entry requirements separately.",
+                "market": "Nevada, US",
+                "name": "Clark County, Nevada | Security Officer",
+                "period": "2026-09-29",
+                "publisher": "Clark County, Nevada",
+                "scope": "recruitment_proxy",
+                "url": "https://www.governmentjobs.com/careers/clarkcounty/jobs/newprint/5495099"
               }
             ]
           },
@@ -37088,6 +37164,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which work direction within this occupation are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand interest codes",
+      "interface.quick_decision.suit_heading": "Who tends to enjoy security guard work?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. wage reference",
@@ -37531,7 +37608,7 @@
       "text": "Security Guards"
     }
   },
-  "source_content_sha256": "e54e1dc82950488b4ebe762686e54d21deb1ef701d89c05238faab59f4d5b7c7",
+  "source_content_sha256": "9ecd07cead124d40018f63e5c71fa11ff863495781f00bd71ecc49992a6ee5c1",
   "subject": {
     "canonical_slug": "security-guards",
     "name": "Security Guards",

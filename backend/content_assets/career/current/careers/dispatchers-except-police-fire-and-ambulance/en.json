@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-dispatch-jinhai": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-dispatch-lingyu": {
+        "status": "pending_mapping"
       },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
@@ -26059,7 +26065,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The National Bureau of Statistics 2025 annual pre-tax average for urban non-private 133,981 / private 73,133 yuan in transportation, warehousing and postal services is only the background of related units across multiple occupations in the industry, not the dispatcher median, starting pay, percentile or monthly pay. The survey covers urban legal persons with 5 or more employees and excludes the self-employed and freelancers; all employees of outsourcing companies cannot be broadly excluded, and platform settlement is not automatically the same as legal-person employed wages. Dispatch positions span industries, so the transport industry is not applied across the board. No precise Chinese national occupational wage or representative recruitment pay was obtained in this round."
+              "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. These averages cover multiple jobs and cannot estimate individual pay for this occupation."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
@@ -26157,12 +26163,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national single-occupation wage scope was obtained."
+              "A Yantian Lingyu Logistics posting combines freight, staff and vehicle scheduling with disruption handling. It listed CNY 4,000 during probation and from CNY 5,000 after passing, with no pay period stated. A Dongfang Jinhai port dispatcher posting preferred port logistics experience and left pay for discussion. Neither establishes typical pay for all non-emergency dispatchers."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "dispatch-lingyu",
+            "dispatch-jinhai"
           ],
           "type": "prose"
         },
@@ -26185,7 +26192,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The National Bureau of Statistics 2025 annual pre-tax average for urban non-private 133,981 / private 73,133 yuan in transportation, warehousing and postal services is only the background of related units across multiple occupations in the industry, not the dispatcher median, starting pay, percentile or monthly pay. The survey covers urban legal persons with 5 or more employees and excludes the self-employed and freelancers; all employees of outsourcing companies cannot be broadly excluded, and platform settlement is not automatically the same as legal-person employed wages. Dispatch positions span industries, so the transport industry is not applied across the board. No precise Chinese national occupational wage or representative recruitment pay was obtained in this round."
+              "These averages cover multiple jobs and cannot estimate individual pay for this occupation."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -26213,7 +26220,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no precise national occupational wage distribution was obtained in this round, and it is not asserted that all public data is unpublished."
+              "No comparable nationwide occupational wage distribution for mainland China was found. The postings below show the terms listed by individual employers at the time."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26255,7 +26262,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page does not provide recruitment quotes or personal income promises; missing items remain missing, and industry averages or neighboring occupations are not used as substitutes."
+              "The historical postings show individual jobs and terms at the time. A comparable nationwide wage distribution for this occupation is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -31034,7 +31041,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Receive and prepare work orders and check client requirements and specifications and time and location and priority; lay out daily and operating schedules according to the type and quantity and status of available personnel and vehicles and equipment and in line with qualification and working hour and safety requirements; relay work orders and tasks and changes to crews and drivers and field personnel by telephone or radio and confirm receipt; monitor personnel and equipment location and usage and adjust for traffic and construction and weather and breakdown conditions; record and maintain dispatch and cost and expenses and inventory information and compile work progress statistics; arrange necessary repairs and order and issue supplies, and complete the handoff.",
+                "answer": "Review requests, assign available staff, equipment or vehicles, then track changes, delays and handoffs. Fleet dispatch is one setting. This occupation excludes police, fire and ambulance dispatch.",
                 "id": "actors.faq.1",
                 "question": "What does a dispatcher do every day?",
                 "question_key": "career.faq.dispatchers-except-police-fire-and-ambulance.1",
@@ -31043,13 +31050,12 @@
                 ]
               },
               {
-                "answer": "This occupation is operational dispatch: intake and scheduling and dispatch and follow-up and recording within the carrier's and employer's rules; public safety telecommunicators receive alarms and dispatch police and fire and emergency medical services, which falls under emergency communications and emergency command and has separate training and discipline requirements; customer service representatives mainly handle inquiries and complaints and work order registration and do not bear personnel and vehicle scheduling and dispatch. Authorization and outputs differ, and the positions cannot be swapped by name.",
+                "answer": "Non-emergency dispatchers coordinate resources and assignments. Public safety telecommunicators handle emergency calls and dispatch under a separate system. Drivers execute routes and deliveries. Ask who owns exceptions, handoffs and authorizations.",
                 "id": "actors.faq.2",
-                "question": "What is the difference between it and public safety telecommunicators or customer service representatives?",
+                "question": "How do operations dispatchers differ from emergency dispatchers and truck drivers?",
                 "question_key": "career.faq.dispatchers-except-police-fire-and-ambulance.2",
                 "source_refs": [
-                  "onet",
-                  "art"
+                  "onet"
                 ]
               },
               {
@@ -31063,9 +31069,9 @@
                 ]
               },
               {
-                "answer": "Dispatch and assignment systems, vehicle and equipment positioning and status monitoring, route and time window and arrival time estimation, and work order and messaging and statistics report tools; these tools improve efficiency, but priority and exception handling and external commitments and safety reporting remain the responsibility of people.",
+                "answer": "Software may assist scheduling, routing or records. Staff verify conditions, customer disputes and exceptions under their own procedures. This page does not measure AI adoption, gains or replacement.",
                 "id": "actors.faq.4",
-                "question": "Which tasks already have tool or system support?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.dispatchers-except-police-fire-and-ambulance.4",
                 "source_refs": [
                   "onet"
@@ -31081,13 +31087,14 @@
                 ]
               },
               {
-                "answer": "The 2025 United States wage data median is 50,340 US dollars per year (24.20 US dollars per hour), with annual percentiles of 36,030／42,750／50,340／62,450／78,140 US dollars and hourly percentiles of 17.32／20.56／24.20／30.02／37.57 US dollars; no corresponding national single-occupation scope was obtained for the Chinese mainland, so no median or percentile is given. When comparing real positions, check the city, industry and carrier or platform type, shifts and duty and rotation, whether performance or allowances and work meals and accommodation are included, and the pre-tax versus after-tax treatment.",
+                "answer": "The May 2025 U.S. median wage was $24.20 per hour and $50,340 per year. A Yantian Lingyu Logistics posting combines freight, staff and vehicle scheduling with disruption handling. It listed CNY 4,000 during probation and from CNY 5,000 after passing, with no pay period stated. A Dongfang Jinhai port dispatcher posting preferred port logistics experience and left pay for discussion. Neither establishes typical pay for all non-emergency dispatchers.",
                 "id": "actors.faq.6",
                 "question": "What is the typical pay, and how should it be compared?",
                 "question_key": "career.faq.dispatchers-except-police-fire-and-ambulance.6",
                 "source_refs": [
-                  "oews",
-                  "nbs"
+                  "onet",
+                  "dispatch-lingyu",
+                  "dispatch-jinhai"
                 ]
               },
               {
@@ -31121,13 +31128,12 @@
                 ]
               },
               {
-                "answer": "Consider the information load and prolonged sitting (telephone conversations every day 100%, face-to-face discussions every day 98%, continuous contact with others 92%, continuous sitting 59%), facing strict deadlines every day 76%, rotating shifts and holiday duty, and responsibility for authorization and safety reporting and data management; working hours are relatively regular (61% fixed shifts) but intensity rises in peak seasons and during emergencies.",
+                "answer": "BLS projects U.S. employment for 43-5032 to move from about 203,500 in 2025 to 202,100 in 2035 (−0.7%), with about 16,000 annual openings including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing this occupation?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.dispatchers-except-police-fire-and-ambulance.10",
                 "source_refs": [
-                  "onet",
-                  "sag"
+                  "r5-bls-current"
                 ]
               }
             ]
@@ -31518,11 +31524,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The National Bureau of Statistics 2025 annual pre-tax average for urban non-private 133,981 / private 73,133 yuan in transportation, warehousing and postal services is only the background of related units across multiple occupations in the industry, not the dispatcher median, starting pay, percentile or monthly pay. The survey covers urban legal persons with 5 or more employees and excludes the self-employed and freelancers; all employees of outsourcing companies cannot be broadly excluded, and platform settlement is not automatically the same as legal-person employed wages. Dispatch positions span industries, so the transport industry is not applied across the board. No precise Chinese national occupational wage or representative recruitment pay was obtained in this round."
+                  "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. These averages cover multiple jobs and cannot estimate individual pay for this occupation."
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs",
-                "limitation": "The National Bureau of Statistics 2025 annual pre-tax average for urban non-private 133,981 / private 73,133 yuan in transportation, warehousing and postal services is only the background of related units across multiple occupations in the industry, not the dispatcher median, starting pay, percentile or monthly pay. The survey covers urban legal persons with 5 or more employees and excludes the self-employed and freelancers; all employees of outsourcing companies cannot be broadly excluded, and platform settlement is not automatically the same as legal-person employed wages. Dispatch positions span industries, so the transport industry is not applied across the board. No precise Chinese national occupational wage or representative recruitment pay was obtained in this round.",
+                "limitation": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. These averages cover multiple jobs and cannot estimate individual pay for this occupation.",
                 "market": "Chinese mainland",
                 "name": "National Bureau of Statistics public channel (wage statistics scope by industry and unit type)",
                 "period": "accessed 2026-09-19",
@@ -31562,7 +31568,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "The O*NET43-5032 definition covers dispatching personnel, crews, equipment or service vehicles for transporting materials, goods or passengers, or for installation, service and emergency repair outside the place of business. Of 12 tasks, 10 are Core and 2 Supplemental; ordering and issuing supplies or equipment and supervising communications in an assigned area are supplemental, and are not treated as universally required in all positions. Receiving work orders, resource schedules, relaying information, location monitoring, recording costs and inventory and arranging repairs are the main tasks; arranging repairs is not the same as performing repairs, and coordinating personnel is not the same as being a manager. Different positions may have overlapping tasks, and the name does not automatically confer driving, operating, safety management or emergency dispatch authority. O*NET57 context: telephone every day 100%, face-to-face every day 98%, continuous contact 92%, decisions every day 91%, coordination 81 extremely important / 17 very important, teamwork 69 extremely important / 31 very important, accuracy 67 extremely important / 23 very important, email every day 83%, time pressure every day 76%, dealing with unpleasant people every day 69%, continuous sitting 59%, more than 40 hours per week 75%, regular 61%, controlled indoor every day 56%, very high responsibility for others' safety 66%. It is not the case that everyone has fixed shifts, is purely indoors or always works nights; for decisions that are wrong, 54% answered not at all serious and 19% extremely serious, so they cannot be uniformly described as catastrophic. Automation 38 moderate / 24 slight / 25 none does not equal a GenAI adoption rate. The survey is not an individual ability threshold or accident probability. BLS43-5032: employment in 2025 was 203,500, projected at 202,100 in 2035, an official net change of -1,500 and -0.7%; subtracting the two rounded end figures gives -1,400, which does not replace the official net change. The annual average of 16,000 openings over 2025—2035 includes growth and replacement, and is not a ten-year total or a yearly net increase. Self-employment was 1.1% in 2025. In Table 1.2 the OOH entry for this detailed occupation is shown as a dash, so the exact projection table is used rather than another group's OOH. National projections are not individual hiring probability, local hiring volume or AI causality."
                 ],
@@ -31574,7 +31580,7 @@
                 "period": "updated 2026; accessed 2026-09-19",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-5032.00"
+                "url": "https://www.onetonline.org/link/details/43-5032.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31594,11 +31600,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The National Bureau of Statistics 2025 annual pre-tax average for urban non-private 133,981 / private 73,133 yuan in transportation, warehousing and postal services is only the background of related units across multiple occupations in the industry, not the dispatcher median, starting pay, percentile or monthly pay. The survey covers urban legal persons with 5 or more employees and excludes the self-employed and freelancers; all employees of outsourcing companies cannot be broadly excluded, and platform settlement is not automatically the same as legal-person employed wages. Dispatch positions span industries, so the transport industry is not applied across the board. No precise Chinese national occupational wage or representative recruitment pay was obtained in this round. The old URL is the homepage, and the full text is listed separately as r5-nbs-current."
+                  "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. These averages cover multiple jobs and cannot estimate individual pay for this occupation."
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "r2-pay-1",
-                "limitation": "The National Bureau of Statistics 2025 annual pre-tax average for urban non-private 133,981 / private 73,133 yuan in transportation, warehousing and postal services is only the background of related units across multiple occupations in the industry, not the dispatcher median, starting pay, percentile or monthly pay. The survey covers urban legal persons with 5 or more employees and excludes the self-employed and freelancers; all employees of outsourcing companies cannot be broadly excluded, and platform settlement is not automatically the same as legal-person employed wages. Dispatch positions span industries, so the transport industry is not applied across the board. No precise Chinese national occupational wage or representative recruitment pay was obtained in this round. The old URL is the homepage, and the full text is listed separately as r5-nbs-current.",
+                "limitation": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. These averages cover multiple jobs and cannot estimate individual pay for this occupation.",
                 "market": "Chinese mainland",
                 "name": "Average annual wage of urban unit employees in 2025",
                 "period": "2025; accessed 2026-09-19",
@@ -31761,11 +31767,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The National Bureau of Statistics 2025 annual pre-tax average for urban non-private 133,981 / private 73,133 yuan in transportation, warehousing and postal services is only the background of related units across multiple occupations in the industry, not the dispatcher median, starting pay, percentile or monthly pay. The survey covers urban legal persons with 5 or more employees and excludes the self-employed and freelancers; all employees of outsourcing companies cannot be broadly excluded, and platform settlement is not automatically the same as legal-person employed wages. Dispatch positions span industries, so the transport industry is not applied across the board. No precise Chinese national occupational wage or representative recruitment pay was obtained in this round."
+                  "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. These averages cover multiple jobs and cannot estimate individual pay for this occupation."
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "r5-nbs-current",
-                "limitation": "The National Bureau of Statistics 2025 annual pre-tax average for urban non-private 133,981 / private 73,133 yuan in transportation, warehousing and postal services is only the background of related units across multiple occupations in the industry, not the dispatcher median, starting pay, percentile or monthly pay. The survey covers urban legal persons with 5 or more employees and excludes the self-employed and freelancers; all employees of outsourcing companies cannot be broadly excluded, and platform settlement is not automatically the same as legal-person employed wages. Dispatch positions span industries, so the transport industry is not applied across the board. No precise Chinese national occupational wage or representative recruitment pay was obtained in this round.",
+                "limitation": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. These averages cover multiple jobs and cannot estimate individual pay for this occupation.",
                 "market": "Chinese mainland",
                 "name": "National Bureau of Statistics 2025 urban unit wages: transportation, warehousing and postal services",
                 "period": "2025",
@@ -31774,16 +31780,16 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "BLS43-5032: employment in 2025 was 203,500, projected at 202,100 in 2035, an official net change of -1,500 and -0.7%; subtracting the two rounded end figures gives -1,400, which does not replace the official net change. The annual average of 16,000 openings over 2025—2035 includes growth and replacement, and is not a ten-year total or a yearly net increase. Self-employment was 1.1% in 2025. In Table 1.2 the OOH entry for this detailed occupation is shown as a dash, so the exact projection table is used rather than another group's OOH. National projections are not individual hiring probability, local hiring volume or AI causality. BLS gives the typical entry as high school or equivalent, related experience of None, and medium-term on-the-job training; this is not a uniform threshold or curriculum for all positions. O*NET JZ1—2 / SVP below 6 and a few days to a year are a description of the preparation group, not the total training duration for all of this occupation. 47% high school or equivalent, 26% some college no degree and 8% associate's are respondents' feedback on the education needed for new entrants, not 47% of positions or employers or employee education. Specific United States professional routes such as aviation and state qualifications were not checked item by item, and no national license exemption is claimed."
+                  "BLS projects U.S. employment for 43-5032 to move from about 203,500 in 2025 to 202,100 in 2035 (−0.7%), with about 16,000 annual openings including replacements."
                 ],
                 "evidence_type": "official projections",
                 "id": "r5-bls-current",
                 "limitation": "BLS43-5032: employment in 2025 was 203,500, projected at 202,100 in 2035, an official net change of -1,500 and -0.7%; subtracting the two rounded end figures gives -1,400, which does not replace the official net change. The annual average of 16,000 openings over 2025—2035 includes growth and replacement, and is not a ten-year total or a yearly net increase. Self-employment was 1.1% in 2025. In Table 1.2 the OOH entry for this detailed occupation is shown as a dash, so the exact projection table is used rather than another group's OOH. National projections are not individual hiring probability, local hiring volume or AI causality. BLS gives the typical entry as high school or equivalent, related experience of None, and medium-term on-the-job training; this is not a uniform threshold or curriculum for all positions. O*NET JZ1—2 / SVP below 6 and a few days to a year are a description of the preparation group, not the total training duration for all of this occupation. 47% high school or equivalent, 26% some college no degree and 8% associate's are respondents' feedback on the education needed for new entrants, not 47% of positions or employers or employee education. Specific United States professional routes such as aviation and state qualifications were not checked item by item, and no national license exemption is claimed.",
                 "market": "United States",
                 "name": "BLS Table 1.2 dispatcher employment projections and typical training",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31849,6 +31855,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Schedules loads, staff and vehicles and handles disruptions. CNY 4,000 during probation and from CNY 5,000 after passing it, without a stated pay period."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "dispatch-lingyu",
+                "limitation": "Historical posting, not national statistics or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Shenzhen Lingyu Logistics: fleet dispatcher",
+                "period": "2025-12",
+                "publisher": "Yantian District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.yantian.gov.cn/cn/zwgk/zdlyxxgk/jycy/zpxx/content/post_12545828.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One dispatcher; Yantian Port logistics experience preferred. Pay to be discussed, with no amount published."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "dispatch-jinhai",
+                "limitation": "Historical posting, not national statistics or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Shenzhen Dongfang Jinhai Logistics: port dispatcher",
+                "period": "2026-02",
+                "publisher": "Yantian District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.yantian.gov.cn/cn/zwgk/zdlyxxgk/jycy/zpxx/content/post_12635905.html"
               }
             ]
           },
@@ -34640,7 +34676,7 @@
             {
               "指标": "Data type",
               "数值": "Occupational wage gap; industry background",
-              "说明": "The National Bureau of Statistics 2025 annual pre-tax average for urban non-private 133,981 / private 73,133 yuan in transportation, warehousing and postal services is only the background of related units across multiple occupations in the industry, not the dispatcher median, starting pay, percentile or monthly pay. The survey covers urban legal persons with 5 or more employees and excludes the self-employed and freelancers; all employees of outsourcing companies cannot be broadly excluded, and platform settlement is not automatically the same as legal-person employed wages. Dispatch positions span industries, so the transport industry is not applied across the board. No precise Chinese national occupational wage or representative recruitment pay was obtained in this round."
+              "说明": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. These averages cover multiple jobs and cannot estimate individual pay for this occupation."
             },
             {
               "指标": "Chinese aviation professional dispatcher route",
@@ -34842,7 +34878,7 @@
               }
             },
             {
-              "城市/区间": "Recruitment quotes (cannot substitute for actual treatment)",
+              "城市/区间": "Mainland China historical job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34854,13 +34890,14 @@
           "china_soc_row": "Chinese mainland salary scope",
           "edu": "See the entry module for training and licenses and qualifications",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-dispatch-lingyu",
+            "posting-dispatch-jinhai"
           ],
           "sources_note": "Source links are used according to their respective scope of application.",
           "ui": {
             "ai_heading": "Will AI and automation directly change the income for this occupation?",
             "driver_heading": "What should be checked when discussing pay for similar positions in the Chinese mainland?",
-            "official_heading": "Chinese mainland official scope and statistical gap",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Comparison of pay methods and statistical boundaries",
             "scenario_heading": "Can the pay methods of similar positions in the Chinese mainland be compared directly?",
             "scenario_interpretation_label": "Scope of application and gaps",
@@ -35546,7 +35583,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/police-fire-and-ambulance-dispatchers",
+            "target_href": "/en/career/jobs/police-fire-and-ambulance-dispatchers",
             "target_slug": "police-fire-and-ambulance-dispatchers",
             "target_title": "Public safety telecommunicators: differences from this occupation in emergency dispatch authorization",
             "transition_distance": {
@@ -35569,7 +35606,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/customer-service-representatives",
+            "target_href": "/en/career/jobs/customer-service-representatives",
             "target_slug": "customer-service-representatives",
             "target_title": "Customer service representatives: differences from this occupation in scheduling and dispatch",
             "transition_distance": {
@@ -35592,7 +35629,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/heavy-and-tractor-trailer-truck-drivers",
+            "target_href": "/en/career/jobs/heavy-and-tractor-trailer-truck-drivers",
             "target_slug": "heavy-and-tractor-trailer-truck-drivers",
             "target_title": "Heavy and tractor-trailer truck drivers: differences from this occupation in driving responsibility",
             "transition_distance": {
@@ -35615,7 +35652,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/transportation-storage-and-distribution-managers",
+            "target_href": "/en/career/jobs/transportation-storage-and-distribution-managers",
             "target_slug": "transportation-storage-and-distribution-managers",
             "target_title": "Transportation, storage and distribution managers: differences from this occupation in operating responsibility",
             "transition_distance": {
@@ -35638,7 +35675,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/bus-drivers-transit-and-intercity",
+            "target_href": "/en/career/jobs/bus-drivers-transit-and-intercity",
             "target_slug": "bus-drivers-transit-and-intercity",
             "target_title": "Intercity and transit bus drivers: differences from this occupation in passenger operations",
             "transition_distance": {
@@ -35661,7 +35698,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/locomotive-engineers",
+            "target_href": "/en/career/jobs/locomotive-engineers",
             "target_slug": "locomotive-engineers",
             "target_title": "Locomotive engineers: differences from this occupation in railway driving",
             "transition_distance": {
@@ -35684,7 +35721,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/transportation-inspectors",
+            "target_href": "/en/career/jobs/transportation-inspectors",
             "target_slug": "transportation-inspectors",
             "target_title": "Transportation inspectors: differences from this occupation in inspection and determination",
             "transition_distance": {
@@ -35707,7 +35744,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/power-distributors-and-dispatchers",
+            "target_href": "/en/career/jobs/power-distributors-and-dispatchers",
             "target_slug": "power-distributors-and-dispatchers",
             "target_title": "Power dispatchers and distributors: differences from this occupation in professional dispatching",
             "transition_distance": {
@@ -35790,7 +35827,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35839,7 +35876,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35888,7 +35925,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35937,7 +35974,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35986,7 +36023,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36035,7 +36072,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36657,7 +36694,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of dispatchers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37157,7 +37194,7 @@
         "fact_id": "median",
         "market": "United States",
         "measure": "Median wage (annual scope, with hourly scope)",
-        "occupation_scope": "Scope for this occupation (43-5032.00); the 2025 wage data publish both annual and hourly percentiles; the figures are the employed pre-tax wage statistical scope and exclude overtime pay and night shift or shift allowances and performance or commission pay, and outsourced and platform settlement income is not included, so they cannot be treated as individual take-home income",
+        "occupation_scope": "U.S. SOC 43-5032 nationwide straight-time wage for employees. It can include commissions and production bonuses and excludes overtime premiums and self-employment.",
         "period": "2025 wage data; retrieved 2026-09-19",
         "source_refs": [
           "oews"
@@ -37188,39 +37225,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 218,700 people (2024, O*NET summary page scope)",
+        "derivation": "BLS Table 1.2, exact occupation.",
+        "display_value": "203,500 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistic)",
         "occupation_scope": "Scope for this occupation (43-5032.00); the size varies with transport and logistics and platform dispatch demand and with the degree of dispatch automation, and is not entirely the same as the population covered by wage statistics; the national total does not indicate specific opportunities in a particular industry or with a particular carrier",
-        "period": "2024 base period; retrieved 2026-09-19",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "The 2024—2034 projection is decline (-1% or lower) (the category marked on the O*NET summary page, which does not give a specific percentage)",
+        "derivation": "BLS Table 1.2, exact occupation.",
+        "display_value": "−0.7%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "Scope for this occupation, projection period 2024—2034; the projection is a change in the occupation total, not individual hiring probability; the O*NET page gives only the decline (-1% or lower) category and not a specific percentage, so this page states it in the original wording without converting to a percentage on its own; this page did not obtain first-hand scope from the BLS Occupational Outlook page for this occupation",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. SOC 43-5032",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 18,500 (2024—2034, including replacement needs; O*NET summary page scope)",
+        "derivation": "BLS Table 1.2, exact occupation.",
+        "display_value": "16,000 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Projected period job openings (including replacement needs)",
-        "occupation_scope": "Scope for this occupation; these are total openings formed during the projection period by growth and replacement, not annual net new positions, and not a direct measure of individual opportunity; the scope period marked on that O*NET page is 2024—2034, and the page cites it under that scope without separate annual conversion",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. SOC 43-5032",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-current"
         ]
       },
       {
@@ -37311,37 +37348,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2025 employment 203,500 people",
+        "derivation": "BLS Table 1.2, exact occupation.",
+        "display_value": "203,500 jobs (2025)",
         "fact_id": "r5-current-employment",
         "market": "United States",
         "measure": "Occupational employment stock",
         "occupation_scope": "BLS43-5032: employment in 2025 was 203,500, projected at 202,100 in 2035, an official net change of -1,500 and -0.7%; subtracting the two rounded end figures gives -1,400, which does not replace the official net change. The annual average of 16,000 openings over 2025—2035 includes growth and replacement, and is not a ten-year total or a yearly net increase. Self-employment was 1.1% in 2025. In Table 1.2 the OOH entry for this detailed occupation is shown as a dash, so the exact projection table is used rather than another group's OOH. National projections are not individual hiring probability, local hiring volume or AI causality.",
-        "period": "2025—2035",
+        "period": "2025",
         "source_refs": [
           "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2025—2035 decrease of 0.7%; official net decrease of 1,500 people",
+        "derivation": "BLS Table 1.2, exact occupation.",
+        "display_value": "−0.7%",
         "fact_id": "r5-current-growth",
         "market": "United States",
         "measure": "Projected net change",
         "occupation_scope": "BLS43-5032: employment in 2025 was 203,500, projected at 202,100 in 2035, an official net change of -1,500 and -0.7%; subtracting the two rounded end figures gives -1,400, which does not replace the official net change. The annual average of 16,000 openings over 2025—2035 includes growth and replacement, and is not a ten-year total or a yearly net increase. Self-employment was 1.1% in 2025. In Table 1.2 the OOH entry for this detailed occupation is shown as a dash, so the exact projection table is used rather than another group's OOH. National projections are not individual hiring probability, local hiring volume or AI causality.",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2025—2035 annual average 16,000 openings, including replacement",
+        "derivation": "BLS Table 1.2, exact occupation.",
+        "display_value": "16,000 annually (including replacements)",
         "fact_id": "r5-current-openings",
         "market": "United States",
         "measure": "Annual average openings",
         "occupation_scope": "BLS43-5032: employment in 2025 was 203,500, projected at 202,100 in 2035, an official net change of -1,500 and -0.7%; subtracting the two rounded end figures gives -1,400, which does not replace the official net change. The annual average of 16,000 openings over 2025—2035 includes growth and replacement, and is not a ten-year total or a yearly net increase. Self-employment was 1.1% in 2025. In Table 1.2 the OOH entry for this detailed occupation is shown as a dash, so the exact projection table is used rather than another group's OOH. National projections are not individual hiring probability, local hiring volume or AI causality.",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-current"
         ]
@@ -37405,7 +37442,7 @@
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "Chinese mainland",
         "measure": "Occupational wage gap and industry background",
-        "occupation_scope": "The National Bureau of Statistics 2025 annual pre-tax average for urban non-private 133,981 / private 73,133 yuan in transportation, warehousing and postal services is only the background of related units across multiple occupations in the industry, not the dispatcher median, starting pay, percentile or monthly pay. The survey covers urban legal persons with 5 or more employees and excludes the self-employed and freelancers; all employees of outsourcing companies cannot be broadly excluded, and platform settlement is not automatically the same as legal-person employed wages. Dispatch positions span industries, so the transport industry is not applied across the board. No precise Chinese national occupational wage or representative recruitment pay was obtained in this round.",
+        "occupation_scope": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. These averages cover multiple jobs and cannot estimate individual pay for this occupation.",
         "period": "2025",
         "source_refs": [
           "r5-nbs-current"
@@ -37422,6 +37459,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Schedules loads, staff and vehicles and handles disruptions. CNY 4,000 during probation and from CNY 5,000 after passing it, without a stated pay period.",
+        "fact_id": "posting-dispatch-lingyu",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Shenzhen Lingyu Logistics: fleet dispatcher",
+        "period": "2025-12",
+        "source_refs": [
+          "dispatch-lingyu"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One dispatcher; Yantian Port logistics experience preferred. Pay to be discussed, with no amount published.",
+        "fact_id": "posting-dispatch-jinhai",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Shenzhen Dongfang Jinhai Logistics: port dispatcher",
+        "period": "2026-02",
+        "source_refs": [
+          "dispatch-jinhai"
+        ]
       }
     ]
   },
@@ -37435,7 +37496,7 @@
     "badges": [
       "Operational dispatch and scheduling · work orders and priority · records and handoff",
       "O*NET-SOC 43-5032.00 · 2025 wage data",
-      "Job Zone 1-2 · interest code CR · decline (-1% or lower) in 2024—2034"
+      "Job Zone 1–2 · interest code CR"
     ],
     "metrics": [
       {
@@ -37448,19 +37509,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "United States employment projection (decline (-1% or lower) in 2024—2034; the source gives only the category and no specific percentage)"
+        "label": "U.S. projected employment change (2025–2035): −0.7%"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "United States employment (about 218,700 people in 2024)"
+        "label": "U.S. employment (2025): 203,500 jobs"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "United States projected job openings (about 18,500 in 2024—2034, including replacement needs)"
+        "label": "U.S. projected annual openings: 16,000 (including replacements)"
       },
       {
         "availability": "missing",
@@ -37474,17 +37535,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Dispatchers, Except Police, Fire, and Ambulance (O*NET-SOC 43-5032.00) do dispatch and scheduling and follow-up in operational scenarios such as road transport and logistics and aviation and railways and mining and public utilities and ride-hailing platforms: receive and prepare work orders and priority, lay out operating and work schedules according to available personnel and vehicles and equipment, relay work orders and changes by telephone or radio and confirm receipt, monitor location and usage and adjust for traffic and weather and breakdowns, and record and maintain dispatch and cost and inventory information and compile statistics and complete handoff. United States scope: the 2025 wage data median annual wage is 50,340 US dollars (median hourly wage 24.20 US dollars), with annual percentiles of 36,030／42,750／50,340／62,450／78,140 US dollars; employment was about 218,700 in 2024, the 2024—2034 projection is decline (-1% or lower), with about 18,500 projected openings; the preparation level is Job Zone 1-2 and the interest code is CR. Chinese mainland: requirements are distinguished by industry, aviation operations control requires holding a flight dispatcher license and being designated by the operator, and road transport and ride-hailing follow operating licensing and practice qualification requirements; public statistics have not established an occupation-level wage scope, and this page visibly marks the gap in the relevant places."
+      "text": "Explore non-emergency dispatch duties, assignments and disruption handling. Compare Yantian logistics postings, U.S. data and emergency dispatch."
     },
     "title": {
       "availability": "available",
-      "text": "Dispatchers"
+      "text": "Dispatchers (Except Police, Fire and Ambulance)"
     }
   },
-  "source_content_sha256": "09018dff1cf35809413a48ce5b9371671829a464f76be6a140fe8dadcc59852c",
+  "source_content_sha256": "7f23fd2af0146b9bcfb0a027c03f6596f222f53d01cfe601a8477f0920123108",
   "subject": {
     "canonical_slug": "dispatchers-except-police-fire-and-ambulance",
-    "name": "Dispatchers",
-    "summary": "Dispatchers, Except Police, Fire, and Ambulance (United States side, O*NET-SOC 43-5032.00) is an operational dispatch position: scheduling and dispatching workers and work crews and equipment or service vehicles for the transport of materials and goods and passengers, or for routine installation and service and emergency repair conducted outside the place of business; receiving and preparing work orders according to client requirements and specifications and work orders and priority, laying out daily and operating schedules according to available personnel and vehicles and equipment, relaying work orders and tasks and changes to crews and drivers and field personnel by telephone and radio and confirming receipt, monitoring personnel and equipment location and usage and adjusting service and schedules for traffic and construction and weather and breakdown conditions, recording and maintaining dispatch information such as client requests and completed work and costs and expenses and inventory, arranging necessary repairs and ordering and issuing supplies, and compiling work progress statistics and reports. United States scope: for this occupation the 2025 wage data median annual wage is 50,340 US dollars (median hourly wage 24.20 US dollars), with annual percentiles of 36,030／42,750／50,340／62,450／78,140 US dollars (hourly percentiles 17.32／20.56／24.20／30.02／37.57); the O*NET summary page gives employment of about 218,700 in 2024, a 2024—2034 projection of decline (-1% or lower) and about 18,500 projected job openings (the source gives only the category for the projection and no specific percentage, and this page states it in the original wording); the preparation level is Job Zone 1-2 (SVP below 6.0), the education feedback is 47% high school or equivalent and 26% some college no degree and 8% associate's or two-year degree; the interest code is CR; the work context includes telephone conversations every day 100%, face-to-face discussions every day 98%, continuous contact with others 92%, teamwork extremely important 69%, decision freedom very much 62%, precision or accuracy extremely important 67%, facing strict deadlines every day 76%, making decisions every day that affect others 91%, use email every day 83%, continuous sitting 59%, and working hours regular (fixed shifts) 61%. Chinese mainland scope: requirements for this occupation are distinguished by industry, aviation operations control must be performed by personnel holding a flight dispatcher license and designated by the operator (Rules on the Administration of Civil Aviation Flight Dispatcher Licenses and Training Institutions, CCAR-65 department, 2022), road transport and ride-hailing operations and practice qualifications follow the Regulations on Road Transport of the People's Republic of China and the Provisions on the Administration of Road Transport Practitioners and the Interim Measures for the Administration of Online Ride-Hailing Operating Services, and work safety follows the Work Safety Law of the People's Republic of China (on the road transport side it is cited by regulation name and general requirements, without checking article numbers item by item); this page explicitly excludes the emergency alarm intake and emergency command dispatch of police and fire and ambulance, and does not bear transport operating licensing and safety main responsibility or driving and repair work. Public statistics have not established an occupation-level wage scope corresponding to this occupation, and this page truthfully retains the gap."
+    "name": "Dispatchers (Except Police, Fire and Ambulance)",
+    "summary": "Review requests, assign available staff, equipment or vehicles, then track changes, delays and handoffs. Fleet dispatch is one setting. This occupation excludes police, fire and ambulance dispatch."
   }
 }

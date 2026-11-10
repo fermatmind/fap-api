@@ -167,6 +167,9 @@
       "item:park-naturalists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:park-naturalists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:park-naturalists.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -13076,6 +13079,21 @@
             "ai"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The planned trail is closed and the alternative has no access note. List what to verify with park staff and draft a revised visitor announcement."
+            ]
+          },
+          "id": "park-naturalists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "jobzone"
+          ],
+          "title": "Adapt a park interpretation route",
+          "type": "notice"
         }
       ]
     },
@@ -15674,6 +15692,13 @@
         "id": "park-naturalists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "park-naturalists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15916,7 +15941,7 @@
       "text": "Park naturalist."
     }
   },
-  "source_content_sha256": "7c01ac6540c243cde3d31a31ea7d9c2eb06a4f9cb0b233511b4100e24f952dd9",
+  "source_content_sha256": "877ee8d8e4d2ce78bb53ddb33b7ca2177da353177faa28fd4496e080809522ed",
   "subject": {
     "canonical_slug": "park-naturalists",
     "name": "Park naturalist.",

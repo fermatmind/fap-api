@@ -179,6 +179,9 @@
       "item:nuclear-medicine-technologists.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:nuclear-medicine-technologists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nuclear-medicine-technologists.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13400,6 +13403,21 @@
             "nmpa-reform-2025"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The request and equipment record share a date but have different study IDs. List the fields to reconcile. Authorized clinical staff handle actual procedures."
+            ]
+          },
+          "id": "nuclear-medicine-technologists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-profile"
+          ],
+          "title": "Match nuclear medicine study IDs",
+          "type": "notice"
         }
       ]
     },
@@ -16017,6 +16035,13 @@
         "id": "nuclear-medicine-technologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nuclear-medicine-technologists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16311,7 +16336,7 @@
       "text": "Nuclear medicine technologists"
     }
   },
-  "source_content_sha256": "06c2a31c10c177626d0d439992f877913488cb61b1dd95bbbb6ec9c6b80f6ce3",
+  "source_content_sha256": "c7f2a909055e4bb5bb3d8baf9fcf48fe7550c6bd18aed8319e0d07ce79bb28c6",
   "subject": {
     "canonical_slug": "nuclear-medicine-technologists",
     "name": "Nuclear medicine technologists",

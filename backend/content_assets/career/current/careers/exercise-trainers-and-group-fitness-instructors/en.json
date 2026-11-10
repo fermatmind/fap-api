@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a51-shanghai": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a51-yuzhou": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:exercise-trainers-and-group-fitness-instructors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:exercise-trainers-and-group-fitness-instructors.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "exercise-trainers-and-group-fitness-instructors.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "exercise-trainers-and-group-fitness-instructors.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23076,7 +23042,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Using the FT346 fictional item on this page: a 40-minute 5+25+10 stage, at most 3 people and 3 chairs, a cardboard box at the entrance, A pending verification / B knee pain / C chest pain that day / D missing information; only check scheduling, the status of the four people, and the aisle pending confirmation, and do not actually lead training or diagnose."
+              "Use the fictional room, equipment and booking records in GF31 to write a one-page opening handoff. Separate preparation, venue approval and participant notices."
             ]
           },
           "id": "exercise-trainers-and-group-fitness-instructors.quick-decision.fit-decision-checklist.2",
@@ -26621,7 +26587,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National (industry proxy)"
+              "Yuzhou coach and part-time group exercise roles"
             ]
           },
           "id": "exercise-trainers-and-group-fitness-instructors.china-salary.career-snapshot-primary-locale.49",
@@ -26635,12 +26601,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national single-occupation monthly or annual salary statistic precisely corresponding to this occupation in mainland China was obtained; this page provides only the industry average wage as background (non-private 129,447 yuan/year, private 64,015 yuan/year, 2025), which cannot be converted into a specific position's monthly salary."
+              "Shangli Fitness in Yuzhou advertised fitness coach pay of CNY 80,000–150,000 per year, including base pay, commission and bonuses, and preferred relevant certificates. A separate part-time group exercise role preferred teaching experience and gave no specific amount."
             ]
           },
           "id": "exercise-trainers-and-group-fitness-instructors.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "internal-rubric"
+            "a51-yuzhou"
           ],
           "type": "prose"
         },
@@ -26677,7 +26643,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other cities"
+              "Shanghai coach apprenticeship posting"
             ]
           },
           "id": "exercise-trainers-and-group-fitness-instructors.china-salary.career-snapshot-primary-locale.53",
@@ -26691,12 +26657,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable monthly salary statistic for this occupation in other cities was obtained; differences across cities and facilities are large and must be checked by work location."
+              "Shanghai Qihang Fitness advertised fitness coach apprentices at CNY 5,000–8,000 per month. The description covered facility safety, equipment upkeep and member guidance. The online hiring event served veterans and accompanying military family members."
             ]
           },
           "id": "exercise-trainers-and-group-fitness-instructors.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a51-shanghai"
           ],
           "type": "prose"
         },
@@ -27443,13 +27409,13 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
@@ -29209,38 +29175,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Material One: FT346 fictional class and limitations",
-                  "Paper walkthrough only: class 40 minutes, at most 3 people in the space, 3 chairs; the entrance is blocked by a cardboard box. Facility rule: do not lead training until the aisle is cleared and confirmed by the authorized person in charge.",
-                  "Fictional A wants general fitness and the materials contain no record of discomfort; B has current knee pain and no professional opinion; C reports chest pain that day; D has not submitted health limitation information. Medical judgments must not be filled in.",
-                  "Fictional procedure: A still must complete entry verification by authorized personnel; B/C are not scheduled for training and the authorized person in charge is notified to handle them under the facility's referral or emergency procedure; D awaits document verification. This rule is for this item only and is not a general medical protocol.",
-                  "The schedule template specifies only a 5-minute warm-up, a 25-minute main section, and a 10-minute cool-down; the specific movements and intensity must be confirmed by a qualified instructor according to the individual. The exercise does not let anyone trial-perform.",
-                  "Output a one-page schedule draft and a pending-confirmation list; do not collect real member names, medical records, or contact details.",
-                  "The materials, rules, and people are all fictional and do not represent real facility approval, safety judgment, or diagnosis."
+                  "GF31: beginner group class at 18:30 with 12 confirmed participants.",
+                  "Room A seats up to 14 participants and has 10 inspected mats.",
+                  "Room B seats up to 10 participants and has 12 inspected mats.",
+                  "Both rooms are available at the scheduled time.",
+                  "The venue requires one inspected mat per participant.",
+                  "The equipment team can deliver two spare mats by 18:15. Their inspection status is determined on arrival.",
+                  "The venue supervisor approves the class or any rescheduling. Front desk staff notify participants.",
+                  "Review fictional records only. The participant count excludes the instructor."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Material Two: FT346 paper deliverable requirements",
-                  "Write out the 40-minute stage table, the A/B/C/D status, and the aisle remediation requirement; distinguish this item's rule conclusions, missing information, and items the authorizer must confirm.",
-                  "Deliver a schedule draft and a safety/authorization to-do list; do not write a four-week training prescription directly for the four people."
+                  "List each room’s capacity, inspected mats, status and next action for the supervisor.",
+                  "Single-change variant: two spare mats arrive in Room A and pass inspection. All other inputs stay the same. Show the row that changes.",
+                  "Draft a message for the front desk and state when it can be sent."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material Three: FT346 reference deliverable (fictional)",
-                  "5+25+10=40 minutes, with stages of warm-up 5 / main 25 / cool-down 10, without adding specific movement intensity. A awaits entry verification, B/C are not trained and are handed to the person in charge per the given rules, D awaits documents; at most 3 people and 3 chairs are not treated as approval to run the class.",
-                  "The cardboard box must be removed and confirmed by the person in charge; the materials give no confirmation record, so the class is not executed. All movement intensity and participation conditions are verified by real qualified authorized personnel.",
-                  "Sample confirmation draft: 'Person in charge: the FT346 aisle had a cardboard box, A awaits verification, B/C are handed to you for handling per this item and are not trained, D lacks documents; we propose 5/25/10 for 40 minutes in total, please verify the facility and personnel conditions. The class will not start until you reply, and no movement parameters are filled in.' Do not actually send it.",
-                  "On day 5 only the given new information is added: the cardboard box has been removed but the person in charge has not confirmed, and D still lacks documents; the status record stays as not started, and no condition assessment or participant feedback is invented."
+                  "Finish both versions independently.",
+                  "Record room capacity, equipment evidence and class approval separately.",
+                  "On day seven, open “GF31 group class handoff reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Material Four: boundary statement",
-                  "This item compares paper information handling only and does not involve leading training, first aid drills, or treatment; real emergencies are handled under local emergency and medical procedures."
+                  "This is a paper exercise. No class takes place.",
+                  "Follow venue procedures for actual rooms, equipment and classes."
                 ]
               }
             ]
@@ -29249,7 +29214,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "Fictional exercise prompt and reference deliverable",
+          "title": "GF31 fictional group class opening handoff",
           "type": "cards"
         },
         {
@@ -29260,9 +29225,9 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Work One: FT346 input and conditions comparison",
-                  "List the 40 minutes / at most 3 people / 3 chairs / aisle and the given A/B/C/D status and open items.",
-                  "If a real posting is attached, record the date and qualification requirements; the posting is not a required input for this item, and no open-vacancy sample is invented."
+                  "Keep both room and equipment handoffs.",
+                  "Explain what capacity and equipment constrain separately.",
+                  "Attach the front desk draft and sending conditions."
                 ]
               },
               {
@@ -29357,50 +29322,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read the fictional rules",
-                  "List the three conditions of the aisle, each person's information, and authorization, and keep the label that this item's rules are not medical advice."
+                  "Day 1",
+                  "Record attendance and the class time."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: make the 40-minute schedule table",
-                  "Use the 5+25+10 template to list stages and actions pending authorization; do not actually trial-perform."
+                  "Day 2",
+                  "Compare the two room capacities."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: separate the four-person status",
-                  "A awaits entry verification, B/C are handed to the person in charge and not trained, D awaits documents; the absence of a record must not be treated as safe."
+                  "Day 3",
+                  "Check how many mats passed inspection."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: review the facility conditions",
-                  "Found the cardboard box blocking the entrance; record the remediation and the requirement for the person in charge to confirm; the class must not start without confirmation."
+                  "Day 4",
+                  "List unresolved items for each room."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: write the fictional class record",
-                  "New fictional feedback: the cardboard box has been removed but the person in charge has not yet confirmed, and D still lacks documents. Record these changes and open items; do not invent reactions from a class that ran."
+                  "Day 5",
+                  "Write the supervisor handoff and a front desk draft."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: self-review or invite someone to challenge",
-                  "Check whether the time total, the four-person status, and authorization are consistent; outside help is optional and you need not find a real colleague."
+                  "Day 6",
+                  "Submit both versions and show the row that changes."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: write your judgment",
-                  "Summarize whether you like information verification and communication and which skills need to be added; the paper experience does not prove qualifications for leading training or medical judgment."
+                  "Day 7",
+                  "On day seven, open “GF31 group class handoff reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29545,14 +29510,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain a representative recruitment sample that is still valid in China and corresponds to this occupation; the employer card is only a verification prompt, not proof of an opening, and the date, role, certification supervision, and pay are checked separately.",
-              "The education, certification, and experience conditions in a job posting must be read together; one item being relaxed does not mean other conditions can be substituted."
+              "Shangli Fitness in Yuzhou advertised fitness coach pay of CNY 80,000–150,000 per year, including base pay, commission and bonuses, and preferred relevant certificates. A separate part-time group exercise role preferred teaching experience and gave no specific amount. Shanghai Qihang Fitness advertised fitness coach apprentices at CNY 5,000–8,000 per month. The description covered facility safety, equipment upkeep and member guidance. The online hiring event served veterans and accompanying military family members.",
+              "These are historical employer postings. Current vacancy status is unverified. Comparable nationwide wage data for exercise trainers and group instructors in mainland China remain unavailable."
             ]
           },
           "id": "exercise-trainers-and-group-fitness-instructors.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a51-yuzhou",
+            "a51-shanghai"
           ],
           "title": "How to read a job posting",
           "type": "notice"
@@ -31589,13 +31554,13 @@
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics material checked this time is an industry-category measure, and no national single-occupation wage statistic precisely corresponding to this occupation was obtained; this page uses the 'culture, sports, and recreation' urban unit average wage (2025 non-private 129,447 yuan/year, private 64,015 yuan/year) as an industry proxy, which only explains the industry background, and does not use industry averages or a single job posting quote to replace the occupational wage.",
+                "answer": "Shangli Fitness in Yuzhou advertised fitness coach pay of CNY 80,000–150,000 per year, including base pay, commission and bonuses, and preferred relevant certificates. A separate part-time group exercise role preferred teaching experience and gave no specific amount. Shanghai Qihang Fitness advertised fitness coach apprentices at CNY 5,000–8,000 per month. The description covered facility safety, equipment upkeep and member guidance. The online hiring event served veterans and accompanying military family members. These are historical employer postings. Current vacancy status is unverified. Comparable nationwide wage data for exercise trainers and group instructors in mainland China remain unavailable.",
                 "id": "exercise-trainers-and-group-fitness-instructors.faq.3",
                 "question": "Can wages in mainland China be found?",
                 "question_key": "career.faq.exercise-trainers-and-group-fitness-instructors.q3",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "a51-yuzhou",
+                  "a51-shanghai"
                 ]
               },
               {
@@ -31661,14 +31626,21 @@
                 ]
               },
               {
-                "answer": "US BLS precise SOC39-9031: 388,400 employed in 2025 and 416,900 in 2035, a net increase of 28,500, a change of 7.3% (OOH rounds to 7%); an annual average of 68,000 openings over 2025—2035, including replacements, not net additions.\nThis does not represent AI causation or an individual hiring rate; for a cross-background move, first verify movement instruction, supervision, and the actual qualification conditions, and FT346 is a paper exploration only that does not guarantee a transition.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 39-9031 to rise from about 388,400 in 2025 to 416,900 in 2035, an increase of 7.3%, with about 68,000 annual openings from growth and replacement. For a move into exercise physiology or physical therapy, check the target role’s education, scope and practice requirements separately.",
                 "id": "exercise-trainers-and-group-fitness-instructors.faq.10",
                 "question": "What is the US employment outlook? What needs to be added for a career change?",
                 "question_key": "career.faq.exercise-trainers-and-group-fitness-instructors.outlook-transition",
                 "source_refs": [
                   "bls-projections-2025-35",
-                  "bls-ooh-fitness"
+                  "adj-exercise-physiologists",
+                  "adj-physical-therapists"
                 ]
+              },
+              {
+                "answer": "In the original, Room A can fit the group but is two inspected mats short. Room B has enough mats but is two places short. Put both rooms on hold. Ask the equipment team to confirm delivery and inspection and have the supervisor prepare a rescheduling option. In the variant, Room A has 12 inspected mats and can go to the supervisor for approval. Room B’s capacity is unchanged. The front desk waits for supervisor approval before sending a notice. Check attendance, equipment, approval and notification.",
+                "id": "exercise-trainers-and-group-fitness-instructors.faq.11",
+                "question": "GF31 group class handoff reference (open after day six)",
+                "question_key": "career.faq.exercise-trainers-and-group-fitness-instructors.11"
               }
             ]
           },
@@ -31762,28 +31734,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the exercise trainers and group fitness instructors career page",
@@ -31827,17 +31787,18 @@
                 "url": "https://www.onetonline.org/link/summary/39-9031.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "This round directly checked 21 tasks, work context, software, interests, JobZone3, and education; the tasks include emergency first aid and bandaging, handling minor chronic conditions, and therapeutic, recreational, and physical activities.",
-                  "In the US, 100% indoors under controlled conditions daily, 86% in continuous contact, 86% face-to-face daily; standing 50% continuously and 45% for more than half the time, hours 43% less than 40h, 29% 40h, and 29% more."
+                  "In the US, 100% indoors under controlled conditions daily, 86% in continuous contact, 86% face-to-face daily; standing 50% continuously and 45% for more than half the time, hours 43% less than 40h, 29% 40h, and 29% more.",
+                  "The 2025 U.S. median was $22.67 hourly and $47,160 annually. Employment projections use BLS Table 1.2."
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
                 "limitation": "It applies only to this occupational description; certification and practice requirements must be verified separately against the local jurisdiction's and facility's original text.",
                 "market": "United States",
                 "name": "O*NET OnLine: Exercise Trainers and Group Fitness Instructors detailed occupational information (39-9031.00)",
-                "period": "current page; accessed 2026-09-20",
+                "period": "2026 occupation profile; 2025 wages; 2025–2035 employment projections",
                 "publisher": "O*NET OnLine",
                 "scope": "exact occupation (SOC 39-9031)",
                 "url": "https://www.onetonline.org/link/details/39-9031.00"
@@ -31876,10 +31837,9 @@
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/fitness-trainers-and-instructors.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "US BLS precise SOC39-9031: 388,400 employed in 2025 and 416,900 in 2035, a net increase of 28,500, a change of 7.3% (OOH rounds to 7%); an annual average of 68,000 openings over 2025—2035, including replacements, not net additions.",
-                  "Typical BLS entry is a high school diploma or equivalent, related experience None, short-term on-the-job training; self-employed 14.8%, which is not the share covered by wage statistics."
+                  "BLS Table 1.2 projects U.S. employment in occupation 39-9031 to rise from about 388,400 in 2025 to 416,900 in 2035, an increase of 7.3%, with about 68,000 annual openings from growth and replacement."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
@@ -32112,6 +32072,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Shangli Fitness in Yuzhou advertised fitness coach pay of CNY 80,000–150,000 per year, including base pay, commission and bonuses, and preferred relevant certificates. A separate part-time group exercise role preferred teaching experience and gave no specific amount."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a51-yuzhou",
+                "limitation": "These are historical employer postings. Current vacancy status is unverified. Comparable nationwide wage data for exercise trainers and group instructors in mainland China remain unavailable.",
+                "market": "Mainland China",
+                "name": "Fitness job posting",
+                "period": "2026-05-14",
+                "publisher": "Yuzhou Municipal Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.yuzhou.gov.cn/jczwgkbzhgfhml/031001/031001009/031001009008/031001009008002/20260514/fa985839-d8bd-48fe-ad75-5108318add1a.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Shanghai Qihang Fitness advertised fitness coach apprentices at CNY 5,000–8,000 per month. The description covered facility safety, equipment upkeep and member guidance. The online hiring event served veterans and accompanying military family members."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a51-shanghai",
+                "limitation": "These are historical employer postings. Current vacancy status is unverified. Comparable nationwide wage data for exercise trainers and group instructors in mainland China remain unavailable.",
+                "market": "Mainland China",
+                "name": "Fitness job posting",
+                "period": "2024-11-11",
+                "publisher": "Shanghai Municipal Bureau of Veterans Affairs",
+                "scope": "recruitment_proxy",
+                "url": "https://tyjr.sh.gov.cn/shtyjrswj/tzgg/20241111/0606ae230aa9487ca3f5dfd43a4f44e6.html"
               }
             ]
           },
@@ -34972,6 +34962,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a51-yuzhou",
+            "posting-a51-shanghai"
+          ],
           "sources_note": {
             "$item": "exercise-trainers-and-group-fitness-instructors.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36883,7 +36877,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36893,27 +36887,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "exercise-trainers-and-group-fitness-instructors.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "exercise-trainers-and-group-fitness-instructors.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -37124,7 +37098,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Growth of 7.3% (2025—2035; OOH rounds to 7%), a net increase of 28,500 people",
+        "display_value": "Projected growth of 7.3% (2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "US employment change",
@@ -37301,6 +37275,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Shangli Fitness in Yuzhou advertised fitness coach pay of CNY 80,000–150,000 per year, including base pay, commission and bonuses, and preferred relevant certificates. A separate part-time group exercise role preferred teaching experience and gave no specific amount.",
+        "fact_id": "posting-a51-yuzhou",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Fitness job posting",
+        "period": "2026-05-14",
+        "source_refs": [
+          "a51-yuzhou"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Shanghai Qihang Fitness advertised fitness coach apprentices at CNY 5,000–8,000 per month. The description covered facility safety, equipment upkeep and member guidance. The online hiring event served veterans and accompanying military family members.",
+        "fact_id": "posting-a51-shanghai",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Fitness job posting",
+        "period": "2024-11-11",
+        "source_refs": [
+          "a51-shanghai"
+        ]
       }
     ]
   },
@@ -37360,7 +37358,7 @@
       "text": "Exercise Trainers and Group Fitness Instructors"
     }
   },
-  "source_content_sha256": "c8709881577b975db4f8e70abec2a71739810263d7623338ab9f01b6c05a9dab",
+  "source_content_sha256": "5e05ee613b83a9276df78d13ed56ffa2ac30c2f76cfa50bf2d4c24b81ca25336",
   "subject": {
     "canonical_slug": "exercise-trainers-and-group-fitness-instructors",
     "name": "Exercise Trainers and Group Fitness Instructors",

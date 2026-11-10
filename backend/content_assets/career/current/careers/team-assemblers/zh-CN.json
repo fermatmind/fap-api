@@ -23663,12 +23663,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先查订单版本再核数量，原行不删，重复只计一次；明确不符与未提供分开。纸面匹配率不证真实产线质量、速度或本人设备操作合格。"
+              "纸面体验｜对照虚构工位卡与工单，找出采用旧版图号的工位，标出需交给班组核对的批次。 "
             ]
           },
           "id": "team-assemblers.display.fermat_decision_card.summary",
           "source_refs": [
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24769,15 +24769,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "团队装配工作为团队成员共同装配完整产品或其组件，能执行团队装配过程中的全部任务，并轮换全部或大部分任务，而非永久只做一个动作。工作包含核订单图纸、质量检查、协助线束、清洁设备及生产报告；可参与任务分配与训练，含在团队内工作的组长。组长不自动等于独立一线主管，任务档案中的维修或叉车也不授实际操作资格。本页冻结51-2092.00；BLS工资与预测用51-2090杂项装配合并参考，含其他装配工，不能拆精确团队数据。中国真实设备、岗位训练、特种作业条件、防护与合同分别核。全虚构纸面配套记录只看规则、数量、版本与未知，不开机、不碰真实电气焊接或叉车，不授质量放行。"
+              "团队装配工在工位之间协作，按图纸和工单组装部件并检查成品。轮岗时要让接手人员知道已完成项目和待核项。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "team-assemblers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule",
-            "editorial"
+            "transfer-onet-51-2092.00"
           ],
           "type": "prose"
         }
@@ -25421,14 +25418,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "分给定规则草稿、真实视觉机器人采用及职业结果三层。纸卡1/3匹配只描述三已知包，第四未知；不证真实检验准确率、设备安全或生产增益，本页不填未经可复核评分。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构工位卡与工单，找出采用旧版图号的工位，标出需交给班组核对的批次。"
             ]
           },
           "id": "team-assemblers.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial",
-            "nist",
-            "bls"
+            "transfer-onet-51-2092.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32796,6 +32792,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-2092.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-2092.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-2092.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38277,10 +38300,10 @@
       "text": "团队装配工"
     }
   },
-  "source_content_sha256": "109a524de42e560c8cdab754843ba0f34d57ce1dbd06e5a7e50e4e48a8f09fab",
+  "source_content_sha256": "fae3d340a93752ec0c2fc02bc143e67352788bf94daab01fb622f268c8f9cfdf",
   "subject": {
     "canonical_slug": "team-assemblers",
     "name": "团队装配工",
-    "summary": "团队装配工作为团队成员共同装配完整产品或其组件，能执行团队装配过程中的全部任务，并轮换全部或大部分任务，而非永久只做一个动作。工作包含核订单图纸、质量检查、协助线束、清洁设备及生产报告；可参与任务分配与训练，含在团队内工作的组长。组长不自动等于独立一线主管，任务档案中的维修或叉车也不授实际操作资格。本页冻结51-2092.00；BLS工资与预测用51-2090杂项装配合并参考，含其他装配工，不能拆精确团队数据。中国真实设备、岗位训练、特种作业条件、防护与合同分别核。全虚构纸面配套记录只看规则、数量、版本与未知，不开机、不碰真实电气焊接或叉车，不授质量放行。"
+    "summary": "团队装配工在工位之间协作，按图纸和工单组装部件并检查成品。轮岗时要让接手人员知道已完成项目和待核项。"
   }
 }

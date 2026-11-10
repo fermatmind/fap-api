@@ -164,6 +164,9 @@
       "item:ophthalmic-medical-technicians.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:ophthalmic-medical-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:ophthalmic-medical-technicians.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12292,6 +12295,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。一张检查单有日期和项目，另一张有受检人编号但缺日期。说明哪些字段需要联系眼科团队核对。"
+            ]
+          },
+          "id": "ophthalmic-medical-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "核眼科检查记录归属",
+          "type": "notice"
         }
       ]
     },
@@ -14678,6 +14696,13 @@
         "id": "ophthalmic-medical-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "ophthalmic-medical-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14907,7 +14932,7 @@
       "text": "眼科医疗技术员：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "b9364b5d98e71b717b0a2139651ec2c1a71a8373f7df58fdef6d0ec40065a4af",
+  "source_content_sha256": "4b083195450822f56239d903d32aca5023a767c1959cde800eaa65135b565ab5",
   "subject": {
     "canonical_slug": "ophthalmic-medical-technicians",
     "name": "眼科医疗技术员",

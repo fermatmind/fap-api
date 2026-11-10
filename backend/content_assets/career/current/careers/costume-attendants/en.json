@@ -6,7 +6,7 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
@@ -30,7 +30,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -54,7 +54,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-costume-shanghai": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-costume-taizhou": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -23598,7 +23604,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, recruitment samples and a precise mapping were not obtained."
+              "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, a precise occupational mapping was not obtained."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
@@ -26023,7 +26029,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, recruitment samples and a precise mapping were not obtained."
+              "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, a precise occupational mapping was not obtained."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
@@ -26066,12 +26072,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain verifiable job posting offer statistics for theatrical costume and costume management positions in mainland China; a single posting or a single production's daily rate cannot represent the national level"
+              "A Taizhou Peking Opera stage team advertised one costume role covering production support, upkeep and inventory. It required full-time associate-level education or above, any field, and gave pay components but no amount. Shanghai Huai Opera listed one costume technician with secondary vocational education or above and experience or knowledge of costume fitting, making, maintenance and repair. It gave no amount."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "costume-taizhou",
+            "costume-shanghai"
           ],
           "type": "prose"
         },
@@ -26094,7 +26101,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese target unit job announcements were not sampled, and the ratio of project-based to formal positions was not obtained, so no educational assignment of fitting or storage work is made."
+              "The two postings describe individual roles and do not establish entry or assessment requirements across employers."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -26164,7 +26171,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, recruitment samples and a precise mapping were not obtained."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -30904,7 +30911,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Coordinate design details with costume designers and production staff, count and safeguard the inventory of costumes, wigs and makeup supplies, purchase, rent or draw costumes and consumables, study the script and historical costume references to determine the form, arrange performer fittings and make patterns from design drawings, schedule the costume crew and changes during rehearsals and performances, recommend and follow up suppliers and provide related budget recommendations, and look after the store room, changing rooms and laundry area.",
+                "answer": "Prepare, fit, label and maintain costumes by cast member and scene. Help with changes, then count, repair or flag damaged pieces and return them to storage.",
                 "id": "actors.faq.1",
                 "question": "What does the daily work of costume attendants involve?",
                 "question_key": "career.faq.costume-attendants.1",
@@ -30913,7 +30920,7 @@
                 ]
               },
               {
-                "answer": "Costume attendants prepare, maintain and manage costumes and supplies and are responsible for item availability, inventory and on-site scheduling; theatrical and performance makeup artists design and apply makeup looks; set and exhibit designers design sets and exhibitions; fashion designers design garment styles; tailors and custom sewers make and alter garments to measurements; and ushers and ticket takers guide audiences and check tickets.",
+                "answer": "Costume attendants prepare, fit and maintain garments. Some also design or make pieces or arrange tailoring. Fashion design focuses on developing the look and makeup roles on makeup. Check who approves alterations and substitutions.",
                 "id": "actors.faq.2",
                 "question": "How do costume attendants differ from makeup artists and fashion designers?",
                 "question_key": "career.faq.costume-attendants.2",
@@ -30931,9 +30938,9 @@
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: the three task categories of inventory registration and lookup, patterns and paper patterns, and washing and care can be partly taken on by tools; this page has no single-occupation adoption rate or displacement data.",
+                "answer": "Digital inventories can help track garments and repairs. Fittings, quick changes and damage handling still rely on rehearsal, physical checks and coordination. This is not a measurement of AI adoption or job displacement.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of costume attendants is there already AI change evidence?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.costume-attendants.4",
                 "source_refs": [
                   "onet"
@@ -30949,12 +30956,14 @@
                 ]
               },
               {
-                "answer": "Among the U.S. 2025 wage data, the median annual wage is 50,400 USD and the hourly wage 24.23 USD (single-occupation basis for 39-3092.00), with percentiles at annual wages 32,150／38,610／50,400／77,680／109,520 USD; no occupation-level wage value was obtained for mainland China, and this page treats it as a gap rather than filling it with an industry average.",
+                "answer": "The May 2025 U.S. median wage was $50,400 per year and $24.23 per hour. A Taizhou Peking Opera stage team advertised one costume role covering production support, upkeep and inventory. It required full-time associate-level education or above, any field, and gave pay components but no amount. Shanghai Huai Opera listed one costume technician with secondary vocational education or above and experience or knowledge of costume fitting, making, maintenance and repair. It gave no amount.",
                 "id": "actors.faq.6",
                 "question": "What is the usual wage for costume attendants, and how should it be compared?",
                 "question_key": "career.faq.costume-attendants.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "costume-taizhou",
+                  "costume-shanghai"
                 ]
               },
               {
@@ -30985,12 +30994,12 @@
                 ]
               },
               {
-                "answer": "The O*NET employment trend page (based on BLS 2024—2034 projections) shows about 6,700 people in this detailed occupation in 2024, a projected label of Faster than average (5% to 6%), and about 1,800 cumulative openings including growth and replacement; the work is mainly standing, carrying and manual operation, with night work concentrated around schedules, so it must be checked against local production and performance demand.",
+                "answer": "BLS projects U.S. employment in SOC 39-3092 to go from about 6,600 in 2025 to 7,000 in 2035 (+5.9%). It projects about 1,700 openings per year, including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing a costume attendant career now?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.costume-attendants.10",
                 "source_refs": [
-                  "bls"
+                  "a18-bls-projections"
                 ]
               }
             ]
@@ -31006,7 +31015,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "U.S. and mainland China data are in separate columns: U.S. wages use the single-occupation basis for 39-3092.00 (OEWS 2025 wage data), and employment and projections come from the O*NET employment trend page (based on BLS 2024—2034 projections); mainland China is treated as a gap, and the two do not substitute for each other.",
+              "U.S. and mainland China data are in separate columns: U.S. wages use the single-occupation basis for 39-3092.00 (OEWS 2025 wage data), and employment and projections come from BLS Table 1.2 (2025–2035); mainland China occupational statistics remain a separate gap; the postings illustrate individual hiring terms, and the two do not substitute for each other.",
               "When the statistical period, survey subjects and pay basis differ they are cited separately; no interpolation and no filling in with adjacent occupations or industry averages.",
               "The exercise materials are all fictional or based on public materials and do not constitute training proof, employment authorization or a hiring promise."
             ]
@@ -31362,11 +31371,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, recruitment samples and a precise mapping were not obtained."
+                  "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, a precise mapping were not obtained."
                 ],
                 "evidence_type": "official statistics",
                 "id": "nbs",
-                "limitation": "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, recruitment samples and a precise mapping were not obtained.",
+                "limitation": "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, a precise mapping were not obtained.",
                 "market": "Mainland China",
                 "name": "NBS2025 urban unit wages",
                 "period": "2025 data, published 2026-05-15",
@@ -31406,7 +31415,7 @@
                 "url": "https://www.onetonline.org/link/localwages/39-3092.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "U.S. O*NET23 tasks: 15 Core tasks include change checklists, helping performers dress or assigning dressers, arranging costumes in order of use, designing, making or sending major repairs to a tailor, checking fit and modification records, distributing items and recording status, checking effects under stage lighting, washing, pressing and minor repairs, collaborating on design, inventory and designated-person access, purchasing and renting, historical costume research, returning and storing after completion, studying the script, and taking inventory; 6 Supplemental ones are crew scheduling, hiring, training, scheduling and supervising alteration staff, budget items, storage, changing and laundry areas, suppliers, and non-costume items; 2 New ones are making patterns from design drawings and arranging fittings. The categories are not daily frequency, and design and repair work is not excluded for this occupation. U.S. O*NET2025 shows arts, entertainment and recreation 59%, information 17% and education 12%; the other 12% is obtained by subtracting the first three categories from 100, and no accommodation and food services or self-employment detail is inferred; shares are not industry wages or a Chinese employment distribution."
                 ],
@@ -31418,7 +31427,7 @@
                 "period": "Page updated 2026; industry data 2025, and the surveys are not a uniform 2026 survey",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-3092.00"
+                "url": "https://www.onetonline.org/link/details/39-3092.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31438,11 +31447,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, recruitment samples and a precise mapping were not obtained."
+                  "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, a precise mapping were not obtained."
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, recruitment samples and a precise mapping were not obtained.",
+                "limitation": "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, a precise mapping were not obtained.",
                 "market": "Mainland China",
                 "name": "NBS2025 urban unit wages",
                 "period": "2025 data, published 2026-05-15",
@@ -31574,6 +31583,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment in SOC 39-3092 to go from about 6,600 in 2025 to 7,000 in 2035 (+5.9%). It projects about 1,700 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a18-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One costume position; production support, maintenance and inventory. No pay amount. The posting required full-time associate-level education or higher, any field, and age under 45, with possible flexibility for theater experience."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "costume-taizhou",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Taizhou Mei Lanfang Peking Opera costume position",
+                "period": "2023-11",
+                "publisher": "Taizhou Talent Public Service",
+                "scope": "recruitment_proxy",
+                "url": "https://tac.rsj.taizhou.gov.cn/hotinfo/86cf3993a308402c8f1fdd8a5d5c2082"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One costume technician: secondary vocational education or above, age 40 or below, familiarity with opera costumes and knowledge of making, maintaining and repairing them. No pay amount."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "costume-shanghai",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Shanghai Huai Opera costume technician",
+                "period": "2022-06-13",
+                "publisher": "Shanghai Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.sh.gov.cn/tzpgg_17408/20220613/t0035_1407437.html"
               }
             ]
           },
@@ -34370,7 +34424,7 @@
           "bls_table": [
             {
               "指标": "Data and basis",
-              "数值": "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, recruitment samples and a precise mapping were not obtained.",
+              "数值": "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, a precise mapping were not obtained.",
               "说明": "Industry background does not stand in for the occupation"
             },
             {
@@ -34520,10 +34574,10 @@
             },
             {
               "城市/区间": "Industry background (pretax annual average, not monthly salary)",
-              "月薪参考": "NBS2025 condition-matched background: culture, sports and entertainment non-private 129,447/private 64,015, and education 133,539/63,908 yuan pretax annual average; matched by the employing legal entity's main business and private/other classification, without automatically determining the industry from backstage tasks. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances. This is not the occupational wage of costume attendants, monthly take-home pay or a crew daily rate; Chinese occupational distribution, recruitment samples and a precise mapping were not obtained."
+              "月薪参考": "NBS publishes annual averages by employers’ industry. Those figures provide context and do not establish pay for this occupation."
             },
             {
-              "城市/区间": "Mainland China (job posting offer basis)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34535,13 +34589,14 @@
           "china_soc_row": "O*NET39-3092.00／BLS39-3092 U.S.; a precise Chinese entity mapping has not been completed.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-costume-taizhou",
+            "posting-costume-shanghai"
           ],
           "sources_note": "Source links are used according to their respective statistical or announcement scope; when the statistical period, survey subjects and pay basis differ they are cited separately, with no conversion between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect the wages of costume attendants?",
             "driver_heading": "How are work cycles arranged in costume and backstage settings?",
-            "official_heading": "Official statistical basis and missing data notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Educational and training background, position directions and notes (editorial compilation, not wage statistics)",
             "scenario_heading": "Which costume service position directions correspond to different educational and training backgrounds?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35185,7 +35240,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/makeup-artists-theatrical-and-performance",
+            "target_href": "/en/career/jobs/makeup-artists-theatrical-and-performance",
             "target_slug": "makeup-artists-theatrical-and-performance",
             "target_title": "Makeup artists, theatrical and performance (adjacent occupation)",
             "transition_distance": {
@@ -35208,7 +35263,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/set-and-exhibit-designers",
+            "target_href": "/en/career/jobs/set-and-exhibit-designers",
             "target_slug": "set-and-exhibit-designers",
             "target_title": "Set and exhibit designers (adjacent occupation)",
             "transition_distance": {
@@ -35231,7 +35286,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/tailors-dressmakers-and-custom-sewers",
+            "target_href": "/en/career/jobs/tailors-dressmakers-and-custom-sewers",
             "target_slug": "tailors-dressmakers-and-custom-sewers",
             "target_title": "Tailors and custom sewers (adjacent occupation)",
             "transition_distance": {
@@ -35254,7 +35309,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/fashion-designers",
+            "target_href": "/en/career/jobs/fashion-designers",
             "target_slug": "fashion-designers",
             "target_title": "Fashion designers (adjacent occupation)",
             "transition_distance": {
@@ -35277,7 +35332,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/merchandise-displayers-and-window-trimmers",
+            "target_href": "/en/career/jobs/merchandise-displayers-and-window-trimmers",
             "target_slug": "merchandise-displayers-and-window-trimmers",
             "target_title": "Merchandise displayers and window trimmers (adjacent occupation)",
             "transition_distance": {
@@ -35300,7 +35355,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/ushers-lobby-attendants-and-ticket-takers",
+            "target_href": "/en/career/jobs/ushers-lobby-attendants-and-ticket-takers",
             "target_slug": "ushers-lobby-attendants-and-ticket-takers",
             "target_title": "Ushers, lobby attendants and ticket takers (adjacent occupation)",
             "transition_distance": {
@@ -35323,7 +35378,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/amusement-and-recreation-attendants",
+            "target_href": "/en/career/jobs/amusement-and-recreation-attendants",
             "target_slug": "amusement-and-recreation-attendants",
             "target_title": "Amusement and recreation attendants (adjacent occupation)",
             "transition_distance": {
@@ -35346,7 +35401,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/producers-and-directors",
+            "target_href": "/en/career/jobs/producers-and-directors",
             "target_slug": "producers-and-directors",
             "target_title": "Producers and directors (adjacent occupation)",
             "transition_distance": {
@@ -35434,7 +35489,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35483,7 +35538,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Explore my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35532,7 +35587,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35581,7 +35636,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Explore my motivation cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35630,7 +35685,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35679,7 +35734,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Explore my communication cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36301,7 +36356,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore the task interests and work preferences of costume attendants",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36415,11 +36470,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -36835,39 +36890,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 6,700 people (2024, single-occupation basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "6,600 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size",
-        "occupation_scope": "The O*NET employment trend page (based on BLS 2024—2034 projections) employment estimate for this detailed occupation in 2024",
-        "period": "2024 (O*NET/BLS); retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 39-3092",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Growth of 5%—6% (2024—2034, label Faster than average)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+5.9%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Employment change rate",
-        "occupation_scope": "The O*NET employment trend page (based on BLS 2024—2034 projections) projection label for this detailed occupation is 'Faster than average'",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 39-3092",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 1,800 (2024—2034 cumulative, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "1,700 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Job openings",
-        "occupation_scope": "The O*NET employment trend page's cumulative openings for this detailed occupation over 2024—2034, stated to include growth and replacement demand",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 39-3092",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
@@ -36919,39 +36974,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "6,600 people (2025 for this occupation)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "6,600 jobs (2025)",
         "fact_id": "g04-employment-2025",
         "market": "United States",
         "measure": "Employment size",
-        "occupation_scope": "U.S. CostumeAttendants39-3092 for this occupation, with annual average rather than cumulative openings; industry shares are not wages",
-        "period": "2025 industry employment／2025—2035 projections; verified 2026-10-09",
+        "occupation_scope": "U.S. SOC 39-3092",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Growth of 6% (2025—2035)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+5.9%",
         "fact_id": "g04-growth-2025",
         "market": "United States",
         "measure": "Employment change rate",
-        "occupation_scope": "U.S. CostumeAttendants39-3092 for this occupation, with annual average rather than cumulative openings; industry shares are not wages",
-        "period": "2025 industry employment／2025—2035 projections; verified 2026-10-09",
+        "occupation_scope": "U.S. SOC 39-3092",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1,700 per year on average (2025—2035, growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "1,700 annually (including replacements)",
         "fact_id": "g04-openings-2025",
         "market": "United States",
         "measure": "Job openings",
-        "occupation_scope": "U.S. CostumeAttendants39-3092 for this occupation, with annual average rather than cumulative openings; industry shares are not wages",
-        "period": "2025 industry employment／2025—2035 projections; verified 2026-10-09",
+        "occupation_scope": "U.S. SOC 39-3092",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
@@ -37001,6 +37056,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One costume position; production support, maintenance and inventory. No pay amount.",
+        "fact_id": "posting-costume-taizhou",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Taizhou Mei Lanfang Peking Opera costume position",
+        "period": "2023-11",
+        "source_refs": [
+          "costume-taizhou"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One costume technician: secondary vocational education or above, age 40 or below, familiarity with opera costumes and knowledge of making, maintaining and repairing them. No pay amount.",
+        "fact_id": "posting-costume-shanghai",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Shanghai Huai Opera costume technician",
+        "period": "2022-06-13",
+        "source_refs": [
+          "costume-shanghai"
+        ]
       }
     ]
   },
@@ -37027,19 +37106,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, growth of 5%—6%, faster than average)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employed persons (2024, about 6,700 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. job openings (2024—2034, about 1,800)"
+        "label": "U.S. projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37053,17 +37132,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Costume attendants (O*NET-SOC 39-3092.00) prepare and manage costumes, wigs and makeup supplies for film, television, theatre and performances: this covers liaising with designers and production staff, maintaining and safeguarding the inventory, purchasing, renting and drawing, studying the script and historical costume references, arranging fittings and making patterns, scheduling the costume crew during rehearsals and performances, and looking after changing and laundry areas; it includes the U.S. 2025 median annual wage of 50,400 USD (hourly wage 24.23 USD), about 6,700 people employed in 2024, a 2024—2034 employment projection faster than average (5%—6%), the mainland China occupation-level wage and employment basis gap, and the control points for physical carrying, chemical contact and performance milestone pressure."
+      "text": "See how costume attendants fit, track and maintain costumes. Compare Taizhou and Shanghai theater postings and U.S. wages and employment."
     },
     "title": {
       "availability": "available",
       "text": "Costume attendants"
     }
   },
-  "source_content_sha256": "622f9988b99b4453d359945f949b06150e3550412c230475cf8131c7c5ef3c8b",
+  "source_content_sha256": "d232ce362129f958e4c6abf3829ac3568b30894cef17383fb1cd0692e1668e2b",
   "subject": {
     "canonical_slug": "costume-attendants",
     "name": "Costume attendants",
-    "summary": "Costume attendants correspond in the United States to O*NET-SOC 39-3092.00 (Costume Attendants, marked Bright Outlook by O*NET). The core is preparing, maintaining and managing costumes, wigs and makeup supplies for film, television, theatre, performances and events: liaising on design details with costume designers and production staff, maintaining and safeguarding the costume and supply inventory, purchasing, renting or drawing costumes and consumables, studying the script and historical costume references to determine the form, arranging performer fittings, making patterns, scheduling the costume crew during rehearsals and performances and looking after changing and laundry areas. On the China side, theatrical costume, costume and prop management positions belong to different companies, crews and service units and are not a one-to-one correspondence with this U.S. detailed occupation, so appointment and employment bases cannot be interchanged."
+    "summary": "Prepare, fit, label and maintain costumes by cast member and scene. Help with changes, then count, repair or flag damaged pieces and return them to storage."
   }
 }

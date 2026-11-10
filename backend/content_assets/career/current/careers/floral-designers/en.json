@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a50-beijing": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a50-yuli": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:floral-designers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:floral-designers.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "floral-designers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "floral-designers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23076,7 +23042,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Practice prompt | A shop receives a completely fictional order for a small wedding setup (ceremony area and reception table flowers). Write a floral design proposal covering: (1) how to confirm the occasion, style, colors, budget, and delivery time and location with the customer; (2) how to select materials to suit the requirements and specify estimated proportions and quantities of focal flowers, supporting materials, and foliage; (3) how to arrange incoming flower inspection, cutting and conditioning, preservation, and temperature and humidity control; (4) how to design colors and forms and explain alternatives for different containers and settings; and (5) how to check finished work before delivery (freshness, stability, color discrepancies, and packaging) and retain reviewable records. Use public information and simulated dimensions; do not use any real customer, address, or contract information."
+              "Use order FL27 for six wedding tables to prepare two quotes and stock lists. Check available stems, substitution approval and total price before writing the shop handoff."
             ]
           },
           "id": "floral-designers.quick-decision.fit-decision-checklist.2",
@@ -26570,7 +26536,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "First-tier cities (Beijing, Shanghai, Guangzhou, Shenzhen)"
+              "Beijing design and production role"
             ]
           },
           "id": "floral-designers.china-salary.career-snapshot-primary-locale.49",
@@ -26584,12 +26550,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No mainland China monthly wage data for this occupation verifiable by city or region has been obtained; advertised pay, industry averages, and secondhand accounts are not substituted."
+              "Ankang’s employment bulletin listed three floral designer positions in Beijing at Beijing Bocheng Weiye Sports Culture. The employer quoted CNY 6,000–8,000 per month and asked for independent design, production and flower care skills."
             ]
           },
           "id": "floral-designers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "internal-rubric"
+            "a50-beijing"
           ],
           "type": "prose"
         },
@@ -26626,7 +26592,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "County areas and lower-tier markets"
+              "Yuli shop roles"
             ]
           },
           "id": "floral-designers.china-salary.career-snapshot-primary-locale.53",
@@ -26640,12 +26606,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No mainland China monthly wage data for this occupation verifiable by city or region has been obtained; advertised pay, industry averages, and secondhand accounts are not substituted."
+              "Zizihua Floristry in Yuli listed one shop assistant and one floral designer. The shared entry quoted CNY 3,000 in base pay plus commission and described organizing, displaying and caring for flowers. Ask the employer how the pay period and commission apply to each role."
             ]
           },
           "id": "floral-designers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a50-yuli"
           ],
           "type": "prose"
         },
@@ -26959,7 +26925,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "US27-1023: May2025 median 37360 dollars / year and 17.96 dollars / hour; 2025 employment 45200, 2025—2035 decline 6%, average annual openings 5200, all projected to come from replacements. The 10 / 90 thresholds 28600 / 51000 have been checked; 25 / 75 remain to be checked. Some exact occupational industry medians have been obtained and are listed by actual industry, so a gap across all industries is no longer indicated."
+              "BLS Table 1.2 projects U.S. employment in occupation 27-1023 to fall from about 45,200 in 2025 to 42,700 in 2035, a decline of 5.6%, with about 5,200 openings per year. The BLS Occupational Outlook Handbook attributes the openings to replacement needs."
             ]
           },
           "id": "floral-designers.us-salary.career-snapshot-secondary-locale.25",
@@ -26974,7 +26940,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "US27-1023: May2025 median 37360 dollars / year and 17.96 dollars / hour; 2025 employment 45200, 2025—2035 decline 6%, average annual openings 5200, all projected to come from replacements. Percentiles are not starting wages or job levels; OEWS employee wages cannot be explained by including self-employed business income in the range."
+              "US27-1023: May2025 median 37360 dollars / year and 17.96 dollars / hour; 2025 employment 45200, 2025—2035 decline 5.6%, average annual openings 5200, all projected to come from replacements. Percentiles are not starting wages or job levels; OEWS employee wages cannot be explained by including self-employed business income in the range."
             ]
           },
           "id": "floral-designers.us-salary.career-snapshot-secondary-locale.26",
@@ -27390,13 +27356,13 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
@@ -29156,38 +29122,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "A completely fictional small wedding brief (occasion, style, colors, budget range, and venue plan).",
-                  "A blank requirements confirmation form (occasion, style, colors, budget, and delivery time and location).",
-                  "A blank incoming inspection and conditioning record (quantity, quality, cutting, hydration, and preservation treatment).",
-                  "A blank pre-delivery checklist (freshness, stability, color discrepancies, packaging, and card information).",
-                  "A materials list (proportions and quantities of focal flowers, supporting materials, and foliage, containers, and packaging).",
-                  "A process flowchart (requirements confirmation—material selection and ordering—inspection and conditioning—design and production—packaging and pricing—delivery and setup—care instructions).",
-                  "A pen and calculator (for trial quantity and cost calculations).",
-                  "A timer (60-minute limit)."
+                  "Wedding order FL27: six tables, each with two ivory focal stems.",
+                  "The client approved up to two white lisianthus stems as substitutes. Ask before making any other substitution.",
+                  "The planned ivory roses cost CNY 18 per stem. Ten passed receiving inspection.",
+                  "White lisianthus costs CNY 12 per stem. Four passed inspection.",
+                  "Supporting flowers, greenery and containers cost CNY 114 in total.",
+                  "Delivery and setup cost CNY 36 in total.",
+                  "The budget cap is CNY 390. Delivery is due by 15:00 on Saturday.",
+                  "All quantities and prices are fictional."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Complete within 60 minutes: requirements confirmation records, material selection and quantity estimates, incoming inspection and conditioning plan, and color and form plan (including container and setting alternatives).",
-                  "Complete trial quantity and cost calculations for focal and supporting flowers, and describe at least two risks that could cause customer complaints and corresponding measures.",
-                  "Specify situations requiring a pause and escalation rather than handling them yourself (such as unavailable key flowers, venue hazards, or conflicting requirements and budget)."
+                  "Submit a one-page stock list and quote. Show focal stem counts, table allocation, total price and who will confirm delivery.",
+                  "Single-change variant: nine ivory roses now pass inspection instead of ten. All other conditions stay the same. Show what changes and what needs confirmation.",
+                  "Show your arithmetic and questions for the client."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First list requirements to confirm and items that cannot be omitted, then record confirmation methods and outcomes for each.",
-                  "Specify flower varieties, grades, quantities, arrival times, and conditioning requirements.",
-                  "Specify proportions, colors, containers, and setting suitability for colors and forms, and provide alternatives.",
-                  "Finish with a reflection: Which compressed steps would cause which consequences?"
+                  "Finish the original first, then the variant.",
+                  "Record stock and the scope of existing approval separately.",
+                  "On day seven, open “FL27 wedding table arrangement reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Do not judge venue structures, electricity, or fire safety. For imported flower quarantine and food safety (such as edible decorations), always state that compliance must be checked before use.",
-                  "The work sample only shows that you can organize tasks and retain records in this occupation's manner; it does not establish qualifications or competence."
+                  "Work from the paper records. The shop confirms actual prices, substitutions and delivery.",
+                  "A hand-drawn table plan is enough."
                 ]
               }
             ]
@@ -29196,7 +29161,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "Floral Designers | path",
+          "title": "FL27 fictional wedding table arrangement order",
           "type": "cards"
         },
         {
@@ -29207,9 +29172,9 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "List each step completed in the simulated task in three columns: task, ability, and evidence.",
-                  "Mark whether each step was completed independently or with guidance.",
-                  "Mark steps requiring escalation rather than independent judgment."
+                  "Keep both stock lists and quotes.",
+                  "Mark the stock change in the variant.",
+                  "Separate shop decisions from questions for the client."
                 ]
               },
               {
@@ -29304,50 +29269,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Understand this occupation's objects and process (requirements confirmation—material selection and ordering—inspection and conditioning—design and production—packaging and delivery—care instructions).",
-                  "Record shop conditions and peak-season pace you observe."
+                  "Day 1",
+                  "Record table count, color, budget and delivery time."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Check working conditions: standing and repetitive hand movements, refrigerated and wet areas, pollen and plant sap, and peak-season schedules.",
-                  "Write down the practical cost you find hardest to adapt to and judge whether you can accept it."
+                  "Day 2",
+                  "Count required focal stems and stock that passed inspection."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Complete a sample record of requirements confirmation and material selection.",
-                  "List key conditioning parameters from supplier instructions (hydration time, refrigeration temperature, preservative ratios)."
+                  "Day 3",
+                  "Check the approved type and number of substitute stems."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Use a fictional brief to calculate trial quantities and costs for focal and supporting flowers, marking assumed values.",
-                  "Write responses and escalation contacts for two typical delivery risks."
+                  "Day 4",
+                  "Calculate the quote, separating stem costs and fixed fees."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Complete a small piece or a simulated setup exercise.",
-                  "Find at least two deviations against the checklist and record corrective methods."
+                  "Day 5",
+                  "Write the table allocation and delivery handoff."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Ask an experienced person to challenge your color and conditioning judgments.",
-                  "Record their objections and your responses; do not avoid counterexamples."
+                  "Day 6",
+                  "Submit both versions independently. List what changes and what needs confirmation."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Write your decision to continue, stop, or change direction, with evidence.",
-                  "List the abilities and training you need if continuing, and your next actions."
+                  "Day 7",
+                  "On day seven, open “FL27 wedding table arrangement reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29492,14 +29457,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Recruitment sample note | This page cites no counts or pay figures from specific recruitment announcements. Floral vacancies are often released in batches by shop and peak season, with many filled through direct shop hiring and personal referrals, so public-channel samples struggle to represent the whole market.",
-              "Checking suggestion | When viewing vacancies, record publication date, location, shop type, employment arrangement (full time, part time, or per order), whether personal tools are required, peak-season overtime and commissions, and delivery and scheduling arrangements. These details often reflect actual conditions better than the page."
+              "Ankang’s employment bulletin listed three floral designer positions in Beijing at Beijing Bocheng Weiye Sports Culture. The employer quoted CNY 6,000–8,000 per month and asked for independent design, production and flower care skills. Zizihua Floristry in Yuli listed one shop assistant and one floral designer. The shared entry quoted CNY 3,000 in base pay plus commission and described organizing, displaying and caring for flowers. Ask the employer how the pay period and commission apply to each role.",
+              "These are historical employer postings. Current vacancy status is unverified. Comparable nationwide wage data for floral designers in mainland China remain unavailable."
             ]
           },
           "id": "floral-designers.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a50-beijing",
+            "a50-yuli"
           ],
           "title": "Floral Designers | path",
           "type": "notice"
@@ -30780,7 +30745,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "US27-1023: May2025 median 37360 dollars / year and 17.96 dollars / hour; 2025 employment 45200, 2025—2035 decline 6%, average annual openings 5200, all projected to come from replacements. The 10 / 90 thresholds 28600 / 51000 and four industry medians have been checked; 25 / 75 and Chinese wages and recruitment have not been re-obtained, so Chinese statistics cannot be deemed unestablished."
+              "BLS Table 1.2 projects U.S. employment in occupation 27-1023 to fall from about 45,200 in 2025 to 42,700 in 2035, a decline of 5.6%, with about 5,200 openings per year. The BLS Occupational Outlook Handbook attributes the openings to replacement needs."
             ]
           },
           "id": "floral-designers.market-signals.market-signal-card.8",
@@ -30879,7 +30844,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Employment about 45,200 (2025 base year); decline about -6%; about 5,200 average annual openings"
+              "Employment about 45,200 (2025 base year); decline of 5.6%; about 5,200 average annual openings"
             ]
           },
           "id": "floral-designers.market-signals.market-signal-card.15",
@@ -31523,23 +31488,23 @@
                 ]
               },
               {
-                "answer": "The 2025 median annual wage was 37,360 dollars (median hourly wage 17.96 dollars); 2025 employment was about 45,200 (BLS Employment Projections base year). Employment is projected to decline about -6% during 2025—2035, with about 5,200 average annual job openings (mainly replacement needs). These use US O*NET / BLS definitions and do not apply to other jurisdictions.",
+                "answer": "The 2025 U.S. medians were $37,360 per year and $17.96 per hour. BLS Table 1.2 projects U.S. employment in occupation 27-1023 to fall from about 45,200 in 2025 to 42,700 in 2035, a decline of 5.6%, with about 5,200 openings per year. The BLS Occupational Outlook Handbook attributes the openings to replacement needs.",
                 "id": "floral-designers.faq.3",
                 "question": "What are US wages and employment like?",
                 "question_key": "career.faq.floral-designers.q3",
                 "source_refs": [
-                  "bls-oews-2025",
+                  "onet-summary",
                   "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "Mainland China has not established public occupational wage statistics precisely matching this occupation. The National Bureau of Statistics publishes average wages of employees in urban units by industry category (such as wholesale and retail trade: urban non-private units 135,749 yuan / year and urban private units 69,622 yuan / year). These industry figures do not distinguish occupations and provide background proxies only. This page retains visible Insufficient evidence: markers in the mainland China section, without substituting industry averages, advertised pay, or third-party estimates.",
+                "answer": "Ankang’s employment bulletin listed three floral designer positions in Beijing at Beijing Bocheng Weiye Sports Culture. The employer quoted CNY 6,000–8,000 per month and asked for independent design, production and flower care skills. Zizihua Floristry in Yuli listed one shop assistant and one floral designer. The shared entry quoted CNY 3,000 in base pay plus commission and described organizing, displaying and caring for flowers. Ask the employer how the pay period and commission apply to each role. These are historical employer postings. Current vacancy status is unverified. Comparable nationwide wage data for floral designers in mainland China remain unavailable.",
                 "id": "floral-designers.faq.4",
                 "question": "Is there corresponding wage data for mainland China?",
                 "question_key": "career.faq.floral-designers.q4",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "a50-beijing",
+                  "a50-yuli"
                 ]
               },
               {
@@ -31593,7 +31558,7 @@
                 ]
               },
               {
-                "answer": "Under US definitions, employment is projected to decline about -6% during 2025—2035, with openings mainly from replacement needs. Projections do not equal personal opportunities; actual opportunities depend on local holiday and wedding consumption and shop structures. Adjacent directions include craft art, merchandise display and window trimming, graphic design, interior design, set and exhibit design, retail sales, landscaping, and artistic coordination (requiring learning materials and techniques anew), as well as flower wholesaling and preservation support, floral teaching, and independent studios.",
+                "answer": "Under US definitions, employment is projected to decline by 5.6% during 2025—2035, with openings mainly from replacement needs. Projections do not equal personal opportunities; actual opportunities depend on local holiday and wedding consumption and shop structures. Adjacent directions include craft art, merchandise display and window trimming, graphic design, interior design, set and exhibit design, retail sales, landscaping, and artistic coordination (requiring learning materials and techniques anew), as well as flower wholesaling and preservation support, floral teaching, and independent studios.",
                 "id": "floral-designers.faq.10",
                 "question": "What is the outlook, and what directions can I move into?",
                 "question_key": "career.faq.floral-designers.q10",
@@ -31601,6 +31566,12 @@
                   "bls-projections-2025-35",
                   "onet-summary"
                 ]
+              },
+              {
+                "answer": "The original needs 12 focal stems. Use 10 roses and two approved lisianthus stems. Give four tables two roses each and the other two tables one rose and one lisianthus each. The quote is 10 × 18 + 2 × 12 + 114 + 36 = CNY 354. With nine roses in the variant, existing approval covers only 11 stems. A third lisianthus needs approval. If approved, the quote is CNY 348. Otherwise ask the shop whether one suitable rose can arrive in time before confirming the price. Ask the shop to confirm stock, substitutions and delivery by Saturday at 15:00.",
+                "id": "floral-designers.faq.11",
+                "question": "FL27 wedding table arrangement reference (open after day six)",
+                "question_key": "career.faq.floral-designers.11"
               }
             ]
           },
@@ -31662,7 +31633,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Author revisions to nine modules this round await independent review. US27-1023: May2025 median 37360 dollars / year and 17.96 dollars / hour; 2025 employment 45200, 2025—2035 decline 6%, average annual openings 5200, all projected to come from replacements. Obtained 10 / 90 thresholds 28600 / 51000 and industry medians: wholesale 40530 / food retail 38760 / lawn and garden equipment and supplies retail 37650 / florists 36870. The 25 / 75 figures, OEWS employment count, and Chinese wages / recruitment have not been re-obtained. RAC, JobZone1—2, and education 71 / 24 / 5 retained; typical high school education is not described as no education. The occupational directory includes retail payment collection. US substitutions removed from the Chinese recruitment table; projection self-employment and OEWS commission definitions corrected. Protected Hero / FAQ / shared facts retain conflicts; personality occupational validity, AI adoption effects, and all quarantine, food, and venue rules have not been checked. No HTML, independent review, Git, or publication."
+              "BLS Table 1.2 projects U.S. employment in occupation 27-1023 to fall from about 45,200 in 2025 to 42,700 in 2035, a decline of 5.6%, with about 5,200 openings per year. The BLS Occupational Outlook Handbook attributes the openings to replacement needs. These are historical employer postings. Current vacancy status is unverified. Comparable nationwide wage data for floral designers in mainland China remain unavailable."
             ]
           },
           "id": "floral-designers.sources.source-card.4",
@@ -31691,28 +31662,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the Floral Designers career page",
@@ -31770,10 +31729,9 @@
                 "url": "https://www.onetonline.org/link/details/27-1023.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Table row 27-1023: About 45.2 thousand employed in 2025 and 42.7 thousand in 2035, a net reduction of about 2.5 thousand, growth about -6%, and average annual openings about 5.2 thousand.",
-                  "Projections use occupational statistical definitions, not individual hiring probabilities."
+                  "BLS Table 1.2 projects U.S. employment in occupation 27-1023 to fall from about 45,200 in 2025 to 42,700 in 2035, a decline of 5.6%, with about 5,200 openings per year. The BLS Occupational Outlook Handbook attributes the openings to replacement needs."
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
@@ -31848,6 +31806,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Ankang’s employment bulletin listed three floral designer positions in Beijing at Beijing Bocheng Weiye Sports Culture. The employer quoted CNY 6,000–8,000 per month and asked for independent design, production and flower care skills."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a50-beijing",
+                "limitation": "These are historical employer postings. Current vacancy status is unverified. Comparable nationwide wage data for floral designers in mainland China remain unavailable.",
+                "market": "Mainland China",
+                "name": "Floral job posting",
+                "period": "2025-05-16",
+                "publisher": "Ankang Municipal Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.ankang.gov.cn/Content-2838401.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Zizihua Floristry in Yuli listed one shop assistant and one floral designer. The shared entry quoted CNY 3,000 in base pay plus commission and described organizing, displaying and caring for flowers. Ask the employer how the pay period and commission apply to each role."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a50-yuli",
+                "limitation": "These are historical employer postings. Current vacancy status is unverified. Comparable nationwide wage data for floral designers in mainland China remain unavailable.",
+                "market": "Mainland China",
+                "name": "Floral job posting",
+                "period": "2025-03-03",
+                "publisher": "Yuli County Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.yuli.gov.cn/xjylx/c110928/202503/bda8e0c552dc48308f80aab926dbf068.shtml"
               }
             ]
           },
@@ -34343,7 +34331,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet",
+            "id": "onet-work-context",
             "label": {
               "$link": "floral-designers.risk.career-risk-cards.7",
               "block": "risk",
@@ -34708,6 +34696,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a50-beijing",
+            "posting-a50-yuli"
+          ],
           "sources_note": {
             "$item": "floral-designers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36583,7 +36575,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36593,27 +36585,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "floral-designers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "floral-designers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -36824,7 +36796,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Decline of about -6% (2025—2035, BLS Employment Projections)",
+        "display_value": "Projected decline of 5.6% (2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
         "measure": "Employment growth rate",
@@ -36920,7 +36892,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: Mainland China has not established occupational wage statistics precisely matching floral designers; industry averages and advertised pay are not substituted.",
+        "display_value": "Comparable nationwide occupation-level wages for mainland China remain unavailable.",
         "fact_id": "cn-mid-managers-2025",
         "market": "CN",
         "measure": "Exact occupational wage",
@@ -36932,7 +36904,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: Mainland China has not established occupational wage statistics precisely matching floral designers; industry averages and advertised pay are not substituted.",
+        "display_value": "Comparable nationwide occupation-level wages for mainland China remain unavailable.",
         "fact_id": "cn-clerical-2025",
         "market": "CN",
         "measure": "Exact occupational wage",
@@ -37001,6 +36973,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Ankang’s employment bulletin listed three floral designer positions in Beijing at Beijing Bocheng Weiye Sports Culture. The employer quoted CNY 6,000–8,000 per month and asked for independent design, production and flower care skills.",
+        "fact_id": "posting-a50-beijing",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Floral job posting",
+        "period": "2025-05-16",
+        "source_refs": [
+          "a50-beijing"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Zizihua Floristry in Yuli listed one shop assistant and one floral designer. The shared entry quoted CNY 3,000 in base pay plus commission and described organizing, displaying and caring for flowers. Ask the employer how the pay period and commission apply to each role.",
+        "fact_id": "posting-a50-yuli",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Floral job posting",
+        "period": "2025-03-03",
+        "source_refs": [
+          "a50-yuli"
+        ]
       }
     ]
   },
@@ -37060,7 +37056,7 @@
       "text": "Floral Designers"
     }
   },
-  "source_content_sha256": "33a62bca9e04e793c827fb05856eb3fc0d0e70e261568a5c2361c864cac84581",
+  "source_content_sha256": "769824233c1bbfeee11bbeac77484f766dfaa27a6b55606fc84fa8c82cc8aeaf",
   "subject": {
     "canonical_slug": "floral-designers",
     "name": "Floral Designers",

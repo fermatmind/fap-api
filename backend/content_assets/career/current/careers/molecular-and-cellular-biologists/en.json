@@ -132,7 +132,7 @@
         "status": "mapped"
       },
       "item:molecular-and-cellular-biologists.path.credential-decision.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:molecular-and-cellular-biologists.path.employer-evidence.3": {
         "status": "mapped"
@@ -141,16 +141,22 @@
         "status": "pending_mapping"
       },
       "item:molecular-and-cellular-biologists.path.entry-role-comparison.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:molecular-and-cellular-biologists.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:molecular-and-cellular-biologists.path.interview-probation.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:molecular-and-cellular-biologists.path.recruitment-sample.1": {
         "status": "pending_mapping"
       },
-      "item:molecular-and-cellular-biologists.path.seven-day-trial.6": {
+      "item:molecular-and-cellular-biologists.path.seven-day-decision.1": {
         "status": "mapped"
+      },
+      "item:molecular-and-cellular-biologists.path.seven-day-trial.6": {
+        "status": "pending_mapping"
       },
       "item:molecular-and-cellular-biologists.profile.career-quick-answers-block.4": {
         "status": "mapped"
@@ -5796,52 +5802,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -6072,36 +6216,98 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molecular-and-cellular-biologists.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
         "ref": {
@@ -12081,7 +12287,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Scope and boundaries: this page covers only O*NET-SOC 19-1029.02 molecular and cellular biologists (studying cell molecules and organelles to understand cell function and organization), and does not cover adjacent occupations such as biochemists and biophysicists, microbiologists, medical scientists, bioinformatics pipeline maintenance, and natural sciences project management; laboratory operations, biosafety and chemical management, animal experimentation, and research ethics approval are determined by institutional and local rules."
+              "Be cautious if you need a clear mechanism from the first comparison; experimental evidence can be incomplete or inconsistent."
             ]
           },
           "id": "molecular-and-cellular-biologists.quick-decision.fermat-decision-card.1",
@@ -12095,7 +12301,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "How to judge: with a completely fictional experimental protocol and data table, check whether you can write the hypothesis, controls and replicates, sample and reagent registration, raw data records, statistical analysis methods, and limits of the conclusions, and list three check points and the handling of deviations; do only paper reasoning, without touching real patient samples, animals, or institutional biological materials."
+              "In 09 Entry, qualification, and career development, find “MC-18: Check a Cell Study Comparison.” Allow about 10 minutes before reading the answer."
             ]
           },
           "id": "molecular-and-cellular-biologists.quick-decision.fit-decision-checklist.2",
@@ -12109,7 +12315,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "What suits you: willing to ask questions about mechanisms, check data and records repeatedly against the protocol, withstand experimental failure and revise the hypothesis from it, and check before concluding when results are anomalous; note: if you dislike repeated recording and failed experiments, or tend to conclude directly from a single result, first compare adjacent directions."
+              "Consider molecular and cellular biology if you enjoy separating a mechanism hypothesis from what the documented controls can support."
             ]
           },
           "id": "molecular-and-cellular-biologists.quick-decision.fit-decision-checklist.3",
@@ -12123,7 +12329,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Note: all of the following is editorially designed paper reasoning, without touching real samples, animals, or institutional research data, and it does not constitute laboratory operation, biosafety, chemical management, or research ethics authorization; any judgment involving safety, health, and qualifications must return to institutional procedures and local rules."
+              "Use only the fictional MC-18 documentation check in section 09. Do not use real cell samples or infer an effect."
             ]
           },
           "id": "molecular-and-cellular-biologists.quick-decision.fermat-decision-card.4",
@@ -12146,7 +12352,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "The official definition of molecular and cellular biologists (O*NET-SOC 19-1029.02, Molecular and Cellular Biologists) is: to study and explore cell molecules and organelles in order to understand cell function and organization; the scope excludes biochemists and biophysicists who study the chemical and physical principles of life processes, microbiologists who study microorganisms, medical scientists who study human disease and treatment, and bioinformatics technicians whose work is mainly data pipeline maintenance."
+              "The official definition of molecular and cellular biologists (O*NET-SOC 19-1029.02, Molecular and Cellular Biologists) is: to study and explore cell molecules and organelles in order to understand cell function and organization. Compare nearby occupations by their central research question and output; applications can overlap in microbiology and disease detection."
             ]
           },
           "id": "molecular-and-cellular-biologists.profile.definition-block.1",
@@ -12208,7 +12414,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Preparation and training: O*NET lists this occupation at preparation level 5, usually requiring a doctorate or equivalent training; the education composition shows 35% bachelor's degree, 35% postdoctoral training, and 23% doctorate; the O*NET national training directory lists 4,580 higher education degree or certificate programs and lists no apprenticeship opportunities."
+              "Preparation and training: O*NET places this occupation in Job Zone Five, a group that calls for extensive preparation. When asked what a new hire needs, 35% of respondents said a bachelor's degree, 35% postdoctoral training, and 23% a doctorate. These are survey responses about hiring requirements, not the degrees held by current workers or a single rule for every job.The directory can help you find training programs; listings change."
             ]
           },
           "id": "molecular-and-cellular-biologists.profile.onet-structured-fields-block.5",
@@ -12522,7 +12728,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 BLS OEWS national median hourly wage shown by O*NET on this occupation's page is 47.56 USD and the median annual wage is 98,920 USD; the page's original text labels the wages under the Biological Scientists, All Other group framing, which is not equal to the 19-1029.02 separately listed value and does not represent starting pay, senior position pay, or a personal quote."
+              "Employment projections are not current vacancies or a guarantee."
             ]
           },
           "id": "molecular-and-cellular-biologists.us-salary.career-snapshot-secondary-locale.1",
@@ -12821,12 +13027,12 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "The entry sample for molecular and cellular biologists uses only public datasets or completely fictional data tables, showing hypotheses, protocols, records, and analysis, and does not carry real patient samples, animals, or unpublished research data."
+              "The CAS Center for Excellence in Molecular Cell Science posted a postdoctoral and an assistant researcher position in Ningning Zhang’s GlycoRNA and cell-surface RNA group on November 6, 2026. Both require a PhD in biology or medicine; the assistant researcher role also requires at least one postdoctoral appointment. These are this lab’s criteria. Current vacancy status was not verified."
             ]
           },
           "id": "molecular-and-cellular-biologists.path.recruitment-sample.1",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "cn-cas-cell-biology"
           ],
           "type": "notice"
         },
@@ -12840,6 +13046,13 @@
               "career.column.boundary",
               "career.column.evidence",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Stage",
+              "Tasks",
+              "Scope",
+              "Evidence",
+              "Next step"
             ],
             "rows": [
               [
@@ -12958,6 +13171,12 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "Scenario",
+              "Action",
+              "Review",
+              "Deliverable"
+            ],
             "rows": [
               [
                 "Incomplete information or samples",
@@ -13000,29 +13219,55 @@
                 "id": "molecular-and-cellular-biologists.trial.day1",
                 "values": [
                   "Day 1",
-                  "Define the scientific question and hypothesis and list what is known and unknown"
+                  "Start W-MC. A fictional review asks for a documented control condition and an observation date for V6 and V7. Copy both rules."
                 ]
               },
               {
                 "id": "molecular-and-cellular-biologists.trial.day3",
                 "values": [
-                  "Day 3",
-                  "Complete a paper analysis with public or fictional data"
+                  "Day 2",
+                  "V6 names control Z; V7 refers to a control but does not name it. Record both."
                 ]
               },
               {
                 "id": "molecular-and-cellular-biologists.trial.day7",
                 "values": [
+                  "Day 3",
+                  "V6 has a date. V7 has an undated note. List which evidence is present."
+                ]
+              },
+              {
+                "id": "molecular-and-cellular-biologists.trial.extra4",
+                "values": [
+                  "Day 4",
+                  "Write one question for the research lead about the missing control and date."
+                ]
+              },
+              {
+                "id": "molecular-and-cellular-biologists.trial.extra5",
+                "values": [
+                  "Day 5",
+                  "Draft two handoff lines and identify what remains pending."
+                ]
+              },
+              {
+                "id": "molecular-and-cellular-biologists.trial.extra6",
+                "values": [
+                  "Day 6",
+                  "Work alone: verify your two lines against the rules and records from Days 1–3. Peer feedback is optional afterward."
+                ]
+              },
+              {
+                "id": "molecular-and-cellular-biologists.trial.extra7",
+                "values": [
                   "Day 7",
-                  "Review the method limits and improvements and write the next step"
+                  "Name one task you enjoyed and one method skill to practice."
                 ]
               }
             ]
           },
           "id": "molecular-and-cellular-biologists.path.seven-day-trial.6",
-          "source_refs": [
-            "source-pack-onet-localtraining"
-          ],
+          "title": "Seven-day paper trial: a separate case",
           "type": "timeline"
         },
         {
@@ -13037,6 +13282,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Category",
+              "Evidence",
+              "Verifying party",
+              "Conditions",
+              "Limits",
+              "Responsible party",
+              "Next step"
             ],
             "rows": [
               [
@@ -13059,7 +13313,7 @@
               ],
               [
                 "Professional certification",
-                "Such as ABMGG clinical molecular genetics and ABCC molecular diagnostics, ASCP molecular biology technologist, and others",
+                "O*NET displays the label “Clinical Molecular Genetics.” ABMGG’s bylaws call the former credential “Clinical Molecular Genetics and Genomics.” For current applications to the laboratory specialty, use ABMGG’s Laboratory Genetics and Genomics requirements. Directory entries do not confer a license or lab authority.",
                 "Certifying body and employer",
                 "According to position preference",
                 "Certification is not the same as licensure or institutional authorization",
@@ -13098,7 +13352,10 @@
           "id": "molecular-and-cellular-biologists.path.credential-decision.7",
           "source_refs": [
             "source-pack-onet-localtraining",
-            "source-pack-onet-localcert"
+            "source-pack-onet-localcert",
+            "abmgg-former-names",
+            "abmgg-current-lg-genomics",
+            "abms-current-lg-genomics"
           ],
           "type": "table"
         },
@@ -13129,6 +13386,67 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials: MC-18 (about 10 minutes)",
+                  "A fictional comparison may enter a report only if it names a control and records its measurement definition.",
+                  "C4 names control X and includes a definition. C5 names control X but leaves the definition blank.",
+                  "Only the research lead decides what enters the report. This is a paper exercise."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Write two evidence lines and one question for the lead.",
+                  "Say which comparison you would hold without interpreting an effect."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Answer key",
+                  "C4 meets both documentation conditions. C5 has a control but no measurement definition.",
+                  "Hold C5 and ask for the definition from the study log."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Check both IDs, the two conditions, and who can resolve missing evidence."
+                ]
+              }
+            ]
+          },
+          "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+          "title": "MC-18: Check a Cell Study Comparison",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "I listed both IDs.",
+              "I checked both conditions.",
+              "I left missing evidence unresolved.",
+              "I named the reviewer.",
+              "I used fictional records only.",
+              "I could recheck independently.",
+              "I identified one skill to practice."
+            ]
+          },
+          "id": "molecular-and-cellular-biologists.path.seven-day-decision.1",
+          "title": "Judgment questions after seven days",
+          "type": "list"
         }
       ]
     },
@@ -13143,7 +13461,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The O*NET page presents the Biological Scientists, All Other group: 2025 employment 59600, 2025—2035 faster than average 5%—6% category, average annual 4300 openings; this is not a separately listed value for this occupation, and the overall projection is not AI attribution."
+              "BLS Table 1.2, 19-1029 parent group: 59,600 jobs in 2025, 62,400 projected in 2035, +4.7%, and 4,300 projected annual openings. The projection is for the parent group and does not establish an effect from AI."
             ]
           },
           "id": "molecular-and-cellular-biologists.market-signals.market-signal-card.1",
@@ -13223,7 +13541,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Studying cell molecules and organelles to understand cell function and organization; typical work includes posing hypotheses and designing molecular or cellular experiments, completing laboratory procedures such as DNA sequencing, cloning and extraction, RNA purification, or gel electrophoresis according to protocols, maintaining accurate laboratory records and data, consolidating and analyzing data and interpreting results, and writing grant applications, reports, and papers and teaching undergraduate and graduate students. The scope excludes adjacent occupations such as biochemistry and biophysics, microbiology, medical science, and natural sciences project management.",
+                "answer": "Studying cell molecules and organelles to understand cell function and organization; typical work includes posing hypotheses and designing molecular or cellular experiments, completing laboratory procedures such as DNA sequencing, cloning and extraction, RNA purification, or gel electrophoresis according to protocols, maintaining accurate laboratory records and data, consolidating and analyzing data and interpreting results, and writing grant applications, reports, and papers and teaching undergraduate and graduate students. Adjacent fields can share tools and applications. Compare the main research question and expected output for each role.",
                 "id": "molecular-and-cellular-biologists.faq.1",
                 "question": "What exactly do molecular and cellular biologists do?",
                 "question_key": "career.faq.molecular-and-cellular-biologists.1",
@@ -13232,13 +13550,15 @@
                 ]
               },
               {
-                "answer": "The objects and scales differ: molecular and cellular biologists focus on the function and organization of cell molecules and organelles; biochemists and biophysicists focus on the chemical and physical properties of biological molecules and separation and characterization; microbiologists take microorganisms themselves and infection processes as their core object.",
+                "answer": "The focus differs. Molecular and cellular biologists study how molecules, organelles and cells work. Biochemists and biophysicists study chemical and physical processes in living systems. Microbiologists study microorganisms and their effects; some roles investigate infection. Work can overlap, so check the project and role.",
                 "id": "molecular-and-cellular-biologists.faq.2",
                 "question": "How does this occupation differ from biochemists and microbiologists?",
                 "question_key": "career.faq.molecular-and-cellular-biologists.2",
                 "source_refs": [
                   "onet-details",
-                  "onet-summary"
+                  "onet-summary",
+                  "mc-neighbor-biochemistry",
+                  "mc-neighbor-microbiology"
                 ]
               },
               {
@@ -13251,7 +13571,7 @@
                 ]
               },
               {
-                "answer": "Mainland China has no national occupational wage on the same framing as O*NET-SOC 19-1029.02; this page uses 2025 scientific research and technical services (non-private 182,064 yuan/year, private 83,560 yuan/year) as an industry proxy, which must not be treated as this occupation's or a personal wage.",
+                "answer": "This review did not find a mainland China national occupational wage series matching O*NET-SOC 19-1029.02; this page uses 2025 scientific research and technical services (non-private 182,064 yuan/year, private 83,560 yuan/year) as an industry proxy, which must not be treated as this occupation's or a personal wage.",
                 "id": "molecular-and-cellular-biologists.faq.4",
                 "question": "How should the mainland China wage data be understood?",
                 "question_key": "career.faq.molecular-and-cellular-biologists.4",
@@ -13260,12 +13580,13 @@
                 ]
               },
               {
-                "answer": "The 2025 BLS OEWS national median hourly wage of 47.56 USD and median annual wage of 98,920 USD shown on this O*NET occupation page, with the 10th—90th percentiles at 60,430—168,010 USD/year; the page explicitly labels this as the Biological Scientists, All Other group framing, which is not equal to a separately listed value for this occupation, is not starting pay or a personal quote, and cannot be converted into mainland China income.",
+                "answer": "For Biological Scientists, All Other (19-1029 parent group), BLS Table 1.2 reports a May 2025 median annual wage of $98,920. It lists 59,600 U.S. jobs in 2025, 62,400 projected in 2035 (+4.7%), and 4,300 projected annual openings on average, including replacements. These figures do not isolate molecular and cellular biologists.",
                 "id": "molecular-and-cellular-biologists.faq.5",
                 "question": "What do the U.S. wage data represent?",
                 "question_key": "career.faq.molecular-and-cellular-biologists.5",
                 "source_refs": [
-                  "onet-wages"
+                  "onet-wages",
+                  "bls-table-1-2"
                 ]
               },
               {
@@ -13279,14 +13600,19 @@
                 ]
               },
               {
-                "answer": "O*NET lists this occupation at preparation level 5, usually requiring a doctorate or equivalent training (the education composition shows 35% bachelor's, 35% postdoc, 23% doctorate); the national training directory lists 4,580 higher education degree or certificate programs and no apprenticeship opportunities. The national certifications listed by O*NET (ABMGG clinical molecular genetics, ABCC molecular diagnostics, ASCP molecular biology technologist and specialist, and others) are not the same as licensure or institutional authorization. Chinese or local position and research ethics requirements are verified against competent-authority and employer rules.",
+                "answer": "O*NET places this occupation in Job Zone Five, a group that calls for extensive preparation. When asked what a new hire needs, 35% of respondents said a bachelor's degree, 35% postdoctoral training, and 23% a doctorate. These are survey responses about hiring requirements, not the degrees held by current workers or a single rule for every job. The directory can help you find training programs; listings change. O*NET displays the label “Clinical Molecular Genetics.” ABMGG’s bylaws call the former credential “Clinical Molecular Genetics and Genomics.” For current applications to the laboratory specialty, use ABMGG’s Laboratory Genetics and Genomics requirements. Directory entries do not confer a license or lab authority.",
                 "id": "molecular-and-cellular-biologists.faq.7",
                 "question": "What training and qualifications are needed to enter the field?",
                 "question_key": "career.faq.molecular-and-cellular-biologists.7",
                 "source_refs": [
                   "source-pack-onet-localtraining",
-                  "source-pack-onet-localcert",
-                  "onet-cert"
+                  "onet-cert",
+                  "onet-mc-education",
+                  "onet-summary",
+                  "abmgg-current-lg-genomics",
+                  "abmgg-former-names",
+                  "abmgg-2026-exam-bulletin",
+                  "abms-current-lg-genomics"
                 ]
               },
               {
@@ -13341,28 +13667,28 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Molecular and cellular biologists",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Molecular and cellular biologists",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Molecular and cellular biologists",
+                "entity": "Microbiologists",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/career/jobs/microbiologists"
               },
               {
-                "entity": "Molecular and cellular biologists",
+                "entity": "Medical scientists",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/career/jobs/medical-scientists-except-epidemiologists"
               },
               {
                 "entity": "Molecular and cellular biologists",
@@ -13403,7 +13729,7 @@
                 "name": "Task impact and evidence grading explanation (editorial scale)",
                 "period": "FermatMind task rubric v2026.09; reviewed 2026-09-25",
                 "publisher": "FermatMind",
-                "scope": "editorial_synthesis",
+                "scope": "Task impact and evidence grading explanation (editorial scale)",
                 "url": null
               },
               {
@@ -13418,21 +13744,21 @@
                 "name": "Average annual wages of urban unit employees in 2025",
                 "period": "2025; published 2026-05-16; accessed 2026-09-25",
                 "publisher": "National Bureau of Statistics of the People's Republic of China",
-                "scope": "industry_proxy",
+                "scope": "Average annual wages of urban unit employees in 2025",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Lists certifications such as ABMGG clinical molecular genetics, clinical biochemical genetics, and clinical cytogenetics and genomics, ABCC molecular diagnostics, ASCP molecular biology technologist and specialist, and AAB embryology and andrology laboratory scientist."
+                  "O*NET displays the label “Clinical Molecular Genetics.” ABMGG’s bylaws call the former credential “Clinical Molecular Genetics and Genomics.” For current applications to the laboratory specialty, use ABMGG’s Laboratory Genetics and Genomics requirements. Directory entries do not confer a license or lab authority."
                 ],
                 "evidence_type": "official credential directory",
                 "id": "onet-cert",
-                "limitation": "A directory is not the same as licensure, institutional appointment, or a general requirement.",
+                "limitation": "O*NET displays the label “Clinical Molecular Genetics.” ABMGG’s bylaws call the former credential “Clinical Molecular Genetics and Genomics.” For current applications to the laboratory specialty, use ABMGG’s Laboratory Genetics and Genomics requirements. Directory entries do not confer a license or lab authority.",
                 "market": "US",
                 "name": "National Certifications 19-1029.02 Molecular And Cellular Biologists",
                 "period": "current 2026; accessed 2026-09-25",
-                "publisher": "O*NET OnLine",
+                "publisher": "O*NET OnLine; directory data from CareerOneStop",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/19-1029.02"
               },
@@ -13476,24 +13802,24 @@
                 "limitation": "U.S. Biological Scientists, All Other group framing; not extrapolated to other regions and not a separately listed value for this occupation.",
                 "market": "US",
                 "name": "19-1029.02 Molecular and Cellular Biologists — Summary",
-                "period": "2025 BLS OEWS and 2024—2034 projections; accessed 2026-09-25",
+                "period": "Read 2026-11-10",
                 "publisher": "O*NET OnLine",
-                "scope": "parent_occupation_proxy",
+                "scope": "19-1029.02 Molecular and Cellular Biologists — Summary",
                 "url": "https://www.onetonline.org/link/summary/19-1029.02"
               },
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "2024 employment 63,700, 2034 employment 64,500, change +1% (Slower than average), average annual job openings 4,800; the O*NET page labels the employment data under the Biological Scientists, All Other group framing."
+                  "For Biological Scientists, All Other (19-1029 parent group), BLS Table 1.2 reports a May 2025 median annual wage of $98,920. It lists 59,600 U.S. jobs in 2025, 62,400 projected in 2035 (+4.7%), and 4,300 projected annual openings on average, including replacements. These figures do not isolate molecular and cellular biologists."
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
-                "limitation": "A projection is not a guarantee; average annual openings are not a personal hiring probability.",
+                "limitation": "Current employment figures are shown in BLS Table 1.2.",
                 "market": "US",
                 "name": "National Employment Trends 19-1029.02 Molecular and Cellular Biologists",
-                "period": "2024—2034 BLS projections; accessed 2026-09-25",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
-                "scope": "parent_occupation_proxy",
+                "scope": "National Employment Trends 19-1029.02 Molecular and Cellular Biologists",
                 "url": "https://www.onetonline.org/link/localtrends/19-1029.02"
               },
               {
@@ -13508,7 +13834,7 @@
                 "name": "National Wages 19-1029.02 Molecular And Cellular Biologists",
                 "period": "2025 BLS OEWS; accessed 2026-09-25",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "parent_occupation_proxy",
+                "scope": "National Wages 19-1029.02 Molecular And Cellular Biologists",
                 "url": "https://www.onetonline.org/link/localwages/19-1029.02"
               },
               {
@@ -13557,18 +13883,18 @@
                 "url": "https://www.onetonline.org/link/hot_tech/19-1029.02"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Government about 38%, professional, scientific, and technical services about 34%, educational services about 11%, other industries about 17% (Biological Scientists, All Other group framing)."
+                  "Government about 39%, professional, scientific, and technical services about 34%, educational services about 11%, other industries about 16% (O*NET industry distribution for the Biological Scientists, All Other parent group)."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
                 "limitation": "The industry distribution is an employer-scenario signal, not a demand projection.",
                 "market": "US",
                 "name": "Industries: 19-1029.02 - Molecular and Cellular Biologists",
-                "period": "2024; accessed 2026-09-25",
+                "period": "Displayed by O*NET; read on 2026-11-10 (reference year not stated on this page)",
                 "publisher": "O*NET OnLine",
-                "scope": "parent_occupation_proxy",
+                "scope": "Industries: 19-1029.02 - Molecular and Cellular Biologists",
                 "url": "https://www.onetonline.org/link/industry/19-1029.02"
               },
               {
@@ -13598,7 +13924,7 @@
                 "name": "National Wages: 19-1029.02 (hourly and annual percentiles)",
                 "period": "2025 BLS OEWS; accessed 2026-09-25",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "parent_occupation_proxy",
+                "scope": "National Wages: 19-1029.02 (hourly and annual percentiles)",
                 "url": "https://www.onetonline.org/link/localwages/19-1029.02"
               },
               {
@@ -13613,13 +13939,13 @@
                 "name": "19-1029.02 (summary entry)",
                 "period": "current; accessed 2026-09-25",
                 "publisher": "O*NET OnLine",
-                "scope": "parent_occupation_proxy",
+                "scope": "19-1029.02 (summary entry)",
                 "url": "https://www.onetonline.org/link/summary/19-1029.02"
               },
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "4,580 national higher education degree and certificate programs; no apprenticeship opportunities are listed."
+                  "The directory can help you find training programs; listings change."
                 ],
                 "evidence_type": "official training discovery",
                 "id": "source-pack-onet-localtraining",
@@ -13677,6 +14003,137 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "details": [
+                  "For Biological Scientists, All Other (19-1029 parent group), BLS Table 1.2 reports a May 2025 median annual wage of $98,920. It lists 59,600 U.S. jobs in 2025, 62,400 projected in 2035 (+4.7%), and 4,300 projected annual openings on average, including replacements. These figures do not isolate molecular and cellular biologists."
+                ],
+                "id": "bls-table-1-2",
+                "limitation": "For Biological Scientists, All Other (19-1029 parent group), BLS Table 1.2 reports a May 2025 median annual wage of $98,920. It lists 59,600 U.S. jobs in 2025, 62,400 projected in 2035 (+4.7%), and 4,300 projected annual openings on average, including replacements. These figures do not isolate molecular and cellular biologists.",
+                "market": "US",
+                "name": "BLS Table 1.2 (19-1029)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "Biological Scientists, All Other (19-1029 parent group)",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "One research group lists postdoctoral or assistant research work on glycosylated and cell-surface RNA."
+                ],
+                "id": "cn-cas-cell-biology",
+                "limitation": "One research group lists postdoctoral or assistant research work on glycosylated and cell-surface RNA.",
+                "market": "CN",
+                "name": "Chinese Academy of Sciences molecular and cellular biology recruitment",
+                "period": "2026",
+                "publisher": "Chinese Academy of Sciences",
+                "scope": "Chinese Academy of Sciences molecular and cellular biology recruitment",
+                "url": "https://cemcs.cas.cn/rczp/yjz/202611/t20261106_8304220.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "O*NET displays the label “Clinical Molecular Genetics.” ABMGG’s bylaws call the former credential “Clinical Molecular Genetics and Genomics.” For current applications to the laboratory specialty, use ABMGG’s Laboratory Genetics and Genomics requirements. Directory entries do not confer a license or lab authority."
+                ],
+                "evidence_type": "Official source",
+                "id": "abmgg-current-lg-genomics",
+                "limitation": "O*NET displays the label “Clinical Molecular Genetics.” ABMGG’s bylaws call the former credential “Clinical Molecular Genetics and Genomics.” For current applications to the laboratory specialty, use ABMGG’s Laboratory Genetics and Genomics requirements. Directory entries do not confer a license or lab authority.",
+                "market": "US",
+                "name": "ABMGG current certification exam requirements",
+                "period": "Read November 10, 2026",
+                "publisher": "ABMGG",
+                "scope": "contextual",
+                "url": "https://www.abmgg.org/initial-certification/certification-exam/exam-requirements/"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "New-hire education survey: bachelor’s 35%, postdoctoral training 35%, doctorate 23%."
+                ],
+                "evidence_type": "Official source",
+                "id": "onet-mc-education",
+                "limitation": "New-hire education survey: bachelor’s 35%, postdoctoral training 35%, doctorate 23%.",
+                "market": "US",
+                "name": "O*NET 19-1029.02: education for new hires",
+                "period": "Read November 10, 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/19-1029.02#Education"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "O*NET displays the label “Clinical Molecular Genetics.” ABMGG’s bylaws call the former credential “Clinical Molecular Genetics and Genomics.”"
+                ],
+                "evidence_type": "Official source",
+                "id": "abmgg-former-names",
+                "limitation": "O*NET displays the label “Clinical Molecular Genetics.” ABMGG’s bylaws call the former credential “Clinical Molecular Genetics and Genomics.”",
+                "market": "US",
+                "name": "ABMGG bylaws: former certification names",
+                "period": "Read November 10, 2026",
+                "publisher": "ABMGG",
+                "scope": "contextual",
+                "url": "https://www.abmgg.org/about-abmgg/bylaws-of-the-american-board-of-medical-genetics-and-genomics/"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The 2026 bulletin lists Laboratory Genetics and Genomics as a current laboratory specialty."
+                ],
+                "evidence_type": "Official source",
+                "id": "abmgg-2026-exam-bulletin",
+                "limitation": "The 2026 bulletin lists Laboratory Genetics and Genomics as a current laboratory specialty.",
+                "market": "US",
+                "name": "ABMGG 2026 examination bulletin",
+                "period": "Read November 10, 2026",
+                "publisher": "ABMGG",
+                "scope": "contextual",
+                "url": "https://www.abmgg.org/wp-content/uploads/2025/12/Bulletin-of-Information-2026-New-Deadlines-Update.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Lists Laboratory Genetics and Genomics among the current specialties. Consult ABMGG for application requirements."
+                ],
+                "evidence_type": "Official source",
+                "id": "abms-current-lg-genomics",
+                "limitation": "Lists Laboratory Genetics and Genomics among the current specialties. Consult ABMGG for application requirements.",
+                "market": "US",
+                "name": "ABMS: ABMGG certification specialties",
+                "period": "Read November 10, 2026",
+                "publisher": "American Board of Medical Specialties",
+                "scope": "contextual",
+                "url": "https://abms.org/member-board/american-board-of-medical-genetics-and-genomics/"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Explains work on the chemical and physical principles of living things."
+                ],
+                "evidence_type": "Official source",
+                "id": "mc-neighbor-biochemistry",
+                "limitation": "Explains work on the chemical and physical principles of living things.",
+                "market": "US",
+                "name": "BLS Biochemists and Biophysicists",
+                "period": "Read November 10, 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/biochemists-and-biophysicists.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Describes research on microorganisms and their effects, including disease research in some settings."
+                ],
+                "evidence_type": "Official source",
+                "id": "mc-neighbor-microbiology",
+                "limitation": "Describes research on microorganisms and their effects, including disease research in some settings.",
+                "market": "US",
+                "name": "O*NET Microbiologists: tasks",
+                "period": "Read November 10, 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/19-1022.00"
               }
             ]
           },
@@ -13934,14 +14391,14 @@
         "evidence_rows": [
           {
             "使用限制": "Describes only this occupation's framing and does not prove adoption or degree of automation",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET OnLine: occupation and tasks",
             "研究对象": "O*NET 19-1029.02 tasks and work context",
             "结论": "Defines this occupation's scope, 22 tasks, and the work context survey framing",
             "链接": "https://www.onetonline.org/link/details/19-1029.02"
           },
           {
             "使用限制": "Common technologies are not equal to an adoption rate, automation rate, or job outcome",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET OnLine: common technologies",
             "研究对象": "O*NET Hot Technologies 19-1029.02",
             "结论": "Lists the common software technologies for the position (Microsoft Excel, Office, R, PowerPoint, Python, MATLAB, C++, Git, and others, 11 items)",
             "链接": "https://www.onetonline.org/link/hot_tech/19-1029.02"
@@ -13957,12 +14414,12 @@
             "使用限制": "The Biological Scientists, All Other group (19-1029), not the 19-1029.02 separately listed value; overall employment is not AI attribution",
             "来源": "O*NET / U.S. Bureau of Labor Statistics",
             "研究对象": "2025 wages and the 2025—2035 employment projection, Biological Scientists, All Other group",
-            "结论": "2025 median wage 47.56 USD/hour and 98920 USD/year; group employment 59600, 2025—2035 faster than average 5%—6% category, average annual 4300",
+            "结论": "2025 median wage 47.56 USD/hour and 98920 USD/year; group employment 59,600, 2025—2035 4.7%, average annual 4,300",
             "链接": "https://www.onetonline.org/link/details/19-1029.02#WagesEmployment"
           },
           {
             "使用限制": "The industry distribution is an employer-scenario signal, not a demand projection",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET OnLine: industry distribution",
             "研究对象": "Industries19-1029.02 page: Biological Scientists, All Other group",
             "结论": "2025 group-level industry employment distribution: government 39%, professional, scientific, and technical services 34%, education 11%, other 16%; not a separately listed value for this occupation or a demand projection.",
             "链接": "https://www.onetonline.org/link/industry/19-1029.02"
@@ -14156,9 +14613,9 @@
         "entry_heading": "From undergraduate laboratory training and graduate training to independently leading research questions",
         "heading": "Entry, qualifications, and career development paths for molecular and cellular biologists",
         "locale_requirements": {
-          "credential_boundary": "Education, training, professional certification, and institutional appointment are not the same state; the national certifications listed by O*NET (ABMGG clinical molecular genetics, clinical biochemical genetics, and clinical cytogenetics and genomics; ABCC molecular diagnostics; ASCP molecular biology technologist and specialist, and others) differ from U.S. state or institutional requirements for clinical laboratory practice, and certification is not the same as licensure, appointment, or research authorization.",
+          "credential_boundary": "Education, training, certification, licensure and institutional appointment are separate. Check the issuer for the current certification route and the applicable jurisdiction and institution for clinical laboratory authorization. O*NET displays the label “Clinical Molecular Genetics.” ABMGG’s bylaws call the former credential “Clinical Molecular Genetics and Genomics.” For current applications to the laboratory specialty, use ABMGG’s Laboratory Genetics and Genomics requirements. Directory entries do not confer a license or lab authority.",
           "jurisdiction": "This page uses the U.S. O*NET/BLS framing to explain occupational facts; mainland China's position, training, research ethics, and biosafety rules follow local competent authorities and employers.",
-          "summary": "Job Zone5 is extensive preparation for the occupational group; the Education new-hire requirements of 35% bachelor's, 35% postdoc, and 23% doctorate are respondent answers. The current training directory shows 4580 programs, which is a related education directory, not an equivalent qualification or open enrollment places; apprenticeships not being listed does not mean they do not exist."
+          "summary": "Job Zone5 is extensive preparation for the occupational group; the Education new-hire requirements of 35% bachelor's, 35% postdoc, and 23% doctorate are respondent answers.The directory can help you find training programs; listings change."
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14185,6 +14642,12 @@
             "id": "source-pack-onet-industry",
             "label": "O*NET Industries 19-1029.02",
             "scope": "Industry distribution and employer scenarios"
+          },
+          {
+            "href": "https://cemcs.cas.cn/rczp/yjz/202611/t20261106_8304220.html",
+            "id": "cn-cas-cell-biology",
+            "label": "Chinese Academy of Sciences molecular and cellular biology recruitment",
+            "scope": "One research group lists postdoctoral or assistant research work on glycosylated and cell-surface RNA."
           }
         ],
         "tracks": [
@@ -14705,7 +15168,7 @@
             "scenario_role_label": "Preparation stage",
             "scenario_value_label": "Training direction"
           },
-          "us_growth": "Faster than average (5%—6% category, 2025—2035, occupational group)",
+          "us_growth": "4.7%, 2025—2035, occupational group)",
           "us_median": "47.56 USD/hour (98,920 USD/year, 2025, broad framing)"
         }
       },
@@ -14739,24 +15202,24 @@
           },
           {
             "指标": "Employment count (2025)",
-            "数值": "59600",
+            "数值": "59,600 → 62,400 jobs",
             "说明": "Biological Scientists, All Other group (19-1029), not the 19-1029.02 separately listed value; the national overall projection is not AI attribution | https://www.onetonline.org/link/details/19-1029.02#WagesEmployment"
           },
           {
             "指标": "Employment projection (2025—2035)",
-            "数值": "Faster than average (5%—6% category)",
+            "数值": "59,600 → 62,400 jobs",
             "说明": "Biological Scientists, All Other group (19-1029), not the 19-1029.02 separately listed value; the national overall projection is not AI attribution | https://www.onetonline.org/link/details/19-1029.02#WagesEmployment"
           },
           {
             "指标": "Average annual job openings (2025—2035)",
-            "数值": "4300 per year",
+            "数值": "4,300 per year",
             "说明": "Biological Scientists, All Other group (19-1029), not the 19-1029.02 separately listed value; the national overall projection is not AI attribution | https://www.onetonline.org/link/details/19-1029.02#WagesEmployment"
           }
         ],
         "boundary": "The U.S. data apply only to the Biological Scientists, All Other group framing labeled on the O*NET/BLS 19-1029.02 page and the listed period; they cannot be treated as a separately listed value for this occupation or converted or extrapolated into mainland China personal income.",
         "direct_answer": {
           "$join": [
-            "The 2025 median hourly wage of 47.56 USD and median annual wage of 98,920 USD presented on the U.S. O*NET/BLS 19-1029.02 page, with both wages and employment under the Biological Scientists, All Other group framing;",
+            "For Biological Scientists, All Other (19-1029 parent group), BLS Table 1.2 reports a May 2025 median annual wage of $98,920. It lists 59,600 U.S. jobs in 2025, 62,400 projected in 2035 (+4.7%), and 4,300 projected annual openings on average, including replacements. These figures do not isolate molecular and cellular biologists.",
             {
               "$item": "molecular-and-cellular-biologists.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -14781,7 +15244,7 @@
           }
         ],
         "factors_heading": "Factors affecting the actual quote",
-        "growth": "Faster than average (5%—6% category, 2025—2035, occupational group)",
+        "growth": "4.7% projected growth",
         "heading": "U.S. wage and employment data boundaries for molecular and cellular biologists",
         "industry_heading": "Industry and position differences",
         "industry_period": "2025 (occupational group)",
@@ -14841,7 +15304,7 @@
             "question": "How are percentiles used?"
           },
           {
-            "answer": "2025 employment of about 59600 is the Biological Scientists, All Other group (19-1029), not the 19-1029.02 separately listed value and not the current number of job openings.",
+            "answer": "2025 employment of about 59,600 is the Biological Scientists, All Other group (19-1029), not the 19-1029.02 separately listed value and not the current number of job openings.",
             "question": "What does the employment count represent?"
           },
           {
@@ -14929,8 +15392,8 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "Do a paper reasoning exercise with a completely fictional experimental protocol and data table, checking the hypothesis, controls, records, and analysis steps; paper reasoning does not constitute laboratory operation, biosafety, or research ethics authorization.",
-        "title": "Molecular and cellular biologists"
+        "summary": "Consider molecular and cellular biology if you enjoy separating a mechanism hypothesis from what the documented controls can support.",
+        "title": "Who may enjoy being a molecular and cellular biologist?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -14960,12 +15423,12 @@
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "Career prospects and moving to related occupations"
+            "href": "#career-visual-group-sources",
+            "label": "Check the data sources"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "Moving to related occupations"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "Compare related career directions"
           }
         ],
         "direct_answer": {
@@ -15004,7 +15467,7 @@
             "metric": "U.S. employment count",
             "occupation_scope": "The Biological Scientists, All Other group framing presented on the O*NET/BLS 19-1029.02 page",
             "source_id": "ep",
-            "value": "59600 (2025)"
+            "value": "59,600 (2025)"
           },
           {
             "geography": "United States",
@@ -15014,7 +15477,7 @@
             "metric": "U.S. employment change",
             "occupation_scope": "The Biological Scientists, All Other group framing presented on the O*NET/BLS 19-1029.02 page",
             "source_id": "ep",
-            "value": "Faster than average (5%—6% category) (2025—2035)"
+            "value": "4.7% (2025—2035)"
           },
           {
             "geography": "United States",
@@ -15024,7 +15487,7 @@
             "metric": "U.S. average annual job openings",
             "occupation_scope": "The Biological Scientists, All Other group framing presented on the O*NET/BLS 19-1029.02 page",
             "source_id": "nbs",
-            "value": "4300 per year (2025—2035)"
+            "value": "4,300 per year (2025—2035)"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15147,13 +15610,13 @@
             "alternate_value": null,
             "label": "U.S. employment (2025, occupational group)",
             "secondary_value": null,
-            "value": "59600"
+            "value": "59,600"
           },
           {
             "alternate_value": null,
             "label": "U.S. employment change (2025—2035, occupational group)",
             "secondary_value": null,
-            "value": "Faster than average (5%—6% category)"
+            "value": "4.7%"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15366,11 +15829,11 @@
             "question": "Do laboratory chemical and biological exposures need attention?"
           },
           {
-            "answer": "Use public datasets or completely fictional data tables for paper analysis and reproduction exercises, retaining the analysis scripts, records, and limitation statements.",
+            "answer": "Start with MC-18 or W-MC. Use only the supplied fictional control, measurement and record details to make two evidence lines and a question for the research lead. No code or real experiment is needed.",
             "question": "How do you accumulate reviewable research evidence?"
           },
           {
-            "answer": "Start with literature reviews, public data reproduction, and paper experimental design, without using unauthorized patient samples, animals, or institutional biological materials.",
+            "answer": "Start with MC-18 or W-MC. Use only the supplied fictional control, measurement and record details to make two evidence lines and a question for the research lead. No code or real experiment is needed.",
             "question": "Which low-cost trials suit starting with?"
           }
         ],
@@ -15389,7 +15852,7 @@
             "tone": "caution"
           },
           {
-            "body": "Complete one paper analysis with a public dataset or a completely fictional data table, writing out the hypothesis, controls, check points, and limitations.",
+            "body": "Try the MC-18 paper exercise in section 09. Use only the fictional records to check what is documented before a comparison can be proposed.",
             "id": "experiment",
             "label": "Low-cost trial",
             "tone": "action"
@@ -15487,7 +15950,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI personality test (English page)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -15497,7 +15960,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five personality model test (English page)"
+            "label": "Big Five personality test"
           },
           {
             "href": {
@@ -15507,7 +15970,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI Chinese assessment"
+            "label": "Microbiologists"
           },
           {
             "href": {
@@ -15517,7 +15980,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five personality test (Chinese page)"
+            "label": "Medical scientists"
           }
         ]
       },
@@ -15595,6 +16058,20 @@
         "id": "molecular-and-cellular-biologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "molecular-and-cellular-biologists.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "molecular-and-cellular-biologists.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -15640,7 +16117,7 @@
         "fact_id": "us-wage",
         "market": "United States",
         "measure": "Median wage",
-        "occupation_scope": "Broad framing: the wages and employment on this O*NET page are both labeled Biological Scientists, All Other, not the separately listed value for the 19-1029.02 molecular and cellular biologist",
+        "occupation_scope": "Biological Scientists, All Other (19-1029 parent group)",
         "period": "2025 BLS OEWS; consulted 2026-09-25",
         "source_refs": [
           "onet-wages"
@@ -15659,39 +16136,39 @@
         ]
       },
       {
-        "derivation": "The O*NET employment trends page original text labels this \"Employment data for Biological Scientists, All Other.\".",
-        "display_value": "63,700 people (2024)",
+        "derivation": null,
+        "display_value": "59,600 jobs",
         "fact_id": "us-employment",
         "market": "United States",
-        "measure": "Employment size",
-        "occupation_scope": "Broad framing: the wages and employment on this O*NET page are both labeled Biological Scientists, All Other, not the separately listed value for the 19-1029.02 molecular and cellular biologist",
-        "period": "2024 BLS employment size; consulted 2026-09-25",
+        "measure": "59,600 jobs",
+        "occupation_scope": "Biological Scientists, All Other (19-1029 parent group)",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "bls-table-1-2"
         ]
       },
       {
-        "derivation": "O*NET labels this Slower than average; about 64,500 in 2034.",
-        "display_value": "Growth 1% (2024—2034)",
+        "derivation": null,
+        "display_value": "4.7%",
         "fact_id": "us-growth",
         "market": "United States",
-        "measure": "Employment change projection",
-        "occupation_scope": "Broad framing: the wages and employment on this O*NET page are both labeled Biological Scientists, All Other, not the separately listed value for the 19-1029.02 molecular and cellular biologist",
-        "period": "2024—2034 BLS employment projections; consulted 2026-09-25",
+        "measure": "4.7%",
+        "occupation_scope": "Biological Scientists, All Other (19-1029 parent group)",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-table-1-2"
         ]
       },
       {
-        "derivation": "Includes growth and net replacement needs; O*NET labels it as an annual average framing.",
-        "display_value": "About 4,800 per year (2024—2034)",
+        "derivation": null,
+        "display_value": "4,300 projected annual openings",
         "fact_id": "us-openings",
         "market": "United States",
-        "measure": "Average annual job openings",
-        "occupation_scope": "Broad framing: the wages and employment on this O*NET page are both labeled Biological Scientists, All Other, not the separately listed value for the 19-1029.02 molecular and cellular biologist",
-        "period": "2024—2034 BLS employment projections; consulted 2026-09-25",
+        "measure": "4,300 projected annual openings",
+        "occupation_scope": "Biological Scientists, All Other (19-1029 parent group)",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-table-1-2"
         ]
       },
       {
@@ -15761,31 +16238,31 @@
         "availability": "available",
         "fact_ref": "us-wage",
         "key": "us_pay",
-        "label": "U.S. salary reference"
+        "label": "U.S. median annual wage (May 2025) — 19-1029 parent group"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "U.S. employment change"
+        "label": "U.S. projected growth (2025–2035) — 19-1029 parent group"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment",
         "key": "us_employment",
-        "label": "U.S. employment count"
+        "label": "U.S. jobs in 2025 — 19-1029 parent group"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "U.S. average annual job openings"
+        "label": "U.S. projected annual openings — 19-1029 parent group"
       },
       {
         "availability": "available",
         "fact_ref": "cn-wage-nonprivate",
         "key": "china_pay",
-        "label": "Mainland China salary reference"
+        "label": "Mainland China: research and technical services industry background"
       }
     ]
   },
@@ -15793,14 +16270,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Molecular and cellular biologists (O*NET 19-1029.02) study the function and organization of cell molecules and organelles, designing molecular and cellular experiments and interpreting results. This page explains the official tasks and work context, the U.S. BLS 2025 Biological Scientists, All Other broad framing median wage of 98,920 USD and the 2024—2034 growth of 1%, the mainland China scientific research and technical services proxy wage, AI task boundaries, fit signals, and entry paths."
+      "text": "Explore molecular and cellular biology, U.S. parent group wage and jobs data, a mainland China employer example, and a fictional cell study exercise."
     },
     "title": {
       "availability": "available",
       "text": "Molecular and cellular biologists"
     }
   },
-  "source_content_sha256": "f3fb925e2681680b4486e6f2f1ce7a6e1b3f071ba69dc8206ce175666340cd8d",
+  "source_content_sha256": "cbea95fb3e3e9bbd77e6f3683ad8ea43f6be8a7847b7eef1d584d49661345538",
   "subject": {
     "canonical_slug": "molecular-and-cellular-biologists",
     "name": "Molecular and cellular biologists",

@@ -36,13 +36,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -63,7 +63,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -1542,7 +1542,7 @@
         "status": "pending_mapping"
       },
       "item:baggage-porters-and-bellhops.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:baggage-porters-and-bellhops.sources.source-card.1": {
         "status": "mapped"
@@ -23166,12 +23166,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：行李搬运员行李员不是「站门口帮忙的」，而是在交通枢纽为旅客、或在酒店及类似场所为客人搬运行李与物品的一线服务岗位：接收并标记行李与寄存牌、用手或行李车在客房与装运区与车辆与航站楼之间搬运箱包与行李与包裹、迎送宾客并陪同至客房、提供指引与交通与设施信息、递送留言与客房服务订餐并代办杂务，部分岗位还协助场所秩序与安保；只想站着等活、不愿为件数与物主与破损状态逐件核对、也不愿在户外与高体力强度下工作的人不适合。"
+              "到 09 做 BT-69，先独立交两版。"
             ]
           },
           "id": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
+            "bt69-editor",
             "onet"
           ],
           "type": "prose"
@@ -23181,11 +23181,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你愿意在人多与嘈杂与天气变化的环境中保持耐心，能按流程逐件核对件数与标签与寄存牌、如实登记交接与破损与遗留物品，愿意使用行李车与正确搬运姿势保护自己，也能在有礼与克制的前提下处理催促与不满的宾客。"
+              "如果你愿意核号码和件数，在单据不符时停下来交接，可以先做一次纸面领取单。"
             ]
           },
           "id": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.2",
           "source_refs": [
+            "bt69-editor",
             "onet"
           ],
           "type": "prose"
@@ -23195,13 +23196,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停投入的条件：你还没有在任何有监督的条件下完成过一次完整的「接收—标记—搬送—交接—登记」闭环，或只能靠「喜欢和人打交道」说明兴趣；也不要把做过志愿接待或搬运兼职当作可以独立保管贵重物品、或处理宾客纠纷与收费结算的证明。行李与物品的保管与交接、贵重物品与现金处理、场所安全与安保职责、以及涉及宾客个人信息的处理，须按雇主规则与适用规定执行并留有可追溯记录；本页不提供任何交接、收费或安保指令。"
+              "领取凭证、访问记录和异常放行按实际授权核。"
             ]
           },
           "id": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
+            "bt69-editor",
             "onet"
           ],
           "type": "prose"
@@ -23211,12 +23211,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历与准备必须分开核对：O*NET 把 39-6011.00 列为 Job Zone 1–2（SVP 低于 6.0，即准备程度从很少到一些），页面公布的学历构成中42% 为要求低于高中文凭、41% 为要求高中文凭或同等学历、9% 为要求部分大学教育但无学位；该区职业的入职培训通常从数天到一年，相关经验可能只需很少或无需经验。学历、职业培训、用人单位岗前培训、以及岗位职责与授权是不同状态，须按雇主、岗位与法域逐项核验。"
+              "BLS 表 1.2 对 39-6011 的典型分类为高中或同等学历、通常无需相关经验、短期在岗培训。大陆雇主分别核岗位职责、轮班、语言、培训和行李交付权限。"
             ]
           },
           "id": "baggage-porters-and-bellhops.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -23226,12 +23226,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以逐件核对与搬送与交接为重心、并在户外与高接触环境中为宾客与旅客服务的一线岗位，核心是行李接收与标记、搬送与保管与交接、以及宾客与场所服务，而不是对服务业的想象。"
+              "如果你愿意核号码和件数，在单据不符时停下来交接，可以先做一次纸面领取单。"
             ]
           },
           "id": "baggage-porters-and-bellhops.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
+            "bt69-editor",
             "onet"
           ],
           "type": "prose"
@@ -23249,12 +23249,11 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "行李搬运员行李员的工作可分三类：宾客与行李服务（接收并标记行李与开具寄存牌；用手或行李车把箱包与行李与包裹在客房与装运区与车辆与航站楼之间搬运；迎送宾客并把宾客陪同至客房；告知客房设施如门锁与通风与电视的使用；为宾客与旅客提供指引与交通与景点信息；递送留言与客房服务订餐并代办杂务；代取送洗衣与代客服务物品）；场所与安保协助（保持大堂与入口区域整洁；在交通枢纽或酒店等场所作为安保团队的一员；检查客房是否物品齐备与整洁舒适；布置会议室与展示桌与货架）；登记与收费与托运（填写并保管服务收费小票与记录；填写行李保险单据；受理行李与快递与包裹托运并称重与计费；为宾客呼叫传呼）。三类任务都以件数与物主与归属不清、或涉及贵重物品与现金与宾客信息时停工核实为前提。"
+              "行李员的工作可分三类：宾客与行李服务（接收并标记行李与开具寄存牌；用手或行李车把箱包与行李与包裹在客房与装运区与车辆与航站楼之间搬运；迎送宾客并把宾客陪同至客房；告知客房设施如门锁与通风与电视的使用；为宾客与旅客提供指引与交通与景点信息；递送留言与客房服务订餐并代办杂务；代取送洗衣与代客服务物品）；场所与安保协助（保持大堂与入口区域整洁；在交通枢纽或酒店等场所作为安保团队的一员；检查客房是否物品齐备与整洁舒适；布置会议室与展示桌与货架）；登记与收费与托运（填写并保管服务收费小票与记录；填写行李保险单据；受理行李与快递与包裹托运并称重与计费；为宾客呼叫传呼）。三类任务都以件数与物主与归属不清、或涉及贵重物品与现金与宾客信息时停工核实为前提。"
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23288,7 +23287,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -23298,11 +23296,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜93% 每天在环境受控的室内工作，91% 每天在户外并暴露于各种天气，85% 每天在封闭车辆内或操作封闭设备，64% 持续与他人接触（另有 20% 大部分时间与他人接触），59% 持续或几乎持续站立，60% 每天面对面讨论，42% 持续或几乎持续行走或跑动，34% 每天在非环境受控的室内工作，35% 每天暴露于分散注意或不适的噪音，29% 每天暴露于污染物，23% 每天暴露于极热或极冷温度，28% 每天处于过亮或照明不足的环境，19% 持续或几乎持续用手处理与控制或感觉物体与工具，16% 持续或几乎持续需要保持或恢复平衡，15%回答高度自动化、16%回答中度自动化。\n主要装备与工具｜行李车与手推车、行李标签与寄存牌、称重设备、收费与登记终端、通讯与传呼设备、个人防护（安全鞋与手套等，按作业需要）。\n任务节奏｜71% 的典型工作周为 40 小时，81% 为固定作息，16% 为不规律作息；23% 每天面临时间压力，38% 有很大的决策自由（另有 59% 有一定自由），61% 每天需要作出决定。\n协作对象｜与前台与客房与餐饮等岗位协作，与司机与搬运班组协调；59% 认为与工作组或团队合作极其重要（另有 21% 认为非常重要），21% 对他人健康与安全承担很高责任（另有 35% 为高责任），62% 认为决策对同事或公司结果是重要结果。\n竞争与压力｜13%认为错误后果极其严重（另有 52% 为严重），27% 每天与不好打交道或不礼貌的人打交道，17% 每天处于冲突情境，11% 认为竞争极其激烈（另有 33% 为略有竞争），16%每月至少一次但非每周接触暴力或肢体攻击者。\n合规与安全｜搬送与交接与收费须符合雇主规程与适用的消费者保护与场所安全要求；中国大陆侧《消费者权益保护法实施条例》要求经营者保障消费者人身与财产安全、真实全面告知并明示价格与保护个人信息。\n记录与复盘｜件数与物主与标签与寄存牌与交接与破损与遗留物品需要可追溯；16% 认为精确或准确极其重要（另有 36% 认为非常重要）。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能以积极倾听 66 与口语表达 66 与批判性思维 50 与监控 47 与阅读理解 47 为主；可迁移技能以服务取向 69、协调 50、复杂问题解决 47、社会洞察力 47、时间管理 47 为主；知识以客户与个人服务 90、英语语言 67、公共安全与安保 60、运输 60 为主；工作风格包含社会取向、合作与可靠性；17项工作风格使用Impact：社会取向76、可靠75、合作74、正直57、乐观56、同理51、自控50、细节42、压力耐受41；不是人格分数或任务频率。。\n准入与授权｜学历不等于作业或收费或安保授权；O*NET 显示该职业未登记国家认证，具体职责边界须按雇主规则与适用规定执行。\n行业与雇主｜O*NET 行业分布为2025美国本职业行业分布：住宿餐饮56%、运输仓储17%、其他服务业（公共管理除外）13%、其他14%（含房地产租赁）；非中国占比或行业工资。；常见雇主为酒店与住宿场所、机场与车站等交通枢纽、以及会议与活动场所。\n问卷比例是群体回答，非个人必遇；75%从不佩戴普通防护回答不免实际防护。新聘学历需求问卷：42%要求低于高中、41%高中或同等、9%部分大学无学位，非在岗学历构成。Zone1–2/SVP<6是一般职业准备分组，描述数天至一年在职培训及不同程度经验，非每岗固定培训或无需经验的保证。"
+              "工作环境｜93% 每天在环境受控的室内工作，91% 每天在户外并暴露于各种天气，85% 每天在封闭车辆内或操作封闭设备，64% 持续与他人接触（另有 20% 大部分时间与他人接触），59% 持续或几乎持续站立，60% 每天面对面讨论，42% 持续或几乎持续行走或跑动，34% 每天在非环境受控的室内工作，35% 每天暴露于分散注意或不适的噪音，29% 每天暴露于污染物，23% 每天暴露于极热或极冷温度，28% 每天处于过亮或照明不足的环境，19% 持续或几乎持续用手处理与控制或感觉物体与工具，16% 持续或几乎持续需要保持或恢复平衡，15%回答高度自动化、16%回答中度自动化。\n主要装备与工具｜行李车与手推车、行李标签与寄存牌、称重设备、收费与登记终端、通讯与传呼设备、个人防护（安全鞋与手套等，按作业需要）。\n任务节奏｜71% 的典型工作周为 40 小时，81% 为固定作息，16% 为不规律作息；23% 每天面临时间压力，38% 有很大的决策自由（另有 59% 有一定自由），61% 每天需要作出决定。\n协作对象｜与前台与客房与餐饮等岗位协作，与司机与搬运班组协调；59% 认为与工作组或团队合作极其重要（另有 21% 认为非常重要），21% 对他人健康与安全承担很高责任（另有 35% 为高责任），62% 认为决策对同事或公司结果是重要结果。\n竞争与压力｜13%认为错误后果极其严重（另有 52% 为严重），27% 每天与不好打交道或不礼貌的人打交道，17% 每天处于冲突情境，11% 认为竞争极其激烈（另有 33% 为略有竞争），16%每月至少一次但非每周接触暴力或肢体攻击者。\n合规与安全｜搬送与交接与收费须符合雇主规程与适用的消费者保护与场所安全要求；中国大陆侧《消费者权益保护法实施条例》要求经营者保障消费者人身与财产安全、真实全面告知并明示价格与保护个人信息。\n记录与复盘｜件数与物主与标签与寄存牌与交接与破损与遗留物品需要可追溯；16% 认为精确或准确极其重要（另有 36% 认为非常重要）。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能以积极倾听 66 与口语表达 66 与批判性思维 50 与监控 47 与阅读理解 47 为主；可迁移技能以服务取向 69、协调 50、复杂问题解决 47、社会洞察力 47、时间管理 47 为主；知识以客户与个人服务 90、英语语言 67、公共安全与安保 60、运输 60 为主；工作风格包含社会取向、合作与可靠性；17项工作风格使用Impact：社会取向76、可靠75、合作74、正直57、乐观56、同理51、自控50、细节42、压力耐受41；不是人格分数或任务频率。。\n准入与授权｜学历不等于作业或收费或安保授权；O*NET 显示该职业未登记国家认证，具体职责边界须按雇主规则与适用规定执行。\n行业与雇主｜O*NET 39-6011.00 行业子表列住宿和餐饮 56%、运输和仓储 17%、其他服务（公共行政除外）13%、其他 14%。该子表未单列统计年份。\n问卷比例是群体回答，非个人必遇；75%从不佩戴普通防护回答不免实际防护。新聘学历需求问卷：42%要求低于高中、41%高中或同等、9%部分大学无学位，非在岗学历构成。Zone1–2/SVP<6是一般职业准备分组，描述数天至一年在职培训及不同程度经验，非每岗固定培训或无需经验的保证。"
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.work-context-block.1",
           "source_refs": [
+            "r2-pay-2",
             "bls",
             "health"
           ],
@@ -23318,7 +23317,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.2",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23328,7 +23326,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国工资分布：O*NET 展示的 2025 年 BLS 职业就业与工资统计（OEWS）按本职业 39-6011.00 口径给出年薪第 10 分位 27,040 美元、第 25 分位 31,200 美元、中位数 37,080 美元、第 75 分位 44,130 美元、第 90 分位 51,600 美元；时薪第 10 分位 13.00 美元、第 25 分位 15.00 美元、中位数 17.83 美元、第 75 分位 21.22 美元、第 90 分位 24.81 美元。O*NET 页面未声明这些工资或就业数据取自其他职业，均为本职业口径；中位数不等于入门工资，也不构成收入承诺，OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等。排除自雇、未注册企业所有者合伙人及无酬家庭劳动者；受雇承包企业员工不等于自雇。"
+              "美国工资分布：O*NET 展示的 2025 年 BLS 职业就业与工资统计（OEWS）按本职业 39-6011.00 口径给出年薪第 10 分位 27,040 美元、第 25 分位 31,200 美元、中位数 37,080 美元、第 75 分位 44,130 美元、第 90 分位 51,600 美元；时薪第 10 分位 13.00 美元、第 25 分位 15.00 美元、中位数 17.83 美元、第 75 分位 21.22 美元、第 90 分位 24.81 美元。O*NET 页面未声明这些工资或就业数据取自其他职业，均为本职业口径；中位数不等于入门工资，也不构成收入承诺，OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等。排除自雇、非公司制企业的所有者和合伙人及无酬家庭劳动者；受雇承包企业员工不等于自雇。"
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.onet-structured-fields-block.2",
@@ -23348,7 +23346,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23379,7 +23376,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23389,12 +23385,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国39-6011本职业：2025就业29,200人，2035预测28,400人，2025—2035增长取整为-3%（下降），年均空缺3,800个。空缺含替补需求，不是十年净增、个人录用概率或生成式AI因果测量。"
+              "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。"
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -23408,7 +23404,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.5",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23418,7 +23413,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025美国本职业行业分布：住宿餐饮56%、运输仓储17%、其他服务业（公共管理除外）13%、其他14%（含房地产租赁）；非中国占比或行业工资。 详细资料列4类软件、4项Hot：2025美国职业关联唯一招聘Office1%，Excel、Outlook和Word各不足1%。分母是该职业关联唯一招聘，非岗位使用率、AI采用率或中国要求；软件类数不等于软件产品数。"
+              "O*NET 39-6011.00 行业子表列住宿和餐饮 56%、运输和仓储 17%、其他服务（公共行政除外）13%、其他 14%。该子表未单列统计年份。"
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.onet-structured-fields-block.5",
@@ -23438,7 +23433,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23448,13 +23442,11 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "行李搬运员行李员以行李与物品的接收与搬送与交接为主，对实物与交接链负责；礼宾员以信息与安排服务为主，通常不承担行李实物的长时间搬送；引座员以入场与秩序管理为主；寄存与衣帽间服务员以保管随身物品为主；娱乐与休闲服务员以活动与设施服务为主；酒店前台文员以登记与结算与客房分配为主，通常不承担实物搬运；乘客服务员以交通工具上的乘客服务为主。相邻职业共享服务意识与沟通与安全常识，但对象、交付与责任不同。"
+              "行李员以行李与物品的接收与搬送与交接为主，对实物与交接链负责；礼宾员以信息与安排服务为主，通常不承担行李实物的长时间搬送；引座员以入场与秩序管理为主；寄存与衣帽间服务员以保管随身物品为主；娱乐与休闲服务员以活动与设施服务为主；酒店前台文员以登记与结算与客房分配为主，通常不承担实物搬运；乘客服务员以交通工具上的乘客服务为主。相邻职业共享服务意识与沟通与安全常识，但对象、交付与责任不同。"
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23469,7 +23461,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23484,7 +23475,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23499,7 +23489,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23514,7 +23503,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23524,13 +23512,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "行李搬运员行李员（美国侧 O*NET 39-6011.00，Baggage Porters and Bellhops）在交通枢纽为旅客、或在酒店及类似场所为客人搬运行李与物品。官方职责原文为「Handle baggage for travelers at transportation terminals or for guests at hotels or similar establishments.」；O*NET 官方任务共 17 项（10 项核心、7 项补充），核心任务包括接收并标记行李与填写与粘贴寄存牌（重要性 89）、迎接到店宾客并陪同至客房（88）、在场所与周边区域运送宾客或安排交通（88）、保持大堂与入口区域整洁（88）、用手或行李车把行李与箱包与包裹在客房与装运区与车辆与航站楼之间搬运（87）、向宾客或旅客提供指引与交通与其他信息（87）、说明客房设施如门锁与通风与电视的使用（86）、协助有残障的旅客与宾客（85）、递送留言与客房服务订餐并代办杂务（81）、代取送洗衣与代客服务物品（79）；补充任务包括作为场所安保团队的一员（79）、填写并保管收费小票与记录（74）、为宾客呼叫传呼（71）、布置会议室与展示桌与货架（67）、检查客房（66）、填写行李保险单据（63）、受理行李与快递与包裹托运并称重与计费（56）。该职业在美国属 Job Zone 1–2（SVP 低于 6.0）。本页不构成搬送、收费或安保指令，相关决定须按雇主规则与适用规定执行。"
+              "行李员（美国侧 O*NET 39-6011.00，Baggage Porters and Bellhops）在交通枢纽为旅客、或在酒店及类似场所为客人搬运行李与物品。官方职责原文为「Handle baggage for travelers at transportation terminals or for guests at hotels or similar establishments.」；O*NET 官方任务共 17 项（10 项核心、7 项补充），核心任务包括接收并标记行李与填写与粘贴寄存牌（重要性 89）、迎接到店宾客并陪同至客房（88）、在场所与周边区域运送宾客或安排交通（88）、保持大堂与入口区域整洁（88）、用手或行李车把行李与箱包与包裹在客房与装运区与车辆与航站楼之间搬运（87）、向宾客或旅客提供指引与交通与其他信息（87）、说明客房设施如门锁与通风与电视的使用（86）、协助有残障的旅客与宾客（85）、递送留言与客房服务订餐并代办杂务（81）、代取送洗衣与代客服务物品（79）；补充任务包括作为场所安保团队的一员（79）、填写并保管收费小票与记录（74）、为宾客呼叫传呼（71）、布置会议室与展示桌与货架（67）、检查客房（66）、填写行李保险单据（63）、受理行李与快递与包裹托运并称重与计费（56）。该职业在美国属 Job Zone 1–2（SVP 低于 6.0）。本页不构成搬送、收费或安保指令，相关决定须按雇主规则与适用规定执行。"
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23545,7 +23531,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23560,7 +23545,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23575,7 +23559,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23590,7 +23573,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23605,7 +23587,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23620,7 +23601,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23635,7 +23615,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23645,12 +23624,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 39-6011.00 列为 Job Zone 1–2（SVP 低于 6.0），该区的入职培训通常从数天到一年，相关经验可能只需很少或无需经验；页面公布的学历构成中 42% 为要求低于高中文凭、41% 为要求高中文凭或同等学历、9% 为要求部分大学教育但无学位。O*NET 培训页面显示该职业全国未登记培训项目，认证页面显示未登记国家认证。中国大陆侧以用人单位岗前培训与在岗带教为主，具体要求由用人单位规定。"
+              "BLS 表 1.2 对 39-6011 的典型分类为高中或同等学历、通常无需相关经验、短期在岗培训。大陆雇主分别核岗位职责、轮班、语言、培训和行李交付权限。"
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -23665,7 +23644,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23680,7 +23658,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23695,7 +23672,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23719,12 +23695,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧为 O*NET 39-6011.00（Baggage Porters and Bellhops）；其工资与就业与行业数据为本职业口径，页面未声明取自其他职业。中国大陆侧本页未取得与该职业精确对应的公开职业条目，中文页面语言不构成中国等价职业或工资映射；比较时应先辨认岗位属于酒店与住宿、交通枢纽与运输，还是其他服务场所。"
+              "江苏人社公开的国家职业标准目录将前厅服务员 4-03-01-01 与铁路行包运输服务员（铁路行李员）4-02-01-04 分列。目录可用于查找相邻职业；不能据此把大陆酒店和交通场站合并为一个统计职业或统一入职条件。"
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.24",
           "source_refs": [
-            "onet",
+            "front-desk-rail-catalog",
             "onet"
           ],
           "type": "prose"
@@ -23748,12 +23724,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧学历构成以低于高中文凭与高中文凭或同等学历为主（42%／41%，另有 9% 为部分大学教育但无学位），入职培训通常从数天到一年，相关经验可能只需很少或无需经验；O*NET 未登记该职业的全国培训项目或国家认证。中国大陆以用人单位岗前培训与在岗带教为主，具体学历与经验要求由用人单位规定。"
+              "BLS 表 1.2 对 39-6011 的典型分类为高中或同等学历、通常无需相关经验、短期在岗培训。大陆雇主分别核岗位职责、轮班、语言、培训和行李交付权限。"
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -23777,12 +23753,11 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "搬送与交接须按雇主流程与适用规定执行；涉及贵重物品与现金与收费、场所安全与安保处置、宾客个人信息处理时，须按雇主规则与授权执行。美国侧 O*NET 未登记该职业的国家认证，也不存在统一的联邦准入证书；中国大陆侧本页未取得精确等价的公开职业条目与准入依据，入职前核对岗前培训与授权流程，不能从学历或经验直接推断。"
+              "向雇主核对岗前培训和行李处理权限。O*NET 目录查询不能决定法定准入。涉及贵重物品、收费和宾客信息时，按场所流程和实际授权。"
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23811,7 +23786,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23826,7 +23800,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23841,7 +23814,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23856,7 +23828,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23871,7 +23842,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23923,10 +23893,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -23941,8 +23907,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23957,10 +23921,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23970,12 +23930,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表把行李搬运员行李员与五条相邻方向放在同一组维度上比较：职业方向、核心工作与产出、关键区别，以及每种偏好更适合的选择。"
+              "下表把行李员与五条相邻方向放在同一组维度上比较：职业方向、核心工作与产出、关键区别，以及每种偏好更适合的选择。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23985,12 +23944,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "礼宾员以提供信息与安排服务（如订车与订票与推荐）为主，通常不承担行李实物的长时间搬送；行李搬运员行李员以行李与物品的接收与搬送与交接为主。"
+              "礼宾员以提供信息与安排服务（如订车与订票与推荐）为主，通常不承担行李实物的长时间搬送；行李员以行李与物品的接收与搬送与交接为主。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24000,12 +23958,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做信息与安排服务，优先比较礼宾员；若你更愿意做行李实物的接收与搬送，则适合行李搬运员行李员。"
+              "若你更愿意做信息与安排服务，优先比较礼宾员；若你更愿意做行李实物的接收与搬送，则适合行李员。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24020,7 +23977,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24030,7 +23986,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "行李搬运员行李员和礼宾员"
+              "行李员和礼宾员"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.14",
@@ -24044,12 +24000,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "娱乐与休闲服务员以活动与设施与器材服务为主；行李搬运员行李员以行李与物品的接收与搬送与交接为主。"
+              "娱乐与休闲服务员以活动与设施与器材服务为主；行李员以行李与物品的接收与搬送与交接为主。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24059,12 +24014,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做活动与设施服务，优先比较娱乐与休闲服务员；若你更愿意做行李与物品服务，则适合行李搬运员行李员。"
+              "若你更愿意做活动与设施服务，优先比较娱乐与休闲服务员；若你更愿意做行李与物品服务，则适合行李员。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24079,7 +24033,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24089,7 +24042,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "行李搬运员行李员和娱乐与休闲服务员"
+              "行李员和娱乐与休闲服务员"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.18",
@@ -24103,12 +24056,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "寄存与衣帽间服务员以保管随身物品为主，通常发生在固定寄存点；行李搬运员行李员以行李与物品的接收与搬送与交接并在场所内移动为主。"
+              "寄存与衣帽间服务员以保管随身物品为主，通常发生在固定寄存点；行李员以行李与物品的接收与搬送与交接并在场所内移动为主。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.19",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24118,12 +24070,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做固定点位的寄存保管，优先比较寄存与衣帽间服务员；若你更愿意做场所内搬送与交接，则适合行李搬运员行李员。"
+              "若你更愿意做固定点位的寄存保管，优先比较寄存与衣帽间服务员；若你更愿意做场所内搬送与交接，则适合行李员。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24138,7 +24089,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24148,7 +24098,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "行李搬运员行李员和寄存与衣帽间服务员"
+              "行李员和寄存与衣帽间服务员"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.22",
@@ -24162,12 +24112,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "引座员以入场引导与秩序管理为主；行李搬运员行李员以行李与物品搬送与宾客与设施服务为主。"
+              "引座员以入场引导与秩序管理为主；行李员以行李与物品搬送与宾客与设施服务为主。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24177,12 +24126,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做入场引导与秩序管理，优先比较引座员；若你更愿意做行李与宾客服务，则适合行李搬运员行李员。"
+              "若你更愿意做入场引导与秩序管理，优先比较引座员；若你更愿意做行李与宾客服务，则适合行李员。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24197,7 +24145,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24207,7 +24154,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "行李搬运员行李员和引座员"
+              "行李员和引座员"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.26",
@@ -24221,12 +24168,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "乘客服务员以交通工具上的乘客服务为主；行李搬运员行李员以地面场所的行李接收与搬送与交接为主。"
+              "乘客服务员以交通工具上的乘客服务为主；行李员以地面场所的行李接收与搬送与交接为主。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24236,12 +24182,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意在交通工具上服务乘客，优先比较乘客服务员；若你更愿意在地面场所搬送与交接行李，则适合行李搬运员行李员。"
+              "若你更愿意在交通工具上服务乘客，优先比较乘客服务员；若你更愿意在地面场所搬送与交接行李，则适合行李员。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24256,7 +24201,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24266,7 +24210,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "行李搬运员行李员和乘客服务员"
+              "行李员和乘客服务员"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.30",
@@ -24280,12 +24224,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "酒店前台文员以登记与结算与客房分配为主，通常不承担实物搬运；行李搬运员行李员以行李实物的接收与搬送与交接为主。"
+              "酒店前台文员以登记与结算与客房分配为主，通常不承担实物搬运；行李员以行李实物的接收与搬送与交接为主。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24295,12 +24238,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做登记与结算与客房分配，优先比较酒店前台文员；若你更愿意做行李实物服务，则适合行李搬运员行李员。"
+              "若你更愿意做登记与结算与客房分配，优先比较酒店前台文员；若你更愿意做行李实物服务，则适合行李员。"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24315,7 +24257,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24325,7 +24266,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "行李搬运员行李员和酒店前台文员"
+              "行李员和酒店前台文员"
             ]
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.34",
@@ -24392,10 +24333,10 @@
                 "url": "https://www.onetonline.org/link/industry/39-6011.00"
               },
               {
-                "entity": "O*NET本职业2025—2035就业趋势",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 39-6011.00 全国工资分位",
@@ -24416,22 +24357,22 @@
                 "url": "https://www.onetonline.org/link/details/39-6011.00"
               },
               {
-                "entity": "O*NET 39-6011.00 认证发现（行业认证口径）",
+                "entity": "O*NET 招聘工具",
                 "id": "link-10",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/39-6011.00"
+                "url": "https://www.onetonline.org/link/hot_tech/39-6011.00"
               },
               {
-                "entity": "O*NET 39-6011.00 行业分布（行业与雇主类型口径）",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
+                "entity": "O*NET 行业子表",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.onetonline.org/link/industry/39-6011.00"
               },
               {
                 "entity": "O*NET 39-6011.00 职业摘要",
@@ -24458,10 +24399,10 @@
                 "url": "https://www.onetonline.org/link/industry/39-6011.00"
               },
               {
-                "entity": "O*NET本职业2025—2035就业趋势",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 39-6011.00 详细资料（工作情境）",
@@ -24479,13 +24420,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -24500,7 +24434,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24515,7 +24448,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24525,12 +24457,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在职的行李搬运员行李员"
+              "在职的行李员"
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24545,7 +24476,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24560,7 +24490,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24575,7 +24504,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24590,8 +24518,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.16",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24606,8 +24532,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24617,12 +24541,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "生成式AI采用率和提效证据仍未取得；登记检索与草稿为编辑试验候选。BLS职业利用因素表对航空运输支持业488100说明旅客偏好变化与自助行李投放机减少skycaps需求，对赌场酒店721120说明缩减非必要服务降低该职业占比；为行业内占比预测理由，非生成式AI采用率、已测减员幅度或全部酒店的替代结论。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "生成式AI采用率和提效证据仍未取得；登记检索与草稿为编辑试验候选。BLS职业利用因素表对航空运输支持业488100说明旅客偏好变化与自助行李投放机减少skycaps需求，对赌场酒店721120说明缩减非必要服务降低该职业占比；为行业内占比预测理由，非生成式AI采用率、已测减员幅度或全部酒店的替代结论。 AI 任务影响估算 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -24665,7 +24589,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24680,7 +24603,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24761,11 +24683,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国本职业行业分布：住宿餐饮56%、运输仓储17%、其他服务业（公共管理除外）13%、其他14%（含房地产租赁）；非中国占比或行业工资。"
+              "O*NET 39-6011.00 行业子表列住宿和餐饮 56%、运输和仓储 17%、其他服务（公共行政除外）13%、其他 14%。该子表未单列统计年份。"
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.28",
           "source_refs": [
+            "r2-pay-2",
             "onet"
           ],
           "type": "prose"
@@ -24775,7 +24698,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-6011.00 职业摘要（就业与预测字段）"
+              "BLS 表 1.2：就业与预测"
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.29",
@@ -24794,7 +24717,7 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -24836,7 +24759,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24851,7 +24773,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24866,7 +24787,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24881,7 +24801,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24896,7 +24815,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24911,7 +24829,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24926,7 +24843,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25133,11 +25049,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-6011.00 职业摘要（就业与预测字段）"
+              "BLS 表 1.2：39-6011 的就业与预测"
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.54",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -25152,7 +25069,7 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -25161,12 +25078,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国39-6011本职业：2025就业29,200人，2035预测28,400人，2025—2035增长取整为-3%（下降），年均空缺3,800个。空缺含替补需求，不是十年净增、个人录用概率或生成式AI因果测量。"
+              "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。"
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -25217,11 +25134,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国本职业行业分布：住宿餐饮56%、运输仓储17%、其他服务业（公共管理除外）13%、其他14%（含房地产租赁）；非中国占比或行业工资。"
+              "O*NET 39-6011.00 行业子表列住宿和餐饮 56%、运输和仓储 17%、其他服务（公共行政除外）13%、其他 14%。该子表未单列统计年份。"
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.60",
           "source_refs": [
+            "r2-pay-2",
             "onet"
           ],
           "type": "prose"
@@ -25236,7 +25154,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25251,7 +25168,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25261,12 +25177,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国39-6011本职业：2025就业29,200人，2035预测28,400人，2025—2035增长取整为-3%（下降），年均空缺3,800个。空缺含替补需求，不是十年净增、个人录用概率或生成式AI因果测量。 BLS职业利用因素表对航空运输支持业488100说明旅客偏好变化与自助行李投放机减少skycaps需求，对赌场酒店721120说明缩减非必要服务降低该职业占比；为行业内占比预测理由，非生成式AI采用率、已测减员幅度或全部酒店的替代结论。"
+              "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。"
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -25281,7 +25197,7 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -25296,7 +25212,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25326,7 +25241,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25341,7 +25255,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25365,12 +25278,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国39-6011本职业：2025就业29,200人，2035预测28,400人，2025—2035增长取整为-3%（下降），年均空缺3,800个。空缺含替补需求，不是十年净增、个人录用概率或生成式AI因果测量。"
+              "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。"
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -25384,7 +25297,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25399,7 +25311,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25423,12 +25334,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "所读资料未给出岗位消失年份；美国39-6011本职业：2025就业29,200人，2035预测28,400人，2025—2035增长取整为-3%（下降），年均空缺3,800个。空缺含替补需求，不是十年净增、个人录用概率或生成式AI因果测量。"
+              "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。"
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -25442,7 +25353,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25457,7 +25367,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25472,7 +25381,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25487,7 +25395,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.78",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25502,7 +25409,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.79",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25517,7 +25423,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25532,7 +25437,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25547,7 +25451,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.82",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25576,7 +25479,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.84",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25591,7 +25493,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25648,7 +25549,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25663,7 +25563,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.90",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25678,7 +25577,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25693,7 +25591,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.92",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25708,7 +25605,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.93",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25765,7 +25661,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25822,7 +25717,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25879,7 +25773,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.105",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25936,7 +25829,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25993,7 +25885,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26106,7 +25997,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26121,7 +26011,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26336,11 +26225,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "精确职业工资缺口保留；相关分类与有匹配条件的行业均值可参考。"
+              "大陆酒店岗位：上海实习与昆明复合岗位"
             ]
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
             "nbs"
           ],
           "type": "prose"
@@ -26350,11 +26241,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "缺口在本页以「证据不足」标记；这不是零收入，而是证据无法支持该精度。若需比较，请以书面任职条件（城市、用人单位类型、岗位职责、班次与小费、税前税后）为准。"
+              "安徽财贸职业学院就业信息 2026-04-21 刊载上海浦东机场假日酒店和洲际酒店的行李员实习岗位 6 个。第 1 至第 6 月 2,800 元/月，第 7 月起 3,000 元/月；公告另列试用期 4,000–4,500 元/月。"
             ]
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
             "onet"
           ],
           "type": "prose"
@@ -26369,7 +26262,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26398,7 +26290,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26413,7 +26304,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26442,7 +26332,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26457,7 +26346,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26472,7 +26360,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26487,7 +26374,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26502,7 +26388,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26533,7 +26418,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26548,7 +26432,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26579,7 +26462,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26608,7 +26490,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26637,7 +26518,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26680,7 +26560,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26690,12 +26569,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "场景比较需要用人单位类型与岗位职责与班次一致；本页不提供本职业的精确月薪区间。"
+              "弥勒市人民政府 2026 年第七期招聘汇编刊载昆明君悦酒店 5 个「前台接待员（礼宾部行李员）」岗位：大专及以上、英文良好，3,000–3,800 元/月加提成。工作地点在昆明；标题含前台接待，不能看作纯行李员工资。"
             ]
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
             "onet"
           ],
           "type": "prose"
@@ -26710,7 +26590,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26734,12 +26613,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆行李搬运员行李员的精确月薪区间；同名或近名岗位的用人单位类型与岗位职责差异较大，比较时须把班次与小费与职责与授权与责任范围纳入书面条件。"
+              "本页不提供中国大陆行李员的精确月薪区间；同名或近名岗位的用人单位类型与岗位职责差异较大，比较时须把班次与小费与职责与授权与责任范围纳入书面条件。"
             ]
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26763,11 +26641,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：尚未取得全国本职业工资分布；相关工种分类已取得，非全职业一对一互认。"
+              "两份公告各有岗位和日期；不将实习、试用、前台混合岗位和全国工资合并。"
             ]
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
             "cn-class-2022"
           ],
           "type": "prose"
@@ -26819,7 +26699,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未有官方或可核验来源支持其他城市的行李搬运员行李员月薪区间。"
+              "本页未取得可比的其他城市报价。"
             ]
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.54",
@@ -26866,7 +26746,7 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -26897,13 +26777,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 39-6011.00 全国工资分位｜https://www.onetonline.org/link/localwages/39-6011.00；O*NET 39-6011.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/39-6011.00；O*NET 39-6011.00 行业分布｜https://www.onetonline.org/link/industry/39-6011.00"
+              "O*NET 39-6011.00 全国工资分位｜https://www.onetonline.org/link/localwages/39-6011.00；BLS 表 1.2：就业与预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET 39-6011.00 行业分布｜https://www.onetonline.org/link/industry/39-6011.00"
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27060,7 +26938,7 @@
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -27069,13 +26947,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国39-6011本职业：2025就业29,200人，2035预测28,400人，2025—2035增长取整为-3%（下降），年均空缺3,800个。空缺含替补需求，不是十年净增、个人录用概率或生成式AI因果测量。"
+              "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。"
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27084,13 +26962,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "-3%（2025—2035，取整预测）"
+              "预计下降 3.0%（2025—2035）"
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27099,13 +26977,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国39-6011本职业：2025就业29,200人，2035预测28,400人，2025—2035增长取整为-3%（下降），年均空缺3,800个。空缺含替补需求，不是十年净增、个人录用概率或生成式AI因果测量。"
+              "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。"
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27120,7 +26998,7 @@
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -27135,7 +27013,7 @@
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -27144,7 +27022,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 OEWS本职业五档年薪与时薪；预测2025及2025—2035。OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等。排除自雇、未注册企业所有者合伙人及无酬家庭劳动者；受雇承包企业员工不等于自雇。"
+              "2025 OEWS本职业五档年薪与时薪；预测2025及2025—2035。OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等。排除自雇、非公司制企业的所有者和合伙人及无酬家庭劳动者；受雇承包企业员工不等于自雇。"
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.25",
@@ -27159,13 +27037,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：2025本职业中位年薪37,080美元、时薪17.83；美国39-6011本职业：2025就业29,200人，2035预测28,400人，2025—2035增长取整为-3%（下降），年均空缺3,800个。空缺含替补需求，不是十年净增、个人录用概率或生成式AI因果测量。"
+              "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。"
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27250,7 +27128,6 @@
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27260,13 +27137,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "-3%（2025—2035，取整预测）"
+              "预计下降 3.0%（2025—2035）"
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27303,11 +27180,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025美国行业分布住宿餐饮56%；占比不提供行业工资。"
+              "住宿餐饮业占比来自 O*NET 行业子表；该表不是工资数据。"
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
+            "r2-pay-2",
             "onet"
           ],
           "type": "prose"
@@ -27345,7 +27223,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025美国行业分布运输仓储17%；不能以占比推行业工资。"
+              "O*NET 行业子表的运输仓储占 17%；未单列统计年份，不能用占比推行业工资。"
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.39",
@@ -27449,7 +27327,6 @@
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27480,7 +27357,7 @@
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -27494,7 +27371,6 @@
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27523,7 +27399,6 @@
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27552,7 +27427,6 @@
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27580,7 +27454,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27592,19 +27466,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "引座员",
@@ -27685,20 +27559,15 @@
                 "url": "https://www.onetonline.org/link/industry/39-6011.00"
               },
               {
-                "entity": "O*NET 39-6011.00 职业摘要（就业与预测字段）",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -27742,7 +27611,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27800,7 +27668,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27829,7 +27696,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.riasec-fit-block.9",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27886,7 +27752,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28001,7 +27866,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28088,7 +27952,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -28131,7 +27994,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28146,7 +28008,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28161,7 +28022,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28176,7 +28036,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28191,7 +28050,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28206,7 +28064,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28221,7 +28078,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28236,7 +28092,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28251,7 +28106,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28266,7 +28120,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28281,7 +28134,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28296,7 +28148,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28311,7 +28162,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28326,8 +28176,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28370,7 +28218,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28385,7 +28232,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28400,7 +28246,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28415,7 +28260,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28514,7 +28358,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28557,7 +28400,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28572,7 +28414,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.57",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28735,10 +28576,10 @@
                 "url": "https://www.onetonline.org/link/details/39-6011.00"
               },
               {
-                "entity": "O*NET本职业2025—2035就业趋势",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 39-6011.00 全国工资分位",
@@ -28756,10 +28597,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -28789,8 +28626,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28805,9 +28640,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28822,7 +28654,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28837,7 +28668,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28867,7 +28697,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28882,7 +28711,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28897,7 +28725,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28912,7 +28739,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28927,7 +28753,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28984,7 +28809,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28999,7 +28823,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29014,7 +28837,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29044,7 +28866,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29059,7 +28880,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29074,7 +28894,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29089,7 +28908,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29104,7 +28922,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29119,7 +28936,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29134,7 +28950,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29163,7 +28978,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29206,7 +29020,7 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.37",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -29261,7 +29075,7 @@
             "column_labels": [
               "岗位方向",
               "起步任务",
-              "雇主依据",
+              "向雇主核对",
               "零经验可提交的证据",
               "需要区分的边界"
             ],
@@ -29269,44 +29083,42 @@
               [
                 "酒店行李与宾客服务岗",
                 "在有监督下接收并标记行李与寄存牌、把箱包搬送至客房、迎送宾客并说明客房设施。",
-                "编辑核对项：关注件数与物主核对、搬送安全、礼貌与礼仪与交接规范程度；职责与授权由雇主岗前培训与考核决定。 本轮无具体雇主招聘样本。",
-                "提交一份含虚构酒店场景、行李接收与交接记录与破损与遗留物品说明的作业说明，不使用真实宾客信息。",
+                "向雇主核轮班、语言、培训和交付权限。",
+                "BT-69 只交两版证据对照与一页交接。实际行李搬运另核授权。",
                 "O*NET有收费及安保团队补充任务，中国前厅条目也含收费与保管；不是所有酒店岗位都禁止这些职责，按实际分工和规定另核。"
               ],
               [
                 "交通枢纽行李服务岗",
                 "在机场与车站接收与搬运行李与箱包与包裹，协助旅客与有残障的旅客。",
-                "编辑核对项：关注搬运动作与行李车使用、旅客服务与秩序配合能力。 本轮无具体雇主招聘样本。",
-                "提交一份含旅客服务流程、搬送路线与交接与协助说明的虚构作业记录。",
+                "向雇主核轮班、语言、培训和交付权限。",
+                "BT-69 只交两版证据对照与一页交接。实际行李搬运另核授权。",
                 "涉及托运与安全与安检的环节须按场所与承运方规程执行；本页不提供作业指令。"
               ],
               [
                 "寄存与收费服务岗",
                 "受理寄存与托运，填写收费小票与记录与行李保险单据，称重与计费。",
-                "编辑核对项：关注收费与登记准确性与票据规范与现金与物品责任意识。 本轮无具体雇主招聘样本。",
-                "提交一份含价目与收费与登记与交接与异常处理的虚构记录。",
+                "向雇主核轮班、语言、培训和交付权限。",
+                "BT-69 只交两版证据对照与一页交接。实际行李搬运另核授权。",
                 "收费与票据须按雇主规程执行；不得自行减免或代收。"
               ],
               [
                 "场所巡视与安保协助岗",
                 "保持大堂与入口区域整洁、检查客房物品、按规程协助秩序与安保。",
-                "编辑核对项：关注巡检与记录规范、异常上报与授权边界意识。 本轮无具体雇主招聘样本。",
-                "提交一份含巡检路线、检查项与异常上报与授权边界的虚构记录。",
+                "向雇主核轮班、语言、培训和交付权限。",
+                "BT-69 只交两版证据对照与一页交接。实际行李搬运另核授权。",
                 "安保处置须在授权范围内执行；涉及人身安全与执法的交由有职责人员处理。"
               ],
               [
                 "领班与班组协调岗",
                 "安排班次与分工、带教新人、协调前台与客房与运输环节、处理疑难与投诉。",
-                "编辑核对项：关注协调与带教与异常处置与记录复核能力。 本轮无具体雇主招聘样本。",
-                "提交一份含排班与分工、异常处置与复核与改进建议的虚构方案。",
+                "向雇主核轮班、语言、培训和交付权限。",
+                "BT-69 只交两版证据对照与一页交接。实际行李搬运另核授权。",
                 "管理与处置决定须按雇主规程与授权作出；本页不提供管理指令。"
               ]
             ]
           },
           "id": "baggage-porters-and-bellhops.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "title": "岗位方向与起步任务比较",
@@ -29372,42 +29184,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份场所与班次说明、一份行李接收与交接记录表、一份寄存与收费登记表与一份破损与遗留物品登记模板。",
-                  "全部材料为虚构，不含真实宾客信息、真实行李或物品、监控或内部资料。",
-                  "全部材料与场景为虚构，不得使用真实宾客信息、真实行李或物品、监控或内部资料。"
+                  "BT-69 虚构领取单。H1：领取凭证 B72 记两件，标签分别是 B72-1、B72-2。",
+                  "H2：暂存区的两件都贴 B72-1。题设规定每件须有匹配且唯一的标签；仅件数相符不能交付。",
+                  "H3 原版没有第二件的异常登记。变式只换 H3：值班主管附上签名更正记录，明确第二件原标签印错，并有可核的 B72-2 身份。两版都没有实际交付记录。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构场所写清接收与标记与搬送路线与交接与登记方法、件数与物主与标签与寄存牌与包装状态、破损与遗留物品与未决事项，以及需要复核与需要授权的环节。",
-                  "在 60—90 分钟内完成，允许参考公开的通用服务与搬运安全资料，但不使用真实宾客信息。",
-                  "记录中把件数与物主与标签、搬送路线与时间、交接人、破损与遗留物品分开书写，并标注需复核的部分。"
+                  "对照件数、标签和更正记录。",
+                  "分别写两版可否提交交付复核，列待核项。",
+                  "交一页交接，注明 H1–H3 和接手人。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先核对场所与班次与职责范围，再按规程接收与搬送与交接，最后写明结论与未决事项。",
-                  "把件数与物主与标签、搬送路线与时间、交接人、破损与遗留物品分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核件数与归属核对与交接结论，并保留修改理由。"
+                  "先独立交两版。",
+                  "区分账目相符和已经交付。",
+                  "交卷后打开「BT-69 参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成搬送、收费或安保指令，也不能替代雇主规程与职责授权。",
-                  "不得在练习中接触真实宾客或操作真实收费与安保与寄存系统；涉及贵重物品与现金与安保处置的作业须由有职责人员按规程处理。",
-                  "练习不替代雇主规程与职责授权，也不构成任何搬送、收费或安保指令。"
+                  "仅用虚构纸面记录。",
+                  "不接触真实行李或客户信息。",
+                  "不试用设备或进入限制区域。"
                 ]
               }
             ]
           },
           "id": "baggage-porters-and-bellhops.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "bt69-editor"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "BT-69：行李领取交接单",
           "type": "cards"
         },
         {
@@ -29418,37 +29230,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：学历、职业培训、用人单位岗前培训、相关工作经验、语言与沟通能力、急救与消防与场所安全培训、以及岗位职责与收费与安保授权。",
-                  "每项都注明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「职业培训」「岗前培训」「相关经验」「岗位职责」「收费与安保授权」分列，避免混为一谈。"
+                  "列两版标签核对。",
+                  "引 H1–H3。",
+                  "写证据缺口。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的作业说明，重点检查件数与物主核对、搬送路线与安全、当面交接、破损与遗留物品登记是否逐项写清。",
-                  "把复核意见与修改理由一并保留，作为判断你能否接受复核的证据。"
+                  "交一页交接。",
+                  "标接手角色。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明场所与班次、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给同伴与主管复核，并保留复核意见与修改理由。"
+                  "区分记录核对与交付。",
+                  "写变式只换 H3。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用登记或收费或调度工具，须注明工具名称与版本、输入与依据与人工修改理由。",
-                  "宾客与住客信息与行程记录处理须先取得授权，并记录访问范围、保留期限与销毁约定。"
+                  "交卷后核参考。",
+                  "全程用虚构材料。"
                 ]
               }
             ]
           },
           "id": "baggage-porters-and-bellhops.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "bt69-editor"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29498,7 +29310,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.interview-probation.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "title": "面试与试用期考察",
@@ -29512,57 +29323,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与边界阅读：读 O*NET 39-6011.00 与 OSHA 行李搬运人体工学指引，写清接收与搬送、交接与登记、职责与授权的区别。",
-                  "产出：一页术语与流程对照表，标注每项的来源。"
+                  "读 H1–H3。",
+                  "证据索引"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "接收与标记练习：为虚构场所写清件数与物主核对、标签与寄存牌与登记要点。",
-                  "产出：一份接收与标记记录。"
+                  "列件数与预期标签。",
+                  "领取条件"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "搬送与安全练习：为虚构路线写清搬送方式与行李车使用与坡道与门口与电梯安全要点。",
-                  "产出：一份搬送与安全说明。"
+                  "核 H2 两件记录。",
+                  "标签对照"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "交接与登记练习：为虚构场景写清当面交接与件数清点与破损与遗留物品登记方法。",
-                  "产出：一份交接与登记记录。"
+                  "比较两版 H3。",
+                  "更正记录"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "收费与托运练习：为虚构价目写清收费小票与行李保险单据与称重与计费与异常处理。",
-                  "产出：一份收费与托运说明。"
+                  "写待核与接手。",
+                  "交接草稿"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的件数与归属核对与交接结论，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "先交两版领取单与一页交接。",
+                  "两版与交接"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "打开「BT-69 参考解（交卷后再打开）」。",
+                  "复核差异"
                 ]
               }
             ]
           },
           "id": "baggage-porters-and-bellhops.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "bt69-editor"
           ],
           "title": "七日体验产出",
           "type": "timeline"
@@ -29572,18 +29383,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你完成了七日练习并发现自己在件数与物主核对与搬送与交接与登记上可持续投入。",
-              "继续：你能接受户外与轮班与较大体力负荷，并愿意按规程记录与接受复核。",
-              "暂停：你只想尽快完工，不愿逐件核对件数与物主。",
-              "暂停：你把「看起来没错」当作已完成交接，或在涉及贵重物品与现金与安保处置上跳过规程与授权。",
-              "换方向：你更愿意做信息与安排服务，可比较礼宾员方向。",
-              "换方向：你更愿意做登记与结算，可比较酒店前台文员方向。",
-              "信息不足：如果你还没有任何有监督的搬送或交接经历，先补这两项再判断。"
+              "继续：能逐件核标签。",
+              "继续：能写清待核和接手。",
+              "暂停：容易只看件数。",
+              "暂停：分不清记录相符和交付完成。",
+              "比较酒店前台。",
+              "比较场站客运协助。",
+              "真实岗位另核。"
             ]
           },
           "id": "baggage-porters-and-bellhops.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "bt69-editor"
           ],
           "title": "七日后的判断",
           "type": "list"
@@ -29685,14 +29496,16 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本轮O*NET全国培训目录显示No training programs were found nationwide，认证目录显示No certifications were found；仅目录检索结果，不证明所有培训、雇主要求或法定准入均不存在。 学历、训练、证书和岗位权限分别核。",
-              "新聘学历需求问卷：42%要求低于高中、41%高中或同等、9%部分大学无学位，非在岗学历构成。Zone1–2/SVP<6是一般职业准备分组，描述数天至一年在职培训及不同程度经验，非每岗固定培训或无需经验的保证。 OSHA行李eTool面向航空售票、分拣和机坪处理，识别举升、推拉、反复动作与不良姿势风险；售票柜台建议重件标记、请他人或用辅助设备协助、减少举升并轮换任务。酒店可作有边界搬运参考，需按场所设备规程另核，eTool不新增法定义务。",
-              "2022职业分类大典：4-03-01-01前厅服务员含宾客行李员工种，职责含提运行李、物品保管、问询及收费结账；4-02-01-04铁路行包运输服务员含铁路行李员，4-02-02-03道路客运服务员含寄存及受理交接装卸发还行李，4-02-03-03港口客运员含港口行李员，4-02-04-02航空运输地面服务员含行李进出港中转。相关职责参考，非与美国39-6011整体一对一互认或准入许可。 中国《消费者权益保护法实施条例》2024-07-01施行：第7条规定经营者保障人身财产及场所设施安全，第9/10条要求真实全面信息与明示服务价格，第23条保护个人信息并禁止过度收集。义务主体为经营者，非所有行李员统一准入证或具体处置授权。",
-              "操作建议：入职前把「学历／职业培训／用人单位岗前培训／相关经验／岗位职责与授权／安全与消防培训」分列成一张表，逐项写明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。"
+              "BLS 表 1.2 对 39-6011 的典型分类为高中或同等学历、通常无需相关经验、短期在岗培训。大陆雇主分别核岗位职责、轮班、语言、培训和行李交付权限。",
+              "江苏人社公开的国家职业标准目录将前厅服务员 4-03-01-01 与铁路行包运输服务员（铁路行李员）4-02-01-04 分列。目录可用于查找相邻职业；不能据此把大陆酒店和交通场站合并为一个统计职业或统一入职条件。",
+              "核对现场培训与交付权限。",
+              "受限区域另核准入。"
             ]
           },
           "id": "baggage-porters-and-bellhops.path.credential-boundary.1",
           "source_refs": [
+            "ep-table",
+            "front-desk-rail-catalog",
             "bls",
             "census",
             "nist",
@@ -29709,15 +29522,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮未引用具体雇主招聘，以下准备与路径为编辑候选；O*NET报告职位名不等于开放岗位、中文招聘普遍门槛或晋升概率。",
-              "核对清单：岗位属于酒店与住宿、交通枢纽与运输还是会议与活动场所；是否需要岗前培训或职责与收费与安保授权；班次与轮班与小费安排；以及搬运与消防与场所安全要求与贵重物品处置规则。"
+              "安徽财贸职业学院就业信息 2026-04-21 刊载上海浦东机场假日酒店和洲际酒店的行李员实习岗位 6 个。第 1 至第 6 月 2,800 元/月，第 7 月起 3,000 元/月；公告另列试用期 4,000–4,500 元/月。",
+              "弥勒市人民政府 2026 年第七期招聘汇编刊载昆明君悦酒店 5 个「前台接待员（礼宾部行李员）」岗位：大专及以上、英文良好，3,000–3,800 元/月加提成。工作地点在昆明；标题含前台接待，不能看作纯行李员工资。"
             ]
           },
           "id": "baggage-porters-and-bellhops.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
             "onet"
           ],
           "title": "招聘信息核对",
@@ -29756,9 +29568,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -29773,7 +29582,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29788,7 +29596,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29817,7 +29624,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29846,7 +29652,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29875,7 +29680,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29964,7 +29768,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30035,7 +29838,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30064,7 +29866,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30079,7 +29880,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30108,7 +29908,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30137,7 +29936,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30152,7 +29950,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30181,7 +29978,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30210,7 +30006,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30225,7 +30020,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30254,7 +30048,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30283,7 +30076,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30298,7 +30090,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30327,7 +30118,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30356,7 +30146,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30371,7 +30160,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.51",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30400,7 +30188,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30429,7 +30216,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30444,7 +30230,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30473,7 +30258,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.58",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30502,7 +30286,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.60",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30517,7 +30300,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30546,7 +30328,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.63",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30575,7 +30356,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.65",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30590,7 +30370,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.66",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30619,7 +30398,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30648,7 +30426,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.70",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30663,7 +30440,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.71",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30692,7 +30468,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.73",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30721,7 +30496,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30736,7 +30510,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.76",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30765,7 +30538,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.78",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30794,7 +30566,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30809,7 +30580,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30838,7 +30608,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.83",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30867,7 +30636,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30882,7 +30650,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.86",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30927,16 +30694,16 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET本职业2025—2035就业趋势",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 39-6011.00 行业分布",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "国家统计局2025行业年平均工资",
@@ -31002,9 +30769,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -31014,12 +30778,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国39-6011本职业：2025就业29,200人，2035预测28,400人，2025—2035增长取整为-3%（下降），年均空缺3,800个。空缺含替补需求，不是十年净增、个人录用概率或生成式AI因果测量。"
+              "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。"
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -31048,7 +30812,7 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -31058,12 +30822,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国39-6011本职业：2025就业29,200人，2035预测28,400人，2025—2035增长取整为-3%（下降），年均空缺3,800个。空缺含替补需求，不是十年净增、个人录用概率或生成式AI因果测量。"
+              "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。"
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -31101,11 +30865,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "美国行李员 39-6011"
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.14",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -31115,12 +30880,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "29,200人（2025，美国本职业）"
+              "29,200 个岗位"
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -31149,7 +30914,7 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -31159,12 +30924,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国39-6011本职业：2025就业29,200人，2035预测28,400人，2025—2035增长取整为-3%（下降），年均空缺3,800个。空缺含替补需求，不是十年净增、个人录用概率或生成式AI因果测量。 BLS职业利用因素表对航空运输支持业488100说明旅客偏好变化与自助行李投放机减少skycaps需求，对赌场酒店721120说明缩减非必要服务降低该职业占比；为行业内占比预测理由，非生成式AI采用率、已测减员幅度或全部酒店的替代结论。"
+              "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。"
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -31174,12 +30939,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "-3%是取整总体预测，可描述群体变化，非个人录用概率或中国增长；行业利用因素说明非AI实测。"
+              "预计年均空缺含替补，和十年净变化分列。"
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -31203,11 +30968,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "美国行李员 39-6011"
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.21",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -31217,12 +30983,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "-3%；年均空缺3,800个（2025—2035）"
+              "−3.0%，年均约 3,800 个空缺"
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -31340,7 +31106,7 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -31397,7 +31163,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31412,7 +31177,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31441,7 +31205,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31456,7 +31219,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31485,7 +31247,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31500,7 +31261,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31529,7 +31289,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31544,7 +31303,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31573,7 +31331,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31588,7 +31345,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31617,7 +31373,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31660,7 +31415,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31675,7 +31429,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31704,7 +31457,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31719,7 +31471,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31754,7 +31505,7 @@
               {
                 "answer": "在交通枢纽为旅客、或在酒店及类似场所为客人搬运行李与物品：接收并标记行李与寄存牌、用手或行李车在客房与装运区与车辆与航站楼之间搬运箱包与行李与包裹、迎送宾客并陪同至客房、提供指引与交通与设施信息、递送留言与客房服务订餐并代办杂务、填写收费小票与记录并受理托运与计费，部分岗位还协助场所秩序与安保。",
                 "id": "baggage-porters-and-bellhops.faq.1",
-                "question": "行李搬运员行李员每天做什么？",
+                "question": "行李员每天做什么？",
                 "question_key": "career.faq.baggage-porters-and-bellhops.1"
               },
               {
@@ -31764,10 +31515,13 @@
                 "question_key": "career.faq.baggage-porters-and-bellhops.2"
               },
               {
-                "answer": "看可复核的产出：能否按规程完成接收与搬送与交接并如实登记、能否按现场核对与实物确认判断归属与破损、能否在归属不明或超出授权时停下来升级。兴趣代码 RCS 与工作风格只说明方向接近，不能替代这些实作证据。",
+                "answer": "到 09 做 BT-69，把件数、标签和异常交接分开。",
                 "id": "baggage-porters-and-bellhops.faq.3",
-                "question": "怎样判断自己适不适合做行李搬运员行李员？",
-                "question_key": "career.faq.baggage-porters-and-bellhops.3"
+                "question": "怎样判断自己适不适合做行李员？",
+                "question_key": "career.faq.baggage-porters-and-bellhops.3",
+                "source_refs": [
+                  "bt69-editor"
+                ]
               },
               {
                 "answer": "AI 与自动化可以改变登记与收费录入、寄存与调度信息检索、以及交接与遗留物品记录的整理；但件数与物主核对、现场搬送与当面交接、破损与纠纷判断仍由本人按雇主规程承担。任务自动化程度不等于岗位数量变化。",
@@ -31782,10 +31536,14 @@
                 "question_key": "career.faq.baggage-porters-and-bellhops.5"
               },
               {
-                "answer": "分六类核对：学历；职业培训；用人单位岗前培训；相关工作经验；语言与沟通能力；急救与消防与场所安全培训。O*NET 显示该职业全国未登记培训项目，也未登记国家认证，也不存在统一的联邦准入证书；任何一项都不能由另一项自动推出，实际要求以雇主规定为准。",
+                "answer": "BLS 表 1.2 对 39-6011 的典型分类为高中或同等学历、通常无需相关经验、短期在岗培训。大陆雇主分别核岗位职责、轮班、语言、培训和行李交付权限。",
                 "id": "baggage-porters-and-bellhops.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.baggage-porters-and-bellhops.6"
+                "question_key": "career.faq.baggage-porters-and-bellhops.6",
+                "source_refs": [
+                  "ep-table",
+                  "front-desk-rail-catalog"
+                ]
               },
               {
                 "answer": "工作情境显示 59% 持续或几乎持续站立、42% 持续或几乎持续行走或跑动、91% 每天在户外并暴露于各种天气、85% 每天在封闭车辆内或操作封闭设备；反复举升与推拉与搬运行李需要一定体力与正确的搬运姿势，OSHA 指引建议先评估重量与路线并尽量使用行李车。",
@@ -31800,27 +31558,38 @@
                 "question_key": "career.faq.baggage-porters-and-bellhops.8"
               },
               {
-                "answer": "O*NET 展示的 BLS 数据按本职业 39-6011.00 口径给出 2024 年在岗约 32,500 人、2024—2034 年变化为「下降（-1% 或更低）」、预测期职位空缺约 4,600（多来自替换需求）；转向可比较礼宾员、引座员、寄存与衣帽间服务员、娱乐与休闲服务员、乘客服务员、停车服务员与快递员等，但都需要补充相应训练与岗位授权。",
+                "answer": "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。",
                 "id": "baggage-porters-and-bellhops.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.baggage-porters-and-bellhops.9"
+                "question_key": "career.faq.baggage-porters-and-bellhops.9",
+                "source_refs": [
+                  "ep-table"
+                ]
               },
               {
-                "answer": "美国工资分位是本职业 39-6011.00 的 2025 年 OEWS 口径；中国大陆未取得与该职业精确对应的公开职业条目与全国工资分布，本页不发布中国大陆职业工资数值，也不以行业或岗位大类替代。两边的职业范围、统计制度、资料期与小费与轮班结构都不同，不能把美元换算成人民币，也不应相信缺少样本与岗位范围的报价。",
+                "answer": "美国是 39-6011 全国雇员工资分位；上海实习、试用与昆明复合岗的报价只属于各公告。不能按汇率互换。",
                 "id": "baggage-porters-and-bellhops.faq.10",
                 "question": "美国工资与中国大陆工资为什么不能互相换算？",
-                "question_key": "career.faq.baggage-porters-and-bellhops.10"
+                "question_key": "career.faq.baggage-porters-and-bellhops.10",
+                "source_refs": [
+                  "onet-wages",
+                  "shanghai-pudong-hotel-2026",
+                  "kunming-hotel-2026"
+                ]
+              },
+              {
+                "answer": "原版两件数量相符，但 B72-1 重复、B72-2 未核。暂不交付，交值班主管核异常。变式只补 H3，有签名和可追溯更正，可把记录送交付复核。两版都未实际交付。自核：逐件标签、异常凭证、接手人、交付状态。",
+                "id": "baggage-porters-and-bellhops.faq.11",
+                "question": "BT-69 参考解（交卷后再打开）",
+                "question_key": "career.faq.baggage-porters-and-bellhops.q11",
+                "source_refs": [
+                  "bt69-editor"
+                ]
               }
             ]
           },
           "id": "baggage-porters-and-bellhops.sources.faq.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "faq"
@@ -31830,15 +31599,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试编辑核对：当前O*NET本职业职责、工资、行业、招聘软件、预测与目录；BLS行业利用因素、OSHA航空搬运、消费保护条例、中国2022相关工种及2025行业工资，区分统计、法规、建议和缺口。"
+              "费马测试编辑部"
             ]
           },
           "id": "baggage-porters-and-bellhops.sources.source-card.1",
           "source_refs": [
+            "ep-table",
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
+            "bt69-editor",
             "onet",
             "bls",
             "oews",
-            "onet-trends",
             "bls-utilization",
             "r2-pay-3",
             "health",
@@ -31852,15 +31624,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要资料：O*NET39-6011详情、工资、趋势、行业、Hot及目录；BLS利用因素本职业两行业；OSHA航空行李eTool；消费者保护实施条例7/9/10/23；2022职业分类大典和NBS2025行业工资。"
+              "美国就业看 BLS，工资与行业表按各自来源。大陆招聘样本分别链接原公告。"
             ]
           },
           "id": "baggage-porters-and-bellhops.sources.source-card.2",
           "source_refs": [
+            "ep-table",
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
+            "bt69-editor",
             "onet",
             "bls",
             "oews",
-            "onet-trends",
             "bls-utilization",
             "r2-pay-3",
             "health",
@@ -31874,15 +31649,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：工资2025 OEWS、软件2025美国招聘、就业2025及2025—2035、行业2025；中国分类2022、行业工资2025、消保实施条例2024-07-01施行。本轮读原文2026-10-09，未读旧入口不刷新为全文已核。"
+              "预测期 2025—2035；大陆为 2026 年的历史公告。"
             ]
           },
           "id": "baggage-porters-and-bellhops.sources.source-card.3",
           "source_refs": [
+            "ep-table",
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
+            "bt69-editor",
             "onet",
             "bls",
             "oews",
-            "onet-trends",
             "bls-utilization",
             "r2-pay-3",
             "health",
@@ -31896,15 +31674,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "边界：中国宾客行李员等为相关工种，非39-6011整体互认；行业均值非职业工资；航空OSHA指引非全部酒店强制程序，旅客打包折页非员工安全手册；目录未检索到不证明全部培训或准入不存在；AI建议非已测采用或岗位消失预测。"
+              "实际行李交付、受限区和设备使用按雇主制度。BT-69 只用虚构记录。"
             ]
           },
           "id": "baggage-porters-and-bellhops.sources.source-card.4",
           "source_refs": [
+            "ep-table",
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
+            "bt69-editor",
             "onet",
             "bls",
             "oews",
-            "onet-trends",
             "bls-utilization",
             "r2-pay-3",
             "health",
@@ -31936,7 +31717,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -31948,16 +31729,16 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "查看行李搬运员行李员职业页面",
+                "entity": "查看行李员职业页面",
                 "id": "navigation-6",
                 "relation": "career.self",
                 "url": "/zh/career/jobs/baggage-porters-and-bellhops"
@@ -32018,18 +31799,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official outlook",
+                  "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。",
                   "2025及2025—2035；访问2026-10-09"
                 ],
                 "evidence_type": "official outlook",
                 "id": "ep",
-                "limitation": "本职业总体就业预测，空缺为年均，非AI因果。",
+                "limitation": "预计空缺不是录用机会。",
                 "market": "美国",
-                "name": "O*NET 39-6011.00 职业摘要（就业与预测字段）",
-                "period": "2025及2025—2035",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：行李员 39-6011",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32039,7 +31820,7 @@
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "oews",
-                "limitation": "OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等。排除自雇、未注册企业所有者合伙人及无酬家庭劳动者；受雇承包企业员工不等于自雇。 本职业五分位非起薪。",
+                "limitation": "OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等。排除自雇、非公司制企业的所有者和合伙人及无酬家庭劳动者；受雇承包企业员工不等于自雇。 本职业五分位非起薪。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年工资分位（39-6011.00）",
                 "period": "May 2025（OEWS）；访问 2026-09-15",
@@ -32073,10 +31854,10 @@
                 "id": "cnclass",
                 "limitation": "用于说明中国大陆职业分类的官方入口与中类口径；共享分类入口不等于本职业的精确映射，本页不据此声称中国等价职业。",
                 "market": "中国大陆",
-                "name": "人力资源社会保障部《中华人民共和国职业分类大典（2022 年版）》数字职业标识发布",
+                "name": "人社部：2022 年版职业分类大典发布信息",
                 "period": "2022-10-28 发布；访问 2026-09-15",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "shared_official_identity_entry",
+                "scope": "contextual",
                 "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
               },
               {
@@ -32114,18 +31895,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official outlook",
+                  "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。",
                   "2025及2025—2035；访问2026-10-09"
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
-                "limitation": "本职业总体就业预测，空缺为年均，非AI因果。",
+                "limitation": "预计空缺不是录用机会。",
                 "market": "美国",
-                "name": "O*NET 39-6011.00 职业摘要（就业与预测字段）",
-                "period": "2025及2025—2035",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：行李员 39-6011",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32167,12 +31948,12 @@
                 ],
                 "evidence_type": "institutional task research",
                 "id": "ilo",
-                "limitation": "提供任务暴露与岗位转型的全球研究口径，不给该职业采用率或替代日期。",
+                "limitation": "全球职业暴露研究，不是本职业采用率或替代率。",
                 "market": "全球",
                 "name": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
                 "period": "2025 年；访问 2026-09-15",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -32185,7 +31966,7 @@
                 "id": "editor",
                 "limitation": "美国职业摘要及群体资料；本页编辑核对建议不等于该来源发布的效果、资格或招聘证明。教育问卷表示新聘履职所需教育，不能当在岗学历构成或中国统一要求。",
                 "market": "美国",
-                "name": "O*NET 行李搬运员行李员职业摘要（本页引用字段）",
+                "name": "O*NET 行李员职业摘要（本页引用字段）",
                 "period": "访问 2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -32279,7 +32060,7 @@
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "r2-pay-1",
-                "limitation": "OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等。排除自雇、未注册企业所有者合伙人及无酬家庭劳动者；受雇承包企业员工不等于自雇。 本职业五分位非起薪。",
+                "limitation": "OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等。排除自雇、非公司制企业的所有者和合伙人及无酬家庭劳动者；受雇承包企业员工不等于自雇。 本职业五分位非起薪。",
                 "market": "美国",
                 "name": "O*NET 39-6011.00 全国工资分位（时薪与年薪分位）",
                 "period": "May 2025（OEWS）；访问 2026-09-15",
@@ -32290,17 +32071,17 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "industry distribution",
-                  "2025行业分布；访问2026-10-09"
+                  "O*NET 39-6011.00 行业子表列住宿和餐饮 56%、运输和仓储 17%、其他服务（公共行政除外）13%、其他 14%。该子表未单列统计年份。",
+                  "行业子表不标统计年份。"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "2025美国本职业行业分布：住宿餐饮56%、运输仓储17%、其他服务业（公共管理除外）13%、其他14%（含房地产租赁）；非中国占比或行业工资。",
+                "limitation": "O*NET 39-6011.00 行业子表列住宿和餐饮 56%、运输和仓储 17%、其他服务（公共行政除外）13%、其他 14%。该子表未单列统计年份。",
                 "market": "美国",
-                "name": "O*NET 39-6011.00 行业分布",
-                "period": "2025行业分布",
+                "name": "O*NET 行李员行业子表",
+                "period": "子表未单列统计年份",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/39-6011.00"
               },
               {
@@ -32313,10 +32094,10 @@
                 "id": "r2-pay-3",
                 "limitation": "OSHA行李eTool面向航空售票、分拣和机坪处理，识别举升、推拉、反复动作与不良姿势风险；售票柜台建议重件标记、请他人或用辅助设备协助、减少举升并轮换任务。酒店可作有边界搬运参考，需按场所设备规程另核，eTool不新增法定义务。",
                 "market": "美国",
-                "name": "OSHA《Baggage Handling eTool》（行李搬运人体工学指引）",
+                "name": "OSHA：航空行李搬运 eTool",
                 "period": "访问 2026-09-15",
                 "publisher": "Occupational Safety and Health Administration（美国）",
-                "scope": "related_task_proxy",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/etools/baggage-handling"
               },
               {
@@ -32327,7 +32108,7 @@
                 ],
                 "evidence_type": "certification information",
                 "id": "census",
-                "limitation": "本轮O*NET全国培训目录显示No training programs were found nationwide，认证目录显示No certifications were found；仅目录检索结果，不证明所有培训、雇主要求或法定准入均不存在。",
+                "limitation": "查询目录可作为线索。实际培训、授权或准入要求以雇主和适用规则为准。",
                 "market": "美国",
                 "name": "O*NET 39-6011.00 认证发现（行业认证）",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32338,17 +32119,17 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "institutional traveler packing guidance",
-                  "访问 2026-09-15"
+                  "航空旅客包装与托运行李背景。",
+                  "航空旅客包装与托运行李背景。"
                 ],
                 "evidence_type": "institutional traveler packing guidance",
                 "id": "msresearch",
-                "limitation": "实际为2页旅客行李打包防伤折页，非航空行李搬运工安全手册；提醒轮子不消除举升风险，没有所有岗位通用安全重量，不能当员工操作授权。",
+                "limitation": "面向航空旅客的行李包装建议，非酒店岗位训练或作业授权。",
                 "market": "美国",
-                "name": "OSHA托管NSC《旅行行李打包与避免伤害》折页",
+                "name": "OSHA 收录：航空行李包装材料",
                 "period": "访问 2026-09-15",
                 "publisher": "Occupational Safety and Health Administration（美国）",
-                "scope": "related_task_proxy",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/sites/default/files/2019-11/nsc_airline_packingbrochure.pdf"
               },
               {
@@ -32359,7 +32140,7 @@
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "onet-wages",
-                "limitation": "OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等。排除自雇、未注册企业所有者合伙人及无酬家庭劳动者；受雇承包企业员工不等于自雇。 本职业五分位非起薪。",
+                "limitation": "OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等。排除自雇、非公司制企业的所有者和合伙人及无酬家庭劳动者；受雇承包企业员工不等于自雇。 本职业五分位非起薪。",
                 "market": "美国",
                 "name": "O*NET 全国工资分位页面（39-6011.00）",
                 "period": "May 2025（OEWS）；访问 2026-09-15",
@@ -32375,7 +32156,7 @@
                 ],
                 "evidence_type": "certification information",
                 "id": "archivists",
-                "limitation": "本轮O*NET全国培训目录显示No training programs were found nationwide，认证目录显示No certifications were found；仅目录检索结果，不证明所有培训、雇主要求或法定准入均不存在。",
+                "limitation": "查询目录可作为线索。实际培训、授权或准入要求以雇主和适用规则为准。",
                 "market": "美国",
                 "name": "O*NET 39-6011.00 认证发现（国家认证）",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32386,7 +32167,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
+                  "见原页所列范围。",
                   "不冒称完整职业或个案验证"
                 ],
                 "evidence_type": "官方原文相关章节",
@@ -32410,26 +32191,10 @@
                 "limitation": "国家统计局工资总额可包括计时、计件、奖金、津贴补贴和加班工资，不能一概排除提成与浮动报酬；须按款项性质核计入范围。年平均工资非税后到手、门店经营利润或本职业分位。",
                 "market": "中国大陆",
                 "name": "国家统计局《关于工资总额组成的规定》（工资口径说明）",
-                "period": "1990年工资总额组成规定；现网页访问2026-10-09",
+                "period": "1990 年规定",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
-              },
-              {
-                "accessed_at": "2026-10-09",
-                "details": [
-                  "official outlook",
-                  "2025及2025—2035；访问2026-10-09"
-                ],
-                "evidence_type": "official outlook",
-                "id": "onet-trends",
-                "limitation": "美国39-6011本职业：2025就业29,200人，2035预测28,400人，2025—2035增长取整为-3%（下降），年均空缺3,800个。空缺含替补需求，不是十年净增、个人录用概率或生成式AI因果测量。",
-                "market": "美国",
-                "name": "O*NET本职业就业趋势",
-                "period": "2025及2025—2035",
-                "publisher": "O*NET / BLS",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/39-6011.00"
+                "url": "https://www.stats.gov.cn/gk/tjfg/xzfg/202302/t20230206_1901829.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32457,10 +32222,10 @@
                 "id": "osha-ticket",
                 "limitation": "OSHA行李eTool面向航空售票、分拣和机坪处理，识别举升、推拉、反复动作与不良姿势风险；售票柜台建议重件标记、请他人或用辅助设备协助、减少举升并轮换任务。酒店可作有边界搬运参考，需按场所设备规程另核，eTool不新增法定义务。",
                 "market": "美国",
-                "name": "OSHA航空售票柜台行李处理",
+                "name": "OSHA：航空行李办理柜台",
                 "period": "当前公开指引",
                 "publisher": "Occupational Safety and Health Administration",
-                "scope": "related_task_proxy",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/etools/baggage-handling/ticket-counter"
               },
               {
@@ -32473,10 +32238,10 @@
                 "id": "cn-class-2022",
                 "limitation": "2022职业分类大典：4-03-01-01前厅服务员含宾客行李员工种，职责含提运行李、物品保管、问询及收费结账；4-02-01-04铁路行包运输服务员含铁路行李员，4-02-02-03道路客运服务员含寄存及受理交接装卸发还行李，4-02-03-03港口客运员含港口行李员，4-02-04-02航空运输地面服务员含行李进出港中转。相关职责参考，非与美国39-6011整体一对一互认或准入许可。",
                 "market": "中国大陆",
-                "name": "2022职业分类大典：宾客及交通行李服务相关工种",
+                "name": "中华人民共和国职业分类大典（2022 年版）",
                 "period": "2022年版",
                 "publisher": "人社部等三部门；锡林郭勒盟政府公开PDF",
-                "scope": "related_occupation_proxy",
+                "scope": "contextual",
                 "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
               },
               {
@@ -32634,11 +32399,86 @@
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "name": "FermatMind AI 任务影响估算估算方法 v1",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ep-table",
+                "limitation": "BLS 表 1.2：美国 39-6011 在 2025 年有 29,200 个岗位，2035 年预计 28,400 个，预计下降 3.0%，原表按千人显示净变化 −0.9。显示值分别舍入，不能从两端反算精确净变化。预计年均 3,800 个空缺，自雇占 1.7%。2025 年 5 月年薪中位数 37,080 美元。",
+                "market": "美国",
+                "name": "BLS 表 1.2：行李员 39-6011",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "安徽财贸职业学院就业信息 2026-04-21 刊载上海浦东机场假日酒店和洲际酒店的行李员实习岗位 6 个。第 1 至第 6 月 2,800 元/月，第 7 月起 3,000 元/月；公告另列试用期 4,000–4,500 元/月。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "shanghai-pudong-hotel-2026",
+                "limitation": "安徽财贸职业学院就业信息 2026-04-21 刊载上海浦东机场假日酒店和洲际酒店的行李员实习岗位 6 个。第 1 至第 6 月 2,800 元/月，第 7 月起 3,000 元/月；公告另列试用期 4,000–4,500 元/月。",
+                "market": "中国大陆",
+                "name": "安徽财贸职业学院：上海浦东机场酒店实习招聘",
+                "period": "2026-04-21",
+                "publisher": "安徽财贸职业学院",
+                "scope": "recruitment_proxy",
+                "url": "https://www.afc.edu.cn/whcyxy/info/1115/7102.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "弥勒市人民政府 2026 年第七期招聘汇编刊载昆明君悦酒店 5 个「前台接待员（礼宾部行李员）」岗位：大专及以上、英文良好，3,000–3,800 元/月加提成。工作地点在昆明；标题含前台接待，不能看作纯行李员工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "kunming-hotel-2026",
+                "limitation": "弥勒市人民政府 2026 年第七期招聘汇编刊载昆明君悦酒店 5 个「前台接待员（礼宾部行李员）」岗位：大专及以上、英文良好，3,000–3,800 元/月加提成。工作地点在昆明；标题含前台接待，不能看作纯行李员工资。",
+                "market": "中国大陆",
+                "name": "弥勒市人民政府：昆明君悦酒店历史招聘",
+                "period": "2026",
+                "publisher": "弥勒市人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hhml.gov.cn/info/35871/908402.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "江苏人社公开的国家职业标准目录将前厅服务员 4-03-01-01 与铁路行包运输服务员（铁路行李员）4-02-01-04 分列。目录可用于查找相邻职业；不能据此把大陆酒店和交通场站合并为一个统计职业或统一入职条件。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "front-desk-rail-catalog",
+                "limitation": "江苏人社公开的国家职业标准目录将前厅服务员 4-03-01-01 与铁路行包运输服务员（铁路行李员）4-02-01-04 分列。目录可用于查找相邻职业；不能据此把大陆酒店和交通场站合并为一个统计职业或统一入职条件。",
+                "market": "中国大陆",
+                "name": "江苏人社：国家职业标准目录",
+                "period": "2022-05-19",
+                "publisher": "江苏省人力资源和社会保障厅",
+                "scope": "contextual",
+                "url": "https://jshrss.jiangsu.gov.cn/art/2022/5/19/art_85534_10454317.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "本页虚构纸面交接。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "bt69-editor",
+                "limitation": "本页虚构纸面交接。",
+                "market": "虚构练习",
+                "name": "FermatMind BT-69：行李领取交接单",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": null
               }
             ]
           },
@@ -32773,7 +32613,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "type": "prose"
         },
-        "heading": "行李搬运员行李员的工作方向与相邻职业怎么比较？",
+        "heading": "行李员的工作方向与相邻职业怎么比较？",
         "intro": {
           "$item": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.10",
           "block": "direction-comparison",
@@ -33392,7 +33232,7 @@
             }
           }
         ],
-        "heading": "AI 会取代行李搬运员行李员吗？",
+        "heading": "AI 会取代行李员吗？",
         "method_cards": [
           {
             "含义": {
@@ -33419,7 +33259,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "概念": "AI 会减少行李搬运员行李员岗位吗？"
+            "概念": "AI 会减少行李员岗位吗？"
           }
         ],
         "questions": [
@@ -33443,7 +33283,7 @@
               "entry": "link-13",
               "field": "url"
             },
-            "问题": "行李搬运员行李员会被 AI 取代吗？"
+            "问题": "行李员会被 AI 取代吗？"
           },
           {
             "回答": {
@@ -33979,7 +33819,7 @@
           "type": "prose"
         },
         "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为行李搬运员行李员？教育、资格与职业发展路径",
+        "heading": "怎样成为行李员？教育、资格与职业发展路径",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "baggage-porters-and-bellhops.path.career-path-block.21",
@@ -34512,7 +34352,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "行李搬运员行李员的工作可以分成哪几类？",
+            "question": "行李员的工作可以分成哪几类？",
             "table": {
               "rows": [
                 {
@@ -34569,7 +34409,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "行李搬运员行李员和相邻岗位的边界在哪里？",
+            "question": "行李员和相邻岗位的边界在哪里？",
             "table": {
               "rows": [
                 {
@@ -34837,7 +34677,7 @@
           "copy_key": "career.item.career-risk-cards",
           "type": "prose"
         },
-        "heading": "行李搬运员行李员的工作有哪些压力、风险与职业边界？",
+        "heading": "行李员的工作有哪些压力、风险与职业边界？",
         "risks": [
           {
             "affected_roles": {
@@ -35514,11 +35354,11 @@
             "type": "prose"
           },
           "ui": {
-            "ai_heading": "AI 会影响行李搬运员行李员的工资吗？",
+            "ai_heading": "AI 会影响行李员的工资吗？",
             "driver_heading": "哪些行业与岗位可能涉及这个职业？",
             "official_heading": "中国大陆薪资参考（行业代理口径，非本职业工资）",
             "scenario_caption": "准备类别、待核岗位方向与核对事项（编辑整理，非招聘分布或薪资统计）",
-            "scenario_heading": "行李搬运员行李员：中国大陆准备与条件核对（编辑建议）",
+            "scenario_heading": "行李员：中国大陆准备与条件核对（编辑建议）",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "准备或条件类别",
             "scenario_value_label": "待核岗位方向"
@@ -35730,14 +35570,14 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国行李搬运员行李员工资？",
+        "factors_heading": "哪些因素会影响美国行李员工资？",
         "growth": {
           "$item": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国行李搬运员行李员工资多少？",
+        "heading": "美国行李员工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -35956,7 +35796,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "行李搬运员行李员适合什么样的人？"
+        "title": "行李员适合什么样的人？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -35979,9 +35819,9 @@
         }
       },
       "hero": {
-        "h1": "行李搬运员行李员",
-        "quick_answer": "行李搬运员行李员在交通枢纽为旅客、或在酒店及类似场所为客人搬运行李与物品：接收并标记行李与寄存牌、用手或行李车在客房与装运区与车辆与航站楼之间搬运箱包与行李与包裹、迎送宾客并陪同至客房、提供指引与交通与设施信息、递送留言与客房服务订餐并代办杂务；其工作不等于贵重物品保管或酒店前台结算，也不代替安保与场所安全职责，并在物品信息或归属不清以及超出本人授权时停止升级。",
-        "title": "行李搬运员行李员"
+        "h1": "行李员",
+        "quick_answer": "酒店和交通场站行李员接收、标记、搬运行李并核对交接。酒店礼宾行李岗位还可能引导宾客。美国 39-6011 将这些任务归入同一职业；礼宾咨询及其他站场岗位需分别核对。",
+        "title": "行李员"
       },
       "market_signal_card": {
         "context_links": [
@@ -36024,7 +35864,7 @@
           "copy_key": "career.item.market-signal-card",
           "type": "prose"
         },
-        "heading": "行李搬运员行李员的前景如何？可以转向哪些相关职业？",
+        "heading": "行李员的前景如何？可以转向哪些相关职业？",
         "outlook_evidence": [
           {
             "geography": {
@@ -36063,7 +35903,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls",
             "value": {
               "$item": "baggage-porters-and-bellhops.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36108,7 +35948,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "baggage-porters-and-bellhops.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36498,7 +36338,7 @@
         "rows": [
           {
             "alternate_value": null,
-            "label": "O*NET 39-6011.00 行李搬运员行李员职业档案",
+            "label": "O*NET 39-6011.00 行李员职业档案",
             "secondary_value": null,
             "value": {
               "$item": "baggage-porters-and-bellhops.profile.onet-structured-fields-block.1",
@@ -36579,7 +36419,7 @@
             },
             "id": "riasec",
             "label": "霍兰德职业兴趣模型（RIASEC）",
-            "question": "霍兰德兴趣中什么类型更接近行李搬运员行李员？",
+            "question": "霍兰德兴趣中什么类型更接近行李员？",
             "signals": {
               "$item": "baggage-porters-and-bellhops.fit.personality-fit-block.4",
               "block": "fit",
@@ -36653,7 +36493,7 @@
             },
             "id": "mbti",
             "label": "迈尔斯-布里格斯类型指标（MBTI）",
-            "question": "MBTI 能用来判断我适不适合行李搬运员行李员吗？",
+            "question": "MBTI 能用来判断我适不适合行李员吗？",
             "signals": {
               "$item": "baggage-porters-and-bellhops.fit.personality-fit-block.12",
               "block": "fit",
@@ -36727,7 +36567,7 @@
             },
             "id": "iq",
             "label": "智力商数（IQ）与数理推理",
-            "question": "数学不好，能做行李搬运员行李员吗？",
+            "question": "数学不好，能做行李员吗？",
             "signals": {
               "$item": "baggage-porters-and-bellhops.fit.personality-fit-block.20",
               "block": "fit",
@@ -36764,7 +36604,7 @@
             },
             "id": "eq",
             "label": "情绪智力（EI，常称“情商”）",
-            "question": "做行李搬运员行李员需要高情商吗？",
+            "question": "做行李员需要高情商吗？",
             "signals": {
               "$item": "baggage-porters-and-bellhops.fit.personality-fit-block.24",
               "block": "fit",
@@ -37015,7 +36855,7 @@
             }
           }
         ],
-        "heading": "做行李搬运员行李员，哪些兴趣、能力与工作方式更重要？",
+        "heading": "做行李员，哪些兴趣、能力与工作方式更重要？",
         "questions": [
           {
             "answer": {
@@ -37024,7 +36864,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "什么性格的人更适合做行李搬运员行李员？"
+            "question": "什么性格的人更适合做行李员？"
           },
           {
             "answer": {
@@ -37033,7 +36873,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "内向的人适合做行李搬运员行李员吗？"
+            "question": "内向的人适合做行李员吗？"
           },
           {
             "answer": {
@@ -37042,7 +36882,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "外向的人能做好行李搬运员行李员吗？"
+            "question": "外向的人能做好行李员吗？"
           },
           {
             "answer": {
@@ -37051,7 +36891,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "哪种 MBTI 最适合行李搬运员行李员？"
+            "question": "哪种 MBTI 最适合行李员？"
           },
           {
             "answer": {
@@ -37078,7 +36918,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "数学不好能做行李搬运员行李员吗？"
+            "question": "数学不好能做行李员吗？"
           },
           {
             "answer": {
@@ -37087,7 +36927,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "做行李搬运员行李员需要高情商吗？"
+            "question": "做行李员需要高情商吗？"
           },
           {
             "answer": {
@@ -37332,7 +37172,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合行李搬运员行李员",
+        "label": "用 RIASEC 探索职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37454,7 +37294,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
-      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
+      "interface.quick_decision.experiment_heading": "怎样用一次纸面练习判断自己是否适合？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37547,7 +37387,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 任务影响估算",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37570,7 +37410,7 @@
         "fact_id": "identity",
         "market": "美国",
         "measure": "O*NET-SOC 职业代码",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "O*NET 2026 年更新页面；访问 2026-09-15",
         "source_refs": [
           "onet"
@@ -37582,7 +37422,7 @@
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "年薪第 10 分位（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "May 2025（OEWS）；访问 2026-09-15",
         "source_refs": [
           "onet-wages"
@@ -37594,7 +37434,7 @@
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
         "measure": "年薪第 25 分位（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "May 2025（OEWS）；访问 2026-09-15",
         "source_refs": [
           "onet-wages"
@@ -37606,7 +37446,7 @@
         "fact_id": "us-wage-2025",
         "market": "美国",
         "measure": "年薪中位数（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "May 2025（OEWS）；访问 2026-09-15",
         "source_refs": [
           "onet-wages"
@@ -37618,7 +37458,7 @@
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
         "measure": "年薪第 75 分位（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "May 2025（OEWS）；访问 2026-09-15",
         "source_refs": [
           "onet-wages"
@@ -37630,92 +37470,92 @@
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "年薪第 90 分位（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "May 2025（OEWS）；访问 2026-09-15",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "32,500人",
+        "derivation": "发布值。",
+        "display_value": "29,200 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
-        "period": "2024 年；访问 2026-09-15",
+        "measure": "就业岗位",
+        "occupation_scope": "美国行李员 39-6011",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "下降（-1% 或更低）",
+        "derivation": "发布值。",
+        "display_value": "−3.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "预计增长",
+        "occupation_scope": "美国行李员 39-6011",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 4,600",
+        "derivation": "发布值。",
+        "display_value": "约 3,800 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "预测期职位空缺（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "预计年均空缺",
+        "occupation_scope": "美国行李员 39-6011",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "本页未取得行业工资中位数",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "行李搬运员行李员",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
+        "occupation_scope": "行李员",
+        "period": "本页未取得",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "本页未取得行业工资中位数",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "行李搬运员行李员",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
+        "occupation_scope": "行李员",
+        "period": "本页未取得",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "本页未取得行业工资中位数",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "行李搬运员行李员",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
+        "occupation_scope": "行李员",
+        "period": "本页未取得",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "本页未取得行业工资中位数",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "行李搬运员行李员",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
+        "occupation_scope": "行李员",
+        "period": "本页未取得",
         "source_refs": [
           "operations"
         ]
@@ -37726,7 +37566,7 @@
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "不适用：来源不支持该字段",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "不适用：来源不支持该字段",
         "source_refs": [
           "nbs"
@@ -37738,7 +37578,7 @@
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "不适用：来源不支持该字段",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "不适用：来源不支持该字段",
         "source_refs": [
           "nbs"
@@ -37750,7 +37590,7 @@
         "fact_id": "cn-mid-managers-2025",
         "market": "中国大陆",
         "measure": "不适用：来源不支持该字段",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "不适用：来源不支持该字段",
         "source_refs": [
           "nbs"
@@ -37762,7 +37602,7 @@
         "fact_id": "cn-clerical-2025",
         "market": "中国大陆",
         "measure": "不适用：来源不支持该字段",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "不适用：来源不支持该字段",
         "source_refs": [
           "nbs"
@@ -37774,7 +37614,7 @@
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆",
         "measure": "不适用：来源不支持该字段",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "不适用：来源不支持该字段",
         "source_refs": [
           "nbs"
@@ -37786,7 +37626,7 @@
         "fact_id": "cn-industry-science-tech-2025",
         "market": "中国大陆",
         "measure": "不适用：来源不支持该字段",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "不适用：来源不支持该字段",
         "source_refs": [
           "nbs"
@@ -37798,7 +37638,7 @@
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆",
         "measure": "不适用：来源不支持该字段",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "不适用：来源不支持该字段",
         "source_refs": [
           "nbs"
@@ -37810,7 +37650,7 @@
         "fact_id": "cn-industry-public-admin-2025",
         "market": "中国大陆",
         "measure": "不适用：来源不支持该字段",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "不适用：来源不支持该字段",
         "source_refs": [
           "nbs"
@@ -37822,7 +37662,7 @@
         "fact_id": "us-hourly-median-parent",
         "market": "美国",
         "measure": "小时工资中位数（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "May 2025（OEWS）",
         "source_refs": [
           "onet-wages"
@@ -37834,46 +37674,46 @@
         "fact_id": "us-annual-median-parent",
         "market": "美国",
         "measure": "年薪中位数（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
+        "occupation_scope": "行李员",
         "period": "May 2025（OEWS）",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "32,500人",
+        "derivation": "发布值。",
+        "display_value": "29,200 个岗位",
         "fact_id": "us-employment-parent",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
-        "period": "2024 年",
+        "measure": "就业岗位",
+        "occupation_scope": "美国行李员 39-6011",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "下降（-1% 或更低）",
+        "derivation": "发布值。",
+        "display_value": "−3.0%",
         "fact_id": "us-growth-parent",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
-        "period": "2024—2034 年",
+        "measure": "预计增长",
+        "occupation_scope": "美国行李员 39-6011",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 4,600",
+        "derivation": "发布值。",
+        "display_value": "约 3,800 个/年",
         "fact_id": "us-openings-parent",
         "market": "美国",
-        "measure": "预测期职位空缺（本职业口径）",
-        "occupation_scope": "行李搬运员行李员",
-        "period": "2024—2034 年",
+        "measure": "预计年均空缺",
+        "occupation_scope": "美国行李员 39-6011",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
@@ -37881,8 +37721,8 @@
         "display_value": "25%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "行李搬运员行李员",
+        "measure": "AI 任务影响估算（编辑估算）",
+        "occupation_scope": "行李员",
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
@@ -37895,12 +37735,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务影响估算"
     },
     "badges": [
       "O*NET 39-6011.00 · Job Zone 1–2 · 入门准备低",
       "酒店与交通枢纽 / 行李接收与搬送 / 宾客与行李服务",
-      "本职业口径（工资与就业未取自其他职业）· 中国大陆无精确等价职业 · 缺口可见标记"
+      "大陆参考：两份历史招聘，未取得同口径全国工资"
     ],
     "metrics": [
       {
@@ -37913,19 +37753,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国预计增长（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国预测期职位空缺（2024—2034）"
+        "label": "美国预计年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -37939,17 +37779,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "行李搬运员行李员做什么、需要哪些学历与准备、美国的收入与前景如何、AI 会改变哪些任务，以及行李交接、宾客隐私、小费与搬运安全的边界；保留来源范围与数据缺口。"
+      "text": "看酒店与场站行李员如何收件、标记和交接。分开了解美国工资、两份大陆招聘样本，再试做纸面领取单。"
     },
     "title": {
       "availability": "available",
-      "text": "行李搬运员行李员"
+      "text": "行李员：工作、薪酬与入行｜FermatMind"
     }
   },
-  "source_content_sha256": "ed22a8642ec8febbde7717d7fe52cadcbdd54de9e3521da80366f0cb6432098f",
+  "source_content_sha256": "fbd0874967a32f2f9f7fd2f18305d1aa9b04875d6b888661ed8b9c9f573823c7",
   "subject": {
     "canonical_slug": "baggage-porters-and-bellhops",
-    "name": "行李搬运员行李员",
-    "summary": "行李搬运员行李员在交通枢纽为旅客、或在酒店及类似场所为客人搬运行李与物品：接收与标记行李并开具寄存牌、用手或行李车搬运箱包与行李与包裹、迎送宾客并陪同至客房、提供指引与设施说明、递送留言与订餐并代办杂务，部分岗位还承担场所秩序与安保协助职责。美国侧对应 O*NET 39-6011.00（Baggage Porters and Bellhops），属 Job Zone 1–2（SVP 低于 6.0）；工资与就业与行业数据均为本职业口径，O*NET 页面未声明取自其他职业。中国大陆侧本页未取得与该职业精确对应的公开职业条目与全国工资分布，中文页面语言不构成中国等价职业或工资映射，也不以行业或岗位大类替代职业工资。"
+    "name": "行李员",
+    "summary": "酒店和交通场站行李员接收、标记、搬运行李并核对交接。酒店礼宾行李岗位还可能引导宾客。美国 39-6011 将这些任务归入同一职业；礼宾咨询及其他站场岗位需分别核对。"
   }
 }

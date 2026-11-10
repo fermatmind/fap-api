@@ -23665,14 +23665,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe whether you can keep original values and check numbers, periods, and currencies, and investigate the basis rather than assuming a violation when a difference appears. Real work also requires accounting and tax law knowledge, role training, procedures, and authority; one correct reconciliation does not prove the ability to assess tax liability, penalties, or enforced collection."
+              "Paper check | Compare notice and response times in a fictional case timeline. Flag a status entry that lacks a reference to the original document. "
             ]
           },
           "id": "tax-examiners-and-collectors-and-revenue-agents.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "cn-rule",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24957,15 +24955,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Tax examiners, collectors, and revenue agents determine tax obligations or collect taxes under applicable laws and regulations, review returns and supporting records, communicate differences, and keep case records. This page uses the US O*NET-SOC13-2081.00 as its occupational baseline, and Revenue Agents are not tax agents filing returns for taxpayers; Chinese tax audits are explained separately according to local statutory duties, jurisdiction, and procedures."
+              "Tax examiners, collectors and revenue agents review filings, contact taxpayers and document cases for a tax authority. Requests for documents, payments and other actions follow the applicable procedures. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tax-examiners-and-collectors-and-revenue-agents.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "cn-rule",
-            "editorial"
+            "transfer-onet-13-2081.00"
           ],
           "type": "prose"
         }
@@ -25749,15 +25744,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Distinguish text and spreadsheet technical assistance, actual agency adoption, case quality, and occupational employment. NIST supports general information risk, O*NET explains occupational tasks, and BLS provides precise statistics; none of the three constitutes a quantifiable substitution rate or enforcement authorization evidence for this occupation. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare notice and response times in a fictional case timeline. Flag a status entry that lacks a reference to the original document."
             ]
           },
           "id": "tax-examiners-and-collectors-and-revenue-agents.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "bls",
-            "editorial"
+            "transfer-onet-13-2081.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -34323,6 +34316,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-13-2081.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 13-2081.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/13-2081.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39795,10 +39815,10 @@
       "text": "Tax examiners, collectors, and revenue agents"
     }
   },
-  "source_content_sha256": "6a6cc8cc5ceca79cc21f6824a3f65ad01108fa1e73bdf326189d8d7176d9815f",
+  "source_content_sha256": "1fd99c9828ecfd592a9a9417a29a2297cd7d93354f3552cda301749f14482845",
   "subject": {
     "canonical_slug": "tax-examiners-and-collectors-and-revenue-agents",
     "name": "Tax examiners, collectors, and revenue agents",
-    "summary": "Tax examiners, collectors, and revenue agents determine tax obligations or collect taxes under applicable laws and regulations, review returns and supporting records, communicate differences, and keep case records. This page uses the US O*NET-SOC13-2081.00 as its occupational baseline, and Revenue Agents are not tax agents filing returns for taxpayers; Chinese tax audits are explained separately according to local statutory duties, jurisdiction, and procedures."
+    "summary": "Tax examiners, collectors and revenue agents review filings, contact taxpayers and document cases for a tax authority. Requests for documents, payments and other actions follow the applicable procedures."
   }
 }

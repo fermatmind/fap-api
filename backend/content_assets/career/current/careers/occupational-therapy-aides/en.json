@@ -149,6 +149,9 @@
       "item:occupational-therapy-aides.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:occupational-therapy-aides.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:occupational-therapy-aides.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12430,6 +12433,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The setup list names three items, but only two are on the work surface and the log does not note a missing item. List the gap and who on the therapy team should know."
+            ]
+          },
+          "id": "occupational-therapy-aides.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Hand over occupational therapy equipment",
+          "type": "notice"
         }
       ]
     },
@@ -14803,6 +14821,13 @@
         "id": "occupational-therapy-aides.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-therapy-aides.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14984,7 +15009,7 @@
       "text": "Occupational therapy aides: duties, wages, and entry boundaries"
     }
   },
-  "source_content_sha256": "306afbeb8e1a228340d77702888841c33cacb825bad4f3718fc8b6d1104986b2",
+  "source_content_sha256": "a6e1573a20328302b6b35e444c337e492dcbd6c6a0d57c2f10d8b07ec2e0fe83",
   "subject": {
     "canonical_slug": "occupational-therapy-aides",
     "name": "Occupational therapy aides",

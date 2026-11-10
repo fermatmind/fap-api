@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1497,7 +1494,7 @@
         "status": "pending_mapping"
       },
       "item:helpers-carpenters.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:helpers-carpenters.sources.source-card.1": {
         "status": "mapped"
@@ -10834,7 +10831,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10886,7 +10883,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10938,7 +10935,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -23757,12 +23754,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "This checklist is only for self-questioning and does not constitute hiring criteria, a capability score, an evaluation of job competence, or any safety, occupational health, or legal advice. This page corresponds to the exact occupation O*NET/SOC 47-3012.00 \"Helpers--Carpenters\" (Helpers--Carpenters): help carpenters by performing duties requiring less skill: using, supplying, or delivering materials and tools, and cleaning the work area and equipment. Official scope text: Help carpenters by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment. The core tasks listed by O*NET include: erecting scaffolding, shoring, or braces; cleaning work areas, machines, or equipment to keep the site tidy and safe; aligning, straightening, leveling, and squaring forms for installation; cutting lumber, wood, or panels to specified dimensions; and positioning and steadying lumber, wood, or panels for fastening or cutting. Common job titles include Carpenter Helper and Carpenter Assistant and Carpenter Apprentice and Helper and Apprentice Carpenter. Scope note: the U.S. wage and employment data presented by O*NET on the 47-3012.00 page are not marked as taken from a parent or adjacent occupation, and this page labels them faithfully according to this occupation's (47-3012.00) own scope; in the United States this occupation is Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)) and is marked Bright Outlook; this page does not extrapolate the U.S. scope to mainland China's job titles, qualifications, or wages."
+              "If lifting, prolonged standing, site noise or repeated checks would be difficult, ask about material weights, task rotation and crew assignments."
             ]
           },
           "id": "helpers-carpenters.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -23771,12 +23769,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Practice prompt | a completely fictitious carpentry coordination task package (for practicing the process only, and not representing any real company, project, or data). Please write a draft plan: (1) how to assist one carpentry or formwork operation in a structured way based on a fictitious construction task sheet and material list (project location and drawing number, lumber and panel specifications, formwork and shoring and scaffolding, cutting and drilling and fastening, aligning and straightening and leveling and squaring, material handling and stacking and delivery, post-work cleaning and protection), and state which information is insufficient and needs to be supplemented (drawing version and detailing requirements, site conditions and support and stacking conditions, safety and access requirements, material arrival and schedule interfaces); (2) how to design filling-in and review points for a fictitious material and work record form (fields and definitions, location and batch identifiers, materials and specifications and usage, cutting and drilling and fastening, cleaning and protection, anomalies and rework and outstanding items, original records and revision trail); (3) how to write a handover-ready shift and work summary (location — materials and specifications — cutting and usage — cleaning and protection — outstanding items and recommendations); (4) how to record and retain material and work data, and distinguish publicly shareable information from controlled materials involving the project and suppliers; (5) how to pause and review and isolate and report when a collapse or fall or machinery and cutting or dust and adhesive risk, or going beyond job authorization or a safety risk is found. Use public materials and simulated data to answer, and do not use any real company or project data."
+              "Try the original and variant under “Entry and Sheet M: Stock preparation handoff,” then open the folded answer."
             ]
           },
           "id": "helpers-carpenters.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -23785,12 +23783,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Fit signals | The work activity importance for U.S. O*NET 47-3012.00 shows: performing general physical activities (86) and handling and moving objects (84) and inspecting equipment, structures, or materials (80) and obtaining information (78) and making decisions and solving problems (75) and operating vehicles, mechanized devices, or equipment (73) and communicating with supervisors, peers, or subordinates (70) are this occupation's most important activities; the work context shows: long periods of standing (83% standing continually or almost continually), exposure to hazardous equipment is common (71% every day), exposure to contaminants is common (54% every day), close collaboration with carpenters and colleagues (61% continuous contact with others), a work schedule that changes with weather and schedules and contract periods (38% irregular), and constraints from project schedules and process interfaces. If you are willing to work hands-on around materials and tools and the site, can do cutting and drilling and alignment and material supply and cleaning solidly according to the carpenter's instructions and drawings, and take responsibility for work safety and process quality and site order, this occupation's daily requirements are closer to your way of working."
+              "Use Sheet M: Stock preparation handoff to check board dimensions and counts. Retain conflicting entries and name the reviewer for each difference."
             ]
           },
           "id": "helpers-carpenters.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -23799,12 +23797,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Caution signals | O*NET also shows (47-3012.00, work context and task scope): exposure to hazardous equipment is common (71% every day); long periods of standing (83% standing continually or almost continually); exposure to contaminants is common (54% every day); relatively serious consequences of error (21% extremely serious and 47% very serious); relatively high responsibility for others' health and safety (48% extremely high responsibility); often working in narrow or elevated spaces and on scaffolding; and time pressure from process interfaces and schedules (28% every day). This occupation deals with lumber and wood and panels and formwork and shoring and temporary facilities: one improper scaffolding or shoring erection, one improper material stacking or surcharge, one cutting or drilling or nail gun mistake, or one inadequate alignment or fastening can all cause material waste, rework, personal injury, and schedule and compliance risk. O*NET places this occupation in Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)); the education section on that page shows — the page does not give percentages for each education level, only stating that some positions require a high school diploma or equivalent, some require less than a high school diploma, and some require a post-secondary certificate; and it is marked Bright Outlook. If you find it hard to work amid dust and noise and adhesives and outdoor weather and elevated conditions, find it hard to accept a rhythm that changes with the project and processes and weather and possible overtime, or are unwilling to take responsibility for safety and process coordination, you should treat these as real costs."
+              "Expect repeated material handling, time on your feet and cleanup. Check tool permissions and site training requirements before taking the job."
             ]
           },
           "id": "helpers-carpenters.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -23813,7 +23812,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Taking on judgment | Real fit comes from whether you can do three things at the same time on one task: do the technical work solidly (complete cutting and drilling and alignment and material supply and cleaning and protection according to drawings and the carpenter's instructions and process requirements, producing usable material and work records), keep safety and compliance and boundaries under control (work and keep records according to scaffolding and shoring and edge and opening and machinery and cutting and dust and adhesive and work permit requirements, distinguish publicly shareable information from controlled materials involving the project and suppliers and handle them according to policy, and do not erect or dismantle or operate or handle out of bounds without authorization), and take on definable job responsibility (be responsible for your own cutting and drilling and alignment and material supply and cleaning and records, and refer matters beyond job authorization or involving special operations and major safety matters to the appropriate position or organization according to policy). It is suggested to test this with one verifiable experience (completing an assisted work plan and an explanation of material and work records for a fictitious task sheet, or a review of handling a collapse or fall or cutting anomaly), rather than relying only on the conclusion of an interest questionnaire."
+              "This work may suit people who can repeatedly check board dimensions and counts, handle and record materials, and report unresolved differences promptly."
             ]
           },
           "id": "helpers-carpenters.quick-decision.fermat-decision-card.7",
@@ -23835,7 +23834,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Direct answer | The \"Helpers--Carpenters\" on this page is the exact occupation O*NET 47-3012.00 (Helpers--Carpenters), and the work can be divided into several categories: first, materials and preparation — selecting tools and equipment and materials from storage and moving materials to the site, and organizing or storing materials and tools and equipment; second, cutting and processing — cutting lumber and wood and panels to specified dimensions, drilling holes in lumber, sanding or smoothing surfaces to remove protrusions and tool marks and glue, and cutting or welding metal; third, coordination and positioning — positioning and steadying lumber and panels for fastening or cutting, fastening lumber with glue and screws and dowels or nails and installing hardware, and aligning and straightening and leveling and squaring forms for installation; fourth, formwork and structures — erecting scaffolding and shoring or braces, making forms and assisting in lifting them, fixing stakes and building foundation forms, and installing handrails under direction; fifth, cleaning and finishing — cleaning work areas and machines and equipment to keep the site tidy and safe, and cutting and installing insulation or sound-absorbing materials and facing materials."
+              "Carpenter helpers prepare materials and tools, position and hold stock, check dimensions against work instructions and keep the work area clear. Ask which tasks you can assist with, who checks dimensions and who owns fabrication and sign-off."
             ]
           },
           "id": "helpers-carpenters.profile.career-quick-answers-block.1",
@@ -23924,7 +23923,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Task sheet and drawing checking → Materials and selection and moving → Cutting and drilling and processing → Formwork and shoring and scaffolding confirmation → Positioning and fastening and aligning → Cleaning and protection and records and handover"
+              "Receive the work order → Check assignments → Verify materials and records → Report discrepancies → Assist with assigned tasks → Hand off records"
             ]
           },
           "id": "helpers-carpenters.profile.career-quick-answers-block.3",
@@ -24316,7 +24315,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Checklist point notes | U.S. O*NET places 47-3012.00 (Helpers--Carpenters) in Job Zone 1-2 (little or no preparation needed to some preparation needed), with an SVP range of below 6.0 (SVP Below 6.0); the education section shows — the page does not give percentages for each education level, only stating that some positions require a high school diploma or equivalent, some require less than a high school diploma, and some require a post-secondary certificate; this occupation is marked Bright Outlook; in the United States preparation for this occupation is usually short-term on-the-job training and mentor-based training, or vocational school training and carpentry registered apprenticeship."
+              "Verify credentials, supervision and authorization for the actual task. See BLS Table 1.2 for typical U.S. preparation."
             ]
           },
           "id": "helpers-carpenters.profile.career-quick-answers-block.27",
@@ -24904,7 +24903,7 @@
                 "url": "https://www.onetonline.org/link/hot_tech/47-3012.00"
               },
               {
-                "entity": "O*NET 47-3012.00 employment trend (this occupation's own scope, BLS employment projections 2024—2034)",
+                "entity": "BLS Table 1.2 for U.S. occupation 47-3012 shows about 21,900 jobs in 2025 and projects 21,500 in 2035 (−1.7%), with about 2,000 openings per year including replacements. Counts are rounded independently.",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
@@ -25118,7 +25117,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task judgment | Trials of task sheets, material lists, and record drafts may be conducted in an approved environment, manually checking the original information and on-site criteria. No evidence has been obtained on this occupation's generative AI adoption rate, measured efficiency gains, exposure level, or employment causality, and it is not guaranteed that the occupation as a whole will not be substituted. O*NET lists 13 software skill categories; the 14 items on the hot technologies page — QuickBooks, Linux, Access, Excel, Office, Outlook, PowerPoint, SharePoint, Windows, Word, Oracle, Salesforce, SAP, UNIX — are a U.S. 2025 recruitment skill directory, with all shares not provided, and they do not prove usage rates, AI adoption, or efficiency gains. The precise BLS 47-3012 projection for 2025—2035 is about 21,900 → 21,500 people, growth -1.7%, average annual openings 2,000 including replacements, and self-employment in the base period 1.7%; this is not real-time hiring, net new jobs, or AI causality. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Editorial task judgment | Trials of task sheets, material lists, and record drafts may be conducted in an approved environment, manually checking the original information and on-site criteria. No evidence has been obtained on this occupation's generative AI adoption rate, measured efficiency gains, exposure level, or employment causality, and it is not guaranteed that the occupation as a whole will not be substituted. O*NET lists 13 software skill categories; the 14 items on the hot technologies page — QuickBooks, Linux, Access, Excel, Office, Outlook, PowerPoint, SharePoint, Windows, Word, Oracle, Salesforce, SAP, UNIX — are a U.S. 2025 recruitment skill directory, with all shares not provided, and they do not prove usage rates, AI adoption, or efficiency gains. The precise BLS 47-3012 projection for 2025—2035 is about 21,900 → 21,500 people, growth -1.7%, average annual openings 2,000 including replacements, and self-employment in the base period 1.7%; this is not real-time hiring, net new jobs, or AI causality."
             ]
           },
           "id": "helpers-carpenters.ai-impact.ai-impact-table.18",
@@ -26596,12 +26595,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025 10th percentile annual wage $31,660; hourly wage $15.22"
+              "10th percentile: USD 31,660 per year and USD 15.22 per hour."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26610,12 +26609,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3012.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3012.00"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26624,12 +26623,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025 25th percentile annual wage $36,730; hourly wage $17.66"
+              "25th percentile: USD 36,730 per year and USD 17.66 per hour."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26638,12 +26637,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3012.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3012.00"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26652,12 +26651,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025 50th percentile annual wage $43,780; hourly wage $21.05"
+              "50th percentile: USD 43,780 per year and USD 21.05 per hour."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26666,12 +26665,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3012.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3012.00"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26680,12 +26679,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025 75th percentile annual wage $49,400; hourly wage $23.75"
+              "75th percentile: USD 49,400 per year and USD 23.75 per hour."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26694,12 +26693,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3012.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3012.00"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26708,12 +26707,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025 90th percentile annual wage $57,670; hourly wage $27.73"
+              "90th percentile: USD 57,670 per year and USD 27.73 per hour."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26722,12 +26721,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3012.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3012.00"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26736,12 +26735,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3012 projection for 2025—2035 is about 21,900 → 21,500 people, growth -1.7%, average annual openings 2,000 including replacements, and self-employment in the base period 1.7%; this is not real-time hiring, net new jobs, or AI causality."
+              "About 21,900 jobs (2025)"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26750,12 +26749,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025—2035 precise occupational projection; boundaries | employment includes self-employment and openings include replacements, and this is not real-time hiring, net new jobs, or AI causality."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26764,12 +26763,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3012 projection for 2025—2035 is about 21,900 → 21,500 people, growth -1.7%, average annual openings 2,000 including replacements, and self-employment in the base period 1.7%; this is not real-time hiring, net new jobs, or AI causality."
+              "−1.7%"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26778,12 +26777,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025—2035 precise occupational projection; boundaries | employment includes self-employment and openings include replacements, and this is not real-time hiring, net new jobs, or AI causality."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26792,12 +26791,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3012 projection for 2025—2035 is about 21,900 → 21,500 people, growth -1.7%, average annual openings 2,000 including replacements, and self-employment in the base period 1.7%; this is not real-time hiring, net new jobs, or AI causality."
+              "About 2,000 projected per year"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26806,12 +26805,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025—2035 precise occupational projection; boundaries | employment includes self-employment and openings include replacements, and this is not real-time hiring, net new jobs, or AI causality."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26834,7 +26833,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupational definition | The Helpers--Carpenters on this page is the exact occupation O*NET 47-3012.00 (Helpers--Carpenters): help carpenters by performing duties requiring less skill: using, supplying, or delivering materials and tools, and cleaning the work area and equipment. In the United States this occupation is Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)); the current precise employment projection is checked separately, and the old Bright Outlook label is not carried over."
+              "Identify support roles by assigned duties. Verify trade and helper responsibilities and authorization separately."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.24",
@@ -26848,7 +26847,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Carpentry or building construction related education and training"
+              "Duties"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.25",
@@ -26862,7 +26861,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Most positions"
+              "Check support scope"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.26",
@@ -26876,7 +26875,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Meets the materials and process and safety knowledge starting point for entry; the education section on that page shows — the page does not give percentages for each education level, only stating that some positions require a high school diploma or equivalent, some require less than a high school diploma, and some require a post-secondary certificate"
+              "Ask who reviews preparation, handling and handoff."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.27",
@@ -26890,7 +26889,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Materials and cutting and positioning and fastening and cleaning ability"
+              "Training and protection"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.28",
@@ -26904,7 +26903,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "All positions"
+              "Check supervision"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.29",
@@ -26918,7 +26917,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Positions usually require the ability to cut and drill and position and fasten and align and clean to size, and to comply with scaffolding and shoring and edge and opening and working at height and machinery and cutting and dust and adhesive safety requirements"
+              "Ask about site training and any tasks requiring separate authorization."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.30",
@@ -26932,7 +26931,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scaffolding and machinery operation and working-at-height qualifications"
+              "Base pay"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.31",
@@ -26946,7 +26945,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Positions involving the corresponding operations"
+              "Check pay units"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.32",
@@ -26960,7 +26959,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Effective 2026-06-01, actual building construction special operations trades in building and municipal engineering receive training and assessment and certification as required; not all helper or height activities require all qualifications; apprenticeship is not listed as universally required or common."
+              "Distinguish day, hourly and monthly rates."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.33",
@@ -26974,7 +26973,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupational health and labor protection requirements"
+              "Additional pay"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.34",
@@ -26988,7 +26987,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Positions involving dust and noise and outdoor work and heights"
+              "Check payment terms"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.35",
@@ -27002,7 +27001,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Those exposed to occupational disease hazards are examined and protected as required; position adjustment depends on the actual hazards and results, and rotation is not a fixed requirement for everyone."
+              "Ask how overtime, stoppages and probation are paid."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.36",
@@ -27114,7 +27113,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Job title mapping | Helpers--Carpenters (O*NET/SOC 47-3012.00 Helpers--Carpenters; commonly called in recruitment and in the industry carpenter, formwork worker, decoration worker, carpentry assistant, carpentry apprentice)."
+              "Mainland China wage references"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.44",
@@ -27128,12 +27127,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China section | In mainland China there are positions in the carpentry and formwork and decoration field similar to Helpers--Carpenters, and their work and scaffolding and shoring and edges and openings and working at height and machinery and cutting and dust and adhesives and safety and occupational health and records are governed by the Work Safety Law of the People's Republic of China and related regulations and standards on building construction safety and occupational health and environmental protection; however, public occupational statistics do not list a national wage distribution separately for this occupation."
+              "China’s National Bureau of Statistics reports average annual wages for urban construction. A nationwide wage distribution for this helper occupation is unavailable."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27142,7 +27141,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Matching rationale | Carpentry, formwork, or decoration construction assistant positions match the construction industry; the category covers multiple occupations and levels and is not this occupation's wage; the broad reference is the 2025 annual average wage of 92,036/66,275 yuan for urban non-private/private units in construction. The statistics cover multiple occupations and levels in that industry and cannot be filled in for this occupation's median, starting wage, or personal income. This round has not obtained a precise national wage distribution for this occupation, and the gap is retained."
+              "Verify hours, pay units and task authorization for the actual contract and site."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.46",
@@ -27184,7 +27183,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 construction industry / urban non-private units (industry reference)"
+              "Urban non-private units · construction"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.49",
@@ -27198,7 +27197,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Average annual wage 92,036 yuan/year; the average for all employed persons in the industry, not this occupation's wage."
+              "92,036 CNY per year"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.50",
@@ -27213,7 +27212,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 construction industry / urban private units (industry reference)"
+              "Urban private units · construction"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.51",
@@ -27227,7 +27226,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Average annual wage 66,275 yuan/year; the average for all employed persons in the industry, not this occupation's wage."
+              "66,275 CNY per year"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.52",
@@ -27242,7 +27241,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China precise national occupational wage for this occupation"
+              "National urban non-private units · all industries"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.53",
@@ -27256,7 +27255,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: public occupational statistics in mainland China have not established a national occupational wage distribution precisely corresponding to O*NET 47-3012.00 (Helpers--Carpenters); the National Bureau of Statistics publishes average wages of urban unit employees by industry category without distinguishing occupations, and this page does not fill in the gap with industry averages, recruitment offers, or U.S. data."
+              "129,441 CNY per year"
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.54",
@@ -27270,12 +27269,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Classification mapping note | This page is the exact occupation O*NET 47-3012.00 (Helpers--Carpenters), which differs from adjacent occupations such as helpers--electricians (47-3013.00), helpers--brickmasons and blockmasons and stonemasons and tile and marble setters (47-3011.00), helpers--painters and paperhangers and plasterers and stucco masons (47-3014.00), carpenters (47-2031.00), and construction laborers (47-2061.00); wages and employment must be checked according to each occupation's own code and statistical scope and cannot be applied to one another."
+              "A nationwide mainland China wage distribution for this helper occupation is unavailable. The 2025 NBS construction averages were CNY 92,036 a year in urban non-private units and CNY 66,275 in urban private units."
             ]
           },
           "id": "helpers-carpenters.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27334,12 +27333,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET precise national wages | https://www.onetonline.org/link/localwages/47-3012.00; BLS precise 2025—2035 projection | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; BLS occupational group background | https://www.bls.gov/ooh/construction-and-extraction/construction-laborers-and-helpers.htm"
+              "O*NET national occupational wages | https://www.onetonline.org/link/localwages/47-3012.00; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; MOHURD guidance on construction workers | https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2024/art_17339_767894.html"
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -27348,12 +27349,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025 10th percentile annual wage $31,660; hourly wage $15.22"
+              "10th percentile: USD 31,660 per year and USD 15.22 per hour."
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27362,12 +27363,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3012.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3012.00"
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27376,12 +27377,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025 25th percentile annual wage $36,730; hourly wage $17.66"
+              "25th percentile: USD 36,730 per year and USD 17.66 per hour."
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27390,12 +27391,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3012.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3012.00"
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27404,12 +27405,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025 50th percentile annual wage $43,780; hourly wage $21.05"
+              "50th percentile: USD 43,780 per year and USD 21.05 per hour."
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27418,12 +27419,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3012.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3012.00"
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27432,12 +27433,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025 75th percentile annual wage $49,400; hourly wage $23.75"
+              "75th percentile: USD 49,400 per year and USD 23.75 per hour."
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27446,12 +27447,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3012.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3012.00"
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27460,12 +27461,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025 90th percentile annual wage $57,670; hourly wage $27.73"
+              "90th percentile: USD 57,670 per year and USD 27.73 per hour."
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27474,12 +27475,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. precise 47-3012.00 national wages May2025; boundaries | percentiles cannot be used to infer seniority or starting wages, production bonuses are included, and benefits, overtime, and non-production bonuses are excluded."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/47-3012.00"
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27488,12 +27489,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3012 projection for 2025—2035 is about 21,900 → 21,500 people, growth -1.7%, average annual openings 2,000 including replacements, and self-employment in the base period 1.7%; this is not real-time hiring, net new jobs, or AI causality."
+              "About 21,900 jobs (2025)"
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27502,12 +27503,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025—2035 precise occupational projection; boundaries | employment includes self-employment and openings include replacements, and this is not real-time hiring, net new jobs, or AI causality."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27516,12 +27517,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3012 projection for 2025—2035 is about 21,900 → 21,500 people, growth -1.7%, average annual openings 2,000 including replacements, and self-employment in the base period 1.7%; this is not real-time hiring, net new jobs, or AI causality."
+              "−1.7%"
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27530,12 +27531,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025—2035 precise occupational projection; boundaries | employment includes self-employment and openings include replacements, and this is not real-time hiring, net new jobs, or AI causality."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27544,12 +27545,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3012 projection for 2025—2035 is about 21,900 → 21,500 people, growth -1.7%, average annual openings 2,000 including replacements, and self-employment in the base period 1.7%; this is not real-time hiring, net new jobs, or AI causality."
+              "About 2,000 projected per year"
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27558,12 +27559,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | BLS2025—2035 precise occupational projection; boundaries | employment includes self-employment and openings include replacements, and this is not real-time hiring, net new jobs, or AI causality."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27572,7 +27573,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The precise national five wage percentiles and employment projection have been checked; regional and precise industry wages have not been obtained. The industry background is scoped separately; shared old facts and protected surfaces are retained, and full-page synchronization is not claimed."
+              "U.S. wage percentiles and employment projections come from OEWS and BLS Table 1.2. Industry wages cover the broader construction laborers and helpers group. Check local and role-specific pay separately."
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.25",
@@ -27586,12 +27587,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. precise 47-3012.00 May2025 median annual wage $43,780 and hourly wage $21.05, with the five wage percentiles checked. The precise BLS 47-3012 projection for 2025—2035 is about 21,900 → 21,500 people, growth -1.7%, average annual openings 2,000 including replacements, and self-employment in the base period 1.7%; this is not real-time hiring, net new jobs, or AI causality."
+              "In May 2025, the U.S. national median for carpenter helpers (47-3012) was USD 43,780 a year and USD 21.05 an hour."
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27908,7 +27909,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Usage suggestion: read the three sets of figures — median, percentiles, and employment — together with \"this occupation's own scope, not representing adjacent occupations\" and \"2025—2035 growth of 5% to 6%; the current precise employment projection is checked separately, the old Bright Outlook label is not carried over, and openings consist mainly of replacement needs\", to avoid treating the median as a starting wage or the projection as an individual outcome."
+              "U.S. employment projections use the 47-3012 occupation row in BLS Table 1.2."
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.49",
@@ -27936,12 +27937,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "A national distribution position; experience, duties, or starting wages cannot be inferred backwards from it; the causes of individual wages must be checked separately."
+              "The 10th percentile of the U.S. national occupational wage distribution."
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27950,12 +27951,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The median represents the typical level at the midpoint of the distribution, but does not represent the entry-level starting wage; it rises with region, project, trade, skills, qualifications, and scope of duties; it is this occupation's own scope and does not represent adjacent occupations."
+              "The 50th percentile of the U.S. national occupational wage distribution."
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27964,12 +27965,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "A national distribution position; experience, duties, or starting wages cannot be inferred backwards from it; the causes of individual wages must be checked separately."
+              "The 90th percentile of the U.S. national occupational wage distribution."
             ]
           },
           "id": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27996,31 +27997,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Helpers--Painters, Paperhangers, Plasterers, and Stucco Masons",
@@ -28517,7 +28518,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Boundaries | The assessments and direction comparisons on this page are only for self-questioning and exploration and do not constitute hiring criteria, ability scores, or qualification judgments; admission is governed by education and training and safety and occupational health and qualifications and enterprise authorization. In particular, in the United States this occupation is Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)); the current precise employment projection is checked separately and the old Bright Outlook label is not carried over; matters involving scaffolding and machinery operation and working at height must also meet the corresponding qualification and work permit requirements."
+              "Use the paper exercise to explore fit. Verify training, credentials and authorization before site work."
             ]
           },
           "id": "helpers-carpenters.fit.personality-fit-block.26",
@@ -28559,7 +28560,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Able to independently complete cutting and drilling and positioning and fastening and aligning and cleaning and records within the scope of the carpenter and job authorization and process procedures"
+              "Check materials and keep records under supervision. Verify training, qualifications and site authorization for machinery or work at height."
             ]
           },
           "id": "helpers-carpenters.fit.personality-fit-block.29",
@@ -28937,7 +28938,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Fit signals: willing to be responsible for work safety and process quality under scaffolding and shoring and edge and opening and working at height and machinery and cutting requirements, able to switch between cutting and drilling and positioning and fastening and cleaning while keeping attention on evidence and records, able to maintain procedures and evidence and review under process and schedule pressure, and to isolate and report according to policy when there is an on-site or safety anomaly or authorization is exceeded."
+              "Repeatedly compare materials and work orders, preserve discrepancies, and stop and refer unclear conditions to the responsible person."
             ]
           },
           "id": "helpers-carpenters.fit.personality-fit-block.56",
@@ -28965,7 +28966,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Verification suggestion: first test reading drawings and cutting and positioning and writing records with one simulated or real coordination task, and understand the target enterprise's and jurisdiction's requirements for safety and occupational health and scaffolding and machinery operation and working-at-height qualifications, before deciding whether to invest long term."
+              "Use Sheet M: Stock preparation handoff to check board dimensions and counts. Retain conflicting entries and name the reviewer for each difference."
             ]
           },
           "id": "helpers-carpenters.fit.personality-fit-block.58",
@@ -29077,7 +29078,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Used to check the employment trend and the official period presentation (this occupation's own scope; 2025—2035 growth of 5% to 6%; the current precise employment projection is checked separately and the old Bright Outlook label is not carried over)."
+              "U.S. employment projections use the 47-3012 occupation row in BLS Table 1.2."
             ]
           },
           "id": "helpers-carpenters.fit.personality-fit-block.66",
@@ -29148,7 +29149,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Boundaries | What this page lists are the failure types and control points relatively common in this occupation's cutting and drilling and positioning and fastening and cleaning, used to help identify and manage risks, and they do not constitute any safety, occupational health, or legal advice or a conclusion on an individual case; anything involving scaffolding acceptance, structural safety determinations, or occupational disease diagnosis must be handled by a position or organization holding the corresponding qualifications."
+              "If asked to use woodworking machinery, work at height or alter scaffolding without training and authorization, stop, step clear and tell the site lead. Trained and authorized personnel with any required qualifications handle the work under site supervision. Stop and report missing or failed guards."
             ]
           },
           "id": "helpers-carpenters.risk.career-risk-cards.8",
@@ -29274,7 +29275,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Work according to scaffolding erection and acceptance and edge and opening protection requirements and check the securement and support; if a scaffold or protection anomaly is found, stop work immediately and isolate and report"
+              "If asked to use woodworking machinery, work at height or alter scaffolding without training and authorization, stop, step clear and tell the site lead. Trained and authorized personnel with any required qualifications handle the work under site supervision. Stop and report missing or failed guards."
             ]
           },
           "id": "helpers-carpenters.risk.career-risk-cards.17",
@@ -29330,7 +29331,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Cutting and machinery work must be carried out according to protection and de-energization and isolation requirements; if a machinery or cutting anomaly is found, stop immediately and isolate and report"
+              "If asked to use woodworking machinery, work at height or alter scaffolding without training and authorization, stop, step clear and tell the site lead. Trained and authorized personnel with any required qualifications handle the work under site supervision. Stop and report missing or failed guards."
             ]
           },
           "id": "helpers-carpenters.risk.career-risk-cards.21",
@@ -29671,7 +29672,7 @@
                 "id": "education",
                 "values": [
                   "U.S. O*NET places 47-3012.00 (Helpers--Carpenters) in Job Zone 1-2 (little or no preparation needed to some preparation needed), with an SVP range of below 6.0 (SVP Below 6.0); the education section shows — the page does not give percentages for each education level, only stating that some positions require a high school diploma or equivalent, some require less than a high school diploma, and some require a post-secondary certificate; this description does not replace the enterprise's and competent authority's requirements for qualifications and work permits.",
-                  "Whether one can independently complete cutting and drilling and positioning and fastening does not depend on education itself, but on whether skills training has been completed and the corresponding qualifications obtained and whether the work is performed within the scope of job authorization.",
+                  "BLS lists no formal educational credential as typical for U.S. entry, with short-term on-the-job training. Check employer requirements, site safety training and assigned tasks separately.",
                   "Education and training only affect the entry starting point; whether one can skillfully complete cutting and drilling and positioning and fastening and aligning and cleaning mainly depends on on-the-job training and mentoring and assessment results."
                 ]
               },
@@ -29679,7 +29680,7 @@
                 "id": "clearance",
                 "values": [
                   "Effective 2026-06-01, actual building construction special operations trades in building and municipal engineering receive training and assessment and certification as required; not all helper or height activities require all qualifications; other training, protection, and health examinations are checked according to the real work hazards.",
-                  "Matters involving scaffolding acceptance, structural safety determinations, or occupational disease diagnosis must be handled by a position or organization holding the corresponding qualifications.",
+                  "MOHURD guidance calls for safety training for construction workers entering a site to perform construction. Verify the specific hiring conditions and division of work with the employer.",
                   "Data involving project and supplier drawings and technical materials must be managed under confidentiality and minimum necessity requirements and must not be sent to unauthorized environments."
                 ]
               },
@@ -29703,7 +29704,8 @@
           },
           "id": "helpers-carpenters.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "title": "What do employers usually look at in recruitment?",
           "type": "cards"
@@ -29716,41 +29718,41 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Practice materials (all fictitious)",
-                  "A construction task sheet and a carpentry or formwork location drawing and a material list (lumber and panel and hardware specifications), a drawing and layout and alignment diagram, and instructions for using cutting and drilling equipment and measuring tools.",
-                  "A blank material and cutting and usage and cleaning and protection record form."
+                  "Sheet M: Stock preparation handoff",
+                  "Fictional paper exercise. Check records only. The work order calls for A: 600 mm, two pieces; B: 420 mm, one piece; C: 310 mm, one piece. The stock list shows A: 600 mm, two pieces; B: 402 mm, one piece; C: 310 mm, two pieces. Hold any dimension or quantity discrepancy. Send dimensions to the carpenter and quantities to the stock clerk. In the variant, change only B's stock length to 420 mm. List the items ready for handoff, original discrepancies and review owners.",
+                  "Use the two records in the prompt. No site access or tools are needed."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Practice task",
-                  "Prepare an assisted work plan for a fictitious task sheet and fill in a material and work record.",
-                  "Explain the materials and selection and moving, the cutting and drilling and processing, the formwork and shoring and scaffolding confirmation, the positioning and fastening and aligning, and the cleaning and protection and anomaly contingency plan."
+                  "What to hand over",
+                  "Record both cases. Keep the original values, status and review owner for each row.",
+                  "Retain discrepant values through review."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Suggested approach",
-                  "First check the location and drawings and materials and safety conditions, then determine the cutting and positioning and fastening steps according to drawings and dimensions and processes.",
-                  "During execution, record material and specification and usage and cutting and cleaning data, and after completion check and protect; clearly mark where information is insufficient and explain why it is not filled in."
+                  "Check after finishing",
+                  "Save both answers before opening the folded answer key in the FAQ.",
+                  "Check discrepancies and handoff owners."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundary note",
-                  "This practice is only for testing process understanding and record-keeping ability; all projects and companies and data are fictitious."
+                  "Exercise scope",
+                  "Check the paper records only."
                 ]
               }
             ]
           },
           "id": "helpers-carpenters.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "Entry practice: one complete materials and cutting and positioning and fastening and cleaning coordination task (fictitious materials)",
+          "title": "Sheet M: Stock preparation handoff",
           "type": "cards"
         },
         {
@@ -29762,28 +29764,28 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Work matrix",
-                  "Organize a fictitious assisted work plan, a material and specification and usage record, a cutting and drilling and fastening record, and a cleaning and protection and anomaly handling explanation into a portfolio, mapping item by item to the cutting and drilling and positioning and fastening and aligning and cleaning and safety and recording abilities in the job requirements."
+                  "Put the original records side by side and mark differences."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "Independent review",
-                  "Give the plan and records to others to review according to drawings and dimensions, and check whether cutting and positioning and fastening and aligning are self-consistent; only if others can review them without reading the explanation does it show the plan and records are handover-ready."
+                  "Keep the pending items and their review owners."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "Briefing summary",
-                  "Use one page to explain this location's materials and specifications — cutting and usage — positioning and fastening and aligning — cleaning and protection — outstanding items, so it is easy to show in an interview or mentoring session how you connect materials with evidence and records."
+                  "Write a one-line summary for each case."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "Tool description",
-                  "Explain the readings and errors and settings of the cutting and drilling and measuring tools you used, and which judgments depend on experience rather than tools, demonstrating your grasp of the boundaries of data and evidence."
+                  "Check with paper and pencil, then open the answer key."
                 ]
               }
             ]
@@ -29853,59 +29855,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Understand this occupation's work objects and processes (accepting the task — materials and selection and moving — cutting and drilling and processing — handling and positioning and material supply — fastening and aligning and shoring — cleaning and protection and records).",
-                  "Record the scaffolding and shoring and edge and opening and machinery and cutting safety requirements you observe."
+                  "Read the records",
+                  "Read the order and list the fields to check."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Observe one round of materials and cutting and drilling with a carpenter, recording the cutting steps and usage and safety actions.",
-                  "Organize a list of the cutting and drilling steps and criteria you observed."
+                  "Check the fields",
+                  "Compare the original records row by row."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Under mentoring, take part in preparing tools and measuring tools and filling in records and organizing materials.",
-                  "Write out the three steps you think are most prone to error and the reasons."
+                  "Route discrepancies",
+                  "Send discrepancies to the review owners given in the prompt."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Under mentoring, take part in one round of cutting and dimension and alignment checking.",
-                  "Explain how you would stop and report if there is a dimension or cutting or material anomaly."
+                  "Try the variant",
+                  "Change only the specified input and reevaluate the rows."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Under mentoring, take part in one round of positioning and fastening and cleaning and fill in the record.",
-                  "List the basis for determining conformity and the rework disposition steps for nonconforming items."
+                  "Keep original values",
+                  "Keep records for both cases."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Organize an explanation of the cutting and usage and cleaning records for a fictitious location and check it with the carpenter.",
-                  "Record any disagreement with the carpenter on cutting or positioning or determination and how it was handled."
+                  "Check the answer key",
+                  "Open the folded answer key to check."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Review the seven days: which types of tasks you are confident about, which need more training, and use this to decide whether to continue investing.",
-                  "Write the review conclusion on one page and use it as the basis for whether to enter the field, rather than judging by interest."
+                  "Check the actual assignment",
+                  "Write one question about work assignments to ask an employer."
                 ]
               }
             ]
           },
           "id": "helpers-carpenters.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "Seven-day experience: complete a cutting and positioning and fastening and cleaning loop with fictitious materials",
+          "title": "Paper exercise steps",
           "type": "timeline"
         },
         {
@@ -29913,20 +29915,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: able to complete cutting and drilling and positioning and fastening and aligning and cleaning under safety and procedural and quality requirements and make the process and basis reviewable.",
-              "Continue: maintaining procedures and evidence and records under process and schedule pressure, and not skipping checks or relaxing safety or falsifying records to rush the job.",
-              "Continue: able to prove your material and process and coordination ability with one verifiable coordination task or anomaly handling review.",
-              "Continue: willing to do hands-on work long term in dusty and noisy and adhesive and outdoor elevated environments and to be responsible for work safety and process quality.",
-              "Caution: if during the seven-day experience you repeatedly find it hard to keep up with safety rules or procedural checks, reassess your fit.",
-              "Caution: if you find it hard to accept overtime and a rhythm that changes with project processes and schedules and weather, or hard to endure dusty and outdoor elevated environments, reassess your fit.",
-              "Caution: if you tend to act first and supply the basis later when there is a collapse or fall or machinery or cutting anomaly, reassess your occupational fit and risk awareness."
+              "Check that every row retains its source values.",
+              "Separate specification mismatches from count mismatches.",
+              "Preserve both records when they conflict.",
+              "Check who receives each pending item.",
+              "Change only the specified field in the variant.",
+              "Open the folded answer after completing both cases.",
+              "Ask the target crew how it reviews discrepancies."
             ]
           },
           "id": "helpers-carpenters.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "How to judge whether to continue at the end of the seven days",
+          "title": "What to review afterward",
           "type": "list"
         },
         {
@@ -29953,22 +29955,22 @@
             ],
             "rows": [
               [
-                "Vocational school training or relevant on-the-job experience",
-                "Most positions",
-                "Meets the materials and process and safety knowledge starting point for entry",
-                "The typical U.S. BLS precise 47-3012 requires no formal educational credential, no relevant experience, and short-term on-the-job training; O*NET lists only qualitatively that some positions require high school / below high school / a post-secondary certificate, without providing education shares, and this is not filled in.",
-                "Complete vocational school training or accumulate on-the-job experience",
-                "Several weeks to several months",
-                "Education and training are not equal to qualifications or work authorization"
+                "Typical U.S. preparation",
+                "Readers comparing U.S. roles",
+                "BLS Table 1.2 lists no formal educational credential and short-term on-the-job training for carpenter helpers (47-3012).",
+                "Verify education and experience in the actual posting.",
+                "Ask who supervises training and which tools you may use.",
+                "Check with the employer",
+                "Education and training do not confer permission to operate tools."
               ],
               [
-                "Safety and skills training and assessment",
-                "All positions",
-                "Meets safety and scaffolding and machinery and cutting and working-at-height operation requirements",
-                "Generally required for positions involving the corresponding operations",
-                "Attend enterprise or institutional safety and skills training and pass the assessment",
-                "Several days to several weeks",
-                "Training and assessment are not equal to structural or team-leading authorization"
+                "Site safety induction",
+                "Workers entering a construction site to work",
+                "Recognize hazard areas, stop-work conditions and whom to notify.",
+                "Verify requirements for the applicable project and site.",
+                "Ask the crew about induction, duties and reporting.",
+                "Check with the project",
+                "Check qualifications and authorization for work at height, scaffolding and tool use separately."
               ],
               [
                 "Carpentry registered apprenticeship or mentor-based training",
@@ -29980,13 +29982,13 @@
                 "Apprenticeship experience is not equal to automatically obtaining a position or work authorization"
               ],
               [
-                "Scaffolding and machinery operation and working-at-height qualifications",
-                "Positions involving the corresponding operations",
-                "Meets the statutory or compliance requirements for scaffolding and shoring and machinery and working-at-height operations",
-                "Effective 2026-06-01, actual building construction special operations trades in building and municipal engineering receive training and assessment and certification as required; not all helper or height activities require all qualifications.",
-                "Attend recognized training and assessment and obtain the qualification or work permit",
-                "Several days to several weeks",
-                "The scope of qualification is governed by the certificate and the competent authority and the work permit"
+                "Credentials for regulated work",
+                "Workers assigned covered or restricted tasks",
+                "Verify qualifications, assessment and site approval for the actual task.",
+                "For covered building and municipal work, check MOHURD Order 60 and the joint directory. Its appendix describes scaffold credential transitions and training exemptions for eligible workers.",
+                "Ask the authority about existing credentials, training exemptions and assessment. Confirm site authorization and safety conditions for tools, scaffolding or work at height with the project.",
+                "Check the applicable rules and site arrangements",
+                "Verify credential scope, site approval and safety conditions separately."
               ],
               [
                 "Occupational health examination and protection requirements",
@@ -29999,8 +30001,8 @@
               ],
               [
                 "Enterprise position and work authorization",
-                "All independent work positions",
-                "The prerequisite for obtaining the authority to independently cut and position and lead a team",
+                "People assigned support work on a crew",
+                "Prepare materials and records under supervision. Verify qualifications, training and site authorization before using machinery or taking on scaffold or work-at-height tasks.",
                 "According to the requirements of the enterprise's construction and safety management systems",
                 "Work after passing the assessment and within the scope of the position and work authorization",
                 "Depends on position arrangements",
@@ -30010,7 +30012,11 @@
           },
           "id": "helpers-carpenters.path.credential-decision.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035",
+            "mohurd-special-operation-2026",
+            "cn-work-example",
+            "special-work-directory-2026"
           ],
           "title": "Education, training, and qualifications: which are the real thresholds for this occupation?",
           "type": "table"
@@ -30020,15 +30026,19 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "Qualification boundaries, first | Application conditions, education, training certificates, safety and skills training, scaffolding and machinery operation and working-at-height qualifications, occupational health examinations, position and work authorization, and scaffolding acceptance and structural safety determination are different statuses: meeting recruitment conditions is not the same as obtaining the authority to independently lead a team or accept scaffolding or issue quality conclusions. In the United States, this occupation is Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)) and is marked Bright Outlook.",
+              "Verify credentials, supervision and authorization for the actual task. See BLS Table 1.2 for typical U.S. preparation.",
               "The typical U.S. BLS precise 47-3012 requires no formal educational credential, no relevant experience, and short-term on-the-job training; O*NET lists only qualitatively that some positions require high school / below high school / a post-secondary certificate, without providing education shares, and this is not filled in; in China, actual building construction special operations in building and municipal engineering are certified for the corresponding trades per MOHURD Order 60. For first-time certification, no less than 6 months of internship before formal work, under the guidance of personnel with 6 or more years in the corresponding trade, and interns must not work independently; this does not apply to all helpers.",
               "Qualification boundaries, third | The preparation items listed on this page are not equal to authorization and do not automatically bring scaffolding acceptance, structural change, or external disclosure authority; real authority is governed by the requirements of the enterprise and the competent authority.",
-              "Building construction special operations qualifications are valid for 3 years per MOHURD Order 60, with extension review; other certificate types and permits are checked separately, and the old 2008 provisions are not applied."
+              "Check the joint directory appendix for relevant scaffold credentials and applicable training exemptions. MOHURD Order 60 governs credential validity and renewal review for covered construction special operations. Confirm site approval and safety conditions separately."
             ]
           },
           "id": "helpers-carpenters.path.credential-boundary.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035",
+            "mohurd-special-operation-2026",
+            "cn-work-example",
+            "special-work-directory-2026"
           ],
           "title": "Notes on qualification and authorization boundaries",
           "type": "notice"
@@ -30091,7 +30101,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Boundaries | The preparation paths and capability ladder on this page are used to help you plan learning and accumulate evidence, and do not constitute hiring, promotion, or qualification determinations. Real admission is governed by safety and skills training and qualifications and enterprise authorization and assessment, and also does not mean obtaining the authority to independently lead a team or accept scaffolding or determine structural safety."
+              "If asked to use woodworking machinery, work at height or alter scaffolding without training and authorization, stop, step clear and tell the site lead. Trained and authorized personnel with any required qualifications handle the work under site supervision. Stop and report missing or failed guards."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.11",
@@ -30105,7 +30115,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Under mentoring, take on material and tool preparation and cutting assistance and handling and cleaning and record assistance; do not independently lead a team or erect and dismantle scaffolding or issue quality conclusions."
+              "Confirm which support tasks are assigned and who receives a report."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.12",
@@ -30119,7 +30129,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Job shadowing and assistant position"
+              "Confirm assignment and supervision"
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.13",
@@ -30133,7 +30143,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Able to independently complete cutting and drilling and positioning and fastening and aligning and cleaning and records within the scope of the carpenter and job authorization and process procedures, and isolate and report according to policy when there is an anomaly or safety issue or authorization is exceeded."
+              "Check materials against the list in the assigned area and record source values."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.14",
@@ -30147,7 +30157,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Independent coordination position"
+              "Prepare and label materials"
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.15",
@@ -30161,7 +30171,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Able to take on formwork and complex location coordination and cutting and drilling and mentoring and process coordination."
+              "Keep the original record of any specification or count mismatch and refer it for review."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.16",
@@ -30175,7 +30185,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Skilled and specialist position"
+              "Preserve discrepancies"
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.17",
@@ -30189,7 +30199,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Able to take on crew and process arrangements and quality and safety and materials and progress implementation and evaluation and anomaly sign-off and multi-party coordination."
+              "If asked to use woodworking machinery, work at height or alter scaffolding without training and authorization, stop, step clear and tell the site lead. Trained and authorized personnel with any required qualifications handle the work under site supervision. Stop and report missing or failed guards."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.18",
@@ -30203,7 +30213,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Team leader and site management position"
+              "Report and hand off"
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.19",
@@ -30217,12 +30227,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The typical U.S. BLS precise 47-3012 requires no formal educational credential, no relevant experience, and short-term on-the-job training; O*NET lists only qualitatively that some positions require high school / below high school / a post-secondary certificate, without providing education shares, and this is not filled in. Check qualifications and enterprise authorization according to the actual work; apprenticeship, vocational courses, or all specialty certificate types are not universally required. The development ladder is an editorial plan and does not guarantee hiring or promotion."
+              "BLS Table 1.2 lists no formal educational credential and short-term on-the-job training as typical U.S. preparation.Ask the employer about supervision, assigned duties, stop-work conditions and reporting."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -30231,7 +30241,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Qualification boundaries | Receiving vocational training, completing job shadowing and practical work, obtaining education or training certificates, passing safety and skills assessment and scaffolding and machinery operation and working-at-height qualifications, entering occupational health management, and obtaining enterprise position and work authorization are different statuses; the preparation items listed on this page are not equal to authorization and do not automatically bring scaffolding acceptance or structural change or external disclosure authority."
+              "Verify assigned duties, supervision and site authorization. Check separate credentials for regulated work."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.21",
@@ -30245,7 +30255,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The typical U.S. BLS precise 47-3012 requires no formal educational credential, no relevant experience, and short-term on-the-job training; O*NET lists only qualitatively that some positions require high school / below high school / a post-secondary certificate, without providing education shares, and this is not filled in; effective 2026-06-01, actual building construction special operations trades in building and municipal engineering receive training and assessment and certification as required; not all helper or height activities require all qualifications; the U.S. and Chinese jurisdictions are kept separate and not combined."
+              "Mainland China construction and regulated operations"
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.22",
@@ -30260,12 +30270,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Summary | Understand the path as a cycle of learning — job shadowing and practical work — safety and skills and qualifications — position and work authorization — responsibility: first complete skills training, then become familiar with cutting and drilling and positioning and fastening and aligning and safety systems under mentoring, and after obtaining qualifications and work authorization work independently and deepen in a direction; matters involving scaffolding acceptance and structural safety and major rework are handled according to policy and the requirements of the competent authority."
+              "For mainland China, ask the site about stock preparation and handling support on carpentry crews. MOHURD calls for site safety training. Verify supervision, material review, tool limits and any separate requirements for scaffolding or work at height."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30442,7 +30452,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Independently complete materials and selection and moving and cutting and preparation and records according to processes, and isolate and report according to policy when anomalies are found."
+              "Check materials and keep records under supervision. Verify training, qualifications and site authorization for machinery or work at height."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.36",
@@ -30610,7 +30620,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Process and tool basic training record; safety training."
+              "Verify the task scope with the supervisor."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.48",
@@ -30624,7 +30634,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Familiarity with shoring and formwork and aligning and safety points."
+              "Refer unresolved items to the responsible person."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.49",
@@ -30638,7 +30648,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Shoring assistance records and mentoring evaluation; able to restate alignment and safety points."
+              "Original list, material labels and review record."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.50",
@@ -30652,7 +30662,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Under mentoring, take on shoring and formwork erection assistance and tool preparation, and do not independently erect and dismantle or accept key locations."
+              "Organize listed materials in the assigned area."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.51",
@@ -30666,7 +30676,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Formwork and shoring job shadowing position"
+              "Prepare materials"
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.52",
@@ -30680,7 +30690,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Job authorization and safety and qualifications; formwork and shoring experience."
+              "Verify the task scope with the supervisor."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.53",
@@ -30694,7 +30704,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Accumulate experience under different location and process conditions and practice aligning and fastening and shoring methods."
+              "Refer unresolved items to the responsible person."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.54",
@@ -30708,7 +30718,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Formwork and shoring and alignment records and review opinions."
+              "Original list, material labels and review record."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.55",
@@ -30722,7 +30732,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Complete shoring and formwork erection and aligning and fastening and records according to processes, and report according to policy when anomalies are found."
+              "Compare labels with the task list and record discrepancies."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.56",
@@ -30736,7 +30746,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Formwork and shoring position"
+              "Check specifications"
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.57",
@@ -30750,7 +30760,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Corresponding job authorization and specialty qualifications; complex formwork experience."
+              "Verify the task scope with the supervisor."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.58",
@@ -30764,7 +30774,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Learn complex location formwork and shoring and aligning and process coordination methods."
+              "Refer unresolved items to the responsible person."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.59",
@@ -30778,7 +30788,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Complex formwork and shoring and anomaly handling records."
+              "Original list, material labels and review record."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.60",
@@ -30792,7 +30802,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Take on complex location formwork and shoring and aligning and mentoring and process coordination."
+              "Keep original specifications and counts pending review."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.61",
@@ -30806,7 +30816,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Formwork and shoring backbone position"
+              "Retain discrepancies"
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.62",
@@ -30820,7 +30830,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Corresponding management appointment or enterprise authorization."
+              "Verify the task scope with the supervisor."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.63",
@@ -30834,7 +30844,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Improve crew and process and quality management mechanisms."
+              "Refer unresolved items to the responsible person."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.64",
@@ -30848,7 +30858,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Overall conclusions; crew and process and quality documents."
+              "Original list, material labels and review record."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.65",
@@ -30862,7 +30872,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Coordinate crew and process and quality and safety and sign-off, and guide newcomers."
+              "If asked to use woodworking machinery, work at height or alter scaffolding without training and authorization, stop, step clear and tell the site lead. Trained and authorized personnel with any required qualifications handle the work under site supervision. Stop and report missing or failed guards."
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.66",
@@ -30876,7 +30886,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Crew and process supervisor position"
+              "Hand off unresolved items"
             ]
           },
           "id": "helpers-carpenters.path.career-path-block.67",
@@ -31275,12 +31285,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. precise 47-3012 May2025 median annual wage $43,780 and hourly wage $21.05. The precise BLS 47-3012 projection for 2025—2035 is about 21,900 → 21,500 people, growth -1.7%, average annual openings 2,000 including replacements, and self-employment in the base period 1.7%; this is not real-time hiring, net new jobs, or AI causality. Precise occupational wages and employment in China have not been obtained; the NBS 2025 construction non-private/private annual average of 92,036/66,275 yuan is only category background."
+              "BLS Table 1.2 for U.S. occupation 47-3012 shows about 21,900 jobs in 2025 and projects 21,500 in 2035 (−1.7%), with about 2,000 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31294,7 +31304,7 @@
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31303,12 +31313,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31345,12 +31355,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Wages (median and percentiles, this occupation's own scope)"
+              "Employment and projected change"
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31359,12 +31369,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 47-3012.00 (OEWS 2025, as presented by O*NET)"
+              "47-3012"
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31373,12 +31383,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Median hourly wage $21.05 and median annual wage $43,780; 10th percentile hourly wage 15.22 and annual wage 31,660, 25th percentile hourly wage 17.66 and annual wage 36,730, 75th percentile hourly wage 23.75 and annual wage 49,400, 90th percentile hourly wage 27.73 and annual wage 57,670"
+              "BLS Table 1.2 for U.S. occupation 47-3012 shows about 21,900 jobs in 2025 and projects 21,500 in 2035 (−1.7%), with about 2,000 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31392,7 +31402,7 @@
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31401,12 +31411,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31443,12 +31453,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Employment size and growth and job openings (this occupation's own scope)"
+              "Projected annual openings"
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31457,12 +31467,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 47-3012.00 (BLS employment projections, as presented by O*NET)"
+              "47-3012"
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31471,12 +31481,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The precise BLS 47-3012 projection for 2025—2035 is about 21,900 → 21,500 people, growth -1.7%, average annual openings 2,000 including replacements, and self-employment in the base period 1.7%; this is not real-time hiring, net new jobs, or AI causality."
+              "About 2,000 projected per year, including replacements."
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31485,12 +31495,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Mainland China"
+              "United States"
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31499,12 +31509,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025-05"
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31541,12 +31551,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Occupational wages and employment (statistical scope and gaps)"
+              "Median annual wage"
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31555,12 +31565,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics average wages of urban unit employees (industry category scope) and bounded search"
+              "47-3012"
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31569,12 +31579,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: public occupational statistics in mainland China have not established a national occupational wage distribution precisely corresponding to O*NET 47-3012.00 (Helpers--Carpenters); the National Bureau of Statistics publishes average wages of urban unit employees by industry category without distinguishing occupations, and this page does not fill in the gap with industry averages, recruitment offers, or U.S. data."
+              "USD 43,780/year"
             ]
           },
           "id": "helpers-carpenters.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31996,22 +32006,32 @@
                 "question_key": "career.faq.helpers-carpenters.q2"
               },
               {
-                "answer": "In 2025, in the United States this occupation's median hourly wage was $21.05 and median annual wage $43,780 (BLS OEWS, as presented by O*NET, this occupation's own scope); 10th percentile annual wage $31,660, 25th percentile $36,730, 75th percentile $49,400, 90th percentile $57,670; benefits and bonuses are excluded, and the median is not an entry-level starting wage. Mainland China has not established a national occupational wage distribution precisely corresponding to this occupation.",
+                "answer": "The May 2025 national median for U.S. occupation 47-3012 was USD 43,780 a year and USD 21.05 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 31,660, 36,730, 43,780, 49,400, 57,670.",
                 "id": "helpers-carpenters.faq.3",
                 "question": "What is the wage?",
-                "question_key": "career.faq.helpers-carpenters.q3"
+                "question_key": "career.faq.helpers-carpenters.q3",
+                "source_refs": [
+                  "onet-wages"
+                ]
               },
               {
-                "answer": "The BLS employment projections presented by O*NET on the 47-3012.00 page show: employment of 25,200 in 2024 and a projected 26,400 in 2034, 2024—2034 growth of Faster than average (5% to 6%) and marked Bright Outlook, with average annual openings of about 2,700 during the period (including growth and replacements). A projection is not equal to an individual job outcome.",
+                "answer": "BLS Table 1.2 for U.S. occupation 47-3012 shows about 21,900 jobs in 2025 and projects 21,500 in 2035 (−1.7%), with about 2,000 openings per year including replacements. Counts are rounded independently.",
                 "id": "helpers-carpenters.faq.4",
                 "question": "What are the employment prospects?",
-                "question_key": "career.faq.helpers-carpenters.q4"
+                "question_key": "career.faq.helpers-carpenters.q4",
+                "source_refs": [
+                  "bls-ep-2025-2035"
+                ]
               },
               {
-                "answer": "O*NET places this occupation in Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)); the education section on that page does not give percentages for each level, only stating that some positions require a high school diploma or equivalent, some require less than a high school diploma, and some require a post-secondary certificate; it is marked Bright Outlook. In mainland China, positions involving scaffolding and working at height and machinery and cutting must meet building construction safety and occupational health requirements and obtain the corresponding qualifications or work permits; the specifics are governed by the requirements of the enterprise and the competent authority.",
+                "answer": "BLS lists no formal educational credential as typical for U.S. entry, with short-term on-the-job training. Check employer requirements, site safety training and assigned tasks separately. MOHURD guidance calls for safety training for construction workers entering a site to perform construction. Verify the specific hiring conditions and division of work with the employer.",
                 "id": "helpers-carpenters.faq.5",
                 "question": "What education and qualifications are needed?",
-                "question_key": "career.faq.helpers-carpenters.q5"
+                "question_key": "career.faq.helpers-carpenters.q5",
+                "source_refs": [
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
+                ]
               },
               {
                 "answer": "No. This occupation only needs materials and work hours records and project communication applications and spreadsheets and office tools; programming is not an entry requirement for this occupation.",
@@ -32020,7 +32040,7 @@
                 "question_key": "career.faq.helpers-carpenters.q6"
               },
               {
-                "answer": "It will not be replaced as a whole. Task sheets and usage and materials and progress and knowledge retrieval can be assisted by systems, but on-site cutting and drilling and positioning and fastening and safety responsibility remain with experienced personnel; O*NET shows this occupation's 2024—2034 growth is Faster than average 5% to 6% and marked Bright Outlook, and automation changes the composition of tasks more than it eliminates positions.",
+                "answer": "BLS Table 1.2 for U.S. occupation 47-3012 shows about 21,900 jobs in 2025 and projects 21,500 in 2035 (−1.7%), with about 2,000 openings per year including replacements. Counts are rounded independently.",
                 "id": "helpers-carpenters.faq.7",
                 "question": "Will this occupation be replaced by AI or automation?",
                 "question_key": "career.faq.helpers-carpenters.q7"
@@ -32038,10 +32058,19 @@
                 "question_key": "career.faq.helpers-carpenters.q9"
               },
               {
-                "answer": "This page uses O*NET 47-3012.00 and U.S. BLS OEWS 2025 and BLS employment projections 2024—2034 as its main sources, and cites ILO and NIST research on occupational exposure and governance; all values are the U.S. this occupation's own scope and do not cover mainland China; for mainland China only the statistical scope and visible gaps are registered; this page does not constitute safety or occupational health or quality or legal advice.",
+                "answer": "BLS Table 1.2 for U.S. occupation 47-3012 shows about 21,900 jobs in 2025 and projects 21,500 in 2035 (−1.7%), with about 2,000 openings per year including replacements. Counts are rounded independently.",
                 "id": "helpers-carpenters.faq.10",
                 "question": "What are the sources and scope boundaries of this page?",
                 "question_key": "career.faq.helpers-carpenters.q10"
+              },
+              {
+                "answer": "In the original, A is ready. Keep B's 420 and 402 mm entries and send them to the carpenter. Keep C's counts of one and two and send them to the stock clerk. In the variant, A and B are ready. C is still pending.",
+                "id": "helpers-carpenters.faq.paper-exercise",
+                "question": "Paper exercise answer key (open after completing)",
+                "question_key": "career.faq.helpers-carpenters.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -32056,7 +32085,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Source card | Research process: first check the official scope and tasks and work activities and work context and interest code and Job Zone and certification and training opportunities of U.S. O*NET/SOC 47-3012.00 (Helpers--Carpenters), then take the BLS OEWS 2025 wages and the employment and growth and openings of the BLS employment projections 2025—2035 (all as presented on the O*NET page, and that page does not mark them as taken from a parent or adjacent occupation, so they are presented according to this occupation's own scope), and register the scope and gaps for mainland China according to the National Bureau of Statistics and building construction safety and special operations and occupational health and environmental protection systems."
+              "O*NET describes the work. OEWS and BLS Table 1.2 supply U.S. wages and employment. NBS data provide mainland China industry context, and site qualifications depend on the applicable rules and actual task."
             ]
           },
           "id": "helpers-carpenters.sources.source-card.1",
@@ -32084,12 +32113,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round, checked on 2026-10-11: O*NET47-3012 precise 19 tasks 12Core/7Supplemental, the original activities 86/84/80/78/75/73/70 and context, education only qualitative, RC and Zone1-2; 13 software categories / 14 hot items with all shares unavailable; precise May2025 quintiles and the BLS2025—2035 matrix, the OOH group background, NBS2025, and MOHURD Order 60."
+              "Use O*NET for U.S. tasks and work context and BLS Table 1.2 for employment projections and typical preparation. Verify mainland China site requirements under applicable rules and project procedures."
             ]
           },
           "id": "helpers-carpenters.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -32098,7 +32129,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Precise occupational wages and employment for China, precise industry/regional wages in the United States, AI adoption measured effects and causality, and psychological assessment validity have not been obtained; the industry background is the construction laborers and helpers group. Education shares are not guessed, and the absence of specific apprenticeship titles in the entry list does not imply they do not exist; protected surfaces and shared-source old projections are retained, and full-page synchronization is not claimed."
+              "U.S. wage percentiles and employment projections come from OEWS and BLS Table 1.2. Industry wages cover the broader construction laborers and helpers group. Check local and role-specific pay separately."
             ]
           },
           "id": "helpers-carpenters.sources.source-card.4",
@@ -32130,25 +32161,25 @@
                 "entity": "Big Five personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "This occupation (Helpers--Carpenters)",
@@ -32194,7 +32225,7 @@
                 "accessed_at": "2026-09-22",
                 "details": [
                   "Used to check the official scope (Help carpenters by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment.) and common job titles.",
-                  "Used to check the interest code (RC) and Job Zone 1-2 (little or no preparation needed to some preparation needed) and Bright Outlook and industry distribution (construction)."
+                  "U.S. employment projections use BLS Table 1.2. O*NET describes the occupation and its work."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "bls",
@@ -32209,15 +32240,15 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to check employment of 25,200 in 2024 and 26,400 in 2034, 2024—2034 growth of 5% to 6%, and average annual openings of about 2,700 during the period (including growth and replacements).",
-                  "Used to explain that employment projections and OEWS point-in-time employment estimates have different scopes, and that a projection is not equal to an individual job outcome and openings consist mainly of replacement needs."
+                  "The employment projections shown here come from BLS Table 1.2.",
+                  "The employment projections shown here come from BLS Table 1.2."
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
-                "limitation": "This is the occupation's scope as presented by O*NET on the 47-3012.00 page; growth 5% to 6% and marked Bright Outlook.",
+                "limitation": "U.S. employment projections use the 47-3012 occupation row in BLS Table 1.2.",
                 "market": "United States",
                 "name": "O*NET OnLine: Helpers--Carpenters employment trend (47-3012.00, this occupation's own scope)",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
+                "period": "Occupational profile or live lookup",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "47-3012.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localtrends/47-3012.00"
@@ -32228,11 +32259,11 @@
                   "Used to check the median hourly wage of $21.05 and median annual wage of $43,780 and the 10th/25th/75th/90th percentiles (hourly wage 15.22 / 17.66 / 23.75 / 27.73 dollars, annual wage 31,660 / 36,730 / 49,400 / 57,670 dollars).",
                   "Used to explain that wage percentiles are not experience levels and are not equal to an individual's starting wage."
                 ],
-                "evidence_type": "official wage display",
+                "evidence_type": "OEWS national occupational wages",
                 "id": "oews",
                 "limitation": "O*NET does not mark the wage data on that page as taken from a parent or adjacent occupation; this page presents them according to this occupation's own scope, excluding benefits and bonuses.",
                 "market": "United States",
-                "name": "O*NET OnLine: Helpers--Carpenters national wages (47-3012.00, this occupation's own scope)",
+                "name": "U.S. national wages for carpenter helpers (47-3012)",
                 "period": "2025 BLS OEWS wage data via O*NET",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "47-3012.00 exact occupation",
@@ -32289,18 +32320,18 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to explain work safety requirements for scaffolding and shoring and edges and openings and working at height and machinery and cutting.",
-                  "Operations involving special operations must undergo safety technology training and assessment and be performed with a certificate."
+                  "Item 6 addresses safety education for workers entering construction sites to work.",
+                  "Verify the rule for the actual task with the competent authority."
                 ],
-                "evidence_type": "regulator portal",
+                "evidence_type": "Departmental notice",
                 "id": "facilities",
-                "limitation": "The regulations and requirements issued by the competent authority prevail.",
+                "limitation": "Verify requirements for the actual assignment.",
                 "market": "Mainland China",
-                "name": "Ministry of Emergency Management of the People's Republic of China: work safety and special operations and dangerous operations management",
+                "name": "MOHURD notice on construction worker safety training",
                 "period": "current; accessed 2026-09-22",
-                "publisher": "Ministry of Emergency Management",
-                "scope": "work safety and special operations",
-                "url": "https://www.mem.gov.cn/"
+                "publisher": "MOHURD General Office",
+                "scope": "Mainland China construction-site safety training",
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2024/art_17339_767894.html"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32433,24 +32464,24 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used for field and evidence scope and gap registration rules.",
-                  "Used to explain cross-market and cross-jurisdiction scope boundaries."
+                  "Tools may help organize records. Verify key information against the original.",
+                  "Tools may help organize records. Verify key information against the original."
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "Editorial explanation",
                 "id": "employer",
-                "limitation": "Internal scope rules, not an external factual source.",
-                "market": "Global",
-                "name": "FermatMind career content field and evidence scope rules",
-                "period": "current authoring rules",
+                "limitation": "This explanation does not measure adoption or work outcomes.",
+                "market": "This page",
+                "name": "FermatMind task and human review notes",
+                "period": "This page",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "Tasks on this page",
                 "url": "https://fermatmind.com"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to check certification and specialty qualification search entry points related to this occupation.",
-                  "In mainland China, matters involving scaffolding and machinery operation and working at height require qualifications or work permits recognized by the competent authority; the specifics are governed by the requirements of the enterprise and the competent authority."
+                  "O*NET lists credentials related to this U.S. occupation.",
+                  "Use the directory to find U.S. issuers. Check state, employer and task requirements separately."
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "purchasing-managers",
@@ -32543,20 +32574,19 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Used to check that construction is the main industry.",
-                  "Used to explain the main employer types."
+                  "The May 2025 national median for U.S. occupation 47-3012 was USD 43,780 a year and USD 21.05 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 31,660, 36,730, 43,780, 49,400, 57,670."
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "OEWS national occupational wages",
                 "id": "onet-wages",
-                "limitation": "This scope is the U.S. distribution and does not establish a mainland China mapping.",
+                "limitation": "National occupational distribution. Local wages and individual offers vary.",
                 "market": "United States",
-                "name": "O*NET OnLine: Helpers--Carpenters industry distribution (47-3012.00)",
-                "period": "current page; accessed 2026-09-22",
+                "name": "U.S. national wages for carpenter helpers (47-3012)",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "47-3012.00 exact occupation",
-                "url": "https://www.onetonline.org/link/industry/47-3012.00"
+                "url": "https://www.onetonline.org/link/localwages/47-3012.00"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32606,21 +32636,85 @@
                 "url": "https://www.mohurd.gov.cn/gongkai/zhengce/gzk/art/2025/art_f3913c15c84e4bbc8d4fb21af3370fb8.html"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Materials and preparation — 25/100; weight=1/3; helpers-carpenters.ai-impact.ai-impact-table.95[0]",
-                  "Cutting and processing — 0/100; weight=1/3; helpers-carpenters.ai-impact.ai-impact-table.99[0]",
-                  "Coordination and positioning — 0/100; weight=1/3; helpers-carpenters.ai-impact.ai-impact-table.103[0]"
+                  "BLS Table 1.2 for U.S. occupation 47-3012 shows about 21,900 jobs in 2025 and projects 21,500 in 2035 (−1.7%), with about 2,000 openings per year including replacements. Counts are rounded independently.",
+                  "BLS lists no formal educational credential as typical for U.S. entry, with short-term on-the-job training. Check employer requirements, site safety training and assigned tasks separately."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "47-3012",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "MOHURD guidance calls for safety training for construction workers entering a site to perform construction. Verify the specific hiring conditions and division of work with the employer."
+                ],
+                "id": "cn-work-example",
+                "limitation": "The notice explains site training requirements. It gives no nationwide wage figures or uniform schooling requirement for this occupation.",
+                "market": "Mainland China",
+                "name": "MOHURD guidance on construction workers",
+                "period": "2022",
+                "publisher": "MOHURD General Office",
+                "scope": "Mainland China construction-site requirements",
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2024/art_17339_767894.html"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks the paper records only.",
+                "market": "This page",
+                "name": "Sheet M: Stock preparation handoff",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "scope": "Paper exercise",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Woodworking tool guarding on covered construction sites."
+                ],
+                "id": "osha-wood",
+                "limitation": "For applicable U.S. construction sites.",
+                "market": "United States",
+                "name": "OSHA 1926.304",
+                "period": "29 CFR 1926",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.304"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Trained and experienced employees selected by a competent person alter scaffolds under supervision."
+                ],
+                "id": "osha-scaffold",
+                "limitation": "For applicable U.S. construction sites.",
+                "market": "United States",
+                "name": "OSHA 1926.451",
+                "period": "29 CFR 1926",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.451"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The directory and its appendix identify covered tasks and the conditions for credential coverage and recognition."
+                ],
+                "id": "special-work-directory-2026",
+                "limitation": "Verify the applicable scope under the appendix and relevant policies. Check site authorization and safety conditions separately.",
+                "market": "Mainland China",
+                "name": "Joint special operations directory (2026 No. 45)",
+                "period": "2026-06-01",
+                "publisher": "MEM, MOHURD and National Mine Safety Administration",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202605/W020260526532904903760.pdf"
               }
             ]
           },
@@ -33957,8 +34051,8 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
-        "entry_heading": "How new graduates or career changers can verify and get started",
-        "heading": "How to become a Helper--Carpenter: education, qualifications, and career development paths",
+        "entry_heading": "Entry and Sheet M: Stock preparation handoff",
+        "heading": "Entry and Sheet M: Stock preparation handoff",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "helpers-carpenters.path.career-path-block.21",
@@ -34341,7 +34435,7 @@
                 }
               }
             ],
-            "title": "Formwork and component coordination direction"
+            "title": "Carpentry materials and handoff"
           },
           {
             "id": "safety-and-cleanup",
@@ -34865,7 +34959,9 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "bls",
+              "osha-wood",
+              "osha-scaffold"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34897,7 +34993,9 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "bls",
+              "osha-wood",
+              "osha-scaffold"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -35127,6 +35225,42 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "osha-wood",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-carpenters.source-register.published.1"
+            },
+            "id": "osha-wood",
+            "label": {
+              "$source": "osha-wood",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-carpenters.source-register.published.1"
+            },
+            "scope": "Woodworking tool guarding on covered construction sites."
+          },
+          {
+            "href": {
+              "$source": "osha-scaffold",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-carpenters.source-register.published.1"
+            },
+            "id": "osha-scaffold",
+            "label": {
+              "$source": "osha-scaffold",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-carpenters.source-register.published.1"
+            },
+            "scope": "Trained and experienced employees selected by a competent person alter scaffolds under supervision."
           }
         ]
       },
@@ -35436,7 +35570,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-carpenters.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35450,7 +35584,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-carpenters.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35464,7 +35598,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-carpenters.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35487,12 +35621,12 @@
           "ui": {
             "ai_heading": "Will AI affect the wages of Helpers--Carpenters?",
             "driver_heading": "Which industries and directions use this occupation?",
-            "official_heading": "China industry wage background and precise occupational gap",
-            "scenario_caption": "Education background, common position directions, and verification advice (editorial compilation, not wage statistics)",
-            "scenario_heading": "With different education backgrounds, which position directions do Helpers--Carpenters usually start from?",
-            "scenario_interpretation_label": "Notes and verification advice",
-            "scenario_role_label": "Education background",
-            "scenario_value_label": "Common position directions"
+            "official_heading": "2025 annual wage context for urban units",
+            "scenario_caption": "Role and pay checks",
+            "scenario_heading": "What should you check in a job posting?",
+            "scenario_interpretation_label": "Ask the employer",
+            "scenario_role_label": "Scope",
+            "scenario_value_label": "Check"
           },
           "us_growth": {
             "$item": "helpers-carpenters.china-salary.career-snapshot-primary-locale.58",
@@ -35698,15 +35832,15 @@
             }
           }
         ],
-        "factors_heading": "Which factors affect U.S. wages for Helpers--Carpenters?",
+        "factors_heading": "What affects pay",
         "growth": {
           "$item": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "What are the U.S. wages for Helpers--Carpenters?",
-        "industry_heading": "How much do U.S. wages differ across industries?",
+        "heading": "U.S. carpenter helper wages",
+        "industry_heading": "Industry wages for U.S. construction laborers and helpers",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
@@ -35794,7 +35928,7 @@
           }
         ],
         "industry_value_label": "Median wage for the construction laborers and helpers occupational group within the industry (background)",
-        "interpretation_heading": "How should this set of U.S. wage figures be understood?",
+        "interpretation_heading": "How to read the percentiles",
         "interpretation_rows": [
           {
             "answer": {
@@ -35844,52 +35978,55 @@
         "wage_column_labels": [
           "Wage statistical position",
           "Annual wage reference",
-          "Conversion boundaries",
+          "Hourly wage",
           "How to understand this position"
         ],
-        "wage_heading": "U.S. wage distribution",
+        "wage_heading": "National wage percentiles",
         "wage_tiers": [
           {
-            "equivalent": "Official annual wage, not individual monthly income",
+            "equivalent": "USD 15.22/hour",
             "interpretation": {
               "$item": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Lowest 10%",
-            "value": {
-              "$fact": "us-wage-low10-2025",
-              "field": "display_value"
-            }
+            "label": "10th percentile",
+            "value": "USD 31,660/year"
           },
           {
-            "equivalent": "Official annual wage, not an individual's actual take-home pay",
+            "equivalent": "USD 17.66/hour",
+            "interpretation": "May 2025 U.S. national wage.",
+            "label": "25th percentile",
+            "value": "USD 36,730/year"
+          },
+          {
+            "equivalent": "USD 21.05/hour",
             "interpretation": {
               "$item": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Median (50%)",
-            "value": {
-              "$fact": "us-wage-2025",
-              "field": "display_value"
-            }
+            "label": "50th percentile",
+            "value": "USD 43,780/year"
           },
           {
-            "equivalent": "Official annual wage, not an individual's actual take-home pay",
+            "equivalent": "USD 23.75/hour",
+            "interpretation": "May 2025 U.S. national wage.",
+            "label": "75th percentile",
+            "value": "USD 49,400/year"
+          },
+          {
+            "equivalent": "USD 27.73/hour",
             "interpretation": {
               "$item": "helpers-carpenters.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Highest 10%",
-            "value": {
-              "$fact": "us-wage-high10-2025",
-              "field": "display_value"
-            }
+            "label": "90th percentile",
+            "value": "USD 57,670/year"
           }
         ]
       },
@@ -35920,7 +36057,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person suits Helpers--Carpenters?"
+        "title": "What work preferences fit a carpenter helper role?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36033,7 +36170,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "helpers-carpenters.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36078,7 +36215,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "helpers-carpenters.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36123,7 +36260,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "oews",
             "value": {
               "$item": "helpers-carpenters.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36501,7 +36638,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS employment projections (2024—2034, this occupation's own scope)",
+            "label": "2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "helpers-carpenters.profile.onet-structured-fields-block.4",
@@ -37442,14 +37579,14 @@
       "interface.path.credential_boundary_label": "Qualification boundaries",
       "interface.path.entry_decisions_heading": "What to verify before entering the field",
       "interface.path.next_step_label": "Next steps",
-      "interface.path.promotion_evidence_label": "Promotion evidence",
+      "interface.path.promotion_evidence_label": "Stage records and exploration exercises",
       "interface.path.responsibilities_label": "Typical duties",
       "interface.profile.comparison.dimension_header": "Dimension",
       "interface.profile.comparison.primary_header": "Main direction",
       "interface.profile.comparison.secondary_header": "Comparison direction",
       "interface.profile.responsibilities_heading": "Core work",
       "interface.quick_decision.caution_heading": "In what situations should choosing Helpers--Carpenters be approached with caution?",
-      "interface.quick_decision.experiment_heading": "How can a small experiment help judge whether you suit Helpers--Carpenters?",
+      "interface.quick_decision.experiment_heading": "What can you learn from a short paper exercise?",
       "interface.quick_decision.suit_heading": "What kind of person is more likely suited to Helpers--Carpenters?",
       "interface.risk.affected_roles_label": "Main positions",
       "interface.risk.consequence_label": "Possible consequences",
@@ -37551,19 +37688,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
-      "china-salary": "Mainland China salary reference",
+      "ai-impact": "AI tools and human review",
+      "china-salary": "Mainland China wage references",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
       "market-signals": "Career prospects and moving to related occupations",
       "navigation": "Next steps and related entry points",
-      "path": "Entry, qualifications, and career development",
+      "path": "Entry and Sheet M: Stock preparation handoff",
       "profile": "Occupational profile",
       "quick-decision": "Quick assessment",
       "risk": "Work pressure, risks, and occupational boundaries",
       "source-register": "Sources",
       "sources": "Frequently asked questions and sources",
-      "us-salary": "U.S. salary reference"
+      "us-salary": "U.S. carpenter helper wages"
     }
   },
   "fact_register": {
@@ -37581,15 +37718,15 @@
         ]
       },
       {
-        "derivation": "Scope | 2025 BLS OEWS national wages, as presented by O*NET on the 47-3012.00 page; the page does not mark the data as taken from a parent or adjacent occupation, and this page labels it faithfully according to this occupation's own scope; benefits and bonuses are excluded; the median is the midpoint of the distribution and percentiles are distribution positions, and neither corresponds to an individual's starting salary; later updates are subject to a query for the current period on the official page.",
-        "display_value": "Median hourly wage $21.05 / median annual wage $43,780 (2025, BLS OEWS, this occupation's (47-3012.00) own scope)",
+        "derivation": "Direct national annual median from BLS OEWS.",
+        "display_value": "USD 43,780/year",
         "fact_id": "us-wage-2025",
         "market": "United States",
-        "measure": "Median wage",
-        "occupation_scope": "This occupation: Helpers--Carpenters",
-        "period": "2025",
+        "measure": "U.S. median annual wage (May 2025)",
+        "occupation_scope": "47-3012",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "onet-wages"
         ]
       },
       {
@@ -37617,39 +37754,39 @@
         ]
       },
       {
-        "derivation": "Scope | BLS employment projections 2024—2034 (as presented by O*NET on the 47-3012.00 page, this occupation's own scope, with growth labeled Faster than average 5% to 6% and marked Bright Outlook); the employment base period on that O*NET page is 25,200 in 2024; the projection includes replacement needs and is not equal to actual hiring or layoffs, and is affected by construction activity and workforce organization.",
-        "display_value": "Growth Faster than average (5% to 6%) and marked Bright Outlook (2024—2034, BLS employment projections, this occupation's (47-3012.00) own scope)",
+        "derivation": "Directly from the matching occupation row of BLS Table 1.2.",
+        "display_value": "−1.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Employment growth",
-        "occupation_scope": "This occupation: Helpers--Carpenters",
-        "period": "2024—2034",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "47-3012",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "Scope | BLS employment projection base period (about 25,200 for this occupation in 2024, as presented by O*NET); this differs in scope from the BLS OEWS point-in-time employment estimate (OEWS covers only sampled non-farm establishment employers and excludes self-employment), and this page labels them separately without mixing them.",
-        "display_value": "Employment about 25,200 (2024, BLS employment projection base period, this occupation's (47-3012.00) own scope)",
+        "derivation": "Directly from the matching occupation row of BLS Table 1.2.",
+        "display_value": "About 21,900 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment figure",
-        "occupation_scope": "This occupation: Helpers--Carpenters",
-        "period": "2024",
+        "measure": "U.S. employment (2025)",
+        "occupation_scope": "47-3012",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "Scope | Period openings in the BLS employment projections (about 2,700 per year on average for this occupation in 2024—2034, including growth and replacements, as presented by O*NET); this is a period annual average scope consisting mainly of replacement needs, and it cannot be read as net new positions.",
-        "display_value": "Projected average annual job openings of about 2,700 (2024—2034, BLS employment projections, this occupation's (47-3012.00) own scope, including growth and replacements)",
+        "derivation": "Directly from the matching occupation row of BLS Table 1.2.",
+        "display_value": "About 2,000 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Average annual job openings",
-        "occupation_scope": "This occupation: Helpers--Carpenters",
-        "period": "2024—2034",
+        "measure": "U.S. annual openings (2025–2035)",
+        "occupation_scope": "47-3012",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -37699,57 +37836,45 @@
         "source_refs": [
           "onet"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "8%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Helpers--Carpenters",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
-      "Helpers--Carpenters · tasks, deliverables, and responsibility boundaries",
-      "Materials and cutting and positioning · material supply and cleaning documentation · site and process responsibility",
-      "U.S. occupational materials; the precise occupational wage gap for China is retained according to the source"
+      "Carpenter Helpers",
+      "Wages and projections use separate tables",
+      "China occupational wage distribution unavailable"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "U.S. median salary (2025, BLS OEWS, this occupation's (47-3012.00) own scope)"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034, this occupation's (47-3012.00) own scope)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment (2024, this occupation's (47-3012.00) own scope)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024—2034, this occupation's (47-3012.00) own scope)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -37763,17 +37888,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What Helpers--Carpenters do, what capabilities and qualifications are needed, what the wages and prospects are, and which tasks AI will change. Retains the occupational scope (O*NET 47-3012.00), Job Zone 1-2 (little or no preparation needed to some preparation needed) and the education note, the U.S. wages and employment under this occupation's own scope, and the mainland China data gap."
+      "text": "Explore carpenter helpers tasks, U.S. wage percentiles and employment projections, with a paper exercise on checking records."
     },
     "title": {
       "availability": "available",
-      "text": "Helpers--Carpenters"
+      "text": "Carpenter Helpers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "ac8368580fbad2f1e854cdcc290ac28993f3100b959e01b74c53d240170e9c38",
+  "source_content_sha256": "95f3e29075c2c1b5924c479a2871d399bd40e8d7fd694da0ca77a04c2f24a679",
   "subject": {
     "canonical_slug": "helpers-carpenters",
-    "name": "Helpers--Carpenters",
-    "summary": "Helpers--Carpenters corresponds to the exact occupation O*NET/SOC 47-3012.00 \"Helpers--Carpenters\": help carpenters by performing duties requiring less skill: using, supplying, or delivering materials and tools, and cleaning the work area and equipment. Core tasks include erecting scaffolding and shoring, cleaning work areas and machines and equipment to keep the site tidy and safe, aligning and straightening and leveling and squaring forms for installation, selecting tools and equipment or materials from storage and moving materials to the work site, and fastening lumber with glue and screws and dowels or nails and installing hardware; common job titles include Carpenter Helper and Carpenter Assistant and Carpenter Apprentice and Helper. Official scope text: Help carpenters by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment. Scope note: the U.S. wage and employment and industry data presented by O*NET on the 47-3012.00 page are not marked as taken from a parent or adjacent occupation, and this page labels them faithfully according to this occupation's (47-3012.00) own scope; this occupation is Job Zone 1-2 (little or no preparation needed to some preparation needed) (below 6.0 (SVP Below 6.0)), with 2024—2034 growth of Faster than average (5% to 6%) and marked Bright Outlook. The content of this page does not constitute safety, occupational health, or legal advice."
+    "name": "Carpenter Helpers",
+    "summary": "Carpenter helpers prepare materials and tools, position and hold stock, check dimensions against work instructions and keep the work area clear. Ask which tasks you can assist with, who checks dimensions and who owns fabrication and sign-off."
   }
 }

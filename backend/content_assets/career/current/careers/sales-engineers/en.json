@@ -22951,7 +22951,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Verify customer operating conditions, interfaces, performance, budget, and acceptance criteria; prepare customer-specific proposals and bid responses based on product materials; arrange demonstrations, prototypes, or trial installations and define test boundaries; deliver implementation or support handover records. Key capabilities, prices, and contract terms must be verified with source materials and authorization."
+              "Ask how presales, sales, and delivery share the work. Verify technical results and external commitments separately."
             ]
           },
           "id": "sales-engineers.quick-decision.fit-decision-checklist.1",
@@ -22966,7 +22966,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Adjacent occupations are distinguished by main work output, knowledge requirements, and management responsibility; shared customer communication does not mean the same statistics, duties, or qualifications."
+              "In section 09, “Entry, qualifications, and career development,” try SE-P01: Check a proof of concept against customer requirements. Save a first draft before checking the key."
             ]
           },
           "id": "sales-engineers.quick-decision.fit-decision-checklist.2",
@@ -22980,7 +22980,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "AI assists with material retrieval, requirement summaries, and copy drafts; real product capabilities, quotes, contracts, customer data, and delivery commitments are verified by people."
+              "Consider this work if you enjoy translating customer needs into testable criteria and explaining solutions with evidence."
             ]
           },
           "id": "sales-engineers.quick-decision.fit-decision-checklist.3",
@@ -22996,7 +22996,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "This page is based on official occupational tasks and fictional practice and does not predict individual hiring; position knowledge, education, qualifications, and authorization are verified per region and employer."
+              "Record customer requirements, test conditions, evidence, and commitments separately."
             ]
           },
           "id": "sales-engineers.quick-decision.fermat-decision-card.6",
@@ -23011,7 +23011,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The BLS 2025 median annual wage for sales engineers is 124,900 U.S. dollars; 2025—2035 employment goes from 51,600 to 53,000, a change of 2.8%, with 3,800 annual openings. Chinese industry averages serve only as background."
+              "Consider this work if you enjoy translating customer needs into testable criteria and explaining solutions with evidence."
             ]
           },
           "id": "sales-engineers.quick-decision.fermat-decision-card.7",
@@ -27368,31 +27368,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Sales representatives, technical and scientific products",
@@ -29129,9 +29129,9 @@
               {
                 "id": "clearance",
                 "values": [
-                  "Position authorization",
-                  "Quotes, contracts, technical commitments, and data access are separated.",
-                  "Verify the organizational approval chain."
+                  "Bohai New Energy presales engineer",
+                  "The posting covers discovery, tailored demonstrations, and proposals for distribution-grid software.",
+                  "Ask how presales, sales, and delivery share the work. Verify technical results and external commitments separately."
                 ]
               },
               {
@@ -29145,9 +29145,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "Systems and materials",
-                  "CRM, inventory, technical product catalogs, and after-sales systems require corresponding training and customer data access.",
-                  "Verify system access, price versions, order handover, and information protection rules."
+                  "Shixi Technology presales engineer",
+                  "The posting lists customer discovery, data-security solutions, proofs of concept, and demos.",
+                  "The posting covers discovery, design, demos, and success criteria for proofs of concept."
                 ]
               }
             ]
@@ -29155,7 +29155,10 @@
           "id": "sales-engineers.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d016-cn-main",
+            "d016-cn-context",
+            "d016-us-example"
           ],
           "title": "What do employers usually look at in hiring?",
           "type": "cards"
@@ -29168,37 +29171,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and setup｜All editorially designed fictional industrial equipment and system proposals",
-                  "You are a supervised trainee who only checks materials, proposals, and handover; do not commit to real performance, prices, or contracts.",
-                  "A1｜The customer requires processing 100 units per hour, but existing tests verified only 80 units, so performance is not met.",
-                  "A2｜Product material v2 is inconsistent with the demonstration environment v1, and the interface conditions are unknown.",
-                  "A3｜The quote includes a discount, but no authorization approval is visible.",
-                  "A4｜The customer log contains access credentials and must not be sent directly to external tools.",
-                  "A5｜The implementation team has not confirmed integration, but the sales summary says it is already deliverable."
+                  "Fictional inputs",
+                  "Fictional customer requirements R4 specify at least 200 records in 60 minutes with 40 terminals active, plus an audit log. The target environment uses connector C3.",
+                  "Test report P2 processed 214 records in 60 minutes with 20 terminals on C3. No audit log was collected. A sales draft describes P2 as validation under the customer’s conditions.",
+                  "The technical lead verifies test coverage, the customer confirms acceptance criteria, and the commercial owner approves external commitments."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task one: mark unresolved items",
-                  "Following A1—A5, list source evidence, conflicts, unknowns, and paused commitment items.",
-                  "Do not invent missing materials and do not treat model suggestions as approval."
+                  "Task and deliverable",
+                  "Submit a one-page gap analysis and follow-up test plan, with requirements, observations, coverage gaps, and owners.",
+                  "Check environment, load, and outputs separately. Keep both versions.",
+                  "Use paper or a local spreadsheet and identify the evidence."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Task two: write the review and handover",
-                  "Make a checklist by requirement, version, condition, responsible person, and evidence pending.",
-                  "Require verification by the corresponding technical, commercial, data, or delivery responsible officer.",
-                  "Separate reported, verified, and approved."
+                  "Before checking your work",
+                  "Save your draft before checking the key after the seven-day plan.",
+                  "Work independently.",
+                  "Keep the versions.",
+                  "Leave missing evidence open."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Practice boundaries",
-                  "A1—A5 are entirely fictional and are not technical product safety certification or real price advice; real electrical compatibility is verified by official materials or professionals, and customer materials are handled only in approved systems."
+                  "Authority boundaries",
+                  "Use the fictional records only.",
+                  "Do not approve or release real work."
                 ]
               }
             ]
@@ -29207,7 +29210,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry practice: error checking and handover for fictional industrial equipment and system proposals",
+          "title": "SE-P01 | Check a proof of concept against customer requirements",
           "type": "cards"
         },
         {
@@ -29218,33 +29221,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Requirement and performance card",
-                  "List the related A1—A5 evidence, unknowns, and recipient.",
-                  "Others can recheck the source materials and do not mistake it for approved."
+                  "Version and material record",
+                  "Identify the original record and current version.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Version and quote card",
-                  "List the related A1—A5 evidence, unknowns, and recipient.",
-                  "Others can recheck the source materials and do not mistake it for approved."
+                  "Inputs and status",
+                  "Compare source records, targets, and discrepancies.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Data and delivery card",
-                  "List the related A1—A5 evidence, unknowns, and recipient.",
-                  "Others can recheck the source materials and do not mistake it for approved."
+                  "Open checks and handoff",
+                  "Separate open checks, verified findings, and owners.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "AI draft review notes",
-                  "If a tool generates a comparison table, review A1—A5 item by item and mark fabricated parameters and outdated prices.",
-                  "Tools do not decide compatibility, discounts, or payment success."
+                  "Delivery boundaries",
+                  "Record physical checks and approval status.",
+                  "Use the supplied records."
                 ]
               }
             ]
@@ -29275,27 +29278,27 @@
             "rows": [
               [
                 "Requirement follow-up",
-                "What to do when key conditions are unverified",
-                "List knowns and unknowns and follow up",
-                "Simulation does not grant commitment authority"
+                "Identify the original record and current version.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Material verification",
-                "What to do when versions or specifications conflict",
-                "Return to source materials and record the differences",
-                "Does not guess compatibility conclusions"
+                "Compare source records, targets, and discrepancies.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Commercial verification",
-                "What to do when a quote or contract is not approved",
-                "Refer to the approver and keep the limits",
-                "Does not approve on someone's behalf"
+                "Separate open checks, verified findings, and owners.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Handover review",
-                "How to explain unresolved items",
-                "Write the responsible person, evidence, and next steps",
-                "Does not predict long-term performance"
+                "Record physical checks and approval status.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ]
             ]
           },
@@ -29315,50 +29318,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day one",
-                  "Read A1—A2, and verify the requirement and material conflicts."
+                  "Day 1",
+                  "Record the subject and versions."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day two",
-                  "Read A3—A4, and verify commercial and data access."
+                  "Day 2",
+                  "Identify the original record and current version."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day three",
-                  "Read A5, and write the unresolved items and handover."
+                  "Day 3",
+                  "Compare source records, targets, and discrepancies."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day four",
-                  "Verify the A3 inventory update time and list the physical items to verify."
+                  "Day 4",
+                  "Separate open checks, verified findings, and owners."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day five",
-                  "Verify the A4 quote against the CRM price and write the supervisor handover sheet."
+                  "Day 5",
+                  "Record physical checks and approval status."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day six",
-                  "Use a tool to draft comparison copy, correct it item by item, and cite sources."
+                  "Day 6",
+                  "Finish the handoff before checking the key and rubric below, then make one revision. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day seven",
-                  "Compile the requirement card, price review sheet, and after-sales handover, and review the position training needs."
+                  "Day 7",
+                  "Organize your four practice outputs. Keep the source records and review status."
                 ]
               }
             ]
@@ -29375,20 +29378,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep the A1—A5 first drafts and the basis for changes.",
-              "Check whether unknown performance, prices, or approvals were invented.",
-              "Confirm that items to verify remain marked unknown and that the recipient and next steps are clear.",
-              "Record whether you are willing to repeatedly verify materials and explain conditions; do not convert this into a fit score.",
-              "Verify product training, customer type, metrics, pay, and authorization with a real employer.",
-              "Redo the checklist and confirm that known, unknown, and approval status are separated.",
-              "If preferences are still unclear, compare adjacent position tasks and do not draw hiring conclusions from simulation results."
+              "P2 matches R4’s C3 connector. The 214 records were measured over 60 minutes with 20 terminals.",
+              "The test did not cover 40 simultaneous terminals, so the 214 records do not demonstrate performance at the requested load.",
+              "Log the audit output as untested. P2 neither verifies the requirement nor establishes that the product lacks the feature.",
+              "Ask the technical lead to test 40 terminals on C3, capture the audit log, and confirm the evaluation with the customer.",
+              "Flag the sales draft for revision and ask the commercial owner to confirm what can be promised externally.",
+              "Score each item 0–2: version and evidence, item-by-item decisions, unknown scope, and approval and handoff.",
+              "Award 2 for complete and traceable work, 1 for partial work, and 0 for missing evidence or exceeding authority."
             ]
           },
           "id": "sales-engineers.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide at the end of seven days whether to continue",
+          "title": "Answer key and self-check rubric",
           "type": "list"
         },
         {
@@ -29489,7 +29492,7 @@
               "Practice only with fictional requirements, materials, quotes, and handover, with no real customers; practice does not grant commercial, technical, or contract authority.",
               "This page uses public occupational materials and fictional materials; specific knowledge, authority, pay, and qualifications are verified per the target position and do not predict individual outcomes.",
               "This page uses public occupational materials and fictional materials; specific knowledge, authority, pay, and qualifications are verified per the target position and do not predict individual outcomes.",
-              "This page uses public occupational materials and fictional materials; specific knowledge, authority, pay, and qualifications are verified per the target position and do not predict individual outcomes."
+              "Ask how presales, sales, and delivery share the work. Verify technical results and external commitments separately."
             ]
           },
           "id": "sales-engineers.path.credential-boundary.1",
@@ -29506,16 +29509,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Certificate search is only an entry point; verify the issuing body, position relevance, and recognition scope, which do not equal signing or sales qualifications.",
-              "This page uses public occupational materials and fictional materials; specific knowledge, authority, pay, and qualifications are verified per the target position and do not predict individual outcomes."
+              "The posting lists customer discovery, data-security solutions, proofs of concept, and demos.",
+              "The posting covers discovery, design, demos, and success criteria for proofs of concept."
             ]
           },
           "id": "sales-engineers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "d016-cn-main",
+            "d016-us-example"
           ],
           "title": "Notes on hiring samples",
           "type": "notice"
@@ -31593,13 +31594,13 @@
                 "question_key": "career.faq.sales-engineers.education-path"
               },
               {
-                "answer": "Record and escalate when materials, requirements, verification, quotes, contracts, or data access conflict.",
+                "answer": "Ask how presales, sales, and delivery share the work. Verify technical results and external commitments separately.",
                 "id": "sales-engineers.faq.8",
                 "question": "In what situations should commitments be paused?",
                 "question_key": "career.faq.sales-engineers.credentials"
               },
               {
-                "answer": "Practice requirements, evidence, authority, and handover using only fictional A1—A5 materials; do not connect to real customers.",
+                "answer": "In section 09, “Entry, qualifications, and career development,” try SE-P01: Check a proof of concept against customer requirements. Save a first draft before checking the key.",
                 "id": "sales-engineers.faq.9",
                 "question": "How to do the entry practice?",
                 "question_key": "career.faq.sales-engineers.risk-boundary"
@@ -31629,7 +31630,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "AI assists with material and record drafts; requirements, capability, commercial authorization, data, and delivery are reviewed by people."
+              "SE-P01 is a fictional exercise for this page."
             ]
           },
           "id": "sales-engineers.sources.source-card.1",
@@ -31643,14 +31644,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational tasks follow this page's O*NET and related BLS occupational materials; U.S. wages keep the original precise or clearly parent-category／combined basis, and employment trends use the BLS 2025—2035 projection. Chinese wages supplement the National Bureau of Statistics 2025 pre-tax industry and broad-job averages for manufacturing and scientific research and technical services, explicitly not this occupation's wages and not AI-attributed."
+              "The posting covers discovery, tailored demonstrations, and proposals for distribution-grid software."
             ]
           },
           "id": "sales-engineers.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "bls",
-            "nbs"
+            "d016-cn-context"
           ],
           "type": "prose"
         },
@@ -31659,12 +31658,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Materials reviewed on this page as of 2026-09-28; sources can be rechecked, and fictional practice is kept separate from statistics."
+              "The posting lists customer discovery, data-security solutions, proofs of concept, and demos."
             ]
           },
           "id": "sales-engineers.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "d016-cn-main"
           ],
           "type": "prose"
         },
@@ -31673,13 +31672,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Fictional practice does not represent employer policy, does not grant work authority, and does not predict individual income or hiring."
+              "Read wages and projections for the applicable U.S. occupation. Employer postings and role descriptions illustrate individual responsibilities."
             ]
           },
           "id": "sales-engineers.sources.source-card.4",
           "source_refs": [
             "editor",
-            "privacy"
+            "privacy",
+            "d016-cn-main",
+            "d016-us-example"
           ],
           "type": "prose"
         }
@@ -31718,13 +31719,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the sales engineer career page",
@@ -31946,8 +31947,8 @@
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "FermatMind editorial fictional practice: for the corresponding task, statistical, or research scope.",
-                  "A fictional desktop exercise, not an actual customer proposal, employer policy, or commitment authorization."
+                  "SE-P01 is a fictional paper exercise.",
+                  "Record customer requirements, test conditions, evidence, and commitments separately."
                 ],
                 "evidence_type": "Editorial summary",
                 "id": "editor",
@@ -32199,6 +32200,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The posting lists customer discovery, data-security solutions, proofs of concept, and demos."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d016-cn-main",
+                "limitation": "For task and pathway comparison.",
+                "market": "Mainland China",
+                "name": "Shixi Technology presales engineer",
+                "period": "Date shown where available",
+                "publisher": "Shixi Technology presales engineer",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/home/correcruit/content/id/80363.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The posting covers discovery, tailored demonstrations, and proposals for distribution-grid software."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d016-cn-context",
+                "limitation": "For task and pathway comparison.",
+                "market": "Mainland China",
+                "name": "Bohai New Energy presales engineer",
+                "period": "Date shown where available",
+                "publisher": "Bohai New Energy presales engineer",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/home/correcruit/content/id/76400.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The posting covers discovery, design, demos, and success criteria for proofs of concept."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d016-us-example",
+                "limitation": "For task and pathway comparison.",
+                "market": "United States",
+                "name": "Secomea sales engineer, Americas",
+                "period": "Date shown where available",
+                "publisher": "Secomea sales engineer, Americas",
+                "scope": "recruitment_proxy",
+                "url": "https://careers.secomea.com/jobs/8552553-sales-engineer-amer"
               }
             ]
           },
@@ -35511,7 +35557,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person suits sales engineers?"
+        "title": "Would sales engineering suit me?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36893,7 +36939,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit sales engineers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37439,14 +37485,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Sales engineer occupation introduction: technical requirements, proposal recommendations, demonstrations and trials, technical explanation, commercial collaboration, delivery support, AI assistance and responsibility boundaries, U.S. 41-9031 wages and employment, China wholesale and retail industry background, and fictional practice."
+      "text": "Explore sales engineering, customer discovery, demos, and proofs of concept. Compare roles and U.S. wages, then try a validation exercise."
     },
     "title": {
       "availability": "available",
       "text": "Sales Engineers"
     }
   },
-  "source_content_sha256": "e4cfd2aa08e863508f8396de17572f2695178f1155194b864eeb42d1c848cdf6",
+  "source_content_sha256": "fb7dea6fcc3be2afb78f29386d0b29ff3fbc89beb05774ee72a16b28fcfeac24",
   "subject": {
     "canonical_slug": "sales-engineers",
     "name": "Sales Engineers",

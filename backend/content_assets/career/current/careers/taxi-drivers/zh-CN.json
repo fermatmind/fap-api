@@ -23670,15 +23670,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "观察能否把目的地时间和计费疑问说清、保留原值、遇缺项先确认。实际驾驶需合法证件、训练和安全状态；一次算对不能证明能合法载客或处理路面风险。"
+              "纸面体验｜在虚构订单中对照地名与上车入口，圈出一条同名地点但入口不同的记录，拟一句确认消息。 "
             ]
           },
           "id": "taxi-drivers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "cn-rule",
-            "sag",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -25112,17 +25109,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "出租车司机驾驶车辆运送临时需求的乘客并收取车费，通常使用计程计价设备；还需确认接送需求、与调度沟通、检查车辆状况、协助上下车并记录异常。本页以O*NET-SOC53-3054.00为基准，不把预约接送53-3053或客运公交合并。中国巡游与网约业务分别核驾驶证、从业资格注册、车辆及经营许可和地方要求；纸面体验不授实际载客运营资格。"
+              "出租车司机承接按需行程，确认上下车点，载送乘客并按适用安排收取车费。接单地点与车辆位置的变动需要及时核对。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "taxi-drivers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule",
-            "employer",
-            "sag",
-            "editorial"
+            "transfer-onet-53-3054.00"
           ],
           "type": "prose"
         }
@@ -25936,18 +25928,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分文字记录、导航派单与车辆控制；原资料、合法计价、目的地和安全运营条件均需核。工具可协助虚构问题整理，不能替驾驶训练许可、实时判断或实际乘客确认。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：在虚构订单中对照地名与上车入口，圈出一条同名地点但入口不同的记录，拟一句确认消息。"
             ]
           },
           "id": "taxi-drivers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule",
-            "employer",
-            "sag",
-            "nist",
-            "editorial"
+            "transfer-onet-53-3054.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -36034,6 +36021,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-53-3054.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 53-3054.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/53-3054.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -41506,10 +41520,10 @@
       "text": "出租车司机"
     }
   },
-  "source_content_sha256": "9b02eb1db2537fe59e41da49a5aa879a0cfd7f0f70b5653f6fbd8100d95876b9",
+  "source_content_sha256": "a82176dedf9653d515f458f60fc23715fbf18d531819d7c5205bae328b836ba0",
   "subject": {
     "canonical_slug": "taxi-drivers",
     "name": "出租车司机",
-    "summary": "出租车司机驾驶车辆运送临时需求的乘客并收取车费，通常使用计程计价设备；还需确认接送需求、与调度沟通、检查车辆状况、协助上下车并记录异常。本页以O*NET-SOC53-3054.00为基准，不把预约接送53-3053或客运公交合并。中国巡游与网约业务分别核驾驶证、从业资格注册、车辆及经营许可和地方要求；纸面体验不授实际载客运营资格。"
+    "summary": "出租车司机承接按需行程，确认上下车点，载送乘客并按适用安排收取车费。接单地点与车辆位置的变动需要及时核对。"
   }
 }

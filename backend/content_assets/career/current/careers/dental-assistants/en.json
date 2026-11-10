@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-dental-shunde": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-dental-yuechi": {
+        "status": "pending_mapping"
+      },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
       },
@@ -26104,12 +26110,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "In China, qualifications are verified first by actual activity: practicing nursing requires practice registration under the 2020 revised Nurses Regulation and a valid nurse practice certificate, and an exam pass certificate differs from a practice certificate; all oral reception and administrative assistants cannot be uniformly equated with nurses, and no nationwide one-to-one correspondence or closest match ranking was verified. Nurse registration conditions include full civil capacity, a full-time ordinary nursing or midwifery program of at least 3 years (including at least 8 months of clinical internship in a teaching general hospital), and the corresponding education, examination, and health requirements; the first application must be filed within 3 years of passing the exam, and if overdue requires 3 months of clinical training and assessment. Registration is valid for 5 years, and changes of location or renewal are verified separately; nursing interns must be supervised by a nurse. This round has no real recruitment sample, so it is not claimed that oral technology majors are generally preferred or that a nurse exam certificate is sufficient to practice."
+              "The two postings describe individual jobs and quoted pay. Confirm the contract, gross or net pay and any allowances; a national distribution was not established."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "r5-cn-nurse"
+            "dental-yuechi",
+            "dental-shunde"
           ],
           "type": "prose"
         },
@@ -26174,13 +26181,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "In China, qualifications are verified first by actual activity: practicing nursing requires practice registration under the 2020 revised Nurses Regulation and a valid nurse practice certificate, and an exam pass certificate differs from a practice certificate; all oral reception and administrative assistants cannot be uniformly equated with nurses, and no nationwide one-to-one correspondence or closest match ranking was verified. Personnel engaged in radiological occupational activities must be at least 18 years old, pass health and training requirements, and be subject to work permit and dose health management, with the unit applying to the licensing authority; pre-employment training is no less than 4 days, and subsequent training at intervals of no more than 2 years lasts no less than 2 days each time. A work permit does not replace the institution's radiological diagnosis and treatment license, professional imaging personnel, or specific operating authority, and ordinary administrative positions do not uniformly require the certificate. Occupational wages and recruitment remain a gap, and industry averages cannot fill in."
+              " Health and social work industry averages cover many jobs and cannot substitute for dental occupation wages."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "r5-cn-nurse",
-            "r5-cn-radworker",
             "r5-nbs-health"
           ],
           "type": "prose"
@@ -26190,12 +26195,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no occupational wage or real recruitment quote distribution for Chinese dental assistants or oral nurses, and the unverifiable 3000—8000 range has been removed; the NBS2025 health and social work figures match only an actual medical unit industry background, not occupational values, and the absence of a figure is not used to claim nothing was ever published or that this is the highest breakdown."
+              "A Yuechi Zhongkou clinic posting quoted CNY 2,500–4,500 per month for dental nurses and listed chairside support, instrument disinfection and scheduling. A Shunde HR company posting quoted CNY 5,001–7,000 per month and asked for nursing training and the relevant qualification and practice certificates; it did not name the clinic. These are job examples, not national dental assistant pay."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-nbs-health"
+            "dental-yuechi",
+            "dental-shunde"
           ],
           "type": "prose"
         },
@@ -26218,13 +26224,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round has no real Chinese recruitment sample, so nursing education cannot be called common, nor can any major be called preferred or any keyword called prevalent; training is verified against the actual nursing, imaging, infection control, and administrative duties. WS/T842—2024 took effect on 2025-01-01 and applies to oral medical institutions at all levels and types, and citing WS506 does not replace it. Select PPE according to the actual operation, with gloves per patient and hand hygiene; verify packaging, contamination, name, and validity when preparing; and verify water lines and impression and restoration handover and radiological equipment surface infection control item by item; a recommended standard is not a practice certificate. The full text of WS506 412 was not read this round, and it is not falsely claimed that all sterilization release details have been verified."
+              "The two postings describe individual employer requirements. Ask whether the role centers on nursing, chairside work, imaging, instrument processing or preventive care."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "r5-cn-ws842",
-            "r5-cn-nurse"
+            "dental-yuechi",
+            "dental-shunde"
           ],
           "type": "prose"
         },
@@ -28737,35 +28743,35 @@
               [
                 "Chairside assistance assistant",
                 "Under mentoring, prepare the treatment tray and instruments, receive the patient, pass instruments and suction, and observe and report patient reactions.",
-                "Tasks and standards support the editorial observation suggestion; this round did not verify real employer announcements or uniform recruitment preferences",
+                "Check supervision, actual duties and permissions. The historical postings support only the jobs described.",
                 "Use fictional instruments and a checklist to simulate a four-handed assistance flow and explain the verification points.",
                 "Compared with the infection control direction, it is closer to the patient and the treatment process."
               ],
               [
                 "Infection control and instrument processing assistant",
                 "Collect, clean, disinfect, or sterilize instruments per procedure, register monitoring and release records, and handle operatory infection control and medical waste.",
-                "Tasks and standards support the editorial observation suggestion; this round did not verify real employer announcements or uniform recruitment preferences",
+                "Check supervision, actual duties and permissions. The historical postings support only the jobs described.",
                 "Use fictional instruments and labels to complete one sterilization verification and registration exercise.",
                 "Compared with the chairside direction, there is less patient contact and more focus on process and records."
               ],
               [
                 "Imaging and records assistant",
                 "Prepare the imaging process per prescription, assist with positioning and protection, file images, and complete medical record entries.",
-                "Tasks and standards support the editorial observation suggestion; this round did not verify real employer announcements or uniform recruitment preferences",
+                "Check supervision, actual duties and permissions. The historical postings support only the jobs described.",
                 "Use fictional patient information to organize a sample imaging filing and medical record entry.",
                 "Requires the radiology-related qualifications or specialized training required by the jurisdiction, and is not the same as an ordinary reception position."
               ],
               [
                 "Reception and administrative assistant",
                 "Reception information registration, appointment and billing, and authorized record filing; clinical triage and vital signs require separate verification of training and qualification, and authority is not inferred from an administrative position title",
-                "Tasks and standards support the editorial observation suggestion; this round did not verify real employer announcements or uniform recruitment preferences",
+                "Check supervision, actual duties and permissions. The historical postings support only the jobs described.",
                 "Use fictional clinic information to produce a sample appointment and billing record.",
                 "Compared with the clinical direction, it does not directly carry clinical operations or instrument sterilization."
               ],
               [
                 "Clinic generalist assistant",
                 "In a small clinic, take on preparation, assistance, sterilization, records, and reception at the same time, rotating according to the day's schedule.",
-                "Tasks and standards support the editorial observation suggestion; this round did not verify real employer announcements or uniform recruitment preferences",
+                "Check supervision, actual duties and permissions. The historical postings support only the jobs described.",
                 "Use a fictional schedule to explain how you would arrange time for preparation, assistance, and sterilization.",
                 "Broad coverage but limited depth in each item, and specialty institutions often require specialized ability."
               ]
@@ -29520,7 +29526,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The editorial work verifies training and authorization against actual duties, and no current employer sample or nationwide CPR threshold was obtained; in China, qualifications are verified first by actual activity: practicing nursing requires practice registration under the 2020 revised Nurses Regulation and a valid nurse practice certificate, and an exam pass certificate differs from a practice certificate; all oral reception and administrative assistants cannot be uniformly equated with nurses, and no nationwide one-to-one correspondence or closest match ranking was verified. Taking California as the current example: a general assistant provides basic support under dentist supervision, and radiographic equipment requires an approved safety course; RDA and RDAEF require board licensure, with specific tasks distinguished between general and direct supervision. Without a license, one cannot place sealants or perform ultrasonic scaling. State-level authority cannot be inferred automatically from O*NET tasks such as cleaning teeth, nor directly applied to China."
+              "Ask who supervises chairside training and which instrument or patient tasks are permitted."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
@@ -29600,7 +29606,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The editorial work verifies training and authorization against actual duties, and no current employer sample or nationwide CPR threshold was obtained; in China, qualifications are verified first by actual activity: practicing nursing requires practice registration under the 2020 revised Nurses Regulation and a valid nurse practice certificate, and an exam pass certificate differs from a practice certificate; all oral reception and administrative assistants cannot be uniformly equated with nurses, and no nationwide one-to-one correspondence or closest match ranking was verified. Taking California as the current example: a general assistant provides basic support under dentist supervision, and radiographic equipment requires an approved safety course; RDA and RDAEF require board licensure, with specific tasks distinguished between general and direct supervision. Without a license, one cannot place sealants or perform ultrasonic scaling. State-level authority cannot be inferred automatically from O*NET tasks such as cleaning teeth, nor directly applied to China."
+              "Check instrument handling training and records, including who authorizes release."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.credentials",
@@ -29760,7 +29766,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The editorial work verifies training and authorization against actual duties, and no current employer sample or nationwide CPR threshold was obtained; in China, qualifications are verified first by actual activity: practicing nursing requires practice registration under the 2020 revised Nurses Regulation and a valid nurse practice certificate, and an exam pass certificate differs from a practice certificate; all oral reception and administrative assistants cannot be uniformly equated with nurses, and no nationwide one-to-one correspondence or closest match ranking was verified. Taking California as the current example: a general assistant provides basic support under dentist supervision, and radiographic equipment requires an approved safety course; RDA and RDAEF require board licensure, with specific tasks distinguished between general and direct supervision. Without a license, one cannot place sealants or perform ultrasonic scaling. State-level authority cannot be inferred automatically from O*NET tasks such as cleaning teeth, nor directly applied to China."
+              "Check radiography against local rules, the facility’s permissions and authorized duties."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
@@ -30183,7 +30189,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The editorial work verifies training and authorization against actual duties, and no current employer sample or nationwide CPR threshold was obtained; in China, qualifications are verified first by actual activity: practicing nursing requires practice registration under the 2020 revised Nurses Regulation and a valid nurse practice certificate, and an exam pass certificate differs from a practice certificate; all oral reception and administrative assistants cannot be uniformly equated with nurses, and no nationwide one-to-one correspondence or closest match ranking was verified. Taking California as the current example: a general assistant provides basic support under dentist supervision, and radiographic equipment requires an approved safety course; RDA and RDAEF require board licensure, with specific tasks distinguished between general and direct supervision. Without a license, one cannot place sealants or perform ultrasonic scaling. State-level authority cannot be inferred automatically from O*NET tasks such as cleaning teeth, nor directly applied to China."
+              "Verify nursing registration for nursing duties; reception roles have different requirements."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -30263,7 +30269,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The editorial work verifies training and authorization against actual duties, and no current employer sample or nationwide CPR threshold was obtained; in China, qualifications are verified first by actual activity: practicing nursing requires practice registration under the 2020 revised Nurses Regulation and a valid nurse practice certificate, and an exam pass certificate differs from a practice certificate; all oral reception and administrative assistants cannot be uniformly equated with nurses, and no nationwide one-to-one correspondence or closest match ranking was verified. Taking California as the current example: a general assistant provides basic support under dentist supervision, and radiographic equipment requires an approved safety course; RDA and RDAEF require board licensure, with specific tasks distinguished between general and direct supervision. Without a license, one cannot place sealants or perform ultrasonic scaling. State-level authority cannot be inferred automatically from O*NET tasks such as cleaning teeth, nor directly applied to China."
+              "Check permissions and privacy training for appointments, records and insurance information."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.02.credentials",
@@ -30343,7 +30349,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The editorial work verifies training and authorization against actual duties, and no current employer sample or nationwide CPR threshold was obtained; in China, qualifications are verified first by actual activity: practicing nursing requires practice registration under the 2020 revised Nurses Regulation and a valid nurse practice certificate, and an exam pass certificate differs from a practice certificate; all oral reception and administrative assistants cannot be uniformly equated with nurses, and no nationwide one-to-one correspondence or closest match ranking was verified. Taking California as the current example: a general assistant provides basic support under dentist supervision, and radiographic equipment requires an approved safety course; RDA and RDAEF require board licensure, with specific tasks distinguished between general and direct supervision. Without a license, one cannot place sealants or perform ultrasonic scaling. State-level authority cannot be inferred automatically from O*NET tasks such as cleaning teeth, nor directly applied to China."
+              "If imaging is involved, ask about authorization, dose management and records."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.03.credentials",
@@ -30423,7 +30429,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The editorial work verifies training and authorization against actual duties, and no current employer sample or nationwide CPR threshold was obtained; in China, qualifications are verified first by actual activity: practicing nursing requires practice registration under the 2020 revised Nurses Regulation and a valid nurse practice certificate, and an exam pass certificate differs from a practice certificate; all oral reception and administrative assistants cannot be uniformly equated with nurses, and no nationwide one-to-one correspondence or closest match ranking was verified. Taking California as the current example: a general assistant provides basic support under dentist supervision, and radiographic equipment requires an approved safety course; RDA and RDAEF require board licensure, with specific tasks distinguished between general and direct supervision. Without a license, one cannot place sealants or perform ultrasonic scaling. State-level authority cannot be inferred automatically from O*NET tasks such as cleaning teeth, nor directly applied to China."
+              "Ask how the clinic trains staff to escalate emergencies and verify any credential requirements locally."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.04.credentials",
@@ -30524,14 +30530,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Official employment and wages, recruitment technology terms, and editorial adjacent task comparisons are kept separate; this round has no real Chinese recruitment sample, and a standard is not treated as nationwide employer frequency."
+              "Read U.S. projections, technology keywords and the two mainland China postings separately. Individual ads do not establish common national requirements."
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
             "r5-bls-current",
-            "r5-hottech-current",
-            "r5-nbs-health"
+            "dental-yuechi",
+            "dental-shunde"
           ],
           "type": "prose"
         },
@@ -30660,12 +30666,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The 3 U.S. recruitment technology terms for the full year 2025: Dentrix14%, Office2%, and Excel below 1%; a mention share is not long-term use, prevalence, or proficiency rate, nor GenAI adoption or efficiency gain. Clinic software, imaging equipment, and infection control records may contain multiple technologies, and whether there is AI depends on the specific product function and is not judged by name alone. This round has no real Chinese recruitment sample, and specialty advantages or national demand were not verified."
+              "U.S. posting keywords show mentions, not actual use or AI adoption. Mainland China postings establish only the conditions in those listings."
             ]
           },
           "id": "actors.display.market_signal_card.outlook.hiring.limit",
           "source_refs": [
-            "r5-hottech-current"
+            "r5-hottech-current",
+            "dental-yuechi",
+            "dental-shunde"
           ],
           "type": "prose"
         },
@@ -31106,21 +31114,22 @@
           "data": {
             "entries": [
               {
-                "answer": "Prepare and sterilize instruments under the dentist's direction, set up the treatment tray and materials, receive and prepare the patient, provide four-handed assistance during treatment, take dental radiographs per prescription, record treatment and medical history information, give oral hygiene and post-treatment instruction per the dentist's specified content, and possibly handle administrative matters such as scheduling, billing, and medical records; clinical diagnosis, treatment plans, and the final clinical decision are the responsibility of the dentist.",
+                "answer": "Prepare patients and instruments, pass instruments and assist with suction chairside, then follow instrument processing and record procedures. Check local rules, training and authorization for radiography or expanded clinical duties.",
                 "id": "actors.faq.1",
                 "question": "What does a dental assistant do in a typical day?",
                 "question_key": "career.faq.dental-assistants.1",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "General dentists are responsible for examination, diagnosis, treatment plans, and clinical operations and carry responsibility for clinical results; dental hygienists independently perform scaling, periodontal assessment, and preventive treatment, usually requiring a state license; this occupation provides clinical support and patient care under the dentist's direction, does not independently perform scaling, and makes no diagnosis or treatment decision.",
+                "answer": "Dental assistants mainly support chairside work and instrument turnover. Hygienists focus on authorized preventive care and education. Dentists make diagnosis and treatment decisions. All work with patients; check who may perform, review and sign off on each task.",
                 "id": "actors.faq.2",
                 "question": "What is the difference between dental assistants and dental hygienists or general dentists?",
                 "question_key": "career.faq.dental-assistants.2",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "dental-adjacent"
                 ]
               },
               {
@@ -31133,12 +31142,12 @@
                 ]
               },
               {
-                "answer": "What can be verified is the long-standing use of clinic information systems and digital tools: electronic medical records and appointment scheduling, dental imaging and clinic management software, and instrument cleaning, disinfection, and traceability recording tools; these are established practices of technology and process tools, not adoption rates or job outcome data.",
+                "answer": "Software may help with scheduling or organizing authorized information. Staff still verify patient records; automation does not replace clinical judgment, instrument handling or licensing. This page does not establish adoption or outcomes.",
                 "id": "actors.faq.4",
-                "question": "Which tasks of dental assistants already have evidence of technology change?",
+                "question": "Which tasks could software assist with?",
                 "question_key": "career.faq.dental-assistants.4",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current"
                 ]
               },
               {
@@ -31151,36 +31160,36 @@
                 ]
               },
               {
-                "answer": "The median annual wage in the U.S. May 2025 wage data for this occupation is 48,070 USD (median hourly 23.11 USD), with annual percentiles of 37,130／44,340／48,070／58,090／62,250 USD; employment was about 388,600 in 2025. Mainland China public wage statistics are published by industry category and personnel category and no occupation-level definition corresponding to this position has been established, so this page retains the gap rather than substituting industry averages or U.S. data.",
+                "answer": "The May 2025 U.S. median wage was $23.11 per hour and $48,070 per year. A Yuechi Zhongkou clinic posting quoted CNY 2,500–4,500 per month for dental nurses and listed chairside support, instrument disinfection and scheduling. A Shunde HR company posting quoted CNY 5,001–7,000 per month and asked for nursing training and the relevant qualification and practice certificates; it did not name the clinic. These are job examples, not national dental assistant pay.",
                 "id": "actors.faq.6",
                 "question": "What are the typical wages for dental assistants, and how should they be compared?",
                 "question_key": "career.faq.dental-assistants.6",
                 "source_refs": [
-                  "oews",
-                  "bls",
-                  "r2-pay-1"
+                  "r5-wages-current",
+                  "dental-yuechi",
+                  "dental-shunde"
                 ]
               },
               {
-                "answer": "The typical entry-level education in the U.S. is a postsecondary nondegree award, usually with no related work experience or on-the-job training requirement, and most states allow entry through on-the-job training while some require completing an accredited program and passing an examination. The practice basis for nursing positions in mainland China is nurse practice registration under the Nurses Regulation: one must complete an ordinary full-time nursing or midwifery program of more than 3 years at a secondary vocational school or higher institution (including more than 8 months of clinical nursing internship) and obtain the corresponding diploma, pass the nurse practice qualification examination, and meet health standards; the education and training requirements for specific positions follow the target unit's announcement, and U.S. state requirements cannot be used to infer mainland China conditions.",
+                "answer": "BLS lists a postsecondary nondegree award as typical. Some U.S. states allow on-the-job training; check the state dental board for radiography and expanded duties. In mainland China, check the actual clinical, nursing or administrative role. A U.S. dental assistant title is not the Chinese registered assistant physician credential.",
                 "id": "actors.faq.7",
                 "question": "What education do dental assistants need, and how should they train?",
                 "question_key": "career.faq.dental-assistants.7",
                 "source_refs": [
-                  "bls",
-                  "ratify",
-                  "cn-rule"
+                  "r5-bls-ooh",
+                  "china-physician-role",
+                  "dental-yuechi",
+                  "dental-shunde"
                 ]
               },
               {
-                "answer": "Most U.S. states do not require a license for entry-level assistants, and some states require a license, registration, or certification for radiography, infection control, or expanded duties. Mainland China has no one-to-one corresponding occupational classification: the closest regulated role is the dental nurse (nursing personnel), who must obtain and register a nurse practice certificate under the Nurses Regulation, with registration conditions including completing the specified nursing or midwifery program and clinical internship, passing the nurse practice qualification examination, and meeting health standards; operating dental radiographic equipment is a radiological diagnostic activity and also requires a Radiation Worker Certificate under the Measures for the Occupational Health Management of Radiation Workers, with radiation protection and legal knowledge training and assessment, occupational health examination, and personal dose monitoring. Qualifications in the two countries are not interchangeable.",
+                "answer": "BLS lists a postsecondary nondegree award as typical. Some U.S. states allow on-the-job training; check the state dental board for radiography and expanded duties. In mainland China, check the actual clinical, nursing or administrative role. A U.S. dental assistant title is not the Chinese registered assistant physician credential.",
                 "id": "actors.faq.8",
-                "question": "Must I obtain a certificate to work as a dental assistant? What qualifications are needed in mainland China?",
+                "question": "How do you verify qualifications for a particular location?",
                 "question_key": "career.faq.dental-assistants.8",
                 "source_refs": [
-                  "ratify",
-                  "cn-rule",
-                  "announcing"
+                  "r5-bls-ooh",
+                  "china-physician-role"
                 ]
               },
               {
@@ -31193,14 +31202,13 @@
                 ]
               },
               {
-                "answer": "Look at three things at once: the change in the occupation total (about 7% growth projected for 2025—2035, with about 53,000 openings per year), differences in job structure (chairside assistance, infection control, and reception and administration have different requirements), and the entry and qualification requirements of the target jurisdiction (state licensing or certification, and mainland China's nurse practice registration and radiation work qualifications); do not replace these verifications with a single salary figure or an industry slogan.",
+                "answer": "BLS projects U.S. employment for 31-9091 to grow from 388,600 in 2025 to 417,400 in 2035 (+7.4%), with about 53,000 annual openings including replacement needs. Ask about patient contact, permitted duties, schedules and supervision.",
                 "id": "actors.faq.10",
                 "question": "What else should I consider when choosing the dental assistant occupation now?",
                 "question_key": "career.faq.dental-assistants.10",
                 "source_refs": [
-                  "employer",
-                  "cn-rule",
-                  "announcing"
+                  "r5-bls-current",
+                  "r5-onet-current"
                 ]
               }
             ]
@@ -31807,7 +31815,7 @@
                 "url": "https://www.onetonline.org/link/localcert/31-9091.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "16 tasks: 14 core and 2 supplementary; cleaning teeth and making and fitting orthodontic materials are supplementary and are not a list of statutory authority. The 57 context items were actually read, and contact frequencies are not disease or injury rates. The education figures 46 post-high-school certificate, 29 high school, and 17 some college without completion are required opinions, and the remaining 8 is not extrapolated; JobZone3/SVP6 below 7 is not law. The 21 style Impact scores are not population percentages. The interest is CRS. The 2025 health and social work industry is 96%, and the remaining 4 is a difference, not official self-employment."
                 ],
@@ -31852,16 +31860,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/31-9091.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "31-9091 itself 388.6→417.4 thousand, a net increase of 28.8 thousand, +7.4%, average annual openings 53.0 thousand including replacement, self-employed 0.1%; the typical entry is a postsecondary nondegree award, no related experience, and None for on-the-job training. None does not mean never training, and the OOH does describe state-level on-the-job entry routes."
+                  "BLS projects U.S. employment for 31-9091 to grow from 388,600 in 2025 to 417,400 in 2035 (+7.4%), with about 53,000 annual openings including replacement needs."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r5-bls-current",
                 "limitation": "31-9091 itself 388.6→417.4 thousand, a net increase of 28.8 thousand, +7.4%, average annual openings 53.0 thousand including replacement, self-employed 0.1%; the typical entry is a postsecondary nondegree award, no related experience, and None for on-the-job training. None does not mean never training, and the OOH does describe state-level on-the-job entry routes.",
                 "market": "United States",
                 "name": "BLS table 1.2 dental assistants 2025—2035",
-                "period": "2025 base period and 2025—2035 projection; searched 2026-10-09",
+                "period": "2025–2035",
                 "publisher": "Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32182,6 +32190,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "CNY 2,500–4,500 per month for ten roles. Oral nursing experience; chairside support, instrument packing/disinfection and scheduling."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "dental-yuechi",
+                "limitation": "Limited to what the original posting or document supports.",
+                "market": "Mainland China",
+                "name": "Yuechi Zhongkou Dental Clinic: dental nurse",
+                "period": "2026-03-06",
+                "publisher": "Yuechi County Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.scyc.gov.cn/ycxrmzfw/zklv/pc/content/content_2029732150011416576.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "CNY 5,001–7,000 per month for three full-time roles; the job description asks for nursing training, nurse qualification and registration. The clinic is not publicly named."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "dental-shunde",
+                "limitation": "Limited to what the original posting or document supports.",
+                "market": "Mainland China",
+                "name": "Shunde HR company posting: dental nurse",
+                "period": "Posting date not stated",
+                "publisher": "Shunde public employment platform",
+                "scope": "recruitment_proxy",
+                "url": "https://sdjy.shunde.gov.cn/index/job/detail.html?id=61917"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS lists a postsecondary nondegree award as typical. Some U.S. states allow on-the-job training; check the state dental board for radiography and expanded duties. In mainland China, check the actual clinical, nursing or administrative role. A U.S. dental assistant title is not the Chinese registered assistant physician credential."
+                ],
+                "evidence_type": "Primary source",
+                "id": "china-physician-role",
+                "limitation": "Limited to what the original posting or document supports.",
+                "market": "Mainland China",
+                "name": "Physicians Law, Articles 2, 34 and 35",
+                "period": "2026-11-09",
+                "publisher": "Chinese official document",
+                "scope": "regulatory_context",
+                "url": "https://www.sdcourt.gov.cn/jningweisfy/385991/385992/7418857/index.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Dental assistants mainly support chairside work and instrument turnover. Hygienists focus on authorized preventive care and education. Dentists make diagnosis and treatment decisions. All work with patients; check who may perform, review and sign off on each task."
+                ],
+                "evidence_type": "Primary source",
+                "id": "dental-adjacent",
+                "limitation": "Limited to what the original posting or document supports.",
+                "market": "United States",
+                "name": "Adjacent dental occupation tasks",
+                "period": "2026-11-09",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-1292.00"
               }
             ]
           },
@@ -35275,7 +35343,7 @@
               }
             },
             {
-              "城市/区间": "Individual units and recruitment platform quotes (cannot replace the national definition)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -35287,13 +35355,14 @@
           "china_soc_row": "Actual Chinese positions and U.S. 31-9091 are not verified equivalents",
           "edu": "See the entry module for training and qualification",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-dental-yuechi",
+            "posting-dental-shunde"
           ],
           "sources_note": "Source links are used according to their respective scopes of application.",
           "ui": {
             "ai_heading": "Will AI and automation directly change dental assistants' income?",
             "driver_heading": "What should be verified when discussing pay for comparable positions in mainland China?",
-            "official_heading": "Official Chinese definitions and statistical gaps",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Comparison of pay methods and statistical boundaries",
             "scenario_heading": "Can quotes from different institutions in mainland China be compared directly?",
             "scenario_interpretation_label": "Scope of application and gaps",
@@ -36123,7 +36192,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/dental-hygienists",
+            "target_href": "/en/career/jobs/dental-hygienists",
             "target_slug": "dental-hygienists",
             "target_title": "Dental hygienists: ability adjacency with this occupation",
             "transition_distance": {
@@ -36146,7 +36215,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/dentists-general",
+            "target_href": "/en/career/jobs/dentists-general",
             "target_slug": "dentists-general",
             "target_title": "General dentists: ability adjacency with this occupation",
             "transition_distance": {
@@ -36169,7 +36238,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/medical-assistants",
+            "target_href": "/en/career/jobs/medical-assistants",
             "target_slug": "medical-assistants",
             "target_title": "Medical assistants: ability adjacency with this occupation",
             "transition_distance": {
@@ -36192,7 +36261,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians",
+            "target_href": "/en/career/jobs/dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians",
             "target_slug": "dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians",
             "target_title": "Dental laboratory technicians: ability adjacency with this occupation",
             "transition_distance": {
@@ -36215,7 +36284,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/radiologic-technologists",
+            "target_href": "/en/career/jobs/radiologic-technologists",
             "target_slug": "radiologic-technologists",
             "target_title": "Radiologic technologists and technicians: ability adjacency with this occupation",
             "transition_distance": {
@@ -36238,7 +36307,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/pharmacy-aides",
+            "target_href": "/en/career/jobs/pharmacy-aides",
             "target_slug": "pharmacy-aides",
             "target_title": "Pharmacy aides: ability adjacency with this occupation",
             "transition_distance": {
@@ -36261,7 +36330,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/receptionists-and-information-clerks",
+            "target_href": "/en/career/jobs/receptionists-and-information-clerks",
             "target_slug": "receptionists-and-information-clerks",
             "target_title": "Receptionists and information clerks: ability adjacency with this occupation",
             "transition_distance": {
@@ -36284,7 +36353,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/licensed-practical-and-licensed-vocational-nurses",
+            "target_href": "/en/career/jobs/licensed-practical-and-licensed-vocational-nurses",
             "target_slug": "licensed-practical-and-licensed-vocational-nurses",
             "target_title": "Licensed practical and licensed vocational nurses: ability adjacency with this occupation",
             "transition_distance": {
@@ -36372,7 +36441,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -36421,7 +36490,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Explore my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -36470,7 +36539,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36519,7 +36588,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Explore my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36568,7 +36637,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36617,7 +36686,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Explore my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -37239,7 +37308,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore the task interests and work preferences of dental assistants",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37727,7 +37796,7 @@
         "fact_id": "identity",
         "market": "United States",
         "measure": "Official occupation code (the identity definition for this page)",
-        "occupation_scope": "A single O*NET-SOC occupation (31-9091.00); tasks, work context, abilities, wages, employment, and the projection are all under this occupation's own definition. Adjacent but different occupations include dental hygienists (29-1292.00, responsible for scaling and preventive treatment), general dentists (29-1021.00, responsible for diagnosis and treatment decisions), dental laboratory technicians (51-9081.00, fabricating restorations in the laboratory), and medical assistants (31-9092.00, facing general clinics); mainland China has no occupational classification corresponding one-to-one with this code, and the closest regulated role is the dental nurse, who must hold a nurse practice certificate, with duties, qualification, and pay definitions that are not one-to-one counterparts",
+        "occupation_scope": "U.S. O*NET-SOC 31-9091.00. Some mainland China dental nursing jobs offer task comparisons for chairside and instrument work. Titles and legal duties are not interchangeable.",
         "period": "O*NET-SOC 2018 SOC; page updated 2026; searched 2026-09-19",
         "source_refs": [
           "onet"
@@ -37783,14 +37852,14 @@
       },
       {
         "derivation": null,
-        "display_value": "Growth of 7% (2025—2035, label growth; employment change +28,800)",
+        "display_value": "7.4% growth (2025–2035)",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
         "occupation_scope": "Under the 31-9091.00 definition for this occupation itself; the BLS Occupational Outlook shows 7% growth for this occupation in 2025—2035, noticeably faster than the average for all occupations, with an employment change of about +28,800; the O*NET page shows the earlier period definition (2024—2034, growth of 5%–6%). A projection is a change in the occupation total, not an individual's probability of being hired",
-        "period": "2025—2035 projection period; searched 2026-09-19",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
@@ -37843,14 +37912,15 @@
       },
       {
         "derivation": "Precise occupation-level wages for mainland China were not obtained; U.S. data, industry averages, or opaque recruitment samples are not used to replace this occupation's wages.",
-        "display_value": "Note: mainland China has no occupational classification corresponding one-to-one with U.S. 31-9091.00; the closest regulated role is the dental nurse (nursing personnel), who must obtain and register a nurse practice certificate under the Nurses Regulation, and public wage statistics are published by industry category and personnel category with no occupation-level definition corresponding to this occupation established; this round obtained no verifiable mainland China occupation-level wage distribution",
+        "display_value": "No nationwide mainland China wage estimate comparable to the U.S. occupation was verified. Individual posting quotes are shown separately.",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "Chinese mainland",
         "measure": "Statistical position not obtained (occupation-level wages for Chinese dental nurses)",
         "occupation_scope": "Mainland China occupation-level definition; the dental nurse quotes visible on recruitment platforms (mostly 3,000–8,000 yuan per month) come from individual unit and platform samples with incomplete disclosure of conditions and cannot represent the national level; the highest breakdown in public wage statistics is by industry category and personnel category (such as health and social work), and industry averages are not this occupation's wages; the page being in Simplified Chinese also does not mean an exactly equivalent occupational classification exists",
         "period": "Current publication definition; searched 2026-09-19",
         "source_refs": [
-          "r2-pay-1"
+          "dental-yuechi",
+          "dental-shunde"
         ]
       },
       {
@@ -37906,12 +37976,12 @@
       },
       {
         "derivation": null,
-        "display_value": "Growth of 7.4%, about 28800 people (2025—2035; OOH rounds to 7%, about 417400 in 2035)",
+        "display_value": "7.4% growth (2025–2035)",
         "fact_id": "r5-current-growth",
         "market": "United States",
         "measure": "Ten-year employment change",
         "occupation_scope": "31-9091 itself includes the self-employed and is not individual opportunity or average annual net additions",
-        "period": "2025 base period and 2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-current"
         ]
@@ -37966,14 +38036,15 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: this round obtained no occupational wage or quote distribution for Chinese dental assistants or dental nurses; the health and social work figures non-private 146266 and private 75631 are only industry background",
+        "display_value": "No nationwide mainland China wage estimate comparable to the U.S. occupation was verified. Individual posting quotes are shown separately.",
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "Chinese mainland",
         "measure": "Occupational wage gap and industry background",
         "occupation_scope": "Actual medical legal entities have multiple occupations and are not a personal quote or an occupational median",
         "period": "2025 industry and searched 2026-10-09",
         "source_refs": [
-          "r5-nbs-health"
+          "dental-yuechi",
+          "dental-shunde"
         ]
       },
       {
@@ -37986,6 +38057,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "CNY 2,500–4,500 per month for ten roles. Oral nursing experience; chairside support, instrument packing/disinfection and scheduling.",
+        "fact_id": "posting-dental-yuechi",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Yuechi Zhongkou Dental Clinic: dental nurse",
+        "period": "2026-03-06",
+        "source_refs": [
+          "dental-yuechi"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "CNY 5,001–7,000 per month for three full-time roles; the job description asks for nursing training, nurse qualification and registration. The clinic is not publicly named.",
+        "fact_id": "posting-dental-shunde",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Shunde HR company posting: dental nurse",
+        "period": "Posting date not stated",
+        "source_refs": [
+          "dental-shunde"
         ]
       }
     ]
@@ -38013,7 +38108,7 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2025—2035, growth of 7%, label growth)"
+        "label": "U.S. projected employment change (2025–2035): +7.4%"
       },
       {
         "availability": "available",
@@ -38039,17 +38134,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Dental assistants (O*NET-SOC 31-9091.00) prepare and sterilize instruments, set up the treatment tray and materials, receive and prepare the patient, provide four-handed assistance during treatment, take dental radiographs, record treatment and medical history information, give oral hygiene and post-treatment instruction under the dentist's direction, and may handle administrative matters such as scheduling, billing, and medical records; clinical diagnosis and treatment decisions are the responsibility of the dentist. The work context includes close contact and daily exposure to radiation, infection, and contaminants, and requires routine and specialized protective equipment and compliance with radiation safety and infection control procedures. U.S. definitions: about 388,600 positions in 2025, projected growth of 7% in 2025—2035 (+28,800), and about 53,000 openings per year; the May 2025 wage data shows a median annual wage of 48,070 USD (median hourly 23.11 USD), with annual percentiles of 37,130／44,340／48,070／58,090／62,250 USD; the typical entry-level education is a postsecondary nondegree award, usually with no related work experience requirement, and some states require a license, registration, or certification for radiography or expanded duties. Mainland China: there is no one-to-one corresponding occupational classification, and the closest role, the dental nurse, must obtain and register a nurse practice certificate under the Nurses Regulation; radiological diagnostic operations require a Radiation Worker Certificate and training and assessment, occupational health examination, and personal dose monitoring; cleaning, disinfection, and sterilization of dental instruments follow WS 506—2016. Mainland China public statistics have not published occupation-level wages corresponding to 31-9091.00, and this page marks the gap visibly in the relevant places rather than filling it with industry averages."
+      "text": "Explore dental assistant duties, chairside support and training. Compare mainland China dental nurse postings, U.S. data and dental hygiene roles."
     },
     "title": {
       "availability": "available",
       "text": "Dental assistants"
     }
   },
-  "source_content_sha256": "74dcb1fe920b3b26c8649d2aa9fbc18e8909607c4c9eb2d34287a59db7c11d64",
+  "source_content_sha256": "7c459bb9691904734521b5249b4a762ac77c768e2e84c58a62e8bd9e4b4e9c0f",
   "subject": {
     "canonical_slug": "dental-assistants",
     "name": "Dental assistants",
-    "summary": "Dental assistants (Dental Assistants, O*NET-SOC 31-9091.00) perform limited clinical and nonclinical support work under the dentist's direction: preparing and sterilizing instruments, setting up the treatment tray and materials, receiving and preparing the patient, passing instruments and assisting with suction during treatment (four-handed operation), taking dental radiographs, recording treatment and medical history information, assisting with intraoral preventive procedures, and explaining dentist-specified post-treatment precautions and oral hygiene instruction to patients; they may also handle administrative matters such as scheduling, billing, medical records, and insurance information. The work output is verifiable patient records, disinfection and sterilization records, imaging data, and the visit flow, while clinical diagnosis, treatment plans, and the final clinical decision are the responsibility of the dentist. U.S. definitions: O*NET-SOC 31-9091.00 is a single-occupation definition, with about 388,600 positions in 2025, projected growth of 7% in 2025—2035 (employment change +28,800), and about 53,000 openings per year over the projection period; the May 2025 wage data shows a median annual wage of 48,070 USD (median hourly 23.11 USD), with annual percentiles of 37,130／44,340／48,070／58,090／62,250 USD. Mainland China definitions: there is no occupational classification corresponding one-to-one with U.S. 31-9091.00; the closest regulated role is the dental nurse (nursing personnel), who must obtain and register a nurse practice certificate under the Nurses Regulation, while operations involving radiological diagnosis and treatment such as X-rays also require a Radiation Worker Certificate and occupational health surveillance and personal dose monitoring; cleaning, disinfection, and sterilization of dental instruments must follow the mandatory health industry standard WS 506—2016. Mainland China public statistics have not published occupation-level wages corresponding to this occupation, and this page retains the gap faithfully."
+    "summary": "Prepare patients and instruments, pass instruments and assist with suction chairside, then follow instrument processing and record procedures. Check local rules, training and authorization for radiography or expanded clinical duties. BLS lists a postsecondary nondegree award as typical. Some U.S. states allow on-the-job training; check the state dental board for radiography and expanded duties. In mainland China, check the actual clinical, nursing or administrative role. A U.S. dental assistant title is not the Chinese registered assistant physician credential."
   }
 }

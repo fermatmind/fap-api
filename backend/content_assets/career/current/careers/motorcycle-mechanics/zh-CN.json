@@ -155,6 +155,9 @@
       "item:motorcycle-mechanics.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:motorcycle-mechanics.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:motorcycle-mechanics.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13247,6 +13250,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。车主称制动时有异响，受理单却写怠速异响，试车栏为空。把车主描述与受理记录分开，写下要请维修技师核实的问题。"
+            ]
+          },
+          "id": "motorcycle-mechanics.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "交接摩托车故障描述",
+          "type": "notice"
         }
       ]
     },
@@ -15721,6 +15739,13 @@
         "id": "motorcycle-mechanics.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "motorcycle-mechanics.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15926,7 +15951,7 @@
       "text": "摩托车机械师"
     }
   },
-  "source_content_sha256": "b3691abca700122cff6e962219501efab86f050b5453bf0e431d63870da6bcbe",
+  "source_content_sha256": "9535a5e91ab5d7046088bd6c6702ea411ff8512436683cf4c8162cbd51c80137",
   "subject": {
     "canonical_slug": "motorcycle-mechanics",
     "name": "摩托车机械师",

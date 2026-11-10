@@ -164,6 +164,9 @@
       "item:online-merchants.path.recruitment-sample.8": {
         "status": "pending_mapping"
       },
+      "item:online-merchants.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:online-merchants.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12196,6 +12199,21 @@
             "mohrss-wage"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。线上订单选小号蓝色，拣货单写小号黑色。写一条给仓配的核对记录，包括平台订单、变体和处理责任。"
+            ]
+          },
+          "id": "online-merchants.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "核商品变体与出货",
+          "type": "notice"
         }
       ]
     },
@@ -14605,6 +14623,13 @@
         "id": "online-merchants.path.recruitment-sample.8",
         "location": "entry_decisions",
         "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "online-merchants.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14822,7 +14847,7 @@
       "text": "在线零售商家：选品、履约、利润与风险"
     }
   },
-  "source_content_sha256": "18af22396b8d8fb2019ee2109839f2fa86895e16f195b80f1f1c87e6f368b793",
+  "source_content_sha256": "c90ce3d848d4e407c03b764a066984dabef26e1a5a9fb0336a98dccdac6b341f",
   "subject": {
     "canonical_slug": "online-merchants",
     "name": "在线零售商家",

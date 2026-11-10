@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First observe whether the person is willing to record tiny differences accurately, keep parts and work orders matched, accept re-testing and guidance, and explain to customers what is known and unknown. Interest is only a starting point; hands-on ability, training resources, working conditions, and quote scope all need verification."
+              "Paper check | If the movement ID differs on two sample records, retain both IDs and the timing reading. Ask the technician to match the movement to the ticket before closing the job. "
             ]
           },
           "id": "watch-and-clock-repairers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24810,13 +24809,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Watch and clock repairers use professional tools and test instruments to inspect, repair, clean, service, and adjust watches, clocks, and similar timekeeping devices. The work includes asking about symptoms, recording service history, handling parts and mechanisms, reviewing timekeeping and function, and explaining the delivery; repair, manufacturing and assembly, appraisal, and collectible trading each have different task boundaries."
+              "Watch and clock repairers inspect worn parts and timing deviations, then clean, adjust or reassemble the movement and document its condition before return. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "watch-and-clock-repairers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "cn-rule"
+            "transfer-onet-49-9064.00"
           ],
           "type": "prose"
         }
@@ -25465,13 +25463,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with records and questions, but this page has no adoption rate, repair effect, or job replacement rate evidence for watch and clock repair. Mechanical and electronic testing, plan confirmation, and actual technique still need professional checking; no reviewable task score has been produced, so a separate editorial estimate is shown for now. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: If the movement ID differs on two sample records, retain both IDs and the timing reading. Ask the technician to match the movement to the ticket before closing the job."
             ]
           },
           "id": "watch-and-clock-repairers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-49-9064.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32860,6 +32858,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-49-9064.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 49-9064.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/49-9064.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38354,10 +38379,10 @@
       "text": "Watch and clock repairers: work content, wages, qualifications, and entry experience"
     }
   },
-  "source_content_sha256": "261a8644bd30a29e1fd534cd77720a6c1d41153d9365e2374658ada13b29e607",
+  "source_content_sha256": "dca7862df5717c7560e0fcc27e6888f9cea241592f25305a7592a17ef186fcf4",
   "subject": {
     "canonical_slug": "watch-and-clock-repairers",
     "name": "Watch and clock repairers",
-    "summary": "Watch and clock repairers inspect watches and clocks for faults, clean, repair, and adjust the timekeeping mechanism, review timekeeping and function, and record parts, charges, and service history. Precision hands-on work, accurate testing, and customer communication together make up the job; entry should start with a paper work order and data recomputation, then learn actual repair under qualified guidance."
+    "summary": "Watch and clock repairers inspect worn parts and timing deviations, then clean, adjust or reassemble the movement and document its condition before return."
   }
 }

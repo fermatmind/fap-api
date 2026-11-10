@@ -155,6 +155,9 @@
       "item:middle-school-teachers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:middle-school-teachers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:middle-school-teachers.profile.career-quick-answers-block.5": {
         "status": "mapped"
       },
@@ -13051,6 +13054,21 @@
             "bls-ooh"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. A quiz tests recall on one item and explanation on another. Most students lose points only on the explanation. Choose one understanding to check in the next lesson."
+            ]
+          },
+          "id": "middle-school-teachers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Adjust a lesson using class evidence",
+          "type": "notice"
         }
       ]
     },
@@ -15537,6 +15555,13 @@
         "id": "middle-school-teachers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "middle-school-teachers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15730,7 +15755,7 @@
       "text": "Middle School Teachers: Duties, U.S. Wages, and Entry"
     }
   },
-  "source_content_sha256": "31519afad6fd8bb8d5d0cb9d7d68c613cbc53e3e1188f2615ff737c27e23550d",
+  "source_content_sha256": "bcd390df4efddaa2d36d12b2a10aeeb9ae65553f4f70eeb7aa774b81c655218a",
   "subject": {
     "canonical_slug": "middle-school-teachers",
     "name": "Middle School Teachers, Except Special and Career / Technical Education",

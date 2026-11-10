@@ -9,7 +9,7 @@
         "status": "pending_mapping"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:employment-g04-current": {
         "status": "pending_mapping"
@@ -18,7 +18,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:growth-g04-current": {
         "status": "pending_mapping"
@@ -57,9 +57,15 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:openings-g04-current": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-crossing-shantou": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-crossing-wdlc": {
         "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
@@ -26145,12 +26151,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆护学岗与交通疏导岗位招聘或报价统计；个别单位的岗位补贴披露不能代表全国水平"
+              "五大连池道路养护公告的交通疏导兼司机公益岗为 3,100 元/月，需 C1 及以上驾照，兼驾驶轻型货车。汕头警务辅助招聘的交通协管员年包干经费约 58,000 元，含双边五险一金，是相邻辅警场景的总经费，不是个人年薪。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "crossing-wdlc",
+            "crossing-shantou"
           ],
           "type": "prose"
         },
@@ -26245,7 +26252,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国大陆薪资板块只保留证据边界：不把行业均值当作职业工资、不用美国数据替代，也不陈述本职业的全国中位数、起薪或分位数。"
+              "以下公告用于对照岗位和计薪条件。全国职业工资分布缺少可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -30997,7 +31004,7 @@
           "data": {
             "entries": [
               {
-                "answer": "在学校周边、路口、铁路道口与施工路段护送行人过街并按需要拦停车辆；监测车流以判断行人可安全通行的间隙；用标志、旗帜、指示灯与手势引导交通或警示危险；在指定点位布设交通管制标志与标牌并掌握责任区内交通标志的位置与用途；拦停超速车辆以提醒交通法规，并向驾驶员说明施工路段的绕行路线；向学生与成年人说明交通与过街规则；记录无视交通信号车辆的号牌并报告违章信息，把儿童的危险行为报告给学校；并与上级讨论交通疏导方案与控制点位置。",
+                "answer": "在指定路口、校区或道路作业区，按现场方案提示行人和车辆，观察视距与冲突并报告异常。过街护导和作业区交通引导的设备、培训和授权不同。",
                 "id": "actors.faq.1",
                 "question": "交通路口警卫旗手每天的具体工作是什么？",
                 "question_key": "career.faq.crossing-guards-and-flaggers.1",
@@ -31006,9 +31013,9 @@
                 ]
               },
               {
-                "answer": "本职业以引导交通与护送行人为主，通常不具有开单执法或强制权；停车执法员执行停车法规并为违章停车开单；警察与治安巡逻官具有法定执法与强制权并负责治安执法；公交与铁路警察维护公共交通与铁路秩序；安全警卫守护场所安全；休闲保护服务人员在休闲场所承担保护与救援；校车监督员维持学生接送秩序。名称相近不代表职责或授权可以互换。",
+                "answer": "本职业侧重现场引导和警示。道路警务岗位另有法定职责，施工交通方案由相应单位确定。遇险按现场规定报告，不能由岗位名称推处罚或执法权。",
                 "id": "actors.faq.2",
-                "question": "这个职业与警察、停车执法员有什么区别？",
+                "question": "交通引导与道路警务有什么区别？",
                 "question_key": "career.faq.crossing-guards-and-flaggers.2",
                 "source_refs": [
                   "onet"
@@ -31024,9 +31031,9 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：车流监测与安全间隙判断、排班与记录文书、警示与沟通三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "系统可帮助排班、接收通知或记录事件；现场可见性、过街和车辆信号、交接与异常上报按方案执行。 这不是对本职业 AI 使用率或岗位替代的测量。",
                 "id": "actors.faq.4",
-                "question": "这个职业哪些任务已有 AI 变化证据？",
+                "question": "哪些工作可能由软件辅助？",
                 "question_key": "career.faq.crossing-guards-and-flaggers.4",
                 "source_refs": [
                   "onet"
@@ -31042,12 +31049,14 @@
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位年薪 38,100 美元，分位为 30,840／34,430／38,100／47,540／61,690 美元（33-9091.00 单一职业口径），同时公布小时工资；按州或地区细分的数值须在 O*NET 当地工资页按地区与期间查询，不能当作个人报价；中国大陆未取得职业级工资数值，本页按缺口处理。",
+                "answer": "美国 2025 年 5 月工资中位数为 38,100 美元/年、18.32 美元/小时。 五大连池道路养护公告的交通疏导兼司机公益岗为 3,100 元/月，需 C1 及以上驾照，兼驾驶轻型货车。汕头警务辅助招聘的交通协管员年包干经费约 58,000 元，含双边五险一金，是相邻辅警场景的总经费，不是个人年薪。",
                 "id": "actors.faq.6",
                 "question": "这个职业的工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.crossing-guards-and-flaggers.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "crossing-wdlc",
+                  "crossing-shantou"
                 ]
               },
               {
@@ -31078,12 +31087,12 @@
                 ]
               },
               {
-                "answer": "O*NET 摘要与就业趋势页（基于 BLS 2024—2034 年预测）显示该职业 2024 年约 91,400 人，预测标签为 Average（增长 3% 至 4%），年均约 18,000 个含增长与替换的空缺；工作以户外站立走动为主、多为每周少于 40 小时的时段性岗位，须按本地学校与道路需求、雇主与季节性安排核对。",
+                "answer": "美国 BLS 预计 33-9091 就业从 2025 年约 94,800 到 2035 年约 98,100（+3.5%）。年均约 17,300 个空缺，包含替补需求。",
                 "id": "actors.faq.10",
-                "question": "现在选择这个职业，还应考虑什么？",
+                "question": "美国就业预测怎么读？",
                 "question_key": "career.faq.crossing-guards-and-flaggers.10",
                 "source_refs": [
-                  "bls"
+                  "a21-bls-projections"
                 ]
               }
             ]
@@ -31506,7 +31515,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "当前O*NET12项任务中7Core、5Supplemental。Core包括护送过街、监测间隙、道路铁路施工引导、标志旗帜灯及手势警示、向学生成人说明规则、报告儿童危险行为、记录号牌报主管部门；Supplemental包括布设标牌、拦停超速提醒法规、了解责任区标志、与上级讨论路线控制点、施工绕行引导。任务描述不是中美法律许可或人人每班任务。",
                   "美国本岗新聘教育回答显示73%高中或同等、18%低于高中、6%上过大学未获学位，未显示余项不补零。Job Zone1–2/SVP低于6是通用准备层级，几天至一年培训属通用说明，不是本岗每位人员培训时长或统一学历门槛；中国岗位条件须核具体公告。",
@@ -31520,7 +31529,7 @@
                 "period": "2026-10-09读取；任务情境教育未统一披露调查年，行业2025",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/33-9091.00"
+                "url": "https://www.onetonline.org/link/details/33-9091.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31767,6 +31776,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 预计 33-9091 就业从 2025 年约 94,800 到 2035 年约 98,100（+3.5%）。年均约 17,300 个空缺，包含替补需求。"
+                ],
+                "evidence_type": "官方统计",
+                "id": "a21-bls-projections",
+                "limitation": "年均空缺包含替补；不是净增或录用概率。",
+                "market": "美国",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "公益性岗位 2 名，3,100 元/月；C1 及以上，兼开轻型货车，符合当地就业困难条件。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "crossing-wdlc",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "交通疏导员兼司机",
+                "period": "2026-09-14",
+                "publisher": "五大连池市公路事业发展中心",
+                "scope": "recruitment_proxy",
+                "url": "https://www.wdlc.gov.cn/wdlc/c100750/202609/c11_359856.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "年包干约 58,000 元，含双边五险一金；是经费口径，不是到手收入。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "crossing-shantou",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "警务辅助交通协管员",
+                "period": "2026-09-15",
+                "publisher": "汕头市公安局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shantou.gov.cn/gaj/zwgk/gggs/content/post_2567887.html"
               }
             ]
           },
@@ -34730,7 +34784,7 @@
               }
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34742,13 +34796,14 @@
           "china_soc_row": "美国33-9091.00单一职业；中国一一职业分类映射未取，法定权限另核。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026-g04-current"
+            "posting-crossing-wdlc",
+            "posting-crossing-shantou"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响这个职业的工资吗？",
             "driver_heading": "交通引导工作怎样安排时段与季节？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历与训练背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "不同学历与训练背景对应哪些交通引导岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36508,7 +36563,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解交通路口警卫旗手的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36621,12 +36676,12 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "label": "人格偏好"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "label": "大五人格特质"
           },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
@@ -37039,39 +37094,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约91,400人（2024 年，单一职业口径）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "94,800 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模（存量统计）",
-        "occupation_scope": "33-9091.00；2024 年就业人数来自 O*NET 摘要页（基于 BLS 2024—2034 年预测）",
-        "period": "2024 年基期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 33-9091",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a21-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "增长3%至4%（2024—2034 年，标签「平均」）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "+3.5%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "预测就业变化（职业总量）",
-        "occupation_scope": "33-9091.00；预测标签 Average（3% 至 4%），属于预测期总量变化，不是个人录用概率",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 33-9091",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a21-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约18,000个（2024—2034 年年均，含增长与替换）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 17,300 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "年均职位空缺（含增长与替换）",
-        "occupation_scope": "33-9091.00；空缺为 2024—2034 年年均，含因增长与替换产生的位置，不是每年净增岗位数",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 33-9091",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a21-bls-projections"
         ]
       },
       {
@@ -37229,6 +37284,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "公益性岗位 2 名，3,100 元/月；C1 及以上，兼开轻型货车，符合当地就业困难条件。",
+        "fact_id": "posting-crossing-wdlc",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "交通疏导员兼司机",
+        "period": "2026-09-14",
+        "source_refs": [
+          "crossing-wdlc"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年包干约 58,000 元，含双边五险一金；是经费口径，不是到手收入。",
+        "fact_id": "posting-crossing-shantou",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "警务辅助交通协管员",
+        "period": "2026-09-15",
+        "source_refs": [
+          "crossing-shantou"
+        ]
       }
     ]
   },
@@ -37255,19 +37334,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，增长 3% 至 4%，平均）"
+        "label": "美国预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 91,400 人）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，约 18,000 个，含增长与替换）"
+        "label": "美国预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37281,17 +37360,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "交通路口警卫旗手（O*NET-SOC 33-9091.00）在学校周边、路口、铁路道口与施工路段引导交通：覆盖护送学生过街并拦停车辆、用标志旗帜与手势引导交通、监测车流判断行人安全间隙、说明交通与过街规则、报告儿童危险行为与违章车辆信息、布设交通管制标志、掌握责任区交通标志、与上级讨论疏导方案等；含美国 2025 年中位年薪 38,100 美元、2024 年约 91,400 人在岗、2024—2034 年就业预测增长 3% 至 4%（平均）、年均约 18,000 个含增长与替换的空缺、行业就业集中在行政与支持服务（42%）与政府（39%）、兴趣代码 RC、中国大陆职业级工资缺口，以及户外作业与恶劣天气、行人安全、法定指挥权限与记录责任边界的控制点。"
+      "text": "过街护导员和交通引导员如何观察、提示和报告？看道路养护与交通协管样本、美国工资与就业。"
     },
     "title": {
       "availability": "available",
       "text": "交通路口警卫旗手"
     }
   },
-  "source_content_sha256": "b78f0023fccb826b4ab850dbf0d50356deef5563491f73680779dd5090ee3e29",
+  "source_content_sha256": "6dcb427bc9ebd3f6231159eeb045cea012bea029a774275aca03307244f96e5e",
   "subject": {
     "canonical_slug": "crossing-guards-and-flaggers",
     "name": "交通路口警卫旗手",
-    "summary": "交通路口警卫旗手在美国对应 O*NET-SOC 33-9091.00（Crossing Guards and Flaggers），在学校周边、街道与铁路道口以及施工路段引导或控制车辆与行人交通：在学生上下学时护送其过街并按需要拦停车辆，在路口与施工路段用标志、旗帜、指示灯与手势引导交通并警示危险，监测车流以判断行人可安全通过的间隙，向学生与成年人说明交通与过街规则，报告儿童危险行为与无视信号车辆的违章信息，在指定点位布设交通管制标志与标牌，掌握责任区内交通标志的位置与用途，并与上级讨论交通疏导方案与控制点位置。该职业准备层级为 Job Zone 1-2（通常要求高中文凭或同等学历，提供几天到一年的在岗培训）；中国侧同类岗位为学校周边的护学岗、交通协管员与施工路段的交通疏导人员，职责与授权口径与该美国职业细类不是一一对应，不能互换。"
+    "summary": "在指定路口、校区或道路作业区，按现场方案提示行人和车辆，观察视距与冲突并报告异常。过街护导和作业区交通引导的设备、培训和授权不同。"
   }
 }

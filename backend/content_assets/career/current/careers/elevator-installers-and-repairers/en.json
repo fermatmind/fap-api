@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a32-ankang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a32-hechuan": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -1605,7 +1611,7 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1677,7 +1683,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26107,12 +26113,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Broad-scope construction industry reference: nationwide 2025 average annual wage for urban non-private units was 92,036 yuan, and for private units 66,275 yuan; pre-tax industry averages, not the elevator installation and repair occupation median or an individual income range."
+              " These are past notices. A comparable mainland occupational median remains unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "nbs"
+            "a32-ankang",
+            "a32-hechuan"
           ],
           "type": "prose"
         },
@@ -26222,12 +26229,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Industry average wages or a single recruitment quote are not used to substitute for this occupation's wages."
+              "Use the notices to compare duties and pay terms for individual posts."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "nbs"
+            "a32-ankang",
+            "a32-hechuan"
           ],
           "type": "prose"
         }
@@ -28979,25 +28987,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Material one: fictional drawings and hoistway conditions",
-                  "Gives drawing versions, hoistway dimensions, and load-bearing conditions as exercise input.",
-                  "Exercise output: list the installation sequence, key dimensions, and open items."
+                  "Paper exercise inputs",
+                  "Fictional unit E6. Ticket L12 records work complete. Recheck Q07 for E6 records only door status.",
+                  "The exercise requires a door record and a running check for return to service. Q07 has no running result and no approval signature.",
+                  "The maintenance owner completes the record. The duty lead confirms return to service. There is no elevator operation or evidence of the root cause."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Material two: regulatory and checklist excerpt",
-                  "Gives applicable clauses, inspection items, and criteria.",
-                  "Exercise output: write the criteria source and scope of application for this inspection."
+                  "What to submit",
+                  "Submit a one-page handoff with ticket and unit IDs, recorded items, missing items, status and owners.",
+                  "Use the paper records and distinguish work completion from return approval."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Material three: commissioning data sheet (fictional)",
-                  "Gives parameters, test results, and records, including one out-of-limit value and one missing item.",
-                  "Exercise output: mark the out-of-limit and missing items and write the retest and review requirements."
+                  "Finish your own answer first",
+                  "Open “Maintenance handoff reference (open after day six)” under FAQs and sources.",
+                  "Use the checklist to record one difference and one correction."
                 ]
               },
               {
@@ -29026,50 +29035,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: read one safety procedure",
-                  "Copy one applicable clause and write its scope of application and uncertain points."
+                  "Day 1",
+                  "Copy the unit and ticket IDs."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: write an installation checklist",
-                  "Use fictional drawings to organize the installation sequence and inspection items, marking assumptions and open items."
+                  "Day 2",
+                  "Separate work completion and recheck."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: do one dimension check",
-                  "Check one key dimension or clearance per the excerpt and record the source."
+                  "Day 3",
+                  "List evidence needed for return."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: define test criteria",
-                  "Write pass criteria, measurement conditions, and recording requirements."
+                  "Day 4",
+                  "Check review and return owners."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: build a maintenance checklist",
-                  "List maintenance and safety device inspection items per fictional regulations."
+                  "Day 5",
+                  "Finish the paper handoff."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: make two variants",
-                  "Change one hoistway condition and one criterion respectively and write clearly the impact scope and items to retest."
+                  "Day 6: finish your own answer",
+                  "Check whether someone could read your handoff on its own before opening the reference."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: review the stop conditions",
-                  "Summarize the conditions under which you must stop and escalate, producing a one-page review record."
+                  "Day 7: open the reference and review",
+                  "Open “Maintenance handoff reference (open after day six)” under FAQs and sources. Record one difference and correction, then decide whether to continue or pause."
                 ]
               }
             ]
@@ -29088,13 +29097,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: can you accurately identify a clause's scope of application and exceptions, rather than only copying keywords?",
+              "You can finish a one-page handoff and separate verified facts, open checks and approvals.",
               "Day 2: can you break the drawings into a checkable installation sequence and inspection items and flag open items?",
-              "Day 3: can you clearly state the criteria, units, and sources in dimension checking?",
+              "Note which paper step takes most effort. Ask the employer about actual work demands.",
               "Day 4: can you write “pass” as executable criteria rather than a vague description?",
               "Day 5: can you build a checklist without omitting safety device items?",
               "Day 6: can you judge the scope of a change's impact and list the items that must be retested?",
-              "Day 7: can you write clear stop and escalation conditions and state who confirms them?"
+              "On day seven, check your handoff against the collapsed reference. Repeat if a critical item is missing. Ask the employer about training and actual responsibilities."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30979,21 +30988,21 @@
           "data": {
             "entries": [
               {
-                "answer": "Assembles, installs, commissions, repairs, and maintains electric or hydraulic passenger and freight elevators, escalators, moving walkways, and dumbwaiters: positions guide rails and the car per drawings, connects and commissions electrical controls, troubleshoots braking and door operator faults, and completes safety inspections and maintenance records per regulations.",
+                "answer": "Install, inspect, maintain or repair elevators and escalators, and document equipment state, rechecks and handoff. Ask about installation versus maintenance duties, callouts and who authorizes return to service.",
                 "id": "actors.faq.1",
                 "question": "What do elevator and escalator installers and repairers mainly do?",
                 "question_key": "career.faq.elevator-installers-and-repairers.1",
                 "source_refs": [
-                  "onet"
+                  "a32-onet"
                 ]
               },
               {
-                "answer": "This occupation deals specifically with vertical transportation equipment such as elevators and escalators and involves hoistway work, traction systems, and safety devices; electricians work on building and industrial electrical systems; HVAC technicians work on heating, ventilation, air conditioning, and refrigeration equipment.",
+                "answer": "Elevator work covers the lift and its mechanical, electrical and control systems. Electricians often handle wiring and supply. HVAC technicians work on climate systems. Verify site authority and approvals.",
                 "id": "actors.faq.2",
                 "question": "How does it differ from electricians and HVAC technicians?",
                 "question_key": "career.faq.elevator-installers-and-repairers.2",
                 "source_refs": [
-                  "onet"
+                  "a32-onet"
                 ]
               },
               {
@@ -31006,31 +31015,31 @@
                 ]
               },
               {
-                "answer": "BLS OES／O*NET show a 2025 national median annual wage of 109,910 USD (median hourly wage 52.84 USD); the quintiles are 59,270／79,290／109,910／135,720／158,890 USD.",
+                "answer": "The May 2025 U.S. annual median for this occupation was $109,910.",
                 "id": "actors.faq.4",
                 "question": "What is the U.S. wage?",
                 "question_key": "career.faq.elevator-installers-and-repairers.4",
                 "source_refs": [
-                  "onet"
+                  "a32-bls"
                 ]
               },
               {
-                "answer": "O*NET/BLS show about 24,200 employed in 2024, projected growth faster than average over 2024—2034 (5%—6%), and about 2,000 projected openings per year; openings include growth and replacements.",
+                "answer": "BLS projects U.S. SOC 47-4021 to rise from about 24,700 jobs in 2025 to 26,100 in 2035 (+5.7%), with about 1,900 annual openings including replacements.",
                 "id": "actors.faq.5",
                 "question": "What is the U.S. employment outlook?",
                 "question_key": "career.faq.elevator-installers-and-repairers.5",
                 "source_refs": [
-                  "onet"
+                  "a32-bls"
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics materials checked here reach only industry and broad personnel-category framing and do not provide a national single-occupation wage percentile precisely corresponding to this occupation; this page registers insufficient evidence accordingly and does not substitute industry averages or a single recruitment quote.",
+                "answer": "Ten posts at CNY 4,000–8,000 per month depending on skill. Duties included inspection, repair, scheduled maintenance and records. Chongqing Maigao listed two maintenance posts, total monthly pay of CNY 4,000–7,000 and a junior-college credential or higher in a related field. These are past notices. A comparable mainland occupational median remains unavailable.",
                 "id": "actors.faq.6",
                 "question": "Can Mainland China wages be looked up?",
                 "question_key": "career.faq.elevator-installers-and-repairers.6",
                 "source_refs": [
-                  "onet",
-                  "nbs"
+                  "a32-ankang",
+                  "a32-hechuan"
                 ]
               },
               {
@@ -31069,6 +31078,15 @@
                 "source_refs": [
                   "onet"
                 ]
+              },
+              {
+                "answer": "L12 work completion and Q07 door status are recorded for E6. A running result and approval signature are missing, so service return remains pending. The maintenance owner completes the record, and the duty lead confirms after review. Log E6, L12, Q07, gaps and owners. Check four items: IDs, recorded items, missing evidence and status, and handoff and approval. Count each complete item. The exercise is fictional and the source provides occupational context.",
+                "id": "actors.faq.11",
+                "question": "Maintenance handoff reference (open after day six)",
+                "question_key": "career.faq.elevator-installers-and-repairers.11",
+                "source_refs": [
+                  "a32-onet"
+                ]
               }
             ]
           },
@@ -31084,7 +31102,7 @@
           "data": {
             "entries": [
               "Education, apprenticeship experience, license, and operation certificate requirements in a job posting must be read item by item; one relaxable item does not mean other conditions can be substituted.",
-              "Chinese and U.S. data are in separate columns: the U.S. is the O*NET-SOC 47-4021.00 single-occupation statistic (May 2025 wages, 2024—2034 outlook), while Mainland China figures are industry and broad personnel-category framing, with no precise occupational percentile obtained.",
+              "U.S. employment and wages use BLS 47-4021. The two mainland postings describe individual pay and hiring terms.",
               "This page does not constitute a work permit, an inspection, or a compliance conclusion; the installation, inspection, and release of elevators and escalators may only be carried out by qualified and authorized individuals under applicable regulations and organizational rules."
             ]
           },
@@ -31299,20 +31317,19 @@
                 "url": "https://www.bls.gov/ooh/occupation-finder.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Check this occupation's median wage, employment size, growth, and annual openings.",
-                  "Applies only to that U.S. single occupation."
+                  "BLS projects U.S. SOC 47-4021 to rise from about 24,700 jobs in 2025 to 26,100 in 2035 (+5.7%), with about 1,900 annual openings including replacements."
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "bls",
-                "limitation": "Applies only to the U.S. framing; the median is not a starting salary, and openings are not net gains.",
+                "limitation": "Annual openings include replacements.",
                 "market": "United States",
-                "name": "BLS OOH — Elevator and Escalator Installers and Repairers (elevator and escalator installers and repairers)",
-                "period": "May 2025 wage data; 2025—2035 projection",
+                "name": "BLS Table 1.2: occupational projections",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/elevator-installers-and-repairers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -31665,6 +31682,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Install, inspect, maintain or repair elevators and escalators, and document equipment state, rechecks and handoff. Ask about installation versus maintenance duties, callouts and who authorizes return to service."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a32-onet",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "Occupational task profile",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/47-4021.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS projects U.S. SOC 47-4021 to rise from about 24,700 jobs in 2025 to 26,100 in 2035 (+5.7%), with about 1,900 annual openings including replacements."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a32-bls",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Ten posts at CNY 4,000–8,000 per month depending on skill. Duties included inspection, repair, scheduled maintenance and records."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a32-ankang",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Elevator maintenance technician",
+                "period": "2026 年第一批",
+                "publisher": "Ankang Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.ankang.gov.cn/Content-2888848.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Chongqing Maigao listed two maintenance posts, total monthly pay of CNY 4,000–7,000 and a junior-college credential or higher in a related field."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a32-hechuan",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Elevator maintenance worker",
+                "period": "2026-02-05",
+                "publisher": "Chongqing Hechuan District government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hc.gov.cn/bmjd/bm_100475/rlsbj/zwxx_101296/gggs_11/202602/t20260205_15383788.html"
               }
             ]
           },
@@ -34466,7 +34543,7 @@
             },
             {
               "指标": "Position framing",
-              "数值": "Mainland China's elevator installation, maintenance, and inspection positions do not correspond one-to-one with the U.S. single-occupation framing",
+              "数值": "See the two dated job postings below.",
               "说明": "The boundaries between installation, maintenance, and inspection duties must be checked per organization."
             },
             {
@@ -34606,7 +34683,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "Historical case status",
+          "china_open": "The dated posting samples are shown alongside the national occupation-level data gap.",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34650,7 +34727,7 @@
               }
             },
             {
-              "城市/区间": "Construction industry average annual wage (broad-scope reference)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$join": [
                   {
@@ -34680,7 +34757,8 @@
           "china_soc_row": "Chinese pay framing",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a32-ankang",
+            "posting-a32-hechuan"
           ],
           "sources_note": {
             "$join": [
@@ -34705,14 +34783,14 @@
           "ui": {
             "ai_heading": "Will AI directly change income in this occupation?",
             "driver_heading": "What should be looked at when checking pay for comparable positions in Mainland China?",
-            "official_heading": "Mainland China public framing and statistical gaps",
+            "official_heading": "Scope of industry figures and job postings",
             "scenario_caption": "A precise national occupational wage is still missing; the construction industry pre-tax annual average wage is only an industry reference.",
             "scenario_heading": "Can framing for comparable positions in Mainland China be compared directly?",
             "scenario_interpretation_label": "Scope of application and gaps",
             "scenario_role_label": "Position or scope",
             "scenario_value_label": "Pay and disclosure situation"
           },
-          "us_growth": "See the U.S. pay reference module for U.S. projections.",
+          "us_growth": "5.7% (2025–2035)",
           "us_median": "See the U.S. pay reference module for U.S. wages."
         }
       },
@@ -35190,7 +35268,7 @@
         "outlook_evidence": [
           {
             "geography": "United States",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.2",
               "block": "market-signals",
@@ -35205,8 +35283,8 @@
             },
             "metric": "Employment growth",
             "occupation_scope": "O*NET-SOC 47-4021.00 (Elevator and Escalator Installers and Repairers)",
-            "source_id": "onet",
-            "value": "6%"
+            "source_id": "a32-bls",
+            "value": "5.7%"
           },
           {
             "geography": "United States",
@@ -35225,12 +35303,12 @@
             },
             "metric": "Employment size",
             "occupation_scope": "O*NET-SOC 47-4021.00 (Elevator and Escalator Installers and Repairers)",
-            "source_id": "onet",
+            "source_id": "a32-bls",
             "value": "24,700"
           },
           {
             "geography": "United States",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -35245,8 +35323,8 @@
             },
             "metric": "Projected openings",
             "occupation_scope": "O*NET-SOC 47-4021.00 (Elevator and Escalator Installers and Repairers)",
-            "source_id": "onet",
-            "value": "1,900 per year"
+            "source_id": "a32-bls",
+            "value": "1,900"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -35358,7 +35436,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electricians",
+            "target_href": "/en/career/jobs/electricians",
             "target_slug": "electricians",
             "target_title": "Electricians",
             "transition_distance": {
@@ -35381,7 +35459,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/plumbers-pipefitters-and-steamfitters",
+            "target_href": "/en/career/jobs/plumbers-pipefitters-and-steamfitters",
             "target_slug": "plumbers-pipefitters-and-steamfitters",
             "target_title": "Plumbers, pipefitters, and steamfitters",
             "transition_distance": {
@@ -35404,7 +35482,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/heating-air-conditioning-and-refrigeration-mechanics-and-installers",
+            "target_href": "/en/career/jobs/heating-air-conditioning-and-refrigeration-mechanics-and-installers",
             "target_slug": "heating-air-conditioning-and-refrigeration-mechanics-and-installers",
             "target_title": "Heating, air conditioning, and refrigeration mechanics and installers",
             "transition_distance": {
@@ -35427,7 +35505,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/general-maintenance-and-repair-workers",
+            "target_href": "/en/career/jobs/general-maintenance-and-repair-workers",
             "target_slug": "general-maintenance-and-repair-workers",
             "target_title": "General maintenance personnel",
             "transition_distance": {
@@ -35450,7 +35528,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/millwrights",
+            "target_href": "/en/career/jobs/millwrights",
             "target_slug": "millwrights",
             "target_title": "Mechanical millwrights",
             "transition_distance": {
@@ -35473,7 +35551,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/sheet-metal-workers",
+            "target_href": "/en/career/jobs/sheet-metal-workers",
             "target_slug": "sheet-metal-workers",
             "target_title": "Sheet metal workers",
             "transition_distance": {
@@ -35496,7 +35574,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/structural-iron-and-steel-workers",
+            "target_href": "/en/career/jobs/structural-iron-and-steel-workers",
             "target_slug": "structural-iron-and-steel-workers",
             "target_title": "Structural iron and steel workers",
             "transition_distance": {
@@ -35519,7 +35597,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/first-line-supervisors-of-construction-trades-and-extraction-workers",
+            "target_href": "/en/career/jobs/first-line-supervisors-of-construction-trades-and-extraction-workers",
             "target_slug": "first-line-supervisors-of-construction-trades-and-extraction-workers",
             "target_title": "Construction and extraction supervisors and workers",
             "transition_distance": {
@@ -35607,7 +35685,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Learn about my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35656,7 +35734,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Learn about my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35705,7 +35783,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Learn about my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35754,7 +35832,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Learn about my motivation cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35803,7 +35881,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Learn about my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35852,7 +35930,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Learn about my communication cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36450,7 +36528,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of elevator and escalator installers and repairers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36981,39 +37059,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 24,200 (2024)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "24,700 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "U.S. employment size",
-        "occupation_scope": "Primary school teachers (O*NET-SOC 25-2021.00)",
-        "period": "2024",
+        "occupation_scope": "U.S. 47-4021",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "a32-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Faster than average (5%—6%, 2024—2034)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "5.7%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "U.S. employment growth",
-        "occupation_scope": "Primary school teachers (O*NET-SOC 25-2021.00)",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. 47-4021",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a32-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 2,000 per year (2024—2034)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "1,900 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "U.S. projected openings",
-        "occupation_scope": "Primary school teachers (O*NET-SOC 25-2021.00)",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. 47-4021",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a32-bls"
         ]
       },
       {
@@ -37054,14 +37132,15 @@
       },
       {
         "derivation": "Chinese precise occupational data were not obtained; no conversion is performed.",
-        "display_value": "Insufficient evidence: no Mainland China national single-occupation wage percentile precisely corresponding to this occupation was obtained",
+        "display_value": "Ten posts at CNY 4,000–8,000 per month depending on skill. Duties included inspection, repair, scheduled maintenance and records. Chongqing Maigao listed two maintenance posts, total monthly pay of CNY 4,000–7,000 and a junior-college credential or higher in a related field.",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "China",
         "measure": "Mainland China framing",
-        "occupation_scope": "Primary school teachers (O*NET-SOC 25-2021.00)",
-        "period": "Checked in 2026",
+        "occupation_scope": "Two past job notices",
+        "period": "2026",
         "source_refs": [
-          "nbs"
+          "a32-ankang",
+          "a32-hechuan"
         ]
       },
       {
@@ -37074,6 +37153,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Ten posts at CNY 4,000–8,000 per month depending on skill. Duties included inspection, repair, scheduled maintenance and records.",
+        "fact_id": "posting-a32-ankang",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Elevator maintenance technician",
+        "period": "2026 年第一批",
+        "source_refs": [
+          "a32-ankang"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Chongqing Maigao listed two maintenance posts, total monthly pay of CNY 4,000–7,000 and a junior-college credential or higher in a related field.",
+        "fact_id": "posting-a32-hechuan",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Elevator maintenance worker",
+        "period": "2026-02-05",
+        "source_refs": [
+          "a32-hechuan"
         ]
       }
     ]
@@ -37101,19 +37204,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. 47-4021 · projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment"
+        "label": "U.S. 47-4021 · employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. projected openings"
+        "label": "U.S. 47-4021 · projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37127,17 +37230,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "U.S. O*NET-SOC 47-4021.00: 2025 median annual wage 109,910 USD (median hourly wage 52.84 USD), about 24,200 employed in 2024, and projected growth faster than average over 2024—2034 (5%—6%); includes the apprenticeship path, special equipment work qualifications, and the Mainland China framing explanation."
+      "text": "See work orders, rechecks and handoffs in elevator maintenance, compare postings and try a paper service-return record."
     },
     "title": {
       "availability": "available",
       "text": "Elevator and Escalator Installers and Repairers: duties, pay, and entry paths"
     }
   },
-  "source_content_sha256": "dfa225d12a83ddf8efdc635d835410a55d9bfb3480814d8606e87293617cb902",
+  "source_content_sha256": "2bdb7cb1cb41795e57a33c17195cb02130fac855b1fd8d216a661ad9a1b38442",
   "subject": {
     "canonical_slug": "elevator-installers-and-repairers",
     "name": "Elevator and Escalator Installers and Repairers",
-    "summary": "Under U.S. O*NET-SOC 47-4021.00, assembles, installs, commissions, repairs, and maintains electric or hydraulic passenger and freight elevators, escalators, moving walkways, and dumbwaiters: positions guide rails and the car per drawings, connects and commissions electrical controls, troubleshoots braking and door operator faults, and completes safety inspections and maintenance records per regulations."
+    "summary": "Install, inspect, maintain or repair elevators and escalators, and document equipment state, rechecks and handoff. Ask about installation versus maintenance duties, callouts and who authorizes return to service."
   }
 }

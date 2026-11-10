@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a23-dalian": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a23-sh-mch": {
+        "status": "pending_mapping"
       },
       "fact:r5-current-cn-health": {
         "status": "pending_mapping"
@@ -26136,12 +26142,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain verifiable recruitment or quoted-pay statistics for cytogenetics/chromosome testing positions in mainland China; the pay disclosures of individual units or platforms cannot represent the national level"
+              "A Shanghai maternal-health center’s prenatal laboratory management post required a master’s degree or higher in laboratory science, a senior professional rank and familiarity with genetic testing. A Dalian reproductive laboratory technician post was open to 2024 graduates with a master’s degree or higher. Both are adjacent roles; neither table quoted pay."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "a23-sh-mch",
+            "a23-dalian"
           ],
           "type": "prose"
         },
@@ -26237,7 +26244,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 figures of 146266 yuan for non-private and 75631 yuan for private units in health and social work are annual average pre-tax industry background, with the statistics released on 2026-05-15. The scope of urban legal entities with 5 or more employees excludes the self-employed and freelancers; non-private does not mean only state-owned enterprises. Research institutions must be matched to the real industry, and this must not be extrapolated to this occupation's wages, starting pay or take-home income."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -31000,7 +31007,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Analyse chromosomes or chromosome segments in biological specimens to assist in the study, diagnosis, classification or treatment of inherited or acquired genetic disease: receiving and assessing whether a specimen is suitable for the requested test; preparing specimens and culture media using aseptic technique, culturing cells and harvesting them in the optimal time sequence and manner; preparing cell culture slides, selecting a banding method and staining; counting chromosomes and identifying structural abnormalities with a microscope, light microscope or photomicrography system and arranging chromosomes in pairs on a karyogram; extracting, measuring and diluting deoxyribonucleic acid (DNA) for microarray analysis; carrying out further analysis with techniques such as FISH or aCGH; describing results according to the International System for Human Cytogenomic Nomenclature (ISCN) and summarising and reporting them; recording specimen handling, analysis and technical problems in logs or the laboratory information system; maintaining microscopic and imaging equipment; and carrying out quality control and archiving case materials.",
+                "answer": "Cytogenetic technologists prepare specimens, stain or hybridize slides, and examine chromosome number and structure. They document quality issues and submit findings under laboratory procedures. Result approval and clinical interpretation follow local roles and institutional rules.",
                 "id": "actors.faq.1",
                 "question": "What does the daily work of a cytogenetic technologist involve?",
                 "question_key": "career.faq.cytogenetic-technologists.1",
@@ -31009,9 +31016,9 @@
                 ]
               },
               {
-                "answer": "This occupation centres on chromosome karyotypes and molecular cytogenetic analysis and must carry out chromosome counting and structural abnormality interpretation; cytotechnologists centre on exfoliative cell morphology screening; histotechnologists centre on tissue sectioning, staining and immunohistochemistry; medical and clinical laboratory technologists/technicians cover many routine clinical test items; molecular and cellular biologists are oriented to research questions and experimental design; bioengineers and biomedical engineers centre on designing and developing instruments, processes or analytical systems; nuclear medicine technologists centre on radiopharmaceuticals and imaging equipment operation. Similar names do not mean duties or qualification requirements can be swapped.",
+                "answer": "Cytogenetics examines chromosome number, structure and karyotypes. Cytology focuses on individual cells and their morphology. Check whether the listing calls for karyotyping, FISH, cytology screening or a broader lab assignment.",
                 "id": "actors.faq.2",
-                "question": "What is the difference between this occupation and adjacent testing and research directions?",
+                "question": "How does cytogenetics differ from cytology?",
                 "question_key": "career.faq.cytogenetic-technologists.2",
                 "source_refs": [
                   "onet"
@@ -31027,9 +31034,9 @@
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: three types of task — microscopic observation and chromosome counting, slide and banding quality determination, and recording and result summarisation — can be partly handled by tools; this page has no occupation-specific adoption or displacement data.",
+                "answer": "Imaging software can help arrange chromosomes, compare images and flag unusual results. Lab staff verify specimen identity, slide quality and exceptions under their procedures and authorization. This is not a measurement of AI adoption or job displacement.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of this occupation is there already evidence of AI-driven change?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.cytogenetic-technologists.4",
                 "source_refs": [
                   "onet"
@@ -31045,12 +31052,14 @@
                 ]
               },
               {
-                "answer": "In the U.S. 2025 wage data, the median annual wage is 62,930 dollars (30.26 dollars per hour), with percentiles of 38,910 / 47,650 / 62,930 / 81,450 / 100,990 dollars (hourly 18.71 / 22.91 / 30.26 / 39.16 / 48.55), under the O*NET/OEWS parent occupation \"Clinical Laboratory Technologists and Technicians\" (29-2011.00) proxy basis, not collected separately for this subcategory; values broken down by state or area must be looked up on the O*NET local wages page by area and period and cannot be treated as an individual offer; no occupation-level figure was obtained for mainland China, and this page presents the industry average proxy with a clear label and does not write it as this occupation's wage.",
+                "answer": "These U.S. figures cover Clinical Laboratory Technologists and Technicians as a group, with no separate estimate for cytogenetics. The May 2025 U.S. median wage was $62,930 per year and $30.26 per hour. A Shanghai maternal-health center’s prenatal laboratory management post required a master’s degree or higher in laboratory science, a senior professional rank and familiarity with genetic testing. A Dalian reproductive laboratory technician post was open to 2024 graduates with a master’s degree or higher. Both are adjacent roles; neither table quoted pay.",
                 "id": "actors.faq.6",
                 "question": "What is the typical wage for this occupation, and how should it be compared?",
                 "question_key": "career.faq.cytogenetic-technologists.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "a23-sh-mch",
+                  "a23-dalian"
                 ]
               },
               {
@@ -31081,12 +31090,12 @@
                 ]
               },
               {
-                "answer": "The O*NET summary and employment trends page (based on BLS 2024—2034 projections, parent-occupation proxy basis) shows about 351,200 people under this basis in 2024, a projection label of \"slower than average\" (1%—2%) and an annual average of about 22,600 openings including growth and replacement; the projection is on an occupation-total basis, the work mainly involves specimen handling, culture and slide preparation and interpretation and reporting, and it should be verified against local testing demand, institutional structure and automation investment, with priority given to verifying how biosafety protection, quality control and result reporting authorization are implemented.",
+                "answer": "BLS projects U.S. employment for U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytogenetics separately) to go from about 343,000 in 2025 to 352,400 in 2035 (+2.7%). It projects about 20,800 openings per year, including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing this occupation now?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.cytogenetic-technologists.10",
                 "source_refs": [
-                  "bls"
+                  "a23-bls-projections"
                 ]
               }
             ]
@@ -31528,7 +31537,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Supports this occupation's tasks, work context and preparation level.",
                   "Contains no technology adoption or job displacement data."
@@ -31541,7 +31550,7 @@
                 "period": "Page updated in 2026; retrieved 2026-09-19",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/29-2011.01"
+                "url": "https://www.onetonline.org/link/details/29-2011.01"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31870,6 +31879,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment for U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytogenetics separately) to go from about 343,000 in 2025 to 352,400 in 2035 (+2.7%). It projects about 20,800 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a23-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Master’s or higher in laboratory science, senior professional rank, laboratory credentials and genetic-testing knowledge. No pay listed."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a23-sh-mch",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Shanghai prenatal laboratory management (adjacent role)",
+                "period": "2026",
+                "publisher": "Shanghai Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.sh.gov.cn/cmsres/37/374168b3dd1343c9994ac58f53296173/2ddc8a4a638c58d3d6212edf3e1ff007.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Code 08, one post for 2024 graduates with a master’s degree or higher. Genetics was one listed discipline. No pay listed."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a23-dalian",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Dalian reproductive laboratory technician (adjacent role)",
+                "period": "2024",
+                "publisher": "Shandong University careers portal (Dalian recruitment attachment)",
+                "scope": "recruitment_proxy",
+                "url": "https://jobcareer.sdu.edu.cn/eweb/servlet/resdownload?id=CS8fVEQvmGwdYbPZXhYwqb&type=getfile"
               }
             ]
           },
@@ -34928,7 +34982,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (industry category basis)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34940,13 +34994,14 @@
           "china_soc_row": "O*NET29-2011.01 is the U.S. occupational identity; occupation-level wages for China were not obtained, and it is not asserted that the official source has established no corresponding classification.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "r5-current-cn-health"
+            "posting-a23-sh-mch",
+            "posting-a23-dalian"
           ],
           "sources_note": "Source links are used according to their respective statistical or announcement scopes; when the statistical period, survey population and pay basis differ, cite them separately and do not convert between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect the wages for this occupation?",
             "driver_heading": "How is testing work arranged around specimen batches and culture cycles?",
-            "official_heading": "Official statistical basis and gap notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "An editorial direction example, not a unified recruitment threshold or wage statistic",
             "scenario_heading": "Which testing position directions correspond to different education and training backgrounds?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35765,7 +35820,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cytotechnologists",
+            "target_href": "/en/career/jobs/cytotechnologists",
             "target_slug": "cytotechnologists",
             "target_title": "Cytotechnologists (adjacent occupation)",
             "transition_distance": {
@@ -35788,7 +35843,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/histotechnologists",
+            "target_href": "/en/career/jobs/histotechnologists",
             "target_slug": "histotechnologists",
             "target_title": "Histotechnologists (adjacent occupation)",
             "transition_distance": {
@@ -35811,7 +35866,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/medical-and-clinical-laboratory-technologists",
+            "target_href": "/en/career/jobs/medical-and-clinical-laboratory-technologists",
             "target_slug": "medical-and-clinical-laboratory-technologists",
             "target_title": "Medical and Clinical Laboratory Technologists (adjacent occupation)",
             "transition_distance": {
@@ -35834,7 +35889,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/molecular-and-cellular-biologists",
+            "target_href": "/en/career/jobs/molecular-and-cellular-biologists",
             "target_slug": "molecular-and-cellular-biologists",
             "target_title": "Molecular and Cellular Biologists (adjacent occupation)",
             "transition_distance": {
@@ -35857,7 +35912,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/biomedical-engineers",
+            "target_href": "/en/career/jobs/biomedical-engineers",
             "target_slug": "biomedical-engineers",
             "target_title": "Bioengineers and Biomedical Engineers (adjacent occupation)",
             "transition_distance": {
@@ -35880,7 +35935,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/medical-and-clinical-laboratory-technicians",
+            "target_href": "/en/career/jobs/medical-and-clinical-laboratory-technicians",
             "target_slug": "medical-and-clinical-laboratory-technicians",
             "target_title": "Medical and Clinical Laboratory Technicians (adjacent occupation)",
             "transition_distance": {
@@ -35903,7 +35958,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/histology-technicians",
+            "target_href": "/en/career/jobs/histology-technicians",
             "target_slug": "histology-technicians",
             "target_title": "Histology Technicians (adjacent occupation)",
             "transition_distance": {
@@ -35926,7 +35981,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/nuclear-medicine-technologists",
+            "target_href": "/en/career/jobs/nuclear-medicine-technologists",
             "target_slug": "nuclear-medicine-technologists",
             "target_title": "Nuclear Medicine Technologists (adjacent occupation)",
             "transition_distance": {
@@ -36014,7 +36069,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Learn about my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -36063,7 +36118,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Learn about my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -36112,7 +36167,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Learn about my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36161,7 +36216,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Learn about my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36210,7 +36265,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Learn about my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36259,7 +36314,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Learn about my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36881,7 +36936,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of cytogenetic technologists",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36995,11 +37050,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -37412,39 +37467,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 351,200 people (2024; parent-occupation proxy basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "343,000 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistics)",
-        "occupation_scope": "Cytogenetic Technologists (29-2011.01); the 2024 employment figure comes from the O*NET summary page (based on BLS 2024—2034 projections), marked on the page as following the parent occupation \"Clinical Laboratory Technologists and Technicians\" (29-2011.00) basis",
-        "period": "2024 base year; retrieved 2026-09-19",
+        "occupation_scope": "U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytogenetics separately)",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a23-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Slower than average 1%—2% (2024—2034, label \"Slower than average\"; parent-occupation proxy basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+2.7%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "The parent-occupation proxy basis for 29-2011.01; projection label \"slower than average\" (1%—2%), a change in the total over the projection period, not an individual probability of being hired",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytogenetics separately)",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a23-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 22,600 (annual average 2024—2034, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "20,800 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Annual average job openings (including growth and replacement)",
-        "occupation_scope": "The parent-occupation proxy basis for 29-2011.01; openings are an annual average for 2024—2034, including positions arising from growth and replacement",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytogenetics separately)",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a23-bls-projections"
         ]
       },
       {
@@ -37532,39 +37587,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 343000 people (2025 combined 29-2010 base year)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "343,000 jobs (2025)",
         "fact_id": "r5-current-employment",
         "market": "United States",
         "measure": "Employment stock (combined statistical proxy)",
-        "occupation_scope": "U.S. wages, employment and industry are all the combined Clinical Laboratory Technologists and Technicians 29-2010 statistical proxy, covering technologists and technicians; they are not a separate statistic for 29-2011.00 technologists, still less this occupation's own 29-2011.01 cytogenetic technologist data. Own tasks, context and preparation material are kept separate from the combined statistics.",
-        "period": "2025—2035 projection; 2025 base year; retrieved 2026-10-09",
+        "occupation_scope": "U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytogenetics separately)",
+        "period": "2025",
         "source_refs": [
-          "r5-bls-current"
+          "a23-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "+2.7% and about 9400 people (2025—2035 combined 29-2010 projection)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+2.7%",
         "fact_id": "r5-current-growth",
         "market": "United States",
         "measure": "Projected total change (combined statistical proxy)",
-        "occupation_scope": "U.S. wages, employment and industry are all the combined Clinical Laboratory Technologists and Technicians 29-2010 statistical proxy, covering technologists and technicians; they are not a separate statistic for 29-2011.00 technologists, still less this occupation's own 29-2011.01 cytogenetic technologist data. Own tasks, context and preparation material are kept separate from the combined statistics.",
-        "period": "2025—2035 projection; 2025 base year; retrieved 2026-10-09",
+        "occupation_scope": "U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytogenetics separately)",
+        "period": "2025–2035",
         "source_refs": [
-          "r5-bls-current"
+          "a23-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 20800 openings per year (2025—2035 combined 29-2010, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "20,800 annually (including replacements)",
         "fact_id": "r5-current-openings",
         "market": "United States",
         "measure": "Projected period annual average openings (combined statistical proxy)",
-        "occupation_scope": "U.S. wages, employment and industry are all the combined Clinical Laboratory Technologists and Technicians 29-2010 statistical proxy, covering technologists and technicians; they are not a separate statistic for 29-2011.00 technologists, still less this occupation's own 29-2011.01 cytogenetic technologist data. Own tasks, context and preparation material are kept separate from the combined statistics.",
-        "period": "2025—2035 projection; 2025 base year; retrieved 2026-10-09",
+        "occupation_scope": "U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytogenetics separately)",
+        "period": "2025–2035",
         "source_refs": [
-          "r5-bls-current"
+          "a23-bls-projections"
         ]
       },
       {
@@ -37626,6 +37681,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Master’s or higher in laboratory science, senior professional rank, laboratory credentials and genetic-testing knowledge. No pay listed.",
+        "fact_id": "posting-a23-sh-mch",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Shanghai prenatal laboratory management (adjacent role)",
+        "period": "2026",
+        "source_refs": [
+          "a23-sh-mch"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Code 08, one post for 2024 graduates with a master’s degree or higher. Genetics was one listed discipline. No pay listed.",
+        "fact_id": "posting-a23-dalian",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Dalian reproductive laboratory technician (adjacent role)",
+        "period": "2024",
+        "source_refs": [
+          "a23-dalian"
+        ]
       }
     ]
   },
@@ -37646,31 +37725,31 @@
         "availability": "available",
         "fact_ref": "median",
         "key": "us_pay",
-        "label": "U.S. median annual wage (2025 wage data, 62,930 dollars per year; parent-occupation proxy basis)"
+        "label": "U.S. median wage · Clinical Laboratory Technologists and Technicians"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, slower than average 1%—2%; parent-occupation proxy basis)"
+        "label": "U.S. projected employment change (2025–2035) · Clinical Laboratory Technologists and Technicians"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, about 351,200 people; parent-occupation proxy basis)"
+        "label": "U.S. employment (2025) · Clinical Laboratory Technologists and Technicians"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. annual average job openings (2024—2034, about 22,600, including growth and replacement)"
+        "label": "U.S. projected annual openings (including replacements) · Clinical Laboratory Technologists and Technicians"
       },
       {
-        "availability": "available",
-        "fact_ref": "china-jiaojiang-featured-daily-2026",
+        "availability": "missing",
+        "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China industry average proxy (2025 health and social work; see the China salary section)"
+        "label": "Mainland China: occupation wage unavailable"
       }
     ]
   },
@@ -37678,17 +37757,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Cytogenetic Technologists (O*NET-SOC 29-2011.01) analyse chromosomes or chromosome segments in biological specimens to assist in the study, diagnosis, classification and treatment of inherited or acquired genetic disease: covering assessing specimen suitability, aseptic culture and cell harvest, selecting a banding method and slide preparation and staining, counting chromosomes under the microscope and identifying structural abnormalities, arranging pairs on a karyogram, carrying out further analysis with FISH and aCGH, describing results according to ISCN and summarising and reporting them, keeping logs and the laboratory information system, maintaining microscopic equipment, and carrying out quality control and archiving cases; it should be noted that their U.S. wage, employment and industry data are published on O*NET under the parent occupation \"Clinical Laboratory Technologists and Technicians\" (29-2011.00), including the 2025 median annual wage of 62,930 dollars (30.26 dollars/hour), about 351,200 people employed in 2024, a 2024—2034 employment projection of slower than average (1%—2%), an estimated annual average of about 22,600 openings including growth and replacement, industry health care and social assistance 83% | other industries 17%, the interest code IRC and preparation level Job Zone Four; together with the industry average proxy basis for such positions in mainland China and control points for the specimen identity chain, culture and harvest quality, karyotype interpretation and nomenclature, and result reporting and escalation."
+      "text": "Explore chromosome analysis, the distinction from cytology, U.S. parent-group wages, and two related mainland China job examples."
     },
     "title": {
       "availability": "available",
       "text": "Cytogenetic Technologists"
     }
   },
-  "source_content_sha256": "9cb8e9d3325134a3e43bef8dfd718f66818ba162f2f53b2170bb2ae9fdfc973e",
+  "source_content_sha256": "faa5f20ca2e1c2f6a3fe1bb1cec8a769b60ba5892b9760806b23ef7e734c03d3",
   "subject": {
     "canonical_slug": "cytogenetic-technologists",
     "name": "Cytogenetic Technologists",
-    "summary": "In the United States, cytogenetic technologists correspond to O*NET-SOC 29-2011.01 (Cytogenetic Technologists), analysing chromosomes or chromosome segments in biological specimens to assist in the study, diagnosis, classification or treatment of inherited or acquired genetic disease: receiving and assessing whether a specimen is suitable for the requested test, culturing cells using aseptic technique and harvesting them with blocking agents, hypotonic solution and fixative; selecting a banding method and preparing and staining slides so that chromosomes are visible; counting chromosomes, identifying structural abnormalities and arranging pairs on a karyogram under the microscope or photomicrography system; carrying out further analysis with techniques such as fluorescence in situ hybridisation (FISH) or microarray comparative genomic hybridisation (aCGH); describing results according to the International System for Human Cytogenomic Nomenclature (ISCN) and summarising and reporting them to physicians or relevant personnel; and recording specimen handling, analysis and technical problems in logs or the laboratory information system, maintaining microscopic equipment, carrying out quality control and quality assurance programmes and archiving case materials. The preparation level for this occupation is Job Zone Four (considerable preparation needed, SVP 7.0 to below 8.0), and the official education survey shows that 100% of this occupation requires a bachelor's degree. On O*NET, the wage, employment and industry data for this subcategory are published under the parent occupation \"Clinical Laboratory Technologists and Technicians\" (29-2011.00) basis, not values collected separately for this subcategory. Comparable positions in China are cytogenetics/chromosome testing positions in medical institutions and third-party medical laboratory organisations; their duties and qualification basis do not correspond one-to-one with this U.S. occupational subcategory and cannot be interchanged."
+    "summary": "Cytogenetic technologists prepare specimens, stain or hybridize slides, and examine chromosome number and structure. They document quality issues and submit findings under laboratory procedures. Result approval and clinical interpretation follow local roles and institutional rules."
   }
 }

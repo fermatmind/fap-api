@@ -1310,6 +1310,9 @@
       "item:parts-salespersons.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:parts-salespersons.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:parts-salespersons.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30933,6 +30936,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The old part and catalog have different model suffixes. Stock has an unsuffixed part. List the equipment ID, part ID and difference to verify with the supplier."
+            ]
+          },
+          "id": "parts-salespersons.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Check replacement part compatibility",
+          "type": "notice"
         }
       ]
     },
@@ -37432,6 +37450,13 @@
         "id": "parts-salespersons.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "parts-salespersons.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37899,7 +37924,7 @@
       "text": "Parts salesperson: work content, wages, and parts fitment risk."
     }
   },
-  "source_content_sha256": "ecd7a41c40e70a66309b5312ba09626d32b738b7d4c6c8914d32daa6972f51b7",
+  "source_content_sha256": "12fbfde19dc3574489200b82869b8d1620721a7f7c993266079b2065a2480bb8",
   "subject": {
     "canonical_slug": "parts-salespersons",
     "name": "Parts salesperson.",

@@ -9400,13 +9400,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "信息安全分析师保护组织的计算机网络与系统，典型交付包括安全监测、漏洞核查、控制改进、事件记录和风险缓解建议；本页采用美国 BLS/O*NET 精确职业范围，不能外推中国许可或薪资。"
+              "信息安全分析师关注组织系统、网络和数据的保护，监测异常，分析告警证据，记录风险，并与工程、运营和合规团队协调处置。工作内容随安全运营、风险评估等方向而不同。"
             ]
           },
           "id": "information-security-analysts.profile.definition-block.1",
           "source_refs": [
-            "bls-ooh-2025-information-security-analysts",
-            "source-pack-onet-details"
+            "source-pack-onet-summary",
+            "cn-gfex-sec",
+            "cn-hebut-sec"
           ],
           "type": "prose"
         },
@@ -9502,12 +9503,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "协作链：网络与系统管理员、开发与运维、业务负责人、供应商和安全管理者；高影响处置由授权责任人决定。"
+              "用虚构告警记录，写时间线、已知事实、待查证据、影响和需要升级给谁。上证所信息网络公司的安全方向样本列告警分析处置；练习只用授权环境或合成数据。"
             ]
           },
           "id": "information-security-analysts.profile.career-quick-answers-block.8",
           "source_refs": [
-            "bls-ooh-2025-information-security-analysts"
+            "source-pack-onet-summary",
+            "cn-gfex-sec",
+            "cn-hebut-sec"
           ],
           "type": "prose"
         },
@@ -9516,12 +9519,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "质量标准：每个判断都能回到原始日志、资产、权限或配置；记录时间、版本、假设、复核人和升级结果。"
+              "分析师通常解释信号、跟踪风险和事件；工程师更多构建维护控制与平台。企业可能让同一岗位兼做，先看工作说明。"
             ]
           },
           "id": "information-security-analysts.profile.career-quick-answers-block.9",
           "source_refs": [
-            "bls-ooh-2025-information-security-analysts"
+            "source-pack-onet-summary",
+            "cn-gfex-sec"
           ],
           "type": "prose"
         },
@@ -11841,12 +11845,13 @@
                 ]
               },
               {
-                "answer": "BLS 预计 2024—2034 增长 29%（远快于平均），平均每年约 16,000 个空缺，2024 年就业约 182,800 人；这些是美国精确职业统计，不是个人录用保证，也不等于中国大陆工资。",
+                "answer": "美国 BLS 表1.2：15-1212 2025 年就业约 192,900 人，预计 2035 年约 233,400 人，2025—2035 年变化 +21.0%，年均约 14,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                 "id": "information-security-analysts.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.information-security-analysts.10",
                 "source_refs": [
-                  "bls-ooh-2025-information-security-analysts"
+                  "bls-ooh-2025-information-security-analysts",
+                  "bls-design-ep"
                 ]
               },
               {
@@ -12114,7 +12119,7 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "支持精确职业页的 2025 工资与 2024—2034 就业展望。",
+                  "美国 BLS 表1.2：15-1212 2025 年就业约 192,900 人，预计 2035 年约 233,400 人，2025—2035 年变化 +21.0%，年均约 14,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                   "美国全国职业口径；工资为 OEWS 年薪（美元/年），不是中国工资或个人报价。"
                 ],
                 "evidence_type": "official OOH occupation page",
@@ -12122,10 +12127,10 @@
                 "limitation": "美国全国职业口径；工资为OEWS年薪美元/年，不是中国工资或个人报价。",
                 "market": "US",
                 "name": "Information Security Analysts: Occupational Outlook Handbook",
-                "period": "2025工资；2024—2034就业展望",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/ooh/computer-and-information-technology/information-security-analysts.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-27",
@@ -12159,6 +12164,46 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "分列安全分析师、安全服务工程师和安全研究员。"
+                ],
+                "id": "cn-gfex-sec",
+                "limitation": "招聘岗位名样本，不说明所有岗位的任职条件。",
+                "market": "中国大陆",
+                "name": "北京微步在线安全类岗位样本",
+                "period": "2027届",
+                "publisher": "华中科技大学就业网",
+                "scope": "具名岗位或制度",
+                "url": "https://job.hust.edu.cn/zpinfo1/2407281.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "样本列告警分析处置和应急响应。"
+                ],
+                "id": "cn-hebut-sec",
+                "limitation": "具名用人场景，职责不必然适用于所有分析师。",
+                "market": "中国大陆",
+                "name": "上证所信息网络公司安全方向招聘",
+                "period": "2026",
+                "publisher": "河北工业大学就业网",
+                "scope": "具名岗位或制度",
+                "url": "https://career.hebut.edu.cn/correcruit/content/id/78500.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 表1.2：15-1212 2025 年就业约 192,900 人，预计 2035 年约 233,400 人，2025—2035 年变化 +21.0%，年均约 14,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。"
+                ],
+                "id": "bls-design-ep",
+                "market": "美国",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -13375,7 +13420,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这份工作先核对什么？",
+            "question": "零经验怎么做一份安全分析练习？",
             "table": {
               "rows": [
                 {
@@ -13407,7 +13452,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "怎样判断工作闭环？",
+            "question": "安全分析师与安全工程师怎么分？",
             "table": {
               "rows": [
                 {
@@ -14617,7 +14662,7 @@
           "entry": "information-security-analysts.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合信息安全分析师",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -14867,39 +14912,39 @@
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 15-1212.00 精确职业（2024—2034）；增长为远快于平均，含替换需求，不等于个人录用概率。",
-        "display_value": "就业 约 182,800 人（2024 年，BLS 就业预测基期，15-1212.00 精确职业）",
+        "derivation": "美国 BLS 表1.2：15-1212 2025 年就业约 192,900 人，预计 2035 年约 233,400 人，2025—2035 年变化 +21.0%，年均约 14,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 192,900 人",
         "fact_id": "us-employment-2025",
         "market": "美国全国",
         "measure": "employment size",
         "occupation_scope": "Information Security Analysts",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "bls-ooh-2025-information-security-analysts"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 15-1212.00 精确职业（2024—2034）；增长为远快于平均，含替换需求，不等于个人录用概率。",
-        "display_value": "增长 远快于平均（29%，2024—2034，BLS 就业预测，15-1212.00 精确职业）",
+        "derivation": "美国 BLS 表1.2：15-1212 2025 年就业约 192,900 人，预计 2035 年约 233,400 人，2025—2035 年变化 +21.0%，年均约 14,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "+21.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国全国",
         "measure": "projected employment growth",
         "occupation_scope": "Information Security Analysts",
-        "period": "2024-2034",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-ooh-2025-information-security-analysts"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 15-1212.00 精确职业（2024—2034）；增长为远快于平均，含替换需求，不等于个人录用概率。",
-        "display_value": "预计年均岗位空缺 约 16,000 个（2024—2034，BLS 就业预测，15-1212.00 精确职业，含增长与替补）",
+        "derivation": "美国 BLS 表1.2：15-1212 2025 年就业约 192,900 人，预计 2035 年约 233,400 人，2025—2035 年变化 +21.0%，年均约 14,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 14,100 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国全国",
         "measure": "projected annual openings",
         "occupation_scope": "Information Security Analysts",
-        "period": "2024-2034",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-ooh-2025-information-security-analysts"
+          "bls-design-ep"
         ]
       },
       {
@@ -14963,19 +15008,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业规模（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -14989,17 +15034,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "信息安全分析师做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET/SOC 15-1212.00）、BLS OEWS 2025 年工资（精确职业口径）、BLS 就业预测 2024—2034、中国大陆全国职业工资缺口与个人信息保护边界。"
+      "text": "了解信息安全分析师怎样分清告警和事件，如何记录证据，以及与安全工程职责的差别。"
     },
     "title": {
       "availability": "available",
-      "text": "信息安全分析师"
+      "text": "信息安全分析师做什么：告警研判、风险与事件交接"
     }
   },
-  "source_content_sha256": "b64e88dc0e3a824d2fc3e7e91c291beb11b823134732638c71a89c3f25b7fc4f",
+  "source_content_sha256": "a443c762aeb1d8bf3ac29f0e19c795e7ee6cd780714055c74185b7ee3c02dacd",
   "subject": {
     "canonical_slug": "information-security-analysts",
     "name": "信息安全分析师",
-    "summary": "信息安全分析师负责保护组织的计算机网络与系统：监测安全事件、检查漏洞、维护防护措施、记录攻击与指标，并提出风险缓解方案。判断这条路径时，应同时核对技术证据、权限边界、异常升级和可复核交付。"
+    "summary": "信息安全分析师关注组织系统、网络和数据的保护，监测异常，分析告警证据，记录风险，并与工程、运营和合规团队协调处置。工作内容随安全运营、风险评估等方向而不同。"
   }
 }

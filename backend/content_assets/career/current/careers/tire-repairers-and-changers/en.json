@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "You can observe whether you can match the service request, the object identification and the inspection records item by item, and explain clearly when the records conflict. Tire service requires hands-on work and cooperation; the paper experience only offers clues about checking habits, and the actual physical demands, operating training and customer communication still need to be learned separately."
+              "Paper check | Compare a fictional service intake with a bay card. Flag a reversed wheel position and retain both entries for the responsible person to check. "
             ]
           },
           "id": "tire-repairers-and-changers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24806,13 +24805,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Tire repairers and changers repair or replace vehicle tires, with tasks involving wheel mounting and dismounting, balancing, tire repair, inspection and service records, and they may also provide roadside service. The United States O*NET49-3093.00 list also includes some retreading work; it is understood separately from the independent occupations of machine tire building, whole-vehicle repair and diesel engine repair, and specific operations and release follow the actual training and division of duties."
+              "Tire repairers and changers inspect tires and wheels and perform removal, installation or balancing checks according to the work order. Service records identify the wheel position and work completed. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tire-repairers-and-changers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-49-3093.00"
           ],
           "type": "prose"
         }
@@ -25580,13 +25578,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: reviewable task scores, national AI adoption and net employment causal results for this occupation. The case checked is limited to licence plate and customer record matching, and repair safety still requires professional confirmation; the BLS2025—2035 overall growth of 3.4%, the ten-year net increase of about 3800 people and the average annual 12900 openings that includes replacements are component indicators and do not represent an AI effect. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional service intake with a bay card. Flag a reversed wheel position and retain both entries for the responsible person to check."
             ]
           },
           "id": "tire-repairers-and-changers.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial",
-            "nist"
+            "transfer-onet-49-3093.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33072,6 +33070,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-49-3093.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 49-3093.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/49-3093.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38543,10 +38568,10 @@
       "text": "Tire repairers and changers"
     }
   },
-  "source_content_sha256": "61cf8d9d8d059568f39a6053fee9115f5b8ea71115a7c6ea566b44148a867312",
+  "source_content_sha256": "a90da6071db927ae3ad03973323702b0ec2554d39783cfa2790c17f85f706a39",
   "subject": {
     "canonical_slug": "tire-repairers-and-changers",
     "name": "Tire repairers and changers",
-    "summary": "Tire repairers and changers repair or replace vehicle tires, involving wheel mounting and dismounting, tire balancing, repair, tire condition inspection and service records, and they may also provide service on site. The job requires not only hands-on speed but also object identification, accurate records, cooperation and the trained scope. Start by using the fictional vehicle intake records on this page to identify missing items and conflicts, see whether you are willing to check repeatedly, then check the training, shifts and pay conditions of an actual shop."
+    "summary": "Tire repairers and changers inspect tires and wheels and perform removal, installation or balancing checks according to the work order. Service records identify the wheel position and work completed."
   }
 }

@@ -188,6 +188,9 @@
       "item:nurse-midwives.path.seven-day-trial.6": {
         "status": "pending_mapping"
       },
+      "item:nurse-midwives.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nurse-midwives.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13348,6 +13351,21 @@
             "onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。同一家庭的两份产后随访单分别写母亲与婴儿，联系电话栏只在其中一份确认。说明下一次联系前应核哪些字段，由谁核。"
+            ]
+          },
+          "id": "nurse-midwives.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核产后随访交接",
+          "type": "notice"
         }
       ]
     },
@@ -15923,6 +15941,13 @@
         "id": "nurse-midwives.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nurse-midwives.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16276,7 +16301,7 @@
       "text": "护士助产士"
     }
   },
-  "source_content_sha256": "fac695d9f86cda4c5f54ffdb995fc72eca661d9590c31808fd3a9f2b73966b37",
+  "source_content_sha256": "be297daf1abce297079ad5f695ff42cc0cb12ea58bb90dbcc81b852d187a2639",
   "subject": {
     "canonical_slug": "nurse-midwives",
     "name": "护士助产士",

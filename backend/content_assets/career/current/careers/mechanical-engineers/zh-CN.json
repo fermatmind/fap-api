@@ -7292,18 +7292,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页覆盖 O*NET 17-2141.00「机械工程师（Mechanical Engineers）」：执行工程职责，规划与设计工具、发动机、机械及其他机械运行设备，并监督集中供热、燃气、水与蒸汽等设备的安装、运行、维护与维修；常见报告岗位名包括应用工程师、设计工程师、设备工程师、机械设计工程师、产品开发工程师、产品工程师、项目工程师与测试工程师。工作以室内设计分析为主，兼有现场与试验。本页不含机械工程技师与技术员（17-3027.00）、工业工程师（17-2112.00）、机械制图员（17-3013.00）等相邻岗位。"
+              "机械工程师把功能、载荷、制造和维护要求转化为机械方案，做分析、选材、试制与验证，并与制图、工艺和质量团队交接。不同产业的产品与签审责任不同。"
             ]
           },
           "id": "mechanical-engineers.profile.definition-block.1",
           "source_refs": [
             "onet-summary",
-            "onet-tasks",
-            "onet-context",
-            "onet-industry",
-            "onet-education",
-            "onet-details",
-            "onet-wages"
+            "cn-nk-mecheng",
+            "cn-haut-draw"
           ],
           "type": "prose"
         },
@@ -7400,12 +7396,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "先核对的内容：需求与功能指标、适用标准与法规、材料与工艺条件、载荷与工况、成本与工期约束，以及需要责任工程师确认的工程与合规判断。"
+              "为虚构机构写清载荷、空间和制造约束，比较两种方案，列验证指标和失败条件。星猿哲校园招聘样本包括机器人结构方案与工程图纸，只作行业例。"
             ]
           },
           "id": "mechanical-engineers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-tasks"
+            "onet-summary",
+            "cn-nk-mecheng",
+            "cn-haut-draw"
           ],
           "type": "prose"
         },
@@ -7414,12 +7412,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作闭环：从解读图纸与需求开始，经过可行性与成本分析、设计与计算、建模与验证、评审与签核，到交付与变更管理；任一需求或标准未确认前不开展设计，任一性能或安全结论未经复核前不签发。"
+              "工程师侧重设计决策、分析与验证；制图员按设计输入整理图纸、尺寸和版本。项目可能合岗，图纸放行仍按团队权限。"
             ]
           },
           "id": "mechanical-engineers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-tasks"
+            "onet-summary",
+            "cn-nk-mecheng"
           ],
           "type": "prose"
         },
@@ -8332,12 +8331,13 @@
                 ]
               },
               {
-                "answer": "BLS/O*NET 2024 年就业约 293,100 人，2024—2034 年预计增长快于平均（约 7% 或更高），年均职位空缺约 18,100 个（含替换需求）；为统计预测，不等于个人录用概率。",
+                "answer": "美国 BLS 表1.2：17-2141 2025 年就业约 298,500 人，预计 2035 年约 332,000 人，2025—2035 年变化 +11.2%，年均约 17,800 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                 "id": "mechanical-engineers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.mechanical-engineers.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "onet-trends",
+                  "bls-design-ep"
                 ]
               },
               {
@@ -8569,18 +8569,18 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "2024 年就业 293,100 人、2024—2034 年预计增长快于平均（约 7% 或更高）、年均空缺约 18,100 个。",
+                  "美国 BLS 表1.2：17-2141 2025 年就业约 298,500 人，预计 2035 年约 332,000 人，2025—2035 年变化 +11.2%，年均约 17,800 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                   "含替换需求，不等于净增岗位。"
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
                 "limitation": "含替换需求，不等于净增岗位。",
                 "market": "美国",
-                "name": "O*NET 17-2141.00 全国就业趋势（BLS 2024—2034 年预测）",
-                "period": "2024—2034 年预测；查阅 2026-09-25",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/17-2141.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8710,6 +8710,46 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "具名机器人机械工程样本列结构方案、建模、样机和图纸。"
+                ],
+                "id": "cn-nk-mecheng",
+                "limitation": "特定行业雇主样本，不能外推入门条件。",
+                "market": "中国大陆",
+                "name": "星猿哲科技机械工程岗位",
+                "period": "2027届",
+                "publisher": "南开大学就业网",
+                "scope": "具名岗位或制度",
+                "url": "https://career.nankai.edu.cn/correcruit/content/id/117823.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "岗位样本列图纸会签、工装验证与试制资料。"
+                ],
+                "id": "cn-haut-draw",
+                "limitation": "设计岗位为交接近邻，不代表制图员必须负责签审。",
+                "market": "中国大陆",
+                "name": "中原内配机械设计师招聘",
+                "period": "2026",
+                "publisher": "河南工业大学就业网",
+                "scope": "具名岗位或制度",
+                "url": "https://job.haut.edu.cn/module/position_details/id-276348/nid-6014"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 表1.2：17-2141 2025 年就业约 298,500 人，预计 2035 年约 332,000 人，2025—2035 年变化 +11.2%，年均约 17,800 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。"
+                ],
+                "id": "bls-design-ep",
+                "market": "美国",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -9524,7 +9564,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这份工作先核对什么？",
+            "question": "机械工程作品集怎样展示取舍？",
             "table": {
               "rows": [
                 {
@@ -9556,7 +9596,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "怎样判断工作闭环？",
+            "question": "工程师与制图员怎么分？",
             "table": {
               "rows": [
                 {
@@ -11151,7 +11191,7 @@
           "entry": "mechanical-engineers.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合机械工程师",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11271,39 +11311,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "293,100 人",
+        "derivation": "美国 BLS 表1.2：17-2141 2025 年就业约 298,500 人，预计 2035 年约 332,000 人，2025—2035 年变化 +11.2%，年均约 17,800 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 298,500 人",
         "fact_id": "us-employment-2024",
         "market": "美国",
         "measure": "2024 年就业规模",
         "occupation_scope": "17-2141.00",
-        "period": "2024；查阅 2026-09-25",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET 全国就业趋势页：2024—2034 年预计增长快于平均（约 7% 或更高）。",
-        "display_value": "增长快于平均（约 7% 或更高，2024—2034）",
+        "derivation": "美国 BLS 表1.2：17-2141 2025 年就业约 298,500 人，预计 2035 年约 332,000 人，2025—2035 年变化 +11.2%，年均约 17,800 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "+11.2%",
         "fact_id": "us-growth",
         "market": "美国",
         "measure": "就业增长预测",
         "occupation_scope": "17-2141.00",
-        "period": "2024—2034；查阅 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "为预测期内的职位空缺估计，含替换需求。",
-        "display_value": "约 18,100 个/年（2024—2034）",
+        "derivation": "美国 BLS 表1.2：17-2141 2025 年就业约 298,500 人，预计 2035 年约 332,000 人，2025—2035 年变化 +11.2%，年均约 17,800 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 17,800 个",
         "fact_id": "us-openings",
         "market": "美国",
         "measure": "预计职位空缺（年均）",
         "occupation_scope": "17-2141.00",
-        "period": "2024—2034；查阅 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
@@ -11379,19 +11419,19 @@
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业规模（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11405,17 +11445,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "机械工程师（O*NET 17-2141.00）设计与评估工具、发动机与机械设备，规划安装、运行与维护。2025 年 BLS 中位年薪 104,110 美元；2024 年就业 293,100 人，2024—2034 年预计增长快于平均（约 7% 或更高）。含工作情境、风险与入行路径。"
+      "text": "了解机械工程师如何比较方案、说明验证依据，以及与机械技术员或制图员的区别。"
     },
     "title": {
       "availability": "available",
-      "text": "机械工程师：工作内容、美国工资与入行 | 费马测试"
+      "text": "机械工程师做什么：结构方案、试制和验证"
     }
   },
-  "source_content_sha256": "0b96feda87c752b74373770b050b18c448cb4fb4fbc67fa700e86050a11d4b08",
+  "source_content_sha256": "42021c9795c4f65359304717c84edab0f122a7440927cbde52861b2dff4e00d0",
   "subject": {
     "canonical_slug": "mechanical-engineers",
     "name": "机械工程师",
-    "summary": "机械工程师（O*NET 17-2141.00）设计并评估工具、发动机与机械设备及传热、气、水、蒸汽系统，规划安装、运行与维护，评估成本与能效，并对设计决策与签核负责。"
+    "summary": "机械工程师把功能、载荷、制造和维护要求转化为机械方案，做分析、选材、试制与验证，并与制图、工艺和质量团队交接。不同产业的产品与签审责任不同。"
   }
 }

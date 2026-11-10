@@ -152,6 +152,9 @@
       "item:molders-shapers-and-casters-except-metal-and-plastic.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:molders-shapers-and-casters-except-metal-and-plastic.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:molders-shapers-and-casters-except-metal-and-plastic.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13245,6 +13248,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。石膏制品单 G3 要求模具编号和制品批号。记录甲模具正确但批次不明，乙批次正确但模具号来自另一工单。写出交接前应查的原始记录。"
+            ]
+          },
+          "id": "molders-shapers-and-casters-except-metal-and-plastic.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "区分模具与非金属制品批次",
+          "type": "notice"
         }
       ]
     },
@@ -15705,6 +15723,13 @@
         "id": "molders-shapers-and-casters-except-metal-and-plastic.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "molders-shapers-and-casters-except-metal-and-plastic.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15898,7 +15923,7 @@
       "text": "非金属造型成型工"
     }
   },
-  "source_content_sha256": "41fcb0a2e2221686711584bc18df1a3fff0b3cc16f29ccdbad40ffef54d1bb9f",
+  "source_content_sha256": "fd83753cf2b3d57878d1534c4ba733009a59a8a912bfdbc36efbac547c505b27",
   "subject": {
     "canonical_slug": "molders-shapers-and-casters-except-metal-and-plastic",
     "name": "非金属造型成型工",

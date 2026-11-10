@@ -38,9 +38,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1290,7 +1287,7 @@
         "status": "mapped"
       },
       "item:animal-care-and-service-workers.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:animal-care-and-service-workers.path.interview-probation.1": {
         "status": "mapped"
@@ -1548,7 +1545,7 @@
         "status": "pending_mapping"
       },
       "item:animal-care-and-service-workers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:animal-care-and-service-workers.sources.source-card.1": {
         "status": "mapped"
@@ -23302,7 +23299,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本页中文动物照护与服务人员统计对象为Animal Caretakers（39-2021），不是含Animal Trainers的39-2000组合。为犬猫等非食用动物做饲喂清洁、观察记录、美容运动和客户服务，场景含犬舍、收容所、动物园、水族馆。美国24任务还含按说明/处方混合食物药物、联系兽医或治疗、按说明麻醉接种、领养安置、设备维护与员工培训；这些不是中国独立操作授权。中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。"
+              "本页中文动物照护与服务人员统计对象为Animal Caretakers（39-2021），不是含Animal Trainers的39-2000组合。为犬猫等非食用动物做饲喂清洁、观察记录、美容运动和客户服务，场景含犬舍、收容所、动物园、水族馆。美国24任务还含按说明/处方混合食物药物、联系兽医或治疗、按说明麻醉接种、领养安置、设备维护与员工培训；这些不是中国独立操作授权。中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。"
             ]
           },
           "id": "animal-care-and-service-workers.quick-decision.fit-decision-checklist.1",
@@ -23318,12 +23315,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "三个纸面任务均用本页A/B/C虚构材料：计算两条摄入记录并标未知；核同一时点原表与交接差异；写三句事实—未知—报告说明。不接触动物，不设计药物、保定或美容操作；只观察核对、计算与沟通方式。"
+              "试做 AS-52：把预约、到场与书面接收分开，再给下一班写一份交接。"
             ]
           },
           "id": "animal-care-and-service-workers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23347,15 +23344,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国本职业全国或城市工资分布，宽行业均值不代职业工资。美国May2025中位35,360美元/年、17.00美元/小时；BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。中国诊疗与技能等级分别核。"
+              "郑州海昌海洋公园 2026 年 10 月的公告同时列饵料工与动物保育员等岗，薪资面议，未分别列人数或个人工资。 石家庄市动物园 2026 年询价把展区运营和表演服务分为两个标段；第二标段所列驯养员负责鸟行为训练，并承担饲养、丰容和异常记录，要求两年以上相关经验。它是采购需求，不是个人招聘。"
             ]
           },
           "id": "animal-care-and-service-workers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "oews",
-            "ep",
-            "nbs",
-            "cnvet"
+            "care-zhengzhou",
+            "care-shijiazhuang"
           ],
           "type": "prose"
         },
@@ -23364,13 +23359,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：为犬猫等非食用动物提供饲喂、清洁、观察、美容与运动照护，并如实记录动物状况、与宠物主人及访客沟通的动物服务岗位。"
+              "寄养或展区服务交班时，先分清谁接收、谁记观察、谁跟进。美国统计采用动物照护员 39-2021 单项；驯养师和动物诊疗另核。"
             ]
           },
           "id": "animal-care-and-service-workers.quick-decision.fermat-decision-card.7",
           "source_refs": [
             "onet",
-            "onet"
+            "care-zhengzhou",
+            "care-shijiazhuang"
           ],
           "type": "prose"
         }
@@ -23466,7 +23462,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "ONET展示May2025工资五分位27,250/29,820/35,360/40,050/50,060美元，时中位17.00；BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。O*NET当前已列2025就业与2025—2035预测；精确值仍直接核EP。64%高中/同等、14%副学士或两年学位、13%学士为美国受访者报告的新聘人员学历要求；典型高中短OJT，动物园饲养员常需相关本科，非中国统一门槛。"
+              "ONET展示May2025工资五个工资分位数27,250/29,820/35,360/40,050/50,060美元，时中位17.00；BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025–2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。O*NET当前已列2025就业与2025–2035预测；精确值仍直接核EP。64%高中/同等、14%副学士或两年学位、13%学士为美国受访者报告的新聘人员学历要求；典型高中短OJT，动物园饲养员常需相关本科，非中国统一门槛。"
             ]
           },
           "id": "animal-care-and-service-workers.profile.onet-structured-fields-block.2",
@@ -23526,7 +23522,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。本页以本职业明细为准，39-2000组合就业413,000/增长11.2%/年均69,400不替代。中国全国本职业预测见前景区缺口标记；空缺不等净增或个人就业保证。"
+              "BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025–2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。本页以本职业明细为准，39-2000组合就业413,000/增长11.2%/年均69,400不替代。中国全国本职业预测见前景区缺口标记；空缺不等净增或个人就业保证。"
             ]
           },
           "id": "animal-care-and-service-workers.profile.onet-structured-fields-block.4",
@@ -23555,7 +23551,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国宠物服务职业仅作方向参照，不能等效整个美国职业；驯导师也不等本页39-2021统计。广东2025目录列4-10-07-01健康护理员、02驯导师、03美容师，B类五级指导补贴1000/1500/2000/2500/3000元；申请条件按适用政策核，不能凭证保证补贴或岗位。中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。野生或实验动物场景还应核实际适用管理要求。"
+              "中国宠物服务职业仅作方向参照，不能等效整个美国职业；驯导师也不等本页39-2021统计。广东2025目录列4-10-07-01健康护理员、02驯导师、03美容师，B类五级指导补贴1000/1500/2000/2500/3000元；申请条件按适用政策核，不能凭证保证补贴或岗位。中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。野生或实验动物场景还应核实际适用管理要求。"
             ]
           },
           "id": "animal-care-and-service-workers.profile.onet-structured-fields-block.5",
@@ -23586,7 +23582,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "照护人员按岗位和合法训练饲喂、清洁、观察、美容与记录；中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。领养审核由机构依制度实施，经营资质由主体依法核办，不把美国先期治疗任务转成中国照护人员救治例外。"
+              "照护人员按岗位和合法训练饲喂、清洁、观察、美容与记录；中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。领养审核由机构依制度实施，经营资质由主体依法核办，不把美国先期治疗任务转成中国照护人员救治例外。"
             ]
           },
           "id": "animal-care-and-service-workers.profile.career-quick-answers-block.7",
@@ -23662,7 +23658,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页中文动物照护与服务人员统计对象为Animal Caretakers（39-2021），不是含Animal Trainers的39-2000组合。为犬猫等非食用动物做饲喂清洁、观察记录、美容运动和客户服务，场景含犬舍、收容所、动物园、水族馆。May2025工资中位35,360美元；BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。"
+              "本页中文动物照护与服务人员统计对象为Animal Caretakers（39-2021），不是含Animal Trainers的39-2000组合。为犬猫等非食用动物做饲喂清洁、观察记录、美容运动和客户服务，场景含犬舍、收容所、动物园、水族馆。May2025工资中位35,360美元；BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025–2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。"
             ]
           },
           "id": "animal-care-and-service-workers.profile.definition-block.11",
@@ -23770,7 +23766,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国技能等级不等兽医诊疗资格，具体岗位要求核书面条件；中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。美国OOH说明专业认证一般非必需，多州自雇服务需经营执照，非所有员工个人诊疗执照。"
+              "中国技能等级不等兽医诊疗资格，具体岗位要求核书面条件；中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。美国OOH说明专业认证一般非必需，多州自雇服务需经营执照，非所有员工个人诊疗执照。"
             ]
           },
           "id": "animal-care-and-service-workers.profile.career-quick-answers-block.18",
@@ -24050,7 +24046,7 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "entity": "O*NET 39-2021.00 工资分位（专属口径）",
+                "entity": "O*NET 39-2021.00 工资分位（39-2021 统计）",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localwages/39-2021.00"
@@ -24507,7 +24503,7 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "entity": "ONET展示May2025五分位",
+                "entity": "ONET展示May2025五个工资分位数",
                 "id": "link-2",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localwages/39-2021.00"
@@ -24519,7 +24515,7 @@
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
               },
               {
-                "entity": "BLS EP2025—2035明细",
+                "entity": "BLS EP2025–2035明细",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24758,13 +24754,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业AI采用率、效果、替代率或工资因果。记录整理与预约提醒仅编辑可能用途；BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。不能将预测增长归因AI，亦不能据此断言不会被替代。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "工具可提醒记录缺项或班次交接，但异常要按场所流程核实，由有相应权限的人评估或处置。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ep"
+            "editor",
+            "onet"
           ],
           "type": "prose"
         },
@@ -24801,7 +24797,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-2021.00 工资分位（专属口径）"
+              "O*NET 39-2021.00 工资分位（39-2021 统计）"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.21",
@@ -24857,7 +24853,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP 2025—2035本职业明细"
+              "BLS EP 2025–2035本职业明细"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.25",
@@ -24955,7 +24951,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于本职业五分位；不作为中国工资或技能回报。"
+              "用于本职业五个工资分位数；不作为中国工资或技能回报。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.32",
@@ -25171,7 +25167,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国39-2021五分位分布"
+              "美国39-2021五个工资分位数分布"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.47",
@@ -25283,7 +25279,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025—2035增长及空缺"
+              "2025–2035增长及空缺"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.55",
@@ -25297,7 +25293,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业39-2021增长12.1%，OOH取整12%、年均62,800个空缺；39-2000组合增长11.2%/年均69,400另列。O*NET当前也已列2025就业与2025—2035预测；精确增长、净变化及空缺直接核EP，不能归因AI。"
+              "本职业39-2021增长12.1%，OOH取整12%、年均62,800个空缺；39-2000组合增长11.2%/年均69,400另列。O*NET当前也已列2025就业与2025–2035预测；精确增长、净变化及空缺直接核EP，不能归因AI。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.56",
@@ -25396,7 +25392,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。任务辅助可能性不是岗位数量因果估计。"
+              "BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025–2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。任务辅助可能性不是岗位数量因果估计。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.63",
@@ -25440,7 +25436,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国本职业全国工资分布。美国May2025五分位27,250/29,820/35,360/40,050/50,060美元；中国行业均值不代职业中位。"
+              "证据不足：未取得中国本职业全国工资分布。美国May2025五个工资分位数27,250/29,820/35,360/40,050/50,060美元；中国行业均值不代职业中位。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.66",
@@ -25529,7 +25525,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。兽医师可诊断开处方；助理可依法检查/采样/配给药及指导下辅助手术，按一般规则不出诊断证明或处方，省级允许助理在乡村独立活动的例外另核。乡村兽医按备案县域乡村范围核；普通照护人员不能据美国麻醉接种任务自行开展中国诊疗。"
+              "中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。兽医师可诊断开处方；助理可依法检查/采样/配给药及指导下辅助手术，按一般规则不出诊断证明或处方，省级允许助理在乡村独立活动的例外另核。乡村兽医按备案县域乡村范围核；普通照护人员不能据美国麻醉接种任务自行开展中国诊疗。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.72",
@@ -25561,7 +25557,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。是否进入应核目标岗位、书面报酬和真实训练条件，不把年均空缺当净增或收入保证。"
+              "BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025–2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。是否进入应核目标岗位、书面报酬和真实训练条件，不把年均空缺当净增或收入保证。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.74",
@@ -25575,7 +25571,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP2025—2035明细与OOH；选择建议由编辑提出。"
+              "BLS EP2025–2035明细与OOH；选择建议由编辑提出。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.75",
@@ -26869,7 +26865,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "核对自己的预期时，先确认机构类型（宠物美容与养护机构／犬舍与寄养／动物收容所与救助组织／动物园与水族馆）、岗位方向（是否含美容与训练等技能服务）、技能等级与经验以及是否含销售提成；不要用行业代理替代书面薪酬条件，也不要把美国专属口径数字换算成人民币预期。"
+              "核对自己的预期时，先确认机构类型（宠物美容与养护机构／犬舍与寄养／动物收容所与救助组织／动物园与水族馆）、岗位方向（是否含美容与训练等技能服务）、技能等级与经验以及是否含销售提成；不要用行业代理替代书面薪酬条件，也不要把美国39-2021 统计数字换算成人民币预期。"
             ]
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.46",
@@ -26925,12 +26921,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得动物照护与服务人员精确职业的全国或分城市工资分布"
+              "郑州海昌海洋公园 2026 年 10 月的公告同时列饵料工与动物保育员等岗，薪资面议，未分别列人数或个人工资。 石家庄市动物园 2026 年询价把展区运营和表演服务分为两个标段；第二标段所列驯养员负责鸟行为训练，并承担饲养、丰容和异常记录，要求两年以上相关经验。它是采购需求，不是个人招聘。 一条招聘和一项采购各自描述当地工作安排，不能用来推算个人工资或全国行情。"
             ]
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "nbs"
+            "care-zhengzhou",
+            "care-shijiazhuang"
           ],
           "type": "prose"
         },
@@ -27025,7 +27022,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "12.1%（2025—2035；OOH取整12%）"
+              "12.1%（2025–2035；OOH取整12%）"
             ]
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.58",
@@ -27245,7 +27242,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "12.1%（2025—2035；OOH取整12%）"
+              "12.1%（2025–2035；OOH取整12%）"
             ]
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.21",
@@ -27287,7 +27284,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035空缺含增长与替代，不等净增44,100。；BLS EP职业预测表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "2025–2035空缺含增长与替代，不等净增44,100。；BLS EP职业预测表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.24",
@@ -27301,7 +27298,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025工资为OEWS受雇分位；EP2025—2035就业含自雇。OOH本职业明细另列，39-2000组合不代39-2021；O*NET当前也列2025就业及2025—2035预测，精确值直接核EP。OOH另公布文娱37,460、零售35,290美元行业内本职业中位。"
+              "May2025工资为OEWS受雇分位；EP2025–2035就业含自雇。OOH本职业明细另列，39-2000组合不代39-2021；O*NET当前也列2025就业及2025–2035预测，精确值直接核EP。OOH另公布文娱37,460、零售35,290美元行业内本职业中位。"
             ]
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.25",
@@ -27317,7 +27314,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国May2025本职业五分位27,250/29,820/35,360/40,050/50,060美元，时中位17.00。分位不等起薪或最低工资，也不估计技能、地区与机构的工资因果；实际条件核书面报酬。"
+              "美国May2025本职业五个工资分位数27,250/29,820/35,360/40,050/50,060美元，时中位17.00。分位不等起薪或最低工资，也不估计技能、地区与机构的工资因果；实际条件核书面报酬。"
             ]
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.26",
@@ -27331,7 +27328,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OOH提出伴侣宠物家庭与照护支出增长作为美国组合需求背景；不是中国预测或AI因果。BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。"
+              "OOH提出伴侣宠物家庭与照护支出增长作为美国组合需求背景；不是中国预测或AI因果。BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025–2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。"
             ]
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.27",
@@ -27420,7 +27417,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "12.1%（2025—2035；OOH取整12%）"
+              "12.1%（2025–2035；OOH取整12%）"
             ]
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.33",
@@ -27546,7 +27543,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS政府99排除州/地方学校医院及USPS；实际机构按行业口径核，不把全部公立动物园直接归此类。"
+              "BLS 分行业表可供查阅；本页没有本职业的政府行业工资中位数。"
             ]
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.42",
@@ -27588,12 +27585,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该职业 2025 年 5 月全国年薪中位数（BLS OEWS／O*NET 展示），用于对照，不是行业数字。"
+              "美国 39-2021 全国职业年薪中位数为 35,360 美元。BLS 手册另列四行业中位数：艺术、娱乐和休闲 37,460 美元，零售 35,290，其他个人服务 35,190，专业、科学与技术服务 33,350。统计期是 2025 年 5 月。"
             ]
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "oews"
+            "ooh",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27631,7 +27629,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资为May2025 OEWS，经ONET展示；当前就业预测为BLS EP2025—2035。OOH有39-2021明细，组合39-2000另列。"
+              "工资为May2025 OEWS，经ONET展示；当前就业预测为BLS EP2025–2035。OOH有39-2021明细，组合39-2000另列。"
             ]
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.48",
@@ -27675,7 +27673,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最低 10%：低于 27,250 美元/年（专属口径），不代表起薪或最低工资标准。"
+              "最低 10%：低于 27,250 美元/年（39-2021 统计），不代表起薪或最低工资标准。"
             ]
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.51",
@@ -27689,7 +27687,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数：35,360 美元/年（专属口径，2025 年 5 月），是分布中点而非起薪。"
+              "中位数：35,360 美元/年（39-2021 统计，2025 年 5 月），是分布中点而非起薪。"
             ]
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.52",
@@ -27735,7 +27733,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27747,19 +27745,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "兽医",
@@ -27980,7 +27978,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "编辑建议：先用本页A/B/C做纸面摄入计算、同源交接核对和事实沟通；不实际接触动物。兴趣RSC86/46/38为职业剖面，体验与测评不预测录用或表现。"
+              "编辑建议：先用本页A/B/C做两版预约、到场和接收核对表及一份交接；不实际接触动物。兴趣RSC86/46/38为职业剖面，体验与测评不预测录用或表现。"
             ]
           },
           "id": "animal-care-and-service-workers.fit.riasec-fit-block.9",
@@ -28369,7 +28367,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑转向核对项：动物诊疗辅助与检验任务须按目标法域、角色资格、监督训练及机构条件确认；美国相邻岗位名不等中国统一角色。"
+              "转岗时核对：动物诊疗辅助与检验任务须按目标法域、角色资格、监督训练及机构条件确认；美国相邻岗位名不等中国统一角色。"
             ]
           },
           "id": "animal-care-and-service-workers.fit.personality-fit-block.33",
@@ -28692,7 +28690,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑建议：先核现行课程与目标岗位要求，再用本页A/B/C做两条摄入计算、同源交接核对和沟通说明；仅纸面准备，不据此预测人格或录用。"
+              "编辑建议：先核现行课程与目标岗位要求，再用本页A/B/C做两版预约、到场和接收核对表及一份交接；仅纸面准备，不据此预测人格或录用。"
             ]
           },
           "id": "animal-care-and-service-workers.fit.personality-fit-block.55",
@@ -28736,7 +28734,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用本页A/B/C虚构材料做两条摄入计算、同一9:30两字段差异和三句事实—未知—报告说明。只看材料核对方式，不接触动物，不证明现场照护、美容或诊疗能力。"
+              "用 AS-52 核预约、到场和接收记录，写两版和一份交接。纸面记录不能证明实际服务或诊疗能力。"
             ]
           },
           "id": "animal-care-and-service-workers.fit.personality-fit-block.58",
@@ -28834,7 +28832,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET摘要用于Bright Outlook及职业资料；当前页已列2025就业和2025—2035预测，精确增长与空缺直接核EP。它不提供中国补贴或人格预测。"
+              "O*NET摘要用于Bright Outlook及职业资料；当前页已列2025就业和2025–2035预测，精确增长与空缺直接核EP。它不提供中国补贴或人格预测。"
             ]
           },
           "id": "animal-care-and-service-workers.fit.personality-fit-block.65",
@@ -29429,35 +29427,35 @@
                 "宠物美容与养护方向",
                 "从事宠物洗浴、刷毛、修剪与基础养护并接待客户。",
                 "美容服务质量稳定、动物与人员安全、客户沟通记录完整。",
-                "A/B/C纸面记录与三句服务沟通，不执行实际美容。",
+                "用 AS-52 两版和交接自查记录习惯。",
                 "照护、美容与实际诊疗分开核；中国不同兽医角色、监督人员、备案和机构条件各有适用范围，照护岗位名不授予诊疗资格。"
               ],
               [
                 "犬舍与收容所照护方向",
                 "从事群体动物饲喂、清洁消毒、运动与健康观察并协助领养。",
                 "照护与清洁规范、动物异常报告及时、记录完整。",
-                "三条记录与两条摄入计算，保留未知。",
+                "用 AS-52 两版和交接自查记录习惯。",
                 "与动物控制人员不同：面向收容机构内的照护与领养，不承担动物控制执法职责。"
               ],
               [
                 "动物园与水族馆饲养方向",
                 "从事展示动物饲养、环境温湿度管理与展区维护并讲解。",
                 "饲养与环境记录准确、展区维护到位、讲解清楚。",
-                "同源交接差异报告与权限说明。",
+                "用 AS-52 两版和交接自查记录习惯。",
                 "与动物学家不同：饲养员承担现场饲养与公众服务，研究结论由科研人员负责。"
               ],
               [
                 "记录与交接",
                 "记录动物健康状况、饲喂与治疗与安置信息并完成交接。",
                 "记录连续、完整、可追溯。",
-                "原表、交接与计算三列对照。",
+                "用 AS-52 两版和交接自查记录习惯。",
                 "日常照护记录与实际诊疗技术任务可有协作或重叠，须分别核真实岗位分工、兽医角色及合法权限。"
               ],
               [
                 "安全与生物安全执行",
                 "按规程执行保定、清洁消毒与防护并报告异常。",
                 "安全操作规范、防护到位、异常报告及时。",
-                "按C规则报告未知与差异，不执行动物处置。",
+                "用 AS-52 两版和交接自查记录习惯。",
                 "照护与繁育任务可重叠，具体岗位及许可另核。"
               ]
             ]
@@ -29488,7 +29486,7 @@
                 "id": "clearance",
                 "values": [
                   "技能与诊疗边界",
-                  "技能等级与诊疗资格分开，广东2025补贴是指导标准，须核适用条件。\n中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。",
+                  "技能等级与诊疗资格分开，广东2025补贴是指导标准，须核适用条件。\n中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。",
                   "特殊动物场景核适用主体、岗位和具体管理要求，不笼统声称每名员工均要一种个人许可证。"
                 ]
               },
@@ -29530,39 +29528,40 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料与规则",
-                  "A：你是纸面学习者，无现场/诊疗授权。9:30原表D1投放120克、剩余30克、摄入90克，行为记为未观察；D2投放100克、剩余量空。数字仅虚构算式，无物种营养或安全含义。\nB：9:35交接引用同一9:30原表，D1摄入写80克、行为写正常。未给接收人、复核人和反馈。",
-                  "C：纸面摄入=投放减剩余，缺数待核；比较同标识/时点/字段，保留两原值，向带教报告差异与未知；不得推断动物健康、编反馈或执行饲喂/诊疗/美容。"
+                  "AS-52｜三份虚构纸面记录",
+                  "A：预约册有 P1、P2、P3。到场记录仅有 P1、P2。P3 没有到场记录。",
+                  "B：接收回执只确认 P1。P2 无回执；交班草稿写「三条均已接收」，没有原件。",
+                  "变式只加 C：为 P2 增一份有效接收回执。纸面规则：要有到场和接收回执，才记为已接收。预约不作接收依据。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "三个纸面任务",
-                  "任务1：列D1/D2两条摄入计算、原表与交接值，缺数标待核。\n任务2：核D1同一9:30记录的摄入和行为字段，写差异及报告对象。",
-                  "任务3：写三句事实—未知—下一步沟通，不能声称交接已纠正或动物健康正常。"
+                  "交两版和一份交接",
+                  "两版分别核每个编号的预约、到场、接收状态与出处，汇总已接收、已到待核和未见到场。",
+                  "写清草稿哪里不符、原件保留、谁去查缺口。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考交付",
-                  "参考1：D1=120−30=90克；D2剩余未给，摄入待核，不补0。\n参考2：D1原表90克/未观察，交接80克/正常，引用同一9:30记录；两字段冲突，保留原值报告带教。",
-                  "参考3：可说已发现两字段差异；D2摄入及接收人/反馈未知；请求带教核原记录与交接依据，不能编已回复/更正或诊断。"
+                  "先独立交卷",
+                  "第6天交两版和交接。第7天展开常见问题「AS-52 参考解（交卷后再打开）」。",
+                  "保留所有原记录与依据。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习验证边界",
-                  "只验证纸面数据、计算和沟通，不验证喂养量、营养、动物健康或操作安全，不执行动物处置。\n四作品沿A/B/C：两条计算、两字段差异、三句沟通与复盘权限；不代表技能等级、独立照护或诊疗许可。"
+                  "纸面练习",
+                  "不接触真实动物或客户资料，不判断诊疗、喂养或放行。"
                 ]
               }
             ]
           },
           "id": "animal-care-and-service-workers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "入行练习：照护记录计算与交接核对（虚构材料）",
           "type": "cards"
@@ -29575,36 +29574,36 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "摄入计算表",
-                  "两条摄入计算表：D1投放120、剩30、算90；D2投放100、剩余与摄入待核。\n列原时点9:30、标识D1/D2与克单位，保留缺数，不补0。"
+                  "预约、到场和接收核对表",
+                  "核岗位和权限。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "同源交接对照",
-                  "两字段对照：9:35交接引用9:30D1，原表90/未观察，对交接80/正常。\n保留两原值与同源时点，报告带教；接收人/依据/反馈待确认。"
+                  "留原表与修订。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "三句沟通",
-                  "三句沟通：已发现摄入与行为差异；D2摄入及反馈未知；请带教核来源和交接依据。\n不写已纠正，不把正常标签或90克推断为健康/营养结论。"
+                  "交接沟通",
+                  "写一页交接。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "复盘与权限",
-                  "一页复盘与权限：逐项回指A/B/C，写仍待核项与下一步训练/岗位条件核对。\n仅纸面学习，无动物操作、诊疗或经营授权，不展示真实客户资料。"
+                  "只用纸笔或表格。"
                 ]
               }
             ]
           },
           "id": "animal-care-and-service-workers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "入门时可以准备哪些可复核的作品材料？",
           "type": "cards"
@@ -29628,33 +29627,33 @@
             "rows": [
               [
                 "记录与单位",
-                "能否保留标识、时间、克单位与未知。",
-                "D1/D2两记录完整；D2不补0。",
-                "编辑核对项，不证明现场照护能力。"
+                "核记录类型、出处和责任人。",
+                "保留原字段、证据和下一责任人。",
+                "不据纸面决定真实接收或放行。"
               ],
               [
                 "纸面计算",
-                "是否沿C而非猜数。",
-                "120−30=90克，D2待核。",
-                "仅虚构算式，不判断喂养量或健康。"
+                "核记录类型、出处和责任人。",
+                "保留原字段、证据和下一责任人。",
+                "不据纸面决定真实接收或放行。"
               ],
               [
                 "交接与沟通",
-                "是否比较同一9:30记录两字段。",
-                "90/未观察对80/正常，保留原值报告带教。",
-                "接收人和反馈未知，不编已纠正；合法更正不等伪造。"
+                "核记录类型、出处和责任人。",
+                "保留原字段、证据和下一责任人。",
+                "不据纸面决定真实接收或放行。"
               ],
               [
                 "权限与训练",
-                "是否区分纸面准备、技能与诊疗资格。",
-                "明确没有现场/诊疗授权，核后续训练条件。",
-                "真实招聘和技能考核另核，不用作品授予许可。"
+                "核记录类型、出处和责任人。",
+                "保留原字段、证据和下一责任人。",
+                "不据纸面决定真实接收或放行。"
               ]
             ]
           },
           "id": "animal-care-and-service-workers.path.interview-probation.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "面试与试用期可能考察什么，哪些结论不能推断？",
           "type": "table"
@@ -29667,57 +29666,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天｜读材料与边界",
-                  "读A/B/C，记纸面身份和无现场/诊疗授权；不另找规程代替题面。"
+                  "第 1 天",
+                  "区分预约、到场与接收。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天｜列原记录",
-                  "列9:30D1/D2投放、剩余、摄入与观察值；未知保留。"
+                  "第 2 天",
+                  "抄编号、原状态与出处。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天｜计算复核",
-                  "按C算D1=90克，D2待核；核单位和输入，不推健康。"
+                  "第 3 天",
+                  "独立完成原版并汇总。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4天｜交接核对",
-                  "核9:35交接引用同一9:30D1，列90/80及未观察/正常两差异。"
+                  "第 4 天",
+                  "只加 P2 回执，另写修订。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5天｜沟通说明",
-                  "写事实—未知—请求核对三句；报告带教，不编接收人/反馈或已纠正。"
+                  "第 5 天",
+                  "写原件、待核项和转交对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天｜四作品",
-                  "整合两条计算、两字段对照、三句沟通及复盘权限，逐项回指A/B/C。"
+                  "第 6 天",
+                  "不看参考，独立交两版和一份交接。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天｜复盘选择",
-                  "复核原值、算式、差异和未知；核下一步训练与书面岗位条件，不执行动物操作。"
+                  "第 7 天",
+                  "打开常见问题「AS-52 参考解（交卷后再打开）」，记录差异或无差异。"
                 ]
               }
             ]
           },
           "id": "animal-care-and-service-workers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "七天体验：用虚构材料完成一次动物照护与服务人员任务闭环",
           "type": "timeline"
@@ -29727,18 +29726,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "1.两条记录都保留标识、时点和单位了吗？",
-              "2.D1是否算90克，D2是否保留待核而非补0？",
-              "3.是否核同一9:30记录的90/80与未观察/正常两差异？",
-              "4.是否保留原值、报告带教，未编反馈或已纠正？",
-              "5.四作品是否逐项回指A/B/C，而非另造题面？",
-              "6.是否明确无操作/诊疗授权，不将算式推为健康判断？",
-              "7.是否愿意继续学记录与沟通，并核真实训练和岗位条件？"
+              "继续：愿意按班次保留原记录。",
+              "暂缓：先练缺项追问。",
+              "比较：可了解寄养、救助或日常照护。",
+              "实际培训与资格向用人单位核。",
+              "按参考自核，两版保留。",
+              "继续：愿意按班次保留原记录。",
+              "暂缓：先练缺项追问。"
             ]
           },
           "id": "animal-care-and-service-workers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "七天结束时如何判断要不要继续",
           "type": "list"
@@ -29800,7 +29799,7 @@
                 "涉及诊疗依法核",
                 "资格/备案/地域范围及机构许可分别核",
                 "按法定条件",
-                "符合规定学生/毕业生仅监督协助，不能用照护名自行用药"
+                "参加动物诊疗教学实践的兽医相关专业学生，以及未获执业兽医资格且在动物诊疗机构参加工作实践的相关专业毕业生，应在执业兽医师监督指导下协助，不能用照护名自行用药"
               ],
               [
                 "特殊动物及场景管理",
@@ -29839,8 +29838,8 @@
           "data": {
             "paragraphs": [
               "普通照护与美容按岗位、合法训练和适用技能要求核，技能等级不等诊疗资格；补贴指导标准须核申请条件。",
-              "中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。",
-              "兽医师、助理及乡村兽医具体权限不同；兽医相关专业学生/毕业生符合办法时只可监督协助。动物诊疗机构病历档案至少保存三年，普通照护记录按适用制度核。",
+              "中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。",
+              "兽医师、助理及乡村兽医具体权限不同；参加动物诊疗教学实践的兽医相关专业学生，以及未获执业兽医资格且在动物诊疗机构参加工作实践的相关专业毕业生，应在执业兽医师监督指导下协助。动物诊疗机构病历档案至少保存三年，普通照护记录按适用制度核。",
               "美国39-2021统计不含训练师组合；中国三类宠物职业仅方向参照，特殊动物场景另核。纸面练习与作品均不授予现场操作或诊疗许可。"
             ]
           },
@@ -29859,18 +29858,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "样本适用范围：本页不引用任何招聘公告作为工资或需求证据；招聘条件、技能等级与岗位要求随地区与机构变化，请以主管部门与用人单位官方发布为准。",
-              "本页不提供该职业的分城市工资分布与技能等级通过率：美国侧给出 O*NET 与 BLS 的专属口径工资、就业与预测，中国大陆侧给出行业门类宽口径参照与职业分类与技能等级框架，两者不是同一统计口径。",
-              "判断一个岗位是否属于本职业，看任务描述而不是名称：是否涉及犬猫等非食用动物的饲喂与清洁消毒、健康观察与保定、美容与运动照护、记录与交接，以及面向宠物主人与访客的服务。"
+              "郑州海昌海洋公园 2026 年 10 月的公告同时列饵料工与动物保育员等岗，薪资面议，未分别列人数或个人工资。 石家庄市动物园 2026 年询价把展区运营和表演服务分为两个标段；第二标段所列驯养员负责鸟行为训练，并承担饲养、丰容和异常记录，要求两年以上相关经验。它是采购需求，不是个人招聘。 一条招聘和一项采购各自描述当地工作安排，不能用来推算个人工资或全国行情。"
             ]
           },
           "id": "animal-care-and-service-workers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "ep",
-            "oews",
-            "nbs",
-            "cnpet"
+            "care-zhengzhou",
+            "care-shijiazhuang"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -29920,7 +29914,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国EP本职业典型高中/同等、短OJT；ONET受访者报告的新聘人员学历要求64/14/13%不是中国门槛，OOH动物园岗位常需相关本科。中国核院校现行课程、实训与目标岗位；中国宠物服务职业仅作方向参照，不能等效整个美国职业；驯导师也不等本页39-2021统计。广东2025目录列4-10-07-01健康护理员、02驯导师、03美容师，B类五级指导补贴1000/1500/2000/2500/3000元；申请条件按适用政策核，不能凭证保证补贴或岗位。中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。"
+              "美国EP本职业典型高中/同等、短OJT；ONET受访者报告的新聘人员学历要求64/14/13%不是中国门槛，OOH动物园岗位常需相关本科。中国核院校现行课程、实训与目标岗位；中国宠物服务职业仅作方向参照，不能等效整个美国职业；驯导师也不等本页39-2021统计。广东2025目录列4-10-07-01健康护理员、02驯导师、03美容师，B类五级指导补贴1000/1500/2000/2500/3000元；申请条件按适用政策核，不能凭证保证补贴或岗位。中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.11",
@@ -30079,7 +30073,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。兽医师可诊断处方，助理按一般规则检查、采样、配给药及指导下辅助手术，不出诊断证明或处方；省级按办法允许助理在乡村独立活动的例外须另核；乡村兽医按备案县域乡村范围核。特殊动物管理与普通技能等级分别核，不能互换。"
+              "中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。兽医师可诊断处方，助理按一般规则检查、采样、配给药及指导下辅助手术，不出诊断证明或处方；省级按办法允许助理在乡村独立活动的例外须另核；乡村兽医按备案县域乡村范围核。特殊动物管理与普通技能等级分别核，不能互换。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.21",
@@ -30420,7 +30414,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑进阶核对项：核目标机构实际经验、训练、管理及选拔条件；本页没有统一经验年限或岗位样本。"
+              "编辑进阶核对项：核目标机构实际经验、训练、管理及选拔条件；经验年限请核具体岗位公告。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.43",
@@ -31142,7 +31136,7 @@
                 "url": "https://www.onetonline.org/link/summary/39-2021.00"
               },
               {
-                "entity": "BLS EP 2025—2035动物照护员39-2021详细预测",
+                "entity": "BLS EP 2025–2035动物照护员39-2021详细预测",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31223,7 +31217,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国本职业全国就业预测。BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。美国本职业自雇24.8%，OOH其他个人服务40%/自雇25%等为就业结构，不保证个人就业。39-2000组合413,000/11.2%/69,400另分，O*NET当前页也列2025就业与2025—2035预测；增长不推AI因果。"
+              "证据不足：未取得中国本职业全国就业预测。BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025–2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。美国本职业自雇24.8%，OOH其他个人服务40%/自雇25%等为就业结构，不保证个人就业。39-2000组合413,000/11.2%/69,400另分，O*NET当前页也列2025就业与2025–2035预测；增长不推AI因果。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.8",
@@ -31238,7 +31232,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国（全国，专属口径）"
+              "美国（全国，39-2021 统计）"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.9",
@@ -31280,7 +31274,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为动物照护与服务人员（39-2021.00）专属口径的全国就业规模，不按细分方向或地区细分，不能外推为中国大陆。"
+              "为美国动物照护员 39-2021的全国就业规模，不按细分方向或地区细分，不能外推为中国大陆。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.12",
@@ -31308,7 +31302,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "动物照护与服务人员（O*NET 39-2021.00，专属口径）"
+              "动物照护员（美国 39-2021）"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.14",
@@ -31336,7 +31330,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国（全国，专属口径）"
+              "美国（全国，39-2021 统计）"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.16",
@@ -31350,7 +31344,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035年"
+              "2025–2035年"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.17",
@@ -31378,7 +31372,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为专属口径全国预测；空缺数与增长指标反映行业需求与替代需求，不等于个人就业保证，也不能外推为中国大陆。"
+              "为39-2021 统计全国预测；空缺数与增长指标反映行业需求与替代需求，不等于个人就业保证，也不能外推为中国大陆。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.19",
@@ -31406,7 +31400,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "动物照护与服务人员（O*NET 39-2021.00，专属口径）"
+              "动物照护员（美国 39-2021）"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.21",
@@ -31420,7 +31414,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "12.1%（2025—2035；OOH取整12%）"
+              "12.1%（2025–2035；OOH取整12%）"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.22",
@@ -31434,7 +31428,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国（全国，专属口径）"
+              "美国（全国，39-2021 统计）"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.23",
@@ -31448,7 +31442,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035年"
+              "2025–2035年"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.24",
@@ -31504,7 +31498,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "动物照护与服务人员（O*NET 39-2021.00，专属口径）"
+              "动物照护员（美国 39-2021）"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.28",
@@ -31618,7 +31612,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑转向核对项：相邻方向，需改换为兽医资格体系。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
+              "转岗时核对：相邻方向，需改换为兽医资格体系。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.36",
@@ -31666,7 +31660,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑转向核对项：相邻方向，需补诊疗辅助训练与资格。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
+              "转岗时核对：相邻方向，需补诊疗辅助训练与资格。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.39",
@@ -31712,7 +31706,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑转向核对项：邻近方向，需补繁育与人工授精技能。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
+              "转岗时核对：邻近方向，需补繁育与人工授精技能。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.42",
@@ -31757,7 +31751,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑转向核对项：邻近方向，需补动物控制培训与授权。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
+              "转岗时核对：邻近方向，需补动物控制培训与授权。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.45",
@@ -31802,7 +31796,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑转向核对项：较远距离转向，需补科研训练与学历。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
+              "转岗时核对：较远距离转向，需补科研训练与学历。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.48",
@@ -31846,7 +31840,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑转向核对项：较远距离转向，需补科研训练与学历。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
+              "转岗时核对：较远距离转向，需补科研训练与学历。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.51",
@@ -31890,7 +31884,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑转向核对项：邻近方向，需补农场作业技能。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
+              "转岗时核对：邻近方向，需补农场作业技能。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.54",
@@ -31934,7 +31928,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑转向核对项：邻近方向，需补零售与客户服务技能。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
+              "转岗时核对：邻近方向，需补零售与客户服务技能。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.57",
@@ -31958,13 +31952,13 @@
           "data": {
             "entries": [
               {
-                "answer": "本页中文动物照护与服务人员统计对象为Animal Caretakers（39-2021），不是含Animal Trainers的39-2000组合。为犬猫等非食用动物做饲喂清洁、观察记录、美容运动和客户服务，场景含犬舍、收容所、动物园、水族馆。美国任务含按说明/处方药物辅助、治疗或联系兽医及按说明麻醉接种；不是中国普通照护人员独立权限。中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。",
+                "answer": "本页中文动物照护与服务人员统计对象为Animal Caretakers（39-2021），不是含Animal Trainers的39-2000组合。为犬猫等非食用动物做饲喂清洁、观察记录、美容运动和客户服务，场景含犬舍、收容所、动物园、水族馆。美国任务含按说明/处方药物辅助、治疗或联系兽医及按说明麻醉接种；不是中国普通照护人员独立权限。中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。",
                 "id": "animal-care-and-service-workers.faq.1",
                 "question": "动物照护与服务人员每天做什么？",
                 "question_key": "career.faq.animal-care-and-service-workers.daily-work"
               },
               {
-                "answer": "照护、研究、诊疗、繁育和销售可有任务重叠；中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。中国宠物技能等级与兽医资质分别核，经营主体和个人角色不同。",
+                "answer": "照护、研究、诊疗、繁育和销售可有任务重叠；中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。中国宠物技能等级与兽医资质分别核，经营主体和个人角色不同。",
                 "id": "animal-care-and-service-workers.faq.2",
                 "question": "这个职业和相邻岗位的边界在哪里？",
                 "question_key": "career.faq.animal-care-and-service-workers.comparison"
@@ -31976,19 +31970,23 @@
                 "question_key": "career.faq.animal-care-and-service-workers.ai"
               },
               {
-                "answer": "证据不足：未取得中国本职业全国或城市工资分布。NBS2025居民服务修理其他服务业非私营70,226/私营52,059是宽行业平均，不代职业中位；城镇5人以上法人含私营，个体与自由职业排除。",
+                "answer": "郑州海昌海洋公园 2026 年 10 月的公告同时列饵料工与动物保育员等岗，薪资面议，未分别列人数或个人工资。 石家庄市动物园 2026 年询价把展区运营和表演服务分为两个标段；第二标段所列驯养员负责鸟行为训练，并承担饲养、丰容和异常记录，要求两年以上相关经验。它是采购需求，不是个人招聘。 一条招聘和一项采购各自描述当地工作安排，不能用来推算个人工资或全国行情。",
                 "id": "animal-care-and-service-workers.faq.4",
                 "question": "中国大陆的工资怎么理解？",
-                "question_key": "career.faq.animal-care-and-service-workers.china-pay"
+                "question_key": "career.faq.animal-care-and-service-workers.china-pay",
+                "source_refs": [
+                  "care-zhengzhou",
+                  "care-shijiazhuang"
+                ]
               },
               {
-                "answer": "美国May2025本职业五分位27,250/29,820/35,360/40,050/50,060美元，时中位17.00。分位不是起薪或技能回报，工资参照与中国统计不互推。",
+                "answer": "美国May2025本职业五个工资分位数27,250/29,820/35,360/40,050/50,060美元，时中位17.00。分位不是起薪或技能回报，工资参照与中国统计不互推。",
                 "id": "animal-care-and-service-workers.faq.5",
                 "question": "美国这个职业的工资是多少？",
                 "question_key": "career.faq.animal-care-and-service-workers.us-pay"
               },
               {
-                "answer": "美国EP典型高中短OJT，ONET64%高中/14%副学士两年学位/13%学士为受访者报告的新聘人员学历要求，OOH动物园岗位常需相关本科。中国核现行课程与目标岗位；技能等级不等诊疗许可，中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。",
+                "answer": "美国EP典型高中短OJT，ONET64%高中/14%副学士两年学位/13%学士为受访者报告的新聘人员学历要求，OOH动物园岗位常需相关本科。中国核现行课程与目标岗位；技能等级不等诊疗许可，中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；参加动物诊疗教学实践的兽医相关专业学生，以及未取得执业兽医资格证书、在动物诊疗机构参加工作实践的相关专业毕业生，应当在执业兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。",
                 "id": "animal-care-and-service-workers.faq.6",
                 "question": "怎么才能成为动物照护与服务人员？",
                 "question_key": "career.faq.animal-care-and-service-workers.education"
@@ -32000,7 +31998,7 @@
                 "question_key": "career.faq.animal-care-and-service-workers.risk"
               },
               {
-                "answer": "BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。39-2000组合413,000/11.2%/69,400另列；空缺不等净增，不外推中国或保证个人工作。",
+                "answer": "BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025–2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。39-2000组合413,000/11.2%/69,400另列；空缺不等净增，不外推中国或保证个人工作。",
                 "id": "animal-care-and-service-workers.faq.8",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.animal-care-and-service-workers.outlook"
@@ -32016,6 +32014,15 @@
                 "id": "animal-care-and-service-workers.faq.10",
                 "question": "宠物美容与养护、犬舍与收容所照护、动物园与水族馆饲养三个方向怎么选？",
                 "question_key": "career.faq.animal-care-and-service-workers.direction-choice"
+              },
+              {
+                "answer": "原版：P1 已接收；P2 已到场待核接收；P3 只有预约。汇总 1／1／1，不能确认三条都已接收。变式：C 仅让 P2 转为已接收，P3 不变，汇总 2／0／1。保留 A、B 和新回执；下一班记录责任人核 P3 是否到场，不能把未见记录写成未到场已确认。原版 P2 由接收记录负责人核是否有有效回执。",
+                "id": "animal-care-and-service-workers.faq.11",
+                "question": "AS-52 参考解（交卷后再打开）",
+                "question_key": "career.faq.animal-care-and-service-workers.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -32037,10 +32044,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组"
+              "费马测试编辑部"
             ]
           },
           "id": "animal-care-and-service-workers.sources.source-card.1",
+          "source_refs": [
+            "editor"
+          ],
           "type": "prose"
         },
         {
@@ -32048,18 +32058,29 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "ONET2026任务、情境和兴趣；ONET展示May2025工资；BLS EP2025—2035与OOH职业明细/部分行业工资；NBS2025与GB行业分类；广东2025补贴目录及农业农村部兽医/诊疗机构管理办法，来源各支持自己的范围。"
+              "郑州海昌海洋公园 2026 年 10 月的公告同时列饵料工与动物保育员等岗，薪资面议，未分别列人数或个人工资。 石家庄市动物园 2026 年询价把展区运营和表演服务分为两个标段；第二标段所列驯养员负责鸟行为训练，并承担饲养、丰容和异常记录，要求两年以上相关经验。它是采购需求，不是个人招聘。"
             ]
           },
           "id": "animal-care-and-service-workers.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "oews",
+            "care-zhengzhou",
+            "care-shijiazhuang"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.source-card",
+          "data": {
+            "paragraphs": [
+              "美国工资与就业采用动物照护员 39-2021。郑州招聘与石家庄采购分别说明岗位和服务要求。兽医执业与诊疗机构许可分开核。"
+            ]
+          },
+          "id": "animal-care-and-service-workers.sources.source-card.3",
+          "source_refs": [
             "ep",
-            "ooh",
-            "nbs",
-            "cnindustry",
-            "cnpet",
+            "care-zhengzhou",
+            "care-shijiazhuang",
             "cnvet",
             "cnclinic"
           ],
@@ -32070,18 +32091,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核心事实核对2026-10-08—09：O*NET任务、情境与全国工资，BLS职业明细及行业工资，NBS同版统计和广东2025目录；兽医同文权限沿用本窗口已核原文，诊疗机构病历条款另核。旧大典PDF及行业注释PDF全文未取得，不宣称全文阅读。"
-            ]
-          },
-          "id": "animal-care-and-service-workers.sources.source-card.3",
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.source-card",
-          "data": {
-            "paragraphs": [
-              "证据不足：中国本职业工资及预测、AI与人格因果、美国政府行业内职业中位本轮未取得。已核May2025五分位、OOH其他个人服务35,190/专业科学技术33,350及文娱37,460/零售35,290；当前EP39-2021与组合分开。中国行业与职业分类不同，宠物医院8222不是人类卫生行业、动物园水族馆管理7715不能按展示岗位直接套文娱；诊疗资格、备案、主体许可和补贴各自核。虚构练习不授予权限。"
+              "证据不足：中国本职业工资及预测、AI与人格因果、美国政府行业内职业中位本轮未取得。已核May2025五个工资分位数、OOH其他个人服务35,190/专业科学技术33,350及文娱37,460/零售35,290；当前EP39-2021与组合分开。中国行业与职业分类不同，宠物医院8222不是人类卫生行业、动物园水族馆管理7715不能按展示岗位直接套文娱；诊疗资格、备案、主体许可和补贴各自核。虚构练习不授予权限。"
             ]
           },
           "id": "animal-care-and-service-workers.sources.source-card.4",
@@ -32120,7 +32130,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32132,13 +32142,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看动物照护与服务人员职业页面",
@@ -32170,12 +32180,12 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "exact",
+                  "职业原始资料。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "24任务、受访情境、教育与RSC；当前工资2025、就业2025及预测2025—2035，精确增长和空缺另核EP。不证明中国权限、人格预测或AI效果。",
+                "limitation": "24任务、受访情境、教育与RSC；当前工资2025、就业2025及预测2025–2035，精确增长和空缺另核EP。不证明中国权限、人格预测或AI效果。",
                 "market": "美国",
                 "name": "ONET2026 Animal Caretakers详细职业",
                 "period": "2026年更新职业资料",
@@ -32186,15 +32196,15 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "exact",
+                  "职业原始资料。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "bls",
                 "limitation": "支持39-2021工资、就业、教育及部分行业内职业中位；39-2000组合不可替代。",
                 "market": "美国",
                 "name": "BLS OOH Animal Caretakers明细与组合",
-                "period": "2025年5月工资；2025—2035预测",
+                "period": "2025年5月工资；2025–2035预测",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
@@ -32202,15 +32212,15 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "exact",
+                  "职业原始资料。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "ep",
                 "limitation": "39-2021就业365.3千至409.4千、净44.1千、12.1%、年均62.8千；典型高中/短OJT，含自雇。",
                 "market": "美国",
                 "name": "BLS EP职业预测与特征表",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32218,14 +32228,14 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "exact",
+                  "职业原始资料。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "oews",
-                "limitation": "本职业五分位、时年工资统计位置，非起薪或中国工资。",
+                "limitation": "本职业五个工资分位数、时年工资统计位置，非起薪或中国工资。",
                 "market": "美国",
-                "name": "ONET展示BLS May2025全国五分位",
+                "name": "ONET展示BLS May2025全国五个工资分位数",
                 "period": "2025年5月",
                 "publisher": "O*NET OnLine（BLS OEWS 数据）",
                 "scope": "exact",
@@ -32234,10 +32244,10 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "industry_proxy",
+                  "行业背景，非职业工资。",
                   "访问2026-10-09"
                 ],
-                "evidence_type": "industry_proxy",
+                "evidence_type": "primary_document",
                 "id": "nbs",
                 "limitation": "城镇5人以上法人税前年平均工资，含私营法人，排除个体/自由职业；行业和岗位大类非本职业。",
                 "market": "中国大陆",
@@ -32250,10 +32260,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
                 "limitation": "旧大典分类仅有限方向参考，本轮PDF未取得全文；不可等效整个美国39-2021或授予诊疗许可。",
                 "market": "中国大陆",
@@ -32266,10 +32276,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnpet",
                 "limitation": "2025目录列三类宠物职业B类，初级/中级/高级/技师/高级技师指导标准1000/1500/2000/2500/3000元；这是2025文件参照，实际适用对象、程序及现行政策另核，不保证发放或授予诊疗资格。",
                 "market": "中国大陆",
@@ -32282,10 +32292,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "privacy",
                 "limitation": "用于工作情境比例（站立与体力、户外与噪音暴露、精确性与客户沟通）。",
                 "market": "美国",
@@ -32298,10 +32308,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "facilities",
                 "limitation": "Groom Pro、123Pet、Access、Excel等软件示例；不声称设备清单、普遍采用率或AI效果。",
                 "market": "美国",
@@ -32314,10 +32324,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "operations",
                 "limitation": "用于任务清单与工作活动（饲喂清洁、健康观察、美容、运动与环境、记录与访客服务）。",
                 "market": "美国",
@@ -32330,10 +32340,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "hr",
                 "limitation": "用于工作周时长、日程规律性与户外、噪音、污染物与动物伤病暴露等比例。",
                 "market": "美国",
@@ -32346,10 +32356,10 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-09"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "health",
                 "limitation": "税前工资包括个人代扣社保、公积金与个税，单位统计范围及行业分类；不证明本职业工资。",
                 "market": "中国大陆",
@@ -32362,10 +32372,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "ilo",
                 "limitation": "ONET职业兴趣RSC86/46/38，不是人格预测或ILO研究。",
                 "market": "美国",
@@ -32378,26 +32388,26 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
-                  "访问2026-10-08"
+                  "AS-52 是虚构纸面练习。",
+                  "AS-52 是虚构纸面练习。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "美国典型高中/OJT，动物园常需本科；认证通常非必需，多州自雇经营执照，非中国资格或所有员工许可。",
-                "market": "美国",
-                "name": "BLS OOH教育训练及经营要求",
-                "period": "2025—2035版",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "limitation": "纸面案例不提供饲喂或诊疗依据。",
+                "market": "虚构案例",
+                "name": "费马测试编辑部：AS-52",
+                "period": "虚构练习",
+                "publisher": "费马测试编辑部",
                 "scope": "contextual",
-                "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
+                "url": "#career-content-path"
               },
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "nist",
                 "limitation": "用于职业概述与相关职业入口。",
                 "market": "美国",
@@ -32410,10 +32420,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "arxiv",
                 "limitation": "用于任务与职责参考。",
                 "market": "美国",
@@ -32426,10 +32436,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "weforum",
                 "limitation": "用于任务与照护程序说明。",
                 "market": "美国",
@@ -32442,10 +32452,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "employer",
                 "limitation": "用于动物健康与治疗记录、美容与客户记录与安置记录要求说明。",
                 "market": "美国",
@@ -32458,10 +32468,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "purchasing-managers",
                 "limitation": "用于任务清单参考。",
                 "market": "美国",
@@ -32474,10 +32484,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "r2-pay-1",
                 "limitation": "职业任务及情境背景，不支持工资因果、中国统计、法律或AI效果。",
                 "market": "美国",
@@ -32490,10 +32500,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "r2-pay-2",
                 "limitation": "职业任务及情境背景，不支持工资因果、中国统计、法律或AI效果。",
                 "market": "美国",
@@ -32506,10 +32516,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "r2-pay-3",
                 "limitation": "职业任务及情境背景，不支持工资因果、中国统计、法律或AI效果。",
                 "market": "美国",
@@ -32522,10 +32532,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "census",
                 "limitation": "本职业其他个人服务40%、自雇25%、专业科学技术10%、零售9%、文娱5%为就业结构，不是行业工资或中国行业分类。",
                 "market": "美国",
@@ -32538,10 +32548,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "msresearch",
                 "limitation": "ONET岗位区1—2及64/14/13%受访者报告的新聘人员学历要求；不是全国统一训练时长或中国学历门槛。",
                 "market": "美国",
@@ -32554,12 +32564,12 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "exact",
+                  "职业原始资料。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "全国本职业五分位；不支持技能工资因果。",
+                "limitation": "全国本职业五个工资分位数；不支持技能工资因果。",
                 "market": "美国",
                 "name": "ONET展示May2025工资分位",
                 "period": "2025年5月",
@@ -32570,10 +32580,10 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "archivists",
                 "limitation": "用于记录、动物福利与交接过程说明。",
                 "market": "美国",
@@ -32586,15 +32596,15 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "exact",
+                  "职业原始资料。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "ooh",
                 "limitation": "职业明细与组合分开，支持部分行业内本职业中位，不估计AI因果。",
                 "market": "美国",
                 "name": "BLS OOH本职业教育、就业及部分行业工资",
-                "period": "2025年5月工资；2025—2035预测",
+                "period": "2025年5月工资；2025–2035预测",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
@@ -32602,26 +32612,26 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "农业农村部规章原文。",
                   "访问2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnvet",
-                "limitation": "角色、资格、备案及范围，学生/毕业生监督协助；照护名不授予权限。",
+                "limitation": "第21条规定两类实践人员在执业兽医师监督指导下协助；普通照护岗位没有诊疗权限。",
                 "market": "中国大陆",
                 "name": "农业农村部执业兽医和乡村兽医管理办法",
-                "period": "2022年第6号；2022-10-07施行",
+                "period": "2022 年第 6 号令",
                 "publisher": "中华人民共和国农业农村部",
                 "scope": "contextual",
-                "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408942.htm"
+                "url": "https://www.moa.gov.cn/gk/nyncbgzk/gzk/202209/P020220930306068952275.pdf"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "contextual",
+                  "农业农村部规章原文。",
                   "访问2026-10-09"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnclinic",
                 "limitation": "经营性诊疗机构许可；兼营区域独立、病例至少三年；不套普通照护档案。",
                 "market": "中国大陆",
@@ -32629,17 +32639,17 @@
                 "period": "2022年第5号；2022-10-07施行",
                 "publisher": "中华人民共和国农业农村部",
                 "scope": "contextual",
-                "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408940.htm"
+                "url": "https://www.moa.gov.cn/gk/nyncbgzk/gzk/202209/P020221118344793830026.pdf"
               },
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "查阅2026-10-02"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnindustry",
-                "limitation": "本轮官方检索片段核8222宠物医院、7493排除宠物医院及7715动物园水族馆管理；NBS原PDF全文与广州统计局HTML直接读取失败，不声称全文已核。机构行业按主营活动核，不由员工名称推定。",
+                "limitation": "按机构的实际经济活动判行业代码，不能从岗位名称推出。",
                 "market": "中国大陆",
                 "name": "国家统计局GB/T4754-2017行业分类注释",
                 "period": "2017行业分类注释",
@@ -32650,12 +32660,12 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "查阅2026-10-02"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "industry",
-                "limitation": "政府99排除州地方学校医院及USPS；本轮动态职业页未取得政府行业内职业中位，不等未发布。",
+                "limitation": "行业表与全国职业工资的口径分别核对。",
                 "market": "美国",
                 "name": "BLS May2025行业职业表入口",
                 "period": "2025年5月",
@@ -32666,10 +32676,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解该工作情境。",
                   "查阅2026-10-02"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "oews-method",
                 "limitation": "受雇工资统计与2080小时年化；不等个人实际工时与收入。",
                 "market": "美国",
@@ -32681,20 +32691,46 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "日常饲喂与清洁｜按时间表照护｜按时间表与喂食说明饲喂与喂水，清洗布草并清洁、消毒与维护动物居所与设备。 — 0/100; weight=1/3; animal-care-and-service-workers.profile.responsibilities-block.1[0]",
-                  "动物美容｜洗浴与修剪｜执行洗浴、刷毛、剪毛修毛、剪指甲与清洁耳朵等美容工作，并与客户讨论美容需求。 — 0/100; weight=1/3; animal-care-and-service-workers.profile.responsibilities-block.1[2]",
-                  "记录与领养｜信息与安置｜收集并记录体重与身体状况与治疗与进食量，为流浪或弃养动物寻找领养家庭。 — 50/100; weight=1/3; animal-care-and-service-workers.profile.responsibilities-block.1[4]"
+                  "工具可提醒记录缺项或班次交接，但异常要按场所流程核实，由有相应权限的人评估或处置。"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "name": "O*NET：照护与记录任务",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "url": "https://www.onetonline.org/link/details/39-2021.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "郑州海昌海洋公园 2026 年 10 月的公告同时列饵料工与动物保育员等岗，薪资面议，未分别列人数或个人工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "care-zhengzhou",
+                "limitation": "一条招聘和一项采购各自描述当地工作安排，不能用来推算个人工资或全国行情。",
+                "market": "中国大陆",
+                "name": "郑州海昌海洋公园招聘公告",
+                "period": "2026-10",
+                "publisher": "郑州市个体私营经济发展促进中心",
+                "scope": "recruitment_proxy",
+                "url": "https://amr.zhengzhou.gov.cn/jycyzl/10290759.jhtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "石家庄市动物园 2026 年 2 月询价的第二标段列鸟行为训练驯养员，含饲养、丰容和记录，要求两年以上相关经验。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "care-shijiazhuang",
+                "limitation": "一条招聘和一项采购各自描述当地工作安排，不能用来推算个人工资或全国行情。",
+                "market": "中国大陆",
+                "name": "石家庄市动物园展区与表演服务询价",
+                "period": "2026-02",
+                "publisher": "石家庄市园林局",
+                "scope": "contextual",
+                "url": "https://ylj.sjz.gov.cn/columns/e582584c-d809-4d7e-ac1f-cc235c1894a5/202602/03/2c14116d-e42c-4a9d-953d-8c356e47636b.html"
               }
             ]
           },
@@ -36030,7 +36066,7 @@
       },
       "hero": {
         "h1": "动物照护与服务人员",
-        "quick_answer": "照护非食用动物，包含饲喂清洁、观察记录、美容运动及客户服务。美国39-2021统计不含训练师组合；药物、麻醉与接种任务不授予中国照护岗位独立诊疗权限。",
+        "quick_answer": "寄养或展区服务交班时，先分清谁接收、谁记观察、谁跟进。美国统计采用动物照护员 39-2021 单项；驯养师和动物诊疗另核。",
         "title": "动物照护与服务人员"
       },
       "market_signal_card": {
@@ -36581,7 +36617,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS EP 2025—2035动物照护员就业预测",
+            "label": "BLS EP 2025–2035动物照护员就业预测",
             "secondary_value": null,
             "value": {
               "$item": "animal-care-and-service-workers.profile.onet-structured-fields-block.4",
@@ -37596,7 +37632,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与照护记录",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37699,12 +37735,12 @@
       },
       {
         "derivation": null,
-        "display_value": "12.1%（2025—2035；OOH取整12%）；官方净增44,100人",
+        "display_value": "12.1%（2025–2035；OOH取整12%）；官方净增44,100人",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长率与官方净变化",
         "occupation_scope": "动物照护与服务人员",
-        "period": "2025—2035年",
+        "period": "2025–2035年",
         "source_refs": [
           "ep"
         ]
@@ -37716,7 +37752,7 @@
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "动物照护与服务人员",
-        "period": "2025—2035年",
+        "period": "2025–2035年",
         "source_refs": [
           "ep"
         ]
@@ -37927,12 +37963,12 @@
       },
       {
         "derivation": null,
-        "display_value": "12.1%（2025—2035）；官方净增44,100人",
+        "display_value": "12.1%（2025–2035）；官方净增44,100人",
         "fact_id": "employment-projection",
         "market": "美国",
         "measure": "就业预测口径",
         "occupation_scope": "动物照护与服务人员",
-        "period": "2025—2035年",
+        "period": "2025–2035年",
         "source_refs": [
           "ep"
         ]
@@ -37948,57 +37984,45 @@
         "source_refs": [
           "facilities"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "17%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "动物照护与服务人员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与照护记录"
     },
     "badges": [
-      "动物照护与服务：饲喂清洁与保定 · 美容与养护 · 动物观察与记录",
-      "AI：任务级变化说明 · 不给出替代年份",
-      "美国39-2021工资与2025—2035预测 · 中国行业参照与诊疗边界 · 真实缺口"
+      "饲喂｜清洁｜观察交接",
+      "异常上报与诊疗权限分开",
+      "美国数据 SOC 39-2021"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国年薪中位数（专属口径）"
+        "label": "美国年薪中位数（动物照护员 39-2021）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（专属口径）"
+        "label": "美国就业增长（动物照护员 39-2021）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（专属口径）"
+        "label": "美国在岗人数（动物照护员 39-2021）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（专属口径）"
+        "label": "美国年均职位空缺（动物照护员 39-2021）"
       },
       {
         "availability": "missing",
@@ -38012,17 +38036,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解动物照护与服务人员的任务、美国39-2021工资与2025—2035预测、中国工资参照与诊疗权限，以及纸面入行练习；区分职业、行业和法域口径。"
+      "text": "了解寄养、日常照护和接待的分工；对照郑州招聘和石家庄采购，试做纸面接收交接。"
     },
     "title": {
       "availability": "available",
-      "text": "动物照护与服务人员：任务、工资与就业前景（O*NET 39-2021.00）"
+      "text": "动物照护与服务人员：寄养、接待与交接"
     }
   },
-  "source_content_sha256": "e1d3f9cb55ee478ab5646d989469564b5b76067331d12deebbe88c821728774c",
+  "source_content_sha256": "f9b8ea53af973a43b32166b3f8e6244dadfd3db275b63f5cc3abcd3b3c4d813c",
   "subject": {
     "canonical_slug": "animal-care-and-service-workers",
     "name": "动物照护与服务人员",
-    "summary": "本页中文动物照护与服务人员统计对象为Animal Caretakers（39-2021），不是含Animal Trainers的39-2000组合。为犬猫等非食用动物做饲喂清洁、观察记录、美容运动和客户服务，场景含犬舍、收容所、动物园、水族馆。中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。"
+    "summary": "寄养或展区服务交班时，先分清谁接收、谁记观察、谁跟进。美国统计采用动物照护员 39-2021 单项；驯养师和动物诊疗另核。"
   }
 }

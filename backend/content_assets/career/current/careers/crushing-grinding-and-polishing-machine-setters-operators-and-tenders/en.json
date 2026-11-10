@@ -62,6 +62,12 @@
       "fact:openings-g04-current": {
         "status": "pending_mapping"
       },
+      "fact:posting-a41-hechuan": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a41-zhangye": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -1701,7 +1707,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -19540,56 +19546,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22566,7 +22536,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Low-risk check: use a fictional work order and de-identified data to complete one exercise of setting mill grinding fineness per specifications, simulating one weighing and sampling, writing one operation and anomaly record, and explaining the stop and report order; it only gauges work preference, does not operate real equipment, does not enter a real workshop, does not generate production instructions, and is not equivalent to employer hiring or on-site operating authorization."
+              "Use the three fictional screening records on this page to write a one-page handoff. Check the sample and lot, measurement unit and retest status. Record what changes in the variant."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -23620,13 +23590,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+              "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
           "source_refs": [
             "onet",
-            "g04-trends"
+            "g04-trends",
+            "a41-bls"
           ],
           "type": "prose"
         },
@@ -23635,12 +23606,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025 US industry employment for this occupation: manufacturing 65%, mining, quarrying, and oil and gas extraction 13%, and other including wholesale trade 22%; not industry wages, China shares, or AI causality. The US education response for new hires in this position shows 62% high school or equivalent and 19% less than high school, and unshown remaining items are not filled in as zero. Job Zone1–2/SVP below 6 is a general level, and training from a few days to one year is a general statement, not this position's uniform education, training duration, or a Chinese hiring threshold."
+              "O*NET lists manufacturing (65%) and mining, quarrying, and oil and gas extraction (13%) as leading U.S. industries for this occupation in 2025. The US education response for new hires in this position shows 62% high school or equivalent and 19% less than high school, and unshown remaining items are not filled in as zero. Job Zone1–2/SVP below 6 is a general level, and training from a few days to one year is a general statement, not this position's uniform education, training duration, or a Chinese hiring threshold."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24128,7 +24100,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Next step: use the fictional exercises on this page or one workshop observation follow-along to verify whether the target direction's object is crushing, grinding, and polishing equipment operation, equipment repair, metal rolling, punching and shearing forming, or machine tool grinding, and then decide the direction."
+              "Ask what materials the employer processes and what is measured in the finished product. Check whether the work is machine operation, hand polishing or machine-tool work."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.transition",
@@ -24453,14 +24425,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+              "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
             "r2-ai",
             "nist",
-            "g04-trends"
+            "g04-trends",
+            "a41-bls"
           ],
           "type": "prose"
         },
@@ -24649,14 +24622,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+              "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
           "source_refs": [
             "r2-ai",
             "nist",
-            "g04-trends"
+            "g04-trends",
+            "a41-bls"
           ],
           "type": "prose"
         },
@@ -24891,14 +24865,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+              "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
             "r2-ai",
             "nist",
-            "g04-trends"
+            "g04-trends",
+            "a41-bls"
           ],
           "type": "prose"
         },
@@ -26131,13 +26106,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This position's Chinese wage, quote percentiles, and one-to-one occupation classification mapping were not obtained; it is not inferred that the corresponding occupation does not exist, that the maximum is only industry level, or that it will never be published. Conditional industry background: where the employer's legal entity main industry falls under manufacturing, the NBS2025 urban non-private figure of 113,594 yuan and private figure of 76,055 yuan pre-tax annual average wages can serve as background. Urban legal persons with 5 or more people, excluding sole proprietors and the self-employed; not this position's wage, median, starting wage, percentile, or monthly take-home pay, and the two populations are not mixed; other main industries such as mining and solid waste treatment must be matched to their own industries."
+              "Both notices cover crushing worker roles, with limited detail on equipment and authorization. Check with the employers for current openings."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa",
-            "g04-nbs"
+            "a41-zhangye",
+            "a41-hechuan"
           ],
           "type": "prose"
         },
@@ -26146,12 +26121,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no verifiable recruitment or quote statistics for Mainland China crushing, grinding, and polishing equipment operation positions; a single enterprise's position pay disclosure cannot represent the national level"
+              "Comparable national occupation-level wage data remain unavailable. The two postings illustrate individual jobs."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "a41-zhangye",
+            "a41-hechuan"
           ],
           "type": "prose"
         },
@@ -26268,14 +26244,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 wage is the 51-9021.00 single-occupation paid full-time and part-time regular pre-tax wage. US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+              "The 2025 wage is the 51-9021.00 single-occupation paid full-time and part-time regular pre-tax wage. BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
             "bls",
             "oews",
-            "g04-trends"
+            "g04-trends",
+            "a41-bls"
           ],
           "type": "prose"
         },
@@ -26465,13 +26442,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 US industry employment for this occupation: manufacturing 65%, mining, quarrying, and oil and gas extraction 13%, and other including wholesale trade 22%; not industry wages, China shares, or AI causality."
+              "O*NET lists manufacturing (65%) and mining, quarrying, and oil and gas extraction (13%) as leading U.S. industries for this occupation in 2025."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26480,13 +26458,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 US industry employment for this occupation: manufacturing 65%, mining, quarrying, and oil and gas extraction 13%, and other including wholesale trade 22%; not industry wages, China shares, or AI causality."
+              "O*NET lists manufacturing (65%) and mining, quarrying, and oil and gas extraction (13%) as leading U.S. industries for this occupation in 2025."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26495,13 +26474,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 US industry employment for this occupation: manufacturing 65%, mining, quarrying, and oil and gas extraction 13%, and other including wholesale trade 22%; not industry wages, China shares, or AI causality."
+              "O*NET lists manufacturing (65%) and mining, quarrying, and oil and gas extraction (13%) as leading U.S. industries for this occupation in 2025."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26510,13 +26490,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 US industry employment for this occupation: manufacturing 65%, mining, quarrying, and oil and gas extraction 13%, and other including wholesale trade 22%; not industry wages, China shares, or AI causality."
+              "O*NET lists manufacturing (65%) and mining, quarrying, and oil and gas extraction (13%) as leading U.S. industries for this occupation in 2025."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26833,7 +26814,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "First use a fictional work order and de-identified data to complete one exercise of setting mill grinding fineness per specifications, simulating one weighing and sampling, writing one operation and anomaly record, and explaining the stop and report order, or one workshop observation, and then judge preference."
+              "Use the three fictional screening records on this page to write a one-page handoff. Check the sample and lot, measurement unit and retest status. Record what changes in the variant."
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -27883,7 +27864,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use the fictional exercises on this page or one workshop observation to verify the real conditions, and compare the observation results item by item with the target direction's object, safety requirements, and authorization boundaries."
+              "Use the paper records to see how you feel about repeated checks. Ask the employer about actual equipment, roles and authorization."
             ]
           },
           "id": "actors.display.personality_fit_block.questions.next.answer",
@@ -28548,14 +28529,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+              "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
             "sag",
             "nist",
-            "g04-trends"
+            "g04-trends",
+            "a41-bls"
           ],
           "type": "prose"
         },
@@ -28633,15 +28615,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This page does not cite specific open announcements or count historical recruitment cases as open positions; recruitment and appointment conditions must be verified against the target unit's public information for the current year.",
+              "Gansu Jintuo Development Technology Chemical listed two crushing worker openings at CNY 5,000–6,000 per month. The same notice lists process operation, maintenance and automation operation separately. Chongqing Jintongcheng Technology listed one crushing worker opening at CNY 4,000–4,500 per month, with no stated education requirement. Assembly was listed separately. Both notices cover crushing worker roles, with limited detail on equipment and authorization. Check with the employers for current openings.",
               "On-site observation is an editorial verification example and does not represent common employer verification methods or a uniform process."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "a41-zhangye",
+            "a41-hechuan"
           ],
           "type": "notice"
         },
@@ -28766,9 +28747,9 @@
               {
                 "id": "scene",
                 "values": [
-                  "Portfolio one: fictional work order setup and operation plan",
-                  "Deliverable: a completely fictional work order setup and operation plan for crushing and grinding equipment, including specifications, grinding fineness, startup order, and watching points.",
-                  "Write the basis for each setup (work order, specifications, procedures), and the plan must not be self-contradictory."
+                  "Work sample one: screening log handoff",
+                  "Keep the original and K05 variant.",
+                  "Show evidence, status and next owner."
                 ]
               },
               {
@@ -29022,34 +29003,34 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional equipment operation and anomaly handling scenario material (exercise input)",
-                  "Fictional situation: a crushing, grinding, and polishing machine setter, operator, or tender encounters four problems while on duty. First, a grinding machine develops abnormal vibration and noise during operation and output begins to fall; second, a section of conveyor is blocked by material and production is forced to stop; third, a batch of product measures above the specification upper limit and it must be decided whether to remove the whole batch; fourth, the shift leader asks you to enter the guard enclosure while the equipment holds material to deal with the blockage quickly in order to catch up with the schedule.",
-                  "Given material: the work order and production specifications; a summary of equipment operating and safety procedures; the machine guarding and lockout/tagout system description; and the measurement and inspection record form.",
-                  "Not given: the specific threshold for how long abnormal vibration may continue, the energy isolation and confirmation details when clearing a blockage, the rules for judging and releasing out-of-specification product, and the determination of whether entering the guard enclosure for work is within authorized scope. If the exercise needs these conditions, write out your assumptions and the parties you need to confirm with."
+                  "Three fictional screening records from a crushing line",
+                  "K04: the sample label says K40 and the log says K04. All test readings are present.",
+                  "K05: the log requires the share by mass retained on the screen. It shows 12, with the unit field blank.",
+                  "K06: the lot, reading and unit match. The log requires a retest, but the result field is blank."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Task requirements",
-                  "Please write a one-page handling and reporting plan: covering assessment and shutdown for an equipment anomaly, safe clearing of a conveyor blockage, judgment and handling of out-of-specification product, and verification and refusal of a request to enter the guard enclosure with material present.",
-                  "The plan should state which information comes from the given material and which is still an assumption, and explain whether it relies on procedures, the system description, or the work order specifications."
+                  "One-page handoff",
+                  "For each item, record evidence, status and next owner. The sampling lead verifies sample identity, quality checks readings and retests, and the designated leads approve process changes and batch release.",
+                  "Single-change variant: add a percent sign to the K05 unit field. Leave the other records as given. Show the row that changes."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference deliverable (derivable from the prompt)",
-                  "The plan should include: an equipment anomaly (record the vibration and noise phenomenon and the output change, assess and shut down for inspection per procedures, report to repair staff and the supervisor, and do not dismantle and repair on your own); blockage clearing (first stop the machine and isolate energy, confirm the equipment will not start, then clear per procedures with tools, and do not handle it bare-handed while running); out-of-specification product (judge and segregate per standards, record the measurement data and handle per procedures, and consult per authorization if release is needed rather than deciding on your own); entering the guard enclosure with material present (explain that this request violates machine guarding and lockout/tagout procedures and exceeds authority, refuse and report to the supervisor, and propose the alternative of handling it after shutdown); and handover (write clearly the status of the four matters, the actions taken, and the items awaiting confirmation).",
-                  "The reference deliverable only lists the elements that should be included and does not require wording identical to the example; being able to explain the basis for the judgment is enough."
+                  "Finish independently",
+                  "Submit the original and variant on day six.",
+                  "On day seven, open “Screening log handoff reference (open after day six)” under Common questions and sources."
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "Boundaries and conclusions that cannot be inferred",
-                  "This question only tests equipment anomaly judgment, safety protection and lockout/tagout awareness, and quality judgment and authorization checking awareness; it does not evaluate whether the handling of a real case is compliant, nor does it constitute an operating permit, a liability finding, or legal opinion.",
-                  "Real production data or personal information that has not been de-identified must not be used; where real equipment operation, repair, and safety handling are involved, safety procedures, company rules, and applicable provisions must be followed."
+                  "Exercise boundary",
+                  "Use the supplied fields for this paper handoff.",
+                  "Machine adjustments, actual retests and release follow workplace rules."
                 ]
               }
             ]
@@ -29060,7 +29041,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "Fictional exercise material: handling equipment anomaly and protection authorization problems",
+          "title": "Fictional screening log handoff",
           "type": "cards"
         },
         {
@@ -29071,50 +29052,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: read one public material",
-                  "Find a public material on crushing and grinding or equipment safety education, mark three key safety points and the corresponding protection, and write down the points you want to confirm."
+                  "Day 1",
+                  "Copy the batch IDs."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: work through one work order setup",
-                  "Using a fictional work order, write out the equipment setup and grinding fineness steps, the startup order, and the watching points, and note the conditions that need confirmation."
+                  "Day 2",
+                  "Compare the sample label and log."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: write one weighing and sampling record",
-                  "Using fictional measurement data, record weighing or measurement results at intervals, sampling for laboratory testing, and deviation handling notes."
+                  "Day 3",
+                  "Check the measurement unit."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: write one anomaly and shutdown record",
-                  "Using a fictional case, write a shutdown, handling, and reporting record for an equipment anomaly or blockage, including the basis, limits, and the party it was handed to."
+                  "Day 4",
+                  "Check retest status."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: write one protection and authorization check record",
-                  "Using a fictional case, write a check and refusal record for a request to enter the guard enclosure with material present, including the basis, limits, and alternative plan."
+                  "Day 5",
+                  "Record three statuses and owners."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: have someone else review using only the material",
-                  "Have a peer review your judgment using only your setup, records, and handling plan, and record the questions they raise."
+                  "Day 6",
+                  "Submit one page on your own with the original three records and a separate row for the changed record in the variant."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: decide whether to continue",
-                  "Return to the judgment checklist on this page and write down three reasons you are willing to continue and two conditions that require caution."
+                  "Day 7",
+                  "On day seven, open “Screening log handoff reference (open after day six)” under Common questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29133,13 +29114,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Specific change: whether you can write out the order of setup, watching, measurement judgment, shutdown and reporting, and authorization checking under the given material, rather than just writing handled.",
-              "Facts and choices: whether you would rather do crushing and grinding equipment operation, polishing and surface treatment, or the lead and section management direction.",
-              "Exercise consumption: a dusty and noisy environment, long standing and repetitive motion, and shift work and longer hours, which step drains you most, and can you accept it recurring in the work.",
-              "Material boundaries: the exercise material is all fictional or based on public material, and real production or personal information that has not been de-identified must not be included.",
-              "Feedback response: when problems with your setup or records are pointed out, are you willing to go back to specifications and procedures to fill the gaps.",
-              "Process interest: even if setup and measuring are repetitive, are you willing to complete the verification and records each time rather than skipping procedures based on experience.",
-              "Next step: if you are willing to continue through the first six steps, the next step is to complete one closed loop from setup and watching to measuring and records under compliant conditions (such as workshop observation or one training shift follow-along) and have an experienced person review it; if some step is clearly draining, narrow the direction first and then verify."
+              "Keep the original and variant.",
+              "Give evidence that can be checked.",
+              "Distinguish a complete record from batch approval.",
+              "Name the next owner.",
+              "Compare with the reference and note one correction.",
+              "Ask the employer about actual duties.",
+              "Save the handoff as a work sample."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30388,7 +30369,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+              "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
@@ -30396,7 +30377,8 @@
             "onet",
             "bls",
             "cn-rule",
-            "g04-trends"
+            "g04-trends",
+            "a41-bls"
           ],
           "type": "prose"
         },
@@ -30477,14 +30459,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+              "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
             "bls",
             "oews",
-            "g04-trends"
+            "g04-trends",
+            "a41-bls"
           ],
           "type": "prose"
         },
@@ -30944,14 +30927,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+              "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
             "bls",
             "oews",
-            "g04-trends"
+            "g04-trends",
+            "a41-bls"
           ],
           "type": "prose"
         },
@@ -31058,12 +31042,14 @@
                 ]
               },
               {
-                "answer": "In the US 2025 wage data the median annual wage is 48,540 US dollars and the percentiles are 36,520／40,430／48,540／60,040／69,240 US dollars (51-9021.00 single-occupation basis), and hourly wages are published as well; figures broken down by state or region must be queried on the O*NET local wage page by region and period and cannot be taken as an individual quote; no occupation-level wage figure was obtained for Mainland China, and this page handles it as a gap.",
+                "answer": "In 2025 the U.S. median was $48,540 per year or $23.34 per hour. The mainland China quotes are for individual job postings. Gansu Jintuo Development Technology Chemical listed two crushing worker openings at CNY 5,000–6,000 per month. The same notice lists process operation, maintenance and automation operation separately. Chongqing Jintongcheng Technology listed one crushing worker opening at CNY 4,000–4,500 per month, with no stated education requirement. Assembly was listed separately.",
                 "id": "actors.faq.6",
                 "question": "About how much does this occupation pay, and how should it be compared?",
                 "question_key": "career.faq.crushing-grinding-and-polishing-machine-setters-operators-and-tenders.6",
                 "source_refs": [
-                  "oews"
+                  "sag-moa",
+                  "a41-zhangye",
+                  "a41-hechuan"
                 ]
               },
               {
@@ -31085,7 +31071,7 @@
                 ]
               },
               {
-                "answer": "First use the fictional exercises on this page to complete one round of setting mill grinding fineness per specifications, simulating one weighing and sampling, writing one operation and anomaly record, and explaining the stop and report order, or one workshop observation, and then verify the target direction's object, safety requirements, and authorization boundaries.",
+                "answer": "Use the three fictional screening records on this page to write a one-page handoff. Check the sample and lot, measurement unit and retest status. Record what changes in the variant.",
                 "id": "actors.faq.9",
                 "question": "Starting from zero, what should I do first if I want to try this direction?",
                 "question_key": "career.faq.crushing-grinding-and-polishing-machine-setters-operators-and-tenders.9",
@@ -31094,13 +31080,19 @@
                 ]
               },
               {
-                "answer": "The O*NET summary and employment trends page (based on the BLS 2024—2034 projection) shows about 28,700 people in this occupation in 2024, with a projection label of Decline (a decline of -1% or lower), and about 2,700 openings including growth and replacement over the decade; an overall declining projection still produces replacement openings, and the work is mainly standing operation and watching in a workshop, and must be verified against local manufacturing and mining demand, company equipment, and shift arrangements.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements.",
                 "id": "actors.faq.10",
                 "question": "What else should I consider now when choosing this occupation?",
                 "question_key": "career.faq.crushing-grinding-and-polishing-machine-setters-operators-and-tenders.10",
                 "source_refs": [
-                  "bls"
+                  "a41-bls"
                 ]
+              },
+              {
+                "answer": "K04 has a lot mismatch. Ask the sampling lead to verify sample identity. K05 lacks a unit. Flag the reading for quality. K06 lacks a retest result. Ask quality to follow up. In the variant, K05 can be read as 12%. Send it to quality to check against the applicable specification. A complete unit field does not authorize batch release. K04 and K06 stay the same. Check four items: lot, unit, retest, and status and owners in both versions.",
+                "id": "actors.faq.11",
+                "question": "Screening log handoff reference (open after day six)",
+                "question_key": "career.faq.crushing-grinding-and-polishing-machine-setters-operators-and-tenders.11"
               }
             ]
           },
@@ -31115,7 +31107,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "US and Mainland China data are in separate columns: the US wage, employment, and industry data are on the 51-9021.00 single-occupation basis (OEWS 2025 wage data, BLS 2024—2034 projection); Mainland China is handled as a gap, and the two do not substitute for each other.",
+              "U.S. wages and employment use occupation 51-9021. The two mainland China job notices illustrate individual roles. Comparable occupation-level wage data remain unavailable.",
               "Where the statistical period, survey object, and pay basis differ, cite them separately; do not interpolate and do not fill in with adjacent occupations or industry averages.",
               "The practice materials are all fictional or based on public material and do not constitute a health certificate, a hiring promise, or on-site equipment operation and repair authorization."
             ]
@@ -31331,19 +31323,19 @@
                 "url": "https://www.onetonline.org/link/summary/51-4031.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "The original shared 2024—2034 citation is retained; the currently authorized consumer uses g04-trends."
+                  "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "The original ten-year total openings expression is not used as the current statistical basis; the protected Hero and FAQ old citations are retained without signing that they are currently correct.",
+                "limitation": "U.S. occupational projection.",
                 "market": "United States",
-                "name": "O*NET OnLine: Crushing, Grinding, and Polishing Machine Setters, Operators, and Tenders 51-9021.00 summary and employment trends (based on the BLS 2024—2034 projection)",
-                "period": "2024—2034 projection period; retrieved 2026-09-18",
+                "name": "BLS Table 1.2: Crushing, Grinding, and Polishing Machine Setters, Operators, and Tenders, 51-9021",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/51-9021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-18",
@@ -31428,7 +31420,7 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "The US education response for new hires in this position shows 62% high school or equivalent and 19% less than high school, and unshown remaining items are not filled in as zero. Job Zone1–2/SVP below 6 is a general level, and training from a few days to one year is a general statement, not this position's uniform education, training duration, or a Chinese hiring threshold.",
-                  "2025 US industry employment for this occupation: manufacturing 65%, mining, quarrying, and oil and gas extraction 13%, and other including wholesale trade 22%; not industry wages, China shares, or AI causality."
+                  "O*NET lists manufacturing (65%) and mining, quarrying, and oil and gas extraction (13%) as leading U.S. industries for this occupation in 2025."
                 ],
                 "evidence_type": "official source",
                 "id": "employer",
@@ -31523,7 +31515,7 @@
                 "details": [
                   "For this position the current 21Tasks are 13Core and 8Supplemental. The 13Core are observing operation, cleaning, adjusting, and maintaining with hand tools, watching pumps and conveyors, operating controls, reporting needed repairs, weighing and measuring at intervals, recording operation, test, and production data, removing nonconforming product and adjusting equipment, checking chain and auger wear, cleaning the work area, visual and tactile inspection, reading work orders, and clearing blockages with tools; the 8Supplemental are testing samples, silo identification, transferring materials, adding and mixing chemicals and ingredients, sampling for laboratory testing, loading, controlling humidity with valves, and setting mill fineness. Importance scores are not workforce shares, and Core does not mean every shift does all of them or that it is an operating authorization.",
                   "The US education response for new hires in this position shows 62% high school or equivalent and 19% less than high school, and unshown remaining items are not filled in as zero. Job Zone1–2/SVP below 6 is a general level, and training from a few days to one year is a general statement, not this position's uniform education, training duration, or a Chinese hiring threshold.",
-                  "2025 US industry employment for this occupation: manufacturing 65%, mining, quarrying, and oil and gas extraction 13%, and other including wholesale trade 22%; not industry wages, China shares, or AI causality."
+                  "O*NET lists manufacturing (65%) and mining, quarrying, and oil and gas extraction (13%) as leading U.S. industries for this occupation in 2025."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
@@ -31662,7 +31654,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+                  "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
                 ],
                 "evidence_type": "official employment projection",
                 "id": "g04-trends",
@@ -31677,7 +31669,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "2025 US industry employment for this occupation: manufacturing 65%, mining, quarrying, and oil and gas extraction 13%, and other including wholesale trade 22%; not industry wages, China shares, or AI causality."
+                  "O*NET lists manufacturing (65%) and mining, quarrying, and oil and gas extraction (13%) as leading U.S. industries for this occupation in 2025."
                 ],
                 "evidence_type": "official occupation industry employment distribution",
                 "id": "g04-industry",
@@ -31780,6 +31772,50 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
+                ],
+                "evidence_type": "official occupation data",
+                "id": "a41-bls",
+                "market": "United States",
+                "name": "BLS Table 1.2: Crushing, Grinding, and Polishing Machine Setters, Operators, and Tenders, 51-9021",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Gansu Jintuo Development Technology Chemical listed two crushing worker openings at CNY 5,000–6,000 per month. The same notice lists process operation, maintenance and automation operation separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a41-zhangye",
+                "limitation": "One employer’s quoted pay. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Crushing worker posting",
+                "period": "2024-10-30",
+                "publisher": "Zhangye Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhangye.gov.cn/rsj/dzdt/tzgg/202410/t20241030_1309884_ghb.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Chongqing Jintongcheng Technology listed one crushing worker opening at CNY 4,000–4,500 per month, with no stated education requirement. Assembly was listed separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a41-hechuan",
+                "limitation": "One employer’s quoted pay. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Crushing worker posting",
+                "period": "2025-05-21",
+                "publisher": "Chongqing Hechuan District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hc.gov.cn/bmjd/bm_100475/rlsbj/zwxx_101296/gggs_11/202505/t20250521_14645092.html"
               }
             ]
           },
@@ -34612,9 +34648,9 @@
               "说明": "Conditional industry background: where the employer's legal entity main industry falls under manufacturing, the NBS2025 urban non-private figure of 113,594 yuan and private figure of 76,055 yuan pre-tax annual average wages can serve as background. Urban legal persons with 5 or more people, excluding sole proprietors and the self-employed; not this position's wage, median, starting wage, percentile, or monthly take-home pay, and the two populations are not mixed; other main industries such as mining and solid waste treatment must be matched to their own industries."
             },
             {
-              "指标": "Insufficient evidence",
-              "数值": "No recruitment or quote statistics or wage percentiles for Mainland China crushing, grinding, and polishing equipment operation positions were obtained",
-              "说明": "A single enterprise's position pay disclosure is not used to pass as nationwide data, and no interpolation is done."
+              "指标": "Job postings",
+              "数值": "Gansu Jintuo Development Technology Chemical listed two crushing worker openings at CNY 5,000–6,000 per month. The same notice lists process operation, maintenance and automation operation separately. Chongqing Jintongcheng Technology listed one crushing worker opening at CNY 4,000–4,500 per month, with no stated education requirement. Assembly was listed separately.",
+              "说明": "Both notices cover crushing worker roles, with limited detail on equipment and authorization. Check with the employers for current openings."
             }
           ],
           "china_ai_row": {
@@ -34626,7 +34662,7 @@
           "china_class_row": "Mineral processing, building materials, and food, among others, are editorial work scenarios, and the one-to-one occupation classification and nationwide employment share were not obtained, so it is not inferred that the corresponding segment does not exist.",
           "china_edu_table": [
             {
-              "学历段": "Verify education and assistant position conditions",
+              "学历段": "Zhangye crushing worker: education not specified",
               "岗位方向": "Assistant watching positions for crushing and grinding equipment",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -34636,7 +34672,7 @@
               }
             },
             {
-              "学历段": "Verify equipment operation training and actual conditions",
+              "学历段": "Chongqing crushing worker: no education requirement listed",
               "岗位方向": "Crushing, grinding, and polishing equipment operation positions",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34727,11 +34763,15 @@
               }
             },
             {
-              "城市/区间": "Mainland China (industry average proxy basis)",
+              "城市/区间": "Zhangye and Chongqing job postings",
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026-g04-current",
+                    "$fact": "posting-a41-zhangye",
+                    "field": "display_value"
+                  },
+                  {
+                    "$fact": "posting-a41-hechuan",
                     "field": "display_value"
                   },
                   {
@@ -34741,7 +34781,7 @@
                     "type": "prose"
                   }
                 ],
-                "separator": ""
+                "separator": "\n"
               }
             },
             {
@@ -34757,7 +34797,8 @@
           "china_soc_row": "US 51-9021.00 single occupation; the one-to-one Chinese occupation classification was not obtained, and the specific equipment and work qualifications are verified separately.",
           "edu": "See the entry module for training and qualification",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026-g04-current"
+            "posting-a41-zhangye",
+            "posting-a41-hechuan"
           ],
           "sources_note": "Source links are used within their own statistical or announcement scopes; where the statistical period, survey object, and pay basis differ, cite them separately and do not convert between them.",
           "ui": {
@@ -34770,7 +34811,7 @@
             "scenario_role_label": "Preparation and qualification verification directions",
             "scenario_value_label": "Position directions"
           },
-          "us_growth": "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality.",
+          "us_growth": "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements.",
           "us_median": "48,540 US dollars per year (median, 2025 wage data)"
         }
       },
@@ -34821,7 +34862,7 @@
               "$fact": "employment-g04-current",
               "field": "display_value"
             },
-            "说明": "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+            "说明": "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
           },
           {
             "fact_ref": "growth-g04-current",
@@ -34830,7 +34871,7 @@
               "$fact": "growth-g04-current",
               "field": "display_value"
             },
-            "说明": "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+            "说明": "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
           },
           {
             "fact_ref": "openings-g04-current",
@@ -34839,7 +34880,7 @@
               "$fact": "openings-g04-current",
               "field": "display_value"
             },
-            "说明": "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality."
+            "说明": "BLS Table 1.2 projects U.S. employment in occupation 51-9021 to fall from about 26,600 in 2025 to 26,100 in 2035, a decline of 1.7%. It projects about 2,300 openings per year on average, including replacements."
           }
         ],
         "boundary": {
@@ -34962,7 +35003,7 @@
           },
           {
             "industry": "Industry of crushing, grinding, and polishing machine setters, operators, and tenders (statistical classification)",
-            "median": "2025 US industry employment for this occupation: manufacturing 65%, mining, quarrying, and oil and gas extraction 13%, and other including wholesale trade 22%; not industry wages, China shares, or AI causality.",
+            "median": "O*NET lists manufacturing (65%) and mining, quarrying, and oil and gas extraction (13%) as leading U.S. industries for this occupation in 2025.",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -35234,7 +35275,7 @@
           {
             "geography": "United States",
             "horizon": {
-              "$fact": "growth-g04-current",
+              "$fact": "growth",
               "field": "period"
             },
             "interpretation": {
@@ -35251,9 +35292,9 @@
             },
             "metric": "Overall employment change",
             "occupation_scope": "US 51-9021.00 single-occupation BLS2025—2035 projection",
-            "source_id": "g04-trends",
+            "source_id": "a41-bls",
             "value": {
-              "$fact": "growth-g04-current",
+              "$fact": "growth",
               "field": "display_value"
             }
           },
@@ -35407,7 +35448,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/industrial-machinery-mechanics",
+            "target_href": "/en/career/jobs/industrial-machinery-mechanics",
             "target_slug": "industrial-machinery-mechanics",
             "target_title": "Industrial machinery mechanics (adjacent occupation)",
             "transition_distance": {
@@ -35430,7 +35471,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/maintenance-workers-machinery",
+            "target_href": "/en/career/jobs/maintenance-workers-machinery",
             "target_slug": "maintenance-workers-machinery",
             "target_title": "Maintenance workers, machinery (adjacent occupation)",
             "transition_distance": {
@@ -35453,7 +35494,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/rolling-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/rolling-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "rolling-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Rolling machine setters, operators, and tenders (adjacent occupation)",
             "transition_distance": {
@@ -35476,7 +35517,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Cutting, punching, and press machine setters, operators, and tenders (adjacent occupation)",
             "transition_distance": {
@@ -35499,7 +35540,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Grinding, lapping, polishing, and buffing machine tool setters, operators, and tenders (adjacent occupation)",
             "transition_distance": {
@@ -35522,7 +35563,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders",
+            "target_href": "/en/career/jobs/extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders",
             "target_slug": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders",
             "target_title": "Extruding, forming, pressing, and compacting machine setters, operators, and tenders (adjacent occupation)",
             "transition_distance": {
@@ -35545,7 +35586,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Molding, coremaking, and casting machine setters, operators, and tenders (adjacent occupation)",
             "transition_distance": {
@@ -35568,7 +35609,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Multiple machine tool setters, operators, and tenders (adjacent occupation)",
             "transition_distance": {
@@ -35656,7 +35697,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35705,7 +35746,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35754,7 +35795,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35803,7 +35844,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35852,7 +35893,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35901,7 +35942,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36637,19 +36678,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "MBTI personality test"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Understand my personality preferences"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Understand my Big Five traits"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -37055,74 +37088,74 @@
       },
       {
         "derivation": null,
-        "display_value": "About 28,700 people (2024, single-occupation basis)",
+        "display_value": "26,600 workers",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment scale (stock statistics)",
-        "occupation_scope": "51-9021.00; the 2024 employment figure comes from the O*NET summary page (based on the BLS 2024—2034 projection)",
-        "period": "2024 base period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. occupation 51-9021",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a41-bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline of -1% or lower (2024—2034, label Decline)",
+        "display_value": "Decline of 1.7%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "51-9021.00; the projection label is Decline (-1% or lower), a total change for the projection period, not an individual hiring probability",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. occupation 51-9021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a41-bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 2,700 (2024—2034 total, including growth and replacement)",
+        "display_value": "About 2,300 per year",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Projected period job openings (including growth and replacement)",
-        "occupation_scope": "51-9021.00; openings are a 2024—2034 total, including positions arising from growth and replacement, and replacement openings occur even when the overall projection declines",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. occupation 51-9021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a41-bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Manufacturing｜68% (employment share in the 2024 industry distribution)",
+        "display_value": "Manufacturing 65%",
         "fact_id": "industry-theater",
         "market": "United States",
         "measure": "Industry employment share (not wage)",
-        "occupation_scope": "51-9021.00 2024 industry distribution; manufacturing is listed separately on O*NET",
-        "period": "2024 industry distribution; retrieved 2026-09-18",
+        "occupation_scope": "U.S. 51-9021 employment by industry",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "sag-moa"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Mining, quarrying, and oil and gas extraction｜12% (employment share in the 2024 industry distribution)",
+        "display_value": "Mining, quarrying, and oil and gas extraction 13%",
         "fact_id": "industry-education",
         "market": "United States",
         "measure": "Industry employment share (not wage)",
-        "occupation_scope": "51-9021.00 2024 industry distribution; mining, quarrying, and oil and gas extraction is listed separately on O*NET",
-        "period": "2024 industry distribution; retrieved 2026-09-18",
+        "occupation_scope": "U.S. 51-9021 employment by industry",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "sag-moa"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Other industries (including wholesale trade)｜20% (employment share in the 2024 industry distribution)",
+        "display_value": "The remaining industries are not listed individually",
         "fact_id": "industry-amusement",
         "market": "United States",
         "measure": "Industry employment share (not wage)",
-        "occupation_scope": "51-9021.00 2024 industry distribution; industries other than manufacturing and mining, quarrying, and oil and gas extraction are merged on O*NET as other industries (including wholesale trade)",
-        "period": "2024 industry distribution; retrieved 2026-09-18",
+        "occupation_scope": "U.S. 51-9021 employment by industry",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "sag-moa"
         ]
       },
       {
@@ -37139,74 +37172,74 @@
       },
       {
         "derivation": null,
-        "display_value": "26,600 people (2025 United States, this occupation)",
+        "display_value": "26,600 workers",
         "fact_id": "employment-g04-current",
         "market": "United States",
         "measure": "Employment scale (stock statistics)",
-        "occupation_scope": "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality.",
-        "period": "2025—2035; verified 2026-10-09",
+        "occupation_scope": "U.S. occupation 51-9021",
+        "period": "2025",
         "source_refs": [
-          "g04-trends"
+          "a41-bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline of 2% (2025—2035; 26,600→26,100)",
+        "display_value": "Decline of 1.7%",
         "fact_id": "growth-g04-current",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality.",
-        "period": "2025—2035; verified 2026-10-09",
+        "occupation_scope": "U.S. occupation 51-9021",
+        "period": "2025–2035",
         "source_refs": [
-          "g04-trends"
+          "a41-bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Average annual 2,300 (2025—2035, growth and replacement)",
+        "display_value": "About 2,300 per year",
         "fact_id": "openings-g04-current",
         "market": "United States",
         "measure": "Average annual job openings (growth and replacement)",
-        "occupation_scope": "US 51-9021.00 single-occupation BLS2025—2035 projection: 26,600 employed in 2025 and a 2035 projection of 26,100, a decline of 2% (Decline label -1% or lower), with 2,300 average annual openings including growth and replacement. Openings are not a ten-year total, annual net additions, or an individual hiring probability, and they do not prove AI causality.",
-        "period": "2025—2035; verified 2026-10-09",
+        "occupation_scope": "U.S. occupation 51-9021",
+        "period": "2025–2035",
         "source_refs": [
-          "g04-trends"
+          "a41-bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Manufacturing｜65% (2025 industry employment)",
+        "display_value": "Manufacturing 65%",
         "fact_id": "industry-theater-g04-current",
         "market": "United States",
         "measure": "Industry employment share (not wage)",
-        "occupation_scope": "2025 US industry employment for this occupation: manufacturing 65%, mining, quarrying, and oil and gas extraction 13%, and other including wholesale trade 22%; not industry wages, China shares, or AI causality.",
-        "period": "2025; verified 2026-10-09",
+        "occupation_scope": "U.S. 51-9021 employment by industry",
+        "period": "2025",
         "source_refs": [
-          "g04-industry"
+          "sag-moa"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Mining, quarrying, and oil and gas extraction｜13% (2025 industry employment)",
+        "display_value": "Mining, quarrying, and oil and gas extraction 13%",
         "fact_id": "industry-education-g04-current",
         "market": "United States",
         "measure": "Industry employment share (not wage)",
-        "occupation_scope": "2025 US industry employment for this occupation: manufacturing 65%, mining, quarrying, and oil and gas extraction 13%, and other including wholesale trade 22%; not industry wages, China shares, or AI causality.",
-        "period": "2025; verified 2026-10-09",
+        "occupation_scope": "U.S. 51-9021 employment by industry",
+        "period": "2025",
         "source_refs": [
-          "g04-industry"
+          "sag-moa"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Other including wholesale trade｜22% (2025 industry employment)",
+        "display_value": "The remaining industries are not listed individually",
         "fact_id": "industry-amusement-g04-current",
         "market": "United States",
         "measure": "Industry employment share (not wage)",
-        "occupation_scope": "2025 US industry employment for this occupation: manufacturing 65%, mining, quarrying, and oil and gas extraction 13%, and other including wholesale trade 22%; not industry wages, China shares, or AI causality.",
-        "period": "2025; verified 2026-10-09",
+        "occupation_scope": "U.S. 51-9021 employment by industry",
+        "period": "2025",
         "source_refs": [
-          "g04-industry"
+          "sag-moa"
         ]
       },
       {
@@ -37244,6 +37277,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Gansu Jintuo Development Technology Chemical listed two crushing worker openings at CNY 5,000–6,000 per month. The same notice lists process operation, maintenance and automation operation separately.",
+        "fact_id": "posting-a41-zhangye",
+        "market": "Mainland China",
+        "measure": "Advertised monthly pay",
+        "occupation_scope": "Crushing worker posting",
+        "period": "2024-10-30",
+        "source_refs": [
+          "a41-zhangye"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Chongqing Jintongcheng Technology listed one crushing worker opening at CNY 4,000–4,500 per month, with no stated education requirement. Assembly was listed separately.",
+        "fact_id": "posting-a41-hechuan",
+        "market": "Mainland China",
+        "measure": "Advertised monthly pay",
+        "occupation_scope": "Crushing worker posting",
+        "period": "2025-05-21",
+        "source_refs": [
+          "a41-hechuan"
+        ]
       }
     ]
   },
@@ -37270,19 +37327,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "US employment projection (2024—2034, decline of -1% or lower)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "US employed persons (2024, about 28,700 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "US ten-year job openings (2024—2034, about 2,700, including growth and replacement)"
+        "label": "U.S. average annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37296,14 +37353,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Crushing, grinding, and polishing machine setters, operators, and tenders (O*NET-SOC 51-9021.00) set up, operate, or tend crushing, grinding, and polishing machines: this covers setting the mill and grinding fineness per work orders and specifications, starting and adjusting machine controls, watching auxiliary equipment such as pumps and conveyors, weighing and measuring at intervals and sampling for laboratory testing, observing equipment operation to troubleshoot anomalies and blockages, cleaning, adjusting, and maintaining and reporting repairs, judging and removing nonconforming product, and recording operation and test data on forms; it includes the US 2025 median annual wage of 48,540 US dollars, about 28,700 people employed in 2024, a 2024—2034 employment projection decline (-1% or lower), about 2,700 ten-year openings including growth and replacement, industry employment concentrated in manufacturing (68%) and mining, quarrying, and oil and gas extraction (12%), the interest code RC, the Mainland China occupation-level wage gap, and the control points of machine guarding and lockout/tagout, dust, noise, and hand protection, and equipment status verification and record responsibility boundaries."
+      "text": "Explore crushing, grinding and polishing machine work, U.S. wages and outlook, and mainland China job examples. Practice documenting exceptions in batch records."
     },
     "title": {
       "availability": "available",
       "text": "Crushing, grinding, and polishing machine setters, operators, and tenders"
     }
   },
-  "source_content_sha256": "02952a10d8dc5577498c0a9bf25c19fd7f04eae8513f3f0f61869afd127c775b",
+  "source_content_sha256": "5d41be840a8862baa0d1ff225b8c706d2764d1802a21e4b6b57cfca072eb60c3",
   "subject": {
     "canonical_slug": "crushing-grinding-and-polishing-machine-setters-operators-and-tenders",
     "name": "Crushing, grinding, and polishing machine setters, operators, and tenders",

@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-a40-huadu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a40-putuo": {
+        "status": "pending_mapping"
+      },
       "fact:r5-employment-2025": {
         "status": "pending_mapping"
       },
@@ -1695,7 +1701,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -19546,56 +19552,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22572,7 +22542,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Low-risk validation: using safe materials such as cardboard or foam, complete one exercise — \"read the dimensions from a fictional work order — write out the tool and parameter setting card — draw up a trial-cut and measurement inspection table — write out the stop-and-report process for a guard or interlock anomaly and for lockout/tagout\" — this only assesses work preferences; the exercise does not operate real running equipment or involve real production orders, and is not equivalent to employer hiring or equipment operation authorization."
+              "Use the three fictional slitting batch records on this page to write a one-page handoff. Check the width range, lot number and review signature. Then identify which row changes in the variant."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -24153,7 +24123,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Next step: using the fictional exercises on this page or one workshop shadowing session, verify whether the object of the target direction is general cutting and slicing machines, metal punching and shearing equipment, grinding and polishing machine tools, milling and planing machine tools, multiple machine tools, or textile cutting and wood sawing, and then decide on a direction."
+              "Check the target job’s materials and equipment first. Then ask the employer who handles setup, inspection and release."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.transition",
@@ -26121,12 +26091,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 urban manufacturing unit pre-tax annual average wages: non-private 113,594 yuan, private 76,055 yuan (released 2026-05-15). It covers urban legal entities with 5 or more employees, excluding self-employed individuals and freelancers; non-private does not mean only state-owned enterprises. It serves as industry background only when the actual employer is in manufacturing, and is not this occupation's wage, quote or percentile."
+              "These notices cover an apprentice and a machine lead. The quoted pay applies to each posting. Check with the employers for current openings."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "r5-nbs-manufacturing"
+            "a40-putuo",
+            "a40-huadu"
           ],
           "type": "prose"
         },
@@ -26813,7 +26784,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "First do a paper walkthrough of dimensional verification and anomaly reporting for a fictional work order; workshop observation requires the unit's permission, and equipment operation, tool fitting and maintenance require completed safety training and must fall within the scope of authorization, and the paper exercise does not grant equipment permissions."
+              "Use the three fictional slitting batch records on this page to write a one-page handoff. Check the width range, lot number and review signature. Then identify which row changes in the variant."
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -27865,7 +27836,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use the fictional exercises on this page or one workshop shadowing session to verify the real conditions, and check your observations item by item against the object, equipment requirements and safety boundaries of the target direction."
+              "Use the paper handoff to see how you feel about checking records. Ask the employer about the actual station, pace and authorization, or observe a shift with its permission."
             ]
           },
           "id": "actors.display.personality_fit_block.questions.next.answer",
@@ -28602,15 +28573,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This page does not cite specific job postings and does not count historical recruitment cases as open positions; recruitment and qualification conditions must be verified against the target employer's public information for the current year.",
+              "Shanghai Huaye Communication Electronics advertised a tape slitting apprentice at CNY 4,000–8,500 per month. It listed junior middle school or above, machine operation, quality and maintenance, and offered pre-job training for applicants without experience. Foshan Shunke Color Printing and Packaging advertised a slitting machine lead at CNY 6,000–7,000 per month. It preferred at least a year of experience in the role and said it could train newcomers. These notices cover an apprentice and a machine lead. The quoted pay applies to each posting. Check with the employers for current openings.",
               "The training, observation and mentoring assessment methods in the examples are editorial designs, used to illustrate common verification approaches and not representing any employer's unified process."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "r5-onet-current",
-            "r5-bls-current",
-            "r5-cn-safety"
+            "a40-putuo",
+            "a40-huadu"
           ],
           "type": "notice"
         },
@@ -28735,9 +28705,9 @@
               {
                 "id": "scene",
                 "values": [
-                  "Work sample one: a fictional parameter and trial cut plan",
-                  "Deliverable: a fully fictional parameter setting card and trial cut plan, including the work order dimensions, tool and template selection, parameter values and trial cut inspection points.",
-                  "State the basis for each judgement (work order, drawing or work instruction); the plan must not be self-contradictory."
+                  "Work sample one: slitting batch handoff",
+                  "Keep the three original records and the R17 variant.",
+                  "Show the evidence, status and next owner for each record."
                 ]
               },
               {
@@ -28986,34 +28956,34 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional production scenario material (exercise input)",
-                  "Fictional scenario: a cutting and slicing equipment operator encounters four problems during a shift. First, a set of cutting parameters was set for the previous batch of material, and this batch's specification differs slightly; second, after the trial cut a dimension falls at the tolerance edge and the delivery date is very tight; third, an abnormal sound is heard while the equipment runs and it is unclear whether an interlock indicator on the guard is normal; fourth, one machine needs its cutting edge cleaned, the maintenance worker says it will be serviced later, and the team leader is pressing to keep producing.",
-                  "Materials provided: work order dimensions and drawings; parameter setting and trial cut inspection requirements; machine guard and interlock requirements; lockout/tagout energy isolation and maintenance reporting procedures.",
-                  "Materials not provided: the rules for judging and conceding a dimension at the tolerance edge, the authority to handle an abnormal sound, whether cleaning the cutting edge requires stopping and isolation, and the priority between servicing and production. If the exercise requires these conditions, state your assumptions and the people you need to confirm with."
+                  "Three fictional paper roll slitting records",
+                  "R17: the work order allows 119–121 mm. The first piece measures 122 mm, the lot matches and the review is signed.",
+                  "R18: the first piece is within the work order range. The work order shows lot P08 and the roll label shows P80. The review is signed.",
+                  "R19: the first piece is within the work order range, the lot matches and the review signature field is blank."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Task requirements",
-                  "Please write a one-page handling and reporting plan covering: parameter re-verification and trial cut arrangements, handling of a dimension at the edge, verification of the abnormal sound and guard interlock and the decision to stop, and arrangements for cleaning the cutting edge and servicing.",
-                  "The plan must state which information comes from the given materials and which is still assumption, and indicate whether the basis is the drawing, the parameter requirements or the machine safety and energy isolation procedures."
+                  "One-page handoff",
+                  "For each record, list evidence, status and next owner. Quality checks width and inspection review, the materials lead checks lots, and quality signs off on shipment.",
+                  "Single-change variant: change the R17 reading to 120 mm. Leave the other records as given. Show the row that changes."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference deliverable (can be derived from the prompt)",
-                  "The plan should include: parameter re-verification (verify the work order and parameters against this batch's material and trial cut again to confirm, not carrying over the previous batch's settings), an edge dimension (re-measure and verify whether it is within tolerance, and when out of tolerance or uncertain stop the machine, isolate and report according to procedure without releasing on your own), an abnormal sound and guard interlock (stop the machine first, do not bypass the interlock, verify the guard and interlock according to procedure and report, and resume only after confirming they are normal), cleaning the cutting edge and servicing (isolate the energy and apply the tag under the energy control procedure before cleaning, do not treat a stop button as complete isolation, and report the servicing arrangement according to procedure and explain it to the team leader), and handover (state the status of the four items, the actions taken and the matters still to be confirmed).",
-                  "The reference deliverable only lists the elements that should be included and does not require wording identical to the example; being able to explain the basis for your judgements is enough."
+                  "Finish independently",
+                  "Submit the original and variant on day six.",
+                  "On day seven, open “Slitting batch handoff reference (open after day six)” under Common questions and sources."
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "Boundaries and conclusions that cannot be inferred",
-                  "This item only tests awareness of parameter verification, dimensional judgement, machine safety and energy isolation handling and anomaly escalation; it does not evaluate whether the handling of any real case is compliant, and it does not constitute a safety determination, liability determination or legal advice.",
-                  "Do not use real production orders or unredacted commercial information; where real equipment operation, tool mounting and removal, guards and interlocks, lockout/tagout and personal protection are involved, machine safety procedures, work instructions and unit policies must be followed."
+                  "Exercise boundary",
+                  "Use the paper records to make and hand off your observations.",
+                  "Machine operation and shipment sign-off follow workplace rules."
                 ]
               }
             ]
@@ -29024,7 +28994,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "Fictional exercise material: handling parameter verification and energy isolation issues",
+          "title": "Fictional slitting batch handoff",
           "type": "cards"
         },
         {
@@ -29035,50 +29005,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: Read a public document",
-                  "Find a public educational document on machine safety or cutting equipment, mark three key requirements and the corresponding practices, and write down the points you want to confirm."
+                  "Day 1",
+                  "Record the batch IDs and work order ranges."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: Run one parameter setting walkthrough",
-                  "Using a fictional work order and drawing, write out the tool and parameter setting card and the trial cut points, and note the conditions that need confirmation."
+                  "Day 2",
+                  "Compare first-piece widths."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: Write an inspection and tolerance verification checklist",
-                  "Using a fictional work order, list the measurement items, tolerance judgements and rejection criteria, marking the items that require stopping the machine and reporting."
+                  "Day 3",
+                  "Compare the work order and roll label."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: Run one guard and energy isolation verification",
-                  "Using a fictional scenario, write out the steps and verification method for handling a guard or interlock anomaly and for lockout/tagout energy isolation."
+                  "Day 4",
+                  "Check the review fields."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: Write an anomaly handling record",
-                  "Using a fictional scenario, write a record of stopping, isolating and reporting for an abnormal sound or an out-of-tolerance dimension, including the basis for judgement and the handover content."
+                  "Day 5",
+                  "Record the status and next owner for all three records."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: Have someone review using only the materials",
-                  "Ask a peer to review your judgements using only your plan, and write down the questions they raise."
+                  "Day 6",
+                  "Submit one page on your own with the original three records and a separate row for the changed record in the variant."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: Decide whether to continue",
-                  "Return to the judgement checklist on this page and write down three reasons you are willing to continue and two conditions that call for caution."
+                  "Day 7",
+                  "On day seven, open “Slitting batch handoff reference (open after day six)” under Common questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29097,13 +29067,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Concrete change: whether you can write out the sequence of parameter basis, trial cutting and inspection, and guard and energy isolation handling given the materials, rather than just writing \"handled\".",
-              "Facts and choices: whether you would rather do tool fitting, machine setup and equipment operation, feeding, monitoring, inspection and maintenance, or equipment and process coordination.",
-              "Exercise load: the equipment takt, continuous standing and the hazardous working environment — which step drains you most, and can you accept it recurring in the work.",
-              "Material boundaries: the exercise materials are all fictional or based on public information, and real production orders or unredacted commercial information must not be included.",
-              "Response to feedback: when inspection points out problems with your parameters or dimensions, are you willing to go back to the drawing and standards and complete them.",
-              "Interest in the process: even when feeding and measurement are repetitive, are you willing to complete the trial cut and first-piece verification every time rather than skipping procedure based on experience.",
-              "Next step: if you are willing to continue through the first six steps, the next step is to complete, under compliant conditions (such as workshop shadowing or one mentoring session), a full loop from drawing reading and tool fitting and machine setup to trial cutting and inspection, and ask someone experienced to review it; if some step is clearly draining, narrow the direction first and then verify."
+              "Keep both versions of the handoff.",
+              "Give evidence that can be checked for each record.",
+              "Distinguish a complete record from approval.",
+              "Name the next owner.",
+              "Compare with the reference and note one correction.",
+              "Ask the employer about actual duties.",
+              "Save the handoff as a work sample."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -31014,12 +30984,14 @@
                 ]
               },
               {
-                "answer": "In the U.S. 2025 wage data, the median annual wage is 46,570 dollars (22.39 dollars per hour), with percentiles of 35,930 / 39,440 / 46,570 / 53,800 / 61,120 dollars (hourly 17.27 / 18.96 / 22.39 / 25.87 / 29.39), under O*NET-SOC 51-9032.00's own basis; values broken down by state or area must be looked up on the O*NET local wages page by area and period and cannot be treated as an individual offer; no occupation-level figure was obtained for mainland China, and this page treats it as a gap without substituting industry averages or recruitment samples.",
+                "answer": "In 2025 the U.S. median was $46,570 per year or $22.39 per hour. The mainland China pay examples cover a Shanghai apprentice and a Foshan machine lead, with different duties and experience. Shanghai Huaye Communication Electronics advertised a tape slitting apprentice at CNY 4,000–8,500 per month. It listed junior middle school or above, machine operation, quality and maintenance, and offered pre-job training for applicants without experience. Foshan Shunke Color Printing and Packaging advertised a slitting machine lead at CNY 6,000–7,000 per month. It preferred at least a year of experience in the role and said it could train newcomers.",
                 "id": "actors.faq.6",
                 "question": "What is the typical wage for this occupation, and how should it be compared?",
                 "question_key": "career.faq.cutting-and-slicing-machine-setters-operators-and-tenders.6",
                 "source_refs": [
-                  "oews"
+                  "r5-onet-current",
+                  "a40-putuo",
+                  "a40-huadu"
                 ]
               },
               {
@@ -31041,7 +31013,7 @@
                 ]
               },
               {
-                "answer": "First complete one exercise using safe materials such as cardboard or foam — \"read the dimensions from a fictional work order — write out the tool and parameter setting card — draw up a trial-cut and measurement inspection table — write out the stop-and-report process for a guard or interlock anomaly and for lockout/tagout\" — or one workshop shadowing session, and then verify the object, equipment requirements and safety boundaries of the target direction.",
+                "answer": "Use the three fictional slitting batch records on this page to write a one-page handoff. Check the width range, lot number and review signature. Then identify which row changes in the variant.",
                 "id": "actors.faq.9",
                 "question": "If you want to try this direction with no background, what should you do first?",
                 "question_key": "career.faq.cutting-and-slicing-machine-setters-operators-and-tenders.9",
@@ -31050,13 +31022,19 @@
                 ]
               },
               {
-                "answer": "The O*NET summary and employment trends page (based on BLS 2024—2034 projections, 51-9032.00's own basis) shows about 49,000 people under this basis in 2024, a projection label of Decline (declining -1% or lower) and about 5,300 openings including growth and replacement over the decade; the projection is on an occupation-total basis, the work mainly involves equipment operation and inspection, and it should be verified against local manufacturing and processing orders, product mix and automation investment, with priority given to verifying how machine guards and interlocks, energy isolation and personal protection are implemented.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 51-9032 to fall from about 45,900 in 2025 to 45,500 in 2035, a decline of 0.9%. It projects about 5,400 openings per year on average, including replacements.",
                 "id": "actors.faq.10",
                 "question": "What else should be considered when choosing this occupation now?",
                 "question_key": "career.faq.cutting-and-slicing-machine-setters-operators-and-tenders.10",
                 "source_refs": [
-                  "bls"
+                  "r5-bls-current"
                 ]
+              },
+              {
+                "answer": "R17 at 122 mm exceeds the 121 mm limit. Flag the width for quality. R18 has P08 on the work order and P80 on the label. Ask the materials lead to check which lot it belongs to. R19 lacks a review signature. Refer it to quality for review. In the variant, R17 at 120 mm falls within range. Send it to quality for shipment sign-off; a matching width does not authorize shipment. R18 and R19 stay the same. Check four items: width, lot, signature, and the variant and shipment authority.",
+                "id": "actors.faq.11",
+                "question": "Slitting batch handoff reference (open after day six)",
+                "question_key": "career.faq.cutting-and-slicing-machine-setters-operators-and-tenders.11"
               }
             ]
           },
@@ -31071,7 +31049,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "U.S. and mainland China data are presented in separate columns: U.S. wages, employment and industry data follow O*NET-SOC 51-9032.00's own basis (OEWS 2025 wage data, BLS 2025—2035 projections); mainland China is treated as a gap without substituting industry averages or recruitment samples, and the two are not interchangeable.",
+              "U.S. wages and employment use occupation 51-9032. The two mainland China job notices illustrate individual roles. Comparable occupation-level wage data remain unavailable.",
               "When the statistical period, survey population and pay basis differ, cite them separately; do not interpolate, and do not fill this occupation's wages with adjacent occupations or industry averages.",
               "The exercise materials are all fictional or based on public information; they do not constitute proof of training completion, a hiring promise or equipment operation authorization."
             ]
@@ -31292,21 +31270,19 @@
                 "url": "https://www.onetonline.org/link/summary/51-4081.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports the employment and projection figures for this occupation (this subcategory's own basis).",
-                  "Does not include mainland China information and cannot replace mainland China data.",
-                  "Checked this round: the old 2024–2034 register is retained for out-of-scope historical consumers; the current authorized module this round uses r5-bls-current."
+                  "BLS Table 1.2 projects U.S. employment in occupation 51-9032 to fall from about 45,900 in 2025 to 45,500 in 2035, a decline of 0.9%. It projects about 5,400 openings per year on average, including replacements."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "The old 2024–2034 register is retained for out-of-scope historical consumers; the current authorized module this round uses r5-bls-current.",
+                "limitation": "U.S. occupational projection.",
                 "market": "United States",
-                "name": "O*NET OnLine: Cutting and Slicing Machine Setters, Operators, and Tenders 51-9032.00 summary and employment trends (based on BLS 2024—2034 projections, this subcategory's own basis)",
-                "period": "2024—2034 projection period; retrieved 2026-09-19",
+                "name": "BLS Table 1.2: Cutting and Slicing Machine Setters, Operators, and Tenders, 51-9032",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/51-9032.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31802,6 +31778,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Shanghai Huaye Communication Electronics advertised a tape slitting apprentice at CNY 4,000–8,500 per month. It listed junior middle school or above, machine operation, quality and maintenance, and offered pre-job training for applicants without experience."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a40-putuo",
+                "limitation": "One employer’s quoted pay. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Slitting job posting",
+                "period": "2025-12-23",
+                "publisher": "Shanghai Putuo District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shpt.gov.cn/bm-ms/20251223/966115.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Foshan Shunke Color Printing and Packaging advertised a slitting machine lead at CNY 6,000–7,000 per month. It preferred at least a year of experience in the role and said it could train newcomers."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a40-huadu",
+                "limitation": "One employer’s quoted pay. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Slitting job posting",
+                "period": "2026-05",
+                "publisher": "Guangzhou Huadu District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.huadu.gov.cn/zdlyxxgk/jycy/zpxx/content/mpost_10841301.html"
               }
             ]
           },
@@ -34671,9 +34677,9 @@
               "说明": "Treated as a gap; no industry average or population average is used as a substitute."
             },
             {
-              "指标": "Insufficient evidence",
-              "数值": "No recruitment or quoted-pay statistics or wage percentiles for such positions in mainland China were obtained",
-              "说明": "No individual unit or platform pay disclosure is used to stand in for national data, and no interpolation is done."
+              "指标": "Job postings",
+              "数值": "Shanghai Huaye Communication Electronics advertised a tape slitting apprentice at CNY 4,000–8,500 per month. It listed junior middle school or above, machine operation, quality and maintenance, and offered pre-job training for applicants without experience. Foshan Shunke Color Printing and Packaging advertised a slitting machine lead at CNY 6,000–7,000 per month. It preferred at least a year of experience in the role and said it could train newcomers.",
+              "说明": "These notices cover an apprentice and a machine lead. The quoted pay applies to each posting. Check with the employers for current openings."
             }
           ],
           "china_ai_row": {
@@ -34685,7 +34691,7 @@
           "china_class_row": "Mainland China employment settings: cutting, slicing and blanking equipment operation positions in manufacturing and processing enterprises, and related workstations in producers of glass, stone, food, paper, rubber and insulation materials; this round did not obtain Chinese occupational wages corresponding to O*NET-SOC 51-9032.00, and qualifications or income are not presumed from the classification.",
           "china_edu_table": [
             {
-              "学历段": "Education requirement for the target Chinese position: no posting obtained yet",
+              "学历段": "Tape slitting apprentice: junior middle school or above",
               "岗位方向": "Editorial verification: the tasks and recruitment conditions of the specific support workstation",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34695,7 +34701,7 @@
               }
             },
             {
-              "学历段": "Education and process training requirements for the target Chinese position: no posting obtained yet",
+              "学历段": "Slitting machine lead: a year or more in the role preferred",
               "岗位方向": "Editorial verification: the specific equipment operation, machine setup duties and authorization",
               "说明": "Editorial check suggestion: Chinese employer recruitment conditions, passing position safety training, and the actual equipment and maintenance permissions are confirmed separately. Articles 28–30 of the Work Safety Law do not support inferring from the occupation title that all staff need a special operations certificate."
             },
@@ -34817,11 +34823,15 @@
               }
             },
             {
-              "城市/区间": "Mainland China (recruitment quoted-pay basis)",
+              "城市/区间": "Shanghai and Foshan job postings",
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "posting-a40-putuo",
+                    "field": "display_value"
+                  },
+                  {
+                    "$fact": "posting-a40-huadu",
                     "field": "display_value"
                   },
                   {
@@ -34831,7 +34841,7 @@
                     "type": "prose"
                   }
                 ],
-                "separator": ""
+                "separator": "\n"
               }
             },
             {
@@ -34847,7 +34857,8 @@
           "china_soc_row": "U.S. occupation code: O*NET-SOC 51-9032.00 (Cutting and Slicing Machine Setters, Operators, and Tenders); this round did not obtain a corresponding mainland China occupational wage basis or figure.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a40-putuo",
+            "posting-a40-huadu"
           ],
           "sources_note": "Source links are used according to their respective statistical or announcement scopes; when the statistical period, survey population and pay basis differ, cite them separately and do not convert between them.",
           "ui": {
@@ -35683,7 +35694,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Cutting, Punching, and Press Machine Setters, Operators, and Tenders, Metal and Plastic (adjacent occupation)",
             "transition_distance": {
@@ -35706,7 +35717,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Grinding, Lapping, Polishing, and Buffing Machine Tool Setters, Operators, and Tenders, Metal and Plastic (adjacent occupation)",
             "transition_distance": {
@@ -35729,7 +35740,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Milling and Planing Machine Setters, Operators, and Tenders, Metal and Plastic (adjacent occupation)",
             "transition_distance": {
@@ -35752,7 +35763,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic (adjacent occupation)",
             "transition_distance": {
@@ -35775,7 +35786,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/paper-goods-machine-setters-operators-and-tenders",
+            "target_href": "/en/career/jobs/paper-goods-machine-setters-operators-and-tenders",
             "target_slug": "paper-goods-machine-setters-operators-and-tenders",
             "target_title": "Paper Goods Machine Setters, Operators, and Tenders (adjacent occupation)",
             "transition_distance": {
@@ -35798,7 +35809,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/rolling-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/rolling-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "rolling-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Rolling Machine Setters, Operators, and Tenders, Metal and Plastic (adjacent occupation)",
             "transition_distance": {
@@ -35821,7 +35832,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/sawing-machine-setters-operators-and-tenders-wood",
+            "target_href": "/en/career/jobs/sawing-machine-setters-operators-and-tenders-wood",
             "target_slug": "sawing-machine-setters-operators-and-tenders-wood",
             "target_title": "Sawing Machine Setters, Operators, and Tenders, Wood (adjacent occupation)",
             "transition_distance": {
@@ -35844,7 +35855,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/textile-cutting-machine-setters-operators-and-tenders",
+            "target_href": "/en/career/jobs/textile-cutting-machine-setters-operators-and-tenders",
             "target_slug": "textile-cutting-machine-setters-operators-and-tenders",
             "target_title": "Textile Cutting Machine Setters, Operators, and Tenders (adjacent occupation)",
             "transition_distance": {
@@ -35932,7 +35943,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Learn about my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35981,7 +35992,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Learn about my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -36030,7 +36041,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Learn about my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36079,7 +36090,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Learn about my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36128,7 +36139,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Learn about my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36177,7 +36188,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Learn about my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36913,19 +36924,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "MBTI personality test"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Learn about my personality preferences"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Learn about my Big Five traits"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -37331,74 +37334,74 @@
       },
       {
         "derivation": null,
-        "display_value": "About 49,000 people (2024)",
+        "display_value": "About 45,900 people (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistics)",
-        "occupation_scope": "Cutting and Slicing Machine Setters, Operators, and Tenders (51-9032.00) own subcategory basis; the 2024 employment figure comes from the O*NET summary page (based on BLS 2024—2034 projections)",
-        "period": "2024 base year; retrieved 2026-09-19",
+        "occupation_scope": "U.S. 51-9032 own occupational basis; a current independent fact",
+        "period": "2025 base year; retrieved 2026-10-09",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline of -1% or lower (2024—2034, label \"Decline\")",
+        "display_value": "Decline of 0.9%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "51-9032.00 own subcategory basis; projection label Decline (-1% or lower), a change in the total over the projection period, not an individual probability of being hired",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. 51-9032 own occupational basis; a current independent fact",
+        "period": "2025—2035 projection; retrieved 2026-10-09",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 5,300 (2024—2034 total, including growth and replacement)",
+        "display_value": "About 5,400 per year (2025—2035, including growth and replacement)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Projected period job openings (including growth and replacement)",
-        "occupation_scope": "51-9032.00 own subcategory basis; openings are a 2024—2034 total, including positions arising from growth and replacement",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. 51-9032 own occupational basis; a current independent fact",
+        "period": "2025—2035 annual average; retrieved 2026-10-09",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Manufacturing | 82% (share of employment in the 2024 industry distribution)",
+        "display_value": "Manufacturing | 81% (2025 employment share, not wages)",
         "fact_id": "industry-theater",
         "market": "United States",
         "measure": "Industry employment share (not wages)",
-        "occupation_scope": "51-9032.00 own subcategory basis; manufacturing is the largest category in the O*NET industry distribution",
-        "period": "2024 industry distribution; retrieved 2026-09-19",
+        "occupation_scope": "U.S. 51-9032 own occupational basis; a current independent fact",
+        "period": "2025 industry distribution; retrieved 2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Other industries (including wholesale trade) | 18% (share of employment in the 2024 industry distribution)",
+        "display_value": "The remaining 19% (editorial arithmetic 100%-81%, no specific industry verified)",
         "fact_id": "industry-education",
         "market": "United States",
         "measure": "Industry employment share (not wages)",
-        "occupation_scope": "51-9032.00 own subcategory basis; other industries is the second category published in combination on the O*NET industry page",
-        "period": "2024 industry distribution; retrieved 2026-09-19",
+        "occupation_scope": "U.S. 51-9032 own occupational basis; a current independent fact",
+        "period": "2025 industry distribution; retrieved 2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Statistical status: the O*NET 2024 industry distribution assigns this occupation's employment to only two categories, \"manufacturing\" and \"other industries (including wholesale trade)\"",
+        "display_value": "O*NET lists only the main industry manufacturing at 81%, and the remainder is not set out item by item",
         "fact_id": "industry-amusement",
         "market": "United States",
         "measure": "Industry distribution basis note (not wages)",
-        "occupation_scope": "51-9032.00 own subcategory basis; the O*NET industry page does not publish more detailed industry category shares, and this page does not split the two categories further",
-        "period": "2024 industry distribution; retrieved 2026-09-19",
+        "occupation_scope": "U.S. 51-9032 own occupational basis; a current independent fact",
+        "period": "2025 industry distribution; retrieved 2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
@@ -37427,7 +37430,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Decline of 0.9% (2025—2035; the OOH rounds this to a 1% decline)",
+        "display_value": "Decline of 0.9%",
         "fact_id": "r5-growth-2025-2035",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
@@ -37496,6 +37499,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Shanghai Huaye Communication Electronics advertised a tape slitting apprentice at CNY 4,000–8,500 per month. It listed junior middle school or above, machine operation, quality and maintenance, and offered pre-job training for applicants without experience.",
+        "fact_id": "posting-a40-putuo",
+        "market": "Mainland China",
+        "measure": "Advertised monthly pay",
+        "occupation_scope": "Slitting job posting",
+        "period": "2025-12-23",
+        "source_refs": [
+          "a40-putuo"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Foshan Shunke Color Printing and Packaging advertised a slitting machine lead at CNY 6,000–7,000 per month. It preferred at least a year of experience in the role and said it could train newcomers.",
+        "fact_id": "posting-a40-huadu",
+        "market": "Mainland China",
+        "measure": "Advertised monthly pay",
+        "occupation_scope": "Slitting job posting",
+        "period": "2026-05",
+        "source_refs": [
+          "a40-huadu"
+        ]
       }
     ]
   },
@@ -37522,19 +37549,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, Decline of -1% or lower)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, about 49,000 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. ten-year job openings (2024—2034, about 5,300, including growth and replacement)"
+        "label": "U.S. average annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37548,14 +37575,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Cutting and Slicing Machine Setters, Operators, and Tenders (O*NET-SOC 51-9032.00, Cutting and Slicing Machine Setters, Operators, and Tenders) set up, operate or tend cutting and slicing machines to cut glass, stone, cork, rubber, tobacco, food, paper and insulation materials, among others, to specification: covering determining parameters from work orders and drawings, fitting tools, rollers and templates, feeding and trial cutting, monitoring and adjusting, measuring and weighing to verify specification, removing non-conforming items and readjusting, removing finished products and stacking and sorting, cleaning, lubricating and sharpening tools, and recording output and dimensions and transferring; it should be noted that its U.S. wage and employment follow this subcategory's own basis (2025 median annual wage 46,570 dollars, hourly 22.39 dollars; about 49,000 people employed in 2024; a 2024—2034 projection of a decline of -1% or lower; about 5,300 openings including growth and replacement over the decade; industry distribution manufacturing 82% | other industries 18%; interest code RC), together with the industry-level gap for such positions in mainland China and control points for machine guards, lockout/tagout energy isolation, trial cut verification and dimensional inspection."
+      "text": "Explore cutting and slicing machine work, U.S. wages and outlook, and mainland China job examples. Try a handoff using fictional slitting batch records."
     },
     "title": {
       "availability": "available",
       "text": "Cutting and Slicing Machine Setters, Operators, and Tenders"
     }
   },
-  "source_content_sha256": "af06ddc42b85cece8cb2858b5980fdf206a60729e9e8acb6ff3e743ce4cfd00f",
+  "source_content_sha256": "9a724795e524effbe8ae561ad199fc22c96b47d4a799a240d31beb27c174d99f",
   "subject": {
     "canonical_slug": "cutting-and-slicing-machine-setters-operators-and-tenders",
     "name": "Cutting and Slicing Machine Setters, Operators, and Tenders",

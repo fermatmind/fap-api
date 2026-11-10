@@ -155,6 +155,9 @@
       "item:motorboat-operators.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:motorboat-operators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:motorboat-operators.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12996,6 +12999,21 @@
             "authority"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。航次 B4 记录的乘员人数与名单不符，岸上联络人栏也为空。写出两项待核问题及接收人。实际出发由负责航次的人按运营方程序决定。"
+            ]
+          },
+          "id": "motorboat-operators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "employment"
+          ],
+          "title": "核机动船出发交接",
+          "type": "notice"
         }
       ]
     },
@@ -15471,6 +15489,13 @@
         "id": "motorboat-operators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "motorboat-operators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15664,7 +15689,7 @@
       "text": "机动船操作员"
     }
   },
-  "source_content_sha256": "4688757ed552e64815df1266ebf0c0ae9cba89323e7cc5bf3a9adefb1375ffa9",
+  "source_content_sha256": "bae6c7305aeea39bc295316d05aa3e60ff16c46dc4c9bfd8cc9f254b344c6b8e",
   "subject": {
     "canonical_slug": "motorboat-operators",
     "name": "机动船操作员",

@@ -23311,7 +23311,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "机器人工程师的核心是把任务需求转成可验证的机器人系统：核使用场景与安全约束，设计机械、电气、传感器和控制方案，构建原型并测试。程序能跑不等于系统可在人员环境中放行。"
+              "先核自己偏好的结构、控制或集成方向，以及现场测试、设计审批和技术交接范围。"
             ]
           },
           "id": "robotics-engineers.quick-decision.fit-decision-checklist.1",
@@ -23326,7 +23326,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "与电气、硬件、制造、航空工程师共享部分设计和测试方法，但机器人岗位特别关注感知、执行、控制与整机集成。机器人员技术员侧重装配、测试与维护，工程设计责任需另核。"
+              "在 09「入行、资格与职业发展」做 RB-E01｜比较两版台架验证记录，先完成初稿再看参考。"
             ]
           },
           "id": "robotics-engineers.quick-decision.fit-decision-checklist.2",
@@ -23340,7 +23340,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "AI可帮助查文档、生成代码草稿和测试用例候选；接口、传感器、控制逻辑、失效状态和现场安全须依真实设备与实验数据复核，不能由生成结果自动批准。"
+              "适合愿意把需求变成可复现测试、处理指标冲突并留版本的人。"
             ]
           },
           "id": "robotics-engineers.quick-decision.fit-decision-checklist.3",
@@ -23356,7 +23356,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "进入岗位前核目标机器人类型、软硬件分工、实验条件、功能安全责任、实机操作授权与交付标准。虚构调试练习只训练找缺口，不可用于真实设备。"
+              "把需求、试验条件和批准状态分开，记录每个门槛的证据。"
             ]
           },
           "id": "robotics-engineers.quick-decision.fermat-decision-card.6",
@@ -23371,7 +23371,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "美国机器人工程师17-2199.08没有单列的2025工资和2025—2035就业；O*NET引用“其他工程师”17-2199父职业中位122,930美元，BLS父职业增长3.7%、年均约8,800空缺。中国精确职业工资未取得。"
+              "适合愿意把需求变成可复现测试、处理指标冲突并留版本的人。"
             ]
           },
           "id": "robotics-engineers.quick-decision.fermat-decision-card.7",
@@ -27737,31 +27737,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "电子工程师",
@@ -29493,7 +29493,7 @@
                 "values": [
                   "教育与基础",
                   "BLS父职业典型入门为本科学历；机器人子职业具体要求由雇主决定。",
-                  "核控制、机械、电气、软件和测试的真实职责。"
+                  "长沙校招样本覆盖运动控制、软件、结构与硬件等方向。"
                 ]
               },
               {
@@ -29516,8 +29516,8 @@
                 "id": "tools",
                 "values": [
                   "协作与记录",
-                  "需与技术员、应用方和安全人员共享可复现信息。",
-                  "核接手人能否按记录重现问题。"
+                  "在 09「入行、资格与职业发展」做 RB-E01｜比较两版台架验证记录，先完成初稿再看参考。",
+                  "把需求、试验条件和批准状态分开，记录每个门槛的证据。"
                 ]
               }
             ]
@@ -29526,7 +29526,9 @@
           "source_refs": [
             "bls",
             "onet",
-            "editor"
+            "editor",
+            "cn-d010-main",
+            "cn-d010-context"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29539,37 +29541,35 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "练习设定｜全部虚构，不连接真实设备",
-                  "你是受监督机器人系统学员。只核资料与测试证据，不生成实机运动指令。",
-                  "A1｜需求文档要求在有人通道运行；风险评估、允许速度和停止条件未给出。",
-                  "A2｜传感器日志标注2026-09-01版标定，设备清单写2026-09-14版；两者不一致。",
-                  "A3｜控制程序提交号与测试报告提交号不同，报告只记录“正常”，没有失败场景。",
-                  "A4｜演示在空场地通过，但客户要求进入有障碍、有人流的真实空间。",
-                  "A5｜工程师可列问题和建议；实机扩场、参数变更和部署由获授权团队批准。"
+                  "虚构材料",
+                  "虚构台架使用同一负载、同一测试脚本和同一量具。批准的下一阶段门槛为三次平均周期不超过 10 秒，且最大绝对定位误差不超过 1.6 mm。只核纸面记录。",
+                  "V1：三次周期 10、11、10 秒，绝对误差 1.2、1.5、1.4 mm。V2：三次周期 9、9、10 秒，绝对误差 1.4、1.7、1.8 mm。",
+                  "记录未覆盖其他负载，也未给现场安全或扩测签批。测试负责人核结果，项目负责人批准下一阶段。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务一：标记不可放行项",
-                  "列出A1人员暴露条件不明、A2标定冲突、A3版本不一致、A4场景外推；状态写“暂停扩场”。",
-                  "不要补造速度、控制参数或安全认证。"
+                  "任务与交付",
+                  "交两版验证表，分别计算平均周期和最大误差，核两个门槛，给下一轮对照设计。",
+                  "区分观测、推断和批准。不要从同一负载三次测试外推现场。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "任务二：写复核与交接",
-                  "按问题、原始资料、版本、测试条件、责任人、待证据和状态做清单。",
-                  "请求安全评估、统一标定与代码版本，并补有人流场景测试方案。",
-                  "清楚区分“已提交”“已复核”“已批准”。"
+                  "提交前提示",
+                  "先保存初稿，再看七天计划之后的参考。",
+                  "无需同伴协助。",
+                  "记录版本。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "安全边界",
-                  "练习缺实际设备与安全参数，不能导出操作指令。"
+                  "权限边界",
+                  "使用虚构记录。",
+                  "不实际批准或对外交付。"
                 ]
               }
             ]
@@ -29578,7 +29578,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：虚构机器人系统的故障定位",
+          "title": "RB-E01 | 比较两版台架验证记录",
           "type": "cards"
         },
         {
@@ -29589,33 +29589,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "需求与风险卡",
-                  "标注A1有人通道需求与缺失的风险评估。",
-                  "他人可看到未取得的停止条件。"
+                  "版本与条件",
+                  "记同负载、脚本与量具。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "配置对照表",
-                  "并列A2标定版本、A3程序提交号与报告版本。",
-                  "不能把不同版本的“通过”合并。"
+                  "门槛核对",
+                  "逐版核两个门槛和算式。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "失败场景单",
-                  "列A4空场地和真实场地差异，提出待验证情况。",
-                  "不把演示成功写成现场安全。"
+                  "下一轮验证",
+                  "列下一轮受控变量和采样计划。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "交接与批准链",
-                  "记录A5谁可复核、谁可批准扩场和部署。",
-                  "状态必须明确到人和时间。"
+                  "交付边界",
+                  "列谁复核与谁批准扩测。",
+                  "用题设原始记录核对。"
                 ]
               }
             ]
@@ -29646,27 +29646,27 @@
             "rows": [
               [
                 "需求追问",
-                "有人通道需求不清怎么办",
-                "能指出风险和停止条件缺口",
-                "不能凭面试题授设备权限"
+                "记同负载、脚本与量具。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "配置核查",
-                "标定和程序版本冲突如何处理",
-                "能暂停并回查原始记录",
-                "不编造哪个版本正确"
+                "逐版核两个门槛和算式。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "测试设计",
-                "空场地通过可否进真实场地",
-                "能区分场景和覆盖范围",
-                "部署须另经批准"
+                "列下一轮受控变量和采样计划。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "交接复盘",
-                "如何交代残余缺陷",
-                "能列条件、责任人和待证据",
-                "一次练习不预测长期表现"
+                "列谁复核与谁批准扩测。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ]
             ]
           },
@@ -29686,50 +29686,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第一日",
-                  "读A1，标注使用场景和安全需求缺口。"
+                  "第 1 天",
+                  "记录对象和版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第二日",
-                  "读A2，制作标定版本对照表。"
+                  "第 2 天",
+                  "记同负载、脚本与量具。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第三日",
-                  "读A3，核程序、报告与硬件配置能否对应。"
+                  "第 3 天",
+                  "逐版核两个门槛和算式。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第四日",
-                  "读A4，列空场地演示不能外推的条件。"
+                  "第 4 天",
+                  "列下一轮受控变量和采样计划。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第五日",
-                  "按A1—A5写复核与批准链，保持暂停扩场状态。"
+                  "第 5 天",
+                  "列谁复核与谁批准扩测。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第六日",
-                  "请熟悉系统验证的人审阅模拟材料，记录意见。"
+                  "第 6 天",
+                  "先独立完成交接稿，再按下方参考和量规核对并修订一处。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第七日",
-                  "保留初稿与修订稿，复盘遗漏和复现质量。"
+                  "第 7 天",
+                  "整理四份练习成果，保留原件和待审状态。"
                 ]
               }
             ]
@@ -29746,20 +29746,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "记录A1—A5每个未知项和原始资料位置。",
-              "检查是否把标定冲突猜成某一版本正确。",
-              "检查是否把程序提交号与测试报告混用。",
-              "检查是否将空场地演示当作有人场地验证。",
-              "确认部署决定始终留在授权链。",
-              "记录自己是否愿意跨机械、电气和软件核问题。",
-              "练习只用于职业探索，不是设备操作资格。"
+              "V1 平均周期 31／3≈10.33 秒，超过 10 秒。最大绝对误差 1.5 mm，在 1.6 mm 内。",
+              "V2 平均周期 28／3≈9.33 秒，在限值内。最大绝对误差 1.8 mm，超过 1.6 mm。",
+              "两版各有一个门槛不满足。不能凭周期改善批准 V2 扩测，也不能据三次测试判定原因。",
+              "下一轮先复核量具、脚本与版本，保持负载和环境一致，增加重复次数。再单独改变负载做额外对照。",
+              "将原记录、算式及未观测条件提交测试负责人，项目负责人核批准。未取得现场权限前只交验证建议。",
+              "四项各 0–2 分：版本与原件、逐项判断、未知范围、权限交接。",
+              "完整可追溯为 2，部分为 1，缺失或越权为 0。"
             ]
           },
           "id": "robotics-engineers.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "题后参考与自核量规",
           "type": "list"
         },
         {
@@ -29874,16 +29874,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证书、学历与设备操作授权分别核实。中国本岗的可比招聘样本、具体资格主体和厂商授权资料尚未取得，不能给出统一证书或起薪门槛。",
-              "证书目录只能作为检索入口；正式资格、雇主授权和设备权限需分别核。"
+              "长沙校招样本覆盖运动控制、软件、结构与硬件等方向。",
+              "原岗列机器人运动控制算法的设计、实现及调试，属于研发岗位的一条方向。"
             ]
           },
           "id": "robotics-engineers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "cn-d010-main",
+            "cn-d010-context"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -31917,13 +31915,15 @@
                 ]
               },
               {
-                "answer": "BLS父职业典型入门为本科学历，但不是机器人子职业统一法定门槛；具体雇主条件另核。",
+                "answer": "BLS父职业典型入门为本科学历，但不是机器人子职业统一法定门槛；具体雇主条件另核。 长沙校招样本覆盖运动控制、软件、结构与硬件等方向。 原岗列机器人运动控制算法的设计、实现及调试，属于研发岗位的一条方向。",
                 "id": "robotics-engineers.faq.3",
                 "question": "入行一定要本科吗？",
                 "question_key": "career.faq.robotics-engineers.q3",
                 "source_refs": [
                   "onet",
-                  "editor"
+                  "editor",
+                  "cn-d010-main",
+                  "cn-d010-context"
                 ]
               },
               {
@@ -31965,7 +31965,7 @@
                 "question_key": "career.faq.robotics-engineers.credentials"
               },
               {
-                "answer": "只用虚构需求、接口表和日志，标记版本冲突、测试覆盖与授权链；不连接真实设备。",
+                "answer": "在 09「入行、资格与职业发展」做 RB-E01｜比较两版台架验证记录，先完成初稿再看参考。",
                 "id": "robotics-engineers.faq.9",
                 "question": "如何练习系统判断？",
                 "question_key": "career.faq.robotics-engineers.risk-boundary"
@@ -31986,7 +31986,9 @@
             "nbs",
             "privacy",
             "editor",
-            "editor"
+            "editor",
+            "cn-d010-main",
+            "cn-d010-context"
           ],
           "type": "faq"
         },
@@ -32073,13 +32075,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32313,8 +32315,8 @@
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "FermatMind虚构机器人调试练习：仅用于上述适用范围。",
-                  "虚构练习，不是设备调试指令或资格证明。"
+                  "RB-E01 为虚构纸笔试做。",
+                  "把需求、试验条件和批准状态分开，记录每个门槛的证据。"
                 ],
                 "evidence_type": "编辑归纳",
                 "id": "editor",
@@ -32550,6 +32552,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "长沙校招样本覆盖运动控制、软件、结构与硬件等方向。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-d010-main",
+                "limitation": "用于职业任务和路径对照。",
+                "market": "中国大陆",
+                "name": "中联重科机器人研发工程师",
+                "period": "原帖及课程日期见来源",
+                "publisher": "中联重科机器人研发工程师",
+                "scope": "recruitment_proxy",
+                "url": "https://career.nankai.edu.cn/correcruit/content/id/116863.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "原岗列机器人运动控制算法的设计、实现及调试，属于研发岗位的一条方向。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-d010-context",
+                "limitation": "用于职业任务和路径对照。",
+                "market": "中国大陆",
+                "name": "昊志机电运动控制算法工程师",
+                "period": "原帖及课程日期见来源",
+                "publisher": "昊志机电运动控制算法工程师",
+                "scope": "contextual",
+                "url": "https://career.hebut.edu.cn/home/correcruit/content/id/80506.html"
               }
             ]
           },
@@ -37244,7 +37276,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合机器人工程师",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37791,14 +37823,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "机器人工程师职业介绍：系统设计、传感器与控制、集成测试、AI辅助边界、美国17-2199父职业工资就业口径、中国制造业工资背景及虚构调试练习。"
+      "text": "机器人工程师设计、集成和验证机器人。比较大陆研发方向、美国统计宽组与两版台架记录试做。"
     },
     "title": {
       "availability": "available",
       "text": "机器人工程师"
     }
   },
-  "source_content_sha256": "34a64eef3b94d5a611cf6439664f3ccdef60ec309d230491437e98771d6183d3",
+  "source_content_sha256": "321453528e51372abd8454d505cd1da7e872827ad5a7df41751c8d3136cfea01",
   "subject": {
     "canonical_slug": "robotics-engineers",
     "name": "机器人工程师",

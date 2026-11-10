@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-entry-huainan": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-entry-sonid": {
+        "status": "pending_mapping"
+      },
       "fact:r5-current-cn-business": {
         "status": "pending_mapping"
       },
@@ -19498,56 +19504,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19555,7 +19525,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19568,7 +19538,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19581,7 +19551,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19594,7 +19564,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -26030,7 +26000,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial checking scenarios: Direct employment, outsourcing or dispatch, and self-employment each require checks of actual contracts and wages or project fees. This round has no Chinese recruitment or contract samples and cannot claim full-time monthly wages predominate nationally."
+              "Check the actual contract for direct employment, agency work or contracting terms and pay. Two historical postings do not establish which terms predominate in China."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
@@ -26114,12 +26084,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: This round obtained no verifiable mainland Chinese recruitment or quotation statistics for data entry roles. Individual platform or organizational quotations cannot represent national levels"
+              "A Huainan data entry posting advertises CNY 2,200 per month and asks for high school or above. It does not name the system or detailed duties. A part-time Sonid Left Banner records posting combined scanning, cataloging, entry and quality checks. Base pay was CNY 2,600 per month both during and after probation. Piece-rate pay and an attendance award were listed separately for after probation. Check responsibilities and pay terms. These are two postings, not national wages."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "entry-huainan",
+            "entry-sonid"
           ],
           "type": "prose"
         },
@@ -28589,7 +28560,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This round obtained no actual Chinese recruitment samples or contracts for this occupation. Historical or editorial examples do not count as demand. The following roles and observable abilities are editorial suggestions, not uniformly adopted employer practices.",
+              "The two historical postings illustrate possible entry routes. The suggested skills below are exercises; check the target employer’s contract, workflow and permissions separately.",
               "Chinese entry involving identifiable personal information: Under PIPL13, check lawful processing bases; consent is not always the sole basis. 6 minimal necessity/8 quality; 51 reasonable operation permissions and regular security training. Account authorization does not replace a legal processing basis. Outsourcing 21 requires checking entrusted scope, supervision and sub-entrustment conditions; 59 entrusted parties' security assistance. Employees report questions according to actual responsibilities without expanding uses independently."
             ]
           },
@@ -28922,7 +28893,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial entry pathway: Identify source field values and perform entry/checking → Business rules and referral of questions → Batch review abilities. This is not a uniform national advancement sequence or necessarily more effective than certificates. Check target-role training, appointments and data permissions separately; this round has no actual Chinese employer recruitment samples."
+              "Editorial entry pathway: Identify source field values and perform entry/checking → Business rules and referral of questions → Batch review abilities. This is not a uniform national advancement sequence or necessarily more effective than certificates. Check target-role training, appointments and data permissions separately; this page includes two historical Chinese postings but does not establish current vacancies or national employment patterns."
             ]
           },
           "id": "actors.path.career-path-block.1",
@@ -30387,7 +30358,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Demand levels: Official total projections, actual organizational and contractual arrangements, and current recruitment samples. This round has no Chinese recruitment samples or AI/outsourcing causality; these cannot substitute for one another."
+              "Read official U.S. projections, two historical mainland China ads and actual contract terms separately. These sources do not establish current vacancies or effects from AI or outsourcing."
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30945,21 +30916,23 @@
           "data": {
             "entries": [
               {
-                "answer": "Operate data entry equipment (such as keyboards or photo-composing perforators), potentially including data verification and preparation of printed materials: compile, sort and check accuracy of data requiring entry; select materials needed for work; read sources such as canceled checks, sales reports or bills and use keyboards or scanners to enter specified fields or media such as tapes and disks; compare data with sources or re-enter in verification format to find errors; identify and correct entry errors or report to supervisors; store completed documents appropriately; maintain logs of work activities and completed work; load equipment with input or output media such as paper, cards, disks, tapes or Braille media; and use cryptographic procedures and equipment to interpret garbled or indecipherable information.",
+                "answer": "Enter source forms or records in specified fields, compare the entries with the source and correct or report discrepancies. The materials, systems and review procedures vary by employer.",
                 "id": "actors.faq.1",
                 "question": "What specific work do data entry keyers do every day?",
                 "question_key": "career.faq.data-entry-keyers.1",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "This occupation focuses on accurately entering source-document information into specified fields and responsibility for results. Billing and Posting Clerks handle accounting and vouchers; Office Clerks, General handle general office and administrative affairs; Word Processors and Typists format and finalize documents; File Clerks classify, store and retrieve materials; Mail Clerks and Mail Machine Operators receive and dispatch mail and documents and handle machine processing; Payroll and Timekeeping Clerks calculate payroll and attendance data. Similar names do not make responsibilities, assessment methods or qualifications interchangeable.",
+                "answer": "Data entry keyers primarily hand off structured records and verification results. Correspondence clerks primarily prepare written responses and maintain correspondence records. Records digitization jobs can combine entry with scanning, cataloging and quality checks.",
                 "id": "actors.faq.2",
-                "question": "How does this occupation differ from adjacent clerical, records and office equipment directions?",
+                "question": "How does data entry differ from correspondence and records digitization?",
                 "question_key": "career.faq.data-entry-keyers.2",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "entry-correspondence",
+                  "entry-sonid"
                 ]
               },
               {
@@ -30972,12 +30945,13 @@
                 ]
               },
               {
-                "answer": "Verifiable changes are at task level: tools may partially undertake three task categories—data collection and recognition, comparison and verification, and records and traces. This page has no adoption rate or replacement data for a single occupation.",
+                "answer": "OCR or form validation can help identify fields and flag formatting issues. Review still requires checking the source. These are examples of possible assistance; the page does not measure adoption or productivity in the occupation.",
                 "id": "actors.faq.4",
-                "question": "Which tasks in this occupation already have evidence of AI-related change?",
+                "question": "Which tasks could software help with?",
                 "question_key": "career.faq.data-entry-keyers.4",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "r5-nist-core"
                 ]
               },
               {
@@ -30990,21 +30964,24 @@
                 ]
               },
               {
-                "answer": "US 2025 wage data give median annual pay of USD 41,340 (median hourly wage USD 19.88). Annual wage percentiles are USD 31,200/35,760/41,340/48,410/58,790, within this detailed O*NET-SOC occupation 43-9021.00 itself. Percentiles are statistical positions, not individual quotations or take-home income. Occupational values for mainland China were not obtained; this page treats this as a gap without substituting industry averages or quotation samples.",
+                "answer": "The 2025 U.S. occupational median wage was $19.88 an hour and $41,340 a year. A Huainan data entry posting advertises CNY 2,200 per month and asks for high school or above. It does not name the system or detailed duties. A part-time Sonid Left Banner records posting combined scanning, cataloging, entry and quality checks. Base pay was CNY 2,600 per month both during and after probation. Piece-rate pay and an attendance award were listed separately for after probation. Check responsibilities and pay terms. These are two postings, not national wages.",
                 "id": "actors.faq.6",
                 "question": "How much does this occupation usually pay, and how should wages be compared?",
                 "question_key": "career.faq.data-entry-keyers.6",
                 "source_refs": [
-                  "oews"
+                  "r5-wages-current",
+                  "entry-huainan",
+                  "entry-sonid"
                 ]
               },
               {
-                "answer": "The US preparation level is Job Zone 1-2 (SVP below 6.0). The official education survey presents new-entrant requirements as some roles requiring high school diplomas or equivalents, some college experience, or associate or other two-year degrees, with no corresponding percentages published. Mainland Chinese roles mostly require spreadsheet and office software proficiency, and some relevant professional backgrounds or business experience; specifics follow the target organization's rules.",
+                "answer": "BLS lists a high school diploma or equivalent and short-term on-the-job training as typical. Practice field checks, correction logs and exception reporting with fictional records. Ask about the actual systems and access permissions.",
                 "id": "actors.faq.7",
                 "question": "What education does this occupation need, and how should one train?",
                 "question_key": "career.faq.data-entry-keyers.7",
                 "source_refs": [
-                  "onet"
+                  "r5-bls-current",
+                  "r5-onet-current"
                 ]
               },
               {
@@ -31026,12 +31003,14 @@
                 ]
               },
               {
-                "answer": "The O*NET summary and employment trends pages (based on BLS 2024–2034 projections, within this detailed occupation 43-9021.00) show approximately 141,600 people in 2024 and 104,900 in 2034, a decline projection label (-26%, label Decline), and approximately 9,500 average annual openings including replacements. The projection concerns total occupational employment. Work focuses on field entry and checking; check local industry structures, outsourcing and automation, prioritizing responsibility scope, system and data permissions, and payment and employment forms.",
+                "answer": "BLS projects U.S. employment for SOC 43-9021 to fall 25.5%, from about 131,800 in 2025 to 98,200 in 2035, with about 7,700 annual openings. Replacement openings can occur even as employment declines. The table does not isolate AI effects. When comparing adjacent roles, ask whether the main responsibility is data entry, records processing, exception review or written responses.",
                 "id": "actors.faq.10",
                 "question": "What else should I consider when choosing this occupation now?",
                 "question_key": "career.faq.data-entry-keyers.10",
                 "source_refs": [
-                  "bls"
+                  "r5-bls-current",
+                  "r5-onet-current",
+                  "entry-correspondence"
                 ]
               }
             ]
@@ -31272,21 +31251,19 @@
                 "url": "https://www.onetonline.org/link/summary/43-4071.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Supports employment and projection scopes for this occupation (this detailed category).",
-                  "Contains no mainland Chinese information and cannot replace mainland Chinese data.",
-                  "This round's verification: Old 2024–2034 consumers are retained. Authorized modules this round use 2025–2035 for the occupation itself at −25.5%, not the combined 43-9020."
+                  "BLS projects U.S. employment for SOC 43-9021 to fall 25.5%, from about 131,800 in 2025 to 98,200 in 2035, with about 7,700 annual openings. Replacement openings can occur even as employment declines. The table does not isolate AI effects."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
                 "limitation": "Old 2024–2034 consumers are retained. Authorized modules this round use 2025–2035 for the occupation itself at −25.5%, not the combined 43-9020.",
                 "market": "United States",
-                "name": "O*NET OnLine: Data Entry Keyers 43-9021.00 summary and employment trends (based on BLS 2024–2034 projections)",
-                "period": "2024–2034 projection period; retrieved 2026-09-19",
+                "name": "BLS projections for 43-9021, 2025–2035",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-9021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31661,16 +31638,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/43-9021.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "43-9021 itself: 131.8 → 98.2 thousand, −33.6 thousand/−25.5%, average annual openings 7.7 thousand, self-employment 1.6%. Not the combined 43-9020 decline of −27.6%. Typical high school/no related experience/short-term on-the-job training is not uniform law or no training. Projections do not establish causal shares for AI or outsourcing."
+                  "BLS projects U.S. employment for SOC 43-9021 to fall 25.5%, from about 131,800 in 2025 to 98,200 in 2035, with about 7,700 annual openings. Replacement openings can occur even as employment declines. The table does not isolate AI effects."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r5-bls-current",
                 "limitation": "43-9021 itself: 131.8 → 98.2 thousand, −33.6 thousand/−25.5%, average annual openings 7.7 thousand, self-employment 1.6%. Not the combined 43-9020 decline of −27.6%. Typical high school/no related experience/short-term on-the-job training is not uniform law or no training. Projections do not establish causal shares for AI or outsourcing.",
                 "market": "United States",
                 "name": "BLS table 1.2: 2025–2035 projections for data entry keyers",
-                "period": "2025 base period; 2025–2035 projections; retrieved 2026-10-09",
+                "period": "2025–2035",
                 "publisher": "Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31796,6 +31773,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Booth 003 lists one data entry clerk at CNY 2,200 per month and asks for high school or above. Detailed duties and systems are not stated."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "entry-huainan",
+                "limitation": "A historical posting, not a national wage estimate or current vacancy.",
+                "market": "Mainland China",
+                "name": "Huainan Zhenhua vocational training school: data entry clerk",
+                "period": "2025-11",
+                "publisher": "Huainan Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.huainan.gov.cn/rsrc/zpxx/551848848.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The ad lists four part-time records roles covering scanning, cataloging, entry, quality checks and confidentiality. Base pay is CNY 2,600 per month during probation and afterward, with piece rates and attendance pay listed after probation."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "entry-sonid",
+                "limitation": "A historical posting, not a national wage estimate or current vacancy.",
+                "market": "Mainland China",
+                "name": "Xilingol Shuode Information: records processing",
+                "period": "2026-03",
+                "publisher": "Sonid Left Banner Employment Service Center",
+                "scope": "recruitment_proxy",
+                "url": "https://www.sntzq.gov.cn/eportal/ui?articleKey=303012146b9c44b3bda5d0fe4ad363ef&columnId=46bb97808ed145f9b184a805c76fd8c2&pageId=9ad216e54bb34e19af670978c74511cf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Prepare responses and maintain correspondence records."
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "entry-correspondence",
+                "limitation": "Comparison occupation.",
+                "market": "United States",
+                "name": "Correspondence Clerks",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/43-4021.00"
               }
             ]
           },
@@ -34789,7 +34811,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (industry category scope)",
+              "城市/区间": "Mainland China data entry and records postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34801,13 +34823,14 @@
           "china_soc_row": "US code O*NET-SOC43-9021.00. This round obtained no directly comparable Chinese occupational wage scope.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-entry-huainan",
+            "posting-entry-sonid"
           ],
           "sources_note": "Use source links within their respective statistical or announcement scopes. Cite differing periods, survey populations and payment scopes separately, without converting between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect wages in this occupation?",
             "driver_heading": "How is data entry work scheduled by business batch and deadline?",
-            "official_heading": "Official statistical scopes and missing data notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Education and business backgrounds, role directions and explanations (editorial compilation, not wage statistics)",
             "scenario_heading": "Which data entry role directions correspond to different education and business backgrounds?",
             "scenario_interpretation_label": "Explanations and verification suggestions",
@@ -36742,7 +36765,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand data entry keyers' task interests and work preferences",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36856,19 +36879,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Explore my personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Understand my personality preferences"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Understand my Big Five traits"
+            "label": "Explore my Big Five traits"
           }
         ]
       },
@@ -37274,38 +37289,38 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 141,600 people (2024)",
+        "display_value": "131,800 people (2025)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment size (stock statistic)",
-        "occupation_scope": "The detailed Data Entry Keyers occupation (43-9021.00); employment for 2024 comes from O*NET summary and employment trends pages (based on BLS projections for 2024–2034).",
-        "period": "Base year 2024; retrieved 2026-09-19",
+        "measure": "U.S. employment (2025 base year)",
+        "occupation_scope": "U.S. SOC 43-9021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline -26% (2024–2034, labeled “Decline”)",
+        "display_value": "Decline of 25.5% (2025–2035)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Projected employment change (total employment in the occupation)",
-        "occupation_scope": "The detailed occupation 43-9021.00; the projected decline (-26%) is a total change over the projection period, not an individual's probability of being hired. Employment changes from approximately 141,600 people in 2024 to approximately 104,900 in 2034.",
-        "period": "2024–2034 projection period; retrieved 2026-09-19",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "U.S. SOC 43-9021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 9,500 openings (annual average for 2024–2034, including growth and replacement)",
+        "display_value": "7,700 per year (including replacement needs)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Average annual job openings (including growth and replacement)",
-        "occupation_scope": "The detailed occupation 43-9021.00; openings are an annual average for 2024–2034, including positions arising from growth and replacement. Replacement openings still exist when total employment declines; this is not the number of net new jobs each year.",
-        "period": "2024–2034 projection period; retrieved 2026-09-19",
+        "measure": "U.S. projected annual openings",
+        "occupation_scope": "U.S. SOC 43-9021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
@@ -37490,6 +37505,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Booth 003 lists one data entry clerk at CNY 2,200 per month and asks for high school or above. Detailed duties and systems are not stated.",
+        "fact_id": "posting-entry-huainan",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Huainan Zhenhua vocational training school: data entry clerk",
+        "period": "2025-11",
+        "source_refs": [
+          "entry-huainan"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The ad lists four part-time records roles covering scanning, cataloging, entry, quality checks and confidentiality. Base pay is CNY 2,600 per month during probation and afterward, with piece rates and attendance pay listed after probation.",
+        "fact_id": "posting-entry-sonid",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Xilingol Shuode Information: records processing",
+        "period": "2026-03",
+        "source_refs": [
+          "entry-sonid"
+        ]
       }
     ]
   },
@@ -37516,19 +37555,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projections (2024–2034, decline -26%, labeled “Decline”)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, approximately 141,600 people)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024–2034, approximately 9,500, including growth and replacement)"
+        "label": "U.S. projected annual openings"
       },
       {
         "availability": "missing",
@@ -37542,14 +37581,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Data Entry Keyers (O*NET-SOC 43-9021.00) operate data entry equipment to enter data from source documents into specified fields, verify accuracy, identify and correct errors, and maintain records and logs. Tasks cover compiling, sorting, and checking data before entry; comparing it with source documents or re-entering it in a verification format; reading source documents such as canceled checks, sales reports, or bills; entering data into specified fields or media such as disks and tapes; locating and correcting errors or reporting them to supervisors; storing completed documents; maintaining work logs; loading input and output media; and using cryptographic procedures to decipher garbled information. The scope of U.S. employment and wage figures needs clarification: approximately 141,600 people were employed in this occupation in 2024; employment is projected to decline in 2024–2034 (-26%, labeled “Decline”), with approximately 9,500 annual openings including replacement. The median annual wage in 2025 wage data is USD 41,340 (median hourly wage USD 19.88), and annual wage percentiles are USD 31,200/35,760/41,340/48,410/58,790. Industries are administrative and support services 17%/professional, scientific, and technical services 17%/health care and social assistance 11%/other industries (including finance and insurance and educational services) 55%. The interest code is CR and the preparation level is Job Zone 1-2. Also covered are the gap in occupation-level wages for comparable mainland China roles and control points for data verification, quality checks, permissions and audit trails, and exception escalation."
+      "text": "See how data entry keyers transcribe source records, check fields and escalate errors. Compare mainland China postings and U.S. job projections."
     },
     "title": {
       "availability": "available",
       "text": "Data Entry Keyers"
     }
   },
-  "source_content_sha256": "1bca24c5dac69707f4be1332b766a0fbc247a2a1fdc53340929367b31df95760",
+  "source_content_sha256": "ea91247c68b7a4d4cf8f03899e79cb3f35578e4a12cc2711273acc4bdbbfbf00",
   "subject": {
     "canonical_slug": "data-entry-keyers",
     "name": "Data Entry Keyers",

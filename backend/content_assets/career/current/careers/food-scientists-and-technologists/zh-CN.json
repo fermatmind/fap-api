@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-science-banan": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-science-xuanzhou": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -20127,60 +20133,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "id": "food-scientists-and-technologists.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-2"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "id": "food-scientists-and-technologists.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-3"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -20203,7 +20169,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -20231,7 +20197,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23750,13 +23716,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "统计项目｜2025BLS矩阵基期14,100含自雇，非OEWS受雇人数。本轮全国分位和职业分行业工资表未取得，不混旧13,060人数，也不从职业规模推未发布。"
+              "2025 年 BLS 就业预测基期约 14,100 人，含自雇；同年 5 月 OEWS 工资雇员估计为 13,060 人。两个统计项目覆盖不同。"
             ]
           },
           "id": "food-scientists-and-technologists.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet-details",
-            "bls-oews-methods"
+            "bls-projections-2025-35",
+            "oews-profile-2025"
           ],
           "type": "prose"
         }
@@ -23817,13 +23783,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "结论｜本职业与相邻职业的核心差别在「解决什么层级的问题、由谁判定与签认」：本职业综合化学与微生物与工程学解决食品加工与保存与包装与配送问题，并制定标准与规格与开发产品；微生物学家与化学家与生物化学家负责本学科的方法与机理与判定；食品科学技术员按标准方法执行检测；农业与食品科学技术员面向农业与原料与田间检测；质量控制分析员负责过程与体系审核。方法与判定权限与合规责任各不相同，不能跨岗位沿用结论与签认。"
+              "结论｜本职业与相邻职业的核心差别在「解决什么层级的问题、由谁判定与签认」：本职业综合化学与微生物与工程学解决食品加工与保存与包装与配送问题，并制定标准与规格与开发产品；微生物学家与化学家与生物化学家负责本学科的方法与机理与判定；食品科学技术员按标准方法执行检测；农业与食品科学技术员面向农业与原料与田间检测；质量控制分析员也做实验室质量检测。方法与判定权限与合规责任各不相同，不能跨岗位沿用结论与签认。"
             ]
           },
           "id": "food-scientists-and-technologists.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
             "internal-rubric",
-            "onet-summary"
+            "onet-summary",
+            "onet-qc-details"
           ],
           "type": "prose"
         },
@@ -26008,7 +25975,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜原登记第10百分位，本轮官方原表未取得待核；边界｜工资分布位置不是经验、学历、责任或个人达到该工资的概率。"
+              "口径｜美国全国工资第 10 百分位；边界｜工资分布位置不是经验、学历、责任或个人达到该工资的概率。"
             ]
           },
           "id": "food-scientists-and-technologists.china-salary.career-snapshot-primary-locale.10",
@@ -26120,12 +26087,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025矩阵14,100人，含自雇，本职业自雇5.7%；边界｜非OEWS受雇工资项目，不混旧13,060人数。"
+              "口径｜2025 年 BLS 预测基期约 14,100 人，含自雇；边界｜May 2025 OEWS 工资雇员估计为 13,060 人，两个统计项目覆盖不同。"
             ]
           },
           "id": "food-scientists-and-technologists.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet-details"
+            "bls-projections-2025-35",
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -26555,7 +26523,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "合同核对建议｜核基本工资、绩效、项目奖、股权、工时及福利，未取得职业样本，不称通常结构或学历职责对收入效果。"
+              "合同核对建议｜核基本工资、绩效、项目奖、股权、工时及福利，现有两则招聘不具代表性，不称通常结构或学历职责对收入效果。"
             ]
           },
           "id": "food-scientists-and-technologists.china-salary.career-snapshot-primary-locale.48",
@@ -26625,12 +26593,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "县域与下沉市场"
+              "大陆招聘样本"
             ]
           },
           "id": "food-scientists-and-technologists.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "science-banan",
+            "science-xuanzhou"
           ],
           "type": "prose"
         },
@@ -26639,12 +26608,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按城市或地区核验的本职业月薪数据；不以招聘报价、行业均值或他人转述代填。"
+              "重庆巴南一条食品研发员招聘列 4,000–4,500 元/月，做配方、工艺和样品试制；宣州调味料研发工程师列 15,000–18,000 元/月，要求能独立开发适合车间生产的产品。核对岗位是否要主导配方取舍、跟进放大和验证产品稳定性；两条招聘职责和资历不同，不能当成全国职业工资。"
             ]
           },
           "id": "food-scientists-and-technologists.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "science-banan",
+            "science-xuanzhou"
           ],
           "type": "prose"
         },
@@ -26774,7 +26744,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜原登记第10百分位，本轮官方原表未取得待核；边界｜工资分布位置不是经验、学历、责任或个人达到该工资的概率。"
+              "口径｜美国全国工资第 10 百分位；边界｜工资分布位置不是经验、学历、责任或个人达到该工资的概率。"
             ]
           },
           "id": "food-scientists-and-technologists.us-salary.career-snapshot-secondary-locale.12",
@@ -26886,12 +26856,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025矩阵14,100人，含自雇，本职业自雇5.7%；边界｜非OEWS受雇工资项目，不混旧13,060人数。"
+              "口径｜2025 年 BLS 预测基期约 14,100 人，含自雇；边界｜May 2025 OEWS 工资雇员估计为 13,060 人，两个统计项目覆盖不同。"
             ]
           },
           "id": "food-scientists-and-technologists.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet-details"
+            "bls-projections-2025-35",
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -26957,12 +26928,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2026-10-11已取正常May2025 Profiles本职业全国分位与行业表；雇员13060/RSE3.6%、均年95360/时45.85；年P10/P25/P50/P75/P90=52920/68810/88720/116650/145280，时=25.44/33.08/42.65/56.08/69.85。表中行业选列来自最高年中位行业表，非主要雇主排名或行业全职业工资；EP就业为另一项目，不用OEWS雇员数替换EP。保护Hero/FAQ共享历史事实另列冲突。"
+              "行业表只比较该职业在列出的行业中的估计；不代表行业全岗位的工资，也不是雇主数量排名。OEWS 的工资雇员与就业预测的覆盖范围不同。"
             ]
           },
           "id": "food-scientists-and-technologists.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "oews-profile-2025"
+            "oews-profile-2025",
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26971,13 +26943,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025中位88,720美元、时薪42.65已核；原分位52,920/68,810/116,650/145,280本轮官方表未取得待核，不能推地区雇主学历经验因果。"
+              "全国工资分位描述该职业的工资分布。第 50 分位是中位数，不是起薪。此处不将分位差归因于地区、经验或班次。"
             ]
           },
           "id": "food-scientists-and-technologists.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "bls-oews-methods",
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27074,12 +27045,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 6.2%（2025—2035，BLS 投影，经 O*NET 呈现）"
+              "美国 SOC 19-1012 的基期就业为 14,100 人，预计 2035 年为 14,900 人，2025–2035 年增长 6.2%、年均约 1,000 个空缺（含替补需求）。"
             ]
           },
           "id": "food-scientists-and-technologists.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27393,31 +27364,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "化学家方向",
@@ -29509,12 +29480,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘核对建议｜本页未取得具体招聘样本，不推全国发布或渠道规律。核日期、地点、主体、产品方法与法规范围、工时、学历培训、机构资质及个人授权。"
+              "两则历史招聘可用来核对具体岗位。求职时再看当前公告，确认工作地点、任务、工时和培训。两则样本不足以判断全国工资或招聘渠道。"
             ]
           },
           "id": "food-scientists-and-technologists.path.recruitment-sample.1",
           "source_refs": [
-            "internal-rubric"
+            "science-banan",
+            "science-xuanzhou"
           ],
           "title": "食品科学家与食品技术专家｜path",
           "type": "notice"
@@ -30853,13 +30825,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "预测矩阵含自雇，本职业5.7%；不同于OEWS受雇工资，不混旧13,060人数。"
+              "2025 年 BLS 就业预测基期约 14,100 人，含自雇；同年 5 月 OEWS 工资雇员估计为 13,060 人。两个统计项目覆盖不同。"
             ]
           },
           "id": "food-scientists-and-technologists.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet-details",
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -31526,7 +31498,7 @@
           "data": {
             "entries": [
               {
-                "answer": "按 O*NET-SOC 19-1012.00，本职业运用化学、微生物学、工程学与其他科学研究食品加工与变质的基本原理，分析食品成分以测定维生素、脂肪、糖与蛋白质含量，发现新食物来源，研究使加工食品安全、适口与健康的方法，并运用食品科学知识确定加工、包装、保存、储存与配送食品的最佳方式。工作包括研究结构与成分与储存与加工变化、制定食品标准与生产规格与安全与卫生与废弃物与水资源规范、检查原料与成品、开发新食品与新的保存与加工与包装与储存与配送方式、评估加工与储存并协助建立质量保证体系、跟踪法规与文献并与工艺与设备与包装与市场岗位协作。不含按既定方法执行的常规检测技术操作、生产设备操作、法规合规的最终判定与产品放行签字。",
+                "answer": "研究食品成分及其加工和储存变化，开发配方、工艺和保藏方案；也可能检查样品或参与质量验证。具体职责取决于产品与团队分工。常规检验和产品放行的权限要另看岗位及机构规定。",
                 "id": "food-scientists-and-technologists.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.food-scientists-and-technologists.q1",
@@ -31536,17 +31508,20 @@
                 ]
               },
               {
-                "answer": "食品科学技术员按既定标准方法执行理化与感官与微生物检测并提供可复核数据；微生物学家专注微生物学方法与机理与判定；化学家在化学学科内做分析方法与结论；生物化学家与生物物理学家在分子与细胞层面做机理研究；质量控制分析员负责过程与体系审核；农业与食品科学技术员面向农业与原料与田间检测。本职业综合多学科解决食品加工与保存与包装与配送问题并制定标准与工艺与产品方案，方法与判定与合规责任层级不同。",
+                "answer": "食品科学家与技术专家研究配方、加工和保藏；食品科学技术员按既定方法做检验和记录。微生物学家研究微生物，化学家关注物质及其反应。质量控制分析员也可能做原料、半成品和成品检测。比较职位时看产品、方法、由谁评估结果及签发报告。",
                 "id": "food-scientists-and-technologists.faq.2",
                 "question": "它和食品科学技术员、微生物学家、化学家有什么区别？",
                 "question_key": "career.faq.food-scientists-and-technologists.q2",
                 "source_refs": [
                   "onet-summary",
-                  "internal-rubric"
+                  "onet-qc-details",
+                  "onet-comparison-micro",
+                  "onet-comparison-chem",
+                  "onet-comparison-food"
                 ]
               },
               {
-                "answer": "2025 年中位年薪 88,720 美元（中位时薪 42.65 美元）；2024 年就业约 15,200 人（BLS 职业投影基期；OEWS May 2025 呈现约 13,060 人）；2024—2034 年预计增长远高于平均（约 7% 或更高），年均岗位空缺约 1,200 个（含替换需求，因职业规模很小绝对量有限）。上述为美国 O*NET/BLS 口径，不适用其他法域。",
+                "answer": "2025 年美国职业工资中位数为 42.65 美元/小时、88,720 美元/年。 美国 SOC 19-1012 的基期就业为 14,100 人，预计 2035 年为 14,900 人，2025–2035 年增长 6.2%、年均约 1,000 个空缺（含替补需求）。",
                 "id": "food-scientists-and-technologists.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.food-scientists-and-technologists.q3",
@@ -31556,13 +31531,13 @@
                 ]
               },
               {
-                "answer": "中国大陆未建立与本职业精确对应的公开职业工资统计。国家统计局按行业门类公布城镇单位就业人员平均工资（如制造业：城镇非私营 113,594 元/年、城镇私营 76,055 元/年），属行业口径、不区分职业，只能作为背景代理；本页在中国大陆部分保留「证据不足：」可见标记，不以行业均值、招聘报价或第三方估算代填。",
+                "answer": "重庆巴南一条食品研发员招聘列 4,000–4,500 元/月，做配方、工艺和样品试制；宣州调味料研发工程师列 15,000–18,000 元/月，要求能独立开发适合车间生产的产品。核对岗位是否要主导配方取舍、跟进放大和验证产品稳定性；两条招聘职责和资历不同，不能当成全国职业工资。",
                 "id": "food-scientists-and-technologists.faq.4",
                 "question": "中国大陆有对应的工资数据吗？",
                 "question_key": "career.faq.food-scientists-and-technologists.q4",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "science-banan",
+                  "science-xuanzhou"
                 ]
               },
               {
@@ -31586,13 +31561,14 @@
                 ]
               },
               {
-                "answer": "O*NET 显示新入职者中 82% 为学士学位、9% 为中学后证书、5% 为副学士或两年制学历，Job Zone 为第 4 级（SVP 7.0 至低于 8.0），通常需要数年的工作经验与在职培训；研究岗位常需硕士或博士。实际以雇主招聘条件为准。",
+                "answer": "BLS 把美国该职业典型入行学历列为学士。大陆两条招聘分别是研发员和独立开发工程师，核对专业、已有产品经验与从小试到车间的实际分工。",
                 "id": "food-scientists-and-technologists.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.food-scientists-and-technologists.q7",
                 "source_refs": [
-                  "onet-summary",
-                  "bls-projections-2025-35"
+                  "bls-projections-2025-35",
+                  "science-banan",
+                  "science-xuanzhou"
                 ]
               },
               {
@@ -31616,7 +31592,7 @@
                 ]
               },
               {
-                "answer": "美国口径下 2024—2034 年预计增长远高于平均（约 7% 或更高），空缺含替换需求但因职业规模很小绝对量有限；预测不等于个人机会，实际机会取决于本地食品与研发行业结构与实验自动化程度。可转向微生物学家、化学家、生物化学家与生物物理学家、食品科学技术员、农业与食品科学技术员与质量控制分析员等相邻岗位（需重新学习方法与标准），或转向质量与法规或工艺与设备工程或学术研究。",
+                "answer": "美国 SOC 19-1012 的基期就业为 14,100 人，预计 2035 年为 14,900 人，2025–2035 年增长 6.2%、年均约 1,000 个空缺（含替补需求）。 偏好按规程取样、检测和记录，可以另比食品科学技术员。更想研究配方或保藏机理时，可关注食品研发与食品微生物方向，并核对岗位所需技能。",
                 "id": "food-scientists-and-technologists.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.food-scientists-and-technologists.q10",
@@ -31672,15 +31648,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮2026-10-11核O*NET19-1012任务、情境、学历问题、IRC与工资中位，BLS2025—2035精确行，OEWS方法、NBS行业代理、OSHA实验室化学及危险能量范围。原共享旧预测保留保护冲突，分位已补核，不继承历史复核结论。 2026-10-11追加正常May2025 Profiles全国五分位与精确行业选列，原访问受限已解除。"
+              "任务以 O*NET 为参照。BLS 分别发布美国工资分布和就业预测；大陆行业工资与招聘样本另列。"
             ]
           },
           "id": "food-scientists-and-technologists.sources.source-card.3",
           "source_refs": [
-            "onet-details",
-            "bls-oews-methods",
-            "internal-rubric",
-            "oews-profile-2025"
+            "onet-summary",
+            "bls-oews-2025",
+            "bls-projections-2025-35",
+            "science-banan",
+            "science-xuanzhou"
           ],
           "type": "prose"
         },
@@ -31689,7 +31666,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "当前保留缺口：中国大陆精确职业与地区工资就业、具体招聘及AI采用因果未取得。美国本职全国五分位与明确行业工资已补核；旧宽泛行业场景没有据此取得合并工资，改为官方明确类别选列。共享来源元数据、Hero事实与FAQ保护冲突列报告，本次不等全页统一或独立验收。"
+              "美国全国工资分位和分行业资料分别使用。大陆招聘说明个别岗位当时的条件；缺少可比的全国职业工资与就业统计。"
             ]
           },
           "id": "food-scientists-and-technologists.sources.source-card.4",
@@ -31716,18 +31693,6 @@
                 "id": "navigation-1",
                 "relation": "related-evidence",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
-              },
-              {
-                "entity": "MBTI（英文）",
-                "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（英文）",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI（中文）",
@@ -31797,17 +31762,16 @@
                 "url": "https://www.onetonline.org/link/details/19-1012.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "表中 19-1012 行：2024 年就业约 15.2 千，增长远高于平均（约 7% 或更高），年均空缺约 1.2 千。",
-                  "预测是职业层面的统计口径，不是个人录用概率。"
+                  "美国 SOC 19-1012 的基期就业为 14,100 人，预计 2035 年为 14,900 人，2025–2035 年增长 6.2%、年均约 1,000 个空缺（含替补需求）。"
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
                 "limitation": "不得把预测增量或年均空缺直接解释为个人收入或录用保证。",
                 "market": "US",
-                "name": "U.S. Bureau of Labor Statistics：2024—2034 Occupational Projections and Characteristics",
-                "period": "2024—2034",
+                "name": "BLS：职业预测表1.2（2025–2035）",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "19-1012 Food Scientists and Technologists",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31826,7 +31790,7 @@
                 "period": "May 2025 OEWS",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "19-1012 Food Scientists and Technologists",
-                "url": "https://www.bls.gov/news.release/archives/ocwage_05152026.pdf"
+                "url": "https://www.onetonline.org/link/localwages/19-1012.00"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31981,6 +31945,81 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "食品研发员1名、4,000–4,500元/月；大专及以上、1–3年相关经历，做配方开发、工艺研发和样品试制。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "science-banan",
+                "limitation": "仅该岗位和招聘批次；不代表全国工资或当前空缺。",
+                "market": "中国大陆",
+                "name": "重庆顿恒餐饮：食品研发员",
+                "period": "2026-03",
+                "publisher": "重庆市巴南区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.cqbn.gov.cn/zwgk_252/zfxxgkml/rszk/bflc/202603/t20260330_15577375.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "公开报价15,000–18,000元/月。要求熟悉食品配方工艺和香精或调味料应用，能按客户需求独立做出适合车间生产的产品。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "science-xuanzhou",
+                "limitation": "仅该岗位和招聘批次；不代表全国工资或当前空缺。",
+                "market": "中国大陆",
+                "name": "安徽天韵：食品调味料研发工程师",
+                "period": "2026",
+                "publisher": "安徽省宣城市宣州区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.xuanzhou.gov.cn/OpennessContent/show/3808983.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "微生物学家"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "onet-comparison-micro",
+                "limitation": "美国职责参照",
+                "market": "美国",
+                "name": "微生物学家",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/19-1022.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "化学家"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "onet-comparison-chem",
+                "limitation": "美国职责参照",
+                "market": "美国",
+                "name": "化学家",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/19-2031.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "相邻食品科学职业"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "onet-comparison-food",
+                "limitation": "美国职责参照",
+                "market": "美国",
+                "name": "相邻食品科学职业",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/19-4013.00"
               }
             ]
           },
@@ -34853,6 +34892,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-science-banan",
+            "posting-science-xuanzhou"
+          ],
           "sources_note": {
             "$item": "food-scientists-and-technologists.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34862,7 +34905,7 @@
           "ui": {
             "ai_heading": "AI 会影响食品科学家与食品技术专家的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "食品科学家与食品技术专家在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36645,7 +36688,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "开始核对食品科学家与食品技术专家是否适合你",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36719,30 +36762,10 @@
               "$link": "food-scientists-and-technologists.navigation.links.1",
               "block": "navigation",
               "copy_key": "career.item.navigation-links",
-              "entry": "navigation-2",
-              "field": "url"
-            },
-            "label": "MBTI（英文）"
-          },
-          {
-            "href": {
-              "$link": "food-scientists-and-technologists.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-3",
-              "field": "url"
-            },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "food-scientists-and-technologists.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "了解我的人格偏好"
           },
           {
             "href": {
@@ -36752,7 +36775,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "了解我的大五特质"
           }
         ]
       },
@@ -36951,36 +36974,36 @@
       },
       {
         "derivation": null,
-        "display_value": "约 15,200 人（2024，BLS 职业投影基期，经 O*NET 呈现；OEWS 呈现口径约 13,060 人）",
+        "display_value": "14,100 人（2025 年）",
         "fact_id": "us-employment-2025",
         "market": "US",
-        "measure": "就业规模",
-        "occupation_scope": "食品科学家与食品技术专家；19-1012.00",
-        "period": "2025",
+        "measure": "基期就业",
+        "occupation_scope": "U.S. SOC 19-1012",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "增长 远高于平均（约 7% 或更高，2024—2034，BLS 投影，经 O*NET 呈现）",
+        "display_value": "增长 6.2%（2025–2035 年）",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
-        "measure": "就业增长率",
-        "occupation_scope": "食品科学家与食品技术专家；19-1012.00",
-        "period": "2024—2034",
+        "measure": "就业变化率",
+        "occupation_scope": "U.S. SOC 19-1012",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均岗位空缺约 1,200 个（2024—2034，含替换需求）",
+        "display_value": "1,000 个/年（含替补需求）",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
         "measure": "年均职位空缺",
-        "occupation_scope": "食品科学家与食品技术专家；19-1012.00",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. SOC 19-1012",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -37140,6 +37163,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "食品研发员1名、4,000–4,500元/月；大专及以上、1–3年相关经历，做配方开发、工艺研发和样品试制。",
+        "fact_id": "posting-science-banan",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "重庆顿恒餐饮：食品研发员",
+        "period": "2026-03",
+        "source_refs": [
+          "science-banan"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "公开报价15,000–18,000元/月。要求熟悉食品配方工艺和香精或调味料应用，能按客户需求独立做出适合车间生产的产品。",
+        "fact_id": "posting-science-xuanzhou",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "安徽天韵：食品调味料研发工程师",
+        "period": "2026",
+        "source_refs": [
+          "science-xuanzhou"
+        ]
       }
     ]
   },
@@ -37166,19 +37213,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国就业规模（2024 投影基期）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均空缺（2024—2034）"
+        "label": "美国预计年均职位空缺（2025–2035 年）"
       },
       {
         "availability": "available",
@@ -37192,14 +37239,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "食品科学家与食品技术专家做什么、如何入行、工作边界与发展方向。基于官方职业资料，区分职业统计、行业代理和资格缺口。"
+      "text": "食品科学家怎样从配方试验走到中试和生产？比较大陆研发招聘、美国就业及检验技术岗的分工。"
     },
     "title": {
       "availability": "available",
       "text": "食品科学家与食品技术专家"
     }
   },
-  "source_content_sha256": "eadbfd0a38187562f4aaffbd3bacebce7c4a2e0e3edf1df9606d48ae5b35b72f",
+  "source_content_sha256": "0b8dbcb35b63bfa223629685ecb16812c4ad7c7d3c0019d182ee11689440953d",
   "subject": {
     "canonical_slug": "food-scientists-and-technologists",
     "name": "食品科学家与食品技术专家",

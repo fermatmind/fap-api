@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "This work turns materials, patterns and specifications into verifiable cut pieces or slit products. You can first observe whether you can consistently check dimension units, batch numbers, pattern numbers and quantities, and keep the original data and ask for re-checking when you find inconsistencies. Real fit also requires checking equipment, shifts, standing and protection conditions; liking handicraft work alone is not enough to judge."
+              "Paper check | Compare a fictional cutting order with its layout file. Find a size assigned an older pattern and record the revision to check. "
             ]
           },
           "id": "textile-cutting-machine-setters-operators-and-tenders.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24819,13 +24818,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Textile cutting machine setters, operators and tenders set up, operate or tend machines that cut textiles, process material to a pattern or specified dimensions, monitor the process, inspect products and record work completed, settings and anomalies."
+              "Textile cutting machine operators set up jobs from patterns or digital layouts, inspect the size and shape of cut pieces, and report pattern discrepancies at handoff. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "textile-cutting-machine-setters-operators-and-tenders.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-6062.00"
           ],
           "type": "prose"
         }
@@ -25479,13 +25477,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Text tools can assist with drafts of specification and re-inspection records, while equipment control and quality approval still require trained and authorized personnel. The BLS 2025—2035 overall projection for this occupation shows a 13.6% decline and about 900 annual openings including replacements; these cannot be attributed to AI alone, and this page still has no job-level AI adoption rate, substitution rate or personal unemployment probability. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional cutting order with its layout file. Find a size assigned an older pattern and record the revision to check."
             ]
           },
           "id": "textile-cutting-machine-setters-operators-and-tenders.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial",
-            "nist"
+            "transfer-onet-51-6062.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32856,6 +32854,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-6062.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-6062.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-6062.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38329,10 +38354,10 @@
       "text": "Textile cutting machine setters, operators and tenders"
     }
   },
-  "source_content_sha256": "7530dfdcd22c954c540ce27756a379b7a187cbf810c2d37155a4fd2b42d7fb45",
+  "source_content_sha256": "2e5ed978983178c21f048b7d6685c6e45d38d42dde7048bf39888e7a9ed1fd90",
   "subject": {
     "canonical_slug": "textile-cutting-machine-setters-operators-and-tenders",
     "name": "Textile cutting machine setters, operators and tenders",
-    "summary": "Set up, operate or tend machines that cut textiles, producing cut pieces or slit products to patterns and specifications, monitoring the run, inspecting dimensions and quantities and recording settings and anomalies. The US occupational identity of this page is 51-6062.00; the related Chinese trade, equipment training and employer requirements are checked separately, and the paper experience does not replace safety training or machine operation authorization."
+    "summary": "Textile cutting machine operators set up jobs from patterns or digital layouts, inspect the size and shape of cut pieces, and report pattern discrepancies at handoff."
   }
 }

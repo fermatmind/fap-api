@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-layout-beijing": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-layout-shanghai": {
+        "status": "pending_mapping"
       },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
@@ -26185,12 +26191,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable occupational-level wage statistics for publishing and prepress layout positions in mainland China were obtained in this round; quotes from individual companies and recruitment platforms cannot represent the national level"
+              "A Beijing Shijingshan layout posting quoted CNY 4,000–7,000 per month for publication layout and prepress checks. A Shanghai Baoshan prepress engineer posting quoted combined pay of CNY 10,000–15,000 per month for duties including checking files, imposition and output. These different roles do not establish national layout pay."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "layout-beijing",
+            "layout-shanghai"
           ],
           "type": "prose"
         },
@@ -30957,7 +30964,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Desktop publishers use computer software to format and lay out manuscripts and graphic elements to produce material that can be used directly for publication: studying page or design instructions to determine the work and order of operations, importing text and art elements, keying in text and selecting type size, font style, column width and spacing, producing sample page layouts for approval, using pixel or bitmap editing, painting, masking and retouching to process graphics and photos, entering image coordinates and color specifications for retouching and color correction, selecting the number of colors and determining separations, checking preliminary and final proofs and correcting errors, converting files into formats for print or the internet, and delivering masters to printers and filing version records.",
+                "answer": "Turn copy, images and styles into proofable layouts. Check pagination, overflow, images and output settings, revise after review and keep versions. Editing and press operation depend on the assignment.",
                 "id": "actors.faq.1",
                 "question": "What does a desktop publisher actually do every day?",
                 "question_key": "career.faq.desktop-publishers.1",
@@ -30966,37 +30973,30 @@
                 ]
               },
               {
-                "answer": "This occupation designs pages, graphics and text and proofs; graphic designers focus on commercial visual concepts, and art directors coordinate direction and the team. The positions overlap, and authority over concepts, text changes and release is verified by project authorization, not excluded by occupation title.",
+                "answer": "Desktop publishers prepare deliverable layouts. Editors make content and language decisions; prepress roles prepare production output and check imposition and printing requirements. Ask who owns revisions and final approval.",
                 "id": "actors.faq.2",
-                "question": "What is the difference between this occupation and a graphic designer?",
+                "question": "How do desktop publishing, editing and prepress differ?",
                 "question_key": "career.faq.desktop-publishers.2",
                 "source_refs": [
-                  "onet",
-                  "employer",
-                  "agent",
-                  "teacher"
+                  "onet"
                 ]
               },
               {
-                "answer": "Under the older O*NET 2024—2034 scope, employment is about 5,000 people with about 400 annual average openings; under the new BLS 2025—2035 scope the base period is 4,600 and the end period 4,000, a decline of 14%, with about 300 annual average openings all coming from replacement. The different periods are presented separately; this is an overall employment projection, not AI attribution and not an individual probability of being hired. Insufficient evidence: the AI adoption effects for this occupation and a verifiable SOC exposure mapping were not obtained in this round, and a substitution ratio cannot be derived from the decline in the total.",
+                "answer": "BLS Table 1.2 projects a 14.5% employment decline from 2025 to 2035. The projection does not measure how much change comes from AI. In an actual job, ask who owns template work, complex layouts, proof revisions and output checks.",
                 "id": "actors.faq.3",
-                "question": "How will AI and automation affect desktop publishers?",
+                "question": "Does the U.S. employment projection measure AI displacement?",
                 "question_key": "career.faq.desktop-publishers.3",
                 "source_refs": [
-                  "employer",
-                  "onet-trends",
-                  "sag"
+                  "r5-bls-current"
                 ]
               },
               {
-                "answer": "The official tasks for this occupation include designing page layouts, checking and correcting proofs, processing images, converting files and adding audio and animation to electronic publications. Templates and pre-checks can serve as editorial exercises with clearly stated conditions, and whether specific software functions use AI must be checked in the implementation documentation; occupational tasks and context percentages do not prove adoption.",
+                "answer": "Software may assist version checks, layout or document retrieval. People verify accuracy, access and final outputs. This page does not measure AI adoption, gains or replacement.",
                 "id": "actors.faq.4",
-                "question": "Which technical changes have evidence and which do not?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.desktop-publishers.4",
                 "source_refs": [
-                  "onet",
-                  "employer",
-                  "sag-moa"
+                  "onet"
                 ]
               },
               {
@@ -31009,14 +31009,14 @@
                 ]
               },
               {
-                "answer": "In 2025 the median annual wage for this occupation in the United States is 55,290 USD, with the quintiles listed separately. OEWS is pretax wage for the usual hours of the employed, including production bonuses and commissions, excluding overtime premiums, shift differentials, nonproduction bonuses and the self-employed; individual take-home income cannot be calculated from percentiles. Insufficient evidence: no precise occupational wage for mainland China was obtained in this round; an annual average reference for the culture, sports and entertainment industry exists but cannot be used to fill in.",
+                "answer": "The May 2025 U.S. median wage was $26.58 per hour and $55,290 per year. A Beijing Shijingshan layout posting quoted CNY 4,000–7,000 per month for publication layout and prepress checks. A Shanghai Baoshan prepress engineer posting quoted combined pay of CNY 10,000–15,000 per month for duties including checking files, imposition and output. These different roles do not establish national layout pay.",
                 "id": "actors.faq.6",
                 "question": "How much do desktop publishers generally earn, and how should it be compared?",
                 "question_key": "career.faq.desktop-publishers.6",
                 "source_refs": [
-                  "r2-pay-3",
-                  "r2-pay-2",
-                  "r2-pay-1"
+                  "onet",
+                  "layout-beijing",
+                  "layout-shanghai"
                 ]
               },
               {
@@ -31056,16 +31056,12 @@
                 ]
               },
               {
-                "answer": "Under the older O*NET 2024—2034 scope, employment is about 5,000 people with about 400 annual average openings; under the new BLS 2025—2035 scope the base period is 4,600 and the end period 4,000, a decline of 14%, with about 300 annual average openings all coming from replacement. The different periods are presented separately; this is an overall employment projection, not AI attribution and not an individual probability of being hired. In China, verify qualification registration, examination and prepress recognition separately according to the applicable unit; also verify fees, revisions and overtime in the contract, and hiring cannot be inferred from wage percentiles.",
+                "answer": "BLS projects U.S. employment for 43-9031 to move from about 4,600 in 2025 to 4,000 in 2035 (−14.5%), with about 300 annual openings including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing this direction now?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.desktop-publishers.10",
                 "source_refs": [
-                  "employer",
-                  "onet-trends",
-                  "cn-register",
-                  "cn-rule",
-                  "nbs"
+                  "r5-bls-current"
                 ]
               }
             ]
@@ -31527,7 +31523,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Supports the occupational definition, tasks, interest code, skills and work context on this page.",
                   "Category data is not treated as a conclusion about individual capability.",
@@ -31541,7 +31537,7 @@
                 "period": "Page updated 2026; 2024 employment and 2024—2034 projection; retrieved 2026-09-19",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-9031.00"
+                "url": "https://www.onetonline.org/link/details/43-9031.00"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -31805,16 +31801,16 @@
                 "url": "https://www.onetonline.org/link/localtrends/43-9031.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "United States 43-9031, this occupation 2025 4,600→2035 4,000; BLS Table 1.2 shows a decline of 14.5%, OOH shows a decline of 14%, and the O*NET trend page a decline of 15%, preserving the precision of each source. The official net decrease is 700 people and is not superseded by the 600 obtained by subtracting the rounded endpoints; the annual average openings of 300 all come from replacement, not net growth. The overall projection does not equal a net AI effect or an individual probability of being hired, and no unrounded base figures were obtained in this round to explain the different presentations. Self-employed 19.8%. BLS typical entry-level associate degree, about 1 month of on-the-job training; those with experience and software proficiency may not hold a college degree, and some employers prefer a bachelor's degree. The None for related experience in Table 1.2 is a typical classification and does not exempt skills testing; the 1—2 years of O*NET Job Zone Three is an occupational group preparation description, not a uniform term for this occupation."
+                  "BLS projects U.S. employment for 43-9031 to move from about 4,600 in 2025 to 4,000 in 2035 (−14.5%), with about 300 annual openings including replacements."
                 ],
                 "evidence_type": "official source",
                 "id": "r5-bls-current",
                 "limitation": "United States 43-9031, this occupation 2025 4,600→2035 4,000; BLS Table 1.2 shows a decline of 14.5%, OOH shows a decline of 14%, and the O*NET trend page a decline of 15%, preserving the precision of each source. The official net decrease is 700 people and is not superseded by the 600 obtained by subtracting the rounded endpoints; the annual average openings of 300 all come from replacement, not net growth. The overall projection does not equal a net AI effect or an individual probability of being hired, and no unrounded base figures were obtained in this round to explain the different presentations. Self-employed 19.8%. BLS typical entry-level associate degree, about 1 month of on-the-job training; those with experience and software proficiency may not hold a college degree, and some employers prefer a bachelor's degree. The None for related experience in Table 1.2 is a typical classification and does not exempt skills testing; the 1—2 years of O*NET Job Zone Three is an occupational group preparation description, not a uniform term for this occupation.",
                 "market": "United States",
                 "name": "BLS Table 1.2 desktop publishing occupational projection and training classification",
-                "period": "Actually checked 2026-10-09",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32105,6 +32101,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Two positions at CNY 4,000–7,000 per month, including magazine and book layout and prepress checks."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "layout-beijing",
+                "limitation": "Historical posting, not national statistics or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Beijing Xierai Printing: layout",
+                "period": "2023-02",
+                "publisher": "Beijing Shijingshan Human Resources and Social Security",
+                "scope": "recruitment_proxy",
+                "url": "https://www.bjsjs.gov.cn/gongkai/zwgkpd/zdly_1960/gkzp_1969/202303/t20230321_68057_sjs.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One position with combined pay of CNY 10,000–15,000 per month, covering preflight, conversion, imposition and output. An adjacent role."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "layout-shanghai",
+                "limitation": "Historical posting, not national statistics or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Shanghai Baoshan posting: prepress engineer",
+                "period": "2025-11",
+                "publisher": "Shanghai Municipal Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shanghai.gov.cn/nw17239/20251121/13d34e4c22e541f2b196606cfd180ae0.html"
               }
             ]
           },
@@ -35104,7 +35130,7 @@
               }
             },
             {
-              "城市/区间": "Individual companies and job quotes (cannot replace the national scope)",
+              "城市/区间": "Mainland China historical job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -35116,13 +35142,14 @@
           "china_soc_row": "Mainland China salary scope",
           "edu": "Qualification and training are covered in the entry module",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-layout-beijing",
+            "posting-layout-shanghai"
           ],
           "sources_note": "Source links are used according to their respective scope of application.",
           "ui": {
             "ai_heading": "Will AI and automation directly change the income of desktop publishers?",
             "driver_heading": "What should be verified when discussing pay for similar positions in mainland China?",
-            "official_heading": "Official scope and statistical gaps in mainland China",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Comparison of pay methods and statistical boundaries",
             "scenario_heading": "Can the pay methods of similar positions in mainland China be compared directly?",
             "scenario_interpretation_label": "Scope of application and gaps",
@@ -35808,7 +35835,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/graphic-designers",
+            "target_href": "/en/career/jobs/graphic-designers",
             "target_slug": "graphic-designers",
             "target_title": "Graphic designer: differences in duties from this occupation",
             "transition_distance": {
@@ -35831,7 +35858,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/art-directors",
+            "target_href": "/en/career/jobs/art-directors",
             "target_slug": "art-directors",
             "target_title": "Art director: differences in the scope of decisions from this occupation",
             "transition_distance": {
@@ -35854,7 +35881,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/editors",
+            "target_href": "/en/career/jobs/editors",
             "target_slug": "editors",
             "target_title": "Editor: differences in duties from this occupation",
             "transition_distance": {
@@ -35877,7 +35904,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/proofreaders-and-copy-markers",
+            "target_href": "/en/career/jobs/proofreaders-and-copy-markers",
             "target_slug": "proofreaders-and-copy-markers",
             "target_title": "Proofreaders and copy markers: differences in duties from this occupation",
             "transition_distance": {
@@ -35900,7 +35927,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/printing-press-operators",
+            "target_href": "/en/career/jobs/printing-press-operators",
             "target_slug": "printing-press-operators",
             "target_title": "Printing press operators: differences in craft from this occupation",
             "transition_distance": {
@@ -35923,7 +35950,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/print-binding-and-finishing-workers",
+            "target_href": "/en/career/jobs/print-binding-and-finishing-workers",
             "target_slug": "print-binding-and-finishing-workers",
             "target_title": "Print binding and finishing workers: differences in craft from this occupation",
             "transition_distance": {
@@ -35946,7 +35973,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/web-developers",
+            "target_href": "/en/career/jobs/web-developers",
             "target_slug": "web-developers",
             "target_title": "Web developers: differences in technology and duties from this occupation",
             "transition_distance": {
@@ -35969,7 +35996,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/multimedia-artists-and-animators",
+            "target_href": "/en/career/jobs/multimedia-artists-and-animators",
             "target_slug": "multimedia-artists-and-animators",
             "target_title": "Multimedia artists and animators: differences in skills from this occupation",
             "transition_distance": {
@@ -36057,7 +36084,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -36106,7 +36133,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -36155,7 +36182,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36204,7 +36231,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36253,7 +36280,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36302,7 +36329,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36924,7 +36951,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of desktop publishers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37045,11 +37072,11 @@
             "label": "Big Five personality trait exploration (English)"
           },
           {
-            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
             "label": "MBTI personality preference exploration (Chinese)"
           },
           {
-            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "href": "/en/tests/big-five-personality-test-ocean-model",
             "label": "Big Five personality trait exploration (Chinese)"
           }
         ]
@@ -37455,42 +37482,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 5,000 people (2024, O*NET summary page scope)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "4,600 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment scale (stock statistic)",
-        "occupation_scope": "Scope of this occupation (43-9031.00); not entirely the same population as the wage statistics; digitalization and changes in content formats affect the actual number, and the BLS Occupational Outlook 2025 scope is 4,600 positions, so the two have different base periods and coverage",
-        "period": "2024 base period; retrieved 2026-09-19",
+        "occupation_scope": "US exact SOC 43-9031",
+        "period": "2025",
         "source_refs": [
-          "onet-trends",
-          "employer"
+          "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Employment decline (2024—2034, marked as -1% or lower on the O*NET summary page)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "−14.5%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "Scope of this occupation, projection period 2024—2034; this projection is a change in the occupational total, not an individual probability of being hired; the BLS Occupational Outlook 2025—2035 scope is -14%, with a different base period and period and a consistent direction",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "US exact SOC 43-9031",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends",
-          "employer"
+          "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 400 per year (older 2024—2034 projection period, including replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "300 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Projected annual job openings (including replacement)",
-        "occupation_scope": "Under the older O*NET 2024—2034 scope, employment is about 5,000 people with about 400 annual average openings; under the new BLS 2025—2035 scope the base period is 4,600 and the end period 4,000, a decline of 14%, with about 300 annual average openings all coming from replacement. The different periods are presented separately; this is an overall employment projection, not AI attribution and not an individual probability of being hired",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "US exact SOC 43-9031",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends",
-          "employer"
+          "r5-bls-current"
         ]
       },
       {
@@ -37543,44 +37567,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "4,600 people (2025; projected 4,000 in 2035)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "4,600 jobs (2025)",
         "fact_id": "r5-current-employment",
         "market": "United States",
         "measure": "Employment stock for this occupation",
-        "occupation_scope": "Includes the self-employed, not an employed wage sample.",
-        "period": "2025 base period / 2025—2035 projection; checked 2026-10-09",
+        "occupation_scope": "US exact SOC 43-9031",
+        "period": "2025",
         "source_refs": [
-          "r5-bls-current",
-          "r5-trends-current"
+          "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Decline of 14.5% (BLS table); OOH shows 14% and the O*NET trend 15%; official net decrease 700",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "−14.5%",
         "fact_id": "r5-current-growth",
         "market": "United States",
         "measure": "Projected change for this occupation",
-        "occupation_scope": "The display precision of each source is retained; the 600 difference between the rounded endpoints does not override the official 700; this is not AI causation.",
-        "period": "2025—2035; checked 2026-10-09",
+        "occupation_scope": "US exact SOC 43-9031",
+        "period": "2025–2035",
         "source_refs": [
-          "r5-bls-current",
-          "r5-bls-ooh",
-          "r5-trends-current"
+          "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "300 per year (2025—2035, all from replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "300 annually (including replacements)",
         "fact_id": "r5-current-openings",
         "market": "United States",
         "measure": "Annual average openings for this occupation",
-        "occupation_scope": "Annual average, not a ten-year total or net growth.",
-        "period": "2025—2035; checked 2026-10-09",
+        "occupation_scope": "US exact SOC 43-9031",
+        "period": "2025–2035",
         "source_refs": [
-          "r5-bls-current",
-          "r5-bls-ooh",
-          "r5-trends-current"
+          "r5-bls-current"
         ]
       },
       {
@@ -37630,6 +37649,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Two positions at CNY 4,000–7,000 per month, including magazine and book layout and prepress checks.",
+        "fact_id": "posting-layout-beijing",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Beijing Xierai Printing: layout",
+        "period": "2023-02",
+        "source_refs": [
+          "layout-beijing"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One position with combined pay of CNY 10,000–15,000 per month, covering preflight, conversion, imposition and output. An adjacent role.",
+        "fact_id": "posting-layout-shanghai",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Shanghai Baoshan posting: prepress engineer",
+        "period": "2025-11",
+        "source_refs": [
+          "layout-shanghai"
+        ]
       }
     ]
   },
@@ -37656,19 +37699,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "United States overall employment projection (older 2024—2034, decline; not AI attribution)"
+        "label": "U.S. projected employment change (2025–2035): −14.5%"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "United States employment (2024, about 5,000 people)"
+        "label": "U.S. employment (2025): 4,600 jobs"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "United States projected annual openings (older 2024—2034, about 400, including replacement)"
+        "label": "U.S. projected annual openings: 300 (including replacements)"
       },
       {
         "availability": "missing",
@@ -37682,17 +37725,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Desktop Publishers (O*NET-SOC 43-9031.00) use computer software to lay out manuscripts and graphic elements and produce material that can be used directly for publication: reading design specifications and layout instructions, importing text and art elements, selecting type size and font style and column width and spacing, producing sample page layouts, processing graphics and photos with retouching and color correction, selecting the number of colors and determining separations, checking proofs page by page and correcting them, and converting files into formats for print or the internet and delivering masters to printers. The work is mainly indoors in front of a computer, with frequent email and communication (100% every day), continuous sitting 74%, time pressure 64% every day, and precision or accuracy being very important 30%. United States scope: in the 2025 wage data the median annual wage is 55,290 USD (median hourly 26.58 USD), with annual percentiles of 35,680 / 43,730 / 55,290 / 73,840 / 96,170 USD; 2024 employment is about 5,000 people, a decline is projected for 2024—2034 with about 400 projected openings; the interest code is CAR. Mainland China: for professional publishing technical work you may take the professional qualification examination for publishing professionals, and the prepress and plate-making direction corresponds to the prepress processing and production operator occupational skill level (level five to level one, requiring normal color vision with no color blindness or color weakness); public statistics have not established an occupational-level wage scope for this occupation, and this page marks the gap in the relevant places."
+      "text": "Explore desktop publishing work in layout, proofs and file delivery. Compare mainland China postings, U.S. wages and prepress duties."
     },
     "title": {
       "availability": "available",
       "text": "Desktop Publishers"
     }
   },
-  "source_content_sha256": "c7fe5ae7330569bbf610a8eb9930a35b5888fedeea48c366222116baef7b449f",
+  "source_content_sha256": "4be4516972d4f2e266e03ef1409acd38b762fc5c46158c5a288c146e46057993",
   "subject": {
     "canonical_slug": "desktop-publishers",
     "name": "Desktop Publishers",
-    "summary": "Desktop publishers (43-9031.00) use software to design and lay out graphics and text, check and correct proofs and convert delivery files. In the United States the May 2025 median annual wage is 55,290 USD; the older 2024—34 annual average openings are 400, while the new 2025—35 employment declines by 14% with 300 annual average openings, and the overall projection is not AI attribution. In China, qualification registration applies to the listed publishing professional work, and responsible editors must also have intermediate or above qualifications and be registered; prepress skill recognition is verified separately. Chinese industry annual average references are shown in the salary section split into private and non-private. Precise occupational wages and occupational AI adoption effects were not obtained."
+    "summary": "Turn copy, images and styles into proofable layouts. Check pagination, overflow, images and output settings, revise after review and keep versions. Editing and press operation depend on the assignment."
   }
 }

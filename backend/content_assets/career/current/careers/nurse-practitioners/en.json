@@ -194,6 +194,9 @@
       "item:nurse-practitioners.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:nurse-practitioners.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nurse-practitioners.profile.definition-block.1": {
         "status": "pending_mapping"
       },
@@ -12223,6 +12226,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two notes for one follow-up say completed and pending, without update times. State the conflict, the source to check and the clinical role that should resolve it."
+            ]
+          },
+          "id": "nurse-practitioners.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Reconcile an outpatient follow-up record",
+          "type": "notice"
         }
       ]
     },
@@ -14880,6 +14898,13 @@
         "id": "nurse-practitioners.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nurse-practitioners.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15234,7 +15259,7 @@
       "text": "Nurse Practitioners occupation profile | tasks, wages, admission, and boundaries"
     }
   },
-  "source_content_sha256": "4663f64a4fc949bc221376e8a28c0f4c4b0ff80d160ef7a1964ad75b3fe5b001",
+  "source_content_sha256": "ab6ba91a235cc452a9c3a71af38b9fc12171853d4670faa9ee8010b511b693fd",
   "subject": {
     "canonical_slug": "nurse-practitioners",
     "name": "Nurse Practitioners",

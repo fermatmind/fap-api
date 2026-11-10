@@ -6,7 +6,7 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
@@ -30,7 +30,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -54,7 +54,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-counter-dafang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-counter-ehi": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -23574,7 +23580,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, offer samples, employment ratios and a precise China-U.S. mapping were not obtained."
+              "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, employment ratios and a precise China-U.S. mapping were not obtained."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
@@ -26000,7 +26006,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, offer samples, employment ratios and a precise China-U.S. mapping were not obtained."
+              "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, employment ratios and a precise China-U.S. mapping were not obtained."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
@@ -26043,12 +26049,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain verifiable job posting offer statistics for counter and rental positions in mainland China; a single posting cannot represent the national level"
+              "An eHi campus posting listed CNY 3,000–4,500 per month during internship and CNY 4,500–6,000 after conversion, both total compensation. The role includes vehicle checks and preparation. Dafang lists intake, pickup, returns and payment in Wuhan and Changsha without an amount. eHi named Xi’an and other cities, a three- to six-month internship, current study at associate level or higher, and C1 or above (or in progress). Dafang required a C-class license or above and at least one year of driving experience. These driving requirements apply to the vehicle rental examples."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "counter-ehi",
+            "counter-dafang"
           ],
           "type": "prose"
         },
@@ -26141,7 +26148,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, offer samples, employment ratios and a precise China-U.S. mapping were not obtained."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -30878,7 +30885,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Greeting walk-in and telephone customers, understanding the type, quality and quantity of the rental or service needed, explaining rental fees and policy procedures, describing item availability and operation and advising on use and care, receiving orders for rental, repair, dry cleaning and storage services, calculating fees and deposits and collecting payment, preparing rental forms and obtaining signatures and license information, inspecting and adjusting rental items, registering and marking items pending handling, reserving and registering rental records, and setting up displays and allocating equipment for events.",
+                "answer": "Take rental, repair or service orders, explain options and charges, and record handoff and payment. Rental staff may check returns for damage and escalate disputes to someone authorized to decide.",
                 "id": "actors.faq.1",
                 "question": "What does the daily work of counter and rental clerks involve?",
                 "question_key": "career.faq.counter-and-rental-clerks.1",
@@ -30887,7 +30894,7 @@
                 ]
               },
               {
-                "answer": "Counter and rental clerks receive rental and service orders and carry fee and deposit calculation and document and item inspection responsibility; cashiers focus on settlement and collection and usually do not carry item inspection and rental registration; retail salespersons focus on recommending and selling merchandise; bank tellers handle account and voucher business; receptionists focus on reception and transfer; and order clerks receive orders and enter payment methods.",
+                "answer": "Cashiers focus on payments, and retail sales staff help customers buy products. Rental clerks also manage availability, due dates, condition at return and additional charges.",
                 "id": "actors.faq.2",
                 "question": "How do counter and rental clerks differ from cashiers and retail salespersons?",
                 "question_key": "career.faq.counter-and-rental-clerks.2",
@@ -30905,9 +30912,9 @@
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: the three task categories of intake, billing and registration, inventory and availability lookup, and identity verification and contracts can be partly taken on by tools; this page has no single-occupation adoption rate or displacement data.",
+                "answer": "Systems can check availability, calculate routine charges and draft replies. People still review disputed charges, damage, privacy and policy exceptions. This is not a measurement of AI adoption or job displacement.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of counter and rental clerks is there already AI change evidence?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.counter-and-rental-clerks.4",
                 "source_refs": [
                   "onet"
@@ -30923,16 +30930,18 @@
                 ]
               },
               {
-                "answer": "Among the U.S. 2025 wage data, the median annual wage is 41,300 USD and the hourly wage 19.86 USD (single-occupation basis for 41-2021.00), with percentiles at annual wages 29,800／35,630／41,300／50,190／65,370 USD; no occupation-level wage value was obtained for mainland China, and this page treats it as a gap rather than filling it with an industry average.",
+                "answer": "The May 2025 U.S. median wage was $41,300 per year and $19.86 per hour. An eHi campus posting listed CNY 3,000–4,500 per month during internship and CNY 4,500–6,000 after conversion, both total compensation. The role includes vehicle checks and preparation. Dafang lists intake, pickup, returns and payment in Wuhan and Changsha without an amount. eHi named Xi’an and other cities, a three- to six-month internship, current study at associate level or higher, and C1 or above (or in progress). Dafang required a C-class license or above and at least one year of driving experience. These driving requirements apply to the vehicle rental examples.",
                 "id": "actors.faq.6",
                 "question": "What is the usual wage for counter and rental clerks, and how should it be compared?",
                 "question_key": "career.faq.counter-and-rental-clerks.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "counter-ehi",
+                  "counter-dafang"
                 ]
               },
               {
-                "answer": "The U.S. preparation level is Job Zone 1–2 (SVP below 6.0), usually requiring a high school diploma or equivalent with on-the-job training from a few days to one year; most positions master the processes and systems through one onboarding training and on-the-job learning. Recruitment and training for similar positions in mainland China follow the target unit's rules.",
+                "answer": "BLS classifies typical U.S. entry for this occupation as no formal educational credential and short-term on-the-job training. O*NET Job Zone 1–2 describes a group of occupations; individual employers may ask for high school or equivalent. The two Chinese vehicle rental examples differ, so check the actual posting.",
                 "id": "actors.faq.7",
                 "question": "What education do counter and rental clerks need, and how should training be done?",
                 "question_key": "career.faq.counter-and-rental-clerks.7",
@@ -30959,12 +30968,12 @@
                 ]
               },
               {
-                "answer": "The O*NET employment trend page (based on BLS 2024—2034 projections) shows about 408,200 people in this detailed occupation in 2024, a projected label of Average (3% to 4%), and about 45,900 cumulative openings including growth and replacement; the work is mainly standing and walking and high-frequency communication, with weekend and holiday shifts concentrated, so it must be checked against local store and business demand.",
+                "answer": "BLS projects U.S. employment in SOC 41-2021 to go from about 409,400 in 2025 to 421,900 in 2035 (+3.0%). It projects about 46,100 openings per year, including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing a counter and rental clerk career now?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.counter-and-rental-clerks.10",
                 "source_refs": [
-                  "bls"
+                  "a18-bls-projections"
                 ]
               }
             ]
@@ -30980,7 +30989,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "U.S. and mainland China data are in separate columns: U.S. wages use the single-occupation basis for 41-2021.00 (OEWS 2025 wage data), and employment and projections come from the O*NET employment trend page (based on BLS 2024—2034 projections); mainland China is treated as a gap, and the two do not substitute for each other.",
+              "U.S. and mainland China data are in separate columns: U.S. wages use the single-occupation basis for 41-2021.00 (OEWS 2025 wage data), and employment and projections come from BLS Table 1.2 (2025–2035); mainland China occupational statistics remain a separate gap; the postings illustrate individual hiring terms, and the two do not substitute for each other.",
               "When the statistical period, survey subjects and pay basis differ they are cited separately; no interpolation and no filling in with adjacent occupations or industry averages.",
               "The exercise materials are all fictional or based on public materials and do not constitute training proof, authorization or a hiring promise."
             ]
@@ -31338,11 +31347,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, offer samples, employment ratios and a precise China-U.S. mapping were not obtained."
+                  "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, employment ratios and a precise China-U.S. mapping were not obtained."
                 ],
                 "evidence_type": "official statistics",
                 "id": "nbs",
-                "limitation": "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, offer samples, employment ratios and a precise China-U.S. mapping were not obtained.",
+                "limitation": "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, employment ratios and a precise China-U.S. mapping were not obtained.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 urban unit wages",
                 "period": "2025 data, published 2026-05-15",
@@ -31382,7 +31391,7 @@
                 "url": "https://www.onetonline.org/link/localwages/41-2021.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "U.S. O*NET16 tasks: 15 Core tasks include billing and collecting payment, rental, repair, dry cleaning and storage orders, explaining fees and policy, item information and usage and care advice, greeting customers and answering calls, inspecting and adjusting items, forms, signatures and required licenses, rental services and returns, recording transactions and store footfall, receiving and inspecting and marking items pending handling, reserving and rental records, preparing displays or purchasing rental items, and broad product and service recommendations; allocating activity equipment is 1 Supplemental. The classification is not daily frequency, and each position's work fronts are not all described as high-frequency alternation. U.S. O*NET2025 industry employment: real estate and rental and leasing 44%, retail trade 22%, other services (except public administration) 14% and other industries 20% including wholesale and administrative support; the remaining proportion is not broken out as self-employment, and these are not wages or a Chinese employment distribution."
                 ],
@@ -31394,7 +31403,7 @@
                 "period": "Page updated 2026, industry data 2025; the surveys differ",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/41-2021.00"
+                "url": "https://www.onetonline.org/link/details/41-2021.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31414,11 +31423,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, offer samples, employment ratios and a precise China-U.S. mapping were not obtained."
+                  "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, employment ratios and a precise China-U.S. mapping were not obtained."
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, offer samples, employment ratios and a precise China-U.S. mapping were not obtained.",
+                "limitation": "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, employment ratios and a precise China-U.S. mapping were not obtained.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 urban unit wages",
                 "period": "2025 data, published 2026-05-15",
@@ -31535,6 +31544,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment in SOC 41-2021 to go from about 409,400 in 2025 to 421,900 in 2035 (+3.0%). It projects about 46,100 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a18-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Total monthly pay: CNY 3,000–4,500 during internship and CNY 4,500–6,000 after conversion. The posting included Xi’an and other cities, a three- to six-month internship, current study at associate level or higher, and C1 or higher (or in the process of obtaining it)."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "counter-ehi",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "eHi branch representative",
+                "period": "Not stated",
+                "publisher": "Shaanxi Polytechnic University career portal",
+                "scope": "recruitment_proxy",
+                "url": "https://51uns.bysjy.com.cn/Position/Details/1714734?schoolCode=10828"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Rental, return and settlement at branches including Wuhan and Changsha; no pay amount. The Wuhan and Changsha examples required a C-class license or higher and at least one year of driving experience."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "counter-dafang",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Dafang rental branch representative",
+                "period": "Not stated",
+                "publisher": "Dafang Car Rental",
+                "scope": "recruitment_proxy",
+                "url": "https://www.dafang24.com/helpdetails/22"
               }
             ]
           },
@@ -34328,7 +34382,7 @@
           "bls_table": [
             {
               "指标": "Data and basis",
-              "数值": "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, offer samples, employment ratios and a precise China-U.S. mapping were not obtained.",
+              "数值": "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, employment ratios and a precise China-U.S. mapping were not obtained.",
               "说明": "Industry background does not stand in for the occupational wage"
             },
             {
@@ -34478,10 +34532,10 @@
             },
             {
               "城市/区间": "Industry background (pretax annual average, not monthly salary)",
-              "月薪参考": "NBS2025 condition-matched industry background, non-private/private pretax annual average: leasing and business services 110,162/68,919, wholesale and retail trade 135,749/69,622, and resident services and repair and other services 70,226/52,059 yuan. Matched by the legal entity's main industry and private classification; these are not the counter rental occupation's median, monthly take-home pay or part-time rate. Urban legal entities with 5 or more people, excluding self-employed and freelance workers; China's wage distribution for this occupation, offer samples, employment ratios and a precise China-U.S. mapping were not obtained."
+              "月薪参考": "NBS publishes annual averages by employers’ industry. Those figures provide context and do not establish pay for this occupation."
             },
             {
-              "城市/区间": "Mainland China (job posting offer basis)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34493,13 +34547,14 @@
           "china_soc_row": "U.S. O*NET41-2021.00/OEWS41-2021 for this occupation; a precise Chinese entity mapping was not completed this round.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-counter-ehi",
+            "posting-counter-dafang"
           ],
           "sources_note": "Source links are used according to their respective statistical or announcement scope; when the statistical period, survey subjects and pay basis differ they are cited separately, with no conversion between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect the wages of counter and rental clerks?",
             "driver_heading": "How are shifts arranged in counter and store settings?",
-            "official_heading": "Official statistical basis and missing data notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Educational and training background, position directions and notes (editorial compilation, not wage statistics)",
             "scenario_heading": "Which preparation conditions must be checked for different task directions?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35143,7 +35198,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/customer-service-representatives",
+            "target_href": "/en/career/jobs/customer-service-representatives",
             "target_slug": "customer-service-representatives",
             "target_title": "Customer service representatives (adjacent occupation)",
             "transition_distance": {
@@ -35166,7 +35221,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/order-clerks",
+            "target_href": "/en/career/jobs/order-clerks",
             "target_slug": "order-clerks",
             "target_title": "Order clerks (adjacent occupation)",
             "transition_distance": {
@@ -35189,7 +35244,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/tellers",
+            "target_href": "/en/career/jobs/tellers",
             "target_slug": "tellers",
             "target_title": "Bank tellers (adjacent occupation)",
             "transition_distance": {
@@ -35212,7 +35267,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/retail-salespersons",
+            "target_href": "/en/career/jobs/retail-salespersons",
             "target_slug": "retail-salespersons",
             "target_title": "Retail salespersons (adjacent occupation)",
             "transition_distance": {
@@ -35235,7 +35290,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cashiers",
+            "target_href": "/en/career/jobs/cashiers",
             "target_slug": "cashiers",
             "target_title": "Cashiers (adjacent occupation)",
             "transition_distance": {
@@ -35258,7 +35313,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/stockers-and-order-fillers",
+            "target_href": "/en/career/jobs/stockers-and-order-fillers",
             "target_slug": "stockers-and-order-fillers",
             "target_title": "Stockers and order fillers (adjacent occupation)",
             "transition_distance": {
@@ -35281,7 +35336,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/shipping-receiving-and-inventory-clerks",
+            "target_href": "/en/career/jobs/shipping-receiving-and-inventory-clerks",
             "target_slug": "shipping-receiving-and-inventory-clerks",
             "target_title": "Shipping, receiving and inventory clerks (adjacent occupation)",
             "transition_distance": {
@@ -35304,7 +35359,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/insurance-sales-agents",
+            "target_href": "/en/career/jobs/insurance-sales-agents",
             "target_slug": "insurance-sales-agents",
             "target_title": "Insurance sales agents (adjacent occupation)",
             "transition_distance": {
@@ -35392,7 +35447,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35441,7 +35496,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Explore my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35490,7 +35545,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35539,7 +35594,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Explore my motivation cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35588,7 +35643,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35637,7 +35692,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Explore my communication cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36259,7 +36314,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore the task interests and work preferences of counter and rental clerks",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36373,11 +36428,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -36793,39 +36848,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 408,200 people (2024, single-occupation basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "409,400 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size",
-        "occupation_scope": "The O*NET employment trend page (based on BLS 2024—2034 projections) employment estimate for this detailed occupation in 2024",
-        "period": "2024 (O*NET/BLS); retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 41-2021",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Growth of 3%—4% (2024—2034, label Average)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+3.0%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Employment change rate",
-        "occupation_scope": "The O*NET employment trend page (based on BLS 2024—2034 projections) projection label for this detailed occupation is 'Average'",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 41-2021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 45,900 (2024—2034 cumulative, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "46,100 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Job openings",
-        "occupation_scope": "The O*NET employment trend page's cumulative openings for this detailed occupation over 2024—2034, stated to include growth and replacement demand",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 41-2021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
@@ -36877,39 +36932,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "409,400 people (2025 employment)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "409,400 jobs (2025)",
         "fact_id": "g04-employment-2025",
         "market": "United States",
         "measure": "Employment size",
-        "occupation_scope": "U.S. 41-2021 for this occupation, with annual average rather than cumulative openings; industry shares are not wages",
-        "period": "2025 industry employment／2025—2035 projections; verified 2026-10-09",
+        "occupation_scope": "U.S. SOC 41-2021",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Growth of 3% (2025—2035)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+3.0%",
         "fact_id": "g04-growth-2025",
         "market": "United States",
         "measure": "Employment change rate",
-        "occupation_scope": "U.S. 41-2021 for this occupation, with annual average rather than cumulative openings; industry shares are not wages",
-        "period": "2025 industry employment／2025—2035 projections; verified 2026-10-09",
+        "occupation_scope": "U.S. SOC 41-2021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "46,100 per year on average (2025—2035, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "46,100 annually (including replacements)",
         "fact_id": "g04-openings-2025",
         "market": "United States",
         "measure": "Job openings",
-        "occupation_scope": "U.S. 41-2021 for this occupation, with annual average rather than cumulative openings; industry shares are not wages",
-        "period": "2025 industry employment／2025—2035 projections; verified 2026-10-09",
+        "occupation_scope": "U.S. SOC 41-2021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
@@ -36959,6 +37014,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Total monthly pay: CNY 3,000–4,500 during internship and CNY 4,500–6,000 after conversion. The posting included Xi’an and other cities, a three- to six-month internship, current study at associate level or higher, and C1 or higher (or in the process of obtaining it).",
+        "fact_id": "posting-counter-ehi",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "eHi branch representative",
+        "period": "Not stated",
+        "source_refs": [
+          "counter-ehi"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Rental, return and settlement at branches including Wuhan and Changsha; no pay amount. The Wuhan and Changsha examples required a C-class license or higher and at least one year of driving experience.",
+        "fact_id": "posting-counter-dafang",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Dafang rental branch representative",
+        "period": "Not stated",
+        "source_refs": [
+          "counter-dafang"
+        ]
       }
     ]
   },
@@ -36985,19 +37064,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, growth of 3%—4%, average)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employed persons (2024, about 408,200 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. job openings (2024—2034, about 45,900)"
+        "label": "U.S. projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37011,17 +37090,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Counter and rental clerks (O*NET-SOC 41-2021.00) receive rental, repair, dry cleaning and storage services at the counter and advise customers: this covers explaining fees and policy, describing rental items, calculating fees and collecting payment, inspecting and adjusting rental items, preparing rental forms and signatures and licenses, registering and marking items pending handling, reserving and registering rental records, and setting up displays; it includes the U.S. 2025 median annual wage of 41,300 USD (hourly wage 19.86 USD), about 408,200 people employed in 2024, a 2024—2034 employment projection of average (3%—4%), the mainland China occupation-level wage and employment basis gap, and the control points for alternating long standing and sitting, emotional communication and cash responsibility."
+      "text": "See how counter and rental clerks handle orders, fees and returns. Compare Chinese rental branches, related jobs and U.S. wages."
     },
     "title": {
       "availability": "available",
       "text": "Counter and rental clerks"
     }
   },
-  "source_content_sha256": "de2633af19d480486964ca0545af938f1d81d9a92d57447d84a027b153978820",
+  "source_content_sha256": "3b6afdf3ab480bd1b8d5185d35fae9c1a55704e2701303ce28a2cd3dc791258f",
   "subject": {
     "canonical_slug": "counter-and-rental-clerks",
     "name": "Counter and rental clerks",
-    "summary": "Counter and rental clerks correspond in the United States to O*NET-SOC 41-2021.00 (Counter and Rental Clerks). The core is facing walk-in and telephone customers at a counter or store and receiving orders for rental, repair, dry cleaning and storage services: explaining rental fees and policy, describing item availability and operation, calculating fees and collecting payment, inspecting and adjusting rental items, preparing rental forms and obtaining customer signatures and license information, registering and marking items pending alteration, cleaning, storage or repair, reserving and registering rental records, setting up displays, and allocating equipment for sporting or recreational activities. On the China side, counter and rental clerk positions belong to retail, leasing and service industries and are not a one-to-one correspondence with this U.S. detailed occupation, so appointment and pay bases cannot be interchanged."
+    "summary": "Take rental, repair or service orders, explain options and charges, and record handoff and payment. Rental staff may check returns for damage and escalate disputes to someone authorized to decide."
   }
 }

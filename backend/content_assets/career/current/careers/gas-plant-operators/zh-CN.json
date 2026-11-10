@@ -24195,12 +24195,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜本页的「天然气操作员」对应美国 SOC 51-8092.00，工作可以分成几类：（一）设备监视与巡检——监视设备运行，观察温度与液位与流量计，做定期单元检查以确保压缩机与洗涤器与蒸发器与制冷设备与阀门与仪表按预期运行；（二）气体分配与处理——用配电盘与控制板与半自动设备为公用事业公司与工业客户分配或处理气体，控制设备调节送往锅炉与炉膛与相关蒸汽或供热设备的燃气流量与压力；（三）压缩与液化与调压——控制压缩机与洗涤器与蒸发器与制冷设备以液化或压缩或再气化天然气，调整温度与压力与真空与液位与流量以维持工艺在要求范围；（四）记录与测试与协作——记录并复核并汇总运行记录与试验结果与仪表读数，在过程中测试气体与化学品与空气的纯度与含水量以发现质量问题或泄漏，与其他操作员协作解决装置问题并在需要时联系维修。四类工作循环衔接：接班巡检与读表—分配与处理与调压—取样与测试与记录—异常判断与调整—依真实预案处置与报告。本页不把该职业与相邻的压缩站操作员或炼油厂操作员或锅炉操作员或化工装置操作员混为一谈。"
+              "用虚构流程图标出进料、处理单元、产品和异常通知节点，再写一页交接。鄂尔多斯的具名处理厂案例展示设备维护、巡检与下游输送；案例不是操作规程或招录标准。"
             ]
           },
           "id": "gas-plant-operators.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-gas-processing-ordos",
+            "cn-gas-local-check"
           ],
           "type": "prose"
         },
@@ -24382,12 +24384,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本页对应美国 SOC 51-8092.00，与相邻岗位的核心差别在「对象与产出」：本职业以天然气装置与压缩机与洗涤器与蒸发器与制冷设备与调压流程为对象，产出是稳定可核验的气体分配与处理与压缩或液化或再气化运行与参数与试验记录；天然气压缩机与天然气泵站操作员（53-7071.00）以管道压气站与泵站的压缩与泵送运行为对象，聚焦维持管线压力；石油泵系统操作员与炼油厂计量员（51-8093.00）以炼油厂与油品泵送与计量为对象，处理更广的石油炼制流程与油品计量；固定设备工程师与锅炉操作员（51-8021.00）以锅炉与蒸汽与供热设备为对象；化工装置与系统操作员（51-8091.00）以化学反应与分离系统的装置为对象。对象与产出各不相同，不能跨岗位沿用设备调整与参数设定与安全隔离与作业许可的权限。"
+              "处理厂岗位重点监测工艺、处理结果和装置状态；压气站岗位关注压缩及输送；维修人员按工单检查或修复设备。按实际职责及授权判断。"
             ]
           },
           "id": "gas-plant-operators.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-gas-processing-ordos"
           ],
           "type": "prose"
         },
@@ -24452,12 +24455,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "51-8092为公用事业或工业设施分配处理气体并控制主管压力；15核心含监测控制、参数调整、试验记录、手工具维护修理或请求维修和指挥辅助工。四补充含氮氧提取配比计算施工换图，不当全员核心。实际班次设备介质、训练健康专项资格许可授权分别核；工周52%超40和46%高度自动化不证明所有岗位只监视或同班制。"
+              "天然气处理厂操作员监控并记录气体处理或分配工艺，关注仪表、产品或运行状态，按现场规程巡检和交接。净化、分离及不同装置的职责由企业确定，不可用城镇燃气地方培训要求替代。"
             ]
           },
           "id": "gas-plant-operators.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-gas-processing-ordos",
+            "cn-gas-local-check"
           ],
           "type": "prose"
         },
@@ -25288,7 +25293,7 @@
                 "url": "https://www.onetonline.org/link/details/51-8092.00"
               },
               {
-                "entity": "全国2025工资五分位",
+                "entity": "全国2025工资工资分位数",
                 "id": "link-9",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localwages/51-8092.00"
@@ -27930,7 +27935,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025全国五分位及CA本职年中位130,220、小时62.61已核，州数值不代全国87,820；其它地区和四行业工资、装置资历班次因果未取。当前industry44/31/25未给参考年，旧期预测不拼。"
+              "2025全国工资分位数及CA本职年中位130,220、小时62.61已核，州数值不代全国87,820；其它地区和四行业工资、装置资历班次因果未取。当前industry44/31/25未给参考年，旧期预测不拼。"
             ]
           },
           "id": "gas-plant-operators.us-salary.career-snapshot-secondary-locale.25",
@@ -30396,13 +30401,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取本职中国代表性招聘渠道、样本规模季节及用人因果；本页无数量工资样本，不从41/31/28行业份额推实际招聘。",
+              "鄂尔多斯一个天然气处理厂公开案例描述巡检、设备维护及保供衔接。它不是岗位招聘，不能推学历、证照或工资。",
               "编辑核对：公告日期地区、装置气体任务、长期训练资格许可授权、适用健康、班次工时与收入组成逐项记，不设所有机构统一要求。"
             ]
           },
           "id": "gas-plant-operators.path.recruitment-sample.1",
           "source_refs": [
-            "onet"
+            "cn-gas-processing-ordos"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -32468,7 +32473,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜本页登记51-8092的O*NET任务、情境、兴趣、软件与当前无参考年份的行业份额44/31/25（旧登记保护待复核），2025全国OEWS工资、BLS直接EP2025—2035及典型教育长期在岗培训；旧O*NET2024—2034仅区分历史。中国NBS行业五岗位组、企业薪酬摘要不映射精确SOC；安全生产法28/30、个人信息保护法与主管门户分别标实际法规或检索入口。美国OSHA1910.119只核覆盖工艺与运行规程，49CFR192.801只核covered tasks范围。ILO2025 Working Paper140摘要用于通用任务暴露边界，NIST用于通用AI治理，均非本职量化采用因果。相邻53-7071与51-8091、分类数据库、证书目录及内部口径规则各标用途，原source_refs稳定保。"
+              "来源卡｜本页登记51-8092的O*NET任务、情境、兴趣、软件与当前无参考年份的行业份额44/31/25（旧登记保护待复核），2025全国OEWS工资、BLS直接EP2025—2035及典型教育长期在岗培训；中国NBS行业五岗位组、企业薪酬摘要不映射精确SOC；安全生产法28/30、个人信息保护法与主管门户分别标实际法规或检索入口。美国OSHA1910.119只核覆盖工艺与运行规程，49CFR192.801只核covered tasks范围。ILO2025 Working Paper140摘要用于通用任务暴露边界，NIST用于通用AI治理，均非本职量化采用因果。相邻53-7071与51-8091、分类数据库、证书目录及内部口径规则各标用途，原source_refs稳定保。"
             ]
           },
           "id": "gas-plant-operators.sources.source-card.2",
@@ -32482,7 +32487,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮2026-10-03重核资料：工资2025、直接EP及教育2025—2035/2025、行业ONET2024，旧ONET2024—2034只历史比较。法规法域覆盖各核，不从门户冒法条。"
+              "本轮2026-10-03重核资料：工资2025、直接EP及教育2025—2035/2025、行业ONET2024，法规法域覆盖各核，不从门户冒法条。"
             ]
           },
           "id": "gas-plant-operators.sources.source-card.3",
@@ -32496,7 +32501,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮及本页既有有界检索未取得中国大陆精确对应51-8092的全国、城市、用工工资与就业；NBS行业及五大岗位组、企业薪酬摘要不能直接映射，不用行业均值招聘报价或美国数字补，不证明全国不存在其他统计。 四行业及其他地区工资、收入因果、GenAI量化与本职测评效度、代表招聘有界未取，各原生板块公开，不證不存在。 本轮CA年中位130,220小时62.61已核；当前industry44/31/25无年份，旧2024登记保护待复核。"
+              "美国工资与就业预测分别按 OEWS 和 BLS 表1.2 读取。大陆案例只用于理解现场任务；具体准入、授权、班次和工资应核岗位和地区。"
             ]
           },
           "id": "gas-plant-operators.sources.source-card.4",
@@ -32543,10 +32548,10 @@
                 "url": "/zh/tests/mbti-personality-test"
               },
               {
-                "entity": "天然气操作员相关方向 5",
+                "entity": "天然气压气站运行操作员",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/career/jobs/gas-compressor-and-gas-pumping-station-operators"
               },
               {
                 "entity": "天然气操作员相关方向 6",
@@ -32608,7 +32613,7 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "BLS直接EP51-8092：2025就业18.2千→2035预测17.1千，公布净减1.1千、下降6.0%、年均空缺1.4千（1,400个）；自雇栏破折号不当0%。空缺含转出退出非净新增、十年总量或真实招聘，不从圆整就业反算变化率。",
-                  "O*NET旧2024—2034就业16200下降类别年均1300，与本轮当前直接EP不同，不拼接。"
+                  "年均空缺含替换需求，不是当前在招。"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
@@ -32988,6 +32993,34 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "具名天然气处理厂和采气企业保供场景包括设备维护、巡检和上下游输送。"
+                ],
+                "id": "cn-gas-processing-ordos",
+                "limitation": "运行案例，不代表全国就业量或雇主招录条件。",
+                "market": "中国大陆",
+                "name": "鄂尔多斯天然气采气和处理厂保供案例",
+                "period": "2025-12",
+                "publisher": "鄂尔多斯市人民政府网站",
+                "scope": "具名岗位或制度",
+                "url": "https://www.ordos.gov.cn/xw_127672/jreeds/202512/t20251225_3863368.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "指引适用于该地城镇天然气行业所列人员。"
+                ],
+                "id": "cn-gas-local-check",
+                "limitation": "城镇燃气地方指引，不能推油气田集输、处理厂或其他地区规定。",
+                "market": "中国大陆",
+                "name": "重庆市城镇天然气行业从业人员考核报名工作指引",
+                "period": "2026-04",
+                "publisher": "重庆市经信委",
+                "scope": "具名岗位或制度",
+                "url": "https://jjxxw.cq.gov.cn/zwgk_213/gsgg/202604/t20260428_15642206.html"
               }
             ]
           },
@@ -34858,7 +34891,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "气体处理与分配运行可以分成哪几类？",
+            "question": "应聘天然气处理厂运行岗，怎么理解现场工作？",
             "table": {
               "rows": [
                 {
@@ -34915,7 +34948,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "天然气操作员和相邻岗位的边界在哪里？",
+            "question": "天然气处理厂操作与压气站、维修岗位怎样分工？",
             "table": {
               "rows": [
                 {
@@ -37639,7 +37672,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合天然气操作员",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37746,7 +37779,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "天然气压气站运行操作员"
           }
         ]
       },
@@ -38136,17 +38169,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "天然气操作员做什么、需要什么能力、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围、来源口径与数据缺口。"
+      "text": "了解天然气处理厂操作员怎样核运行状态和交接，以及与压气站和维修岗位的区别。"
     },
     "title": {
       "availability": "available",
-      "text": "天然气操作员"
+      "text": "天然气处理厂操作员做什么：工艺监控、巡检与运行记录"
     }
   },
-  "source_content_sha256": "3e47c395c9614d52a35dcdd73733528f6f4d413c1bfe98cc995e142a4cda5113",
+  "source_content_sha256": "57fbb17f08be777d4c253c0dc21629915d88d879562a06daa897b34a64d1b63d",
   "subject": {
     "canonical_slug": "gas-plant-operators",
-    "name": "天然气操作员",
-    "summary": "天然气操作员对应美国 O*NET/SOC 51-8092.00「Gas Plant Operators」：为公用事业公司等分配或处理气体，通过控制压缩机维持主管道上的规定压力。监视设备运行并观察温度与液位与流量计并做定期单元检查；用配电盘与控制板与半自动设备分配或处理气体；控制压缩机与洗涤器与蒸发器与制冷设备以液化或压缩或再气化天然气；控制设备调节送往锅炉与炉膛与相关蒸汽或供热设备的燃气流量与压力；记录并复核并汇总运行记录与试验结果与仪表读数；判断异常压力波动的成因并提出与执行纠正措施；调整温度与压力与真空与液位与流量；与其他操作员协作解决装置问题；在过程中测试气体与化学品与空气的纯度与含水量以发现质量问题或泄漏。官方范围原文：Distribute or process gas for utility companies and others by controlling compressors to maintain specified pressures on main pipelines."
+    "name": "天然气处理厂操作员",
+    "summary": "天然气处理厂操作员监控并记录气体处理或分配工艺，关注仪表、产品或运行状态，按现场规程巡检和交接。净化、分离及不同装置的职责由企业确定，不可用城镇燃气地方培训要求替代。"
   }
 }

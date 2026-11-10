@@ -9,7 +9,7 @@
         "status": "pending_mapping"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:employment-g04-current": {
         "status": "pending_mapping"
@@ -18,7 +18,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:growth-g04-current": {
         "status": "pending_mapping"
@@ -57,9 +57,15 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:openings-g04-current": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-analyst-cib": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-analyst-spdb": {
         "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
@@ -26152,12 +26158,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆信用分析岗位招聘或报价统计；个别单位的岗位薪酬披露不能代表全国水平"
+              "兴业银行沈阳分行曾招聘信用审查人员，要求辽宁银行公司信贷调查或审查相关工作三年以上，能独立审查项目。浦发总行上海的公司授信审批是更资深的相邻岗，要求相关经验十年以上及骨干审批经历。两则公告未列金额。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "analyst-cib",
+            "analyst-spdb"
           ],
           "type": "prose"
         },
@@ -26252,7 +26259,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国大陆薪资板块只保留证据边界：不把行业均值当作职业工资、不用美国数据替代，也不陈述信用分析师的全国中位数、起薪或分位数。"
+              "以下公告用于对照岗位和计薪条件。全国职业工资分布缺少可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -31000,7 +31007,7 @@
           "data": {
             "entries": [
               {
-                "answer": "分析个人或企业的信用数据与财务报表、判断放贷或授信所涉风险程度，用计算机程序生成财务比率评估客户财务状况，完成贷款申请（含信用分析与贷款申请摘要）并提交贷款委员会等有权机构审批，分析收入增长、管理层质量与市场份额等财务数据判断贷款的预期盈利能力，把受评机构的流动性、盈利能力与信用历史与同行业同地区类似机构比较，编制包含风险程度的报告，依据收入、储蓄数据、还款记录与交易活动评估客户记录并建议还款方案，审阅个人或企业客户档案、识别并挑选逾期账户用于催收，联系客户催收逾期账款、处理客户投诉并核实财务与信贷交易，与征信机构及业务代表交换客户的信用信息。",
+                "answer": "审阅财务报表、现金流、负债和信用记录，核实来源及异常，写明风险判断、证据和限制，交给有权限的人审查或决策。",
                 "id": "actors.faq.1",
                 "question": "信用分析师每天的具体工作是什么？",
                 "question_key": "career.faq.credit-analysts.1",
@@ -31009,9 +31016,9 @@
                 ]
               },
               {
-                "answer": "信用分析师针对个人或企业的授信与放贷判断信用风险程度并编制决策用报告；金融分析师研究证券与市场并给出投资分析；会计师和审计师编制与审计财务信息；预算分析师编制与分析机构预算；财务经理统筹财务活动与团队；信贷专员与客户接洽并推动贷款申请；保险核保师评估投保风险与承保条件。",
+                "answer": "信用分析师主要评估借款方偿还能力与风险；授信核验岗位侧重申请材料、账户和权限流程；贷款专员还可能与客户沟通方案并组织材料。",
                 "id": "actors.faq.2",
-                "question": "信用分析师和金融分析师、会计师和审计师有什么区别？",
+                "question": "信用分析师与授信核验人员、贷款专员有什么区别？",
                 "question_key": "career.faq.credit-analysts.2",
                 "source_refs": [
                   "onet"
@@ -31027,9 +31034,9 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：财务比率与报表汇总、报告与申请摘要初稿、客户档案筛选与分类三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "工具可辅助抽取报表项目和核对异常；分析人仍需复核原件、会计口径、授权和意见中写明的假设。 这不是对本职业 AI 使用率或岗位替代的测量。",
                 "id": "actors.faq.4",
-                "question": "信用分析师哪些任务已有 AI 变化证据？",
+                "question": "哪些工作可能由软件辅助？",
                 "question_key": "career.faq.credit-analysts.4",
                 "source_refs": [
                   "onet"
@@ -31045,12 +31052,14 @@
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位年薪 83,510 美元、时薪 40.15 美元（13-2041.00 单一职业口径），分位为年薪 56,250／65,210／83,510／122,460／169,230 美元；中国大陆未取得职业级工资数值，本页按缺口处理，不用行业均值代填。",
+                "answer": "美国 2025 年 5 月工资中位数为 83,510 美元/年、40.15 美元/小时。 兴业银行沈阳分行曾招聘信用审查人员，要求辽宁银行公司信贷调查或审查相关工作三年以上，能独立审查项目。浦发总行上海的公司授信审批是更资深的相邻岗，要求相关经验十年以上及骨干审批经历。两则公告未列金额。",
                 "id": "actors.faq.6",
                 "question": "信用分析师的工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.credit-analysts.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "analyst-cib",
+                  "analyst-spdb"
                 ]
               },
               {
@@ -31081,12 +31090,12 @@
                 ]
               },
               {
-                "answer": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 67,800 人，预测标签为 Decline（-1% 或更低），年均约 3,700 个含增长与替换的空缺；工作以办公环境中的数据处理、核对与沟通为主，须按本地金融业结构与合规要求核对。",
+                "answer": "美国 BLS 预计 13-2041 就业从 2025 年约 64,700 到 2035 年约 61,900（−4.3%）。年均约 3,100 个空缺，包含替补需求。",
                 "id": "actors.faq.10",
-                "question": "现在选择信用分析师职业，还应考虑什么？",
+                "question": "美国就业预测怎么读？",
                 "question_key": "career.faq.credit-analysts.10",
                 "source_refs": [
-                  "bls"
+                  "a20-bls-projections"
                 ]
               }
             ]
@@ -31506,7 +31515,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "支持本职业的任务、工作情境与准备层级。",
                   "不含技术采用与岗位替代数据。"
@@ -31519,7 +31528,7 @@
                 "period": "O*NET当前档案，页面2026更新非统一调查年；本轮核2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/13-2041.00"
+                "url": "https://www.onetonline.org/link/details/13-2041.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31785,6 +31794,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 预计 13-2041 就业从 2025 年约 64,700 到 2035 年约 61,900（−4.3%）。年均约 3,100 个空缺，包含替补需求。"
+                ],
+                "evidence_type": "官方统计",
+                "id": "a20-bls-projections",
+                "limitation": "年均空缺包含替补；不是净增或录用概率。",
+                "market": "美国",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "信用审查与放款审核分别列岗；信用审查岗位要求相关经历三年以上。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "analyst-cib",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "沈阳分行信用审查",
+                "period": "未注明",
+                "publisher": "兴业银行",
+                "scope": "recruitment_proxy",
+                "url": "https://branch.cib.com.cn/ShenYang/jobs/jobs.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "资深相邻岗位；本科及以上、十年以上相关经历与骨干审批经历；未列金额。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "analyst-spdb",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "浦发银行上海总行公司授信审批",
+                "period": "2025-03",
+                "publisher": "上海市国资委",
+                "scope": "recruitment_proxy",
+                "url": "https://www.gzw.sh.gov.cn/shgzw_xxgk_cqzp/20250304/ecbe908818cd40079a4576414855cf2f.html"
               }
             ]
           },
@@ -34894,7 +34948,7 @@
               }
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34906,13 +34960,14 @@
           "china_soc_row": "美国O*NET-SOC13-2041.00；中国本轮未取得一一职业映射与职业工资资料，非断言官方不存在。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026-g04-current"
+            "posting-analyst-cib",
+            "posting-analyst-spdb"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响信用分析师的工资吗？",
             "driver_heading": "信用分析工作怎样安排审批与报表周期？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "编辑准备方向，非中国学历门槛、招聘统计或薪资档",
             "scenario_heading": "准备能力与岗位方向怎样分开核对？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36672,7 +36727,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解信用分析师的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36785,12 +36840,12 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "label": "Personality preferences"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "label": "Big Five traits"
           },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
@@ -37203,39 +37258,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 67,800 人（2024 年，单一职业口径）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "64,700 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模",
-        "occupation_scope": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）该细分的 2024 年就业估计",
-        "period": "2024 年（O*NET/BLS）；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 13-2041",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a20-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "下降 -1% 或更低（2024—2034 年，标签 Decline）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "−4.3%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "就业变化率",
-        "occupation_scope": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）该细分的预测标签「下降」；是区间标签，不是个人就业保证",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 13-2041",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a20-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "年均约 3,700 个（2024—2034 年，含增长与替换）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 3,100 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "年均职位空缺",
-        "occupation_scope": "O*NET 就业趋势页该细分 2024—2034 年空缺，说明含增长与替换需求，不等于净新增",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 13-2041",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a20-bls-projections"
         ]
       },
       {
@@ -37393,6 +37448,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "信用审查与放款审核分别列岗；信用审查岗位要求相关经历三年以上。",
+        "fact_id": "posting-analyst-cib",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "沈阳分行信用审查",
+        "period": "未注明",
+        "source_refs": [
+          "analyst-cib"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "资深相邻岗位；本科及以上、十年以上相关经历与骨干审批经历；未列金额。",
+        "fact_id": "posting-analyst-spdb",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "浦发银行上海总行公司授信审批",
+        "period": "2025-03",
+        "source_refs": [
+          "analyst-spdb"
+        ]
       }
     ]
   },
@@ -37419,19 +37498,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，下降 -1% 或更低）"
+        "label": "美国预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 67,800 人）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，约 3,700 个）"
+        "label": "美国预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37445,17 +37524,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "信用分析师（O*NET-SOC 13-2041.00）分析个人或企业的信用数据与财务报表，判断放贷或授信风险并编制决策用报告：覆盖生成财务比率、完成贷款申请与摘要、编制风险报告、比较同类机构流动性盈利能力与信用历史、评估客户记录并建议还款方案、识别逾期账户、催收与核实信贷交易、交换信用信息；含美国 2025 年中位年薪 83,510 美元（时薪 40.15 美元）、2024 年约 67,800 人在岗、2024—2034 年就业预测下降（-1% 或更低）、中国大陆职业级工资与用工口径缺口，以及信用信息保护与记录留存、授权与审批边界、模型与数据质量的控制点。"
+      "text": "信用分析师怎样读报表、核现金流、写授信风险意见？对照两家中国银行样本与美国工资和就业。"
     },
     "title": {
       "availability": "available",
       "text": "信用分析师"
     }
   },
-  "source_content_sha256": "a82e8572282e0aa91ed067bfe0c539511d8864adccc9cc4c6a78efd5ddf4f19a",
+  "source_content_sha256": "2f57084e914cf137c01dac16c47c6b73af94645191abb44daeb20da3ba0c2bda",
   "subject": {
     "canonical_slug": "credit-analysts",
     "name": "信用分析师",
-    "summary": "信用分析师在美国对应 O*NET-SOC 13-2041.00（Credit Analysts）。核心是分析个人或企业的信用数据与财务报表，判断放贷或授信所涉风险程度，并编制含信用信息的报告供决策使用：用计算机程序生成财务比率评估客户财务状况，完成贷款申请（含信用分析与贷款申请摘要）并提交贷款委员会审批，分析收入增长、管理层质量与市场份额等财务数据判断贷款的预期盈利能力，把受评机构的流动性、盈利能力与信用历史与同行业同地区类似机构对比，依据收入、储蓄数据、还款记录与交易活动评估客户记录并建议还款方案，审阅个人或企业客户档案、识别并挑选逾期账户用于催收，联系客户催收逾期账款、与客户沟通处理投诉并核实财务与信贷交易，与征信机构及业务代表交换客户信用信息。美国口径为单一职业细分，中国侧同类岗位分散在银行、消费金融与征信风控等方向，与该美国职业细类不是一一对应，任职、授权与计酬口径不能互换。"
+    "summary": "审阅财务报表、现金流、负债和信用记录，核实来源及异常，写明风险判断、证据和限制，交给有权限的人审查或决策。"
   }
 }

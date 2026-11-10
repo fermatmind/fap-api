@@ -23377,14 +23377,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Next, verify the pharmacy roles, employer training, and supervision arrangements in the locality; a paper exercise does not grant authority to dispense, review prescriptions, or counsel on medication."
+              "Paper check | Match a fictional delivery slip to a purchase order. Flag the quantity mismatch on a shared stock ID and retain both document numbers. "
             ]
           },
           "id": "pharmacy-aides.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "ep",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23699,14 +23697,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Pharmacy aides (O*NET31-9095.00) handle receiving and storage, inventory records, and counter support, and under pharmacist direction and organizational authority take on tasks such as labeling, counting and packaging, or delivery; the United States profile does not directly set Chinese clinical authority, and prescription appropriateness and individual treatment questions go to an authorized pharmacist."
+              "Pharmacy aides support stock, incoming deliveries and counter administration. They keep supplies and records organized and route patients’ medication questions to a pharmacist. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "pharmacy-aides.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "cnclass",
-            "editor"
+            "transfer-onet-31-9095.00"
           ],
           "type": "prose"
         },
@@ -25012,20 +25008,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verified pharmacy aide GenAI adoption rate, overall substitution rate, or disappearance year. Receiving fields and handover drafts may be conditionally trialed; physical storage and individual medication questions still require people and pharmacists, and barcode inventory systems are not proof of GenAI adoption. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Match a fictional delivery slip to a purchase order. Flag the quantity mismatch on a shared stock ID and retain both document numbers."
             ]
           },
           "id": "pharmacy-aides.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ep",
-            "ilo",
-            "arxiv",
-            "weforum",
-            "nist",
-            "cnclass",
-            "aide-pipl",
-            "editor"
+            "transfer-onet-31-9095.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33987,6 +33976,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-31-9095.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 31-9095.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/31-9095.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39238,10 +39254,10 @@
       "text": "Pharmacy aides"
     }
   },
-  "source_content_sha256": "8af47d88295c77e858745ca25c071e8b5bbb8a64e68768fac3635d543846d2d9",
+  "source_content_sha256": "10623d842bb99808ab27f2abe1e552004812b453e1c2400f8a79cba09c693c1a",
   "subject": {
     "canonical_slug": "pharmacy-aides",
     "name": "Pharmacy aides",
-    "summary": "Pharmacy aides (O*NET 31-9095.00) record drugs delivered to the pharmacy, store incoming stock, report inventory needs, and may operate the cash register, accept prescriptions awaiting filling, and respond to general counter questions. Aides should verify that information is complete and maintain inventory and handover records; prescription review, dispensing release, and individual medication advice are the responsibility of pharmacists or other authorized personnel under local law and organizational policy."
+    "summary": "Pharmacy aides support stock, incoming deliveries and counter administration. They keep supplies and records organized and route patients’ medication questions to a pharmacist."
   }
 }

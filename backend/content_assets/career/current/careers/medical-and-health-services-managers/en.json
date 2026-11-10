@@ -7270,13 +7270,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "This page covers O*NET 11-9111.00, Medical and Health Services Managers: planning, directing, or coordinating medical and health services in hospitals, clinics, managed care organizations, public health agencies, or similar organizations. Common reported titles include Cancer Center Director, Clinical Director, Health Information Management Director, Health Information Manager, Healthcare System Director, Medical Records Director, Medical Records Manager, Mental Health Program Manager, Nurse Manager, and Nursing Director. This page excludes adjacent occupations such as Administrative Services Managers, Social and Community Service Managers, and Management Analysts."
+              "Medical and health services managers coordinate operations in organizations such as hospitals and clinics. They track staffing, workflows, budgets and service quality."
             ]
           },
           "id": "medical-and-health-services-managers.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
-            "onet-details"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7372,12 +7371,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Verify first: service goals and indicators, budgets and financial systems, staffing and schedules, regulatory entry and safety/health compliance checklists, data definitions, and signatures, commitments, and major changes requiring authorized confirmation."
+              "Use a fictional clinic workflow. Define a wait or quality issue, show how to measure it and identify who should review a proposed change."
             ]
           },
           "id": "medical-and-health-services-managers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-details"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7386,12 +7385,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Work cycle: check goals, budgets, and applicable rules, arrange personnel and resources, coordinate departments, monitor services and quality, and report improvements. Record unresolved new proposals and refer them for authorized confirmation. Do not generalize every anomaly into stopping existing patient services; service continuity and anomaly handling depend on organizational procedures and responsibility judgments."
+              "Managers organize services and resources. Clinicians make care decisions within their scope. Some leaders hold both responsibilities."
             ]
           },
           "id": "medical-and-health-services-managers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-details"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -8312,12 +8311,13 @@
                 ]
               },
               {
-                "answer": "US occupation 11-9111.00: approximately 616,200 employed in 2024, projected approximately 759,100 in 2034, much-faster-than-average growth over 2024—2034 (approximately 23%), and approximately 62,100 average annual openings including replacement demand. These are not an individual's hiring probability.",
+                "answer": "BLS Table 1.2: U.S. occupation 11-9111 had about 640,400 jobs in 2025 and is projected to have about 795,500 in 2035 (+24.2%), with about 62,300 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. These are not an individual's hiring probability.",
                 "id": "medical-and-health-services-managers.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.medical-and-health-services-managers.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "onet-trends",
+                  "bls-design-ep"
                 ]
               },
               {
@@ -8546,18 +8546,18 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Approximately 616,200 employed in 2024; projected approximately 759,100 in 2034, much-faster-than-average growth over 2024—2034 (approximately 23%), and approximately 62,100 average annual openings.",
+                  "BLS Table 1.2: U.S. occupation 11-9111 had about 640,400 jobs in 2025 and is projected to have about 795,500 in 2035 (+24.2%), with about 62,300 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
                   "Includes replacement demand."
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
                 "limitation": "Includes replacement demand; not an individual's hiring probability.",
                 "market": "United States",
-                "name": "O*NET 11-9111.00 National Employment Trends (BLS 2024—2034 Projections)",
-                "period": "BLS2024—2034 employment projections; accessed 2026-10-03",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "U.S. BLS Table 1.2: Occupational projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/11-9111.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -8820,6 +8820,18 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS Table 1.2: U.S. occupation 11-9111 had about 640,400 jobs in 2025 and is projected to have about 795,500 in 2035 (+24.2%), with about 62,300 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring."
+                ],
+                "id": "bls-design-ep",
+                "market": "United States",
+                "name": "U.S. BLS Table 1.2: Occupational projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -9703,7 +9715,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "What Should Be Checked First in This Occupation?",
+            "question": "What could a healthcare operations work sample show?",
             "table": {
               "rows": [
                 {
@@ -9735,7 +9747,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "How Can You Assess the Complete Work Cycle?",
+            "question": "How does health services management differ from clinical care?",
             "table": {
               "rows": [
                 {
@@ -11144,7 +11156,7 @@
           "entry": "medical-and-health-services-managers.navigation.1",
           "field": "url"
         },
-        "label": "Test Whether My Career Interests Fit Medical and Health Services Management",
+        "label": "Explore work activities with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11268,39 +11280,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "616,200 people",
+        "derivation": "BLS Table 1.2: U.S. occupation 11-9111 had about 640,400 jobs in 2025 and is projected to have about 795,500 in 2035 (+24.2%), with about 62,300 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 640,400 jobs",
         "fact_id": "us-employment-2024",
         "market": "United States (Medical and Health Services Managers 11-9111.00)",
         "measure": "2024 employment level",
         "occupation_scope": "O*NET 11-9111.00 occupational scope",
-        "period": "2024; accessed 2026-10-03",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET national employment trends page: projected much-faster-than-average growth over 2024—2034 (approximately 23%).",
-        "display_value": "Much faster than average (approximately 23%, 2024—2034)",
+        "derivation": "BLS Table 1.2: U.S. occupation 11-9111 had about 640,400 jobs in 2025 and is projected to have about 795,500 in 2035 (+24.2%), with about 62,300 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "+24.2%",
         "fact_id": "us-growth",
         "market": "United States (Medical and Health Services Managers 11-9111.00)",
         "measure": "Projected employment growth",
         "occupation_scope": "O*NET 11-9111.00 occupational scope",
-        "period": "2024—2034; accessed 2026-10-03",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "Estimated openings over the projection period, including replacement demand.",
-        "display_value": "Approximately 62,100 openings per year (2024—2034)",
+        "derivation": "BLS Table 1.2: U.S. occupation 11-9111 had about 640,400 jobs in 2025 and is projected to have about 795,500 in 2035 (+24.2%), with about 62,300 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 62,300 per year",
         "fact_id": "us-openings",
         "market": "United States (Medical and Health Services Managers 11-9111.00)",
         "measure": "Projected openings (annual average)",
         "occupation_scope": "O*NET 11-9111.00 occupational scope",
-        "period": "2024—2034; accessed 2026-10-03",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
@@ -11364,19 +11376,19 @@
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "US Employment Growth"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "US Employment Level"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "US Average Annual Openings"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11390,17 +11402,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Medical and health services managers (O*NET 11-9111.00) manage healthcare service operations, budgets, personnel, and compliance. US BLS 2025 median annual wage: USD 123,860. Approximately 616,200 employed in 2024; projected much-faster-than-average growth over 2024—2034 (approximately 23%). Includes work context, risks, and entry paths."
+      "text": "Learn how healthcare managers improve services and coordinate resources with clinical teams."
     },
     "title": {
       "availability": "available",
-      "text": "Medical and Health Services Managers: Work, US Wages, and Entry Paths"
+      "text": "Medical and Health Services Manager: Operations and Quality"
     }
   },
-  "source_content_sha256": "cd3a158b63986f4f3c3f81504ce179e59d6c1cc0bdfa82bb80f50225140336a5",
+  "source_content_sha256": "3fc47682b426f02f559fdf6dffa1f399b3a2bcc6b1b1ecd559ef166e93eaac7a",
   "subject": {
     "canonical_slug": "medical-and-health-services-managers",
-    "name": "Medical and Health Services Managers",
-    "summary": "Medical and health services managers (O*NET 11-9111.00) plan, direct, and coordinate medical and health services in hospitals, clinics, or public health agencies, handling operations and budgets, personnel and quality, compliance, and external collaboration."
+    "name": "Medical and Health Services Manager",
+    "summary": "Medical and health services managers coordinate operations in organizations such as hospitals and clinics. They track staffing, workflows, budgets and service quality."
   }
 }

@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1497,7 +1494,7 @@
         "status": "pending_mapping"
       },
       "item:helpers-electricians.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:helpers-electricians.sources.source-card.1": {
         "status": "mapped"
@@ -10834,7 +10831,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10886,7 +10883,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10938,7 +10935,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -24117,12 +24114,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对岗位胜任度的评价，也不构成任何安全、职业健康或法律意见。本页对应美国 O*NET/SOC 47-3013.00「Helpers--Electricians」（电工帮工）这一精确职业：以较低技能要求的作业协助电工：使用、供应或递送材料与工具，并清洁作业区与设备。官方范围原文：Help electricians by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment. O*NET 列出的核心任务包括（该页列出 25 项任务，页面默认展示重要性最高的 5 项）：使用剥线钳剥去线端绝缘层并把导线接到接线端子上以备随后焊接；使用测试仪排查接线中的短路；使用测量仪器与手动工具对电线与导管进行测量与切割与弯曲；检查电气设备是否存在连接松动与绝缘破损并使用手动工具紧固连接；维护工具、车辆与设备并保持零件与用品井然有序。常见职位名称包括 Electrical Helper 与 Electrician Helper 与 Electrician Apprentice 与 Electrical Apprentice 与 Inside Wireman Apprentice。口径提示：O*NET 在 47-3013.00 页呈现的美国工资与就业数据未标注取自上级或相邻职业，本页按本职业（47-3013.00）自身口径如实标注；该职业在美国属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；本页不把美国口径外推为中国大陆的岗位名称、资格或工资。"
+              "若不适应搬运、久站、现场噪声或反复核料，先问清材料重量、轮换和班组分工。"
             ]
           },
           "id": "helpers-electricians.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -24131,12 +24129,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一份完全虚构的电气配合任务包（仅用于练习流程，不代表任何真实企业、项目或数据）。请写出方案草案：（1）如何根据一份虚构的施工任务单与电气图纸，按结构化思路协助一次电气安装或检修作业（工程部位与图纸编号、导线与导管与配电设备规格、剥线与接线与端子、测量与切割与弯曲、断电与验电与隔离、高处与吊顶与管井作业、工具与材料搬运与清点、作业后清洁与恢复），并写明哪些信息不足需要补充（图纸版本与回路编号、现场条件与供电状态与准入要求、安全与断电与验电安排、材料到货与停电窗口与工期衔接）；（2）如何为一份虚构的材料与作业记录表设计填写与复核要点（字段与口径、部位与回路标识、导线与导管与端子与用量、断点与验电与接地、测试与检查、异常与返工与遗留项、原始记录与修订留痕）；（3）如何撰写一份可交接的班次与作业摘要（部位与回路—材料与规格—接线与测量—断点与验电—清洁与恢复—遗留项与建议）；（4）如何记录与保存材料与作业数据，并区分可公开信息与涉及项目与供电方与厂商的受控资料；（5）如何在发现带电或短路或高处或机械与切割风险、超出岗位授权或安全风险时暂停并复核与隔离与上报。使用公开资料与模拟数据作答，不使用任何真实企业或项目数据。"
+              "到「入行与 E 表：线管物料标签核对」做原题和变式，再打开折叠参考解。"
             ]
           },
           "id": "helpers-electricians.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24145,12 +24143,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜美国 O*NET 47-3013.00 的工作活动重要性显示：决策与解决问题（88）与检查设备、结构或材料（84）与进行一般身体活动（82）与处理信息（81）与获取信息（80）与搬运与移动物体（80）与与主管、同事或下属沟通（79）是该职业最重要的活动；工作情境显示：面对面讨论频繁（89% 每天）、决策频率高（65% 每天）、接触危险设备 常见（51% 每天）、接触污染物 常见（55% 每天）、与电工与同事紧密协作（56% 持续与他人接触）、精确性与配合要求高（56% 极其重要）。若你愿意围绕导线与导管与电气设备动手配合、能按电工指令与图纸把测量与剥线与接线与检查做扎实，并对作业安全与工序质量与现场秩序负责，本职业的日常要求与你的工作方式更接近。"
+              "在E 表：线管物料标签核对核对型号与件数，保留冲突原值，写明交接对象。"
             ]
           },
           "id": "helpers-electricians.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24159,12 +24157,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜O*NET 同时显示（47-3013.00，工作情境与任务口径）：接触危险设备 常见（51% 每天）；接触污染物 常见（55% 每天）；常在狭窄或高处与吊顶与管井作业；错误的后果较为严重（17% 极其严重、22% 非常严重）；对他人的健康与安全责任较高（37% 极高责任、20% 高责任）；工序衔接与工期带来时间压力（19% 每天、52% 每周一次或以上）。本职业以导线与导管与配电与电气设备与供电状态为对象：一次未断电或未验电即作业、一次接线或端子紧固不到位、一次测量或切割失误、一次高处或吊顶作业防护不到位，都可能造成触电、短路、火灾、设备损坏与工期与合规风险。O*NET 将该职业列入 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；该页学历部分显示 71% 表示要求高中文凭或同等学历、13% 表示要求高中后证书、11% 表示低于高中文凭（该页未说明剩余 5%）；增长标为 Little or no change（0%），该页未标注 Bright Outlook。若你难以在粉尘与污染物与噪声与高处与狭窄环境下作业、难以接受随项目与工序与停电窗口变化与可能加班的节奏，或不愿对安全与工序配合承担责任，应把这些作为现实成本。"
+              "施工现场可能有工具、设备和电气风险。接线、测试与送电由符合当地要求且获授权的人员负责。"
             ]
           },
           "id": "helpers-electricians.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -24173,7 +24172,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项作业上同时完成三件事：把技术做实（依据图纸与电工指令与规程完成测量与剥线与接线与检查与清洁，产出可用的材料与作业记录）、把安全与合规与边界管住（按断电与验电与隔离与上锁挂牌与高处与临边与机械与切割与职业健康要求工作并留痕、区分可公开信息与涉及项目与供电方与厂商的受控资料并按制度处理、不在无授权时带电作业或越界处置）、并承担可界定的岗位责任（对本人测量与剥线与接线与紧固与检查与记录负责，对超出岗位授权或涉及特种作业与带电与重大安全事项按制度提请相应岗位或机构处理）。建议用一次可核验的体验（为一份虚构任务单完成一份协助作业方案与一份材料与作业记录说明，或一次带电或短路或切割异常的处置复盘）来检验，而不是仅依据兴趣问卷的结论。"
+              "适合愿意重复核对型号与件数、搬运并记录材料，以及及时把未决差异交给负责人的人。"
             ]
           },
           "id": "helpers-electricians.quick-decision.fermat-decision-card.7",
@@ -24195,7 +24194,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜本页的「电工帮工」是 O*NET 47-3013.00（Helpers--Electricians）这一精确职业，工作可以分成几类：（一）材料与准备——从仓储中选取工具与设备与材料并运抵作业现场，维护工具与车辆与设备并保持零件与用品井然有序；（二）测量与加工——使用测量仪器与手动工具对电线与导管进行测量与切割与弯曲，使用剥线钳剥去线端绝缘层；（三）接线与检查——把导线接到接线端子上以备随后焊接，检查电气设备是否存在连接松动与绝缘破损并使用手动工具紧固连接；（四）排查与测试——使用测试仪排查接线中的短路，协助测试与检查回路与设备状态；（五）清洁与恢复——清洁作业区与设备与工具，恢复防护与盖板，并协助记录用量与断点与异常。"
+              "电工助手为电工准备工具、线管和其他物料，按分工协助定位、传递与清理，并报告标签、数量或位置差异。接线、测试和送电的责任按当地资格及现场授权核对。"
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.1",
@@ -24209,7 +24208,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "精确47-3013电工帮工以较低技能任务供应扶持材料工具及清洁，当前25任务18Core/7Supplemental；剥线接端子86、短路排查80、测切弯80、检查紧固79、维护78；原任务正确保留。活动决策88、检查84、体力82、处理81、获取80、搬运80、沟通79均正确保留。美国BLS精确47-3013典型高中或同等学历、无相关经验要求、短期在岗训练；O*NET新聘71%高中/13%高中后证书/11%低于高中为不同测量，剩余5%不猜。RC为当前官方兴趣描述，仅用于探索；本轮未取得兴趣分项数值；当前风格依赖71、细节62、谨慎52、合作52，是职业描述，不是人格预测。BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。"
+              "精确47-3013电工帮工以较低技能任务供应扶持材料工具及清洁，当前25任务18Core/7Supplemental；剥线接端子86、短路排查80、测切弯80、检查紧固79、维护78；活动决策88、检查84、体力82、处理81、获取80、搬运80、沟通79。美国BLS精确47-3013典型高中或同等学历、无相关经验要求、短期在岗训练；O*NET新聘71%高中/13%高中后证书/11%低于高中为不同测量，剩余5%不猜。RC为当前官方兴趣描述，仅用于探索；本轮未取得兴趣分项数值；当前风格依赖71、细节62、谨慎52、合作52，是职业描述，不是人格预测。BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。"
             ]
           },
           "id": "helpers-electricians.profile.onet-structured-fields-block.1",
@@ -24256,12 +24255,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录与协作说明｜以施工任务单与电气图纸与材料清单为起点，先核对工程部位与图纸编号与回路编号、导线与导管与配电设备规格、剥线与接线与端子、测量与切割与弯曲、断电与验电与隔离与上锁挂牌、高处与吊顶与管井作业、材料搬运与清点、作业后清洁与恢复，再按电工与工序要求协助作业并按班次交接。涉及带电与高处与机械与切割与受限空间的须按资质与制度执行，并保留可追溯的材料与作业与测试记录。"
+              "美国 O*NET 的 47-3013 职业记录列有剥线、接端子和测试等任务。助手通常支持备料、标签与记录；现场接线、测试及电源处置按实际任务、所在地资格和现场授权分工。电源状态不明或任务越界时先停、退离并报告。"
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-circuit"
           ],
           "type": "prose"
         },
@@ -24284,7 +24284,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "任务单与图纸核对 → 材料与选料与运料 → 断电与验电与隔离 → 测量与切割与剥线 → 接线与检查与紧固 → 清洁与恢复与记录与交接"
+              "接收工单 → 核对分工 → 核对物料和记录 → 报告差异 → 协助已分配任务 → 交接记录"
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.3",
@@ -24312,12 +24312,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "安全与合规说明｜按建筑施工安全与电气安全与断电与验电与隔离与上锁挂牌与高处与临边与机械与切割与职业健康与记录要求组织工作：测量与剥线与接线与紧固与测试须与图纸与规程与现行标准一致并标明来源与局限，不得替代电气安全检测、送电验收或安全许可要求；涉及带电作业与高处与吊顶与管井作业与机械与切割作业的须按规定办理作业许可与个人防护；涉及项目与供电方与厂商图纸与技术资料的收集与使用与对外提供须具有合法依据并限于最小必要范围并按制度审批与留痕。"
+              "美国 O*NET 的 47-3013 职业记录列有剥线、接端子和测试等任务。助手通常支持备料、标签与记录；现场接线、测试及电源处置按实际任务、所在地资格和现场授权分工。电源状态不明或任务越界时先停、退离并报告。"
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-circuit"
           ],
           "type": "prose"
         },
@@ -24340,7 +24341,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "接受任务与图纸核对 → 材料与选料与运料 → 断电与验电与隔离 → 测量与加工与剥线 → 接线与紧固与检查 → 测试与排查与清洁与恢复与记录"
+              "确认任务与带教 → 在指定区备料 → 核对标签和件数 → 留存差异 → 电工复核技术问题 → 交接并记录未决项"
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.5",
@@ -24368,12 +24369,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录与协作｜按企业施工与质量与安全管理制度记录任务单、材料与规格与用量、测量与切割与剥线与接线、断电与验电与隔离与上锁挂牌、测试与检查与清洁与恢复、异常与返工与遗留项与班次交接与原始记录与修订留痕，并与电工与班组与材料与安全人员核对部位与回路，异常须及时隔离并上报。"
+              "美国 O*NET 的 47-3013 职业记录列有剥线、接端子和测试等任务。助手通常支持备料、标签与记录；现场接线、测试及电源处置按实际任务、所在地资格和现场授权分工。电源状态不明或任务越界时先停、退离并报告。"
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-circuit"
           ],
           "type": "prose"
         },
@@ -24676,7 +24678,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜美国 O*NET 将 47-3013.00（电工帮工）列入 Job Zone 1-2（几乎无需至需要一定准备），SVP 区间为 低于 6.0（SVP Below 6.0）；学历部分显示 71% 表示要求高中文凭或同等学历、13% 表示要求高中后证书、11% 表示低于高中文凭（该页未说明剩余 5%）；增长标为 Little or no change（0%），未标注 Bright Outlook；在美国该职业准备通常为短期在岗训练与师徒带教，或职业学校训练与电工注册学徒。"
+              "美国就业展望采用 BLS 表 1.2 的 47-3013 职业行。"
             ]
           },
           "id": "helpers-electricians.profile.career-quick-answers-block.27",
@@ -24909,12 +24911,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "核心工作与产出：从仓储中选取工具与材料并运抵现场，测量与切割与弯曲电线与导管，剥去线端绝缘层并接到端子上，检查连接松动与绝缘破损并紧固，使用测试仪排查短路，维护工具与车辆与设备；产出为按图纸与规程完成的配合作业与材料与作业记录。"
+              "美国 O*NET 的 47-3013 职业记录列有剥线、接端子和测试等任务。助手通常支持备料、标签与记录；现场接线、测试及电源处置按实际任务、所在地资格和现场授权分工。电源状态不明或任务越界时先停、退离并报告。"
             ]
           },
           "id": "helpers-electricians.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-circuit"
           ],
           "type": "prose"
         },
@@ -25264,7 +25267,7 @@
                 "url": "https://www.onetonline.org/link/hot_tech/47-3013.00"
               },
               {
-                "entity": "O*NET 47-3013.00 就业趋势（本职业自身口径，BLS 就业预测 2024—2034）",
+                "entity": "2025–2035",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
@@ -25478,7 +25481,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务判断｜可在获准环境试验任务单、材料清单与记录草稿，人工核原始信息与现场判据。未取得本职业生成式AI采用率、实测提效、暴露等级或就业因果，不保证职业整体不替代。O*NET列5类软件技能；热门页仅Excel、Office两项美国2025招聘技能，全部占比未提供；CAD、记录和报告软件目录不证明普遍使用，Outlook未列当前热门页；不推AI采用提效。BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "编辑任务判断｜可在获准环境试验任务单、材料清单与记录草稿，人工核原始信息与现场判据。未取得本职业生成式AI采用率、实测提效、暴露等级或就业因果，不保证职业整体不替代。O*NET列5类软件技能；热门页仅Excel、Office两项美国2025招聘技能，全部占比未提供；CAD、记录和报告软件目录不证明普遍使用，Outlook未列当前热门页；不推AI采用提效。BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。"
             ]
           },
           "id": "helpers-electricians.ai-impact.ai-impact-table.18",
@@ -26290,7 +26293,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先掌握测量与切割与弯曲与剥线与接线与端子紧固、短路排查与测试、断电与验电与隔离与上锁挂牌、高处与临边与机械与切割与电气安全作业，以及在工序与工期压力下坚持规程与证据与记录与异常上报的能力；数字工具只需会用即可。"
+              "助手核对物料和记录。现场电源状态、验电、隔离、接线、测试和送电由符合资格并获授权的人员按现场规程处置。"
             ]
           },
           "id": "helpers-electricians.ai-impact.ai-impact-table.76",
@@ -26822,7 +26825,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "断电与验电与隔离由本人按资质负责（人的控制点）"
+              "助手核对物料和记录。现场电源状态、验电、隔离、接线、测试和送电由符合资格并获授权的人员按现场规程处置。"
             ]
           },
           "id": "helpers-electricians.ai-impact.ai-impact-table.114",
@@ -26878,7 +26881,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "异常识别与隔离与上报与返工提请由本人按授权完成（人的控制点）"
+              "助手按分工备料并记录差异。电源或安全条件不清时停止、退离并报告，电路隔离由符合资格且获现场授权的人员负责。"
             ]
           },
           "id": "helpers-electricians.ai-impact.ai-impact-table.118",
@@ -26920,7 +26923,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "识别带电或短路或机械或高处异常并隔离与上报"
+              "助手按分工备料并记录差异。电源或安全条件不清时停止、退离并报告，电路隔离由符合资格且获现场授权的人员负责。"
             ]
           },
           "id": "helpers-electricians.ai-impact.ai-impact-table.121",
@@ -26956,12 +26959,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025第10分位年工资33,020美元；时薪15.88美元"
+              "第 10 分位年薪 33,020 美元，时薪 15.88 美元。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26970,12 +26973,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-3013.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "2025 年 5 月美国全国职业工资。O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26984,12 +26987,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025第25分位年工资36,830美元；时薪17.71美元"
+              "第 25 分位年薪 36,830 美元，时薪 17.71 美元。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26998,12 +27001,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-3013.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "2025 年 5 月美国全国职业工资。O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27012,12 +27015,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025第50分位年工资42,670美元；时薪20.51美元"
+              "第 50 分位年薪 42,670 美元，时薪 20.51 美元。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27026,12 +27029,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-3013.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "2025 年 5 月美国全国职业工资。O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27040,12 +27043,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025第75分位年工资48,470美元；时薪23.30美元"
+              "第 75 分位年薪 48,470 美元，时薪 23.3 美元。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27054,12 +27057,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-3013.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "2025 年 5 月美国全国职业工资。O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27068,12 +27071,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025第90分位年工资58,340美元；时薪28.05美元"
+              "第 90 分位年薪 58,340 美元，时薪 28.05 美元。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27082,12 +27085,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-3013.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "2025 年 5 月美国全国职业工资。O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27096,12 +27099,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。"
+              "约 65,000 个岗位（2025）"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27110,12 +27113,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025—2035精确职业预测；边界｜就业含自雇、空缺含替换，不是实时招聘、净增或AI因果。"
+              "2025—2035 美国全国职业就业预测。BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27124,12 +27127,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。"
+              "+0.6%"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27138,12 +27141,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025—2035精确职业预测；边界｜就业含自雇、空缺含替换，不是实时招聘、净增或AI因果。"
+              "2025—2035 美国全国职业就业预测。BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27152,12 +27155,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。"
+              "预计年均约 6,100 个"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27166,12 +27169,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025—2035精确职业预测；边界｜就业含自雇、空缺含替换，不是实时招聘、净增或AI因果。"
+              "2025—2035 美国全国职业就业预测。BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27194,7 +27197,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜本页的电工帮工是 O*NET 47-3013.00（Helpers--Electricians）这一精确职业：以较低技能要求的作业协助电工：使用、供应或递送材料与工具，并清洁作业区与设备。该职业在美国属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；增长标为 2025—2035精确增长0.6%，该页未标注 Bright Outlook。"
+              "按招聘职责识别辅助岗位。师傅工种与助手的任务和授权分别核对。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.24",
@@ -27208,7 +27211,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "电气或建筑施工相关学历与训练"
+              "工作分工"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.25",
@@ -27222,7 +27225,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "多数岗位"
+              "核对辅助范围"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.26",
@@ -27236,7 +27239,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "满足入门的电气与工具与安全知识起点；该页学历部分显示 71% 表示要求高中文凭或同等学历、13% 表示要求高中后证书、11% 表示低于高中文凭（该页未说明剩余 5%）"
+              "问清备料、搬运和交接由谁复核。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.27",
@@ -27250,7 +27253,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "材料与测量与剥线与接线与检查能力"
+              "培训与防护"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.28",
@@ -27264,7 +27267,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "所有岗位"
+              "核对带教"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.29",
@@ -27278,7 +27281,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位通常要求能按规程测量与切割与剥线与接线与检查与紧固，并遵守断电与验电与带电与高处与机械与切割安全要求"
+              "问清进场培训和哪些任务需另核授权。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.30",
@@ -27292,7 +27295,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "低压电工作业与高处作业等资格"
+              "基本报酬"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.31",
@@ -27306,7 +27309,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "涉及相应作业岗位"
+              "核对计薪单位"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.32",
@@ -27320,7 +27323,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国房屋市政工程实际建筑施工特种作业按住建60号；其他实际电工作业按应急19号及其目录培训考核取证，两类证种不混用；不是所有电工帮工同时要所有资格。；学徒不列普遍必需或常见。"
+              "分清日薪、小时工资或月薪。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.33",
@@ -27334,7 +27337,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业健康与劳动保护要求"
+              "额外报酬"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.34",
@@ -27348,7 +27351,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "涉及电气与高处与污染物岗位"
+              "核对支付条件"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.35",
@@ -27362,7 +27365,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业病危害接触者按规定检查与防护；岗位调整依实际危害和结果，不固定要求所有人轮岗。"
+              "问清加班、停工和试用期计薪。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.36",
@@ -27474,7 +27477,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜电工帮工（O*NET/SOC 47-3013.00 Helpers--Electricians；招聘与行业内常称电气安装工、建筑电工辅助人员、低压电工辅助人员、机电安装工、电工学徒）。"
+              "中国大陆工资参考"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.44",
@@ -27488,12 +27491,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜中国大陆在电气安装与检修与建筑机电领域存在与电工帮工相近的岗位，其作业与断电与验电与高处与临边与机械与切割与电气与安全与职业健康与记录受《中华人民共和国安全生产法》与特种作业（低压电工作业等）与职业健康与环境保护等相关法规与标准约束；但公开职业统计未按本职业单列全国工资分布。"
+              "国家统计局公布城镇建筑业年平均工资。本页暂无中国大陆助手岗位的全国职业工资分布。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27502,7 +27505,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "匹配理由｜建筑电气安装辅助岗位匹配建筑业；工业设备检修等其他雇主归类另核，门类不作职业工资；宽口径参考为建筑业城镇非私营/私营单位2025年年平均工资92,036/66,275元。统计覆盖该行业多种职业与职级，不能代填本职业中位数、起薪或个人收入。本轮未取得该职业全国精确工资分布，保留缺口。"
+              "应聘时按项目、合同和实际任务核对工时、计薪单位及授权。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.46",
@@ -27544,7 +27547,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025年 建筑业／城镇非私营单位（行业参考）"
+              "城镇非私营单位 · 建筑业"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.49",
@@ -27558,7 +27561,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年平均工资 92,036 元/年；行业全体就业人员平均数，不是本职业工资。"
+              "92,036 元／年"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.50",
@@ -27573,7 +27576,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025年 建筑业／城镇私营单位（行业参考）"
+              "城镇私营单位 · 建筑业"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.51",
@@ -27587,7 +27590,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年平均工资 66,275 元/年；行业全体就业人员平均数，不是本职业工资。"
+              "66,275 元／年"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.52",
@@ -27602,7 +27605,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆本职业精确全国职业工资"
+              "全国城镇非私营单位 · 全行业"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.53",
@@ -27616,7 +27619,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与 O*NET 47-3013.00（电工帮工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "129,441 元／年"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.54",
@@ -27630,12 +27633,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜本页为 O*NET 47-3013.00（电工帮工）这一精确职业，与电工（47-2111.00）、帮工木工（47-3012.00）、帮工管道铺设工与管道工与管道装配工与蒸汽管道工（47-3015.00）、帮工油漆工与裱糊工与抹灰工与灰泥泥瓦工（47-3014.00）、帮工屋顶工（47-3016.00）等相邻职业不同；工资与就业须按各自职业代码与统计口径核对，不能互相套用。"
+              "暂无中国大陆这一助手职业的全国工资分布。国家统计局 2025 年建筑业年平均工资为城镇非私营单位 92,036 元、城镇私营单位 66,275 元，可作行业参照。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27658,7 +27661,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 几乎无变化 2025—2035精确增长0.6%（2025—2035，BLS 就业预测，本职业（47-3013.00）自身口径；该页未标注 Bright Outlook）"
+              "美国就业预测采用 BLS 表 1.2。O*NET 用于核对职业身份及工作内容。"
             ]
           },
           "id": "helpers-electricians.china-salary.career-snapshot-primary-locale.58",
@@ -27694,12 +27697,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET精确全国工资｜https://www.onetonline.org/link/localwages/47-3013.00；BLS精确2025—2035预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS职业组背景｜https://www.bls.gov/ooh/construction-and-extraction/construction-laborers-and-helpers.htm"
+              "O*NET 全国职业工资｜https://www.onetonline.org/link/localwages/47-3013.00；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；住建部第 60 号令建筑施工特种作业人员管理规定｜https://www.mohurd.gov.cn/tsgb/gzk/art/2025/art_33002693.html"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -27708,12 +27713,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025第10分位年工资33,020美元；时薪15.88美元"
+              "第 10 分位年薪 33,020 美元，时薪 15.88 美元。"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27722,12 +27727,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-3013.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27736,12 +27741,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025第25分位年工资36,830美元；时薪17.71美元"
+              "第 25 分位年薪 36,830 美元，时薪 17.71 美元。"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27750,12 +27755,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-3013.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27764,12 +27769,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025第50分位年工资42,670美元；时薪20.51美元"
+              "第 50 分位年薪 42,670 美元，时薪 20.51 美元。"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27778,12 +27783,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-3013.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27792,12 +27797,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025第75分位年工资48,470美元；时薪23.30美元"
+              "第 75 分位年薪 48,470 美元，时薪 23.3 美元。"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27806,12 +27811,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-3013.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27820,12 +27825,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025第90分位年工资58,340美元；时薪28.05美元"
+              "第 90 分位年薪 58,340 美元，时薪 28.05 美元。"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27834,12 +27839,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国精确47-3013.00全国工资May2025；边界｜分位不能反推资历或起薪，含生产奖金，排除福利、加班及非生产奖金。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-3013.00"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27848,12 +27853,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。"
+              "约 65,000 个岗位（2025）"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27862,12 +27867,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025—2035精确职业预测；边界｜就业含自雇、空缺含替换，不是实时招聘、净增或AI因果。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27876,12 +27881,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。"
+              "+0.6%"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27890,12 +27895,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025—2035精确职业预测；边界｜就业含自雇、空缺含替换，不是实时招聘、净增或AI因果。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27904,12 +27909,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。"
+              "预计年均约 6,100 个"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27918,12 +27923,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS2025—2035精确职业预测；边界｜就业含自雇、空缺含替换，不是实时招聘、净增或AI因果。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27932,7 +27937,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "精确全国五分位与就业预测已核；地区及精确行业工资未取得。行业背景另标范围；共享旧事实与保护面保持，不宣称全页同步。"
+              "美国五档工资与就业预测分别来自 OEWS 与 BLS 表 1.2。行业数据描述建筑工人及帮工组，地区和具体岗位工资请另核。"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.25",
@@ -27946,12 +27951,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国精确47-3013.00 May2025中位年工资42,670美元、时薪20.51美元，五分位已核。BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。"
+              "2025 年 5 月，美国电工助手 47-3013 全国工资中位数为 42,670 美元／年、20.51 美元／时。"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28044,7 +28049,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 几乎无变化 2025—2035精确增长0.6%（2025—2035，BLS 就业预测，本职业（47-3013.00）自身口径；该页未标注 Bright Outlook）"
+              "美国就业预测采用 BLS 表 1.2。O*NET 用于核对职业身份及工作内容。"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.33",
@@ -28296,12 +28301,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国分布位置，不能反推经验、职责或起薪；个人工资成因另核。"
+              "美国全国职业工资第 10 分位。"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28310,12 +28315,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位代表分布中点的典型水平，但不代表入职起薪；随地区、工程、工种、技能、资格与职责范围变化上升；为本职业自身口径，不代表相邻职业。"
+              "美国全国职业工资第 50 分位。"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28324,12 +28329,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国分布位置，不能反推经验、职责或起薪；个人工资成因另核。"
+              "美国全国职业工资第 90 分位。"
             ]
           },
           "id": "helpers-electricians.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -28356,31 +28361,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
@@ -28919,7 +28924,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能在电工与岗位授权与规程范围内独立完成测量与剥线与接线与检查与清洁与记录"
+              "发现电源状态不明、裸露导体或任务超出授权时，助手应停止、退离并报告现场负责人。由符合当地资格与现场授权的人员确认电源状态，按程序完成隔离、验电、接线或测试。助手不得自行处理回路、送电或放行。"
             ]
           },
           "id": "helpers-electricians.fit.personality-fit-block.29",
@@ -29297,7 +29302,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：愿意在断电与验电与隔离与上锁挂牌与高处与机械与切割要求下对作业安全与工序质量负责，能在测量与剥线与接线与检查与测试与清洁之间切换并保持对依据与记录的重视，能在停电窗口与工期压力下坚持规程与证据与复核，并在现场或电气异常或超授权时按制度隔离与上报。"
+              "愿意反复核对物料和工单，保留差异，在情况不清时停手并请对应负责人复核。"
             ]
           },
           "id": "helpers-electricians.fit.personality-fit-block.56",
@@ -29325,7 +29330,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议：先用一次模拟或真实的配合任务检验读图纸与测量与剥线与接线与写记录，并了解目标企业与法域对安全与职业健康与低压电工与高处作业资格的要求，再决定是否长期投入。"
+              "在E 表：线管物料标签核对核对型号与件数，保留冲突原值，写明交接对象。"
             ]
           },
           "id": "helpers-electricians.fit.personality-fit-block.58",
@@ -29367,7 +29372,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "RC为当前官方兴趣描述，仅用于探索；本轮未取得兴趣分项数值；当前风格依赖71、细节62、谨慎52、合作52，是职业描述，不是人格预测。；JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
+              "RC为当前官方兴趣描述，仅用于探索；本轮未取得兴趣分项数值；当前风格依赖71、细节62、谨慎52、合作52，是职业描述，不是人格预测。JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
             ]
           },
           "id": "helpers-electricians.fit.personality-fit-block.61",
@@ -29381,7 +29386,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "RC为当前官方兴趣描述，仅用于探索；本轮未取得兴趣分项数值；当前风格依赖71、细节62、谨慎52、合作52，是职业描述，不是人格预测。；JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
+              "RC为当前官方兴趣描述，仅用于探索；本轮未取得兴趣分项数值；当前风格依赖71、细节62、谨慎52、合作52，是职业描述，不是人格预测。JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
             ]
           },
           "id": "helpers-electricians.fit.personality-fit-block.62",
@@ -29395,7 +29400,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "RC为当前官方兴趣描述，仅用于探索；本轮未取得兴趣分项数值；当前风格依赖71、细节62、谨慎52、合作52，是职业描述，不是人格预测。；JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
+              "RC为当前官方兴趣描述，仅用于探索；本轮未取得兴趣分项数值；当前风格依赖71、细节62、谨慎52、合作52，是职业描述，不是人格预测。JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
             ]
           },
           "id": "helpers-electricians.fit.personality-fit-block.63",
@@ -29409,7 +29414,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "RC为当前官方兴趣描述，仅用于探索；本轮未取得兴趣分项数值；当前风格依赖71、细节62、谨慎52、合作52，是职业描述，不是人格预测。；JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
+              "RC为当前官方兴趣描述，仅用于探索；本轮未取得兴趣分项数值；当前风格依赖71、细节62、谨慎52、合作52，是职业描述，不是人格预测。JobZone1-2，SVP低于6；不支持心理测评分数对绩效的结论。"
             ]
           },
           "id": "helpers-electricians.fit.personality-fit-block.64",
@@ -29508,7 +29513,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界｜本页列出的是本职业在测量与剥线与接线与检查与测试中较常见的失效类型与控制要点，用于帮助识别与管理风险，不构成任何电气安全、特种作业、职业健康或法律意见或对个案的结论；凡涉及电气安全检测、送电验收、事故认定、职业病诊断的须由具备相应资格的岗位或机构处理。"
+              "发现电源状态不明、裸露导体或任务超出授权时，助手应停止、退离并报告现场负责人。由符合当地资格与现场授权的人员确认电源状态，按程序完成隔离、验电、接线或测试。助手不得自行处理回路、送电或放行。"
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.8",
@@ -29536,7 +29541,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET精确任务与情境、BLS职业组环境支持风险线索；六卡为编辑场景，不是逐卡事故率或法定资格认定。中国房屋市政工程实际建筑施工特种作业按住建60号；其他实际电工作业按应急19号及其目录培训考核取证，两类证种不混用；不是所有电工帮工同时要所有资格。"
+              "房屋市政工程按住建部第 60 号令核实受监管作业。其他适用特种作业按应急管理部第 19 号令和联合目录核实，遇有专门规定从其规定。按实际任务向项目及主管部门核对应资格、适用互认与现场授权。"
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.10",
@@ -29578,7 +29583,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按断电与验电与隔离与上锁挂牌与验电确认要求作业并使用绝缘防护；发现带电或异常立即停止并复核与隔离与上报"
+              "发现电源状态不明、裸露导体或任务超出授权时，助手应停止、退离并报告现场负责人。由符合当地资格与现场授权的人员确认电源状态，按程序完成隔离、验电、接线或测试。助手不得自行处理回路、送电或放行。"
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.13",
@@ -29634,7 +29639,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按脚手架与梯具与临边与洞口防护要求作业并检查固定；发现架体或防护异常立即停止作业并隔离与上报"
+              "培训、现场授权、脚手架或临边防护、电气危险控制任何一项未确认时，助手不接手。先停、退至安全处并报告现场负责人。检查或处置由相应人员完成，得到现场明确指示前保持待处理。"
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.17",
@@ -29690,7 +29695,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "切割与机械作业须按防护与断电与隔离要求执行；发现机械或切割异常立即停止并隔离与上报"
+              "机具防护缺失、失效或所需能源隔离未确认时，助手不得启动或接手机具。停止、退至安全处并报告。由获授权人员按现场程序检查并处置，确认前不恢复。"
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.21",
@@ -29802,7 +29807,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按图纸与规程完成测量与剥线与接线与紧固与测试；发现不合格或返工立即隔离并上报与配合返修"
+              "发现电源状态不明、裸露导体或任务超出授权时，助手应停止、退离并报告现场负责人。由符合当地资格与现场授权的人员确认电源状态，按程序完成隔离、验电、接线或测试。助手不得自行处理回路、送电或放行。"
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.29",
@@ -29928,7 +29933,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国房屋市政工程实际建筑施工特种作业按住建60号；其他实际电工作业按应急19号及其目录培训考核取证，两类证种不混用；不是所有电工帮工同时要所有资格。"
+              "房屋市政工程按住建部第 60 号令核实受监管作业。其他适用特种作业按应急管理部第 19 号令和联合目录核实，遇有专门规定从其规定。按实际任务向项目及主管部门核对应资格、适用互认与现场授权。"
             ]
           },
           "id": "helpers-electricians.risk.career-risk-cards.38",
@@ -30031,22 +30036,22 @@
                 "id": "education",
                 "values": [
                   "美国 O*NET 将 47-3013.00（电工帮工）列入 Job Zone 1-2（几乎无需至需要一定准备），SVP 区间为 低于 6.0（SVP Below 6.0）；学历部分显示 71% 表示要求高中文凭或同等学历、13% 表示要求高中后证书、11% 表示低于高中文凭（该页未说明剩余 5%）；该描述不取代企业与主管机关对资格与作业许可的要求。",
-                  "能否独立完成测量与剥线与接线与检查不取决于学历本身，而取决于是否经过技能训练与取得相应资格并在岗位授权范围内作业。",
+                  "美国 BLS 将该职业的典型入门教育列为高中或同等学历，通常有短期在岗培训。向雇主分别确认助手职责、培训与当地持证作业要求。",
                   "学历与训练只影响准入起点，能否熟练完成测量与剥线与接线与检查与排查主要取决于在岗训练与带教与考核结果。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "中国房屋市政工程实际建筑施工特种作业按住建60号；其他实际电工作业按应急19号及其目录培训考核取证，两类证种不混用；不是所有电工帮工同时要所有资格。；其他培训、防护与健康检查按真实作业危害核。",
-                  "涉及电气安全检测、送电验收、事故认定、职业病诊断的须由具备相应资格的岗位或机构处理。",
+                  "房屋市政工程按住建部第 60 号令核实受监管作业。其他适用特种作业按应急管理部第 19 号令和联合目录核实，遇有专门规定从其规定。按实际任务向项目及主管部门核对应资格、适用互认与现场授权。",
+                  "中国大陆房屋市政工程中，适用第 60 号令的建筑施工特种作业须按规定培训、考核并取得相应资格证书。工种范围另行规定，向项目和主管部门核对实际任务。",
                   "涉及项目与供电方与厂商图纸与技术资料的数据须按保密与最小必要要求管理，不得外发至未授权环境。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "RC为当前官方兴趣描述，仅用于探索；本轮未取得兴趣分项数值；当前风格依赖71、细节62、谨慎52、合作52，是职业描述，不是人格预测。；JobZone1-2，SVP低于6；风格是职业描述，不是个体人格预测。",
+                  "RC为当前官方兴趣描述，仅用于探索；本轮未取得兴趣分项数值；当前风格依赖71、细节62、谨慎52、合作52，是职业描述，不是人格预测。JobZone1-2，SVP低于6；风格是职业描述，不是个体人格预测。",
                   "本职业需在粉尘与污染物与噪声与高处与狭窄环境动手作业，并通过图纸与测试仪与量具判断回路与设备状态。",
                   "工作情境显示接触危险设备与污染物与噪声常见、决策频率高、精确性要求高、错误的后果较严重、对他人的健康与安全责任较高、受工序与停电窗口约束。"
                 ]
@@ -30063,7 +30068,8 @@
           },
           "id": "helpers-electricians.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -30076,41 +30082,41 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "练习材料（全部虚构）",
-                  "一份施工任务单与一张电气图纸与回路图与一份材料清单（导线与导管与端子与配电设备规格）、一份图例与回路编号示意、剥线与测量与测试设备使用说明。",
-                  "一份空白材料与测量与接线与测试与断点记录表。"
+                  "E 表：线管物料标签核对",
+                  "虚构纸面练习。清单要求 E1 为 C20 两件、E2 为 C25 三件、E3 为 C32 一件。到货记录为 E1 C20 两件、E2 C52 三件、E3 C32 两件。型号和数量都相符才可在表上确认。型号差异交电工复核，数量差异交收料员。变式只把 E2 到货型号改为 C25。分别列可确认项、原记录和交接对象。",
+                  "用题面提供的两份记录，不需要现场或工具。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "练习任务",
-                  "为一份虚构任务单编制一份协助作业方案并填写一份材料与作业记录。",
-                  "说明材料与选料与运料、断电与验电与隔离、测量与切割与剥线、接线与紧固与检查、测试与短路排查、清洁与恢复与异常预案。"
+                  "要交付的记录",
+                  "分别写原题和变式。每行记录原值、状态和复核人。",
+                  "差异原值保留至复核完成。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "做法建议",
-                  "先核对部位与图纸与回路与材料与安全条件，再按图纸与规程确定断电与验电与测量与接线步骤。",
-                  "执行时记录材料与规格与用量与测试与断点数据，完成后检查并恢复；对信息不足处明确标注并说明为何不代填。"
+                  "完成后复核",
+                  "先保存两份独立答案，再到常见问题打开折叠参考解。",
+                  "复核差异和交接对象。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界说明",
-                  "本练习只用于检验流程理解与记录能力，所有工程与企业与数据均为虚构。"
+                  "练习边界",
+                  "只核纸面记录。"
                 ]
               }
             ]
           },
           "id": "helpers-electricians.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "入行练习：一次完整的测量与剥线与接线与检查与清洁配合任务（虚构材料）",
+          "title": "E 表：线管物料标签核对",
           "type": "cards"
         },
         {
@@ -30122,28 +30128,28 @@
                 "id": "requirements-matrix",
                 "values": [
                   "作品矩阵",
-                  "把一份虚构的协助作业方案、一份材料与规格与用量记录、一份测量与剥线与接线记录、一份断电与验电与测试与异常处置说明整理成作品集，逐项对应招聘要求中的测量与剥线与接线与检查与排查与安全与记录能力。"
+                  "把两份原记录并排，注明差异。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "独立复核",
-                  "把方案与记录交给他人按图纸与规程复核，检查测量与接线与紧固与检查是否自洽；能被他人在不看说明的情况下复核，才说明方案与记录可交接。"
+                  "保留待核项及各自复核人。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "汇报摘要",
-                  "用一页说明本部位与回路的材料与规格—测量与用量—接线与紧固与检查—断点与验电—清洁与恢复—遗留项，便于面试或带教时展示你如何把材料与依据与记录串起来。"
+                  "分别写原题和变式的一行摘要。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "工具说明",
-                  "说明你所用测量仪器与测试仪与量具的读数与误差与校准情况，以及哪些判断依赖经验而非工具，体现对数据与依据边界的把握。"
+                  "使用纸笔核对，完成后读参考解。"
                 ]
               }
             ]
@@ -30213,59 +30219,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（接受任务—材料与选料与运料—断电与验电与隔离—测量与切割与剥线—接线与紧固与检查—测试与清洁与恢复与记录）。",
-                  "记录你观察到的断电与验电与隔离与高处与机械与切割安全要求。"
+                  "读取记录",
+                  "读工单，列出需要核对的字段。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "随电工观摩一次测量与剥线与接线，记录步骤与用量与安全动作。",
-                  "整理一份你观察到的测量与剥线与接线步骤与判据清单。"
+                  "核对字段",
+                  "逐行对照两份原记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "在带教下参与工具与量具与测试仪准备与记录填写与材料整理。",
-                  "写出你认为最容易出错的三个环节及原因。"
+                  "确定交接",
+                  "把差异分给题面指定的复核人。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "在带教下参与一次回路测量与短路排查。",
-                  "说明如果带电或短路或测试异常你会如何停止与上报。"
+                  "完成变式",
+                  "只改变式要求的一项，重做状态判断。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在带教下参与一次接线与紧固与检查并填写记录。",
-                  "列出判定合格与否的依据与不合格的隔离处置步骤。"
+                  "保存原值",
+                  "保留原题和变式的记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "整理一份虚构回路的测量与接线与测试记录说明并与电工核对。",
-                  "记录你与电工在测量或接线或判定上的分歧及处理方式。"
+                  "核对参考解",
+                  "打开折叠参考解核对。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "复盘七天体验：哪一类任务你有把握、哪一类需要更多训练，并据此决定是否继续投入。",
-                  "把复盘结论写成一页，作为是否入行的依据而不是凭兴趣判断。"
+                  "核对实际分工",
+                  "写下一个需要向雇主确认的分工问题。"
                 ]
               }
             ]
           },
           "id": "helpers-electricians.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天体验：用虚构材料完成一次测量与剥线与接线与检查闭环",
+          "title": "纸面核对顺序",
           "type": "timeline"
         },
         {
@@ -30273,20 +30279,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能在安全与规程与质量要求下完成测量与剥线与接线与检查与测试与清洁并使过程与依据可复核。",
-              "继续：在停电窗口与工期压力下坚持规程与证据与留痕，不因赶工跳过核对或放宽安全或伪造记录。",
-              "继续：能用一次可核验的配合任务或异常处置复盘证明自己的电气与配合能力。",
-              "继续：愿意在粉尘与污染物与噪声与高处环境中长期动手工作并对作业安全与工序质量负责。",
-              "谨慎：若七天体验中反复对安全规章或规程核对感到难以坚持，应重新评估适配。",
-              "谨慎：若难以接受随项目工序与停电窗口变化的加班与节奏，或难以承受高处与狭窄环境，应重新评估适配。",
-              "谨慎：若对带电或短路或机械或高处异常倾向先处置后补依据，应重新评估职业适配与风险意识。"
+              "确认每行都记录了原值。",
+              "把规格差异和数量差异分开。",
+              "保留冲突，不覆盖任何一条原记录。",
+              "检查每项待核记录的交接人。",
+              "变式只改题面指定的字段。",
+              "完成后打开折叠参考解。",
+              "向目标班组询问现场如何复核差异。"
             ]
           },
           "id": "helpers-electricians.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "做完后核对什么",
           "type": "list"
         },
         {
@@ -30322,13 +30328,13 @@
                 "学历与训练不等于资格或作业授权"
               ],
               [
-                "安全与技能培训与考核",
-                "所有岗位",
-                "满足安全与断电与验电与高处与机械与切割作业要求",
-                "涉及相应作业的岗位普遍要求",
-                "参加企业或机构的安全与技能培训并通过考核",
-                "数天到数周",
-                "培训与考核不等于送电或带电作业授权"
+                "进场安全教育",
+                "进入施工现场从事施工作业",
+                "识别危险区、按分工报告和停手",
+                "按适用现场要求接受培训。验电、隔离等受限任务另核资格与授权。",
+                "向班组核对适用培训和报告程序",
+                "以项目安排为准",
+                "涉及实际电气作业须另核资格与授权"
               ],
               [
                 "电工注册学徒或师徒带教",
@@ -30340,13 +30346,13 @@
                 "学徒经历不等于自动获得岗位或作业授权"
               ],
               [
-                "低压电工作业与高处作业资格",
-                "涉及相应作业岗位",
-                "满足带电作业与高处作业的法定或合规要求",
-                "中国房屋市政工程实际建筑施工特种作业按住建60号；其他实际电工作业按应急19号及其目录培训考核取证，两类证种不混用；不是所有电工帮工同时要所有资格。",
-                "参加认可培训与考核并取得资格或作业许可",
-                "数天到数周",
-                "资格范围以证书与主管机关与作业许可为准"
+                "受监管作业的资格",
+                "拟实际承担目录内作业的人员",
+                "核对与实际作业对应的有效证书及适用互认。证书本身不授予带电、送电或其他现场许可。",
+                "按项目、工种和现行联合目录核实适用证书。目录列明部分证书适用衔接、互认或免重复取证条件。",
+                "向主管部门核实已持证书是否适用、是否需培训或考核；与项目另核现场授权、批准及安全条件。",
+                "按主管部门和现场要求",
+                "资格范围、现场授权和安全条件都须逐项确认。"
               ],
               [
                 "职业健康检查与防护要求",
@@ -30360,7 +30366,7 @@
               [
                 "企业岗位与作业授权",
                 "所有独立作业岗位",
-                "取得独立测量与接线与送电配合的权限前提",
+                "入场安全教育、受限作业资格与现场授权分别核实。现场接线、测试与送电由符合资格且获授权者负责。",
                 "按企业施工与安全管理制度要求",
                 "经考核合格并在岗位与作业授权范围内作业",
                 "随岗位安排",
@@ -30370,7 +30376,12 @@
           },
           "id": "helpers-electricians.path.credential-decision.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035",
+            "mohurd-special-operation-2026",
+            "cn-work-example",
+            "mem-special-operation-2026",
+            "special-work-directory-2026"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -30380,15 +30391,20 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜应聘条件、学历、训练证明、安全与技能培训、低压电工作业与高处作业资格、职业健康检查、岗位与作业授权、电气安全检测与送电验收是不同状态：满足招聘条件不等于取得独立带电作业或送电或出具检测结论的权限。在美国，该职业属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0）），增长标为 Little or no change（0%）。",
-              "美国BLS精确47-3013典型高中或同等学历、无相关经验要求、短期在岗训练；O*NET新聘71%高中/13%高中后证书/11%低于高中为不同测量，剩余5%不猜。；中国房屋市政工程实际建筑施工特种作业按住建60号；其他实际电工作业按应急19号及其目录培训考核取证，两类证种不混用；不是所有电工帮工同时要所有资格。；安全训练、资格与企业作业授权分开。",
+              "美国就业展望采用 BLS 表 1.2 的 47-3013 职业行。",
+              "房屋市政工程按住建部第 60 号令核实受监管作业。其他适用特种作业按应急管理部第 19 号令和联合目录核实，遇有专门规定从其规定。按实际任务向项目及主管部门核对应资格、适用互认与现场授权。",
               "资格边界（三）｜本页列示的准备项不等于授权，也不自动带来带电作业、送电、对外披露的权限；真实权限须以企业与主管机关要求为准。",
               "住建60号施工特种作业证有效3年并按延期复核；应急19号证种按到期换证及实际目录要求；不是同一证种，不能把旧固定3年复审套全部电工帮工。"
             ]
           },
           "id": "helpers-electricians.path.credential-boundary.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035",
+            "mohurd-special-operation-2026",
+            "cn-work-example",
+            "mem-special-operation-2026",
+            "special-work-directory-2026"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -30451,7 +30467,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以安全与技能训练与资格与企业授权与考核为准，也不代表取得独立带电作业或送电或电气安全检测的权限。"
+              "发现电源状态不明、裸露导体或任务超出授权时，助手应停止、退离并报告现场负责人。由符合当地资格与现场授权的人员确认电源状态，按程序完成隔离、验电、接线或测试。助手不得自行处理回路、送电或放行。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.11",
@@ -30465,7 +30481,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在带教下承担材料与工具准备与测量与剥线协助与搬运与清洁与记录协助；不独立带电作业或送电或出具检测结论。"
+              "先问清可做的辅助任务与报告对象。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.12",
@@ -30479,7 +30495,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "跟岗与辅助岗"
+              "核对任务和带教"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.13",
@@ -30493,7 +30509,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在电工与岗位授权与规程范围内独立完成测量与剥线与接线与检查与清洁与记录，遇异常或安全或超授权按制度隔离与上报。"
+              "在指定区域按清单核对材料，记录原值。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.14",
@@ -30507,7 +30523,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立配合岗"
+              "备料与标签"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.15",
@@ -30521,7 +30537,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能承担带电与复杂回路配合与测试与排障与带教与工艺配合。"
+              "规格或数量不符时保留原记录，交负责人复核。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.16",
@@ -30535,7 +30551,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "熟练与专科岗"
+              "留存差异"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.17",
@@ -30549,7 +30565,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能承担班组与工序安排与质量与安全与材料与进度落实与评估与异常会签与多方协调。"
+              "发现电源状态不明、裸露导体或任务超出授权时，助手应停止、退离并报告现场负责人。由符合当地资格与现场授权的人员确认电源状态，按程序完成隔离、验电、接线或测试。助手不得自行处理回路、送电或放行。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.18",
@@ -30563,7 +30579,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "班组长与现场管理岗"
+              "报告并交接"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.19",
@@ -30577,12 +30593,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国BLS精确47-3013典型高中或同等学历、无相关经验要求、短期在岗训练；O*NET新聘71%高中/13%高中后证书/11%低于高中为不同测量，剩余5%不猜。按实际作业核资格和企业授权；学徒、职业课程或全部专项证种不是普遍必需。发展阶梯为编辑规划，不保证录用或晋升。"
+              "先看大陆项目的机电安装辅助岗，向班组核对备料、线管型号复核和记录交接由谁带教。按实际工作区分房屋市政工程中的建筑施工特种作业，以及适用应急管理规定的特种作业。分别向项目和主管部门核适用目录、证书、适用互认与现场授权。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "mem-special-operation-2026",
+            "special-work-directory-2026"
           ],
           "type": "prose"
         },
@@ -30591,7 +30609,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜接受职业训练、完成跟岗与实务、取得学历或训练证明、通过安全与技能考核与低压电工作业与高处作业资格、并入职业健康管理、取得企业岗位与作业授权是不同状态；本页列示的准备项不等于授权，也不自动带来带电作业或送电或对外披露权限。"
+              "先核岗位分工、带教和任务授权。受监管作业另核适用资格。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.21",
@@ -30605,7 +30623,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国BLS精确47-3013典型高中或同等学历、无相关经验要求、短期在岗训练；O*NET新聘71%高中/13%高中后证书/11%低于高中为不同测量，剩余5%不猜。；中国房屋市政工程实际建筑施工特种作业按住建60号；其他实际电工作业按应急19号及其目录培训考核取证，两类证种不混用；不是所有电工帮工同时要所有资格。；美国与中国法域分开，不拼接。"
+              "中国大陆施工与受监管作业"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.22",
@@ -30621,12 +30639,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "小结｜把路径理解为学习—跟岗与实务—安全与技能与资格—岗位与作业授权—负责的循环：先完成技能训练，再在带教中熟悉测量与剥线与接线与排障与电气安全制度，取得资格与作业授权后独立作业并在方向深化；涉及带电作业与送电验收与重大返工的事项按制度与主管机关要求处理。"
+              "先看大陆项目的机电安装辅助岗，向班组核对备料、线管型号复核和记录交接由谁带教。按实际工作区分房屋市政工程中的建筑施工特种作业，以及适用应急管理规定的特种作业。分别向项目和主管部门核适用目录、证书、适用互认与现场授权。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "mem-special-operation-2026",
+            "special-work-directory-2026"
           ],
           "type": "prose"
         },
@@ -30775,7 +30795,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在不同材料与回路条件下积累经验，练习测量与剥线与排料方法。"
+              "在带教下整理物料清单、核对标签和数量，并记录待复核差异。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.34",
@@ -30803,7 +30823,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按规程独立完成材料与选料与运料与准备与记录，发现异常按制度隔离与上报。"
+              "助手按分工备料并记录差异。电源或安全条件不清时停止、退离并报告，电路隔离由符合资格且获现场授权的人员负责。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.36",
@@ -30971,7 +30991,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "工艺与工具基础训练记录；安全培训。"
+              "向带教人核对应任务范围。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.48",
@@ -30985,7 +31005,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "熟悉导管与剥线与接线与安全要点。"
+              "将未决项交相应负责人。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.49",
@@ -30999,7 +31019,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "接线协助记录与带教评价；能复述接线与安全要点。"
+              "原清单、实物标签和复核记录。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.50",
@@ -31013,7 +31033,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在带教下承担导管切割与剥线与接线协助与工具准备，不独立带电或送电关键回路。"
+              "在指定区域按清单整理材料。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.51",
@@ -31027,7 +31047,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "接线与导管跟岗岗"
+              "准备材料"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.52",
@@ -31041,7 +31061,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "岗位授权与安全与资格；接线与导管经历。"
+              "向带教人核对应任务范围。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.53",
@@ -31055,7 +31075,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在不同回路与工序条件下积累经验，练习接线与紧固与排障方法。"
+              "将未决项交相应负责人。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.54",
@@ -31069,7 +31089,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "接线与紧固与测试记录及复核意见。"
+              "原清单、实物标签和复核记录。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.55",
@@ -31083,7 +31103,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按规程完成测量与切割与剥线与接线与紧固与检查与记录，发现异常按制度上报。"
+              "对照标签和任务单，记录不一致。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.56",
@@ -31097,7 +31117,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "接线与导管岗"
+              "核对规格"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.57",
@@ -31111,7 +31131,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应岗位授权与专项资格；复杂排障经验。"
+              "向带教人核对应任务范围。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.58",
@@ -31125,7 +31145,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习复杂回路排障与测试与工艺配合方法。"
+              "将未决项交相应负责人。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.59",
@@ -31139,7 +31159,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "复杂排障与异常处置记录。"
+              "原清单、实物标签和复核记录。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.60",
@@ -31153,7 +31173,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担复杂回路接线与短路排查与测试与带教与工艺配合。"
+              "保留规格与件数原值，等待复核。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.61",
@@ -31167,7 +31187,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "接线与排障骨干岗"
+              "留存差异"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.62",
@@ -31181,7 +31201,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理任命或企业授权。"
+              "向带教人核对应任务范围。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.63",
@@ -31195,7 +31215,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完善班组与工序与质量管理机制。"
+              "将未决项交相应负责人。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.64",
@@ -31209,7 +31229,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹结论；班组与工序与质量文件。"
+              "原清单、实物标签和复核记录。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.65",
@@ -31223,7 +31243,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹班组与工序与质量与安全与会签并指导新人。"
+              "发现电源状态不明、裸露导体或任务超出授权时，助手应停止、退离并报告现场负责人。由符合当地资格与现场授权的人员确认电源状态，按程序完成隔离、验电、接线或测试。助手不得自行处理回路、送电或放行。"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.66",
@@ -31237,7 +31257,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "班组与工序主管岗"
+              "交接未决项"
             ]
           },
           "id": "helpers-electricians.path.career-path-block.67",
@@ -31636,12 +31656,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国精确47-3013 May2025中位年工资42,670美元、时薪20.51美元。BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。中国精确职业工资就业未取得；NBS建筑业2025非私营/私营92,036/66,275元年平均仅背景。"
+              "BLS 表 1.2（美国本职业 47-3013）：2025 年约 65,000 个岗位，2035 年预计约 65,400 个，变化 +0.6%，年均约 6,100 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31650,12 +31670,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31664,12 +31684,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31706,12 +31726,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "工资（中位与分位，本职业自身口径）"
+              "就业规模与变化"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31720,12 +31740,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 47-3013.00（OEWS 2025 年，经 O*NET 呈现）"
+              "47-3013"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31734,12 +31754,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位时薪 20.51 美元与中位年薪 42,670 美元；第 10 分位时薪 15.88 与年薪 33,020、第 25 分位时薪 17.71 与年薪 36,830、第 75 分位时薪 23.30 与年薪 48,470、第 90 分位时薪 28.05 与年薪 58,340"
+              "BLS 表 1.2（美国本职业 47-3013）：2025 年约 65,000 个岗位，2035 年预计约 65,400 个，变化 +0.6%，年均约 6,100 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31748,12 +31768,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31762,12 +31782,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31804,12 +31824,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业规模与增长与岗位空缺（本职业自身口径）"
+              "预计年均空缺"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31818,12 +31838,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 47-3013.00（BLS 就业预测，经 O*NET 呈现）"
+              "47-3013"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31832,12 +31852,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS精确47-3013的2025—2035预测约65,000→65,400人，增长0.6%，年均空缺6,100个含替换，基期自雇1.7%；O*NET展示Slower than average（1%至2%）为分类标签，不能代替矩阵精确0.6%，不是招聘净增或AI因果。"
+              "预计年均约 6,100 个，含替补。"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31846,12 +31866,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆"
+              "美国全国"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31860,12 +31880,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025-05"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31902,12 +31922,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "职业工资与就业（统计口径与缺口）"
+              "年薪中位数"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31916,12 +31936,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局城镇单位就业人员平均工资（行业门类口径）与有界检索"
+              "47-3013"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31930,12 +31950,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与 O*NET 47-3013.00（电工帮工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "42,670 美元/年"
             ]
           },
           "id": "helpers-electricians.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -32357,22 +32377,32 @@
                 "question_key": "career.faq.helpers-electricians.q2"
               },
               {
-                "answer": "2025 年美国本职业中位时薪 20.51 美元与中位年薪 42,670 美元（BLS OEWS，经 O*NET 呈现，本职业自身口径）；第 10 分位年薪 33,020 美元、第 25 分位 36,830 美元、第 75 分位 48,470 美元、第 90 分位 58,340 美元；不含福利与奖金，中位数不是入职起薪。中国大陆未建立与本职业精确对应的全国职业工资分布。",
+                "answer": "2025 年 5 月美国本职业 47-3013全国年薪中位数 42,670 美元，时薪中位数 20.51 美元。年薪第 10、25、50、75、90 分位依次为 33,020、36,830、42,670、48,470、58,340 美元。",
                 "id": "helpers-electricians.faq.3",
                 "question": "工资是多少？",
-                "question_key": "career.faq.helpers-electricians.q3"
+                "question_key": "career.faq.helpers-electricians.q3",
+                "source_refs": [
+                  "onet-wages"
+                ]
               },
               {
-                "answer": "O*NET 在 47-3013.00 页呈现的 BLS 就业预测显示：就业 2024 年 66,600 人、2034 年预计 66,700 人，2024—2034 年增长为 Little or no change（0%，该页未标注 Bright Outlook），期间年均空缺约 6,800 个（含增长与替补）。预测不等于个人岗位结果；即使总量几乎无变化，因人员流动与替换仍存在招人。",
+                "answer": "BLS 表 1.2（美国本职业 47-3013）：2025 年约 65,000 个岗位，2035 年预计约 65,400 个，变化 +0.6%，年均约 6,100 个职位空缺，含人员替补。人数分别取整。",
                 "id": "helpers-electricians.faq.4",
                 "question": "就业前景如何？",
-                "question_key": "career.faq.helpers-electricians.q4"
+                "question_key": "career.faq.helpers-electricians.q4",
+                "source_refs": [
+                  "bls-ep-2025-2035"
+                ]
               },
               {
-                "answer": "O*NET 将本职业列入 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；学历部分显示 71% 表示要求高中文凭或同等学历、13% 表示要求高中后证书、11% 表示低于高中文凭（该页未说明剩余 5%）。在中国大陆，涉及低压电工作业与高处作业与机械与切割的岗位须满足安全生产与职业健康要求并取得相应资格或作业许可；具体以企业与主管机关要求为准。",
+                "answer": "美国 BLS 将该职业的典型入门教育列为高中或同等学历，通常有短期在岗培训。向雇主分别确认助手职责、培训与当地持证作业要求。 中国大陆房屋市政工程中，适用第 60 号令的建筑施工特种作业须按规定培训、考核并取得相应资格证书。工种范围另行规定，向项目和主管部门核对实际任务。",
                 "id": "helpers-electricians.faq.5",
                 "question": "需要什么学历和资格？",
-                "question_key": "career.faq.helpers-electricians.q5"
+                "question_key": "career.faq.helpers-electricians.q5",
+                "source_refs": [
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
+                ]
               },
               {
                 "answer": "不需要。本职业使用材料与工时记录与项目沟通应用与电子表格与办公工具即可；编程不是本职业的入职要求。",
@@ -32381,7 +32411,7 @@
                 "question_key": "career.faq.helpers-electricians.q6"
               },
               {
-                "answer": "不会整体被取代。任务单与用量与材料与进度与知识检索可被系统辅助，但现场测量与剥线与接线与检查与断电与验电与安全责任仍由有经验人员负责；O*NET 显示本职业 2024—2034 年增长为 Little or no change（0%），自动化更多改变任务构成而非取消岗位。",
+                "answer": "BLS 表 1.2（美国本职业 47-3013）：2025 年约 65,000 个岗位，2035 年预计约 65,400 个，变化 +0.6%，年均约 6,100 个职位空缺，含人员替补。人数分别取整。",
                 "id": "helpers-electricians.faq.7",
                 "question": "这个职业会被 AI 或自动化取代吗？",
                 "question_key": "career.faq.helpers-electricians.q7"
@@ -32399,10 +32429,19 @@
                 "question_key": "career.faq.helpers-electricians.q9"
               },
               {
-                "answer": "本页以 O*NET 47-3013.00 与美国 BLS OEWS 2025 与 BLS 就业预测 2024—2034 为主要来源，并引用 ILO 与 NIST 的职业暴露与治理研究；所有数值为美国本职业自身口径，不覆盖中国大陆；中国大陆只登记统计口径与可见缺口；本页不构成安全或特种作业或质量或法律意见。",
+                "answer": "BLS 表 1.2（美国本职业 47-3013）：2025 年约 65,000 个岗位，2035 年预计约 65,400 个，变化 +0.6%，年均约 6,100 个职位空缺，含人员替补。人数分别取整。",
                 "id": "helpers-electricians.faq.10",
                 "question": "本页来源与口径边界是什么？",
                 "question_key": "career.faq.helpers-electricians.q10"
+              },
+              {
+                "answer": "原题仅 E1 可确认。E2 保留 C25 和 C52，交电工复核。E3 保留一件和两件，交收料员。变式 E1、E2 可确认，E3 待核。",
+                "id": "helpers-electricians.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.helpers-electricians.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -32417,7 +32456,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对美国 O*NET/SOC 47-3013.00（电工帮工）的官方范围与任务与工作活动与工作情境与兴趣代码与 Job Zone 与证书与培训机会，再取 BLS OEWS 2025 年工资与 BLS 就业预测 2025—2035 的就业与增长与空缺（均经 O*NET 页面呈现，且该页未标注取自上级或相邻职业，故按本职业自身口径呈现），并对中国大陆按国家统计局与安全生产与特种作业与职业健康与环保制度登记口径与缺口。"
+              "职业职责来自 O*NET，美国工资和就业来自 OEWS 与 BLS 表 1.2。大陆工资仅列国家统计局行业背景，现场资格按适用法规与实际任务核对。"
             ]
           },
           "id": "helpers-electricians.sources.source-card.1",
@@ -32445,12 +32484,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮2026-10-11核精确47-3013的25任务18Core/7Supplemental及活动与情境、71/13/11新聘学历、RC及Zone1-2、5软件类/2热门招聘技能占比未提供；May2025五分位、2025—2035矩阵、OOH组背景、NBS2025及住建60号/应急19号。"
+              "O*NET 用于查看美国职业任务与工作环境。BLS 表 1.2 提供就业预测和典型入行信息。中国大陆现场条件按适用法规及项目核对。"
             ]
           },
           "id": "helpers-electricians.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -32459,7 +32500,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "中国精确职业工资就业与美国精确行业地区工资、AI采用实测效果因果、心理测评效度未取得；四行业仅OOH职业组背景，O*NET增长分类与BLS精确0.6%分开。保护面共享旧事实保持，不宣称全页同步。"
+              "美国五档工资与就业预测分别来自 OEWS 与 BLS 表 1.2。行业数据描述建筑工人及帮工组，地区和具体岗位工资请另核。"
             ]
           },
           "id": "helpers-electricians.sources.source-card.4",
@@ -32491,25 +32532,25 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "本职业（电工帮工）",
@@ -32555,7 +32596,7 @@
                 "accessed_at": "2026-09-22",
                 "details": [
                   "用于核对官方范围（Help electricians by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment.）与常见职位名称。",
-                  "用于核对兴趣代码（RC）与 Job Zone 1-2（几乎无需至需要一定准备） 与行业分布（建筑业）；该页未标注 Bright Outlook。"
+                  "美国就业预测采用 BLS 表 1.2。O*NET 用于核对职业身份及工作内容。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "bls",
@@ -32570,15 +32611,15 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于核对就业 2024 年 66,600 人与 2034 年 66,700 人与 2024—2034 年增长 0% 与期间年均空缺约 6,800 个（含增长与替补）。",
-                  "用于说明就业预测与 OEWS 时点就业估计口径不同，且预测不等于个人岗位结果、空缺主要由替换需求构成。"
+                  "本页就业预测采用 BLS 表 1.2。",
+                  "本页就业预测采用 BLS 表 1.2。"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
-                "limitation": "为 O*NET 在 47-3013.00 页呈现的本职业口径；增长 Little or no change 0%，未标注 Bright Outlook。",
+                "limitation": "美国就业预测采用 BLS 表 1.2。O*NET 用于核对职业身份及工作内容。",
                 "market": "美国",
                 "name": "O*NET OnLine：电工帮工就业趋势（47-3013.00，本职业自身口径）",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
+                "period": "职业资料或动态查询",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "47-3013.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localtrends/47-3013.00"
@@ -32589,11 +32630,11 @@
                   "用于核对中位时薪 20.51 美元与中位年薪 42,670 美元与第 10/25/75/90 分位（时薪 15.88 / 17.71 / 23.30 / 28.05 美元，年薪 33,020 / 36,830 / 48,470 / 58,340 美元）。",
                   "用于说明工资分位不是经验等级，也不等于个人起薪。"
                 ],
-                "evidence_type": "official wage display",
+                "evidence_type": "OEWS 全国职业工资",
                 "id": "oews",
                 "limitation": "O*NET 在该页未标注工资数据取自上级或相邻职业；本页按本职业自身口径呈现，不含福利与奖金。",
                 "market": "美国",
-                "name": "O*NET OnLine：电工帮工国家工资（47-3013.00，本职业自身口径）",
+                "name": "美国电工助手全国工资（47-3013）",
                 "period": "2025 BLS OEWS wage data via O*NET",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "47-3013.00 exact occupation",
@@ -32650,18 +32691,18 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明低压电工作业与高处与机械与切割等安全生产要求。",
-                  "涉及特种作业的须经安全技术培训与考核并持证作业。"
+                  "第 2–4 条界定适用范围、培训考核和持证要求。",
+                  "按实际任务及主管部门要求核对。"
                 ],
-                "evidence_type": "regulator portal",
+                "evidence_type": "部门规章",
                 "id": "facilities",
-                "limitation": "以主管机关发布的法规与要求为准。",
+                "limitation": "以实际任务和适用规定为准。",
                 "market": "中国大陆",
-                "name": "中华人民共和国应急管理部：安全生产与特种作业与危险作业管理",
+                "name": "应急管理部第 19 号令",
                 "period": "current; accessed 2026-09-22",
                 "publisher": "应急管理部",
-                "scope": "work safety and special operations",
-                "url": "https://www.mem.gov.cn/"
+                "scope": "中国大陆适用特种作业",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32794,24 +32835,24 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于字段与证据口径与缺口登记规则。",
-                  "用于跨市场与法域口径边界说明。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "编辑说明",
                 "id": "employer",
-                "limitation": "内部口径规则，非外部事实来源。",
-                "market": "全球",
-                "name": "FermatMind 职业内容字段与证据口径规则",
-                "period": "current authoring rules",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页任务",
                 "url": "https://fermatmind.com"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于核对与本职业相关的证书与专项资格检索入口。",
-                  "在中国大陆，涉及低压电工作业与高处作业的须取得主管机关认可的资格或作业许可；具体以企业与主管机关要求为准。"
+                  "O*NET 汇集与该美国职业相关的证书目录。",
+                  "可用于查找美国发证机构。具体州、雇主和任务要求需另核。"
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "purchasing-managers",
@@ -32904,20 +32945,19 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对建筑业为主要行业。",
-                  "用于说明主要用人单位类型。"
+                  "2025 年 5 月美国本职业 47-3013全国年薪中位数 42,670 美元，时薪中位数 20.51 美元。年薪第 10、25、50、75、90 分位依次为 33,020、36,830、42,670、48,470、58,340 美元。"
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "OEWS 全国职业工资",
                 "id": "onet-wages",
-                "limitation": "该口径为美国分布，不建立中国大陆映射。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
-                "name": "O*NET OnLine：电工帮工行业分布（47-3013.00）",
-                "period": "current page; accessed 2026-09-22",
+                "name": "美国电工助手全国工资（47-3013）",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "47-3013.00 exact occupation",
-                "url": "https://www.onetonline.org/link/industry/47-3013.00"
+                "url": "https://www.onetonline.org/link/localwages/47-3013.00"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32973,7 +33013,7 @@
                 ],
                 "evidence_type": "official regulatory requirements",
                 "id": "mem-special-operation-2026",
-                "limitation": "不混住建房屋市政施工证种，不把帮工名称当资格范围。",
+                "limitation": "按实际作业和适用规定核对。证书互认、适用衔接及免重复取证条件以现行联合目录附件及相关政策为准。",
                 "market": "中国大陆",
                 "name": "特种作业人员安全技术培训考核管理规定（应急令19号）",
                 "period": "2026-06-01施行",
@@ -32982,21 +33022,111 @@
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "测量与加工 — 25/100; weight=1/3; helpers-electricians.ai-impact.ai-impact-table.99[0]",
-                  "接线与检查 — 0/100; weight=1/3; helpers-electricians.ai-impact.ai-impact-table.103[0]",
-                  "排查与测试 — 25/100; weight=1/3; helpers-electricians.ai-impact.ai-impact-table.107[0]"
+                  "BLS 表 1.2（美国本职业 47-3013）：2025 年约 65,000 个岗位，2035 年预计约 65,400 个，变化 +0.6%，年均约 6,100 个职位空缺，含人员替补。人数分别取整。",
+                  "美国 BLS 将该职业的典型入门教育列为高中或同等学历，通常有短期在岗培训。向雇主分别确认助手职责、培训与当地持证作业要求。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "47-3013",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "中国大陆房屋市政工程中，适用第 60 号令的建筑施工特种作业须按规定培训、考核并取得相应资格证书。工种范围另行规定，向项目和主管部门核对实际任务。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "该规定用于区分助手分工与受监管作业，不能据此确定所有助手的用工条件。",
+                "market": "中国大陆",
+                "name": "住建部第 60 号令建筑施工特种作业人员管理规定",
+                "period": "2026-06-01",
+                "publisher": "住房和城乡建设部",
+                "scope": "中国大陆施工现场规定",
+                "url": "https://www.mohurd.gov.cn/tsgb/gzk/art/2025/art_33002693.html"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "E 表：线管物料标签核对",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "适用施工场地的电路接触防护。"
+                ],
+                "id": "osha-circuit",
+                "limitation": "仅用于适用的美国施工场地。",
+                "market": "美国",
+                "name": "OSHA 1926.416",
+                "period": "29 CFR 1926",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.416"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "适用施工场地的电路停用和挂牌。"
+                ],
+                "id": "osha-tagging",
+                "limitation": "仅用于适用的美国施工场地。",
+                "market": "美国",
+                "name": "OSHA 1926.417",
+                "period": "29 CFR 1926",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.417"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "目录及附件列明实际作业范围、证书适用衔接与互认条件。"
+                ],
+                "id": "special-work-directory-2026",
+                "limitation": "按附件及相应政策核对适用范围，项目的现场授权与安全条件另核。",
+                "market": "中国大陆",
+                "name": "三部门《特种作业目录》（应急〔2026〕45号）",
+                "period": "2026-06-01",
+                "publisher": "应急管理部、住房城乡建设部、国家矿山安监局",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202605/W020260526532904903760.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "适用美国施工场地的脚手架监督及人员条件。"
+                ],
+                "id": "osha-scaffold",
+                "limitation": "适用美国施工场地。",
+                "market": "美国",
+                "name": "OSHA 1926.451",
+                "period": "29 CFR 1926",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.451"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "适用美国施工场地的工具安全和防护。"
+                ],
+                "id": "osha-tool-guards",
+                "limitation": "适用美国施工场地。",
+                "market": "美国",
+                "name": "OSHA 1926.300",
+                "period": "29 CFR 1926",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.300"
               }
             ]
           },
@@ -34333,8 +34463,8 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
-        "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为电工帮工？教育、资格与职业发展路径",
+        "entry_heading": "入行与 E 表：线管物料标签核对",
+        "heading": "入行与 E 表：线管物料标签核对",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "helpers-electricians.path.career-path-block.21",
@@ -34448,6 +34578,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "special-work-directory-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "id": "special-work-directory-2026",
+            "label": {
+              "$source": "special-work-directory-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "scope": "中国大陆按实际作业核目录。"
           }
         ],
         "tracks": [
@@ -34717,7 +34865,7 @@
                 }
               }
             ],
-            "title": "接线与导管配合方向"
+            "title": "线管物料与交接"
           },
           {
             "id": "safety-and-cleanup",
@@ -35209,7 +35357,9 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "bls",
+              "osha-circuit",
+              "osha-tagging"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -35241,7 +35391,8 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "bls",
+              "osha-scaffold"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35273,7 +35424,8 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "bls",
+              "osha-tool-guards"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -35337,7 +35489,9 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "bls",
+              "osha-circuit",
+              "osha-tagging"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35503,6 +35657,78 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "osha-circuit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "id": "osha-circuit",
+            "label": {
+              "$source": "osha-circuit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "scope": "适用施工场地的电路接触防护。"
+          },
+          {
+            "href": {
+              "$source": "osha-tagging",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "id": "osha-tagging",
+            "label": {
+              "$source": "osha-tagging",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "scope": "适用施工场地的电路停用和挂牌。"
+          },
+          {
+            "href": {
+              "$source": "osha-scaffold",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "id": "osha-scaffold",
+            "label": {
+              "$source": "osha-scaffold",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "scope": "适用美国施工场地的脚手架监督及人员条件。"
+          },
+          {
+            "href": {
+              "$source": "osha-tool-guards",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "id": "osha-tool-guards",
+            "label": {
+              "$source": "osha-tool-guards",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-electricians.source-register.published.1"
+            },
+            "scope": "适用美国施工场地的工具安全和防护。"
           }
         ]
       },
@@ -35812,7 +36038,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-electricians.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35826,7 +36052,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-electricians.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35840,7 +36066,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-electricians.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35863,12 +36089,12 @@
           "ui": {
             "ai_heading": "AI 会影响电工帮工的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "中国行业工资背景与精确职业缺口",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "电工帮工在不同学历背景下通常从哪些岗位方向开始？",
-            "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "official_heading": "2025 年城镇单位年平均工资背景",
+            "scenario_caption": "岗位与报酬核对项",
+            "scenario_heading": "看招聘时核对哪些条件？",
+            "scenario_interpretation_label": "向用人单位确认",
+            "scenario_role_label": "核对范围",
+            "scenario_value_label": "核对项"
           },
           "us_growth": {
             "$item": "helpers-electricians.china-salary.career-snapshot-primary-locale.58",
@@ -36074,15 +36300,15 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国电工帮工工资？",
+        "factors_heading": "影响报酬的条件",
         "growth": {
           "$item": "helpers-electricians.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国电工帮工工资多少？",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "heading": "美国电工助手工资",
+        "industry_heading": "美国建筑工人及帮工组行业工资",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
@@ -36170,7 +36396,7 @@
           }
         ],
         "industry_value_label": "该行业内建筑工人及帮工职业组工资中位（背景）",
-        "interpretation_heading": "这组美国工资数字应当怎么理解？",
+        "interpretation_heading": "如何读工资分位",
         "interpretation_rows": [
           {
             "answer": {
@@ -36220,52 +36446,55 @@
         "wage_column_labels": [
           "工资统计位置",
           "年工资参考",
-          "折算边界",
+          "时薪",
           "怎样理解这个位置"
         ],
-        "wage_heading": "美国工资分布",
+        "wage_heading": "全国工资分位",
         "wage_tiers": [
           {
-            "equivalent": "官方年工资，非个人月收入",
+            "equivalent": "15.88 美元/小时",
             "interpretation": {
               "$item": "helpers-electricians.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最低 10%",
-            "value": {
-              "$fact": "us-wage-low10-2025",
-              "field": "display_value"
-            }
+            "label": "第 10 百分位",
+            "value": "33,020 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "17.71 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资。",
+            "label": "第 25 百分位",
+            "value": "36,830 美元/年"
+          },
+          {
+            "equivalent": "20.51 美元/小时",
             "interpretation": {
               "$item": "helpers-electricians.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "中位数（50%）",
-            "value": {
-              "$fact": "us-wage-2025",
-              "field": "display_value"
-            }
+            "label": "第 50 百分位",
+            "value": "42,670 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "23.3 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资。",
+            "label": "第 75 百分位",
+            "value": "48,470 美元/年"
+          },
+          {
+            "equivalent": "28.05 美元/小时",
             "interpretation": {
               "$item": "helpers-electricians.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最高 10%",
-            "value": {
-              "$fact": "us-wage-high10-2025",
-              "field": "display_value"
-            }
+            "label": "第 90 百分位",
+            "value": "58,340 美元/年"
           }
         ]
       },
@@ -36296,7 +36525,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "电工帮工适合什么样的人？"
+        "title": "电工助手适合怎样的工作偏好？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36409,7 +36638,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "helpers-electricians.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36454,7 +36683,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "helpers-electricians.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36499,7 +36728,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "oews",
             "value": {
               "$item": "helpers-electricians.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36877,7 +37106,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034，本职业自身口径）",
+            "label": "2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "helpers-electricians.profile.onet-structured-fields-block.4",
@@ -37818,14 +38047,14 @@
       "interface.path.credential_boundary_label": "资格边界",
       "interface.path.entry_decisions_heading": "入行前要核对什么",
       "interface.path.next_step_label": "下一步",
-      "interface.path.promotion_evidence_label": "晋升证据",
+      "interface.path.promotion_evidence_label": "阶段记录与探索练习",
       "interface.path.responsibilities_label": "典型职责",
       "interface.profile.comparison.dimension_header": "维度",
       "interface.profile.comparison.primary_header": "主要方向",
       "interface.profile.comparison.secondary_header": "比较方向",
       "interface.profile.responsibilities_heading": "核心工作",
       "interface.quick_decision.caution_heading": "什么情况下需要慎重选择电工帮工？",
-      "interface.quick_decision.experiment_heading": "如何用一次小实验判断自己是否适合电工帮工？",
+      "interface.quick_decision.experiment_heading": "纸面试做能帮你观察什么？",
       "interface.quick_decision.suit_heading": "什么样的人更可能适合电工帮工？",
       "interface.risk.affected_roles_label": "主要岗位",
       "interface.risk.consequence_label": "可能后果",
@@ -37927,19 +38156,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资参考",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
       "market-signals": "职业前景与相关职业转向",
       "navigation": "下一步与相关入口",
-      "path": "入行、资格与职业发展",
+      "path": "入行与 E 表：线管物料标签核对",
       "profile": "职业画像",
       "quick-decision": "快速判断",
       "risk": "工作压力、风险与职业边界",
       "source-register": "资料来源",
       "sources": "常见问题与资料来源",
-      "us-salary": "美国薪资参考"
+      "us-salary": "美国电工助手工资"
     }
   },
   "fact_register": {
@@ -37957,15 +38186,15 @@
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-3013.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
-        "display_value": "中位时薪 20.51 美元 / 中位年薪 42,670 美元（2025 年，BLS OEWS，本职业（47-3013.00）自身口径）",
+        "derivation": "直接采用 BLS OEWS 全国年薪中位数。",
+        "display_value": "42,670 美元/年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "工资中位数",
-        "occupation_scope": "本职业：电工帮工",
-        "period": "2025",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "47-3013",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "onet-wages"
         ]
       },
       {
@@ -37993,39 +38222,39 @@
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 2024—2034（经 O*NET 在 47-3013.00 页呈现，本职业自身口径，增长标为 Little or no change 0%、该页未标注 Bright Outlook）；O*NET 该页就业基期为 2024 年 66,600 人、2034 年预计 66,700 人；预测含替换需求、不等于实际招聘或裁员。",
-        "display_value": "增长 几乎无变化 Little or no change（0%）（2024—2034，BLS 就业预测，本职业（47-3013.00）自身口径；该页未标注 Bright Outlook）",
+        "derivation": "直接采用 BLS 表 1.2 对应职业行。",
+        "display_value": "+0.6%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长",
-        "occupation_scope": "本职业：电工帮工",
-        "period": "2024—2034",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "47-3013",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测基期（2024 年本职业约 66,600 人，经 O*NET 呈现）；与 BLS OEWS 的时点就业估计口径不同（OEWS 只覆盖被抽样非农机构雇主、不含自雇），本页分别标注不混用。",
-        "display_value": "就业 约 66,600 人（2024，BLS 就业预测基期，本职业（47-3013.00）自身口径）",
+        "derivation": "直接采用 BLS 表 1.2 对应职业行。",
+        "display_value": "约 65,000 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数",
-        "occupation_scope": "本职业：电工帮工",
-        "period": "2024",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "47-3013",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测的期间空缺（2024—2034 本职业年均约 6,800 个，含增长与替补，经 O*NET 呈现）；为期间年均口径、主要由替换需求构成，即使总量几乎无变化仍存在招人，不可读作净新增岗位。",
-        "display_value": "预计年均岗位空缺约 6,800 个（2024—2034，BLS 就业预测，本职业（47-3013.00）自身口径，含增长与替补）",
+        "derivation": "直接采用 BLS 表 1.2 对应职业行。",
+        "display_value": "年均约 6,100 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺",
-        "occupation_scope": "本职业：电工帮工",
-        "period": "2024—2034",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "47-3013",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -38075,57 +38304,45 @@
         "source_refs": [
           "onet"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "17%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "电工帮工",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "电工帮工 · 任务、交付与责任边界",
-      "测量与剥线与接线 · 断点与测试留痕 · 现场与工序责任",
-      "美国职业资料；中国精确职业工资缺口按来源保留"
+      "电工助手",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国薪资中位数（2025，BLS OEWS，本职业（47-3013.00）自身口径）"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，本职业（47-3013.00）自身口径）"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，本职业（47-3013.00）自身口径）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，本职业（47-3013.00）自身口径）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "available",
@@ -38139,17 +38356,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "电工帮工做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET 47-3013.00）、Job Zone 1-2（几乎无需至需要一定准备） 与学历说明、美国工资与就业的本职业自身口径与中国大陆数据缺口。"
+      "text": "了解电工助手的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "电工帮工"
+      "text": "电工助手做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "a0066faa32513a73675f16e630c394e5617bac832e7529e55ccdafa9ca539d4d",
+  "source_content_sha256": "eaadcee1b7964fb11005b9402a17b179793628e0291877304f65f167e105afcb",
   "subject": {
     "canonical_slug": "helpers-electricians",
-    "name": "电工帮工",
-    "summary": "电工帮工对应 O*NET/SOC 47-3013.00「Helpers--Electricians」这一精确职业：以较低技能要求的作业协助电工：使用、供应或递送材料与工具，并清洁作业区与设备。核心任务包括使用剥线钳剥去线端绝缘层并把导线接到端子上以备随后焊接、使用测试仪排查接线中的短路、使用测量仪器与手动工具对电线与导管进行测量与切割与弯曲、检查电气设备是否存在连接松动与绝缘破损并使用手动工具紧固连接、维护工具与车辆与设备并保持零件与用品井然有序；常见职位名称包括 Electrical Helper 与 Electrician Helper 与 Electrician Apprentice 与 Electrical Apprentice。官方范围原文：Help electricians by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment. 口径说明：O*NET 在 47-3013.00 页呈现的美国工资与就业与行业数据未标注取自上级或相邻职业，本页按本职业（47-3013.00）自身口径如实标注；该职业属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0）），2024—2034 年增长为 Little or no change（0%）。本页内容不构成安全、特种作业、职业健康或法律意见。"
+    "name": "电工助手",
+    "summary": "电工助手为电工准备工具、线管和其他物料，按分工协助定位、传递与清理，并报告标签、数量或位置差异。接线、测试和送电的责任按当地资格及现场授权核对。"
   }
 }

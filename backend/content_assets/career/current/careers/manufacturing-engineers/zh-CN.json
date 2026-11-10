@@ -7272,13 +7272,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页制造工程师指 O*NET 17-2112.03：设计、整合或改进制造系统或相关流程，可与设计人员合作改进产品以提高可制造性并降低成本，含工艺工程师、工厂工程师与精益改进工程师等职称。工作包括排查产品与流程问题、解决用料偏差与瓶颈、识别并实施流程或产品改进、应用精益等持续改进方法、审核可制造性、用统计方法确定失效根因、设计设备布局、编写流程文档、估算成本与工时并评估环境可持续性。工作以工厂现场与办公室为主。本页不含汽车工程师、人因工程师、工业工程师、材料工程师等相邻岗位。"
+              "制造工程师设计、整合或改进制造流程，协调工装、作业步骤和质量要求，并用试产记录验证流程能否稳定运行。职责会随产品和工厂变化。"
             ]
           },
           "id": "manufacturing-engineers.profile.definition-block.1",
           "source_refs": [
             "onet-summary",
-            "onet-tasks"
+            "cn-xd-npi",
+            "cn-hust-process"
           ],
           "type": "prose"
         },
@@ -7373,12 +7374,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "先核对的内容：问题与目标、数据来源与口径、产品与工艺约束、成本与产能限制、安全与合规要求，以及结论的证据强度与授权边界。"
+              "用虚构工序记录基线、变更、验证指标、异常及回退条件。西电就业网 NPI 样本列试制报告和异常闭环，可用于了解新品导入分工。"
             ]
           },
           "id": "manufacturing-engineers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-tasks"
+            "onet-summary",
+            "cn-xd-npi",
+            "cn-hust-process"
           ],
           "type": "prose"
         },
@@ -7387,12 +7390,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作闭环：从界定问题与目标开始，经过收集产线与质量数据、分析根因、形成并比较改进方案、实施与试产验证，到更新文档与标准并跟踪效果；任一数据口径或安全边界未确认前不下结论，任一变更未经验证前不量产。"
+              "制造工程师多负责制造方法和过程验证；生产经理多负责排程、团队和交付。具体的工艺变更与放行权限要按工厂流程核。"
             ]
           },
           "id": "manufacturing-engineers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-tasks"
+            "onet-summary",
+            "cn-xd-npi"
           ],
           "type": "prose"
         },
@@ -7727,7 +7731,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025美国工资参考为父职业Industrial Engineers（17-2112），非17-2112.03制造工程师精确值：年薪中位102,440、时薪49.25美元，父职业P10/25/50/75/90见原表。旧2024—2034就业事实保留；25,200是预测年均空缺。最新父职业为2025年365,100人、2025—2035增长12%、年均23,100；不同版本不拼接。"
+              "2025美国工资参考为父职业Industrial Engineers（17-2112），非17-2112.03制造工程师精确值：年薪中位102,440、时薪49.25美元，父职业P10/25/50/75/90见原表。美国 BLS 表1.2 上位职业 Industrial Engineers：17-2112 2025 年就业约 365,100 人，预计 2035 年约 410,600 人，2025—2035 年变化 +12.4%，年均约 23,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。最新父职业为2025年365,100人、2025—2035增长12%、年均23,100；不同版本不拼接。"
             ]
           },
           "fact_refs": [
@@ -7738,7 +7742,8 @@
           ],
           "id": "manufacturing-engineers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages"
+            "onet-wages",
+            "bls-design-ep"
           ],
           "type": "prose"
         },
@@ -7798,7 +7803,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业版本：保留旧2024年父职业351,100人与2024—2034年均空缺25,200；最新父职业2025年365,100人、2025—2035年均23,100。空缺含替补，非净新增、十年合计或当前招聘。"
+              "美国 BLS 表1.2 上位职业 Industrial Engineers：17-2112 2025 年就业约 365,100 人，预计 2035 年约 410,600 人，2025—2035 年变化 +12.4%，年均约 23,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。空缺含替补，非净新增、十年合计或当前招聘。"
             ]
           },
           "fact_refs": [
@@ -7807,7 +7812,8 @@
           ],
           "id": "manufacturing-engineers.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "onet-trends"
+            "onet-trends",
+            "bls-design-ep"
           ],
           "type": "prose"
         }
@@ -8159,12 +8165,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本页参考的是父职业Industrial Engineers；旧2024年351,100人与2024—2034年均25,200空缺保留。最新BLS父职业2025年365,100人、2025—2035增长12%、年均23,100；不是制造工程师精确规模、招聘样本或个人录用概率。"
+              "美国 BLS 表1.2 上位职业 Industrial Engineers：17-2112 2025 年就业约 365,100 人，预计 2035 年约 410,600 人，2025—2035 年变化 +12.4%，年均约 23,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。最新BLS父职业2025年365,100人、2025—2035增长12%、年均23,100；不是制造工程师精确规模、招聘样本或个人录用概率。"
             ]
           },
           "id": "manufacturing-engineers.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "onet-trends",
+            "bls-design-ep"
           ],
           "type": "prose"
         },
@@ -8173,12 +8180,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该页 2024 年主要行业为 Manufacturing 与 Professional, Scientific, and Technical Services；就业与空缺为统计预测，须与个人机会分开解释。"
+              "美国 BLS 表1.2 上位工业工程师（17-2112）：2025 年约 365,100 人，2035 年预计约 410,600 人（+12.4%），年均约 23,100 个空缺。包括替换。"
             ]
           },
           "id": "manufacturing-engineers.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-industry"
+            "onet-trends"
           ],
           "type": "prose"
         },
@@ -8311,12 +8318,13 @@
                 ]
               },
               {
-                "answer": "O*NET 该职业页展示的就业为父职业 Industrial Engineers 口径：2024 年就业约 351,100 人，2024—2034 年预计远快于平均（7% 或更高），期间职位空缺约 25,200 个；这是职业统计，不等于个人录用概率。",
+                "answer": "美国 BLS 表1.2 上位职业 Industrial Engineers：17-2112 2025 年就业约 365,100 人，预计 2035 年约 410,600 人，2025—2035 年变化 +12.4%，年均约 23,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                 "id": "manufacturing-engineers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.manufacturing-engineers.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "onet-trends",
+                  "bls-design-ep"
                 ]
               },
               {
@@ -8516,18 +8524,18 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "2024 年就业规模与 2024—2034 年增长与职位空缺预测；该页展示的是父职业 Industrial Engineers（17-2112.00）口径。",
+                  "美国 BLS 表1.2 上位职业 Industrial Engineers：17-2112 2025 年就业约 365,100 人，预计 2035 年约 410,600 人，2025—2035 年变化 +12.4%，年均约 23,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                   "预测不是录用保证。"
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
                 "limitation": "该页就业为父职业展示口径，非本职业精确值；预测不是录用保证。",
                 "market": "美国",
-                "name": "O*NET 17-2112.03 全国就业趋势（父职业 Industrial Engineers）",
-                "period": "2024—2034 预测；查阅 2026-09-25",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/17-2112.03"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8687,6 +8695,46 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "列新品试产、异常分析、试制报告及闭环。"
+                ],
+                "id": "cn-xd-npi",
+                "limitation": "NPI 是部分制造工程工作的近邻或方向。",
+                "market": "中国大陆",
+                "name": "NPI 工程师校园岗位",
+                "period": "2026届",
+                "publisher": "西安电子科技大学就业网",
+                "scope": "具名岗位或制度",
+                "url": "https://job.xidian.edu.cn/job/view/id/1515058"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "用人样本列工艺文件、分析试产数据和减少报废。"
+                ],
+                "id": "cn-hust-process",
+                "limitation": "试产与工艺样本，不外推所有工厂。",
+                "market": "中国大陆",
+                "name": "华中科技大学就业网工艺岗位",
+                "period": "2026",
+                "publisher": "华中科技大学就业网",
+                "scope": "具名岗位或制度",
+                "url": "https://job.hust.edu.cn/zjob/2435001.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 表1.2 上位职业 Industrial Engineers：17-2112 2025 年就业约 365,100 人，预计 2035 年约 410,600 人，2025—2035 年变化 +12.4%，年均约 23,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。"
+                ],
+                "id": "bls-design-ep",
+                "market": "美国",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -9512,7 +9560,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这份工作先核对什么？",
+            "question": "制造工程作品集怎样说明过程改进？",
             "table": {
               "rows": [
                 {
@@ -9544,7 +9592,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "怎样判断工作闭环？",
+            "question": "制造工程师与生产经理有什么区别？",
             "table": {
               "rows": [
                 {
@@ -10151,7 +10199,7 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "351,100 人（2024，父职业）",
+            "数值": "约 365,100 人（2025）",
             "说明": {
               "$join": [
                 {
@@ -10175,7 +10223,7 @@
           },
           {
             "指标": "就业 · 变化",
-            "数值": "远快于平均（7% 或更高，2024—2034，父职业）",
+            "数值": "+12.4%；2035 年约 410,600 人",
             "说明": {
               "$join": [
                 {
@@ -10199,7 +10247,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约25,200个/年（旧2024—2034，父职业）",
+            "数值": "年均约 23,100 个",
             "说明": {
               "$join": [
                 {
@@ -10222,7 +10270,7 @@
             }
           }
         ],
-        "boundary": "美国2025OEWS工资和行业参考均为父职业Industrial Engineers（17-2112）；制造工程师17-2112.03精确值未取得。旧就业2024—2034与最新2025—2035分别解释，不混用。",
+        "boundary": "美国工资和预测属于上位工业工程师（17-2112），并非制造工程师独立数据；预测不是当前招聘。",
         "direct_answer": {
           "$item": "manufacturing-engineers.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10249,7 +10297,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "远快于平均（父职业，2024—2034）",
+        "growth": "+12.4%（上位职业）",
         "heading": {
           "$item": "manufacturing-engineers.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10298,11 +10346,11 @@
             "question": "工资"
           },
           {
-            "answer": "2024 年父职业在岗人数，不是本职业精确值或招聘职位数。",
+            "answer": "2025 年美国上位职业就业规模。",
             "question": "就业"
           },
           {
-            "answer": "旧2024—2034与最新2025—2035分别看待；最新父职业增长12%、年均23,100空缺，非细分录用结果。",
+            "answer": "美国 BLS 表1.2 上位工业工程师（17-2112）：2025 年约 365,100 人，2035 年预计约 410,600 人（+12.4%），年均约 23,100 个空缺。包括替换。",
             "question": "展望"
           },
           {
@@ -10312,7 +10360,7 @@
         ],
         "median": "$102,440/年（2025，父职业）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025–2035",
         "wage_column_labels": [
           "分位",
           "年度参考",
@@ -10435,9 +10483,9 @@
         "outlook_evidence": [
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
-            "interpretation": "就业规模、变化与职位空缺必须分别解释。",
-            "limitation": "为父职业展示口径，不能作为个人就业保证。",
+            "horizon": "2025–2035",
+            "interpretation": "美国 BLS 表1.2 上位工业工程师（17-2112）：2025 年约 365,100 人，2035 年预计约 410,600 人（+12.4%），年均约 23,100 个空缺。包括替换。",
+            "limitation": "美国工资和预测属于上位工业工程师（17-2112），并非制造工程师独立数据；预测不是当前招聘。",
             "metric": "就业规模与变化",
             "occupation_scope": "展示口径：Industrial Engineers（17-2112.00 父职业）",
             "value": {
@@ -10449,12 +10497,12 @@
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
-            "interpretation": "旧2024—2034预测年均空缺，含替补；非十年合计，最新2025—2035年均23,100另列。",
-            "limitation": "不能作为个人录用概率。",
+            "horizon": "2025–2035",
+            "interpretation": "空缺包含替换。",
+            "limitation": "美国工资和预测属于上位工业工程师（17-2112），并非制造工程师独立数据；预测不是当前招聘。",
             "metric": "预测年均职位空缺（父职业）",
             "occupation_scope": "展示口径：Industrial Engineers（17-2112.00 父职业）",
-            "value": "约25,200个/年（旧父职业版本）"
+            "value": "年均约 23,100 个（上位职业）"
           },
           {
             "geography": "美国全国",
@@ -11019,7 +11067,7 @@
           "entry": "manufacturing-engineers.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合制造工程师",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11087,7 +11135,7 @@
             "item": "manufacturing-engineers.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：O*NET 17-2112.03 制造工程师（摘要）：提供 17-2112.03 的职业身份、官方描述、兴趣代码、Job Zone、技能与知识；其工资与就业展示父职业口径。；该页工资与就业数据为父职业展示口径。；O*NET 17-2112.03 任务（Tasks）：提供排除产品与流程问题、改进流程与产品、应用精益等方法、评估可制造性、用统计方法确定根因、设计设备布局、编写流程文档、评估成本与可持续性等任务清单。；任务样本不代表每个岗位执行全部任务。；O*NET 17-2112.03 工作情境（Work Context）：描述受控室内为主、邮件与会议沟通、需精确、对他人安全负责、多数一周超过 40 小时等情境。；美国工作情境不替代中国法律与雇主规程。；O*NET 17-2112.03 全国工资（BLS OEWS 展示，父职业 Industrial Engineers）：2025 BLS OEWS 中位工资，展示口径为父职业 Industrial Engineers（17-2112.00），非本职业精确值。；本页未展示分位工资。；O*NET 17-2112.03 全国就业趋势（父职业 Industrial Engineers）：2024 年就业规模与 2024—2034 年增长与职位空缺预测，展示口径为父职业。；预测不是录用保证。；Industries: 17-2112.03：该页 2024 年主要行业为 Manufacturing 与 Professional, Scientific, and Technical Services。；行业分布是雇主场景信号，不是增长或需求预测。；O*NET 17-2112.03 教育与职业准备：Job Zone 4：多数岗位要求四年制学士学位、部分要求两年制学位并通常需数年相关工作或培训。；教育分布不等于每个雇主的硬性要求。；Licenses & Certifications: 17-2112.03：O*NET 提供的州执照与全国认证查询入口。；认证与培训不等于执业授权或雇主录用条件。；Generative AI and Jobs (ILO Working Paper 140, 2025)：按任务层面评估生成式 AI 的职业暴露。；暴露指数不等于采用率、岗位结果或录用概率。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营与私营单位分行业门类年平均工资（含制造业）。；行业平均不是职业中位数，且不含个体工商户与自由职业者。；企业薪酬调查信息（2024年）：人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。；覆盖城镇企业，不含机关事业单位；本页未取得与本职业精确对应的条目。；FermatMind 制造工程师任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。；编辑量表不等于采用率、裁员、法规或证照证据。；"
+        "note": "美国工资和预测属于上位工业工程师（17-2112），并非制造工程师独立数据；预测不是当前招聘。"
       },
       "work_context_block": {
         "$item": "manufacturing-engineers.profile.work-context-block.5",
@@ -11136,46 +11184,46 @@
         "fact_id": "us-wage-median",
         "market": "美国（父职业展示口径）",
         "measure": "2025 年年薪中位数（约 49.25 美元/小时）",
-        "occupation_scope": "O*NET 展示口径：Industrial Engineers（17-2112.00 父职业，非本职业 17-2112.03）",
+        "occupation_scope": "美国上位职业 Industrial Engineers（17-2112）",
         "period": "2025 BLS OEWS；查阅 2026-09-25",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "351,100 人",
+        "derivation": "美国 BLS 表1.2 上位职业 Industrial Engineers：17-2112 2025 年就业约 365,100 人，预计 2035 年约 410,600 人，2025—2035 年变化 +12.4%，年均约 23,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 365,100 人",
         "fact_id": "us-employment-2024",
         "market": "美国（父职业展示口径）",
         "measure": "2024 年在岗人数（父职业）",
-        "occupation_scope": "O*NET 展示口径：Industrial Engineers（17-2112.00 父职业，非本职业 17-2112.03）",
-        "period": "2024；查阅 2026-09-25",
+        "occupation_scope": "美国上位职业 Industrial Engineers（17-2112）",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET 该职业页展示 Projected growth (2024-2034) 为 Much faster than average（7% or higher），展示口径为父职业 Industrial Engineers（17-2112.00）。",
-        "display_value": "远快于平均（7% 或更高，2024—2034）",
+        "derivation": "美国 BLS 表1.2 上位职业 Industrial Engineers：17-2112 2025 年就业约 365,100 人，预计 2035 年约 410,600 人，2025—2035 年变化 +12.4%，年均约 23,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "+12.4%",
         "fact_id": "us-growth",
         "market": "美国（父职业展示口径）",
         "measure": "就业增长预测（父职业）",
-        "occupation_scope": "O*NET 展示口径：Industrial Engineers（17-2112.00 父职业，非本职业 17-2112.03）",
-        "period": "2024—2034；查阅 2026-09-25",
+        "occupation_scope": "美国上位职业 Industrial Engineers（17-2112）",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET 该职业页展示 Projected job openings (2024-2034) 为 25,200，展示口径为父职业 Industrial Engineers（17-2112.00）；期间合计而非年均。",
-        "display_value": "约 25,200 个（2024—2034 合计）",
+        "derivation": "美国 BLS 表1.2 上位职业 Industrial Engineers：17-2112 2025 年就业约 365,100 人，预计 2035 年约 410,600 人，2025—2035 年变化 +12.4%，年均约 23,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 23,100 个",
         "fact_id": "us-openings",
         "market": "美国（父职业展示口径）",
         "measure": "预计职位空缺（期间合计，父职业）",
-        "occupation_scope": "O*NET 展示口径：Industrial Engineers（17-2112.00 父职业，非本职业 17-2112.03）",
-        "period": "2024—2034；查阅 2026-09-25",
+        "occupation_scope": "美国上位职业 Industrial Engineers（17-2112）",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
@@ -11257,25 +11305,25 @@
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国上位职业年薪中位数（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业变化"
+        "label": "上位职业：美国就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "上位职业：美国就业规模（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国职位空缺（期合计）"
+        "label": "上位职业：美国年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11289,17 +11337,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "本页制造工程师指 O*NET 17-2112.03：排除产品与流程问题、改进制造流程与产品、应用精益等持续改进方法、评估可制造性、用统计方法确定失效根因、设计设备布局、编写流程文档、评估制造成本与环境可持续性。判断这条职业路径时，应同时验证工作闭环、责任与证据边界、证据口径、风险控制和可观察的入门作品。"
+      "text": "了解制造工程师如何设计流程、验证试产并与生产管理及质量团队交接。"
     },
     "title": {
       "availability": "available",
-      "text": "制造工程师职业判断：工作、入行与风险边界"
+      "text": "制造工程师做什么：工艺设计、试产和量产验证"
     }
   },
-  "source_content_sha256": "521c2cd09429c0816c765ebd4ab6ee551c6ed812bceb89c2245c72f10b0306e2",
+  "source_content_sha256": "8a130a4d5abd68169001e8e912bcecf5bf6532b56e0fe1a72564a4fcec46f3fe",
   "subject": {
     "canonical_slug": "manufacturing-engineers",
     "name": "制造工程师",
-    "summary": "本页制造工程师指 O*NET 17-2112.03：设计、整合或改进制造系统或相关流程，可与设计人员合作改进产品以提高可制造性并降低成本，含工艺工程师、工厂工程师等职称。"
+    "summary": "制造工程师设计、整合或改进制造流程，协调工装、作业步骤和质量要求，并用试产记录验证流程能否稳定运行。职责会随产品和工厂变化。"
   }
 }

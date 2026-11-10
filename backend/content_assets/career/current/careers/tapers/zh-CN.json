@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "观察能否按原始记录核接缝位置、长度、材料信息和确认状态，发现缺项时写明待确认而非补造。真实嵌缝还需要手艺训练、材料说明、现场安全条件和质量复核，不能一次算对长度就上岗。"
+              "纸面体验｜在虚构墙面草图与交接单上找出一条遗漏的板缝，标出所在墙段及需复核的记录。 "
             ]
           },
           "id": "tapers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24874,14 +24873,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "嵌缝工处理石膏板等墙板接缝、裂隙及钉螺钉头位置，使用嵌缝材料与接缝带并修整表面，为涂装或贴墙纸做准备。Tapers在此指墙板接缝处理，不是医疗包扎或电线圈包带；板材安装、最终涂装与特殊施工作业另有任务和权限。"
+              "石膏板接缝工处理板缝和固定点，完成贴带与找平，使接缝能和周围板面平顺衔接。工作交接要标明哪些区域还待检查。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "tapers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "editorial"
+            "transfer-onet-47-2082.00"
           ],
           "type": "prose"
         }
@@ -25665,15 +25662,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分文字清单辅助、图像提示、实际施工与就业结果。NIST资料支持核信息风险，O*NET支持任务范围，BLS支持精确统计；它们不提供本职业替代比例。没有可复核任务评分方法与输入，本页另列AI影响度编辑估算。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：在虚构墙面草图与交接单上找出一条遗漏的板缝，标出所在墙段及需复核的记录。"
             ]
           },
           "id": "tapers.display.ai_impact_table.answer",
           "source_refs": [
-            "nist",
-            "onet",
-            "bls",
-            "editorial"
+            "transfer-onet-47-2082.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -34237,6 +34232,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-47-2082.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 47-2082.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/47-2082.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39710,10 +39732,10 @@
       "text": "嵌缝工（墙板接缝处理）"
     }
   },
-  "source_content_sha256": "cbb34a7ceae63a4557e3f8334ee081de29c7e34aa86c06af1b636e4384a12739",
+  "source_content_sha256": "42ba675cd358d1a915172f7ddd293ee9c4e2c2dcb73f7649e419dd88e7c0f061",
   "subject": {
     "canonical_slug": "tapers",
     "name": "嵌缝工（墙板接缝处理）",
-    "summary": "嵌缝工处理石膏板等墙板接缝、裂隙及钉螺钉头位置，使用嵌缝材料与接缝带并修整表面，为涂装或贴墙纸做准备。Tapers在此指墙板接缝处理，不是医疗包扎或电线圈包带；板材安装、最终涂装与特殊施工作业另有任务和权限。"
+    "summary": "石膏板接缝工处理板缝和固定点，完成贴带与找平，使接缝能和周围板面平顺衔接。工作交接要标明哪些区域还待检查。"
   }
 }

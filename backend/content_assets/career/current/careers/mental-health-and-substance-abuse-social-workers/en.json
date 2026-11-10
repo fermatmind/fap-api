@@ -159,12 +159,21 @@
         "status": "pending_mapping"
       },
       "item:mental-health-and-substance-abuse-social-workers.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:mental-health-and-substance-abuse-social-workers.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:mental-health-and-substance-abuse-social-workers.path.interview-probation.10": {
+        "status": "pending_mapping"
+      },
+      "item:mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1": {
         "status": "mapped"
       },
       "item:mental-health-and-substance-abuse-social-workers.profile.definition-block.1": {
@@ -5686,52 +5695,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5962,96 +6109,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -11315,7 +11698,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Direct assessment: If you are willing to respond steadily under pressure and in crises, document work under assessment and confidentiality standards, and help others, this direction is worth exploring further. The safe trial uses only entirely fictional service cases, with no real client information or restricted data."
+              "Be cautious if you want each case resolved within one conversation; service access and follow-up often depend on another organization."
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.quick-decision.fermat-decision-card.1",
@@ -11329,7 +11712,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observable signals: Can you follow assessment and risk-screening processes, strictly maintain confidentiality and recordkeeping standards, and escalate immediately when safety risks arise? Personality labels cannot determine fit or eligibility."
+              "In 09 Entry, qualifications, and career development, find “SW-16: Check a Service Referral.” Spend about 10 minutes on the fictional records before reading the answer."
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.quick-decision.fermat-decision-card.2",
@@ -11343,7 +11726,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions supporting fit: Willingness to handle emotional demands and crisis situations over the long term, work steadily under supervision and standards, and keep learning. Reasons for caution: If high emotional demands and safety responsibilities are difficult to tolerate, or confidentiality requirements feel uncomfortable, first compare adjacent directions such as counseling or case management."
+              "Consider mental health social work if you want to check access barriers, coordinate with service providers and keep track of referrals."
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.quick-decision.fermat-decision-card.3",
@@ -11357,7 +11740,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Safe work sample (entirely fictional service case): For a fictional referral case, spend 60 minutes writing a needs and risk assessment, service plan objectives, intervention and documentation points, confidentiality and escalation situations, and matters requiring confirmation by qualified people or the institution. Use no real client information or restricted data."
+              "Practice with fictional records only. Leave assessments, care decisions and disclosures to qualified or otherwise authorized staff under the applicable process."
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.quick-decision.fermat-decision-card.4",
@@ -11436,7 +11819,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Research inputs: Official O*NET 21-1023.00 description, tasks, work context, interest code SI, and Job Zone Five, plus BLS 2025 wages and 2024–2034 employment projections for this occupation. These do not establish mainland Chinese qualifications, wages, or employment scope."
+              "Research inputs: Official O*NET 21-1023.00 description, tasks, work context, interest code SI, and Job Zone Five, plus BLS 2025 wages and 2025–2035 employment projections for this occupation. These do not establish mainland Chinese qualifications, wages, or employment scope."
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.profile.definition-block.5",
@@ -11791,7 +12174,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. occupation 21-1023, 2025–2035 employment 138,900 → 153,200, growth 10%, net increase 14,300. O*NET average annual openings of 12,500 include growth and replacement. Openings are not net increase, current recruitment, or AI causality."
+              "U.S. occupation 21-1023, 2025–2035 employment 138,900 → 153,200, growth 10.3%, net increase 14,300. BLS projected annual openings of 12,500 include growth and replacement. Openings are not net increase, current recruitment, or AI causality."
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.us-salary.career-snapshot-secondary-locale.3",
@@ -11959,7 +12342,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Next trial: Use an entirely fictional service case to complete an assessment–plan–documentation exercise, then decide whether to continue."
+              "Use SW-16 in section 09 to compare fictional sharing permission and receipt evidence, then draft a handoff to the coordinator. W-SW separately tests contact availability and appointment confirmation."
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.fit.riasec-fit-block.8",
@@ -11981,7 +12364,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Check jurisdiction and job scope separately: China's Mental Health Law distinguishes counseling, treatment, and diagnosis of mental disorders. U.S. clinical social workers require state licensure and may diagnose within their scope. Occupational titles, scales, or AI outputs do not confer authority. | https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992810.html｜https://www.bls.gov/ooh/community-and-social-service/social-workers.htm"
+              "Check the task, applicable law and assigned role before making or escalating a decision. The entry qualification FAQ gives separate U.S. and mainland China examples and links to their source texts. A tool does not grant practice authority."
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.risk.career-risk-cards.1",
@@ -12129,7 +12512,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Entry work sample: Under supervision, assess and document an entirely fictional case, showing risk screening, plan objectives, and escalation judgment, without contact with real clients."
+              "Try SW-16 in section 09: independently check the two fictional referral records for permission and receipt, then name the authorized coordinator."
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.path.career-path-block.6",
@@ -12177,12 +12560,19 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "Stage",
+              "Tasks",
+              "Authority",
+              "Evidence: paper practice or authorized real work",
+              "Next step"
+            ],
             "rows": [
               [
                 "Foundational observation",
                 "Participate in assessment and case management under supervision",
                 "Do not independently handle crises or diagnose",
-                "Assessment and documentation practice",
+                "Paper option: SW-16 permission and receipt notes, or W-SW contact and appointment evidence.",
                 "Expand tasks under licensure and supervisory evaluation"
               ],
               [
@@ -12231,12 +12621,18 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "Scenario",
+              "Action",
+              "Review",
+              "Deliverable"
+            ],
             "rows": [
               [
                 "Before the interview",
-                "Prepare an assessment and planning example for a fictional case",
-                "Ask someone to challenge risk and confidentiality judgments",
-                "Assessment and plan samples"
+                "Use SW-16 in section 09 to compare fictional sharing permission and receipt evidence, then draft a handoff to the coordinator. W-SW separately tests contact availability and appointment confirmation.",
+                "Recheck independently against the rubric after SW-16. A second reader is optional.",
+                "Fictional evidence notes, open items and paper handoff."
               ],
               [
                 "During the interview",
@@ -12276,6 +12672,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Category",
+              "Supporting evidence",
+              "Verifying party",
+              "Verification conditions",
+              "Authority boundary",
+              "Responsible party",
+              "Next step"
             ],
             "rows": [
               [
@@ -12339,6 +12744,127 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials: SW-16 (about 10 minutes)",
+                  "A community team requires a recorded sharing permission and an acknowledgment from the receiving service before marking a referral handed over.",
+                  "R4 has a permission note and a receipt from the service. R5 has a permission note and an outgoing email copy.",
+                  "Only the assigned coordinator closes the referral. The exercise uses no real records."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Write one handoff line per record, showing what evidence exists and what is pending.",
+                  "Write one question for the service coordinator."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Answer key",
+                  "R4 has both kinds of evidence. R5’s outgoing copy is not an acknowledgment.",
+                  "Keep R5 pending and ask the coordinator to verify receipt with the service."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Check both IDs, the two required records and who can close the handoff."
+                ]
+              }
+            ]
+          },
+          "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+          "title": "SW-16: Check a Service Referral",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "Day 1",
+                  "Start W-SW. A fictional provider needs a reachable contact window and an appointment confirmation for T6 and T7. Copy the two conditions."
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "Day 2",
+                  "T6 can be contacted Wednesday morning; T7 has no confirmed contact window. Record what is known."
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "Day 3",
+                  "T6 has an appointment confirmation. T7 has a request sent without a reply. Separate acknowledgment from a request."
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "Day 4",
+                  "Draft a neutral question for the coordinator about T7’s contact window and appointment."
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "Day 5",
+                  "Write two referral follow-up lines with evidence and a next owner. Do not close either file on your own."
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "Day 6",
+                  "Work alone: compare your notes with Day 1 and the two records on Days 2–3. Peer feedback is optional afterward."
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "Day 7",
+                  "Name one task you would enjoy repeating and one missing resource that would make coordination harder."
+                ]
+              }
+            ]
+          },
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+          "title": "Seven-day paper trial: a separate case",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "I listed both IDs.",
+              "I checked the two conditions.",
+              "I did not assume missing information.",
+              "I named the next owner.",
+              "I used fictional material only.",
+              "I can independently repeat the check.",
+              "I identified one skill to practice."
+            ]
+          },
+          "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+          "title": "Judgment questions after seven days",
+          "type": "list"
         }
       ]
     },
@@ -12353,7 +12879,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. occupation 21-1023, 2025–2035 employment 138,900 → 153,200, growth 10%, net increase 14,300. O*NET average annual openings of 12,500 include growth and replacement. Openings are not net increase, current recruitment, or AI causality."
+              "U.S. occupation 21-1023, 2025–2035 employment 138,900 → 153,200, growth 10.3%, net increase 14,300. BLS projected annual openings of 12,500 include growth and replacement. Openings are not net increase, current recruitment, or AI causality."
             ]
           },
           "id": "mental-health-and-substance-abuse-social-workers.market-signals.market-signal-card.1",
@@ -12468,12 +12994,14 @@
                 ]
               },
               {
-                "answer": "Qualified, licensed people must take responsibility within their roles for psychosocial assessment, risk screening and response, intervention plans, confidentiality and disclosure judgments, referrals, and crisis escalation. Tool outputs must not serve as diagnostic or intervention conclusions.",
+                "answer": "The person responsible for assessment, intervention, confidentiality, referrals or escalation depends on the task, applicable law and institutional procedure. Check any required license for regulated clinical tasks. Tool output does not establish a diagnosis or intervention decision.",
                 "id": "mental-health-and-substance-abuse-social-workers.faq.5",
                 "question": "Which key judgments must remain the responsibility of professionals?",
                 "question_key": "career.faq.mental-health-and-substance-abuse-social-workers.human-control",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "source-pack-onet-details",
+                  "bls-ooh-licensure",
+                  "cn-community-rehab-policy"
                 ]
               },
               {
@@ -12496,12 +13024,15 @@
                 ]
               },
               {
-                "answer": "U.S. Job Zone Five: Typically graduate education, a master's or higher, often licensure or registration, with fieldwork and supervision hours commonly required. Mainland Chinese education, practice, and supervision boundaries follow competent authorities' rules. A degree does not equal practice authorization.",
+                "answer": "In the U.S., clinical social workers need a social work master’s degree, supervised clinical experience, an exam, and state licensure. Nonclinical licensing or credential rules vary by state. O*NET Job Zone Five describes extensive preparation; it does not set a legal requirement. Mainland China’s community rehabilitation policy describes teams that include psychiatric physicians, social workers, and other professionals. Social workers may coordinate services and support rehabilitation. Team membership does not confer authority to diagnose or treat mental disorders. Article 29 assigns diagnosis of mental disorders to licensed psychiatrists in mainland China.",
                 "id": "mental-health-and-substance-abuse-social-workers.faq.8",
                 "question": "What does the entry and training path usually look like?",
                 "question_key": "career.faq.mental-health-and-substance-abuse-social-workers.education-path",
                 "source_refs": [
-                  "source-pack-onet-localcert"
+                  "source-pack-onet-localcert",
+                  "bls-ooh-licensure",
+                  "cn-community-rehab-policy",
+                  "cn-mental-health-law-article29"
                 ]
               },
               {
@@ -12514,7 +13045,7 @@
                 ]
               },
               {
-                "answer": "O*NET 21-1023.00 occupation-specific scope: Approximately 136,800 employed in 2024, projected approximately 150,100 in 2034, approximately 10% growth, and approximately 13,500 average annual openings. Industry shares are approximately 75% healthcare and social assistance and 14% government. These are not individual hiring probabilities.",
+                "answer": "O*NET lists 76% in health care and social assistance, 15% in government and 9% in other industries. The U.S. BLS projects 12,500 annual openings on average, including replacement needs.",
                 "id": "mental-health-and-substance-abuse-social-workers.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.mental-health-and-substance-abuse-social-workers.outlook-transition",
@@ -12524,7 +13055,7 @@
                 ]
               },
               {
-                "answer": "If you can complete an assessment–plan–documentation exercise using an entirely fictional case under supervision, check against standards, and stop and escalate first when safety or confidentiality questions arise, further exploration is worthwhile. Specific licensure and supervision requirements follow local and institutional rules.",
+                "answer": "Try SW-16 in section 09: independently check the two fictional referral records for permission and receipt, then name the authorized coordinator.",
                 "id": "mental-health-and-substance-abuse-social-workers.faq.11",
                 "question": "Is this occupation worth exploring further?",
                 "question_key": "career.faq.mental-health-and-substance-abuse-social-workers.career-worth",
@@ -12574,28 +13105,28 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Mental Health and Substance Abuse Social Workers",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Mental Health and Substance Abuse Social Workers",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Mental Health and Substance Abuse Social Workers",
+                "entity": "Mental health counselors",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/career/jobs/mental-health-counselors"
               },
               {
-                "entity": "Mental Health and Substance Abuse Social Workers",
+                "entity": "Clinical and counseling psychologists",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/career/jobs/clinical-and-counseling-psychologists"
               },
               {
                 "entity": "Mental Health and Substance Abuse Social Workers",
@@ -12753,23 +13284,23 @@
                 "name": "MOHRSS Labor Relations: Wages and Benefits section (bounded wage information search)",
                 "period": "bounded search; accessed 2026-09-28",
                 "publisher": "Ministry of Human Resources and Social Security of the People's Republic of China",
-                "scope": "parent_occupation_proxy",
+                "scope": "MOHRSS Labor Relations: Wages and Benefits section (bounded wage information search)",
                 "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/"
               },
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "O*NET displays BLS 2024–2034 employment projections: 136,800 employed in 2024, projected 150,100 in 2034, growth 10% (much faster than average), and 13,500 average annual openings."
+                  "BLS Table 1.2 for Mental health and substance abuse social workers (21-1023): May 2025 median annual wage $60,280; 138,900 U.S. jobs in 2025 and 153,200 projected in 2035 (+10.3%), including 12,500 projected annual openings on average. Openings include replacement needs."
                 ],
                 "evidence_type": "official employment trends and projections",
                 "id": "source-pack-onet-localtrends",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "BLS Table 1.2 for Mental health and substance abuse social workers (21-1023): May 2025 median annual wage $60,280; 138,900 U.S. jobs in 2025 and 153,200 projected in 2035 (+10.3%), including 12,500 projected annual openings on average. Openings include replacement needs.",
                 "market": "US",
-                "name": "National Employment Trends: 21-1023.00 - Mental Health and Substance Abuse Social Workers",
-                "period": "2024—2034 BLS Employment Projections displayed by O*NET OnLine; accessed 2026-09-28",
+                "name": "BLS Table 1.2 (21-1023)",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/21-1023.00"
+                "scope": "Mental health and substance abuse social workers (21-1023)",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-28",
@@ -12781,9 +13312,9 @@
                 "limitation": "Industry-category average wages, without a separate listing for mental health and substance abuse social workers. The survey excludes individual businesses and freelancers.",
                 "market": "CN",
                 "name": "Average Wages of Employees in Urban Units in 2025",
-                "period": "2025 data, released 2026-05-15; accessed 2026-09-28",
+                "period": "2025 data (published May 15, 2026)",
                 "publisher": "National Bureau of Statistics of China",
-                "scope": "industry_proxy",
+                "scope": "Average Wages of Employees in Urban Units in 2025",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
@@ -12802,6 +13333,75 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "details": [
+                  "July 2026 course lists social workers among several audiences. It is a training example, not a hiring, licensing or wage source."
+                ],
+                "id": "cn-shanghai-community-training",
+                "limitation": "July 2026 course lists social workers among several audiences. It is a training example, not a hiring, licensing or wage source.",
+                "market": "CN",
+                "name": "Shanghai Mental Health Center community rehabilitation training",
+                "period": "2026",
+                "publisher": "Shanghai Mental Health Center community rehabilitation training",
+                "scope": "Shanghai Mental Health Center community rehabilitation training",
+                "url": "https://www.smhc.org.cn/info/1009/20961.htm"
+              },
+              {
+                "details": [
+                  "The 27 October 2026 notice concerns community mental health services procured by a medical group. It does not announce an individual job."
+                ],
+                "id": "cn-nanshan-community-services",
+                "limitation": "The indexed notice and buyer’s listing confirm a service procurement announcement dated October 27, 2026. Full notice text was not verified. This is not an individual job posting or qualification source.",
+                "market": "CN",
+                "name": "Nanshan community mental health social work procurement",
+                "period": "2026",
+                "publisher": "Nanshan community mental health social work procurement",
+                "scope": "Nanshan community mental health social work procurement",
+                "url": "https://www.ccgp.gov.cn/cggg/dfgg/gkzb/202610/t20261027_27565467.htm"
+              },
+              {
+                "details": [
+                  "Mainland China’s community rehabilitation policy describes a team that includes psychiatric physicians, social workers and other professionals. Social work includes coordination and rehabilitation support; the team arrangement does not confer authority to diagnose or treat a mental disorder."
+                ],
+                "id": "cn-community-rehab-policy",
+                "limitation": "Mainland China’s community rehabilitation policy describes a team that includes psychiatric physicians, social workers and other professionals. Social work includes coordination and rehabilitation support; the team arrangement does not confer authority to diagnose or treat a mental disorder.",
+                "market": "CN",
+                "name": "Ministry of Civil Affairs and partner agencies: community rehabilitation policy",
+                "period": "2017",
+                "publisher": "Ministry of Civil Affairs and partner agencies: community rehabilitation policy",
+                "scope": "Ministry of Civil Affairs and partner agencies: community rehabilitation policy",
+                "url": "https://app.www.gov.cn/govdata/gov/201711/14/414987/article.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. licensure, education and supervised experience; check the state board for applicable requirements."
+                ],
+                "evidence_type": "Official occupational handbook",
+                "id": "bls-ooh-licensure",
+                "limitation": "U.S. licensure, education and supervised experience; check the state board for applicable requirements.",
+                "market": "US",
+                "name": "BLS Occupational Outlook Handbook: How to Become One",
+                "period": "Read November 10, 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/community-and-social-service/social-workers.htm#tab-4"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Article 29 assigns diagnosis of mental disorders to licensed psychiatrists in mainland China."
+                ],
+                "evidence_type": "Official legal text",
+                "id": "cn-mental-health-law-article29",
+                "limitation": "Article 29 assigns diagnosis of mental disorders to licensed psychiatrists in mainland China.",
+                "market": "CN",
+                "name": "Mental Health Law of the People’s Republic of China, Article 29",
+                "period": "2018 amendment",
+                "publisher": "Beijing Municipal Health Commission, republication",
+                "scope": "contextual",
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992810.html"
               }
             ]
           },
@@ -13119,7 +13719,7 @@
             "问题": "Can case documentation be completed automatically?"
           },
           {
-            "回答": "Qualified, licensed people must take responsibility within their roles for risk signal judgments, crisis response, and confidentiality judgments.",
+            "回答": "Follow the applicable law and the institution’s assigned roles for risk decisions, crisis response and confidentiality. Check applicable licensing requirements for regulated clinical tasks.",
             "来源": "21-1023.00 - Mental Health and Substance Abuse Social Workers",
             "链接": "https://www.onetonline.org/link/details/21-1023.00",
             "问题": "Can risk assessment be delegated to tools?"
@@ -13313,7 +13913,7 @@
         "entry_heading": "Entry paths and inspectable evidence",
         "heading": "Mental Health and Substance Abuse Social Workers: Entry Paths, Qualification Boundaries, and Career Development",
         "locale_requirements": {
-          "credential_boundary": "Check education, registration, licensure, and institutional permissions separately. U.S. clinical social workers may diagnose within license scope; in China, mental disorder diagnoses are made by licensed psychiatrists.",
+          "credential_boundary": "Check education, registration, licensure, and institutional permissions separately. U.S. clinical social workers may diagnose within license scope; in China, mental disorder diagnoses are made by licensed psychiatrists. Mainland China’s community rehabilitation policy describes a team that includes psychiatric physicians, social workers and other professionals. Social work includes coordination and rehabilitation support; the team arrangement does not confer authority to diagnose or treat a mental disorder.",
           "jurisdiction": "Check U.S. state licensure rules separately from China's Mental Health Law and specific job requirements",
           "summary": "U.S. BLS: Workers in this occupation are often clinical social workers. Clinical practice requires a master's, post-graduation supervised experience, and state licensure, with requirements varying by state. Job Zone Five describes group preparation and does not set a universal occupational duration. Check Chinese requirements by actual service category, institution, and law."
         },
@@ -13342,6 +13942,24 @@
             "id": "faa",
             "label": "21-1023.00 - Mental Health and Substance Abuse Social Workers",
             "scope": "Occupational scope, source scope, and responsibility boundaries"
+          },
+          {
+            "href": "https://www.smhc.org.cn/info/1009/20961.htm",
+            "id": "cn-shanghai-community-training",
+            "label": "Shanghai Mental Health Center community rehabilitation training",
+            "scope": "July 2026 course lists social workers among several audiences. It is a training example, not a hiring, licensing or wage source."
+          },
+          {
+            "href": "https://www.ccgp.gov.cn/cggg/dfgg/gkzb/202610/t20261027_27565467.htm",
+            "id": "cn-nanshan-community-services",
+            "label": "Nanshan community mental health social work procurement",
+            "scope": "The 27 October 2026 notice concerns community mental health services procured by a medical group. It does not announce an individual job."
+          },
+          {
+            "href": "https://app.www.gov.cn/govdata/gov/201711/14/414987/article.html",
+            "id": "cn-community-rehab-policy",
+            "label": "Ministry of Civil Affairs and partner agencies: community rehabilitation policy",
+            "scope": "Mainland China’s community rehabilitation policy describes a team that includes psychiatric physicians, social workers and other professionals. Social work includes coordination and rehabilitation support; the team arrangement does not confer authority to diagnose or treat a mental disorder."
           }
         ],
         "tracks": [
@@ -13904,18 +14522,18 @@
           },
           {
             "指标": "Employment 2025 → 2035",
-            "数值": "138,900 → 153,200 employed",
-            "说明": "O*NET overall U.S. occupational projection; openings include replacement, not AI causality | https://www.onetonline.org/link/localtrends/21-1023.00"
+            "数值": "138,900 → 153,200 jobs",
+            "说明": "BLS Table 1.2; projected openings include replacement needs | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "指标": "Employment change 2025–2035",
-            "数值": "10%; net increase 14,300 employed",
-            "说明": "O*NET overall U.S. occupational projection; openings include replacement, not AI causality | https://www.onetonline.org/link/localtrends/21-1023.00"
+            "数值": "10.3%; net increase 14,300 jobs",
+            "说明": "BLS Table 1.2; projected openings include replacement needs | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "指标": "Average annual openings 2025–2035",
             "数值": "12,500 / year",
-            "说明": "O*NET overall U.S. occupational projection; openings include replacement, not AI causality | https://www.onetonline.org/link/localtrends/21-1023.00"
+            "说明": "BLS Table 1.2; projected openings include replacement needs | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
         "boundary": "U.S. data apply only to mental-health-and-substance-abuse-social-workers during the labeled period. They are not extrapolated to China and do not guarantee personal income or hiring.",
@@ -13946,7 +14564,7 @@
           }
         ],
         "factors_heading": "Main factors affecting actual wage levels",
-        "growth": "10%（2025—2035）",
+        "growth": "10.3% projected job growth, 2025–2035",
         "heading": "Boundaries of U.S. Wage and Employment Data for Mental Health and Substance Abuse Social Workers",
         "industry_heading": "Industry and job differences",
         "industry_period": "Current O*NET industry page; verify the year against the original table",
@@ -14094,8 +14712,8 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "May suit people who remain steady under pressure and in crises, document under assessment and confidentiality standards, and escalate immediately when safety risks arise.",
-        "title": "Who may be suited to mental health and substance abuse social work?"
+        "summary": "Consider mental health social work if you want to check access barriers, coordinate with service providers and keep track of referrals.",
+        "title": "Who may enjoy being a mental health and substance abuse social worker?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -14125,12 +14743,12 @@
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-sources",
+            "label": "Check the sources for market data"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "Compare related career directions"
           }
         ],
         "direct_answer": {
@@ -14189,7 +14807,7 @@
             "metric": "Employment size and change",
             "occupation_scope": "Displayed scope: 21-1023.00",
             "source_id": "bls",
-            "value": "138,900 → 153,200 employed; 10%; net increase 14,300"
+            "value": "138,900 → 153,200 jobs; 10.3%; net increase 14,300"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -14312,13 +14930,13 @@
             "alternate_value": null,
             "label": "U.S. employment (2025)",
             "secondary_value": null,
-            "value": "138,900 employed"
+            "value": "138,900 jobs"
           },
           {
             "alternate_value": null,
             "label": "U.S. growth (2025–2035)",
             "secondary_value": null,
-            "value": "10%, overall projection, not AI attribution"
+            "value": "10.3% — BLS Table 1.2 occupation-wide projection, without AI attribution."
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -14499,44 +15117,44 @@
         "heading": "Fit signals, personality tool boundaries, and practical use",
         "questions": [
           {
-            "answer": "Mental health and substance abuse social workers can use tools to assist information organization, but responsible people must still check actual adoption, permissions, result release, and exception escalation.",
-            "question": "What abilities and work approach do mental health and substance abuse social workers need?"
+            "answer": "Use SW-16 to check the supplied sharing permission and receipt, then draft a paper handoff to the designated coordinator. W-SW lets you check the contact window and appointment evidence separately.",
+            "question": "What can I try before choosing this career direction?"
           },
           {
-            "answer": "Mental health and substance abuse social workers can use tools to assist information organization, but responsible people must still check actual adoption, permissions, result release, and exception escalation.",
-            "question": "What abilities and work approach do mental health and substance abuse social workers need?"
+            "answer": "Check each fictional referral for documented permission to share and a receipt from the receiving service.",
+            "question": "What does the two-line referral note show?"
           },
           {
-            "answer": "Mental health and substance abuse social workers can use tools to assist information organization, but responsible people must still check actual adoption, permissions, result release, and exception escalation.",
-            "question": "What abilities and work approach do mental health and substance abuse social workers need?"
+            "answer": "Use the supplied records to distinguish sending from receipt. Mark missing confirmation for the coordinator to check.",
+            "question": "Does a sent message prove receipt?"
           },
           {
-            "answer": "Mental health and substance abuse social workers can use tools to assist information organization, but responsible people must still check actual adoption, permissions, result release, and exception escalation.",
-            "question": "What abilities and work approach do mental health and substance abuse social workers need?"
+            "answer": "The designated coordinator decides. Your paper handoff states what is documented and what remains open.",
+            "question": "Who can close a referral in this exercise?"
           },
           {
-            "answer": "Mental health and substance abuse social workers can use tools to assist information organization, but responsible people must still check actual adoption, permissions, result release, and exception escalation.",
-            "question": "What abilities and work approach do mental health and substance abuse social workers need?"
+            "answer": "Compare the supplied contact windows and appointment records, then separate missing evidence from what can be confirmed.",
+            "question": "What does W-SW ask me to check?"
           },
           {
-            "answer": "Mental health and substance abuse social workers can use tools to assist information organization, but responsible people must still check actual adoption, permissions, result release, and exception escalation.",
-            "question": "What abilities and work approach do mental health and substance abuse social workers need?"
+            "answer": "Reopen the case instructions and original record lines on Day 6. Check the handoff against both conditions and the designated recipient.",
+            "question": "How do I self-check the seven-day trial?"
           },
           {
-            "answer": "Mental health and substance abuse social workers can use tools to assist information organization, but responsible people must still check actual adoption, permissions, result release, and exception escalation.",
-            "question": "What abilities and work approach do mental health and substance abuse social workers need?"
+            "answer": "Use only the fictional records supplied on this page. Do not contact service users or handle real client data.",
+            "question": "Do I need real case records?"
           },
           {
-            "answer": "Mental health and substance abuse social workers can use tools to assist information organization, but responsible people must still check actual adoption, permissions, result release, and exception escalation.",
-            "question": "What abilities and work approach do mental health and substance abuse social workers need?"
+            "answer": "It can suggest interest in coordination and documentation. The exercise does not assess clinical skill or practice eligibility.",
+            "question": "What if I enjoy the handoff task?"
           },
           {
-            "answer": "Mental health and substance abuse social workers can use tools to assist information organization, but responsible people must still check actual adoption, permissions, result release, and exception escalation.",
-            "question": "What abilities and work approach do mental health and substance abuse social workers need?"
+            "answer": "Treat it as a starting point for exploration. Compare the day-to-day work with what you actually enjoyed in the paper exercises.",
+            "question": "How do I read an interest profile here?"
           },
           {
-            "answer": "Mental health and substance abuse social workers can use tools to assist information organization, but responsible people must still check actual adoption, permissions, result release, and exception escalation.",
-            "question": "What abilities and work approach do mental health and substance abuse social workers need?"
+            "answer": "Check the specific role, supervision and local authorization. See the entry qualification FAQ for U.S. and mainland China sources.",
+            "question": "What should I verify for a real position?"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -14554,7 +15172,7 @@
             "tone": "caution"
           },
           {
-            "body": "Use an entirely fictional service case to complete an assessment–plan–documentation exercise, then decide whether to continue.",
+            "body": "Use SW-16 in section 09 to compare fictional sharing permission and receipt evidence, then draft a handoff to the coordinator. W-SW separately tests contact availability and appointment confirmation.",
             "id": "experiment",
             "label": "Next trial action",
             "tone": "action"
@@ -14652,7 +15270,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI Personality Test (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -14662,7 +15280,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five Personality Model Test (English)"
+            "label": "Big Five personality test"
           },
           {
             "href": {
@@ -14672,7 +15290,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI assessment in Chinese"
+            "label": "Mental health counselors"
           },
           {
             "href": {
@@ -14682,7 +15300,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five assessment in Chinese"
+            "label": "Clinical and counseling psychologists"
           }
         ]
       },
@@ -14725,6 +15343,27 @@
         "id": "mental-health-and-substance-abuse-social-workers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mental-health-and-substance-abuse-social-workers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "mental-health-and-substance-abuse-social-workers.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -14818,7 +15457,7 @@
         "fact_id": "us-median",
         "market": "United States (Mental Health and Substance Abuse Social Workers 21-1023.00)",
         "measure": "2025 median annual wage",
-        "occupation_scope": "O*NET 21-1023.00 occupation-specific scope",
+        "occupation_scope": "Mental health and substance abuse social workers (21-1023)",
         "period": "2025 wage data; accessed 2026-09-25",
         "source_refs": [
           "source-pack-onet-localwages"
@@ -14850,36 +15489,36 @@
       },
       {
         "derivation": null,
-        "display_value": "136,800 employed (2024)",
+        "display_value": "138,900 jobs — Mental health and substance abuse social workers (21-1023)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "2024 employment size",
-        "occupation_scope": "O*NET 21-1023.00 occupation-specific scope",
-        "period": "2024; accessed 2026-09-25",
+        "measure": "138,900 jobs",
+        "occupation_scope": "Mental health and substance abuse social workers (21-1023)",
+        "period": "2025",
         "source_refs": [
           "source-pack-onet-localtrends"
         ]
       },
       {
-        "derivation": "O*NET national employment trends page: approximately 10% projected growth during 2024–2034.",
-        "display_value": "Much faster than average (approximately 10%, 2024–2034)",
+        "derivation": null,
+        "display_value": "10.3% projected growth — Mental health and substance abuse social workers (21-1023)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Projected employment growth",
-        "occupation_scope": "O*NET 21-1023.00 occupation-specific scope",
-        "period": "2024–2034; accessed 2026-09-25",
+        "measure": "10.3% projected growth",
+        "occupation_scope": "Mental health and substance abuse social workers (21-1023)",
+        "period": "2025–2035",
         "source_refs": [
           "source-pack-onet-localtrends"
         ]
       },
       {
-        "derivation": "Includes replacement needs.",
-        "display_value": "Approximately 13,500 / year (2024–2034)",
+        "derivation": null,
+        "display_value": "12,500 projected annual openings — Mental health and substance abuse social workers (21-1023)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Projected openings (annual average)",
-        "occupation_scope": "O*NET 21-1023.00 occupation-specific scope",
-        "period": "2024–2034; accessed 2026-09-25",
+        "measure": "12,500 projected annual openings",
+        "occupation_scope": "Mental health and substance abuse social workers (21-1023)",
+        "period": "2025–2035",
         "source_refs": [
           "source-pack-onet-localtrends"
         ]
@@ -14927,31 +15566,31 @@
         "availability": "available",
         "fact_ref": "us-median",
         "key": "us_pay",
-        "label": "U.S. wage reference"
+        "label": "U.S. 21-1023 median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. 21-1023 projected job growth (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment"
+        "label": "U.S. 21-1023 jobs in 2025"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual openings"
+        "label": "U.S. 21-1023 projected annual openings (2025–2035)"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China wage reference"
+        "label": "Mainland China: exact occupational wage not verified"
       }
     ]
   },
@@ -14959,14 +15598,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Mental health and substance abuse social workers (O*NET 21-1023.00) assess and help people with mental health or substance use problems, providing case management, crisis intervention, and prevention education. U.S. BLS median annual pay was $60,280 in 2025, with approximately 136,800 employed in 2024. Includes work context, risks, and entry paths."
+      "text": "Explore mental health social work, service coordination, U.S. wages and jobs, and a fictional referral exercise."
     },
     "title": {
       "availability": "available",
       "text": "Mental Health and Substance Abuse Social Workers: Duties, U.S. Pay, and Entry"
     }
   },
-  "source_content_sha256": "9b89e9d37b3718a382f2c942645ff98e3c6f7fb7f6b423f32489756f73744674",
+  "source_content_sha256": "c6fe6fcdbed07d7b33ed1eebb9ad73c2d49eed637ad46ce5ec9ecb59a7d6bd99",
   "subject": {
     "canonical_slug": "mental-health-and-substance-abuse-social-workers",
     "name": "Mental Health and Substance Abuse Social Workers",

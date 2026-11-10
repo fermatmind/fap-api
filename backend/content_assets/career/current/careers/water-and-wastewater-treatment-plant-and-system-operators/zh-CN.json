@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先观察是否愿意按记录核对时间、累计读数和单位，把异常与待确认事项说清楚，接受指导并保留修改依据。W23可帮助探索记录和交接任务；实际采样、检测、设备操作、安全训练和轮班适应仍需在真实岗位验证。"
+              "纸面体验｜对照样本号与取样时间。仪表读数与化验单不同就并列记录，交值班负责人。纸面练习不决定投药或排放。 "
             ]
           },
           "id": "water-and-wastewater-treatment-plant-and-system-operators.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24820,13 +24819,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "给排水处理厂与系统操作员操作或控制设备系统以输送、处理水及污水，监控运行、采样检测、记录并巡视维护及交接异常。供水、污水处理与工程设计、环境监测和危材清除分别有不同目标和责任，不因同处一座设施就合并身份。"
+              "水处理运行人员巡看设备、按流程采样、记录仪表和检测结果，并按班次交接超限或未复核项目。调整工艺由现场规定的岗位负责。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "water-and-wastewater-treatment-plant-and-system-operators.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh"
+            "transfer-onet-51-8031.00"
           ],
           "type": "prose"
         }
@@ -25493,16 +25491,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：先区分工业自动化、生成式文字辅助和真实就业结果。本职业已有控制与监控任务，但这不是大模型采用率证据；文字工具的建议必须复核。既有外部资料未提供可直接采用的实测可复核的职业任务评分或AI替代率，因此另列编辑估算分数。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照样本号与取样时间。仪表读数与化验单不同就并列记录，交值班负责人。纸面练习不决定投药或排放。"
             ]
           },
           "id": "water-and-wastewater-treatment-plant-and-system-operators.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "bls-ooh",
-            "bls",
-            "editorial"
+            "transfer-onet-51-8031.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33544,6 +33539,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-8031.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-8031.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-8031.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39012,10 +39034,10 @@
       "text": "给排水处理厂与系统操作员：任务、工资、训练与纸面体验"
     }
   },
-  "source_content_sha256": "bc2ecc9df5953b40df864d843a4b1c48be5fc8379a68e6851cd634da197777d2",
+  "source_content_sha256": "98a840d978e61774c9380fda7d7583257bfe37d2f3394b532ffd3e4f54e76d71",
   "subject": {
     "canonical_slug": "water-and-wastewater-treatment-plant-and-system-operators",
     "name": "给排水处理厂与系统操作员",
-    "summary": "给排水处理厂与系统操作员监控和操作输送、净化水及处理污水的设备与流程，采样检测、记录运行数据、巡视维护并交接异常。供水与污水处理的目标和具体标准不同；入门先练习读数、单位与交接记录，再在真实岗位的训练和权限范围内操作。"
+    "summary": "水处理运行人员巡看设备、按流程采样、记录仪表和检测结果，并按班次交接超限或未复核项目。调整工艺由现场规定的岗位负责。"
   }
 }

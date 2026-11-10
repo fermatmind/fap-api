@@ -1490,6 +1490,9 @@
       "item:coaches-and-scouts.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:coaches-and-scouts.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:coaches-and-scouts.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31263,6 +31266,21 @@
           ],
           "title": "How job-posting samples are used",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. One note comes from a full game, the other from a three-minute clip. State what each supports and ask one scouting question that needs fuller observation."
+            ]
+          },
+          "id": "coaches-and-scouts.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Separate coaching observations from scouting judgments",
+          "type": "notice"
         }
       ]
     },
@@ -38057,6 +38075,13 @@
         "id": "coaches-and-scouts.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "coaches-and-scouts.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38720,7 +38745,7 @@
       "text": "Coaches and scouts"
     }
   },
-  "source_content_sha256": "83da3b50a2ddb9a1086ba75767d9cefe0487d2e208a57145b34720cf7442ea16",
+  "source_content_sha256": "62ec0f3beeeb08b9317de8a7bb6323dcb26aca76ab0026b1287acc6c0c8ecdfa",
   "subject": {
     "canonical_slug": "coaches-and-scouts",
     "name": "Coaches and scouts",

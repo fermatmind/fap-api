@@ -2,9 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment": {
         "status": "pending_mapping"
       },
@@ -7236,12 +7233,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "试验方法｜按路径U材料、三条模拟规则及参考答案，完成事实状态表、版本引证表、日期复算表和中立草稿；七日计划逐步复核，不授予任用资格。"
+              "见「入行、资格与职业发展」的纸面练习《M 稿：备忘录引文追溯》。"
             ]
           },
           "id": "judicial-law-clerks.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7273,14 +7270,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "司法法律文员对应美国23-1012.00，在法院研究法律、审阅材料、准备备忘录并起草或校对文书以协助法官；可提出内部建议，正式裁判由法官与法院按权限作出。美国2025年薪中位64,920美元，五分位详见工资板块。证据不足：本轮企业宽组与行业工资资料不能建立中国大陆本职业全国工资分布。当前美国全国工资：2025年中位64,920美元/年；2025就业14,000人，2025—2035增长3%—4%（O*NET增长分类）、年均空缺1,500个（总体预测，非AI归因）。中国精确职业工资缺口保留，行业均值只作宽参考。"
+              "司法法律助理为法官或法院提供法律检索、案卷梳理和文书草拟支持，把可复核的出处和未决问题交给负责审理的人。岗位本身不授予裁判权。"
             ]
           },
           "id": "judicial-law-clerks.profile.definition-block.1",
           "source_refs": [
-            "onet-details",
-            "onet-wages",
-            "mohrss-wage"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7360,14 +7355,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入｜CEI兴趣C68、E59、I50；Job Zone5是通用准备描述，不是文员统一PhD/MD/JD或五年经验法律门槛。美国联邦OSCAR要求任用时法学院毕业或完成全部学位要求待授学位，并满足前三分之一成绩、法律评论编辑、LLM或法官认可等效法律研究能力之一；法官可加条件。JSP11可为满足学业要求的新毕业生，不统一要求多年经验或已获律师资格；更高等级另核经验及律师资格。FBI指纹核查为必需，其他核查依任用法官。当前美国2025就业14,000人，2025—2035增长分类3%—4%、年均空缺1,500个，政府行业占比100%；空缺含增长与替换，非净新增。26-66仅一条具体官网岗位公告，不据此推全国需求或仍有空岗。"
+              "O*NET 23-1012.00 说明本职业任务和工作情境。美国工资采用 OEWS，就业预测采用 BLS 表 1.2。"
             ]
           },
           "id": "judicial-law-clerks.profile.onet-structured-fields-block.7",
           "source_refs": [
             "onet-details",
-            "onet-trends",
-            "oscar-qualifications"
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7554,7 +7549,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜可用U全虚构材料试验摘要、引证格式和初稿整理，但本页没有本职业采用率或提效实测。逐字回查规则页，不让工具补成已确认日期、虚构引语或代发裁判。正式使用另核法院授权及申请样本规则。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "直接回答｜可用U全虚构材料试验摘要、引证格式和初稿整理，但本页没有本职业采用率或提效实测。逐字回查规则页，不让工具补成已确认日期、虚构引语或代发裁判。正式使用另核法院授权及申请样本规则。"
             ]
           },
           "id": "judicial-law-clerks.ai-impact.ai-impact-table.2",
@@ -7741,7 +7736,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国薪资参考｜O*NET 23-1012.00 国家工资页，2025年BLS OEWS，美国全国精确职业口径；2026-10-11核对。"
+              "美国全国工资采用 O*NET 展示的 2025 年 5 月 BLS OEWS（美国本职业 23-1012）。"
             ]
           },
           "id": "judicial-law-clerks.us-salary.career-snapshot-secondary-locale.1",
@@ -7755,14 +7750,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国2025年工资｜第10/25/50/75/90百分位年工资分别为 46,180 / 52,870 / 64,920 / 80,420 / 113,140 美元，中位数为64,920美元/年。百分位不是最低工资或经验等级；数据不等于个人到手收入。"
+              "2025 年 5 月美国本职业 23-1012全国年薪中位数 64,920 美元，时薪中位数 31.21 美元。年薪第 10、25、50、75、90 分位依次为 46,180、52,870、64,920、80,420、113,140 美元。"
             ]
           },
           "id": "judicial-law-clerks.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages",
-            "onet-trends",
-            "onet-details"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -8053,13 +8046,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "任用入口｜美国联邦OSCAR要求任用时法学院毕业或完成全部学位要求待授学位，并满足前三分之一成绩、法律评论编辑、LLM或法官认可等效法律研究能力之一；法官可加条件。JSP11可为满足学业要求的新毕业生，不统一要求多年经验或已获律师资格；更高等级另核经验及律师资格。FBI指纹核查为必需，其他核查依任用法官。JSP适用于law clerk，staff attorney的CPS另列；法官可加岗位条件，具体任期与申请渠道以公告核。Job Zone5不能套为统一五年经验门槛。"
+              "美国 BLS 将博士或专业学位列为典型入门教育。具体法院的申请时间、写作样本和任期另查。"
             ]
           },
           "id": "judicial-law-clerks.path.career-path-block.2",
           "source_refs": [
-            "oscar-qualifications",
-            "onet-details"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8068,13 +8060,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "特定法域要求｜美国采用联邦与州分层的司法体系与任用安排，各法院与法官的要求不同，须逐一核对，不将任一法院或法官的做法写成统一标准；中国大陆法院内法官助理等岗位的设置与职责由相关法律与法院制度规定，不与美国 judicial law clerk 一一对应。"
+              "报道描述中国法官助理阅卷、研究问题及草拟文书，与书记员事务分工有别。该样本不能等同美国司法法律助理岗位。"
             ]
           },
           "id": "judicial-law-clerks.path.career-path-block.3",
           "source_refs": [
-            "oscar-qualifications",
-            "moj-judge-law"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8111,12 +8102,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参考答案｜A第2日已确认；B两提交日期仍是主张，不能把第5日写成已确认。草稿有三处引证问题：沿用版本1的5日标准、段号应为甲案第2段、乙案引语无原文支持。依U2从第3日起计3日，截止第5日；若实际第5日则在模拟期限内，若第7日则晚2日，但原始提交记录缺失，不能选定实际结果。依U3交法官审阅。四作品：A—C事实/主张/缺项表、两规则页版本/段号/逐字引证表、两情形日期复算表、一页中立草稿与待补原始记录交接；标明全部虚构、输入版本及复核角色。"
+              "纸面练习《M 稿：备忘录引文追溯》。 虚构备忘录 V2 中，M1 和 M2 各有已核原件，M3 只有二手摘要。旧稿把三条都列为已核原文。列出需要更正与待核项。变式只把 M3 改为已取得并核对原件。"
             ]
           },
           "id": "judicial-law-clerks.path.career-path-block.6",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8125,13 +8116,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七日计划｜每天20—30分钟：D1按A—C分类事实主张缺项；D2比版本1/2并改甲案段号；D3逐字核乙案，删除不存在引语；D4复算截止第5日及第7日晚2日；D5写一页草稿，保留日期未决并交法官角色复核；D6请他人仅按U材料复核，保留错误及修改；D7合并四作品，查目标法院学历、任期及申请写作样本规则。只用本页虚构材料；练习或AI生成稿不能冒充个人原创招聘样本，26-66公告明确要求样本未用AI起草。"
+              "先做原题和变式，保存第一稿。再到「常见问题与资料来源」打开「纸面练习参考解（完成后打开）」。复核能否追溯原值、待核原因和交接对象。"
             ]
           },
           "id": "judicial-law-clerks.path.career-path-block.7",
           "source_refs": [
-            "onet-details",
-            "cacd-term-26-66"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8167,7 +8157,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "司法法律文员的市场信号与相关方向：本页只陈述来源覆盖范围内的观察。"
+              "职业前景与相关方向"
             ]
           },
           "id": "judicial-law-clerks.market-signals.market-signal-card.1",
@@ -8182,15 +8172,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国总体就业预测，非AI归因｜O*NET 23-1012.00：2025年就业14,000人，2025—2035增长3%—4%（O*NET增长分类），预计年均空缺1,500个（含增长与替补）。证据不足：中国该职业全国就业预测及规范招聘样本未取得，不能转换个人录用概率。"
+              "BLS 表 1.2（美国本职业 23-1012）：2025 年约 14,000 个岗位，2035 年预计约 14,400 个，变化 2.8%，年均约 1,500 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "judicial-law-clerks.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends",
-            "onet-details",
-            "cacd-term-26-66",
-            "mohrss-wage"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8323,23 +8310,22 @@
                 ]
               },
               {
-                "answer": "美国2025年薪第10分位46,180美元、第25分位52,870美元、中位64,920美元、第75分位80,420美元、第90分位113,140美元，O*NET呈现BLS精确职业23-1012.00。OEWS为雇主报告的税前常规工资，包含激励工资等，排除加班费、非生产性奖金、雇主福利等；不能一概写不含奖金。全国分位不是起薪或税后实发。",
+                "answer": "2025 年 5 月美国本职业 23-1012全国年薪中位数 64,920 美元，时薪中位数 31.21 美元。年薪第 10、25、50、75、90 分位依次为 46,180、52,870、64,920、80,420、113,140 美元。",
                 "id": "judicial-law-clerks.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.judicial-law-clerks.us-pay",
                 "source_refs": [
-                  "onet-wages",
-                  "bls-oews-methods"
+                  "onet-wages"
                 ]
               },
               {
-                "answer": "任用入口｜美国联邦OSCAR要求任用时法学院毕业或完成全部学位要求待授学位，并满足前三分之一成绩、法律评论编辑、LLM或法官认可等效法律研究能力之一；法官可加条件。JSP11可为满足学业要求的新毕业生，不统一要求多年经验或已获律师资格；更高等级另核经验及律师资格。FBI指纹核查为必需，其他核查依任用法官。JSP适用于law clerk，staff attorney的CPS另列；法官可加岗位条件，具体任期与申请渠道以公告核。Job Zone5不能套为统一五年经验门槛。",
+                "answer": "美国 BLS 将博士或专业学位列为典型入门教育。具体法院的申请时间、写作样本和任期另查。 报道描述中国法官助理阅卷、研究问题及草拟文书，与书记员事务分工有别。该样本不能等同美国司法法律助理岗位。",
                 "id": "judicial-law-clerks.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.judicial-law-clerks.education-path",
                 "source_refs": [
-                  "oscar-qualifications",
-                  "onet-details"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
@@ -8353,14 +8339,12 @@
                 ]
               },
               {
-                "answer": "美国23-1012.00：2024就业14,500人，2034预计14,900人，2024—2034增长3%、年均空缺1,000含增长及替换；政府占2024就业97%。不把空缺当净新增或个人录用率。中国全国需求未建立；洛杉矶26-66是一条具体官网公告。",
+                "answer": "BLS 表 1.2（美国本职业 23-1012）：2025 年约 14,000 个岗位，2035 年预计约 14,400 个，变化 2.8%，年均约 1,500 个职位空缺，含人员替补。人数分别取整。",
                 "id": "judicial-law-clerks.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.judicial-law-clerks.outlook-transition",
                 "source_refs": [
-                  "onet-trends",
-                  "onet-details",
-                  "cacd-term-26-66"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8381,6 +8365,15 @@
                 "source_refs": [
                   "source-pack-onet-details",
                   "mohrss-wage"
+                ]
+              },
+              {
+                "answer": "原题可标原文已核 2 条，变式 3 条。保留旧稿和更正原因。纸面练习不提出真实法律意见。",
+                "id": "judicial-law-clerks.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.judicial-law-clerks.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
                 ]
               }
             ]
@@ -8581,31 +8574,30 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "支持就业基数、预测就业、增长率和年均职位空缺。",
-                  "预测不是个人就业保证，空缺包括替代需求。"
+                  "本页就业预测采用 BLS 表 1.2。",
+                  "本页就业预测采用 BLS 表 1.2。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "onet-trends",
                 "limitation": "预测不是个人就业保证，空缺包括替代需求。",
                 "market": "美国",
                 "name": "National Employment Trends: Judicial Law Clerks",
-                "period": "2024-2034 projections",
+                "period": "职业资料或动态查询",
                 "publisher": "O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/23-1012.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "本轮完整表核实2025美国年薪10/25/50/75/90分位46,180/52,870/64,920/80,420/113,140美元；时薪22.20/25.42/31.21/38.67/54.40美元。",
-                  "分位非起薪、税后收入或联邦JSP岗位报价；直接用公布值，不反向折算。"
+                  "2025 年 5 月美国本职业 23-1012全国年薪中位数 64,920 美元，时薪中位数 31.21 美元。年薪第 10、25、50、75、90 分位依次为 46,180、52,870、64,920、80,420、113,140 美元。"
                 ],
                 "evidence_type": "official wage distribution",
                 "id": "onet-wages",
-                "limitation": "全国工资分布不等于联邦任用等级、统一起薪或中国工资。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
                 "name": "National Wages: Judicial Law Clerks",
-                "period": "2025 wage data",
+                "period": "2025-05",
                 "publisher": "O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/23-1012.00"
@@ -8645,15 +8637,15 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "用于核对职业身份、任务、工作活动与工作情境。",
-                  "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。"
+                  "本页就业预测采用 BLS 表 1.2。",
+                  "本页就业预测采用 BLS 表 1.2。"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "source-pack-onet-details",
                 "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。",
                 "market": "美国",
                 "name": "23-1012.00 - Judicial Law Clerks",
-                "period": "当前职业页；工资2025、就业2024、预测2024—2034分别标示",
+                "period": "职业资料或动态查询",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/23-1012.00"
@@ -8741,15 +8733,15 @@
               {
                 "accessed_at": "2026-09-01",
                 "details": [
-                  "用于核对职业身份、入门与就业展望入口（就业与展望为 23-1012.00 精确职业口径）。",
-                  "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。"
+                  "本页就业预测采用 BLS 表 1.2。",
+                  "本页就业预测采用 BLS 表 1.2。"
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "source-pack-onet-summary",
                 "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。",
                 "market": "美国",
                 "name": "23-1012.00 - Judicial Law Clerks",
-                "period": "当前职业页；工资2025、就业2024、预测2024—2034分别标示",
+                "period": "职业资料或动态查询",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/23-1012.00"
@@ -8931,21 +8923,46 @@
                 "url": "https://www.cacd.uscourts.gov/employment/term-law-clerk-0"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "审阅诉状与动议 — 75/100; weight=1/3; judicial-law-clerks.profile.responsibilities-block.4[0]",
-                  "研究法律判例并准备备忘录 — 75/100; weight=1/3; judicial-law-clerks.profile.responsibilities-block.4[0]",
-                  "起草校对裁判文书与引证 — 75/100; weight=1/3; judicial-law-clerks.profile.responsibilities-block.4[0]"
+                  "BLS 表 1.2（美国本职业 23-1012）：2025 年约 14,000 个岗位，2035 年预计约 14,400 个，变化 2.8%，年均约 1,500 个职位空缺，含人员替补。人数分别取整。",
+                  "美国 BLS 将博士或专业学位列为典型入门教育。具体法院的申请时间、写作样本和任期另查。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "23-1012",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "报道描述中国法官助理阅卷、研究问题及草拟文书，与书记员事务分工有别。该样本不能等同美国司法法律助理岗位。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "案例不代表全国职业工资、入行或招聘。",
+                "market": "中国大陆",
+                "name": "最高人民法院：法官助理工作报道",
+                "period": "2018",
+                "publisher": "最高人民法院",
+                "scope": "具名工作实例",
+                "url": "https://www.court.gov.cn/zixun/xiangqing/84842.html"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "M 稿：备忘录引文追溯",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -11348,7 +11365,7 @@
             "item": "judicial-law-clerks.source-register.published.1"
           }
         },
-        "note": "2026-10-11作者核对｜O*NET 23-1012.00提供职业任务与准备背景，国家工资页的2025分位为46,180 / 52,870 / 64,920 / 80,420 / 113,140美元/年；就业为2025基期、2025—2035预测。NBS表2/5只支持中国公共管理、社会保障和社会组织行业平均年工资，不能替代本职业。AI分析是任务级编辑判断。共享登记、Hero和FAQ保留原口径，未宣称全页一致。"
+        "note": "O*NET 提供任务信息，OEWS 提供工资，BLS 表 1.2 提供就业预测。"
       },
       "work_context_block": {
         "$item": "judicial-law-clerks.profile.work-context-block.5",
@@ -11374,7 +11391,7 @@
     ],
     "path": "/zh/career/jobs/judicial-law-clerks",
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与人工复核",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -11393,38 +11410,38 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "就业 约 14,500 人（2024 年，BLS 就业预测基期，23-1012.00 精确职业）",
+        "display_value": "约 14,000 个岗位",
         "fact_id": "us-employment",
         "market": "美国",
-        "measure": "2024 年就业人数",
-        "occupation_scope": "Judicial Law Clerks，O*NET 23-1012.00",
-        "period": "2024-2034 projections",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "23-1012",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "增长 3%（2024—2034，BLS 就业预测，23-1012.00 精确职业）",
+        "display_value": "2.8%",
         "fact_id": "us-growth",
         "market": "美国",
-        "measure": "就业增长率预测",
-        "occupation_scope": "Judicial Law Clerks，O*NET 23-1012.00",
-        "period": "2024-2034 projections",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "23-1012",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "预计年均职位空缺 约 1,000 个（2024—2034，BLS 就业预测，23-1012.00 精确职业，含增长与替换）",
+        "display_value": "年均约 1,500 个",
         "fact_id": "us-openings",
         "market": "美国",
-        "measure": "年均职位空缺预测",
-        "occupation_scope": "Judicial Law Clerks，O*NET 23-1012.00",
-        "period": "2024-2034 projections",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "23-1012",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -11434,19 +11451,19 @@
         "market": "美国",
         "measure": "2034 年预测就业人数",
         "occupation_scope": "Judicial Law Clerks，O*NET 23-1012.00",
-        "period": "2024-2034 projections",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年薪中位数 64,920 美元（2025 年，BLS OEWS，23-1012.00 精确职业）",
+        "display_value": "64,920 美元/年",
         "fact_id": "us-wage-median",
         "market": "美国",
-        "measure": "年薪中位数",
-        "occupation_scope": "Judicial Law Clerks，O*NET 23-1012.00",
-        "period": "2025 wage data",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "23-1012",
+        "period": "2025-05",
         "source_refs": [
           "onet-wages"
         ]
@@ -11474,57 +11491,45 @@
         "source_refs": [
           "onet-wages"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "75%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "司法法律文员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "司法法律文员 · 研究与文书、保密与授权边界",
-      "来源范围 · 统计口径 · 人工复核",
-      "中国大陆精确职业工资缺口按证据保留"
+      "司法法律助理",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "美国年薪中位数（2025，精确职业口径）"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，3%）"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，精确职业口径）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11538,17 +11543,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "司法法律文员做什么、如何进入司法 clerkship、有哪些保密与授权边界，以及 AI 会改变哪些任务。本页对应 O*NET-SOC 23-1012.00，兴趣代码 CEI、Job Zone 第五级；美国数值为 O*NET 呈现的 BLS 精确职业口径，中国大陆工资缺口按证据登记，本页不构成法律意见。"
+      "text": "了解司法法律助理的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "司法法律文员职业判断：研究、保密与授权边界"
+      "text": "司法法律助理做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "a4c86d0eaecd479716b302082d25d84f7516d17d1146bd452c29feedf1be433d",
+  "source_content_sha256": "82d62f2ca6d7f8b00853154bc7be32b43aa1c611d7ba74e5c2f17c2cbb0bec0b",
   "subject": {
     "canonical_slug": "judicial-law-clerks",
-    "name": "司法法律文员",
-    "summary": "司法法律文员在法院研究法律、审查材料、起草及校对文书以协助法官。适配重点是引证准确、事实状态、中立写作与保密纪律；任用按具体法院核。美国2025年薪中位64,920美元，中国全国职业工资证据不足。"
+    "name": "司法法律助理",
+    "summary": "司法法律助理为法官或法院提供法律检索、案卷梳理和文书草拟支持，把可复核的出处和未决问题交给负责审理的人。岗位本身不授予裁判权。"
   }
 }

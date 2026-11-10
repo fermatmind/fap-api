@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe whether you can check documents, numbers, and quantities item by item, stop the paper release and explain the reason when you find a mismatch, and leave a complete record at handover. A real role also requires checking materials, sites, equipment training, and statutory qualifications, and one correct net weight calculation does not qualify you to work."
+              "Paper check | Compare a fictional loading order and shipping document. Flag a carrier ID that differs by its last digit and retain both document numbers for the lead. "
             ]
           },
           "id": "tank-car-truck-and-ship-loaders.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24808,13 +24807,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Railway tank car, truck, and ship loaders use material handling equipment to load and unload chemicals and bulk materials such as coal, sand, and grain, verifying transport documents, vehicles, and quantities, observing operation status, and recording handovers. Tank car refers to a railway tank car; this occupation does not automatically include the qualifications and authority of driving, maintenance, or dangerous goods loading supervisors."
+              "Tank car, truck and ship loaders verify carriers, cargo and loading records and support transfer and handoff. A discrepancy in ID or quantity needs to trace back to its work order. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tank-car-truck-and-ship-loaders.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-53-7121.00"
           ],
           "type": "prose"
         }
@@ -25598,15 +25596,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First distinguish text record assistance, equipment automation, and employment outcomes. The editorial suggestion is to use AI for fictional document checking questions and summary drafts, with humans reviewing numbers, units, formulas, and status; the control and release responsibility for real loading still follows site systems. Task files, employment projections, and general risk material do not prove industry adoption rates, so this page does not fill in a substitution score. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+50)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional loading order and shipping document. Flag a carrier ID that differs by its last digit and retain both document numbers for the lead."
             ]
           },
           "id": "tank-car-truck-and-ship-loaders.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls",
-            "nist",
-            "editorial"
+            "transfer-onet-53-7121.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33802,6 +33798,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-53-7121.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 53-7121.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/53-7121.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39284,10 +39307,10 @@
       "text": "Tank car / truck / ship loaders"
     }
   },
-  "source_content_sha256": "a1efbe586e68501939cd4566a23e6c7904adaefa20c36312cb2b40b310a63ea0",
+  "source_content_sha256": "c88c222a2633eb5d92393eb92c4a0e7f1aca578a08618c28317c825da64bfd9c",
   "subject": {
     "canonical_slug": "tank-car-truck-and-ship-loaders",
     "name": "Railway tank car, truck, and ship loaders",
-    "summary": "Railway tank car, truck, and ship loaders use material handling equipment to load and unload chemicals and bulk materials such as coal, sand, and grain, verifying transport documents, vehicles, and quantities, observing operation status, and recording handovers. Tank car refers to a railway tank car; this occupation does not automatically include the qualifications and authority of driving, maintenance, or dangerous goods loading supervisors."
+    "summary": "Tank car, truck and ship loaders verify carriers, cargo and loading records and support transfer and handoff. A discrepancy in ID or quantity needs to trace back to its work order."
   }
 }

@@ -23675,16 +23675,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First see whether the material can be used to independently compute 12/3=4 and to explain that the mean does not equal every original value, then check the scores and unknowns per the given four conditions. One paper score cannot infer real student understanding, course outcomes, or your own teaching qualification."
+              "Paper check | Compare a fictional rubric and course announcement. Flag a criterion with conflicting versions and write a question for the course lead. "
             ]
           },
           "id": "teaching-assistants-postsecondary.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule",
-            "employer",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -25264,19 +25260,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Postsecondary teaching assistants support postsecondary teachers or other teaching staff, prepare teaching materials and answers, organize discussion and question sessions, assist with exams and check assignments and records, and may support laboratories or research; specific subject tasks, grading standards, data use, and laboratory training are confirmed with the school and teaching team. This page fixes O*NET-SOC25-9044.00 and does not merge regular school or special education assistants. The BLS occupation description states that graduate students who independently teach one or more complete courses should be classified under the 25-1000 postsecondary teacher group, and all TA, RA, or China assistant titles cannot be directly merged into this page's statistics. China graduate assistants are a specific system with training, selection, guided training, and post stipend requirements, distinguished from teacher employee wages and other awards and aid. Paper work only checks the given rules and explanations and does not prove real teaching effectiveness or grant authority over independent courses, official grade approval, or laboratory operation."
+              "Postsecondary teaching assistants lead discussion or lab sections, answer questions, prepare materials and grade work against the course rubric under the instructor’s direction. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "teaching-assistants-postsecondary.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-oews",
-            "cn-rule",
-            "employer",
-            "sag",
-            "nist",
-            "editorial"
+            "transfer-onet-25-9044.00"
           ],
           "type": "prose"
         }
@@ -26100,19 +26089,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate material explanations, rule-based scoring, and real courses. Preserve original questions, rubrics, submissions, duplicates, blanks, unknowns, and your own corrections, and return course grade and laboratory data authority to the school teaching team; correct output does not prove students learned. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional rubric and course announcement. Flag a criterion with conflicting versions and write a question for the course lead."
             ]
           },
           "id": "teaching-assistants-postsecondary.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-oews",
-            "cn-rule",
-            "employer",
-            "sag",
-            "nist",
-            "editorial"
+            "transfer-onet-25-9044.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -35659,6 +35642,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-25-9044.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 25-9044.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/25-9044.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -41131,10 +41141,10 @@
       "text": "Postsecondary teaching assistants"
     }
   },
-  "source_content_sha256": "41a6580da497b29a44401dca95f7f2469ab420cc7b77e011bdd10c741add1626",
+  "source_content_sha256": "433373bd91bb81205d46620f02e8e6ad39e22c74bc5d7a3ec6755a59fa5d2905",
   "subject": {
     "canonical_slug": "teaching-assistants-postsecondary",
     "name": "Postsecondary teaching assistants",
-    "summary": "Postsecondary teaching assistants support postsecondary teachers or other teaching staff, prepare teaching materials and answers, organize discussion and question sessions, assist with exams and check assignments and records, and may support laboratories or research; specific subject tasks, grading standards, data use, and laboratory training are confirmed with the school and teaching team. This page fixes O*NET-SOC25-9044.00 and does not merge regular school or special education assistants. The BLS occupation description states that graduate students who independently teach one or more complete courses should be classified under the 25-1000 postsecondary teacher group, and all TA, RA, or China assistant titles cannot be directly merged into this page's statistics. China graduate assistants are a specific system with training, selection, guided training, and post stipend requirements, distinguished from teacher employee wages and other awards and aid. Paper work only checks the given rules and explanations and does not prove real teaching effectiveness or grant authority over independent courses, official grade approval, or laboratory operation."
+    "summary": "Postsecondary teaching assistants lead discussion or lab sections, answer questions, prepare materials and grade work against the course rubric under the instructor’s direction."
   }
 }

@@ -23665,14 +23665,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "See whether you can hear the object and period clearly, keep the original input, and confirm with the right party after finding duplicate amounts and missing materials. Real filing also requires jurisdictional tax type knowledge, professional training, real-name authorization, and the corresponding qualification; one correct calculation does not prove you can file for a client."
+              "Paper check | Compare a fictional income summary with its document index. Flag an amount without a document ID and write the follow-up question for the client. "
             ]
           },
           "id": "tax-preparers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "cn-rule",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -25029,16 +25027,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Tax preparers prepare or assist in preparing tax returns for individuals or small businesses, interview clients, check income and expense records, verify calculations and data inputs per the applicable filing instructions, and explain pending questions. This page uses O*NET-SOC13-2082.00 as its occupational baseline and is not the same as accounting and auditing or government tax review and collection; Chinese engagement scope, professional ability, and real-name authorization follow local rules separately."
+              "Tax preparers collect filing information from clients, check income and other records and complete the applicable forms. Conflicting information calls for verifying the source. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tax-preparers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule",
-            "sag",
-            "editorial"
+            "transfer-onet-13-2082.00"
           ],
           "type": "prose"
         }
@@ -25822,15 +25816,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Distinguish four layers: technical assistance, institutional adoption, filing quality, and employment. NIST covers only general risk, O*NET only occupational tasks, and BLS only precise statistics; this page provides no occupational substitution rate or paid service qualification from them. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional income summary with its document index. Flag an amount without a document ID and write the follow-up question for the client."
             ]
           },
           "id": "tax-preparers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "bls",
-            "editorial"
+            "transfer-onet-13-2082.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -34710,6 +34702,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-13-2082.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 13-2082.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/13-2082.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -40182,10 +40201,10 @@
       "text": "Tax preparers"
     }
   },
-  "source_content_sha256": "168ddd7d97e49ed2594f02ee9cc79315274cbaf7f603b568c7161fc91d8a9a54",
+  "source_content_sha256": "eaf0b82e9c74baf767758fee4c56c101275f2edbca1ad6ace54b5ab3a7172e43",
   "subject": {
     "canonical_slug": "tax-preparers",
     "name": "Tax preparers",
-    "summary": "Tax preparers prepare or assist in preparing tax returns for individuals or small businesses, interview clients, check income and expense records, verify calculations and data inputs per the applicable filing instructions, and explain pending questions. This page uses O*NET-SOC13-2082.00 as its occupational baseline and is not the same as accounting and auditing or government tax review and collection; Chinese engagement scope, professional ability, and real-name authorization follow local rules separately."
+    "summary": "Tax preparers collect filing information from clients, check income and other records and complete the applicable forms. Conflicting information calls for verifying the source."
   }
 }

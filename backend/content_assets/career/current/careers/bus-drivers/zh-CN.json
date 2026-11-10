@@ -14,9 +14,6 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -27,7 +24,7 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-2035": {
         "status": "pending_mapping"
@@ -39,7 +36,7 @@
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-current": {
         "status": "pending_mapping"
@@ -54,6 +51,9 @@
         "status": "pending_mapping"
       },
       "fact:us-industry-current-4": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-state-government-2025": {
         "status": "pending_mapping"
       },
       "fact:us-industry-wage-aerospace-mfg-2025": {
@@ -72,13 +72,13 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-current": {
         "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-high10-2025": {
         "status": "pending_mapping"
@@ -23181,10 +23181,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：公交与城际巴士司机不是「把车开走」，而是按时刻表与核准线路运送乘客，并对行车安全、乘客服务与运营记录负责。美国侧对应 O*NET-SOC 53-3052.00，O*NET 列为 Job Zone 1-2（准备程度从很少到一些，SVP 低于 6.0），未标注 Bright Outlook。核心边界是：你可以独立完成出车前检查、按线路与时刻表驾驶、报站、售票与乘客协助、记录票款与行车日志并按流程报告延误与事故；但不能自行改变核准线路、站点与票价，不能替代运营单位的安全生产管理判断，也不能在不符合准驾车型与从业资格要求时驾车营运。"
+              "了解这份工作，先问一次班次怎么开始、间隔由谁安排、末班如何交接。公交和城际巴士都需要按实际线路、车辆和单位规程行车；排班记录可用于向雇主核对条件。"
             ]
           },
           "id": "bus-drivers.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -23192,10 +23195,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你对「按时刻表把一批人安全准时送到」的兴趣大于「路线是否新鲜」，愿意长时间保持注意力并按规程复核车辆与路线；能在拥堵、坏天气、乘客情绪与时间压力下保持稳定，并坚持按流程处理异常与报告事故；接受长时间坐姿、封闭车厢、噪声与与公众高频接触，并愿意持续更新安全与应急知识。"
+              "先做 SH-49 纸面班次，看看会不会分开记录已确认和待核时段，再决定问雇主哪些事。"
             ]
           },
           "id": "bus-drivers.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23203,10 +23209,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停高额投入的条件：你还没有在持有相应准驾车型驾驶证的条件下，在带教或监督下完整跑过一次从出车前检查、按时刻表运营、报站与乘客服务、异常处置到收车记录与票款交接的闭环；或者只想开车、不愿按规程检查车辆与记录，也不愿面对乘客纠纷与突发事件；也不要把「会开小汽车」当作可以驾驶营运客车或已具备从业资格的证明。"
+              "将排班跨度、在岗时段和计薪条款分开提问。纸面结果不能作为实际计薪或驾驶证明。"
             ]
           },
           "id": "bus-drivers.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23225,10 +23234,16 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以安全驾驶、客运服务、车辆检查与运营记录为核心的岗位，产出是可复核的行车与票款记录、按时刻表完成的运输服务，以及按规定报告与升级的异常信息；它不是自主决定线路与票价的角色，也不替代运营单位的安全生产责任。美国工资、就业与预测数据即为 Bus Drivers, Transit and Intercity（SOC 53-3052）本职业口径；中国大陆按证据路由不发布该职业的职业级与代理工资数值，只保留统计口径与缺口。"
+              "司机按班次行车、检查车辆，向调度或下一班移交异常记录。美国工资和就业使用 SOC 53-3052。中国大陆未取得对应全国职业工资；国家统计局行业均值仅作背景。"
             ]
           },
           "id": "bus-drivers.quick-decision.fermat-decision-card.7",
+          "source_refs": [
+            "onet-details",
+            "bls-pay",
+            "bls-outlook",
+            "nbs-wages"
+          ],
           "type": "prose"
         }
       ]
@@ -23598,7 +23613,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "普通线路、站点、时段变更按运营管理程序；2024城市条例22有紧急及安全例外、34允许不安全时暂停相关运营。驾驶员按现行应急程序及时保护乘客、处置并报告，2017规章29禁止先于乘客弃车逃离，不应为等待普通变更审批拖延紧急保护。 中国经营性道路旅客运输驾驶员按2026从业规定9：相应机动车驾驶证1年以上、年龄不超过63周岁、3年内无重大以上交通责任事故，掌握道路旅客运输法规、机动车维修和旅客急救基本知识，并经考试取得相应从业资格。63不是全部机动车驾驶证的年龄门槛，城市公交岗位另核城市规则。"
+              "《城市公共交通条例》第22条规定运营企业不得擅改线路、站点或运营时间，特殊原因临时调整一般须先公告并报告主管部门，突发事件或保障安全的紧急措施除外。第34条允许运营企业在突发事件、设备故障等危及安全时暂停部分区段或全线网服务。驾驶员按应急程序保护乘客并报告；2017年规章第29条禁止先于乘客弃车逃离。 中国经营性道路旅客运输驾驶员按2026从业规定9：相应机动车驾驶证1年以上、年龄不超过63周岁、3年内无重大以上交通责任事故，掌握道路旅客运输法规、机动车维修和旅客急救基本知识，并经考试取得相应从业资格。63不是全部机动车驾驶证的年龄门槛，城市公交岗位另核城市规则。"
             ]
           },
           "id": "bus-drivers.profile.career-quick-answers-block.19",
@@ -23658,7 +23673,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "2022职业分类大典4-02-02-01客运车辆驾驶员含客车司机、城市公共汽电车司机，也含出租/网约司机，范围宽于美国53-3052。4-02-02-03道路客运服务员负责售检票、乘务等，不是驾驶员的同义细类；按实际任务核对。 O*NET2025行业：政府59%、运输与仓储37%、其他4%；这是职业行业分布，不是工资或中国公交单位行业。OOH另细列地方政府（不含教育医院）54%、城市公交17%、包车8%、城际乡村5%、其他客运3%，不能强行合并。"
+              "2022职业分类大典4-02-02-01客运车辆驾驶员含客车司机、城市公共汽电车司机，也含出租/网约司机，范围宽于美国53-3052。4-02-02-03道路客运服务员负责售检票、乘务等，不是驾驶员的同义细类；按实际任务核对。 O*NET2025行业：政府59%、运输与仓储37%；这是职业行业分布，不是工资或中国公交单位行业。OOH另细列地方政府（不含教育医院）54%、城市公交17%、包车8%、城际乡村5%、其他客运3%，不能强行合并。"
             ]
           },
           "id": "bus-drivers.profile.career-quick-answers-block.24",
@@ -23787,7 +23802,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "编辑核对：班次、早末班与节假日、加班及津贴、计酬方式、培训取证费用由谁承担，按目标用工方合同核；本轮未核具体招聘频率。"
+              "向用人单位核对：班次、早末班与节假日、加班及津贴、计酬方式、培训取证费用由谁承担，按目标用工方合同核；本页未核具体招聘频率。"
             ]
           },
           "id": "bus-drivers.profile.career-quick-answers-block.34",
@@ -23853,7 +23868,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国53-3052：2025就业166400人、2035预测173300人；2025—2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。"
+              "美国53-3052：2025就业166400人、2035预测173300人；2025–2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。"
             ]
           },
           "id": "bus-drivers.profile.onet-structured-fields-block.4",
@@ -23868,7 +23883,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET2025行业：政府59%、运输与仓储37%、其他4%；这是职业行业分布，不是工资或中国公交单位行业。OOH另细列地方政府（不含教育医院）54%、城市公交17%、包车8%、城际乡村5%、其他客运3%，不能强行合并。 O*NET兴趣R83/C62/S43/E30/A0/I0，前三类RCS；41具体兴趣领域另列运输97、个人服务41、体力手工23、机械电子18、社会服务14，不是RIASEC的排他子类或个人合格线。"
+              "O*NET2025行业：政府59%、运输与仓储37%；这是职业行业分布，不是工资或中国公交单位行业。OOH另细列地方政府（不含教育医院）54%、城市公交17%、包车8%、城际乡村5%、其他客运3%，不能强行合并。 O*NET兴趣R83/C62/S43/E30/A0/I0，前三类RCS；41具体兴趣领域另列运输97、个人服务41、体力手工23、机械电子18、社会服务14，不是RIASEC的排他子类或个人合格线。"
             ]
           },
           "id": "bus-drivers.profile.onet-structured-fields-block.5",
@@ -24665,7 +24680,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：引入系统前核权限、数据、复核责任和事故报告路径；驾驶员、运营企业、调度及主管部门各按适用职责处置，不把所有安全决定归为驾驶员单独最终决定。"
+              "建议：引入系统前核权限、数据、复核责任和事故报告路径；驾驶员、运营企业、调度及主管部门各按适用职责处置，不把所有安全决定归为驾驶员单独最终决定。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.15",
@@ -24702,14 +24717,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮资料不能推出整体替代率或替代年份。调度、票务与记录可设工具辅助试点，属于编辑建议；现行资格和应急职责依适用规则执行，不能由职业任务暴露指数推出就业数量。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "排班工具可提醒首末班、漏记的交接和未确认时段。具体班次、计酬和调度变更请向实际用人单位核对，不将系统输出当成批准。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor-current",
-            "ilo-genai",
-            "driver-current"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -24821,7 +24834,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET2025行业：政府59%、运输与仓储37%、其他4%；这是职业行业分布，不是工资或中国公交单位行业。OOH另细列地方政府（不含教育医院）54%、城市公交17%、包车8%、城际乡村5%、其他客运3%，不能强行合并。"
+              "O*NET2025行业：政府59%、运输与仓储37%；这是职业行业分布，不是工资或中国公交单位行业。OOH另细列地方政府（不含教育医院）54%、城市公交17%、包车8%、城际乡村5%、其他客运3%，不能强行合并。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.28",
@@ -24846,7 +24859,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国53-3052：2025就业166400人、2035预测173300人；2025—2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。"
+              "美国53-3052：2025就业166400人、2035预测173300人；2025–2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.30",
@@ -25137,7 +25150,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025工资与2025—2035预测，逐段核范围"
+              "2025工资与2025–2035预测，逐段核范围"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.55",
@@ -25151,13 +25164,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "含校车父级摘要：563200就业/49390年薪/23.75时薪/2%增长/净增9800/77600空缺；本职业53-3052另列59050工资及166400就业，预测增长4.1%。均为2025—2035预测，不能互换相加。"
+              "本页采用美国 SOC 53-3052。2025 年基期约有 166,400 个岗位；2025 年工资中位数为每年 59,050 美元。2025–2035 年预计就业增长 4.1%。BLS 手册页首含校车司机的总览采用更宽的口径。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "ooh-current",
-            "ep-current"
+            "bls-outlook",
+            "bls-pay",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -25210,7 +25224,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试点：工具可辅助查询、票务核对、记录与报表，效率与现场能力须实测；是否获准接入车载感知及运营系统另核。输出需回到实际状态、适用规程及复核人员，不假定所有工具毫无现场信息。"
+              "试用工具时：工具可辅助查询、票务核对、记录与报表，效率与现场能力须实测；是否获准接入车载感知及运营系统另核。输出需回到实际状态、适用规程及复核人员，不假定所有工具毫无现场信息。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.61",
@@ -25235,7 +25249,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国53-3052：2025就业166400人、2035预测173300人；2025—2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。 预测不是AI情景模型，现行人的法定职责也不是未来岗位不会减少的证明。"
+              "美国53-3052：2025就业166400人、2035预测173300人；2025–2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。 预测不是AI情景模型，现行人的法定职责也不是未来岗位不会减少的证明。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.63",
@@ -25276,7 +25290,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮O*NET典型任务未把编程列为驾驶普遍门槛；编辑建议按实际岗位学调度、票务、通信和记录设备，具体招聘条件另核，数字工具不能替代驾驶资格。"
+              "问用人单位使用哪套调度、票务和交接系统，哪些功能由司机操作。O*NET 的主要驾驶任务未将编程列为通用要求。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.66",
@@ -25324,7 +25338,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国53-3052：2025就业166400人、2035预测173300人；2025—2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。 含校车父级预测2%/77600空缺另读，不替代本职业。"
+              "美国53-3052：2025就业166400人、2035预测173300人；2025–2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。 含校车父级预测2%/77600空缺另读，不替代本职业。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.70",
@@ -25350,7 +25364,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "驾驶员、运营企业与应急指挥各按现行职责执行；系统可供信息和记录，使用方式按合法运营安排核，不能由工具输出自动授驾驶或处置资格。普通线路、站点、时段变更按运营管理程序；2024城市条例22有紧急及安全例外、34允许不安全时暂停相关运营。驾驶员按现行应急程序及时保护乘客、处置并报告，2017规章29禁止先于乘客弃车逃离，不应为等待普通变更审批拖延紧急保护。"
+              "驾驶员、运营企业与应急指挥各按现行职责执行；系统可供信息和记录，使用方式按合法运营安排核，不能由工具输出自动授驾驶或处置资格。《城市公共交通条例》第22条规定运营企业不得擅改线路、站点或运营时间，特殊原因临时调整一般须先公告并报告主管部门，突发事件或保障安全的紧急措施除外。第34条允许运营企业在突发事件、设备故障等危及安全时暂停部分区段或全线网服务。驾驶员按应急程序保护乘客并报告；2017年规章第29条禁止先于乘客弃车逃离。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.72",
@@ -25377,7 +25391,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮查阅的O*NET、BLS及ILO资料未提供该职业整体消失年份的依据；本页不据任务暴露或自动化程度推算年份。"
+              "证据不足：本页查阅的O*NET、BLS及ILO资料未提供该职业整体消失年份的依据；本页不据任务暴露或自动化程度推算年份。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.74",
@@ -25426,7 +25440,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以下五步是编辑提出的工具使用核对建议，不是统一法定审批或全部系统的唯一操作程序。"
+              "按用人单位的权限、记录和复核流程，逐项核对工具用法。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.78",
@@ -25886,7 +25900,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑带教任务示例：按单位实际人员条件和安排示范行车、服务、记录与异常报告；普通司机不由本页描述自动取得培训资格。"
+              "带教任务示例：按单位实际人员条件和安排示范行车、服务、记录与异常报告；普通司机不由本页描述自动取得培训资格。"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.119",
@@ -26048,10 +26062,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未取得与公交与城际巴士司机精确对应的中国大陆全国职业工资分布；按证据路由（暂无可安全使用的数据）处理，本页不发布职业级工资数值。"
+              "本页未找到可核验的大陆全国职业工资。下列公告均未列金额，适合比较招录与面试流程。"
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "shift-taizhou",
+            "shift-liyang"
+          ],
           "type": "prose"
         },
         {
@@ -26059,12 +26077,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "精确职业全国工资、城市月薪和分位仍证据不足；可以补实际雇主行业背景，不能当司机工资。国家统计局2025交通运输、仓储和邮政业城镇单位税前年平均工资：非私营133981元、私营73133元。只作实际用工单位行业背景，混合不同岗位，不是司机平均、中位数、起薪或城市月薪。"
+              "泰州市交通产业集团 2026 年公告招公交驾驶员 10 人，报名至 9 月 28 日 17:30。考核按实操 70%、面试 30%，两项均设 60 分门槛；公告未列工资金额。 溧阳市客运有限公司 2026 年 11 月 6 日公告分列公交 28 人与校车 7 人。公交条件列 A1 或 A3 且过实习期，另列经营性道路旅客运输驾驶员从业资格；报名 11 月 9–12 日，待遇按企业办法未列金额。"
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "nbs-current"
+            "shift-taizhou",
+            "shift-liyang"
           ],
           "type": "prose"
         },
@@ -26181,7 +26200,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国行业平均2025、美国职业工资2025与预测2025—2035，年份同为2025也不能混同均值/中位数、职业/行业或货币。"
+              "中国行业平均2025、美国职业工资2025与预测2025–2035，年份同为2025也不能混同均值/中位数、职业/行业或货币。"
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.18",
@@ -26243,7 +26262,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得调度和电子票务工具对中国大陆本职业工资统计或分类口径影响的资料；保留精确职业工资缺口，不以行业均值代填。"
+              "国家统计局的行业均值涵盖多种岗位，不能据此计算司机工资，也不能判断调度或电子票务如何影响个人计酬。"
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.23",
@@ -26268,7 +26287,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑求职背景：核实际学历与培训要求，不设中国统一高中法定线。"
+              "求职时，核实际学历与培训要求，不设中国统一高中法定线。"
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.25",
@@ -26304,7 +26323,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑岗位背景：核驾驶经历、资格、实际安全记录与用工方要求。"
+              "查看岗位时，核驾驶经历、资格、实际安全记录与用工方要求。"
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.28",
@@ -26670,7 +26689,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长4.1%（整数4%，2025—2035）"
+              "增长4.1%（整数4%，2025–2035）"
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.58",
@@ -26925,7 +26944,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第90分位40.72美元/小时，为统计高端；本轮未取得线路、资历、资格导致该分位的分解证据。"
+              "第90分位40.72美元/小时，为统计高端；本页未找到线路、资历、资格导致该分位的分解证据。"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.18",
@@ -26953,7 +26972,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET2025行业：政府59%、运输与仓储37%、其他4%；这是职业行业分布，不是工资或中国公交单位行业。OOH另细列地方政府（不含教育医院）54%、城市公交17%、包车8%、城际乡村5%、其他客运3%，不能强行合并。"
+              "O*NET2025行业：政府59%、运输与仓储37%；这是职业行业分布，不是工资或中国公交单位行业。OOH另细列地方政府（不含教育医院）54%、城市公交17%、包车8%、城际乡村5%、其他客运3%，不能强行合并。"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.20",
@@ -26967,7 +26986,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长4.1%（整数4%，2025—2035）"
+              "增长4.1%（整数4%，2025–2035）"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.21",
@@ -26992,7 +27011,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "21100个/年（2025—2035预测）"
+              "21100个/年（2025–2035预测）"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.23",
@@ -27017,7 +27036,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本职业2025工资与2025—2035预测；OOH同页父级摘要含校车563200/2%/77600空缺，也另列本职业数据与细行业工资，不因同一页面就混用或称未公布。"
+              "美国工资分位采用 SOC 53-3052。BLS 手册的页首总览包含校车司机；各职业工资在相应段落单列。"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.25",
@@ -27032,7 +27051,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025年薪中位59050、时薪28.39，年薪P10至P90为40030—84700；美国53-3052：2025就业166400人、2035预测173300人；2025—2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。"
+              "2025年薪中位59050、时薪28.39，年薪P10至P90为40030—84700；美国53-3052：2025就业166400人、2035预测173300人；2025–2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.26",
@@ -27075,12 +27094,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET2025行业：政府59%、运输与仓储37%、其他4%；这是职业行业分布，不是工资或中国公交单位行业。OOH另细列地方政府（不含教育医院）54%、城市公交17%、包车8%、城际乡村5%、其他客运3%，不能强行合并。 BLS按细行业列本职业工资中位数，另表展示，不从行业人数比例推工资。"
+              "O*NET 就业份额：政府 59%，运输和仓储 37%。这些是美国本职业的就业份额。 BLS 手册列出的 2025 年 5 月行业年薪中位数：州政府（不含教育和医院）70,700 美元；地方政府（不含教育和医院）64,590；城市公共交通 57,820；包车 48,420；城际与农村客运 46,860。"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "industry-current",
+            "onet-industry",
             "ooh-current"
           ],
           "type": "prose"
@@ -27101,12 +27120,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "编辑比较收入时核班次、加班、职责及计酬合同；本轮未取得这些因素对本职业收入的因果大小或排序。"
+              "比较机会时，逐项核对班次、待命与交接是否计薪，并请用人单位书面确认。"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "editor-current"
+            "shift-taizhou",
+            "shift-liyang"
           ],
           "type": "prose"
         },
@@ -27126,12 +27146,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长4.1%（整数4%）"
+              "同一雇主的线路、班次和车辆也可能不同。先问报到、换班和末班交接安排。"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "ep-current"
+            "bls-entry",
+            "editorial"
           ],
           "type": "prose"
         },
@@ -27168,7 +27189,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS本职业细行业中位数，不是该行业所有岗位均值；同页另列其他客运48330美元/年，不能与行业份额混算。"
+              "这是该行业内本职业的中位数，与全国工资分位和就业份额分开。"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.36",
@@ -27210,7 +27231,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS本职业细行业中位数，不是该行业所有岗位均值；同页另列其他客运48330美元/年，不能与行业份额混算。"
+              "这是该行业内本职业的中位数，与全国工资分位和就业份额分开。"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.39",
@@ -27252,7 +27273,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS本职业细行业中位数，不是该行业所有岗位均值；同页另列其他客运48330美元/年，不能与行业份额混算。"
+              "这是该行业内本职业的中位数，与全国工资分位和就业份额分开。"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.42",
@@ -27294,7 +27315,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS本职业细行业中位数，不是该行业所有岗位均值；同页另列其他客运48330美元/年，不能与行业份额混算。"
+              "这是该行业内本职业的中位数，与全国工资分位和就业份额分开。"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.45",
@@ -27334,7 +27355,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资2025；预测2025—2035；OOH本职业五细行业工资已公布，和O*NET政府/运输行业人数占比口径不同。"
+              "工资2025；预测2025–2035；OOH本职业五细行业工资已公布，和O*NET政府/运输行业人数占比口径不同。"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.48",
@@ -27545,7 +27566,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27557,19 +27578,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "校车司机",
@@ -27713,7 +27734,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑观察：以按规程检查、如实记录、自控和协作为讨论线索；O*NET工作风格可靠88/谨慎87/自控71/合作69/细节62/压力耐受62，不能据此证成人格测验的因果或录用效度。"
+              "观察：以按规程检查、如实记录、自控和协作为讨论线索；O*NET工作风格可靠88/谨慎87/自控71/合作69/细节62/压力耐受62，不能据此证成人格测验的因果或录用效度。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.6",
@@ -27728,7 +27749,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据为职业工作风格描述和编辑观察；本轮未取得大五人格对本职业的专门效度研究。"
+              "证据为职业工作风格描述及具体行为示例；本页未找到大五人格对本职业的专门效度研究。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.7",
@@ -27742,8 +27763,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "编辑观察：能否按检查清单核车辆状态和记录细节。",
-              "编辑观察：面对复杂路况与乘客情绪时，能否按规程处置并报告；不作人格因果结论。"
+              "观察：能否按检查清单核车辆状态和记录细节。",
+              "观察：面对复杂路况与乘客情绪时，能否按规程处置并报告；不作人格因果结论。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.8",
@@ -27776,7 +27797,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本轮O*NET/BLS资料不提供MBTI对本职业的专门预测效度；不设类型或分数胜任门槛。"
+              "本页O*NET/BLS资料不提供MBTI对本职业的专门预测效度；不设类型或分数胜任门槛。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.11",
@@ -27914,7 +27935,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET风格包含自控71、谨慎87和可靠88；情绪智力测验对本职业的预测效度本轮未取得，编辑建议观察实际沟通和规程执行。"
+              "O*NET 的工作风格包括自控 71、谨慎 87 和可靠 88。可观察自己能否按规程完成交接、遇到异常时及时沟通；这些工作风格数据不能验证情商测试的职业预测效度。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.23",
@@ -27929,7 +27950,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "编辑观察建议：记录乘客情绪激动或路况异常时能否按适用规程处置并报告；未取得与情绪分数的比较效度。",
+              "观察建议：记录乘客情绪激动或路况异常时能否按适用规程处置并报告；未取得与情绪分数的比较效度。",
               "愿意承认操作或记录偏差并立即纠正与留痕，是专业能力的一部分。"
             ]
           },
@@ -27952,7 +27973,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑观察：核资格、实际获准训练反馈、行车与服务记录；不能据这些建议给出人格预测效度或由一次产出判定胜任。"
+              "观察：核资格、实际获准训练反馈、行车与服务记录；不能据这些建议给出人格预测效度或由一次产出判定胜任。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.26",
@@ -27966,7 +27987,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑建议观察注意力、规范执行、乘客沟通与异常记录，实际资格和岗位考核另核；本轮未比较这些指标的预测效力。"
+              "观察自己能否保持注意、遵循流程、和乘客沟通并记录异常。岗位资格和考核向雇主核对。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.27",
@@ -27994,7 +28015,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑比较：车辆检查、驾驶和乘客沟通经验可核。"
+              "比较时：车辆检查、驾驶和乘客沟通经验可核。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.29",
@@ -28036,7 +28057,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑比较：愿意照管学生、维护上下车秩序并配合驾驶员。"
+              "比较时：愿意照管学生、维护上下车秩序并配合驾驶员。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.32",
@@ -28078,7 +28099,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑比较：愿意做行李搬运、引导与当面服务。"
+              "比较时：愿意做行李搬运、引导与当面服务。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.35",
@@ -28120,7 +28141,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑比较：愿意处理票务、信息核对和乘客咨询。"
+              "比较时：愿意处理票务、信息核对和乘客咨询。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.38",
@@ -28162,7 +28183,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑比较：线路班次知识可作理解运行的线索。"
+              "比较时：线路班次知识可作理解运行的线索。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.41",
@@ -28204,7 +28225,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑比较：可讨论秩序沟通经验与目标岗位差距。"
+              "比较时：可讨论秩序沟通经验与目标岗位差距。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.44",
@@ -28243,7 +28264,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "美国情境问答显示74%持续与他人接触、62%每天面对面讨论，与公众打交道对43%极其重要。编辑观察建议：关注乘客、调度与班组间信息核对的具体表现；未取得与外向性分数的比较效度研究。"
+              "美国情境问答显示74%持续与他人接触、62%每天面对面讨论，与公众打交道对43%极其重要。观察建议：关注乘客、调度与班组间信息核对的具体表现；未取得与外向性分数的比较效度研究。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.47",
@@ -28268,7 +28289,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本轮未取得某MBTI类型对本职业更适合的依据；可整理偏好并提出核对问题，不给类型名单或预测录用。"
+              "本页未找到某MBTI类型对本职业更适合的依据；可整理偏好并提出核对问题，不给类型名单或预测录用。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.49",
@@ -28307,13 +28328,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "数学不好不等于不能做。任务涉及时刻、票价、里程及基本数量核对；先用非运营材料练单位换算、时间差和找错，按实际训练反馈补差距。本轮无IQ分数门槛，数学表现也不能替代驾驶资格、注意力及岗位考核。"
+              "试做 SH-49 的三条时段：核对起止、待确认项和交接，保留原版与修订版。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.52",
           "source_refs": [
-            "details-current",
-            "editor-current"
+            "editorial"
           ],
           "type": "prose"
         },
@@ -28322,7 +28342,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑建议观察压力下按规程处置和清楚沟通的表现；O*NET工作风格是职业描述，不提供情商分数合格线或本职业预测效度。"
+              "遇到压力时，观察自己能否按规程处置并清楚交接。O*NET 工作风格不能给出该职业的情商分数合格线。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.53",
@@ -28348,7 +28368,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "检查记录、日志和异常说明可作编辑观察材料；复核通过只说明该材料的情况，不自动证明基本适配、驾驶资格或独立营运权限。"
+              "检查记录、日志和异常说明可作自查材料；复核通过只说明该材料的情况，不自动证明基本适配、驾驶资格或独立营运权限。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.55",
@@ -28436,7 +28456,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "美国53-3052：2025就业166400人、2035预测173300人；2025—2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。"
+              "美国53-3052：2025就业166400人、2035预测173300人；2025–2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。"
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.62",
@@ -28494,7 +28514,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "编辑适配观察：规范驾驶、沟通、检查记录和接受反馈；未比较其预测效力，实际资格及单位考核独立核。"
+              "看自己能否按要求驾驶、记录车辆检查、清楚沟通并接受反馈。正式资格和考核按用人单位及适用规则核对。"
             ]
           },
           "id": "bus-drivers.fit.riasec-fit-block.9",
@@ -28728,7 +28748,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "来源分工：O*NET职业情境非发生率、BLS本职业伤病定性描述；中国城市条例/城市规章及经营性从业规定分别给职责与资格；美国客运HOS先核范围例外。数据、姿势和复盘建议为编辑整理，不替代单位真实规程。"
+              "来源分工：O*NET职业情境非发生率、BLS本职业伤病定性描述；中国城市条例/城市规章及经营性从业规定分别给职责与资格；美国客运HOS先核范围例外。作业要求向单位核对。"
             ]
           },
           "id": "bus-drivers.risk.career-risk-cards.10",
@@ -28774,7 +28794,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑健康核对：按实际车辆和单位要求核座椅、休息、卫生与防护。2024城市条例32要求关注重点岗位人员身体、心理状况和行为习惯，定期组织体检、加强心理疏导，并合理安排驾驶员工作时间防疲劳；不等于统一定期心理检查，也不证明本页姿势建议的预防效果。"
+              "向用人单位核对健康与休息安排：按实际车辆和单位要求核座椅、休息、卫生与防护。2024城市条例32要求关注重点岗位人员身体、心理状况和行为习惯，定期组织体检、加强心理疏导，并合理安排驾驶员工作时间防疲劳；不等于统一定期心理检查，也不证明本页姿势建议的预防效果。"
             ]
           },
           "id": "bus-drivers.risk.career-risk-cards.13",
@@ -28870,7 +28890,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "普通线路、站点、时段变更按运营管理程序；2024城市条例22有紧急及安全例外、34允许不安全时暂停相关运营。驾驶员按现行应急程序及时保护乘客、处置并报告，2017规章29禁止先于乘客弃车逃离，不应为等待普通变更审批拖延紧急保护。"
+              "《城市公共交通条例》第22条规定运营企业不得擅改线路、站点或运营时间，特殊原因临时调整一般须先公告并报告主管部门，突发事件或保障安全的紧急措施除外。第34条允许运营企业在突发事件、设备故障等危及安全时暂停部分区段或全线网服务。驾驶员按应急程序保护乘客并报告；2017年规章第29条禁止先于乘客弃车逃离。"
             ]
           },
           "id": "bus-drivers.risk.career-risk-cards.21",
@@ -28918,7 +28938,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑数据建议：核单位实际保密、权限及工具数据边界；未授权平台不得接收真实乘客或运行数据。不以本页道路客运规章来源冒充NIST或个人信息专门法律。"
+              "数据使用建议：核单位实际保密、权限及工具数据边界；未授权平台不得接收真实乘客或运行数据。不以本页道路客运规章来源冒充NIST或个人信息专门法律。"
             ]
           },
           "id": "bus-drivers.risk.career-risk-cards.25",
@@ -28965,7 +28985,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国城市公交条例32要求培训考核合格、档案和合理时间防疲劳；经营性客运从业规定38禁止连续驾驶超过4h、超速和疲劳。美国适用联邦客运HOS的岗位另核10h驾驶/8h连续休息及15h在岗等规则和例外，不套货车工时。复盘改培训为编辑建议。"
+              "中国城市公交条例32要求培训考核合格、档案和合理时间防疲劳；经营性客运从业规定38禁止连续驾驶超过4h、超速和疲劳。美国适用联邦客运HOS的岗位另核10h驾驶/8h连续休息及15h在岗等规则和例外，不套货车工时。"
             ]
           },
           "id": "bus-drivers.risk.career-risk-cards.29",
@@ -29424,7 +29444,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑路径：先核个人资格及用工条件，经实际安排的训练与考核积累常规任务经验；复杂线路、带教和管理是示例方向，不是普遍晋升序列或统一高中门槛。"
+              "先向用人单位核个人资格和班次，再按安排参加培训和考核。以后可了解复杂线路、带教或运营管理，各单位安排不同。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.23",
@@ -29494,7 +29514,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑训练核对：需要与准驾车型相符的机动车驾驶证、按城市公共汽电车客运要求完成企业培训与考核。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
+              "向用人单位核对培训：需要与准驾车型相符的机动车驾驶证、按城市公共汽电车客运要求完成企业培训与考核。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.28",
@@ -29510,7 +29530,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑下一步示例：在带教下承接固定线路班次，逐步熟悉高峰时段与客流组织。 须具备实际资格、培训考核与运营安排，不保证晋升。"
+              "可能的下一步：在带教下承接固定线路班次，逐步熟悉高峰时段与客流组织。 须具备实际资格、培训考核与运营安排，不保证晋升。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.29",
@@ -29524,7 +29544,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑能力材料：可复核的出车检查记录与完整行车日志。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
+              "可保留的工作记录：可复核的出车检查记录与完整行车日志。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.30",
@@ -29564,7 +29584,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑训练核对：需要满足记分周期与犯罪记录等录用条件，并通过企业服务与应急培训考核。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
+              "向用人单位核对培训：需要满足记分周期与犯罪记录等录用条件，并通过企业服务与应急培训考核。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.33",
@@ -29580,7 +29600,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑下一步示例：承接骨干线路或高峰班次，参与客流疏导与投诉处置。 须具备实际资格、培训考核与运营安排，不保证晋升。"
+              "可能的下一步：承接骨干线路或高峰班次，参与客流疏导与投诉处置。 须具备实际资格、培训考核与运营安排，不保证晋升。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.34",
@@ -29594,7 +29614,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑能力材料：可复核的服务记录、投诉处理记录与安全行车记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
+              "可保留的工作记录：可复核的服务记录、投诉处理记录与安全行车记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.35",
@@ -29634,7 +29654,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑训练核对：需要多项线路驾驶经验与安全行车记录。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
+              "向用人单位核对培训：需要多项线路驾驶经验与安全行车记录。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.38",
@@ -29650,7 +29670,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑下一步示例：承担新驾驶员带教与安全检查任务，参与线路优化建议。 须具备实际资格、培训考核与运营安排，不保证晋升。"
+              "可能的下一步：承担新驾驶员带教与安全检查任务，参与线路优化建议。 须具备实际资格、培训考核与运营安排，不保证晋升。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.39",
@@ -29664,7 +29684,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑能力材料：带教记录、安全检查记录与事故投诉复盘材料。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
+              "可保留的工作记录：带教记录、安全检查记录与事故投诉复盘材料。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.40",
@@ -29704,7 +29724,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑训练核对：需要安全管理或运营管理相关的培训经历与考核成绩。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
+              "向用人单位核对培训：需要安全管理或运营管理相关的培训经历与考核成绩。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.43",
@@ -29720,7 +29740,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑下一步示例：参与班次编排与安全体系改进，组织培训与应急演练。 须具备实际资格、培训考核与运营安排，不保证晋升。"
+              "可能的下一步：参与班次编排与安全体系改进，组织培训与应急演练。 须具备实际资格、培训考核与运营安排，不保证晋升。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.44",
@@ -29734,7 +29754,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑能力材料：可复核的安全体系文件、演练记录与培训考核记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
+              "可保留的工作记录：可复核的安全体系文件、演练记录与培训考核记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.45",
@@ -29774,7 +29794,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑训练核对：需要相应准驾车型驾驶证、经营性道路旅客运输从业资格与单位岗前培训考核。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
+              "向用人单位核对培训：需要相应准驾车型驾驶证、经营性道路旅客运输从业资格与单位岗前培训考核。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.48",
@@ -29790,7 +29810,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑下一步示例：在带教下承接较短城际班线，熟悉长途驾驶的作息与休息安排。 须具备实际资格、培训考核与运营安排，不保证晋升。"
+              "可能的下一步：在带教下承接较短城际班线，熟悉长途驾驶的作息与休息安排。 须具备实际资格、培训考核与运营安排，不保证晋升。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.49",
@@ -29804,7 +29824,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑能力材料：可复核的行车日志与安全行车记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
+              "可保留的工作记录：可复核的行车日志与安全行车记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.50",
@@ -29844,7 +29864,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑训练核对：需要满足年龄、事故记录与健康条件，并完成疲劳管理与应急培训。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
+              "向用人单位核对培训：需要满足年龄、事故记录与健康条件，并完成疲劳管理与应急培训。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.53",
@@ -29860,7 +29880,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑下一步示例：独立承接城际与长途班次，处置途中与到站异常。 须具备实际资格、培训考核与运营安排，不保证晋升。"
+              "可能的下一步：独立承接城际与长途班次，处置途中与到站异常。 须具备实际资格、培训考核与运营安排，不保证晋升。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.54",
@@ -29874,7 +29894,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑能力材料：完整班次的里程、票款与异常处置记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
+              "可保留的工作记录：完整班次的里程、票款与异常处置记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.55",
@@ -29914,7 +29934,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑训练核对：需要多线路经验与应急处置考核合格。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
+              "向用人单位核对培训：需要多线路经验与应急处置考核合格。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.58",
@@ -29930,7 +29950,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑任务扩展：仅在安全运营条件满足、资格考核及单位安排允许时学习复杂线路；恶劣天气须核停运或调整，不能把冒险发车作为进阶。"
+              "拓展任务时：仅在安全运营条件满足、资格考核及单位安排允许时学习复杂线路；恶劣天气须核停运或调整，不能把冒险发车作为进阶。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.59",
@@ -29945,7 +29965,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑能力材料：应急处置记录、演练评价与安全行车记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
+              "可保留的工作记录：应急处置记录、演练评价与安全行车记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.60",
@@ -29985,7 +30005,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑训练核对：需要安全与运营管理培训经历与考核成绩。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
+              "向用人单位核对培训：需要安全与运营管理培训经历与考核成绩。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.63",
@@ -30001,7 +30021,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑下一步示例：参与长途运营的班次与疲劳管理、事故复盘与流程改进。 须具备实际资格、培训考核与运营安排，不保证晋升。"
+              "可能的下一步：参与长途运营的班次与疲劳管理、事故复盘与流程改进。 须具备实际资格、培训考核与运营安排，不保证晋升。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.64",
@@ -30015,7 +30035,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑能力材料：可复核的管理文件与复盘报告。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
+              "可保留的工作记录：可复核的管理文件与复盘报告。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.65",
@@ -30055,7 +30075,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑训练核对：需要相应准驾车型证件、从业资格与单位岗前培训考核。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
+              "向用人单位核对培训：需要相应准驾车型证件、从业资格与单位岗前培训考核。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.68",
@@ -30071,7 +30091,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑下一步示例：在带教下承接单点或多点接送任务，熟悉行程单与用车方沟通。 须具备实际资格、培训考核与运营安排，不保证晋升。"
+              "可能的下一步：在带教下承接单点或多点接送任务，熟悉行程单与用车方沟通。 须具备实际资格、培训考核与运营安排，不保证晋升。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.69",
@@ -30085,7 +30105,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑能力材料：可复核的行程执行记录与安全行车记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
+              "可保留的工作记录：可复核的行程执行记录与安全行车记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.70",
@@ -30125,7 +30145,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑训练核对：需要满足包车客运相关要求并完成服务规范培训。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
+              "向用人单位核对培训：需要满足包车客运相关要求并完成服务规范培训。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.73",
@@ -30141,7 +30161,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑下一步示例：独立承接包车与旅游客运任务，按行程单执行并处理变更。 须具备实际资格、培训考核与运营安排，不保证晋升。"
+              "可能的下一步：独立承接包车与旅游客运任务，按行程单执行并处理变更。 须具备实际资格、培训考核与运营安排，不保证晋升。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.74",
@@ -30155,7 +30175,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑能力材料：行程单执行记录、变更确认记录与乘客服务记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
+              "可保留的工作记录：行程单执行记录、变更确认记录与乘客服务记录。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.75",
@@ -30195,7 +30215,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑训练核对：需要多点接送与跨区域运营经验。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
+              "向用人单位核对培训：需要多点接送与跨区域运营经验。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.78",
@@ -30211,7 +30231,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑下一步示例：承担跨区域或多日行程任务，配合用车方与调度协调。 须具备实际资格、培训考核与运营安排，不保证晋升。"
+              "可能的下一步：承担跨区域或多日行程任务，配合用车方与调度协调。 须具备实际资格、培训考核与运营安排，不保证晋升。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.79",
@@ -30225,7 +30245,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑能力材料：跨区域行程记录、协调记录与异常处置说明。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
+              "可保留的工作记录：跨区域行程记录、协调记录与异常处置说明。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.80",
@@ -30265,7 +30285,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑训练核对：需要安全与服务质量管理的培训经历与考核成绩。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
+              "向用人单位核对培训：需要安全与服务质量管理的培训经历与考核成绩。 具体资格和培训条件按任务、法域及用工方核，不作为统一新增证书门槛。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.83",
@@ -30281,7 +30301,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑下一步示例：参与包车与旅游客运的服务标准建设与安全复盘。 须具备实际资格、培训考核与运营安排，不保证晋升。"
+              "可能的下一步：参与包车与旅游客运的服务标准建设与安全复盘。 须具备实际资格、培训考核与运营安排，不保证晋升。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.84",
@@ -30295,7 +30315,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑能力材料：可复核的服务标准文件与复盘报告。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
+              "可保留的工作记录：可复核的服务标准文件与复盘报告。；据可核事实接受单位评估，单份材料不自动授独立营运权限。"
             ]
           },
           "id": "bus-drivers.path.career-path-block.85",
@@ -30353,35 +30373,35 @@
                 "城市公交线路驾驶员",
                 "在带教下完成出车检查、按固定线路与班次运营、报站与乘客服务，学习票款与行车记录规范。",
                 "核匹配驾驶证、公交录用条件、培训考核、班次和服务职责。",
-                "提交一份受监督完成的出车检查与行车日志样例。",
+                "用 SH-49 两版班次表和一份交接了解工作偏好。实际训练只按资格和单位安排参加。",
                 "此路径不独立决定线路与班次安排；须按单位排班与授权执行。"
               ],
               [
                 "城际与长途客运驾驶员",
                 "按班次完成较长线路运输，处理高速路况、途中停靠与乘客随行事务。",
                 "核经营性客运资格、日志、连续驾驶及休息安排，不以连续耐受代替防疲劳。",
-                "提交一份含班次、里程与异常处置说明的行车记录。",
+                "用 SH-49 两版班次表和一份交接了解工作偏好。实际训练只按资格和单位安排参加。",
                 "长途班次的作息与休息安排须按单位制度与适任要求执行。"
               ],
               [
                 "包车与旅游客运驾驶员",
                 "按约定行程执行包车或旅游运输，处理多点停靠与用车方沟通。",
                 "核实际经营类型、个人资格、行程和服务条件。",
-                "提交一份按行程单完成的运营与异常说明。",
+                "用 SH-49 两版班次表和一份交接了解工作偏好。实际训练只按资格和单位安排参加。",
                 "行程变更须与用车方和调度确认后执行，不得自行变更。"
               ],
               [
                 "安全与培训岗位",
                 "协助安全行车检查、驾驶员培训与事故复盘，学习安全规程与培训方法。",
                 "核安全或培训岗位实际职责、考核与权限，非驾驶资历自动转任。",
-                "提交一份安全检查项与培训要点说明样例。",
+                "用 SH-49 两版班次表和一份交接了解工作偏好。实际训练只按资格和单位安排参加。",
                 "培训与安全检查权限由单位制度与岗位授权确定。"
               ],
               [
                 "相邻工种转入（校车、穿梭巴士、货运驾驶）",
                 "承接常规班次运营并熟悉客运服务与票务流程。",
                 "核个人准驾车型、适用从业资格及目标客运单位录用培训、班次和车型要求；补足乘客服务、停靠、票务及应急处置训练，既有校车或货运驾驶资格不自动互认。",
-                "提交一份从既有岗位整理的可复核行车记录，并说明与客运驾驶的差距。",
+                "用 SH-49 两版班次表和一份交接了解工作偏好。实际训练只按资格和单位安排参加。",
                 "相邻驾驶经验不等于客运从业资格；转岗须补足客运法规与服务规范训练。"
               ]
             ]
@@ -30441,33 +30461,33 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构作业包：一份简化班次的时刻表与站点清单、一份线路与票价说明摘录、一份出车检查表与行车日志模板，全部为自造材料且不含真实车辆、乘客与线路信息。",
-                  "工具：模拟报站与票务界面、行车日志表单；不接触真实营运车辆与道路运营。",
-                  "边界说明：练习不得用于真实营运驾驶，也不得把练习结果包装成安全行车或运营合规结论。",
-                  "时间安排：一次 30 分钟时刻表与站点阅读 + 一次 60 分钟出车检查推演与日志填写。"
+                  "SH-49：三段虚构班次记录",
+                  "A 06:50–07:30／已确认；B 07:30–08:00／待确认；C 08:00–08:50／已确认。时刻在同一天。",
+                  "纸面规则：按结束减开始算分钟；只把已确认段相加，待确认段单列。该规则不是实际计薪。",
+                  "修订只给 B 补一份确认回执，三个时段和其他输入不变。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "按时刻表与站点清单排出一次班次的停靠顺序与预计用时，标注可能影响准点的因素。",
-                  "填写一份出车检查表，列出检查项、判据与发现异常时的处置与上报路径。",
-                  "填写一份行车日志：班次、里程、票款、异常事件与处置结果。"
+                  "交付两版",
+                  "逐段计算分钟并分开列出已确认和待核。",
+                  "写一份交接：原值、变化、未决项和责任方。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "练习方式：先按规程与时刻表再动手，任何计划外假设单独记录。",
-                  "把「按班次完成运营」「票款核对一致」「异常已按流程上报」分开书写，不把完成任务直接当成安全与服务已达标。",
-                  "对不确定的车辆状态、乘客情况或处置方式先停下核对，而不是凭经验跳步。"
+                  "先独立交卷",
+                  "第 6 天交两版和一份交接，不看参考。",
+                  "第 7 天展开常见问题「SH-49 参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "如果练习中出现必须接触真实道路运营、载客驾驶或车辆操作的环节，应停下并把该环节标为需具备相应资格的人员实施。",
-                  "如果不确定某项做法是否符合安全操作规程或服务规范，应记录该疑问并请复核人确认，而不是自行决定。"
+                  "虚构数据",
+                  "不接触实际乘客、线路、车辆、系统或工资资料。"
                 ]
               }
             ]
@@ -30484,31 +30504,31 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：目标法域与单位要求的准驾车型与从业资格、班次与作息安排、线路与车型范围、安全与应急培训要求，以及计酬与津贴口径。",
-                  "每项都注明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「准驾车型」「从业资格」「班次授权」「安全记录」「计酬口径」分列，避免混为一谈。"
+                  "核对表",
+                  "逐段写分钟和状态。",
+                  "原版和修订分开保存。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有经验的驾驶员或安全管理人员复核你的时刻表理解、出车检查项与异常处置思路，重点检查是否遗漏车辆状态确认与上报路径。",
-                  "把复核意见与修改理由一并保留，作为判断你是否能接受专业复核的证据。",
-                  "记录复核人指出的每一处偏差及你后续的修改，形成可复核的改进记录。"
+                  "确认依据",
+                  "写明只补哪一项。",
+                  "保留原记录及变更原因。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明依据、自己的运营过程、被指出的偏差与仍不确定的部分。",
-                  "把复盘交给一位有经验的人复核，并保留复核意见与修改理由。"
+                  "交接",
+                  "写清待核时间和责任方。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用调度、报站或票务系统辅助运营与记录，须注明系统与版本、数据范围与人工复核方式。",
-                  "行车与票款记录须保留班次、里程、异常与处置结果，使他人可以复核同一趟运营。"
+                  "工具",
+                  "用纸笔或表格即可。"
                 ]
               }
             ]
@@ -30572,50 +30592,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业边界阅读：读 O*NET 53-3052.00 的职业摘要与详细资料，写清该职业做什么、不做什么。",
-                  "产出：一页任务对照表，标注每项来源与口径。"
+                  "第 1 天：分清岗位",
+                  "列想问用人单位的班次与交接问题。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "法规与资格梳理：核对准驾车型与从业资格的公开要求，整理出自身的资格缺口。",
-                  "产出：一份资格与培训对照清单。"
+                  "第 2 天：抄时段",
+                  "抄三条时段和确认状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "安全与应急梳理：列出路面、天气、乘客与车厢秩序风险及对应处置与上报要求。",
-                  "产出：一份风险与处置清单。"
+                  "第 3 天：算原版",
+                  "按题面算每段分钟和原版汇总。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "时刻表推演练习：按一份虚构班次排出停靠顺序与预计用时，标注影响准点的因素。",
-                  "产出：一份班次推演说明。"
+                  "第 4 天：按题改一项",
+                  "只按指定变化另写修订版。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "出车检查推演：按出车检查表逐项推演检查项与判据，写明异常时的处置与上报路径。",
-                  "产出：一份出车检查与上报说明。"
+                  "第 5 天：写交接",
+                  "写原值、变化、未决项和责任方。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请一位有经验的人指出你的检查项与处置思路中的偏差并说明原因。",
-                  "产出：一份复核意见与修改说明。"
+                  "第 6 天：独立交卷",
+                  "不看参考，独立交两版及交接。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "决策复盘：把六日产出整理成一页对照表，标出继续、暂停与需要补齐的证据。",
-                  "产出：一页决策对照表与依据说明。"
+                  "第 7 天：展开参考",
+                  "展开常见问题「SH-49 参考解（交卷后再打开）」并对照。"
                 ]
               }
             ]
@@ -30629,13 +30649,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你能在七天内完成全部产出，并愿意接受对出车检查、运营流程与记录的逐项检查。",
+              "继续了解：整理想问的班次、待命和计薪问题。",
               "暂停：你能完成练习但难以接受复核纠正，或不适应长时间坐姿、封闭车厢、噪声与高频公众接触。",
               "换方向：你更愿意做行李与服务类工作，可比较行李搬运与门厅服务人员；更愿意做票务与咨询，可比较运输售票与旅行事务员。",
               "核实用工：若目标岗位为外包驾驶或劳务派遣，先核实用工形式、班次安排与责任划分。",
-              "补齐证据：把七日产出整理成可复核的出车检查与行车记录样例，用于实训申请或岗位入职。",
+              "保留两版表和交接供自查，不能当工作证明。",
               "成本评估：把驾驶证与从业资格取证费用、复训安排、班次与加班安排列入书面计划。",
-              "补充：若仍不确定，先把七日产出交给一位从业者复核，再决定是否投入取证与求职。"
+              "按具名参考自核，交卷后可选他人反馈。"
             ]
           },
           "id": "bus-drivers.path.seven-day-decision.1",
@@ -30715,7 +30735,7 @@
                 "在岗驾驶员",
                 "决定可以独立驾驶哪些线路与班次。",
                 "属于企业内部管理制度要求。",
-                "按单位实际制度确定任务范围；本轮未取得所有单位统一带教评估程序。",
+                "按单位实际制度确定任务范围；本页未找到所有单位统一带教评估程序。",
                 "随经验与考核结果调整。",
                 "授权可因安全记录或资格变化被调整或撤销。"
               ]
@@ -30754,11 +30774,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘核对说明：本轮未取得具体招聘公告；公交、城际班线、包车等是编辑岗位示例，不能称已核公开招聘频率或统一序列。",
-              "阅读招聘信息时应核对用工形式（公交企业、道路客运企业、包车或旅游客运、外包）、班次与作息安排、准驾车型与从业资格要求、线路与车型范围、工时与计酬方式，并警惕把短期培训宣传为可独立驾驶营运客车或可自行决定线路与票价的表述。"
+              "泰州市交通产业集团 2026 年公告招公交驾驶员 10 人，报名至 9 月 28 日 17:30。考核按实操 70%、面试 30%，两项均设 60 分门槛；公告未列工资金额。 溧阳市客运有限公司 2026 年 11 月 6 日公告分列公交 28 人与校车 7 人。公交条件列 A1 或 A3 且过实习期，另列经营性道路旅客运输驾驶员从业资格；报名 11 月 9–12 日，待遇按企业办法未列金额。"
             ]
           },
           "id": "bus-drivers.path.recruitment-sample.1",
+          "source_refs": [
+            "shift-taizhou",
+            "shift-liyang"
+          ],
           "title": "招聘样本使用说明",
           "type": "notice"
         }
@@ -30887,7 +30910,7 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS表1.2本职业2025—2035预测",
+                "entity": "BLS表1.2本职业2025–2035预测",
                 "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -30968,14 +30991,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国53-3052：2025就业166400人、2035预测173300人；2025—2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。 BLS父级含校车563200/2%/77600另读。中国精确职业工资就业仍缺，单位行业背景可补。"
+              "美国 SOC 53-3052：2025 年工资中位数为 59,050 美元/年、28.39 美元/小时；2025 约 166,400 岗，2035 预计约 173,300，增长 4.1%、净增约 6,900，年均约 21,100 个空缺含替补。"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.8",
           "source_refs": [
-            "ep-current",
-            "ooh-current",
-            "nbs-current"
+            "bls-outlook",
+            "bls-pay"
           ],
           "type": "prose"
         },
@@ -31020,12 +31042,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2025行业：政府59%、运输与仓储37%、其他4%；这是职业行业分布，不是工资或中国公交单位行业。OOH另细列地方政府（不含教育医院）54%、城市公交17%、包车8%、城际乡村5%、其他客运3%，不能强行合并。"
+              "O*NET 就业份额：政府 59%，运输和仓储 37%。这些是美国本职业的就业份额。"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.12",
           "source_refs": [
-            "industry-current"
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -31081,7 +31103,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035年"
+              "2025–2035年"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.17",
@@ -31246,12 +31268,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国53-3052：2025就业166400人、2035预测173300人；2025—2035 BLS表1.2增长4.1%、OOH/O*NET整数4%（Average 3%—4%）、净增6900人、年均空缺21100个。空缺含转岗退出替代，不是净增或AI归因。"
+              "美国 SOC 53-3052：2025 年工资中位数为 59,050 美元/年、28.39 美元/小时；2025 约 166,400 岗，2035 预计约 173,300，增长 4.1%、净增约 6,900，年均约 21,100 个空缺含替补。"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.30",
           "source_refs": [
-            "ep-current"
+            "bls-outlook",
+            "bls-pay"
           ],
           "type": "prose"
         },
@@ -31260,12 +31283,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2025行业：政府59%、运输与仓储37%、其他4%；这是职业行业分布，不是工资或中国公交单位行业。OOH另细列地方政府（不含教育医院）54%、城市公交17%、包车8%、城际乡村5%、其他客运3%，不能强行合并。"
+              "O*NET 就业份额：政府 59%，运输和仓储 37%。这些是美国本职业的就业份额。"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.31",
           "source_refs": [
-            "industry-current"
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -31328,7 +31351,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离较近：同属巴士驾驶，服务对象与班次安排不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
+              "转岗比较：距离较近：同属巴士驾驶，服务对象与班次安排不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.36",
@@ -31364,7 +31387,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离较近：同属客运驾驶，线路形式不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
+              "转岗比较：距离较近：同属客运驾驶，线路形式不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.39",
@@ -31400,7 +31423,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离中等：同属载客驾驶，运营方式不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
+              "转岗比较：距离中等：同属载客驾驶，运营方式不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.42",
@@ -31436,7 +31459,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离中等：同属营运驾驶，载运对象不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
+              "转岗比较：距离中等：同属营运驾驶，载运对象不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.45",
@@ -31472,7 +31495,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离较近：同属道路营运驾驶，载运对象不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
+              "转岗比较：距离较近：同属道路营运驾驶，载运对象不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.48",
@@ -31508,7 +31531,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离中等：同属运输操作，作业系统不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
+              "转岗比较：距离中等：同属运输操作，作业系统不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.51",
@@ -31544,7 +31567,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离较近：同属客运服务，不承担驾驶责任。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
+              "两岗都服务乘客。客运服务人员负责乘务，公交与城际巴士司机负责驾驶。转岗前核目标岗位的资格、任务和培训。"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.54",
@@ -31580,7 +31603,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离中等：都在运营体系内，决策与执行责任不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
+              "转岗比较：距离中等：都在运营体系内，决策与执行责任不同。 未取得转岗成功率或统一门槛；目标法域资格、任务与训练另核。"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.57",
@@ -31615,16 +31638,22 @@
                 "question_key": "career.faq.bus-drivers.2"
               },
               {
-                "answer": "适配信号是能在长时间驾驶中保持注意力与规范操作、在乘客纠纷或路况异常时先按流程处置并报告、能如实记录票款与异常；喜欢开车本身不足以证明胜任。",
+                "answer": "用 SH-49 写两版时段核对和一份交接，观察是否愿意保留原值、明确追问。",
                 "id": "bus-drivers.faq.3",
                 "question": "怎样判断自己适不适合做这份工作？",
-                "question_key": "career.faq.bus-drivers.3"
+                "question_key": "career.faq.bus-drivers.3",
+                "source_refs": [
+                  "editorial"
+                ]
               },
               {
-                "answer": "排班与线路优化、到站信息播报与乘客查询、电子支付与票务清分、行车记录与油耗统计等环节可被辅助；驾驶决策、路况与车厢异常处置、乘客安全与应急处置、事故与延误报告仍由人负责。",
+                "answer": "排班工具可提醒首末班、漏记的交接和未确认时段。具体班次、计酬和调度变更请向实际用人单位核对，不将系统输出当成批准。",
                 "id": "bus-drivers.faq.4",
                 "question": "AI 与自动化会改变哪些环节？",
-                "question_key": "career.faq.bus-drivers.4"
+                "question_key": "career.faq.bus-drivers.4",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
                 "answer": "出车前的车辆状态确认、按时刻表与路况的安全驾驶判断、突发事件与乘客安全的现场处置、票款核对与异常处理、延误与事故的报告结论，都必须由取得相应资格的驾驶员确认。",
@@ -31645,22 +31674,34 @@
                 "question_key": "career.faq.bus-drivers.7"
               },
               {
-                "answer": "83% 为规律班制（既定常规、固定时间表），29% 每周工作超过 40 小时，早末班与节假日出勤常见；74% 持续与他人接触、62% 每天进行面对面讨论，70% 每天需要做决策，64% 每天面临时间压力或严格的截止期限。",
+                "answer": "了解这份工作，先问一次班次怎么开始、间隔由谁安排、末班如何交接。公交和城际巴士都需要按实际线路、车辆和单位规程行车；排班记录可用于向雇主核对条件。",
                 "id": "bus-drivers.faq.8",
                 "question": "工作时间和工作方式是什么样的？",
-                "question_key": "career.faq.bus-drivers.8"
+                "question_key": "career.faq.bus-drivers.8",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
-                "answer": "O*NET 页面显示本职业 2024 年就业 158,800 人、2024—2034 年预测增长 3% 至 4%、年均约 20,900 个空缺；BLS 职业展望手册的合并页另给出全部巴士司机 2025—2035 年增长 2%、年均约 77,600 个空缺（覆盖范围与期间不同）。转向相邻工种须补足目标岗位的资格与规范要求。",
+                "answer": "美国 SOC 53-3052：2025 年工资中位数为 59,050 美元/年、28.39 美元/小时；2025 约 166,400 岗，2035 预计约 173,300，增长 4.1%、净增约 6,900，年均约 21,100 个空缺含替补。",
                 "id": "bus-drivers.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.bus-drivers.9"
+                "question_key": "career.faq.bus-drivers.9",
+                "source_refs": [
+                  "bls-outlook",
+                  "bls-pay"
+                ]
               },
               {
-                "answer": "美国数值来自 O*NET 展示的 BLS 2025 年 OEWS 数据，口径为 Bus Drivers, Transit and Intercity（SOC 53-3052），即本页身份口径；中国大陆没有该职业的全国职业工资统计，本页按证据路由不发布职业级与代理工资，只保留口径与缺口。",
+                "answer": "美国 2025 数字为职业分位。泰州和溧阳样本仅说明各自招聘，不能换算成全国职业工资。",
                 "id": "bus-drivers.faq.10",
                 "question": "美国工资与中国大陆口径为什么不能互相换算？",
-                "question_key": "career.faq.bus-drivers.10"
+                "question_key": "career.faq.bus-drivers.10",
+                "source_refs": [
+                  "bls-pay",
+                  "shift-taizhou",
+                  "shift-liyang"
+                ]
               },
               {
                 "answer": "O*NET 技术清单共 3 项软件技能（1 项 Hot Technology），含互联网浏览器软件、地图制作软件（AOL MapQuest、Microsoft MapPoint）与操作系统软件（Microsoft Windows）；核心能力是安全与防御性驾驶、按时刻表与线路执行、乘客服务与沟通、突发事件与应急疏散处置、票务与行车记录规范，以及取暖照明与通风等车厢设备的调节。",
@@ -31679,6 +31720,15 @@
                 "id": "bus-drivers.faq.13",
                 "question": "公交与城际巴士司机的工作环境与协作方式如何？",
                 "question_key": "career.faq.bus-drivers.13"
+              },
+              {
+                "answer": "A 40 分钟、B 30 分钟、C 50 分钟。原版只合计 A 与 C，90 分；B 的 30 分保留待核。修订只确认 B 后合计 120 分，待核 0 分。保留原版与确认回执，交接给纸面记录责任人。计算结果不是实际工时或应付工资。",
+                "id": "bus-drivers.faq.14",
+                "question": "SH-49 参考解（交卷后再打开）",
+                "question_key": "career.faq.bus-drivers.14",
+                "source_refs": [
+                  "editorial"
+                ]
               }
             ]
           },
@@ -31699,10 +31749,10 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "美国2025工资与2025—2035预测，当前O*NET/BLS同期间；父级含校车与本职业分节解读。保护范围共享历史来源和事实保留，不能称全页统一。",
+              "美国工资和就业采用 53-3052 口径；BLS 手册中校车司机和含校车的总览均是其他范围。",
               "中国精确职业/城市薪资就业仍缺，可补交通运输行业非私营/私营年度背景；平均不等本职业中位或月薪。",
-              "边界三：编辑练习与作品建议均为虚构材料，读者不应据此在真实道路上进行载客驾驶或车辆操作，也不得把练习结果包装成安全行车、运营合规或事故责任结论。",
-              "边界四：本页由 O*NET、BLS、国家统计局、《中华人民共和国道路运输条例》《道路运输从业人员管理规定》《道路旅客运输及客运站管理规定》《城市公共汽车和电车客运管理规定》、ILO 任务暴露研究等公开资料及编辑设计组成；每项资料的适用范围与缺口单独标记。"
+              "边界三：纸面练习与作品建议均为虚构材料，读者不应据此在真实道路上进行载客驾驶或车辆操作，也不得把练习结果包装成安全行车、运营合规或事故责任结论。",
+              "边界四：本页由 O*NET、BLS、国家统计局、《中华人民共和国道路运输条例》《道路运输从业人员管理规定》《道路旅客运输及客运站管理规定》《城市公共汽车和电车客运管理规定》、ILO 任务暴露研究等公开资料及纸面练习组成；每项资料的适用范围与缺口单独标记。"
             ]
           },
           "id": "bus-drivers.sources.boundary.1",
@@ -31727,10 +31777,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组：依据 O*NET、BLS、国家统计局、《中华人民共和国道路运输条例》《道路运输从业人员管理规定》《道路旅客运输及客运站管理规定》《城市公共汽车和电车客运管理规定》等公开资料整理，逐项标注口径与数据期。"
+              "面试时问首班、末班、待命间隔、交接、培训和记录分别由谁安排。"
             ]
           },
           "id": "bus-drivers.sources.source-card.1",
+          "source_refs": [
+            "shift-taizhou",
+            "shift-liyang"
+          ],
           "type": "prose"
         },
         {
@@ -31738,27 +31792,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮来源：O*NET2026任务活动情境教育兴趣风格、2025行业/软件/工资、2025—2035预测；BLS分节OOH/表1.2；统计局2025行业；2022大典4-02-02-01/03；2026从业规章和道路条例、2024城市条例、2017城市规章；FMCSA CDL/ELDT/客运HOS。ILO同版暴露方法仅作一般背景，编辑建议分标。"
+              "美国 SOC 53-3052：2025 年工资中位数为 59,050 美元/年、28.39 美元/小时；2025 约 166,400 岗，2035 预计约 173,300，增长 4.1%、净增约 6,900，年均约 21,100 个空缺含替补。"
             ]
           },
           "id": "bus-drivers.sources.source-card.2",
           "source_refs": [
-            "details-current",
-            "industry-current",
-            "hot-current",
-            "ep-current",
-            "ooh-current",
-            "nbs-current",
-            "classification-current",
-            "driver-current",
-            "transport-current",
-            "urban-current",
-            "city-current",
-            "cdl-current",
-            "eldt-current",
-            "hos-current",
-            "ilo-genai",
-            "editor-current"
+            "bls-outlook",
+            "bls-pay"
           ],
           "type": "prose"
         },
@@ -31767,18 +31807,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-09核现行页面：O*NET档案2026/行业招聘工资2025/预测2025—2035；统计局2025；道路条例2026第六修订、从业规章2026第四修正、城市条例2024、城市规章2017。旧共享登记不机械换URL或文献身份；未用2025征求意见稿作生效规则。"
+              "美国 SOC 53-3052 是本页职业数据口径。地方招聘条件以公告为准；实际资格和班次向雇主核对。"
             ]
           },
           "id": "bus-drivers.sources.source-card.3",
           "source_refs": [
-            "details-current",
-            "ep-current",
-            "nbs-current",
-            "driver-current",
-            "transport-current",
-            "urban-current",
-            "city-current"
+            "bls-outlook",
+            "shift-taizhou",
+            "shift-liyang"
           ],
           "type": "prose"
         },
@@ -31787,15 +31823,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业统计、行业背景及父级按段落分读；NA非0、教育问答非从业者学历、情境比例非风险发生率。经营许可/个人证照/企业考核分开；63岁仅相应经营性客运条件。中国精确职业工资就业、AI替代率、人格效度、招聘频率保留缺口。"
+              "SH-49 只练记录，不提供真实驾驶、计薪或工时合规判定。"
             ]
           },
           "id": "bus-drivers.sources.source-card.4",
           "source_refs": [
-            "editor-current",
-            "driver-current",
-            "ep-current",
-            "nbs-current"
+            "editorial"
           ],
           "type": "prose"
         }
@@ -31822,7 +31855,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -31834,13 +31867,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看公交与城际巴士司机职业页面",
@@ -31899,18 +31932,18 @@
                 "url": "https://www.onetonline.org/link/summary/53-3052.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "支持 2024 年行业分布：政府 59%、运输与仓储 36%、其他行业 5%。",
-                  "2024 年分布；访问 2026-09-16"
+                  "O*NET 就业份额：政府 59%，运输和仓储 37%。这些是美国本职业的就业份额。",
+                  "适用范围见原文。"
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-industry",
-                "limitation": "行业分布描述统计分类，不用于推导行业工资或就业规模。",
+                "limitation": "适用范围见原文。",
                 "market": "美国",
-                "name": "O*NET-SOC 53-3052.00 行业分布",
-                "period": "2024 年分布；访问 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET：美国主要行业",
+                "period": "2025",
+                "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/53-3052.00"
               },
@@ -31949,15 +31982,15 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "支持合并职业口径的官方数值：2025 年中位年薪 49,390 美元、时薪中位数 23.75 美元、2025 年在岗 563,200 人、2025—2035 年增长 2%（慢于平均）、就业变化约 9,800 人、年均约 77,600 个空缺；其中城际与公交客运司机 2025 年 5 月中位年薪 59,050 美元、校车司机 47,920 美元。该页为合并职业口径，不是本页身份口径。",
-                  "2025 年 5 月工资；2025—2035 年预测"
+                  "支持合并职业口径的官方数值：2025 年中位年薪 49,390 美元、时薪中位数 23.75 美元、2025 年在岗 563,200 人、2025–2035 年增长 2%（慢于平均）、就业变化约 9,800 人、年均约 77,600 个空缺；其中城际与公交客运司机 2025 年 5 月中位年薪 59,050 美元、校车司机 47,920 美元。该页为合并职业口径，不是本页身份口径。",
+                  "2025 年 5 月工资；2025–2035 年预测"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-entry",
-                "limitation": "该页覆盖全部巴士司机（含校车司机等），不是本页身份口径；其期间（2025—2035 年）与覆盖范围同 O*NET 展示的 2024—2034 年本职业口径不同，须分别标注、不互换或相加。",
+                "limitation": "页首概览含校车；就业与工资需按职业段落区分。",
                 "market": "美国",
                 "name": "BLS《Occupational Outlook Handbook》Bus Drivers（合并职业口径）",
-                "period": "2025 年 5 月工资；2025—2035 年预测",
+                "period": "2025 年 5 月工资；2025–2035 年预测",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/transportation-and-material-moving/bus-drivers.htm"
@@ -31979,30 +32012,30 @@
                 "url": "https://www.onetonline.org/link/localwages/53-3052.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "支持该职业 2024 年就业 158,800 人、2024—2034 年增长标签 Average（3% 至 4%）与年均职位空缺 20,900 个。",
-                  "就业为 2024 年、预测为 2024—2034 年；访问 2026-09-16"
+                  "美国 SOC 53-3052：2025 年工资中位数为 59,050 美元/年、28.39 美元/小时；2025 约 166,400 岗，2035 预计约 173,300，增长 4.1%、净增约 6,900，年均约 21,100 个空缺含替补。",
+                  "适用范围见原文。"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-outlook",
-                "limitation": "就业与预测为该职业口径；BLS 合并页的期间（2025—2035 年）与覆盖范围不同。",
+                "limitation": "适用范围见原文。",
                 "market": "美国",
-                "name": "O*NET-SOC 53-3052.00 职业摘要（就业与预测字段）",
-                "period": "就业为 2024 年、预测为 2024—2034 年；访问 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：53-3052",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-3052.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "支持中国大陆按行业门类与岗位大类公布平均工资、但不单列该职业的事实，以及统计覆盖范围（城镇地域内就业人数 5 人及以上的法人单位，不含个体工商户与自由职业者）；按证据路由本页不展示其数值。",
+                  "国家统计局按行业等口径发布平均工资，未单列该职业。",
                   "2025 年；2026-05-15 发布"
                 ],
                 "evidence_type": "primary_document",
                 "id": "nbs-wages",
-                "limitation": "按行业门类与岗位大类汇总，未单列该职业；按证据路由本页不展示其数值、也不作为职业工资。",
+                "limitation": "行业均值仅为背景，不能当作司机职业工资。",
                 "market": "中国大陆",
                 "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
                 "period": "2025 年；2026-05-15 发布",
@@ -32061,14 +32094,14 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "记录本页编辑设计与虚构练习的整理方式、口径标注原则与缺口登记方式。",
+                  "记录本页纸面练习与虚构练习的整理方式、口径标注原则与缺口登记方式。",
                   "2026-09 整理"
                 ],
                 "evidence_type": "editorial_synthesis",
                 "id": "editorial",
-                "limitation": "编辑整理记录，用于说明口径与缺口，不作为事实来源。",
+                "limitation": "费马测试编辑部整理记录，用于说明口径与缺口，不作为事实来源。",
                 "market": "美国",
-                "name": "FermatMind 编辑设计与虚构练习",
+                "name": "FermatMind 纸面练习与虚构练习",
                 "period": "2026-09 整理",
                 "publisher": "费马测试职业内容编辑组",
                 "scope": "editorial_synthesis",
@@ -32162,7 +32195,7 @@
                 ],
                 "evidence_type": "primary_document",
                 "id": "industry-current",
-                "limitation": "政府59/运输37/其他4，不等OOH更细行业份额或工资。",
+                "limitation": "政府59/运输37，不等OOH更细行业份额或工资。",
                 "market": "美国",
                 "name": "O*NET本职业行业分布",
                 "period": "2025",
@@ -32190,14 +32223,14 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "O*NET现行就业预测",
-                  "2025—2035"
+                  "2025–2035"
                 ],
                 "evidence_type": "primary_document",
                 "id": "trends-current",
                 "limitation": "166400→173300/整数4/21100空缺，非AI归因。",
                 "market": "美国",
                 "name": "O*NET现行就业预测",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/53-3052.00"
@@ -32205,15 +32238,15 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "BLS巴士司机职业展望（分节核口径）",
-                  "2025工资/2025—2035预测"
+                  "BLS 手册列出的 2025 年 5 月行业年薪中位数：州政府（不含教育和医院）70,700 美元；地方政府（不含教育和医院）64,590；城市公共交通 57,820；包车 48,420；城际与农村客运 46,860。",
+                  "2025工资/2025–2035预测"
                 ],
                 "evidence_type": "primary_document",
                 "id": "ooh-current",
-                "limitation": "摘要563200/49390/2/77600是含校车父级；另明列53-3052就业166400、工资59050、五细行业工资、预测4.1，逐节分开。",
+                "limitation": "以上仅为该手册中本职业的五个行业数据。",
                 "market": "美国",
                 "name": "BLS巴士司机职业展望（分节核口径）",
-                "period": "2025工资/2025—2035预测",
+                "period": "2025工资/2025–2035预测",
                 "publisher": "BLS",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/transportation-and-material-moving/bus-drivers.htm"
@@ -32222,14 +32255,14 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "BLS表1.2公交城际巴士司机",
-                  "2025—2035"
+                  "2025–2035"
                 ],
                 "evidence_type": "primary_document",
                 "id": "ep-current",
                 "limitation": "53-3052：166400→173300/4.1%/净增6900/年均空缺21100；典型HS/相关经验None/中期在岗培训。",
                 "market": "美国",
                 "name": "BLS表1.2公交城际巴士司机",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "BLS",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32328,7 +32361,7 @@
                 "period": "2026-10-09现行页面核",
                 "publisher": "FMCSA",
                 "scope": "contextual",
-                "url": "https://www.fmcsa.dot.gov/regulations/hours-service/summary-hours-service-regulations"
+                "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-III/subchapter-B/part-395/subpart-A/section-395.5"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32344,7 +32377,7 @@
                 "period": "2025-10-02页面更新",
                 "publisher": "FMCSA",
                 "scope": "contextual",
-                "url": "https://www.fmcsa.dot.gov/cdl"
+                "url": "https://www.fmcsa.dot.gov/registration/commercial-drivers-license/drivers"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32372,8 +32405,8 @@
                 "id": "classification-current",
                 "limitation": "4-02-02-01含客车及城市公共汽电车司机，也含出租网约司机，宽于53-3052；4-02-02-03客运服务员是不同非驾驶职责。",
                 "market": "中国大陆",
-                "name": "2022职业分类大典客运车辆驾驶员",
-                "period": "2022/原书187—188页",
+                "name": "《中华人民共和国职业分类大典》（2022 年版社会公示稿）",
+                "period": "2022",
                 "publisher": "广元市人社局公开大典",
                 "scope": "contextual",
                 "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
@@ -32382,34 +32415,66 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "费马测试驾驶任务与转岗核对建议",
-                  "2026-10-09作者整理"
+                  "2026-10-09费马测试编辑部"
                 ],
                 "evidence_type": "editorial_synthesis",
                 "id": "editor-current",
-                "limitation": "工具用途、人格观察、递进与转岗距离为编辑建议；未核招聘频率、测评效度、自动化部署率、风险干预效果。",
+                "limitation": "工具用途、人格观察、递进与转岗距离可供参考；未核招聘频率、测评效度、自动化部署率、风险干预效果。",
                 "market": "跨市场",
                 "name": "费马测试驾驶任务与转岗核对建议",
-                "period": "2026-10-09作者整理",
+                "period": "2026-10-09费马测试编辑部",
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/53-3052.00"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "安全驾驶与停靠｜按时刻表与核准线路行车、遵守交通法规、在载客区规范停车｜按班次完成的运输服务与行车记录。 — 25/100; weight=1/3; bus-drivers.profile.responsibilities-block.1[1]",
-                  "乘客服务｜播报站点、协助老年人或残障人士等乘客上下车、回答班次与线路问题｜乘客服务过程与异常报告。 — 25/100; weight=1/3; bus-drivers.profile.responsibilities-block.1[2]",
-                  "收车与交接｜记录票款与行车信息并维护日志、保持车辆清洁、完成票款与车辆状态交接｜收车记录与交接文件。 — 75/100; weight=1/3; bus-drivers.profile.responsibilities-block.1[5]"
+                  "排班工具可提醒首末班、漏记的交接和未确认时段。具体班次、计酬和调度变更请向实际用人单位核对，不将系统输出当成批准。",
+                  "适用范围见原文。",
+                  "适用范围见原文。",
+                  "适用范围见原文。",
+                  "适用范围见原文。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "primary_document",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "适用范围见原文。",
+                "market": "美国",
+                "name": "O*NET：巴士驾驶与记录任务",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-3052.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "泰州市交通产业集团 2026 年公告招公交驾驶员 10 人，报名至 9 月 28 日 17:30。考核按实操 70%、面试 30%，两项均设 60 分门槛；公告未列工资金额。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "shift-taizhou",
+                "limitation": "适用范围见原文。",
+                "market": "中国大陆",
+                "name": "泰州交通产业集团：公交司机招聘",
+                "period": "2026",
+                "publisher": "泰州市交通产业集团",
+                "scope": "recruitment_proxy",
+                "url": "https://jtgs.taizhou.gov.cn/xxgk/tzgg3/art/2026/art_45a9db71f19447398d503f747fa876f4.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "溧阳市客运有限公司 2026 年 11 月 6 日公告分列公交 28 人与校车 7 人。公交条件列 A1 或 A3 且过实习期，另列经营性道路旅客运输驾驶员从业资格；报名 11 月 9–12 日，待遇按企业办法未列金额。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "shift-liyang",
+                "limitation": "适用范围见原文。",
+                "market": "中国大陆",
+                "name": "溧阳市：公交与校车司机招聘",
+                "period": "2026-11-06",
+                "publisher": "溧阳市人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.liyang.gov.cn/html/czly/2026/AQQJAIBA_1106/35959.html"
               }
             ]
           },
@@ -34974,7 +35039,7 @@
               "entry": "link-9",
               "field": "entity"
             },
-            "scope": "数据处理与健康观察等为编辑建议，非专项法合规或干预效果"
+            "scope": "数据处理与健康观察等可供参考，非专项法合规或干预效果"
           }
         ]
       },
@@ -35807,7 +35872,7 @@
       },
       "hero": {
         "h1": "公交与城际巴士司机",
-        "quick_answer": "本页条目对应公交与城际巴士司机（美国侧 O*NET-SOC 53-3052.00）：驾驶公交客车或长途客车，包括常规线路运营、包车与私人运输——按时刻表与核准线路行车、规范停靠与报站、协助乘客上下车、收取车票或票款、维护车厢秩序、记录票款与行车日志、处置乘客紧急情况并上报延误或事故；工作以长时间坐姿、封闭车厢、各类天气与高频公众接触为常态，其职责不等于自行决定线路与票价，也不替代运营单位的安全生产责任。",
+        "quick_answer": "了解这份工作，先问一次班次怎么开始、间隔由谁安排、末班如何交接。公交和城际巴士都需要按实际线路、车辆和单位规程行车；排班记录可用于向雇主核对条件。",
         "title": "公交与城际巴士司机"
       },
       "market_signal_card": {
@@ -36358,7 +36423,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET/BLS就业与预测（2025—2035）",
+            "label": "O*NET/BLS就业与预测（2025–2035）",
             "secondary_value": null,
             "value": {
               "$item": "bus-drivers.profile.onet-structured-fields-block.4",
@@ -37373,7 +37438,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与排班记录",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37391,7 +37456,7 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "O*NET-SOC 53-3052.00",
         "fact_id": "occupation-identity",
         "market": "美国",
@@ -37403,7 +37468,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "59,050美元/年（中位数）",
         "fact_id": "us-wage-2025",
         "market": "美国",
@@ -37415,7 +37480,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "28.39美元/小时（中位数）",
         "fact_id": "us-wage-hourly-2025",
         "market": "美国",
@@ -37427,67 +37492,67 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "158,800人（2024 年）",
+        "derivation": "按原表期间与口径展示。",
+        "display_value": "约 166,400 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
+        "measure": "2025 年在岗人数",
         "occupation_scope": "公交与城际巴士司机",
-        "period": "2024 年；Bus Drivers, Transit and Intercity（SOC 53-3052）口径",
+        "period": "2025",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足：O*NET 页面未公布预测期就业人数（53-3052 口径）",
+        "derivation": "按原表期间与口径展示。",
+        "display_value": "约 173,300 个岗位",
         "fact_id": "us-employment-2035",
         "market": "美国",
-        "measure": "预测就业人数（未公布）",
+        "measure": "2035 预计岗位",
         "occupation_scope": "公交与城际巴士司机",
-        "period": "2024—2034 年；Bus Drivers, Transit and Intercity（SOC 53-3052）口径",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-oews-methods"
+          "bls-outlook"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "增长 3% 至 4%（Average）",
+        "derivation": "按原表期间与口径展示。",
+        "display_value": "+4.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长率（本职业口径）",
+        "measure": "预计就业变化",
         "occupation_scope": "公交与城际巴士司机",
-        "period": "2024—2034 年；Bus Drivers, Transit and Intercity（SOC 53-3052）口径",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足：O*NET 页面未公布预测期净变化人数（53-3052 口径）",
+        "derivation": "按原表期间与口径展示。",
+        "display_value": "净增约 6,900",
         "fact_id": "us-change-2025-2035",
         "market": "美国",
-        "measure": "就业净变化（未公布）",
+        "measure": "预计就业净变化",
         "occupation_scope": "公交与城际巴士司机",
-        "period": "2024—2034 年；Bus Drivers, Transit and Intercity（SOC 53-3052）口径",
-        "source_refs": [
-          "bls-oews-methods"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "20,900个/年",
-        "fact_id": "us-openings-2025-2035",
-        "market": "美国",
-        "measure": "预测期年均职位空缺（本职业口径）",
-        "occupation_scope": "公交与城际巴士司机",
-        "period": "2024—2034 年；Bus Drivers, Transit and Intercity（SOC 53-3052）口径",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
+        "display_value": "年均约 21,100 个",
+        "fact_id": "us-openings-2025-2035",
+        "market": "美国",
+        "measure": "预计年均职位空缺",
+        "occupation_scope": "公交与城际巴士司机",
+        "period": "2025–2035",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      },
+      {
+        "derivation": "按原表期间与口径展示。",
         "display_value": "证据不足：未取得与公交与城际巴士司机精确对应的中国大陆全国职业工资；按证据路由不发布职业级数值",
         "fact_id": "cn-industry-science-tech-2024",
         "market": "中国大陆",
@@ -37499,7 +37564,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "证据不足：行业门类均值不单列本职业，且按证据路由不用于替代职业工资",
         "fact_id": "cn-industry-manufacturing-2024",
         "market": "中国大陆",
@@ -37511,7 +37576,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "证据不足：岗位大类均值不区分具体职业，本页不据此推算或展示本职业工资",
         "fact_id": "cn-professional-technical-2024",
         "market": "中国大陆",
@@ -37523,7 +37588,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "证据不足：城镇单位口径未单列本职业，本页不发布职业级数值",
         "fact_id": "cn-urban-nonprivate-2024",
         "market": "中国大陆",
@@ -37535,7 +37600,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "40,030美元/年（第 10 分位）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
@@ -37547,7 +37612,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "84,700美元/年（第 90 分位）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
@@ -37559,67 +37624,67 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "derivation": "按原表期间与口径展示。",
+        "display_value": "该行业不在 BLS 手册为此职业列示的五项中。",
         "fact_id": "us-industry-wage-aerospace-mfg-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数",
         "occupation_scope": "公交与城际巴士司机",
         "period": "不适用：来源未公布该字段",
         "source_refs": [
-          "bls-oews-methods"
+          "ooh-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "derivation": "按原表期间与口径展示。",
+        "display_value": "该行业不在 BLS 手册为此职业列示的五项中。",
         "fact_id": "us-industry-wage-engineering-services-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数",
         "occupation_scope": "公交与城际巴士司机",
         "period": "不适用：来源未公布该字段",
         "source_refs": [
-          "bls-oews-methods"
+          "ooh-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "derivation": "按原表期间与口径展示。",
+        "display_value": "该行业不在 BLS 手册为此职业列示的五项中。",
         "fact_id": "us-industry-wage-federal-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数",
         "occupation_scope": "公交与城际巴士司机",
         "period": "不适用：来源未公布该字段",
         "source_refs": [
-          "bls-oews-methods"
+          "ooh-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "derivation": "按原表期间与口径展示。",
+        "display_value": "该行业不在 BLS 手册为此职业列示的五项中。",
         "fact_id": "us-industry-wage-rd-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数",
         "occupation_scope": "公交与城际巴士司机",
         "period": "不适用：来源未公布该字段",
         "source_refs": [
-          "bls-oews-methods"
+          "ooh-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "derivation": "按原表期间与口径展示。",
+        "display_value": "该行业不在 BLS 手册为此职业列示的五项中。",
         "fact_id": "us-industry-wage-instruments-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数",
         "occupation_scope": "公交与城际巴士司机",
         "period": "不适用：来源未公布该字段",
         "source_refs": [
-          "bls-oews-methods"
+          "ooh-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "47,530美元/年（第 25 分位）",
         "fact_id": "us-wage-p25-2025",
         "market": "美国",
@@ -37631,7 +37696,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "70,700美元/年（第 75 分位）",
         "fact_id": "us-wage-p75-2025",
         "market": "美国",
@@ -37643,67 +37708,67 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "166400人",
         "fact_id": "us-employment-current",
         "market": "美国",
         "measure": "就业规模",
         "occupation_scope": "公交与城际巴士司机（SOC53-3052）",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "173300人",
         "fact_id": "us-employment-2035-current",
         "market": "美国",
         "measure": "预测就业",
         "occupation_scope": "公交与城际巴士司机（SOC53-3052）",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "增长4.1%（整数4%）",
         "fact_id": "us-growth-current",
         "market": "美国",
         "measure": "就业增长率",
         "occupation_scope": "公交与城际巴士司机（SOC53-3052）",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "6900人",
         "fact_id": "us-change-current",
         "market": "美国",
         "measure": "预测净增",
         "occupation_scope": "公交与城际巴士司机（SOC53-3052）",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "21100个/年",
         "fact_id": "us-openings-current",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "公交与城际巴士司机（SOC53-3052）",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "64590美元/年",
         "fact_id": "us-industry-current-1",
         "market": "美国",
@@ -37715,7 +37780,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "57820美元/年",
         "fact_id": "us-industry-current-2",
         "market": "美国",
@@ -37727,7 +37792,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "48420美元/年",
         "fact_id": "us-industry-current-3",
         "market": "美国",
@@ -37739,7 +37804,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间与口径展示。",
         "display_value": "46860美元/年",
         "fact_id": "us-industry-current-4",
         "market": "美国",
@@ -37751,30 +37816,30 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "公交与城际巴士司机",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "derivation": "按原表期间与口径展示。",
+        "display_value": "70,700 美元/年",
+        "fact_id": "us-industry-state-government-2025",
+        "market": "美国",
+        "measure": "州政府内该职业年薪中位数（不含教育和医院）",
+        "occupation_scope": "公交与城际巴士司机（SOC53-3052）",
+        "period": "2025年5月",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "ooh-current"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与排班记录"
     },
     "badges": [
-      "O*NET 53-3052.00 · 安全驾驶 / 客运服务 / 票务与行车记录",
-      "按时刻表与核准线路运营 / 乘客协助与应急处置 / 班次与疲劳管理",
-      "美国数据为本职业精确口径 · 中国大陆按证据路由只登记口径与缺口"
+      "班次｜待确认时段｜末班交接",
+      "用工与计酬向雇主分别核",
+      "美国统计 SOC 53-3052"
     ],
     "metrics": [
       {
@@ -37787,19 +37852,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，53-3052.00 口径）"
+        "label": "美国就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，53-3052.00 口径）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，53-3052.00 口径）"
+        "label": "美国年均职位空缺（2025–2035）"
       },
       {
         "availability": "missing",
@@ -37813,17 +37878,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "公交与城际巴士司机做什么、需要哪些学历与资格、美国与中国的薪资和前景如何，以及 AI 与自动化会改变哪些环节；保留中国大陆按证据路由登记的缺口。"
+      "text": "面试前查班次、间隔、交接和计酬，比较泰州与溧阳两份公告，并用虚构班次练习核时。"
     },
     "title": {
       "availability": "available",
-      "text": "公交与城际巴士司机"
+      "text": "公交与城际巴士司机：班次、交接与面试"
     }
   },
-  "source_content_sha256": "38ad9aa5f482fa95c219e56f592400b070e2ba9b55f5a31a7091a3e370186f4c",
+  "source_content_sha256": "7983fd13028bb3f098992eb92470278708e35883aacb3bac5578373ec03df1db",
   "subject": {
     "canonical_slug": "bus-drivers",
     "name": "公交与城际巴士司机",
-    "summary": "本页条目对应公交与城际巴士司机（美国侧 O*NET-SOC 53-3052.00）：驾驶公交客车或长途客车，包括常规线路运营、包车与私人运输——按时刻表与核准线路行车、规范停靠与报站、协助乘客上下车、收取车票或票款、维护车厢秩序、记录票款与行车日志、处置乘客紧急情况并上报延误或事故；工作以长时间坐姿、封闭车厢、各类天气与高频公众接触为常态，其职责不等于自行决定线路与票价，也不替代运营单位的安全生产责任。"
+    "summary": "了解这份工作，先问一次班次怎么开始、间隔由谁安排、末班如何交接。公交和城际巴士都需要按实际线路、车辆和单位规程行车；排班记录可用于向雇主核对条件。"
   }
 }

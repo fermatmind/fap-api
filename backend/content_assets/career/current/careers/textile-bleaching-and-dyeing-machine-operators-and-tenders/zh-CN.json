@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "这份工作把织物、工艺单与设备状态转成可追溯的漂洗染整批次。可以先观察自己能否持续核对单位和批号、区分允许范围与异常、记录不确定信息，并在赶产时仍遵守报告与停机权限。真实适配还需核对班次、环境和岗位训练。"
+              "纸面体验｜比对虚构批次标签和机台日志，标出色号相同而批次不同的一行，留下原标签引用。 "
             ]
           },
           "id": "textile-bleaching-and-dyeing-machine-operators-and-tenders.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24812,13 +24811,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "纺织漂染机器操作员与看护员按既定工艺操作或看护机器，对织物、纱线或相关纤维进行漂白、洗涤、染色、缩水或整理，监控过程参数、检查产品并记录异常与生产结果。"
+              "纺织漂染机操作人员看管洗涤、漂白或染色设备，观察织物和仪表状态，并记录批次或设备异常。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "textile-bleaching-and-dyeing-machine-operators-and-tenders.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-6061.00"
           ],
           "type": "prose"
         }
@@ -25494,13 +25492,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文本工具可尝试辅助记录草稿；工艺、设备和安全决定仍需受训授权人员复核。BLS本职业2025—2035总体预测下降12.5%、年均空缺约600（含替补），不单独归因AI；本页仍无可核AI采用率、替代率或个人失业概率。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比对虚构批次标签和机台日志，标出色号相同而批次不同的一行，留下原标签引用。"
             ]
           },
           "id": "textile-bleaching-and-dyeing-machine-operators-and-tenders.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-6061.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33154,6 +33152,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-6061.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-6061.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-6061.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38633,10 +38658,10 @@
       "text": "纺织漂染机器操作员与看护员"
     }
   },
-  "source_content_sha256": "1e1fd52c786807469e930ecc470b3db5467218c7b9e73775c611772ac89becde",
+  "source_content_sha256": "6daa5d32ecbf82b779a86876ef44156585dade2c3c1f4d68a50b287b32cfa430",
   "subject": {
     "canonical_slug": "textile-bleaching-and-dyeing-machine-operators-and-tenders",
     "name": "纺织漂染机器操作员与看护员",
-    "summary": "按既定工艺操作或看护纺织漂白、洗涤、染色和整理机器，监控温度、流量等适用参数，检查产品并记录生产与异常信息。理解岗位要同时核对织物、设备、批次追溯、安全训练和授权边界；本页美国职业代码为51-6061.00，中国工种与雇主条件另行核对。"
+    "summary": "纺织漂染机操作人员看管洗涤、漂白或染色设备，观察织物和仪表状态，并记录批次或设备异常。"
   }
 }

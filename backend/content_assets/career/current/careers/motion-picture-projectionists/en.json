@@ -173,6 +173,9 @@
       "item:motion-picture-projectionists.path.recruitment-sample.8": {
         "status": "pending_mapping"
       },
+      "item:motion-picture-projectionists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:motion-picture-projectionists.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12322,6 +12325,21 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The schedule specifies subtitles, the playlist names an unsubtitled file, and the test log gives no file revision. Write a clear handover note for the projection lead."
+            ]
+          },
+          "id": "motion-picture-projectionists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Match a screening to its playback version",
+          "type": "notice"
         }
       ]
     },
@@ -14707,6 +14725,13 @@
         "id": "motion-picture-projectionists.path.recruitment-sample.8",
         "location": "entry_decisions",
         "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "motion-picture-projectionists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14962,7 +14987,7 @@
       "text": "Motion Picture Projectionists"
     }
   },
-  "source_content_sha256": "8720ac79d35a2b08ae40b3bfb5d19e5bab51bfbf09cae85e79402641d3756050",
+  "source_content_sha256": "b1f30345c7b0df820671b9bde379fae26febecdc02894bf811012e2fb0ab84dd",
   "subject": {
     "canonical_slug": "motion-picture-projectionists",
     "name": "Motion Picture Projectionists",

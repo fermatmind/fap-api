@@ -23011,13 +23011,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Path: BLS lists the typical entry-level education for United States 25-1054 as a doctoral or professional degree; some university teaching positions may have different requirements, so check the specific school posting."
+              "Paper check | Draft two rubric items for a fictional lab report. One checks whether units are recorded and the other whether the argument follows from the data. "
             ]
           },
           "id": "physics-teachers-postsecondary.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "ep",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23306,14 +23305,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Definition: O*NET 25-1054 includes teaching-focused and teaching-and-research postsecondary physics teachers."
+              "Postsecondary physics teachers organize concepts, derivations and experiments into courses. Assignments and lab reports show whether students can use evidence to explain results. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "physics-teachers-postsecondary.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "cnclass"
+            "transfer-onet-25-1054.00"
           ],
           "type": "prose"
         },
@@ -24418,15 +24415,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist with worked example drafts, teaching material organization, candidate concept explanations, and low-risk exercise feedback; teachers must still verify physics correctness, learning objectives, grading fairness, student privacy, and laboratory safety. The NIST generative AI profile is risk governance material and does not provide a 25-1054 position replacement rate. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Draft two rubric items for a fictional lab report. One checks whether units are recorded and the other whether the argument follows from the data."
             ]
           },
           "id": "physics-teachers-postsecondary.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-25-1054.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32300,6 +32295,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-25-1054.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 25-1054.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/25-1054.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37544,10 +37566,10 @@
       "text": "Postsecondary physics teacher career guide: teaching tasks, wages, and entry paths"
     }
   },
-  "source_content_sha256": "8559b77f3b27d7d2c3d017bb957b055c5b5e63d3955bda5bbf901f1d6d1af9e4",
+  "source_content_sha256": "885cd7df843bc9c4ae34c7e5ccf1429a67f315078bbbea39a7f3e80030a27ac2",
   "subject": {
     "canonical_slug": "physics-teachers-postsecondary",
     "name": "Postsecondary physics teachers",
-    "summary": "Postsecondary physics teachers (United States O*NET 25-1054) teach college physics courses, design teaching materials, experiments, and assessments, and advise students; some positions also carry research, papers, and projects. Courses, student learning, and research outputs must all be verified against the specific school position. The United States BLS 25-1054 wages and employment figures cannot be treated as Chinese university hiring or individual income."
+    "summary": "Postsecondary physics teachers organize concepts, derivations and experiments into courses. Assignments and lab reports show whether students can use evidence to explain results."
   }
 }

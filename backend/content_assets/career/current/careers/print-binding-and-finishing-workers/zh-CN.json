@@ -1527,7 +1527,7 @@
         "status": "pending_mapping"
       },
       "item:print-binding-and-finishing-workers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:print-binding-and-finishing-workers.sources.source-card.1": {
         "status": "mapped"
@@ -23311,7 +23311,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "真实设备操作、换刀、清堵和复机须按现场培训与授权进行；练习只用纸笔。"
+              "如果不适应重复核页序和尺寸、机台节拍或轮班，先问清岗位。换刀、清堵和复机只由受训并获授权的人按现场规程处理；试做只用纸笔。"
             ]
           },
           "id": "print-binding-and-finishing-workers.quick-decision.fit-decision-checklist.1",
@@ -23326,7 +23326,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用虚构120册工单列规格、首件和抽检点；六册样本发现三册缺陷时只报告样本3/6，不推整批。"
+              "去 09 做 B-01：核对装订工单、计算内页位置、按抽样记录标明异常和未观察范围。先提交自己的卡，再看参考。"
             ]
           },
           "id": "print-binding-and-finishing-workers.quick-decision.fit-decision-checklist.2",
@@ -23356,7 +23356,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "提交一页工单卡：写明 120 册共需 5,760 个内页位置，页数不等于纸张张数；列出页序、尺寸、装订牢固度三项验收点，以及卡纸或异响时的停机升级对象。"
+              "把内页位置和纸张张数分开，记录页序、尺寸和装订异常；题面和自核都在 09。"
             ]
           },
           "id": "print-binding-and-finishing-workers.quick-decision.fermat-decision-card.6",
@@ -26526,14 +26526,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "装订、裁切、折页与印后设备加工对应制造业生产任务。2025年全国规模以上制造业生产制造及有关人员税前年平均79,182元；制造业非私营全体113,594元、私营全体76,055元分列参考。均非装订工职业中位数、起薪或个人工资区间。美国51-5113与中国岗位名称不能直接互认，仍须核实际工序、设备和雇主条件。"
+              "装订、裁切、折页与印后设备加工对应制造业生产任务。2025年全国规模以上制造业生产制造及有关人员税前年平均79,182元；制造业非私营全体113,594元、私营全体76,055元分列参考。均非装订工职业中位数、起薪或个人工资区间。美国51-5113与中国岗位名称不能直接互认，仍须核实际工序、设备和雇主条件。 国家统计局数值分别是 2025 年单位或行业全体、以及生产制造及有关人员岗位大类的税前年平均。招聘样本单列，不能据此推算职业工资，也不能以汇率换算美国中位数。"
             ]
           },
           "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
             "onet",
             "nbs-en",
-            "editor"
+            "editor",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26542,13 +26543,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中学或中职"
+              "雇主带教样本"
             ]
           },
           "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
             "editor",
-            "employer"
+            "employer",
+            "cn-print-posting"
           ],
           "type": "prose"
         },
@@ -26557,13 +26559,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "基础装订操作"
+              "从上料或收书协助起步"
             ]
           },
           "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
             "editor",
-            "employer"
+            "employer",
+            "cn-print-posting"
           ],
           "type": "prose"
         },
@@ -26572,13 +26575,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "看懂工单、纸张规格与安全标识；实际设备操作需现场培训。"
+              "北京利丰雅高长城印刷的 2026 年装订操作岗样本面向高职，先协助上料或收书，在机长带教下学习设备操作。它说明了一种入门安排，不能当所有岗位学历门槛。"
             ]
           },
           "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
             "editor",
-            "employer"
+            "employer",
+            "cn-print-posting"
           ],
           "type": "prose"
         },
@@ -26587,7 +26591,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业培训"
+              "培训范围"
             ]
           },
           "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.28",
@@ -26632,7 +26636,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "相关专科"
+              "课程或校内练习"
             ]
           },
           "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.31",
@@ -26677,7 +26681,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "在岗进阶"
+              "已有一线经验"
             ]
           },
           "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.34",
@@ -26841,7 +26845,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆装订工全国职业级月薪或年薪分布；求职时按城市、设备、班次、加班与社保口径核具体报价。"
+              "先核实际培训、操作授权、设备和班次，再分别问底薪、补贴、加班与社保。表内是准备建议和单个历史样本。"
             ]
           },
           "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.45",
@@ -26856,7 +26860,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "上方2025年行业与岗位大类数值是税前年平均背景，不是本职业工资区间；下方为核价建议，不是招聘样本。个人工资不能由平均数倒推，也不能按汇率换算美国42,290 美元/年。BLS 51-5113 美国精确职业资料｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "不要把单岗招聘条件当全国学历门槛，也不要把纸笔或课程当作设备资格。"
             ]
           },
           "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.46",
@@ -26943,12 +26947,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按雇主公告核底薪、计件、加班和社保"
+              "北京这则 2026 年装订实习样本的页首金额与正文综合薪资不一致，正文还单列餐补并注明可能夜班。先问清工资周期、加班和补贴，不拿这则历史广告估算正式工月薪。"
             ]
           },
           "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "r2-pay-2"
+            "r2-pay-2",
+            "cn-print-posting"
           ],
           "type": "prose"
         },
@@ -26985,13 +26990,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国 SOC 51-5113 是职业分类；中国工资统计未以该编码单列装订岗位。"
+              "大陆《职业分类大典》把装订列在印后制作员（6-08-01-03）之下。同一职业还包含其他印后工种；找装订岗时先核产品、是否手工或自动线、由谁确认首件。"
             ]
           },
           "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "editor",
-            "r2-pay-1"
+            "r2-pay-1",
+            "cn-print-occupation",
+            "cn-print-posting"
           ],
           "type": "prose"
         },
@@ -27050,7 +27057,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国精确职业任务：O*NET 51-5113.00｜https://www.onetonline.org/link/details/51-5113.00；2025 年工资分位：O*NET 所载 BLS 工资表｜https://www.onetonline.org/link/localwages/51-5113.00?st=NJ；2025–2035 就业：BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "美国精确职业任务：O*NET 51-5113.00｜https://www.onetonline.org/link/details/51-5113.00；2025 年工资分位：O*NET 所载 BLS 工资表｜https://www.onetonline.org/link/localwages/51-5113.00；2025–2035 就业：BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "print-binding-and-finishing-workers.us-salary.career-snapshot-secondary-locale.8",
@@ -27080,7 +27087,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 年 5 月美国 51-5113 工资第 10 分位，不是新人起薪。；O*NET 51-5113.00 美国工资分位表｜https://www.onetonline.org/link/localwages/51-5113.00?st=NJ"
+              "2025 年 5 月美国 51-5113 工资第 10 分位，不是新人起薪。；O*NET 51-5113.00 美国工资分位表｜https://www.onetonline.org/link/localwages/51-5113.00"
             ]
           },
           "id": "print-binding-and-finishing-workers.us-salary.career-snapshot-secondary-locale.10",
@@ -27108,7 +27115,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 年 5 月工资第 25 分位；分位不等于工作年限。；O*NET 51-5113.00 美国工资分位表｜https://www.onetonline.org/link/localwages/51-5113.00?st=NJ"
+              "2025 年 5 月工资第 25 分位；分位不等于工作年限。；O*NET 51-5113.00 美国工资分位表｜https://www.onetonline.org/link/localwages/51-5113.00"
             ]
           },
           "id": "print-binding-and-finishing-workers.us-salary.career-snapshot-secondary-locale.12",
@@ -27136,7 +27143,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 年 5 月美国精确职业年薪中位数，非个人报价。；O*NET 51-5113.00 美国工资分位表｜https://www.onetonline.org/link/localwages/51-5113.00?st=NJ"
+              "2025 年 5 月美国精确职业年薪中位数，非个人报价。；O*NET 51-5113.00 美国工资分位表｜https://www.onetonline.org/link/localwages/51-5113.00"
             ]
           },
           "id": "print-binding-and-finishing-workers.us-salary.career-snapshot-secondary-locale.14",
@@ -27164,7 +27171,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 年 5 月工资第 75 分位，不代表主管职级。；O*NET 51-5113.00 美国工资分位表｜https://www.onetonline.org/link/localwages/51-5113.00?st=NJ"
+              "2025 年 5 月工资第 75 分位，不代表主管职级。；O*NET 51-5113.00 美国工资分位表｜https://www.onetonline.org/link/localwages/51-5113.00"
             ]
           },
           "id": "print-binding-and-finishing-workers.us-salary.career-snapshot-secondary-locale.16",
@@ -27192,7 +27199,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 年 5 月工资第 90 分位，不代表固定晋升收入。；O*NET 51-5113.00 美国工资分位表｜https://www.onetonline.org/link/localwages/51-5113.00?st=NJ"
+              "2025 年 5 月工资第 90 分位，不代表固定晋升收入。；O*NET 51-5113.00 美国工资分位表｜https://www.onetonline.org/link/localwages/51-5113.00"
             ]
           },
           "id": "print-binding-and-finishing-workers.us-salary.career-snapshot-secondary-locale.18",
@@ -27723,31 +27730,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "印刷机操作员",
@@ -29195,7 +29202,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "页序、裁切尺寸、胶量或线迹偏差若未被首件和抽检发现，会扩散到整批。 虚构场景：抽检发现第 21 册缺页。暂停该批交付，追溯上次合格样本和配页设定。"
+              "页序、尺寸或装订强度异常时，记录工单号和可见缺陷，追溯上一个合格样本，交质检负责人决定。样本状态请在 09 自判。"
             ]
           },
           "id": "print-binding-and-finishing-workers.risk.career-risk-cards.26",
@@ -29478,7 +29485,7 @@
                 "values": [
                   "工单理解与教育背景",
                   "BLS 51-5113 表列典型入门教育为高中或同等学历；具体雇主可另有要求。",
-                  "核公告是否要求读工单、计量、搬运和设备培训。"
+                  "北京利丰雅高长城印刷的 2026 年装订操作岗样本面向高职，先协助上料或收书，在机长带教下学习设备操作。它说明了一种入门安排，不能当所有岗位学历门槛。"
                 ]
               },
               {
@@ -29512,7 +29519,8 @@
             "bls",
             "onet",
             "employer",
-            "editor"
+            "editor",
+            "cn-print-posting"
           ],
           "title": "入行核查依据与编辑准备建议",
           "type": "cards"
@@ -29525,7 +29533,7 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料与设定｜A1–A5 全部虚构",
+                  "虚构材料",
                   "你是纸笔练习者，需为 120 册、每册 48 个编号内页位置的骑马订手册写一页质量与异常交接卡；不接触真实机器，不把练习当设备资格。",
                   "A1：工单要求 120 册、每册 48 个内页位置、骑马订，成品按样张核页序和裁切尺寸；封面另计，不推算纸张张数。",
                   "A2：编辑设定每 20 册抽一册，抽查编号 1、21、41、61、81、101。"
@@ -29534,7 +29542,7 @@
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务与产出",
+                  "任务与交付｜先自行完成",
                   "A3：抽样记录：1 合格；21 缺第 17–18 页；41 裁切偏位；61 订线松；81 与 101 合格。A4：整批尚未放行，未知其余 114 册状态。",
                   "A5：练习者仅记录和提出隔离建议；质检负责人决定放行或返工，受训操作员才可按现场规程调机。提交算式、抽样缺陷表、待核问题和升级对象。"
                 ]
@@ -29542,16 +29550,17 @@
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考思路（先独立做）",
-                  "120×48=5,760 个内页位置，不等于纸张张数；6 册样本中 3 册有缺陷，为样本 50%，不能推断整批缺陷率。",
-                  "列出 21、41、61 的缺陷，暂缓批次放行并交质检负责人核范围；不能凭纸笔练习调整机器。"
+                  "算式与记录",
+                  "独立完成工单算式和逐项抽检记录。",
+                  "保留原始输入、计量单位和待核项。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界与复核",
-                  "他人应能从 A1–A5 复算数量，找到抽样编号、三个缺陷和未检查的 114 册；缺页、偏位与订线松分别写明。"
+                  "交卷前核对",
+                  "确认每项判断能回到 A1–A5。",
+                  "记录还需什么依据，并写清由谁处理。"
                 ]
               }
             ]
@@ -29560,7 +29569,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：一张虚构装订工单",
+          "title": "B-01｜装订工单与异常交接",
           "type": "cards"
         },
         {
@@ -29572,23 +29581,23 @@
                 "id": "requirements-matrix",
                 "values": [
                   "工单与样张卡",
-                  "从 A1/A2 写数量、页数、装订方式和六个抽检编号。",
-                  "复核方式：他人能复算 5,760 个内页位置并定位样本。"
+                  "从 A1／A2 写下工单规格和抽样记录。",
+                  "让读者能复算数量并找到样本。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "缺陷与抽检卡",
-                  "逐项记录 1、21、41、61、81、101 的结果，标缺页、偏位和订线松。",
-                  "复核方式：3/6 仅为样本结果，不冒称整批缺陷率。"
+                  "按 A3 逐件填写抽检记录，注明缺陷及位置。",
+                  "将样本结论与整批状态分开。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "升级交接卡",
-                  "写明暂缓放行、未检查 114 册、质检负责人和受训操作员各自待决事项。"
+                  "记录待核范围、交接事项和下一责任人。"
                 ]
               },
               {
@@ -29626,20 +29635,20 @@
             "rows": [
               [
                 "面试读工单",
-                "能否区分 48 个内页位置与纸张张数",
-                "指出 A1 未给排版和纸张开数，不能算纸张张数。",
+                "能否区分工单数量与材料数量",
+                "写出哪些量可以由工单得出，哪些需要另查。",
                 "纸笔练习不能证明实机能力。"
               ],
               [
                 "面试复算抽检",
-                "能否算 120×48 与 3/6",
-                "算出 5,760 和样本 50%，并说明不能外推整批。",
-                "样本非随机、其余 114 册未知。"
+                "能否独立复算并说明抽样范围",
+                "列算式和分母，注明样本之外仍待核的范围。",
+                "仅以题设样本作练习。"
               ],
               [
                 "试用期质量记录",
                 "能否记清批次、抽样编号与缺陷",
-                "交接记录可追到 21、41、61 和上次合格样本。",
+                "交接记录可追到批次、抽样编号和观察结果。",
                 "真实数据使用须遵守工厂制度。"
               ],
               [
@@ -29674,42 +29683,42 @@
                 "id": "entry-trial-day-2",
                 "values": [
                   "第二日",
-                  "第二日：复算 120×48=5,760 个内页位置，说明为什么不能换成纸张张数。"
+                  "按工单复算内页位置，说明需要哪些资料才能核纸张数量。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "第三日",
-                  "第三日：按 A3 建抽检表，逐册记录三个不同缺陷及合格样本。"
+                  "按 A3 逐件记录观察和缺陷。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "第四日",
-                  "第四日：复算样本 3/6=50%，写明其余 114 册未知，不能当整批缺陷率。"
+                  "计算样本比例，注明尚未观察的范围。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "第五日",
-                  "第五日：根据 A4/A5 写暂缓放行、质检复核和授权调机的交接请求。"
+                  "按 A4／A5 写交接请求，列明待决事项和责任人。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "第六日",
-                  "第六日：封存初稿后看参考思路，修正缺陷分类、算式或越权建议。"
+                  "独立完成并保存初稿，保留算式和判断依据。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "第七日",
-                  "第七日：交工单、抽检、升级、方法四卡，记录最费力的环节与下一步练习。"
+                  "保存第 6 天初稿后，在常见问题中展开「B-01 参考与自核量规（第 7 天展开）」，按量规复核四张卡，记录一处修订及理由。"
                 ]
               }
             ]
@@ -29726,11 +29735,11 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "工单卡写明 120 册、48 个内页位置与骑马订，未虚构封面或纸张张数。",
-              "抽检编号为 1、21、41、61、81、101；六个样本与 A2 一致。",
-              "缺陷为 21 缺页、41 裁切偏位、61 订线松；其余三个样本合格。",
-              "3/6=50% 仅描述抽样，不代表整批；其余 114 册状态未知。",
-              "异常卡要求隔离受影响批次并让质检负责人决定是否放行。",
+              "工单卡列明规格和数量，并标出需另查的资料。",
+              "抽样编号和观察记录能逐项回到原材料。",
+              "把观察结果、缺陷及位置逐件记清。",
+              "分开样本比例、整批状态和未观察范围。",
+              "异常卡写明交接事项和下一责任人。",
               "调机、清堵与维修须由现场培训且获授权的人按规程进行。",
               "作品和反思仅证明纸笔方法，不等于雇主录用或设备资格。"
             ]
@@ -29857,16 +29866,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本页 A1–A5 和七天计划均为编辑虚构的纸笔练习，不含真实招聘、生产数据或可直接执行的设备参数。",
-              "岗位薪资、设备与招聘状态需按当地雇主和官方来源核验；本页不把美国统计或示例当中国通用条件。"
+              "北京利丰雅高长城印刷的 2026 年装订操作岗样本面向高职，先协助上料或收书，在机长带教下学习设备操作。它说明了一种入门安排，不能当所有岗位学历门槛。 上海青浦人社 2025 年职介表另列上海中华印刷的装订机长；这是机长岗的历史记录，不能拿来估算北京的入门实习薪资。"
             ]
           },
           "id": "print-binding-and-finishing-workers.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "cn-print-posting",
+            "cn-bindery-lead"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -31906,7 +31912,7 @@
                 "question_key": "career.faq.print-binding-and-finishing-workers.ai-impact"
               },
               {
-                "answer": "证据不足：中国大陆装订工全国精确职业级薪资分布。2025年规模以上制造业生产岗位税前年平均79,182元；制造业非私营全体113,594元、私营全体76,055元分列参考，不能当职业中位数、起薪或收入区间。实际收入需按城市、机型、班次、加班和社保核雇主报价。",
+                "answer": "本页未找到可比的全国职业级工资。79,182 元是 2025 年规模以上制造业企业生产制造及有关人员税前年均工资，仅作背景。 北京这则 2026 年装订实习样本的页首金额与正文综合薪资不一致，正文还单列餐补并注明可能夜班。先问清工资周期、加班和补贴，不拿这则历史广告估算正式工月薪。",
                 "id": "print-binding-and-finishing-workers.faq.5",
                 "question": "中国大陆装订工的工资是多少？",
                 "question_key": "career.faq.print-binding-and-finishing-workers.china-pay"
@@ -31918,7 +31924,7 @@
                 "question_key": "career.faq.print-binding-and-finishing-workers.us-pay"
               },
               {
-                "answer": "BLS给出的美国典型入门教育是高中或同等学历，通常需要适度在岗培训。中国具体岗位的学历、经验、设备培训和班次要求以目标雇主为准。",
+                "answer": "美国 BLS 把高中或同等学历列为典型入门教育。大陆则应逐个核雇主条件。 北京利丰雅高长城印刷的 2026 年装订操作岗样本面向高职，先协助上料或收书，在机长带教下学习设备操作。它说明了一种入门安排，不能当所有岗位学历门槛。",
                 "id": "print-binding-and-finishing-workers.faq.7",
                 "question": "入行需要什么学历和经验？",
                 "question_key": "career.faq.print-binding-and-finishing-workers.education-path"
@@ -31940,6 +31946,12 @@
                 "id": "print-binding-and-finishing-workers.faq.10",
                 "question": "这个职业的前景如何？可以转到哪里？",
                 "question_key": "career.faq.print-binding-and-finishing-workers.outlook-transition"
+              },
+              {
+                "answer": "120×48=5,760 个内页位置，不等于纸张张数；6 册样本中 3 册有缺陷，为样本 50%，不能推断整批缺陷率。\n\n列出 21、41、61 的缺陷，暂缓批次放行并交质检负责人核范围；不能凭纸笔练习调整机器。\n\n他人应能从 A1–A5 复算数量，找到抽样编号、三个缺陷和未检查的 114 册；缺页、偏位与订线松分别写明。\n\n按四项各记 0–2 分：工单和算式、抽检与缺陷可追溯、明确未知范围、写明暂缓放行及下一责任人。齐全且可回溯记 2，部分记 1，凭猜测或越权记 0。",
+                "id": "print-binding-and-finishing-workers.faq.11",
+                "question": "B-01 参考与自核量规（第 7 天展开）",
+                "question_key": "career.faq.print-binding-and-finishing-workers.exercise-answer-key"
               }
             ]
           },
@@ -31952,7 +31964,10 @@
             "privacy",
             "cnclass",
             "editor",
-            "nbs-en"
+            "nbs-en",
+            "cn-print-posting",
+            "cn-print-occupation",
+            "onet-wages"
           ],
           "type": "faq"
         },
@@ -31975,14 +31990,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业身份与任务依据 O*NET 51-5113.00；美国工资和展望依据 O*NET/BLS 单列职业数据；中国工资仅用国家统计局行业与岗位类别背景。"
+              "美国职业任务和工资取 O*NET，展望取 BLS 单列行。大陆以职业分类大典和招聘样本核岗位，国家统计局行业及岗位大类工资只作背景。"
             ]
           },
           "id": "print-binding-and-finishing-workers.sources.source-card.2",
           "source_refs": [
             "onet",
             "bls",
-            "nbs"
+            "nbs",
+            "cn-print-occupation",
+            "cn-print-posting",
+            "onet-wages",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31991,7 +32010,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页资料核读日期：2026-09-26；招聘与工厂设备条件不作实时承诺。"
+              "本次所用职业分类、招聘样本和工资、就业原页于 2026 年 11 月 9 日核读。岗位是否仍在招、机型与班次以雇主核实为准。"
             ]
           },
           "id": "print-binding-and-finishing-workers.sources.source-card.3",
@@ -32005,7 +32024,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页中文用于解释美国官方职业范围，不建立中外资格互认；所有虚构练习材料均为编辑设计，不代表雇主标准或法律规定。个人结果、订单与支付信息不进入公开页面。"
+              "大陆与美国分别使用各自的职业分类和工资口径。纸笔任务是虚构练习，不代表雇主标准或设备操作资格。"
             ]
           },
           "id": "print-binding-and-finishing-workers.sources.source-card.4",
@@ -32038,31 +32057,37 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "path",
                 "id": "navigation-6",
                 "relation": "related-evidence",
                 "url": "/zh/career/jobs/print-binding-and-finishing-workers"
+              },
+              {
+                "entity": "secondary_cta",
+                "id": "navigation-7",
+                "relation": "related-evidence",
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               }
             ]
           },
@@ -32131,20 +32156,20 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2025年国家统计局公布城镇单位工资，按私营和非私营单位分列。",
-                  "制造业与生产制造岗位大类可作背景，不能提取本职业工资分位。"
+                  "2025年美国该职业年薪10%分位为32,220美元，中位数42,290美元。",
+                  "90%分位为59,150美元；分位数不是新人、熟练工的职级工资。"
                 ],
-                "evidence_type": "official wage table",
+                "evidence_type": "BLS wage table via O*NET",
                 "id": "oews",
-                "limitation": "制造业和生产制造岗位大类只供背景比较，不能称本职业中位数。",
-                "market": "中国大陆",
-                "name": "国家统计局 2025 年城镇单位工资",
-                "period": "2025 年",
-                "publisher": "国家统计局",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+                "limitation": "取 United States 行，工资分位不是入门或资深岗位保证值。",
+                "market": "美国",
+                "name": "O*NET 51-5113.00 美国工资分位表",
+                "period": "2025 年 5 月工资",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/51-5113.00"
               },
               {
                 "accessed_at": "2026-08-30",
@@ -32179,7 +32204,7 @@
                 "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "NIST生成式AI风险框架列出数据隐私、信息完整性等风险类别。",
                   "客户工单、图像与批次记录接入AI前应评估数据许可和泄露。"
@@ -32189,13 +32214,13 @@
                 "limitation": "自愿性风险框架；不提供装订工采用率或安全授权。",
                 "market": "美国/通用",
                 "name": "NIST AI RMF Generative AI Profile",
-                "period": "2021 revision; effective 2021-09-01; accessed 2026-08-30",
+                "period": "2024-07-26",
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "OSHA机器防护材料说明危险运动部件应设置适当防护。",
                   "刀具、夹点与输送装置的具体防护仍须按机型与现场规程核实。"
@@ -32205,13 +32230,13 @@
                 "limitation": "美国机器防护要求与指导；中国场景需依适用法规。",
                 "market": "美国",
                 "name": "OSHA Machine Guarding",
-                "period": "2021 revision; effective 2021-09-01; accessed 2026-08-30",
+                "period": "原页当前说明，未列本页发布日期",
                 "publisher": "Occupational Safety and Health Administration",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/machine-guarding"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "1910.147规定美国工作场所维护或维修时控制危险能量的程序。",
                   "异常停机与复机由获授权人员按适用流程执行，不能以AI建议替代。"
@@ -32221,7 +32246,7 @@
                 "limitation": "美国危险能量控制规定；中国场景需依适用法规。",
                 "market": "美国",
                 "name": "OSHA 29 CFR 1910.147 Hazardous Energy Control",
-                "period": "2021 revision; effective 2021-09-01; accessed 2026-08-30",
+                "period": "原页当前说明，未列本页发布日期",
                 "publisher": "Occupational Safety and Health Administration",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
@@ -32292,7 +32317,7 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "框架建议识别、测量和管理生成式AI的错误与数据风险。",
                   "本页借此设计保留原始工单、复核人与小范围试点的流程。"
@@ -32302,7 +32327,7 @@
                 "limitation": "自愿性风险框架；不提供装订工采用率或安全授权。",
                 "market": "美国/通用",
                 "name": "NIST AI RMF Generative AI Profile",
-                "period": "2024 年 NIST AI 600-1",
+                "period": "2024-07-26",
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
@@ -32356,7 +32381,7 @@
                 "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "51-5112.00是印刷机操作员，可比较印刷与印后工序。",
                   "印刷机训练不自动覆盖裁切、胶装或精装机操作。"
@@ -32366,7 +32391,7 @@
                 "limitation": "相邻印刷机操作职业；不是装订工数据。",
                 "market": "美国",
                 "name": "O*NET 51-5112.00 Printing Press Operators",
-                "period": "2021 revision; effective 2021-09-01; accessed 2026-08-30",
+                "period": "O*NET 当前职业档案",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "adjacent_occupation",
                 "url": "https://www.onetonline.org/link/details/51-5112.00"
@@ -32451,7 +32476,7 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "2025年美国该职业年薪10%分位为32,220美元，中位数42,290美元。",
                   "90%分位为59,150美元；分位数不是新人、熟练工的职级工资。"
@@ -32464,7 +32489,7 @@
                 "period": "2025 年 5 月工资",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/51-5113.00?st=NJ"
+                "url": "https://www.onetonline.org/link/localwages/51-5113.00"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -32513,6 +32538,52 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "6-08-01-03 包括装订、裁切、印品整饰和印后成型。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "cn-print-occupation",
+                "limitation": "用于核大陆工序和职业分类；不证明中美分类完全等价，也不是工资统计。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国职业分类大典》印刷人员",
+                "period": "2022",
+                "publisher": "人力资源社会保障部等；广元市人社局转载",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "北京利丰雅高长城印刷的 2026 年装订操作岗样本面向高职，先协助上料或收书，在机长带教下学习设备操作。它说明了一种入门安排，不能当所有岗位学历门槛。",
+                  "北京这则 2026 年装订实习样本的页首金额与正文综合薪资不一致，正文还单列餐补并注明可能夜班。先问清工资周期、加班和补贴，不拿这则历史广告估算正式工月薪。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-print-posting",
+                "limitation": "单个招聘样本；不确认仍在招聘，不代表普遍工资、岗位总量或增长预测。",
+                "market": "中国大陆",
+                "name": "北京利丰雅高长城印刷｜装订操作岗样本",
+                "period": "2026-05-25",
+                "publisher": "天津职业大学就业指导中心",
+                "scope": "recruitment_proxy",
+                "url": "https://jyw.tjtc.edu.cn/correcruit/content/id/14403.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "上海青浦人社 2025 年职介表另列上海中华印刷的装订机长；这是机长岗的历史记录，不能拿来估算北京的入门实习薪资。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-bindery-lead",
+                "limitation": "单个招聘样本；不确认仍在招聘，不代表普遍工资、岗位总量或增长预测。",
+                "market": "中国大陆",
+                "name": "青浦人社｜上海中华印刷装订机长",
+                "period": "2025-02-18",
+                "publisher": "上海市青浦区人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shqp.gov.cn/rbj/zjxx/20250218/1271169.html"
               }
             ]
           },
@@ -35386,11 +35457,11 @@
             "ai_heading": "AI 会影响装订工的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "工资口径与雇主核价建议",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "装订工在不同学历背景下通常从哪些岗位方向开始？",
-            "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_caption": "入门准备与雇主核对事项",
+            "scenario_heading": "入门准备和用工条件怎么核？",
+            "scenario_interpretation_label": "向雇主核对",
+            "scenario_role_label": "核对事项",
+            "scenario_value_label": "准备方向"
           },
           "us_growth": {
             "$item": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.58",
@@ -37210,7 +37281,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合装订工工作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37287,7 +37358,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测试"
           },
           {
             "href": {
@@ -37297,7 +37368,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -37307,7 +37378,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格测试"
           },
           {
             "href": {
@@ -37317,7 +37388,17 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "IQ 推理测评"
+          },
+          {
+            "href": {
+              "$link": "print-binding-and-finishing-workers.navigation.links.1",
+              "block": "navigation",
+              "copy_key": "career.item.navigation-links",
+              "entry": "navigation-7",
+              "field": "url"
+            },
+            "label": "EQ 情商测评"
           }
         ]
       },
@@ -37748,7 +37829,7 @@
         "availability": "available",
         "fact_ref": "cn-clerical-2025",
         "key": "china_pay",
-        "label": "2025中国规模以上制造业生产岗位年平均"
+        "label": "大陆规模以上制造业生产岗位税前年均（2025，背景）"
       }
     ]
   },
@@ -37756,14 +37837,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "装订工把装订工按工单设置刀具、导轨、滚轮与胶量，进行裁切、折页、配页、缝订或上胶，抽检成品并调整工艺参数。发现卡纸、异响或缺陷时进行故障诊断，必要时停机升级。转化为进行裁切、折页、配页、缝订、上胶、压合和包装等设备操作。判断这条职业路径时，应同时验证工作闭环、责任边界、证据口径、风险控制和可观察的入门作品。"
+      "text": "装订工接收印张，核页序、折页、配页或装订，并检查成品。了解印后制作员与印刷机操作员的区别、入门要求和工资资料。"
     },
     "title": {
       "availability": "available",
       "text": "装订工"
     }
   },
-  "source_content_sha256": "5f0d43c5c2649698e1dacdbbd7049d89e5e5a196a1270b237efd1545fe0b8f2b",
+  "source_content_sha256": "5f25b3069bb2c7e0cafceea4ba168606319898ba9aaf24deb7dbaefc5bcdf9dd",
   "subject": {
     "canonical_slug": "print-binding-and-finishing-workers",
     "name": "装订工",

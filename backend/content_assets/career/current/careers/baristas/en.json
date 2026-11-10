@@ -36,7 +36,7 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-current-2025": {
         "status": "pending_mapping"
@@ -45,7 +45,7 @@
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-current-2025": {
         "status": "pending_mapping"
@@ -69,7 +69,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-current-2025": {
         "status": "pending_mapping"
@@ -1551,7 +1551,7 @@
         "status": "pending_mapping"
       },
       "item:baristas.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:baristas.sources.source-card.1": {
         "status": "mapped"
@@ -23245,13 +23245,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "One-sentence judgment: a barista is not “someone who can do latte art,” but a store position that prepares and serves specialty coffee and other beverages and plated food according to recipes and procedures: taking orders and relaying them to colleagues, preparing hot or cold beverages according to recipes (coffee and espresso drinks and blended coffee and tea), weighing and grinding and packaging coffee beans, preparing and serving menu items such as sandwiches and salads, wrapping and labeling and dating food for sale, checking freezer and refrigerator and heating equipment temperatures, cleaning and disinfecting work areas and utensils and equipment, taking out trash and cleaning service areas, ordering and restocking and arranging displays, describing the menu to customers and demonstrating equipment use, and collecting and processing payments; it is not suitable for people who only want to produce by feel, are unwilling to verify portions and extraction and temperature and time according to recipes, and are unwilling to treat utensil disinfection and equipment temperature checks and cleaning as part of the job."
+              "Go to BC-72 in section 09. Check two paper order records and write a one-page handoff."
             ]
           },
           "id": "baristas.quick-decision.fit-decision-checklist.1",
           "source_refs": [
+            "bc72-editor",
             "onet",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -23260,11 +23261,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: you are willing to verify portions and extraction and temperature and time item by item according to recipes and standard procedures, you can stay accurate and hygienic in the rhythm of peak queues, continuous standing, and repetitive motions, you take the initiative to verify equipment temperatures and food labels and shelf lives, you are willing to confirm first and then handle customer complaints or order anomalies, and you can truthfully record handovers and temperatures and cleaning and exceptions."
+              "You like confirming requests and staying accurate when it gets busy."
             ]
           },
           "id": "baristas.quick-decision.fit-decision-checklist.2",
           "source_refs": [
+            "bc72-editor",
             "onet"
           ],
           "type": "prose"
@@ -23274,13 +23276,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions for pausing investment first: you have not yet completed a full order-taking—preparation—serving—cleaning—recording loop under any supervised conditions, or you can only explain your interest by saying “I like drinking coffee”; also do not treat having made coffee at home or having taken a hobby course as proof that you can independently operate commercial equipment or independently bear food safety, equipment shutdown, or refund responsibility. Hot beverage, steam, and equipment burn protection, food allergens and temperature control, food label and shelf life verification, customer information and payment information handling, and food safety and shutdown and refund authority must be carried out in accordance with the applicable jurisdiction and the competent authority and employer systems and must leave traceable records; this page does not provide any recipes, extraction parameters, or equipment operating instructions."
+              "Try writing down the evidence and open checks in a busy service scenario."
             ]
           },
           "id": "baristas.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
+            "bc72-editor",
             "onet"
           ],
           "type": "prose"
@@ -23290,12 +23291,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Occupational identity and definition must be verified separately: O*NET lists 35-3023.01 (Baristas) as Job Zone 1–2 (SVP below 6.0); among the educational attainment the page publishes, 64% require less than a high school diploma, 29% require a high school diploma or equivalent, and 2% require a postsecondary certificate; the corresponding chapter of the BLS Occupational Outlook Handbook lists the typical entry-level education for this combined group as no formal educational credential, with no related work experience required and short-term on-the-job training. It must also be noted: the wage, employment, and industry data on this page are explicitly labeled on the O*NET page as taken from the same-family parent occupation 35-3023.00 (Fast Food and Counter Workers), and are not a barista-only definition; the BLS Occupational Outlook Handbook chapter is also the combined “Food and Beverage Serving and Related Workers” group, which is broader than the same-family parent occupation. Education, training, certification, employer hiring, and in-store task authorization are different statuses and must be verified item by item according to employer and position and jurisdiction."
+              "BLS Table 1.2 lists no typical formal educational credential or related work experience and short-term on-the-job training for 35-3023. The Mainland examples have different requirements. Check the employer and applicable rules for the job you want."
             ]
           },
           "id": "baristas.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "ep",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "onet"
           ],
           "type": "prose"
@@ -23305,12 +23308,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: this is a store service position that delivers steadily by verifying item by item according to recipes and standard procedures and working through the rhythm of peak periods, continuous standing, and repetitive motions, with the core being beverage preparation and serving, equipment temperature checks, utensil disinfection, and records — not an interest in coffee or an imagination about social media; its U.S. wage and employment data must be read under the same-family parent occupation definition."
+              "Try BC-72 to record the customer’s order, open ingredient checks and handoff."
             ]
           },
           "id": "baristas.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
+            "bc72-editor",
             "onet"
           ],
           "type": "prose"
@@ -23360,7 +23363,7 @@
               "Order taking and confirmation | Give the service a basis | Receive customer orders and repeat them back for confirmation, relay orders to other colleagues for preparation, and explain the feasible scope and waiting time.",
               "Beverage preparation and serving | Give the output a specification | Weigh and grind and extract according to recipes and standard procedures, and prepare and serve hot or cold beverages and menu items.",
               "Food preparation and labeling | Keep risk controlled | Prepare or serve menu items such as sandwiches and salads according to procedure, and wrap and label food for sale and verify shelf lives and first-in-first-out.",
-              "Equipment and temperature checks | Make the process reviewable | Check freezer and refrigerator or heating equipment temperatures, confirm proper operation, and handle abnormalities.",
+              "Equipment and temperature checks | Make the process reviewable | Record equipment temperatures under shop procedures and report abnormalities.",
               "Cleaning and disinfection | Make hygiene traceable | Clean or disinfect work areas and utensils and equipment, clean service and seating areas, take out trash, and handle waste.",
               "Cashiering and store operations | Keep the business running | Collect and process customer payments, order and receive and restock and arrange displays, and respond to customer requests and record exceptions within the authorized scope."
             ]
@@ -23377,16 +23380,19 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Work environment | 94% continuously or almost continuously stand, 67% continuously or almost continuously use hands to handle, control, or feel objects and tools, 47% continuously or almost continuously make repetitive motions (another 32% more than half the time), 36% continuously or almost continuously walk or run, and 23% bend or twist the body about half the time; 100% are in contact with others continuously, 86% have face-to-face discussions every day, 66% work very close (within touching distance) to others, and 29% have telephone conversations every day; 92% work indoors in an environmentally controlled setting every day and 18% work indoors without environmental control every day; 43% are exposed to extreme heat or cold every day, 44% are exposed to distracting or uncomfortable noise every day, 26% are exposed to minor burns, cuts, bites, or stings every day, 19% are exposed to contaminants every day, and 17% wear common protective or safety equipment every day; 92% are never in hazardous conditions, 94% never come into contact with hazardous equipment, and 97% are never exposed to disease or infections; 68% never sit, and 79% kneel, crouch, bend, or crawl less than half the time.\nMain equipment and tools | Espresso machines and grinders and cold beverage and steam equipment, freezers and refrigerators and heating equipment and thermometers, coffee beans and tea leaves and dairy products and syrups and ingredients and prepared foods, cleaning and disinfection supplies and disposables, cash register and ordering and inventory systems, and personal protection (gloves, aprons, and burn protection as the work requires).\nTask rhythm | 88% have a typical workweek of less than 40 hours; 52% have a regular schedule and 40% an irregular schedule; 16% face time pressure every day (64% never); 33% have a lot of freedom in decisions and 39% some freedom; 55% consider the work slightly automated and 22% consider it not at all automated; 22% consider the pace determined by equipment speed very important (25% consider it not at all important).\nCollaboration | Collaborate with baristas on the same shift and with back-of-house and front-desk colleagues; 64% consider working with a work group or team extremely important (another 23% very important), 15% bear very high responsibility for the health and safety of others (another 44% moderate responsibility), and 76% consider dealing with external customers or the public extremely important (another 22% very important).\nCompetition and pressure | 35% consider precision or accuracy extremely important (another 35% very important and 30% important); 23% deal with unpleasant or angry people every day (53% at least once a week); 24% are in conflict situations at least once a week; 20% consider the consequences of error serious; 40% consider competition slight and 27% consider there to be no competition at all.\nCompliance and safety | Beverage preparation and serving and utensil disinfection and equipment temperature must meet applicable food safety and venue hygiene and equipment safety requirements; on the U.S. side, the BLS notes that this combined group usually has no formal education or experience requirement and that skills are learned on the job; O*NET lists 3 national certifications (including coffee and food service fields). Article 44 of China's Food Safety Law requires food production and operation enterprises to carry out food safety knowledge training; Article 45 requires personnel engaged in work that comes into contact with directly edible food to undergo an annual health examination and obtain a health certificate before starting work. Specific equipment, refund, and management authority must be verified separately with the employer and cannot be inferred from education or occupational certificates.\nRecords and retrospective | Orders and output, equipment temperature checks, utensil cleaning and disinfection handling, food label and shelf life verification, and customer feedback and exceptions need to be traceable.\nSkills and training | O*NET lists this occupation as Job Zone 1–2 (SVP below 6.0); basic skills are led by active listening 60, speaking 56, monitoring 50, reading comprehension 47, and critical thinking 41; transferable skills are led by service orientation 60, coordination 50, social perceptiveness 50, operation and control 41, persuasion 38, negotiation 35, and time management 35; knowledge is led by customer and personal service 89, administration and management 65, sales and marketing 62, food production 54, and English language 52; the current abilities list includes speech clarity, oral comprehension, oral expression, and control precision; work styles are social orientation 73, cooperation 69, dependability 69, attention to detail 55, and self control 50, none of which are individual admission scores.\nEntry and authorization | Education and certification do not equal equipment operation or food safety determinations or shutdown and refund authority; the BLS notes that this combined group usually has no formal education or experience requirement and that skills are learned on the job; O*NET lists 3 national certifications, none of which equals a hiring threshold or employer appointment.\nIndustry and employers | The O*NET industry distribution is accommodation and food services 87% and other industries (including retail trade) 13% (same-family parent occupation definition); common employers are chain brand stores, independent coffee shops, and retail, hotel, and institutional beverage bars."
+              "Work environment | Among O*NET respondents, 94% report standing continually or almost continually.; 100% report constant contact with others.; 92% report working indoors in a controlled environment every day.; Consider prolonged standing and hand work.; Check protection requirements for the worksite.; Ask about the station and breaks.\nMain equipment and tools | Espresso machines and grinders and cold beverage and steam equipment, freezers and refrigerators and heating equipment and thermometers, coffee beans and tea leaves and dairy products and syrups and ingredients and prepared foods, cleaning and disinfection supplies and disposables, cash register and ordering and inventory systems, and personal protection (gloves, aprons, and burn protection as the work requires).\nTask rhythm | 88% report a typical workweek shorter than 40 hours.; Confirm scheduling with the employer.; Compare opening, closing and weekend shifts.; Check how work is assigned during a rush.; Distinguish order-taking and preparation stations.; Compare part-time and full-time arrangements.\nCollaboration | Check open orders and station status with shift colleagues.; Record unresolved items for the handoff.\nCompetition and pressure | Verify orders during a rush.; Repeat unclear requests back to the customer.; Record exceptions.; Confirm who follows up.; Compare each employer’s written terms.\nCompliance and safety | Beverage preparation and serving and utensil disinfection and equipment temperature must meet applicable food safety and venue hygiene and equipment safety requirements; on the U.S. side, the BLS notes that this combined group usually has no formal education or experience requirement and that skills are learned on the job; O*NET lists 3 credential examples from named issuing bodies (including coffee and food service fields). Article 44 of China's Food Safety Law requires food production and operation enterprises to carry out food safety knowledge training; Article 45 requires personnel engaged in work that comes into contact with directly edible food to undergo an annual health examination and obtain a health certificate before starting work. Specific equipment, refund, and management authority must be verified separately with the employer and cannot be inferred from education or occupational certificates.\nRecords and retrospective | Orders and output, equipment temperature checks, utensil cleaning and disinfection handling, food label and shelf life verification, and customer feedback and exceptions need to be traceable.\nSkills and training | O*NET lists baristas in Job Zone 1–2.; Pay attention to listening.; Communicate clearly during a rush.; Confirm equipment training boundaries.; Document open items and handovers.; Employers train and assess for their own roles.\nEntry and authorization | Check education, certificates and shop authorization separately.; BLS lists short-term on-the-job training for the parent occupation.; See O*NET examples of named credentials from issuing bodies.\nIndustry and employers | The O*NET industry subtable titled Baristas lists accommodation and food services at 87% and other industries, including retail, at 13%. It does not state a year or attribute the figures to the parent occupation.; These industry shares do not show industry wages or the types of shops employing baristas."
             ]
           },
           "id": "baristas.profile.work-context-block.1",
           "source_refs": [
+            "bls",
+            "r2-pay-2",
+            "cn-food-law",
+            "census",
+            "ep",
             "onet",
             "facilities",
-            "nbs",
-            "census",
-            "cn-food-law"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23440,11 +23446,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The 2022 catalog of national vocational skill standards promulgated by the Ministry of Human Resources and Social Security lists barista 4-03-02-08. This catalog confirms the name and code; the complete version of that standard was not obtained this time, and the catalog cannot be used to infer education, level conditions, or full equivalence with U.S. 35-3023.01. Precise occupational wages for China are still missing; the urban unit average for the accommodation and catering industry serves only as industry background."
+              "The Mainland barista standard (4-03-02-08) covers preparing coffee and related drinks and sets out Grade 5 through Grade 1. It does not determine an employer’s hiring rules or establish equivalence to the U.S. code."
             ]
           },
           "id": "baristas.profile.onet-structured-fields-block.3",
           "source_refs": [
+            "cn-barista-standard",
             "cn-coffee-code",
             "cn-wages-current"
           ],
@@ -23470,11 +23477,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Employment and prospects (same-family parent occupation definition, not barista-only): the O*NET employment trends page states at the top “Employment data for Fast Food and Counter Workers,” and under that definition gives about 3,855,900 employed in 2025 and about 4,079,100 in 2035 (2025—2035 +6%, labeled faster than average (5% to 6%)), with about 827,400 job openings per year over the projection period (including growth and replacement). The corresponding chapter of the BLS Occupational Outlook Handbook is the combined “Food and Beverage Serving and Related Workers” group: 5,143,000 employed in 2025, 2025—2035 +5% (faster than average), a change of +280,800, and about 1,078,500 annual openings (mostly from replacement needs). Both definitions are broader than barista-only, and the definition describes the occupational group and does not represent an individual hiring guarantee."
+              "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas."
             ]
           },
           "id": "baristas.profile.onet-structured-fields-block.4",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -23500,7 +23508,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The current O*NET industry page uses the parent occupation definition: accommodation and food services 87% and other industries (including retail) 13%, with no separate data year; sample job titles include Bobarista and Catering Barista. The O*NET hot technology page, based on January 1, 2025 to December 31 U.S. Lightcast job postings, lists Microsoft Office, Excel, and Word, each mentioned at below 1%; a posting mention is not an adoption rate, ability threshold, or uniform hiring condition."
+              "The O*NET industry subtable titled Baristas lists accommodation and food services at 87% and other industries, including retail, at 13%. It does not state a year or attribute the figures to the parent occupation.; sample job titles include Bobarista and Catering Barista. The O*NET hot technology page, based on January 1, 2025 to December 31 U.S. Lightcast job postings, lists Microsoft Office, Excel, and Word, each mentioned at below 1%; a posting mention is not an adoption rate, ability threshold, or uniform hiring condition."
             ]
           },
           "id": "baristas.profile.onet-structured-fields-block.5",
@@ -23606,7 +23614,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Baristas (U.S. side O*NET 35-3023.01, Baristas) prepare or serve specialty coffee and other beverages and serve food such as baked goods and sandwiches to customers. The original official duty text is “Prepare or serve specialty coffee or other beverages. Serve food such as baked goods or sandwiches to patrons.”; there are 19 O*NET official tasks (17 core and 2 supplemental); core tasks include cleaning or disinfecting work areas and utensils and equipment (importance 96), collecting and processing customer payments (95), preparing or serving hot or cold beverages such as coffee and espresso drinks and blended coffee and tea (95), taking orders and relaying them to other colleagues for preparation (93), cleaning service or seating areas (86), making or serving menu items such as sandwiches or salads (86), wrapping and labeling or dating food for sale (84), checking freezer and refrigerator or heating equipment temperatures to ensure proper operation (83), taking out trash (82), describing menu items to customers or recommending products (81), demonstrating the use of retail equipment such as espresso machines (80), ordering and receiving or inventory replenishment or retail products (80), serving prepared foods such as muffins, biscotti, and bagels (77), restocking paper goods or beverage preparation materials at the customer service counter (77), providing product details such as coffee blends or brewing methods (73), setting up or restocking merchandise displays (73), and weighing and grinding and packaging coffee beans for customers (71); supplemental tasks include making signs labeling store products or events (46) and slicing fruit and vegetables and desserts or meats (35). This occupation is Job Zone 1–2 in the United States (SVP below 6.0) and is marked by O*NET as Bright Outlook; its wage, employment, and industry data are labeled on the O*NET page as taken from the same-family parent occupation 35-3023.00. This page does not constitute recipes, extraction parameters, or equipment operating instructions."
+              "Baristas (U.S. side O*NET 35-3023.01, Baristas) prepare or serve specialty coffee and other beverages and serve food such as baked goods and sandwiches to customers. The original official duty text is “Prepare or serve specialty coffee or other beverages. Serve food such as baked goods or sandwiches to patrons.”; there are 19 O*NET official tasks (17 core and 2 supplemental); core tasks include cleaning or disinfecting work areas and utensils and equipment (importance 96), collecting and processing customer payments (95), preparing or serving hot or cold beverages such as coffee and espresso drinks and blended coffee and tea (95), taking orders and relaying them to other colleagues for preparation (93), cleaning service or seating areas (86), making or serving menu items such as sandwiches or salads (86), wrapping and labeling or dating food for sale (84), checking freezer and refrigerator or heating equipment temperatures to ensure proper operation (83), taking out trash (82), describing menu items to customers or recommending products (81), demonstrating the use of retail equipment such as espresso machines (80), ordering and receiving or inventory replenishment or retail products (80), serving prepared foods such as muffins, biscotti, and bagels (77), restocking paper goods or beverage preparation materials at the customer service counter (77), providing product details such as coffee blends or brewing methods (73), setting up or restocking merchandise displays (73), and weighing and grinding and packaging coffee beans for customers (71); supplemental tasks include making signs labeling store products or events (46) and slicing fruit and vegetables and desserts or meats (35). This occupation is Job Zone 1–2 in the United States (SVP below 6.0) and is marked by O*NET as Bright Outlook; its wage and employment data are labeled on the O*NET page as taken from the same-family parent occupation 35-3023.00. This page does not constitute recipes, extraction parameters, or equipment operating instructions."
             ]
           },
           "id": "baristas.profile.definition-block.11",
@@ -23727,14 +23735,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET lists 35-3023.01 (Baristas) as Job Zone 1–2 (SVP below 6.0); among the educational attainment the page publishes, 64% require less than a high school diploma, 29% require a high school diploma or equivalent, and 2% require a postsecondary certificate, and it notes that jobs in this zone usually require a high school diploma or equivalent, with experience requirements ranging from little to a few months to a year and on-the-job training ranging from a few days to a year. The corresponding chapter of the BLS Occupational Outlook Handbook lists the typical entry-level education for this combined group as no formal educational credential, with no related work experience required and short-term on-the-job training, and notes that schedules often include early mornings and late nights and weekends and holidays, and that part-time work is common. The O*NET training page shows that no training programs for this occupation are registered nationwide, and the occupation summary also provides an Apprenticeship.gov apprenticeship opportunities entry point (searched by this occupational code); the certification page lists 3 national certifications (including coffee and food service fields). In mainland China, the barista 4-03-02-08 standard catalog has been verified; specific in-store mentoring must be verified with the employer. Article 44 of China's Food Safety Law requires food production and operation enterprises to carry out food safety knowledge training; Article 45 requires personnel engaged in work that comes into contact with directly edible food to undergo an annual health examination and obtain a health certificate before starting work. Specific equipment, refund, and management authority must be verified separately with the employer and cannot be inferred from education or occupational certificates."
+              "O*NET asked respondents what education new hires need: 64% chose less than high school, 29% chose high school or equivalent, and 2% chose a postsecondary certificate. These are survey responses. For parent occupation 35-3023, BLS Table 1.2 lists no typical formal educational credential or related work experience, and short-term on-the-job training. The O*NET nationwide directory returned no programs for this occupation code. Check available training and workplace instruction separately with employers."
             ]
           },
           "id": "baristas.profile.career-quick-answers-block.19",
           "source_refs": [
+            "bls",
+            "ep",
+            "nist",
             "onet",
             "nbs",
-            "nist",
             "census",
             "cn-coffee-code",
             "cn-food-law"
@@ -23805,12 +23815,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The U.S. identity and tasks are 35-3023.01, and the wage, employment, and industry pages explicitly adopt the parent occupation 35-3023.00. The employment table for the OOH Food and Beverage Serving and Related Workers chapter covers four groups — fast food and counter workers, nonrestaurant food servers, restaurant assistants, and hosts and hostesses — and does not include waiters and waitresses or bartenders; its combined group is not a barista subcategory. The 2022 catalog of national vocational skill standards promulgated by the Ministry of Human Resources and Social Security lists barista 4-03-02-08. This catalog confirms the name and code; the complete version of that standard was not obtained this time, and the catalog cannot be used to infer education, level conditions, or full equivalence with U.S. 35-3023.01. Precise national barista wages are still insufficient."
+              "Baristas take orders, prepare and serve drinks, check ingredient information, clean their station and hand over open issues. O*NET 35-3023.01 describes barista duties. U.S. wage and outlook figures use the parent occupation, fast food and counter workers (35-3023). The two Mainland examples are historical listings from a Shenzhen chain and a Beijing campus kitchen. The Mainland barista standard (4-03-02-08) covers preparing coffee and related drinks and sets out Grade 5 through Grade 1. It does not determine an employer’s hiring rules or establish equivalence to the U.S. code."
             ]
           },
           "id": "baristas.profile.career-quick-answers-block.24",
           "source_refs": [
             "onet",
+            "ep",
+            "cn-barista-standard",
             "nbs",
             "cn-coffee-code"
           ],
@@ -23835,14 +23847,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "On the U.S. side, the O*NET educational composition is less than a high school diploma 64%, high school diploma or equivalent 29%, and postsecondary certificate 2%; the BLS Occupational Outlook Handbook lists the typical entry-level education for this combined group as no formal educational credential and notes that skills are learned on the job; no training programs for this occupation are registered nationwide in O*NET, and there is also an apprenticeship opportunities entry point and 3 national certifications. In mainland China, the barista 4-03-02-08 standard catalog has been verified; specific education, experience, and mentoring must be verified separately with the employer. Article 44 of China's Food Safety Law requires food production and operation enterprises to carry out food safety knowledge training; Article 45 requires personnel engaged in work that comes into contact with directly edible food to undergo an annual health examination and obtain a health certificate before starting work. Specific equipment, refund, and management authority must be verified separately with the employer and cannot be inferred from education or occupational certificates."
+              "O*NET asked respondents what education new hires need: 64% chose less than high school, 29% chose high school or equivalent, and 2% chose a postsecondary certificate. These are survey responses. For parent occupation 35-3023, BLS Table 1.2 lists no typical formal educational credential or related work experience, and short-term on-the-job training. The O*NET nationwide directory returned no programs for this occupation code. Check available training and workplace instruction separately with employers."
             ]
           },
           "id": "baristas.profile.career-quick-answers-block.26",
           "source_refs": [
+            "bls",
+            "ep",
+            "nist",
             "onet",
             "nbs",
-            "nist",
             "census",
             "cn-coffee-code",
             "cn-food-law"
@@ -23868,7 +23882,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Beverage preparation and serving and utensil disinfection must be carried out according to the employer's recipes and standard procedures and food safety procedures; where equipment start-stop and abnormal temperature handling, food allergens and temperature control, and refund, complimentary-item, and complaint handling are involved, this must be done according to employer procedures and authorization. On the U.S. side, O*NET lists 3 national certifications (which do not equal a hiring threshold or employer appointment); the BLS Occupational Outlook Handbook notes that this combined group usually has no formal education or experience requirement and that skills are learned on the job. Verify the pre-job training and authorization process before starting, and do not infer it directly from education or experience."
+              "Beverage preparation and serving and utensil disinfection must be carried out according to the employer's recipes and standard procedures and food safety procedures; where equipment start-stop and abnormal temperature handling, food allergens and temperature control, and refund, complimentary-item, and complaint handling are involved, this must be done according to employer procedures and authorization. On the U.S. side, O*NET lists 3 credential examples from named issuing bodies (which do not equal a hiring threshold or employer appointment); the BLS Occupational Outlook Handbook notes that this combined group usually has no formal education or experience requirement and that skills are learned on the job. Verify the pre-job training and authorization process before starting, and do not infer it directly from education or experience."
             ]
           },
           "id": "baristas.profile.career-quick-answers-block.28",
@@ -23897,12 +23911,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The work environment and utensils and food must meet applicable hygiene and safety requirements (utensil cleaning and disinfection, food labels and shelf lives and temperature control, handling contaminated items and waste, cleaning workstations and floors, hot beverage and steam and equipment burn protection, and protection against prolonged standing and repetitive motions). O*NET work context shows 94% continuously or almost continuously stand, 67% continuously or almost continuously use hands to handle or feel objects and tools, 47% continuously or almost continuously make repetitive motions, 36% continuously or almost continuously walk or run, 86% have face-to-face discussions every day, 100% are in contact with others continuously, 66% work very close (within touching distance) to others, 43% are exposed to extreme heat or cold every day, 44% are exposed to distracting or uncomfortable noise every day, 26% are exposed to minor burns, cuts, bites, or stings every day, 19% are exposed to contaminants every day, and 17% wear common protective or safety equipment every day; this page does not constitute recipes, extraction parameters, or equipment operating instructions."
+              "Among O*NET respondents, 94% report standing continually or almost continually and 100% report constant contact with others.;Check cleaning procedures, equipment training and escalation with the employer."
             ]
           },
           "id": "baristas.profile.career-quick-answers-block.30",
           "source_refs": [
-            "onet",
+            "bls",
+            "cn-food-law",
             "onet"
           ],
           "type": "prose"
@@ -23927,12 +23942,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Work context shows 88% have a typical workweek of less than 40 hours, 52% have a regular schedule, and 40% an irregular schedule; 16% face time pressure every day (64% never); 23% deal with unpleasant or angry people every day (53% at least once a week); 24% are in conflict situations at least once a week. The BLS Occupational Outlook Handbook notes that this combined group's schedules often include early mornings and late nights and weekends and holidays, and that part-time work is common. When comparing positions, write the employment arrangement, shifts, tips, and overtime rules into the written terms."
+              "88% of O*NET respondents report a typical week of less than 40 hours; the broader handbook group often works part time; shop shifts can include early or late hours and weekends; check written terms."
             ]
           },
           "id": "baristas.profile.career-quick-answers-block.32",
           "source_refs": [
-            "onet",
+            "bls",
+            "nbs",
             "onet"
           ],
           "type": "prose"
@@ -24483,10 +24499,10 @@
                 "url": "https://www.onetonline.org/link/industry/35-3023.01"
               },
               {
-                "entity": "O*NET barista page 2025—2035 national employment trends (parent occupation 35-3023.00)",
+                "entity": "BLS Table 1.2: Fast food and counter workers (35-3023)",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 35-3023.01 National Wage Percentiles",
@@ -24513,10 +24529,10 @@
                 "url": "https://www.onetonline.org/link/hot_tech/35-3023.01"
               },
               {
-                "entity": "O*NET barista page 2025—2035 national employment trends (parent occupation 35-3023.00)",
+                "entity": "BLS Table 1.2: Fast food and counter workers (35-3023)",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "International Labour Organization, Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140)",
@@ -24543,16 +24559,16 @@
                 "url": "https://www.onetonline.org/link/details/35-3023.01"
               },
               {
-                "entity": "O*NET barista page 2025—2035 national employment trends (parent occupation 35-3023.00)",
+                "entity": "BLS Table 1.2: Fast food and counter workers (35-3023)",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "Food Safety Law of the People's Republic of China, 2025 amended version",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://sjfg.samr.gov.cn/law/file/pdf/3238901/1763351546670.pdf"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_6bff4ef87291497fa72949e1fc88efb5.html"
               },
               {
                 "entity": "International Labour Organization, Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140)",
@@ -24708,11 +24724,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: assistance uses such as order text, inventory summaries, menu descriptions, and record drafts can be evaluated, testing accuracy, data permissions, and human review first. Insufficient evidence: the sources reviewed this time do not give a barista AI adoption rate, productivity, or replacement result. Beverage preparation, abnormal temperature, and allergen handling still follow on-site procedures. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "A text tool can help draft order, inventory and exception records.;The three work samples score 25, 0 and 25.;The equally weighted estimate rounds to 17%.;It is not a measure of adoption, productivity or working time."
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.18",
           "source_refs": [
+            "source-fermatmind-ai-rubric",
             "onet",
             "ilo",
             "cn-food-law"
@@ -24852,11 +24869,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Used to explain the industry distribution of this occupation (same-family parent occupation definition); cannot be used to infer industry wages or employment size."
+              "These industry shares do not show industry wages or the types of shops employing baristas."
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.28",
           "source_refs": [
+            "r2-pay-2",
             "onet"
           ],
           "type": "prose"
@@ -24866,7 +24884,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 35-3023.01 Occupation Summary (Employment and Projections Fields)"
+              "BLS Table 1.2: Fast food and counter workers (35-3023)"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.29",
@@ -25224,7 +25242,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 35-3023.01 Occupation Summary (Employment and Projections Fields)"
+              "BLS Table 1.2: Fast food and counter workers (35-3023)"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.54",
@@ -25253,11 +25271,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The O*NET employment trends page states “Employment data for Fast Food and Counter Workers,” and under that same-family parent occupation definition gives about 3,855,900 employed in 2025 and about 4,079,100 in 2035 (2025—2035 +6%, faster than average (5% to 6%)), with about 827,400 job openings per year over the projection period."
+              "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas."
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.56",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -25354,11 +25373,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Task exposure, actual adoption, productivity, and employment are different measurement objects; the BLS data displayed by O*NET still give the same-family parent occupation 2025—2035 +6% (faster than average (5% to 6%)), and this page does not equate the degree of task automation with a change in the number of positions."
+              "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas."
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.63",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -25458,11 +25478,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The BLS data displayed by O*NET give, under the same-family parent occupation 2025—2035 definition, +6% (faster than average (5% to 6%)) and about 827,400 job openings per year over the projection period; this definition describes the occupational group and does not represent individual hiring probability."
+              "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas."
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.70",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -25516,11 +25537,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The sources reviewed this time do not provide a year in which positions disappear. The U.S. parent occupation 35-3023.00 (Fast Food and Counter Workers) has 3,855,900 in 2025 and 4,079,100 in 2035, growth of 6%, and 827,400 annual openings; none of these are barista subcategory statistics, and none are AI attributions. Task exposure, actual adoption, and employment numbers cannot be derived from one another."
+              "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas."
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.74",
           "source_refs": [
+            "ep",
             "ep-current",
             "ilo"
           ],
@@ -25985,7 +26007,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Determine whether equipment temperature is normal and whether adjustment or shutdown and reporting is needed."
+              "Record and report under shop procedures. Authorized staff decide whether to adjust, stop or restart equipment."
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.106",
@@ -25999,7 +26021,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Check freezer and refrigerator or heating equipment temperatures, confirm proper operation, and handle abnormalities."
+              "Record equipment temperatures under shop procedures and report abnormalities."
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.107",
@@ -26027,12 +26049,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Temperature records and prompts can assist, but abnormality judgment and shutdown reporting remain yours."
+              "Record tools can flag unusual temperatures. Baristas identify, document and report them. Authorized staff decide how to respond, including whether to shut down equipment."
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
+            "bc72-editor",
             "onet"
           ],
           "type": "prose"
@@ -26236,11 +26258,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2022 catalog of national vocational skill standards promulgated by the Ministry of Human Resources and Social Security lists barista 4-03-02-08. This catalog confirms the name and code; the complete version of that standard was not obtained this time, and the catalog cannot be used to infer education, level conditions, or full equivalence with U.S. 35-3023.01."
+              "Mainland China’s barista skill standard (4-03-02-08) has five grades, from Grade 5 to Grade 1. Check skill grades, employer requirements, task authorization and the health certification required by law for staff whose work involves direct contact with ready-to-eat food separately."
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
+            "cn-barista-standard",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "cn-coffee-code"
           ],
           "type": "prose"
@@ -26442,11 +26467,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Precise barista occupational wages are still insufficient evidence; the industry average serves only as background with the population noted."
+              "Two historical Mainland listings"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
+            "cn-barista-standard",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "cn-wages-current",
             "cn-coffee-code"
           ],
@@ -26457,11 +26485,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The industry average is not a precise occupational salary. Comparing an individual written offer requires verifying the city, employer, hours, shifts, and compensation conditions."
+              "The Shenzhen government’s October 20, 2026 historical bulletin lists 30 KCOFFEE barista roles across Shenzhen districts at CNY 3,000–5,000 per month in combined pay. Experience was preferred, training was offered to applicants without experience and a health certificate was required."
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
+            "cn-barista-standard",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "cn-wages-current",
             "cn-coffee-code"
           ],
@@ -26487,11 +26518,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2022 catalog of national vocational skill standards promulgated by the Ministry of Human Resources and Social Security lists barista 4-03-02-08. This catalog confirms the name and code; the complete version of that standard was not obtained this time, and the catalog cannot be used to infer education, level conditions, or full equivalence with U.S. 35-3023.01."
+              "Mainland China’s barista skill standard (4-03-02-08) has five grades, from Grade 5 to Grade 1. Check skill grades, employer requirements, task authorization and the health certification required by law for staff whose work involves direct contact with ready-to-eat food separately."
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
+            "cn-barista-standard",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "cn-coffee-code"
           ],
           "type": "prose"
@@ -26668,12 +26702,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The work environment and utensils and food must meet applicable hygiene and safety requirements (utensil cleaning and disinfection, food labels and shelf lives and temperature control, handling contaminated items and waste, cleaning workstations and floors, hot beverage and steam and equipment burn protection, and protection against prolonged standing and repetitive motions). O*NET work context shows 94% continuously or almost continuously stand, 47% continuously or almost continuously make repetitive motions, 100% are in contact with others continuously, 66% work very close to others, 43% are exposed to extreme heat or cold every day, 26% are exposed to minor burns, cuts, bites, or stings every day, and 19% are exposed to contaminants every day; this page does not constitute recipes, extraction parameters, or equipment operating instructions."
+              "Among O*NET respondents, 94% report standing continually or almost continually and 100% report constant contact with others.;Check cleaning procedures, equipment training and escalation with the employer."
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet",
+            "bls",
+            "cn-food-law",
             "onet"
           ],
           "type": "prose"
@@ -26698,7 +26733,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "According to the O*NET industry distribution (same-family parent occupation 35-3023.00 definition), this occupation is 87% in accommodation and food services (current page, U.S. definition); this category is highly related to coffee shops, but the Chinese industry unit average is listed separately as background and is not mixed with the U.S. industry share."
+              "The O*NET industry subtable titled Baristas lists accommodation and food services at 87% and other industries, including retail, at 13%. It does not state a year or attribute the figures to the parent occupation. These industry shares do not show industry wages or the types of shops employing baristas."
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.38",
@@ -26728,7 +26763,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "According to the O*NET industry distribution (same-family parent occupation definition), another 13% of this occupation falls under other industries (including retail trade) (current page, U.S. definition); the Chinese industry unit average is listed separately as background and is not mixed with the U.S. industry share."
+              "The O*NET industry subtable titled Baristas lists accommodation and food services at 87% and other industries, including retail, at 13%. It does not state a year or attribute the figures to the parent occupation. These industry shares do not show industry wages or the types of shops employing baristas."
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.40",
@@ -26802,12 +26837,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scenario comparisons require the employer type and employment arrangement to match; this page does not provide a precise monthly salary range for this occupation."
+              "Central University of Finance and Economics’ July 15, 2026 historical notice advertised one combined Western-food and barista role, with at least a year of coffee or beverage experience and a valid health certificate. It offered CNY 6,000–8,000 per month, negotiable, with meals and accommodation. The listing is marked completed."
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
+            "cn-barista-standard",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "onet"
           ],
           "type": "prose"
@@ -26846,12 +26883,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page does not provide a precise monthly salary range for baristas in mainland China; positions with the same or similar names vary considerably in employer type and employment arrangement, so shifts, tips, duties, store authorization, and responsibility scope must be included in the written terms when comparing."
+              "These jobs differ in duties and pay structure. Verify base pay, performance pay, working hours and shifts for each offer."
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
+            "cn-barista-standard",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "onet"
           ],
           "type": "prose"
@@ -26875,11 +26914,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national barista occupational monthly salary distribution was obtained; the official name and code 4-03-02-08 have been verified."
+              "This page did not obtain a national Mainland wage distribution for baristas."
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
+            "cn-barista-standard",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "cn-wages-current",
             "cn-coffee-code"
           ],
@@ -26904,11 +26946,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable city-level occupational income data were obtained, and this page does not show city rankings."
+              "The Shenzhen and Beijing listings are individual historical examples, not a comparison of city wages."
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
+            "cn-barista-standard",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "onet"
           ],
           "type": "prose"
@@ -26932,11 +26977,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no official or verifiable source supports a monthly salary range for baristas in other cities."
+              "This page does not have comparable quotes for the same work in other cities."
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
+            "cn-barista-standard",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "onet"
           ],
           "type": "prose"
@@ -26946,11 +26994,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2022 catalog of national vocational skill standards promulgated by the Ministry of Human Resources and Social Security lists barista 4-03-02-08. This catalog confirms the name and code; the complete version of that standard was not obtained this time, and the catalog cannot be used to infer education, level conditions, or full equivalence with U.S. 35-3023.01."
+              "Mainland China’s barista skill standard (4-03-02-08) has five grades, from Grade 5 to Grade 1. Check skill grades, employer requirements, task authorization and the health certification required by law for staff whose work involves direct contact with ready-to-eat food separately."
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
+            "cn-barista-standard",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "cn-coffee-code"
           ],
           "type": "prose"
@@ -26974,11 +27025,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Faster than average (5% to 6%)"
+              "Parent occupation projected growth: 5.8%"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
+            "cn-barista-standard",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "ep-current",
             "nbs"
           ],
@@ -27011,7 +27065,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 35-3023.01 National Wage Percentiles (the first line of the page states Wage data for Fast Food and Counter Workers)｜https://www.onetonline.org/link/localwages/35-3023.01; O*NET 35-3023.01 Occupation Summary (Employment and Projections Fields)｜https://www.onetonline.org/link/summary/35-3023.01; O*NET 35-3023.01 Industry Distribution｜https://www.onetonline.org/link/industry/35-3023.01"
+              "O*NET 35-3023.01 National Wage Percentiles (the first line of the page states Wage data for Fast Food and Counter Workers)｜https://www.onetonline.org/link/localwages/35-3023.01; BLS Table 1.2: Fast food and counter workers (35-3023)｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET 35-3023.01 Industry Distribution｜https://www.onetonline.org/link/industry/35-3023.01"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.8",
@@ -27186,11 +27240,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The number employed given by the O*NET employment trends page under the same-family parent occupation (the top of the page states Employment data for Fast Food and Counter Workers); it is not barista-only employment.; O*NET 35-3023.01 Occupation Summary (Employment and Projections Fields)｜https://www.onetonline.org/link/summary/35-3023.01"
+              "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas.; BLS Table 1.2: Fast food and counter workers (35-3023)｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -27201,11 +27256,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Faster than average (5% to 6%) (2025—2035, same-family parent occupation definition)"
+              "5.8% (2025–2035, parent occupation)"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -27216,11 +27272,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS data displayed by O*NET classify this under the same-family parent occupation 35-3023.00 definition as faster than average (5% to 6%); the combined group chapter of the BLS Occupational Outlook Handbook separately gives 2025—2035 +5%, and the two definitions differ and are both broader than barista-only and cannot be mixed.; O*NET 35-3023.01 Occupation Summary (Employment and Projections Fields)｜https://www.onetonline.org/link/summary/35-3023.01"
+              "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas.; BLS Table 1.2: Fast food and counter workers (35-3023)｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -27231,11 +27288,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "About 827,400 (2025—2035, same-family parent occupation definition, including growth and replacement)"
+              "About 827,400 annual openings (parent occupation)"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -27246,11 +27304,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This is the job openings definition over the projection period shown on the O*NET employment trends page, including growth and replacement (the combined BLS Occupational Outlook Handbook group separately gives about 1,078,500 annual openings); it is not the net increase in positions and does not constitute an individual hiring guarantee.; O*NET 35-3023.01 Occupation Summary (Employment and Projections Fields)｜https://www.onetonline.org/link/summary/35-3023.01"
+              "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas.; BLS Table 1.2: Fast food and counter workers (35-3023)｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -27261,13 +27320,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Boundary (three-layer definition): ① the occupational identity and tasks are under this occupation's O*NET 35-3023.01 definition; ② “the wage, employment, and industry data are explicitly labeled on the O*NET page as taken from the same-family parent occupation 35-3023.00 (Fast Food and Counter Workers)”; ③ the BLS Occupational Outlook Handbook chapter is the combined “Food and Beverage Serving and Related Workers” group. The three cannot substitute for one another and cannot be treated as barista-only data."
+              "O*NET 35-3023.01 describes barista tasks. U.S. pay and projections use parent occupation 35-3023. The BLS handbook also has a broader food service group."
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
+            "ep",
             "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27276,13 +27336,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Direct answer: the U.S. public data give the same-family parent occupation's hourly and annual wage percentiles and the 2025—2035 employment and projections; what can be verified are the percentiles, median, and projection figures, along with their respective definitions and data periods."
+              "O*NET 35-3023.01 describes barista tasks. U.S. pay and projections use parent occupation 35-3023. The BLS handbook also has a broader food service group."
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "ep-current",
-            "nbs"
+            "ep",
+            "onet",
+            "nbs",
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27378,11 +27440,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Faster than average (5% to 6%)"
+              "Parent occupation projected growth: 5.8%"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -27422,7 +27485,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The O*NET industry distribution lists this occupation at 87% in accommodation and food services (current page, also under the same-family parent occupation definition); the industry distribution does not provide industry wage levels."
+              "The O*NET industry subtable titled Baristas lists accommodation and food services at 87% and other industries, including retail, at 13%. It does not state a year or attribute the figures to the parent occupation. These industry shares do not show industry wages or the types of shops employing baristas."
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.36",
@@ -27465,7 +27528,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The O*NET industry distribution also assigns 13% to “other industries (including retail trade)” (current page) and does not separately publish occupational wages for those industries."
+              "The O*NET industry subtable titled Baristas lists accommodation and food services at 87% and other industries, including retail, at 13%. It does not state a year or attribute the figures to the parent occupation. These industry shares do not show industry wages or the types of shops employing baristas."
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.39",
@@ -27716,19 +27779,19 @@
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Ability Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Cashiers",
@@ -27809,10 +27872,10 @@
                 "url": "https://www.onetonline.org/link/industry/35-3023.01"
               },
               {
-                "entity": "O*NET 35-3023.01 Occupation Summary (Employment and Projections Fields)",
+                "entity": "BLS Table 1.2: Fast food and counter workers (35-3023)",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/35-3023.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -28830,11 +28893,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The 2022 catalog of national vocational skill standards promulgated by the Ministry of Human Resources and Social Security lists barista 4-03-02-08. This catalog confirms the name and code; the complete version of that standard was not obtained this time, and the catalog cannot be used to infer education, level conditions, or full equivalence with U.S. 35-3023.01."
+              "The Mainland barista standard (4-03-02-08) covers preparing coffee and related drinks and sets out Grade 5 through Grade 1. It does not determine an employer’s hiring rules or establish equivalence to the U.S. code."
             ]
           },
           "id": "baristas.fit.personality-fit-block.66",
           "source_refs": [
+            "cn-barista-standard",
             "cn-coffee-code"
           ],
           "type": "prose"
@@ -28886,7 +28950,7 @@
                 "entity": "Food Safety Law of the People's Republic of China, 2025 amended version",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://sjfg.samr.gov.cn/law/file/pdf/3238901/1763351546670.pdf"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_6bff4ef87291497fa72949e1fc88efb5.html"
               }
             ]
           },
@@ -28939,14 +29003,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Scope of evidence: the risk and boundary items are based on the official duties, tasks, and work context fields of O*NET 35-3023.01 (94% continuously or almost continuously stand, 67% continuously or almost continuously use hands to handle or feel objects and tools, 47% continuously or almost continuously make repetitive motions, 100% are in contact with others continuously, 66% work very close to others, 43% are exposed to extreme heat or cold every day, 26% are exposed to minor burns, cuts, bites, or stings every day, 19% are exposed to contaminants every day, 23% deal with unpleasant or angry people every day, 35% consider precision or accuracy extremely important) and the public BLS Occupational Outlook Handbook notes for this combined group on entry preparation and schedules (early mornings and late nights and weekends and holidays, part-time work common); this cannot be extrapolated into an individual practice risk prediction."
+              "Among O*NET respondents, 94% report standing continually or almost continually and 100% report constant contact with others.;Check cleaning procedures, equipment training and escalation with the employer."
             ]
           },
           "id": "baristas.risk.career-risk-cards.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "bls",
+            "cn-food-law",
             "onet"
           ],
           "type": "prose"
@@ -29402,35 +29465,35 @@
                 "Coffee position in a chain brand store",
                 "Under supervision, complete order taking and preparation and serving according to brand standard procedures, and complete utensil cleaning and disinfection and temperature checks and shift handover records according to procedure.",
                 "Editorial verification suggestion: verify output consistency and standard procedure execution, the degree of hygiene and temperature record compliance, and stability under peak customer flow with the target employer; job eligibility is determined by the employer's pre-job training and assessment.",
-                "Submit a service record containing a fictional menu and recipe card, order and output records, and equipment temperature check and cleaning and disinfection notes, without using real customer or transaction data.",
+                "For BC-72, submit both order records and one handoff.",
                 "A store position does not determine equipment procurement or food safety systems; matters involving equipment shutdown and refunds must be handled by responsible personnel according to procedure."
               ],
               [
                 "Preparation position in an independent coffee shop",
                 "Independently complete order taking and preparation and serving in a smaller team, while also handling equipment setup and cleaning and restocking.",
                 "Editorial verification suggestion: verify recipe understanding and output stability, basic equipment setup and maintenance, and customer communication and product introduction ability with the target employer.",
-                "Submit a fictional record containing recipe and output records, equipment setup and cleaning records, and customer feedback.",
+                "For BC-72, submit both order records and one handoff.",
                 "Equipment setup and shutdown must be carried out according to store authorization; this page does not provide work instructions."
               ],
               [
                 "Retail, hotel, and institutional beverage bar position",
                 "Provide beverages and light food according to establishment standards in a retail, hotel, or institutional setting, coordinating with other positions on reception and hygiene and inventory.",
                 "Editorial verification suggestion: verify service standards and cross-position collaboration, and hygiene and inventory and temperature recording ability with the target employer.",
-                "Submit a fictional plan containing service processes, temperature and cleaning records, and inventory and exception reporting.",
+                "For BC-72, submit both order records and one handoff.",
                 "Establishment standards and food safety management must be implemented according to the competent authority and employer rules; this page does not provide management instructions."
               ],
               [
                 "Roasting and procurement support position",
                 "Within the authorized scope, participate in coffee bean selection and roasting records and inventory management, and conduct cupping and output parameter recording.",
                 "Editorial verification suggestion: verify sensory description and recording, and parameter and batch management ability with the target employer.",
-                "Submit a fictional write-up containing the objective, parameter records, sensory descriptions, and batch comparisons.",
+                "For BC-72, submit both order records and one handoff.",
                 "Selection and recipe approval must be carried out according to store authorization; a support position does not equal recipe or procurement approval."
               ],
               [
                 "Shift and team coordination position",
                 "Arrange shifts and division of labor, train new hires, check hygiene and temperature and equipment condition, and handle customer complaints and exceptions and handover.",
                 "Editorial verification suggestion: verify scheduling and training and exception handling and record review ability with the target employer.",
-                "Submit a fictional plan containing shift and division of labor, temperature and cleaning checks, exception handling, and improvement suggestions.",
+                "For BC-72, submit both order records and one handoff.",
                 "Shutdown and refund decisions must be made according to store procedures and authorization; this page does not provide management instructions."
               ]
             ]
@@ -29452,16 +29515,16 @@
               {
                 "id": "education",
                 "values": [
-                  "U.S. side: O*NET lists 35-3023.01 (Baristas) as Job Zone 1–2 (SVP below 6.0); among the educational attainment the page publishes, 64% require less than a high school diploma, 29% require a high school diploma or equivalent, and 2% require a postsecondary certificate; the corresponding chapter of the BLS Occupational Outlook Handbook lists the typical entry-level education for this combined group as no formal educational credential, with no related work experience required and short-term on-the-job training, and notes that schedules often include early mornings and late nights and weekends and holidays, and that part-time work is common.",
-                  "The O*NET training page shows that no training programs for this occupation are registered nationwide; the occupation summary also provides an Apprenticeship.gov apprenticeship opportunities entry point (searched by this occupational code); the certification page lists 3 national certifications (Certified Restaurant Server, Certified Home Brewers, Certified Coffee Specialist).",
-                  "The 2022 catalog of national vocational skill standards promulgated by the Ministry of Human Resources and Social Security lists barista 4-03-02-08. This catalog confirms the name and code; the complete version of that standard was not obtained this time, and the catalog cannot be used to infer education, level conditions, or full equivalence with U.S. 35-3023.01. Article 44 of China's Food Safety Law requires food production and operation enterprises to carry out food safety knowledge training; Article 45 requires personnel engaged in work that comes into contact with directly edible food to undergo an annual health examination and obtain a health certificate before starting work. Specific equipment, refund, and management authority must be verified separately with the employer and cannot be inferred from education or occupational certificates."
+                  "O*NET asked respondents what education new hires need: 64% chose less than high school, 29% chose high school or equivalent, and 2% chose a postsecondary certificate. These are survey responses. For parent occupation 35-3023, BLS Table 1.2 lists no typical formal educational credential or related work experience, and short-term on-the-job training.",
+                  "The O*NET nationwide directory returned no programs for this occupation code. Check available training and workplace instruction separately with employers.",
+                  "The Mainland barista standard (4-03-02-08) covers preparing coffee and related drinks and sets out Grade 5 through Grade 1. It does not determine an employer’s hiring rules or establish equivalence to the U.S. code. Article 44 of China’s Food Safety Law requires food production and operation enterprises to train staff. Article 45 requires annual health checks for staff whose work involves direct contact with ready-to-eat food. They must obtain a health certificate before working in that role."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
                   "Beverage preparation and serving and utensil disinfection and equipment temperature checks must be carried out according to the employer's recipes and standard procedures and food safety procedures; matters involving equipment start-stop and abnormal temperature handling, food allergens and temperature control, and refund, complimentary-item, and complaint handling must be carried out within the scope of store authorization.",
-                  "On the U.S. side, O*NET lists 3 national certifications (which do not equal a hiring threshold or employer appointment); the BLS notes that this combined group usually has no formal education or experience requirement and that skills are learned on the job, so the boundaries of onboarding training and authorization especially need to be clarified at hire.",
+                  "On the U.S. side, O*NET lists 3 credential examples from named issuing bodies (which do not equal a hiring threshold or employer appointment); the BLS notes that this combined group usually has no formal education or experience requirement and that skills are learned on the job, so the boundaries of onboarding training and authorization especially need to be clarified at hire.",
                   "Customer information and payment information and consumption records may involve privacy and payment security; information protection requirements vary by jurisdiction and store and must be confirmed before starting, along with access scope and compliance obligations."
                 ]
               },
@@ -29470,7 +29533,7 @@
                 "values": [
                   "There are 19 official tasks (17 core and 2 supplemental), including cleaning or disinfecting work areas and utensils and equipment, collecting and processing customer payments, preparing or serving hot or cold beverages, taking orders and relaying them, cleaning service or seating areas, making or serving menu items, wrapping and labeling or dating food for sale, and checking freezer and refrigerator or heating equipment temperatures.",
                   "The work activities page lists 41 items with importance scores, the highest being identifying objects, actions, and events 61, performing for or working directly with the public 59, communicating with supervisors, peers, or subordinates 58, getting information 57, and resolving conflicts and negotiating with others 54.",
-                  "Work context: 94% continuously or almost continuously stand, 67% continuously or almost continuously use hands to handle or feel objects and tools, 47% continuously or almost continuously make repetitive motions, 100% are in contact with others continuously, 66% work very close to others, 43% are exposed to extreme heat or cold every day, and 88% have a typical workweek of less than 40 hours."
+                  "Among O*NET respondents, 94% report standing continually or almost continually and 100% report constant contact with others. Check cleaning procedures, equipment training and escalation with the employer."
                 ]
               },
               {
@@ -29485,14 +29548,16 @@
           },
           "id": "baristas.path.employer-evidence.1",
           "source_refs": [
-            "onet",
             "bls",
-            "nbs",
+            "ep",
             "nist",
+            "cn-barista-standard",
+            "cn-food-law",
+            "onet",
+            "nbs",
             "census",
             "hr",
             "cn-coffee-code",
-            "cn-food-law",
             "cn-pipl"
           ],
           "title": "Preparation evidence employers value",
@@ -29506,42 +29571,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional materials package: a menu and recipe card, an order and output record sheet, an equipment temperature check sheet, and a utensil cleaning and disinfection record sheet.",
-                  "All materials are fictional and contain no real recipes, real customer orders, transaction data, or internal standards documents.",
-                  "All materials and scenarios are fictional, and real recipes, real customer orders, transaction data, or store internal standards documents must not be used."
+                  "BC-72 fictional order. B1 a customer orders an oat drink and asks about contact with milk. The exercise requires a hold and handoff while the checks are open. The shift lead receives any handoff in this exercise.",
+                  "B2 the station record contains no shared-equipment check or supervisor confirmation.",
+                  "B3 the original has no ingredient label. In the variant only B3 changes: the ingredient label is identifiable, but the equipment check and supervisor confirmation remain missing."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "For a fictional order, write clearly the preparation and serving points, equipment temperature checks and utensil cleaning and disinfection handling, food label and shelf life verification, exceptions and handling and open items, and which steps require review and which require authorization.",
-                  "Complete within 60—90 minutes; consulting public general food safety and equipment materials is allowed, but real recipes must not be used and the safety interlocks of real equipment must not be operated.",
-                  "In the record, write orders and output, equipment temperature checks, utensil cleaning and disinfection handling, food label and shelf life verification, and exceptions and the retrospective note separately, and mark the parts that need review."
+                  "Separate the order from the request to check contact with milk.",
+                  "For each version, record verified evidence, open checks and the receiver.",
+                  "Submit both order records and a one-page handoff citing B1–B3."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First confirm the order and the condition of equipment and materials and utensils, then prepare and clean and record according to standard procedures, and finally write the conclusions and open items.",
-                  "Write orders and output, temperature checks, utensil cleaning and disinfection handling, label and shelf life verification, and exceptions and the retrospective note separately, and mark anything uncertain as requiring review.",
-                  "After completion, ask an experienced person to review the recipe execution and the serving and temperature and cleaning conclusions, and retain the reasons for revisions."
+                  "Complete both versions independently.",
+                  "Compare only the change in B3.",
+                  "Open “BC-72 reference (open after submitting)” after submitting."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "The exercise does not constitute recipes, extraction parameters, or equipment operating instructions and cannot replace the applicable jurisdiction and store authorization requirements.",
-                  "Do not touch the heating and steam components and pressure systems of real equipment during the exercise, and do not use real customer orders and transaction data; work involving equipment shutdown, food safety, and allergen control must be handled by authorized personnel according to procedure.",
-                  "The exercise does not replace the applicable jurisdiction and store authorization requirements and does not constitute any recipes, extraction parameters, or equipment operating instructions; the safety interlocks of real equipment and food must not be touched during the exercise."
+                  "Use fictional paper records only.",
+                  "Do not operate equipment, prepare drinks or taste them.",
+                  "Do not assess allergies or promise that a drink is safe."
                 ]
               }
             ]
           },
           "id": "baristas.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "bc72-editor"
           ],
-          "title": "Low-risk practice materials and tasks",
+          "title": "BC-72: Check two order records and write one handoff",
           "type": "cards"
         },
         {
@@ -29552,37 +29617,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Job requirements checklist: education, occupational training, industry certifications, store pre-job training, equipment operation and shutdown authorization, cashiering and refund authorization, and food safety and hygiene and customer information protection training.",
-                  "Note the source, data period, and jurisdiction for each item; leave items that cannot be verified blank and mark them as insufficient evidence, and do not fill them in with speculation.",
-                  "List “education,” “occupational training,” “industry certification,” “store task authorization,” and “food safety and information protection training” separately to avoid conflating them; also note that U.S. wages and employment are under the same-family parent occupation 35-3023.00 definition."
+                  "Write both order records.",
+                  "Cite B1–B3.",
+                  "Mark the open checks."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Ask an experienced person to review your output records, focusing on whether recipe execution and output consistency, equipment temperature checks, utensil cleaning and disinfection handling, and food label and shelf life verification and exception handling are written clearly item by item.",
-                  "Keep the review comments and the reasons for revisions together as evidence of whether you can accept review."
+                  "Write a one-page handoff.",
+                  "Name the receiver."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "One-page retrospective: write this order and output, your own judgments, the parts that were corrected, and the parts that are still uncertain.",
-                  "Hand the retrospective to peers and supervisors for review, and retain the review comments and the reasons for revisions."
+                  "Compare B3 only.",
+                  "Record the evidence and open checks for each version."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool use note: if ordering, inventory, scheduling, or record tools are used, note the tool name and version, the inputs and basis, and the reasons for manual edits.",
-                  "Handling customer information and payment information requires prior authorization, and the access scope, retention period, and destruction arrangements must be recorded."
+                  "Check after submitting.",
+                  "Do not handle equipment."
                 ]
               }
             ]
           },
           "id": "baristas.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "bc72-editor"
           ],
           "title": "Preparation materials that can be submitted",
           "type": "cards"
@@ -29646,57 +29711,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Occupational and definition reading: read O*NET 35-3023.01 and the public BLS Occupational Outlook Handbook materials for this combined group, and write clearly the differences between the occupational identity, the same-family parent occupation 35-3023.00 definition, and the combined group definition.",
-                  "Output: a one-page definition and process comparison table, noting the source of each item."
+                  "Read B1–B3.",
+                  "Evidence index"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Recipe and standard procedure exercise: for a fictional menu and recipe card, write clearly the portions and sequence and serving points.",
-                  "Output: a recipe execution and output record."
+                  "Separate order and check.",
+                  "Request comparison"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Equipment temperature check exercise: for a fictional equipment list, write clearly the check items and frequency and abnormality judgment and reporting conditions.",
-                  "Output: a temperature check and exception handling record."
+                  "Record the open B2 checks.",
+                  "Open items"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Food label and shelf life exercise: for fictional food for sale, write clearly the wrapping and labeling and first-in-first-out and isolation handling points.",
-                  "Output: a label and shelf life verification record."
+                  "Compare both B3 records.",
+                  "Evidence change"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Cleaning and disinfection exercise: for a fictional utensil list, write clearly the cleaning and disinfection process, handling of contaminated items and waste, and recording points.",
-                  "Output: a cleaning and disinfection record."
+                  "Draft the handoff and name the receiver.",
+                  "Draft handoff"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Review-style self-questioning: ask an experienced person to challenge your recipe execution and temperature and disinfection conclusions, and record what was corrected.",
-                  "Output: review comments and a revision explanation."
+                  "Submit both order records and one handoff first.",
+                  "Both versions and handoff"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Final retrospective: decide whether to continue, pause, or change direction, and write clearly the basis and the parts that are still uncertain.",
-                  "Output: a one-page decision write-up with an evidence list attached."
+                  "Open “BC-72 reference (open after submitting)”.",
+                  "Check both versions"
                 ]
               }
             ]
           },
           "id": "baristas.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "bc72-editor"
           ],
           "title": "Seven-day experience output",
           "type": "timeline"
@@ -29706,18 +29771,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: you completed the seven-day exercise and found that you can sustain investment in recipe execution and serving and cleaning and records.",
-              "Continue: you can accept prolonged standing and peak customer flow and early morning and late night and weekend scheduling and part-time hours, and you are willing to check temperatures and disinfect according to procedure and accept review.",
-              "Pause: you only want to produce by feel and are unwilling to verify according to recipes and temperature and time.",
-              "Pause: you treat “it looks about right” as qualified output, or you skip procedures and authorization on temperature checks and utensil disinfection and label verification.",
-              "Change direction: if you prefer a broader scope of order taking and counter and serving work, compare the food counter worker direction.",
-              "Change direction: if you prefer tableside service and serving, compare the waiter and waitress direction.",
-              "Insufficient information: if you have no supervised beverage preparation or store service experience at all, gain those two first before deciding."
+              "Continue if you can repeat the customer order accurately.",
+              "Continue if you can document open checks when busy.",
+              "Pause if you often overlook open checks.",
+              "Pause if you tend to skip handoffs.",
+              "Compare a chain store role.",
+              "Compare a combined campus food service role.",
+              "Verify real training separately."
             ]
           },
           "id": "baristas.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "bc72-editor"
           ],
           "title": "Judgment after seven days",
           "type": "list"
@@ -29748,8 +29813,8 @@
               [
                 "High school diploma or equivalent",
                 "People who hope to enter this occupation",
-                "Not required for most positions: O*NET64% require less than high school; verify the education requirement of the specific target position separately.",
-                "Among the educational attainment published on the O*NET page, 64% require less than a high school diploma, 29% require a high school diploma or equivalent, and 2% require a postsecondary certificate; the BLS notes that this combined group usually has no formal education requirement.",
+                "Verify the employer’s written requirements.",
+                "O*NET asked respondents what education new hires need: 64% chose less than high school, 29% chose high school or equivalent, and 2% chose a postsecondary certificate. These are survey responses. For parent occupation 35-3023, BLS Table 1.2 lists no typical formal educational credential or related work experience, and short-term on-the-job training.",
                 "Complete according to the program length.",
                 "According to the program duration.",
                 "Education does not equal equipment operation or food safety determinations or refund authority."
@@ -29776,7 +29841,7 @@
                 "Apprenticeship opportunities (Apprenticeship.gov entry point)",
                 "People who want to learn through an on-the-job route",
                 "Provides an on-the-job learning and skill accumulation pathway.",
-                "Not a universal threshold; the O*NET training page shows that no training programs for this occupation are registered nationwide, and the occupation summary provides an apprenticeship opportunities entry point (searched by this occupational code).",
+                "The O*NET nationwide directory returned no programs for this occupation code. Check available training and workplace instruction separately with employers.",
                 "According to employer and apprenticeship program arrangements.",
                 "According to the apprenticeship program cycle.",
                 "Apprenticeship experience does not equal equipment operation or food safety determination authorization."
@@ -29803,11 +29868,13 @@
           },
           "id": "baristas.path.credential-decision.1",
           "source_refs": [
+            "bls",
+            "ep",
+            "nist",
+            "cn-food-law",
             "onet",
             "nbs",
-            "nist",
-            "census",
-            "cn-food-law"
+            "census"
           ],
           "title": "Qualification and licensing decisions",
           "type": "table"
@@ -29818,19 +29885,22 @@
           "data": {
             "paragraphs": [
               "Qualification boundary: education, occupational training, industry certification, employer hiring and store task authorization, and equipment start-stop and food safety determination and refund and complimentary-item authority are different statuses, and none can be automatically inferred from another; venue hygiene and utensil disinfection and food temperature control are subject to the applicable jurisdiction and the competent authority and the employer.",
-              "U.S. side: O*NET lists 35-3023.01 (Baristas) as Job Zone 1–2 (SVP below 6.0); the educational composition published on the page is less than a high school diploma 64%, high school diploma or equivalent 29%, and postsecondary certificate 2%; the corresponding chapter of the BLS Occupational Outlook Handbook lists the typical entry-level education for this combined group as no formal educational credential, with no related work experience required and short-term on-the-job training; the O*NET training page shows that no training programs for this occupation are registered nationwide, and the certification page lists 3 national certifications (including coffee and food service fields). The wage, employment, and industry data for this occupation are labeled on the O*NET page as taken from the same-family parent occupation 35-3023.00 (Fast Food and Counter Workers), and the BLS chapter is also the combined “Food and Beverage Serving and Related Workers” group.",
-              "The 2022 catalog of national vocational skill standards promulgated by the Ministry of Human Resources and Social Security lists barista 4-03-02-08. This catalog confirms the name and code; the complete version of that standard was not obtained this time, and the catalog cannot be used to infer education, level conditions, or full equivalence with U.S. 35-3023.01. Article 44 of China's Food Safety Law requires food production and operation enterprises to carry out food safety knowledge training; Article 45 requires personnel engaged in work that comes into contact with directly edible food to undergo an annual health examination and obtain a health certificate before starting work. Specific equipment, refund, and management authority must be verified separately with the employer and cannot be inferred from education or occupational certificates.",
+              "O*NET asked respondents what education new hires need: 64% chose less than high school, 29% chose high school or equivalent, and 2% chose a postsecondary certificate. These are survey responses. For parent occupation 35-3023, BLS Table 1.2 lists no typical formal educational credential or related work experience, and short-term on-the-job training. The O*NET nationwide directory returned no programs for this occupation code. Check available training and workplace instruction separately with employers.",
+              "The Mainland barista standard (4-03-02-08) covers preparing coffee and related drinks and sets out Grade 5 through Grade 1. It does not determine an employer’s hiring rules or establish equivalence to the U.S. code. Article 44 of China’s Food Safety Law requires food production and operation enterprises to train staff. Article 45 requires annual health checks for staff whose work involves direct contact with ready-to-eat food. They must obtain a health certificate before working in that role.",
               "Operational suggestion: before starting, set out “education / occupational training / industry certification / store pre-job training / equipment operation and shutdown authorization / cashiering and refund authorization / food safety and hygiene training” in one table, writing the source, data period, and jurisdiction for each item; leave items that cannot be verified blank and mark them as insufficient evidence, and do not fill them in with speculation."
             ]
           },
           "id": "baristas.path.credential-boundary.1",
           "source_refs": [
+            "bls",
+            "ep",
+            "nist",
+            "cn-barista-standard",
+            "cn-food-law",
             "onet",
             "nbs",
-            "nist",
             "census",
-            "cn-coffee-code",
-            "cn-food-law"
+            "cn-coffee-code"
           ],
           "title": "Qualification boundaries",
           "type": "notice"
@@ -29840,18 +29910,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Job posting sample gap: this section does not cite specific employer postings. The following is an editorial verification checklist, and the position directions are task compilations, not evidence of posting coverage or actual open positions.",
+              "The Shenzhen government’s October 20, 2026 historical bulletin lists 30 KCOFFEE barista roles across Shenzhen districts at CNY 3,000–5,000 per month in combined pay. Experience was preferred, training was offered to applicants without experience and a health certificate was required. Central University of Finance and Economics’ July 15, 2026 historical notice advertised one combined Western-food and barista role, with at least a year of coffee or beverage experience and a valid health certificate. It offered CNY 6,000–8,000 per month, negotiable, with meals and accommodation. The listing is marked completed.",
               "Checklist: whether the position is in a chain brand store, independent coffee shop, or retail, hotel, and institutional beverage bar; whether the employment arrangement is full-time or part-time; whether equipment operation and shutdown and refund authorization is required; shifts (early mornings and late nights and weekends and holidays) and tip and overtime arrangements; and the food safety and hygiene and customer information protection training requirements."
             ]
           },
           "id": "baristas.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "onet"
           ],
-          "title": "Job posting verification",
+          "title": "Two historical Mainland listings",
           "type": "notice"
         },
         {
@@ -29881,7 +29950,7 @@
                 "entity": "Food Safety Law of the People's Republic of China, 2025 amended version",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://sjfg.samr.gov.cn/law/file/pdf/3238901/1763351546670.pdf"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_6bff4ef87291497fa72949e1fc88efb5.html"
               }
             ]
           },
@@ -30030,12 +30099,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Direct answer: O*NET lists 35-3023.01 (Baristas) as Job Zone 1–2 (SVP below 6.0); among the educational attainment the page publishes, 64% require less than a high school diploma, 29% require a high school diploma or equivalent, and 2% require a postsecondary certificate; the corresponding chapter of the BLS Occupational Outlook Handbook lists the typical entry-level education for this combined group as no formal educational credential, with no related work experience required and short-term on-the-job training, and notes that schedules often include early mornings and late nights and weekends and holidays, and that part-time work is common. The O*NET training page shows that no training programs for this occupation are registered nationwide, and the occupation summary also provides an Apprenticeship.gov apprenticeship opportunities entry point (searched by this occupational code). On the mainland China side, employer-provided pre-job training and on-the-job mentoring predominate, and the applicable food safety and public place hygiene requirements must be met."
+              "For parent occupation 35-3023, BLS Table 1.2 lists no typical formal educational credential or related work experience, and short-term on-the-job training. The two Mainland listings set different experience and training expectations. Verify arrangements with the employer."
             ]
           },
           "id": "baristas.path.career-path-block.20",
           "source_refs": [
-            "onet",
+            "ep",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "onet"
           ],
           "type": "prose"
@@ -30045,13 +30116,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Qualification boundary: education, occupational training, industry certifications (such as Certified Coffee Specialist), employer hiring and store task authorization, and equipment start-stop and food safety determination and refund and complimentary-item authority are different statuses, and none can be automatically inferred from another; the O*NET certification page lists 3 national certifications, and the training page shows that no training programs for this occupation are registered nationwide. It should also be noted: the wage and employment data on this page are labeled on the source page as under the same-family parent occupation 35-3023.00 definition, not barista-only data."
+              "Check schooling, onboarding, food safety requirements and store authorization separately. The training directory helps locate programs."
             ]
           },
           "id": "baristas.path.career-path-block.21",
           "source_refs": [
-            "onet",
-            "onet",
+            "nist",
+            "cn-food-law",
             "onet"
           ],
           "type": "prose"
@@ -30061,15 +30132,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The U.S. task definition is 35-3023.01, and specific employer personnel and food safety requirements must be verified separately; the BLS combined group entry background is not an individual position condition. The 2022 catalog of national vocational skill standards promulgated by the Ministry of Human Resources and Social Security lists barista 4-03-02-08. This catalog confirms the name and code; the complete version of that standard was not obtained this time, and the catalog cannot be used to infer education, level conditions, or full equivalence with U.S. 35-3023.01. Article 44 of China's Food Safety Law requires food production and operation enterprises to carry out food safety knowledge training; Article 45 requires personnel engaged in work that comes into contact with directly edible food to undergo an annual health examination and obtain a health certificate before starting work. Specific equipment, refund, and management authority must be verified separately with the employer and cannot be inferred from education or occupational certificates."
+              "The Mainland barista standard (4-03-02-08) covers preparing coffee and related drinks and sets out Grade 5 through Grade 1. It does not determine an employer’s hiring rules or establish equivalence to the U.S. code. Article 44 of China’s Food Safety Law requires food production and operation enterprises to train staff. Article 45 requires annual health checks for staff whose work involves direct contact with ready-to-eat food. They must obtain a health certificate before working in that role."
             ]
           },
           "id": "baristas.path.career-path-block.22",
           "source_refs": [
+            "cn-barista-standard",
+            "cn-food-law",
             "onet",
             "nbs",
-            "cn-coffee-code",
-            "cn-food-law"
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -30107,7 +30179,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Used to explain the educational composition and experience and training arrangements of this occupation."
+              "Source for what respondents said about education needed by new hires."
             ]
           },
           "id": "baristas.path.career-path-block.25",
@@ -30559,12 +30631,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Responsible for equipment status judgments and output parameters and shutdown recommendations."
+              "Document equipment status and output issues and report them. Authorized staff make response or shutdown decisions."
             ]
           },
           "id": "baristas.path.career-path-block.56",
           "source_refs": [
-            "onet",
+            "cn-food-law",
             "onet"
           ],
           "type": "prose"
@@ -31047,16 +31119,16 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET barista page 2025—2035 national employment trends (parent occupation 35-3023.00)",
+                "entity": "BLS Table 1.2: Fast food and counter workers (35-3023)",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET barista page 2025—2035 national employment trends (parent occupation 35-3023.00)",
+                "entity": "BLS Table 1.2: Fast food and counter workers (35-3023)",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "National Bureau of Statistics, Average Annual Wages of Urban Unit Employees in 2025",
@@ -31134,11 +31206,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Direct answer: the O*NET employment trends page, under the same-family parent occupation 35-3023.00 (Fast Food and Counter Workers, the top of the page states Employment data for Fast Food and Counter Workers), gives about 3,855,900 employed in 2025 and about 4,079,100 in 2035 (+6%, faster than average (5% to 6%)), with about 827,400 job openings per year over the projection period (including growth and replacement). The combined group chapter of the BLS Occupational Outlook Handbook separately gives 5,143,000 employed in 2025, 2025—2035 +5%, and about 1,078,500 annual openings; the two definitions differ and are both broader than barista-only and cannot be mixed."
+              "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas."
             ]
           },
           "id": "baristas.market-signals.market-signal-card.8",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -31178,11 +31251,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The number employed given by the O*NET employment trends page under the same-family parent occupation; it is not barista-only employment."
+              "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas."
             ]
           },
           "id": "baristas.market-signals.market-signal-card.11",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -31221,11 +31295,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "parent_occupation_proxy"
+              "U.S. parent occupation: fast food and counter workers (35-3023)"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.14",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31279,11 +31354,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. parent occupation 35-3023.00 (Fast Food and Counter Workers): 3,855,900 in 2025, 4,079,100 in 2035, growth of 6%, and 827,400 annual openings; none of these are barista subcategory statistics, and none are AI attributions. The OOH combined group shows 2025—2035 growth of 5% and 1,078,500 annual openings, which is another definition and cannot be mixed, nor can it predict individual hiring or store profit."
+              "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas."
             ]
           },
           "id": "baristas.market-signals.market-signal-card.18",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -31294,11 +31370,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The projections cannot be merged and interpreted as an individual hiring guarantee, nor can they be used to derive a precise growth rate for this occupation."
+              "Annual openings include growth and replacements and are separate from the net increase."
             ]
           },
           "id": "baristas.market-signals.market-signal-card.19",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31322,11 +31399,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "parent_occupation_proxy"
+              "U.S. parent occupation: fast food and counter workers (35-3023)"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.21",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31336,11 +31414,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Faster than average (about 827,400 annual job openings, same-family parent occupation definition)"
+              "5.8% growth and about 827,400 annual openings"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.22",
           "source_refs": [
+            "ep",
             "ep-current",
             "nbs"
           ],
@@ -31379,11 +31458,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The 2022 catalog of national vocational skill standards promulgated by the Ministry of Human Resources and Social Security lists barista 4-03-02-08. This catalog confirms the name and code; the complete version of that standard was not obtained this time, and the catalog cannot be used to infer education, level conditions, or full equivalence with U.S. 35-3023.01. Insufficient evidence: the national occupational wage distribution has still not been obtained. The 2025 accommodation and catering industry unit average serves only as industry background, not a demand forecast or an individual monthly salary."
+              "Mainland China’s barista skill standard (4-03-02-08) has five grades, from Grade 5 to Grade 1. Check skill grades, employer requirements, task authorization and the health certification required by law for staff whose work involves direct contact with ready-to-eat food separately."
             ]
           },
           "id": "baristas.market-signals.market-signal-card.25",
           "source_refs": [
+            "cn-barista-standard",
             "cn-coffee-code",
             "cn-wages-current"
           ],
@@ -31872,10 +31952,13 @@
                 "question_key": "career.faq.baristas.2"
               },
               {
-                "answer": "Look at reviewable output: whether you can produce consistent output according to recipes and standard procedures and adjust to feedback, whether you can verify equipment temperatures and food labels and disinfect according to procedure, and whether you can stop and report when equipment is abnormal or food contamination is suspected or the situation exceeds authorization. The interest code RSC and the knowledge fields only indicate a similar direction and cannot replace this practical evidence.",
+                "answer": "Try BC-72 in section 09 to practice checking ingredients and handing over an order on paper.",
                 "id": "baristas.faq.3",
                 "question": "How do I judge whether I am suited to being a barista?",
-                "question_key": "career.faq.baristas.3"
+                "question_key": "career.faq.baristas.3",
+                "source_refs": [
+                  "bc72-editor"
+                ]
               },
               {
                 "answer": "AI and automation can change order taking and order relaying, inventory and supply ordering summaries, scheduling and peak forecasting references, and preliminary classification of equipment prompts; but recipe and output quality determinations, judgment and handling of abnormal equipment temperature, food allergens and temperature control, and refund, complimentary-item, and complaint handling decisions are still borne by you and authorized personnel in accordance with the applicable jurisdiction and employer systems. The degree of task automation does not equal a change in the number of positions.",
@@ -31890,34 +31973,57 @@
                 "question_key": "career.faq.baristas.5"
               },
               {
-                "answer": "Verify under six categories: education; occupational training; industry certifications (such as Certified Coffee Specialist and 3 national certifications); store pre-job training; equipment operation and shutdown and refund authorization; and food safety and venue hygiene training. On the U.S. side, the O*NET educational composition is less than a high school diploma 64%, high school diploma or equivalent 29%, and postsecondary certificate 2%, and the BLS notes that this combined group usually has no formal education or experience requirement and that skills are learned on the job. None of these can be automatically inferred from another.",
+                "answer": "For parent occupation 35-3023, BLS Table 1.2 lists no typical formal educational credential or related work experience, and short-term on-the-job training. The Mainland barista standard (4-03-02-08) covers preparing coffee and related drinks and sets out Grade 5 through Grade 1. It does not determine an employer’s hiring rules or establish equivalence to the U.S. code. Article 44 of China’s Food Safety Law requires food production and operation enterprises to train staff. Article 45 requires annual health checks for staff whose work involves direct contact with ready-to-eat food. They must obtain a health certificate before working in that role.",
                 "id": "baristas.faq.6",
                 "question": "Which qualifications must be verified to enter this occupation?",
-                "question_key": "career.faq.baristas.6"
+                "question_key": "career.faq.baristas.6",
+                "source_refs": [
+                  "ep",
+                  "cn-barista-standard",
+                  "cn-food-law"
+                ]
               },
               {
-                "answer": "Work context shows 94% continuously or almost continuously stand, 67% continuously or almost continuously use hands to handle or feel objects and tools, 47% continuously or almost continuously make repetitive motions, 36% continuously or almost continuously walk or run, 43% are exposed to extreme heat or cold every day, 44% are exposed to noise every day, and 26% are exposed to minor burns, cuts, bites, or stings every day; prolonged standing and repetitive motions require a certain level of physical stamina and proper workstation and rotation and burn protection arrangements.",
+                "answer": "Among O*NET respondents, 94% report standing continually or almost continually and 100% report constant contact with others.;Check cleaning procedures, equipment training and escalation with the employer.",
                 "id": "baristas.faq.7",
                 "question": "Are the physical demands of this job high?",
-                "question_key": "career.faq.baristas.7"
+                "question_key": "career.faq.baristas.7",
+                "source_refs": [
+                  "bls"
+                ]
               },
               {
-                "answer": "Work context shows 88% have a typical workweek of less than 40 hours, 52% have a regular schedule, and 40% an irregular schedule; the BLS notes that this combined group's schedules often include early mornings and late nights and weekends and holidays, and that part-time work is common. When comparing positions, write the employment arrangement (full-time or part-time), shifts, tips, and overtime rules into the written terms.",
+                "answer": "88% of O*NET respondents report a typical workweek of under 40 hours. Check the employer’s written schedule and part-time terms.;Check cleaning procedures, equipment training and escalation with the employer.",
                 "id": "baristas.faq.8",
                 "question": "What are the working hours and the way of working like?",
-                "question_key": "career.faq.baristas.8"
+                "question_key": "career.faq.baristas.8",
+                "source_refs": [
+                  "bls"
+                ]
               },
               {
-                "answer": "The O*NET employment trends page, under the same-family parent occupation 35-3023.00 definition, gives about 3,796,000 employed in 2024 and about 4,029,200 in 2034 (+6%, faster than average (5% to 6%)), with about 904,300 job openings per year over the projection period; the combined group chapter of the BLS Occupational Outlook Handbook separately gives 2025—2035 +5% and about 1,078,500 annual openings. For transitions, food counter workers (the same-family parent occupation), waiters and waitresses, bartenders, cashiers, food preparation workers, and hosts and hostesses can be compared, but all require additional training, licensing, and authorization.",
+                "answer": "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas.",
                 "id": "baristas.faq.9",
                 "question": "How do I judge career prospects and transitions?",
-                "question_key": "career.faq.baristas.9"
+                "question_key": "career.faq.baristas.9",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
                 "answer": "The U.S. wage percentiles are the 2025 OEWS definition for the same-family parent occupation 35-3023.00 (Fast Food and Counter Workers), and the first line of the page explicitly states that the wage data belong to the parent occupation; for mainland China no precise national occupational wage distribution for baristas was obtained, and this page does not publish mainland China occupational wage figures or replace them with industry wage statistics. The occupational scope, statistical systems, data periods, and compensation structures (tips and part-time work) differ on both sides, so USD cannot be converted into RMB, and quotes that lack sample and position scope should not be trusted.",
                 "id": "baristas.faq.10",
                 "question": "Why can't U.S. wages and mainland China wages be converted into each other?",
                 "question_key": "career.faq.baristas.10"
+              },
+              {
+                "answer": "The original lacks the ingredient label, shared-equipment check and supervisor confirmation. Keep the order on hold and hand it to the shift lead. The variant adds only the label in B3. The equipment check and supervisor confirmation are still missing. Neither version permits preparation, handoff to the customer or a promise of safety. Did you record the request, evidence change, open checks and receiver?",
+                "id": "baristas.faq.11",
+                "question": "BC-72 reference (open after submitting)",
+                "question_key": "career.faq.baristas.q11",
+                "source_refs": [
+                  "bc72-editor"
+                ]
               }
             ]
           },
@@ -31938,11 +32044,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The nine sections this round verify O*NET barista tasks and context, parent occupation wages and 2025—2035 employment, BLS statistical methods and the combined group OOH, the China barista standard catalog and industry wages, food safety and personal information regulations, FDA allergen notes, and the ILO task exposure study. Editorial candidate uses and facts are labeled separately."
+              "FermatMind Editorial"
             ]
           },
           "id": "baristas.sources.source-card.1",
           "source_refs": [
+            "ep",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "onet",
             "bls",
             "onet-wages",
@@ -31963,12 +32072,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Main original texts: O*NET35-3023.01 summary, detailed tasks, national wages/trends, industry, hot technologies, training and certification; BLSMay2025OEWS methods and the OOH; ILO Working Paper 140; item 6 of the 2022 MOHRSS standard catalog; National Bureau of Statistics 2025 unit wages; the Food Safety Law and the Personal Information Protection Law; the FDA food allergy guidance."
+              "O*NET 35-3023.01 describes barista tasks. U.S. pay and projections use parent occupation 35-3023. The BLS handbook also has a broader food service group."
             ]
           },
           "id": "baristas.sources.source-card.2",
           "source_refs": [
+            "ep",
             "onet",
+            "nbs",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "bls",
             "onet-wages",
             "ep-current",
@@ -31977,7 +32090,6 @@
             "nist",
             "census",
             "oews-methods",
-            "nbs",
             "ilo",
             "cn-coffee-code",
             "cn-wages-current",
@@ -31992,11 +32104,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Verified and read this round on 2026-10-08: the O*NET page updated in 2026, wages May2025, employment 2025—2035; the hot software data are 2025 U.S. postings, and the industry page does not list a separate data year. The China standard catalog 2022, unit wages 2025; the Food Safety Law 2025 amended version effective 2025-12-01, and the ILO paper 2025. Access dates and data periods are read separately."
+              "U.S. wages are from May 2025 and projections run from 2025 to 2035. The two Mainland listings are historical notices from 2026."
             ]
           },
           "id": "baristas.sources.source-card.3",
           "source_refs": [
+            "ep",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "onet",
             "onet-wages",
             "ep-current",
@@ -32014,11 +32129,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The barista tasks are U.S. 35-3023.01; the wage, employment, and industry pages adopt the parent occupation 35-3023.00, and the OOH combined group is one layer broader. The China name and code have been verified, while the complete new occupational standard and precise wages are still insufficient; the accommodation and catering industry average is not occupational statistics. Laws and guidance retain their jurisdictions, the certification catalog is not a threshold, and task exposure is not an adoption or replacement result."
+              "The Mainland listings use their own pay definitions. BC-72 is a fictional paper exercise."
             ]
           },
           "id": "baristas.sources.source-card.4",
           "source_refs": [
+            "ep",
+            "sz-kcoffee-2026",
+            "cufe-cafe-2026",
             "onet",
             "onet-wages",
             "ep-current",
@@ -32066,13 +32184,13 @@
                 "entity": "Enneagram Personality Test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the barista career page",
@@ -32109,7 +32227,7 @@
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
-                "limitation": "U.S. occupational classification; does not directly prove China job sequences or authorization; the page explicitly labels the wage/employment/industry data as taken from the same-family parent occupation 35-3023.00.",
+                "limitation": "O*NET 35-3023.01 describes barista tasks. U.S. pay and projections use parent occupation 35-3023. The BLS handbook also has a broader food service group.",
                 "market": "United States",
                 "name": "O*NET 35-3023.01 Occupation Summary (Baristas)",
                 "period": "Page updated 2026; accessed 2026-09-15",
@@ -32136,18 +32254,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official outlook",
-                  "2024—2034; accessed 2026-09-15"
+                  "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas.",
+                  "2025 baseline; projections through 2035."
                 ],
                 "evidence_type": "official outlook",
                 "id": "ep",
-                "limitation": "The employment and projections fields are labeled on the page as taken from the same-family parent occupation 35-3023.00 and cannot be treated as a barista-only definition or extrapolated to a broader occupational group.",
+                "limitation": "O*NET 35-3023.01 describes barista tasks. U.S. pay and projections use parent occupation 35-3023. The BLS handbook also has a broader food service group.",
                 "market": "United States",
-                "name": "O*NET 35-3023.01 Occupation Summary (Employment and Projections Fields)",
-                "period": "2024—2034; accessed 2026-09-15",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/35-3023.01"
+                "name": "BLS Table 1.2: Fast food and counter workers (35-3023)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32205,13 +32323,13 @@
                 ],
                 "evidence_type": "occupation profile",
                 "id": "privacy",
-                "limitation": "The educational composition is respondent percentages (less than a high school diploma 64%, high school diploma or equivalent 29%, postsecondary certificate 2%) and is not a uniform hiring threshold.",
+                "limitation": "O*NET asked respondents what education new hires need: 64% chose less than high school, 29% chose high school or equivalent, and 2% chose a postsecondary certificate. These are survey responses.",
                 "market": "United States",
-                "name": "O*NET 35-3023.01 Occupation Summary (educational composition)",
+                "name": "O*NET 35-3023.01: New-hire education question",
                 "period": "Page updated 2026; accessed 2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/35-3023.01"
+                "url": "https://www.onetonline.org/link/details/35-3023.01"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32232,18 +32350,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official outlook",
-                  "2024—2034; accessed 2026-09-15"
+                  "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas.",
+                  "2025 baseline; projections through 2035."
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
-                "limitation": "The page labels the employment and projections as “Employment data for Fast Food and Counter Workers”; this is not individual hiring probability.",
+                "limitation": "O*NET 35-3023.01 describes barista tasks. U.S. pay and projections use parent occupation 35-3023. The BLS handbook also has a broader food service group.",
                 "market": "United States",
-                "name": "O*NET 35-3023.01 Occupation Summary (Employment and Projections Fields)",
-                "period": "2024—2034; accessed 2026-09-15",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/35-3023.01"
+                "name": "BLS Table 1.2: Fast food and counter workers (35-3023)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32274,7 +32392,7 @@
                 "name": "BLS Occupational Outlook Handbook, Food and Beverage Serving and Related Workers (entry education and training definition)",
                 "period": "Current version of the page; accessed 2026-09-15",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "combined_group",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/food-preparation-and-serving/food-and-beverage-serving-and-related-workers.htm"
               },
               {
@@ -32290,22 +32408,22 @@
                 "name": "International Labour Organization, Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140)",
                 "period": "2025; accessed 2026-09-15",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "editorial record",
+                  "O*NET 35-3023.01 describes barista tasks. U.S. pay and projections use parent occupation 35-3023. The BLS handbook also has a broader food service group.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "editorial record",
+                "evidence_type": "primary_document",
                 "id": "editor",
-                "limitation": "Editorial team compilation and definition verification record.",
+                "limitation": "O*NET 35-3023.01 describes barista tasks. U.S. pay and projections use parent occupation 35-3023. The BLS handbook also has a broader food service group.",
                 "market": "United States",
-                "name": "FermatMind career content editorial team verification record",
+                "name": "O*NET: Baristas 35-3023.01 occupation summary",
                 "period": "Accessed 2026-09-15",
-                "publisher": "FermatMind career content editorial team",
+                "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/35-3023.01"
               },
@@ -32317,7 +32435,7 @@
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "The page shows that no training programs for this occupation are registered nationwide; the occupation summary also provides an Apprenticeship.gov apprenticeship opportunities entry point (searched by this occupational code); training and apprenticeship information does not constitute a hiring threshold or authorization.",
+                "limitation": "The O*NET nationwide directory returned no programs for this occupation code. Check available training and workplace instruction separately with employers.",
                 "market": "United States",
                 "name": "O*NET 35-3023.01 Training and Education Information",
                 "period": "Page updated 2026; accessed 2026-09-15",
@@ -32413,29 +32531,29 @@
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "Parent occupation 35-3023.00: accommodation and catering 87%, other 13%; this is not barista industry wages or an employer type distribution.",
+                "limitation": "The O*NET industry subtable titled Baristas lists accommodation and food services at 87% and other industries, including retail, at 13%. It does not state a year or attribute the figures to the parent occupation. These industry shares do not show industry wages or the types of shops employing baristas.",
                 "market": "United States",
                 "name": "O*NET 35-3023.01 Industry Distribution",
-                "period": "Current page; verified and read 2026-10-08, with no separate data year",
+                "period": "Year unspecified on subtable",
                 "publisher": "O*NET OnLine",
-                "scope": "parent_occupation_proxy",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/35-3023.01"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official employment trends",
-                  "2024—2034; accessed 2026-09-15"
+                  "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas.",
+                  "2025 baseline; projections through 2035."
                 ],
                 "evidence_type": "official employment trends",
                 "id": "r2-pay-3",
-                "limitation": "The top of the page states “Employment data for Fast Food and Counter Workers”: 3,796,000 employed in 2024, about 4,029,200 in 2034, 2024—2034 +6% (faster than average), and about 904,300 job openings per year over the projection period (including growth and replacement); this is the same-family parent occupation definition and does not equal barista-only employment, nor does it constitute individual hiring probability.",
+                "limitation": "O*NET 35-3023.01 describes barista tasks. U.S. pay and projections use parent occupation 35-3023. The BLS handbook also has a broader food service group.",
                 "market": "United States",
-                "name": "O*NET 35-3023.01 employment trends page (employment and openings)",
-                "period": "2024—2034; accessed 2026-09-15",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "BLS Table 1.2: Fast food and counter workers (35-3023)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32445,9 +32563,9 @@
                 ],
                 "evidence_type": "certification information",
                 "id": "census",
-                "limitation": "The page lists 3 national certifications: Certified Restaurant Server (American Hotel and Lodging Association Educational Institute), Certified Home Brewers (Specialty Coffee Association of America), and Certified Coffee Specialist (National Automatic Merchandising Association); a certification is proof of ability and does not equal a hiring threshold or employer appointment.",
+                "limitation": "The page lists 3 credential examples from named issuing bodies: Certified Restaurant Server (American Hotel and Lodging Association Educational Institute), Certified Home Brewers (Specialty Coffee Association of America), and Certified Coffee Specialist (National Automatic Merchandising Association); a certification is proof of ability and does not equal a hiring threshold or employer appointment.",
                 "market": "United States",
-                "name": "O*NET 35-3023.01 Certification Findings (national certification)",
+                "name": "O*NET 35-3023.01 Certification examples by issuing body",
                 "period": "Page updated 2026; accessed 2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -32466,7 +32584,7 @@
                 "name": "O*NET Resource Center, O*NET Database and O*NET Taxonomy (occupational codes and classification definition)",
                 "period": "Current version; accessed 2026-09-15",
                 "publisher": "O*NET Resource Center (funded by the U.S. Department of Labor)",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetcenter.org/database.html"
               },
               {
@@ -32511,27 +32629,27 @@
                 "id": "oews-methods",
                 "limitation": "Covers full-time and part-time wage-and-salary workers; wages include tips, commissions, and production bonuses, and exclude the self-employed and overtime premiums; the 2,080-hour annualization is not actual individual hours.",
                 "market": "United States",
-                "name": "BLS May2025 OEWS technical note",
+                "name": "BLS OEWS: Concepts",
                 "period": "May2025",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "parent_occupation_proxy",
-                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "official employment trends",
-                  "2025—2035"
+                  "BLS Table 1.2 lists 3,855,900 jobs in 2025 for the U.S. parent occupation 35-3023 and projects 4,079,100 in 2035, 5.8% growth and about 827,400 annual openings. BLS separately reports a net increase of 223,300 and 0.1% self-employed. May 2025 employee medians were $31,200 a year and $15.00 an hour. These figures do not isolate baristas.",
+                  "2025 baseline; projections through 2035."
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep-current",
-                "limitation": "U.S. parent occupation 35-3023.00 (Fast Food and Counter Workers): 3,855,900 in 2025, 4,079,100 in 2035, growth of 6%, and 827,400 annual openings; none of these are barista subcategory statistics, and none are AI attributions.",
+                "limitation": "O*NET 35-3023.01 describes barista tasks. U.S. pay and projections use parent occupation 35-3023. The BLS handbook also has a broader food service group.",
                 "market": "United States",
-                "name": "O*NET barista page 2025—2035 national employment trends (parent occupation 35-3023.00)",
-                "period": "2025—2035",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS Table 1.2: Fast food and counter workers (35-3023)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32541,7 +32659,7 @@
                 ],
                 "evidence_type": "official occupational standard directory",
                 "id": "cn-coffee-code",
-                "limitation": "Item 6, barista 4-03-02-08; the catalog is not the full standard text and does not support wages or specific education/level conditions.",
+                "limitation": "The publication catalog confirms the name and code; see the separately listed full standard for the skill grades.",
                 "market": "Mainland China",
                 "name": "2022 catalog of national vocational skill standards promulgated by the Ministry of Human Resources and Social Security",
                 "period": "2022",
@@ -32576,10 +32694,10 @@
                 "limitation": "Articles 33, 44, 45, 47, 54, 56, and 63 on food business hygiene, training, health management, and operator responsibility; does not grant every barista recall or reopening authority.",
                 "market": "Mainland China",
                 "name": "Food Safety Law of the People's Republic of China, 2025 amended version",
-                "period": "Amended 2025-09-12; effective 2025-12-01",
+                "period": "Third amendment, 2025",
                 "publisher": "Bulletin of the Standing Committee of the National People's Congress / regulations database of the State Administration for Market Regulation",
-                "scope": "jurisdiction_specific",
-                "url": "https://sjfg.samr.gov.cn/law/file/pdf/3238901/1763351546670.pdf"
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_6bff4ef87291497fa72949e1fc88efb5.html"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32594,7 +32712,7 @@
                 "name": "Personal Information Protection Law of the People's Republic of China",
                 "period": "Effective 2021-11-01",
                 "publisher": "State Administration for Market Regulation",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               },
               {
@@ -32610,25 +32728,85 @@
                 "name": "FDA Food Allergies",
                 "period": "Verified and read this time on 2026-10-08",
                 "publisher": "U.S. Food and Drug Administration",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies?lv=true"
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "This equally weighted estimate uses three specific work samples. Scores of 25, 0 and 25 average to 17/100 after rounding. It is not an observed result or a share of working time.; FermatMind editorial estimate; 2026-11-10.",
                   "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Order taking and confirmation | Give the service a basis | Receive customer orders and repeat them back for confirmation, relay orders to other colleagues for preparation, and explain the feasible scope and waiting time. — 75/100; weight=1/3; baristas.profile.responsibilities-block.1[0]",
-                  "Beverage preparation and serving | Give the output a specification | Weigh and grind and extract according to recipes and standard procedures, and prepare and serve hot or cold beverages and menu items. — 0/100; weight=1/3; baristas.profile.responsibilities-block.1[1]",
-                  "Cashiering and store operations | Keep the business running | Collect and process customer payments, order and receive and restock and arrange displays, and respond to customer requests and record exceptions within the authorized scope. — 75/100; weight=1/3; baristas.profile.responsibilities-block.1[5]"
+                  "Order taking | Order notes | A tool can draft an order summary. Staff verify it with the customer and relay it. — 25/100; weight=1/3; baristas.profile.responsibilities-block.1[0]",
+                  "Drink preparation | Physical preparation | This sample covers physical preparation and serving. A text tool performs neither. — 0/100; weight=1/3; baristas.profile.responsibilities-block.1[1]",
+                  "Shop records | Inventory and exception notes | A tool can summarize existing fields. Staff handle inventory, payment and decisions within their authority. — 25/100; weight=1/3; baristas.profile.responsibilities-block.1[5]"
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "name": "FermatMind AI task impact method v1",
+                "period": "2026-11-10",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Shenzhen government’s October 20, 2026 historical bulletin lists 30 KCOFFEE barista roles across Shenzhen districts at CNY 3,000–5,000 per month in combined pay. Experience was preferred, training was offered to applicants without experience and a health certificate was required."
+                ],
+                "evidence_type": "primary_document",
+                "id": "sz-kcoffee-2026",
+                "limitation": "The Shenzhen government’s October 20, 2026 historical bulletin lists 30 KCOFFEE barista roles across Shenzhen districts at CNY 3,000–5,000 per month in combined pay. Experience was preferred, training was offered to applicants without experience and a health certificate was required.",
+                "market": "Mainland China",
+                "name": "Shenzhen Government: historical KCOFFEE listing",
+                "period": "2026-10-20",
+                "publisher": "Shenzhen Municipal Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.sz.gov.cn/szzt2010/sarczdnl/sarc/zgz/content/post_13048098.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Central University of Finance and Economics’ July 15, 2026 historical notice advertised one combined Western-food and barista role, with at least a year of coffee or beverage experience and a valid health certificate. It offered CNY 6,000–8,000 per month, negotiable, with meals and accommodation. The listing is marked completed."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cufe-cafe-2026",
+                "limitation": "Central University of Finance and Economics’ July 15, 2026 historical notice advertised one combined Western-food and barista role, with at least a year of coffee or beverage experience and a valid health certificate. It offered CNY 6,000–8,000 per month, negotiable, with meals and accommodation. The listing is marked completed.",
+                "market": "Mainland China",
+                "name": "CUFE Logistics: historical Western-food and barista listing",
+                "period": "2026-07-15",
+                "publisher": "CUFE Logistics Services",
+                "scope": "recruitment_proxy",
+                "url": "https://hq.cufe.edu.cn/info/1047/4839.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Mainland China’s barista skill standard (4-03-02-08) has five grades, from Grade 5 to Grade 1. Check skill grades, employer requirements, task authorization and the health certification required by law for staff whose work involves direct contact with ready-to-eat food separately."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-barista-standard",
+                "limitation": "Mainland China’s barista skill standard (4-03-02-08) has five grades, from Grade 5 to Grade 1. Check skill grades, employer requirements, task authorization and the health certification required by law for staff whose work involves direct contact with ready-to-eat food separately.",
+                "market": "Mainland China",
+                "name": "National occupational skill standard for baristas",
+                "period": "2022",
+                "publisher": "Ministry of Human Resources and Social Security",
+                "scope": "contextual",
+                "url": "https://www.lnmtc.com/uploadfile/ueditor/file/202508/1756351717380219.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Fictional paper order."
+                ],
+                "evidence_type": "editorial_design",
+                "id": "bc72-editor",
+                "limitation": "Fictional paper order.",
+                "market": "Paper exercise",
+                "name": "FermatMind BC-72: Check two order records and write one handoff",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": null
               }
             ]
           },
@@ -35962,7 +36140,7 @@
       },
       "hero": {
         "h1": "Baristas",
-        "quick_answer": "Baristas prepare and serve specialty coffee and other beverages and serve food such as baked goods and sandwiches to customers: taking orders and relaying them to other colleagues for preparation, preparing and serving hot or cold beverages according to recipes (coffee and espresso drinks and blended coffee and tea), weighing and grinding and packaging coffee beans, making or serving menu items such as sandwiches and salads, wrapping and labeling or dating food for sale, checking freezer and refrigerator and heating equipment temperatures to ensure proper operation, cleaning and disinfecting work areas and utensils and equipment, taking out trash and cleaning service and seating areas, ordering and receiving and restocking and arranging merchandise displays, describing menu items to customers and demonstrating the use of equipment such as espresso machines, and collecting and processing customer payments; their work does not equal the determination and authorization of food safety and equipment shutdown, nor does it replace venue hygiene and allergen control responsibility, and they stop and escalate when equipment temperature is abnormal, food contamination is suspected, or the situation exceeds their authorization.",
+        "quick_answer": "Baristas take orders, prepare and serve drinks, check ingredient information, clean their station and hand over open issues. O*NET 35-3023.01 describes barista duties. U.S. wage and outlook figures use the parent occupation, fast food and counter workers (35-3023). The two Mainland examples are historical listings from a Shenzhen chain and a Beijing campus kitchen.",
         "title": "Baristas"
       },
       "market_signal_card": {
@@ -36513,7 +36691,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET employment and projections fields (same-family occupation 35-3023.00 definition)",
+            "label": "BLS Table 1.2: Fast food and counter workers (35-3023)",
             "secondary_value": null,
             "value": {
               "$item": "baristas.profile.onet-structured-fields-block.4",
@@ -37314,7 +37492,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit being a barista",
+        "label": "Explore my career interests with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37436,7 +37614,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which adjacent direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
-      "interface.quick_decision.experiment_heading": "What does this work mainly involve?",
+      "interface.quick_decision.experiment_heading": "How can I try the work with a paper order?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. salary reference",
@@ -37529,7 +37707,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI task-impact estimate",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37619,37 +37797,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "3,796,000 people (same-family occupation 35-3023.00 definition)",
+        "derivation": "BLS published value.",
+        "display_value": "3,855,900 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment size (same-family parent occupation definition)",
-        "occupation_scope": "Baristas",
-        "period": "2024; accessed 2026-09-15",
+        "measure": "Employment",
+        "occupation_scope": "U.S. parent occupation: fast food and counter workers (35-3023)",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Faster than average (5% to 6%) (same-family occupation 35-3023.00 definition)",
+        "derivation": "BLS published value.",
+        "display_value": "5.8%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Employment growth label (same-family parent occupation definition)",
-        "occupation_scope": "Baristas",
-        "period": "2024—2034; accessed 2026-09-15",
+        "measure": "Projected growth",
+        "occupation_scope": "U.S. parent occupation: fast food and counter workers (35-3023)",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 904,300 (same-family occupation 35-3023.00 definition, including growth and replacement)",
+        "derivation": "BLS published value.",
+        "display_value": "About 827,400 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Projected annual job openings over the projection period (same-family parent occupation definition)",
-        "occupation_scope": "Baristas",
-        "period": "2024—2034; accessed 2026-09-15",
+        "measure": "Projected annual openings",
+        "occupation_scope": "U.S. parent occupation: fast food and counter workers (35-3023)",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -37827,85 +38005,85 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "3,796,000 people (same-family occupation 35-3023.00 definition)",
+        "derivation": "BLS published value.",
+        "display_value": "3,855,900 jobs",
         "fact_id": "us-employment-parent",
         "market": "United States",
-        "measure": "Employment size (same-family parent occupation definition)",
-        "occupation_scope": "Baristas",
-        "period": "2024",
-        "source_refs": [
-          "ep"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "Faster than average (5% to 6%)",
-        "fact_id": "us-growth-parent",
-        "market": "United States",
-        "measure": "Employment growth label (same-family parent occupation definition)",
-        "occupation_scope": "Baristas",
-        "period": "2024—2034",
-        "source_refs": [
-          "ep"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "About 904,300 (same-family occupation 35-3023.00 definition)",
-        "fact_id": "us-openings-parent",
-        "market": "United States",
-        "measure": "Projected annual job openings over the projection period (same-family parent occupation definition)",
-        "occupation_scope": "Baristas",
-        "period": "2024—2034",
-        "source_refs": [
-          "ep"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "3,855,900 people (parent occupation 35-3023.00)",
-        "fact_id": "us-employment-current-2025",
-        "market": "United States",
-        "measure": "Employment size",
-        "occupation_scope": "35-3023.00 Fast Food and Counter Workers; not the barista subcategory",
+        "measure": "Employment",
+        "occupation_scope": "U.S. parent occupation: fast food and counter workers (35-3023)",
         "period": "2025",
         "source_refs": [
-          "ep-current"
+          "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "6% (parent occupation 35-3023.00, not AI attribution)",
+        "derivation": "BLS published value.",
+        "display_value": "5.8%",
+        "fact_id": "us-growth-parent",
+        "market": "United States",
+        "measure": "Projected growth",
+        "occupation_scope": "U.S. parent occupation: fast food and counter workers (35-3023)",
+        "period": "2025–2035",
+        "source_refs": [
+          "ep"
+        ]
+      },
+      {
+        "derivation": "BLS published value.",
+        "display_value": "About 827,400 per year",
+        "fact_id": "us-openings-parent",
+        "market": "United States",
+        "measure": "Projected annual openings",
+        "occupation_scope": "U.S. parent occupation: fast food and counter workers (35-3023)",
+        "period": "2025–2035",
+        "source_refs": [
+          "ep"
+        ]
+      },
+      {
+        "derivation": "BLS published value.",
+        "display_value": "3,855,900 jobs",
+        "fact_id": "us-employment-current-2025",
+        "market": "United States",
+        "measure": "Employment",
+        "occupation_scope": "U.S. parent occupation: fast food and counter workers (35-3023)",
+        "period": "2025",
+        "source_refs": [
+          "ep"
+        ]
+      },
+      {
+        "derivation": "BLS published value.",
+        "display_value": "5.8%",
         "fact_id": "us-growth-current-2025",
         "market": "United States",
-        "measure": "Overall employment growth rate",
-        "occupation_scope": "35-3023.00 Fast Food and Counter Workers; not the barista subcategory",
-        "period": "2025—2035",
+        "measure": "Projected growth",
+        "occupation_scope": "U.S. parent occupation: fast food and counter workers (35-3023)",
+        "period": "2025–2035",
         "source_refs": [
-          "ep-current"
+          "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "827,400 per year (parent occupation 35-3023.00)",
+        "derivation": "BLS published value.",
+        "display_value": "About 827,400 per year",
         "fact_id": "us-openings-current-2025",
         "market": "United States",
-        "measure": "Annual job openings over the projection period",
-        "occupation_scope": "35-3023.00 Fast Food and Counter Workers; not the barista subcategory",
-        "period": "2025—2035",
+        "measure": "Projected annual openings",
+        "occupation_scope": "U.S. parent occupation: fast food and counter workers (35-3023)",
+        "period": "2025–2035",
         "source_refs": [
-          "ep-current"
+          "ep"
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
+        "derivation": "This equally weighted estimate uses three specific work samples. Scores of 25, 0 and 25 average to 17/100 after rounding. It is not an observed result or a share of working time.",
+        "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Baristas",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "measure": "AI task-impact estimate (editorial estimate)",
+        "occupation_scope": "Three selected barista work samples",
+        "period": "2026-11-10",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -37917,37 +38095,37 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI task-impact estimate"
     },
     "badges": [
       "O*NET 35-3023.01 · Job Zone 1–2 · Low entry preparation · Bright Outlook",
       "Beverage preparation and serving / food safety and cleaning / customer reception and cashiering",
-      "Wage, employment, and industry data are taken from the same-family parent occupation 35-3023.00 · no precise equivalent occupational entry in mainland China · gaps visibly marked"
+      "U.S. pay and employment projections use parent occupation 35-3023. Mainland China has a barista standard (4-03-02-08), but comparable national occupation wages are unavailable in this page’s sources."
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "U.S. annual salary median (same-family occupation 35-3023.00 definition)"
+        "label": "U.S. parent occupation pay (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034)"
+        "label": "U.S. parent occupation growth (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. number employed (2024, same-family occupation definition)"
+        "label": "U.S. parent occupation jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. projected job openings over the projection period (2024—2034, same-family occupation definition)"
+        "label": "U.S. parent occupation annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37961,17 +38139,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What baristas do, what preparation is needed, what U.S. income and prospects look like, which tasks AI will change, and the boundaries of hot beverage and steam and equipment burns, food allergens and temperature control, customer information and payment information, and food safety and shutdown authority; source scope and data gaps are retained (U.S. wages and employment are under the same-family parent occupation definition)."
+      "text": "Explore barista duties, pay data and real job listing examples. Try a paper exercise in checking ingredients and handing over an order."
     },
     "title": {
       "availability": "available",
-      "text": "Baristas"
+      "text": "Barista: Duties, Pay and How to Get Started | FermatMind"
     }
   },
-  "source_content_sha256": "903752da0a2f606a8190ae1766ef8355ad55623b58ba49ebcfdc5e99171873d3",
+  "source_content_sha256": "24a1d3bac3975eeb7a5c12d8b1946b032fc6c6e4fad6e98affd1143de9ccd637",
   "subject": {
     "canonical_slug": "baristas",
     "name": "Baristas",
-    "summary": "Baristas prepare and serve specialty coffee and other beverages and serve food such as baked goods and sandwiches to customers: taking orders and relaying them, preparing and serving hot and cold beverages according to recipes, weighing and grinding and packaging coffee beans, preparing and serving menu items, wrapping and labeling and dating, checking equipment temperatures, cleaning and disinfecting work areas and utensils and equipment, cleaning service and seating areas, ordering and restocking and arranging displays, describing the menu and demonstrating equipment use, and collecting and processing payments. The U.S. side corresponds to O*NET 35-3023.01 (Baristas), which is Job Zone 1–2 (SVP below 6.0) and is marked by O*NET as Bright Outlook; its wage, employment, and industry data are explicitly labeled on the O*NET page as taken from the same-family parent occupation 35-3023.00 (Fast Food and Counter Workers), and the BLS Occupational Outlook Handbook chapter is also the combined “Food and Beverage Serving and Related Workers” group, neither of which is equivalent to a barista-only definition. On the mainland China side, this page has not obtained a precise national occupational wage distribution for baristas, so the boundary of no data that can be safely used is retained; industry wage statistics cannot provide a national occupational median or a uniform starting wage, and the Chinese page language is not treated as a China equivalent occupation or wage mapping."
+    "summary": "Baristas take orders, prepare and serve drinks, check ingredient information, clean their station and hand over open issues. O*NET 35-3023.01 describes barista duties. U.S. wage and outlook figures use the parent occupation, fast food and counter workers (35-3023). The two Mainland examples are historical listings from a Shenzhen chain and a Beijing campus kitchen."
   }
 }

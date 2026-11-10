@@ -1478,6 +1478,9 @@
       "item:coin-vending-and-amusement-machine-servicers-and-repairers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:coin-vending-and-amusement-machine-servicers-and-repairers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:coin-vending-and-amusement-machine-servicers-and-repairers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31452,6 +31455,21 @@
           "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.recruitment-sample.1",
           "title": "Notes on using recruitment samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Machine A accepts payment without dispensing. Machine B is out of stock. The tickets share one machine ID by mistake. Match site, equipment and complaint before writing questions for the service technician."
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Match vending machine faults to machines",
+          "type": "notice"
         }
       ]
     },
@@ -38331,6 +38349,13 @@
         "id": "coin-vending-and-amusement-machine-servicers-and-repairers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38934,7 +38959,7 @@
       "text": "Coin, Vending, and Amusement Machine Servicer and Repairer"
     }
   },
-  "source_content_sha256": "8f499899632934cb477d743c13986c76b25597ceaf1d33947331917fd3c0e55a",
+  "source_content_sha256": "a1b01a737137a178a215982d75bf93751e7030a493c347ab9074085fb71f77bf",
   "subject": {
     "canonical_slug": "coin-vending-and-amusement-machine-servicers-and-repairers",
     "name": "Coin, Vending, and Amusement Machine Servicer and Repairer",

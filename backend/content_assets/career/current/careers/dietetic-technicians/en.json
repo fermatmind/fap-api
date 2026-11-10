@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-nutrition-chongqing": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-nutrition-huaxi": {
+        "status": "pending_mapping"
       },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
@@ -22559,7 +22565,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Worth trying first: you are willing to record item by item according to procedure rather than judging from impressions, can stay careful in repetitive recording and verification work, are willing to communicate repeatedly with patients, families, nursing and catering staff and to make yourself understood, can accept the institution's hygiene, sample retention, disinfection and infection control requirements, and clearly know which judgments must be left to the dietitian or physician rather than concluding yourself."
+              "Start with the entry section’s paper exercise: use the fictional meals, weights and rules to write a handoff and check a tray independently. Consult the reference afterward. Do not use real patient data."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.2",
@@ -22587,7 +22593,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Low-risk verification: use a fictional inpatient's food intake record and weight change table to complete an exercise in marking the changes that must be reported to the dietitian according to given rules, organising a set of key points from the dietary history, writing a handover record for the dietitian, and listing the items in this check that are uncertain and need to be raised; this only verifies whether you are willing to check item by item according to procedure and hand over truthfully. The exercise uses fictional material, does not touch any real patient information, does not give a nutrition diagnosis or meal prescription, and does not equal completed training, practice qualification or industry certification."
+              "Check meal plans, record intake and feedback, verify service and report discrepancies. Qualified technical staff can assist with screening, assessment or meal preparation within applicable rules. A job title or assignment alone does not authorize prescribing."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -22629,7 +22635,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Similar names do not mean the same duties: this page is O*NET-SOC 29-2051.00 Dietetic Technicians, whose core is assisting with food service and nutrition programmes under the supervision of a registered dietitian. Adjacent positions have different duties — dietitians and nutritionists are responsible for nutrition diagnosis, nutrition therapy and the recommendations and prescriptions of medical nutrition therapy (this occupation carries them out under their supervision), food service managers are responsible for operations and staff and cost management, cooks and catering staff are responsible for bulk production and serving, and nursing assistants are responsible for daily patient care and some feeding assistance. The specific authorization is governed by the institution's rules, the job description and local regulations, is not inferred from the job title, and nutrition diagnosis or meal prescriptions must not be undertaken independently."
+              "Check meal plans, record intake and feedback, verify service and report discrepancies. Qualified technical staff can assist with screening, assessment or meal preparation within applicable rules. A job title or assignment alone does not authorize prescribing."
             ]
           },
           "id": "actors.display.fermat_decision_card.caveat",
@@ -22671,7 +22677,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "All paper exercises on this page use fictional material; real nutrition screening and assessment, enteral nutrition preparation, medical diet arrangement and therapeutic diet adjustment must be carried out by trained and authorized nutrition technical personnel according to institutional rules, and nutrition diagnosis and treatment must be undertaken by physicians trained in clinical nutrition (for example, in mainland China according to the Guidelines for the Construction and Management of Clinical Nutrition Departments (trial)). Individuals must not carry out diagnosis, treatment or prescription interventions on their own, and this page does not constitute medical, compliance or legal advice."
+              "Check meal plans, record intake and feedback, verify service and report discrepancies. Qualified technical staff can assist with screening, assessment or meal preparation within applicable rules. A job title or assignment alone does not authorize prescribing."
             ]
           },
           "id": "actors.display.fit_decision_checklist.how-detail",
@@ -23750,12 +23756,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "This table compares dietetic technicians with six adjacent positions row by row across core work and outputs, key differences, and basis for choice. The principle for choosing adjacent positions is that they are easily confused within the same nutrition and catering system, or have a job rotation or transfer relationship with this occupation. The purpose of the comparison is not to rank them but to explain their respective duty boundaries and scopes of authorization — in particular, nutrition diagnosis and prescribing authority cannot be borne by an execution position."
+              "Manage food service operations, including staffing, purchasing, inventory, costs, service quality and hygiene."
             ]
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -23764,12 +23770,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The comparison should rest on three things: first, the work object (the patient's nutritional status and therapeutic diet execution, nutrition diagnosis and treatment plans, bulk catering, daily care); second, the basis and authorization (the respective application of the plan determined by the dietitian and clinical nutrition guidelines, operating and cost systems, recipe and hygiene specifications, and nursing specifications); third, outputs and responsibility (who is responsible for the accuracy of records and arrangement execution, and who is responsible for nutrition diagnosis and treatment plans). Where the three are inconsistent, the actual duties of the position and the institution's authorization documents should prevail."
+              "Assist with daily care, mobility, feeding and observation. Report changes to the responsible nursing staff."
             ]
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -23778,12 +23784,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The basis for choice can follow three clues: if you want to face patients and families directly and are willing to record and execute under a dietitian's supervision, this occupation is the closest; if you want to take on nutrition assessment, diagnosis and the formulation of treatment plans, you need the dietitian and nutritionist path and must meet its education, internship and examination conditions; if you prefer kitchen output and the catering rhythm, institutional and cafeteria cooks are more suitable; if you want operations, cost and staff management, food service manager is another path. What needs to be built up when transferring is knowledge of the objects, the basis and the scope of authorization, not just operational proficiency."
+              "Wash, cut and portion ingredients, prepare cold foods and keep work areas clean. The job ordinarily does not involve nutrition diagnosis."
             ]
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -23792,12 +23798,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Boundaries and sources: the differences listed in this table are based on the O*NET occupational profiles and work context data, and Articles six, six and eight of the mainland China Guidelines for the Construction and Management of Clinical Nutrition Departments (trial) regarding the scope of work of nutrition technical personnel and the departmental preparation system. The qualification and authorization requirements of adjacent positions cannot substitute for one another; this page does not infer income levels or hiring conditions from job titles, nor does it read execution duties as diagnosis or prescribing authority."
+              "Help with patient intake, records and clinical support in outpatient settings, subject to local rules and employer responsibilities."
             ]
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet"
+            "directing"
           ],
           "type": "prose"
         },
@@ -23848,7 +23854,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.career",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -23857,12 +23863,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Conduct nutrition assessment and diagnosis, formulate and adjust nutrition therapy plans and medical nutrition therapy recommendations, determine the use of therapeutic diets and food for special medical purposes, run nutrition clinics and consultations and supervise the execution steps."
+              "The U.S. occupational definition covers planning and delivering nutrition services, assessing needs, providing advice and overseeing implementation. Clinical treatment and authority depend on state law and institutional rules."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.work",
           "source_refs": [
-            "onet"
+            "agent",
+            "nutrition-hospital-us"
           ],
           "type": "prose"
         },
@@ -23871,12 +23878,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The level of authorization differs: dietitians are responsible for nutrition assessment, diagnosis and treatment plans and may recommend or prescribe enteral and parenteral nutrition and food for special medical purposes; this occupation executes monitoring, recording, screening assistance, meal arrangement and teaching under their supervision and is not responsible for diagnosis and plans. The mainland China scope likewise assigns nutrition diagnosis and treatment to physicians trained in clinical nutrition, while nutrition technical personnel carry out consultation, screening and assessment, enteral nutrition preparation, medical diet arrangement and teaching."
+              "In U.S. hospitals, patient diets, including therapeutic diets, may be ordered by the practitioner responsible for care. Qualified dietitians or nutrition professionals may order those diets only when authorized by the medical staff and permitted under state law. In mainland Chinese medical institutions, physicians trained in clinical nutrition provide nutrition diagnosis and treatment under applicable rules. Qualified technical staff provide counseling, screening and assessment, enteral preparation, medical meal arrangements and education within their role. The job title does not confer prescribing authority."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
           "source_refs": [
-            "onet"
+            "nutrition-hospital-us",
+            "nutrition-clinical-cn"
           ],
           "type": "prose"
         },
@@ -23885,12 +23893,15 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "If the goal is to formulate nutrition therapy plans and bear diagnostic responsibility, you should take the dietitian and nutritionist path and verify the education, internship and examination conditions (the United States registered dietitian direction has separate education and internship requirements); if you want to enter the nutrition care setting sooner and start with execution and recording, this occupation is closer. When transferring, clinical nutrition knowledge, use of assessment tools and plan-writing capability need to be built up."
+              "To focus on assessment, planning and counseling, compare dietitian education, supervised training, registration and employer requirements. For meal implementation, records and handoffs, look at technician roles. Clinical care and diet orders require a separate check of local qualifications and institutional authorization."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.choice",
           "source_refs": [
-            "onet"
+            "nutrition-clinical-cn",
+            "nutrition-hospital-us",
+            "onet",
+            "agent"
           ],
           "type": "prose"
         },
@@ -26189,12 +26200,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no equivalent single-occupation wage distribution for Chinese dietetic technicians or representative recruitment sample was obtained in this round. NBS2025 health and social work urban non-private 146266 and private 75631 yuan pretax annual average, used as multi-occupation background for actual medical units and not as the median, starting salary or recruitment quote for dietetic technicians; it covers urban legal entities with 5 or more people, and non-private includes public institutions, government agencies and foreign-funded units and is not only state-owned enterprises, excluding sole traders and freelance workers. It does not apply to all canteens, schools or self-operated institutions."
+              "A West China Tianfu Hospital posting in Chengdu describes a direct contract and work under senior dietitians and nutrition physicians, including medical meal oversight. Pay follows hospital policy. A Chongqing hospital posting asks for a public health master’s, experience and a professional title. Neither historical posting gives a numeric wage or establishes national technician pay."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-nbs-current"
+            "nutrition-huaxi",
+            "nutrition-chongqing"
           ],
           "type": "prose"
         },
@@ -26341,13 +26353,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "United States 29-2051 for the current 2025—2035: employment 32100 in 2025→a projected 32900 in 2035; BLS Table 1.2 gives growth of 2.7%, an official net change of 0.9 thousand, 4200 annual average openings including growth and replacement, and self-employment 0.4%. The O*NET national trend rounds to 3%, and the summary group is Average3 to 4%. The precision of each source is retained, and the official net change is not revised by subtracting the rounded stock figures; openings are not a ten-year total, a net increase or an individual hiring rate, and the projection does not prove AI causation."
+              "The 90th percentile is near the upper end of the wage distribution. It is not a pay cap or a seniority level."
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "r5-bls-current",
-            "r5-trends-current"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26371,12 +26382,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This round obtained the current national occupational wages and projection, but not the narrow industry wages and headcount shares for this occupation, and the older 2024 summary classification is not treated as current statistics. Occupational context was also read: O*NET survey context: continuous contact 78%, face-to-face 79% every day, controlled indoor environment 91% every day, exposure to disease or infection 82% every day, ordinary PPE65% every day, noise 66% every day, time pressure 61% every day; teamwork extremely important 72%, accuracy extremely important 57%, responsibility for the safety of other employees 71% very high. The frequencies are not infection or error rates, and PPE is not worn by everyone every day. Weekly hours: 31% over 40 / 37% equal to 40 / 33% under 40 (rounded in the report), and 99% regular scheduling does not mean no morning, evening or weekend work."
+              "BLS Table 1.2 shows a 2025 base of about 32,100 U.S. jobs. It projects about 32,900 in 2035, a 2.7% increase."
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "sag-moa",
             "r5-bls-current"
           ],
           "type": "prose"
@@ -26386,13 +26396,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 national wage deciles/quartiles: annual 29720 / 33880 / 37640 / 45750 / 54020 USD at the 10th, 25th, 50th, 75th and 90th percentiles, hourly 14.29 / 16.29 / 18.09 / 22.00 / 25.97 USD. OEWS straight-time pretax figures include basic wages, specified allowances and incentives such as commissions and production bonuses, and exclude overtime premiums, shift differentials, nonproduction bonuses and the self-employed; this does not exclude all allowances or all contract employees across the board. Percentiles are not starting salaries, years of service, certification effects or take-home income."
+              "Percentiles describe positions in the wage distribution. The median was $37,640 per year. Lower or higher percentiles are not starting pay, seniority levels or caps."
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "bls",
-            "r5-oews-concepts"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26461,13 +26470,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Percentiles are not starting salaries or individual quotes; there is no causal study in this round on certification or management duties and wage percentiles, and specific positions are verified against the contract separately."
+              "Projected openings average about 4,200 per year from 2025 to 2035. They include growth and replacements for workers who transfer or leave the labor force."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.percentile",
           "source_refs": [
-            "bls",
-            "r5-oews-concepts"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -26476,13 +26484,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "United States 29-2051 for the current 2025—2035: employment 32100 in 2025→a projected 32900 in 2035; BLS Table 1.2 gives growth of 2.7%, an official net change of 0.9 thousand, 4200 annual average openings including growth and replacement, and self-employment 0.4%. The O*NET national trend rounds to 3%, and the summary group is Average3 to 4%. The precision of each source is retained, and the official net change is not revised by subtracting the rounded stock figures; openings are not a ten-year total, a net increase or an individual hiring rate, and the projection does not prove AI causation."
+              "Industry information helps identify settings such as hospitals or care facilities. Ask about shifts, supervision, patient contact and meal duties. Industry labels do not determine personal pay."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
           "source_refs": [
-            "r5-bls-current",
-            "r5-trends-current"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26704,7 +26711,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Third group of signals: ability to carry out hygiene and infection control requirements — exposure to disease or infection every day (82%) means putting on and taking off protective equipment and hand hygiene are hard requirements; they cannot be omitted because you are busy or find it troublesome."
+              "Third signal: can you follow the target employer’s hygiene and infection-control procedures? Ask about the actual contacts, when hand hygiene is required and what protective equipment the role uses."
             ]
           },
           "id": "actors.fit.personality-fit-block.4",
@@ -28074,7 +28081,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Risk two: inadequate infection exposure and hand hygiene and protection. This occupation is exposed to disease or infection every day (82%), with many steps involving contact with patients, food and tableware; omitting protection, hand hygiene or disinfection steps may infect oneself and colleagues and may also cause food contamination. The control is to wear protective equipment according to the rules, carry out hand hygiene and disinfection at the specified points, and report and handle skin damage or illness according to the rules."
+              "Risk two: patient contact and hygiene. In the U.S. O*NET survey, 82% of respondents reported daily exposure to disease or infection. This is neither an infection rate nor a condition of every job. Ask the employer about contact, protective equipment, hand hygiene, disinfection and reporting."
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
@@ -29040,32 +29047,32 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional material: an inpatient's intake and weight record sheet",
-                  "Contains the intake and eating method for three meals, one week of weight change, and allergy and swallowing restriction information from the dietary history",
-                  "Used to practise marking the changes that must be reported to the dietitian according to the rules and explaining the reasons"
+                  "Scenario (all fictional): P17 ate 30% of breakfast by mouth at 08:00, 25% of lunch at 12:00 and 60% of dinner at 18:00. Weight: 61.8 kg on day 1 and 60.5 kg on day 7, same scale and time of day.",
+                  "Approved order for P17: milk-free food, minced and moist texture, and drinks thickened as ordered. Unserved tray for P17: regular rice, pudding labeled with milk powder, and unthickened tea. Allergy flag: milk protein.",
+                  "Exercise rules: report to the dietitian during the shift if two consecutive meals are below 50% or weight falls by at least 1.0 kg within seven days. Hold a tray for an allergen, texture or drink mismatch. Notify the dietitian and meal-service lead and have a second qualified person verify the replacement before release. These are exercise rules, not clinical standards."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Fictional task: write a handover record for the dietitian",
-                  "State clearly what has been recorded, the changes that must be reported, which diet is currently being followed, and what still needs confirmation",
-                  "The output is a reviewable handover record"
+                  "Task 1: Write the handoff first. List the meals, the weight change and the two rules that triggered a report. Say whom to notify and when.",
+                  "Task 2: Check the tray independently. Verify P17 first, then compare milk ingredients, food texture and drink consistency. Say whether to hold or release it and what happens next.",
+                  "Finish both records before reading the reference below. Do not change the order, diagnose or prescribe treatment."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Fictional task: perform one therapeutic diet verification",
-                  "Verify the arrangement and recipients against the ordered category and allergy and swallowing restrictions, and mark the cases requiring two-person verification",
-                  "The output is a verification checklist"
+                  "Reference, after you finish: “P17 ate 30%, 25% and 60% by mouth. The two-meal rule triggered at 12:00; notify the dietitian during the shift, without waiting for dinner. Weight fell 1.3 kg, from 61.8 to 60.5 kg between days 1 and 7, which also triggers a report.” Record the time and recipient only once the report is made.",
+                  "Tray reference: P17 matches. Hold the whole tray: the pudding contains milk powder, regular rice does not match the ordered texture, and the tea is not thickened.",
+                  "Notify the dietitian and meal-service lead. Replace the tray against the approved order, and have a second qualified person verify and record it before release. Do not change the order yourself."
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "Boundary",
-                  "All the above are paper exercises and do not touch any real patient information, do not give a nutrition diagnosis or meal prescription, and do not carry out real preparation or distribution"
+                  "Use only fictional identifiers and exercise rules. Do not handle patients, real records or trays.",
+                  "On day six, use the reference to check both reporting triggers, all three tray mismatches and the second-person verification step."
                 ]
               }
             ]
@@ -29087,22 +29094,22 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day one: read and understand a dietary record sheet",
-                  "Find a publicly available dietary and intake record example and write out which items need registering and at what points"
+                  "Day one: read the exercise on this page",
+                  "Record the three meals, route, two weights and the order."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day two: practise identifying changes that must be reported",
-                  "Using one set of fictional intake and weight data, mark the changes that must be reported to the dietitian according to the given rules and state the reasons"
+                  "Day two: write the handoff",
+                  "Calculate the change and mark the reporting triggers on your own."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day three: write a verification checklist",
-                  "List a therapeutic diet verification checklist by ordered category, allergy and swallowing restrictions and recipients, marking the cases requiring review"
+                  "Day three: check the tray independently",
+                  "Check P17, milk ingredients, food texture and drinks. Write the hold and notification steps."
                 ]
               },
               {
@@ -29115,22 +29122,22 @@
               {
                 "id": "day-5",
                 "values": [
-                  "Day five: prepare a set of teaching points",
-                  "In no more than 200 characters, write the food selection and preparation points for one type of patient and mark the questions that must be referred to the dietitian"
+                  "Day five: finish the two records",
+                  "Keep the handoff and tray check separate, and list open questions. Do not read the reference yet."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day six: compare adjacent directions",
-                  "Choose two directions in the adjacent occupation comparison table on this page and write one sentence each on the difference in objects and the scope of authorization"
+                  "Day six: check your work against the reference",
+                  "Check both reporting triggers, the three tray mismatches and the second-person verification. Correct one omission on your own."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day seven: verify the training and qualification paths",
-                  "Find out separately the target institution's entry education, training, certification and health certificate requirements, and write down what information is still missing"
+                  "Day seven: verify real employer requirements",
+                  "Read a real notice from a target employer. Record education, credentials, supervision and duties, and ask the employer about anything unclear."
                 ]
               }
             ]
@@ -29150,12 +29157,12 @@
           "data": {
             "entries": [
               "Day seven judgement 1: whether you are willing to record intake and weight item by item by meal rather than filling it in afterwards from impressions.",
-              "Day seven judgement 2: whether you accept exposure to disease or infection every day and strictly implement hand hygiene and disinfection and protection requirements.",
+              "Day seven, check 2: ask the employer about patient contact, exposure, hand hygiene, disinfection and protection. Then decide whether the actual work conditions suit you.",
               "Day seven judgement 3: whether you are willing to execute under the dietitian's supervision and not give a nutrition diagnosis or treatment advice beyond authority.",
               "Day seven judgement 4: whether you can complete sample retention, temperature verification and ingredient file records according to the system and sign truthfully.",
               "Day seven judgement 5: whether you are willing to complete verification and distribution against the checklist even under catering peaks and time pressure.",
               "Day seven judgement 6: whether you have found out the target institution's education, training, certification and health certificate requirements, rather than enrolling directly on a course.",
-              "Day seven judgement 7: if the answer to most of the above is yes, you can enter supervised placement or position training; if most are no, it is better to learn about adjacent directions before deciding."
+              "Day seven, check 7: if the tasks suit you and you have verified the employer’s mandatory requirements, apply for an observation, placement or training that the institution authorizes. Clarify unknowns first, or explore adjacent roles if you do not yet meet the requirements. This self-check does not qualify you for a role."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -31009,30 +31016,35 @@
           "data": {
             "entries": [
               {
-                "answer": "A typical day revolves around meals and records: observe and record the patient's intake and eating method by meal, measure and register weight according to procedure, and organise changes, progress and dietary problems before reporting to the dietitian; collect and assess dietary history and assist with nutrition screening and assessment; prepare meals by calculating against recipes and portions, and verify the arrangement and recipients of therapeutic diets and special meals against the ordered diet category and allergy and swallowing restrictions; implement sample retention, tableware disinfection, temperature verification and ingredient file records; explain food selection and preparation points to patients and families according to the plan determined by the dietitian, take part in interdisciplinary meetings with other medical professionals, and help refer patients when necessary. The work is mainly in controlled indoor settings and requires wearing protective equipment according to institutional rules and carrying out hand hygiene.",
+                "answer": "Check meal plans, record intake and feedback, verify service and report discrepancies. Qualified technical staff can assist with screening, assessment or meal preparation within applicable rules. A job title or assignment alone does not authorize prescribing.",
                 "id": "actors.faq.1",
                 "question": "What is the specific daily work?",
                 "question_key": "career.faq.dietetic-technicians.1",
                 "source_refs": [
-                  "onet"
+                  "r5-trends-current",
+                  "nutrition-clinical-cn",
+                  "nutrition-hospital-us"
                 ]
               },
               {
-                "answer": "This occupation is the execution and support level in the nutrition and dietetics field: it works under the supervision of a registered dietitian and is responsible for records, organising screening material, meal arrangement and verification, teaching assistance and food safety records. Dietitians and nutritionists are responsible for nutrition assessment and diagnosis and for formulating nutrition therapy plans; nursing staff are responsible for patients' daily care and some feeding assistance; catering and kitchen staff are responsible for bulk production and serving. Under the mainland China scope, nutrition technical personnel with clinical nutrition professional education or training may carry out nutrition consultation, nutrition screening and assessment, enteral nutrition preparation, medical diet arrangement and nutrition teaching, while nutrition diagnosis and nutrition therapy are undertaken by physicians trained in clinical nutrition. The division of labour follows institutional rules and position authorization.",
+                "answer": "Technicians assist with meal implementation, recordkeeping, delivery checks and reporting. Appropriately trained personnel may also participate in screening, assessment or meal preparation within their role. Dietitians often design and review plans. Chinese clinical care follows local professional qualifications and guidance. U.S. hospital diet orders depend on state law, qualified personnel and medical staff authorization.",
                 "id": "actors.faq.2",
                 "question": "How is the division of labour with dietitians and nursing and catering colleagues arranged?",
                 "question_key": "career.faq.dietetic-technicians.2",
                 "source_refs": [
-                  "onet"
+                  "r5-trends-current",
+                  "nutrition-clinical-cn",
+                  "nutrition-hospital-us"
                 ]
               },
               {
-                "answer": "What the available public evidence supports is a change in calculation and recording methods, not replacement. The O*NET software skills recorded for this occupation centre on nutrition analysis software, medical information systems and common office software, which are calculation and record support; the ILO occupational exposure study classifies this type of occupation as having limited exposure; the tasks of this occupation are mainly on-site observation and recording, arrangement and verification, and communication with patients and teams. The O*NET summary page gives a projection of growth of 3% to 4% for 2024—2034.",
+                "answer": "Software may help calculate portions, check menus and nutrient totals, organize records and flag discrepancies. Staff still verify patient details and diet orders and escalate mismatches within their assigned role. Software suggestions are not clinical orders. This page does not measure AI adoption, effects or job replacement.",
                 "id": "actors.faq.3",
                 "question": "How will AI affect or replace this occupation?",
                 "question_key": "career.faq.dietetic-technicians.3",
                 "source_refs": [
-                  "r2-ai"
+                  "onet",
+                  "nist"
                 ]
               },
               {
@@ -31054,30 +31066,37 @@
                 ]
               },
               {
-                "answer": "United States OEWS May 2025 wage data show a median annual wage of 37,640 USD (median hourly 18.09 USD), with annual percentiles of 29,720 / 33,880 / 37,640 / 45,750 / 54,020 USD. When comparing, first confirm the occupational code, statistical period, unit (annual or hourly) and whether allowances and overtime are included; without all of these they cannot be compared; no occupational-level wage scope for this occupation was obtained for mainland China, and this page retains visible gap markers without substituting an industry average or an online quote, and without applying the values of the adjacent dietitian position to this occupation.",
+                "answer": "A West China Tianfu Hospital posting in Chengdu describes a direct contract and work under senior dietitians and nutrition physicians, including medical meal oversight. Pay follows hospital policy. A Chongqing hospital posting asks for a public health master’s, experience and a professional title. Neither historical posting gives a numeric wage or establishes national technician pay. The May 2025 U.S. median was $18.09 per hour and $37,640 per year.",
                 "id": "actors.faq.6",
                 "question": "How much is the wage generally, and how should it be compared?",
                 "question_key": "career.faq.dietetic-technicians.6",
                 "source_refs": [
-                  "bls"
+                  "nutrition-huaxi",
+                  "nutrition-chongqing",
+                  "r5-trends-current"
                 ]
               },
               {
-                "answer": "O*NET summary page feedback from new hires shows that 35% consider an associate degree or other two-year degree necessary, 27% consider a postsecondary certificate necessary, and 15% have some college experience without a degree; the preparation level is Job Zone Three (medium preparation, SVP 6.0 to below 7.0), usually requiring 1—2 years of training, with apprenticeship opportunities. Some institutions may require or prefer industry certification and registration, and state-level licensing and certification requirements vary by state. This page did not obtain the first-hand scope of the BLS Occupational Outlook page, so its preparation level wording is not cited.",
+                "answer": "BLS lists an associate degree as typical for U.S. entry and lists no typical related work experience or on-the-job training for this occupation. O*NET Job Zone 3 describes preparation for a group of occupations; an apprenticeship is not a universal requirement. West China Tianfu Hospital listed a bachelor’s degree or higher. The Chongqing posting specified a master’s in public health and the corresponding degree, a registered dietitian credential, at least three years of relevant work at a tertiary grade-A hospital, and a junior technical title. These conditions apply to those postings.",
                 "id": "actors.faq.7",
                 "question": "What education is needed, and how should training be done?",
                 "question_key": "career.faq.dietetic-technicians.7",
                 "source_refs": [
-                  "onet"
+                  "r5-bls-current",
+                  "onet",
+                  "nutrition-huaxi",
+                  "nutrition-chongqing"
                 ]
               },
               {
-                "answer": "There is no uniform statutory practising licence in the United States, but employers may require or prefer industry certification and registration, and state-level licensing and certification requirements vary by state. In mainland China, the public nutritionist has been removed from the national occupational qualification catalogue and changed to occupational skill level recognition (under the National Occupational Skill Standard for Public Nutritionists (2021 edition), levels four/intermediate worker to one/senior technician, organised by third-party assessment bodies filed with the human resources and social security department); such certificates do not carry physician practice qualification and must not be used for disease diagnosis, treatment or prescription intervention. The scope of work of hospital nutrition department positions follows Article six of the Guidelines for the Construction and Management of Clinical Nutrition Departments (trial), and nutrition diagnosis and treatment are undertaken by physicians trained in clinical nutrition.",
+                "answer": "There is no uniform statutory practising licence in the United States, but employers may require or prefer industry certification and registration, and state-level licensing and certification requirements vary by state. In mainland China, the public nutritionist has been removed from the national occupational qualification catalogue and changed to occupational skill level recognition (under the National Occupational Skill Standard for Public Nutritionists (2021 edition), levels four/intermediate worker to one/senior technician, organised by third-party assessment bodies filed with the human resources and social security department); such certificates do not carry physician practice qualification and must not be used for disease diagnosis, treatment or prescription intervention. In mainland Chinese medical institutions, Article 5 of the Clinical Nutrition Department Guidelines addresses diagnosis and treatment by physicians trained in clinical nutrition. Article 6 specifies the duties of appropriately educated or trained technical staff.",
                 "id": "actors.faq.8",
                 "question": "Must I obtain a certificate, and does a public nutritionist certificate count as a practice qualification?",
                 "question_key": "career.faq.dietetic-technicians.8",
                 "source_refs": [
-                  "cn-rule"
+                  "cn-rule",
+                  "nutrition-clinical-cn",
+                  "nutrition-hospital-us"
                 ]
               },
               {
@@ -31090,12 +31109,12 @@
                 ]
               },
               {
-                "answer": "Four points should also be considered: first, working conditions — exposure to disease or infection every day 82% and wearing common protective equipment 65% every day require strict hygiene and protection; second, pace — time pressure 61% every day requires cooperation with early shifts and catering peaks, and some institutions have shift work; third, responsibility boundaries — nutrition advice must not be given beyond authority, and nutrition diagnosis and treatment are the responsibility of the dietitian or a trained physician; fourth, regional differences — this occupation is relatively small in scale, and there are more opportunities in areas where medical institutions and long-term care facilities are concentrated. These factors affect long-term fit no less than the wage level.",
+                "answer": "BLS projects U.S. employment for 29-2051 to grow from about 32,100 in 2025 to 32,900 in 2035 (+2.7%), with about 4,200 annual openings including replacements. Counts are rounded independently.",
                 "id": "actors.faq.10",
                 "question": "What else should be considered when choosing this occupation now?",
                 "question_key": "career.faq.dietetic-technicians.10",
                 "source_refs": [
-                  "nist"
+                  "r5-bls-current"
                 ]
               }
             ]
@@ -31388,7 +31407,7 @@
                 "period": "Currently in force; retrieved 2026-09-19",
                 "publisher": "National Health Commission of the People's Republic of China",
                 "scope": "exact",
-                "url": "https://www.nhc.gov.cn/"
+                "url": "https://www.hunan.gov.cn/zqt/zcsd/202204/t20220413_22735524.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31772,7 +31791,7 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "United States 29-2051 for the current 2025—2035: employment 32100 in 2025→a projected 32900 in 2035; BLS Table 1.2 gives growth of 2.7%, an official net change of 0.9 thousand, 4200 annual average openings including growth and replacement, and self-employment 0.4%. The O*NET national trend rounds to 3%, and the summary group is Average3 to 4%. The precision of each source is retained, and the official net change is not revised by subtracting the rounded stock figures; openings are not a ten-year total, a net increase or an individual hiring rate, and the projection does not prove AI causation."
                 ],
@@ -31784,19 +31803,19 @@
                 "period": "2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/29-2051.00"
+                "url": "https://www.onetonline.org/link/details/29-2051.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "United States 29-2051 for the current 2025—2035: employment 32100 in 2025→a projected 32900 in 2035; BLS Table 1.2 gives growth of 2.7%, an official net change of 0.9 thousand, 4200 annual average openings including growth and replacement, and self-employment 0.4%. The O*NET national trend rounds to 3%, and the summary group is Average3 to 4%. The precision of each source is retained, and the official net change is not revised by subtracting the rounded stock figures; openings are not a ten-year total, a net increase or an individual hiring rate, and the projection does not prove AI causation. United States 29-2051: O*NET Job Zone3, SVP6 to below 7, and the group-level 1—2 years of preparation describes the group rather than a fixed course length for every programme; the education responses of 35% associate degree, 27% postsecondary certificate and 15% some college without a degree are the respondents' opinions on the education needed by new hires, not the education distribution of new hires or existing employees. BLS Table 1.2 lists a typical associate degree, no related work experience and no on-the-job training; this does not exempt supervised practice within education or employer training. The actual registered apprenticeship programmes and all state licensing for this occupation were not verified. The OOH column in the table is a dash, and the old OOH URL returned 403 in this round, so it is not used to infer that there are no data nationwide."
+                  "BLS projects U.S. employment for 29-2051 to grow from about 32,100 in 2025 to 32,900 in 2035 (+2.7%), with about 4,200 annual openings including replacements. Counts are rounded independently."
                 ],
                 "evidence_type": "official projections",
                 "id": "r5-bls-current",
                 "limitation": "United States 29-2051 for the current 2025—2035: employment 32100 in 2025→a projected 32900 in 2035; BLS Table 1.2 gives growth of 2.7%, an official net change of 0.9 thousand, 4200 annual average openings including growth and replacement, and self-employment 0.4%. The O*NET national trend rounds to 3%, and the summary group is Average3 to 4%. The precision of each source is retained, and the official net change is not revised by subtracting the rounded stock figures; openings are not a ten-year total, a net increase or an individual hiring rate, and the projection does not prove AI causation. United States 29-2051: O*NET Job Zone3, SVP6 to below 7, and the group-level 1—2 years of preparation describes the group rather than a fixed course length for every programme; the education responses of 35% associate degree, 27% postsecondary certificate and 15% some college without a degree are the respondents' opinions on the education needed by new hires, not the education distribution of new hires or existing employees. BLS Table 1.2 lists a typical associate degree, no related work experience and no on-the-job training; this does not exempt supervised practice within education or employer training. The actual registered apprenticeship programmes and all state licensing for this occupation were not verified. The OOH column in the table is a dash, and the old OOH URL returned 403 in this round, so it is not used to infer that there are no data nationwide.",
                 "market": "United States",
                 "name": "BLS Table 1.2 dietetic technicians employment and training classification",
-                "period": "2025—2035 and 2025 wages",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31892,6 +31911,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Assists clinical nutrition work and supervises medical diets under senior dietitians and physicians. Direct hospital contract; no numeric wage stated."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "nutrition-huaxi",
+                "limitation": "Historical posting, not national pay or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Chengdu clinical nutrition technician",
+                "period": "2026-06",
+                "publisher": "West China Tianfu Hospital, Sichuan University",
+                "scope": "recruitment_proxy",
+                "url": "https://www.wctfh.cn/info/1510/5197.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Requires a master’s in public health, credentials specified in the ad, at least three years of relevant hospital experience and a junior professional title; no numeric wage stated."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "nutrition-chongqing",
+                "limitation": "Historical posting, not national pay or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Chongqing clinical nutrition technician",
+                "period": "2026-10",
+                "publisher": "Second Affiliated Hospital of Chongqing Medical University",
+                "scope": "recruitment_proxy",
+                "url": "https://www.cqsahcqmu.cn/index.php?c=show&id=25367"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Distinguishes trained physicians’ clinical work from qualified technical staff’s screening, assessment and related tasks."
+                ],
+                "evidence_type": "Official guidance or regulation",
+                "id": "nutrition-clinical-cn",
+                "limitation": "Verify the jurisdiction, institution, credentials and task.",
+                "market": "As specified by jurisdiction",
+                "name": "China NHC Clinical Nutrition Department guideline, Articles 5–6",
+                "period": "2026-11-09",
+                "publisher": "Official text",
+                "scope": "regulatory_context",
+                "url": "https://www.hunan.gov.cn/zqt/zcsd/202204/t20220413_22735524.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Hospital therapeutic diet orders depend on state law and medical staff authorization."
+                ],
+                "evidence_type": "Official guidance or regulation",
+                "id": "nutrition-hospital-us",
+                "limitation": "Verify the jurisdiction, institution, credentials and task.",
+                "market": "As specified by jurisdiction",
+                "name": "U.S. 42 CFR 482.28(b)(2)",
+                "period": "2026-11-09",
+                "publisher": "Official text",
+                "scope": "regulatory_context",
+                "url": "https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-482/subpart-C/section-482.28"
               }
             ]
           },
@@ -34889,7 +34968,7 @@
               }
             },
             {
-              "城市/区间": "Quotes circulating online (cannot replace actual benefits)",
+              "城市/区间": "Mainland China historical job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34901,13 +34980,14 @@
           "china_soc_row": "United States 29-2051 and Chinese duties are verified separately and are not a one-to-one mapping",
           "edu": "Training and skill levels are covered in the entry module",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-nutrition-huaxi",
+            "posting-nutrition-chongqing"
           ],
           "sources_note": "Source links are used according to their respective scope of application.",
           "ui": {
             "ai_heading": "Will AI and automation directly change the income of dietetic technicians?",
             "driver_heading": "What should be verified when discussing pay for similar positions in mainland China?",
-            "official_heading": "Official scope and statistical gaps in mainland China",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Comparison of pay methods and statistical boundaries",
             "scenario_heading": "Can the pay methods of similar positions in mainland China be compared directly?",
             "scenario_interpretation_label": "Scope of application and gaps",
@@ -34964,7 +35044,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "r5-current-median",
+            "fact_ref": "r5-current-low",
             "指标": "Salary · 10th percentile",
             "数值": {
               "$fact": "r5-current-low",
@@ -34992,7 +35072,7 @@
             "说明": "The upper quartile of the May 2025 wage data for this occupation; the hourly basis is 22.00 USD."
           },
           {
-            "fact_ref": "r5-current-median",
+            "fact_ref": "r5-current-high",
             "指标": "Salary · 90th percentile",
             "数值": {
               "$fact": "r5-current-high",
@@ -35001,7 +35081,7 @@
             "说明": "The 90th percentile is not evidence of a wage premium for certification, management duties or cost of living"
           },
           {
-            "fact_ref": "r5-current-median",
+            "fact_ref": "r5-current-employment",
             "指标": "2025 employment scale",
             "数值": {
               "$fact": "r5-current-employment",
@@ -35010,7 +35090,7 @@
             "说明": "United States 29-2051 for the current 2025—2035: employment 32100 in 2025→a projected 32900 in 2035; BLS Table 1.2 gives growth of 2.7%, an official net change of 0.9 thousand, 4200 annual average openings including growth and replacement, and self-employment 0.4%. The O*NET national trend rounds to 3%, and the summary group is Average3 to 4%. The precision of each source is retained, and the official net change is not revised by subtracting the rounded stock figures; openings are not a ten-year total, a net increase or an individual hiring rate, and the projection does not prove AI causation."
           },
           {
-            "fact_ref": "r5-current-median",
+            "fact_ref": "r5-current-growth",
             "指标": "2025—2035 growth projection",
             "数值": {
               "$fact": "r5-current-growth",
@@ -35019,7 +35099,7 @@
             "说明": "United States 29-2051 for the current 2025—2035: employment 32100 in 2025→a projected 32900 in 2035; BLS Table 1.2 gives growth of 2.7%, an official net change of 0.9 thousand, 4200 annual average openings including growth and replacement, and self-employment 0.4%. The O*NET national trend rounds to 3%, and the summary group is Average3 to 4%. The precision of each source is retained, and the official net change is not revised by subtracting the rounded stock figures; openings are not a ten-year total, a net increase or an individual hiring rate, and the projection does not prove AI causation."
           },
           {
-            "fact_ref": "r5-current-median",
+            "fact_ref": "r5-current-openings",
             "指标": "2025—2035 annual average openings",
             "数值": {
               "$fact": "r5-current-openings",
@@ -35593,7 +35673,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/dietitians-and-nutritionists",
+            "target_href": "/en/career/jobs/dietitians-and-nutritionists",
             "target_slug": "dietitians-and-nutritionists",
             "target_title": "Dietitians and nutritionists: differences in the level of authorization from this occupation",
             "transition_distance": {
@@ -35616,7 +35696,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cooks-institution-and-cafeteria",
+            "target_href": "/en/career/jobs/cooks-institution-and-cafeteria",
             "target_slug": "cooks-institution-and-cafeteria",
             "target_title": "Institutional and cafeteria cooks: differences in work content from this occupation",
             "transition_distance": {
@@ -35639,7 +35719,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/food-service-managers",
+            "target_href": "/en/career/jobs/food-service-managers",
             "target_slug": "food-service-managers",
             "target_title": "Food service managers: differences in the level of responsibility from this occupation",
             "transition_distance": {
@@ -35662,7 +35742,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/nursing-assistants",
+            "target_href": "/en/career/jobs/nursing-assistants",
             "target_slug": "nursing-assistants",
             "target_title": "Nursing assistants: differences in care content from this occupation",
             "transition_distance": {
@@ -35685,7 +35765,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/medical-assistants",
+            "target_href": "/en/career/jobs/medical-assistants",
             "target_slug": "medical-assistants",
             "target_title": "Medical assistants: differences in work setting from this occupation",
             "transition_distance": {
@@ -35708,7 +35788,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/food-preparation-workers",
+            "target_href": "/en/career/jobs/food-preparation-workers",
             "target_slug": "food-preparation-workers",
             "target_title": "Food preparation workers: differences in task scope from this occupation",
             "transition_distance": {
@@ -35731,7 +35811,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/child-family-and-school-social-workers",
+            "target_href": "/en/career/jobs/child-family-and-school-social-workers",
             "target_slug": "child-family-and-school-social-workers",
             "target_title": "Child, family and school social workers: differences in service recipients from this occupation",
             "transition_distance": {
@@ -35754,7 +35834,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cooks-restaurant",
+            "target_href": "/en/career/jobs/cooks-restaurant",
             "target_slug": "cooks-restaurant",
             "target_title": "Restaurant cooks: differences in work purpose from this occupation",
             "transition_distance": {
@@ -35842,8 +35922,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Understand my occupational interests",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
+            "cta_label": "Explore career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
               "block": "fit",
@@ -35891,8 +35971,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
-            "cta_label": "Understand my Big Five traits",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
+            "cta_label": "Explore Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
               "block": "fit",
@@ -35940,8 +36020,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "cta_label": "Understand my personality preferences",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "Explore personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
               "block": "fit",
@@ -35989,8 +36069,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
-            "cta_label": "Understand my motivation clues",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
+            "cta_label": "Reflect on motivations",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
               "block": "fit",
@@ -36038,8 +36118,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
-            "cta_label": "Understand my cognitive performance",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
+            "cta_label": "Explore reasoning performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
               "block": "fit",
@@ -36087,8 +36167,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
-            "cta_label": "Understand my communication clues",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "cta_label": "Reflect on emotional responses",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
               "block": "fit",
@@ -36709,7 +36789,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of dietetic technicians",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37197,7 +37277,7 @@
         "fact_id": "identity",
         "market": "United States",
         "measure": "Official occupational code (the identity basis for this page)",
-        "occupation_scope": "The O*NET-SOC narrow occupation for this occupation is 29-2051.00; the wages, employment and work context on this page all follow that code. This occupation is the execution and support level in the nutrition and dietetics field and excludes adjacent positions such as dietitians and nutritionists (29-1031.00, responsible for nutrition diagnosis, nutrition therapy and the prescribing and medical orders of medical nutrition therapy), food service managers (11-9051.00), cooks (35-2014.00) and nursing assistants (31-1131.00); on the mainland China side the distinction is based on the scope of work for nutrition technical personnel in the Guidelines for the Construction and Management of Clinical Nutrition Departments (trial), and nutrition diagnosis and treatment are undertaken by physicians trained in clinical nutrition",
+        "occupation_scope": "U.S. SOC 29-2051 Dietetic Technicians. Excludes U.S. SOC 29-1031 dietitians and nutritionists, food service managers, food preparation workers and nursing assistants. Clinical care and diet-ordering authority depend on jurisdiction and institution.",
         "period": "O*NET-SOC 2018 SOC; page updated 2026; retrieved 2026-09-19",
         "source_refs": [
           "onet"
@@ -37240,39 +37320,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 30,900 people (2024, O*NET summary page scope)",
+        "derivation": "SOC 29-2051 in BLS Table 1.2.",
+        "display_value": "32,100 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment scale (stock statistic)",
-        "occupation_scope": "Scope of this occupation (29-2051.00); demand varies with the density of medical institutions and the scale of group catering and is not entirely the same population as the wage statistics; this occupation is relatively small in scale, and local openings explain individual opportunity better than a national total",
-        "period": "2024 base period; retrieved 2026-09-19",
+        "measure": "2025 employment base",
+        "occupation_scope": "U.S. SOC 29-2051",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Growth of 3% to 4% (2024—2034, marked about average on the O*NET summary page)",
+        "derivation": "SOC 29-2051 in BLS Table 1.2.",
+        "display_value": "2.7% growth (2025–2035)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "Scope of this occupation, projection period 2024—2034; this projection is a change in the occupational total, not an individual probability of being hired; this page did not obtain the first-hand scope of the BLS Occupational Outlook page (unavailable to capture this time), so no second projection value is presented alongside, and the page states this in the relevant place",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "measure": "2025–2035 employment change",
+        "occupation_scope": "U.S. SOC 29-2051",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 4,000 (2024—2034, including replacement demand; O*NET summary page scope)",
+        "derivation": "SOC 29-2051 in BLS Table 1.2.",
+        "display_value": "4,200 per year (including replacements)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Projected job openings in the period (including replacement demand)",
-        "occupation_scope": "Scope of this occupation; these are the total openings arising from replacement and other factors within the projection period, not annual net new positions, nor a direct measure of individual opportunity; the scope period marked on the O*NET page is 2024—2034, and the page cites it on that basis without converting it to an annual figure",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "measure": "Projected annual openings (including replacements)",
+        "occupation_scope": "U.S. SOC 29-2051",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-current"
         ]
       },
       {
@@ -37363,39 +37443,39 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "SOC 29-2051 in BLS Table 1.2.",
         "display_value": "About 32100 positions (2025)",
         "fact_id": "r5-current-employment",
         "market": "United States",
-        "measure": "Employment scale",
-        "occupation_scope": "United States 29-2051 for the current 2025—2035: employment 32100 in 2025→a projected 32900 in 2035; BLS Table 1.2 gives growth of 2.7%, an official net change of 0.9 thousand, 4200 annual average openings including growth and replacement, and self-employment 0.4%. The O*NET national trend rounds to 3%, and the summary group is Average3 to 4%. The precision of each source is retained, and the official net change is not revised by subtracting the rounded stock figures; openings are not a ten-year total, a net increase or an individual hiring rate, and the projection does not prove AI causation.",
-        "period": "2025—2035",
+        "measure": "2025 employment base",
+        "occupation_scope": "U.S. SOC 29-2051",
+        "period": "2025",
         "source_refs": [
           "r5-bls-current",
           "r5-trends-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "SOC 29-2051 in BLS Table 1.2.",
         "display_value": "Growth of 2.7% (BLS); O*NET rounds to 3%, and the summary grouping is 3 to 4%",
         "fact_id": "r5-current-growth",
         "market": "United States",
-        "measure": "Ten-year employment change",
-        "occupation_scope": "United States 29-2051 for the current 2025—2035: employment 32100 in 2025→a projected 32900 in 2035; BLS Table 1.2 gives growth of 2.7%, an official net change of 0.9 thousand, 4200 annual average openings including growth and replacement, and self-employment 0.4%. The O*NET national trend rounds to 3%, and the summary group is Average3 to 4%. The precision of each source is retained, and the official net change is not revised by subtracting the rounded stock figures; openings are not a ten-year total, a net increase or an individual hiring rate, and the projection does not prove AI causation.",
-        "period": "2025—2035",
+        "measure": "2025–2035 employment change",
+        "occupation_scope": "U.S. SOC 29-2051",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-current",
           "r5-trends-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "SOC 29-2051 in BLS Table 1.2.",
         "display_value": "4200 annual average openings (2025—2035, including growth and replacement)",
         "fact_id": "r5-current-openings",
         "market": "United States",
-        "measure": "Annual average openings",
-        "occupation_scope": "United States 29-2051 for the current 2025—2035: employment 32100 in 2025→a projected 32900 in 2035; BLS Table 1.2 gives growth of 2.7%, an official net change of 0.9 thousand, 4200 annual average openings including growth and replacement, and self-employment 0.4%. The O*NET national trend rounds to 3%, and the summary group is Average3 to 4%. The precision of each source is retained, and the official net change is not revised by subtracting the rounded stock figures; openings are not a ten-year total, a net increase or an individual hiring rate, and the projection does not prove AI causation.",
-        "period": "2025—2035",
+        "measure": "Projected annual openings (including replacements)",
+        "occupation_scope": "U.S. SOC 29-2051",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-current",
           "r5-trends-current"
@@ -37473,6 +37553,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Assists clinical nutrition work and supervises medical diets under senior dietitians and physicians. Direct hospital contract; no numeric wage stated.",
+        "fact_id": "posting-nutrition-huaxi",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Chengdu clinical nutrition technician",
+        "period": "2026-06",
+        "source_refs": [
+          "nutrition-huaxi"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Requires a master’s in public health, credentials specified in the ad, at least three years of relevant hospital experience and a junior professional title; no numeric wage stated.",
+        "fact_id": "posting-nutrition-chongqing",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Chongqing clinical nutrition technician",
+        "period": "2026-10",
+        "source_refs": [
+          "nutrition-chongqing"
+        ]
       }
     ]
   },
@@ -37486,7 +37590,7 @@
     "badges": [
       "Intake and weight monitoring · nutrition assessment assistance · meal arrangement and teaching",
       "O*NET-SOC 29-2051.00 · 2025 wage data",
-      "Job Zone Three · on-the-job training and apprenticeship · interest code SCR"
+      "O*NET Job Zone 3 · medium preparation · interest code SCR"
     ],
     "metrics": [
       {
@@ -37499,19 +37603,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "United States employment projection (growth of 3% to 4% over 2024—2034, about average)"
+        "label": "U.S. 2025–2035 projected employment: +2.7%"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "United States employment (about 30,900 people in 2024)"
+        "label": "U.S. employment: 32,100 jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "United States projected job openings (about 4,000 in 2024—2034, including replacement demand)"
+        "label": "U.S. projected annual openings: 4,200 (including replacements)"
       },
       {
         "availability": "missing",
@@ -37525,17 +37629,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Dietetic technicians (O*NET-SOC 29-2051.00) assist with food service and nutrition programmes under the supervision of a registered dietitian: monitoring intake and weight and reporting to the dietitian, collecting dietary history and carrying out nutrition assessment, preparing main meals according to recipes and calculating portions, planning menus and meals according to guidelines and guiding individuals and families, supervising food production and service, analyzing and standardising recipes, calculating food costs, taking part in interdisciplinary meetings, referring patients and giving nutrition presentations. United States scope: in the May 2025 wage data the median annual wage is 37,640 USD (median hourly 18.09 USD), with annual percentiles of 29,720 / 33,880 / 37,640 / 45,750 / 54,020 USD; 2024 employment is about 30,900 people, growth of 3% to 4% over 2024—2034 with about 4,000 projected openings; the interest code is SCR; the preparation level is Job Zone Three. Mainland China: nutrition and dietary execution in clinical nutrition departments and group catering is carried out by trained nutrition technical personnel and is not physician practice, and the public nutritionist has changed to occupational skill level recognition; public statistics have not established an occupational-level wage scope for this occupation, and this page marks the gap in the relevant places."
+      "text": "See how dietetic technicians check meals and record intake. Compare U.S. wages, mainland China hospital postings and the dietitian’s role."
     },
     "title": {
       "availability": "available",
       "text": "Dietetic technicians"
     }
   },
-  "source_content_sha256": "b32f9a408039904333d32c82214dcd82b3825481b24daa362f7f1c7a4be8f178",
+  "source_content_sha256": "b8c7c80cd4bf089678224b7dfe5b76ed6ee65849157e8a7edae7f4f08e2d815a",
   "subject": {
     "canonical_slug": "dietetic-technicians",
     "name": "Dietetic technicians",
-    "summary": "Dietetic technicians (United States side O*NET-SOC 29-2051.00) are an execution and support position that assists in providing food service and nutrition programmes under the supervision of a registered dietitian: observing and recording the patient's intake and weight changes and reporting changes, progress and dietary problems to the dietitian; collecting and assessing the individual's dietary history in order to carry out nutrition assessment and assisting in formulating nutrition plans; preparing main meals according to recipes and calculating group portions, planning menus and meals according to nutritional needs and established guidelines, or guiding individuals and families on food selection, preparation and menu planning; supervising food production and service, or assisting the dietitian with food service supervision and planning; analyzing and standardising menus and recipes and testing new products, calculating food and beverage costs and assisting with cost control; recording and verifying the arrangement and distribution of therapeutic diets and special meals and tracking food safety and sample retention and tableware disinfection requirements; taking part in interdisciplinary meetings with other medical professionals, assisting the dietitian in researching food, nutrition and food service systems, organising induction and in-service education, referring patients to other related services to maintain continuity of care, and giving dietary and nutrition health presentations to populations. United States scope: in the May 2025 wage data for this occupation the median annual wage is 37,640 USD (median hourly 18.09 USD), with annual percentiles of 29,720 / 33,880 / 37,640 / 45,750 / 54,020 USD (hourly percentiles 14.29 / 16.29 / 18.09 / 22.00 / 25.97); the O*NET summary page gives 2024 employment of about 30,900 people, growth of 3% to 4% over 2024—2034 (average) and about 4,000 projected job openings, with the main industry being healthcare and social assistance; the preparation level is Job Zone Three (medium preparation, SVP 6.0 to below 7.0), usually requiring 1—2 years of training, with apprenticeship opportunities, and among new hire feedback 35% consider an associate degree or other two-year degree necessary and 27% consider a postsecondary certificate necessary; the interest code is SCR; the work context includes continuous contact with others 78%, being indoors in a controlled environment 91% every day, face-to-face discussion 79% every day, exposure to disease or infection 82% every day, time pressure 61% every day, and wearing common protective equipment 65% every day. Mainland China scope: nutrition and dietary execution work in hospital clinical nutrition departments and group catering is carried out by nutrition technical personnel with clinical nutrition professional education or training, who may carry out nutrition consultation, nutrition screening and assessment, enteral nutrition preparation, medical diet arrangement and nutrition teaching, but this is not physician practice and does not involve nutrition diagnosis and treatment; the public nutritionist has changed to occupational skill level recognition and the certificate does not carry physician practice qualification. Public statistics have not published occupational-level wages corresponding to this occupation, and this page retains the gap as it stands."
+    "summary": "Check meal plans, record intake and feedback, verify service and report discrepancies. Qualified technical staff can assist with screening, assessment or meal preparation within applicable rules. A job title or assignment alone does not authorize prescribing."
   }
 }

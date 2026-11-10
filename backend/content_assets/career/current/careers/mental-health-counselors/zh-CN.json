@@ -164,8 +164,17 @@
       "item:mental-health-counselors.path.entry-role-comparison.9": {
         "status": "pending_mapping"
       },
+      "item:mental-health-counselors.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
       "item:mental-health-counselors.path.interview-probation.10": {
         "status": "pending_mapping"
+      },
+      "item:mental-health-counselors.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:mental-health-counselors.path.seven-day-trial.1": {
+        "status": "mapped"
       },
       "item:mental-health-counselors.profile.definition-block.1": {
         "status": "mapped"
@@ -5686,52 +5695,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5962,96 +6109,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -11936,7 +12319,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "直接判断：若你愿意倾听与稳定回应、按评估与保密规范记录并在危机时升级，帮助他人改善心理与情绪健康，这个方向值得进一步试验。安全试做只用完全虚构的咨询案例，不接触真实当事人信息或受限数据。"
+              "如果你更喜欢迅速给建议，不喜欢跟进、记录和督导，选择时要谨慎；心理咨询常需要持续对话并守住职责边界。"
             ]
           },
           "id": "mental-health-counselors.quick-decision.fermat-decision-card.1",
@@ -11950,7 +12333,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "可观察信号：能否按评估与风险筛查流程工作、能否严守保密与记录规范、能否在安全风险出现时立即升级；人格标签不能决定适配或资格。"
+              "也可以问督导，目标岗位有哪些支持与转介流程。"
             ]
           },
           "id": "mental-health-counselors.quick-decision.fermat-decision-card.2",
@@ -11964,7 +12347,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合条件：愿意长期处理情绪负荷与保密责任，能在督导与执照范围内稳定工作并持续学习。谨慎条件：若难以承受高情绪负荷与安全责任，可先比较社会服务或心理咨询等相邻方向。"
+              "如果你喜欢认真倾听、持续跟进对话，并愿意按明确流程转介，可以进一步了解心理咨询工作。"
             ]
           },
           "id": "mental-health-counselors.quick-decision.fermat-decision-card.3",
@@ -11978,7 +12361,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "完全虚构纸面包，60分钟，不接触真实当事人或信息。A：成年角色林某刚换班，近两周自述睡眠不规律、担心工作，只希望了解可用支持；未提供既往史、安全筛查、同意范围或诊断。B：虚构机构规则要求学习者只做需求摘录、已知/未知清单和交接草案；任何安全线索先按机构流程交督导/有资格者，不独立评估处置。C：角色的一句话被记录为“有时觉得撑不住”，含义和即时安全状态未知；其亲友索要完整记录，但未给披露授权。整理事实与待核问题、两项待专业人员确认的支持目标、保密/升级交接和记录模板，不给诊断、疗程或危险程度分级，不上传个人信息到工具。"
+              "只使用虚构记录。涉及评估、照护决定或资料披露，按适用流程交具资质或有授权的人处理。"
             ]
           },
           "id": "mental-health-counselors.quick-decision.fermat-decision-card.4",
@@ -12057,7 +12440,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入：O*NET 21-1014.00 的官方描述、任务、工作情境、兴趣代码（SI）与 Job Zone Five，以及 BLS 2025 年工资与 2024—2034 年就业预测（本职业口径）；不据此推定中国大陆的资格、工资或就业口径。"
+              "研究输入：O*NET 21-1014.00 的官方描述、任务、工作情境、兴趣代码（SI）与 Job Zone Five，以及 BLS 2025 年工资与 2025—2035 年就业预测（21-1018 组合口径）；不据此推定中国大陆的资格、工资或就业口径。"
             ]
           },
           "id": "mental-health-counselors.profile.definition-block.5",
@@ -12213,7 +12596,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "使用前述虚构A/B/C包，练事实与未知项整理及交接；工具提示只能辅助，不能给角色诊断或安全等级，也不上传真实个案信息。"
+              "职业探索只做第 09 节 HC-16 和另一个七日新题 W-HC，两者仅用虚构的预约与交接记录。"
             ]
           },
           "id": "mental-health-counselors.ai-impact.ai-impact-table.2",
@@ -12411,7 +12794,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国21-1018物质滥用、行为障碍与心理健康咨询师组合职业：2025—2035就业533,400→631,400人，18%、净增98,000，年均空缺50,500含增长与替换；不是21-1014单列统计、当前招聘或AI因果。"
+              "美国21-1018物质滥用、行为障碍与心理健康咨询师组合职业：2025—2035就业533,400→631,400 个岗位，18.4%、净增98,000，年均空缺50,500含增长与替换；不是21-1014单列统计、当前招聘或AI因果。"
             ]
           },
           "id": "mental-health-counselors.us-salary.career-snapshot-secondary-locale.3",
@@ -12579,7 +12962,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "使用前述虚构A/B/C包和参考交付，只练事实摘录、未知项及交接草案，不做诊断、安全分级或真实咨询。纸面表现只供探索，须另核真实训练、督导和执照要求。"
+              "职业探索只做第 09 节 HC-16 和另一个七日新题 W-HC，两者仅用虚构的预约与交接记录。"
             ]
           },
           "id": "mental-health-counselors.fit.riasec-fit-block.8",
@@ -12657,7 +13040,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "共同升级规则：一旦出现安全风险、保密疑问或超出范围的请求，先暂停相关环节，把事实、影响和待决问题交督导或有执照者确认后再继续。"
+              "共同升级规则：一旦出现安全风险、保密疑问或超出范围的请求，先暂停相关环节，把事实、影响和待决问题交指定督导或按机构流程有权处理的人员确认；涉及受监管的临床工作，先核执照要求。"
             ]
           },
           "id": "mental-health-counselors.risk.career-risk-cards.5",
@@ -12749,7 +13132,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "作品：前述虚构A/B/C的事实/未知清单、支持目标草案、保密与升级交接记录，标记未接触真实个案、未做诊断/筛查或咨询。七日每天20分钟：第1天摘录已知事实；第2天列安全/同意/病史未知；第3天写交督导问题与及时升级边界；第4天核亲友请求和披露权限；第5天整理目标及空白记录；第6天对照参考交付纠错；第7天汇成作品，再查一个目标岗位的教育/督导/执照要求并记来源日期，未找到如实记录。安全未知的真实事件不得等待这份纸面学习计划。"
+              "职业探索只做第 09 节 HC-16 和另一个七日新题 W-HC，两者仅用虚构的预约与交接记录。"
             ]
           },
           "id": "mental-health-counselors.path.career-path-block.6",
@@ -12807,9 +13190,9 @@
             "rows": [
               [
                 "学习阶段",
-                "用虚构ABC整理事实与交接草案",
+                "用 HC-16 核虚构预约凭证。",
                 "不接真实个案、不诊断或安全分级",
-                "标记虚构和未完成筛查的纸面作品",
+                "两行纸面凭证及一份给排班员的交接。",
                 "下一阶段先核资格、督导与机构授权"
               ],
               [
@@ -12867,9 +13250,9 @@
             "rows": [
               [
                 "面试前准备",
-                "整理虚构ABC事实、未知项和交接",
-                "核对是否臆造筛查、同意或诊断",
-                "明确纸面性质的交接作品"
+                "到第 09 节用 HC-16 核虚构预约凭证，拟交排班员的便笺。独立的 W-HC 核联系偏好和督导签认。",
+                "按 HC-16 题后量规独立回核，同伴复核可选。",
+                "虚构凭证便笺、待核项与纸面交接。"
               ],
               [
                 "面试现场",
@@ -12981,6 +13364,127 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "虚构材料：HC-16（约 10 分钟）",
+                  "虚构训练台规定：预约须记录偏好时段及排班确认，才标为已约。",
+                  "H2 有偏好时段及排班确认；H3 有偏好时段及日历占位草稿。",
+                  "由排班员确认预约，不做心理评估，也不使用真人资料。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "任务与交付",
+                  "写两行跟进，逐一列编号、凭证和下一步。",
+                  "写清谁可确认排班。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "题后参考",
+                  "H2 两种凭证齐全；H3 的占位草稿不是预约确认。",
+                  "把疑问交排班员，H3 保留待办。"
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "独立自核量规",
+                  "核两个编号、确认凭证和决定责任。"
+                ]
+              }
+            ]
+          },
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "title": "HC-16：准备一次后续预约交接",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "第 1 天",
+                  "开始新题 W-HC。虚构训练服务要求 J8、J9 发跟进前有联系偏好及督导签认。抄下规则。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "第 2 天",
+                  "J8 偏好书面留言；J9 的偏好栏空白。分别登记，不猜测。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "第 3 天",
+                  "J8 有督导签认；J9 只有未签草稿。分别标出证据。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "第 4 天",
+                  "写一句给虚构督导的问题，核 J9 缺失记录。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "第 5 天",
+                  "写两行交接，列依据和下一步，先不发送消息。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "第 6 天",
+                  "独立对照第 1 天规则及第 2–3 天记录复核交接；完成后可选请同伴看。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "第 7 天",
+                  "写下你是否喜欢细致跟进，以及入行前想了解哪种督导。"
+                ]
+              }
+            ]
+          },
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "title": "七天纸面体验：独立新题",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "我列了两个编号。",
+              "我核了两项条件。",
+              "我没有猜测缺失资料。",
+              "我写清了下一责任人。",
+              "我只使用虚构材料。",
+              "我可以独立再核一遍。",
+              "我确定了一项要练的能力。"
+            ]
+          },
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "title": "七天后的判断问题",
+          "type": "list"
         }
       ]
     },
@@ -12995,7 +13499,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国21-1018物质滥用、行为障碍与心理健康咨询师组合职业：2025—2035就业533,400→631,400人，18%、净增98,000，年均空缺50,500含增长与替换；不是21-1014单列统计、当前招聘或AI因果。"
+              "美国21-1018物质滥用、行为障碍与心理健康咨询师组合职业：2025—2035就业533,400→631,400 个岗位，18.4%、净增98,000，年均空缺50,500含增长与替换；不是21-1014单列统计、当前招聘或AI因果。"
             ]
           },
           "id": "mental-health-counselors.market-signals.market-signal-card.1",
@@ -13111,12 +13615,14 @@
                 ]
               },
               {
-                "answer": "咨询需求评估、风险筛查与处置、咨询方案、保密与披露判断、转介与危机升级，必须由有资格与执照的人按职责负责；工具输出不得作为诊断或处置结论。",
+                "answer": "咨询需求评估、风险筛查、咨询方案、保密与升级按适用法律和机构流程分工。受监管的临床工作另核所需执照。工具输出不能作为诊断或处置结论。",
                 "id": "mental-health-counselors.faq.5",
                 "question": "哪些关键判断必须由专业人员负责？",
                 "question_key": "career.faq.mental-health-counselors.5",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "source-pack-onet-details",
+                  "bls-ooh-licensure",
+                  "cn-mental-health-law-article23"
                 ]
               },
               {
@@ -13129,21 +13635,24 @@
                 ]
               },
               {
-                "answer": "BLS 2025 年工资数据（展示口径 Substance Abuse, Behavioral Disorder, and Mental Health Counselors）：中位年薪 59,350 美元（约 28.53 美元/小时），10 分位 38,940、25 分位 47,100、75 分位 76,530、90 分位 97,590 美元；分位不含个人到手收入。",
+                "answer": "BLS 表 1.2 的物质使用、行为障碍及心理健康咨询师（21-1018 合计）：2025 年 5 月年工资中位数 59,350 美元；2025 年美国有 533,400 个岗位，2035 年预计 631,400 个（+18.4%），预计年均空缺 50,500 个，含替换需求。 这是组合统计，不单列心理健康咨询师。",
                 "id": "mental-health-counselors.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.mental-health-counselors.7",
                 "source_refs": [
-                  "onet-wages"
+                  "onet-wages",
+                  "onet-trends"
                 ]
               },
               {
-                "answer": "美国 Job Zone Five：通常需要研究生教育（硕士或以上）并多需执照或注册，实习与督导时数是常见要求；中国大陆的学历、执业与监督边界按主管部门规则确定。学位不等于执业授权。",
+                "answer": "美国 BLS 将心理健康咨询师的执照规则与统计组合区分：全美各州均要求其持照，包含全国考试和受督导临床实务；细节以目标州主管部门为准。中国大陆《精神卫生法》第 23 条规定，心理咨询人员依执业规范提供专业心理咨询，不得从事心理治疗或者精神障碍的诊断、治疗；发现来访者可能患有精神障碍时，应建议到符合法定条件的医疗机构就诊。",
                 "id": "mental-health-counselors.faq.8",
                 "question": "入行和训练路径通常是什么样的？",
                 "question_key": "career.faq.mental-health-counselors.8",
                 "source_refs": [
-                  "source-pack-onet-localcert"
+                  "source-pack-onet-localcert",
+                  "bls-ooh-licensure",
+                  "cn-mental-health-law-article23"
                 ]
               }
             ]
@@ -13188,28 +13697,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "心理健康咨询师",
+                "entity": "MBTI 人格测试",
                 "id": "navigation-2",
-                "relation": "career.section",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "心理健康咨询师",
-                "id": "navigation-3",
-                "relation": "career.section",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "心理健康咨询师",
-                "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "心理健康咨询师",
-                "id": "navigation-5",
+                "entity": "大五人格测试",
+                "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
+              },
+              {
+                "entity": "心理健康社工",
+                "id": "navigation-4",
+                "relation": "career.section",
+                "url": "/zh/career/jobs/mental-health-and-substance-abuse-social-workers"
+              },
+              {
+                "entity": "临床与咨询心理学家",
+                "id": "navigation-5",
+                "relation": "career.section",
+                "url": "/zh/career/jobs/clinical-and-counseling-psychologists"
               },
               {
                 "entity": "心理健康咨询师",
@@ -13247,7 +13756,7 @@
                 "name": "心理健康咨询师 AI task boundary",
                 "period": "current task analysis; reviewed 2026-08-31",
                 "publisher": "FermatMind editorial review",
-                "scope": "editorial_synthesis",
+                "scope": "心理健康咨询师 AI task boundary",
                 "url": null
               },
               {
@@ -13262,7 +13771,7 @@
                 "name": "心理健康咨询师 employment model boundary",
                 "period": "current employer context; reviewed 2026-08-31",
                 "publisher": "FermatMind editorial review",
-                "scope": "editorial_synthesis",
+                "scope": "心理健康咨询师 employment model boundary",
                 "url": null
               },
               {
@@ -13277,7 +13786,7 @@
                 "name": "心理健康咨询师 market and path boundary",
                 "period": "current employer context; reviewed 2026-08-31",
                 "publisher": "FermatMind editorial review",
-                "scope": "editorial_synthesis",
+                "scope": "心理健康咨询师 market and path boundary",
                 "url": null
               },
               {
@@ -13290,9 +13799,9 @@
                 "limitation": "行业平均不能替代本职业精确工资。",
                 "market": "CN",
                 "name": "2025年城镇单位就业人员年平均工资情况",
-                "period": "2025 annual wages; published 2026-05-15; retrieved 2026-08-31",
+                "period": "2025 年数据（2026 年 5 月 15 日发布）",
                 "publisher": "国家统计局",
-                "scope": "industry_proxy",
+                "scope": "2025年城镇单位就业人员年平均工资情况",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
@@ -13358,18 +13867,17 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "数据来自Substance Abuse, Behavioral Disorder, and Mental Health Counselors组合职业，经21-1014.00展示；不单列心理健康咨询师。",
-                  "2024—2034年均48,300空缺，含替代；不是当前招聘数。"
+                  "BLS 表 1.2 的物质使用、行为障碍及心理健康咨询师（21-1018 合计）：2025 年 5 月年工资中位数 59,350 美元；2025 年美国有 533,400 个岗位，2035 年预计 631,400 个（+18.4%），预计年均空缺 50,500 个，含替换需求。 这是组合统计，不单列心理健康咨询师。"
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
-                "limitation": "组合职业全国口径，不是单列本职业工资或就业；不外推中国、个人收入或录用。",
+                "limitation": "BLS 表 1.2 的物质使用、行为障碍及心理健康咨询师（21-1018 合计）：2025 年 5 月年工资中位数 59,350 美元；2025 年美国有 533,400 个岗位，2035 年预计 631,400 个（+18.4%），预计年均空缺 50,500 个，含替换需求。 这是组合统计，不单列心理健康咨询师。",
                 "market": "US",
-                "name": "National employment trends for 21-1014.00",
-                "period": "BLS 2024-2034 projections via O*NET; retrieved 2026-08-31",
+                "name": "BLS 表 1.2（21-1018）",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / BLS",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/21-1014.00"
+                "scope": "物质使用、行为障碍及心理健康咨询师（21-1018 合计）",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -13523,6 +14031,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "details": [
+                  "2026 年 3 月 20 日公告列日常咨询、预约流程和对外协作；申请已于 4 月 3 日截止，条件仅代表该校。"
+                ],
+                "id": "cn-pkusz-counseling-vacancy",
+                "limitation": "2026 年 3 月 20 日公告列日常咨询、预约流程和对外协作；申请已于 4 月 3 日截止，条件仅代表该校。",
+                "market": "CN",
+                "name": "北京大学深圳研究生院心理咨询岗位",
+                "period": "2026",
+                "publisher": "北京大学深圳研究生院心理咨询岗位",
+                "scope": "北京大学深圳研究生院心理咨询岗位",
+                "url": "https://www.pkusz.edu.cn/info/1056/6599.htm"
+              },
+              {
+                "details": [
+                  "中国大陆《精神卫生法》第 23 条规定，心理咨询人员依执业规范提供专业心理咨询，不得从事心理治疗或者精神障碍的诊断、治疗；发现来访者可能患有精神障碍时，应建议到符合法定条件的医疗机构就诊。"
+                ],
+                "id": "cn-mental-health-law-article23",
+                "limitation": "中国大陆《精神卫生法》第 23 条规定，心理咨询人员依执业规范提供专业心理咨询，不得从事心理治疗或者精神障碍的诊断、治疗；发现来访者可能患有精神障碍时，应建议到符合法定条件的医疗机构就诊。",
+                "market": "CN",
+                "name": "《中华人民共和国精神卫生法》第 23 条",
+                "period": "2018 revision",
+                "publisher": "Beijing Municipal Health Commission",
+                "scope": "《中华人民共和国精神卫生法》第 23 条",
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992810.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国执照、学历和受督导经验；实际条件看适用州主管部门。"
+                ],
+                "evidence_type": "官方职业手册",
+                "id": "bls-ooh-licensure",
+                "limitation": "美国执照、学历和受督导经验；实际条件看适用州主管部门。",
+                "market": "US",
+                "name": "BLS 职业展望手册：入行与执照",
+                "period": "2026-11-10 实读",
+                "publisher": "美国劳工统计局",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/community-and-social-service/substance-abuse-behavioral-disorder-and-mental-health-counselors.htm#tab-4"
               }
             ]
           },
@@ -13710,7 +14259,7 @@
             }
           }
         ],
-        "answer": "工具可辅助记录整理、资源检索与信息核对，但评估、咨询干预、危机处置与保密判断仍由有执照的人负责。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
+        "answer": "工具可辅助记录整理、资源检索与信息核对，但评估、咨询干预、危机处置与保密按适用法律和机构流程分工；受监管的临床工作另核所需执照。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "本职业任务与范围",
@@ -13864,7 +14413,7 @@
             "问题": "工具可以确认安全吗？"
           },
           {
-            "回答": "使用本页ABC虚构包和参考交付，不接触真实当事人或信息。",
+            "回答": "用 HC-16 核虚构预约凭证并拟交接；不使用真实来访者资料。",
             "来源": "本职业任务基础与编辑边界",
             "链接": "https://www.onetonline.org/link/details/21-1014.00",
             "问题": "如何开始纸面试验？"
@@ -14015,7 +14564,7 @@
             "stage": "责任扩展"
           }
         ],
-        "direct_answer": "BLS美国心理健康咨询师通常需硕士与实习，所有州要求执照，考试及督导临床工作等具体要求按州核；这是本职业要求，不由Job Zone Five推出。中国按实际咨询/治疗类别与机构核要求。",
+        "direct_answer": "BLS美国心理健康咨询师通常需硕士与实习，所有州要求执照，考试及督导临床工作等具体要求按州核；这是本职业要求，不由Job Zone Five推出。中国按实际咨询/治疗类别与机构核要求。 中国大陆《精神卫生法》第 23 条规定，心理咨询人员依执业规范提供专业心理咨询，不得从事心理治疗或者精神障碍的诊断、治疗；发现来访者可能患有精神障碍时，应建议到符合法定条件的医疗机构就诊。",
         "entry_heading": "入行路径与可检查证据",
         "heading": "心理健康咨询师的入行路径、资格边界与职业发展",
         "locale_requirements": {
@@ -14071,6 +14620,18 @@
             "id": "source-pack-onet-localcert",
             "label": "美国认证查询入口",
             "scope": "目录不是州执照或机构授权。"
+          },
+          {
+            "href": "https://www.pkusz.edu.cn/info/1056/6599.htm",
+            "id": "cn-pkusz-counseling-vacancy",
+            "label": "北京大学深圳研究生院心理咨询岗位",
+            "scope": "2026 年 3 月 20 日公告列日常咨询、预约流程和对外协作；申请已于 4 月 3 日截止，条件仅代表该校。"
+          },
+          {
+            "href": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992810.html",
+            "id": "cn-mental-health-law-article23",
+            "label": "《中华人民共和国精神卫生法》第 23 条",
+            "scope": "中国大陆《精神卫生法》第 23 条规定，心理咨询人员依执业规范提供专业心理咨询，不得从事心理治疗或者精神障碍的诊断、治疗；发现来访者可能患有精神障碍时，应建议到符合法定条件的医疗机构就诊。"
           }
         ],
         "tracks": [
@@ -14080,8 +14641,8 @@
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
                 "next_moves": "核下一阶段任务、资格及授权后再训练，不保证独立执业或晋升。",
-                "readiness_evidence": "作品：前述虚构A/B/C的事实/未知清单、支持目标草案、保密与升级交接记录，标记未接触真实个案、未做诊断/筛查或咨询。七日每天20分钟：第1天摘录已知事实；第2天列安全/同意/病史未知；第3天写交督导问题与及时升级边界；第4天核亲友请求和披露权限；第5天整理目标及空白记录；第6天对照参考交付纠错；第7天汇成作品，再查一个目标岗位的教育/督导/执照要求并记来源日期，未找到如实记录。安全未知的真实事件不得等待这份纸面学习计划。",
-                "responsibility": "前述ABC只做纸面学习；真实服务须核资格、督导及机构范围。",
+                "readiness_evidence": "职业探索只做第 09 节 HC-16 和另一个七日新题 W-HC，两者仅用虚构的预约与交接记录。",
+                "responsibility": "HC-16 与 W-HC 仅作纸面练习；真实服务须核资格、督导和机构授权。",
                 "role": "纸面需求摘录"
               },
               {
@@ -14115,7 +14676,7 @@
                 "credentials": "按具体法域、机构与雇主规则核验。",
                 "next_moves": "核下一阶段任务、资格及授权后再训练，不保证独立执业或晋升。",
                 "readiness_evidence": "可复核的咨询与转介训练、记录及督导反馈；纸面记录注明非真实服务。",
-                "responsibility": "前述ABC只做纸面学习；真实服务须核资格、督导及机构范围。",
+                "responsibility": "HC-16 与 W-HC 仅作纸面练习；真实服务须核资格、督导和机构授权。",
                 "role": "纸面目标与资源核对"
               },
               {
@@ -14149,7 +14710,7 @@
                 "credentials": "按具体法域、机构与雇主规则核验。",
                 "next_moves": "核下一阶段任务、资格及授权后再训练，不保证独立执业或晋升。",
                 "readiness_evidence": "可复核的保密与记录训练、记录及督导反馈；纸面记录注明非真实服务。",
-                "responsibility": "前述ABC只做纸面学习；真实服务须核资格、督导及机构范围。",
+                "responsibility": "HC-16 与 W-HC 仅作纸面练习；真实服务须核资格、督导和机构授权。",
                 "role": "纸面同意与未知项"
               },
               {
@@ -14510,7 +15071,7 @@
             {
               "指标": "2025卫生和社会工作行业参考",
               "数值": "非私营146,266；私营75,631元/年",
-              "说明": "中国城镇单位全行业税前年均；非职业中位/月薪｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              "说明": "中国城镇单位卫生和社会工作行业内就业人员税前年平均工资；非职业中位/月薪｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             },
             {
               "指标": "统一起薪",
@@ -14648,18 +15209,18 @@
           },
           {
             "指标": "组合就业2025→2035",
-            "数值": "533,400→631,400人",
-            "说明": "21-1018组合预测，非单列心理健康咨询师；空缺非净增｜https://www.onetonline.org/link/localtrends/21-1014.00"
+            "数值": "533,400→631,400 个岗位",
+            "说明": "BLS 表 1.2，21-1018 组合口径；预计空缺含替换需求｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "指标": "组合就业变化2025—2035",
-            "数值": "18%；净增98,000人",
-            "说明": "21-1018组合预测，非单列心理健康咨询师；空缺非净增｜https://www.onetonline.org/link/localtrends/21-1014.00"
+            "数值": "18.4%；净增98,000 个岗位",
+            "说明": "BLS 表 1.2，21-1018 组合口径；预计空缺含替换需求｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "指标": "组合年均空缺2025—2035",
             "数值": "50,500个/年",
-            "说明": "21-1018组合预测，非单列心理健康咨询师；空缺非净增｜https://www.onetonline.org/link/localtrends/21-1014.00"
+            "说明": "BLS 表 1.2，21-1018 组合口径；预计空缺含替换需求｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
         "boundary": {
@@ -14693,7 +15254,7 @@
         },
         "factor_rows": [
           {
-            "answer": "核对个体/团体、机构人群和转介范围，不套医疗设备维修职责。",
+            "answer": "核对个体/团体、机构人群和转介范围。",
             "factor": "人群与服务模式"
           },
           {
@@ -14711,14 +15272,14 @@
           }
         ],
         "factors_heading": "地区、机构与资格差异",
-        "growth": "18%（2025—2035，组合职业）",
+        "growth": "18.4%，2025–2035 年预计岗位增幅",
         "heading": "心理健康咨询师：美国组合职业工资与就业",
         "industry_heading": "行业场景与工资范围",
         "industry_period": "2025组合职业行业内工资",
         "industry_rows": [
           {
-            "industry": "医院（州、地方及私营）",
-            "median": "63,310美元/年",
+            "industry": "教育服务（州、地方及私营）",
+            "median": "62,070美元/年",
             "note": {
               "$join": [
                 "2025行业内21-1018组合职业中位年薪；非单列心理健康咨询师、非行业全员均值｜https://www.bls.gov/ooh/community-and-social-service/substance-abuse-behavioral-disorder-and-mental-health-counselors.htm",
@@ -14826,8 +15387,8 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "适合能倾听与稳定回应、按评估与保密规范记录、并在危机或安全风险出现时立即升级的人。",
-        "title": "心理健康咨询师适合什么样的人？"
+        "summary": "如果你喜欢认真倾听、持续跟进对话，并愿意按明确流程转介，可以进一步了解心理咨询工作。",
+        "title": "谁可能适合做心理健康咨询师？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -14836,7 +15397,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "how": "完全虚构纸面包，60分钟，不接触真实当事人或信息。A：成年角色林某刚换班，近两周自述睡眠不规律、担心工作，只希望了解可用支持；未提供既往史、安全筛查、同意范围或诊断。B：虚构机构规则要求学习者只做需求摘录、已知/未知清单和交接草案；任何安全线索先按机构流程交督导/有资格者，不独立评估处置。C：角色的一句话被记录为“有时觉得撑不住”，含义和即时安全状态未知；其亲友索要完整记录，但未给披露授权。整理事实与待核问题、两项待专业人员确认的支持目标、保密/升级交接和记录模板，不给诊断、疗程或危险程度分级，不上传个人信息到工具。 参考交付：已知仅为换班、两周睡眠困扰和求助意愿；不能据此诊断或判断安全/不安全。“撑不住”的含义与即时安全状态是须由督导或有资格人员及时按机构流程核对的未知项，不能留到常规周计划。亲友请求没有披露授权，先交负责人按适用规则核验，不能承诺绝对保密或自行披露。支持目标草案可写“明确可用支持资源”和“由专业人员共同确定可复核目标”，不是治疗处方。交付带原话/时间待填、未知项、交接对象与待确认事项的纸面记录，不虚构筛查完成、同意签字或实际咨询效果。",
+        "how": "到目录「09 入行、资格与职业发展」找《HC-16：准备一次后续预约交接》，用约 10 分钟核虚构记录，再读题后参考。",
         "suit": {
           "$join": [
             {
@@ -14863,12 +15424,12 @@
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "查看本职业市场信号"
+            "href": "#career-visual-group-sources",
+            "label": "查市场数据来源"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "查看市场数据与转型说明"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "比较相关职业方向"
           }
         ],
         "direct_answer": {
@@ -14939,7 +15500,7 @@
             "metric": "就业规模与变化",
             "occupation_scope": "Substance Abuse, Behavioral Disorder, and Mental Health Counselors组合职业（21-1018），经O*NET21-1014.00展示，不是单列心理健康咨询师统计",
             "source_id": "onet-trends",
-            "value": "533,400→631,400人；18%；净增98,000"
+            "value": "533,400→631,400 个岗位；18.4%；净增98,000"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15062,13 +15623,13 @@
             "alternate_value": null,
             "label": "美国组合职业就业（2025）",
             "secondary_value": null,
-            "value": "533,400人（21-1018组合统计）"
+            "value": "533,400 个岗位（21-1018组合统计）"
           },
           {
             "alternate_value": null,
             "label": "美国组合职业增长（2025—2035）",
             "secondary_value": null,
-            "value": "18%，非单列心理健康咨询师、非AI归因"
+            "value": "18.4%：BLS 表 1.2 的 21-1018 组合预测，不单列心理健康咨询师，也不归因于 AI。"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15076,7 +15637,7 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": "SI可以提出帮助他人及分析核验的兴趣假设，不能证明胜任；可先做本页ABC事实和未知清单。",
+            "answer": "SI 提示你可能对助人和凭证核对有兴趣。先用 HC-16 核虚构预约记录，看看你是否喜欢这类任务。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "做RIASEC兴趣探索",
             "evidence_level": {
@@ -15268,19 +15829,19 @@
             "question": "EQ分数能证明危机沟通能力吗？"
           },
           {
-            "answer": "观察能否分开A/C原话与推断、列出病史同意和即时安全未知，按B规则留交督导问题，不给诊断。",
-            "question": "虚构交接作品观察什么？"
+            "answer": "用 HC-16 核每份预约凭证支持什么、哪些信息待核；拟给排班员的交接，不实际联系任何人。",
+            "question": "虚构交接可核什么？"
           },
           {
-            "answer": "题面没有披露授权，只写负责人须核的同意与规则问题，不自行公开、不补造同意签字。",
-            "question": "亲友索要记录时如何练习？"
+            "answer": "用 W-HC 分栏写联系偏好和督导签认证据。缺证就留给指定督导复核，不发送消息。",
+            "question": "七天题哪些事项应留待核？"
           },
           {
             "answer": "真实安全线索须及时按机构流程交督导或有资格人员；七日纸面学习安排不适用于延迟处理真实事件。",
             "question": "遇到安全线索可等七日计划吗？"
           },
           {
-            "answer": "先用ABC纸面包与参考纠错，再查目标岗位教育、执照、督导和机构权限并记录来源日期；未取得资料如实标记。",
+            "answer": "先做 HC-16，按题后量规独立回核；再查目标岗位的教育、执照、督导和机构授权，记录来源及日期。",
             "question": "下一步如何核对目标岗位？"
           }
         ],
@@ -15304,7 +15865,7 @@
             "tone": "caution"
           },
           {
-            "body": "使用本页虚构ABC包和参考，只做事实/未知清单与交接，不做诊断、安全分级或真实咨询。",
+            "body": "到第 09 节用 HC-16 核虚构预约凭证，拟交排班员的便笺。独立的 W-HC 核联系偏好和督导签认。",
             "id": "experiment",
             "label": "下一步试验动作",
             "tone": "action"
@@ -15408,7 +15969,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "英文MBTI探索入口"
+            "label": "MBTI 人格测试"
           },
           {
             "href": {
@@ -15418,7 +15979,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "英文大五人格探索入口"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -15428,7 +15989,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "中文MBTI探索入口"
+            "label": "心理健康社工"
           },
           {
             "href": {
@@ -15438,7 +15999,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "中文大五人格探索入口"
+            "label": "临床与咨询心理学家"
           }
         ]
       },
@@ -15482,6 +16043,27 @@
         "id": "mental-health-counselors.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mental-health-counselors.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "mental-health-counselors.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "mental-health-counselors.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -15575,7 +16157,7 @@
         "fact_id": "us-median",
         "market": "美国（显示口径：Substance Abuse, Behavioral Disorder, and Mental Health Counselors）",
         "measure": "2025 年年薪中位数",
-        "occupation_scope": "Substance Abuse, Behavioral Disorder, and Mental Health Counselors组合职业（BLS21-1018），经O*NET21-1014.00展示；不是单列本职业统计。",
+        "occupation_scope": "物质使用、行为障碍及心理健康咨询师（21-1018 合计）",
         "period": "2025 年工资数据；查阅 2026-09-25",
         "source_refs": [
           "onet-wages"
@@ -15607,36 +16189,36 @@
       },
       {
         "derivation": null,
-        "display_value": "483,500 人（2024）",
+        "display_value": "533,400 个岗位 — 物质使用、行为障碍及心理健康咨询师（21-1018 合计）",
         "fact_id": "employment",
         "market": "美国",
-        "measure": "2024 年就业规模",
-        "occupation_scope": "Substance Abuse, Behavioral Disorder, and Mental Health Counselors组合职业（BLS21-1018），经O*NET21-1014.00展示；不是单列本职业统计。",
-        "period": "2024；查阅 2026-09-25",
+        "measure": "533,400 个岗位",
+        "occupation_scope": "物质使用、行为障碍及心理健康咨询师（21-1018 合计）",
+        "period": "2025",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
-        "derivation": "O*NET 全国就业趋势页：2024—2034 年预计增长约 17%。",
-        "display_value": "远高于平均（约 17%，2024—2034）",
+        "derivation": null,
+        "display_value": "18.4% 预计岗位增幅 — 物质使用、行为障碍及心理健康咨询师（21-1018 合计）",
         "fact_id": "growth",
         "market": "美国",
-        "measure": "就业增长预测",
-        "occupation_scope": "Substance Abuse, Behavioral Disorder, and Mental Health Counselors组合职业（BLS21-1018），经O*NET21-1014.00展示；不是单列本职业统计。",
-        "period": "2024—2034；查阅 2026-09-25",
+        "measure": "18.4% 预计岗位增幅",
+        "occupation_scope": "物质使用、行为障碍及心理健康咨询师（21-1018 合计）",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
-        "derivation": "含替换需求。",
-        "display_value": "约 48,300 个/年（2024—2034）",
+        "derivation": null,
+        "display_value": "50,500 个预计年均空缺 — 物质使用、行为障碍及心理健康咨询师（21-1018 合计）",
         "fact_id": "openings",
         "market": "美国",
-        "measure": "预计职位空缺（年均）",
-        "occupation_scope": "Substance Abuse, Behavioral Disorder, and Mental Health Counselors组合职业（BLS21-1018），经O*NET21-1014.00展示；不是单列本职业统计。",
-        "period": "2024—2034；查阅 2026-09-25",
+        "measure": "50,500 个预计年均空缺",
+        "occupation_scope": "物质使用、行为障碍及心理健康咨询师（21-1018 合计）",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
@@ -15684,31 +16266,31 @@
         "availability": "available",
         "fact_ref": "us-median",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国 21-1018 合计年工资中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国 21-1018 合计预计岗位增幅（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国 21-1018 合计2025 年岗位数"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国 21-1018 合计预计年均空缺（2025–2035 年）"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆：未核实本职业全国精确工资"
       }
     ]
   },
@@ -15716,14 +16298,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "心理健康咨询师（O*NET21-1014.00）提供心理健康咨询与预防。美国工资与就业采用物质滥用、行为障碍和心理健康咨询师组合统计：2025中位年薪59,350美元，2024就业483,500人；含任务、风险与入行边界。"
+      "text": "了解心理咨询工作、美国合计工资与岗位数据、中国大陆雇主样本，并用纸面题体验预约交接。"
     },
     "title": {
       "availability": "available",
       "text": "心理健康咨询师：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "cbfaf9d8ff6a9ff2fe988a98f325190f901b2810652d217c2feb7b4a85442a27",
+  "source_content_sha256": "9edb9654e65a91a7a5a3d11d30ef245a327bf916e01fbc635d124bb22b42fa1c",
   "subject": {
     "canonical_slug": "mental-health-counselors",
     "name": "心理健康咨询师",

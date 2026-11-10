@@ -161,6 +161,9 @@
       "item:ophthalmic-medical-technologists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:ophthalmic-medical-technologists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:ophthalmic-medical-technologists.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12954,6 +12957,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The test sheet names E2 and the quality-control sheet names E5. State the unverified link and what evidence the technical lead should check."
+            ]
+          },
+          "id": "ophthalmic-medical-technologists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Review ophthalmic equipment quality records",
+          "type": "notice"
         }
       ]
     },
@@ -15475,6 +15493,13 @@
         "id": "ophthalmic-medical-technologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "ophthalmic-medical-technologists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15692,7 +15717,7 @@
       "text": "Ophthalmic medical technologist: work, wages, and entry paths"
     }
   },
-  "source_content_sha256": "829e7c8bb1de06e18fc9b3e82afc3d83be5e36e211536917ea86c1833b074a36",
+  "source_content_sha256": "8ecd85f36a8546fd7df60a7b3e70852e7f9492d36700f1a0f3e2f2293e6fe01e",
   "subject": {
     "canonical_slug": "ophthalmic-medical-technologists",
     "name": "Ophthalmic medical technologist",

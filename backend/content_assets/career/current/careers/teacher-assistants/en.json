@@ -23670,15 +23670,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First see whether answers can be checked against the exercise standard, find clear duplicates, preserve missing submissions and missing items, and describe visible responses without guessing a child's ability or motivation. Real child interaction and supervision still require lawful school arrangements and training, and fast paper arithmetic does not certify teaching competence."
+              "Paper check | Compare two fictional assistant assignments. Sort student participation support, lab guidance and grading, and flag one task for the instructor to confirm. "
             ]
           },
           "id": "teacher-assistants.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "cn-rule",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -25254,19 +25251,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Teaching assistants support regular preschool, elementary, middle, or high school instruction under teacher guidance, assisting with individual or small-group review, preparing materials, maintaining records, and supervising student activities; the teacher holds main responsibility for designing and implementing the education plan. This page fixes O*NET-SOC25-9042.00 and excludes special education specialist assistants and postsecondary assistants. The US BLS25-9045 wages and employment are a combined reference covering regular, special education, and other non-postsecondary assistants and cannot be treated as a separate statistic for this occupation. In China, first check actual job duties, teaching qualification applicability, entry inquiry, and student protection; paper work grants no independent teaching, guardianship, or diagnostic authority."
+              "Teacher assistants support classroom work under an instructor’s direction. School-based assistants may help students participate and support classroom routines, while college assistants may lead discussions or labs and grade from a rubric. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "teacher-assistants.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-ooh",
-            "employer",
-            "cn-rule",
-            "sag",
-            "nist",
-            "editorial"
+            "transfer-onet-25-9043.00",
+            "transfer-onet-25-9044.00"
           ],
           "type": "prose"
         }
@@ -26090,19 +26081,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate material drafts, rule-based answer checking, and real student support. Preserve original tests, responses, duplicates, blanks, and unknowns, and check teacher main responsibility, school protection qualifications, and data use per the real division; the model does not fabricate approval or grades. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare two fictional assistant assignments. Sort student participation support, lab guidance and grading, and flag one task for the instructor to confirm."
             ]
           },
           "id": "teacher-assistants.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-ooh",
-            "cn-rule",
-            "employer",
-            "sag",
-            "nist",
-            "editorial"
+            "transfer-onet-25-9043.00",
+            "transfer-onet-25-9044.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -35696,6 +35682,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-25-9043.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 25-9043.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/25-9043.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-25-9044.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 25-9044.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/25-9044.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -41168,10 +41195,10 @@
       "text": "Teacher assistants (regular preschool to secondary)"
     }
   },
-  "source_content_sha256": "39101ebb7424be9bb599f460529cbbbef3d8d69cda14a42b1cce87410ef37114",
+  "source_content_sha256": "aad9cf3809d1d203125f9e101a6340b680bd287c7a2a9b2c607b8016f7b233d5",
   "subject": {
     "canonical_slug": "teacher-assistants",
     "name": "Teacher assistants (regular preschool to secondary)",
-    "summary": "Teaching assistants support regular preschool, elementary, middle, or high school instruction under teacher guidance, assisting with individual or small-group review, preparing materials, maintaining records, and supervising student activities; the teacher holds main responsibility for designing and implementing the education plan. This page fixes O*NET-SOC25-9042.00 and excludes special education specialist assistants and postsecondary assistants. The US BLS25-9045 wages and employment are a combined reference covering regular, special education, and other non-postsecondary assistants and cannot be treated as a separate statistic for this occupation. In China, first check actual job duties, teaching qualification applicability, entry inquiry, and student protection; paper work grants no independent teaching, guardianship, or diagnostic authority."
+    "summary": "Teacher assistants support classroom work under an instructor’s direction. School-based assistants may help students participate and support classroom routines, while college assistants may lead discussions or labs and grade from a rubric."
   }
 }

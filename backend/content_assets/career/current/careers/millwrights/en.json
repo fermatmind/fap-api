@@ -155,6 +155,9 @@
       "item:millwrights.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:millwrights.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:millwrights.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -12980,6 +12983,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The handover requires a foundation reference and a recheck record. Sheet A has only the foundation reference. B has a recheck value but no machine ID. Record what each sheet confirms and who should review it."
+            ]
+          },
+          "id": "millwrights.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Hand over an alignment record",
+          "type": "notice"
         }
       ]
     },
@@ -15409,6 +15427,13 @@
         "id": "millwrights.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "millwrights.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15602,7 +15627,7 @@
       "text": "Millwrights: Duties, U.S. Wages, and Safety"
     }
   },
-  "source_content_sha256": "d14bcc839c3cb045b7d2a3b6d5d907aff0d734df823267f94d715ede42cd8839",
+  "source_content_sha256": "8daf9c392e685459545a04dac6a67ee8300603d5c23dee535b8aa392a17d4d34",
   "subject": {
     "canonical_slug": "millwrights",
     "name": "Millwrights",

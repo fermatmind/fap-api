@@ -23655,12 +23655,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Bank tellers process receipts and payments in financial institutions, check amounts and vouchers, record transactions, and reconcile cash drawers. Fit emphasizes accuracy, integrity, authorized exception handling, and patient explanations of customer questions. Counter service may collaborate with account opening, loan review, or marketing, but titles alone do not establish permissions."
+              "Paper check | Compare a fictional transaction log with a closing total. Flag a repeated reference number and retain both entries for review. "
             ]
           },
           "id": "tellers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24727,12 +24727,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Bank tellers receive and pay out money in financial institutions and record transactions involving money and negotiable instruments. This page uses US O*NET-SOC 43-3071.00 as its identity baseline; check Chinese comprehensive counter service responsibilities, conditions, and permissions by institution."
+              "Bank tellers handle counter transactions such as deposits and withdrawals, verify records and amounts, and balance cash against transactions at shift change or close. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tellers.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-43-3071.00"
           ],
           "type": "prose"
         }
@@ -25355,12 +25355,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI is more likely to assist text organization, retrieval, and discrepancy prompts; receipts, payments, verification, and transaction statuses require real system evidence. Insufficient evidence: materials read provide no exact generative AI teller replacement rate, so automation-related employment projections cannot be attributed to one technology. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional transaction log with a closing total. Flag a repeated reference number and retain both entries for review."
             ]
           },
           "id": "tellers.display.ai_impact_table.answer",
           "source_refs": [
-            "r2-ai"
+            "transfer-onet-43-3071.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32481,6 +32482,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-43-3071.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 43-3071.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/43-3071.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37974,10 +38002,10 @@
       "text": "Bank Tellers"
     }
   },
-  "source_content_sha256": "424c5ceeefd953a09bf6cbc9e3ccdf20a9c9b5c5afa2f5ef5f765aa39d268894",
+  "source_content_sha256": "2bbf28f0f5cfa99bae983efbee18c026d9f9f7742df8e92ac57f93cd722ad837",
   "subject": {
     "canonical_slug": "tellers",
     "name": "Bank Tellers",
-    "summary": "Bank tellers process receipts and payments in financial institutions, check amounts and vouchers, record transactions, and reconcile cash drawers. Fit emphasizes accuracy, integrity, authorized exception handling, and patient explanations of customer questions. Counter service may collaborate with account opening, loan review, or marketing, but titles alone do not establish permissions."
+    "summary": "Bank tellers handle counter transactions such as deposits and withdrawals, verify records and amounts, and balance cash against transactions at shift change or close."
   }
 }

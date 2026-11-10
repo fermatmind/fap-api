@@ -9400,13 +9400,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Information security analysts protect an organization's computer networks and systems, with typical deliverables including security monitoring, vulnerability checking, control improvement, incident records and risk mitigation recommendations; this page uses the precise US BLS/O*NET occupational scope and cannot be extrapolated to Chinese licensing or pay."
+              "Information security analysts help protect systems, networks and data. They assess alerts, record risks and coordinate responses with engineering and operations teams. Some roles emphasize incident analysis, while others emphasize risk assessment."
             ]
           },
           "id": "information-security-analysts.profile.definition-block.1",
           "source_refs": [
-            "bls-ooh-2025-information-security-analysts",
-            "source-pack-onet-details"
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         },
@@ -9502,12 +9501,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Collaboration chain: network and system administrators, development and operations, business owners, vendors and security managers; high-impact handling is decided by the authorized responsible person."
+              "Use fictional logs. Record a timeline, confirmed facts, missing evidence, possible impact and the person responsible for the next decision. Practice only with authorized or synthetic data."
             ]
           },
           "id": "information-security-analysts.profile.career-quick-answers-block.8",
           "source_refs": [
-            "bls-ooh-2025-information-security-analysts"
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         },
@@ -9516,12 +9515,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Quality standards: every judgment can be traced back to the original log, asset, permission or configuration; record the time, version, assumptions, reviewer and escalation result."
+              "Analysts commonly interpret signals and track incidents or risks. Engineers commonly build and maintain controls. Job descriptions may combine both."
             ]
           },
           "id": "information-security-analysts.profile.career-quick-answers-block.9",
           "source_refs": [
-            "bls-ooh-2025-information-security-analysts"
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         },
@@ -11841,12 +11840,13 @@
                 ]
               },
               {
-                "answer": "BLS projects 2024—2034 growth of 29% (much faster than average), an annual average of about 16,000 openings, and 2024 employment of about 182,800; these are US precise occupational statistics, not an individual hiring guarantee, and do not equal mainland China wages.",
+                "answer": "BLS Table 1.2: U.S. occupation 15-1212 had about 192,900 jobs in 2025 and is projected to have about 233,400 in 2035 (+21.0%), with about 14,100 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
                 "id": "information-security-analysts.faq.10",
                 "question": "How should market signals be understood?",
                 "question_key": "career.faq.information-security-analysts.10",
                 "source_refs": [
-                  "bls-ooh-2025-information-security-analysts"
+                  "bls-ooh-2025-information-security-analysts",
+                  "bls-design-ep"
                 ]
               },
               {
@@ -12114,7 +12114,7 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "Supports the precise occupation page's 2025 wages and 2024—2034 employment outlook.",
+                  "BLS Table 1.2: U.S. occupation 15-1212 had about 192,900 jobs in 2025 and is projected to have about 233,400 in 2035 (+21.0%), with about 14,100 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
                   "US national occupational basis; the wage is the OEWS annual wage (USD/year), not a Chinese wage or an individual quote."
                 ],
                 "evidence_type": "official OOH occupation page",
@@ -12122,10 +12122,10 @@
                 "limitation": "US national occupational basis; the wage is the OEWS annual wage in USD/year, not a Chinese wage or an individual quote.",
                 "market": "US",
                 "name": "Information Security Analysts: Occupational Outlook Handbook",
-                "period": "2025 wages; 2024—2034 employment outlook",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/ooh/computer-and-information-technology/information-security-analysts.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-27",
@@ -12159,6 +12159,18 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS Table 1.2: U.S. occupation 15-1212 had about 192,900 jobs in 2025 and is projected to have about 233,400 in 2035 (+21.0%), with about 14,100 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring."
+                ],
+                "id": "bls-design-ep",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -13375,7 +13387,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "What does this work check first?",
+            "question": "How can you practice alert triage without access to company systems?",
             "table": {
               "rows": [
                 {
@@ -13407,7 +13419,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "How is the work loop judged?",
+            "question": "How does a security analyst differ from a security engineer?",
             "table": {
               "rows": [
                 {
@@ -14280,7 +14292,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand the Big Five",
             "evidence_level": "editorial",
             "id": "big-five",
@@ -14299,7 +14311,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand MBTI",
             "evidence_level": "editorial",
             "id": "mbti",
@@ -14327,7 +14339,7 @@
           },
           {
             "answer": "No uniform IQ threshold or validity of this page's test for occupational performance was obtained; check log, asset and rule comprehension tasks.",
-            "cta_href": "/zh/tests/iq-test",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand cognitive ability",
             "evidence_level": "editorial",
             "id": "iq",
@@ -14341,7 +14353,7 @@
           },
           {
             "answer": "No emotional ability test performance validity was obtained; observe explaining risk, listening to feedback and escalation communication.",
-            "cta_href": "/zh/tests/eq-test",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand emotional ability",
             "evidence_level": "editorial",
             "id": "eq",
@@ -14617,7 +14629,7 @@
           "entry": "information-security-analysts.navigation.1",
           "field": "url"
         },
-        "label": "Test whether my career interests suit information security analysts",
+        "label": "Explore work activities with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -14867,39 +14879,39 @@
         ]
       },
       {
-        "derivation": "Basis | BLS employment projections precise occupation 15-1212.00 (2024—2034); growth is much faster than average and includes replacement needs; it does not equal an individual hiring probability.",
-        "display_value": "Employment about 182,800 (2024, BLS employment projections base period, 15-1212.00 precise occupation)",
+        "derivation": "BLS Table 1.2: U.S. occupation 15-1212 had about 192,900 jobs in 2025 and is projected to have about 233,400 in 2035 (+21.0%), with about 14,100 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 192,900 jobs",
         "fact_id": "us-employment-2025",
         "market": "US national",
         "measure": "employment size",
         "occupation_scope": "Information Security Analysts",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "bls-ooh-2025-information-security-analysts"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "Basis | BLS employment projections precise occupation 15-1212.00 (2024—2034); growth is much faster than average and includes replacement needs; it does not equal an individual hiring probability.",
-        "display_value": "Growth much faster than average (29%, 2024—2034, BLS employment projections, 15-1212.00 precise occupation)",
+        "derivation": "BLS Table 1.2: U.S. occupation 15-1212 had about 192,900 jobs in 2025 and is projected to have about 233,400 in 2035 (+21.0%), with about 14,100 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "+21.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "US national",
         "measure": "projected employment growth",
         "occupation_scope": "Information Security Analysts",
-        "period": "2024-2034",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-ooh-2025-information-security-analysts"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "Basis | BLS employment projections precise occupation 15-1212.00 (2024—2034); growth is much faster than average and includes replacement needs; it does not equal an individual hiring probability.",
-        "display_value": "Projected annual average job openings about 16,000 (2024—2034, BLS employment projections, 15-1212.00 precise occupation, including growth and replacement)",
+        "derivation": "BLS Table 1.2: U.S. occupation 15-1212 had about 192,900 jobs in 2025 and is projected to have about 233,400 in 2035 (+21.0%), with about 14,100 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 14,100 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "US national",
         "measure": "projected annual openings",
         "occupation_scope": "Information Security Analysts",
-        "period": "2024-2034",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-ooh-2025-information-security-analysts"
+          "bls-design-ep"
         ]
       },
       {
@@ -14963,19 +14975,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "US employment growth"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "US employment count"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "US annual average job openings"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -14989,17 +15001,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What information security analysts do, what capabilities and qualifications are needed, what wages and prospects are like, and which tasks AI will change. Retains the occupational scope (O*NET/SOC 15-1212.00), the BLS OEWS 2025 wages (precise occupational basis), the BLS employment projections 2024—2034, the mainland China national occupational wage gap and the personal information protection boundary."
+      "text": "Learn what security analysts do, how to document an alert and how analyst work differs from security engineering."
     },
     "title": {
       "availability": "available",
-      "text": "Information security analysts"
+      "text": "Information Security Analyst: Alert Triage, Risk and Incident Handoffs"
     }
   },
-  "source_content_sha256": "273fb9ff55695ec32bc1db362ad687252a556fd355bade739042c5633c9d99a9",
+  "source_content_sha256": "056aea238780e0d4698ef3d6d6795c2e7cfdfedbb0e472bf9b8f0a5384568e33",
   "subject": {
     "canonical_slug": "information-security-analysts",
-    "name": "Information security analysts",
-    "summary": "Information security analysts are responsible for protecting an organization's computer networks and systems: monitoring security events, checking vulnerabilities, maintaining protective measures, recording attacks and metrics, and proposing risk mitigation options. When judging this path, technical evidence, authority boundaries, anomaly escalation and reviewable deliverables should be checked at the same time."
+    "name": "Information Security Analyst",
+    "summary": "Information security analysts help protect systems, networks and data. They assess alerts, record risks and coordinate responses with engineering and operations teams. Some roles emphasize incident analysis, while others emphasize risk assessment."
   }
 }

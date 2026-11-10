@@ -23661,12 +23661,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "See whether the person can distinguish reader prerequisites, entry points, successful outcomes, and failure handling, and raises specific questions when the specification does not say. A smooth paper document does not mean real software usability has been verified."
+              "Paper check | Compare a fictional product screen with its help draft. Flag an outdated button label, note the applicable version and identify who should confirm it. "
             ]
           },
           "id": "technical-writers.display.fermat_decision_card.summary",
           "source_refs": [
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24758,16 +24758,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Technical writers research product specifications and communicate with technical staff, turning complex information into manuals, operating guides, online help, and illustrations that users can understand and execute, and maintaining terminology, versions, and revision records. The focus is whether the reader can complete the task under current conditions rather than elegant wording; writing steps does not mean having authority to approve product safety, medical, or engineering conclusions. The US code is 27-3042.00, and the 2025 wages and 2025–2035 projection are recorded per the precise occupation; China income and comparable recruitment samples remain a visible gap. You can first use this page's fictional notebook v2 specification to write a one-page quick start, failure branches, and a revision record and to do a paper walkthrough; the work does not pretend to be real product testing and does not disclose customer logs or unauthorized images and text."
+              "Technical writers turn engineering or product material into instructions readers can follow and verify. They maintain terminology and revision history and confirm key steps with subject experts before release. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "technical-writers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule",
-            "sag",
-            "editorial"
+            "transfer-onet-27-3042.00"
           ],
           "type": "prose"
         }
@@ -25440,13 +25436,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate draft capability, actual adoption, document outcomes, and employment outcomes. O*NET defines tasks, BLS provides the US projection explanation, and NIST defines generic generation risks; this page's documentation check steps are editorial advice, with no single-occupation accuracy or time-saving measurement. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional product screen with its help draft. Flag an outdated button label, note the applicable version and identify who should confirm it."
             ]
           },
           "id": "technical-writers.display.ai_impact_table.answer",
           "source_refs": [
-            "nist",
-            "editorial"
+            "transfer-onet-27-3042.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32825,6 +32821,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-27-3042.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 27-3042.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/27-3042.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38295,10 +38318,10 @@
       "text": "Technical writers"
     }
   },
-  "source_content_sha256": "c5459d49c7bbabeb02e66136b00f2f96246bf4defb9994ed55ff83ae3ced6d53",
+  "source_content_sha256": "a9383b4977352a4b88cd170536e4b1fcc649d78548e00738a07a7f80024ed7d3",
   "subject": {
     "canonical_slug": "technical-writers",
     "name": "Technical writers",
-    "summary": "Technical writers research product specifications and communicate with technical staff, turning complex information into manuals, operating guides, online help, and illustrations that users can understand and execute, and maintaining terminology, versions, and revision records. The focus is whether the reader can complete the task under current conditions rather than elegant wording; writing steps does not mean having authority to approve product safety, medical, or engineering conclusions. The US code is 27-3042.00, and the 2025 wages and 2025–2035 projection are recorded per the precise occupation; China income and comparable recruitment samples remain a visible gap. You can first use this page's fictional notebook v2 specification to write a one-page quick start, failure branches, and a revision record and to do a paper walkthrough; the work does not pretend to be real product testing and does not disclose customer logs or unauthorized images and text."
+    "summary": "Technical writers turn engineering or product material into instructions readers can follow and verify. They maintain terminology and revision history and confirm key steps with subject experts before release."
   }
 }

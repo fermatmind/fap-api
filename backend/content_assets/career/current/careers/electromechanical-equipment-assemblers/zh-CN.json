@@ -14,6 +14,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a34-huainan": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a34-xinhui": {
+        "status": "pending_mapping"
+      },
       "fact:wage": {
         "status": "pending_mapping"
       },
@@ -143,7 +149,16 @@
       "item:electromechanical-equipment-assemblers.path.entry-role-comparison.current.v1": {
         "status": "pending_mapping"
       },
+      "item:electromechanical-equipment-assemblers.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
       "item:electromechanical-equipment-assemblers.path.interview-probation.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:electromechanical-equipment-assemblers.path.seven-day-decision.1": {
+        "status": "pending_mapping"
+      },
+      "item:electromechanical-equipment-assemblers.path.seven-day-trial.1": {
         "status": "pending_mapping"
       },
       "item:electromechanical-equipment-assemblers.profile.career-quick-answers-block.1": {
@@ -8076,7 +8091,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "虚构记录：A图纸与物料表均为v4、零件匹配、公差合格且测试条件已批准并完整；B图纸v4但物料表v3；C测量值超上限；D测试隔离状态未知。"
+              "按纸面题核版本、尺寸和测试记录。 第七天到「常见问题与资料来源」打开「机电装配交接参考答案（完成第六天后再打开）」。"
             ]
           },
           "id": "electromechanical-equipment-assemblers.path.career-path-block.3",
@@ -8090,7 +8105,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "规则：版本、零件、公差和测试条件齐全才进入纸面放行；冲突隔离；超差返工评审；隔离未知暂停。"
+              "按纸面题核版本、尺寸和测试记录。 第七天到「常见问题与资料来源」打开「机电装配交接参考答案（完成第六天后再打开）」。"
             ]
           },
           "id": "electromechanical-equipment-assemblers.path.career-path-block.4",
@@ -8104,7 +8119,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立推演：A满足版本、零件、公差和测试条件全部要求，进入纸面放行；B版本冲突隔离；C超差进入返工评审；D隔离状态未知而暂停。四条守恒。"
+              "按纸面题核版本、尺寸和测试记录。 第七天到「常见问题与资料来源」打开「机电装配交接参考答案（完成第六天后再打开）」。"
             ]
           },
           "id": "electromechanical-equipment-assemblers.path.career-path-block.5",
@@ -8118,7 +8133,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七天试验只用同一材料做核对、分流、记录和复盘。"
+              "按纸面题核版本、尺寸和测试记录。 第七天到「常见问题与资料来源」打开「机电装配交接参考答案（完成第六天后再打开）」。"
             ]
           },
           "id": "electromechanical-equipment-assemblers.path.career-path-block.6",
@@ -8319,6 +8334,114 @@
           },
           "id": "electromechanical-equipment-assemblers.path.credential-decision.current.v1",
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "题面记录",
+                  "虚构批次 A、B、C、D。题设要求图纸和物料单为 v4、部件匹配、尺寸合格，并记录批准的测试条件。",
+                  "A 的四项记录齐全。B 的图纸是 v4，物料单是 v3，其余项齐全。",
+                  "C 只有尺寸超上限，其余项齐全。D 只有测试条件栏未填写。",
+                  "放行负责人审完整记录，质检复核异常，测试负责人核缺项。练习只用纸面记录。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "交件要求",
+                  "交一页逐项交接，写 A 至 D 的状态、依据与接手人。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "先独立完成",
+                  "第七天到「常见问题与资料来源」打开「机电装配交接参考答案（完成第六天后再打开）」。"
+                ]
+              }
+            ]
+          },
+          "id": "electromechanical-equipment-assemblers.path.entry-work-sample-data.1",
+          "title": "纸面交接练习",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "第 1 天",
+                  "列出四项审核条件。"
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "第 2 天",
+                  "抄录图纸与物料单的版本。"
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "第 3 天",
+                  "标出尺寸记录的差异。"
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "第 4 天",
+                  "检查测试条件栏。"
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "第 5 天",
+                  "拟四行交接记录。"
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "第 6 天",
+                  "完成独立交件。"
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「机电装配交接参考答案（完成第六天后再打开）」。 写下一处修订。"
+                ]
+              }
+            ]
+          },
+          "id": "electromechanical-equipment-assemblers.path.seven-day-trial.1",
+          "title": "七天纸面练习",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "第六天独立交件。",
+              "第七天按折叠参考自核，留下修订记录。"
+            ]
+          },
+          "id": "electromechanical-equipment-assemblers.path.seven-day-decision.1",
+          "title": "练习结项",
+          "type": "list"
         }
       ]
     },
@@ -8363,7 +8486,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "合并预测不能推51-2023精确新增、AI因果或个人录用概率；总体需求背景与任务辅助分别核。"
+              "5.0% (2025–2035)"
             ]
           },
           "id": "electromechanical-equipment-assemblers.market-signals.market-signal-card.3",
@@ -8417,26 +8540,21 @@
           "data": {
             "entries": [
               {
-                "answer": "核心工作包括读图纸规格、对准紧固零件、连接线缆管路、精密测量、检验测试并调整成品。",
+                "answer": "核对图纸和物料单后装配机电部件，记录编号、测量和检验结果，并把版本或尺寸异常交给质检复核。",
                 "id": "electromechanical-equipment-assemblers.faq.1",
                 "question": "机电设备装配工：日常工作如何形成闭环？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.daily-work",
                 "source_refs": [
-                  "onet"
+                  "a34-onet"
                 ]
               },
               {
-                "answer": "装配工按规格形成实体组件；电子工程师负责设计，工程技术员支持开发测试，机器人技术员安装维护自动系统，校准岗位保障量值，维修工诊断修复已用设备。",
+                "answer": "装配工按现行图纸完成部件和工序记录。工程技术员协助开发、测试和异常核查。谁能改图、批准重做或放行，按单位授权确认。",
                 "id": "electromechanical-equipment-assemblers.faq.2",
                 "question": "机电设备装配工：它与相邻职业有什么区别？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.role-comparison",
                 "source_refs": [
-                  "adj-cal",
-                  "adj-eng",
-                  "adj-repair",
-                  "adj-robot",
-                  "adj-tech",
-                  "onet"
+                  "a34-onet"
                 ]
               },
               {
@@ -8467,21 +8585,22 @@
                 ]
               },
               {
-                "answer": "国家统计局2025年行业和人员类别工资材料未建立与O*NET 51-2023.00一一对应的中国全国单职业工资分布。",
+                "answer": "新会公告列电气装配工 10 人，2,200–7,000 元/月，装配成套配电设备，新手由师傅带班。 淮南公告第 53 家企业列装配电工 10 人，4,200–6,500 元/月，要求一至两年电柜装配经验并能读电路图。 两份历史公告各有条件。大陆对应职业的工资中位数仍缺可比资料。",
                 "id": "electromechanical-equipment-assemblers.faq.6",
                 "question": "机电设备装配工：中国大陆薪资应如何核对？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.china-pay",
                 "source_refs": [
-                  "nbs"
+                  "a34-xinhui",
+                  "a34-huainan"
                 ]
               },
               {
-                "answer": "美国2025年合并职业数据：电气、电子和机电装配工合并口径年薪中位数45,850美元、时薪中位数22.04美元。",
+                "answer": "美国 BLS 51-2028 合并统计 的 2025 年 5 月年工资中位数为 45,850 美元。 该组含电气、电子和机电装配，排除线圈绕制、包扎和精整岗位。机电设备装配工 51-2023.00 未单列。",
                 "id": "electromechanical-equipment-assemblers.faq.7",
                 "question": "机电设备装配工：美国工资数据应如何解释？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.us-pay",
                 "source_refs": [
-                  "wage"
+                  "a34-bls"
                 ]
               },
               {
@@ -8512,12 +8631,12 @@
                 ]
               },
               {
-                "answer": "美国合并职业数据预计就业由2024年261,400人增至2034年273,300人，增长5%，年均空缺29,600个。",
+                "answer": "美国 BLS 51-2028 合并统计 的就业预计从 2025 年约 246,300 人增至 2035 年约 258,700 人（+5.0%），年均空缺约 25,900 个，含替补。",
                 "id": "electromechanical-equipment-assemblers.faq.11",
                 "question": "机电设备装配工：就业展望与相邻转向应如何理解？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.outlook-transition",
                 "source_refs": [
-                  "trend"
+                  "a34-bls"
                 ]
               },
               {
@@ -8528,6 +8647,12 @@
                 "source_refs": [
                   "editorial"
                 ]
+              },
+              {
+                "answer": "A 的记录齐全，交放行负责人做纸面审核。B 有版本冲突，交质检核现行物料单。C 尺寸超限，交质检评估返工。D 缺测试条件记录，交测试负责人确认。后三项均暂缓放行。自核四项：A 的审核状态、B 的版本冲突、C 的尺寸偏差、D 的缺项及接手人。每项完整记一项。",
+                "id": "electromechanical-equipment-assemblers.faq.13",
+                "question": "机电装配交接参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.electromechanical-equipment-assemblers.13"
               }
             ]
           },
@@ -8818,20 +8943,20 @@
                 "url": "https://www.onetonline.org/link/details/51-2023.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "支持2024至2034年合并职业预测。",
-                  "仅适用于所列职业或合并口径、市场和期间。"
+                  "美国 BLS 51-2028 合并统计 的就业预计从 2025 年约 246,300 人增至 2035 年约 258,700 人（+5.0%），年均空缺约 25,900 个，含替补。",
+                  "合并统计。"
                 ],
                 "evidence_type": "official source",
                 "id": "trend",
-                "limitation": "仅适用于所列职业或合并口径、市场和期间。",
+                "limitation": "不单列机电设备装配工。",
                 "market": "美国",
-                "name": "National Employment Trends: 51-2023.00",
-                "period": "2024-2034",
+                "name": "BLS 表 1.2 合并就业预测",
+                "period": "2025–2035",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "combined_official",
-                "url": "https://www.onetonline.org/link/localtrends/51-2023.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-06",
@@ -8895,6 +9020,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "核对图纸和物料单后装配机电部件，记录编号、测量和检验结果，并把版本或尺寸异常交给质检复核。"
+                ],
+                "evidence_type": "职业任务原始资料",
+                "id": "a34-onet",
+                "limitation": "仅用于美国任务对照。",
+                "market": "美国",
+                "name": "职业任务细项",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/51-2023.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国 BLS 51-2028 合并统计 的就业预计从 2025 年约 246,300 人增至 2035 年约 258,700 人（+5.0%），年均空缺约 25,900 个，含替补。 美国 BLS 51-2028 合并统计 的 2025 年 5 月年工资中位数为 45,850 美元。 该组含电气、电子和机电装配，排除线圈绕制、包扎和精整岗位。机电设备装配工 51-2023.00 未单列。"
+                ],
+                "evidence_type": "官方就业和工资统计",
+                "id": "a34-bls",
+                "limitation": "美国合并统计，机电设备装配工未单列。",
+                "market": "美国",
+                "name": "BLS 表 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "新会公告列电气装配工 10 人，2,200–7,000 元/月，装配成套配电设备，新手由师傅带班。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a34-xinhui",
+                "limitation": "单次公告，只说明该岗位的条件。",
+                "market": "中国大陆",
+                "name": "电气装配工",
+                "period": "2023-10-09",
+                "publisher": "新会区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.xinhui.gov.cn/zwgk/zdlyxxgk/jycyxxgk/zpxx/content/post_2995402.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "淮南公告第 53 家企业列装配电工 10 人，4,200–6,500 元/月，要求一至两年电柜装配经验并能读电路图。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a34-huainan",
+                "limitation": "单次公告，只说明该岗位的条件。",
+                "market": "中国大陆",
+                "name": "装配电工",
+                "period": "2026 年第二季度",
+                "publisher": "淮南市人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.huainan.gov.cn/gzqk/tzgg/551864645.html"
               }
             ]
           },
@@ -10132,8 +10317,8 @@
               "月薪参考": "暂无安全数值"
             },
             {
-              "城市/区间": "全国单职业",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "大陆招聘样本",
+              "月薪参考": "新会公告列电气装配工 10 人，2,200–7,000 元/月，装配成套配电设备，新手由师傅带班。 淮南公告第 53 家企业列装配电工 10 人，4,200–6,500 元/月，要求一至两年电柜装配经验并能读电路图。"
             }
           ],
           "china_soc_row": {
@@ -10142,6 +10327,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a34-xinhui",
+            "posting-a34-huainan"
+          ],
           "sources_note": {
             "$join": [
               {
@@ -10656,6 +10845,7 @@
             "limitation": "不能作为个人就业保证。",
             "metric": "总体预测",
             "occupation_scope": "51-2028合并职业，非51-2023精确数据",
+            "source_id": "a34-bls",
             "value": {
               "$item": "electromechanical-equipment-assemblers.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -10670,6 +10860,7 @@
             "limitation": "不能作为个人就业保证。",
             "metric": "就业人数",
             "occupation_scope": "51-2028合并职业，非51-2023精确数据",
+            "source_id": "a34-bls",
             "value": "246,300人"
           },
           {
@@ -10679,6 +10870,7 @@
             "limitation": "不能作为个人就业保证。",
             "metric": "年均空缺",
             "occupation_scope": "51-2028合并职业，非51-2023精确数据",
+            "source_id": "a34-bls",
             "value": "25,900个/年（含更替）"
           }
         ],
@@ -10771,8 +10963,8 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electronic-engineers-except-computer",
-            "target_slug": "electronic-engineers-except-computer",
+            "target_href": "/zh/career/jobs/electronics-engineers-except-computer",
+            "target_slug": "electronics-engineers-except-computer",
             "target_title": "电子工程（计算机除外）",
             "transition_distance": "需补目标任务和权限证据"
           },
@@ -11212,7 +11404,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "测我的职业兴趣是否适合机电设备装配工",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11342,6 +11534,27 @@
         "id": "electromechanical-equipment-assemblers.path.credential-decision.current.v1",
         "location": "entry_decisions",
         "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "electromechanical-equipment-assemblers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "electromechanical-equipment-assemblers.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "electromechanical-equipment-assemblers.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": "/zh/career/jobs/electromechanical-equipment-assemblers",
@@ -11401,15 +11614,14 @@
       },
       {
         "derivation": null,
-        "display_value": "2024 年约 261,400 人；2034 年约 273,300 人；2024—2034 年增长 5%（快于平均）；年均空缺约 29,600 个（合并口径）",
+        "display_value": "美国 BLS 51-2028 合并统计 的就业预计从 2025 年约 246,300 人增至 2035 年约 258,700 人（+5.0%），年均空缺约 25,900 个，含替补。",
         "fact_id": "employment",
         "market": "美国",
         "measure": "employment projection",
         "occupation_scope": "合并职业数据：美国电气、电子和机电装配工",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "trend",
-          "wage"
+          "a34-bls"
         ]
       },
       {
@@ -11435,6 +11647,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "新会公告列电气装配工 10 人，2,200–7,000 元/月，装配成套配电设备，新手由师傅带班。",
+        "fact_id": "posting-a34-xinhui",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "电气装配工",
+        "period": "2023-10-09",
+        "source_refs": [
+          "a34-xinhui"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "淮南公告第 53 家企业列装配电工 10 人，4,200–6,500 元/月，要求一至两年电柜装配经验并能读电路图。",
+        "fact_id": "posting-a34-huainan",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "装配电工",
+        "period": "2026 年第二季度",
+        "source_refs": [
+          "a34-huainan"
+        ]
       }
     ]
   },
@@ -11455,13 +11691,13 @@
         "availability": "available",
         "fact_ref": "wage",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国合并口径 · 美国薪资参考"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国合并口径 · 美国就业增长"
       },
       {
         "availability": "missing",
@@ -11487,17 +11723,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "机电设备装配工按批准图纸与规格完成零件定位、紧固、接线、测量、测试和记录。核心不是把部件拼起来，而是保持版本、公差、接线与测试条件一致，在任何冲突或安全状态不明时停手。"
+      "text": "了解机电设备装配工如何核图纸、尺寸和测试记录，比较招聘公告，再做一页纸面装配交接。"
     },
     "title": {
       "availability": "available",
       "text": "机电设备装配工"
     }
   },
-  "source_content_sha256": "b49c05662722b2746448e383e2f2206f46b3bc3934699ba79ee8fe8358be5eaf",
+  "source_content_sha256": "1f7e04861d50ad72e15ea35b531a49e22eede19307578f8858d76b4c36fb94fc",
   "subject": {
     "canonical_slug": "electromechanical-equipment-assemblers",
     "name": "机电设备装配工",
-    "summary": "机电设备装配工按批准图纸与规格完成零件定位、紧固、接线、测量、测试和记录。核心不是把部件拼起来，而是保持版本、公差、接线与测试条件一致，在任何冲突或安全状态不明时停手。"
+    "summary": "核对图纸和物料单后装配机电部件，记录编号、测量和检验结果，并把版本或尺寸异常交给质检复核。"
   }
 }

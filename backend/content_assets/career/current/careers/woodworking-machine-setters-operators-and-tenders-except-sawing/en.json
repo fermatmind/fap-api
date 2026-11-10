@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Judge the single item from the fictional target, tolerance, and measured value, list the two items of C's missing measurement and the recheck result, and observe willingness to work with detail."
+              "Paper check | A fictional first piece exceeds the specified hole depth. Keep the reading for quality review. The paper result gives no authority to adjust the machine. "
             ]
           },
           "id": "woodworking-machine-setters-operators-and-tenders-except-sawing.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,13 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Machine setters, operators, and tenders correspond to O*NET51-7042.00, and in practice this is the setup, operation, and tending of non-sawing woodworking machinery. Equipment includes drilling, turning, shaping, milling, sanding, planing, and wood nailing machines, and CNC may be used. Tasks include checking work orders and lumber, equipment setup and running monitoring, workpiece dimension and shape inspection, marking and transfer, and maintenance and cleaning, with specific machines following training and in-factory procedures. It is not road paving or all machinery repair; positions mainly involving CNC programming and operation still need their statistical classification verified by main tasks. The paper hole-spacing problem does not substitute for physical items or equipment training."
+              "Woodworking machine operators other than saw operators set up equipment such as drills, routers, planers or sanders, check trial pieces and document deviations. Operating and maintenance authority are separate. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "woodworking-machine-setters-operators-and-tenders-except-sawing.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-7042.00"
           ],
           "type": "prose"
         }
@@ -25455,13 +25453,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Exploring the organization of specification and inspection data is possible, checking ranges independently and keeping missing measurements; machine control or CAD requirements do not prove text AI adoption. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: A fictional first piece exceeds the specified hole depth. Keep the reading for quality review. The paper result gives no authority to adjust the machine."
             ]
           },
           "id": "woodworking-machine-setters-operators-and-tenders-except-sawing.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-7042.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33110,6 +33108,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-7042.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-7042.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-7042.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38618,10 +38643,10 @@
       "text": "Machine setters, operators, and tenders"
     }
   },
-  "source_content_sha256": "80aec405a262382bd8e1a0eb3476d867b1f3d6d2ce1325b44fc32565415707c8",
+  "source_content_sha256": "4cc5c341e4ac9ace95660a2c45b9f97f3aea303066f337f9faf9c75e53f26776",
   "subject": {
     "canonical_slug": "woodworking-machine-setters-operators-and-tenders-except-sawing",
     "name": "Machine setters, operators, and tenders",
-    "summary": "The frozen machine setters, operators, and tenders correspond to O*NET51-7042.00, and in practice this is the setup, operation, and tending of non-sawing woodworking machinery. Equipment includes drilling, turning, shaping, milling, sanding, planing, and wood nailing machines, and CNC may be used. Tasks include checking work orders and lumber, equipment setup and running monitoring, workpiece dimension and shape inspection, marking and transfer, and maintenance and cleaning, with specific machines following training and in-factory procedures. It is not road paving or all machinery repair; positions mainly involving CNC programming and operation still need their statistical classification verified by main tasks. The paper hole-spacing problem does not substitute for physical items or equipment training."
+    "summary": "Woodworking machine operators other than saw operators set up equipment such as drills, routers, planers or sanders, check trial pieces and document deviations. Operating and maintenance authority are separate."
   }
 }

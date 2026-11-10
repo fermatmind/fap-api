@@ -7284,13 +7284,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页住宿经理指 O*NET 11-9081.00：规划、指导或协调提供住宿及其他膳宿服务的机构或部门活动；负责前台与客房协调、设定房价与预算、监控营收、安排员工职责与轮班并培训考核，采购物资与外部服务，检查客房与公共区域，处理住客投诉并与会议客户协调会议与活动。工作以住宿场所现场管理为主，涉及轮班与高峰时段，并承担营收与服务质量责任。本页不含总经理与运营经理、行政服务经理、餐饮服务经理等相邻岗位。"
+              "住宿运营经理协调前台、房务、维护等团队，跟踪房间可用情况、服务质量和经营指标，处理需要跨部门决策的异常。职责随物业规模和组织结构而变。"
             ]
           },
           "id": "lodging-managers.profile.definition-block.1",
           "source_refs": [
-            "onet-details",
-            "onet-summary"
+            "onet-summary",
+            "cn-ys-manager",
+            "cn-yd-hotel"
           ],
           "type": "prose"
         },
@@ -7384,12 +7385,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "先核对的内容：接班房态与账务、当日预订与团队接待、房价与政策、员工排班与分工、设施与卫生状况，以及需要上报或跟进的投诉与维修事项。"
+              "用虚构周末满房案例，写出房态、清洁人员、房间维修和客人等候等冲突，列负责人和复盘指标。对照具名招聘的职责，辨认管理范围。"
             ]
           },
           "id": "lodging-managers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-tasks"
+            "onet-summary",
+            "cn-ys-manager",
+            "cn-yd-hotel"
           ],
           "type": "prose"
         },
@@ -7398,12 +7401,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作闭环：从接班核对房态与账务开始，经过前台与客房服务协调、排班与培训、房价与营收执行、采购与设施检查，到投诉处置、会议协调与记录交接；任一房态、账务或政策未确认前不推进。"
+              "前台主管主要负责前台班组与服务流程；住宿运营经理往往还协调房务、设施、排班和成本。查看岗位汇报关系、预算权限与覆盖部门。"
             ]
           },
           "id": "lodging-managers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-tasks"
+            "onet-summary",
+            "cn-ys-manager"
           ],
           "type": "prose"
         },
@@ -8339,12 +8343,13 @@
                 ]
               },
               {
-                "answer": "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 52,000 人，2024—2034 年预计增长约 3%（平均），2034 年约 53,800 人，年均职位空缺约 5,400 个；预测是职业统计，不等于个人录用概率，也不等同于招聘样本。",
+                "answer": "美国 BLS 表1.2：11-9081 2025 年就业约 54,800 人，预计 2035 年约 56,900 人，2025—2035 年变化 +3.8%，年均约 5,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                 "id": "lodging-managers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.lodging-managers.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "onet-trends",
+                  "bls-design-ep"
                 ]
               },
               {
@@ -8560,18 +8565,18 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "11-9081.00 的就业规模与 2024—2034 年预测与年均职位空缺。",
+                  "美国 BLS 表1.2：11-9081 2025 年就业约 54,800 人，预计 2035 年约 56,900 人，2025—2035 年变化 +3.8%，年均约 5,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                   "预测不是录用保证。"
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
                 "limitation": "预测不是录用保证；不含个人录用概率。",
                 "market": "美国",
-                "name": "O*NET 11-9081.00 全国就业趋势",
-                "period": "2024—2034 预测；查阅 2026-09-25",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/11-9081.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8684,6 +8689,46 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "历史岗位区分大堂管理与前台接待。"
+                ],
+                "id": "cn-ys-manager",
+                "limitation": "样本已过期；不能推整个酒店管理权限。",
+                "market": "中国大陆",
+                "name": "甘肃御景国际酒店大堂副理岗位",
+                "period": "2025",
+                "publisher": "河西学院就业服务平台",
+                "scope": "具名岗位或制度",
+                "url": "https://jiuyezp.hxu.edu.cn/job/view/id/1805395"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "烟台机场国际酒店样本写明为客人办理入住登记。"
+                ],
+                "id": "cn-yd-hotel",
+                "limitation": "历史样本，不代表正在招聘。",
+                "market": "中国大陆",
+                "name": "烟台黄渤海新区岗位信息",
+                "period": "2026",
+                "publisher": "烟台黄渤海新区",
+                "scope": "具名岗位或制度",
+                "url": "https://www.yeda.gov.cn/col/col106126/art/2026/art_51a855edb3f8464f8d5fde3602ad3cf0.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 表1.2：11-9081 2025 年就业约 54,800 人，预计 2035 年约 56,900 人，2025—2035 年变化 +3.8%，年均约 5,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。"
+                ],
+                "id": "bls-design-ep",
+                "market": "美国",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -9498,7 +9543,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这份工作先核对什么？",
+            "question": "没有酒店管理头衔怎样展示运营能力？",
             "table": {
               "rows": [
                 {
@@ -9530,7 +9575,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "怎样判断工作闭环？",
+            "question": "住宿运营经理和前台主管有什么区别？",
             "table": {
               "rows": [
                 {
@@ -10975,7 +11020,7 @@
           "entry": "lodging-managers.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合住宿经理",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11143,39 +11188,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "52,000 人",
+        "derivation": "美国 BLS 表1.2：11-9081 2025 年就业约 54,800 人，预计 2035 年约 56,900 人，2025—2035 年变化 +3.8%，年均约 5,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 54,800 人",
         "fact_id": "us-employment-2024",
         "market": "美国",
         "measure": "2024 年在岗人数",
         "occupation_scope": "O*NET 11-9081.00（美国全国）",
-        "period": "2024；查阅 2026-09-25",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET 显示 2024 年 52,000 人、2034 年约 53,800 人，预测增长约 3%（平均）。",
-        "display_value": "约 +3%（平均，2024—2034）",
+        "derivation": "美国 BLS 表1.2：11-9081 2025 年就业约 54,800 人，预计 2035 年约 56,900 人，2025—2035 年变化 +3.8%，年均约 5,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "+3.8%",
         "fact_id": "us-growth",
         "market": "美国",
         "measure": "就业增长预测",
         "occupation_scope": "O*NET 11-9081.00（美国全国）",
-        "period": "2024—2034；查阅 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET 显示 2024—2034 年年均职位空缺约 5,400 个；该数字为年均，不是十年合计。",
-        "display_value": "约 5,400 个/年（2024—2034 年均）",
+        "derivation": "美国 BLS 表1.2：11-9081 2025 年就业约 54,800 人，预计 2035 年约 56,900 人，2025—2035 年变化 +3.8%，年均约 5,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 5,500 个",
         "fact_id": "us-openings",
         "market": "美国",
         "measure": "预计年均职位空缺",
         "occupation_scope": "O*NET 11-9081.00（美国全国）",
-        "period": "2024—2034；查阅 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
@@ -11263,19 +11308,19 @@
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业规模（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11289,17 +11334,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "本页指 O*NET 11-9081.00 住宿经理：协调前台与客房、设定房价与预算、监控营收、安排员工排班与培训、采购与检查客房设施，并处理住客投诉与会议活动协调，工作以住宿场所现场管理为主并承担营收与服务质量责任。判断这条职业路径时，应同时验证工作闭环、责任边界、证据口径、风险控制和可观察的入门作品。"
+      "text": "了解住宿运营经理的日常决策、案例练习，以及与前台接待或单部门主管的区别。"
     },
     "title": {
       "availability": "available",
-      "text": "住宿经理职业判断：工作、入行与风险边界"
+      "text": "酒店与住宿运营经理做什么：排班、房态和服务复盘"
     }
   },
-  "source_content_sha256": "86e9c401ad3ff686948b1325eba9c1454ef2e23f2e5f6296db182de6f16f68b6",
+  "source_content_sha256": "75b8d3aeefd209196d42fcca18751429badd867217f9170542cf62787595ec3d",
   "subject": {
     "canonical_slug": "lodging-managers",
-    "name": "住宿经理",
-    "summary": "本页指 O*NET 11-9081.00 住宿经理：规划、指导或协调提供住宿及其他膳宿服务的机构或部门活动；负责前台与客房协调、设定房价与预算、监控营收、安排员工职责与轮班并培训与考核，采购物资与外部服务，检查客房与公共区域，处理住客投诉，并与会议客户协调会议、宴会与活动。工作以住宿场所现场管理为主，涉及轮班、高峰时段与现场决策，并承担营收与服务质量责任。本页不含总经理与运营经理、行政服务经理、餐饮服务经理等相邻岗位。"
+    "name": "住宿运营经理",
+    "summary": "住宿运营经理协调前台、房务、维护等团队，跟踪房间可用情况、服务质量和经营指标，处理需要跨部门决策的异常。职责随物业规模和组织结构而变。"
   }
 }

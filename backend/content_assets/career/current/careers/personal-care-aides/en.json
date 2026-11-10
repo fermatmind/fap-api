@@ -1283,6 +1283,9 @@
       "item:personal-care-aides.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:personal-care-aides.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:personal-care-aides.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31027,6 +31030,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The service plan lists meal preparation and walking assistance. The log confirms only meal preparation. Separate completed and unsigned tasks for the service coordinator."
+            ]
+          },
+          "id": "personal-care-aides.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Check a home care handover",
+          "type": "notice"
         }
       ]
     },
@@ -37412,6 +37430,13 @@
         "id": "personal-care-aides.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "personal-care-aides.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37761,7 +37786,7 @@
       "text": "Personal care aides"
     }
   },
-  "source_content_sha256": "5f403716cc333fc8a98b56cace389fbe4c165ba2c2974cadd0e58422a1b1bcee",
+  "source_content_sha256": "0fce0b42c9a08b0f563ea886f2878c3ced177e37405303b9b09e57ca2dd9ae68",
   "subject": {
     "canonical_slug": "personal-care-aides",
     "name": "Personal Care Aides",

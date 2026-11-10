@@ -32,9 +32,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1557,7 +1554,7 @@
         "status": "pending_mapping"
       },
       "item:airfield-operations-specialists.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:airfield-operations-specialists.sources.source-card.1": {
         "status": "mapped"
@@ -23331,15 +23328,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "机场运行专员（美国O*NET 53-2022.00）围绕机场安全起降开展场地检查、安全程序、运行协调、信息和记录工作。O*NET列出的29项任务含14项核心、13项补充及2项新增任务，另有签派、机组保障和军用飞行计划等内容，不是每个岗位每天做全套。中国对照运行指挥与场务等实际职责；不得由美国任务列表推定中国管制、维修放行或信息发布权限。准备时重点观察逐项核对、清晰交接和异常升级能力。"
+              "先用虚构材料练记录核对。真实通行、场况报告和恢复运行按相应授权执行。"
             ]
           },
           "id": "airfield-operations-specialists.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
-            "operations",
-            "ccar140",
-            "cnclass"
+            "editor",
+            "ccar140"
           ],
           "type": "prose"
         },
@@ -23348,7 +23343,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "使用路径板块内的虚构资料收集室题面，核对R-v2版次、来源、时间和复核签字：初始A/B/C/D分别为可交接、待更新、待确认、待复核；补充B/C资料后为3条可交接、1条待复核。只做纸面记录核对，不进入飞行区，不制作航行通告或飞行简报，不作运行决定；这是编辑设计的自我观察练习。"
+              "从「入行、资格与职业发展」找「AF-23｜四份纸面记录，哪些可以交接？」，独立核对四份记录及两条补件。"
             ]
           },
           "id": "airfield-operations-specialists.quick-decision.fit-decision-checklist.2",
@@ -23362,13 +23357,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "编辑判断：愿意逐项核对依据、按职责协同、发现冲突时如实记录并升级的人可进一步了解本职业。现场、信息和安全方向比重不同；班次、夜班、环境暴露及培训要求都应向具体雇主核实，不把性格标签当作录用标准。"
+              "如果愿意按版本、来源和签字留证，且能如实报告待办，可继续比较巡查和协调方向。"
             ]
           },
           "id": "airfield-operations-specialists.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "operations",
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23377,14 +23372,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国职业工资未取得匹配分布，行业均值仅供宽口径对照。美国2025年5月工资：年薪中位数56,850美元、时薪27.33美元，P10为35,870美元、P90为102,120美元（OEWS，经O*NET展示）。美国 BLS 53-2022：2025 年就业 15.3 千人，2035 年预测 16.5 千人；官方净变化 1.2 千人、增长 7.8%，2025—2035 年年均职位空缺 1.5 千个。空缺包含增长及离职、转职等需求，不等于净新增；数据经过舍入，不用两个总量另算增长率，也不外推为中国需求。"
+              "从「入行、资格与职业发展」打开 AF-23。用 90 分钟交一页交接摘要加初始表和更新表，写清版本、来源、形成与接收时间、签字、状态及下一步。"
             ]
           },
           "id": "airfield-operations-specialists.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "oews",
-            "ep",
-            "nbs"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23584,14 +23577,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国岗位应按任务分别对照：教育部2025年高职教学标准列出机场运行指挥员（4-02-04-03），2019年技能标准定义其机场信息、航班保障、机坪管理与应急协调工作；现行运行规章区分运行指挥中心与飞行区场地运维部门。上海2026年技能提升补贴目录列有机场场务员（4-02-04-05），仅用于核对当地项目名称和编码，不代表全国入职门槛或已核实《大典》正式全文。美国53-2022.00是跨任务职业描述，不与某一个中国岗位一一等同。"
+              "飞行区巡查、运行协调、机坪保障和安全管理交付不同。遵义样本为场务巡查相关职责，云南两地岗位的学历条件不同；核当前雇主的岗位任务、培训、通行与授权。"
             ]
           },
           "id": "airfield-operations-specialists.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "cnclass",
-            "cn-standard",
-            "cn-sh-2026",
+            "moutai",
+            "yunnan",
             "ccar140"
           ],
           "type": "prose"
@@ -23691,15 +23683,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "机场运行专员的美国职业描述覆盖飞行区检查、安全程序、运行协调、机场与飞行信息及记录，并包括部分签派、机组保障任务。中国岗位按运行指挥、场务等具体职责对照，执行现行民航规章和机场手册；信息准确、授权边界和记录可追溯是判断重点。 中国岗位应按任务分别对照：教育部2025年高职教学标准列出机场运行指挥员（4-02-04-03），2019年技能标准定义其机场信息、航班保障、机坪管理与应急协调工作；现行运行规章区分运行指挥中心与飞行区场地运维部门。上海2026年技能提升补贴目录列有机场场务员（4-02-04-05），仅用于核对当地项目名称和编码，不代表全国入职门槛或已核实《大典》正式全文。美国53-2022.00是跨任务职业描述，不与某一个中国岗位一一等同。"
+              "飞行区巡查、运行协调、机坪保障和安全管理交付不同。遵义样本为场务巡查相关职责，云南两地岗位的学历条件不同；核当前雇主的岗位任务、培训、通行与授权。"
             ]
           },
           "id": "airfield-operations-specialists.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "cnclass",
-            "ccar140",
-            "cn-sh-2026"
+            "moutai",
+            "yunnan",
+            "ccar140"
           ],
           "type": "prose"
         },
@@ -23824,13 +23815,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "发现道面破损、通信故障、动物侵入或其他风险应按规定立即通知管制并上报，不因航班压力隐瞒或自行处置超出授权的问题。"
+              "发现道面、通信、动物侵入或其他异常，按本场程序、风险类型和岗位职责记录、报告与升级。中国大陆运输机场在规章列明的特定跑道巡查情形须立即通报塔台；不同风险的通报对象和时限分别核。"
             ]
           },
           "id": "airfield-operations-specialists.profile.career-quick-answers-block.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar140",
+            "faa-self"
           ],
           "type": "prose"
         },
@@ -24772,12 +24763,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得53-2022职业级AI替代率、部署成效或岗位减少因果研究。O*NET任务可供拆解信息核对和记录环节，软件招聘标签不等于AI使用率。美国 BLS 53-2022：2025 年就业 15.3 千人，2035 年预测 16.5 千人；官方净变化 1.2 千人、增长 7.8%，2025—2035 年年均职位空缺 1.5 千个。空缺包含增长及离职、转职等需求，不等于净新增；数据经过舍入，不用两个总量另算增长率，也不外推为中国需求。 这是总体就业预测，不能据此归因于AI。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "工具可对照虚构巡查记录的编号、版本和缺项。场况、通行、信息发布和恢复运行决定仍按适用程序，由相应人员处理。本页来源未提供本职业的 AI 替代率。"
             ]
           },
           "id": "airfield-operations-specialists.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ep"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25361,12 +25352,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面列14个软件标签；Office6%、Excel5%、Outlook3%、Word2%、PowerPoint2%、Access不足1%，其余标签比例未提供。分母是2025年美国与本职业关联的独立岗位广告，不是从业人数。"
+              "O*NET 的软件目录可作查阅入口。实际招聘与系统权限以具体岗位为准。"
             ]
           },
           "id": "airfield-operations-specialists.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "facilities"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26536,14 +26527,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "先核对教育路线与目标岗位"
+              "遵义茅台机场历史样本"
             ]
           },
           "id": "airfield-operations-specialists.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "cnclass",
-            "ccar140",
-            "cn-standard"
+            "moutai"
           ],
           "type": "prose"
         },
@@ -26552,14 +26541,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "教育部2025年高职专科机场运行服务与管理专业（500408）入学基本要求为中职、高中毕业或同等学力，基本学制3年。这是学校入学标准，不是机场运行指挥员普遍入职学历，也不保证录用。"
+              "贵州遵义茅台机场 2023 年社会招聘场务员 1 人，要求相关本科及以上，工作含飞行区管理、外来物防范、净空管理和驱鸟。岗位表未列工资。"
             ]
           },
           "id": "airfield-operations-specialists.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "cnclass",
-            "ccar140",
-            "cn-standard"
+            "moutai"
           ],
           "type": "prose"
         },
@@ -26584,14 +26571,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "机场运行服务与管理（500408）"
+              "云南机场集团历史样本"
             ]
           },
           "id": "airfield-operations-specialists.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "cnclass",
-            "ccar140",
-            "cn-standard"
+            "yunnan"
           ],
           "type": "prose"
         },
@@ -26600,14 +26585,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "教育部标准职业面向列机场运行指挥员（4-02-04-03）、机场地面服务保障人员等。2019年运行指挥员技能标准普通受教育程度为大专或同等学力；技能鉴定、学校入学和雇主招聘是不同条件。"
+              "云南机场集团 2021 年 11 月岗位表：丽江机场场务员 2 人，相关全日制本科及以上；迪庆香格里拉机场场务员 1 人，相关全日制大专及以上。两条均未列薪资金额，都是历史样本。"
             ]
           },
           "id": "airfield-operations-specialists.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "cnclass",
-            "ccar140",
-            "cn-standard"
+            "yunnan"
           ],
           "type": "prose"
         },
@@ -26830,13 +26813,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "场景比较需要雇主类型、岗位方向、运行规模与轮班安排一致；行业代理不能替代书面薪酬条件。"
+              "两份原表未列工资"
             ]
           },
           "id": "airfield-operations-specialists.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "yunnan"
           ],
           "type": "prose"
         },
@@ -26845,13 +26827,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "核对自己的预期时，先确认雇主类型（运输机场管理机构／军民合用机场／机场运行服务企业）、岗位方向（飞行区运行与巡查／运行协调与信息发布／安全与应急）与轮班加班安排；不要用行业代理替代书面薪酬条件。"
+              "贵州遵义茅台机场 2023 年社会招聘场务员 1 人，要求相关本科及以上，工作含飞行区管理、外来物防范、净空管理和驱鸟。岗位表未列工资。 云南机场集团 2021 年 11 月岗位表：丽江机场场务员 2 人，相关全日制本科及以上；迪庆香格里拉机场场务员 1 人，相关全日制大专及以上。两条均未列薪资金额，都是历史样本。"
             ]
           },
           "id": "airfield-operations-specialists.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "moutai",
+            "yunnan"
           ],
           "type": "prose"
         },
@@ -26874,13 +26856,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局数据覆盖城镇 5 人及以上法人单位，不含个体工商户与自由职业者；工资为税前工资总额，含个人缴纳的社保、公积金与个税。行业门类数字不等于本职业工资。机场运行人员薪酬按用人单位制度与岗位设置执行。"
+              "国家统计局 2025 年城镇非私营单位交通运输、仓储和邮政业平均年工资 133,981 元。行业均值不能换算成机场场务起薪，两份招聘表均未列金额。"
             ]
           },
           "id": "airfield-operations-specialists.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "nbs",
-            "health"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26903,12 +26884,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得机场运行专员精确职业的全国或分城市工资分布"
+              "国家统计局 2025 年城镇非私营单位交通运输、仓储和邮政业平均年工资 133,981 元。行业均值不能换算成机场场务起薪，两份招聘表均未列金额。"
             ]
           },
           "id": "airfield-operations-specialists.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26931,12 +26912,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本职业未单列；相近的交通运输、仓储和邮政业（非私营）2025 年为 133,981 元/年，仅作宽口径参考"
+              "没有可用的场务城市工资排名。"
             ]
           },
           "id": "airfield-operations-specialists.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27463,7 +27444,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得2025年政府行业内53-2022工资中位数；本次BLS访问受限，不据此认定未公布。"
+              "本页未核到该分行业职业工资中位数。"
             ]
           },
           "id": "airfield-operations-specialists.us-salary.career-snapshot-secondary-locale.38",
@@ -27507,7 +27488,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得2025年航空运输支持服务内53-2022工资中位数；本次BLS访问受限。"
+              "本页未核到该分行业职业工资中位数。"
             ]
           },
           "id": "airfield-operations-specialists.us-salary.career-snapshot-secondary-locale.41",
@@ -27711,7 +27692,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27723,19 +27704,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "空中交通管制员",
@@ -27810,10 +27791,10 @@
                 "url": "https://www.onetonline.org/link/details/53-2022.00"
               },
               {
-                "entity": "教育部《机场运行服务与管理专业教学标准》（高职专科，2025）",
+                "entity": "云南机场集团：2021 年社会招聘表",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.moe.gov.cn/s78/A07/zcs_ztzl/2017_zt06/17zt06_bznr/bznr_zyjyzyjxbz/gdzyjy_zk/zk_jtysdl/jtysdl_hkysl/202502/P020250207547047426500.pdf"
+                "url": "https://bn.ynairport.com/u/cms/www/202111/23112416529b.pdf"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -28689,12 +28670,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "使用路径板块内的虚构资料收集室题面，核对R-v2版次、来源、时间和复核签字：初始A/B/C/D分别为可交接、待更新、待确认、待复核；补充B/C资料后为3条可交接、1条待复核。只做纸面记录核对，不进入飞行区，不制作航行通告或飞行简报，不作运行决定；这是编辑设计的自我观察练习。"
+              "从入行章节找 AF-23。按题面规则核版本、来源、时间和签字，独立交初始表、更新表和交接摘要，再对照参考。只用虚构纸面材料。"
             ]
           },
           "id": "airfield-operations-specialists.fit.personality-fit-block.55",
           "source_refs": [
-            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28734,12 +28714,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "使用路径板块内的虚构资料收集室题面，核对R-v2版次、来源、时间和复核签字：初始A/B/C/D分别为可交接、待更新、待确认、待复核；补充B/C资料后为3条可交接、1条待复核。只做纸面记录核对，不进入飞行区，不制作航行通告或飞行简报，不作运行决定；这是编辑设计的自我观察练习。"
+              "从入行章节找 AF-23。按题面规则核版本、来源、时间和签字，独立交初始表、更新表和交接摘要，再对照参考。只用虚构纸面材料。"
             ]
           },
           "id": "airfield-operations-specialists.fit.personality-fit-block.58",
           "source_refs": [
-            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28838,12 +28817,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "教育部《机场运行服务与管理专业教学标准》（高职专科，2025）：学校培养及职业面向，不支持人格匹配。"
+              "云南机场集团 2021 年历史招聘：核丽江和迪庆场务岗位及学历条件，不用于人格或个人录用判断。"
             ]
           },
           "id": "airfield-operations-specialists.fit.personality-fit-block.65",
           "source_refs": [
-            "cnclass"
+            "yunnan"
           ],
           "type": "prose"
         },
@@ -28899,10 +28878,10 @@
                 "url": "https://www.onetonline.org/link/details/53-2022.00"
               },
               {
-                "entity": "教育部《机场运行服务与管理专业教学标准》（高职专科，2025）",
+                "entity": "交通运输部令 2025 年第 5 号",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.moe.gov.cn/s78/A07/zcs_ztzl/2017_zt06/17zt06_bznr/bznr_zyjyzyjxbz/gdzyjy_zk/zk_jtysdl/jtysdl_hkysl/202502/P020250207547047426500.pdf"
+                "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202512/t20251201_229272.html"
               },
               {
                 "entity": "O*NET 53-2022.00 职业摘要（任务与职责）",
@@ -29373,7 +29352,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "教育部《机场运行服务与管理专业教学标准》（高职专科，2025）：职业面向与培养，不是资质授权。"
+              "现行运输机场运行安全范围。"
             ]
           },
           "id": "airfield-operations-specialists.risk.career-risk-cards.38",
@@ -29442,7 +29421,7 @@
                 "机场安全与应急管理方向",
                 "见习安全程序、准入管理与应急预案。",
                 "编辑观察：能说明资料依据、时间、版本和异常待办，不是公开雇主录用标准。",
-                "本页D待复核及不转发的交接边界说明。",
+                "提交 AF-23 的纸面交接，标出待核记录及转交对象。",
                 "与空中交通管制员不同：面向机场安全与应急，不提供管制指令。"
               ],
               [
@@ -29456,7 +29435,7 @@
                 "运行协调与应急",
                 "协调管制与维修并参与应急响应。",
                 "编辑观察：能说明资料依据、时间、版本和异常待办，不是公开雇主录用标准。",
-                "本页10项自查及失误复盘。",
+                "对照题后参考复核两张表和一页摘要。",
                 "与飞机机械师技术员不同：面向运行与协调，不承担维修与放行。"
               ]
             ]
@@ -29481,7 +29460,7 @@
                   "美国学历与培养口径",
                   "美国O*NET新雇员学历问项列学士、高中或同等学历、部分大学未获学位，未给比例；Job Zone 3是准备程度组别，不是招聘硬门槛。",
                   "BLS典型培养分类另为高中或同等学历、无相关经验、长期在岗训练；不能把两个统计口径混为学历分布。",
-                  "中国教育部500408高职专业学制3年，入学条件为中职、高中或同等学力；2019年技能标准普通受教育程度为大专或同等学力，具体技能申报与招聘另核。"
+                  "遵义和云南样本的实际学历条件不同。学校培养、技能评价、招聘与岗位授权分别核。"
                 ]
               },
               {
@@ -29507,7 +29486,7 @@
                 "values": [
                   "美国软件招聘标签",
                   "O*NET当前软件页列14个美国招聘技能标签，资料期2025年。",
-                  "Office6%、Excel5%、Outlook3%、Word2%、PowerPoint2%、Access不足1%；其余未提供比例，不是从业使用率。",
+                  "O*NET 的软件目录可作查阅入口。实际招聘与系统权限以具体岗位为准。",
                   "具体机场系统、设备、数据权限和培训以目标雇主说明为准。"
                 ]
               }
@@ -29535,25 +29514,25 @@
                   "题面是虚构资料收集室的纸面交接，不含机场、航空器或实际运行数据。规则R-v2在10:00生效：可交接必须版本R-v2、来源为资料员、接收时间不早于该条材料形成时间、复核签字为复核员；一项不满足便登记待办，不能对外转发。R-v1在10:00失效。",
                   "10:30时的四条原始记录（材料形成/接收时间均为当日）：A：R-v2、资料员、10:05/10:10、复核员已签；B：R-v1、资料员、09:55/10:12、复核员已签；C：R-v2、聊天转述、10:08/10:15、复核员已签；D：R-v2、资料员、10:06/10:16、无复核签字。",
                   "10:40收到B的新资料：R-v2、资料员、10:35/10:40、复核员已签；10:45收到C的正式资料：R-v2、资料员、10:41/10:45、复核员已签。D尚无补充，不得猜测签字。",
-                  "标签按题面：版本失效为待更新；来源不合为待确认；缺复核签字为待复核；全部满足为可交接。原始记录保留，更新另行记入。"
+                  "标签按题面：版本失效为待更新；来源不合为待确认；缺复核签字为待复核；全部满足为可交接。原始记录保留，更新另行记入。 接收早于形成时标「时间待核」。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "交付与10项自查",
+                  "交付：两张表与一页摘要",
                   "输出四条核对记录：编号、材料与接收时间、版本、来源、复核人、结论、依据和下一步；分别统计10:30与10:45可交接及待办数量。",
-                  "写一段10:45内部交接摘要，必须列出A/B/C可交接、D待复核及不得转发D；不写运行指令或航行通告。",
-                  "按10项自查评分：4条初始结论各1分、初始统计1分、B更新1分、C更新1分、D仍待办1分、保留原记录1分、交接边界1分，共10分。分数只表示本题核对结果。"
+                  "写一段 10:45 内部交接摘要，列哪些材料可交接、哪些待核及应转交谁。只用题面规则。",
+                  "变式：只改 C 的新资料接收时间为 10:39，形成时间仍为 10:41。10:45 的 C 状态及统计怎样变？主问题与变式写完再看参考。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考交付",
-                  "参考交付：10:30 A可交接，B待更新（R-v1失效），C待确认（聊天转述不是资料员），D待复核（缺签字）；所有已给接收时间不早于形成时间。可交接1条、待办3条。",
-                  "10:45 B用新R-v2资料可交接，C用正式资料可交接；A保持可交接，D仍待复核。更新后可交接3条、待办1条；B/C原记录保留，不覆盖原结论。",
-                  "参考摘要：截至10:45，A/B/C资料已按R-v2完成来源、时间和签字核对；D缺复核员签字，等待补充，不对外转发D。实际岗位、考核和运行权限不能由本题结果推出。"
+                  "独立交两版",
+                  "交初始表、更新表、变式标注和一页内部交接摘要。",
+                  "保留原始记录和更新版本，不改原时间。",
+                  "交卷后展开常见问题「资料交接参考解（交卷后再打开）」。"
                 ]
               },
               {
@@ -29570,7 +29549,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：虚构资料交接",
+          "title": "AF-23｜四份纸面记录，哪些可以交接？",
           "type": "cards"
         },
         {
@@ -29581,35 +29560,35 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "作品1—3：核对表、更新表与摘要",
-                  "作品1：四条初始核对表，保留R-v2规则、每条原始材料及A/B/C/D四种结论。",
-                  "作品2：B/C更新追踪表，显示新资料来源、形成和接收时间、结论变化与原记录保留。",
-                  "作品3：10:45交接摘要，明确3条可交接、D仍待复核，不对外转发D。"
+                  "初始表、更新表和交接摘要",
+                  "列四条原始记录和各自状态。",
+                  "单独登记两条更新，保留原件。",
+                  "摘要记录两轮合计、未决项及转交对象。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "作品4：自查及独立复核",
-                  "作品4：10项自查表，4条初始结论各1分，其余6项各1分；标出失分原因，不能按职业资格解释成绩。",
-                  "复核时间关系、来源和签字是否按题面；D没有补充，不能为了结清而补签。",
-                  "另核对中国现行规定第17条运行安全记录5年与第19条培训档案3年，写明不同类别，不把本题留存规则当法律期限。"
+                  "独立复核",
+                  "按原题复做并记录差异。",
+                  "处理 C 的接收时间变式，再用题后参考自核。",
+                  "区分纸面结果与单位工作授权。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页准备摘要",
-                  "一页准备摘要：目标方向、四件纸面作品、核对失误与下次改进；岗位公告未取得的学历或条件列待核。",
-                  "实际准备要求另外核对学校入学、技能鉴定、岗位持证、复训、通行证和进入许可，不混成同一证件。"
+                  "一页准备说明",
+                  "列一项可展示成果和一项待核雇主要求。",
+                  "记录下一步要比较的具体岗位。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具与材料边界",
-                  "可用本地表格或纸张；题面所有名字和数据虚构，不收集真实人员、航班或机场内部材料。",
-                  "作品显示资料核对与交接方法，不代表雇主认可、岗位授权或适任证明。"
+                  "材料与边界",
+                  "仅用本页虚构材料；不进入场区，不用真实运行资料。",
+                  "交接成果不作录用、资格或运行授权。"
                 ]
               }
             ]
@@ -29642,7 +29621,7 @@
                 "报名与体检",
                 "是否符合招聘的年龄、学历与体检等基本条件。",
                 "能提供官方要求的证明材料并如实填报。",
-                "弄虚作假或通过非官方中介报名，会直接影响资格。"
+                "使用招聘公告指定渠道，如实提交资料。"
               ],
               [
                 "岗位培训与见习",
@@ -29654,7 +29633,7 @@
                 "岗位授权与控制区证件",
                 "是否取得岗位授权与控制区证件，是否完成复训。",
                 "授权与证件记录齐备，作业范围明确。",
-                "控制区证件、岗位授权及管制进入许可分别有效；失效或违章按实际制度处理，不预设统一处罚。"
+                "岗位授权和控制区证件分别核。中国大陆运输机场在跑道开放运行期间，车辆或人员进入地面保护区或机动区作业，还须按适用程序取得管制许可。"
               ],
               [
                 "运行记录与复核",
@@ -29682,57 +29661,60 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天｜题面与规则",
-                  "整理R-v2四项条件和A/B/C/D原材料，不查机场内部资料。"
+                  "第1天",
+                  "读 O*NET 和一份大陆机场招聘，记现场巡查与报告分工。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天｜初始四条核对",
-                  "逐条填版本、来源、时间、签字、结论及下一步，得到1条可交接、3条待办。"
+                  "第2天",
+                  "按题定版本、来源、时间和签字分别核初始四份。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天｜独立比对参考",
-                  "先完成再查看参考交付，对照四个初始结论与时间关系，保存错误原因。"
+                  "第3天",
+                  "写原始状态与缺口，注明应转交的人。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4天｜更新追踪",
-                  "处理10:40 B和10:45 C新资料，保留原记录，更新到3条可交接、1条待办。"
+                  "第4天",
+                  "录入两条补件，保留原件并单独算状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5天｜内部交接摘要",
-                  "明确A/B/C可交接、D缺签字待复核且不得对外转发，不编造关闭或运行指令。"
+                  "第5天",
+                  "独立做时间变式，写本次结论与待办。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天｜四件作品及自查",
-                  "整理初始表、更新表、摘要和10项自查；另区分中国运行记录5年与培训档案3年。"
+                  "第6天",
+                  "不看参考，独立完成原版与单项变式。 交初始表、更新表、变式标注和一页内部交接摘要。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天｜复盘与继续判断",
-                  "复盘版本、来源、时间或签字失误，以及重复核对、保留记录和待办交接的感受；成绩不等于适任，再核具体岗位要求。"
+                  "第7天",
+                  "展开常见问题「资料交接参考解（交卷后再打开）」，记录一处差异或无差异，再决定下一步探索方向。"
                 ]
               }
             ]
           },
           "id": "airfield-operations-specialists.path.seven-day-trial.1",
           "source_refs": [
-            "editor"
+            "editor",
+            "onet",
+            "moutai",
+            "yunnan"
           ],
           "title": "七天体验：用虚构材料完成一次机场运行专员任务闭环",
           "type": "timeline"
@@ -29742,13 +29724,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "做完一周准备后先回答：我是否愿意长期按规章与手册执行、接受复训与安全复核并对运行安全承担责任？",
+              "继续：能独立核四份记录及补件、算清两次状态，并写待办交接。",
               "判断方向：偏飞行区运行与巡查、运行协调与信息发布，还是机场安全与应急管理。",
               "判断准备：招聘的学历、体检与培训要求是否满足或可补齐；规章解读、信息核对与记录能力是否需要补强。",
               "判断边界：是否清楚空中交通管制执照与航空器维修执照不等同于本职业的岗位授权与控制区证件，几套体系不可互相折算。",
               "判断班次和环境：向具体岗位核对轮班、夜班、户外、噪音及防护，不能由本页美国比例推定中国全机场24小时运行。",
               "入门后按岗位授权与技能等级体系发展：取得更多岗位授权与资格，或转向运行管理与安全管理岗位。",
-              "保留四条初始表、B/C更新表、10:45摘要与10项自查，观察重复核对和未结待办的处理，不用纸面成绩承诺就业。"
+              "信息不足时先完成初始表、更新表和交接摘要，再按题后参考记一处差异或无差异。纸面成绩不承诺就业。"
             ]
           },
           "id": "airfield-operations-specialists.path.seven-day-decision.1",
@@ -29811,9 +29793,9 @@
               [
                 "运行指挥员技能等级",
                 "申请该职业等级评价的人",
-                "2019年技能标准提供等级、学历与申报条件",
+                "查具体雇主的学历和岗位任务。",
                 "不据此推定所有岗位国家职业资格门槛",
-                "普通受教育程度大专或同等学力；四级申报为从业1年以上，其他等级逐项核对标准及机构公告",
+                "在中国大陆运输机场，按本场规章核岗位培训、场区通行和具体任务授权。作业证书、职业资格、场区证和塔台通行许可各有用途。",
                 "按真实公告核对；本页不报费用或统一周期",
                 "技能等级与岗位持证、依法需要的职业资格、通行证和管制许可分开"
               ],
@@ -29852,19 +29834,17 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "中国运输机场（含军民合用机场民用部分）按现行规定第21条对运行安全相关岗位实行持证上岗，依法需要从业资格的岗位另须取得相应国家职业资格证书；第22条要求飞行区从业人员复训周期不超过13个月，学时、方式和内容按民航局有关规定。第24条要求飞行区人员佩带控制区通行证、工作服及反光标识。岗位证、职业资格、技能等级、通行证与进入机动区的管制许可不能互相替代。",
-              "中国岗位应按任务分别对照：教育部2025年高职教学标准列出机场运行指挥员（4-02-04-03），2019年技能标准定义其机场信息、航班保障、机坪管理与应急协调工作；现行运行规章区分运行指挥中心与飞行区场地运维部门。上海2026年技能提升补贴目录列有机场场务员（4-02-04-05），仅用于核对当地项目名称和编码，不代表全国入职门槛或已核实《大典》正式全文。美国53-2022.00是跨任务职业描述，不与某一个中国岗位一一等同。",
-              "2019年运行指挥员技能标准设四级中级工、三级高级工、二级技师、一级高级技师；普通受教育程度大专或同等学力。公开PDF文本与江苏人社2019版目录对应；具体申报按适用标准和机构公告另核。",
-              "运行经历不自动授予管制或维修执照；本页纸面练习不构成任何岗位资格。"
+              "BLS 将美国入行教育分类为高中或同等学历，在职培训归长周期；这是职业统计分类。",
+              "大陆运输机场适用交通运输部令 2025 年第 5 号，自 2026 年 7 月 1 日施行。机场运营人与驻场单位按职责和运行协议分工。巡查记录、场内通行、关闭或恢复运行决定和对外通报须按本场程序及授权核。",
+              "FAA AC 150/5200-18D 面向机场运营人的安全自检。美国持证机场按适用 Part 139 和机场手册核受训人员、巡视范围、记录与报告；机场运行专员与空中交通管制员的权限不互换。",
+              "先查机场实际职位说明，不凭岗位名称推定签字、发布或通行资格。"
             ]
           },
           "id": "airfield-operations-specialists.path.credential-boundary.1",
           "source_refs": [
+            "ep",
             "ccar140",
-            "cnclass",
-            "cn-standard",
-            "cn-sh-2026",
-            "cn-standard-catalog"
+            "faa-self"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29874,16 +29854,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本页未采集匹配中国机场运行岗位的公开招聘样本，不提供招聘数量、起薪或雇主录用偏好。条件需核对具体官方公告。",
-              "美国O*NET新雇员学历问项、BLS典型培养分类、中国学校入学和技能鉴定条件分开表述，不提供学历占比分布。",
-              "按真实任务和雇主核对运行指挥、场务、保障、安全或航空飞行签派职责，不由名称推定可兼任或权限。"
+              "贵州遵义茅台机场 2023 年社会招聘场务员 1 人，要求相关本科及以上，工作含飞行区管理、外来物防范、净空管理和驱鸟。岗位表未列工资。",
+              "云南机场集团 2021 年 11 月岗位表：丽江机场场务员 2 人，相关全日制本科及以上；迪庆香格里拉机场场务员 1 人，相关全日制大专及以上。两条均未列薪资金额，都是历史样本。",
+              "上述学历为单个雇主历史条件。按实际地点和任务另核场区通行、轮班、培训及单位授权。"
             ]
           },
           "id": "airfield-operations-specialists.path.recruitment-sample.1",
           "source_refs": [
-            "editor",
-            "ep",
-            "cnclass",
+            "moutai",
+            "yunnan",
             "ccar140"
           ],
           "title": "招聘样本说明",
@@ -29907,10 +29886,10 @@
                 "url": "https://xxgk.mot.gov.cn/gz/202511/t20251127_4180546.html"
               },
               {
-                "entity": "教育部《机场运行服务与管理专业教学标准》（高职专科，2025）",
+                "entity": "云南机场集团：2021 年社会招聘表",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.moe.gov.cn/s78/A07/zcs_ztzl/2017_zt06/17zt06_bznr/bznr_zyjyzyjxbz/gdzyjy_zk/zk_jtysdl/jtysdl_hkysl/202502/P020250207547047426500.pdf"
+                "url": "https://bn.ynairport.com/u/cms/www/202111/23112416529b.pdf"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -29934,14 +29913,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国职业任务和新雇员学历问项见O*NET；BLS典型培养分类为高中或同等学历、无相关经验、长期在岗训练，不是所有雇主统一门槛。中国岗位应按任务分别对照：教育部2025年高职教学标准列出机场运行指挥员（4-02-04-03），2019年技能标准定义其机场信息、航班保障、机坪管理与应急协调工作；现行运行规章区分运行指挥中心与飞行区场地运维部门。上海2026年技能提升补贴目录列有机场场务员（4-02-04-05），仅用于核对当地项目名称和编码，不代表全国入职门槛或已核实《大典》正式全文。美国53-2022.00是跨任务职业描述，不与某一个中国岗位一一等同。 中国运输机场（含军民合用机场民用部分）按现行规定第21条对运行安全相关岗位实行持证上岗，依法需要从业资格的岗位另须取得相应国家职业资格证书；第22条要求飞行区从业人员复训周期不超过13个月，学时、方式和内容按民航局有关规定。第24条要求飞行区人员佩带控制区通行证、工作服及反光标识。岗位证、职业资格、技能等级、通行证与进入机动区的管制许可不能互相替代。"
+              "飞行区巡查、运行协调、机坪保障和安全管理交付不同。遵义样本为场务巡查相关职责，云南两地岗位的学历条件不同；核当前雇主的岗位任务、培训、通行与授权。 在中国大陆运输机场，按本场规章核岗位培训、场区通行和具体任务授权。作业证书、职业资格、场区证和塔台通行许可各有用途。"
             ]
           },
           "id": "airfield-operations-specialists.path.career-path-block.11",
           "source_refs": [
-            "ccar140",
-            "cnclass",
-            "cn-standard"
+            "moutai",
+            "yunnan",
+            "ccar140"
           ],
           "type": "prose"
         },
@@ -30066,14 +30045,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习路线：美国O*NET受访学历要求与BLS典型培养分类分别核对；中国高职500408专业入学为中职、高中或同等学力、学制3年，技能标准学历和等级申报另核。学校毕业不保证持证、岗位授权或录用。"
+              "飞行区巡查、运行协调、机坪保障和安全管理交付不同。遵义样本为场务巡查相关职责，云南两地岗位的学历条件不同；核当前雇主的岗位任务、培训、通行与授权。 在中国大陆运输机场，按本场规章核岗位培训、场区通行和具体任务授权。作业证书、职业资格、场区证和塔台通行许可各有用途。"
             ]
           },
           "id": "airfield-operations-specialists.path.career-path-block.20",
           "source_refs": [
-            "ccar140",
-            "cnclass",
-            "cn-standard"
+            "moutai",
+            "yunnan",
+            "ccar140"
           ],
           "type": "prose"
         },
@@ -30098,14 +30077,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国依据为O*NET任务、学历问项与BLS工资和就业预测；中国依据为教育部专业教学标准、2019年技能标准及现行运输机场规章，统计工资另取国家统计局宽口径。不能将代理、学历与资格互相替代。"
+              "飞行区巡查、运行协调、机坪保障和安全管理交付不同。遵义样本为场务巡查相关职责，云南两地岗位的学历条件不同；核当前雇主的岗位任务、培训、通行与授权。 在中国大陆运输机场，按本场规章核岗位培训、场区通行和具体任务授权。作业证书、职业资格、场区证和塔台通行许可各有用途。"
             ]
           },
           "id": "airfield-operations-specialists.path.career-path-block.22",
           "source_refs": [
-            "ccar140",
-            "cnclass",
-            "cn-standard"
+            "moutai",
+            "yunnan",
+            "ccar140"
           ],
           "type": "prose"
         },
@@ -30158,7 +30137,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "教育部《机场运行服务与管理专业教学标准》（高职专科，2025）及现行运输机场规章；技能标准和当地项目另见来源登记。"
+              "云南机场集团历史场务招聘；不代表全国雇主条件。"
             ]
           },
           "id": "airfield-operations-specialists.path.career-path-block.26",
@@ -31110,10 +31089,10 @@
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
               },
               {
-                "entity": "教育部《机场运行服务与管理专业教学标准》（高职专科，2025）",
+                "entity": "云南机场集团：2021 年社会招聘表",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.moe.gov.cn/s78/A07/zcs_ztzl/2017_zt06/17zt06_bznr/bznr_zyjyzyjxbz/gdzyjy_zk/zk_jtysdl/jtysdl_hkysl/202502/P020250207547047426500.pdf"
+                "url": "https://bn.ynairport.com/u/cms/www/202111/23112416529b.pdf"
               },
               {
                 "entity": "空中交通管制员",
@@ -31179,7 +31158,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国对应岗位的官方职业就业预测；不能据美国增长推断中国需求。美国 BLS 53-2022：2025 年就业 15.3 千人，2035 年预测 16.5 千人；官方净变化 1.2 千人、增长 7.8%，2025—2035 年年均职位空缺 1.5 千个。空缺包含增长及离职、转职等需求，不等于净新增；数据经过舍入，不用两个总量另算增长率，也不外推为中国需求。"
+              "美国 53-2022：2025 年约 15,300 个岗位，2035 年预计 16,500 个，增 7.8%，净增约 1,200，年均约 1,500 个空缺（含替代）。"
             ]
           },
           "id": "airfield-operations-specialists.market-signals.market-signal-card.8",
@@ -31529,7 +31508,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "教育部《机场运行服务与管理专业教学标准》（高职专科，2025）：中国岗位培养对照，不能作为就业预测。"
+              "云南机场集团历史场务招聘；不代表全国雇主条件。"
             ]
           },
           "id": "airfield-operations-specialists.market-signals.market-signal-card.33",
@@ -31906,10 +31885,13 @@
           "data": {
             "entries": [
               {
-                "answer": "机场运行专员的任务可分四类：飞行区检查与安全程序（按法规与运行手册检查飞行区场地与设施状况，实施机场安全程序以确保人员与航空器运行的安全环境，检查机场财产与周界以维持受控准入，协调跑道与滑行道除雪，管理机场场地内及周边的野生动物，规划并协调机场施工）；运行协调与信息发布（协调空中交通管制与维修人员之间的通信，使用着陆与导航助航设备与数字终端通信设备执行任务，接收、传输并控制报文，接收并发布天气与飞行计划数据，发布通告以告知机组机场状态，向上级管制机构转达离场、到达、延误与机场状态）；航班与机组保障（监控所有航空器的到达、停放、加油、装载与离场，为机组提供机场管理与飞行计划所需的信息与服务，协调机组住宿、餐饮、加油、地面运输与过站维修需求，开展离场与到达简报，与相应空中交通管制机构协调航班行程变更，与民事机构核对军用飞行计划，监控并管理机场空域内的无人机运行）；记录与协同（维护飞行与事件日志、机组飞行记录与进出港运行记录，张贴可视化展示板与状态板，培训运行人员，协助应对航空器与医疗紧急情况）。这是美国O*NET的任务集合，含核心、补充和新增任务，不表示所有岗位均需执行；中国需按运行指挥、场务等岗位分别确认职责。",
+                "answer": "飞行区运行专员巡查机场飞行区、记录道面或标志异常，并向负责处置和通报的人交接。场务巡查、运行协调和安全管理的交付不同；先查岗位的通行、报告及处置权限。",
                 "id": "airfield-operations-specialists.faq.1",
                 "question": "机场运行专员每天做什么？",
-                "question_key": "career.faq.airfield-operations-specialists.daily-work"
+                "question_key": "career.faq.airfield-operations-specialists.daily-work",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
                 "answer": "中国运行岗位、空中交通管理、维修放行、运营人及其他驻场单位各按职责和权限协作。通用调度职业链接不是航空飞行签派统一资格。美国档案含协调、签派和机组保障等任务，不授予中国任何执照或关闭、发布权限。",
@@ -31918,28 +31900,43 @@
                 "question_key": "career.faq.airfield-operations-specialists.comparison"
               },
               {
-                "answer": "证据不足：未取得本职业AI替代或就业减少因果证据。BLS预测2025—2035年增长7.8%，并不分解AI作用；本页只把资料核对与记录草稿作为编辑提出的试用环节。",
+                "answer": "工具可对照虚构巡查记录的编号、版本和缺项。场况、通行、信息发布和恢复运行决定仍按适用程序，由相应人员处理。本页来源未提供本职业的 AI 替代率。",
                 "id": "airfield-operations-specialists.faq.3",
                 "question": "这个职业会被 AI 取代吗？",
-                "question_key": "career.faq.airfield-operations-specialists.ai"
+                "question_key": "career.faq.airfield-operations-specialists.ai",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "证据不足：未取得中国本职业全国或城市工资分布。国家统计局2025年运输仓储邮政非私营行业平均133,981元/年，公共管理等119,465元/年，是宽门类均值，不是运行岗位工资；国有企业不因此归为公共管理行业。",
+                "answer": "贵州遵义茅台机场 2023 年社会招聘场务员 1 人，要求相关本科及以上，工作含飞行区管理、外来物防范、净空管理和驱鸟。岗位表未列工资。 云南机场集团 2021 年 11 月岗位表：丽江机场场务员 2 人，相关全日制本科及以上；迪庆香格里拉机场场务员 1 人，相关全日制大专及以上。两条均未列薪资金额，都是历史样本。 国家统计局 2025 年城镇非私营单位交通运输、仓储和邮政业平均年工资 133,981 元。行业均值不能换算成机场场务起薪，两份招聘表均未列金额。",
                 "id": "airfield-operations-specialists.faq.4",
                 "question": "中国大陆的工资怎么理解？",
-                "question_key": "career.faq.airfield-operations-specialists.china-pay"
+                "question_key": "career.faq.airfield-operations-specialists.china-pay",
+                "source_refs": [
+                  "moutai",
+                  "yunnan",
+                  "nbs"
+                ]
               },
               {
-                "answer": "美国口径：2025 年 5 月 53-2022 年薪中位数 56,850 美元（时薪 27.33 美元），第 10 分位为 35,870 美元、第 25 分位为 42,000 美元、第 75 分位为 77,340 美元、第 90 分位为 102,120 美元（BLS 职业就业与工资统计 OEWS，经 O*NET 展示）。分位数是统计分布位置，不代表起薪。",
+                "answer": "美国 2025 年 5 月全国中位数为 56,850 美元/年、27.33 美元/小时。",
                 "id": "airfield-operations-specialists.faq.5",
                 "question": "美国这个职业的工资是多少？",
-                "question_key": "career.faq.airfield-operations-specialists.us-pay"
+                "question_key": "career.faq.airfield-operations-specialists.us-pay",
+                "source_refs": [
+                  "oews"
+                ]
               },
               {
-                "answer": "美国O*NET列三种新雇员学历受访项而不提供比例，BLS典型分类另为高中或同等学历、无相关经验、长期在岗训练。中国500408高职教育与2019年运行指挥员技能鉴定条件、岗位持证、复训和准入分别核对。中国运输机场（含军民合用机场民用部分）按现行规定第21条对运行安全相关岗位实行持证上岗，依法需要从业资格的岗位另须取得相应国家职业资格证书；第22条要求飞行区从业人员复训周期不超过13个月，学时、方式和内容按民航局有关规定。第24条要求飞行区人员佩带控制区通行证、工作服及反光标识。岗位证、职业资格、技能等级、通行证与进入机动区的管制许可不能互相替代。",
+                "answer": "大陆运输机场适用交通运输部令 2025 年第 5 号，自 2026 年 7 月 1 日施行。机场运营人与驻场单位按职责和运行协议分工。巡查记录、场内通行、关闭或恢复运行决定和对外通报须按本场程序及授权核。 FAA AC 150/5200-18D 面向机场运营人的安全自检。美国持证机场按适用 Part 139 和机场手册核受训人员、巡视范围、记录与报告；机场运行专员与空中交通管制员的权限不互换。",
                 "id": "airfield-operations-specialists.faq.6",
                 "question": "怎么才能成为这个职业的运行专员？",
-                "question_key": "career.faq.airfield-operations-specialists.education"
+                "question_key": "career.faq.airfield-operations-specialists.education",
+                "source_refs": [
+                  "ccar140",
+                  "faa-self"
+                ]
               },
               {
                 "answer": "编辑风险清单：场地与准入安全、信息和协调、应急协同，以及岗位相关噪音、污染物和轮班压力。美国受访情境不等于中国现场发生概率；是否夜班、24小时开放及防护安排需核对具体岗位。",
@@ -31948,10 +31945,13 @@
                 "question_key": "career.faq.airfield-operations-specialists.risk"
               },
               {
-                "answer": "美国 BLS 53-2022：2025 年就业 15.3 千人，2035 年预测 16.5 千人；官方净变化 1.2 千人、增长 7.8%，2025—2035 年年均职位空缺 1.5 千个。空缺包含增长及离职、转职等需求，不等于净新增；数据经过舍入，不用两个总量另算增长率，也不外推为中国需求。",
+                "answer": "美国 53-2022：2025 年约 15,300 个岗位，2035 年预计 16,500 个，增 7.8%，净增约 1,200，年均约 1,500 个空缺（含替代）。",
                 "id": "airfield-operations-specialists.faq.8",
                 "question": "美国就业前景如何？",
-                "question_key": "career.faq.airfield-operations-specialists.outlook"
+                "question_key": "career.faq.airfield-operations-specialists.outlook",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
                 "answer": "美国O*NET受访者：69%每天受控室内、19%从不，35%每周至少一次但非每天暴露于户外天气；62%每天噪音、57%每天污染物；93%持续接触他人、69%认为精确性极其重要、85%认为难纠正错误后果极其严重。不是中国岗位实测、健康风险或固定排班。",
@@ -31964,6 +31964,15 @@
                 "id": "airfield-operations-specialists.faq.10",
                 "question": "飞行区运行与巡查、运行协调与信息发布、机场安全与应急管理三个方向怎么选？",
                 "question_key": "career.faq.airfield-operations-specialists.direction-choice"
+              },
+              {
+                "answer": "参考交付：10:30 A可交接，B待更新（R-v1失效），C待确认（聊天转述不是资料员），D待复核（缺签字）；所有已给接收时间不早于形成时间。可交接1条、待办3条。 10:45 B用新R-v2资料可交接，C用正式资料可交接；A保持可交接，D仍待复核。更新后可交接3条、待办1条；B/C原记录保留，不覆盖原结论。 变式参考：C 新资料接收早于形成，继续待确认时间。A/B 可交接，C/D 待办，合计 2 条可交接、2 条待办。保留原件，不自行改时间。",
+                "id": "airfield-operations-specialists.faq.11",
+                "question": "资料交接参考解（交卷后再打开）",
+                "question_key": "career.faq.airfield-operations-specialists.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31998,19 +32007,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国O*NET职业任务、工作情境、学历及兴趣；2025年OEWS工资经O*NET展示；BLS表1.2就业预测。中国教育部2025年高职教学标准、2019年运行指挥员技能标准及江苏目录、上海2026年技能目录、现行运输机场规章、国家统计局2025年宽口径工资。"
+              "职业任务用 O*NET，工资用 May 2025 OEWS，就业用 BLS 表 1.2。大陆岗位样本来自两份机场雇主招聘表，运行规则见交通运输部。"
             ]
           },
           "id": "airfield-operations-specialists.sources.source-card.2",
           "source_refs": [
             "onet",
-            "oews",
             "ep",
-            "cnclass",
-            "cn-standard",
-            "cn-sh-2026",
-            "ccar140",
-            "nbs"
+            "oews",
+            "yunnan",
+            "moutai",
+            "ccar140"
           ],
           "type": "prose"
         },
@@ -32019,12 +32026,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料核对日期：2026-10-08；工资2025年5月，就业预测2025–2035，法规施行与教育资料期分别注明。"
+              "全国美国工资和就业期间分列；中国 2021、2023 招聘表只作历史样本。"
             ]
           },
           "id": "airfield-operations-specialists.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "oews",
+            "ep",
+            "moutai",
+            "yunnan"
           ],
           "type": "prose"
         },
@@ -32033,16 +32043,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业2025年行业内工资中位数、职业级AI效果、匹配中国职业工资和就业预测或公开招聘样本。美国工资与就业使用不同统计项目；中国学校入学、技能鉴定、持证、复训、通行证及作业许可分别核对。纸面练习和编辑建议不替代机场手册、岗位授权或考核。"
+              "本页未核职业级行业工资、AI 采用率或大陆场务全国工资。两份地方招聘表不代表全国。纸面题不替代单位手册、岗位考核或授权。"
             ]
           },
           "id": "airfield-operations-specialists.sources.source-card.4",
           "source_refs": [
-            "oews",
+            "moutai",
+            "yunnan",
             "ep",
-            "ccar140",
-            "cnclass",
-            "nbs"
+            "ccar140"
           ],
           "type": "prose"
         }
@@ -32069,7 +32078,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32081,13 +32090,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看机场运行专员职业页面",
@@ -32117,124 +32126,124 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "访问 2026-10-03"
+                  "飞行区运行专员巡查机场飞行区、记录道面或标志异常，并向负责处置和通报的人交接。场务巡查、运行协调和安全管理的交付不同；先查岗位的通行、报告及处置权限。",
+                  "美国职业任务。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "用于职业身份、任务与兴趣剖面（CRE）；美国单一职业口径。",
+                "limitation": "美国职业任务。",
                 "market": "美国",
-                "name": "O*NET OnLine 53-2022.00 机场运行专员职业摘要",
-                "period": "O*NET 2026年更新页面",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 53-2022.00 飞行区运行专员",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-2022.00"
+                "url": "https://www.onetonline.org/link/details/53-2022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "访问 2026-10-03"
+                  "美国 53-2022：2025 年约 15,300 个岗位，2035 年预计 16,500 个，增 7.8%，净增约 1,200，年均约 1,500 个空缺（含替代）。",
+                  "全国职业预测。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "bls",
-                "limitation": "本次职业页与行业文件下载返回403；无法取得匹配行业内工资，不据此断言未公布。全国工资改由oews对应O*NET页核实；不用于就业预测。",
+                "limitation": "全国职业预测。",
                 "market": "美国",
-                "name": "BLS 职业就业与工资统计（OEWS）：53-2022",
-                "period": "2025年OEWS",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
-                "url": "https://www.bls.gov/oes/current/oes532022.htm"
-              },
-              {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "exact",
-                  "访问 2026-10-03"
-                ],
-                "evidence_type": "exact",
-                "id": "ep",
-                "limitation": "53-2022规模15.3千人、增长7.8%、净变化1.2千人、空缺1.5千个；非OEWS就业或中国预测。",
-                "market": "美国",
-                "name": "BLS表1.2：2025—2035年职业预测及2025年培养分类",
-                "period": "2025年就业；2025—2035年预测",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "name": "BLS 就业预测表 1.2：53-2022",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "访问 2026-10-03"
+                  "美国 53-2022：2025 年约 15,300 个岗位，2035 年预计 16,500 个，增 7.8%，净增约 1,200，年均约 1,500 个空缺（含替代）。",
+                  "全国职业预测。"
                 ],
-                "evidence_type": "exact",
-                "id": "oews",
-                "limitation": "用于时薪与年薪 10/25/50/75/90 分位数值。",
+                "evidence_type": "primary_document",
+                "id": "ep",
+                "limitation": "全国职业预测。",
                 "market": "美国",
-                "name": "O*NET 展示的 BLS 2025 年 5 月工资分位（53-2022.00）",
-                "period": "2025年5月OEWS工资",
-                "publisher": "O*NET OnLine（BLS OEWS 数据）",
+                "name": "BLS 就业预测表 1.2：53-2022",
+                "period": "2025–2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 2025 年 5 月全国中位数为 56,850 美元/年、27.33 美元/小时。",
+                  "全国职业分位。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "oews",
+                "limitation": "全国职业分位。",
+                "market": "美国",
+                "name": "O*NET 工资（BLS OEWS）",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-2022.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "industry_proxy",
-                  "访问 2026-09-15"
+                  "国家统计局 2025 年城镇非私营单位交通运输、仓储和邮政业平均年工资 133,981 元。行业均值不能换算成机场场务起薪，两份招聘表均未列金额。",
+                  "行业平均。"
                 ],
-                "evidence_type": "industry_proxy",
+                "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "中国城镇单位和规模以上企业工资宽口径均值；非机场运行岗位中位数，不以所有制推断行业。",
+                "limitation": "行业平均。",
                 "market": "中国大陆",
-                "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
-                "period": "2025年工资，2026-05-15发布",
-                "publisher": "国家统计局",
+                "name": "国家统计局：2025 年城镇单位工资",
+                "period": "2025",
+                "publisher": "NBS",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "访问 2026-10-03"
+                  "贵州遵义茅台机场 2023 年社会招聘场务员 1 人，要求相关本科及以上，工作含飞行区管理、外来物防范、净空管理和驱鸟。岗位表未列工资。",
+                  "历史招聘。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
-                "limitation": "专业500408、入学中职/高中/同等学力、学制3年及职业面向4-02-04-03；非招聘门槛、技能鉴定标准或岗位授权。",
+                "limitation": "历史招聘。",
                 "market": "中国大陆",
-                "name": "教育部《机场运行服务与管理专业教学标准》（高职专科，2025）",
-                "period": "2025年教学标准",
-                "publisher": "中华人民共和国教育部",
-                "scope": "contextual",
-                "url": "https://www.moe.gov.cn/s78/A07/zcs_ztzl/2017_zt06/17zt06_bznr/bznr_zyjyzyjxbz/gdzyjy_zk/zk_jtysdl/jtysdl_hkysl/202502/P020250207547047426500.pdf"
+                "name": "遵义茅台机场：2023 年社会招聘表",
+                "period": "2023",
+                "publisher": "Zunyi Maotai Airport",
+                "scope": "recruitment_proxy",
+                "url": "https://airport.moutai.com.cn/mtjc/xmzs/556481/2023042011412031342.pdf"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "访问 2026-10-03"
+                  "大陆运输机场适用交通运输部令 2025 年第 5 号，自 2026 年 7 月 1 日施行。机场运营人与驻场单位按职责和运行协议分工。巡查记录、场内通行、关闭或恢复运行决定和对外通报须按本场程序及授权核。",
+                  "大陆运输机场。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "ccar140",
-                "limitation": "适用运输机场含军民合用民用部分；职责、培训、持证、复训、通行证、管制进入许可、记录及临时关闭程序，不提供个人直接运行授权。",
+                "limitation": "大陆运输机场。",
                 "market": "中国大陆",
-                "name": "《运输机场运行安全管理规定》（2025年第5号，2026-07-01施行）",
-                "period": "2025-11-05公布；2026-07-01施行",
-                "publisher": "中华人民共和国交通运输部",
+                "name": "交通运输部令 2025 年第 5 号",
+                "period": "2026-07-01",
+                "publisher": "CAAC",
                 "scope": "contextual",
-                "url": "https://xxgk.mot.gov.cn/gz/202511/t20251127_4180546.html"
+                "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202512/t20251201_229272.html"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "privacy",
                 "limitation": "用于工作情境比例（噪音、污染物、精确性、决策与沟通）。",
                 "market": "美国",
@@ -32247,10 +32256,10 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "facilities",
                 "limitation": "14个软件标签及广告技能提及比例；不是机场设备清单、软件使用率、AI采用或成效。",
                 "market": "美国",
@@ -32263,10 +32272,10 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "operations",
                 "limitation": "用于任务清单与工作活动。",
                 "market": "美国",
@@ -32279,10 +32288,10 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "hr",
                 "limitation": "用于噪音与污染物暴露、防护装备与工作周时长的比例。",
                 "market": "美国",
@@ -32295,10 +32304,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "国家统计局行业及工资口径。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "health",
                 "limitation": "用于解释民用工资总额为税前口径及其组成范围。",
                 "market": "中国大陆",
@@ -32311,10 +32320,10 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "ilo",
                 "limitation": "用于兴趣代码 CRE（常规型、现实型、企业型）说明。",
                 "market": "美国",
@@ -32325,28 +32334,28 @@
                 "url": "https://www.onetonline.org/link/summary/53-2022.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "AF-23｜四份纸面记录，哪些可以交接？",
+                  "仅纸面。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "美国新雇员学历受访项，无比例；Job Zone 3为组别准备描述，不是中国学历或全部雇主条件。",
-                "market": "美国",
-                "name": "O*NET OnLine 53-2022.00 详细资料（学历与培训要求）",
-                "period": "O*NET 2026年更新页面",
-                "publisher": "O*NET OnLine",
-                "scope": "contextual",
-                "url": "https://www.onetonline.org/link/details/53-2022.00"
+                "limitation": "仅纸面。",
+                "market": "虚构案例",
+                "name": "AF-23｜四份纸面记录，哪些可以交接？",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/zh/career/jobs/airfield-operations-specialists#career-content-path"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "nist",
                 "limitation": "用于职业概述与相关民用职业入口。",
                 "market": "美国",
@@ -32359,10 +32368,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "arxiv",
                 "limitation": "用于任务与职责参考。",
                 "market": "美国",
@@ -32375,10 +32384,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "weforum",
                 "limitation": "用于任务与运行程序说明。",
                 "market": "美国",
@@ -32391,10 +32400,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "employer",
                 "limitation": "用于记录、通告与报告要求说明。",
                 "market": "美国",
@@ -32407,10 +32416,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "purchasing-managers",
                 "limitation": "用于任务清单参考。",
                 "market": "美国",
@@ -32423,10 +32432,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-1",
                 "limitation": "用于任务描述与职责边界。",
                 "market": "美国",
@@ -32439,10 +32448,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-2",
                 "limitation": "用于职业属性说明。",
                 "market": "美国",
@@ -32455,10 +32464,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
                 "limitation": "用于数据口径说明。",
                 "market": "美国",
@@ -32471,10 +32480,10 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "census",
                 "limitation": "美国本职业就业分布：运输仓储64%、政府27%、其他9%；非行业内工资或中国雇主分类。",
                 "market": "美国",
@@ -32487,10 +32496,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "msresearch",
                 "limitation": "用于任务与职责参考。",
                 "market": "美国",
@@ -32501,28 +32510,28 @@
                 "url": "https://www.onetonline.org/link/summary/53-2022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "访问 2026-10-03"
+                  "美国 2025 年 5 月全国中位数为 56,850 美元/年、27.33 美元/小时。",
+                  "全国职业分位。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "用于全国工资分位数值与资料期核对。",
+                "limitation": "全国职业分位。",
                 "market": "美国",
-                "name": "O*NET OnLine 53-2022.00 全国工资分位页面",
-                "period": "2025年5月OEWS工资",
-                "publisher": "O*NET OnLine（BLS OEWS 数据）",
+                "name": "O*NET 工资（BLS OEWS）",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-2022.00"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "美国飞行区运行专员职业资料。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "archivists",
                 "limitation": "用于记录、应急与协同过程说明。",
                 "market": "美国",
@@ -32533,52 +32542,52 @@
                 "url": "https://www.onetonline.org/link/details/53-2022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "访问 2026-10-03"
+                  "大陆运输机场适用交通运输部令 2025 年第 5 号，自 2026 年 7 月 1 日施行。机场运营人与驻场单位按职责和运行协议分工。巡查记录、场内通行、关闭或恢复运行决定和对外通报须按本场程序及授权核。",
+                  "大陆运输机场。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cn-standard",
-                "limitation": "核对第1.3—1.8条定义、四个等级、大专或同等学力及申报；托管站首页不可用，文本身份另由江苏人社目录核对，不声称最新版招聘门槛。",
+                "limitation": "大陆运输机场。",
                 "market": "中国大陆",
-                "name": "《机场运行指挥员国家职业技能标准》（2019年版，公开PDF）",
-                "period": "2019年版",
-                "publisher": "人社部、中国民航局制定；公开PDF托管域名he.nvq.net.cn",
+                "name": "交通运输部令 2025 年第 5 号",
+                "period": "2026-07-01",
+                "publisher": "CAAC",
                 "scope": "contextual",
-                "url": "https://he.nvq.net.cn/siteApp/upload/1072/upload/2021-11-29/2544/32041638150595578.pdf"
+                "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202512/t20251201_229272.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "访问 2026-10-03"
+                  "云南机场集团 2021 年 11 月岗位表：丽江机场场务员 2 人，相关全日制本科及以上；迪庆香格里拉机场场务员 1 人，相关全日制大专及以上。两条均未列薪资金额，都是历史样本。",
+                  "历史招聘。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cn-standard-catalog",
-                "limitation": "第52项列4-02-04-03及2019年版；目录确认名称、编码和版本，不替代技能标准全文或当前评价公告。",
+                "limitation": "历史招聘。",
                 "market": "中国大陆",
-                "name": "江苏省人社厅国家职业标准目录（机场运行指挥员2019）",
-                "period": "2022-05-19目录",
-                "publisher": "江苏省人力资源和社会保障厅",
-                "scope": "contextual",
-                "url": "https://jshrss.jiangsu.gov.cn/art/2022/5/19/art_85534_10454317.html"
+                "name": "云南机场集团：2021 年社会招聘表",
+                "period": "2021-11",
+                "publisher": "Yunnan Airport Group",
+                "scope": "recruitment_proxy",
+                "url": "https://bn.ynairport.com/u/cms/www/202111/23112416529b.pdf"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "访问 2026-10-03"
+                  "云南机场集团 2021 年 11 月岗位表：丽江机场场务员 2 人，相关全日制本科及以上；迪庆香格里拉机场场务员 1 人，相关全日制大专及以上。两条均未列薪资金额，都是历史样本。",
+                  "历史招聘。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cn-sh-2026",
-                "limitation": "第114项列机场场务员4-02-04-05；当地补贴项目名称编码，非全国入职门槛或已核实大典正式全文。",
+                "limitation": "历史招聘。",
                 "market": "中国大陆",
-                "name": "上海市职业技能提升补贴目录（2026年）",
-                "period": "2026-01-09发布，2026-03-01实施",
-                "publisher": "上海市人力资源和社会保障局",
-                "scope": "contextual",
-                "url": "https://rsj.sh.gov.cn/cmsres/9b/9ba19f490cd44fb5bfbdd4f6dd028308/0c1f7bca8e3905c87c234f8f6edbecbb.pdf"
+                "name": "云南机场集团：2021 年社会招聘表",
+                "period": "2021-11",
+                "publisher": "Yunnan Airport Group",
+                "scope": "recruitment_proxy",
+                "url": "https://bn.ynairport.com/u/cms/www/202111/23112416529b.pdf"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32596,21 +32605,68 @@
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "飞行区巡查｜场地与设施｜按法规与运行手册对跑道、滑行道、机坪与升降带开展每日全面巡查与定期步行检查，检查道面、标志、灯光与排水，记录缺陷并采取或上报处置。 — 25/100; weight=1/3; airfield-operations-specialists.profile.responsibilities-block.1[0]",
-                  "运行协调｜管制与维修｜协调空中交通管制与维修人员之间的通信，与机构协调以保障机场管理活动，管理跑道与滑行道除雪协调。 — 50/100; weight=1/3; airfield-operations-specialists.profile.responsibilities-block.1[2]",
-                  "信息传递｜天气与计划｜美国O*NET补充/新增任务包含报文、天气、飞行计划及机场状态信息。实际接收、传递或发布必须按岗位权限；中国侧不据此授予通告签发权，由有权机构办理，运行岗位按分工核对原始资料和状态。 — 75/100; weight=1/3; airfield-operations-specialists.profile.responsibilities-block.1[3]"
+                  "工具可对照虚构巡查记录的编号、版本和缺项。场况、通行、信息发布和恢复运行决定仍按适用程序，由相应人员处理。本页来源未提供本职业的 AI 替代率。",
+                  "无替代率估计。",
+                  "无替代率估计。",
+                  "无替代率估计。",
+                  "无替代率估计。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "无替代率估计。",
+                "market": "编辑说明",
+                "name": "编辑部：巡查记录与 AI",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "云南机场集团 2021 年 11 月岗位表：丽江机场场务员 2 人，相关全日制本科及以上；迪庆香格里拉机场场务员 1 人，相关全日制大专及以上。两条均未列薪资金额，都是历史样本。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "yunnan",
+                "limitation": "历史招聘。",
+                "market": "中国大陆",
+                "name": "云南机场集团：2021 年社会招聘表",
+                "period": "2021-11",
+                "publisher": "Yunnan Airport Group",
+                "scope": "recruitment_proxy",
+                "url": "https://bn.ynairport.com/u/cms/www/202111/23112416529b.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "贵州遵义茅台机场 2023 年社会招聘场务员 1 人，要求相关本科及以上，工作含飞行区管理、外来物防范、净空管理和驱鸟。岗位表未列工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "moutai",
+                "limitation": "历史招聘。",
+                "market": "中国大陆",
+                "name": "遵义茅台机场：2023 年社会招聘表",
+                "period": "2023",
+                "publisher": "Zunyi Maotai Airport",
+                "scope": "recruitment_proxy",
+                "url": "https://airport.moutai.com.cn/mtjc/xmzs/556481/2023042011412031342.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "FAA AC 150/5200-18D 面向机场运营人的安全自检。美国持证机场按适用 Part 139 和机场手册核受训人员、巡视范围、记录与报告；机场运行专员与空中交通管制员的权限不互换。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "faa-self",
+                "limitation": "自检指导，适用范围见原文件。",
+                "market": "美国",
+                "name": "FAA AC 150/5200-18D",
+                "period": "2022",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/airports/resources/advisory_circulars/index.cfm/go/document.current/documentNumber/150_5200-18"
               }
             ]
           },
@@ -35945,9 +36001,9 @@
         }
       },
       "hero": {
-        "h1": "机场运行专员",
-        "quick_answer": "机场运行专员在机场场地检查、运行信息与安全保障之间协作。美国O*NET描述涵盖商用和军用航空器相关任务，部分岗位还涉及签派与机组保障；中国职责需分清运行指挥与场务等岗位。美国2025年年薪中位数56,850美元，BLS预测2025—2035年增长7.8%；中国工资仅列宽口径参照。",
-        "title": "机场运行专员"
+        "h1": "飞行区运行专员",
+        "quick_answer": "飞行区运行专员巡查机场飞行区、记录道面或标志异常，并向负责处置和通报的人交接。场务巡查、运行协调和安全管理的交付不同；先查岗位的通行、报告及处置权限。",
+        "title": "飞行区运行专员"
       },
       "market_signal_card": {
         "context_links": [
@@ -36508,7 +36564,7 @@
           },
           {
             "alternate_value": null,
-            "label": "教育部《机场运行服务与管理专业教学标准》（高职专科，2025）",
+            "label": "遵义与云南机场招聘样本",
             "secondary_value": null,
             "value": {
               "$item": "airfield-operations-specialists.profile.onet-structured-fields-block.5",
@@ -37298,7 +37354,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合机场运行专员",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37375,7 +37431,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "大五人格（英文）"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -37385,7 +37441,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "MBTI 人格测试"
           },
           {
             "href": {
@@ -37395,7 +37451,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "九型人格（中文）"
+            "label": "九型人格测试"
           },
           {
             "href": {
@@ -37405,7 +37461,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "IQ（中文）"
+            "label": "智力与推理测试"
           }
         ]
       },
@@ -37512,7 +37568,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "巡查记录与 AI",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37639,10 +37695,10 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得2025年该行业内本职业工资中位数；本次BLS职业页及行业下载返回403，不代表未公布",
+        "display_value": "本页未核分行业职业工资中位数",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "行业内该职业工资中位数（运输与仓储）",
+        "measure": "分行业职业工资中位数",
         "occupation_scope": "机场运行专员",
         "period": "2025年；查询2026-10-03",
         "source_refs": [
@@ -37651,10 +37707,10 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得2025年该行业内本职业工资中位数；本次BLS职业页及行业下载返回403，不代表未公布",
+        "display_value": "本页未核分行业职业工资中位数",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "行业内该职业工资中位数（政府）",
+        "measure": "分行业职业工资中位数",
         "occupation_scope": "机场运行专员",
         "period": "2025年；查询2026-10-03",
         "source_refs": [
@@ -37663,10 +37719,10 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得2025年该行业内本职业工资中位数；本次BLS职业页及行业下载返回403，不代表未公布",
+        "display_value": "本页未核分行业职业工资中位数",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "行业内该职业工资中位数（航空运输支持服务）",
+        "measure": "分行业职业工资中位数",
         "occupation_scope": "机场运行专员",
         "period": "2025年；查询2026-10-03",
         "source_refs": [
@@ -37675,10 +37731,10 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得2025年该行业内本职业工资中位数；本次BLS职业页及行业下载返回403，不代表未公布",
+        "display_value": "本页未核分行业职业工资中位数",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "行业内该职业工资中位数（其他行业）",
+        "measure": "分行业职业工资中位数",
         "occupation_scope": "机场运行专员",
         "period": "2025年；查询2026-10-03",
         "source_refs": [
@@ -37900,27 +37956,15 @@
         "source_refs": [
           "ep"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "机场运行专员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "巡查记录与 AI"
     },
     "badges": [
       "机场运行保障：飞行区巡查与准入 · 运行协调与信息发布 · 安全与应急",
@@ -37944,7 +37988,7 @@
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
@@ -37964,17 +38008,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "机场运行专员做什么、需要哪些岗位培训与授权、美国工资分位与就业预测如何，以及中国大陆对应职业（机场运行指挥员/机场场务员）与行业工资参照的范围；说明数据口径与缺口。"
+      "text": "比较机场场务巡查、运行协调与安全管理，查看大陆招聘和美国工资，用虚构资料练习记录交接。"
     },
     "title": {
       "availability": "available",
-      "text": "机场运行专员：任务、工资与就业前景（O*NET 53-2022）"
+      "text": "飞行区运行专员：职责、工资与交接试做"
     }
   },
-  "source_content_sha256": "98b939a1d364c7c56129b6b9e5e46a2d2e70c118f89a8d7261b6edfc998a4073",
+  "source_content_sha256": "cd4749d40bd359e2f022acf72fac762135120b717df27db77f733b0232c2f61d",
   "subject": {
     "canonical_slug": "airfield-operations-specialists",
-    "name": "机场运行专员",
-    "summary": "机场运行专员的美国职业描述覆盖飞行区检查、安全程序、运行协调、机场与飞行信息及记录，并包括部分签派、机组保障任务。中国岗位按运行指挥、场务等具体职责对照，执行现行民航规章和机场手册；信息准确、授权边界和记录可追溯是判断重点。"
+    "name": "飞行区运行专员",
+    "summary": "飞行区运行专员巡查机场飞行区、记录道面或标志异常，并向负责处置和通报的人交接。场务巡查、运行协调和安全管理的交付不同；先查岗位的通行、报告及处置权限。"
   }
 }

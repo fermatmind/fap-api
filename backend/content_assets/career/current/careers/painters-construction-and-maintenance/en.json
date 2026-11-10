@@ -164,6 +164,9 @@
       "item:painters-construction-and-maintenance.path.seven-day-trial.8": {
         "status": "mapped"
       },
+      "item:painters-construction-and-maintenance.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:painters-construction-and-maintenance.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -13075,6 +13078,21 @@
             "onet-education"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The order names the corridor wall, but the old photo shows the next room and there is no site check. Identify the surface and who should confirm it."
+            ]
+          },
+          "id": "painters-construction-and-maintenance.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "Check a building painting work order",
+          "type": "notice"
         }
       ]
     },
@@ -15586,6 +15604,13 @@
         "id": "painters-construction-and-maintenance.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "painters-construction-and-maintenance.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15803,7 +15828,7 @@
       "text": "Painters, Construction and Maintenance: work content, pay, and safety risks."
     }
   },
-  "source_content_sha256": "ae1c5182c19c93f9eaaeddacbadcc101eae1ebdaac3e3585ade64b635768dbb2",
+  "source_content_sha256": "c1cb3d9784bbe85acf0f6e3a9ffe0e0dccc98533e6f1b0d2c5c4d82db0cbddaf",
   "subject": {
     "canonical_slug": "painters-construction-and-maintenance",
     "name": "Painters, Construction and Maintenance.",

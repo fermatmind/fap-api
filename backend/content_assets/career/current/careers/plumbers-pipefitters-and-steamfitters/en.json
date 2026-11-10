@@ -1283,6 +1283,9 @@
       "item:plumbers-pipefitters-and-steamfitters.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:plumbers-pipefitters-and-steamfitters.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:plumbers-pipefitters-and-steamfitters.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31002,6 +31005,21 @@
             "editor-note"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The repair on line S4 records the replacement valve, but the attached test sheet says S6. State what is confirmed and what needs review. Authorized personnel handle actual pressurized work and retesting."
+            ]
+          },
+          "id": "plumbers-pipefitters-and-steamfitters.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Match piping repair and test evidence",
+          "type": "notice"
         }
       ]
     },
@@ -37517,6 +37535,13 @@
         "id": "plumbers-pipefitters-and-steamfitters.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "plumbers-pipefitters-and-steamfitters.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37866,7 +37891,7 @@
       "text": "Plumber, pipefitter, and steamfitter career guide: tasks, wages, and the apprenticeship path"
     }
   },
-  "source_content_sha256": "beded6973d715021da0806ec9a07ec67566a390cfa1d81e0e2a93116aa427f3c",
+  "source_content_sha256": "06e7903514b484ce971b138e3246b9d7909192f88b7bd3962b46aa068976d0da",
   "subject": {
     "canonical_slug": "plumbers-pipefitters-and-steamfitters",
     "name": "Plumbers, Pipefitters, and Steamfitters",

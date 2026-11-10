@@ -7270,13 +7270,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页覆盖 O*NET 11-9111.00「医疗与健康服务经理（Medical and Health Services Managers）」：在医院、诊所、管理式医疗组织、公共卫生机构或类似组织规划、指导或协调医疗与健康服务；常见报告岗位名包括癌症中心主任、临床主任、健康信息管理主任、健康信息经理、医疗系统主任、病历主任、病历经理、心理健康项目经理、护士长与护理主任。本页不含行政服务经理、社会与社区服务经理、管理分析师等相邻岗位。"
+              "医疗卫生服务管理者协调医院、诊所等服务机构的流程、人员和资源，跟踪质量、预算与服务指标。管理职责不自动包括临床权限。"
             ]
           },
           "id": "medical-and-health-services-managers.profile.definition-block.1",
           "source_refs": [
             "onet-summary",
-            "onet-details"
+            "cn-nhc-ops"
           ],
           "type": "prose"
         },
@@ -7372,12 +7372,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "先核对的内容：服务目标与指标、预算与财务制度、人员与排班安排、准入与安全卫生合规清单、数据口径，以及需要授权者确认的签署、承诺与重大调整。"
+              "用虚构门诊记录等待、人员、质量指标和改进前后差异。国家卫健委指导意见列公立医院流程和运营评价。"
             ]
           },
           "id": "medical-and-health-services-managers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-details"
+            "onet-summary",
+            "cn-nhc-ops"
           ],
           "type": "prose"
         },
@@ -7386,12 +7387,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作闭环：核目标、预算和适用规则，安排人员与资源，协调部门，监控服务与质量并报告改进。未决的新方案先记录并交授权者确认；不把任一异常泛化为停止既有患者服务，服务连续性与异常处置按机构程序及责任判断。"
+              "管理岗协调流程、人员和资源；临床团队承担诊疗及专业判断。权限由机构规定。"
             ]
           },
           "id": "medical-and-health-services-managers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-details"
+            "onet-summary",
+            "cn-nhc-ops"
           ],
           "type": "prose"
         },
@@ -8312,12 +8314,13 @@
                 ]
               },
               {
-                "answer": "美国 11-9111.00 本职业口径 2024 年就业约 616,200 人，2034 年预计约 759,100 人，2024—2034 年预计远快于平均（约 23%），年均职位空缺约 62,100 个（含替换需求）；不等于个人录用概率。",
+                "answer": "美国 BLS 表1.2：11-9111 2025 年就业约 640,400 人，预计 2035 年约 795,500 人，2025—2035 年变化 +24.2%，年均约 62,300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                 "id": "medical-and-health-services-managers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.medical-and-health-services-managers.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "onet-trends",
+                  "bls-design-ep"
                 ]
               },
               {
@@ -8546,18 +8549,18 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "2024 年就业约 616,200 人、2034 年预计约 759,100 人、2024—2034 年预计远快于平均（约 23%）、年均空缺约 62,100 个。",
+                  "美国 BLS 表1.2：11-9111 2025 年就业约 640,400 人，预计 2035 年约 795,500 人，2025—2035 年变化 +24.2%，年均约 62,300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                   "含替换需求。"
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
                 "limitation": "含替换需求；不等于个人录用概率。",
                 "market": "美国",
-                "name": "O*NET 11-9111.00 全国就业趋势（BLS 2024—2034 年预测）",
-                "period": "BLS2024—2034就业预测；查阅2026-10-03",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/11-9111.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -8820,6 +8823,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "所附指导意见列流程、资源与运营评价。"
+                ],
+                "id": "cn-nhc-ops",
+                "limitation": "公立医院组织指导，不是个人职业资格。",
+                "market": "中国大陆",
+                "name": "陕西转发国家公立医院运营管理指导意见",
+                "period": "2021 转发",
+                "publisher": "陕西省卫生健康委员会",
+                "scope": "具名岗位或制度",
+                "url": "https://sxwjw.shaanxi.gov.cn/sy/ztzl/lszt/jjglnzt/gzdt_4836/202102/P020210204378696230627.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 表1.2：11-9111 2025 年就业约 640,400 人，预计 2035 年约 795,500 人，2025—2035 年变化 +24.2%，年均约 62,300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。"
+                ],
+                "id": "bls-design-ep",
+                "market": "美国",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -9703,7 +9732,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这个职业先核对什么？",
+            "question": "医疗运营案例可以展示什么？",
             "table": {
               "rows": [
                 {
@@ -9735,7 +9764,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "怎样判断工作闭环？",
+            "question": "医疗管理和临床工作怎么分？",
             "table": {
               "rows": [
                 {
@@ -11144,7 +11173,7 @@
           "entry": "medical-and-health-services-managers.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合医疗与健康服务经理",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11268,39 +11297,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "616,200 人",
+        "derivation": "美国 BLS 表1.2：11-9111 2025 年就业约 640,400 人，预计 2035 年约 795,500 人，2025—2035 年变化 +24.2%，年均约 62,300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 640,400 人",
         "fact_id": "us-employment-2024",
         "market": "美国（Medical and Health Services Managers 11-9111.00）",
         "measure": "2024 年就业规模",
         "occupation_scope": "O*NET 11-9111.00 本职业口径",
-        "period": "2024；查阅 2026-10-03",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET 全国就业趋势页：2024—2034 年预计远快于平均（约 23%）。",
-        "display_value": "远快于平均（约 23%，2024—2034）",
+        "derivation": "美国 BLS 表1.2：11-9111 2025 年就业约 640,400 人，预计 2035 年约 795,500 人，2025—2035 年变化 +24.2%，年均约 62,300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "+24.2%",
         "fact_id": "us-growth",
         "market": "美国（Medical and Health Services Managers 11-9111.00）",
         "measure": "就业增长预测",
         "occupation_scope": "O*NET 11-9111.00 本职业口径",
-        "period": "2024—2034；查阅 2026-10-03",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "为预测期内的职位空缺估计，含替换需求。",
-        "display_value": "约 62,100 个/年（2024—2034）",
+        "derivation": "美国 BLS 表1.2：11-9111 2025 年就业约 640,400 人，预计 2035 年约 795,500 人，2025—2035 年变化 +24.2%，年均约 62,300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 62,300 个",
         "fact_id": "us-openings",
         "market": "美国（Medical and Health Services Managers 11-9111.00）",
         "measure": "预计职位空缺（年均）",
         "occupation_scope": "O*NET 11-9111.00 本职业口径",
-        "period": "2024—2034；查阅 2026-10-03",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
@@ -11364,19 +11393,19 @@
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业规模（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11390,17 +11419,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "医疗与健康服务经理（O*NET 11-9111.00）负责医疗健康服务的运营、预算、人员与合规管理。美国 BLS 2025 年中位年薪 123,860 美元；2024 年就业约 616,200 人，2024—2034 年预计远快于平均（约 23%）。含工作情境、风险与入行路径。"
+      "text": "了解医疗卫生服务管理怎样改进流程，并与临床团队分工。"
     },
     "title": {
       "availability": "available",
-      "text": "医疗与健康服务经理：工作内容、美国工资与入行 | 费马测试"
+      "text": "医疗卫生服务管理者做什么：流程、资源与质量"
     }
   },
-  "source_content_sha256": "b60943b1f8e16e0b90e08bc8bbad127e6331ae653418d2cc14d625127012aeed",
+  "source_content_sha256": "f3c06966907f995b66acf05d1f2e55c54c65fd6678821cb99a2ba8ca31064bb0",
   "subject": {
     "canonical_slug": "medical-and-health-services-managers",
-    "name": "医疗与健康服务经理",
-    "summary": "医疗与健康服务经理（O*NET 11-9111.00）规划、指导并协调医院、诊所或公共卫生机构的医疗与健康服务，负责运营与预算、人员与质量、合规与对外协作。"
+    "name": "医疗卫生服务管理者",
+    "summary": "医疗卫生服务管理者协调医院、诊所等服务机构的流程、人员和资源，跟踪质量、预算与服务指标。管理职责不自动包括临床权限。"
   }
 }

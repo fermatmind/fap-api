@@ -14,9 +14,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -7214,7 +7211,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Caution signal | This page corresponds to O*NET-SOC 51-9061.00 \"Inspectors, Testers, Sorters, Samplers, And Weighers\". The official scope is: inspect, test, sort, sample, or weigh nonagricultural raw materials, or processed, machined, fabricated, or assembled parts or products, to detect defects, wear, and deviations from specifications, and may use precision measuring instruments and complex test equipment. The core deliverable is reviewable inspection conclusions and records, not \"picking out bad parts\" itself. Risks come from the state of measurement and gauges, sampling and decision rules, segregation and labeling, and out-of-authority release or concession acceptance. US wages and employment are the precise-occupation BLS definition presented by O*NET (median annual wage 48,570 USD; 2024 employment about 598,000 people, 2024—2034 growth almost no change, projected openings 69,900). If you find it hard to bear repetitive inspection, production-line pace pressure, and accuracy requirements, you should weigh these as real costs needing serious consideration."
+              "BLS Table 1.2 (51-9061) shows about 602,000 U.S. jobs in 2025 and projects 617,200 in 2035 (2.5%), with about 66,700 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.quick-decision.fermat-decision-card.1",
@@ -7242,12 +7239,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "To judge whether you fit inspection, testing, sorting, sampling, or weighing work, first run a verifiable exercise with public or simulated material: set up a fully fictional inspection scenario (for example, inspecting a batch of fictional parts against specifications), write out the process from confirming the inspection plan and specifications, checking gauge and calibration status, measuring per the sampling plan, recording and deciding, handling nonconforming items, to review and handoff, and mark the checkpoints and possible problems at each step (inaccurate or overdue gauges, unclear sampling and decision rules, measurement records not matching the physical items, nonconforming items not segregated or mistakenly released, insufficient protection in hazardous environments). After completing it, check: whether specifications and decision rules, gauge status, segregation and labeling, and protection requirements are treated as non-omittable items; whether releases or concession acceptances beyond your personal authority are written as requests or handoffs; whether the process is left as reviewable records. All material must be fictional; do not use real products, drawings, or test data."
+              "Find “Sheet Q: Sample results and review” under “Entering the field, qualifications, and career development.”"
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7278,21 +7275,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "This occupation per O*NET51-9061 inspects, tests, sorts, samples, or weighs nonagricultural raw materials and processed and assembled products, identifying defects, wear, and specification deviations, and may use precision gauges and complex equipment. The work loop is an editorial summary; actual tasks/authorization are checked per position. 2025 national annual wages at the 10/25/50/75/90 percentiles 35,510/39,890/48,570/61,440/77,860 USD, median hourly wage 23.35 USD. BLS2025—2035 precise SOC51-9061: employment 602,000 to 617,200 people, growth 3%, average annual openings 66,700; includes growth and replacement, not net additions or an individual guarantee. Precise wages for this occupation in China were not obtained."
+              "Production inspectors and testers check materials and products against drawings or inspection instructions. They record measurements, samples and results, then flag nonconforming or pending lots for review."
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
-            "source-pack-onet-custom",
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "source-pack-onet-localcert",
-            "source-pack-onet-localtraining",
-            "source-pack-onet-localwages",
-            "source-pack-onet-summary",
-            "onet-hot",
             "onet-details"
           ],
           "type": "prose"
@@ -7373,12 +7360,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET2026 precise tasks, context, and RCI; Job Zone1—2 is a group preparation description, education survey 70% high school/equivalent, 27% postsecondary nondegree certificate, 3% college no degree, not a uniform individual threshold. 2025 national annual wages at the 10/25/50/75/90 percentiles 35,510/39,890/48,570/61,440/77,860 USD, median hourly wage 23.35 USD. BLS2025—2035 precise SOC51-9061: employment 602,000 to 617,200 people, growth 3%, average annual openings 66,700; includes growth and replacement, not net additions or an individual guarantee. The main employer is manufacturing, and industry distribution does not equal hiring scale."
+              "O*NET 51-9061.00 describes this occupation’s tasks and work context. U.S. wages come from OEWS and projections from BLS Table 1.2."
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "onet-summary"
+            "onet-details",
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7560,7 +7549,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS clearly states that some manufacturers use automated visual inspection, where inspectors monitor equipment, review output, and perform random spot checks; this is a traditional inspection automation description and does not equal a generative AI adoption rate. Generative AI recording and drafting are editorial candidates, and no precise-occupation adoption, effects, or net job causality research was obtained this round. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "BLS clearly states that some manufacturers use automated visual inspection, where inspectors monitor equipment, review output, and perform random spot checks; this is a traditional inspection automation description and does not equal a generative AI adoption rate. Generative AI recording and drafting are editorial candidates, and no precise-occupation adoption, effects, or net job causality research was obtained this round."
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.ai-impact.ai-impact-table.2",
@@ -7742,7 +7731,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "US wage reference | BLS data presented by O*NET (May 2025), on the precise-occupation definition for 51-9061.00."
+              "O*NET displays the May 2025 BLS OEWS national wages for U.S. occupation 51-9061."
             ]
           },
           "fact_refs": [
@@ -7759,7 +7748,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 national annual wages at the 10/25/50/75/90 percentiles 35,510/39,890/48,570/61,440/77,860 USD, median hourly wage 23.35 USD. BLS2025—2035 precise SOC51-9061: employment 602,000 to 617,200 people, growth 3%, average annual openings 66,700; includes growth and replacement, not net additions or an individual guarantee."
+              "The May 2025 U.S. national median was USD 48,570 a year and USD 23.35 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 35,510, 39,890, 48,570, 61,440, 77,860."
             ]
           },
           "fact_refs": [
@@ -8065,12 +8054,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS says US entry commonly requires a high school diploma/equivalent plus on-the-job training, usually more than 1 month to 1 year; the O*NET survey shows 70% high school, 27% postsecondary nondegree certificate, 3% college no degree. Job Zone1—2 is not a fixed training period for this occupation, and the specific product/position and duties are checked separately."
+              "BLS lists a high school diploma or equivalent and moderate-term on-the-job training as typical preparation. Check instrument training, sampling rules and release authority with the employer."
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.path.career-path-block.2",
           "source_refs": [
-            "onet-cert"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8079,12 +8068,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Specific jurisdiction requirements | The US side uses O*NET preparation information to represent the typical path together with on-the-job training; job entry, quality, and work safety requirements in mainland China are governed by relevant regulations and agency rules and must be checked separately, not applied to each other."
+              "A named Kunshan recruitment notice lists process sampling, final inspection, control of nonconforming items and instrument upkeep."
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.path.career-path-block.3",
           "source_refs": [
-            "onet-cert"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8121,12 +8110,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Reviewable evidence | Demonstrate ability with a fully fictional inspection task package: specifications and sampling plan, measurement and decision records, nonconforming-item disposition and gauge status records; do not use real products, drawings, or test data, and note the basis and assumptions."
+              "Paper exercise “Sheet Q: Sample results and review.” Fictional sheet V2 gives an inclusive width range of 9.8 to 10.2 mm. A reads 9.8, B reads 10.3 and C has no reading. The log marks all three as passing. Reassess each and prepare a review handoff. In the variant, change only B to 10.2 mm."
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.path.career-path-block.6",
           "source_refs": [
-            "onet-cert"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8135,12 +8124,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Next action | Complete one fictional inspection task package and review record, ask an experienced person to challenge your gauge judgments, decision rules, and segregation disposition, and use that to judge whether to keep investing in this direction; prove ability with observable deliverables rather than course names."
+              "Complete both cases and save your first draft. Then open “Paper exercise answer key (open after completing)” in “Frequently asked questions and sources.” Check whether someone can trace the original values, pending items and handoff owner."
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.path.career-path-block.7",
           "source_refs": [
-            "onet-cert"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8185,12 +8174,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS2025—2035 precise SOC51-9061: employment 602,000 to 617,200 people, growth 3%, average annual openings 66,700; includes growth and replacement, not net additions or an individual guarantee. BLS2025 manufacturing employers account for 64%; partial traditional automation reduces some inspection tasks and cannot be used to infer generative AI net job causality. China's precise demand was not obtained."
+              "BLS Table 1.2 (51-9061) shows about 602,000 U.S. jobs in 2025 and projects 617,200 in 2035 (2.5%), with about 66,700 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8309,23 +8298,22 @@
                 ]
               },
               {
-                "answer": "Per the BLS May 2025 data presented by O*NET (precise occupation 51-9061.00): median wage 48,570 USD (median hourly wage 23.35 USD), with the 10/25/75/90 percentiles at 35,510 / 39,890 / 61,440 / 77,860 USD. OEWS is employer-reported wages excluding benefits and bonuses, and percentiles do not equal starting pay or individual take-home income.",
+                "answer": "The May 2025 U.S. national median was USD 48,570 a year and USD 23.35 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 35,510, 39,890, 48,570, 61,440, 77,860.",
                 "id": "inspectors-testers-sorters-samplers-and-weighers.faq.7",
                 "question": "What is the US wage evidence?",
                 "question_key": "career.faq.inspectors-testers-sorters-samplers-and-weighers.us-pay",
                 "source_refs": [
-                  "source-pack-onet-localwages",
                   "onet-wages"
                 ]
               },
               {
-                "answer": "O*NET preparation information shows this occupation is Job Zone One to Two: usually requiring a high school diploma or equivalent (70% answered high school diploma, 27% answered postsecondary certificate, 3% some college no degree), with training from a few days to one year of on-the-job training. Entering this occupation should combine on-the-job training and verifiable inspection records; education, certificates, licenses, hiring, agency authorization, and release authority must be checked separately.",
+                "answer": "BLS lists a high school diploma or equivalent and moderate-term on-the-job training as typical preparation. Check instrument training, sampling rules and release authority with the employer. A named Kunshan recruitment notice lists process sampling, final inspection, control of nonconforming items and instrument upkeep.",
                 "id": "inspectors-testers-sorters-samplers-and-weighers.faq.8",
                 "question": "What is the entry and training path?",
                 "question_key": "career.faq.inspectors-testers-sorters-samplers-and-weighers.education-path",
                 "source_refs": [
-                  "source-pack-onet-localtraining",
-                  "source-pack-onet-localcert"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
@@ -8339,13 +8327,12 @@
                 ]
               },
               {
-                "answer": "The US side uses the precise-occupation BLS definition presented by O*NET: 2024—2034 growth almost no change (0%), projected openings 69,900, and about 598,000 people employed in 2024; openings include growth and replacement demand, do not equal net new jobs, and cannot be directly converted into hiring scale or individual hiring probability.",
+                "answer": "BLS Table 1.2 (51-9061) shows about 602,000 U.S. jobs in 2025 and projects 617,200 in 2035 (2.5%), with about 66,700 openings per year including replacements. Counts are rounded independently.",
                 "id": "inspectors-testers-sorters-samplers-and-weighers.faq.10",
                 "question": "How should market signals be understood?",
                 "question_key": "career.faq.inspectors-testers-sorters-samplers-and-weighers.outlook-transition",
                 "source_refs": [
-                  "onet-trends",
-                  "source-pack-onet-summary"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8366,6 +8353,15 @@
                 "source_refs": [
                   "onet-details",
                   "nbs-wages"
+                ]
+              },
+              {
+                "answer": "In the original A is within range, B is out of range and C awaits measurement. In the variant A and B are within range, and C stays pending. Keep the original log and hand off the correction and missing measurement.",
+                "id": "inspectors-testers-sorters-samplers-and-weighers.faq.paper-exercise",
+                "question": "Paper exercise answer key (open after completing)",
+                "question_key": "career.faq.inspectors-testers-sorters-samplers-and-weighers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
                 ]
               }
             ]
@@ -8486,17 +8482,17 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "Organizes assistable tasks and human controls.",
-                  "Not adoption, job-loss, regulation or authorization evidence."
+                  "Tools may help organize records. Verify key information against the original.",
+                  "Tools may help organize records. Verify key information against the original."
                 ],
-                "evidence_type": "internal task rubric",
+                "evidence_type": "Editorial explanation",
                 "id": "internal-rubric",
-                "limitation": "Not adoption, job-loss, regulation or authorization evidence.",
-                "market": "Global task level",
-                "name": "FermatMind inspectors, testers, sorters, samplers, and weighers task impact scale",
-                "period": "FermatMind task rubric v2026.08; reviewed 2026-08-31",
+                "limitation": "This explanation does not measure adoption or work outcomes.",
+                "market": "This page",
+                "name": "FermatMind task and human review notes",
+                "period": "This page",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "Tasks on this page",
                 "url": null
               },
               {
@@ -8596,17 +8592,16 @@
                 "url": "https://www.onetonline.org/link/localtrends/51-9061.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Current wage measure shown for the occupation page.",
-                  "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay."
+                  "The May 2025 U.S. national median was USD 48,570 a year and USD 23.35 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 35,510, 39,890, 48,570, 61,440, 77,860."
                 ],
                 "evidence_type": "official wage data",
                 "id": "onet-wages",
-                "limitation": "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay.",
+                "limitation": "National occupational distribution. Local wages and individual offers vary.",
                 "market": "United States",
                 "name": "National Wages 51-9061.00 Inspectors, Testers, Sorters, Samplers, And Weighers",
-                "period": "2025 wage data; accessed 2026-08-31",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-9061.00"
@@ -8740,21 +8735,46 @@
                 "url": "https://www.onetonline.org/link/summary/51-9061.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Check gauges and measure sampled products — 25/100; weight=1/3; inspectors-testers-sorters-samplers-and-weighers.profile.responsibilities-block.4[0]",
-                  "Record results and assess quality — 75/100; weight=1/3; inspectors-testers-sorters-samplers-and-weighers.profile.responsibilities-block.4[0]",
-                  "Isolate nonconforming items and review findings — 25/100; weight=1/3; inspectors-testers-sorters-samplers-and-weighers.profile.responsibilities-block.4[0]"
+                  "BLS Table 1.2 (51-9061) shows about 602,000 U.S. jobs in 2025 and projects 617,200 in 2035 (2.5%), with about 66,700 openings per year including replacements. Counts are rounded independently.",
+                  "BLS lists a high school diploma or equivalent and moderate-term on-the-job training as typical preparation. Check instrument training, sampling rules and release authority with the employer."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "51-9061",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A named Kunshan recruitment notice lists process sampling, final inspection, control of nonconforming items and instrument upkeep."
+                ],
+                "id": "cn-work-example",
+                "limitation": "This case does not establish national pay, entry requirements or hiring.",
+                "market": "Mainland China",
+                "name": "Kunshan government: Lujia quality inspection recruitment example",
+                "period": "2026",
+                "publisher": "Kunshan Municipal Government",
+                "scope": "Named work example",
+                "url": "https://www.ks.gov.cn/kss/qzkx/202602/fba5eea4445b440e8649f5346f7d7821.shtml"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks the paper records only.",
+                "market": "This page",
+                "name": "Sheet Q: Sample results and review",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "scope": "Paper exercise",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -10298,7 +10318,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Learn about Big Five personality",
             "evidence_level": "editorial",
             "id": "big-five",
@@ -10317,7 +10337,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Learn about MBTI",
             "evidence_level": "editorial",
             "id": "mbti",
@@ -10331,7 +10351,7 @@
           },
           {
             "answer": "No validity of Enneagram for occupational performance was obtained; observe actual task preferences.",
-            "cta_href": "/zh/tests/enneagram-personality-test",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Learn about Enneagram",
             "evidence_level": "editorial",
             "id": "enneagram",
@@ -10345,7 +10365,7 @@
           },
           {
             "answer": "No uniform IQ threshold or validity of this page's scales for occupational performance was obtained; check actual data and method tasks.",
-            "cta_href": "/zh/tests/iq-test",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Learn about cognitive ability",
             "evidence_level": "editorial",
             "id": "iq",
@@ -10359,7 +10379,7 @@
           },
           {
             "answer": "No validity of emotional ability scales for performance was obtained; observe communication, explaining the basis, and feedback behavior.",
-            "cta_href": "/zh/tests/eq-test",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Learn about emotional ability",
             "evidence_level": "editorial",
             "id": "eq",
@@ -10810,7 +10830,7 @@
           "source": "https://www.onetonline.org/link/details/51-9061.00；https://www.onetonline.org/link/localwages/51-9061.00；https://www.bls.gov/ooh/production/quality-control-inspectors.htm",
           "updated_at": "Verified 2026-10-11; wages 2025, projection 2025—2035; NBS English release 2026-05-18"
         },
-        "note": "Precise duties/RCI/context verification retained, five percentiles and 4 industry wages verified; projection updated to 2025—2035. Shared legacy period, legacy NBS date, and bonus definition carry consumer protection, so the retention scope conflicts. Traditional visual automation is not generative AI, and editorial controls are not technical standards."
+        "note": "O*NET describes the tasks, OEWS provides wage estimates, and BLS Table 1.2 provides employment projections."
       },
       "work_context_block": {
         "$item": "inspectors-testers-sorters-samplers-and-weighers.profile.work-context-block.5",
@@ -10832,7 +10852,7 @@
     ],
     "path": "/en/career/jobs/inspectors-testers-sorters-samplers-and-weighers",
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI tools and human review",
       "china-salary": "Mainland China wages",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -10887,7 +10907,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Growth almost no change (0%, 2024—2034, BLS employment projection, precise occupation 51-9061.00)",
+        "display_value": "BLS Table 1.2 (51-9061) shows about 602,000 U.S. jobs in 2025 and projects 617,200 in 2035 (2.5%), with about 66,700 openings per year including replacements. Counts are rounded independently.",
         "fact_id": "employment-projection",
         "market": "United States",
         "measure": "employment projection measure",
@@ -10923,102 +10943,90 @@
       },
       {
         "derivation": null,
-        "display_value": "Median annual wage 48,570 USD (May 2025, BLS OEWS, precise occupation 51-9061.00)",
+        "display_value": "USD 48,570/year",
         "fact_id": "us-wage-median",
-        "market": "US",
-        "measure": "annual median wage",
-        "occupation_scope": "51-9061.00 exact occupation",
-        "period": "May 2025 wages",
+        "market": "United States",
+        "measure": "U.S. median annual wage (May 2025)",
+        "occupation_scope": "51-9061",
+        "period": "2025-05",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "onet-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Growth almost no change (0%, 2024—2034, BLS employment projection, precise occupation 51-9061.00)",
+        "display_value": "2.5%",
         "fact_id": "us-growth-2024-2034",
-        "market": "US",
-        "measure": "projected employment percent change",
-        "occupation_scope": "51-9061.00 exact occupation",
-        "period": "2024-2034 outlook",
+        "market": "United States",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "51-9061",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Employment about 598,000 people (2024, BLS employment projection base period, precise occupation 51-9061.00)",
+        "display_value": "About 602,000 jobs",
         "fact_id": "us-employment-2024",
-        "market": "US",
-        "measure": "employment base",
-        "occupation_scope": "51-9061.00 exact occupation",
-        "period": "2024 employment base",
+        "market": "United States",
+        "measure": "U.S. employment (2025)",
+        "occupation_scope": "51-9061",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Projected job openings 69,900 (2024—2034, BLS employment projection, precise occupation 51-9061.00, including growth and replacement)",
+        "display_value": "About 66,700 per year",
         "fact_id": "us-openings-2024-2034",
-        "market": "US",
-        "measure": "projected job openings",
-        "occupation_scope": "51-9061.00 exact occupation",
-        "period": "2024-2034 outlook",
+        "market": "United States",
+        "measure": "U.S. annual openings (2025–2035)",
+        "occupation_scope": "51-9061",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Inspectors, Testers, Sorters, Samplers, And Weighers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "bls-ep-2025-2035"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
-      "Inspectors, Testers, Sorters, Samplers, And Weighers · specifications, decisions, and safety boundaries",
-      "Source scope · statistical definition · human review",
-      "Mainland China precise occupation wage gap retained per evidence"
+      "Production Inspectors and Testers",
+      "Wages and projections use separate tables",
+      "China occupational wage distribution unavailable"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "US median annual wage (2025, precise-occupation definition)"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2024-2034",
         "key": "us_growth",
-        "label": "US employment growth (2024—2034, almost no change)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "US employed persons (2024)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2024-2034",
         "key": "us_openings",
-        "label": "US projected job openings (2024—2034)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11032,17 +11040,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What inspectors, testers, sorters, samplers, and weighers do, how to enter and train, what authorization and risk boundaries exist, and which tasks AI will change. This page corresponds to O*NET-SOC 51-9061.00, interest code RCI, Job Zone One to Two; US wages and employment use the precise-occupation BLS definition presented by O*NET, and the mainland China wage gap is registered per evidence."
+      "text": "Explore production inspectors and testers tasks, U.S. wage percentiles and employment projections, with a paper exercise on checking records."
     },
     "title": {
       "availability": "available",
-      "text": "Inspectors, Testers, Sorters, Samplers, And Weighers occupational judgment: work, entry, and risk boundaries"
+      "text": "Production Inspectors and Testers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "ce618f589478d89f92694da3a807d5958d1a7b3246808b2118f0e1a77bf30fe3",
+  "source_content_sha256": "63d24955bec1e3e3fb6228a7b0aa2bf8fa9eac62983fad2cba3e8dcdc552f5eb",
   "subject": {
     "canonical_slug": "inspectors-testers-sorters-samplers-and-weighers",
-    "name": "Inspectors, Testers, Sorters, Samplers, And Weighers",
-    "summary": "Inspectors, testers, sorters, samplers, and weighers inspect, test, sort, sample, or weigh nonagricultural raw materials, or processed, machined, fabricated, or assembled parts or products, to detect defects, wear, and deviations from specifications, and may use precision measuring instruments and complex test equipment. The work includes confirming specifications and inspection plans, checking gauge and calibration status, measuring per the sampling plan, deciding and recording, segregation and feedback, and retrospective and improvement. US wages and employment use the precise-occupation BLS 51-9061.00 definition presented by O*NET (May 2025 median wage 48,570 USD; 2024 employment about 598,000 people, 2024—2034 growth almost no change, projected openings 69,900, main industry manufacturing); precise wages for this occupation in mainland China were not obtained and are registered as a visible gap."
+    "name": "Production Inspectors and Testers",
+    "summary": "Production inspectors and testers check materials and products against drawings or inspection instructions. They record measurements, samples and results, then flag nonconforming or pending lots for review."
   }
 }

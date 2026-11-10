@@ -1283,6 +1283,9 @@
       "item:podiatrists.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:podiatrists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:podiatrists.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31086,6 +31089,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两张足踝转介材料分别标了不同侧别，复核人尚未记录。写下原材料及要交给临床团队的待核项。"
+            ]
+          },
+          "id": "podiatrists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "核足踝专科转介资料",
+          "type": "notice"
         }
       ]
     },
@@ -37570,6 +37588,13 @@
         "id": "podiatrists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "podiatrists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37919,7 +37944,7 @@
       "text": "足病医生职业指南：足踝诊疗、美国工资与入行路径"
     }
   },
-  "source_content_sha256": "4ef9863be2960f66e52665431ba9278adaf064ea35f93b47e7d4933bcc09f752",
+  "source_content_sha256": "193911e956eba18dd965620dbb04dbcd2e497313511ae749c510d3e78c96c017",
   "subject": {
     "canonical_slug": "podiatrists",
     "name": "足病医生",

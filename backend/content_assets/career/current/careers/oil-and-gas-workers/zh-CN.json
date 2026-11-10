@@ -152,6 +152,9 @@
       "item:oil-and-gas-workers.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:oil-and-gas-workers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:oil-and-gas-workers.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13215,6 +13218,21 @@
             "onet-cert"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两则岗位一则负责井场设备协作，另一则负责巡查与生产读数。各写一句说明工作地点、交接材料和授权范围该如何问。"
+            ]
+          },
+          "id": "oil-and-gas-workers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "按职责比较油气现场岗位",
+          "type": "notice"
         }
       ]
     },
@@ -15682,6 +15700,13 @@
         "id": "oil-and-gas-workers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "oil-and-gas-workers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15887,7 +15912,7 @@
       "text": "油气旋转钻机操作员：任务、工资与安全路径"
     }
   },
-  "source_content_sha256": "226a1fb88b076cf0eab835fb18cc95d1fb45508b7fe0f7061dd15d07b536d6fe",
+  "source_content_sha256": "264fa34edc6223f7d6782e9b59290cb6a7e96b0a183ffc876ce623affe2ae3fc",
   "subject": {
     "canonical_slug": "oil-and-gas-workers",
     "name": "油气旋转钻机操作员",

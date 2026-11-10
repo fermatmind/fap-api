@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First work on the W28 fictional check record, distinguishing successful requests, failures, and items not yet completed. Learn about recovery, maintenance, content, and collaboration responsibilities, then compare the four adjacent targets of IT management, search marketing, systems analysis, and information security. Work quality lies not only in writing scripts but also in honestly explaining unknowns and validation results."
+              "Paper check | A fictional log shows a successful backup with no restore verification. Keep the statuses separate and ask the on-call lead for evidence of recovery. "
             ]
           },
           "id": "web-administrators.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,12 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Web administrators manage the design, deployment, development collaboration, and maintenance of website environments and carry out website and application testing and quality checks; specific tasks include fault diagnosis, updates and patches, backup and recovery, access permissions, log monitoring, content link maintenance, and user communication. The work must be done within the organization's authorized scope; being able to organize logs or write scripts does not mean you may change production systems or access user data."
+              "Web administrators monitor availability, access and backups, respond to or escalate issues, and maintain configurations and recovery plans within their permissions. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "web-administrators.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-15-1299.01"
           ],
           "type": "prose"
         }
@@ -25556,13 +25555,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no task-level AI effect score or replacement-rate causal evidence for this detailed web administrator occupation was obtained. Text organization, the W28 problem completion ratio, and real maintenance are kept separate; the fictional table has no functional coverage, request times, or recovery tests and does not prove the SLA, security, or production readiness. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: A fictional log shows a successful backup with no restore verification. Keep the statuses separate and ask the on-call lead for evidence of recovery."
             ]
           },
           "id": "web-administrators.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-15-1299.01",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33027,6 +33026,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-15-1299.01",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 15-1299.01 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/15-1299.01"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38491,10 +38517,10 @@
       "text": "Web administrators: tasks, authority, and entry experience"
     }
   },
-  "source_content_sha256": "2ae0ef60fe2a5d0b89bff3ccde702b6c23ec727f8cc0079cced223c91a76f7f1",
+  "source_content_sha256": "67a7b7727f80a446290e2feecd113ea8795d80e6a3c21149926072adfe0e1083",
   "subject": {
     "canonical_slug": "web-administrators",
     "name": "Web administrators",
-    "summary": "Web administrators manage the design, deployment, development collaboration, and maintenance of website environments and carry out website and application testing and quality checks; specific tasks include fault diagnosis, updates and patches, backup and recovery, access permissions, log monitoring, content link maintenance, and user communication. The work must be done within the organization's authorized scope; being able to organize logs or write scripts does not mean you may change production systems or access user data."
+    "summary": "Web administrators monitor availability, access and backups, respond to or escalate issues, and maintain configurations and recovery plans within their permissions."
   }
 }

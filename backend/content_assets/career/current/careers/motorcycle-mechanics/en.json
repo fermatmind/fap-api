@@ -155,6 +155,9 @@
       "item:motorcycle-mechanics.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:motorcycle-mechanics.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:motorcycle-mechanics.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13247,6 +13250,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The rider reports noise during braking, but the intake says noise at idle and has no road-test entry. Separate the rider’s account from the intake note and write a question for the mechanic."
+            ]
+          },
+          "id": "motorcycle-mechanics.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Hand over a motorcycle complaint",
+          "type": "notice"
         }
       ]
     },
@@ -15721,6 +15739,13 @@
         "id": "motorcycle-mechanics.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "motorcycle-mechanics.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15926,7 +15951,7 @@
       "text": "Motorcycle Mechanics"
     }
   },
-  "source_content_sha256": "3a455a3dd3491d3acb1c1c1cc03e4952409770e668ef341b4131724ea736c902",
+  "source_content_sha256": "9c0817bfa99663c733390577a21de6e3ace976b045ce7e286ee98c100db9209e",
   "subject": {
     "canonical_slug": "motorcycle-mechanics",
     "name": "Motorcycle Mechanics",

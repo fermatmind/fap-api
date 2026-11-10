@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Terrazzo workers and finishers mix and spread decorative surface layers containing stone chips, set dividers, and then grind, repair, and protect the surface according to the material conditions. The work requires attention to pattern, dimensions, and surface quality, and also requires assessing dust, equipment, and physical conditions. You can first validate your interest with paper layout, arrival checking, and version handover, and then learn about supervised training."
+              "Paper check | Compare color IDs on a fictional divider layout and sample register. Mark a version discrepancy and its floor area. "
             ]
           },
           "id": "terrazzo-workers-and-finishers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24752,12 +24751,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Terrazzo workers and finishers take decorative surface layers containing stone chips as their object and are responsible for mixing, dividing, spreading, grinding and repair, and surface treatment. This page uses U.S. O*NET-SOC 47-2053.00 as the identity baseline; the materials, positions, and qualification conditions of Chinese projects must be checked separately."
+              "Terrazzo workers and finishers lay out dividers and materials to the design, place and finish the surface, and compare the result with an approved sample. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "terrazzo-workers-and-finishers.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-47-2053.00"
           ],
           "type": "prose"
         }
@@ -25393,14 +25392,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page only suggests testing document drafts on fictional quantity and version material; material, equipment, and quality judgments still require training and project bases. Specific adoption and substitution evidence is lacking, and there is no versioned scoring scale, so no FermatMind task exposure score or substitution rate is provided. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare color IDs on a fictional divider layout and sample register. Mark a version discrepancy and its floor area."
             ]
           },
           "id": "terrazzo-workers-and-finishers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "editorial"
+            "transfer-onet-47-2053.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32966,6 +32964,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-47-2053.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 47-2053.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/47-2053.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38479,10 +38504,10 @@
       "text": "Terrazzo workers and finishers"
     }
   },
-  "source_content_sha256": "96d272272e92816e274df4ae0b2d116ea659b8036d24f4ccc25a919a33390b2a",
+  "source_content_sha256": "f62daabe3960b5273e7f62b335dedbe0229d0368ba54c8de6957b3e7e6099acb",
   "subject": {
     "canonical_slug": "terrazzo-workers-and-finishers",
     "name": "Terrazzo workers and finishers",
-    "summary": "Terrazzo workers and finishers mix and spread decorative surface layers containing stone chips, set dividers, and then grind, repair, and protect the surface according to the material conditions. The work requires attention to pattern, dimensions, and surface quality, and also requires assessing dust, equipment, and physical conditions. You can first validate your interest with paper layout, arrival checking, and version handover, and then learn about supervised training."
+    "summary": "Terrazzo workers and finishers lay out dividers and materials to the design, place and finish the surface, and compare the result with an approved sample."
   }
 }

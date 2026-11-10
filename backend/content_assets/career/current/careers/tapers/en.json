@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe whether you can check seam positions, lengths, material information, and confirmation status against the original records, and write pending confirmation rather than fabricating when items are missing. Real taping also requires craft training, material instructions, on-site safety conditions, and quality review, and one correct length calculation does not qualify you to work."
+              "Paper check | Compare a fictional wall sketch and handoff sheet. Find the omitted joint and note the wall section and record to check. "
             ]
           },
           "id": "tapers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24874,14 +24873,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Tapers treat gypsum board and similar wallboard seams, cracks, and nail and screw head positions, using joint compound and joint tape and finishing surfaces to prepare for painting or wallpapering. Tapers here means wallboard seam treatment, not medical bandaging or coil winding; board installation, final painting, and special construction work have separate tasks and authority."
+              "Drywall tapers finish panel joints and fastener spots so they blend with surrounding surfaces. Their handoff identifies areas still awaiting inspection. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tapers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "editorial"
+            "transfer-onet-47-2082.00"
           ],
           "type": "prose"
         }
@@ -25665,15 +25662,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate text checklist assistance, image prompts, actual construction, and employment outcomes. NIST material supports checking information risk, O*NET supports task scope, and BLS supports precise statistics; none of them provides a substitution rate for this occupation. Without a reviewable task scoring method and inputs, this page shows a separate editorial AI impact estimate. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional wall sketch and handoff sheet. Find the omitted joint and note the wall section and record to check."
             ]
           },
           "id": "tapers.display.ai_impact_table.answer",
           "source_refs": [
-            "nist",
-            "onet",
-            "bls",
-            "editorial"
+            "transfer-onet-47-2082.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -34237,6 +34232,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-47-2082.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 47-2082.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/47-2082.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39710,10 +39732,10 @@
       "text": "Tapers (wallboard seam treatment)"
     }
   },
-  "source_content_sha256": "1489795965411328c5875dc2f040f6e9c0b155850468bfe991241db05798581f",
+  "source_content_sha256": "a532f4ab2fd0891cb6aaba49707ae745c5c34ee93f37c6cf029c063f3c9bdc0b",
   "subject": {
     "canonical_slug": "tapers",
     "name": "Tapers (wallboard seam treatment)",
-    "summary": "Tapers treat gypsum board and similar wallboard seams, cracks, and nail and screw head positions, using joint compound and joint tape and finishing surfaces to prepare for painting or wallpapering. Tapers here means wallboard seam treatment, not medical bandaging or coil winding; board installation, final painting, and special construction work have separate tasks and authority."
+    "summary": "Drywall tapers finish panel joints and fastener spots so they blend with surrounding surfaces. Their handoff identifies areas still awaiting inspection."
   }
 }

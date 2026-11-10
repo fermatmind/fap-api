@@ -23314,7 +23314,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用虚构图纸、点位和测试表练线路标记、功能检查、未通过项和交接，不触碰真实火警系统。"
+              "如果你难以适应跨场地、长时间站立，或不喜欢反复复核记录，先问清目标岗位的现场安排。"
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.quick-decision.fit-decision-checklist.1",
@@ -23329,7 +23329,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合愿意按图施工、核电路和点位、现场沟通并守安全边界的人；人格类型不是资质。"
+              "用纸先完成 09 的 FA-01，体验如何核记录、排复测和交接。"
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.quick-decision.fit-decision-checklist.2",
@@ -23343,7 +23343,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安防安装、火警验收、一般电工和安保巡逻责任不同，求职须先核目标岗位。"
+              "如果你愿意反复核点位编号、日志和图纸，并写清每次测试的证据，值得试做。"
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.quick-decision.fit-decision-checklist.3",
@@ -29076,7 +29076,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "点位 S2 被接到 S3 回路，测试标签与实际不符。"
+              "点位标签与测试日志对不上时，保留原记录并注明矛盾。"
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.risk.career-risk-cards.18",
@@ -29313,7 +29313,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "AI 把未测的探测器 S4 标为已通过。"
+              "工具生成的测试结论须有可追溯的记录支持。"
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.risk.career-risk-cards.34",
@@ -29475,17 +29475,17 @@
               {
                 "id": "education",
                 "values": [
-                  "未采用单一中国雇主公告",
-                  "本轮未取得岗位身份、资质、施工范围和待遇均可核的公告；不推断全国门槛。",
-                  "逐条核地区、系统类型、布线、值班、测试与验收责任。"
+                  "大陆维保与值守分工",
+                  "上海沁峡的历史招聘面向消防维保人员，列报警主机操作与调试，并列弱电消防安装维修或设施维保经验。",
+                  "南京市军供站招聘的是消防控制室轮班、信号处置和巡检记录岗位，用于对照值守与安装维保的分工。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "虚构作品用途",
-                  "M1–M6 只展示点位和测试状态核查，不证明可施工或消防验收。",
-                  "建筑、设备、测试结果完全虚构。"
+                  "美国两种场所分工",
+                  "费尔法克斯县历史原岗列商用建筑消防探测与灭火系统测试、排故、维修和预防性维护。",
+                  "康特拉科斯塔县历史原岗同时涵盖火警和安防电子系统，要求相关安装、测试、维修经历，并列资格替代方式。"
                 ]
               },
               {
@@ -29509,7 +29509,11 @@
           "id": "security-and-fire-alarm-systems-installers.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d024-shanghai",
+            "d024-nanjing",
+            "d024-fairfax",
+            "d024-contra"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29522,37 +29526,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料：四点位和备用电源",
-                  "M1｜完全虚构的楼层 F。工作单列火警探测点 S1、S2、S3、S4 和备用电源 B；本练习不连接真实线路。",
-                  "M2｜虚构测试记录：S1 与 S2 已触发且控制盘正确显示，状态为通过。",
-                  "M3｜S3 触发后控制盘无信号，检查发现回路开路；状态为失败，需有权人员排查复测。",
-                  "M4｜S4 尚未触发测试；状态是未测试，不能因相邻点位通过而推定通过。",
-                  "M5｜B 的主电断开模拟测试未维持控制盘运行；状态为失败，须维修复测。",
-                  "M6｜客户提出立即交付。S3 和 B 失败、S4 未测时不得标系统通过；记录故障、隔离与后续复测责任，正式验收由有权人员。"
+                  "虚构楼层的工作单与记录",
+                  "M1｜工作单列 A-11、A-12、A-13、A-14 四点位和备用供电记录 R-1。试做只读纸面记录。",
+                  "M2｜10:10 和 10:14，A-11 与 A-12 的控制盘记录分别显示预期点号。虚构判据要求点号与工作单一致。",
+                  "M3｜10:21，A-13 的操作记录写 A-13，控制盘日志显示另一个点号。",
+                  "M4｜工作单列 A-14，对应测试时间和控制盘日志为空。",
+                  "M5｜10:28，R-1 的报告写“记录中断”，虚构判据要求完整记录。",
+                  "M6｜签署栏为空。项目负责人负责排后续测试，指定复核人确认更新后的记录。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务：状态、故障与交接",
-                  "T1｜列 S1–S4 和 B 的状态：通过、失败或未测试，说明哪些点需要复测。",
-                  "T2｜判断能否写已验收，列交接清单和需要的批准。"
+                  "提交点位表和交接单",
+                  "T1｜逐项登记证据、记录时间和状态。",
+                  "T2｜写首测、复测或记录复核待办，说明下一责任人和交付边界。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考答案与边界",
-                  "S1、S2 通过；S3 失败（开路）；S4 未测试；B 失败（备用电源未维持）。",
-                  "S3 与 B 经修复需复测，S4 需首次触发测试；在结果明确前不得写全部通过。",
-                  "客户要求立即交付不等于有权验收。记录点位、现象、隔离状态、责任人、复测及有权验收签字，练习不含真实操作。"
+                  "提交前核格式",
+                  "每一行都能追到对应记录。",
+                  "把证据与结论分列。",
+                  "第七天再用指定参考比对初稿。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "复核清单",
-                  "只用虚构资料；核两个通过、两个失败、一个未测试，避免把“未测”写为“通过”。"
+                  "试做边界",
+                  "纸面练习只供核记录。现场施工、测试、隔离和验收由相应人员按项目程序执行。"
                 ]
               }
             ]
@@ -29561,7 +29565,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：虚构探测点与备用电源测试",
+          "title": "FA-01 | 核点位测试记录并写复测交接",
           "type": "cards"
         },
         {
@@ -29573,7 +29577,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "工作单与点位卡",
-                  "列 F 层 S1–S4 与 B 的型号、位置和测试要求。",
+                  "按工作单列点位、原记录和时间。",
                   "不含真实建筑图纸。"
                 ]
               },
@@ -29581,7 +29585,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "测试状态表",
-                  "S1/S2 通过，S3/B 失败，S4 未测试。",
+                  "区分已测、记录不符与缺少记录，写判断依据。",
                   "未测不等于通过。"
                 ]
               },
@@ -29589,7 +29593,7 @@
                 "id": "report-summary",
                 "values": [
                   "故障与复测页",
-                  "S3 开路、B 备用电源未维持，列排查与复测责任。",
+                  "写清每项需要的后续记录和复核人。",
                   "不自行修改真实线路。"
                 ]
               },
@@ -29597,7 +29601,7 @@
                 "id": "tooling-note",
                 "values": [
                   "交接纪要",
-                  "分别列事实、未通过、未测、批准人和正式验收待核。",
+                  "在交接单上分开测试结论和签署状态。",
                   "客户催交不等于验收。"
                 ]
               }
@@ -29629,26 +29633,26 @@
             "rows": [
               [
                 "面试：状态判断",
-                "哪些已通过",
-                "S1、S2",
+                "怎样判读测试状态",
+                "按工作单列点位、原记录和时间。",
                 "仅虚构记录"
               ],
               [
                 "面试：未测试",
-                "S4 能否写通过",
-                "不能，尚未触发测试",
-                "需首测"
+                "如何描述日志空项",
+                "区分已测、记录不符与缺少记录，写判断依据。",
+                "以记录为依据"
               ],
               [
                 "试岗：故障",
-                "S3 和 B 怎样处理",
-                "标失败，交有权人排查并复测",
-                "不能虚填通过"
+                "记录不符时怎样交接",
+                "写清每项需要的后续记录和复核人。",
+                "保留两份原始记录"
               ],
               [
                 "交接：验收",
-                "可否立即写已验收",
-                "不能；未通过与未测项未解决",
+                "交接要写什么",
+                "在交接单上分开测试结论和签署状态。",
                 "正式签字另核"
               ]
             ]
@@ -29670,49 +29674,49 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "第一日",
-                  "读 M1–M6，列点位、工作单和授权。"
+                  "读 M1–M6，摘出工作单、虚构判据和复核分工。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "第二日",
-                  "画虚构 F 层 S1–S4 与 B 的点位表。"
+                  "按工作单列点位、原记录和时间。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "第三日",
-                  "整理 S1/S2 已通过证据。"
+                  "区分已测、记录不符与缺少记录，写判断依据。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "第四日",
-                  "标 S3 开路和 B 备用电源失败。"
+                  "写清每项需要的后续记录和复核人。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "第五日",
-                  "给 S4 标未测试，不推定结果。"
+                  "在交接单上分开测试结论和签署状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "第六日",
-                  "写故障、隔离和复测责任交接卡。"
+                  "独立完成并保存点位表与交接单。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "第七日",
-                  "整理虚构作品并核目标岗位资质、值班和验收边界。"
+                  "保存第 6 天的初稿后，在常见问题区展开「FA-01 参考与自核量规（第 7 天展开）」，核四项并记录一处修订。"
                 ]
               }
             ]
@@ -29729,13 +29733,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "保存测试初稿和修订稿，说明状态差异。",
-              "核 S1/S2 通过、S3/B 失败、S4 未测试。",
-              "说明失败与未测都不能写为通过。",
-              "列 S3、B 的修复复测和 S4 首测责任。",
-              "全部练习资料虚构，不含真实建筑配置。",
-              "核目标岗位施工、编程、测试和验收权限。",
-              "正式消防与电气签字由有权人员承担。"
+              "按工作单列点位、原记录和时间。",
+              "区分已测、记录不符与缺少记录，写判断依据。",
+              "写清每项需要的后续记录和复核人。",
+              "在交接单上分开测试结论和签署状态。",
+              "保留初稿、更正记录和更正理由。",
+              "只用虚构点位，避开真实建筑或客户资料。",
+              "向雇主核对工作单、现场带教和签署分工。"
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.path.seven-day-decision.1",
@@ -29860,15 +29864,19 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：未采纳身份、资质、施工范围和待遇均可核的中国精确公告；不从单一岗位推统一门槛。",
-              "M1–M6 不是雇主考题；真实岗位须核设备、现场安全、值班、测试、验收和计酬。"
+              "上海沁峡的历史招聘面向消防维保人员，列报警主机操作与调试，并列弱电消防安装维修或设施维保经验。",
+              "南京市军供站招聘的是消防控制室轮班、信号处置和巡检记录岗位，用于对照值守与安装维保的分工。",
+              "费尔法克斯县历史原岗列商用建筑消防探测与灭火系统测试、排故、维修和预防性维护。",
+              "康特拉科斯塔县历史原岗同时涵盖火警和安防电子系统，要求相关安装、测试、维修经历，并列资格替代方式。",
+              "看招聘时问清设备范围、现场带教、测试记录由谁复核，以及谁负责签署验收。"
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
+            "d024-shanghai",
+            "d024-nanjing",
+            "d024-fairfax",
+            "d024-contra",
             "editor"
           ],
           "title": "招聘样本说明",
@@ -30050,7 +30058,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "先核目标岗位安防或火警范围；用 M1–M6 虚构 S1/S2 通过、S3/B 失败、S4 未测展示测试与交接。"
+              "先核目标岗位的系统范围。用 FA-01 的点位表和交接单展示记录核对和后续安排。"
             ]
           },
           "id": "security-and-fire-alarm-systems-installers.path.career-path-block.20",
@@ -31954,10 +31962,13 @@
                 "question_key": "career.faq.security-and-fire-alarm-systems-installers.credentials"
               },
               {
-                "answer": "S1/S2 通过，S3 开路失败，S4 未测试，备用电源 B 失败；失败和未测均不得写通过，不能标已验收。",
+                "answer": "A-11 和 A-12 的点号匹配，分别依据 10:10 和 10:14 的控制盘记录，符合本题判据。A-13 的 10:21 记录点号不符。A-14 没有测试记录，是否测过待核。R-1 的 10:28 记录中断，不符合完整性判据，备用供电功能仍待确认。\n\n交项目负责人安排 A-13 复测，并为 R-1 补取完整记录或安排复测。先核 A-14 是否有原测试记录，确认未测后再安排首测。指定复核人核对更新记录。签署栏为空，交接时标明签署待核，由项目负责人确认签署分工。\n\n四项各 0–2 分：状态覆盖全部五项；每项能回溯来源和时间或缺失；区分复测、核原记录与首测；写出下一责任人与签署边界。齐全 2，部分 1，猜测或越权 0。",
                 "id": "security-and-fire-alarm-systems-installers.faq.9",
-                "question": "虚构练习的状态怎么判？",
-                "question_key": "career.faq.security-and-fire-alarm-systems-installers.risk-boundary"
+                "question": "FA-01 参考与自核量规（第 7 天展开）",
+                "question_key": "career.faq.security-and-fire-alarm-systems-installers.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "电工、安保、电子设备维修、电信设备安装、消防检查有技能交集；各自许可和责任另核。",
@@ -32061,13 +32072,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32612,6 +32623,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "上海沁峡的历史招聘面向消防维保人员，列报警主机操作与调试，并列弱电消防安装维修或设施维保经验。"
+                ],
+                "evidence_type": "机构原招聘公告",
+                "id": "d024-shanghai",
+                "limitation": "单个历史岗位，仅用于比较具体职责和雇主条件。",
+                "market": "中国大陆上海",
+                "name": "上海市人社局刊载｜上海沁峡消防维保",
+                "period": "2026-05-21",
+                "publisher": "上海市人社局刊载",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.sh.gov.cn/dzb/rsj/2026-05-21/aid/03-01.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "南京市军供站招聘的是消防控制室轮班、信号处置和巡检记录岗位，用于对照值守与安装维保的分工。"
+                ],
+                "evidence_type": "机构原招聘公告",
+                "id": "d024-nanjing",
+                "limitation": "单个历史岗位，仅用于比较具体职责和雇主条件。",
+                "market": "中国大陆南京",
+                "name": "南京市军供站｜消防设施监控操作员",
+                "period": "2026-09-02",
+                "publisher": "南京市军供站",
+                "scope": "recruitment_proxy",
+                "url": "https://tyjrswj.nanjing.gov.cn/sjb/xxgk/gsgg/202609/t20260902_5903918.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "费尔法克斯县历史原岗列商用建筑消防探测与灭火系统测试、排故、维修和预防性维护。"
+                ],
+                "evidence_type": "机构原招聘公告",
+                "id": "d024-fairfax",
+                "limitation": "单个历史岗位，仅用于比较具体职责和雇主条件。",
+                "market": "美国弗吉尼亚州",
+                "name": "美国费尔法克斯县｜火警技术员",
+                "period": "2026-09-05",
+                "publisher": "美国费尔法克斯县",
+                "scope": "recruitment_proxy",
+                "url": "https://www.governmentjobs.com/careers/fairfaxcounty/jobs/newprint/5415526"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "康特拉科斯塔县历史原岗同时涵盖火警和安防电子系统，要求相关安装、测试、维修经历，并列资格替代方式。"
+                ],
+                "evidence_type": "机构原招聘公告",
+                "id": "d024-contra",
+                "limitation": "单个历史岗位，仅用于比较具体职责和雇主条件。",
+                "market": "美国加利福尼亚州",
+                "name": "美国康特拉科斯塔县｜火警与安防系统技术员",
+                "period": "2026-02-25",
+                "publisher": "美国康特拉科斯塔县",
+                "scope": "recruitment_proxy",
+                "url": "https://www.governmentjobs.com/careers/contracosta/jobs/newprint/5221865"
               }
             ]
           },
@@ -37871,7 +37942,7 @@
       "text": "安全消防系统安装工"
     }
   },
-  "source_content_sha256": "8561446ac9e95e42303e31388656e2556f38542e0c255a44cbd4f9aa91cc2258",
+  "source_content_sha256": "18ce7b347a01037e5e71d8f0e315015949ff1e75409705f8529764e865e8a274",
   "subject": {
     "canonical_slug": "security-and-fire-alarm-systems-installers",
     "name": "安全消防系统安装工",

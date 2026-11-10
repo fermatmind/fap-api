@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-processing-changde": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-processing-fushan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -20127,60 +20133,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "id": "food-and-tobacco-processing-workers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-2"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "id": "food-and-tobacco-processing-workers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-3"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -20203,7 +20169,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -20231,7 +20197,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23105,7 +23071,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Caution signals | Editorial summary (this residual title has no O*NET work-context data): Work usually occurs in cold or room-temperature processing workshops and lines, with prolonged standing, repetitive movements, lifting, and trips to refrigerated areas, potentially involving knives, rotating equipment, wet floors, and cleaning chemicals. Peak production requires consecutive shifts. Strict food safety and hygiene requirements mean negligence at any stage may cause batch scrapping or recalls. If cold and wet environments, prolonged standing, and repetitive labor are difficult, or strict hygiene and recording requirements do not suit you, weigh these practical costs carefully."
+              "Check whether the actual station involves cold or heat, standing, lifting or repetitive work, then ask about protection, scheduling and sanitation records. O*NET does not report shared work-context data for this category."
             ]
           },
           "id": "food-and-tobacco-processing-workers.quick-decision.fermat-decision-card.6",
@@ -23207,7 +23173,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Environment and pace | Work takes place in food-processing workshops and lines, often year-round in cold or hot, humid conditions, moving between refrigerated, room-temperature, and packaging areas. Line speed and order batches determine pace; harvest and holiday peaks often require consecutive shifts or overtime, interrupted periodically by hygiene, washing, and changeovers. Physical loads center on prolonged standing, repetition, moving ingredients and finished goods, and cleaning equipment. Follow procedures for wet floors, cold protection, and rotating-equipment safety."
+              "Ask about the work station, temperature, movement between areas, peak shifts and lifting. Where a role includes changeovers or equipment support, check who owns isolation, cleaning records and handoffs. Conditions depend on the plant and station."
             ]
           },
           "id": "food-and-tobacco-processing-workers.profile.career-quick-answers-block.2",
@@ -23323,7 +23289,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Difference from food-cooking-machine-operators-and-tenders (Food Cooking Machine Operators and Tenders): They operate cooking equipment and control temperatures, determining heating processes. This occupation mainly assists sorting, preprocessing, weighing, and packaging, feeding and monitoring equipment only as needed. Process-parameter responsibilities differ."
+              "Food cooking machine operators primarily operate or tend cooking equipment. This page’s SOC 51-3099 is a residual category, which can contain machine or manual stations. Check actual duties and who may adjust settings."
             ]
           },
           "id": "food-and-tobacco-processing-workers.profile.career-quick-answers-block.6",
@@ -23368,7 +23334,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Before choosing, compare actual tasks (sorting, preprocessing, equipment assistance, packaging, and cleaning proportions), qualification and training paths (short on-the-job training, food safety and hygiene, forklift and equipment training), shifts and physical demands (cold and wet conditions, rotations and consecutive peak shifts, prolonged standing and lifting), and progression (batchmaking, cooking or baking machinery, inspection, and production-support management). Manufacturing and retail-processing businesses differ substantially; check actual hiring and workshop observations."
+              "Compare the station, food safety requirements, shifts and physical demands. BLS lists moderate-term on-the-job training as typical in the U.S. for 51-3099. Verify individual training and equipment duties with employers."
             ]
           },
           "id": "food-and-tobacco-processing-workers.profile.career-quick-answers-block.9",
@@ -23534,13 +23500,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: Mainland China has not established public occupational wages precisely matching Other Food Processing Workers; industry means, advertised pay, and third-party estimates are not substituted."
+              "No mainland China occupational wage statistics comparable to U.S. SOC 51-3099 were found. The Changde and Fushan postings show individual hiring terms."
             ]
           },
           "id": "food-and-tobacco-processing-workers.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "processing-changde",
+            "processing-fushan"
           ],
           "type": "prose"
         },
@@ -23564,13 +23530,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "US wage review points | Figures come from BLS OEWS May 2025 and BLS 2024—2034 projections (through O*NET). Check occupational scope (SOC 51-3099, a residual all-other category), overtime and benefits (excluded by OEWS), and national rather than specific regional or employer scope."
+              "U.S. national wages come from May 2025 OEWS for SOC 51-3099. The figures exclude overtime and benefits and are not local offers."
             ]
           },
           "id": "food-and-tobacco-processing-workers.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "bls-oews-2025",
+            "bls-oews-methods"
           ],
           "type": "prose"
         },
@@ -23637,7 +23603,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Mainland China wage evidence—units | National Bureau of Statistics annual means are yuan / year, total pre-tax wages (including withheld individual income tax and employee social insurance and housing provident fund contributions). US OEWS uses dollars / hour or dollars / year, excluding overtime, bonuses, and benefits. Units and components differ and cannot be directly compared."
+              "NBS reports Chinese industry mean annual wages in yuan before tax. U.S. OEWS uses hourly or annual dollars and includes production bonuses, but excludes nonproduction bonuses, overtime premiums and benefits. Coverage, units and definitions differ."
             ]
           },
           "id": "food-and-tobacco-processing-workers.profile.career-quick-answers-block.26",
@@ -23695,13 +23661,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "US wage evidence—period | Wages are May 2025 OEWS; employment, growth, and openings are 2024—2034 projections. Different reference points must not become a single-time conclusion."
+              "Pay comes from May 2025 OEWS. Projected employment change and openings come from the 2025–2035 BLS projections, which have different coverage."
             ]
           },
           "id": "food-and-tobacco-processing-workers.profile.career-quick-answers-block.30",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "bls-oews-2025",
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -23754,13 +23720,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "US wage evidence—sampling and missing-data limits | OEWS sample estimates have sampling error, with missing or unreliable industry or regional breakdowns. This residual category varies greatly by industry and region (2024 about 58,700, BLS projection base year through O*NET; OEWS shows about 65,000). Industry-specific wages readable by industry were not obtained and remain a visible gap; industry means or third-party estimates are not substituted."
+              "OEWS estimates come from a survey. Detailed local or industry estimates may be unavailable. This U.S. category includes different assignments; its national numbers do not describe jobs at an individual plant."
             ]
           },
           "id": "food-and-tobacco-processing-workers.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "bls-oews-methods",
+            "bls-soc-definition"
           ],
           "type": "prose"
         }
@@ -23802,7 +23768,7 @@
                 "url": "https://www.bls.gov/news.release/ocwage.htm"
               },
               {
-                "entity": "BLS Employment Projections (2024—2034)",
+                "entity": "BLS Employment Projections (2025–2035)",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -23821,13 +23787,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Conclusion | This residual category covers food processing workers not separately listed, with work varying by product and business. Core distinctions concern whether workers determine process parameters or operate specialist equipment. This occupation often handles batch checks, sorting and preprocessing, equipment assistance, weighing and packaging, and hygiene records; batchmakers determine recipes and ratios, cooking-machine operators control heating, roasting and drying operators control temperature profiles, graders determine grades, and hand packers focus on packaging. Authority and process responsibilities differ, so judgment and sign-off authority do not carry across roles."
+              "This residual category covers different food processing jobs. Preparation, packing and equipment operation are examples from individual postings."
             ]
           },
           "id": "food-and-tobacco-processing-workers.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "bls-soc-definition"
           ],
           "type": "prose"
         },
@@ -23866,13 +23831,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Centers on unlisted general food processing and packaging assistance: incoming checks, sorting and preprocessing, equipment feeding and monitoring, weighing, packaging and labels, hygiene and allergens, batch records and traceability."
+              "Food batchmakers set up or operate mixers to a formula. Check who can change the formula with the employer."
             ]
           },
           "id": "food-and-tobacco-processing-workers.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "bls-soc-definition"
           ],
           "type": "prose"
         },
@@ -23924,12 +23888,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Centers on weighing and mixing ingredients to recipes, determining ratios and mixing processes, and taking responsibility for batch consistency."
+              "Cooking machine operators run or tend equipment. Who sets or changes parameters depends on the station and its authorization."
             ]
           },
           "id": "food-and-tobacco-processing-workers.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
-            "internal-rubric"
+            "bls-soc-definition"
           ],
           "type": "prose"
         },
@@ -23981,12 +23945,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Centers on cooking equipment and heating-process control, determining temperature and time parameters and taking responsibility for doneness and sterilization."
+              "Roasting and drying operators work with specific ovens or dryers. This residual category does not describe a single station."
             ]
           },
           "id": "food-and-tobacco-processing-workers.direction-comparison.adjacent-career-comparison-table.19",
           "source_refs": [
-            "internal-rubric"
+            "bls-soc-definition"
           ],
           "type": "prose"
         },
@@ -24241,7 +24205,7 @@
                 "url": "https://www.onetonline.org/link/summary/51-3099.00"
               },
               {
-                "entity": "BLS Employment Projections (2024—2034)",
+                "entity": "BLS Employment Projections (2025–2035)",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24301,7 +24265,7 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "BLS Employment Projections (2024—2034)",
+                "entity": "BLS Employment Projections (2025–2035)",
                 "id": "link-12",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24313,7 +24277,7 @@
                 "url": "https://www.onetonline.org/link/details/51-3099.00"
               },
               {
-                "entity": "BLS Employment Projections (2024—2034)",
+                "entity": "BLS Employment Projections (2025–2035)",
                 "id": "link-14",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24475,7 +24439,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "51-3099 has no O*NET task data, so an overall medium-to-low generative AI exposure level cannot be established. Authorized records, dashboards, label checks, and production planning are editorial candidates without measured adoption or effects; weighing and alarm automation are not automatically generative AI. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "51-3099 has no O*NET task data, so an overall medium-to-low generative AI exposure level cannot be established. Authorized records, dashboards, label checks, and production planning are editorial candidates without measured adoption or effects; weighing and alarm automation are not automatically generative AI. The three examples score 33% under the editorial rubric; this does not estimate occupation-wide AI impact. Model impact index for three equally weighted illustrative scenarios; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "food-and-tobacco-processing-workers.ai-impact.ai-impact-table.18",
@@ -24519,7 +24483,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections (2024—2034)"
+              "BLS Employment Projections (2025–2035)"
             ]
           },
           "id": "food-and-tobacco-processing-workers.ai-impact.ai-impact-table.21",
@@ -25966,13 +25930,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure"
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.7",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -25980,13 +25941,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No announcements obtained for Chinese recruitment samples; US wages or projections do not substitute."
+              "Individual postings do not establish an occupational median."
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.8",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -25994,13 +25952,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure"
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.9",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26008,13 +25963,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No announcements obtained for Chinese recruitment samples; US wages or projections do not substitute."
+              "Comparable wage distributions are unavailable for the 10th percentile."
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.10",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26022,13 +25974,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure"
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.11",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26036,13 +25985,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No announcements obtained for Chinese recruitment samples; US wages or projections do not substitute."
+              "Comparable wage distributions are unavailable for the lower quartile."
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.12",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26050,13 +25996,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure"
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.13",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26064,13 +26007,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No announcements obtained for Chinese recruitment samples; US wages or projections do not substitute."
+              "Comparable wage distributions are unavailable for the upper quartile."
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.14",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26078,13 +26018,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure"
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.15",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26092,13 +26029,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No announcements obtained for Chinese recruitment samples; US wages or projections do not substitute."
+              "Comparable wage distributions are unavailable for the 90th percentile."
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.16",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26106,13 +26040,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure"
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.17",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26120,13 +26051,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No announcements obtained for Chinese recruitment samples; US wages or projections do not substitute."
+              "Industry employment cannot isolate this occupation."
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.18",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26134,13 +26062,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure"
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.19",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26148,13 +26073,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No announcements obtained for Chinese recruitment samples; US wages or projections do not substitute."
+              "Comparable occupational projections are unavailable."
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.20",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26162,13 +26084,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No verifiable numerical Chinese recruitment announcements obtained this round."
+              "No comparable mainland China figure"
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.21",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26176,13 +26095,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No announcements obtained for Chinese recruitment samples; US wages or projections do not substitute."
+              "Historical ads cannot estimate future annual openings."
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.22",
-          "source_refs": [
-            "nbs-wages-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26626,12 +26542,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "County areas and lower-tier markets"
+              "Mainland China food production postings"
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "processing-changde",
+            "processing-fushan"
           ],
           "type": "prose"
         },
@@ -26640,12 +26557,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No mainland China monthly wages verifiable by city or region obtained; advertised pay, industry means, and secondhand accounts do not substitute."
+              "A Changde production listing advertises CNY 3,100–3,600 per month for preparation, cutting and packing, with cooking listed separately. A Fushan food production listing covers mixing, machine operation or a combined machine and manual station and oven tending, and quotes CNY 6,000–8,000 without a pay period. Confirm the station, training and pay terms. The ads neither establish national wages nor map directly to U.S. SOC 51-3099."
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "processing-changde",
+            "processing-fushan"
           ],
           "type": "prose"
         },
@@ -26682,13 +26600,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Current 2025—2035 growth 5.5%, annual openings 7400; older shared 2024—2034 facts are historical."
+              "See U.S. wages and employment for the U.S. figures."
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.58",
-          "source_refs": [
-            "internal-rubric"
-          ],
           "type": "prose"
         },
         {
@@ -26696,13 +26611,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Median annual wage 39,680 dollars (2025 BLS OEWS through O*NET; median hourly wage 19.08 dollars)"
+              "See U.S. wages and employment for the U.S. figures."
             ]
           },
           "id": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.59",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
           "type": "prose"
         }
       ]
@@ -26718,7 +26630,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 51-3099.00 occupation and wages | https://www.onetonline.org/link/summary/51-3099.00; BLS OEWS | https://www.bls.gov/oes/; BLS 2024—2034 Employment Projections | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "O*NET 51-3099.00 occupation and wages | https://www.onetonline.org/link/summary/51-3099.00; BLS OEWS | https://www.bls.gov/oes/; BLS 2025–2035 Employment Projections | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.8",
@@ -26775,7 +26687,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Exact occupation's 10th percentile; boundary | Original 32210 not re-obtained this round; OOH combined 32100 cannot substitute. Percentiles are not experience or shift groups."
+              "The 10th percentile is a point in the national wage distribution, not an entry offer.; O*NET national wages | https://www.onetonline.org/link/localwages/51-3099.00"
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.12",
@@ -26803,7 +26715,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Exact occupation's 25th percentile; boundary | Original 36410 not re-obtained; not an entry offer or low-experience group."
+              "The 25th percentile does not identify an experience level or shift.; O*NET national wages | https://www.onetonline.org/link/localwages/51-3099.00"
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.14",
@@ -26831,7 +26743,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Exact occupation's 75th percentile; boundary | Original 44130 not re-obtained; not a senior or shift group."
+              "The 75th percentile does not establish senior-role pay.; O*NET national wages | https://www.onetonline.org/link/localwages/51-3099.00"
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.16",
@@ -26859,7 +26771,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Exact occupation's 90th percentile; boundary | Original 47950 not re-obtained; OOH combined 57630 cannot substitute; not an overall ceiling."
+              "The 90th percentile is not a ceiling. Use the detailed occupation rather than the combined OOH group.; O*NET national wages | https://www.onetonline.org/link/localwages/51-3099.00"
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.18",
@@ -26873,12 +26785,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Employment 58,700 people (2024 BLS projection base year through O*NET)"
+              "About 67,400 U.S. jobs in the 2025 base year"
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26887,7 +26799,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Original 2024 employment 58700 is historical; boundary | Current 2025 projection 67400 includes self-employment and unpaid family work, unlike OEWS; original OEWS about 65000 not re-obtained."
+              "BLS has 67,400 jobs in the 2025 projections base and 65,000 wage-and-salary jobs in the 2025 OEWS survey. Their coverage differs.; BLS OEWS Table 1 | https://www.bls.gov/news.release/ocwage.t01.htm"
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.20",
@@ -26902,12 +26814,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Growth above average (about 5%–6%, 2024—2034 BLS projections through O*NET)"
+              "Projected U.S. employment growth of 5.5% (2025–2035)"
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26930,12 +26842,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "About 6,500 average annual openings (2024—2034, including replacements)"
+              "About 7,400 projected U.S. openings per year, including replacement needs"
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26944,12 +26856,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Older 2024—2034 annual average 6500 is historical; boundary | Current 2025—2035 average 7400 includes growth and replacements, not net additions; OOH combined 36600 cannot substitute."
+              "Scope | Annual openings include replacement needs; boundary | They are not net additions, actual vacancies or a ten-year total."
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "internal-rubric",
             "bls-projections-2025-35"
           ],
           "type": "prose"
@@ -26959,13 +26870,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Selected subject is 51-3099 Other Food Processing Workers, not the whole food and tobacco processing group: May2025 median 39680 dollars / year, 19.08 dollars / hour; 2025 employment 67400, 2025—2035 growth 5.5%, annual openings 7400; BLS typically no formal education and moderate-term on-the-job training. Older shared projections protected with historical notes; original exact percentiles and OEWS count not re-obtained."
+              "The 2025 U.S. annual wage percentiles (10th, 25th, median, 75th and 90th) were 32,210 / 36,410 / 39,680 / 44,130 / 47,950 dollars."
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27074,12 +26984,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Current 2025—2035 growth 5.5%, annual average 7400; older shared projections retained as history."
+              "BLS projects U.S. employment for SOC 51-3099 to grow 5.5% from about 67,400 in 2025 to 71,100 in 2035, with about 7,400 annual openings including replacement needs."
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27116,7 +27026,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "No exact 51-3099 industry wages obtained; OOH combined industry medians 42740 / 39000 / 38940 / 35710 cannot substitute. Check specific tasks and demand separately."
+              "Check U.S. OEWS by SOC 51-3099 and industry. The OOH food processing group covers multiple occupations."
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.36",
@@ -27158,7 +27068,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "No exact 51-3099 industry wages obtained; OOH combined industry medians 42740 / 39000 / 38940 / 35710 cannot substitute. Check specific tasks and demand separately."
+              "Check U.S. OEWS by SOC 51-3099 and industry. The OOH food processing group covers multiple occupations."
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.39",
@@ -27200,7 +27110,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "No exact 51-3099 industry wages obtained; OOH combined industry medians 42740 / 39000 / 38940 / 35710 cannot substitute. Check specific tasks and demand separately."
+              "Check U.S. OEWS by SOC 51-3099 and industry. The OOH food processing group covers multiple occupations."
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.42",
@@ -27242,7 +27152,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "No exact 51-3099 industry wages obtained; OOH combined industry medians 42740 / 39000 / 38940 / 35710 cannot substitute. Check specific tasks and demand separately."
+              "Check U.S. OEWS by SOC 51-3099 and industry. The OOH food processing group covers multiple occupations."
             ]
           },
           "id": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.45",
@@ -27390,31 +27300,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Packaging and Filling Machine Operators direction",
@@ -27468,7 +27378,7 @@
                 "entity": "O*NET 51-3099.00 Interests",
                 "id": "link-15",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/interest/51-3099.00"
+                "url": "https://www.onetonline.org/link/summary/51-3099.00"
               },
               {
                 "entity": "O*NET 51-3099.00 qualifications and training",
@@ -27489,7 +27399,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS Employment Projections 2024—2034",
+                "entity": "BLS Employment Projections 2025–2035",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -28544,7 +28454,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS Employment Projections 2024—2034",
+                "entity": "BLS Employment Projections 2025–2035",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -29117,7 +29027,7 @@
               {
                 "id": "clearance",
                 "values": [
-                  "Common requirements: Food safety and hygiene training records, health documents, and rules on using personal protective equipment.",
+                  "In mainland China, food producers and operators that are enterprises provide employee food safety training under Article 44 of the Food Safety Law. Article 45 requires an annual health examination and a health certificate before starting work for staff who handle ready-to-eat food. Ask whether the station handles such food and what protective equipment it requires.",
                   "Some employers require forklift, equipment-operation, or inspection-related training records depending on the process.",
                   "Electrical, pressure-vessel, or confined-space work requires a party meeting relevant conditions; specifics follow employer and local requirements."
                 ]
@@ -29143,7 +29053,8 @@
           "id": "food-and-tobacco-processing-workers.path.employer-evidence.1",
           "source_refs": [
             "onet-summary",
-            "internal-rubric"
+            "internal-rubric",
+            "processing-cn-food-safety-law"
           ],
           "title": "Other Food Processing Workers | path",
           "type": "cards"
@@ -29492,14 +29403,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Recruitment sample note | No verifiable Chinese occupational announcements obtained this round. Do not deem factory or labor channels or seasonal recruitment universal, or infer nonexistence of statistics from an acquisition gap.",
-              "Checking suggestion | Record publication date, location, business type, employment (full-time, seasonal, piece-rate), shifts and time allowances, health documents or training requirements, processes, and protection. These details often reflect actual conditions better than the page."
+              "Use the two postings to compare assignments, training and pay terms. Check current listings for vacancies."
             ]
           },
           "id": "food-and-tobacco-processing-workers.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "processing-changde",
+            "processing-fushan"
           ],
           "title": "Other Food Processing Workers | path",
           "type": "notice"
@@ -29522,7 +29432,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS Employment Projections 2024—2034",
+                "entity": "BLS Employment Projections 2025–2035",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -30699,7 +30609,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS Employment Projections 2024—2034",
+                "entity": "BLS Employment Projections 2025–2035",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -30780,13 +30690,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Selected subject is 51-3099 Other Food Processing Workers, not the whole food and tobacco group: May2025 median 39680 dollars / year, 19.08 dollars / hour; 2025 employment 67400, 2025—2035 growth 5.5%, annual openings 7400; BLS typically no formal education and moderate-term training. Exact original percentiles / industries and OEWS count not re-obtained; Chinese wages and hiring are acquisition gaps, not proof of unestablished statistics."
+              "U.S. SOC 51-3099 covers food processing jobs not listed separately. The BLS projection uses a base of 67,400; May 2025 OEWS estimates 65,000 wage and salary jobs. The programs cover different populations."
             ]
           },
           "id": "food-and-tobacco-processing-workers.market-signals.market-signal-card.8",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "bls-projections-2025-35",
+            "bls-oews-2025",
+            "bls-soc-definition"
           ],
           "type": "prose"
         },
@@ -30837,7 +30748,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Projections include self-employment and unpaid family work, unlike OEWS; original OEWS about 65000 not re-obtained."
+              "The 2025 projections base is 67,400. The same-year OEWS survey covers 65,000 wage-and-salary jobs. The series have different coverage."
             ]
           },
           "id": "food-and-tobacco-processing-workers.market-signals.market-signal-card.12",
@@ -30921,12 +30832,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Median not starting pay; original exact percentiles not re-obtained; no experience, regional, or shift causality inferred from range."
+              "A median is not a starting wage. Check the shift, location and duties in each offer."
             ]
           },
           "id": "food-and-tobacco-processing-workers.market-signals.market-signal-card.18",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025",
+            "processing-changde",
+            "processing-fushan"
           ],
           "type": "prose"
         },
@@ -30977,12 +30890,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Median 39680 dollars / year, 19.08 dollars / hour checked; original percentiles 32210 / 36410 / 44130 / 47950 not re-obtained."
+              "U.S. pay uses national OEWS figures for the occupation. Mainland postings give two employers’ historical quotes."
             ]
           },
           "id": "food-and-tobacco-processing-workers.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025",
+            "processing-changde",
+            "processing-fushan"
           ],
           "type": "prose"
         },
@@ -31503,47 +31418,48 @@
           "data": {
             "entries": [
               {
-                "answer": "O*NET-SOC 51-3099.00 is a residual category defined only as All food processing workers not listed separately. O*NET publishes no task or context data for such titles. An editorial industry-practice summary includes incoming checks, sorting and preprocessing, equipment assistance, weighing and packaging, hygiene and allergens, records and traceability, excluding separately listed ingredient mixing, cooking machinery, baking and drying, and slaughtering and cutting occupations.",
+                "answer": "This is a U.S. category for food processing roles not separately classified. Examples include olive pitting, poultry hanging and yeast making. O*NET does not publish one common task profile for it. Check the actual job for equipment, outputs and training.",
                 "id": "food-and-tobacco-processing-workers.faq.1",
                 "question": "What exactly does this occupation do?",
                 "question_key": "career.faq.food-and-tobacco-processing-workers.q1",
                 "source_refs": [
                   "onet-summary",
-                  "internal-rubric"
+                  "bls-soc-definition"
                 ]
               },
               {
-                "answer": "Batchmakers determine recipes and ratios and take consistency responsibility; cooking-machine operators control heating temperatures and times; baking and drying operators control specialist equipment and profiles; graders judge grades; hand packers focus on packaging. This occupation often performs unlisted general processing and packaging assistance, usually without recipe or parameter decisions. Authority and process responsibilities differ.",
+                "answer": "Food batchmakers focus on mixing to a formula. Food cooking machine operators run equipment for processes such as steam cooking or frying. Roasting and drying equipment work is also listed separately. When an ad says food production worker, check whether the assignment is equipment operation, preparation, packing or rotation.",
                 "id": "food-and-tobacco-processing-workers.faq.2",
                 "question": "How does it differ from batchmakers and machine operators?",
                 "question_key": "career.faq.food-and-tobacco-processing-workers.q2",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "bls-soc-definition",
+                  "processing-changde",
+                  "processing-fushan"
                 ]
               },
               {
-                "answer": "2025 median annual wage 39,680 dollars (hourly 19.08 dollars); 2024 employment about 58,700 (BLS projection base year); 2024—2034 growth above average (about 5%–6%), annual openings about 6,500 including replacements. US O*NET / BLS definitions do not apply to other jurisdictions.",
+                "answer": "The 2025 U.S. occupational median wage was $19.08 an hour and $39,680 a year. BLS projects U.S. employment for SOC 51-3099 to grow 5.5% from about 67,400 in 2025 to 71,100 in 2035, with about 7,400 annual openings including replacement needs.",
                 "id": "food-and-tobacco-processing-workers.faq.3",
                 "question": "What are US wages and employment like?",
                 "question_key": "career.faq.food-and-tobacco-processing-workers.q3",
                 "source_refs": [
-                  "bls-oews-2025",
+                  "onet-summary",
                   "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "Mainland China has not established public occupational wages precisely matching this occupation. National Bureau of Statistics urban-unit means by industry (manufacturing: non-private 113,594 yuan / year, private 76,055 yuan / year) do not distinguish occupations and provide background only. Visible Insufficient evidence: markers remain, without substitution of industry means, advertised pay, or third-party estimates.",
+                "answer": "A Changde production listing advertises CNY 3,100–3,600 per month for preparation, cutting and packing, with cooking listed separately. A Fushan food production listing covers mixing, machine operation or a combined machine and manual station and oven tending, and quotes CNY 6,000–8,000 without a pay period. Confirm the station, training and pay terms. The ads neither establish national wages nor map directly to U.S. SOC 51-3099.",
                 "id": "food-and-tobacco-processing-workers.faq.4",
-                "question": "Are corresponding mainland China wages available?",
+                "question": "How should I compare food production job postings in mainland China?",
                 "question_key": "career.faq.food-and-tobacco-processing-workers.q4",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "processing-changde",
+                  "processing-fushan"
                 ]
               },
               {
-                "answer": "No O*NET context data exist for this residual title. Editorial industry-practice summary: Most work is in room-temperature or cold workshops and lines, with prolonged standing, repetition, lifting, cold-storage trips, possible knives and rotating equipment, wet floors, and chemicals, and consecutive peak shifts. Rotation, protection, and breaks reduce strain, but cold, repetition, and equipment risks remain practical costs.",
+                "answer": "O*NET does not provide a common work context for the residual category. Ask about the actual station’s temperature, floors, shifts, lifting, equipment and safeguards. Two postings do not establish what most stations are like.",
                 "id": "food-and-tobacco-processing-workers.faq.5",
                 "question": "Is the environment physically demanding?",
                 "question_key": "career.faq.food-and-tobacco-processing-workers.q5",
@@ -31553,33 +31469,35 @@
                 ]
               },
               {
-                "answer": "Effects mainly concern records and dashboards: Tools may assist batch and inventory records, line dashboards, weighing and label alerts, alarms, and simple scheduling. Staff and leads retain incoming judgments, sorting and preprocessing, feeding and abnormality stops, hygiene and allergens, traceability and reporting. Task exposure is not replacement.",
+                "answer": "The three editorial examples cover on-site judgment, alerts and record support. Use depends on the task and employer authorization. O*NET does not publish task data for 51-3099 that would support an occupation-wide AI estimate.",
                 "id": "food-and-tobacco-processing-workers.faq.6",
-                "question": "Will AI affect this occupation?",
+                "question": "Which example tasks might use software?",
                 "question_key": "career.faq.food-and-tobacco-processing-workers.q6",
                 "source_refs": [
                   "onet-summary",
-                  "internal-rubric"
+                  "source-fermatmind-ai-rubric"
                 ]
               },
               {
-                "answer": "BLS shows typically no formal education, with no formal educational credential as typical entry education, and skills mostly learned through short-term on-the-job training. Actual employer and process requirements prevail.",
+                "answer": "BLS lists no formal educational credential as typical for entry and moderate-term on-the-job training for the U.S. category. The two mainland postings assign different tasks. Ask about equipment, station training, food contact and authorization to work independently.",
                 "id": "food-and-tobacco-processing-workers.faq.7",
                 "question": "What education and training are needed?",
                 "question_key": "career.faq.food-and-tobacco-processing-workers.q7",
                 "source_refs": [
-                  "onet-summary",
-                  "bls-projections-2025-35"
+                  "bls-projections-2025-35",
+                  "processing-changde",
+                  "processing-fushan"
                 ]
               },
               {
-                "answer": "Training, certificates, employer appointment, and release and batch-disposition authority are four states. Food safety and hygiene training and health documents are commonly required; some processes may require forklift or equipment training. Listed items are not formal institutional qualification lists; businesses implement production licensing and hygiene under local laws.",
+                "answer": "Start with the product, process and jurisdiction. Ask whether the job handles ready-to-eat food, uses specific equipment or releases finished batches. Health procedures, training, credentials and release authority must be checked separately for each job.",
                 "id": "food-and-tobacco-processing-workers.faq.8",
                 "question": "Are certificates or qualifications needed?",
                 "question_key": "career.faq.food-and-tobacco-processing-workers.q8",
                 "source_refs": [
                   "onet-summary",
-                  "internal-rubric"
+                  "processing-changde",
+                  "processing-fushan"
                 ]
               },
               {
@@ -31593,13 +31511,13 @@
                 ]
               },
               {
-                "answer": "US 2024—2034 growth is above average (about 5%–6%) with replacement openings. Projections are not individual opportunities, which depend on local processing structure and automation. Adjacent options include batchmaking, cooking and baking machines, packaging and filling, grading and sorting, machine feeding, production assistance (relearn processes and equipment), or inspection and production management.",
+                "answer": "BLS projects U.S. employment for SOC 51-3099 to grow 5.5% from about 67,400 in 2025 to 71,100 in 2035, with about 7,400 annual openings including replacement needs. If the posting specifies batching, cooking equipment or drying, compare the training and duties for that more specific role.",
                 "id": "food-and-tobacco-processing-workers.faq.10",
                 "question": "What is the outlook and transition options?",
                 "question_key": "career.faq.food-and-tobacco-processing-workers.q10",
                 "source_refs": [
                   "bls-projections-2025-35",
-                  "onet-summary"
+                  "bls-soc-definition"
                 ]
               }
             ]
@@ -31648,12 +31566,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-11"
+              "Use O*NET for the occupation, BLS for U.S. wages and employment, and the local job postings for individual duties and pay."
             ]
           },
           "id": "food-and-tobacco-processing-workers.sources.source-card.3",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary",
+            "bls-oews-2025",
+            "bls-projections-2025-35",
+            "processing-changde",
+            "processing-fushan"
           ],
           "type": "prose"
         },
@@ -31662,12 +31584,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Nine-module author revision awaits independent review. Selected 51-3099 Other Food Processing Workers, not whole food and tobacco group: May2025 median 39680 dollars / year, 19.08 dollars / hour; 2025 employment 67400, 2025—2035 growth 5.5%, annual openings 7400; BLS typically no formal education and moderate-term training. O*NET lacks tasks, context, and interests; tasks and risks are editorial examples. US substitutions removed from Chinese recruitment and wage and projection scope corrected. Original percentiles, industries, OEWS count, and Chinese wages and recruitment not re-obtained. Hero / FAQ and older shared projections protected. Personality validity, AI effects, and complete food, health, and equipment entry rules unchecked. No HTML, independent review, Git, or publication."
+              "U.S. employment projections and wage estimates have different coverage. Two mainland postings cannot establish national wages or an individual hiring outcome."
             ]
           },
           "id": "food-and-tobacco-processing-workers.sources.source-card.4",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025",
+            "bls-projections-2025-35",
+            "processing-changde",
+            "processing-fushan"
           ],
           "type": "prose"
         }
@@ -31691,28 +31616,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
-                "id": "navigation-2",
+                "entity": "MBTI",
+                "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
+                "entity": "Big Five",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to Other Food Processing Workers career page",
@@ -31757,30 +31670,29 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "Used to check tasks, activities, tools, technologies, and qualifications."
+                  "A residual category. It does not have a unified O*NET task, tool or qualification profile."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-details",
-                "limitation": "Certifications do not replace local licenses, employment qualifications, or independent authority.",
+                "limitation": "No common occupational interests or work context data.",
                 "market": "US",
-                "name": "O*NET OnLine: Food Processing Workers, All Other detailed information",
+                "name": "O*NET: classification and data coverage",
                 "period": "2026 occupational profile",
                 "publisher": "O*NET Resource Center",
                 "scope": "exact occupation",
-                "url": "https://www.onetonline.org/link/details/51-3099.00"
+                "url": "https://www.onetonline.org/link/summary/51-3099.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Row 51-3099: 2024 employment about 58.7 thousand, above-average growth (about 5%–6%), annual openings about 6.5 thousand.",
-                  "Projections are occupational statistics, not individual hiring probabilities."
+                  "BLS projects U.S. employment for SOC 51-3099 to grow 5.5% from about 67,400 in 2025 to 71,100 in 2035, with about 7,400 annual openings including replacement needs."
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
                 "limitation": "Do not interpret projected changes or openings as personal income or hiring guarantees.",
                 "market": "US",
-                "name": "U.S. Bureau of Labor Statistics：2024—2034 Occupational Projections and Characteristics",
-                "period": "2024—2034",
+                "name": "U.S. Bureau of Labor Statistics：2025–2035 Occupational Projections and Characteristics",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "51-3099 Food Processing Workers, All Other",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31799,7 +31711,7 @@
                 "period": "May 2025 OEWS",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "51-3099 Food Processing Workers, All Other",
-                "url": "https://www.bls.gov/news.release/archives/ocwage_05152026.pdf"
+                "url": "https://www.onetonline.org/link/localwages/51-3099.00"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31834,7 +31746,7 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Model impact index for three equally weighted illustrative scenarios; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
                   "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
                   "Sorting and preprocessing — 0/100; weight=1/3; food-and-tobacco-processing-workers.ai-impact.ai-impact-table.99[0]",
                   "Equipment feeding and monitoring — 25/100; weight=1/3; food-and-tobacco-processing-workers.ai-impact.ai-impact-table.103[0]",
@@ -31846,8 +31758,83 @@
                 "name": "FermatMind AI Impact Score estimation method v1",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "Three illustrative scenarios of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Employer 22, Changde Weitu Supply Chain Management, lists 30 production workers at CNY 3,100–3,600 per month for food preparation, cutting and packaging. Cooking positions are listed separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "processing-changde",
+                "limitation": "A historical posting only, not a current vacancy or national estimate.",
+                "market": "Mainland China",
+                "name": "Changde Weitu: production worker",
+                "period": "2026",
+                "publisher": "Changde High-Tech Zone Administrative Committee",
+                "scope": "recruitment_proxy",
+                "url": "https://cdgxq.changde.gov.cn/slzq/gxdt__xxyw/gzdt/content_78204507"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Eight production positions in mixing, machine operation, mixed manual and machine work or oven tending, with training. The ad lists CNY 6,000–8,000 without a pay period. Packaging is listed separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "processing-fushan",
+                "limitation": "A historical posting only, not a current vacancy or national estimate.",
+                "market": "Mainland China",
+                "name": "Hongguitang Foods: production worker",
+                "period": "2026-05",
+                "publisher": "Fushan District Human Resources and Social Security Bureau, Yantai",
+                "scope": "recruitment_proxy",
+                "url": "https://www.ytfushan.gov.cn/col/col104640/art/2026/art_af6bd4c249e9499280f452a14997b073.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Food processing roles not separately classified, with examples such as olive pitting, poultry hanging and yeast making."
+                ],
+                "evidence_type": "Official occupational classification",
+                "id": "bls-soc-definition",
+                "limitation": "Illustrative examples, not one shared workflow.",
+                "market": "United States",
+                "name": "BLS SOC 51-3099 definition (printed page 156)",
+                "period": "2018 SOC",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/soc/2018/soc_2018_definitions.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Wage coverage and sample estimates."
+                ],
+                "evidence_type": "Official methodology",
+                "id": "bls-oews-methods",
+                "limitation": "Methodology, not hiring data.",
+                "market": "United States",
+                "name": "BLS OEWS wage statistics FAQ",
+                "period": "May 2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Article 44 sets out employee training duties for food-producing and food-operating enterprises. Article 45 covers the annual health examination and pre-work certificate for staff who handle ready-to-eat food."
+                ],
+                "evidence_type": "official source",
+                "id": "processing-cn-food-safety-law",
+                "limitation": "Check whether the station handles ready-to-eat food. Verify equipment and release authorization separately.",
+                "market": "Mainland China",
+                "name": "China Food Safety Law (2025 amendment), Articles 44 and 45",
+                "period": "2025 amendment",
+                "publisher": "National People’s Congress, reposted by the Ministry of Commerce Global Law Network",
+                "scope": "exact",
+                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=104105"
               }
             ]
           },
@@ -34364,7 +34351,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "Pay · Median annual wage",
+              "指标": "Median wage",
               "数值": {
                 "$item": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -34379,7 +34366,7 @@
               }
             },
             {
-              "指标": "Pay · 10th percentile",
+              "指标": "10th percentile wage",
               "数值": {
                 "$item": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -34394,7 +34381,7 @@
               }
             },
             {
-              "指标": "Pay · 25th percentile",
+              "指标": "25th percentile wage",
               "数值": {
                 "$item": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -34409,7 +34396,7 @@
               }
             },
             {
-              "指标": "Pay · 75th percentile",
+              "指标": "75th percentile wage",
               "数值": {
                 "$item": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -34424,7 +34411,7 @@
               }
             },
             {
-              "指标": "Pay · 90th percentile",
+              "指标": "90th percentile wage",
               "数值": {
                 "$item": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.15",
                 "block": "china-salary",
@@ -34439,7 +34426,7 @@
               }
             },
             {
-              "指标": "Employment · Employment size",
+              "指标": "Employment",
               "数值": {
                 "$item": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.17",
                 "block": "china-salary",
@@ -34454,7 +34441,7 @@
               }
             },
             {
-              "指标": "Employment · Growth rate (outlook)",
+              "指标": "Projected employment change",
               "数值": {
                 "$item": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.19",
                 "block": "china-salary",
@@ -34469,7 +34456,7 @@
               }
             },
             {
-              "指标": "Employment · Openings during the projection period",
+              "指标": "Projected annual openings",
               "数值": {
                 "$item": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.21",
                 "block": "china-salary",
@@ -34708,6 +34695,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-processing-changde",
+            "posting-processing-fushan"
+          ],
           "sources_note": {
             "$item": "food-and-tobacco-processing-workers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34717,7 +34708,7 @@
           "ui": {
             "ai_heading": "Will AI affect other food processing wages?",
             "driver_heading": "Which industries and directions use this occupation?",
-            "official_heading": "Public recruitment samples (historical announcements, not official statistics)",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Educational backgrounds, common roles, and checking suggestions (editorial compilation, not wage statistics)",
             "scenario_heading": "Which roles do other food processing workers with different educational backgrounds typically start in?",
             "scenario_interpretation_label": "Notes and checking suggestions",
@@ -34860,7 +34851,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "Employment · Openings during the projection period",
+            "指标": "Employment · Projected annual openings (2025–2035)",
             "数值": {
               "$item": "food-and-tobacco-processing-workers.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -35741,7 +35732,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Employment Projections table (2024—2034)",
+            "label": "BLS Employment Projections table (2025–2035)",
             "secondary_value": null,
             "value": {
               "$item": "food-and-tobacco-processing-workers.profile.onet-structured-fields-block.4",
@@ -36506,7 +36497,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Start checking whether other food processing work suits you",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36580,30 +36571,10 @@
               "$link": "food-and-tobacco-processing-workers.navigation.links.1",
               "block": "navigation",
               "copy_key": "career.item.navigation-links",
-              "entry": "navigation-2",
-              "field": "url"
-            },
-            "label": "MBTI (English)"
-          },
-          {
-            "href": {
-              "$link": "food-and-tobacco-processing-workers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-3",
-              "field": "url"
-            },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "food-and-tobacco-processing-workers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Explore my personality preferences"
           },
           {
             "href": {
@@ -36613,7 +36584,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Explore my Big Five traits"
           }
         ]
       },
@@ -36812,36 +36783,36 @@
       },
       {
         "derivation": null,
-        "display_value": "About 58,700 people (2024 BLS projection base year through O*NET; OEWS scope about 65,000)",
+        "display_value": "67,400 people (2025)",
         "fact_id": "us-employment-2025",
         "market": "US",
-        "measure": "Employment size",
-        "occupation_scope": "Other Food Processing Workers; 51-3099.00",
-        "period": "2025",
+        "measure": "U.S. employment (2025 base year)",
+        "occupation_scope": "U.S. SOC 51-3099",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Growth above average (about 5%–6%, 2024—2034 BLS projections through O*NET)",
+        "display_value": "5.5% (2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
-        "measure": "Employment growth rate",
-        "occupation_scope": "Other Food Processing Workers; 51-3099.00",
-        "period": "2024—2034",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "U.S. SOC 51-3099",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 6,500 average annual openings (2024—2034, mainly replacements)",
+        "display_value": "7,400 per year (including replacement needs)",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
-        "measure": "Average annual openings",
-        "occupation_scope": "Other Food Processing Workers; 51-3099.00",
-        "period": "2024—2034",
+        "measure": "U.S. projected annual openings (2025–2035)",
+        "occupation_scope": "U.S. SOC 51-3099",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -36991,15 +36962,39 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+        "derivation": "Model impact index for three equally weighted illustrative scenarios; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
         "display_value": "33%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Food Processing Workers, All Other",
+        "measure": "AI impact estimate for three examples",
+        "occupation_scope": "Three editorial examples; no occupation-wide inference",
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Employer 22, Changde Weitu Supply Chain Management, lists 30 production workers at CNY 3,100–3,600 per month for food preparation, cutting and packaging. Cooking positions are listed separately.",
+        "fact_id": "posting-processing-changde",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Changde Weitu: production worker",
+        "period": "2026",
+        "source_refs": [
+          "processing-changde"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Eight production positions in mixing, machine operation, mixed manual and machine work or oven tending, with training. The ad lists CNY 6,000–8,000 without a pay period. Packaging is listed separately.",
+        "fact_id": "posting-processing-fushan",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Hongguitang Foods: production worker",
+        "period": "2026-05",
+        "source_refs": [
+          "processing-fushan"
         ]
       }
     ]
@@ -37009,12 +37004,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI impact estimate for three examples"
     },
     "badges": [
-      "Other Food Processing Workers · Official occupational scope · Complete workflow",
-      "Input checks · Process review · Abnormality escalation",
-      "US occupational information; precise Chinese wage gaps retained as sourced"
+      "U.S. SOC 51-3099: Food Processing Workers, All Other",
+      "Check the station, products and authority for each job",
+      "Historical mainland China job postings"
     ],
     "metrics": [
       {
@@ -37027,19 +37022,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "US employment growth (2024—2034)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "US employment size (2024 projection base year)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "US average annual openings (2024—2034)"
+        "label": "U.S. projected annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -37053,17 +37048,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What other food processing workers do, how to enter, work boundaries, and development directions. Based on official occupational information, distinguishing occupational statistics, industry proxies, and qualification gaps."
+      "text": "Compare preparation, packing and equipment duties in food production jobs, with mainland China postings and U.S. SOC 51-3099 employment data."
     },
     "title": {
       "availability": "available",
       "text": "Food Processing Workers, All Other"
     }
   },
-  "source_content_sha256": "d90d616363fc32b0fcd58b0c6269644932a51e2a4934eb88a8a42866f549a4a5",
+  "source_content_sha256": "e577da89d441196a8614a96294414c615415771060fe6a264a8625b8879c74d7",
   "subject": {
     "canonical_slug": "food-and-tobacco-processing-workers",
     "name": "Food Processing Workers, All Other",
-    "summary": "Other food processing workers carry out work involving this occupation's objects, processes, quality, and delivery; specific tasks, training, qualifications, protocols, and authority must be checked against original local and employer documentation."
+    "summary": "U.S. SOC 51-3099 covers food processing workers not listed separately. Individual jobs can involve sorting, preparation, equipment operation or packaging. The station, training and handoffs depend on the product and employer."
   }
 }

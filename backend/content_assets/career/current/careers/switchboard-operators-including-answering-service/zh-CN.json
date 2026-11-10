@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "观察能否准确复述需求、核分机与公开范围、忙线时留清楚留言，并交接未知状态。服务态度和流程准确都要看，不能把接通或说话流利当问题已经解决。"
+              "纸面体验｜比对虚构值班通讯录和留言记录，标出一条过期分机号并注明需向哪位值班人确认。 "
             ]
           },
           "id": "switchboard-operators-including-answering-service.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,13 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "总机接线员操作企业电话系统或总机，接听与转接内外来电，提供获准信息并记录留言；部分岗位还处理访客、报警通知、电话目录和行政记录。核心交付是准确路由、可追踪留言与按组织流程上报，接听成功不等于业务已经解决。"
+              "总机与电话代接人员接听、转接或记录来电，并按值班通讯录联系相应部门。留言要清楚记录回拨对象、时点和转交去向。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "switchboard-operators-including-answering-service.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-43-2011.00"
           ],
           "type": "prose"
         }
@@ -25442,13 +25440,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "分清工具能力、组织实际采用与就业结果。摘要、听写或目录建议只是候选，人工需核来意、号码、时间、公开权限和业务状态；本页没有本职净效应或个人失业预测。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比对虚构值班通讯录和留言记录，标出一条过期分机号并注明需向哪位值班人确认。"
             ]
           },
           "id": "switchboard-operators-including-answering-service.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-43-2011.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33024,6 +33022,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-43-2011.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 43-2011.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/43-2011.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38496,10 +38521,10 @@
       "text": "总机接线员（含应答服务）"
     }
   },
-  "source_content_sha256": "c3d8b6c5c6c9ff4596801e299dbbd730d62e463ce218a4d1fc8ac23e05d90d7d",
+  "source_content_sha256": "06caca38dc41e28c4dba0b6c27a784dc86ec6b26c6ff2b8413e37319e176755b",
   "subject": {
     "canonical_slug": "switchboard-operators-including-answering-service",
     "name": "总机接线员（含应答服务）",
-    "summary": "总机接线员操作企业电话系统或总机，接听与转接内外来电，提供获准信息并记录留言；部分岗位还处理访客、报警通知、电话目录和行政记录。核心交付是准确路由、可追踪留言与按组织流程上报，接听成功不等于业务已经解决。"
+    "summary": "总机与电话代接人员接听、转接或记录来电，并按值班通讯录联系相应部门。留言要清楚记录回拨对象、时点和转交去向。"
   }
 }

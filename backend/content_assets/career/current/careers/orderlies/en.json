@@ -149,6 +149,9 @@
       "item:orderlies.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:orderlies.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:orderlies.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13222,6 +13225,21 @@
             "internal-rubric"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The transport order names destination B, but the shift note says C and leaves the receiving person blank. List the destination and contact to verify."
+            ]
+          },
+          "id": "orderlies.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check an internal patient transport handover",
+          "type": "notice"
         }
       ]
     },
@@ -15674,6 +15692,13 @@
         "id": "orderlies.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "orderlies.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15868,7 +15893,7 @@
       "text": "Hospital orderly (patient transport): work, wages, and entry paths"
     }
   },
-  "source_content_sha256": "cdfb2ca89ef3a7dd9f9a614c83d53adc4bb796832f8dac337c94b2176f29dd5a",
+  "source_content_sha256": "2d36242f12502aab1a6ae9cc61e4bf9672aee5122d0c796acf2e5d82ed6dc8a8",
   "subject": {
     "canonical_slug": "orderlies",
     "name": "Hospital orderly (patient transport)",

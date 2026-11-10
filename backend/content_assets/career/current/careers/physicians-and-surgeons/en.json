@@ -23011,13 +23011,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Path judgment: first choose the specific specialty and state or country, then verify medical education, residency training, licensure, institutional authorization, shifts, and costs; do not use the 29-1229 aggregate wage to represent an individual starting salary."
+              "Paper check | Compare a fictional specialty handoff with a results list. Flag a missing issue time and identify who should verify the original record. "
             ]
           },
           "id": "physicians-and-surgeons.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23308,14 +23307,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Definition: United States SOC 29-1229 Physicians, All Other absorbs physicians not listed separately; the BLS broad physicians group can explain common education and the nature of diagnosis and treatment, but O*NET has no standalone task material for this aggregate category."
+              "Physicians’ work depends on specialty. Rehabilitation physicians assess function and recovery, pathologists interpret specimens and report findings, and surgical roles may include operating and perioperative care. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "physicians-and-surgeons.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "cnclass"
+            "transfer-onet-29-1229.04",
+            "transfer-onet-29-1222.00"
           ],
           "type": "prose"
         },
@@ -24401,15 +24399,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist in organizing authorized medical record materials, retrieving public guidelines, and drafting patient explanations, but text output cannot independently prove the safety of a diagnosis, medication, or procedure. Physicians must verify patient identity, history, examination, medication, allergies, and abnormal results, and are responsible for judgment, communication, and signing within state licensure, the specific specialty, and institutional authorization. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional specialty handoff with a results list. Flag a missing issue time and identify who should verify the original record."
             ]
           },
           "id": "physicians-and-surgeons.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-29-1229.04",
+            "transfer-onet-29-1222.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32143,6 +32140,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-29-1229.04",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 29-1229.04 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/29-1229.04"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-29-1222.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 29-1222.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/29-1222.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37387,10 +37425,10 @@
       "text": "Physicians, All Other"
     }
   },
-  "source_content_sha256": "f8f1f0fd280dda968ca777104e893e3e557a485f9f46a87371d01a4542ae2224",
+  "source_content_sha256": "609e0e769e012fe42b7805c77a99c3f7f0cedcbf41b0c8e7aedfcf4f54dcc92f",
   "subject": {
     "canonical_slug": "physicians-and-surgeons",
     "name": "Physicians, All Other",
-    "summary": "Physicians, All Other (United States SOC 29-1229) is an aggregate physician category covering physicians not separately listed in the classification, excluding surgeons and specialties already listed separately; O*NET publishes no standalone task survey for this aggregate. Practice requires completing medical education, residency training, and obtaining the applicable state license, and the specific diagnostic, treatment, and signing scope follows state law, specialty training, and institutional authorization. This page uses the BLS broad physicians group to explain the common work loop and uses the 29-1229 standalone row to present wage and employment data. A United States qualification does not automatically equal a Chinese physician qualification."
+    "summary": "Physicians’ work depends on specialty. Rehabilitation physicians assess function and recovery, pathologists interpret specimens and report findings, and surgical roles may include operating and perioperative care."
   }
 }

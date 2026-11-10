@@ -23665,14 +23665,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "观察能否保留原值、核编号期间和币种，发现差异时追查依据而非认定违法。真实工作还需会计税法知识、岗位培训、程序与权限；一次对账正确不能证明能核定税负、处罚或执行征收。"
+              "纸面体验｜在虚构案件时间线中对照通知发出与回复收到的时间，标出一条状态缺少原件引用的记录。 "
             ]
           },
           "id": "tax-examiners-and-collectors-and-revenue-agents.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "cn-rule",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24957,15 +24955,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "税务检查、征收与税收稽查人员依据适用法律法规核定纳税义务或征收税款，审阅申报与支持记录、沟通差异并保留案件记录。本页以美国O*NET-SOC13-2081.00为职业基准，Revenue Agents不是替纳税人办申报的税务代理；中国税务稽查按当地法定职责、管辖和程序另行解释。"
+              "税务审查、征收和稽查岗位代表税务机构核对申报、联系纳税人并记录案件进展。补件、缴款或其他处理各有适用流程。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "tax-examiners-and-collectors-and-revenue-agents.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "cn-rule",
-            "editorial"
+            "transfer-onet-13-2081.00"
           ],
           "type": "prose"
         }
@@ -25749,15 +25744,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "分清文字表格技术辅助、机关实际采用、案件质量与职业就业。NIST支持通用信息风险，O*NET说明职业任务，BLS提供精确统计；三者均不构成本职业可量化替代率或执法授权证据。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：在虚构案件时间线中对照通知发出与回复收到的时间，标出一条状态缺少原件引用的记录。"
             ]
           },
           "id": "tax-examiners-and-collectors-and-revenue-agents.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "bls",
-            "editorial"
+            "transfer-onet-13-2081.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -34323,6 +34316,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-13-2081.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 13-2081.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/13-2081.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39795,10 +39815,10 @@
       "text": "税务检查、征收与税收稽查人员"
     }
   },
-  "source_content_sha256": "da7af47348c8742da536384c342b65035e7334f8a9dcf7adc1161fff7f63506c",
+  "source_content_sha256": "0705f0ef2dc408826e7a12818e9d12a0f69a2bacbbfc68e5a613906d81036197",
   "subject": {
     "canonical_slug": "tax-examiners-and-collectors-and-revenue-agents",
     "name": "税务检查、征收与税收稽查人员",
-    "summary": "税务检查、征收与税收稽查人员依据适用法律法规核定纳税义务或征收税款，审阅申报与支持记录、沟通差异并保留案件记录。本页以美国O*NET-SOC13-2081.00为职业基准，Revenue Agents不是替纳税人办申报的税务代理；中国税务稽查按当地法定职责、管辖和程序另行解释。"
+    "summary": "税务审查、征收和稽查岗位代表税务机构核对申报、联系纳税人并记录案件进展。补件、缴款或其他处理各有适用流程。"
   }
 }

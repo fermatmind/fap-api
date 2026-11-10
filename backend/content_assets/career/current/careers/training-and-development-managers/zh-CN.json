@@ -1614,7 +1614,7 @@
         "status": "mapped"
       },
       "item:training-and-development-managers.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:training-and-development-managers.path.interview-probation.1": {
         "status": "mapped"
@@ -1623,7 +1623,7 @@
         "status": "pending_mapping"
       },
       "item:training-and-development-managers.path.seven-day-decision.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:training-and-development-managers.path.seven-day-trial.1": {
         "status": "mapped"
@@ -24439,7 +24439,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "L2先把45分钟缩到35分钟并保留10分钟配对练习、5分钟测验；再在甲版上降到700元，重算费用且保留目标与评价。"
+              "收到时间和预算反馈时，先保留目标、核心练习与测验，再按累积限制重排；去 09 的 L2 复算各版本。"
             ]
           },
           "id": "training-and-development-managers.display.career_quick_answers_block.judgments.04.answer",
@@ -24609,6 +24609,7 @@
           },
           "id": "training-and-development-managers.display.work_context_block.summary",
           "source_refs": [
+            "bls",
             "onet",
             "editorial"
           ],
@@ -24664,11 +24665,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "时间与强度｜多数美国岗位为正常工作时段的全职工作，部分超40小时并需出差。Lancaster历史岗位允许偶尔晚间、周末、假日及当地出行；上海主管样本写常日班，不能合并成统一排期。"
+              "时间与强度｜BLS 显示，多数美国培训与发展经理在常规营业时间全职工作。部分人每周工作超过 40 小时。部分人会往返总部、地区办公室或培训场所。Lancaster 历史岗位要求偶尔在晚间、周末或节假日工作，并说明可能需要在当地出差。上海培训主管样本列为常日班。这两个样本反映各自雇主的安排。"
             ]
           },
           "id": "training-and-development-managers.display.work_context_block.schedule",
           "source_refs": [
+            "bls",
+            "r2-pay-3",
+            "r2-pay-2",
             "onet",
             "editorial"
           ],
@@ -24799,7 +24803,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "组织学习需求与课程评价任务；不使用演员工会条款"
+              "美国雇员学习需求与课程评估的职业任务。"
             ]
           },
           "id": "training-and-development-managers.display.onet_structured_fields_block.sag",
@@ -25477,7 +25481,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可先试访谈提纲、课程和测验草稿，由人核事实、评价口径与权限。美国11-3131单列2025—2035增长6.4%、十年净增约3,200人、年均4,100空缺含转行退休替补，是总体预测而非AI因果。证据不足：本职单列AI净替代率及可复核FermatMind任务评分，另列编辑估算分数或个人失业概率。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可先试访谈提纲、课程和测验草稿，由人核事实、评价口径与权限。美国11-3131单列2025—2035增长6.4%、十年净增约3,200人、年均4,100空缺含转行退休替补，是总体预测而非AI因果。本页未取得 AI 对该职业净替代率的实测数据。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "training-and-development-managers.display.ai_impact_table.answer",
@@ -25992,7 +25996,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "解释美国组织学习职责，不是演员工会协议。"
+              "说明美国雇员培训职责；不提供 AI 替代率。"
             ]
           },
           "id": "training-and-development-managers.display.ai_impact_table.authority.sag.scope",
@@ -27263,14 +27267,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "组织雇员工资与独立课程服务收款不同，后者还涉及业务成本和工作频率。本页未核中国经理自雇分布，不按课程报价推固定收入。"
+              "组织雇员工资与独立课程服务收款不同，后者还涉及业务成本和工作频率。本页未核中国经理自雇分布，不按课程报价推固定收入。 企业内训与职业技能培训有需求调查、课程设计和评价等交集。大陆部分对应企业人力资源管理师（4-07-03-04）与职业培训师（4-07-03-05）的相关任务；岗位名中的“经理”或“专员”仍按雇主的预算、人事与交付责任区分。"
             ]
           },
           "id": "training-and-development-managers.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
             "r2-pay-1",
             "r2-pay-2",
-            "editorial"
+            "editorial",
+            "cn-ld-class"
           ],
           "type": "prose"
         },
@@ -27908,7 +27913,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需求资料要区分事实和推断。L1给10例交接问题，6例漏步骤可设计练习，4例工具不可用要交业务负责人；不能将全部归因员工不会。先核输入，再写目标，并保留未知的真实工作原因。"
+              "先区分学习问题、工具问题与未证实原因。用 L1 原始记录分类后再拟目标，别默认每次遗漏都是员工没学会。"
             ]
           },
           "id": "training-and-development-managers.fit.personality-fit-block.2",
@@ -27923,7 +27928,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "收到时间与预算反馈先确认是否累计，再修改计划。L2甲保留10分钟练习和5分钟测验，压到35分钟；乙在甲版上换400元讲师并算700元。不只说“已优化”，要展示每段时间、费用和仍保留的目标。"
+              "先问变更是否累积，保留核心练习和评分标准。用 L2 列各版时段与费用，自行验算并记录目标是否保留。"
             ]
           },
           "id": "training-and-development-managers.fit.personality-fit-block.3",
@@ -27938,7 +27943,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "课程表现未达标或反馈不理想时，核目标、题目、起点和实施条件。L3六对成绩中C后测3分，可提出补练；没有实施和原因证据，不给他贴能力或态度标签。一次小样本不评价个人总能力。"
+              "课程表现不达标时，先核目标、题目、起点和实施条件。用 09 的成对成绩判断谁需要补练；缺少实施和原因证据时，不给人贴能力或态度标签。"
             ]
           },
           "id": "training-and-development-managers.fit.personality-fit-block.4",
@@ -28572,7 +28577,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用L1分类、L2累计约束和L3分母判断观察具体能力。核18/6与24/6，识别2/6到5/6的50个百分点；通用测验分数不代实际管理表现。"
+              "用 L1 分类、L2 累积限制和 L3 分母分别看能力。自己复算均值和达标率，区分百分点与百分比；通用测评分数不能代替实际管理表现。"
             ]
           },
           "id": "training-and-development-managers.display.personality_fit_block.assessments.iq.answer",
@@ -29469,7 +29474,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "分开学习表现、体验与工作应用，核配对和缺失；L3可建议C补练、缺席者补学，但无对照不宣称确定绩效收益。"
+              "把学习表现、体验与在岗应用分开，核对配对成绩和缺失。09 的虚构题可练补练或补学建议；没有对照，不推确定的绩效变化。"
             ]
           },
           "id": "training-and-development-managers.display.career_risk_cards.audition-feedback.mitigation",
@@ -29964,7 +29969,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本职评价项目与讲师任务，非演员工会条款。"
+              "用于核对培训评价与讲师职责。"
             ]
           },
           "id": "training-and-development-managers.display.career_risk_cards.source.sag",
@@ -30038,14 +30043,14 @@
                 "需求与课程支持练习",
                 "用虚构业务差距整理对象、目标和活动。",
                 "编辑练习入口，不是经理岗位降级条件。",
-                "L1区分6例漏步骤与4例工具不可用。",
+                "把 L1 十条记录分组，给出依据与移交对象。",
                 "先验证支持任务，不能当相关经理经验。"
               ],
               [
                 "讲师与项目协调准备",
                 "编排课程时间、讲师与费用，提出可执行替代。",
                 "BLS管理职责及本页编辑任务。",
-                "L2保留练习测验，依次满足35分钟与700元。",
+                "按 L2 各轮反馈自行重排，保留练习和测验，再验成本。",
                 "展示组织与核算，不只是授课表现。"
               ],
               [
@@ -30099,7 +30104,7 @@
                 "id": "employer-1",
                 "values": [
                   "展示需求判断",
-                  "用L1说明10例问题只有6例与步骤练习有关，4例工具不可用需流程资源跟进；不靠课程承诺全部解决。"
+                  "列 L1 的原始记录、可训练问题和需业务负责人排查的事项；说明分组依据。"
                 ]
               },
               {
@@ -30143,7 +30148,7 @@
                 "id": "rework",
                 "values": [
                   "作品2｜三版项目表",
-                  "初版45分钟900元；甲35分钟900元；乙累计35分钟700元。每版列六段时间、讲师报价、材料与平台费用，解释保留练习测验。"
+                  "做初版、甲版与累计乙版的对照：每版列六段时长、讲师与各项费用，注明约束和练习保留情况。"
                 ]
               },
               {
@@ -30400,7 +30405,7 @@
                 "id": "actors-practice-materials",
                 "values": [
                   "L1｜虚构交接培训简报",
-                  "某虚构团队拟为8名新成员培训。最近10例交接问题中6例遗漏步骤、4例因工具不可用。只针对遗漏步骤设计课程，工具问题列给业务负责人。虚构五步骤：核任务编号、记交接对象、列完成项、列待办及责任人、请接收方复述。测验每正确一步1分，满分5，4分及以上通过。",
+                  "虚构团队有 8 名新成员。最近十条交接记录：01 未写任务号；02 交接工具无法登录；03 未列责任人；04 没请接收人复述；05 扫码器无法使用；06 未列完成项；07 未记接收人；08 终端无法启动；09 未列待办；10 表单服务不可用。请分类，决定哪些适合培训，哪些交业务负责人。五个评分步骤：任务号、接收人、完成项、待办和责任人、接收人复述；每项 1 分，满分 5，4 分通过。",
                   "初版45分钟：目标说明5、演示10、配对练习10、案例讨论10、测验5、复盘5。预算900元：外部讲师600、材料120、平台180。以上费用均为虚构报价，不含其他成本，也不算真实采购。"
                 ]
               },
@@ -30409,15 +30414,16 @@
                 "values": [
                   "L2｜依次执行两次反馈",
                   "甲：可用时间降到35分钟，保留配对练习10与测验5，其余段至少5分钟；目标、测验标准不变，预算上限仍900元。乙：在甲版上预算降到700元，内部讲师替代报价400元，材料120、平台180不变；时间仍35分钟，核心活动保留。",
-                  "每次输出六段时长与总数、讲师及三项费用；保留初版、甲版、累计乙版，至少解释两处变化。不得把乙当独立版本回到45分钟，也不新增题面外优惠。"
+                  "每次输出六段时长与总数、讲师及三项费用；保留初版、甲版、累计乙版，至少解释两处变化。不得把乙当独立版本回到45分钟，也不新增题面外优惠。",
+                  "L3｜虚构成对成绩：报名8人，到场6人，2人缺席且没有成绩。六人配对前测/后测：A 2/4、B 3/4、C 2/3、D 4/5、E 3/4、F 4/4；同一5分口径，4分及以上通过。算到场率、配对前后均值与通过率，写改进与不能推断的结果。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "L3｜虚构评价输入与参考",
-                  "报名8人，到场6人，2人缺席且没有成绩。六人配对前测/后测：A 2/4、B 3/4、C 2/3、D 4/5、E 3/4、F 4/4；同一5分口径，4分及以上通过。算到场率、配对前后均值与通过率，写改进与不能推断的结果。",
-                  "参考：甲时长5+5+10+5+5+5=35，费用600+120+180=900；乙时长保持35，400+120+180=700。到场6/8=75%；前18/6=3，后24/6=4，均值增1分；前通过2/6=33.33%，后5/6=83.33%，增加50个百分点。C后测3未通过，安排针对性练习；两缺席者另约补学，不填0。无对照、无工作应用资料，不宣称培训造成确定绩效或收益。"
+                  "提交前提示",
+                  "先按原始记录完成排程与成对成绩复算，再打开下面的七天任务。参考答案和四项评分在任务表之后。",
+                  "完成初稿后再对照，不填补缺失的证据。"
                 ]
               },
               {
@@ -30433,7 +30439,7 @@
           "source_refs": [
             "editorial"
           ],
-          "title": "交接学习项目",
+          "title": "L-01｜交接培训排程与预算",
           "type": "cards"
         },
         {
@@ -30445,7 +30451,7 @@
                 "id": "day-1",
                 "values": [
                   "第1天｜需求诊断",
-                  "读L1，分开6例漏步骤与4例工具问题。产出需求目标卡、五步骤及责任边界。"
+                  "读 L1 十条记录，区分可通过培训解决的问题和要交业务负责人的工具问题；交一张需求分类卡。"
                 ]
               },
               {
@@ -30466,28 +30472,28 @@
                 "id": "day-4",
                 "values": [
                   "第4天｜累计乙反馈",
-                  "在甲版上换400元内部讲师，费用合计700，保持35分钟。产出累计乙版及三版对照。"
+                  "从甲版出发，按乙反馈换讲师，列费用和预算校验；交乙版与三版对照。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
                   "第5天｜评价计算",
-                  "用L3六对成绩计算均值、通过率及6/8到场率，缺席不填零。产出原始表、公式和分母说明。"
+                  "从 L3 原始成绩复算到场、配对均分和达标率，写公式与各自分母，保留缺席无成绩。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
                   "第6天｜结果与交接",
-                  "写C的补练、缺席者补学、无对照及未实施限制。产出评价建议、工具问题及预算权限交接。"
+                  "独立完成整套试做，写完并保存四份初稿。没有同伴也能完成。当天先保留原记录，等第 7 天再对照。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
                   "第7天｜复盘选择",
-                  "整理四作品，核目标、约束和数字，记录是否愿意继续需求与资源管理。选择一项能获得具体反馈的后续练习。"
+                  "第 6 天初稿保存后，到本页常见问题区，展开「L-01 参考与自核量规（第 7 天展开）」。按四项量规核对，留一处修订和理由，再选一个可获得反馈的下一步。"
                 ]
               }
             ]
@@ -30504,20 +30510,22 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "是否把工具不可用4例保留为非培训事项，而不是承诺一课解决10例？",
-              "三版时长45→35→35、费用900→900→700是否与给定报价一致？",
-              "甲乙是否累计；10分钟配对、5分钟测验与目标标准是否始终保留？",
-              "六对前后成绩和8名报名是否用了不同且正确分母？缺席是否保留缺失？",
-              "是否将均值增1分、通过率增50个百分点与确定绩效因果分开？",
-              "是否愿意重复需求确认、资源协商和结果复核，而不只喜欢授课展示？",
-              "下一步只选一个目标短板，说明可用时间与反馈来源；本练习不保证经理录用或晋升。"
+              "第 6 天交四份带日期的初稿，保留题面与自己的计算。",
+              "把引用过的题面行写到相应结论旁。",
+              "分列已核、需复算和待他人确认。",
+              "用同一套字段对比初版与改稿。",
+              "对每个比率写出分母和统计对象。",
+              "把缺失数据保留为缺失，解释下一步找谁核。",
+              "第 7 天再按常见问题区的参考核对，保存修订理由。",
+              "写下哪一个岗位任务最值得继续练，选择能得到反馈的机会。",
+              "把试做与真实岗位要求分开记录。"
             ]
           },
           "id": "training-and-development-managers.path.seven-day-decision.1",
           "source_refs": [
             "editorial"
           ],
-          "title": "第七日复盘决定",
+          "title": "交卷前后怎么自查",
           "type": "list"
         },
         {
@@ -31802,7 +31810,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "四份历史岗位展示需求调查、课程、资源与评价要求；两美国已截止，中国开放状态未核实。样本不能计算当前热度或全国人才缺口。"
+              "四份历史岗位展示需求调查、课程、资源与评价要求；两美国已截止，中国开放状态未核实。样本不能计算当前热度或全国人才缺口。 房山区人社局 2023 年的招聘公告另列韩建圣水莲庭民宿的学院主管岗，职责包括调查培训需求、策划课程、跟踪培训效果和管理培训团队。"
             ]
           },
           "id": "training-and-development-managers.market-signals.market-signal-card.4",
@@ -31811,7 +31819,8 @@
             "ratify",
             "cn-rule",
             "cn-policy",
-            "editorial"
+            "editorial",
+            "cn-fangshan-training-lead"
           ],
           "type": "prose"
         },
@@ -31883,7 +31892,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "四历史条目来自四雇主，包含相邻主管；开放状态分别解释，不当在招数或代表性样本。"
+              "四历史条目来自四雇主，包含相邻主管；开放状态分别解释，不当在招数或代表性样本。 这里说的是原有四份历史样本。另补的大陆招聘也只说明单个用人单位的要求。"
             ]
           },
           "id": "training-and-development-managers.display.market_signal_card.outlook.hiring.limit",
@@ -32213,13 +32222,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "部门协调及学习需求分析可提供背景。"
+              "可复用需求诊断、课程设计与评估经验。"
             ]
           },
           "id": "training-and-development-managers.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "onet",
-            "editorial"
+            "editor"
           ],
           "type": "prose"
         },
@@ -32228,13 +32236,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转高校管理需补学业与学生服务制度和实际经验。 目标职责不同，不按培训年限承诺转入。"
+              "转向专员工作时，用一份课件、练习反馈或学习数据交接证明一线交付。"
             ]
           },
           "id": "training-and-development-managers.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "onet",
-            "editorial"
+            "editor"
           ],
           "type": "prose"
         },
@@ -32243,13 +32250,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑判断：高校路径"
+              "同职业族"
             ]
           },
           "id": "training-and-development-managers.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "onet",
-            "editorial"
+            "editor"
           ],
           "type": "prose"
         },
@@ -32351,7 +32357,7 @@
                 ]
               },
               {
-                "answer": "可用L1虚构需求、L2累计时间预算及L3六对成绩，独立形成四纸面作品。未实施就注明，不上传员工档案或冒充管理经验。",
+                "answer": "用虚构门店案例写一页方案：比较一场通用课和两场分岗训练的人时、预算、排班代价。选一个方案，写明由谁批、课程后用哪个现场指标复核；参加率不能替代技能是否用到岗位。",
                 "id": "actors.faq.3",
                 "question": "没有真实组织项目能否体验？",
                 "question_key": "career.faq.training-and-development-managers.3",
@@ -32360,7 +32366,7 @@
                 ]
               },
               {
-                "answer": "BLS为美国典型教育经验；Greenville证书desirable，Lancaster证书preferred、宾州驾照required。中国餐饮雇主有本行业资格要求，各自理解，不设全球培训经理许可证。",
+                "answer": "BLS为美国典型教育经验；Greenville证书desirable，Lancaster证书preferred、宾州驾照required。中国餐饮雇主有本行业资格要求，各自理解，不设全球培训经理许可证。 房山的历史学院主管岗要求本科及以上，并要求能策划、实施培训。民宿行业培训经验是该雇主的优先条件。",
                 "id": "actors.faq.4",
                 "question": "学历和证书是统一门槛吗？",
                 "question_key": "career.faq.training-and-development-managers.4",
@@ -32369,7 +32375,8 @@
                   "employer",
                   "r2-pay-1",
                   "r2-pay-3",
-                  "editorial"
+                  "editorial",
+                  "cn-fangshan-training-lead"
                 ]
               },
               {
@@ -32420,9 +32427,9 @@
                 ]
               },
               {
-                "answer": "三版45→35→35分钟、900→900→700元；六对均值3→4，通过率2/6→5/6，到场6/8。缺席不填0，无对照不宣称确定绩效因果。",
+                "answer": "L1：把漏步骤与工具不可用分列；前者六例，后者四例交业务负责人。 参考：甲时长5+5+10+5+5+5=35，费用600+120+180=900；乙时长保持35，400+120+180=700。到场6/8=75%；前18/6=3，后24/6=4，均值增1分；前通过2/6=33.33%，后5/6=83.33%，增加50个百分点。C后测3未通过，安排针对性练习；两缺席者另约补学，不填0。无对照、无工作应用资料，不宣称培训造成确定绩效或收益。\n\n按四项各记 0–2 分：需求与非培训问题分开；A、B 累积且满足限制；分母、缺席和算式正确；交接标记权限和因果边界。齐全可复算记 2，部分记 1，猜测或越权记 0。\n\n是否把工具不可用4例保留为非培训事项，而不是承诺一课解决10例？\n\n三版时长45→35→35、费用900→900→700是否与给定报价一致？\n\n甲乙是否累计；10分钟配对、5分钟测验与目标标准是否始终保留？\n\n六对前后成绩和8名报名是否用了不同且正确分母？缺席是否保留缺失？\n\n是否将均值增1分、通过率增50个百分点与确定绩效因果分开？\n\n是否愿意重复需求确认、资源协商和结果复核，而不只喜欢授课展示？\n\n下一步只选一个目标短板，说明可用时间与反馈来源；本练习不保证经理录用或晋升。",
                 "id": "actors.faq.9",
-                "question": "作品数字怎样保持一致？",
+                "question": "L-01 参考与自核量规（第 7 天展开）",
                 "question_key": "career.faq.training-and-development-managers.9",
                 "source_refs": [
                   "editorial"
@@ -32444,7 +32451,10 @@
           "id": "training-and-development-managers.sources.faq.1",
           "source_refs": [
             "onet",
-            "editorial"
+            "editorial",
+            "cn-fangshan-training-lead",
+            "cn-ld-class",
+            "editor"
           ],
           "type": "faq"
         },
@@ -32484,13 +32494,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本职与四相邻档案、美国年薪及就业、中国法律与官方招聘、两城市历史岗位分别核范围；原创练习为编辑设计。"
+              "美国工资和就业取 O*NET 与 BLS；大陆任务参照职业分类大典，招聘例子只解释雇主职责和条件。行业或岗位大类工资只供背景。"
             ]
           },
           "id": "training-and-development-managers.display.source_card.source",
           "source_refs": [
             "onet",
-            "editorial"
+            "editorial",
+            "cn-fangshan-training-lead",
+            "cn-ld-class"
           ],
           "type": "prose"
         },
@@ -32499,7 +32511,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-12复核本职O*NET任务与ESC、BLS全国五分位及行业中位、EP2025—2035、四份历史招聘、个人信息保护法第6/13/51条与上海服务期解释。NBS官方原页直接读取成功；保留2025管理宽岗位口径与中国精确工资缺口。转岗提示为编辑判断。"
+              "2026 年 11 月 9 日核读本次新增招聘、分类和美国工资／就业资料。"
             ]
           },
           "id": "training-and-development-managers.display.source_card.updated-at",
@@ -32673,7 +32685,7 @@
                 "url": "https://www.bls.gov/ooh/management/training-and-development-managers.htm"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "第6条目的与最小范围，第13条必要HR处理条件及第51条保护措施。",
                   "按职业、地域、期间与任务解释；不超出原始资料支持范围。"
@@ -32682,11 +32694,11 @@
                 "id": "cn-rule",
                 "limitation": "人力资源管理并非任意上传或公开许可，真实情境另核。",
                 "market": "中国",
-                "name": "中国个人信息保护法｜市场监管总局公布文本",
-                "period": "2021-11-01施行；页面2023-04-07",
-                "publisher": "国家市场监督管理总局",
+                "name": "《中华人民共和国个人信息保护法》｜中国人大网原文",
+                "period": "2021-11-01施行；2021-08-20转载",
+                "publisher": "中国人大网原文，中央网信办转载",
                 "scope": "contextual",
-                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -32715,7 +32727,7 @@
                 "limitation": "已截止，仅雇主岗位；预期与完整段不同，不代表全国工资。",
                 "market": "美国北卡雇主",
                 "name": "Greenville：Training and Development Manager历史岗位",
-                "period": "2026-02-01发布；2026-04-29截止",
+                "period": "2026-02-01开放申请；2026-04-29截止",
                 "publisher": "City of Greenville",
                 "scope": "recruitment_proxy",
                 "url": "https://www.governmentjobs.com/careers/greenvillenc/jobs/newprint/5197652"
@@ -32859,7 +32871,7 @@
                 "limitation": "已截止，证书preferred；不作为统一职业门槛。",
                 "market": "美国宾州雇主",
                 "name": "Lancaster：Learning and Development Manager历史岗位",
-                "period": "2026-05-22发布；2026-06-12截止",
+                "period": "2026-05-22开放申请；2026-06-12截止",
                 "publisher": "City of Lancaster",
                 "scope": "recruitment_proxy",
                 "url": "https://www.governmentjobs.com/careers/cityoflancasterpa/jobs/newprint/5338692"
@@ -33032,13 +33044,13 @@
                 ],
                 "evidence_type": "official occupation or statistical source",
                 "id": "bls-oews",
-                "limitation": "URL含AL，但本页仅用全国行；OEWS不含自雇，不用州值。",
+                "limitation": "引用美国全国行；BLS 员工工资不包括自雇，不是个人实际到手工资。",
                 "market": "美国全国",
                 "name": "O*NET转引BLS：2025美国全国年工资",
                 "period": "2025年5月；只用United States行",
                 "publisher": "U.S. Department of Labor, O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/11-3131.00?st=AL"
+                "url": "https://www.onetonline.org/link/localwages/11-3131.00"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -33057,7 +33069,7 @@
                 "url": "https://www.bls.gov/ooh/management/training-and-development-managers.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "解释劳动合同法22条专项费用与专业技术培训条件，及违约金限制。",
                   "按职业、地域、期间与任务解释；不超出原始资料支持范围。"
@@ -33120,6 +33132,37 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "房山区人社局 2023 年的招聘公告另列韩建圣水莲庭民宿的学院主管岗，职责包括调查培训需求、策划课程、跟踪培训效果和管理培训团队。",
+                  "房山的历史学院主管岗要求本科及以上，并要求能策划、实施培训。民宿行业培训经验是该雇主的优先条件。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-fangshan-training-lead",
+                "limitation": "该公告自发布之日起七日内有效。学院主管是承担带队职责的相邻岗位，单个历史样本无法说明当前需求或职业工资。",
+                "market": "中国大陆",
+                "name": "房山区人社局招聘公告｜民宿学院主管",
+                "period": "2023-02-15",
+                "publisher": "北京市房山区人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.bjfsh.gov.cn/zwgk/qrlsbj/zdly_999/fshcyjy/rlzyscgqxx/202302/t20230215_40058254.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "4-07-03-04 包括企业职工教育和员工培训；4-07-03-05 涵盖职业培训需求、项目、实施与评价。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "cn-ld-class",
+                "limitation": "仅作任务对照；不等同美国 SOC、雇主职级或执业要求。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国职业分类大典》人力资源服务人员",
+                "period": "2022",
+                "publisher": "人力资源社会保障部等；广元市人社局转载",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
               }
             ]
           },
@@ -36962,9 +37005,9 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/education-administrators-postsecondary",
-            "target_slug": "education-administrators-postsecondary",
-            "target_title": "高校教育行政管理者",
+            "target_href": "/zh/career/jobs/training-and-development-specialists",
+            "target_slug": "training-and-development-specialists",
+            "target_title": "培训与发展专员",
             "transition_distance": {
               "$item": "training-and-development-managers.display.market_signal_card.transitions.dancing.distance",
               "block": "market-signals",
@@ -37917,7 +37960,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "测我的职业兴趣是否适合本职业工作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -38030,20 +38073,24 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "MBTI (English)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five (English)"
-          },
-          {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "label": "MBTI (中文)"
+            "label": "MBTI 人格测试"
           },
           {
             "href": "/zh/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five (中文)"
+            "label": "大五人格测试"
+          },
+          {
+            "href": "/zh/tests/enneagram-personality-test-nine-types",
+            "label": "九型人格测试"
+          },
+          {
+            "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "label": "IQ 推理测评"
+          },
+          {
+            "href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "label": "EQ 情商测评"
           }
         ]
       },
@@ -38631,14 +38678,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "培训与发展经理如何诊断需求、组织课程讲师与预算并评价改进？核美国2025工资及2025—2035就业、中国历史岗位与薪资边界，用虚构学习项目体验时间费用变更和评价责任。"
+      "text": "培训与发展经理负责员工学习计划、师资和预算，跟进培训效果。比较经理与专员的工作，查看大陆岗位样本和美国薪资资料。"
     },
     "title": {
       "availability": "available",
       "text": "培训与发展经理"
     }
   },
-  "source_content_sha256": "1e13b1e5f163430f90e8577f72bcd14e98cd3277fad59938648da5493be19566",
+  "source_content_sha256": "bbc6b40a382322e40e82ad0f95acdc0653ec5b437a8e34e67ea0627c76b69a8b",
   "subject": {
     "canonical_slug": "training-and-development-managers",
     "name": "培训与发展经理",

@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a46-kunshan": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a46-taoyuan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:fabric-and-apparel-patternmakers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:fabric-and-apparel-patternmakers.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "fabric-and-apparel-patternmakers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "fabric-and-apparel-patternmakers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23076,7 +23042,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "FT351 entirely fictional paper item: style R351 has only two identical rectangles, not a complete garment pattern. Units are cm, and each size needs 2 pieces; each S piece is 60 long by 40 wide, each M piece is 64 long by 42 wide, and M adds 4 in length and 2 in width relative to S. The initial usable fabric width is 80; length runs along the fabric length, width along the fabric width, without rotation, with piece spacing 0, no seam allowance added, and no defects. Only compare the single-row or two-row layout of the two pieces of the same size; material stretch, real seam allowances, and fitting results are unknown, and actual sewability or real material usage is not inferred."
+              "Use FT351’s two sizes and two fabric widths for a paper layout. Explain your comparisons and identify open questions."
             ]
           },
           "id": "fabric-and-apparel-patternmakers.quick-decision.fit-decision-checklist.2",
@@ -26667,12 +26633,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other cities"
+              "Kunshan and Taoyuan job postings"
             ]
           },
           "id": "fabric-and-apparel-patternmakers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a46-kunshan",
+            "a46-taoyuan"
           ],
           "type": "prose"
         },
@@ -26681,12 +26648,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable monthly salary statistic for this occupation in other cities was obtained; differences across regions and product types are large and must be checked by work location."
+              "Kunshan Sabrina Garment advertised three apparel patternmakers at total quoted pay of CNY 7,000–9,000 per month. It asked for at least three years of knitwear patternmaking and independent patternmaking, grading, marker layout and material checks. Lectra CAD proficiency was preferred. Hunan Huaying Textile advertised one patternmaker at CNY 6,000–8,000 per month to make patterns for development samples and lead sample development. It asked for at least three years of underwear or loungewear patternmaking. The patternmaking supervisor and sample sewing positions were listed separately. These are employer quotes for different product lines. Ask about knitwear or underwear and loungewear experience, the division of pattern and sample work, pay components and current openings."
             ]
           },
           "id": "fabric-and-apparel-patternmakers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a46-kunshan",
+            "a46-taoyuan"
           ],
           "type": "prose"
         },
@@ -27469,13 +27437,13 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
@@ -27886,7 +27854,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET has dimension calculation and visualization tasks, and the directory is not an individual intelligence threshold. FT351 can independently verify the length plus 4 and width plus 2 and the fabric width, and does not prove real grading or pattern qualifications."
+              "Use FT351’s two sizes and two fabric widths for a paper layout. Explain your comparisons and identify open questions."
             ]
           },
           "id": "fabric-and-apparel-patternmakers.fit.personality-fit-block.18",
@@ -28320,7 +28288,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Extraversion does not prove pattern capability. Editorially observe whether you can clearly explain that FT351M width 84 exceeds the initial fabric width of 80 and accept verification; real tasks still require training."
+              "Use FT351’s two sizes and two fabric widths for a paper layout. Explain your comparisons and identify open questions."
             ]
           },
           "id": "fabric-and-apparel-patternmakers.fit.personality-fit-block.48",
@@ -28380,7 +28348,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "FT351 length plus 4 and width plus 2; two S pieces at width 80 fit one row with length 60, and M at width 84 > 80 requires two rows with length 128; on Day 5 only the fabric width changes to 84, and M fits one row with length 64. Being able to review the paper arithmetic does not equal real grading and marker making qualifications."
+              "Use FT351’s two sizes and two fabric widths for a paper layout. Explain your comparisons and identify open questions."
             ]
           },
           "id": "fabric-and-apparel-patternmakers.fit.personality-fit-block.52",
@@ -29249,7 +29217,7 @@
                 "id": "exercise-materials",
                 "values": [
                   "Material One: FT351 paper grading and marker making",
-                  "FT351 entirely fictional paper item: style R351 has only two identical rectangles, not a complete garment pattern. Units are cm, and each size needs 2 pieces; each S piece is 60 long by 40 wide, each M piece is 64 long by 42 wide, and M adds 4 in length and 2 in width relative to S. The initial usable fabric width is 80; length runs along the fabric length, width along the fabric width, without rotation, with piece spacing 0, no seam allowance added, and no defects. Only compare the single-row or two-row layout of the two pieces of the same size; material stretch, real seam allowances, and fitting results are unknown, and actual sewability or real material usage is not inferred.",
+                  "FT351 entirely fictional paper item: style R351 has only two identical rectangles, not a complete garment pattern. Units are cm, and each size needs 2 pieces; each S piece is 60 long by 40 wide, each M piece is 64 long by 42 wide. The initial usable fabric width is 80; length runs along the fabric length, width along the fabric width, without rotation, with piece spacing 0, no seam allowance added, and no defects. Only compare the single-row or two-row layout of the two pieces of the same size; material stretch, real seam allowances, and fitting results are unknown, and actual sewability or real material usage is not inferred.",
                   "The two sizes are delivered separately and are not mixed; the two pieces are the same size and are not rotated or joined",
                   "The paper fabric width is the usable width in cm; material stretch, real seam allowances, and fitting results are all unknown",
                   "Not a real brand product; it does not require software, cutting tools, physical materials, or external experts to complete",
@@ -29262,16 +29230,15 @@
                 "values": [
                   "Material Two: tasks",
                   "Compute the length and width increment per piece from S to M; compare the fabric length used by two pieces side by side versus in two rows at a usable fabric width of 80cm",
-                  "On Day 5 only a fabric width change to 84cm is accepted, and the same two sizes are recomputed; the three unknowns are listed and not filled in"
+                  "Single-change variant: change only the usable fabric width from 80 to 84 cm. Recompute both sizes and retain unknowns."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material Three: independently reviewable answer",
-                  "Initially S: 40×2=80 fits side by side, taking 60cm of length on paper; M: 42×2=84 > 80, so two rows take 64×2=128cm of length. On Day 5 only the usable fabric width changes to 84cm; S still takes 60cm and M fits side by side taking 64cm. The piece dimensions, quantity, direction, zero spacing, and three unknowns are all unchanged.",
-                  "Draft unsent letter: please verify material stretch, real seam allowances, and fitting results; no responsible person was given and there is no reply, so no sending or confirmation is invented",
-                  "The paper lengths 60/128/64cm are not real purchasing usage, and a complete garment pattern cannot be inferred from rectangles"
+                  "Finish independently",
+                  "Submit the original and variant on day six, including the unsent note.",
+                  "On day seven, open “FT351 grading and marker layout reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
@@ -29300,7 +29267,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Work One: inputs and sources table",
-                  "List R351, S60×40/M64×42, 2 pieces each, an initial usable fabric width of 80cm, direction, and zero spacing; there is no representative sample of current recruitment",
+                  "Keep FT351 inputs separate from the requirements in the job postings.",
                   "Keep the three unknowns and the authorial fiction marking"
                 ]
               },
@@ -29308,7 +29275,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "Work Two: two-size increment and layout table",
-                  "Length plus 4 and width plus 2; initially S takes 60 in one row and M takes 128 in two rows; mark 84 > 80",
+                  "Show each increment and the basis and length of both layouts.",
                   "Review independently against Material Three and do not infer real usage"
                 ]
               },
@@ -29316,8 +29283,8 @@
                 "id": "report-summary",
                 "values": [
                   "Work Three: unsent verification letter and update",
-                  "List the three pending items: material stretch, real seam allowances, and fitting results; no name was given and there is no reply; on Day 5 the fabric width is 84 and M takes 64 in one row",
-                  "S still takes 60, and the piece dimensions, quantity, direction, and unknowns are all unchanged"
+                  "Keep the original record and show the variant separately.",
+                  "Include the unsent note and identify open items."
                 ]
               },
               {
@@ -29396,50 +29363,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read the input",
-                  "List the two sizes' lengths and widths, 2 pieces each, the 80cm fabric width, the fixed direction, and the three unknowns"
+                  "Day 1",
+                  "Copy the units, sizes, piece counts and fabric width."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: verify the grading increments",
-                  "Write that each piece adds 64−60=4 in length and 42−40=2cm in width, without inferring real grading rules"
+                  "Day 2",
+                  "Calculate the length and width increments per piece."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: verify the initial layout",
-                  "S side by side is 80 wide and takes 60 of length; M side by side is 84 > 80, so two rows take 128cm of length"
+                  "Day 3",
+                  "Compare the layouts at the original width."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: write the verification letter",
-                  "List stretch, real seam allowances, and fitting results as pending, marking that it is unsent, no name was given, and there is no reply"
+                  "Day 4",
+                  "List open items and draft the unsent note."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: the single fabric width update",
-                  "Change only the usable width from 80 to 84cm; S still takes 60 and M takes 64 in one row, and the other inputs and unknowns are unchanged"
+                  "Day 5",
+                  "Recompute layouts at the variant width."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: independent review",
-                  "Check the four works against Material Three; outside feedback is optional, and record 'none' if none occurred"
+                  "Day 6",
+                  "Submit two rows for the original and two for the variant. Include the unsent note."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: reflection",
-                  "Record unit and constraint verification, modifications, and remaining unknowns, without inferring real pattern capability or hiring"
+                  "Day 7",
+                  "On day seven, open “FT351 grading and marker layout reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29456,13 +29423,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: are the original lengths and widths, quantity, fabric width, and unknowns complete",
-              "Day 2: do the 4 and 2cm increments refer back to the two sizes",
-              "Day 3: are the initial 60/128cm and 84 > 80 correct",
-              "Day 4: is it truthful that the three pending items are unsent with no name given and no reply",
-              "Day 5: is only the fabric width changed to 84, with S60/M64 and the other inputs and unknowns unchanged",
-              "Day 6: are the four-work review and the tool and feedback notes truthful",
-              "Day 7: are process interest and the limits of paper capability kept separate"
+              "State units and sizes.",
+              "Give the basis for the size increments.",
+              "Record original layouts and lengths.",
+              "Include the unsent note.",
+              "Record variant layouts.",
+              "Keep your independent work.",
+              "Compare with the reference and record a correction."
             ]
           },
           "id": "fabric-and-apparel-patternmakers.path.seven-day-decision.1",
@@ -29584,14 +29551,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "No representative current recruitment sample was obtained this round; the following are editorial verification prompts. Verify the real posting date and status, product category, software and process, duties, and review conditions.",
-              "The education, software, and experience conditions in a job posting must be read together; one item being relaxed does not mean other conditions can be substituted."
+              "Kunshan Sabrina Garment advertised three apparel patternmakers at total quoted pay of CNY 7,000–9,000 per month. It asked for at least three years of knitwear patternmaking and independent patternmaking, grading, marker layout and material checks. Lectra CAD proficiency was preferred. Hunan Huaying Textile advertised one patternmaker at CNY 6,000–8,000 per month to make patterns for development samples and lead sample development. It asked for at least three years of underwear or loungewear patternmaking. The patternmaking supervisor and sample sewing positions were listed separately. These are employer quotes for different product lines. Ask about knitwear or underwear and loungewear experience, the division of pattern and sample work, pay components and current openings."
             ]
           },
           "id": "fabric-and-apparel-patternmakers.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a46-kunshan",
+            "a46-taoyuan"
           ],
           "title": "Fabric and apparel patternmakers｜path",
           "type": "notice"
@@ -30056,7 +30022,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "FT351 paper calculation of 60/128cm, not a real marker making or purchasing basis"
+              "Use FT351’s two sizes and two fabric widths for a paper layout. Explain your comparisons and identify open questions."
             ]
           },
           "id": "fabric-and-apparel-patternmakers.path.career-path-block.39",
@@ -31642,13 +31608,13 @@
                 ]
               },
               {
-                "answer": "2025 pre-tax average annual wage of Chinese urban manufacturing employees: non-private 113,594 yuan/year, private 76,055 yuan/year. Pattern and garment production tasks match the broad manufacturing industry background; it covers multiple occupations and is not this occupation's median, starting wage, take-home pay, or a city quote. Insufficient evidence: no precise Chinese national or city occupational wage or current representative recruitment sample was obtained.",
+                "answer": "Kunshan Sabrina Garment advertised three apparel patternmakers at total quoted pay of CNY 7,000–9,000 per month. It asked for at least three years of knitwear patternmaking and independent patternmaking, grading, marker layout and material checks. Lectra CAD proficiency was preferred. Hunan Huaying Textile advertised one patternmaker at CNY 6,000–8,000 per month to make patterns for development samples and lead sample development. It asked for at least three years of underwear or loungewear patternmaking. The patternmaking supervisor and sample sewing positions were listed separately. These are employer quotes for different product lines. Ask about knitwear or underwear and loungewear experience, the division of pattern and sample work, pay components and current openings. Comparable national occupation-level wage data remain unavailable.",
                 "id": "fabric-and-apparel-patternmakers.faq.3",
                 "question": "Can wages in mainland China be found?",
                 "question_key": "career.faq.fabric-and-apparel-patternmakers.q3",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "a46-kunshan",
+                  "a46-taoyuan"
                 ]
               },
               {
@@ -31716,15 +31682,19 @@
                 ]
               },
               {
-                "answer": "BLS exact SOC51-6092: 3,000 employed in 2025 and a 2035 projection of 2,600; a decline of 15.0% over 2025—2035, an official net change of -500, and an annual average of 200 job openings. The thousands columns are rounded separately, and the net change is not recomputed from the endpoints; openings include growth and replacements, are not a ten-year total or net additions.\nFor a transition, verify against the real task conditions; the FT351 two-size increments, paper marker making, the unsent verification letter, and the single fabric width update do not prove real final patterns or hiring.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 51-6092 to decline from about 3,000 in 2025 to 2,600 in 2035, down 15.0%, with about 200 openings per year on average, including replacements. Employment totals are rounded separately.",
                 "id": "fabric-and-apparel-patternmakers.faq.10",
                 "question": "What is the US employment outlook? What needs to be added for a career change?",
                 "question_key": "career.faq.fabric-and-apparel-patternmakers.outlook-transition",
                 "source_refs": [
-                  "onet-wages-2025",
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
+              },
+              {
+                "answer": "Each M piece is 4 cm longer and 2 cm wider than S. At an 80 cm fabric width, two S pieces fit side by side and take 60 cm of length. Two M pieces span 84 cm side by side, so they need two rows and take 128 cm. At the variant width of 84 cm, S still takes 60 cm, and M fits side by side and takes 64 cm. Sample unsent note: Please verify fabric stretch, actual seam allowances and fitting results, and confirm who will follow up. These paper lengths cannot be used for purchasing. Check four items: size increments, the original layout, the variant layout, and the unsent note and scope.",
+                "id": "fabric-and-apparel-patternmakers.faq.11",
+                "question": "FT351 grading and marker layout reference (open after day six)",
+                "question_key": "career.faq.fabric-and-apparel-patternmakers.11"
               }
             ]
           },
@@ -31813,28 +31783,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the fabric and apparel patternmakers career page",
@@ -31864,25 +31822,25 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "Draw and construct precise master patterns or marker layouts, and may also mark and cut fabric and garments.",
-                  "O*NET interest RAC, with scales R78, A73, C53, E8, I6, S5, indicating work activity preferences rather than an individual suitability percentage or ability. Job Zone Three is a general preparation group.",
-                  "The earlier 2024 employment of 2800, a 2024—34 decline of -1% or lower, and 300 openings are kept separate from the current BLS period; in 2024 the US distribution was 57% manufacturing, 18% management of companies, and 15% wholesale."
+                  "O*NET interest RAC, with scales R78, A73, C53, E8, I6, S5, indicating work activity preferences rather than an individual suitability percentage or ability. Job Zone Three is a general preparation group."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
                 "limitation": "US occupational materials do not automatically yield enterprise processes or professional standards for mainland China, and they do not constitute product compliance or legal conclusions.",
                 "market": "United States",
                 "name": "O*NET OnLine：Fabric and Apparel Patternmakers（51-6092.00）",
-                "period": "The current occupational page; consulted 2026-10-03",
+                "period": "2026 occupational profile",
                 "publisher": "O*NET OnLine",
                 "scope": "exact occupation (SOC 51-6092)",
                 "url": "https://www.onetonline.org/link/summary/51-6092.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "16 core tasks: master patterns, specification entry, seam position marking, dimensions including stretch, sample fitting and correction, and marker making.",
                   "US respondents report 87% face-to-face daily and accuracy 72% extremely important and 28% very important; sitting is 17% almost continuous and 38% more than half, so it cannot be inferred that everyone is desk-bound.",
-                  "The typical US BLS entry is a high school diploma or equivalent, no related work experience required, and medium-term on-the-job training. The O*NET respondent education shows 41% high school equivalent, 26% bachelor's, and 19% some college with no degree; the three categories total 86% and are not a complete distribution. Job Zone Three/SVP6 to below 7 is a general preparation level, not occupation-specific training duration or a Chinese threshold."
+                  "The typical US BLS entry is a high school diploma or equivalent, no related work experience required, and medium-term on-the-job training. The O*NET respondent education shows 41% high school equivalent, 26% bachelor's, and 19% some college with no degree; the three categories total 86% and are not a complete distribution. Job Zone Three/SVP6 to below 7 is a general preparation level, not occupation-specific training duration or a Chinese threshold.",
+                  "The 2025 U.S. wage medians were $30.17 hourly and $62,750 annually. Manufacturing was listed as a leading industry. See BLS Table 1.2 for the projection."
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
@@ -31897,8 +31855,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "BLS exact SOC51-6092: 3,000 employed in 2025 and a 2035 projection of 2,600; a decline of 15.0% over 2025—2035, an official net change of -500, and an annual average of 200 job openings. The thousands columns are rounded separately, and the net change is not recomputed from the endpoints; openings include growth and replacements, are not a ten-year total or net additions.",
-                  "The typical US BLS entry is a high school diploma or equivalent, no related work experience required, and medium-term on-the-job training. The O*NET respondent education shows 41% high school equivalent, 26% bachelor's, and 19% some college with no degree; the three categories total 86% and are not a complete distribution. Job Zone Three/SVP6 to below 7 is a general preparation level, not occupation-specific training duration or a Chinese threshold."
+                  "BLS Table 1.2 projects U.S. employment in occupation 51-6092 to decline from about 3,000 in 2025 to 2,600 in 2035, down 15.0%, with about 200 openings per year on average, including replacements. Employment totals are rounded separately."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
@@ -32139,6 +32096,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Kunshan Sabrina Garment advertised three apparel patternmakers at total quoted pay of CNY 7,000–9,000 per month. It asked for at least three years of knitwear patternmaking and independent patternmaking, grading, marker layout and material checks. Lectra CAD proficiency was preferred."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a46-kunshan",
+                "limitation": "One employer’s quote. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Apparel patternmaker job posting",
+                "period": "2026-02-27",
+                "publisher": "Kunshan Municipal Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.ks.gov.cn/kss/qzkx/202602/fba5eea4445b440e8649f5346f7d7821.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Hunan Huaying Textile advertised one patternmaker at CNY 6,000–8,000 per month to make patterns for development samples and lead sample development. It asked for at least three years of underwear or loungewear patternmaking. The patternmaking supervisor and sample sewing positions were listed separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a46-taoyuan",
+                "limitation": "One employer’s quote. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Apparel patternmaker job posting",
+                "period": "2026",
+                "publisher": "Taoyuan County Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.taoyuan.gov.cn/zwgk/grassroots/6616340/3755469241.html"
               }
             ]
           },
@@ -34999,6 +34986,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a46-kunshan",
+            "posting-a46-taoyuan"
+          ],
           "sources_note": {
             "$item": "fabric-and-apparel-patternmakers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36032,7 +36023,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS employment projections (2024—2034)",
+            "label": "BLS employment projections (2025—2035)",
             "secondary_value": null,
             "value": {
               "$item": "fabric-and-apparel-patternmakers.profile.onet-structured-fields-block.4",
@@ -36910,7 +36901,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36920,27 +36911,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "fabric-and-apparel-patternmakers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "fabric-and-apparel-patternmakers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -37328,6 +37299,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Kunshan Sabrina Garment advertised three apparel patternmakers at total quoted pay of CNY 7,000–9,000 per month. It asked for at least three years of knitwear patternmaking and independent patternmaking, grading, marker layout and material checks. Lectra CAD proficiency was preferred.",
+        "fact_id": "posting-a46-kunshan",
+        "market": "Mainland China",
+        "measure": "Advertised pay",
+        "occupation_scope": "Apparel patternmaker job posting",
+        "period": "2026-02-27",
+        "source_refs": [
+          "a46-kunshan"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Hunan Huaying Textile advertised one patternmaker at CNY 6,000–8,000 per month to make patterns for development samples and lead sample development. It asked for at least three years of underwear or loungewear patternmaking. The patternmaking supervisor and sample sewing positions were listed separately.",
+        "fact_id": "posting-a46-taoyuan",
+        "market": "Mainland China",
+        "measure": "Advertised pay",
+        "occupation_scope": "Apparel patternmaker job posting",
+        "period": "2026",
+        "source_refs": [
+          "a46-taoyuan"
+        ]
       }
     ]
   },
@@ -37387,7 +37382,7 @@
       "text": "Fabric and Apparel Patternmakers"
     }
   },
-  "source_content_sha256": "64c709044f59f5ba66b2f0530960f90982984a4740fb717462859488717e9af2",
+  "source_content_sha256": "040b18e5d47e0a7e7c6fbd581084f68b9af868de91c03a7c02be4e672148ef05",
   "subject": {
     "canonical_slug": "fabric-and-apparel-patternmakers",
     "name": "Fabric and Apparel Patternmakers",

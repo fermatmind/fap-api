@@ -1430,6 +1430,9 @@
       "item:concierges.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:concierges.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:concierges.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30001,6 +30004,21 @@
           "id": "concierges.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。宾客只确认了出发时间，班次单却写车辆已订妥。写出应核的预约凭证，并注明要由谁回告宾客。"
+            ]
+          },
+          "id": "concierges.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "交接宾客预约需求",
+          "type": "notice"
         }
       ]
     },
@@ -36225,6 +36243,13 @@
         "id": "concierges.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "concierges.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -36637,7 +36662,7 @@
       "text": "礼宾员"
     }
   },
-  "source_content_sha256": "a32d85e46b1130e86b8342886000ef2b4d5cc508b2d590e1cdeb55db2706c1e6",
+  "source_content_sha256": "50c5bd9763eb236755cbda5e75775e76a19cf7162c202c7e2237911985f162d6",
   "subject": {
     "canonical_slug": "concierges",
     "name": "礼宾员",

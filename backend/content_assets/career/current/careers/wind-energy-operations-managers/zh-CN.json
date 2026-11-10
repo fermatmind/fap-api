@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "核计划中的数量、费用、未知报价和审批培训状态，观察能否持续追踪并与负责人澄清。"
+              "纸面体验｜停机台账有恢复时间，检修单没有放行记录。把两个状态分开交当班负责人。 "
             ]
           },
           "id": "wind-energy-operations-managers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24803,13 +24802,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "风能运营经理对应O*NET11-9199.09，管理风场持续运行中的人员、维护、财务及计划。工作包括运维记录、停机及备件跟踪、预算成本、合同保修、培训和承包商监督。不同单位职责范围不同；开发经理重机会与项目前期，工程师重设计分析，维修技术员重具体设备任务，运营管理标题不自动授电气、高处或调度操作权。"
+              "风电运营经理协调现场人员和承包商，跟踪停机、工单及备件，安排复核和计划检修。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "wind-energy-operations-managers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-11-9199.09"
           ],
           "type": "prose"
         }
@@ -25453,13 +25451,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可探索整理记录与状态草稿，费用未知、培训与批准回原文核；CMMS/SCADA不是文字AI采用证据。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：停机台账有恢复时间，检修单没有放行记录。把两个状态分开交当班负责人。"
             ]
           },
           "id": "wind-energy-operations-managers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-11-9199.09",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33077,6 +33075,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-11-9199.09",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 11-9199.09 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/11-9199.09"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38600,10 +38625,10 @@
       "text": "风能运营经理"
     }
   },
-  "source_content_sha256": "3b8a4f6511939c62c1c9d89e043d095536dc18c1b70c627debfa6ece6eaf5834",
+  "source_content_sha256": "6c201e5a0aa91b8a4b0b2adef9bbfea3b16bfc4e8e8cdc8e07d52a44ac7d5190",
   "subject": {
     "canonical_slug": "wind-energy-operations-managers",
     "name": "风能运营经理",
-    "summary": "风能运营经理对应O*NET11-9199.09，管理风场持续运行中的人员、维护、财务及计划。工作包括运维记录、停机及备件跟踪、预算成本、合同保修、培训和承包商监督。不同单位职责范围不同；开发经理重机会与项目前期，工程师重设计分析，维修技术员重具体设备任务，运营管理标题不自动授电气、高处或调度操作权。"
+    "summary": "风电运营经理协调现场人员和承包商，跟踪停机、工单及备件，安排复核和计划检修。"
   }
 }

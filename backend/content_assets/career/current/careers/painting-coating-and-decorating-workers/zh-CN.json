@@ -162,12 +162,24 @@
         "status": "pending_mapping"
       },
       "item:painting-coating-and-decorating-workers.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:painting-coating-and-decorating-workers.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:painting-coating-and-decorating-workers.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:painting-coating-and-decorating-workers.path.interview-probation.10": {
+        "status": "pending_mapping"
+      },
+      "item:painting-coating-and-decorating-workers.path.recruitment-sample.1": {
+        "status": "pending_mapping"
+      },
+      "item:painting-coating-and-decorating-workers.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:painting-coating-and-decorating-workers.path.seven-day-trial.1": {
         "status": "mapped"
       },
       "item:painting-coating-and-decorating-workers.profile.career-quick-answers-block.8": {
@@ -228,7 +240,7 @@
         "status": "pending_mapping"
       },
       "item:painting-coating-and-decorating-workers.sources.faq-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:painting-coating-and-decorating-workers.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -3175,18 +3187,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            0,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.01.mitigation": {
         "ref": null,
@@ -3346,18 +3348,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": null,
@@ -3403,18 +3395,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            4,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": null,
@@ -3460,18 +3442,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            5,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": null,
@@ -5689,52 +5661,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5965,96 +6075,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -9557,157 +9903,48 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.02.accessed_at": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "accessed_at"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.details.01": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "details",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.details.02": {
         "ref": null,
         "status": "unfilled"
       },
       "sources.published-sources.entries.02.evidence_type": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "evidence_type"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.limitation": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "limitation"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.market": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            1,
-            "market"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.name": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "name"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.period": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "period"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.publisher": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "publisher"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.scope": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "scope"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.url": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.03.accessed_at": {
         "ref": {
@@ -9780,7 +10017,7 @@
           "path": [
             "data",
             "entries",
-            2,
+            1,
             "market"
           ],
           "source": "item"
@@ -9929,7 +10166,7 @@
           "path": [
             "data",
             "entries",
-            3,
+            2,
             "market"
           ],
           "source": "item"
@@ -10094,7 +10331,7 @@
           "path": [
             "data",
             "entries",
-            4,
+            3,
             "market"
           ],
           "source": "item"
@@ -10247,7 +10484,7 @@
           "path": [
             "data",
             "entries",
-            5,
+            4,
             "market"
           ],
           "source": "item"
@@ -10400,7 +10637,7 @@
           "path": [
             "data",
             "entries",
-            6,
+            5,
             "market"
           ],
           "source": "item"
@@ -10553,7 +10790,7 @@
           "path": [
             "data",
             "entries",
-            7,
+            6,
             "market"
           ],
           "source": "item"
@@ -10706,7 +10943,7 @@
           "path": [
             "data",
             "entries",
-            8,
+            7,
             "market"
           ],
           "source": "item"
@@ -10859,7 +11096,7 @@
           "path": [
             "data",
             "entries",
-            9,
+            8,
             "market"
           ],
           "source": "item"
@@ -11012,7 +11249,7 @@
           "path": [
             "data",
             "entries",
-            10,
+            9,
             "market"
           ],
           "source": "item"
@@ -11165,7 +11402,7 @@
           "path": [
             "data",
             "entries",
-            11,
+            10,
             "market"
           ],
           "source": "item"
@@ -11318,7 +11555,7 @@
           "path": [
             "data",
             "entries",
-            12,
+            11,
             "market"
           ],
           "source": "item"
@@ -11395,7 +11632,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "accessed_at"
           ],
           "source": "item"
@@ -11408,7 +11645,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "details",
             0
           ],
@@ -11422,7 +11659,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "evidence_type"
           ],
           "source": "item"
@@ -11435,7 +11672,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "limitation"
           ],
           "source": "item"
@@ -11448,7 +11685,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "market"
           ],
           "source": "item"
@@ -11461,7 +11698,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "name"
           ],
           "source": "item"
@@ -11474,7 +11711,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "period"
           ],
           "source": "item"
@@ -11487,7 +11724,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "publisher"
           ],
           "source": "item"
@@ -11500,7 +11737,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "scope"
           ],
           "source": "item"
@@ -11513,7 +11750,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "url"
           ],
           "source": "item"
@@ -11526,7 +11763,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "accessed_at"
           ],
           "source": "item"
@@ -11539,7 +11776,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "details",
             0
           ],
@@ -11553,7 +11790,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "evidence_type"
           ],
           "source": "item"
@@ -11566,7 +11803,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "limitation"
           ],
           "source": "item"
@@ -11579,7 +11816,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "market"
           ],
           "source": "item"
@@ -11592,7 +11829,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "name"
           ],
           "source": "item"
@@ -11605,7 +11842,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "period"
           ],
           "source": "item"
@@ -11618,7 +11855,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "publisher"
           ],
           "source": "item"
@@ -11631,7 +11868,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "scope"
           ],
           "source": "item"
@@ -11644,7 +11881,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "url"
           ],
           "source": "item"
@@ -11657,7 +11894,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "accessed_at"
           ],
           "source": "item"
@@ -11670,7 +11907,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "details",
             0
           ],
@@ -11684,7 +11921,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "evidence_type"
           ],
           "source": "item"
@@ -11697,7 +11934,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "limitation"
           ],
           "source": "item"
@@ -11710,7 +11947,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "market"
           ],
           "source": "item"
@@ -11723,7 +11960,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "name"
           ],
           "source": "item"
@@ -11736,7 +11973,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "period"
           ],
           "source": "item"
@@ -11749,7 +11986,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "publisher"
           ],
           "source": "item"
@@ -11762,7 +11999,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "scope"
           ],
           "source": "item"
@@ -11775,7 +12012,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "url"
           ],
           "source": "item"
@@ -11995,7 +12232,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "适合能在不同材质上控制清洁、颜色、涂层与外观，并耐心检查瑕疵的人。"
+              "如果你喜欢把外观检查追溯到工单，并说清哪一项需要复核，可以考虑制品涂装与装饰。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.quick-decision.fermat-decision-card.2",
@@ -12009,7 +12246,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "若不能遵守涂料、溶剂、喷涂、烘干设备的安全程序，或把制品涂装误认为建筑油漆，应谨慎选择。"
+              "如果你更喜欢巡视生产线，先问清岗位主要看设备，还是检查成品饰面并处理缺陷。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.quick-decision.fermat-decision-card.3",
@@ -12023,7 +12260,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "可用安全教学样件练清洁、遮蔽、刷涂和外观检查；真实化学品、喷涂与烘干设备须按雇主培训和授权操作。"
+              "到目录「09 入行、资格与职业发展」找《FR-28：写外观检查交接单》，先用约 10 分钟作答，再看题后参考。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.quick-decision.fermat-decision-card.4",
@@ -12117,12 +12354,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "历史：美国O*NET 2024精确职业就业约8,800人，不是实时招聘。当前BLS精确51-9123在2025就业约8,200、2035约8,300人，数值为千人表取整；不跨期混算。"
+              "BLS 的美国 51-9123 单列为 2025 年 8,200 个岗位、2035 年预计 8,300 个岗位。这里统计的是全国岗位数。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -12132,7 +12368,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本职业与建筑油漆工的对象不同，与连续涂装机操作员的主任务也不同。"
+              "本职业与建筑油漆工的对象不同，与涂装机操作员的主任务也不同。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.profile.career-quick-answers-block.9",
@@ -12182,7 +12418,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "制品涂装工注重单件或小批制品外观；连续涂装机操作员更注重设备参数和产线运行。"
+              "制品涂装工注重单件或小批制品外观；涂装机操作员更注重设备参数和产线运行。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.direction-comparison.adjacent-career-comparison-table.2",
@@ -12210,7 +12446,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "本职业的对象是家具、玻璃、陶器等制品，产出保护或装饰涂层；建筑油漆处理结构表面，涂装机操作侧重连续设备。"
+              "本职业的对象是家具、玻璃、陶器等制品，产出保护或装饰涂层；建筑油漆处理结构表面，涂装机操作侧重操作涂装设备。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.direction-comparison.adjacent-career-comparison-table.4",
@@ -12452,12 +12688,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "历史：美国2024该职业就业约8,800人，非当前空缺；当前BLS精确51-9123在2025就业约8,200人、2035约8,300，基期不同不可混算。"
+              "BLS 的美国 51-9123 单列为 2025 年 8,200 个岗位、2035 年预计 8,300 个岗位。这里统计的是全国岗位数。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -12509,13 +12744,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资2025年，旧2024就业8,800与2024—2034增长1%—2%/年均800空缺仅作历史。当前BLS精确51-9123为2025—2035总体增长1.3%、官方净增约100人，年均约700空缺含替补；总体预测不是AI采用、替代、个人失业或中国需求。"
+              "BLS 预计 2025—2035 年岗位增长 1.3%，净增约 100 个，年均约 700 个空缺，含替补。此预测无法说明工具采用率或岗位流失原因。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "onet-wages",
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -12737,7 +12970,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "先用安全教学样件练清洁、修补、配色与涂布，真实涂料和烘干设备按雇主程序操作。"
+              "到 09 做 FR-28，核对两份虚构外观记录，写下要交给复核人的问题。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.path.career-path-block.1",
@@ -12752,7 +12985,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "招聘时核对产品材质、涂料、喷枪、烘干设备、通风、班次和质量要求。"
+              "先问饰面按哪份规格检查、谁记录返工、谁签字放行。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.path.career-path-block.2",
@@ -12767,7 +13000,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "作品样本保留工单、制品材质、涂料配方、样件照片、缺陷与返修记录。"
+              "保留工单、检查记录编号、具体发现和指定复核人。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.path.career-path-block.3",
@@ -12782,13 +13015,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "面试可描述如何区分色差、漏涂、流挂和未固化，并说明安全升级边界。"
+              "BLS 将美国 51-9123 的典型入门教育列为无需正式教育证书，培训为中期在岗。O*NET 新聘教育调查中，59% 的受访者选低于高中学历，21% 选高中或同等学历，17% 选大学课程但未获学位。实际条件请向雇主核实。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.path.career-path-block.4",
           "source_refs": [
-            "onet-summary",
-            "editorial-ai"
+            "bls-ep-2025-2035",
+            "onet-education-028"
           ],
           "type": "prose"
         },
@@ -12797,7 +13030,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七日练习用教学材料完成表面清洁、样件涂布、干燥观察和质量评价。"
+              "W-FR 使用另一组复查单。第 6 天独立核区域编号和外观结果，再展开第 7 天参考。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.path.career-path-block.5",
@@ -12842,7 +13075,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "跨向建筑油漆、家具处理或连续涂装机需补目标对象、设备和安全训练。"
+              "跨向建筑油漆、家具处理或涂装机需补目标对象、设备和安全训练。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.path.career-path-block.8",
@@ -12862,6 +13095,13 @@
               "career.column.boundary",
               "career.column.evidence",
               "career.column.next"
+            ],
+            "column_labels": [
+              "阶段",
+              "工作",
+              "边界",
+              "凭证",
+              "下一步"
             ],
             "rows": [
               [
@@ -12918,6 +13158,12 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "情境",
+              "行动",
+              "复核",
+              "凭证"
+            ],
             "rows": [
               [
                 "色差",
@@ -12964,6 +13210,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "阶段",
+              "凭证",
+              "权限",
+              "条件",
+              "缺口",
+              "负责人",
+              "下一步"
             ],
             "rows": [
               [
@@ -13028,6 +13283,142 @@
             "editorial-ai"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "虚构材料（约 10 分钟）",
+                  "虚构 T7 工单要求饰面编号 B2，且外观记录写明未见漏涂，才可以送纸面复核。",
+                  "P1 写 B2、有漏涂。P2 写未见漏涂，饰面编号栏空白。",
+                  "只看纸面记录。练习不涉及实际返工或放行。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "任务与交付",
+                  "判断能否送纸面复核，分别写下两条记录的状态和理由。",
+                  "写出应把原记录和待核问题交给谁。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "参考入口",
+                  "独立作答后，到常见问题展开「FR-28 题后参考」。",
+                  "再与自己的记录对照。"
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "自核清单",
+                  "是否列了两条凭证、解释了判断，并指出谁能复核？"
+                ]
+              }
+            ]
+          },
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "title": "FR-28：写外观检查交接单",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "第 1 天",
+                  "开始 W-FR。虚构复查单必须写区域编号及修饰后外观结果，才能归档。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "第 2 天",
+                  "Q3：区域 Z2，外观结果空白。照录两项。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "第 3 天",
+                  "Q6：区域 Z4，外观结果记「未见漏涂」。照录两项。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "第 4 天",
+                  "指出哪条需要问检验负责人。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "第 5 天",
+                  "分别写下两条记录的归档判断。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "第 6 天",
+                  "先独立复核两份记录的两个栏位。找同伴反馈可选。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "第 7 天",
+                  "完成第 6 天独立复核后，到常见问题展开「W-FR 第 7 天参考」。对照记录，再选一个要练的习惯。"
+                ]
+              }
+            ]
+          },
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "title": "七天纸面体验：独立新题",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "我读了两份记录。",
+              "我核对了两条规则。",
+              "我写下了自己的比较判断。",
+              "我指出了复核人。",
+              "我只用了虚构资料。",
+              "我独立复核了结果。",
+              "我选了一个要练的习惯。"
+            ]
+          },
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "title": "七天后的判断问题",
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "六安 2026 年 3 月历史用工公告列出实木家具油漆工，要求三年以上相关经验。这是公告所列雇主的具体岗位要求。"
+            ]
+          },
+          "id": "painting-coating-and-decorating-workers.path.recruitment-sample.1",
+          "source_refs": [
+            "cn-recruitment-028"
+          ],
+          "title": "国内招聘样本",
+          "type": "notice"
         }
       ]
     },
@@ -13042,12 +13433,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "历史2024—2034美国51-9123预计增长1%—2%。当前BLS精确51-9123在2025—2035总体增长1.3%、官方净增约100人；2025约8,200至2035约8,300人，表按千人取整，不反算增长率。"
+              "2025 年美国工资中位数为每小时 20.00 美元、每年 41,600 美元。BLS 预计 51-9123 从 2025 年 8,200 个岗位增至 2035 年 8,300 个，净增约 100 个（+1.3%）。预计年均空缺约 700 个，含替补。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.market-signals.market-signal-card.1",
           "source_refs": [
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -13057,12 +13447,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "历史2024—2034年均约800空缺含更替。当前2025—2035年均约700空缺含增长与替补，不是净增约100人或实时招工量。"
+              "美国"
             ]
           },
           "id": "painting-coating-and-decorating-workers.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -13072,12 +13461,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "历史2024精确职业就业8,800人。当前BLS精确51-9123在2025就业约8,200人，不能跨期混算或作为中国、AI个人失业预测。"
+              "2025—2035 年"
             ]
           },
           "id": "painting-coating-and-decorating-workers.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -13087,12 +13475,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "数字配色和视觉检查可改变部分任务，但材料适配、现场安全与质量检查仍需人工。"
+              "全国预测以本职业的岗位数计。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.market-signals.market-signal-card.4",
           "source_refs": [
-            "source-pack-onet-summary"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13101,12 +13489,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向需要分别补建筑结构、家具木作或连续涂装设备的专业技能。"
+              "本地招聘须查具体雇主。"
             ]
           },
           "id": "painting-coating-and-decorating-workers.market-signals.market-signal-card.5",
           "source_refs": [
-            "source-pack-onet-summary"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         }
@@ -13138,16 +13526,18 @@
                 "question": "与建筑油漆工有什么区别？",
                 "question_key": "career.faq.painting-coating-and-decorating-workers.2",
                 "source_refs": [
-                  "onet-details"
+                  "onet-details",
+                  "bls-construction-028"
                 ]
               },
               {
-                "answer": "本职业重单件制品施涂与装饰；设备操作员重连续设备参数和产线运行。",
+                "answer": "本职业给制品施涂或装饰。美国 51-9124 侧重设置、操作或照管涂装、喷漆或喷涂设备。连续产线只是可能的工作场景之一。",
                 "id": "painting-coating-and-decorating-workers.faq.3",
                 "question": "与涂装机操作员有什么不同？",
                 "question_key": "career.faq.painting-coating-and-decorating-workers.3",
                 "source_refs": [
-                  "onet-details"
+                  "onet-details",
+                  "onet-machines-028"
                 ]
               },
               {
@@ -13156,16 +13546,17 @@
                 "question": "AI 能直接判定涂层质量吗？",
                 "question_key": "career.faq.painting-coating-and-decorating-workers.4",
                 "source_refs": [
-                  "editorial-ai",
-                  "onet-summary"
+                  "onet-details",
+                  "ilo-genai"
                 ]
               },
               {
-                "answer": "关注涂料溶剂、喷涂雾滴、烘干热源、混料与标签错误。",
+                "answer": "美国现场使用适用易燃或可燃饰面材料的喷涂，见 OSHA 1910.107。真实作业由现场确认材料、通风和人员授权。",
                 "id": "painting-coating-and-decorating-workers.faq.5",
                 "question": "有哪些主要安全风险？",
                 "question_key": "career.faq.painting-coating-and-decorating-workers.5",
                 "source_refs": [
+                  "osha-spray-028",
                   "onet-details"
                 ]
               },
@@ -13179,24 +13570,36 @@
                 ]
               },
               {
-                "answer": "美国2025本职中位时薪20.00、年薪41,600美元；五分位已取得但非资历或起薪。BLS精确51-9123在2025就业约8,200、2035约8,300；2025—2035总体增长1.3%、官方净增约100，年均约700空缺含替补。千人表取整，不反算增幅；非AI替代或个人失业。旧2024就业8,800与2024—2034资料保历史。",
+                "answer": "2025 年美国工资中位数为每小时 20.00 美元、每年 41,600 美元。BLS 预计 51-9123 从 2025 年 8,200 个岗位增至 2035 年 8,300 个，净增约 100 个（+1.3%）。预计年均空缺约 700 个，含替补。",
                 "id": "painting-coating-and-decorating-workers.faq.7",
                 "question": "美国工资和就业是多少？",
                 "question_key": "career.faq.painting-coating-and-decorating-workers.7",
                 "source_refs": [
                   "onet-wages",
-                  "onet-summary",
                   "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "先用教学样件练清洁、修补、调色和检查；真实涂料、喷涂及烘干设备按雇主授权使用。",
+                "answer": "到 09 做 FR-28，核对两份虚构外观记录，写下要交给复核人的问题。 练习只用虚构记录。真实材料、施涂、返工和放行由获授权人员按现场规程处理。",
                 "id": "painting-coating-and-decorating-workers.faq.8",
                 "question": "如何安全入门？",
                 "question_key": "career.faq.painting-coating-and-decorating-workers.8",
                 "source_refs": [
-                  "onet-details"
+                  "cn-recruitment-028",
+                  "osha-spray-028"
                 ]
+              },
+              {
+                "answer": "P1 记录有漏涂，P2 尚缺饰面编号。两条均待核。向外观记录负责人或指定质量复核人交接两份记录编号和具体发现。",
+                "id": "painting-coating-and-decorating-workers.faq.trial-short-reference",
+                "question": "FR-28 题后参考",
+                "question_key": "career.faq.painting-coating-and-decorating-workers.trial-short-reference"
+              },
+              {
+                "answer": "Q6 可按题内规则归档。Q3 缺外观结果，请检验负责人核原始 Z2 结果。记录归档不授权真实产品放行。",
+                "id": "painting-coating-and-decorating-workers.faq.trial-week-reference",
+                "question": "W-FR 第 7 天参考",
+                "question_key": "career.faq.painting-coating-and-decorating-workers.trial-week-reference"
               }
             ]
           },
@@ -13234,31 +13637,31 @@
           "data": {
             "entries": [
               {
-                "entity": "制品涂装与装饰工",
+                "entity": "霍兰德职业兴趣测试（中文）",
                 "id": "navigation-1",
                 "relation": "career.section",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "制品涂装与装饰工",
+                "entity": "MBTI（英文）",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "制品涂装与装饰工",
+                "entity": "大五人格（英文）",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "制品涂装与装饰工",
+                "entity": "MBTI（中文）",
                 "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "制品涂装与装饰工",
+                "entity": "大五人格（中文）",
                 "id": "navigation-5",
                 "relation": "career.section",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
@@ -13299,23 +13702,8 @@
                 "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
                 "period": "ILO Working Paper 140, 2025; accessed 2026-08-31",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "industry_proxy",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "accessed_at": "2026-08-31",
-                "details": [
-                  "未建立与该 O*NET 精确职业一一对应的全国工资分布。"
-                ],
-                "evidence_type": "official occupation and labor-market source",
-                "id": "mohrss-wage",
-                "limitation": "未建立与该 O*NET 精确职业一一对应的全国工资分布。",
-                "market": "CN",
-                "name": "企业薪酬调查信息",
-                "period": "2024 enterprise wage survey information published 2025; accessed 2026-08-31",
-                "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "parent_occupation_proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -13431,7 +13819,7 @@
                 "id": "source-pack-onet-custom",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET 自定义职业报告",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -13446,7 +13834,7 @@
                 "id": "source-pack-onet-details",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET 职业任务与工作情境",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -13461,7 +13849,7 @@
                 "id": "source-pack-onet-hot_tech",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "Hot Technologies: 51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET 软件及技术提及",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -13476,7 +13864,7 @@
                 "id": "source-pack-onet-industry",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "Industries: 51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET 按行业分布的就业",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -13491,10 +13879,10 @@
                 "id": "source-pack-onet-localcert",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "National Certifications: 51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET 认证目录",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localcert/51-9123.00"
               },
               {
@@ -13506,10 +13894,10 @@
                 "id": "source-pack-onet-localtraining",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "National Training: 51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET 培训目录",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localtraining/51-9123.00"
               },
               {
@@ -13521,7 +13909,7 @@
                 "id": "source-pack-onet-localwages",
                 "limitation": "工资分位非资历或起薪、非自营收入或中国工资。",
                 "market": "US",
-                "name": "National Wages: 51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET 全国职业工资分位",
                 "period": "2025 BLS OEWS全国精确51-9123工资",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
@@ -13536,7 +13924,7 @@
                 "id": "source-pack-onet-summary",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET 职业概况",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -13555,12 +13943,12 @@
                 "period": "2025年；表7制造生产宽岗及税前注释",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "2025约8200至2035约8300人、1.3%、官方净增约100人，年均约700空缺含替补；官方千人表取整。"
+                  "2025 年约 8,200 个岗位，2035 年预计约 8,300 个、1.3%、官方净增约 100 个岗位，年均约700空缺含替补；原表以千个岗位为单位。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-ep-2025-2035",
@@ -13582,9 +13970,9 @@
                 "limitation": "不证明现场效果、AI采用率替代率、个人失业、证书或设备安全授权。",
                 "market": "GLOBAL",
                 "name": "FermatMind制品涂装任务与安全教学核对建议",
-                "period": "本轮作者审阅2026-10-02",
+                "period": "编辑说明",
                 "publisher": "FermatMind editorial",
-                "scope": "internal_rubric",
+                "scope": "editorial_synthesis",
                 "url": null
               },
               {
@@ -13603,6 +13991,81 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "六安 2026 年 3 月历史用工公告列出实木家具油漆工，要求三年以上相关经验。这是公告所列雇主的具体岗位要求。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-recruitment-028",
+                "limitation": "六安 2026 年 3 月历史用工公告列出实木家具油漆工，要求三年以上相关经验。这是公告所列雇主的具体岗位要求。",
+                "market": "CN",
+                "name": "家具岗位历史招聘公告",
+                "period": "2026",
+                "publisher": "六安市退役军人事务局",
+                "scope": "recruitment_proxy",
+                "url": "https://tyjrj.luan.gov.cn/public/6608621/10755445.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "受访者对新聘教育条件的选择。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-education-028",
+                "limitation": "受访者对新聘教育条件的选择。",
+                "market": "US",
+                "name": "O*NET 新聘教育调查",
+                "period": "当前职业档案",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-9123.00#Education"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国现场使用适用易燃或可燃饰面材料的喷涂，见 OSHA 1910.107。真实作业由现场确认材料、通风和人员授权。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "osha-spray-028",
+                "limitation": "美国现场使用适用易燃或可燃饰面材料的喷涂，见 OSHA 1910.107。真实作业由现场确认材料、通风和人员授权。",
+                "market": "US",
+                "name": "OSHA 1910.107：喷涂饰面",
+                "period": "29 CFR 1910.107",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.107"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国建筑和结构表面作业。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-construction-028",
+                "limitation": "美国建筑和结构表面作业。",
+                "market": "US",
+                "name": "BLS 建筑与维护油漆工",
+                "period": "2026",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/painters-construction-and-maintenance.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国 51-9124 的设备任务，含设置、操作或照管设备。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-machines-028",
+                "limitation": "美国 51-9124 的设备任务，含设置、操作或照管设备。",
+                "market": "US",
+                "name": "O*NET 涂装、喷漆和喷涂设备操作",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/51-9124.00"
               }
             ]
           },
@@ -13648,24 +14111,24 @@
         },
         "evidence_links": [
           {
-            "href": "https://www.onetonline.org/link/details/51-9123.00",
-            "label": "O*NET 51-9123.00 职业详情"
+            "href": "https://www.onetonline.org/link/details/51-9123.00#Tasks",
+            "label": "O*NET 制品涂装任务"
           },
           {
-            "href": "https://www.onetonline.org/link/details/51-9123.00",
-            "label": "O*NET 51-9123.00 职业详情"
+            "href": "https://www.bls.gov/ooh/production/painting-and-coating-workers.htm",
+            "label": "BLS 制品涂装与涂装设备"
           },
           {
-            "href": "https://www.onetonline.org/link/details/51-9123.00",
-            "label": "O*NET 51-9123.00 职业详情"
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "label": "BLS 职业对照表"
           },
           {
-            "href": "https://www.onetonline.org/link/details/51-9123.00",
-            "label": "O*NET 51-9123.00 职业详情"
+            "href": "https://www.bls.gov/ooh/construction-and-extraction/painters-construction-and-maintenance.htm",
+            "label": "BLS 建筑油漆"
           },
           {
-            "href": "https://www.onetonline.org/link/details/51-9123.00",
-            "label": "O*NET 51-9123.00 职业详情"
+            "href": "https://www.onetonline.org/link/summary/51-9124.00",
+            "label": "O*NET 涂装设备操作"
           }
         ],
         "evidence_note": {
@@ -13705,9 +14168,9 @@
             "职业方向": "建筑与维护油漆工"
           },
           {
-            "关键区别": "主要控制机器和产线参数",
+            "关键区别": "岗位重心在设备运行及检查。",
             "更适合什么选择": "偏好设备监控",
-            "核心工作与产出": "运行连续涂装设备",
+            "核心工作与产出": "设置、操作或照管涂装设备。",
             "职业方向": "涂装机操作员"
           },
           {
@@ -13729,7 +14192,7 @@
             "职业方向": "玻璃装饰工"
           }
         ],
-        "transition": "按制品对象、设备和工艺安全要求比较。"
+        "transition": "先问饰面按哪份规格检查、谁记录返工、谁签字放行。 到 09 做 FR-28，核对两份虚构外观记录，写下要交给复核人的问题。"
       },
       "ai_impact_table": {
         "action_rows": [
@@ -13871,30 +14334,30 @@
           },
           {
             "使用限制": "编辑候选非现场验证、AI采用或替代率证据。",
-            "来源": "O*NET本职任务背景／FermatMind编辑推演",
+            "来源": "任务背景与编辑分析 · 数字配色",
             "研究对象": "数字配色",
             "结论": "可辅助颜色匹配。",
             "链接": "https://www.onetonline.org/link/summary/51-9123.00"
           },
           {
             "使用限制": "编辑候选非现场验证、AI采用或替代率证据。",
-            "来源": "O*NET本职任务背景／FermatMind编辑推演",
+            "来源": "任务背景与编辑分析 · 工艺记录",
             "研究对象": "工艺记录",
             "结论": "可用于记录整理，减少录入的效果待验证。",
             "链接": "https://www.onetonline.org/link/summary/51-9123.00"
           },
           {
             "使用限制": "编辑候选非现场验证、AI采用或替代率证据。",
-            "来源": "O*NET本职任务背景／FermatMind编辑推演",
+            "来源": "任务背景与编辑分析 · 就业替代推断",
             "研究对象": "就业替代推断",
             "结论": "不能据职业任务计算。",
             "链接": "https://www.onetonline.org/link/summary/51-9123.00"
           },
           {
-            "使用限制": "官方千人表取整；非AI采用替代、个人失业、实时招工或中国需求。",
+            "使用限制": "原表以千个岗位为单位；非AI采用替代、个人失业、实时招工或中国需求。",
             "来源": "BLS精确51-9123总体就业预测",
             "研究对象": "美国2025—2035总体职业就业",
-            "结论": "约8,200至8,300人，增长1.3%、官方净增约100；年均约700空缺含替补。",
+            "结论": "约 8,200 至 8,300 个岗位，增长1.3%、官方净增约100；年均约700空缺含替补。",
             "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
@@ -14051,7 +14514,7 @@
             "当前变化": "整理报告草稿"
           }
         ],
-        "transition": "跨建筑油漆或连续涂装设备需补目标对象和安全训练。"
+        "transition": "跨建筑油漆或涂装设备需补目标对象和安全训练。"
       },
       "breadcrumb": {
         "label": "制品涂装与装饰工",
@@ -14117,9 +14580,9 @@
             "stage": "质量交接"
           }
         ],
-        "direct_answer": "先学习材质、涂料和安全，再用教学样件练表面处理、调配施涂、干燥与检验。",
-        "entry_heading": "样件练习与现场带教",
-        "heading": "从教学样件到涂层质量交接",
+        "direct_answer": "到 09 做 FR-28，核对两份虚构外观记录，写下要交给复核人的问题。",
+        "entry_heading": "纸面练习与现场培训",
+        "heading": "入行、资格与职业发展",
         "locale_requirements": {
           "credential_boundary": "普通课程不自动授予喷涂、化学品或烘干设备权限。",
           "jurisdiction": "美国职业资料与中国岗位要求分开。",
@@ -14128,28 +14591,28 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/summary/51-9123.00",
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
-            "label": "O*NET本职制品施涂任务与工作情境",
-            "scope": "美国制品施涂、烘干、清洁检验及暴露背景；不是中国安全SOP或统一资格，练习带教为编辑建议"
+            "label": "BLS表1.2精确51-9123总体就业预测",
+            "scope": "精确职业非父51-9120或设备51-9124；总体非AI采用、替代、个人失业或中国需求。"
           },
           {
-            "href": "https://www.onetonline.org/link/summary/51-9123.00",
+            "href": "https://www.onetonline.org/link/details/51-9123.00#Education",
             "id": "nasa",
-            "label": "O*NET本职制品施涂任务与工作情境",
-            "scope": "美国制品施涂、烘干、清洁检验及暴露背景；不是中国安全SOP或统一资格，练习带教为编辑建议"
+            "label": "O*NET 新聘教育调查",
+            "scope": "受访者对新聘教育条件的选择。"
           },
           {
-            "href": "https://www.onetonline.org/link/summary/51-9123.00",
+            "href": "https://www.onetonline.org/link/details/51-9123.00",
             "id": "onet-training",
-            "label": "O*NET本职制品施涂任务与工作情境",
-            "scope": "美国制品施涂、烘干、清洁检验及暴露背景；不是中国安全SOP或统一资格，练习带教为编辑建议"
+            "label": "Painting, Coating, And Decorating Workers 51-9123.00",
+            "scope": "美国职业资料，不建立中国工资或授权；非精确映射时仅作父职业代理。"
           },
           {
-            "href": "https://www.onetonline.org/link/summary/51-9123.00",
+            "href": "https://tyjrj.luan.gov.cn/public/6608621/10755445.html",
             "id": "faa",
-            "label": "O*NET本职制品施涂任务与工作情境",
-            "scope": "美国制品施涂、烘干、清洁检验及暴露背景；不是中国安全SOP或统一资格，练习带教为编辑建议"
+            "label": "家具岗位历史招聘公告",
+            "scope": "六安 2026 年 3 月历史用工公告列出实木家具油漆工，要求三年以上相关经验。这是公告所列雇主的具体岗位要求。"
           }
         ],
         "tracks": [
@@ -14168,14 +14631,14 @@
                 "next_moves": "补足材料和设备知识。",
                 "readiness_evidence": "监督反馈、核对表与更正记录。",
                 "responsibility": "在岗位训练及监督中练习基础学习，核原始输入、记录反馈和异常。",
-                "role": "培训学员"
+                "role": "获授权的涂装人员"
               },
               {
                 "credentials": "核对涂料和设备训练。",
                 "next_moves": "补足材料和设备知识。",
                 "readiness_evidence": "对应训练权限、任务记录与接收人。",
                 "responsibility": "完成训练并取得相应权限后承担基础学习职责，保留执行与交接记录；喷涂、化学品、烘干设备与质量放行权限另核。",
-                "role": "在岗涂装工"
+                "role": "有经验的涂装人员"
               },
               {
                 "credentials": "核对涂料和设备训练。",
@@ -14202,14 +14665,14 @@
                 "next_moves": "补足材料和设备知识。",
                 "readiness_evidence": "监督反馈、核对表与更正记录。",
                 "responsibility": "在岗位训练及监督中练习监督下涂装，核原始输入、记录反馈和异常。",
-                "role": "培训学员"
+                "role": "获授权的涂装人员"
               },
               {
                 "credentials": "核对涂料和设备训练。",
                 "next_moves": "补足材料和设备知识。",
                 "readiness_evidence": "对应训练权限、任务记录与接收人。",
                 "responsibility": "完成训练并取得相应权限后承担监督下涂装职责，保留执行与交接记录；喷涂、化学品、烘干设备与质量放行权限另核。",
-                "role": "在岗涂装工"
+                "role": "有经验的涂装人员"
               },
               {
                 "credentials": "核对涂料和设备训练。",
@@ -14236,14 +14699,14 @@
                 "next_moves": "补足材料和设备知识。",
                 "readiness_evidence": "监督反馈、核对表与更正记录。",
                 "responsibility": "在岗位训练及监督中练习独立工作与发展，核原始输入、记录反馈和异常。",
-                "role": "培训学员"
+                "role": "获授权的涂装人员"
               },
               {
                 "credentials": "核对涂料和设备训练。",
                 "next_moves": "补足材料和设备知识。",
                 "readiness_evidence": "对应训练权限、任务记录与接收人。",
                 "responsibility": "完成训练并取得相应权限后承担独立工作与发展职责，保留执行与交接记录；喷涂、化学品、烘干设备与质量放行权限另核。",
-                "role": "在岗涂装工"
+                "role": "有经验的涂装人员"
               },
               {
                 "credentials": "核对涂料和设备训练。",
@@ -14356,14 +14819,14 @@
                 {
                   "alternate_value": null,
                   "label": "2025在岗",
-                  "secondary_value": "精确51-9123官方千人表取整",
-                  "value": "约8,200人"
+                  "secondary_value": "BLS 51-9123，2025 年",
+                  "value": "美国 8,200 个岗位"
                 },
                 {
                   "alternate_value": null,
                   "label": "预计增长",
                   "secondary_value": "总体预测，非AI替代",
-                  "value": "2025—2035增长1.3%；净增约100人"
+                  "value": "2025—2035 年增长 1.3%，净增约 100 个岗位"
                 },
                 {
                   "alternate_value": null,
@@ -14375,7 +14838,7 @@
             }
           },
           {
-            "answer": "制品涂装与装饰工可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "到 09 用两份虚构外观记录做 FR-28。 真实材料、设备与放行由获授权人员按现场规程处理。",
             "key": "qa1",
             "question": "如何安全入门？",
             "table": {
@@ -14383,38 +14846,38 @@
                 {
                   "alternate_value": null,
                   "label": "01",
-                  "secondary_value": "区分家具、玻璃和陶器",
-                  "value": "识别材质与工单"
+                  "secondary_value": "用 09 的两份虚构记录。",
+                  "value": "读题给记录"
                 },
                 {
                   "alternate_value": null,
                   "label": "02",
-                  "secondary_value": "先修补瑕疵",
-                  "value": "练表面清洁"
+                  "secondary_value": "比较岗位职责或外观记录栏。",
+                  "value": "找决定性信息"
                 },
                 {
                   "alternate_value": null,
                   "label": "03",
-                  "secondary_value": "不使用危险溶剂",
-                  "value": "制作安全教学样件"
+                  "secondary_value": "引用记录编号和相关信息。",
+                  "value": "写下判断"
                 },
                 {
                   "alternate_value": null,
                   "label": "04",
-                  "secondary_value": "配方和干燥条件",
-                  "value": "学习涂料说明"
+                  "secondary_value": "向能查证的人提一个问题。",
+                  "value": "写下复核对象"
                 },
                 {
                   "alternate_value": null,
                   "label": "05",
-                  "secondary_value": "真实喷涂受监督",
-                  "value": "接受雇主带教"
+                  "secondary_value": "写完自己的判断再展开参考。",
+                  "value": "先独立核对"
                 },
                 {
                   "alternate_value": null,
                   "label": "06",
-                  "secondary_value": "烘干设备另训练",
-                  "value": "核对设备授权"
+                  "secondary_value": "培训与实际操作按现场要求执行。",
+                  "value": "另核现场授权"
                 }
               ]
             }
@@ -14463,7 +14926,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
               "onet"
             ],
             "id": "cost-change",
@@ -14476,7 +14938,7 @@
             "consequence": "可能增加喷涂雾滴暴露。",
             "evidence_refs": [
               "onet",
-              "onet"
+              "osha-spray-028"
             ],
             "id": "record-version",
             "mitigation": "受训人员按材料和设备程序核作业区防护。",
@@ -14488,7 +14950,7 @@
             "consequence": "可能烫伤或引发火灾。",
             "evidence_refs": [
               "onet",
-              "onet"
+              "osha-spray-028"
             ],
             "id": "personal-data",
             "mitigation": "获授权者核工艺设备，异常停用升级。",
@@ -14499,7 +14961,6 @@
             "affected_roles": "配料者、施涂者及接收方",
             "consequence": "可能混错材料或涂层不兼容。",
             "evidence_refs": [
-              "onet",
               "onet"
             ],
             "id": "technical-boundary",
@@ -14511,7 +14972,6 @@
             "affected_roles": "质量人员与产品接收方",
             "consequence": "可能返工或使保护装饰不符要求。",
             "evidence_refs": [
-              "onet",
               "onet"
             ],
             "id": "single-coverage",
@@ -14523,7 +14983,6 @@
             "affected_roles": "精细操作人员",
             "consequence": "可能增加手腕和上肢负担。",
             "evidence_refs": [
-              "onet",
               "onet"
             ],
             "id": "delivery-acceptance",
@@ -14559,10 +15018,10 @@
             "scope": "不证明风险概率、隐私法律或机构授权"
           },
           {
-            "href": "https://www.onetonline.org/link/summary/51-9123.00",
-            "id": "onet",
-            "label": "O*NET任务背景；控制为编辑建议",
-            "scope": "不证明风险概率、隐私法律或机构授权"
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.107",
+            "id": "osha-spray-028",
+            "label": "OSHA 1910.107：喷涂饰面",
+            "scope": "美国现场使用适用易燃或可燃饰面材料的喷涂，见 OSHA 1910.107。真实作业由现场确认材料、通风和人员授权。"
           }
         ]
       },
@@ -14710,11 +15169,11 @@
           {
             "指标": "就业人数",
             "数值": "约8,200",
-            "说明": "2025美国精确51-9123就业，2035约8,300；官方千人表取整，非实时招聘。"
+            "说明": "2025美国精确51-9123就业，2035约8,300；原表以千个岗位为单位，非实时招聘。"
           },
           {
             "指标": "就业前景2025—2035",
-            "数值": "增长1.3%（官方净增约100人）",
+            "数值": "增长1.3%（官方净增约 100 个岗位）",
             "说明": "美国精确职业总体就业预测，不是AI效果；不从取整存量反算增长率。"
           },
           {
@@ -14723,10 +15182,10 @@
             "说明": "2025—2035年均含增长与人员替补，非净新增约100人。"
           }
         ],
-        "boundary": "2025美国精确51-9123雇员工资分布非自营收入。当前总体就业预测2025—2035；2024与2024—2034保历史。不解释AI采用、替代、个人失业或中国需求。",
+        "boundary": "工资统计面向美国 51-9123 的雇员。2025—2035 年全国岗位预测无法说明自营收入、AI 采用或中国需求。",
         "direct_answer": {
           "$join": [
-            "美国精确51-9123在2025就业约8,200人；2025—2035总体增长1.3%、官方净增约100，年均约700空缺含替补。",
+            "美国精确51-9123在2025就业约 8,200 个岗位；2025—2035总体增长1.3%、官方净增约100，年均约700空缺含替补。",
             {
               "$item": "painting-coating-and-decorating-workers.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -14751,7 +15210,7 @@
           }
         ],
         "factors_heading": "影响实际报价的因素",
-        "growth": "1.3%（官方净增约100人）",
+        "growth": "1.3%（官方净增约 100 个岗位）",
         "heading": "美国制品涂装工资与就业",
         "industry_heading": "行业与岗位差异",
         "industry_period": "材质岗位条件核对；无行业工资统计",
@@ -14798,7 +15257,7 @@
           {
             "answer": {
               "$join": [
-                "实际2025五分位已取得，当前与历史就业分别呈现。",
+                "2025 年工资分位数描述美国雇员工资分布。",
                 {
                   "$item": "painting-coating-and-decorating-workers.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -14815,7 +15274,7 @@
             "question": "就业人数代表什么？"
           },
           {
-            "answer": "总体净增约100人与年均约700空缺含替补不同；不能当AI采用、替代、个人失业或中国需求预测。",
+            "answer": "总体净增约 100 个岗位与年均约700空缺含替补不同；不能当AI采用、替代、个人失业或中国需求预测。",
             "question": "增长与空缺如何使用？"
           }
         ],
@@ -14899,7 +15358,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "summary": "适合喜欢材质、色彩与表面细节，愿意按工单调配涂料并检查涂层缺陷，也能遵守化学品和设备安全程序的人。",
+        "summary": "如果你喜欢把外观检查追溯到工单，并说清哪一项需要复核，可以考虑制品涂装与装饰。",
         "title": "制品涂装与装饰工"
       },
       "fit_decision_checklist": {
@@ -14923,19 +15382,19 @@
         }
       },
       "hero": {
-        "h1": "制品涂装与装饰工",
+        "h1": "制品涂装与装饰工｜怎么复核外观记录",
         "quick_answer": "按工单清理和修补家具、玻璃、陶器等制品表面，调配并施涂油漆、油墨或漆料，按要求干燥固化、检查外观和修饰缺陷。",
-        "title": "制品涂装与装饰工"
+        "title": "制品涂装与装饰工｜怎么复核外观记录"
       },
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "比较相邻职业方向"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-us-salary",
+            "label": "核对美国工资与就业数据"
           }
         ],
         "direct_answer": {
@@ -14971,10 +15430,10 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "精确职业就业人数",
-            "occupation_scope": "O*NET 51-9123.00 精确职业",
+            "metric": "就业岗位",
+            "occupation_scope": "BLS 51-9123",
             "source_id": "ep",
-            "value": "约8,200人"
+            "value": "8,200 → 8,300 个岗位"
           },
           {
             "geography": "美国",
@@ -14982,9 +15441,9 @@
             "interpretation": "美国精确职业总体预测非工坊实时招聘、AI采用替代或个人失业。",
             "limitation": "不能外推个人录用概率或中国需求。",
             "metric": "增长与年均空缺",
-            "occupation_scope": "O*NET 51-9123.00 精确职业",
+            "occupation_scope": "BLS 51-9123",
             "source_id": "bls",
-            "value": "增长1.3%；净增约100人；年均约700空缺含替补"
+            "value": "+1.3%，净增约 100 个岗位，年均约 700 个空缺"
           },
           {
             "geography": "中国大陆",
@@ -15018,10 +15477,10 @@
             "scope": "规上制造生产制造及有关人员年税前年均，非本职就业预测"
           },
           {
-            "href": "https://www.onetonline.org/link/summary/51-9123.00",
+            "href": "https://www.onetonline.org/link/details/51-9123.00#Tasks",
             "id": "onet",
-            "label": "O*NET精确51-9123制品任务及历史背景",
-            "scope": "本职任务、2024—2034历史，非AI效果"
+            "label": "O*NET 制品涂装任务",
+            "scope": "美国 51-9123.00 的职业任务。"
           }
         ],
         "transitions": [
@@ -15034,7 +15493,7 @@
             "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "补连续设备供料、参数、厚度检测和机械防护。",
+            "capability_gaps": "核对目标岗位的设备供料、运行参数、检查职责和机械防护。",
             "shared_capabilities": "涂料样件、外观与质量记录。",
             "target_href": "/zh/career/jobs/coating-painting-and-spraying-machine-setters-operators-and-tenders",
             "target_slug": "coating-painting-and-spraying-machine-setters-operators-and-tenders",
@@ -15258,7 +15717,7 @@
               "slug": "coating-painting-and-spraying-machine-setters-operators-and-tenders",
               "title": "涂装机操作员"
             },
-            "watchouts": "补连续设备供料、参数、厚度检测和机械防护。"
+            "watchouts": "核对目标岗位的设备供料、运行参数、检查职责和机械防护。"
           },
           {
             "direction": "家具表面处理工方向",
@@ -15329,7 +15788,7 @@
           },
           {
             "answer": "目标机器参数、防护和工艺训练另核，不把手工施涂当设备授权。",
-            "question": "能直接跨连续涂装机吗？"
+            "question": "能直接跨涂装机吗？"
           },
           {
             "answer": "灯光相机偏色影响判断，须标准光线下核实物。",
@@ -15340,7 +15799,7 @@
             "question": "课程能授烘干设备权吗？"
           },
           {
-            "answer": "核制品材质、涂料、喷枪、烘干、通风、班次及质量职责。",
+            "answer": "先问饰面按哪份规格检查、谁记录返工、谁签字放行。 到 09 做 FR-28，核对两份虚构外观记录，写下要交给复核人的问题。",
             "question": "如何判断具体岗位？"
           }
         ],
@@ -15359,7 +15818,7 @@
             "tone": "caution"
           },
           {
-            "body": "先用公开工单与样件照片核材质、颜色、缺陷和未知条件；真实化学品及设备另需训练。",
+            "body": "到 09 做 FR-28，核对两份虚构外观记录，写下要交给复核人的问题。",
             "id": "experiment",
             "label": "缺陷复核",
             "tone": "action"
@@ -15530,6 +15989,34 @@
         "id": "painting-coating-and-decorating-workers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "painting-coating-and-decorating-workers.path.recruitment-sample.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15559,7 +16046,7 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "本职业涂装家具、玻璃、陶器等制品；建筑油漆和连续涂装机岗位的对象与产出不同。",
+        "display_value": "本职业涂装家具、玻璃、陶器等制品；建筑油漆和涂装机岗位的对象与产出不同。",
         "fact_id": "adjacent-boundary",
         "market": "美国",
         "measure": "来源支持的职业事实",
@@ -15679,7 +16166,7 @@
       },
       {
         "derivation": null,
-        "display_value": "约8,200人",
+        "display_value": "8,200 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "2025精确职业就业人数",
@@ -15691,7 +16178,7 @@
       },
       {
         "derivation": null,
-        "display_value": "增长1.3%（官方净增约100人）",
+        "display_value": "增长1.3%（官方净增约 100 个岗位）",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "总体就业预测净变化",
@@ -15776,17 +16263,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "按工单清理和修补家具、玻璃、陶器等制品表面，调配并施涂油漆、油墨或漆料，按要求干燥固化、检查外观和修饰缺陷。美国 O*NET 51-9123.00，区别于建筑油漆和连续涂装机操作。"
+      "text": "了解制品涂装、外观检查与修饰记录，试用两份虚构外观记录写交接单。"
     },
     "title": {
       "availability": "available",
-      "text": "制品涂装与装饰工：工作内容、工资与安全风险"
+      "text": "制品涂装与装饰工｜怎么复核外观记录"
     }
   },
-  "source_content_sha256": "b1ea5b8619e884fac81e5a6d38a8d24aa946afe82f6f6b3c3a40a35d6178df6f",
+  "source_content_sha256": "56bc3a761f02f07f56c25469ed1d513b997bd6a33ee73a3744585c18177af37f",
   "subject": {
     "canonical_slug": "painting-coating-and-decorating-workers",
-    "name": "制品涂装与装饰工",
+    "name": "制品涂装与装饰工｜怎么复核外观记录",
     "summary": "按工单清理和修补家具、玻璃、陶器等制品表面，调配并施涂油漆、油墨或漆料，按要求干燥固化、检查外观和修饰缺陷。"
   }
 }

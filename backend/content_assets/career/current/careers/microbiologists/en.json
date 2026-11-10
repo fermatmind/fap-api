@@ -144,7 +144,7 @@
         "status": "mapped"
       },
       "item:microbiologists.path.credential-decision.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:microbiologists.path.employer-evidence.3": {
         "status": "mapped"
@@ -153,16 +153,22 @@
         "status": "pending_mapping"
       },
       "item:microbiologists.path.entry-role-comparison.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:microbiologists.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:microbiologists.path.interview-probation.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:microbiologists.path.recruitment-sample.1": {
         "status": "pending_mapping"
       },
-      "item:microbiologists.path.seven-day-trial.6": {
+      "item:microbiologists.path.seven-day-decision.1": {
         "status": "mapped"
+      },
+      "item:microbiologists.path.seven-day-trial.6": {
+        "status": "pending_mapping"
       },
       "item:microbiologists.profile.career-quick-answers-block.4": {
         "status": "mapped"
@@ -5808,52 +5814,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -6084,36 +6228,98 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "microbiologists.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
         "ref": {
@@ -12195,7 +12401,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Direct assessment: If you are willing to design and conduct reproducible experiments, follow biosafety standards, and draw conclusions from data, this direction is worth exploring further. A safe trial uses entirely fictional experimental data and nontoxic simulation materials, with no real pathogens or restricted samples."
+              "Be cautious if repeated checks and detailed records feel like a distraction; microbiology can require careful follow-up when records disagree."
             ]
           },
           "id": "microbiologists.quick-decision.fermat-decision-card.1",
@@ -12209,7 +12415,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observable signals: Can you pose testable questions and follow a protocol, follow aseptic and biosafety procedures, and interpret results from data rather than expectations? Personality labels cannot determine fit or qualifications."
+              "In 09 Entry, qualifications, and career development, find “MB-18: Check a Microbial Study Log.” Allow about 10 minutes before reading the answer."
             ]
           },
           "id": "microbiologists.quick-decision.fit-decision-checklist.2",
@@ -12223,7 +12429,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Suitable conditions: Willingness to invest in experimental and research cycles over the long term, maintain procedures and records through repeated failures, and accept peer review. Reasons for caution: If long research cycles and biosafety responsibilities are hard to tolerate, compare other life science directions first."
+              "Consider microbiology if you enjoy tracing sample identifiers, comparing logs and explaining why evidence should be checked before reporting."
             ]
           },
           "id": "microbiologists.quick-decision.fit-decision-checklist.3",
@@ -12237,7 +12443,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Safe work sample (entirely fictional experimental data): For a fictional research question, spend 60 minutes outlining hypotheses and protocols, aseptic and biosafety practices, data quality controls, statistical analysis and limitations, and situations requiring confirmation by authorized people. Do not use real pathogens or restricted samples."
+              "Practice on the fictional MB-18 record check in section 09. No specimen, lab equipment, or pathogen is used."
             ]
           },
           "id": "microbiologists.quick-decision.fermat-decision-card.4",
@@ -12321,7 +12527,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Research inputs: Official description, tasks, work context, and interest code (IRC) for O*NET 19-1022.00, plus BLS 2025 wages and 2024—2034 employment projections for this occupation. Verify preparation levels against employer and institutional rules. These do not establish mainland Chinese qualifications, wages, or employment scope."
+              "For Microbiologists (19-1022), BLS Table 1.2 reports a May 2025 median annual wage of $87,990. It lists 20,100 U.S. jobs in 2025, 21,400 projected in 2035 (+6.2%), and 1,500 projected annual openings on average, including replacements."
             ]
           },
           "id": "microbiologists.profile.onet-structured-fields-block.5",
@@ -12427,7 +12633,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Difference from laboratory technicians: They focus on clinical sample testing and reporting; this occupation centers on research experiments."
+              "Compare this path if you want to explain a molecular mechanism, whether or not the system is microbial."
             ]
           },
           "id": "microbiologists.direction-comparison.adjacent-career-comparison-table.5",
@@ -12569,7 +12775,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China has no separately listed public occupational wages for this occupation: A bounded search of National Bureau of Statistics methods and public definitions in this round did not obtain a national occupational wage distribution exactly matching O*NET 19-1022.00. This page therefore does not generate an exact Chinese median, percentiles, or stable monthly pay."
+              "This review did not find a national occupational wage series for mainland China: A bounded search of National Bureau of Statistics methods and public definitions in this round did not obtain a national occupational wage distribution exactly matching O*NET 19-1022.00. This page therefore does not generate an exact Chinese median, percentiles, or stable monthly pay."
             ]
           },
           "id": "microbiologists.china-salary.career-snapshot-primary-locale.1",
@@ -12647,7 +12853,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. occupation 19-1022.00: 2025 wages and 2025—2035 projections; not starting pay, Chinese wages, or personal guarantees."
+              "Employment projections are not current vacancies or a guarantee."
             ]
           },
           "id": "microbiologists.us-salary.career-snapshot-secondary-locale.1",
@@ -12675,7 +12881,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. 19-1022.00: Employment in 2025—2035 is projected to move from 20,100→21,400, +6%, a net change of +1,300. Average annual openings of 1,500 include growth and replacement demand. The overall projection does not establish AI causality."
+              "U.S. 19-1022.00: Employment in 2025—2035 is projected to move from 20,100→21,400, +6.2%, a net change of +1,300. Average annual openings of 1,500 include growth and replacement demand. The overall projection does not establish AI causality."
             ]
           },
           "id": "microbiologists.us-salary.career-snapshot-secondary-locale.3",
@@ -12944,12 +13150,12 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This page has not collected actual job advertisements. The following are editorial ability stages and qualification checking suggestions, not recruitment sample statistics, hiring guarantees, or fixed timelines."
+              "The CAS Northeast Institute of Geography and Agroecology posted a soil microbiology project role on September 7, 2026. It lists microbiology or molecular lab skills or bioinformatics analysis. This is one project’s hiring notice; check actual availability with the employer."
             ]
           },
           "id": "microbiologists.path.recruitment-sample.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "cn-cas-soil-microbiology"
           ],
           "type": "notice"
         },
@@ -12963,6 +13169,13 @@
               "career.column.boundary",
               "career.column.evidence",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Stage",
+              "Tasks",
+              "Scope",
+              "Evidence",
+              "Next step"
             ],
             "rows": [
               [
@@ -13038,7 +13251,8 @@
           },
           "id": "microbiologists.path.employer-evidence.3",
           "source_refs": [
-            "onet-cert"
+            "onet-cert",
+            "bls-microbiology-ooh-entry"
           ],
           "type": "cards"
         },
@@ -13081,6 +13295,12 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "Scenario",
+              "Action",
+              "Review",
+              "Deliverable"
+            ],
             "rows": [
               [
                 "Interview preparation",
@@ -13122,30 +13342,56 @@
               {
                 "id": "microbiologists.trial.day1",
                 "values": [
-                  "Days 1—2",
-                  "Understand the research question, experiment, and biosafety requirements."
+                  "Day 1",
+                  "Start W-MB. A new fictional archive needs a matching batch ID and a dated version log. Copy the rules and IDs U2 and U3."
                 ]
               },
               {
                 "id": "microbiologists.trial.day3",
                 "values": [
-                  "Days 3—5",
-                  "Complete analysis and safety recording exercises using entirely fictional data."
+                  "Day 2",
+                  "U2 has two records marked U2; U3 has a sheet marked U3 and a log marked U8. Record both."
                 ]
               },
               {
                 "id": "microbiologists.trial.day7",
                 "values": [
-                  "Days 6—7",
-                  "Ask others to challenge methods and interpretation; write evidence for continuing, stopping, or changing direction."
+                  "Day 3",
+                  "U2 has a dated version note. U3 has only an undated note. Write one evidence line each."
+                ]
+              },
+              {
+                "id": "microbiologists.trial.extra4",
+                "values": [
+                  "Day 4",
+                  "Ask the fictional archive reviewer a question about the U3 originals."
+                ]
+              },
+              {
+                "id": "microbiologists.trial.extra5",
+                "values": [
+                  "Day 5",
+                  "Prepare two handoff lines and state what remains unresolved."
+                ]
+              },
+              {
+                "id": "microbiologists.trial.extra6",
+                "values": [
+                  "Day 6",
+                  "Work alone: recheck your handoff against the Day 1 rule and Days 2–3 records. Peer feedback is optional afterward."
+                ]
+              },
+              {
+                "id": "microbiologists.trial.extra7",
+                "values": [
+                  "Day 7",
+                  "Name what you enjoyed and one documentation skill you want to practice."
                 ]
               }
             ]
           },
           "id": "microbiologists.path.seven-day-trial.6",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
+          "title": "Seven-day paper trial: a separate case",
           "type": "timeline"
         },
         {
@@ -13160,6 +13406,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Category",
+              "Evidence",
+              "Verifying party",
+              "Conditions",
+              "Limits",
+              "Responsible party",
+              "Next step"
             ],
             "rows": [
               [
@@ -13220,7 +13475,8 @@
           },
           "id": "microbiologists.path.credential-decision.7",
           "source_refs": [
-            "onet-cert"
+            "onet-cert",
+            "bls-microbiology-ooh-entry"
           ],
           "type": "table"
         },
@@ -13251,6 +13507,67 @@
             "source-pack-onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials: MB-18 (about 10 minutes)",
+                  "A fictional lab archive requires the same study ID on two forms and a dated reviewer entry.",
+                  "M4 has two forms labeled M4 and a dated review. M5 has forms labeled M5 and M8 and a dated review.",
+                  "Only the archive reviewer can resolve mismatches. Use paper records only."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Write an evidence line for each record and one question for the reviewer.",
+                  "Name who resolves the mismatch."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Answer key",
+                  "M4 meets both conditions. M5 has a dated review but conflicting IDs.",
+                  "Hold M5 and ask the reviewer to check the original forms."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Check both IDs, the two conditions, and who can resolve missing evidence."
+                ]
+              }
+            ]
+          },
+          "id": "microbiologists.path.entry-work-sample-data.1",
+          "title": "MB-18: Check a Microbial Study Log",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "I listed both IDs.",
+              "I checked both conditions.",
+              "I left missing evidence unresolved.",
+              "I named the reviewer.",
+              "I used fictional records only.",
+              "I could recheck independently.",
+              "I identified one skill to practice."
+            ]
+          },
+          "id": "microbiologists.path.seven-day-decision.1",
+          "title": "Judgment questions after seven days",
+          "type": "list"
         }
       ]
     },
@@ -13265,7 +13582,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 19-1022.00: Employment in 2025—2035 is projected to move from 20,100→21,400, +6%, a net change of +1,300. Average annual openings of 1,500 include growth and replacement demand. The overall projection does not establish AI causality."
+              "U.S. 19-1022.00: Employment in 2025—2035 is projected to move from 20,100→21,400, +6.2%, a net change of +1,300. Average annual openings of 1,500 include growth and replacement demand. The overall projection does not establish AI causality."
             ]
           },
           "id": "microbiologists.market-signals.market-signal-card.1",
@@ -13293,7 +13610,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035 projections; this page has not collected actual job advertisements and provides no national demand rate."
+              "U.S. projections cover 2025–2035. The linked CAS notice illustrates one employer's requirements and cannot establish a national demand rate."
             ]
           },
           "id": "microbiologists.market-signals.market-signal-card.3",
@@ -13353,12 +13670,15 @@
                 ]
               },
               {
-                "answer": "This occupation centers on microbial experiments and research; medical scientists focus on human disease research, biochemists on molecular and biochemical mechanisms, and laboratory technicians on clinical sample testing. Similar titles do not make duties, qualifications, or authority interchangeable.",
+                "answer": "This occupation centers on microbial experiments and research; medical scientists focus on human disease research, biochemists on molecular and biochemical mechanisms, and clinical laboratory technicians on clinical sample testing. Similar titles do not make duties, qualifications, or authority interchangeable.",
                 "id": "microbiologists.faq.2",
                 "question": "How does this occupation differ from adjacent occupations?",
                 "question_key": "career.faq.microbiologists.2",
                 "source_refs": [
-                  "source-pack-onet-summary"
+                  "source-pack-onet-summary",
+                  "mb-adj-medical-scientists",
+                  "mb-adj-biochemistry",
+                  "mb-adj-clinical-lab"
                 ]
               },
               {
@@ -13398,21 +13718,23 @@
                 ]
               },
               {
-                "answer": "BLS 2025 wage data: Median annual pay $87,990 (about $42.30 / hour), 10th percentile $54,670, 25th percentile $67,100, 75th percentile $122,350, and 90th percentile $150,000. These figures cover O*NET 19-1022.00; percentiles do not represent individual take-home income.",
+                "answer": "For Microbiologists (19-1022), BLS Table 1.2 reports a May 2025 median annual wage of $87,990. It lists 20,100 U.S. jobs in 2025, 21,400 projected in 2035 (+6.2%), and 1,500 projected annual openings on average, including replacements.",
                 "id": "microbiologists.faq.7",
                 "question": "What U.S. wage evidence is available?",
                 "question_key": "career.faq.microbiologists.7",
                 "source_refs": [
-                  "source-pack-onet-localwages"
+                  "source-pack-onet-localwages",
+                  "bls-table-1-2"
                 ]
               },
               {
-                "answer": "This U.S. occupation usually requires at least a bachelor's degree, with master's or doctoral degrees predominant, plus laboratory and biosafety training. Mainland China's education, laboratory, and biosafety boundaries follow employer and competent authority rules. A degree does not equal biosafety or sign-off authority.",
+                "answer": "BLS identifies a bachelor's degree in microbiology or a related field as the typical U.S. entry route. Some employers prefer a master's or Ph.D., and some positions may require one; check the laboratory and biosafety training expected for the role. Mainland China's education, laboratory, and biosafety boundaries follow employer and competent authority rules. A degree does not equal biosafety or sign-off authority.",
                 "id": "microbiologists.faq.8",
                 "question": "What are typical entry and training pathways?",
                 "question_key": "career.faq.microbiologists.8",
                 "source_refs": [
-                  "onet-cert"
+                  "onet-cert",
+                  "bls-microbiology-ooh-entry"
                 ]
               }
             ]
@@ -13457,28 +13779,28 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Microbiologists",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Microbiologists",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Microbiologists",
+                "entity": "Molecular and cellular biologists",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/career/jobs/molecular-and-cellular-biologists"
               },
               {
-                "entity": "Microbiologists",
+                "entity": "Medical scientists",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/career/jobs/medical-scientists-except-epidemiologists"
               },
               {
                 "entity": "Microbiologists",
@@ -13516,7 +13838,7 @@
                 "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
                 "period": "ILO 2025; accessed 2026-08-31",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -13531,7 +13853,7 @@
                 "name": "Average Annual Wages of Persons Employed in Urban Units in 2025",
                 "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
                 "publisher": "National Bureau of Statistics of China",
-                "scope": "industry_proxy",
+                "scope": "Average Annual Wages of Persons Employed in Urban Units in 2025",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
@@ -13601,10 +13923,10 @@
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
-                "limitation": "Projection is not a hiring guarantee; parent data are not exact occupation counts.",
+                "limitation": "Current employment figures are shown in BLS Table 1.2.",
                 "market": "US",
                 "name": "National Employment Trends 19-1022.00 Microbiologists",
-                "period": "current O*NET/BLS employment data; accessed 2026-08-31",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/19-1022.00"
@@ -13670,7 +13992,7 @@
                 "url": "https://www.onetonline.org/link/hot_tech/19-1022.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
@@ -13679,7 +14001,7 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "Industries: 19-1022.00 - Microbiologists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Displayed by O*NET; read on 2026-11-10 (reference year not stated on this page)",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-1022.00"
@@ -13760,6 +14082,92 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "details": [
+                  "For Microbiologists (19-1022), BLS Table 1.2 reports a May 2025 median annual wage of $87,990. It lists 20,100 U.S. jobs in 2025, 21,400 projected in 2035 (+6.2%), and 1,500 projected annual openings on average, including replacements."
+                ],
+                "id": "bls-table-1-2",
+                "limitation": "For Microbiologists (19-1022), BLS Table 1.2 reports a May 2025 median annual wage of $87,990. It lists 20,100 U.S. jobs in 2025, 21,400 projected in 2035 (+6.2%), and 1,500 projected annual openings on average, including replacements.",
+                "market": "US",
+                "name": "BLS Table 1.2 (19-1022)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "Microbiologists (19-1022)",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "One project recruitment notice mentions soil microbiology work and microbiology, molecular laboratory or bioinformatics skills."
+                ],
+                "id": "cn-cas-soil-microbiology",
+                "limitation": "One project recruitment notice mentions soil microbiology work and microbiology, molecular laboratory or bioinformatics skills.",
+                "market": "CN",
+                "name": "Chinese Academy of Sciences soil microbiology recruitment",
+                "period": "2026",
+                "publisher": "Chinese Academy of Sciences",
+                "scope": "Chinese Academy of Sciences soil microbiology recruitment",
+                "url": "https://iga.cas.cn/temp/zp/202609/t20260907_8279136.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Typical entry education, employer preferences and certification context in the United States."
+                ],
+                "evidence_type": "Official occupational handbook",
+                "id": "bls-microbiology-ooh-entry",
+                "limitation": "Typical entry education, employer preferences and certification context in the United States.",
+                "market": "US",
+                "name": "BLS Microbiologists: How to Become One",
+                "period": "Read November 10, 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/microbiologists.htm#tab-4"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Research on human disease and health."
+                ],
+                "evidence_type": "Official source",
+                "id": "mb-adj-medical-scientists",
+                "limitation": "Research on human disease and health.",
+                "market": "US",
+                "name": "BLS Medical Scientists",
+                "period": "Read November 10, 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/medical-scientists.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Chemical and physical processes of living things."
+                ],
+                "evidence_type": "Official source",
+                "id": "mb-adj-biochemistry",
+                "limitation": "Chemical and physical processes of living things.",
+                "market": "US",
+                "name": "BLS Biochemists and Biophysicists",
+                "period": "Read November 10, 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/biochemists-and-biophysicists.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Clinical laboratory testing and sample handling."
+                ],
+                "evidence_type": "Official source",
+                "id": "mb-adj-clinical-lab",
+                "limitation": "Clinical laboratory testing and sample handling.",
+                "market": "US",
+                "name": "BLS Clinical Laboratory Technologists and Technicians",
+                "period": "Read November 10, 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/healthcare/clinical-laboratory-technologists-and-technicians.htm"
               }
             ]
           },
@@ -13805,24 +14213,24 @@
         },
         "evidence_links": [
           {
-            "href": "https://www.onetonline.org/link/summary/29-2072.00",
-            "label": "29-2072.00 Medical Records Specialists"
+            "href": "https://www.bls.gov/ooh/life-physical-and-social-science/microbiologists.htm",
+            "label": "BLS: Microbiologists"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-2072.00",
-            "label": "Medical Records Specialists detailed occupation profile"
+            "href": "https://www.bls.gov/ooh/life-physical-and-social-science/biochemists-and-biophysicists.htm",
+            "label": "BLS: Biochemists and Biophysicists"
           },
           {
-            "href": "https://www.onetonline.org/link/industry/29-2072.00",
-            "label": "Industries: 29-2072.00 - Medical Records Specialists"
+            "href": "https://www.bls.gov/ooh/life-physical-and-social-science/medical-scientists.htm",
+            "label": "BLS: Medical Scientists"
           },
           {
-            "href": "https://www.onetonline.org/link/custom/29-2072.00",
-            "label": "29-2072.00 - Medical Records Specialists"
+            "href": "https://www.bls.gov/ooh/healthcare/clinical-laboratory-technologists-and-technicians.htm",
+            "label": "BLS: Clinical Laboratory Technologists and Technicians"
           },
           {
-            "href": "https://www.onetonline.org/link/localtrends/29-2072.00",
-            "label": "National Employment Trends 29-2072.00 Medical Records Specialists"
+            "href": "https://www.bls.gov/ooh/life-physical-and-social-science/biological-technicians.htm",
+            "label": "BLS: Biological Technicians"
           }
         ],
         "evidence_note": {
@@ -13852,38 +14260,26 @@
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "核心工作与产出": "Design and maintain health information systems and data standards, producing system plans and data governance rules.",
-            "职业方向": "Health Informatics Specialists"
+            "核心工作与产出": "Study chemical and physical processes in living systems; report molecular or biochemical findings.",
+            "职业方向": "Biochemists and Biophysicists"
           },
           {
-            "关键区别": "Focuses on general document lifecycles, without clinical coding or privacy disclosure responsibilities.",
-            "更适合什么选择": "Compare record lifecycle responsibilities.",
-            "核心工作与产出": "Manage organizational documents and record lifecycles, producing archiving, retention, and retrieval standards.",
-            "职业方向": "Document Management Specialists"
+            "关键区别": "Health outcomes and disease are central; microbial work can overlap in infection research.",
+            "更适合什么选择": "Compare this path if your main question is about human health.",
+            "核心工作与产出": "Study human disease or interventions; report findings from research and trials.",
+            "职业方向": "Medical Scientists"
           },
           {
-            "关键区别": "Focuses on organizational and process analysis, without record integrity or coding compliance responsibilities.",
-            "更适合什么选择": "Compare analysis and process objects.",
-            "核心工作与产出": "Analyze business processes and organizational problems, producing improvement plans and decision support.",
-            "职业方向": "Management Analysts"
+            "关键区别": "Clinical testing serves patient care; research experiments may use different methods and reporting chains.",
+            "更适合什么选择": "Compare the specimen, reporting duty, and role qualifications.",
+            "核心工作与产出": "Test clinical specimens and document results under laboratory procedures.",
+            "职业方向": "Clinical Laboratory Technologists and Technicians"
           },
           {
-            "关键区别": "Focuses on clinical diagnosis, treatment, and care, requiring corresponding professional qualifications and supervision.",
-            "更适合什么选择": "Compare the division between clinical work and coding.",
-            "核心工作与产出": "Participate in diagnosis, treatment, and medical record documentation under supervision, producing clinical assessments and treatment records.",
-            "职业方向": "Physician Assistants"
-          },
-          {
-            "关键区别": "Focuses on direct care, requiring licensure and clinical authorization.",
-            "更适合什么选择": "Compare the division between care and records.",
-            "核心工作与产出": "Perform nursing and patient care, producing shift care and nursing records.",
-            "职业方向": "Registered Nurses"
-          },
-          {
-            "关键区别": "Similar names do not make duties, qualifications, or authority interchangeable.",
-            "更适合什么选择": "Check qualifications and authorization chains individually.",
-            "核心工作与产出": "O*NET related occupations also include Medical and Health Services Managers and Medical Secretaries.",
-            "职业方向": "Associated and related occupations"
+            "关键区别": "The emphasis is on carrying out and documenting assigned lab work; compare who sets the research question and interprets the results.",
+            "更适合什么选择": "Compare this path if you want hands-on lab work and supervised research support.",
+            "核心工作与产出": "Set up lab equipment and assist with experiments; keep sample and test records.",
+            "职业方向": "Biological Technicians"
           }
         ],
         "transition": "Adjacent relationships are for comparing directions only; they do not imply automatic transfers or mutual recognition of qualifications."
@@ -14030,7 +14426,7 @@
             "使用限制": "Supports only the corresponding task, context, or statistical scope; does not prove AI effects",
             "来源": "Employment projections",
             "研究对象": "U.S. 19-1022.00",
-            "结论": "U.S. 19-1022.00: Employment in 2025—2035 is projected to move from 20,100→21,400, +6%, a net change of +1,300. Average annual openings of 1,500 include growth and replacement demand. The overall projection does not establish AI causality.",
+            "结论": "U.S. 19-1022.00: Employment in 2025—2035 is projected to move from 20,100→21,400, +6.2%, a net change of +1,300. Average annual openings of 1,500 include growth and replacement demand. The overall projection does not establish AI causality.",
             "链接": "https://www.onetonline.org/link/localtrends/19-1022.00"
           },
           {
@@ -14066,38 +14462,38 @@
         "questions": [
           {
             "回答": "Generative AI adoption and job causality were not obtained for this occupation. Overall projections are not layoff timetables.",
-            "来源": "29-2072.00 Medical Records Specialists",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00",
+            "来源": "ILO: occupational exposure method",
+            "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
             "问题": "Will AI replace microbiologists?"
           },
           {
             "回答": "Only as leads requiring checking. Professionals must verify methods, controls, and identification evidence.",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00",
+            "来源": "O*NET: microbiologists’ tasks",
+            "链接": "https://www.onetonline.org/link/summary/19-1022.00#Tasks",
             "问题": "Can image recognition directly confirm a microbial species?"
           },
           {
             "回答": "No. Check actual materials, levels, facilities, personnel, and approved procedures separately. Model text does not authorize experiments.",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00",
+            "来源": "BLS: microbiologists’ work and safety context",
+            "链接": "https://www.bls.gov/ooh/life-physical-and-social-science/microbiologists.htm",
             "问题": "Can a model's culture protocol be executed directly?"
           },
           {
             "回答": "Use approved data to check statistical assumptions and results, retain versions and review, and do not conceal failures or deviations.",
-            "来源": "29-2072.00 Medical Records Specialists",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00",
+            "来源": "NIST: AI Risk Management Framework",
+            "链接": "https://www.nist.gov/itl/ai-risk-management-framework",
             "问题": "How should analysis code be used?"
           },
           {
             "回答": "Research and laboratory services do not automatically grant clinical diagnostic authority. Verify jurisdiction and job duties.",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00",
+            "来源": "BLS: clinical laboratory roles (U.S. context)",
+            "链接": "https://www.bls.gov/ooh/healthcare/clinical-laboratory-technologists-and-technicians.htm",
             "问题": "Can research results directly provide a diagnosis?"
           },
           {
             "回答": "Check human-origin / sample information, sharing purposes, and institutional data access rules.",
-            "来源": "Industries: 29-2072.00 - Medical Records Specialists",
-            "链接": "https://www.onetonline.org/link/industry/29-2072.00",
+            "来源": "NIST: AI Risk Management Framework",
+            "链接": "https://www.nist.gov/itl/ai-risk-management-framework",
             "问题": "Can data be uploaded to a public model?"
           },
           {
@@ -14216,7 +14612,7 @@
         },
         "competence_ladder": [
           {
-            "description": "Confirm patient identity, encounter records, and sources.",
+            "description": "Check study and sample identifiers against the original lab records. Log missing or inconsistent evidence for review.",
             "stage": "Check inputs"
           },
           {
@@ -14265,6 +14661,12 @@
             "id": "faa",
             "label": "Duty scope | 19-1022.00",
             "scope": "U.S. occupational background; check Chinese qualifications and actual jobs separately"
+          },
+          {
+            "href": "https://iga.cas.cn/temp/zp/202609/t20260907_8279136.html",
+            "id": "cn-cas-soil-microbiology",
+            "label": "Chinese Academy of Sciences soil microbiology recruitment",
+            "scope": "One project recruitment notice mentions soil microbiology work and microbiology, molecular laboratory or bioinformatics skills."
           }
         ],
         "tracks": [
@@ -14434,7 +14836,7 @@
             }
           },
           {
-            "answer": "Abilities and work practices: Medical and coding knowledge is needed, along with checking against standard classification systems and manuals, attention to record completeness and privacy, and accuracy under repetitive tasks and time pressure.",
+            "answer": "Check that study and sample identifiers match across the original records. Document any deviation, what remains unresolved and who can review it. Use MB-18 in section 09 to try this on fictional forms.",
             "key": "qa2",
             "question": "How can you tell whether this work forms a complete cycle?",
             "table": {
@@ -14485,7 +14887,7 @@
             }
           },
           {
-            "answer": "Qualification and compliance boundaries: This U.S. occupation usually requires at least a bachelor's degree, with master's or doctoral degrees predominant. Verify mainland China's education, laboratory, and biosafety boundaries against employer and competent authority rules. A degree does not equal biosafety or sign-off authority.",
+            "answer": "Qualification and compliance boundaries: BLS identifies a bachelor's degree in microbiology or a related field as the typical U.S. entry route. Some employers prefer a master's or Ph.D., and some positions may require one. Verify mainland China's education, laboratory, and biosafety boundaries against employer and competent authority rules. A degree does not equal biosafety or sign-off authority.",
             "key": "qa1",
             "question": "Qualification boundaries",
             "table": {
@@ -14752,7 +15154,7 @@
           },
           "china_open": "Public duty and skill information can support career exploration but cannot establish Chinese market wages.",
           "china_open_note": "For wage judgments, check the specific city, employer, job level, and publicly advertised conditions.",
-          "china_ref": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure｜https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+          "china_ref": "Average Annual Wages of Persons Employed in Urban Units in 2025 | https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "china_salary_note": {
             "$join": [
               "Exact occupational wages and uniform starting pay were not obtained. The 2025 scientific research and technical services figures of 182,064 yuan / year for non-private and 83,560 yuan / year for private employers match only industry pre-tax annual averages for employers in that industry, not an occupational median.",
@@ -14785,7 +15187,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure｜https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+          "sources_note": "Average Annual Wages of Persons Employed in Urban Units in 2025 | https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "ui": {
             "ai_heading": "Tool and responsibility boundaries",
             "driver_heading": "Influencing factors",
@@ -14801,7 +15203,7 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure｜https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+        "authority_sources": "BLS Occupational Outlook Handbook: May 2025 industry pay | https://www.bls.gov/ooh/life-physical-and-social-science/microbiologists.htm",
         "bls_table": [
           {
             "指标": "10th wage percentile",
@@ -14835,7 +15237,7 @@
           },
           {
             "指标": "Employment outlook 2025—2035",
-            "数值": "+6%（2025—2035）",
+            "数值": "20,100 → 21,400 jobs",
             "说明": "This U.S. occupation | https://www.onetonline.org/link/localtrends/19-1022.00"
           },
           {
@@ -14847,7 +15249,7 @@
         "boundary": "U.S. data apply only to microbiologists for the stated periods. They cannot be extrapolated to China or guarantee individual income or hiring.",
         "direct_answer": {
           "$join": [
-            "All five 2025 percentiles and direct hourly rates were checked; the median is not starting pay or an individual offer.",
+            "For Microbiologists (19-1022), BLS Table 1.2 reports a May 2025 median annual wage of $87,990. It lists 20,100 U.S. jobs in 2025, 21,400 projected in 2035 (+6.2%), and 1,500 projected annual openings on average, including replacements.",
             {
               "$item": "microbiologists.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -14872,33 +15274,38 @@
           }
         ],
         "factors_heading": "Factors affecting actual offers",
-        "growth": "+6%",
+        "growth": "6.2% projected growth",
         "heading": "U.S. Wage and Employment Data Boundaries for Microbiologists",
         "industry_heading": "Industry and role differences",
-        "industry_period": "2025",
+        "industry_period": "May 2025",
         "industry_rows": [
           {
-            "industry": "Government (excluding state / local education and hospitals)",
+            "industry": "Government, excluding state and local education and hospitals",
             "median": "$105,880 / year",
             "note": "BLS2025 industry median wage for this occupation; detailed industry definitions differ from O*NET employment industry shares"
           },
           {
-            "industry": "Physical, engineering, and life sciences R&D",
+            "industry": "Research and development in physical, engineering, and life sciences",
             "median": "$105,110 / year",
             "note": "BLS2025 industry median wage for this occupation; detailed industry definitions differ from O*NET employment industry shares"
           },
           {
-            "industry": "Pharmaceutical manufacturing",
+            "industry": "Pharmaceutical and medicine manufacturing",
             "median": "$83,770 / year",
             "note": "BLS2025 industry median wage for this occupation; detailed industry definitions differ from O*NET employment industry shares"
           },
           {
-            "industry": "State universities and colleges",
+            "industry": "Colleges, universities, and professional schools; state",
             "median": "$67,960 / year",
+            "note": "BLS2025 industry median wage for this occupation; detailed industry definitions differ from O*NET employment industry shares"
+          },
+          {
+            "industry": "Testing laboratories and services",
+            "median": "$59,470 / year",
             "note": "BLS2025 industry median wage for this occupation; detailed industry definitions differ from O*NET employment industry shares"
           }
         ],
-        "industry_value_label": "Job data",
+        "industry_value_label": "Annual median wage",
         "interpretation_heading": "How to interpret",
         "interpretation_rows": [
           {
@@ -15020,8 +15427,8 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "Suited to people who can design and conduct reproducible experiments, follow biosafety standards, and draw conclusions from data rather than expectations.",
-        "title": "What kind of person may fit Microbiologists?"
+        "summary": "Consider microbiology if you enjoy tracing sample identifiers, comparing logs and explaining why evidence should be checked before reporting.",
+        "title": "Who may enjoy being a microbiologist?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -15051,12 +15458,12 @@
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-sources",
+            "label": "Check the data sources"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "Compare related career directions"
           }
         ],
         "direct_answer": {
@@ -15115,7 +15522,7 @@
             "metric": "Employment size and change",
             "occupation_scope": "U.S. occupation 19-1022.00",
             "source_id": "ep",
-            "value": "20,100→21,400; +6%; net change +1,300"
+            "value": "20,100→21,400; +6.2%; net change +1,300"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15238,13 +15645,13 @@
             "alternate_value": null,
             "label": "U.S. employment (2025)",
             "secondary_value": null,
-            "value": "20,100 people"
+            "value": "20,100 jobs"
           },
           {
             "alternate_value": null,
             "label": "U.S. growth (2025—2035)",
             "secondary_value": null,
-            "value": "+6%; not attributed to AI"
+            "value": "+6.2%; not attributed to AI"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15425,44 +15832,44 @@
         "heading": "Fit signals, personality tool boundaries, and practical use",
         "questions": [
           {
-            "answer": "Microbiologists can use tools to assist information organization, but responsible people must still check actual adoption, authority, result release, and abnormality escalation.",
-            "question": "What abilities and work practices do microbiologists need?"
+            "answer": "Use MB-18 to compare two fictional archive records and draft a review question.",
+            "question": "What is a small way to try this work?"
           },
           {
-            "answer": "Microbiologists can use tools to assist information organization, but responsible people must still check actual adoption, authority, result release, and abnormality escalation.",
-            "question": "What abilities and work practices do microbiologists need?"
+            "answer": "Record whether the two study IDs match and whether the review entry is dated.",
+            "question": "What evidence goes in each line?"
           },
           {
-            "answer": "Microbiologists can use tools to assist information organization, but responsible people must still check actual adoption, authority, result release, and abnormality escalation.",
-            "question": "What abilities and work practices do microbiologists need?"
+            "answer": "The archive reviewer checks the original forms. Leave the discrepancy unresolved in your note.",
+            "question": "Who resolves an ID discrepancy?"
           },
           {
-            "answer": "Microbiologists can use tools to assist information organization, but responsible people must still check actual adoption, authority, result release, and abnormality escalation.",
-            "question": "What abilities and work practices do microbiologists need?"
+            "answer": "Compare both lines with the stated rule and the original fictional records before looking at the answer key.",
+            "question": "How do I recheck my answer?"
           },
           {
-            "answer": "Microbiologists can use tools to assist information organization, but responsible people must still check actual adoption, authority, result release, and abnormality escalation.",
-            "question": "What abilities and work practices do microbiologists need?"
+            "answer": "Use the separate seven-day case to check the supplied archive evidence and explain what needs review.",
+            "question": "What does W-MB add?"
           },
           {
-            "answer": "Microbiologists can use tools to assist information organization, but responsible people must still check actual adoption, authority, result release, and abnormality escalation.",
-            "question": "What abilities and work practices do microbiologists need?"
+            "answer": "The paper exercises need only the supplied fictional forms.",
+            "question": "Do I need any samples or lab equipment?"
           },
           {
-            "answer": "Microbiologists can use tools to assist information organization, but responsible people must still check actual adoption, authority, result release, and abnormality escalation.",
-            "question": "What abilities and work practices do microbiologists need?"
+            "answer": "Record each condition separately and leave the unresolved item open for the designated reviewer.",
+            "question": "What if a review entry is present but another condition fails?"
           },
           {
-            "answer": "Microbiologists can use tools to assist information organization, but responsible people must still check actual adoption, authority, result release, and abnormality escalation.",
-            "question": "What abilities and work practices do microbiologists need?"
+            "answer": "Notice whether you like checking small discrepancies and documenting them clearly. The exercise does not assess laboratory competence.",
+            "question": "What can this exercise tell me about fit?"
           },
           {
-            "answer": "Microbiologists can use tools to assist information organization, but responsible people must still check actual adoption, authority, result release, and abnormality escalation.",
-            "question": "What abilities and work practices do microbiologists need?"
+            "answer": "Use it to identify tasks you want to try, then compare it with your experience doing the fictional work.",
+            "question": "How should I read an interest profile?"
           },
           {
-            "answer": "Microbiologists can use tools to assist information organization, but responsible people must still check actual adoption, authority, result release, and abnormality escalation.",
-            "question": "What abilities and work practices do microbiologists need?"
+            "answer": "Check the employer’s methods, training, safety procedures and assigned responsibility before acting.",
+            "question": "What should I check for real lab work?"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -15578,7 +15985,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "English MBTI test"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -15588,7 +15995,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "English Big Five test"
+            "label": "Big Five personality test"
           },
           {
             "href": {
@@ -15598,7 +16005,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Chinese MBTI test"
+            "label": "Molecular and cellular biologists"
           },
           {
             "href": {
@@ -15608,7 +16015,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Chinese Big Five test"
+            "label": "Medical scientists"
           }
         ]
       },
@@ -15686,6 +16093,20 @@
         "id": "microbiologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "microbiologists.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "microbiologists.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -15779,7 +16200,7 @@
         "fact_id": "us-median",
         "market": "United States (Microbiologists 19-1022.00)",
         "measure": "2025 median annual pay",
-        "occupation_scope": "Occupational scope of O*NET 19-1022.00",
+        "occupation_scope": "Microbiologists (19-1022)",
         "period": "2025 wage data; accessed 2026-09-25",
         "source_refs": [
           "onet-wages"
@@ -15811,38 +16232,38 @@
       },
       {
         "derivation": null,
-        "display_value": "20,700 people (2024)",
+        "display_value": "20,100 jobs",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "2024 employment size",
-        "occupation_scope": "Occupational scope of O*NET 19-1022.00",
-        "period": "2024; accessed 2026-09-25",
+        "measure": "20,100 jobs",
+        "occupation_scope": "Microbiologists (19-1022)",
+        "period": "2025",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "bls-table-1-2"
         ]
       },
       {
-        "derivation": "O*NET national employment trends page: Growth of about 4% is projected for 2024—2034.",
-        "display_value": "Average (about 4%, 2024—2034)",
+        "derivation": null,
+        "display_value": "6.2%",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Projected employment growth",
-        "occupation_scope": "Occupational scope of O*NET 19-1022.00",
-        "period": "2024—2034; accessed 2026-09-25",
+        "measure": "6.2%",
+        "occupation_scope": "Microbiologists (19-1022)",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "bls-table-1-2"
         ]
       },
       {
-        "derivation": "Includes replacement demand.",
-        "display_value": "About 1,700 openings / year (2024—2034)",
+        "derivation": null,
+        "display_value": "1,500 projected annual openings",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Projected job openings (annual average)",
-        "occupation_scope": "Occupational scope of O*NET 19-1022.00",
-        "period": "2024—2034; accessed 2026-09-25",
+        "measure": "1,500 projected annual openings",
+        "occupation_scope": "Microbiologists (19-1022)",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "bls-table-1-2"
         ]
       },
       {
@@ -15888,31 +16309,31 @@
         "availability": "available",
         "fact_ref": "us-median",
         "key": "us_pay",
-        "label": "U.S. wage reference"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. projected growth (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment"
+        "label": "U.S. jobs in 2025"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual job openings"
+        "label": "U.S. projected annual openings"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China wage reference"
+        "label": "Mainland China: exact occupational wage not verified"
       }
     ]
   },
@@ -15920,14 +16341,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Microbiologists (O*NET 19-1022.00) study microbial growth, structure, development, and characteristics, including medical microbiology. U.S. BLS 2025 median annual pay was $87,990; employment was about 20,700 in 2024. Includes work context, risks, and entry pathways."
+      "text": "Explore microbiology work, U.S. wage and jobs data, a mainland China employer example, and a fictional study log exercise."
     },
     "title": {
       "availability": "available",
       "text": "Microbiologists: Duties, U.S. Wages, and Entry"
     }
   },
-  "source_content_sha256": "eb2f55176a7f2924c9d2b6a6d0a1bdd1ebf150865613376cf80fdb0c56c4ccb7",
+  "source_content_sha256": "b2b6cd281c5d7ebe64911c5c36898b9b964e8c99773fb189a326994c199e94d9",
   "subject": {
     "canonical_slug": "microbiologists",
     "name": "Microbiologists",

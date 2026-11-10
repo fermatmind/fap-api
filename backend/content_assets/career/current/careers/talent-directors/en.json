@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe whether you can distill criteria from a role description, compare candidates using performance evidence, schedule auditions accurately, and pass consistent information among directors, actors, and agents. Screening conclusions must be explainable, and data permissions and final decision authority must be confirmed first."
+              "Paper check | Compare a fictional role brief and audition schedule. Flag a session using an older brief and draft a version-check message to production. "
             ]
           },
           "id": "talent-directors.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24809,13 +24808,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Casting and talent directors find, audition, and evaluate performers for stage, film, or broadcast projects, organizing role requirements, performance evidence, schedules, and production conditions into candidate lists. The core work is screening and coordinating talent, not performing yourself, and not the same as an agent representing actors; final casting and contract authority depends on the project division of labor."
+              "Casting directors turn role requirements into audition materials, organize auditions and compare performers’ fit before sharing recommendations or a shortlist with production. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "talent-directors.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-27-2012.04"
           ],
           "type": "prose"
         }
@@ -25470,14 +25468,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can serve as a trial tool for data organization, invitation drafts, and schedule checking; whether it is accurate, how much it is actually adopted, and its employment impact are verified separately. The external materials used here supply no measured task-level quantitative score and shows a separate editorial estimate, without an unemployment probability. Role fit and final recommendations require human evidence and clear authority. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional role brief and audition schedule. Flag a session using an older brief and draft a version-check message to production."
             ]
           },
           "id": "talent-directors.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial",
-            "nist-genai2024",
-            "onet"
+            "transfer-onet-27-2012.04",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33450,6 +33447,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-27-2012.04",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 27-2012.04 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/27-2012.04"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38949,10 +38973,10 @@
       "text": "Casting and talent directors"
     }
   },
-  "source_content_sha256": "0294b9a57957a3fd50006eee3ae142c64b15aa6816f02e109993f295fabc455c",
+  "source_content_sha256": "92b5b4807ad54b8a98bc4bb02edc5c8af7bd6a1971d022f27deda43f9d40d7c3",
   "subject": {
     "canonical_slug": "talent-directors",
     "name": "Casting and talent directors",
-    "summary": "Casting and talent directors find, audition, and evaluate performers for stage, film, or broadcast projects, organizing role requirements, performance evidence, schedules, and production conditions into candidate lists. The core work is screening and coordinating talent, not performing yourself, and not the same as an agent representing actors; final casting and contract authority depends on the project division of labor."
+    "summary": "Casting directors turn role requirements into audition materials, organize auditions and compare performers’ fit before sharing recommendations or a shortlist with production."
   }
 }

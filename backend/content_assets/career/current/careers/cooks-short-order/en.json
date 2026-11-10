@@ -53,6 +53,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-short-huangpu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-short-mile": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -19491,56 +19497,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19548,7 +19518,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19561,7 +19531,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19574,7 +19544,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19587,7 +19557,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -22527,7 +22497,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Worth trying first: willing to take customer orders directly and serve quickly on the spot, able to handle several short tickets in parallel in the same period, and willing to take on the links between order taking, production, plating, delivery and payment."
+              "Worth trying: prepare quick items to order, time the items on a ticket to finish together, and hand them off. Check whether the assignment also involves taking orders, serving or payment."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.1",
@@ -22815,7 +22785,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Take the customer's order and record it as required → plan the work sequence for the same batch → take ingredients from the refrigerator as needed → label food with time and date → prepare sandwiches, carved meat, soups and salads → assemble the accompanying tableware and condiments"
+              "Review the short order and time the items on the same ticket. Prepare and label ingredients and gather utensils as required. Taking the order depends on the assignment."
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.camera.steps",
@@ -22955,7 +22925,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Take customer orders directly at a counter or short order station, prepare short-time dishes on the spot, deliver quickly to order and take payment where needed."
+              "Prepare quick dishes to order and hand them off. Some positions also take orders, serve at a counter or handle payments."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.primary",
@@ -23039,7 +23009,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Take the order → plan the sequence for the same batch → fry, grill and bake short-time dishes → take from the holding counter and plate → deliver and take payment → clean and rotate and restock."
+              "Check the ticket → time the items → cook, plate and hand off → clean and restock."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.primary",
@@ -23361,12 +23331,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Clean and restock and check expiry dates; hold back the affected food on an exception, check the batch and leave the outstanding items for handover, and resuming requires an applicable safety basis. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "Clean and restock and check expiry dates; hold back the affected food on an exception, check the batch and leave the outstanding items for handover, and resuming requires an applicable safety basis. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -23375,7 +23346,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "Order taking and work sequencing ｜ take orders and plan the sequence ｜ take customer orders directly and record them as required, group the dishes that must reach the table together in the same batch, and plan the order of work to the processing time limit."
+              "Short orders and timing | Sequence items by preparation time | Check the ticket and aim to hand off the items together. The station assignment determines who takes orders."
             ]
           },
           "id": "actors.display.responsibilities_block.01",
@@ -23557,12 +23528,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Currently responsibility for health and safety 28%/22%, very high and high, with 26% making daily decisions; consequences of error 28% serious / 21% fairly serious, with other responses not fully shown and no total filled in; it is not an accident rate. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "Currently responsibility for health and safety 28%/22%, very high and high, with 26% making daily decisions; consequences of error 28% serious / 21% fairly serious, with other responses not fully shown and no total filled in; it is not an accident rate. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.display.work_context_block.review",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -23812,12 +23784,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from short order cooks is the depth of dish processing and the output system: complete recipes requiring multiple steps; employment was 1,460,200 in 2024, and the O*NET growth category is “much faster than average (7% or higher)”."
+              "Restaurant cooks work to the menu, at assigned stations where the kitchen is divided that way. Short order cooks time the items on a ticket to finish together."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
           "source_refs": [
-            "onet"
+            "editor",
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23868,11 +23842,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is a fixed menu, mainly bulk heating, and usually no direct responsibility for complete preparation and drink making; employment was 669,500 in 2024, and the O*NET growth category is “decline (-14%)”."
+              "Fast food stations use standard procedures and dedicated equipment for a limited menu. A short order cook may take the ticket and cook to the customer’s request."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
           "source_refs": [
+            "adjacent-summary-35-2011",
             "onet"
           ],
           "type": "prose"
@@ -23910,12 +23885,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference is serving a fixed population to a cyclical menu, mainly in bulk, not to ordering customers; employment was 466,100 in 2024, and the O*NET growth category is “slower than average (1% to 2%)”."
+              "Cafeteria cooks generally prepare batches around meal schedules and expected headcount. Short order cooks plan work around customer orders."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
           "source_refs": [
-            "onet"
+            "adjacent-summary-35-2012",
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23952,11 +23929,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference is that there is no responsibility for production and delivery; employment was 902,700 in 2024, the O*NET growth category is “decline (-1% or lower)”, and it often serves as the entry point into the catering system."
+              "Food preparation workers mainly wash, cut, measure or stage ingredients. Check whether the employer also assigns orders or service."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.difference",
           "source_refs": [
+            "enrichment",
             "onet"
           ],
           "type": "prose"
@@ -23994,11 +23972,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is menu leadership and management responsibility: taking on menu design and cost accounting, and staff scheduling and training; the preparation level is Job Zone 3, and employment was 197,300 in 2024."
+              "Head cooks oversee menus, standards and staffing. A short order station mainly executes and hands off tickets."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
           "source_refs": [
+            "agent",
             "onet"
           ],
           "type": "prose"
@@ -24036,11 +24015,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is operational and people management responsibility: a median annual wage of 69,390 dollars (2025), employment of 352,800 in 2024, and the O*NET growth category “much faster than average (5% to 6%)”."
+              "Food service managers oversee shifts and operations. If you want to cook and sequence tickets, compare station-level responsibilities."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.difference",
           "source_refs": [
+            "teacher",
             "onet"
           ],
           "type": "prose"
@@ -24078,12 +24058,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The table below compares short order cooks with five adjacent directions across four items: career direction, core work and output, key differences, and which choice suits you better; employment and growth use U.S. O*NET-SOC measures (2024 employment, 2024—2034 projection)."
+              "Compare nearby roles by whom they serve, how orders arrive and when food is prepared."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.intro",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -24106,12 +24087,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Basis: O*NET OnLine 35-2015.00 and the summary pages and employment trend pages of adjacent occupations (2026 update); employment is for 2024 and growth uses the 2024—2034 projection period, and these are not used to infer an individual's chance of being hired or income."
+              "U.S. profiles provide task comparisons. Check the actual job duties rather than relying on the title."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.evidence_note",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -25627,7 +25609,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial control suggestion: check safe temperature and time against the applicable dish, equipment and current requirements and confirm with a food thermometer; customer doneness preferences, the senses and timer settings cannot prove food safety, and suspect contamination must not be tasted. For exceptions, hold back the affected food, and resuming requires an applicable safety basis; a supervisor's agreement does not equal safety; this round obtained no complete stop-and-resume procedure for every dish. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "Editorial control suggestion: check safe temperature and time against the applicable dish, equipment and current requirements and confirm with a food thermometer; customer doneness preferences, the senses and timer settings cannot prove food safety, and suspect contamination must not be tasted. For exceptions, hold back the affected food, and resuming requires an applicable safety basis; a supervisor's agreement does not equal safety; this round obtained no complete stop-and-resume procedure for every dish. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.4.description",
@@ -26123,12 +26105,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no verifiable statistics on short order cook job-posting pay offers; a single counter's or platform's offer cannot represent the national level"
+              "A snack cook listing in Mile asks for at least one year making specialty snacks and light meals and lists CNY 4,500–4,851 a month. A Huangpu cafeteria lists CNY 7,000 per month for its more senior snack cook role and CNY 5,000 per month for its junior role, with noodle preparation among the duties. Ask who takes orders, what is cooked to order and how tickets are sequenced at peak times. These are different settings, not a national pay range."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "short-mile",
+            "short-huangpu"
           ],
           "type": "prose"
         },
@@ -26151,12 +26134,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial study direction: check the real counter's training, stations and recruitment conditions, as this round has no national distribution of training forms or education. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "Editorial study direction: check the real counter's training, stations and recruitment conditions, as this round has no national distribution of training forms or education. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "sag-moa",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -28020,7 +28004,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Editorial control suggestion: check safe temperature and time against the applicable dish, equipment and current requirements and confirm with a food thermometer; customer doneness preferences, the senses and timer settings cannot prove food safety, and suspect contamination must not be tasted. For exceptions, hold back the affected food, and resuming requires an applicable safety basis; a supervisor's agreement does not equal safety; this round obtained no complete stop-and-resume procedure for every dish. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "Editorial control suggestion: check safe temperature and time against the applicable dish, equipment and current requirements and confirm with a food thermometer; customer doneness preferences, the senses and timer settings cannot prove food safety, and suspect contamination must not be tasted. For exceptions, hold back the affected food, and resuming requires an applicable safety basis; a supervisor's agreement does not equal safety; this round obtained no complete stop-and-resume procedure for every dish. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
@@ -28035,7 +28019,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
@@ -28364,7 +28348,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
@@ -28690,7 +28674,7 @@
                 "id": "employer-1",
                 "values": [
                   "Health management and food-safety conditions",
-                  "Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained.",
+                  "Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained.",
                   "No national distribution of education or certificate use was obtained, and that gap does not waive the applicable statutory health and food-safety training requirements."
                 ]
               },
@@ -28716,7 +28700,8 @@
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "title": "What employers usually check",
           "type": "cards"
@@ -28856,7 +28841,7 @@
                 "Counter personnel who directly handle food",
                 "Check the applicable group for statutory health and food-safety training",
                 "Handling directly consumed food requires an annual health certificate, and enterprise food-safety training follows the law",
-                "Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained.",
+                "Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained.",
                 "No nationally uniform duration, cost or specific procedure was obtained",
                 "A training record does not equal position authorisation; specific requirements follow the rules currently in force."
               ],
@@ -28902,7 +28887,8 @@
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "title": "How to choose training, qualifications and station authorisation",
           "type": "table"
@@ -28912,7 +28898,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "Education, the health certificate, training, skill grades and station authority are checked separately and cannot substitute for one another. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained.",
+              "Education, the health certificate, training, skill grades and station authority are checked separately and cannot substitute for one another. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained.",
               "O*NET Zone1–2/SVP below 6, and a few days to a year of on-the-job training is a level summary; the education responses are 66% high school, 14% below high school and 9% some college without a degree, which are not a Chinese threshold. The BLS entry for this job typically requires no formal credential, no related experience and short-term on-the-job training, which does not mean no learning or safety conditions are needed.",
               "The Chinese cuisine chef 4-03-02-01 occupational information lists junior high school or equivalent and Grades Five to One, and is a related entity's material rather than a uniform education requirement for all counters. The national distribution of certificate requirements and current assessment fee conditions were not obtained and remain gaps.",
               "Actual appointments are checked against the applicable regulations in force, recruitment and the assessment body's conditions, and do not constitute authorisation to hire or resume after an exception."
@@ -28922,7 +28908,8 @@
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "title": "Training, qualifications and the boundaries of work",
           "type": "notice"
@@ -28932,14 +28919,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial path: build on supervised prep, cleaning and order tasks and check against independent production and simultaneous sequencing, then explore multi-station work; this round has no national distribution of common routes or education. O*NET Zone1–2/SVP below 6, and a few days to a year of on-the-job training is a level summary; the education responses are 66% high school, 14% below high school and 9% some college without a degree, which are not a Chinese threshold. The BLS entry for this job typically requires no formal credential, no related experience and short-term on-the-job training, which does not mean no learning or safety conditions are needed. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "Editorial path: build on supervised prep, cleaning and order tasks and check against independent production and simultaneous sequencing, then explore multi-station work; this round has no national distribution of common routes or education. O*NET Zone1–2/SVP below 6, and a few days to a year of on-the-job training is a level summary; the education responses are 66% high school, 14% below high school and 9% some college without a degree, which are not a Chinese threshold. The BLS entry for this job typically requires no formal credential, no related experience and short-term on-the-job training, which does not mean no learning or safety conditions are needed. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.path.career-path-block.1",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -28964,14 +28952,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "U.S. codes and related Chinese entities are not one-to-one, and this round obtained no precise wages, so it is not inferred that China has no related occupation. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "U.S. codes and related Chinese entities are not one-to-one, and this round obtained no precise wages, so it is not inferred that China has no related occupation. Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.path.career-path-block.3",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -29405,14 +29394,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Education and skills are checked against real recruitment; Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "Education and skills are checked against real recruitment; Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -29485,14 +29475,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Education and skills are checked against real recruitment; Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "Education and skills are checked against real recruitment; Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.credentials",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -29741,14 +29732,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Education and skills are checked against real recruitment; Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "Education and skills are checked against real recruitment; Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -30077,14 +30069,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Education and skills are checked against real recruitment; Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Article 47 requires that where there is a potential food-safety incident risk, food production and operation must stop and be reported to the county-level regulatory department, and reporting only to the supervisor is not enough. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
+              "Education and skills are checked against real recruitment; Article 44 of the 2025 amendment to China's Food Safety Law covers food-safety knowledge training for enterprise employees and training and assessment for food-safety managers; Article 45 covers the annual health examination and certificate before taking up posts for those handling directly consumed food; Under Article 47, when there is a potential risk of a food safety incident, the food producer or operator must immediately stop food production and business activities and notify the local county-level food safety regulator. A short-order cook follows workplace procedures to withhold the affected food, record the batch and issue, and alert the supervisor immediately. The operating entity, health certificate, skill grades, training and station authority are checked separately; no national education and certificate penetration rate or uniform training duration was obtained."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -30985,7 +30978,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Take customer orders directly and prepare them to the short-time processing requirements, using the griddle, fryer and oven to make dishes such as chips, eggs, pancakes and patties, plan the work sequence to the order so that the same batch finishes at the same time, take dishes from the holding counter, plate them and deliver at the table or counter, prepare sandwiches, carved meat, soups and salads and bake or brew drinks, restock and rotate food and label refrigerated food with time and date, and clean food preparation equipment and work areas and counters; ordering and shelving stock and taking payment and change may also be required.",
+                "answer": "Prepare quick dishes such as eggs, pancakes or sandwiches to order. Sequence the items using the station’s equipment and hand off the completed dishes. Some jobs also involve taking orders, handling payment or serving customers.",
                 "id": "actors.faq.1",
                 "question": "What does the daily work of short order cooks involve?",
                 "question_key": "career.faq.cooks-short-order.1",
@@ -30994,7 +30987,7 @@
                 ]
               },
               {
-                "answer": "Short order cooks take customer orders directly at a counter and focus on short-time dishes delivered quickly to order; restaurant cooks serve continuously in a restaurant back-of-house to complete recipes with a wider dish range; fast food cooks heat and box in bulk to order in a limited-menu restaurant, with a single station and high repetition.",
+                "answer": "Short order cooks make quick items to order and may take orders at the counter. Restaurant cooks prepare some or all of the restaurant’s menu items. Fast food cooks prepare a limited menu using standard recipes. Duties can overlap by employer.",
                 "id": "actors.faq.2",
                 "question": "How do short order cooks differ from restaurant cooks and fast food cooks?",
                 "question_key": "career.faq.cooks-short-order.2",
@@ -31012,9 +31005,9 @@
                 ]
               },
               {
-                "answer": "What can be checked is change at the task level: three task groups — order, prep and inventory information, short-time production and service pace, and temperature, labelling and cleaning records — can be partly taken over by tools; this page has no occupation-specific adoption rate or displacement data.",
+                "answer": "Software or equipment can help organize orders, flag stock levels or run timers. These are possible uses. This page has no occupation-specific measurements of adoption, hours saved or jobs displaced.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of short order cooks is there evidence of AI-driven change?",
+                "question": "Which tasks could software or equipment help with?",
                 "question_key": "career.faq.cooks-short-order.4",
                 "source_refs": [
                   "onet"
@@ -31030,12 +31023,14 @@
                 ]
               },
               {
-                "answer": "In the United States the 2025 median hourly wage is 17.25 dollars and the median annual wage is 35,880 dollars (the single-occupation measure for 35-2015.00), with percentiles of 23,440/30,610/35,880/42,450/46,460 dollars a year; no occupation-level wage figures were obtained for mainland China, and this page treats this as a gap rather than filling it in with industry averages.",
+                "answer": "The 2025 U.S. occupational median was $17.25 an hour and $35,880 a year. The two mainland China listings on this page illustrate what individual employers offered; they do not establish an occupational wage distribution.",
                 "id": "actors.faq.6",
                 "question": "How much do short order cooks generally earn, and how should this be compared?",
                 "question_key": "career.faq.cooks-short-order.6",
                 "source_refs": [
-                  "oews"
+                  "r2-pay-3",
+                  "short-mile",
+                  "short-huangpu"
                 ]
               },
               {
@@ -31048,12 +31043,14 @@
                 ]
               },
               {
-                "answer": "There is no uniform mandatory licence in the United States; in mainland China health management and food-safety training are common prerequisites, and the Chinese cuisine chef skill grade is usually not a threshold for frontline counter positions, with specific requirements following the target outlet's and the competent authority's rules.",
+                "answer": "In mainland China, Article 45 of the Food Safety Law requires staff who handle ready-to-eat food to have an annual health check and obtain a health certificate before starting that work. This is separate from a cooking skill grade; check the employer’s requirements for skills, work samples and training. U.S. food-handler certification varies by state and locality.",
                 "id": "actors.faq.8",
                 "question": "Do you have to obtain a certificate to work as a short order cook?",
                 "question_key": "career.faq.cooks-short-order.8",
                 "source_refs": [
-                  "cn-rule"
+                  "cn-food-law",
+                  "cn-cook-profile-2022",
+                  "bls-family-context"
                 ]
               },
               {
@@ -31066,12 +31063,12 @@
                 ]
               },
               {
-                "answer": "U.S. official projections show the employment growth rate for this occupation over 2024—2034 as “decline (-1% or lower)”, with about 20,600 job openings over the projection period; a decline in the total still generates replacement openings continuously, and counter hours fluctuate with opening hours, so this should be checked against actual local demand.",
+                "answer": "BLS projects a 5.2% decline in U.S. short order cook employment from 2025 to 2035 and about 17,400 openings per year on average, including replacements. A decline in total employment can coexist with openings. For a local counter job, check how much is cooked to order, who takes tickets and when the busiest shifts run.",
                 "id": "actors.faq.10",
                 "question": "What else should be considered when choosing short order cooking as an occupation now?",
                 "question_key": "career.faq.cooks-short-order.10",
                 "source_refs": [
-                  "bls"
+                  "bls-projections"
                 ]
               }
             ]
@@ -31495,14 +31492,14 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Supports the tasks, work context and preparation levels of this occupation.",
                   "Does not include technology adoption or job displacement data."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "This occupation's summary and tasks: collecting payment, ordering ingredients and grilling and garnishing hamburger patties are Supplemental, while the other eight tasks are Core; current industry 78 accommodation and food services, 14 retail and 8 other with no year stated, without adoption causality.",
+                "limitation": "This occupation's summary and tasks: collecting payment, ordering ingredients and grilling and garnishing hamburger patties are Supplemental, while the other eight tasks are Core; current industry 78 accommodation and food services, 14 retail and 8 other with no data year shown on the O*NET industry table, without adoption causality.",
                 "market": "United States",
                 "name": "O*NET OnLine: Cooks, Short Order (35-2015.00) occupational profile",
                 "period": "Page updated in 2026; retrieved 2026-09-18",
@@ -31639,13 +31636,14 @@
                 "url": "https://www.onetonline.org/link/summary/11-9051.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Only supports the relevant passages actually read this round; articles not checked, jurisdictions and positions are verified separately."
+                  "Article 44 covers employee food safety training and training and assessment of food safety managers. Article 45 covers annual health examinations and certificates for staff who handle ready-to-eat food.",
+                  "Article 47 places the duty to halt food production and business activities and report to the local county-level food safety regulator on the food producer or operator when a potential incident risk exists."
                 ],
                 "evidence_type": "official source",
                 "id": "cn-food-law",
-                "limitation": "Article 44 of the 2025 amendment to China's Food Safety Law requires food production and business operators to provide food safety knowledge training to employees; Article 45 requires food production and business personnel who work with directly consumed food to undergo an annual health examination and to work only after obtaining a health certificate, and provides for restrictions on positions for those with diseases that impair food safety. Its scope of application is statutory production and business activities; it does not equate all cooking in private households with food service operations, nor does it treat a health certificate as a skill level or equipment permit. Articles 42/47/54—57 actually support traceability, self-inspection and suspension reporting, storage of raw materials and equipment, and canteen responsibility; individual job division of labor and technical limits are verified separately.",
+                "limitation": "Article 44 of the 2025 amendment to China's Food Safety Law requires food production and business operators to provide food safety knowledge training to employees; Article 45 requires food production and business personnel who work with directly consumed food to undergo an annual health examination and to work only after obtaining a health certificate, and provides for restrictions on positions for those with diseases that impair food safety. Its scope of application is statutory production and business activities; it does not equate all cooking in private households with food service operations, nor does it treat a health certificate as a skill level or equipment permit. At the station, cooks follow workplace procedures to withhold affected food, record issues and notify a supervisor. The operator’s statutory duty to stop activities and report is separate from these station procedures.",
                 "market": "Mainland China",
                 "name": "Food Safety Law (2025 amendment)",
                 "period": "2025 amendment, effective 2025-12-01; the articles actually relevant",
@@ -31857,10 +31855,10 @@
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet-industry",
-                "limitation": "Currently 78% accommodation and food services, 14% retail and 8% other; the page does not state a year, and these are not wages or specific sub-industry shares.",
+                "limitation": "The occupation summary labels its top industry categories 2025. The separate table reports employment shares without a data year. Shares are not wages.",
                 "market": "United States",
                 "name": "O*NET short order cooks industry employment distribution",
-                "period": "The current page does not state a year; read on 2026-10-09",
+                "period": "The industry table does not state a data year",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/35-2015.00"
@@ -31896,6 +31894,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The snack cook in listings 48–50: one position at CNY 4,500–4,851 per month, requiring at least one year of experience making specialty snacks and light meals."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "short-mile",
+                "limitation": "One posting, not a national wage estimate or confirmation that the vacancy remains open.",
+                "market": "Mainland China",
+                "name": "Mile, Yunnan: snack cook",
+                "period": "2026-06-30",
+                "publisher": "Mile Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hhml.gov.cn/info/35871/922982.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Listing 3 includes three regional snack cooks for a cafeteria at CNY 7,000 per month for the more senior role and CNY 5,000 for the junior role. It specifies noodle and rice noodle preparation but does not confirm order taking or service."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "short-huangpu",
+                "limitation": "One posting, not a national wage estimate or confirmation that the vacancy remains open.",
+                "market": "Mainland China",
+                "name": "Huangpu, Guangzhou: cafeteria snack cook",
+                "period": "2026-08-18",
+                "publisher": "Huangpu District Employment Service Center, Guangzhou",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzjg/qt/ldjyfwzx/kljy/content/post_10969476.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Overview and Tasks for comparing the adjacent occupation."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "adjacent-summary-35-2011",
+                "limitation": "Adjacent-role comparison only; not a source for this occupation’s wages or qualifications.",
+                "market": "United States",
+                "name": "Fast Food Cooks (35-2011.00)",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2011.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Overview and Tasks for comparing the adjacent occupation."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "adjacent-summary-35-2012",
+                "limitation": "Adjacent-role comparison only; not a source for this occupation’s wages or qualifications.",
+                "market": "United States",
+                "name": "Institution and Cafeteria Cooks (35-2012.00)",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2012.00"
               }
             ]
           },
@@ -34871,13 +34929,14 @@
           "china_soc_row": "U.S. 35-2015 wages and the employed population for this occupation are verified separately; related Chinese entities and employers are verified separately, and a precise occupational wage was not obtained.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-short-mile",
+            "posting-short-huangpu"
           ],
           "sources_note": "Source links are used according to their respective statistical or announcement scope; when the statistical period, survey subjects and pay basis differ they are cited separately, with no conversion between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect the wages of short order cooks?",
             "driver_heading": "Which settings make use of short order cooks?",
-            "official_heading": "Official statistical basis and missing data notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Educational background, position directions and notes (editorial compilation, not wage statistics)",
             "scenario_heading": "How should preparation directions be checked against target stall requirements?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35030,7 +35089,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "Current industry page with no year stated: 78%/14%/8%, accommodation and food services, retail and other",
+        "industry_period": "Current industry page with no data year shown on the O*NET industry table: 78%/14%/8%, accommodation and food services, retail and other",
         "industry_rows": [
           {
             "fact_ref": "industry-theater",
@@ -35076,7 +35135,7 @@
           },
           {
             "industry": "Employment classification basis",
-            "median": "Currently 78%/14%/8%, accommodation and food services, retail and other, with no year stated and not wages.",
+            "median": "Currently 78%/14%/8%, accommodation and food services, retail and other, with no data year shown on the O*NET industry table and not wages.",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -36637,7 +36696,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore the task interests and work preferences of short order cooks",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36749,14 +36808,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
             "label": "Explore my personality preferences"
@@ -37172,72 +37223,75 @@
       },
       {
         "derivation": null,
-        "display_value": "About 151,100 people (2024)",
+        "display_value": "138,700 people (2025)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment size (single-occupation basis)",
-        "occupation_scope": "Cooks, Short Order（O*NET-SOC 35-2015.00）",
-        "period": "2024; retrieved 2026-09-18",
+        "measure": "Base period employment",
+        "occupation_scope": "35-2015 short order cooks employment projection, not wages or a hiring rate",
+        "period": "2025—2035 (2025 base year); read on 2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline (2024—2034, -1% or lower)",
+        "display_value": "-5.2% (2025—2035; O*NET shows it as an integer -5%)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Employment change rate (single-occupation basis)",
-        "occupation_scope": "Cooks, Short Order (O*NET-SOC 35-2015.00); the O*NET classification label is 'Decline'",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "measure": "Employment change rate",
+        "occupation_scope": "35-2015 short order cooks employment projection, not wages or a hiring rate",
+        "period": "2025—2035 (2025 base year); read on 2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 20,600 (job openings within the 2024—2034 projection period, including growth and replacement needs)",
+        "display_value": "17,400/year (2025—2035 annual average, including replacement)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Job openings (single-occupation basis)",
-        "occupation_scope": "Cooks, Short Order (O*NET-SOC 35-2015.00); O*NET states that openings include growth needs and replacement needs",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "measure": "Annual average openings",
+        "occupation_scope": "35-2015 short order cooks employment projection, not wages or a hiring rate",
+        "period": "2025—2035 (2025 base year); read on 2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Accommodation and food services 78% (current industry page with no year stated, not wages)",
+        "display_value": "Accommodation and food services 78% (current industry page with no data year shown on the O*NET industry table, not wages)",
         "fact_id": "industry-theater",
         "market": "United States",
         "measure": "Industry employment share (not wages)",
         "occupation_scope": "35-2015 industry distribution, not further broken down and no sub-industry is guessed",
-        "period": "The current industry page does not state a year; read on 2026-10-09",
+        "period": "The industry table does not state a data year",
         "source_refs": [
           "onet-industry"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Retail trade 14% (current industry page with no year stated, not wages)",
+        "display_value": "Retail trade 14% (current industry page with no data year shown on the O*NET industry table, not wages)",
         "fact_id": "industry-education",
         "market": "United States",
         "measure": "Industry employment share (not wages)",
         "occupation_scope": "35-2015 industry distribution, not further broken down and no sub-industry is guessed",
-        "period": "The current industry page does not state a year; read on 2026-10-09",
+        "period": "The industry table does not state a data year",
         "source_refs": [
           "onet-industry"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Other industries 8% (current industry page with no year stated, not wages)",
+        "display_value": "Other industries 8% (current industry page with no data year shown on the O*NET industry table, not wages)",
         "fact_id": "industry-amusement",
         "market": "United States",
         "measure": "Industry employment share (not wages)",
         "occupation_scope": "35-2015 industry distribution, not further broken down and no sub-industry is guessed",
-        "period": "The current industry page does not state a year; read on 2026-10-09",
+        "period": "The industry table does not state a data year",
         "source_refs": [
           "onet-industry"
         ]
@@ -37320,7 +37374,7 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "derivation": "Editorial estimate on a 0–100 scale from three selected tasks. It is not a probability of replacement. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
         "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
@@ -37330,6 +37384,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The snack cook in listings 48–50: one position at CNY 4,500–4,851 per month, requiring at least one year of experience making specialty snacks and light meals.",
+        "fact_id": "posting-short-mile",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Mile, Yunnan: snack cook",
+        "period": "2026-06-30",
+        "source_refs": [
+          "short-mile"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Listing 3 includes three regional snack cooks for a cafeteria at CNY 7,000 per month for the more senior role and CNY 5,000 for the junior role. It specifies noodle and rice noodle preparation but does not confirm order taking or service.",
+        "fact_id": "posting-short-huangpu",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Huangpu, Guangzhou: cafeteria snack cook",
+        "period": "2026-08-18",
+        "source_refs": [
+          "short-huangpu"
+        ]
       }
     ]
   },
@@ -37338,7 +37416,7 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI task assistance estimate (editorial, three tasks)"
     },
     "badges": [
       "Service and food service · counter and short order stall production",
@@ -37356,19 +37434,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, decline of -1% or lower)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employed persons (2024, about 151,100 people)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. job openings (2024—2034, about 20,600)"
+        "label": "U.S. projected annual job openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37382,17 +37460,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Short order cooks (O*NET-SOC 35-2015.00) take orders at counters and short order stalls, prepare short-time dishes on site and deliver them: this covers frying and grilling, plating from the holding station, counter ordering and payment, preparing sandwiches, soups and beverages, food labeling and inventory rotation, and equipment and dining area cleaning; it includes the U.S. 2025 median hourly wage of 17.25 USD, the 2024—2034 growth rate 'decline (-1% or lower)' and about 20,600 job openings over the projection period, the mainland China occupation-level wage gap and the industry average proxy boundary, and burn and cut and food safety risk control plus the boundary of fictional exercises."
+      "text": "See how short order cooks time several tickets at once, how the work differs from fast food, and what U.S. projections and mainland China snack cook listings can tell you."
     },
     "title": {
       "availability": "available",
       "text": "Short order cooks"
     }
   },
-  "source_content_sha256": "51542cfe03fd006fbb4942297c5b81370a4774cbfd3d2de88da27ee8e9c024b0",
+  "source_content_sha256": "6b288f5b18f0e1cefe55a4c60a5ac45cef1d7ec13ceda98a2dc1a110b769f324",
   "subject": {
     "canonical_slug": "cooks-short-order",
     "name": "Short order cooks",
-    "summary": "Short order cooks (Cooks, Short Order) correspond in the United States to O*NET-SOC 35-2015.00: they take customer orders directly at counters, short order stalls and snack shops, prepare short-time fried, deep-fried and grilled dishes on site (such as French fries, eggs, pancakes and hamburgers), plate orders from the holding station and deliver them at tables or the counter, and may collect payment and make change at the same time; they also prepare sandwiches, soups and salads, bake bread or desserts, brew coffee and tea, and label refrigerated food by time and date, rotate inventory and restock. On the China side, related entities such as the Chinese cook (occupation code 4-03-02-01) are verified separately, and the two classification systems are not one-to-one equivalents."
+    "summary": "Short-order cooks prepare quick items to order and coordinate when items on the same ticket are ready. Work settings include counters and snack shops. Taking orders, payment and handoff depend on the employer. The U.S. occupation is O*NET-SOC 35-2015.00."
   }
 }

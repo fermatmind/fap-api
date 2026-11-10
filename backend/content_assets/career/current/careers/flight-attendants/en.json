@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a54-airchina": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a54-spring": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "pending_mapping"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:flight-attendants.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:flight-attendants.sources.source-card.1": {
         "status": "mapped"
@@ -19908,60 +19914,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "flight-attendants.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "flight-attendants.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22801,7 +22767,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Exercise scenario | A fully occupied flight on a hub route encounters sustained turbulence during cruise, followed by a passenger developing rapid breathing and refusing to fasten their seat belt. Draft a response by the flight attendant on duty from discovery through landing: (1) how to approach and stabilize the passenger while maintaining your own safety; (2) the sequence of instructions and announcements to other cabin passengers during turbulence; (3) what to report to the purser and flight deck, and when; (4) how to hand over to ground medical services, ground handling, and the company safety department after landing and retain an audit trail. Answer using public cabin safety materials and a simulated scenario, without any real flight or passenger information."
+              "Use the fictional seat and preorder records in CA31 for a one-page service handoff. Separate confirmed changes, shortages and questions for the lead flight attendant."
             ]
           },
           "id": "flight-attendants.quick-decision.fit-decision-checklist.2",
@@ -22868,7 +22834,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Safety work sample (an entirely fictional flight attendant task package): operate a domestic trunk-route flight lasting 3 hours and 20 minutes, with a passenger load factor of 92%. Before takeoff, check cabin emergency equipment (fire extinguishers, oxygen cylinders, first-aid kits, portable oxygen cylinders, and evacuation slide pressure gauges) and record checks on the checklist. After takeoff, complete the safety demonstration and cabin inspection in sequence and handle 3 passenger needs (infant bassinet installation, unaccompanied child handover, and food allergy explanations). Moderate turbulence occurs midway through cruise: make an announcement, stop service, secure meal carts, and check passengers’ seat belts. Before landing, tidy the cabin and register lost property; after landing, hand over to the purser and submit written records of anomalies. Explain how you would prioritize within 60 minutes, which steps cannot be omitted, and which anomalies require escalation to the purser or flight deck."
+              "Work sample: use the fictional CA31 kit records to verify the seat, order ID and kit status. Name the next owner and flag the open item for the lead flight attendant."
             ]
           },
           "id": "flight-attendants.profile.career-quick-answers-block.1",
@@ -22976,12 +22942,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Adjacent responsibility boundaries | This page covers only Flight Attendants (O*NET-SOC 53-2031.00). Other roles in the transportation and cabin service chain have separate authorization and responsibilities: airport security screeners inspect passengers and baggage and handle prohibited and restricted items; aircraft service attendants clean cabins and replenish supplies; baggage porters and bellhops load, unload, and deliver baggage; ticketing and reservation staff handle tickets and seats. This occupation must not assume adjacent roles’ licensing, signing, response powers, or final responsibilities. Cross-role collaboration must follow each role’s authorization and handover procedures."
+              "Adjacent responsibility boundaries | Flight attendants handle cabin safety and passenger service. Airport screeners check passengers and baggage under ground security procedures. Aircraft service attendants fuel aircraft and may perform ground services such as deicing or replenishing water. Check cabin cleaning as a separate assignment."
             ]
           },
           "id": "flight-attendants.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "nbs-wages-2025"
+            "onet-summary",
+            "a54-ground"
           ],
           "type": "prose"
         },
@@ -23199,7 +23166,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Employment evidence boundaries | Employment and growth cited on this page come from BLS Occupational Employment and Wage Statistics (OEWS, May 2025) and BLS Employment Projections (2024—2034), both using U.S. scopes covering employed workers and excluding self-employment and some part-time arrangements. O*NET’s 2024 employment of 130,800 and OEWS’s 131,650 use different statistical scopes and must not be combined into one series. No public occupational wage statistics precisely matching flight attendants have been established in mainland China; this page does not substitute U.S. figures or unrelated industry figures for Chinese conclusions."
+              "Employment evidence boundaries | Employment projections use BLS Table 1.2. OEWS wages come from a separate survey. Comparable mainland China occupational wage data remain unavailable."
             ]
           },
           "id": "flight-attendants.profile.career-quick-answers-block.15",
@@ -23289,13 +23256,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Mainland China wage evidence—measurement units | Mainland China: industry-average wages are expressed in “CNY per year,” representing pay due before tax and excluding overtime, flight-hour pay, and various allowances. Actual occupational income usually comprises base wages plus flight-hour pay and allowances for stays away from base; the two cannot be compared directly."
+              "Mainland China wage evidence—measurement units | China’s urban-unit average wages are before tax and can include qualifying bonuses, allowances and overtime. The industry average does not describe an individual flight attendant’s pay."
             ]
           },
           "id": "flight-attendants.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -23333,7 +23299,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "U.S. wage evidence—statistical period | United States: OEWS May 2025 wage estimates are published annually; employment projections use the BLS 2024—2034 projection period. Publication cycles and scopes differ and must be listed separately in comparisons."
+              "U.S. wage evidence—statistical period | United States: OEWS May 2025 wage estimates are published annually; employment projections use the BLS 2025–2035 projection period. Publication cycles and scopes differ and must be listed separately in comparisons."
             ]
           },
           "id": "flight-attendants.profile.career-quick-answers-block.24",
@@ -23391,13 +23357,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "U.S. wage evidence—sampling and missing-data limitations | United States: OEWS provides sample survey estimates with sampling error and missing industry/regional breakdowns. This round **did not obtain occupational industry median wages readable by industry**; this position is recorded as a visible gap. The median hourly wage is unpublished and is not filled by dividing annual wages by conventional working hours."
+              "U.S. wage evidence—sampling and missing-data limitations | BLS lists annual medians for scheduled and nonscheduled air transportation. The sources reviewed do not show other carrier subdivisions. O*NET gives the five national annual wage percentiles."
             ]
           },
           "id": "flight-attendants.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a54-ooh-pay",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -23449,13 +23415,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Task signals (fit signal 4) | Entry requires verifiable qualifications and training: civil aviation authorities require cabin crew to complete and pass company initial training (in the United States, FAA certification and a Certificate of Demonstrated Proficiency, separate aircraft-type certification, and annual recurrent training; in China, cabin crew training and qualification management under CCAR-121). Work experience requirements are usually 5 years or less, and education mainly high school/equivalent education. People who fit can usually learn consistently during concentrated training and strict assessments lasting weeks to months."
+              "Task signals (fit signal 4) | The FAA issues a Certificate of Demonstrated Proficiency for flight attendants in applicable Part 121 or 135 operations on aircraft with at least 20 passenger seats. Each person holds one certificate with airplane group ratings. Check carrier aircraft-type training separately. In mainland China, AC-121-FS-27R3 applies to certificate holders operating under CCAR-121."
             ]
           },
           "id": "flight-attendants.profile.career-quick-answers-block.32",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "a54-faa",
+            "a54-caac"
           ],
           "type": "prose"
         },
@@ -23515,7 +23481,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS Employment Projections (2024—2034)",
+                "entity": "BLS Employment Projections (2025–2035)",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/"
@@ -23576,7 +23542,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Scenario 1 (passenger medical emergency) | Trigger: chest pain, difficulty breathing, or altered consciousness during cruise. Consequences: delayed response may endanger life, and exceeding on-site judgment boundaries creates legal and responsibility risks. Controls: immediately obtain the first-aid kit and automated external defibrillator under the manual, announce a request for medical professionals on board, record times and symptoms, report to the captain through the purser, and consider diversion or ground medical services as the captain decides. Boundaries: no diagnosis, medication administration, or promised medical outcomes; medical judgments belong to medical professionals on board or ground medical organizations."
+              "Scenario 1 (passenger medical emergency) | Trigger: chest pain, difficulty breathing, or altered consciousness during cruise. Consequences: delayed response may endanger life, and exceeding on-site judgment boundaries creates legal and responsibility risks. Controls: immediately obtain the first-aid kit and automated external defibrillator under the manual, announce a request for medical professionals on board, record times and symptoms, report to the captain through the purser, and consider diversion or ground medical services as the captain decides. Boundaries: leave diagnosis to medical professionals and follow carrier procedures, training and authorization for any medication; medical judgments belong to medical professionals on board or ground medical organizations."
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.10",
@@ -23663,12 +23629,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Employer evidence | O*NET certification and occupational pages are only search entry points for U.S. preparation; they cannot replace local statutory qualifications, employer authorization, or signing responsibilities. In mainland China, cabin crew training, aircraft-type qualifications, and annual recurrent training follow civil aviation authority operating rules and carrier manuals; in the United States, FAA certification and aircraft-type certification (Certificate of Demonstrated Proficiency) apply. State jurisdiction, year, and scope when citing sources."
+              "Employer evidence | The FAA issues a Certificate of Demonstrated Proficiency for flight attendants in applicable Part 121 or 135 operations on aircraft with at least 20 passenger seats. Each person holds one certificate with airplane group ratings. Check carrier aircraft-type training separately. In mainland China, AC-121-FS-27R3 applies to certificate holders operating under CCAR-121."
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
-            "internal-rubric"
+            "a54-faa",
+            "a54-caac"
           ],
           "type": "prose"
         },
@@ -23677,7 +23644,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Work sample without experience | An entirely fictional flight attendant task package: within 60 minutes, complete cabin safety preparation for a simulated flight (emergency equipment counts and records), a passenger safety compliance checklist, and a turbulence announcement script and response record. Specify review points and escalation conditions. Do not use real flights, passenger information, or internal carrier materials."
+              "Work sample without experience | Complete both CA31 kit handoffs, show the changed row separately and leave one open item for the lead flight attendant."
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.17",
@@ -23706,7 +23673,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Seven-day trial | During the first two days, understand the occupation’s subjects and processes (parallel cabin safety and passenger service rhythms, assigned positions, and manual systems). During the middle three days, complete and review a full work sample (equipment checks, a safety demonstration script, and an incident response record). On the sixth day, ask someone with aviation or passenger service experience to challenge your judgments and records. On the seventh day, record evidence for continuing, stopping, or changing direction."
+              "Seven-day trial | On days 1–2, record seats and order IDs and verify confirmed changes. On days 3–5, check the kits, flag items for review and write the open item for the lead flight attendant. On day 6, independently submit both CA31 handoffs and show the changed row. On day 7, open the CA31 reference on this page and record one correction."
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.19",
@@ -23720,12 +23687,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Qualification decision | Separate three matters when deciding entry: statutory qualifications (civil aviation authority training and qualification management requirements, or FAA certification and aircraft-type certification in the United States); employer conditions (education, foreign language, fitness, medical examination, and background checks in recruitment announcements); and personal preparation (fitness, routine tolerance, service communication, and emergency response learning ability). If any one is unmet, interests or pay expectations alone cannot justify the decision."
+              "Qualification decision | The FAA issues a Certificate of Demonstrated Proficiency for flight attendants in applicable Part 121 or 135 operations on aircraft with at least 20 passenger seats. Each person holds one certificate with airplane group ratings. Check carrier aircraft-type training separately. In mainland China, AC-121-FS-27R3 applies to certificate holders operating under CCAR-121."
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
-            "internal-rubric"
+            "a54-faa",
+            "a54-caac"
           ],
           "type": "prose"
         },
@@ -23849,13 +23817,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Adjacent transitions | Related abilities appear in roles such as aircraft service attendants (cabin cleaning and supply replenishment), customer service representatives (complaints and information handling), reservation and transportation ticket agents and travel clerks (ticket and itinerary business), emergency medical technicians (initial on-site aid and transport handovers), food servers outside restaurants (food service delivery), and lodging managers (service-site operations management). Qualifications, authorization, and jurisdictional requirements differ; prepare anew under statutory entry requirements for the target role."
+              "Adjacent transitions | Related abilities appear in roles such as aircraft service attendants (ground services such as fueling, deicing or replenishing water), customer service representatives (complaints and information handling), reservation and transportation ticket agents and travel clerks (ticket and itinerary business), emergency medical technicians (initial on-site aid and transport handovers), food servers outside restaurants (food service delivery), and lodging managers (service-site operations management). Qualifications, authorization, and jurisdictional requirements differ; prepare anew under statutory entry requirements for the target role."
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
             "onet-summary",
-            "internal-rubric"
+            "internal-rubric",
+            "a54-ground"
           ],
           "type": "prose"
         },
@@ -23864,7 +23833,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "State Chinese, U.S., global, and specific jurisdiction evidence separately: do not combine wage, employment, qualification, safety, and AI conclusions across scopes. This page’s U.S. figures come from BLS OEWS May 2025 and BLS Employment Projections 2024—2034. The mainland China section only explains the absence of public occupational wage statistics precisely matching flight attendants and lists verifiable authorization sources (civil aviation authority operating rules and carrier manuals). The two scopes neither convert into nor corroborate one another."
+              "State Chinese, U.S., global, and specific jurisdiction evidence separately: do not combine wage, employment, qualification, safety, and AI conclusions across scopes. This page’s U.S. figures come from BLS OEWS May 2025 and BLS Employment Projections 2025–2035. The mainland China section only explains the absence of public occupational wage statistics precisely matching flight attendants and lists verifiable authorization sources (civil aviation authority operating rules and carrier manuals). The two scopes neither convert into nor corroborate one another."
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.30",
@@ -23893,12 +23862,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Any “no safely usable data currently available” statement only means a bounded search did not establish safely usable data; proxy values or model memory must not fabricate figures. This page applies that rule to U.S. flight attendant industry wages and median hourly wages: occupational industry median wages were not obtained, and OEWS does not publish a median hourly wage. Both retain visible gaps, without filling them using broader occupational wages, industry averages, or conversions based on conventional working hours."
+              "BLS lists annual medians for scheduled and nonscheduled air transportation. The sources reviewed do not show other carrier subdivisions. O*NET gives the five national annual wage percentiles."
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
-            "internal-rubric"
+            "a54-ooh-pay",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -23986,10 +23956,10 @@
                 "entity": "BLS Occupational Employment and Wage Statistics (OEWS, May 2025)",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes532031.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-2031.00"
               },
               {
-                "entity": "BLS Employment Projections (2024—2034) occupation and characteristics table",
+                "entity": "BLS Employment Projections (2025–2035) occupation and characteristics table",
                 "id": "link-6",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24001,10 +23971,10 @@
                 "url": "https://www.bls.gov/ooh/transportation-and-material-moving/flight-attendants.htm"
               },
               {
-                "entity": "BLS OEWS data homepage",
+                "entity": "BLS May 2025 OEWS national Table 1",
                 "id": "link-8",
                 "relation": "career.evidence",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.bls.gov/news.release/ocwage.t01.htm"
               },
               {
                 "entity": "ILO Working Paper 96 (2023): international research on task exposure to generative AI",
@@ -24064,7 +24034,7 @@
                 "entity": "BLS Occupational Employment and Wage Statistics (occupational page)",
                 "id": "link-18",
                 "relation": "career.evidence",
-                "url": "https://www.bls.gov/oes/current/oes532031.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-2031.00"
               },
               {
                 "entity": "BLS Employment Projections database",
@@ -24357,7 +24327,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections (2024—2034) occupation and characteristics table"
+              "BLS Employment Projections (2025–2035) occupation and characteristics table"
             ]
           },
           "id": "flight-attendants.ai-impact.ai-impact-table.29",
@@ -24527,12 +24497,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Source | BLS Occupational Employment and Wage Statistics (OEWS) data homepage (United States)."
+              "Source | BLS May 2025 OEWS national Table 1."
             ]
           },
           "id": "flight-attendants.ai-impact.ai-impact-table.41",
           "source_refs": [
-            "internal-rubric"
+            "a54-oews-national"
           ],
           "type": "prose"
         },
@@ -24541,12 +24511,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Scope | Annual wage and employment estimates from employer surveys, listing this occupation separately under SOC 53-2031: 2025 median annual wage USD 63,580, mean USD 77,440, percentiles USD 35,110/51,760/95,640/136,430, employment 131,650."
+              "Scope | For occupation 53-2031, estimated national wage and salary employment was 131,650 and mean annual pay was USD 77,440. See the U.S. wage section for the percentiles."
             ]
           },
           "id": "flight-attendants.ai-impact.ai-impact-table.42",
           "source_refs": [
-            "internal-rubric"
+            "a54-oews-national"
           ],
           "type": "prose"
         },
@@ -24555,12 +24525,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "OEWS measures employed workers’ wages before tax for regular working hours, including commissions, incentive pay, production bonuses, and tips; it excludes overtime premiums, nonproduction bonuses, and employer benefit costs, and does not cover self-employed workers. Regional and industry differences are reflected in the wage distribution and cannot be characterized as excluded. The old occupational page URL currently redirects to the OEWS table entry point; the mean, employment, and 25/75 have not been retrieved again, so no claim is made that the median hourly wage is unpublished."
+              "OEWS measures employed workers’ wages before tax for regular working hours, including commissions, incentive pay, production bonuses, and tips; it excludes overtime premiums, nonproduction bonuses, and employer benefit costs, and does not cover self-employed workers. Regional and industry differences are reflected in the wage distribution and cannot be characterized as excluded."
             ]
           },
           "id": "flight-attendants.ai-impact.ai-impact-table.43",
           "source_refs": [
-            "internal-rubric"
+            "a54-oews-national"
           ],
           "type": "prose"
         },
@@ -24793,7 +24763,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Current 2025—2035 average annual openings 18500 are neither net new jobs nor a ten-year total. The original 19800 older-version unit has not been retrieved again; magnitude is not used to infer a total."
+              "BLS Table 1.2 projects U.S. employment in occupation 53-2031 to rise from about 133,700 in 2025 to 145,500 in 2035, up 8.8%, with about 18,500 annual openings from growth and replacement."
             ]
           },
           "id": "flight-attendants.ai-impact.ai-impact-table.60",
@@ -25037,7 +25007,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Current 2025 employment 133700, 2025—2035 growth 9%, and average annual openings 18500 are not net new jobs or a ten-year total. Original 2024—2034 records are historical; the original 19800 unit has not been rechecked against the older table, and magnitude cannot justify claiming a total. OEWS differs from projections; check tasks and institutions separately rather than deriving individual employment probabilities from three consistent layers."
+              "BLS Table 1.2 projects U.S. employment in occupation 53-2031 to rise from about 133,700 in 2025 to 145,500 in 2035, up 8.8%, with about 18,500 annual openings from growth and replacement."
             ]
           },
           "id": "flight-attendants.ai-impact.ai-impact-table.77",
@@ -25718,12 +25688,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese recruitment pay quotes: insufficient evidence; no verifiable sample obtained in this round"
+              "The Air China and Spring Airlines notices are historical hiring and training examples. Neither gives a comparable occupational wage distribution."
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "nbs-wages-2025"
+            "a54-airchina",
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -25732,12 +25703,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | No specific historical Chinese announcements listed. Boundary | U.S. average wages are not Chinese recruitment samples."
+              "Scope | Air China’s Beijing campus notice is a past hiring example. Spring Airlines’ graduation notice is a past training example. Neither reports an occupational wage distribution."
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "nbs-wages-2025"
+            "a54-airchina",
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -25972,13 +25944,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No Chinese carrier recruitment sample was obtained in this round; no claim is made that high school/secondary vocational education is the predominant minimum, and no weights are set for foreign language and service abilities."
+              "The Air China and Spring Airlines notices are historical hiring and training examples. Neither gives a comparable occupational wage distribution."
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "a54-airchina",
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -26237,13 +26209,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: precisely matched Chinese flight attendant wages, employment, and recruitment samples were not obtained in this round; no estimates are made."
+              "The Air China and Spring Airlines notices are historical hiring and training examples. Neither gives a comparable occupational wage distribution."
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs-wages-2025",
-            "internal-rubric"
+            "a54-airchina",
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -26294,7 +26266,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Main bases in first-tier cities (Beijing, Shanghai, Guangzhou, Shenzhen, etc.)"
+              "Air China Beijing campus intake"
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.49",
@@ -26308,12 +26280,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: mainland Chinese flight attendant monthly wages verifiable by city or base were not obtained; recruitment quotes, industry averages, and secondhand accounts do not fill the gap."
+              "Air China’s campus recruitment notice for the class of 2026 listed Beijing-based cabin crew. Duties included cabin safety, passenger service and management of onboard supplies. Applications for that intake closed. The notice did not quote pay."
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "internal-rubric"
+            "a54-airchina"
           ],
           "type": "prose"
         },
@@ -26350,7 +26322,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "International route assignments and roles stationed away from base"
+              "Spring Airlines training announcement"
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.53",
@@ -26364,12 +26336,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: mainland Chinese income data verifiable by route type or structure of stays away from base were not obtained; recruitment quotes or third-party estimates do not fill the gap."
+              "Spring Airlines reported that the first class from a targeted cabin crew recruitment initiative in Shanghai and Lanzhou had completed training. The announcement gave no pay figure or new application opening."
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -26406,7 +26378,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Current 2025 employment 133700, 2025—2035 growth 9%, and average annual openings 18500 are not net new jobs or a ten-year total. Original 2024—2034 records are historical; the original 19800 unit has not been rechecked against the older table, and magnitude cannot justify claiming a total."
+              "BLS Table 1.2 projects U.S. employment in occupation 53-2031 to rise from about 133,700 in 2025 to 145,500 in 2035, up 8.8%, with about 18,500 annual openings from growth and replacement."
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.58",
@@ -26442,13 +26414,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 53-2031.00 Flight Attendants occupational profile | https://www.onetonline.org/link/summary/53-2031.00 ; BLS Occupational Employment and Wage Statistics (OEWS, May 2025) | https://www.bls.gov/oes/current/oes532031.htm ; BLS Employment Projections (2024—2034) occupation and characteristics table | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "O*NET 53-2031.00 Flight Attendants occupational profile | https://www.onetonline.org/link/summary/53-2031.00 ; BLS Occupational Employment and Wage Statistics (OEWS, May 2025) | https://www.onetonline.org/link/localwages/53-2031.00 ; BLS Employment Projections (2025–2035) occupation and characteristics table | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
+            "bls-oews-2025",
             "bls-projections-2025-35",
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -26457,12 +26430,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Median annual wage USD 63,580 (2025, BLS OEWS)"
+              "USD 63,580 per year"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26471,12 +26444,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | OEWS employed-worker wages before tax for regular working hours. Boundary | Flight-related remuneration or all allowances cannot be categorically excluded. This round did not retrieve the original median hourly wage table again; no hourly conversion is made."
+              "Median · USD 63,580 per year · May 2025 OEWS; O*NET national wage table｜https://www.onetonline.org/link/localwages/53-2031.00"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26485,12 +26458,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Percentile 10: USD 35,110 per year (2025, BLS OEWS)"
+              "USD 35,110 per year"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26499,12 +26472,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | May2025: the lowest 10% earn below USD 35110. Boundary | Not starting wages; percentiles do not establish early career stages or carrier types."
+              "10th percentile · USD 35,110 per year · May 2025 OEWS; O*NET national wage table｜https://www.onetonline.org/link/localwages/53-2031.00"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26513,12 +26486,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Percentile 25: USD 51,760 per year (2025, BLS OEWS)"
+              "USD 51,760 per year"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26527,12 +26500,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Original lower quartile record USD 51760; the original table was not retrieved again in this round. Boundary | Does not establish base, aircraft-type, or seniority causes."
+              "25th percentile · USD 51,760 per year · May 2025 OEWS; O*NET national wage table | https://www.onetonline.org/link/localwages/53-2031.00"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26541,12 +26514,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Percentile 75: USD 95,640 per year (2025, BLS OEWS)"
+              "USD 95,640 per year"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26555,12 +26528,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | Original upper quartile record USD 95640; the original table was not retrieved again in this round. Boundary | Does not correspond to a uniform purser or seniority level."
+              "75th percentile · USD 95,640 per year · May 2025 OEWS; O*NET national wage table | https://www.onetonline.org/link/localwages/53-2031.00"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26569,12 +26542,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Percentile 90: USD 136,430 per year (2025, BLS OEWS)"
+              "USD 136,430 per year"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26583,12 +26556,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | May2025: the highest 10% earn above USD 136430. Boundary | Not an overall upper limit; does not establish specific carrier or individual attainability."
+              "90th percentile · USD 136,430 per year · May 2025 OEWS; O*NET national wage table｜https://www.onetonline.org/link/localwages/53-2031.00"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26681,7 +26654,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. scope: May2025 median 63580 and 10/90 thresholds 35110/136430 remain verifiable; original tables for 25/75, mean wages, and OEWS employment were not retrieved again. Current 2025 employment 133700, 2025—2035 growth 9%, and average annual openings 18500 are not net new jobs or a ten-year total. Original 2024—2034 records are historical; the original 19800 unit has not been rechecked against the older table, and magnitude cannot justify claiming a total. Some actual industry medians were obtained; these are not Chinese wages."
+              "BLS Table 1.2 projects U.S. employment in occupation 53-2031 to rise from about 133,700 in 2025 to 145,500 in 2035, up 8.8%, with about 18,500 annual openings from growth and replacement."
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.25",
@@ -26796,7 +26769,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Growth 7% or higher (much faster than average, 2024—2034, BLS projection presented through O*NET)"
+              "Growth 8.8% (much faster than average, 2025–2035, BLS projection presented through O*NET)"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.33",
@@ -26815,7 +26788,7 @@
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a54-ooh-pay"
           ],
           "type": "prose"
         },
@@ -26829,7 +26802,7 @@
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a54-ooh-pay"
           ],
           "type": "prose"
         },
@@ -26843,7 +26816,7 @@
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a54-ooh-pay"
           ],
           "type": "prose"
         },
@@ -26857,7 +26830,7 @@
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a54-ooh-pay"
           ],
           "type": "prose"
         },
@@ -26871,7 +26844,7 @@
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a54-ooh-pay"
           ],
           "type": "prose"
         },
@@ -26885,7 +26858,7 @@
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a54-ooh-pay"
           ],
           "type": "prose"
         },
@@ -27112,13 +27085,13 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
@@ -27190,10 +27163,10 @@
                 "entity": "BLS Occupational Employment and Wage Statistics (OEWS)",
                 "id": "link-15",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes532031.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-2031.00"
               },
               {
-                "entity": "BLS Employment Projections (2024—2034)",
+                "entity": "BLS Employment Projections (2025–2035)",
                 "id": "link-16",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -27859,7 +27832,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The U.S. FAA Certificate of Demonstrated Proficiency applies to cabin personnel on aircraft with 20 seats or more operated by Part121/135 carriers. The certificate lists Group1 propeller / Group2 turbojet; each person holds one certificate, not separate certificates for every aircraft type. Check aircraft-type training separately from certificate Group ratings. China requires separate checking; they are not interchangeable."
+              "The U.S. FAA Certificate of Demonstrated Proficiency applies to cabin personnel on aircraft with 20 or more passenger seats operated by Part121/135 carriers. The certificate lists Group1 propeller / Group2 turbojet; each person holds one certificate, not separate certificates for every aircraft type. Check aircraft-type training separately from certificate Group ratings. China requires separate checking; they are not interchangeable."
             ]
           },
           "id": "flight-attendants.fit.personality-fit-block.41",
@@ -28049,7 +28022,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The U.S. FAA Certificate of Demonstrated Proficiency applies to cabin personnel on aircraft with 20 seats or more operated by Part121/135 carriers. It lists Group1 propeller / Group2 turbojet; each person holds one certificate, not separate certificates for every aircraft type. Check aircraft-type training separately from certificate Group ratings. China requires separate checking; they are not interchangeable. JobZone1—2 is a general preparation level, not all occupational training time or Chinese requirements. The CAACR3 page still marks it valid; the 2026 consultation draft is not treated as its formal replacement."
+              "The U.S. FAA Certificate of Demonstrated Proficiency applies to cabin personnel on aircraft with 20 or more passenger seats operated by Part121/135 carriers. It lists Group1 propeller / Group2 turbojet; each person holds one certificate, not separate certificates for every aircraft type. Check aircraft-type training separately from certificate Group ratings. China requires separate checking; they are not interchangeable. JobZone1—2 is a general preparation level, not all occupational training time or Chinese requirements. The CAACR3 page still marks it valid; the 2026 consultation draft is not treated as its formal replacement."
             ]
           },
           "id": "flight-attendants.fit.personality-fit-block.54",
@@ -28781,7 +28754,7 @@
                 "Ground aircraft services (including fueling)",
                 "Perform ground aircraft services using actual equipment and role duties; not limited to cabin cleaning",
                 "Check ground operating safety, equipment, and actual authorization; not automatically equivalent to flight attendant qualifications",
-                "A fictional flight cabin cleaning and replenishment checklist: area sequence, supply inventory, and defect report sample with locations and observations",
+                "A fictional ground-service work order recording equipment status, the location of a defect, the next owner and an open item.",
                 "Check ground aircraft services separately from in-flight cabin safety; not a validated transition route"
               ],
               [
@@ -28878,34 +28851,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Use only public materials and fictional scenarios: a simulated flight assignment, a blank preflight emergency equipment checklist including slide pressure gauges, oxygen cylinders, first-aid kits and automated external defibrillators, and emergency lighting, plus an incident report template.",
-                  "Do not use real flight numbers, passenger information, internal carrier documents, or any personal data.",
-                  "Public O*NET 53-2031.00 task and work context descriptions can provide background, but do not quote its English original directly as your own work sample content.",
-                  "Supplemental material: standard announcement language for turbulence, medical events, and landing reminders, for practicing standardized wording."
+                  "CA31: The service list covers sealed amenity kits ordered by passengers.",
+                  "S11: Order P11 lists 11A. A confirmed boarding record moves it to 12C.",
+                  "S12: Order P12 lists 14D. The supply list shows one kit, but the kit cannot be located.",
+                  "S13: Order P13 lists 16B. The seat and kit both match.",
+                  "Allocate each kit using its preorder ID.",
+                  "The supplies team checks the S12 shortage. The lead flight attendant approves the exception record and assigns communication.",
+                  "All seats, supplies and records are fictional.",
+                  "Write a service handoff only."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Complete within 60 minutes: cabin emergency equipment check records (confirmation method and result for each item), a pre-takeoff safety compliance checklist (row-by-row items and correction records), and a turbulence announcement script and response record including time, location, actions, and reporting recipients.",
-                  "Also write a one-page response and escalation explanation for a passenger medical incident: what you did on site, whom you reported to, and what you did not do.",
-                  "Finally, identify supporting sources for your three judgments (manual provision types, training content, or public materials) and specify matters requiring escalation."
+                  "Record the seat, kit status, next action and owner for each row.",
+                  "Single-change variant: S12’s kit P12 is found in the spare bin and its ID is verified. All other inputs stay the same. Show the row that changes.",
+                  "Write one open item for the lead flight attendant."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "List check sequences and non-omittable items first, then record confirmation methods item by item. For anomalies, specify locations, observations, judgment bases, and escalation recipients. Finish with reflection on what consequences compressed steps would cause.",
-                  "Record “service completed” separately from “safety compliance” so service items do not obscure safety items.",
-                  "Use whether others can take over from records alone as your self-check standard, rather than writing style or length.",
-                  "Method supplement: list the four categories requiring escalation on a separate checklist and consult it before responding to avoid exceeding boundaries."
+                  "Finish both versions independently.",
+                  "Record seat and kit evidence separately.",
+                  "On day seven, open “CA31 cabin service handoff reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "No medical diagnoses, medication administration, public-order coercive measures, or airworthiness and dispatch release judgments. For any such matter, specify whom to escalate to under procedures.",
-                  "The work sample only shows that you can organize tasks and audit trails in this occupation’s working approach; it does not establish qualifications or competence."
+                  "Use fictional paper records.",
+                  "Follow the airline’s procedures and crew assignments for actual cabin service."
                 ]
               }
             ]
@@ -28914,7 +28890,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "Flight Attendants | path",
+          "title": "CA31 fictional cabin service handoff",
           "type": "cards"
         },
         {
@@ -28925,33 +28901,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Create a three-column “role task—required ability—presentable evidence” matrix, aligned row by row. For example: “preflight equipment checks—physical confirmation and records—checklist with confirmation methods”; “safety compliance checks—row-by-row in-person confirmation and correction—correction records”; “incident responses—escalation through the prescribed path—incident reports with time and reporting recipients.”",
-                  "Cover at least 6 rows: emergency equipment checks, safety compliance confirmation, stopping service in turbulence, medical incident escalation, conflict responses, and records/handovers. Every row must state non-omittable actions and conditions requiring escalation.",
-                  "Supplement: after completing the matrix, label rows requiring escalation rather than independent judgment, so the sample does not include actions beyond your authority."
+                  "Keep both handoffs.",
+                  "Show seat evidence, kit evidence and owners.",
+                  "Keep the open items for the lead flight attendant."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Ask someone with aviation or passenger service experience to review two judgments: whether you treat confirmation as a hands-on action rather than an announcement, and whether escalation conditions cover medical, public-order, airworthiness, and incident matters.",
-                  "After review, record identified omissions and your corrections. List remaining uncertainties separately instead of treating them as completed.",
-                  "Supplement: retain review comments in writing, identifying the reviewer, time, and supporting basis for later review."
+                  "On day 6, independently check both handoffs.",
+                  "Compare seat, order ID, kit status and next owner.",
+                  "On day 7, open the CA31 reference and record one correction."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Include a directly transferable record summary in the portfolio: time, location, observations, response actions, reporting recipients, and pending questions. Assess whether others can take over using only the summary rather than whether the writing is attractive.",
-                  "Distinguish facts from speculation: facts state specific observations and times; speculation must be labeled and explain insufficient support.",
-                  "Supplement: handover summaries must not contain passenger names, identity document numbers, or other identifying information."
+                  "Include seat, order ID, kit status and owner on one page.",
+                  "Show the changed row separately.",
+                  "Keep one open item for the lead flight attendant."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "If the sample uses electronic checklists or report templates, explain audit trails, fallback to paper and manual workflows during anomalies, and minimum necessary handling of sensitive passenger information.",
-                  "Also describe alternative workflows when tools fail (no network, depleted batteries, system faults) and who takes over during anomalies.",
-                  "Supplement: label automatically generated parts separately from parts you checked and revised yourself."
+                  "Use paper records.",
+                  "Keep evidence and exception notes for both versions.",
+                  "Follow airline procedures for actual cabin service."
                 ]
               }
             ]
@@ -29022,50 +28998,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Understand occupational subjects and processes: daily cabin safety actions (equipment checks, safety compliance confirmation, emergency procedures) and passenger service delivery, distinguishing priorities.",
-                  "Output: a one-page process note identifying steps that cannot be omitted under any circumstances."
+                  "Day 1",
+                  "Record seats and order IDs."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Organize working conditions: enclosed cabins, noise and radiation exposure, and responses to time pressure and conflicts. Check willingness to accept long-term shifts and stays away from base.",
-                  "Output: a personal “acceptable/unacceptable” list with reasons."
+                  "Day 2",
+                  "Compare the confirmed seat change."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Complete a fictional flight safety preparation sample: an emergency equipment checklist specifying confirmation methods, a safety compliance checklist, and an incident report draft.",
-                  "Output: directly presentable sample check records containing no real data."
+                  "Day 3",
+                  "Check the kits against their order IDs."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Complete a scenario drill: turbulence announcements and service stopping procedures, plus initial passenger medical incident response and escalation paths (no diagnosis or medication administration).",
-                  "Output: one announcement script and one escalation explanation identifying reporting recipients and sequence."
+                  "Day 4",
+                  "Mark records ready for handoff and records that need review."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Review your sample for skipped items, signing for others, missing times or reporting recipients, and record improvements.",
-                  "Output: an issue list and revised records."
+                  "Day 5",
+                  "Write the open item for the lead flight attendant."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Ask someone with aviation or passenger service experience to challenge your judgments and identify missing escalation conditions or non-omittable steps.",
-                  "Output: review comments and your correction records."
+                  "Day 6",
+                  "Submit both versions independently and show the row that changes."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Conclude whether to continue (prepare for recruitment and training), stop (unacceptable shifts or close-range service), or change direction (other aviation service chain roles), with specific supporting evidence.",
-                  "Output: a one-page conclusion containing evidence, pending questions, and next actions."
+                  "Day 7",
+                  "On day seven, open “CA31 cabin service handoff reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29082,13 +29058,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: you can complete safety preparation under checklists without omissions and accurately identify escalation recipients for medical, public-order, airworthiness, and incident matters.",
-              "Continue: you accept long-term shifts and frequent stays away from base and have checked the target carrier’s current-year recruitment conditions (education, foreign language, medical examinations, and background checks).",
-              "Continue: in conflict drills, you explain rules and safety reasons first and escalate under procedures rather than confronting or ignoring.",
-              "Stop: repeated checks and row-by-row confirmation remain draining, or you cannot accept close-range service in enclosed cabins.",
-              "Stop: you reject strict operating rule and manual constraints and tend to adjust safety steps based on personal experience.",
-              "Change direction: you identify with aviation services but prefer fixed-location customer service (customer service representatives), itinerary/ticketing business (reservation and ticket agents), or ground service roles.",
-              "Change direction: you focus more on on-site first aid and medical responses, are willing to obtain practice qualifications for roles such as emergency medical technicians, and understand that qualifications are not interchangeable."
+              "Continue if both handoffs make the seat, order ID, kit status and owner clear.",
+              "Check that only the variant row changes.",
+              "Send the open item to the lead flight attendant.",
+              "Find one missing piece of evidence and revise the record.",
+              "Notice how you feel about repeated checks and close-range service.",
+              "Ask the target carrier about scheduling, training and duties.",
+              "Record your next step using the exercise and the actual role requirements."
             ]
           },
           "id": "flight-attendants.path.seven-day-decision.1",
@@ -29144,7 +29120,7 @@
                 "New hires who passed recruitment screening",
                 "Core statutory entry step determining eligibility to perform cabin safety duties",
                 "Required (organized and assessed by carriers)",
-                "The U.S. FAA Certificate of Demonstrated Proficiency applies to cabin personnel on aircraft with 20 seats or more operated by Part121/135 carriers. The certificate lists Group1 propeller / Group2 turbojet; each person holds one certificate, not separate certificates for every aircraft type. Check aircraft-type training separately from certificate Group ratings. China requires separate checking; they are not interchangeable.",
+                "The U.S. FAA Certificate of Demonstrated Proficiency applies to cabin personnel on aircraft with 20 or more passenger seats operated by Part121/135 carriers. The certificate lists Group1 propeller / Group2 turbojet; each person holds one certificate, not separate certificates for every aircraft type. Check aircraft-type training separately from certificate Group ratings. China requires separate checking; they are not interchangeable.",
                 "Weeks to months of concentrated training after joining",
                 "Keep certificate Group ratings separate from aircraft-type training; U.S. BLS specifies annual recurrent training, while China follows actual approved requirements"
               ],
@@ -29192,7 +29168,7 @@
           "data": {
             "paragraphs": [
               "Separate occupational qualifications and authorization: education and language evidence are application conditions; carrier initial training and aircraft-type qualifications are statutory entry requirements; medical examinations and background checks are airworthiness and security conditions. Validity and maintenance differ; any lapse can affect scheduling and flight assignments.",
-              "The U.S. FAA Certificate of Demonstrated Proficiency applies to cabin personnel on aircraft with 20 seats or more operated by Part121/135 carriers. The certificate lists Group1 propeller / Group2 turbojet; each person holds one certificate, not separate certificates for every aircraft type. Check aircraft-type training separately from certificate Group ratings. China requires separate checking; they are not interchangeable.",
+              "The U.S. FAA Certificate of Demonstrated Proficiency applies to cabin personnel on aircraft with 20 or more passenger seats operated by Part121/135 carriers. The certificate lists Group1 propeller / Group2 turbojet; each person holds one certificate, not separate certificates for every aircraft type. Check aircraft-type training separately from certificate Group ratings. China requires separate checking; they are not interchangeable.",
               "This page provides no individual medical examination conclusions, hiring likelihood, or pay promises. Final qualification judgments belong to carriers, civil aviation authorities, and qualified medical examination institutions.",
               "Any qualification lapse (expired recurrent training, unmet medical standards, outdated aircraft-type qualifications) can directly affect scheduling and flight assignments. Preparation must treat maintaining validity as equally important as obtaining qualifications."
             ]
@@ -29210,14 +29186,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Recruitment sample representativeness | Carriers publish announcements in batches by base, fleet, and route structure. Concentrated recruitment often corresponds to fleet expansion or staffing plans, not national or long-term demand. Record publication time, location, employment arrangement (direct hiring, labor dispatch, subsidiaries, branches), education and language thresholds, medical standards, and whether designated training must be completed first.",
-              "This page cites no specific announcement’s job counts or pay figures; assess personal opportunities against the target carrier’s currently valid recruitment documents and training requirements directly."
+              "Air China’s campus recruitment notice for the class of 2026 listed Beijing-based cabin crew. Duties included cabin safety, passenger service and management of onboard supplies. Applications for that intake closed. The notice did not quote pay. Spring Airlines reported that the first class from a targeted cabin crew recruitment initiative in Shanghai and Lanzhou had completed training. The announcement gave no pay figure or new application opening.",
+              "These airline examples cover past recruitment and training. Comparable nationwide wage statistics for flight attendants in mainland China remain unavailable."
             ]
           },
           "id": "flight-attendants.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a54-airchina",
+            "a54-spring"
           ],
           "title": "Flight Attendants | path",
           "type": "notice"
@@ -29243,7 +29219,7 @@
                 "entity": "BLS Occupational Employment and Wage Statistics (OEWS)",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes532031.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-2031.00"
               },
               {
                 "entity": "O*NET 53-2031.00 qualification and training information",
@@ -29397,7 +29373,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The U.S. FAA Certificate of Demonstrated Proficiency applies to cabin personnel on aircraft with 20 seats or more operated by Part121/135 carriers. It lists Group1 propeller / Group2 turbojet; each person holds one certificate, not separate certificates for every aircraft type. Check aircraft-type training separately from certificate Group ratings. China requires separate checking; they are not interchangeable. Check recruitment, training, and work qualifications separately; specific conditions follow valid target carrier announcements."
+              "The U.S. FAA Certificate of Demonstrated Proficiency applies to cabin personnel on aircraft with 20 or more passenger seats operated by Part121/135 carriers. It lists Group1 propeller / Group2 turbojet; each person holds one certificate, not separate certificates for every aircraft type. Check aircraft-type training separately from certificate Group ratings. China requires separate checking; they are not interchangeable. Check recruitment, training, and work qualifications separately; specific conditions follow valid target carrier announcements."
             ]
           },
           "id": "flight-attendants.path.career-path-block.20",
@@ -29427,14 +29403,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The U.S. FAA Certificate of Demonstrated Proficiency applies to cabin personnel on aircraft with 20 seats or more operated by Part121/135 carriers. It lists Group1 propeller / Group2 turbojet; each person holds one certificate, not separate certificates for every aircraft type. Check aircraft-type training separately from certificate Group ratings. China requires separate checking; they are not interchangeable. The CAACR3 page still marks it valid; the 2026 text is a consultation draft, and all formal revisions and annex texts have not been obtained."
+              "The FAA issues a Certificate of Demonstrated Proficiency for flight attendants in applicable Part 121 or 135 operations on aircraft with at least 20 passenger seats. Each person holds one certificate with airplane group ratings. Check carrier aircraft-type training separately. In mainland China, AC-121-FS-27R3 applies to certificate holders operating under CCAR-121."
             ]
           },
           "id": "flight-attendants.path.career-path-block.22",
           "source_refs": [
-            "nbs-wages-2025",
-            "bls-projections-2025-35",
-            "onet-summary"
+            "a54-faa",
+            "a54-caac"
           ],
           "type": "prose"
         },
@@ -30417,7 +30392,7 @@
                 "url": "https://www.bls.gov/ooh/transportation-and-material-moving/flight-attendants.htm"
               },
               {
-                "entity": "BLS Employment Projections (2024—2034) occupation and characteristics table",
+                "entity": "BLS Employment Projections (2025–2035) occupation and characteristics table",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -30432,7 +30407,7 @@
                 "entity": "BLS Occupational Employment and Wage Statistics (OEWS)",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes532031.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-2031.00"
               },
               {
                 "entity": "Aircraft service attendant direction",
@@ -30498,7 +30473,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "USMay2025 median 63580, 10/90 thresholds 35110/136430; current 2025 employment 133700, 2025—2035 growth 9%, and average annual openings 18500 are not net new jobs or a ten-year total. Original 2024—2034 records are historical; the original 19800 unit has not been rechecked against the older table, and magnitude cannot justify claiming a total. Chinese wages and employment were not obtained in this round; U.S. values are not imported."
+              "BLS Table 1.2 projects U.S. employment in occupation 53-2031 to rise from about 133,700 in 2025 to 145,500 in 2035, up 8.8%, with about 18,500 annual openings from growth and replacement."
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.8",
@@ -30541,7 +30516,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Current 2025—2035 growth 9% and average annual openings 18500 include growth and replacement, without directly establishing replacement shares or individual hiring."
+              "Current 2025—2035 growth 8.8% and average annual openings 18500 include growth and replacement, without directly establishing replacement shares or individual hiring."
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.11",
@@ -30793,12 +30768,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: precisely matched Chinese occupational wages, employment, and recruitment samples were not obtained in this round; no estimates are made."
+              "The Air China and Spring Airlines notices are historical hiring and training examples. Neither gives a comparable occupational wage distribution."
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.29",
           "source_refs": [
-            "nbs-wages-2025"
+            "a54-airchina",
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -30863,12 +30839,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Build: cabin cleaning and supply replenishment standards, ground support and turnaround collaboration, and defect reporting paths; no in-flight passenger safety responsibility."
+              "Build familiarity with the target role’s ground equipment, fueling or deicing safety procedures and defect reporting. Check separately who handles cabin cleaning."
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet-summary"
+            "a54-ground"
           ],
           "type": "prose"
         },
@@ -31231,31 +31207,33 @@
                 ]
               },
               {
-                "answer": "Flight attendants monitor safety and serve passengers in cabins during flight. Aircraft service attendants clean cabins and replenish supplies after landing without in-flight passenger safety responsibilities. Transportation security screeners inspect passengers and carry-on items before boarding under security control authorization. Authorization and responsibilities differ, without equivalent abilities.",
+                "answer": "Flight attendants handle cabin safety and passenger service. Airport screeners work in ground security screening. Aircraft service attendants fuel aircraft and may perform ground services such as deicing or replenishing water. Check cabin cleaning as a separate assignment.",
                 "id": "flight-attendants.faq.2",
                 "question": "How do flight attendants differ from aircraft service attendants and security screeners?",
                 "question_key": "career.faq.flight-attendants.q2",
                 "source_refs": [
-                  "onet-summary"
+                  "onet-summary",
+                  "a54-ground"
                 ]
               },
               {
-                "answer": "BLS OEWS (May 2025): median annual wage USD 63,580, mean USD 77,440, percentiles USD 35,110 / 51,760 / 95,640 / 136,430, approximately 131,650 employed. OEWS does not publish this occupation’s median hourly wage; this page makes no conversion. BLS Employment Projections (2025–2035): employment from 133,700 to 145,500, growth of 8.8%, and 18,500 average annual openings including growth and replacement needs. Openings are an annual average, not a ten-year total.",
+                "answer": "The U.S. median annual wage in 2025 was $63,580. The 10th, 25th, 50th, 75th and 90th annual wage percentiles were $35,110, $51,760, $63,580, $95,640 and $136,430. BLS Table 1.2 projects U.S. employment in occupation 53-2031 to rise from about 133,700 in 2025 to 145,500 in 2035, up 8.8%, with about 18,500 annual openings from growth and replacement.",
                 "id": "flight-attendants.faq.3",
                 "question": "What are U.S. flight attendant wages and employment?",
                 "question_key": "career.faq.flight-attendants.q3",
                 "source_refs": [
                   "bls-oews-2025",
-                  "bls-ep-2025-2035-current"
+                  "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "No. The National Bureau of Statistics publishes urban unit employee average wages by industry sector, not by occupation. Actual civil aviation cabin crew income often comprises base wages, flight-hour pay, allowances for stays away from base, and other allowances, using different scopes. This page therefore only records gaps and authorization sources (civil aviation authority rules and carrier manuals), provides no estimated figures, and does not fill gaps with U.S. figures or unrelated industry averages.",
+                "answer": "Air China’s campus recruitment notice for the class of 2026 listed Beijing-based cabin crew. Duties included cabin safety, passenger service and management of onboard supplies. Applications for that intake closed. The notice did not quote pay. Spring Airlines reported that the first class from a targeted cabin crew recruitment initiative in Shanghai and Lanzhou had completed training. The announcement gave no pay figure or new application opening. These airline examples cover past recruitment and training. Comparable nationwide wage statistics for flight attendants in mainland China remain unavailable.",
                 "id": "flight-attendants.faq.4",
                 "question": "Does mainland China have precisely matched wage statistics for flight attendants?",
                 "question_key": "career.faq.flight-attendants.q4",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "a54-airchina",
+                  "a54-spring"
                 ]
               },
               {
@@ -31268,7 +31246,7 @@
                 ]
               },
               {
-                "answer": "Overall replacement will not occur. Tools can augment records, checklist reminders, scheduling, and information consolidation. Trained crew must physically confirm emergency equipment, check safety compliance row by row, judge passenger behavior, command emergency evacuation, and respond to medical incidents on site. Tool adoption depends on civil aviation authority rules and carrier manual approval rather than tool capability alone.",
+                "answer": "Where permitted, test tools for organizing records, inventory reminders or drafting reports, then review the output. Cabin safety, on-site checks and escalation follow carrier procedures and training. The task evidence does not establish how the occupation as a whole will change.",
                 "id": "flight-attendants.faq.6",
                 "question": "Will AI replace flight attendants?",
                 "question_key": "career.faq.flight-attendants.q6",
@@ -31277,21 +31255,24 @@
                 ]
               },
               {
-                "answer": "U.S. scope: O*NET preparation level Job Zone 1-2, usually high school/equivalent education and days to a year of on-the-job training. Carriers provide initial training after entry, followed by assessments, FAA certification, separate aircraft-type certificates, and annual recurrent training. Mainland China: cabin crew training and qualification management follow civil aviation authority operating rules and carrier manuals, with recruitment conditions announced by carriers. The two are not interchangeable.",
+                "answer": "BLS describes a high school diploma or equivalent and customer service experience as typical preparation in the U.S. After hiring, the airline provides initial training, usually over several weeks or months. In mainland China, check the carrier’s current education, language and application criteria, then its training and assessment after hiring.",
                 "id": "flight-attendants.faq.7",
                 "question": "What education and training are needed to become a flight attendant?",
                 "question_key": "career.faq.flight-attendants.q7",
                 "source_refs": [
-                  "onet-summary"
+                  "a54-ooh-training",
+                  "a54-airchina",
+                  "a54-caac"
                 ]
               },
               {
-                "answer": "The core is not one certificate but three combined conditions: application conditions (education and service English evidence), statutory entry (carrier initial training and aircraft-type qualifications; U.S. FAA certification, aircraft-type certification, and annual recurrent training), and airworthiness/security conditions (designated medical examinations and background checks). Valid first-aid and automated external defibrillator training is also usually required; international routes may require a second foreign language.",
+                "answer": "In applicable U.S. Part 121 or Part 135 operations, cabin crew on aircraft with at least 20 passenger seats need an FAA Certificate of Demonstrated Proficiency. It records airplane groups. Check aircraft-type training separately. For mainland China, R3 directs CCAR-121 certificate holders to check medical qualification, approved training and checks, and the carrier-issued training certificate.",
                 "id": "flight-attendants.faq.8",
                 "question": "Which certificates or qualifications do flight attendants need?",
                 "question_key": "career.faq.flight-attendants.q8",
                 "source_refs": [
-                  "onet-summary"
+                  "a54-faa",
+                  "a54-caac"
                 ]
               },
               {
@@ -31304,14 +31285,19 @@
                 ]
               },
               {
-                "answer": "United States: 2024—2034 growth 7% or higher, with openings mainly arising from replacement demand. Internal paths include purser, regional purser, instructor, and inspector, or cabin service management and training standards, ground handling, and passenger relations. Licensing or authorization changes, such as maintenance, dispatch, or security screening, require separate qualifications. Verifiable occupational statistics are missing for mainland China; this page gives no numerical projections.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 53-2031 to rise from about 133,700 in 2025 to 145,500 in 2035, up 8.8%, with about 18,500 annual openings from growth and replacement. Purser, training and ground service roles have their own requirements. Check the posting for the role you are considering.",
                 "id": "flight-attendants.faq.10",
                 "question": "What are flight attendants’ prospects and transition directions?",
                 "question_key": "career.faq.flight-attendants.q10",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "onet-summary"
+                  "bls-projections-2025-35"
                 ]
+              },
+              {
+                "answer": "Update S11 to confirmed seat 12C and keep kit P11 on that order. Flag S12 as missing, have the supplies team check, and refer it to the lead flight attendant. S13 matches. In the variant, S12 changes to kit found. Update the exception record for the lead flight attendant’s confirmation. S11 and S13 are unchanged. Check seats, order IDs, exceptions and owners.",
+                "id": "flight-attendants.faq.11",
+                "question": "CA31 cabin service handoff reference (open after day six)",
+                "question_key": "career.faq.flight-attendants.11"
               }
             ]
           },
@@ -31329,7 +31315,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Source card | Research process: obtain the official definition, sample tasks, work activities, and work context percentages from O*NET 53-2031.00; check U.S. wages and employment with BLS OEWS (May 2025), growth and estimated openings with BLS Employment Projections (2024—2034), then use Civil Aviation Administration of China and National Bureau of Statistics sources to explain mainland Chinese scopes and authorization boundaries. Every figure identifies jurisdiction, period, and statistical scope."
+              "Source card | Research process: obtain the official definition, sample tasks, work activities, and work context percentages from O*NET 53-2031.00; check U.S. wages and employment with BLS OEWS (May 2025), growth and estimated openings with BLS Employment Projections (2025–2035), then use Civil Aviation Administration of China and National Bureau of Statistics sources to explain mainland Chinese scopes and authorization boundaries. Every figure identifies jurisdiction, period, and statistical scope."
             ]
           },
           "id": "flight-attendants.sources.source-card.1",
@@ -31343,7 +31329,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Source card | Source register: O*NET OnLine (53-2031.00 summary and details), BLS Occupational Employment and Wage Statistics (May 2025), BLS Employment Projections (2024—2034), National Bureau of Statistics 2025 urban unit employee average wages, and FermatMind career content field and evidence scope rules. Each source identifies publisher, market, and statistical period; unregistered sources do not support claims."
+              "Source card | Source register: O*NET OnLine (53-2031.00 summary and details), BLS Occupational Employment and Wage Statistics (May 2025), BLS Employment Projections (2025–2035), National Bureau of Statistics 2025 urban unit employee average wages, and FermatMind career content field and evidence scope rules. Each source identifies publisher, market, and statistical period; unregistered sources do not support claims."
             ]
           },
           "id": "flight-attendants.sources.source-card.2",
@@ -31359,12 +31345,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Reviewed in this round: 2026-10-11; author revision pending independent review"
+              "U.S. wages are from May 2025 and employment projections cover 2025–2035. Mainland China airline notices illustrate past hiring and training."
             ]
           },
           "id": "flight-attendants.sources.source-card.3",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025",
+            "bls-projections-2025-35",
+            "a54-airchina",
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -31373,7 +31362,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round checked O*NET CSR, JobZone1—2, and work context; BLSOOH May2025 median 63580, 10/90 thresholds 35110/136430, scheduled air transportation 63570, and nonscheduled 70700. Original tables for 25/75, mean wages, OEWS employment, and hourly wages were not retrieved again. Current 2025 employment 133700, 2025—2035 growth 9%, and average annual openings 18500 do not justify claiming a ten-year total based on magnitude. FAA certificate Group ratings are separate from aircraft-type training; CAACR3 is marked valid, and the 2026 text is a consultation draft. Failed annex access does not mean unpublished. U.S. data used as recruitment samples were removed under Chinese labels. NBS and OEWS do not categorically exclude flight-related remuneration; data classification/retention and emergency/security matters follow actual approved procedures. Generic positioning, medication, and turbulence inspection instructions were withdrawn. Shared source registers mixing emergency physicians, earlier projections, and protected Hero/FAQ conflicts are archived rather than treated as repaired. AI effects, test validity, Chinese wages/recruitment, and operating details in all jurisdictions have not been checked. No HTML, independent review, Git, or publication."
+              "BLS Table 1.2 projects U.S. employment in occupation 53-2031 to rise from about 133,700 in 2025 to 145,500 in 2035, up 8.8%, with about 18,500 annual openings from growth and replacement."
             ]
           },
           "id": "flight-attendants.sources.source-card.4",
@@ -31402,28 +31391,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Return to the Flight Attendants career page",
@@ -31452,8 +31429,7 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "Official occupational scope: assess injuries and illnesses and provide basic first aid; may transport injured or ill people to medical facilities.",
-                  "Used for occupational identity, task scope, and adjacent occupational boundaries."
+                  "Flight attendants support cabin safety and passenger service. Duties vary by airline and flight."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31481,42 +31457,39 @@
                 "url": "https://www.onetonline.org/link/details/53-2031.00"
               },
               {
-                "accessed_at": "2026-10-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Table 1.2 row 53-2031: 2025 employment 133.7 thousand, 2035 employment 145.5 thousand, 8.8% growth and 18.5 thousand average annual openings.",
-                  "Annual openings include growth and replacement needs; they are not a ten-year total or individual hiring probability."
+                  "BLS Table 1.2 projects U.S. employment in occupation 53-2031 to rise from about 133,700 in 2025 to 145,500 in 2035, up 8.8%, with about 18,500 annual openings from growth and replacement."
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
                 "limitation": "Do not interpret projected increases or average annual openings directly as personal income or hiring guarantees.",
                 "market": "US",
                 "name": "U.S. Bureau of Labor Statistics：2025–2035 Occupational Projections and Characteristics",
-                "period": "2025–2035 projections",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "53-2031 Flight Attendants",
+                "scope": "U.S. flight attendants 53-2031 employment projections",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Row 53-2031: 2025 median wage USD 335,550 per year and USD 161.32 per hour; percentile 10% USD 103,610 per year and percentile 90% USD 495,910 per year.",
-                  "This page distinguishes median wages, percentiles, and employment projections; statistical values are not individual contract pay quotes."
+                  "The U.S. median annual wage in 2025 was $63,580. The 10th, 25th, 50th, 75th and 90th annual wage percentiles were $35,110, $51,760, $63,580, $95,640 and $136,430."
                 ],
                 "evidence_type": "official wage table",
                 "id": "bls-oews-2025",
                 "limitation": "Wage statistics and employment projections are different statistical programs and cannot combine into individual starting wages or income guarantees.",
                 "market": "US",
-                "name": "U.S. Bureau of Labor Statistics：May 2025 Occupational Employment and Wage Statistics",
+                "name": "O*NET national wage table for flight attendants (BLS OEWS)",
                 "period": "May 2025 OEWS",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "53-2031 Emergency medicine physicians",
-                "url": "https://www.bls.gov/oes/current/oes532031.htm"
+                "scope": "U.S. flight attendants 53-2031 national wage percentiles",
+                "url": "https://www.onetonline.org/link/localwages/53-2031.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Average wages in Health and Social Work: urban non-private units CNY 146,266 per year; urban private units CNY 75,631 per year.",
-                  "These are industry proxies, not flight attendant occupational medians, starting wages, or individual pay quotes."
+                  "The national urban-unit wage tables provide context. Transportation, storage and postal services cover many industries and roles."
                 ],
                 "evidence_type": "official industry proxy",
                 "id": "nbs-wages-2025",
@@ -31525,8 +31498,8 @@
                 "name": "National Bureau of Statistics: average wages of employees in urban units in 2025",
                 "period": "2025 annual wage",
                 "publisher": "National Bureau of Statistics",
-                "scope": "health and social work industry proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260516_1960136.html"
+                "scope": "China urban-unit industry average wages",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31561,9 +31534,9 @@
                 "url": "#career-ai-assessment-method"
               },
               {
-                "accessed_at": "2026-10-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Employment and annual openings are in thousands in the original table."
+                  "BLS Table 1.2 projects U.S. employment in occupation 53-2031 to rise from about 133,700 in 2025 to 145,500 in 2035, up 8.8%, with about 18,500 annual openings from growth and replacement."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-ep-2025-2035-current",
@@ -31572,8 +31545,129 @@
                 "name": "BLS Occupational Projections Table 1.2, Flight Attendants 53-2031, 2025–2035",
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact occupation",
+                "scope": "U.S. flight attendants 53-2031 employment projections",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Air China’s campus recruitment notice for the class of 2026 listed Beijing-based cabin crew. Duties included cabin safety, passenger service and management of onboard supplies. Applications for that intake closed. The notice did not quote pay."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a54-airchina",
+                "limitation": "These airline examples cover past recruitment and training. Comparable nationwide wage statistics for flight attendants in mainland China remain unavailable.",
+                "market": "Mainland China",
+                "name": "Cabin crew recruitment and training example",
+                "period": "2025-11-19",
+                "publisher": "Air China",
+                "scope": "recruitment_proxy",
+                "url": "https://et.airchina.com.cn/cn/about_us/recruitment/184869.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Spring Airlines reported that the first class from a targeted cabin crew recruitment initiative in Shanghai and Lanzhou had completed training. The announcement gave no pay figure or new application opening."
+                ],
+                "evidence_type": "Airline training notice",
+                "id": "a54-spring",
+                "limitation": "These airline examples cover past recruitment and training. Comparable nationwide wage statistics for flight attendants in mainland China remain unavailable.",
+                "market": "Mainland China",
+                "name": "Historical cabin crew training notice",
+                "period": "2026-04-29",
+                "publisher": "Spring Airlines",
+                "scope": "recruitment_proxy",
+                "url": "https://news.ch.com/news/2026-04-29-00-00.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Explains eligibility, the certificate and airplane groups."
+                ],
+                "evidence_type": "Official source",
+                "id": "a54-faa",
+                "limitation": "Check U.S. operating scope. Confirm airplane group ratings and carrier aircraft-type training separately.",
+                "market": "United States",
+                "name": "FAA Flight Attendant Certificate of Demonstrated Proficiency",
+                "period": "FAA certificate guidance",
+                "publisher": "Federal Aviation Administration",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/Flight_Attendant_Certificate_Demonstrated_Proficiency_Information"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "CAAC lists AC-121-FS-27R3 as effective.",
+                  "In mainland China, AC-121-FS-27R3 applies to certificate holders operating under CCAR-121."
+                ],
+                "evidence_type": "Official source",
+                "id": "a54-caac",
+                "limitation": "Check the carrier’s own posting for hiring conditions.",
+                "market": "Mainland China",
+                "name": "CAAC cabin crew qualifications and training",
+                "period": "AC-121-FS-27R3",
+                "publisher": "Civil Aviation Administration of China",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202006/t20200608_202987.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "May 2025 medians were USD 63,570 in scheduled air transportation and USD 70,700 in nonscheduled air transportation."
+                ],
+                "evidence_type": "Official source",
+                "id": "a54-ooh-pay",
+                "limitation": "Applies to the industries listed in the pay table.",
+                "market": "United States",
+                "name": "BLS industry pay for flight attendants",
+                "period": "May 2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/transportation-and-material-moving/flight-attendants.htm#tab-5"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Describes fueling, deicing and other ground aircraft services."
+                ],
+                "evidence_type": "Official source",
+                "id": "a54-ground",
+                "limitation": "Supports comparison with an adjacent occupation.",
+                "market": "United States",
+                "name": "O*NET Aircraft Service Attendants 53-6032",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/53-6032.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The 53-2031 row gives employment and mean annual wages."
+                ],
+                "evidence_type": "official wage table",
+                "id": "a54-oews-national",
+                "limitation": "OEWS covers wage and salary employment and uses a different basis from employment projections.",
+                "market": "US",
+                "name": "BLS May 2025 OEWS national Table 1",
+                "period": "May 2025 OEWS",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "U.S. flight attendants 53-2031 national wage percentiles",
+                "url": "https://www.bls.gov/news.release/ocwage.t01.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Typical U.S. education, service experience, hiring and initial training."
+                ],
+                "evidence_type": "Official source",
+                "id": "a54-ooh-training",
+                "limitation": "U.S. occupational overview; check each carrier’s actual hiring criteria.",
+                "market": "United States",
+                "name": "BLS flight attendant entry and training",
+                "period": "Occupational Outlook Handbook",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/transportation-and-material-moving/flight-attendants.htm#tab-4"
               }
             ]
           },
@@ -33028,6 +33122,42 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "a54-faa",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "flight-attendants.source-register.published.1"
+            },
+            "id": "a54-faa",
+            "label": {
+              "$source": "a54-faa",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "flight-attendants.source-register.published.1"
+            },
+            "scope": "Check U.S. operating scope. Confirm airplane group ratings and carrier aircraft-type training separately."
+          },
+          {
+            "href": {
+              "$source": "a54-caac",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "flight-attendants.source-register.published.1"
+            },
+            "id": "a54-caac",
+            "label": {
+              "$source": "a54-caac",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "flight-attendants.source-register.published.1"
+            },
+            "scope": "Check the carrier’s own posting for hiring conditions."
           }
         ],
         "tracks": [
@@ -34434,6 +34564,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a54-airchina",
+            "posting-a54-spring"
+          ],
           "sources_note": {
             "$item": "flight-attendants.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34714,7 +34848,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-localgov-2025",
             "industry": {
               "$item": "flight-attendants.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -34735,7 +34868,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-education-2025",
             "industry": {
               "$item": "flight-attendants.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -35000,6 +35132,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "flight-attendants.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35044,7 +35177,8 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "flight-attendants.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -35090,6 +35224,7 @@
               "type": "prose"
             },
             "source_id": "nbs",
+            "source_ref": "nbs-wages-2025",
             "value": {
               "$item": "flight-attendants.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -35467,7 +35602,7 @@
           },
           {
             "alternate_value": null,
-            "label": "2024—2034",
+            "label": "2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "flight-attendants.profile.onet-structured-fields-block.4",
@@ -36309,7 +36444,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36319,27 +36454,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "flight-attendants.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "flight-attendants.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -36538,38 +36653,38 @@
       },
       {
         "derivation": "BLS Table 1.2, 2025–2035, Flight Attendants 53-2031. Employment and annual openings converted from thousands.",
-        "display_value": "133,700 people (2025)",
+        "display_value": "About 133,700 jobs in 2025",
         "fact_id": "us-employment-2025",
         "market": "US",
         "measure": "Employment base",
         "occupation_scope": "Flight Attendants; 53-2031.00",
         "period": "2025",
         "source_refs": [
-          "bls-ep-2025-2035-current"
+          "bls-projections-2025-35"
         ]
       },
       {
         "derivation": "BLS Table 1.2, 2025–2035, Flight Attendants 53-2031. Employment and annual openings converted from thousands.",
-        "display_value": "8.8% projected employment growth (2025–2035)",
+        "display_value": "Projected growth of 8.8%",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
         "measure": "Projected employment growth",
         "occupation_scope": "Flight Attendants; 53-2031.00",
         "period": "2025–2035",
         "source_refs": [
-          "bls-ep-2025-2035-current"
+          "bls-projections-2025-35"
         ]
       },
       {
         "derivation": "BLS Table 1.2, 2025–2035, Flight Attendants 53-2031. Employment and annual openings converted from thousands.",
-        "display_value": "18,500 openings per year on average (2025–2035)",
+        "display_value": "About 18,500 annual openings from growth and replacement",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
         "measure": "Average annual openings, including growth and replacement",
         "occupation_scope": "Flight Attendants; 53-2031.00",
         "period": "2025–2035",
         "source_refs": [
-          "bls-ep-2025-2035-current"
+          "bls-projections-2025-35"
         ]
       },
       {
@@ -36581,7 +36696,7 @@
         "occupation_scope": "53-2031 Flight Attendants；Scheduled air transportation",
         "period": "May 2025",
         "source_refs": [
-          "bls-oews-2025"
+          "a54-ooh-pay"
         ]
       },
       {
@@ -36593,7 +36708,7 @@
         "occupation_scope": "53-2031 Flight Attendants；Nonscheduled air transportation",
         "period": "May 2025",
         "source_refs": [
-          "bls-oews-2025"
+          "a54-ooh-pay"
         ]
       },
       {
@@ -36727,6 +36842,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Air China’s campus recruitment notice for the class of 2026 listed Beijing-based cabin crew. Duties included cabin safety, passenger service and management of onboard supplies. Applications for that intake closed. The notice did not quote pay.",
+        "fact_id": "posting-a54-airchina",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Cabin crew recruitment and training example",
+        "period": "2025-11-19",
+        "source_refs": [
+          "a54-airchina"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Spring Airlines reported that the first class from a targeted cabin crew recruitment initiative in Shanghai and Lanzhou had completed training. The announcement gave no pay figure or new application opening.",
+        "fact_id": "posting-a54-spring",
+        "market": "Mainland China",
+        "measure": "Training completion notice",
+        "occupation_scope": "Cabin crew recruitment and training example",
+        "period": "2026-04-29",
+        "source_refs": [
+          "a54-spring"
+        ]
       }
     ]
   },
@@ -36753,7 +36892,7 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2025–2035)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
@@ -36765,7 +36904,7 @@
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual openings (2025–2035)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -36786,7 +36925,7 @@
       "text": "Flight Attendants"
     }
   },
-  "source_content_sha256": "65e2ea0671eb8d525cf44ad5198c056067ba33f1a6cc6cc1fdfb95fb0a1ee7e6",
+  "source_content_sha256": "29e1cc9f7503e9d7dd007c30540367bb4d0e9c174c14ed4663bf3b108a358b76",
   "subject": {
     "canonical_slug": "flight-attendants",
     "name": "Flight Attendants",

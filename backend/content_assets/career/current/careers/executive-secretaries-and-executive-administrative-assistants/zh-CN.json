@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a48-huangpu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a48-shanghai": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:executive-secretaries-and-executive-administrative-assistants.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:executive-secretaries-and-executive-administrative-assistants.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "executive-secretaries-and-executive-administrative-assistants.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "executive-secretaries-and-executive-administrative-assistants.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23076,7 +23042,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用EA344虚构周二日程与周三差旅题核对：找出共同参会与到场时间约束，复算1000元预算，写两条待确认改期草稿；只观察纸面信息整理，不发送邀请或预订。"
+              "用 EA344 的虚构日程和出行记录做一页协调表，区分备选、待确认与已批准。"
             ]
           },
           "id": "executive-secretaries-and-executive-administrative-assistants.quick-decision.fit-decision-checklist.2",
@@ -26626,12 +26592,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他城市"
+              "上海与广州招聘样本"
             ]
           },
           "id": "executive-secretaries-and-executive-administrative-assistants.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a48-shanghai",
+            "a48-huangpu"
           ],
           "type": "prose"
         },
@@ -26640,12 +26607,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可核验的其他城市本职业月薪统计；不同城市与机构的差异较大，需按工作地核对。"
+              "上海新朋程数据科技发展列董事长总助，9,000–15,000 元/月，要求三年以上高管秘书、总经理助理或总裁办工作经验。岗位兼有会议、保密材料和营销项目协作。 广州励丰文化科技列董事长秘书，9,000–10,000 元/月，要求本科及以上，职责包括起草报告和讲话稿、安排行程及跟进项目进度。 两条为个别雇主报价。职位都服务高管，实际行政支持、业务跟进和授权范围须逐岗核实。当前在招状态未核。"
             ]
           },
           "id": "executive-secretaries-and-executive-administrative-assistants.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a48-shanghai",
+            "a48-huangpu"
           ],
           "type": "prose"
         },
@@ -27388,13 +27356,13 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
@@ -29157,9 +29125,9 @@
                   "材料一：EA344虚构日程与差旅输入",
                   "虚构周二，所有时间为北京时间。高管A：09:00—10:00内部预算会，10:00—11:00外部客户会；客户会不能移动，预算会主持人允许14:00—15:00改期。高管B：10:00—11:00面试，需A共同参加；候选人可改到15:00—16:00。",
                   "A周三赴虚构甲城：列车X周三07:00—10:00，票价480元；列车Y周二17:00—20:00，票价580元。现场会议周三09:30开始，需提前30分钟到场。",
-                  "周二出发需住宿一晚，虚构酒店360元；总预算上限1000元。甲城车站到会场/酒店均需30分钟，交通费合计60元。",
+                  "周二出发需住宿一晚，虚构酒店 360 元。预算上限 1,000 元。车站到会场、车站到酒店、酒店到会场各需 30 分钟。两条出行方案各自所需的市内接驳合计均为 60 元。",
                   "全部人物、邀请、路线、价格和规则为本题虚构；不预订、不付款、不接触真实候选人或客户信息。",
-                  "交付：周二调整后日程、可行差旅方案及总费用、两条改期确认草稿、未确认事项清单。",
+                  "交一页协调表、出行方案、两条未发送确认消息和待核项。",
                   "A须确认差旅和预算会改期，B及候选人须确认面试改期；练习者只能提出方案，不代替高管承诺。"
                 ]
               },
@@ -29167,17 +29135,16 @@
                 "id": "exercise-task",
                 "values": [
                   "材料二：计算与交付要求",
-                  "两处时间约束是周二10:00客户会与需A参加的面试冲突，以及列车X最早周三10:30到会场晚于09:00要求；预算会9:00—10:00本来不与10:00会议重叠。可以按题设许可提出预算会14:00改期，但须说明是可选安排。比较两列车与1000元预算，交付待确认同步表。",
-                  "作品为一页协调表及确认清单；所有练习材料均为虚构，未确认项标待确认，不生成真实邀请或订单。"
+                  "比较日程、到场时间与费用，写两条未发送确认消息：一条给相关面试人员，一条请 A 审批出行。",
+                  "单项变式：B 确认 15:00–16:00 面试，其他输入与回复状态不变。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "材料三：参考交付（虚构）",
-                  "周二10:00客户会不可移动，面试拟15:00—16:00；预算会9:00—10:00本来无冲突，可保留，或按题设许可拟14:00—15:00并待A确认。列车X10:00到站+30分钟路程=10:30，晚于09:00，排除。",
-                  "列车Y周二20:00到站；票580+酒店360+交通60=1000元，满足预算上限且可周三09:00前到场。安排须经A确认，不能直接预订。",
-                  "草稿一（预算会可选改期）：A，拟将周二北京时间09:00—10:00预算会改为14:00—15:00；主持人允许，供日程协调，请确认，未回复前保持待确认。草稿二：B及候选人，A周二10:00—11:00已有不可移动客户会，拟将面试改到15:00—16:00，请双方确认；暂不发送邀请。记录题设及版本，差旅1000元待A批准；没有正式订票、订单或真实承诺。"
+                  "先独立完成",
+                  "第六天交原题和变式，附两条未发送确认消息。",
+                  "第七天到「常见问题与资料来源」打开「EA344 日程协调参考答案（完成第六天后再打开）」。"
                 ]
               },
               {
@@ -29205,7 +29172,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "作品一：EA344规则对照",
-                  "列客户会不可移、面试需A、改期许可、周三09:00到场、预算1000和审批对象。",
+                  "分开列 EA344 题设条件和招聘样本要求。",
                   "如果补目标公告，另标真实公告日期与状态，不把题设当招聘样本。"
                 ]
               },
@@ -29213,16 +29180,16 @@
                 "id": "independent-recheck",
                 "values": [
                   "作品二：EA344可复核协调方案",
-                  "用同一题面列周二日程、X10:30不合规、Y580+360+60=1000及两草稿。",
-                  "全部标拟议/待确认，不承诺或预订。"
+                  "写周二日程与两条出行方案。",
+                  "注明到场依据、费用和待确认事项。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "作品三：EA344状态纪要",
-                  "只用第5天给定虚构状态：A同意预算会拟改但差旅未批准；B同意面试改期、候选人未回复。",
-                  "区分已确认/待确认及谁回复，不编造会议决议。"
+                  "只更新变式给出的回复状态。",
+                  "附未发送消息。"
                 ]
               },
               {
@@ -29301,50 +29268,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天：读虚构规则",
-                  "仅用上方虚构练习材料，摘录客户会不可移、需09:00前到场、预算上限1000元和需A批准四条规则。"
+                  "第 1 天",
+                  "抄录时间和预算。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天：整理输入表",
-                  "把A/B安排、候选人可改时段、两列车和费用列成表；标北京时间及虚构，留下版本记录。"
+                  "第 2 天",
+                  "对照参加人安排。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天：处理日程冲突",
-                  "提出预算会14:00—15:00、面试15:00—16:00改期草案；给A/B/候选人写确认文字，全部标待确认，不发送真实邀请。"
+                  "第 3 天",
+                  "比较两条出行的到场时间。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4天：核对虚构差旅",
-                  "算列车X最早10:30到场，排除；列车Y总费用580+360+60=1000，拟周二出发，等待A批准，不预订付款。"
+                  "第 4 天",
+                  "核费用并写两条草稿。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5天：写虚构纪要",
-                  "本题附加虚构状态：A已认可拟改预算会但差旅未批准；B认可面试改期、候选人未回复。只据这三条写状态纪要，原客户会仍不动，不伪造会议或承诺。"
+                  "第 5 天",
+                  "只更新变式给出的回复。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天：自行复核或请他人挑战",
-                  "对照上方参考交付检查时区、到场时间、费用及确认状态；无需实际同事，独立复核亦可，记录遗漏和修改。"
+                  "第 6 天",
+                  "独立交原题和变式，标出变化的确认状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天：写判断",
-                  "从七天的虚构纸面作品判断是否愿意继续、需补何技能，以及确认/预算/对外承诺的权限边界；不能据练习取得真实授权。"
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「EA344 日程协调参考答案（完成第六天后再打开）」。 写一处修订。"
                 ]
               }
             ]
@@ -29361,13 +29328,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第1天：是否列明硬约束与各审批对象？",
-              "第2天：是否标时区、虚构输入和版本？",
-              "第3天：是否区分唯一共同参会冲突与可选预算会改期？",
-              "第4天：是否算X10:30、Y1000并保留待批准？",
-              "第5天：是否只按给定状态分已确认与待确认？",
-              "第6天：是否对题面修订，记录真实复核或无人反馈？",
-              "第7天：是否区分纸面偏好与真实岗位经验、授权？"
+              "记录时区和原始输入。",
+              "写出冲突依据。",
+              "比较出行与费用。",
+              "保留草稿。",
+              "另记变式。",
+              "标审批状态。",
+              "对照参考记录修订。"
             ]
           },
           "id": "executive-secretaries-and-executive-administrative-assistants.path.seven-day-decision.1",
@@ -29489,13 +29456,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得仍有效且可对应本职业的中国雇主招聘样本。现有雇主卡仅核对模板，不是在招或常见要求证明；记录真实公告日期、状态、支持对象、软件和经验。"
+              "上海新朋程数据科技发展列董事长总助，9,000–15,000 元/月，要求三年以上高管秘书、总经理助理或总裁办工作经验。岗位兼有会议、保密材料和营销项目协作。 广州励丰文化科技列董事长秘书，9,000–10,000 元/月，要求本科及以上，职责包括起草报告和讲话稿、安排行程及跟进项目进度。 两条为个别雇主报价。职位都服务高管，实际行政支持、业务跟进和授权范围须逐岗核实。当前在招状态未核。"
             ]
           },
           "id": "executive-secretaries-and-executive-administrative-assistants.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a48-shanghai",
+            "a48-huangpu"
           ],
           "title": "如何读取招聘公告",
           "type": "notice"
@@ -31539,22 +31506,22 @@
                 ]
               },
               {
-                "answer": "当前BLS表1.2精确SOC43-6011：2025就业489,300、2035为489,200，变化0.0%、净减约100人；2025—2035年均空缺43,300，非净增或十年合计。43-6000组-2.1%不能代替本职业，OOH技术背景没有AI贡献量。",
+                "answer": "BLS 表 1.2 的美国 43-6011 行：2025 年约 489,300 人，2035 年预计约 489,200 人，公布变化率为 0.0%（取一位小数），年均岗位空缺约 43,300 个，含替补。人数分别取整。",
                 "id": "executive-secretaries-and-executive-administrative-assistants.faq.5",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.executive-secretaries-and-executive-administrative-assistants.q5",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "bls-ooh-secretaries"
+                  "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "本次所核国家统计局资料为行业门类口径，未取得与本职业精确对应的全国单职业工资统计值；本页以「租赁和商务服务业」城镇单位平均工资（2025 年非私营 110,162 元/年、私营 68,919 元/年）作行业代理，仅说明行业背景，不用行业均值或单条招聘报价替代职业工资。",
+                "answer": "上海新朋程数据科技发展列董事长总助，9,000–15,000 元/月，要求三年以上高管秘书、总经理助理或总裁办工作经验。岗位兼有会议、保密材料和营销项目协作。 广州励丰文化科技列董事长秘书，9,000–10,000 元/月，要求本科及以上，职责包括起草报告和讲话稿、安排行程及跟进项目进度。 两条为个别雇主报价。职位都服务高管，实际行政支持、业务跟进和授权范围须逐岗核实。当前在招状态未核。 全国职业工资分布仍缺可比数据。",
                 "id": "executive-secretaries-and-executive-administrative-assistants.faq.6",
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.executive-secretaries-and-executive-administrative-assistants.us-pay",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "a48-shanghai",
+                  "a48-huangpu"
                 ]
               },
               {
@@ -31597,6 +31564,12 @@
                   "onet-details",
                   "internal-rubric"
                 ]
+              },
+              {
+                "answer": "保留周二 09:00 预算会和 10:00 客户会，向 B 和候选人提议 15:00–16:00 面试，双方未确认前先留草稿。X 最早周三 10:30 到会场，赶不上 09:00。Y 周二抵达，周三 08:25 从酒店出发，约 08:55 到场。580＋360＋60＝1,000 元，正好达到预算上限，仍须 A 批准。变式只有 B 确认，候选人仍待确认，面试邀请暂不发送。自核日程冲突、到场和费用、确认状态及权限。",
+                "id": "executive-secretaries-and-executive-administrative-assistants.faq.11",
+                "question": "EA344 日程协调参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.executive-secretaries-and-executive-administrative-assistants.11"
               }
             ]
           },
@@ -31687,26 +31660,14 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI（英文）",
+                "entity": "MBTI 人格测评",
                 "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（英文）",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI（中文）",
-                "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five（中文）",
-                "id": "navigation-5",
+                "entity": "大五人格测评",
+                "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
@@ -31742,19 +31703,20 @@
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
-                "limitation": "美国职业资料不自动推导中国大陆的执业要求、资质或雇主要求；也不构成法律或合规结论。",
+                "limitation": "工资和就业分别采用 2025 年工资与 BLS 表 1.2 投影。",
                 "market": "美国",
                 "name": "O*NET OnLine：Executive Secretaries and Executive Administrative Assistants（43-6011.00）",
-                "period": "current page; accessed 2026-10-03",
+                "period": "2025 工资与 2025–2035 就业预测口径",
                 "publisher": "O*NET OnLine",
                 "scope": "exact occupation (SOC 43-6011)",
                 "url": "https://www.onetonline.org/link/summary/43-6011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "用于核对任务、工作活动、工作情境、技术技能与准备层级（Job Zone Three）。",
-                  "任务以日程管理、差旅安排、文档编制、办公服务协调与信息处理为核心。"
+                  "任务以日程管理、差旅安排、文档编制、办公服务协调与信息处理为核心。",
+                  "2025 美国中位时薪 36.82 美元、中位年薪 76,590 美元。就业预测见 BLS 表 1.2。"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
@@ -31770,7 +31732,6 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "Median wages (2025)：$36.82 hourly, $76,590 annual。",
-                  "Employment (2024)：502,800；Projected growth (2024—2034)：Decline (-1% or lower)；Projected job openings (2024—2034)：50,000。",
                   "Top industries (2024)：Educational Services；Government。"
                 ],
                 "evidence_type": "official occupation trends (BLS data)",
@@ -31778,7 +31739,7 @@
                 "limitation": "当前摘要就业仍2024/2024—2034；正文当前周期直接核BLS表1.2。五档工资另直接核全国工资表，不将摘要改为新周期。",
                 "market": "美国",
                 "name": "O*NET OnLine：工资与就业趋势（43-6011.00，引 BLS 数据）",
-                "period": "median wages 2025; employment 2024; projections 2024—2034; accessed 2026-09-20",
+                "period": "2025 工资与 2025–2035 就业预测口径",
                 "publisher": "O*NET OnLine（数据来自 BLS）",
                 "scope": "exact occupation (SOC 43-6011)",
                 "url": "https://www.onetonline.org/link/summary/43-6011.00"
@@ -31819,8 +31780,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "精确SOC43-6011：2025为489.3千、2035为489.2千，净变化-0.1千、百分比0.0%、年均空缺43.3千。",
-                  "典型入口高中或同等、少于5年相关经验、OJT项None；43-6000组-2.1%与本职业分开。"
+                  "BLS 表 1.2 的美国 43-6011 行：2025 年约 489,300 人，2035 年预计约 489,200 人，公布变化率为 0.0%（取一位小数），年均岗位空缺约 43,300 个，含替补。人数分别取整。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
@@ -31915,14 +31875,14 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "2024就业502800；2034就业494900；变化-2%；预测期年均空缺50000个，含增长与更替。"
+                  "BLS 表 1.2 的美国 43-6011 行：2025 年约 489,300 人，2035 年预计约 489,200 人，公布变化率为 0.0%（取一位小数），年均岗位空缺约 43,300 个，含替补。人数分别取整。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "onet-national-trends-2024-2034",
-                "limitation": "全国职业统计不是个人收入或录用概率；统计期与单位分别保留。",
+                "limitation": "职业就业变化采用 BLS 表 1.2 的公布精度。",
                 "market": "美国",
-                "name": "O*NET全国就业趋势：执行秘书与执行行政助理（43-6011.00）",
-                "period": "2024基期；2024—2034年预测",
+                "name": "O*NET 全国就业趋势 43-6011",
+                "period": "2025 工资与 2025–2035 就业预测口径",
                 "publisher": "O*NET OnLine（数据来自BLS）",
                 "scope": "exact occupation (SOC 43-6011)",
                 "url": "https://www.onetonline.org/link/localtrends/43-6011.00"
@@ -32063,6 +32023,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "上海新朋程数据科技发展列董事长总助，9,000–15,000 元/月，要求三年以上高管秘书、总经理助理或总裁办工作经验。岗位兼有会议、保密材料和营销项目协作。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a48-shanghai",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "高管行政支持招聘样本",
+                "period": "2026-11-09",
+                "publisher": "上海市杨浦区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shanghai.gov.cn/nw17239/20261109/c82b8612101c460ab05fc56517cbfdd6.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "广州励丰文化科技列董事长秘书，9,000–10,000 元/月，要求本科及以上，职责包括起草报告和讲话稿、安排行程及跟进项目进度。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a48-huangpu",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "高管行政支持招聘样本",
+                "period": "2023-08-09",
+                "publisher": "广州市黄埔区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/hpqgzkfqzdlyzl/jycy/gzdt/content/post_9156631.html"
               }
             ]
           },
@@ -34558,7 +34548,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet",
+            "id": "onet-work-context",
             "label": {
               "$link": "executive-secretaries-and-executive-administrative-assistants.risk.career-risk-cards.7",
               "block": "risk",
@@ -34923,6 +34913,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a48-shanghai",
+            "posting-a48-huangpu"
+          ],
           "sources_note": {
             "$item": "executive-secretaries-and-executive-administrative-assistants.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36834,7 +36828,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测评"
           },
           {
             "href": {
@@ -36844,27 +36838,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "executive-secretaries-and-executive-administrative-assistants.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI（中文）"
-          },
-          {
-            "href": {
-              "$link": "executive-secretaries-and-executive-administrative-assistants.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five（中文）"
+            "label": "大五人格测评"
           }
         ]
       },
@@ -37252,6 +37226,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "上海新朋程数据科技发展列董事长总助，9,000–15,000 元/月，要求三年以上高管秘书、总经理助理或总裁办工作经验。岗位兼有会议、保密材料和营销项目协作。",
+        "fact_id": "posting-a48-shanghai",
+        "market": "中国大陆",
+        "measure": "招聘报价",
+        "occupation_scope": "高管行政支持招聘样本",
+        "period": "2026-11-09",
+        "source_refs": [
+          "a48-shanghai"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "广州励丰文化科技列董事长秘书，9,000–10,000 元/月，要求本科及以上，职责包括起草报告和讲话稿、安排行程及跟进项目进度。",
+        "fact_id": "posting-a48-huangpu",
+        "market": "中国大陆",
+        "measure": "招聘报价",
+        "occupation_scope": "高管行政支持招聘样本",
+        "period": "2023-08-09",
+        "source_refs": [
+          "a48-huangpu"
+        ]
       }
     ]
   },
@@ -37311,7 +37309,7 @@
       "text": "执行秘书与执行行政助理"
     }
   },
-  "source_content_sha256": "b0dbe7e3f5207e935d1e581ac8340965498d48fd75bd5ab934bd552cf49d0167",
+  "source_content_sha256": "295b6bf98af94facf37529f1787de375aac5571d5e67e1ac5d5806738569f9c9",
   "subject": {
     "canonical_slug": "executive-secretaries-and-executive-administrative-assistants",
     "name": "执行秘书与执行行政助理",

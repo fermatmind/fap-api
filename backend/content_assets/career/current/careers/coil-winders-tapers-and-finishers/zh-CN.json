@@ -1478,6 +1478,9 @@
       "item:coil-winders-tapers-and-finishers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:coil-winders-tapers-and-finishers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:coil-winders-tapers-and-finishers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31312,6 +31315,21 @@
           "id": "coil-winders-tapers-and-finishers.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。工单 C4 要求绕组编号与材料批号可追溯。记录甲有绕组编号但批号空白，乙有批号却属于另一工单。写出缺项和应向谁核实，实际绕线由获授权人员操作。"
+            ]
+          },
+          "id": "coil-winders-tapers-and-finishers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核线圈工单和绕线记录",
+          "type": "notice"
         }
       ]
     },
@@ -38203,6 +38221,13 @@
         "id": "coil-winders-tapers-and-finishers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "coil-winders-tapers-and-finishers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38807,7 +38832,7 @@
       "text": "线圈绕线工、包扎工、修整工"
     }
   },
-  "source_content_sha256": "a659d0819bdf320c8d066894ef56b7209c13483ab7ab9162eb4091303ab3a093",
+  "source_content_sha256": "0982509825df5bab7353737f28633cdef1767168ab5280e056e5d134a364b0e8",
   "subject": {
     "canonical_slug": "coil-winders-tapers-and-finishers",
     "name": "线圈绕线工、包扎工、修整工",

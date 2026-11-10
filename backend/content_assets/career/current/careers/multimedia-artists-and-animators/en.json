@@ -158,6 +158,9 @@
       "item:multimedia-artists-and-animators.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:multimedia-artists-and-animators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:multimedia-artists-and-animators.profile.career-quick-answers-block.5": {
         "status": "mapped"
       },
@@ -13325,6 +13328,21 @@
             "onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Storyboard S7 calls for a close-up, the preview uses the old framing, and the audio is synced to the new cut. Identify what to preserve and who should confirm the revision scope."
+            ]
+          },
+          "id": "multimedia-artists-and-animators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Hand over an animation shot",
+          "type": "notice"
         }
       ]
     },
@@ -15806,6 +15824,13 @@
         "id": "multimedia-artists-and-animators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "multimedia-artists-and-animators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16047,7 +16072,7 @@
       "text": "Special Effects Artists and Animators"
     }
   },
-  "source_content_sha256": "772b6e8129b9aef6ebdc65404523793704f73575cde097ffa2d8ec8eddb3c7e6",
+  "source_content_sha256": "36e2018b6c90c230c3d277e979385dce8073771b7d4670cf55c783f951176416",
   "subject": {
     "canonical_slug": "multimedia-artists-and-animators",
     "name": "Special Effects Artists and Animators",

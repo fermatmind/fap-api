@@ -188,6 +188,9 @@
       "item:nurse-midwives.path.seven-day-trial.6": {
         "status": "pending_mapping"
       },
+      "item:nurse-midwives.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nurse-midwives.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13348,6 +13351,21 @@
             "onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two postnatal forms for one household concern the mother and the infant. Only one has a verified contact field. Identify the fields and owner for the next check."
+            ]
+          },
+          "id": "nurse-midwives.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check a nurse-midwifery follow-up handover",
+          "type": "notice"
         }
       ]
     },
@@ -15923,6 +15941,13 @@
         "id": "nurse-midwives.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nurse-midwives.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16276,7 +16301,7 @@
       "text": "Nurse Midwives"
     }
   },
-  "source_content_sha256": "b5305bc67455da3ef635416c4fdb2b072be109274d4fe36c062b701f3580b159",
+  "source_content_sha256": "8e920e08bbe00c3aae2a57d413880a4bff4d99438b2cabf95eb029fd3adab970",
   "subject": {
     "canonical_slug": "nurse-midwives",
     "name": "Nurse Midwives",

@@ -170,6 +170,9 @@
       "item:museum-technicians-and-conservators.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:museum-technicians-and-conservators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:museum-technicians-and-conservators.profile.career-quick-answers-block.5": {
         "status": "mapped"
       },
@@ -13078,6 +13081,21 @@
             "bls-ooh"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. A condition note describes a new crack, but the display checklist cites an older photo. List evidence for comparison and a question for the collections lead. Authorized staff decide actual treatment."
+            ]
+          },
+          "id": "museum-technicians-and-conservators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Prepare an object condition handover",
+          "type": "notice"
         }
       ]
     },
@@ -15594,6 +15612,13 @@
         "id": "museum-technicians-and-conservators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "museum-technicians-and-conservators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15799,7 +15824,7 @@
       "text": "Museum Technicians and Conservators"
     }
   },
-  "source_content_sha256": "c764a1bd5ca4317b2e437baf9574765076896b5b1de8fbd661f1d73fcd63fece",
+  "source_content_sha256": "4a7189be82036a5330917d9e5c523beeeebf3add11bab86700416f86fc3e648c",
   "subject": {
     "canonical_slug": "museum-technicians-and-conservators",
     "name": "Museum Technicians and Conservators",

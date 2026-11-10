@@ -1533,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:solar-energy-installation-managers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:solar-energy-installation-managers.sources.source-card.1": {
         "status": "mapped"
@@ -15975,8 +15975,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -22957,7 +22963,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "First experience whether you can organize the installation scope, personnel and materials and the sequence dependencies clearly, and adjust the plan and explain the impact when delays or incomplete inspections are found. Being willing to lead a team is not the same as being willing to take on site coordination and quality tracking."
+              "Think twice if you prefer a single technical task or find site visits, schedule negotiations, and chasing inspection records draining."
             ]
           },
           "id": "solar-energy-installation-managers.quick-decision.fit-decision-checklist.1",
@@ -22972,7 +22978,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "This occupation directs installation crews; solar photovoltaic installers perform assembly and installation, solar energy systems engineers handle engineering analysis and design, and construction managers cover a wider range of construction projects. When choosing, compare whether you want to deliver crew implementation, design solutions or full project management."
+              "Try SIM-01 in section 09. Finish a first draft before checking the key after the seven-day plan."
             ]
           },
           "id": "solar-energy-installation-managers.quick-decision.fit-decision-checklist.2",
@@ -22987,7 +22993,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use the fictional project on this page to complete process scheduling, delay recalculation and a handover gap list. Do paper coordination only, without climbing, wiring or operating equipment, and the exercise cannot prove real work qualification."
+              "This work may suit you if you enjoy planning crews, materials, and dependencies, then explaining what changes when the schedule slips."
             ]
           },
           "id": "solar-energy-installation-managers.quick-decision.fit-decision-checklist.3",
@@ -26601,7 +26607,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The table below is an editorial exploration path based on installation management tasks, with no verified employer education samples or occupational wage tiers. Education, related experience, project type and authority must be verified separately."
+              "The table shows entry paths to explore. Use the employer examples in section 09 to check education, project types, and responsibilities. See the labeled wage data separately."
             ]
           },
           "id": "solar-energy-installation-managers.china-salary.career-snapshot-primary-locale.45",
@@ -27586,31 +27592,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-test"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Solar Photovoltaic Installers",
@@ -29416,33 +29422,33 @@
               {
                 "id": "education",
                 "values": [
-                  "Evidence is insufficient: no complete employer posting was included",
-                  "No recruitment sample for this occupation with a verifiable original text, date, region, crew leadership duties and pay definition was obtained, and no claim is made about universal employer education or experience thresholds.",
-                  "Verification method: check the posting identity, project type, duties, experience and pay item by item."
+                  "Huangpu District notice: Jiuzhou Energy project manager",
+                  "This historical posting covers site progress, quality, and safety and coordinating changes with the EPC contractor.",
+                  "Check requirements on the posting."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "Editorial design: coordination evidence",
-                  "Use S1/S3 to show dependencies, durations, the single crew constraint and the delay communication method.",
-                  "Verification method: mark it as fictional, recalculate Day9/Day11 and do not fabricate field experience."
+                  "OGW Energy Resources: solar installation manager",
+                  "The employer lists project foreman duties, oversight of an installation crew, and responsibility for keeping installations on schedule.",
+                  "Check requirements on the posting."
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "Official task materials",
-                  "O*NET supports resource estimating, scheduling, supervision and inspection coordination and can be used to compare whether a position really undertakes installation crew management.",
-                  "Verification method: compare with the actual position duties item by item and distinguish design, installation and sales."
+                  "Nankai University: Shandong Hi-Speed solar construction management assistant",
+                  "The November 5, 2026 notice separates construction support from finance. The construction role assists the manager with site coordination, progress, and acceptance.",
+                  "Check requirements on the posting."
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "Editorial design: handover evidence",
-                  "Use S4 to list plan versions and unknown inspection or operation status and state whom to confirm with and which promises cannot be made.",
-                  "Verification method: the next person can distinguish task plans, completed status and professional approval evidence."
+                  "Work authority",
+                  "Track installation progress, professional inspection, and grid approval separately.",
+                  "Confirm responsibilities with the employer and under local rules."
                 ]
               }
             ]
@@ -29450,7 +29456,10 @@
           "id": "solar-energy-installation-managers.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d020-cn-job",
+            "d020-us-job",
+            "d020-cn-context"
           ],
           "title": "The boundary between recruitment evidence and editorial work",
           "type": "cards"
@@ -29482,10 +29491,10 @@
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answers｜finish independently first, then check",
-                  "S1: A Day1; B Day2–3; C Day4–5; D Day6–7; E Day8; F Day9. The earliest finish is Day9, leaving 1 working day of margin before the Day10 deadline. S2: 20×600=12,000 and 20×150=3,000; the total 12,000+3,000+5,000+1,000=21,000 yuan, with a budget margin of 1,000 yuan.",
-                  "S3: A Day1; B Day2–5; C Day6–7; D Day8–9; E Day10; F Day11. This is 2 working days later than the original Day9 and 1 working day later than the Day10 deadline. The suggestion should report the affected processes and request a deadline decision from the project lead; the inspection cannot be skipped or written as passed.",
-                  "Handover example: schedule V2 records the change in B's duration and points back to S3; the design plan remains V1. Construction, professional inspection results and operation or grid connection approval are in separate columns, with the latter two written as unknown or pending confirmation. F is the document handover duration and does not mean the system can operate; ask the corresponding personnel about the inspection conclusion and approval documents, and do not promise an operation date before confirmation."
+                  "Before checking your work",
+                  "Write the inputs, constraints, and calculations in your first draft.",
+                  "Name the responsible person and what still needs confirmation.",
+                  "Save your draft on day 6. Follow the day 7 instructions to open the key."
                 ]
               },
               {
@@ -29501,7 +29510,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Paper exercise: installation scheduling, budget and handover (fictional)",
+          "title": "SIM-01 | Reschedule one crew and update the handoff",
           "type": "cards"
         },
         {
@@ -29512,33 +29521,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Process and resource table",
-                  "Following S1, write the A–F dependencies, start and end dates, single crew constraint and responsible person column; after S3, update V2 and keep the first draft.",
-                  "Review: others can recalculate Day9 and Day11 and know which change affects which process."
+                  "Dependency and schedule table",
+                  "Lay out the original schedule and finish date, showing dependencies and crew limits.",
+                  "Keep the source reference and your check."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Budget reconciliation table",
-                  "Following S2, list 20 modules, 20 mounting structures, labor and transport, a total of 21,000 yuan and a margin of 1,000 yuan.",
-                  "Review: units, quantities and amounts point back to S2, and no market prices, tax rates or revenue are invented."
+                  "Budget calculation",
+                  "Check materials, labor, and transport and show the budget calculation.",
+                  "Keep the source reference and your check."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Delay and handover package",
-                  "Following S3/S4, write the 1-day late figure, the pending delay approval, plan V1, schedule V2, unknown inspection and operation approval, and the corresponding pending-confirmation responsible persons.",
-                  "Review: the next person will not treat inspection duration completion as passing inspection, or handover completion as being allowed to operate."
+                  "Delay request",
+                  "Reschedule the job and draft a delay request showing affected tasks.",
+                  "Keep the source reference and your check."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Method statement card",
-                  "Explain the four bases: consecutive working days, starting the day after the predecessor finishes, no overlapping, and retaining professional authority, and mark everything as a fictional exercise.",
-                  "Review: keep the reasons for revisions and do not treat paper work as real installation experience or qualification."
+                  "Handover checklist",
+                  "Log inspection and operation checks in the handoff.",
+                  "Keep the source reference and your check."
                 ]
               }
             ]
@@ -29569,27 +29578,27 @@
             "rows": [
               [
                 "Scheduling follow-up",
-                "Check predecessor dependencies and resource constraints",
-                "Can explain Day9 and recalculate Day11",
-                "An editorial item, not a uniform industry recruitment examination"
+                "Lay out the original schedule and finish date, showing dependencies and crew limits.",
+                "Explain the evidence and record one open question.",
+                "Check the requirements of the actual role."
               ],
               [
                 "Budget follow-up",
-                "Quantities, costs and budget margin",
-                "Can recalculate 21,000 yuan and 1,000 yuan",
-                "Fictional prices do not represent quoting experience"
+                "Check materials, labor, and transport and show the budget calculation.",
+                "Explain the evidence and record one open question.",
+                "Check the requirements of the actual role."
               ],
               [
                 "Delay communication",
-                "Whether inspections are skipped when pressured on Day10",
-                "Accurately reports 1 day late and requests a deadline decision",
-                "Cannot approve on behalf of the project lead"
+                "Reschedule the job and draft a delay request showing affected tasks.",
+                "Explain the evidence and record one open question.",
+                "Check the requirements of the actual role."
               ],
               [
                 "Handover check",
-                "Distinguishes construction, inspection and operation approval",
-                "Keeps unknowns, versions and responsible persons",
-                "Paper performance does not prove field qualification or long-term performance"
+                "Log inspection and operation checks in the handoff.",
+                "Explain the evidence and record one open question.",
+                "Check the requirements of the actual role."
               ]
             ]
           },
@@ -29617,42 +29626,42 @@
                 "id": "entry-trial-day-2",
                 "values": [
                   "Day 2",
-                  "Following S1, list the A–F sequence and start and end dates and check the rule that the next process starts the day after the predecessor ends and that the single crew does not overlap."
+                  "Lay out the original schedule and finish date, showing dependencies and crew limits."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day 3",
-                  "Following S2, list quantities, unit prices, labor and transport, calculate the total and budget margin independently, and keep the formulas."
+                  "Check materials, labor, and transport and show the budget calculation."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day 4",
-                  "Following S3, reschedule the dates, compare with the original plan and the Day10 deadline, and write a pending delay approval suggestion without deleting E."
+                  "Reschedule the job and draft a delay request showing affected tasks."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day 5",
-                  "Following S4, form the handover package, recording plan V1 and schedule V2, unknown inspection and operation approval, responsible persons and evidence still to be collected."
+                  "Log inspection and operation checks in the handoff."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day 6",
-                  "After sealing the first draft, compare with the reference answers and check Day9/Day11, the 1-day lateness, 21,000 yuan and 1,000 yuan, recording the basis for changes."
+                  "Finish and save your own first draft with the calculations, decisions, and supporting evidence. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day 7",
-                  "Keep the first and revised drafts and review whether dependencies, formulas, unknown statuses and authority are consistent, recording subjective energy without converting it into a fit score."
+                  "After saving your day 6 draft, open “SIM-01 answer key and rubric (open on day 7)” in the FAQ. Use the rubric to review dependencies, calculations, unknown statuses, and approval roles, then record one revision and its reason."
                 ]
               }
             ]
@@ -29669,20 +29678,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep the first and revised drafts and locate each omission and the basis for correction with S1–S4.",
-              "Check whether inspection duration is treated as a passing result, document handover is treated as being allowed to operate, or E is omitted to meet Day10.",
-              "Check no single-crew overlap, the next-day start after predecessors, Day9 and Day11, the 1-day lateness and the budget formulas.",
-              "Record daily input and energy, without converting them into an occupational fit score.",
-              "Redo the schedule once and see whether dependency omissions decrease; unknown approval statuses should still be retained.",
-              "Compare with real position tools and templates to understand the field experience, training and authorization that paper work cannot yet prove.",
-              "List unfinished parts truthfully as specific questions for learning about crew management next time, and do not draw conclusions from a title."
+              "List the start and finish days, dependencies, and crew constraints.",
+              "Keep the original schedule, revised schedule, and budget calculations.",
+              "Name the affected tasks and who decides on a deadline change.",
+              "Record inspection, operation approval, and document handoff separately.",
+              "Use only the fictional materials.",
+              "Use the named answer key on day 7.",
+              "Keep your first draft and record the reason for any revision."
             ]
           },
           "id": "solar-energy-installation-managers.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "Seven-day review and continued exploration",
+          "title": "Submission and review checklist",
           "type": "list"
         },
         {
@@ -29801,18 +29810,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Evidence is insufficient: this round did not include any Chinese mainland employer posting with a verifiable original text, date, installation management duties and pay conditions. Official occupational tasks and DOE training materials cannot serve as employer recruitment samples.",
-              "The simulated durations, prices, budgets, delays and authority are editorial settings, not position wages, employer assessments or a uniform entry threshold."
+              "This historical posting covers site progress, quality, and safety and coordinating changes with the EPC contractor.",
+              "The employer lists project foreman duties, oversight of an installation crew, and responsibility for keeping installations on schedule."
             ]
           },
           "id": "solar-energy-installation-managers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "d020-cn-job",
+            "d020-us-job"
           ],
-          "title": "Chinese recruitment sample gap",
+          "title": "Employer examples from mainland China and the United States",
           "type": "notice"
         },
         {
@@ -30064,7 +30071,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Confirm requirements according to the target location, project system and the position's actual work. This page has no verified employer posting or uniform Chinese qualification list; unknown requirements must be confirmed with the employer and competent authority."
+              "Compare the project size, site duties, credentials, and supervision in the posting. Check local permits and professional sign-off with the responsible authority."
             ]
           },
           "id": "solar-energy-installation-managers.path.career-path-block.23",
@@ -32159,6 +32166,15 @@
                   "onet",
                   "health"
                 ]
+              },
+              {
+                "answer": "S1: A Day1; B Day2–3; C Day4–5; D Day6–7; E Day8; F Day9. The earliest finish is Day9, leaving 1 working day of margin before the Day10 deadline. S2: 20×600=12,000 and 20×150=3,000; the total 12,000+3,000+5,000+1,000=21,000 yuan, with a budget margin of 1,000 yuan.\n\nS3: A Day1; B Day2–5; C Day6–7; D Day8–9; E Day10; F Day11. This is 2 working days later than the original Day9 and 1 working day later than the Day10 deadline. The suggestion should report the affected processes and request a deadline decision from the project lead; the inspection cannot be skipped or written as passed.\n\nHandover example: schedule V2 records the change in B's duration and points back to S3; the design plan remains V1. Construction, professional inspection results and operation or grid connection approval are in separate columns, with the latter two written as unknown or pending confirmation. F is the document handover duration and does not mean the system can operate; ask the corresponding personnel about the inspection conclusion and approval documents, and do not promise an operation date before confirmation.\n\nScore four items from 0 to 2: reproducible dependencies and crew schedule, budget and margin calculations, timing and ownership of the delay decision, and separate inspection, operation, and document-handover statuses.\n\nFor each item, give 2 for complete, verifiable work, 1 for partial work, and 0 for missing work or approving outside your role.\n\nKeep the first and revised drafts. Mark one point still to verify in the handoff.\n\nRead one role with supervision and identify its biggest difference from the paper task.",
+                "id": "solar-energy-installation-managers.faq.11",
+                "question": "SIM-01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.solar-energy-installation-managers.exercise-answer-key",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -32271,13 +32287,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the Solar Energy Installation Managers career page",
@@ -32735,6 +32751,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "This historical posting covers site progress, quality, and safety and coordinating changes with the EPC contractor."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d020-cn-job",
+                "limitation": "Use for this posting’s tasks only.",
+                "market": "Mainland China",
+                "name": "Huangpu District notice: Jiuzhou Energy project manager",
+                "period": "2023 historical posting",
+                "publisher": "Huangpu District notice: Jiuzhou Energy project manager",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzjg/qt/ldjyfwzx/zdqyzplm/content/post_9162479.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The employer lists project foreman duties, oversight of an installation crew, and responsibility for keeping installations on schedule."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d020-us-job",
+                "limitation": "Use for this posting’s tasks only.",
+                "market": "United States",
+                "name": "OGW Energy Resources: solar installation manager",
+                "period": "Read on the employer posting",
+                "publisher": "OGW Energy Resources: solar installation manager",
+                "scope": "recruitment_proxy",
+                "url": "https://ogwenergyresources.com/careers/"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The November 5, 2026 notice separates construction support from finance. The construction role assists the manager with site coordination, progress, and acceptance."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d020-cn-context",
+                "limitation": "Use for this posting’s tasks only.",
+                "market": "Mainland China",
+                "name": "Nankai University: Shandong Hi-Speed solar construction management assistant",
+                "period": "2026-11-05",
+                "publisher": "Nankai University: Shandong Hi-Speed solar construction management assistant",
+                "scope": "recruitment_proxy",
+                "url": "https://career.nankai.edu.cn/correcruit/content/id/120458.html"
               }
             ]
           },
@@ -36047,7 +36108,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person suits Solar Energy Installation Managers?"
+        "title": "Would managing solar installation suit me?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -37429,7 +37490,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit Solar Energy Installation Managers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37551,6 +37612,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which work direction of this occupation are you more likely to suit?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
+      "interface.quick_decision.suit_heading": "Who tends to enjoy managing solar installation?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. wage reference",
@@ -38003,14 +38065,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Crew coordination, process scheduling, inspection handover and entry exercises for solar energy installation managers. It distinguishes system design from field operating authority and explains U.S. 47-1011 parent occupation wages and the Chinese data gap."
+      "text": "See how solar installation managers schedule crews, handle delays, and track handover requirements. Try a project rescheduling exercise."
     },
     "title": {
       "availability": "available",
       "text": "Solar Energy Installation Managers"
     }
   },
-  "source_content_sha256": "aad2e2109c03e6e9764f18cef348232b967b9f3f1c4fd100ec8180593e6a4e15",
+  "source_content_sha256": "0a01da89dfeaab0d2b0a82904c3f8f5547b77d0d81addd2b42a97af681947e73",
   "subject": {
     "canonical_slug": "solar-energy-installation-managers",
     "name": "Solar Energy Installation Managers",

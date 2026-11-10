@@ -29,7 +29,25 @@
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
+      "fact:group-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:group-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:group-openings": {
+        "status": "pending_mapping"
+      },
+      "fact:group-wage": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a52-putuo": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a52-yantian": {
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
@@ -1527,7 +1545,7 @@
         "status": "pending_mapping"
       },
       "item:film-and-video-editors-and-camera-operators.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:film-and-video-editors-and-camera-operators.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20201,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "film-and-video-editors-and-camera-operators.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "film-and-video-editors-and-camera-operators.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23076,7 +23054,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Test this through a paper exercise: given an entirely fictional editing work order specifying genre and running time, material count and total duration, director or client priorities, licensing and confidentiality restrictions, delivery formats and timecode requirements, and available software and hardware, write material review and annotation methods, a structure and pacing plan, sound-picture alignment and graphic treatment considerations, a technical checking and export checklist, versioning and backup methods, and decisions requiring director, producer, or legal confirmation."
+              "Build a 30-second timeline from the ED32 shot cards. Check picture, captions, public-use approval and delivery sign-off."
             ]
           },
           "id": "film-and-video-editors-and-camera-operators.quick-decision.fit-decision-checklist.2",
@@ -26570,7 +26548,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Nationwide (industry proxy)"
+              "Shenzhen filming and editing role"
             ]
           },
           "id": "film-and-video-editors-and-camera-operators.china-salary.career-snapshot-primary-locale.49",
@@ -26584,12 +26562,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national monthly wage or project-based income statistic precisely matching this occupation in mainland China was obtained. This page provides only industry average wages as context (non-private units CNY 129,447 per year; private units CNY 64,015 per year, 2025). These cannot be converted into monthly wages or daily income for a specific job."
+              "Shenzhen Zhongshenli Development Technology sought a short-video editor for planning, filming, editing and packaging, with at least two years of filming and editing experience. Probation pay was CNY 5,000–5,500 per month, with subsequent pay negotiable."
             ]
           },
           "id": "film-and-video-editors-and-camera-operators.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "internal-rubric"
+            "a52-yantian"
           ],
           "type": "prose"
         },
@@ -26626,7 +26604,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other regions and employment arrangements"
+              "Shanghai editing role"
             ]
           },
           "id": "film-and-video-editors-and-camera-operators.china-salary.career-snapshot-primary-locale.53",
@@ -26640,12 +26618,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable monthly wage statistics were obtained for other regions and employment arrangements (full-time employment, project work, and freelancing). Cities, genres, and project sizes vary considerably; check each project."
+              "Shanghai Miaoyu Network Technology listed a separate editor role at CNY 10,000–15,000 per month. It covered editing for an account, pacing and footage management. The listing asked for a bachelor’s degree or above and preferred editing experience. The same bulletin listed photography separately."
             ]
           },
           "id": "film-and-video-editors-and-camera-operators.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a52-putuo"
           ],
           "type": "prose"
         },
@@ -27399,13 +27377,13 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
@@ -29165,37 +29143,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Material one: fictional editing work order",
-                  "Provide genre and running time, material count and total duration, director or client priorities, licensing and confidentiality restrictions, delivery formats and timecode requirements, and available software and hardware as exercise inputs.",
-                  "Label units and missing items, and state that the materials are entirely fictional.",
-                  "List missing information that could affect judgments.",
-                  "State that the exercise uses fictional materials and represents no actual project, business, or employer.",
-                  "Checkable outputs: material review and annotation methods, a structure and pacing plan, sound-picture alignment and graphic treatment considerations, a technical checking and export checklist, versioning and backup methods, and situations requiring director or legal confirmation.",
-                  "State the boundaries: copyright, review, and delivery compliance conclusions must be made by the production company, legal team, or technical supervisor."
+                  "ED32: The client needs a 30-second vertical video in this order: intro, explanation, demonstration, end card.",
+                  "A: 5-second intro, cleared for public use.",
+                  "B: 9-second explanation, cleared for public use. The transcript is approved. Add timed captions.",
+                  "C: 10-second full demonstration, cleared for internal review only.",
+                  "D: 10-second alternate demonstration, cleared for public use. It shows the same step as C in a wider shot.",
+                  "E: 6-second end card, cleared for public use.",
+                  "The client wants a separate review cut and public delivery checklist. The producer approves the public cut.",
+                  "The assets and permission records are fictional."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Material two: editing and delivery assignment (fictional)",
-                  "Write material review and annotation methods, a structure and pacing plan, and sound-picture alignment and graphic treatment considerations, explaining which decisions require director, producer, or legal confirmation.",
-                  "Exercise output: actionable editing and delivery guidelines."
+                  "List shot order and time ranges for both cuts. Mark the caption segment, permission evidence and delivery status.",
+                  "Single-change variant: shot C gains public-use approval. All other inputs stay the same. Show the row that changes.",
+                  "Write a one-line producer handoff stating the approval status of the public cut."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material three: reference approach excerpt (fictional)",
-                  "First review all materials and annotate usable ranges, then arrange structure and adjust pacing according to creative requirements, and finally align sound and picture and export to specifications.",
-                  "Leave unconfirmed licensing or specification issues as unknown and seek director or producer confirmation rather than relying on experience.",
-                  "Explain that the reference approach is an example, not the only correct method."
+                  "Finish both versions independently.",
+                  "Check duration, captions and use permissions for each version.",
+                  "On day seven, open “ED32 editing delivery reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Material four: boundary statement",
-                  "This exercise does not establish legal, copyright, review, or delivery compliance conclusions. The production company, legal team, or technical supervisor handles licensing judgments and delivery specifications under contracts and standards."
+                  "Use the paper shot cards. Editing software is optional.",
+                  "Use project records to verify rights and public delivery for actual footage."
                 ]
               }
             ]
@@ -29204,7 +29182,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "Film and Video Editors | path",
+          "title": "ED32 fictional editing delivery sheet",
           "type": "cards"
         },
         {
@@ -29215,9 +29193,9 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Work sample one: job requirements comparison table",
-                  "List each education, portfolio, and software requirement from the target announcement in a comparison table.",
-                  "Mark requirements met, gaps to address, and items requiring verification."
+                  "Keep both timelines and the public delivery checklist.",
+                  "Record shot choices, caption range and footage permissions.",
+                  "Attach the producer handoff."
                 ]
               },
               {
@@ -29312,50 +29290,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read a delivery specification or material list",
-                  "Extract a format, review, or licensing requirement and write its implementation points."
+                  "Day 1",
+                  "Record delivery specs and the order of the four segments."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: write material review and annotation guidelines",
-                  "Specify material classification, annotation, and retrieval methods by genre."
+                  "Day 2",
+                  "List shot durations and use permissions."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: create a structure and version record template",
-                  "List information to record for structural versions, revisions, and delivery."
+                  "Day 3",
+                  "Lay out both original timelines."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: write technical checking guidelines",
-                  "Write checking points for resolution, frame rate, audio levels, and timecodes."
+                  "Day 4",
+                  "Mark the start and end of the captions."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: write licensing and review guidelines",
-                  "Write self-checking points for material licensing, confidentiality, and content review."
+                  "Day 5",
+                  "Write the delivery checklist and approval status."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: invite someone to challenge your work",
-                  "Ask an experienced editor or postproduction manager to identify structural and delivery omissions, and record the feedback."
+                  "Day 6",
+                  "Submit both versions and show the row that changes."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: write your judgment",
-                  "Write whether you want to continue, what you need to learn, and which judgments you cannot make yourself."
+                  "Day 7",
+                  "On day seven, open “ED32 editing delivery reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29500,14 +29478,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Entering this occupation involves more than learning one software package. First check genre and delivery channels, material volume and project management methods, software and plugin environments, responsibility for all color grading or mixing, licensing and confidentiality constraints, and pay and credit agreements. Record the announcement date and whether recruitment remains open.",
-              "Read education, portfolio, and skill requirements together. Flexibility on one requirement does not mean others can be substituted."
+              "Shenzhen Zhongshenli Development Technology sought a short-video editor for planning, filming, editing and packaging, with at least two years of filming and editing experience. Probation pay was CNY 5,000–5,500 per month, with subsequent pay negotiable. Shanghai Miaoyu Network Technology listed a separate editor role at CNY 10,000–15,000 per month. It covered editing for an account, pacing and footage management. The listing asked for a bachelor’s degree or above and preferred editing experience. The same bulletin listed photography separately.",
+              "Both are historical postings. Current vacancy status is unverified. Duties and probation terms differ. Comparable national occupational wage data remain unavailable."
             ]
           },
           "id": "film-and-video-editors-and-camera-operators.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a52-yantian",
+            "a52-putuo"
           ],
           "title": "Film and Video Editors | path",
           "type": "notice"
@@ -31511,13 +31489,13 @@
           "data": {
             "entries": [
               {
-                "answer": "Organize, trim, and assemble filmed footage and recorded sound into broadcast-ready productions: review and annotate materials; determine narrative sequence and pacing according to scripts, storyboards, or director and producer intentions; choose the best shots for each scene and assemble sequences; trim segments to running time and adjust cuts; align dialogue, music, and sound effects with pictures; use editing, titling, switching, and effects systems for graphic treatment and output; check timecodes and delivery parameters; coordinate with camera, recording, music, and effects departments; attend screenings with directors and complete repeated revisions; maintain projects and versions; and deliver and archive under contracts.",
+                "answer": "Camera operators record footage using the shot plan and conditions on set. Editors select shots, set the pace, synchronize picture and sound, and deliver the finished cut. Some small teams combine the duties, as the Shenzhen job example illustrates.",
                 "id": "film-and-video-editors-and-camera-operators.faq.1",
-                "question": "What do film and video editors mainly do?",
+                "question": "What do film and video editors and camera operators do?",
                 "question_key": "career.faq.film-and-video-editors-and-camera-operators.q1",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "bls-ooh-group",
+                  "a52-yantian"
                 ]
               },
               {
@@ -31531,13 +31509,13 @@
                 ]
               },
               {
-                "answer": "U.S. O*NET-SOC 27-4032.00, Film and Video Editors, corresponds to SOC 27-4032, belongs to Job Zone Four (considerable preparation, SVP 7.0 to <8.0), has interest code AC, and is not designated Bright Outlook. Median wages and percentiles are BLS OEWS estimates for this exact occupation (May 2025, presented through O*NET). Employment and growth use both O*NET's presentation of 2024—2034 projections and the BLS OOH film and video editors and camera operators group's 2025—2035 scope; this page labels them separately.",
+                "answer": "The opening wage and employment figures use BLS Table 1.2 for the combined group (27-4030). The detailed editor wage and employment figures below use 27-4032. Camera operators have a separate line, 27-4031.",
                 "id": "film-and-video-editors-and-camera-operators.faq.3",
                 "question": "What is the scope of U.S. statistics?",
                 "question_key": "career.faq.film-and-video-editors-and-camera-operators.q3",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "bls-oews-2025",
+                  "bls-projections-2025-35"
                 ]
               },
               {
@@ -31551,22 +31529,22 @@
                 ]
               },
               {
-                "answer": "O*NET's presentation of 2024—2034 projections: employment of approximately 43,500 (2024), projected average growth (3% to 4%), and approximately 3,600 annual openings on average (an annual average over the projection period, including replacement needs). The BLS OOH film and video editors and camera operators group (27-4030), 2025—2035 scope: approximately 72,000 jobs (2025), +3% (approximately +1,900 workers), and approximately 5,600 annual openings, mostly from replacement needs. Statistical coverage and periods differ; this page labels them separately without conversion.",
+                "answer": "BLS Table 1.2 projects U.S. employment for film and video editors (27-4032) to rise from about 39,400 in 2025 to 40,800 in 2035, up 3.7%, with about 3,100 annual openings from growth and replacement. The broader group that includes camera operators (27-4030) goes from 72,000 to 73,900, up 2.6%, with 5,600 annual openings.",
                 "id": "film-and-video-editors-and-camera-operators.faq.5",
                 "question": "What is the U.S. employment outlook?",
                 "question_key": "career.faq.film-and-video-editors-and-camera-operators.q5",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics materials checked in this round cover industry categories. No national wage statistic precisely matching this occupation was obtained. This page uses average urban-unit wages in culture, sports, and entertainment (2025: non-private units CNY 129,447 per year; private units CNY 64,015 per year) as an industry proxy for context only. Neither industry averages nor individual recruitment quotations substitute for occupational wages.",
+                "answer": "Shenzhen Zhongshenli Development Technology sought a short-video editor for planning, filming, editing and packaging, with at least two years of filming and editing experience. Probation pay was CNY 5,000–5,500 per month, with subsequent pay negotiable. Shanghai Miaoyu Network Technology listed a separate editor role at CNY 10,000–15,000 per month. It covered editing for an account, pacing and footage management. The listing asked for a bachelor’s degree or above and preferred editing experience. The same bulletin listed photography separately. Both are historical postings. Current vacancy status is unverified. Duties and probation terms differ. Comparable national occupational wage data remain unavailable.",
                 "id": "film-and-video-editors-and-camera-operators.faq.6",
                 "question": "Are wage data available for mainland China?",
                 "question_key": "career.faq.film-and-video-editors-and-camera-operators.us-pay",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "a52-yantian",
+                  "a52-putuo"
                 ]
               },
               {
@@ -31608,6 +31586,12 @@
                   "bls-ooh-group",
                   "internal-rubric"
                 ]
+              },
+              {
+                "answer": "Example timeline: A 00:00–00:05, B 00:05–00:14, demonstration 00:14–00:24, E 00:24–00:30. Time B’s captions to the approved transcript. In the original, use C in the review cut and D in the public cut. The variant permits C in the public cut with the same duration and captions. The producer still approves delivery. Check order, 30-second duration, captions, permissions and final approval.",
+                "id": "film-and-video-editors-and-camera-operators.faq.11",
+                "question": "ED32 editing delivery reference (open after day six)",
+                "question_key": "career.faq.film-and-video-editors-and-camera-operators.11"
               }
             ]
           },
@@ -31669,7 +31653,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round obtained no exact CN wages or national recruitment distribution, occupational AI measurements or personality validity evidence, or original local copyright, review, confidentiality, or contract texts. The OOH publishes four industry wage figures for the exact editing occupation. This page's original identity follows 27-4032 rather than inferring 27-4030 from its slug. FAQ/Hero and shared older sources and facts still retain conflicts including 43500 / 3600, no training needed, overall augmentation, unpublished industry wages, and misread equipment-pace categories; whole-page consistency is not endorsed."
+              "BLS Table 1.2 projects U.S. employment for film and video editors (27-4032) to rise from about 39,400 in 2025 to 40,800 in 2035, up 3.7%, with about 3,100 annual openings from growth and replacement. Both are historical postings. Current vacancy status is unverified. Duties and probation terms differ. Comparable national occupational wage data remain unavailable."
             ]
           },
           "id": "film-and-video-editors-and-camera-operators.sources.source-card.4",
@@ -31698,28 +31682,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Return to the Film and Video Editors career page",
@@ -31746,36 +31718,37 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "Official occupational scope: edit moving images on film, video, or other media, possibly working with producers or directors to organize footage for final production and possibly editing or synchronizing soundtracks.",
                   "Interest code AC; preparation level Job Zone Four (considerable preparation, SVP 7.0 to <8.0); education survey: bachelor's degree 65%, associate degree or other two-year qualification 17%, high school diploma or equivalent 16%. This occupation is not designated Bright Outlook.",
-                  "Wage and employment trends (citing BLS data): median hourly wage USD 36.26 and median annual wage USD 75,420 in 2025; employment of 43,500 in 2024; projected average growth (3% to 4%) over 2024—2034; approximately 3,600 annual openings on average. Major industries in 2024 were information and professional, scientific, and technical services."
+                  "U.S. film and video editors had a median hourly wage of $36.26 and median annual wage of $75,420 in 2025."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
                 "limitation": "U.S. occupational information does not automatically establish mainland China material licensing, likeness, confidentiality, or employment requirements.",
                 "market": "United States",
                 "name": "O*NET OnLine：Film and Video Editors（27-4032.00）",
-                "period": "current page (updated 2026); accessed 2026-09-20",
+                "period": "2026 occupation profile; 2025 wages",
                 "publisher": "O*NET OnLine",
                 "scope": "exact occupation (SOC 27-4032)",
                 "url": "https://www.onetonline.org/link/summary/27-4032.00"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "For checking tasks, work activities, work context, technology skills, interest code (AC), and preparation level (Job Zone Four).",
                   "Main tasks include reviewing and assembling raw materials; selecting and combining the most effective shots; trimming and reassembling to length; switching angles; inserting and sequencing music, dialogue, and sound effects; using editing, titling, and effects equipment; checking key numbers and timecodes; collaborating with audio, music, and effects departments; screening, reviewing, and revising; marking starting and ending frames; attending screenings; and discussing editing direction with producers and directors.",
                   "Work context: 97% have regular schedules; 62% work 40 hours weekly and 38% more than 40 hours; 62% sit continually or almost continually and 34% more than half the time; precision and accuracy are extremely important to 51% and very important to 42%; 71% face strict deadlines daily; 58% have constant contact with others; 90% consider work pace not determined by equipment speed.",
-                  "O*NET's national wage page (onetonline.org/link/localwages/27-4032.00) gives this occupation's national percentiles: annual wages of USD 40,280 at 10%, USD 52,720 at 25%, USD 75,420 at the median, USD 105,310 at 75%, and USD 148,550 at 90%; corresponding hourly wages are USD 19.37, 25.35, 36.26, 50.63, and 71.42."
+                  "O*NET's national wage page (onetonline.org/link/localwages/27-4032.00) gives this occupation's national percentiles: annual wages of USD 40,280 at 10%, USD 52,720 at 25%, USD 75,420 at the median, USD 105,310 at 75%, and USD 148,550 at 90%; corresponding hourly wages are USD 19.37, 25.35, 36.26, 50.63, and 71.42.",
+                  "U.S. film and video editors had a median hourly wage of $36.26 and median annual wage of $75,420 in 2025."
                 ],
                 "evidence_type": "official occupation details and national wages",
                 "id": "onet-details",
                 "limitation": "Applies only to this occupational description. Separately verify material and music licensing, likeness and privacy, confidentiality, and technical delivery specifications against contracts and competent authorities' requirements.",
                 "market": "United States",
                 "name": "O*NET OnLine: Film and Video Editors Detailed Occupational Information and National Wage Percentiles (27-4032.00)",
-                "period": "current page (updated 2026); accessed 2026-09-20",
+                "period": "2026 occupation profile; 2025 wages",
                 "publisher": "O*NET OnLine",
                 "scope": "exact occupation (SOC 27-4032)",
                 "url": "https://www.onetonline.org/link/details/27-4032.00"
@@ -31798,17 +31771,17 @@
                 "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Exact occupation 27-4032 (presented through O*NET): employment of 43,500 in 2024, projected average growth (3% to 4%) over 2024—2034, and approximately 3,600 annual openings on average.",
-                  "Occupational openings in BLS employment projections are annual averages over the projection period. This page therefore labels them as per year, not a cumulative ten-year total."
+                  "BLS Table 1.2 projects U.S. employment for film and video editors (27-4032) to rise from about 39,400 in 2025 to 40,800 in 2035, up 3.7%, with about 3,100 annual openings from growth and replacement.",
+                  "The broader group that includes camera operators (27-4030) goes from 72,000 to 73,900, up 2.6%, with 5,600 annual openings."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
                 "limitation": "Projections do not equal actual outcomes. Annual openings include replacement needs and cannot be interpreted as individual hiring probabilities. The two projection scopes cover different periods.",
                 "market": "United States",
-                "name": "BLS: Occupational Projections and Characteristics Table (2024—2034 projections presented through O*NET; see also the 2025—35 projections table)",
-                "period": "2024—2034 projections as presented by O*NET OnLine; 2025—35 table; accessed 2026-09-20",
+                "name": "BLS Table 1.2: Film and video editors and the broader camera and editing group",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact occupation (SOC 27-4032)",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31925,6 +31898,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Shenzhen Zhongshenli Development Technology sought a short-video editor for planning, filming, editing and packaging, with at least two years of filming and editing experience. Probation pay was CNY 5,000–5,500 per month, with subsequent pay negotiable."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a52-yantian",
+                "limitation": "Both are historical postings. Current vacancy status is unverified. Duties and probation terms differ. Comparable national occupational wage data remain unavailable.",
+                "market": "Mainland China",
+                "name": "Video editing job posting",
+                "period": "2026-02-27",
+                "publisher": "Yantian District Human Resources Bureau, Shenzhen",
+                "scope": "recruitment_proxy",
+                "url": "https://www.yantian.gov.cn/cn/zwgk/zdlyxxgk/jycy/zpxx/content/post_12681383.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Shanghai Miaoyu Network Technology listed a separate editor role at CNY 10,000–15,000 per month. It covered editing for an account, pacing and footage management. The listing asked for a bachelor’s degree or above and preferred editing experience. The same bulletin listed photography separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a52-putuo",
+                "limitation": "Both are historical postings. Current vacancy status is unverified. Duties and probation terms differ. Comparable national occupational wage data remain unavailable.",
+                "market": "Mainland China",
+                "name": "Video editing job posting",
+                "period": "2026-10-10",
+                "publisher": "Shanghai Putuo District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shpt.gov.cn/bm-ms/20261010/973597.html"
               }
             ]
           },
@@ -34791,6 +34794,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a52-yantian",
+            "posting-a52-putuo"
+          ],
           "sources_note": {
             "$item": "film-and-video-editors-and-camera-operators.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34943,7 +34950,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "2024—2034 Employment · Annual average openings",
+            "指标": "2025–2035 Employment · Annual average openings",
             "数值": {
               "$item": "film-and-video-editors-and-camera-operators.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -35824,7 +35831,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Employment Projections (2024—2034) and BLS OOH Film and Video Editors and Camera Operators Group (2025—2035)",
+            "label": "BLS Employment Projections (2025–2035) and BLS OOH Film and Video Editors and Camera Operators Group (2025—2035)",
             "secondary_value": null,
             "value": {
               "$item": "film-and-video-editors-and-camera-operators.profile.onet-structured-fields-block.4",
@@ -36702,7 +36709,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36712,27 +36719,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "film-and-video-editors-and-camera-operators.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "film-and-video-editors-and-camera-operators.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -36931,36 +36918,36 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 43,500 workers (2024, BLS projection scope presented through O*NET); approximately 72,000 jobs in the BLS OOH film and video editors and camera operators group in 2025",
+        "display_value": "About 39,400 workers in 2025",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "U.S. employment size",
         "occupation_scope": "Film and Video Editors (O*NET-SOC 27-4032.00)",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Average growth (3% to 4%, 2024—2034, BLS projections presented through O*NET); +3% for the BLS OOH film and video editors and camera operators group over 2025—2035",
+        "display_value": "Projected growth of 3.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "U.S. employment change",
         "occupation_scope": "Film and Video Editors (O*NET-SOC 27-4032.00)",
-        "period": "2024–2034 projection",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 3,600 per year (2024—2034, BLS projection annual average, exact occupation 27-4032)",
+        "display_value": "About 3,100 annual openings, from growth and replacement",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "U.S. annual average job openings",
         "occupation_scope": "Film and Video Editors (O*NET-SOC 27-4032.00)",
-        "period": "2024–2034 projection",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -37120,6 +37107,78 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Shenzhen Zhongshenli Development Technology sought a short-video editor for planning, filming, editing and packaging, with at least two years of filming and editing experience. Probation pay was CNY 5,000–5,500 per month, with subsequent pay negotiable.",
+        "fact_id": "posting-a52-yantian",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Video editing job posting",
+        "period": "2026-02-27",
+        "source_refs": [
+          "a52-yantian"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Shanghai Miaoyu Network Technology listed a separate editor role at CNY 10,000–15,000 per month. It covered editing for an account, pacing and footage management. The listing asked for a bachelor’s degree or above and preferred editing experience. The same bulletin listed photography separately.",
+        "fact_id": "posting-a52-putuo",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Video editing job posting",
+        "period": "2026-10-10",
+        "source_refs": [
+          "a52-putuo"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "USD 75,100 per year",
+        "fact_id": "group-wage",
+        "market": "United States",
+        "measure": "U.S. group median annual wage (2025)",
+        "occupation_scope": "Television, video, and film camera operators and editors, 27-4030",
+        "period": "2025",
+        "source_refs": [
+          "bls-projections-2025-35"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Projected growth of 2.6%",
+        "fact_id": "group-growth",
+        "market": "United States",
+        "measure": "U.S. group employment change (2025–2035)",
+        "occupation_scope": "Television, video, and film camera operators and editors, 27-4030",
+        "period": "2025–2035",
+        "source_refs": [
+          "bls-projections-2025-35"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "About 72,000 workers",
+        "fact_id": "group-employment",
+        "market": "United States",
+        "measure": "U.S. group employment (2025)",
+        "occupation_scope": "Television, video, and film camera operators and editors, 27-4030",
+        "period": "2025",
+        "source_refs": [
+          "bls-projections-2025-35"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "About 5,600, from growth and replacement",
+        "fact_id": "group-openings",
+        "market": "United States",
+        "measure": "U.S. group average annual openings (2025–2035)",
+        "occupation_scope": "Television, video, and film camera operators and editors, 27-4030",
+        "period": "2025–2035",
+        "source_refs": [
+          "bls-projections-2025-35"
+        ]
       }
     ]
   },
@@ -37131,34 +37190,34 @@
       "label": "AI Impact Score"
     },
     "badges": [
-      "Film and Video Editors · Official occupational scope",
-      "Material review and annotation · Narrative editing and pacing · Sound-picture alignment and delivery",
-      "Exact U.S. occupational wages; China industry proxy only"
+      "Camera operators capture footage · Editors assemble the final cut",
+      "U.S. employment: combined group 27-4030",
+      "Detailed wages and delivery exercise focus on editors"
     ],
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-wage-2025",
+        "fact_ref": "group-wage",
         "key": "us_pay",
-        "label": "U.S. occupational wages (May 2025 OEWS)"
+        "label": "U.S. group median annual wage (2025)"
       },
       {
         "availability": "available",
-        "fact_ref": "us-growth-2025-2035",
+        "fact_ref": "group-growth",
         "key": "us_growth",
-        "label": "U.S. employment change (2024–2034)"
+        "label": "U.S. group employment change (2025–2035)"
       },
       {
         "availability": "available",
-        "fact_ref": "us-employment-2025",
+        "fact_ref": "group-employment",
         "key": "us_employment",
-        "label": "U.S. employment size (2024 projection scope)"
+        "label": "U.S. group employment (2025)"
       },
       {
         "availability": "available",
-        "fact_ref": "us-openings-2025-2035",
+        "fact_ref": "group-openings",
         "key": "us_openings",
-        "label": "U.S. annual average job openings (2024–2034)"
+        "label": "U.S. group average annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -37172,17 +37231,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What film and video editors do, how to enter the occupation, work boundaries, and development paths. Based on official O*NET and BLS occupational information, distinguishing exact occupational statistics, industry proxies, and evidence gaps."
+      "text": "Compare film and video editing with camera operation. See U.S. employment projections for the combined group, editor-specific wages and job examples from Shenzhen and Shanghai."
     },
     "title": {
       "availability": "available",
-      "text": "Film and Video Editors"
+      "text": "Film and Video Editors and Camera Operators"
     }
   },
-  "source_content_sha256": "f0dbae1fb9c37140554df28b9a60ec134b922d168b5fc3adbd509fa40db5ecb2",
+  "source_content_sha256": "c81e9f05fb2f217a57e364c0ea3f59be6cb5d8d1495a070e73d15e2b5e3f6211",
   "subject": {
     "canonical_slug": "film-and-video-editors-and-camera-operators",
-    "name": "Film and Video Editors",
-    "summary": "Organize, trim, and assemble filmed footage into broadcast-ready productions: review and annotate materials; determine narrative sequence and pacing according to scripts, storyboards, or director and producer intentions; select the most suitable shots from each scene and assemble smooth sequences; trim segments to the required running time and adjust cuts for natural continuity; align dialogue, music, and sound effects with pictures and manage their relationship; use editing, titling, switching, and effects systems for graphic treatment and output; check timecodes, key numbers, and delivery parameters; coordinate with camera, sound recording, music, visual effects, and other departments; support directors and producers in screenings and repeated revisions; maintain project files, versions, and material backups; and deliver and archive according to contracts."
+    "name": "Film and Video Editors and Camera Operators",
+    "summary": "This group covers two roles. Camera operators frame and record footage on location or in a studio, while editors assemble shots, dialogue and sound into a finished cut. The employment figures here use BLS group 27-4030. The detailed wages, entry pathway and delivery exercise below focus on film and video editors (27-4032). The separate camera operator profile covers camera work in more detail."
   }
 }

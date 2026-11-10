@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a28-shunde": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a28-zhengzhou": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -1605,7 +1611,7 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1677,7 +1683,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26107,12 +26113,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025全国非私营/私营制造业税前年均113,594/76,055元；科学研究技术服务182,064/83,560元。宽行业代理，非工程师中位或个人到手。"
+              " 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "nbs"
+            "a28-shunde",
+            "a28-zhengzhou"
           ],
           "type": "prose"
         },
@@ -26221,12 +26228,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "不以行业平均工资或单条招聘报价替代本职业工资。"
+              "公告只用于核对岗位职责和计薪方式。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "nbs"
+            "a28-shunde",
+            "a28-zhengzhou"
           ],
           "type": "prose"
         }
@@ -28978,25 +28986,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "材料一：虚构需求与约束清单",
-                  "给出需求版本、接口定义与约束，作为练习输入。",
-                  "练习产出：列出假设、边界条件与未决项清单。"
+                  "纸面工单材料",
+                  "虚构系统 S4，纸面作业。项目要求 V2 的响应时间不得超过 120 ms。报告 T11 对 V2 记录 135 ms，报告 T09 对旧版 V1 记录 110 ms。",
+                  "T11 有测试人员签字，未有验收负责人批准。规则约定：同一版本的记录可用于比较，设计负责人安排复核，验收负责人确认放行。",
+                  "只核对给定记录。练习没有设备操作，也没有提供偏差原因。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "材料二：标准条款与判据摘录",
-                  "给出适用条款、限值与校验方法。",
-                  "练习产出：写出本次设计的判据来源与适用范围。"
+                  "交件要求",
+                  "交一页验证记录，列所用报告、差额、旧版记录能否采用及放行状态。",
+                  "写清复核和验收的接手人，以及还要确认的问题。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "材料三：计算数据表（虚构）",
-                  "给出参数与计算结果，含一处越限与一处条件缺失。",
-                  "练习产出：标出越限项与条件缺失项，并写出复算要求。"
+                  "先完成独立答卷",
+                  "到「常见问题与资料来源」打开「验证记录参考答案（完成第六天后再打开）」。",
+                  "用其中的自核项记录一处差异与修订。"
                 ]
               },
               {
@@ -29025,50 +29034,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "第 1 天：读一条标准条款",
-                  "抄录一条适用标准条款并写出适用范围与不确定处。"
+                  "第 1 天",
+                  "列报告编号和版本。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "第 2 天：写需求与接口清单",
-                  "用虚构需求整理接口与约束，标出假设与未决项。"
+                  "第 2 天",
+                  "用 V2 的要求算差额。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第 3 天：做一次纸面计算",
-                  "按摘录完成一次负荷或选型计算，记录参数来源。"
+                  "第 3 天",
+                  "注明 V1 数据的使用范围。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "第 4 天：定义验证判据",
-                  "写出通过准则、测量条件与不确定度处理方式。"
+                  "第 4 天",
+                  "核对签字与待办角色。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "第 5 天：整理符合性核对表",
-                  "按虚构条款逐项核对设计，标出符合项与偏差项。"
+                  "第 5 天",
+                  "写完纸面验证记录。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第 6 天：做两张变体",
-                  "分别改变一处约束与一处判据，写清影响范围与复算项。"
+                  "第六天：独立交件",
+                  "先不看参考，检查交件能否独立读懂。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第 7 天：复盘停止条件",
-                  "总结在哪些条件下必须停止并升级，形成一页复盘记录。"
+                  "第七天：打开参考并复盘",
+                  "到「常见问题与资料来源」打开「验证记录参考答案（完成第六天后再打开）」。写下一处差异与修订，再决定继续或暂缓。"
                 ]
               }
             ]
@@ -29087,13 +29096,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第 1 天：能否准确找出条款的适用范围与例外，而不是只抄关键词。",
+              "能用题面完成一页交接，并区分已核、待核和审批。",
               "第 2 天：能否把需求拆成可核对的接口与约束，并标出未决项。",
-              "第 3 天：能否说清计算中的参数来源、单位与假设。",
+              "用纸面作业记录哪一步最费力，真实工作量另向雇主核对。",
               "第 4 天：能否把「通过」写成可执行的判据而非笼统描述。",
               "第 5 天：能否在不删数据的前提下标出偏差与条件缺失。",
               "第 6 天：能否判断变更影响范围并列出必须复算的项目。",
-              "第 7 天：能否写出明确的停止与升级条件，并说明由谁确认。"
+              "第七天对照折叠参考检查交件。有关键漏项先重做。真实培训及职责范围另向雇主确认。"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30978,21 +30987,21 @@
           "data": {
             "entries": [
               {
-                "answer": "为商业、工业、军事或科研用途研究与设计电气设备、部件与系统：梳理需求与适用标准，完成电气计算与设备选型，输出图纸与技术文件并经校核审核签署，组织测试验证符合性，并处理设计变更。",
+                "answer": "把系统需求变成电气方案和验证计划，核对设备选型、测试结果及变更记录，交接还未满足的要求。",
                 "id": "actors.faq.1",
                 "question": "电气工程师主要做什么？",
                 "question_key": "career.faq.electrical-engineers.1",
                 "source_refs": [
-                  "onet"
+                  "a28-onet"
                 ]
               },
               {
-                "answer": "本职业专注电气方向的电力与电气系统，承担设计计算与符合性结论；电子工程师（计算机除外）专注电路与器件；工程技师与技术员在工程人员指导下做设计支持与测试记录，不作独立设计批准。",
+                "answer": "电气工程可以涉及供配电、控制和设备系统。电子工程岗位更常围绕电路、信号和板级产品。具体职责按产品、验证要求和签发分工确认。",
                 "id": "actors.faq.2",
                 "question": "它和电子工程师、工程技师有什么不同？",
                 "question_key": "career.faq.electrical-engineers.2",
                 "source_refs": [
-                  "onet"
+                  "a28-onet"
                 ]
               },
               {
@@ -31014,22 +31023,22 @@
                 ]
               },
               {
-                "answer": "O*NET/BLS 显示 2024 年就业约 192,000 人，2024—2034 年预计增长远快于平均（7% 或更高），预计空缺约 11,700 个；空缺含增长与替补。",
+                "answer": "美国 BLS 17-2071 预计 2025 年约 199,700 人、2035 年约 219,500 人（+9.9%），年均约 11,400 个空缺，含替补。",
                 "id": "actors.faq.5",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.electrical-engineers.5",
                 "source_refs": [
-                  "onet"
+                  "a28-bls"
                 ]
               },
               {
-                "answer": "本次所核国家统计局资料只到行业与人员大类口径，未取得与本职业精确对应的全国单职业工资分位；本页据此登记证据不足，不用行业均值或单条招聘报价替代。",
+                "answer": "顺德岗位标 8,501–10,000 元/月，职责含电气系统方案评审、设备选型、图纸及生产调试。 郑州岗位列 5 人、本科，含 PLC 程序、原理图、选型和调试。标 6,000–10,000 元，计薪周期未注明。 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。",
                 "id": "actors.faq.6",
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.electrical-engineers.6",
                 "source_refs": [
-                  "onet",
-                  "nbs"
+                  "a28-shunde",
+                  "a28-zhengzhou"
                 ]
               },
               {
@@ -31067,6 +31076,15 @@
                 "question_key": "career.faq.electrical-engineers.10",
                 "source_refs": [
                   "onet"
+                ]
+              },
+              {
+                "answer": "T11 对应 V2，135 ms 比上限多 15 ms，未达题设要求。T09 的 110 ms 属 V1，不能替代 V2 验证。记录 S4、V2、T11、差额和待查原因。请设计负责人安排复核，放行待验收负责人确认。自核四项：报告版本、差额、旧版排除、复核与放行交接。每项齐全计一项。题设为虚构，来源提供职业背景。",
+                "id": "actors.faq.11",
+                "question": "验证记录参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.electrical-engineers.11",
+                "source_refs": [
+                  "a28-onet"
                 ]
               }
             ]
@@ -31298,20 +31316,19 @@
                 "url": "https://www.bls.gov/ooh/occupation-finder.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "核对组合口径的中位工资、就业规模、增长与年均空缺。",
-                  "只适用于该美国组合职业。"
+                  "美国 BLS 17-2071 预计 2025 年约 199,700 人、2035 年约 219,500 人（+9.9%），年均约 11,400 个空缺，含替补。"
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "bls",
-                "limitation": "只适用于美国组合口径；中位数不是起薪，空缺不等于净新增。",
+                "limitation": "年均空缺包含替补。",
                 "market": "美国",
-                "name": "BLS OOH — 电气与电子设备安装维修人员（组合口径）",
-                "period": "2025 年 5 月工资数据；2025—2035 年预测",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/electrical-and-electronics-installers-and-repairers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -31694,6 +31711,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "职业任务与工作情境。"
+                ],
+                "evidence_type": "职业任务原始资料",
+                "id": "a28-onet",
+                "limitation": "仅用于美国任务对照。",
+                "market": "美国",
+                "name": "美国 17-2071",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/17-2071.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国 BLS 17-2071 预计 2025 年约 199,700 人、2035 年约 219,500 人（+9.9%），年均约 11,400 个空缺，含替补。"
+                ],
+                "evidence_type": "职业任务原始资料",
+                "id": "a28-bls",
+                "limitation": "仅用于美国任务对照。",
+                "market": "美国",
+                "name": "BLS 表 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "顺德岗位标 8,501–10,000 元/月，职责含电气系统方案评审、设备选型、图纸及生产调试。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a28-shunde",
+                "limitation": "单次公告，只说明该岗位的条件。",
+                "market": "中国大陆",
+                "name": "电气工程师",
+                "period": "2026-09-30",
+                "publisher": "顺德就业通",
+                "scope": "recruitment_proxy",
+                "url": "https://sdjyt.shunde.gov.cn/m/jobs-show.php?id=61810"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "郑州岗位列 5 人、本科，含 PLC 程序、原理图、选型和调试。标 6,000–10,000 元，计薪周期未注明。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a28-zhengzhou",
+                "limitation": "单次公告，只说明该岗位的条件。",
+                "market": "中国大陆",
+                "name": "自动化电气工程师",
+                "period": "2026-02-27",
+                "publisher": "郑州市市场监督管理局",
+                "scope": "recruitment_proxy",
+                "url": "https://amr.zhengzhou.gov.cn/jycyzl/9911730.jhtml"
               }
             ]
           },
@@ -34531,7 +34608,7 @@
             },
             {
               "指标": "岗位口径",
-              "数值": "中国大陆同类岗位名称与美国单职业口径不是一一对应",
+              "数值": "查看下方有日期的两份岗位样本。",
               "说明": "电气设计、配电与自动化工程等岗位边界需按单位核对。"
             },
             {
@@ -34671,7 +34748,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "历史案例状态",
+          "china_open": "下列为有日期的招聘样本，另列全国职业工资口径缺口。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34715,7 +34792,7 @@
               }
             },
             {
-              "城市/区间": "行业平均工资（不可替代）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$join": [
                   {
@@ -34745,7 +34822,8 @@
           "china_soc_row": "中国薪资口径",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a28-shunde",
+            "posting-a28-zhengzhou"
           ],
           "sources_note": {
             "$join": [
@@ -34770,14 +34848,14 @@
           "ui": {
             "ai_heading": "AI 会直接改变本职业的收入吗？",
             "driver_heading": "核对中国大陆同类岗位报酬时应看什么？",
-            "official_heading": "中国大陆公开口径与统计缺口",
+            "official_heading": "行业统计与招聘样本的范围",
             "scenario_caption": "未取得全国单职业精确工资，不以行业平均值或招聘报价替代。",
             "scenario_heading": "中国大陆同类岗位的口径能直接比较吗？",
             "scenario_interpretation_label": "适用范围与缺口",
             "scenario_role_label": "岗位或范围",
             "scenario_value_label": "计酬与披露情况"
           },
-          "us_growth": "美国预测见美国薪资参考板块。",
+          "us_growth": "9.9% (2025–2035)",
           "us_median": "美国工资见美国薪资参考板块。"
         }
       },
@@ -35255,7 +35333,7 @@
         "outlook_evidence": [
           {
             "geography": "美国",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.2",
               "block": "market-signals",
@@ -35270,8 +35348,8 @@
             },
             "metric": "就业增长",
             "occupation_scope": "O*NET-SOC 17-2071.00（电气工程师）",
-            "source_id": "bls",
-            "value": "10%（总体预测）"
+            "source_id": "a28-bls",
+            "value": "9.9%"
           },
           {
             "geography": "美国",
@@ -35290,12 +35368,12 @@
             },
             "metric": "就业规模",
             "occupation_scope": "O*NET-SOC 17-2071.00（电气工程师）",
-            "source_id": "ratify",
-            "value": "199,700人"
+            "source_id": "a28-bls",
+            "value": "199,700"
           },
           {
             "geography": "美国",
-            "horizon": "2024—2034",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -35310,8 +35388,8 @@
             },
             "metric": "预计空缺",
             "occupation_scope": "O*NET-SOC 17-2071.00（电气工程师）",
-            "source_id": "employer",
-            "value": "约 11,700 个"
+            "source_id": "a28-bls",
+            "value": "11,400"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -36515,7 +36593,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解电气工程师的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37046,39 +37124,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 192,000 人（2024 年）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "199,700 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "美国就业规模",
-        "occupation_scope": "电气与电子设备安装维修人员（O*NET-SOC 组合口径）",
-        "period": "2024",
+        "occupation_scope": "美国 17-2071",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "a28-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "远快于平均（7% 或更高，2024—2034）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "9.9%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "美国就业增长",
-        "occupation_scope": "电气与电子设备安装维修人员（O*NET-SOC 组合口径）",
-        "period": "2024—2034",
+        "occupation_scope": "美国 17-2071",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a28-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 11,700 个（2024—2034）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 11,400 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "美国预计空缺",
-        "occupation_scope": "电气与电子设备安装维修人员（O*NET-SOC 组合口径）",
-        "period": "2024—2034",
+        "occupation_scope": "美国 17-2071",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a28-bls"
         ]
       },
       {
@@ -37119,14 +37197,15 @@
       },
       {
         "derivation": "中国精确职业数据未取得；不进行换算。",
-        "display_value": "证据不足：未取得与本职业精确对应的中国大陆全国单职业工资分位",
+        "display_value": "顺德岗位标 8,501–10,000 元/月，职责含电气系统方案评审、设备选型、图纸及生产调试。 郑州岗位列 5 人、本科，含 PLC 程序、原理图、选型和调试。标 6,000–10,000 元，计薪周期未注明。",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "中国",
         "measure": "中国大陆口径",
-        "occupation_scope": "电气与电子设备安装维修人员（O*NET-SOC 组合口径）",
-        "period": "2026 年查阅",
+        "occupation_scope": "两份历史招聘公告",
+        "period": "2026",
         "source_refs": [
-          "nbs"
+          "a28-shunde",
+          "a28-zhengzhou"
         ]
       },
       {
@@ -37139,6 +37218,30 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "顺德岗位标 8,501–10,000 元/月，职责含电气系统方案评审、设备选型、图纸及生产调试。",
+        "fact_id": "posting-a28-shunde",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "电气工程师",
+        "period": "2026-09-30",
+        "source_refs": [
+          "a28-shunde"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "郑州岗位列 5 人、本科，含 PLC 程序、原理图、选型和调试。标 6,000–10,000 元，计薪周期未注明。",
+        "fact_id": "posting-a28-zhengzhou",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "自动化电气工程师",
+        "period": "2026-02-27",
+        "source_refs": [
+          "a28-zhengzhou"
         ]
       }
     ]
@@ -37166,19 +37269,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国 17-2071 · 预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国 17-2071 · 就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国预计空缺"
+        "label": "美国 17-2071 · 预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37192,17 +37295,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "美国 O*NET-SOC 17-2071.00：2025 年中位年薪 120,630 美元，2024 年就业约 192,000 人，2024—2034 年预计增长远快于平均（7% 或更高）；含入行路径、执业与中国大陆口径说明。"
+      "text": "了解电气工程师的方案、验收与交接职责，对照顺德和郑州招聘，并做一份纸面验证记录。"
     },
     "title": {
       "availability": "available",
       "text": "电气工程师：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "6ad13fc2645f51d72ddf0cff922257473d0afdacdc8d61ae91301c22aaad0120",
+  "source_content_sha256": "2d5a0de8b3d03fa43e61f6a468ad88430ef9f26d7a1d0350d8fe1a876df645de",
   "subject": {
     "canonical_slug": "electrical-engineers",
     "name": "电气工程师",
-    "summary": "按美国 O*NET-SOC 17-2071.00，为商业、工业、军事或科研用途研究与设计电气设备、部件与系统：梳理需求与适用标准，完成电气计算与设备选型，输出图纸与技术文件并经校核审核签署，组织测试验证符合性并处理设计变更。"
+    "summary": "把系统需求变成电气方案和验证计划，核对设备选型、测试结果及变更记录，交接还未满足的要求。"
   }
 }

@@ -23675,16 +23675,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先看能否按原材料独算12/3=4并说明均值不等每个原值，再按给定四条件核分未知。一次纸面得分不能推真实学生理解、课程成效或本人授课资格。"
+              "纸面体验｜对照虚构评分表和课程公告，圈出一个标准版本冲突，写下请课程负责人确认的问题。 "
             ]
           },
           "id": "teaching-assistants-postsecondary.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule",
-            "employer",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -25264,19 +25260,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "高校教学助理支持高校教师或其他教学人员，准备教材答案、组织讨论答疑、协助考试与核评作业记录，可能支持实验或研究；具体学科任务、评分标准、资料用途和实验训练按学校与任课团队确认。本页固定O*NET-SOC25-9044.00，不并普通学校或特殊教育助理。BLS该职业说明独立教授一门或多门完整课程的研究生应归高校教师25-1000组，不能将所有TA、RA或中国“助教”职称直接并成本页统计。中国研究生助教是有培养、选聘、指导培训与岗位津贴要求的具体制度，区别教师雇员工资和其他奖助。纸面作品只核给定规则与解释，不证明真实教学效果或授独立课程、正式成绩审批和实验操作权限。"
+              "高校助教在课程负责人的安排下带领讨论或实验，答疑、准备教学材料，并按课程评分标准批改和记录成绩。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "teaching-assistants-postsecondary.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-oews",
-            "cn-rule",
-            "employer",
-            "sag",
-            "nist",
-            "editorial"
+            "transfer-onet-25-9044.00"
           ],
           "type": "prose"
         }
@@ -26100,19 +26089,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分材料解释、规则核分与真实课程。保原题量规提交重复空白未知与本人更正，课程成绩和实验资料权限回学校任课团队；正确输出不证明学生学会。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构评分表和课程公告，圈出一个标准版本冲突，写下请课程负责人确认的问题。"
             ]
           },
           "id": "teaching-assistants-postsecondary.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-oews",
-            "cn-rule",
-            "employer",
-            "sag",
-            "nist",
-            "editorial"
+            "transfer-onet-25-9044.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -35659,6 +35642,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-25-9044.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 25-9044.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/25-9044.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -41131,10 +41141,10 @@
       "text": "高校教学助理"
     }
   },
-  "source_content_sha256": "ca44e14bbccfa87380950ef24623a915be2ed90a58e9ec1646c79c39f1bf11af",
+  "source_content_sha256": "b48c76dfdc3fab98cde187b364a7708771e4c6e5b9539fa2cdddc85de3b7e646",
   "subject": {
     "canonical_slug": "teaching-assistants-postsecondary",
     "name": "高校教学助理",
-    "summary": "高校教学助理支持高校教师或其他教学人员，准备教材答案、组织讨论答疑、协助考试与核评作业记录，可能支持实验或研究；具体学科任务、评分标准、资料用途和实验训练按学校与任课团队确认。本页固定O*NET-SOC25-9044.00，不并普通学校或特殊教育助理。BLS该职业说明独立教授一门或多门完整课程的研究生应归高校教师25-1000组，不能将所有TA、RA或中国“助教”职称直接并成本页统计。中国研究生助教是有培养、选聘、指导培训与岗位津贴要求的具体制度，区别教师雇员工资和其他奖助。纸面作品只核给定规则与解释，不证明真实教学效果或授独立课程、正式成绩审批和实验操作权限。"
+    "summary": "高校助教在课程负责人的安排下带领讨论或实验，答疑、准备教学材料，并按课程评分标准批改和记录成绩。"
   }
 }

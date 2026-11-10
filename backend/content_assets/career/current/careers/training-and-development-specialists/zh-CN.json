@@ -1614,7 +1614,7 @@
         "status": "mapped"
       },
       "item:training-and-development-specialists.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:training-and-development-specialists.path.interview-probation.1": {
         "status": "mapped"
@@ -1623,7 +1623,7 @@
         "status": "pending_mapping"
       },
       "item:training-and-development-specialists.path.seven-day-decision.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:training-and-development-specialists.path.seven-day-trial.1": {
         "status": "mapped"
@@ -23779,7 +23779,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "先核问题来自知识步骤、流程还是权限。T1五例缺字段可设计检查练习，三例权限未开交授权负责人；调查访谈提供线索，不预设每个问题都需要加课。"
+              "先核问题来自知识、流程还是权限。用 T1 原始报障做分类；能练的内容写进指南，权限问题交负责人。"
             ]
           },
           "id": "training-and-development-specialists.profile.work-context-block.3",
@@ -23809,7 +23809,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "时间和媒介变化时保留目标与核心练习测验。T2甲25分钟可需求3、演示3、练习10、复盘4、测验5；乙累计改纸面，仍25分钟。同步活动与自学材料都按条件选择，不承诺某方式必然有效。"
+              "时间和媒介变化时保留目标、核心练习和测验。用 T2 的限制重新分配时段，记录纸面和同步版本的区别。"
             ]
           },
           "id": "training-and-development-specialists.profile.work-context-block.5",
@@ -23854,7 +23854,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "评价先核到场、配对、评分和缺失。T3五对成绩，F缺席无成绩不补零；均分1.8至2.8、达标20%至80%，B后2分需针对练习。材料许可、记录用途和版本另留，未实施或无工作应用与对照就不推因果收益。"
+              "评价先核到场、配对、评分和缺失。用 09 的 T3 原始记录分开到场与达标分母，保留缺席无成绩；看不到逐字段作答，就先核漏判字段再安排补练。记录材料权限、用途和版本；无实施、在岗应用与对照证据，不推因果。"
             ]
           },
           "id": "training-and-development-specialists.profile.work-context-block.8",
@@ -25516,7 +25516,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可先试指南、模块和测验草稿，由人核事实、学习目标、专业标准与资料用途。美国13-1151本职2025—2035增长10.8%、十年净增约51,100人、年均46,000空缺含转行退休替补，是总体预测而非AI因果。证据不足：本职AI净替代率及可复核FermatMind任务评分，另列编辑估算分数或个人失业概率。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可先试指南、模块和测验草稿，由人核事实、学习目标、专业标准与资料用途。美国13-1151本职2025—2035增长10.8%、十年净增约51,100人、年均46,000空缺含转行退休替补，是总体预测而非AI因果。本页未取得 AI 对该职业净替代率的实测数据。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "training-and-development-specialists.display.ai_impact_table.answer",
@@ -25792,7 +25792,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能将每个错误都判为知识缺口。O*NET有需求调查任务，T1五例字段缺漏可设计练习、三例权限未开应交负责人；分类和判断属于编辑任务应用。"
+              "不把每条错误都当知识缺口。O*NET 包含需求调研；本页 T1 让你自己区分字段错误和权限问题，再决定练什么、转给谁。"
             ]
           },
           "id": "training-and-development-specialists.display.ai_impact_table.questions.2.answer",
@@ -27339,14 +27339,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职包含需求、材料、实施、学习记录等任务；岗位责任与行业经验可不同。实际报酬与福利、费用分别确认，不预设统一佣金、项目天数或课时价格。"
+              "本职包含需求、材料、实施、学习记录等任务；岗位责任与行业经验可不同。实际报酬与福利、费用分别确认，不预设统一佣金、项目天数或课时价格。 企业内训与职业技能培训有需求调查、课程设计和评价等交集。大陆部分对应企业人力资源管理师（4-07-03-04）与职业培训师（4-07-03-05）的相关任务；岗位名中的“经理”或“专员”仍按雇主的预算、人事与交付责任区分。"
             ]
           },
           "id": "training-and-development-specialists.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
             "r2-pay-1",
             "r2-pay-2",
-            "editorial"
+            "editorial",
+            "cn-ld-class"
           ],
           "type": "prose"
         },
@@ -28002,7 +28003,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长、净增和年均空缺独立解释；472.5与523.7千是舍入端点，不能相减覆盖官方51.1千净增。采用EP10.8%，不混O*NET仍显示的2024—2034就业期；没有个人录用或AI净影响结论。"
+              "增长、净增和年均空缺独立解释；472.5与523.7千是舍入端点，不能相减覆盖官方51.1千净增。采用EP10.8%；没有个人录用或AI净影响结论。"
             ]
           },
           "id": "training-and-development-specialists.display.career_snapshot_secondary_locale.boundary.detail",
@@ -28060,7 +28061,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "收到反馈先核限制：T2甲缩到25分钟，乙在甲基础上改离线。保留个人练习10分钟与测验5分钟，说明其余时间怎样分配。"
+              "收到时间或媒介反馈时，先核目标、累计限制和保留项。用 T2 自己排出各版本，不预填结果。"
             ]
           },
           "id": "training-and-development-specialists.fit.personality-fit-block.3",
@@ -30173,7 +30174,7 @@
                 "需求调查与支持",
                 "询问任务困难，区分知识技能、流程和权限；形成目标和待核项。",
                 "O*NET本职任务含调查访谈；雇主实际要求另核。",
-                "用T1八例写5个缺字段、3个权限问题及处理对象。",
+                "按 T1 记录分组，写清哪些练习、哪些转交权限负责人及其原因。",
                 "这是编辑能力入口，不是统一职级；不直接决定组织培训预算。"
               ],
               [
@@ -30201,7 +30202,7 @@
                 "记录与评价支持",
                 "核到场、配对成绩和缺失，整理评价并交接。",
                 "O*NET评价与记录职责；WV交通历史岗含培训项目工作。",
-                "提交T3计算、B需针对练习和F缺席不补零的说明。",
+                "提交 T3 计算、缺失记录的处理和待确认的反馈依据。",
                 "观察学习表现，不自动等于工作绩效或因果收益。"
               ]
             ]
@@ -30241,14 +30242,14 @@
                 "id": "employer-2",
                 "values": [
                   "Lee County｜已截止",
-                  "2026-03-18至03-25已截止，60000—70000美元/年。教育经验组合等同相关副学士或两年大学课程及2年相关经验；学士为优先。有效驾照、必要出差，周一至五7:30—16:00。"
+                  "2026-03-18 开放申请，2026-03-25 截止。该岗位薪资为60000—70000美元/年。教育经验组合等同相关副学士或两年大学课程及2年相关经验；学士为优先。有效驾照、必要出差，周一至五7:30—16:00。"
                 ]
               },
               {
                 "id": "availability",
                 "values": [
                   "WV交通｜已截止",
-                  "2026-02-20至03-05已截止，1711.54—2478.85美元/双周。认可院校学士及2年相关全职或等量兼职有薪经验；经验可替教育、相关研究生课程可替经验，具体公式未列。有效驾照及出差。"
+                  "2026-02-20 开放申请，2026-03-05 截止。该岗位薪资为1711.54—2478.85美元/双周。认可院校学士及2年相关全职或等量兼职有薪经验；经验可替教育、相关研究生课程可替经验，具体公式未列。有效驾照及出差。"
                 ]
               }
             ]
@@ -30523,8 +30524,8 @@
                 "id": "actors-practice-materials",
                 "values": [
                   "T1｜三字段预约表单",
-                  "虚构6名新成员，收到8例问题：01缺请求编号、02缺用途、03缺预约日期、04缺用途、05缺请求编号；06—08权限未开。前5例是字段检查练习，后3例交授权负责人，不以加课或自行开权限处理。",
-                  "规则：请求编号、用途、预约日期三个字段都须填写，格式不评分。完整例：R01／借阅资料／2026-10-08；缺失例：R02／空白／2026-10-09。先提取三字段，再核是否齐全；缺失退回填写者补全，权限问题交授权负责人。每正确判断一个字段是否填写得1分，总3分，3分才达标。写一页短指南及两例参考反馈。"
+                  "虚构团队 6 人。八条报障：01 请求编号栏空白；02 系统提示无访问权；03 预约没写日期；04 请求没写用途；05 账号没有预约权限；06 单据没有请求号；07 用途栏空白；08 账号未开通表单权限。请分组，决定哪些用练习、哪些转权限负责人。",
+                  "规则：请求编号、用途、预约日期均需填写，格式不评分。样本 R01／借阅资料／2026-10-08；样本 R02／空白／2026-10-09。逐字段判断是否填写，各 1 分，3 分通过。写一页指南，并给两条示例写反馈和下一步。"
                 ]
               },
               {
@@ -30532,15 +30533,16 @@
                 "values": [
                   "T2｜累计修改活动",
                   "初版30分钟：需求5、演示5、个人练习10、复盘5、测验5。甲要求改为25分钟，目标和评分不变；个人练习10、测验5不可删，需求、演示、复盘各至少3分钟。记录至少两处改变和理由。",
-                  "乙在甲基础上追加离线且不得用个人设备，时间仍25分钟，目标评分不变。用纸面虚构表单替在线例，展示初版、甲、乙三版，至少说明时间与媒介两类变更；无需真实授课。"
+                  "乙在甲基础上追加离线且不得用个人设备，时间仍25分钟，目标评分不变。用纸面虚构表单替在线例，展示初版、甲、乙三版，至少说明时间与媒介两类变更；无需真实授课。",
+                  "T3｜虚构成对成绩：6人计划参加，A—E到场，F缺席无成绩。前／后测：A1／3、B1／2、C2／3、D2／3、E3／3；沿用T1三字段正确判断评分，每字段1分，总3分，3分达标。算到场率、配对均分与达标变化，不补F为零。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "T3｜配对结果与参考",
-                  "6人计划参加，A—E到场，F缺席无成绩。前／后测：A1／3、B1／2、C2／3、D2／3、E3／3；沿用T1三字段正确判断评分，每字段1分，总3分，3分达标。算到场率、配对均分与达标变化，不补F为零。",
-                  "T1参考：5例字段缺失、3例权限问题；缺失例R02用途空白退回补全。T2甲可需求3、演示3、练习10、复盘4、测验5，共25；乙保留分配，改纸面示例与测验。T3到场5/6=83.33%；配对前9/5=1.8、后14/5=2.8，升1分；达标1/5=20%至4/5=80%，升60个百分点。B后2分需针对练习，F缺席记无成绩。"
+                  "提交前提示",
+                  "先按原始记录完成排程与成对成绩复算，再打开下面的七天任务。参考答案和四项评分在任务表之后。",
+                  "完成初稿后再对照，不填补缺失的证据。"
                 ]
               },
               {
@@ -30554,10 +30556,9 @@
           },
           "id": "training-and-development-specialists.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet",
             "editorial"
           ],
-          "title": "入门案例材料：三字段预约表单",
+          "title": "T-01｜三字段预约微课与评估",
           "type": "cards"
         },
         {
@@ -30569,7 +30570,7 @@
                 "id": "day-1",
                 "values": [
                   "第1天｜分类需求",
-                  "提取T1八例与规则，列5缺字段、3权限问题及处理对象。"
+                  "读 T1 八条记录，区分需要字段练习和需要转权限负责人的问题，不先看参考。"
                 ]
               },
               {
@@ -30604,21 +30605,20 @@
                 "id": "day-6",
                 "values": [
                   "第6天｜核配对评价",
-                  "算T3到场、均分及达标率，记录B针对练习与F无成绩。"
+                  "独立完成整套试做，写完并保存四份初稿。没有同伴也能完成。当天先保留原记录，等第 7 天再对照。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
                   "第7天｜交接与决策",
-                  "整理四件作品、许可和未实施说明，选一个可获具体反馈的下一步。"
+                  "第 6 天初稿保存后，到本页常见问题区，展开「T-01 参考与自核量规（第 7 天展开）」。按四项量规核对，留一处修订和理由，再选一个可获得反馈的下一步。"
                 ]
               }
             ]
           },
           "id": "training-and-development-specialists.path.seven-day-trial.1",
           "source_refs": [
-            "onet",
             "editorial"
           ],
           "title": "七日纸面培训体验",
@@ -30629,21 +30629,22 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "目标、指南、练习和评分是否都核三个字段，各1分、3分达标？",
-              "是否把5例缺字段与3例权限问题分开，不自行授予真实权限？",
-              "三版活动合计30、25、25分钟，甲最低时长与乙累计离线要求是否满足？",
-              "T3是否只用5对成绩，F无成绩，B后测2分仍未达标？",
-              "均分升1分、达标升60个百分点与到场83.33%是否各有分母？",
-              "是否注明虚构和未实施，不推工作绩效、因果收益或真实人员标签？",
-              "是否愿意继续需求、材料、引导或评价的一项任务，并核现实岗位条件？"
+              "第 6 天交四份带日期的初稿，保留题面与自己的计算。",
+              "把引用过的题面行写到相应结论旁。",
+              "分列已核、需复算和待他人确认。",
+              "用同一套字段对比初版与改稿。",
+              "对每个比率写出分母和统计对象。",
+              "把缺失数据保留为缺失，解释下一步找谁核。",
+              "第 7 天再按常见问题区的参考核对，保存修订理由。",
+              "写下哪一个岗位任务最值得继续练，选择能得到反馈的机会。",
+              "把试做与真实岗位要求分开记录。"
             ]
           },
           "id": "training-and-development-specialists.path.seven-day-decision.1",
           "source_refs": [
-            "onet",
             "editorial"
           ],
-          "title": "第七天核作品并选择下一步",
+          "title": "交卷前后怎么自查",
           "type": "list"
         },
         {
@@ -31686,7 +31687,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "1.8至2.8、20%至80%及60个百分点。"
+              "出示可复算的配对表和各项分母，单列缺失和待核字段。"
             ]
           },
           "id": "training-and-development-specialists.display.career_path_block.tracks.live-entertainment.03.readiness_evidence",
@@ -31716,7 +31717,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "交接B针对练习与未知事项。"
+              "交接补练判断及未确认事项，说明需要谁复核。"
             ]
           },
           "id": "training-and-development-specialists.display.career_path_block.tracks.live-entertainment.03.next_moves",
@@ -31928,7 +31929,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "四个雇主的历史岗位显示职责和条件差异；美国两项已截止，中国当前开放未核实。没有代表性当前岗位总量，不计算招聘热度或增长率。"
+              "四个雇主的历史岗位显示职责和条件差异；美国两项已截止，中国当前开放未核实。没有代表性当前岗位总量，不计算招聘热度或增长率。 另补大陆样本：河北工业大学刊载的玫德集团山东培训专员样本面向本科及以上，安排需求调查、活动执行、课件支持和学习档案。 虹科的培训规划与运营专员校招在上海、苏州、广州列岗，涵盖课程大纲、和技术团队开发内容及评估反馈。与玫德样本相比，这一岗位更侧重课程体系和讲师协作；两份样本不能推出普遍门槛。"
             ]
           },
           "id": "training-and-development-specialists.market-signals.market-signal-card.4",
@@ -31937,7 +31938,9 @@
             "onet",
             "bls",
             "nist",
-            "editorial"
+            "editorial",
+            "cn-meide-training",
+            "cn-hongke-training"
           ],
           "type": "prose"
         },
@@ -32009,7 +32012,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "四条历史招聘不代表当前岗位总量，不能计算需求增减或保证就业机会。"
+              "四条历史招聘不代表当前岗位总量，不能计算需求增减或保证就业机会。 这里说的是原有四份历史样本。另补的大陆招聘也只说明单个用人单位的要求。"
             ]
           },
           "id": "training-and-development-specialists.display.market_signal_card.outlook.hiring.limit",
@@ -32478,7 +32481,7 @@
                 ]
               },
               {
-                "answer": "用虚构T1三字段指南、T2累计活动修订及T3配对数据做纸面作品，无需真实学员或平台；注明未实施，不冒充工作经验或替雇主资格。",
+                "answer": "用虚构的新员工常见错误做一页微课。写一个能当场观察的学习目标、两道带反馈的练习，再设计课后抽查表。区分报名、到课、通过练习和在岗使用，缺记录标待核。",
                 "id": "actors.faq.3",
                 "question": "培训与发展专员没有相关经历能否先体验？",
                 "question_key": "career.faq.training-and-development-specialists.3",
@@ -32488,7 +32491,7 @@
                 ]
               },
               {
-                "answer": "美国典型为学士及相关经验，但具体雇主有不同替代分支；证书通常非必需，部分雇主偏好或要求。中国历史样本条件分别核，不建立全国统一门槛。",
+                "answer": "美国典型为学士及相关经验，但具体雇主有不同替代分支；证书通常非必需，部分雇主偏好或要求。中国历史样本条件分别核，不建立全国统一门槛。 河北工业大学刊载的玫德集团山东培训专员样本面向本科及以上，安排需求调查、活动执行、课件支持和学习档案。 虹科的培训规划与运营专员校招在上海、苏州、广州列岗，涵盖课程大纲、和技术团队开发内容及评估反馈。与玫德样本相比，这一岗位更侧重课程体系和讲师协作；两份样本不能推出普遍门槛。",
                 "id": "actors.faq.4",
                 "question": "培训与发展专员需要哪些学历或证书？",
                 "question_key": "career.faq.training-and-development-specialists.4",
@@ -32498,7 +32501,9 @@
                   "r2-pay-1",
                   "r2-pay-2",
                   "r2-pay-3",
-                  "editorial"
+                  "editorial",
+                  "cn-meide-training",
+                  "cn-hongke-training"
                 ]
               },
               {
@@ -32550,9 +32555,9 @@
                 ]
               },
               {
-                "answer": "整理需求分类、三字段指南、三版本活动及配对评价交接。T2保留时间目标和离线条件，T3注明5对成绩与F缺席；全部虚构且未实施。",
+                "answer": "T1参考：字段缺失：01、03、04、06、07；权限：02、05、08。R01 三字段齐全；R02 用途空白，退回补全。T2甲可需求3、演示3、练习10、复盘4、测验5，共25；乙保留分配，改纸面示例与测验。T3到场5/6=83.33%；配对前9/5=1.8、后14/5=2.8，升1分；达标1/5=20%至4/5=80%，升60个百分点。B后测2分，先核哪一字段漏判，再安排针对性练习，F缺席记无成绩。\n\n按四项各记 0–2 分：需求与非培训问题分开；A、B 累积且满足限制；分母、缺席和算式正确；交接标记权限和因果边界。齐全可复算记 2，部分记 1，猜测或越权记 0。\n\n目标、指南、练习和评分是否都核三个字段，各1分、3分达标？\n\n是否把5例缺字段与3例权限问题分开，不自行授予真实权限？\n\n三版活动合计30、25、25分钟，甲最低时长与乙累计离线要求是否满足？\n\nT3是否只用5对成绩，F无成绩，B后测2分仍未达标？\n\n均分升1分、达标升60个百分点与到场83.33%是否各有分母？\n\n是否注明虚构和未实施，不推工作绩效、因果收益或真实人员标签？\n\n是否愿意继续需求、材料、引导或评价的一项任务，并核现实岗位条件？",
                 "id": "actors.faq.9",
-                "question": "培训与发展专员怎样形成第一份作品？",
+                "question": "T-01 参考与自核量规（第 7 天展开）",
                 "question_key": "career.faq.training-and-development-specialists.9",
                 "source_refs": [
                   "editorial"
@@ -32575,7 +32580,11 @@
           "source_refs": [
             "onet",
             "bls",
-            "editorial"
+            "editorial",
+            "cn-meide-training",
+            "cn-hongke-training",
+            "cn-ld-class",
+            "editor"
           ],
           "type": "faq"
         },
@@ -32616,13 +32625,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET本职及相邻档案、BLS工资与就业方法、四个雇主历史条目、中国个人信息法和NIST；来源仅支持各自主张，编辑练习不冒充实证。"
+              "美国工资和就业取 O*NET 与 BLS；大陆任务参照职业分类大典，招聘例子只解释雇主职责和条件。行业或岗位大类工资只供背景。"
             ]
           },
           "id": "training-and-development-specialists.display.source_card.source",
           "source_refs": [
             "onet",
-            "editorial"
+            "editorial",
+            "cn-meide-training",
+            "cn-hongke-training",
+            "cn-ld-class"
           ],
           "type": "prose"
         },
@@ -32631,7 +32643,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-12复核本职O*NET任务及SI兴趣、BLS全国五分位/行业中位/EP2025—2035、四份历史雇主原公告。绩溪原页可读，4000—5000元仍未注明周期；NBS2025专业技术宽岗位口径与中国个人信息法方法沿本窗刚核依据适用，未将参考替本職精确分布或AI因果。"
+              "2026 年 11 月 9 日核读本次新增招聘、分类和美国工资／就业资料。"
             ]
           },
           "id": "training-and-development-specialists.display.source_card.updated-at",
@@ -32805,7 +32817,7 @@
                 "url": "https://www.bls.gov/ooh/business-and-financial/training-and-development-specialists.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "第六条明确合理目的、直接相关与最小必要范围。",
                   "具体资料处理依据、用途与组织责任按情境核，不把参加培训当无限同意。"
@@ -32814,11 +32826,11 @@
                 "id": "cn-rule",
                 "limitation": "不是工资、全国培训资格或所有处理情境的自动许可。",
                 "market": "中国",
-                "name": "中国个人信息保护法：目的与必要范围",
-                "period": "2021-11-01施行；网页2023-04-07",
-                "publisher": "国家市场监督管理总局公开法律文本",
+                "name": "《中华人民共和国个人信息保护法》｜中国人大网原文",
+                "period": "2021-11-01施行；2021-08-20转载",
+                "publisher": "中国人大网原文，中央网信办转载",
                 "scope": "contextual",
-                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -32847,7 +32859,7 @@
                 "limitation": "已截止；具体岗位条件不代表全国门槛或需求总量。",
                 "market": "美国佛罗里达Lee County",
                 "name": "Lee County：Learning and Development Specialist",
-                "period": "2026-03-18发布；03-25截止",
+                "period": "2026-03-18 开放申请；2026-03-25 截止",
                 "publisher": "Lee County政府招聘",
                 "scope": "recruitment_proxy",
                 "url": "https://www.governmentjobs.com/careers/leecounty/jobs/newprint/5274717"
@@ -32903,7 +32915,7 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "受雇工资统计不含自雇、非公司化业主合伙人、家庭雇员及无薪家属。",
+                  "受雇工资统计不含自雇、非公司化业主合伙人、私人家庭雇员及无薪家庭成员。",
                   "方法说明用于工资覆盖边界，不提供AI采用比例。"
                 ],
                 "evidence_type": "official primary material",
@@ -32924,7 +32936,7 @@
                 ],
                 "evidence_type": "official primary material",
                 "id": "onet",
-                "limitation": "任务兴趣不能推中国统一资格；O*NET旧就业年份不代本页BLS2025—2035。",
+                "limitation": "职业任务和兴趣用于了解工作，不决定大陆资格。就业预测以本页单独列明的 BLS 2025–2035 原表为准。",
                 "market": "美国",
                 "name": "O*NET：培训与发展专员13-1151.00",
                 "period": "2026-10-01查阅",
@@ -32940,7 +32952,7 @@
                 ],
                 "evidence_type": "official primary material",
                 "id": "r2-ai",
-                "limitation": "任务兴趣不能推中国统一资格；O*NET旧就业年份不代本页BLS2025—2035。",
+                "limitation": "职业任务和兴趣用于了解工作，不决定大陆资格。就业预测以本页单独列明的 BLS 2025–2035 原表为准。",
                 "market": "美国",
                 "name": "O*NET：培训与发展专员13-1151.00",
                 "period": "2026-10-01查阅",
@@ -32991,7 +33003,7 @@
                 "limitation": "已截止，替代公式未公开不代填，不年化报价或外推全部岗位。",
                 "market": "美国西弗吉尼亚Kanawha",
                 "name": "WV交通：培训与发展专员历史岗",
-                "period": "2026-02-20发布；03-05截止",
+                "period": "2026-02-20 开放申请；2026-03-05 截止",
                 "publisher": "West Virginia Department of Transportation",
                 "scope": "recruitment_proxy",
                 "url": "https://www.governmentjobs.com/careers/wvdot/jobs/newprint/5243061"
@@ -33036,7 +33048,7 @@
                 ],
                 "evidence_type": "official primary material",
                 "id": "sag-moa",
-                "limitation": "任务兴趣不能推中国统一资格；O*NET旧就业年份不代本页BLS2025—2035。",
+                "limitation": "职业任务和兴趣用于了解工作，不决定大陆资格。就业预测以本页单独列明的 BLS 2025–2035 原表为准。",
                 "market": "美国",
                 "name": "O*NET：培训与发展专员13-1151.00",
                 "period": "2026-10-01查阅",
@@ -33068,7 +33080,7 @@
                 ],
                 "evidence_type": "official primary material",
                 "id": "interest-profiler",
-                "limitation": "任务兴趣不能推中国统一资格；O*NET旧就业年份不代本页BLS2025—2035。",
+                "limitation": "职业任务和兴趣用于了解工作，不决定大陆资格。就业预测以本页单独列明的 BLS 2025–2035 原表为准。",
                 "market": "美国",
                 "name": "O*NET：培训与发展专员13-1151.00",
                 "period": "2026-10-01查阅",
@@ -33160,7 +33172,7 @@
                 "accessed_at": "2026-10-02",
                 "details": [
                   "全国P10/P25/P50/P75/P90为38760/50110/69280/95050/123250美元。",
-                  "页面含CA行，本页只用全国行；未将州工资写为全国值。"
+                  "引用美国全国行；BLS 员工工资不包括自雇，不是个人实际到手工资。"
                 ],
                 "evidence_type": "official primary material",
                 "id": "bls-oews",
@@ -33170,7 +33182,7 @@
                 "period": "2025年薪全国行",
                 "publisher": "O*NET OnLine / BLS OEWS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/13-1151.00?st=CA"
+                "url": "https://www.onetonline.org/link/localwages/13-1151.00"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -33189,7 +33201,7 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "第六条明确合理目的、直接相关与最小必要范围。",
                   "具体资料处理依据、用途与组织责任按情境核，不把参加培训当无限同意。"
@@ -33198,11 +33210,11 @@
                 "id": "cn-policy",
                 "limitation": "不是工资、全国培训资格或所有处理情境的自动许可。",
                 "market": "中国",
-                "name": "中国个人信息保护法：目的与必要范围",
-                "period": "2021-11-01施行；网页2023-04-07",
-                "publisher": "国家市场监督管理总局公开法律文本",
+                "name": "《中华人民共和国个人信息保护法》｜中国人大网原文",
+                "period": "2021-11-01施行；2021-08-20转载",
+                "publisher": "中国人大网原文，中央网信办转载",
                 "scope": "contextual",
-                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -33252,6 +33264,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "河北工业大学刊载的玫德集团山东培训专员样本面向本科及以上，安排需求调查、活动执行、课件支持和学习档案。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-meide-training",
+                "limitation": "单条公开招聘，不确认在招；不作为职业工资、就业总量或普遍学历要求。",
+                "market": "中国大陆",
+                "name": "玫德集团｜培训专员",
+                "period": "2026-03-13",
+                "publisher": "河北工业大学就业指导中心",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/correcruit/content/id/77279.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "虹科的培训规划与运营专员校招在上海、苏州、广州列岗，涵盖课程大纲、和技术团队开发内容及评估反馈。与玫德样本相比，这一岗位更侧重课程体系和讲师协作；两份样本不能推出普遍门槛。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-hongke-training",
+                "limitation": "单条公开招聘，不确认在招；不作为职业工资、就业总量或普遍学历要求。",
+                "market": "中国大陆",
+                "name": "虹科｜培训规划与运营专员",
+                "period": "2026-08-20",
+                "publisher": "河北工业大学就业指导中心",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/home/correcruit/content/id/79327.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "4-07-03-04 包括企业职工教育和员工培训；4-07-03-05 涵盖职业培训需求、项目、实施与评价。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "cn-ld-class",
+                "limitation": "仅作任务对照；不等同美国 SOC、雇主职级或执业要求。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国职业分类大典》人力资源服务人员",
+                "period": "2022",
+                "publisher": "人力资源社会保障部等；广元市人社局转载",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
               }
             ]
           },
@@ -38051,7 +38108,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "测我的职业兴趣是否适合本职业工作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -38164,20 +38221,24 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "MBTI (English)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five (English)"
-          },
-          {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "label": "MBTI (中文)"
+            "label": "MBTI 人格测试"
           },
           {
             "href": "/zh/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five (中文)"
+            "label": "大五人格测试"
+          },
+          {
+            "href": "/zh/tests/enneagram-personality-test-nine-types",
+            "label": "九型人格测试"
+          },
+          {
+            "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "label": "IQ 推理测评"
+          },
+          {
+            "href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "label": "EQ 情商测评"
           }
         ]
       },
@@ -38765,14 +38826,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解培训与发展专员的需求评估、材料设计、培训实施与评价工作，对比中美工资和真实历史岗位，并用原创表单培训练习、参考答案和七日作品计划检验下一步。"
+      "text": "培训与发展专员调研需求、制作课件、组织培训并跟踪学习效果。了解大陆岗位样本、专员与经理的区别，以及如何做一页微课。"
     },
     "title": {
       "availability": "available",
       "text": "培训与发展专员"
     }
   },
-  "source_content_sha256": "6b1a5586385369a6b7af58f848a5750f151f86bcf0c021d3748c7a879ec9c403",
+  "source_content_sha256": "853e3f8068025594dec7b4f1512c8af2e567825f5c654a1ac8dc068ce385257c",
   "subject": {
     "canonical_slug": "training-and-development-specialists",
     "name": "培训与发展专员",

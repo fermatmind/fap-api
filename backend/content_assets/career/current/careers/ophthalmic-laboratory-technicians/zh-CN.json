@@ -149,6 +149,9 @@
       "item:ophthalmic-laboratory-technicians.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:ophthalmic-laboratory-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:ophthalmic-laboratory-technicians.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12981,6 +12984,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。订单 L6 左右眼均有规格，质检单漏写右眼编号。指出哪些记录需要回查，实际装配和放行按实验室流程。"
+            ]
+          },
+          "id": "ophthalmic-laboratory-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "employment"
+          ],
+          "title": "核镜片工单左右眼记录",
+          "type": "notice"
         }
       ]
     },
@@ -15487,6 +15505,13 @@
         "id": "ophthalmic-laboratory-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "ophthalmic-laboratory-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15656,7 +15681,7 @@
       "text": "眼镜光学实验室技师：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "35fe35a78bac9401cba4efbd511b72cee8e5699d9e78c0fc1871daf014d483a7",
+  "source_content_sha256": "3479d6a3b9cacb584793868d1a5a63cc0cd33043193ec91696e1dbb5e7367938",
   "subject": {
     "canonical_slug": "ophthalmic-laboratory-technicians",
     "name": "眼镜光学实验室技师",

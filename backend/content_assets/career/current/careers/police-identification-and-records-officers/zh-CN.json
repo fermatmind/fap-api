@@ -23371,13 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先观察任务，再决定投入。若享受核查编号、解释证据限制和追踪交接，可继续查岗位；若只想快速得出“是谁做的”，却不愿记录不确定性，建议先比较调查或其他方向。练习表现不能证明具备鉴定资格。"
+              "纸面体验｜对照两张虚构移交回执，找出少一位的物品编号，保留两张原件的引用供记录员核对。 "
             ]
           },
           "id": "police-identification-and-records-officers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23668,13 +23667,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "警察鉴定与记录官员（Police Identification and Records Officers，O*NET 33-3021.02）负责现场证据收集与记录、指纹分类识别和证据照片，支持刑事与民事案件。核心是可核查的原始材料与记录，技术比对、保管移交和报告各有责任边界。中国对应岗位须另查具体公告，不能把美国职业代码当作中国任职资格。"
+              "警务鉴识与记录人员处理证据标识、检验记录和移交信息。记录必须让后续人员追溯物品编号及接收时间。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "police-identification-and-records-officers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-onet-33-3021.02"
           ],
           "type": "prose"
         },
@@ -24762,16 +24760,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可以辅助记录整理和资料检索；自动指纹系统也能提供候选匹配，但两类技术不是同一种工具。NIST说明候选结果仍由鉴定人员评估。现有暴露度研究不提供本职业整体替代率，也不能证明机构已采用或岗位将消失。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照两张虚构移交回执，找出少一位的物品编号，保留两张原件的引用供记录员核对。"
             ]
           },
           "id": "police-identification-and-records-officers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls",
-            "r2-pay-3"
+            "transfer-onet-33-3021.02",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32573,6 +32568,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-33-3021.02",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 33-3021.02 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/33-3021.02"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37821,10 +37843,10 @@
       "text": "警察鉴定与记录官员：工作任务、证据边界与入行路径"
     }
   },
-  "source_content_sha256": "8b6c8a65af33718e754099b6c985d439729e1bd814e73fb30e3dc967aa8c7bfa",
+  "source_content_sha256": "b441b9eb25d70123222b64a4d3d223c7601a524179ca7b1f3eb184a5a36fb2dc",
   "subject": {
     "canonical_slug": "police-identification-and-records-officers",
     "name": "警察鉴定与记录官员",
-    "summary": "在授权范围记录、保存和鉴定证据，制作照片、报告与移交记录。这个职业需要持续核对细节、明确写出不确定性，并接受复核；实际任职条件、人员身份与签字权限以具体机构和法域要求为准。"
+    "summary": "警务鉴识与记录人员处理证据标识、检验记录和移交信息。记录必须让后续人员追溯物品编号及接收时间。"
   }
 }

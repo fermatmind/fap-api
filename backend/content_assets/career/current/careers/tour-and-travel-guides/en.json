@@ -23666,13 +23666,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Use a fictional in-museum itinerary to link the material, the times, the visitor questions and the temporary closure information. Being able to explain the basis for a change has more observational value than memorising a florid commentary."
+              "Paper check | Compare a fictional itinerary with a venue notice. Separate an interpretation change from a transport reschedule and identify who should confirm each. "
             ]
           },
           "id": "tour-and-travel-guides.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24817,13 +24816,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Tour guides and escorts provide visit guidance and location commentary for individuals or groups, prepare material and routes, respond to questions, and observe visitor activity and on-site limits. The United States identity uses O*NET 39-7011.00; actual tour guide activity in China requires separate checking of the qualification, the tour guide certificate and the travel agency assignment, and a venue commentary role cannot be judged by the Chinese title alone. You can start with the fictional in-museum material on this page to complete the paper experience of checking the commentary and arranging the time."
+              "Site guides focus on interpretation and leading visitors, while travel guides may also arrange transport and lodging or resolve itinerary changes. The division depends on the service. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tour-and-travel-guides.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-39-7011.00",
+            "transfer-onet-39-7012.00"
           ],
           "type": "prose"
         }
@@ -25492,14 +25491,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the comparable AI adoption rate, task effects and net employment causal data for this occupation, and the score remains missing. Material summaries, drafts and route comparisons are editorial trial suggestions; the facts, times, visitor information and service responsibility are still checked by people. The combined United States 39-7010 2025—2035 overall growth of 6.3%, the ten-year net increase of about 3,900 and the average annual 11,900 openings including replacements are not independent for this page's sub-category or AI causation. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional itinerary with a venue notice. Separate an interpretation change from a transport reschedule and identify who should confirm each."
             ]
           },
           "id": "tour-and-travel-guides.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial",
-            "ratify"
+            "transfer-onet-39-7011.00",
+            "transfer-onet-39-7012.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33671,6 +33670,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-39-7011.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 39-7011.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/39-7011.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-39-7012.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 39-7012.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/39-7012.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39190,10 +39230,10 @@
       "text": "Tour guides and escorts"
     }
   },
-  "source_content_sha256": "bb060bb6ca7952b732d378bd4d4b2680377c0e649318afebf0f48b65449cf683",
+  "source_content_sha256": "3d4a71cbbcea8462cf85f78675fd79c77915d790765063e01381d7c103c8520e",
   "subject": {
     "canonical_slug": "tour-and-travel-guides",
     "name": "Tour guides and escorts",
-    "summary": "Tour guides and escorts provide visit guidance and location commentary for individuals or groups, prepare material and routes, respond to questions, and observe visitor activity and on-site limits. The United States identity uses O*NET 39-7011.00; actual tour guide activity in China requires separate checking of the qualification, the tour guide certificate and the travel agency assignment, and a venue commentary role cannot be judged by the Chinese title alone. You can start with the fictional in-museum material on this page to complete the paper experience of checking the commentary and arranging the time."
+    "summary": "Site guides focus on interpretation and leading visitors, while travel guides may also arrange transport and lodging or resolve itinerary changes. The division depends on the service."
   }
 }

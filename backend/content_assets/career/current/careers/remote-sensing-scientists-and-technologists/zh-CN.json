@@ -14244,20 +14244,8 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "remote-sensing-scientists-and-technologists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
         "ref": {
@@ -14656,16 +14644,8 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "remote-sensing-scientists-and-technologists.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
         "ref": {
@@ -23335,7 +23315,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "N1—N5完全虚构，不授数据、测绘、飞行或成果发布权限。"
+              "若不适应持续复核或不能接受缺资料时暂缓结论，先核岗位节奏。采集、飞行和公开成果各按实际授权。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.quick-decision.fit-decision-checklist.1",
@@ -23350,7 +23330,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先手算NDVI，再排云像元、标零分母，列尺度和独立验证待办。"
+              "用 09 三组虚构像元数据做一份筛查与交接表，先记录自己的判断再核参考。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.quick-decision.fit-decision-checklist.2",
@@ -23364,7 +23344,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "愿意核元数据、复现实验、承认误差并解释结论边界，可探索本岗。"
+              "愿意反复核影像来源、复现实验并解释不确定性，可进一步了解研究岗。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.quick-decision.fit-decision-checklist.3",
@@ -23584,7 +23564,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "USGS质量资料介绍Landsat Collection 2的QA_PIXEL与QA_RADSAT；前者含云等像元标记。实际传感器、产品和位编码各自核，N2云标记仅为编辑题设，不是官方QA编码。"
+              "Landsat Collection 2 的 QA_PIXEL 包含云相关质量标记，QA_RADSAT 标记波段辐射饱和。按 USGS 对应传感器与产品的位编码及掩膜规则解读。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.profile.onet-structured-fields-block.5",
@@ -25848,7 +25828,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按N1—N5复算0.5、1/3和零分母，排除云像元；未知期间尺度保持待核。"
+              "用 09 的虚构像元自己复算，区分能算出的数、质量筛除和无值，记录未知比例因子。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.ai-impact.ai-impact-table.91",
@@ -25998,7 +25978,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可提示N2云标记，不按外观放行。"
+              "工具可提取质量标记。对照原记录与产品规则核实后，再登记处置。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.ai-impact.ai-impact-table.101",
@@ -26058,7 +26038,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可算P1=0.5与P2≈0.333，但P2按题设云污染排除，P3零分母无值；不推真实植被类别。"
+              "工具可按式计算，但须人工对照质量标记、缺值、尺度及版本。题面和复核在 09，不能据此解译真实地物。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.ai-impact.ai-impact-table.105",
@@ -27031,13 +27011,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业均值、招聘报价与个人合同分母不同，不推断起薪。"
+              "大陆「摄影测量与遥感工程技术人员」（2-02-02-03）覆盖数据获取、影像判译、产品生产与成果验收。本页研究岗位只与其中方法、分析和验证任务部分对应；岗位名称随雇主而异，先看是否负责方法选择与结果解释。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "editor",
-            "editor"
+            "cn-rs-class"
           ],
           "type": "prose"
         },
@@ -27777,31 +27757,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "制图与摄影测量人员",
@@ -28224,8 +28204,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "复算N1为0.5、N2为1/3但有云标记。",
-              "识别N3零分母，不能给有效NDVI。"
+              "能否复算虚构像元并写清质量标记如何改变保留或剔除？",
+              "能否写明公式适用条件、质量标记及仍需核查的资料？"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.fit.personality-fit-block.20",
@@ -28699,7 +28679,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可训练。先复算0.5和1/3、辨零分母与云标记，再学习统计与遥感。"
+              "可练：先做 09 的像元算式和质量筛查，再学统计与遥感。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.fit.personality-fit-block.52",
@@ -29131,7 +29111,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "N2：有云标记，不能与清晰像元同样解释。"
+              "图像外观不能代替质量记录。按产品规则写明能否进入后续分析及原因。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.risk.career-risk-cards.18",
@@ -29191,7 +29171,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "N3：NIR与RED均为0，NDVI不定义。"
+              "保留原始波段值与质量标记，再按 09 题设逐像元检查并记录判断依据。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.risk.career-risk-cards.22",
@@ -29538,7 +29518,7 @@
                 "values": [
                   "职业准备",
                   "O*NET Job Zone Four，多数此类职业需要本科；具体项目要求另核。",
-                  "不是中国统一学历或执照。"
+                  "中科院国家空间科学中心的项目聘用样本把多谱算法调研、仿真验证、性能评估与报告列为职责；该岗位要求本科及以上。报名期限已过。 江苏地质局岗位表 A1 把 GIS、遥感解译和建模列在同一岗，面向取得相应学位的 2026 届博士，且注明长期野外工作；不能把这条要求套到所有遥感岗位。"
                 ]
               },
               {
@@ -29570,7 +29550,9 @@
           "id": "remote-sensing-scientists-and-technologists.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "cas-rs-algorithm",
+            "js-geo-research"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29584,10 +29566,10 @@
                 "id": "exercise-materials",
                 "values": [
                   "题设｜N1—N5为虚构像元，不是实际观测",
-                  "30分钟完成指标复算、质量筛选与独立验证待办。题设的NIR与RED已是可比较反射率，不需要额外缩放。",
+                  "限时 30 分钟。NIR 指近红外反射率，RED 指红光反射率。题设数值已经同尺度。",
                   "N1｜像元P1：NIR=0.60、RED=0.20；题设质量标记为清晰。",
-                  "N2｜像元P2：NIR=0.50、RED=0.25；题设标记为云污染，计算值不能用于本练习有效统计。",
-                  "N3｜像元P3：NIR=0、RED=0；分母为零。",
+                  "N2｜P2：NIR=0.50，RED=0.25，质量标记为云污染。",
+                  "N3｜P3：NIR=0，RED=0。",
                   "N4｜题设未给坐标、像元面积、拍摄时段或传感器产品；不计算区域面积或变化。",
                   "N5｜未提供地面真值；须列独立支持数据与验证方案，不能宣布分类精度。"
                 ]
@@ -29596,24 +29578,22 @@
                 "id": "exercise-task",
                 "values": [
                   "任务与产出",
-                  "按NDVI=(NIR-RED)/(NIR+RED)复算P1/P2，判断P3；明确质量筛选先于统计解释。",
+                  "按 NDVI=(NIR−RED)/(NIR+RED) 逐像元检查。先记原值与质量标记，再核分母；记录可算的值。只用质量合格的结果汇总，其余注明排除或无值及原因。",
                   "交一页算式、有效/排除/无值表与验证待办，不对虚构像元作真实地表判定。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考答案（先独立完成）",
-                  "P1=(0.60-0.20)/(0.60+0.20)=0.50。P2=(0.50-0.25)/(0.50+0.25)=1/3≈0.333。",
-                  "P2虽可算，但题设有云污染而排除；P3分母为0，NDVI不定义。仅P1可进入此纸面练习的有效表。",
-                  "N4/N5缺尺度、时间、真实传感器与独立真值，不能推区域面积、地表类别、变化或精度。"
+                  "提交前提示",
+                  "先保存初稿，再看七天计划后的参考。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "边界与复核",
-                  "NASA提供NDVI概念；本题质量标记是编辑虚构，不是Landsat位编码。真实产品缩放、掩膜、配准和验证按对应资料；不采集真实敏感地点。"
+                  "只做纸面模拟，保留未获授权的事项。"
                 ]
               }
             ]
@@ -29622,7 +29602,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入门练习：虚构NDVI、质量筛选与验证设计",
+          "title": "RS-R01｜NDVI 筛查与独立验证设计",
           "type": "cards"
         },
         {
@@ -29642,8 +29622,8 @@
                 "id": "independent-recheck",
                 "values": [
                   "指标与筛选卡",
-                  "复算P1=0.5、P2≈0.333但排除、P3无值。",
-                  "不把三个像元直接求平均。"
+                  "不把三个像元直接求平均。",
+                  "列每个像元的计算过程、质量筛查和纳入汇总的依据。"
                 ]
               },
               {
@@ -29690,27 +29670,27 @@
             "rows": [
               [
                 "公式复算",
-                "能否得到0.5和1/3",
-                "保存算式和舍入",
-                "只证明题设算术"
+                "如何判断公式是否适用并让别人复算？",
+                "用题设原始记录和规则写理由。",
+                "不补写未给出的观测或批准。"
               ],
               [
                 "质量判断",
-                "P2有云能否纳统计",
-                "排除并写原因",
-                "真实掩膜需产品说明"
+                "如何把质量标记和后续用途联系起来？",
+                "用题设原始记录和规则写理由。",
+                "不补写未给出的观测或批准。"
               ],
               [
                 "无效值",
-                "P3零分母如何记录",
-                "无值且保留原输入",
-                "不得写0或补猜"
+                "如果算式不成立，应如何保留原记录？",
+                "用题设原始记录和规则写理由。",
+                "不补写未给出的观测或批准。"
               ],
               [
                 "独立验证",
-                "能否声明类别或精度",
-                "列所缺真值和方法",
-                "不编造验证结论"
+                "交接应写哪些缺证与下一步？",
+                "用题设原始记录和规则写理由。",
+                "不补写未给出的观测或批准。"
               ]
             ]
           },
@@ -29745,35 +29725,35 @@
                 "id": "entry-trial-day-3",
                 "values": [
                   "第三日",
-                  "手算0.5和1/3，识别零分母。"
+                  "用给定反射率复算各像元，记算式或无法计算的依据。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "第四日",
-                  "做有效/排除/无值表，不求不合格平均。"
+                  "按题设质量规则逐行判断，写清统计范围。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "第五日",
-                  "设计独立验证，标未给坐标、时间、产品与像元面积。"
+                  "列独立参考、时空匹配方式和仍缺的数据。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "第六日",
-                  "对参考答案，修正把有云像元或无值写为有效的错误。"
+                  "独立完成并保存四份初稿，保留题面来源和计算。没有同伴也能完成。第 7 天再对照参考。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "第七日",
-                  "核目标岗位的领域、学历、代码、验证和数据权限。"
+                  "第 6 天初稿保存后，到本页常见问题区展开「RS-R01 参考与自核量规（第 7 天展开）」。用四项量规核对，留一处修订及理由。"
                 ]
               }
             ]
@@ -29790,20 +29770,19 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "保留输入、算式、筛选表初稿与修订。",
-              "正确说明0.5、1/3、云排除和零分母。",
-              "记录是否喜欢查元数据、代码和误差。",
-              "重做N4/N5限制说明，不编真实精度。",
-              "列下一轮需补的产品、尺度、时间与真值。",
-              "对照岗位，标遥感、GIS、统计或领域知识缺口。",
-              "未完成项如实保留，不用测评替代行为证据。"
+              "保留每条像元输入、公式和处理记录。",
+              "分别记录数值、质量标识与处理决定。",
+              "标明缺失的元数据和独立参考。",
+              "给下一责任人写一条可以验证的交接。",
+              "保留初稿与修订稿，写下调整依据。",
+              "明确哪些结论还需要现场或独立数据。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "交卷前后怎么自查",
           "type": "list"
         },
         {
@@ -29917,14 +29896,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "NBS宽行业工资不是遥感研究人员精确收入。",
-              "证据不足：未取得领域、地区、学历、职责、工时和计酬可比的中国单岗报价。"
+              "中科院国家空间科学中心的项目聘用样本把多谱算法调研、仿真验证、性能评估与报告列为职责；该岗位要求本科及以上。报名期限已过。 江苏地质局岗位表 A1 把 GIS、遥感解译和建模列在同一岗，面向取得相应学位的 2026 届博士，且注明长期野外工作；不能把这条要求套到所有遥感岗位。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.path.recruitment-sample.1",
           "source_refs": [
-            "nbs",
-            "editor"
+            "cas-rs-algorithm",
+            "js-geo-research"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -31980,7 +31958,7 @@
                 ]
               },
               {
-                "answer": "完成N1—N5虚构NDVI练习：手算、排云像元、标零分母、列尺度与验证待办。观察能否复核输入并明确承认限制。",
+                "answer": "到 09 用同一组虚构数据完成计算和质量判断。保留每项原始记录及筛查依据，写明缺证和下一复核人。",
                 "id": "remote-sensing-scientists-and-technologists.faq.5",
                 "question": "如何判断自己适合？",
                 "question_key": "career.faq.remote-sensing-scientists-and-technologists.q5",
@@ -32008,12 +31986,11 @@
                 ]
               },
               {
-                "answer": "N1—N5只检验入门判断，不授数据、地图发布、测绘、飞行或现场作业权限。学历、训练和准入按实际岗位核。",
+                "answer": "P1=(0.60-0.20)/(0.60+0.20)=0.50。P2=(0.50-0.25)/(0.50+0.25)=1/3≈0.333。\n\nP2虽可算，但题设有云污染而排除；P3分母为0，NDVI不定义。仅P1可进入此纸面练习的有效表。\n\nN4/N5缺尺度、时间、真实传感器与独立真值，不能推区域面积、地表类别、变化或精度。\n\n先确认待验证产品、单位、坐标、像元尺寸与采集时段。用同期地面实测或独立的高分辨率参考数据。按地物覆盖和均匀程度分层取样，预留一批独立样本，校准时不用这批。\n\n将参考数据按同一坐标、像元范围和采集时段配准。对连续量报告有效配对数、偏差、MAE 或 RMSE 及不确定性，并说明缺测与覆盖不足。虚构材料缺这些输入，现阶段只能提交计划。\n\n各项 0–2 分：三个像元算式或无值原因、质量标记与剔除理由、未观察范围、验证或质检交接与下一责任人。齐全 2、部分 1、猜测或越权 0。",
                 "id": "remote-sensing-scientists-and-technologists.faq.8",
-                "question": "纸面练习后能正式开展项目吗？",
+                "question": "RS-R01 参考与自核量规（第 7 天展开）",
                 "question_key": "career.faq.remote-sensing-scientists-and-technologists.credentials",
                 "source_refs": [
-                  "onet",
                   "editor"
                 ]
               },
@@ -32074,14 +32051,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业任务用O*NET19-2099.01；美国工资与预测标19-2099宽类，NASA/USGS只支持指标与产品质量背景。"
+              "美国职业任务取 O*NET 子职业，工资和就业只取标明的 BLS 宽类。大陆以职业分类与招聘样本核职责，行业背景不当职业工资。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.sources.source-card.2",
           "source_refs": [
             "onet",
             "bls",
-            "nbs"
+            "nbs",
+            "cn-rs-class",
+            "cas-rs-algorithm",
+            "js-geo-research"
           ],
           "type": "prose"
         },
@@ -32090,7 +32070,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料于2026年10月3日核读；2025工资与2025—2035预测按父职业19-2099，精确职业19-2099.01缺口另列。"
+              "本次所用大陆分类、岗位与美国职业数据于 2026 年 11 月 9 日核读。"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.sources.source-card.3",
@@ -32137,25 +32117,25 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "回到遥感科学家与技术专家职业页",
@@ -32198,20 +32178,20 @@
                 "url": "https://www.onetonline.org/link/details/19-2099.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "宽类中位数122,570美元。",
-                  "页面明示Physical Scientists, All Other。"
+                  "美国全国父职业组年薪第 10、25、50、75、90 分位（美元）为 67,000 / 86,620 / 122,570 / 161,890 / 195,190。",
+                  "该父职业组时薪中位为 58.93 美元。就业与空缺预测见 BLS Table 1.2。"
                 ],
                 "evidence_type": "宽职业工资",
                 "id": "bls",
                 "limitation": "不是19-2099.01独立工资",
                 "market": "美国",
-                "name": "O*NET工资：19-2099其他物理科学家宽类",
-                "period": "2025年工资",
-                "publisher": "O*NET / BLS",
+                "name": "美国 BLS OEWS｜19-2099 其他物理科学家（父职业组）",
+                "period": "2025 年 5 月",
+                "publisher": "美国劳工统计局（BLS）",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/19-2099.01"
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=190000&measure=01&occupation=192099&year=2025"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32230,20 +32210,20 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "宽类中位数122,570美元。",
-                  "页面明示Physical Scientists, All Other。"
+                  "美国全国父职业组年薪第 10、25、50、75、90 分位（美元）为 67,000 / 86,620 / 122,570 / 161,890 / 195,190。",
+                  "该父职业组时薪中位为 58.93 美元。就业与空缺预测见 BLS Table 1.2。"
                 ],
                 "evidence_type": "宽职业工资",
                 "id": "oews",
                 "limitation": "不是19-2099.01独立工资",
                 "market": "美国",
-                "name": "O*NET工资：19-2099其他物理科学家宽类",
-                "period": "2025年工资",
-                "publisher": "O*NET / BLS",
+                "name": "美国 BLS OEWS｜19-2099 其他物理科学家（父职业组）",
+                "period": "2025 年 5 月",
+                "publisher": "美国劳工统计局（BLS）",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/19-2099.01"
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=190000&measure=01&occupation=192099&year=2025"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32376,7 +32356,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "P1=0.5；P2约1/3但有云排除；P3零分母无值。",
+                  "练习提供虚构像元的波段值与题设质量信息。请逐项记录计算依据、质检判断与待核信息。",
                   "N4缺时空尺度产品，N5无独立真值；不推真实类别面积或精度。"
                 ],
                 "evidence_type": "编辑练习与建议",
@@ -32440,7 +32420,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "P1=0.5；P2约1/3但有云排除；P3零分母无值。",
+                  "练习提供虚构像元的波段值与题设质量信息。请逐项记录计算依据、质检判断与待核信息。",
                   "N4缺时空尺度产品，N5无独立真值；不推真实类别面积或精度。"
                 ],
                 "evidence_type": "编辑练习与建议",
@@ -32677,6 +32657,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "2-02-02-03 包括采集、处理、解译遥感影像、生产产品和验收。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-rs-class",
+                "limitation": "任务部分对应，不等同美国 O*NET 子职业、雇主职级或工资。",
+                "market": "中国大陆",
+                "name": "职业分类大典：摄影测量与遥感工程技术人员",
+                "period": "2022",
+                "publisher": "人力资源社会保障部等；广元市人社局转载",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中科院国家空间科学中心的项目聘用样本把多谱算法调研、仿真验证、性能评估与报告列为职责；该岗位要求本科及以上。报名期限已过。"
+                ],
+                "evidence_type": "招聘样本",
+                "id": "cas-rs-algorithm",
+                "limitation": "单岗历史样本，不作当前在招、通用学历或全国工资依据。",
+                "market": "中国大陆",
+                "name": "中科院国家空间科学中心｜遥感算法设计与开发",
+                "period": "2026-09-03",
+                "publisher": "中科院国家空间科学中心",
+                "scope": "recruitment_proxy",
+                "url": "https://cssar.cas.cn/jrwm2015/202609/t20260903_8277690.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "江苏地质局岗位表 A1 把 GIS、遥感解译和建模列在同一岗，面向取得相应学位的 2026 届博士，且注明长期野外工作；不能把这条要求套到所有遥感岗位。"
+                ],
+                "evidence_type": "招聘样本",
+                "id": "js-geo-research",
+                "limitation": "单岗历史样本，不作当前在招、通用学历或全国工资依据。",
+                "market": "中国大陆",
+                "name": "江苏省地质局第一地质大队｜测绘与遥感专业技术岗",
+                "period": "2026",
+                "publisher": "江苏省地质局第一地质大队",
+                "scope": "recruitment_proxy",
+                "url": "https://jzgc.ecut.edu.cn/1c/e3/c10294a138467/page.htm"
               }
             ]
           },
@@ -37371,7 +37396,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合遥感科学家与技术专家",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37448,7 +37473,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测试"
           },
           {
             "href": {
@@ -37458,7 +37483,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -37468,7 +37493,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格测试"
           },
           {
             "href": {
@@ -37478,7 +37503,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "IQ 推理测评"
           }
         ]
       },
@@ -37974,7 +37999,7 @@
     "badges": [
       "遥感方法与影像分析",
       "空间数据融合 · 验证与不确定性",
-      "O*NET 19-2099.01；工资预测为宽类"
+      "O*NET 19-2099.01；美国工资与就业预测用 BLS 19-2099 宽类"
     ],
     "metrics": [
       {
@@ -38020,7 +38045,7 @@
       "text": "遥感科学家与技术专家：工作内容、数据分析与入门路径"
     }
   },
-  "source_content_sha256": "7317b3a90c7acbba63ca8dda49c388538a89563cf272286c1e7b848f8478566f",
+  "source_content_sha256": "8133d73be1cf13cc3a2beb37af07a6f5ad48b4c42f2bed006b40adc432cc3866",
   "subject": {
     "canonical_slug": "remote-sensing-scientists-and-technologists",
     "name": "遥感科学家与技术专家",

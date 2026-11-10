@@ -191,6 +191,9 @@
       "item:nursing-assistants.path.seven-day-trial.5": {
         "status": "pending_mapping"
       },
+      "item:nursing-assistants.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nursing-assistants.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12566,6 +12569,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。班次表显示午餐未完成，接班者只看到托盘已收。区分直接观察与推断，把已知情况和待核点报告给负责护士。"
+            ]
+          },
+          "id": "nursing-assistants.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "记录生活照护异常",
+          "type": "notice"
         }
       ]
     },
@@ -15159,6 +15177,13 @@
         "id": "nursing-assistants.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nursing-assistants.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15500,7 +15525,7 @@
       "text": "护理员（Nursing Assistants）职业画像｜任务、薪资、准入与边界"
     }
   },
-  "source_content_sha256": "b12e4ea5f8a43971d32402cee7966966c1df7479ba71d9d541191fb020b86b96",
+  "source_content_sha256": "dcc6bc2c28f0248e652793d86ad2bc9ca0e7d481818157a087ccc1a5595851a5",
   "subject": {
     "canonical_slug": "nursing-assistants",
     "name": "护理员",

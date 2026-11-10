@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-dms-dayu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-dms-longgang": {
+        "status": "pending_mapping"
       },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
@@ -26168,12 +26174,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national single-occupation wage scope was obtained."
+              "A Shenzhen Jinrui Kaili posting quoted CNY 4,500–5,500 per month for document control and emphasized quality-system records. A Ganzhou Changlian DCC posting listed CNY 4,000–5,500 without a pay period or detailed duties. The historical ads illustrate document control jobs, not national wages or a direct U.S. classification match."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "dms-longgang",
+            "dms-dayu"
           ],
           "type": "prose"
         },
@@ -26267,7 +26274,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page does not provide recruitment quotes or personal income promises; missing items remain missing, and industry averages or neighboring occupations are not used as substitutes."
+              "The historical postings show individual jobs and terms at the time. A comparable nationwide wage distribution for this occupation is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -31093,7 +31100,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Take part in determining document management policy and establishing the classification and metadata specification, and identify and classify documents by classification level and function and metadata; work with other information technology professionals to implement electronic document processing and retrieval and distribution systems, configure user interfaces and access configuration files and document workflows, and implement access permissions and version control; operate scanning and imaging and automatic data entry to import digitized documents into the system; retrieve electronic assets within the scope of authorization and distribute them to users and provide support and training materials on access issues; monitor regulations and retention periods and organize expiry appraisal and destruction on schedule; write system test plans and technical functions and specifications and analyze system performance data.",
+                "answer": "Maintain classification and metadata, configure version, approval, access and release workflows, and support retrieval, migration and audit. Organizational rules determine access and final approvals.",
                 "id": "actors.faq.1",
                 "question": "What does a document management specialist do every day?",
                 "question_key": "career.faq.document-management-specialists.1",
@@ -31102,13 +31109,12 @@
                 ]
               },
               {
-                "answer": "The occupation on this page handles policy and classification and system configuration and permissions and versions and retrieval and distribution and retention period management for files and records within established systems and rules; computer and information systems managers are responsible for the overall information technology strategy and budget and team and system portfolio; administrative services managers are responsible for the coordinated management of institutional administrative affairs and facilities and procurement and records services. Duties and authorization differ, and the positions cannot be swapped by name.",
+                "answer": "Document management focuses on versions, access and workflows. Data entry focuses on field accuracy; desktop publishing focuses on layout and output. In mixed roles, ask who controls access, retires old versions and delivers final files.",
                 "id": "actors.faq.2",
-                "question": "What is the difference between it and computer and information systems managers or administrative services managers?",
+                "question": "How does document management differ from data entry and desktop publishing?",
                 "question_key": "career.faq.document-management-specialists.2",
                 "source_refs": [
-                  "onet",
-                  "agent"
+                  "onet"
                 ]
               },
               {
@@ -31122,9 +31128,9 @@
                 ]
               },
               {
-                "answer": "Document and content management systems, scanning and imaging and optical character recognition tools, metadata and classification and workflow configuration, permissions and versions and audit logs, and retrieval and deduplication and performance report tools; these tools improve efficiency, but classification level and permissions and distribution and destruction and compliance judgments remain the responsibility of people.",
+                "answer": "Software may assist version checks, layout or document retrieval. People verify accuracy, access and final outputs. This page does not measure AI adoption, gains or replacement.",
                 "id": "actors.faq.4",
-                "question": "Which tasks already have tool or system support?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.document-management-specialists.4",
                 "source_refs": [
                   "onet"
@@ -31140,13 +31146,14 @@
                 ]
               },
               {
-                "answer": "The wages and employment for this detailed occupation are taken from the parent group Computer Occupations, All Other (15-1299): the BLS 2025 wage data median is 116,580 US dollars per year (56.05 US dollars per hour), with annual percentiles of 55,940／79,370／116,580／157,500／188,470 US dollars and hourly percentiles of 26.89／38.16／56.05／75.72／90.61 US dollars; this scope is not the precise value for the single occupation 15-1299.03. No corresponding national single-occupation scope was obtained for the Chinese mainland, so no median or percentile is given. When comparing real positions, check the city, industry and unit type, whether it is internal management or external consulting or implementation, whether project bonuses and allowances are included, and the pre-tax versus after-tax treatment.",
+                "answer": "The May 2025 U.S. median for parent SOC 15-1299 was $56.05 per hour and $116,580 per year. This is not a separate document management wage. A Shenzhen Jinrui Kaili posting quoted CNY 4,500–5,500 per month for document control and emphasized quality-system records. A Ganzhou Changlian DCC posting listed CNY 4,000–5,500 without a pay period or detailed duties. The historical ads illustrate document control jobs, not national wages or a direct U.S. classification match.",
                 "id": "actors.faq.6",
                 "question": "What is the typical pay, and how should it be compared?",
                 "question_key": "career.faq.document-management-specialists.6",
                 "source_refs": [
-                  "oews",
-                  "nbs"
+                  "onet",
+                  "dms-longgang",
+                  "dms-dayu"
                 ]
               },
               {
@@ -31180,13 +31187,12 @@
                 ]
               },
               {
-                "answer": "Consider the communication and screen load (use email every day 100%, telephone conversations every day 74%, face-to-face discussions every day 59%, continuous sitting 35% and more than half the time sitting 50%), the time pressure during milestone periods (20% every day), and classification level and personal information and retention period and audit responsibility; working hours are relatively regular (95% fixed schedule) but intensity rises at project and audit and expiry milestones.",
+                "answer": "BLS projects the U.S. parent SOC 15-1299 to grow from about 471,200 in 2025 to 495,300 in 2035 (+5.1%), with about 27,000 annual openings including replacements. There is no separate projection here for document management 15-1299.03.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing this occupation?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.document-management-specialists.10",
                 "source_refs": [
-                  "onet",
-                  "nist"
+                  "r5-bls-current"
                 ]
               }
             ]
@@ -31623,7 +31629,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "The O*NET15-1299.03 definition covers implementing and administering enterprise document systems and procedures and capturing, storing, retrieving, sharing and destroying electronic records. Of 23 tasks, 22 are Core and 1 Supplemental; analyzing and interpreting and disseminating system performance data is supplemental and is not treated as required in all positions. Policy and classification and evaluating and procuring and deploying new systems are assistance and participation, while configuring access and version control, capture, retrieval, requirements, testing, regulatory tracking and user support are core. Monitoring regulations does not automatically confer legal adjudication authority; tasks may overlap with adjacent occupations, and archive work or system development and configuration or technical duties cannot be uniformly excluded, being distinguished only by main outputs and authorization. O*NET57 context: email every day 100 / telephone 74 / face-to-face 59, continuous contact 16 / most of the time 47 / half the time 37; teamwork extremely important 33 / very important 56; accuracy extremely important 35 / very important 45; daily strict deadlines 20 / weekly 40; daily decisions 16; continuous sitting 35 / more than half the time 50; regular 95; 40 hours per week 79 / more than 40 is 21; controlled indoor every day 61 / never 22. The survey does not prove that everyone often works overtime or communicates with many strangers; public service is 26 very important and 37 important. Automation 28 high / 44 moderate / 28 slight, not GenAI adoption. Actual milestone overtime, duty and procedures must be checked against the specific employer. BLS parent group 15-1299: employment in 2025 was 471,200, projected at 495,300 in 2035, an official net increase of 24,200 and 5.1%; the difference of the rounded endpoints, 24,100, does not replace the official net change. The annual average of 27,000 openings over 2025—2035 includes growth and replacement, and is not a ten-year total or a yearly net increase; self-employment is 4.9%, and this OOH row shows a dash. The wage and employment and industry data are the parent group for other computer occupations and are not the size of the document management detailed occupation, individual hiring probability or AI causality."
                 ],
@@ -31635,7 +31641,7 @@
                 "period": "updated 2026; accessed 2026-09-19",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/15-1299.03"
+                "url": "https://www.onetonline.org/link/details/15-1299.03"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31835,16 +31841,16 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "BLS parent group 15-1299: employment in 2025 was 471,200, projected at 495,300 in 2035, an official net increase of 24,200 and 5.1%; the difference of the rounded endpoints, 24,100, does not replace the official net change. The annual average of 27,000 openings over 2025—2035 includes growth and replacement, and is not a ten-year total or a yearly net increase; self-employment is 4.9%, and this OOH row shows a dash. The wage and employment and industry data are the parent group for other computer occupations and are not the size of the document management detailed occupation, individual hiring probability or AI causality. The O*NET detailed occupation is JZ4/SVP7 and below 8, and its preparation group usually requires several years of related experience and on-the-job and/or vocational training, not a uniform course of a few weeks or months to enter. 60% bachelor's / 15% master's / 10% associate's are respondents' feedback on the education needed for new entrants, not 60% of positions or employers or employee education. The BLS parent group's typical bachelor's degree and related experience of None and typical on-the-job training of None cannot cover the detailed occupation's group-level preparation requirement, and None does not mean training is unnecessary. The current Chinese access catalogue and all United States state requirements were not checked item by item, and no national license exemption or uniform mandatory certification is claimed."
+                  "BLS projects the U.S. parent SOC 15-1299 to grow from about 471,200 in 2025 to 495,300 in 2035 (+5.1%), with about 27,000 annual openings including replacements. There is no separate projection here for document management 15-1299.03."
                 ],
                 "evidence_type": "official projections",
                 "id": "r5-bls-current",
                 "limitation": "BLS parent group 15-1299: employment in 2025 was 471,200, projected at 495,300 in 2035, an official net increase of 24,200 and 5.1%; the difference of the rounded endpoints, 24,100, does not replace the official net change. The annual average of 27,000 openings over 2025—2035 includes growth and replacement, and is not a ten-year total or a yearly net increase; self-employment is 4.9%, and this OOH row shows a dash. The wage and employment and industry data are the parent group for other computer occupations and are not the size of the document management detailed occupation, individual hiring probability or AI causality. The O*NET detailed occupation is JZ4/SVP7 and below 8, and its preparation group usually requires several years of related experience and on-the-job and/or vocational training, not a uniform course of a few weeks or months to enter. 60% bachelor's / 15% master's / 10% associate's are respondents' feedback on the education needed for new entrants, not 60% of positions or employers or employee education. The BLS parent group's typical bachelor's degree and related experience of None and typical on-the-job training of None cannot cover the detailed occupation's group-level preparation requirement, and None does not mean training is unnecessary. The current Chinese access catalogue and all United States state requirements were not checked item by item, and no national license exemption or uniform mandatory certification is claimed.",
                 "market": "United States",
                 "name": "BLS Table 1.2 parent group other computer occupations employment projections and typical training",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31925,6 +31931,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "CNY 4,500–5,500 per month. Document control or quality management experience and familiarity with medical device quality-system records."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "dms-longgang",
+                "limitation": "Historical posting, not national statistics or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Shenzhen Jinrui Kaili Biotechnology: document control",
+                "period": "2021-08",
+                "publisher": "Shenzhen Longgang District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.lg.gov.cn/zwfw/zdfw/jiuye/cjjy/wgryjy/content/post_9027121.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One position at CNY 4,000–5,500. The row does not specify a pay period or detailed duties."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "dms-dayu",
+                "limitation": "Historical posting, not national statistics or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Changlian Materials, Ganzhou: DCC document control",
+                "period": "2026-05",
+                "publisher": "Dayu County Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.jxdy.gov.cn/dyxxxgk/c145429gg/202606/c957d55652424130875c7919a6526fb2.shtml"
               }
             ]
           },
@@ -34917,7 +34953,7 @@
               }
             },
             {
-              "城市/区间": "Recruitment quotes (cannot substitute for actual treatment)",
+              "城市/区间": "Mainland China historical job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34929,13 +34965,14 @@
           "china_soc_row": "Chinese mainland salary scope",
           "edu": "See the entry module for training and authorization",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-dms-longgang",
+            "posting-dms-dayu"
           ],
           "sources_note": "Source links are used according to their respective scope of application.",
           "ui": {
             "ai_heading": "Will AI and automation directly change the income for this occupation?",
             "driver_heading": "What should be checked when discussing pay for similar positions in the Chinese mainland?",
-            "official_heading": "Chinese mainland official scope and statistical gap",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Comparison of pay methods and statistical boundaries",
             "scenario_heading": "Can the pay methods of similar positions in the Chinese mainland be compared directly?",
             "scenario_interpretation_label": "Scope of application and gaps",
@@ -35621,7 +35658,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/computer-and-information-systems-managers",
+            "target_href": "/en/career/jobs/computer-and-information-systems-managers",
             "target_slug": "computer-and-information-systems-managers",
             "target_title": "Computer and information systems managers: differences from this occupation in information technology management authority",
             "transition_distance": {
@@ -35644,7 +35681,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/administrative-services-managers",
+            "target_href": "/en/career/jobs/administrative-services-managers",
             "target_slug": "administrative-services-managers",
             "target_title": "Administrative services managers: differences from this occupation in administrative coordination",
             "transition_distance": {
@@ -35667,7 +35704,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/compliance-managers",
+            "target_href": "/en/career/jobs/compliance-managers",
             "target_slug": "compliance-managers",
             "target_title": "Compliance managers: differences from this occupation in compliance judgment",
             "transition_distance": {
@@ -35690,7 +35727,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/management-analysts",
+            "target_href": "/en/career/jobs/management-analysts",
             "target_slug": "management-analysts",
             "target_title": "Management consultants: differences from this occupation in consulting recommendations",
             "transition_distance": {
@@ -35713,7 +35750,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/computer-systems-analysts",
+            "target_href": "/en/career/jobs/computer-systems-analysts",
             "target_slug": "computer-systems-analysts",
             "target_title": "Computer systems analysts: differences from this occupation in system design",
             "transition_distance": {
@@ -35736,7 +35773,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/database-administrators",
+            "target_href": "/en/career/jobs/database-administrators",
             "target_slug": "database-administrators",
             "target_title": "Database administrators: differences from this occupation in database operations",
             "transition_distance": {
@@ -35759,7 +35796,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/information-security-analysts",
+            "target_href": "/en/career/jobs/information-security-analysts",
             "target_slug": "information-security-analysts",
             "target_title": "Information security analysts: differences from this occupation in security operations",
             "transition_distance": {
@@ -35782,7 +35819,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/archivists",
+            "target_href": "/en/career/jobs/archivists",
             "target_slug": "archivists",
             "target_title": "Archivists: differences from this occupation in archive collection",
             "transition_distance": {
@@ -35865,7 +35902,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35914,7 +35951,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35963,7 +36000,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36012,7 +36049,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36061,7 +36098,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36110,7 +36147,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36732,7 +36769,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of document management specialists",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37228,12 +37265,12 @@
       },
       {
         "derivation": null,
-        "display_value": "116,580 US dollars per year (median, 2025 wage data, parent group Computer Occupations, All Other basis; median hourly wage 56.05 US dollars)",
+        "display_value": "Parent-group median: $56.05/hour; $116,580/year",
         "fact_id": "median",
         "market": "United States",
         "measure": "Median wage (parent group proxy scope, with hourly scope)",
-        "occupation_scope": "Parent group Computer Occupations, All Other (15-1299) basis, not the precise value for the single occupation 15-1299.03; the figure is the employed pre-tax wage statistical scope and excludes bonuses and project and allowance pay, and external consulting and project-based settlement income is not included, so it cannot be treated as individual take-home income",
-        "period": "2025 wage data; retrieved 2026-09-19",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37263,39 +37300,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 472,000 people (2024, O*NET summary page scope, parent group Computer Occupations, All Other)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "471,200 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (parent group proxy scope, stock statistic)",
-        "occupation_scope": "Parent group Computer Occupations, All Other (15-1299) basis, not the size of the single occupation 15-1299.03; the size varies with organizational electronic record growth and the degree of system automation, and is not entirely the same as the population covered by the detailed occupation task scope; the national total does not indicate specific opportunities in a particular industry or organization",
-        "period": "2024 base period; retrieved 2026-09-19",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "The 2024—2034 projection is much faster than average (7% or higher) (parent group basis, the category and threshold marked on the O*NET summary page, which does not give a single precise percentage)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+5.1%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (parent group proxy scope, occupation total)",
-        "occupation_scope": "Parent group Computer Occupations, All Other (15-1299) basis, projection period 2024—2034; the projection is a change in the occupation total, not individual hiring probability; the page gives only the much faster than average (7% or higher) category and threshold and not a single precise percentage, so this page states it in the original wording without converting to a percentage on its own; this page did not obtain first-hand scope from the BLS Occupational Outlook page for this occupation",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 31,300 (2024—2034, including replacement needs; parent group basis, O*NET summary page)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "27,000 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Projected period job openings (parent group proxy scope, including replacement needs)",
-        "occupation_scope": "Parent group basis; these are total openings formed during the projection period by growth and replacement, not annual net new positions, and not a direct measure of individual opportunity; the scope period marked on that O*NET page is 2024—2034, and the page cites it under that scope without separate annual conversion",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-current"
         ]
       },
       {
@@ -37348,12 +37385,12 @@
       },
       {
         "derivation": null,
-        "display_value": "Parent group 15-1299: 116,580 US dollars per year; 56.05 US dollars per hour (2025 median)",
+        "display_value": "Parent-group median: $56.05/hour; $116,580/year",
         "fact_id": "r5-current-median",
         "market": "United States",
         "measure": "Parent group national employed wage percentiles",
-        "occupation_scope": "United States parent group 15-1299 other computer occupations, 2025 national 10/25/50/75/90 percentiles: annual 55,940/79,370/116,580/157,500/188,470 US dollars; hourly 26.89/38.16/56.05/75.72/90.61 US dollars. This is not the precise wage for the document management detailed occupation 15-1299.03. The OEWS straight-time pre-tax employed scope includes base pay, tips, specified allowances, commissions and production bonuses, and excludes overtime premiums, shift differentials, non-production bonuses and self-employment; it does not exclude all employed bonuses or contract employees. Percentiles are not starting pay, years of service, take-home pay or an upper limit, and the official annual statistic is not reconstructed from individual working hours.",
-        "period": "2025",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "May 2025",
         "source_refs": [
           "bls",
           "r5-oews-concepts"
@@ -37386,37 +37423,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Parent group 15-1299: 2025 employment 471,200 people",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "471,200 jobs (2025)",
         "fact_id": "r5-current-employment",
         "market": "United States",
         "measure": "Parent group employment stock",
-        "occupation_scope": "BLS parent group 15-1299: employment in 2025 was 471,200, projected at 495,300 in 2035, an official net increase of 24,200 and 5.1%; the difference of the rounded endpoints, 24,100, does not replace the official net change. The annual average of 27,000 openings over 2025—2035 includes growth and replacement, and is not a ten-year total or a yearly net increase; self-employment is 4.9%, and this OOH row shows a dash. The wage and employment and industry data are the parent group for other computer occupations and are not the size of the document management detailed occupation, individual hiring probability or AI causality.",
-        "period": "2025—2035",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "2025",
         "source_refs": [
           "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Parent group 2025—2035 increase of 5.1%; official net increase of 24,200 people",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+5.1%",
         "fact_id": "r5-current-growth",
         "market": "United States",
         "measure": "Parent group projected net change",
-        "occupation_scope": "BLS parent group 15-1299: employment in 2025 was 471,200, projected at 495,300 in 2035, an official net increase of 24,200 and 5.1%; the difference of the rounded endpoints, 24,100, does not replace the official net change. The annual average of 27,000 openings over 2025—2035 includes growth and replacement, and is not a ten-year total or a yearly net increase; self-employment is 4.9%, and this OOH row shows a dash. The wage and employment and industry data are the parent group for other computer occupations and are not the size of the document management detailed occupation, individual hiring probability or AI causality.",
-        "period": "2025—2035",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Parent group 2025—2035 annual average 27,000 openings, including replacement",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "27,000 annually (including replacements)",
         "fact_id": "r5-current-openings",
         "market": "United States",
         "measure": "Parent group annual average openings",
-        "occupation_scope": "BLS parent group 15-1299: employment in 2025 was 471,200, projected at 495,300 in 2035, an official net increase of 24,200 and 5.1%; the difference of the rounded endpoints, 24,100, does not replace the official net change. The annual average of 27,000 openings over 2025—2035 includes growth and replacement, and is not a ten-year total or a yearly net increase; self-employment is 4.9%, and this OOH row shows a dash. The wage and employment and industry data are the parent group for other computer occupations and are not the size of the document management detailed occupation, individual hiring probability or AI causality.",
-        "period": "2025—2035",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-current"
         ]
@@ -37495,6 +37532,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "CNY 4,500–5,500 per month. Document control or quality management experience and familiarity with medical device quality-system records.",
+        "fact_id": "posting-dms-longgang",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Shenzhen Jinrui Kaili Biotechnology: document control",
+        "period": "2021-08",
+        "source_refs": [
+          "dms-longgang"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One position at CNY 4,000–5,500. The row does not specify a pay period or detailed duties.",
+        "fact_id": "posting-dms-dayu",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Changlian Materials, Ganzhou: DCC document control",
+        "period": "2026-05",
+        "source_refs": [
+          "dms-dayu"
+        ]
       }
     ]
   },
@@ -37507,33 +37568,33 @@
     },
     "badges": [
       "Document and records management · classification and metadata · permissions and retention periods",
-      "O*NET-SOC 15-1299.03 · 2025 wage data (parent group scope)",
-      "Job Zone Four · interest code CI · much faster than average (7% or higher) in 2024—2034"
+      "O*NET-SOC 15-1299.03 · U.S. wage data for parent group 15-1299 only",
+      "Job Zone Four · interest code CI"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "median",
         "key": "us_pay",
-        "label": "United States median wage (2025 wage data, parent group scope 116,580 US dollars per year; 56.05 US dollars per hour)"
+        "label": "U.S. 15-1299 parent group: United States median wage (2025 wage data, parent group scope 116,580 US dollars per year; 56.05 US dollars per hour)"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "United States employment projection (much faster than average (7% or higher) in 2024—2034, parent group scope; the source gives only the category and threshold)"
+        "label": "U.S. 15-1299 parent group: projected employment change (2025–2035): +5.1%"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "United States employment (about 472,000 people in 2024, parent group scope)"
+        "label": "U.S. 15-1299 parent group: employment (2025): 471,200 jobs"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "United States projected job openings (about 31,300 in 2024—2034, including replacement needs, parent group scope)"
+        "label": "U.S. 15-1299 parent group: projected annual openings: 27,000 (including replacements)"
       },
       {
         "availability": "missing",
@@ -37547,17 +37608,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Document Management Specialists (O*NET-SOC 15-1299.03) do file and records management in organizations that rely on large volumes of electronic records, such as information and technical services, finance and insurance, health care and education, public administration and manufacturing: take part in determining document management policy and the classification scheme and metadata specifications, jointly implement and configure the functions and access permissions and version control and document workflows of document and content management systems, operate scanning and imaging and automatic data entry to implement capture and digitization, retrieve and distribute electronic assets within the scope of authorization and provide support and training materials, monitor regulatory developments and retention periods and organize expiry appraisal and destruction, and write system test plans and technical functions and specifications and analyze system performance data. United States scope: the wages and employment for this detailed occupation are taken from the parent group Computer Occupations, All Other (15-1299) proxy scope — the 2025 wage data parent group median is 116,580 US dollars per year (56.05 US dollars per hour), with annual percentiles of 55,940／79,370／116,580／157,500／188,470 US dollars; employment was about 472,000 in 2024, the 2024—2034 projection is much faster than average (7% or higher), with about 31,300 projected openings; the detailed occupation preparation level is Job Zone Four and the interest code is CI. Chinese mainland: files and electronic archives are managed under the Archives Law of the People's Republic of China, accounting archives under the Measures for the Administration of Accounting Archives, and classified and data and personal information under the relevant regulations; public statistics have not established an occupation-level wage scope, and this page visibly marks the gap in the relevant places."
+      "text": "Explore document management, version control, permissions and workflows. Compare Chinese postings, U.S. parent-group data and nearby roles."
     },
     "title": {
       "availability": "available",
       "text": "Document management specialists"
     }
   },
-  "source_content_sha256": "d4433a8738bfdfac81ff0665d51604f28abff465ec395fea096ee5b40a989258",
+  "source_content_sha256": "cc6cc4c4dd752988dd4293e12a61acb28b15f979dbf4fc199594f0b27c574870",
   "subject": {
     "canonical_slug": "document-management-specialists",
     "name": "Document management specialists",
-    "summary": "Document Management Specialists (United States side, O*NET-SOC 15-1299.03) is an organizational file and records management position: implementing and administering enterprise-wide document management systems and related procedures so that organizations can capture, store, retrieve, share and destroy electronic records and documents; taking part in determining document management policy and establishing document and content classification schemes, identifying and classifying documents by classification level and function and metadata and developing standards and best practices and system usage procedures, conducting needs assessments and working with other information technology professionals to implement electronic document processing and retrieval and distribution systems; managing access permissions and version control, recording changes to official documents and confirming them with legal and compliance and records management staff, configuring user interfaces and access configuration files and document workflows, operating scanning and imaging and automatic data entry to implement capture and digitization and exercising security oversight over document processing and copying and distribution and storage and archiving; retrieving electronic assets within the scope of authorization and distributing them to users and providing support documents and training materials, monitoring regulatory developments and retention periods and organizing expiry appraisal and destruction, and writing system test plans and technical functions and specifications and analyzing system performance data. United States scope: the wages and employment and projections for this detailed occupation are taken from the parent group Computer Occupations, All Other (15-1299) proxy scope — the BLS 2025 wage data parent group median is 116,580 US dollars per year (56.05 US dollars per hour), with annual percentiles of 55,940／79,370／116,580／157,500／188,470 US dollars (hourly percentiles 26.89／38.16／56.05／75.72／90.61); the O*NET summary page gives employment of about 472,000 in 2024, a 2024—2034 projection of much faster than average (7% or higher) and about 31,300 projected job openings (the source gives only the category and threshold and not a single precise percentage, and this page states it in the original wording); the detailed occupation scope is: preparation level Job Zone Four (SVP 7.0 to below 8.0), interest code CI, education feedback of 60% bachelor's degree and 15% master's degree and 10% associate's or two-year degree, and 23 tasks; the work context includes use email every day 100%, telephone conversations every day 74%, face-to-face discussions every day 59%, continuous contact with others 16% (another 47% in contact most of the time), teamwork extremely important 33%, decision freedom very much 20%, precision or accuracy extremely important 35%, facing time pressure every day 20%, making decisions every day 16%, working hours regular (fixed schedule) 95%, continuous sitting 35% (another 50% more than half the time), and dealing with external customers or the public very important 26%. Chinese mainland scope: file and electronic archive management follows the Archives Law of the People's Republic of China (revised in 2020, effective January 1, 2021), and electronic archives should have reliable provenance and standardized procedures and compliant elements and have the same effect as archives on traditional carriers; accounting archives follow the Measures for the Administration of Accounting Archives (Ministry of Finance and National Archives Administration Decree No. 79, effective January 1, 2016); classified documents and network and data and personal information security follow the Law of the People's Republic of China on Guarding State Secrets and the Cybersecurity Law of the People's Republic of China and the Data Security Law of the People's Republic of China and the Personal Information Protection Law of the People's Republic of China (parts other than the above specific regulations are cited by name and general requirements, and article numbers were not checked item by item); this occupation has no uniform access-type professional qualification in the Chinese mainland. Public statistics have not established an occupation-level wage scope corresponding to this occupation, and this page truthfully retains the gap."
+    "summary": "Maintain classification and metadata, configure version, approval, access and release workflows, and support retrieval, migration and audit. Organizational rules determine access and final approvals."
   }
 }

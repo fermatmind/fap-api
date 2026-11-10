@@ -132,7 +132,7 @@
         "status": "mapped"
       },
       "item:operating-engineers-and-other-construction-equipment-operators.path.credential-boundary.8": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:operating-engineers-and-other-construction-equipment-operators.path.credential-decision.7": {
         "status": "mapped"
@@ -146,6 +146,9 @@
       "item:operating-engineers-and-other-construction-equipment-operators.path.entry-role-comparison.2": {
         "status": "mapped"
       },
+      "item:operating-engineers-and-other-construction-equipment-operators.path.entry-work-sample-data.10": {
+        "status": "pending_mapping"
+      },
       "item:operating-engineers-and-other-construction-equipment-operators.path.interview-probation.5": {
         "status": "mapped"
       },
@@ -153,7 +156,7 @@
         "status": "pending_mapping"
       },
       "item:operating-engineers-and-other-construction-equipment-operators.path.seven-day-trial.6": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:operating-engineers-and-other-construction-equipment-operators.profile.career-quick-answers-block.4": {
         "status": "mapped"
@@ -12230,7 +12233,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "直接判断：愿在户外施工现场操作重型设备、遵守信号和地下管线保护，且能在异常时停机升级，可探索这一职业"
+              "如果赶工时容易略过设备记录、作业区人员或放行责任人，先做纸面交接再了解现场培训。"
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.quick-decision.fermat-decision-card.1",
@@ -12244,7 +12247,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "正向证据：能在噪声、天气和多人协作中持续观察人员位置、设备盲区与地面状态。"
+              "到目录「09 入行、资格与职业发展」找《OE-08：核对一份交班单》，用虚构记录按虚构记录写能否开工的判断与交接。先做题，再看参考。"
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.quick-decision.fit-decision-checklist.2",
@@ -12258,7 +12261,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全试作：用虚构工地平面图标出设备行驶路线、地下管线、盲区和停机条件；不实际操机"
+              "如果交班证据不齐时你能停下，并写清还要核什么，可以体验设备操作岗。"
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.quick-decision.fit-decision-checklist.3",
@@ -12980,13 +12983,10 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "安全探索只用虚构样本：用虚构工地平面图标出设备行驶路线、地下管线、盲区和停机条件；不实际操机；真实工作须先满足训练和授权。"
+              "先用本页 OE-08 和 W-OE 的虚构交班记录，写缺项和有权核对的人。实际操作设备须另满足训练和授权要求。"
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.path.recruitment-sample.1",
-          "source_refs": [
-            "onet-cert"
-          ],
           "type": "notice"
         },
         {
@@ -13052,30 +13052,74 @@
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.employer-evidence.1",
                 "values": [
-                  "班前检查样本",
-                  "核设备、液压、制动、警示和作业区。"
+                  "获授权工作：班前记录",
+                  "雇主可能看获授权人员怎样记录检查结果与未结缺陷。"
                 ]
               },
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.employer-evidence.2",
                 "values": [
-                  "路线确认样本",
-                  "看图纸、地形、地下管线与人员通道。"
+                  "获授权工作：路线协同",
+                  "雇主可能看获授权人员怎样核作业区，并把未决事项交给现场负责人。"
                 ]
               },
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.employer-evidence.3",
                 "values": [
-                  "设备操作样本",
-                  "按信号启动、移动和控制挖掘或整平。"
+                  "获授权工作：设备操作",
+                  "雇主可能在实际派工时观察受训且获授权的人员。本页试做只用题给虚构记录。"
                 ]
               }
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.path.employer-evidence.3",
           "source_refs": [
-            "onet-cert"
+            "onet-details"
           ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "材料：虚构 OE-08",
+                  "交班记录S-18写例检完成；缺陷一栏仍是“未处理”，没有维修签认。",
+                  "作业区记录写地面人员已排定，但未写清场时间和现场负责人放行；上班次放行已过期。",
+                  "本纸面题规则：有未结缺陷须有维修签认，另须有当前作业区放行，才可开始。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "任务与交付",
+                  "写记录证明了什么、是否可开始，以及要申请的两项凭证。",
+                  "标明谁核各项、谁能放行。不模拟设备控制。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "题后参考",
+                  "例检完成不证明缺陷关闭；排定地面人员与过期放行也不证明区域已清。当前待核，不能开始。",
+                  "请求维修签认和当前作业区清场凭证，补齐后交指定现场负责人作放行决定。"
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "独立自核量规",
+                  "核两项缺证、状态判断和批准人。只用纸面记录，不接触实机或工地。",
+                  "每项只有回指到题给记录才记分。"
+                ]
+              }
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.path.entry-work-sample-data.10",
+          "title": "OE-08：核对一份交班单",
           "type": "cards"
         },
         {
@@ -13086,25 +13130,22 @@
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.portfolio.one",
                 "values": [
-                  "班前检查样本",
-                  "核设备、液压、制动、警示和作业区。",
-                  "班前检查、行驶路线、作业记录和异常停机交接"
+                  "OE-08：交班凭证表",
+                  "只用题给虚构交班单，写已记载事项和缺哪类签认。",
+                  "写当前状态和分别由谁核。"
                 ]
               },
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.portfolio.two",
                 "values": [
-                  "路线确认样本",
-                  "看图纸、地形、地下管线与人员通道。",
-                  "班前检查、行驶路线、作业记录和异常停机交接"
+                  "W-OE：待核交接单",
+                  "对照题给纸面记录的设备编号。",
+                  "写待核问题和有权放行的人，逐项回指记录自核。"
                 ]
               }
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.path.entry-portfolio.4",
-          "source_refs": [
-            "onet-cert"
-          ],
           "type": "cards"
         },
         {
@@ -13158,30 +13199,56 @@
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.trial.day1",
                 "values": [
-                  "班前检查样本",
-                  "核设备、液压、制动、警示和作业区。"
+                  "第 1 天",
+                  "另建W-OE：当前放行有签名，但点检设备编号Q2、派工编号Q7。抄两个编号及出处。"
                 ]
               },
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.trial.day3",
                 "values": [
-                  "路线确认样本",
-                  "看图纸、地形、地下管线与人员通道。"
+                  "第 2 天",
+                  "补维修单：只注明Q2的缺陷已关闭。逐条标凭证对应哪台设备。"
                 ]
               },
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.trial.day7",
                 "values": [
-                  "设备操作样本",
-                  "按信号启动、移动和控制挖掘或整平。"
+                  "第 3 天",
+                  "开工前比对要求的设备身份与材料，列还不能证实的项。"
+                ]
+              },
+              {
+                "id": "entry-trial-extra-day-4",
+                "values": [
+                  "第 4 天",
+                  "分别拟派工与维修各一条核对请求。"
+                ]
+              },
+              {
+                "id": "entry-trial-extra-day-5",
+                "values": [
+                  "第 5 天",
+                  "写给现场负责人的决定单，带依据、缺证和放行责任。"
+                ]
+              },
+              {
+                "id": "entry-trial-extra-day-6",
+                "values": [
+                  "第 6 天",
+                  "自行核每项状态与请求能否回指记录，再改一行。同伴复核可选。"
+                ]
+              },
+              {
+                "id": "entry-trial-extra-day-7",
+                "values": [
+                  "第 7 天",
+                  "判断自己是否适应停下并交接歧义，不做任何实际操作。"
                 ]
               }
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.path.seven-day-trial.6",
-          "source_refs": [
-            "onet-cert"
-          ],
+          "title": "七天纸面体验：独立新题",
           "type": "timeline"
         },
         {
@@ -13256,7 +13323,7 @@
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.path.credential-decision.7",
           "source_refs": [
-            "onet-cert"
+            "bls-2025-35-47-2073"
           ],
           "type": "table"
         },
@@ -13265,12 +13332,16 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "BLS列高中毕业或同等学历，通常经中期在岗训练；具体设备许可和工地授权按地区及雇主核。；真实职责依当地规则和雇主授权，转岗须补目标岗位训练。"
+              "BLS 表 1.2 的美国 47-2073 明细列典型入职学历为高中或同等学历、无相关工作经验，并需中期在岗培训。具体招聘、设备资格和项目放行另核。",
+              "沁水历史招聘要求提交挖掘机操作证书并参加实操，报名于 2026 年 6 月 5 日截止。公告未明确发证类型，项目放行另核。",
+              "国家职业技能标准 6-30-05-05 用于技能评价；证书类型和项目授权分别核。"
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.path.credential-boundary.8",
           "source_refs": [
-            "onet-cert"
+            "bls-2025-35-47-2073",
+            "cn-qinshui-excavator-20260601",
+            "cn-mohrss-6300505"
           ],
           "type": "notice"
         },
@@ -13398,12 +13469,12 @@
                 ]
               },
               {
-                "answer": "BLS列高中毕业或同等学历，通常经中期在岗训练；具体设备许可和工地授权按地区及雇主核。",
+                "answer": "BLS 表 1.2 的美国 47-2073 明细列典型入职学历为高中或同等学历、无相关工作经验，并需中期在岗培训。具体招聘、设备资格和项目放行另核。",
                 "id": "operating-engineers-and-other-construction-equipment-operators.faq.3",
                 "question": "入行需要什么？",
                 "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.fit",
                 "source_refs": [
-                  "onet-details"
+                  "bls-2025-35-47-2073"
                 ]
               },
               {
@@ -13434,7 +13505,7 @@
                 ]
               },
               {
-                "answer": "美国47-2073在2025中位年薪59850美元；2025—2035总体增长4.6%、净增22300人，年均39200空缺含替补，非当前招聘、AI采用替代或个人失业。",
+                "answer": "BLS 47-2073明细2025年5月工资中位数59,850美元/年；2025年就业489,500人，2035年预计511,800人（+4.6%），年均空缺约39,200个。47-2070大组另含摊铺和桩工。",
                 "id": "operating-engineers-and-other-construction-equipment-operators.faq.7",
                 "question": "美国工资和前景？",
                 "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.us-pay",
@@ -13443,39 +13514,37 @@
                 ]
               },
               {
-                "answer": "用虚构工地平面图标出设备行驶路线、地下管线、盲区和停机条件；不实际操机",
+                "answer": "只用第 09 节 OE-08 和 W-OE 的虚构记录，核缺项和谁有权放行。不需要另备工地图或设备。",
                 "id": "operating-engineers-and-other-construction-equipment-operators.faq.8",
                 "question": "如何安全探索？",
-                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.education-path",
-                "source_refs": [
-                  "onet-details"
-                ]
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.education-path"
               },
               {
-                "answer": "操作挖掘机、推土机、平地机、装载机等动力施工设备完成挖掘、搬运和整平；遵守现场安全规则，检查设备并与地面人员协调。",
+                "answer": "先核当前记录、异常和谁有权批准，再做判断。09有纸面交接练习。",
                 "id": "operating-engineers-and-other-construction-equipment-operators.faq.9",
-                "question": "工程机械操作员做什么？",
+                "question": "完成点检就能开工吗？",
                 "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.risk-boundary",
                 "source_refs": [
                   "onet-details"
                 ]
               },
               {
-                "answer": "核设备、液压、制动、警示和作业区。；看图纸、地形、地下管线与人员通道。；按信号启动、移动和控制挖掘或整平。；在许可范围挖土、装载和移动材料。",
+                "answer": "记录实际观察，把维修核验和现场批准交给各自有权的人。",
                 "id": "operating-engineers-and-other-construction-equipment-operators.faq.10",
-                "question": "关键任务有哪些？",
+                "question": "设备交班由谁核验？",
                 "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.outlook-transition",
                 "source_refs": [
                   "onet-details"
                 ]
               },
               {
-                "answer": "BLS列高中毕业或同等学历，通常经中期在岗训练；具体设备许可和工地授权按地区及雇主核。",
+                "answer": "沁水历史招聘要求提交挖掘机操作证书并参加实操，报名于 2026 年 6 月 5 日截止。公告未明确发证类型，项目放行另核。 国家职业技能标准 6-30-05-05 用于技能评价；证书类型和项目授权分别核。",
                 "id": "operating-engineers-and-other-construction-equipment-operators.faq.11",
-                "question": "入行需要什么？",
+                "question": "中国大陆的具体岗位会要求什么？",
                 "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.career-worth",
                 "source_refs": [
-                  "onet-details"
+                  "cn-qinshui-excavator-20260601",
+                  "cn-mohrss-6300505"
                 ]
               }
             ]
@@ -13520,28 +13589,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "工程机械操作员",
+                "entity": "MBTI人格测试",
                 "id": "navigation-2",
-                "relation": "career.section",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "工程机械操作员",
-                "id": "navigation-3",
-                "relation": "career.section",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "工程机械操作员",
-                "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "工程机械操作员",
-                "id": "navigation-5",
+                "entity": "大五人格测试",
+                "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
+              },
+              {
+                "entity": "工程机械工作概览",
+                "id": "navigation-4",
+                "relation": "career.section",
+                "url": "/zh/career/jobs/construction-equipment-operators"
+              },
+              {
+                "entity": "建筑施工工人",
+                "id": "navigation-5",
+                "relation": "career.section",
+                "url": "/zh/career/jobs/construction-laborers"
               },
               {
                 "entity": "工程机械操作员",
@@ -13869,6 +13938,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "2026年6月劳务派遣公告要求挖掘机司机提交操作证书及参加实操。报名期已过，条件仅适用于该公告。"
+                ],
+                "evidence_type": "官方通知原文",
+                "id": "cn-qinshui-excavator-20260601",
+                "limitation": "2026年6月劳务派遣公告要求挖掘机司机提交操作证书及参加实操。报名期已过，条件仅适用于该公告。",
+                "market": "CN",
+                "name": "沁水县挖掘机司机招聘公告",
+                "period": "2026-06-01",
+                "publisher": "沁水县人民政府",
+                "scope": "历史招聘样本",
+                "url": "https://www.qinshui.gov.cn/zwgk_372/gkzp/202606/t20260601_2355704.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "用于挖掘铲运和桩工机械司机技能评价；现场操作权限另核。"
+                ],
+                "evidence_type": "官方原文",
+                "id": "cn-mohrss-6300505",
+                "limitation": "用于挖掘铲运和桩工机械司机技能评价；现场操作权限另核。",
+                "market": "CN",
+                "name": "人社部国家职业技能标准 6-30-05-05",
+                "period": "2023年版",
+                "publisher": "人力资源和社会保障部、住房和城乡建设部",
+                "scope": "用于挖掘铲运和桩工机械司机技能评价；现场操作权限另核。",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/zyyjnpj/202304/W020230414729511815491.pdf"
               }
             ]
           },
@@ -14375,6 +14474,18 @@
             "id": "faa",
             "label": "工作活动",
             "scope": "美国47-2073.00精确职业"
+          },
+          {
+            "href": "https://www.qinshui.gov.cn/zwgk_372/gkzp/202606/t20260601_2355704.shtml",
+            "id": "cn-qinshui-excavator-20260601",
+            "label": "沁水县挖掘机司机招聘公告",
+            "scope": "2026年6月劳务派遣公告要求挖掘机司机提交操作证书及参加实操。报名期已过，条件仅适用于该公告。"
+          },
+          {
+            "href": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/zyyjnpj/202304/W020230414729511815491.pdf",
+            "id": "cn-mohrss-6300505",
+            "label": "人社部国家职业技能标准 6-30-05-05",
+            "scope": "用于挖掘铲运和桩工机械司机技能评价；现场操作权限另核。"
           }
         ],
         "tracks": [
@@ -15307,11 +15418,11 @@
             "transition_distance": "按目标职业另核训练和授权。"
           },
           {
-            "capability_gaps": "岗位分类和行业不同",
+            "capability_gaps": "露天采矿的现场和设备要求另核。",
             "shared_capabilities": "机械控制、空间判断、现场观察、班组沟通与安全停机",
-            "target_href": "/zh/career/jobs/excavating-and-loading-machine-and-dragline-operators",
-            "target_slug": "excavating-and-loading-machine-and-dragline-operators",
-            "target_title": "挖掘装载机械操作员",
+            "target_href": "/zh/career/jobs/excavating-and-loading-machine-and-dragline-operators-surface-mining",
+            "target_slug": "excavating-and-loading-machine-and-dragline-operators-surface-mining",
+            "target_title": "露天采矿挖掘装载机械操作员",
             "transition_distance": "按目标职业另核训练和授权。"
           },
           {
@@ -15528,12 +15639,12 @@
             "watchouts": "目标职业教育、资格和责任范围另核。"
           },
           {
-            "direction": "挖掘装载机械操作员",
+            "direction": "露天采矿挖掘装载机械操作员",
             "fit_signals": "喜欢特定挖掘设备",
             "target": {
-              "href": "/zh/career/jobs/excavating-and-loading-machine-and-dragline-operators",
-              "slug": "excavating-and-loading-machine-and-dragline-operators",
-              "title": "挖掘装载机械操作员"
+              "href": "/zh/career/jobs/excavating-and-loading-machine-and-dragline-operators-surface-mining",
+              "slug": "excavating-and-loading-machine-and-dragline-operators-surface-mining",
+              "title": "露天采矿挖掘装载机械操作员"
             },
             "watchouts": "目标职业教育、资格和责任范围另核。"
           },
@@ -15714,7 +15825,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI测评（英文）"
+            "label": "MBTI人格测试"
           },
           {
             "href": {
@@ -15724,7 +15835,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "大五人格测评（英文）"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -15734,7 +15845,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI测评（中文）"
+            "label": "工程机械工作概览"
           },
           {
             "href": {
@@ -15744,7 +15855,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "大五人格测评（中文）"
+            "label": "建筑施工工人"
           }
         ]
       },
@@ -15771,6 +15882,13 @@
         "block": "path",
         "copy_key": "career.item.employer-evidence",
         "id": "operating-engineers-and-other-construction-equipment-operators.path.employer-evidence.3",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "operating-engineers-and-other-construction-equipment-operators.path.entry-work-sample-data.10",
         "location": "entry_decisions",
         "type": "cards"
       },
@@ -16020,14 +16138,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解工程机械操作员的真实任务、美国2025职业工资与2025—2035就业预测，以及中国工资证据边界。"
+      "text": "了解47-2073设备操作岗、挖掘机招聘样本、美国工资和交班放行纸面练习。"
     },
     "title": {
       "availability": "available",
-      "text": "工程机械操作员：工作、工资与入行路径"
+      "text": "施工设备操作员：点检、交班与放行"
     }
   },
-  "source_content_sha256": "f8151452b40578d2b87ca9b908905030f460daba358c6696e68a8399d4ff0eba",
+  "source_content_sha256": "3f9a6514608f0be003e4ee0ae422970269ccdb5aa04f7e77d144b05605141f3d",
   "subject": {
     "canonical_slug": "operating-engineers-and-other-construction-equipment-operators",
     "name": "工程机械操作员",

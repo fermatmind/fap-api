@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先做W28虚构检查记录，区分请求成功、失败与尚未完成。了解恢复、维护、内容及协作责任，再比较IT管理、搜索营销、系统分析和信息安全四个相邻对象。工作质量不只在写脚本，也在如实说明未知和验证结果。"
+              "纸面体验｜虚构故障记录显示备份任务成功，但没有恢复验证。把两种状态分开，交值班负责人确认恢复证据。 "
             ]
           },
           "id": "web-administrators.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,12 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "网站管理员管理网站环境的设计、部署、开发协作和维护，开展网站及应用测试与质量检查；具体任务包括故障定位、更新与补丁、备份恢复、访问权限、日志监控、内容链接维护和用户沟通。工作须在组织授权范围内进行；会整理日志或写脚本不等于可以改生产系统或访问用户数据。"
+              "网站管理员看可用性、访问和备份记录，处理或上报异常，并按授权维护配置与恢复计划。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "web-administrators.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-15-1299.01"
           ],
           "type": "prose"
         }
@@ -25556,13 +25555,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本精确网站管理员任务级AI效果评分与替代率因果证据。文字整理、W28题设完成比例和真实维护分开；虚构表没有功能覆盖、请求时间或恢复测试，不证明SLA、安全或生产可发布。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：虚构故障记录显示备份任务成功，但没有恢复验证。把两种状态分开，交值班负责人确认恢复证据。"
             ]
           },
           "id": "web-administrators.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-15-1299.01",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33027,6 +33026,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-15-1299.01",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 15-1299.01 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/15-1299.01"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38491,10 +38517,10 @@
       "text": "网站管理员：任务、权限与入门体验｜费马测试"
     }
   },
-  "source_content_sha256": "7bd0825df95db6acedb7d56b334f6dc60d36eedc5b2bbe1fb6c6bd2ce485120b",
+  "source_content_sha256": "674e3d5a6bf9f7615614c73fe490183ef3a3172240742fbf462421d9910b7d25",
   "subject": {
     "canonical_slug": "web-administrators",
     "name": "网站管理员",
-    "summary": "网站管理员管理网站环境的设计、部署、开发协作和维护，开展网站及应用测试与质量检查；具体任务包括故障定位、更新与补丁、备份恢复、访问权限、日志监控、内容链接维护和用户沟通。工作须在组织授权范围内进行；会整理日志或写脚本不等于可以改生产系统或访问用户数据。"
+    "summary": "网站管理员看可用性、访问和备份记录，处理或上报异常，并按授权维护配置与恢复计划。"
   }
 }

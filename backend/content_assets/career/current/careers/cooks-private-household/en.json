@@ -53,6 +53,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-house-huangpu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-house-nanjing": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -1692,7 +1698,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -9150,7 +9156,7 @@
             "data",
             "entries",
             {
-              "id": "bls"
+              "id": "onet"
             },
             "url"
           ],
@@ -9165,7 +9171,7 @@
             "data",
             "entries",
             {
-              "id": "bls"
+              "id": "onet"
             },
             "name"
           ],
@@ -19503,56 +19509,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19560,7 +19530,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19573,7 +19543,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19586,7 +19556,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19599,7 +19569,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -22687,7 +22657,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The work object of a private household cook is one employer household's taste preferences, dietary restrictions and daily routine, and the output is meals delivered at agreed times that match that taste and those restrictions, together with verifiable menu, purchasing and expense records."
+              "Private household cooks plan around each household’s tastes, dietary restrictions and schedule. They may serve one household or several. The arrangement may include meals, purchasing and expense records."
             ]
           },
           "id": "actors.profile.work-context-block.1",
@@ -22869,12 +22839,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Wash and cut vegetables, meat and seafood → cook and bake to the employer's recipes and taste → handle special diets and signature dishes → check doneness and seasoning → serve the employer household and their guests and provide refreshments → record output and feedback"
+              "Rinse and cut produce; handle raw meat, poultry, eggs and seafood separately without washing them → cook and bake to the menu and check doneness and seasoning → serve → record the meal and feedback"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.stage.steps",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-home-food-safety"
           ],
           "type": "prose"
         },
@@ -23051,12 +23022,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Draw up the menu and estimate portions → purchase and check by batch → wash, cut, cook and bake → season and plate and serve → tidy the kitchen and store and freeze → record menus, expenses and handover."
+              "Plan the menu and portions → shop and check ingredients → rinse produce and prepare raw ingredients separately → cook, plate and serve → clean up, store food and record the handoff"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-home-food-safety"
           ],
           "type": "prose"
         },
@@ -23415,12 +23387,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "Core: trimming, cutting and cooking vegetables and meat, baking and exploring new dishes; the literal “wash” task does not mean all raw meat must be rinsed. U.S. FoodSafety.gov household guidance lists clean, separate, confirm cooking with a thermometer, and chill promptly, and states explicitly not to wash raw meat, poultry, eggs and seafood so as to avoid spreading contamination. It is U.S. household food-safety guidance, not Chinese law; this page has no complete temperature handling procedure for every dish, and exceptions are held back until an applicable basis is obtained, since the employer's agreement cannot prove food safety."
+              "Core tasks include trimming, cutting, cooking and baking. U.S. FoodSafety.gov home guidance advises rinsing produce, avoiding washing raw meat, poultry, eggs or seafood, and keeping raw and cooked food separate."
             ]
           },
           "id": "actors.display.responsibilities_block.03",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-home-food-safety"
           ],
           "type": "prose"
         },
@@ -23527,12 +23500,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Then wash, cut, cook and bake in menu order and check doneness, and serve at the agreed time; when ingredient exceptions, allergy risk or equipment faults occur, stop using them and agree an alternative with the employer; after the meal, tidy the kitchen, store or freeze food and record the menu and expenses."
+              "Prepare ingredients separately, check doneness and serve at the agreed time. Set aside suspected contaminated ingredients and do not serve them. If an allergen concern or equipment fault arises, pause the affected work and agree on a safe alternative. After the meal, clean up, store food and record the menu and costs."
             ]
           },
           "id": "actors.display.work_context_block.organization",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-home-food-safety"
           ],
           "type": "prose"
         },
@@ -23583,7 +23557,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Currently 44% have daily routine protection, accuracy 19%/42%/23%, extremely important, very important and important, and 50% never sit; 23% face daily burn, cut and sting exposure and 12% daily noise. The U.S. respondent answers to several questions are not an actual injury rate or Chinese conditions, and the supply categories do not require a full set for every person; actual selection is based on station assessment."
+              "Currently 44% have daily routine protection, accuracy 19%/42%/23%, extremely important, very important and important, and 50% never sit; 23% face daily exposure to minor burns, cuts, bites or stings and 12% daily noise. The U.S. respondent answers to several questions are not an actual injury rate or Chinese conditions, and the supply categories do not require a full set for every person; actual selection is based on station assessment."
             ]
           },
           "id": "actors.display.work_context_block.quality",
@@ -23625,7 +23599,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
+              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
@@ -23639,7 +23613,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "U.S. private household cooks are Zone3/SVP6 to below 7, and a level usually requiring 1—2 years of experience plus informal training is a summary, not a uniform course; respondent education was 38% postsecondary certificate / 31% high school / 15% below high school, and the partial responses are not a Chinese threshold. The BLS entry for this job typically shows a postsecondary non-degree award, less than 5 years of related experience and no on-the-job training indicator; typical and level are different classifications and do not mean no learning or training is needed. Current interests R66/A46/S46/C45/E43/I7; R leads with A/S tied, summarised as R plus tied A/S, without prescribing the sole order of A/S. The activity profile corresponds to ingredients and equipment, dishes and service, not personality ability, population shares or hiring thresholds. The current industry split is 13% other services (except government) / 87% other (including agriculture, forestry, fishing and hunting), the industry page does not state the year, and this is not the share of household employers."
+              "U.S. private household cooks are Zone3/SVP6 to below 7, and a level usually requiring 1—2 years of experience plus informal training is a summary, not a uniform course; respondent education was 38% postsecondary certificate / 31% high school / 15% below high school, and the partial responses are not a Chinese threshold. The BLS entry for this job typically shows a postsecondary non-degree award, less than 5 years of related experience and no on-the-job training indicator; typical and level are different classifications and do not mean no learning or training is needed. Current interests R66/A46/S46/C45/E43/I7; R leads with A/S tied, summarised as R plus tied A/S, without prescribing the sole order of A/S. The activity profile corresponds to ingredients and equipment, dishes and service, not personality ability, population shares or hiring thresholds. The occupation profile lists 13% in Other Services (Except Public Administration) for 2025. The industry page lists the other 87% without a year on that page. These are industry shares, not the share of household employers."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
@@ -23824,7 +23798,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from private household cooks is serving public customers, with the restaurant deciding the menu and the service pace; employment was 1,460,200 in 2024, and the O*NET growth category is “much faster than average (7% or higher)”."
+              "The key difference from private household cooks is serving public customers, with the restaurant deciding the menu and the service pace."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
@@ -23880,7 +23854,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference is serving a fixed population to a cyclical menu, mainly in bulk, with the people served not being a single household; employment was 466,100 in 2024, and the O*NET growth category is “slower than average (1% to 2%)”."
+              "The key difference is serving a fixed population to a cyclical menu, mainly in bulk, with the people served not being a single household."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
@@ -23922,7 +23896,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference is cooking to customer order, with a fixed menu and random portion counts; employment was 669,500 in 2024, and the O*NET growth category is “decline (-14%)”."
+              "The key difference is cooking to customer order, with a fixed menu and portion counts that vary by order."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
@@ -23964,11 +23938,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference is that there is no responsibility for menu planning and expense records; employment was 902,700 in 2024, the O*NET growth category is “decline (-1% or lower)”, and it often serves as the entry point into the catering system."
+              "Food preparation workers generally wash, cut and measure ingredients rather than setting a household menu and shopping budget."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.difference",
           "source_refs": [
+            "adjacent-details-35-2021",
             "onet"
           ],
           "type": "prose"
@@ -24006,7 +23981,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is management responsibility and menu leadership: taking on menu design and cost accounting, staff scheduling and training, and setting output standards; the preparation level is Job Zone 3, and employment was 197,300 in 2024."
+              "The key difference from this occupation is management responsibility and menu leadership: taking on menu design and cost accounting, staff scheduling and training, and setting output standards."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
@@ -24048,11 +24023,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is operational and people management responsibility: a median annual wage of 69,390 dollars (2025), employment of 352,800 in 2024, and the O*NET growth category “much faster than average (5% to 6%)”."
+              "Food service managers run the operation, schedule shifts and supervise staff. Household cooks shop, prepare meals and handle handoffs under the household’s agreement."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.difference",
           "source_refs": [
+            "teacher",
             "onet"
           ],
           "type": "prose"
@@ -24090,12 +24066,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The table below compares private household cooks with five adjacent directions across four items: career direction, core work and output, key differences, and which choice suits you better; employment and growth use U.S. O*NET-SOC measures (2024 employment, 2024—2034 projection)."
+              "Compare adjacent roles by cooking setting, menu decisions and handoff responsibilities."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.intro",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -24118,12 +24095,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Basis: O*NET OnLine 35-2013.00 and the summary pages and employment trend pages of adjacent occupations (2026 update); employment is for 2024 and growth uses the 2024—2034 projection period, and these are not used to infer an individual's chance of being hired or income."
+              "The comparison uses U.S. occupational profiles. Verify the duties of domestic or private cooking work in the contract."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.evidence_note",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -24304,7 +24282,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Menu organisation, purchasing reminders, bookkeeping and scheduling are uses pending verification; sensing, programmed heating and generative text are checked separately, and the net effect must be measured. The 2025 U.S. Lightcast private household cook job-posting data list only Intuit QuickBooks and WordPress, with the proportion for both marked “Not available”, and they cannot be filled in as 0 or below 1%. These are job-posting signals for bookkeeping and website software, not a list of kitchen purchasing software, an AI rate or an adoption rate. This round has no adoption rate, efficiency or employment causality for this job; people check dietary restrictions, temperature control and exceptions against their actual duties. BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Menu organisation, purchasing reminders, bookkeeping and scheduling are uses pending verification; sensing, programmed heating and generative text are checked separately, and the net effect must be measured. The 2025 U.S. Lightcast private household cook job-posting data list only Intuit QuickBooks and WordPress, with the proportion for both marked “Not available”, and they cannot be filled in as 0 or below 1%. These are job-posting signals for bookkeeping and website software, not a list of kitchen purchasing software, an AI rate or an adoption rate. This round has no adoption rate, efficiency or employment causality for this job; people check dietary restrictions, temperature control and exceptions against their actual duties. BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24454,7 +24432,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
+              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
@@ -24649,7 +24627,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
+              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
@@ -24889,7 +24867,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
+              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
@@ -25114,13 +25092,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Wash, trim and cut vegetables, meat and seafood"
+              "Rinse and cut produce; handle raw meat, poultry, eggs and seafood separately"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.task",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "us-home-food-safety"
           ],
           "type": "prose"
         },
@@ -25144,13 +25122,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Judge the condition of ingredients, correct cutting specifications and handle allergen ingredients separately."
+              "Check ingredient condition and cut size. Separate raw, cooked and allergen-containing ingredients as appropriate. Do not wash raw meat, poultry, eggs or seafood."
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "us-home-food-safety"
           ],
           "type": "prose"
         },
@@ -26135,12 +26113,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no verifiable statistics on private household meal service quotes; a single household's or platform's quote cannot represent the national level"
+              "A Huangpu domestic-service listing quotes CNY 2,500–5,000 per month for a role that combines cooking and light housework. A Nanjing listing advertises cooking at CNY 30–80 an hour and offers training to applicants without experience. The hourly offer cannot be converted to monthly income without hours. Check meals per visit, shopping, whether gaps between jobs are paid and what cleaning is included. These examples cannot establish national private-cook wages."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "house-huangpu",
+            "house-nanjing"
           ],
           "type": "prose"
         },
@@ -26255,7 +26234,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 national wage percentiles use the published 35-2013 values, and both the 35-2013 wage and the 2025—2035 employment carry the same occupational code but have different statistical coverage. The OEWS method explicitly excludes the self-employed, people directly employed by private households and unpaid family members. O*NET currently still publishes 2025 wages for 35-2013, which can be read only as wages for the jobs covered by that survey and do not represent all private household direct employment, self-employed per-visit quotes, profit or all employment income; per-visit service does not automatically equal self-employment, and the actual employment status must be checked. BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
+              "The 2025 national wage percentiles use the published 35-2013 values, and both the 35-2013 wage and the 2025—2035 employment carry the same occupational code but have different statistical coverage. The OEWS method explicitly excludes the self-employed, people directly employed by private households and unpaid family members. O*NET currently still publishes 2025 wages for 35-2013, which can be read only as wages for the jobs covered by that survey and do not represent all private household direct employment, self-employed per-visit quotes, profit or all employment income; per-visit service does not automatically equal self-employment, and the actual employment status must be checked. BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
@@ -26450,13 +26429,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The current O*NET industry page shows 13% other services (except government) and 87% other (including agriculture, forestry, fishing and hunting), with no stated year. It is not the case that all employment falls under other at 100%, and it is not wages or the share of household employers."
+              "The O*NET occupation profile lists Other Services (Except Public Administration) at 13% in 2025. Its industry page also lists 87% in other industries, including agriculture, forestry, fishing and hunting, without printing a year on that page. The figures describe industry employment, not household-employer share or wages."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -27056,7 +27035,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial self-question: check the routine, privacy and purchasing communication requirements of live-in and per-visit service separately, and record how you feel; there is no measurement of personality type assigning positions."
+              "Write down the hours for live-in and per-visit work. Compare each with your own schedule."
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.1",
@@ -27070,7 +27049,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial self-question: check the routine, privacy and purchasing communication requirements of live-in and per-visit service separately, and record how you feel; there is no measurement of personality type assigning positions."
+              "Ask the employer where the household privacy boundaries are and who approves purchases."
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.2",
@@ -28017,13 +27996,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Keep aisles and the work area dry, wear non-slip shoes, and lift in stages according to your capacity using a cart or by dividing loads; if standing water, insufficient lighting or unsafe storage positions are found, deal with them before working."
+              "Walk the storage and serving route on a trial shift. Ask about floor cleaning, help with heavy loads and reporting hazards."
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28077,13 +28055,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Use heat-resistant and skin protection, keep ventilation, arrange work breaks and rotate utensil positions; if discomfort persists, report it as agreed and seek medical attention promptly."
+              "On a trial shift, ask about breaks, ventilation, protective equipment and where frequently used tools are stored."
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.mitigation",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28227,13 +28204,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Slipping and lifting strains caused by the limited space of a home kitchen"
+              "Floor, walkways and lifting"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.title",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28242,13 +28218,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Washing areas, storage rooms and ingredient lifting steps"
+              "Washing, storage and ingredient handling stations"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.roles",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28257,13 +28232,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Limited space, dispersed storage and wet floors can serve as check scenarios; the actual residence area was not obtained, so it is not said that all home kitchens are usually cramped; lifting and reaching are assessed per station."
+              "Trial-shift check: look for wet flooring, obstructed walkways and heavy loads. Check the actual space, equipment and storage locations."
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28272,13 +28246,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Slips and lifting injuries may affect booking attendance; this round obtained no incidence rate or ranking for this job or for domestic catering injuries, so they cannot be called generally common."
+              "Use this to assess the worksite. The occupation profile does not provide injury rates for these scenarios."
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28465,13 +28438,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Long-term effects of prolonged standing, oil fume and noise"
+              "Standing, repetitive hand use and kitchen exposure"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.title",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28480,13 +28452,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Positions working in the same home kitchen over the long term"
+              "People who regularly prepare meals in one home kitchen"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.roles",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28495,13 +28466,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Currently standing 81%/15%, almost constantly and more than half the time; hand use 81% almost constantly; 23% face daily burn, cut and sting exposure and 12% daily distracting noise. Contaminants show only 23% yearly rather than monthly and 62% never, with complete daily responses not shown and 8% not filled in; the proportions are not an injury rate or Chinese conditions."
+              "In the U.S. O*NET survey, 81% reported standing almost continuously and 15% more than half the time. Daily exposure to minor burns, cuts, bites or stings was reported by 23%, and distracting noise by 12%. These are work-context responses, not injury rates."
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28510,13 +28480,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Long-term exposure may cause skin, hearing and joint problems and affect sustained attendance."
+              "How demanding these conditions are depends on the schedule, ventilation and setup."
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28525,13 +28494,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability. No injury ranking or household health diagnosis is provided."
+              "O*NET Work Context reports U.S. survey responses, not rates of slips or lifting injuries in home kitchens."
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28608,15 +28576,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This page does not cite specific job postings or dispatch information and does not count historical cases as live positions; employment conditions in mainland China must be checked against the specific household's or institution's agreement for the year in question.",
-              "The questions and scenario observations are candidate verification methods designed editorially; this page has no employer verification frequency, so they are not called a common or uniform recruitment process."
+              "This page compares historical postings from Huangpu and Nanjing. Ask the current employer or agency about scheduling, pay terms, duties and the contract relationship."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "house-huangpu",
+            "house-nanjing"
           ],
           "type": "notice"
         },
@@ -28995,26 +28961,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional work-order material (practice input)",
-                  "Fictional scenario: a fictional family banquet on Friday evening has 8 people, of whom 1 household member is allergic to nuts, 1 needs low-salt soft food and 1 does not eat animal offal; in this week's purchasing records a batch of chilled poultry is marked with an arrival date of Tuesday and a shelf life to the following Monday, but the fridge temperature log shows two occasions this week above 4 degrees Celsius with only “adjusted” written.",
-                  "Material provided: this week's menu and taste preference list; a note of household members' allergies and dietary restrictions; the number of diners and the time arrangement; the purchasing batch and shelf-life ledger; the fridge and finished-product temperature records; the note on kitchen utensil and chopping board zoning.",
-                  "Material not provided: the specific duration and cause of the higher temperature, whether the affected poultry has already been used in earlier meals, the confirmation process for deciding whether to discard it, and the employer's preference for a substitute menu. If these conditions are needed in the exercise, state your assumptions and whom you would need to confirm them with."
+                  "Paper exercise: Friday dinner at 18:30 for eight.",
+                  "Planned dishes: oat rice, roast poultry and soft tofu. Guest A has a peanut allergy, B needs low-salt soft food, and C avoids offal. The tofu seasoning label lists peanuts.",
+                  "Grain and tofu each cover eight portions and were separately stored and verified. At 16:00 the refrigerator reads 7°C, duration unknown, with eight portions of T1 poultry inside. The exercise limit is 4°C. A supplier can deliver a separate replacement batch for eight, subject to acceptance checks.",
+                  "Exercise rules: keep an affected batch isolated when the time above the limit cannot be verified. Use only label-checked alternatives and separate utensils for the allergy meal. Work on paper only."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Task requirements",
-                  "Write a one-page weekly handling and banquet plan covering menu and dietary restriction checks, the judgement and handling of the affected ingredients, purchasing top-ups and inventory rotation, cooking and finished-product temperature requirements, serving times and portion arrangements, the situations that require stopping use or confirming with the employer, and the matters to be recorded and handed over.",
-                  "The plan must state which data come from the exercise material and which are still assumptions, and must say whether it relies on the menu, the temperature records or the utensil zoning note."
+                  "First write a paper plan for eight. Match the three guest requirements, decide whether T1 can be used, and explain replacement checks and timing for 18:30.",
+                  "Use the 16:00 reading in the handoff. Mark the onset, duration and finished-food temperature as unknown. Propose separate utensils and label checks.",
+                  "Finish your own answer before opening the reference in the sources section. The exercise gives no finished-food temperature criterion or utensil map. Verify those separately for a real kitchen."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference deliverable (derivable from the exercise material)",
-                  "The plan should include: checks (apply the 3 restrictions to specific meals and utensils separately, and match the 8 portions to dishes one by one); ingredient judgement (the chilled poultry from the temperature anomaly period must be held back and confirmed with the employer, and must not be released on the strength of an “adjusted” record alone); purchasing top-ups (determine the top-up list from the banquet headcount and existing stock, and keep receipts and batches); cooking and temperature (check finished-product core temperature and cooling and freezing times, with separate utensils and stations for allergen meals); serving and records (serve according to the time arrangement, set out the menu, purchasing, expenses and losses, and register the items still to be confirmed).",
-                  "The reference deliverable lists only the elements that should be included and does not require wording identical to the example; explaining the basis for your judgement is enough."
+                  "Finish your answer first",
+                  "After day six, open “Household dinner reference answer (open after day six)” under FAQs and sources.",
+                  "Use the self-check there to record one difference and one correction."
                 ]
               },
               {
@@ -29051,22 +29017,22 @@
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: compile a one-week menu and headcount list",
-                  "Using fictional household members and diner numbers, turn taste preferences, dietary restrictions and each person's dishes into a one-week menu, and note the actions and whom to confirm with when ingredients are short or restrictions conflict."
+                  "Day 2: write the eight-person menu",
+                  "Use the three guest requirements and note which substitute seasonings need checking."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: do a purchasing and batch check",
-                  "Using a fictional purchasing ledger, write out how to check shelf life by batch, how to arrange first-in-first-out, and how to handle missing labels or abnormal deliveries."
+                  "Day 3: check quantities and the replacement",
+                  "Use the stock to check eight portions and identify when the replacement cannot yet be used."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: do a temperature reading",
-                  "Using fictional refrigeration, cooking and cooling temperature records, judge which period has abnormal readings and the possible direction of the cause, and explain your basis."
+                  "Day 4: check the 16:00 reading",
+                  "Compare the 16:00 reading with the exercise limit. In the handoff, separate what you know from the three items you must mark as unknown."
                 ]
               },
               {
@@ -29079,15 +29045,15 @@
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: write a menu and expense record",
-                  "Using fictional data, write a weekly record covering menus, purchasing, expenses and losses, key points of inventory rotation, unresolved exceptions and the items to be confirmed."
+                  "Day 6: finish your own answer",
+                  "Review your calculation, exception decisions, dietary requirements and handoff before opening the reference."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: decide whether to continue",
-                  "Return to the judgement checklist on this page and write down three reasons you are willing to continue and two conditions that need caution."
+                  "Day 7: open the reference and review",
+                  "Open “Household dinner reference answer (open after day six)” under FAQs and sources. Use its checklist to note a difference and a correction, then decide whether to continue or pause. Ask the employer separately about actual work conditions."
                 ]
               }
             ]
@@ -29108,11 +29074,11 @@
             "entries": [
               "Concrete change: can you, given taste and dietary restrictions, write out the menu, purchasing, temperature and stopping conditions, rather than just writing “pay attention to hygiene”.",
               "Facts and choice: would you rather do live-in and fixed household service, per-visit and hourly service, or banquet and private banquet service.",
-              "Practice drain: long periods of standing and frequent hand use, working alone, repeated kitchen tidying and records — which step drains you most, and can you accept it recurring at every meal.",
+              "Work conditions: ask the employer about the time spent standing, cutting, working independently and cleaning. The paper exercise cannot establish these conditions.",
               "Material boundaries: the practice material is fictional or based on public sources, and real households' member information, health information and household matters must not be included.",
               "Response to feedback: when your menu or method is pointed out as not matching the taste or restrictions, are you willing to go back to the menu and confirmation records and fill them in.",
               "Interest in the process: even when home-style dishes repeat, are you willing to complete taste confirmation, purchasing checks and records every time rather than skipping confirmation steps on the basis of experience.",
-              "Next step: if you are willing to continue with the previous six steps, the next step is, subject to compliance (for example a shadowing experience, food hygiene training or cooking one complete household meal loop for friends or family), to complete the whole flow from menu planning and purchasing checks to serving and records, and have an experienced person review it; if a particular step clearly drains you, narrow the direction first and then verify."
+              "Next step: finish the calculation, exception decisions, dietary checks and handoff. Use the collapsed reference on day seven. Repeat if a critical item is missing. Ask the employer about actual work and training."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -29833,7 +29799,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Self-employed or contracted, requiring the practitioner to handle hygiene and the boundaries of responsibility themselves."
+              "Per-visit work may be arranged through an agency, directly with a household, or independently. Check who signs the contract, provides equipment and is responsible for hygiene and handoff."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.02.credentials",
@@ -30361,7 +30327,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability. U.S. private household cooks are Zone3/SVP6 to below 7, and a level usually requiring 1—2 years of experience plus informal training is a summary, not a uniform course; respondent education was 38% postsecondary certificate / 31% high school / 15% below high school, and the partial responses are not a Chinese threshold. The BLS entry for this job typically shows a postsecondary non-degree award, less than 5 years of related experience and no on-the-job training indicator; typical and level are different classifications and do not mean no learning or training is needed."
+              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability. U.S. private household cooks are Zone3/SVP6 to below 7, and a level usually requiring 1—2 years of experience plus informal training is a summary, not a uniform course; respondent education was 38% postsecondary certificate / 31% high school / 15% below high school, and the partial responses are not a Chinese threshold. The BLS entry for this job typically shows a postsecondary non-degree award, less than 5 years of related experience and no on-the-job training indicator; typical and level are different classifications and do not mean no learning or training is needed."
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
@@ -30448,7 +30414,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
+              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
@@ -30928,7 +30894,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
+              "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability."
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
@@ -30997,7 +30963,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Plan menus to the employer's taste and dietary or nutritional restrictions, buy or order ingredients and kitchen supplies, wash and cut vegetables and meat and bake bread and pastries, cook and serve in a private household, prepare for family banquets and holiday meals, store, tidy and clean the kitchen and cookware, cool, package, label and freeze food and provide reheating instructions, record administrative matters such as menus and expenses, and cook at a holiday residence with the employer as needed.",
+                "answer": "Plan menus to the employer's taste and dietary or nutritional restrictions, buy or order ingredients and kitchen supplies, wash and cut produce and prepare meat separately and bake bread and pastries, cook and serve in a private household, prepare for family banquets and holiday meals, store, tidy and clean the kitchen and cookware, cool, package, label and freeze food and provide reheating instructions, record administrative matters such as menus and expenses, and cook at a holiday residence with the employer as needed.",
                 "id": "actors.faq.1",
                 "question": "What does the daily work of private household cooks involve?",
                 "question_key": "career.faq.cooks-private-household.1",
@@ -31006,7 +30972,7 @@
                 ]
               },
               {
-                "answer": "Private household cooks serve one family, with the menu set by the employer's taste and dietary restrictions, and they often keep purchasing and expense records; restaurant cooks serve public customers with a wider dish range and cook to order; institution and cafeteria cooks serve a fixed population in bulk to a cyclical menu.",
+                "answer": "A private household cook may serve one or more households on an agreed menu and schedule. Restaurant cooks serve the public; institution cooks usually prepare batches to planned menus. Check who handles shopping, expense records and cleaning.",
                 "id": "actors.faq.2",
                 "question": "How do private household cooks differ from restaurant cooks and institution and cafeteria cooks?",
                 "question_key": "career.faq.cooks-private-household.2",
@@ -31017,19 +30983,21 @@
               {
                 "answer": "Menu and recipe organisation, purchasing lists and inventory alerts, expense records and scheduling can be assisted by systems, and programmed equipment and temperature logging can also reduce manual steps; but applying taste and dietary restrictions, purchasing checks, heat and seasoning judgement, allergen isolation, ingredient exception handling and household communication still depend on on-site staff. Technology exposure does not equal organisational adoption or the disappearance of jobs.",
                 "id": "actors.faq.3",
-                "question": "How will AI affect or replace private household cooks?",
+                "question": "Where could AI and software help with household cooking?",
                 "question_key": "career.faq.cooks-private-household.3",
                 "source_refs": [
-                  "bls"
+                  "onet",
+                  "r2-ai"
                 ]
               },
               {
-                "answer": "What can be checked is change at the task level: three task groups — menu, purchasing and expense information, cooking and service pace, and temperature, storage and records — can be partly taken over by tools; this page has no occupation-specific adoption rate or displacement data.",
+                "answer": "Software can help organize menus, shopping lists and expenses; thermometers and timers can help record the process. Ingredient exceptions, allergen separation and meal handoff still need on-site checks. This is a task-level inference; adoption and job displacement were not measured.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of private household cooks is there evidence of AI-driven change?",
+                "question": "Which household cooking tasks could software help with?",
                 "question_key": "career.faq.cooks-private-household.4",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "r2-ai"
                 ]
               },
               {
@@ -31038,52 +31006,67 @@
                 "question": "Faced with AI, which abilities should private household cooks still focus on verifying?",
                 "question_key": "career.faq.cooks-private-household.5",
                 "source_refs": [
-                  "bls"
+                  "onet",
+                  "r2-ai"
                 ]
               },
               {
-                "answer": "In the United States the 2025 median hourly wage is 23.05 dollars and the median annual wage is 47,940 dollars (the single-occupation measure for 35-2013.00), with percentiles of 36,090/40,630/47,940/55,450/91,130 dollars a year; that measure excludes self-employed personal cooks. No occupation-level wage figures were obtained for mainland China, and this page treats this as a gap rather than filling it in with industry averages.",
+                "answer": "The 2025 U.S. median wage for this occupation was $23.05 an hour and $47,940 a year. OEWS wage estimates exclude private household employers and self-employment. The employment projection includes the self-employed. The mainland examples are individual postings, not a national wage estimate.",
                 "id": "actors.faq.6",
                 "question": "How much do private household cooks generally earn, and how should this be compared?",
                 "question_key": "career.faq.cooks-private-household.6",
                 "source_refs": [
-                  "oews"
+                  "r2-pay-3",
+                  "r2-pay-2",
+                  "bls-projections",
+                  "house-huangpu",
+                  "house-nanjing"
                 ]
               },
               {
-                "answer": "The U.S. preparation level is Job Zone 3, and respondent education requirements show 38% stating a postsecondary certificate is needed, 31% a high school diploma or equivalent and 15% below high school, with skills coming mainly from related work experience and on-the-job training; the common starting point for household meal service in mainland China is junior or senior high school, and some require health management and hygiene training.",
+                "answer": "O*NET respondents report different educational requirements and Job Zone 3 is a preparation category. One historical Huangpu hourly-service posting accepts primary school or above. Check the actual cooking, health and work arrangement requirements with the employer; one posting does not set a national threshold.",
                 "id": "actors.faq.7",
                 "question": "What education do private household cooks need, and how should they train?",
                 "question_key": "career.faq.cooks-private-household.7",
+                "source_refs": [
+                  "onet",
+                  "house-huangpu"
+                ]
+              },
+              {
+                "answer": "China’s recommended trade standard SB/T 11239-2023 covers home cooking offered by domestic service organizations. It does not establish a nationwide license for everyone who cooks in a private home. Check the service contract, health documents, training and job duties with the employer or platform.",
+                "id": "actors.faq.8",
+                "question": "Do you have to obtain a certificate to work as a private household cook?",
+                "question_key": "career.faq.cooks-private-household.8",
+                "source_refs": [
+                  "house-cooking-standard"
+                ]
+              },
+              {
+                "answer": "Practice suggestion: use a fictional household menu to check a shopping list, prepare a meal, hand it off and record what you did. Then ask about meal frequency, dietary preferences and hiring arrangements. The exercise is not a job qualification.",
+                "id": "actors.faq.9",
+                "question": "If you have no background and want to try private household cooking work, what should you do first?",
+                "question_key": "career.faq.cooks-private-household.9",
                 "source_refs": [
                   "onet"
                 ]
               },
               {
-                "answer": "There is no uniform mandatory licence in the United States; in mainland China health management and hygiene training are common prerequisites, and the Chinese cuisine chef vocational skill grade is usually not a threshold for household meal service, with specific requirements following the employment agreement and the competent authority's rules.",
-                "id": "actors.faq.8",
-                "question": "Do you have to obtain a certificate to work as a private household cook?",
-                "question_key": "career.faq.cooks-private-household.8",
-                "source_refs": [
-                  "cn-rule"
-                ]
-              },
-              {
-                "answer": "First complete one “menu plan—purchasing check—cooking—serving and recording” exercise using the fictional material on this page, or do one household meal shadowing experience, and then check the target household's taste requirements, dining frequency and employment agreement.",
-                "id": "actors.faq.9",
-                "question": "If you have no background and want to try private household cooking work, what should you do first?",
-                "question_key": "career.faq.cooks-private-household.9",
-                "source_refs": [
-                  "bls"
-                ]
-              },
-              {
-                "answer": "U.S. official projections show the growth rate for this occupation over 2024—2034 as “much faster than average (5% to 6%)”, with about 5,300 job openings over the projection period; but the occupation is small and household employment mostly depends on direct agreement, and hours and income change with the employer household, so it must be checked against local actual demand.",
+                "answer": "BLS projects U.S. employment in SOC 35-2013 to change by +5.1%, from 35,400 in 2025 to 37,200 in 2035, with 5,000 openings per year on average, including replacement needs. For local work, confirm meals per visit, shopping responsibility, hourly versus per-visit pay, and whether cleaning, caregiving and ingredients are billed separately.",
                 "id": "actors.faq.10",
                 "question": "What else should be considered when choosing private household cooking as an occupation now?",
                 "question_key": "career.faq.cooks-private-household.10",
                 "source_refs": [
-                  "bls"
+                  "bls-projections"
+                ]
+              },
+              {
+                "answer": "Keep T1 isolated and unused. Record 16:00, 7°C and mark when the temperature first went above the limit, how long it stayed above it, and the finished-food temperature as unknown. Tell the client and arrange a replacement. Check the replacement batch before allocating eight portions. For A, omit the peanut seasoning and verify a safe substitute and cross-contact controls with separate utensils. Use a low-salt soft option for B and no offal for C. In the handoff, list T1 status, the replacement batch and open items. Plan backward from 18:30. Client approval helps coordinate the replacement menu but does not clear the original batch. Check four items: portions for eight, the temperature decision, the three guest requirements and substitutes, and handoff and all three unknowns. Count each complete item. Repeat the exercise if a critical item is missing. The 4°C limit is an exercise assumption. The source link provides general food-safety background.",
+                "id": "actors.faq.11",
+                "question": "Household dinner reference answer (open after day six)",
+                "question_key": "career.faq.cooks-private-household.11",
+                "source_refs": [
+                  "us-home-food-safety"
                 ]
               }
             ]
@@ -31099,14 +31082,15 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "U.S. and mainland China data are kept in separate columns: U.S. wages, employment and projections use the single-occupation measure for private household cooks (35-2013.00) and exclude self-employed positions; mainland China is treated as a gap, and the two do not substitute for each other.",
+              "Both U.S. sources refer to private household cooks (35-2013). BLS employment and projections include self-employment. The OEWS wage survey excludes self-employed workers, direct private-household employees and unpaid family workers. Mainland job postings are presented separately because comparable national wage data are unavailable.",
               "When the statistical period, survey population and pay measure differ, cite them separately; do not interpolate and do not fill gaps with adjacent occupations or industry averages.",
               "The practice material is fictional or based on public sources and does not constitute a qualification, a permit, an employment or a safe-work authorisation."
             ]
           },
           "id": "actors.sources.boundary.1",
           "source_refs": [
-            "onet"
+            "bls-projections",
+            "r2-pay-2"
           ],
           "type": "list"
         },
@@ -31322,7 +31306,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability.",
+                "limitation": "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability.",
                 "market": "United States",
                 "name": "O*NET national employment trend for private household cooks (BLS2025—2035)",
                 "period": "BLS2025—2035; consulted 2026-10-09",
@@ -31494,7 +31478,8 @@
                 "accessed_at": "2026-09-18",
                 "details": [
                   "For explaining the coverage and conversion measures of wage statistics.",
-                  "Does not provide figures for this occupation and cannot be used to estimate individual income."
+                  "Does not provide figures for this occupation and cannot be used to estimate individual income.",
+                  "OEWS excludes private household employers and self-employed workers. U.S. employment projections include self-employment; wage estimates do not describe all workers."
                 ],
                 "evidence_type": "official statistics",
                 "id": "oews",
@@ -31514,13 +31499,13 @@
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "Private household cook identity and overview, with detailed tasks, context and interests checked separately; the current industry split of 13% other services except government / 87% other has no stated year. Wage and employment coverage differ, and it contains no AI adoption or employment causality.",
+                "limitation": "The occupation profile lists Other Services (Except Public Administration) as 13% of employment in 2025. The 87% other-industries figure comes from the separate industry page, which does not print a year. Employment and wage coverage differ.",
                 "market": "United States",
                 "name": "O*NET OnLine: Cooks, Private Household (35-2013.00) occupational profile",
                 "period": "Page updated in 2026; retrieved 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/35-2013.00"
+                "url": "https://www.onetonline.org/link/details/35-2013.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31808,7 +31793,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls-projections",
-                "limitation": "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability. U.S. private household cooks are Zone3/SVP6 to below 7, and a level usually requiring 1—2 years of experience plus informal training is a summary, not a uniform course; respondent education was 38% postsecondary certificate / 31% high school / 15% below high school, and the partial responses are not a Chinese threshold. The BLS entry for this job typically shows a postsecondary non-degree award, less than 5 years of related experience and no on-the-job training indicator; typical and level are different classifications and do not mean no learning or training is needed. The OEWS method explicitly excludes the self-employed, people directly employed by private households and unpaid family members. O*NET currently still publishes 2025 wages for 35-2013, which can be read only as wages for the jobs covered by that survey and do not represent all private household direct employment, self-employed per-visit quotes, profit or all employment income; per-visit service does not automatically equal self-employment, and the actual employment status must be checked.",
+                "limitation": "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability. U.S. private household cooks are Zone3/SVP6 to below 7, and a level usually requiring 1—2 years of experience plus informal training is a summary, not a uniform course; respondent education was 38% postsecondary certificate / 31% high school / 15% below high school, and the partial responses are not a Chinese threshold. The BLS entry for this job typically shows a postsecondary non-degree award, less than 5 years of related experience and no on-the-job training indicator; typical and level are different classifications and do not mean no learning or training is needed. The OEWS method explicitly excludes the self-employed, people directly employed by private households and unpaid family members. O*NET currently still publishes 2025 wages for 35-2013, which can be read only as wages for the jobs covered by that survey and do not represent all private household direct employment, self-employed per-visit quotes, profit or all employment income; per-visit service does not automatically equal self-employment, and the actual employment status must be checked.",
                 "market": "United States",
                 "name": "BLS table 1.2 private household cooks 35-2013",
                 "period": "2025—2035 projection and 2025 typical preparation; consulted 2026-10-09",
@@ -31838,7 +31823,7 @@
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet-industry",
-                "limitation": "The current 13% other services except government / 87% other including agriculture, forestry, fishing and hunting has no stated year; it is not the share of household employers or the self-employed, and is not wages.",
+                "limitation": "The industry page lists 13% and 87% without a year. The occupation profile lists the 13% under 2025 industries. Neither is household-employer share or wages.",
                 "market": "United States",
                 "name": "O*NET private household cook industry employment distribution",
                 "period": "The current page does not state the year; consulted 2026-10-09",
@@ -31892,6 +31877,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Wenhui advertised ten hourly domestic workers at CNY 2,500–5,000 per month; it asks for cooking, light housework and a health certificate. This is a mixed-duty offer."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "house-huangpu",
+                "limitation": "One posting; not a national wage estimate or confirmation the vacancy is still open.",
+                "market": "Mainland China",
+                "name": "Huangpu domestic service listing: cooking and light housework",
+                "period": "2026-01-27",
+                "publisher": "Huangpu District Employment Service Center, Guangzhou",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/zwgk/mszd/cjjy/content/post_10689110.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Listing 12 advertises ten hourly cooking positions at CNY 30–80 per hour and offers training to people without experience. It does not establish guaranteed hours."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "house-nanjing",
+                "limitation": "One posting; not a national wage estimate or confirmation the vacancy is still open.",
+                "market": "Mainland China",
+                "name": "Yuhuatai, Nanjing: hourly cook",
+                "period": "2026-03-02",
+                "publisher": "Yuhuatai District Government, Nanjing",
+                "scope": "recruitment_proxy",
+                "url": "https://www.njyh.gov.cn/yhtqrmzf/202603/t20260302_5798900.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Current recommended domestic trade standard for home cooking supplied by domestic service organizations."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "house-cooking-standard",
+                "limitation": "Organization-level scope; not a nationwide personal license.",
+                "market": "Mainland China",
+                "name": "SB/T 11239-2023 Home Cooking Services",
+                "period": "2024-06-01",
+                "publisher": "National Public Service Platform for Standards",
+                "scope": "exact",
+                "url": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=0AB4989945FF2E5FE06397BE0A0ACB4E"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Domestic service worker profile 4-10-01-06 lists cooking and purchasing."
+                ],
+                "evidence_type": "Occupation profile",
+                "id": "house-cn-domestic-profile",
+                "limitation": "Does not establish a one-to-one U.S. crosswalk or universal job requirements.",
+                "market": "Mainland China",
+                "name": "Domestic service worker occupation profile",
+                "period": "2022-04-15",
+                "publisher": "China Employment Training Technical Instruction Center",
+                "scope": "occupation_context",
+                "url": "https://chinajob.mohrss.gov.cn/h5/c/2022-04-15/347805.shtml"
               }
             ]
           },
@@ -34388,7 +34433,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls"
+              "onet"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34533,7 +34578,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
+              "onet",
               "employer"
             ],
             "id": "audition-feedback",
@@ -34561,15 +34606,15 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
-            "id": "bls",
+            "id": "onet",
             "label": {
-              "$source": "bls",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34890,7 +34935,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (direct household employment and self-employment measure)",
+              "城市/区间": "Mainland China domestic service postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34899,23 +34944,24 @@
               }
             }
           ],
-          "china_soc_row": "U.S. 35-2013 includes personal chefs; related Chinese occupations and business employment forms are checked separately, and this round obtained no one-to-one matching precise occupational wages.",
+          "china_soc_row": "A corresponding national occupation wage distribution for mainland China was not verified. Compare the listed examples by actual duties and service scope.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-house-huangpu",
+            "posting-house-nanjing"
           ],
           "sources_note": "Source links are used according to their own statistical or announcement scope; where the statistical period, survey population and pay measure differ they are cited separately and no cross-conversion is made.",
           "ui": {
             "ai_heading": "Will AI or automation affect private household cook income?",
             "driver_heading": "Which settings use private household cooks?",
-            "official_heading": "Official statistical measures and notes on what is missing",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Educational background, job directions and notes (editorially compiled, not wage statistics)",
             "scenario_heading": "How should preparation directions and actual household service requirements be checked?",
             "scenario_interpretation_label": "Notes and suggested checks",
             "scenario_role_label": "Educational background",
             "scenario_value_label": "Job direction"
           },
-          "us_growth": "+5.1% (2025—2035, exact BLS row; rounded to 5% in O*NET)",
+          "us_growth": "+5.1% (2025—2035, exact BLS row)",
           "us_median": "23.05 dollars/hour (median, 2025)"
         }
       },
@@ -34966,7 +35012,7 @@
               "$fact": "current-employment-2025-2035",
               "field": "display_value"
             },
-            "说明": "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. OOH/O*NET round the growth rate to 5%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability. The OEWS method explicitly excludes the self-employed, people directly employed by private households and unpaid family members. O*NET currently still publishes 2025 wages for 35-2013, which can be read only as wages for the jobs covered by that survey and do not represent all private household direct employment, self-employed per-visit quotes, profit or all employment income; per-visit service does not automatically equal self-employment, and the actual employment status must be checked."
+            "说明": "BLS table 1.2 private household cooks 35-2013: employment rising from 35,400 in 2025 to a projected 37,200 in 2035, a published net increase of 1,800 and growth of 5.1%, with an average of 5,000 openings per year (including growth and replacement), and the self-employed accounting for 79.7%. The employment projection includes the self-employed while the wage coverage differs; openings are not a ten-year total, net increases, current hiring or a hiring probability. The OEWS method explicitly excludes the self-employed, people directly employed by private households and unpaid family members. O*NET currently still publishes 2025 wages for 35-2013, which can be read only as wages for the jobs covered by that survey and do not represent all private household direct employment, self-employed per-visit quotes, profit or all employment income; per-visit service does not automatically equal self-employment, and the actual employment status must be checked."
           },
           {
             "fact_ref": "current-growth-2025-2035",
@@ -36668,7 +36714,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of private household cooks",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36780,14 +36826,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
             "label": "Understand my personality preferences"
@@ -37203,49 +37241,50 @@
       },
       {
         "derivation": null,
-        "display_value": "About 34,200 people (2024)",
+        "display_value": "35,400 people (2025 BLS projections base year)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment size (single-occupation measure)",
-        "occupation_scope": "Cooks, Private Household（O*NET-SOC 35-2013.00）",
-        "period": "2024; retrieved 2026-09-18",
+        "measure": "2025 base-year employment",
+        "occupation_scope": "U.S. SOC 35-2013",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Much faster than average (2024—2034, 5% to 6%)",
+        "display_value": "+5.1% (projected employment change, 2025–2035)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Employment change rate (single-occupation measure)",
-        "occupation_scope": "Cooks, Private Household (O*NET-SOC 35-2013.00); the O*NET classification label is “Faster than average”",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "measure": "Projected employment change",
+        "occupation_scope": "U.S. SOC 35-2013",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 5,300 (job openings over the 2024—2034 projection period, including growth and replacement demand)",
+        "display_value": "5,000 per year (including replacement needs)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Job openings (single-occupation measure)",
-        "occupation_scope": "Cooks, Private Household (O*NET-SOC 35-2013.00); O*NET notes that openings include growth demand and replacement demand",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "measure": "Average annual openings",
+        "occupation_scope": "U.S. SOC 35-2013",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Other services (except government) 13% (current employment industry share, no stated year)",
+        "display_value": "Other Services (Except Public Administration) 13% (2025 employment share)",
         "fact_id": "industry-theater",
         "market": "United States",
         "measure": "Industry employment share (not wages)",
         "occupation_scope": "35-2013 industry employment distribution, not wages or the share of household employers",
-        "period": "The current industry page does not state the year; reread from the same version on 2026-10-09",
+        "period": "2025",
         "source_refs": [
+          "onet",
           "onet-industry"
         ]
       },
@@ -37327,7 +37366,7 @@
       },
       {
         "derivation": null,
-        "display_value": "+5.1% (2025—2035; rounded to 5% in OOH/O*NET)",
+        "display_value": "+5.1% (2025—2035)",
         "fact_id": "current-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth",
@@ -37362,6 +37401,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Wenhui advertised ten hourly domestic workers at CNY 2,500–5,000 per month; it asks for cooking, light housework and a health certificate. This is a mixed-duty offer.",
+        "fact_id": "posting-house-huangpu",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Huangpu domestic service listing: cooking and light housework",
+        "period": "2026-01-27",
+        "source_refs": [
+          "house-huangpu"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Listing 12 advertises ten hourly cooking positions at CNY 30–80 per hour and offers training to people without experience. It does not establish guaranteed hours.",
+        "fact_id": "posting-house-nanjing",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Yuhuatai, Nanjing: hourly cook",
+        "period": "2026-03-02",
+        "source_refs": [
+          "house-nanjing"
+        ]
       }
     ]
   },
@@ -37388,19 +37451,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, much faster than average 5% to 6%)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, about 34,200 people)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. job openings (2024—2034, about 5,300)"
+        "label": "U.S. projected annual job openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37414,17 +37477,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Private household cooks (O*NET-SOC 35-2013.00) plan menus, purchase, cook and serve in private homes to the employer's taste and dietary restrictions: this covers menus and purchasing, dietary and nutritional restrictions, family banquets and holiday meals, kitchen tidying and inventory, freezing and storage and reheating instructions, and menu and expense records; it includes the U.S. 2025 median hourly wage of 23.05 dollars, a 2024—2034 growth rate of “much faster than average (5% to 6%)” and about 5,300 job openings over the projection period, the mainland China occupation-level wage gap and industry proxy boundary, burn and scald and food-safety risk control, and the boundaries of the fictional exercises."
+      "text": "Explore private household cooking: menu requests, shopping, handoff and allergies. Compare mainland China household-service examples with U.S. occupational data."
     },
     "title": {
       "availability": "available",
       "text": "Private household cooks"
     }
   },
-  "source_content_sha256": "6903c318a7120bf3b2e48f5a7bbb01e0d0580d0f395bba80e7d532097a242d58",
+  "source_content_sha256": "a3416831641f3067bf031618a599743356ab4b31892f2f75e007a52725f6365a",
   "subject": {
     "canonical_slug": "cooks-private-household",
     "name": "Private household cooks",
-    "summary": "Private household cooks (Cooks, Private Household) correspond in the United States to O*NET-SOC 35-2013.00: in a private home, planning menus, purchasing ingredients, cooking and serving to the employer's taste and dietary and nutritional restrictions, possibly also handling family banquets and holiday meals, tidying the kitchen and tableware, inventory and purchasing, freezing and storage and reheating instructions, and menu and expense records; this covers both live-in cooks employed by a single family and per-visit personal cooks (the latter often self-employed or contracted, under a different statistical measure); there is no corresponding occupational subclass on the Chinese side, and it must be checked separately against domestic service and skill grade entities."
+    "summary": "Private household cooks plan menus, shop, prepare meals and handle handoffs in clients’ homes. Mainland China’s domestic service profile includes cooking and shopping. When comparing jobs, distinguish live-in work, per-visit cooking, mixed housekeeping and commercial private events, and ask who hires you and what the job covers."
   }
 }

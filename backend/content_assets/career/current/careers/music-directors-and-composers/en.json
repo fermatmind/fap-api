@@ -152,6 +152,9 @@
       "item:music-directors-and-composers.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:music-directors-and-composers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:music-directors-and-composers.profile.career-quick-answers-block.5": {
         "status": "mapped"
       },
@@ -13550,6 +13553,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The new score changes the ending, but the players’ parts are still old. Write separate notes for the composer or arranger and the rehearsal lead."
+            ]
+          },
+          "id": "music-directors-and-composers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Separate score revision from rehearsal direction",
+          "type": "notice"
         }
       ]
     },
@@ -16043,6 +16061,13 @@
         "id": "music-directors-and-composers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "music-directors-and-composers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16236,7 +16261,7 @@
       "text": "Music Directors and Composers"
     }
   },
-  "source_content_sha256": "3ac26bfa2f7667000ca07a9d0f3233fe8fde3fd9606ffa3b012d5ba2e77e8439",
+  "source_content_sha256": "255be342a1cca40a5c6327eecf8953229c230e9425b4e7e8b29491298ca1d510",
   "subject": {
     "canonical_slug": "music-directors-and-composers",
     "name": "Music Directors and Composers",

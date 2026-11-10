@@ -22951,7 +22951,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Robotics Technicians (O*NET 17-3024.01) install, program, troubleshoot, test, or maintain robots and related automated production line equipment. First see whether an equipment fault can be safely isolated, diagnosed, and retested, then judge whether you are willing to do on-site technical work over the long term."
+              "Ask about site training, shifts, fault escalation, and restart approval. The paper exercise tests recordkeeping and handoff."
             ]
           },
           "id": "robotics-technicians.quick-decision.fit-decision-checklist.1",
@@ -22966,7 +22966,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Share some skills with robotics engineers, electromechanical technicians, and industrial machinery maintenance workers; the core of this occupation is equipment installation, controller and sensor troubleshooting, maintenance records, and authorized functional testing."
+              "In section 09, “Entry, qualifications, and career development,” try RB-T01: Review alarms, configuration, and handoff. Save a first draft before checking the key."
             ]
           },
           "id": "robotics-technicians.quick-decision.fit-decision-checklist.2",
@@ -22980,7 +22980,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "AI can help look up manuals, compare alarm records, and draft test steps; actual wiring, equipment status, fault causes, and return-to-service authorization must be verified by authorized personnel according to on-site procedures."
+              "This work may suit you if you like tracing alarms and maintenance logs and keeping unresolved checks visible."
             ]
           },
           "id": "robotics-technicians.quick-decision.fit-decision-checklist.3",
@@ -22996,7 +22996,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Before starting the job, verify the robot model, controller, end tools, production line interfaces, energy isolation, testing authority, shift arrangements, and training requirements; practice materials must not be connected to real equipment."
+              "Separate approved configuration, observations, repair evidence, and restart approval."
             ]
           },
           "id": "robotics-technicians.quick-decision.fermat-decision-card.6",
@@ -23011,7 +23011,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "U.S. robotics technicians 17-3024.01 have no separate 2025 wages and 2025—2035 employment; O*NET cites a median of 73,900 U.S. dollars for the \"Electro-Mechanical and Mechatronics Technologists and Technicians\" 17-3024 parent occupation, with BLS parent occupation growth of 2.6% and about 1,400 openings per year. Precise occupation wages for China were not obtained."
+              "This work may suit you if you like tracing alarms and maintenance logs and keeping unresolved checks visible."
             ]
           },
           "id": "robotics-technicians.quick-decision.fermat-decision-card.7",
@@ -27367,31 +27367,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Electromechanical system maintenance",
@@ -29117,7 +29117,7 @@
                 "values": [
                   "Education and fundamentals",
                   "The BLS parent occupation typically requires an associate's degree to enter; specific requirements for the robotics sub-occupation are set by employers.",
-                  "Verify the real duties across control, mechanical, electrical, software, and testing."
+                  "The graduate posting describes workstation and line maintenance, alarm troubleshooting, and stoppages."
                 ]
               },
               {
@@ -29140,8 +29140,8 @@
                 "id": "tools",
                 "values": [
                   "Collaboration and records",
-                  "Reproducible information must be shared with technicians, the application side, and safety personnel.",
-                  "Verify whether the person taking over can reproduce the problem from the records."
+                  "In section 09, “Entry, qualifications, and career development,” try RB-T01: Review alarms, configuration, and handoff. Save a first draft before checking the key.",
+                  "Separate approved configuration, observations, repair evidence, and restart approval."
                 ]
               }
             ]
@@ -29150,7 +29150,9 @@
           "source_refs": [
             "bls",
             "onet",
-            "editor"
+            "editor",
+            "cn-d010-main",
+            "cn-d010-context"
           ],
           "title": "What do employers usually look at in hiring?",
           "type": "cards"
@@ -29163,37 +29165,35 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Practice setup｜All fictional, no connection to real equipment",
-                  "You are a supervised robotics maintenance trainee. Only examine alarms, configurations, and test evidence; do not connect to real equipment or generate motion commands.",
-                  "A1｜The requirements document calls for operation in a corridor with people; the risk assessment, permitted speed, and stop conditions are not given.",
-                  "A2｜The sensor log is labeled with the 2026-09-01 calibration version, while the equipment list states the 2026-09-14 version; the two do not match.",
-                  "A3｜The control program submission number differs from the test report submission number, and the report only records \"normal\" with no failure scenarios.",
-                  "A4｜The demo passed in an empty yard, but the customer requires entering a real space with obstacles and foot traffic.",
-                  "A5｜Technicians should list faults and shutdown recommendations; return to service, parameter changes, and deployment are approved by the authorized team."
+                  "Fictional inputs",
+                  "The fictional station is C9. Its equipment record lists C6 as the approved configuration. A service draft mentions C7 without approval. Under the scenario rules, restart requires a configuration check, alarm review, and supervisor approval.",
+                  "At 08:40 the log records a sensor feedback alarm without a cause. At 08:50 the service record shows that the station is stopped pending review. The 09:10 shift report says the records were reviewed but supplies no alarm closure evidence.",
+                  "No actual loaded configuration, confirmed repair, or restart sign-off is supplied. The process owner checks configuration, the maintenance lead reviews the fault record, and the authorized supervisor signs off on restart."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task one: mark items that cannot be released",
-                  "List A1 unclear personnel exposure conditions, A2 calibration conflict, A3 version inconsistency, and A4 scenario extrapolation; write the status as \"pause scenario expansion\".",
-                  "Do not invent speeds, control parameters, or safety certifications."
+                  "Task and deliverable",
+                  "Submit a one-page version, alarm, and restart checklist. Give the original record, missing evidence, and next owner for each item.",
+                  "Distinguish what happened, what is open, and what is approved. Work on paper without connecting equipment."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Task two: write the review and handover",
-                  "Make a checklist by problem, source material, version, test conditions, responsible person, evidence pending, and status.",
-                  "Request a safety assessment, unified calibration and code versions, and a test plan for the scenario with foot traffic.",
-                  "Clearly distinguish \"submitted\", \"reviewed\", and \"approved\"."
+                  "Before checking your work",
+                  "Save your draft before checking the key after the seven-day plan.",
+                  "Work independently.",
+                  "Keep the versions."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Safety boundaries",
-                  "The practice lacks real equipment and safety parameters, so no operating instructions can be derived."
+                  "Authority boundaries",
+                  "Use the fictional records only.",
+                  "Do not approve or release real work."
                 ]
               }
             ]
@@ -29202,7 +29202,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry practice: fault locating in a fictional robotic system",
+          "title": "RB-T01 | Review alarms, configuration, and handoff",
           "type": "cards"
         },
         {
@@ -29213,33 +29213,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Requirements and risk cards",
-                  "Mark A1 the requirement for a corridor with people and the missing risk assessment.",
-                  "Others can see the stop conditions that were not obtained."
+                  "Version record",
+                  "Check the approved, loaded, and proposed versions.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Configuration comparison table",
-                  "Place A2 the calibration version and A3 the program submission number and report version side by side.",
-                  "\"Pass\" results from different versions cannot be merged."
+                  "Event timeline",
+                  "Log the alarm, stop, and review events.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Failure scenario sheet",
-                  "List A4 the differences between the empty yard and the real site, and propose conditions to be verified.",
-                  "Do not write a successful demo as on-site safety."
+                  "Evidence gaps",
+                  "Record missing evidence and limits on your conclusions.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Handover and approval chain",
-                  "Record A5 who can review and who can approve scenario expansion and deployment.",
-                  "Status must be clear to a person and a time."
+                  "Handoff and authority",
+                  "Name the reviewers and restart approver.",
+                  "Use the supplied records."
                 ]
               }
             ]
@@ -29270,27 +29270,27 @@
             "rows": [
               [
                 "Requirement follow-up",
-                "What to do when the corridor-with-people requirement is unclear",
-                "Able to point out gaps in risk and stop conditions",
-                "An interview question cannot grant equipment authority"
+                "Check the approved, loaded, and proposed versions.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Configuration check",
-                "How to handle a calibration and program version conflict",
-                "Able to pause and recheck the original records",
-                "Does not invent which version is correct"
+                "Log the alarm, stop, and review events.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Test installation",
-                "Whether passing in an empty yard allows entering the real site",
-                "Able to distinguish scenario and coverage",
-                "Deployment requires separate approval"
+                "Record missing evidence and limits on your conclusions.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Handover review",
-                "How to explain residual defects",
-                "Able to list conditions, responsible persons, and evidence pending",
-                "A single practice does not predict long-term performance"
+                "Name the reviewers and restart approver.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ]
             ]
           },
@@ -29310,50 +29310,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day one",
-                  "Read A1, and mark the usage scenario and gaps in safety requirements."
+                  "Day 1",
+                  "Record the subject and versions."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day two",
-                  "Read A2, and build a calibration version comparison table."
+                  "Day 2",
+                  "Check the approved, loaded, and proposed versions."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day three",
-                  "Read A3, and verify whether the program, the report, and the hardware configuration correspond."
+                  "Day 3",
+                  "Log the alarm, stop, and review events."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day four",
-                  "Read A4, and list the conditions that the empty-yard demo cannot be extrapolated to."
+                  "Day 4",
+                  "Record missing evidence and limits on your conclusions."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day five",
-                  "Following A1—A5, write the review and approval chain, keeping the status as pause scenario expansion."
+                  "Day 5",
+                  "Name the reviewers and restart approver."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day six",
-                  "Ask someone familiar with system verification to review the simulated materials, and record their comments."
+                  "Day 6",
+                  "Finish the handoff before checking the key and rubric below, then make one revision. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day seven",
-                  "Keep the first draft and the revised draft, and review omissions and reproduction quality."
+                  "Day 7",
+                  "Organize your four practice outputs. Keep the source records and review status."
                 ]
               }
             ]
@@ -29370,20 +29370,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Record A1—A5 each unknown item and the location of the source material.",
-              "Check whether a calibration conflict was guessed as one version being correct.",
-              "Check whether the program submission number and the test report were mixed up.",
-              "Check whether an empty-yard demo was treated as verification for a site with people.",
-              "Confirm that deployment decisions always stay in the authorization chain.",
-              "Record whether you are willing to check problems across mechanical, electrical, and software boundaries.",
-              "The practice is for career exploration only and is not an equipment operating qualification."
+              "C6 is the approved configuration. C7 appears in an unapproved draft. The loaded version is unknown. Refer it to the process owner.",
+              "The 08:40 entry establishes a feedback alarm, not a failed sensor. The 08:50 record shows the station stopped pending review.",
+              "The 09:10 review entry does not close the alarm. The maintenance lead checks the original alarm and repair evidence.",
+              "Keep restart pending. There is no sign-off. Authorized staff handle operation and configuration changes under site procedures.",
+              "The handoff names station C9, the approved version, the unknown loaded version, the missing alarm closure, and the restart approver.",
+              "Score each item 0–2: version and evidence, item-by-item decisions, unknown scope, and approval and handoff.",
+              "Award 2 for complete and traceable work, 1 for partial work, and 0 for missing evidence or exceeding authority."
             ]
           },
           "id": "robotics-technicians.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide at the end of seven days whether to continue",
+          "title": "Answer key and self-check rubric",
           "type": "list"
         },
         {
@@ -29498,16 +29498,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Education, certificates, position hiring, and equipment operating authorization are verified separately; comparable hiring samples, qualification bodies, and vendor rules for this position in China have not been obtained, so no unified certificate or starting-pay threshold can be given.",
-              "Certificate directories can serve only as search entry points; formal qualifications, employer authorization, and equipment authority must be verified separately."
+              "The graduate posting describes workstation and line maintenance, alarm troubleshooting, and stoppages.",
+              "The standard describes monitoring, diagnosis, repair, and preventive maintenance. Confirm site duties and authority separately."
             ]
           },
           "id": "robotics-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "cn-d010-main",
+            "cn-d010-context"
           ],
           "title": "Notes on hiring samples",
           "type": "notice"
@@ -31531,9 +31529,9 @@
                 ]
               },
               {
-                "answer": "Engineers focus on installation, interfaces, and verification, while technicians mostly assemble, test, and maintain per drawings or work orders; actual duties follow position authorization.",
+                "answer": "Technicians install, test, maintain, and document systems under procedures. Engineers tend to focus on design, integration, and validation. Both may debug systems. Check the deliverables and approval authority.",
                 "id": "robotics-technicians.faq.2",
-                "question": "How is this different from robotics technicians?",
+                "question": "How do robotics technicians differ from robotics engineers?",
                 "question_key": "career.faq.robotics-technicians.q2",
                 "source_refs": [
                   "onet",
@@ -31541,13 +31539,15 @@
                 ]
               },
               {
-                "answer": "The BLS parent occupation typically requires an associate's degree to enter, but it is not a unified legal threshold for the robotics sub-occupation; specific employer conditions must be verified separately.",
+                "answer": "The BLS parent occupation typically requires an associate's degree to enter, but it is not a unified legal threshold for the robotics sub-occupation; specific employer conditions must be verified separately. The graduate posting describes workstation and line maintenance, alarm troubleshooting, and stoppages. The standard describes monitoring, diagnosis, repair, and preventive maintenance. Confirm site duties and authority separately.",
                 "id": "robotics-technicians.faq.3",
                 "question": "Is an associate degree required to enter?",
                 "question_key": "career.faq.robotics-technicians.q3",
                 "source_refs": [
                   "onet",
-                  "editor"
+                  "editor",
+                  "cn-d010-main",
+                  "cn-d010-context"
                 ]
               },
               {
@@ -31589,7 +31589,7 @@
                 "question_key": "career.faq.robotics-technicians.credentials"
               },
               {
-                "answer": "Use only fictional requirements, interface tables, and logs to mark version conflicts, test coverage, and the authorization chain; do not connect to real equipment.",
+                "answer": "In section 09, “Entry, qualifications, and career development,” try RB-T01: Review alarms, configuration, and handoff. Save a first draft before checking the key.",
                 "id": "robotics-technicians.faq.9",
                 "question": "How to practice system judgment?",
                 "question_key": "career.faq.robotics-technicians.risk-boundary"
@@ -31610,7 +31610,9 @@
             "nbs",
             "privacy",
             "editor",
-            "editor"
+            "editor",
+            "cn-d010-main",
+            "cn-d010-context"
           ],
           "type": "faq"
         },
@@ -31709,13 +31711,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the robotics technicians career page",
@@ -31938,8 +31940,8 @@
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "FermatMind fictional robot debugging practice: for the applicable scope above only.",
-                  "Fictional practice, not equipment debugging instructions or proof of qualification."
+                  "RB-T01 is a fictional paper exercise.",
+                  "Separate approved configuration, observations, repair evidence, and restart approval."
                 ],
                 "evidence_type": "Editorial summary",
                 "id": "editor",
@@ -32174,6 +32176,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The graduate posting describes workstation and line maintenance, alarm troubleshooting, and stoppages."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-d010-main",
+                "limitation": "For task and pathway comparison.",
+                "market": "Mainland China",
+                "name": "Luhui Intelligent industrial robotics technician",
+                "period": "Date shown in source",
+                "publisher": "Luhui Intelligent industrial robotics technician",
+                "scope": "recruitment_proxy",
+                "url": "https://zhjyb.zua.edu.cn/module/campustalkdetail/id-6aab4989947c3f2b26ebad13/nid-5119"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The standard describes monitoring, diagnosis, repair, and preventive maintenance. Confirm site duties and authority separately."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-d010-context",
+                "limitation": "For task and pathway comparison.",
+                "market": "Mainland China",
+                "name": "China occupational skills standard: industrial robot systems maintenance",
+                "period": "Date shown in source",
+                "publisher": "China occupational skills standard: industrial robot systems maintenance",
+                "scope": "contextual",
+                "url": "https://chinajob.mohrss.gov.cn/upload/resources/jnbzpdf/4ccc6a76ab912072690801.pdf"
               }
             ]
           },
@@ -36868,7 +36900,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit robotics technicians",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37431,14 +37463,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Robotics technician occupation introduction: system installation, sensors and control, integration testing, AI assistance boundaries, the U.S. 17-3024 parent occupation wage and employment basis, China manufacturing wage background, and fictional debugging practice."
+      "text": "Robotics technicians install, test, and maintain workstations. Compare job tasks, broader U.S. data, and an alarm handoff exercise."
     },
     "title": {
       "availability": "available",
       "text": "Robotics Technicians"
     }
   },
-  "source_content_sha256": "06d895fa2ca7d21122a7cebe02a24dd3c267f9f052ceaaeafca8ccaca8c8f291",
+  "source_content_sha256": "6bca95f60fcdd73650d9fbe81cfc303299f8ceb05c0e7a40086546ab2fa7c303",
   "subject": {
     "canonical_slug": "robotics-technicians",
     "name": "Robotics Technicians",

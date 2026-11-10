@@ -2,9 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:market-employment-2025": {
         "status": "pending_mapping"
       },
@@ -30,6 +27,18 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-median": {
+        "status": "pending_mapping"
+      },
+      "fact:verified-us-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:verified-us-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:verified-us-openings": {
+        "status": "pending_mapping"
+      },
+      "fact:verified-us-pay": {
         "status": "pending_mapping"
       },
       "item:layout-workers-metal-and-plastic.ai-impact.ai-impact-table.1": {
@@ -7239,12 +7248,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Safe work sample (an entirely fictional layout-worker task package): Within 60 minutes, organize metal/plastic workpieces, engineering drawings and templates, and measuring/marking tools; interpret drawing dimensions, locate datums and mark layouts, review dimensional markings, and produce results, review points and escalation records. Inputs must contain no real personal, customer, patient or employer-confidential information."
+              "Find “Drawing L: Datum and hole locations” under “Entering the field, qualifications, and career development.”"
             ]
           },
           "id": "layout-workers-metal-and-plastic.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7275,7 +7284,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Layout workers correspond to U.S. 51-4192.00: establishing reference points and dimensions for subsequent processing on metal or plastic stock, tubes, structural parts, castings or machine parts, including shipfitters. Duties include calculating layouts, marking curves, hole locations and welding symbols, checking centerlines and templates, aligning assemblies and positioning workpieces. Actual hoisting, welding and equipment operation each require employer training and authorization, not granted by an occupational title."
+              "Layout workers read drawings, locate reference points and mark positions or outlines on metal or plastic workpieces. They hand off markings and dimensions that downstream workers can verify."
             ]
           },
           "id": "layout-workers-metal-and-plastic.profile.definition-block.1",
@@ -7360,13 +7369,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET interest RC (R91/C48/A31/I31/E0/S0) reflects activity preferences, not ability. Task tools include scribers, marking stones, punches, dividers, protractors, gauge blocks, height gauges and dial indicators; CAD lists AutoCAD, but software listings are not proficiency. U.S. 2025 industries: manufacturing 63%, government 18%, administrative support 11%, with remaining 8% calculated as the difference. BLS51-4192 typically lists high school or equivalent, no related experience and moderate-term on-the-job training; do not extrapolate a uniform Chinese threshold."
+              "O*NET 51-4192.00 describes this occupation’s tasks and work context. U.S. wages come from OEWS and projections from BLS Table 1.2."
             ]
           },
           "id": "layout-workers-metal-and-plastic.profile.onet-structured-fields-block.7",
           "source_refs": [
             "onet-details",
-            "bls-projections"
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7544,7 +7554,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: This round obtained no occupational generative AI adoption rate or measured efficiency gains. Organization can be trialed on fictional drawing records, with humans checking units, datums and versions; a CAD list does not demonstrate generative AI. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Insufficient evidence: This round obtained no occupational generative AI adoption rate or measured efficiency gains. Organization can be trialed on fictional drawing records, with humans checking units, datums and versions; a CAD list does not demonstrate generative AI."
             ]
           },
           "id": "layout-workers-metal-and-plastic.ai-impact.ai-impact-table.2",
@@ -7737,7 +7747,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. wage reference | Exact occupation 51-4192, with BLS2025 wages presented by O*NET; do not fill gaps using the metal/plastic-worker parent category or other OOH roles."
+              "O*NET displays the May 2025 BLS OEWS national wages for U.S. occupation 51-4192."
             ]
           },
           "fact_refs": [
@@ -7754,7 +7764,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This round's O*NET details and exact BLS row verified 2025 median annual pay of USD 63,870 and median hourly pay of USD 30.71. The complete table for originally recorded 2025 P10=39,980 / P90=93,860 was not reacquired this round; P25/P75 is unestablished. The U.S. row on an older 2024 California page cannot serve as 2025 percentiles."
+              "The May 2025 U.S. national median was USD 63,870 a year and USD 30.71 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 39,980, 50,910, 63,870, 79,470, 93,860."
             ]
           },
           "fact_refs": [
@@ -7762,9 +7772,7 @@
           ],
           "id": "layout-workers-metal-and-plastic.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages",
-            "onet-details",
-            "bls-projections"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -8062,12 +8070,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Employer evidence: Specific factories have different training requirements for measuring tools, hoisting, nearby welding and equipment permissions; verify each role. Demonstrate reviewable capabilities rather than merely listing course names."
+              "BLS lists a high school diploma or equivalent and moderate-term on-the-job training as typical preparation. Verify which instruments, references and drawings the employer uses."
             ]
           },
           "id": "layout-workers-metal-and-plastic.path.career-path-block.2",
           "source_refs": [
-            "onet-details"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8119,12 +8127,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Qualification decisions: Practice only with cardboard, paper drawings and nonhazardous measuring tools; operate no real machine tools or sharp-edged metal. Certification, hiring, authorization and sign-off responsibility are different statuses."
+              "Paper exercise “Drawing L: Datum and hole locations.” Fictional drawing V2 places H1 and H2 at 20 and 55 mm from the datum. V1 gives 50 mm for H2. H3 lacks a dimension. Record the revision, spacing between the first two holes and who should confirm H3. In the variant, change only V2’s H2 to 57 mm."
             ]
           },
           "id": "layout-workers-metal-and-plastic.path.career-path-block.6",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8133,12 +8141,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Capability ladder: First learn mechanical drawing, dimensions and tolerances, basic trigonometry, measuring tools and workpiece datums. Advancement rests on reviewable work, not guaranteed years."
+              "Complete both cases and save your first draft. Then open “Paper exercise answer key (open after completing)” in “Frequently asked questions and sources.” Check whether someone can trace the original values, pending items and handoff owner."
             ]
           },
           "id": "layout-workers-metal-and-plastic.path.career-path-block.7",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8183,12 +8191,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Explain employment, growth rate, net change and annual openings separately; do not combine them into an individual employment guarantee."
+              "BLS Table 1.2 (51-4192) shows about 6,200 U.S. jobs in 2025 and projects 5,900 in 2035 (−3.4%), with about 500 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "layout-workers-metal-and-plastic.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-factors"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8303,7 +8311,7 @@
                 ]
               },
               {
-                "answer": "The U.S. occupation's 2025 annual pay at the 90% percentile is USD 93,860.",
+                "answer": "The May 2025 U.S. national median was USD 63,870 a year and USD 30.71 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 39,980, 50,910, 63,870, 79,470, 93,860.",
                 "id": "layout-workers-metal-and-plastic.faq.7",
                 "question": "What is the U.S. pay evidence?",
                 "question_key": "career.faq.layout-workers-metal-and-plastic.us-pay",
@@ -8312,12 +8320,12 @@
                 ]
               },
               {
-                "answer": "Typical U.S. entry education is high school or equivalent, with no related experience and moderate-term on-the-job training.",
+                "answer": "BLS lists a high school diploma or equivalent and moderate-term on-the-job training as typical preparation. Verify which instruments, references and drawings the employer uses.",
                 "id": "layout-workers-metal-and-plastic.faq.8",
                 "question": "What are the entry and training pathways?",
                 "question_key": "career.faq.layout-workers-metal-and-plastic.education-path",
                 "source_refs": [
-                  "onet-details"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8330,12 +8338,12 @@
                 ]
               },
               {
-                "answer": "Programmable processes and equipment integration may replace some layout tasks and improve remaining workers' efficiency, without meaning the occupation disappears in every industry.",
+                "answer": "BLS Table 1.2 (51-4192) shows about 6,200 U.S. jobs in 2025 and projects 5,900 in 2035 (−3.4%), with about 500 openings per year including replacements. Counts are rounded independently.",
                 "id": "layout-workers-metal-and-plastic.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.layout-workers-metal-and-plastic.outlook-transition",
                 "source_refs": [
-                  "bls-factors"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8352,6 +8360,15 @@
                 "id": "layout-workers-metal-and-plastic.faq.boundary",
                 "question": "What are the boundaries of this page's use?",
                 "question_key": "career.faq.layout-workers-metal-and-plastic.boundary"
+              },
+              {
+                "answer": "The original spacing is 35 mm and the variant is 37 mm. Keep the V1 reading and refer H3 to the drawing owner. The paper record does not authorize fabrication.",
+                "id": "layout-workers-metal-and-plastic.faq.paper-exercise",
+                "question": "Paper exercise answer key (open after completing)",
+                "question_key": "career.faq.layout-workers-metal-and-plastic.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -8549,17 +8566,16 @@
                 "url": "https://www.onetonline.org/link/details/51-4192.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Occupation, pay, projections or industrial safety boundaries.",
-                  "Limited to listed markets and occupational definitions."
+                  "The May 2025 U.S. national median was USD 63,870 a year and USD 30.71 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 39,980, 50,910, 63,870, 79,470, 93,860."
                 ],
                 "evidence_type": "official source",
                 "id": "onet-wages",
-                "limitation": "Limited to listed markets and occupational definitions.",
+                "limitation": "National occupational distribution. Local wages and individual offers vary.",
                 "market": "United States",
                 "name": "O*NET National Wages 51-4192.00",
-                "period": "May 2025",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-4192.00"
@@ -8725,21 +8741,32 @@
                 "url": "https://www.onetonline.org/link/summary/51-4192.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Check drawings and calculate dimensions — 75/100; weight=1/3; layout-workers-metal-and-plastic.profile.responsibilities-block.4[0]",
-                  "Locate and verify layout marks — 0/100; weight=1/3; layout-workers-metal-and-plastic.profile.responsibilities-block.4[0]",
-                  "Plan machining sequences and hand over records — 50/100; weight=1/3; layout-workers-metal-and-plastic.profile.responsibilities-block.4[0]"
+                  "BLS Table 1.2 (51-4192) shows about 6,200 U.S. jobs in 2025 and projects 5,900 in 2035 (−3.4%), with about 500 openings per year including replacements. Counts are rounded independently.",
+                  "BLS lists a high school diploma or equivalent and moderate-term on-the-job training as typical preparation. Verify which instruments, references and drawings the employer uses."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "51-4192",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks the paper records only.",
+                "market": "This page",
+                "name": "Drawing L: Datum and hole locations",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "scope": "Paper exercise",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -11090,7 +11117,7 @@
             "item": "layout-workers-metal-and-plastic.source-register.published.1"
           }
         },
-        "note": "Verify O*NET51-4192 tasks / RC/2025 industries and exact BLS projections separately. This round verified median wage 63870/hourly 30.71; original 2025 endpoint percentiles were not reacquired, and 25/75 gaps remain unfilled. NBS manufacturing's two 2025 annual averages are industry context only. BLS industry factors concern programmable equipment; NIST is a risk framework; no measured occupational generative AI adoption exists here. OSHA3170 is 2007 technical guidance and 3120 energy-control material, neither current Chinese law nor occupational accident rates. Shared protected source-template notes retain the scope conflict; body text no longer displays their generic claims."
+        "note": "O*NET describes the tasks, OEWS provides wage estimates, and BLS Table 1.2 provides employment projections."
       },
       "work_context_block": {
         "$item": "layout-workers-metal-and-plastic.profile.work-context-block.5",
@@ -11112,7 +11139,7 @@
     ],
     "path": "/en/career/jobs/layout-workers-metal-and-plastic",
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI tools and human review",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Adjacent occupation comparison",
       "fit": "Fit signals",
@@ -11238,51 +11265,91 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Layout Workers, Metal and Plastic",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "derivation": null,
+        "display_value": "USD 63,870/year",
+        "fact_id": "verified-us-pay",
+        "market": "United States",
+        "measure": "U.S. median annual wage (May 2025)",
+        "occupation_scope": "51-4192",
+        "period": "2025-05",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "−3.4%",
+        "fact_id": "verified-us-growth",
+        "market": "United States",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "51-4192",
+        "period": "2025–2035",
+        "source_refs": [
+          "bls-ep-2025-2035"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "About 6,200 jobs",
+        "fact_id": "verified-us-employment",
+        "market": "United States",
+        "measure": "U.S. employment (2025)",
+        "occupation_scope": "51-4192",
+        "period": "2025",
+        "source_refs": [
+          "bls-ep-2025-2035"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "About 500 per year",
+        "fact_id": "verified-us-openings",
+        "market": "United States",
+        "measure": "U.S. annual openings (2025–2035)",
+        "occupation_scope": "51-4192",
+        "period": "2025–2035",
+        "source_refs": [
+          "bls-ep-2025-2035"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
-    "badges": [],
+    "badges": [
+      "Layout Workers, Metal and Plastic",
+      "Wages and projections use separate tables",
+      "China occupational wage distribution unavailable"
+    ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "verified-us-pay",
         "key": "us_pay",
-        "label": "U.S. pay reference"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "verified-us-growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "verified-us-employment",
         "key": "us_employment",
-        "label": "U.S. employment"
+        "label": "U.S. employment (2025)"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "verified-us-openings",
         "key": "us_openings",
-        "label": "U.S. average annual job openings"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11296,17 +11363,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Layout workers turn layout work into calculations and datum establishment using measuring tools. Assess this career through the work loop, responsibility boundaries, evidence definitions, risk controls and observable entry-level work samples."
+      "text": "Explore layout workers, metal and plastic tasks, U.S. wage percentiles and employment projections, with a paper exercise on checking records."
     },
     "title": {
       "availability": "available",
-      "text": "Layout Worker Career Assessment: Work, Entry and Risk Boundaries"
+      "text": "Layout Workers, Metal and Plastic: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "8d639c1fd515cccf91cdc07122b8345895826a892b534580da691a4eb5f9e6f1",
+  "source_content_sha256": "500b47d13cae87114021c3b75966c76a066535e59274be343cce99a4b4a9394b",
   "subject": {
     "canonical_slug": "layout-workers-metal-and-plastic",
     "name": "Layout Workers, Metal and Plastic",
-    "summary": "Layout workers interpret dimensions from engineering drawings and templates on metal or plastic workpieces, select datums, position workpieces and leave reviewable marks so downstream processing knows where to begin. Assess this career by checking the work loop, responsibility boundaries, evidence definitions, safety risks and observable entry-level work samples."
+    "summary": "Layout workers read drawings, locate reference points and mark positions or outlines on metal or plastic workpieces. They hand off markings and dimensions that downstream workers can verify."
   }
 }

@@ -57,13 +57,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -84,7 +84,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -1572,7 +1572,7 @@
         "status": "pending_mapping"
       },
       "item:bioinformatics-scientists.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:bioinformatics-scientists.sources.source-card.1": {
         "status": "mapped"
@@ -23201,12 +23201,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "职业身份与口径必须分开核对：O*NET 把 19-1029.01（Bioinformatics Scientists）列为 Job Zone Five（需大量准备），学历构成为受访者中 42% 认为需硕士学位、28% 认为需博士学位（页面仅列出这两项）；兴趣代码为 ICR（研究型—常规型—现实型）。同时必须注意：该职业页面的工资、就业与行业数据在 O*NET 页面上明确标注取自父职业 Biological Scientists, All Other（19-1029.00）：地方工资页写明「Wage data for Biological Scientists, All Other.」，就业趋势页写明「Employment data for Biological Scientists, All Other.」。本页据此把工资与就业与行业字段按父职业 19-1029.00 口径发布并逐处标注，不把父职业数值当作本职业独立口径或收入承诺。学历、职业培训、行业认证、雇主任用与岗位授权、数据与系统权限、以及适用法域对人类遗传资源与个人信息与生物安全的要求是不同状态，须按雇主与岗位与法域逐项核验。"
+              "第 09 节 BF-77：核对两版虚构分析交付，写一页给项目复核员的交接。"
             ]
           },
           "id": "bioinformatics-scientists.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "bf77-paper",
             "onet"
           ],
           "type": "prose"
@@ -23216,13 +23216,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以分子生物数据与计算方法与统计推断为核心、并在可复现性与数据合规中交付研究结论的岗位，核心是数据分析与建模、工具与软件开发、结果复核与沟通，而不是对生物学的想象；其美国工资与就业与行业数据命中父职业 19-1029.00 口径并逐处标注；中国大陆侧只以科学研究和技术服务业行业均值作显式代理并标注「非本职业工资」。"
+              "如果你愿意追踪数据来源和版本、解释异常并接受复核，可先试做 BF-77，再比较偏研究设计和偏运行支持的岗位。"
             ]
           },
           "id": "bioinformatics-scientists.quick-decision.fermat-decision-card.7",
           "source_refs": [
             "onet",
-            "onet"
+            "bf77-paper"
           ],
           "type": "prose"
         }
@@ -23290,15 +23290,22 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜89% 认为精确或准确极其重要；81% 每天使用电子邮件（19% 每周一次以上但非每天）；52% 每天有面对面讨论（48% 每周一次以上但非每天）；61% 在决定上有很大自由（12% 有一些、19% 很小）；66% 在确定任务与优先级上有很大自由（19% 很小）；49% 每月一次以上但非每周需要作出决定（20% 每年一次以上但非每月）；33% 与他人多数时间接触（41% 约一半时间）；48% 在一臂距离内与他人工作（24% 略有距离）；29% 认为竞争极其激烈（11% 很激烈、41% 中等）；19% 每天面临时间压力（47% 每周一次以上但非每天、15% 每月一次以上但非每周）；11% 认为错误后果极其严重（51% 较严重、30% 完全不严重）；11% 认为对他人健康与安全承担很高责任（55% 有限、29% 无责任）。\n主要装备与工具｜计算与分析环境：Python 与 R 与 Perl 与 Linux 与 UNIX 与 Bash 与 Git 与 GitHub 与 Docker 与 C 与 C++ 与 Oracle Java 与 JavaScript 与 SQL 与 MySQL 与 The MathWorks MATLAB 与 SAS 与 Microsoft Excel 与 Office software 与 PowerPoint 与 Amazon Web Services 与 Microsoft Azure（O*NET 技术清单 48 项，多数给出出现情况，PostgreSQL2%，Hadoop等缺比例）；软件技能类别另列出分析与科学软件与数据库管理系统与数据查询与开发环境与操作系统与演示与 Web 平台开发软件等 21 类。方法与流程与参数与软件版本须可追溯，并保留数据与代码与运行记录。\n任务节奏｜89% 认为精确或准确极其重要；61% 在决定上有很大自由、66% 在确定任务与优先级上有很大自由；49% 每月一次以上但非每周需要作出决定；19% 每天面临时间压力（47% 每周一次以上但非每天）；50% 认为自动化程度较低（23% 完全不自动化）；21% 认为工作节奏由设备速度决定（72% 认为完全不重要）；30% 持续或几乎持续做重复动作（19% 约一半时间）；30% 持续或几乎持续用双手操作（64% 从不）；长时间坐姿与屏幕工作与长周期分析需要工效安排与间歇与活动。\n协作对象｜与研究人员与实验同事与软件与信息技术人员与临床或转化团队协作；54% 认为与工作组或团队合作极其重要（27% 非常重要、19% 重要）；26% 认为协调或领导他人完成工作极其重要（21% 重要）；36% 认为决定对同事或公司结果为重要影响（26% 轻微影响）；11% 认为对他人健康与安全承担很高责任；48% 在一臂距离内与他人工作。\n合规与安全｜数据分析与工具开发须在机构数据管理与信息安全与科研诚信与伦理授权范围内开展；《中华人民共和国人类遗传资源管理条例》与其实施细则要求按具体数据与活动分别核采集、保藏、国际合作、材料出境与信息对外提供的法定程序，不作所有利用一律批准/备案的结论；《中华人民共和国个人信息保护法》要求处理个人信息遵循合法与正当与必要与诚信原则并对敏感个人信息设更严格要求。本页只陈述适用范围与行为边界，不提供任何规避监管的做法。\n记录与复盘｜数据来源与质控与预处理、方法与流程与参数与软件版本、统计假设与不确定性与偏倚、异常与失败运行与需要复核的部分以及结论与局限需要可追溯；方法变更与人工处理痕迹应如实记录并保留原始数据与代码与运行记录，不得选择性留用或事后修改结果。\n技能与训练｜O*NET 把该职业列为 Job Zone Five（需大量准备）；基本技能标称 10 项，以阅读理解 85 与积极倾听 75 与批判性思维 75 与科学 75 与口语表达 75 与写作 75 与主动学习 72 与数学 72 为主；可迁移技能25项均有分数，较高为复杂问题解决 75 与判断与决策 69 与系统分析 60 与系统评估 56 与时间管理 56 与指导 50 与编程 50；知识33项中29项有分数、4项缺分数，较高为生物学 98 与计算机与电子学 93 与工程与技术 84 与英语语言 84 与数学 82 与化学 74 与教育与培训 53；能力52项均有分数，较高为书面理解 85 与归纳推理 81 与演绎推理 78 与口头理解 78 与书面表达 78 与观念流畅性 75 与信息排序 75 与数学推理 75 与口头表达 75 与独创性 75；工作风格21项有Impact评分，例如求知100、细节92、创新87、适应77、可靠73；这些是职业工作风格描述，不是个人心理测验分数或录用阈值。\n准入与授权｜学历与培训不等于数据获取或结论发布或涉人数据处理的授权；O*NET 新入职教育要求受访回答为新入职教育要求回答硕士42%、博士28%（页面仅列出这两项）；该职业属 Job Zone Five，多数岗位要求研究生教育；O*NET 培训页面显示全国登记 4,580 个培训项目，认证页面显示「No certifications were found.」（未发现该职业的国家认证），不等于录用门槛或雇主任命。\n行业与雇主｜O*NET 行业数据（标注取自父职业 19-1029.00）为政府39%、专业科学与技术服务 34%、教育服务 11%、其他行业（含制造业）16%；常见雇主为科研院所与高校与研究型医院与生物技术与制药企业与测序与生物信息服务平台。"
+              "工作环境｜89% 认为精确或准确极其重要；81% 每天使用电子邮件（19% 每周一次以上但非每天）；52% 每天有面对面讨论（48% 每周一次以上但非每天）；61% 在决定上有很大自由（12% 有一些、19% 很小）；66% 在确定任务与优先级上有很大自由（19% 很小）；49% 每月一次以上但非每周需要作出决定（20% 每年一次以上但非每月）；33% 与他人多数时间接触（41% 约一半时间）；48% 在一臂距离内与他人工作（24% 略有距离）；29% 认为竞争极其激烈（11% 很激烈、41% 中等）；19% 每天面临时间压力（47% 每周一次以上但非每天、15% 每月一次以上但非每周）；11% 认为错误后果极其严重（51% 较严重、30% 完全不严重）；11% 认为对他人健康与安全承担很高责任（55% 有限、29% 无责任）。\n主要装备与工具｜计算与分析环境：Python 与 R 与 Perl 与 Linux 与 UNIX 与 Bash 与 Git 与 GitHub 与 Docker 与 C 与 C++ 与 Oracle Java 与 JavaScript 与 SQL 与 MySQL 与 The MathWorks MATLAB 与 SAS 与 Microsoft Excel 与 Office software 与 PowerPoint 与 Amazon Web Services 与 Microsoft Azure（O*NET 技术清单 48 项，多数给出出现情况，PostgreSQL2%，Hadoop等缺比例）；软件技能类别另列出分析与科学软件与数据库管理系统与数据查询与开发环境与操作系统与演示与 Web 平台开发软件等 21 类。方法与流程与参数与软件版本须可追溯，并保留数据与代码与运行记录。\n任务节奏｜89% 认为精确或准确极其重要；61% 在决定上有很大自由、66% 在确定任务与优先级上有很大自由；49% 每月一次以上但非每周需要作出决定；19% 每天面临时间压力（47% 每周一次以上但非每天）；50% 认为自动化程度较低（23% 完全不自动化）；21% 认为工作节奏由设备速度决定（72% 认为完全不重要）；30% 持续或几乎持续做重复动作（19% 约一半时间）；30% 持续或几乎持续用双手操作（64% 从不）；长时间坐姿与屏幕工作与长周期分析需要工效安排与间歇与活动。\n协作对象｜与研究人员与实验同事与软件与信息技术人员与临床或转化团队协作；54% 认为与工作组或团队合作极其重要（27% 非常重要、19% 重要）；26% 认为协调或领导他人完成工作极其重要（21% 重要）；36% 认为决定对同事或公司结果为重要影响（26% 轻微影响）；11% 认为对他人健康与安全承担很高责任；48% 在一臂距离内与他人工作。\n合规与安全｜数据分析与工具开发须在机构数据管理与信息安全与科研诚信与伦理授权范围内开展；《中华人民共和国人类遗传资源管理条例》与其实施细则要求按具体数据与活动分别核采集、保藏、国际合作、材料出境与信息对外提供的法定程序，不作所有利用一律批准/备案的结论；《中华人民共和国个人信息保护法》要求处理个人信息遵循合法与正当与必要与诚信原则并对敏感个人信息设更严格要求。本页只陈述适用范围与行为边界，不提供任何规避监管的做法。\n记录与复盘｜数据来源与质控与预处理、方法与流程与参数与软件版本、统计假设与不确定性与偏倚、异常与失败运行与需要复核的部分以及结论与局限需要可追溯；方法变更与人工处理痕迹应如实记录并保留原始数据与代码与运行记录，不得选择性留用或事后修改结果。\n技能与训练｜O*NET 把该职业列为 Job Zone Five（需大量准备）；基本技能标称 10 项，以阅读理解 85 与积极倾听 75 与批判性思维 75 与科学 75 与口语表达 75 与写作 75 与主动学习 72 与数学 72 为主；可迁移技能25项均有分数，较高为复杂问题解决 75 与判断与决策 69 与系统分析 60 与系统评估 56 与时间管理 56 与指导 50 与编程 50；知识33项中29项有分数、4项缺分数，较高为生物学 98 与计算机与电子学 93 与工程与技术 84 与英语语言 84 与数学 82 与化学 74 与教育与培训 53；能力52项均有分数，较高为书面理解 85 与归纳推理 81 与演绎推理 78 与口头理解 78 与书面表达 78 与观念流畅性 75 与信息排序 75 与数学推理 75 与口头表达 75 与独创性 75；工作风格21项有Impact评分，例如求知100、细节92、创新87、适应77、可靠73；这些是职业工作风格描述，不是个人心理测验分数或录用阈值。\n准入与授权｜先按实际任务看招聘。成都样本同组科学家要求相关博士，助理要求硕士及以上；广州分析师／助理接受本科及以上，另核分析能力。O*NET 把美国细分职业列为 Job Zone Five；BLS 的典型学士来自美国上位组，不等于细分科学家门槛。 O*NET 新聘教育问项显示硕士 42%、博士 28%；训练目录显示 4,580 项，关联证书目录未返回条目。\n行业与雇主｜O*NET 详情明确标注行业数据来自美国上位组其他生物科学家 19-1029。行业子表列政府 39%、专业科学和技术服务 34%、教育 11%、其他 16%，子表未另列年份。不能据此判断生信科学家的独立分布。"
             ]
           },
           "id": "bioinformatics-scientists.profile.work-context-block.1",
           "source_refs": [
+            "hgr-implementation-2023",
+            "hgr-current",
+            "bio-current",
+            "r2-pay-2",
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
+            "nist",
+            "arxiv",
+            "details-current",
             "onet",
             "hr-current",
-            "details-current",
-            "hgr-current",
             "nhc-guidance",
             "pipl-current"
           ],
@@ -23379,7 +23386,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长5%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。"
+              "美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长4.7%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。"
             ]
           },
           "id": "bioinformatics-scientists.profile.onet-structured-fields-block.4",
@@ -23407,13 +23414,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025美国父职业行业分布：政府39%、专业科学与技术服务34%、教育服务11%、其他行业含制造业16%；不是本职业独立或中国分布，也不是行业工资统计。O*NET技术清单列48项软件，来自2025全年美国Lightcast招聘广告。比例为提及软件的本职业唯一广告数/本职业全部唯一广告数：Python60%、R54%、Linux21%、Perl15%、UNIX及AWS各13%、Git/C++/Bash各10%、SQL9%、GitHub8%、Java/Docker各7%、MATLAB/C各6%；PostgreSQL2%，Hadoop等未给比例。不是软件市场份额、GenAI采用率、个人必修清单或全球需求。详细资料另列21类软件。"
+              "O*NET 详情明确标注行业数据来自美国上位组其他生物科学家 19-1029。行业子表列政府 39%、专业科学和技术服务 34%、教育 11%、其他 16%，子表未另列年份。不能据此判断生信科学家的独立分布。 O*NET 美国 2025 年软件招聘提及：Python 60%、R 54%、Linux 21%、Perl 15%。分母为关联该细分职业的唯一职位广告。不是采用率或任职门槛。"
             ]
           },
           "id": "bioinformatics-scientists.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "industry-current",
-            "hr-current"
+            "r2-pay-2",
+            "hr-current",
+            "industry-current"
           ],
           "type": "prose"
         },
@@ -23515,11 +23523,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET19-1029.01（Updated2026）定义：在制药、医疗技术、生物技术、计算生物学、蛋白质组学、计算机信息科学、生物学及医学信息学等领域，用生物信息理论与方法研究；可设计数据库、开发算法以处理分析基因组或其他生物信息。与研究人员讨论问题及计算策略是任务清单中的一项，不等于完整定义。中国对应岗位须按实际任务核对。"
+              "生物信息学科学家用计算和统计方法研究基因组、转录组等生物数据。日常工作包括定义问题、选择数据和方法、复核异常、记录版本、解释结果与限制。科学家通常更侧重研究设计与解释；技术支持岗可能更侧重运行与维护，具体看招聘。"
             ]
           },
           "id": "bioinformatics-scientists.profile.definition-block.11",
           "source_refs": [
+            "onet",
             "onet-current",
             "details-current",
             "editor"
@@ -23662,7 +23671,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "学历、职业培训、行业认证、雇主任用与岗位授权、数据与系统与算力权限、以及适用法域对人类遗传资源与个人信息与生物安全的规范要求是不同状态：学历与培训结业不带来数据获取或结论发布或涉人数据处理的权限；须按雇主与岗位与法域逐项核验；本页的工资与就业与行业数据命中父职业 Biological Scientists, All Other（19-1029.00）口径并逐处标注；中国大陆侧提供科学研究和技术服务业行业及人员大类宽口径参照并标注「非本职业工资」。"
+              "学历、职业培训、行业认证、雇主任用与岗位授权、数据与系统与算力权限、以及适用法域对人类遗传资源与个人信息与生物安全的规范要求是不同状态：学历与培训结业不带来数据获取或结论发布或涉人数据处理的权限；须按雇主与岗位与法域逐项核验；本页的工资与就业数据命中上位职业 Biological Scientists, All Other（19-1029.00）口径并逐处标注；中国大陆侧提供科学研究和技术服务业行业及人员大类宽口径参照并标注「非本职业工资」。"
             ]
           },
           "id": "bioinformatics-scientists.profile.career-quick-answers-block.21",
@@ -23710,7 +23719,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧为 O*NET 19-1029.01（Bioinformatics Scientists）：身份与任务与工作情境为本职业精确口径，但工资、就业与行业数据在 O*NET 页面上明确标注取自父职业 Biological Scientists, All Other（19-1029.00）（地方工资页与就业趋势页均有该标注）；本页按父职业口径发布工资与就业与行业字段并逐处标注。中国大陆侧按本页证据口径（暂无可安全使用的数据、处理说明「以科学研究和技术服务业行业均值作显式代理」）只以该行业均值作显式代理并逐处标注「非本职业工资」；比较时应先辨认岗位属于数据分析与生物信息平台、算法与工具开发、临床与转化数据、还是多组学与人群队列场景，再核对数据与系统权限与合规边界。"
+              "美国侧为 O*NET 19-1029.01（Bioinformatics Scientists）：身份与任务与工作情境为本职业精确口径，但工资、就业数据在 O*NET 页面上明确标注取自上位职业 Biological Scientists, All Other（19-1029.00）（地方工资页与就业趋势页均有该标注）；本页按父职业口径发布工资与就业与行业字段并逐处标注。中国大陆侧按本页证据口径（暂无可安全使用的数据、处理说明「以科学研究和技术服务业行业均值作显式代理」）只以该行业均值作显式代理并逐处标注「非本职业工资」；比较时应先辨认岗位属于数据分析与生物信息平台、算法与工具开发、临床与转化数据、还是多组学与人群队列场景，再核对数据与系统权限与合规边界。"
             ]
           },
           "id": "bioinformatics-scientists.profile.career-quick-answers-block.24",
@@ -23964,7 +23973,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表把生物信息学科学家与五条相邻方向放在同一组维度上比较：职业方向、核心工作与产出、关键区别，以及每种偏好更适合的选择。"
+              "下表把生物信息学科学家与六条相邻方向放在同一组维度上比较：职业方向、核心工作与产出、关键区别，以及每种偏好更适合的选择。"
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.10",
@@ -23994,7 +24003,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做业务数据与建模与产品交付，优先比较数据科学家；若你更愿意围绕分子生物数据与生物学问题做分析，则适合本职业。"
+              "若你更愿意做业务数据与建模与产品交付，优先比较数据科学家；若你更愿意围绕分子生物数据与生物学问题做分析，可进一步了解本职业。"
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.12",
@@ -24053,7 +24062,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做临床与试验的统计设计与推断，优先比较生物统计学家；若你更愿意做分子数据的分析与工具开发，则适合本职业。"
+              "若你更愿意做临床与试验的统计设计与推断，优先比较生物统计学家；若你更愿意做分子数据的分析与工具开发，可进一步了解本职业。"
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.16",
@@ -24112,7 +24121,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做通用统计方法与调查与分析，优先比较统计师；若你更愿意做生物数据与算法，则适合本职业。"
+              "若你更愿意做通用统计方法与调查与分析，优先比较统计师；若你更愿意做生物数据与算法，可进一步了解本职业。"
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.20",
@@ -24156,13 +24165,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "数学家以数学理论与证明与模型为主要职责，以形式化推理为主要交付；本职业以数据驱动的生物问题与工程实现为主要交付。"
+              "科学家较常设计问题和方法、解释结果；技术员较常运行既定工具、维护数据库并协助分析。实际职责看岗位。"
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
             "onet",
-            "onet"
+            "adj-15-2099.01"
           ],
           "type": "prose"
         },
@@ -24171,13 +24180,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做数学理论与证明与模型，优先比较数学家；若你更愿意做数据驱动的生物问题，则适合本职业。"
+              "想设计研究并说明结果，可先看科学家；想运行、排错和维护流程，可先比较技术员。"
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
             "onet",
-            "onet"
+            "adj-15-2099.01"
           ],
           "type": "prose"
         },
@@ -24186,13 +24195,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "完成数学理论与证明与模型，产出以论文与证明与模型为主。"
+              "科学家交可复核的分析和解释；技术员交可追踪的运行、数据或维护记录。"
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
             "onet",
-            "onet"
+            "adj-15-2099.01"
           ],
           "type": "prose"
         },
@@ -24201,12 +24210,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "生物信息学科学家和数学家"
+              "生物信息学科学家和生物信息技术员"
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "adj-15-2099.01"
           ],
           "type": "prose"
         },
@@ -24230,7 +24240,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做研究组织与人员与预算管理，优先比较自然科学领域经理；若你更愿意做分析工具与结论，则适合本职业。"
+              "若你更愿意做研究组织与人员与预算管理，优先比较自然科学领域经理；若你更愿意做分析工具与结论，可进一步了解本职业。"
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.28",
@@ -24289,7 +24299,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做实验与机制研究，优先比较生物化学家与生物物理学家；若你更愿意做计算与统计与工具，则适合本职业。"
+              "若你更愿意做实验与机制研究，优先比较生物化学家与生物物理学家；若你更愿意做计算与统计与工具，可进一步了解本职业。"
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.32",
@@ -24386,10 +24396,10 @@
                 "url": "https://www.onetonline.org/link/industry/19-1029.01"
               },
               {
-                "entity": "O*NET 19-1029.01 职业摘要（就业与预测字段）",
+                "entity": "美国 BLS 表 1.2：其他生物科学家 19-1029",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 19-1029.01 地方工资页（父职业 19-1029.00 口径）",
@@ -24428,10 +24438,10 @@
                 "url": "https://www.onetonline.org/link/hot_tech/19-1029.01"
               },
               {
-                "entity": "O*NET 19-1029.01 职业摘要（就业与预测字段）",
+                "entity": "美国 BLS 表 1.2：其他生物科学家 19-1029",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 19-1029.01 培训与教育信息",
@@ -24467,12 +24477,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先在固定虚构材料上练熟提问—获取—分析—复核—复现—交付闭环：给一份虚构研究问题与假设、一份虚构数据集说明、一组虚构分析参数与统计结果与异常记录，按顺序写出方法与数据要求、分析与建模过程、异常与重跑的复核过程、可复现与沟通的写法，再谈岗位；同时核对目标机构的数据与合规与伦理培训与授权安排。"
+              "第 09 节 BF-77：核对两版虚构分析交付，写一页给项目复核员的交接。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
+            "bf77-paper",
             "onet"
           ],
           "type": "prose"
@@ -24496,7 +24506,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把数据清洗与批量流程调度、代码补全与文档与注释生成、文献与数据库检索与汇总、以及图表与报告草稿与结果核对用于提高效率，但研究问题与假设的设定、方法与流程的选择与统计推断、结果与偏倚与生物意义的判断、以及涉及人类遗传资源与个人信息与伦理的处理决定仍由本人与有权限的人员按机构规程与适用法域承担，工具输出必须经人工核对与数据复算后才进入正式结论。"
+              "工具可辅助清理、文献整理和交接草稿。研究人员核对来源、版本、假设和结果限制。发现超出授权，停止自己的处理并记录报告；正式合规判定和发布由获授权的角色或机构负责。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.13",
@@ -24575,11 +24585,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务影响判断：清洗、编码、检索与文档可考虑辅助；方法、数据合规、统计与生物意义仍需负责人员复核。未取得本职业GenAI采用率、时间节省、工资溢价或整体替代证据。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "用虚构资料可以试做字段说明和交接草稿。数据来源、模型假设、异常和结果解释要由负责人员核对。没有核实到本职业的实际采用率、工时节约或替代比例。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.18",
           "source_refs": [
+            "source-fermatmind-ai-rubric",
             "editor",
             "details-current",
             "ilo",
@@ -25138,7 +25149,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长5%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。"
+              "美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长4.7%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.56",
@@ -25198,11 +25209,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国父职业行业分布：政府39%、专业科学与技术服务34%、教育服务11%、其他行业含制造业16%；不是本职业独立或中国分布，也不是行业工资统计。"
+              "O*NET 详情明确标注行业数据来自美国上位组其他生物科学家 19-1029。行业子表列政府 39%、专业科学和技术服务 34%、教育 11%、其他 16%，子表未另列年份。不能据此判断生信科学家的独立分布。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.60",
           "source_refs": [
+            "r2-pay-2",
             "industry-current",
             "editor"
           ],
@@ -25244,11 +25256,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、采用、生产率与就业是不同对象。美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长5%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。"
+              "三项纸面子任务 25、25、0 等权取整为 17%。这是编辑指数，不是采用率、实测工时或替代比例。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.63",
           "source_refs": [
+            "source-fermatmind-ai-rubric",
             "editor",
             "ilo",
             "ep-current"
@@ -25353,11 +25366,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长5%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。"
+              "美国 BLS 上位组其他生物科学家 19-1029：2025 年就业约 59,600，2035 年预计 62,400，增长 4.7%，净增约 2,800，预计年均约 4,300 个空缺（含增长和替补）。基期含 1.5% 自雇，未单列生物信息学科学家。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.70",
           "source_refs": [
+            "ep",
             "ep-current",
             "editor"
           ],
@@ -25771,13 +25785,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "制度与法规资料可借助工具，但合规判断与授权责任仍由本人与机构承担。"
+              "本人核对获准范围，记录并报告疑点。正式合规认定和授权决定由具备权限的人员或机构按程序作出。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
-            "editor"
+            "bio-current",
+            "hgr-current",
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -25891,7 +25906,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "汇总与可视化可借助工具，但结果可用性判断与复核责任仍由本人承担。"
+              "工具可辅助汇总。本人核对记录、版本及限制，按项目职责提交复核。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.105",
@@ -25951,7 +25966,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "归档可借助系统，但完整性与合规性责任仍由本人承担。"
+              "系统可辅助归档；本人按职责核记录完整，正式合规判定交有权限人员。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.109",
@@ -26011,13 +26026,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "写作与可视化可辅助，但表述与发布的合规责任仍由本人与有权限人员承担。"
+              "写作工具可辅助草稿。本人如实说明证据和限制，是否发布由具备权限的角色按程序决定。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
-            "editor"
+            "bio-current",
+            "hgr-current",
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -26026,16 +26042,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断是否涉及人类遗传资源与个人信息与伦理审查等需批准情形。"
+              "先核自己获得的授权；发现可能涉及人遗、个人信息或伦理程序，记录并提交有权限人员。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.114",
           "source_refs": [
-            "onet",
+            "bio-current",
             "hgr-current",
-            "nhc-guidance",
-            "pipl-current",
-            "editor"
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -26044,7 +26058,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "发现涉及未取得伦理审查或数据授权或超范围使用等情形，立即停止相关处理并按机构程序报告与配合调查，不参与也不协助。"
+              "适用的伦理审查或数据授权尚未完成，或工作超出授权时，停止自己相关处理，按机构程序报告。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.115",
@@ -26074,13 +26088,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "制度与法规资料可辅助，但合规判断与停止处理与报告的决定仍由本人与有权限人员承担。本页不提供任何规避监管的做法。"
+              "本人停止超出授权的处理，记录并报告。正式合规认定和是否继续由具备权限的人员或机构按程序决定。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.117",
           "source_refs": [
-            "onet",
-            "editor"
+            "bio-current",
+            "hgr-current",
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -26106,13 +26121,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "涉及需专门批准的情形，按制度取得批准或备案并完成培训后处理，不具备条件时不开展。"
+              "由有权限的人员按具体活动核对并履行适用的批准、备案或事先报告。明确须批准的活动须获批准。条件未满足时不开展。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.119",
           "source_refs": [
-            "onet",
-            "editor"
+            "bio-current",
+            "hgr-current",
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -26136,13 +26152,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "制度与法规资料可辅助，但是否具备条件与是否开展的处理判断仍由本人与有权限人员承担；本页不提供任何规避监管的做法。"
+              "本人核对自己的培训、职责和授权，记录未解决项。有权限的人员或机构决定适用程序及是否开展。"
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
-            "editor"
+            "bio-current",
+            "hgr-current",
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -26188,7 +26205,7 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 19-1029.01 认证发现（国家认证口径）",
+                "entity": "O*NET 19-1029.01 认证发现（关联证书目录）",
                 "id": "link-10",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localcert/19-1029.01"
@@ -26249,11 +26266,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业中国工资中位、起薪或城市分位。可用匹配宽口径如下。国家统计局2025科学研究和技术服务业宽口径参照：城镇非私营182,064、私营83,560元/年；规模以上企业全部人员173,855、中层及以上管理人员324,177、专业技术人员172,877元/年。根据真实雇主行业与管理/技术职责选用；行业与人员大类税前年平均不等于本职业工资、中位、起薪、城市月薪或个人实发。"
+              "北京大学成都前沿交叉生物技术研究院 2026 年 7 月 13 日公告：何爱彬实验室生物信息学方向研究科学家 1 名，要求相关博士，涉及数据分析框架、算法和模型，列 25–40 万元/年。同一实验室另招生物信息学科研助理 2 名，要求硕士及以上，涉及高通量数据分析和流程维护，列 18–24 万元/年。"
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
+            "pku-chengdu-bioinfo-2026",
             "nbs-current",
             "editor"
           ],
@@ -26264,11 +26282,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮实际读取国家统计局2025工资发布，并复用同版行业与人员大类表。没有取得中国本职业代表性招聘工资样本，不能陈述职业月薪区间。"
+              "这是两家机构的历史公告与原列报价，不代表现时空缺、统一学历门槛、市场工资或到手收入。"
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
+            "pku-chengdu-bioinfo-2026",
             "nbs-current",
             "editor"
           ],
@@ -26279,11 +26298,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "182,064元/年（科学研究和技术服务业，2025 年，城镇非私营单位；行业代理，非本职业工资）"
+              "中科院广州生物医药与健康研究院潘光锦组 2026 年 3 月 13 日公告招 1 名生物信息学分析师／科研助理，接受本科及以上，要求熟悉 Linux、R 或 Python 等、测序数据分析和脚本开发。公告未列具体薪资。"
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
+            "gibh-pan-bioinfo-2026",
             "onet"
           ],
           "type": "prose"
@@ -26293,11 +26313,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该数值为国家统计局 2025 年城镇非私营单位科学研究和技术服务业就业人员年平均工资；它是行业门类均值代理，不是生物信息学科学家的职业中位数，也不代表某地或某机构的实际招聘报价；使用前须核对当地真实招聘与岗位职责与用工形态。"
+              "这是两家机构的历史公告与原列报价，不代表现时空缺、统一学历门槛、市场工资或到手收入。"
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
+            "gibh-pan-bioinfo-2026",
             "onet",
             "nbs-current"
           ],
@@ -26498,12 +26519,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类：本页未取得与 19-1029.01 精确对应的中国大陆公开职业工资条目；《中华人民共和国职业分类大典（2022 年版）》以中类与细类划分职业，生物信息与计算生物学岗位分散在科学研究与技术服务与卫生与教育等序列中，须按用人单位类型与岗位职责辨认。"
+              "未核实到与 O*NET 19-1029.01 精确对应的大陆职业工资。两则招聘按实际雇主、职责和任职条件比较。"
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026"
           ],
           "type": "prose"
         },
@@ -26706,11 +26728,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025美国父职业行业分布：政府39%、专业科学与技术服务34%、教育服务11%、其他行业含制造业16%；不是本职业独立或中国分布，也不是行业工资统计。非中国行业映射。"
+              "O*NET 详情明确标注行业数据来自美国上位组其他生物科学家 19-1029。行业子表列政府 39%、专业科学和技术服务 34%、教育 11%、其他 16%，子表未另列年份。不能据此判断生信科学家的独立分布。"
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
+            "r2-pay-2",
             "industry-current"
           ],
           "type": "prose"
@@ -26734,11 +26757,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025美国父职业行业分布：政府39%、专业科学与技术服务34%、教育服务11%、其他行业含制造业16%；不是本职业独立或中国分布，也不是行业工资统计。"
+              "O*NET 详情明确标注行业数据来自美国上位组其他生物科学家 19-1029。行业子表列政府 39%、专业科学和技术服务 34%、教育 11%、其他 16%，子表未另列年份。不能据此判断生信科学家的独立分布。"
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
+            "r2-pay-2",
             "industry-current"
           ],
           "type": "prose"
@@ -26805,11 +26829,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "场景比较需要机构类型与平台与用工形态一致；本页提供行业及人员大类参照，缺职业级月薪区间。"
+              "未核实到全国职业工资。成都有招聘报价，广州公告未列金额。"
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
             "onet"
           ],
           "type": "prose"
@@ -26847,11 +26873,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未取得中国本职业城市月薪、起薪、分位或实发；匹配行业及人员大类可作宽口径参照，比较时核地区、机构、用工期限、职责与报酬结构。"
+              "这是两家机构的历史公告与原列报价，不代表现时空缺、统一学历门槛、市场工资或到手收入。"
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
             "nbs-current",
             "editor"
           ],
@@ -26905,11 +26933,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可核对的是岗位本身：雇佣形式与项目周期、研究方向与数据与平台类型、是否涉及人类遗传资源与个人信息、是否涉及对外发布与数据开放、以及税前税后与绩效结构；本页不发布职业级薪资数值。"
+              "先按实际任务看招聘。成都样本同组科学家要求相关博士，助理要求硕士及以上；广州分析师／助理接受本科及以上，另核分析能力。O*NET 把美国细分职业列为 Job Zone Five；BLS 的典型学士来自美国上位组，不等于细分科学家门槛。"
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
             "onet",
             "hgr-current",
             "nhc-guidance",
@@ -27202,7 +27232,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "5%（快于平均Faster than average；2025—2035，美国父职业）"
+              "4.7%（快于平均Faster than average；2025—2035，美国父职业）"
             ]
           },
           "id": "bioinformatics-scientists.us-salary.career-snapshot-secondary-locale.21",
@@ -27266,7 +27296,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界（口径）：① 职业身份与任务与工作情境与技能与知识为 O*NET 19-1029.01 本职业精确口径；② 工资、就业与行业数据在 O*NET 页面上明确标注取自父职业 Biological Scientists, All Other（19-1029.00）（地方工资页与就业趋势页均有该标注）；③ 本页按该父职业口径发布工资与就业与行业字段并逐处标注，不把父职业数值当作本职业独立口径或个人收入承诺；④ 中国大陆侧未取得本职业职业级工资条目（暂无可安全使用的数据、处理说明「以科学研究和技术服务业行业均值作显式代理」），本页只以该行业均值作显式代理并标注「非本职业工资」。"
+              "边界（口径）：① 职业身份与任务与工作情境与技能与知识为 O*NET 19-1029.01 本职业精确口径；② 工资、就业数据在 O*NET 页面上明确标注取自上位职业 Biological Scientists, All Other（19-1029.00）（地方工资页与就业趋势页均有该标注）；③ 本页按该父职业口径发布工资与就业与行业字段并逐处标注，不把父职业数值当作本职业独立口径或个人收入承诺；④ 中国大陆侧未取得本职业职业级工资条目（暂无可安全使用的数据、处理说明「以科学研究和技术服务业行业均值作显式代理」），本页只以该行业均值作显式代理并标注「非本职业工资」。"
             ]
           },
           "id": "bioinformatics-scientists.us-salary.career-snapshot-secondary-locale.25",
@@ -27698,7 +27728,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27722,7 +27752,7 @@
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/emotional-intelligence-test"
               },
               {
                 "entity": "数学家",
@@ -28748,7 +28778,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "CareerOneStop关联认证目录本次未发现该职业的国家认证记录；只说明本次目录查询结果，不证明市场上无证书或无需具体岗位授权。"
+              "CareerOneStop关联认证目录本次关联证书目录未返回条目记录；只说明本次目录查询结果，不证明市场上无证书或无需具体岗位授权。"
             ]
           },
           "id": "bioinformatics-scientists.fit.personality-fit-block.63",
@@ -28841,16 +28871,16 @@
                 "url": "https://www.onetonline.org/link/localwages/19-1029.01"
               },
               {
-                "entity": "O*NET 19-1029.01 就业趋势页（父职业口径）",
+                "entity": "美国 BLS 表 1.2：其他生物科学家 19-1029",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "《中华人民共和国人类遗传资源管理条例》（中国政府网公开文本）",
+                "entity": "人类遗传资源管理条例实施细则：第二条",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.gov.cn/zhengce/content/2019-06/10/content_5398829.htm"
+                "url": "https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/fgzc/bmgz/202306/t20230601_186416.html"
               }
             ]
           },
@@ -28886,11 +28916,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：关键风险包括数据获取与分析授权越界、涉人数据与隐私与合规风险、算法与代码与结论不可复现、工具输出与自动生成代码被当成结论、长期屏幕与重复动作与压力负荷，以及对外结论与数据开放越界；控制方式是先在授权的数据与系统与伦理范围内作业并做风险辨识、按规程处理涉人数据并留存记录、如实记录数据与代码与参数与版本与异常、按授权范围交付结论与开放数据，并在超出授权或发现异常时停止并升级。"
+              "先确认数据来源、同意或其他适用依据、允许用途和访问者。大陆涉及中国人类遗传资源时分别看《生物安全法》第55–57条和适用规则，不能仅因删去姓名就自由共享。医学判断和外发授权由具备职责的人员负责。"
             ]
           },
           "id": "bioinformatics-scientists.risk.career-risk-cards.9",
           "source_refs": [
+            "bio-current",
+            "pipl-current",
             "onet"
           ],
           "type": "prose"
@@ -29367,35 +29399,35 @@
                 "生物信息与数据分析岗",
                 "在有监督下按既定流程完成数据质控与分析并记录结果，参与方法复现与结论复核。",
                 "通常看编程与统计基础与方法复现能力与记录质量、按数据与伦理规程作业的规范性、以及与团队沟通与接受复核的态度；数据与系统授权由机构与项目安排决定。",
-                "提交一份含虚构问题与假设与数据集与质控与分析结果与异常复盘的记录，不使用真实涉人数据与项目数据。",
+                "先做 BF-77 的两版核对和纸面交接。实际岗位方法另核。",
                 "先核可识别个人信息、人遗信息及项目合同限制，分别确定处理和发布权限；不将所有项目数据统称敏感个人信息。"
               ],
               [
                 "算法与工具开发岗",
                 "承担分析工具与流程的开发与测试与文档与用户界面改进，与研究人员配合迭代。",
                 "通常看编程与软件工程与算法与测试能力、对可复现与文档与版本管理的要求、以及与研究人员协作与理解需求的能力。",
-                "提交一份含虚构工具设计与你与测试与文档与复现说明的记录。",
+                "先做 BF-77 的两版核对和纸面交接。实际岗位方法另核。",
                 "工具与代码的对外发布与开源须按机构规则；本页不提供任何规避监管的做法。"
               ],
               [
                 "数据平台与工程岗",
                 "承担数据存储与流程编排与算力与权限与审计与数据治理，与分析与临床团队配合保证数据可用与合规。",
                 "通常看工程与系统与信息安全与数据治理能力、对权限与审计与脱敏与合规要求的把握、以及与多团队协作能力。",
-                "提交一份含虚构数据治理与权限与审计与脱敏方案的说明。",
+                "先做 BF-77 的两版核对和纸面交接。实际岗位方法另核。",
                 "数据治理方案须按机构与法域要求执行；不得绕过权限与审计控制。"
               ],
               [
                 "多组学与队列分析岗",
                 "承担多组学数据整合与人群队列分析与统计建模，与研究方配合解释结果与局限。",
                 "通常看多组学与统计与建模能力、对偏倚与混杂与不确定性评估的能力、以及与临床或公共卫生团队协作能力。",
-                "提交一份含虚构多组学或队列分析与偏倚评估与结论局限说明的记录。",
+                "先做 BF-77 的两版核对和纸面交接。实际岗位方法另核。",
                 "人群队列数据涉及个人信息与伦理要求；须按授权范围处理。"
               ],
               [
                 "临床与转化数据岗",
                 "承担临床与转化研究的数据处理与统计支持与资料准备，在监管与伦理框架下交付。",
                 "通常看临床数据与统计与监管要求理解与文档质量、对数据清理与可追溯要求的把握、以及与临床与注册团队协作能力。",
-                "提交一份含虚构临床数据处理与统计支持与文档清单的说明。",
+                "先做 BF-77 的两版核对和纸面交接。实际岗位方法另核。",
                 "临床与监管资料须按机构与法域要求执行；超出授权须升级。"
               ]
             ]
@@ -29424,7 +29456,7 @@
                 "id": "education",
                 "values": [
                   "O*NET2026资料问新入职者所需教育：42%回答硕士、28%博士，页面仅列两项；不是全体现职人员学历构成。Job Zone Five/SVP8及以上为职业准备描述，不能推出个人必须已有某年限经验。4,580项训练目录基于IPEDS2025—26目录及2024—25学位记录，不是实时招生或录用标准；CareerOneStop关联认证目录本次未发现记录，不证明市场上无证书或无需具体岗位授权。",
-                  "O*NET 培训页面显示全国登记 4,580 个培训项目；认证页面显示「No certifications were found.」（未发现该职业的国家认证）。该职业页面的工资、就业与行业数据在 O*NET 页面上明确标注取自父职业 Biological Scientists, All Other（19-1029.00）；本页按该父职业口径发布并逐处标注，就业与预测按父职业口径发布（2025—2035年5%，年均空缺约 4,300）。",
+                  "O*NET 培训页面显示目录展示 4,580 个培训项目；认证页面显示「No certifications were found.」（目录未返回条目）。该职业页面的工资、就业数据在 O*NET 页面上明确标注取自上位职业 Biological Scientists, All Other（19-1029.00）；本页按该父职业口径发布并逐处标注，就业与预测按父职业口径发布（2025—2035年4.7%，年均空缺约 4,300）。",
                   "中国学历与培养要求须核目标机构，本轮没有中国代表性招聘样本或学历分布；不能由美国JobZone推出。国家统计局2025科学研究和技术服务业宽口径参照：城镇非私营182,064、私营83,560元/年；规模以上企业全部人员173,855、中层及以上管理人员324,177、专业技术人员172,877元/年。根据真实雇主行业与管理/技术职责选用；行业与人员大类税前年平均不等于本职业工资、中位、起薪、城市月薪或个人实发。"
                 ]
               },
@@ -29478,42 +29510,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份研究问题与假设说明、一份数据集与质控说明、一组虚构分析与参数与统计结果、一份异常与失败运行记录表。",
-                  "全部材料为虚构，不含真实涉人数据或项目数据或未公开研究成果、真实客户与合作方信息或真实机构内部资料。",
-                  "全部材料与场景为虚构，不得使用真实涉人数据或项目数据或未公开研究成果、真实客户与合作方信息、真实机构内部资料或真实受伦理审查限制的数据。"
+                  "BF-77 虚构分析交付：F1 交接记录要求输入 D4，流程版本 V2。",
+                  "F2 导出记录列 D4，但未记录流程版本。F3 复核栏未签字。题设规定版本证据和复核签字齐全才可标为已复核。",
+                  "变式只改 F2：补入可核的运行元数据，显示 D4 由 V2 处理。F1、F3 不变。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构研究问题写清假设与方法与流程选择依据、数据质控与预处理与参数与版本记录方式、统计假设与结果与不确定性与偏倚评估、异常与重跑与复现过程，以及结论与局限性与需要复核与需要授权的环节。",
-                  "在 90—120 分钟内完成，允许参考公开的方法与统计资料，但不使用真实数据，也不进行任何涉及涉人数据的处理。",
-                  "记录中把研究问题与假设、数据集与质控与预处理、方法与流程与参数与软件版本、统计假设与结果与不确定性与偏倚、异常与重跑与复现与结论与局限性分开书写，并标注需复核的部分。"
+                  "写两版记录。",
+                  "逐项引用 F1–F3。",
+                  "交一页给项目复核员。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先确认研究问题与假设是否明确与数据是否支持拟用的方法，再按流程分析与复现，最后写明结论与未决事项。",
-                  "把问题与假设、数据与质控、方法与流程、统计结果与不确定性、异常与重跑、结论与局限性分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核方法与统计判断与结论与局限性，并保留修改理由。"
+                  "标明可以核对的字段。",
+                  "列出仍待核的事项。",
+                  "先独立判断，再对照两版。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成任何规避监管的做法，也不能替代适用法域与机构伦理与数据管理规定。",
-                  "不得在练习中伪造或修改原始数据与结果，也不得在练习中使用任何真实涉人数据或受伦理审查限制的数据；涉及涉人数据与对外发布的作业须由有权限人员按规程处理。",
-                  "练习不替代适用法域与机构伦理与数据管理规定，也不构成任何规避监管的做法；不得在练习中伪造或修改原始数据与结果，也不得在练习中使用任何真实涉人数据或受伦理审查限制的数据。"
+                  "只用题内纸面材料。",
+                  "无需代码、外部数据或真实样本。",
+                  "不实施真实分析、发布或审核。"
                 ]
               }
             ]
           },
           "id": "bioinformatics-scientists.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "bf77-paper"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "BF-77：两版分析版本核对",
           "type": "cards"
         },
         {
@@ -29524,37 +29556,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：学历、职业培训、行业认证、机构数据与伦理与安全培训、数据与系统与算力授权、涉人数据与伦理审批、结论发布与数据开放授权，以及适用法域对人类遗传资源与个人信息与生物安全的要求。",
-                  "每项都注明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「职业培训」「行业认证」「机构数据与系统授权」「涉人数据与伦理审批」「结论发布与数据开放授权」「数据与代码与记录留存要求」分列，避免混为一谈；并标注本职业工资与就业与行业数据命中父职业 19-1029.00 口径并逐处标注、以及中国大陆侧只以科学研究和技术服务业行业均值作显式代理。"
+                  "标清输入和版本。",
+                  "标清输入和版本。 独立核。",
+                  "标清输入和版本。 写交接。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的分析记录，重点检查问题与假设与方法选择依据、数据与质控与预处理、参数与软件版本、统计假设与结果与不确定性与偏倚、异常与重跑与复现过程与结论与局限性是否与证据一致。",
-                  "把复核意见与修改理由一并保留，作为判断你能否接受复核的证据。"
+                  "分开已有与待核。",
+                  "分开已有与待核。 独立核。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明本次分析的事实与过程与结论、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给同事与导师或负责人复核，并保留复核意见与修改理由。"
+                  "只使用题内材料。",
+                  "只使用题内材料。 独立核。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用分析或检索或代码辅助工具，须注明工具名称与版本、输入与依据与人工修改理由；数据与系统与算力权限须为机构授权。",
-                  "涉人数据与商业数据与代码处理须先取得授权，并记录访问范围、保留期限与销毁与共享限制；不得在授权系统之外保存或传输涉人数据与受限制数据。"
+                  "确认复核接手人。",
+                  "确认复核接手人。 独立核。"
                 ]
               }
             ]
           },
           "id": "bioinformatics-scientists.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "bf77-paper"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29618,59 +29650,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与口径阅读：读 O*NET 19-1029.01 公开资料，写清本职业精确口径与「工资与就业与行业数据标注取自父职业 Biological Scientists, All Other（19-1029.00）」的含义，以及中国大陆侧只以科学研究和技术服务业行业均值作显式代理的证据边界。",
-                  "产出：一页口径与流程对照表，标注每项的来源。"
+                  "理解核对规则。",
+                  "圈出 F1–F3。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "问题与假设练习：为一个虚构研究问题写清可检验的假设与所需数据与合规边界。",
-                  "产出：一份问题与假设与数据要求说明。"
+                  "读原版。",
+                  "列依据。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "数据质控练习：写清数据获取与质控与预处理与缺失与异常处理与记录方式及需要复核的判断。",
-                  "产出：一份数据质控与预处理说明。"
+                  "写原版检查。",
+                  "标待核。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "分析与建模练习：为虚构数据写清方法与流程与参数与版本与统计假设与结果与不确定性。",
-                  "产出：一份分析与建模记录。"
+                  "只替换 F2。",
+                  "写变式检查。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "复现与异常练习：写清运行报错与结果异常的复核与重跑流程与可复现性检查清单。",
-                  "产出：一份复现与异常处理记录。"
+                  "比较两版。",
+                  "写一页交接。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的方法选择与统计判断与结论，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "先提交两版核对和交接。",
+                  "不打开参考。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "展开「BF-77 参考解（交卷后再打开）」。",
+                  "自查输入、版本、复核和接手人。"
                 ]
               }
             ]
           },
           "id": "bioinformatics-scientists.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "bf77-paper"
           ],
-          "title": "七日体验产出",
+          "title": "BF-77 七天试做",
           "type": "timeline"
         },
         {
@@ -29678,13 +29710,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你完成了七日练习并发现自己在提问与质控与分析与管理复现上可持续投入。",
-              "继续：你能接受长周期调试与结果不确定与竞争压力，并愿意按规程记录与接受复核。",
-              "暂停：你只求「跑出显著结果」而不愿追数据与流程与方法版本。",
-              "暂停：你把「先挑结果再补条件」当作可接受的做法。",
-              "换方向：你更愿意做业务数据与建模与产品交付，可比较数据科学家方向。",
-              "换方向：你更愿意做临床与试验的统计设计与推断，可比较生物统计学家方向。",
-              "信息不足：如果你还没有任何有监督的数据分析或流程复现经历，先补这两项再判断。"
+              "继续：愿意核数据与版本。",
+              "继续：会把缺证写出来。",
+              "暂停：不查版本就交。",
+              "暂停：把草稿当批准。",
+              "比较分析研究。",
+              "比较流程支持。",
+              "实际授权另核。"
             ]
           },
           "id": "bioinformatics-scientists.path.seven-day-decision.1",
@@ -29736,10 +29768,10 @@
                 "岗前培训不等于机构的数据与伦理与发布授权。"
               ],
               [
-                "行业认证（国家认证口径）",
+                "行业认证（关联证书目录）",
                 "希望取得第三方能力证明的人",
                 "作为专项能力的第三方证明。",
-                "O*NET 认证页面显示「No certifications were found.」（未发现该职业的国家认证）。",
+                "O*NET 认证页面显示「No certifications were found.」（目录未返回条目）。",
                 "该目录未发现记录；市场证书、费用、准入和续证条件本轮未取得，须核具体发证机构。",
                 "按发证机构安排与证书有效期维护。",
                 "认证是能力证明，不等于执业许可或数据处理授权。"
@@ -29748,7 +29780,7 @@
                 "职业培训与继续教育（方法与工具）",
                 "希望补充方法与工具能力的人",
                 "作为统计与计算与数据工程与合规能力的学习证明。",
-                "O*NET 培训页面显示全国登记 4,580 个培训项目；是否要求取决于雇主与岗位。",
+                "O*NET 培训页面显示目录展示 4,580 个培训项目；是否要求取决于雇主与岗位。",
                 "按培训机构与雇主安排完成课程与考核。",
                 "按机构安排与课程有效期维护。",
                 "培训结业有课程与版本范围限制，不等于数据与发布授权。"
@@ -29794,7 +29826,7 @@
           "data": {
             "paragraphs": [
               "资格边界：学历、职业培训、行业认证、雇主任用、岗位内部的数据与系统与算力与伦理审批与结论发布授权、以及适用法域对人类遗传资源与个人信息与生物安全的要求是不同状态，任何一项都不能由另一项自动推出；数据与系统权限与保存与共享与销毁要求也属于作业前提，不能由学历替代。",
-              "O*NET2026资料问新入职者所需教育：42%回答硕士、28%博士，页面仅列两项；不是全体现职人员学历构成。Job Zone Five/SVP8及以上为职业准备描述，不能推出个人必须已有某年限经验。4,580项训练目录基于IPEDS2025—26目录及2024—25学位记录，不是实时招生或录用标准；CareerOneStop关联认证目录本次未发现记录，不证明市场上无证书或无需具体岗位授权。 美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长5%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。",
+              "O*NET2026资料问新入职者所需教育：42%回答硕士、28%博士，页面仅列两项；不是全体现职人员学历构成。Job Zone Five/SVP8及以上为职业准备描述，不能推出个人必须已有某年限经验。4,580项训练目录基于IPEDS2025—26目录及2024—25学位记录，不是实时招生或录用标准；CareerOneStop关联认证目录本次未发现记录，不证明市场上无证书或无需具体岗位授权。 美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长4.7%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。",
               "人类遗传资源、个人信息、科研伦理及机构权限分别判断。人遗材料与信息范围不同；单纯临床、影像、蛋白质或代谢数据不因名称自动属于人遗信息。具体采集、保藏、国际合作、材料出境与信息对外提供分别核法定程序，不能概括为所有利用一律批准或备案。主管部门职责已转至卫生健康部门。先核数据能否识别自然人，再核医疗健康等敏感信息及处理依据；不是所有生物、商业或项目数据都属敏感个人信息，去标识化也不等于匿名化。具体目的、必要性、保护措施及共享范围须按适用规则确认。 国家统计局2025科学研究和技术服务业宽口径参照：城镇非私营182,064、私营83,560元/年；规模以上企业全部人员173,855、中层及以上管理人员324,177、专业技术人员172,877元/年。根据真实雇主行业与管理/技术职责选用；行业与人员大类税前年平均不等于本职业工资、中位、起薪、城市月薪或个人实发。",
               "操作建议：入职前把「学历／职业培训／行业认证／机构数据与伦理与安全培训／数据与系统与算力授权／涉人数据与伦理审批／结论发布与数据开放授权／数据与代码与记录留存要求」分列成一张表，逐项写明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。"
             ]
@@ -29820,12 +29852,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮没有中国本职业代表性雇主招聘样本；以下机构、名称、用工与能力方向为编辑核对建议，不能据O*NET相邻职业推出中国岗位名称普遍度。实际核雇主实体、职责、学历/经验、数据权限、项目期限、薪酬与培训条件。",
-              "核对清单：岗位属于科研院所、高校、企业研发中心、医院科研平台还是测序与生物信息服务商；用工形态为全职或项目聘用或课题组聘用或博士后；研究方向与数据与平台类型；是否涉及人类遗传资源与个人信息；是否涉及对外发布与数据开放；以及税前税后与绩效与记录留存要求的落地方式。"
+              "北京大学成都前沿交叉生物技术研究院 2026 年 7 月 13 日公告：何爱彬实验室生物信息学方向研究科学家 1 名，要求相关博士，涉及数据分析框架、算法和模型，列 25–40 万元/年。同一实验室另招生物信息学科研助理 2 名，要求硕士及以上，涉及高通量数据分析和流程维护，列 18–24 万元/年。",
+              "中科院广州生物医药与健康研究院潘光锦组 2026 年 3 月 13 日公告招 1 名生物信息学分析师／科研助理，接受本科及以上，要求熟悉 Linux、R 或 Python 等、测序数据分析和脚本开发。公告未列具体薪资。",
+              "这是两家机构的历史公告与原列报价，不代表现时空缺、统一学历门槛、市场工资或到手收入。"
             ]
           },
           "id": "bioinformatics-scientists.path.recruitment-sample.1",
           "source_refs": [
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
             "editor",
             "details-current",
             "nbs-current",
@@ -29833,7 +29868,7 @@
             "nhc-guidance",
             "pipl-current"
           ],
-          "title": "招聘信息核对",
+          "title": "成都与广州两份历史招聘",
           "type": "notice"
         },
         {
@@ -30011,11 +30046,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑路径核对建议：直接回答：O*NET 把 19-1029.01（Bioinformatics Scientists）列为 Job Zone Five（需大量准备），新入职教育要求受访回答为受访者中 42% 认为需硕士学位、28% 认为需博士学位（页面仅列出这两项）；多数岗位要求研究生教育，部分要求博士或其他专业学位。O*NET 培训页面显示全国登记 4,580 个培训项目；认证页面显示「No certifications were found.」（未发现该职业的国家认证）。该职业页面的工资、就业与行业数据在 O*NET 页面上明确标注取自父职业 Biological Scientists, All Other（19-1029.00）；本页按该父职业口径发布并逐处标注。中国大陆侧数据处理受《中华人民共和国人类遗传资源管理条例》与《中华人民共和国个人信息保护法》约束，任何一项都不构成免于法域约束的空间。"
+              "先按实际任务看招聘。成都样本同组科学家要求相关博士，助理要求硕士及以上；广州分析师／助理接受本科及以上，另核分析能力。O*NET 把美国细分职业列为 Job Zone Five；BLS 的典型学士来自美国上位组，不等于细分科学家门槛。"
             ]
           },
           "id": "bioinformatics-scientists.path.career-path-block.20",
           "source_refs": [
+            "onet",
+            "ep",
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
             "editor",
             "details-current",
             "hgr-current",
@@ -30029,7 +30068,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑路径核对建议：资格边界：学历、职业培训、行业认证（该页显示未发现该职业的国家认证）、雇主任用、岗位内部的数据与系统与算力与伦理审批与结论发布授权、以及适用法域对人类遗传资源与个人信息与生物安全的规范要求是不同状态，任何一项都不能由另一项自动推出。同时注意：本页的工资与就业与行业数据命中父职业 19-1029.00 口径并逐处标注，就业与预测按父职业口径发布（2025—2035年5%，年均空缺约 4,300）。中国大陆侧《中华人民共和国个人信息保护法》要求处理个人信息遵循合法与正当与必要与诚信原则并对敏感个人信息设更严格要求。"
+              "编辑路径核对建议：资格边界：学历、职业培训、行业认证（该页显示关联证书目录未返回条目）、雇主任用、岗位内部的数据与系统与算力与伦理审批与结论发布授权、以及适用法域对人类遗传资源与个人信息与生物安全的规范要求是不同状态，任何一项都不能由另一项自动推出。同时注意：本页的工资与就业数据命中上位职业 19-1029.00 口径并逐处标注，就业与预测按父职业口径发布（2025—2035年4.7%，年均空缺约 4,300）。中国大陆侧《中华人民共和国个人信息保护法》要求处理个人信息遵循合法与正当与必要与诚信原则并对敏感个人信息设更严格要求。"
             ]
           },
           "id": "bioinformatics-scientists.path.career-path-block.21",
@@ -30111,7 +30150,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑路径核对建议：用于说明培训与教育信息入口（该页显示全国登记 4,580 个培训项目），不构成录用门槛或授权。"
+              "编辑路径核对建议：用于说明培训与教育信息入口（该页显示目录展示 4,580 个培训项目），不构成录用门槛或授权。"
             ]
           },
           "id": "bioinformatics-scientists.path.career-path-block.26",
@@ -31065,10 +31104,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 19-1029.01 职业摘要（就业与预测字段，父职业口径）",
+                "entity": "美国 BLS 表 1.2：其他生物科学家 19-1029",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 19-1029.01 行业分布（父职业口径）",
@@ -31077,10 +31116,10 @@
                 "url": "https://www.onetonline.org/link/industry/19-1029.01"
               },
               {
-                "entity": "O*NET 19-1029.01 就业趋势页（父职业口径）",
+                "entity": "美国 BLS 表 1.2：其他生物科学家 19-1029",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 19-1029.01 地方工资页（父职业 19-1029.00 口径）",
@@ -31149,11 +31188,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长5%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。"
+              "美国 BLS 上位组其他生物科学家 19-1029：2025 年就业约 59,600，2035 年预计 62,400，增长 4.7%，净增约 2,800，预计年均约 4,300 个空缺（含增长和替补）。基期含 1.5% 自雇，未单列生物信息学科学家。"
             ]
           },
           "id": "bioinformatics-scientists.market-signals.market-signal-card.8",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31191,11 +31231,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页按父职业 19-1029.00 口径给出的在岗人数；该口径不是本职业独立口径，个别机构或区域的招聘需求与全国口径差异可能很大。"
+              "BLS 上位组 2025 基期。与 OEWS 工资调查的就业人数不同。"
             ]
           },
           "id": "bioinformatics-scientists.market-signals.market-signal-card.11",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31289,7 +31330,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长5%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。"
+              "美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长4.7%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。"
             ]
           },
           "id": "bioinformatics-scientists.market-signals.market-signal-card.18",
@@ -31345,11 +31386,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "5%（快于平均）；年均约4,300空缺，均为父职业"
+              "上位组增长 4.7%，年均约 4,300 空缺"
             ]
           },
           "id": "bioinformatics-scientists.market-signals.market-signal-card.22",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31472,11 +31514,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025美国父职业行业分布：政府39%、专业科学与技术服务34%、教育服务11%、其他行业含制造业16%；不是本职业独立或中国分布，也不是行业工资统计。"
+              "O*NET 详情明确标注行业数据来自美国上位组其他生物科学家 19-1029。行业子表列政府 39%、专业科学和技术服务 34%、教育 11%、其他 16%，子表未另列年份。不能据此判断生信科学家的独立分布。"
             ]
           },
           "id": "bioinformatics-scientists.market-signals.market-signal-card.31",
           "source_refs": [
+            "r2-pay-2",
             "industry-current"
           ],
           "type": "prose"
@@ -31486,7 +31529,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长5%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。"
+              "美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长4.7%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。"
             ]
           },
           "id": "bioinformatics-scientists.market-signals.market-signal-card.32",
@@ -31907,16 +31950,23 @@
           "data": {
             "entries": [
               {
-                "answer": "与研究人员协作分析问题并推荐基于技术的方案或确定计算策略，为遗传分析与分子测量等生物学活动提供统计与计算工具，并分析大型分子数据：分析微阵列与基因组序列与蛋白质组等大型分子数据、按研究目标创建新的计算方法与分析工具、为基因表达与基因组注释与结构生物信息学编制数据、通过会议与论文与项目报告沟通研究结果、测试新的与更新的工具与软件、设计并应用包括无监督与有监督机器学习与动态规划等算法、开发新软件或改造既有软件、操作公开与商业或专有基因组与蛋白质组数据库、建立数据模型与数据库、指导应用工具的技术人员与信息技术人员、讲授工具的选择与使用、改进软件与数据库的用户界面、提出改进运行的新系统与流程、编制关于人类基因组的汇总统计，以及创建或修改基于网络的生物信息工具。",
+                "answer": "生物信息学科学家用计算和统计方法研究基因组、转录组等生物数据。日常工作包括定义问题、选择数据和方法、复核异常、记录版本、解释结果与限制。科学家通常更侧重研究设计与解释；技术支持岗可能更侧重运行与维护，具体看招聘。",
                 "id": "bioinformatics-scientists.faq.1",
                 "question": "生物信息学科学家每天做什么？",
-                "question_key": "career.faq.bioinformatics-scientists.1"
+                "question_key": "career.faq.bioinformatics-scientists.1",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "关键风险包括数据获取与分析授权越界、涉人数据与隐私与合规风险、算法与代码与结论不可复现、工具输出与自动生成代码被当成结论、长期屏幕与重复动作与压力负荷，以及对外结论与数据开放越界；控制方式是先在授权的数据与系统与伦理范围内作业并做风险辨识、按规程处理涉人数据并留存记录、如实记录数据与代码与参数与版本与异常、按授权范围交付结论与开放数据、并在超出授权或发现异常时停止并升级。",
+                "answer": "先确认数据来源、同意或其他适用依据、允许用途和访问者。大陆涉及中国人类遗传资源时分别看《生物安全法》第55–57条和适用规则，不能仅因删去姓名就自由共享。医学判断和外发授权由具备职责的人员负责。",
                 "id": "bioinformatics-scientists.faq.2",
                 "question": "这份工作最需要提前注意什么风险？",
-                "question_key": "career.faq.bioinformatics-scientists.2"
+                "question_key": "career.faq.bioinformatics-scientists.2",
+                "source_refs": [
+                  "bio-current",
+                  "pipl-current"
+                ]
               },
               {
                 "answer": "看可复核的产出：能否把研究问题拆成可检验的假设并选择合适的方法、能否按流程质控与分析并记录参数与版本、能否在数据异常或结果与预期不符或超出授权时停下来复核并报告。兴趣代码 ICR 与技能与知识分数只说明方向接近，不能替代这些实作证据。",
@@ -31925,22 +31975,36 @@
                 "question_key": "career.faq.bioinformatics-scientists.3"
               },
               {
-                "answer": "AI 与自动化可以改变数据清洗与批量流程调度、代码补全与文档生成、文献与数据库检索与汇总与草稿撰写；但问题与假设设定、方法与流程选择与统计推断、结果与偏倚判断、以及涉人数据与伦理与发布处置决定仍由人承担。任务自动化程度不等于岗位数量变化；官方公开的就业与预测为父职业 19-1029.00 口径。",
+                "answer": "用虚构资料可以试做字段说明和交接草稿。数据来源、模型假设、异常和结果解释要由负责人员核对。没有核实到本职业的实际采用率、工时节约或替代比例。",
                 "id": "bioinformatics-scientists.faq.4",
                 "question": "AI 会改变哪些任务？",
-                "question_key": "career.faq.bioinformatics-scientists.4"
+                "question_key": "career.faq.bioinformatics-scientists.4",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
-                "answer": "问题与假设设定、方法与流程选择与统计推断、结果与偏倚判断、以及涉及人类遗传资源与个人信息与伦理与数据开放与代码发布的处置决定，必须由本人与有权限的人员按适用法域与机构制度承担；工具输出与自动生成代码只能作为可回滚、可复核的辅助环节。",
+                "answer": "个人可提交能复核的分析，注明数据、方法、版本和限制。涉及人遗、个人信息、伦理、数据开放、代码或结果发布的决定，按适用程序由具备权限的人员或机构作出。",
                 "id": "bioinformatics-scientists.faq.5",
                 "question": "哪些环节必须保留人工复核？",
-                "question_key": "career.faq.bioinformatics-scientists.5"
+                "question_key": "career.faq.bioinformatics-scientists.5",
+                "source_refs": [
+                  "bio-current",
+                  "pipl-current",
+                  "hgr-current"
+                ]
               },
               {
-                "answer": "分六类核对：学历（O*NET 学历构成为硕士学位 42%、博士学位 28%，页面仅列出这两项）；职业培训与继续教育（培训页面显示全国登记 4,580 个培训项目）；行业认证（认证页面显示「No certifications were found.」，即未发现该职业的国家认证）；机构数据与伦理与信息安全培训与数据与系统与算力权限；机构内部的数据与伦理审批与结论发布与数据开放授权；以及适用法域对人类遗传资源与个人信息与生物安全的要求。该职业属 Job Zone Five（需大量准备）。任何一项都不能由另一项自动推出。",
+                "answer": "先按实际任务看招聘。成都样本同组科学家要求相关博士，助理要求硕士及以上；广州分析师／助理接受本科及以上，另核分析能力。O*NET 把美国细分职业列为 Job Zone Five；BLS 的典型学士来自美国上位组，不等于细分科学家门槛。",
                 "id": "bioinformatics-scientists.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.bioinformatics-scientists.6"
+                "question_key": "career.faq.bioinformatics-scientists.6",
+                "source_refs": [
+                  "onet",
+                  "ep",
+                  "pku-chengdu-bioinfo-2026",
+                  "gibh-pan-bioinfo-2026"
+                ]
               },
               {
                 "answer": "工作情境显示 89% 认为精确或准确极其重要、81% 每天使用电子邮件、52% 每天有面对面讨论、61% 在决定上有很大自由（12% 有一些、19% 很小）、66% 在确定任务与优先级上有很大自由（19% 很小）、19% 每天面临时间压力（47% 每周一次以上）、29% 认为竞争极其激烈（11% 很激烈、41% 中等）、90% 从不暴露于危险条件、37% 每月一次以上暴露于分散注意或不适的噪音（47% 从不）、30% 持续或几乎持续做重复动作（19% 约一半时间）；长时间坐姿与屏幕与重复性操作需要工效安排与间歇与活动，项目与发表与申报节点会带来阶段性强度上升，应及早报告持续不适。",
@@ -31955,16 +32019,33 @@
                 "question_key": "career.faq.bioinformatics-scientists.8"
               },
               {
-                "answer": "O*NET 就业趋势页按父职业 Biological Scientists, All Other（19-1029.00）口径给出 2024 年在岗 63,700 人、2034 年约 64,500 人（1%，慢于平均）、预测期年均职位空缺约 4,800；该口径不是本职业独立口径，增长与空缺是不同指标、空缺含替代需求。转向可比较生物信息技术员、数据科学家、生物统计学家、统计师、数学家、自然科学领域经理、生物化学家与生物物理学家、遗传学家、微生物学家，但都需要补充相应训练与资质与授权。",
+                "answer": "美国 BLS 上位组其他生物科学家 19-1029：2025 年就业约 59,600，2035 年预计 62,400，增长 4.7%，净增约 2,800，预计年均约 4,300 个空缺（含增长和替补）。基期含 1.5% 自雇，未单列生物信息学科学家。",
                 "id": "bioinformatics-scientists.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.bioinformatics-scientists.9"
+                "question_key": "career.faq.bioinformatics-scientists.9",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
-                "answer": "美国侧 O*NET 地方工资页写明「Wage data for Biological Scientists, All Other.」，即官方页面数值为父职业 19-1029.00 口径；本页按该父职业口径发布 2025 年 BLS 数值并逐处标注（年薪中位数 98,920 美元、时薪中位数 47.56 美元）。中国大陆未取得该职业的职业级工资条目；按本页证据口径（暂无可安全使用的数据、处理说明「以科学研究和技术服务业行业均值作显式代理」），本页只以 2025 年科学研究和技术服务业行业均值作显式代理（城镇非私营单位 182,064 元/年、城镇私营单位 83,560 元/年）并逐处标注「非本职业工资」，不把行业均值写成职业中位数或起薪。两边的职业范围、统计制度、资料期与用工与计酬结构都不同，不能把美元或父职业数值换算成人民币，也不应相信缺少样本与岗位范围的报价。",
+                "answer": "这是两家机构的历史公告与原列报价，不代表现时空缺、统一学历门槛、市场工资或到手收入。",
                 "id": "bioinformatics-scientists.faq.10",
                 "question": "美国工资与中国大陆口径为什么不能互相换算？",
-                "question_key": "career.faq.bioinformatics-scientists.10"
+                "question_key": "career.faq.bioinformatics-scientists.10",
+                "source_refs": [
+                  "nbs",
+                  "pku-chengdu-bioinfo-2026",
+                  "gibh-pan-bioinfo-2026"
+                ]
+              },
+              {
+                "answer": "原版 F1 要求 D4、V2，F2 只能证明 D4，版本待核。变式只改 F2，运行元数据证实 D4 使用 V2。两版都缺 F3 复核签字，交项目复核员。自核：是否区分输入、流程版本、复核签字与接手人？",
+                "id": "bioinformatics-scientists.faq.11",
+                "question": "BF-77 参考解（交卷后再打开）",
+                "question_key": "career.faq.bioinformatics-scientists.q11",
+                "source_refs": [
+                  "bf77-paper"
+                ]
               }
             ]
           },
@@ -32031,11 +32112,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业页面Updated2026；工资2025与预测2025—2035为19-1029.00父职业；广告2025全年；训练IPEDS2025—26/2024—25；中国工资2025行业/人员大类；行业年均历史参照BLS2023。法律条文与2026征求意见稿区分。"
+              "核对日 2026-11-10。BLS 工资为 2025 年，预测期为 2025–2035，两者均为上位组。大陆两份公告保留各自日期。"
             ]
           },
           "id": "bioinformatics-scientists.sources.source-card.3",
           "source_refs": [
+            "ep",
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
             "editor",
             "onet-current",
             "details-current",
@@ -32054,11 +32138,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业任务与结构字段、父职业工资/就业/行业、中国行业工资及编辑建议分别解释；不能混作本职业精确工资、个人门槛或中国趋势。人遗材料/信息、个人信息、伦理及内部权限须分别核。旧Hero/FAQ和原事实依授权未改，其历史期值与本轮九模块有差异，报告登记待处理。"
+              "任务来自 O*NET 细分职业。美国工资与就业、大陆行业均值、历史招聘和虚构练习各自说明不同问题。"
             ]
           },
           "id": "bioinformatics-scientists.sources.source-card.4",
           "source_refs": [
+            "onet",
+            "ep",
+            "nbs",
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
+            "bf77-paper",
             "editor",
             "onet-current",
             "details-current",
@@ -32095,7 +32185,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32146,14 +32236,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "official occupation profile",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "职业页 2026 年更新"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
                 "limitation": "美国职业分类，不直接证明中国岗位序列或资格；该页身份与职责为 19-1029.01 本职业口径，但工资与就业与行业三行明确标注取自父职业 Biological Scientists, All Other（19-1029.00）。",
                 "market": "美国",
                 "name": "O*NET 19-1029.01 职业摘要（生物信息学科学家）",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "period": "职业页 2026 年更新",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/19-1029.01"
@@ -32162,33 +32252,33 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "official occupation details",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "职业页 2026 年更新"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "bls",
                 "limitation": "任务清单描述群体工作，不代表每个岗位都承担全部任务；该页列出 20 项任务并给出重要性分数。",
                 "market": "美国",
                 "name": "O*NET 19-1029.01 详细资料（任务与工作活动）",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "period": "职业页 2026 年更新",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/19-1029.01"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official outlook",
-                  "2024—2034 年；Biological Scientists, All Other 父职业口径；访问 2026-09-16"
+                  "美国 BLS 上位组其他生物科学家 19-1029：2025 年就业约 59,600，2035 年预计 62,400，增长 4.7%，净增约 2,800，预计年均约 4,300 个空缺（含增长和替补）。基期含 1.5% 自雇，未单列生物信息学科学家。",
+                  "上位组，不是生信科学家单项。"
                 ],
-                "evidence_type": "official outlook",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "就业与预测为父职业 Biological Scientists, All Other（19-1029.00）口径，非本职业独立口径；不能外推更宽职业群。",
+                "limitation": "美国 BLS 上位组其他生物科学家 19-1029：2025 年就业约 59,600，2035 年预计 62,400，增长 4.7%，净增约 2,800，预计年均约 4,300 个空缺（含增长和替补）。基期含 1.5% 自雇，未单列生物信息学科学家。",
                 "market": "美国",
-                "name": "O*NET 19-1029.01 职业摘要（就业与预测字段）",
-                "period": "2024—2034 年；Biological Scientists, All Other 父职业口径；访问 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "美国 BLS 表 1.2：其他生物科学家 19-1029",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/summary/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32225,18 +32315,18 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "official administrative regulation",
-                  "2019 年国务院令第 717 号公布、2019-07-01 施行；访问 2026-09-16"
+                  "管理条例第 28 条：信息使用与安全审查。",
+                  "材料和信息的办理条件分别核对。"
                 ],
                 "evidence_type": "official administrative regulation",
                 "id": "cnclass",
-                "limitation": "该条例规范我国人类遗传资源的采集与保藏与利用与对外提供：外国组织与个人及其设立或实际控制的机构不得在我国境内采集与保藏我国人类遗传资源，须与我国科研机构与高校与企业合作并遵守规定；向境外提供我国人类遗传资源须依法办理审批或备案。涉人数据还适用个人信息保护相关法律的一般要求（处理个人信息应遵循合法与正当与必要与诚信原则、对敏感个人信息设更严格要求）。该条例为行政法规，不构成岗位授权；本页只引用其适用范围与行为边界，不提供任何规避监管的做法。",
+                "limitation": "《生物安全法》第56条对列明活动设审批，含中国人类遗传资源材料出境；第57条针对向境外组织、个人或其设立或实际控制的机构提供或开放资源信息，要求向国务院卫生健康主管部门事先报告并提交备份。管理条例第28条也规定外方使用信息的备案及在可能影响公众健康、国家安全和社会公共利益时的安全审查。机构应核对适用条文和程序。",
                 "market": "中国大陆",
-                "name": "《中华人民共和国人类遗传资源管理条例》—— 中国政府网公开文本",
-                "period": "2019 年国务院令第 717 号公布、2019-07-01 施行；访问 2026-09-16",
-                "publisher": "中华人民共和国国务院（中国政府网公开文本）",
-                "scope": "jurisdiction_specific",
-                "url": "https://www.gov.cn/zhengce/content/2019-06/10/content_5398829.htm"
+                "name": "人类遗传资源管理条例（2024 年修订）",
+                "period": "2024",
+                "publisher": "国务院；新吴区政府公开",
+                "scope": "contextual",
+                "url": "https://www.wnd.gov.cn/doc/2024/05/10/4348442.shtml"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32258,14 +32348,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "occupation details",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "职业页 2026 年更新"
                 ],
                 "evidence_type": "occupation details",
                 "id": "facilities",
                 "limitation": "工作情境字段为受访比例，不能推导个人岗位条件；该页列出 57 项工作情境，其中精确性要求与时间压力与竞争与自动化程度与暴露等项按页面的分级回答列出。",
                 "market": "美国",
                 "name": "O*NET 19-1029.01 详细资料（工作情境与工作活动）",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "period": "职业页 2026 年更新",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/19-1029.01"
@@ -32274,14 +32364,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "official outlook",
-                  "2024—2034 年；19-1029.00 父职业口径；访问 2026-09-16"
+                  "2025–2035 年；19-1029.00 父职业口径；访问 2026-09-16"
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
                 "limitation": "为父职业口径的就业与预测，不是本职业独立口径，也不是个人录用概率。",
                 "market": "美国",
                 "name": "O*NET 19-1029.01 职业摘要（就业与预测字段，父职业口径）",
-                "period": "2024—2034 年；19-1029.00 父职业口径；访问 2026-09-16",
+                "period": "2025–2035 年；19-1029.00 父职业口径；访问 2026-09-16",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/summary/19-1029.01"
@@ -32290,14 +32380,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "technology signals",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "2025 年美国 Lightcast 职位广告。"
                 ],
                 "evidence_type": "technology signals",
                 "id": "hr",
-                "limitation": "页面列出 48 项软件技能并按需求标注出现情况（Python 60、R 54、Linux 21、Perl 15、UNIX 13、Amazon Web Services 13、Git 10、C++ 10、Bash 10、SQL 9、GitHub 8、Oracle Java 7、Docker 7、The MathWorks MATLAB 6 等，PostgreSQL 等标注「Not available」）；来源为 Lightcast 招聘公告，未给出比例时不能推断岗位采用率。",
+                "limitation": "美国 2025 年相关职位广告：Python 60%、R 54%、Linux 21%、Perl 15%、PostgreSQL 2%。未列比例的工具不能据此推断使用情况。",
                 "market": "美国",
                 "name": "O*NET 19-1029.01 技术清单（软件技能信号）",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "period": "职业页 2026 年更新",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/19-1029.01"
@@ -32354,14 +32444,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "training information",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "职业页 2026 年更新"
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "页面显示全国登记 4,580 个培训项目；职业准备信息说明该职业属 Job Zone Five，多数岗位要求研究生教育，部分要求博士或其他专业学位；培训信息不构成执业许可或雇主任命。",
+                "limitation": "页面显示目录展示 4,580 个培训项目；职业准备信息说明该职业属 Job Zone Five，多数岗位要求研究生教育，部分要求博士或其他专业学位；培训信息不构成执业许可或雇主任命。",
                 "market": "美国",
                 "name": "O*NET 19-1029.01 培训与教育信息",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "period": "职业页 2026 年更新",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/19-1029.01"
@@ -32370,14 +32460,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "certification information",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "职业页 2026 年更新"
                 ],
                 "evidence_type": "certification information",
                 "id": "arxiv",
-                "limitation": "页面显示「No certifications were found.」（未发现该职业的国家认证）；未发现认证不等于无需雇主或机构的岗位授权，也不构成录用门槛。",
+                "limitation": "页面显示「No certifications were found.」（目录未返回条目）；未发现认证不等于无需雇主或机构的岗位授权，也不构成录用门槛。",
                 "market": "美国",
-                "name": "O*NET 19-1029.01 认证发现（国家认证）",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "name": "O*NET 关联证书目录",
+                "period": "职业页 2026 年更新",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/19-1029.01"
@@ -32386,14 +32476,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "occupation profile",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "职业页 2026 年更新"
                 ],
                 "evidence_type": "occupation profile",
                 "id": "weforum",
                 "limitation": "用于核对官方职责原文「Consult with researchers to analyze problems, recommend technology-based solutions, or determine computational strategies.」。",
                 "market": "美国",
                 "name": "O*NET 19-1029.01 职业摘要（职责原文）",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "period": "职业页 2026 年更新",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/19-1029.01"
@@ -32402,14 +32492,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "occupation details",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "职业页 2026 年更新"
                 ],
                 "evidence_type": "occupation details",
                 "id": "employer",
                 "limitation": "用于基本技能与可迁移技能与知识口径；该页基本技能标称 10 项（阅读理解 85、积极倾听 75、批判性思维 75、科学 75、口语表达 75、写作 75、主动学习 72、数学 72、监控 60、学习策略 50）；可迁移技能标称 25 项，可见分数为复杂问题解决 75 与判断与决策 69 与系统分析 60 与系统评估 56 等；知识标称 33 项，可见分数为生物学 98 与计算机与电子学 93 与工程与技术 84 与英语语言 84 与数学 82 与化学 74。",
                 "market": "美国",
                 "name": "O*NET 19-1029.01 详细资料（技能与知识）",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "period": "职业页 2026 年更新",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/19-1029.01"
@@ -32418,14 +32508,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "occupation profile",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "职业页 2026 年更新"
                 ],
                 "evidence_type": "occupation profile",
                 "id": "purchasing-managers",
                 "limitation": "任务清单描述群体工作；该页列出 20 项任务，按核心任务与补充任务分组并给出重要性分数。",
                 "market": "美国",
                 "name": "O*NET 19-1029.01 职业摘要（任务清单）",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "period": "职业页 2026 年更新",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/19-1029.01"
@@ -32449,66 +32539,50 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "industry distribution",
-                  "2024 年；访问 2026-09-16"
+                  "O*NET 详情明确标注行业数据来自美国上位组其他生物科学家 19-1029。行业子表列政府 39%、专业科学和技术服务 34%、教育 11%、其他 16%，子表未另列年份。不能据此判断生信科学家的独立分布。",
+                  "该子表不提供工资。"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "政府 38%、专业科学与技术服务 34%、教育服务 11%、其他行业（含制造业）17%；摘要页将行业数据标注为取自父职业 Biological Scientists, All Other（19-1029.00）；行业分布描述统计分类，不提供行业工资水平。",
+                "limitation": "O*NET 详情明确标注行业数据来自美国上位组其他生物科学家 19-1029。行业子表列政府 39%、专业科学和技术服务 34%、教育 11%、其他 16%，子表未另列年份。不能据此判断生信科学家的独立分布。",
                 "market": "美国",
                 "name": "O*NET 19-1029.01 行业分布",
-                "period": "2024 年；访问 2026-09-16",
+                "period": "子表未单列年份",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/industry/19-1029.01"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official employment trends",
-                  "2024—2034 年；Biological Scientists, All Other 父职业口径；访问 2026-09-16"
+                  "美国 BLS 上位组其他生物科学家 19-1029：2025 年就业约 59,600，2035 年预计 62,400，增长 4.7%，净增约 2,800，预计年均约 4,300 个空缺（含增长和替补）。基期含 1.5% 自雇，未单列生物信息学科学家。",
+                  "上位组，不是生信科学家单项。"
                 ],
-                "evidence_type": "official employment trends",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
-                "limitation": "页面写明「Employment data for Biological Scientists, All Other.」；2024 年在岗 63,700 人、2034 年约 64,500 人、2024—2034 年 1%（慢于平均 Slower than average）、预测期年均职位空缺约 4,800；为父职业口径，不是本职业独立口径。",
+                "limitation": "美国 BLS 上位组其他生物科学家 19-1029：2025 年就业约 59,600，2035 年预计 62,400，增长 4.7%，净增约 2,800，预计年均约 4,300 个空缺（含增长和替补）。基期含 1.5% 自雇，未单列生物信息学科学家。",
                 "market": "美国",
-                "name": "O*NET 19-1029.01 就业趋势页（父职业口径）",
-                "period": "2024—2034 年；Biological Scientists, All Other 父职业口径；访问 2026-09-16",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "美国 BLS 表 1.2：其他生物科学家 19-1029",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
                 "details": [
                   "occupation profile",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "职业页 2026 年更新"
                 ],
                 "evidence_type": "occupation profile",
                 "id": "census",
                 "limitation": "官方档案提供职业身份与职责描述与样本职位名称；相关职业清单含 Biochemists and Biophysicists、Bioinformatics Technicians、Biostatisticians、Data Scientists、Geneticists、Mathematicians、Microbiologists、Natural Sciences Managers、Statisticians 等；不设定个人胜任阈值。",
                 "market": "美国",
                 "name": "O*NET 19-1029.01 自定义职业档案",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "period": "职业页 2026 年更新",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/19-1029.01"
-              },
-              {
-                "accessed_at": "2026-09-16",
-                "details": [
-                  "official occupation classification reference",
-                  "2022 年版；访问 2026-09-16"
-                ],
-                "evidence_type": "official occupation classification reference",
-                "id": "msresearch",
-                "limitation": "职业分类以中类与细类划分职业；本页未取得与 19-1029.01 精确对应的中国大陆职业工资条目，生物信息与计算生物学岗位分散在科学研究与技术服务与卫生与教育等序列中，须按用人单位类型与岗位职责辨认。该资料为职业分类参考，不建立岗位授权。",
-                "market": "中国大陆",
-                "name": "《中华人民共和国职业分类大典（2022 年版）》相关说明（人力资源和社会保障部）",
-                "period": "2022 年版；访问 2026-09-16",
-                "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "jurisdiction_specific",
-                "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32530,14 +32604,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "occupation details",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "职业页 2026 年更新"
                 ],
                 "evidence_type": "occupation details",
                 "id": "archivists",
                 "limitation": "官方档案仅提供职业身份与职责与领域与工具描述，可用于按行业与兴趣与知识领域检索该职业；不设定个人胜任阈值。",
                 "market": "美国",
                 "name": "O*NET 19-1029.01 详细资料（领域与工具检索）",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "period": "职业页 2026 年更新",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/19-1029.01"
@@ -32575,33 +32649,33 @@
                 "url": "https://www.onetonline.org/link/details/19-1029.01"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official employment trends",
-                  "2025—2035"
+                  "美国 BLS 上位组其他生物科学家 19-1029：2025 年就业约 59,600，2035 年预计 62,400，增长 4.7%，净增约 2,800，预计年均约 4,300 个空缺（含增长和替补）。基期含 1.5% 自雇，未单列生物信息学科学家。",
+                  "上位组，不是生信科学家单项。"
                 ],
-                "evidence_type": "official employment trends",
+                "evidence_type": "primary_document",
                 "id": "ep-current",
-                "limitation": "美国父职业Biological Scientists, All Other（19-1029.00）：2025年就业59,600人，2035年预计62,400人；2025—2035增长5%（Faster than average，快于平均），净增约2,800人，年均职位空缺约4,300（含增长与替换）。不是生物信息学科学家独立规模、中国预测或个人录用率。",
+                "limitation": "美国 BLS 上位组其他生物科学家 19-1029：2025 年就业约 59,600，2035 年预计 62,400，增长 4.7%，净增约 2,800，预计年均约 4,300 个空缺（含增长和替补）。基期含 1.5% 自雇，未单列生物信息学科学家。",
                 "market": "美国",
-                "name": "O*NET当前父职业就业趋势",
-                "period": "2025—2035",
-                "publisher": "O*NET/BLS",
+                "name": "美国 BLS 表 1.2：其他生物科学家 19-1029",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "industry distribution",
-                  "2025"
+                  "O*NET 详情明确标注行业数据来自美国上位组其他生物科学家 19-1029。行业子表列政府 39%、专业科学和技术服务 34%、教育 11%、其他 16%，子表未另列年份。不能据此判断生信科学家的独立分布。",
+                  "该子表不提供工资。"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "industry-current",
-                "limitation": "2025美国父职业行业分布：政府39%、专业科学与技术服务34%、教育服务11%、其他行业含制造业16%；不是本职业独立或中国分布，也不是行业工资统计。",
+                "limitation": "O*NET 详情明确标注行业数据来自美国上位组其他生物科学家 19-1029。行业子表列政府 39%、专业科学和技术服务 34%、教育 11%、其他 16%，子表未另列年份。不能据此判断生信科学家的独立分布。",
                 "market": "美国",
-                "name": "O*NET当前父职业行业分布",
-                "period": "2025",
+                "name": "O*NET 生物信息学行业子表",
+                "period": "子表未单列年份",
                 "publisher": "O*NET/BLS",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/industry/19-1029.01"
@@ -32641,33 +32715,33 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official administrative regulation",
-                  "2024修订"
+                  "管理条例第 28 条：信息使用与安全审查。",
+                  "材料和信息的办理条件分别核对。"
                 ],
                 "evidence_type": "official administrative regulation",
                 "id": "hgr-current",
-                "limitation": "已读第2—4、7—14、21—28条；按活动判断程序。2019原稿主管部门不再代表当前职责。",
+                "limitation": "《生物安全法》第56条对列明活动设审批，含中国人类遗传资源材料出境；第57条针对向境外组织、个人或其设立或实际控制的机构提供或开放资源信息，要求向国务院卫生健康主管部门事先报告并提交备份。管理条例第28条也规定外方使用信息的备案及在可能影响公众健康、国家安全和社会公共利益时的安全审查。机构应核对适用条文和程序。",
                 "market": "中国大陆",
-                "name": "人类遗传资源条例2024修订官方公开文本",
-                "period": "2024修订",
+                "name": "人类遗传资源管理条例（2024 年修订）",
+                "period": "2024",
                 "publisher": "国务院；新吴区政府公开",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.wnd.gov.cn/doc/2024/05/10/4348442.shtml"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official administrative guidance",
-                  "2026-10-09公开指南"
+                  "国家卫生健康委政务服务平台"
                 ],
                 "evidence_type": "official administrative guidance",
                 "id": "nhc-guidance",
-                "limitation": "已读实施主体、无收费和定义/采集活动范围FAQ；包括核酸序列及关联疾病信息，不包括单纯临床、影像、蛋白质或代谢数据。不能将指南当个人证书或判定本项目合规。",
+                "limitation": "用于查办事入口。数据分类参见《人类遗传资源管理条例实施细则》第2条。",
                 "market": "中国大陆",
-                "name": "国家卫健委当前人遗服务系统申报指南",
-                "period": "2026-10-09公开指南",
+                "name": "国家卫生健康委人类遗传资源服务入口",
+                "period": "政务服务入口",
                 "publisher": "国家卫生健康委员会",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://zwfw.nhc.gov.cn/bsp/rlyczyfwxt/"
               },
               {
@@ -32678,12 +32752,12 @@
                 ],
                 "evidence_type": "official national law",
                 "id": "bio-current",
-                "limitation": "中国《生物安全法》2024修正：第34—38条区分研究风险，高/中风险研发须由境内依法成立的法人组织开展并依法批准或备案、风险评估及预案；第42—50条按病原微生物和实验室等级管理。研究风险类别与实验室防护等级不是同一指标，不能把所有生物化学研究写成统一许可事项。该法第55条要求人类遗传资源活动符合伦理；第56条按特定采集、保藏、国际科研合作、材料出境等情形规定卫生健康主管部门审批，并有法定排除与临床试验备案例外；第57条资源信息向境外提供或开放使用须事先报告并提交备份。不是所有样品、所有利用均一律审批，也不能用机构授权替代法定要求。",
+                "limitation": "《生物安全法》第55–57条分别规定人类遗传资源伦理、特定活动审批与例外、以及向境外组织、个人或其设立或实际控制的机构开放或提供资源信息时向国务院卫生健康主管部门事先报告并提交备份。",
                 "market": "中国大陆",
                 "name": "中华人民共和国生物安全法（2024修正）",
                 "period": "2024-04-26修正；原法2021-04-15施行",
                 "publisher": "商务部全球法规网转载法律正文",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=100341"
               },
               {
@@ -32699,7 +32773,7 @@
                 "name": "中华人民共和国个人信息保护法",
                 "period": "2021-11-01施行",
                 "publisher": "中央网信办公布",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
@@ -32715,7 +32789,7 @@
                 "name": "BLS OEWS工资定义与范围",
                 "period": "当前定义；2026-10-09核对",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "wage_scope",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
@@ -32731,7 +32805,7 @@
                 "name": "OSHA电脑工作站作业组织指导",
                 "period": "2026-10-09公开指导",
                 "publisher": "OSHA",
-                "scope": "broad_workplace_reference",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/etools/computer-workstations/work-process"
               },
               {
@@ -32747,7 +32821,7 @@
                 "name": "OSHA电脑工作站环境指导",
                 "period": "2026-10-09公开指导",
                 "publisher": "OSHA",
-                "scope": "broad_workplace_reference",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/etools/computer-workstations/workstation-environment"
               },
               {
@@ -32779,7 +32853,7 @@
                 "name": "O*NET相邻职业：生物信息技术员",
                 "period": "Updated2026；本轮核定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-2099.01"
               },
               {
@@ -32795,7 +32869,7 @@
                 "name": "O*NET相邻职业：数据科学家",
                 "period": "Updated2026；本轮核定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-2051.00"
               },
               {
@@ -32811,7 +32885,7 @@
                 "name": "O*NET相邻职业：生物统计学家",
                 "period": "Updated2026；本轮核定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-2041.01"
               },
               {
@@ -32827,7 +32901,7 @@
                 "name": "O*NET相邻职业：统计师",
                 "period": "Updated2026；本轮核定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-2041.00"
               },
               {
@@ -32843,7 +32917,7 @@
                 "name": "O*NET相邻职业：生物化学家与生物物理学家",
                 "period": "Updated2026；本轮核定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-1021.00"
               },
               {
@@ -32859,7 +32933,7 @@
                 "name": "O*NET相邻职业：遗传学家",
                 "period": "Updated2026；本轮核定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-1029.03"
               },
               {
@@ -32875,7 +32949,7 @@
                 "name": "O*NET相邻职业：微生物学家",
                 "period": "Updated2026；本轮核定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-1022.00"
               },
               {
@@ -32891,25 +32965,85 @@
                 "name": "O*NET相邻职业：自然科学领域经理",
                 "period": "Updated2026；本轮核定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-9121.00"
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "三项纸面子任务 25、25、0 等权取整为 17%。这是编辑指数，不是采用率、实测工时或替代比例。 floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-11-10.",
                   "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "澄清问题与假设｜让分析有依据｜与研究方把问题拆成可检验的假设与可计算的指标，并事先说明方法与数据要求与合规边界。 — 50/100; weight=1/3; bioinformatics-scientists.profile.responsibilities-block.1[0]",
-                  "分析与建模｜让结论可检验｜选择或设计合适的方法与流程并评估不确定性与偏倚，用可复现的方式实现与运行。 — 75/100; weight=1/3; bioinformatics-scientists.profile.responsibilities-block.1[2]",
-                  "复核与复现｜让结果可追溯｜对异常与失败运行先复核与重跑，保留参数与版本与运行记录，而不是先取想要的结果。 — 75/100; weight=1/3; bioinformatics-scientists.profile.responsibilities-block.1[3]"
+                  "数据准备｜整理字段｜可辅助写字段说明，定义、单位和版本须核。 — 25/100; weight=1/3; 本页任务编辑样本",
+                  "复盘准备｜交接草稿｜可整理交接，人员核异常和未解决项。 — 25/100; weight=1/3; 本页任务编辑样本",
+                  "结果审查｜发布决定｜是否发布由负责人员决定。 — 0/100; weight=1/3; 本页任务编辑样本"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "name": "费马 AI 子任务编辑方法",
+                "period": "2026-11-10",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "北京大学成都前沿交叉生物技术研究院 2026 年 7 月 13 日公告：何爱彬实验室生物信息学方向研究科学家 1 名，要求相关博士，涉及数据分析框架、算法和模型，列 25–40 万元/年。同一实验室另招生物信息学科研助理 2 名，要求硕士及以上，涉及高通量数据分析和流程维护，列 18–24 万元/年。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "pku-chengdu-bioinfo-2026",
+                "limitation": "这是两家机构的历史公告与原列报价，不代表现时空缺、统一学历门槛、市场工资或到手收入。",
+                "market": "中国大陆（成都）",
+                "name": "北大成都研究院：生物信息学科学家与助理",
+                "period": "2026-07-13",
+                "publisher": "Peking University Chengdu institute",
+                "scope": "recruitment_proxy",
+                "url": "https://aaib.pku.edu.cn/info/1008/1794.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "中科院广州生物医药与健康研究院潘光锦组 2026 年 3 月 13 日公告招 1 名生物信息学分析师／科研助理，接受本科及以上，要求熟悉 Linux、R 或 Python 等、测序数据分析和脚本开发。公告未列具体薪资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "gibh-pan-bioinfo-2026",
+                "limitation": "这是两家机构的历史公告与原列报价，不代表现时空缺、统一学历门槛、市场工资或到手收入。",
+                "market": "中国大陆（广州）",
+                "name": "中科院广州健康院：生物信息学分析师／科研助理",
+                "period": "2026-03-13",
+                "publisher": "CAS Guangzhou Institutes of Biomedicine and Health",
+                "scope": "recruitment_proxy",
+                "url": "https://gibh.cas.cn/rczp/202603/t20260313_8158954.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "第 09 节 BF-77：核对两版虚构分析交付，写一页给项目复核员的交接。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "bf77-paper",
+                "limitation": "第 09 节 BF-77：核对两版虚构分析交付，写一页给项目复核员的交接。",
+                "market": "虚构练习",
+                "name": "费马 BF-77：两版结果记录和一页交接",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "第二条界定人类遗传资源信息，单纯的临床、影像、蛋白质及代谢数据不计入该项。"
+                ],
+                "evidence_type": "科技部令第21号部门规章",
+                "id": "hgr-implementation-2023",
+                "limitation": "区分数据种类，另核适用规则、个人信息与机构权限。",
+                "market": "中国大陆",
+                "name": "人类遗传资源管理条例实施细则：第二条",
+                "period": "2023",
+                "publisher": "中华人民共和国科学技术部",
+                "scope": "contextual",
+                "url": "https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/fgzc/bmgz/202306/t20230601_186416.html"
               }
             ]
           },
@@ -33036,6 +33170,10 @@
               "entry": "link-5",
               "field": "entity"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-2099.01",
+            "label": "O*NET 生物信息技术员 15-2099.01"
           }
         ],
         "evidence_note": {
@@ -33663,7 +33801,7 @@
             }
           }
         ],
-        "heading": "AI 会取代生物信息学科学家吗？",
+        "heading": "哪些生信分析子任务可试用 AI？",
         "method_cards": [
           {
             "含义": {
@@ -34334,6 +34472,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://aaib.pku.edu.cn/info/1008/1794.htm",
+            "id": "pku-chengdu-bioinfo-2026",
+            "label": "北大成都研究院：生物信息学科学家与助理",
+            "scope": "recruitment_proxy"
+          },
+          {
+            "href": "https://gibh.cas.cn/rczp/202603/t20260313_8158954.html",
+            "id": "gibh-pan-bioinfo-2026",
+            "label": "中科院广州健康院：生物信息学分析师／科研助理",
+            "scope": "recruitment_proxy"
+          },
+          {
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "id": "ep",
+            "label": "美国 BLS 表 1.2：其他生物科学家 19-1029",
+            "scope": "parent_occupation_proxy"
           }
         ],
         "tracks": [
@@ -35429,6 +35585,18 @@
             "id": "work-env",
             "label": "OSHA工作站环境指导",
             "scope": "过强照明/眩光可能引起视疲劳，指导调整照明和屏幕环境；不是本职业发病率或个体医学诊断。"
+          },
+          {
+            "href": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=100341",
+            "id": "bio-current",
+            "label": "中华人民共和国生物安全法（2024修正）",
+            "scope": "jurisdiction_specific"
+          },
+          {
+            "href": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm",
+            "id": "pipl-current",
+            "label": "中华人民共和国个人信息保护法",
+            "scope": "jurisdiction_specific"
           }
         ]
       },
@@ -35436,7 +35604,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "职业口径（中国大陆）",
+              "指标": "成都：研究科学家与科研助理",
               "数值": {
                 "$item": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -35451,7 +35619,7 @@
               }
             },
             {
-              "指标": "行业门类宽口径",
+              "指标": "广州：分析师／科研助理",
               "数值": {
                 "$item": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -36256,7 +36424,7 @@
       },
       "hero": {
         "h1": "生物信息学科学家",
-        "quick_answer": "生物信息学科学家与研究人员协作分析问题并推荐基于技术的方案或确定计算策略，为生物学活动提供统计与计算工具并分析大型分子数据；常见工作包括分析微阵列与基因组序列与蛋白质组等大型分子数据、为基因表达与基因组注释与结构生物信息学编制数据、按研究目标创建新的计算方法与分析工具、设计并应用包括无监督与有监督机器学习与动态规划等算法、开发新软件或改造既有软件、测试新的与更新的生物信息工具与软件、操作公开与商业或专有基因组与蛋白质组数据库、建立数据模型与数据库、改进软件与数据库的用户界面、创建或修改基于网络的生物信息工具、编制关于人类基因组的汇总统计、通过会议与论文与项目报告沟通研究结果、指导应用工具的技术人员与信息技术人员、以及讲授生物信息工具的选择与使用；其工作不等于伦理审查或数据出境或临床结论的批准，也不代替适用法域与主管部门与机构伦理与管理规定对人类遗传资源与个人信息与生物数据管理的规范要求，并在数据来源不合规、涉及涉人数据与跨境传输等需专门批准的情形、或发现结果异常或涉及超出本人授权的情形时停止并升级。",
+        "quick_answer": "生物信息学科学家用计算和统计方法研究基因组、转录组等生物数据。日常工作包括定义问题、选择数据和方法、复核异常、记录版本、解释结果与限制。科学家通常更侧重研究设计与解释；技术支持岗可能更侧重运行与维护，具体看招聘。",
         "title": "生物信息学科学家"
       },
       "market_signal_card": {
@@ -37691,7 +37859,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "大五人格（中文）"
           },
           {
             "href": {
@@ -37721,7 +37889,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "智力与推理（中文）"
+            "label": "IQ（中文）"
           }
         ]
       },
@@ -37829,7 +37997,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与生信分析子任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37853,7 +38021,7 @@
         "market": "美国",
         "measure": "O*NET-SOC 职业代码",
         "occupation_scope": "生物信息学科学家",
-        "period": "O*NET 2025 年更新页面；访问 2026-09-16",
+        "period": "O*NET 职业页 2026 年更新",
         "source_refs": [
           "onet"
         ]
@@ -37919,37 +38087,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "63,700人（2024 年，19-1029.00 父职业口径）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "约 59,600 人",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业规模（父职业口径）",
-        "occupation_scope": "生物信息学科学家",
-        "period": "2024 年；Biological Scientists, All Other 父职业口径；访问 2026-09-16",
+        "occupation_scope": "美国其他生物科学家 19-1029 上位组",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1%（慢于平均，19-1029.00 父职业口径）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "4.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长率（父职业口径）",
-        "occupation_scope": "生物信息学科学家",
-        "period": "2024—2034 年；Biological Scientists, All Other 父职业口径；访问 2026-09-16",
+        "occupation_scope": "美国其他生物科学家 19-1029 上位组",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 4,800（含增长与替换，19-1029.00 父职业口径）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "年均约 4,300 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "预测期年均职位空缺（父职业口径）",
-        "occupation_scope": "生物信息学科学家",
-        "period": "2024—2034 年；Biological Scientists, All Other 父职业口径；访问 2026-09-16",
+        "occupation_scope": "美国其他生物科学家 19-1029 上位组",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -38123,37 +38291,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "63,700人（2024 年，父职业口径）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "约 59,600 人",
         "fact_id": "us-employment-parent",
         "market": "美国",
         "measure": "就业规模（父职业口径）",
-        "occupation_scope": "生物信息学科学家",
-        "period": "2024 年；19-1029.00 父职业口径",
+        "occupation_scope": "美国其他生物科学家 19-1029 上位组",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1%（慢于平均，父职业口径）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "4.7%",
         "fact_id": "us-growth-parent",
         "market": "美国",
         "measure": "就业增长率（父职业口径）",
-        "occupation_scope": "生物信息学科学家",
-        "period": "2024—2034 年；19-1029.00 父职业口径",
+        "occupation_scope": "美国其他生物科学家 19-1029 上位组",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 4,800（含增长与替换，父职业口径）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "年均约 4,300 个",
         "fact_id": "us-openings-parent",
         "market": "美国",
         "measure": "预测期年均职位空缺（父职业口径）",
-        "occupation_scope": "生物信息学科学家",
-        "period": "2024—2034 年；19-1029.00 父职业口径",
+        "occupation_scope": "美国其他生物科学家 19-1029 上位组",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -38172,7 +38340,7 @@
       },
       {
         "derivation": null,
-        "display_value": "5%（快于平均；2025—2035父职业）",
+        "display_value": "4.7%（快于平均；2025—2035父职业）",
         "fact_id": "current-growth-parent",
         "market": "美国",
         "measure": "就业增长率",
@@ -38243,13 +38411,13 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
+        "derivation": "三项纸面子任务 25、25、0 等权取整为 17%。这是编辑指数，不是采用率、实测工时或替代比例。",
+        "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "生物信息学科学家",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "measure": "AI 子任务编辑指数（编辑估算）",
+        "occupation_scope": "三个选定的纸面子任务",
+        "period": "2026-11-10",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -38261,12 +38429,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 子任务编辑指数"
     },
     "badges": [
       "O*NET 19-1029.01 · Job Zone Five（需大量准备）· 学历以研究生教育为主",
       "数据分析与建模 / 工具与软件开发 / 结果复核与沟通",
-      "本职业身份为精确口径 · 工资与就业与行业数据命中父职业 19-1029.00 口径并逐处标注 · 中国大陆薪资按行业代理标记"
+      "本职业身份为精确口径 · 工资与就业数据命中上位职业 19-1029.00 口径并逐处标注 · 中国大陆薪资按行业代理标记"
     ],
     "metrics": [
       {
@@ -38279,19 +38447,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，Biological Scientists, All Other 父职业口径）"
+        "label": "美国上位组增长（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，Biological Scientists, All Other 父职业口径）"
+        "label": "美国上位组就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，Biological Scientists, All Other 父职业口径）"
+        "label": "美国上位组年均空缺（2025–2035）"
       },
       {
         "availability": "missing",
@@ -38305,17 +38473,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "生物信息学科学家做什么、需要哪些学历与准备、美国的收入与前景如何、AI 会改变哪些任务，以及数据获取与分析授权越界、涉人数据与隐私与合规风险、算法与代码与结论不可复现、工具输出被当成结论、长期屏幕与重复动作与压力负荷、以及对外结论与数据开放的边界；保留来源范围与数据缺口。"
+      "text": "看生物信息学科学家的实际分析职责、成都与广州的招聘样本、美国上位职业工资，再试做纸面版本核对。"
     },
     "title": {
       "availability": "available",
       "text": "生物信息学科学家"
     }
   },
-  "source_content_sha256": "4aa890baae903a6424b2f9b5fb1741d387c6cd5053e79131fdd634c3b1fd7d4a",
+  "source_content_sha256": "25a6ad4487ef4a8c2c404080d0be5476eaa95be675ac6902128c7f65e9d25bc3",
   "subject": {
     "canonical_slug": "bioinformatics-scientists",
     "name": "生物信息学科学家",
-    "summary": "生物信息学科学家与研究人员协作分析问题并推荐基于技术的方案或确定计算策略，为遗传分析与分子测量等生物学活动提供统计与计算工具，并分析微阵列与基因组序列与蛋白质组等大型分子数据：创建新的计算方法与分析工具、设计与应用机器学习与动态规划等算法、开发或改造软件、测试工具与软件、操作基因组与蛋白质组数据库、建立数据模型与数据库、改进用户界面、创建或修改基于网络的工具、编制人类基因组汇总统计、沟通研究结果、指导与讲授工具使用。美国侧对应 O*NET 19-1029.01（Bioinformatics Scientists），属 Job Zone Five（需大量准备）；该职业页面的工资、就业与行业数据明确标注取自父职业 Biological Scientists, All Other（19-1029.00），本页按该父职业口径发布工资与就业与行业字段并逐处标注。中国大陆侧本页未取得与该职业精确对应的公开职业工资条目，按证据口径只以科学研究和技术服务业行业均值作显式代理并标注「非本职业工资」，不把行业均值写成职业中位数或起薪；涉人数据处理在中国大陆受《中华人民共和国人类遗传资源管理条例》等规定约束。"
+    "summary": "生物信息学科学家用计算和统计方法研究基因组、转录组等生物数据。日常工作包括定义问题、选择数据和方法、复核异常、记录版本、解释结果与限制。科学家通常更侧重研究设计与解释；技术支持岗可能更侧重运行与维护，具体看招聘。 美国 BLS 上位组其他生物科学家 19-1029：2025 年就业约 59,600，2035 年预计 62,400，增长 4.7%，净增约 2,800，预计年均约 4,300 个空缺（含增长和替补）。基期含 1.5% 自雇，未单列生物信息学科学家。"
   }
 }

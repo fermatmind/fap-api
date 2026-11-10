@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1239,7 +1236,7 @@
         "status": "mapped"
       },
       "item:hazardous-materials-removal-workers.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:hazardous-materials-removal-workers.path.interview-probation.1": {
         "status": "mapped"
@@ -1497,7 +1494,7 @@
         "status": "pending_mapping"
       },
       "item:hazardous-materials-removal-workers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:hazardous-materials-removal-workers.sources.source-card.1": {
         "status": "mapped"
@@ -10834,7 +10831,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10886,7 +10883,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10938,7 +10935,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -24117,7 +24114,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对岗位胜任度的评价，也不构成任何危险材料处理、石棉与铅与放射性或生物危害、受限空间作业、医疗、法律、安全生产或投资意见。本页对应美国 O*NET/SOC 47-4041.00「Hazardous Materials Removal Workers」（危险材料清除工）这一精确职业：识别、清除、包装、运输或处置危险材料，包括石棉、含铅涂料、废油、燃料、传动液、放射性材料或受污染土壤；该职业通常要求危险材料处理的专门培训与认证或受限空间进入许可；可能操作土方设备或卡车。官方范围原文：Identify, remove, pack, transport, or dispose of hazardous materials, including asbestos, lead-based paint, waste oil, fuel, transmission fluid, radioactive materials, or contaminated soil. Specialized training and certification in hazardous materials handling or a confined entry permit are generally required. May operate earth-moving equipment or trucks. O*NET 列出的核心任务包括：使用刮刀与真空设备或高压喷洗器等手工或动力工具从表面清除石棉或铅（重要性 89）；在开始清除或去污作业前搭建围护区（87）；为清除或存放准备危险材料（84）；遵守规定的安全程序或规范废物处置方法的联邦法律（83）；记录处置场存放容器的数量并注明设备类型或所处置废物的数量与种类（78）；使用洗涤剂或溶剂与喷砂设备与过滤泵或蒸汽清洁器清洁受污染设备或区域以便再利用（77）；通过清除受损多孔材料或彻底清洁所有受污染无孔材料来清洁受霉菌污染的区域（75）；操作机器或设备以清除与包装与存放或运输废物载荷（74）；使用起重设备或叉车把材料装入容器或装上卡车（71）；在填埋场或处置中心按正确处置程序对专门危险废物进行分类（70）；使用监测设备识别待清除的石棉与铅或其他危险材料（79）；在涉及危险物质的紧急事件后清除或限制污染（71）；组织或跟踪填埋场中危险物品的位置（66）；驾驶卡车或其他重型设备把受污染废物运往指定的海上或陆上地点（64）；识别或分离可回收或再利用的废品或材料（59）；处理含铅或汞的电子废弃物等电子垃圾（51）；操作起重机移动或装载料篮与料桶或罐体（46）；对危险废物应用生物修复技术以使自然存在的细菌分解有毒物质（45）；把混凝土混合或浇注入模板以包封废物以便处置（27）。常见职位名称包括 Abatement Worker 与 Asbestos Abatement Worker 与 Asbestos Worker 与 Clandestine Laboratory Responder 与 D and D Operator 与 Hazmat Technician 与 Mold Damage Technician 与 Product Disposal Coordinator 与 Waste Handling Technician。本页的工资与就业与行业数字为 O*NET 在 47-4041.00 页面呈现的本职业自身口径，该页未标注取自上或上级职业，并显示 2024—2034 年预测增长为「Slower than average (1% to 2%)」（慢于平均）；口径与边界见下文各板块。"
+              "BLS 表 1.2（美国本职业 47-4041）：2025 年约 52,700 个岗位，2035 年预计约 53,500 个，变化 +1.5%，年均约 4,300 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "hazardous-materials-removal-workers.quick-decision.fit-decision-checklist.1",
@@ -24131,12 +24128,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一份完全虚构的危险材料清除与去污任务包（仅用于练习流程，不代表任何真实场地、物质、客户、机构或数据）。请写出方案草案：（1）如何根据一份虚构的场地与建筑物调查与物质识别与清除范围说明，按结构化思路安排一次危险材料清除作业（物质与范围与量确认、围护与隔离与负压与通风、个人防护与呼吸防护与去污流程、清除与包装与标识与暂存与运输、受限空间与高处与用电与机械边界、清洁验证与废物交接与记录），并写明哪些信息不足需要补充（物质种类与浓度与形态与危害等级、许可与资质与作业票与受限空间许可、防护等级与去污与洗消要求、监测与验证方法与限值、废物包装与运输与处置去向与联单）；（2）如何为一份虚构的清除与监测与废物记录表设计填写与复核要点（字段与单位、物质与区域与点位与量、防护与监测与围护与负压参数、包装与标识与暂存与运输联单、异常与泄漏与处置与上报记录、原始记录与修订留痕）；（3）如何撰写一份可交接的作业说明（范围与物质—方法与防护与围护—监测与验证—废物去向—遗留项与建议）；（4）如何记录与保存作业与监测与防护与废物与培训与资质记录，并区分可披露信息与受控或涉及客户或场所或个人信息的资料；（5）如何在发现物质识别不符或未知物质、防护或围护或负压或监测失效、泄漏或散落或交叉污染、受限空间或高处或用电或机械风险、结论超出本职范围时暂停并复核与上报。使用公开资料与模拟数据作答，不使用任何真实场地数据或个人身份信息。"
+              "到「入行、资格与职业发展」做《Z 表：封签与交接记录》，比对原始记录并写明差异交给谁。"
             ]
           },
           "id": "hazardous-materials-removal-workers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24159,7 +24156,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜O*NET 同时显示（47-4041.00，重要性口径与工作情境百分比响应口径）：获取信息（78）与识别对象、动作与事件（70）与决策与解决问题（68）与检查设备、结构或材料（66）为最高活动；他人健康与安全责任 57% 表示极高、43% 表示高，暴露于污染物 59% 表示每天、暴露于危险条件 45% 表示每天、暴露于危险设备 35% 表示每天、穿戴专业防护装备 69% 表示每天、暴露于轻微烧伤或割伤或咬伤或蜇伤 25% 表示每天、暴露于噪声 31% 表示每天；错误的后果 23% 表示极为严重、11% 表示非常严重、25% 表示严重；工作日程 34% 表示不规律。本职业以石棉与含铅涂料与废油与燃料与传动液与放射性材料与受污染土壤与霉菌与电子废弃物等危险材料与围护与负压与监测与呼吸防护与去污设备为对象，一次物质识别或防护等级或围护或负压或监测失误、一次受限空间或高处或用电或机械操作不当、一次包装或标识或运输或交接不当，都可能造成人身伤害与职业健康损害与环境污染与法律责任。官方范围明确「通常要求危险材料处理的专门培训与认证或受限空间进入许可」，属资格与法域敏感岗位。美国侧本职业 2024—2034 年预测增长为「Slower than average (1% to 2%)」（慢于平均）。若你难以长期在污染物与危险条件下穿戴专业防护作业、难以承受对他人健康与安全的高责任与错误的严重后果，或不愿对许可与资质与记录的真实性承担责任，应把这些作为需要认真权衡的现实成本。"
+              "BLS 表 1.2（美国本职业 47-4041）：2025 年约 52,700 个岗位，2035 年预计约 53,500 个，变化 +1.5%，年均约 4,300 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "hazardous-materials-removal-workers.quick-decision.fermat-decision-card.6",
@@ -24195,7 +24192,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜本页的「危险材料清除工」是 O*NET 47-4041.00（Hazardous Materials Removal Workers）这一精确职业，工作可以分成几类：（一）识别与准备——使用监测设备识别待清除的石棉与铅或其他危险材料，为清除或存放准备危险材料，并在开始清除或去污前搭建围护区；（二）清除与去污——使用刮刀与真空设备或高压喷洗器等手工或动力工具从表面清除石棉或铅，通过清除受损多孔材料或彻底清洁受污染无孔材料清洁受霉菌污染区域，使用洗涤剂或溶剂与喷砂设备与过滤泵或蒸汽清洁器清洁受污染设备或区域以便再利用；（三）包装与装卸与处置——操作机器或设备清除与包装与存放或运输废物载荷，使用起重设备或叉车把材料装入容器或装上卡车，在填埋场或处置中心按正确处置程序分类专门危险废物，组织或跟踪填埋场中危险物品的位置；（四）运输与紧急处置——驾驶卡车或其他重型设备把受污染废物运往指定的海上或陆上地点，在涉及危险物质的紧急事件后清除或限制污染；（五）回收与专项处理——识别或分离可回收或再利用的废品或材料，处理含铅或汞的电子废弃物，操作起重机移动或装载料篮与料桶或罐体，对危险废物应用生物修复技术，把混凝土混合或浇注入模板以包封废物以便处置；（六）记录与合规——遵守规定的安全程序或规范废物处置方法的联邦法律，记录处置场存放容器数量并注明设备类型或所处置废物的数量与种类。工作循环衔接：调查与物质识别—许可与围护与防护准备—清除与去污与清洁—包装与标识与暂存—运输与交接与处置—监测验证与记录与复盘。本页不把该职业与相邻的车辆与设备清洁工、建筑工人、爆破工、公路养护工、保温工、回收与再利用工、回收协调员、可回收材料收集员、化粪池维修员与下水管道清洁工、给排水处理厂与系统操作员混为一谈，也不把危险材料清除岗位的职责扩大到代替物质危害等级判定、许可与方案批准、清洁验证结论与废物最终处置决定的范围。"
+              "危险材料清除作业人员在受管控的项目中识别、移除、装包或交接危险材料。任务取决于材料、场地和岗位训练，项目还会区分样品、人员防护、运输与合规责任。"
             ]
           },
           "id": "hazardous-materials-removal-workers.profile.career-quick-answers-block.1",
@@ -24226,14 +24223,15 @@
               "识别与准备｜监测与围护｜使用监测设备识别待清除的石棉与铅或其他危险材料，为清除或存放准备危险材料，并在作业前搭建围护区。",
               "清除与去污｜手工与动力工具｜使用刮刀与真空设备或高压喷洗器从表面清除石棉或铅，并清洁受霉菌污染区域与被污染设备或区域。",
               "包装与装卸与处置｜容器与起重｜操作机器或设备清除与包装与存放或运输废物载荷，使用起重设备或叉车装料，并按程序在处置场分类危险废物。",
-              "运输与紧急处置｜车辆与现场｜驾驶卡车或其他重型设备运输受污染废物，并在涉及危险物质的紧急事件后清除或限制污染。",
-              "回收与专项处理｜回收与包封｜识别或分离可回收或再利用材料，处理含铅或汞电子废弃物，操作起重机装载料篮与料桶，并应用生物修复或混凝土包封。",
+              "补充任务｜运输与应急｜O*NET 将驾驶重型设备运输污染废物及突发污染后清除列为补充任务。根据项目、培训和授权分配；未承担应急处置职责时，撤离并报告。",
+              "补充任务｜专项项目｜电子废物、起重和生物修复只在相应项目及明确分工中考虑。",
               "记录与合规｜法规与台账｜遵守规定的安全程序与规范废物处置的相关法律，记录容器数量与设备类型与废物数量与种类。"
             ]
           },
           "id": "hazardous-materials-removal-workers.profile.responsibilities-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-hazwoper"
           ],
           "type": "list"
         },
@@ -24284,7 +24282,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "调查与物质识别 → 许可与围护与防护准备 → 清除与去污与清洁 → 包装与标识与暂存 → 运输与交接与处置 → 监测验证与记录与复盘"
+              "接收工单 → 核对分工 → 核对封签和接收记录 → 报告差异 → 协助已分配任务 → 交接记录"
             ]
           },
           "id": "hazardous-materials-removal-workers.profile.career-quick-answers-block.3",
@@ -24298,12 +24296,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆口径与缺口｜中国大陆在石棉与建筑拆除与危险废物与放射性废物与污染场地治理与电子废弃物处理领域存在与危险材料清除工相近的岗位，其作业与设备与许可与防护与环境与安全与职业健康受《中华人民共和国安全生产法》与《中华人民共和国职业病防治法》与《中华人民共和国环境保护法》与《中华人民共和国固体废物污染环境防治法》与《中华人民共和国放射性污染防治法》与《危险化学品安全管理条例》及危险废物与受限空间与辐射与高处作业管理制度约束：危险废物与放射性废物与危险化学品作业须取得相应许可与资质并按规程执行；受限空间与高处与用电与起重作业须按安全要求审批与防护；职业病危害与防护与监护与体检要求按主管机关要求执行。但公开职业统计未建立与美国 O*NET 47-4041.00（危险材料清除工）精确对应的全国职业工资分布：国家统计局按行业门类公布城镇单位就业人员平均工资，属行业口径、不区分职业，也未按本职业单列。按证据政策，本页只登记统计口径与可见缺口（「证据不足：」标记），不使用行业均值、招聘报价或美国工资跨法域外推起薪、中位数或个人收入；中美两套口径的法律环境与统计期间不同，不拼接、不换算。"
+              "中国大陆危险废物标志、台账、经营许可与联单分别核《生态环境法典》第五百三十一、五百三十二、五百三十四和五百三十六条。人员安全培训、现场授权及适用设备资格另核。"
             ]
           },
           "id": "hazardous-materials-removal-workers.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25246,10 +25245,10 @@
                 "url": "https://www.onetonline.org/link/details/47-4041.00"
               },
               {
-                "entity": "O*NET 47-4041.00 详细资料（任务与工作活动）",
+                "entity": "2025 年 5 月美国全国 OEWS 工资原表",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/construction-and-extraction/hazardous-materials-removal-workers.htm"
+                "url": "https://www.onetonline.org/link/localwages/47-4041.00"
               },
               {
                 "entity": "O*NET 47-4041.00 职业范围与工作情境",
@@ -25264,7 +25263,7 @@
                 "url": "https://www.onetonline.org/link/hot_tech/47-4041.00"
               },
               {
-                "entity": "O*NET 47-4041.00 就业趋势（本职业（47-4041.00）自身口径，BLS 就业预测 2024—2034）",
+                "entity": "2025–2035",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
@@ -25478,7 +25477,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜可以把工具用于废物与监测记录整理、台账核对和文档草稿。遥控设备或传感器与生成式 AI 是不同技术；能否用于具体现场须经过机构验证并满足相应作业要求。本页未取得 SOC 47-4041 的 AI 采用率、减少暴露的实测效果或 AI 导致就业变化的因果证据。O*NET 的任务与工作情境用于界定工作；其自动化程度响应不等于 AI 使用率。BLS 2025—2035 就业预测为总体需求背景，不能据此保证职业不被替代。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "直接回答｜可以把工具用于废物与监测记录整理、台账核对和文档草稿。遥控设备或传感器与生成式 AI 是不同技术；能否用于具体现场须经过机构验证并满足相应作业要求。本页未取得 SOC 47-4041 的 AI 采用率、减少暴露的实测效果或 AI 导致就业变化的因果证据。O*NET 的任务与工作情境用于界定工作；其自动化程度响应不等于 AI 使用率。BLS 2025—2035 就业预测为总体需求背景，不能据此保证职业不被替代。"
             ]
           },
           "id": "hazardous-materials-removal-workers.ai-impact.ai-impact-table.18",
@@ -26710,12 +26709,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "运输与紧急处置由本人按规程负责"
+              "运输或应急处置按适用培训、角色和现场授权分配。未承担应急处置职责时，停手、撤离并报告。"
             ]
           },
           "id": "hazardous-materials-removal-workers.ai-impact.ai-impact-table.106",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-hazwoper"
           ],
           "type": "prose"
         },
@@ -26752,12 +26752,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "驾驶车辆运输受污染废物并在紧急事件后清除或限制污染"
+              "按任务核是否授权运输受污染废物。突发污染由相应受训和获授权人员按应急方案处置。"
             ]
           },
           "id": "hazardous-materials-removal-workers.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-hazwoper"
           ],
           "type": "prose"
         },
@@ -26956,12 +26957,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位年薪 38,460 美元（May 2025，SOC 47-4041）"
+              "第 10 分位年薪 38,460 美元，时薪 18.49 美元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26970,12 +26971,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041；边界｜工资为分布位置，非资历或起薪。预测空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-4041.00"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26984,12 +26985,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025第25分位年工资44,720美元；时薪21.50美元"
+              "第 25 分位年薪 44,720 美元，时薪 21.5 美元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26998,12 +26999,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041；边界｜工资为分布位置，非资历或起薪。预测空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-4041.00"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27012,12 +27013,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位年薪 49,450 美元；中位时薪 23.78 美元（May 2025，SOC 47-4041）"
+              "第 50 分位年薪 49,450 美元，时薪 23.78 美元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27026,12 +27027,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041；边界｜工资为分布位置，非资历或起薪。预测空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-4041.00"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27040,12 +27041,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "May2025第75分位年工资61,530美元；时薪29.58美元"
+              "第 75 分位年薪 61,530 美元，时薪 29.58 美元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27054,12 +27055,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041；边界｜工资为分布位置，非资历或起薪。预测空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-4041.00"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27068,12 +27069,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位年薪 82,410 美元（May 2025，SOC 47-4041）"
+              "第 90 分位年薪 82,410 美元，时薪 39.62 美元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27082,12 +27083,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041；边界｜工资为分布位置，非资历或起薪。预测空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-4041.00"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27096,12 +27097,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 年就业约 52,700 人（BLS 就业预测基期）"
+              "约 52,700 个岗位（2025）"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27110,12 +27111,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041；边界｜工资为分布位置，非资历或起薪。预测空缺不等于净新增。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27124,12 +27125,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 增长约 1.5%（OOH 显示四舍五入 2%）"
+              "+1.5%"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27138,12 +27139,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041；边界｜工资为分布位置，非资历或起薪。预测空缺不等于净新增。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27152,12 +27153,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 年均职位空缺约 4,300 个，含增长与替换需求"
+              "预计年均约 4,300 个"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27166,12 +27167,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041；边界｜工资为分布位置，非资历或起薪。预测空缺不等于净新增。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27194,12 +27195,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜本页的危险材料清除工是 O*NET 47-4041.00（Hazardous Materials Removal Workers）这一精确职业：识别、清除、包装、运输或处置危险材料，包括石棉、含铅涂料、废油、燃料、传动液、放射性材料或受污染土壤；该职业通常要求危险材料处理的专门培训与认证或受限空间进入许可；可能操作土方设备或卡车。常见职位名称包括 Abatement Worker 与 Asbestos Worker 与 Hazmat Technician 与 Mold Damage Technician 与 Waste Handling Technician。产出为按规程与许可完成的清除与去污与废物交接与监测记录；上述为美国口径，中国大陆的危险废物与放射性污染与职业健康与环境保护管理制度与统计口径另见本页说明。"
+              "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局表 2、5 给出 2025 年水利、环境和公共设施管理业年平均工资。城镇非私营单位 70,172 元，城镇私营单位 49,527 元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27292,7 +27293,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "危险材料与受限空间与辐射与高处与用电防护培训与认证"
+              "按材料、工序和法域核训练与授权"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.31",
@@ -27474,7 +27475,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜危险材料清除工（O*NET/SOC 47-4041.00 Hazardous Materials Removal Workers；招聘与行业内常称石棉清除工、去污工、危废处理工、危化品处置工、污染场地修复工、退役去污操作工、霉菌治理工、废物处理技术员等；与车辆与设备清洁工、建筑工人、爆破工、公路养护工、保温工、回收与再利用工、回收协调员、可回收材料收集员、化粪池维修员与下水管道清洁工、给排水处理厂与系统操作员分属不同对象与授权层级）"
+              "中国大陆工资参考"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.44",
@@ -27488,12 +27489,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜中国大陆在石棉与建筑拆除与危险废物与放射性废物与污染场地治理与电子废弃物处理领域存在与危险材料清除工相近的岗位，其作业与设备与许可与防护与环境与安全与职业健康受《中华人民共和国安全生产法》与《中华人民共和国职业病防治法》与《中华人民共和国环境保护法》与《中华人民共和国固体废物污染环境防治法》与《中华人民共和国放射性污染防治法》与《危险化学品安全管理条例》及危险废物与受限空间与辐射与高处作业管理制度约束：危险废物与放射性废物与危险化学品作业须取得相应许可与资质并按规程执行；受限空间与高处与用电与起重作业须按安全要求审批与防护；职业病危害与防护与监护与体检要求按主管机关要求执行。但公开职业统计未建立与美国 O*NET 47-4041.00（危险材料清除工）精确对应的全国职业工资分布：国家统计局按行业门类公布城镇单位就业人员平均工资，属行业口径、不区分职业，也未按本职业单列。按证据政策，本页只登记统计口径与可见缺口（「证据不足：」标记），展示缺失而不使用代理数字，不以行业均值、招聘报价、美国工资或境外数据推断起薪、中位数或个人收入，也不把本页美国数值直接当作中国大陆同岗位收入。"
+              "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局表 2、5 给出 2025 年水利、环境和公共设施管理业年平均工资。城镇非私营单位 70,172 元，城镇私营单位 49,527 元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27530,7 +27531,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "薪酬结构说明｜本职业各岗位收入通常与地区与生活成本、项目与物质类型（石棉与铅与霉菌与放射性与危废）、资质与持证（危险材料与受限空间与辐射与危化品资格）、防护等级与作业环境、工时与项目周期与危险作业与应急津贴相关；同类岗位在不同企业与项目下的津贴差异较大；本页不给出任何具体金额，也不提供中国大陆收入估计，避免以个别样本或跨境外推代表整体。"
+              "核具体报价时，向雇主核地区、材料、工序、工时和计薪规则。"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.48",
@@ -27544,12 +27545,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025年 水利、环境和公共设施管理业／城镇非私营单位（行业参考）"
+              "城镇非私营单位 · 水利、环境和公共设施管理业"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27558,12 +27559,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年平均工资 70,172 元/年；行业全体就业人员平均数，不是本职业工资。"
+              "70,172 元/年"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet",
             "nbs-wage-release-2025"
           ],
           "type": "prose"
@@ -27573,26 +27573,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025年 水利、环境和公共设施管理业／城镇私营单位（行业参考）"
+              "城镇私营单位 · 水利、环境和公共设施管理业"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "年平均工资 49,527 元/年；行业全体就业人员平均数，不是本职业工资。"
-            ]
-          },
-          "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.52",
-          "source_refs": [
-            "onet",
             "nbs-wage-release-2025"
           ],
           "type": "prose"
@@ -27602,12 +27587,26 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆本职业精确全国职业工资"
+              "49,527 元/年"
+            ]
+          },
+          "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.52",
+          "source_refs": [
+            "nbs-wage-release-2025"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "城镇非私营单位 · 全行业"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27616,12 +27615,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国大陆与美国 O*NET 47-4041.00（危险材料清除工）精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "129,441 元/年"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27630,12 +27629,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜本页为 O*NET 47-4041.00（危险材料清除工）这一精确职业，与车辆与设备清洁工（53-7061.00）、建筑工人（47-2061.00）、爆破工（47-5032.00）、公路养护工（47-4051.00）、保温工（47-2131.00）、回收与再利用工（53-7062.04）、回收协调员（53-1042.01）、可回收材料收集员（53-7081.00）、化粪池维修员与下水管道清洁工（47-4071.00）、给排水处理厂与系统操作员（51-8031.00）分属不同对象与授权层级。国际职业分类（如 ISCO-08）只能说明危险材料与废物处理类岗位的宽泛位置，不能替代美国 SOC 或中国大陆的资质与职业分类与统计口径。中国大陆由安全生产与危险废物与放射性污染与职业病防治制度界定的岗位边界与本页美国职业不是精确一一对应（尤其危险废物与放射性作业存在法定许可与资质要求），两者统计口径与法律环境不同，不做数值换算。"
+              "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局表 2、5 给出 2025 年水利、环境和公共设施管理业年平均工资。城镇非私营单位 70,172 元，城镇私营单位 49,527 元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27694,12 +27693,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH May 2025工资及2025—2035预测｜https://www.bls.gov/ooh/construction-and-extraction/hazardous-materials-removal-workers.htm；BLS就业预测原表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS工资方法｜https://www.bls.gov/news.release/archives/ocwage_05152026.pdf"
+              "O*NET 全国职业工资｜https://www.onetonline.org/link/localwages/47-4041.00；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；中华人民共和国生态环境法典｜https://www.mee.gov.cn/ywgz/fgbz/fl/202603/t20260313_1146496.shtml"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -27708,12 +27709,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位年薪 38,460 美元（May 2025，SOC 47-4041）"
+              "第 10 分位年薪 38,460 美元，时薪 18.49 美元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27722,12 +27723,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041 本职业；边界｜工资分位是分布位置，不等于起薪、资历或资格。就业预测空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-4041.00"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27736,12 +27737,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025第25分位年工资44,720美元；时薪21.50美元"
+              "第 25 分位年薪 44,720 美元，时薪 21.5 美元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27750,12 +27751,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041 本职业；边界｜工资分位是分布位置，不等于起薪、资历或资格。就业预测空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-4041.00"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27764,12 +27765,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位年薪 49,450 美元；中位时薪 23.78 美元（May 2025，SOC 47-4041）"
+              "第 50 分位年薪 49,450 美元，时薪 23.78 美元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27778,12 +27779,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041 本职业；边界｜工资分位是分布位置，不等于起薪、资历或资格。就业预测空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-4041.00"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27792,12 +27793,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025第75分位年工资61,530美元；时薪29.58美元"
+              "第 75 分位年薪 61,530 美元，时薪 29.58 美元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27806,12 +27807,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041 本职业；边界｜工资分位是分布位置，不等于起薪、资历或资格。就业预测空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-4041.00"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27820,12 +27821,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位年薪 82,410 美元（May 2025，SOC 47-4041）"
+              "第 90 分位年薪 82,410 美元，时薪 39.62 美元。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27834,12 +27835,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041 本职业；边界｜工资分位是分布位置，不等于起薪、资历或资格。就业预测空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/47-4041.00"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27848,12 +27849,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 年就业约 52,700 人（BLS 就业预测基期）"
+              "约 52,700 个岗位（2025）"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27862,12 +27863,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041 本职业；边界｜工资分位是分布位置，不等于起薪、资历或资格。就业预测空缺不等于净新增。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27876,12 +27877,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 增长约 1.5%（OOH 显示四舍五入 2%）"
+              "+1.5%"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27890,12 +27891,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041 本职业；边界｜工资分位是分布位置，不等于起薪、资历或资格。就业预测空缺不等于净新增。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27904,12 +27905,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 年均职位空缺约 4,300 个，含增长与替换需求"
+              "预计年均约 4,300 个"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27918,12 +27919,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 SOC 47-4041 本职业；边界｜工资分位是分布位置，不等于起薪、资历或资格。就业预测空缺不等于净新增。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27932,7 +27933,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 SOC 47-4041 工资为 May 2025 OEWS；就业预测为 2025—2035。BLS OOH 已核中位、10/90 分位年薪及三类行业中位数；国家工资Full Details本轮已取得25/75分位44,720/61,530美元年工资及21.50/29.58时薪。工资不代表中国收入或个人起薪。旧共享事实及未选模块仍可能使用 2024—2034，未据本次范围改写。"
+              "BLS 表 1.2（美国本职业 47-4041）：2025 年约 52,700 个岗位，2035 年预计约 53,500 个，变化 +1.5%，年均约 4,300 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.25",
@@ -27946,12 +27947,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜美国 SOC 47-4041 May 2025 中位年薪 49,450 美元、中位时薪 23.78 美元；第 10/90 分位年薪分别 38,460/82,410 美元。25/75分位本轮已核44,720/61,530美元年工资及21.50/29.58时薪。2025—2035 就业由约52,700增至53,500人，增长约1.5%，年均空缺约4,300。三类行业职业年薪见表；这些统计不代表个人起薪或中国收入。"
+              "用于核对中位时薪 23.78 美元 / 中位年薪 49,450 美元与第 10/25/75/90 分位（38,460 / 44,720 / 61,530 / 82,410 美元/年）。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28058,12 +28059,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "建筑业（Construction）"
+              "建筑业"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "onet"
+            "hazmat-ooh"
           ],
           "type": "prose"
         },
@@ -28077,7 +28078,7 @@
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "onet"
+            "hazmat-ooh"
           ],
           "type": "prose"
         },
@@ -28086,12 +28087,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 SOC 47-4041 在该行业的职业年工资中位数，May 2025；来源：BLS OOH 工资表。不是行业全体从业者平均工资，也不适用于中国。"
+              "BLS 职业展望行业年薪中位数。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet"
+            "hazmat-ooh"
           ],
           "type": "prose"
         },
@@ -28100,12 +28101,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "修复及其他废物管理服务（Remediation and other waste management services）"
+              "修复及其他废物管理服务"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "onet"
+            "hazmat-ooh"
           ],
           "type": "prose"
         },
@@ -28119,7 +28120,7 @@
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "onet"
+            "hazmat-ooh"
           ],
           "type": "prose"
         },
@@ -28128,12 +28129,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 SOC 47-4041 在该行业的职业年工资中位数，May 2025；来源：BLS OOH 工资表。不是行业全体从业者平均工资，也不适用于中国。"
+              "BLS 职业展望行业年薪中位数。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "hazmat-ooh"
           ],
           "type": "prose"
         },
@@ -28142,12 +28143,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "废物处理与处置（Waste treatment and disposal）"
+              "废物处理和处置"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "onet"
+            "hazmat-ooh"
           ],
           "type": "prose"
         },
@@ -28161,7 +28162,7 @@
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "hazmat-ooh"
           ],
           "type": "prose"
         },
@@ -28170,12 +28171,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 SOC 47-4041 在该行业的职业年工资中位数，May 2025；来源：BLS OOH 工资表。不是行业全体从业者平均工资，也不适用于中国。"
+              "BLS 职业展望行业年薪中位数。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "hazmat-ooh"
           ],
           "type": "prose"
         },
@@ -28184,12 +28185,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "应急响应与去污服务（Emergency Response / Decontamination）"
+              "其他工作场景"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "onet"
+            "hazmat-ooh"
           ],
           "type": "prose"
         },
@@ -28198,12 +28199,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业（47-4041.00）读取的该行业或细分类别工资中位数；不以行业均值或第三方估算代填。"
+              "本页未查得"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "onet"
+            "hazmat-ooh"
           ],
           "type": "prose"
         },
@@ -28212,12 +28213,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "危险物质应急响应与去污服务岗位可归入相关细分；O*NET 该页未按此粒度展示，故此处仅作范围说明。"
+              "按实际雇主核报酬。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "hazmat-ooh"
           ],
           "type": "prose"
         },
@@ -28226,12 +28227,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分布解读：中位数是分布中点，不等于起点；本职业（47-4041.00）的 10 分位到 90 分位之间年薪跨度约从 38,460 美元到 82,410 美元，差异主要来自地区与项目与资质与防护等级；本页未取得按行业与分地区的分位工资，按可见缺口登记。"
+              "全国分位描述美国本职业工资分布。核具体报价时，向雇主确认地区、工时、任务、防护和计薪规则。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28296,12 +28297,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资分布位置，不能据此判断任职年限、证书、具体职责或个人起薪。"
+              "2025 年 5 月全国职业工资。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28310,12 +28311,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位代表分布中点的典型水平，但不代表入职起薪；随地区、项目、资质、防护等级与职责范围变化上升；为本职业（47-4041.00）自身口径，不代表相邻职业。"
+              "2025 年 5 月全国职业工资。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28324,12 +28325,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资分布位置，不能据此判断任职年限、证书、具体职责或个人起薪。"
+              "2025 年 5 月全国职业工资。"
             ]
           },
           "id": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -28356,31 +28357,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "化粪池维修员与下水管道清洁工方向",
@@ -28455,7 +28456,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS 就业预测（2024—2034）",
+                "entity": "2025–2035",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/"
@@ -28579,12 +28580,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不要把性格测评说我不适合当作放弃或不入行的依据；应以实习或跟岗或模拟清除与监测任务与带教评价与考核结果为准。"
+              "用 Z 表核对封签和接收栏，保留原值并记录复核人。现场作业由符合适用训练和授权的人员执行。"
             ]
           },
           "id": "hazardous-materials-removal-workers.fit.personality-fit-block.9",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -28806,12 +28807,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "分数高低不能说明能否学会危险材料识别与清除与防护；应通过实习或跟岗或模拟清除与监测任务与带教评价来检验。"
+              "用 Z 表核对封签和接收栏，保留原值并记录复核人。现场作业由符合适用训练和授权的人员执行。"
             ]
           },
           "id": "hazardous-materials-removal-workers.fit.personality-fit-block.21",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -28891,12 +28892,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答｜工具与测评不能预测你是否能通过危险材料与受限空间与辐射防护培训与认证与考核，能否在项目与应急条件下稳定完成识别与围护与清除与监测与记录，也不能替代真实现场实践。最可靠的判断方式是用一次真实或模拟的清除与监测任务来检验你如何读调查与准备防护与执行作业与监测与记录，以及是否清楚自己的物质与许可与授权与防护边界。"
+              "用 Z 表核对封签和接收栏，保留原值并记录复核人。现场作业由符合适用训练和授权的人员执行。"
             ]
           },
           "id": "hazardous-materials-removal-workers.fit.personality-fit-block.27",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -29325,12 +29326,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议：先用一次模拟或真实的清除与监测任务检验读调查与准备防护与执行作业与监测与记录，并了解目标机构与法域对危险材料与受限空间与辐射防护培训与认证与许可与体检的要求，再决定是否长期投入。"
+              "用 Z 表核对封签和接收栏，保留原值并记录复核人。现场作业由符合适用训练和授权的人员执行。"
             ]
           },
           "id": "hazardous-materials-removal-workers.fit.personality-fit-block.58",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -29508,12 +29509,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界｜本页列出的是本职业在物质识别与围护与清除与去污与包装与运输与处置中较常见的失效类型与控制要点，用于帮助识别与管理风险，不构成危险材料处理、石棉与铅与放射性或生物危害、受限空间作业、医疗、法律、安全生产或投资意见或对个案的结论；凡涉及物质危害等级判定、许可与方案批准、清洁验证结论与废物最终处置与辐射与应急响应等事项，应由具备相应资格的岗位或机构与主管机关按法规与制度处置。本页所述为危险材料清除岗位的一般情形，具体以安全生产与职业病防治与环境保护与危险废物与放射性污染防治管理规定与机构危险材料与安全制度为准。"
+              "发现容器标签、现场控制或材料状态不明时，停止、退离并报告项目负责人。由获授权人员按程序确认材料、处置或放行。"
             ]
           },
           "id": "hazardous-materials-removal-workers.risk.career-risk-cards.8",
           "source_refs": [
-            "onet"
+            "osha-hazwoper",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29578,12 +29580,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按调查与许可确认物质与防护等级，作业前检查防护与围护与负压与监测有效性，异常立即停止与撤离与上报；发现物质识别不符或防护或围护或监测异常立即停止并复核"
+              "核对现场是否已确认材料、防护与监测分工。状态不明时停止、退离并报告项目负责人。"
             ]
           },
           "id": "hazardous-materials-removal-workers.risk.career-risk-cards.13",
           "source_refs": [
-            "onet"
+            "osha-hazwoper",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -29634,12 +29637,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "不满足准入与监护条件时停止进入、撤离并上报，启动单位应急程序；未受训人员不得盲目进入救援。检测、通风、监护与救援由具备相应条件的人员按现场制度执行，记录真实完整。"
+              "按实际工序核准入、隔离和授权。未核条件时不进入，由指定人员按项目规程处置。"
             ]
           },
           "id": "hazardous-materials-removal-workers.risk.career-risk-cards.17",
           "source_refs": [
-            "onet"
+            "osha-hazwoper",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -29690,12 +29694,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "包装与标识与暂存与运输与处置须按危险废物要求执行并留存联单，泄漏须立即处置与上报，清洁验证须按方法执行；废物与验证与联单记录须与批次一并留痕"
+              "封签、标签或接收记录不符时保留原件并暂停交接。危险废物经营单位许可和联单按法域核对。"
             ]
           },
           "id": "hazardous-materials-removal-workers.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29746,11 +29750,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "物质判定与方案与许可与验证与处置变更须按程序审批并留痕，验证结论与最终处置与披露移交相应岗位或机构；遇到超授权或结论性要求先说明边界并按流程移交"
+              "记录原始观察与异常，不擅自判定材料属性或签发放行。交项目指定人员复核。"
             ]
           },
           "id": "hazardous-materials-removal-workers.risk.career-risk-cards.25",
           "source_refs": [
+            "cn-work-example",
             "onet"
           ],
           "type": "prose"
@@ -29802,11 +29807,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "建立资质与防护与监测与设备与方案的备份与交接与校准规则，关键作业与监测经验与许可可复现并留痕；出现人手或设备或资质不足时按制度上报并调整优先级"
+              "班前确认监测、人员与设备交接。责任人或控制措施缺位时暂停受影响任务并报告。"
             ]
           },
           "id": "hazardous-materials-removal-workers.risk.career-risk-cards.29",
           "source_refs": [
+            "osha-hazwoper",
             "onet"
           ],
           "type": "prose"
@@ -29858,12 +29864,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "范围与物质与验证与验收与废物去向须明确依据与责任与时限并留痕，交接前核对现场与记录与联单一致；出现标准或责任争议时暂停并复核与上报"
+              "保存原始登记、状态和复核人。交接差异由项目指定人员确认并留痕。"
             ]
           },
           "id": "hazardous-materials-removal-workers.risk.career-risk-cards.33",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -30031,7 +30038,7 @@
                 "id": "education",
                 "values": [
                   "美国 O*NET 将 47-4041.00（危险材料清除工）列入 Job Zone 1-2（很少至一些准备），SVP 区间为不足 6.0，通常要求高中文凭或同等学历（部分岗位可能不要求）；该页学历部分未显示百分比分布，本页不代填百分比；官方范围明确该职业通常要求危险材料处理的专门培训与认证或受限空间进入许可；该描述不取代主管机关与雇主的学历与训练与认证与许可与健康与资格要求。",
-                  "能否独立作业与签署监测与交接记录不取决于学历本身，而取决于是否取得相应培训与认证与许可并在机构许可与授权范围内承担相应职责。",
+                  "BLS 表 1.2 将高中或同等学历与中期在岗培训列为典型美国入行准备。按项目核污染物、适用安全培训和许可。",
                   "学历与训练只影响准入起点，能否熟练识别与围护与清除与去污与监测主要取决于培训与认证与带教与在岗训练与考核结果与实作积累。"
                 ]
               },
@@ -30039,7 +30046,7 @@
                 "id": "clearance",
                 "values": [
                   "常见要求：危险材料识别与围护与负压与通风与监测要求；呼吸与皮肤与眼面防护与去污与洗消与更换要求；受限空间与辐射与高处与用电与起重与机械作业审批与防护要求；危险废物与放射性废物与危险化学品的包装与标识与暂存与运输与处置与联单要求；泄漏与散落与交叉污染与应急响应要求；职业健康与监护与体检与职业病危害告知与职业禁忌要求。",
-                  "涉及物质危害等级判定、许可与方案批准、清洁验证结论与废物最终处置决定与辐射与应急响应的须由具备相应资格的岗位或机构执行。",
+                  "《生态环境法典》第五百三十一、五百三十二、五百三十四、五百三十六条分别涉及危险废物标志、台账、经营单位许可和转移联单。",
                   "受控或涉及客户或场所或个人信息的资料的保存与提供与披露须按保密与最小必要要求管理；不得把受控资料外发至未授权环境。"
                 ]
               },
@@ -30063,7 +30070,8 @@
           },
           "id": "hazardous-materials-removal-workers.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -30076,45 +30084,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "一份完全虚构的场地与建筑物调查与物质识别与清除范围说明（不含任何真实场地数据）。",
-                  "一份虚构的物质种类与浓度与形态与危害等级与防护与围护要求说明。",
-                  "一份空白的围护与负压与监测与防护与去污记录模板。",
-                  "一份空白的清除与去污与清洁验证与废物联单记录模板。",
-                  "一份空白的受限空间与高处与用电与应急与响应要点模板。",
-                  "一支笔与计算器与量具（用于量测与浓度与剂量与量核对）。"
+                  "Z 表：封签与交接记录",
+                  "虚构纸面练习。按题设，交接单上的封签号须与登记表一致，接收栏也须有记录，才可标为纸面齐备。Z1 登记 Z17、交接 Z17、接收已记；Z2 登记 Z18、交接 Z81、接收已记；Z3 登记 Z19、交接 Z19、接收栏空白。封签冲突交台账负责人，缺接收记录交交接负责人。变式只补齐 Z3 接收栏。分别标状态、原值与复核人。",
+                  "用题面提供的两份记录，不需要现场或工具。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "在 90 分钟内完成：围护与防护与监测与清除方案、监测与废物与异常记录与复核说明、受限空间与应急与响应要点草案。",
-                  "完成一次浓度与剂量与废物量核算，并写出至少两条可能导致暴露或污染或事故的情形与对应措施。",
-                  "写出哪些情形必须停下并复核或上报或移交（未知物质或识别不符、防护或围护或负压或监测失效、泄漏或交叉污染、受限空间或高处或用电或机械风险、超授权判定）。"
+                  "要交付的记录",
+                  "分别写原题和变式。每行记录原值、状态和复核人。",
+                  "差异原值保留至复核完成。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先列从调查与物质识别到许可与围护与防护准备到清除与去污与清洁到包装与运输与处置到监测验证与记录的关键步骤与不可省略项，再逐项记录依据与结果。",
-                  "对物质与规程与许可与防护与监测与设备与记录与版本写清依据与复核人与记录方式，保留原始记录与版本。",
-                  "对风险写清识别信号、处置步骤与报告对象。",
-                  "最后写一段反思：哪些步骤被压缩或省略会导致什么后果，以及哪些结论在现有信息下不能下。"
+                  "完成后复核",
+                  "保存两种答案，再到「常见问题」打开「纸面练习参考解」。",
+                  "下方链接可跳到常见问题。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "不涉及真实场地数据或受控资料或真实客户或场所或个人信息；对未知物质或防护或围护或监测或受限空间或超授权要求一律写明暂停并复核与上报与移交；并声明所有现场作业与方案与许可与验证与披露须由具备相应授权的人员与机构在安全生产与职业病防治与环境保护与危险废物与放射性污染防治要求内执行，练习使用虚构材料。",
-                  "作品只证明你能按本职业的工作方式组织识别与围护与清除与监测与记录工作，不构成授权或胜任证明。"
+                  "练习边界",
+                  "只核纸面记录。"
                 ]
               }
             ]
           },
           "id": "hazardous-materials-removal-workers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "paper-answer-key"
           ],
-          "title": "入行练习：一次完整的围护与防护与监测与清除与验证任务（虚构材料）",
+          "title": "纸面试做",
           "type": "cards"
         },
         {
@@ -30125,32 +30130,32 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "用调查与许可依据—操作与监测记录—安全与环境与合规三列列出你在模拟任务中完成的每一步。",
-                  "标注每一步是独立完成还是他人指导下完成。",
+                  "登记封签",
+                  "保留登记号和交接号。",
                   "标注哪些步骤涉及防护与负压与监测与受限空间与辐射与受控数据，必须按许可与规程由本人或相应岗位完成。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有经验的安全或环境或合规或辐射防护或监测岗位复核你的围护与防护与监测与清除说明，并书面指出问题。",
-                  "记录复核意见、时间与依据，便于后续复盘。",
+                  "核接收栏",
+                  "标明有记录或空白。",
                   "不要只展示做完了，要展示从调查到许可到围护到清除到监测验证到记录与归档的流程与留痕。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "写一份可交接的作业摘要（调查与物质与区域与点位与量、防护与围护与负压与监测参数、清除与去污与验证与废物联单与处置去向与遗留事项）。",
-                  "摘要中不得出现真实场地数据或受控或涉及客户或场所资料或可识别个人信息，必要时使用编号与合成数据。",
+                  "待核项",
+                  "按差异类型写负责人。",
                   "注明信息来源与假设，区分实测事实与判断推断与待验证。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "若使用了自动设备或数字工具或生成式工具，标注哪些部分由设备或工具生成、哪些由本人核对与修订。",
-                  "说明监测与设备输出在使用前经过了谁的复核与哪次校准或比对。",
+                  "变式记录",
+                  "只改题设指定的一项。",
                   "数值与结论若为示例值，必须标明并说明由具备相应授权的人员最终确认。"
                 ]
               }
@@ -30158,9 +30163,9 @@
           },
           "id": "hazardous-materials-removal-workers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "入门时可以准备哪些可复核的作品材料？",
+          "title": "留下哪些纸面记录？",
           "type": "cards"
         },
         {
@@ -30221,59 +30226,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（调查与物质识别—许可与围护与防护准备—清除与去污与清洁—包装与标识与暂存—运输与交接与处置—监测验证与记录与复盘）。",
-                  "记录你观察到的危险材料与受限空间与辐射防护与职业健康要求。"
+                  "读规则",
+                  "读工单，列出需要核对的字段。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "核对工作条件：工时与项目与应急加班与不规律日程、监测与防护与围护与起重与运输设备与许可文件与权限、场所与客户数据归属与保密约定、与安全与环境与合规与项目与医疗岗位的协作方式。",
-                  "写下你最不适应的一个现实成本并判断能否接受。"
+                  "核登记",
+                  "逐行对照两份原记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "完成一份围护与防护与监测与清除方案与一份监测与废物与异常记录与复核说明。",
-                  "按规范列出关键要求（物质与区域与量、防护等级与围护与负压与监测、包装与运输与处置、受限空间与应急）。"
+                  "核交接",
+                  "把差异分给题面指定的复核人。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "完成一次浓度与剂量与废物量核算，并标注假设与数据来源。",
-                  "对两个典型风险（未知物质或识别不符、防护或围护或监测失效）写出核对与报告方案。"
+                  "核接收",
+                  "只改变式要求的一项，重做状态判断。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在指导下完成一次模拟围护与防护穿戴与去污与监测演练。",
-                  "对照检查单找出至少两处偏差并记录整改方式。"
+                  "写复核人",
+                  "保留原题和变式的记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请有经验的人挑战你的物质与许可与围护与验证与安全与环境边界理解。",
-                  "记录对方的异议与你的回应，不回避反例。"
+                  "做变式",
+                  "打开折叠参考解核对。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "写出继续、停止或转向的判断与证据。",
-                  "列出若继续需要补齐的能力与经历（如物质识别与围护与负压与监测与限制空间与辐射防护、危险材料与危废与认证培训、特定物质或场地方向经验），以及下一步行动。"
+                  "核答案",
+                  "写下一个需要向雇主确认的分工问题。"
                 ]
               }
             ]
           },
           "id": "hazardous-materials-removal-workers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天体验：用虚构材料完成一次危险材料清除与监测与合规闭环",
+          "title": "纸面核对顺序",
           "type": "timeline"
         },
         {
@@ -30281,20 +30286,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能在许可与规程与安全与环境与授权范围内完成识别与围护与清除与去污与监测与记录并使过程与依据可复核。",
-              "继续：能在项目与应急与危险条件压力下坚持许可与防护与留痕，不因赶工跳过监测或防护或验证或夸大记录。",
-              "继续：愿意在实习与带教中把物质与围护与负压与去污与验证与合规规范学扎实。",
-              "停止：难以长期在污染物与危险条件下穿戴专业防护作业，且短期无法改善。",
-              "停止：对物质与许可与围护与验证与安全与环境边界缺乏警觉，反复出现暴露未隔离或防护失效或方案擅自变更或记录不实。",
-              "换方向：偏好保温安装与拆除可考虑保温工；偏好一般施工与拆除可考虑建筑工人。",
-              "换方向：偏好管道与化粪池清理可考虑化粪池维修员与下水管道清洁工；偏好可回收物分类与处理可考虑回收与再利用工；偏好收集与清运可考虑可回收材料收集员方向。"
+              "保留两份纸面记录并按差异分流。",
+              "只做纸面记录核对。",
+              "只做纸面记录核对。",
+              "只做纸面记录核对。",
+              "只做纸面记录核对。",
+              "只做纸面记录核对。",
+              "只做纸面记录核对。"
             ]
           },
           "id": "hazardous-materials-removal-workers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "完成后复核",
           "type": "list"
         },
         {
@@ -30339,22 +30344,22 @@
                 "技能不自动获得物质判定或验证与处置权限"
               ],
               [
-                "危险材料与受限空间与辐射与高处与用电防护培训与认证与许可",
-                "现场作业岗位",
-                "取得从事危险材料与受限空间与辐射作业的法定前提",
-                "官方范围明确通常要求",
-                "完成规定培训与认证并按主管机关取得许可与体检与职业健康监护",
-                "数天至数周",
-                "以主管机关与机构要求为准，资质与许可要求不得逾越"
+                "按工序核个人培训、资格与现场许可",
+                "承担适用工序的人员",
+                "区分危险材料、受限空间、辐射、高处与用电等作业",
+                "适用范围依材料、设备、任务与法域",
+                "向雇主和主管机关核个人要求及现场许可",
+                "按适用规定和雇主安排",
+                "未经训练、授权或防护不明时暂停并报告"
               ],
               [
-                "危险废物与放射性废物相关许可与资质（如涉及）",
-                "涉危废与放射性岗位",
-                "保证危废与放射性作业合法合规与可追溯",
-                "涉相关岗位必需",
-                "按主管机关与机构要求取得许可与资质并按规程作业并留存记录",
-                "按周期执行",
-                "许可与资质到期或条件不符时不得继续作业"
+                "危废经营单位许可",
+                "从事适用危险废物经营活动的单位",
+                "按《生态环境法典》第 534 条核单位经营许可",
+                "具体适用范围按经营活动和主管机关核",
+                "核单位许可范围，另核人员培训、作业资格和现场授权",
+                "按许可条件和现场程序",
+                "单位许可与个人授权分别核验"
               ],
               [
                 "行业资格或技能等级（O*NET 证书目录已列出相关项）",
@@ -30378,7 +30383,9 @@
           },
           "id": "hazardous-materials-removal-workers.path.credential-decision.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "operations",
+            "facilities"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -30406,7 +30413,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本页不引用任何具体招聘公告的数量或薪酬数字。危险材料清除岗位多通过环境治理与拆除与危废与放射性退役与污染场地修复企业与外包服务与劳务派遣与项目招工等渠道招募，且受项目与合规要求与地区影响，公开渠道的样本难以代表整体市场；本页工资与就业为 O*NET 在 47-4041.00 页呈现的本职业（47-4041.00）自身口径，且 2024—2034 年预测增长 1% 至 2%。",
+              "BLS 表 1.2（美国本职业 47-4041）：2025 年约 52,700 个岗位，2035 年预计约 53,500 个，变化 +1.5%，年均约 4,300 个职位空缺，含人员替补。人数分别取整。",
               "核对建议｜查看招聘信息时应记录发布时间、地点、企业类型与物质与项目方向（石棉与铅与霉菌与放射性与危废）、工时与项目与应急加班安排、学历与技能与认证与许可要求、危险材料与受限空间与辐射与高处与用电防护与体检要求、监测与围护与起重与运输设备配备、合同期限与项目来源以及试用期与考核口径；这些信息比职位名称往往更能反映真实条件。"
             ]
           },
@@ -30435,7 +30442,7 @@
                 "url": "https://www.onetonline.org/link/details/47-4041.00"
               },
               {
-                "entity": "O*NET 47-4041.00 证书目录",
+                "entity": "美国证书检索",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localcert/47-4041.00"
@@ -30459,12 +30466,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以学历与训练与认证与许可与健康与机构授权与考核为准，也不代表取得物质判定或验证或处置与披露的权限；涉及现场作业与危险材料与受限空间与辐射与受控资料须在安全生产与职业病防治与环境保护与危险废物与放射性污染防治要求内进行。"
+              "发现容器标签、现场控制或材料状态不明时，停止、退离并报告项目负责人。由获授权人员按程序确认材料、处置或放行。"
             ]
           },
           "id": "hazardous-materials-removal-workers.path.career-path-block.11",
           "source_refs": [
-            "onet"
+            "osha-hazwoper",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30585,12 +30593,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜美国 BLS 对该职业典型入门准备为高中文凭、无需相关职业经验、中期在岗培训；具体危险物质类型和州法可能要求额外训练、许可或证书。在中国，应先确认岗位处理的物质、单位业务资质、个人是否属于特种作业等具体类别，再完成对应训练和授权。受限空间、辐射、高处、用电和职业健康检查仅在实际危害或岗位要求适用时核对，不是所有清除工通用的一套证件。后续清除、监测、合规或管理路径是编辑规划，不自动获得出具评估结论的权限。"
+              "BLS 表 1.2 将高中或同等学历与中期在岗培训列为典型美国入行准备。按项目核污染物、适用安全培训和许可。 中国大陆上岗前应按《安全生产法》第二十八条完成适用安全教育和培训。"
             ]
           },
           "id": "hazardous-materials-removal-workers.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -30599,12 +30608,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜单位的危险废物业务许可、个人专项作业资格、培训合格、岗位授权与健康监护是不同要求，须按实际法域、作业类别和危害条件分别核对。培训或录用不自动授予物质评估、清洁验证签发或最终处置决定权。"
+              "经营单位许可、人员培训与现场授权按各自规则核实。"
             ]
           },
           "id": "hazardous-materials-removal-workers.path.career-path-block.21",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30627,12 +30636,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "小结｜先核实际危害与岗位，再完成相应训练、监督实践与授权。涉及评估、方案批准、验证签发或处置变更时移交具有相应权限的岗位；发展阶段不自动扩大权限。"
+              "中国大陆上岗前应按《安全生产法》第二十八条完成适用安全教育和培训。 《生态环境法典》第五百三十一、五百三十二、五百三十四、五百三十六条分别涉及危险废物标志、台账、经营单位许可和转移联单。"
             ]
           },
           "id": "hazardous-materials-removal-workers.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "facilities",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31642,12 +31652,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国口径：本页工资与就业取 O*NET 在 47-4041.00（危险材料清除工）页面呈现的本职业自身口径（该页未标注取自上或上级职业）——2025 年中位年薪 49,450 美元、中位时薪 23.78 美元；第 10 分位年薪 38,460 美元、第 25 分位 44,720 美元、第 75 分位 61,530 美元、第 90 分位 82,410 美元（BLS OEWS 2025 年，经 O*NET 呈现）。就业与增长：2025 年就业 52,700 人、2025—2035 年预测增长 1% 至 2%、期间年均岗位空缺约 4,300 个（含增长与替补）。需说明：空缺主要由替换需求构成；本职业总量较小且受项目与合规要求影响；不代表个人的岗位结果，也不代表相邻职业。官方范围明确该职业通常要求危险材料处理的专门培训与认证或受限空间进入许可。中国大陆部分：公开职业统计未建立与本职业精确对应的全国职业工资分布，按证据政策本页只登记统计口径与缺口，不提供代理数值。"
+              "BLS 表 1.2（美国本职业 47-4041）：2025 年约 52,700 个岗位，2035 年预计约 53,500 个，变化 +1.5%，年均约 4,300 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31656,12 +31666,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31670,12 +31680,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31684,12 +31694,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位是分布中点，不等于起薪；差异来自地区与项目与资质与防护等级；本页未取得按行业与分地区的分位工资，按可见缺口登记；数值为本职业（47-4041.00）自身口径、不代表相邻职业。"
+              "BLS 就业预测描述全国岗位变化，年均空缺含新增和人员替补。"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31712,12 +31722,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "工资（中位与分位，本职业（47-4041.00）自身口径）"
+              "就业规模与变化"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31726,12 +31736,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 47-4041.00（OEWS 2025 年，经 O*NET 呈现）"
+              "47-4041"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31740,12 +31750,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "May 2025：中位年薪 49,450 美元，中位时薪 23.78 美元；10/90 分位年薪分别 38,460/82,410 美元。25/75分位本轮已核44,720/61,530美元年工资及21.50/29.58时薪。"
+              "BLS 表 1.2（美国本职业 47-4041）：2025 年约 52,700 个岗位，2035 年预计约 53,500 个，变化 +1.5%，年均约 4,300 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31754,12 +31764,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31768,12 +31778,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31782,12 +31792,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该口径为投影且本职业总量较小，受建筑与拆除与环保治理与危废与合规要求影响；空缺主要由替换需求构成；数值为本职业（47-4041.00）自身口径，不等于个人岗位结果。"
+              "BLS 表 1.2 是本职业的美国全国就业预测。年均空缺包括人员替补，不能据此判断某地项目或招聘。"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31810,12 +31820,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业规模与增长与岗位空缺（本职业（47-4041.00）自身口径）"
+              "预计年均空缺"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31824,12 +31834,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 47-4041.00（BLS 就业预测，经 O*NET 呈现）"
+              "47-4041"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31838,12 +31848,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年约 52,700 人，2035 年约 53,500 人，增长约 1.5%；年均空缺约 4,300 个，含增长与替换需求。"
+              "预计年均约 4,300 个，含替补。"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31852,12 +31862,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆"
+              "美国全国"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31866,12 +31876,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025-05"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31908,12 +31918,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "职业工资与就业（统计口径与缺口）"
+              "年薪中位数"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31922,12 +31932,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局城镇单位就业人员平均工资（行业门类口径）与有界检索"
+              "47-4041"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31936,12 +31946,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国大陆与美国 O*NET 47-4041.00（危险材料清除工）精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页展示缺失而不使用代理数字。"
+              "49,450 美元/年"
             ]
           },
           "id": "hazardous-materials-removal-workers.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -32351,6 +32361,15 @@
           "data": {
             "entries": [
               {
+                "answer": "原题仅 Z1 纸面齐备。Z2 保留 Z18 和 Z81，交台账负责人；Z3 保留接收栏空白，交交接负责人。变式 Z1、Z3 齐备，Z2 仍待核。",
+                "id": "hazardous-materials-removal-workers.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.hazardous-materials-removal-workers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
+              },
+              {
                 "answer": "本页的危险材料清除工是 O*NET 47-4041.00（Hazardous Materials Removal Workers）这一精确职业：识别、清除、包装、运输或处置危险材料，包括石棉、含铅涂料、废油、燃料、传动液、放射性材料或受污染土壤；该职业通常要求危险材料处理的专门培训与认证或受限空间进入许可；可能操作土方设备或卡车。核心任务包括使用刮刀与真空设备或高压喷洗器清除石棉或铅（重要性 89）、搭建围护区（87）、准备危险材料（84）、遵守安全程序与废物处置相关法律（83）、记录容器与废物数量与种类（78）、清洁受污染设备或区域（77）、清洁霉菌污染区域（75）、操作机器清除与包装与运输废物（74）、装料与装卸（71）、处置场分类危险废物（70）、使用监测设备识别（79）、紧急事件后清除或限制污染（71）等。常见职位名称包括 Abatement Worker 与 Asbestos Worker 与 Hazmat Technician 与 Mold Damage Technician 与 Waste Handling Technician；O*NET 在 47-4041.00 页显示该职业在美国的主要行业为行政与支持服务。本页所述为美国职业分类口径，工资与就业为本职业（47-4041.00）自身口径；本页内容不构成任何医疗、法律或合规意见。",
                 "id": "hazardous-materials-removal-workers.faq.1",
                 "question": "这个职业具体做什么？",
@@ -32372,82 +32391,81 @@
                 ]
               },
               {
-                "answer": "需要先说明口径：O*NET 在 47-4041.00 页未标注该数据取自上或上级职业，本页按本职业（47-4041.00）自身口径如实呈现。本职业 2025 年中位年薪 49,450 美元、中位时薪 23.78 美元；第 10 分位年薪 38,460 美元、第 25 分位 44,720 美元、第 75 分位 61,530 美元、第 90 分位 82,410 美元（BLS OEWS 2025 年，经 O*NET 呈现）。就业与增长：2024 年就业 51,300 人、2024—2034 年预测增长 1% 至 2%、期间年均岗位空缺约 5,000 个（含增长与替补）。上述不含福利与奖金，不适用其他法域，也不代表相邻职业；空缺主要由替换需求构成，且需求受建筑与环保与合规要求影响；官方范围明确该职业通常要求危险材料处理的专门培训与认证或受限空间进入许可。",
+                "answer": "2025 年 5 月，美国本职业全国年薪中位数为 49,450 美元，时薪中位数为 23.78 美元。年薪第 10、25、75、90 分位分别为 38,460、44,720、61,530、82,410 美元。 BLS 表 1.2（美国本职业 47-4041）：2025 年约 52,700 个岗位，2035 年预计约 53,500 个，变化 +1.5%，年均约 4,300 个职位空缺，含人员替补。人数分别取整。",
                 "id": "hazardous-materials-removal-workers.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.hazardous-materials-removal-workers.q3",
                 "source_refs": [
                   "oews",
-                  "ep"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "没有与该美国职业精确对应的全国职业工资分布。中国大陆在石棉与建筑拆除与危险废物与放射性废物与污染场地治理与电子废弃物处理领域存在相近岗位，其作业与设备与许可与防护与环境与安全与职业健康受《中华人民共和国安全生产法》与《中华人民共和国职业病防治法》与《中华人民共和国环境保护法》与《中华人民共和国固体废物污染环境防治法》与《中华人民共和国放射性污染防治法》与《危险化学品安全管理条例》及危险废物与受限空间与辐射与高处作业管理制度约束（危险废物与放射性废物与危险化学品作业须取得相应许可与资质并按规程执行；受限空间与高处与用电与起重作业须按安全要求审批与防护；职业病危害与防护与监护与体检要求按主管机关要求执行），但公开职业统计未按本职业单列：国家统计局按行业门类公布城镇单位就业人员平均工资，属行业口径、不区分职业。按本页证据政策，中国部分只登记统计口径与「证据不足：」可见标记，不使用行业均值、招聘报价或美国数据跨法域外推起薪、中位数或个人收入。本页内容不构成法律或合规意见。",
+                "answer": "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局表 2、5 给出 2025 年水利、环境和公共设施管理业年平均工资。城镇非私营单位 70,172 元，城镇私营单位 49,527 元。 本页所核资料也未取得中国大陆该职业全国就业序列。可按材料、项目、记录和现场授权核对实际岗位。",
                 "id": "hazardous-materials-removal-workers.faq.4",
-                "question": "中国大陆有对应的工资数据吗？",
+                "question": "中国大陆有对应的工资和就业数据吗？",
                 "question_key": "career.faq.hazardous-materials-removal-workers.q4",
                 "source_refs": [
-                  "nbs",
-                  "cnclass"
+                  "nbs-wage-release-2025"
                 ]
               },
               {
-                "answer": "O*NET 47-4041.00 的工作活动重要性最高为获取信息（78）与识别对象、动作与事件（70）与决策与解决问题（68）与与上级、同事或下属沟通（67）与检查设备、结构或材料（66）；工作情境（百分比响应口径）显示他人健康与安全责任 57% 表示极高、43% 表示高，暴露于污染物 59% 表示每天、暴露于危险条件 45% 表示每天、暴露于危险设备 35% 表示每天、穿戴专业防护装备 69% 表示每天、暴露于轻微烧伤或割伤或咬伤或蜇伤 25% 表示每天、错误的后果 23% 表示极为严重、11% 表示非常严重、25% 表示严重、时间压力 51% 表示每天、站立 51% 表示持续或几乎持续、每周工作时间超过 40 小时 57%、工作日程 34% 表示不规律。工作以危险条件下穿戴专业防护按规程作业为特点，项目与应急可能带来集中加班，需按危险材料与受限空间与辐射要求防护。",
+                "answer": "工作可涉及防护服、污染区和较重的装备。应聘时核材料、暴露评估、防护、工作时长和异常上报。",
                 "id": "hazardous-materials-removal-workers.faq.5",
                 "question": "工作环境和工作强度如何？",
                 "question_key": "career.faq.hazardous-materials-removal-workers.q5",
                 "source_refs": [
                   "onet",
-                  "bls"
+                  "osha-hazwoper"
                 ]
               },
               {
-                "answer": "本职业的物质监测与围护监测与高危区域遥控作业与记录环节已可被遥感与光谱与传感器与机器人设备辅助，自动化暴露中等（自动化程度 35% 表示中等自动化、65% 表示完全不自动化）；生成式 AI 本身直接影响有限，主要涉及废物与暴露与合规数据与台账与报表。O*NET 热门技术页列出 7 项软件技能（Microsoft Excel 3%、Microsoft Office software 3%、Microsoft Outlook 2%、Microsoft PowerPoint 1%、Microsoft Word Under 1% 及两项未给出占比）。物质危害等级与围护与负压方案判断、许可与方案批准、清除与去污与清洁验证、废物最终处置与安全与环境合规责任仍由具备相应授权的人员负责；O*NET 显示本职业 2024—2034 年预测增长 1% 至 2%，但预测不等于个人岗位结果。",
+                "answer": "软件可以整理封签和交接记录，现场识别和放行由指定人员负责。就业预测没有测量 AI 采用或提效。",
                 "id": "hazardous-materials-removal-workers.faq.6",
                 "question": "AI 会影响这个职业吗？",
                 "question_key": "career.faq.hazardous-materials-removal-workers.q6",
                 "source_refs": [
-                  "onet-wages",
-                  "nist"
+                  "onet",
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "美国 O*NET 将 47-4041.00（危险材料清除工）列入 Job Zone 1-2（很少至一些准备，SVP 不足 6.0），通常要求高中文凭或同等学历，部分岗位可能不要求；该页学历部分未显示百分比分布；官方范围明确该职业通常要求危险材料处理的专门培训与认证或受限空间进入许可。在中国大陆，危险废物与放射性废物与危险化学品作业须取得相应许可与资质并按规程执行；受限空间与高处与用电与起重作业须按安全要求审批与防护；职业病危害与防护与监护与体检要求按主管机关要求执行。该描述不取代主管机关与机构对学历与训练与健康与资格的要求。",
+                "answer": "BLS 表 1.2 将高中或同等学历与中期在岗培训列为典型美国入行准备。按项目核污染物、适用安全培训和许可。 中国大陆上岗前应按《安全生产法》第二十八条完成适用安全教育和培训。",
                 "id": "hazardous-materials-removal-workers.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.hazardous-materials-removal-workers.q7",
                 "source_refs": [
-                  "r2-pay-3",
-                  "editor"
+                  "bls-ep-2025-2035",
+                  "facilities"
                 ]
               },
               {
-                "answer": "需要区分学历、训练证明、健康与职业健康检查、危险材料与受限空间与辐射与危化品认证与许可、机构与岗位授权、方案与验证与处置与放行权限与物质危害等级判定权限。O*NET 证书目录列出与本职业相关的危险材料与修复与安全类证书，例如 Institute of Hazardous Materials Management 的 Certified Hazardous Materials Manager 与 Certified Hazardous Materials Practitioner 与 Certified Dangerous Goods Professional 与 Certified Dangerous Goods Trainer、World Safety Organization 的 Certified Hazardous Materials Technician I 与 Level II 与 Supervisor 与 Certified Safety Technician、Restoration Industry Association 的 Certified Restorer 与 Certified Mold Professional、Federal Motor Carrier Safety Administration 的 Hazardous Material Endorsement (H) 与 Combination of Tank Vehicle and Hazardous Materials、International Board for Certification of Safety Managers 的 Certified Hazard Control Manager；在中国大陆，危险废物与放射性废物与危险化学品作业须取得相应许可与资质并按规程执行，特种作业须依法持证；在美国，官方范围明确通常要求危险材料处理的专门培训与认证或受限空间进入许可。",
+                "answer": "适用的美国危险废物作业和应急响应按 (a) 核范围，按任务核训练和监督。 经营单位许可、人员培训与现场授权按各自规则核实。",
                 "id": "hazardous-materials-removal-workers.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.hazardous-materials-removal-workers.q8",
                 "source_refs": [
-                  "purchasing-managers",
-                  "health"
+                  "osha-hazwoper",
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "常见失效包括：物质识别错误或防护等级不足或呼吸与皮肤防护失效或围护与负压与监测失效导致暴露或污染扩散；受限空间与高处与用电与起重与机械作业未按审批与规程，或可燃与爆炸与缺氧条件未识别与处置；包装或标识或运输或暂存或处置不当，或泄漏或散落，或废物去向不清或无联单，或清洁验证方法或结论不当；超出授权自行决定物质处置或围护与负压方案或清洁验证结论或废物最终处置或对外披露；关键资质或防护或监测由单一点承担；与项目或客户或监管或处置方在范围与物质与验证与验收与费用与废物去向与责任上标准不清。控制要点是按调查与许可与规程与法规核对与复核与留痕，异常与超授权事项立即暂停与上报。本页内容不构成医疗、法律或合规意见。",
+                "answer": "发现容器标签、现场控制或材料状态不明时，停止、退离并报告项目负责人。由获授权人员按程序确认材料、处置或放行。",
                 "id": "hazardous-materials-removal-workers.faq.9",
                 "question": "这个职业有哪些主要风险？",
                 "question_key": "career.faq.hazardous-materials-removal-workers.q9",
                 "source_refs": [
-                  "onet",
-                  "nist"
+                  "osha-hazwoper",
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "需先说明口径：本页就业与增长为 O*NET 在 47-4041.00 页呈现的本职业（47-4041.00）自身口径（2024 年就业 51,300 人、2024—2034 年预测增长 1% 至 2%、期间年均岗位空缺约 5,000 个含替补），不代表相邻职业或个人就业机会；空缺主要由替换需求构成，且需求受建筑与拆除与环保治理与危废与合规要求影响。可转向车辆与设备清洁工、建筑工人、爆破工、公路养护工、保温工、回收与再利用工、可回收材料收集员与化粪池维修员与下水管道清洁工等相邻方向（需重新学习与补足该方向的对象与许可与设备与资格与经验）。中国大陆相关岗位与许可与安全与统计口径另见本页说明。",
+                "answer": "BLS 表 1.2（美国本职业 47-4041）：2025 年约 52,700 个岗位，2035 年预计约 53,500 个，变化 +1.5%，年均约 4,300 个职位空缺，含人员替补。人数分别取整。 本页未查得大陆同职业的全国就业序列。按项目比较清除、取样或合规岗位的分工。",
                 "id": "hazardous-materials-removal-workers.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.hazardous-materials-removal-workers.q10",
                 "source_refs": [
-                  "ep",
+                  "bls-ep-2025-2035",
                   "onet"
                 ]
               }
@@ -32464,12 +32482,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对美国 O*NET/SOC 47-4041.00（危险材料清除工）的官方范围与任务与工作活动与工作情境与兴趣代码与证书目录与培训机会，再取 BLS OEWS 2025 年与 BLS 就业预测 2025—2035 的数值（O*NET 在 47-4041.00 页未标注取自上级职业，本页按本职业自身口径标注）以及该页的行业分布（行政与支持服务）与热门技术（7 项软件技能）作为行业与数字工具提示；安全与环境要求以安全生产法与职业病防治法与环境保护法与固体废物污染环境防治法与放射性污染防治法与危险化学品安全管理条例为参照；中国大陆按统计口径与证据政策展示缺失而不使用代理数字。本页内容不构成医疗、法律或合规意见。"
+              "中国大陆危险废物标志、台账、经营许可与联单分别核《生态环境法典》第五百三十一、五百三十二、五百三十四和五百三十六条。人员安全培训、现场授权及适用设备资格另核。"
             ]
           },
           "id": "hazardous-materials-removal-workers.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -32535,28 +32554,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "大五人格测试",
+                "entity": "大五人格测评",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "MBTI 人格测试",
+                "entity": "MBTI 偏好测评",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "智力与推理测试",
+                "entity": "推理测评",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "情绪智力测试",
+                "entity": "情绪能力测评",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "本职业（危险材料清除工）",
@@ -32594,7 +32613,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：危险材料清除工详细资料（47-4041.00）",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "47-4041.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/47-4041.00"
               },
@@ -32610,25 +32629,25 @@
                 "market": "美国",
                 "name": "O*NET OnLine：危险材料清除工职业档案与官方范围（47-4041.00）",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "47-4041.00 exact occupation",
                 "url": "https://www.onetonline.org/link/summary/47-4041.00"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对就业 2024 年 51,300 人、2024—2034 年预测增长 1% 至 2% 与期间年均岗位空缺约 5,000 个（含增长与替补）。",
-                  "用于说明就业预测与 OEWS 时点就业估计口径不同，且预测不等于个人岗位结果、空缺主要由替换需求构成。"
+                  "BLS 表 1.2（美国本职业 47-4041）：2025 年约 52,700 个岗位，2035 年预计约 53,500 个，变化 +1.5%，年均约 4,300 个职位空缺，含人员替补。人数分别取整。",
+                  "BLS 表 1.2 将高中或同等学历与中期在岗培训列为典型美国入行准备。按项目核污染物、适用安全培训和许可。"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
-                "limitation": "为 O*NET 在 47-4041.00 页呈现的本职业口径；预测增长 1% 至 2% 且本职业总量较小。",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
                 "market": "美国",
-                "name": "O*NET OnLine：危险材料清除工就业趋势（47-4041.00，本职业自身口径）",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "47-4041.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/47-4041.00"
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "47-4041",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32665,18 +32684,18 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明公开企业薪酬调查未建立与本职业精确对应的全国工资分布。",
-                  "不作为本职业工资代理数字使用。"
+                  "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局表 2、5 给出 2025 年水利、环境和公共设施管理业年平均工资。城镇非私营单位 70,172 元，城镇私营单位 49,527 元。",
+                  "水利、环境和公共设施管理业行业参照"
                 ],
-                "evidence_type": "official survey release",
+                "evidence_type": "水利、环境和公共设施管理业行业参照",
                 "id": "cnclass",
-                "limitation": "为岗位大类聚合口径，未建立与本职业精确对应的统计值。",
+                "limitation": "水利、环境和公共设施管理业行业参照",
                 "market": "中国大陆",
-                "name": "人力资源和社会保障部：企业薪酬调查信息",
-                "period": "2025 survey; accessed 2026-09-22",
-                "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "occupation major class proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
+                "name": "国家统计局：2025年城镇单位就业人员年平均工资情况",
+                "period": "2025",
+                "publisher": "国家统计局",
+                "scope": "水利、环境和公共设施管理业行业参照",
+                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32697,34 +32716,34 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明危险材料与受限空间与高处与用电与起重与机械作业与应急处置要求。",
-                  "现场作业须按许可与规程与防护与培训要求执行，不得带隐患或超许可作业。"
+                  "中国大陆上岗前应按《安全生产法》第二十八条完成适用安全教育和培训。",
+                  "中国大陆上岗前应按《安全生产法》第二十八条完成适用安全教育和培训。"
                 ],
-                "evidence_type": "regulator portal",
+                "evidence_type": "法律原文（机关转载）",
                 "id": "facilities",
                 "limitation": "以主管机关发布的法规与要求为准。",
                 "market": "中国大陆",
-                "name": "中华人民共和国应急管理部：安全生产与危险材料与受限空间与用电要求",
-                "period": "current; accessed 2026-09-22",
+                "name": "中华人民共和国安全生产法",
+                "period": "2021",
                 "publisher": "中华人民共和国应急管理部",
-                "scope": "workplace safety",
-                "url": "https://www.mem.gov.cn/"
+                "scope": "中国大陆上岗培训",
+                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明危险废物与放射性废物与泄漏与污染场地的环保与许可要求。",
-                  "包装与标识与运输与处置与联单须按主管机关要求执行。"
+                  "《生态环境法典》第五百三十一、五百三十二、五百三十四、五百三十六条分别涉及危险废物标志、台账、经营单位许可和转移联单。",
+                  "经营单位许可、人员培训与现场授权按各自规则核实。"
                 ],
-                "evidence_type": "regulator portal",
+                "evidence_type": "法律原文（机关转载）",
                 "id": "operations",
                 "limitation": "以主管机关发布的法规与要求为准。",
                 "market": "中国大陆",
-                "name": "中华人民共和国生态环境部：环境保护与危险废物与放射性废物管理要求",
-                "period": "current; accessed 2026-09-22",
+                "name": "中华人民共和国生态环境法典",
+                "period": "2026-08-15",
                 "publisher": "中华人民共和国生态环境部",
-                "scope": "environmental protection",
-                "url": "https://www.mee.gov.cn/"
+                "scope": "中国大陆危险废物记录和许可",
+                "url": "https://www.mee.gov.cn/ywgz/fgbz/fl/202603/t20260313_1146496.shtml"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32786,7 +32805,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：危险材料清除工职业范围与工作情境（47-4041.00）",
                 "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "47-4041.00 exact occupation",
                 "url": "https://www.onetonline.org/link/custom/47-4041.00"
               },
@@ -32834,24 +32853,24 @@
                 "market": "美国",
                 "name": "O*NET OnLine：危险材料清除工热门技术（47-4041.00）",
                 "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "47-4041.00 exact occupation",
                 "url": "https://www.onetonline.org/link/hot_tech/47-4041.00"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于字段与证据口径与缺口登记规则。",
-                  "用于跨市场与法域口径边界说明。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "编辑说明",
                 "id": "employer",
-                "limitation": "内部口径规则，非外部事实来源。",
-                "market": "全球",
-                "name": "FermatMind 职业内容字段与证据口径规则",
-                "period": "current authoring rules",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页任务",
                 "url": "https://fermatmind.com"
               },
               {
@@ -32866,7 +32885,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：危险材料清除工证书目录（47-4041.00）",
                 "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "47-4041.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localcert/47-4041.00"
               },
@@ -32882,7 +32901,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：危险材料清除工国家培训（47-4041.00）",
                 "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "47-4041.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localtraining/47-4041.00"
               },
@@ -32898,7 +32917,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：保温工（47-2131.00）",
                 "period": "current; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "47-2131.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/47-2131.00"
               },
@@ -32914,7 +32933,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：化粪池维修员与下水管道清洁工（47-4071.00）",
                 "period": "current; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "47-4071.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/47-4071.00"
               },
@@ -32951,18 +32970,18 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对行政与支持服务一类行业。",
-                  "用于说明主要用人单位类型。"
+                  "行业分布用于说明就业场景。",
+                  "行业就业占比与工资分开。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "onet-wages",
-                "limitation": "该口径为美国分布，不建立中国大陆映射。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
                 "name": "O*NET OnLine：危险材料清除工行业分布（47-4041.00）",
-                "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
                 "scope": "47-4041.00 exact occupation",
                 "url": "https://www.onetonline.org/link/industry/47-4041.00"
               },
@@ -32978,42 +32997,96 @@
                 "market": "美国",
                 "name": "O*NET OnLine：危险材料清除工详细工作活动与工作情境（47-4041.00）",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "47-4041.00 exact occupation",
                 "url": "https://www.onetonline.org/link/longview/47-4041.00"
               },
               {
                 "accessed_at": "2026-10-11",
                 "details": [
-                  "使用表2非私营及表5私营同一行业门类，单位元/年；不折算个人月薪。",
-                  "污染清除、环境治理与修复服务可出现在该行业；建筑拆除现场岗位按实际雇主行业另核"
+                  "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局表 2、5 给出 2025 年水利、环境和公共设施管理业年平均工资。城镇非私营单位 70,172 元，城镇私营单位 49,527 元。",
+                  "水利、环境和公共设施管理业行业参照"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wage-release-2025",
-                "limitation": "行业全体就业人员平均工资，不是本职业中位数、起薪或个人收入；非私营与私营分列。",
+                "limitation": "水利、环境和公共设施管理业行业参照",
                 "market": "中国大陆",
                 "name": "国家统计局：2025年城镇单位就业人员年平均工资情况",
                 "period": "2025年；2026-05-15发布",
                 "publisher": "国家统计局",
-                "scope": "水利、环境和公共设施管理业；中国城镇单位就业人员，行业门类宽口径",
+                "scope": "水利、环境和公共设施管理业行业参照",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "识别与准备 — 25/100; weight=1/3; hazardous-materials-removal-workers.ai-impact.ai-impact-table.95[0]",
-                  "清除与去污 — 0/100; weight=1/3; hazardous-materials-removal-workers.ai-impact.ai-impact-table.99[0]",
-                  "包装与装卸与处置 — 0/100; weight=1/3; hazardous-materials-removal-workers.ai-impact.ai-impact-table.103[0]"
+                  "BLS 表 1.2（美国本职业 47-4041）：2025 年约 52,700 个岗位，2035 年预计约 53,500 个，变化 +1.5%，年均约 4,300 个职位空缺，含人员替补。人数分别取整。",
+                  "BLS 表 1.2 将高中或同等学历与中期在岗培训列为典型美国入行准备。按项目核污染物、适用安全培训和许可。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "47-4041",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "《生态环境法典》第五百三十一、五百三十二、五百三十四、五百三十六条分别涉及危险废物标志、台账、经营单位许可和转移联单。"
+                ],
+                "evidence_type": "法律原文（机关转载）",
+                "id": "cn-work-example",
+                "limitation": "经营单位许可、人员培训与现场授权按各自规则核实。",
+                "market": "中国大陆",
+                "name": "中华人民共和国生态环境法典",
+                "period": "2026-08-15",
+                "publisher": "全国人大",
+                "scope": "中国大陆危险废物管理",
+                "url": "https://www.mee.gov.cn/ywgz/fgbz/fl/202603/t20260313_1146496.shtml"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "Z 表：封签与交接记录",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
+              },
+              {
+                "details": [
+                  "Pay 列出本职业在建筑业、修复及其他废物管理服务、废物处理处置的行业年薪中位数。"
+                ],
+                "id": "hazmat-ooh",
+                "name": "BLS 危险材料清除工职业展望",
+                "period": "2025-05",
+                "publisher": "BLS",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/hazardous-materials-removal-workers.htm"
+              },
+              {
+                "details": [
+                  "适用的美国危险废物作业和应急响应按 (a) 核范围，按任务核训练和监督。"
+                ],
+                "id": "osha-hazwoper",
+                "name": "OSHA 1910.120",
+                "period": "29 CFR 1910",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.120"
+              },
+              {
+                "details": [
+                  "完成原题和变式后打开折叠答案。"
+                ],
+                "id": "paper-answer-key",
+                "name": "纸面练习参考解（常见问题）",
+                "url": "#career-content-sources"
               }
             ]
           },
@@ -34350,8 +34423,8 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
-        "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为危险材料清除工？教育、资格与职业发展路径",
+        "entry_heading": "培训、分工与纸面试做",
+        "heading": "入行与 Z 表交接核对",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "hazardous-materials-removal-workers.path.career-path-block.21",
@@ -35225,8 +35298,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "bls"
+              "osha-hazwoper",
+              "facilities"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -35257,8 +35330,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "bls"
+              "osha-hazwoper",
+              "facilities"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35289,8 +35362,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "bls"
+              "cn-work-example",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -35321,8 +35394,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "bls"
+              "cn-work-example",
+              "onet"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -35353,8 +35426,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "bls"
+              "osha-hazwoper",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35385,8 +35458,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "bls"
+              "cn-work-example",
+              "paper-exercise"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35520,6 +35593,30 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "osha-hazwoper",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "hazardous-materials-removal-workers.source-register.published.1"
+            },
+            "id": "osha-hazwoper",
+            "label": "OSHA 1910.120",
+            "scope": "适用美国危险废物作业及应急响应"
+          },
+          {
+            "href": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "hazardous-materials-removal-workers.source-register.published.1"
+            },
+            "id": "cn-work-example",
+            "label": "中华人民共和国生态环境法典",
+            "scope": "中国大陆危险废物管理"
           }
         ]
       },
@@ -35829,7 +35926,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35843,7 +35940,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35857,7 +35954,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "hazardous-materials-removal-workers.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35880,7 +35977,7 @@
           "ui": {
             "ai_heading": "AI 会影响危险材料清除工的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "中国行业工资背景与精确职业缺口",
+            "official_heading": "大陆行业年平均工资参照",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "危险材料清除工在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35911,7 +36008,7 @@
         "bls_table": [
           {
             "fact_ref": "us-wage-low10-2025",
-            "指标": "薪资 · 10 分位",
+            "指标": "工资 · 第 10 分位",
             "数值": {
               "$item": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35926,7 +36023,7 @@
             }
           },
           {
-            "指标": "薪资 · 25 分位",
+            "指标": "工资 · 第 25 分位",
             "数值": {
               "$item": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.11",
               "block": "us-salary",
@@ -35942,7 +36039,7 @@
           },
           {
             "fact_ref": "us-wage-2025",
-            "指标": "薪资 · 中位数",
+            "指标": "工资 · 第 50 分位",
             "数值": {
               "$item": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.13",
               "block": "us-salary",
@@ -35957,7 +36054,7 @@
             }
           },
           {
-            "指标": "薪资 · 75 分位",
+            "指标": "工资 · 第 75 分位",
             "数值": {
               "$item": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.15",
               "block": "us-salary",
@@ -35973,7 +36070,7 @@
           },
           {
             "fact_ref": "us-wage-high10-2025",
-            "指标": "薪资 · 90 分位",
+            "指标": "工资 · 第 90 分位",
             "数值": {
               "$item": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.17",
               "block": "us-salary",
@@ -36096,7 +36193,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国危险材料清除工工资多少（本职业（47-4041.00）自身口径）？",
+        "heading": "美国危险材料清除工工资",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": "May 2025，BLS OOH，SOC 47-4041",
         "industry_rows": [
@@ -36232,52 +36329,55 @@
         "wage_column_labels": [
           "工资统计位置",
           "年工资参考",
-          "折算边界",
+          "时薪",
           "怎样理解这个位置"
         ],
         "wage_heading": "美国工资分布",
         "wage_tiers": [
           {
-            "equivalent": "官方年工资，非个人月收入",
+            "equivalent": "18.49 美元/小时",
             "interpretation": {
               "$item": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最低 10%",
-            "value": {
-              "$fact": "us-wage-low10-2025",
-              "field": "display_value"
-            }
+            "label": "第 10 百分位",
+            "value": "38,460 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "21.5 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资。",
+            "label": "第 25 百分位",
+            "value": "44,720 美元/年"
+          },
+          {
+            "equivalent": "23.78 美元/小时",
             "interpretation": {
               "$item": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "中位数（50%）",
-            "value": {
-              "$fact": "us-wage-2025",
-              "field": "display_value"
-            }
+            "label": "第 50 百分位",
+            "value": "49,450 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "29.58 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资。",
+            "label": "第 75 百分位",
+            "value": "61,530 美元/年"
+          },
+          {
+            "equivalent": "39.62 美元/小时",
             "interpretation": {
               "$item": "hazardous-materials-removal-workers.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最高 10%",
-            "value": {
-              "$fact": "us-wage-high10-2025",
-              "field": "display_value"
-            }
+            "label": "第 90 百分位",
+            "value": "82,410 美元/年"
           }
         ]
       },
@@ -36421,7 +36521,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "hazardous-materials-removal-workers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36466,7 +36566,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "hazardous-materials-removal-workers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36511,7 +36611,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "oews",
             "value": {
               "$item": "hazardous-materials-removal-workers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36613,6 +36713,18 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "hazardous-materials-removal-workers.source-register.published.1"
+            },
+            "id": "bls-ep-2025-2035",
+            "label": "BLS Employment Projections, Table 1.2",
+            "scope": "美国 47-4041 的全国就业与空缺预测"
           }
         ],
         "transitions": [
@@ -36889,7 +37001,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034，本职业（47-4041.00）自身口径）",
+            "label": "2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "hazardous-materials-removal-workers.profile.onet-structured-fields-block.4",
@@ -37076,7 +37188,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "cta_label": "了解我的智力与推理表现",
+            "cta_label": "体验矩阵推理测评",
             "evidence_level": {
               "$item": "hazardous-materials-removal-workers.fit.personality-fit-block.19",
               "block": "fit",
@@ -37113,7 +37225,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "cta_label": "了解我的情绪智力能力",
+            "cta_label": "用 EQ 自评梳理情绪与沟通习惯",
             "evidence_level": {
               "$item": "hazardous-materials-removal-workers.fit.personality-fit-block.23",
               "block": "fit",
@@ -37654,7 +37766,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合危险材料清除工",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37731,7 +37843,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "大五人格（中文）"
+            "label": "大五人格测评"
           },
           {
             "href": {
@@ -37741,7 +37853,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "MBTI 偏好测评"
           },
           {
             "href": {
@@ -37751,7 +37863,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "智力与推理测评（中文）"
+            "label": "推理测评"
           },
           {
             "href": {
@@ -37761,7 +37873,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "情绪智力测评（中文）"
+            "label": "情绪能力测评"
           }
         ]
       },
@@ -37830,14 +37942,14 @@
       "interface.path.credential_boundary_label": "资格边界",
       "interface.path.entry_decisions_heading": "入行前要核对什么",
       "interface.path.next_step_label": "下一步",
-      "interface.path.promotion_evidence_label": "晋升证据",
+      "interface.path.promotion_evidence_label": "阶段记录与探索练习",
       "interface.path.responsibilities_label": "典型职责",
       "interface.profile.comparison.dimension_header": "维度",
       "interface.profile.comparison.primary_header": "主要方向",
       "interface.profile.comparison.secondary_header": "比较方向",
       "interface.profile.responsibilities_heading": "核心工作",
       "interface.quick_decision.caution_heading": "什么情况下需要慎重选择危险材料清除工？",
-      "interface.quick_decision.experiment_heading": "如何用一次小实验判断自己是否适合危险材料清除工？",
+      "interface.quick_decision.experiment_heading": "纸面试做能帮你观察什么？",
       "interface.quick_decision.suit_heading": "什么样的人更可能适合危险材料清除工？",
       "interface.risk.affected_roles_label": "主要岗位",
       "interface.risk.consequence_label": "可能后果",
@@ -37939,19 +38051,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资参考",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
       "market-signals": "职业前景与相关职业转向",
       "navigation": "下一步与相关入口",
-      "path": "入行、资格与职业发展",
+      "path": "入行与 Z 表交接核对",
       "profile": "职业画像",
       "quick-decision": "快速判断",
       "risk": "工作压力、风险与职业边界",
       "source-register": "资料来源",
       "sources": "常见问题与资料来源",
-      "us-salary": "美国薪资参考"
+      "us-salary": "美国危险材料清除工工资"
     }
   },
   "fact_register": {
@@ -37969,19 +38081,19 @@
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-4041.00 页呈现；O*NET 在该页未标注该数据取自上或上级职业，本页按本职业（47-4041.00）自身口径如实标注，也不借用相邻职业数值；不含福利与奖金；中位为分布中点，分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
-        "display_value": "中位年薪 49,450 美元 / 中位时薪 23.78 美元（2025 年，BLS OEWS，本职业（47-4041.00）自身口径）",
+        "derivation": "O*NET 全国工资原表，美国 2025 年 5 月 OEWS。",
+        "display_value": "49,450 美元/年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "工资中位数",
-        "occupation_scope": "本职业：危险材料清除工",
-        "period": "2025",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "47-4041",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-4041.00 页呈现；O*NET 在该页未标注该数据取自上或上级职业，本页按本职业（47-4041.00）自身口径如实标注，也不借用相邻职业数值；不含福利与奖金；中位为分布中点，分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "O*NET 全国工资原表，美国 2025 年 5 月 OEWS。",
         "display_value": "第 10 分位年薪 38,460 美元 / 时薪 18.49 美元（2025 年，BLS OEWS，本职业（47-4041.00）自身口径）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
@@ -37989,11 +38101,11 @@
         "occupation_scope": "本职业：危险材料清除工",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-4041.00 页呈现；O*NET 在该页未标注该数据取自上或上级职业，本页按本职业（47-4041.00）自身口径如实标注，也不借用相邻职业数值；不含福利与奖金；中位为分布中点，分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "O*NET 全国工资原表，美国 2025 年 5 月 OEWS。",
         "display_value": "第 90 分位年薪 82,410 美元 / 时薪 39.62 美元（2025 年，BLS OEWS，本职业（47-4041.00）自身口径）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
@@ -38001,71 +38113,71 @@
         "occupation_scope": "本职业：危险材料清除工",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 2024—2034（经 O*NET 在 47-4041.00 页呈现，取值自本职业（47-4041.00），预测增长 1% 至 2%）；O*NET 该页示例的就业基期为 2024 年 51,300 人；预测含替换需求、不等于实际招聘数或裁员，且受建筑与拆除与环保治理与危废与合规要求影响；不代表个人岗位稳定性。",
-        "display_value": "增长 慢于平均 1% 至 2%（2024—2034，BLS 就业预测，本职业（47-4041.00）自身口径）",
+        "derivation": "BLS 表 1.2 的 47-4041 行，人数按千人原表换算。",
+        "display_value": "+1.5%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长",
-        "occupation_scope": "本职业：危险材料清除工",
-        "period": "2024—2034",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "47-4041",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测基期（2024 年本职业（47-4041.00）约 51,300 人，经 O*NET 呈现）；与 BLS OEWS 的时点就业估计口径不同（OEWS 只覆盖被抽样非农机构雇主、不含自雇），本页分别标注不混用；本职业总量较小且受项目与合规需求影响。",
-        "display_value": "就业 约 51,300 人（2024，BLS 就业预测基期，本职业（47-4041.00）自身口径）",
+        "derivation": "BLS 表 1.2 的 47-4041 行，人数按千人原表换算。",
+        "display_value": "约 52,700 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数",
-        "occupation_scope": "本职业：危险材料清除工",
-        "period": "2024",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "47-4041",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测的期间空缺（2024—2034 本职业（47-4041.00）年均约 5,000 个，含增长与替补，经 O*NET 呈现）；为期间年均口径、主要由替换需求构成，不可读作净新增岗位。",
-        "display_value": "预计年均岗位空缺约 5,000 个（2024—2034，BLS 就业预测，本职业（47-4041.00）自身口径，含增长与替补）",
+        "derivation": "BLS 表 1.2 的 47-4041 行，人数按千人原表换算。",
+        "display_value": "年均约 4,300 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺",
-        "occupation_scope": "本职业：危险材料清除工",
-        "period": "2024—2034",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "47-4041",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜中国大陆公开职业统计未建立与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业；危险废物与放射性污染与安全生产与职业病防治与环境保护管理另按相应要求执行（危险废物与放射性作业存在法定许可与资质要求）；本页按证据政策登记缺口而不使用代理数字。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与 O*NET 47-4041.00（危险材料清除工）精确对应的全国职业工资分布；不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "国家统计局表 2、5，行业均值。",
+        "display_value": "70,172 元/年（城镇非私营）",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
-        "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：危险材料清除工",
+        "measure": "水利、环境和公共设施管理业行业参照",
+        "occupation_scope": "中国大陆城镇水利、环境和公共设施管理业",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs-wage-release-2025"
         ]
       },
       {
-        "derivation": "口径｜中国大陆公开职业统计未建立与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业；危险废物与放射性污染与安全生产与职业病防治与环境保护管理另按相应要求执行（危险废物与放射性作业存在法定许可与资质要求）；本页按证据政策登记缺口而不使用代理数字。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与 O*NET 47-4041.00（危险材料清除工）精确对应的全国职业工资分布；不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "国家统计局表 2、5，行业均值。",
+        "display_value": "49,527 元/年（城镇私营）",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
-        "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：危险材料清除工",
+        "measure": "水利、环境和公共设施管理业行业参照",
+        "occupation_scope": "中国大陆城镇水利、环境和公共设施管理业",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs-wage-release-2025"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-4041.00 页呈现；O*NET 在该页未标注该数据取自上或上级职业，本页按本职业（47-4041.00）自身口径如实标注，也不借用相邻职业数值；不含福利与奖金；中位为分布中点，分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "O*NET 全国工资原表，美国 2025 年 5 月 OEWS。",
         "display_value": "第 25 分位年薪 44,720 美元 / 时薪 21.50 美元（2025 年，BLS OEWS，本职业（47-4041.00）自身口径）",
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
@@ -38073,11 +38185,11 @@
         "occupation_scope": "本职业：危险材料清除工",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-4041.00 页呈现；O*NET 在该页未标注该数据取自上或上级职业，本页按本职业（47-4041.00）自身口径如实标注，也不借用相邻职业数值；不含福利与奖金；中位为分布中点，分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "O*NET 全国工资原表，美国 2025 年 5 月 OEWS。",
         "display_value": "第 75 分位年薪 61,530 美元 / 时薪 29.58 美元（2025 年，BLS OEWS，本职业（47-4041.00）自身口径）",
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
@@ -38085,65 +38197,53 @@
         "occupation_scope": "本职业：危险材料清除工",
         "period": "2025",
         "source_refs": [
-          "onet"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "8%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "危险材料清除工",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "oews"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "危险材料清除工 · 任务、交付与责任边界",
-      "来源范围 · 统计口径 · 人工复核",
-      "中国精确职业工资缺口按证据保留"
+      "危险材料清除作业人员",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国年薪中位数（2025，BLS OEWS，本职业（47-4041.00）自身口径）"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，本职业（47-4041.00）自身口径）"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，本职业（47-4041.00）自身口径）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，本职业（47-4041.00）自身口径）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "cn-urban-nonprivate-2025",
         "key": "china_pay",
-        "label": "中国大陆（暂无精确职业工资）"
+        "label": "水利、环境和公共设施管理业行业参照"
       }
     ]
   },
@@ -38151,17 +38251,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "危险材料清除工做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET/SOC 47-4041.00）、官方范围对危险材料专门培训与认证或受限空间许可的要求、美国工资与就业的本职业（47-4041.00）自身口径与中国大陆数据缺口。"
+      "text": "了解危险材料清除作业人员的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "危险材料清除工"
+      "text": "危险材料清除作业人员做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "d6a28682b98420607078e3d455faca1732aa1b718924f298cdf4221157def1e6",
+  "source_content_sha256": "4350cbb72709aab466bc997f0a4876ca0feaf09569cd0506ab7bb09b8777f257",
   "subject": {
     "canonical_slug": "hazardous-materials-removal-workers",
-    "name": "危险材料清除工",
-    "summary": "危险材料清除工对应 O*NET/SOC 47-4041.00「Hazardous Materials Removal Workers」这一精确职业：识别、清除、包装、运输或处置危险材料，包括石棉、含铅涂料、废油、燃料、传动液、放射性材料或受污染土壤；通常要求危险材料处理的专门培训与认证或受限空间进入许可，可能操作土方设备或卡车；常见职位名称包括 Abatement Worker 与 Asbestos Worker 与 Hazmat Technician 与 Mold Damage Technician 与 Waste Handling Technician。官方范围原文：Identify, remove, pack, transport, or dispose of hazardous materials, including asbestos, lead-based paint, waste oil, fuel, transmission fluid, radioactive materials, or contaminated soil. Specialized training and certification in hazardous materials handling or a confined entry permit are generally required. May operate earth-moving equipment or trucks. 口径说明：本页美国工资与就业即取 O*NET 在 47-4041.00 页呈现的本职业（47-4041.00）自身口径（该页未标注取自上级职业），不以相邻职业数值替代；该职业 2024—2034 年预测增长 1% 至 2%。本页内容不构成医疗、法律或合规意见。"
+    "name": "危险材料清除作业人员",
+    "summary": "危险材料清除作业人员在受管控的项目中识别、移除、装包或交接危险材料。任务取决于材料、场地和岗位训练，项目还会区分样品、人员防护、运输与合规责任。"
   }
 }

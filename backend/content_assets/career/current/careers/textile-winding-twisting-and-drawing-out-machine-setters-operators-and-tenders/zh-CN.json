@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先体验材料身份、规格和数量核查：能否把批号、单位、读数与记录对应，发现异常后保留原值并提出明确问题。现场工作还要核班次、重复巡检和防护条件，不能只按兴趣或一次计算速度判断。"
+              "纸面体验｜对照虚构卷筒标签和交班单，标记卷筒号缺失的异常，保留机台、时点和可用的批次信息。 "
             ]
           },
           "id": "textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24818,13 +24817,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "设定、操作或看护卷绕、加捻及牵伸设备，将纱线或纤维条转为符合规格的卷装、纱线或条子，并核对批次、完成量、产品质量和异常。中文名称是美国职业范围译名，具体中国岗位按工序核对。"
+              "纺织卷绕、加捻和牵伸设备操作人员看管纱线走向和设备运行，记录批次、停机或需要维修人员核查的情况。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-6064.00"
           ],
           "type": "prose"
         }
@@ -25531,14 +25529,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先讨论信息整理：工单核对、计数汇总、异常摘要和交班草稿；现场状态及质量须匹配验证。BLS2025—2035本职总体下降10.3%、年均约2,400空缺含替补，非AI因果；本页另列AI影响度编辑估算，不提供实测替代率。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构卷筒标签和交班单，标记卷筒号缺失的异常，保留机台、时点和可用的批次信息。"
             ]
           },
           "id": "textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "editorial"
+            "transfer-onet-51-6064.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33138,6 +33135,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-6064.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-6064.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-6064.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38611,10 +38635,10 @@
       "text": "纺织卷绕、加捻与牵伸设备设定员、操作员与看护员"
     }
   },
-  "source_content_sha256": "1a88944e8f33e84900891128756048cdc7d801e15d75c10563c65dd0039448e6",
+  "source_content_sha256": "1140af7cf8f4e22f8d297145a1dbb4a6e2f8ae9234d4e59f50cf98e9f1433854",
   "subject": {
     "canonical_slug": "textile-winding-twisting-and-drawing-out-machine-setters-operators-and-tenders",
     "name": "纺织卷绕、加捻与牵伸设备设定员、操作员与看护员",
-    "summary": "设定、操作或看护卷绕、加捻及牵伸设备，将纱线或纤维条转为符合规格的卷装、纱线或条子，并核对批次、完成量、产品质量和异常。中文名称是美国职业范围译名，具体中国岗位按工序核对。"
+    "summary": "纺织卷绕、加捻和牵伸设备操作人员看管纱线走向和设备运行，记录批次、停机或需要维修人员核查的情况。"
   }
 }

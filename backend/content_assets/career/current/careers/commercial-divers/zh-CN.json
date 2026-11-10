@@ -1418,6 +1418,9 @@
       "item:commercial-divers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:commercial-divers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:commercial-divers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30504,6 +30507,21 @@
           "id": "commercial-divers.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。项目表列水下结构的检查位置，照片只标了日期。写出须向作业主管核对的点位与影像编号，实际潜水按获准方案。"
+            ]
+          },
+          "id": "commercial-divers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核潜水作业记录交接",
+          "type": "notice"
         }
       ]
     },
@@ -37496,6 +37514,13 @@
         "id": "commercial-divers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "commercial-divers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37859,7 +37884,7 @@
       "text": "商业潜水员"
     }
   },
-  "source_content_sha256": "9c0c3f9ec42ba93e14bd09e4a4883a9df7d91ff07ad041bb2cdaf0425792a7cf",
+  "source_content_sha256": "677c4034ad2f463ca4452e6592f62627ead9d48168e705588433bbcc61067d87",
   "subject": {
     "canonical_slug": "commercial-divers",
     "name": "商业潜水员",

@@ -162,12 +162,24 @@
         "status": "pending_mapping"
       },
       "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.interview-probation.10": {
+        "status": "pending_mapping"
+      },
+      "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.recruitment-sample.1": {
+        "status": "pending_mapping"
+      },
+      "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1": {
         "status": "mapped"
       },
       "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.definition-block.1": {
@@ -228,7 +240,7 @@
         "status": "pending_mapping"
       },
       "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.sources.faq-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -5689,52 +5701,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5965,96 +6115,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -11939,7 +12325,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "组合机床操作工（O*NET-SOC 51-4081.00）按工艺文件与图纸设置、操作或看管一种以上的切削或成形机床或机器人，交付尺寸与外观合格的金属或塑料零件。真正的工作交换是按规范装夹、设参与检尺寸，并为每一批次的加工状态留痕。"
+              "如果你更喜欢一直做同一工位，先问多久换单，以及交给下一工位前哪些项目必须重新核。"
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.1",
@@ -11953,7 +12339,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "如果你愿意按图纸与工艺卡逐项核对、能读懂尺寸公差与表面要求、并在多台设备同时运行时保持对异常声音、振动、温度与报警的敏感，这是比「喜欢机器」更有用的正向信号。"
+              "到目录「09 入行、资格与职业发展」找《MT-27：复核首件交接记录》，先用约 10 分钟作答，再看题后参考。"
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.2",
@@ -11967,7 +12353,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "需要谨慎的是：为赶产量跳过首件检验或量具校准；凭经验改设参而不核对工艺文件；或者在设备报警时绕过安全联锁继续运行。这些问题会直接变成批量报废、设备损坏或人身事故。"
+              "如果你喜欢在工件流转不同设备时，把工件、图纸版本与检验结果一起核清，可以考虑多种机床操作。"
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.3",
@@ -11981,7 +12367,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "可先做一次纸面工艺走查：取一份完全虚构的图纸与工艺卡，写出装夹方式、刀具或模具选择、关键尺寸与量具、首件检验项、批量抽检频次与三处安全确认点，并说明发现超差后的处置顺序。只用虚构或公开示例图纸，不操作真实设备。"
+              "到 09 做 MT-27。对照 F2、F6 的尺寸和图纸版本，写下要请记录负责人核实的问题。"
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.4",
@@ -12064,12 +12450,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "准备与训练：O*NET 将本职业列为准备层级 1—2（SVP 低于 6.0），通常要求高中文凭或 GED，相关经验从很少到数月不等，在岗培训从数天到一年；O*NET 全国训练目录列出 315 个相关项目（机床与机械加工技术方向）。"
+              "BLS 将高中或同等学历和中期在岗培训列为美国本职业的典型入行条件。 O*NET 新聘调查中，82% 选择高中或同等学历，8% 选择中学后证书，6% 选择读过大学但未取得学位。 这些回答不代表现职人员学历分布，也不规定雇主的录用条件。"
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.definition-block.5",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "onet-trends",
+            "onet-education-027"
           ],
           "type": "prose"
         },
@@ -12805,6 +13192,13 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "角色",
+              "工作",
+              "权限",
+              "证据",
+              "下一步"
+            ],
             "rows": [
               [
                 "协助操作",
@@ -12859,30 +13253,36 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "情境",
+              "需要说明",
+              "复核人",
+              "证据"
+            ],
             "rows": [
               [
-                "读图与尺寸解释",
-                "说明关键尺寸、公差与量具选择",
-                "能否把图纸要求转成可执行的检验项",
-                "图纸标注与检验项清单"
+                "图纸版本",
+                "说明如何把图纸与首件记录对应起来。",
+                "记录负责人确认原始版本。",
+                "图纸编号和有日期的检验记录。"
               ],
               [
-                "首件试切",
-                "按工艺卡设参、对刀并试切首件",
-                "是否先核对程序版本与量具校准",
-                "首件记录与量具校准记录"
+                "首件",
+                "说明送纸面复核前要核哪些项目。",
+                "真实生产由获授权人员决定。",
+                "尺寸、图纸版本与工件编号。"
               ],
               [
-                "异常处置",
-                "按现象停机、记录并上报",
-                "是否按安全联锁要求停止并保留证据",
-                "停机记录与异常说明"
+                "异常读数",
+                "说明要报告什么，由谁处理。",
+                "安全和设备处置由现场指定人员负责。",
+                "读数、时间及受影响工单。"
               ],
               [
-                "交接与记录",
-                "完成班次交接与批次记录归档",
-                "记录是否完整、可追溯",
-                "交接单与批次记录"
+                "交接",
+                "说明下一工位怎样找到各份记录。",
+                "接收人员确认已完成的项目。",
+                "含工位号与工单号的流转卡。"
               ]
             ]
           },
@@ -12890,6 +13290,7 @@
           "source_refs": [
             "onet-details"
           ],
+          "title": "复核人可能问什么",
           "type": "table"
         },
         {
@@ -12904,6 +13305,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "类别",
+              "凭证",
+              "权限",
+              "条件",
+              "边界",
+              "负责人",
+              "下一步"
             ],
             "rows": [
               [
@@ -12926,7 +13336,7 @@
               ],
               [
                 "机床与机械加工训练项目",
-                "当前O*NET434机床/机械加工教育训练项目",
+                "当前O*NET机床/机械加工教育训练项目",
                 "职业学校与院校",
                 "按项目与课程核验",
                 "项目结业不等同岗位录用",
@@ -12968,6 +13378,142 @@
             "onet-details"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "虚构材料（约 10 分钟）",
+                  "虚构工单要求首件实测直径为 28.00 至 28.10 毫米，并记图纸版本 D3，才可送纸面复核。",
+                  "F2 实测 28.08 毫米，图纸版本栏空白；F6 实测 28.14 毫米，记图纸 D3。",
+                  "仅看纸面，不测真实工件、不调机、不批准生产。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "任务与交付",
+                  "判断两份记录是否有一份可以送复核，分别引用尺寸与版本。",
+                  "给首件记录负责人写一个待核问题。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "参考入口",
+                  "独立作答后，到常见问题展开「MT-27 题后参考」。",
+                  "再与自己的记录对照。"
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "自核清单",
+                  "是否列了两条凭证、解释了判断，并指出谁能复核？"
+                ]
+              }
+            ]
+          },
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "title": "MT-27：复核首件交接记录",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "第 1 天",
+                  "开始 W-MT。另一张虚构工单只有在流转卡写明两个完成工位时才可交接。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "第 2 天",
+                  "R4：工位 A2 标为已完成，第二工位栏空白。照录工位及其记录状态。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "第 3 天",
+                  "R9：工位 A2、B5 都标为已完成。照录两个工位及其记录状态。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "第 4 天",
+                  "查缺哪项、谁能核原始记录。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "第 5 天",
+                  "写下两张流转卡的交接判断。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "第 6 天",
+                  "先独立核对每张卡的两个工位栏和完成状态。找同伴反馈可选。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "第 7 天",
+                  "完成第 6 天独立复核后，到常见问题展开「W-MT 第 7 天参考」。对照记录，再选一个要练的习惯。"
+                ]
+              }
+            ]
+          },
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "title": "七天纸面体验：独立新题",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "我读了两份记录。",
+              "我核对了两条规则。",
+              "我写下了自己的比较判断。",
+              "我指出了复核人。",
+              "我只用了虚构资料。",
+              "我独立复核了结果。",
+              "我选了一个要练的习惯。"
+            ]
+          },
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "title": "七天后的判断问题",
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "济南一则历史招聘公告中的数控车工岗位要求能看图并完成首件自检，同时兼顾数车和数铣者优先。这是相邻岗位样本，不代表当前空缺或全国准入。"
+            ]
+          },
+          "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.recruitment-sample.1",
+          "source_refs": [
+            "cn-recruitment-027"
+          ],
+          "title": "国内相邻岗位样本",
+          "type": "notice"
         }
       ]
     },
@@ -12982,7 +13528,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "当前美国51-4081：2025就业127100、2025—2035增长类别1%—2%、年均11600空缺。未读精确终期人数不代填。"
+              "BLS 预计美国 51-4081 的就业岗位从 2025 年的 127,100 个增至 2035 年的 127,900 个，净增 800 个（+0.6%）。预计年均空缺约 11,600 个，含替补需求。"
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.market-signals.market-signal-card.1",
@@ -13038,7 +13584,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "预测不保证个人收入或录用；本次采用实际可读O*NET当前就业，不将旧作者BLS403尝试记成本轮证据。"
+              "BLS 表 1.2 单列美国 51-4081 的全国岗位预测。当地招聘情况须看雇主和市场。"
             ]
           },
           "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.market-signals.market-signal-card.5",
@@ -13097,16 +13643,18 @@
                 ]
               },
               {
-                "answer": "O*NET 将本职业列为准备层级 1—2（SVP 低于 6.0），通常要求高中文凭或 GED，相关经验从很少到数月，在岗培训从数天到一年；全国训练目录列出 315 个机床与机械加工技术相关项目。",
+                "answer": "BLS 将高中或同等学历和中期在岗培训列为美国本职业的典型入行条件。 O*NET 新聘调查中，82% 选择高中或同等学历，8% 选择中学后证书，6% 选择读过大学但未取得学位。 这些回答不代表现职人员学历分布，也不规定雇主的录用条件。",
                 "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.5",
                 "question": "入行通常需要什么学历与训练？",
                 "question_key": "career.faq.multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.5",
                 "source_refs": [
+                  "onet-trends",
+                  "onet-education-027",
                   "source-pack-onet-localtraining"
                 ]
               },
               {
-                "answer": "不是。O*NET 国家认证目录列出 3 项第三方专业认证（机加工、润滑与油液监测方向），认证可证明特定技能但不等同法定执照或雇主上岗任命；是否需要以用人单位要求为准。",
+                "answer": "O*NET 展示 CareerOneStop 认证目录。具体岗位是否要求证书，应向发证机构或雇主核对。目录条目不授予许可或设备操作权限。",
                 "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.6",
                 "question": "有专业认证是必需的吗？",
                 "question_key": "career.faq.multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.6",
@@ -13115,7 +13663,7 @@
                 ]
               },
               {
-                "answer": "目前没有与 51-4081.00 精确对应的中国大陆全国职业工资分布；本页以国家统计局 2025 年制造业行业门类（非私营 113,594 元/年、私营 76,055 元/年）与规模以上企业「生产制造及有关人员」（79,182 元/年）作参照并标明边界。",
+                "answer": "本次未取得中国大陆与该职业精确对应的全国工资分布。2025 年城镇非私营单位制造业年均 113,594 元，城镇私营单位制造业年均 76,055 元。规模以上制造业企业的生产制造及有关人员年均 79,182 元。三项为不同人群的年平均。",
                 "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.7",
                 "question": "中国大陆的工资数据情况如何？",
                 "question_key": "career.faq.multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.7",
@@ -13124,13 +13672,26 @@
                 ]
               },
               {
-                "answer": "2025 年 BLS OEWS 中位 22.68 美元/小时、47,180 美元/年；第 10 与第 90 分位分别为 35,780 与 74,450 美元/年；这些都不是保证起薪或含加班的个人收入。",
+                "answer": "2025 年 BLS OEWS 中位 22.68 美元/小时、47,180 美元/年；第 10 与第 90 分位分别为 35,780 与 74,450 美元/年；这些都不是保证起薪或含加班的个人收入。 BLS 预计美国 51-4081 的就业岗位从 2025 年的 127,100 个增至 2035 年的 127,900 个，净增 800 个（+0.6%）。预计年均空缺约 11,600 个，含替补需求。",
                 "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.8",
                 "question": "美国工资是多少？",
                 "question_key": "career.faq.multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.8",
                 "source_refs": [
-                  "onet-wages"
+                  "onet-wages",
+                  "onet-trends"
                 ]
+              },
+              {
+                "answer": "两份记录都暂不能送复核。F2 尺寸在范围内，但没有版本；F6 版本为 D3，但超过 28.10 毫米。请记录负责人核 F2 对应的图纸版本，不能从 F6 抄过来。",
+                "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.trial-short-reference",
+                "question": "MT-27 题后参考",
+                "question_key": "career.faq.multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.trial-short-reference"
+              },
+              {
+                "answer": "R9 按题内规则可交接，因为 A2、B5 都标为已完成。R4 第二工位栏空白，保留待核并请负责人查原始记录。流转卡不授权操作任何设备。",
+                "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.trial-week-reference",
+                "question": "W-MT 第 7 天参考",
+                "question_key": "career.faq.multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.trial-week-reference"
               }
             ]
           },
@@ -13168,37 +13729,37 @@
           "data": {
             "entries": [
               {
-                "entity": "组合机床操作工",
+                "entity": "霍兰德职业兴趣测试（中文）",
                 "id": "navigation-1",
                 "relation": "career.section",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "组合机床操作工",
+                "entity": "MBTI（英文）",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "组合机床操作工",
+                "entity": "大五人格（英文）",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "组合机床操作工",
+                "entity": "MBTI（中文）",
                 "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "组合机床操作工",
+                "entity": "大五人格（中文）",
                 "id": "navigation-5",
                 "relation": "career.section",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "组合机床操作工",
+                "entity": "职业指南",
                 "id": "navigation-6",
                 "relation": "career.section",
                 "url": "/zh/career/jobs/multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic"
@@ -13252,19 +13813,19 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "前景解读与相邻职业转向为编辑归纳，数字均来自 O*NET 转发的 BLS 2024—2034 预测。"
+                  "BLS 预计美国 51-4081 的就业岗位从 2025 年的 127,100 个增至 2035 年的 127,900 个，净增 800 个（+0.6%）。预计年均空缺约 11,600 个，含替补需求。"
                 ],
                 "evidence_type": "editorial synthesis",
                 "id": "editorial-market",
-                "limitation": "前景解读与相邻职业转向为编辑归纳，数字均来自 O*NET 转发的 BLS 2024—2034 预测。",
+                "limitation": "全国职业预测统计岗位与空缺，不预测单个雇主招聘，也不把变化归因于 AI。",
                 "market": "US",
-                "name": "前景与转向解读的编辑归纳",
-                "period": "2026-09-25",
-                "publisher": "FermatMind",
-                "scope": "editorial_synthesis",
-                "url": null
+                "name": "BLS 表 1.2：美国多种机床操作岗位",
+                "period": "BLS 表 1.2，2025—2035 年",
+                "publisher": "美国劳工统计局 BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -13342,19 +13903,19 @@
                 "url": "https://www.onetcenter.org/taxonomy.html"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "2024 年 131,000 人、2034 年 130,300 人、变化 -1%（Little or no change）、年均空缺 12,800；为全国口径，不外推地区或单个工厂。"
+                  "BLS 预计美国 51-4081 的就业岗位从 2025 年的 127,100 个增至 2035 年的 127,900 个，净增 800 个（+0.6%）。预计年均空缺约 11,600 个，含替补需求。"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "onet-trends",
-                "limitation": "2024 年 131,000 人、2034 年 130,300 人、变化 -1%（Little or no change）、年均空缺 12,800；为全国口径，不外推地区或单个工厂。",
+                "limitation": "全国职业预测统计岗位与空缺，不预测单个雇主招聘，也不把变化归因于 AI。",
                 "market": "US",
-                "name": "National Employment Trends: Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
-                "period": "BLS 2024—2034 projections via O*NET；查阅 2026-09-25",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS 表 1.2：美国多种机床操作岗位",
+                "period": "BLS 表 1.2，2025—2035 年",
+                "publisher": "美国劳工统计局 BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/51-4081.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -13419,11 +13980,11 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "仅给出就业行业占比（制造业 81%、行政与支持服务 12%、其他行业 7%），不是需求预测或行业工资。"
+                  "O*NET 2025 年就业占比为制造业 80%、行政与支持服务 11%、其他行业 9%。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "仅给出就业行业占比（制造业 81%、行政与支持服务 12%、其他行业 7%），不是需求预测或行业工资。",
+                "limitation": "这是就业人数占比，不能用来估计行业工资。",
                 "market": "US",
                 "name": "Industries: Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
                 "period": "current page; accessed 2026-09-25",
@@ -13434,14 +13995,14 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "列出 3 项第三方专业认证（ICML、NIMS、STLE 各一项），不等同法定执照或雇主上岗任命。"
+                  "目录用于查找条目，具体条件向机构核对。目录不规定许可或雇主录用条件。"
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "source-pack-onet-localcert",
-                "limitation": "列出 3 项第三方专业认证（ICML、NIMS、STLE 各一项），不等同法定执照或雇主上岗任命。",
+                "limitation": "目录用于查找条目，具体条件向机构核对。目录不规定许可或雇主录用条件。",
                 "market": "US",
                 "name": "National Certifications: Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
-                "period": "列出 3 项认证；查阅 2026-09-25",
+                "period": "当前目录",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/51-4081.00"
@@ -13449,14 +14010,14 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "训练项目目录是美国教育供给信号，不等同岗位准入或中国市场结论。"
+                  "目录用于查找条目，具体条件向机构核对。目录不规定许可或雇主录用条件。"
                 ],
                 "evidence_type": "official local training discovery",
                 "id": "source-pack-onet-localtraining",
-                "limitation": "训练项目目录是美国教育供给信号，不等同岗位准入或中国市场结论。",
+                "limitation": "目录用于查找条目，具体条件向机构核对。目录不规定许可或雇主录用条件。",
                 "market": "US",
-                "name": "National Training: Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
-                "period": "315 个项目；查阅 2026-09-25",
+                "name": "O*NET 培训目录",
+                "period": "当前目录",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/51-4081.00"
@@ -13522,6 +14083,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国受访者对新聘人员所需学历的回答，不代表现职人员学历分布或统一招聘门槛。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-education-027",
+                "limitation": "美国受访者对新聘人员所需学历的回答，不代表现职人员学历分布或统一招聘门槛。",
+                "market": "US",
+                "name": "O*NET 新聘人员学历调查",
+                "period": "2026-11-10 核查",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-4081.00#Education"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "济南一则历史招聘公告中的数控车工岗位要求能看图并完成首件自检，同时兼顾数车和数铣者优先。这是相邻岗位样本，不代表当前空缺或全国准入。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-recruitment-027",
+                "limitation": "济南一则历史招聘公告中的数控车工岗位要求能看图并完成首件自检，同时兼顾数车和数铣者优先。这是相邻岗位样本，不代表当前空缺或全国准入。",
+                "market": "CN",
+                "name": "济南起步区招聘公告",
+                "period": "2026 年历史公告",
+                "publisher": "济南新旧动能转换起步区",
+                "scope": "recruitment_proxy",
+                "url": "https://jnxxq.jinan.gov.cn/col/col71555/art/2026/art_362743ff0660480badcf521e0dbc7bfc.html"
               }
             ]
           },
@@ -13579,8 +14170,8 @@
             "label": "O*NET National Wages（2025 BLS OEWS）"
           },
           {
-            "href": "https://www.onetonline.org/link/localtrends/51-4081.00",
-            "label": "O*NET 就业趋势（BLS 2024—2034）"
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "label": "BLS 表 1.2：美国就业预测"
           },
           {
             "href": "https://www.onetonline.org/link/industry/51-4081.00",
@@ -13648,7 +14239,7 @@
             "职业方向": "磨工"
           }
         ],
-        "transition": "选择相邻方向时，先比较你更愿意承担的责任类型（整件工艺、单机精度、模具工装、板材冲剪、焊接连接或精加工表面），再补该方向的设备与工艺知识。"
+        "transition": "选择相邻方向时，先比较你更愿意承担的责任类型（整件工艺、单机精度、模具工装、板材冲剪、焊接连接或精加工表面），再补该方向的设备与工艺知识。 第 09 节 MT-27 可用虚构首件记录体验交接判断。"
       },
       "ai_impact_table": {
         "action_rows": [
@@ -13776,24 +14367,24 @@
         "evidence_rows": [
           {
             "使用限制": "仅描述本职业口径，不证明采用或自动化程度",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET OnLine · 任务与工作环境",
             "研究对象": "51-4081.00 任务与工作情境",
             "结论": "定义本职业范围、21 项任务与工作情境调查口径",
             "链接": "https://www.onetonline.org/link/details/51-4081.00"
           },
           {
             "使用限制": "概要口径为美国本职业，不外推到其他地区",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET OnLine · 职业概况",
             "研究对象": "O*NET 概要（含兴趣代码 RC）",
             "结论": "记录职业标识、兴趣代码与准备层级 1—2",
             "链接": "https://www.onetonline.org/link/summary/51-4081.00"
           },
           {
             "使用限制": "全国口径预测，不是个人录用概率或单个工厂的岗位趋势",
-            "来源": "O*NET / U.S. Bureau of Labor Statistics",
+            "来源": "BLS 表 1.2：就业预测",
             "研究对象": "美国51-4081当前2025就业与2025—2035预测",
-            "结论": "127100人，Slower than average（1%—2%），年均11600空缺",
-            "链接": "https://www.onetonline.org/link/details/51-4081.00#WagesEmployment"
+            "结论": "BLS 预计美国 51-4081 的就业岗位从 2025 年的 127,100 个增至 2035 年的 127,900 个，净增 800 个（+0.6%）。预计年均空缺约 11,600 个，含替补需求。",
+            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "使用限制": "OEWS雇员正常工时税前工资：计件/激励/生产奖金包含，加班溢价及班次差额等排除；非自雇及全额到手收入。｜https://www.bls.gov/oes/oes_ques.htm",
@@ -13804,7 +14395,7 @@
           },
           {
             "使用限制": "技能清单不是采用率、能力标准或中国招聘要求",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET OnLine · 技术工具",
             "研究对象": "O*NET 雇主技术信号",
             "结论": "列出 7 项软件技能（含 AutoCAD、SAP 与 Office 系列），该页未给出提及率",
             "链接": "https://www.onetonline.org/link/hot_tech/51-4081.00"
@@ -13827,7 +14418,7 @@
         ],
         "questions": [
           {
-            "回答": "未取得本职AI采用或净就业因果。总体预测1%—2%增长、年均11600空缺不能判断AI取代概率；装夹、检验、异常与安全按现场授权人工核验。",
+            "回答": "BLS 预测总体就业，不衡量 AI 采用或替代。装夹、检验和安全判断仍由现场相应岗位负责。",
             "来源": "O*NET / U.S. Bureau of Labor Statistics",
             "链接": "https://www.onetonline.org/link/details/51-4081.00#WagesEmployment",
             "问题": "AI 与自动化会取代这个职业吗？"
@@ -14035,7 +14626,7 @@
         "locale_requirements": {
           "credential_boundary": "学历、训练项目结业、第三方专业认证、工艺变更授权与安全作业许可是不同状态；认证不等同法定执照或雇主上岗任命，也不能替代设备操作规程、上锁挂牌要求与安全联锁管理。",
           "jurisdiction": "本页采用美国 O*NET 与经其转发的 BLS 口径说明职业事实；中国大陆的设备操作、特种作业与安全生产要求以主管部门规定和用人单位规程为准。",
-          "summary": "JobZone1—2职业组准备，非本职统一数天至一年期限。新聘教育82%高中、8%中等后证书、6%大学课程无学位；当前434机床/机械加工项目、3专业认证为目录，不是许可或录用条件。中国实际要求按岗位和所在地规则核。"
+          "summary": "JobZone1—2职业组准备，非本职统一数天至一年期限。O*NET 关于新聘教育的调查中，82% 的受访者选高中或同等学历，8% 选中等后证书，6% 选上过大学课程但未获学位。具体条件请向雇主核实。 当前机床/机械加工项目、3专业认证为目录，不是许可或录用条件。中国实际要求按岗位和所在地规则核。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14048,7 +14639,7 @@
           {
             "href": "https://www.onetonline.org/link/localtraining/51-4081.00",
             "id": "source-pack-onet-localtraining",
-            "label": "O*NET National Training（434项目）",
+            "label": "O*NET National Training（训练目录）",
             "scope": "相关教育训练目录，非统一在岗期限"
           },
           {
@@ -14376,7 +14967,8 @@
             },
             "evidence_refs": [
               "onet-details",
-              "onet-summary"
+              "onet-summary",
+              "osha-machine-guarding"
             ],
             "id": "cost-change",
             "mitigation": "按规程使用防护装置与专用工具，设备运行时保持手部远离切削与成形区域",
@@ -14388,10 +14980,10 @@
             "consequence": "编辑风险情境：锐屑、热屑、飞溅与积液可能造成接触危害；本职发生率及呼吸道效果未取得。",
             "evidence_refs": [
               "onet-details",
-              "onet-details"
+              "osha-hazardous-energy"
             ],
             "id": "record-version",
-            "mitigation": "清理/维护按规程确认停机、危险能量隔离及安全状态，专用工具清理；按暴露选防护，避免手套接触旋转件。｜https://stacks.cdc.gov/view/cdc/216121",
+            "mitigation": "美国现场涉及该标准的检修或维护由授权人员按雇主的危险能量控制程序执行。正常生产中，由雇主评估切屑和飞溅风险并配备适用的防护装置和防护用品。",
             "scenario": "清理切屑或更换冷却液时未停机，或防护门未关合",
             "title": "切屑与冷却液飞溅风险"
           },
@@ -14403,7 +14995,7 @@
               "onet-details"
             ],
             "id": "personal-data",
-            "mitigation": "核对程序版本与工艺文件，首件试切验证后再批量加工并留痕",
+            "mitigation": "由现场授权人员核对程序和图纸版本，批量放行前记录首件结果。读记录可以先做 MT-27 纸面练习。",
             "scenario": "调用错误程序版本、改参未核对或未做首件验证",
             "title": "程序或参数错误风险"
           },
@@ -14436,10 +15028,10 @@
             "consequence": "人身事故与设备损坏，且记录缺失导致责任不清",
             "evidence_refs": [
               "onet-details",
-              "onet-details"
+              "osha-machine-guarding"
             ],
             "id": "delivery-acceptance",
-            "mitigation": "禁止绕开联锁与防护运行设备，异常时停机、保留证据并按流程上报",
+            "mitigation": "保持防护装置和联锁有效。授权操作员按现场异常程序处置，发现报警或联锁被绕过时报告指定负责人。",
             "scenario": "为赶产量绕过联锁，或报警后未按流程停机上报",
             "title": "安全联锁与异常处置风险"
           }
@@ -14475,6 +15067,18 @@
             "id": "nist-ai-rmf",
             "label": "NIST AI RMF 1.0（自愿性 AI 风险管理框架）",
             "scope": "责任与控制边界表述"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.212",
+            "id": "osha-machine-guarding",
+            "label": "美国 OSHA 机器防护标准",
+            "scope": "美国适用现场的机器防护"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147",
+            "id": "osha-hazardous-energy",
+            "label": "美国 OSHA 危险能量控制标准",
+            "scope": "美国适用的检修维护及授权人员边界"
           }
         ]
       },
@@ -14587,7 +15191,7 @@
             "scenario_role_label": "准备阶段",
             "scenario_value_label": "准备方向"
           },
-          "us_growth": "Slower than average（1%—2%）（2025—2035）",
+          "us_growth": "+0.6%（2025—2035 年）",
           "us_median": "22.68 美元/小时（47,180 美元/年，2025）"
         }
       },
@@ -14621,18 +15225,18 @@
           },
           {
             "指标": "就业人数（2025）",
-            "数值": "127100人",
-            "说明": "美国51-4081.00当前总体就业系列，非当前招聘、个人概率或AI因果｜https://www.onetonline.org/link/details/51-4081.00#WagesEmployment"
+            "数值": "2025 年 127,100 个岗位",
+            "说明": "全国职业预测统计岗位与空缺，不预测单个雇主招聘，也不把变化归因于 AI。 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "指标": "就业预测（2025—2035）",
-            "数值": "Slower than average（1%—2%）",
-            "说明": "美国51-4081.00当前总体就业系列，非当前招聘、个人概率或AI因果｜https://www.onetonline.org/link/details/51-4081.00#WagesEmployment"
+            "数值": "2035 年 127,900 个岗位，净增 800 个（+0.6%）",
+            "说明": "全国职业预测统计岗位与空缺，不预测单个雇主招聘，也不把变化归因于 AI。 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "指标": "年均岗位空缺（2025—2035）",
-            "数值": "11600个/年",
-            "说明": "美国51-4081.00当前总体就业系列，非当前招聘、个人概率或AI因果｜https://www.onetonline.org/link/details/51-4081.00#WagesEmployment"
+            "数值": "年均空缺 11,600 个",
+            "说明": "全国职业预测统计岗位与空缺，不预测单个雇主招聘，也不把变化归因于 AI。 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
         "boundary": "美国数据只适用于 51-4081.00 的美国口径与所列期间，不能换算或外推为中国大陆个人收入。",
@@ -14663,7 +15267,7 @@
           }
         ],
         "factors_heading": "影响实际报价的因素",
-        "growth": "Slower than average（1%—2%）（2025—2035）",
+        "growth": "+0.6%（2025—2035 年）",
         "heading": "组合机床操作工的美国薪资与就业数据边界",
         "industry_heading": "行业与岗位差异",
         "industry_period": "2025",
@@ -14723,7 +15327,7 @@
             "question": "分位数怎么用？"
           },
           {
-            "answer": "2025职业就业存量约127100人，不是当前招聘数；须区分OEWS工资与EP就业系列。",
+            "answer": "BLS 预计美国 51-4081 的就业岗位从 2025 年的 127,100 个增至 2035 年的 127,900 个，净增 800 个（+0.6%）。预计年均空缺约 11,600 个，含替补需求。 全国职业预测统计岗位与空缺，不预测单个雇主招聘，也不把变化归因于 AI。",
             "question": "就业人数代表什么？"
           },
           {
@@ -14811,7 +15415,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "用一份完全虚构的图纸与工艺卡做纸面工艺走查：写出装夹方式、刀具或模具选择、关键尺寸与量具、首件检验项、批量抽检频次与三处安全确认点，并说明发现超差后的处置顺序；只用虚构或公开示例图纸，不操作真实设备，练习不构成设备操作、特种作业或安全生产授权。",
+        "summary": "如果你喜欢在工件流转不同设备时，把工件、图纸版本与检验结果一起核清，可以考虑多种机床操作。",
         "title": "组合机床操作工"
       },
       "fit_decision_checklist": {
@@ -14842,12 +15446,12 @@
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "职业前景与转岗参考"
+            "href": "#career-visual-group-sources",
+            "label": "核对市场来源"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "职业前景与转岗参考"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "比较相邻职业方向"
           }
         ],
         "direct_answer": {
@@ -14886,27 +15490,27 @@
             "metric": "美国在岗人数",
             "occupation_scope": "美国51-4081总体就业，2025及2025—2035预测",
             "source_id": "ep",
-            "value": "127100人（2025）"
+            "value": "2025 年 127,100 个岗位"
           },
           {
             "geography": "美国",
             "horizon": "2025—2035",
-            "interpretation": "当前美国全国职业总体就业预测；类别不等于个人机会或AI因果，不填未读的预测终期精确人数。",
+            "interpretation": "全国职业预测统计岗位与空缺，不预测单个雇主招聘，也不把变化归因于 AI。",
             "limitation": "预测不等于保证，行业与地区差异较大",
             "metric": "美国就业变化",
             "occupation_scope": "美国51-4081总体就业，2025及2025—2035预测",
             "source_id": "ep",
-            "value": "Slower than average（1%—2%）（2025—2035）"
+            "value": "2035 年 127,900 个岗位，净增 800 个（+0.6%）"
           },
           {
             "geography": "美国",
             "horizon": "2025—2035",
-            "interpretation": "为年均口径，含增长与净替换需求",
+            "interpretation": "全国职业预测统计岗位与空缺，不预测单个雇主招聘，也不把变化归因于 AI。",
             "limitation": "含替换需求，不等于个人录用概率",
             "metric": "美国年均职位空缺",
             "occupation_scope": "美国51-4081总体就业，2025及2025—2035预测",
             "source_id": "ep",
-            "value": "11600个/年（2025—2035）"
+            "value": "年均空缺 11,600 个"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -14918,10 +15522,10 @@
             "scope": "职业范围、来源口径与责任边界"
           },
           {
-            "href": "https://www.onetonline.org/link/details/51-4081.00#WagesEmployment",
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "ep",
-            "label": "O*NET转发BLS2025—2035预测",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "BLS 表 1.2：就业预测",
+            "scope": "全国职业预测统计岗位与空缺，不预测单个雇主招聘，也不把变化归因于 AI。"
           },
           {
             "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
@@ -15023,19 +15627,19 @@
             "alternate_value": null,
             "label": "准备层级",
             "secondary_value": null,
-            "value": "JobZone1—2是职业组准备描述，非统一培训期限；本职新聘教育82%高中、8%中等后证书、6%大学课程无学位。训练目录434项目不等于434工作机会或法定许可。"
+            "value": "JobZone1—2是职业组准备描述，非统一培训期限；O*NET 关于新聘教育的调查中，82% 的受访者选高中或同等学历，8% 选中等后证书，6% 选上过大学课程但未获学位。具体条件请向雇主核实。训练目录列的是培训项目。录用和准入条件要另外核对。"
           },
           {
             "alternate_value": null,
             "label": "美国就业（2025）",
             "secondary_value": null,
-            "value": "127100人"
+            "value": "2025 年 127,100 个岗位"
           },
           {
             "alternate_value": null,
             "label": "美国就业变化（2025—2035）",
             "secondary_value": null,
-            "value": "Slower than average（1%—2%）"
+            "value": "2035 年 127,900 个岗位，净增 800 个（+0.6%）"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15232,7 +15836,7 @@
             "question": "性格外向还是内向更适合？"
           },
           {
-            "answer": "本职新聘教育82%高中、8%中等后证书、6%大学课程无学位；434训练项目及3认证是目录，不是统一学历/训练期限或准入。",
+            "answer": "O*NET 关于新聘教育的调查中，82% 的受访者选高中或同等学历，8% 选中等后证书，6% 选上过大学课程但未获学位。具体条件请向雇主核实。",
             "question": "入行通常需要什么学历、训练和资格条件？"
           },
           {
@@ -15252,7 +15856,7 @@
             "question": "如何积累可复核的技能证据？"
           },
           {
-            "answer": "先做纸面工艺走查与量具读数练习：用虚构图纸写出装夹、刀具、检验项与安全确认点，再对照公开工艺资料复盘。",
+            "answer": "到 09 做 MT-27。对照 F2、F6 的尺寸和图纸版本，写下要请记录负责人核实的问题。",
             "question": "适合先做哪一类低成本试验？"
           }
         ],
@@ -15271,7 +15875,7 @@
             "tone": "caution"
           },
           {
-            "body": "用一份完全虚构的图纸与工艺卡做纸面工艺走查：写出装夹方式、刀具或模具、关键尺寸与量具、首件与抽检项、三处安全确认点与超差处置顺序。",
+            "body": "到 09 做 MT-27。对照 F2、F6 的尺寸和图纸版本，写下要请记录负责人核实的问题。",
             "id": "experiment",
             "label": "低成本试验",
             "tone": "action"
@@ -15290,7 +15894,7 @@
           },
           {
             "href": "https://www.onetonline.org/link/localtraining/51-4081.00",
-            "label": "O*NET National Training（当前434项目）",
+            "label": "O*NET National Training（训练目录）",
             "usage": "相关教育训练项目目录，非在岗期限或就业机会"
           },
           {
@@ -15317,6 +15921,11 @@
             "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
             "label": "国家统计局 2025 年城镇单位就业人员平均工资情况",
             "usage": "中国制造业代理工资口径"
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/51-4081.00#Education",
+            "label": "O*NET 新聘教育调查",
+            "usage": "美国受访者对新聘教育条件的选择"
           }
         ]
       },
@@ -15356,7 +15965,7 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "O*NET51-4081定义21Tasks/工作情境/RC/JobZone1—2、2025全国工资、2025就业127100及2025—2035增长1%—2%/11600、industry80/11/9、2025广告7软件百分比NA、434训练与3认证。NBS2025制造业三项均值参考；BLSFAQ计件含、加班溢价/班次差额不含。NIST为自愿AI管理非机械安全规范；CDC馆藏手套卷入警示仅危险机制与防护边界，非本职事故率。",
+          "source": "O*NET 职业任务、学历调查及工资，BLS 就业预测，国家统计局制造业工资背景。",
           "updated_at": "O*NET档案2026；工资2025/预测2025—2035；NBS2025数据发布2026-05-15；本次查阅2026-10-11。"
         },
         "note": "证据只支持组合机床操作工在标注市场与期间内的范围性判断，不构成个人收入、录用或设备操作与安全授权保证。",
@@ -15442,6 +16051,34 @@
         "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.recruitment-sample.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15555,36 +16192,36 @@
       },
       {
         "derivation": null,
-        "display_value": "131,000人（2024）",
+        "display_value": "2025 年 127,100 个岗位",
         "fact_id": "us-employment",
         "market": "美国",
         "measure": "就业规模",
         "occupation_scope": "精确职业口径：O*NET-SOC 51-4081.00",
-        "period": "BLS 2024 年就业（经 O*NET 转发）；查阅 2026-09-25",
+        "period": "BLS 表 1.2，2025—2035 年",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
-        "derivation": "2034 年预计 130,300 人。",
-        "display_value": "-1%（2024—2034，Little or no change）",
+        "derivation": null,
+        "display_value": "2035 年预计 127,900 个岗位（+0.6%）",
         "fact_id": "us-outlook",
         "market": "美国",
         "measure": "就业变化预测",
         "occupation_scope": "精确职业口径：O*NET-SOC 51-4081.00",
-        "period": "BLS 2024—2034 预测（经 O*NET 转发）；查阅 2026-09-25",
+        "period": "BLS 表 1.2，2025—2035 年",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
-        "derivation": "含增长与净替换需求。",
-        "display_value": "约12,800个/年（2024—2034）",
+        "derivation": "含替补需求。",
+        "display_value": "年均空缺 11,600 个",
         "fact_id": "us-openings",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "精确职业口径：O*NET-SOC 51-4081.00",
-        "period": "BLS 2024—2034 预测（经 O*NET 转发）；查阅 2026-09-25",
+        "period": "BLS 表 1.2，2025—2035 年",
         "source_refs": [
           "onet-trends"
         ]
@@ -15688,14 +16325,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "组合机床操作工（O*NET-SOC 51-4081.00）设置、操作或看管一种以上的切削或成形机床或机器人，含数控、冲压、钻镗、车削、铣刨、磨削与焊接设备方向。本页整理 O*NET 官方任务与工作情境、准备层级 1—2 与高中文凭路径、美国 2025 年 BLS OEWS 工资中位数 47,180 美元与 2024—2034 年就业变化 -1%、中国大陆制造业行业代理工资、AI 与自动化边界、适配信号与入行路径。"
+      "text": "了解多种机床操作的职责、美国工资和就业数据、入行培训，并用一份纸面首件交接练习体验岗位判断。"
     },
     "title": {
       "availability": "available",
       "text": "组合机床操作工"
     }
   },
-  "source_content_sha256": "2265779d0ca98c6da12dddd11af1c14fd628476c2ca45487d66d64d18b578273",
+  "source_content_sha256": "8384aa95b08c7013c8ae3006df15b0888eef4090c39d0c5e715478e54fb16eec",
   "subject": {
     "canonical_slug": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic",
     "name": "组合机床操作工",

@@ -2,9 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment": {
         "status": "pending_mapping"
       },
@@ -7233,12 +7230,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Trial method | Use the path section's six T cards and four simulated rules to deliver four samples: material classification, arithmetic differences, procedural checks, and neutral handover. Answers and a seven-day plan are provided together. This tests work samples only and confers no qualification or adjudicative authority."
+              "Find “Sheet J: Hearing record status” under “Entering the field, qualifications, and career development.”"
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7271,13 +7268,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: a review of NBS2025 industry wages and China's Judges Law provisions did not establish a mainland China national occupational wage distribution for judges, wages by education / region, or national occupational employment projections. Industry averages, U.S. data, and one selection quota do not fill the gaps. This page covers U.S. 23-1023.00 judges, magistrate judges, and magistrates, who preside and adjudicate in court under law; it does not include the 23-1021 administrative hearing occupation. The complete workflow runs from jurisdiction and procedural checks through material review and legal research to reasons, service, and records. The Chinese title does not establish equivalent Chinese and U.S. qualifications. Current U.S. national pay: a 2025 median of $153,990 per year; employment of 25,300 in 2025, 3% growth for 2025—2035, and 800 average annual openings (an overall projection, not attributed to AI). The exact occupational wage gap for China remains; industry averages are broad references only."
+              "This U.S. category covers judges and magistrates who preside over proceedings, manage procedural matters and make decisions within their authority. Jurisdiction and appointment vary by court."
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.profile.definition-block.1",
           "source_refs": [
-            "onet-details",
-            "nbs-wages-2025"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7360,14 +7356,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Research inputs | O*NET court occupation 23-1023.00 and ECS interests describe activity preferences only. Current figures show 25,300 employed in 2025, a 3%—4% growth category for 2025—2035, and 800 average annual openings. The precise BLS court-component growth is 3%; the combined 1,300 openings cover two occupations. U.S. Article III and federal magistrate appointments differ; check states and localities separately. Job Zone is not a uniform doctorate or years-of-legal-practice threshold."
+              "O*NET 23-1023.00 describes this occupation’s tasks and work context. U.S. wages come from OEWS and projections from BLS Table 1.2."
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.profile.onet-structured-fields-block.7",
           "source_refs": [
             "onet-details",
-            "onet-industry",
-            "uscourts-faq"
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7557,7 +7553,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | China's Supreme People's Court 2022 opinion positions judicial AI as an auxiliary reference, with adjudication and responsibility retained by judicial personnel; users may choose to use or terminate it. Search, material organization, and drafts may support bounded trials. This page has no measurements of generative AI adoption, efficiency gains, or replacement rates in this occupation. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Direct answer | China's Supreme People's Court 2022 opinion positions judicial AI as an auxiliary reference, with adjudication and responsibility retained by judicial personnel; users may choose to use or terminate it. Search, material organization, and drafts may support bounded trials. This page has no measurements of generative AI adoption, efficiency gains, or replacement rates in this occupation."
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.ai-impact.ai-impact-table.2",
@@ -7734,12 +7730,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. pay reference | O*NET 23-1023.00 national wage page, 2025 BLS OEWS, precise U.S. national occupational category; checked on 2026-10-11."
+              "O*NET displays the May 2025 BLS OEWS national wages for U.S. occupation 23-1023."
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls-ooh-judges"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7748,12 +7744,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. wages in 2025 | Annual wages at the 10 / 25 / 50 / 75 / 90 percentiles were $46,950 / 85,710 / 153,990 / 194,950 / 221,710 respectively, with a median of $153,990 per year. Percentiles are neither minimum wages nor experience levels; the data do not represent individual take-home income."
+              "The May 2025 national median for U.S. occupation 23-1023 was USD 153,990 a year and USD 74.03 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 46,950, 85,710, 153,990, 194,950, 221,710."
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls-ooh-judges"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -8046,14 +8042,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Direct answer | Initial judges in mainland China must meet Judges Law conditions for education, legal work experience, character, and other matters and obtain legal professional qualifications through the national unified legal professional qualification examination, followed by statutory selection and appointment or removal procedures. U.S. federal Article III judges are nominated by the President and confirmed by the Senate; the Constitution does not list uniform professional qualification conditions, and state and local rules differ. First confirm target-jurisdiction qualifications and selection methods, then hearing and document ability requirements, preparing verifiable analytical and document samples. This page is not legal advice."
+              "BLS lists a doctoral or professional degree, at least five years of related experience and short-term on-the-job training as typical preparation. Check appointment, election and qualifications with the applicable jurisdiction."
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.path.career-path-block.2",
           "source_refs": [
-            "moj-judge-law",
-            "uscourts-faq",
-            "onet-details"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8062,14 +8056,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Jurisdictional requirements | Article 12 of China's 2019 Judges Law sets education, legal work, and initial legal qualification conditions. Check separately routes including regular higher-education undergraduate law study with a bachelor's or higher degree, or qualifying non-law undergraduate study with corresponding law degrees / professional legal knowledge. Legal work usually requires five years, four with a professional or academic master's degree in law, and three with a law doctorate; initial appointments require statutory examination and assessment selection. Qualifications are not appointments. United States: distinguish federal, state, and local entry. Relevant Article III judges are nominated by the President and confirmed by the Senate, with no specific uniform constitutional qualifications. Federal magistrates are appointed by majority vote of active district court judges, with eight-year full-time terms. Check states and localities separately. Job Zone Five is a cross-occupation preparation category, not a uniform PhD / MD / JD or five-year legal practice threshold. Serving Chinese judges may not concurrently practice as lawyers, arbitrators, or notaries; neighboring comparisons are not suggestions for unlawful concurrent work."
+              "The Supreme People’s Court document distinguishes duties across judicial teams and roles in China. The U.S. occupation classification has a different scope."
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.path.career-path-block.3",
           "source_refs": [
-            "moj-judge-law",
-            "uscourts-faq",
-            "onet-details"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8108,12 +8100,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Reference answer | 120−45=75 is an arithmetic difference, not an amount to award. Alpha's 90 is 15 higher; the privately submitted attachment also does not prove that 15. Three unresolved matters are Beta's notice evidence, the proposed adjudicator's recusal, and procedural handling of the private attachment. Under R2, do not mark ready to schedule; under R3, refer to T's designated reviewer; under R4, do not adopt it as an established fact. Four samples: the six-card materials / claims / missing-items table, a recalculation of 75 and difference from 90, a four-rule procedural checklist, and neutral reasons and handover draft. Each states input versions, grounds, and receiving roles for pending matters."
+              "Paper exercise “Sheet J: Hearing record status.” In fictional hearing log V2, J1 and J2 have verified sources and revisions. J3’s source is pending. The old index marks all three verified. List the checked records and pending item. In the variant, add only a verified source for J3."
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.path.career-path-block.6",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8122,12 +8114,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Seven-day plan | 20—30 minutes daily: D1, read six cards and separate facts and claims; D2, recalculate 75 and explain the difference from 90; D3, check four rules and three unresolved matters; D4, write reasons and handover; D5, simulate Alpha demanding immediate scheduling, explaining unmet conditions without promising outcomes; D6, have someone review using only six cards and retain revisions; D7, combine four samples and list target-jurisdiction education, qualifications, selection, and appointment checks. Use only this page's fictional materials; no real case files or imitation official judicial documents."
+              "Complete both cases and save your first draft. Then open “Paper exercise answer key (open after completing)” in “Frequently asked questions and sources.” Check whether someone can trace the original values, pending items and handoff owner."
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.path.career-path-block.7",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8160,7 +8152,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Market signals and related directions for judges: this page states only observations within the coverage of its sources."
+              "Occupational outlook and related work"
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.market-signals.market-signal-card.1",
@@ -8175,15 +8167,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Overall U.S. employment projection, not attributed to AI | O*NET 23-1023.00: employment of 25,300 in 2025, 3% growth for 2025—2035, and 800 projected average annual openings (including growth and replacement needs). Insufficient evidence: a national employment projection and a standardized recruitment sample for this occupation in China were not obtained; these figures cannot be converted into individual hiring probabilities."
+              "BLS Table 1.2 for U.S. occupation 23-1023 shows about 25,300 jobs in 2025 and projects 26,000 in 2035 (2.8%), with about 800 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-details",
-            "bls-ooh-judges",
-            "gansu-judges-202603",
-            "nbs-wages-2025"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8317,24 +8306,22 @@
                 ]
               },
               {
-                "answer": "Insufficient evidence: this round did not obtain percentiles 25 and 75 for the precise occupation; retrieval of the O*NET wage entry point failed. U.S. May 2025 median annual wages for court judges and related roles were $153,990; the lowest 10% earned below $46,950 and the highest 10% above $221,710. This uses direct BLS OOH text without presenting thresholds as a complete percentile table obtained in this round. Wage definition | OEWS regular pretax wages include commissions, incentive pay, and production bonuses meeting its definition; they exclude nonproduction bonuses, overtime premiums, profit sharing, and employer benefit costs. Annual pay is not a starting salary, take-home income, total compensation, or individual quote.",
+                "answer": "The May 2025 national median for U.S. occupation 23-1023 was USD 153,990 a year and USD 74.03 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 46,950, 85,710, 153,990, 194,950, 221,710.",
                 "id": "judges-magistrate-judges-and-magistrates.faq.7",
                 "question": "What is the U.S. pay evidence?",
                 "question_key": "career.faq.judges-magistrate-judges-and-magistrates.us-pay",
                 "source_refs": [
-                  "bls-ooh-judges",
-                  "bls-oews-methods"
+                  "onet-wages"
                 ]
               },
               {
-                "answer": "Distinguish federal, state, and local U.S. court judge entry. Relevant Article III judges are nominated by the President and confirmed by the Senate, with no specific uniform constitutional qualifications. Federal magistrates are appointed by majority vote of active district court judges, with eight-year full-time terms. Check states and localities separately. Job Zone Five is a cross-occupation preparation category, not a uniform PhD / MD / JD or five-year legal practice threshold. Article 12 of China's 2019 Judges Law sets education, legal work, and initial legal qualification conditions. Check separately routes including undergraduate law education and law degrees, or qualifying non-law undergraduate education with corresponding law degrees / professional legal knowledge. Legal work usually requires five years, four with a master of laws or law degree, and three with a law doctorate; initial appointments require statutory examination and assessment selection. Qualifications are not appointments.",
+                "answer": "BLS lists a doctoral or professional degree, at least five years of related experience and short-term on-the-job training as typical preparation. Check appointment, election and qualifications with the applicable jurisdiction. The Supreme People’s Court document distinguishes duties across judicial teams and roles in China. The U.S. occupation classification has a different scope.",
                 "id": "judges-magistrate-judges-and-magistrates.faq.8",
                 "question": "What are the entry and training routes?",
                 "question_key": "career.faq.judges-magistrate-judges-and-magistrates.education-path",
                 "source_refs": [
-                  "onet-details",
-                  "uscourts-faq",
-                  "moj-judge-law"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
@@ -8348,14 +8335,12 @@
                 ]
               },
               {
-                "answer": "O*NET's precise court occupation shows 27,300 employed in 2024, 3%—4% growth for 2024—2034, and 900 average annual openings. The newer BLS OOH court component shows 25,300 employed in 2025 → 26,000 projected in 2035, with 3% growth. Do not subtract different base years or assign the combined 1,300 openings to courts. Chinese national demand was not established in this round; the Gansu 2026 announcement is only a historical selection sample.",
+                "answer": "BLS Table 1.2 for U.S. occupation 23-1023 shows about 25,300 jobs in 2025 and projects 26,000 in 2035 (2.8%), with about 800 openings per year including replacements. Counts are rounded independently.",
                 "id": "judges-magistrate-judges-and-magistrates.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.judges-magistrate-judges-and-magistrates.outlook-transition",
                 "source_refs": [
-                  "onet-details",
-                  "bls-ooh-judges",
-                  "gansu-judges-202603"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8375,6 +8360,15 @@
                 "source_refs": [
                   "source-pack-onet-details",
                   "china-wage-boundary"
+                ]
+              },
+              {
+                "answer": "The original has 2 verified records and the variant has 3. Keep the old index and explain the correction. The exercise checks records and does not determine admissibility or case outcomes.",
+                "id": "judges-magistrate-judges-and-magistrates.faq.paper-exercise",
+                "question": "Paper exercise answer key (open after completing)",
+                "question_key": "career.faq.judges-magistrate-judges-and-magistrates.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
                 ]
               }
             ]
@@ -8543,7 +8537,7 @@
               {
                 "accessed_at": "2026-08-29",
                 "details": [
-                  "Exact identity, tasks, context, interests and 2024-2034 workforce indicators.",
+                  "BLS Table 1.2 for U.S. occupation 23-1023 shows about 25,300 jobs in 2025 and projects 26,000 in 2035 (2.8%), with about 800 openings per year including replacements. Counts are rounded independently.",
                   "US O*NET scope; source periods differ and do not establish China rules or pay."
                 ],
                 "evidence_type": "official occupation profile",
@@ -8621,20 +8615,19 @@
                 "url": "https://www.onetonline.org/link/localtraining/23-1023.00?zip=75001"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Historically registered as the 2025 wage entry point; neither postal-code nor no-postal-code access obtained body text in this round.",
-                  "Current public wages instead use the median and lowest / highest 10% thresholds verified directly through BLS OOH; no claim is made that this round obtained that page's percentile table."
+                  "The May 2025 national median for U.S. occupation 23-1023 was USD 153,990 a year and USD 74.03 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 46,950, 85,710, 153,990, 194,950, 221,710."
                 ],
                 "evidence_type": "official wage distribution",
                 "id": "onet-wages",
-                "limitation": "Not read in this round; cannot independently support current exact percentiles.",
+                "limitation": "National occupational distribution. Local wages and individual offers vary.",
                 "market": "US",
                 "name": "O*NET local wages for 23-1023.00",
-                "period": "May 2025; accessed 2026-08-29",
+                "period": "2025-05",
                 "publisher": "O*NET / BLS OEWS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/23-1023.00?zip=75001"
+                "url": "https://www.onetonline.org/link/localwages/23-1023.00"
               },
               {
                 "accessed_at": "2026-09-01",
@@ -8751,15 +8744,15 @@
               {
                 "accessed_at": "2026-09-01",
                 "details": [
-                  "Used to check occupational identity, entry requirements, and employment outlook entry points (employment and outlook use the precise occupational category 23-1023.00).",
-                  "Applies only to this O*NET occupation and the U.S. market; does not establish a Chinese mapping, Chinese wages, or legal authorization."
+                  "The employment projections shown here come from BLS Table 1.2.",
+                  "The employment projections shown here come from BLS Table 1.2."
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "source-pack-onet-summary",
                 "limitation": "Applies only to this O*NET occupation and the U.S. market; does not establish a Chinese mapping, Chinese wages, or legal authorization.",
                 "market": "United States",
                 "name": "23-1023.00 - Judges, Magistrate Judges, and Magistrates",
-                "period": "Current occupational page; wages 2025, employment 2024, and projections 2024—2034 labeled separately",
+                "period": "Occupational profile or live lookup",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/23-1023.00"
@@ -9005,21 +8998,46 @@
                 "url": "https://www.onetonline.org/link/summary/23-1011.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Conduct hearings and rule on evidence — 25/100; weight=1/3; judges-magistrate-judges-and-magistrates.profile.responsibilities-block.4[0]",
-                  "Research laws and precedents — 75/100; weight=1/3; judges-magistrate-judges-and-magistrates.profile.responsibilities-block.4[0]",
-                  "Determine facts and draft reasons — 50/100; weight=1/3; judges-magistrate-judges-and-magistrates.profile.responsibilities-block.4[0]"
+                  "BLS Table 1.2 for U.S. occupation 23-1023 shows about 25,300 jobs in 2025 and projects 26,000 in 2035 (2.8%), with about 800 openings per year including replacements. Counts are rounded independently.",
+                  "BLS lists a doctoral or professional degree, at least five years of related experience and short-term on-the-job training as typical preparation. Check appointment, election and qualifications with the applicable jurisdiction."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "23-1023",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The Supreme People’s Court document distinguishes duties across judicial teams and roles in China. The U.S. occupation classification has a different scope."
+                ],
+                "id": "cn-work-example",
+                "limitation": "This case does not establish national pay, entry requirements or hiring.",
+                "market": "Mainland China",
+                "name": "Supreme People’s Court: guidance on judicial responsibilities",
+                "period": "2020",
+                "publisher": "Supreme People’s Court of China",
+                "scope": "Named work example",
+                "url": "https://www.court.gov.cn/fabu/xiangqing/276311.html"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks the paper records only.",
+                "market": "This page",
+                "name": "Sheet J: Hearing record status",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "scope": "Paper exercise",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -11338,7 +11356,7 @@
             "item": "judges-magistrate-judges-and-magistrates.source-register.published.1"
           }
         },
-        "note": "Author checked 2026-10-11 | O*NET 23-1023.00 provides occupational tasks and preparation context; its national wage page gives 2025 percentiles of 46,950 / 85,710 / 153,990 / 194,950 / 221,710 USD/year; employment uses a 2025 base period and 2025—2035 projections. NBS Tables 2/5 support only China's average annual wages for the public administration, social security, and social organizations industry, and cannot substitute for this occupation. AI analysis is task-level editorial judgment. The shared registry, Hero, and FAQ retain their original scope; no claim of page-wide consistency is made."
+        "note": "O*NET describes the tasks, OEWS provides wage estimates, and BLS Table 1.2 provides employment projections."
       },
       "work_context_block": {
         "$item": "judges-magistrate-judges-and-magistrates.profile.work-context-block.5",
@@ -11364,7 +11382,7 @@
     ],
     "path": "/en/career/jobs/judges-magistrate-judges-and-magistrates",
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI tools and human review",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Comparison with neighboring occupations",
       "fit": "Fit signals",
@@ -11383,50 +11401,50 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "Approximately 27,300 employed (2024, BLS employment projection base year, precise occupation 23-1023.00)",
+        "display_value": "About 25,300 jobs",
         "fact_id": "us-employment",
-        "market": "US",
-        "measure": "Employment",
-        "occupation_scope": "O*NET-SOC 23-1023.00 Judges, Magistrate Judges, and Magistrates",
-        "period": "2024 employment base year; accessed 2026-10-03",
+        "market": "United States",
+        "measure": "U.S. employment (2025)",
+        "occupation_scope": "23-1023",
+        "period": "2025",
         "source_refs": [
-          "onet-details"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "3%—4% growth (2024—2034, BLS employment projections, precise occupation 23-1023.00)",
+        "display_value": "2.8%",
         "fact_id": "us-growth",
-        "market": "US",
-        "measure": "Projected employment growth category",
-        "occupation_scope": "O*NET-SOC 23-1023.00 Judges, Magistrate Judges, and Magistrates",
-        "period": "2024—2034 projections; accessed 2026-10-03",
+        "market": "United States",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "23-1023",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-details"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 900 projected average annual openings (2024—2034, BLS employment projections, precise occupation 23-1023.00, including growth and replacement needs)",
+        "display_value": "About 800 per year",
         "fact_id": "us-openings",
-        "market": "US",
-        "measure": "Projected average annual openings",
-        "occupation_scope": "O*NET-SOC 23-1023.00 Judges, Magistrate Judges, and Magistrates",
-        "period": "2024—2034 projections; accessed 2026-10-03",
+        "market": "United States",
+        "measure": "U.S. annual openings (2025–2035)",
+        "occupation_scope": "23-1023",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-details"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Median annual wages of $153,990 (May 2025, BLS OEWS, precise occupation 23-1023.00)",
+        "display_value": "USD 153,990/year",
         "fact_id": "us-wage-median",
-        "market": "US",
-        "measure": "Median annual wages",
-        "occupation_scope": "O*NET-SOC 23-1023.00 Judges, Magistrate Judges, and Magistrates",
-        "period": "May 2025; accessed 2026-10-03",
+        "market": "United States",
+        "measure": "U.S. median annual wage (May 2025)",
+        "occupation_scope": "23-1023",
+        "period": "2025-05",
         "source_refs": [
-          "bls-ooh-judges"
+          "onet-wages"
         ]
       },
       {
@@ -11452,57 +11470,45 @@
         "source_refs": [
           "bls-ooh-judges"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Judges",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
-      "Judges · Jurisdiction, Procedure, and Ethics Boundaries",
-      "Source scope · Statistical definitions · Human review",
-      "Exact occupational wage gaps for mainland China retained according to the evidence"
+      "Judges, Magistrate Judges and Magistrates",
+      "Wages and projections use separate tables",
+      "China occupational wage distribution unavailable"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "U.S. median annual wages (2025-05, precise occupational category)"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034, 3%—4%)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, precise occupational category)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "U.S. average annual openings (2024—2034)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11516,17 +11522,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What judges do, how to enter the judiciary and prepare, their jurisdictional and judicial ethics boundaries, and which tasks AI may change. This page corresponds to O*NET-SOC 23-1023.00, interest code ECS, and Job Zone Five. U.S. figures use the precise BLS occupational category presented by O*NET; mainland China wage gaps are recorded according to the evidence. This page is not legal advice."
+      "text": "Explore judges, magistrate judges and magistrates tasks, U.S. wage percentiles and employment projections, with a paper exercise on checking records."
     },
     "title": {
       "availability": "available",
-      "text": "Evaluating Judges as a Career: Judicial Authority, Procedure, and Boundaries"
+      "text": "Judges, Magistrate Judges and Magistrates: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "f5662c173c725663792d2142ec9e36089de3effeadd99c53073c26297bca7fa4",
+  "source_content_sha256": "a44ae1c61bd8e939c9bb4f82dcee4e50abcaa79f3d07838163cf5e4e9f2d71e5",
   "subject": {
     "canonical_slug": "judges-magistrate-judges-and-magistrates",
-    "name": "Judges",
-    "summary": "Judges review disputed issues and evidence, research law, preside over procedure, and explain reasons within court authority. Fit centers on material checking, neutral communication, and procedural and recusal discipline; check appointment by jurisdiction. The U.S. court occupation's 2025 median annual pay is $153,990; evidence for Chinese national occupational wages is insufficient."
+    "name": "Judges, Magistrate Judges and Magistrates",
+    "summary": "This U.S. category covers judges and magistrates who preside over proceedings, manage procedural matters and make decisions within their authority. Jurisdiction and appointment vary by court."
   }
 }

@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-mgr-huangpu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-mgr-shanghai": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -20127,60 +20133,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "id": "food-service-managers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-2"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "id": "food-service-managers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-3"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -20203,7 +20169,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -20231,7 +20197,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -26317,12 +26283,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Counties and lower-tier markets"
+              "Mainland China job postings, by actual duties"
             ]
           },
           "id": "food-service-managers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "mgr-shanghai",
+            "mgr-huangpu"
           ],
           "type": "prose"
         },
@@ -26331,12 +26298,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no monthly wage data for this occupation that can be verified by city or region was obtained for mainland China; recruitment quotes, industry averages or second-hand accounts are not used as substitutes."
+              "A Shanghai deputy manager listing quotes CNY 12,000–15,000 per month for store operations, scheduling, food safety and performance support. A Huangpu contract catering manager listing quotes CNY 10,000–12,000 per month and covers contracts, costs and delivery. Before comparing pay, ask who owns the budget, purchasing and contract decisions, and how performance pay is set. These are individual offers."
             ]
           },
           "id": "food-service-managers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "mgr-shanghai",
+            "mgr-huangpu"
           ],
           "type": "prose"
         },
@@ -27116,31 +27084,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Lodging managers direction",
@@ -31289,13 +31257,13 @@
                 ]
               },
               {
-                "answer": "Insufficient evidence: the NBS2025 wage release reviewed does not list food service manager wages separately. Accommodation and food service urban non-private 62461 and private 55123 yuan / year are industry background only; they cover legal entities with 5 or more persons, are pre-tax and exclude sole proprietors and the self-employed, and cannot substitute for exact occupational or individual wages.",
+                "answer": "A Shanghai deputy manager listing quotes CNY 12,000–15,000 per month for store operations, scheduling, food safety and performance support. A Huangpu contract catering manager listing quotes CNY 10,000–12,000 per month and covers contracts, costs and delivery. Before comparing pay, ask who owns the budget, purchasing and contract decisions, and how performance pay is set. These are individual offers.",
                 "id": "food-service-managers.faq.4",
                 "question": "Is there corresponding wage data for mainland China?",
                 "question_key": "career.faq.food-service-managers.q4",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "mgr-shanghai",
+                  "mgr-huangpu"
                 ]
               },
               {
@@ -31309,7 +31277,7 @@
                 ]
               },
               {
-                "answer": "The impact is mainly in planning and record and reporting steps: scheduling and customer flow forecasting, inventory and purchasing and loss accounting, sales and cost and budget analysis, complaint and work order tracking, and draft training materials and compliance checklists can be assisted by tools; on-site supervision, personnel and employment decisions, complaint and labour dispute handling, and judgements on alcohol and fire safety and licensing compliance remain with managers and responsible persons holding the corresponding duties and authorisation. Task exposure does not equal job replacement.",
+                "answer": "Tools may help with schedules, handoff notes, training drafts and complaint summaries. Authorized staff still check food safety, staffing and exceptions. This page does not measure adoption, efficiency gains or job displacement.",
                 "id": "food-service-managers.faq.6",
                 "question": "Will AI affect this occupation?",
                 "question_key": "career.faq.food-service-managers.q6",
@@ -31331,14 +31299,14 @@
                 ]
               },
               {
-                "answer": "Jurisdiction check | some US states or localities require food service managers to hold a food safety certification, verified with the local health department. Article 44 of China's Food Safety Law requires food production and operation enterprises to train employees, and Article 45 requires those in contact with directly edible food to undergo an annual examination and obtain a health certificate before taking up the post; the operating licence belongs to the operator, and training or a health certificate does not automatically confer pricing, employment or clinical judgement authority.",
+                "answer": "In mainland China, food production and operating enterprises must train staff in food safety. Staff who handle ready-to-eat food need an annual check and health certificate under Article 45. Catering chains must also appoint food safety personnel. A manager or shift lead title does not establish that appointment; check formal responsibilities and local rules. Some U.S. states or localities require food service managers to obtain food safety certification; check your local authority.",
                 "id": "food-service-managers.faq.8",
                 "question": "Are certificates or qualifications required?",
                 "question_key": "career.faq.food-service-managers.q8",
                 "source_refs": [
-                  "bls-ooh",
-                  "food-safety-law",
-                  "internal-rubric"
+                  "cn-personal-food-safety",
+                  "cn-chain-order-104",
+                  "bls-ooh"
                 ]
               },
               {
@@ -31378,7 +31346,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Research process | on 2026-10-11 all O*NET11-9051 tasks, context, ECR and new-hire education questions were checked; the BLS2025 dynamic interface national percentiles and the four high-annual-median industry examples matched the original values, and the 5.8% projection, 38800 average annual openings and 30.6% self-employment were consistent. The current OOH retains the actual education, experience, shifts and local certification, and the currently unsupported high injury rate is withdrawn; the shared NBS, food law, ILO and NIST entries follow the original texts already verified in this window and are cited within their respective scopes."
+              "O*NET describes tasks and work context. BLS publishes U.S. occupational wages and employment projections."
             ]
           },
           "id": "food-service-managers.sources.source-card.1",
@@ -31392,7 +31360,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Source register | occupations, wages, methods, projections, Chinese industries, food regulations and general AI methods are registered separately. Author exercises and fit suggestions are not official research; citations must be checked against the specific scope of support."
+              "The mainland China postings show management responsibilities and historical offers. Industry averages provide context."
             ]
           },
           "id": "food-service-managers.sources.source-card.2",
@@ -31406,7 +31374,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This review was on 2026-10-11; the O*NET profile is 2026, wages May2025, projections 2025—2035, and NBS industry wages 2025. Historical shared register dates are retained and cannot replace this round's verification."
+              "U.S. wage data are for May 2025. The employment projection covers 2025–2035."
             ]
           },
           "id": "food-service-managers.sources.source-card.3",
@@ -31449,28 +31417,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
-                "id": "navigation-2",
+                "entity": "MBTI",
+                "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
+                "entity": "Big Five",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the food service managers career page",
@@ -31683,6 +31639,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One position at CNY 12,000–15,000 per month, with at least three years of restaurant management experience. Duties include performance, scheduling, food safety and complaints."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "mgr-shanghai",
+                "limitation": "A single posting; neither national wages nor current vacancies.",
+                "market": "Mainland China",
+                "name": "Shanghai Tanghongjie Catering: deputy store manager",
+                "period": "2026-01-28",
+                "publisher": "Changning District Government, Shanghai",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shanghai.gov.cn/nw17239/20260128/ac16644aba4b459eb03c88872bac1cd9.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The third employer advertises three project managers at CNY 10,000–12,000 per month, coordinating client requirements, contracts, cost, kitchens and delivery."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "mgr-huangpu",
+                "limitation": "A single posting; neither national wages nor current vacancies.",
+                "market": "Mainland China",
+                "name": "Huangpu: contract catering project manager",
+                "period": "2026-08-18",
+                "publisher": "Huangpu District Employment Service Center, Guangzhou",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzjg/qt/ldjyfwzx/kljy/content/post_10969476.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Article 7 requires covered chains to appoint food safety personnel; Article 21 addresses controls at central kitchens and outlets."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "cn-chain-order-104",
+                "limitation": "Applies to mainland China catering chains. A job title alone does not establish a formal food safety appointment.",
+                "market": "Mainland China",
+                "name": "Food safety responsibilities of catering chains",
+                "period": "2025-12-01",
+                "publisher": "State Administration for Market Regulation",
+                "scope": "exact",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_09105249f5984a2fb507e88cd346f20d.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Businesses must train employees. Ready-to-eat food handlers in covered food production or business roles need an annual check and health certificate before starting that work."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "cn-personal-food-safety",
+                "limitation": "Mainland food production and business activities; Article 45 applies according to whether the worker handles ready-to-eat food.",
+                "market": "Mainland China",
+                "name": "Food Safety Law, Articles 44 and 45",
+                "period": "2025-12-01",
+                "publisher": "National People’s Congress Standing Committee; Beijing Government copy",
+                "scope": "exact",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202603/t20260325_4565776.html"
               }
             ]
           },
@@ -34543,6 +34559,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-mgr-shanghai",
+            "posting-mgr-huangpu"
+          ],
           "sources_note": {
             "$item": "food-service-managers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34552,7 +34572,7 @@
           "ui": {
             "ai_heading": "Will AI affect the wages of food service managers?",
             "driver_heading": "Institutions and business settings that can be verified",
-            "official_heading": "China city occupational wages: current evidence gap",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Education background and preparation suggestions (author's compilation, not a Chinese recruitment distribution)",
             "scenario_heading": "Preparation directions and verification suggestions for different education backgrounds",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -36341,7 +36361,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Start checking whether food service managers suits you",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36415,30 +36435,10 @@
               "$link": "food-service-managers.navigation.links.1",
               "block": "navigation",
               "copy_key": "career.item.navigation-links",
-              "entry": "navigation-2",
-              "field": "url"
-            },
-            "label": "MBTI (English)"
-          },
-          {
-            "href": {
-              "$link": "food-service-managers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-3",
-              "field": "url"
-            },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "food-service-managers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Explore my personality preferences"
           },
           {
             "href": {
@@ -36448,7 +36448,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Explore my Big Five traits"
           }
         ]
       },
@@ -36837,6 +36837,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One position at CNY 12,000–15,000 per month, with at least three years of restaurant management experience. Duties include performance, scheduling, food safety and complaints.",
+        "fact_id": "posting-mgr-shanghai",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Shanghai Tanghongjie Catering: deputy store manager",
+        "period": "2026-01-28",
+        "source_refs": [
+          "mgr-shanghai"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The third employer advertises three project managers at CNY 10,000–12,000 per month, coordinating client requirements, contracts, cost, kitchens and delivery.",
+        "fact_id": "posting-mgr-huangpu",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Huangpu: contract catering project manager",
+        "period": "2026-08-18",
+        "source_refs": [
+          "mgr-huangpu"
+        ]
       }
     ]
   },
@@ -36889,14 +36913,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What food service managers do, how to enter the field, work boundaries and development directions. Based on official occupational materials, distinguishing occupational statistics, industry proxies and qualification gaps."
+      "text": "See how food service managers handle staffing, costs, food safety and complaints. Compare mainland China manager postings with U.S. occupational data."
     },
     "title": {
       "availability": "available",
       "text": "Food service managers"
     }
   },
-  "source_content_sha256": "2cca804500f2f97ff965304ccbecf50a9d48b0d365eeba0134bf1dca3f034beb",
+  "source_content_sha256": "f831c66c46bdf0bb8d0f4c66b540347e07eab568175f1fe95d657383a65b2752",
   "subject": {
     "canonical_slug": "food-service-managers",
     "name": "Food service managers",

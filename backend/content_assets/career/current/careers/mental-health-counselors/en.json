@@ -164,8 +164,17 @@
       "item:mental-health-counselors.path.entry-role-comparison.9": {
         "status": "pending_mapping"
       },
+      "item:mental-health-counselors.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
       "item:mental-health-counselors.path.interview-probation.10": {
         "status": "pending_mapping"
+      },
+      "item:mental-health-counselors.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:mental-health-counselors.path.seven-day-trial.1": {
+        "status": "mapped"
       },
       "item:mental-health-counselors.profile.definition-block.1": {
         "status": "mapped"
@@ -5686,52 +5695,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5962,96 +6109,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -11936,7 +12319,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Direct judgment: if you are willing to listen and respond steadily, record according to assessment and confidentiality standards, and escalate in a crisis, helping others improve their psychological and emotional health is a direction worth testing further. Safe trials use only completely fictional counseling cases and do not touch real client information or restricted data."
+              "Be cautious if you prefer giving quick advice or dislike follow-up records and supervision; counseling can involve repeated conversations and work within defined limits."
             ]
           },
           "id": "mental-health-counselors.quick-decision.fermat-decision-card.1",
@@ -11950,7 +12333,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observable signals: whether you can work according to the assessment and risk screening process, strictly follow confidentiality and record standards, and escalate immediately when a safety risk appears; personality labels cannot determine fit or qualification."
+              "Ask a supervisor what tasks and referral support the post provides."
             ]
           },
           "id": "mental-health-counselors.quick-decision.fermat-decision-card.2",
@@ -11964,7 +12347,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Suitable conditions: willing to handle emotional load and confidentiality responsibility over the long term, able to work steadily within supervision and license scope, and to keep learning. Caution conditions: if it is hard to bear a high emotional load and safety responsibility, first compare adjacent directions such as social services or psychological counseling."
+              "Consider mental health counseling if you enjoy careful listening, follow-up conversations and working within a defined referral process."
             ]
           },
           "id": "mental-health-counselors.quick-decision.fermat-decision-card.3",
@@ -11978,7 +12361,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "A completely fictional paper package, 60 minutes, without touching real clients or information. A: an adult character, Lin, has just changed shifts and reports irregular sleep over the past two weeks and worry about work, and only wants to know the available support; no history, safety screening, consent scope, or diagnosis was provided. B: fictional institutional rules require learners to produce only a needs excerpt, a known/unknown list, and a handover draft; any safety clue goes first to a supervisor or qualified person according to institutional procedure, without independent assessment or handling. C: one sentence from a character was recorded as \"sometimes feels like I cannot hold on\", and its meaning and immediate safety status are unknown; the relatives ask for the full record but no disclosure authorization was given. Organize the facts and pending questions, two support goals to be confirmed by a professional, and a confidentiality/escalation handover and record template, without giving a diagnosis, treatment course, or danger level rating, and without uploading personal information to a tool."
+              "Practice with fictional records only. Leave assessments, care decisions and disclosures to qualified or otherwise authorized staff under the applicable process."
             ]
           },
           "id": "mental-health-counselors.quick-decision.fermat-decision-card.4",
@@ -12057,7 +12440,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Research inputs: the official description, tasks, work context, interest code (SI), and Job Zone Five of O*NET 21-1014.00, plus the BLS 2025 wages and the 2024—2034 employment projection (this occupation's framing); these are not used to infer qualifications, wages, or employment framing in mainland China."
+              "Research inputs: the official description, tasks, work context, interest code (SI), and Job Zone Five of O*NET 21-1014.00, plus the BLS 2025 wages and the 2025—2035 employment projection (this occupation's framing); these are not used to infer qualifications, wages, or employment framing in mainland China."
             ]
           },
           "id": "mental-health-counselors.profile.definition-block.5",
@@ -12213,7 +12596,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Use the fictional A/B/C package above to practice organizing facts and unknowns and handing over; tool prompts can only assist, cannot give a character a diagnosis or safety level, and must not upload real case information."
+              "For career exploration use HC-16 in section 09, and the separate seven-day case W-HC. Both use fictional appointment and handoff records only."
             ]
           },
           "id": "mental-health-counselors.ai-impact.ai-impact-table.2",
@@ -12411,7 +12794,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. 21-1018 substance abuse, behavioral disorder, and mental health counselors combined occupation: 2025—2035 employment 533,400 → 631,400, 18%, net increase 98,000, average annual openings 50,500 including growth and replacements; this is not the separately listed 21-1014 statistic, current hiring, or AI causality."
+              "U.S. 21-1018 substance abuse, behavioral disorder, and mental health counselors combined occupation: 2025—2035 employment 533,400 → 631,400, 18.4%, net increase 98,000, average annual openings 50,500 including growth and replacements; this is not the separately listed 21-1014 statistic, current hiring, or AI causality."
             ]
           },
           "id": "mental-health-counselors.us-salary.career-snapshot-secondary-locale.3",
@@ -12579,7 +12962,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use the fictional A/B/C package and reference deliverable above to practice only fact excerpts, unknowns, and handover drafts, with no diagnosis, safety grading, or real counseling. Paper performance is for exploration only, and real training, supervision, and licensing requirements must be checked separately."
+              "For career exploration use HC-16 in section 09, and the separate seven-day case W-HC. Both use fictional appointment and handoff records only."
             ]
           },
           "id": "mental-health-counselors.fit.riasec-fit-block.8",
@@ -12749,7 +13132,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Works: the fact/unknown list for the fictional A/B/C above, a draft support goal, and a confidentiality and escalation handover record, marked as not touching real cases and not conducting diagnosis/screening or counseling. Seven days, 20 minutes a day: day 1 excerpt the known facts; day 2 list the unknown safety/consent/history items; day 3 write the questions to take to supervision and the timely escalation boundary; day 4 check the relatives' request and disclosure authority; day 5 organize the goals and a blank record; day 6 correct against the reference deliverable; day 7 compile the works, then check one target position's education/supervision/licensing requirements and record the source date, and record truthfully if not found. A real event with unknown safety must not wait for this paper learning plan."
+              "For career exploration use HC-16 in section 09, and the separate seven-day case W-HC. Both use fictional appointment and handoff records only."
             ]
           },
           "id": "mental-health-counselors.path.career-path-block.6",
@@ -12807,9 +13190,9 @@
             "rows": [
               [
                 "Learning stage",
-                "Use the fictional ABC to organize facts and a handover draft",
+                "Use HC-16 to compare the fictional appointment evidence.",
                 "No real cases, no diagnosis or safety grading",
-                "A paper work marked fictional and with screening incomplete",
+                "Two paper evidence rows and one handoff to the scheduler.",
                 "In the next stage, first check qualifications, supervision, and institutional authorization"
               ],
               [
@@ -12867,9 +13250,9 @@
             "rows": [
               [
                 "Interview preparation",
-                "Organize the fictional ABC facts, unknowns, and handover",
-                "Check whether screening, consent, or diagnosis was fabricated",
-                "Clarify that the handover work is paper-based"
+                "Use HC-16 in section 09 to compare the fictional appointment records and draft a handoff to the scheduler. W-HC separately tests contact preferences and supervisor signoff.",
+                "Recheck independently against the rubric after HC-16. A second reader is optional.",
+                "Fictional evidence notes, open items and paper handoff."
               ],
               [
                 "Interview itself",
@@ -12981,6 +13364,127 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials: HC-16 (about 10 minutes)",
+                  "A training desk records an appointment only after a preferred time and a desk confirmation are documented.",
+                  "H2 has a preferred time and a desk confirmation. H3 has a preferred time and a draft calendar hold.",
+                  "The scheduler confirms appointments. No mental health assessment or real client data are used."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Draft a two-line follow-up with evidence and next action for each ID.",
+                  "Name who can confirm the schedule."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Answer key",
+                  "H2 has both records. H3’s draft calendar hold does not confirm a booking.",
+                  "Send the open question to the scheduler and keep H3 pending."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Check both IDs, the confirmation evidence and who owns the decision."
+                ]
+              }
+            ]
+          },
+          "id": "mental-health-counselors.path.entry-work-sample-data.1",
+          "title": "HC-16: Prepare a Follow-up Handoff",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "Day 1",
+                  "Start W-HC. A fictional training service requests a contact preference and a supervisor signoff before sending a follow-up message for J8 and J9. Copy the rule."
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "Day 2",
+                  "J8 prefers a written message; J9 has a blank preference field. Log both without guessing."
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "Day 3",
+                  "J8 has a supervisor signoff; J9 has an unsigned draft. Distinguish the evidence."
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "Day 4",
+                  "Write a short question to check the missing J9 records through the fictional supervisor."
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "Day 5",
+                  "Write a two-line handoff showing evidence and next actions. Keep the message unsent."
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "Day 6",
+                  "Work alone: compare your handoff to the Day 1 rules and Days 2–3 records. Peer feedback is optional afterward."
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "Day 7",
+                  "Write whether you enjoyed careful follow-up and what type of supervision you would ask about before entering this work."
+                ]
+              }
+            ]
+          },
+          "id": "mental-health-counselors.path.seven-day-trial.1",
+          "title": "Seven-day paper trial: a separate case",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "I listed both IDs.",
+              "I checked the two conditions.",
+              "I did not assume missing information.",
+              "I named the next owner.",
+              "I used fictional material only.",
+              "I can independently repeat the check.",
+              "I identified one skill to practice."
+            ]
+          },
+          "id": "mental-health-counselors.path.seven-day-decision.1",
+          "title": "Judgment questions after seven days",
+          "type": "list"
         }
       ]
     },
@@ -12995,7 +13499,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 21-1018 substance abuse, behavioral disorder, and mental health counselors combined occupation: 2025—2035 employment 533,400 → 631,400, 18%, net increase 98,000, average annual openings 50,500 including growth and replacements; this is not the separately listed 21-1014 statistic, current hiring, or AI causality."
+              "U.S. 21-1018 substance abuse, behavioral disorder, and mental health counselors combined occupation: 2025—2035 employment 533,400 → 631,400, 18.4%, net increase 98,000, average annual openings 50,500 including growth and replacements; this is not the separately listed 21-1014 statistic, current hiring, or AI causality."
             ]
           },
           "id": "mental-health-counselors.market-signals.market-signal-card.1",
@@ -13111,12 +13615,14 @@
                 ]
               },
               {
-                "answer": "Counseling needs assessment, risk screening and handling, counseling plans, confidentiality and disclosure judgment, and referral and crisis escalation must be the responsibility of qualified and licensed people according to their duties; tool output must not serve as a diagnosis or handling conclusion.",
+                "answer": "Needs assessment, risk screening, counseling plans, confidentiality decisions and escalation follow the applicable law and the institution’s assigned roles. Check any required license for the regulated clinical task. Tool output does not establish a diagnosis or response decision.",
                 "id": "mental-health-counselors.faq.5",
                 "question": "Which key judgments must remain the responsibility of professionals?",
                 "question_key": "career.faq.mental-health-counselors.5",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "source-pack-onet-details",
+                  "bls-ooh-licensure",
+                  "cn-mental-health-law-article23"
                 ]
               },
               {
@@ -13138,12 +13644,14 @@
                 ]
               },
               {
-                "answer": "U.S. Job Zone Five: usually requires graduate education (master's or above) and often a license or registration, with internship and supervised hours commonly required; in mainland China the education, practice, and supervision boundaries are set by competent-authority rules. A degree is not the same as practice authorization.",
+                "answer": "BLS distinguishes mental health counselors from the combined statistical group: all U.S. states require licensure for mental health counselors, including a national exam and supervised clinical work. Check the state board for its details. Mainland China’s Mental Health Law, Article 23, permits professional psychological counseling within its scope and prohibits counselors from providing psychotherapy or diagnosing or treating mental disorders. If the counselor identifies a possible mental disorder, they should advise the person to seek care at a medical institution that meets the law’s requirements.",
                 "id": "mental-health-counselors.faq.8",
                 "question": "What do the entry and training paths usually look like?",
                 "question_key": "career.faq.mental-health-counselors.8",
                 "source_refs": [
-                  "source-pack-onet-localcert"
+                  "source-pack-onet-localcert",
+                  "bls-ooh-licensure",
+                  "cn-mental-health-law-article23"
                 ]
               }
             ]
@@ -13188,28 +13696,28 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Mental health counselor",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Mental health counselor",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Mental health counselor",
+                "entity": "Mental health social workers",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/career/jobs/mental-health-and-substance-abuse-social-workers"
               },
               {
-                "entity": "Mental health counselor",
+                "entity": "Clinical and counseling psychologists",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/career/jobs/clinical-and-counseling-psychologists"
               },
               {
                 "entity": "Mental health counselor",
@@ -13247,7 +13755,7 @@
                 "name": "Mental health counselor AI task boundary",
                 "period": "current task analysis; reviewed 2026-08-31",
                 "publisher": "FermatMind editorial review",
-                "scope": "editorial_synthesis",
+                "scope": "Mental health counselor AI task boundary",
                 "url": null
               },
               {
@@ -13262,7 +13770,7 @@
                 "name": "Mental health counselor employment model boundary",
                 "period": "current employer context; reviewed 2026-08-31",
                 "publisher": "FermatMind editorial review",
-                "scope": "editorial_synthesis",
+                "scope": "Mental health counselor employment model boundary",
                 "url": null
               },
               {
@@ -13277,7 +13785,7 @@
                 "name": "Mental health counselor market and path boundary",
                 "period": "current employer context; reviewed 2026-08-31",
                 "publisher": "FermatMind editorial review",
-                "scope": "editorial_synthesis",
+                "scope": "Mental health counselor market and path boundary",
                 "url": null
               },
               {
@@ -13290,9 +13798,9 @@
                 "limitation": "An industry average cannot replace this occupation's precise wage.",
                 "market": "CN",
                 "name": "Average annual wages of urban unit employees in 2025",
-                "period": "2025 annual wages; published 2026-05-15; retrieved 2026-08-31",
+                "period": "2025 data (published May 15, 2026)",
                 "publisher": "National Bureau of Statistics",
-                "scope": "industry_proxy",
+                "scope": "Average annual wages of urban unit employees in 2025",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
@@ -13358,18 +13866,17 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "The data come from the Substance Abuse, Behavioral Disorder, and Mental Health Counselors combined occupation and are presented via 21-1014.00; mental health counselors are not listed separately.",
-                  "2024—2034 average 48,300 openings, including replacements; not the current number of hires."
+                  "BLS Table 1.2 for Substance abuse, behavioral disorder, and mental health counselors (21-1018 combined): May 2025 median annual wage $59,350; 533,400 U.S. jobs in 2025 and 631,400 projected in 2035 (+18.4%), including 50,500 projected annual openings on average. Openings include replacement needs. These are combined figures; there is no separate estimate here for mental health counselors alone."
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
-                "limitation": "Combined occupation national framing, not the separately listed wage or employment of this occupation; not extrapolated to China, personal income, or hiring.",
+                "limitation": "BLS Table 1.2 for Substance abuse, behavioral disorder, and mental health counselors (21-1018 combined): May 2025 median annual wage $59,350; 533,400 U.S. jobs in 2025 and 631,400 projected in 2035 (+18.4%), including 50,500 projected annual openings on average. Openings include replacement needs. These are combined figures; there is no separate estimate here for mental health counselors alone.",
                 "market": "US",
-                "name": "National employment trends for 21-1014.00",
-                "period": "BLS 2024-2034 projections via O*NET; retrieved 2026-08-31",
+                "name": "BLS Table 1.2 (21-1018)",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / BLS",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/21-1014.00"
+                "scope": "Substance abuse, behavioral disorder, and mental health counselors (21-1018 combined)",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -13523,6 +14030,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "details": [
+                  "The 20 March 2026 notice lists counseling, appointment processes and work with external providers. Its application period ended 3 April; its qualifications apply to that employer only."
+                ],
+                "id": "cn-pkusz-counseling-vacancy",
+                "limitation": "The 20 March 2026 notice lists counseling, appointment processes and work with external providers. Its application period ended 3 April; its qualifications apply to that employer only.",
+                "market": "CN",
+                "name": "Peking University Shenzhen Graduate School counseling vacancy",
+                "period": "2026",
+                "publisher": "Peking University Shenzhen Graduate School counseling vacancy",
+                "scope": "Peking University Shenzhen Graduate School counseling vacancy",
+                "url": "https://www.pkusz.edu.cn/info/1056/6599.htm"
+              },
+              {
+                "details": [
+                  "Mainland China’s Mental Health Law, Article 23, permits professional psychological counseling within its scope and prohibits counselors from providing psychotherapy or diagnosing or treating mental disorders. If the counselor identifies a possible mental disorder, they should advise the person to seek care at a medical institution that meets the law’s requirements."
+                ],
+                "id": "cn-mental-health-law-article23",
+                "limitation": "Mainland China’s Mental Health Law, Article 23, permits professional psychological counseling within its scope and prohibits counselors from providing psychotherapy or diagnosing or treating mental disorders. If the counselor identifies a possible mental disorder, they should advise the person to seek care at a medical institution that meets the law’s requirements.",
+                "market": "CN",
+                "name": "Mental Health Law of the People’s Republic of China, Article 23",
+                "period": "2018 revision",
+                "publisher": "Beijing Municipal Health Commission",
+                "scope": "Mental Health Law of the People’s Republic of China, Article 23",
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992810.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. licensure, education and supervised experience; check the state board for applicable requirements."
+                ],
+                "evidence_type": "Official occupational handbook",
+                "id": "bls-ooh-licensure",
+                "limitation": "U.S. licensure, education and supervised experience; check the state board for applicable requirements.",
+                "market": "US",
+                "name": "BLS Occupational Outlook Handbook: How to Become One",
+                "period": "Read November 10, 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/community-and-social-service/substance-abuse-behavioral-disorder-and-mental-health-counselors.htm#tab-4"
               }
             ]
           },
@@ -13710,7 +14258,7 @@
             }
           }
         ],
-        "answer": "Tools can assist with record organization, resource retrieval, and information checking, but assessment, counseling intervention, crisis handling, and confidentiality judgment remain the responsibility of licensed people. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
+        "answer": "Tools can assist with record organization, resource retrieval, and information checking, but assessment, counseling intervention, crisis handling, and confidentiality decisions follow the roles assigned by law and institutional procedure. Check whether the clinical task requires a license. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
         "authority_links": [
           {
             "来源": "This occupation's tasks and scope",
@@ -13864,7 +14412,7 @@
             "问题": "Can a tool confirm safety?"
           },
           {
-            "回答": "Use the ABC fictional package and reference deliverable on this page, without touching real clients or information.",
+            "回答": "Use HC-16 in section 09 to compare the fictional appointment records and draft a handoff to the scheduler. W-HC separately tests contact preferences and supervisor signoff.",
             "来源": "This occupation's task foundation and editorial boundaries",
             "链接": "https://www.onetonline.org/link/details/21-1014.00",
             "问题": "How do you start the paper trial?"
@@ -14015,7 +14563,7 @@
             "stage": "Responsibility expansion"
           }
         ],
-        "direct_answer": "BLS: U.S. mental health counselors usually need a master's degree and an internship, all states require licensure, and the specific examination and supervised clinical work requirements are checked by state; this is this occupation's requirement and is not derived from Job Zone Five. China checks requirements by the actual counseling/treatment category and institution.",
+        "direct_answer": "BLS: U.S. mental health counselors usually need a master's degree and an internship, all states require licensure, and the specific examination and supervised clinical work requirements are checked by state; this is this occupation's requirement and is not derived from Job Zone Five. China checks requirements by the actual counseling/treatment category and institution. Mainland China’s Mental Health Law, Article 23, permits professional psychological counseling within its scope and prohibits counselors from providing psychotherapy or diagnosing or treating mental disorders. If the counselor identifies a possible mental disorder, they should advise the person to seek care at a medical institution that meets the law’s requirements.",
         "entry_heading": "Entry paths and checkable evidence",
         "heading": "Entry paths, qualification boundaries, and career development for mental health counselors",
         "locale_requirements": {
@@ -14071,6 +14619,18 @@
             "id": "source-pack-onet-localcert",
             "label": "U.S. certification lookup entry",
             "scope": "A directory is not a state license or institutional authorization."
+          },
+          {
+            "href": "https://www.pkusz.edu.cn/info/1056/6599.htm",
+            "id": "cn-pkusz-counseling-vacancy",
+            "label": "Peking University Shenzhen Graduate School counseling vacancy",
+            "scope": "The 20 March 2026 notice lists counseling, appointment processes and work with external providers. Its application period ended 3 April; its qualifications apply to that employer only."
+          },
+          {
+            "href": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992810.html",
+            "id": "cn-mental-health-law-article23",
+            "label": "Mental Health Law of the People’s Republic of China, Article 23",
+            "scope": "Mainland China’s Mental Health Law, Article 23, permits professional psychological counseling within its scope and prohibits counselors from providing psychotherapy or diagnosing or treating mental disorders. If the counselor identifies a possible mental disorder, they should advise the person to seek care at a medical institution that meets the law’s requirements."
           }
         ],
         "tracks": [
@@ -14080,8 +14640,8 @@
               {
                 "credentials": "Verified according to the specific jurisdiction, institution, and employer rules.",
                 "next_moves": "Check the next stage's tasks, qualification, and authorization before training; independent practice or promotion is not guaranteed.",
-                "readiness_evidence": "Works: the fact/unknown list for the fictional A/B/C above, a draft support goal, and a confidentiality and escalation handover record, marked as not touching real cases and not conducting diagnosis/screening or counseling. Seven days, 20 minutes a day: day 1 excerpt the known facts; day 2 list the unknown safety/consent/history items; day 3 write the questions to take to supervision and the timely escalation boundary; day 4 check the relatives' request and disclosure authority; day 5 organize the goals and a blank record; day 6 correct against the reference deliverable; day 7 compile the works, then check one target position's education/supervision/licensing requirements and record the source date, and record truthfully if not found. A real event with unknown safety must not wait for this paper learning plan.",
-                "responsibility": "The ABC above is only paper learning; real services require verified qualification, supervision, and institutional scope.",
+                "readiness_evidence": "For career exploration use HC-16 in section 09, and the separate seven-day case W-HC. Both use fictional appointment and handoff records only.",
+                "responsibility": "HC-16 and W-HC are paper exercises. Real services require verified qualifications, supervision, and institutional authorization.",
                 "role": "Paper needs excerpt"
               },
               {
@@ -14115,7 +14675,7 @@
                 "credentials": "Verified according to the specific jurisdiction, institution, and employer rules.",
                 "next_moves": "Check the next stage's tasks, qualification, and authorization before training; independent practice or promotion is not guaranteed.",
                 "readiness_evidence": "Reviewable counseling and referral training, records, and supervision feedback; paper records are marked as not real services.",
-                "responsibility": "The ABC above is only paper learning; real services require verified qualification, supervision, and institutional scope.",
+                "responsibility": "HC-16 and W-HC are paper exercises. Real services require verified qualifications, supervision, and institutional authorization.",
                 "role": "Paper goals and resource checking"
               },
               {
@@ -14149,7 +14709,7 @@
                 "credentials": "Verified according to the specific jurisdiction, institution, and employer rules.",
                 "next_moves": "Check the next stage's tasks, qualification, and authorization before training; independent practice or promotion is not guaranteed.",
                 "readiness_evidence": "Reviewable confidentiality and record training, records, and supervision feedback; paper records are marked as not real services.",
-                "responsibility": "The ABC above is only paper learning; real services require verified qualification, supervision, and institutional scope.",
+                "responsibility": "HC-16 and W-HC are paper exercises. Real services require verified qualifications, supervision, and institutional authorization.",
                 "role": "Paper consent and unknowns"
               },
               {
@@ -14510,7 +15070,7 @@
             {
               "指标": "2025 health and social work industry reference",
               "数值": "Non-private 146,266; private 75,631 yuan/year",
-              "说明": "Chinese urban unit all-industry pretax annual average; not the occupational median or monthly wage | https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              "说明": "Pretax annual average for employees of urban units in health care and social assistance; not the occupational median or monthly wage | https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             },
             {
               "指标": "Uniform starting pay",
@@ -14649,17 +15209,17 @@
           {
             "指标": "Combined employment 2025 → 2035",
             "数值": "533,400 → 631,400",
-            "说明": "The 21-1018 combined projection, not the separately listed mental health counselor; openings are not net increase | https://www.onetonline.org/link/localtrends/21-1014.00"
+            "说明": "BLS Table 1.2, 21-1018 combined; projected openings include replacement needs | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "指标": "Combined employment change 2025—2035",
-            "数值": "18%; net increase 98,000",
-            "说明": "The 21-1018 combined projection, not the separately listed mental health counselor; openings are not net increase | https://www.onetonline.org/link/localtrends/21-1014.00"
+            "数值": "18.4%; net increase 98,000",
+            "说明": "BLS Table 1.2, 21-1018 combined; projected openings include replacement needs | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "指标": "Combined average annual openings 2025—2035",
             "数值": "50,500 per year",
-            "说明": "The 21-1018 combined projection, not the separately listed mental health counselor; openings are not net increase | https://www.onetonline.org/link/localtrends/21-1014.00"
+            "说明": "BLS Table 1.2, 21-1018 combined; projected openings include replacement needs | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
         "boundary": {
@@ -14693,7 +15253,7 @@
         },
         "factor_rows": [
           {
-            "answer": "Check individual/group, institutional population, and referral scope; do not apply medical equipment repair duties.",
+            "answer": "Check individual/group, institutional population, and referral scope.",
             "factor": "Population and service model"
           },
           {
@@ -14711,14 +15271,14 @@
           }
         ],
         "factors_heading": "Regional, institutional, and qualification differences",
-        "growth": "18% (2025—2035, combined occupation)",
+        "growth": "18.4% projected job growth, 2025–2035",
         "heading": "Mental health counselors: U.S. combined occupation wages and employment",
         "industry_heading": "Industry scenarios and wage ranges",
         "industry_period": "2025 combined occupation industry wages",
         "industry_rows": [
           {
-            "industry": "Hospitals (state, local, and private)",
-            "median": "63,310 USD/year",
+            "industry": "Educational services (state, local, and private)",
+            "median": "62,070 USD/year",
             "note": {
               "$join": [
                 "The 2025 industry median annual wage for the 21-1018 combined occupation; not the separately listed mental health counselor and not the industry-wide average for all workers | https://www.bls.gov/ooh/community-and-social-service/substance-abuse-behavioral-disorder-and-mental-health-counselors.htm",
@@ -14826,8 +15386,8 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "Suits people who can listen and respond steadily, record according to assessment and confidentiality standards, and escalate immediately when a crisis or safety risk appears.",
-        "title": "What kind of person is suited to being a mental health counselor?"
+        "summary": "Consider mental health counseling if you enjoy careful listening, follow-up conversations and working within a defined referral process.",
+        "title": "Who may enjoy being a mental health counselor?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -14836,7 +15396,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "how": "A completely fictional paper package, 60 minutes, without touching real clients or information. A: an adult character, Lin, has just changed shifts and reports irregular sleep over the past two weeks and worry about work, and only wants to know the available support; no history, safety screening, consent scope, or diagnosis was provided. B: fictional institutional rules require learners to produce only a needs excerpt, a known/unknown list, and a handover draft; any safety clue goes first to a supervisor or qualified person according to institutional procedure, without independent assessment or handling. C: one sentence from a character was recorded as \"sometimes feels like I cannot hold on\", and its meaning and immediate safety status are unknown; the relatives ask for the full record but no disclosure authorization was given. Organize the facts and pending questions, two support goals to be confirmed by a professional, and a confidentiality/escalation handover and record template, without giving a diagnosis, treatment course, or danger level rating, and without uploading personal information to a tool. Reference deliverable: the known facts are only the shift change, two weeks of sleep difficulty, and a willingness to seek help; a diagnosis or a safe/unsafe judgment cannot be based on these. The meaning of \"cannot hold on\" and the immediate safety status are unknowns that must be promptly checked by a supervisor or qualified person according to institutional procedure and cannot wait for a routine weekly plan. The relatives' request has no disclosure authorization, so it goes first to the responsible person to verify under the applicable rules, and neither absolute confidentiality nor unilateral disclosure may be promised. The draft support goals may read \"clarify available support resources\" and \"jointly determine reviewable goals with a professional\", which is not a treatment prescription. The deliverable is a paper record with the original wording and time to be filled in, the unknowns, the handover recipient, and the items to be confirmed, without fabricating completed screening, signed consent, or actual counseling effects.",
+        "how": "In 09 Entry, qualification, and career development, find “HC-16: Prepare a Follow-up Handoff.” Spend about 10 minutes on the fictional records before reading the answer.",
         "suit": {
           "$join": [
             {
@@ -14863,12 +15423,12 @@
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "View this occupation's market signals"
+            "href": "#career-visual-group-sources",
+            "label": "Check the sources for market data"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "View market data and transition notes"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "Compare related career directions"
           }
         ],
         "direct_answer": {
@@ -14939,7 +15499,7 @@
             "metric": "Employment size and change",
             "occupation_scope": "Substance Abuse, Behavioral Disorder, and Mental Health Counselors combined occupation (21-1018), presented via O*NET21-1014.00, not a separately listed mental health counselor statistic",
             "source_id": "onet-trends",
-            "value": "533,400 → 631,400; 18%; net increase 98,000"
+            "value": "533,400 → 631,400; 18.4%; net increase 98,000"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15068,7 +15628,7 @@
             "alternate_value": null,
             "label": "U.S. combined occupation growth (2025—2035)",
             "secondary_value": null,
-            "value": "18%, not the separately listed mental health counselor, and not AI attribution"
+            "value": "18.4% — BLS Table 1.2 combined 21-1018 projection, not specific to mental health counselors or attributable to AI."
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15076,7 +15636,7 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": "SI can raise interest hypotheses about helping others and analytical verification but cannot prove competence; start with the ABC facts and unknown list on this page.",
+            "answer": "SI suggests interests in helping and evidence checking. Start with the fictional HC-16 appointment records to see whether you like the task.",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "Do the RIASEC interest exploration",
             "evidence_level": {
@@ -15268,19 +15828,19 @@
             "question": "Can an EQ score prove crisis communication ability?"
           },
           {
-            "answer": "Observe whether you can separate the A/C original wording from inference, list the unknown history, consent, and immediate safety items, and leave questions for supervision under rule B, without giving a diagnosis.",
-            "question": "What is observed in the fictional handover work?"
+            "answer": "Use HC-16 to check what each appointment record supports and what remains open. Draft the handoff for the scheduler without contacting anyone.",
+            "question": "What can I check in the fictional handoff?"
           },
           {
-            "answer": "The prompt gives no disclosure authorization, so write only the consent and rules questions for the responsible person to check, without disclosing on your own or fabricating a consent signature.",
-            "question": "How do you practice when relatives ask for the record?"
+            "answer": "Use W-HC to record the contact preference and supervisor signoff evidence separately. If the evidence is missing, note it for the designated supervisor and do not send a message.",
+            "question": "What should I leave unresolved in the seven-day trial?"
           },
           {
             "answer": "Real safety clues must be handed promptly to a supervisor or qualified person according to institutional procedure; the seven-day paper learning arrangement does not apply to delaying real events.",
             "question": "Can you wait for the seven-day plan when a safety clue appears?"
           },
           {
-            "answer": "First use the ABC paper package and reference correction, then check the target position's education, licensing, supervision, and institutional authority and record the source date; mark truthfully if the material is not obtained.",
+            "answer": "Use HC-16 for paper practice, then check the target position’s education, licensure, supervision, and institutional authorization.",
             "question": "How do you check a target position next?"
           }
         ],
@@ -15304,7 +15864,7 @@
             "tone": "caution"
           },
           {
-            "body": "Use the fictional ABC package and reference on this page to do only the fact/unknown list and handover, with no diagnosis, safety grading, or real counseling.",
+            "body": "Use HC-16 in section 09 to compare the fictional appointment records and draft a handoff to the scheduler. W-HC separately tests contact preferences and supervisor signoff.",
             "id": "experiment",
             "label": "Next trial actions",
             "tone": "action"
@@ -15408,7 +15968,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "English MBTI exploration entry"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -15418,7 +15978,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "English Big Five exploration entry"
+            "label": "Big Five personality test"
           },
           {
             "href": {
@@ -15428,7 +15988,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Chinese MBTI exploration entry"
+            "label": "Mental health social workers"
           },
           {
             "href": {
@@ -15438,7 +15998,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Chinese Big Five exploration entry"
+            "label": "Clinical and counseling psychologists"
           }
         ]
       },
@@ -15482,6 +16042,27 @@
         "id": "mental-health-counselors.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mental-health-counselors.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "mental-health-counselors.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "mental-health-counselors.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -15575,7 +16156,7 @@
         "fact_id": "us-median",
         "market": "United States (presentation framing: Substance Abuse, Behavioral Disorder, and Mental Health Counselors)",
         "measure": "2025 median annual wage",
-        "occupation_scope": "Substance Abuse, Behavioral Disorder, and Mental Health Counselors combined occupation (BLS21-1018), presented via O*NET21-1014.00; not a separately listed statistic for this occupation.",
+        "occupation_scope": "Substance abuse, behavioral disorder, and mental health counselors (21-1018 combined)",
         "period": "2025 wage data; consulted 2026-09-25",
         "source_refs": [
           "onet-wages"
@@ -15607,36 +16188,36 @@
       },
       {
         "derivation": null,
-        "display_value": "483,500 people (2024)",
+        "display_value": "533,400 jobs — Substance abuse, behavioral disorder, and mental health counselors (21-1018 combined)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "2024 employment size",
-        "occupation_scope": "Substance Abuse, Behavioral Disorder, and Mental Health Counselors combined occupation (BLS21-1018), presented via O*NET21-1014.00; not a separately listed statistic for this occupation.",
-        "period": "2024; consulted 2026-09-25",
+        "measure": "533,400 jobs",
+        "occupation_scope": "Substance abuse, behavioral disorder, and mental health counselors (21-1018 combined)",
+        "period": "2025",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
-        "derivation": "O*NET national employment trends page: projected growth of about 17% from 2024 to 2034.",
-        "display_value": "Much faster than average (about 17%, 2024—2034)",
+        "derivation": null,
+        "display_value": "18.4% projected growth — Substance abuse, behavioral disorder, and mental health counselors (21-1018 combined)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Employment growth projection",
-        "occupation_scope": "Substance Abuse, Behavioral Disorder, and Mental Health Counselors combined occupation (BLS21-1018), presented via O*NET21-1014.00; not a separately listed statistic for this occupation.",
-        "period": "2024—2034; consulted 2026-09-25",
+        "measure": "18.4% projected growth",
+        "occupation_scope": "Substance abuse, behavioral disorder, and mental health counselors (21-1018 combined)",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
-        "derivation": "Includes replacement needs.",
-        "display_value": "About 48,300 per year (2024—2034)",
+        "derivation": null,
+        "display_value": "50,500 projected annual openings — Substance abuse, behavioral disorder, and mental health counselors (21-1018 combined)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Projected job openings (annual average)",
-        "occupation_scope": "Substance Abuse, Behavioral Disorder, and Mental Health Counselors combined occupation (BLS21-1018), presented via O*NET21-1014.00; not a separately listed statistic for this occupation.",
-        "period": "2024—2034; consulted 2026-09-25",
+        "measure": "50,500 projected annual openings",
+        "occupation_scope": "Substance abuse, behavioral disorder, and mental health counselors (21-1018 combined)",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
@@ -15684,31 +16265,31 @@
         "availability": "available",
         "fact_ref": "us-median",
         "key": "us_pay",
-        "label": "U.S. salary reference"
+        "label": "U.S. 21-1018 combined median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. 21-1018 combined projected job growth (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment count"
+        "label": "U.S. 21-1018 combined jobs in 2025"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual job openings"
+        "label": "U.S. 21-1018 combined projected annual openings (2025–2035)"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China salary reference"
+        "label": "Mainland China: exact occupational wage not verified"
       }
     ]
   },
@@ -15716,14 +16297,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Mental health counselors (O*NET21-1014.00) provide mental health counseling and prevention. U.S. wages and employment use the substance abuse, behavioral disorder, and mental health counselors combined statistic: 2025 median annual wage 59,350 USD, 2024 employment 483,500; includes tasks, risks, and entry boundaries."
+      "text": "Explore mental health counseling, combined U.S. job and wage figures, a mainland employer example, and a paper follow-up exercise."
     },
     "title": {
       "availability": "available",
       "text": "Mental health counselor: work content, U.S. wages, and entry"
     }
   },
-  "source_content_sha256": "206ff12acea0dd8d6d94215433e515efe819a4b6a4f3cd71c1220acefc6f0851",
+  "source_content_sha256": "96f8a04b1386c854bb456b40cfcbd3b793acfee54fe654fdd5a7e91d62bd2e2a",
   "subject": {
     "canonical_slug": "mental-health-counselors",
     "name": "Mental health counselor",

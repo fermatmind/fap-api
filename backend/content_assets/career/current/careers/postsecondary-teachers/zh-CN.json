@@ -23383,13 +23383,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "偏好持续授课和研究者可继续核具体学科岗位；若偏好运营管理，可比较高等教育行政管理者。"
+              "纸面体验｜对照两份虚构高校岗位说明，按授课、评估和研究整理任务，标明哪项工作量仍需向院系核实。 "
             ]
           },
           "id": "postsecondary-teachers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23679,13 +23678,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "BLS聚合页覆盖多个高等教育学科；O*NET 25-1081只为教育学教师提供具体任务样例。课程设计、授课、评价与学生指导可共通，研究及任职条件须按实际学科与机构。"
+              "高校教师的共同工作包括备课、授课和评估学习。以教育学教师为例，课程可结合教学案例和研究材料，研究与服务任务因岗位而异。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "postsecondary-teachers.profile.definition-block.11",
           "source_refs": [
-            "bls",
-            "onet"
+            "transfer-onet-25-1081.00"
           ],
           "type": "prose"
         },
@@ -24779,13 +24777,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "已有研究讨论文本任务潜力和风险，不能据此给高校教师替代概率。草稿可辅助，学科准确性、评分公平与学生支持仍须人工负责。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照两份虚构高校岗位说明，按授课、评估和研究整理任务，标明哪项工作量仍需向院系核实。"
             ]
           },
           "id": "postsecondary-teachers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor",
-            "bls"
+            "transfer-onet-25-1081.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32732,6 +32730,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-25-1081.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 25-1081.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/25-1081.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38024,10 +38049,10 @@
       "text": "高等教育教师"
     }
   },
-  "source_content_sha256": "9a5c830f284b6f72e50767f3bc26022f53e9d56bf404373f75327d750fb5783d",
+  "source_content_sha256": "224a351f9cd8408fad4c6fb995e381acc615235a1528ed27abf1e6cda3b0ac49",
   "subject": {
     "canonical_slug": "postsecondary-teachers",
     "name": "高等教育教师",
-    "summary": "高等教育教师在大学、学院、社区学院等高等教育机构讲授学科课程，设计教学大纲、作业和评价，指导学生；部分岗位同时开展研究、发表成果及参与院系服务。具体教学与研究比重随学校、学科和聘任类型变化。本页美国工资与就业使用BLS Postsecondary Teachers聚合页；O*NET 25-1081仅为教育学教师细分任务样例。"
+    "summary": "高校教师的共同工作包括备课、授课和评估学习。以教育学教师为例，课程可结合教学案例和研究材料，研究与服务任务因岗位而异。"
   }
 }

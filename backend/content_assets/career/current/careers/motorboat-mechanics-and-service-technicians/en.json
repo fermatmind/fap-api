@@ -158,6 +158,9 @@
       "item:motorboat-mechanics-and-service-technicians.path.seven-day-trial.7": {
         "status": "mapped"
       },
+      "item:motorboat-mechanics-and-service-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:motorboat-mechanics-and-service-technicians.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13273,6 +13276,21 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two outboard orders share a model but have different serial suffixes. One reports vibration and the other includes an unnumbered service record. Match the complaint to its engine and state what the service technician should verify."
+            ]
+          },
+          "id": "motorboat-mechanics-and-service-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Verify a boat engine service intake",
+          "type": "notice"
         }
       ]
     },
@@ -15745,6 +15763,13 @@
         "id": "motorboat-mechanics-and-service-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "motorboat-mechanics-and-service-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15962,7 +15987,7 @@
       "text": "Motorboat Mechanics and Service Technicians"
     }
   },
-  "source_content_sha256": "5a4514bc57161381d30321ee4dcec081b63422a5632aeca7aea33fd8effd9158",
+  "source_content_sha256": "3e020d2aa350425ac419faccb33b06b7c8d9fa10e149f6eaad3d5ed2d209b70a",
   "subject": {
     "canonical_slug": "motorboat-mechanics-and-service-technicians",
     "name": "Motorboat Mechanics and Service Technicians",

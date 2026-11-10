@@ -23371,13 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Those who prefer equipment observation and procedural discipline can compare in-plant operation, grid dispatch, or maintenance tasks; actual job requirements are verified separately."
+              "Paper check | Find similar point IDs with different times in two fictional operations logs. Put the original readings and question on a handoff sheet. "
             ]
           },
           "id": "power-plant-operators.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23667,13 +23666,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Power plant operators control, operate, or maintain generating equipment, including auxiliary equipment; monitoring readings, startup and shutdown, output adjustment, and records follow job authorization."
+              "Power plant operators monitor generating equipment and instrument readings, record changes under site procedures and hand them off to the crew. An unusual reading should be traceable to its source point and time. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "power-plant-operators.profile.definition-block.11",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-onet-51-8013.00"
           ],
           "type": "prose"
         },
@@ -24772,14 +24770,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "OOH notes that control room modernization can automate some tasks; using generative tools to organize alarms, logs, or trends is only a to-be-verified idea on this page, with no actual effect or adoption rate. Startup and shutdown, output adjustment, and equipment anomaly handling follow authorization and organizational procedures. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Find similar point IDs with different times in two fictional operations logs. Put the original readings and question on a handoff sheet."
             ]
           },
           "id": "power-plant-operators.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "employer",
-            "editor",
-            "onet"
+            "transfer-onet-51-8013.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32680,6 +32677,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-8013.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-8013.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-8013.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37925,10 +37949,10 @@
       "text": "Power Plant Operators"
     }
   },
-  "source_content_sha256": "dcf85820348a925f325542a980dd5d2a621c208641644c73705ad2db30df2f99",
+  "source_content_sha256": "619c8da5c2fc5af258a5d79c78e8140596a1169d71b0b675385e02c22a4dce20",
   "subject": {
     "canonical_slug": "power-plant-operators",
     "name": "Power Plant Operators",
-    "summary": "Power plant operators run generating units and boilers, turbines, generators, and auxiliary equipment under authorization, monitor instruments, adjust output, and handle anomalies. O*NET 51-8013.00 lists unit startup and shutdown, power output, equipment monitoring, and operating records as core tasks; real equipment operation follows plant procedures and job authorization."
+    "summary": "Power plant operators monitor generating equipment and instrument readings, record changes under site procedures and hand them off to the crew. An unusual reading should be traceable to its source point and time."
   }
 }

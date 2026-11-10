@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a48-huangpu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a48-shanghai": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:executive-secretaries-and-executive-administrative-assistants.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:executive-secretaries-and-executive-administrative-assistants.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "executive-secretaries-and-executive-administrative-assistants.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "executive-secretaries-and-executive-administrative-assistants.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22716,7 +22682,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use the EA344 fictional Tuesday schedule and Wednesday travel prompt to check: find the shared attendee and arrival-time constraints, recompute the 1000 yuan budget, and write two draft messages about rescheduling items awaiting confirmation; only observe paper-based information organization, and do not send invitations or make bookings."
+              "Use EA344’s fictional calendar and travel details to write a one-page coordination table. Distinguish proposed, pending and approved items."
             ]
           },
           "id": "executive-secretaries-and-executive-administrative-assistants.quick-decision.fit-decision-checklist.2",
@@ -26266,12 +26232,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other cities"
+              "Shanghai and Guangzhou job postings"
             ]
           },
           "id": "executive-secretaries-and-executive-administrative-assistants.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a48-shanghai",
+            "a48-huangpu"
           ],
           "type": "prose"
         },
@@ -26280,12 +26247,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable monthly wage statistic for this occupation in other cities was obtained; differences among cities and institutions are large and must be verified by work location."
+              "Shanghai Xinpengcheng Data Technology advertised an assistant to the chair at CNY 9,000–15,000 per month. It asked for at least three years of executive support experience and included meetings, confidential materials and marketing project coordination. Guangzhou Leafun Culture Technology advertised a chair’s secretary at CNY 9,000–10,000 per month, asking for a bachelor’s degree or above. Duties included drafting reports and speeches, arranging schedules and tracking project progress. These are quotes from individual employers. Both roles support executives. Ask each employer about administrative work, business follow-up, authorization and current openings."
             ]
           },
           "id": "executive-secretaries-and-executive-administrative-assistants.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a48-shanghai",
+            "a48-huangpu"
           ],
           "type": "prose"
         },
@@ -27028,13 +26996,13 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
@@ -28797,9 +28765,9 @@
                   "Material One: EA344 fictional schedule and travel inputs",
                   "Fictional Tuesday, all times Beijing time. Executive A: 09:00–10:00 internal budget meeting, 10:00–11:00 external client meeting; the client meeting cannot be moved, and the budget meeting chair allows rescheduling to 14:00–15:00. Executive B: 10:00–11:00 interview, which A must attend jointly; the candidate can move to 15:00–16:00.",
                   "A travels to fictional City Jia on Wednesday: train X on Wednesday 07:00–10:00, fare 480 yuan; train Y on Tuesday 17:00–20:00, fare 580 yuan. The on-site meeting starts Wednesday at 09:30 and requires arriving 30 minutes early.",
-                  "Departing on Tuesday requires one night of accommodation, fictional hotel 360 yuan; the total budget cap is 1000 yuan. From City Jia station to the venue and the hotel takes 30 minutes each, with total transport cost of 60 yuan.",
+                  "Tuesday departure requires a night at a fictional hotel costing CNY 360. The cap is CNY 1,000. The station-to-venue, station-to-hotel and hotel-to-venue trips each take 30 minutes. The local transfers needed for either plan total CNY 60.",
                   "All people, invitations, routes, prices, and rules are fictional for this exercise; do not book, pay, or access real candidate or client information.",
-                  "Deliverables: the adjusted Tuesday schedule, a feasible travel plan and total cost, two draft rescheduling confirmations, and a list of unconfirmed items.",
+                  "Deliver a one-page coordination table, a travel proposal, two unsent confirmation messages and a list of open items.",
                   "A must confirm the travel and the budget meeting rescheduling, and B and the candidate must confirm the interview rescheduling; the practitioner can only propose options and does not commit on the executives' behalf."
                 ]
               },
@@ -28807,17 +28775,16 @@
                 "id": "exercise-task",
                 "values": [
                   "Material Two: calculation and delivery requirements",
-                  "The two time constraints are the Tuesday 10:00 client meeting conflicting with the interview that requires A, and train X arriving at the venue at the earliest 10:30 on Wednesday, later than the 09:00 requirement; the budget meeting at 9:00–10:00 originally does not overlap with the 10:00 meeting. Rescheduling the budget meeting to 14:00 can be proposed under the stated permission, but it must be described as an optional arrangement. Compare the two trains and the 1000 yuan budget, and deliver a synchronization table of items awaiting confirmation.",
-                  "The work is a one-page coordination table and confirmation list; all exercise materials are fictional, unconfirmed items are marked as pending, and no real invitations or orders are generated."
+                  "Compare schedules, venue arrival times and costs. Draft two unsent messages, one to the interview participants and one requesting A’s travel approval.",
+                  "Single-change variant: B confirms the 15:00–16:00 interview. Leave all other inputs and reply statuses unchanged."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material Three: reference delivery (fictional)",
-                  "The Tuesday 10:00 client meeting cannot be moved, and the interview is proposed for 15:00–16:00; the budget meeting at 9:00–10:00 originally has no conflict and can be kept, or proposed for 14:00–15:00 under the stated permission pending A's confirmation. Train X10:00 arrival +30 minute journey = 10:30, later than 09:00, and is excluded.",
-                  "Train Y arrives at 20:00 on Tuesday; the fare 580 plus hotel 360 plus transport 60 equals 1000 yuan, meeting the budget cap and allowing arrival before 09:00 on Wednesday. The arrangement must be confirmed by A and cannot be booked directly.",
-                  "Draft one (optional budget meeting rescheduling): A, it is proposed to move the Tuesday 09:00–10:00 Beijing time budget meeting to 14:00–15:00; the chair allows this, for schedule coordination, please confirm, and it remains pending until a reply is received. Draft two: B and the candidate, A already has an immovable client meeting on Tuesday 10:00–11:00, so the interview is proposed for 15:00–16:00, please confirm on both sides; invitations are not sent for now. Record the prompt and versions; the 1000 yuan travel cost awaits A's approval; there is no formal ticket purchase, order, or real commitment."
+                  "Finish independently",
+                  "Submit both versions on day six, with two unsent confirmation messages.",
+                  "On day seven, open “EA344 scheduling and travel reference (open after day six)” under FAQ and sources."
                 ]
               },
               {
@@ -28845,7 +28812,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Work sample One: EA344 rule comparison",
-                  "List that the client meeting cannot move, the interview requires A, the rescheduling permission, the Wednesday 09:00 arrival, the 1000 budget, and the approval recipients.",
+                  "Keep EA344 inputs separate from the job posting requirements.",
                   "If a target posting is added, mark the real posting date and status separately, and do not treat the prompt as a recruitment sample."
                 ]
               },
@@ -28853,16 +28820,16 @@
                 "id": "independent-recheck",
                 "values": [
                   "Work sample Two: EA344 reviewable coordination plan",
-                  "Using the same prompt, list the Tuesday schedule, that X10:30 is non-compliant, Y580+360+60=1000, and the two drafts.",
-                  "Mark everything as proposed/pending, and do not commit or book."
+                  "Write the Tuesday schedule and both travel options.",
+                  "Show arrival assumptions, costs and open items."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "Work sample Three: EA344 status minute",
-                  "Use only the fictional status given on day 5: A agrees to the proposed budget meeting change but travel is not approved; B agrees to the interview rescheduling and the candidate has not replied.",
-                  "Distinguish confirmed from pending and who replied, and do not invent meeting resolutions."
+                  "Update only the reply status supplied in the variant.",
+                  "Include the unsent messages."
                 ]
               },
               {
@@ -28941,50 +28908,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read the fictional rules",
-                  "Using only the fictional exercise materials above, extract the four rules: the client meeting cannot move, arrival is required before 09:00, the budget cap is 1000 yuan, and A's approval is required."
+                  "Day 1",
+                  "Record the time zone, schedules and budget."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: organize the input table",
-                  "Tabulate the A/B arrangements, the candidate's available window, the two trains, and the costs; mark Beijing time and the fictional nature, and keep a version record."
+                  "Day 2",
+                  "Compare attendee schedules."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: handle the schedule conflict",
-                  "Propose drafts rescheduling the budget meeting to 14:00–15:00 and the interview to 15:00–16:00; write confirmation text for A/B/the candidate, mark everything as pending, and do not send real invitations."
+                  "Day 3",
+                  "Compare venue arrival times."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: verify the fictional travel",
-                  "Calculate that train X arrives at the earliest at 10:30 and exclude it; train Y totals 580+360+60=1000, with departure proposed for Tuesday, awaiting A's approval, and no booking or payment."
+                  "Day 4",
+                  "Check costs and write both drafts."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: write a fictional minute",
-                  "The additional fictional status for this exercise: A has accepted the proposed budget meeting change but travel is not approved; B accepts the interview rescheduling and the candidate has not replied. Write the status minute based only on these three items, keep the original client meeting unchanged, and do not fabricate meetings or commitments."
+                  "Day 5",
+                  "Update only the reply supplied in the variant."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: self-review or ask someone to challenge",
-                  "Check the time zone, arrival times, costs, and confirmation status against the reference delivery above; no actual colleague is needed, independent review is acceptable, and record omissions and revisions."
+                  "Day 6",
+                  "Submit both versions on your own and show the confirmation status that changes."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: write your judgment",
-                  "From the seven days of fictional paper work, judge whether you want to continue, what skills you need to make up, and the permission boundaries for confirmation, budget, and external commitments; the exercise does not grant real authorization."
+                  "Day 7",
+                  "On day seven, open “EA344 scheduling and travel reference (open after day six)” under FAQ and sources. Record one correction."
                 ]
               }
             ]
@@ -29001,13 +28968,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: did you list the hard constraints and each approval recipient?",
-              "Day 2: did you mark the time zone, fictional inputs, and versions?",
-              "Day 3: did you distinguish the single shared attendee conflict from the optional budget meeting rescheduling?",
-              "Day 4: did you calculate X10:30 and Y1000 and keep them pending approval?",
-              "Day 5: did you split confirmed and pending only according to the given status?",
-              "Day 6: did you revise against the prompt and record real review or the absence of feedback?",
-              "Day 7: did you distinguish paper preferences from real role experience and authorization?"
+              "Record the time zone and inputs.",
+              "Explain conflicts.",
+              "Compare travel and costs.",
+              "Keep the drafts.",
+              "Record the variant separately.",
+              "Show approval status.",
+              "Compare with the reference and record a correction."
             ]
           },
           "id": "executive-secretaries-and-executive-administrative-assistants.path.seven-day-decision.1",
@@ -29129,13 +29096,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain a still-valid Chinese employer recruitment sample corresponding to this occupation. The existing employer cards are verification templates only, not proof of active hiring or common requirements; record the real posting date, status, support recipient, software, and experience."
+              "Shanghai Xinpengcheng Data Technology advertised an assistant to the chair at CNY 9,000–15,000 per month. It asked for at least three years of executive support experience and included meetings, confidential materials and marketing project coordination. Guangzhou Leafun Culture Technology advertised a chair’s secretary at CNY 9,000–10,000 per month, asking for a bachelor’s degree or above. Duties included drafting reports and speeches, arranging schedules and tracking project progress. These are quotes from individual employers. Both roles support executives. Ask each employer about administrative work, business follow-up, authorization and current openings."
             ]
           },
           "id": "executive-secretaries-and-executive-administrative-assistants.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a48-shanghai",
+            "a48-huangpu"
           ],
           "title": "How to read a job posting",
           "type": "notice"
@@ -31179,22 +31146,22 @@
                 ]
               },
               {
-                "answer": "Current BLS Table 1.2 for the exact SOC43-6011: employment 489,300 in 2025 and 489,200 in 2035, a change of 0.0% and a net decrease of about 100; the 2025–2035 annual average openings are 43,300, not net new positions or a ten-year total. The 43-6000 group figure of -2.1% cannot replace this occupation, and the OOH technology context has no AI contribution quantity.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 43-6011 at about 489,200 in 2035, down from 489,300 in 2025. The table reports 0.0% change at one decimal place and about 43,300 annual openings, including replacements. Employment totals are rounded separately.",
                 "id": "executive-secretaries-and-executive-administrative-assistants.faq.5",
                 "question": "What is the U.S. employment outlook?",
                 "question_key": "career.faq.executive-secretaries-and-executive-administrative-assistants.q5",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "bls-ooh-secretaries"
+                  "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics materials verified this time are at the broad industry category level, and no nationwide single-occupation wage statistic precisely corresponding to this occupation was obtained; this page uses the average wage of urban units in \"Leasing and Business Services\" (2025 non-private 110,162 yuan/year, private 68,919 yuan/year) as an industry proxy, only to describe the industry context, and does not substitute an industry average or a single recruitment quote for occupational wages.",
+                "answer": "Shanghai Xinpengcheng Data Technology advertised an assistant to the chair at CNY 9,000–15,000 per month. It asked for at least three years of executive support experience and included meetings, confidential materials and marketing project coordination. Guangzhou Leafun Culture Technology advertised a chair’s secretary at CNY 9,000–10,000 per month, asking for a bachelor’s degree or above. Duties included drafting reports and speeches, arranging schedules and tracking project progress. These are quotes from individual employers. Both roles support executives. Ask each employer about administrative work, business follow-up, authorization and current openings. Comparable national occupation-level wage data remain unavailable.",
                 "id": "executive-secretaries-and-executive-administrative-assistants.faq.6",
                 "question": "Can wages in mainland China be found?",
                 "question_key": "career.faq.executive-secretaries-and-executive-administrative-assistants.us-pay",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "a48-shanghai",
+                  "a48-huangpu"
                 ]
               },
               {
@@ -31237,6 +31204,12 @@
                   "onet-details",
                   "internal-rubric"
                 ]
+              },
+              {
+                "answer": "Keep Tuesday’s 09:00 budget meeting and 10:00 client meeting. Propose 15:00–16:00 for the interview and keep the invitation in draft pending both replies. Train X gets A to the venue at 10:30 on Wednesday, too late for 09:00. Train Y arrives Tuesday. Leave the hotel at 08:25 Wednesday to reach the venue around 08:55. Fare, hotel and transfers total CNY 1,000, exactly the cap. A still needs to approve travel. In the variant, only B confirms. The candidate’s reply is pending, so the invitation stays in draft. Check the conflict, arrival and cost, confirmation status and authority.",
+                "id": "executive-secretaries-and-executive-administrative-assistants.faq.11",
+                "question": "EA344 scheduling and travel reference (open after day six)",
+                "question_key": "career.faq.executive-secretaries-and-executive-administrative-assistants.11"
               }
             ]
           },
@@ -31327,28 +31300,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the Executive Secretaries and Administrative Assistants page",
@@ -31382,19 +31343,20 @@
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
-                "limitation": "U.S. occupational sources do not automatically imply mainland China licensing requirements, qualifications, or employer requirements; they also do not constitute legal or compliance conclusions.",
+                "limitation": "Wages use 2025 wage estimates. Employment uses BLS Table 1.2 projections.",
                 "market": "United States",
                 "name": "O*NET OnLine：Executive Secretaries and Executive Administrative Assistants（43-6011.00）",
-                "period": "current page; accessed 2026-10-03",
+                "period": "2025 wages and 2025–2035 employment projection",
                 "publisher": "O*NET OnLine",
                 "scope": "exact occupation (SOC 43-6011)",
                 "url": "https://www.onetonline.org/link/summary/43-6011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "Used to verify tasks, work activities, work context, technical skills, and preparation level (Job Zone Three).",
-                  "The core tasks are schedule management, travel arrangements, document preparation, office services coordination, and information handling."
+                  "The core tasks are schedule management, travel arrangements, document preparation, office services coordination, and information handling.",
+                  "The 2025 U.S. wage medians were $36.82 hourly and $76,590 annually. See BLS Table 1.2 for the projection."
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
@@ -31410,7 +31372,6 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "Median wages (2025)：$36.82 hourly, $76,590 annual。",
-                  "Employment (2024)：502,800；Projected growth (2024—2034)：Decline (-1% or lower)；Projected job openings (2024—2034)：50,000。",
                   "Top industries (2024)：Educational Services；Government。"
                 ],
                 "evidence_type": "official occupation trends (BLS data)",
@@ -31418,7 +31379,7 @@
                 "limitation": "The current summary still shows 2024 employment and 2024–2034; the main text's current cycle is verified directly against BLS Table 1.2. The five-tier wages are also verified directly against the national wage table, and the summary is not converted to the new cycle.",
                 "market": "United States",
                 "name": "O*NET OnLine: wages and employment trends (43-6011.00, citing BLS data)",
-                "period": "median wages 2025; employment 2024; projections 2024—2034; accessed 2026-09-20",
+                "period": "2025 wages and 2025–2035 employment projection",
                 "publisher": "O*NET OnLine (data from BLS)",
                 "scope": "exact occupation (SOC 43-6011)",
                 "url": "https://www.onetonline.org/link/summary/43-6011.00"
@@ -31459,8 +31420,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Exact SOC43-6011: 489.3 thousand in 2025 and 489.2 thousand in 2035, a net change of -0.1 thousand, 0.0%, and 43.3 thousand annual openings.",
-                  "Typical entry is a high school diploma or equivalent, less than 5 years of related experience, and the OJT item is None; the 43-6000 group figure of -2.1% is kept separate from this occupation."
+                  "BLS Table 1.2 projects U.S. employment in occupation 43-6011 at about 489,200 in 2035, down from 489,300 in 2025. The table reports 0.0% change at one decimal place and about 43,300 annual openings, including replacements. Employment totals are rounded separately."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
@@ -31555,14 +31515,14 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "Employment 502800 in 2024; 494900 in 2034; a change of -2%; 50000 annual openings during the projection period, including growth and replacement."
+                  "BLS Table 1.2 projects U.S. employment in occupation 43-6011 at about 489,200 in 2035, down from 489,300 in 2025. The table reports 0.0% change at one decimal place and about 43,300 annual openings, including replacements. Employment totals are rounded separately."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "onet-national-trends-2024-2034",
-                "limitation": "National occupational statistics are not individual income or hiring probabilities; the statistical period and units are retained separately.",
+                "limitation": "Use BLS Table 1.2 for the published precision of the employment projection.",
                 "market": "United States",
-                "name": "O*NET national employment trend: Executive Secretaries and Executive Administrative Assistants (43-6011.00)",
-                "period": "2024 base period; 2024–2034 projection",
+                "name": "O*NET National Employment Trends, 43-6011",
+                "period": "2025 wages and 2025–2035 employment projection",
                 "publisher": "O*NET OnLine (data from BLS)",
                 "scope": "exact occupation (SOC 43-6011)",
                 "url": "https://www.onetonline.org/link/localtrends/43-6011.00"
@@ -31703,6 +31663,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Shanghai Xinpengcheng Data Technology advertised an assistant to the chair at CNY 9,000–15,000 per month. It asked for at least three years of executive support experience and included meetings, confidential materials and marketing project coordination."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a48-shanghai",
+                "limitation": "One employer’s quote. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Executive support job posting",
+                "period": "2026-11-09",
+                "publisher": "Shanghai Yangpu District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shanghai.gov.cn/nw17239/20261109/c82b8612101c460ab05fc56517cbfdd6.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Guangzhou Leafun Culture Technology advertised a chair’s secretary at CNY 9,000–10,000 per month, asking for a bachelor’s degree or above. Duties included drafting reports and speeches, arranging schedules and tracking project progress."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a48-huangpu",
+                "limitation": "One employer’s quote. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Executive support job posting",
+                "period": "2023-08-09",
+                "publisher": "Guangzhou Huangpu District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/hpqgzkfqzdlyzl/jycy/gzdt/content/post_9156631.html"
               }
             ]
           },
@@ -34198,7 +34188,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet",
+            "id": "onet-work-context",
             "label": {
               "$link": "executive-secretaries-and-executive-administrative-assistants.risk.career-risk-cards.7",
               "block": "risk",
@@ -34563,6 +34553,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a48-shanghai",
+            "posting-a48-huangpu"
+          ],
           "sources_note": {
             "$item": "executive-secretaries-and-executive-administrative-assistants.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36474,7 +36468,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36484,27 +36478,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "executive-secretaries-and-executive-administrative-assistants.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "executive-secretaries-and-executive-administrative-assistants.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -36892,6 +36866,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Shanghai Xinpengcheng Data Technology advertised an assistant to the chair at CNY 9,000–15,000 per month. It asked for at least three years of executive support experience and included meetings, confidential materials and marketing project coordination.",
+        "fact_id": "posting-a48-shanghai",
+        "market": "Mainland China",
+        "measure": "Advertised pay",
+        "occupation_scope": "Executive support job posting",
+        "period": "2026-11-09",
+        "source_refs": [
+          "a48-shanghai"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Guangzhou Leafun Culture Technology advertised a chair’s secretary at CNY 9,000–10,000 per month, asking for a bachelor’s degree or above. Duties included drafting reports and speeches, arranging schedules and tracking project progress.",
+        "fact_id": "posting-a48-huangpu",
+        "market": "Mainland China",
+        "measure": "Advertised pay",
+        "occupation_scope": "Executive support job posting",
+        "period": "2023-08-09",
+        "source_refs": [
+          "a48-huangpu"
+        ]
       }
     ]
   },
@@ -36951,7 +36949,7 @@
       "text": "Executive Secretaries and Executive Administrative Assistants"
     }
   },
-  "source_content_sha256": "91039f023c4879cbbb187c18a3d50a4784a1de3e7a251ccfe44492d796c0a89e",
+  "source_content_sha256": "36b753590e81959bd619054428c0301224920b5f7ca17a355a8840f285256145",
   "subject": {
     "canonical_slug": "executive-secretaries-and-executive-administrative-assistants",
     "name": "Executive Secretaries and Executive Administrative Assistants",

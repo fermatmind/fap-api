@@ -9,7 +9,7 @@
         "status": "pending_mapping"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:employment-g04-current": {
         "status": "pending_mapping"
@@ -18,7 +18,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:growth-g04-current": {
         "status": "pending_mapping"
@@ -57,9 +57,15 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:openings-g04-current": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-authorizer-jlbank": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-authorizer-scu": {
         "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
@@ -26140,12 +26146,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no verifiable recruitment or quote statistics for credit authorization and credit verification positions in Mainland China; an individual unit's position pay disclosure cannot represent the national level"
+              "Jilin Bank’s card review notice lists application checks, credit and fraud risk screening, and written review findings; it gives no wage. A China Merchants Bank Chengdu posting on Sichuan University’s portal states annual income of CNY 110,000–140,000. A separate 6,000–8,000 field has no pay period and does not establish a monthly or base wage. The role handles card issue, rejection and limits under bank policy."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "authorizer-jlbank",
+            "authorizer-scu"
           ],
           "type": "prose"
         },
@@ -26241,7 +26248,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Mainland China salary section of this page keeps only the evidence boundary: it does not treat an industry average as an occupation wage, does not replace it with US data, and does not state a national median or starting wage or percentile for this occupation."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -30998,7 +31005,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Receive credit applications and sales slips sent by mail or phone, interview applicants in person or by phone to collect personal and financial data, obtain information from banks and credit reporting agencies and other credit service providers and provide information mutually on request, review public records to verify residence and property and bankruptcy and liens and debts or unpaid tax and other matters, evaluate computerized credit records and repayment history by predetermined standards to decide whether to approve new credit, summarize and analyze the credit information investigated and prepare investigation results and recommendation reports, process\napplications and notify acceptance or denial, record clients' fees and payments and mail statements and file sales slips, review client files to identify and select overdue accounts and collect overdue amounts by phone, and communicate with clients to resolve complaints or verify financial and credit transactions.",
+                "answer": "Check applications, transactions or account information, record evidence and flag exceptions. Act within assigned limits and rules, and escalate cases that exceed them or raise risk concerns.",
                 "id": "actors.faq.1",
                 "question": "What do credit authorizers and checkers and clerks specifically do every day?",
                 "question_key": "career.faq.credit-authorizers-checkers-and-clerks.1",
@@ -31007,9 +31014,9 @@
                 ]
               },
               {
-                "answer": "Credit authorizers and checkers and clerks process and authorize specific credit applications by predetermined standards and investigate the applicant's history and credit status; credit analysts perform deeper credit risk analysis on a single credit facility and prepare risk reports; loan officers meet clients and advance loan applications to completion; accountants and auditors prepare and audit financial information; financial managers coordinate financial activities and teams; bookkeeping, accounting, and auditing clerks record and verify accounts; tellers handle counter transactions.",
+                "answer": "Credit checkers focus on records and authorization procedures. Credit analysts assess repayment and business risk in greater depth. The institution determines who has final approval authority.",
                 "id": "actors.faq.2",
-                "question": "What is the difference between this occupation and credit analysts or loan officers?",
+                "question": "How does credit checking differ from credit analysis and final approval?",
                 "question_key": "career.faq.credit-authorizers-checkers-and-clerks.2",
                 "source_refs": [
                   "onet"
@@ -31025,9 +31032,9 @@
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: three types of tasks—material classification and missing item prompts, record comparison and consistency checks, and notice and letter drafts—can be partly taken on by tools; this page has no single-occupation adoption rate or replacement data.",
+                "answer": "Systems can flag missing fields and anomalies. Staff must follow their authorization for document verification, privacy, exceptions and final decisions. This is not a measurement of AI adoption or job displacement.",
                 "id": "actors.faq.4",
-                "question": "For which tasks in this occupation is there evidence of AI change?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.credit-authorizers-checkers-and-clerks.4",
                 "source_refs": [
                   "onet"
@@ -31043,12 +31050,14 @@
                 ]
               },
               {
-                "answer": "In the US 2025 wage data, the median annual wage is 50,080 US dollars and the median hourly wage is 24.08 US dollars (single occupation basis 43-4041.00), with annual percentiles of 30,260／40,520／50,080／60,860／72,700 US dollars; no occupation-level wage figure was obtained for Mainland China, and this page handles it as a gap without filling it in with an industry average.",
+                "answer": "The May 2025 U.S. median wage was $50,080 per year and $24.08 per hour. Jilin Bank’s card review notice lists application checks, credit and fraud risk screening, and written review findings; it gives no wage. A China Merchants Bank Chengdu posting on Sichuan University’s portal states annual income of CNY 110,000–140,000. A separate 6,000–8,000 field has no pay period and does not establish a monthly or base wage. The role handles card issue, rejection and limits under bank policy.",
                 "id": "actors.faq.6",
                 "question": "About how much does this occupation pay, and how should it be compared?",
                 "question_key": "career.faq.credit-authorizers-checkers-and-clerks.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "authorizer-jlbank",
+                  "authorizer-scu"
                 ]
               },
               {
@@ -31079,12 +31088,12 @@
                 ]
               },
               {
-                "answer": "The O*NET employment trends page (based on the BLS 2024—2034 projection) shows this segment at about 12,000 people in 2024, with a projection label of Decline (-1% or lower, about -6%), and about 1,000 average annual openings including growth and replacement; the work is mainly document processing and standard application and high-frequency communication in an office environment and must be verified against the local financial industry structure and compliance requirements.",
+                "answer": "BLS projects U.S. employment in SOC 43-4041 to go from about 12,200 in 2025 to 11,300 in 2035 (−7.4%). It projects about 900 openings per year, including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should I consider now when choosing this occupation?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.credit-authorizers-checkers-and-clerks.10",
                 "source_refs": [
-                  "bls"
+                  "a20-bls-projections"
                 ]
               }
             ]
@@ -31505,7 +31514,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "The current partial profile is still being added to; the 55 Context items are 0—100 ratings rather than response percentages."
                 ],
@@ -31517,7 +31526,7 @@
                 "period": "Page updated 2026; retrieved 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-4041.00"
+                "url": "https://www.onetonline.org/link/details/43-4041.00"
               },
               {
                 "accessed_at": "2026-09-18",
@@ -31811,6 +31820,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment in SOC 43-4041 to go from about 12,200 in 2025 to 11,300 in 2035 (−7.4%). It projects about 900 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a20-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Card application checks and written review opinions. No pay amount."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "authorizer-jlbank",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Head-office card review role",
+                "period": "2025-05",
+                "publisher": "Jilin Bank",
+                "scope": "recruitment_proxy",
+                "url": "https://www.jlbank.com.cn/jlbank/gyjx/rczp/shzp/2025050915475127855/index.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Body lists CNY 110,000–140,000 in annual income. Separate field 6,000–8,000 has no period. Ten positions in Wuhou, Chengdu; bachelor’s degree or higher."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "authorizer-scu",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "China Merchants Bank Chengdu card application review",
+                "period": "2026-06-12",
+                "publisher": "Sichuan University career center",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh4Y9yKu9Sqyobddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E"
               }
             ]
           },
@@ -34992,7 +35046,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (recruitment quote basis)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -35004,13 +35058,14 @@
           "china_soc_row": "US 43-4041.00; for China this round obtained no one-to-one occupation mapping or nationwide occupation wage, which is not an assertion that they do not exist.",
           "edu": "Training and qualifications are in the entry module",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026-g04-current"
+            "posting-authorizer-jlbank",
+            "posting-authorizer-scu"
           ],
           "sources_note": "Source links are used within their respective statistical or announcement scope; where the statistical period or survey object or pay basis differs, cite them separately and do not convert between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect this occupation's wages?",
             "driver_heading": "How does credit authorization and verification work arrange the application and billing cycle?",
-            "official_heading": "Official statistical basis and gap notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Editorial preparation direction, not a Chinese education threshold or recruitment or salary statistic",
             "scenario_heading": "How should preparation ability and job direction be verified?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35654,7 +35709,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/credit-analysts",
+            "target_href": "/en/career/jobs/credit-analysts",
             "target_slug": "credit-analysts",
             "target_title": "Credit analysts (adjacent occupation)",
             "transition_distance": {
@@ -35677,7 +35732,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/loan-officers",
+            "target_href": "/en/career/jobs/loan-officers",
             "target_slug": "loan-officers",
             "target_title": "Loan officers (adjacent occupation)",
             "transition_distance": {
@@ -35700,7 +35755,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/accountants-and-auditors",
+            "target_href": "/en/career/jobs/accountants-and-auditors",
             "target_slug": "accountants-and-auditors",
             "target_title": "Accountants and auditors (adjacent occupation)",
             "transition_distance": {
@@ -35723,7 +35778,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/financial-managers",
+            "target_href": "/en/career/jobs/financial-managers",
             "target_slug": "financial-managers",
             "target_title": "Financial managers (adjacent occupation)",
             "transition_distance": {
@@ -35746,7 +35801,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/bookkeeping-accounting-and-auditing-clerks",
+            "target_href": "/en/career/jobs/bookkeeping-accounting-and-auditing-clerks",
             "target_slug": "bookkeeping-accounting-and-auditing-clerks",
             "target_title": "Bookkeeping, accounting, and auditing clerks (adjacent occupation)",
             "transition_distance": {
@@ -35769,7 +35824,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/tellers",
+            "target_href": "/en/career/jobs/tellers",
             "target_slug": "tellers",
             "target_title": "Tellers (adjacent occupation)",
             "transition_distance": {
@@ -35792,7 +35847,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/bill-and-account-collectors",
+            "target_href": "/en/career/jobs/bill-and-account-collectors",
             "target_slug": "bill-and-account-collectors",
             "target_title": "Bill and account collectors (adjacent occupation)",
             "transition_distance": {
@@ -35815,7 +35870,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/new-accounts-clerks",
+            "target_href": "/en/career/jobs/new-accounts-clerks",
             "target_slug": "new-accounts-clerks",
             "target_title": "New accounts clerks (adjacent occupation)",
             "transition_distance": {
@@ -35903,7 +35958,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35952,7 +36007,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -36001,7 +36056,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36050,7 +36105,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36099,7 +36154,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36148,7 +36203,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36770,7 +36825,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of credit authorizers and checkers and clerks",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36884,11 +36939,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -37301,39 +37356,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 12,000 people (2024, single occupation basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "12,200 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size",
-        "occupation_scope": "The 2024 employment estimate for this segment on the O*NET employment trends page (based on the BLS 2024—2034 projection)",
-        "period": "2024 (O*NET/BLS); retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4041",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a20-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Decline -1% or lower (2024—2034, label Decline; the projected change on this basis is about -6%)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "−7.4%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Employment change rate",
-        "occupation_scope": "The projection label Decline for this segment on the O*NET employment trends page (based on the BLS 2024—2034 projection); it is a range label, not a personal employment guarantee",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4041",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a20-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 1,000 per year (2024—2034, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "900 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Average annual job openings",
-        "occupation_scope": "The 2024—2034 openings for this segment on the O*NET employment trends page, which state that growth and replacement demand are included and do not equal net new additions",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4041",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a20-bls-projections"
         ]
       },
       {
@@ -37491,6 +37546,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Card application checks and written review opinions. No pay amount.",
+        "fact_id": "posting-authorizer-jlbank",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Head-office card review role",
+        "period": "2025-05",
+        "source_refs": [
+          "authorizer-jlbank"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Body lists CNY 110,000–140,000 in annual income. Separate field 6,000–8,000 has no period. Ten positions in Wuhou, Chengdu; bachelor’s degree or higher.",
+        "fact_id": "posting-authorizer-scu",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "China Merchants Bank Chengdu card application review",
+        "period": "2026-06-12",
+        "source_refs": [
+          "authorizer-scu"
+        ]
       }
     ]
   },
@@ -37517,19 +37596,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "US employment projection (2024—2034, decline -1% or lower)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "US employment level (2024, about 12,000 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "US average annual job openings (2024—2034, about 1,000)"
+        "label": "U.S. projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37543,17 +37622,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Credit authorizers and checkers and clerks (O*NET-SOC \n43-4041.00) authorize credit transactions on client accounts and investigate the applicant's history and credit status: covering receiving credit applications, interviewing to collect personal and financial data, obtaining and exchanging credit reporting information, reviewing public records for verification, evaluating credit records and repayment history by predetermined standards, preparing investigation results and recommendation reports, processing applications and notifying acceptance or denial, recording fees and payments, and selecting overdue accounts and collecting by phone; includes the US 2025 median annual wage of 50,080\n US dollars (hourly 24.08 US dollars), about 12,000 people employed in 2024, the 2024—2034 employment projection of decline (-1% or lower, about -6%), the occupation-level wage and employment gap for Mainland China, and control points for credit information protection and query permissions and authorization and approval boundaries and explainable decisions and adverse action notice."
+      "text": "See how credit authorizers and clerks check applications and handle limits. Compare Jilin and Chengdu postings and U.S. figures."
     },
     "title": {
       "availability": "available",
       "text": "Credit authorizers, checkers, and clerks"
     }
   },
-  "source_content_sha256": "7a80ffcd6c3c6c15387ffc839eeb6c7966c7ca4d73a202cb0a0a951b8790a766",
+  "source_content_sha256": "a7496e1b32465876e417e8c17bdde1ee15399b289e9d63b57f820697134622fa",
   "subject": {
     "canonical_slug": "credit-authorizers-checkers-and-clerks",
     "name": "Credit authorizers, checkers, and clerks",
-    "summary": "In the United States, credit authorizers and checkers and clerks correspond to O*NET-SOC 43-4041.00 (Credit Authorizers, Checkers, and Clerks). The core is authorizing credit transactions on client accounts and investigating the history and credit status of individual or enterprise applicants: receiving credit applications and sales slips sent by mail or phone, collecting the personal and financial data needed to complete a credit report in person or by phone\n, obtaining information from banks and credit reporting agencies and other credit service providers and providing information mutually on request, reviewing public records to verify residence and property and bankruptcy and liens and debts or unpaid tax and other matters, evaluating computerized credit records and repayment history by predetermined standards to decide whether to approve new credit, summarizing and analyzing the credit information investigated and preparing investigation results and recommendation reports, processing applications and notifying acceptance or denial, mailing statements to clients and recording fees and payments, selecting overdue accounts from client files and\ncollecting by phone, and communicating with clients to resolve complaints or verify financial and credit transactions. The US basis is a single occupation segment, while similar positions on the China side are spread across bank credit front office and consumer finance and credit reporting services, which is not a one-to-one correspondence with that US occupation segment, and the appointment and authorization and pay bases cannot be interchanged."
+    "summary": "Check applications, transactions or account information, record evidence and flag exceptions. Act within assigned limits and rules, and escalate cases that exceed them or raise risk concerns."
   }
 }

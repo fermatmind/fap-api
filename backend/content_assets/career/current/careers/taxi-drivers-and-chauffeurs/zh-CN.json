@@ -23670,15 +23670,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先观察能否保原值编号，发现同一资源的时间冲突并留待确认，不擅自删预约或补未知。实际驾驶与专项乘客协助另需合法条件训练，一次排表不证明驾驶或急救能力。"
+              "纸面体验｜将虚构临时订单和预约接驳单按出发时间排列，标明需核对的接车点以及预约行程的确认人。 "
             ]
           },
           "id": "taxi-drivers-and-chauffeurs.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "cn-rule",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -25183,18 +25180,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "接驳车司机与专职司机按预先计划或排程驾驶车辆运送乘客，可能收取费用；包括非紧急医疗接送和灵车驾驶，但不因此获得医疗或急救服务资格。本页固定O*NET-SOC53-3053.00对应当前Shuttle Drivers and Chauffeurs，旧网址名称保留；临时需求收费出租车53-3054另列。实际业务先分单位自用接送、经营性班车包车或出租预约，再核人员准驾、车辆经营、许可区域与安全训练；纸面计划核对不授驾驶运营资格。"
+              "出租车司机多接临时用车需求，接驳或专车司机通常按约定的时间和地点服务。两类岗位都需要核实乘车信息与车辆安排。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "taxi-drivers-and-chauffeurs.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-ooh",
-            "employer",
-            "cn-rule",
-            "sag",
-            "editorial"
+            "transfer-onet-53-3054.00",
+            "transfer-onet-53-3053.00"
           ],
           "type": "prose"
         }
@@ -26018,19 +26010,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分文字计划核对、导航调度与车辆控制。保原预约车辆时段、重复和未知，真实业务安全、训练及许可由相应责任人员核；工具不把计划变成完成。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：将虚构临时订单和预约接驳单按出发时间排列，标明需核对的接车点以及预约行程的确认人。"
             ]
           },
           "id": "taxi-drivers-and-chauffeurs.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-ooh",
-            "cn-rule",
-            "employer",
-            "sag",
-            "nist",
-            "editorial"
+            "transfer-onet-53-3054.00",
+            "transfer-onet-53-3053.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -35473,6 +35460,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-53-3054.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 53-3054.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/53-3054.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-53-3053.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 53-3053.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/53-3053.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -40945,10 +40973,10 @@
       "text": "接驳车司机与专职司机"
     }
   },
-  "source_content_sha256": "b88995b40d534dff9211a49ea78e46e2774436dce1e86d511fe9f677d4cdccc3",
+  "source_content_sha256": "6db9ad72ae2307a2d6aef7cd1d41bc9175705a68b2cba9f01f6946bbbfdeab4c",
   "subject": {
     "canonical_slug": "taxi-drivers-and-chauffeurs",
     "name": "接驳车司机与专职司机",
-    "summary": "接驳车司机与专职司机按预先计划或排程驾驶车辆运送乘客，可能收取费用；包括非紧急医疗接送和灵车驾驶，但不因此获得医疗或急救服务资格。本页固定O*NET-SOC53-3053.00对应当前Shuttle Drivers and Chauffeurs，旧网址名称保留；临时需求收费出租车53-3054另列。实际业务先分单位自用接送、经营性班车包车或出租预约，再核人员准驾、车辆经营、许可区域与安全训练；纸面计划核对不授驾驶运营资格。"
+    "summary": "出租车司机多接临时用车需求，接驳或专车司机通常按约定的时间和地点服务。两类岗位都需要核实乘车信息与车辆安排。"
   }
 }

@@ -23,9 +23,6 @@
       "fact:content-us-salary-1": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1512,7 +1509,7 @@
         "status": "pending_mapping"
       },
       "item:glass-blowers-molders-benders-and-finishers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:glass-blowers-molders-benders-and-finishers.sources.source-card.1": {
         "status": "mapped"
@@ -24146,12 +24143,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "编辑练习H1｜下方给出6组完整虚构输入和参考解法，用90分钟核尺寸界限、冷却记录算术、许可缺项、版本、交接时限和列示成本。只读纸面记录，不加热、吹制、切割或操作玻璃设备。交付结果表、问题表、V1→V2修订表和200字内交接。"
+              "见「入行、资格与职业发展」的纸面练习《G 工单：玻璃成型记录核对》。"
             ]
           },
           "id": "glass-blowers-molders-benders-and-finishers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24188,12 +24185,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "H1只观察纸面核对与证据分层习惯，不能证明真实吹制手感、设备操作、产品合格、资格、长期适配或就业结果。感兴趣后再核真实岗位训练和条件。"
+              "见「入行、资格与职业发展」的《G 工单：玻璃成型记录核对》。"
             ]
           },
           "id": "glass-blowers-molders-benders-and-finishers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         }
@@ -24467,7 +24464,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "玻璃职业画像｜51-9195.04按样板塑造熔融玻璃，含加热、吹制/成型/弯曲/接合、切割修整、精加工、测量与记录，也含设计创作和草图转规格。电窑70任务指玻璃板模塑，不能直接译为退火。O*NET2026页情境96%每天穿常规防护、83%持续用手、70%每天轻微伤害暴露、50%每天极端温度；这些不是事故率。美国工资2025父职业51-9195.00中位46,170美元/年、22.20美元/时；本轮就业采用BLS直接2025—2035父职业43,000→45,500、增长5.8%、年均空缺5,100；本轮O*NET已呈2025就业及2025—2035趋势，与本页BLS现期一致，父职业或精确范围仍须区分。行业2024父职业制造业70%，非玻璃细分雇主分布。 本轮2025父职业制造业64%，非玻璃细分雇主分布，2024的70%仅历史。"
+              "玻璃吹制与成型工按图样塑造玻璃，工作可能包含吹制、模具成型、弯曲或修整。玻璃交付前要核对尺寸和缺陷记录。美国工资和就业采用上位职业数据。"
             ]
           },
           "id": "glass-blowers-molders-benders-and-finishers.profile.definition-block.11",
@@ -25493,7 +25490,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得51-9195.04精确生成式AI暴露等级、采用率、替代率或收入因果。编辑任务分析：可探索草图、记录整理、库存与单据草稿的辅助；效果须以原稿/工具稿对照核，不把自动化或普通软件等同生成式AI。 详细职业页列Billing、Outlook、Inventory control、Excel共4类软件；热门技术页只列Excel和Outlook两项，2025年美国招聘提及占比均NA。软件条目不证明普遍使用、实际采用率、AI使用或提效。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "工具可辅助整理草图、核对检查记录和起草交接。现场成型、设备状态和质量放行须由具备权限的人员确认。"
             ]
           },
           "id": "glass-blowers-molders-benders-and-finishers.ai-impact.ai-impact-table.18",
@@ -28400,31 +28397,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "工具和模具制造工方向",
@@ -30131,7 +30128,7 @@
                   "M3｜虚构记录15:00为760°C，15:10为720°C；求两点间平均温度变化率。材料/传感器校准/获批曲线未给，不能判断退火是否合格。V1误写40°C/min。",
                   "M4｜培训记录A已过期，B有效但未给操作批准；V1误写“四件均通过”。只整理纸面待复核包，不视作工艺或产品放行。V2保留V1，写实际更正时间、理由和待S复核，不伪造签字。",
                   "M5｜当前15:28，内部交接截止16:00；15:13已向Q询问缺项但未回复。算剩余时间及已等待时间；未回复不等批准，只可交待复核资料。",
-                  "M6｜仅列成本：4件×18元/件材料；1.5人时×80元/人时劳动。能源、税费等未给，求列示小计而非完整成本或报价。只需纸笔/计算器，不操作设备、不实测或加热玻璃。"
+                  "M6｜仅列成本：4件×18元/件材料；1.5人时×80元/人时劳动。能源、税费等未给，求列示小计而非完整成本或报价。只需纸笔/计算器，不操作设备、不实测或加热玻璃。 变式只把 C 的长度从 100.6 改为 100.5 mm，其他尺寸、时间、成本和授权状态不变。重算通过教学尺寸的件数。"
                 ]
               },
               {
@@ -30145,10 +30142,10 @@
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考核算｜长度闭区间99.5—100.5 mm，直径7.8—8.2 mm；A/B两项均在界内，C长度高出上限0.1 mm，D直径低于下限0.1 mm。通过两项教学尺寸2/4=50%，不是实际生产良率或产品验收。平均变化率(720−760)/10=−4°C/min，降温幅度4°C/min。列示小计72+120=192元。",
-                  "参考问题表｜材料、外观/强度、量具与温度传感器校准、获批曲线未知，不能判退火/产品合格；A培训过期、B有效培训不等操作批准。15:28至16:00剩32分钟，Q从15:13等待15分钟；未回应仍待复核。",
-                  "参考V2｜保留V1“四件均通过、40°C/min”，改为“A/B仅教学尺寸通过、C/D超限；平均变化率−4°C/min”；写真实更正时间、依据M1—M3和S待复核，不倒签或覆盖原记录。",
-                  "交接示例｜H1纸面包：A/B仅两项教学尺寸通过，C长度、D直径超限。变化率−4°C/min，列示成本192元。材料/校准/曲线缺项，培训与批准未齐；Q待复核15分钟，截止剩32分钟。V1已保留，V2待S复核，非产品放行。自查四点：边界、单位、缺项、版本；只能评价纸面核对。"
+                  "先列题面输入和单位。",
+                  "做完原题和变式后核对公式、单位和待核项。",
+                  "保留 V1、真实更正时间和复核状态。",
+                  "完成第 6 天后再打开常见问题里的参考解。"
                 ]
               },
               {
@@ -30162,9 +30159,9 @@
           },
           "id": "glass-blowers-molders-benders-and-finishers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "H1：纸面尺寸核对与记录纠错（完整输入及参考解法）",
+          "title": "《G 工单：玻璃成型记录核对》",
           "type": "cards"
         },
         {
@@ -30175,8 +30172,8 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "结果表含M1界限、A—D逐项判断、温度变化率、32/15分钟与192元。",
-                  "写明只核教学两项尺寸，未取得外观/强度/校准/曲线。",
+                  "结果表列计算步骤、单位和逐项判断。",
+                  "写明检查范围和计算依据。",
                   "展示单位、公式和原始输入，不称真实产品验收。"
                 ]
               },
@@ -30193,7 +30190,7 @@
                 "values": [
                   "保留V1和V2修订表，记录原值、更正值、理由和真实时间。",
                   "S状态待复核，不伪造批准；用合成编号，不外传受控资料。",
-                  "写200字内交接，分清已知、计算、未知与待核。"
+                  "交接写清时限、列示成本和未核事项。"
                 ]
               },
               {
@@ -30285,8 +30282,8 @@
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "逐项核A—D，算2/4=50%。",
-                  "仅两项尺寸通过率，不当作良率或验收。"
+                  "逐项判断题面测量值，写下界限和偏差。",
+                  "标明复核依据、未知项和交接对象。"
                 ]
               },
               {
@@ -30299,22 +30296,22 @@
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "核M5的32分钟/15分钟和M6的192元。",
+                  "计算交接剩余时间、已等待时间与列示成本。",
                   "交接未回复不等批准；小计不是报价。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "制作V1→V2修订表并按参考解法自查。",
-                  "保留原值/真实时间；无导师就写仅自查。"
+                  "独立完成原题和变式，提交四项纸面成果并保存第一稿。",
+                  "标明复核依据、未知项和交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "写200字内交接及继续探索理由。",
-                  "只决定是否继续了解/找受训路径，不能由H1判真实职业适配。"
+                  "完成第 6 天后，到「常见问题与资料来源」打开「G 工单参考解（完成第 6 天后再打开）」。",
+                  "标明复核依据、未知项和交接对象。"
                 ]
               }
             ]
@@ -32422,14 +32419,12 @@
                 ]
               },
               {
-                "answer": "美国工资为2025父职业51-9195.00：中位46,170美元/年、22.20美元/时，第10/25/75/90分位35,850/39,280/53,000/61,530美元/年。 OEWS不含自雇和福利，包括生产奖金、佣金，排除非生产奖金、加班溢价与轮班差额；不是总报酬或个人实发。分位是工资分布位置，不能对应经验、资格或个人起薪。 BLS直接2025—2035预测表：父职业51-9195就业2025年43,000人、2035年45,500人，增长5.8%，年均职位空缺5,100个。原表就业/空缺单位为千人，分别乘1000；空缺含增长及替换需求，非净新增。该父职业还含其他非金属成型工作，不能当作51-9195.04玻璃细分职业自身或个人机会。",
+                "answer": "2025 年 5 月 美国上位职业 51-9195年薪中位数 46,170 美元，时薪中位数 22.20 美元。年薪第 10、25、50、75、90 分位依次为 35,850、39,280、46,170、53,000、61,530 美元。",
                 "id": "glass-blowers-molders-benders-and-finishers.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.glass-blowers-molders-benders-and-finishers.q3",
                 "source_refs": [
-                  "oews",
-                  "arxiv",
-                  "ep"
+                  "onet-wages"
                 ]
               },
               {
@@ -32501,13 +32496,21 @@
                 ]
               },
               {
-                "answer": "BLS直接2025—2035预测表：父职业51-9195就业2025年43,000人、2035年45,500人，增长5.8%，年均职位空缺5,100个。原表就业/空缺单位为千人，分别乘1000；空缺含增长及替换需求，非净新增。该父职业还含其他非金属成型工作，不能当作51-9195.04玻璃细分职业自身或个人机会。 可比较父类别其他非金属成型、石材、模具、焊接与送料；需重新核材料、任务与训练，没有转岗成功率或自动晋升证据。",
+                "answer": "BLS 表 1.2 的美国上位职业 51-9195：2025 年约 43,000 个岗位，2035 年预计约 45,500 个，变化 5.8%，年均约 5,100 个空缺，含人员替补。",
                 "id": "glass-blowers-molders-benders-and-finishers.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.glass-blowers-molders-benders-and-finishers.q10",
                 "source_refs": [
-                  "ep",
-                  "onet"
+                  "ep"
+                ]
+              },
+              {
+                "answer": "参考核算｜长度闭区间99.5—100.5 mm，直径7.8—8.2 mm；A/B两项均在界内，C长度高出上限0.1 mm，D直径低于下限0.1 mm。通过两项教学尺寸2/4=50%，不是实际生产良率或产品验收。平均变化率(720−760)/10=−4°C/min，降温幅度4°C/min。列示小计72+120=192元。 参考问题表｜材料、外观/强度、量具与温度传感器校准、获批曲线未知，不能判退火/产品合格；A培训过期、B有效培训不等操作批准。15:28至16:00剩32分钟，Q从15:13等待15分钟；未回应仍待复核。 参考V2｜保留V1“四件均通过、40°C/min”，改为“A/B仅教学尺寸通过、C/D超限；平均变化率−4°C/min”；写真实更正时间、依据M1—M3和S待复核，不倒签或覆盖原记录。 交接示例｜H1纸面包：A/B仅两项教学尺寸通过，C长度、D直径超限。变化率−4°C/min，列示成本192元。材料/校准/曲线缺项，培训与批准未齐；Q待复核15分钟，截止剩32分钟。V1已保留，V2待S复核，非产品放行。自查四点：边界、单位、缺项、版本；只能评价纸面核对。 变式 C 恰在长度上限且直径在界内，A、B、C 通过，3/4 = 75%，D 仍不通过。",
+                "id": "glass-blowers-molders-benders-and-finishers.faq.11",
+                "question": "G 工单参考解（完成第 6 天后再打开）",
+                "question_key": "career.faq.glass-blowers-molders-benders-and-finishers.q11",
+                "source_refs": [
+                  "paper-exercise"
                 ]
               }
             ]
@@ -32565,12 +32568,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得玻璃细分自身工资/就业、分行业/地区工资、中国精确映射工资/就业、具体可完整核对招聘公告、AI采用/替代/工资因果和测评职业预测效度。父职业代理需明确，不能当精确职业；编辑H1与学习建议不作调查事实。"
+              "美国工资采用 OEWS，就业预测采用 BLS 表 1.2。中国项目案例只作场景参照。 上海松江的具名企业案例描述冷弯玻璃成型，用于了解一类加工场景。它不代表所有玻璃吹制岗位。"
             ]
           },
           "id": "glass-blowers-molders-benders-and-finishers.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "ep",
+            "onet-wages",
+            "cn-forming"
           ],
           "type": "prose"
         }
@@ -32597,25 +32602,25 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "本职业（玻璃吹制工、成型工、弯曲工、修整工）",
@@ -32660,12 +32665,12 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于核对官方范围（按样板与图样塑造熔融玻璃）与常见职位名称与 Bright Outlook 标记。",
-                  "用于核RC兴趣、Job Zone1-2及新入职教育要求问卷27%高中、23%低于高中、23%两年制学位，非已持学历分布。"
+                  "BLS 表 1.2 的美国上位职业 51-9195：2025 年约 43,000 个岗位，2035 年预计约 45,500 个，变化 5.8%，年均约 5,100 个空缺，含人员替补。",
+                  "职业预测期为 2025—2035 年。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "bls",
-                "limitation": "职业级描述，不构成材料或工艺或窑炉或燃气或电气或安全或投资意见。",
+                "limitation": "就业预测按 BLS 表 1.2。",
                 "market": "美国",
                 "name": "O*NET OnLine：玻璃吹制工、成型工、弯曲工、修整工职业档案与官方范围（51-9195.04）",
                 "period": "O*NET updated 2026; accessed 2026-09-21",
@@ -32676,15 +32681,15 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "父职业51-9195，非玻璃细分自身",
-                  "BLS直接2025—2035预测表：父职业51-9195就业2025年43,000人、2035年45,500人，增长5.8%，年均职位空缺5,100个。原表就业/空缺单位为千人，分别乘1000；空缺含增长及替换需求，非净新增。该父职业还含其他非金属成型工作，不能当作51-9195.04玻璃细分职业自身或个人机会。"
+                  "BLS 表 1.2 的美国上位职业 51-9195：2025 年约 43,000 个岗位，2035 年预计约 45,500 个，变化 5.8%，年均约 5,100 个空缺，含人员替补。",
+                  "职业预测期为 2025—2035 年。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "ep",
-                "limitation": "BLS直接2025—2035预测表：父职业51-9195就业2025年43,000人、2035年45,500人，增长5.8%，年均职位空缺5,100个。原表就业/空缺单位为千人，分别乘1000；空缺含增长及替换需求，非净新增。该父职业还含其他非金属成型工作，不能当作51-9195.04玻璃细分职业自身或个人机会。",
+                "limitation": "岗位与空缺独立取整，空缺含替补。",
                 "market": "美国",
-                "name": "BLS直接职业预测2025—2035",
-                "period": "2025—2035",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "父职业51-9195，非玻璃细分自身",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -33010,20 +33015,19 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "详细页父职业51-9195.00制造业70%（2024）。",
-                  "不是玻璃细分自身行业分布，不作中国行业映射。"
+                  "2025 年 5 月 美国上位职业 51-9195年薪中位数 46,170 美元，时薪中位数 22.20 美元。年薪第 10、25、50、75、90 分位依次为 35,850、39,280、46,170、53,000、61,530 美元。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "onet-wages",
                 "limitation": "O*NET 在该页标注行业数据取自上位职业 51-9195.00；该口径为美国分布，不建立中国大陆映射。",
                 "market": "美国",
                 "name": "O*NET OnLine：玻璃吹制工、成型工、弯曲工、修整工行业分布（51-9195.04，上位职业 51-9195.00 口径）",
-                "period": "2024 industry data; checked 2026-10-03",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "51-9195.04 page displaying parent-occupation data",
-                "url": "https://www.onetonline.org/link/details/51-9195.04"
+                "url": "https://www.onetonline.org/link/localwages/51-9195.00"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -33042,21 +33046,29 @@
                 "url": "https://www.onetonline.org/link/summary/51-9195.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "加热与取料 — 0/100; weight=1/3; glass-blowers-molders-benders-and-finishers.ai-impact.ai-impact-table.95[0]",
-                  "成型与弯曲接合 — 0/100; weight=1/3; glass-blowers-molders-benders-and-finishers.ai-impact.ai-impact-table.99[0]",
-                  "检验与记录 — 50/100; weight=1/3; glass-blowers-molders-benders-and-finishers.ai-impact.ai-impact-table.115[0]"
+                  "上海松江的具名企业案例描述冷弯玻璃成型，用于了解一类加工场景。它不代表所有玻璃吹制岗位。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "cn-forming",
+                "limitation": "具名项目背景，不推出全国工资、资格或招聘。",
+                "market": "中国大陆",
+                "name": "上海松江区：冷弯玻璃成型案例",
+                "period": "2022",
+                "publisher": "上海区级政务网站",
+                "url": "https://www.songjiang.gov.cn/xwzx/001001/20221207/0ac5ee51-8a93-40c9-80b2-bb4ed2bb9a45.html"
+              },
+              {
+                "details": [
+                  "题目输入与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核记录，不证明现场作业能力。",
+                "market": "适用于本页",
+                "name": "《G 工单：玻璃成型记录核对》",
+                "period": "纸面练习",
+                "publisher": "FermatMind",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -37991,7 +38003,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与人工复核",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38121,8 +38133,8 @@
         ]
       },
       {
-        "derivation": "BLS直接2025—2035预测表：父职业51-9195就业2025年43,000人、2035年45,500人，增长5.8%，年均职位空缺5,100个。原表就业/空缺单位为千人，分别乘1000；空缺含增长及替换需求，非净新增。该父职业还含其他非金属成型工作，不能当作51-9195.04玻璃细分职业自身或个人机会。",
-        "display_value": "增长5.8%（2025—2035，BLS直接表，父职业51-9195）",
+        "derivation": "BLS 表 1.2 的美国上位职业 51-9195：2025 年约 43,000 个岗位，2035 年预计约 45,500 个，变化 5.8%，年均约 5,100 个空缺，含人员替补。",
+        "display_value": "5.8%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长",
@@ -38133,7 +38145,7 @@
         ]
       },
       {
-        "derivation": "BLS直接2025—2035预测表：父职业51-9195就业2025年43,000人、2035年45,500人，增长5.8%，年均职位空缺5,100个。原表就业/空缺单位为千人，分别乘1000；空缺含增长及替换需求，非净新增。该父职业还含其他非金属成型工作，不能当作51-9195.04玻璃细分职业自身或个人机会。",
+        "derivation": "BLS 表 1.2 的美国上位职业 51-9195：2025 年约 43,000 个岗位，2035 年预计约 45,500 个，变化 5.8%，年均约 5,100 个空缺，含人员替补。",
         "display_value": "就业43,000人（2025，BLS直接预测基期，父职业51-9195）",
         "fact_id": "us-employment-2025",
         "market": "美国",
@@ -38145,7 +38157,7 @@
         ]
       },
       {
-        "derivation": "BLS直接2025—2035预测表：父职业51-9195就业2025年43,000人、2035年45,500人，增长5.8%，年均职位空缺5,100个。原表就业/空缺单位为千人，分别乘1000；空缺含增长及替换需求，非净新增。该父职业还含其他非金属成型工作，不能当作51-9195.04玻璃细分职业自身或个人机会。",
+        "derivation": "BLS 表 1.2 的美国上位职业 51-9195：2025 年约 43,000 个岗位，2035 年预计约 45,500 个，变化 5.8%，年均约 5,100 个空缺，含人员替补。",
         "display_value": "年均职位空缺5,100个（2025—2035，父职业51-9195，含增长与替换）",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
@@ -38205,27 +38217,15 @@
           "oews",
           "arxiv"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "17%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "玻璃吹制工、成型工、弯曲工、修整工",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
       "玻璃吹制工、成型工、弯曲工、修整工 · 任务、交付与责任边界",
@@ -38243,7 +38243,7 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2025—2035，上位职业 51-9195.00 口径）"
+        "label": "美国上位职业 51-9195就业变化（2025—2035）"
       },
       {
         "availability": "available",
@@ -38269,17 +38269,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "玻璃吹制工、成型工、弯曲工、修整工做什么、需要什么能力、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET/SOC 51-9195.04）、美国工资与就业的上位职业 51-9195.00 口径与中国大陆数据缺口。"
+      "text": "了解吹制、成型和修整的岗位任务，用纸面工单检查尺寸和交接，查看美国上位职业数据的覆盖范围。"
     },
     "title": {
       "availability": "available",
-      "text": "玻璃吹制工、成型工、弯曲工、修整工"
+      "text": "玻璃吹制与成型工做什么：成型、修整与入行"
     }
   },
-  "source_content_sha256": "b0c120d4a8b88e1d896b7396de892008b6a02bba6040912e613011f011b1ca8a",
+  "source_content_sha256": "826e441a6d0e591ace794c065e9374dc7a617424205e65e2c93e514abd607a3e",
   "subject": {
     "canonical_slug": "glass-blowers-molders-benders-and-finishers",
-    "name": "玻璃吹制工、成型工、弯曲工、修整工",
-    "summary": "玻璃吹制工、成型工、弯曲工、修整工对应 O*NET/SOC 51-9195.04「Glass Blowers, Molders, Benders, and Finishers」这一精确职业：按样板与图样塑造熔融玻璃，包括加热与取料、成型与弯曲与接合、退火与冷却、切割与磨抛与装饰与检验；常见职位名称包括 Glassblower 与 Gaffer 与 Glass Artist 与 Neon Glass Bender 与 Glass Lathe Operator 与 Glass Worker。官方范围原文：Shape molten glass according to patterns. 口径说明：O*NET 在 51-9195.04 页呈现的美国工资与就业与行业数据取自上位职业 51-9195.00（Molders, Shapers, and Casters, Except Metal and Plastic），本页如实标注为上位职业口径，不称其为本精确职业自身数值。"
+    "name": "玻璃吹制与成型工",
+    "summary": "玻璃吹制与成型工按图样塑造玻璃，工作可能包含吹制、模具成型、弯曲或修整。玻璃交付前要核对尺寸和缺陷记录。美国工资和就业采用上位职业数据。"
   }
 }

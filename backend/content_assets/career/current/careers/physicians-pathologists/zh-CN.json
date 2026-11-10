@@ -1283,6 +1283,9 @@
       "item:physicians-pathologists.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:physicians-pathologists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:physicians-pathologists.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31051,6 +31054,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。标本清单列 A、B 两瓶，原始图像只标 A，B 无可追溯编号。写清待核项并交给标本接收或病理复核人员。"
+            ]
+          },
+          "id": "physicians-pathologists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "核病理标本交接",
+          "type": "notice"
         }
       ]
     },
@@ -37411,6 +37429,13 @@
         "id": "physicians-pathologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "physicians-pathologists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37760,7 +37785,7 @@
       "text": "病理医师"
     }
   },
-  "source_content_sha256": "018749534fe51650210afe5bac419e7e61e42a30f673b304598f124a96b7fcfd",
+  "source_content_sha256": "f6a9ca54d8ef97037208594d10325354e760a003047e8cae362f9e7c9ae4f3b6",
   "subject": {
     "canonical_slug": "physicians-pathologists",
     "name": "病理医师",

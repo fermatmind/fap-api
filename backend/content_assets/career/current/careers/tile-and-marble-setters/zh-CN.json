@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先体验尺寸单位、图样和材料核查：能否把平面尺寸转成格网，分清颜色与批次，发现版本改变后重新计算并说明未知。还需了解身体负荷、训练和用工条件，不能只看效果图兴趣。"
+              "纸面体验｜在虚构排版图上标出两种门口收边做法，写清需向现场负责人确认的图纸版本。 "
             ]
           },
           "id": "tile-and-marble-setters.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24803,13 +24802,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "按图样和现场条件，将硬质瓷砖、石材及类似材料铺贴到墙、地面、台面等部位，核尺寸、排列、材料和接缝，完成安装与修整。美国职业范围也含部分屋面及装饰任务；中国具体岗位和权限需分别核对。"
+              "瓷砖与大理石铺贴工按排版图放样，切配边角和障碍处的材料，再检查接缝与表面完成效果。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "tile-and-marble-setters.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-47-2044.00"
           ],
           "type": "prose"
         }
@@ -25589,15 +25587,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：采用率、施工效果、AI就业净影响及任务评分未核得。BLS2025—2035本职总体增长9.8%、年均约3,300空缺含替补，非AI因果；下面仅以编辑情境说明信息辅助的核查点。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：在虚构排版图上标出两种门口收边做法，写清需向现场负责人确认的图纸版本。"
             ]
           },
           "id": "tile-and-marble-setters.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "nist",
-            "editorial"
+            "transfer-onet-47-2044.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33736,6 +33732,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-47-2044.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 47-2044.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/47-2044.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39215,10 +39238,10 @@
       "text": "瓷砖与石材铺设工"
     }
   },
-  "source_content_sha256": "ce35cb1f06ba9f2dac22f3871e5011860903023e454e61e99d2c836c024cf562",
+  "source_content_sha256": "02fe03d4d2fc12184811864b36eaa04b04d17a0965f513615f59190d686c43de",
   "subject": {
     "canonical_slug": "tile-and-marble-setters",
     "name": "瓷砖与石材铺设工",
-    "summary": "按图样和现场条件，将硬质瓷砖、石材及类似材料铺贴到墙、地面、台面等部位，核尺寸、排列、材料和接缝，完成安装与修整。美国职业范围也含部分屋面及装饰任务；中国具体岗位和权限需分别核对。"
+    "summary": "瓷砖与大理石铺贴工按排版图放样，切配边角和障碍处的材料，再检查接缝与表面完成效果。"
   }
 }

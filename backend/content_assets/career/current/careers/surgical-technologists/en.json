@@ -23668,14 +23668,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "You can first observe whether you can check the original records item by item, point out duplicates and omissions, hear instructions clearly and report status honestly; then learn about formal education and the target post qualifications. Paper exploration does not assess clinical competence or health fitness or grant qualifications."
+              "Paper check | Compare two fictional instrument lists. Flag a matching name with different kit IDs, retain the original entries and mark the item for review. "
             ]
           },
           "id": "surgical-technologists.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24952,17 +24950,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Surgical technologists assist with operating room preparation, instrument and material support, counting and related records under the supervision of a surgeon, registered nurse or other surgical staff; this is the U.S. 29-2055.00 occupational scope, not a uniform Chinese practising identity or a clinical operating tutorial."
+              "Surgical technologists prepare sterile instruments and supplies, assist with passing items and counts, and refer the resulting records to the team for review. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "surgical-technologists.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "ratify",
-            "sag",
-            "employer",
-            "editor"
+            "transfer-onet-29-2055.00"
           ],
           "type": "prose"
         }
@@ -25655,18 +25648,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate occupational tasks, general research, real adoption and employment causality. The evidence supports the high-level task background and the risk recheck but not yet an adoption, time-saving or substitution percentage for this occupation; the exploration only checks fictional paper inputs. AI Impact Score 8% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare two fictional instrument lists. Flag a matching name with different kit IDs, retain the original entries and mark the item for review."
             ]
           },
           "id": "surgical-technologists.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls-ors",
-            "r2-ai",
-            "nist",
-            "bls-ooh",
-            "oews",
-            "editor"
+            "transfer-onet-29-2055.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33864,6 +33852,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-29-2055.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 29-2055.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/29-2055.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39364,10 +39379,10 @@
       "text": "Surgical technologists"
     }
   },
-  "source_content_sha256": "4ff514ed484f1b427bb92fd490936451f776499732868849b8da87e674a6603c",
+  "source_content_sha256": "7df6aa17310cc462bc38259495aa891e2ea852f1198c3b7f1081471dba05660c",
   "subject": {
     "canonical_slug": "surgical-technologists",
     "name": "Surgical technologists",
-    "summary": "Surgical technologists work under U.S. 29-2055.00 under the supervision of a physician, registered nurse or other surgical staff, carrying out operating room preparation, instrument and material support and counting records. Surgical assistants are listed separately; nearby Chinese nursing posts are checked by their real identity, registration and institutional tasks. Complete fictional colour card material checking can be done first, and this does not stand for medical training or clinical authorization."
+    "summary": "Surgical technologists prepare sterile instruments and supplies, assist with passing items and counts, and refer the resulting records to the team for review."
   }
 }

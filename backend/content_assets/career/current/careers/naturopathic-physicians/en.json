@@ -173,6 +173,9 @@
       "item:naturopathic-physicians.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:naturopathic-physicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:naturopathic-physicians.profile.career-quick-answers-block.6": {
         "status": "pending_mapping"
       },
@@ -13032,6 +13035,21 @@
             "wa-license"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two intake forms list different medications and only one is dated. Record the conflict and the source to verify for the attending clinician."
+            ]
+          },
+          "id": "naturopathic-physicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Reconcile intake records",
+          "type": "notice"
         }
       ]
     },
@@ -15524,6 +15542,13 @@
         "id": "naturopathic-physicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "naturopathic-physicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15790,7 +15815,7 @@
       "text": "Naturopathic physicians"
     }
   },
-  "source_content_sha256": "0054b25fd33249ace3e18b9bfb5e52185630d1076b3c99800442b11a23d83dfa",
+  "source_content_sha256": "ab7e2906b1e3acf231427c0be31ce22abc3bb422471c7263fb7d2db2b116c6ef",
   "subject": {
     "canonical_slug": "naturopathic-physicians",
     "name": "Naturopathic physicians",

@@ -149,6 +149,9 @@
       "item:occupational-therapy-aides.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:occupational-therapy-aides.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:occupational-therapy-aides.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12430,6 +12433,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。器材清单列三个编号，台面只有两个，使用记录没有标缺项。写下待查器材和要通知的治疗团队成员。"
+            ]
+          },
+          "id": "occupational-therapy-aides.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "整理作业治疗活动交接",
+          "type": "notice"
         }
       ]
     },
@@ -14803,6 +14821,13 @@
         "id": "occupational-therapy-aides.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-therapy-aides.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14984,7 +15009,7 @@
       "text": "作业治疗辅助员：职责、工资与入行边界"
     }
   },
-  "source_content_sha256": "f7ee7684dcb69c48731ffe5de99155a7d0206d718a34467511dc5c8b6b6752ef",
+  "source_content_sha256": "85f2039f68dfcc0c1a508e810ff9393d7c3ee34e3f78dac649a454fc0fdf79a2",
   "subject": {
     "canonical_slug": "occupational-therapy-aides",
     "name": "作业治疗辅助员",

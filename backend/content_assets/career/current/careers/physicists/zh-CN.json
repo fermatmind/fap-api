@@ -23371,13 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "路径判断：研究与高校岗位通常要求博士训练，部分联邦入门岗位可能接受本科；先核具体雇主、研究方向、学历、项目经历和安全要求。"
+              "纸面体验｜对照两份虚构测量表，圈出一个单位变化，说明在比较数值前需要核对哪条元数据。 "
             ]
           },
           "id": "physicists.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23666,14 +23665,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "定义：O*NET 19-2012 Physicists研究物理现象并发展理论、方法或应用；该统计行与天文学家、工程师分别归类。"
+              "物理学家借助数学模型、实验或计算研究物理现象。整理数据时，他们要交代测量条件和不确定性，使同事能够复核结论。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "physicists.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "cnclass"
+            "transfer-onet-19-2012.00"
           ],
           "type": "prose"
         },
@@ -24763,15 +24760,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可辅助检索文献、编写分析代码、整理数据和生成模型候选，但不能独立证明量纲、校准、实验条件或物理解释。物理学家须核原始数据、模拟边界、误差和可复现性。当前没有可核实的19-2012专属AI岗位替代率。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照两份虚构测量表，圈出一个单位变化，说明在比较数值前需要核对哪条元数据。"
             ]
           },
           "id": "physicists.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-19-2012.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32504,6 +32499,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-19-2012.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 19-2012.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/19-2012.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37748,10 +37770,10 @@
       "text": "物理学家"
     }
   },
-  "source_content_sha256": "c3216d23129914bd2a3c8883af82d9abc3484277108c36d3f7d9622868c6eafb",
+  "source_content_sha256": "e22b4e5fccc75a8b5d93f491aa3e221718da8abdd19b84266c11a47730901390",
   "subject": {
     "canonical_slug": "physicists",
     "name": "物理学家",
-    "summary": "物理学家（美国SOC 19-2012）研究物质、能量、空间和时间中的物理规律。常见工作是提出可检验问题、建立数学模型、设计实验或模拟、分析数据和不确定性、复核结果，并发表或应用发现。理论、实验和应用岗位的工具与产出不同。美国工资及预测仅对应19-2012；中国职业工资、岗位资格和研究机构要求须另核。"
+    "summary": "物理学家借助数学模型、实验或计算研究物理现象。整理数据时，他们要交代测量条件和不确定性，使同事能够复核结论。"
   }
 }

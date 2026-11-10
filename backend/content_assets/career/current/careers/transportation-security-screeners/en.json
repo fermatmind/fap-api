@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Watch for a willingness to check item by item, admit what is unknown, keep the original records and pass questions to the designated responsible person. A tidy state in the exercise only means the fields are complete, not that security clearance is met; stating limitations clearly is more useful than rushing to a verdict."
+              "Paper check | Find an item entry with no transfer time on a fictional handoff. Identify the receipt number to verify. "
             ]
           },
           "id": "transportation-security-screeners.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24803,13 +24802,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Transportation security screeners screen passengers, baggage or cargo under the relevant laws, regulations and institutional requirements, and record and report the situation. The task baseline for this page is the United States O*NET33-9093.00; Chinese civil aviation qualifications and other transport settings are verified separately, and an occupational description confers no operating or law enforcement authority."
+              "Transportation security screeners check passengers or items under site procedures, document issues and refer cases requiring further judgment to authorized staff. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "transportation-security-screeners.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-33-9093.00"
           ],
           "type": "prose"
         }
@@ -25548,12 +25546,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate text organisation, professional detection systems, actual adoption and employment outcomes. The task record describes the work object, NIST provides a general risk framework, and no screening detection score or substitution rate is given. The external materials used here supply no measured task-level score and shows a separate editorial estimate; the paper exercise only observes checking and explanation. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Find an item entry with no transfer time on a fictional handoff. Identify the receipt number to verify."
             ]
           },
           "id": "transportation-security-screeners.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial"
+            "transfer-onet-33-9093.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32860,6 +32859,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-33-9093.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 33-9093.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/33-9093.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38349,10 +38375,10 @@
       "text": "Transportation security screeners"
     }
   },
-  "source_content_sha256": "8da3a5a5b58ed40d23149acba04814d6bcd619fbda1b70d9e00b8be94a567a94",
+  "source_content_sha256": "87836ab681309bfd3bcba601ef079258d359d4e659456ebc809b59d8199833b0",
   "subject": {
     "canonical_slug": "transportation-security-screeners",
     "name": "Transportation security screeners",
-    "summary": "Transportation security screeners screen passengers, baggage or cargo under the applicable laws, regulations and institutional requirements, and record, communicate and hand over the situation. This page uses the United States O*NET33-9093.00 tasks as the baseline and distinguishes Chinese civil aviation qualifications from other settings; the fictional record exercise can be used to observe checking, clarification and revision ability."
+    "summary": "Transportation security screeners check passengers or items under site procedures, document issues and refer cases requiring further judgment to authorized staff."
   }
 }

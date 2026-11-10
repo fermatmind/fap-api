@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First separate work package costs, document status, and planning conditions, then write the project status brief. Observe whether you are willing to recalculate, clarify unknowns, and keep coordinating."
+              "Paper check | If the interconnection milestone is unconfirmed but the plan says construction can start, record the dependency, owner and affected date for the project lead. "
             ]
           },
           "id": "wind-energy-development-managers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24802,13 +24801,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "The wind energy development manager corresponds to O*NET11-9199.10, leading or managing the development and evaluation of wind energy business opportunities and covering environmental studies, permit documents, and project proposals, and may also manage construction. It coordinates energy assessment, engineering, and construction, sets scope, schedule, and budget, reviews proposals and technical documents, and takes part in land, power purchase, and grid connection agreement negotiations. Wind farm operations managers and wind turbine service technicians are separated separately; coordinating development does not automatically grant engineering design, on-site electrical work, or administrative approval authority."
+              "Wind development managers coordinate project plans, resource assessment, land use, interconnection, budget and schedule. They prepare the dependencies and approvals for project decisions. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "wind-energy-development-managers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-11-9199.10"
           ],
           "type": "prose"
         }
@@ -25452,13 +25450,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "A draft can help organize approved documents, and cost, document status, and dates must go back to the original input; this occupation's adoption, time savings, and replacement lack evidence, and the parent group projection is not AI causality. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: If the interconnection milestone is unconfirmed but the plan says construction can start, record the dependency, owner and affected date for the project lead."
             ]
           },
           "id": "wind-energy-development-managers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-11-9199.10",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33045,6 +33043,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-11-9199.10",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 11-9199.10 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/11-9199.10"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38562,10 +38587,10 @@
       "text": "Wind Energy Development Managers"
     }
   },
-  "source_content_sha256": "5e86ecdbc337b38c071a494e3982790e38d49cf3716fabdd9cc822a8a243ae13",
+  "source_content_sha256": "902e4d033ec4ac3bf2dded5ee6bd48288813969b08f857ab12b0d76779ca12c0",
   "subject": {
     "canonical_slug": "wind-energy-development-managers",
     "name": "Wind Energy Development Managers",
-    "summary": "The wind energy development manager corresponds to O*NET11-9199.10, leading or managing the development and evaluation of wind energy business opportunities and covering environmental studies, permit documents, and project proposals, and may also manage construction. It coordinates energy assessment, engineering, and construction, sets scope, schedule, and budget, reviews proposals and technical documents, and takes part in land, power purchase, and grid connection agreement negotiations. Wind farm operations managers and wind turbine service technicians are separated separately; coordinating development does not automatically grant engineering design, on-site electrical work, or administrative approval authority."
+    "summary": "Wind development managers coordinate project plans, resource assessment, land use, interconnection, budget and schedule. They prepare the dependencies and approvals for project decisions."
   }
 }

@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -21747,17 +21744,8 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.13.market": {
-        "ref": {
-          "id": "physical-therapist-assistants.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            12,
-            "market"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.13.name": {
         "ref": {
@@ -21775,19 +21763,8 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.13.period": {
-        "ref": {
-          "id": "physical-therapist-assistants.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "editor"
-            },
-            "period"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.13.publisher": {
         "ref": {
@@ -22406,12 +22383,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Quick judgment: are you willing to work with patients long term under physical therapist supervision, guide exercises per an established plan, observe changes in pain, mobility, and safety, and record and report results accurately? This work requires patient communication, physical stamina, and continuous training. United States PTA credentials and similar rehabilitation treatment positions in China cannot be automatically mutually recognized; before enrolling, verify the legitimate program, practice, and position requirements of the target region."
+              "If you want to assess people independently or create or change treatment plans, compare PT and PTA responsibilities and credentials first."
             ]
           },
           "id": "physical-therapist-assistants.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "editor",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -22421,7 +22398,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Fit signals: able to understand and restate the physical therapist's goals and contraindications, describe what the patient can and cannot currently do, hold the line on transfer, infection control, and abnormal escalation rules, and proactively ask about unauthorized changes. Compliance observation and fully fictional cases can help test record and communication habits, and interest scales cannot prove clinical competence or licensure."
+              "Open “Entering the field, qualifications, and career development” and find “PTA-08 | Plan versions and handover”. Use three paper records to write a check list and two handover sentences before reading the sample."
             ]
           },
           "id": "physical-therapist-assistants.quick-decision.fit-decision-checklist.2",
@@ -22435,14 +22412,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Safety exercise: using fully fictional patient information and a treatment plan, produce a one-page pre-treatment checklist, one exercise observation record, and an abnormal escalation note within 60 minutes. Organize written materials only, and do not operate on real patients, equipment, or restricted medical records; the exercise must state which judgments should be left to the physical therapist."
+              "Fit signals: able to understand and restate the physical therapist's goals and contraindications, describe what the patient can and cannot currently do, hold the line on transfer, infection control, and abnormal escalation rules, and proactively ask about unauthorized changes. Compliance observation and fully fictional cases can help test record and communication habits, and interest scales cannot prove clinical competence or licensure."
             ]
           },
           "id": "physical-therapist-assistants.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "editor",
-            "onet",
-            "employer"
+            "editor"
           ],
           "type": "prose"
         },
@@ -22451,13 +22426,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The reference deliverable should state the fictional plan goals, existing contraindications, patient feedback, exercises actually completed, unmeasured indicators, changes that must be reported to the physical therapist, and the reasons for not modifying the plan on your own. This work only shows record-keeping and risk identification thinking and cannot serve as treatment qualifications, patient diagnosis, or real operation permission."
+              "Use the exercise to see whether you can separate observation from inference and route unresolved questions to the right person."
             ]
           },
           "id": "physical-therapist-assistants.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "editor",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -22466,12 +22440,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "If you are willing to repeatedly guide patient exercises, observe function, keep records, and hand over to the team under supervision, next verify the United States state PTA license or the similar position requirements of the target institution in China, and then evaluate courses, clinical internships, and costs. If you would rather independently develop treatment plans, compare the separate education and practice path of physical therapists, and do not treat assistant experience as a license upgrade."
+              "Consider this path if you would enjoy following plans under PT supervision, observing changes, documenting what happened and handing it over. Ask employers how they arrange training, supervision and records."
             ]
           },
           "id": "physical-therapist-assistants.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -23398,7 +23372,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Their training and clinical decision responsibility differ from PTAs and cannot be mutually recognized based on similar exercises."
+              "Check U.S. PTA jurisdiction requirements and mainland employer requirements separately. Verify the duties, credentials and supervision arrangement for the actual role."
             ]
           },
           "id": "physical-therapist-assistants.direction-comparison.adjacent-career-comparison-table.23",
@@ -23853,15 +23827,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can help organize public rehabilitation materials, generate draft education materials, or flag missing record items, but there is no evidence that it can independently and safely guide real patient exercises. PTA direct care, observation of patient changes, contraindication verification, and reporting to the physical therapist must still be carried out by qualified personnel per the plan; institutional adoption and employment change must be verified separately. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Try templates and omission checks with fictional records. A tool can organize text; plan selection, changes to treatment and clinical sign-off remain with authorized professionals. Handle real records only through institution-approved processes."
             ]
           },
           "id": "physical-therapist-assistants.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
             "onet",
-            "bls"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25917,7 +25889,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "United States PTA and Chinese positions are not directly mutually recognized."
+              "Check U.S. PTA jurisdiction requirements and mainland employer requirements separately. Verify the duties, credentials and supervision arrangement for the actual role."
             ]
           },
           "id": "physical-therapist-assistants.china-salary.career-snapshot-primary-locale.44",
@@ -25946,13 +25918,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Tables 2 and 5 from the National Bureau of Statistics provide the health and social work industry average and do not list physical therapist assistants separately; National Health Commission training materials describe Chinese rehabilitation therapy professional training and cannot be used to conclude that United States PTA qualifications are mutually recognized."
+              "Neither hospital listed a pay amount, and the postings do not establish a national Chinese wage. One supports physical-agent work; the other covers equipment operation only. Compare each job’s actual duties."
             ]
           },
           "id": "physical-therapist-assistants.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "nbs",
-            "cnclass"
+            "pta-wuhan",
+            "pta-wangjing"
           ],
           "type": "prose"
         },
@@ -26816,31 +26788,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Occupational therapists",
@@ -27941,7 +27913,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Verify the rehabilitation training background of new entrants, transfers, and junior staff in China; this does not prove mutual recognition of United States PTA qualifications."
+              "Check U.S. PTA jurisdiction requirements and mainland employer requirements separately. Verify the duties, credentials and supervision arrangement for the actual role."
             ]
           },
           "id": "physical-therapist-assistants.fit.personality-fit-block.66",
@@ -28569,7 +28541,7 @@
                 "id": "education",
                 "values": [
                   "Education and clinical training",
-                  "United States PTAs usually complete an accredited associate program and supervised clinical training; verify the target state rules first.",
+                  "U.S. entry typically involves an accredited PTA associate program and supervised clinical practice. The PTA-level NPTE is separate from the license or certification issued by the target state or jurisdiction. For foreign education, verify equivalence and jurisdiction approval.",
                   "Verify the school's program accreditation, internship arrangements, and state licensure application requirements."
                 ]
               },
@@ -28592,17 +28564,20 @@
               {
                 "id": "tools",
                 "values": [
-                  "Demonstrable work",
-                  "Use fictional cases to produce plan verification, exercise records, and abnormal reporting samples, without real patient information.",
-                  "Ask qualified practitioners to check the stop points and clarity of handover."
+                  "Prepare a paper sample",
+                  "Use the fictional PTA-08 records to show how you check versions, identity and handover.",
+                  "Check it yourself or ask a peer whether the note is clear."
                 ]
               }
             ]
           },
           "id": "physical-therapist-assistants.path.employer-evidence.1",
           "source_refs": [
-            "employer",
-            "editor"
+            "bls",
+            "onet",
+            "pta-fsbpt",
+            "editor",
+            "pta-fsbpt-exam"
           ],
           "title": "What do employers usually look at in recruitment?",
           "type": "cards"
@@ -28615,33 +28590,33 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and setup｜all fictional",
-                  "Fictional patient Lin A practices sit-to-stand and short-distance walking under a plan already signed by the physical therapist; all dosages, pain scores, and dates are editorial exercises only and are not medical advice.",
-                  "A1: the plan states 5 sit-to-stand repetitions, 10 meters of walking, and standby protection; stop the exercise and report immediately if marked dizziness or new chest pain occurs.",
-                  "A2: on the fictional day, the patient reports starting pain of 2/10 and becomes dizzy and unsteady after completing the 3rd sit-to-stand."
+                  "Paper materials | Three fictional records",
+                  "P1: The PT signed paper plan v5 for case A-17. It lists a preparatory activity and a walking observation. The PT must confirm changes.",
+                  "P2: Unsigned system draft v6 substitutes another item for the walking observation. The handover slip says A-71.",
+                  "P3: At 08:45 only scheduling was recorded. Start time and completion are undocumented. Neither identity nor plan version has been confirmed."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Tasks and outputs",
-                  "Write a pre-operation checklist: patient, plan version, assistive devices, staff providing patient protection, and stop conditions.",
-                  "Then write the progress record: only write the 3 completed sit-to-stand repetitions, the patient's complaints, and observations, and do not add the uncompleted walking; mark whom it was reported to."
+                  "Task: write a verification list and two-sentence handover",
+                  "Separate signature status, both identifiers, completion status and unresolved items. Address the supervising PT; do not assume receipt.",
+                  "Keep scheduling separate from delivery. Write your draft before checking the sample."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference approach",
-                  "Stop the exercise immediately, protect the patient, and notify the supervising physical therapist per institutional process; start the emergency procedure if necessary.",
-                  "Record the time, the patient's own words, the actual completed volume, and the reporting outcome; do not diagnose the cause of dizziness yourself and do not increase the dosage on your own."
+                  "After you write: sample handover",
+                  "08:45: Signed v5 lists A-17, unsigned v6 changes an item, and the slip says A-71; start and completion are undocumented. Hold the affected activities based on this record until the supervising PT and registration staff verify identity, the applicable plan and next steps; receipt is unconfirmed.",
+                  "A signature does not resolve the identity conflict, and missing records do not establish that nothing happened. Keep these items pending on paper."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries and review",
-                  "This exercise handles fictional paper information only; do not conduct training with real patients."
+                  "Boundaries and self-check",
+                  "Use fictional paper records only. Do not work with a real person or device, infer a clinical condition or change the PT’s plan."
                 ]
               }
             ]
@@ -28650,7 +28625,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: fictional rehabilitation plan verification and abnormal records",
+          "title": "PTA-08 | Plan versions and handover",
           "type": "cards"
         },
         {
@@ -28661,31 +28636,31 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Plan verification package",
-                  "Extract the movements, dosages, protection, and stop conditions in A1, and clearly raise unknown items.",
-                  "Review whether movements outside the plan were treated as authorized."
+                  "Version table",
+                  "List both versions and their signature status.",
+                  "Keep the signed version and draft separate."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Abnormal handling package",
-                  "Based on the description in A2, stop the exercise and protect first, then report to the supervising physical therapist per process.",
-                  "Review whether you diagnosed on your own or continued training."
+                  "Identity cross-check",
+                  "Retain each source and mark the conflict pending.",
+                  "Do not merge the two identifiers."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Progress record package",
-                  "Distinguish the 3 completed sit-to-stand repetitions from the walking that had not started, and preserve the patient's complaints."
+                  "Completion status",
+                  "Leave it unconfirmed where the record is missing."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Handover note card",
-                  "State the time, status, whom it was reported to, and the items pending confirmation next."
+                  "Handover",
+                  "Use two sentences to give the facts, recipient and acknowledgement status."
                 ]
               }
             ]
@@ -28721,16 +28696,16 @@
                 "Simulated answers cannot replace a license"
               ],
               [
-                "Talking about dizziness in an interview",
-                "Whether stop-exercise and reporting signals can be identified",
-                "Protect the patient first, record the facts, and escalate per process",
-                "Candidates are not asked to diagnose remotely"
+                "Paper check",
+                "Notice that identifiers disagree",
+                "Keep both records and flag the discrepancy",
+                "Does not establish a real person’s identity"
               ],
               [
-                "Clinical training records",
-                "Whether completed volume and patient responses are recorded faithfully",
-                "Mentors can verify that operations match the records",
-                "Simulated work is not equal to clinical ability"
+                "Progress note",
+                "Distinguish scheduling from completion",
+                "Leave undocumented values unresolved",
+                "Does not demonstrate clinical competence"
               ],
               [
                 "Team handover",
@@ -28757,49 +28732,49 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "Day one",
-                  "Read BLS and O*NET and clearly write the role differences between PTAs, PTs, and aides."
+                  "Check PT, PTA and aide roles."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "Day two",
-                  "Verify the target state's accredited programs and licensure path and list the questions to confirm with the school."
+                  "Review the target location’s training and credentials; write one question for a school."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day three",
-                  "Read the fictional A1 plan and write the patient, movement, dosage, and stop condition checklist."
+                  "Use P1 and P2 to compare versions, signatures and identifiers."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day four",
-                  "Read the fictional A2 change and write the stop-exercise protection and reporting sequence."
+                  "Read P3 and distinguish scheduling, start and completion."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day five",
-                  "Write the progress record, recording only the actual completed volume and the patient's complaints."
+                  "Write two handover sentences and mark receipt as unconfirmed."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day six",
-                  "Ask qualified staff to challenge the records and handover, correct omissions but keep the reasons for modification."
+                  "Check your own work before reading the sample; peer feedback is optional."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day seven",
-                  "Review whether you are willing to provide close care, records, and team collaboration over the long term; list the next qualification verification steps."
+                  "Decide whether you prefer carrying out plans, keeping records or communicating. Choose one employer and training route to investigate."
                 ]
               }
             ]
@@ -28816,13 +28791,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "First understand the treatment plan, patient identity, contraindications, and stop signals.",
-              "Supervised practice: during courses and clinical training, guide movements per the physical therapist's arrangement and observe pain, fatigue, and safety responses.",
-              "Stable execution and handover: take on prescribed treatment within licensure and employer authorization, record progress, explain deviations, and report to the physical therapist promptly.",
-              "Specialty deepening and collaboration: accumulate outpatient, hospital, or home rehabilitation experience within the lawful scope; continuing education or the separate physical therapist professional path are options.",
-              "Before training, verify patient identity, plan version, and contraindications.",
-              "For each session, record the actual completed volume, symptoms, and reasons for adjustment.",
-              "When symptoms change, stop the exercise, protect the patient, and report to the supervising physical therapist."
+              "Keep both identifiers.",
+              "Separate the signed plan and draft.",
+              "Do not treat scheduling as completion.",
+              "Mark undocumented fields unconfirmed.",
+              "Identify who verifies identity, plan and receipt.",
+              "Self-check with fictional material.",
+              "Choose a task you would repeat and investigate the actual role."
             ]
           },
           "id": "physical-therapist-assistants.path.seven-day-decision.1",
@@ -28907,7 +28882,7 @@
                 "United States PTA cannot be directly applied",
                 "Verify per local authorities and announcements",
                 "Varies by specialty and institution",
-                "Does not establish mutual recognition of Chinese and United States credentials"
+                "Check U.S. PTA jurisdiction requirements and mainland employer requirements separately. Verify the duties, credentials and supervision arrangement for the actual role."
               ]
             ]
           },
@@ -28930,14 +28905,14 @@
               "Completing the program, the clinical internship, state licensure, and employer position authorization are different statuses; one must not practice treatment independently just because the program is completed.",
               "BLS notes that United States PTAs usually need an accredited associate program and state licensure or certification; the aide path of high school education plus on-the-job training must not be mixed in.",
               "Real patient information must be handled per institutional privacy rules; the fictional exercises on this page use no patient information.",
-              "Related rehabilitation therapy positions in China must be verified against local specialty, training, and institutional rules; no mutual recognition of United States PTA qualifications is claimed."
+              "WS/T 893–2026 covers home-bed rehabilitation from primary healthcare institutions. Section 7.5.1 assigns plan delivery and documentation to a doctor or rehabilitation therapist. It does not create U.S. PTA equivalence or authorize independent care by an assistant."
             ]
           },
           "id": "physical-therapist-assistants.path.credential-boundary.1",
           "source_refs": [
+            "pta-homebed",
             "bls",
-            "editor",
-            "privacy"
+            "pta-fsbpt"
           ],
           "title": "Qualification and authorization boundary statement",
           "type": "notice"
@@ -28947,18 +28922,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "United States education, state licensure, and occupational tasks follow official BLS and O*NET materials; the target state's current requirements and the specific employer's supervision arrangements must be verified separately.",
-              "The China section cites only the National Health Commission description of rehabilitation therapy personnel training, and does not treat cross-occupation wages, historical recruitment, or United States licensure as Chinese occupational entry."
+              "In September 2026, Wuhan University Zhongnan Hospital’s Optics Valley campus posted one agency-hire rehabilitation therapist assistant job, supporting a rehabilitation technician’s physical-agent therapy work. It asked for a related junior-college qualification or higher and basic operating skills. The application window closed; pay was not listed.",
+              "In 2025, Wangjing Hospital advertised three contract assistant technician posts. It asked for a related junior-college qualification or higher and preferred a rehabilitation therapist credential. The duties were equipment operation only, without participating in treatment. The window closed; no pay amount was given."
             ]
           },
           "id": "physical-therapist-assistants.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "pta-wuhan",
+            "pta-wangjing"
           ],
-          "title": "Recruitment sample note",
+          "title": "Mainland postings: similar titles, different duties",
           "type": "notice"
         },
         {
@@ -29006,7 +28979,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Simulated work cannot replace a real patient internship, licensure, or employer authorization. The training and authority of related rehabilitation therapy positions in China must be verified separately against National Health Commission, local, and institutional rules; this page does not promise mutual recognition of Chinese and United States qualifications."
+              "Check U.S. PTA jurisdiction requirements and mainland employer requirements separately. Verify the duties, credentials and supervision arrangement for the actual role."
             ]
           },
           "id": "physical-therapist-assistants.path.career-path-block.11",
@@ -29227,7 +29200,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Chinese training targets and content; does not establish mutual recognition of United States PTA licenses."
+              "Check U.S. PTA jurisdiction requirements and mainland employer requirements separately. Verify the duties, credentials and supervision arrangement for the actual role."
             ]
           },
           "id": "physical-therapist-assistants.path.career-path-block.26",
@@ -30994,10 +30967,15 @@
                 "question_key": "career.faq.physical-therapist-assistants.ai-impact"
               },
               {
-                "answer": "A national Chinese occupational wage median that maps one-to-one to the United States PTA has still not been verified. Based on the supervised rehabilitation care duties, a 2025 national health and social work industry pre-tax average annual wage is provided as a reference: 146,266 yuan for urban non-private units and 75,631 yuan per year for private units; it covers positions across the industry and is not a PTA median, new entrant price, or income range. Chinese position titles, qualifications, institutional authorization, and current contracts must be verified separately.",
+                "answer": "Neither hospital listed a pay amount, and the postings do not establish a national Chinese wage. One supports physical-agent work; the other covers equipment operation only. Compare each job’s actual duties.",
                 "id": "physical-therapist-assistants.faq.5",
                 "question": "What is the wage of physical therapist assistants in mainland China?",
-                "question_key": "career.faq.physical-therapist-assistants.china-pay"
+                "question_key": "career.faq.physical-therapist-assistants.china-pay",
+                "source_refs": [
+                  "pta-wuhan",
+                  "pta-wangjing",
+                  "nbs"
+                ]
               },
               {
                 "answer": "No. BLS reports a 2025 United States PTA median annual wage of 68,380 USD; the percentiles given by O*NET cover different experience levels, regions, and employers and cannot be treated as new entrant starting pay.",
@@ -31006,16 +30984,21 @@
                 "question_key": "career.faq.physical-therapist-assistants.us-pay"
               },
               {
-                "answer": "United States PTAs usually need an accredited associate program and supervised clinical training. The education, specialty, and training requirements for similar rehabilitation positions in China must be verified against local rules and employer announcements, and cannot be mutually recognized.",
+                "answer": "Check U.S. PTA jurisdiction requirements and mainland employer requirements separately. Verify the duties, credentials and supervision arrangement for the actual role.",
                 "id": "physical-therapist-assistants.faq.7",
                 "question": "What education and experience are needed to enter the field?",
                 "question_key": "career.faq.physical-therapist-assistants.education-path"
               },
               {
-                "answer": "United States states require PTAs to obtain licensure or certification, and the specific examination and continuing education requirements should be verified with the target state authority. Chinese rehabilitation therapy positions must verify local qualifications and institutional authorization; United States PTA credentials do not automatically apply.",
+                "answer": "U.S. entry typically involves an accredited PTA associate program and supervised clinical practice. The PTA-level NPTE is separate from the license or certification issued by the target state or jurisdiction. For foreign education, verify equivalence and jurisdiction approval.",
                 "id": "physical-therapist-assistants.faq.8",
                 "question": "What certificates must be taken?",
-                "question_key": "career.faq.physical-therapist-assistants.credentials"
+                "question_key": "career.faq.physical-therapist-assistants.credentials",
+                "source_refs": [
+                  "bls",
+                  "pta-fsbpt",
+                  "pta-fsbpt-exam"
+                ]
               },
               {
                 "answer": "Patient falls or symptom changes not stopped and reported in time, operations beyond the treatment plan, infection prevention omissions, and incomplete progress records. On site, act per institutional process and the supervising physical therapist's instructions.",
@@ -31095,7 +31078,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This Chinese-language page explains the scope of the United States PTA occupation and does not establish mutual recognition of Chinese and United States qualifications. The simulated cases are only for practicing records and stop-exercise escalation, do not provide diagnostic advice, and use no real patient information."
+              "Check U.S. PTA jurisdiction requirements and mainland employer requirements separately. Verify the duties, credentials and supervision arrangement for the actual role."
             ]
           },
           "id": "physical-therapist-assistants.sources.source-card.4",
@@ -31140,13 +31123,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "path",
@@ -31175,8 +31158,8 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "United States exact occupation tasks, work context, and the 2024—2034 projection",
-                  "United States exact occupation tasks, work context, and the 2024—2034 projection"
+                  "U.S. 31-2021 occupational tasks and work settings; see BLS Table 1.2 for employment projections.",
+                  "U.S. 31-2021 occupational tasks and work settings; see BLS Table 1.2 for employment projections."
                 ],
                 "evidence_type": "Official occupation and statistical materials",
                 "id": "onet",
@@ -31366,19 +31349,17 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Editorial scope of fictional exercises and cross-source interpretation",
-                  "Editorial scope of fictional exercises and cross-source interpretation"
+                  "All three exercise records are fictional.",
+                  "All three exercise records are fictional."
                 ],
-                "evidence_type": "Editorial synthesis",
+                "evidence_type": "Fictional paper exercise",
                 "id": "editor",
-                "limitation": "This source supports only the listed scope and cannot be used to infer Chinese physical therapist assistant qualifications, occupational standalone wages, or an AI replacement rate.",
-                "market": "Cross-region",
-                "name": "FermatMind career content editorial note",
-                "period": "Verified and read 2026-09-26; the original timestamps are shown in the links",
-                "publisher": "FermatMind editorial compilation",
-                "scope": "editorial",
+                "limitation": "Does not assess clinical ability.",
+                "name": "FermatMind Editorial: PTA-08 paper exercise",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
                 "url": null
               },
               {
@@ -31448,8 +31429,8 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "United States exact occupation tasks, work context, and the 2024—2034 projection",
-                  "United States exact occupation tasks, work context, and the 2024—2034 projection"
+                  "U.S. 31-2021 occupational tasks and work settings; see BLS Table 1.2 for employment projections.",
+                  "U.S. 31-2021 occupational tasks and work settings; see BLS Table 1.2 for employment projections."
                 ],
                 "evidence_type": "Official occupation and statistical materials",
                 "id": "purchasing-managers",
@@ -31528,7 +31509,7 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "United States exact occupation tasks, work context, and the 2024—2034 projection"
+                  "U.S. 31-2021 occupational tasks and work settings; see BLS Table 1.2 for employment projections."
                 ],
                 "evidence_type": "Official occupation and statistical materials",
                 "id": "msresearch",
@@ -31574,20 +31555,85 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Observe patient exercise responses — 25/100; weight=1/3; physical-therapist-assistants.ai-impact.ai-impact-table.99[0]",
-                  "Record treatment progress — 75/100; weight=1/3; physical-therapist-assistants.ai-impact.ai-impact-table.103[0]",
-                  "Assist with gait and balance training — 0/100; weight=1/3; physical-therapist-assistants.ai-impact.ai-impact-table.111[0]"
+                  "Use fictional inputs and review output manually.",
+                  "Use fictional inputs and review output manually.",
+                  "Use fictional inputs and review output manually.",
+                  "Use fictional inputs and review output manually.",
+                  "Use fictional inputs and review output manually."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "No estimate of job displacement or treatment effect.",
+                "name": "FermatMind: documentation tool limits",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In September 2026, Wuhan University Zhongnan Hospital’s Optics Valley campus posted one agency-hire rehabilitation therapist assistant job, supporting a rehabilitation technician’s physical-agent therapy work. It asked for a related junior-college qualification or higher and basic operating skills. The application window closed; pay was not listed."
+                ],
+                "evidence_type": "primary_document",
+                "id": "pta-wuhan",
+                "name": "Zhongnan Hospital Optics Valley posting",
+                "period": "2026-09-10",
+                "publisher": "Wuhan University Zhongnan Hospital",
+                "scope": "recruitment_proxy",
+                "url": "https://www.znhospital.cn/reurits_detail/17626.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In 2025, Wangjing Hospital advertised three contract assistant technician posts. It asked for a related junior-college qualification or higher and preferred a rehabilitation therapist credential. The duties were equipment operation only, without participating in treatment. The window closed; no pay amount was given."
+                ],
+                "evidence_type": "primary_document",
+                "id": "pta-wangjing",
+                "name": "Wangjing Hospital contract posting",
+                "period": "2025-04-16",
+                "publisher": "Wangjing Hospital",
+                "scope": "recruitment_proxy",
+                "url": "https://wjhospital.com.cn/Html/News/Articles/20005821.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A PTA needs a license or certification in the target state or jurisdiction. The exam is one part of that process."
+                ],
+                "evidence_type": "primary_document",
+                "id": "pta-fsbpt",
+                "name": "FSBPT: jurisdiction licensure and exam",
+                "period": "Current guidance",
+                "publisher": "FSBPT",
+                "scope": "exact",
+                "url": "https://www.fsbpt.org/Secondary-Pages/Licensees/Getting-Licensed"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "WS/T 893–2026 covers home-bed rehabilitation from primary healthcare institutions. Section 7.5.1 assigns plan delivery and documentation to a doctor or rehabilitation therapist. It does not create U.S. PTA equivalence or authorize independent care by an assistant."
+                ],
+                "evidence_type": "primary_document",
+                "id": "pta-homebed",
+                "name": "NHC: Home-bed rehabilitation standard",
+                "period": "2026-09-01",
+                "publisher": "National Health Commission",
+                "scope": "exact",
+                "url": "https://www.nhc.gov.cn/fzs/c100048/202603/a7d6e2615e9e474fba624d2e0e5bfc83/files/WST%20893%E2%80%942026.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Check the appropriate exam level, CAPTE accreditation or substantial equivalence determined by a recognized credentialing agency, and approval by the target jurisdiction."
+                ],
+                "evidence_type": "primary_document",
+                "id": "pta-fsbpt-exam",
+                "name": "FSBPT: NPTE eligibility",
+                "period": "Current guidance",
+                "publisher": "FSBPT",
+                "scope": "exact",
+                "url": "https://www.fsbpt.org/Secondary-Pages/Exam-Candidates/National-Exam-NPTE/Eligibility-Requirements"
               }
             ]
           },
@@ -36279,7 +36325,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests suit physical therapist assistant work",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36493,7 +36539,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "Where can AI assist with documentation?",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -36761,27 +36807,15 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Physical therapist assistants",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and physical therapist assistant work"
     },
     "badges": [
       "Physical therapist assistants · task verification",
@@ -36825,17 +36859,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Physical therapist assistants (PTAs) carry out the treatment plan under physical therapist supervision, guiding exercises, observing patient responses, and recording progress. View United States 2025 wages and the 2025—2035 employment projection, entry qualifications, work risks, and adjacent occupations; Chinese data are not directly mutually recognized with United States qualifications or wages."
+      "text": "Learn how physical therapist assistants follow a care plan and report changes. Compare U.S. PTA, PT and aide roles, mainland job examples, U.S. pay and a fictional version-check exercise."
     },
     "title": {
       "availability": "available",
       "text": "Physical therapist assistants"
     }
   },
-  "source_content_sha256": "ae29412a6c7e9b7a2b2f278b878e79ec76ebeef3af75f620b4be10af9f05751f",
+  "source_content_sha256": "2436ccc6cd5f4c34f1b70a237537a354e2335852034b921073dfc886424d5f33",
   "subject": {
     "canonical_slug": "physical-therapist-assistants",
     "name": "Physical therapist assistants",
-    "summary": "Physical therapist assistants instruct patients in prescribed exercises and functional activities under the care plan and supervision established by a physical therapist, observe treatment responses, record progress, and report abnormalities promptly. United States PTAs usually need an accredited associate program and state licensure or certification; similar positions in China must have local education, training, and institutional duties verified separately and cannot be directly mutually recognized."
+    "summary": "U.S. physical therapist assistants deliver assigned care under a physical therapist’s supervision, observe changes and report back. Similar mainland job titles can mean helping a rehabilitation technician or operating equipment only. Check the actual job and local credentials before choosing training."
   }
 }

@@ -2,13 +2,7 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:cn-private-2025": {
-        "status": "pending_mapping"
-      },
       "fact:cn-urban-nonprivate-2025": {
-        "status": "pending_mapping"
-      },
-      "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:identity": {
@@ -1239,7 +1233,7 @@
         "status": "mapped"
       },
       "item:general-and-operations-managers.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:general-and-operations-managers.path.interview-probation.1": {
         "status": "mapped"
@@ -1497,7 +1491,7 @@
         "status": "pending_mapping"
       },
       "item:general-and-operations-managers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:general-and-operations-managers.sources.source-card.1": {
         "status": "mapped"
@@ -24117,12 +24111,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对岗位胜任度的评价。本页对应美国 O*NET/SOC 11-1021.00「General and Operations Managers」（总经理和运营经理，固定索引中文名即为「总经理和运营经理」；行业中常称业务经理、中心经理、部门经理、区域经理、总经理（GM）、运营总监、运营总经理、运营经理、工厂主管与门店经理）。官方范围为：规划、指挥或协调公共或私营部门组织的运营，监督多个部门或多个经营场所；职责包括制定政策、管理日常运营，以及规划材料与人力资源的使用，但职责过于多样与一般，无法归入人员、采购或行政服务等任一单一管理或行政职能；通常通过下属主管实施管理；不含一线主管。核心工作包括查看财务报表与销售或活动报告与其他绩效数据以衡量生产率或目标达成并识别需要降本或改进的领域；指挥与协调与生产、定价、销售或分销有关的业务或部门活动；指挥与提供产品与服务的直接相关行政活动；编制员工排班表并分配具体职责；指挥或协调财务或预算活动以保障运营资金、最大化投资或提高效率；规划或指挥需要与其他部门经理协作的活动（如促销）；执行甄选与培训与考核等人事职能；与董事会成员与机构负责人或员工一同制定部门政策与目标与程序；监督供应商以确保其在预算内有效提供所需物资或服务；管理物资进出生产设施以保证运营效率与可持续；依据客户需求预测为物资或服务定价或设定信用条件；执行店面工作（如接待与协助客户、补货或盘点）；制定或实施产品营销策略（含广告活动与促销）；指挥广告或采购等非销售部门；实施或监督环境管理或可持续项目（如回收与节能与废弃物管理）；规划门店布局或设计陈列；建议新设施选址或监督现有设施改造与翻新。工作以决策频率高、沟通密集、对他人安全与结果责任重、典型工作周常多于 40 小时为特点。O*NET的2024年主要行业背景显示专业科学技术服务12%、零售12%；76%为按已显示取整数计算的其余行业余数，不给内部细分份额。"
+              "谨慎信号｜如果频繁跨站协调、排班冲突或紧急交接会明显增加你的负担，先向雇主核实际工时、负责的站点和谁处理突发事项。试做调度练习，看看是否愿意在能力和预算都未核实前保留待批项。"
             ]
           },
           "id": "general-and-operations-managers.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24131,12 +24126,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜G1合成案例｜两服务点A/B，售后与调度由两名下属主管协调。下周已确认订单100单（A60、B40），本周完成90单、成本9,000元。常规产能A50单、B40单，已批准固定成本8,000元覆盖90单；可另买10单外包能力，每单120元，新增支出1,200元。目标：完成100单、准时交付率至少95%、成本不超过10,000元；标准工时与安全检查不得减少。模拟授权：本人可在既定计划内新增支出不超过1,000元，超过须上级书面批准；外包供应商须采购/质量复核，不得擅自变更用工、安全检查或承诺未批准订单。只用编号，不含个人信息。在90分钟内填写指标/口径表、资源安排、成本试算及审批/升级记录；写明未批准前能承诺的数量。所有数据为纸面练习假设，不能执行真实采购或用工。"
+              "到「入行、资格与职业发展」完成《两站调度：三单一批》的原题和变式，再打开常见问题中的折叠参考解。"
             ]
           },
           "id": "general-and-operations-managers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24195,7 +24190,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜本页的「总经理和运营经理」对应美国 SOC 11-1021.00，工作可以分成几类：（一）目标与绩效管理——查看财务报表与销售或活动报告与其他绩效数据以衡量生产率或目标达成，识别需要降本或改进的领域；（二）运营指挥与协调——指挥与协调与生产、定价、销售或分销有关的业务或部门活动，指挥与提供产品与服务的直接相关行政活动，规划或指挥需要与其他部门经理协作的活动，管理物资进出生产设施；（三）人员与组织——编制员工排班表并分配具体职责，执行甄选与培训与考核等人事职能，与董事会成员与机构负责人或员工一同制定部门政策与目标与程序；（四）财务与商业决策——指挥或协调财务或预算活动以保障运营资金与投资与效率，依据客户需求预测为物资或服务定价或设定信用条件，制定或实施产品营销策略；（五）供应链与设施——监督供应商以确保其在预算内有效提供所需物资或服务，规划门店布局或设计陈列，建议新设施选址或监督现有设施改造与翻新，实施或监督环境管理或可持续项目。四类以上工作循环衔接：读取绩效数据—把目标转成指标与资源计划—安排人员与工作—指挥与协调跨部门执行—监控成本质量交付与客户结果—处理异常并向上级或董事会报告。本页不把该职业与相邻的行政服务经理或采购经理或销售经理或财务经理或工业生产经理或一线主管混为一谈，也不把经理头衔等同于董事会或最高管理层的治理权。"
+              "直接回答｜本页的「总经理和运营经理」对应美国 SOC 11-1021，工作可以分成几类：（一）目标与绩效管理——查看财务报表与销售或活动报告与其他绩效数据以衡量生产率或目标达成，识别需要降本或改进的领域；（二）运营指挥与协调——指挥与协调与生产、定价、销售或分销有关的业务或部门活动，指挥与提供产品与服务的直接相关行政活动，规划或指挥需要与其他部门经理协作的活动，管理物资进出生产设施；（三）人员与组织——编制员工排班表并分配具体职责，执行甄选与培训与考核等人事职能，与董事会成员与机构负责人或员工一同制定部门政策与目标与程序；（四）财务与商业决策——指挥或协调财务或预算活动以保障运营资金与投资与效率，依据客户需求预测为物资或服务定价或设定信用条件，制定或实施产品营销策略；（五）供应链与设施——监督供应商以确保其在预算内有效提供所需物资或服务，规划门店布局或设计陈列，建议新设施选址或监督现有设施改造与翻新，实施或监督环境管理或可持续项目。四类以上工作循环衔接：读取绩效数据—把目标转成指标与资源计划—安排人员与工作—指挥与协调跨部门执行—监控成本质量交付与客户结果—处理异常并向上级或董事会报告。本页不把该职业与相邻的行政服务经理或采购经理或销售经理或财务经理或工业生产经理或一线主管混为一谈，也不把经理头衔等同于董事会或最高管理层的治理权。"
             ]
           },
           "id": "general-and-operations-managers.profile.career-quick-answers-block.1",
@@ -24209,7 +24204,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 与 BLS 职业档案要点｜本页对应美国 SOC 11-1021.00「General and Operations Managers」（管理类职业，O*NET 标注 Bright Outlook，更新于 2026），官方范围为：规划、指挥或协调公共或私营部门组织的运营，监督多个部门或多个经营场所；职责包括制定政策、管理日常运营以及规划材料与人力资源的使用，但职责过于多样与一般而无法归入任一单一管理或行政职能；通常通过下属主管实施管理；不含一线主管。O*NET共17项任务，9项核心：绩效数据核对80、业务协调79、行政活动75、排班75、财务预算73、协作活动71、人事70、政策目标69、供应商监督61。8项补充：物资流76、定价信用75、店面工作72、营销64、非销售部门63、可持续53、布局48、设施选址改造45。补充不表示全员核心职责。工作活动重要性最高的是使用计算机（87）与获取信息（86），其次是与上级与同伴与下属沟通（84）与做决策与解决问题（83）与建立与维护人际关系（82）与识别对象与动作与事件（81）与指导与指挥与激励下属（80）与组织与计划与排定工作优先次序（80）与评判对象与服务的品质（78）与处理信息（77）。"
+              "O*NET 与 BLS 职业档案要点｜本页对应美国 SOC 11-1021「General and Operations Managers」（管理类职业，O*NET 标注 Bright Outlook，更新于 2026），官方范围为：规划、指挥或协调公共或私营部门组织的运营，监督多个部门或多个经营场所；职责包括制定政策、管理日常运营以及规划材料与人力资源的使用，但职责过于多样与一般而无法归入任一单一管理或行政职能；通常通过下属主管实施管理；不含一线主管。O*NET共17项任务，9项核心：绩效数据核对80、业务协调79、行政活动75、排班75、财务预算73、协作活动71、人事70、政策目标69、供应商监督61。8项补充：物资流76、定价信用75、店面工作72、营销64、非销售部门63、可持续53、布局48、设施选址改造45。补充不表示全员核心职责。工作活动重要性最高的是使用计算机（87）与获取信息（86），其次是与上级与同伴与下属沟通（84）与做决策与解决问题（83）与建立与维护人际关系（82）与识别对象与动作与事件（81）与指导与指挥与激励下属（80）与组织与计划与排定工作优先次序（80）与评判对象与服务的品质（78）与处理信息（77）。"
             ]
           },
           "id": "general-and-operations-managers.profile.onet-structured-fields-block.1",
@@ -24270,12 +24265,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业与工资口径｜本页对应美国 O*NET/SOC 11-1021.00（总经理和运营经理）：2025 年全国中位时薪为 50.85 美元、中位年薪为 105,770 美元；第 10 分位年薪 50,090 美元、第 25 分位年薪 72,320 美元、第 75 分位年薪 167,280 美元、第 90 分位年薪 253,390 美元（BLS OEWS 2025 年，经 O*NET 呈现）。就业与增长取 BLS 就业预测（BLS最新表1.2）：就业由 2025 年约 3,599,000 个岗位增至 2035 年约 3,780,300 个岗位（约 +5%），期间预计年均岗位空缺约 285,000 个（含增长与替补）。上述为美国全国口径，不含非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴，不适用其他法域。"
+              "美国 2025 年 5 月 OEWS 全国年薪第 10、25、50、75、90 分位分别为 50,090、72,320、105,770、167,280、253,390 美元，时薪中位数为 50.85 美元。 BLS 表 1.2 显示，美国职业 11-1021 就业从 2025 年的约 3,599,000 个岗位增至 2035 年预计约 3,780,300 个（+5.0%），年均预计约有 285,000 个职位空缺，含替补。"
             ]
           },
           "id": "general-and-operations-managers.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep"
           ],
           "type": "prose"
         },
@@ -24328,13 +24324,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS就业预测口径｜最新表1.2精确11-1021行：2025年3,599,000→2035年3,780,300个岗位，净增181,300、增长5.0%；年均285,000个空缺含增长与替换。EP包含自雇，OEWS是非农机构工资薪金雇员模型估计且不含自雇。O*NET仍显示旧2024—2034预测，本页采用BLS最新表，不把新值称为O*NET当前展示。"
+              "BLS 表 1.2 显示，美国职业 11-1021 就业从 2025 年的约 3,599,000 个岗位增至 2035 年预计约 3,780,300 个（+5.0%），年均预计约有 285,000 个职位空缺，含替补。"
             ]
           },
           "id": "general-and-operations-managers.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "ep",
-            "arxiv"
+            "ep"
           ],
           "type": "prose"
         },
@@ -24387,7 +24382,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本页对应美国 SOC 11-1021.00，与相邻岗位的核心差别在「对象与授权层级」：本职业以跨多个部门或经营场所的日常运营为对象，产出是可核验的运营指标与资源计划与绩效复盘与跨部门决策与升级记录；行政服务经理（11-3012.00）以行政与设施与记录等支持职能为对象；采购经理（11-3061.00）以采购与供应商与合同执行为对象；销售经理（11-2022.00）以销售目标与销售团队与客户关系为对象；财务经理（11-3031.00）以财务规划与报告与资金与风险控制为对象；工业生产经理（11-3051.00）以生产计划与制造过程与产能与质量与安全为对象；一线主管被本职业官方范围明确排除。对象与授权层级各不相同，不能跨岗位沿用预算与签约与定价与用工与安全控制变更的权限，经理头衔也不自动包含董事会或最高管理层的治理权。"
+              "边界结论｜本页对应美国 SOC 11-1021，与相邻岗位的核心差别在「对象与授权层级」：本职业以跨多个部门或经营场所的日常运营为对象，产出是可核验的运营指标与资源计划与绩效复盘与跨部门决策与升级记录；行政服务经理（11-3012.00）以行政与设施与记录等支持职能为对象；采购经理（11-3061.00）以采购与供应商与合同执行为对象；销售经理（11-2022.00）以销售目标与销售团队与客户关系为对象；财务经理（11-3031.00）以财务规划与报告与资金与风险控制为对象；工业生产经理（11-3051.00）以生产计划与制造过程与产能与质量与安全为对象；一线主管被本职业官方范围明确排除。对象与授权层级各不相同，不能跨岗位沿用预算与签约与定价与用工与安全控制变更的权限，经理头衔也不自动包含董事会或最高管理层的治理权。"
             ]
           },
           "id": "general-and-operations-managers.profile.career-quick-answers-block.7",
@@ -24457,12 +24452,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "总经理和运营经理统筹多个部门或经营场所的运营，通常通过下属主管组织人员、资源与日常执行，交付运营指标、资源计划和复盘记录；美国定义排除一线主管。 证据不足：本页未取得中国精确职业工资分布。"
+              "综合运营经理统筹多个部门或地点的日常运营，和各地主管核对交付量、安排人力与物料，并跟进跨团队异常。美国职业 11-1021 排除只负责一线班组的主管。企业主要负责人通常承担更广的战略和治理职责，实际分工看组织授权。"
             ]
           },
           "id": "general-and-operations-managers.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24830,10 +24826,10 @@
                 "url": "https://www.onetonline.org/link/localwages/11-1021.00"
               },
               {
-                "entity": "O*NET 11-1021.00 行业分布",
+                "entity": "O*NET 11-1021.00 职业任务",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/11-1021.00#Industries"
+                "url": "https://www.onetonline.org/link/details/11-1021.00"
               }
             ]
           },
@@ -24848,7 +24844,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "结论｜本职业（美国 SOC 11-1021.00 总经理和运营经理）与相邻岗位的核心差别在「对象与授权层级」：本职业以跨多个部门或经营场所的日常运营为对象，产出是可核验的运营指标与资源计划与绩效复盘与跨部门决策与升级记录；行政服务经理（11-3012.00）以行政与设施与记录等支持职能为对象；销售经理（11-2022.00）以销售目标与销售团队与客户关系为对象；财务经理（11-3031.00）以财务规划与报告与资金与风险控制为对象；工业生产经理（11-3051.00）以生产计划与制造过程与产能与质量与安全为对象；采购经理（11-3061.00）以采购与供应商与合同执行为对象。对象与授权层级各不相同，不能跨岗位沿用预算与签约与定价与用工与安全控制变更的权限；经理头衔也不自动包含董事会或最高管理层的治理权。"
+              "结论｜本职业（美国 SOC 11-1021 总经理和运营经理）与相邻岗位的核心差别在「对象与授权层级」：本职业以跨多个部门或经营场所的日常运营为对象，产出是可核验的运营指标与资源计划与绩效复盘与跨部门决策与升级记录；行政服务经理（11-3012.00）以行政与设施与记录等支持职能为对象；销售经理（11-2022.00）以销售目标与销售团队与客户关系为对象；财务经理（11-3031.00）以财务规划与报告与资金与风险控制为对象；工业生产经理（11-3051.00）以生产计划与制造过程与产能与质量与安全为对象；采购经理（11-3061.00）以采购与供应商与合同执行为对象。对象与授权层级各不相同，不能跨岗位沿用预算与签约与定价与用工与安全控制变更的权限；经理头衔也不自动包含董事会或最高管理层的治理权。"
             ]
           },
           "id": "general-and-operations-managers.direction-comparison.adjacent-career-comparison-table.8",
@@ -24918,7 +24914,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "核心工作与产出：查看财务报表与销售或活动报告与其他绩效数据以衡量生产率或目标达成，指挥与协调与生产、定价、销售或分销有关的业务或部门活动，编制员工排班表并分配具体职责，指挥或协调财务或预算活动，监督供应商并管理物资进出生产设施，依据客户需求预测定价或设定信用条件，处理异常并向上级或董事会报告；产出为运营指标与资源与人员计划与绩效复盘与跨部门决策与升级记录（美国 SOC 11-1021.00）。"
+              "核心工作与产出：查看财务报表与销售或活动报告与其他绩效数据以衡量生产率或目标达成，指挥与协调与生产、定价、销售或分销有关的业务或部门活动，编制员工排班表并分配具体职责，指挥或协调财务或预算活动，监督供应商并管理物资进出生产设施，依据客户需求预测定价或设定信用条件，处理异常并向上级或董事会报告；产出为运营指标与资源与人员计划与绩效复盘与跨部门决策与升级记录（美国 SOC 11-1021）。"
             ]
           },
           "id": "general-and-operations-managers.direction-comparison.adjacent-career-comparison-table.13",
@@ -25487,7 +25483,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得11-1021精确对应的生成式AI暴露评分、组织采用率或效率效果研究，不给本职业暴露等级。 O*NET任务显示需要分析绩效、排班、跨部门协调与决策；2025年美国招聘广告中Office和Excel各被11%的关联去重广告提及。编辑建议先试验报表汇总、草稿整理与数据核对，并记录准确性、耗时与复核成本。软件提及不是AI采用证据，技术可行、组织采用与就业结果需分别核验。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "证据不足：本页未取得11-1021精确对应的生成式AI暴露评分、组织采用率或效率效果研究，不给本职业暴露等级。 O*NET任务显示需要分析绩效、排班、跨部门协调与决策；2025年美国招聘广告中Office和Excel各被11%的关联去重广告提及。编辑建议先试验报表汇总、草稿整理与数据核对，并记录准确性、耗时与复核成本。软件提及不是AI采用证据，技术可行、组织采用与就业结果需分别核验。"
             ]
           },
           "id": "general-and-operations-managers.ai-impact.ai-impact-table.18",
@@ -26989,12 +26985,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 50.85 美元 / 中位年薪 105,770 美元（2025 年，BLS OEWS，11-1021.00）"
+              "50,090 美元/年，24.08 美元/小时"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27003,12 +26999,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 11-1021.00 全国中位数（2025 年，BLS OEWS，经 O*NET 呈现）；边界｜中位是分布中点，不等于起薪，也不代表任一机构或地区；OEWS 不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴。"
+              "2025 年 5 月美国全国工资。；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/11-1021.00"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27017,12 +27013,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位年薪 50,090 美元（2025 年，BLS OEWS，11-1021.00）"
+              "72,320 美元/年，34.77 美元/小时"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27031,12 +27027,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜2025年美国精确职业第10分位年薪50,090美元；约10%的工资位于该位置以下。它是分布位置，不对应起薪、经验或管理幅度。"
+              "2025 年 5 月美国全国工资。；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/11-1021.00"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27045,12 +27041,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 25 分位年薪 72,320 美元（2025 年，BLS OEWS，11-1021.00）"
+              "105,770 美元/年，50.85 美元/小时"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27059,12 +27055,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国该职业的第 25 分位年薪（2025 年，BLS OEWS）；边界｜处于分布下四分位，行业与组织规模与地区与管理幅度会明显影响实际收入。"
+              "2025 年 5 月美国全国工资。；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/11-1021.00"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27073,12 +27069,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 75 分位年薪 167,280 美元（2025 年，BLS OEWS，11-1021.00）"
+              "167,280 美元/年，80.42 美元/小时"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27087,12 +27083,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜2025年美国精确职业第75分位年薪167,280美元；它是分布位置，不能推出管理幅度、损益责任或行业。"
+              "2025 年 5 月美国全国工资。；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/11-1021.00"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27101,12 +27097,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位年薪 253,390 美元（2025 年，BLS OEWS，11-1021.00）"
+              "253,390 美元/年，121.82 美元/小时"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27115,12 +27111,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜2025年美国精确职业第90分位年薪253,390美元；它不代表多数从业者，不能由该数值推断股票激励或管理资历。"
+              "2025 年 5 月美国全国工资。；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/11-1021.00"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27129,12 +27125,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 3,599,000 个岗位（2025，BLS 就业预测基期，11-1021.00）"
+              "约 3,599,000 个岗位"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27143,12 +27139,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS表1.2基期2025年约3,599,000个岗位，包含自雇；OEWS为非农机构工资薪金雇员的模型估计，不含自雇。两个统计用途与范围不同，不混用。"
+              "美国全国职业就业预测。；BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27157,12 +27153,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 约 +5%（2025—2035，BLS 就业预测，11-1021.00）"
+              "2035 年预计 3,780,300 个岗位（+5.0%）"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27171,12 +27167,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS 就业预测（2025—2035，本职业约由 3,599,000 个岗位增至 3,780,300 个岗位，变化约 +5%，BLS最新表1.2）；边界｜该变化为投影，不等于实际招聘，也不适用其他法域。"
+              "美国全国职业就业预测。；BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27185,12 +27181,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "预计年均岗位空缺约 285,000 个（2025—2035，BLS 就业预测，含增长与替补）"
+              "年均预计约 285,000 个，含替补"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27199,12 +27195,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS 就业预测的期间空缺（2025—2035 年均约 285,000 个，含增长与替补，BLS最新表1.2）；边界｜含替换需求，不可读作净新增岗位。"
+              "美国全国职业就业预测。；BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27227,7 +27223,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜本页的总经理和运营经理对应美国 SOC 11-1021.00「General and Operations Managers」，官方范围为：规划、指挥或协调公共或私营部门组织的运营，监督多个部门或多个经营场所；职责包括制定政策、管理日常运营以及规划材料与人力资源的使用，但职责过于多样与一般而无法归入任一单一管理或行政职能；通常通过下属主管实施管理；不含一线主管。任务（含核心与补充，9/8分别读）包括查看财务报表与销售或活动报告与其他绩效数据以衡量生产率或目标达成；指挥与协调与生产、定价、销售或分销有关的业务或部门活动；指挥提供产品与服务的直接相关行政活动；编制员工排班表并分配具体职责；指挥或协调财务或预算活动；规划或指挥需要与其他部门经理协作的活动；执行甄选与培训与考核等人事职能；与董事会成员与机构负责人或员工一同制定部门政策与目标与程序；监督供应商；管理物资进出生产设施；依据客户需求预测定价或设定信用条件；执行店面工作；制定或实施产品营销策略；指挥广告或采购等非销售部门；实施或监督环境管理与可持续项目；规划门店布局或设计陈列；建议新设施选址或监督改造与翻新。产出为运营指标与资源与人员计划与绩效复盘与跨部门决策与升级记录；上述为美国口径，中国大陆的岗位与法定职权与统计口径另见本页说明。"
+              "职业定义｜本页的总经理和运营经理对应美国 SOC 11-1021「General and Operations Managers」，官方范围为：规划、指挥或协调公共或私营部门组织的运营，监督多个部门或多个经营场所；职责包括制定政策、管理日常运营以及规划材料与人力资源的使用，但职责过于多样与一般而无法归入任一单一管理或行政职能；通常通过下属主管实施管理；不含一线主管。任务（含核心与补充，9/8分别读）包括查看财务报表与销售或活动报告与其他绩效数据以衡量生产率或目标达成；指挥与协调与生产、定价、销售或分销有关的业务或部门活动；指挥提供产品与服务的直接相关行政活动；编制员工排班表并分配具体职责；指挥或协调财务或预算活动；规划或指挥需要与其他部门经理协作的活动；执行甄选与培训与考核等人事职能；与董事会成员与机构负责人或员工一同制定部门政策与目标与程序；监督供应商；管理物资进出生产设施；依据客户需求预测定价或设定信用条件；执行店面工作；制定或实施产品营销策略；指挥广告或采购等非销售部门；实施或监督环境管理与可持续项目；规划门店布局或设计陈列；建议新设施选址或监督改造与翻新。产出为运营指标与资源与人员计划与绩效复盘与跨部门决策与升级记录；上述为美国口径，中国大陆的岗位与法定职权与统计口径另见本页说明。"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.24",
@@ -27493,12 +27489,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "人力资源和社会保障部：企业薪酬调查信息（岗位大类口径）｜https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
+              "义乌工资价位原表｜https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3549/site/attach/0/de9dfc30674c4e45baf5338dcf67f409.pdf"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.43",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27507,7 +27503,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜总经理和运营经理（美国 SOC 11-1021.00 General and Operations Managers；行业与招聘中常称总经理（GM）、运营总监、运营总经理、运营经理、业务经理、部门经理、区域经理、中心经理、工厂主管与门店经理等；与行政服务经理、销售经理、财务经理、工业生产经理、采购经理以及一线主管分属不同职能与授权层级）"
+              "职业名称对照｜总经理和运营经理（美国 SOC 11-1021 General and Operations Managers；行业与招聘中常称总经理（GM）、运营总监、运营总经理、运营经理、业务经理、部门经理、区域经理、中心经理、工厂主管与门店经理等；与行政服务经理、销售经理、财务经理、工业生产经理、采购经理以及一线主管分属不同职能与授权层级）"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.44",
@@ -27521,13 +27517,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得与11-1021精确对应的中国全国职业工资分布，不以层级代理代填。 中国大陆部分｜中国大陆《公司法》第74条所称公司经理依章程或董事会授权履职，高级管理人员依第180条负忠实和勤勉义务；这不自动覆盖所有运营经理、厂长或店长头衔。符合第75条的公司可由一名董事行使董事会职权。NBS2025发布中，规模以上企业中层及以上管理人员税前年平均工资210,016元是层级代理，不是本职业精确工资或中位数。工资总额含奖金等工资项目，排除股权激励兑现收益等资本性收益；统计范围以原文列明的企业范围为准，不含个体工商户和自由职业者。"
+              "湖北鄂西地质科技发展有限公司 2026 年 2 月已结束的招聘中，物业职业经理人协助主要负责人制订年度经营目标，统筹产业与商业物业运营、成本和人员。样本要求本科及以上学历和相关经验。本页所核资料未取得可与美国该职业直接对比的大陆全国岗位数、增长或年均空缺预测。"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs",
-            "operations"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -27536,13 +27531,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明｜中国公司法经理与普通运营头衔须区分，实际职责依适用法律、章程与授权。已查NBS2025行业/岗位大类表及企业薪酬调查线索，未取得本职业精确全国工资分布。210,016元仅为规模以上企业管理层级税前年均代理，非职业中位数；美国工资和预测分开列示，不跨法域换算。"
+              "先和站点主管确认可用班次与服务承诺，再按书面授权安排资源。金额、合同、人员任免或安全控制超出权限时，由相应授权人复核决定。岗位名称本身不授予企业主要负责人的权限。"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "nbs",
-            "operations"
+            "cnclass",
+            "onet"
           ],
           "type": "prose"
         },
@@ -27551,12 +27546,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局：城镇单位就业人员平均工资与规模以上企业分岗位工资统计口径说明｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              "义乌工资价位原表｜https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3549/site/attach/0/de9dfc30674c4e45baf5338dcf67f409.pdf"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27565,12 +27560,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "书面核对基础工资奖金长期激励与工时职责，是否适用以真实合同核；未核中国本职全国薪酬结构和因素因果，210,016是管理层级均值非职业中位。"
+              "金华市人社局义乌 2024 年装饰工程行业样本中，“运营主管/经理”工资第 10、25、50、75、90 分位分别为 135,203、151,107、181,481、220,739、237,301 元。表中另列“总经理/负责人”。这组数仅供义乌该行业参考，原表以元列示。本页所核资料未取得与美国 11-1021 同口径的大陆全国职业工资分布。"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27579,12 +27574,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆全国本职业工资"
+              "湖北物业运营岗位月度基础薪酬（2026 年 2 月）"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -27593,13 +27588,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆本页查阅来源未提供与美国 O*NET/SOC 11-1021.00 精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "同一湖北招聘的基础薪酬为每月 5,000–6,000 元，另有按年度考核核定的绩效薪酬。"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "nbs",
-            "operations"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -27608,13 +27602,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆地区本职业工资"
+              "大陆同口径全国职业数据"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.51",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -27622,14 +27613,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆本页查阅来源未提供与美国 O*NET/SOC 11-1021.00 精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "本页所核资料未取得可比的全国工资分布与就业预测。"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.52",
-          "source_refs": [
-            "nbs",
-            "operations"
-          ],
           "type": "prose"
         },
         {
@@ -27637,12 +27624,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆用工形式本职业工资"
+              "湖北物业运营岗位样本（2026 年 2 月）"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -27651,13 +27638,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆本页查阅来源未提供与美国 O*NET/SOC 11-1021.00 精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "湖北鄂西地质科技发展有限公司 2026 年 2 月已结束的招聘中，物业职业经理人协助主要负责人制订年度经营目标，统筹产业与商业物业运营、成本和人员。样本要求本科及以上学历和相关经验。本页所核资料未取得可与美国该职业直接对比的大陆全国岗位数、增长或年均空缺预测。"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "nbs",
-            "operations"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -27666,7 +27652,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜美国 SOC 11-1021.00 属管理类职业下的「总经理和运营经理」，与行政服务经理（11-3012.00）、销售经理（11-2022.00）、财务经理（11-3031.00）、工业生产经理（11-3051.00）、采购经理（11-3061.00）分属不同职能与授权层级；一线主管被本职业官方范围明确排除。国际职业分类（如 ISCO-08）只能说明管理类岗位的宽泛位置，不能替代美国 SOC 或中国大陆的职业分类与公司治理与统计口径。中国大陆由《公司法》与公司章程界定的经理职权与本页美国职业不是精确一一对应，两者统计口径与法律环境不同，不做数值换算。"
+              "分类对照说明｜美国 SOC 11-1021 属管理类职业下的「总经理和运营经理」，与行政服务经理（11-3012.00）、销售经理（11-2022.00）、财务经理（11-3031.00）、工业生产经理（11-3051.00）、采购经理（11-3061.00）分属不同职能与授权层级；一线主管被本职业官方范围明确排除。国际职业分类（如 ISCO-08）只能说明管理类岗位的宽泛位置，不能替代美国 SOC 或中国大陆的职业分类与公司治理与统计口径。中国大陆由《公司法》与公司章程界定的经理职权与本页美国职业不是精确一一对应，两者统计口径与法律环境不同，不做数值换算。"
             ]
           },
           "id": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.55",
@@ -27730,12 +27716,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS，2025 年）｜https://www.bls.gov/oes/；BLS 就业预测（2025—2035）｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET 11-1021.00 国家工资｜https://www.onetonline.org/link/localwages/11-1021.00；本职行业工资｜https://www.bls.gov/ooh/management/top-executives.htm；本职CA｜https://www.onetonline.org/link/localwages/11-1021.00?st=CA"
+              "O*NET 全国工资表｜https://www.onetonline.org/link/localwages/11-1021.00；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；美国 BLS 职业展望手册｜https://www.bls.gov/ooh/management/top-executives.htm"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27744,12 +27732,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 50.85 美元 / 中位年薪 105,770 美元（2025 年，BLS OEWS，11-1021.00）"
+              "50,090 美元/年，24.08 美元/小时"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27758,12 +27746,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国 11-1021.00 全国中位数（2025 年，BLS OEWS，经 O*NET 呈现）；边界｜中位是分布中点，不等于起薪，也不代表任一机构或地区；OEWS 不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴。"
+              "2025 年 5 月美国全国工资。；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/11-1021.00"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27772,12 +27760,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位年薪 50,090 美元（2025 年，BLS OEWS，11-1021.00）"
+              "72,320 美元/年，34.77 美元/小时"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27786,12 +27774,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国2025年11-1021第25分位年工资72,320美元；边界｜这是全国分布位置，不对应起薪、管理幅度、行业或资历。"
+              "2025 年 5 月美国全国工资。；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/11-1021.00"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27800,12 +27788,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 25 分位年薪 72,320 美元（2025 年，BLS OEWS，11-1021.00）"
+              "105,770 美元/年，50.85 美元/小时"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27814,12 +27802,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国该职业的第 25 分位年薪（2025 年）；边界｜处于分布下四分位，行业与组织规模与地区与管理幅度会明显影响实际收入。"
+              "2025 年 5 月美国全国工资。；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/11-1021.00"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27828,12 +27816,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 75 分位年薪 167,280 美元（2025 年，BLS OEWS，11-1021.00）"
+              "167,280 美元/年，80.42 美元/小时"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27842,12 +27830,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国2025年11-1021精确职业工资分布；边界｜第75分位是工资分布上四分位位置，不能据此认定管理幅度、行业或损益责任。"
+              "2025 年 5 月美国全国工资。；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/11-1021.00"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27856,12 +27844,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位年薪 253,390 美元（2025 年，BLS OEWS，11-1021.00）"
+              "253,390 美元/年，121.82 美元/小时"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27870,12 +27858,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国2025年11-1021精确职业工资分布；边界｜第90分位是工资分布上段，不代表多数从业者，也不表示股票激励已计入。"
+              "2025 年 5 月美国全国工资。；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/11-1021.00"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27884,12 +27872,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 3,599,000 个岗位（2025，BLS 就业预测基期，11-1021.00）"
+              "约 3,599,000 个岗位"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27898,12 +27886,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS表1.2基期2025年约3,599,000个岗位，包含自雇；边界｜与OEWS雇主工资统计用途和范围不同，不混用。"
+              "美国全国职业就业预测。；BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27912,12 +27900,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 约 +5%（2025—2035，BLS 就业预测，11-1021.00）"
+              "2035 年预计 3,780,300 个岗位（+5.0%）"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27926,12 +27914,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS 就业预测（2025—2035，本职业约 +5%，BLS最新表1.2）；边界｜该变化为投影，不等于实际招聘，也不适用其他法域。"
+              "美国全国职业就业预测。；BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27940,12 +27928,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预计年均岗位空缺约 285,000 个（2025—2035，BLS 就业预测，含增长与替补）"
+              "年均预计约 285,000 个，含替补"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27954,12 +27942,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS 就业预测的期间空缺（2025—2035 年均约 285,000 个，含增长与替补，BLS最新表1.2）；边界｜含替换需求，不可读作净新增岗位。"
+              "美国全国职业就业预测。；BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27982,12 +27970,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜美国 2025 年该职业中位时薪 50.85 美元、中位年薪 105,770 美元；分布上第 10 分位年薪 50,090 美元、第 25 分位 72,320 美元、第 75 分位 167,280 美元、第 90 分位 253,390 美元（BLS OEWS 2025 年，经 O*NET 呈现）。就业与增长取 BLS 就业预测（2025—2035）：就业由 2025 年约 3,599,000 个岗位增至 2035 年约 3,780,300 个岗位（约 +5%），期间预计年均岗位空缺约 285,000 个（含增长与替补）。中位非起薪；全国分位不证明个人差异因果或激励结构，真实合同与权限另核。"
+              "美国 2025 年 5 月 OEWS 全国年薪第 10、25、50、75、90 分位分别为 50,090、72,320、105,770、167,280、253,390 美元，时薪中位数为 50.85 美元。"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28122,12 +28110,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH本职行业年中位非行业全职业均值；当前O*NET12%专业科学技术、12%零售、76%其他未给参考年，不对应本行工资样本权重。"
+              "BLS《职业展望手册》按行业列该职业的工资中位数。"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28164,12 +28152,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH本职行业年中位非行业全职业均值；当前O*NET12%专业科学技术、12%零售、76%其他未给参考年，不对应本行工资样本权重。"
+              "BLS《职业展望手册》按行业列该职业的工资中位数。"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28178,12 +28166,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "制造业"
+              "批发贸易"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28192,12 +28180,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "130,960美元/年（2025年5月11-1021行业中位）"
+              "115,620 美元/年（2025 年 5 月，11-1021 本职业在该行业的中位数）"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28206,12 +28194,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH本职行业年中位非行业全职业均值；当前O*NET12%专业科学技术、12%零售、76%其他未给参考年，不对应本行工资样本权重。"
+              "BLS《职业展望手册》按行业列该职业的工资中位数。"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28248,12 +28236,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH本职行业年中位非行业全职业均值；当前O*NET12%专业科学技术、12%零售、76%其他未给参考年，不对应本行工资样本权重。"
+              "BLS《职业展望手册》按行业列该职业的工资中位数。"
             ]
           },
           "id": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28392,31 +28380,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "本职业（总经理和运营经理）方向",
@@ -28941,7 +28929,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "总经理和运营经理｜以可核验的运营指标与资源与人员计划与绩效复盘与跨部门决策与升级记录为产出：查看财务报表与绩效数据、把目标转成指标与资源与人员计划、指挥与协调跨部门执行、监控成本与质量与交付与客户结果、处理异常并向上级或董事会报告（美国 SOC 11-1021.00）"
+              "总经理和运营经理｜以可核验的运营指标与资源与人员计划与绩效复盘与跨部门决策与升级记录为产出：查看财务报表与绩效数据、把目标转成指标与资源与人员计划、指挥与协调跨部门执行、监控成本与质量与交付与客户结果、处理异常并向上级或董事会报告（美国 SOC 11-1021）"
             ]
           },
           "id": "general-and-operations-managers.fit.personality-fit-block.28",
@@ -30112,44 +30100,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "G1合成案例｜两服务点A/B，售后与调度由两名下属主管协调。下周已确认订单100单（A60、B40），本周完成90单、成本9,000元。常规产能A50单、B40单，已批准固定成本8,000元覆盖90单；可另买10单外包能力，每单120元，新增支出1,200元。目标：完成100单、准时交付率至少95%、成本不超过10,000元；标准工时与安全检查不得减少。模拟授权：本人可在既定计划内新增支出不超过1,000元，超过须上级书面批准；外包供应商须采购/质量复核，不得擅自变更用工、安全检查或承诺未批准订单。只用编号，不含个人信息。",
-                  "自行画指标—计算口径—目标—实际/预测—来源五列表。",
-                  "自行画资源—能力—成本—前置批准四列表。",
-                  "自行画事项—权限—复核人—升级人四列表。",
-                  "纸笔、计算器或电子表格；不执行真实采购与用工。",
-                  "计时器：90分钟；缺失实际准时率与质量结果必须标待核。"
+                  "两站调度：三单一批",
+                  "虚构纸面练习。北站当天可处理 24 单，截止前需交付 29 单。南站可处理 18 单，需交付 12 单。南站可承接北站订单，每批预留 3 单容量，每批增加 90 元，且不能挤占南站本地订单。运营经理本次授权上限为合计 100 元。超过上限的完整调度方案须由上级书面批准，且同一次调度不得拆单绕过。两站主管核实承接能力与交接，只有已获授权的容量可对外承诺。写出覆盖北站缺口的最少批数、费用、当前可承诺单量、待批事项。变式只把北站到期订单改为 27 单，重做一遍。",
+                  "在纸上作答。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "计算常规能力、缺口、外包后的总成本与单位成本；对照1,000元授权及10,000元成本上限。",
-                  "定义完成量与准时率（按期完成订单数÷已确认订单数）；给出至少两条平衡控制，列明采购、质量、上级各自核对事项。",
-                  "写出批准前与批准后各能安排多少单；质量结果与实际按期完成量没有给定，标为待核，不能把产能当交付实绩。"
+                  "交付一张两案对照表",
+                  "逐案写批数、总费用、可承诺单量与审批人。",
+                  "单独标出待批单量。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "复算基准：常规50+40=90单，缺口10单；外包10×120=1,200元，拟议成本8,000+1,200=9,200元，单位成本92元。",
-                  "本周单位成本9,000÷90=100元；拟议降8%，同时总成本上升200元（约2.22%），不是总成本下降。",
-                  "1,200元超过1,000元模拟权限，须上级批准且采购/质量复核；批准前仅有90单常规能力，不得承诺100单。准时率95%目标对应至少95单按期完成；实际准时率待核。"
+                  "完成后复核",
+                  "下方链接直达常见问题，打开折叠参考解。",
+                  "先保留你的答案。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "全部为纸面情景与假设，不构成真实经营指令、授权、资格或胜任证明；缺少真实到岗、供应商质量与交付信息，不补造。",
-                  "评判依据：算术正确，单位/口径明确，不越权、不省安全检查，并明确审批前后与实际/预测的区别。"
+                  "练习边界",
+                  "纸面模拟。实际调度按本单位授权与安全要求执行。"
                 ]
               }
             ]
           },
           "id": "general-and-operations-managers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "paper-answer-key"
           ],
-          "title": "入行练习：一次完整的运营指标与资源与人员决策任务（虚构材料）",
+          "title": "纸面试做",
           "type": "cards"
         },
         {
@@ -30168,7 +30154,7 @@
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请同伴按G1复算基准核对；若无人协助，独立重算并比对答案，注明为自核。",
+                  "用两案对照表复算，保存初稿和复核结果。",
                   "保留初稿与修改后稿，记录真实核对时间、依据及发现的错误。",
                   "展示需求—产能—成本—审批—结果口径的流程，不把纸面自核称为机构考核。"
                 ]
@@ -30256,59 +30242,60 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（读取绩效数据—目标分解与资源与人员计划—指挥与协调执行—监控结果—处理异常—按授权升级与报告）。",
-                  "记录你观察到的授权阈值与审批与报告与安全与合规与记录要求。"
+                  "读题面，抄录两站需求和容量。",
+                  "区分容量和已完成订单。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "核对工作条件：工时与值班与差旅、管理幅度与汇报关系、薪酬与绩效与激励构成、差错与经营与安全责任约定。",
-                  "写下你最不适应的一个现实成本并判断能否接受。"
+                  "标出南站必须保留的本地订单。",
+                  "按批计算可转移量。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "使用G1给定数据，完成100单目标与90单常规能力的指标/资源草案。",
-                  "列出1,000元模拟支出权限、采购/质量复核及不可减少的安全检查。"
+                  "分别判断完整方案和当前授权。",
+                  "记录需要书面审批的事项。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "复算G1的1,200元外包、9,200元总成本、92元单位成本，对比100元本周单位成本。",
-                  "说明单位成本下降8%但总成本增200元，且支出超权限，不能先执行后批准。"
+                  "只改变式要求的输入。",
+                  "另写一份答案。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "独立完成G1模拟审批与复盘：列清未批准前90单能力、批准后100单拟议能力。",
-                  "对照复算基准找出误差，未发现偏差就明确记录无算术差异，不强编两处偏差。"
+                  "写出每案可对外承诺的量。",
+                  "列出交接确认人。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请同伴挑战成本口径与权限判断；无人协助时，用同一数据反向复算并记录自核。",
-                  "记录异议与回应，不把同伴意见当正式授权。"
+                  "用折叠参考解复核两案。",
+                  "保留初次计算与修订。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "写出继续、停止或转向的判断与证据。",
-                  "列出若继续需要补齐的能力与经历（如财务与运营与人力经验、治理与合规与安全培训、职能认证或学徒），以及下一步行动。"
+                  "选一条真实岗位公告核对授权边界。",
+                  "记录一项需在面谈中确认的分工。"
                 ]
               }
             ]
           },
           "id": "general-and-operations-managers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "cnclass"
           ],
-          "title": "七天体验：用虚构材料完成一次目标分解与运营复盘闭环",
+          "title": "七天探索：从调度试做到核对岗位",
           "type": "timeline"
         },
         {
@@ -30441,13 +30428,12 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得可核验的代表性雇主招聘样本，不给岗位数量、薪酬、主要招募渠道或录用概率。查看公告时记录地点、期间、行业、管理范围、汇报与授权、学历经验、工时及薪酬构成，再判断适用性。",
-              "核对建议｜查看招聘信息时应记录发布时间、地点、行业与组织规模、管理幅度与汇报关系、是否承担损益与多站点责任、签约与支出与用工与安全控制变更的授权阈值、学历与经验与认证要求、工时与值班与差旅安排、薪酬与绩效与长期激励构成；这些信息比职位名称往往更能反映真实条件。"
+              "湖北鄂西地质科技发展有限公司 2026 年 2 月已结束的招聘中，物业职业经理人协助主要负责人制订年度经营目标，统筹产业与商业物业运营、成本和人员。样本要求本科及以上学历和相关经验。本页所核资料未取得可与美国该职业直接对比的大陆全国岗位数、增长或年均空缺预测。"
             ]
           },
           "id": "general-and-operations-managers.path.recruitment-sample.1",
           "source_refs": [
-            "onet"
+            "cnclass"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -30470,7 +30456,7 @@
                 "url": "https://www.onetonline.org/link/details/11-1021.00"
               },
               {
-                "entity": "O*NET 11-1021.00 证书目录",
+                "entity": "美国证书检索",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localcert/11-1021.00"
@@ -30494,11 +30480,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以机构招聘条件、学历与经历与考核、机构授权与治理制度与专业规程为准，也不代表取得签约或支出或用工与安全控制变更或治理与签字权限；涉及重大合同与投资与合规与人事处分的事项须按章程与制度取得批准。"
+              "先和站点主管确认可用班次与服务承诺，再按书面授权安排资源。金额、合同、人员任免或安全控制超出权限时，由相应授权人复核决定。岗位名称本身不授予企业主要负责人的权限。"
             ]
           },
           "id": "general-and-operations-managers.path.career-path-block.11",
           "source_refs": [
+            "cnclass",
             "onet"
           ],
           "type": "prose"
@@ -30620,12 +30607,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑准备路线｜核目标岗位职责学历经验和真实权限；以预算资源团队交付记录积累经验，经考核及任命承担跨职能或多场所运营，再探索扩大职责或相邻方向。美国EP典型本科5年以上经验NoneOJT，与O*NET新聘29高中27本科22未毕业大学问卷不同，不是中国统一路径或保证晋升。"
+              "美国 BLS 表 1.2 将学士学位和至少五年相关职业经验列为典型准备。表内“典型在岗培训”栏为无，具体带教和任命由雇主说明。"
             ]
           },
           "id": "general-and-operations-managers.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -30664,12 +30651,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "小结｜把路径理解为实践—训练—资格—授权—负责的循环：先完成学历与业务与项目经验与机构治理与合规与安全培训与考核，再在目标分解与资源与人员安排与指标追踪与复盘与异常处置中积累经验，通过考核后承担单职能或单站点管理并逐步扩大责任与授权；涉及签约与支出与定价与用工与安全与合规控制变更与重大合同与投资时，必须按章程与制度取得相应授权或移交董事会与专业负责人。"
+              "湖北历史招聘列出本科及以上学历及商业资产运营或物业管理经验。核对招聘时应再问汇报对象、管理站点和授权额度。"
             ]
           },
           "id": "general-and-operations-managers.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -31595,10 +31582,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET：OEWS2025本职业全国工资",
+                "entity": "O*NET 全国工资表（BLS OEWS）",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/11-1021.00?st=CA"
+                "url": "https://www.onetonline.org/link/localwages/11-1021.00"
               },
               {
                 "entity": "BLS：就业预测表1.2（2025—2035）",
@@ -31607,10 +31594,10 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "NBS：2025行业与岗位大类工资",
+                "entity": "金华市人社局：义乌市分行业分职业细类企业从业人员工资价位",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+                "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3549/site/attach/0/de9dfc30674c4e45baf5338dcf67f409.pdf"
               },
               {
                 "entity": "O*NET本职任务情境（行业另见独立入口）",
@@ -31679,12 +31666,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国口径（SOC 11-1021.00 精确职业）：2025 年中位时薪 50.85 美元、中位年薪 105,770 美元；第 10 分位年薪 50,090 美元、第 25 分位 72,320 美元、第 75 分位 167,280 美元、第 90 分位 253,390 美元（BLS OEWS 2025 年，经 O*NET 呈现）。就业与增长取 BLS 就业预测（2025—2035）：就业由 2025 年约 3,599,000 个岗位增至 2035 年约 3,780,300 个岗位（约 +5%），期间预计年均岗位空缺约 285,000 个（含增长与替补）。中国大陆部分：本页查阅来源未提供与本职业精确对应的全国职业工资分布，按证据政策本页只登记统计口径与缺口，并提供一条明确标注的管理层级代理（规模以上企业中层及以上管理人员年平均工资），不提供本职业精确数值。"
+              "BLS 表 1.2 显示，美国职业 11-1021 就业从 2025 年的约 3,599,000 个岗位增至 2035 年预计约 3,780,300 个（+5.0%），年均预计约有 285,000 个职位空缺，含替补。 湖北鄂西地质科技发展有限公司 2026 年 2 月已结束的招聘中，物业职业经理人协助主要负责人制订年度经营目标，统筹产业与商业物业运营、成本和人员。样本要求本科及以上学历和相关经验。本页所核资料未取得可与美国该职业直接对比的大陆全国岗位数、增长或年均空缺预测。"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "ep",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -31698,7 +31686,7 @@
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31707,12 +31695,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31721,12 +31709,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS精确行预测增长5.0%，年均空缺含增长与替换；这些全国模型结果不证明本职业个人前景或AI采用原因。"
+              "美国全国预测，含替补。"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31735,12 +31723,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国全国就业预测，包含自雇；不适用于中国大陆。基期与终期为岗位数，空缺含增长与替换；预测不是实际招聘数，与OEWS时点估计不混用。"
+              "美国全国预测，含替补。"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31749,12 +31737,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业规模与增长与岗位空缺"
+              "就业规模与变化"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31763,12 +31751,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC11-1021，本轮直接BLS EP2025—2035，非O*NET旧期展示"
+              "11-1021"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31777,12 +31765,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业由 2025 年约 3,599,000 个岗位增至 2035 年约 3,780,300 个岗位，变化约 +5%；期间预计年均岗位空缺约 285,000 个"
+              "BLS 表 1.2 显示，美国职业 11-1021 就业从 2025 年的约 3,599,000 个岗位增至 2035 年预计约 3,780,300 个（+5.0%），年均预计约有 285,000 个职位空缺，含替补。"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31796,7 +31784,7 @@
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31805,12 +31793,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31819,12 +31807,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "全国与CA及四行业本职工资分别核；其他行业地区资历分组未取，不由全国分位推个人工资原因。"
+              "美国全国预测，含替补。"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31833,12 +31821,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS 不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴；数值取自 2025 年数据，后续更新应以当期查询为准。"
+              "美国全国预测，含替补。"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31847,12 +31835,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "工资（中位与分位）"
+              "预计年均空缺"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31861,12 +31849,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 11-1021.00（OEWS 2025 年，经 O*NET 呈现）"
+              "11-1021"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31875,12 +31863,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位时薪 50.85 美元、中位年薪 105,770 美元；第 10 分位 50,090、第 25 分位 72,320、第 75 分位 167,280、第 90 分位 253,390（美元/年）"
+              "预计年均约 285,000 个，含替补。"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31889,12 +31877,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆"
+              "中国大陆·义乌"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31903,12 +31891,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2024"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31917,12 +31905,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国岗位名称、治理主体与统计范围须分别核对；本页未取得职业精确全国工资，层级代理仅作参考，不外推个人收入。"
+              "义乌地区单一行业样本。"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31931,12 +31919,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "法律环境与统计口径不同，不做拼接与换算；本页中国部分只登记统计口径与可见缺口与管理层级代理。"
+              "义乌地区单一行业样本。"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31945,12 +31933,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "职业工资与就业（统计口径与缺口）"
+              "2024 年义乌装饰工程样本工资中位数"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31959,12 +31947,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局城镇单位就业人员平均工资（行业门类口径）与管理层级代理与有界检索"
+              "装饰工程行业运营主管/经理"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31973,12 +31961,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆本页查阅来源未提供与美国 O*NET/SOC 11-1021.00 精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页展示缺失而不使用代理数字充当本职业精确值。"
+              "181,481 元"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32015,12 +32003,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对中国大陆的统计口径与缺口与管理层级代理，美国工资不可直接外推至中国大陆同岗位；本页只登记统计口径与可见缺口与代理边界。"
+              "义乌装饰工程行业的地方样本，纸页 15 第 8 行。"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32029,7 +32017,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职任务情境，不直接行业工资；当前industry12/12/76无参考年，非招聘或中国映射。"
+              "核对职业任务、范围与工作情境。"
             ]
           },
           "id": "general-and-operations-managers.market-signals.market-signal-card.33",
@@ -32388,9 +32376,18 @@
           "data": {
             "entries": [
               {
-                "answer": "本页的总经理和运营经理对应美国 SOC 11-1021.00：规划、指挥或协调公共或私营部门组织的运营，监督多个部门或多个经营场所；职责包括制定政策、管理日常运营以及规划材料与人力资源的使用，但职责过于多样与一般而无法归入任一单一管理或行政职能；通常通过下属主管实施管理；不含一线主管。核心工作包括查看财务报表与销售或活动报告与其他绩效数据以衡量生产率或目标达成；指挥与协调与生产、定价、销售或分销有关的业务或部门活动；编制员工排班表并分配具体职责；指挥或协调财务或预算活动；监督供应商并管理物资进出生产设施；依据客户需求预测定价或设定信用条件；执行甄选与培训与考核等人事职能；与董事会成员与机构负责人或员工一同制定部门政策与目标与程序；处理异常并向上级或董事会报告。常见用人单位覆盖制造、零售、建筑、专业服务与公共服务等组织的运营部门；本页所述为美国职业分类口径。",
+                "answer": "原题北站缺 5 单，南站余 6 单。至少两批可覆盖缺口，费用合计 180 元。先提交整笔方案书面审批，审批前只承诺北站自有的 24 单，不把任何外援批次算入承诺。获批且两站确认交接后可承诺北站全部 29 单。变式北站缺 3 单，一批 90 元即可覆盖，确认交接后可承诺全部 27 单。南站原有 12 单在两案中均保留。",
+                "id": "general-and-operations-managers.faq.paper-exercise",
+                "question": "纸面练习参考解",
+                "question_key": "career.faq.general-and-operations-managers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
+              },
+              {
+                "answer": "综合运营经理统筹多个部门或地点的日常运营，和各地主管核对交付量、安排人力与物料，并跟进跨团队异常。美国职业 11-1021 排除只负责一线班组的主管。企业主要负责人通常承担更广的战略和治理职责，实际分工看组织授权。",
                 "id": "general-and-operations-managers.faq.1",
-                "question": "这个职业具体做什么？",
+                "question": "总经理和运营经理做什么？",
                 "question_key": "career.faq.general-and-operations-managers.q1",
                 "source_refs": [
                   "onet",
@@ -32398,20 +32395,20 @@
                 ]
               },
               {
-                "answer": "核心区别在对象与授权层级：本职业以跨多个部门或经营场所的日常运营为对象，产出是可核验的运营指标与资源计划与绩效复盘与跨部门决策与升级记录；行政服务经理（11-3012.00）以行政与设施与记录等支持职能为对象；销售经理（11-2022.00）以销售目标与销售团队与客户关系为对象；财务经理（11-3031.00）以财务规划与报告与资金与风险控制为对象；工业生产经理（11-3051.00）以生产计划与制造过程与产能与质量与安全为对象；采购经理（11-3061.00）以采购与供应商与合同执行为对象；一线主管被本职业官方范围明确排除。对象与授权层级各不相同，不能跨岗位沿用预算与签约与定价与用工与安全控制变更的权限。",
+                "answer": "综合运营经理统筹多个部门或地点的日常运营，和各地主管核对交付量、安排人力与物料，并跟进跨团队异常。美国职业 11-1021 排除只负责一线班组的主管。企业主要负责人通常承担更广的战略和治理职责，实际分工看组织授权。 先和站点主管确认可用班次与服务承诺，再按书面授权安排资源。金额、合同、人员任免或安全控制超出权限时，由相应授权人复核决定。岗位名称本身不授予企业主要负责人的权限。",
                 "id": "general-and-operations-managers.faq.2",
-                "question": "它和相邻岗位有什么区别？",
+                "question": "和企业主要负责人有什么区别？",
                 "question_key": "career.faq.general-and-operations-managers.q2",
                 "source_refs": [
                   "onet",
-                  "r2-pay-2",
-                  "r2-pay-3"
+                  "bls",
+                  "cnclass"
                 ]
               },
               {
-                "answer": "美国口径（SOC 11-1021.00 精确职业）：2025 年中位时薪 50.85 美元、中位年薪 105,770 美元；第 10 分位年薪 50,090 美元、第 25 分位 72,320 美元、第 75 分位 167,280 美元、第 90 分位 253,390 美元（BLS OEWS 2025 年，经 O*NET 呈现）。就业与增长取 BLS 就业预测（2025—2035）：就业由 2025 年约 3,599,000 个岗位增至 2035 年约 3,780,300 个岗位（约 +5%），期间预计年均岗位空缺约 285,000 个（含增长与替补）。上述为美国全国口径，不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴，不适用其他法域。",
+                "answer": "美国 2025 年 5 月 OEWS 全国年薪第 10、25、50、75、90 分位分别为 50,090、72,320、105,770、167,280、253,390 美元，时薪中位数为 50.85 美元。 BLS 表 1.2 显示，美国职业 11-1021 就业从 2025 年的约 3,599,000 个岗位增至 2035 年预计约 3,780,300 个（+5.0%），年均预计约有 285,000 个职位空缺，含替补。",
                 "id": "general-and-operations-managers.faq.3",
-                "question": "美国工资和就业情况如何？",
+                "question": "美国工资和就业前景如何？",
                 "question_key": "career.faq.general-and-operations-managers.q3",
                 "source_refs": [
                   "oews",
@@ -32419,9 +32416,9 @@
                 ]
               },
               {
-                "answer": "本页未取得与11-1021精确对应的中国全国职业工资分布。已查NBS2025行业与岗位大类表；210,016元是规模以上企业中层及以上管理人员的税前年平均工资，只作层级代理，非本职业精确工资或中位数。范围及奖金口径见中国薪资说明，不跨法域换算。",
+                "answer": "金华市人社局义乌 2024 年装饰工程行业样本中，“运营主管/经理”工资第 10、25、50、75、90 分位分别为 135,203、151,107、181,481、220,739、237,301 元。表中另列“总经理/负责人”。这组数仅供义乌该行业参考，原表以元列示。本页所核资料未取得与美国 11-1021 同口径的大陆全国职业工资分布。 湖北鄂西地质科技发展有限公司 2026 年 2 月已结束的招聘中，物业职业经理人协助主要负责人制订年度经营目标，统筹产业与商业物业运营、成本和人员。样本要求本科及以上学历和相关经验。本页所核资料未取得可与美国该职业直接对比的大陆全国岗位数、增长或年均空缺预测。 同一湖北招聘的基础薪酬为每月 5,000–6,000 元，另有按年度考核核定的绩效薪酬。",
                 "id": "general-and-operations-managers.faq.4",
-                "question": "中国大陆有对应的工资数据吗？",
+                "question": "大陆工资和就业可以参考什么？",
                 "question_key": "career.faq.general-and-operations-managers.q4",
                 "source_refs": [
                   "nbs",
@@ -32429,9 +32426,9 @@
                 ]
               },
               {
-                "answer": "O*NET 11-1021.00 的工作情境显示：决策频率 93% 表示「每天」；自由决策程度 86% 表示「很大自由」；电子邮件 88% 每天与电话 88% 每天与当面讨论 86% 每天；与他人持续接触 76%；在团队中工作 79% 表示「极其重要」；协调或带领他人 57% 表示「极其重要」；对他人健康与安全 61% 表示「很高责任」；对同事或公司结果影响 72% 表示「非常重要结果」；与外部客户或公众打交道 61% 表示「极其重要」；典型工作周 70% 表示「多于 40 小时」；室内环境受控 80% 每天；与不愉快的人打交道 59% 表示「每月或更多但非每周」。工作以决策密集、沟通密集、责任重、工时长为特点。",
+                "answer": "各站点主管提供产能、班次与异常，经理把口径对齐后协调跨站资源，指定交接责任人和复核时间。关注实际完成量、等待时长和质量结果。",
                 "id": "general-and-operations-managers.faq.5",
-                "question": "工作环境和沟通强度如何？",
+                "question": "日常工作怎样和各站点协作？",
                 "question_key": "career.faq.general-and-operations-managers.q5",
                 "source_refs": [
                   "onet",
@@ -32439,55 +32436,50 @@
                 ]
               },
               {
-                "answer": "证据不足：本页未取得11-1021精确对应的AI暴露评分、组织采用率或效率效果研究。O*NET支持报表分析、排班与跨部门决策的任务描述；可先用合成数据试验汇总、草稿与核对，记录准确性、耗时和复核成本。2025招聘广告中Office与Excel各有11%提及不是AI采用率；签约、用工、安全控制与结果责任仍按机构授权办理，不由工具产生权限。",
+                "answer": "可用虚构数据试做报表汇总或交接草稿，记录漏项与复核成本。人负责核对原记录、授权与对外承诺。本页所核资料未取得该职业的 AI 采用率或效率测量。",
                 "id": "general-and-operations-managers.faq.6",
-                "question": "AI 会影响这个职业吗？",
+                "question": "AI 可以辅助哪些任务？",
                 "question_key": "career.faq.general-and-operations-managers.q6",
                 "source_refs": [
-                  "bls",
-                  "onet-wages",
-                  "nist"
+                  "onet"
                 ]
               },
               {
-                "answer": "美国 O*NET 将本职业（11-1021.00）列入 Job Zone Four（较高准备），该准备类别的通用说明为多数职业要求本科，并需较多经验与培训；它不是本职业多数受访者要求本科的统计结论；O*NET 受访者中 27% 表示要求本科学位。该描述不取代雇主对经验与资质与治理培训的要求；常见培训路径包括工商管理等专业课程与内部管理培养项目与注册学徒（如 Operations Management），实际以机构与岗位要求为准。",
+                "answer": "美国 BLS 表 1.2 将学士学位和至少五年相关职业经验列为典型准备。表内“典型在岗培训”栏为无，具体带教和任命由雇主说明。 湖北鄂西地质科技发展有限公司 2026 年 2 月已结束的招聘中，物业职业经理人协助主要负责人制订年度经营目标，统筹产业与商业物业运营、成本和人员。样本要求本科及以上学历和相关经验。本页所核资料未取得可与美国该职业直接对比的大陆全国岗位数、增长或年均空缺预测。",
                 "id": "general-and-operations-managers.faq.7",
-                "question": "需要什么学历和培训？",
+                "question": "需要什么学历和经验？",
                 "question_key": "career.faq.general-and-operations-managers.q7",
                 "source_refs": [
-                  "onet",
-                  "bls",
-                  "r2-pay-1"
+                  "ep",
+                  "cnclass"
                 ]
               },
               {
-                "answer": "学位、培训、行业认证、学徒结业、机构考核与实际授权须分别核对。O*NET证书目录仅供发现，不授予签约、支出、用工、安全控制或专业签字权限。中国公司法第74条的公司经理依章程或董事会授权履职，第180条规定高级管理人员忠实与勤勉义务；普通运营头衔不自动属于该法定身份。具体岗位依适用法律、章程与书面授权办理，学历或证书不自动产生权限。",
+                "answer": "先和站点主管确认可用班次与服务承诺，再按书面授权安排资源。金额、合同、人员任免或安全控制超出权限时，由相应授权人复核决定。岗位名称本身不授予企业主要负责人的权限。",
                 "id": "general-and-operations-managers.faq.8",
-                "question": "需要证书或资格吗？",
+                "question": "谁批准用人、预算和安全控制变更？",
                 "question_key": "career.faq.general-and-operations-managers.q8",
                 "source_refs": [
-                  "purchasing-managers",
-                  "operations"
+                  "cnclass",
+                  "onet"
                 ]
               },
               {
-                "answer": "常见失效包括：未经授权签约或支出或定价或用工或绕过审批阈值；指标定义失真或驱动错误行为或为追求产量与成本弱化安全与质量与环保控制；经营与人事与考核与安全记录不实、缺失或无痕篡改；以经理头衔代行董事会或专业签字权限；关键职能或客户或供应商由单一人承担导致运营中断；供应商交付与验收与客户承诺不清。控制要点是按章程与授权与制度核对与审批与留痕与升级、以人员安全与环境与客户资产保护优先，并对指标设置平衡与护栏。",
+                "answer": "常见的风险场景是把计划容量当成已完成量，或把待批容量写进客户承诺。把可用、待批和已确认分别列出，由站点主管核交接，超限事项交授权人。",
                 "id": "general-and-operations-managers.faq.9",
-                "question": "这个职业有哪些主要风险？",
+                "question": "跨站调度最容易在哪一步出错？",
                 "question_key": "career.faq.general-and-operations-managers.q9",
                 "source_refs": [
-                  "onet",
-                  "nist"
+                  "onet"
                 ]
               },
               {
-                "answer": "美国口径下本职业 2025—2035 年就业约 +5%（由约 3,599,000 个岗位增至约 3,780,300 个岗位），期间年均约 285,000 个空缺（含增长与替补）；行业周期、组织规模、流程数字化与管理层替换会影响用工。可转向采购经理、行政服务经理、设施经理、人力资源经理、医疗卫生服务经理、财务经理、销售经理与工业生产经理等相邻管理岗位，或向供应链、项目群与职能领导与创业经营方向延伸（需重新学习与补足行业与财务深度）。中国大陆相关岗位与统计口径另见本页说明。",
+                "answer": "BLS 表 1.2 显示，美国职业 11-1021 就业从 2025 年的约 3,599,000 个岗位增至 2035 年预计约 3,780,300 个（+5.0%），年均预计约有 285,000 个职位空缺，含替补。",
                 "id": "general-and-operations-managers.faq.10",
-                "question": "前景如何、能转向哪些方向？",
+                "question": "美国就业预测里的空缺包括什么？",
                 "question_key": "career.faq.general-and-operations-managers.q10",
                 "source_refs": [
-                  "ep",
-                  "onet"
+                  "ep"
                 ]
               }
             ]
@@ -32503,7 +32495,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对美国 SOC 11-1021.00（总经理和运营经理）的官方范围与 O*NET 的任务与工作活动与工作情境与兴趣代码与工作风格与证书目录与培训机会，再取 BLS OEWS 2025 年的全国中位与分位工资（O*NET工资页；BLS表1.2提供中位但非五分位），以及 BLS 就业预测 2025—2035 的就业与增长与空缺；以 O*NET 行业分布与热门技术（49 项软件技能）作为行业与数字工具提示；治理与授权以《中华人民共和国公司法》与公司章程与董事会决议为参照，安全与合规与劳动保护以主管机关与机构制度为参照，数据保护以《中华人民共和国个人信息保护法》为参照；中国大陆按统计口径与证据政策展示缺失与管理层级代理而不提供本职业精确数值。"
+              "来源卡｜研究流程：先核对美国 SOC 11-1021（总经理和运营经理）的官方范围与 O*NET 的任务与工作活动与工作情境与兴趣代码与工作风格与证书目录与培训机会，再取 BLS OEWS 2025 年的全国中位与分位工资（O*NET工资页；BLS表1.2提供中位但非五分位），以及 BLS 就业预测 2025—2035 的就业与增长与空缺；以 O*NET 行业分布与热门技术（49 项软件技能）作为行业与数字工具提示；治理与授权以《中华人民共和国公司法》与公司章程与董事会决议为参照，安全与合规与劳动保护以主管机关与机构制度为参照，数据保护以《中华人民共和国个人信息保护法》为参照；中国大陆按统计口径与证据政策展示缺失与管理层级代理而不提供本职业精确数值。"
             ]
           },
           "id": "general-and-operations-managers.sources.source-card.1",
@@ -32517,12 +32509,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜来源登记：本页的来源登记列出 O*NET 11-1021.00 的职业档案与详细资料与就业趋势与职业兴趣与国家工资与热门技术与行业分布与国家培训与证书目录、BLS 职业就业与工资统计（OEWS 2025 年）与就业预测（2025—2035）与方法说明与就业预测总览与就业预测教育与培训对照表与 2018 SOC 直接匹配标题文件、行政服务经理（11-3012.00）与销售经理（11-2022.00）等相邻职业条目、O*NET 数据库、国家统计局城镇单位就业人员平均工资与规模以上企业分岗位工资与人力资源和社会保障部企业薪酬调查信息、《中华人民共和国公司法》与《中华人民共和国个人信息保护法》与安全生产主管机关（应急管理部）与市场监管主管机关与职业健康主管机关（国家卫生健康委员会）与国家法律法规数据库、国际劳工组织生成式 AI 与就业暴露研究、NIST 人工智能风险管理框架，以及 FermatMind 口径规则；每条事实的 source_refs 均指向该登记内的 id。"
+              "O*NET 职业任务与美国全国工资，BLS 表 1.2 就业预测，金华人社局义乌行业工资及湖北雇主公告。"
             ]
           },
           "id": "general-and-operations-managers.sources.source-card.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "ep",
+            "nbs",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -32531,12 +32527,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜本轮于2026-10-02核对O*NET任务/情境/学历/兴趣与软件招聘提及，工资为OEWS2025，行业为O*NET2024背景；就业改用BLS2025—2035表1.2，因为O*NET仍展示旧预测。中国代理为NBS2025数据、2026-05-15发布；公司法为2023修订、2024-07-01施行。历史查阅凭证保留。"
+              "资料核对：2026 年 11 月 10 日"
             ]
           },
           "id": "general-and-operations-managers.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "ep",
+            "oews",
+            "nbs",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -32545,12 +32544,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得中国本职业精确全国工资及美国本职业其他行业、地区及资历分组工资。NBS2025年210,016元是规模以上企业中层及以上管理人员税前平均工资代理，不是本职业精确值或中位数；工资总额可包含奖金，不包含股权激励兑现收益等资本性收益。各缺口与法域分别标注，不代填。 本轮4行业中位及CA124,390/59.81已核，当前12/12/76未标参考年，旧登记和查阅日期分别保留。"
+              "美国工资采用 O*NET 展示的 BLS OEWS，全国就业预测用 BLS 表 1.2。义乌工资与湖北招聘是各自独立的地方证据。"
             ]
           },
           "id": "general-and-operations-managers.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "ep",
+            "oews",
+            "nbs",
+            "cnclass"
           ],
           "type": "prose"
         }
@@ -32568,34 +32570,34 @@
           "data": {
             "entries": [
               {
-                "entity": "总经理和运营经理相关方向 1",
+                "entity": "探索我的职业兴趣",
                 "id": "navigation-1",
                 "relation": "related-evidence",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "总经理和运营经理相关方向 2",
+                "entity": "大五人格测评",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "总经理和运营经理相关方向 3",
+                "entity": "MBTI 偏好测评",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "总经理和运营经理相关方向 4",
+                "entity": "推理测评",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "总经理和运营经理相关方向 5",
+                "entity": "情绪能力测评",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "总经理和运营经理相关方向 6",
@@ -32622,10 +32624,10 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于界定本职业的官方范围与任务与工作情境与兴趣代码与工作风格。",
-                  "用于核对本页任务与工作情境与工作活动表述。"
+                  "综合运营经理统筹多个部门或地点的日常运营，和各地主管核对交付量、安排人力与物料，并跟进跨团队异常。美国职业 11-1021 排除只负责一线班组的主管。企业主要负责人通常承担更广的战略和治理职责，实际分工看组织授权。",
+                  "查看任务和工作情境。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
@@ -32634,88 +32636,87 @@
                 "name": "O*NET OnLine：总经理和运营经理职业档案（11-1021.00）",
                 "period": "O*NET updated 2026; accessed 2026-09-21",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "11-1021.00 exact occupation",
-                "url": "https://www.onetonline.org/link/summary/11-1021.00"
+                "scope": "11-1021.00",
+                "url": "https://www.onetonline.org/link/details/11-1021.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对 17 项任务的重要性与工作活动与详细工作活动。",
-                  "用于核对工作情境中的决策频率与责任与工时指标。"
+                  "综合运营经理统筹多个部门或地点的日常运营，和各地主管核对交付量、安排人力与物料，并跟进跨团队异常。美国职业 11-1021 排除只负责一线班组的主管。企业主要负责人通常承担更广的战略和治理职责，实际分工看组织授权。",
+                  "职业职责见手册。"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "bls",
                 "limitation": "职业级描述，不构成任职或授权依据。",
                 "market": "美国",
-                "name": "O*NET OnLine：总经理和运营经理详细资料（11-1021.00）",
-                "period": "O*NET updated 2026; accessed 2026-09-21",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "11-1021.00 exact occupation",
-                "url": "https://www.onetonline.org/link/details/11-1021.00"
+                "name": "美国 BLS 职业展望手册",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "11-1021",
+                "url": "https://www.bls.gov/ooh/management/top-executives.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "11-1021：2025年3,599,000、2035年3,780,300个岗位；净增181,300，增长5.0%。",
-                  "年均空缺285,000个，含增长与替换；基期含自雇，不能套用OEWS范围。"
+                  "BLS 表 1.2 显示，美国职业 11-1021 就业从 2025 年的约 3,599,000 个岗位增至 2035 年预计约 3,780,300 个（+5.0%），年均预计约有 285,000 个职位空缺，含替补。",
+                  "美国 BLS 表 1.2 将学士学位和至少五年相关职业经验列为典型准备。表内“典型在岗培训”栏为无，具体带教和任命由雇主说明。"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
                 "limitation": "投影含替换需求；不等于实际招聘。",
                 "market": "美国",
-                "name": "BLS：2025—2035职业就业预测与特征（表1.2）",
-                "period": "2025—2035",
+                "name": "BLS 就业预测表 1.2",
+                "period": "2025–2035",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "11-1021.00 exact occupation",
+                "scope": "11-1021",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对中位时薪 50.85 美元 / 中位年薪 105,770 美元与第 10/25/75/90 分位（50,090 / 72,320 / 167,280 / 253,390 美元/年）。",
-                  "用于说明工资分位不是经验等级，也不等于个人起薪。"
+                  "美国 2025 年 5 月 OEWS 全国年薪第 10、25、50、75、90 分位分别为 50,090、72,320、105,770、167,280、253,390 美元，时薪中位数为 50.85 美元。"
                 ],
                 "evidence_type": "official wage display",
                 "id": "oews",
                 "limitation": "全国口径，不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴；本职业分位跨度很大。",
                 "market": "美国",
-                "name": "O*NET OnLine：总经理和运营经理国家工资（11-1021.00）",
-                "period": "2025 BLS OEWS wage data via O*NET",
+                "name": "O*NET 全国工资表（BLS OEWS）",
+                "period": "2025-05",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "11-1021.00 exact occupation",
+                "scope": "11-1021",
                 "url": "https://www.onetonline.org/link/localwages/11-1021.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于说明中国大陆按行业门类公布平均工资、不拆分职业，并公布规模以上企业分岗位工资。",
-                  "本页以规模以上企业中层及以上管理人员年均工资作为管理层级代理并标注边界，不作为本职业精确值。"
+                  "金华市人社局义乌 2024 年装饰工程行业样本中，“运营主管/经理”工资第 10、25、50、75、90 分位分别为 135,203、151,107、181,481、220,739、237,301 元。表中另列“总经理/负责人”。这组数仅供义乌该行业参考，原表以元列示。本页所核资料未取得与美国 11-1021 同口径的大陆全国职业工资分布。",
+                  "原表纸页 15 第 8 行。"
                 ],
                 "evidence_type": "official statistics release",
                 "id": "nbs",
-                "limitation": "行业门类口径不区分职业；管理层级代理不区分本职业。",
+                "limitation": "地方行业调查样本。",
                 "market": "中国大陆",
-                "name": "国家统计局：城镇单位就业人员平均工资与规模以上企业分岗位工资统计口径与发布",
-                "period": "2025 data; accessed 2026-09-21",
-                "publisher": "国家统计局",
-                "scope": "industry-level and size-above enterprise occupation-band reference",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+                "name": "金华市人社局：义乌市分行业分职业细类企业从业人员工资价位",
+                "period": "2024",
+                "publisher": "金华市人力资源和社会保障局",
+                "scope": "义乌装饰工程行业，纸页 15 第 8 行",
+                "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3549/site/attach/0/de9dfc30674c4e45baf5338dcf67f409.pdf"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "证据不足：本页未取得中国11-1021精确对应的职业工资分布；企业薪酬调查大类线索不作为本职业精确值。",
-                  "不将大类代理作为本职业工资。"
+                  "湖北鄂西地质科技发展有限公司 2026 年 2 月已结束的招聘中，物业职业经理人协助主要负责人制订年度经营目标，统筹产业与商业物业运营、成本和人员。样本要求本科及以上学历和相关经验。本页所核资料未取得可与美国该职业直接对比的大陆全国岗位数、增长或年均空缺预测。",
+                  "同一湖北招聘的基础薪酬为每月 5,000–6,000 元，另有按年度考核核定的绩效薪酬。"
                 ],
-                "evidence_type": "official survey release",
+                "evidence_type": "历史雇主招聘公告",
                 "id": "cnclass",
-                "limitation": "为岗位大类聚合口径，未建立与本职业精确对应的统计值。",
+                "limitation": "公告已结束。",
                 "market": "中国大陆",
-                "name": "人力资源和社会保障部：企业薪酬调查信息",
-                "period": "2025 survey; accessed 2026-09-21",
-                "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "occupation major class proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
+                "name": "湖北鄂西地质科技发展有限公司：物业职业经理人招聘启事",
+                "period": "2026-02-02",
+                "publisher": "湖北鄂西地质科技发展有限公司",
+                "scope": "历史单一雇主公告",
+                "url": "https://dzj.hubei.gov.cn/qd/xwzx/tzgg/202602/t20260202_5868447.shtml"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -33008,35 +33009,34 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "专业科学技术服务12%、零售12%；美国2024年行业背景。",
-                  "76%为按已显示取整数计算的余数，不提供建筑等内部细分份额。"
+                  "用于核对日常运营、人员排班、预算和跨部门协调。",
+                  "工资与分行业口径分别采用 BLS 对应来源。"
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "职业任务原页",
                 "id": "archivists",
-                "limitation": "行业分布为美国口径，不建立中国大陆映射。",
+                "limitation": "用于任务对照。",
                 "market": "美国",
-                "name": "O*NET OnLine：总经理和运营经理行业分布（11-1021.00）",
-                "period": "Top industries (2024)",
+                "name": "O*NET 11-1021.00 职业任务",
+                "period": "O*NET 职业资料",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "11-1021.00 exact occupation",
-                "url": "https://www.onetonline.org/link/details/11-1021.00#Industries"
+                "scope": "美国职业任务",
+                "url": "https://www.onetonline.org/link/details/11-1021.00"
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "查看财务报表与销售或活动报告与其他绩效数据以衡量生产率或目标达成 — 75/100; weight=1/3; general-and-operations-managers.ai-impact.ai-impact-table.95[0]",
-                  "编制员工排班表并分配具体职责并执行人事职能 — 50/100; weight=1/3; general-and-operations-managers.ai-impact.ai-impact-table.103[0]",
-                  "识别成本超支或质量事故或供应中断或客户投诉并界定责任与时限 — 25/100; weight=1/3; general-and-operations-managers.ai-impact.ai-impact-table.115[0]"
+                  "题面数据和授权均为虚构。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "paper-exercise",
+                "name": "两站调度：三单一批",
+                "url": "#career-content-path"
+              },
+              {
+                "details": [
+                  "完成原题与变式后打开。"
+                ],
+                "id": "paper-answer-key",
+                "name": "纸面练习参考解",
+                "url": "#career-content-sources"
               }
             ]
           },
@@ -35550,7 +35550,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "薪资 · 10 分位",
+              "指标": "美国工资 · 第 10 分位",
               "数值": {
                 "$item": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -35565,7 +35565,7 @@
               }
             },
             {
-              "指标": "薪资 · 25 分位",
+              "指标": "美国工资 · 第 25 分位",
               "数值": {
                 "$item": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -35580,7 +35580,7 @@
               }
             },
             {
-              "指标": "薪资 · 中位数",
+              "指标": "美国工资 · 第 50 分位",
               "数值": {
                 "$item": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -35595,7 +35595,7 @@
               }
             },
             {
-              "指标": "薪资 · 75 分位",
+              "指标": "美国工资 · 第 75 分位",
               "数值": {
                 "$item": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -35610,7 +35610,7 @@
               }
             },
             {
-              "指标": "薪资 · 90 分位",
+              "指标": "美国工资 · 第 90 分位",
               "数值": {
                 "$item": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.15",
                 "block": "china-salary",
@@ -35625,7 +35625,7 @@
               }
             },
             {
-              "指标": "就业 · 就业规模",
+              "指标": "美国就业岗位（2025）",
               "数值": {
                 "$item": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.17",
                 "block": "china-salary",
@@ -35640,7 +35640,7 @@
               }
             },
             {
-              "指标": "就业 · 增长率",
+              "指标": "美国预计就业变化（2025—2035）",
               "数值": {
                 "$item": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.19",
                 "block": "china-salary",
@@ -35655,7 +35655,7 @@
               }
             },
             {
-              "指标": "就业 · 年均职位空缺",
+              "指标": "美国年均职位空缺（2025—2035）",
               "数值": {
                 "$item": "general-and-operations-managers.china-salary.career-snapshot-primary-locale.21",
                 "block": "china-salary",
@@ -35903,7 +35903,7 @@
           "ui": {
             "ai_heading": "AI 会影响总经理和运营经理的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
+            "official_heading": "大陆工资参照与就业资料",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "总经理和运营经理在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35934,7 +35934,7 @@
         "bls_table": [
           {
             "fact_ref": "us-wage-low10-2025",
-            "指标": "薪资 · 10 分位",
+            "指标": "美国工资 · 第 10 分位",
             "数值": {
               "$item": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35950,7 +35950,7 @@
           },
           {
             "fact_ref": "us-wage-q25-2025",
-            "指标": "薪资 · 25 分位",
+            "指标": "美国工资 · 第 25 分位",
             "数值": {
               "$item": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.11",
               "block": "us-salary",
@@ -35966,7 +35966,7 @@
           },
           {
             "fact_ref": "us-wage-2025",
-            "指标": "薪资 · 中位数",
+            "指标": "美国工资 · 第 50 分位",
             "数值": {
               "$item": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.13",
               "block": "us-salary",
@@ -35982,7 +35982,7 @@
           },
           {
             "fact_ref": "us-wage-q75-2025",
-            "指标": "薪资 · 75 分位",
+            "指标": "美国工资 · 第 75 分位",
             "数值": {
               "$item": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.15",
               "block": "us-salary",
@@ -35998,7 +35998,7 @@
           },
           {
             "fact_ref": "us-wage-high10-2025",
-            "指标": "薪资 · 90 分位",
+            "指标": "美国工资 · 第 90 分位",
             "数值": {
               "$item": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.17",
               "block": "us-salary",
@@ -36014,7 +36014,7 @@
           },
           {
             "fact_ref": "us-employment-2025",
-            "指标": "就业 · 就业规模",
+            "指标": "美国就业岗位（2025）",
             "数值": {
               "$item": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.19",
               "block": "us-salary",
@@ -36030,7 +36030,7 @@
           },
           {
             "fact_ref": "us-growth-2025-2035",
-            "指标": "就业 · 增长率",
+            "指标": "美国预计就业变化（2025—2035）",
             "数值": {
               "$item": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.21",
               "block": "us-salary",
@@ -36046,7 +36046,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "就业 · 年均职位空缺",
+            "指标": "美国年均职位空缺（2025—2035）",
             "数值": {
               "$item": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -36268,54 +36268,57 @@
           "field": "period"
         },
         "wage_column_labels": [
-          "工资统计位置",
-          "年工资参考",
-          "折算边界",
-          "怎样理解这个位置"
+          "分位",
+          "年薪",
+          "时薪",
+          "口径"
         ],
         "wage_heading": "美国工资分布",
         "wage_tiers": [
           {
-            "equivalent": "官方年工资，非个人月收入",
+            "equivalent": "24.08 美元/小时",
             "interpretation": {
               "$item": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "第10百分位",
-            "value": {
-              "$fact": "us-wage-low10-2025",
-              "field": "display_value"
-            }
+            "label": "第 10 分位",
+            "value": "50,090 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "34.77 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资。",
+            "label": "第 25 分位",
+            "value": "72,320 美元/年"
+          },
+          {
+            "equivalent": "50.85 美元/小时",
             "interpretation": {
               "$item": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "中位数（50%）",
-            "value": {
-              "$fact": "us-wage-2025",
-              "field": "display_value"
-            }
+            "label": "第 50 分位",
+            "value": "105,770 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "80.42 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资。",
+            "label": "第 75 分位",
+            "value": "167,280 美元/年"
+          },
+          {
+            "equivalent": "121.82 美元/小时",
             "interpretation": {
               "$item": "general-and-operations-managers.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "第90百分位",
-            "value": {
-              "$fact": "us-wage-high10-2025",
-              "field": "display_value"
-            }
+            "label": "第 90 分位",
+            "value": "253,390 美元/年"
           }
         ]
       },
@@ -36504,7 +36507,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "general-and-operations-managers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36568,7 +36571,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "bls",
+            "id": "oews",
             "label": {
               "$link": "general-and-operations-managers.market-signals.market-signal-card.7",
               "block": "market-signals",
@@ -37692,7 +37695,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合总经理和运营经理",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37769,7 +37772,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI测评"
+            "label": "大五人格测评"
           },
           {
             "href": {
@@ -37779,7 +37782,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "大五人格测评"
+            "label": "MBTI 偏好测评"
           },
           {
             "href": {
@@ -37789,7 +37792,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "推理测评"
           },
           {
             "href": {
@@ -37799,7 +37802,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "情绪能力测评"
           }
         ]
       },
@@ -37977,7 +37980,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与人工复核",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38007,170 +38010,139 @@
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，对应美国 SOC 11-1021.00（精确职业，经 O*NET 呈现）；不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴；中位为分布中点，分位为分布位置，均不对应个人起薪；本职业分位跨度很大；后续更新以官方页面当期查询为准。",
-        "display_value": "中位时薪 50.85 美元 / 中位年薪 105,770 美元（2025 年，BLS OEWS，11-1021.00）",
+        "derivation": "直接引用来源表该行。",
+        "display_value": "105,770 美元/年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "工资中位数",
-        "occupation_scope": "本职业：总经理和运营经理",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "11-1021",
         "period": "2025-05",
         "source_refs": [
-          "oews",
-          "arxiv"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，对应美国 SOC 11-1021.00（精确职业，经 O*NET 呈现）；不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴；中位为分布中点，分位为分布位置，均不对应个人起薪；本职业分位跨度很大；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，对应美国 SOC 11-1021（精确职业，经 O*NET 呈现）；不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴；中位为分布中点，分位为分布位置，均不对应个人起薪；本职业分位跨度很大；后续更新以官方页面当期查询为准。",
         "display_value": "第 10 分位年薪 50,090 美元（2025 年，BLS OEWS，11-1021.00）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "工资第10分位",
-        "occupation_scope": "本职业：总经理和运营经理",
+        "occupation_scope": "11-1021",
         "period": "2025-05",
         "source_refs": [
-          "oews",
-          "arxiv"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，对应美国 SOC 11-1021.00（精确职业，经 O*NET 呈现）；不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴；中位为分布中点，分位为分布位置，均不对应个人起薪；本职业分位跨度很大；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，对应美国 SOC 11-1021（精确职业，经 O*NET 呈现）；不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴；中位为分布中点，分位为分布位置，均不对应个人起薪；本职业分位跨度很大；后续更新以官方页面当期查询为准。",
         "display_value": "第 90 分位年薪 253,390 美元（2025 年，BLS OEWS，11-1021.00）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "工资第90分位",
-        "occupation_scope": "本职业：总经理和运营经理",
+        "occupation_scope": "11-1021",
         "period": "2025-05",
         "source_refs": [
-          "oews",
-          "arxiv"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜BLS表1.2：2025—2035年3,599,000→3,780,300个岗位，净增181,300、增长5.0%；年均285,000个空缺含增长与替换，空缺不等于净增。",
-        "display_value": "增长 约 +5%（2025—2035，BLS 就业预测，11-1021.00）",
+        "derivation": "直接引用来源表该行。",
+        "display_value": "+5.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长",
-        "occupation_scope": "本职业：总经理和运营经理",
-        "period": "2025—2035",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "11-1021",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": "口径｜BLS表1.2的11-1021精确行：2025年3,599,000个岗位，包含自雇。OEWS为非农机构工资薪金雇员的模型估计，不含自雇，不能混用。",
-        "display_value": "就业 约 3,599,000 个岗位（2025，BLS 就业预测基期，11-1021.00）",
+        "derivation": "BLS 表 1.2 原表以千计，3,599.0 乘以 1,000 后换算为人数。",
+        "display_value": "3,599,000",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业规模（岗位数）",
-        "occupation_scope": "本职业：总经理和运营经理",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "11-1021",
         "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测的期间空缺（2025—2035 年均约 285,000 个，含增长与替补，BLS最新表1.2）；按原文呈现，不可读作净新增岗位。",
-        "display_value": "预计年均岗位空缺约 285,000 个（2025—2035，BLS 就业预测，含增长与替补）",
+        "derivation": "BLS 表 1.2 原表以千计，285.0 乘以 1,000 后换算为人数。",
+        "display_value": "285,000",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺",
-        "occupation_scope": "本职业：总经理和运营经理",
-        "period": "2025—2035",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "11-1021",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": "口径｜中国大陆本页查阅来源未提供与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，并公布规模以上企业分岗位工资（本页管理层级代理来源）；本页按证据政策登记缺口而不使用代理数字充当本职业精确值。",
-        "display_value": "证据不足：中国大陆本页查阅来源未提供与 O*NET 11-1021.00 总经理和运营经理精确对应的全国职业工资分布；不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "直接引用来源表该行。",
+        "display_value": "181,481 元",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
-        "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：总经理和运营经理",
-        "period": "2025",
+        "measure": "义乌装饰工程运营主管/经理工资中位数（2024 年样本）",
+        "occupation_scope": "义乌装饰工程行业运营主管/经理",
+        "period": "2024",
         "source_refs": [
-          "nbs",
-          "cnclass"
+          "nbs"
         ]
       },
       {
-        "derivation": "口径｜中国大陆本页查阅来源未提供与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，并公布规模以上企业分岗位工资（本页管理层级代理来源）；本页按证据政策登记缺口而不使用代理数字充当本职业精确值。",
-        "display_value": "证据不足：中国大陆本页查阅来源未提供与 O*NET 11-1021.00 总经理和运营经理精确对应的全国职业工资分布；不以行业均值、招聘报价或美国数据代填。",
-        "fact_id": "cn-private-2025",
-        "market": "中国大陆",
-        "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：总经理和运营经理",
-        "period": "2025",
-        "source_refs": [
-          "nbs",
-          "cnclass"
-        ]
-      },
-      {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，对应美国 SOC 11-1021.00（精确职业，经 O*NET 呈现）；不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴；中位为分布中点，分位为分布位置，均不对应个人起薪；本职业分位跨度很大；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，对应美国 SOC 11-1021（精确职业，经 O*NET 呈现）；不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴；中位为分布中点，分位为分布位置，均不对应个人起薪；本职业分位跨度很大；后续更新以官方页面当期查询为准。",
         "display_value": "第 25 分位年薪 72,320 美元（2025 年，BLS OEWS，11-1021.00）",
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
         "measure": "工资第25分位",
-        "occupation_scope": "本职业：总经理和运营经理",
+        "occupation_scope": "11-1021",
         "period": "2025-05",
         "source_refs": [
-          "oews",
-          "arxiv"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，对应美国 SOC 11-1021.00（精确职业，经 O*NET 呈现）；不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴；中位为分布中点，分位为分布位置，均不对应个人起薪；本职业分位跨度很大；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，对应美国 SOC 11-1021（精确职业，经 O*NET 呈现）；不含加班溢价、非生产奖金、股票奖金和雇主福利成本；包含佣金、生产奖金及部分津贴；中位为分布中点，分位为分布位置，均不对应个人起薪；本职业分位跨度很大；后续更新以官方页面当期查询为准。",
         "display_value": "第 75 分位年薪 167,280 美元（2025 年，BLS OEWS，11-1021.00）",
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
         "measure": "工资第75分位",
-        "occupation_scope": "本职业：总经理和运营经理",
+        "occupation_scope": "11-1021",
         "period": "2025-05",
         "source_refs": [
-          "oews",
-          "arxiv"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "总经理和运营经理",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "oews"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "总经理和运营经理 · 任务、交付与责任边界",
-      "来源范围 · 统计口径 · 人工复核",
-      "中国精确职业工资缺口按证据保留"
+      "跨部门与多站点运营",
+      "美国全国工资与就业预测",
+      "大陆工资为义乌行业参照"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国薪资中位数（2025，BLS OEWS，11-1021.00）"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2025—2035）"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
@@ -38182,13 +38154,13 @@
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均岗位空缺（2025—2035）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "cn-urban-nonprivate-2025",
         "key": "china_pay",
-        "label": "中国大陆（暂无精确职业工资）"
+        "label": "义乌装饰工程运营主管/经理工资中位数（2024 年样本）"
       }
     ]
   },
@@ -38196,17 +38168,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "总经理和运营经理做什么、需要什么能力、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围、来源口径与数据缺口。"
+      "text": "看综合运营经理如何跨站点安排人力和订单，对照美国就业与工资原表、义乌行业样本，并完成两站调度纸面练习。"
     },
     "title": {
       "availability": "available",
-      "text": "总经理和运营经理"
+      "text": "总经理和运营经理做什么：任务、工资和就业"
     }
   },
-  "source_content_sha256": "2c29461fcaeca5c9d950ee04c54bad0945ab51eb2ebee3d1cfd844b2499e9a94",
+  "source_content_sha256": "7e2169d08ec05a1b0329f17c90c7f18cb9fe79dc515c2c11179aa600ad6b6ca8",
   "subject": {
     "canonical_slug": "general-and-operations-managers",
     "name": "总经理和运营经理",
-    "summary": "总经理和运营经理对应美国 O*NET/SOC 11-1021.00「General and Operations Managers」：规划、指挥或协调公共或私营部门组织的运营，监督多个部门或多个经营场所；职责包括制定政策、管理日常运营以及规划材料与人力资源的使用，但职责过于多样与一般而无法归入任一单一管理或行政职能；通常通过下属主管实施管理，不含一线主管。核心工作包括查看财务报表与销售或活动报告与其他绩效数据以衡量生产率或目标达成，指挥与协调与生产与定价与销售或分销有关的业务或部门活动，编制员工排班表并分配职责，指挥或协调财务或预算活动，监督供应商并管理物资进出生产设施，依据需求预测定价或设定信用条件，执行甄选与培训与考核等人事职能，并与董事会成员与机构负责人或员工一同制定部门政策与目标与程序。官方范围原文：Plan, direct, or coordinate the operations of public or private sector organizations, overseeing multiple departments or locations."
+    "summary": "综合运营经理统筹多个部门或地点的日常运营，和各地主管核对交付量、安排人力与物料，并跟进跨团队异常。美国职业 11-1021 排除只负责一线班组的主管。企业主要负责人通常承担更广的战略和治理职责，实际分工看组织授权。"
   }
 }

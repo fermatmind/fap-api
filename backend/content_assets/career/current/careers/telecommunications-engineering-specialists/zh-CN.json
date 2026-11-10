@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "看能否澄清需求、画清连接关系、核算容量并解释方案限制；发现未知条件时先提问，收到变更后重新验证，而不是只展示一张漂亮拓扑图。"
+              "纸面体验｜比较虚构设备规范与测试记录，标出一个使用旧接口版本的条目，写清复核所需的附件。 "
             ]
           },
           "id": "telecommunications-engineering-specialists.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24872,14 +24871,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "电信工程专员设计或配置承载语音、视频和数据的有线、无线、卫星通信系统，协调安装和维护，核技术规格、兼容性、成本与性能，向用户提供技术支持并保留系统和问题记录。O*NET 15-1241.01 的任务定义不等于中国同名岗位或父级统计的全部职责。"
+              "电信工程专员制定设备或网络规格，诊断运行问题并协调改造。设计和支持工作都需要可追溯的标准及设备记录。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "telecommunications-engineering-specialists.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "editorial"
+            "transfer-onet-15-1241.01"
           ],
           "type": "prose"
         }
@@ -25642,15 +25639,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：既有外部资料未提供可直接采用的实测可复核的电信工程专员任务级AI评分，另列编辑估算分数。可讨论需求整理、文档草稿与诊断假设的辅助用途，但不能宣称已经验证效率提升。把技术能力、组织实际采用和岗位结果分开；容量、配置、安全与操作许可仍由人核实，本页不预测个人失业概率。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比较虚构设备规范与测试记录，标出一个使用旧接口版本的条目，写清复核所需的附件。"
             ]
           },
           "id": "telecommunications-engineering-specialists.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "nist",
-            "editorial"
+            "transfer-onet-15-1241.01",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33574,6 +33569,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-15-1241.01",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 15-1241.01 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/15-1241.01"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39047,10 +39069,10 @@
       "text": "电信工程专员：职责、薪资口径与入行体验"
     }
   },
-  "source_content_sha256": "73096ffe4f0cec872f36016bea3d766657f2e16380cf8bbda2724d009803cbc7",
+  "source_content_sha256": "73f76b3a8b3440740c30e1f42e7b0d884dc03c603e8734caa16beed899338ce6",
   "subject": {
     "canonical_slug": "telecommunications-engineering-specialists",
     "name": "电信工程专员",
-    "summary": "电信工程专员设计、配置和维护承载语音、视频与数据的通信系统，核对业务需求、拓扑、容量与设备兼容性，协调安装测试并保留变更和故障记录。O*NET-SOC 15-1241.01 是本页美国任务口径；工资和就业引用父级计算机网络架构师 15-1241，不能当作子职业单列数据。中国岗位名称、资格与授权另核。"
+    "summary": "电信工程专员制定设备或网络规格，诊断运行问题并协调改造。设计和支持工作都需要可追溯的标准及设备记录。"
   }
 }

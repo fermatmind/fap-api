@@ -32,9 +32,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -1560,7 +1557,7 @@
         "status": "pending_mapping"
       },
       "item:amusement-and-recreation-attendants.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:amusement-and-recreation-attendants.sources.source-card.1": {
         "status": "mapped"
@@ -23351,12 +23348,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "三个纸面小任务：用本页入行练习材料A/B/C做状态核对表、两段顾客提示和两条异常记录。只按给定信息记录，暂停原因、恢复时间与接收人姓名未给就保留未知；不得操作设备或作安全放行。观察自己对信息冲突、顾客追问和如实记录的反应，不能把练习结果当录用或资格证明。"
+              "试做 AR-53：核对现场状态和电子提示，再向下一班说明哪些问题要转交。"
             ]
           },
           "id": "amusement-and-recreation-attendants.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23381,17 +23378,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得中国大陆本职业全国工资分布，行业门类数字仅作参照。美国工资由O*NET展示的BLS2025年5月分位提供：39-3091年薪中位数32,150美元（时薪15.46美元），第10/25/75/90分位分别22,350/27,660/36,590/42,490美元。就业另取BLS EP：2025年约408,400人，2025—2035年增长3.7%，年均约100,400个空缺（含增长与替代需求），不能据此归因为高流动性或季节性。O*NET描述的主要行业为艺术娱乐休闲及政府，93%受访者工作周不足40小时；本轮O*NET摘要已展示2025–2035周期，精确增长率仍以BLS EP详细表为准。中国大型游乐设施操作须取得相应资格，运营单位须落实每日试运行和例行检查。"
+              "本页没有大陆全国职业工资。杭州公告可核班次与报名，公开的北京合并招聘用于识别岗位方向。"
             ]
           },
           "id": "amusement-and-recreation-attendants.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet",
-            "cnlaw",
-            "cnride",
-            "ep",
-            "oews"
+            "nbs",
+            "ride-hangzhou",
+            "ride-beijing"
           ],
           "type": "prose"
         },
@@ -23400,14 +23394,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：在游乐园与休闲设施售票核验、引导顾客、操作游乐设施并确认安全装置、监控规则执行、清洁检查与记录库存的现场服务岗位。"
+              "游乐与休闲服务包括检票、游客引导、场地秩序和部分设施服务。先问岗位负责向游客说明，还是实际操作设备。中国大陆大型游乐设施的操作资质只适用于对应设备与任务，不能从普通服务岗位名推定。"
             ]
           },
           "id": "amusement-and-recreation-attendants.quick-decision.fermat-decision-card.7",
           "source_refs": [
             "onet",
-            "onet",
-            "cnlaw",
             "cnride"
           ],
           "type": "prose"
@@ -23524,7 +23516,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "上岗准备与试运行：按检查单确认设备、安全装置与警示标识。 → 票务与入场：售票、核验门票并引导顾客入场。 → 安全装置确认：为顾客系紧或指导其系紧安全装置并提示禁忌。 → 运营与监控：操作设备并监控顾客是否遵守规则与安全程序。 → 异常与疏散：按程序处置异常并熟悉关停与紧急疏散。 → 清洁与记录：清洁设备与场地、补充耗材并记录销售与维修活动。"
+              "按雇主明确岗位分工 → 票务与入口核验 → 游客提示与引导 → 获授权者操作设备和确认安全装置 → 异常按角色上报与处理 → 场地清洁与台账。"
             ]
           },
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.3",
@@ -23573,7 +23565,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS EP直接提供39-3091：2025年约408,400人，2025—2035年增长3.7%，年均约100,400个空缺，含增长与替代需求。空缺不是净新增，也不代表个人就业保证；不外推中国或归因于季节性。本轮O*NET摘要也已展示2025—2035预测；精确增长率仍以BLS EP详细表为准。"
+              "BLS EP直接提供39-3091：2025年约408,400人，2025–2035年增长3.7%，年均约100,400个空缺，含增长与替代需求。空缺不是净新增，也不代表个人就业保证；不外推中国或归因于季节性。本轮O*NET摘要也已展示2025–2035预测；精确增长率仍以BLS EP详细表为准。"
             ]
           },
           "id": "amusement-and-recreation-attendants.profile.onet-structured-fields-block.4",
@@ -23859,7 +23851,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "必须严格执行操作规程与操作人员守则，不得随意变更或拆除安全保护装置与防护措施；每次运行前应告知乘客安全注意事项并确认安全装置；发现设备异常或严重事故隐患应停止使用并报告，不得带病运营；遇突发事件应按应急预案处置并按规定报告。"
+              "大型游乐设施的操作人员按其作业资格、岗位授权和操作规程履职。每次运行前按要求告知乘客安全注意事项并确认安全装置，不能随意变更或拆除安全保护装置；入口和票务岗位按现场分工负责提示、引导与通知。"
             ]
           },
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.19",
@@ -23876,7 +23868,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "发现设备异响、安全装置失效、顾客违规或其他不安全因素应立即停用并按程序报告，不因客流压力简化检查或隐瞒异常。"
+              "入口和票务人员发现异常时，按现场流程提示、引导游客并通知值班负责人。 每日试运行与例行安全检查由运营使用单位落实。运行中发现不正常情况，负责该设备的获授权持证操作人员须立即采取有效措施消除隐患。发生故障或突发事件时，须立即停止运行或采取紧急措施保护乘客，并立即报告现场安全管理人员。设备发生故障或异常后，运营使用单位须全面检查、消除事故隐患后方可继续使用。"
             ]
           },
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.20",
@@ -24620,7 +24612,7 @@
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "entity": "BLS2025—2035年就业预测",
+                "entity": "BLS2025–2035年就业预测",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24656,7 +24648,7 @@
                 "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
-                "entity": "BLS2025—2035年就业预测",
+                "entity": "BLS2025–2035年就业预测",
                 "id": "link-11",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24680,7 +24672,7 @@
                 "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
-                "entity": "BLS2025—2035年就业预测",
+                "entity": "BLS2025–2035年就业预测",
                 "id": "link-15",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24698,7 +24690,7 @@
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "entity": "BLS2025—2035年就业预测",
+                "entity": "BLS2025–2035年就业预测",
                 "id": "link-18",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24786,7 +24778,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把票务与监控系统的提示与现场确认分开对待；按操作规程与检查单执行每日试运行与例行安全检查，异常按程序停用并上报，不因客流压力简化流程。"
+              "入口和票务人员发现异常时，按现场流程提示、引导游客并通知值班负责人。 每日试运行与例行安全检查由运营使用单位落实。运行中发现不正常情况，负责该设备的获授权持证操作人员须立即采取有效措施消除隐患。发生故障或突发事件时，须立即停止运行或采取紧急措施保护乘客，并立即报告现场安全管理人员。设备发生故障或异常后，运营使用单位须全面检查、消除事故隐患后方可继续使用。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.13",
@@ -24869,18 +24861,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得本职业AI采用率、岗位替代率或工资因果估计。票务整理、记录汇总与异常提示仅为编辑提出的可能用途；现场确认、操作授权与应急责任仍按适用规程执行。BLS2025—2035年预测增长3.7%、年均约100,400个空缺，不能用来推断AI造成岗位增减。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "电子屏可汇总游客信息或提示牌面冲突；设施当前状态按现场规定核实，系统文字不授予操作或恢复权限。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "cnlaw",
-            "cnride",
-            "ep"
+            "editor",
+            "onet"
           ],
           "type": "prose"
         },
@@ -24976,7 +24963,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2025—2035 年就业预测"
+              "BLS 2025–2035 年就业预测"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.25",
@@ -25411,7 +25398,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2025—2035 年就业预测"
+              "BLS 2025–2035 年就业预测"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.54",
@@ -25440,7 +25427,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测 39-3091 在 2025—2035 年增长 3.7%（2035 年约 423,600 人），年均约 100,400 个职位空缺，多数来自替代需求。"
+              "BLS 预测 39-3091 在 2025–2035 年增长 3.7%（2035 年约 423,600 人），年均约 100,400 个职位空缺，多数来自替代需求。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.56",
@@ -25557,7 +25544,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS2025—2035年预测增长3.7%、年均约100,400个空缺，含增长与替代需求。不能由短工时、季节性比例分解空缺原因，也不能据此归因于AI。"
+              "BLS2025–2035年预测增长3.7%、年均约100,400个空缺，含增长与替代需求。不能由短工时、季节性比例分解空缺原因，也不能据此归因于AI。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.63",
@@ -25638,7 +25625,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS预测2025—2035年年均约100,400个空缺，含增长与替代需求；十年净增加约15,200人（3.7%），不是同一量。O*NET另有93%工作周不足40小时、17%季节日程；这些比例不能分解空缺原因或证明所有岗位短期兼职。"
+              "BLS预测2025–2035年年均约100,400个空缺，含增长与替代需求；十年净增加约15,200人（3.7%），不是同一量。O*NET另有93%工作周不足40小时、17%季节日程；这些比例不能分解空缺原因或证明所有岗位短期兼职。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.68",
@@ -25654,7 +25641,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 与 BLS 2025—2035 年就业预测（编辑归纳）"
+              "O*NET 39-3091.00 与 BLS 2025–2035 年就业预测（编辑归纳）"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.69",
@@ -25736,7 +25723,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不提供岗位消失年份。BLS2025—2035年就业预测不归因于AI，也不能用于推断此职业消失时间。"
+              "不提供岗位消失年份。BLS2025–2035年就业预测不归因于AI，也不能用于推断此职业消失时间。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.74",
@@ -25752,7 +25739,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS2025—2035年就业预测（非AI因果估计）"
+              "BLS2025–2035年就业预测（非AI因果估计）"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.75",
@@ -25920,7 +25907,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "严格按操作规程与检查单执行每日试运行与例行安全检查，异常按程序停用并上报。"
+              "设备试运行与例行检查由运营使用单位落实；持证且获授权的操作人员按规程处置设备异常。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.85",
@@ -25983,7 +25970,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "发现异常立即停用、检查与报告，严禁带病运营。"
+              "入口和票务人员发现异常时，按现场流程提示、引导游客并通知值班负责人。 每日试运行与例行安全检查由运营使用单位落实。运行中发现不正常情况，负责该设备的获授权持证操作人员须立即采取有效措施消除隐患。发生故障或突发事件时，须立即停止运行或采取紧急措施保护乘客，并立即报告现场安全管理人员。设备发生故障或异常后，运营使用单位须全面检查、消除事故隐患后方可继续使用。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.89",
@@ -26427,7 +26414,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录出勤、销售、收据与维修活动，并在发现异常时按程序停用与上报。"
+              "按岗位记录出勤、销售或事件。 入口和票务人员发现异常时，按现场流程提示、引导游客并通知值班负责人。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.119",
@@ -26488,7 +26475,7 @@
           "data": {
             "entries": [
               {
-                "entity": "BLS2025—2035年就业预测",
+                "entity": "BLS2025–2035年就业预测",
                 "id": "link-10",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -27175,12 +27162,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得娱乐与休闲服务员精确职业的全国或分城市工资分布"
+              "杭州青少年活动中心 2026 年 7 月 28 日公告招半山分中心游艺项目操作员 5 名，按班做五休二，周末和法定节假日需上班，报名 7 月 29 日至 8 月 4 日。公告正文未列工资。 2026 年 5 月 12 日发布的高校线上双选会页面合列北京欢乐谷游乐设施、检票与餐饮等岗位；100 人与“2.2k+”均为合并口径，未按岗列人数、薪资或班次，也未注明计薪周期。"
             ]
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "ride-hangzhou",
+            "ride-beijing"
           ],
           "type": "prose"
         },
@@ -27315,7 +27303,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET展示的BLS2025年工资分位｜https://www.onetonline.org/link/localwages/39-3091.00；BLS2025—2035年就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS OEWS工资统计方法｜https://www.bls.gov/oes/oes_ques.htm"
+              "O*NET展示的BLS2025年工资分位｜https://www.onetonline.org/link/localwages/39-3091.00；BLS2025–2035年就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS OEWS工资统计方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.8",
@@ -27491,7 +27479,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS就业预测表39-3091行2025年就业规模，含自雇；不是OEWS雇员就业数。；BLS2025—2035年就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "BLS就业预测表39-3091行2025年就业规模，含自雇；不是OEWS雇员就业数。；BLS2025–2035年就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.20",
@@ -27507,7 +27495,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3.7%（2025—2035年）"
+              "3.7%（2025–2035年）"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.21",
@@ -27522,7 +27510,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035年就业预计增长3.7%，2035年约423,600人，净增加约15,200人。；BLS就业预测表39-3091｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "2025–2035年就业预计增长3.7%，2035年约423,600人，净增加约15,200人。；BLS就业预测表39-3091｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.22",
@@ -27552,7 +27540,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035年年均约100,400个空缺，含增长和替代需求；不等于十年净增加约15,200人。；BLS就业预测表39-3091｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "2025–2035年年均约100,400个空缺，含增长和替代需求；不等于十年净增加约15,200人。；BLS就业预测表39-3091｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.24",
@@ -27715,7 +27703,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得该行业本职业可核对的工资中位数；不使用第三方估算。"
+              "证据不足：本页不提供该行业本职业可核对的工资中位数；不使用第三方估算。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.35",
@@ -27729,7 +27717,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET行业分布列出艺术、娱乐与休闲；本轮未取得该行业本职业工资中位数。"
+              "O*NET行业分布列出艺术、娱乐与休闲；本页不提供该行业本职业工资中位数。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.36",
@@ -27757,7 +27745,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得该行业本职业可核对的工资中位数；不使用第三方估算。"
+              "证据不足：本页不提供该行业本职业可核对的工资中位数；不使用第三方估算。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.38",
@@ -27799,7 +27787,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得该行业本职业可核对的工资中位数；不使用第三方估算。"
+              "证据不足：本页不提供该行业本职业可核对的工资中位数；不使用第三方估算。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.41",
@@ -27902,7 +27890,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "来自美国劳工统计局职业就业与工资统计（OEWS）2025 年 5 月，由 O*NET 展示；就业预测来自 BLS 2025—2035 年预测，为增长 3.7%与年均约 100,400 个空缺（多数来自替代需求）。"
+              "来自美国劳工统计局职业就业与工资统计（OEWS）2025 年 5 月，由 O*NET 展示；就业预测来自 BLS 2025–2035 年预测，为增长 3.7%与年均约 100,400 个空缺（多数来自替代需求）。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.48",
@@ -28014,7 +28002,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -28026,19 +28014,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "娱乐与休闲经理（不含赌博）",
@@ -28089,7 +28077,7 @@
                 "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
-                "entity": "BLS2025—2035年就业预测（39-3091）",
+                "entity": "BLS2025–2035年就业预测（39-3091）",
                 "id": "link-15",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -28280,7 +28268,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本页不按MBTI类型推荐职业或判断适任；本轮未取得该职业类型匹配的预测研究。实际准入与表现按培训、资格和雇主任务核对。"
+              "本页不按MBTI类型推荐职业或判断适任；本页不提供该职业类型匹配的预测研究。实际准入与表现按培训、资格和雇主任务核对。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.10",
@@ -29336,7 +29324,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "严格按操作规程与检查单执行每日试运行与例行安全检查，异常按程序停用并上报。"
+              "设备试运行与例行检查由运营使用单位落实；持证且获授权的操作人员按规程处置设备异常。"
             ]
           },
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.13",
@@ -29458,7 +29446,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "发现异常立即停用、检查与报告，严禁带病运营。"
+              "入口和票务人员发现异常时，按现场流程提示、引导游客并通知值班负责人。 每日试运行与例行安全检查由运营使用单位落实。运行中发现不正常情况，负责该设备的获授权持证操作人员须立即采取有效措施消除隐患。发生故障或突发事件时，须立即停止运行或采取紧急措施保护乘客，并立即报告现场安全管理人员。设备发生故障或异常后，运营使用单位须全面检查、消除事故隐患后方可继续使用。"
             ]
           },
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.21",
@@ -29769,36 +29757,36 @@
               [
                 "游乐设施操作方向",
                 "先完成相应资格、岗前培训和授权，再按规程在带教中参与大型游乐设施操作；无资格不承担操作。",
-                "试运行检查与安全装置确认规范、异常按程序停用与上报。",
-                "公开资料整理的每日运营前检查与试运行清单。",
+                "设备试运行与例行检查由运营使用单位落实；持证且获授权的操作人员按规程处置设备异常。",
+                "AR-53 两版状态表与一份交接。",
                 "与娱乐与休闲经理不同：承担一线设备操作与安全确认，不负责排班与经营决策。"
               ],
               [
                 "票务与入场服务方向",
                 "完成票务系统与顾客服务培训并上岗。",
                 "秩序维护得当、特殊情况按程序升级并记录。",
-                "一段安全提示与禁止事项播报稿（乘车须知、禁忌与紧急指引）。",
+                "AR-53 两版状态表与一份交接。",
                 "与收银员不同：还承担入场引导与现场秩序维护。"
               ],
               [
                 "设施与场地保障方向",
                 "完成设备检查、清洁与安全防护培训并上岗。",
                 "检查与维修记录完整、异常按程序上报。",
-                "一份含检查项、判据与处置的设备与场地检查记录模板。",
+                "AR-53 两版状态表与一份交接。",
                 "与停车服务员不同：面向游乐设施与休闲场地，设备与安全要求更高。"
               ],
               [
                 "设备操作与安全确认",
                 "按规程操作设备并确认顾客安全装置。",
                 "操作规范、安全装置逐位确认、记录完整。",
-                "虚构场景下的安全装置确认与提示流程说明。",
+                "AR-53 两版状态表与一份交接。",
                 "与引座员不同：承担设备操作与安全装置确认，不限于入场引导。"
               ],
               [
                 "异常处置与记录",
-                "发现异常停用设备并按程序上报与记录。",
-                "停用与上报及时、记录如实可追溯。",
-                "一次设备异常（异响或安全装置失效）的处置与报告记录框架。",
+                "入口和票务人员发现异常时，按现场流程提示、引导游客并通知值班负责人。",
+                "如实记录通知对象、时间和已核信息。",
+                "AR-53 两版状态表与一份交接。",
                 "与救生员不同：不承担水域或雪场人身救助职责。"
               ]
             ]
@@ -29868,45 +29856,43 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料：角色、状态与规则",
-                  "材料A（全为虚构）：你是入口服务练习者，没有设备操作授权。园区样例说明：设施R今日暂停；设施S须知写明身高至少1.20米、听从现场人员指引。你不得据身高自行判定安全或改变设施状态。",
-                  "材料B（虚构观察表）：09:00设施R状态牌显示“暂停”，但电子导览仍显示“开放”；09:05一位顾客询问R能否进入；09:08另一位顾客询问身高1.18米能否乘坐S。尚无负责人恢复开放通知。",
-                  "材料C（虚构流程）：服务人员核对须知并回答一般信息；状态信息冲突交值班负责人确认；记录时间、设施、原话或观察、已做动作、接收人及待确认项。不得编造设备检查、停用原因或恢复时间。"
+                  "AR-53｜虚构现场信息",
+                  "A：09:00，R 现场牌写「暂停」，电子导览写「开放」。未见值班负责人确认。",
+                  "B：09:05，一位游客问 R 能否进入。你是入口服务人员，无设备操作、放行或恢复权限。",
+                  "变式只加 C：09:12 导览员回执，电子导览改为「暂停」。没有恢复开放通知。纸面规则：状态冲突交值班负责人，已知和未核分开。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务：核对、提示与记录",
-                  "任务1：整理R状态核对表，列现场牌、电子导览、冲突、询问对象与仍未知事项；不得填“检查合格”。",
-                  "任务2：分别向两位顾客写两句提示，说明已知规则与转交现场人员核对的事项；不得承诺开放时间或作安全放行。",
-                  "任务3：按材料C填写09:05与09:08两条记录，并写值班负责人未反馈时的后续待办。"
+                  "交两版状态表和一份交接",
+                  "原版及变式分别记现场牌、电子导览、是否冲突和各自证据。",
+                  "分别写一句游客提示；交接说明未知项和负责人。",
+                  "记录原值与出处。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考答案：逐项回指题面",
-                  "参考1：R现场牌暂停、电子导览开放，信息冲突；应向值班负责人核对并记录，暂停原因、检查结果和恢复时间均未知。不能据电子导览让顾客进入。",
-                  "参考2：对R顾客可说“现场标示暂停，开放信息正在向负责人核对，请依现场指引”；对S顾客可说“样例须知至少1.20米，1.18米未满足该数值，请向现场人员核对适用须知”。不推断其他健康或资格条件。",
-                  "参考3：09:05记录R开放询问及两处信息冲突，动作是提示现场状态并转交值班负责人；09:08记录1.18米与样例1.20米条件不符，转交现场人员。接收人姓名未给，记“待确认”，不编造回执或处置完成。"
+                  "先独立提交",
+                  "第6天交两版和交接；第7天再打开「AR-53 参考解（交卷后再打开）」。",
+                  "记录原值与出处。",
+                  "记录原值与出处。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界：纸面与现场权限",
-                  "仅做纸面信息、沟通与记录练习；虚构身高阈值不适用于真实设备，不能据此实施操作或放行。",
-                  "真实安全检查、试运行、停用或恢复按资格、使用维护说明书与现场授权执行；准备作品不能替代资格和培训。"
+                  "不操作设备",
+                  "不接触设备或真实游客，不推断检查结果、停用原因或恢复时间。",
+                  "记录原值与出处。"
                 ]
               }
             ]
           },
           "id": "amusement-and-recreation-attendants.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet",
-            "cnlaw",
-            "cnride"
+            "editor"
           ],
           "title": "入行练习：用完整虚构材料做服务提示与异常记录",
           "type": "cards"
@@ -29919,38 +29905,36 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "状态核对表",
-                  "沿用材料A/B列出R现场牌与电子导览、矛盾、询问对象和未知项；S仅比较给定身高条件，不写检查合格。"
+                  "核操作资格与岗位边界",
+                  "先区分入口服务和须获资格与授权的设备操作。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "两段服务提示",
-                  "分别回答R开放询问和S身高问题，区分已知信息与须转交现场人员的事项，不承诺恢复开放。"
+                  "两版状态核对表",
+                  "各记状态、依据和下一责任人。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "两条异常记录",
-                  "按材料C记录09:05和09:08的观察、动作、接收人及待确认项；没有真实反馈就不填处置完成。"
+                  "给值班负责人一份交接",
+                  "保留尚不能核实的事项。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "一页复盘",
-                  "检查每个结论能回指A/B/C；列出暂停原因、恢复时间、接收人姓名未给等未知项，说明纸面练习与作业资格的区别。"
+                  "每版一句游客提示",
+                  "分别依据两版资料拟一句话。"
                 ]
               }
             ]
           },
           "id": "amusement-and-recreation-attendants.path.entry-portfolio.1",
           "source_refs": [
-            "onet",
-            "cnlaw",
-            "cnride"
+            "editor"
           ],
           "title": "入门时可以准备哪些可复核的作品材料？",
           "type": "cards"
@@ -29974,36 +29958,33 @@
             "rows": [
               [
                 "报名与条件核对",
-                "是否符合招聘的年龄、学历与健康等基本条件。",
-                "能提供雇主要求的证明材料并如实填报。",
-                "弄虚作假或通过非官方中介报名，会直接影响资格。"
+                "核对现场与电子信息。",
+                "留原记录、依据与负责人。",
+                "纸面不授权设备或游客放行。"
               ],
               [
                 "岗前安全培训与考核",
-                "能否掌握操作规程、安全装置确认、警示与疏散要求。",
-                "培训与考核记录完整，能复述安全要点与报告流程。",
-                "未通过岗前培训与考核不得独立上岗。"
+                "核对现场与电子信息。",
+                "留原记录、依据与负责人。",
+                "纸面不授权设备或游客放行。"
               ],
               [
                 "作业资格（操作类岗位）",
-                "是否取得大型游乐设施操作等特种设备作业人员证。",
-                "资格记录齐备，操作范围明确。",
-                "未取得作业资格不得从事相应设备操作。"
+                "核对现场与电子信息。",
+                "留原记录、依据与负责人。",
+                "纸面不授权设备或游客放行。"
               ],
               [
                 "检查与记录复核",
-                "是否按制度完成试运行检查、维护与记录并通过复核。",
-                "检查、维护与事件记录完整、异常按程序处置。",
-                "记录不实或隐瞒异常会被追责并影响岗位资格。"
+                "核对现场与电子信息。",
+                "留原记录、依据与负责人。",
+                "纸面不授权设备或游客放行。"
               ]
             ]
           },
           "id": "amusement-and-recreation-attendants.path.interview-probation.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "cnlaw",
-            "cnride"
+            "editor"
           ],
           "title": "面试与试用期可能考察什么，哪些结论不能推断？",
           "type": "table"
@@ -30016,57 +29997,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天｜明确角色与授权",
-                  "阅读A/B/C，列明入口服务角色没有设备操作授权。"
+                  "第 1 天",
+                  "区分入口服务与设备权限。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天｜整理材料条件与记录字段",
-                  "摘出样例R暂停、S至少1.20米及C记录字段；另核法律第14、41—43条用途。"
+                  "第 2 天",
+                  "抄两处状态和游客问题。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天｜完成状态核对表",
-                  "完成R状态核对表，保留现场牌与电子导览冲突以及未知项。"
+                  "第 3 天",
+                  "写原版状态和冲突。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天｜安全提示播报",
-                  "完成R和S两段服务提示，1.18米不满足样例1.20米；不作安全放行。"
+                  "第 4 天",
+                  "只加回执 C，另写修订。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天｜顾客沟通练习",
-                  "模拟顾客追问开放时间，练习说明未获负责人反馈并按流程转交。"
+                  "第 5 天",
+                  "每版写一句游客提示，并交一份交接。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天｜异常处置记录",
-                  "完成09:05和09:08两条记录；接收人姓名与回执未给就标待确认。"
+                  "第 6 天",
+                  "不看参考，独立交两版和交接。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天｜复盘与决策",
-                  "将表、提示、记录对照参考答案复盘，判断自己对准确记录和顾客沟通的耐受；核下一步培训要求。"
+                  "第 7 天",
+                  "展开常见问题「AR-53 参考解（交卷后再打开）」，记录差异或无差异。"
                 ]
               }
             ]
           },
           "id": "amusement-and-recreation-attendants.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "七天体验：用虚构材料完成一次娱乐与休闲服务员任务闭环",
           "type": "timeline"
@@ -30076,20 +30057,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "做完一周准备后先回答：我是否愿意长期按规程与检查单执行、在户外天气与高峰客流中提供服务并对顾客安全承担责任？",
-              "判断方向：偏游乐设施操作、票务与入场服务，还是设施与场地保障。",
-              "判断准备：岗前培训与考核、作业资格（操作类岗位）、健康条件是否满足或可补齐；顾客沟通与安全意识是否需要补强。",
-              "判断边界：是否清楚大型游乐设施操作属特种设备作业、须持证上岗，且设备维护保养与定期检验由具备资格的单位实施。",
-              "判断耐受：能否适应长时间站立、户外天气、短时工作周与季节性或临时性安排。",
-              "入门后按岗前培训与作业资格体系发展：承担多设备操作与带教职责，或转向安全员与运营管理岗位。",
-              "把公开资料整理、检查清单与安全播报练习持续整理成可核对的准备经历，比相信非官方承诺更可靠。"
+              "继续：愿意保留记录、礼貌答复并及时转交。",
+              "暂缓：先练状态记录与交接。",
+              "比较：可了解票务、场地服务或受监管操作。",
+              "继续：愿意保留记录、礼貌答复并及时转交。",
+              "暂缓：先练状态记录与交接。",
+              "比较：可了解票务、场地服务或受监管操作。",
+              "继续：愿意保留记录、礼貌答复并及时转交。"
             ]
           },
           "id": "amusement-and-recreation-attendants.path.seven-day-decision.1",
           "source_refs": [
-            "onet",
-            "cnlaw",
-            "cnride"
+            "editor"
           ],
           "title": "七天结束时如何判断要不要继续",
           "type": "list"
@@ -30214,19 +30193,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "样本适用范围：本页不引用任何招聘公告作为工资或需求证据；招聘条件、培训与作业资格要求随雇主与地区变化，请以主管部门与雇主官方发布为准。",
-              "本页不提供该职业的分城市工资分布与培训通过率：美国侧给出 O*NET 与 BLS 的工资、就业与预测，中国大陆侧给出行业门类宽口径参照与特种设备作业资格框架，两者不是同一统计口径。",
-              "判断一个岗位是否属于本职业，看任务描述而不是名称：是否涉及售票与入场服务、顾客引导、游乐设施操作与安全装置确认、监控规则与安全程序、设备检查清洁与记录；若岗位主要承担排班、安全制度与经营决策，则属娱乐与休闲经理等不同职业。"
+              "杭州青少年活动中心 2026 年 7 月 28 日公告招半山分中心游艺项目操作员 5 名，按班做五休二，周末和法定节假日需上班，报名 7 月 29 日至 8 月 4 日。公告正文未列工资。 2026 年 5 月 12 日发布的高校线上双选会页面合列北京欢乐谷游乐设施、检票与餐饮等岗位；100 人与“2.2k+”均为合并口径，未按岗列人数、薪资或班次，也未注明计薪周期。"
             ]
           },
           "id": "amusement-and-recreation-attendants.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "cnlaw",
-            "cnride"
+            "ride-hangzhou",
+            "ride-beijing"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -30504,7 +30477,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET展示的BLS2025年工资分位；就业预测另见BLS2025—2035年表。"
+              "O*NET展示的BLS2025年工资分位；就业预测另见BLS2025–2035年表。"
             ]
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.25",
@@ -30660,7 +30633,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "试运行检查与安全装置确认规范、异常按程序停用与上报。"
+              "设备试运行与例行检查由运营使用单位落实；持证且获授权的操作人员按规程处置设备异常。"
             ]
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.35",
@@ -31594,7 +31567,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS EP表39-3091直接提供2025年约408,400人，覆盖含自雇就业；本轮O*NET摘要也展示2025年规模及2025—2035年预测。"
+              "BLS EP表39-3091直接提供2025年约408,400人，覆盖含自雇就业；本轮O*NET摘要也展示2025年规模及2025–2035年预测。"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.11",
@@ -31680,7 +31653,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035年"
+              "2025–2035年"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.17",
@@ -31695,12 +31668,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国全国就业预测，含自雇；不代表雇主承诺，也不能外推为中国大陆。"
+              "美国 39-3091 的 2025 年年薪中位数为 32,150 美元，时薪 15.46 美元；就业基期约 408,400，2035 年预计 423,600，增长 3.7%、净增约 15,200，年均约 100,400 个空缺。"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "ep",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31751,7 +31725,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "3.7%（2025—2035年）"
+              "3.7%（2025–2035年）"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.22",
@@ -31780,7 +31754,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035年"
+              "2025–2035年"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.24",
@@ -31795,7 +31769,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 预测 39-3091 在 2025—2035 年年均约 100,400 个职位空缺，多数来自替代需求。"
+              "BLS 预测 39-3091 在 2025–2035 年年均约 100,400 个职位空缺，多数来自替代需求。"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.25",
@@ -32331,16 +32305,20 @@
                 "question_key": "career.faq.amusement-and-recreation-attendants.comparison"
               },
               {
-                "answer": "证据不足：本页未取得该职业AI采用率或岗位替代因果估计。票务、监控与设备监测系统可能增强效率与预警，但现场设备操作、安全装置确认、顾客引导与应急处置仍由持证或受训人员承担；本页引用的 2025—2035 年增长 3.7% 与年均约 100,400 个空缺为 BLS 官方口径，本页不据技术名词推断岗位增减。",
+                "answer": "证据不足：本页未取得该职业AI采用率或岗位替代因果估计。票务、监控与设备监测系统可能增强效率与预警，但现场设备操作、安全装置确认、顾客引导与应急处置仍由持证或受训人员承担；本页引用的 2025–2035 年增长 3.7% 与年均约 100,400 个空缺为 BLS 官方口径，本页不据技术名词推断岗位增减。",
                 "id": "amusement-and-recreation-attendants.faq.3",
                 "question": "这个职业会被 AI 取代吗？",
                 "question_key": "career.faq.amusement-and-recreation-attendants.ai"
               },
               {
-                "answer": "本页采用的国家统计局工资资料未单列“娱乐与休闲服务员”，本页只给出国家统计局 2025 年行业门类与单位类型的宽口径参照（如文化、体育和娱乐业非私营 129,447 元/年、公共管理社会保障和社会组织非私营 119,465 元/年）；这些门类覆盖大量非本职业岗位，不能当作本职业工资。",
+                "answer": "杭州青少年活动中心 2026 年 7 月 28 日公告招半山分中心游艺项目操作员 5 名，按班做五休二，周末和法定节假日需上班，报名 7 月 29 日至 8 月 4 日。公告正文未列工资。 2026 年 5 月 12 日发布的高校线上双选会页面合列北京欢乐谷游乐设施、检票与餐饮等岗位；100 人与“2.2k+”均为合并口径，未按岗列人数、薪资或班次，也未注明计薪周期。",
                 "id": "amusement-and-recreation-attendants.faq.4",
                 "question": "中国大陆的工资怎么理解？",
-                "question_key": "career.faq.amusement-and-recreation-attendants.china-pay"
+                "question_key": "career.faq.amusement-and-recreation-attendants.china-pay",
+                "source_refs": [
+                  "ride-hangzhou",
+                  "ride-beijing"
+                ]
               },
               {
                 "answer": "美国口径：2025 年 5 月 39-3091 年薪中位数 32,150 美元（时薪 15.46 美元），第 10 分位为 22,350 美元、第 25 分位为 27,660 美元、第 75 分位为 36,590 美元、第 90 分位为 42,490 美元（BLS 职业就业与工资统计 OEWS，经 O*NET 展示）。该职业工作周以不足 40 小时为主，实际年收入受工时与季节性影响；分位数不代表起薪。",
@@ -32349,22 +32327,32 @@
                 "question_key": "career.faq.amusement-and-recreation-attendants.us-pay"
               },
               {
-                "answer": "美国侧：学历门槛较低（64% 受访者低于高中文凭），入职后按雇主岗前安全培训与岗位要求上岗。中国大陆侧：一般现场服务岗位以岗前安全培训为主；大型游乐设施操作岗位属特种设备作业岗位，须按《中华人民共和国特种设备安全法》取得特种设备作业人员证（作业项目“大型游乐设施操作”，项目代号 Y2）方可操作；运营使用单位须配备持证操作人员并落实每日试运行与例行安全检查。具体要求以主管部门与雇主官方信息为准。",
+                "answer": "先问岗位是否实际操作受监管的大型游乐设施。此类操作须核对应证件，上海指引列作业项目 Y2；票务、引导、现场维护和设备修理的职责与条件分别核。每日试运行和例行安全检查是运营使用单位职责。",
                 "id": "amusement-and-recreation-attendants.faq.6",
                 "question": "怎么才能成为这个职业的服务员或操作人员？",
-                "question_key": "career.faq.amusement-and-recreation-attendants.education"
+                "question_key": "career.faq.amusement-and-recreation-attendants.education",
+                "source_refs": [
+                  "cnlaw",
+                  "ride-shanghai",
+                  "ride-hangzhou",
+                  "ride-beijing"
+                ]
               },
               {
-                "answer": "主要是跳过运营前检查与安全装置确认、顾客违规与秩序失控、设备带病运营、应急处置与疏散不熟、清洁与库存不到位以及记录与上报不完整。严格按操作规程与检查单执行每日试运行与例行安全检查、及时制止与升级顾客违规、发现异常立即停用并报告、熟悉应急预案与疏散、按制度完成清洁补给与记录是基础控制措施；具体规定以特种设备安全法律法规与运营使用单位制度为准。",
+                "answer": "入口和票务人员发现异常时，按现场流程提示、引导游客并通知值班负责人。 每日试运行与例行安全检查由运营使用单位落实。运行中发现不正常情况，负责该设备的获授权持证操作人员须立即采取有效措施消除隐患。发生故障或突发事件时，须立即停止运行或采取紧急措施保护乘客，并立即报告现场安全管理人员。设备发生故障或异常后，运营使用单位须全面检查、消除事故隐患后方可继续使用。",
                 "id": "amusement-and-recreation-attendants.faq.7",
                 "question": "这个职业的主要风险是什么？",
                 "question_key": "career.faq.amusement-and-recreation-attendants.risk"
               },
               {
-                "answer": "BLS EP直接提供39-3091：2025年约408,400人，2035年约423,600人，净增约15,200人（3.7%）；年均约100,400个空缺，含增长与替代需求，不等于净新增或个人就业保证。O*NET仍展示旧预测，其短工时比例不能解释空缺原因。不能外推中国。",
+                "answer": "美国 39-3091 的 2025 年年薪中位数为 32,150 美元，时薪 15.46 美元；就业基期约 408,400，2035 年预计 423,600，增长 3.7%、净增约 15,200，年均约 100,400 个空缺。",
                 "id": "amusement-and-recreation-attendants.faq.8",
                 "question": "美国就业前景如何？",
-                "question_key": "career.faq.amusement-and-recreation-attendants.outlook"
+                "question_key": "career.faq.amusement-and-recreation-attendants.outlook",
+                "source_refs": [
+                  "ep",
+                  "onet-wages"
+                ]
               },
               {
                 "answer": "主要在游乐与休闲设施现场：99% 每天有面对面讨论，96% 持续与他人接触，91% 认为与外部顾客或公众打交道极其重要；64% 每天在户外暴露于各种天气，55% 持续或几乎持续站立，29% 持续或几乎持续行走或跑动；28% 每天暴露于干扰性噪音，74% 从不佩戴常见防护设备；46% 每周至少一次需要应对不愉快或愤怒的人；93% 工作周少于 40 小时，45% 日程不规律、17% 为季节性（O*NET 39-3091.00 受访比例）。",
@@ -32377,6 +32365,15 @@
                 "id": "amusement-and-recreation-attendants.faq.10",
                 "question": "游乐设施操作、票务与入场服务、设施与场地保障三个方向怎么选？",
                 "question_key": "career.faq.amusement-and-recreation-attendants.direction-choice"
+              },
+              {
+                "answer": "原版 R 的现场牌暂停、电子导览开放，构成冲突。先告知游客按现场暂停指引，交值班负责人核实，不承诺恢复。变式只把电子导览改为暂停，冲突消除，仍无恢复通知。提示仍按暂停指引。保留 A、B 与新增 C；检查结果、停用原因和恢复时间都没有证据，交值班负责人。",
+                "id": "amusement-and-recreation-attendants.faq.11",
+                "question": "AR-53 参考解（交卷后再打开）",
+                "question_key": "career.faq.amusement-and-recreation-attendants.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -32403,12 +32400,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组"
+              "费马测试编辑部"
             ]
           },
           "id": "amusement-and-recreation-attendants.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -32417,19 +32414,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 娱乐与休闲服务员职业摘要与详细资料（前景光明）；BLS 职业就业与工资统计（OEWS）：39-3091 与 2025—2035 年就业预测；《中华人民共和国特种设备安全法》；《大型游乐设施安全监察规定》与《大型游乐设施安全技术规程》（TSG 71-2023）；国家统计局《2025 年城镇单位就业人员年平均工资情况》。"
+              "杭州青少年活动中心 2026 年 7 月 28 日公告招半山分中心游艺项目操作员 5 名，按班做五休二，周末和法定节假日需上班，报名 7 月 29 日至 8 月 4 日。公告正文未列工资。 2026 年 5 月 12 日发布的高校线上双选会页面合列北京欢乐谷游乐设施、检票与餐饮等岗位；100 人与“2.2k+”均为合并口径，未按岗列人数、薪资或班次，也未注明计薪周期。"
             ]
           },
           "id": "amusement-and-recreation-attendants.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "cnlaw",
-            "cnride",
-            "cn-tsg",
-            "ep",
-            "nbs"
+            "ride-hangzhou",
+            "ride-beijing"
           ],
           "type": "prose"
         },
@@ -32438,13 +32429,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料核对日期：2026-10-08；工资2025年5月，就业预测2025–2035；法律、技术规范和中国背景资料期分别注明。"
+              "美国 39-3091 的 2025 年年薪中位数为 32,150 美元，时薪 15.46 美元；就业基期约 408,400，2035 年预计 423,600，增长 3.7%、净增约 15,200，年均约 100,400 个空缺。"
             ]
           },
           "id": "amusement-and-recreation-attendants.sources.source-card.3",
           "source_refs": [
-            "onet",
-            "ep"
+            "ep",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -32453,7 +32444,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得本职业可核对的分行业工资中位数及中国大陆本职业全国工资分布；中国2025年城镇单位与行业工资仅作宽口径参照。美国2025年5月工资为BLS OEWS经O*NET展示的职业分位；2025—2035年就业预测直接取BLS EP，含自雇，与OEWS雇员覆盖不同。年均空缺包含增长与替代需求，不能解释为净新增、AI效应或季节性因果。中国大型游乐设施操作资格与每日试运行检查等义务见《特种设备安全法》、《大型游乐设施安全监察规定》、TSG71—2023登记来源；本页不替代法律或操作规程。"
+              "证据不足：本页不提供本职业可核对的分行业工资中位数及中国大陆本职业全国工资分布；中国2025年城镇单位与行业工资仅作宽口径参照。美国2025年5月工资为BLS OEWS经O*NET展示的职业分位；2025–2035年就业预测直接取BLS EP，含自雇，与OEWS雇员覆盖不同。年均空缺包含增长与替代需求，不能解释为净新增、AI效应或季节性因果。中国大型游乐设施操作资格与每日试运行检查等义务见《特种设备安全法》、《大型游乐设施安全监察规定》、TSG71—2023登记来源；本页不替代法律或操作规程。"
             ]
           },
           "id": "amusement-and-recreation-attendants.sources.source-card.4",
@@ -32490,7 +32481,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32502,13 +32493,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看娱乐与休闲服务员职业页面",
@@ -32540,10 +32531,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet",
                 "limitation": "用于职业身份、任务与兴趣剖面（CSR）；美国单一职业口径。",
                 "market": "美国",
@@ -32556,10 +32547,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "bls",
                 "limitation": "雇员工资覆盖与2,080小时年化方法，不支持EP就业规模。",
                 "market": "美国",
@@ -32572,15 +32563,15 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "ep",
                 "limitation": "2025与2035年就业、净变化及年均空缺；含自雇，与OEWS工资覆盖不同。",
                 "market": "美国",
-                "name": "BLS2025—2035年就业预测表39-3091",
-                "period": "2025年就业；2025—2035年预测",
+                "name": "BLS2025–2035年就业预测表39-3091",
+                "period": "2025年就业；2025–2035年预测",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32588,10 +32579,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "oews",
                 "limitation": "用于时薪与年薪 10/25/50/75/90 分位数值与资料期。",
                 "market": "美国",
@@ -32604,10 +32595,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "industry_proxy",
+                  "城镇单位行业数据仅作背景。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "industry_proxy",
+                "evidence_type": "primary_document",
                 "id": "nbs",
                 "limitation": "用于中国大陆民用行业门类与单位类型年平均工资；不含本职业单列工资。",
                 "market": "中国大陆",
@@ -32615,36 +32606,36 @@
                 "period": "2025年工资；2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnse",
-                "limitation": "用于中国大陆大型游乐设施每日投入使用前试运行与例行安全检查、作业人员经考核合格持证上岗等要求的框架说明（与《中华人民共和国特种设备安全法》并行适用）。",
+                "limitation": "运营使用单位落实故障后检查与隐患消除、每日试运行与例行检查。",
                 "market": "中国大陆",
-                "name": "《特种设备安全监察条例》（国务院，含大型游乐设施每日试运行与作业人员持证要求）",
-                "period": "2003年公布；2009年修订",
-                "publisher": "国务院",
+                "name": "《特种设备安全法》：运营使用单位每日检查",
+                "period": "第42、43条",
+                "publisher": "全国人大常委会制定，市场监管总局刊载",
                 "scope": "contextual",
-                "url": "https://big5.www.gov.cn/gate/big5/www.gov.cn/flfg/2009-02/06/content_1225116.htm"
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2019/art_39715c5a62f64e32aa522fcc2afd6298.html"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnride",
-                "limitation": "中国大陆运营、人员培训、试运行检查、乘客须知和应急管理；TSG另列。",
+                "limitation": "第28条分列运行中发现不正常与发生故障或突发事件的操作人员职责。",
                 "market": "中国大陆",
-                "name": "《大型游乐设施安全监察规定》（2021年修正）",
-                "period": "2013年公布；2021年修正",
+                "name": "《大型游乐设施安全监察规定》（2025 年第二次修订）",
+                "period": "2025-03-18 第二次修订，市场监管总局令第101号",
                 "publisher": "国家市场监督管理总局（原国家质检总局）",
                 "scope": "contextual",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_9956bbbb4120480db071119c3957f81e.html"
@@ -32652,10 +32643,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
                 "limitation": "用于中国大陆相关服务岗位归类说明；大典未单列“娱乐与休闲服务员”。",
                 "market": "中国大陆",
@@ -32668,10 +32659,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "privacy",
                 "limitation": "用于工作情境比例（顾客接触、户外天气、站立与工作周）。",
                 "market": "美国",
@@ -32684,10 +32675,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "facilities",
                 "limitation": "用于该职业常用工具与技术条目；不表示技术采用率。",
                 "market": "美国",
@@ -32700,10 +32691,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "operations",
                 "limitation": "用于任务清单与工作活动。",
                 "market": "美国",
@@ -32716,10 +32707,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "hr",
                 "limitation": "用于工作周时长、日程规律性与冲突和天气暴露等比例。",
                 "market": "美国",
@@ -32732,10 +32723,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "health",
                 "limitation": "用于解释民用工资总额为税前口径及其组成范围。",
                 "market": "中国大陆",
@@ -32748,10 +32739,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "ilo",
                 "limitation": "用于兴趣代码 CSR（常规型、社会型、现实型）说明。",
                 "market": "美国",
@@ -32764,26 +32755,26 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "纸面案例。",
+                  "纸面案例。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "editorial_design",
                 "id": "editor",
                 "limitation": "用于入门学历受访比例与职业准备等级说明。",
-                "market": "美国",
-                "name": "O*NET OnLine 39-3091.00 详细资料（学历与培训要求）",
-                "period": "职业页面更新2026年；本轮查阅2026-10-02",
-                "publisher": "O*NET OnLine",
+                "market": "虚构案例",
+                "name": "费马测试编辑部：AR-53",
+                "period": "纸面练习",
+                "publisher": "费马测试编辑部",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/details/39-3091.00"
+                "url": "#career-content-path"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "nist",
                 "limitation": "用于职业概述与相关职业入口。",
                 "market": "美国",
@@ -32796,10 +32787,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "arxiv",
                 "limitation": "用于任务与职责参考。",
                 "market": "美国",
@@ -32812,10 +32803,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "weforum",
                 "limitation": "用于任务与现场服务流程说明。",
                 "market": "美国",
@@ -32828,10 +32819,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "employer",
                 "limitation": "用于票务、检查与事件记录要求说明。",
                 "market": "美国",
@@ -32844,10 +32835,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "purchasing-managers",
                 "limitation": "用于任务清单参考。",
                 "market": "美国",
@@ -32860,10 +32851,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "r2-pay-1",
                 "limitation": "用于任务描述与职责边界。",
                 "market": "美国",
@@ -32876,10 +32867,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "r2-pay-2",
                 "limitation": "用于职业属性说明。",
                 "market": "美国",
@@ -32892,10 +32883,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "r2-pay-3",
                 "limitation": "用于数据口径说明。",
                 "market": "美国",
@@ -32908,10 +32899,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "census",
                 "limitation": "用于主要行业（艺术、娱乐与休闲；政府）说明。",
                 "market": "美国",
@@ -32924,10 +32915,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "msresearch",
                 "limitation": "用于任务与职责参考。",
                 "market": "美国",
@@ -32940,10 +32931,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
                 "limitation": "用于全国工资分位数值与资料期核对。",
                 "market": "美国",
@@ -32956,10 +32947,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "archivists",
                 "limitation": "用于检查、清洁与记录过程说明。",
                 "market": "美国",
@@ -32972,10 +32963,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问2026-10-02"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnlaw",
                 "limitation": "第14、41—43、69条：资格、异常处理、每日检查与应急。",
                 "market": "中国大陆",
@@ -32988,26 +32979,26 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问2026-10-02"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cn-tsg",
-                "limitation": "大型游乐设施技术与使用管理要求；不能作为通用纸面操作指导。",
+                "limitation": "解读介绍持证、故障记录等重点要求。实际设备按适用规程和单位安排核对。",
                 "market": "中国大陆",
-                "name": "《大型游乐设施安全技术规程》（TSG71—2023）",
+                "name": "市场监管总局：TSG 71—2023 解读",
                 "period": "2023年发布；2024-03-01施行",
                 "publisher": "国家市场监督管理总局",
                 "scope": "contextual",
-                "url": "https://www.samr.gov.cn/tzsbj/zcfg/aqjsgf/art/2025/art_18ed3bbd68a445cc8f8896924d70ca71.html"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/xwxcs/art/2023/art_506e03269ff64ebda3785e7cf1880b1b.html"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问2026-10-02"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cn-qual",
                 "limitation": "用于Y2操作、Y1修理与A安全管理的项目区分；办证按当前主管部门流程。",
                 "market": "中国大陆",
@@ -33020,10 +33011,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
+                  "用于理解岗位情境。",
                   "访问2026-10-02"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "背景资料",
                 "id": "oews-method",
                 "limitation": "年薪通常采用2,080小时年化，不是兼职人员实际全年收入。",
                 "market": "美国",
@@ -33050,20 +33041,61 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "票务与入场｜核验与收费｜售票并收取费用，核验、收取或打孔门票后放行顾客。 — 75/100; weight=1/3; amusement-and-recreation-attendants.profile.responsibilities-block.1[0]",
-                  "设备操作｜游乐设施与装置｜操作、驾驶或讲解机械游乐装置与自动化设备，并按要求试运行与检查。 — 25/100; weight=1/3; amusement-and-recreation-attendants.profile.responsibilities-block.1[2]",
-                  "顾客安全｜安全装置与疏散｜为顾客系紧安全装置或指导其系紧，协助进出游乐设施或上下动物，熟悉关停与紧急疏散程序。 — 0/100; weight=1/3; amusement-and-recreation-attendants.profile.responsibilities-block.1[3]"
+                  "电子屏可汇总游客信息或提示牌面冲突；设施当前状态按现场规定核实，系统文字不授予操作或恢复权限。"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "name": "O*NET：游乐与休闲服务任务",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "url": "https://www.onetonline.org/link/details/39-3091.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "杭州青少年活动中心 2026 年 7 月 28 日公告招半山分中心游艺项目操作员 5 名，按班做五休二，周末和法定节假日需上班，报名 7 月 29 日至 8 月 4 日。公告正文未列工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ride-hangzhou",
+                "limitation": "单家公告的历史样本，不代表目前在招或全国职业工资。",
+                "market": "中国大陆",
+                "name": "杭州青少年活动中心游艺项目操作员招聘",
+                "period": "2026-07-28",
+                "publisher": "杭州青少年活动中心",
+                "scope": "recruitment_proxy",
+                "url": "https://job.hzqsn.com/rms/apply/getNotice.action?keycode=d5684ea3-db6a-447c-b4dc-b28b6c8efa88"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "2026 年 5 月 12 日发布的高校线上双选会页面合列北京欢乐谷游乐设施、检票与餐饮等岗位；100 人与“2.2k+”均为合并口径，未按岗列人数、薪资或班次，也未注明计薪周期。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ride-beijing",
+                "limitation": "单家公告的历史样本，不代表目前在招或全国职业工资。",
+                "market": "中国大陆",
+                "name": "高校文旅双选会：北京欢乐谷",
+                "period": "页面发布：2026-05-12",
+                "publisher": "郑州旅游职业学院就业网",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zztrc.edu.cn/jy/info/1028/4634.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "大型游乐设施操作项目代号为 Y2。一般票务服务按实际岗位职责核对。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ride-shanghai",
+                "limitation": "上海指引；具体场所及设备另核。",
+                "market": "中国上海",
+                "name": "上海市场监管：大型游乐设施安全运营指引",
+                "period": "地方合规指引",
+                "publisher": "上海市市场监督管理局",
+                "scope": "contextual",
+                "url": "https://www.shanghai.gov.cn/gwk/search/content/2c984a7297a668ba0197af9e44882493"
               }
             ]
           },
@@ -36399,7 +36431,7 @@
       },
       "hero": {
         "h1": "娱乐与休闲服务员",
-        "quick_answer": "娱乐与休闲服务员在游乐园与休闲设施售票核验、引导顾客并介绍设施与规则，操作游乐设施与其他自动化设备并为顾客确认安全装置，监控规则与安全程序并在必要时升级处置，检查设备并做小修调整、清洁设备与场地、维护库存，并记录出勤、销售与维修活动。本页给出美国 OEWS 工资分位与 BLS 就业预测（平均增长、年均约 100,400 个空缺），中国侧仅提供行业口径与特种设备作业资格框架参照。",
+        "quick_answer": "游乐与休闲服务包括检票、游客引导、场地秩序和部分设施服务。先问岗位负责向游客说明，还是实际操作设备。中国大陆大型游乐设施的操作资质只适用于对应设备与任务，不能从普通服务岗位名推定。",
         "title": "娱乐与休闲服务员"
       },
       "market_signal_card": {
@@ -36950,7 +36982,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 2025—2035 年就业预测（年均约 100,400 个空缺）",
+            "label": "BLS 2025–2035 年就业预测（年均约 100,400 个空缺）",
             "secondary_value": null,
             "value": {
               "$item": "amusement-and-recreation-attendants.profile.onet-structured-fields-block.4",
@@ -37965,7 +37997,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与游客信息",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38073,7 +38105,7 @@
         "market": "美国",
         "measure": "就业增长率与官方净变化",
         "occupation_scope": "娱乐与休闲服务员",
-        "period": "2025—2035年",
+        "period": "2025–2035年",
         "source_refs": [
           "ep"
         ]
@@ -38085,14 +38117,14 @@
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "娱乐与休闲服务员",
-        "period": "2025—2035年",
+        "period": "2025–2035年",
         "source_refs": [
           "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（本轮未取得可核对的该职业分行业工资中位数，不使用第三方估算）",
+        "display_value": "证据不足：未取得该行业本职业工资中位数（本页不提供可核对的该职业分行业工资中位数，不使用第三方估算）",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（艺术、娱乐与休闲）",
@@ -38104,7 +38136,7 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（本轮未取得可核对的该职业分行业工资中位数，不使用第三方估算）",
+        "display_value": "证据不足：未取得该行业本职业工资中位数（本页不提供可核对的该职业分行业工资中位数，不使用第三方估算）",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（娱乐与主题公园）",
@@ -38116,7 +38148,7 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（本轮未取得可核对的该职业分行业工资中位数，不使用第三方估算）",
+        "display_value": "证据不足：未取得该行业本职业工资中位数（本页不提供可核对的该职业分行业工资中位数，不使用第三方估算）",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（政府）",
@@ -38128,7 +38160,7 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（本轮未取得可核对的该职业分行业工资中位数，不使用第三方估算）",
+        "display_value": "证据不足：未取得该行业本职业工资中位数（本页不提供可核对的该职业分行业工资中位数，不使用第三方估算）",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（其他行业）",
@@ -38332,41 +38364,29 @@
       },
       {
         "derivation": null,
-        "display_value": "3.7%（2025—2035）",
+        "display_value": "3.7%（2025–2035）",
         "fact_id": "employment-projection",
         "market": "美国",
         "measure": "就业预测口径",
         "occupation_scope": "娱乐与休闲服务员",
-        "period": "2025—2035年",
+        "period": "2025–2035年",
         "source_refs": [
           "ep"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "娱乐与休闲服务员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与游客信息"
     },
     "badges": [
-      "休闲设施现场服务：售票与顾客引导 · 游乐设施操作与安全确认 · 检查清洁与记录",
-      "AI：任务级变化说明 · 不给出替代年份",
-      "美国 OEWS 工资分位与 BLS 预测 · 中国大陆行业口径与特种设备作业资格框架 · 数据缺口标注"
+      "检票｜引导｜状态交接",
+      "设备操作与一般服务分开",
+      "美国 SOC 39-3091"
     ],
     "metrics": [
       {
@@ -38405,17 +38425,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "娱乐与休闲服务员做什么、需要哪些岗前培训与作业资格、美国工资分位与平均增长的就业预测及年均约 10.24 万空缺如何理解，以及中国大陆对应岗位的特种设备作业资格与每日试运行检查要求；说明数据口径与缺口。"
+      "text": "区分检票、游客指引和大型游乐设施操作，了解杭州与北京招聘样本、美国工资就业，并做停用信息的纸面交接。"
     },
     "title": {
       "availability": "available",
-      "text": "娱乐与休闲服务员：任务、工资与就业前景（O*NET 39-3091，前景光明）"
+      "text": "游乐与休闲服务员：游客引导、设施状态与入岗"
     }
   },
-  "source_content_sha256": "e17b81e6f874acf299a4661eea7acf3ead6054ab75b310291730a605a1e3502b",
+  "source_content_sha256": "f3ce8b620a407f7611e1d4851cd32a68e7c10ee0fdd8988e17dc6836614efc79",
   "subject": {
     "canonical_slug": "amusement-and-recreation-attendants",
     "name": "娱乐与休闲服务员",
-    "summary": "娱乐与休闲服务员在游乐园与休闲设施售票与核验门票、引导顾客并介绍设施与规则，操作游乐设施与自动化设备并为顾客确认安全装置，监控规则与安全程序、检查维护设备、清洁场地并记录出勤与销售；中国大陆侧，大型游乐设施操作人员属特种设备作业人员，须取得相应资格并按规程完成每日试运行与例行安全检查。"
+    "summary": "游乐与休闲服务包括检票、游客引导、场地秩序和部分设施服务。先问岗位负责向游客说明，还是实际操作设备。中国大陆大型游乐设施的操作资质只适用于对应设备与任务，不能从普通服务岗位名推定。"
   }
 }

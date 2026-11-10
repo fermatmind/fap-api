@@ -23369,13 +23369,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "如果你愿意持续阅读、解释复杂制度、引导不同观点按证据讨论，并逐份评价学生学习，就值得用虚构课程样本试做。若更偏独立研究，可比较政治学家岗位；若更重学段教学，另核教师资格和教学对象。"
+              "纸面体验｜比较两份虚构政策摘要，分别标出年份和适用制度，写一个能帮助学生检验比较前提的问题。 "
             ]
           },
           "id": "political-science-teachers-postsecondary.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23653,12 +23652,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业定义：在高等教育机构教授政治学、国际事务或国际关系课程；部分岗位兼做研究。"
+              "高校政治学教师讲授政治制度、行为与思想，并指导学生用材料提出和检验论点。课堂比较通常需要说明材料的时间和制度背景。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "political-science-teachers-postsecondary.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "transfer-onet-25-1065.00"
           ],
           "type": "prose"
         },
@@ -24744,16 +24743,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可帮助起草课程大纲、阅读问题、资料摘要和反馈框架，但原文核对、课程目标、评分、公平性、学生信息和学术责任仍由教师与学校承担。ILO 与相关研究测的是任务暴露或能力潜力，不能推成该职业的采用率、替代率或失业时间表；BLS 2025–2035 对精确职业的预测需独立解读。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比较两份虚构政策摘要，分别标出年份和适用制度，写一个能帮助学生检验比较前提的问题。"
             ]
           },
           "id": "political-science-teachers-postsecondary.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor",
-            "onet",
-            "ilo",
-            "arxiv",
-            "ep"
+            "transfer-onet-25-1065.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32682,6 +32678,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-25-1065.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 25-1065.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/25-1065.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37971,10 +37994,10 @@
       "text": "高校政治学教师"
     }
   },
-  "source_content_sha256": "d13130085a238532c0b6d81c35a4c3a1d08b62b358f10b07e8f5118a5c96f054",
+  "source_content_sha256": "be976e0eaddfa53990c327083a7274b2896c6fa7e9dbed333af96c7fcc558090",
   "subject": {
     "canonical_slug": "political-science-teachers-postsecondary",
     "name": "高校政治学教师",
-    "summary": "高校政治学教师教授大学层级的政治学、国际事务和国际关系课程，设计课程与评价学生学习，并可能同时开展研究和院系服务。求职时应分别核对教学与研究要求、学校聘任条件及具体岗位的工作量。"
+    "summary": "高校政治学教师讲授政治制度、行为与思想，并指导学生用材料提出和检验论点。课堂比较通常需要说明材料的时间和制度背景。"
   }
 }

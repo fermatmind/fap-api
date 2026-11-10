@@ -23656,13 +23656,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先看能否核对设备、端口和版本，把读数与猜测分开，依据测试缩小问题范围，遇权限或安全条件不明会停下询问，再看出勤与生活条件。一次体验不是岗位认证。"
+              "纸面体验｜比对虚构机柜端口图和测试单，圈出一处端口编号不一致，留给设备负责人查原图。 "
             ]
           },
           "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls-ooh"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24791,13 +24790,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "电信设备安装与维修人员安装、设置、调整和维修交换、分配、路由及客户通信设备，结合图纸和测试定位问题，复核修复结果、维护记录并向用户说明。49-2022.00不含线路安装职业，楼内通信布线可属于其任务。"
+              "通信设备安装维修人员在设备站点安装、测试或检修通信设备及连接，凭图纸和测试记录隔离故障并交接。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh"
+            "transfer-onet-49-2022.00"
           ],
           "type": "prose"
         }
@@ -25437,13 +25435,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：既有外部资料未提供可直接采用的实测可复核的49-2022任务级AI评分，另列编辑估算分数。可探索手册问题、记录草稿和测试清单等文本辅助；诊断真实性、操作权限与安全条件仍要人工核，不预测个人失业概率。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比对虚构机柜端口图和测试单，圈出一处端口编号不一致，留给设备负责人查原图。"
             ]
           },
           "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.display.ai_impact_table.answer",
           "source_refs": [
-            "bls-ors",
-            "bls-ooh"
+            "transfer-onet-49-2022.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32743,6 +32741,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-49-2022.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 49-2022.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/49-2022.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38259,10 +38284,10 @@
       "text": "电信设备安装与维修人员（不含线路安装人员）"
     }
   },
-  "source_content_sha256": "1943b127d73493df6453a05994495d56ea715f30e8f18a573a2f0933dc0d5364",
+  "source_content_sha256": "dbee132f8d5c85c0c003c0e95ea072af32cf06a34ee0d80b4ee5a8b7c86dff84",
   "subject": {
     "canonical_slug": "telecommunications-equipment-installers-and-repairers-except-line-installers",
     "name": "电信设备安装与维修人员（不含线路安装人员）",
-    "summary": "安装、设置、调整和维修交换、分配、路由及客户通信设备，结合图纸与测试定位异常，复核修复结果并留记录和用户说明。O*NET49-2022.00可含楼内通信布线，不合并线路安装职业；中国任务、资格与现场许可另核。"
+    "summary": "通信设备安装维修人员在设备站点安装、测试或检修通信设备及连接，凭图纸和测试记录隔离故障并交接。"
   }
 }

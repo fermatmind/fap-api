@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先做W29虚构卡片布局，计算总宽与窄屏换行，区分修改说明和新增条件。再了解用户研究、视觉与交互、兼容测试和开发交付；会用设计工具不等于已验证真实体验。"
+              "纸面体验｜拿一个提交表单画出成功、校验失败和加载中三种状态。注明焦点去向及用户怎样继续。 "
             ]
           },
           "id": "web-and-digital-interface-designers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,12 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "网页与数字界面设计师设计网站或数字界面的布局、导航、功能与视觉呈现，研究用户反馈并测试不同浏览器或设备的兼容性和可用性；可配合客户端代码、图形与内容维护。漂亮画面只是部分产出，布局规格、交互状态、测试记录和开发协作同样需要核对。"
+              "网页与数字界面设计师把用户任务拆成界面流程，制作原型，核对反馈、交互状态及开发交接。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "web-and-digital-interface-designers.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-15-1255.00"
           ],
           "type": "prose"
         }
@@ -25570,13 +25569,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本精确职业任务级AI效果评分及替代率因果资料。文字方案、W29尺寸算术与真实用户测试分开；总宽296只说明给定条件，不给兼容、无障碍或发布保证。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：拿一个提交表单画出成功、校验失败和加载中三种状态。注明焦点去向及用户怎样继续。"
             ]
           },
           "id": "web-and-digital-interface-designers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-15-1255.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33040,6 +33039,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-15-1255.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 15-1255.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/15-1255.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38504,10 +38530,10 @@
       "text": "网页与数字界面设计师：任务、工资与布局体验｜费马测试"
     }
   },
-  "source_content_sha256": "d3fb3997670ae0446f86cc6f8ac24bd7ada7122fc574b85259a0ffef5d7a4174",
+  "source_content_sha256": "8de5b5d4c0f0c57f50d3b7dae4f63caf2fe1f3a2430cc6ceb4962e4a7a3870df",
   "subject": {
     "canonical_slug": "web-and-digital-interface-designers",
     "name": "网页与数字界面设计师",
-    "summary": "网页与数字界面设计师设计网站或数字界面的布局、导航、功能与视觉呈现，研究用户反馈并测试不同浏览器或设备的兼容性和可用性；可配合客户端代码、图形与内容维护。漂亮画面只是部分产出，布局规格、交互状态、测试记录和开发协作同样需要核对。"
+    "summary": "网页与数字界面设计师把用户任务拆成界面流程，制作原型，核对反馈、交互状态及开发交接。"
   }
 }

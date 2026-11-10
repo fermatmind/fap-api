@@ -1527,7 +1527,7 @@
         "status": "pending_mapping"
       },
       "item:small-engine-mechanics.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:small-engine-mechanics.sources.source-card.1": {
         "status": "mapped"
@@ -15639,8 +15639,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -22621,7 +22627,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "The exercise only checks text and evidence; do not start, disassemble, refuel, energize, short, or test equipment. Real diagnosis and repair must be performed by trained personnel per manufacturer instructions and on-site safety procedures."
+              "Think twice if you dislike working through intermittent faults, keeping work records, or the noise and physical demands of a repair shop."
             ]
           },
           "id": "small-engine-mechanics.quick-decision.fit-decision-checklist.1",
@@ -22637,7 +22643,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use a fictional lawn mower intake card for the paper experience: check the model, the customer's described symptoms, known evidence, missing information, and items awaiting approval, and write a handoff record containing no repair actions."
+              "In section 09, “Entry, qualifications, and career development,” try ME-01: Check equipment identity and retest records. Save a first draft before checking the key."
             ]
           },
           "id": "small-engine-mechanics.quick-decision.fit-decision-checklist.2",
@@ -22651,7 +22657,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Suits people who like locating mechanical faults, can verify per records and manufacturer instructions, and are willing to accept on-site training and a seasonal business rhythm. First confirm whether you can accept noise, fuel and fluids, hazardous equipment, standing, and customer communication."
+              "Consider this work if you like tracing equipment models, fault reports, parts, and retest records."
             ]
           },
           "id": "small-engine-mechanics.quick-decision.fit-decision-checklist.3",
@@ -22667,7 +22673,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The conclusions come from public occupational tasks and editorial summaries, not an individual assessment or an employment guarantee. The actual models repaired, supervision, manufacturer training, and warranty scope must be checked with the target employer; the same title may also cover equipment rental transactions, customer service, or power tool repair."
+              "Separate unit identity, symptom evidence, retesting, and return approval."
             ]
           },
           "id": "small-engine-mechanics.quick-decision.fermat-decision-card.6",
@@ -22684,7 +22690,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Inspect, adjust, and repair small engines in lawn mowers, chainsaws, and portable generators, recording repair hours and parts and verifying repair results. A customer's fault guess does not equal a diagnosis; intake, quoting, repair, test running, and delivery must be checked per actual training and position division of labor."
+              "Consider this work if you like tracing equipment models, fault reports, parts, and retest records."
             ]
           },
           "id": "small-engine-mechanics.quick-decision.fermat-decision-card.7",
@@ -24046,7 +24052,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First use A1—A5 for paper evidence classification; prioritize learning models, work orders, and safety escalation, and do not treat AI output as a fault conclusion."
+              "Learn model checks, work orders, and escalation first. Then check whether the tool classifies the records faithfully."
             ]
           },
           "id": "small-engine-mechanics.ai-impact.ai-impact-table.11",
@@ -24375,7 +24381,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Summarize customer description, model, and repair history and flag the 4821 and 4812 conflict."
+              "Summarize the customer report, unit ID, and service history. Mark which records apply to the unit."
             ]
           },
           "id": "small-engine-mechanics.ai-impact.ai-impact-table.34",
@@ -25074,7 +25080,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Keep the original work orders, drafts, reasons for changes, and the receiver, and avoid confusing 4821/4812."
+              "Keep the original job, draft, reasons for edits, and handoff owner."
             ]
           },
           "id": "small-engine-mechanics.ai-impact.ai-impact-table.82",
@@ -25163,7 +25169,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "4821 and 4812 are similar, and a model summary may merge different equipment."
+              "Similar serial numbers can cause a tool to merge separate units. Verify each record against its unit label or work order."
             ]
           },
           "id": "small-engine-mechanics.ai-impact.ai-impact-table.88",
@@ -25247,7 +25253,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Check serial number 4821 and the customer's original words"
+              "Verify the unit ID and the customer’s wording. Record which symptoms have yet to be reproduced."
             ]
           },
           "id": "small-engine-mechanics.ai-impact.ai-impact-table.94",
@@ -25345,7 +25351,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Flags the 4812 and 4821 number difference"
+              "Check serial numbers and work order IDs separately, even for units of the same model."
             ]
           },
           "id": "small-engine-mechanics.ai-impact.ai-impact-table.101",
@@ -25401,7 +25407,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Lists the F2 unidentified fluid traces and photo gaps"
+              "Photos document visible observations. A technician verifies materials and possible causes."
             ]
           },
           "id": "small-engine-mechanics.ai-impact.ai-impact-table.105",
@@ -27198,31 +27204,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Power tool repairers",
@@ -27645,7 +27651,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Can identify the number difference between 4821 and 4812.",
+              "Use the paper exercise to see how you handle work orders and retesting.",
               "Marks unconfirmed costs as unknown."
             ]
           },
@@ -27747,7 +27753,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "More important is whether you can accept mechanical diagnosis, standing and manual work, noise and fuel environments, customer communication, and rigorous work orders long term. First do the fictional A1—A5 paper exercise, then check the actual work through compliant training and job observation."
+              "Use the paper exercise to see how you handle work orders and retesting."
             ]
           },
           "id": "small-engine-mechanics.fit.personality-fit-block.27",
@@ -28182,7 +28188,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Complete the A1—A5 fact matrix, escalation card, customer draft, and version note, and observe whether the person is willing to repeatedly check identity and unknowns; paper work does not prove actual repair ability."
+              "Use the paper exercise to see how you handle work orders and retesting."
             ]
           },
           "id": "small-engine-mechanics.fit.personality-fit-block.55",
@@ -28504,7 +28510,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The equipment smells of gasoline and photo F2 shows unidentified fluid traces; the nature of the liquid is unconfirmed."
+              "Keep the discrepancy record. Actual checks and return to service follow shop authorization."
             ]
           },
           "id": "small-engine-mechanics.risk.career-risk-cards.14",
@@ -28688,7 +28694,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Writes the LM-20/4812 old repair onto this 4821 equipment."
+              "Keep the discrepancy record. Actual checks and return to service follow shop authorization."
             ]
           },
           "id": "small-engine-mechanics.risk.career-risk-cards.26",
@@ -28812,7 +28818,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Promising same-day completion when there is still no on-site test, parts, or quote."
+              "Keep the discrepancy record. Actual checks and return to service follow shop authorization."
             ]
           },
           "id": "small-engine-mechanics.risk.career-risk-cards.34",
@@ -28990,9 +28996,9 @@
               {
                 "id": "clearance",
                 "values": [
-                  "Editorial design: intake evidence",
-                  "Use a fictional equipment model, customer statement, and missing information to show accurate records, without pretending to be an actual diagnosis.",
-                  "Can point out which item is a customer description and which needs on-site inspection."
+                  "Zonsen general-purpose gasoline engine support",
+                  "The manufacturer describes after-sales service for general-purpose gasoline engines and related equipment.",
+                  "Ask what the shop services and who handles training, safe work, retesting, and return approval."
                 ]
               },
               {
@@ -29006,9 +29012,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "Manufacturer and employer training",
-                  "BLS notes that warranty or specific model tasks may require manufacturer courses, and certification is generally not universally mandatory.",
-                  "Check equipment, safety procedures, supervision, and warranty authorization with the target employer."
+                  "Rato general-purpose engine service",
+                  "The manufacturer describes general-purpose engines, portable generators, and fault-repair training as service examples.",
+                  "Ask what the shop services and who handles training, safe work, retesting, and return approval."
                 ]
               }
             ]
@@ -29016,7 +29022,10 @@
           "id": "small-engine-mechanics.path.employer-evidence.1",
           "source_refs": [
             "employer",
-            "editor"
+            "editor",
+            "d018-cn-main",
+            "d018-cn-context",
+            "d018-us-example"
           ],
           "title": "What do employers usually look at in hiring?",
           "type": "cards"
@@ -29029,37 +29038,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and setup | All are editorially designed fictional material",
-                  "You are a new apprentice at a repair shop and are only responsible for organizing intake material, marking gaps, and handing off to trained technicians. No contact with real equipment is needed. All models, dates, parts, and personnel are fictional and do not represent manufacturer instructions.",
-                  "A1 | Intake at 09:00 on 2026-09-16: the customer says \"the lawn mower is hard to start and I smelled gasoline\"; the equipment card shows model LM-20 and the last four serial digits 4821. The customer provided no purchase date, warranty proof, fuel use history, or repair records. The customer's judgment that \"the spark plug is broken\" has no test evidence yet.",
-                  "A2 | Intake photo contents: the housing label LM-20/4821 is legible, and photo F2 shows unidentified fluid traces on the underside of the equipment; the photo has no timestamp or close-up and cannot confirm a fuel leak or judge equipment safety.",
-                  "A3 | Old record in the work order system: under the same customer name there is equipment number LM-20/4812, whose ignition component was replaced on 2026-07-03. The serial number differs from this 4821, and the old repair cannot automatically be attributed to this machine; the customer and technician must check.",
-                  "A4 | At 10:00 on 2026-09-16 the customer called hoping to pick up the machine that afternoon and said they would pay a \"routine maintenance fee\". There is currently no trained technician inspection, quote, parts, warranty status, or safety verification record; completion time and fixed cost must not be promised.",
-                  "A5 | Responsibility chain: the apprentice records material and marks \"pending technician inspection\"; the trained technician judges hazards, diagnoses, and verifies per site procedures; the service supervisor checks quotes and customer commitments. If the fluid traces may involve fuel, isolate immediately per the shop safety procedure and notify the responsible person. The system changes status only after the actual evidence is complete and approval is obtained."
+                  "Fictional inputs",
+                  "Fictional work order G12 lists model M4, unit 761. The customer says it stopped after running for a while. The technician logged its condition at intake and has yet to reproduce the symptom.",
+                  "An older attachment, H7, lists the same M4 model, unit 716, and a satisfactory load check. A parts worker suggests reusing it because the model matches. G12 has no test conditions, load retest, or technician approval.",
+                  "The technician verifies the unit and retest. The service lead decides whether it can be returned. Review records only."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Tasks and outputs",
-                  "List A1—A3 in four categories: equipment identity, customer statements, photo observations, and old records; mark each item's source and credibility limits in the paper matrix.",
-                  "Use A4—A5 to write follow-up intake questions, items to inspect, stop and escalation conditions, and a customer callback draft; deliver a one-page work order summary containing no diagnostic conclusions."
+                  "Task and deliverable",
+                  "Write an intake summary covering unit identity, the customer report, whether the older job applies, missing evidence, and the next owner.",
+                  "Separate the customer report, intake observation, and a completed retest.",
+                  "Use paper or a local spreadsheet and identify the evidence."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answer (complete it independently before reading)",
-                  "A1 shows 4821 and the old order A3 shows 4812, and they cannot be merged. The customer's guess of a spark plug fault has no test evidence; the F2 fluid traces are only a photo observation and cannot characterize a fuel leak or rule out risk.",
-                  "A4 cannot promise same-day completion or collect a routine maintenance fee, because inspection, quoting, and warranty confirmation have not yet occurred. The trained technician should be notified to check the fluid traces and equipment identity, and the supervisor then decides the reply on the customer's time and price.",
-                  "Handoff example: work order LM-20/4821, customer description of hard starting and gasoline odor, photo F2 showing unidentified fluid traces, old record with an inconsistent equipment number; status \"pending technician inspection, safety issue pending verification\", with the responsible person and customer callback to-dos listed."
+                  "Before checking your work",
+                  "Save your own first draft on day 6. Follow the day 7 instructions to open the key.",
+                  "Work independently.",
+                  "Keep the versions.",
+                  "Leave missing evidence open."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries and review",
-                  "The exercise uses fictional text only and does not start, refuel, disassemble, test, charge, or move real equipment. Photos must not be treated as testing, old orders as the same machine's repair, or customer guesses as faults, and quotes, warranty, or operational verification must not be fabricated. Real risks are handed to trained personnel per site rules."
+                  "Authority boundaries",
+                  "Use the fictional records only.",
+                  "Do not approve or release real work."
                 ]
               }
             ]
@@ -29068,7 +29077,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: paper evidence and handoff for a fictional lawn mower work order",
+          "title": "ME-01 | Check equipment identity and retest records",
           "type": "cards"
         },
         {
@@ -29079,33 +29088,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Intake fact matrix",
-                  "Per A1—A3, list the equipment number, customer statement, photo observations, old order, and sources; make clear that 4821 and 4812 are inconsistent.",
-                  "Others can distinguish known, unknown, and misfiling risk."
+                  "Version and material record",
+                  "Identify the original record and current version.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Safety and escalation card",
-                  "Mark the \"gasoline odor\" and unidentified fluid traces as requiring on-site safety checking and write the technician and supervisor receivers.",
-                  "Do not write a confirmed leak or specific disassembly handling steps."
+                  "Inputs and status",
+                  "Compare source records, targets, and discrepancies.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Customer callback draft",
-                  "Respond to the same-day pickup request but explain that inspection, quoting, and verification are needed first; record the callback responsibility and time.",
-                  "Do not promise a fixed cost, warranty eligibility, or that it is repaired."
+                  "Open checks and handoff",
+                  "Separate open checks, verified findings, and owners.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Version review note",
-                  "Keep the first and revised drafts and make clear how customer guesses, mismatched old orders, and photo evidence limits changed the judgment.",
-                  "The work proves record habits, not on-site repair skills or hiring evidence."
+                  "Delivery boundaries",
+                  "Record physical checks and approval status.",
+                  "Use the supplied records."
                 ]
               }
             ]
@@ -29136,27 +29145,27 @@
             "rows": [
               [
                 "Interview: fault description",
-                "Can distinguish customer statements from verified facts",
-                "Makes clear that the spark plug is only a customer guess",
-                "A paper answer does not mean being able to diagnose in practice"
+                "Identify the original record and current version.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Interview: identity conflict",
-                "How to handle the 4821 and 4812 old work orders",
-                "Keep both numbers and ask someone to check",
-                "Records cannot be merged based on the customer name"
+                "Compare source records, targets, and discrepancies.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Probation period: safety escalation",
-                "How to report per site rules when smelling gasoline and seeing fluid traces",
-                "Stops unauthorized handling and hands to the trained technician and supervisor",
-                "On-site measures follow employer procedures"
+                "Separate open checks, verified findings, and owners.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Probation period: work order handoff",
-                "Whether quotes, parts, verification, and unfinished items are recorded",
-                "The next person can trace sources and responsible persons",
-                "One exercise does not prove long-term ability"
+                "Record physical checks and approval status.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ]
             ]
           },
@@ -29175,50 +29184,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day one",
-                  "Read A1—A5 and write the authority boundaries of the apprentice, technician, and supervisor; list the items that must not be handled independently."
+                  "Day 1",
+                  "Record the subject and versions."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day two",
-                  "Build the fact matrix per A1—A3, separating customer statements, photos, old records, and unknowns."
+                  "Day 2",
+                  "Identify the original record and current version."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day three",
-                  "Check the serial number difference between 4821 and 4812 and write the wrong-order risk and pending questions."
+                  "Day 3",
+                  "Compare source records, targets, and discrepancies."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day four",
-                  "Read A4 and write the customer callback draft, without promising same-day completion, price, or warranty."
+                  "Day 4",
+                  "Separate open checks, verified findings, and owners."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day five",
-                  "Write the safety and escalation card and hand the gasoline odor and F2 fluid traces to the trained person, without diagnosing."
+                  "Day 5",
+                  "Record physical checks and approval status."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day six",
-                  "After sealing the first draft, read the reference answer and mark where a customer guess or an old order was mistakenly treated as evidence."
+                  "Day 6",
+                  "Finish and save your own first handoff draft with the original records and the reasons for your decisions. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day seven",
-                  "Complete a one-page work order handoff and retrospective: evidence, gaps, responsible persons, and your own sense of the work rhythm."
+                  "Day 7",
+                  "After saving your day 6 draft, open “ME-01 answer key and rubric (open on day 7)” in the FAQ. Use the rubric and record one revision with its reason."
                 ]
               }
             ]
@@ -29235,20 +29244,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep the first and revised drafts, each item corresponding to the evidence source in A1—A5.",
-              "Check whether \"the spark plug is broken\" was written as a diagnosis and whether the F2 fluid traces were written as a confirmed leak.",
-              "Check whether the LM-20/4812 old repair was mistakenly attributed to 4821.",
-              "Record the time spent each day and whether you are willing to repeatedly check identity, symptoms, risk, and work orders.",
-              "Keep unidentified fluid traces, warranty, quotes, and operational verification as pending; do not draw equipment safety conclusions from a text exercise.",
-              "Check equipment type, training and supervision, customer service, and warranty scope against real position postings.",
-              "Record unfinished items truthfully; the work cannot replace on-site repair training or occupational qualifications."
+              "Match each record to its work order, unit ID, and model.",
+              "Separate the customer report, observations, and retest results.",
+              "List any conditions and original records that still need checking.",
+              "State the review status and who should follow up.",
+              "Use the fictional records and keep the first draft for review.",
+              "Use the named answer key on day 7.",
+              "Record one revision and the evidence behind it."
             ]
           },
           "id": "small-engine-mechanics.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to judge at the end of seven days whether to continue",
+          "title": "Submission and review checklist",
           "type": "list"
         },
         {
@@ -29349,7 +29358,7 @@
               "The BLS detailed occupation 49-3053 has a typical entry of a high school diploma or equivalent with moderate-term on-the-job training; vocational courses and industry certification may help, and a paper exercise must not be treated as equipment operation training.",
               "The BLS handbook is the combined small engine mechanics group; manufacturer courses are often a prerequisite for specific warranty work, and industry certification is generally not universally mandatory. Actual requirements are checked by brand, model, and employer.",
               "China's agricultural machinery repairer 5-05-05-02 is relevant only in some agricultural machinery settings; the Anhui 2025 contents republished by Huainan are provincial training subsidy information and do not establish cross-country qualification mutual recognition.",
-              "On-site risks from fuel, batteries, moving parts, hot surfaces, and noise are handled by trained personnel per the system; a paper handoff has no authority to declare equipment safe."
+              "Ask what the shop services and who handles training, safe work, retesting, and return approval."
             ]
           },
           "id": "small-engine-mechanics.path.credential-boundary.1",
@@ -29368,14 +29377,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "The Home Depot Tuscaloosa tool rental repair technician posting covers small engines, outdoor power equipment, and handheld power equipment, and also includes rental transactions and customer repair records; this is a mixed position and cannot serve as a uniform 49-3053 entry requirement.",
-              "Insufficient evidence: the body was read on 2026-10-02, and no comparable wage quote for this occupation was verified for that mixed Home Depot position; no national wage or certification condition is inferred from it."
+              "Rato general-purpose engine service. The manufacturer describes general-purpose engines, portable generators, and fault-repair training as service examples.",
+              "Advanced Power Equipment small-engine technician. The posting covers diagnosis, repair, and outdoor equipment service. Its experience requirements apply to that role."
             ]
           },
           "id": "small-engine-mechanics.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "editor"
+            "d018-cn-main",
+            "d018-us-example"
           ],
           "title": "Recruitment sample: a mixed tool rental repair position",
           "type": "notice"
@@ -29558,7 +29567,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The typical US BLS detailed occupational entry is a high school diploma or equivalent with moderate-term on-the-job training. First practice recording with the paper A1—A5, then learn specific models through compliant courses or employer supervision; industry certification is usually not uniformly mandatory nationwide, but warranty work may require manufacturer training."
+              "Separate unit identity, symptom evidence, retesting, and return approval."
             ]
           },
           "id": "small-engine-mechanics.path.career-path-block.20",
@@ -29709,7 +29718,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The A1—A5 paper work order can distinguish customer statements, photos, and equipment numbers."
+              "Separate unit identity, symptom evidence, retesting, and return approval."
             ]
           },
           "id": "small-engine-mechanics.path.career-path-block.30",
@@ -31507,7 +31516,7 @@
                 ]
               },
               {
-                "answer": "Use only the fictional A1—A5 intake material to check equipment numbers 4821 and 4812, customer guesses, the F2 fluid traces, and pending items; do not start, disassemble, or touch real equipment.",
+                "answer": "In section 09, “Entry, qualifications, and career development,” try ME-01: Check equipment identity and retest records. Save a first draft before checking the key.",
                 "id": "small-engine-mechanics.faq.9",
                 "question": "How to experience this work safely?",
                 "question_key": "career.faq.small-engine-mechanics.risk-boundary",
@@ -31516,10 +31525,19 @@
                 ]
               },
               {
-                "answer": "4821 and 4812 cannot be merged; \"the spark plug is broken\" is a customer guess; the F2 fluid traces are not characterized; without inspection, quoting, and verification, same-day delivery or repaired status cannot be promised.",
+                "answer": "After trying section 09, use the key to check equipment identity, the limits of the results, and the next owner.",
                 "id": "small-engine-mechanics.faq.10",
-                "question": "What is the key to the exercise reference answer?",
+                "question": "How can I check my sample service record?",
                 "question_key": "career.faq.small-engine-mechanics.outlook-transition",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "G12 is for M4 unit 761. Keep the reported stop as a symptom not yet reproduced.\n\nH7 is for unit 716. The matching model does not make it a retest for unit 761.\n\nThe intake observation establishes no cause, load condition, or repair outcome. List those separately for review.\n\nAsk the technician to verify the unit ID and record the checks and retest conditions under the shop process. Keep both original IDs.\n\nLeave G12 open for the service lead’s review and return decision.\n\nScore each item 0–2: version and evidence, item-by-item decisions, unknown scope, and approval and handoff.\n\nAward 2 for complete and traceable work, 1 for partial work, and 0 for missing evidence or exceeding authority.",
+                "id": "small-engine-mechanics.faq.11",
+                "question": "ME-01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.small-engine-mechanics.exercise-answer-key",
                 "source_refs": [
                   "editor"
                 ]
@@ -31545,7 +31563,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Compiled editorially from O*NET49-3053 occupational tasks, BLS2025 wages and the 2025—2035 detailed projection, NBS and Chifeng wages, and Chinese related training contents; the A1—A5 are fictional paper exercises."
+              "ME-01 is a fictional exercise for this page."
             ]
           },
           "id": "small-engine-mechanics.sources.source-card.1",
@@ -31567,20 +31585,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "US occupational wages and projections use the O*NET/BLS detailed row; training and certification use the BLS small engine handbook. For China, the Anhui subsidized training contents (republished by Huainan), NBS2025 resident services and repair industry wages, and the Chifeng 2025 broad-category survey are used."
+              "The manufacturer describes after-sales service for general-purpose gasoline engines and related equipment."
             ]
           },
           "id": "small-engine-mechanics.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "onet-wages",
-            "ep",
-            "privacy",
-            "nbs",
-            "r2-pay-2",
-            "cnclass",
-            "employer",
-            "editor"
+            "d018-cn-context"
           ],
           "type": "prose"
         },
@@ -31589,16 +31599,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round on 2026-10-02 checked the national five percentiles, the independent employment projection, the 14 tasks and interests, training and certification, the Chifeng 2025 survey, the Anhui subsidy contents, the Home Depot mixed position body, and the eight adjacent occupations. NBS and ILO, LLM, and NIST methodology follow the material already verified in this batch; no comparable 49-3053 industry wage or independent GenAI measurement was obtained."
+              "The manufacturer describes general-purpose engines, portable generators, and fault-repair training as service examples."
             ]
           },
           "id": "small-engine-mechanics.sources.source-card.3",
           "source_refs": [
-            "onet-wages",
-            "ep",
-            "nbs",
-            "r2-pay-2",
-            "editor"
+            "d018-cn-main"
           ],
           "type": "prose"
         },
@@ -31607,7 +31613,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The Chinese page explains the detailed US occupation and compares related Chinese equipment repair settings; it does not establish occupational code or qualification mutual recognition. The paper exercise uses no real equipment, and on-site safety and warranty conditions are checked per authorized training."
+              "Read U.S. wages and employment for the occupation shown. Chinese service documents describe scope and provide no wage estimate. A historical posting from Xiji Collective Forest Farm in Beijing lists troubleshooting chainsaws and brush cutters, engine repair, service records, and on-site emergency work. The target start was March 20, 2026. Current availability is unverified."
             ]
           },
           "id": "small-engine-mechanics.sources.source-card.4",
@@ -31615,7 +31621,10 @@
             "onet",
             "cnclass",
             "privacy",
-            "editor"
+            "editor",
+            "d018-cn-main",
+            "d018-us-example",
+            "d018-cn-historical-recruitment"
           ],
           "type": "prose"
         }
@@ -31654,13 +31663,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Return to the outdoor power equipment and other small engine mechanics occupation page",
@@ -31881,8 +31890,8 @@
               {
                 "accessed_at": "2026-09-30",
                 "details": [
-                  "Fictional tasks and exercise boundaries",
-                  "Contains no real repair or operational verification and is not an occupational qualification"
+                  "ME-01 is a fictional paper exercise.",
+                  "Separate unit identity, symptom evidence, retesting, and return approval."
                 ],
                 "evidence_type": "Fictional tasks and exercise boundaries",
                 "id": "editor",
@@ -32193,6 +32202,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The manufacturer describes general-purpose engines, portable generators, and fault-repair training as service examples."
+                ],
+                "evidence_type": "primary_document",
+                "id": "d018-cn-main",
+                "limitation": "Manufacturer support and training information, used to illustrate equipment and fault-repair settings.",
+                "market": "Mainland China",
+                "name": "Rato general-purpose engine service",
+                "period": "Date shown where available",
+                "publisher": "Rato",
+                "scope": "contextual",
+                "url": "https://www.ratogh.com/shows/24/7.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The manufacturer describes after-sales service for general-purpose gasoline engines and related equipment."
+                ],
+                "evidence_type": "primary_document",
+                "id": "d018-cn-context",
+                "limitation": "Manufacturer information on general-purpose gasoline engines and related equipment.",
+                "market": "Mainland China",
+                "name": "Zonsen general-purpose gasoline engine support",
+                "period": "Date shown where available",
+                "publisher": "Zonsen Power",
+                "scope": "contextual",
+                "url": "https://zonsenpower.cn/mobile/page/34.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The posting covers diagnosis, repair, and outdoor equipment service. Its experience requirements apply to that role."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d018-us-example",
+                "limitation": "One U.S. employer posting, used to illustrate experience with two-stroke and four-stroke small equipment.",
+                "market": "United States",
+                "name": "Advanced Power Equipment small-engine technician",
+                "period": "Date shown where available",
+                "publisher": "Advanced Power Equipment",
+                "scope": "recruitment_proxy",
+                "url": "https://www.advanced-power-equipment.com/hiring"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The post covers troubleshooting chainsaws, brush cutters, and blowers, engine repair, and parts and service records."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d018-cn-historical-recruitment",
+                "limitation": "The on-site forest-farm role also covers electrical, hydraulic, and transmission systems and emergency repairs. Use it as a task comparison.",
+                "market": "Mainland China, Tongzhou, Beijing",
+                "name": "Garden machinery mechanic, Xiji Collective Forest Farm, Beijing",
+                "period": "Target start 2026-03-20. Current availability unverified.",
+                "publisher": "Xiji Collective Forest Farm (Zhaopin)",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhaopin.com/jobdetail/CCL1216770150J40925216702.htm"
               }
             ]
           },
@@ -35505,7 +35574,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person fits outdoor power equipment and other small engine mechanics?"
+        "title": "Would small-engine repair suit me?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36887,7 +36956,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests fit outdoor power equipment and other small engine mechanics",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37009,6 +37078,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which repair directions can be compared further?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
+      "interface.quick_decision.suit_heading": "Who tends to enjoy small-engine repair?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "US wage reference",
@@ -37440,14 +37510,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What do outdoor power equipment and other small engine mechanics do? Check the O*NET 49-3053.00 tasks, US 2025 wages and the 2025—2035 employment projection, related Chinese occupations, and safety boundaries, and experience a paper intake record."
+      "text": "Explore outdoor power equipment repair, service intake, and retest records. Compare job examples and U.S. wages, then try a sample work order."
     },
     "title": {
       "availability": "available",
       "text": "Outdoor power equipment and other small engine mechanics"
     }
   },
-  "source_content_sha256": "a484dc9234f0f3f459b16f3ecf8ee050b5dce31b9d2278535a317a46b23fb0c8",
+  "source_content_sha256": "a526bdc5c0aceb483c02e6c0e451fcfbb2d77dde71b376c98ecbe9a84e7f097a",
   "subject": {
     "canonical_slug": "small-engine-mechanics",
     "name": "Outdoor power equipment and other small engine mechanics",

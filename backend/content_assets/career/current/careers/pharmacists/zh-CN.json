@@ -23377,14 +23377,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "下一步核目标法域的药学教育、执照、医院或零售机构培训及岗位权限；虚构练习不代表临床判断或真实处方审核。"
+              "纸面体验｜用两张虚构且无药品信息的处方封面找出版本日期冲突，记录需药师确认的原始编号和时间。 "
             ]
           },
           "id": "pharmacists.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "cnclass",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23693,14 +23691,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET美国职业分类不等于中国执业药师或药学职称；资格与处方权限分开核。"
+              "药师审核处方、调配或监督调配，并向患者解释用药信息。发现处方疑点时，药师核对记录并按工作流程联系相关临床人员。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "pharmacists.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "cnclass",
-            "editor"
+            "transfer-onet-29-1051.00"
           ],
           "type": "prose"
         },
@@ -24813,16 +24809,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：药剂师生成式AI采用率、整体替代率及消失年份未核得。ASHP 2025报道受访医院近四分之三使用EHR自动核验某些医嘱，涉及规则式算法，不能当药师GenAI采用率或普遍免审。处方审核与患者用药责任依法域和机构制度核。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：用两张虚构且无药品信息的处方封面找出版本日期冲突，记录需药师确认的原始编号和时间。"
             ]
           },
           "id": "pharmacists.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "oews",
-            "census",
-            "msresearch",
-            "cnclass",
-            "editor"
+            "transfer-onet-29-1051.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33224,6 +33217,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-29-1051.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 29-1051.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/29-1051.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38476,10 +38496,10 @@
       "text": "药剂师"
     }
   },
-  "source_content_sha256": "004b47b184bdf61ee401b62a4f219ca8930b0e8fee242e4865c158c6f3a4f56e",
+  "source_content_sha256": "062cb87089b581871e3c3a7b09b8e6463d0361e0e53aef4299b80ea3160f614c",
   "subject": {
     "canonical_slug": "pharmacists",
     "name": "药剂师",
-    "summary": "药剂师（O*NET 29-1051.00）审核处方的准确性与适宜性，核患者信息、过敏史、药品和用法，调配或监督调配、最终核对并向患者解释用药信息，与医疗团队沟通异常。具体执业范围、处方审核和发药权由所在地法规、执照及机构制度决定；本页不提供个体治疗建议。"
+    "summary": "药师审核处方、调配或监督调配，并向患者解释用药信息。发现处方疑点时，药师核对记录并按工作流程联系相关临床人员。"
   }
 }

@@ -36,13 +36,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -63,7 +63,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -1542,7 +1542,7 @@
         "status": "pending_mapping"
       },
       "item:automotive-body-and-glass-repairers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:automotive-body-and-glass-repairers.sources.source-card.1": {
         "status": "mapped"
@@ -23166,7 +23166,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "One-line judgment: Automotive Body and Glass Repairers are not about \"a couple of taps and a coat of paint\" but about linking vehicle damage assessment, sheet metal shaping, welding and cutting, grinding and painting, frame and dimensional alignment, and glass and accessory replacement into a checkable, measurable, reviewable repair process; people who only want to deliver the car as fast as possible and are unwilling to verify against process parameters and procedures are not suited to it."
+              "Find BD-65 in section 09. Submit both decisions and a one-page handoff before opening the reference."
             ]
           },
           "id": "automotive-body-and-glass-repairers.quick-decision.fit-decision-checklist.1",
@@ -23181,7 +23181,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: you can read repair work orders and damage reports, judge the condition of the frame and panels by dimensions and symmetry, are willing to work to paint mixing ratios and process parameters and to work under ventilation and protective conditions, can complete degreasing and masking before painting, and stop and ask for guidance when structural parts, safety parts, or repair dimensions are unclear."
+              "Explore this work if you like checking measurements against a specification, documenting rework and handing unresolved tickets to the responsible reviewer."
             ]
           },
           "id": "automotive-body-and-glass-repairers.quick-decision.fit-decision-checklist.2",
@@ -23195,7 +23195,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions for pausing your investment: you have not yet completed one full assessment—shaping—grinding—painting—review process under any supervised conditions, or you can only describe your interest as \"liking cars\"; also do not treat course grades, one time helping a friend touch up paint, or being able to drive as proof that you can repair structural parts independently, weld and cut, or paint. Work involving welding and cutting, structural part repair, and painting must be carried out by organizations and personnel with the appropriate training and authorization following procedures; this page does not provide welding, painting, or field work instructions."
+              "Ask who measures, who reviews structural or glass safety, and who releases the vehicle. Check authority for each task."
             ]
           },
           "id": "automotive-body-and-glass-repairers.quick-decision.fit-decision-checklist.3",
@@ -23211,12 +23211,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education and authorization must be verified separately: O*NET lists 49-3021.00 as Job Zone 1–2 (SVP below 6.0), and among respondents 42% think a high school diploma or equivalent is needed, 35% think a postsecondary certificate is needed, and 23% think less than a high school diploma is needed; the BLS Occupational Outlook Handbook lists the typical entry-level education as a high school diploma or equivalent and notes that most employers prefer to hire people who have completed a body or glass repair training program, and that industry certification is increasingly important. On the mainland China side, motor vehicle repair operations are subject to filing and classification management under the Provisions on the Administration of Motor Vehicle Repair, and body repair, auto detailing and trim, and auto glass installation and repair are special repair items; education, training, vendor and industry certification, an employer's internal authorization to work, and work authorization are different statuses and must be verified item by item according to employer, position, and location."
+              "If you prefer glass fitting, sealing and mobile service, compare automotive glass installation and repair. See section 09 for qualifications."
             ]
           },
           "id": "automotive-body-and-glass-repairers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "neighbor-49-3022-00",
             "onet"
           ],
           "type": "prose"
@@ -23226,12 +23226,11 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "One line: this is an occupation that turns vehicle damage into measurable, reviewable repair results; the core is assessment, shaping, welding and cutting, grinding and painting, glass and accessory replacement, and quality review, with responsibility for repair dimensions, paint quality, and work safety, rather than an interest in cars or driving experience."
+              "Explore this work if you like checking measurements against a specification, documenting rework and handing unresolved tickets to the responsible reviewer."
             ]
           },
           "id": "automotive-body-and-glass-repairers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23264,7 +23263,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET occupational identity and tasks: O*NET 49-3021.00 Automotive Body and Related Repairers (page updated in 2026). The official duties are to repair and refinish automotive vehicle bodies and straighten vehicle frames, and they also involve windshields and window glass; there are 25 official tasks, covering leveling repaired surfaces with power and hand tools; inspecting repaired vehicles and road-testing them; installing replacement parts with welding equipment and grinding welds; spraying primer and topcoat; fastening parts to a hydraulic frame machine to straighten them; removing dents with dollies and hammers; reviewing damage reports and reviewing repair cost estimates; removing interior trim and accessories to reach the body; mixing resin and hardener; installing windows, tops, and trim; adjusting headlights, wheels, and brake systems; replacing damaged glass; repairing plastic panels; cleaning the work area; laying up fiberglass mat; and customizing modifications to customer requirements. Field boundaries: the summary page does not publish importance scores for tasks, and the task list describes the work of the group as a whole and does not mean every job performs all tasks. The details show 25 tasks in fact split into 22 Core and 3 Supplemental: surface leveling 88, completion inspection and road test 87, welding and installation 86, primer and topcoat 85; custom modification 68, custom glass cutouts 61, and roof cutting 60 are Supplemental. The original plastic task mentions softening with hot air or hot water before shaping, so it is not entirely equivalent to hot-air welding; Importance is not frequency or work authorization for all positions."
+              "O*NET occupational identity and tasks: O*NET 49-3021.00 Automotive Body and Related Repairers (page updated in 2026). The official duties are to repair and refinish automotive vehicle bodies and straighten vehicle frames. Replacing vehicle glass is one task. Specialized glass installation and repair is listed separately under 49-3022; there are 25 official tasks, covering leveling repaired surfaces with power and hand tools; inspecting repaired vehicles and road-testing them; installing replacement parts with welding equipment and grinding welds; spraying primer and topcoat; fastening parts to a hydraulic frame machine to straighten them; removing dents with dollies and hammers; reviewing damage reports and reviewing repair cost estimates; removing interior trim and accessories to reach the body; mixing resin and hardener; installing windows, tops, and trim; adjusting headlights, wheels, and brake systems; replacing damaged glass; repairing plastic panels; cleaning the work area; laying up fiberglass mat; and customizing modifications to customer requirements. Field boundaries: the summary page does not publish importance scores for tasks, and the task list describes the work of the group as a whole and does not mean every job performs all tasks. The details show 25 tasks in fact split into 22 Core and 3 Supplemental: surface leveling 88, completion inspection and road test 87, welding and installation 86, primer and topcoat 85; custom modification 68, custom glass cutouts 61, and roof cutting 60 are Supplemental. The original plastic task mentions softening with hot air or hot water before shaping, so it is not entirely equivalent to hot-air welding; Importance is not frequency or work authorization for all positions."
             ]
           },
           "id": "automotive-body-and-glass-repairers.profile.onet-structured-fields-block.1",
@@ -23284,7 +23283,7 @@
               "Welding and replacement | Verify the connection against process and real conditions | Officially this includes welding in replacements and grinding welds; the special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name.",
               "Grinding and painting | Verify the real process and applicable rules | Officially this includes grinding and masking, primer, and topcoat; mixing ratios and application records must be verified against real technical materials, Article 23 of the repair provisions covers safety education and safety procedures and Article 24 covers waste disposal in accordance with national requirements; the OSHA body hazards page is in fact a hazard and guidance link index, covering isocyanate asthma, solvents, dust, noise, and welding and cutting, and is not the full text of all current standards. The current EPA 6H introduction and the 2023 outreach summary cover applicable spray painting and paint stripping scope and exceptions, training, and paint controls, and do not imply the same permit or complete environmental conditions for all shops. This round did not obtain all PPE and ventilation parameters, fire and hazardous waste, and recovery procedures.",
               "Glass and accessories | Get the fit right | Install and fasten windows, vinyl tops, and metal trim, replace damaged glass, and adjust or align headlights, wheels, and brake systems.",
-              "Review and records | Deliver according to the actual inspection division of labor | Officially this includes completion dimension and appearance inspection, road test, and cleaning the work area; Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 applies intake, in-process, and completion inspections to level-two maintenance, assemblies, and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, with no delivery without a signature, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the electronic file to lawfully include the contract, work order, items, personnel, and settlement, and the listed repair additionally includes inspection and certificate copies; upload the genuine motor vehicle repair electronic health record."
+              "Review and records | Deliver according to the actual inspection division of labor | Officially this includes completion dimension and appearance inspection, road test, and cleaning the work area; Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 requires pre-repair diagnostic inspection, in-process inspection and final quality inspection for level-two maintenance, assembly repair and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, and prohibits delivery for use if the certificate has not been issued, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the operator’s electronic repair records to include the contract or work order, repair items, personnel and settlement. The three specified categories also require the inspection form, inspector and a certificate copy; the operator must accurately complete and promptly upload the repair data records for vehicles serviced to the relevant national motor vehicle repair electronic health record system."
             ]
           },
           "id": "automotive-body-and-glass-repairers.profile.responsibilities-block.1",
@@ -23302,11 +23301,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Work environment | 100% are exposed to contaminants every day, 84% are exposed to distracting or uncomfortable noise every day, 81% are exposed to hazardous conditions every day, 74% work indoors without a controlled environment every day, and 50% are exposed to hazardous equipment every day; 88% wear routine protective equipment every day, and 37% wear specialized protective equipment at least once a week but not every day.\nMain equipment and systems | Welding and cutting equipment, hydraulic frame machines, sheet metal tools such as dollies and hammers, power and pneumatic sanding tools, paint spray guns and paint mixing and color matching systems, measuring tools and dimensional measurement instruments, and lifting and disassembly equipment.\nTask rhythm | 95% need to use their hands to handle tools and equipment continuously or almost continuously, 52% bend or twist continuously or almost continuously, 52% stand more than half the time, 47% walk or run more than half the time, and 50% kneel, squat, bend, or crawl more than half the time; 66% work more than 40 hours per week, and 53% face time pressure every day.\nCollaboration | Work with customers, service advisers and insurance adjusters, workshop supervisors, and sheet metal and paint colleagues; 65% need face-to-face discussions every day, 39% have continuous contact with others, and 39% consider teamwork very important.\nCompetition and pressure | 54% consider the level of competition very high, 57% consider their decisions very important to colleague or company results, 41% consider the consequences of errors very serious, and 56% carry moderate responsibility for the health and safety of others.\nCompliance and safety | Article 23 of the repair provisions covers safety education and safety procedures and Article 24 covers waste disposal in accordance with national requirements; the OSHA body hazards page is in fact a hazard and guidance link index, covering isocyanate asthma, solvents, dust, noise, and welding and cutting, and is not the full text of all current standards. The current EPA 6H introduction and the 2023 outreach summary cover applicable spray painting and paint stripping scope and exceptions, training, and paint controls, and do not imply the same permit or complete environmental conditions for all shops. This round did not obtain all PPE and ventilation parameters, fire and hazardous waste, and recovery procedures.\nRecords and review | Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 applies intake, in-process, and completion inspections to level-two maintenance, assemblies, and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, with no delivery without a signature, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the electronic file to lawfully include the contract, work order, items, personnel, and settlement, and the listed repair additionally includes inspection and certificate copies; upload the genuine motor vehicle repair electronic health record. The figures of 52% considering precision extremely important, 56% making decisions every day, and 58% having a lot of decision freedom are group context.\nSkills and training | O*NET Zone1–2, SVP<6; the zone generally requires a high school diploma or equivalent, with some occupations lower, and training from a few days to a year, which is not the complete training period for working independently in this occupation. In the survey of education required for new hires, responses were 42% high school, 35% postsecondary certificate, and 23% below high school, which is not the education distribution of incumbents or the threshold for all positions. The BLS EP typical entry for body work is a high school diploma or equivalent, no related work experience, and long-term OJT; the OOH says body work usually takes 2—3 years of hands-on work to become fully independent, while glass basics can take 6 months and full independence up to 1 year.\nEntry and authorization | China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name.\nIndustry and employers | Current O*NET broad industry: other services (except public administration) 67%, retail trade 17%, and other 16%; this is not a Chinese distribution, nor does it equal OOH repair and similar specialized industries. The collision shops, dealerships, and glass services listed are comparison directions, and no actual recruiting was read; insurance collaboration is not present in every position."
+              "Work environment | 100% are exposed to contaminants every day, 84% are exposed to distracting or uncomfortable noise every day, 81% are exposed to hazardous conditions every day, 74% work indoors without a controlled environment every day, and 50% are exposed to hazardous equipment every day; 88% wear routine protective equipment every day, and 37% wear specialized protective equipment at least once a week but not every day.\nMain equipment and systems | Welding and cutting equipment, hydraulic frame machines, sheet metal tools such as dollies and hammers, power and pneumatic sanding tools, paint spray guns and paint mixing and color matching systems, measuring tools and dimensional measurement instruments, and lifting and disassembly equipment.\nTask rhythm | 95% need to use their hands to handle tools and equipment continuously or almost continuously, 52% bend or twist continuously or almost continuously, 52% stand more than half the time, 47% walk or run more than half the time, and 50% kneel, squat, bend, or crawl more than half the time; 66% work more than 40 hours per week, and 53% face time pressure every day.\nCollaboration | Work with customers, service advisers and insurance adjusters, workshop supervisors, and sheet metal and paint colleagues; 65% need face-to-face discussions every day, 39% have continuous contact with others, and 39% consider teamwork very important.\nCompetition and pressure | 54% consider the level of competition very high, 57% consider their decisions very important to colleague or company results, 41% consider the consequences of errors very serious, and 56% carry moderate responsibility for the health and safety of others.\nCompliance and safety | Article 23 of the repair provisions covers safety education and safety procedures and Article 24 covers waste disposal in accordance with national requirements; the OSHA body hazards page is in fact a hazard and guidance link index, covering isocyanate asthma, solvents, dust, noise, and welding and cutting, and is not the full text of all current standards. The current EPA 6H introduction and the 2023 outreach summary cover applicable spray painting and paint stripping scope and exceptions, training, and paint controls, and do not imply the same permit or complete environmental conditions for all shops. This round did not obtain all PPE and ventilation parameters, fire and hazardous waste, and recovery procedures.\nRecords and review | Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 requires pre-repair diagnostic inspection, in-process inspection and final quality inspection for level-two maintenance, assembly repair and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, and prohibits delivery for use if the certificate has not been issued, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the operator’s electronic repair records to include the contract or work order, repair items, personnel and settlement. The three specified categories also require the inspection form, inspector and a certificate copy; the operator must accurately complete and promptly upload the repair data records for vehicles serviced to the relevant national motor vehicle repair electronic health record system. The figures of 52% considering precision extremely important, 56% making decisions every day, and 58% having a lot of decision freedom are group context.\nSkills and training | O*NET Zone1–2, SVP<6; the zone generally requires a high school diploma or equivalent, with some occupations lower, and training from a few days to a year, which is not the complete training period for working independently in this occupation. In the survey of education required for new hires, responses were 42% high school, 35% postsecondary certificate, and 23% below high school, which is not the education distribution of incumbents or the threshold for all positions. The BLS EP typical entry for body work is a high school diploma or equivalent, no related work experience, and long-term OJT; the OOH says body work usually takes 2—3 years of hands-on work to become fully independent, while glass basics can take 6 months and full independence up to 1 year.\nEntry and authorization | China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name.\nIndustry and employers | Current O*NET broad industry: other services (except public administration) 67%, retail trade 17%, and other 16%; this is not a Chinese distribution, nor does it equal OOH repair and similar specialized industries. The Laiyang notice is one historical employer example. Check collision shops, dealers and glass service employers separately; insurance work varies by role."
             ]
           },
           "id": "automotive-body-and-glass-repairers.profile.work-context-block.1",
           "source_refs": [
+            "laiyang-body-2026",
             "privacy",
             "industry-current",
             "cn-repair-regulation-2023",
@@ -23533,14 +23533,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Automotive Body and Glass Repairers (U.S. side O*NET 49-3021.00, Automotive Body and Related Repairers) repair and refinish motor vehicle bodies and straighten vehicle frames, and they also involve replacing and repairing windshields and window glass. The original official duties read \"Repair and refinish automotive vehicle bodies and straighten vehicle frames.\"; there are 25 official tasks, focused on filing, grinding, sanding, and leveling repaired surfaces with power and hand tools; inspecting repaired vehicles for operating condition, completion, dimensional accuracy, and paint appearance and road-testing them; installing and welding replacement parts with wrenches and welding equipment and grinding welds; spraying primer and topcoat with a paint spray gun and power sander; determining the parts to repair or replace and the labor time per the supervisor's instructions; sanding areas to be painted and covering them with masking tape or paper to prevent paint contamination; fastening the frame and parts to a hydraulic frame machine to straighten damaged areas; removing dents with dollies and hammers; applying protective film and cleaning off adhesive; reviewing damage reports and reviewing repair cost estimates; filling small dents with plastic or solder; removing damaged sections with a metal cutting torch and pneumatic grinder and installing replacement parts; removing small dents and pits with a pick hammer and punch; removing interior trim, accessories, and trim to reach the body and fenders; mixing polyester resin and hardener; installing and fastening windows, vinyl tops, and metal trim; adjusting or aligning headlights, wheels, and brake systems; replacing damaged glass; identifying plastic types; repairing plastic panels with a hot-air welding gun; cleaning the work area; laying up fiberglass mat; determining custom modifications to customer requirements; and cutting openings in the body to install custom windows and cutting vinyl material. In the United States this occupation is in Job Zone 1–2 (SVP below 6.0); mainland China statistics are aggregated by industry category and do not list this occupation separately, so industry figures can only serve as a broad-scope comparison. This page does not constitute welding, cutting, painting, or field work instructions, and such work must be carried out by organizations and personnel with the appropriate training and authorization following procedures."
+              "Automotive Body and Glass Repairers (U.S. side O*NET 49-3021.00, Automotive Body and Related Repairers) repair and refinish motor vehicle bodies and straighten vehicle frames, and the O*NET task list includes replacing vehicle glass. Specialized windshield and window glass repair is separately listed under 49-3022. The original official duties read \"Repair and refinish automotive vehicle bodies and straighten vehicle frames.\"; there are 25 official tasks, focused on filing, grinding, sanding, and leveling repaired surfaces with power and hand tools; inspecting repaired vehicles for operating condition, completion, dimensional accuracy, and paint appearance and road-testing them; installing and welding replacement parts with wrenches and welding equipment and grinding welds; spraying primer and topcoat with a paint spray gun and power sander; determining the parts to repair or replace and the labor time per the supervisor's instructions; sanding areas to be painted and covering them with masking tape or paper to prevent paint contamination; fastening the frame and parts to a hydraulic frame machine to straighten damaged areas; removing dents with dollies and hammers; applying protective film and cleaning off adhesive; reviewing damage reports and reviewing repair cost estimates; filling small dents with plastic or solder; removing damaged sections with a metal cutting torch and pneumatic grinder and installing replacement parts; removing small dents and pits with a pick hammer and punch; removing interior trim, accessories, and trim to reach the body and fenders; mixing polyester resin and hardener; installing and fastening windows, vinyl tops, and metal trim; adjusting or aligning headlights, wheels, and brake systems; replacing damaged glass; identifying plastic types; repairing plastic panels with a hot-air welding gun; cleaning the work area; laying up fiberglass mat; determining custom modifications to customer requirements; and cutting openings in the body to install custom windows and cutting vinyl material. In the United States this occupation is in Job Zone 1–2 (SVP below 6.0); mainland China statistics are aggregated by industry category and do not list this occupation separately, so industry figures can only serve as a broad-scope comparison. This page does not constitute welding, cutting, painting, or field work instructions, and such work must be carried out by organizations and personnel with the appropriate training and authorization following procedures."
             ]
           },
           "id": "automotive-body-and-glass-repairers.profile.definition-block.11",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "neighbor-49-3022-00",
+            "census"
           ],
           "type": "prose"
         },
@@ -23875,12 +23875,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "New model materials (high-strength steel, aluminum, plastics, and composites) and painting processes update quickly (O*NET lists 11 software skills, 5 of which are marked as hot technologies, including collision damage estimating, spray mixing, and measurement software), requiring ongoing continuing training and maintenance of industry certifications; before starting, confirm the training arrangements, certification maintenance, and quality review mechanisms."
+              "Check material, measurement and colour-matching requirements with the employer. The O*NET occupation profile includes estimating, measurement and colour-matching software examples. A separate job posting table lists only Office, Excel, Outlook, Windows and Word. These are different lists."
             ]
           },
           "id": "automotive-body-and-glass-repairers.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
+            "bls",
+            "hr",
             "onet"
           ],
           "type": "prose"
@@ -24519,7 +24520,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial preparation example: use fictional work orders and damage materials to check estimating, dimensions, materials, and records; verify specific courses separately, and practice does not grant field welding or spraying or independent repair rights. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
+              "Editorial preparation example: use fictional work orders and damage materials to check estimating, dimensions, materials, and records; verify specific courses separately, and practice does not grant field welding or spraying or independent repair rights. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
             ]
           },
           "id": "automotive-body-and-glass-repairers.ai-impact.ai-impact-table.11",
@@ -24582,7 +24583,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editors check the specific tools, vehicle customer material permissions, the reviewer, and the conditions of work order use; Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 applies in-shop and process completion inspection to level-two maintenance, assemblies, and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, with no delivery without a signature, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the electronic file to lawfully include the contract, work order, items, personnel, and settlement, and the listed repair additionally includes inspection and certificate copies; upload the genuine motor vehicle repair electronic health record. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
+              "Editors check the specific tools, vehicle customer material permissions, the reviewer, and the conditions of work order use; Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 requires pre-repair diagnostic inspection, in-process inspection and final quality inspection for level-two maintenance, assembly repair and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, and prohibits delivery for use if the certificate has not been issued, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the operator’s electronic repair records to include the contract or work order, repair items, personnel and settlement. The three specified categories also require the inspection form, inspector and a certificate copy; the operator must accurately complete and promptly upload the repair data records for vehicles serviced to the relevant national motor vehicle repair electronic health record system. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
             ]
           },
           "id": "automotive-body-and-glass-repairers.ai-impact.ai-impact-table.15",
@@ -24632,7 +24633,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round did not obtain causal measurements of generative AI adoption, productivity, substitution, or employment for this occupation; estimating, measurement comparison, color matching, and records are editorial candidates. The ILO introduction extended abstract and the NIST brief are background only, and the complete occupational mapping was not read, so it is not concluded from a gap that field tasks will never be replaced. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "This round did not obtain causal measurements of generative AI adoption, productivity, substitution, or employment for this occupation; estimating, measurement comparison, color matching, and records are editorial candidates. The ILO introduction extended abstract and the NIST brief are background only, and the complete occupational mapping was not read, so it is not concluded from a gap that field tasks will never be replaced. AI task-impact estimate 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "automotive-body-and-glass-repairers.ai-impact.ai-impact-table.18",
@@ -24938,7 +24939,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Check the actual inspection division of labor and settlement differences, and this page is not taken as authorization to stop work, resume work, or issue a release certificate. Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 applies in-shop and process completion inspection to level-two maintenance, assemblies, and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, with no delivery without a signature, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the electronic file to lawfully include the contract, work order, items, personnel, and settlement, and the listed repair additionally includes inspection and certificate copies; upload the genuine motor vehicle repair electronic health record."
+              "Check the actual inspection division of labor and settlement differences, and this page is not taken as authorization to stop work, resume work, or issue a release certificate. Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 requires pre-repair diagnostic inspection, in-process inspection and final quality inspection for level-two maintenance, assembly repair and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, and prohibits delivery for use if the certificate has not been issued, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the operator’s electronic repair records to include the contract or work order, repair items, personnel and settlement. The three specified categories also require the inspection form, inspector and a certificate copy; the operator must accurately complete and promptly upload the repair data records for vehicles serviced to the relevant national motor vehicle repair electronic health record system."
             ]
           },
           "id": "automotive-body-and-glass-repairers.ai-impact.ai-impact-table.39",
@@ -25421,7 +25422,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Tool output cannot automatically constitute a process, dimensional, or release conclusion; the actual tasks and responsibilities must be verified against the jurisdiction and division of labor, and not all work execution and certification is attributed to the individual. Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 applies in-shop and process completion inspection to level-two maintenance, assemblies, and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, with no delivery without a signature, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the electronic file to lawfully include the contract, work order, items, personnel, and settlement, and the listed repair additionally includes inspection and certificate copies; upload the genuine motor vehicle repair electronic health record."
+              "Tool output cannot automatically constitute a process, dimensional, or release conclusion; the actual tasks and responsibilities must be verified against the jurisdiction and division of labor, and not all work execution and certification is attributed to the individual. Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 requires pre-repair diagnostic inspection, in-process inspection and final quality inspection for level-two maintenance, assembly repair and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, and prohibits delivery for use if the certificate has not been issued, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the operator’s electronic repair records to include the contract or work order, repair items, personnel and settlement. The three specified categories also require the inspection form, inspector and a certificate copy; the operator must accurately complete and promptly upload the repair data records for vehicles serviced to the relevant national motor vehicle repair electronic health record system."
             ]
           },
           "id": "automotive-body-and-glass-repairers.ai-impact.ai-impact-table.72",
@@ -25577,7 +25578,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Keep records according to the real repair materials and the statutory file scope, and do not substitute general examples for all retention requirements. Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 applies in-shop and process completion inspection to level-two maintenance, assemblies, and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, with no delivery without a signature, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the electronic file to lawfully include the contract, work order, items, personnel, and settlement, and the listed repair additionally includes inspection and certificate copies; upload the genuine motor vehicle repair electronic health record."
+              "Keep records according to the real repair materials and the statutory file scope, and do not substitute general examples for all retention requirements. Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 requires pre-repair diagnostic inspection, in-process inspection and final quality inspection for level-two maintenance, assembly repair and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, and prohibits delivery for use if the certificate has not been issued, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the operator’s electronic repair records to include the contract or work order, repair items, personnel and settlement. The three specified categories also require the inspection form, inspector and a certificate copy; the operator must accurately complete and promptly upload the repair data records for vehicles serviced to the relevant national motor vehicle repair electronic health record system."
             ]
           },
           "id": "automotive-body-and-glass-repairers.ai-impact.ai-impact-table.82",
@@ -25750,7 +25751,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Record work execution, inspection, and open items according to the real files and position rules; Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 applies in-shop and process completion inspection to level-two maintenance, assemblies, and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, with no delivery without a signature, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the electronic file to lawfully include the contract, work order, items, personnel, and settlement, and the listed repair additionally includes inspection and certificate copies; upload the genuine motor vehicle repair electronic health record."
+              "Record work execution, inspection, and open items according to the real files and position rules; Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 requires pre-repair diagnostic inspection, in-process inspection and final quality inspection for level-two maintenance, assembly repair and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, and prohibits delivery for use if the certificate has not been issued, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the operator’s electronic repair records to include the contract or work order, repair items, personnel and settlement. The three specified categories also require the inspection form, inspector and a certificate copy; the operator must accurately complete and promptly upload the repair data records for vehicles serviced to the relevant national motor vehicle repair electronic health record system."
             ]
           },
           "id": "automotive-body-and-glass-repairers.ai-impact.ai-impact-table.93",
@@ -26075,7 +26076,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Officially this includes completion inspection, dimensions and appearance, and road test; the statutory repair inspection scope and the personnel who issue the certificate should be verified separately. Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 applies in-shop and process completion inspection to level-two maintenance, assemblies, and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, with no delivery without a signature, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the electronic file to lawfully include the contract, work order, items, personnel, and settlement, and the listed repair additionally includes inspection and certificate copies; upload the genuine motor vehicle repair electronic health record."
+              "Officially this includes completion inspection, dimensions and appearance, and road test; the statutory repair inspection scope and the personnel who issue the certificate should be verified separately. Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 requires pre-repair diagnostic inspection, in-process inspection and final quality inspection for level-two maintenance, assembly repair and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, and prohibits delivery for use if the certificate has not been issued, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the operator’s electronic repair records to include the contract or work order, repair items, personnel and settlement. The three specified categories also require the inspection form, inspector and a certificate copy; the operator must accurately complete and promptly upload the repair data records for vehicles serviced to the relevant national motor vehicle repair electronic health record system."
             ]
           },
           "id": "automotive-body-and-glass-repairers.ai-impact.ai-impact-table.115",
@@ -26415,11 +26416,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round did not obtain precise Chinese occupational income, and only broad-scope ranges and gaps are shown."
+              "Historical Mainland China examples: Laiyang bodywork and paint apprentice"
             ]
           },
           "id": "automotive-body-and-glass-repairers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
+            "laiyang-body-2026",
             "nbs",
             "cnclass",
             "cn-repair-regulation-2023"
@@ -26431,11 +26433,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The gap is marked on this page as \"evidence gap\", and no nationwide average monthly salary or per-shop pay range is given; this is not zero income, but rather that the evidence cannot support that level of precision."
+              "Laiyang’s 2026 Spring Breeze job fair lists one bodywork opening at Laiyang Shunsheng Automobile Sales Co., Ltd. with advertised pay of CNY 5,000–8,000 per month. The same employer separately advertises CNY 3,000–5,000 for a paint apprentice. The quotes apply to different roles."
             ]
           },
           "id": "automotive-body-and-glass-repairers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
+            "laiyang-body-2026",
+            "nbs",
             "onet"
           ],
           "type": "prose"
@@ -26595,7 +26599,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
+              "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
             ]
           },
           "id": "automotive-body-and-glass-repairers.china-salary.career-snapshot-primary-locale.33",
@@ -26778,12 +26782,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scenario comparison requires consistency in the employer's nature, the filed business items, the business direction, and the pay definition; an industry proxy cannot replace written pay terms."
+              "Bodywork and paint apprentice positions have different tasks and quotes."
             ]
           },
           "id": "automotive-body-and-glass-repairers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
+            "laiyang-body-2026",
+            "nbs",
             "onet"
           ],
           "type": "prose"
@@ -26853,11 +26858,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Evidence gap: no nationwide occupational monthly salary distribution precisely corresponding to automotive body and glass repairers was obtained."
+              "One employer’s historical quote does not establish national occupation pay. Check contract terms for piece rates and overtime, and keep customer labour charges separate."
             ]
           },
           "id": "automotive-body-and-glass-repairers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
+            "laiyang-body-2026",
+            "nbs",
             "onet"
           ],
           "type": "prose"
@@ -26954,7 +26961,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Average (3% to 4%; BLS3.7%)"
+              "3.7% (U.S. 49-3021, 2025–2035)"
             ]
           },
           "id": "automotive-body-and-glass-repairers.china-salary.career-snapshot-primary-locale.58",
@@ -27181,7 +27188,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Average 3% to 4% (BLS3.7%, 2025—2035)"
+              "3.7% (2025–2035, U.S. 49-3021)"
             ]
           },
           "id": "automotive-body-and-glass-repairers.us-salary.career-snapshot-secondary-locale.21",
@@ -27364,7 +27371,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Average (3% to 4%; BLS3.7%)"
+              "3.7% (2025–2035, U.S. 49-3021)"
             ]
           },
           "id": "automotive-body-and-glass-repairers.us-salary.career-snapshot-secondary-locale.33",
@@ -27709,19 +27716,19 @@
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Bus and truck mechanics and diesel engine specialists",
@@ -28689,11 +28696,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Write a one-page fictional repair plan: including the work order and damage judgment, the shaping, welding, and replacement part steps, the grinding, degreasing, masking, and spraying parameters, the dimensional and appearance review items, and the welding and painting protection and waste disposal notes, and ask an experienced person to review it and record the reasons for changes. This does not constitute welding, painting, or field work instructions, nor does it replace position training and work authorization."
+              "Use BD-65 in section 09 to check measurements, records, review and handoff. Submit both decisions and one handoff first."
             ]
           },
           "id": "automotive-body-and-glass-repairers.fit.personality-fit-block.58",
           "source_refs": [
+            "bd65-editor",
             "onet"
           ],
           "type": "prose"
@@ -28876,7 +28884,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The six risks are possible editorial scenarios, not an accident rate ranking or complete field procedures. Article 23 of the repair provisions covers safety education and safety procedures and Article 24 covers waste disposal in accordance with national requirements; the OSHA body hazards page is in fact a hazard and guidance link index, covering isocyanate asthma, solvents, dust, noise, and welding and cutting, and is not the full text of all current standards. The current EPA 6H introduction and the 2023 outreach summary cover applicable spray painting and paint stripping scope and exceptions, training, and paint controls, and do not imply the same permit or complete environmental conditions for all shops. This round did not obtain all PPE and ventilation parameters, fire and hazardous waste, and recovery procedures. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another."
+              "The six risks are possible editorial scenarios, not an accident rate ranking or complete field procedures. Article 23 of the repair provisions covers safety education and safety procedures and Article 24 covers waste disposal in accordance with national requirements; the OSHA body hazards page is in fact a hazard and guidance link index, covering isocyanate asthma, solvents, dust, noise, and welding and cutting, and is not the full text of all current standards. The current EPA 6H introduction and the 2023 outreach summary cover applicable spray painting and paint stripping scope and exceptions, training, and paint controls, and do not imply the same permit or complete environmental conditions for all shops. This round did not obtain all PPE and ventilation parameters, fire and hazardous waste, and recovery procedures. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another."
             ]
           },
           "id": "automotive-body-and-glass-repairers.risk.career-risk-cards.8",
@@ -29229,7 +29237,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name. Specific anomaly reporting and stop and resume procedures follow on-site rules, and an ordinary authorization does not exempt the conditions."
+              "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name. Specific anomaly reporting and stop and resume procedures follow on-site rules, and an ordinary authorization does not exempt the conditions."
             ]
           },
           "id": "automotive-body-and-glass-repairers.risk.career-risk-cards.29",
@@ -29294,7 +29302,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Article 26 of the repair provisions covers the itemized labor and material cost in customer settlement, which is not employee pay. Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 applies in-shop and process completion inspection to level-two maintenance, assemblies, and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, with no delivery without a signature, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the electronic file to lawfully include the contract, work order, items, personnel, and settlement, and the listed repair additionally includes inspection and certificate copies; upload the genuine motor vehicle repair electronic health record. Specific dimensional and process records follow the actual materials, and not everyone can automatically issue the quality inspection certificate."
+              "Article 26 of the repair provisions covers the itemized labor and material cost in customer settlement, which is not employee pay. Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 requires pre-repair diagnostic inspection, in-process inspection and final quality inspection for level-two maintenance, assembly repair and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, and prohibits delivery for use if the certificate has not been issued, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the operator’s electronic repair records to include the contract or work order, repair items, personnel and settlement. The three specified categories also require the inspection form, inspector and a certificate copy; the operator must accurately complete and promptly upload the repair data records for vehicles serviced to the relevant national motor vehicle repair electronic health record system. Specific dimensional and process records follow the actual materials, and not everyone can automatically issue the quality inspection certificate."
             ]
           },
           "id": "automotive-body-and-glass-repairers.risk.career-risk-cards.33",
@@ -29424,37 +29432,37 @@
               [
                 "Collision repair shop sheet metal position",
                 "Complete disassembly, dent removal, grinding, and panel replacement under supervision, and record dimensions and replaced parts according to process.",
-                "Editorial preparation example: check the actual disassembly, shaping, dimensional, and equipment training. No employer postings were read this round.",
+                "Editorial preparation example: check the actual disassembly, shaping, dimensional, and equipment training. The Laiyang posting is a separate historical example.",
                 "Submit a fictional repair order containing the damage judgment, shaping and grinding steps, dimensional review items, and a replaced-parts list, without using real customer information.",
-                "Check the actual disassembly, shaping, dimensional, and equipment training. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
+                "Check the actual disassembly, shaping, dimensional, and equipment training. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
               ],
               [
                 "Painting and paint mixing position",
                 "Mix paint to ratio, mask and degrease, and spray primer and topcoat to parameters, recording the application conditions.",
-                "Editorial preparation example: check the real paint, spray equipment, protection, and applicable rules. No employer postings were read this round.",
+                "Editorial preparation example: check the real paint, spray equipment, protection, and applicable rules. The Laiyang posting is a separate historical example.",
                 "Submit a fictional work order containing color matching and mixing ratios, spray parameters, and masking and protection notes.",
-                "Check the real paint, spray equipment, protection, and applicable rules. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
+                "Check the real paint, spray equipment, protection, and applicable rules. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
               ],
               [
                 "Automotive glass installation and repair position",
                 "Install windshields and window glass per procedure, handle sealing and optical quality, and perform leak and function checks.",
-                "Editorial preparation example: check the real glass processes and jurisdictional conditions, and do not infer glass qualifications from a body repair identity. No employer postings were read this round.",
+                "Editorial preparation example: check the real glass processes and jurisdictional conditions, and do not infer glass qualifications from a body repair identity. The Laiyang posting is a separate historical example.",
                 "Submit a fictional work order containing removal and installation steps and sealing and inspection items.",
-                "Check the real glass processes and jurisdictional conditions, and do not infer glass qualifications from a body repair identity. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
+                "Check the real glass processes and jurisdictional conditions, and do not infer glass qualifications from a body repair identity. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
               ],
               [
                 "Automotive modification and custom position",
                 "Assess feasibility and regulatory limits to customer requirements, and complete cutouts and installation and cutting of custom parts.",
-                "Editorial preparation example: Article 22 of the repair provisions prohibits unauthorized modification or repairing scrapped or assembled vehicles; a color change, engine change, or body or frame change must be repaired only after checking the statutory paperwork, and a customer request is not automatically lawful. No employer postings were read this round.",
+                "Editorial preparation example: Article 22 of the repair provisions prohibits unauthorized modification or repairing scrapped or assembled vehicles; a color change, engine change, or body or frame change must be repaired only after checking the statutory paperwork, and a customer request is not automatically lawful. The Laiyang posting is a separate historical example.",
                 "Submit a fictional note containing the modification plan, a dimensions and materials list, and compliance check items.",
-                "Article 22 of the repair provisions prohibits unauthorized modification or repairing scrapped or assembled vehicles; a color change, engine change, or body or frame change must be repaired only after checking the statutory paperwork, and a customer request is not automatically lawful. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
+                "Article 22 of the repair provisions prohibits unauthorized modification or repairing scrapped or assembled vehicles; a color change, engine change, or body or frame change must be repaired only after checking the statutory paperwork, and a customer request is not automatically lawful. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
               ],
               [
                 "Insurance claims and estimating support position",
                 "Assist in organizing damage photos and teardown conclusions, entering estimate items, and checking labor time and material costs.",
-                "Editorial preparation example: check the division of labor between estimating support and actual damage assessment, quality inspection release, and customer billing. No employer postings were read this round.",
+                "Editorial preparation example: check the division of labor between estimating support and actual damage assessment, quality inspection release, and customer billing. The Laiyang posting is a separate historical example.",
                 "Submit a fictional estimate table containing a damage list, repair and replacement judgments, and itemized labor time and material costs.",
-                "Check the division of labor between estimating support and actual damage assessment, quality inspection release, and customer billing. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
+                "Check the division of labor between estimating support and actual damage assessment, quality inspection release, and customer billing. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
               ]
             ]
           },
@@ -29483,7 +29491,7 @@
               {
                 "id": "clearance",
                 "values": [
-                  "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another.",
+                  "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another.",
                   "The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name. Article 23 of the repair provisions covers safety education and safety procedures and Article 24 covers waste disposal in accordance with national requirements; the OSHA body hazards page is in fact a hazard and guidance link index, covering isocyanate asthma, solvents, dust, noise, and welding and cutting, and is not the full text of all current standards. The current EPA 6H introduction and the 2023 outreach summary cover applicable spray painting and paint stripping scope and exceptions, training, and paint controls, and do not imply the same permit or complete environmental conditions for all shops. This round did not obtain all PPE and ventilation parameters, fire and hazardous waste, and recovery procedures.",
                   "Security requirements for customer, vehicle, and insurance materials vary by institution, and the access scope and compliance obligations must be confirmed before starting."
                 ]
@@ -29528,42 +29536,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional material pack: a work order and damage photo description, an excerpt from repair technical information and a process card template, and a dimensional and spray parameter record template.",
-                  "All materials are fictional and contain no real customer information, vehicle or insurance materials, or internal institutional materials.",
-                  "All materials and scenarios are fictional, and real customer information, vehicle or insurance materials, or internal institutional materials must not be used."
+                  "BD-65 fictional body repair ticket. B1: both diagonals must be within 1,200 mm ±2 mm. This specification applies only to the exercise.",
+                  "B2 original offline record: A is 1,201 mm and B is 1,204 mm. In the variant replace only B2: A is unchanged and B is 1,202 mm.",
+                  "B3 requires an authorized inspector to review and sign off in both versions. There is no signature on either record."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Write clear damage judgments, shaping, welding, and replacement part steps, grinding, degreasing, masking, and spraying parameters, dimensional and appearance review items, and welding and painting protection and waste disposal notes for a fictional work order.",
-                  "Complete within 90—120 minutes; public repair technical information and general process materials may be consulted, but real customer information must not be used.",
-                  "Write the measurement results, judgments, and process conclusions separately in the record, and mark the parts that need review."
+                  "Calculate the acceptable interval and check both versions.",
+                  "Decide each ticket’s status, open items and receiver.",
+                  "Submit a one-page handoff with B1–B3."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First verify the work order and the extent of damage, then work through the process step by step, and finally state the open items and the working condition confirmation items.",
-                  "Write the measurement results, judgments, and process conclusions separately, and mark any uncertainty as needing review.",
-                  "When finished, ask an experienced person to review the dimensional and process records, and keep the reasons for changes."
+                  "Submit both decisions independently.",
+                  "Record evidence and authority.",
+                  "Open “BD-65 reference (open after submitting)” after submitting."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "The exercise does not constitute welding, painting, or field work instructions and cannot replace institutional procedures and position authorization.",
-                  "Real customer information must not be handled and real welding and painting equipment must not be operated during the exercise; matters involving structural parts, welding and cutting, and painting must be handled by authorized personnel following procedures.",
-                  "The exercise does not replace institutional procedures and work authorization and does not constitute any welding, painting, or field handling instruction."
+                  "Do not touch a vehicle.",
+                  "Do not measure, pull or weld a body.",
+                  "Do not use the fictional measurements or authority to approve real work."
                 ]
               }
             ]
           },
           "id": "automotive-body-and-glass-repairers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "bd65-editor"
           ],
-          "title": "Low-risk exercise materials and tasks",
+          "title": "BD-65: Body measurement review ticket",
           "type": "cards"
         },
         {
@@ -29574,37 +29582,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Position requirements checklist: education and on-the-job training, institutional pre-job training and assessment, industry and vendor certification, the unit's filed business items, the scope of position work authorization, and occupational health and environmental training.",
-                  "Note the source and reference period for each item; leave items that cannot be verified blank and mark them as evidence gaps, and do not fill them in with speculation.",
-                  "List \"education\", \"on-the-job training\", \"industry and vendor certification\", \"institutional authorization to work\", \"unit filing items\", and \"position work authorization\" separately to avoid conflating them."
+                  "Cite B1–B3 in both records.",
+                  "Write down the acceptable interval.",
+                  "Record the two readings separately."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Ask an experienced person to review your dimensional and process records, focusing on whether the damage judgment, dimensional measurement, paint mixing ratio and spray parameters, degreasing and masking, and replaced parts are checked item by item.",
-                  "Keep the review comments together with the reasons for changes as evidence of whether you can accept review."
+                  "After submitting, peer review is optional.",
+                  "Ask a peer whether the evidence supports your decisions."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "A one-page debrief: state the work order and the extent of damage, the basis, your own judgments, the parts that were corrected, and the parts that remain uncertain.",
-                  "Hand the debrief to a peer for review, and keep the review comments and the reasons for changes."
+                  "Submit one page with open items and the receiver.",
+                  "After submitting, note why you would change anything."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool use notes: if estimating, measurement, or color matching software is used, note the tool name and version, the input scope, and the reasons for manual changes.",
-                  "Handling customer, vehicle, and insurance materials requires prior authorization, and the access scope, retention period, and destruction arrangements must be recorded."
+                  "Use the fictional paper records only.",
+                  "No vehicle, measuring tools or site access are needed."
                 ]
               }
             ]
           },
           "id": "automotive-body-and-glass-repairers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "bd65-editor"
           ],
           "title": "Preparation materials that can be submitted",
           "type": "cards"
@@ -29668,57 +29676,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Occupation and boundary reading: read O*NET 49-3021.00 and public welding and painting safety materials, and write out clearly what assessment, shaping, welding, grinding and painting, and review each mean.",
-                  "Output: a one-page terminology and process comparison table, noting the source for each item."
+                  "Read B1–B3.",
+                  "Evidence index"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Damage assessment exercise: build a damage list for a fictional work order, determine the boundary between repair and replacement, and write out the basis.",
-                  "Output: a damage list and repair plan."
+                  "Calculate the interval.",
+                  "Measurement sheet"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Shaping and dimensional exercise: write the shaping steps and the dimensional measurement points and acceptance criteria for a fictional body.",
-                  "Output: a shaping and dimensional record."
+                  "Check both B2 records.",
+                  "Record comparison"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Painting process exercise: write the degreasing and masking, paint mixing ratio, spray parameters, and inspection items for a fictional repair surface.",
-                  "Output: a painting process card."
+                  "Check B3.",
+                  "Authority field"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Safety and protection exercise: list the ventilation, protective equipment, combustible clearing, and waste disposal requirements for this scenario.",
-                  "Output: a safety and environmental work checklist."
+                  "Draft the handoff.",
+                  "Open items"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Review-style self-questioning: ask an experienced person to challenge your dimensional and process records, and record what was corrected.",
-                  "Output: review comments and a note of changes."
+                  "Submit both decisions and a handoff first.",
+                  "Two decisions and handoff"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Final debrief: decide whether to continue, pause, or change direction, and write out the basis and the parts that remain uncertain.",
-                  "Output: a one-page decision note with an evidence list."
+                  "Open “BD-65 reference (open after submitting)”.",
+                  "Review the difference"
                 ]
               }
             ]
           },
           "id": "automotive-body-and-glass-repairers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "bd65-editor"
           ],
           "title": "Seven-day experience outputs",
           "type": "timeline"
@@ -29728,18 +29736,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: you completed the seven-day exercise and found that you can sustain effort in dimensional measurement, process verification, and records.",
-              "Continue: you can accept a dust and paint mist environment, more than 40 hours of work, and peak-season overtime, and you are willing to protect yourself per procedure.",
-              "Pause: you are only interested in cars and are unwilling to work to process parameters and review by dimensions.",
-              "Pause: you tend to act first and fill in the paperwork later when protection, ventilation, or work authorization is unclear.",
-              "Change direction: you would rather do mechanical and electrical diagnosis and repair, and you can compare the automotive service technicians and mechanics direction.",
-              "Change direction: you would rather specialize in windshields and window glass, and you can compare the automotive glass installers direction.",
-              "Insufficient information: if you do not yet have any supervised hands-on or review experience, add those two first before judging."
+              "Continue if you can explain both decisions with evidence.",
+              "Continue if the handoff lists open items and the receiver.",
+              "Pause if you need practice keeping evidence gaps open.",
+              "Pause if you need practice distinguishing records from authorization.",
+              "Compare automotive glass repair if it fits better.",
+              "Compare vehicle diagnostics if it fits better.",
+              "Check real training separately."
             ]
           },
           "id": "automotive-body-and-glass-repairers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "bd65-editor"
           ],
           "title": "Judgment after seven days",
           "type": "list"
@@ -29790,7 +29798,7 @@
                 "Units engaged in motor vehicle repair operations",
                 "Determines whether the unit may lawfully carry out the corresponding repair business.",
                 "It is a statutory requirement when operating a motor vehicle repair business.",
-                "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another.",
+                "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another.",
                 "Handled by the unit and updated according to change requirements.",
                 "Unit filing does not equal individual position training or work authorization."
               ],
@@ -29816,7 +29824,7 @@
                 "Occupational health and environmental training",
                 "Personnel involved in welding, grinding, and painting",
                 "Training and actual protective conditions are kept separate, and attending a class is not treated as proven protective ability",
-                "Article 23 of China's repair provisions on safety education, the applicable special operations training and examination, and the applicable U.S. 6H paint training requirements must be verified, and it cannot be generalized that it is not a universal threshold",
+                "Article 23 of China's repair provisions on safety education, the applicable special operations training and examination, and the applicable U.S. 6H paint training requirements must be verified, according to the jurisdiction and the work actually performed",
                 "Article 23 of the repair provisions covers safety education and safety procedures and Article 24 covers waste disposal in accordance with national requirements; the OSHA body hazards page is in fact a hazard and guidance link index, covering isocyanate asthma, solvents, dust, noise, and welding and cutting, and is not the full text of all current standards. The current EPA 6H introduction and the 2023 outreach summary cover applicable spray painting and paint stripping scope and exceptions, training, and paint controls, and do not imply the same permit or complete environmental conditions for all shops. This round did not obtain all PPE and ventilation parameters, fire and hazardous waste, and recovery procedures. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name.",
                 "Retrain according to institutional arrangements.",
                 "Training does not mean you may handle hazardous waste yourself; it must be done according to environmental requirements."
@@ -29842,19 +29850,20 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "Qualification boundary: education, on-the-job training, industry and vendor certification, institutional authorization to work (including sheet metal and paint job types), motor vehicle repair business filing items, and position work authorization are different statuses, and none of them can be automatically inferred from another.",
+              "BLS lists a high school diploma or equivalent, no related work experience and long-term on-the-job training as typical for 49-3021. Shanghai’s 2025 evaluation notice lists the SAIC Motor evaluation project for body straightening and repair under motor vehicle repair worker 4-12-01-01, levels 5, 4, 3 and 2. Check skill evaluation, special work qualifications, business filing and release authority separately.",
               "O*NET Zone1–2, SVP<6; the zone generally requires a high school diploma or equivalent, with some occupations lower, and training from a few days to a year, which is not the complete training period for working independently in this occupation. In the survey of education required for new hires, responses were 42% high school, 35% postsecondary certificate, and 23% below high school, which is not the education distribution of incumbents or the threshold for all positions. The BLS EP typical entry for body work is a high school diploma or equivalent, no related work experience, and long-term OJT; the OOH says body work usually takes 2—3 years of hands-on work to become fully independent, while glass basics can take 6 months and full independence up to 1 year. Most OOH employers prefer people who have completed a training program, but some also enter without prior training; courses may include electronics, estimating, and welding, and career programs are often 6 months to 1 year, with some community college programs at 2 years, which is not all Chinese course or position conditions. Certification is usually not mandatory but can help advancement; a few states have licensing requirements for glass workers, so it cannot be said that an ordinary employer authorization is always enough. The O*NET registered apprenticeship listing gives 3 titles — automotive body repairer, automotive manufacturing service mechanic, and truck body builder — which are type examples, not actual vacancies or admission conditions that were read.",
-              "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name.",
+              "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name.",
               "Operational recommendation: before starting, list \"education / on-the-job training / industry and vendor certification / institutional authorization to work / unit filing items / position work authorization / occupational health and environmental training\" as a table, and state the source and reference period for each item; leave items that cannot be verified blank and mark them as evidence gaps, and do not fill them in with speculation."
             ]
           },
           "id": "automotive-body-and-glass-repairers.path.credential-boundary.1",
           "source_refs": [
+            "ep-table",
+            "shanghai-body-levels",
+            "cn-repair-regulation-2023",
             "onet",
             "census",
-            "ep-table",
             "cn-classification-2022",
-            "cn-repair-regulation-2023",
             "cn-special-work",
             "osha-autobody-hazards",
             "epa-autobody-rule"
@@ -29867,12 +29876,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "No job postings were read this round; collision sheet metal, painting, glass, and estimating are only editorial comparison directions, and it is not claimed that public samples were read. Verify the real position, personnel, equipment, process, and contract conditions.",
-              "The employee contract monthly salary, piece rate, bonuses, and overtime should be verified separately; the itemized labor and material cost in customer repair settlement is a settlement list, not employee wages. Unit filing, statutory personnel conditions, and protection procedures should be verified separately."
+              "Laiyang’s 2026 Spring Breeze job fair lists one bodywork opening at Laiyang Shunsheng Automobile Sales Co., Ltd. with advertised pay of CNY 5,000–8,000 per month. The same employer separately advertises CNY 3,000–5,000 for a paint apprentice. The quotes apply to different roles.",
+              "BLS lists a high school diploma or equivalent, no related work experience and long-term on-the-job training as typical for 49-3021. Shanghai’s 2025 evaluation notice lists the SAIC Motor evaluation project for body straightening and repair under motor vehicle repair worker 4-12-01-01, levels 5, 4, 3 and 2. Check skill evaluation, special work qualifications, business filing and release authority separately."
             ]
           },
           "id": "automotive-body-and-glass-repairers.path.recruitment-sample.1",
           "source_refs": [
+            "laiyang-body-2026",
+            "shanghai-body-levels",
             "onet",
             "census",
             "ep-table",
@@ -29930,7 +29941,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The following are editorial preparation and development examples, not uniform promotion, independent qualification upon course completion, or field procedures. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
+              "The following are editorial preparation and development examples, not uniform promotion, independent qualification upon course completion, or field procedures. China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
             ]
           },
           "id": "automotive-body-and-glass-repairers.path.career-path-block.11",
@@ -30100,7 +30111,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name. Education, certification, and internal authorization cannot substitute for statutory conditions."
+              "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name. Education, certification, and internal authorization cannot substitute for statutory conditions."
             ]
           },
           "id": "automotive-body-and-glass-repairers.path.career-path-block.21",
@@ -30121,7 +30132,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. Article 23 of the repair provisions covers safety education and safety procedures and Article 24 covers waste disposal in accordance with national requirements; the OSHA body hazards page is in fact a hazard and guidance link index, covering isocyanate asthma, solvents, dust, noise, and welding and cutting, and is not the full text of all current standards. The current EPA 6H introduction and the 2023 outreach summary cover applicable spray painting and paint stripping scope and exceptions, training, and paint controls, and do not imply the same permit or complete environmental conditions for all shops. This round did not obtain all PPE and ventilation parameters, fire and hazardous waste, and recovery procedures. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
+              "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. For category I and II, quality inspectors need a driver’s license for the vehicles serviced. This is not a blanket condition for bodywork personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. Article 23 of the repair provisions covers safety education and safety procedures and Article 24 covers waste disposal in accordance with national requirements; the OSHA body hazards page is in fact a hazard and guidance link index, covering isocyanate asthma, solvents, dust, noise, and welding and cutting, and is not the full text of all current standards. The current EPA 6H introduction and the 2023 outreach summary cover applicable spray painting and paint stripping scope and exceptions, training, and paint controls, and do not imply the same permit or complete environmental conditions for all shops. This round did not obtain all PPE and ventilation parameters, fire and hazardous waste, and recovery procedures. The special operations training and assessment provisions effective 2026-06-01 define the work by catalog, and applicable tasks require specialized training and assessment and an operation certificate; an ordinary internal authorization or supervision does not replace the statutory conditions. The catalog was not fully verified this round, and the same certificate is not required of all body workers on the basis of the occupation name."
             ]
           },
           "id": "automotive-body-and-glass-repairers.path.career-path-block.22",
@@ -30142,7 +30153,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Supervised entry, approved routine tasks, mentoring, and adjacent directions are editorial development examples, not automatic promotion or a uniform qualification; Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 applies intake, in-process, and completion inspections to level-two maintenance, assemblies, and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, with no delivery without a signature, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the electronic file to lawfully include the contract, work order, items, personnel, and settlement, and the listed repair additionally includes inspection and certificate copies; upload the genuine motor vehicle repair electronic health record."
+              "Supervised entry, approved routine tasks, mentoring, and adjacent directions are editorial development examples, not automatic promotion or a uniform qualification; Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 requires pre-repair diagnostic inspection, in-process inspection and final quality inspection for level-two maintenance, assembly repair and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, and prohibits delivery for use if the certificate has not been issued, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the operator’s electronic repair records to include the contract or work order, repair items, personnel and settlement. The three specified categories also require the inspection form, inspector and a certificate copy; the operator must accurately complete and promptly upload the repair data records for vehicles serviced to the relevant national motor vehicle repair electronic health record system."
             ]
           },
           "id": "automotive-body-and-glass-repairers.path.career-path-block.23",
@@ -30436,7 +30447,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Actual process work, quality inspection release, training, and personnel management follow statutory and position rules; Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 applies intake, in-process, and completion inspections to level-two maintenance, assemblies, and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, with no delivery without a signature, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the electronic file to lawfully include the contract, work order, items, personnel, and settlement, and the listed repair additionally includes inspection and certificate copies; upload the genuine motor vehicle repair electronic health record."
+              "Actual process work, quality inspection release, training, and personnel management follow statutory and position rules; Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 requires pre-repair diagnostic inspection, in-process inspection and final quality inspection for level-two maintenance, assembly repair and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, and prohibits delivery for use if the certificate has not been issued, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the operator’s electronic repair records to include the contract or work order, repair items, personnel and settlement. The three specified categories also require the inspection form, inspector and a certificate copy; the operator must accurately complete and promptly upload the repair data records for vehicles serviced to the relevant national motor vehicle repair electronic health record system."
             ]
           },
           "id": "automotive-body-and-glass-repairers.path.career-path-block.41",
@@ -31209,13 +31220,13 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 49-3021.00 occupation summary (employment and projections fields)",
+                "entity": "BLS Table 1.2: Employment",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/49-3021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS Occupational Employment Projections and Characteristics table 49-3021",
+                "entity": "BLS Table 1.2: Growth and openings",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31296,14 +31307,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The U.S. 49-3021 body and related repairers occupation had 163,200 jobs in 2025 and is projected at 169,300 in 2035, growing 3.7% from 2025 to 2035 (O*NET average of 3% to 4%), a net gain of 6,100, and about 12,600 openings per year, with the self-employed at 8.5%. Openings include growth and replacements and are not the net gain or an individual hiring rate. The combined OOH body and glass group had 185,800 jobs in 2025 and is projected at 193,200 in 2035, growing about 4%, a net gain of 7,400, and about 13,900 openings per year; glass 49-3022 is listed separately as 22,600 → 23,900, 5.7%, and 1,300 per year. The fixed identity of this page, 49-3021, is not changed, and the combined group and glass statistics are not treated as this occupation's independent data. The NBS total wage may include piece-rate and lump-sum pay, bonuses, allowances and subsidies, and overtime pay, and they cannot all be excluded; verify items excluded by rule according to the nature of the actual payments. Unit industry and job category averages are not this occupation's income. The labor time and material cost in customer repair settlement are also not employee wages."
+              "BLS Table 1.2: U.S. automotive body and related repairers (49-3021) numbered 163,200 in 2025 and are projected at 169,300 in 2035. Growth is 3.7%, a net gain of about 6,100, with about 12,600 annual openings. Self-employment was 8.5%; openings include growth and replacement. BLS Occupational Outlook Handbook combined body and glass group: 185,800 in 2025 and 193,200 projected in 2035, with about 4% growth and a net gain of 7,400. The outlook text lists about 13,900 annual openings. Group median annual pay is $52,530. The separate glass occupation (49-3022) is 22,600 to 23,900, with 5.7% growth, about 1,300 annual openings and median annual pay of $47,630."
             ]
           },
           "id": "automotive-body-and-glass-repairers.market-signals.market-signal-card.8",
           "source_refs": [
-            "ep",
             "ep-table",
-            "census"
+            "census",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31386,7 +31397,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "U.S. Body and Related Repairers 49-3021"
             ]
           },
           "id": "automotive-body-and-glass-repairers.market-signals.market-signal-card.14",
@@ -31442,13 +31453,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The U.S. 49-3021 body and related repairers occupation had 163,200 jobs in 2025 and is projected at 169,300 in 2035, growing 3.7% from 2025 to 2035 (O*NET average of 3% to 4%), a net gain of 6,100, and about 12,600 openings per year, with the self-employed at 8.5%. Openings include growth and replacements and are not the net gain or an individual hiring rate. The combined OOH body and glass group had 185,800 jobs in 2025 and is projected at 193,200 in 2035, growing about 4%, a net gain of 7,400, and about 13,900 openings per year; glass 49-3022 is listed separately as 22,600 → 23,900, 5.7%, and 1,300 per year. The fixed identity of this page, 49-3021, is not changed, and the combined group and glass statistics are not treated as this occupation's independent data."
+              "BLS Table 1.2: U.S. automotive body and related repairers (49-3021) numbered 163,200 in 2025 and are projected at 169,300 in 2035. Growth is 3.7%, a net gain of about 6,100, with about 12,600 annual openings. Self-employment was 8.5%; openings include growth and replacement."
             ]
           },
           "id": "automotive-body-and-glass-repairers.market-signals.market-signal-card.18",
           "source_refs": [
-            "ep",
             "ep-table",
+            "ep",
             "census"
           ],
           "type": "prose"
@@ -31458,7 +31469,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The precise BLS figure of 3.7% for this occupation is in fact available, and the about 4% OOH combined figure is listed separately; openings do not equal an individual hiring guarantee or AI causality."
+              "Annual openings include growth and replacement and are distinct from net job gains."
             ]
           },
           "id": "automotive-body-and-glass-repairers.market-signals.market-signal-card.19",
@@ -31488,7 +31499,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "U.S. Body and Related Repairers 49-3021"
             ]
           },
           "id": "automotive-body-and-glass-repairers.market-signals.market-signal-card.21",
@@ -31502,7 +31513,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Average 3% to 4% (about 12,600 openings per year)"
+              "3.7%, about 12,600 annual openings"
             ]
           },
           "id": "automotive-body-and-glass-repairers.market-signals.market-signal-card.22",
@@ -31587,7 +31598,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "industry_proxy"
+              "Urban-unit industry average"
             ]
           },
           "id": "automotive-body-and-glass-repairers.market-signals.market-signal-card.28",
@@ -32030,10 +32041,13 @@
                 "question_key": "career.faq.automotive-body-and-glass-repairers.2"
               },
               {
-                "answer": "The more explanatory signals are: being able to complete shaping, welding, grinding, and spraying to process and record honestly, reviewing repair results by dimensions and symmetry, and stopping and escalating when structural parts, safety parts, process parameters, or work authorization are unclear; \"liking cars\" alone cannot settle it. The Holland interest code is RC (Realistic + Conventional), and a consistent interest only indicates that the direction is close.",
+                "answer": "Try BD-65 in section 09 to record measurement findings, review status and the receiver.",
                 "id": "automotive-body-and-glass-repairers.faq.3",
                 "question": "How do I judge whether I am suited to being an automotive body and glass repairer?",
-                "question_key": "career.faq.automotive-body-and-glass-repairers.3"
+                "question_key": "career.faq.automotive-body-and-glass-repairers.3",
+                "source_refs": [
+                  "bd65-editor"
+                ]
               },
               {
                 "answer": "AI and automation can change damage estimating and quotation support, damage measurement and dimensional comparison, spray mixing and color matching, and labor time and parts ledgers and settlement compilation; but there is no official evidence that they will replace on-site damage determination, frame and dimensional measurement, welding and structural part repair, and spray application and quality release responsibility as a whole. The official materials also do not give an automation substitution rate or a job disappearance year for this occupation.",
@@ -32042,16 +32056,26 @@
                 "question_key": "career.faq.automotive-body-and-glass-repairers.4"
               },
               {
-                "answer": "Determining the extent of damage, frame and dimensional measurement, decisions on repairing structural and safety parts, welding and cutting process execution, paint mixing and spray parameters, glass and accessory installation quality, and road test and quality release conclusions must all be undertaken by the individual according to institutional procedures; tool output must first be marked as reference and can only enter the formal work order and settlement after on-site measurement and process verification.",
+                "answer": "Assign structural damage assessment, measurement, welding and paint, glass safety, road testing and final release to people qualified and authorized for each task. Treat software output as a lead. Follow manufacturer documentation and site procedures for real vehicles. The paper exercise only reviews records.",
                 "id": "automotive-body-and-glass-repairers.faq.5",
                 "question": "Which steps must retain manual review?",
-                "question_key": "career.faq.automotive-body-and-glass-repairers.5"
+                "question_key": "career.faq.automotive-body-and-glass-repairers.5",
+                "source_refs": [
+                  "cn-repair-regulation-2023",
+                  "osha-autobody-hazards",
+                  "bd65-editor"
+                ]
               },
               {
-                "answer": "U.S. side: O*NET lists 49-3021.00 as Job Zone 1–2 (SVP below 6.0), and the BLS Occupational Outlook Handbook lists the typical entry-level education as a high school diploma or equivalent and notes that most employers prefer to hire people who have completed a body or glass repair training program, with industry certification increasingly important; certification is used to demonstrate specific abilities but is not a statutory work permit. Mainland China side: motor vehicle repair operations are subject to filing and classification management under the Provisions on the Administration of Motor Vehicle Repair, and class one and class two operations must be staffed with technical responsible personnel, quality inspection personnel, and repair technicians engaged in sheet metal and paint work, and body repair, auto detailing and trim, and auto glass installation and repair are special repair items. Education, training, certification, unit filing, and position authorization cannot substitute for one another.",
+                "answer": "BLS lists a high school diploma or equivalent, no related work experience and long-term on-the-job training as typical for 49-3021. Shanghai’s 2025 evaluation notice lists the SAIC Motor evaluation project for body straightening and repair under motor vehicle repair worker 4-12-01-01, levels 5, 4, 3 and 2. Check skill evaluation, special work qualifications, business filing and release authority separately. Article 9 of China’s Motor Vehicle Repair Administration Provisions distinguishes specialized body repair from glass installation and repair. Article 12 sets personnel and facility conditions by business category. The operator files for the relevant business scope. Individual training or skill evaluation does not substitute for that filing.",
                 "id": "automotive-body-and-glass-repairers.faq.6",
                 "question": "What qualifications must be verified to enter this occupation?",
-                "question_key": "career.faq.automotive-body-and-glass-repairers.6"
+                "question_key": "career.faq.automotive-body-and-glass-repairers.6",
+                "source_refs": [
+                  "ep-table",
+                  "shanghai-body-levels",
+                  "cn-repair-regulation-2023"
+                ]
               },
               {
                 "answer": "Yes. The O*NET work context shows that 95% need to use their hands to handle tools and equipment continuously or almost continuously, 52% bend or twist continuously or almost continuously, 52% stand more than half the time, 50% kneel, squat, bend, or crawl more than half the time, and 47% walk or run more than half the time; the ability list includes manual and finger dexterity, arm-hand steadiness, trunk strength, near vision, and color discrimination. It also requires material and process understanding and dimensional measurement and record-keeping ability.",
@@ -32066,16 +32090,34 @@
                 "question_key": "career.faq.automotive-body-and-glass-repairers.8"
               },
               {
-                "answer": "The official employment projection is about 172,600 people employed in 2024, growth below average from 2024 to 2034 (1% to 2%), and about 14,600 openings per year; the BLS Occupational Outlook Handbook gives, for 2025—2035, about 185,800 people employed in the combined occupation group, 4% growth, and about 13,900 openings per year, mostly from replacement needs. A projection is not an individual hiring probability. For transitions you can compare directions such as automotive glass installers, automotive service technicians and mechanics, sheet metal workers, bus and truck mechanics and diesel engine specialists, electric motor and power tool repairers, and motorcycle mechanics, but qualifications and authorizations must be verified item by item.",
+                "answer": "BLS Table 1.2: U.S. automotive body and related repairers (49-3021) numbered 163,200 in 2025 and are projected at 169,300 in 2035. Growth is 3.7%, a net gain of about 6,100, with about 12,600 annual openings. Self-employment was 8.5%; openings include growth and replacement.",
                 "id": "automotive-body-and-glass-repairers.faq.9",
                 "question": "How should I judge the career outlook and transitions?",
-                "question_key": "career.faq.automotive-body-and-glass-repairers.9"
+                "question_key": "career.faq.automotive-body-and-glass-repairers.9",
+                "source_refs": [
+                  "ep-table"
+                ]
               },
               {
-                "answer": "The U.S. figures come from the BLS Occupational Employment and Wage Statistics (OEWS, 2025, under the 49-3021.00 occupation definition) and the BLS Occupational Outlook Handbook Automotive Body and Glass Repairers (2025 median annual wage of 52,530 USD, under the combined occupation group definition); mainland China has no nationwide occupational wage distribution precisely corresponding to 49-3021.00, and this page only shows industry-category and job-category average wages as a comparison. The two markets differ in statistical definitions, the population covered, and reference periods and cannot be converted directly.",
+                "answer": "U.S. OEWS reports employee wage percentiles for 49-3021. Mainland China urban-unit data report industry averages and can include employer-paid piece wages, bonuses, allowances and overtime. A repair invoice is not worker pay. Laiyang quotes apply only to the historical jobs.",
                 "id": "automotive-body-and-glass-repairers.faq.10",
                 "question": "Why can't U.S. wages and mainland China wages be converted into each other?",
-                "question_key": "career.faq.automotive-body-and-glass-repairers.10"
+                "question_key": "career.faq.automotive-body-and-glass-repairers.10",
+                "source_refs": [
+                  "nbs",
+                  "cnclass",
+                  "onet-wages",
+                  "laiyang-body-2026"
+                ]
+              },
+              {
+                "answer": "B1 allows 1,198 to 1,202 mm. In the original A passes, but B is 1,204 mm, 2 mm over the upper limit; hold the ticket and escalate for measurement review. Only B changes in the variant, to 1,202 mm, so both readings are in range and the ticket can go to the authorized inspector. B3 is unsigned in both versions, so neither is released.",
+                "id": "automotive-body-and-glass-repairers.faq.11",
+                "question": "BD-65 reference (open after submitting)",
+                "question_key": "career.faq.automotive-body-and-glass-repairers.q11",
+                "source_refs": [
+                  "bd65-editor"
+                ]
               }
             ]
           },
@@ -32096,7 +32138,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The actual official materials read this round support limited nine-module author verification, and accessible links or old records are not treated as independent sign-off."
+              "FermatMind Editorial"
             ]
           },
           "id": "automotive-body-and-glass-repairers.sources.source-card.1",
@@ -32110,7 +32152,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Actually read: O*NET49-3021 summary/details/wages/hottech/industry/trends and 8 adjacent definitions, BLS EP49-3021/49-3022 and the OOH employment and wages including the medians for 3 body industries, and training; 2022 classification PDF276. China's repair provisions 7—12/20/22—33 were actually read, and the relevant articles of special operations Order No. 19 are reused from the same window and same day, while the catalog was not fully read. The new OSHA hazard index, the current EPA introduction, and 2 pages of the 2023 summary were actually read, and the current eCFR access control did not yield the full text. The same NBS wage rows and the 1990 provisions and the OEWS method reuse the versions actually read in the same window on the same day; the ILO introduction extended abstract and the NIST brief are background only. The old repair and OSHA URLs failed, custom/training/cert did not give complete conditions, and a Profile failure does not mean industry wages do not exist."
+              "U.S. sources are BLS and O*NET. Mainland sources are NBS, Laiyang, Shanghai HRSS and the Ministry of Transport."
             ]
           },
           "id": "automotive-body-and-glass-repairers.sources.source-card.2",
@@ -32142,7 +32184,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Verified on 2026-10-09: employment, wages, and recruiting are 2025 and projections 2025—2035; Chinese wages are 2025, the wage provisions are 1990, the classification is 2022, the repair provisions are the 2023 fifth amendment, and the special operations training provisions take effect 2026-06-01; the current EPA introduction was updated 2025-10-26 and the 2023 summary is not the full current text. Old entry points were not re-read and the dates are retained."
+              "Sources checked: November 10, 2026."
             ]
           },
           "id": "automotive-body-and-glass-repairers.sources.source-card.3",
@@ -32156,7 +32198,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The NBS total wage may include piece-rate and lump-sum pay, bonuses, allowances and subsidies, and overtime pay, and they cannot all be excluded; verify items excluded by rule according to the nature of the actual payments. Unit industry and job category averages are not this occupation's income. The labor time and material cost in customer repair settlement are also not employee wages. OEWS includes paid employees' base pay, commissions, production bonuses, and other incentive pay and tips; it excludes overtime premiums, shift differentials, and nonproduction bonuses. The self-employed, owners and partners of unincorporated businesses, and unpaid family workers are excluded, and paid corporate employees are not excluded wholesale because of small scale or a family business. Not all piece-rate or hourly workers can be excluded from the statistics, and this is not an individual's net take-home income. 2022 occupational classification, PDF276 page 4-12-01-01 auto mechanic: inspecting, maintaining, repairing, and adjusting automobiles and special-purpose vehicles, with tasks including diagnosing and repairing engine, chassis, body, and electrical faults, appearance, interior, and wheel trim, tool maintenance, used-car reconditioning, and process records; it lists job types such as automotive glass repairer, automotive body shaping and repairer, and automotive body refinisher. It overlaps with US49-3021/49-3022, and the job type classification does not equal business item classification, wages, or mutual recognition of qualifications. Specific employer contracts, all training and certification and special catalogs, GB/T standards, all vehicle model processes, PPE, fire and hazardous waste, and recovery procedures, the complete eCFR and privacy conditions, AI occupational effects, scale prediction, and transition mutual recognition were not verified. The shared facts and out-of-scope consumers are frozen, so full-page consistency or formal acceptance cannot be signed."
+              "Follow manufacturer documentation and the employer’s release process for actual vehicles."
             ]
           },
           "id": "automotive-body-and-glass-repairers.sources.source-card.4",
@@ -32201,13 +32243,13 @@
                 "entity": "Enneagram personality test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the automotive body and glass repairers career page",
@@ -32271,12 +32313,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "163,200 → 169,300; 3.7% / average 3% to 4%",
-                  "Net gain 6,100; about 12,600 per year"
+                  "O*NET shows 163,200 employed in 2025 and a 2025–2035 growth band.",
+                  "See BLS Table 1.2 for the exact growth percentage."
                 ],
                 "evidence_type": "official outlook",
                 "id": "ep",
-                "limitation": "The U.S. 49-3021 body and related repairers occupation had 163,200 jobs in 2025 and is projected at 169,300 in 2035, growing 3.7% from 2025 to 2035 (O*NET average of 3% to 4%), a net gain of 6,100, and about 12,600 openings per year, with the self-employed at 8.5%. Openings include growth and replacements and are not the net gain or an individual hiring rate.",
+                "limitation": "U.S. occupation summary, separate from the combined group.",
                 "market": "United States",
                 "name": "O*NET 49-3021.00 occupation summary (employment and projections fields)",
                 "period": "2025 employment and 2025—2035 projections; visited 2026-10-09",
@@ -32330,7 +32372,7 @@
                 "period": "Released 1990; visited 2026-10-09",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
+                "url": "https://www.stats.gov.cn/gk/tjfg/xzfg/202302/t20230206_1901829.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32367,12 +32409,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "163,200 → 169,300; 3.7% / average 3% to 4%",
-                  "Net gain 6,100; about 12,600 per year"
+                  "O*NET shows 163,200 employed in 2025 and a 2025–2035 growth band.",
+                  "See BLS Table 1.2 for the exact growth percentage."
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
-                "limitation": "The U.S. 49-3021 body and related repairers occupation had 163,200 jobs in 2025 and is projected at 169,300 in 2035, growing 3.7% from 2025 to 2035 (O*NET average of 3% to 4%), a net gain of 6,100, and about 12,600 openings per year, with the self-employed at 8.5%. Openings include growth and replacements and are not the net gain or an individual hiring rate.",
+                "limitation": "U.S. occupation summary, separate from the combined group.",
                 "market": "United States",
                 "name": "O*NET 49-3021.00 occupation summary (employment and projections fields)",
                 "period": "2025 employment and 2025—2035 projections; visited 2026-10-09",
@@ -32425,7 +32467,7 @@
                 "name": "International Labour Organization, Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140)",
                 "period": "2025; visited 2026-09-15",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -32434,13 +32476,13 @@
                   "The actual official summary link",
                   "Not an independent editorial group original record"
                 ],
-                "evidence_type": "Official occupation summary",
+                "evidence_type": "primary_document",
                 "id": "editor",
                 "limitation": "The actual official summary does not prove an independent editorial group record.",
                 "market": "United States",
-                "name": "O*NET49-3021 occupation summary (editorial verification entry point)",
+                "name": "O*NET occupation summary: Automotive Body and Related Repairers",
                 "period": "Visited 2026-10-09",
-                "publisher": "O*NET",
+                "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/49-3021.00"
               },
@@ -32575,17 +32617,17 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official outlook",
-                  "2025—2035; visited 2026-10-09"
+                  "BLS Occupational Outlook Handbook combined body and glass group: 185,800 in 2025 and 193,200 projected in 2035, with about 4% growth and a net gain of 7,400. The outlook text lists about 13,900 annual openings. Group median annual pay is $52,530. The separate glass occupation (49-3022) is 22,600 to 23,900, with 5.7% growth, about 1,300 annual openings and median annual pay of $47,630.",
+                  "Group and occupation statistics are separate."
                 ],
                 "evidence_type": "official outlook",
                 "id": "census",
-                "limitation": "The combined OOH body and glass group had 185,800 jobs in 2025 and is projected at 193,200 in 2035, growing about 4%, a net gain of 7,400, and about 13,900 openings per year; glass 49-3022 is listed separately as 22,600 → 23,900, 5.7%, and 1,300 per year. The fixed identity of this page, 49-3021, is not changed, and the combined group and glass statistics are not treated as this occupation's independent data. The 2025 body industry medians actually read are 55920/52040/50450; body training is usually 2—3 years and glass up to 1 year. The combined median is 52530, body 54890, and glass 47630, each a different statistical object; these are not the conditions of all employers.",
+                "limitation": "Annual openings are from the Job Outlook narrative.",
                 "market": "United States",
-                "name": "BLS Occupational Outlook Handbook: Automotive Body and Glass Repairers",
-                "period": "2025—2035; visited 2026-10-09",
+                "name": "BLS Occupational Outlook Handbook: Combined body and glass group",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/automotive-body-and-glass-repairers.htm"
               },
               {
@@ -32655,18 +32697,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "Actually PDF276 page 4-12-01-01",
-                  "Job types such as glass, body shaping, and refinishing repair"
+                  "Lists body straightening and repair under 4-12-01-01 at levels 5, 4, 3 and 2.",
+                  "Local skill evaluation, not individual credentials or business filing."
                 ],
-                "evidence_type": "Relevant entries in the official occupational classification document",
+                "evidence_type": "primary_document",
                 "id": "cn-classification-2022",
-                "limitation": "2022 occupational classification, PDF276 page 4-12-01-01 auto mechanic: inspecting, maintaining, repairing, and adjusting automobiles and special-purpose vehicles, with tasks including diagnosing and repairing engine, chassis, body, and electrical faults, appearance, interior, and wheel trim, tool maintenance, used-car reconditioning, and process records; it lists job types such as automotive glass repairer, automotive body shaping and repairer, and automotive body refinisher. It overlaps with US49-3021/49-3022, and the job type classification does not equal business item classification, wages, or mutual recognition of qualifications.",
+                "limitation": "Shanghai 2025 evaluation catalog.",
                 "market": "Mainland China",
-                "name": "2022 occupational classification, auto mechanic and body and glass job types",
-                "period": "2022 edition; visited 2026-10-09",
-                "publisher": "Government public original text, Xilin Gol League site",
+                "name": "Shanghai HRSS: body straightening and repair skill evaluation",
+                "period": "2025",
+                "publisher": "Shanghai Department of Human Resources and Social Security",
                 "scope": "contextual",
-                "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+                "url": "https://rsj.sh.gov.cn/tjypx_17737/20250102/t0035_1429707.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32719,30 +32761,30 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The parts described were actually read this round, or an access failure was recorded",
-                  "Visited 2026-10-09"
+                  "BLS Table 1.2: U.S. automotive body and related repairers (49-3021) numbered 163,200 in 2025 and are projected at 169,300 in 2035. Growth is 3.7%, a net gain of about 6,100, with about 12,600 annual openings. Self-employment was 8.5%; openings include growth and replacement.",
+                  "Glass is a separate row."
                 ],
-                "evidence_type": "Official employment projections and characteristics table",
+                "evidence_type": "primary_document",
                 "id": "ep-table",
-                "limitation": "The U.S. 49-3021 body and related repairers occupation had 163,200 jobs in 2025 and is projected at 169,300 in 2035, growing 3.7% from 2025 to 2035 (O*NET average of 3% to 4%), a net gain of 6,100, and about 12,600 openings per year, with the self-employed at 8.5%. Openings include growth and replacements and are not the net gain or an individual hiring rate. The combined OOH body and glass group had 185,800 jobs in 2025 and is projected at 193,200 in 2035, growing about 4%, a net gain of 7,400, and about 13,900 openings per year; glass 49-3022 is listed separately as 22,600 → 23,900, 5.7%, and 1,300 per year. The fixed identity of this page, 49-3021, is not changed, and the combined group and glass statistics are not treated as this occupation's independent data. The typical entry for this occupation is a high school diploma or equivalent, no experience, and long-term OJT; for glass it is medium-term OJT.",
+                "limitation": "U.S. projection, not individual hiring prospects.",
                 "market": "United States",
-                "name": "BLS Occupational Employment Projections and Characteristics table 49-3021/49-3022",
-                "period": "2025、2025—2035",
-                "publisher": "BLS",
+                "name": "BLS Table 1.2: Automotive Body and Related Repairers 49-3021",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The parts described were actually read this round, or an access failure was recorded",
-                  "Visited 2026-10-09"
+                  "Article 9 of China’s Motor Vehicle Repair Administration Provisions distinguishes specialized body repair from glass installation and repair. Article 12 sets personnel and facility conditions by business category. The operator files for the relevant business scope. Individual training or skill evaluation does not substitute for that filing.",
+                  "Business filing and individual qualifications are separate."
                 ],
                 "evidence_type": "Relevant articles of the current departmental rule",
                 "id": "cn-repair-regulation-2023",
-                "limitation": "China's Provisions on the Administration of Motor Vehicle Repair, fifth amendment in 2023: Articles 7—9 require filing with the county-level transport department after registration and classification by vehicle type, capability, and item; Article 12 requires at least 1 each of technical responsible person, quality inspector, business reception, and mechanical, electrical, sheet metal, and paint technicians for class one and two, and staffing by item for class three, where body repair additionally requires a technical responsible person and quality inspection personnel. Quality inspection requires an appropriate driver's license, and this license is not required of all sheet metal personnel; Article 20 requires operating within the filed scope. Unit filing, personnel conditions, and the statutory qualifications for specific work cannot substitute for one another. Article 29 of the repair provisions requires repairing according to standards and publicly available vendor technical materials and not damaging emission systems such as OBD; Article 30 prohibits counterfeit and substandard parts, and requires recording purchase and use information, checking conformity certificates, and keeping the source. Article 31 applies in-shop and process completion inspection to level-two maintenance, assemblies, and whole-vehicle repair; Article 32 requires the corresponding release certificate to be issued by quality inspection personnel, with no delivery without a signature, and ordinary technicians or supervisors must not automatically sign on their behalf. Article 33 requires the electronic file to lawfully include the contract, work order, items, personnel, and settlement, and the listed repair additionally includes inspection and certificate copies; upload the genuine motor vehicle repair electronic health record. Articles 7—12/20/22—33 were actually read, and these are not all local implementation rules, GB/T16739, or fire and hazardous waste standards.",
+                "limitation": "Article 9 of China’s Motor Vehicle Repair Administration Provisions distinguishes specialized body repair from glass installation and repair. Article 12 sets personnel and facility conditions by business category. The operator files for the relevant business scope. Individual training or skill evaluation does not substitute for that filing.",
                 "market": "Mainland China",
-                "name": "Provisions on the Administration of Motor Vehicle Repair, 2023 fifth amendment",
+                "name": "Ministry of Transport: Motor Vehicle Repair Administration Provisions",
                 "period": "Effective 2023-11-10",
                 "publisher": "Ministry of Transport",
                 "scope": "contextual",
@@ -32951,11 +32993,56 @@
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "name": "FermatMind AI task-impact estimate estimation method v1",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Laiyang’s 2026 Spring Breeze job fair lists one bodywork opening at Laiyang Shunsheng Automobile Sales Co., Ltd. with advertised pay of CNY 5,000–8,000 per month. The same employer separately advertises CNY 3,000–5,000 for a paint apprentice. The quotes apply to different roles."
+                ],
+                "evidence_type": "primary_document",
+                "id": "laiyang-body-2026",
+                "limitation": "Laiyang’s 2026 Spring Breeze job fair lists one bodywork opening at Laiyang Shunsheng Automobile Sales Co., Ltd. with advertised pay of CNY 5,000–8,000 per month. The same employer separately advertises CNY 3,000–5,000 for a paint apprentice. The quotes apply to different roles.",
+                "market": "Mainland China",
+                "name": "Laiyang 2026 Spring Breeze: historical bodywork and paint apprentice listings",
+                "period": "2026",
+                "publisher": "Laiyang government portal",
+                "scope": "recruitment_proxy",
+                "url": "https://www.laiyang.gov.cn/col/col111041/art/2026/art_18a5886e284c4e3494452e3736a2d91b.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS lists a high school diploma or equivalent, no related work experience and long-term on-the-job training as typical for 49-3021. Shanghai’s 2025 evaluation notice lists the SAIC Motor evaluation project for body straightening and repair under motor vehicle repair worker 4-12-01-01, levels 5, 4, 3 and 2. Check skill evaluation, special work qualifications, business filing and release authority separately."
+                ],
+                "evidence_type": "primary_document",
+                "id": "shanghai-body-levels",
+                "limitation": "BLS lists a high school diploma or equivalent, no related work experience and long-term on-the-job training as typical for 49-3021. Shanghai’s 2025 evaluation notice lists the SAIC Motor evaluation project for body straightening and repair under motor vehicle repair worker 4-12-01-01, levels 5, 4, 3 and 2. Check skill evaluation, special work qualifications, business filing and release authority separately.",
+                "market": "Mainland China",
+                "name": "Shanghai HRSS: body straightening and repair skill evaluation",
+                "period": "2025",
+                "publisher": "Shanghai Department of Human Resources and Social Security",
+                "scope": "contextual",
+                "url": "https://rsj.sh.gov.cn/tjypx_17737/20250102/t0035_1429707.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Fictional paper ticket created for this page."
+                ],
+                "evidence_type": "editorial_design",
+                "id": "bd65-editor",
+                "limitation": "Fictional paper ticket created for this page.",
+                "market": "Fictional exercise",
+                "name": "FermatMind Editorial BD-65: Body measurement review ticket",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": null
               }
             ]
           },
@@ -36289,7 +36376,7 @@
       },
       "hero": {
         "h1": "Automotive Body and Glass Repairers",
-        "quick_answer": "Automotive Body and Glass Repairers assess vehicle damage and repair and refinish bodies and straighten frames, and they also handle replacing and repairing windshields and window glass; they complete shaping, welding and cutting, grinding and painting, and assembly according to repair technical information and process procedures, and review by dimensions and appearance; their work is not \"a couple of taps and a coat of paint\", and they stop and escalate when structural parts, process parameters, or work authorization are unclear.",
+        "quick_answer": "Body repairers assess structural and panel damage, record measurements, plan repairs or replacements and check work against manufacturer requirements. Glass repair is an adjacent role. The main U.S. figures here are for body and related repairers (49-3021), with glass and combined figures shown separately.",
         "title": "Automotive Body and Glass Repairers"
       },
       "market_signal_card": {
@@ -37641,7 +37728,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests suit automotive body and glass repairers",
+        "label": "Explore my career interests with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37738,7 +37825,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Enneagram (Chinese)"
+            "label": "Enneagram (English)"
           },
           {
             "href": {
@@ -37748,7 +37835,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "IQ (Chinese)"
+            "label": "IQ (English)"
           }
         ]
       },
@@ -37763,7 +37850,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which adjacent direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
-      "interface.quick_decision.experiment_heading": "What does this job mainly do?",
+      "interface.quick_decision.experiment_heading": "How can I try a paper exercise to see whether the work fits?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. salary reference",
@@ -37856,7 +37943,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI task-impact estimate",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37946,39 +38033,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "172,600 people",
+        "derivation": "Published value.",
+        "display_value": "163,200 people",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "2024 employment (49-3021.00 occupation definition)",
-        "occupation_scope": "Automotive Body and Glass Repairers",
-        "period": "2024; visited 2026-09-15",
+        "measure": "Employment",
+        "occupation_scope": "U.S. Automotive Body and Related Repairers 49-3021",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Below average (1% to 2%)",
+        "derivation": "Published value.",
+        "display_value": "3.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "2024—2034 employment growth label",
-        "occupation_scope": "Automotive Body and Glass Repairers",
-        "period": "2024—2034; visited 2026-09-15",
+        "measure": "Projected growth",
+        "occupation_scope": "U.S. Automotive Body and Related Repairers 49-3021",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 14,600 per year",
+        "derivation": "Published value.",
+        "display_value": "About 12,600 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "2024—2034 average annual job openings",
-        "occupation_scope": "Automotive Body and Glass Repairers",
-        "period": "2024—2034; visited 2026-09-15",
+        "measure": "Annual openings",
+        "occupation_scope": "U.S. Automotive Body and Related Repairers 49-3021",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
@@ -38126,63 +38213,63 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "26.39 USD/hour",
+        "derivation": "Published value.",
+        "display_value": "$25.25/hour",
         "fact_id": "us-hourly-median-parent",
         "market": "United States",
-        "measure": "Hourly wage median (same definition)",
-        "occupation_scope": "Automotive Body and Glass Repairers",
-        "period": "May 2025（OEWS）",
+        "measure": "Median hourly wage",
+        "occupation_scope": "U.S. combined body and glass group",
+        "period": "2025-05",
         "source_refs": [
-          "onet-wages"
+          "census"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "54,890 USD/year",
+        "derivation": "Published value.",
+        "display_value": "$52,530/year",
         "fact_id": "us-annual-median-parent",
         "market": "United States",
-        "measure": "Annual wage median (same definition)",
-        "occupation_scope": "Automotive Body and Glass Repairers",
-        "period": "May 2025（OEWS）",
+        "measure": "Median annual wage",
+        "occupation_scope": "U.S. combined body and glass group",
+        "period": "2025-05",
         "source_refs": [
-          "onet-wages"
+          "census"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "172,600 people",
+        "derivation": "Published value.",
+        "display_value": "185,800 people",
         "fact_id": "us-employment-parent",
         "market": "United States",
-        "measure": "2024 employment (this occupation definition)",
-        "occupation_scope": "Automotive Body and Glass Repairers",
-        "period": "2024",
+        "measure": "Employment",
+        "occupation_scope": "U.S. combined body and glass group",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "census"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Below average (1% to 2%)",
+        "derivation": "Published value.",
+        "display_value": "4%",
         "fact_id": "us-growth-parent",
         "market": "United States",
-        "measure": "2024—2034 employment growth label",
-        "occupation_scope": "Automotive Body and Glass Repairers",
-        "period": "2024—2034",
+        "measure": "Projected growth",
+        "occupation_scope": "U.S. combined body and glass group",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "census"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 14,600 per year",
+        "derivation": "Published value.",
+        "display_value": "About 13,900 per year",
         "fact_id": "us-openings-parent",
         "market": "United States",
-        "measure": "2024—2034 average annual job openings",
-        "occupation_scope": "Automotive Body and Glass Repairers",
-        "period": "2024—2034",
+        "measure": "Annual openings",
+        "occupation_scope": "U.S. combined body and glass group",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "census"
         ]
       },
       {
@@ -38190,7 +38277,7 @@
         "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "AI task-impact estimate (editorial estimate)",
         "occupation_scope": "Automotive Body and Glass Repairers",
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
@@ -38204,12 +38291,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI task-impact estimate"
     },
     "badges": [
-      "O*NET 49-3021.00 · Job Zone 1–2 · Little preparation",
+      "Main U.S. figures: body and related repairers (49-3021)",
       "Body repair and refinishing / frame straightening / glass and accessory replacement",
-      "No precise occupational statistics for mainland China · visible gap marker"
+      "Mainland China: historical bodywork listing and industry wages shown separately"
     ],
     "metrics": [
       {
@@ -38222,19 +38309,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034)"
+        "label": "U.S. employment growth (2025—2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment (2024)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024—2034)"
+        "label": "U.S. average annual job openings (2025—2035)"
       },
       {
         "availability": "missing",
@@ -38248,17 +38335,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What automotive body and glass repairers do, what education and qualifications are needed, what income and outlook are like in the United States and China, which tasks AI will change, and the safety and environmental boundaries of welding, cutting, and painting; the source scope and data gaps are preserved."
+      "text": "Compare body and glass repair work, pay and training. Check a historical Mainland China bodywork listing and try a paper review ticket."
     },
     "title": {
       "availability": "available",
-      "text": "Automotive Body and Glass Repairers"
+      "text": "Automotive Body and Glass Repairers: Work, Pay and Entry | FermatMind"
     }
   },
-  "source_content_sha256": "0534ee5595882da1202df476180dd716c7bc3d07157af9e5b15180f165fc8390",
+  "source_content_sha256": "4be217ea02a92db9f93b8ab725ee096b2a8fdfa4186b7dd54f81c96c63477d35",
   "subject": {
     "canonical_slug": "automotive-body-and-glass-repairers",
     "name": "Automotive Body and Glass Repairers",
-    "summary": "Automotive Body and Glass Repairers assess vehicle damage and repair and refinish motor vehicle bodies, straighten frames, and replace windshields and window glass, and the core is shaping to process, welding, grinding and painting, and checking dimensions. The U.S. side corresponds to O*NET 49-3021.00 (Automotive Body and Related Repairers), in Job Zone 1–2 (SVP below 6.0); mainland China statistics are aggregated by industry category and do not list this occupation separately, and motor vehicle repair operations are subject to filing and classification management under the Provisions on the Administration of Motor Vehicle Repair; industry figures do not cover overtime pay or piece-rate commissions."
+    "summary": "Body repairers assess structural and panel damage, record measurements, plan repairs or replacements and check work against manufacturer requirements. Glass repair is an adjacent role. The main U.S. figures here are for body and related repairers (49-3021), with glass and combined figures shown separately."
   }
 }

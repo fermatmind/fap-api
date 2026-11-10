@@ -57,13 +57,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -84,7 +84,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -1572,7 +1572,7 @@
         "status": "pending_mapping"
       },
       "item:biological-technicians.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:biological-technicians.sources.source-card.1": {
         "status": "mapped"
@@ -23361,12 +23361,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "职业身份与口径必须分开核对：O*NET 把 19-4021.00（Biological Technicians）列为 Job Zone Four（需要相当准备），学历构成为该页按岗位差异列出「部分岗位要求学士学位、部分岗位要求高中或同等学历、部分岗位要求部分大学教育（无学位）」（页面未给出各项百分比）；兴趣代码为 CRI（常规型—现实型—研究型）。该职业页面的工资、就业与行业数据在 O*NET 页面上均按本职业 19-4021.00 口径给出：年薪分位为第 10 分位 40,330 美元、第 25 分位 48,130 美元、中位数 57,510 美元、第 75 分位 71,520 美元、第 90 分位 84,940 美元；时薪分位为 19.39 与 23.14 与 27.65 与 34.39 与 40.84 美元；就业趋势页给出 2024 年在岗 82,700 人、2034 年约 85,600 人（2024—2034 年 4%，标签为平均（Average））、预测期年均职位空缺 9,100；行业分布为专业科学与技术服务 38%、教育服务 23%、政府 15%、医疗与社会援助 11%、其他行业（含制造业）13%。本页据此按本职业口径发布并逐处标注资料期。学历、职业培训、行业认证、雇主任用与岗位与设备与样本与动物与化学品操作授权、以及适用法域对生物安全与实验室安全与实验动物福利的要求是不同状态，须按机构与岗位与法域逐项核验。中国大陆侧本轮未建立与该职业一一对应的全国工资口径，本页不发布任何中国大陆薪资数值，只保留可见缺口标记。"
+              "去第 09 节做 BT-78：核两版虚构物料记录，写一页给技术复核员的交接。"
             ]
           },
           "id": "biological-technicians.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "bt78-paper",
             "onet"
           ],
           "type": "prose"
@@ -23376,13 +23376,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以样本与仪器与数据记录为核心、并在生物安全与质量与可复现要求下协助科研与检测的技术岗位，核心是设置与操作与维护仪器、监测实验与收集数据与样本、计算与记录结果并如实交接，而不是对生物学的想象；其美国工资与就业与行业数据均按本职业 19-4021.00 口径给出并逐处标注；中国大陆侧未取得与该职业一一对应的全国工资口径，本页不发布中国大陆薪资数值并可见标记为证据不足。"
+              "先用 BT-78 观察自己是否喜欢核对记录、保留差异并及时交接，再比较实验支持和生产岗位。"
             ]
           },
           "id": "biological-technicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
             "onet",
-            "onet"
+            "bt78-paper"
           ],
           "type": "prose"
         }
@@ -23448,18 +23448,21 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜61% 认为精确或准确极其重要（26% 非常重要、12% 重要）；94% 与他人持续接触；88% 每天使用电子邮件（11% 每月一次以上但非每周）；83% 每天有面对面讨论（17% 每周一次以上但非每天）；85% 每天佩戴常见防护或安全装备（14% 每周一次以上但非每天）；61% 持续或几乎持续用双手操作工具与物品；49% 认为重复同一任务极其重要（24% 非常重要、22% 重要）；81% 在决定上只有一些自由（11% 很小）；23% 在确定任务与优先级上有很大自由（54% 有一些、23% 很小）；23% 每天面临时间压力（36% 每周一次以上但非每天、35% 每月一次以上但非每周）；33% 认为错误后果极其严重（14% 很严重、22% 严重、19% 完全不严重）；13% 每天暴露于危险条件（31% 每周一次以上但非每天、39% 每月一次以上但非每周）；33% 每天暴露于污染物（13% 每周一次以上但非每天）；20%回答每日面临轻微烧/割/咬/蜇伤暴露情境（非每日受伤发生率）；20% 持续或几乎持续站立（48% 超过一半时间）。\n主要装备与工具｜实验室与数据环境：Microsoft Excel 与 Office software 与 .NET Framework 与 Word 与 ESRI ArcGIS software 与 PowerPoint 与 Outlook 与 Access（O*NET 技术清单 12 项，其中 Adobe Acrobat 与 Adobe Photoshop 与 Microsoft Project 与 SAS 标注「Not available」）；软件技能类别另列出分析与科学软件与数据库查询与开发环境与文档管理与地理信息系统与图形或图像处理与办公套件与演示与电子表格与文字处理等 12 类；实验操作另需使用移液与离心与培养与显微与分光与称量与灭菌等仪器与试剂与防护装备，其使用与维护须按机构实验室与生物安全制度执行。样本与仪器状态与试剂批次与记录须可追溯。\n任务节奏｜61% 认为精确或准确极其重要；81% 在决定上只有一些自由；23% 在确定任务与优先级上有很大自由；23% 每天面临时间压力（36% 每周一次以上但非每天、35% 每月一次以上但非每周）；49% 认为重复同一任务极其重要；24% 认为自动化程度高度自动化、23% 中等、35% 轻微、18% 完全不自动化；15% 认为工作节奏由设备速度决定极其重要（42% 完全不重要）；35% 每周工时超过 40 小时、63% 恰好 40 小时；67% 为固定常规工作安排（非轮班频率）、12% 为不规则工作安排；长时间站立与重复性操作与防护装备佩戴需要工效安排与间歇。\n协作对象｜与研究人员与临床人员与实验室同事与设备与耗材供应商协作；86% 认为与工作组或团队合作极其重要（13% 非常重要）；35% 认为协调或领导他人完成工作极其重要；16% 认为决定对同事或机构结果为非常重要（55% 重要）；23% 认为对他人健康与安全承担高责任（37% 中等）；94% 与他人持续接触。\n合规与安全｜生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。\n记录与复盘｜样本来源与处理与保存、仪器与试剂与批次、标准操作规程与版本、观察与异常与对照与偏差以及需要复测或复核的部分需要可追溯；方法变更与人工处理痕迹应如实记录并保留原始数据与样本与日志，不得选择性留用或事后修改记录。\n技能与训练｜O*NET 把该职业列为 Job Zone Four（需要相当准备）；基本技能标称 10 项，以阅读理解 75 与积极倾听 72 与批判性思维 69 与科学 69 与主动学习 63 与写作 63 与监控 60 为主；可迁移技能标称 25 项，可见分数为复杂问题解决 53 与判断与决策 53 与协调 50 与运行监控 50 与质量控制分析 50 与时间管理 50 与系统分析 47 与系统评估 47 与故障排除 44；知识标称 33 项，可见分数为生物学 96 与英语语言 73 与计算机与电子学 63 与化学 61 与数学 56 与行政 43 与教育与培训 41；能力标称 52 项，可见分数为归纳推理 75 与信息排序 75 与近距视觉 75 与口头理解 75 与演绎推理 72 与口头表达 72 与问题敏感度 69 与书面理解 69 与书面表达 69 与类别灵活性 66；工作风格标称 20 项，可见分数为注重细节 91 与可靠性 85 与谨慎 70 与求知欲 64 与诚信 63 与合作 60 与成就导向 53 与坚持 51；具体兴趣领域标称 41 项，可见分数为生命科学 86 与医学科学 71 与数学或统计 34。\n准入与授权｜O*NET2026的新入职所需教育字段列学士、高中或同等、部分大学教育无学位，均未给百分比，不是现职学历构成。Job Zone Four/SVP7至小于8描述准备程度，不能推出个人固定训练年限。4,195项训练目录依据IPEDS2025—26目录与2024—25授予学位记录，不是实时招生或本职业专属课程。CareerOneStop关联目录18项，包括BCSI专项技能、AFS渔业、NREP环境及AALAS实验动物技术认证；目录命中不是本职业普遍录用门槛或中国国家资格。详细页列4个经行业审核及美国劳工部批准供注册学徒项目使用的示例职称：上下游生物制造技术员、Dairy Technologist、微生物质控技术员；不是4个当前开放雇主项目，名额、报酬和报名条件未核。\n行业与雇主｜2025美国本职业行业分布：专业科学与技术服务39%、教育23%、政府14%、医疗与社会援助12%、制造10%、其他2%。行业分布不是行业工资，也不建立中国行业或岗位映射。"
+              "工作环境｜61% 认为精确或准确极其重要（26% 非常重要、12% 重要）；94% 与他人持续接触；88% 每天使用电子邮件（11% 每月一次以上但非每周）；83% 每天有面对面讨论（17% 每周一次以上但非每天）；85% 每天佩戴常见防护或安全装备（14% 每周一次以上但非每天）；61% 持续或几乎持续用双手操作工具与物品；49% 认为重复同一任务极其重要（24% 非常重要、22% 重要）；81% 在决定上只有一些自由（11% 很小）；23% 在确定任务与优先级上有很大自由（54% 有一些、23% 很小）；23% 每天面临时间压力（36% 每周一次以上但非每天、35% 每月一次以上但非每周）；33% 认为错误后果极其严重（14% 很严重、22% 严重、19% 完全不严重）；13% 每天暴露于危险条件（31% 每周一次以上但非每天、39% 每月一次以上但非每周）；33% 每天暴露于污染物（13% 每周一次以上但非每天）；20%回答每日面临轻微烧/割/咬/蜇伤暴露情境（非每日受伤发生率）；20% 持续或几乎持续站立（48% 超过一半时间）。\n主要装备与工具｜实验室与数据环境：Microsoft Excel 与 Office software 与 .NET Framework 与 Word 与 ESRI ArcGIS software 与 PowerPoint 与 Outlook 与 Access（O*NET 技术清单 12 项，其中 Adobe Acrobat 与 Adobe Photoshop 与 Microsoft Project 与 SAS 标注「Not available」）；软件技能类别另列出分析与科学软件与数据库查询与开发环境与文档管理与地理信息系统与图形或图像处理与办公套件与演示与电子表格与文字处理等 12 类；实验操作另需使用移液与离心与培养与显微与分光与称量与灭菌等仪器与试剂与防护装备，其使用与维护须按机构实验室与生物安全制度执行。样本与仪器状态与试剂批次与记录须可追溯。\n任务节奏｜61% 认为精确或准确极其重要；81% 在决定上只有一些自由；23% 在确定任务与优先级上有很大自由；23% 每天面临时间压力（36% 每周一次以上但非每天、35% 每月一次以上但非每周）；49% 认为重复同一任务极其重要；24% 认为自动化程度高度自动化、23% 中等、35% 轻微、18% 完全不自动化；15% 认为工作节奏由设备速度决定极其重要（42% 完全不重要）；35% 每周工时超过 40 小时、63% 恰好 40 小时；67% 为固定常规工作安排（非轮班频率）、12% 为不规则工作安排；长时间站立与重复性操作与防护装备佩戴需要工效安排与间歇。\n协作对象｜与研究人员与临床人员与实验室同事与设备与耗材供应商协作；86% 认为与工作组或团队合作极其重要（13% 非常重要）；35% 认为协调或领导他人完成工作极其重要；16% 认为决定对同事或机构结果为非常重要（55% 重要）；23% 认为对他人健康与安全承担高责任（37% 中等）；94% 与他人持续接触。\n合规与安全｜涉及病原微生物时按实验活动核对应防护等级、机构规程与授权；依法需批准或备案的项目另核该程序。《危险化学品安全法》涉及使用单位的培训和安全职责。技术员记录差异并向有权限的人员交接。\n记录与复盘｜样本来源与处理与保存、仪器与试剂与批次、标准操作规程与版本、观察与异常与对照与偏差以及需要复测或复核的部分需要可追溯；方法变更与人工处理痕迹应如实记录并保留原始数据与样本与日志，不得选择性留用或事后修改记录。\n技能与训练｜O*NET 把该职业列为 Job Zone Four（需要相当准备）；基本技能标称 10 项，以阅读理解 75 与积极倾听 72 与批判性思维 69 与科学 69 与主动学习 63 与写作 63 与监控 60 为主；可迁移技能标称 25 项，可见分数为复杂问题解决 53 与判断与决策 53 与协调 50 与运行监控 50 与质量控制分析 50 与时间管理 50 与系统分析 47 与系统评估 47 与故障排除 44；知识标称 33 项，可见分数为生物学 96 与英语语言 73 与计算机与电子学 63 与化学 61 与数学 56 与行政 43 与教育与培训 41；能力标称 52 项，可见分数为归纳推理 75 与信息排序 75 与近距视觉 75 与口头理解 75 与演绎推理 72 与口头表达 72 与问题敏感度 69 与书面理解 69 与书面表达 69 与类别灵活性 66；工作风格标称 20 项，可见分数为注重细节 91 与可靠性 85 与谨慎 70 与求知欲 64 与诚信 63 与合作 60 与成就导向 53 与坚持 51；具体兴趣领域标称 41 项，可见分数为生命科学 86 与医学科学 71 与数学或统计 34。\n准入与授权｜美国 BLS 典型入门为相关学士，部分岗位接受更低学历。大陆于洋组历史公告要求相关本科及以上；康方细胞生产技术员要求本科，生产记录与科研实验支持并非同一岗。 O*NET 新聘教育问项列学士、高中或同等学历、以及部分大学教育未获学位；未给各项比例。\n行业与雇主｜O*NET 行业子表列专业科学和技术服务 38%、教育 23%、政府 15%、医疗与社会救助 11%、其他 13%，未另列年份。BLS 手册的雇主类别和职业工资细项是另一张表。"
             ]
           },
           "id": "biological-technicians.profile.work-context-block.1",
           "source_refs": [
-            "details-current",
-            "hr-current",
-            "industry-current",
-            "training-current",
-            "cert-current",
+            "cas-yuyang-technician-2026",
+            "akeso-cell-technician-2026",
+            "bls-ooh-19-4021",
             "bio-current",
             "chemical-current",
+            "industry-current",
+            "details-current",
+            "hr-current",
+            "training-current",
+            "cert-current",
             "editor"
           ],
           "type": "prose"
@@ -23513,7 +23516,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、管理324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
+              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、中层及以上管理人员324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
             ]
           },
           "id": "biological-technicians.profile.onet-structured-fields-block.3",
@@ -23542,7 +23545,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国19-4021.00本职业：2025就业74,400人，2035预计79,900人；2025—2035增长7%（Much faster than average，远快于平均），年均空缺9,400（含增长与替换）。人数已舍入，不能据简单相减重算精确增长率；不是中国趋势、个人录用率或GenAI因果预测。"
+              "美国19-4021.00本职业：2025就业74,400人，2035预计79,900人；2025—2035增长7.4%（Much faster than average，远快于平均），年均空缺9,400（含增长与替换）。人数已舍入，不能据简单相减重算精确增长率；不是中国趋势、个人录用率或GenAI因果预测。"
             ]
           },
           "id": "biological-technicians.profile.onet-structured-fields-block.4",
@@ -23571,13 +23574,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025美国本职业行业分布：专业科学与技术服务39%、教育23%、政府14%、医疗与社会援助12%、制造10%、其他2%。行业分布不是行业工资，也不建立中国行业或岗位映射。12项软件信号来自2025全年美国Lightcast唯一招聘广告：Excel8%、Office7%、.NET6%、Word4%、ArcGIS3%、PowerPoint/Outlook各2%、Access1%；Acrobat/Photoshop/Project/SAS为Not available。分母是本职业全部唯一广告，缺比例不填0；不是在岗采用率、GenAI使用率或工具操作合格率。详细页另列12类软件。"
+              "O*NET 详情页 2025 年主要行业列专业科学技术服务 39%、教育 23%、政府 14%、医疗与社会救助 12%、制造 10%。另一个行业子表未列统计年，不能将两组数字合并。 美国 2025 年 Lightcast 关联招聘中，Excel 8%、Office 7%、.NET 6%、Word 4%、ArcGIS 3%。这些是招聘提及率。"
             ]
           },
           "id": "biological-technicians.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "industry-current",
-            "hr-current"
+            "details-current",
+            "hr-current",
+            "industry-current"
           ],
           "type": "prose"
         },
@@ -23684,13 +23688,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "生物技术员（美国侧 O*NET 19-4021.00，Biological Technicians）协助生物学与医学科学家，官方职责原文为「Assist biological and medical scientists. Set up, operate, and maintain laboratory instruments and equipment, monitor experiments, collect data and samples, make observations, and calculate and record results. May analyze organic substances, such as blood, food, and drugs.」（协助生物学与医学科学家；设置与操作与维护实验室仪器与设备，监测实验，收集数据与样本，进行观察，并计算与记录结果；可能分析血液与食品与药物等有机物质。）O*NET 官方任务共 18 项，包括开展或协助开展研究并采集血液与水体与土壤与植物等样本、监测与观察实验并记录生产与测试数据供研究人员评估、检查动物与标本以发现疾病或其他问题、把数据录入数据库、隔离与鉴定与制备待检标本、监督实验室工作是否符合既定标准、保留详细的工作日志、使用计算机与计算机接口设备或机器人或高技术工业应用、为测试或动物饲料称量与配制化合物与溶液、清洁与维护与准备物资与工作区域、设置与调整与校准与清洁与维护与排除实验室与野外设备故障、开展标准化的生物学或微生物学或生物化学检验与实验室分析、订购实验室设备与耗材、参与药品与制剂的研发或生产、喂饲家畜或实验动物、分析实验数据并撰写报告与结论摘要、开展或监督鱼类孵化与温室与畜牧生产等运营项目、以及为农业与环境科学或资源管理等领域的科学家与工程师提供技术支撑。该职业在 O*NET 属 Job Zone Four（需要相当准备），兴趣代码为 CRI；页面样本职称含 Biological Science Lab Tech 与 Biological Science Tech 与 Biologist Aide 与 Biologist Technician 等。该职业页面的工资与就业与行业数据均按本职业 19-4021.00 口径给出；本页据页面数值发布并逐处标注资料期。实验与生物与化学安全在中国大陆受《中华人民共和国生物安全法》与《危险化学品安全法》（2026年5月1日起施行）等规定约束；本页只引用其适用范围与行为边界。"
+              "生物技术员在研究人员或团队负责人指导下准备材料、检查设备、记录实验和异常，交可复核的工作记录。研究支持与生产现场的条件不同；按实际岗位及机构程序核对职责。"
             ]
           },
           "id": "biological-technicians.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23838,7 +23840,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "学历、专项认证、单位聘用、实验室等级与人员准入、设备样本动物操作及报告权限分别核，不互相替代。NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、管理324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
+              "学历、专项认证、单位聘用、实验室等级与人员准入、设备样本动物操作及报告权限分别核，不互相替代。NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、中层及以上管理人员324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
             ]
           },
           "id": "biological-technicians.profile.career-quick-answers-block.21",
@@ -23885,7 +23887,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国定义、统计为19-4021.00，中文名称不建立中国等价职业。中国单位按研究、检测、生产、农业或临床等真实职责辨认；NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、管理324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
+              "美国定义、统计为19-4021.00，中文名称不建立中国等价职业。中国单位按研究、检测、生产、农业或临床等真实职责辨认；NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、中层及以上管理人员324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
             ]
           },
           "id": "biological-technicians.profile.career-quick-answers-block.24",
@@ -23947,7 +23949,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。单位培训及项目授权不能由学历自动推出。"
+              "生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。单位培训及项目授权不能由学历自动推出。"
             ]
           },
           "id": "biological-technicians.profile.career-quick-answers-block.28",
@@ -24146,7 +24148,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表把生物技术员与五条相邻方向放在同一组维度上比较：职业方向、核心工作与产出、关键区别，以及每种偏好更适合的选择。"
+              "下表把生物技术员与六条相邻方向放在同一组维度上比较：职业方向、核心工作与产出、关键区别，以及每种偏好更适合的选择。"
             ]
           },
           "id": "biological-technicians.direction-comparison.adjacent-career-comparison-table.10",
@@ -24176,7 +24178,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意定义研究问题与分析方法，优先比较生物信息学科学家；若你更愿意把实验做稳做准并如实记录，则适合本职业。"
+              "若你更愿意定义研究问题与分析方法，优先比较生物信息学科学家；若你更愿意把实验做稳做准并如实记录，可进一步了解本职业。"
             ]
           },
           "id": "biological-technicians.direction-comparison.adjacent-career-comparison-table.12",
@@ -24235,7 +24237,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做数据与脚本与数据库维护，优先比较生物信息学技术员；若你更愿意做样本与仪器与实验操作，则适合本职业。"
+              "若你更愿意做数据与脚本与数据库维护，优先比较生物信息学技术员；若你更愿意做样本与仪器与实验操作，可进一步了解本职业。"
             ]
           },
           "id": "biological-technicians.direction-comparison.adjacent-career-comparison-table.16",
@@ -24294,7 +24296,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做临床标本检验与结果报告，优先比较医疗临床技术员；若你更愿意做科研与检测场景的样本与仪器，则适合本职业。"
+              "若你更愿意做临床标本检验与结果报告，优先比较医疗临床技术员；若你更愿意做科研与检测场景的样本与仪器，可进一步了解本职业。"
             ]
           },
           "id": "biological-technicians.direction-comparison.adjacent-career-comparison-table.20",
@@ -24353,7 +24355,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做化学品与化学分析，优先比较化学技术员；若你更愿意做生物与微生物与生化检验，则适合本职业。"
+              "若你更愿意做化学品与化学分析，优先比较化学技术员；若你更愿意做生物与微生物与生化检验，可进一步了解本职业。"
             ]
           },
           "id": "biological-technicians.direction-comparison.adjacent-career-comparison-table.24",
@@ -24412,7 +24414,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做测量设备校准与不确定度，优先比较校准技术员；若你更愿意做实验室样本与仪器与数据，则适合本职业。"
+              "若你更愿意做测量设备校准与不确定度，优先比较校准技术员；若你更愿意做实验室样本与仪器与数据，可进一步了解本职业。"
             ]
           },
           "id": "biological-technicians.direction-comparison.adjacent-career-comparison-table.28",
@@ -24471,7 +24473,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做研究组织与人员与预算管理，优先比较自然科学领域经理；若你更愿意做实验操作与记录，则适合本职业。"
+              "若你更愿意做研究组织与人员与预算管理，优先比较自然科学领域经理；若你更愿意做实验操作与记录，可进一步了解本职业。"
             ]
           },
           "id": "biological-technicians.direction-comparison.adjacent-career-comparison-table.32",
@@ -24568,10 +24570,10 @@
                 "url": "https://www.onetonline.org/link/industry/19-4021.00"
               },
               {
-                "entity": "O*NET 19-4021.00 职业摘要（就业与预测字段）",
+                "entity": "美国 BLS 表 1.2：生物技术员 19-4021",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/19-4021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 19-4021.00 地方工资页（本职业口径）",
@@ -24610,10 +24612,10 @@
                 "url": "https://www.onetonline.org/link/hot_tech/19-4021.00"
               },
               {
-                "entity": "O*NET 19-4021.00 职业摘要（就业与预测字段）",
+                "entity": "美国 BLS 表 1.2：生物技术员 19-4021",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/19-4021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 19-4021.00 培训与教育信息",
@@ -24656,12 +24658,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先在固定虚构材料上练熟实验闭环：给一份虚构实验目的与样本要求说明、一份虚构仪器与试剂与耗材清单、一组虚构观察与读数与异常记录，按顺序写出准备与设置步骤、监测与记录方式、异常与偏差的复核过程、可复现与交接的写法，再谈岗位；同时核对目标机构的实验室质量与生物安全与化学品与动物福利培训与授权安排。"
+              "去第 09 节做 BT-78：核两版虚构物料记录，写一页给技术复核员的交接。"
             ]
           },
           "id": "biological-technicians.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
+            "bt78-paper",
             "onet"
           ],
           "type": "prose"
@@ -24763,11 +24765,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮已读来源未提供本职业独立GenAI采用率、整体替代率或消失年份。整理台账/文献/报告草稿是编辑辅助场景，仪器自动采集/机器人不等于生成式AI，真实样本操作和实验安全责任按机构授权承担。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "用虚构记录试做字段整理和交接草稿。实际物料、设备和异常是否合规须按程序和岗位授权核对。现有证据不能估计 AI 的采用、实际工时或替代。"
             ]
           },
           "id": "biological-technicians.ai-impact.ai-impact-table.18",
           "source_refs": [
+            "source-fermatmind-ai-rubric",
             "editor",
             "details-current"
           ],
@@ -25355,7 +25358,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国19-4021.00本职业：2025就业74,400人，2035预计79,900人；2025—2035增长7%（Much faster than average，远快于平均），年均空缺9,400（含增长与替换）。人数已舍入，不能据简单相减重算精确增长率；不是中国趋势、个人录用率或GenAI因果预测。"
+              "美国19-4021.00本职业：2025就业74,400人，2035预计79,900人；2025—2035增长7.4%（Much faster than average，远快于平均），年均空缺9,400（含增长与替换）。人数已舍入，不能据简单相减重算精确增长率；不是中国趋势、个人录用率或GenAI因果预测。"
             ]
           },
           "id": "biological-technicians.ai-impact.ai-impact-table.56",
@@ -25423,7 +25426,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国本职业行业分布：专业科学与技术服务39%、教育23%、政府14%、医疗与社会援助12%、制造10%、其他2%。行业分布不是行业工资，也不建立中国行业或岗位映射。"
+              "O*NET 行业子表列专业科学和技术服务 38%、教育 23%、政府 15%、医疗与社会救助 11%、其他 13%，未另列年份。BLS 手册的雇主类别和职业工资细项是另一张表。"
             ]
           },
           "id": "biological-technicians.ai-impact.ai-impact-table.60",
@@ -25469,11 +25472,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、实际采用、实验效果和就业变化须分别测量；美国19-4021.00本职业：2025就业74,400人，2035预计79,900人；2025—2035增长7%（Much faster than average，远快于平均），年均空缺9,400（含增长与替换）。人数已舍入，不能据简单相减重算精确增长率；不是中国趋势、个人录用率或GenAI因果预测。"
+              "三个选定的纸面子任务 0、25、25 等权取整为 17%。这是编辑指数，不是采用率、实际工时或替代率。"
             ]
           },
           "id": "biological-technicians.ai-impact.ai-impact-table.63",
           "source_refs": [
+            "source-fermatmind-ai-rubric",
             "editor",
             "ep-current"
           ],
@@ -25575,11 +25579,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国19-4021.00本职业：2025就业74,400人，2035预计79,900人；2025—2035增长7%（Much faster than average，远快于平均），年均空缺9,400（含增长与替换）。人数已舍入，不能据简单相减重算精确增长率；不是中国趋势、个人录用率或GenAI因果预测。"
+              "美国 BLS 生物技术员 19-4021：2025 年就业约 74,400，2035 年预计 79,900，增长 7.4%，净增约 5,500，预计年均约 9,400 个空缺，含增长和替补。2025 基期含 0.1% 自雇。"
             ]
           },
           "id": "biological-technicians.ai-impact.ai-impact-table.70",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -26279,7 +26284,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。能识别自然人的样本关联资料属于个人信息，含健康/生物识别等内容按敏感信息条件判断；动物数据本身不因属于生物数据就成为个人信息，去标识化不等于匿名化。按处理依据、目的和最小必要核访问、保存与提供。人类遗传资源材料/信息另核专门规则；涉外合作、材料出境或信息对外提供按具体活动分别判断批准、证明、报告备份与安全审查条件，不将一切样本数据出境写成统一批准。具体条件未满足时停止受影响活动并按机构程序报告。"
+              "生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。能识别自然人的样本关联资料属于个人信息，含健康/生物识别等内容按敏感信息条件判断；动物数据本身不因属于生物数据就成为个人信息，去标识化不等于匿名化。按处理依据、目的和最小必要核访问、保存与提供。人类遗传资源材料/信息另核专门规则；涉外合作、材料出境或信息对外提供按具体活动分别判断批准、证明、报告备份与安全审查条件，不将一切样本数据出境写成统一批准。具体条件未满足时停止受影响活动并按机构程序报告。"
             ]
           },
           "id": "biological-technicians.ai-impact.ai-impact-table.118",
@@ -26298,7 +26303,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。能识别自然人的样本关联资料属于个人信息，含健康/生物识别等内容按敏感信息条件判断；动物数据本身不因属于生物数据就成为个人信息，去标识化不等于匿名化。按处理依据、目的和最小必要核访问、保存与提供。人类遗传资源材料/信息另核专门规则；涉外合作、材料出境或信息对外提供按具体活动分别判断批准、证明、报告备份与安全审查条件，不将一切样本数据出境写成统一批准。具体条件未满足时停止受影响活动并按机构程序报告。"
+              "生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。能识别自然人的样本关联资料属于个人信息，含健康/生物识别等内容按敏感信息条件判断；动物数据本身不因属于生物数据就成为个人信息，去标识化不等于匿名化。按处理依据、目的和最小必要核访问、保存与提供。人类遗传资源材料/信息另核专门规则；涉外合作、材料出境或信息对外提供按具体活动分别判断批准、证明、报告备份与安全审查条件，不将一切样本数据出境写成统一批准。具体条件未满足时停止受影响活动并按机构程序报告。"
             ]
           },
           "id": "biological-technicians.ai-impact.ai-impact-table.119",
@@ -26462,11 +26467,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、管理324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
+              "中科院生物物理研究所于洋组 2026 年 9 月 10 日公告招 1 名技术员，要求生命科学或医学相关本科及以上，职责是协助完成基础实验，待遇面议，未列具体金额。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
+            "cas-yuyang-technician-2026",
             "nbs-current"
           ],
           "type": "prose"
@@ -26476,11 +26482,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮未取得与本职业精确对应的中国中位、起薪、工资分位及城市区间；保留缺口，并提供与真实科技研发/检测或教育单位匹配的2025行业及企业人员大类参照。"
+              "两则历史岗位用来比较研究支持和生产记录，不代表当前空缺、统一任职门槛或全国职业工资。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
+            "cas-yuyang-technician-2026",
             "editor",
             "nbs-current"
           ],
@@ -26491,11 +26498,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "182,064元/年（2025科技行业城镇非私营平均）"
+              "南开大学就业平台载康方生物 2026 年秋招：细胞生产技术员要求本科，列中山和广州黄埔，涉及生产记录、物料及设备协作。薪资栏原写「5K–9K」，未明示计薪周期；它是制造生产岗位样本。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
+            "akeso-cell-technician-2026",
             "nbs-current",
             "editor"
           ],
@@ -26506,11 +26514,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "科技行业覆盖多个专业；非私营含事业单位，不是生物技术员独立工资。"
+              "两则历史岗位用来比较研究支持和生产记录，不代表当前空缺、统一任职门槛或全国职业工资。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
+            "akeso-cell-technician-2026",
             "nbs-current",
             "editor"
           ],
@@ -26521,13 +26530,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "83,560元/年（2025科技行业城镇私营平均）"
+              "83,560 元/年（2025 年城镇私营单位年平均工资）"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "nbs-current",
-            "editor"
+            "nbs-current"
           ],
           "type": "prose"
         },
@@ -26536,13 +26544,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "私营法人科技行业均值，不代表所有企业研发或第三方检测岗位工资。"
+              "科学研究和技术服务业的城镇私营单位参照。与规模以上企业的人员分组是不同统计总体。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "nbs-current",
-            "editor"
+            "nbs-current"
           ],
           "type": "prose"
         },
@@ -26551,7 +26558,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025规模以上科技企业：专业技术172,877、管理324,177、全部人员173,855元/年。"
+              "2025规模以上科学研究和技术服务业企业：专业技术172,877、中层及以上管理人员324,177、全部人员173,855元/年。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.13",
@@ -26581,13 +26588,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "城镇工资覆盖城镇就业5人及以上法人单位，不含个体户/自由职业；规模以上表覆盖16行业企业法人。外包雇员可能由其实际雇主报送，不一概排除。"
+              "国家统计局发布的城镇单位覆盖城镇地域内就业人数在 5 人及以上的法人单位，不含个体工商户、自由职业者等。规模以上企业表按发布定义覆盖 16 个行业门类的企业法人单位。两表范围不能混同。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "nbs-current",
-            "editor"
+            "nbs-current"
           ],
           "type": "prose"
         },
@@ -26671,7 +26677,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业精确中位/起薪/城市分位未取得；科技行业及人员大类参照可用于同口径比较。"
+              "职业精确中位/起薪/城市分位未取得；科学研究和技术服务业及人员大类参照可用于同口径比较。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.21",
@@ -26863,7 +26869,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET2026的新入职所需教育字段列学士、高中或同等、部分大学教育无学位，均未给百分比，不是现职学历构成。Job Zone Four/SVP7至小于8描述准备程度，不能推出个人固定训练年限。4,195项训练目录依据IPEDS2025—26目录与2024—25授予学位记录，不是实时招生或本职业专属课程。CareerOneStop关联目录18项，包括BCSI专项技能、AFS渔业、NREP环境及AALAS实验动物技术认证；目录命中不是本职业普遍录用门槛或中国国家资格。详细页列4个经行业审核及美国劳工部批准供注册学徒项目使用的示例职称：上下游生物制造技术员、Dairy Technologist、微生物质控技术员；不是4个当前开放雇主项目，名额、报酬和报名条件未核。生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。"
+              "O*NET2026的新入职所需教育字段列学士、高中或同等、部分大学教育无学位，均未给百分比，不是现职学历构成。Job Zone Four/SVP7至小于8描述准备程度，不能推出个人固定训练年限。4,195项训练目录依据IPEDS2025—26目录与2024—25授予学位记录，不是实时招生或本职业专属课程。CareerOneStop关联目录18项，包括BCSI专项技能、AFS渔业、NREP环境及AALAS实验动物技术认证；目录命中不是本职业普遍录用门槛或中国国家资格。详细页列4个经行业审核及美国劳工部批准供注册学徒项目使用的示例职称：上下游生物制造技术员、Dairy Technologist、微生物质控技术员；不是4个当前开放雇主项目，名额、报酬和报名条件未核。生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.33",
@@ -26950,11 +26956,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "科技行业非私营182,064、私营83,560元/年；以实际法人行业核适用性，不是本职业工资或中国需求占比。"
+              "O*NET 行业子表列专业科学和技术服务 38%、教育 23%、政府 15%、医疗与社会救助 11%、其他 13%，未另列年份。BLS 手册的雇主类别和职业工资细项是另一张表。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
+            "industry-current",
             "nbs-current",
             "editor"
           ],
@@ -26980,11 +26987,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "教育非私营133,539、私营63,908元/年；含多学段与岗位，不代表高校实验员工资。美国行业另为2025教育23%、政府14%、医疗12%、制造10%，不能套为中国。"
+              "O*NET 行业子表列专业科学和技术服务 38%、教育 23%、政府 15%、医疗与社会救助 11%、其他 13%，未另列年份。BLS 手册的雇主类别和职业工资细项是另一张表。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
+            "industry-current",
             "nbs-current",
             "editor"
           ],
@@ -26995,13 +27003,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "科技企业人员大类：2025中国工资参照"
+              "规模以上科学研究和技术服务业企业：2025 年人员分组"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "nbs-current",
-            "editor"
+            "nbs-current"
           ],
           "type": "prose"
         },
@@ -27010,7 +27017,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "规模以上科技企业专业技术172,877、管理324,177、全部173,855元/年；管理对照不作为普通实验员工资，事业单位不套企业表。"
+              "规模以上科学研究和技术服务业企业专业技术172,877、中层及以上管理人员324,177、全部173,855元/年；管理对照不作为普通实验员工资，事业单位不套企业表。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.42",
@@ -27055,11 +27062,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按实际科技或教育单位选择同口径年均参照，不提供生物技术员职业级月薪。"
+              "未核实到大陆全国职业工资；下列为两家历史样本。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
+            "cas-yuyang-technician-2026",
+            "akeso-cell-technician-2026",
             "nbs-current",
             "editor"
           ],
@@ -27070,7 +27079,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、管理324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
+              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、中层及以上管理人员324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.46",
@@ -27099,11 +27108,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未取得中国本职业月薪、起薪或城市分位；行业年均不能除12当作真实岗位报价。比较时同时核单位行业、职责、合同、绩效/班次、税前税后与实验授权。"
+              "两则历史岗位用来比较研究支持和生产记录，不代表当前空缺、统一任职门槛或全国职业工资。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
+            "cas-yuyang-technician-2026",
+            "akeso-cell-technician-2026",
             "nbs-current",
             "editor"
           ],
@@ -27159,7 +27170,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、管理324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
+              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、中层及以上管理人员324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.52",
@@ -27237,7 +27248,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "7%（2025—2035远快于平均）"
+              "7.4%（2025—2035远快于平均）"
             ]
           },
           "id": "biological-technicians.china-salary.career-snapshot-primary-locale.58",
@@ -27466,7 +27477,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "7%（2025—2035，远快于平均）"
+              "7.4%（2025—2035，远快于平均）"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.21",
@@ -27480,7 +27491,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国19-4021.00本职业：2025就业74,400人，2035预计79,900人；2025—2035增长7%（Much faster than average，远快于平均），年均空缺9,400（含增长与替换）。人数已舍入，不能据简单相减重算精确增长率；不是中国趋势、个人录用率或GenAI因果预测。"
+              "美国19-4021.00本职业：2025就业74,400人，2035预计79,900人；2025—2035增长7.4%（Much faster than average，远快于平均），年均空缺9,400（含增长与替换）。人数已舍入，不能据简单相减重算精确增长率；不是中国趋势、个人录用率或GenAI因果预测。"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.22",
@@ -27523,15 +27534,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025OEWS本职业工资分位与2025—2035就业预测分列。中国精确工资未取得、匹配行业参照见中国板块；2023行业年平均作为历史参照，不能与2025中位同期比较。"
+              "美国行业表使用 2025 年 5 月 BLS 职业手册中位数。职业工资分位、行业中位数和预测各有自己的统计口径。"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet-wages",
-            "ep-current",
-            "nbs-current",
-            "bls-industry-2023"
+            "bls-ooh-19-4021",
+            "ep",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27555,12 +27565,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2023BLS本职业按行业年平均工资可作历史比较：科研研发60,990、大学专业学校52,000、政府48,720、药品制造69,070美元；非2025中位或个人报价。"
+              "BLS 手册列美国 2025 年本职业部分行业年薪中位数：研发 62,060；私立高校 53,560；州立高校 53,330；政府（不含州和地方教育及医院）51,400；医疗和社会救助 51,080 美元。行业工资和行业就业占比分开。"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27660,7 +27670,7 @@
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27669,12 +27679,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "60,990美元/年（2023行业年平均）"
+              "62,060 美元/年"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27683,12 +27693,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2023BLS行业内本职业年平均，非2025中位。"
+              "2025 年本职业在该行业的工资中位数。"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27697,12 +27707,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "大学、大学院及专业学校"
+              "私立高校"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27711,12 +27721,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "52,000美元/年（2023行业年平均）"
+              "53,560 美元/年"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27725,12 +27735,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2023BLS行业内本职业年平均；非整个教育行业工资。"
+              "私立高校不代表整个教育行业。"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27739,12 +27749,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "联邦、州与地方政府（排除规定机构）"
+              "州立高校"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27753,12 +27763,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "48,720美元/年（2023行业年平均）"
+              "53,330 美元/年"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27767,12 +27777,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2023BLS年平均；排除州地方政府学校、医院及USPS。"
+              "仅此类州立单位。"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27781,12 +27791,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "药品与医药制造"
+              "医疗与社会救助"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27795,12 +27805,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "69,070美元/年（2023行业年平均）"
+              "51,080 美元/年"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27809,12 +27819,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2023BLS行业内本职业年平均；非所有制造或项目制收入。"
+              "同表另列政府 51,400 美元，不含州和地方教育及医院。"
             ]
           },
           "id": "biological-technicians.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "bls-industry-2023"
+            "bls-ooh-19-4021"
           ],
           "type": "prose"
         },
@@ -27957,7 +27967,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27981,7 +27991,7 @@
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/emotional-intelligence-test"
               },
               {
                 "entity": "化学技术员",
@@ -29142,10 +29152,10 @@
                 "url": "https://www.onetonline.org/link/localwages/19-4021.00"
               },
               {
-                "entity": "O*NET 19-4021.00 就业趋势页",
+                "entity": "美国 BLS 表 1.2：生物技术员 19-4021",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/19-4021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "危险化学品安全法（2026年5月1日起施行）",
@@ -29170,7 +29180,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本节依据本职业任务/美国情境与当前中国法规提出编辑核对建议，不能据职业名称认定每人接触全部危险源。生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。"
+              "本节依据本职业任务/美国情境与当前中国法规提出编辑核对建议，不能据职业名称认定每人接触全部危险源。生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。"
             ]
           },
           "id": "biological-technicians.risk.career-risk-cards.8",
@@ -29191,13 +29201,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：关键风险包括生物安全与病原微生物操作越界、涉人样本与生物数据合规风险、样本与数据与记录不可复现、自动化采集与系统输出被当成结论、危险化学品与实验动物与职业暴露负荷，以及样本与结果对外报告与转移越界；控制方式是先在授权的生物安全与实验室质量与伦理范围内作业并做风险辨识、按规程处理病原微生物与化学品与动物与涉人样本并留存记录、如实记录样本与仪器与试剂与批次与数据与异常、按授权范围交接结果与提供样本，并在超出授权或发现异常时停止并升级。"
+              "涉及病原微生物时按实验活动核对应防护等级、机构规程与授权；依法需批准或备案的项目另核该程序。《危险化学品安全法》涉及使用单位的培训和安全职责。技术员记录差异并向有权限的人员交接。"
             ]
           },
           "id": "biological-technicians.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
+            "bio-current",
+            "chemical-current",
             "onet"
           ],
           "type": "prose"
@@ -29576,7 +29586,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "对外样本材料与数据/报告分别核机构权限、个人信息和人遗规则；探索性结果不说成确定结论。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。"
+              "对外样本材料与数据/报告分别核机构权限、个人信息和人遗规则；探索性结果不说成确定结论。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。"
             ]
           },
           "id": "biological-technicians.risk.career-risk-cards.32",
@@ -29695,7 +29705,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。"
+              "危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。"
             ]
           },
           "id": "biological-technicians.risk.career-risk-cards.39",
@@ -29742,35 +29752,35 @@
                 "科研实验支撑岗",
                 "按标准操作规程完成样本处理与仪器操作与数据记录，参与方法复现与异常复核。",
                 "通常看无菌与防污染操作与仪器使用与记录质量、按生物安全与实验室质量规程作业的规范性、以及与研究人员沟通与接受复核的态度；生物安全等级与设备与样本授权由机构与项目安排决定。",
-                "提交一份含虚构实验目的与样本与仪器清单与读数与异常回盘的记录，不使用真实生物样本或涉人样本。",
+                "先做 BT-78 两版记录和一页交接。实际岗位方法另核。",
                 "按具体材料、关联个人信息及实验危险源分别判断，处理须按适用法域与机构规定执行；病原微生物操作与样本处置不得自行决定。"
               ],
               [
                 "检测与检验技术岗",
                 "按标准方法完成样品前处理与检验与结果计算与报告草拟，按质量体系要求记录。",
                 "通常看标准方法与质量控制与仪器维护能力、对记录与可追溯与偏差处理要求的把握、以及按质量体系作业的规范意识。",
-                "提交一份含虚构样品处理与检验与质控与偏差处理说明的记录。",
+                "先做 BT-78 两版记录和一页交接。实际岗位方法另核。",
                 "检验结果与报告须按机构与法域要求出具；本页不提供任何规避监管的做法。"
               ],
               [
                 "生物制品与药品生产岗",
                 "按生产规程完成配液与无菌操作与过程监测与批记录，执行环境与设备清洁与验证。",
                 "通常看无菌操作与洁净区行为规范与批记录质量、对偏差与变更与验证要求的把握、以及与生产与质量团队协作能力。",
-                "提交一份含虚构配液与无菌操作与过程记录与偏差处理说明的材料。",
+                "先做 BT-78 两版记录和一页交接。实际岗位方法另核。",
                 "生产与质量活动须按机构与法域要求执行；不得绕过验证与质量放行控制。"
               ],
               [
                 "环境与农业检测方向",
                 "承担水体与土壤与植物与农产品样品的采集与前处理与检验与数据整理。",
                 "通常看样品采集规范与野外与实验室安全与数据处理能力、对采样代表性要求的把握、以及与项目方沟通能力。",
-                "提交一份含虚构采样方案与样品处理与检验与数据整理说明的记录。",
+                "先做 BT-78 两版记录和一页交接。实际岗位方法另核。",
                 "野外与农业检测须按机构与法域要求执行；涉及农残与污染物须按规程处置。"
               ],
               [
                 "实验动物与生物资源方向",
                 "承担实验动物的饲养与观察与取样协助与设施清洁与记录。",
                 "通常看动物福利与操作规范与观察记录质量、对生物安全与设施管理要求的把握、以及与研究人员协作能力。",
-                "提交一份含虚构饲养与观察与取样协助与福利记录说明的材料。",
+                "先做 BT-78 两版记录和一页交接。实际岗位方法另核。",
                 "涉及实验动物须按动物福利与伦理审查要求执行；超出授权不得自行处置。"
               ]
             ]
@@ -29794,14 +29804,14 @@
                 "values": [
                   "O*NET2026的新入职所需教育字段列学士、高中或同等、部分大学教育无学位，均未给百分比，不是现职学历构成。Job Zone Four/SVP7至小于8描述准备程度，不能推出个人固定训练年限。4,195项训练目录依据IPEDS2025—26目录与2024—25授予学位记录，不是实时招生或本职业专属课程。",
                   "CareerOneStop关联目录18项，包括BCSI专项技能、AFS渔业、NREP环境及AALAS实验动物技术认证；目录命中不是本职业普遍录用门槛或中国国家资格。BCSI微证书用于专项技能评估。Lab Bench评无菌转移、Quantitative Lab Skills I评受监考计算、Regulatory Auditor Communication评审计沟通；三项O*NET问答均不要求超过2年学历训练或经验，并要求考试、2年续证。发证方FAQ一般每技能每次20美元，重考须等待30天且20美元，证书2年、凭仍使用技能的证据免费续证；不是18项认证统一费用，个人考点、材料或附加费用本轮未核。详细页列4个经行业审核及美国劳工部批准供注册学徒项目使用的示例职称：上下游生物制造技术员、Dairy Technologist、微生物质控技术员；不是4个当前开放雇主项目，名额、报酬和报名条件未核。",
-                  "中国招聘学历/经验/带教与许可按真实单位和活动核对，本轮未核全国分布。NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、管理324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
+                  "中国招聘学历/经验/带教与许可按真实单位和活动核对，本轮未核全国分布。NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、中层及以上管理人员324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
                   "生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。",
-                  "危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。",
+                  "危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。",
                   "能识别自然人的样本关联资料属于个人信息，含健康/生物识别等内容按敏感信息条件判断；动物数据本身不因属于生物数据就成为个人信息，去标识化不等于匿名化。按处理依据、目的和最小必要核访问、保存与提供。人类遗传资源材料/信息另核专门规则；涉外合作、材料出境或信息对外提供按具体活动分别判断批准、证明、报告备份与安全审查条件，不将一切样本数据出境写成统一批准。"
                 ]
               },
@@ -29839,42 +29849,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份实验目的与样本与安全要求说明、一份仪器与试剂与耗材与批次清单、一组虚构观察与读数与异常记录、一份复核与复测与交接与日志模板。",
-                  "全部材料为虚构，不含真实生物样本或涉人样本或实验数据或未公开研究成果、真实合作方信息或真实机构内部资料。",
-                  "全部材料与场景为虚构，不得使用真实生物样本与涉人样本或实验数据或未公开研究成果、真实合作方信息、真实机构内部资料或真实受伦理审查限制的样本与数据。"
+                  "BT-78 是虚构记录。T1 计划用物料号 M17。",
+                  "T2 交接标签抄为 M18。T3 复核栏没有签字。题设需原始标签与复核签字才能记为已核。",
+                  "变式只改 T2：找到可核的原始标签记录，显示 M17。T1、T3 不变。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构实验写清准备与设置步骤与安全等级要求、观察与读数与异常记录方式、对照与重复与校准状态与复核与复测流程、以及交接与归档与需复核环节。",
-                  "在 90—120 分钟内完成，允许参考公开的标准操作规程与仪器手册资料，但不使用真实样本，也不开展任何真实实验操作。",
-                  "记录中把实验目的与样本与安全要求、仪器与试剂与耗材与批次、观察与读数与异常与偏差、复核与复测与交接与日志要求分开书写，并标注需复核的部分。"
+                  "写两版核对记录。",
+                  "逐项引用 T1–T3。",
+                  "交一页给技术复核员。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先确认实验目的与样本与安全要求是否明确与设备与权限是否支持拟用方法，再按流程准备与操作与复核，最后写明结论与未决事项。",
-                  "把实验目的与安全要求、仪器与试剂与批次、观察与读数与异常、复核与复测、交接与归档分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核操作规范与数据复核与记录完整性，并保留修改理由。"
+                  "对照编号与出处。",
+                  "列仍待核的事项。",
+                  "先独立写两版，再比较。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成任何规避监管的做法，也不能替代适用法域与机构实验室质量与生物安全管理规定。",
-                  "不得在练习中伪造或修改原始数据与读数，也不得在练习中使用任何真实生物样本或涉人样本或受伦理审查限制的材料；涉及病原微生物与危险化学品与实验动物的操作须由有权限人员按规程处理。",
-                  "练习不替代适用法域与机构实验室质量与生物安全管理规定，也不构成任何规避监管的做法；不得在练习中伪造或修改原始数据与读数，也不得在练习中使用任何真实生物样本或涉人样本或受伦理审查限制的材料。"
+                  "只读题内纸面记录。",
+                  "不操作设备、物料或样本。",
+                  "不做真实审批、试验或放行。"
                 ]
               }
             ]
           },
           "id": "biological-technicians.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "bt78-paper"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "BT-78：两版物料核对",
           "type": "cards"
         },
         {
@@ -29885,37 +29895,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：学历、职业培训、行业认证、已登记学徒岗位、实验室质量与生物安全与化学品与动物福利培训、生物安全等级与设备与样本与动物授权、结果报告与样本转移授权，以及适用法域对生物安全与实验室安全与实验动物福利的要求。",
-                  "每项都注明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「职业培训」「行业认证」「实验室质量与生物安全培训」「生物安全等级与设备与样本与动物授权」「化学品与废弃物管理」「结果报告与样本转移授权」「样本与数据与记录留存要求」分列，避免混为一谈；并标注本职业工资与就业与行业数据均为本职业 19-4021.00 口径并逐处标注、以及中国大陆侧仅有行业和宽口径统计且本页不出数。"
+                  "写清编号和出处。",
+                  "写清编号和出处。 再独立核对。",
+                  "写清编号和出处。 交一页记录。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的实验记录，重点检查实验目的与安全要求依据、样本与仪器与试剂与批次记录、观察与读数与异常与偏差、对照与重复与校准状态、复核与复测与交接与日志是否与证据一致。",
-                  "把复核意见与修改理由一并保留，作为判断你能否接受复核的证据。"
+                  "标明待核项。",
+                  "标明待核项。 再独立核对。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明本次实验的事实与过程与结果、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给同事与导师或负责人复核，并保留复核意见与修改理由。"
+                  "使用题内纸面。",
+                  "使用题内纸面。 再独立核对。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用自动化仪器或数据系统或辅助工具，须注明仪器型号与软件版本与参数与输入与人工修改理由；实验室与设备与数据权限须为机构授权。",
-                  "生物样本与涉人样本与商业数据处理须先取得授权，并记录接收与使用与保存与销毁与共享限制；不得在授权区域与系统之外保存或转移样本与受限制数据。"
+                  "写接手角色。",
+                  "写接手角色。 再独立核对。"
                 ]
               }
             ]
           },
           "id": "biological-technicians.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "bt78-paper"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29979,59 +29989,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与口径阅读：读 O*NET 19-4021.00 公开资料，写清本职业口径与「工资与就业与行业数据均为本职业 19-4021.00 口径」的含义，以及中国大陆侧仅有行业和宽口径统计且本页不出数的证据边界。",
-                  "产出：一页口径与流程对照表，标注每项的来源。"
+                  "写清核对规则。",
+                  "找 T1–T3。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "任务与安全要求练习：为一个虚构实验写清目的与样本要求与生物安全等级与权限边界。",
-                  "产出：一份实验目的与安全要求说明。"
+                  "读原版。",
+                  "列出处。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "准备与操作练习：写清仪器与试剂与耗材准备与设置与校准与无菌与防污染要点。",
-                  "产出：一份准备与操作说明。"
+                  "写原版核对。",
+                  "标待核项。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "观察与记录练习：为虚构读数写清记录格式与异常与偏差标记与对照与重复要求。",
-                  "产出：一份观察与记录与异常说明。"
+                  "只改 T2。",
+                  "写变式核对。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "复核与交接练习：写清复核与复测流程与交接与归档与记录留存要求。",
-                  "产出：一份复核与交接记录。"
+                  "比较两版。",
+                  "写一页交接。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的操作规范与数据复核与记录完整性，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "先提交两版和交接。",
+                  "不打开参考。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "展开「BT-78 参考解（交卷后再打开）」。",
+                  "自查编号、出处、签字和接手人。"
                 ]
               }
             ]
           },
           "id": "biological-technicians.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "bt78-paper"
           ],
-          "title": "七日体验产出",
+          "title": "BT-78 七天试做",
           "type": "timeline"
         },
         {
@@ -30039,13 +30049,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你完成了七日练习并发现自己在样本处理与仪器操作与记录上可持续投入。",
-              "继续：你能接受重复任务与时间压力与防护装备要求，并愿意按规程记录与接受复核。",
-              "暂停：你只求「出结果」而不愿追样本与仪器与记录。",
-              "暂停：你把「先出结果再补记录」当作可接受的做法。",
-              "换方向：你更愿意做数据与脚本与数据库维护，可比较生物信息学技术员方向。",
-              "换方向：你更愿意做测量设备校准与不确定度，可比较校准技术员方向。",
-              "信息不足：如果你还没有任何有监督的样本处理或仪器操作或记录经历，先补这两项再判断。"
+              "继续：愿意核编号。",
+              "继续：能写明差异。",
+              "暂停：常不查出处。",
+              "暂停：用自己签字代替复核。",
+              "比较科研技术支持。",
+              "比较生产技术员。",
+              "实际训练与授权另核。"
             ]
           },
           "id": "biological-technicians.path.seven-day-decision.1",
@@ -30127,8 +30137,8 @@
                 "中国大陆侧：生物安全与危险化学品管理要求",
                 "在中国大陆开展相关实验与检测的人",
                 "决定实验活动与化学品使用是否合规。",
-                "生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。",
-                "须完成用人单位培训并按要求取得相应批准或备案或授权。",
+                "生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。",
+                "完成用人单位要求的培训；机构按活动核法定程序，再分别核本人授权。",
                 "按主管部门与机构安排维护。",
                 "培训与授权不能免除法律责任；本页不提供任何规避监管的做法。"
               ]
@@ -30158,8 +30168,8 @@
             "paragraphs": [
               "学历、认证、单位聘用、实验室等级/人员准入及操作报告权限各自核，不相互替代。",
               "O*NET2026的新入职所需教育字段列学士、高中或同等、部分大学教育无学位，均未给百分比，不是现职学历构成。Job Zone Four/SVP7至小于8描述准备程度，不能推出个人固定训练年限。4,195项训练目录依据IPEDS2025—26目录与2024—25授予学位记录，不是实时招生或本职业专属课程。CareerOneStop关联目录18项，包括BCSI专项技能、AFS渔业、NREP环境及AALAS实验动物技术认证；目录命中不是本职业普遍录用门槛或中国国家资格。BCSI微证书用于专项技能评估。Lab Bench评无菌转移、Quantitative Lab Skills I评受监考计算、Regulatory Auditor Communication评审计沟通；三项O*NET问答均不要求超过2年学历训练或经验，并要求考试、2年续证。发证方FAQ一般每技能每次20美元，重考须等待30天且20美元，证书2年、凭仍使用技能的证据免费续证；不是18项认证统一费用，个人考点、材料或附加费用本轮未核。详细页列4个经行业审核及美国劳工部批准供注册学徒项目使用的示例职称：上下游生物制造技术员、Dairy Technologist、微生物质控技术员；不是4个当前开放雇主项目，名额、报酬和报名条件未核。",
-              "生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。",
-              "能识别自然人的样本关联资料属于个人信息，含健康/生物识别等内容按敏感信息条件判断；动物数据本身不因属于生物数据就成为个人信息，去标识化不等于匿名化。按处理依据、目的和最小必要核访问、保存与提供。人类遗传资源材料/信息另核专门规则；涉外合作、材料出境或信息对外提供按具体活动分别判断批准、证明、报告备份与安全审查条件，不将一切样本数据出境写成统一批准。NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、管理324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
+              "生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。",
+              "能识别自然人的样本关联资料属于个人信息，含健康/生物识别等内容按敏感信息条件判断；动物数据本身不因属于生物数据就成为个人信息，去标识化不等于匿名化。按处理依据、目的和最小必要核访问、保存与提供。人类遗传资源材料/信息另核专门规则；涉外合作、材料出境或信息对外提供按具体活动分别判断批准、证明、报告备份与安全审查条件，不将一切样本数据出境写成统一批准。NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、中层及以上管理人员324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
             ]
           },
           "id": "biological-technicians.path.credential-boundary.1",
@@ -30184,18 +30194,18 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：本节不引用具体雇主的招聘公告，只说明核对应关注的项目；公开渠道出现的岗位名称包括实验员与生物实验技术员与检测与检验技术员与研发助理与实验动物技术员等（O*NET 页面样本职称含 Biological Science Lab Tech 与 Biological Science Tech 与 Biologist Aide 与 Biologist Technician 等）。",
-              "核对清单：岗位属于科研院所、高校、企业研发中心、第三方检测机构、生物制品与制药企业还是环境与农业机构；用工形态为全职或项目制或外包或劳务派遣；实验室类型与生物安全等级；是否涉及病原微生物与实验动物与涉人样本；班次与值班安排；以及税前税后与绩效与记录留存要求的落地方式。"
+              "中科院生物物理研究所于洋组 2026 年 9 月 10 日公告招 1 名技术员，要求生命科学或医学相关本科及以上，职责是协助完成基础实验，待遇面议，未列具体金额。",
+              "南开大学就业平台载康方生物 2026 年秋招：细胞生产技术员要求本科，列中山和广州黄埔，涉及生产记录、物料及设备协作。薪资栏原写「5K–9K」，未明示计薪周期；它是制造生产岗位样本。",
+              "两则历史岗位用来比较研究支持和生产记录，不代表当前空缺、统一任职门槛或全国职业工资。"
             ]
           },
           "id": "biological-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "cas-yuyang-technician-2026",
+            "akeso-cell-technician-2026",
             "onet"
           ],
-          "title": "招聘信息核对",
+          "title": "中科院与康方两则历史招聘",
           "type": "notice"
         },
         {
@@ -30374,11 +30384,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET2026的新入职所需教育字段列学士、高中或同等、部分大学教育无学位，均未给百分比，不是现职学历构成。Job Zone Four/SVP7至小于8描述准备程度，不能推出个人固定训练年限。4,195项训练目录依据IPEDS2025—26目录与2024—25授予学位记录，不是实时招生或本职业专属课程。CareerOneStop关联目录18项，包括BCSI专项技能、AFS渔业、NREP环境及AALAS实验动物技术认证；目录命中不是本职业普遍录用门槛或中国国家资格。详细页列4个经行业审核及美国劳工部批准供注册学徒项目使用的示例职称：上下游生物制造技术员、Dairy Technologist、微生物质控技术员；不是4个当前开放雇主项目，名额、报酬和报名条件未核。生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。"
+              "美国 BLS 典型入门为相关学士，部分岗位接受更低学历。大陆于洋组历史公告要求相关本科及以上；康方细胞生产技术员要求本科，生产记录与科研实验支持并非同一岗。"
             ]
           },
           "id": "biological-technicians.path.career-path-block.20",
           "source_refs": [
+            "bls-ooh-19-4021",
+            "cas-yuyang-technician-2026",
+            "akeso-cell-technician-2026",
             "editor",
             "details-current",
             "training-current",
@@ -30394,7 +30407,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学历/认证/聘用和具体操作权限是不同状态。生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。"
+              "学历/认证/聘用和具体操作权限是不同状态。生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。"
             ]
           },
           "id": "biological-technicians.path.career-path-block.21",
@@ -30414,7 +30427,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国准备资料不能直接套中国资格。生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。"
+              "美国准备资料不能直接套中国资格。生物安全法2024修正：病原微生物实验按相应等级、国家标准与技术规程开展；高等级实验室从事高致病性或疑似高致病性活动及我国尚未发现/宣布消灭病原体等规定情形另核主管部门批准，不能说所有生物实验都须同一种批准。机构设立、人员准入、动物及废弃物处置责任分别核。危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。"
             ]
           },
           "id": "biological-technicians.path.career-path-block.22",
@@ -31425,10 +31438,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 19-4021.00 职业摘要（就业与预测字段）",
+                "entity": "美国 BLS 表 1.2：生物技术员 19-4021",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/19-4021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 19-4021.00 行业分布",
@@ -31437,10 +31450,10 @@
                 "url": "https://www.onetonline.org/link/industry/19-4021.00"
               },
               {
-                "entity": "O*NET 19-4021.00 就业趋势页",
+                "entity": "美国 BLS 表 1.2：生物技术员 19-4021",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/19-4021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 19-4021.00 地方工资页（本职业口径）",
@@ -31512,11 +31525,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国19-4021.00本职业：2025就业74,400人，2035预计79,900人；2025—2035增长7%（Much faster than average，远快于平均），年均空缺9,400（含增长与替换）。人数已舍入，不能据简单相减重算精确增长率；不是中国趋势、个人录用率或GenAI因果预测。"
+              "美国 BLS 生物技术员 19-4021：2025 年就业约 74,400，2035 年预计 79,900，增长 7.4%，净增约 5,500，预计年均约 9,400 个空缺，含增长和替补。2025 基期含 0.1% 自雇。"
             ]
           },
           "id": "biological-technicians.market-signals.market-signal-card.8",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31554,11 +31568,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页按本职业 19-4021.00 口径给出的在岗人数；个别机构或区域的招聘需求与全国口径差异可能很大。"
+              "BLS 表 1.2 的全国职业预测与基期；年均空缺不能当现有岗位或个人录用率。"
             ]
           },
           "id": "biological-technicians.market-signals.market-signal-card.11",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31652,7 +31667,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国19-4021.00本职业：2025就业74,400人，2035预计79,900人；2025—2035增长7%（Much faster than average，远快于平均），年均空缺9,400（含增长与替换）。人数已舍入，不能据简单相减重算精确增长率；不是中国趋势、个人录用率或GenAI因果预测。科研资金、项目周期等仅为编辑询问方向，不代表已量化影响。"
+              "美国19-4021.00本职业：2025就业74,400人，2035预计79,900人；2025—2035增长7.4%（Much faster than average，远快于平均），年均空缺9,400（含增长与替换）。人数已舍入，不能据简单相减重算精确增长率；不是中国趋势、个人录用率或GenAI因果预测。科研资金、项目周期等仅为编辑询问方向，不代表已量化影响。"
             ]
           },
           "id": "biological-technicians.market-signals.market-signal-card.18",
@@ -31667,11 +31682,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长7%为官方本职业预测，不能由舍入人数重算或解释为个人录用保证、GenAI因果效果。"
+              "BLS 表 1.2 的全国职业预测与基期；年均空缺不能当现有岗位或个人录用率。"
             ]
           },
           "id": "biological-technicians.market-signals.market-signal-card.19",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31709,11 +31725,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "7%（2025—2035远快于平均；年均空缺9,400）"
+              "增长 7.4%，预计年均约 9,400 空缺"
             ]
           },
           "id": "biological-technicians.market-signals.market-signal-card.22",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31752,7 +31769,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、管理324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
+              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、中层及以上管理人员324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
             ]
           },
           "id": "biological-technicians.market-signals.market-signal-card.25",
@@ -31812,7 +31829,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、管理324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
+              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、中层及以上管理人员324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。"
             ]
           },
           "id": "biological-technicians.market-signals.market-signal-card.29",
@@ -32264,16 +32281,23 @@
           "data": {
             "entries": [
               {
-                "answer": "协助生物学与医学科学家：设置与操作与维护实验室仪器与设备；监测实验；收集数据与样本；进行观察；并计算与记录结果；可能分析血液与食品与药物等有机物质。常见工作包括开展或协助实验并采集血液与水体与土壤与植物等样本；记录生产与测试数据供研究人员评估；检查动物与标本以发现疾病或其他问题；把数据录入数据库；隔离与鉴定与制备待检标本；监督实验室工作是否符合既定标准；保留详细工作日志；使用计算机与计算机接口设备或机器人或高技术工业应用；为测试或动物饲料称量与配制化合物与溶液；清洁与维护与准备物资与工作区域；设置与调整与校准与清洁与维护与排除实验室与野外设备故障；开展标准化的生物学或微生物学或生物化学检验与实验室分析；订购实验室设备与耗材；参与药品与制剂的研发或生产；喂饲家畜或实验动物；分析实验数据并撰写报告与结论摘要；开展或监督鱼类孵化与温室与畜牧生产等运营项目；并为农业与环境科学或资源管理等领域的科学家与工程师提供技术支撑。",
+                "answer": "生物技术员在研究人员或团队负责人指导下准备材料、检查设备、记录实验和异常，交可复核的工作记录。研究支持与生产现场的条件不同；按实际岗位及机构程序核对职责。",
                 "id": "biological-technicians.faq.1",
                 "question": "生物技术员每天做什么？",
-                "question_key": "career.faq.biological-technicians.1"
+                "question_key": "career.faq.biological-technicians.1",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "关键风险包括生物安全与病原微生物操作越界、涉人样本与生物数据合规风险、样本与数据与记录不可复现、自动化采集与系统输出被当成结论、危险化学品与实验动物与职业暴露负荷，以及样本与结果对外报告与转移越界；控制方式是先在授权的生物安全与实验室质量与伦理范围内作业并做风险辨识、按规程处理病原微生物与化学品与动物与涉人样本并留存记录、如实记录样本与仪器与试剂与批次与数据与异常、按授权范围交接结果与提供样本、并在超出授权或发现异常时停止并升级。",
+                "answer": "涉及病原微生物时按实验活动核对应防护等级、机构规程与授权；依法需批准或备案的项目另核该程序。《危险化学品安全法》涉及使用单位的培训和安全职责。技术员记录差异并向有权限的人员交接。",
                 "id": "biological-technicians.faq.2",
                 "question": "这份工作最需要提前注意什么风险？",
-                "question_key": "career.faq.biological-technicians.2"
+                "question_key": "career.faq.biological-technicians.2",
+                "source_refs": [
+                  "bio-current",
+                  "chemical-current"
+                ]
               },
               {
                 "answer": "看可复核的产出：能否按标准操作规程准备与操作与监测、能否如实记录样本与仪器与数据并保持可复现、能否在设备故障或结果异常或样本污染或超出授权时停下来复核并报告。兴趣代码 CRI 与技能与知识分数只说明方向接近，不能替代这些实作证据。",
@@ -32282,10 +32306,13 @@
                 "question_key": "career.faq.biological-technicians.3"
               },
               {
-                "answer": "AI 与自动化可以改变数据录入与整理、读数采集与曲线处理、台账与库存管理与草稿撰写；但实验目的与安全等级确认、标准操作规程执行与样本处置、异常与偏差与失效判断、以及生物安全与动物福利与结果报告处置决定仍由人承担。设备自动化程度不等于岗位数量变化；官方公开的就业与预测为本职业 19-4021.00 口径。",
+                "answer": "用虚构记录试做字段整理和交接草稿。实际物料、设备和异常是否合规须按程序和岗位授权核对。现有证据不能估计 AI 的采用、实际工时或替代。",
                 "id": "biological-technicians.faq.4",
                 "question": "AI 会改变哪些任务？",
-                "question_key": "career.faq.biological-technicians.4"
+                "question_key": "career.faq.biological-technicians.4",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
                 "answer": "实验目的与安全等级确认、标准操作规程执行与样本处置、异常与偏差与失效判断、以及涉及病原微生物与危险化学品与实验动物与涉人样本的处置决定，必须由本人与有权限的人员按适用法域与机构制度承担；自动采集与系统生成结果只能作为可回滚、可复核的辅助环节。",
@@ -32294,10 +32321,15 @@
                 "question_key": "career.faq.biological-technicians.5"
               },
               {
-                "answer": "分六类核对：学历（O*NET 学历字段按岗位差异列出学士学位与高中或同等学历与部分大学教育（无学位））；职业培训与继续教育（培训页面显示全国登记 4,195 个培训项目）；行业认证（认证页面显示 18 项国家认证）；已登记的学徒岗位（4 项）；机构实验室质量与生物安全与化学品与动物福利培训与生物安全等级与设备与样本与动物与化学品授权；以及适用法域对生物安全与实验室安全与实验动物福利的要求。该职业属 Job Zone Four（需要相当准备）。任何一项都不能由另一项自动推出。",
+                "answer": "美国 BLS 典型入门为相关学士，部分岗位接受更低学历。大陆于洋组历史公告要求相关本科及以上；康方细胞生产技术员要求本科，生产记录与科研实验支持并非同一岗。",
                 "id": "biological-technicians.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.biological-technicians.6"
+                "question_key": "career.faq.biological-technicians.6",
+                "source_refs": [
+                  "cas-yuyang-technician-2026",
+                  "akeso-cell-technician-2026",
+                  "bls-ooh-19-4021"
+                ]
               },
               {
                 "answer": "工作情境显示 61% 认为精确或准确极其重要（26% 非常重要）、94% 与他人持续接触、88% 每天使用电子邮件、85% 每天佩戴常见防护或安全装备、61% 持续或几乎持续用双手操作工具与物品、49% 认为重复同一任务极其重要、23% 每天面临时间压力（36% 每周一次以上）、33% 认为错误后果极其严重（14% 很严重、22% 严重）、13% 每天暴露于危险条件（31% 每周一次以上）、33% 每天暴露于污染物、20% 每天暴露于轻微烧伤或割伤或咬伤或蜇伤、22% 每天暴露于分散注意或不适的噪音、20% 持续或几乎持续站立（48% 超过一半时间）；长时间站立与重复性操作与防护装备佩戴需要工效安排与间歇，项目与检测高峰会带来阶段性强度上升，应及早报告持续不适。",
@@ -32312,16 +32344,33 @@
                 "question_key": "career.faq.biological-technicians.8"
               },
               {
-                "answer": "O*NET 就业趋势页按本职业 19-4021.00 口径给出 2024 年在岗 82,700 人、2034 年约 85,600 人（4%，平均（Average））、预测期年均职位空缺 9,100；增长与空缺是不同指标、空缺含替代需求。转向可比较生物信息学技术员、医疗临床技术员、化学技术员、校准技术员、农业技术员、细胞遗传学技师、分子与细胞生物学家、微生物学家，但都需要补充相应训练与资格与授权。",
+                "answer": "美国 BLS 生物技术员 19-4021：2025 年就业约 74,400，2035 年预计 79,900，增长 7.4%，净增约 5,500，预计年均约 9,400 个空缺，含增长和替补。2025 基期含 0.1% 自雇。",
                 "id": "biological-technicians.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.biological-technicians.9"
+                "question_key": "career.faq.biological-technicians.9",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
-                "answer": "美国侧 O*NET 地方工资页按本职业 19-4021.00 口径给出「Workers on average earn $57,510」；本页据页面数值发布 2025 年 BLS 数值并逐处标注（年薪中位数 57,510 美元、时薪中位数 27.65 美元）。中国大陆仅有行业和宽口径统计，未取得与该职业精确对应的职业工资条目；按本页证据口径（暂无可安全使用的数据、处理说明「仅有行业和宽口径统计，不冒充职业中位数」），本页不发布任何中国大陆薪资数值并保留可见缺口标记，也不以行业均值冒充职业中位数。两边的职业范围、统计制度、资料期与用工与计酬结构都不同，不能把美元换算成人民币，也不应相信缺少样本与岗位范围的报价。",
+                "answer": "两则历史岗位用来比较研究支持和生产记录，不代表当前空缺、统一任职门槛或全国职业工资。",
                 "id": "biological-technicians.faq.10",
                 "question": "美国工资与中国大陆口径为什么不能互相换算？",
-                "question_key": "career.faq.biological-technicians.10"
+                "question_key": "career.faq.biological-technicians.10",
+                "source_refs": [
+                  "cas-yuyang-technician-2026",
+                  "akeso-cell-technician-2026",
+                  "nbs"
+                ]
+              },
+              {
+                "answer": "原版 T1 是 M17，T2 只列 M18，编号与出处待核。变式只改 T2，原始标签记录能确认 M17。两版都没有 T3 复核签字，交技术复核员。自核：是否分别写了编号、原始出处、签字缺口和接手人？",
+                "id": "biological-technicians.faq.11",
+                "question": "BT-78 参考解（交卷后再打开）",
+                "question_key": "career.faq.biological-technicians.q11",
+                "source_refs": [
+                  "bt78-paper"
+                ]
               }
             ]
           },
@@ -32342,11 +32391,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试编辑依据O*NET当前全字段、2025工资/2025—2035趋势、BLS2023历史行业工资、中国NBS2025匹配行业及人员大类和当前适用法规整理。内容明确区分职业精确数据、宽口径参照、编辑建议及证据缺口。"
+              "费马测试编辑部按原证核对美国就业和工资、大陆历史招聘及不同活动的工作边界。"
             ]
           },
           "id": "biological-technicians.sources.source-card.1",
           "source_refs": [
+            "ep",
+            "bls-ooh-19-4021",
+            "cas-yuyang-technician-2026",
+            "akeso-cell-technician-2026",
             "onet-current",
             "details-current",
             "hr-current",
@@ -32369,11 +32422,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮来源：O*NET九入口及三项认证问答、BCSI官方FAQ和Lab Bench说明、BLS2023行业表、NBS2025中文统计、生物安全法2024修正、危险化学品安全法2026施行、PIPL及当前人遗规则。原来源登记保留历史记录，当前支持来源另增。"
+              "主要资料：O*NET 职责和工资分位，BLS 表 1.2 与职业手册，国家统计局行业均值，两则招聘，生物安全、危险化学品与个人信息法规。"
             ]
           },
           "id": "biological-technicians.sources.source-card.2",
           "source_refs": [
+            "ep",
+            "bls-ooh-19-4021",
+            "cas-yuyang-technician-2026",
+            "akeso-cell-technician-2026",
+            "bio-current",
+            "chemical-current",
+            "pipl-current",
             "onet-current",
             "details-current",
             "hr-current",
@@ -32382,10 +32442,7 @@
             "onet-wages",
             "bls-industry-2023",
             "nbs-current",
-            "bio-current",
-            "chemical-current",
             "bcsi-faq",
-            "pipl-current",
             "hgr-current",
             "editor"
           ],
@@ -32396,11 +32453,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国工资2025：年薪中位57,510、时薪27.65美元，全部分位已核；趋势2025—2035增长7%/年均9,400；行业2025。中国NBS2025税前年平均参照、BLS2023行业年平均为历史参照；不能混期混指标。"
+              "核对日 2026-11-10。美国工资 2025、BLS 预测 2025–2035；两则大陆公告保留原资料期。"
             ]
           },
           "id": "biological-technicians.sources.source-card.3",
           "source_refs": [
+            "ep",
+            "cas-yuyang-technician-2026",
+            "akeso-cell-technician-2026",
             "onet-current",
             "details-current",
             "hr-current",
@@ -32423,11 +32483,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业任务与情境/软件广告/就业预测不构成GenAI采用因果证据；学历、专项证书、机构任用及实验权限分开。中国精确工资、认证个人考点/附加费用及学徒在招名额未核，不用职业语言或目录数推等价与录用承诺。"
+              "美国职业工资、大陆行业平均、两则招聘和 BT-78 纸面练习各自回答不同问题。"
             ]
           },
           "id": "biological-technicians.sources.source-card.4",
           "source_refs": [
+            "ep",
+            "nbs",
+            "cas-yuyang-technician-2026",
+            "akeso-cell-technician-2026",
+            "bt78-paper",
             "onet-current",
             "details-current",
             "hr-current",
@@ -32468,7 +32533,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32548,20 +32613,20 @@
                 "url": "https://www.onetonline.org/link/details/19-4021.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official outlook",
-                  "2024—2034 年；本职业 19-4021.00 口径；访问 2026-09-16"
+                  "美国 BLS 生物技术员 19-4021：2025 年就业约 74,400，2035 年预计 79,900，增长 7.4%，净增约 5,500，预计年均约 9,400 个空缺，含增长和替补。2025 基期含 0.1% 自雇。",
+                  "空缺是年均预测，不是实时招聘。"
                 ],
-                "evidence_type": "official outlook",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "就业与预测为本职业 19-4021.00 口径，不能外推更宽职业群。",
+                "limitation": "美国 BLS 生物技术员 19-4021：2025 年就业约 74,400，2035 年预计 79,900，增长 7.4%，净增约 5,500，预计年均约 9,400 个空缺，含增长和替补。2025 基期含 0.1% 自雇。",
                 "market": "美国",
-                "name": "O*NET 19-4021.00 职业摘要（就业与预测字段）",
-                "period": "2024—2034 年；本职业 19-4021.00 口径；访问 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "美国 BLS 表 1.2：生物技术员 19-4021",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/19-4021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32587,7 +32652,7 @@
                 ],
                 "evidence_type": "official wage statistics entry",
                 "id": "nbs",
-                "limitation": "该发布按行业门类与单位类型与人员大类公布城镇单位就业人员平均工资；本页只用其说明统计口径与覆盖范围边界，不取任何行业门类数值替代本职业工资，也不发布中国大陆薪资数值。",
+                "limitation": "国家统计局发布行业、单位类型及岗位大类年平均工资。本页另列两份雇主公告，行业平均与岗位报价均不能推成全国职业工资。",
                 "market": "中国大陆",
                 "name": "国家统计局（2025 年城镇单位就业人员年平均工资情况，英文发布页）",
                 "period": "2025 年；访问 2026-09-16",
@@ -32596,36 +32661,36 @@
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official law",
-                  "2020-10-17 通过、2021-04-15 施行；访问 2026-09-16"
+                  "涉及病原微生物时按实验活动核对应防护等级、机构规程与授权；依法需批准或备案的项目另核该程序。《危险化学品安全法》涉及使用单位的培训和安全职责。技术员记录差异并向有权限的人员交接。",
+                  "根据实际活动和单位职责核适用规则。"
                 ],
-                "evidence_type": "official law",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
-                "limitation": "该法要求从事生物技术研究开发与应用活动应当符合生物安全要求，涉及病原微生物实验活动须在相应等级的实验室并按批准范围开展，并对人类遗传资源与生物资源与实验室生物安全管理作出规范。该法不构成岗位授权；本页只引用其适用范围与行为边界，不提供任何规避监管的做法。",
+                "limitation": "涉及病原微生物时按实验活动核对应防护等级、机构规程与授权；依法需批准或备案的项目另核该程序。《危险化学品安全法》涉及使用单位的培训和安全职责。技术员记录差异并向有权限的人员交接。",
                 "market": "中国大陆",
-                "name": "《中华人民共和国生物安全法》—— 政府网站公开文本",
-                "period": "2020-10-17 通过、2021-04-15 施行；访问 2026-09-16",
-                "publisher": "中华人民共和国（政府网站公开转载）",
-                "scope": "jurisdiction_specific",
-                "url": "https://zjj.huainan.gov.cn/tzgg/551590010.html"
+                "name": "生物安全法2024修正商务部法规全文",
+                "period": "2024修正；本轮复核42—50条",
+                "publisher": "商务部法规数据库",
+                "scope": "contextual",
+                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=100341"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official administrative regulation",
-                  "国务院令第 591 号公布；访问 2026-09-16"
+                  "涉及病原微生物时按实验活动核对应防护等级、机构规程与授权；依法需批准或备案的项目另核该程序。《危险化学品安全法》涉及使用单位的培训和安全职责。技术员记录差异并向有权限的人员交接。",
+                  "根据实际活动和单位职责核适用规则。"
                 ],
-                "evidence_type": "official administrative regulation",
+                "evidence_type": "primary_document",
                 "id": "privacy",
-                "limitation": "该条例要求使用危险化学品的单位其使用条件（包括工艺）符合法律与行政法规与国家标准与行业标准的要求，并按危险化学品的种类与危险特性以及使用量和使用方式建立健全安全管理制度与操作规程，对从业人员进行安全教育与岗位技术培训。本页只引用其适用范围与行为边界，不提供任何规避监管的做法。",
+                "limitation": "涉及病原微生物时按实验活动核对应防护等级、机构规程与授权；依法需批准或备案的项目另核该程序。《危险化学品安全法》涉及使用单位的培训和安全职责。技术员记录差异并向有权限的人员交接。",
                 "market": "中国大陆",
-                "name": "《危险化学品安全管理条例》—— 中国政府网公开文本",
-                "period": "国务院令第 591 号公布；访问 2026-09-16",
-                "publisher": "中华人民共和国国务院（中国政府网公开文本）",
-                "scope": "jurisdiction_specific",
-                "url": "https://www.gov.cn/zhengce/content/2011-03/11/content_3114.htm"
+                "name": "危险化学品安全法市场监管总局全文",
+                "period": "2026-05-01施行；本轮核46—52/127条",
+                "publisher": "全国人大；市场监管总局公开全文",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2026/art_4e160e51cc134696a183a5f531f097e5.html"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32647,14 +32712,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "official outlook",
-                  "2024—2034 年；本职业 19-4021.00 口径；访问 2026-09-16"
+                  "2025–2035 年；本职业 19-4021.00 口径；访问 2026-09-16"
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
                 "limitation": "为本职业口径的就业与预测，不是个人录用概率。",
                 "market": "美国",
                 "name": "O*NET 19-4021.00 职业摘要（就业与预测字段，本职业口径）",
-                "period": "2024—2034 年；本职业 19-4021.00 口径；访问 2026-09-16",
+                "period": "2025–2035 年；本职业 19-4021.00 口径；访问 2026-09-16",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/19-4021.00"
@@ -32683,9 +32748,9 @@
                 ],
                 "evidence_type": "certification information",
                 "id": "health",
-                "limitation": "页面显示 18 项国家认证（含 BCSI Aseptic Technique- Lab Bench 与 BCSI Quantitative Lab Skills I 与 BCSI Regulatory Auditor Communication 等，由 Bioscience Core Skills Institute 等机构颁发）；认证不等于生物安全授权或执业许可。",
+                "limitation": "页面显示 18 条具名机构证书记录（含 BCSI Aseptic Technique- Lab Bench 与 BCSI Quantitative Lab Skills I 与 BCSI Regulatory Auditor Communication 等，由 Bioscience Core Skills Institute 等机构颁发）；认证不等于生物安全授权或执业许可。",
                 "market": "美国",
-                "name": "O*NET 19-4021.00 认证发现（国家认证）",
+                "name": "O*NET 19-4021.00 认证发现（具名机构证书）",
                 "period": "2025—2026 年更新页面；访问 2026-09-16",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -32731,10 +32796,10 @@
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "页面显示全国登记 4,195 个培训项目；职业准备信息说明该职业属 Job Zone Four，多数岗位要求四年制学士学位，但并非全部如此；培训信息不构成实验室与生物安全授权或雇主任命。",
+                "limitation": "全国训练目录显示 4,195 个项目，依据 IPEDS 2025–26 目录和 2024–25 授予记录。目录不是实时招生或职业任职条件。",
                 "market": "美国",
                 "name": "O*NET 19-4021.00 培训与教育信息",
-                "period": "2025—2026 年更新页面；访问 2026-09-16",
+                "period": "IPEDS 2025–26 目录及 2024–25 授予记录",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/19-4021.00"
@@ -32822,34 +32887,34 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "industry distribution",
-                  "2024 年；访问 2026-09-16"
+                  "O*NET 行业子表列专业科学和技术服务 38%、教育 23%、政府 15%、医疗与社会救助 11%、其他 13%，未另列年份。BLS 手册的雇主类别和职业工资细项是另一张表。",
+                  "不能视为行业工资。"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "专业科学与技术服务 38%、教育服务 23%、政府 15%、医疗与社会援助 11%、其他行业（含制造业）13%；行业分布描述统计分类，不提供行业工资水平。",
+                "limitation": "O*NET 行业子表列专业科学和技术服务 38%、教育 23%、政府 15%、医疗与社会救助 11%、其他 13%，未另列年份。BLS 手册的雇主类别和职业工资细项是另一张表。",
                 "market": "美国",
                 "name": "O*NET 19-4021.00 行业分布",
-                "period": "2024 年；访问 2026-09-16",
+                "period": "子表未列年份",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-4021.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official employment trends",
-                  "2024—2034 年；本职业 19-4021.00 口径；访问 2026-09-16"
+                  "美国 BLS 生物技术员 19-4021：2025 年就业约 74,400，2035 年预计 79,900，增长 7.4%，净增约 5,500，预计年均约 9,400 个空缺，含增长和替补。2025 基期含 0.1% 自雇。",
+                  "空缺是年均预测，不是实时招聘。"
                 ],
-                "evidence_type": "official employment trends",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
-                "limitation": "2024 年在岗 82,700 人、2034 年约 85,600 人、2024—2034 年 4%（标签为平均（Average））、预测期年均职位空缺 9,100；为本职业口径。",
+                "limitation": "美国 BLS 生物技术员 19-4021：2025 年就业约 74,400，2035 年预计 79,900，增长 7.4%，净增约 5,500，预计年均约 9,400 个空缺，含增长和替补。2025 基期含 0.1% 自雇。",
                 "market": "美国",
-                "name": "O*NET 19-4021.00 就业趋势页（本职业口径）",
-                "period": "2024—2034 年；本职业 19-4021.00 口径；访问 2026-09-16",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "美国 BLS 表 1.2：生物技术员 19-4021",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/19-4021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32880,7 +32945,7 @@
                 "name": "《中华人民共和国职业分类大典（2022 年版）》相关说明（人力资源和社会保障部）",
                 "period": "2022 年版；访问 2026-09-16",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
               },
               {
@@ -32964,33 +33029,33 @@
                 "url": "https://www.onetonline.org/link/custom/19-4021.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official occupation data",
-                  "2025—2035"
+                  "美国 BLS 生物技术员 19-4021：2025 年就业约 74,400，2035 年预计 79,900，增长 7.4%，净增约 5,500，预计年均约 9,400 个空缺，含增长和替补。2025 基期含 0.1% 自雇。",
+                  "空缺是年均预测，不是实时招聘。"
                 ],
-                "evidence_type": "official occupation data",
+                "evidence_type": "primary_document",
                 "id": "ep-current",
-                "limitation": "美国19-4021.00本职业：2025就业74,400人，2035预计79,900人；2025—2035增长7%（Much faster than average，远快于平均），年均空缺9,400（含增长与替换）。人数已舍入，不能据简单相减重算精确增长率；不是中国趋势、个人录用率或GenAI因果预测。",
+                "limitation": "美国 BLS 生物技术员 19-4021：2025 年就业约 74,400，2035 年预计 79,900，增长 7.4%，净增约 5,500，预计年均约 9,400 个空缺，含增长和替补。2025 基期含 0.1% 自雇。",
                 "market": "美国",
-                "name": "O*NET19-4021.00 就业趋势",
-                "period": "2025—2035",
-                "publisher": "O*NET OnLine",
+                "name": "美国 BLS 表 1.2：生物技术员 19-4021",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/19-4021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official occupation data",
-                  "2025"
+                  "O*NET 行业子表列专业科学和技术服务 38%、教育 23%、政府 15%、医疗与社会救助 11%、其他 13%，未另列年份。BLS 手册的雇主类别和职业工资细项是另一张表。",
+                  "不能视为行业工资。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "industry-current",
-                "limitation": "2025美国本职业行业分布：专业科学与技术服务39%、教育23%、政府14%、医疗与社会援助12%、制造10%、其他2%。行业分布不是行业工资，也不建立中国行业或岗位映射。",
+                "limitation": "O*NET 行业子表列专业科学和技术服务 38%、教育 23%、政府 15%、医疗与社会救助 11%、其他 13%，未另列年份。BLS 手册的雇主类别和职业工资细项是另一张表。",
                 "market": "美国",
                 "name": "O*NET19-4021.00 行业分布",
-                "period": "2025",
+                "period": "子表未列年份",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-4021.00"
@@ -33019,10 +33084,10 @@
                 ],
                 "evidence_type": "official occupation data",
                 "id": "training-current",
-                "limitation": "O*NET2026的新入职所需教育字段列学士、高中或同等、部分大学教育无学位，均未给百分比，不是现职学历构成。Job Zone Four/SVP7至小于8描述准备程度，不能推出个人固定训练年限。4,195项训练目录依据IPEDS2025—26目录与2024—25授予学位记录，不是实时招生或本职业专属课程。",
+                "limitation": "全国训练目录显示 4,195 个项目，依据 IPEDS 2025–26 目录和 2024–25 授予记录。目录不是实时招生或职业任职条件。",
                 "market": "美国",
                 "name": "O*NET19-4021.00 训练目录",
-                "period": "IPEDS2025—26/2024—25",
+                "period": "IPEDS 2025–26 目录及 2024–25 授予记录",
                 "publisher": "O*NET OnLine",
                 "scope": "education_directory",
                 "url": "https://www.onetonline.org/link/localtraining/19-4021.00"
@@ -33051,7 +33116,7 @@
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "nbs-current",
-                "limitation": "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、管理324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。",
+                "limitation": "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业专业技术172,877、中层及以上管理人员324,177、全部人员173,855元/年。教育行业非私营133,539、私营63,908元/年可供真实教育单位实验岗位比较。均为税前年平均、非生物技术员中位/起薪/月薪；按实际单位行业及职责选择，企业岗位大类不套用于事业单位。",
                 "market": "中国大陆",
                 "name": "NBS2025城镇单位平均工资",
                 "period": "2025；2026-05-15发布",
@@ -33072,7 +33137,7 @@
                 "name": "生物安全法2024修正商务部法规全文",
                 "period": "2024修正；本轮复核42—50条",
                 "publisher": "商务部法规数据库",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=100341"
               },
               {
@@ -33083,12 +33148,12 @@
                 ],
                 "evidence_type": "official law",
                 "id": "chemical-current",
-                "limitation": "危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业，不是每名实验员或每个科研实验室一律办证。",
+                "limitation": "危险化学品安全法已于2026年5月1日施行。第46—52条覆盖学校、科研、医疗、检测等使用单位：使用条件、制度/操作规程及向从业人员提供安全技术说明书/标签、培训和应急措施分别落实。安全使用许可证第48条针对使用指定种类达到数量标准从事生产的化工企业（危险化学品生产企业除外），不是每名实验员或每个科研实验室一律办证。",
                 "market": "中国大陆",
                 "name": "危险化学品安全法市场监管总局全文",
                 "period": "2026-05-01施行；本轮核46—52/127条",
                 "publisher": "全国人大；市场监管总局公开全文",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2026/art_4e160e51cc134696a183a5f531f097e5.html"
               },
               {
@@ -33104,7 +33169,7 @@
                 "name": "中华人民共和国个人信息保护法",
                 "period": "2021-11-01施行",
                 "publisher": "中央网信办公布",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
@@ -33115,28 +33180,28 @@
                 ],
                 "evidence_type": "official administrative regulation",
                 "id": "hgr-current",
-                "limitation": "已读第2—4、7—14、21—28条；按活动判断程序。2019原稿主管部门不再代表当前职责。",
+                "limitation": "条例按活动分别规定程序。中国人类遗传资源材料出境、信息对适用境外主体提供以及个人信息处理各核相应规定。",
                 "market": "中国大陆",
                 "name": "人类遗传资源条例2024修订官方公开文本",
                 "period": "2024修订",
                 "publisher": "国务院；新吴区政府公开",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.wnd.gov.cn/doc/2024/05/10/4348442.shtml"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official administrative guidance",
-                  "2026-10-09公开指南"
+                  "国家卫生健康委政务服务平台"
                 ],
                 "evidence_type": "official administrative guidance",
                 "id": "nhc-guidance",
-                "limitation": "已读实施主体、无收费和定义/采集活动范围FAQ；包括核酸序列及关联疾病信息，不包括单纯临床、影像、蛋白质或代谢数据。不能将指南当个人证书或判定本项目合规。",
+                "limitation": "用于查办事入口。数据分类参见《人类遗传资源管理条例实施细则》第2条。",
                 "market": "中国大陆",
-                "name": "国家卫健委当前人遗服务系统申报指南",
-                "period": "2026-10-09公开指南",
+                "name": "国家卫生健康委人类遗传资源服务入口",
+                "period": "政务服务入口",
                 "publisher": "国家卫生健康委员会",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://zwfw.nhc.gov.cn/bsp/rlyczyfwxt/"
               },
               {
@@ -33152,39 +33217,39 @@
                 "name": "BLS OEWS工资定义与范围",
                 "period": "当前定义；2026-10-09核对",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "wage_scope",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official ergonomic guidance",
-                  "2026-10-09公开指导"
+                  "通用工作站参考"
                 ],
                 "evidence_type": "official ergonomic guidance",
                 "id": "ergonomics",
                 "limitation": "长时静态姿势与重复操作可能引起局部疲劳、损伤；调整工作站/姿势、交替任务与短休息是一般指导。非本职业疾病发生率、中国法定休息时长或个体诊断。",
                 "market": "美国；宽口径工作站参照",
                 "name": "OSHA电脑工作站作业组织指导",
-                "period": "2026-10-09公开指导",
+                "period": "OSHA 通用工作站指导",
                 "publisher": "OSHA",
-                "scope": "broad_workplace_reference",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/etools/computer-workstations/work-process"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official ergonomic guidance",
-                  "2026-10-09公开指导"
+                  "通用工作站参考"
                 ],
                 "evidence_type": "official ergonomic guidance",
                 "id": "work-env",
                 "limitation": "过强照明/眩光可能引起视疲劳，指导调整照明和屏幕环境；不是本职业发病率或个体医学诊断。",
                 "market": "美国；宽口径工作站参照",
                 "name": "OSHA电脑工作站环境指导",
-                "period": "2026-10-09公开指导",
+                "period": "OSHA 通用工作站指导",
                 "publisher": "OSHA",
-                "scope": "broad_workplace_reference",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/etools/computer-workstations/workstation-environment"
               },
               {
@@ -33278,7 +33343,7 @@
                 "limitation": "科研研发60990、大学专业学校52000、政府48720、药品制造69070美元年平均；非2025工资中位。政府行排除州地方政府学校医院及USPS。",
                 "market": "美国",
                 "name": "BLS19-4021行业工资历史参照",
-                "period": "2023年5月；当前明细页未取得",
+                "period": "2023 年 5 月历史资料",
                 "publisher": "BLS",
                 "scope": "occupation_industry_reference",
                 "url": "https://www.bls.gov/oes/2023/may/oes194021.htm"
@@ -33296,7 +33361,7 @@
                 "name": "O*NET相关职业定义 15-2099.01",
                 "period": "Updated2026；2026-10-09已读定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-2099.01"
               },
               {
@@ -33312,7 +33377,7 @@
                 "name": "O*NET相关职业定义 29-2012.00",
                 "period": "Updated2026；2026-10-09已读定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-2012.00"
               },
               {
@@ -33328,7 +33393,7 @@
                 "name": "O*NET相关职业定义 19-4031.00",
                 "period": "Updated2026；2026-10-09已读定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-4031.00"
               },
               {
@@ -33344,7 +33409,7 @@
                 "name": "O*NET相关职业定义 17-3028.00",
                 "period": "Updated2026；2026-10-09已读定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/17-3028.00"
               },
               {
@@ -33360,7 +33425,7 @@
                 "name": "O*NET相关职业定义 19-4012.00",
                 "period": "Updated2026；2026-10-09已读定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-4012.00"
               },
               {
@@ -33376,7 +33441,7 @@
                 "name": "O*NET相关职业定义 29-2011.01",
                 "period": "Updated2026；2026-10-09已读定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-2011.01"
               },
               {
@@ -33392,7 +33457,7 @@
                 "name": "O*NET相关职业定义 19-1029.02",
                 "period": "Updated2026；2026-10-09已读定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-1029.02"
               },
               {
@@ -33408,25 +33473,100 @@
                 "name": "O*NET相关职业定义 19-1022.00",
                 "period": "Updated2026；2026-10-09已读定义",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-1022.00"
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "三个选定的纸面子任务 0、25、25 等权取整为 17%。这是编辑指数，不是采用率、实际工时或替代率。 floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-11-10.",
                   "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "准备与操作与监测｜让实验可运行｜按标准操作规程设置与校准与操作仪器并准备样本，监测实验过程并如实采集数据与样本。 — 0/100; weight=1/3; biological-technicians.profile.responsibilities-block.1[1]",
-                  "记录与复核｜让结果可检验｜保留详细工作日志并把数据录入数据库，对对照与重复与偏差先复核，标记需要复测或复核的部分。 — 75/100; weight=1/3; biological-technicians.profile.responsibilities-block.1[2]",
-                  "维护与故障处置｜让设备可依赖｜按规程清洁与维护与排除实验室与野外设备故障，如实记录仪器状态与校准与维修情况。 — 25/100; weight=1/3; biological-technicians.profile.responsibilities-block.1[3]"
+                  "设备核对｜现场操作｜文字工具不操作设备或核现场状态。 — 0/100; weight=1/3; 本页任务编辑样本",
+                  "记录整理｜字段草稿｜可整理草稿字段，原始记录由人员核。 — 25/100; weight=1/3; 本页任务编辑样本",
+                  "交接准备｜整理待核项｜可整理待核事项，处置由责任人员决定。 — 25/100; weight=1/3; 本页任务编辑样本"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "name": "费马 AI 子任务编辑方法",
+                "period": "2026-11-10",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国典型入门为相关学士，部分岗位接受更低学历；工资中位 57,510 美元。手册把 7.4% 就业变化显示为整数 7%。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-ooh-19-4021",
+                "limitation": "BLS 手册列美国 2025 年本职业部分行业年薪中位数：研发 62,060；私立高校 53,560；州立高校 53,330；政府（不含州和地方教育及医院）51,400；医疗和社会救助 51,080 美元。行业工资和行业就业占比分开。",
+                "market": "美国",
+                "name": "美国 BLS 生物技术员职业手册",
+                "period": "2025–2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/biological-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "中科院生物物理研究所于洋组 2026 年 9 月 10 日公告招 1 名技术员，要求生命科学或医学相关本科及以上，职责是协助完成基础实验，待遇面议，未列具体金额。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cas-yuyang-technician-2026",
+                "limitation": "两则历史岗位用来比较研究支持和生产记录，不代表当前空缺、统一任职门槛或全国职业工资。",
+                "market": "中国大陆（北京）",
+                "name": "中科院生物物理所于洋组：技术员",
+                "period": "2026-09-10",
+                "publisher": "CAS Institute of Biophysics",
+                "scope": "recruitment_proxy",
+                "url": "https://ibp.cas.cn/zp/zxzx/202609/t20260910_8280336.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "南开大学就业平台载康方生物 2026 年秋招：细胞生产技术员要求本科，列中山和广州黄埔，涉及生产记录、物料及设备协作。薪资栏原写「5K–9K」，未明示计薪周期；它是制造生产岗位样本。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "akeso-cell-technician-2026",
+                "limitation": "两则历史岗位用来比较研究支持和生产记录，不代表当前空缺、统一任职门槛或全国职业工资。",
+                "market": "中国大陆（中山、广州）",
+                "name": "南开大学就业平台：康方细胞生产技术员",
+                "period": "2026 fall",
+                "publisher": "南开大学就业平台",
+                "scope": "recruitment_proxy",
+                "url": "https://career.nankai.edu.cn/correcruit/content/id/119237.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "去第 09 节做 BT-78：核两版虚构物料记录，写一页给技术复核员的交接。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "bt78-paper",
+                "limitation": "去第 09 节做 BT-78：核两版虚构物料记录，写一页给技术复核员的交接。",
+                "market": "虚构练习",
+                "name": "费马 BT-78：两版物料记录和交接",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "第二条区分人类遗传资源信息与单纯的临床、影像、蛋白质或代谢数据。"
+                ],
+                "evidence_type": "科技部令第21号部门规章",
+                "id": "hgr-implementation-2023",
+                "limitation": "条例按活动分别规定程序。中国人类遗传资源材料出境、信息对适用境外主体提供以及个人信息处理各核相应规定。",
+                "market": "中国大陆",
+                "name": "人类遗传资源管理条例实施细则：第二条",
+                "period": "2023",
+                "publisher": "中华人民共和国科学技术部",
+                "scope": "contextual",
+                "url": "https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/fgzc/bmgz/202306/t20230601_186416.html"
               }
             ]
           },
@@ -34180,7 +34320,7 @@
             }
           }
         ],
-        "heading": "AI 会取代生物技术员吗？",
+        "heading": "AI 能辅助哪些生物技术子任务？",
         "method_cards": [
           {
             "含义": {
@@ -34851,6 +34991,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://ibp.cas.cn/zp/zxzx/202609/t20260910_8280336.html",
+            "id": "cas-yuyang-technician-2026",
+            "label": "中科院生物物理所于洋组：技术员",
+            "scope": "recruitment_proxy"
+          },
+          {
+            "href": "https://career.nankai.edu.cn/correcruit/content/id/119237.html",
+            "id": "akeso-cell-technician-2026",
+            "label": "南开大学就业平台：康方细胞生产技术员",
+            "scope": "recruitment_proxy"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/life-physical-and-social-science/biological-technicians.htm",
+            "id": "bls-ooh-19-4021",
+            "label": "美国 BLS 生物技术员职业手册",
+            "scope": "exact"
           }
         ],
         "tracks": [
@@ -36059,6 +36217,18 @@
               "field": "limitation",
               "item": "biological-technicians.source-register.published.1"
             }
+          },
+          {
+            "href": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=100341",
+            "id": "bio-current",
+            "label": "生物安全法2024修正商务部法规全文",
+            "scope": "jurisdiction_specific"
+          },
+          {
+            "href": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2026/art_4e160e51cc134696a183a5f531f097e5.html",
+            "id": "chemical-current",
+            "label": "危险化学品安全法市场监管总局全文",
+            "scope": "jurisdiction_specific"
           }
         ]
       },
@@ -36066,7 +36236,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "科技行业非私营平均（元/年）",
+              "指标": "北京：科研技术员",
               "数值": {
                 "$item": "biological-technicians.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -36081,7 +36251,7 @@
               }
             },
             {
-              "指标": "科技行业私营平均（元/年）",
+              "指标": "中山、广州：细胞生产技术员",
               "数值": {
                 "$item": "biological-technicians.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -36096,7 +36266,7 @@
               }
             },
             {
-              "指标": "科技企业人员大类（元/年）",
+              "指标": "科学研究和技术服务业：城镇私营单位",
               "数值": {
                 "$item": "biological-technicians.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -36111,7 +36281,7 @@
               }
             },
             {
-              "指标": "统计覆盖范围",
+              "指标": "规模以上科学研究和技术服务业企业：人员分组",
               "数值": {
                 "$item": "biological-technicians.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -36732,7 +36902,7 @@
             }
           }
         ],
-        "industry_value_label": "2023行业内本职业年平均工资",
+        "industry_value_label": "本职业在该行业的年薪中位数",
         "interpretation_heading": "这组美国工资数字应当怎么理解？",
         "interpretation_rows": [
           {
@@ -36886,7 +37056,7 @@
       },
       "hero": {
         "h1": "生物技术员",
-        "quick_answer": "生物技术员协助生物学与医学科学家：设置与操作与维护实验室仪器与设备、监测实验、收集数据与样本、进行观察并计算与记录结果，并可能分析血液与食品与药物等有机物质；常见工作包括开展或协助实验并采集血液与水体与土壤与植物等样本、记录生产与测试数据供研究人员评估、检查动物与标本以发现疾病或其他问题、把数据录入数据库、隔离与鉴定与制备待检标本、监督实验室工作是否符合既定标准、保留详细工作日志、使用计算机与计算机接口设备或机器人或高技术工业应用、为测试或动物饲料称量与配制化合物与溶液、清洁与维护与准备物资与工作区域、设置与调整与校准与清洁与维护与排除实验室与野外设备故障、开展标准化的生物学或微生物学或生物化学检验与实验室分析、订购实验室设备与耗材、参与药品与制剂的研发或生产、喂饲家畜或实验动物、分析实验数据并撰写报告与结论摘要、开展或监督鱼类孵化与温室与畜牧生产等运营项目、并为农业与环境科学或资源管理等领域的科学家与工程师提供技术支撑；其工作不等于研究结论的最终裁定或病原微生物与动物处置的批准，也不代替适用法域与主管部门与机构制度对生物安全与实验室安全与化学品与实验动物与人源样本管理的规范要求，并在样本来源不合规、涉及高等级病原微生物或实验动物或数据出境等需专门批准的情形、或发现样本污染或设备失效或数据异常或超出本人授权的情形时停止并升级。",
+        "quick_answer": "生物技术员在研究人员或团队负责人指导下准备材料、检查设备、记录实验和异常，交可复核的工作记录。研究支持与生产现场的条件不同；按实际岗位及机构程序核对职责。",
         "title": "生物技术员"
       },
       "market_signal_card": {
@@ -38339,7 +38509,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "大五人格（中文）"
           },
           {
             "href": {
@@ -38369,7 +38539,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "智力与推理（中文）"
+            "label": "IQ（中文）"
           }
         ]
       },
@@ -38477,7 +38647,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与技术支持子任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38567,37 +38737,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "82,700人（2024 年，本职业口径）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "约 74,400 人",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业规模（本职业口径）",
         "occupation_scope": "生物技术员",
-        "period": "2024 年；本职业 19-4021.00 口径；访问 2026-09-16",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "4%（平均（Average），本职业口径）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "7.4%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长率（本职业口径）",
         "occupation_scope": "生物技术员",
-        "period": "2024—2034 年；本职业 19-4021.00 口径；访问 2026-09-16",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "9,100（含增长与替换，本职业口径）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "年均约 9,400 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "预测期年均职位空缺（本职业口径）",
         "occupation_scope": "生物技术员",
-        "period": "2024—2034 年；本职业 19-4021.00 口径；访问 2026-09-16",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -38771,133 +38941,133 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "82,700人（2024 年）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "约 74,400 人",
         "fact_id": "us-employment-parent",
         "market": "美国",
         "measure": "就业规模（本职业口径）",
         "occupation_scope": "生物技术员",
-        "period": "2024 年；19-4021.00 本职业口径",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "4%（平均（Average））",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "7.4%",
         "fact_id": "us-growth-parent",
         "market": "美国",
         "measure": "就业增长率（本职业口径）",
         "occupation_scope": "生物技术员",
-        "period": "2024—2034 年；19-4021.00 本职业口径",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "9,100（含增长与替换）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "年均约 9,400 个",
         "fact_id": "us-openings-parent",
         "market": "美国",
         "measure": "预测期年均职位空缺（本职业口径）",
         "occupation_scope": "生物技术员",
-        "period": "2024—2034 年；19-4021.00 本职业口径",
+        "period": "2025–2035",
+        "source_refs": [
+          "ep"
+        ]
+      },
+      {
+        "derivation": "BLS 原表发布值。",
+        "display_value": "约 74,400 人",
+        "fact_id": "employment-current",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "生物技术员",
+        "period": "2025",
+        "source_refs": [
+          "ep"
+        ]
+      },
+      {
+        "derivation": "BLS 原表发布值。",
+        "display_value": "7.4%",
+        "fact_id": "growth-current",
+        "market": "美国",
+        "measure": "就业增长率",
+        "occupation_scope": "生物技术员",
+        "period": "2025–2035",
+        "source_refs": [
+          "ep"
+        ]
+      },
+      {
+        "derivation": "BLS 原表发布值。",
+        "display_value": "年均约 9,400 个",
+        "fact_id": "openings-current",
+        "market": "美国",
+        "measure": "预测期年均空缺",
+        "occupation_scope": "生物技术员",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "74,400人（2025）",
-        "fact_id": "employment-current",
-        "market": "美国",
-        "measure": "就业规模",
-        "occupation_scope": "生物技术员",
-        "period": "2025—2035；19-4021.00本职业",
-        "source_refs": [
-          "ep-current"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "7%（远快于平均）",
-        "fact_id": "growth-current",
-        "market": "美国",
-        "measure": "就业增长率",
-        "occupation_scope": "生物技术员",
-        "period": "2025—2035；19-4021.00本职业",
-        "source_refs": [
-          "ep-current"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "9,400（年均，含增长与替换）",
-        "fact_id": "openings-current",
-        "market": "美国",
-        "measure": "预测期年均空缺",
-        "occupation_scope": "生物技术员",
-        "period": "2025—2035；19-4021.00本职业",
-        "source_refs": [
-          "ep-current"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "60,990美元/年",
+        "display_value": "62,060 美元/年",
         "fact_id": "industry-mean-current-0",
         "market": "美国",
-        "measure": "科研研发服务年平均工资",
-        "occupation_scope": "生物技术员",
-        "period": "2023年5月；本职业行业年平均，非2025中位",
+        "measure": "本职业×行业年薪中位数",
+        "occupation_scope": "科研研发服务",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "bls-industry-2023"
+          "bls-ooh-19-4021"
         ]
       },
       {
         "derivation": null,
-        "display_value": "52,000美元/年",
+        "display_value": "53,560 美元/年",
         "fact_id": "industry-mean-current-1",
         "market": "美国",
-        "measure": "大学、大学院及专业学校年平均工资",
-        "occupation_scope": "生物技术员",
-        "period": "2023年5月；本职业行业年平均，非2025中位",
+        "measure": "本职业×行业年薪中位数",
+        "occupation_scope": "私立高校",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "bls-industry-2023"
+          "bls-ooh-19-4021"
         ]
       },
       {
         "derivation": null,
-        "display_value": "48,720美元/年",
+        "display_value": "53,330 美元/年",
         "fact_id": "industry-mean-current-2",
         "market": "美国",
-        "measure": "联邦、州与地方政府（排除规定机构）年平均工资",
-        "occupation_scope": "生物技术员",
-        "period": "2023年5月；本职业行业年平均，非2025中位",
+        "measure": "本职业×行业年薪中位数",
+        "occupation_scope": "州立高校",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "bls-industry-2023"
+          "bls-ooh-19-4021"
         ]
       },
       {
         "derivation": null,
-        "display_value": "69,070美元/年",
+        "display_value": "51,080 美元/年",
         "fact_id": "industry-mean-current-3",
         "market": "美国",
-        "measure": "药品与医药制造年平均工资",
-        "occupation_scope": "生物技术员",
-        "period": "2023年5月；本职业行业年平均，非2025中位",
+        "measure": "本职业×行业年薪中位数",
+        "occupation_scope": "医疗与社会救助",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "bls-industry-2023"
+          "bls-ooh-19-4021"
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
+        "derivation": "三个选定的纸面子任务 0、25、25 等权取整为 17%。这是编辑指数，不是采用率、实际工时或替代率。",
+        "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "生物技术员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "measure": "AI 子任务编辑指数（编辑估算）",
+        "occupation_scope": "三个纸面子任务",
+        "period": "2026-11-10",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -38909,7 +39079,7 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 子任务编辑指数"
     },
     "badges": [
       "O*NET 19-4021.00 · Job Zone Four（需要相当准备）· 学历按岗位差异列出",
@@ -38927,25 +39097,25 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，本职业 19-4021.00 口径）"
+        "label": "美国就业增长（2025–2035，本职业 19-4021.00 口径）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，本职业 19-4021.00 口径）"
+        "label": "美国就业人数（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，本职业 19-4021.00 口径）"
+        "label": "美国年均职位空缺（2025–2035，本职业 19-4021.00 口径）"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考（未取得职业级条目，本页不出数）"
+        "label": "中国大陆全国职业工资（未核实）"
       }
     ]
   },
@@ -38953,17 +39123,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "生物技术员做什么、需要哪些学历与准备、美国的收入与前景如何、AI 会改变哪些任务，以及生物安全与病原微生物操作越界、涉人样本与生物数据合规风险、样本与数据与记录不可复现、自动化采集结果被当成结论、危险化学品与实验动物与职业暴露负荷、以及样本与结果对外报告与转移的边界；保留来源范围与数据缺口。"
+      "text": "了解生物技术员的实验支持、记录和交接，比较两份大陆岗位与美国工资，再试做纸面物料核对。"
     },
     "title": {
       "availability": "available",
       "text": "生物技术员"
     }
   },
-  "source_content_sha256": "4c1ecabc745dba99e9ec1cdc29b134953ae7929e81c12be3ae7b42697a5d424b",
+  "source_content_sha256": "f495d1006f26693f9054cc95637438b4ac8b25e0bab8ad06e59272a83be1df35",
   "subject": {
     "canonical_slug": "biological-technicians",
     "name": "生物技术员",
-    "summary": "生物技术员协助生物学与医学科学家：设置与操作与维护实验室仪器与设备，监测实验，收集数据与样本，进行观察并计算与记录结果，并可能分析血液与食品与药物等有机物质；常见工作包括按标准操作规程开展生物学或微生物学或生物化学检验与实验室分析、隔离与鉴定与制备待检标本、设置与校准与维护与排除设备故障、保留详细工作日志、把数据录入数据库并分析数据与撰写报告与结论摘要，并为农业与环境科学或资源管理等领域的科学家与工程师提供技术支撑。美国侧对应 O*NET 19-4021.00（Biological Technicians），属 Job Zone Four（需要相当准备）；该职业页面的工资与就业与行业数据均按本职业 19-4021.00 口径给出，本页据页面数值发布并逐处标注资料期。中国大陆侧仅有行业和宽口径统计，未取得与该职业精确对应的职业工资条目，按证据口径本页不发布任何中国大陆薪资数值并保留可见缺口标记，也不以行业均值冒充职业中位数；实验与生物与化学安全在中国大陆受《中华人民共和国生物安全法》与《危险化学品安全管理条例》等规定约束。"
+    "summary": "生物技术员在研究人员或团队负责人指导下准备材料、检查设备、记录实验和异常，交可复核的工作记录。研究支持与生产现场的条件不同；按实际岗位及机构程序核对职责。 美国 BLS 生物技术员 19-4021：2025 年就业约 74,400，2035 年预计 79,900，增长 7.4%，净增约 5,500，预计年均约 9,400 个空缺，含增长和替补。2025 基期含 0.1% 自雇。"
   }
 }

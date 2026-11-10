@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "这份工作把材料、版样和规格转成可核对的裁片或分切产品。可以先观察自己能否持续核对尺寸单位、批号、版号和数量，发现不一致时保留原始数据并请求复核。真实适配还要核设备、轮班、站立及防护条件，不能只靠喜欢做手工判断。"
+              "纸面体验｜对照虚构裁剪工单和排料文件，找出一个尺码使用旧版纸样的记录，写下需复核的版号。 "
             ]
           },
           "id": "textile-cutting-machine-setters-operators-and-tenders.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24819,13 +24818,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "纺织裁剪设备设定员、操作员与看护员设定、操作或看护切割纺织品的机器，按版样或规定规格处理材料，监控过程、检验产品并记录工作完成量、设定与异常。"
+              "纺织裁剪设备操作人员按纸样或数字排料文件设置裁剪作业，检查裁片尺寸和形状，并处理交接中的版型差异。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "textile-cutting-machine-setters-operators-and-tenders.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-6062.00"
           ],
           "type": "prose"
         }
@@ -25479,13 +25477,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文本工具可以辅助规格与复检记录草稿，设备控制和质量批准仍需受训授权人员。BLS本职业2025—2035总体预测下降13.6%、年均空缺约900含替补；这些不能单独归因AI，本页仍无岗位AI采用率、替代率或个人失业概率。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构裁剪工单和排料文件，找出一个尺码使用旧版纸样的记录，写下需复核的版号。"
             ]
           },
           "id": "textile-cutting-machine-setters-operators-and-tenders.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial",
-            "nist"
+            "transfer-onet-51-6062.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32856,6 +32854,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-6062.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-6062.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-6062.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38329,10 +38354,10 @@
       "text": "纺织裁剪设备设定员、操作员与看护员"
     }
   },
-  "source_content_sha256": "773c3e5cece8dec9d8f2e84b8aa0461d478c479176f3b4be5b1b8982a7168cd7",
+  "source_content_sha256": "f356a4556c02e6d6982406e34cdbfbc228a087f72849ab50c3801eb9ad27df53",
   "subject": {
     "canonical_slug": "textile-cutting-machine-setters-operators-and-tenders",
     "name": "纺织裁剪设备设定员、操作员与看护员",
-    "summary": "设定、操作或看护切割纺织品的机器，按版样与规格形成裁片或分切产品，监控运行、检验尺寸数量并记录设定和异常。本页美国职业身份为51-6062.00；中国相关工种、设备训练与雇主要求分别核对，纸面体验不替代安全培训和上机授权。"
+    "summary": "纺织裁剪设备操作人员按纸样或数字排料文件设置裁剪作业，检查裁片尺寸和形状，并处理交接中的版型差异。"
   }
 }

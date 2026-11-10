@@ -50,6 +50,12 @@
       "fact:openings-current-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:posting-cold-chongming": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-cold-ezhou": {
+        "status": "pending_mapping"
+      },
       "fact:target-current-2035": {
         "status": "pending_mapping"
       },
@@ -19503,56 +19509,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19560,7 +19530,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19573,7 +19543,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19586,7 +19556,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19599,7 +19569,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23639,12 +23609,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国O*NET Job Zone1–2、SVP低于6，几天至一年在职训练为层级概述；本岗教育页定性列低于高中、中等后证书及高中或同等学历，响应比例未显示。BLS典型高中或同等学历、无相关经验要求、中期在职训练，非中国门槛或各雇主统一条件。兴趣RC；当前行业制造80%其他20%，未明行业年度。"
+              "美国O*NET Job Zone1–2、SVP低于6，几天至一年在职训练为层级概述；本岗教育页定性列低于高中、中等后证书及高中或同等学历，响应比例未显示。BLS典型高中或同等学历、无相关经验要求、中期在职训练，非中国门槛或各雇主统一条件。兴趣 RC。 O*NET 摘要的「2025 年主要行业」列出制造业。单独的行业占比页列制造业 80%、其他行业合计 20%，该页未标数据年份。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls",
+            "employer",
+            "onet-cooling-industry-breakdown"
           ],
           "type": "prose"
         },
@@ -23824,7 +23797,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是工作对象是设备本身且承担拆修责任：需要拆装、找正与功能验证；中位年薪 64,520 美元，2024 年就业 439,600 人，O*NET 增速类别为「远快于平均（7% 或更高）」。"
+              "机械维修岗位把故障定位、修复和设备功能验证作为主要交接；冷却操作岗位主要保持设备按工艺运行。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
@@ -23880,7 +23853,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是加工目标是配料与混合而非降温与冻结：中位年薪 42,290 美元，2024 年就业 173,500 人，O*NET 增速类别为「远快于平均（7% 或更高）」。"
+              "食品配料主要交接按配方称量和混合的一批料；冷却岗位重点交接产品温度及设备运行记录。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
@@ -23922,7 +23895,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是工艺对象是化学反应过程：中位年薪 58,040 美元，2024 年就业 128,900 人，O*NET 增速类别为「平均（3% 至 4%）」。"
+              "化工设备操作看反应或化工流程，冷却设备操作看降温条件和产品。先查是否兼岗。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
@@ -23964,7 +23937,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是热加工方向相反（加热而非降温）：中位年薪 41,590 美元，2024 年就业 29,700 人，O*NET 增速类别为「慢于平均（1% 至 2%）」。"
+              "蒸煮、油炸等岗位监控加热过程；冷却与冷冻岗位监控降温或冻结阶段。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.difference",
@@ -24006,7 +23979,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是工艺目标为干燥与熟化：中位年薪 44,810 美元，2024 年就业 20,700 人，O*NET 增速类别为「慢于平均（1% 至 2%）」。"
+              "烘烤干燥岗位跟踪温湿度与样品状态；冷却岗位跟踪降温或冷冻。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
@@ -24048,7 +24021,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是成型加工而非温控处理：中位年薪 47,720 美元，2024 年就业 66,000 人，O*NET 增速类别为「慢于平均（1% 至 2%）」。"
+              "挤出成型岗位跟踪材料形状和成型设备；冷却岗位跟踪降温或冻结条件。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.difference",
@@ -24090,12 +24063,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表把冷却与冷冻设备操作员与看护员与五个相邻方向，按职业方向、核心工作与产出、关键区别和更适合什么选择四项对照；就业与增速为美国 O*NET-SOC 口径（2024 年就业、2024—2034 年预测）。"
+              "按工作对象、仪表记录和交接责任比较。美国 BLS 就业数字用于本职业背景，不能用于推算个人录用或收入。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.intro",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24118,12 +24092,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "依据：O*NET OnLine 51-9193.00 与相邻职业的摘要页、就业趋势页（2026 年更新）；就业为 2024 年、增速为 2024—2034 年预测期口径，不用于推断个人录用机会或收入。"
+              "按工作对象、仪表记录和交接责任比较。美国 BLS 就业数字用于本职业背景，不能用于推算个人录用或收入。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.evidence_note",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26134,12 +26109,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的制冷与低温岗位招聘报价统计；单条企业或平台的报价不能代表全国水平"
+              "上海崇明一家蛋品企业的制冷工列 8,000–10,000 元/月，包含压缩机巡查、冷库温度点检和维修。鄂州一家食品企业招聘制冷工列 4,400–5,900 元/月，未列设备和班制。比较工作时，问清是生产线上冷却、机房巡检还是维修；这两则报价不能用来比较城市工资或推算全国工资。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "cold-chongming",
+            "cold-ezhou"
           ],
           "type": "prose"
         },
@@ -26449,13 +26425,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前行业页制造业80%，页面未明年度，不能据此分拆食品、化工和制药比例。"
+              "O*NET 摘要的「2025 年主要行业」列出制造业。单独的行业占比页列制造业 80%、其他行业合计 20%，该页未标数据年份。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-cooling-industry-breakdown"
           ],
           "type": "prose"
         },
@@ -26469,8 +26444,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-cooling-industry-breakdown"
           ],
           "type": "prose"
         },
@@ -26484,8 +26458,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-cooling-industry-breakdown"
           ],
           "type": "prose"
         },
@@ -26499,8 +26472,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-cooling-industry-breakdown"
           ],
           "type": "prose"
         },
@@ -30998,7 +30970,7 @@
           "data": {
             "entries": [
               {
-                "answer": "读取控制面板刻度与压力、温度、流量、电流仪表并调节控制器与阀门，维持进料速度、温度、气压与机器转速等条件；启动泵与进料器与输送机并开关阀门送入或转送物料；按工艺称量投料并把容器放入或取出设备；清除结霜与冻结物、处理堵塞等故障并通知主管；取样检测比重与酸度等特性；检查并冲洗管路、对设备喷淋消毒液，并按班次记录温度、处理量与检测结果。",
+                "answer": "使用冷却机组、冷冻设备或速冻隧道冷却或冻住产品，查看温度、压力等仪表并记录处理量和结果。食品是常见应用之一；职业定义也涵盖血浆或化学品。",
                 "id": "actors.faq.1",
                 "question": "这份工作每天的具体内容是什么？",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.1",
@@ -31016,18 +30988,18 @@
                 ]
               },
               {
-                "answer": "参数采集与趋势报警、记录与追溯、程序化制冷控制与自动除霜可由系统辅助，但设备与管路状态确认、结霜与堵塞处置、产品冻结程度判断、取样检测、异常停机与交接仍依赖现场人员。技术暴露不等于组织采用或岗位消失。",
+                "answer": "美国 BLS 对 51-9193 的就业预测包含总人数变化与替补空缺，不能从这些数字推断 AI 替代。比较目标工位时再问记录、报警和设备操作分工。",
                 "id": "actors.faq.3",
-                "question": "AI 会怎样影响或取代这份工作？",
+                "question": "冷却与冷冻设备操作的就业预测如何理解？",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.3",
                 "source_refs": [
                   "bls"
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：运行数据与记录，制冷控制与除霜节拍，异常与安全处置三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "记录汇总可作为工具辅助的候选，程序控制除霜属于设备自动化，不能当作生成式 AI 采用。异常、报警和安全处置由有权人员按规程核对；本页没有该职业的采用率、替代或事故变化实证。",
                 "id": "actors.faq.4",
-                "question": "这份工作哪些任务已有 AI 变化证据？",
+                "question": "哪些冷库任务可能由工具辅助？",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.4",
                 "source_refs": [
                   "onet"
@@ -31043,30 +31015,35 @@
                 ]
               },
               {
-                "answer": "美国 2025 年中位时薪 19.87 美元、年薪 41,330 美元（51-9193.00 单一职业口径），分位为年薪 33,430／36,380／41,330／49,550／62,340 美元；中国大陆未取得职业级工资数值，本页按缺口处理，不用行业均值代填。",
+                "answer": "美国 2025 年职业工资中位数为 19.87 美元/小时、41,330 美元/年。 BLS 预计美国 SOC 51-9193 就业由 2025 年约 7,700 人增至 2035 年约 8,100 人，增长 5.9%，年均约 800 个空缺（含替补需求）。 上海崇明一家蛋品企业的制冷工列 8,000–10,000 元/月，包含压缩机巡查、冷库温度点检和维修。鄂州一家食品企业招聘制冷工列 4,400–5,900 元/月，未列设备和班制。比较工作时，问清是生产线上冷却、机房巡检还是维修；这两则报价不能用来比较城市工资或推算全国工资。",
                 "id": "actors.faq.6",
-                "question": "这份工作工资一般多少，应该怎样比较？",
+                "question": "怎样比较美国统计和大陆招聘报价？",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.6",
                 "source_refs": [
-                  "oews"
+                  "oews",
+                  "bls",
+                  "cold-chongming",
+                  "cold-ezhou"
                 ]
               },
               {
-                "answer": "美国准备层级为 Job Zone 1–2，O*NET 摘要页说明部分岗位不要求高中学历、部分要求中等后证书、部分要求高中或同等学历；证据不足：本轮打开的摘要页未给出教育需求受访比例数值。国内制冷与低温岗位多从巡检与辅助作业做起，部分岗位要求安全培训与持证作业。",
+                "answer": "BLS 列美国典型入行为高中或同等学历、中期在岗训练。初学可先了解目标岗位是否有跟班巡检或辅助训练；在受训、获得授权前不独立操作设备。",
                 "id": "actors.faq.7",
                 "question": "这份工作需要什么学历，又该怎样训练？",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.7",
                 "source_refs": [
+                  "bls",
                   "onet"
                 ]
               },
               {
-                "answer": "美国没有统一的强制证照；中国大陆企业安全培训与岗位授权是常见前置条件，受压设备、电气与焊接等作业须按类别持证。具体要求按目标企业与主管部门规定。",
+                "answer": "中国大陆现行特种作业目录第 4.1 项适用于规定行业用液氨作冷媒的制冷设备运行、维修。先核实际冷媒、任务、是否涉及该目录或其他特种作业，再核当前证书。上海历史招聘写“有制冷证”，未写冷媒，也早于新版目录；不能推成所有冷却岗位都要同一证。",
                 "id": "actors.faq.8",
-                "question": "做这份工作必须考证吗？",
+                "question": "哪些制冷岗位涉及特种作业证？",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.8",
                 "source_refs": [
-                  "cn-rule"
+                  "mem-catalog-2026",
+                  "cold-chongming"
                 ]
               },
               {
@@ -31079,12 +31056,13 @@
                 ]
               },
               {
-                "answer": "美国官方预测显示 2024—2034 年该职业增速为「远快于平均（7% 或更高）」，预测期职位空缺约 800 个；但该职业规模较小（2024 年约 7,100 人），百分比受基数影响较大，且常见连续班制与低温噪声环境，须按本地实际需求核对。",
+                "answer": "BLS 预计美国 SOC 51-9193 就业由 2025 年约 7,700 人增至 2035 年约 8,100 人，增长 5.9%，年均约 800 个空缺（含替补需求）。 在求职时问清设备、冷媒、交接记录和维修授权。",
                 "id": "actors.faq.10",
                 "question": "现在选择这份工作，还应考虑什么？",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.10",
                 "source_refs": [
-                  "bls"
+                  "bls",
+                  "onet"
                 ]
               }
             ]
@@ -31316,18 +31294,17 @@
                 "url": "https://www.onetonline.org/link/summary/51-4021.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "支持就业预测与职位空缺的统计口径。",
-                  "不预测个人录用机会；小规模职业的年度波动更大。"
+                  "BLS 预计美国 SOC 51-9193 就业由 2025 年约 7,700 人增至 2035 年约 8,100 人，增长 5.9%，年均约 800 个空缺（含替补需求）。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
                 "limitation": "BLS表1.2本岗51-9193：2025就业7,700人、2035预测8,100人，表中净增500人、变化5.9%，年均空缺800个；总量端点与净变化分别舍入，不用端点差重算。O*NET显示整数6%、快于平均。年均空缺非十年合计、当前招聘、净增或录用率，预测非AI替代因果。美国O*NET Job Zone1–2、SVP低于6，几天至一年在职训练为层级概述；本岗教育页定性列低于高中、中等后证书及高中或同等学历，响应比例未显示。BLS典型高中或同等学历、无相关经验要求、中期在职训练，非中国门槛或各雇主统一条件。",
                 "market": "美国",
                 "name": "BLS职业预测表1.2：Cooling and Freezing Equipment Operators and Tenders（51-9193）",
-                "period": "2025—2035预测；2025工资和教育训练特征",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
@@ -31521,7 +31498,7 @@
                 "period": "页面 2026 年更新；检索 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/51-9193.00"
+                "url": "https://www.onetonline.org/link/details/51-9193.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31727,6 +31704,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "制冷工1名、8,000–10,000元/月；巡查压缩机和冷库温度、兼设备维护维修。要求有制冷证，未写明冷媒。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "cold-chongming",
+                "limitation": "一则历史招聘；不表示仍在招聘或可代表全国。",
+                "market": "中国大陆",
+                "name": "正大蛋业（上海）：制冷工",
+                "period": "2025-02",
+                "publisher": "上海市人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shanghai.gov.cn/nw17239/20250226/561eca2ed3de4b6c80a99fde97e1ff28.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第71组制冷工3名、4,400–5,900元/月；未列设备、排班和具体证书。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "cold-ezhou",
+                "limitation": "一则历史招聘；不表示仍在招聘或可代表全国。",
+                "market": "中国大陆",
+                "name": "湖北伊利食品：制冷工",
+                "period": "2024-02",
+                "publisher": "鄂州临空经济区",
+                "scope": "recruitment_proxy",
+                "url": "https://lkjjq.ezhou.gov.cn/xxgk/fdzdgknr/zkly/202402/P020240208615749192522.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "制造业占 80%，其余行业合计 20%。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-cooling-industry-breakdown",
+                "limitation": "分表只列就业占比，未拆分其余行业，也没有工资数值。摘要另列 2025 年主要行业。",
+                "market": "美国",
+                "name": "O*NET 51-9193.00 分行业就业占比",
+                "period": "分行业占比页未单列数据年份",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/51-9193.00"
               }
             ]
           },
@@ -34691,7 +34713,7 @@
               }
             },
             {
-              "城市/区间": "中国大陆（企业招聘报价口径）",
+              "城市/区间": "大陆制冷工招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34703,13 +34725,14 @@
           "china_soc_row": "美国51-9193.00工资及就业分别核；本轮未建立匹配中国职业级工资口径。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-cold-chongming",
+            "posting-cold-ezhou"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响本职业的工资吗？",
             "driver_heading": "哪些场景会用到本职业的设备操作与看护能力？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "不同学历与训练背景对应哪些制冷与低温岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -34908,7 +34931,7 @@
           },
           {
             "industry": "就业归类口径",
-            "median": "制造业80%、其他20%；当前页未明年度和其他细分。",
+            "median": "O*NET 摘要的「2025 年主要行业」列出制造业。单独的行业占比页列制造业 80%、其他行业合计 20%，该页未标数据年份。",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -36466,7 +36489,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解冷却与冷冻设备操作员与看护员的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36578,14 +36601,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解我的人格偏好"
@@ -37001,38 +37016,38 @@
       },
       {
         "derivation": null,
-        "display_value": "约 7,100 人（2024 年）",
+        "display_value": "7,700 人（2025 年）",
         "fact_id": "employment",
         "market": "美国",
-        "measure": "就业规模（单一职业口径）",
-        "occupation_scope": "Cooling and Freezing Equipment Operators and Tenders（O*NET-SOC 51-9193.00）；该职业规模较小，就业与空缺数值的抽样误差相对更大",
-        "period": "2024 年；检索 2026-09-18",
+        "measure": "美国基期就业（2025 年）",
+        "occupation_scope": "U.S. SOC 51-9193",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "远快于平均（2024—2034 年，7% 或更高）",
+        "display_value": "5.9% (2025–2035)",
         "fact_id": "growth",
         "market": "美国",
-        "measure": "就业变化率（单一职业口径）",
-        "occupation_scope": "Cooling and Freezing Equipment Operators and Tenders（O*NET-SOC 51-9193.00）；O*NET 分类标签为「Much faster than average」",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "measure": "美国就业预测（2025–2035 年）",
+        "occupation_scope": "U.S. SOC 51-9193",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 800 个（2024—2034 年预测期内的职位空缺，含增长与替换需求）",
+        "display_value": "年均 800 个（含替补需求）",
         "fact_id": "openings",
         "market": "美国",
-        "measure": "职位空缺（单一职业口径）",
-        "occupation_scope": "Cooling and Freezing Equipment Operators and Tenders（O*NET-SOC 51-9193.00）；O*NET 说明空缺包含增长需求与替换需求；该数值按十人取整，规模较小",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "measure": "美国预计年均职位空缺（2025–2035 年）",
+        "occupation_scope": "U.S. SOC 51-9193",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
@@ -37042,9 +37057,9 @@
         "market": "美国",
         "measure": "行业就业占比（非工资）",
         "occupation_scope": "51-9193.00行业就业分布，未明年度或其他细分",
-        "period": "当前行业页，未明年度；检索2026-10-09",
+        "period": "分行业占比页未单列数据年份",
         "source_refs": [
-          "onet"
+          "onet-cooling-industry-breakdown"
         ]
       },
       {
@@ -37054,9 +37069,9 @@
         "market": "美国",
         "measure": "行业就业占比（非工资）",
         "occupation_scope": "51-9193.00行业就业分布，未明年度或其他细分",
-        "period": "当前行业页，未明年度；检索2026-10-09",
+        "period": "分行业占比页未单列数据年份",
         "source_refs": [
-          "onet"
+          "onet-cooling-industry-breakdown"
         ]
       },
       {
@@ -37066,9 +37081,9 @@
         "market": "美国",
         "measure": "行业表口径（非工资）",
         "occupation_scope": "51-9193.00行业就业分布，未明年度或其他细分",
-        "period": "当前行业页，未明年度；检索2026-10-09",
+        "period": "分行业占比页未单列数据年份",
         "source_refs": [
-          "onet"
+          "onet-cooling-industry-breakdown"
         ]
       },
       {
@@ -37154,6 +37169,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "制冷工1名、8,000–10,000元/月；巡查压缩机和冷库温度、兼设备维护维修。要求有制冷证，未写明冷媒。",
+        "fact_id": "posting-cold-chongming",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "正大蛋业（上海）：制冷工",
+        "period": "2025-02",
+        "source_refs": [
+          "cold-chongming"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第71组制冷工3名、4,400–5,900元/月；未列设备、排班和具体证书。",
+        "fact_id": "posting-cold-ezhou",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "湖北伊利食品：制冷工",
+        "period": "2024-02",
+        "source_refs": [
+          "cold-ezhou"
+        ]
       }
     ]
   },
@@ -37180,19 +37219,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，远快于平均 7% 或更高）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 7,100 人）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国职位空缺（2024—2034 年，约 800 个）"
+        "label": "美国预计年均职位空缺（2025–2035 年）"
       },
       {
         "availability": "missing",
@@ -37206,17 +37245,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "冷却与冷冻设备操作员与看护员（O*NET-SOC 51-9193.00）操作与看护冷却冷冻设备把产品降温或冻结：覆盖读取仪表与调节控制器、启动泵与输送设备、组装管路与阀门、清除结霜与堵塞、记录温度与处理量、清洗消毒与产品取样检测；含美国 2025 年中位时薪 19.87 美元、2024—2034 年增速「远快于平均（7% 或更高）」与预测期职位空缺约 800 个、中国大陆职业级工资缺口与行业代理边界、低温与制冷剂风险控制及虚构练习边界。"
+      "text": "冷却与冷冻设备操作员怎样看仪表、记录温度和处理量？对照制冷工招聘、美国就业数据和涉氨作业要求。"
     },
     "title": {
       "availability": "available",
       "text": "冷却与冷冻设备操作员与看护员"
     }
   },
-  "source_content_sha256": "81c436fdac657a879c77e8c7746725dc9739a5002d81cbc951f260198cc1f28d",
+  "source_content_sha256": "9b9c7c1ed4e7a1e34a1cccec5689b6d151653749fd90f846e92f7d1f1065aecf",
   "subject": {
     "canonical_slug": "cooling-and-freezing-equipment-operators-and-tenders",
     "name": "冷却与冷冻设备操作员与看护员",
-    "summary": "冷却与冷冻设备操作员与看护员（Cooling and Freezing Equipment Operators and Tenders）在美国对应 O*NET-SOC 51-9193.00：操作或看护冷却与冷冻设备（冷却与冷冻机组、冷库与冰箱、批量冻结机、冻结隧道等），把产品、食品、血浆与化学品降温或冻结；工作中读取控制面板上的刻度与仪表并调节阀门与控制器，维持进料速度、温度、气压与机器转速等指定条件，处理堵塞等设备故障并记录温度与处理量；中国侧没有与之对应的职业细类，须按制冷设备操作与维修类实体另行核对。"
+    "summary": "操作冷却或冷冻设备，按规程监控并调节温度、进料和设备状态，记录处理量并交接异常。中国大陆的冷藏工和冷冻食品制作工作有部分任务重叠；尚未核实覆盖相同任务范围的一对一分类。"
   }
 }

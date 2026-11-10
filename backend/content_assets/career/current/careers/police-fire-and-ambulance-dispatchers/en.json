@@ -23011,13 +23011,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The key to fit is accurate listening, concise expression, controlled task switching, and sustainable shift work. First look at the omissions and corrections in the fictional handover sample, then decide whether to apply based on the formal position requirements."
+              "Paper check | Find an address correction in a fictional call record. Place it alongside the original address and label each source and update time. "
             ]
           },
           "id": "police-fire-and-ambulance-dispatchers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23307,13 +23306,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Public safety telecommunicators answer emergency and non-emergency calls, verify the incident and location, coordinate police, fire, or emergency medical resources per agency procedures, and continuously maintain unit status, on-scene reports, and incident records. The core output is accurate, timely, traceable information; it is not equal to on-scene enforcement or medical treatment."
+              "Police, fire and ambulance dispatchers receive calls, establish the location and key facts, and route resources and update status under local procedures. They distinguish confirmed details from open questions at handoff. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "police-fire-and-ambulance-dispatchers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-onet-43-5031.00"
           ],
           "type": "prose"
         },
@@ -24428,14 +24426,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence is insufficient: no dispatcher AI adoption rate, overall displacement rate, or task-level scoring basis was obtained. Text organization is an editorial trial suggestion; location confirmation, response protocols, resource coordination, and anomaly escalation must still be handled by authorized personnel. The ILO and the paper measure potential task exposure, and the BLS overall projection does not identify an AI causal effect and provides no disappearance year or layoff rate. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Find an address correction in a fictional call record. Place it alongside the original address and label each source and update time."
             ]
           },
           "id": "police-fire-and-ambulance-dispatchers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor",
-            "onet",
-            "nist"
+            "transfer-onet-43-5031.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32559,6 +32556,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-43-5031.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 43-5031.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/43-5031.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37804,10 +37828,10 @@
       "text": "Public safety telecommunicators: work tasks, US wages, and the entry path"
     }
   },
-  "source_content_sha256": "57cdd438ef3c3d88540a29f676cf7f319d30e4d81afcc3e630fb055fb2925e74",
+  "source_content_sha256": "add5a32dde8d9ae9fd05fbc884e4ed1b7f862753666c8997d380031a22756582",
   "subject": {
     "canonical_slug": "police-fire-and-ambulance-dispatchers",
     "name": "Public Safety Telecommunicators",
-    "summary": "Public safety telecommunicators answer 911, non-emergency, and agency lines, confirm the incident type and location, dispatch police, fire, or emergency medical resources under agency procedures, and continuously record, relay, update, and coordinate information. The work requires accuracy under noise, time pressure, shift work, and privacy constraints; specific authority and certification requirements depend on the jurisdiction, the employer, and the formal position announcement."
+    "summary": "Police, fire and ambulance dispatchers receive calls, establish the location and key facts, and route resources and update status under local procedures. They distinguish confirmed details from open questions at handoff."
   }
 }

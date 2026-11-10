@@ -23661,12 +23661,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "看能否分清读者前提、操作入口、成功结果与失败处理；遇规格未说明就提出具体待问。纸面顺畅不等真实软件可用性得到验证。"
+              "纸面体验｜对照虚构产品界面和帮助草稿，找出一个旧按钮名，注明适用版本和需要确认的人。 "
             ]
           },
           "id": "technical-writers.display.fermat_decision_card.summary",
           "source_refs": [
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24758,16 +24758,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "技术写作者研究产品规范并与技术人员沟通，把复杂信息写成用户可理解和执行的说明书、操作指南、在线帮助与配图，维护术语、版本和修订记录。重点是读者能否按当前条件完成任务，而非文辞华丽；写出步骤不等于有权批准产品安全、医疗或工程结论。美国对应27-3042.00，2025年工资与2025—2035年预测按精确职业记录；中国收入和招聘可比样本保持可见缺口。可先用本页虚构便签册v2规格写一页快速开始、失败分支和修订记录，做纸面走查；作品不冒充真实产品实测，也不公开客户日志和未授权图文。"
+              "技术写作者把工程或产品资料整理成用户能执行和复核的说明，统一术语并保留版本变更。发布前会向主题专家核实关键步骤。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "technical-writers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule",
-            "sag",
-            "editorial"
+            "transfer-onet-27-3042.00"
           ],
           "type": "prose"
         }
@@ -25440,13 +25436,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分草稿能力、真实采用、文档效果与就业结果。O*NET定任务，BLS提供美国预测解释，NIST定通用生成风险；本页的文档检查步骤是编辑建议，未有单职业准确率或节时测量。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构产品界面和帮助草稿，找出一个旧按钮名，注明适用版本和需要确认的人。"
             ]
           },
           "id": "technical-writers.display.ai_impact_table.answer",
           "source_refs": [
-            "nist",
-            "editorial"
+            "transfer-onet-27-3042.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32825,6 +32821,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-27-3042.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 27-3042.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/27-3042.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38295,10 +38318,10 @@
       "text": "技术写作者"
     }
   },
-  "source_content_sha256": "5fdc8f856ac364c26ed923db27cb01dd3acd80940343a1a5c4caad1fceaf9533",
+  "source_content_sha256": "73f4b2e23148344217d498e2a627f04e892200e1bb1643a6dcb33850a89512f1",
   "subject": {
     "canonical_slug": "technical-writers",
     "name": "技术写作者",
-    "summary": "技术写作者研究产品规范并与技术人员沟通，把复杂信息写成用户可理解和执行的说明书、操作指南、在线帮助与配图，维护术语、版本和修订记录。重点是读者能否按当前条件完成任务，而非文辞华丽；写出步骤不等于有权批准产品安全、医疗或工程结论。美国对应27-3042.00，2025年工资与2025—2035年预测按精确职业记录；中国收入和招聘可比样本保持可见缺口。可先用本页虚构便签册v2规格写一页快速开始、失败分支和修订记录，做纸面走查；作品不冒充真实产品实测，也不公开客户日志和未授权图文。"
+    "summary": "技术写作者把工程或产品资料整理成用户能执行和复核的说明，统一术语并保留版本变更。发布前会向主题专家核实关键步骤。"
   }
 }

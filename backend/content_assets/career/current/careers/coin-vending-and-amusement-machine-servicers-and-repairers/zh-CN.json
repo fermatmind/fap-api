@@ -1478,6 +1478,9 @@
       "item:coin-vending-and-amusement-machine-servicers-and-repairers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:coin-vending-and-amusement-machine-servicers-and-repairers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:coin-vending-and-amusement-machine-servicers-and-repairers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31452,6 +31455,21 @@
           "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。点位 A 的机器报收款后不出货，点位 B 报缺货。工单错把两台设备写成同一编号。先核点位、设备编号与故障现象，再列出给维修人员的问题。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核售货机维修记录",
+          "type": "notice"
         }
       ]
     },
@@ -38331,6 +38349,13 @@
         "id": "coin-vending-and-amusement-machine-servicers-and-repairers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38934,7 +38959,7 @@
       "text": "自动售货、机器维修员"
     }
   },
-  "source_content_sha256": "04b5bf9cec4a568209e25c77c4ecb06b9a7ab50501aec2b818c98897cad8c8ad",
+  "source_content_sha256": "1ed7d89de5d9e1a8429a3424eca45c5b48350b9edff893fb36fe8ef94204d9d2",
   "subject": {
     "canonical_slug": "coin-vending-and-amusement-machine-servicers-and-repairers",
     "name": "自动售货、机器维修员",

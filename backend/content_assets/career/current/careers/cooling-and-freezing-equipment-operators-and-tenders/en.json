@@ -50,6 +50,12 @@
       "fact:openings-current-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:posting-cold-chongming": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-cold-ezhou": {
+        "status": "pending_mapping"
+      },
       "fact:target-current-2035": {
         "status": "pending_mapping"
       },
@@ -19503,56 +19509,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19560,7 +19530,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19573,7 +19543,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19586,7 +19556,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19599,7 +19569,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23639,12 +23609,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "U.S. O*NET Job Zone1–2, SVP below 6, a few days to one year of on-the-job training as a level summary; this occupation's education page qualitatively lists less than high school, postsecondary certificate, and high school or equivalent, with response proportions not shown. BLS states typically high school or equivalent, no related experience required, and medium-term on-the-job training, not a China threshold or a uniform condition across employers. Interests RC; current industry manufacturing 80% and other 20%, with no industry year stated."
+              "U.S. O*NET Job Zone1–2, SVP below 6, a few days to one year of on-the-job training as a level summary; this occupation's education page qualitatively lists less than high school, postsecondary certificate, and high school or equivalent, with response proportions not shown. BLS states typically high school or equivalent, no related experience required, and medium-term on-the-job training, not a China threshold or a uniform condition across employers. Interest code: RC. The O*NET summary lists manufacturing under Top industries (2025). Its separate industry share page gives manufacturing 80% and all other industries 20%, and does not display a data year."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls",
+            "employer",
+            "onet-cooling-industry-breakdown"
           ],
           "type": "prose"
         },
@@ -23824,7 +23797,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is that the work object is the equipment itself and it carries repair responsibility: it requires disassembly and reassembly, alignment and functional verification; median annual wage 64,520 USD, 2024 employment 439,600 people, and the O*NET growth category is 'much faster than average (7% or higher)'."
+              "Machinery maintenance centers on diagnosing faults, repairing equipment and verifying operation. Cooling operators mainly keep the process running to its specified conditions."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
@@ -23880,7 +23853,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is that the processing goal is batching and mixing rather than cooling and freezing: median annual wage 42,290 USD, 2024 employment 173,500 people, and the O*NET growth category is 'much faster than average (7% or higher)'."
+              "Food batchmakers hand off ingredients weighed and mixed to a formula. Cooling operators hand off product temperature and equipment records."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
@@ -23922,7 +23895,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is that the process object is a chemical reaction process: median annual wage 58,040 USD, 2024 employment 128,900 people, and the O*NET growth category is 'average (3% to 4%)'."
+              "Chemical equipment operators work on reactions or chemical processing. Cooling operators control cooling conditions. Check whether the employer combines the jobs."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
@@ -23964,7 +23937,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is that thermal processing goes the other way (heating rather than cooling): median annual wage 41,590 USD, 2024 employment 29,700 people, and the O*NET growth category is 'slower than average (1% to 2%)'."
+              "Cooking machine operators monitor heating processes such as steam cooking or frying. Cooling and freezing operators monitor cooling or freezing stages."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.difference",
@@ -24006,7 +23979,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is that the process goal is drying and curing: median annual wage 44,810 USD, 2024 employment 20,700 people, and the O*NET growth category is 'slower than average (1% to 2%)'."
+              "Roasting and drying operators monitor temperature, humidity and product samples. Cooling operators monitor cooling or freezing."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
@@ -24048,7 +24021,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is forming rather than temperature-controlled processing: median annual wage 47,720 USD, 2024 employment 66,000 people, and the O*NET growth category is 'slower than average (1% to 2%)'."
+              "Extruding and forming operators focus on product shape and forming equipment. Cooling operators track cooling or freezing conditions."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.difference",
@@ -24090,12 +24063,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The table below compares cooling and freezing equipment operators and tenders with five adjacent directions on four items: occupational direction, core work and outputs, key differences, and what choice fits better; employment and growth use the U.S. O*NET-SOC basis (2024 employment, 2024—2034 projections)."
+              "Compare the materials, instrument readings and handoff duties. U.S. BLS employment figures describe the occupation and do not predict individual hiring or income."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.intro",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24118,12 +24092,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Basis: O*NET OnLine 51-9193.00 and the summary pages and employment trend pages of adjacent occupations (2026 update); employment is 2024 and growth uses the 2024—2034 projection period basis, and these are not used to infer individual hiring chances or income."
+              "Compare the materials, instrument readings and handoff duties. U.S. BLS employment figures describe the occupation and do not predict individual hiring or income."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.evidence_note",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26134,12 +26109,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain verifiable job posting offer statistics for refrigeration and low-temperature positions; an offer from a single company or platform cannot represent the national level"
+              "A Chongming egg producer advertised CNY 8,000–10,000 per month for refrigeration work covering compressor inspections, cold-room temperature checks and repairs. An Ezhou food producer advertised CNY 4,400–5,900 per month and did not specify equipment or shifts. Ask whether the work is line cooling, plant checks or repairs. The two ads do not establish city or national wages."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "cold-chongming",
+            "cold-ezhou"
           ],
           "type": "prose"
         },
@@ -26449,13 +26425,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The current industry page shows manufacturing 80%, and the page does not state a year, so the proportions of food, chemical and pharmaceutical cannot be split out from it."
+              "The O*NET summary lists manufacturing under Top industries (2025). Its separate industry share page gives manufacturing 80% and all other industries 20%, and does not display a data year."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-cooling-industry-breakdown"
           ],
           "type": "prose"
         },
@@ -26469,8 +26444,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-cooling-industry-breakdown"
           ],
           "type": "prose"
         },
@@ -26484,8 +26458,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-cooling-industry-breakdown"
           ],
           "type": "prose"
         },
@@ -26499,8 +26472,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-cooling-industry-breakdown"
           ],
           "type": "prose"
         },
@@ -30998,7 +30970,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Reading control panel scales and pressure, temperature, flow and current instruments and adjusting controllers and valves to maintain conditions such as feed rate, temperature, air pressure and machine speed; starting pumps, feeders and conveyors and opening and closing valves to feed in or transfer materials; weighing and loading according to the process and putting containers in or out of equipment; removing frost and frozen material and handling faults such as blockages and notifying supervisors; sampling to test characteristics such as specific gravity and acidity; checking and flushing pipelines and spraying disinfectant on equipment, and recording temperature, throughput and test results by shift.",
+                "answer": "Operators cool or freeze products using refrigeration units, freezers or freezing tunnels. They check readings such as temperature and pressure and record throughput and results. The occupation also covers applications outside food, including plasma and chemicals.",
                 "id": "actors.faq.1",
                 "question": "What does this work involve each day?",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.1",
@@ -31016,18 +30988,18 @@
                 ]
               },
               {
-                "answer": "Parameter collection and trend alarms, records and traceability, and programmatic refrigeration control and automatic defrosting can be aided by systems, but confirmation of equipment and pipeline status, frost and blockage handling, judgment of the degree of product freezing, sampling and testing, abnormal shutdown and handover still depend on on-site personnel. Technical exposure is not equal to organizational adoption or job disappearance.",
+                "answer": "BLS projections for U.S. SOC 51-9193 cover employment change and replacement openings. They do not estimate AI replacement. Ask the employer who owns records, alarms and equipment decisions.",
                 "id": "actors.faq.3",
-                "question": "How will AI affect or replace this work?",
+                "question": "How should you read this occupation’s employment outlook?",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.3",
                 "source_refs": [
                   "bls"
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: the three task categories of operating data and records, refrigeration control and defrost cycles, and exceptions and safety handling can be partly taken on by tools; this page has no single-occupation adoption rate or displacement data.",
+                "answer": "Tools could help summarize operating logs. Programmed defrost is conventional controls automation and does not establish generative AI adoption. Authorized staff verify alarms and safety responses. This page does not measure adoption, replacement or incident outcomes.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of this work is there already AI change evidence?",
+                "question": "Which refrigeration tasks could tools assist with?",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.4",
                 "source_refs": [
                   "onet"
@@ -31043,30 +31015,35 @@
                 ]
               },
               {
-                "answer": "U.S. 2025 median hourly wage 19.87 USD and annual wage 41,330 USD (single-occupation basis for 51-9193.00), with percentiles at annual wages 33,430／36,380／41,330／49,550／62,340 USD; no occupation-level wage value was obtained for mainland China, and this page treats it as a gap rather than filling it with an industry average.",
+                "answer": "The 2025 U.S. occupational median wage was $19.87 an hour and $41,330 a year. BLS projects U.S. employment for SOC 51-9193 to grow 5.9% from about 7,700 in 2025 to 8,100 in 2035, with about 800 annual openings including replacement needs. A Chongming egg producer advertised CNY 8,000–10,000 per month for refrigeration work covering compressor inspections, cold-room temperature checks and repairs. An Ezhou food producer advertised CNY 4,400–5,900 per month and did not specify equipment or shifts. Ask whether the work is line cooling, plant checks or repairs. The two ads do not establish city or national wages.",
                 "id": "actors.faq.6",
-                "question": "What is the usual wage for this work, and how should it be compared?",
+                "question": "How should I compare U.S. wages and mainland China postings?",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.6",
                 "source_refs": [
-                  "oews"
+                  "oews",
+                  "bls",
+                  "cold-chongming",
+                  "cold-ezhou"
                 ]
               },
               {
-                "answer": "The U.S. preparation level is Job Zone 1–2, and the O*NET summary page states that some positions do not require a high school education, some require a postsecondary certificate and some require high school or equivalent; insufficient evidence: the summary page opened this round does not give respondent proportion figures for education requirements. Domestic refrigeration and low-temperature positions mostly start from patrol inspection and support work, and some positions require safety training and certified work.",
+                "answer": "BLS lists a high school diploma or equivalent and moderate-term on-the-job training as typical for U.S. entry. Ask whether the role offers supervised inspections or assistant training. Operate equipment independently only once trained and authorized.",
                 "id": "actors.faq.7",
                 "question": "What education does this work require, and how should training be done?",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.7",
                 "source_refs": [
+                  "bls",
                   "onet"
                 ]
               },
               {
-                "answer": "There is no uniform mandatory license in the United States; in mainland China, company safety training and position authorization are common prerequisites, and pressurized equipment, electrical and welding work must be certified by category. Specific requirements follow the target company and the competent authority.",
+                "answer": "China’s current Special Operations Catalogue item 4.1 covers operating or maintaining refrigeration equipment using liquid ammonia in the specified sectors. Check the actual refrigerant, duties and applicable category. The historical Shanghai posting asked for a refrigeration credential without naming the refrigerant and predates the current catalogue; it does not establish one credential for every cooling job.",
                 "id": "actors.faq.8",
-                "question": "Do I have to get a certificate to do this work?",
+                "question": "When does a refrigeration job involve a special operations credential?",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.8",
                 "source_refs": [
-                  "cn-rule"
+                  "mem-catalog-2026",
+                  "cold-chongming"
                 ]
               },
               {
@@ -31079,12 +31056,13 @@
                 ]
               },
               {
-                "answer": "The official U.S. projection shows a growth rate for this occupation of 'much faster than average (7% or higher)' over 2024—2034, with about 800 job openings over the projection period; but this occupation is small (about 7,100 people in 2024), the percentage is greatly affected by the base, and continuous shift patterns and low-temperature and noisy environments are common, so it must be checked against local actual demand.",
+                "answer": "BLS projects U.S. employment for SOC 51-9193 to grow 5.9% from about 7,700 in 2025 to 8,100 in 2035, with about 800 annual openings including replacement needs. When applying, check the equipment, refrigerant, handoff records and repair authorization.",
                 "id": "actors.faq.10",
                 "question": "What else should be considered when choosing this work now?",
                 "question_key": "career.faq.cooling-and-freezing-equipment-operators-and-tenders.10",
                 "source_refs": [
-                  "bls"
+                  "bls",
+                  "onet"
                 ]
               }
             ]
@@ -31316,18 +31294,17 @@
                 "url": "https://www.onetonline.org/link/summary/51-4021.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Supports the statistical basis for employment projections and job openings.",
-                  "Does not predict individual hiring chances; annual fluctuations are greater for small occupations."
+                  "BLS projects U.S. employment for SOC 51-9193 to grow 5.9% from about 7,700 in 2025 to 8,100 in 2035, with about 800 annual openings including replacement needs."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
                 "limitation": "BLS Table 1.2 for this occupation 51-9193: 2025 employment 7,700 people and 2035 projected 8,100 people, a net increase of 500 in the table, change 5.9%, and annual average openings 800; the total endpoints and the net change are rounded separately, and the endpoint difference is not recomputed. O*NET shows an integer 6%, faster than average. Annual average openings are not a ten-year total, current hiring, net increase or a hiring rate, and the projection is not AI displacement causality. U.S. O*NET Job Zone1–2, SVP below 6, a few days to one year of on-the-job training as a level summary; this occupation's education page qualitatively lists less than high school, postsecondary certificate, and high school or equivalent, with response proportions not shown. BLS states typically high school or equivalent, no related experience required, and medium-term on-the-job training, not a China threshold or a uniform condition across employers.",
                 "market": "United States",
                 "name": "BLS occupational projections Table 1.2: Cooling and Freezing Equipment Operators and Tenders (51-9193)",
-                "period": "2025—2035 projections; 2025 wages and education and training characteristics",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
@@ -31521,7 +31498,7 @@
                 "period": "Page updated 2026; retrieved 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/51-9193.00"
+                "url": "https://www.onetonline.org/link/details/51-9193.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31727,6 +31704,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One refrigeration worker at CNY 8,000–10,000 per month. Duties include checking compressors and cold-room temperatures, maintenance and repairs. The posting asks for a refrigeration credential and does not identify the refrigerant."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "cold-chongming",
+                "limitation": "A historical posting only, not a current vacancy or national estimate.",
+                "market": "Mainland China",
+                "name": "CP Egg (Shanghai): refrigeration worker",
+                "period": "2025-02",
+                "publisher": "Shanghai Municipal Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shanghai.gov.cn/nw17239/20250226/561eca2ed3de4b6c80a99fde97e1ff28.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Group 71 lists three refrigeration workers at CNY 4,400–5,900 per month. Equipment, shifts and credentials are unspecified."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "cold-ezhou",
+                "limitation": "A historical posting only, not a current vacancy or national estimate.",
+                "market": "Mainland China",
+                "name": "Hubei Yili Foods: refrigeration worker",
+                "period": "2024-02",
+                "publisher": "Ezhou Airport Economic Zone",
+                "scope": "recruitment_proxy",
+                "url": "https://lkjjq.ezhou.gov.cn/xxgk/fdzdgknr/zkly/202402/P020240208615749192522.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Manufacturing accounts for 80% and all other industries together account for 20%."
+                ],
+                "evidence_type": "official source",
+                "id": "onet-cooling-industry-breakdown",
+                "limitation": "The breakdown gives employment shares without splitting the other industries or giving wages. The summary separately lists top industries for 2025.",
+                "market": "United States",
+                "name": "O*NET 51-9193.00 employment shares by industry",
+                "period": "No data year displayed on the industry share page",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/51-9193.00"
               }
             ]
           },
@@ -34691,7 +34713,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (company job posting offer basis)",
+              "城市/区间": "Mainland China refrigeration job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34703,13 +34725,14 @@
           "china_soc_row": "U.S. 51-9193.00 wages and employment are checked separately; this round did not establish a matching China occupation-level wage basis.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-cold-chongming",
+            "posting-cold-ezhou"
           ],
           "sources_note": "Source links are used according to their respective statistical or announcement scope; when the statistical period, survey subjects and pay basis differ they are cited separately, with no conversion between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect the wages of this occupation?",
             "driver_heading": "In which settings are the equipment operation and tending abilities of this occupation used?",
-            "official_heading": "Official statistical basis and missing data notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Educational background, position directions and notes (editorial compilation, not wage statistics)",
             "scenario_heading": "Which refrigeration and low-temperature position directions correspond to different educational and training backgrounds?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -34908,7 +34931,7 @@
           },
           {
             "industry": "Employment classification basis",
-            "median": "Manufacturing 80% and other 20%; the current page does not state the year and other breakdowns.",
+            "median": "The O*NET summary lists manufacturing under Top industries (2025). Its separate industry share page gives manufacturing 80% and all other industries 20%, and does not display a data year.",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -36466,7 +36489,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore the task interests and work preferences of cooling and freezing equipment operators and tenders",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36578,14 +36601,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
             "label": "Explore my personality preferences"
@@ -37001,38 +37016,38 @@
       },
       {
         "derivation": null,
-        "display_value": "About 7,100 people (2024)",
+        "display_value": "7,700 people (2025)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment size (single-occupation basis)",
-        "occupation_scope": "Cooling and Freezing Equipment Operators and Tenders (O*NET-SOC 51-9193.00); this occupation is small, so sampling error in employment and openings values is relatively larger",
-        "period": "2024; retrieved 2026-09-18",
+        "measure": "U.S. employment (2025 base year)",
+        "occupation_scope": "U.S. SOC 51-9193",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Much faster than average (2024—2034, 7% or higher)",
+        "display_value": "5.9% (2025–2035)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Employment change rate (single-occupation basis)",
-        "occupation_scope": "Cooling and Freezing Equipment Operators and Tenders (O*NET-SOC 51-9193.00); the O*NET classification label is 'Much faster than average'",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "U.S. SOC 51-9193",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 800 (job openings within the 2024—2034 projection period, including growth and replacement needs)",
+        "display_value": "800 per year (including replacement needs)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Job openings (single-occupation basis)",
-        "occupation_scope": "Cooling and Freezing Equipment Operators and Tenders (O*NET-SOC 51-9193.00); O*NET states that openings include growth needs and replacement needs; the figure is rounded to the nearest ten and the occupation is small",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "measure": "U.S. projected annual openings (2025–2035)",
+        "occupation_scope": "U.S. SOC 51-9193",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
@@ -37042,9 +37057,9 @@
         "market": "United States",
         "measure": "Industry employment share (not wages)",
         "occupation_scope": "51-9193.00 industry employment distribution, with no year or other breakdown stated",
-        "period": "Current industry page, with no year stated; retrieved 2026-10-09",
+        "period": "No data year displayed on the industry share page",
         "source_refs": [
-          "onet"
+          "onet-cooling-industry-breakdown"
         ]
       },
       {
@@ -37054,9 +37069,9 @@
         "market": "United States",
         "measure": "Industry employment share (not wages)",
         "occupation_scope": "51-9193.00 industry employment distribution, with no year or other breakdown stated",
-        "period": "Current industry page, with no year stated; retrieved 2026-10-09",
+        "period": "No data year displayed on the industry share page",
         "source_refs": [
-          "onet"
+          "onet-cooling-industry-breakdown"
         ]
       },
       {
@@ -37066,9 +37081,9 @@
         "market": "United States",
         "measure": "Industry table basis (not wages)",
         "occupation_scope": "51-9193.00 industry employment distribution, with no year or other breakdown stated",
-        "period": "Current industry page, with no year stated; retrieved 2026-10-09",
+        "period": "No data year displayed on the industry share page",
         "source_refs": [
-          "onet"
+          "onet-cooling-industry-breakdown"
         ]
       },
       {
@@ -37154,6 +37169,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One refrigeration worker at CNY 8,000–10,000 per month. Duties include checking compressors and cold-room temperatures, maintenance and repairs. The posting asks for a refrigeration credential and does not identify the refrigerant.",
+        "fact_id": "posting-cold-chongming",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "CP Egg (Shanghai): refrigeration worker",
+        "period": "2025-02",
+        "source_refs": [
+          "cold-chongming"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Group 71 lists three refrigeration workers at CNY 4,400–5,900 per month. Equipment, shifts and credentials are unspecified.",
+        "fact_id": "posting-cold-ezhou",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Hubei Yili Foods: refrigeration worker",
+        "period": "2024-02",
+        "source_refs": [
+          "cold-ezhou"
+        ]
       }
     ]
   },
@@ -37180,19 +37219,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, much faster than average 7% or higher)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employed persons (2024, about 7,100 people)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. job openings (2024—2034, about 800)"
+        "label": "U.S. projected annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37206,17 +37245,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Cooling and freezing equipment operators and tenders (O*NET-SOC 51-9193.00) operate and tend cooling and freezing equipment to cool or freeze products: this covers reading instruments and adjusting controllers, starting pumps and conveying equipment, assembling pipelines and valves, removing frost and blockages, recording temperature and throughput, and cleaning, disinfection and product sampling and testing; it includes the U.S. 2025 median hourly wage of 19.87 USD, the 2024—2034 growth rate 'much faster than average (7% or higher)' and about 800 job openings over the projection period, the mainland China occupation-level wage gap and the industry proxy boundary, and low-temperature and refrigerant risk control plus the boundary of fictional exercises."
+      "text": "See how cooling and freezing operators monitor equipment and record temperatures. Compare mainland China refrigeration postings, U.S. data and ammonia-specific credential rules."
     },
     "title": {
       "availability": "available",
       "text": "Cooling and freezing equipment operators and tenders"
     }
   },
-  "source_content_sha256": "c8bcb7671715b947d8d0b87d89633bde0e122718d25f319e629c26e74f6b7ced",
+  "source_content_sha256": "b0e4edaeda6891f3df582d778477c67cce72f04c15b4437fc02a7fa9285888bd",
   "subject": {
     "canonical_slug": "cooling-and-freezing-equipment-operators-and-tenders",
     "name": "Cooling and freezing equipment operators and tenders",
-    "summary": "Cooling and freezing equipment operators and tenders (Cooling and Freezing Equipment Operators and Tenders) correspond in the United States to O*NET-SOC 51-9193.00: they operate or tend cooling and freezing equipment (cooling and freezing units, cold storage and refrigerators, batch freezers, freezing tunnels and so on) to cool or freeze products, food, plasma and chemicals; in the work they read scales and instruments on the control panel and adjust valves and controllers to maintain specified conditions such as feed rate, temperature, air pressure and machine speed, handle equipment faults such as blockages and record temperature and throughput; there is no corresponding detailed occupation on the China side, and it must be checked separately against refrigeration equipment operation and maintenance entities."
+    "summary": "Operate cooling and freezing equipment, monitor temperature, flow and equipment status, and record output and exceptions. Cold-storage and frozen-food roles in mainland China overlap in some tasks; a one-to-one classification covering the same duties has not been verified."
   }
 }

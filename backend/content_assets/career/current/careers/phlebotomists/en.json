@@ -1283,6 +1283,9 @@
       "item:phlebotomists.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:phlebotomists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:phlebotomists.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31555,6 +31558,18 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The tube says S6 and the request says S9. Record both source identifiers and the person to notify. Actual specimens follow the institution’s discrepancy procedure."
+            ]
+          },
+          "id": "phlebotomists.path.work-sample-draft-20261110.1",
+          "title": "Check a blood specimen label",
+          "type": "notice"
         }
       ]
     },
@@ -38180,6 +38195,13 @@
         "id": "phlebotomists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "phlebotomists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38537,7 +38559,7 @@
       "text": "Phlebotomists"
     }
   },
-  "source_content_sha256": "04e62e8084ad5bac28a7fe69bddcabbde00732f7340db5324ce08317c87f3f54",
+  "source_content_sha256": "e618580967bb07dde9377c35ffc52c7a002aa3e651300084b97ce9919bcc6e6b",
   "subject": {
     "canonical_slug": "phlebotomists",
     "name": "Phlebotomists",

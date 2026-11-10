@@ -23375,13 +23375,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "下一步核目标岗位是油藏、钻井、完井还是生产工程，所需工程学历、现场训练、地区许可及雇主授权；先完成虚构数据核对，不把练习方案用于真实作业。"
+              "纸面体验｜给两条虚构产量曲线标出统计时段，指出缺测日期会如何影响比较，并写下交给数据负责人的核查项。 "
             ]
           },
           "id": "petroleum-engineers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23673,13 +23672,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET美国职业分类不等于中国工程资质或签字许可；具体法域与雇主职责另核。"
+              "石油工程师结合井资料和生产数据，分析采出表现，设计或评估开发与生产方案。交付方案时要说明依据哪些观测、采用哪些假设。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "petroleum-engineers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "ep"
+            "transfer-onet-17-2171.00"
           ],
           "type": "prose"
         },
@@ -24777,13 +24775,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未核得本职实际生成式AI采用、整体替代率或消失年份；井数据整理、情景计算与报告草稿仅获准编辑试用，不能替代原始井测试、仪器地层设备、井控环境和授权复核。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：给两条虚构产量曲线标出统计时段，指出缺测日期会如何影响比较，并写下交给数据负责人的核查项。"
             ]
           },
           "id": "petroleum-engineers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-onet-17-2171.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32795,6 +32793,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-17-2171.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 17-2171.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/17-2171.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38047,10 +38072,10 @@
       "text": "石油工程师"
     }
   },
-  "source_content_sha256": "4ba2f4bd9c6d6b22f2cfac487c14a90c2e7d1cf40e501d87ee505e332b965c23",
+  "source_content_sha256": "5b017374ba0eb0f504b64ef58536825188a357d778e66699941ebed91b1354bf",
   "subject": {
     "canonical_slug": "petroleum-engineers",
     "name": "石油工程师",
-    "summary": "石油工程师（O*NET 17-2171.00）分析油气藏、井筒和生产数据，设计或改进钻井、完井及采收方案，监测产量与设备表现，给出有边界的技术建议并记录结果。现场作业、设备变更和安全决定须由有权限的团队按适用标准复核。"
+    "summary": "石油工程师结合井资料和生产数据，分析采出表现，设计或评估开发与生产方案。交付方案时要说明依据哪些观测、采用哪些假设。"
   }
 }

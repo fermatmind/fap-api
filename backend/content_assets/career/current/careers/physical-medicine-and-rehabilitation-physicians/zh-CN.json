@@ -23345,13 +23345,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "若你愿意长期做功能评估、医疗风险判断、跨专业协调和随访复评，并接受医师责任，下一步应核本地医师注册、康复医学训练及真实岗位要求。可联系正规教育或培训机构确认周期与费用，再访谈在职医师了解门诊、病房与值班安排。若主要兴趣在运动训练，也应比较物理治疗师等相邻职业的独立资格和职责，不把协作任务当作可直接互转的执照。"
+              "纸面体验｜比较虚构功能目标卡和随访表，标出一处测量条件变化，写下请康复团队确认的原始记录。 "
             ]
           },
           "id": "physical-medicine-and-rehabilitation-physicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet-tasks-29-1229-04",
-            "nhc-rehab-practice-scope"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23629,12 +23628,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "康复医师评估功能与医疗风险，制定并复核康复计划，协调治疗团队；诊疗受医师注册与机构授权约束。"
+              "康复医学医师评估活动和日常功能，制定康复目标并与治疗团队协调。复诊时结合任务条件和测量记录判断功能变化。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "physical-medicine-and-rehabilitation-physicians.profile.definition-block.11",
           "source_refs": [
-            "onet-tasks-29-1229-04"
+            "transfer-onet-29-1229.04"
           ],
           "type": "prose"
         },
@@ -24711,15 +24710,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可能辅助非敏感资料检索、术语整理和记录草稿；没有本职业单列采用率或替代率证据。功能评估、诊断、处方、患者沟通和最终签署仍须由有权限的临床人员负责。ILO测的是任务暴露潜力，WHO和NIST提供治理要求，三者均不能证明某工具已在康复医疗中安全有效。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比较虚构功能目标卡和随访表，标出一处测量条件变化，写下请康复团队确认的原始记录。"
             ]
           },
           "id": "physical-medicine-and-rehabilitation-physicians.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet-tasks-29-1229-04",
-            "ilo-genai-index-2025",
-            "who-health-lmm-2024",
-            "nist-genai-profile-2024"
+            "transfer-onet-29-1229.04",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32859,6 +32856,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-29-1229.04",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 29-1229.04 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/29-1229.04"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38007,10 +38031,10 @@
       "text": "物理医学与康复医师"
     }
   },
-  "source_content_sha256": "6622785086883eda6683ab842f6c86efab41e7510002c817415837af0e490c1f",
+  "source_content_sha256": "cd8620e4533227202f940ed747ece51bb96e9065e3798dbb279e6a98433ea4a8",
   "subject": {
     "canonical_slug": "physical-medicine-and-rehabilitation-physicians",
     "name": "物理医学与康复医师",
-    "summary": "康复医学医师评估患者功能与医疗风险，制定并复核康复计划，协调治疗团队；诊疗须符合医师注册和机构授权。"
+    "summary": "康复医学医师评估活动和日常功能，制定康复目标并与治疗团队协调。复诊时结合任务条件和测量记录判断功能变化。"
   }
 }

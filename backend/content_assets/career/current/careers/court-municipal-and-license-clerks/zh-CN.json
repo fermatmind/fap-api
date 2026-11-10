@@ -9,7 +9,7 @@
         "status": "pending_mapping"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:employment-g04-current": {
         "status": "pending_mapping"
@@ -18,7 +18,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:growth-g04-current": {
         "status": "pending_mapping"
@@ -54,9 +54,15 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:openings-g04-current": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-clerk-jiangsu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-clerk-ningxia": {
         "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
@@ -26138,12 +26144,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆法院与政务文书岗位招聘报价统计；单条招聘公告不能代表全国水平"
+              "宁夏法院 2023 年公告列聘用制书记员当时约 3,800–4,800 元/月，含个人应缴社保、公积金。江苏法院 2024 年公告用当地最低工资的至少 1.2 倍计算基本工资，并另列绩效和等级津贴。两份公告仅是法院岗位样本。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "clerk-ningxia",
+            "clerk-jiangsu"
           ],
           "type": "prose"
         },
@@ -26240,7 +26247,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025条件行业背景：非私营公共管理社会保障社会组织税前年均119,465元，须法人主营分类匹配，不等书记员或政务文员职业中位、月到手或岗位等级。私营对应行业数值本表未取得，不填0。城镇5人及以上法人单位，不含个体自由职业；全国本岗工资分布、招聘报价样本及精确中美映射未取得。最高法2026政策解读说明法院聘用书记员待遇按当地经济财政及职工平均工资居民收入合理确定，但未给全国统一金额。"
+              "以下公告用于对照岗位和计薪条件。全国职业工资分布缺少可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -31000,7 +31007,7 @@
           "data": {
             "entries": [
               {
-                "answer": "接收并检查提交给法院的法律文书是否符合法律与程序，记录案件处置与法院命令，回答公众关于程序与出庭的咨询，准备并发布法院命令与传票，编制待审案件目录；维护市政文件的归档保管、准备法令决议与公告、发布公共通知、准备会议议程、记录并编辑会议记录、应请求检索市政档案；询问并记录申请人信息、评估申请完整性与许可条件、编码录入、签发结婚垂钓狩猎与养犬等许可并收取费用，并按调查需要对持证者做记录核查。",
+                "answer": "按所在机构要求登记申请或案件、核对材料、安排日程、维护案卷或公共记录。许可或法院事项的决定由获授权人员作出。美国统计同时覆盖法院、市政及执照事务。",
                 "id": "actors.faq.1",
                 "question": "法院、市政、执照文员每天的具体工作是什么？",
                 "question_key": "career.faq.court-municipal-and-license-clerks.1",
@@ -31009,9 +31016,9 @@
                 ]
               },
               {
-                "answer": "法院、市政、执照文员处理法院文书与案件记录、市政记录与会议、许可申请与签发；合规专员评估机构是否符合法规并推动整改；律师助理与法务助理在律师指导下准备法律文件；办公室文员处理一般行政与文书；前台接待以接待与转接为主；保险理赔文员受理理赔与保单；产权审查员检索并核对产权记录。",
+                "answer": "书记及许可事务岗位维护正式记录、受理材料和按规则办理流程；庭审速录侧重逐字记录，法律助理侧重检索材料与起草辅助。岗位授权随机构而异。",
                 "id": "actors.faq.2",
-                "question": "法院、市政、执照文员和合规专员、办公室文员有什么区别？",
+                "question": "法院事务文员与庭审速录、法律助理有什么区别？",
                 "question_key": "career.faq.court-municipal-and-license-clerks.2",
                 "source_refs": [
                   "onet"
@@ -31027,9 +31034,9 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：文书接收与检索、信息录入与表单、会议记录与通知三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "文书软件可辅助模板、排期和材料检索；身份、保密权限、案卷内容和最终文书必须由相应人员复核。 这不是对本职业 AI 使用率或岗位替代的测量。",
                 "id": "actors.faq.4",
-                "question": "法院、市政、执照文员哪些任务已有 AI 变化证据？",
+                "question": "哪些工作可能由软件辅助？",
                 "question_key": "career.faq.court-municipal-and-license-clerks.4",
                 "source_refs": [
                   "onet"
@@ -31045,12 +31052,14 @@
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位年薪 48,700 美元、时薪 23.41 美元（43-4031.00 单一职业口径），分位为年薪 36,300／40,810／48,700／60,840／73,820 美元；中国大陆未取得职业级工资数值，本页按缺口处理，不用行业均值代填。",
+                "answer": "美国 2025 年 5 月工资中位数为 48,700 美元/年、23.41 美元/小时。 宁夏法院 2023 年公告列聘用制书记员当时约 3,800–4,800 元/月，含个人应缴社保、公积金。江苏法院 2024 年公告用当地最低工资的至少 1.2 倍计算基本工资，并另列绩效和等级津贴。两份公告仅是法院岗位样本。",
                 "id": "actors.faq.6",
                 "question": "法院、市政、执照文员工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.court-municipal-and-license-clerks.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "clerk-ningxia",
+                  "clerk-jiangsu"
                 ]
               },
               {
@@ -31063,12 +31072,12 @@
                 ]
               },
               {
-                "answer": "美国没有统一的全国证照，多由雇主安排在职培训；中国大陆同类岗位多无全国统一资质要求，部分岗位有招录或考试条件；具体条件按目标单位招聘公告与现行规定核对。",
+                "answer": "最高人民法院 2026 年发布说明列考试与考察结合。各法院的考试科目、技能测试和薪酬仍按实际公告核对。美国统计还包含市政和执照事务，不能套用中国法院条件。",
                 "id": "actors.faq.8",
-                "question": "做法院、市政、执照文员必须考证吗？",
+                "question": "中国法院聘用制书记员如何招聘？",
                 "question_key": "career.faq.court-municipal-and-license-clerks.8",
                 "source_refs": [
-                  "cn-rule"
+                  "clerk-spc-current"
                 ]
               },
               {
@@ -31081,12 +31090,12 @@
                 ]
               },
               {
-                "answer": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 180,400 人，预测标签为 Average（3% 至 4%），累计约 18,500 个含增长与替换的空缺；工作以长时间坐着处理文书与公众沟通为主，且有严格的准确与保密要求，须按本地机构需求核对。",
+                "answer": "美国 BLS 预计 43-4031 就业从 2025 年约 187,000 到 2035 年约 193,300（+3.4%）。年均约 17,100 个空缺，包含替补需求。",
                 "id": "actors.faq.10",
-                "question": "现在选择法院、市政、执照文员职业，还应考虑什么？",
+                "question": "美国就业预测怎么读？",
                 "question_key": "career.faq.court-municipal-and-license-clerks.10",
                 "source_refs": [
-                  "bls"
+                  "a19-bls-projections"
                 ]
               }
             ]
@@ -31503,7 +31512,7 @@
                 "url": "https://www.onetonline.org/link/localwages/43-4031.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "美国43-4031.00共29任务：11Core含市政文件保管归档计算机化、法律文书程序检查、案件结果命令费用安排记录、司法公众问答、一般文书与行政、申请人信息、出庭时间指示、公众及政府信息请求、办公室跟踪系统、市政档案检索；18Supplemental含诉讼结果文件、许可完整资格评估、法令公告、签发许可收费、会议通知、申请编码、生命与财务记录、案件日历、法院命令、议程与会议记录、带训协调、许可咨询、合同招标、持证核查、预算、证件真实性、联系证人当事人。分类不是每日频次；法院、市政和许可不等每个岗位三面高频轮换。美国2025行业就业政府98%、其他2%，非工资或中国用人分布，不细推自雇及雇主类型。"
                 ],
@@ -31515,7 +31524,7 @@
                 "period": "2026页面更新，行业2025；任务各调查不同",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-4031.00"
+                "url": "https://www.onetonline.org/link/details/43-4031.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31686,6 +31695,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 预计 43-4031 就业从 2025 年约 187,000 到 2035 年约 193,300（+3.4%）。年均约 17,100 个空缺，包含替补需求。"
+                ],
+                "evidence_type": "官方统计",
+                "id": "a19-bls-projections",
+                "limitation": "年均空缺包含替补；不是净增或录用概率。",
+                "market": "美国",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "当时约 3,800–4,800 元/月，含个人缴纳社保与住房公积金。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "clerk-ningxia",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "宁夏法院聘用制书记员",
+                "period": "2023-09-15",
+                "publisher": "宁夏回族自治区高级人民法院",
+                "scope": "recruitment_proxy",
+                "url": "https://www.nxfy.gov.cn/xwzx/2018fyzx/202309/t20230915_4977964.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "基本工资至少当地最低工资的 1.2 倍；另列绩效及等级津贴。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "clerk-jiangsu",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "江苏法院聘用制书记员",
+                "period": "2024",
+                "publisher": "江苏法院网",
+                "scope": "recruitment_proxy",
+                "url": "https://www.jsfy.gov.cn/article/98398.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "招聘结合考试与考察，薪酬按当地因素确定并动态调整。"
+                ],
+                "evidence_type": "官方发布",
+                "id": "clerk-spc-current",
+                "limitation": "仅用于人民法院聘用制书记员。",
+                "market": "中国大陆",
+                "name": "2026 聘用制书记员管理意见发布说明",
+                "period": "2026",
+                "publisher": "最高人民法院",
+                "scope": "jurisdiction_reference",
+                "url": "https://www.court.gov.cn/zixun/xiangqing/507841.html"
               }
             ]
           },
@@ -34649,7 +34718,7 @@
               }
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34661,13 +34730,14 @@
           "china_soc_row": "美国43-4031合并法院市政许可；中国相关岗位分开核，精确实体映射及全国职业工资本轮未取得。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-clerk-ningxia",
+            "posting-clerk-jiangsu"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响法院、市政、执照文员的工资吗？",
             "driver_heading": "法院与政务岗位怎样安排班次与周期？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "法域与实际岗位准备条件，非学历到岗位的分配规则",
             "scenario_heading": "学历、招录与岗位权限怎样分别核？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36427,7 +36497,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解法院、市政、执照文员的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36540,12 +36610,12 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "label": "Personality preferences"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "label": "Big Five traits"
           },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
@@ -36961,39 +37031,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 180,400 人（2024 年，单一职业口径）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "187,000 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模",
-        "occupation_scope": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）该细分的 2024 年就业估计",
-        "period": "2024 年（O*NET/BLS）；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4031",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a19-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "增长 3%—4%（2024—2034 年，标签 Average）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "+3.4%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "就业变化率",
-        "occupation_scope": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）该细分的预测标签「平均」",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4031",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a19-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 18,500 个（2024—2034 年累计，含增长与替换）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 17,100 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "职位空缺",
-        "occupation_scope": "O*NET 就业趋势页该细分 2024—2034 年累计空缺，说明含增长与替换需求",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4031",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a19-bls-projections"
         ]
       },
       {
@@ -37139,6 +37209,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "当时约 3,800–4,800 元/月，含个人缴纳社保与住房公积金。",
+        "fact_id": "posting-clerk-ningxia",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "宁夏法院聘用制书记员",
+        "period": "2023-09-15",
+        "source_refs": [
+          "clerk-ningxia"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "基本工资至少当地最低工资的 1.2 倍；另列绩效及等级津贴。",
+        "fact_id": "posting-clerk-jiangsu",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "江苏法院聘用制书记员",
+        "period": "2024",
+        "source_refs": [
+          "clerk-jiangsu"
+        ]
       }
     ]
   },
@@ -37165,19 +37259,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，增长 3%—4%，平均）"
+        "label": "美国预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 180,400 人）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国职位空缺（2024—2034 年，约 18,500 个）"
+        "label": "美国预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37191,17 +37285,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "法院、市政、执照文员（O*NET-SOC 43-4031.00）在法院、市政机构或执照窗口处理案件与公共记录、受理并审核申请：覆盖检查法律文书的合规、记录案件处置与法院命令、回答公众咨询、准备命令与传票、编制案件目录、维护法令与会议记录、发布公共通知、检索档案、评估许可申请并签发许可与收取费用；含美国 2025 年中位年薪 48,700 美元（时薪 23.41 美元）、2024 年约 180,400 人在岗、2024—2034 年就业预测平均（3%—4%）、中国大陆职业级工资与用工口径缺口，以及准确严谨、保密与职权边界、公众沟通压力的控制点。"
+      "text": "法院、市政和执照事务文员如何核材料、管记录？对照宁夏、江苏书记员历史公告及美国工资、就业。"
     },
     "title": {
       "availability": "available",
       "text": "法院、市政、执照文员"
     }
   },
-  "source_content_sha256": "0f3aecefd7487e01119e6a4f95620d9a1fd79355910ef2aa1d36d8ee8ad083b4",
+  "source_content_sha256": "51ba4c10a9217287e70241be2f4c2eaf462d344343b32cc7ac725956987b62d7",
   "subject": {
     "canonical_slug": "court-municipal-and-license-clerks",
     "name": "法院、市政、执照文员",
-    "summary": "法院、市政、执照文员在美国对应 O*NET-SOC 43-4031.00（Court, Municipal, and License Clerks）。核心是在法院、市政机构或执照窗口处理案件与公共记录、受理并审核申请：接收与检查提交给法院的法律文书是否符合法律与程序、记录案件处置与法院命令、回答公众关于程序出庭日期传票罚款的咨询、准备并发布法院命令与传票、编制待审案件目录；在市政侧维护法令决议与会议记录、发布公共通知、检索市政档案；在执照侧询问并记录申请人信息、评估申请是否完整准确并判断是否符合许可条件、签发结婚垂钓狩猎与养犬等许可并收取费用、对持证者做记录核查。中国侧，同类岗位分属法院书记员、机关文书与政务/许可窗口，与该美国职业细类不是一一对应，任职与计酬口径不能互换。"
+    "summary": "按所在机构要求登记申请或案件、核对材料、安排日程、维护案卷或公共记录。许可或法院事项的决定由获授权人员作出。美国统计同时覆盖法院、市政及执照事务。"
   }
 }

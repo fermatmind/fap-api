@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1542,7 +1539,7 @@
         "status": "pending_mapping"
       },
       "item:avionics-technicians.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:avionics-technicians.sources.source-card.1": {
         "status": "mapped"
@@ -23086,12 +23083,11 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：航空电子技术员不是「换件工」，而是安装、检查、测试、调整与维修航空器与航天器上雷达、无线电、导航与导弹控制等航空电子设备的技术岗位：按蓝图与手册与接线图规划安装、安装电气与电子组件与总成与系统、用电路测试仪与示波器与电压表测试并排查仪表与组件与总成、连接无线电系统与仪表与磁电机与逆变器与空中加油系统等总成、操作地面支持与测试设备执行功能性飞行试验、并保存维护与修理记录；只想凭感觉换件、不愿为测试数据与放行结论负责的人不适合。"
+              "航空电子技术员安装、检查和排查航空器的通信、导航等电子设备。航线作业关注系统与工卡；部件维修更看重台架记录、序列号和故障复现条件。维修作业、检查和签署放行的权限分别核对。"
             ]
           },
           "id": "avionics-technicians.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23101,12 +23097,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你能读懂接线图与维修手册并按规程使用手动工具与烙铁，愿意用仪器测量并如实记录数据与判断依据，能在系统状态或隔离措施不明、或涉及通电与射频辐射与易燃易爆与危险能量时停下来核实，并愿意与工程师与其他维修人员协调作业。"
+              "如果你愿意逐项核序列号和试验条件，并记录没有回答的问题，可以继续比较航线和部件维修。"
             ]
           },
           "id": "avionics-technicians.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23115,14 +23111,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停投入的条件：你还没有在任何有监督的条件下完成过一次完整的规划—安装—测试—排查—记录闭环，或只能靠「喜欢飞机电子」说明兴趣；也不要把会焊接电路板或做过消费电子维修当作可以独立放行航空器电子系统的证明。航空器维护与放行、射频与危险能量作业、以及适航放行签署必须由具相应授权的人员按适用法规与机构程序执行并留有可追溯依据；本页不提供安装、测试、维修或放行指令。"
+              "如果你不喜欢逐项核对编号、版本和试验条件，先用纸面练习确认自己能否把证据和未决项交接清楚。实际测试与放行按适用授权执行。"
             ]
           },
           "id": "avionics-technicians.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23131,13 +23125,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历与授权必须分开核对：O*NET 把 49-2091.00 列为 Job Zone Three（SVP 6.0 至 <7.0），页面公布的学历构成中 50% 为要求高中后证书、18% 为要求高中文凭或同等学历、16% 为要求副学士或其他两年制学位；该区大多数职业需要职业学校培训、相关在职经验或副学士学位，并要求先前相关工作技能与一到两年培训。美国侧航空器维护与放行受FAA 法规约束：为他人实施维护的机构须持修理站证书（14 CFR Part 145），监督与检验与批准恢复使用的人员通常须按 14 CFR Part 65 取得机械师或修理员证书。学历、培训、行业认证、机构上岗资格与放行授权是不同状态，须按雇主、岗位与法域逐项核验。"
+              "从「入行、资格与职业发展」打开「AV-21｜两份台架记录能否对应同一部件？」，90 分钟交一页复核交接单，写明两条原证编号、证据缺口、负责复核的人和下一项获准检查。只做虚构记录。"
             ]
           },
           "id": "avionics-technicians.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23146,12 +23139,11 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以按图纸与手册安装、以仪器测量排查、并对测试数据与放行结论负责的航空电子技术岗位，核心是规划与安装、测试与排查、协调与记录，而不是对电子产品的兴趣。"
+              "航空电子技术员安装、检查和排查航空器的通信、导航等电子设备。航线作业关注系统与工卡；部件维修更看重台架记录、序列号和故障复现条件。维修作业、检查和签署放行的权限分别核对。"
             ]
           },
           "id": "avionics-technicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23219,7 +23211,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜69% 持续与他人接触，66% 持续或几乎持续用手处理与控制或感觉物体与工具，64% 每天暴露于污染物，62% 每天在环境受控的室内工作，58% 每天需要面对面讨论，40% 每天在非环境受控的室内工作，34% 每天暴露于分散注意或不适的噪音，33% 持续或几乎持续做重复动作，32% 超过一半时间坐着，26% 从不佩戴常规防护或安全装备。\n主要装备与工具｜手动工具与烙铁、电路测试仪与示波器与电压表、地面支持与测试设备、计算机辅助制图与设计软件、测量与校准仪器、个人防护（护目镜、手套、听力保护、安全鞋、呼吸防护）。\n任务节奏｜79% 的典型工作周为 40 小时；66% 持续用手处理与控制工具，33% 持续或几乎持续做重复动作，32% 超过一半时间坐着；44% 每周至少一次但非每天面临时间压力。\n协作对象｜与设计工程师、其他航空电子技术员、机械与结构维修人员以及质量控制与检验人员协作；69% 持续与他人接触，52% 认为与工作组或团队合作极其重要，39% 对他人健康与安全承担高责任，49% 认为决策对同事或公司的结果是重要结果。\n竞争与压力｜37% 认为错误的后果非常严重，61% 认为精确或准确极其重要，45% 有很大的决策自由、32% 对任务与优先级与目标有一定自由，26% 每天需要作出决定。\n合规与安全｜安装与测试与维护须符合适用的适航与维护法规与机构程序；美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。 在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。\n记录与复盘｜依据文件与接线与测量与测试与调整与更换件需要可追溯；61% 认为精确或准确极其重要。\n技能与训练｜O*NET 把该职业列为 Job Zone Three（SVP 6.0 至 <7.0）；基本技能以批判性思维、积极倾听、口语表达、阅读理解与写作与监控为主；可迁移技能包含设备维护、修理、故障排查、运行监控与质量控制分析；知识以计算机与电子学、机械、英语语言、工程与技术、设计与通信为主；能力包含书面理解、信息排序、近距视力、口语理解、问题敏感性、演绎推理、手指灵巧度等（详细资料提供Importance，非频率）。\n准入与授权｜学历不等于作业或放行授权，行业认证也不等于可以在任何场所放行航空器电子系统；须按机构授权与适用法规执行。\n行业与雇主｜O*NET 行业分布为2025年制造38%、运输仓储37%、其他25%；常见雇主为航空器制造与改装单位、维修与修理站、航空公司机务以及无人机与航天器相关单位。\n问卷边界｜26%从不佩戴常规防护仅为群体回答，不能据此取消实际防护要求。新聘学历需求问卷50%高中后证书、18%高中或同等、16%副学士或其他两年制，不是在岗学历构成。Zone3/SVP6至<7一般描述通常一至两年培训，不是每岗固定年限；BLS EP本职业典型高中后非学位证书、相关经验None、在职培训None是统计分类，不免除岗位培训或法定资格。 OOH合并职业说明常见8或10小时班含夜间周末节假日，非所有航电岗位固定排班。"
+              "工作环境｜69% 持续与他人接触，66% 持续或几乎持续用手处理与控制或感觉物体与工具，64% 每天暴露于污染物，62% 每天在环境受控的室内工作，58% 每天需要面对面讨论，40% 每天在非环境受控的室内工作，34% 每天暴露于分散注意或不适的噪音，33% 持续或几乎持续做重复动作，32% 超过一半时间坐着，26% 从不佩戴常规防护或安全装备。\n主要装备与工具｜手动工具与烙铁、电路测试仪与示波器与电压表、地面支持与测试设备、计算机辅助制图与设计软件、测量与校准仪器、个人防护（护目镜、手套、听力保护、安全鞋、呼吸防护）。\n任务节奏｜79% 的典型工作周为 40 小时；66% 持续用手处理与控制工具，33% 持续或几乎持续做重复动作，32% 超过一半时间坐着；44% 每周至少一次但非每天面临时间压力。\n协作对象｜与设计工程师、其他航空电子技术员、机械与结构维修人员以及质量控制与检验人员协作；69% 持续与他人接触，52% 认为与工作组或团队合作极其重要，39% 对他人健康与安全承担高责任，49% 认为决策对同事或公司的结果是重要结果。\n竞争与压力｜37% 认为错误的后果非常严重，61% 认为精确或准确极其重要，45% 有很大的决策自由、32% 对任务与优先级与目标有一定自由，26% 每天需要作出决定。\n合规与安全｜维修、普通检验和签署放行分开核。大陆及美国按适用法域、主体和单位任务授权核。\n记录与复盘｜依据文件与接线与测量与测试与调整与更换件需要可追溯；61% 认为精确或准确极其重要。\n技能与训练｜O*NET 把该职业列为 Job Zone Three（SVP 6.0 至 <7.0）；基本技能以批判性思维、积极倾听、口语表达、阅读理解与写作与监控为主；可迁移技能包含设备维护、修理、故障排查、运行监控与质量控制分析；知识以计算机与电子学、机械、英语语言、工程与技术、设计与通信为主；能力包含书面理解、信息排序、近距视力、口语理解、问题敏感性、演绎推理、手指灵巧度等（详细资料提供Importance，非频率）。\n准入与授权｜学历不等于作业或放行授权，行业认证也不等于可以在任何场所放行航空器电子系统；须按机构授权与适用法规执行。\n行业与雇主｜O*NET 列制造业 38%、运输仓储 37%；其余约 25% 是余额，不能分配给任何具体行业。\n问卷边界｜26%从不佩戴常规防护仅为群体回答，不能据此取消实际防护要求。新聘学历需求问卷50%高中后证书、18%高中或同等、16%副学士或其他两年制，不是在岗学历构成。Zone3/SVP6至<7一般描述通常一至两年培训，不是每岗固定年限；BLS EP本职业典型高中后非学位证书、相关经验None、在职培训None是统计分类，不免除岗位培训或法定资格。 OOH合并职业说明常见8或10小时班含夜间周末节假日，非所有航电岗位固定排班。"
             ]
           },
           "id": "avionics-technicians.profile.work-context-block.1",
@@ -23287,15 +23279,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国精确职业工资仍证据不足。2022职业分类大典相关条目：6-23-03-05航空电气安装调试工（线路敷设端接装焊和设备测试）；-09飞机无线电设备安装调试工、-10飞机雷达安装调试工；6-31-02-02航空器机械维护员涉及通信导航测试，-03航空器部件修理工含电子电气部件，-05航空器外场维护员含通信雷达检查。为相关职责映射，不认定与49-2091全部航空器/航天器、导弹、无人机职责精确互认，也不是执照依据。 中国2025修订民用航空法自2026-07-01施行：第30条维修机构许可、第33条维修由取得许可机构或人员进行，第36/37条含维修人员等航空人员培训考核执照要求。具体岗位机型执照及放行条件仍须查主管细则；不把民用航空规则直接外推全部军用、航天或无人机对象，第34条无人机许可另有规定及例外。 2025国家统计局城镇单位行业年平均工资：制造业非私营113,594元、私营76,055元；交通运输仓储邮政133,981/73,133元；科研技术服务182,064/83,560元。依单位主要活动选门类，不由航电职位名直接分类；均非本职业中位数、月薪或起薪。 工资总额按款项性质含计时计件、奖金、津贴补贴和加班工资等，不能一概排轮班外勤及加班；税前年平均非个人到手收入。"
+              "成都空客是航电技术员雇主样本，广州航新是历史航空电子维修工程师样本；任务交叉不代表中美职业分类互认。全国精确职业工资仍缺，国家统计局行业工资只作背景。"
             ]
           },
           "id": "avionics-technicians.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "cn-class-2022",
-            "cn-civil-law-2025",
-            "nbs-wages-2025",
-            "cn-wage-definition"
+            "airbus",
+            "hangxin",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23319,13 +23310,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个、自雇4.2%。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。"
+              "美国 SOC 49-2091：2025 年 19,800 人，2035 年预计 21,600 人，增 9.4%。BLS 单独取整的净增为 1,900 人，年均约 1,700 个空缺，含替代需求。"
             ]
           },
           "id": "avionics-technicians.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -23349,14 +23339,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025本职业行业分布：制造38%、运输仓储37%、其他25%（含专业科学技术和政府）；不是中国雇主占比或行业工资。BLS OOH具体雇主门类另列航空产品零部件制造36%、航空运输支持29%、专业科学技术9%、航空运输8%、联邦政府6%，不可混用分类层级。 14类软件技能、12项热门技术；2025美国职业关联唯一招聘Office9%、Excel7%、Outlook4%、PowerPoint3%、Word2%、AutoCAD/Linux/SAP/C++各1%，Java/UNIX/Workday未公布。分母为职业关联唯一招聘，不是岗位使用率、中国要求或AI采用率。"
+              "制造业 38%、运输仓储 37% 为 O*NET 所列美国行业就业分布；其余约 25% 是这两类之外的余额，不代表任何具体细分行业。"
             ]
           },
           "id": "avionics-technicians.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "r2-pay-2",
-            "hr",
-            "ooh-current"
+            "onet",
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -23456,7 +23445,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "航空电子技术员（美国侧 O*NET 49-2091.00，Avionics Technicians）安装、检查、测试、调整或维修航空器或航天器上的航空电子设备，如雷达、无线电、导航与导弹控制系统。官方职责原文为「Install, inspect, test, adjust, or repair avionics equipment, such as radar, radio, navigation, and missile control systems in aircraft or space vehicles.」；O*NET 官方任务共 14 项（均为核心任务），包括使用手动工具或烙铁调整、修理或更换故障组件或总成（重要性 84）、依据蓝图与手册与接线图规划航空器总成与系统的安装（82）、保存维护和修理工作记录（82）、使用电路测试仪与示波器或电压表测试和排查仪表与组件与总成（82）、使用手动工具和烙铁把组件连接到无线电系统与仪表与磁电机与逆变器与空中加油系统等总成（80）、在航空器上安装电气和电子组件与总成与系统（78）、与工程师与技术人员及其他航空器维护人员协调工作（76）、设置和操作地面支持与测试设备对电气和电子系统进行功能性飞行测试（71）、使用手动工具或烙铁组装开关与电气控制器与接线盒等组件（70）、解读飞行测试数据以诊断故障和系统性性能问题（68）、按需制造零件和测试辅助工具（65）、操作计算机辅助制图和设计应用设计航空电子系统改装方案（58）、组装用于测试的电路与仪表与系统原型或模型（56），以及一项新增任务——在无人机等无人驾驶飞行器中执行航空电子设备的安装、测试、调整和修理（该新增任务未公布重要性分数）。该职业在美国属 Job Zone Three（SVP 6.0 至 <7.0）。本页不构成安装、测试、维修或放行指令，相关决定须由具相应资质与授权的人员按适用法规与机构程序执行。"
+              "航空电子技术员（美国侧 O*NET 49-2091.00，Avionics Technicians）安装、检查、测试、调整或维修航空器或航天器上的航空电子设备，如雷达、无线电、导航与导弹控制系统。官方职责原文为「Install, inspect, test, adjust, or repair avionics equipment, such as radar, radio, navigation, and missile control systems in aircraft or space vehicles.」；O*NET 官方任务共 14 项（13 项核心、1 项新增），包括使用手动工具或烙铁调整、修理或更换故障组件或总成（重要性 84）、依据蓝图与手册与接线图规划航空器总成与系统的安装（82）、保存维护和修理工作记录（82）、使用电路测试仪与示波器或电压表测试和排查仪表与组件与总成（82）、使用手动工具和烙铁把组件连接到无线电系统与仪表与磁电机与逆变器与空中加油系统等总成（80）、在航空器上安装电气和电子组件与总成与系统（78）、与工程师与技术人员及其他航空器维护人员协调工作（76）、设置和操作地面支持与测试设备对电气和电子系统进行功能性飞行测试（71）、使用手动工具或烙铁组装开关与电气控制器与接线盒等组件（70）、解读飞行测试数据以诊断故障和系统性性能问题（68）、按需制造零件和测试辅助工具（65）、操作计算机辅助制图和设计应用设计航空电子系统改装方案（58）、组装用于测试的电路与仪表与系统原型或模型（56），以及一项新增任务——在无人机等无人驾驶飞行器中执行航空电子设备的安装、测试、调整和修理（该新增任务未公布重要性分数）。该职业在美国属 Job Zone Three（SVP 6.0 至 <7.0）。本页不构成安装、测试、维修或放行指令，相关决定须由具相应资质与授权的人员按适用法规与机构程序执行。"
             ]
           },
           "id": "avionics-technicians.profile.definition-block.11",
@@ -23577,13 +23566,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 49-2091.00 列为 Job Zone Three（SVP 6.0 至 <7.0），该区大多数职业要求职业学校培训、相关在职经验或副学士学位，并要求先前相关工作技能、知识或经验，培训通常为一到两年并可能有受认可的学徒计划；页面公布的学历构成中 50% 为要求高中后证书、18% 为要求高中文凭或同等学历、16% 为要求副学士或其他两年制学位。O*NET 另列出 3 项注册学徒职位（Aircraft Mechanic, Electrical；Avionics Technician；Electrician, Aircraft）与多个Avionics Maintenance Technology/Technician 培训项目；认证页面列出 6 项行业认证（如 Aircraft Electronics Association 的Certified Aircraft Electronics Technician、ASTM International 的Aircraft Electronics Technician 与 Unmanned Aircraft Systems Certification、SpaceTEC 的 Certified Aerospace Technician、ETA International 的RADAR Electronics Technician 等）。中国大陆侧以航空电子与航空维修相关专业教育与岗位培训为主，具体要求由用人单位规定。"
+              "O*NET 新聘人员所需教育问卷：50% 回答高中后证书，18% 回答高中或同等，16% 回答两年制副学士等。Job Zone 3 是一组职业的一般准备说明。BLS 将航电技术员的典型美国入行学历归为高中后非学位证书，实际岗位条件由雇主及适用规则决定。"
             ]
           },
           "id": "avionics-technicians.profile.career-quick-answers-block.19",
           "source_refs": [
             "onet",
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -23607,13 +23596,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "学历、课程与培训、行业认证、注册学徒经历、机构内部上岗资格与作业授权是不同状态：学历不带来放行授权，认证也不等于可以独立放行航空器电子系统或在任何场所开展维护作业；美国侧为他人实施维护的机构须持修理站证书，监督与检验与批准恢复使用的人员通常须持机械师或修理员证书。"
+              "美国 FAA 不单发航电机械师等级。先核雇主、适用主体与任务范围，再分别查谁可以维修、谁可以检查、谁可以批准恢复使用。作为持证修理站运营时，才适用相应修理站证书要求；普通检验不等于恢复使用批准。 大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。"
             ]
           },
           "id": "avionics-technicians.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet",
-            "onet"
+            "faa-av",
+            "ecfr-43-3",
+            "ecfr-43-7",
+            "ecfr-145-5",
+            "ccar66"
           ],
           "type": "prose"
         },
@@ -23651,13 +23643,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧为 O*NET 49-2091.00（Avionics Technicians）；其工资与就业与行业数据为本职业口径，页面未声明取自其他职业。中国大陆侧本页未取得与该职业精确等价的公开职业条目，中文页面语言不构成中国等价职业或工资映射；比较时应先辨认岗位属于航空器制造与改装、维修单位、航空公司机务，还是无人机与航天器相关单位。"
+              "成都空客是航电技术员雇主样本，广州航新是历史航空电子维修工程师样本；任务交叉不代表中美职业分类互认。全国精确职业工资仍缺，国家统计局行业工资只作背景。"
             ]
           },
           "id": "avionics-technicians.profile.career-quick-answers-block.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "airbus",
+            "hangxin",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23680,13 +23673,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧学历构成以高中后证书为主（O*NET 页面公布的学历构成中 50% 为要求高中后证书、18% 为要求高中文凭或同等学历，另有 16% 为要求副学士或其他两年制学位），多数岗位要求先前相关工作技能与一到两年培训，并设有 3 项注册学徒职位与多个 Avionics Maintenance Technology/Technician培训项目；中国大陆以航空电子与航空维修相关专业教育与岗位培训为主，具体学历要求由用人单位规定。"
+              "O*NET 新聘人员所需教育问卷：50% 回答高中后证书，18% 回答高中或同等，16% 回答两年制副学士等。Job Zone 3 是一组职业的一般准备说明。BLS 将航电技术员的典型美国入行学历归为高中后非学位证书，实际岗位条件由雇主及适用规则决定。"
             ]
           },
           "id": "avionics-technicians.profile.career-quick-answers-block.26",
           "source_refs": [
             "onet",
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -23709,13 +23702,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "安装与测试与排查须按机构流程与适用法规执行。美国侧为他人实施维护的机构须持修理站证书（14 CFR Part 145，§145.5）；监督人员与被授权批准恢复使用的人员以及签署最终检验与维护放行的雇员，在美国境内须按 14 CFR Part 65 取得机械师或修理员证书（§145.153、§145.157、§145.213）。O*NET 认证页面另列出 6 项行业认证。中国大陆侧本页未取得精确等价的公开职业条目与准入依据，入职前核对岗前培训与作业授权与放行流程，不能从学历或认证直接推断。"
+              "美国 FAA 不单发航电机械师等级。先核雇主、适用主体与任务范围，再分别查谁可以维修、谁可以检查、谁可以批准恢复使用。作为持证修理站运营时，才适用相应修理站证书要求；普通检验不等于恢复使用批准。 大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。"
             ]
           },
           "id": "avionics-technicians.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "faa-av",
+            "ecfr-43-3",
+            "ecfr-43-7",
+            "ecfr-145-5",
+            "ccar66"
           ],
           "type": "prose"
         },
@@ -23768,7 +23764,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作情境显示 79% 的典型工作周为 40 小时、44% 每周一次以上面临时间压力、45% 有很大的决策自由、26% 每天需要作出决定、49% 认为决策对同事或公司的结果是重要结果；常见安排包含机库与生产线与值班排班与外勤。比较岗位时把任职方式、班次与加班办法写入书面条件。"
+              "工作情境显示 79% 的典型工作周为 40 小时、44% 每周至少一次但非每天面临时间压力、45% 有很大的决策自由、26% 每天需要作出决定、49% 认为决策对同事或公司的结果是重要结果；常见安排包含机库与生产线与值班排班与外勤。比较岗位时把任职方式、班次与加班办法写入书面条件。"
             ]
           },
           "id": "avionics-technicians.profile.career-quick-answers-block.32",
@@ -23798,7 +23794,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "机型与航电设备与测试设备与软件、以及适航与维护法规更新较快（O*NET 列出 14 类技术技能，其中 12 项标记为热门技术，页面按雇主招聘公告给出出现比例：Microsoft Office 9%、Microsoft Excel 7%、Microsoft Outlook 4%、Microsoft PowerPoint 3%、Microsoft Word 2%、Autodesk AutoCAD 1%、Linux 1%、SAP software 1%，其余为未公布比例），需要持续的继续培训与依据文件维护；入职前确认培训安排、作业授权与检验与返工复核机制。"
+              "O*NET 职业页列 14 类软件技能和 12 项热门技术。招聘软件要求因岗位而异；目录不测量个人使用频率或 AI 采用率。"
             ]
           },
           "id": "avionics-technicians.profile.career-quick-answers-block.34",
@@ -24442,13 +24438,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先在固定虚构材料上练熟规划—安装—测试—排查—归档闭环：给一份虚构的蓝图与接线图与手册摘录、一份安装与接线记录表与一份测量与测试数据表，按顺序写出依据文件与接线、测量值与测试数据、故障判断依据、调整与更换件与未决事项的写法，再谈岗位；同时核对目标岗位的作业与放行授权要求。"
+              "用本页 AV-21 的两份虚构记录试做：独立核身份、版本和试验条件，记录差异，再用题后参考自核。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -24472,17 +24467,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试验建议：在获准资料中试测手册检索、参数比对和记录草稿，核错漏与人工复核成本；尚未取得本职业提效实测。美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。"
+              "在允许使用的材料中，可试工具检索、比对记录与标记缺项。保留原件；作业、检验和恢复使用批准须由各自获授权的人员核。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.13",
           "source_refs": [
+            "faa-av",
             "ecfr-43-3",
-            "ecfr-43-7",
-            "ecfr-145-5",
-            "ecfr-145-157",
-            "ecfr-145-213",
-            "cn-civil-law-2025"
+            "ecfr-43-7"
           ],
           "type": "prose"
         },
@@ -24553,14 +24545,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得航电职业生成式AI采用率、提效或减员因果测量。资料检索、参数比对和记录草稿为编辑试验候选；职责描述和总体预测不能证明已部署或永不被替代。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "工具可整理虚构故障记录并标出编号或版本差异。应人工核对原件与试验条件，写明证据能支持什么，再由获授权人员决定下一步。现有证据不支持航电岗位的 AI 替代比例。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "source-fermatmind-ai-rubric",
             "onet"
           ],
           "type": "prose"
@@ -24670,7 +24660,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "14类软件技能、12项热门技术；2025美国职业关联唯一招聘Office9%、Excel7%、Outlook4%、PowerPoint3%、Word2%、AutoCAD/Linux/SAP/C++各1%，Java/UNIX/Workday未公布。分母为职业关联唯一招聘，不是岗位使用率、中国要求或AI采用率。"
+              "O*NET 职业页列 14 类软件技能和 12 项热门技术。招聘软件要求因岗位而异；目录不测量个人使用频率或 AI 采用率。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.26",
@@ -24699,13 +24689,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025本职业行业分布：制造38%、运输仓储37%、其他25%（含专业科学技术和政府）；不是中国雇主占比或行业工资。BLS OOH具体雇主门类另列航空产品零部件制造36%、航空运输支持29%、专业科学技术9%、航空运输8%、联邦政府6%，不可混用分类层级。"
+              "制造业 38%、运输仓储 37% 为 O*NET 所列美国行业就业分布；其余约 25% 是这两类之外的余额，不代表任何具体细分行业。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "r2-pay-2",
-            "ooh-current"
+            "onet",
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -25044,7 +25034,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "14类软件技能、12项热门技术；2025美国职业关联唯一招聘Office9%、Excel7%、Outlook4%、PowerPoint3%、Word2%、AutoCAD/Linux/SAP/C++各1%，Java/UNIX/Workday未公布。分母为职业关联唯一招聘，不是岗位使用率、中国要求或AI采用率。"
+              "O*NET 职业页列 14 类软件技能和 12 项热门技术。招聘软件要求因岗位而异；目录不测量个人使用频率或 AI 采用率。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.52",
@@ -25102,13 +25092,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个、自雇4.2%。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。"
+              "美国 SOC 49-2091：2025 年 19,800 人，2035 年预计 21,600 人，增 9.4%。BLS 单独取整的净增为 1,900 人，年均约 1,700 个空缺，含替代需求。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25159,13 +25148,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025本职业行业分布：制造38%、运输仓储37%、其他25%（含专业科学技术和政府）；不是中国雇主占比或行业工资。BLS OOH具体雇主门类另列航空产品零部件制造36%、航空运输支持29%、专业科学技术9%、航空运输8%、联邦政府6%，不可混用分类层级。"
+              "制造业 38%、运输仓储 37% 为 O*NET 所列美国行业就业分布；其余约 25% 是这两类之外的余额，不代表任何具体细分行业。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "r2-pay-2",
-            "ooh-current"
+            "onet",
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -25189,13 +25178,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "取决于机构的测试设备与工具链、机型与数据保护规范、以及上岗与复核安排；本页不推测采用进度，也没有该职业的采用率统计。"
+              "是否采用工具取决于单位的数据保护、设备与复核安排。本页来源未提供航电岗位采用率。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
-            "onet"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -25204,13 +25192,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个、自雇4.2%。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。"
+              "美国 SOC 49-2091：2025 年 19,800 人，2035 年预计 21,600 人，增 9.4%。BLS 单独取整的净增为 1,900 人，年均约 1,700 个空缺，含替代需求。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25308,13 +25295,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个、自雇4.2%。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。"
+              "美国 SOC 49-2091：2025 年 19,800 人，2035 年预计 21,600 人，增 9.4%。BLS 单独取整的净增为 1,900 人，年均约 1,700 个空缺，含替代需求。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25338,7 +25324,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。 在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。 工具输出不能自动赋予签署权限；本轮未完整取得自动判定系统审批条件，不由职责清单推永久技术不可能。"
+              "美国 FAA 不单发航电机械师等级。先核雇主、适用主体与任务范围，再分别查谁可以维修、谁可以检查、谁可以批准恢复使用。作为持证修理站运营时，才适用相应修理站证书要求；普通检验不等于恢复使用批准。 大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.72",
@@ -25371,13 +25357,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "所读资料未提供岗位消失年份；美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个、自雇4.2%。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。"
+              "美国 SOC 49-2091：2025 年 19,800 人，2035 年预计 21,600 人，增 9.4%。BLS 单独取整的净增为 1,900 人，年均约 1,700 个空缺，含替代需求。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25506,7 +25491,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。 在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。 中国2025修订民用航空法自2026-07-01施行：第30条维修机构许可、第33条维修由取得许可机构或人员进行，第36/37条含维修人员等航空人员培训考核执照要求。具体岗位机型执照及放行条件仍须查主管细则；不把民用航空规则直接外推全部军用、航天或无人机对象，第34条无人机许可另有规定及例外。"
+              "美国 FAA 不单发航电机械师等级。先核雇主、适用主体与任务范围，再分别查谁可以维修、谁可以检查、谁可以批准恢复使用。作为持证修理站运营时，才适用相应修理站证书要求；普通检验不等于恢复使用批准。 大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。"
             ]
           },
           "id": "avionics-technicians.ai-impact.ai-impact-table.83",
@@ -26096,12 +26081,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国精确分类互认和全国职业工资仍未取得，相关中国职责有公开条目可参考。2022职业分类大典相关条目：6-23-03-05航空电气安装调试工（线路敷设端接装焊和设备测试）；-09飞机无线电设备安装调试工、-10飞机雷达安装调试工；6-31-02-02航空器机械维护员涉及通信导航测试，-03航空器部件修理工含电子电气部件，-05航空器外场维护员含通信雷达检查。为相关职责映射，不认定与49-2091全部航空器/航天器、导弹、无人机职责精确互认，也不是执照依据。"
+              "成都空客是航电技术员雇主样本，广州航新是历史航空电子维修工程师样本；任务交叉不代表中美职业分类互认。全国精确职业工资仍缺，国家统计局行业工资只作背景。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "cn-class-2022"
+            "airbus",
+            "hangxin",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26110,12 +26097,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮取得2022大典相关制造与维修条目，但未证明49-2091全范围精确对应，也未取得全国或城市职业工资分布；以下宽行业均值不能当职业中位数。"
+              "两份具名招聘用于比较工作内容与任职条件。广州金额只对应该历史岗位；中国大陆全国与城市的精确职业工资仍缺。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "cn-class-2022"
+            "airbus",
+            "hangxin"
           ],
           "type": "prose"
         },
@@ -26292,12 +26280,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "精确职业工资证据不足；相关中国分类、民航法及2025行业均值作为有边界参考。"
+              "成都空客是航电技术员雇主样本，广州航新是历史航空电子维修工程师样本；任务交叉不代表中美职业分类互认。全国精确职业工资仍缺，国家统计局行业工资只作背景。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "nbs-wages-2025"
+            "airbus",
+            "hangxin",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26335,12 +26325,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2022职业分类大典相关条目：6-23-03-05航空电气安装调试工（线路敷设端接装焊和设备测试）；-09飞机无线电设备安装调试工、-10飞机雷达安装调试工；6-31-02-02航空器机械维护员涉及通信导航测试，-03航空器部件修理工含电子电气部件，-05航空器外场维护员含通信雷达检查。为相关职责映射，不认定与49-2091全部航空器/航天器、导弹、无人机职责精确互认，也不是执照依据。"
+              "成都空客是航电技术员雇主样本，广州航新是历史航空电子维修工程师样本；任务交叉不代表中美职业分类互认。全国精确职业工资仍缺，国家统计局行业工资只作背景。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "cn-class-2022"
+            "airbus",
+            "hangxin",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26364,13 +26356,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "航空器制造与改装单位与维修与修理站的航电岗位。"
+              "航线航电：成都空客样本"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "airbus"
           ],
           "type": "prose"
         },
@@ -26379,13 +26370,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "学历与岗位序列是两条不同路径；学历不等于作业授权或放行权限。"
+              "成都空客航电技术员招聘样本要求相关专业大专或相当的航空学校教育、五年以上飞机维修经历和 CCAR-66 TA，并要求基本英语。岗位在工程师指导下做航电作业，可按分工签部分工卡；招聘页未列薪酬。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "airbus"
           ],
           "type": "prose"
         },
@@ -26409,13 +26399,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "航空公司机务与无人机与航天器单位的航电岗位。"
+              "部件维修：广州航新历史样本"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "hangxin"
           ],
           "type": "prose"
         },
@@ -26424,13 +26413,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "用人单位类型与作业范围不同（制造、维修、机务、无人机），岗位名称与职责须在录用条件中确认。"
+              "广州市黄埔区 2023 年 9 月发布的广州航新招聘样本：航空电子维修工程师 4 人，10,000–20,000 元/月，涉及航电部件维修和测试设备制作。该范围仅对应这则历史招聘。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "hangxin"
           ],
           "type": "prose"
         },
@@ -26469,7 +26457,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国2025修订民用航空法自2026-07-01施行：第30条维修机构许可、第33条维修由取得许可机构或人员进行，第36/37条含维修人员等航空人员培训考核执照要求。具体岗位机型执照及放行条件仍须查主管细则；不把民用航空规则直接外推全部军用、航天或无人机对象，第34条无人机许可另有规定及例外。 美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。 在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。"
+              "美国 FAA 不单发航电机械师等级。先核雇主、适用主体与任务范围，再分别查谁可以维修、谁可以检查、谁可以批准恢复使用。作为持证修理站运营时，才适用相应修理站证书要求；普通检验不等于恢复使用批准。 大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.33",
@@ -26651,13 +26639,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "场景比较需要用人单位类型与作业范围与任职职级一致；本页不提供本职业的精确月薪区间。"
+              "两地招聘的金额与条件"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "hangxin"
           ],
           "type": "prose"
         },
@@ -26666,13 +26653,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "核对报酬时先确认用人单位类型、岗位职责与作业与放行授权范围，以及任职与职级与轮班与补贴安排；不要把海外数字换算成人民币预期，也不要采信缺少样本与岗位范围与期间的报价。"
+              "广州市黄埔区 2023 年 9 月发布的广州航新招聘样本：航空电子维修工程师 4 人，10,000–20,000 元/月，涉及航电部件维修和测试设备制作。该范围仅对应这则历史招聘。 成都空客航电技术员招聘样本要求相关专业大专或相当的航空学校教育、五年以上飞机维修经历和 CCAR-66 TA，并要求基本英语。岗位在工程师指导下做航电作业，可按分工签部分工卡；招聘页未列薪酬。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "hangxin",
+            "airbus"
           ],
           "type": "prose"
         },
@@ -26695,13 +26682,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆航空电子技术员的精确月薪区间；同名或近名岗位的用人单位类型与作业范围差异较大，比较时须把任职与职级、轮班安排、作业与放行授权与责任范围纳入书面条件。"
+              "国家统计局 2025 年城镇非私营单位制造业平均年工资 113,594 元，科学研究和技术服务业 182,064 元。行业均值不提供航电技术员全国工资分布。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26724,12 +26710,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得全国精确职业月薪分布；相关职责条目不等于精确互认。"
+              "国家统计局 2025 年城镇非私营单位制造业平均年工资 113,594 元，科学研究和技术服务业 182,064 元。行业均值不提供航电技术员全国工资分布。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26752,12 +26738,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可核验的城市级职业收入数据，本页不出示城市排名。"
+              "一则广州历史招聘给出薪资，不能据此排列城市工资。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "hangxin"
           ],
           "type": "prose"
         },
@@ -26794,12 +26780,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2022职业分类大典相关条目：6-23-03-05航空电气安装调试工（线路敷设端接装焊和设备测试）；-09飞机无线电设备安装调试工、-10飞机雷达安装调试工；6-31-02-02航空器机械维护员涉及通信导航测试，-03航空器部件修理工含电子电气部件，-05航空器外场维护员含通信雷达检查。为相关职责映射，不认定与49-2091全部航空器/航天器、导弹、无人机职责精确互认，也不是执照依据。 美国49-2091工资、就业为本职业口径；不能靠中文名称等价映射。"
+              "成都空客是航电技术员雇主样本，广州航新是历史航空电子维修工程师样本；任务交叉不代表中美职业分类互认。全国精确职业工资仍缺，国家统计局行业工资只作背景。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "cn-class-2022"
+            "airbus",
+            "hangxin",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27034,7 +27022,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个、自雇4.2%。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。"
+              "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。"
             ]
           },
           "id": "avionics-technicians.us-salary.career-snapshot-secondary-locale.20",
@@ -27068,7 +27056,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个、自雇4.2%。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。"
+              "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。"
             ]
           },
           "id": "avionics-technicians.us-salary.career-snapshot-secondary-locale.22",
@@ -27286,7 +27274,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH航电行业表，非飞机机械师工资或全行业工资。"
+              "BLS 手册航电分项，2025 年 5 月。"
             ]
           },
           "id": "avionics-technicians.us-salary.career-snapshot-secondary-locale.36",
@@ -27328,7 +27316,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH航电表，非整个制造业中位或个人薪酬承诺。"
+              "BLS 手册航电分项，2025 年 5 月。"
             ]
           },
           "id": "avionics-technicians.us-salary.career-snapshot-secondary-locale.39",
@@ -27370,7 +27358,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH航电行业表，行业分类与认证职责不可混为同一收入分组。"
+              "BLS 手册航电分项，2025 年 5 月。"
             ]
           },
           "id": "avionics-technicians.us-salary.career-snapshot-secondary-locale.42",
@@ -27412,14 +27400,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS含基本工资、佣金、生产奖金、小费等，排加班溢价、轮班差额和非生产奖金等，补贴按性质判断。自雇、非公司制企业所有者和合伙人及无酬家庭劳动者排除，有薪公司负责人不因职务自动排除；受雇承包企业员工不等于自雇。"
+              "BLS 手册航电分项，2025 年 5 月。"
             ]
           },
           "id": "avionics-technicians.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "oews",
-            "oews-method",
-            "bls",
             "ooh-current"
           ],
           "type": "prose"
@@ -27569,7 +27554,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27581,19 +27566,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "商业与工业设备电气电子维修工",
@@ -29079,12 +29064,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国持证修理站§145.109要求用于适航判定的测试检验设备工具按FAA认可标准校准、所需数据当前且可访问。具体校准周期与异常停用恢复程序仍须核设备和机型规程，记录字段为编辑建议。"
+              "在实际获准作业中，先核单位对设备校准、文件版本与异常上报的适用程序。不要用纸面练习代替设备核验。"
             ]
           },
           "id": "avionics-technicians.risk.career-risk-cards.29",
           "source_refs": [
-            "ecfr-145-109"
+            "faa-av"
           ],
           "type": "prose"
         },
@@ -29138,7 +29123,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。 在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。 §65.101一般修理员申请须至少18岁、具特定工作能力、由符合条款的修理站/运营人/承运人雇用并向主管推荐，具18个月经验或主管认可正式培训及英语条件（境外限定有例外）。§65.103仅可为原雇用并推荐的雇主履行指定维修职责，须理解当前适航及维修指令；雇主推荐不等于雇主自行签发FAA证书。"
+              "美国 FAA 不单发航电机械师等级。先核雇主、适用主体与任务范围，再分别查谁可以维修、谁可以检查、谁可以批准恢复使用。作为持证修理站运营时，才适用相应修理站证书要求；普通检验不等于恢复使用批准。 大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。"
             ]
           },
           "id": "avionics-technicians.risk.career-risk-cards.33",
@@ -29274,35 +29259,35 @@
               [
                 "航电安装岗",
                 "在有监督下按依据文件规划与安装电气与电子组件与总成，完成接线与固定并记录。",
-                "编辑核对项：核对依据文件阅读与接线与工具使用与记录规范程度；上岗资格由机构岗前培训与考核决定。 本轮没有具体雇主招聘样本。",
+                "成都空客航电技术员招聘样本要求相关专业大专或相当的航空学校教育、五年以上飞机维修经历和 CCAR-66 TA，并要求基本英语。岗位在工程师指导下做航电作业，可按分工签部分工卡；招聘页未列薪酬。",
                 "提交一份含虚构机型、接线图与安装记录与固定与接地说明的作业说明，不使用真实机型资料。",
                 "安装岗不承担放行决定；涉及航空器维护与放行须由有授权人员确认。"
               ],
               [
                 "测试与排查岗",
                 "使用电路测试仪与示波器与电压表测量与排查，设置并操作地面支持与测试设备执行功能性试验。",
-                "编辑核对项：核对电路与电子学基础、仪器使用与测试数据解读能力。 本轮没有具体雇主招聘样本。",
+                "广州市黄埔区 2023 年 9 月发布的广州航新招聘样本：航空电子维修工程师 4 人，10,000–20,000 元/月，涉及航电部件维修和测试设备制作。该范围仅对应这则历史招聘。",
                 "提交一份含测量值、测试数据与规格对照、判断依据与结论的虚构测试记录。",
                 "测试结论须经实测与依据文件验证；不得用系统建议替代判断。"
               ],
               [
                 "改装设计支持岗",
                 "操作计算机辅助制图与设计应用，支持航空电子系统改装方案设计。",
-                "编辑核对项：核对制图与系统知识与技术数据使用能力。 本轮没有具体雇主招聘样本。",
+                "两则样本不覆盖改装设计。按雇主核图纸和变更权限。",
                 "提交一份含改造目标、接线与布线与校核项的虚构改装方案说明。",
                 "方案须经工程与适航符合性确认；设计支持不等于设计批准。"
               ],
               [
                 "无人机与新型平台航电岗",
                 "在无人机等无人驾驶飞行器中安装与测试与调整与修理航空电子设备。",
-                "编辑核对项：核对新型平台知识与设备使用与测试能力。 本轮没有具体雇主招聘样本。",
+                "两则样本不覆盖无人机或航天项目。按平台核资质。",
                 "提交一份含设备清单、安装与测试步骤与合规边界的虚构作业方案。",
                 "新型平台合规须按适用法规与授权执行；本页不提供作业指令。"
               ],
               [
                 "修理站检验与放行支持岗",
                 "按机构质量控制体系完成检验与记录，支持维护放行流程。",
-                "编辑核对项：按具体岗位区分监督、普通检验及最终签署要求；看规程意识与检验能力。 本轮没有具体雇主招聘样本。",
+                "先核单位的维修范围、检验授权及放行签署权限。",
                 "提交一份含检验项目、测量与测试结果、放行或退回依据的虚构检验记录。",
                 "放行签署须由具授权人员作出；本页不提供放行指令。"
               ]
@@ -29310,9 +29295,11 @@
           },
           "id": "avionics-technicians.path.entry-role-comparison.1",
           "source_refs": [
+            "airbus",
+            "hangxin",
             "onet",
-            "onet",
-            "onet"
+            "ccar66",
+            "faa-av"
           ],
           "title": "岗位方向与起步任务比较",
           "type": "table"
@@ -29327,14 +29314,14 @@
                 "values": [
                   "新聘学历需求问卷50%高中后证书、18%高中或同等、16%副学士或其他两年制，不是在岗学历构成。Zone3/SVP6至<7一般描述通常一至两年培训，不是每岗固定年限；BLS EP本职业典型高中后非学位证书、相关经验None、在职培训None是统计分类，不免除岗位培训或法定资格。",
                   "O*NET列3个经行业审查且获DOL认可的注册学徒示例职位：Aircraft Mechanic, Electrical、Avionics Technician、Electrician, Aircraft；不表示当前有开放名额。培训目录本轮显示56项目，可作课程检索入口，结业非FAA法定权限。",
-                  "中国相关职责与许可分别核：2022职业分类大典相关条目：6-23-03-05航空电气安装调试工（线路敷设端接装焊和设备测试）；-09飞机无线电设备安装调试工、-10飞机雷达安装调试工；6-31-02-02航空器机械维护员涉及通信导航测试，-03航空器部件修理工含电子电气部件，-05航空器外场维护员含通信雷达检查。为相关职责映射，不认定与49-2091全部航空器/航天器、导弹、无人机职责精确互认，也不是执照依据。 中国2025修订民用航空法自2026-07-01施行：第30条维修机构许可、第33条维修由取得许可机构或人员进行，第36/37条含维修人员等航空人员培训考核执照要求。具体岗位机型执照及放行条件仍须查主管细则；不把民用航空规则直接外推全部军用、航天或无人机对象，第34条无人机许可另有规定及例外。"
+                  "成都空客是航电技术员雇主样本，广州航新是历史航空电子维修工程师样本；任务交叉不代表中美职业分类互认。全国精确职业工资仍缺，国家统计局行业工资只作背景。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
                   "安装与测试与排查须按机构流程与适用法规执行；涉及航空器维护与放行与射频与危险能量的作业决定须由具相应资质与授权的人员作出。",
-                  "美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。 在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。 §65.101一般修理员申请须至少18岁、具特定工作能力、由符合条款的修理站/运营人/承运人雇用并向主管推荐，具18个月经验或主管认可正式培训及英语条件（境外限定有例外）。§65.103仅可为原雇用并推荐的雇主履行指定维修职责，须理解当前适航及维修指令；雇主推荐不等于雇主自行签发FAA证书。 中国2025修订民用航空法自2026-07-01施行：第30条维修机构许可、第33条维修由取得许可机构或人员进行，第36/37条含维修人员等航空人员培训考核执照要求。具体岗位机型执照及放行条件仍须查主管细则；不把民用航空规则直接外推全部军用、航天或无人机对象，第34条无人机许可另有规定及例外。",
+                  "美国 FAA 不单发航电机械师等级。先核雇主、适用主体与任务范围，再分别查谁可以维修、谁可以检查、谁可以批准恢复使用。作为持证修理站运营时，才适用相应修理站证书要求；普通检验不等于恢复使用批准。 大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。",
                   "机型与受修单位与测试数据可能涉及敏感信息，信息安全与保密要求因机构而异，须在入职前确认访问范围与合规义务。"
                 ]
               },
@@ -29350,7 +29337,7 @@
                 "id": "tools",
                 "values": [
                   "手动工具与烙铁、电路测试仪与示波器与电压表、地面支持与测试设备、计算机辅助制图与设计软件、测量与校准仪器、个人防护（护目镜、手套、听力保护、安全鞋、呼吸防护）。",
-                  "14类软件技能、12项热门技术；2025美国职业关联唯一招聘Office9%、Excel7%、Outlook4%、PowerPoint3%、Word2%、AutoCAD/Linux/SAP/C++各1%，Java/UNIX/Workday未公布。分母为职业关联唯一招聘，不是岗位使用率、中国要求或AI采用率。",
+                  "O*NET 职业页列 14 类软件技能和 12 项热门技术。招聘软件要求因岗位而异；目录不测量个人使用频率或 AI 采用率。",
                   "把测试设备与数据与记录工具用于安装与测试与放行流程前，须确认设备校准状态、机型数据保护与人工复核安排。"
                 ]
               }
@@ -29385,42 +29372,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份机型与依据文件说明、一份接线图与安装记录表、一份测量与测试数据表与一份维护记录模板。",
-                  "全部材料为虚构，不含真实机型资料、检修与测试数据、影像或内部资料。",
-                  "全部材料与场景为虚构，不得使用真实机型资料、检修与测试数据、影像或内部资料。"
+                  "题面：虚构航电接收机部件 R7，两份原始记录无需设备即可复核。",
+                  "故障报告 A：R7，序列号 S-14，版本 B，间歇性接收机告警。未附告警出现时的运行条件。",
+                  "台架记录 B：R7，序列号 S-41，版本 B，仅常规条件，记录「未复现」。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构机型写清安装顺序与接线与固定与接地方法、测量与测试数据与规格对照、故障判断依据与调整与更换件与未决事项，以及需要复核与需要授权的环节。",
-                  "在 60—90 分钟内完成，允许参考公开的通用航电资料，但不使用真实机型资料。",
-                  "记录中把机型与依据文件、接线与安装、测量与测试数据、故障判断依据、调整与更换件分开书写，并标注需复核的部分。"
+                  "主问题：对照记录 A 与 B。写明这份台架记录能说明什么，不能说明什么。",
+                  "变式：资料负责人用原件证明 B 的序列号应为 S-14。只改这一个字段，你会改哪些结论？",
+                  "交一页复核交接单，写明两条原证编号、证据缺口、负责复核的人和下一项获准检查。先写主问题和变式，再看参考。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先核对机型与依据文件与作业范围，再按接线图安装与测量与测试，最后写明结论与未决事项。",
-                  "把机型与依据文件、接线与安装、测量与测试数据、故障判断依据、调整与更换件分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核接线与测量与故障判断结论，并保留修改理由。"
+                  "独立交两版",
+                  "交两版和一页复核交接单，列原证编号、缺口、复核人和下一项获准检查。",
+                  "交卷后展开常见问题「AV-21 复核交接参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成安装、测试、维修或放行指令，也不能替代机构规程与作业授权。",
-                  "不得在练习中接触真实航空器或操作真实通电与射频与测试设备；涉及航空器维护与放行与危险能量的作业须由有权限人员按规程处理。",
-                  "练习不替代机构规程与作业授权，也不构成任何安装、测试、维修或放行指令。"
+                  "分别记录原版与单项变式的依据和未决项。",
+                  "保留原记录和更正依据，不操作真实设备。",
+                  "自查：身份、版本、运行条件、结论边界和复核对象五项都要交代。"
                 ]
               }
             ]
           },
           "id": "avionics-technicians.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "AV-21｜两份台架记录能否对应同一部件？",
           "type": "cards"
         },
         {
@@ -29431,37 +29418,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：学历与专业培训与实训、注册学徒经历、行业认证（AEA Certified Aircraft Electronics Technician、ASTM Aircraft Electronics Technician 与 UAS Certification、SpaceTEC Certified Aerospace Technician、ETA RADAR Electronics Technician 等）、机械师或修理员证书（14 CFR Part 65）与修理站证书（14 CFR Part 145）、机构上岗资格与放行授权、以及安全与防护与数据保护培训。",
-                  "每项都注明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「专业培训」「行业认证」「机械师或修理员证书」「带教或学徒经历」「机构上岗资格」「作业与放行授权」分列，避免混为一谈。"
+                  "保留两条原证与更正轨迹。",
+                  "标记差异、未决项及复核人。",
+                  "最终交一页复核交接单，写明两条原证编号、证据缺口、负责复核的人和下一项获准检查。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的作业说明，重点检查机型与依据文件核对、接线与安装与接地、测量与测试数据与规格对照、故障判断依据与调整与更换件是否逐项写清。",
-                  "把复核意见与修改理由一并保留，作为判断你能否接受检验与复核的证据。"
+                  "保留两条原证与更正轨迹。",
+                  "标记差异、未决项及复核人。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明机型与依据、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给同伴与主管与检验人员复核，并保留复核意见与修改理由。"
+                  "保留两条原证与更正轨迹。",
+                  "标记差异、未决项及复核人。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用测试设备或制图或数据处理工具，须注明工具名称与版本与校准状态、输入与依据与人工修改理由。",
-                  "机型与检修与测试数据与影像处理须先取得授权，并记录访问范围、保留期限与销毁约定。"
+                  "保留两条原证与更正轨迹。",
+                  "标记差异、未决项及复核人。"
                 ]
               }
             ]
           },
           "id": "avionics-technicians.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29525,57 +29512,60 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与边界阅读：读 O*NET 49-2091.00 与公开的航空电子与维护与放行法规资料，写清安装、测试与排查、维护放行与作业授权的区别。",
-                  "产出：一页术语与流程对照表，标注每项的来源。"
+                  "第1天",
+                  "读 O*NET 任务页和成都或广州招聘，记两项任务差别和一项授权问题。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "依据文件练习：为虚构机型写清蓝图与手册与接线图的阅读顺序与安装方案要点。",
-                  "产出：一份依据文件与安装方案说明。"
+                  "第2天",
+                  "抄 A、B 的部件号、序列号、版本、现象与条件，保留原文。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "安装与总装练习：为虚构系统写清连接与安装顺序、接线与固定与接地与屏蔽要点。",
-                  "产出：一份安装与接线记录。"
+                  "第3天",
+                  "标出冲突与缺项，写清 A、B 分别能证明什么。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "测量与测试练习：为虚构系统写清测量方法与测试项目、规格对照与判定界限。",
-                  "产出：一份测量与测试数据记录。"
+                  "第4天",
+                  "给每项缺口指定应复核的人和须找的原件。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "排查与调整练习：为虚构故障写清测试数据解读、故障定位、调整或更换与复测与未决事项。",
-                  "产出：一份排查与调整说明。"
+                  "第5天",
+                  "做序列号更正变式，单独标记仍未解决的条件。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的接线与测量与故障判断结论，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "第6天",
+                  "不看参考，独立完成原版与单项变式。 交两版和一页复核交接单，列原证编号、缺口、复核人和下一项获准检查。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "第7天",
+                  "展开常见问题「AV-21 复核交接参考解（交卷后再打开）」，记录一处差异或无差异，再决定下一步探索方向。"
                 ]
               }
             ]
           },
           "id": "avionics-technicians.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor",
+            "onet",
+            "airbus",
+            "hangxin"
           ],
           "title": "七日体验产出",
           "type": "timeline"
@@ -29585,13 +29575,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你完成了七日练习并发现自己在依据文件阅读与安装与测试与排查与记录上可持续投入。",
+              "继续：能独立交 AV-21 复核单，且愿意查实际岗位的任务与授权。",
               "继续：你能接受轮班与试飞支持排班与狭小空间作业，并愿意按规程记录与接受复核。",
               "暂停：你只想尽快完工，不愿按依据文件核对接线与实测数据。",
               "暂停：你把「通电后正常」当作已完成系统验证，或在航空器维护与放行与射频与危险能量作业上跳过复核与授权。",
               "换方向：你更愿意做整机与机体系统维护，可比较飞机机械师技术员方向。",
               "换方向：你更愿意做计量与校准，可比较校准技术员方向。",
-              "信息不足：如果你还没有任何有监督的安装或测试经历，先补这两项再判断。"
+              "先暂缓设备投入：缺现场证据时先比较监督培训及雇主要求。"
             ]
           },
           "id": "avionics-technicians.path.seven-day-decision.1",
@@ -29665,7 +29655,7 @@
                 "依法承担维修、修理站监督或最终签署等指定职责的主体",
                 "按主体、等级、地点和任务核权限，不由学历或内部授权自动推出。",
                 "特定主体和岗位条件，非所有航电人员统一证书。",
-                "美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。 在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。 §65.101一般修理员申请须至少18岁、具特定工作能力、由符合条款的修理站/运营人/承运人雇用并向主管推荐，具18个月经验或主管认可正式培训及英语条件（境外限定有例外）。§65.103仅可为原雇用并推荐的雇主履行指定维修职责，须理解当前适航及维修指令；雇主推荐不等于雇主自行签发FAA证书。",
+                "美国 FAA 不单发航电机械师等级。先核雇主、适用主体与任务范围，再分别查谁可以维修、谁可以检查、谁可以批准恢复使用。作为持证修理站运营时，才适用相应修理站证书要求；普通检验不等于恢复使用批准。",
                 "实际申请、训练和证书维护条件按相应主体规则核。",
                 "普通检验、监督、最终签署分开；境内外条件不同，修理员指定雇主和工作不自动转移。"
               ],
@@ -29706,29 +29696,19 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界：学历、职业院校或培训机构培训、注册学徒经历（Aircraft Mechanic, Electrical；Avionics Technician；Electrician, Aircraft）、行业认证（Aircraft Electronics Association 的 Certified Aircraft Electronics Technician、ASTM International 的 Aircraft Electronics Technician 与 Unmanned Aircraft Systems Certification、SpaceTEC 的 Certified Aerospace Technician、ETA International 的 RADAR Electronics Technician 等）、机械师或修理员证书（14 CFR Part 65）、以及机构内部上岗资格与放行授权是不同状态，任何一项都不能由另一项自动推出。",
-              "新聘学历需求问卷50%高中后证书、18%高中或同等、16%副学士或其他两年制，不是在岗学历构成。Zone3/SVP6至<7一般描述通常一至两年培训，不是每岗固定年限；BLS EP本职业典型高中后非学位证书、相关经验None、在职培训None是统计分类，不免除岗位培训或法定资格。 美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。 在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。 §65.101一般修理员申请须至少18岁、具特定工作能力、由符合条款的修理站/运营人/承运人雇用并向主管推荐，具18个月经验或主管认可正式培训及英语条件（境外限定有例外）。§65.103仅可为原雇用并推荐的雇主履行指定维修职责，须理解当前适航及维修指令；雇主推荐不等于雇主自行签发FAA证书。 当前认证目录6项，不是统一上岗证。",
-              "2022职业分类大典相关条目：6-23-03-05航空电气安装调试工（线路敷设端接装焊和设备测试）；-09飞机无线电设备安装调试工、-10飞机雷达安装调试工；6-31-02-02航空器机械维护员涉及通信导航测试，-03航空器部件修理工含电子电气部件，-05航空器外场维护员含通信雷达检查。为相关职责映射，不认定与49-2091全部航空器/航天器、导弹、无人机职责精确互认，也不是执照依据。 中国2025修订民用航空法自2026-07-01施行：第30条维修机构许可、第33条维修由取得许可机构或人员进行，第36/37条含维修人员等航空人员培训考核执照要求。具体岗位机型执照及放行条件仍须查主管细则；不把民用航空规则直接外推全部军用、航天或无人机对象，第34条无人机许可另有规定及例外。",
-              "操作建议：入职前把「学历／培训／带教或学徒经历／行业认证／机械师或修理员证书／机构上岗资格与作业与放行授权」分列成一张表，逐项写明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。"
+              "BLS 对美国职业的典型入行教育分类为高中后非学位证书。招聘条件和具体作业授权另核。",
+              "美国 FAA 不单发一种航电机械师等级。核实际任务与适用规则：14 CFR §§43.3 和 43.7 分别列出可作业与可批准恢复使用的人员或机构，Part 65 和修理站规则另有限定。",
+              "大陆民航维修执照的通用学历门槛为大专及以上。CCAR-66-R3 第 66.6 条的经历条件可由至少一年经授权相关维修工作满足（不含培训、实习），或由理工科大专及以上并完成适用实作培训满足。复杂航空器放行还要核对应航空器型号的签署和单位授权；首次类别机型签署须在通过机型维修培训和考试后完成至少连续六个月实习。",
+              "可把单位、设备范围、监督者、工卡签署和放行人写成五列，在入职前逐项核对。"
             ]
           },
           "id": "avionics-technicians.path.credential-boundary.1",
           "source_refs": [
-            "bls",
             "ep-current",
-            "census",
-            "nist",
+            "faa-av",
+            "ccar66",
             "ecfr-43-3",
-            "ecfr-43-7",
-            "ecfr-145-5",
-            "ecfr-145-153",
-            "ecfr-145-155",
-            "ecfr-145-157",
-            "ecfr-145-213",
-            "ecfr-65-101",
-            "ecfr-65-103",
-            "cn-class-2022",
-            "cn-civil-law-2025"
+            "ecfr-43-7"
           ],
           "title": "资格边界",
           "type": "notice"
@@ -29738,18 +29718,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮未采用具体雇主招聘公告；岗位方向和核对清单为编辑候选，不能推多数雇主条件、开放职位或统一晋升路径。",
-              "核对清单：岗位属于航空器制造与改装、维修与修理站、航空公司机务还是无人机与航天器单位；是否需要作业与放行授权或机型与专项培训与认证；任职与职级与轮班与外勤安排；以及机型数据保护义务与检验与返工机制。"
+              "成都空客航电技术员招聘样本要求相关专业大专或相当的航空学校教育、五年以上飞机维修经历和 CCAR-66 TA，并要求基本英语。岗位在工程师指导下做航电作业，可按分工签部分工卡；招聘页未列薪酬。",
+              "广州市黄埔区 2023 年 9 月发布的广州航新招聘样本：航空电子维修工程师 4 人，10,000–20,000 元/月，涉及航电部件维修和测试设备制作。该范围仅对应这则历史招聘。"
             ]
           },
           "id": "avionics-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "airbus",
+            "hangxin"
           ],
-          "title": "招聘信息核对",
+          "title": "成都与广州招聘样本",
           "type": "notice"
         },
         {
@@ -29776,10 +29754,10 @@
                 "url": "https://www.onetonline.org/link/localtraining/49-2091.00"
               },
               {
-                "entity": "中国民航法：维修机构和人员许可",
+                "entity": "CCAR-66-R3",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html"
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202006/t20200608_202988.html"
               }
             ]
           },
@@ -29928,26 +29906,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "新聘学历需求问卷50%高中后证书、18%高中或同等、16%副学士或其他两年制，不是在岗学历构成。Zone3/SVP6至<7一般描述通常一至两年培训，不是每岗固定年限；BLS EP本职业典型高中后非学位证书、相关经验None、在职培训None是统计分类，不免除岗位培训或法定资格。 美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。"
+              "可先比较航线安装与部件维修。成都空客与广州航新样本的任务和条件各不同；美国典型入行教育分类是高中后非学位证书。具体执照及授权由当地规则和工作内容决定。"
             ]
           },
           "id": "avionics-technicians.path.career-path-block.20",
           "source_refs": [
-            "bls",
+            "airbus",
+            "hangxin",
             "ep-current",
-            "census",
-            "nist",
-            "ecfr-43-3",
-            "ecfr-43-7",
-            "ecfr-145-5",
-            "ecfr-145-153",
-            "ecfr-145-155",
-            "ecfr-145-157",
-            "ecfr-145-213",
-            "ecfr-65-101",
-            "ecfr-65-103",
-            "cn-class-2022",
-            "cn-civil-law-2025"
+            "ccar66",
+            "faa-av"
           ],
           "type": "prose"
         },
@@ -29972,26 +29940,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。 在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。 2022职业分类大典相关条目：6-23-03-05航空电气安装调试工（线路敷设端接装焊和设备测试）；-09飞机无线电设备安装调试工、-10飞机雷达安装调试工；6-31-02-02航空器机械维护员涉及通信导航测试，-03航空器部件修理工含电子电气部件，-05航空器外场维护员含通信雷达检查。为相关职责映射，不认定与49-2091全部航空器/航天器、导弹、无人机职责精确互认，也不是执照依据。 中国2025修订民用航空法自2026-07-01施行：第30条维修机构许可、第33条维修由取得许可机构或人员进行，第36/37条含维修人员等航空人员培训考核执照要求。具体岗位机型执照及放行条件仍须查主管细则；不把民用航空规则直接外推全部军用、航天或无人机对象，第34条无人机许可另有规定及例外。"
+              "美国 FAA 不单发航电机械师等级。先核雇主、适用主体与任务范围，再分别查谁可以维修、谁可以检查、谁可以批准恢复使用。作为持证修理站运营时，才适用相应修理站证书要求；普通检验不等于恢复使用批准。"
             ]
           },
           "id": "avionics-technicians.path.career-path-block.22",
           "source_refs": [
-            "bls",
-            "ep-current",
-            "census",
-            "nist",
+            "faa-av",
             "ecfr-43-3",
             "ecfr-43-7",
             "ecfr-145-5",
-            "ecfr-145-153",
-            "ecfr-145-155",
-            "ecfr-145-157",
-            "ecfr-145-213",
-            "ecfr-65-101",
-            "ecfr-65-103",
-            "cn-class-2022",
-            "cn-civil-law-2025"
+            "ccar66"
           ],
           "type": "prose"
         },
@@ -30057,13 +30015,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国民航法相关机构和人员许可边界；本链接不能证明美国六项认证目录或中国职业大典分类。认证发证与具体岗位接受情况须在相应项目原文另核。"
+              "大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。"
             ]
           },
           "id": "avionics-technicians.path.career-path-block.27",
           "source_refs": [
-            "census",
-            "cn-class-2022",
+            "ccar66",
             "cn-civil-law-2025"
           ],
           "type": "prose"
@@ -30970,19 +30927,19 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 49-2091.00 职业摘要（就业与预测字段）",
+                "entity": "O*NET 49-2091.00 航空电子技术员",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/49-2091.00"
+                "url": "https://www.onetonline.org/link/details/49-2091.00"
               },
               {
-                "entity": "O*NET本职业2025—2035就业趋势",
+                "entity": "BLS 就业预测表 1.2",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/49-2091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国家统计局2025行业年平均工资",
+                "entity": "国家统计局：2025 年城镇单位工资",
                 "id": "link-5",
                 "relation": "career.source",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
@@ -31057,13 +31014,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个、自雇4.2%。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。"
+              "美国 SOC 49-2091：2025 年 19,800 人，2035 年预计 21,600 人，增 9.4%。BLS 单独取整的净增为 1,900 人，年均约 1,700 个空缺，含替代需求。 大陆招聘样本不能推全国走势。"
             ]
           },
           "id": "avionics-technicians.market-signals.market-signal-card.8",
           "source_refs": [
             "ep-current",
-            "onet-trends"
+            "airbus",
+            "hangxin"
           ],
           "type": "prose"
         },
@@ -31101,13 +31059,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个、自雇4.2%。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。"
+              "美国 SOC 49-2091：2025 年 19,800 人，2035 年预计 21,600 人，增 9.4%。BLS 单独取整的净增为 1,900 人，年均约 1,700 个空缺，含替代需求。"
             ]
           },
           "id": "avionics-technicians.market-signals.market-signal-card.11",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31144,7 +31101,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "美国 SOC 49-2091 航空电子技术员"
             ]
           },
           "id": "avionics-technicians.market-signals.market-signal-card.14",
@@ -31158,13 +31115,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "19,800人（2025，美国本职业）"
+              "美国 SOC 49-2091：2025 年 19,800 人，2035 年预计 21,600 人，增 9.4%。BLS 单独取整的净增为 1,900 人，年均约 1,700 个空缺，含替代需求。"
             ]
           },
           "id": "avionics-technicians.market-signals.market-signal-card.15",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31202,13 +31158,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个、自雇4.2%。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。"
+              "美国 SOC 49-2091：2025 年 19,800 人，2035 年预计 21,600 人，增 9.4%。BLS 单独取整的净增为 1,900 人，年均约 1,700 个空缺，含替代需求。"
             ]
           },
           "id": "avionics-technicians.market-signals.market-signal-card.18",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31246,7 +31201,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "美国 SOC 49-2091 航空电子技术员"
             ]
           },
           "id": "avionics-technicians.market-signals.market-signal-card.21",
@@ -31260,13 +31215,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "9.4%；年均1,700空缺（2025—2035）"
+              "国家统计局 2025 年城镇非私营单位制造业平均年工资 113,594 元，科学研究和技术服务业 182,064 元。行业均值不提供航电技术员全国工资分布。"
             ]
           },
           "id": "avionics-technicians.market-signals.market-signal-card.22",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31305,7 +31259,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025国家统计局城镇单位行业年平均工资：制造业非私营113,594元、私营76,055元；交通运输仓储邮政133,981/73,133元；科研技术服务182,064/83,560元。依单位主要活动选门类，不由航电职位名直接分类；均非本职业中位数、月薪或起薪。 2022职业分类大典相关条目：6-23-03-05航空电气安装调试工（线路敷设端接装焊和设备测试）；-09飞机无线电设备安装调试工、-10飞机雷达安装调试工；6-31-02-02航空器机械维护员涉及通信导航测试，-03航空器部件修理工含电子电气部件，-05航空器外场维护员含通信雷达检查。为相关职责映射，不认定与49-2091全部航空器/航天器、导弹、无人机职责精确互认，也不是执照依据。 中国2025修订民用航空法自2026-07-01施行：第30条维修机构许可、第33条维修由取得许可机构或人员进行，第36/37条含维修人员等航空人员培训考核执照要求。具体岗位机型执照及放行条件仍须查主管细则；不把民用航空规则直接外推全部军用、航天或无人机对象，第34条无人机许可另有规定及例外。"
+              "成都空客是航电技术员雇主样本，广州航新是历史航空电子维修工程师样本；任务交叉不代表中美职业分类互认。全国精确职业工资仍缺，国家统计局行业工资只作背景。"
             ]
           },
           "id": "avionics-technicians.market-signals.market-signal-card.25",
@@ -31353,7 +31307,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "industry_proxy"
+              "中国大陆相关行业"
             ]
           },
           "id": "avionics-technicians.market-signals.market-signal-card.28",
@@ -31383,7 +31337,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明本职业的就业规模字段。"
+              "航空电子技术员任务。"
             ]
           },
           "id": "avionics-technicians.market-signals.market-signal-card.30",
@@ -31397,13 +31351,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于2025及2025—2035本职业就业与总体预测，非AI归因。"
+              "美国航电技术员就业预测。"
             ]
           },
           "id": "avionics-technicians.market-signals.market-signal-card.31",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31412,14 +31365,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于中国相关行业年平均工资，精确职业工资缺口保留。"
+              "大陆单位行业工资均值。"
             ]
           },
           "id": "avionics-technicians.market-signals.market-signal-card.32",
           "source_refs": [
-            "nbs-wages-2025",
-            "cn-class-2022",
-            "cn-civil-law-2025"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31802,10 +31753,13 @@
           "data": {
             "entries": [
               {
-                "answer": "安装、检查、测试、调整或维修航空器与航天器上的航空电子设备：按蓝图与手册与接线图规划安装，安装电气与电子组件与总成与系统，用电路测试仪与示波器与电压表测试与排查，连接无线电系统与仪表与磁电机与逆变器等总成，设置并操作地面支持与测试设备执行功能性试验，解读飞行试验数据定位故障，并保存维护与修理记录。",
+                "answer": "航空电子技术员安装、检查和排查航空器的通信、导航等电子设备。航线作业关注系统与工卡；部件维修更看重台架记录、序列号和故障复现条件。维修作业、检查和签署放行的权限分别核对。",
                 "id": "avionics-technicians.faq.1",
                 "question": "航空电子技术员每天做什么？",
-                "question_key": "career.faq.avionics-technicians.1"
+                "question_key": "career.faq.avionics-technicians.1",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
                 "answer": "主要包括航空器通电与射频辐射与危险能量、焊接与烙铁与化学品与溶剂暴露、误接线与安装不当导致系统失效、机型与检修与测试数据泄露、测试条件与校准状态误判，以及越权放行与作业授权不明；控制方式是按适用法规与机构规程执行并在依据不明或超出授权时停止并升级。",
@@ -31820,22 +31774,33 @@
                 "question_key": "career.faq.avionics-technicians.3"
               },
               {
-                "answer": "AI 与自动化可以改变依据文件检索与手册查询、测量记录与参数比对、以及安装与测试与维修记录的整理；但接线与安装质量判断、故障原因定位、测试与放行结论仍由本人按机构规程与适用法规承担。任务自动化程度不等于岗位数量变化。",
+                "answer": "工具可整理虚构故障记录并标出编号或版本差异。应人工核对原件与试验条件，写明证据能支持什么，再由获授权人员决定下一步。现有证据不支持航电岗位的 AI 替代比例。",
                 "id": "avionics-technicians.faq.4",
                 "question": "AI 会改变哪些任务？",
-                "question_key": "career.faq.avionics-technicians.4"
+                "question_key": "career.faq.avionics-technicians.4",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
-                "answer": "接线与安装质量判断、故障原因定位、测试与放行结论、航空器维护与放行签署以及通电与射频与危险能量相关判断必须由具授权的人员按适用法规与机构程序承担；系统输出只能作为可回滚、可复核的辅助环节，并须经实测与依据文件核对。",
+                "answer": "人工核对序列号、版本、试验条件与原始现象。发现证据不对齐，保留记录并交有授权人员复核。",
                 "id": "avionics-technicians.faq.5",
                 "question": "哪些环节必须保留人工复核？",
-                "question_key": "career.faq.avionics-technicians.5"
+                "question_key": "career.faq.avionics-technicians.5",
+                "source_refs": [
+                  "editor",
+                  "faa-av"
+                ]
               },
               {
-                "answer": "分六类核对：学历；职业院校或培训机构培训；注册学徒经历；行业认证（AEA Certified Aircraft Electronics Technician、ASTM Aircraft Electronics Technician 与 UAS Certification、SpaceTEC Certified Aerospace Technician、ETA RADAR Electronics Technician 等）；机械师或修理员证书（14 CFR Part 65）与修理站证书（14 CFR Part 145）；以及机构内部上岗资格与放行授权。任何一项都不能由另一项自动推出。",
+                "answer": "大陆民航维修执照的通用学历门槛为大专及以上。CCAR-66-R3 第 66.6 条的经历条件可由至少一年经授权相关维修工作满足（不含培训、实习），或由理工科大专及以上并完成适用实作培训满足。复杂航空器放行还要核对应航空器型号的签署和单位授权；首次类别机型签署须在通过机型维修培训和考试后完成至少连续六个月实习。 美国 FAA 不单发一种航电机械师等级。核实际任务与适用规则：14 CFR §§43.3 和 43.7 分别列出可作业与可批准恢复使用的人员或机构，Part 65 和修理站规则另有限定。",
                 "id": "avionics-technicians.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.avionics-technicians.6"
+                "question_key": "career.faq.avionics-technicians.6",
+                "source_refs": [
+                  "ccar66",
+                  "faa-av"
+                ]
               },
               {
                 "answer": "工作情境显示 66% 持续或几乎持续用手处理与控制工具、33% 持续或几乎持续做重复动作、32% 超过一半时间坐着，另有 64% 每天暴露于污染物、34% 每天暴露于噪音；机库与生产线与狭小空间作业需要一定体力与手部灵活度。",
@@ -31844,22 +31809,39 @@
                 "question_key": "career.faq.avionics-technicians.7"
               },
               {
-                "answer": "工作情境显示 79% 的典型工作周为 40 小时、44% 每周一次以上面临时间压力、26% 每天需要作出决定、69% 持续与他人接触；常见安排包含机库与生产线与值班与试飞支持排班，比较岗位时应把任职方式与班次与加班办法写入书面条件。",
+                "answer": "工作情境显示 79% 的典型工作周为 40 小时、44% 每周至少一次但非每天面临时间压力、26% 每天需要作出决定、69% 持续与他人接触；常见安排包含机库与生产线与值班与试飞支持排班，比较岗位时应把任职方式与班次与加班办法写入书面条件。",
                 "id": "avionics-technicians.faq.8",
                 "question": "工作时间和工作方式是什么样的？",
                 "question_key": "career.faq.avionics-technicians.8"
               },
               {
-                "answer": "O*NET 展示的 BLS 数据按本职业 49-2091.00 口径给出 2024 年在岗约 21,400 人、2024—2034 年增长为「远快于平均（7% 或更高）」、预测期职位空缺约 1,800；转向可比较飞机机械师技术员、航空航天工程与运营技术员、校准技术员、商业与工业设备电气电子维修工、运输设备电气电子安装工与飞机结构与表面索具与系统装配工等，但都需要补充相应训练与资格。",
+                "answer": "美国 SOC 49-2091：2025 年 19,800 人，2035 年预计 21,600 人，增 9.4%。BLS 单独取整的净增为 1,900 人，年均约 1,700 个空缺，含替代需求。",
                 "id": "avionics-technicians.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.avionics-technicians.9"
+                "question_key": "career.faq.avionics-technicians.9",
+                "source_refs": [
+                  "ep-current"
+                ]
               },
               {
-                "answer": "美国工资分位是本职业 49-2091.00 的 2025 年 OEWS 口径；中国大陆未取得与该职业精确对应的公开职业条目与全国工资分布，本页仅以人社部职业中类作为代理。两边的职业范围、统计制度、资料期与计酬结构都不同，不能把美元换算成人民币，也不应相信缺少样本与岗位范围的报价。",
+                "answer": "广州市黄埔区 2023 年 9 月发布的广州航新招聘样本：航空电子维修工程师 4 人，10,000–20,000 元/月，涉及航电部件维修和测试设备制作。该范围仅对应这则历史招聘。 成都空客航电技术员招聘样本要求相关专业大专或相当的航空学校教育、五年以上飞机维修经历和 CCAR-66 TA，并要求基本英语。岗位在工程师指导下做航电作业，可按分工签部分工卡；招聘页未列薪酬。 美国 2025 年 5 月全国中位数为 82,280 美元/年、39.56 美元/小时。",
                 "id": "avionics-technicians.faq.10",
                 "question": "美国工资与中国大陆工资为什么不能互相换算？",
-                "question_key": "career.faq.avionics-technicians.10"
+                "question_key": "career.faq.avionics-technicians.10",
+                "source_refs": [
+                  "hangxin",
+                  "airbus",
+                  "oews"
+                ]
+              },
+              {
+                "answer": "主问题参考：A 记录 S-14 的告警，B 只记录 S-41 在常规条件下未复现。保留两条记录，不能用 B 关闭 S-14 的故障。 请资料负责人核 S-14 的台架原件，请负责复核的人员确认告警出现时的条件，并决定下一项获准检查。 纸面交接只记录证据与未决项。不要实际通电、改变设置、判定维修完成或签署放行。 变式参考：部件身份已对齐，但台架记录只有常规条件，仍不能判断原告警是否排除。 保留原 B 与更正依据；不要把「未复现」改成「故障已排除」。",
+                "id": "avionics-technicians.faq.11",
+                "question": "AV-21 复核交接参考解（交卷后再打开）",
+                "question_key": "career.faq.avionics-technicians.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31880,22 +31862,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试编辑组：核当前O*NET职责情境、BLS本职业2025工资和2025—2035预测、OOH航电行业工资、中美维修权限、中国2022相关职责分类及2025行业均值；区分统计、法规、编辑建议及未核项。"
+              "职业任务、工资和就业分别采用 O*NET 与 BLS 原表；成都和广州招聘仅说明各雇主的任务、任职与报酬口径。"
             ]
           },
           "id": "avionics-technicians.sources.source-card.1",
           "source_refs": [
             "onet",
-            "bls",
-            "oews",
             "ep-current",
-            "ooh-current",
-            "ecfr-43-3",
-            "ecfr-43-7",
-            "ecfr-145-213",
-            "cn-class-2022",
-            "cn-civil-law-2025",
-            "nbs-wages-2025"
+            "oews",
+            "airbus",
+            "hangxin"
           ],
           "type": "prose"
         },
@@ -31904,7 +31880,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET49-2091详情、工资、行业、Hot、趋势及培训认证目录；BLS EP和OOH航电单独统计；eCFR§43.3/7/13、§145.5/109/153/155/157/213及§65.101/103；中国职业分类大典2022、民航法2025修订及NBS2025行业工资。"
+              "美国 FAA 不单发航电机械师等级。先核雇主、适用主体与任务范围，再分别查谁可以维修、谁可以检查、谁可以批准恢复使用。作为持证修理站运营时，才适用相应修理站证书要求；普通检验不等于恢复使用批准。 大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。"
             ]
           },
           "id": "avionics-technicians.sources.source-card.2",
@@ -31928,22 +31904,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET2026更新，工资2025 OEWS、招聘软件2025、就业2025及2025—2035。eCFR具体条款本轮核读，标题当前至2026-10-07非各条修订日；中国民航法2026-07-01施行，分类2022，行业工资2025。人社部旧文正文本轮未成功取得，搜索片段不当全文已核。"
+              "美国工资为 2025 年 5 月 OEWS，就业为 BLS 2025–2035 预测。大陆招聘分成都样本与 2023 年广州历史样本；分别按原公告范围解读。"
             ]
           },
           "id": "avionics-technicians.sources.source-card.3",
           "source_refs": [
-            "onet",
-            "bls",
             "oews",
             "ep-current",
-            "ooh-current",
-            "ecfr-43-3",
-            "ecfr-43-7",
-            "ecfr-145-213",
-            "cn-class-2022",
-            "cn-civil-law-2025",
-            "nbs-wages-2025"
+            "airbus",
+            "hangxin"
           ],
           "type": "prose"
         },
@@ -31952,22 +31921,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "边界：美国统计是49-2091本职业，OOH合并职业和飞机机械师行须分开；中国相关职责非精确互认，行业均值不填职业月薪缺口；维修、普通检验、监督及最终签署和境内外站分别核权。目录和编辑建议不是完整作业程序或普遍录用标准。"
+              "成都空客是航电技术员雇主样本，广州航新是历史航空电子维修工程师样本；任务交叉不代表中美职业分类互认。全国精确职业工资仍缺，国家统计局行业工资只作背景。"
             ]
           },
           "id": "avionics-technicians.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "bls",
-            "oews",
-            "ep-current",
-            "ooh-current",
-            "ecfr-43-3",
-            "ecfr-43-7",
-            "ecfr-145-213",
-            "cn-class-2022",
-            "cn-civil-law-2025",
-            "nbs-wages-2025"
+            "airbus",
+            "hangxin",
+            "nbs"
           ],
           "type": "prose"
         }
@@ -31985,7 +31946,7 @@
           "data": {
             "entries": [
               {
-                "entity": "职业兴趣测评",
+                "entity": "探索我的职业兴趣",
                 "id": "navigation-1",
                 "relation": "career.cta",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
@@ -31994,7 +31955,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32006,13 +31967,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看航空电子技术员职业页面",
@@ -32042,100 +32003,100 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupation profile",
-                  "2026更新；访问2026-10-09"
+                  "航空电子技术员安装、检查和排查航空器的通信、导航等电子设备。航线作业关注系统与工卡；部件维修更看重台架记录、序列号和故障复现条件。维修作业、检查和签署放行的权限分别核对。",
+                  "美国职业任务口径。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "美国职业分类，不直接证明中国岗位序列或作业授权。",
+                "limitation": "美国职业任务口径。",
                 "market": "美国",
-                "name": "O*NET 49-2091.00 职业摘要",
-                "period": "2026更新；访问2026-10-09",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/49-2091.00"
-              },
-              {
-                "accessed_at": "2026-10-09",
-                "details": [
-                  "official occupation details",
-                  "2026更新；访问2026-10-09"
-                ],
-                "evidence_type": "official occupation details",
-                "id": "bls",
-                "limitation": "任务清单描述群体工作，不代表每个岗位都承担全部任务。",
-                "market": "美国",
-                "name": "O*NET 49-2091.00 详细资料（任务与工作活动）",
-                "period": "2026更新；访问2026-10-09",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 49-2091.00 航空电子技术员",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/49-2091.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official outlook",
-                  "2025及2025—2035；访问2026-10-09"
+                  "航空电子技术员安装、检查和排查航空器的通信、导航等电子设备。航线作业关注系统与工卡；部件维修更看重台架记录、序列号和故障复现条件。维修作业、检查和签署放行的权限分别核对。",
+                  "美国职业任务口径。"
                 ],
-                "evidence_type": "official outlook",
-                "id": "ep",
-                "limitation": "本职业总体预测；空缺为年均，非十年净增或AI因果。",
+                "evidence_type": "primary_document",
+                "id": "bls",
+                "limitation": "美国职业任务口径。",
                 "market": "美国",
-                "name": "O*NET 49-2091.00 职业摘要（就业与预测字段）",
-                "period": "2025及2025—2035",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 49-2091.00 航空电子技术员",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/49-2091.00"
+                "url": "https://www.onetonline.org/link/details/49-2091.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official wage percentiles",
-                  "May2025 OEWS；访问2026-10-09"
+                  "美国 SOC 49-2091：2025 年 19,800 人，2035 年预计 21,600 人，增 9.4%。BLS 单独取整的净增为 1,900 人，年均约 1,700 个空缺，含替代需求。",
+                  "美国全国预测；净增与端点单独取整。"
                 ],
-                "evidence_type": "official wage percentiles",
-                "id": "oews",
-                "limitation": "本职业工资分位，计酬与覆盖按OEWS方法，不一概排所有补贴。",
+                "evidence_type": "primary_document",
+                "id": "ep",
+                "limitation": "美国全国预测；净增与端点单独取整。",
                 "market": "美国",
-                "name": "O*NET 展示的 BLS 2025 年工资分位（49-2091.00）",
-                "period": "May2025 OEWS",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS 就业预测表 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 2025 年 5 月全国中位数为 82,280 美元/年、39.56 美元/小时。",
+                  "全国分位不代表录用报价。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "oews",
+                "limitation": "全国分位不代表录用报价。",
+                "market": "美国",
+                "name": "O*NET 工资表（BLS OEWS）",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/49-2091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official enterprise wage survey",
-                  "2024 年数据、2025-06-27 发布；访问 2026-09-15"
+                  "国家统计局 2025 年城镇非私营单位制造业平均年工资 113,594 元，科学研究和技术服务业 182,064 元。行业均值不提供航电技术员全国工资分布。",
+                  "行业平均。"
                 ],
-                "evidence_type": "official enterprise wage survey",
+                "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "本轮正文返回空白，搜索仅片段，未重新核全表及方法；不把旧工资价位标签当本轮精确职业工资。",
+                "limitation": "行业平均。",
                 "market": "中国大陆",
-                "name": "人力资源社会保障部《企业薪酬调查信息（2024 年）》（职业中类工资价位）",
-                "period": "2024 年数据、2025-06-27 发布；访问 2026-09-15",
-                "publisher": "中华人民共和国人力资源和社会保障部",
+                "name": "国家统计局：2025 年城镇单位工资",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official enterprise wage survey",
-                  "2024 年数据、2025-06-27 发布；访问 2026-09-15"
+                  "大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。",
+                  "大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。"
                 ],
-                "evidence_type": "official enterprise wage survey",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
-                "limitation": "本轮正文返回空白，搜索仅片段，未重新核全表及方法；不把旧工资价位标签当本轮精确职业工资。",
+                "limitation": "仅对应适用法规和授权。",
                 "market": "中国大陆",
-                "name": "人力资源社会保障部《企业薪酬调查信息（2024 年）》（分岗位等级工资价位）",
-                "period": "2024 年数据、2025-06-27 发布；访问 2026-09-15",
-                "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "industry_proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
+                "name": "CCAR-66-R3",
+                "period": "2020",
+                "publisher": "CAAC",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202006/t20200608_202988.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32188,12 +32149,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "technology signals",
-                  "2025美国唯一招聘；访问2026-10-09"
+                  "O*NET 职业页列 14 类软件技能和 12 项热门技术。招聘软件要求因岗位而异；目录不测量个人使用频率或 AI 采用率。",
+                  "O*NET 职业页列 14 类软件技能和 12 项热门技术。招聘软件要求因岗位而异；目录不测量个人使用频率或 AI 采用率。"
                 ],
                 "evidence_type": "technology signals",
                 "id": "hr",
-                "limitation": "14类软件技能、12项热门技术；2025美国职业关联唯一招聘Office9%、Excel7%、Outlook4%、PowerPoint3%、Word2%、AutoCAD/Linux/SAP/C++各1%，Java/UNIX/Workday未公布。分母为职业关联唯一招聘，不是岗位使用率、中国要求或AI采用率。",
+                "limitation": "O*NET 职业页列 14 类软件技能和 12 项热门技术。招聘软件要求因岗位而异；目录不测量个人使用频率或 AI 采用率。",
                 "market": "美国",
                 "name": "O*NET 49-2091.00 技术清单（热门技术信号）",
                 "period": "2025美国唯一招聘",
@@ -32204,12 +32165,12 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official regulation",
-                  "内容更新至 2026-09-11；访问 2026-09-15"
+                  "具体维修与签字条件按条文适用范围核。",
+                  "具体维修与签字条件按条文适用范围核。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "health",
-                "limitation": "Part145为持证修理站规则；本轮逐条核§145.5/109/153/155/157/213，普通检验与监督/最终签署及境内外条件分开，非所有为他人维修机构统一持证。未声明完整通读Part145。",
+                "limitation": "具体维修与签字条件按条文适用范围核。",
                 "market": "美国",
                 "name": "eCFR 14 CFR Part 145（Repair Stations）",
                 "period": "内容更新至 2026-09-11；访问 2026-09-15",
@@ -32234,30 +32195,30 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "O*NET官方职业摘要；本页编辑解释与外部来源发布者分开",
-                  "采用本页所列职业代码及实际任务、教育、兴趣字段；不表示已核完整资格条件"
+                  "AV-21｜两份台架记录能否对应同一部件？",
+                  "仅纸面练习。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "美国职业摘要及群体资料；本页编辑核对建议不等于该来源发布的效果、资格或招聘证明。教育问卷表示新聘履职所需教育，不能当在岗学历构成或中国统一要求。",
-                "market": "美国",
-                "name": "O*NET 航空电子技术员职业摘要（本页引用字段）",
-                "period": "访问 2026-09-15",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/49-2091.00"
+                "limitation": "仅纸面练习。",
+                "market": "虚构体验",
+                "name": "AV-21｜两份台架记录能否对应同一部件？",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/zh/career/jobs/avionics-technicians#career-content-path"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "training information",
-                  "2026更新；访问2026-10-09"
+                  "培训目录仅供比较项目，不代表雇主门槛、发证或开放名额。",
+                  "培训目录仅供比较项目，不代表雇主门槛、发证或开放名额。"
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "本轮全国目录显示56训练项目，不由目录推统一雇主门槛、发证条件或开放名额。",
+                "limitation": "培训目录仅供比较项目，不代表雇主门槛、发证或开放名额。",
                 "market": "美国",
                 "name": "O*NET 49-2091.00 培训与教育信息",
                 "period": "2026更新；访问2026-10-09",
@@ -32330,30 +32291,30 @@
                 "url": "https://www.onetonline.org/link/summary/49-2091.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official wage percentiles",
-                  "May2025 OEWS；访问2026-10-09"
+                  "美国 2025 年 5 月全国中位数为 82,280 美元/年、39.56 美元/小时。",
+                  "全国分位不代表录用报价。"
                 ],
-                "evidence_type": "official wage percentiles",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-1",
-                "limitation": "本职业工资分位，计酬与覆盖按OEWS方法，不一概排所有补贴。",
+                "limitation": "全国分位不代表录用报价。",
                 "market": "美国",
-                "name": "O*NET 49-2091.00 全国工资分位（时薪与年薪分位）",
-                "period": "May2025 OEWS",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "O*NET 工资表（BLS OEWS）",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/49-2091.00"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "industry distribution",
-                  "2025行业分布；访问2026-10-09"
+                  "O*NET 列制造业 38%、运输仓储 37%；其余约 25% 是余额，不能分配给任何具体行业。",
+                  "O*NET 列制造业 38%、运输仓储 37%；其余约 25% 是余额，不能分配给任何具体行业。"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "2025本职业行业分布：制造38%、运输仓储37%、其他25%（含专业科学技术和政府）；不是中国雇主占比或行业工资。BLS OOH具体雇主门类另列航空产品零部件制造36%、航空运输支持29%、专业科学技术9%、航空运输8%、联邦政府6%，不可混用分类层级。",
+                "limitation": "O*NET 列制造业 38%、运输仓储 37%；其余约 25% 是余额，不能分配给任何具体行业。",
                 "market": "美国",
                 "name": "O*NET 49-2091.00 行业分布",
                 "period": "2025行业分布",
@@ -32364,28 +32325,28 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official regulation",
-                  "内容更新至 2026-09-11；访问 2026-09-15"
+                  "按不同主体规定恢复使用批准。",
+                  "按不同主体规定恢复使用批准。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "r2-pay-3",
-                "limitation": "旧链接subchapter-C位置与Part65现行subchapter-D不符；本轮使用独立§65.101/103文献，不把旧链接当已核权限。",
+                "limitation": "按不同主体规定恢复使用批准。",
                 "market": "美国",
-                "name": "eCFR 14 CFR Part 65（机械师与修理员证书；§65.101）",
-                "period": "内容更新至 2026-09-11；访问 2026-09-15",
-                "publisher": "Electronic Code of Federal Regulations（美国）",
+                "name": "eCFR§43.7",
+                "period": "当前条款核读2026-10-09",
+                "publisher": "Electronic Code of Federal Regulations",
                 "scope": "combined_official",
-                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-C/part-65"
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-C/part-43/section-43.7"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "certification information",
-                  "2026更新；访问2026-10-09"
+                  "认证目录是查询入口。具体资格及工作授权分别核。",
+                  "认证目录是查询入口。具体资格及工作授权分别核。"
                 ],
                 "evidence_type": "certification information",
                 "id": "census",
-                "limitation": "本轮关联目录6项认证，具体发证条件费用未逐一核；不等于统一FAA证或岗位放行权限。",
+                "limitation": "认证目录是查询入口。具体资格及工作授权分别核。",
                 "market": "美国",
                 "name": "O*NET 49-2091.00 认证发现（行业认证）",
                 "period": "2026更新；访问2026-10-09",
@@ -32396,12 +32357,12 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official regulation",
-                  "内容更新至 2026-09-11；访问 2026-09-15"
+                  "具体维修与签字条件按条文适用范围核。",
+                  "具体维修与签字条件按条文适用范围核。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "msresearch",
-                "limitation": "Part145为持证修理站规则；本轮逐条核§145.5/109/153/155/157/213，普通检验与监督/最终签署及境内外条件分开，非所有为他人维修机构统一持证。未声明完整通读Part145。",
+                "limitation": "具体维修与签字条件按条文适用范围核。",
                 "market": "美国",
                 "name": "eCFR 14 CFR Part 145（§145.157 与 §145.213 人员与检验条款）",
                 "period": "内容更新至 2026-09-11；访问 2026-09-15",
@@ -32410,30 +32371,30 @@
                 "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-H/part-145"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official wage percentiles",
-                  "May2025 OEWS；访问2026-10-09"
+                  "美国 2025 年 5 月全国中位数为 82,280 美元/年、39.56 美元/小时。",
+                  "全国分位不代表录用报价。"
                 ],
-                "evidence_type": "official wage percentiles",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "本职业工资分位，计酬与覆盖按OEWS方法，不一概排所有补贴。",
+                "limitation": "全国分位不代表录用报价。",
                 "market": "美国",
-                "name": "O*NET 全国工资分位页面（49-2091.00）",
-                "period": "May2025 OEWS",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "O*NET 工资表（BLS OEWS）",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/49-2091.00"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "certification information",
-                  "2026更新；访问2026-10-09"
+                  "认证目录是查询入口。具体资格及工作授权分别核。",
+                  "认证目录是查询入口。具体资格及工作授权分别核。"
                 ],
                 "evidence_type": "certification information",
                 "id": "archivists",
-                "limitation": "本轮关联目录6项认证，具体发证条件费用未逐一核；不等于统一FAA证或岗位放行权限。",
+                "limitation": "认证目录是查询入口。具体资格及工作授权分别核。",
                 "market": "美国",
                 "name": "O*NET 49-2091.00 认证发现（国家认证）",
                 "period": "2026更新；访问2026-10-09",
@@ -32444,12 +32405,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
-                  "不冒称完整职业或个案验证"
+                  "OEWS 定义与调查方法；不提供录用工资。",
+                  "OEWS 定义与调查方法；不提供录用工资。"
                 ],
                 "evidence_type": "官方原文相关章节",
                 "id": "oews-method",
-                "limitation": "OEWS有薪员工工资含基本工资、佣金、生产奖金及小费等，排加班溢价、轮班差额、非生产奖金等；不能把计件、提成全部排除。自雇、非公司制企业所有者和合伙人、无酬家庭劳动者不在工资调查内；有薪公司员工不因门店或上门形式自动排除。",
+                "limitation": "OEWS 定义与调查方法；不提供录用工资。",
                 "market": "美国",
                 "name": "BLS OEWS Concepts当前方法",
                 "period": "当前页面，更新2026-09-24",
@@ -32490,33 +32451,33 @@
                 "url": "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official industry and job-group wages",
-                  "2025年；2026-05-15发布；访问2026-10-09"
+                  "国家统计局 2025 年城镇非私营单位制造业平均年工资 113,594 元，科学研究和技术服务业 182,064 元。行业均值不提供航电技术员全国工资分布。",
+                  "行业平均。"
                 ],
-                "evidence_type": "official industry and job-group wages",
+                "evidence_type": "primary_document",
                 "id": "nbs-wages-2025",
-                "limitation": "2025国家统计局城镇单位行业年平均工资：制造业非私营113,594元、私营76,055元；交通运输仓储邮政133,981/73,133元；科研技术服务182,064/83,560元。依单位主要活动选门类，不由航电职位名直接分类；均非本职业中位数、月薪或起薪。",
+                "limitation": "行业平均。",
                 "market": "中国大陆",
-                "name": "国家统计局2025城镇单位行业及岗位年平均工资",
-                "period": "2025年；2026-05-15发布",
-                "publisher": "国家统计局",
+                "name": "国家统计局：2025 年城镇单位工资",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official projections table",
-                  "2025及2025—2035；访问2026-10-09"
+                  "美国 SOC 49-2091：2025 年 19,800 人，2035 年预计 21,600 人，增 9.4%。BLS 单独取整的净增为 1,900 人，年均约 1,700 个空缺，含替代需求。",
+                  "美国全国预测；净增与端点单独取整。"
                 ],
-                "evidence_type": "official projections table",
+                "evidence_type": "primary_document",
                 "id": "ep-current",
-                "limitation": "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个、自雇4.2%。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。",
+                "limitation": "美国全国预测；净增与端点单独取整。",
                 "market": "美国",
-                "name": "BLS2025—2035职业预测特征表",
-                "period": "2025及2025—2035",
+                "name": "BLS 就业预测表 1.2",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32524,12 +32485,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official outlook",
-                  "2025及2025—2035；访问2026-10-09"
+                  "O*NET 提供趋势与地方查询入口；精确增长和净增请看 BLS 就业预测表 1.2。",
+                  "O*NET 提供趋势与地方查询入口；精确增长和净增请看 BLS 就业预测表 1.2。"
                 ],
                 "evidence_type": "official outlook",
                 "id": "onet-trends",
-                "limitation": "美国49-2091航空电子技术员：2025就业19,800人、2035预测21,600人；2025—2035增长9.4%（取整9%，远快于平均），原表净增1.9千人、年均空缺1,700个、自雇4.2%。原表千人数和取整人数有舍入差异，不用两个取整人数相减重算净增；空缺含增长与离职转岗替补，不是十年净增或AI效应。",
+                "limitation": "O*NET 提供趋势与地方查询入口；精确增长和净增请看 BLS 就业预测表 1.2。",
                 "market": "美国",
                 "name": "O*NET本职业就业趋势",
                 "period": "2025及2025—2035",
@@ -32538,17 +32499,17 @@
                 "url": "https://www.onetonline.org/link/localtrends/49-2091.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupational handbook",
-                  "2025数据；2026-08-27更新；访问2026-10-09"
+                  "美国 2025 年 5 月全国中位数为 82,280 美元/年、39.56 美元/小时。",
+                  "只采用航电分项的工资。"
                 ],
-                "evidence_type": "official occupational handbook",
+                "evidence_type": "primary_document",
                 "id": "ooh-current",
-                "limitation": "航电行业工资和就业须取49-2091单独行；排班等合并职业说明非全岗固定条件。修理员发证以eCFR主管条文为准。",
+                "limitation": "只采用航电分项的工资。",
                 "market": "美国",
-                "name": "BLS飞机及航电维修OOH：航电单独行业工资和雇主表",
-                "period": "2025数据；2026-08-27更新",
+                "name": "BLS 职业展望手册：航电分项",
+                "period": "May 2025",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/aircraft-and-avionics-equipment-mechanics-and-technicians.htm"
@@ -32556,12 +32517,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "列适用维修主体与受监督路径。",
+                  "列适用维修主体与受监督路径。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "ecfr-43-3",
-                "limitation": "美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。",
+                "limitation": "列适用维修主体与受监督路径。",
                 "market": "美国",
                 "name": "eCFR§43.3",
                 "period": "当前条款核读2026-10-09",
@@ -32572,12 +32533,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "按不同主体规定恢复使用批准。",
+                  "按不同主体规定恢复使用批准。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "ecfr-43-7",
-                "limitation": "美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。",
+                "limitation": "按不同主体规定恢复使用批准。",
                 "market": "美国",
                 "name": "eCFR§43.7",
                 "period": "当前条款核读2026-10-09",
@@ -32588,12 +32549,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "具体维修与签字条件按条文适用范围核。",
+                  "具体维修与签字条件按条文适用范围核。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "ecfr-43-13",
-                "limitation": "当前厂家手册/持续适航指令或主管认可方法、适用工具设备；不是全机型接地屏蔽细节。",
+                "limitation": "具体维修与签字条件按条文适用范围核。",
                 "market": "美国",
                 "name": "eCFR§43.13",
                 "period": "当前条款核读2026-10-09",
@@ -32604,12 +32565,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "适用于以持证修理站身份运营的主体。",
+                  "适用于以持证修理站身份运营的主体。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "ecfr-145-5",
-                "limitation": "美国§145.5要求以持证修理站身份运营者持有效证书、相应等级和运行规范，不能推成所有为他人维修机构都必须持该证。§43.3另允许相关机械师、修理员、符合条件的受监督人员、航空承运人或制造商等依法维修；受监督途径不含Part91/125规定检查及重大维修改装后的检查。§43.7恢复使用批准按主体和权限分别规定，普通修理员证书不自动赋予独立通用放行权。",
+                "limitation": "适用于以持证修理站身份运营的主体。",
                 "market": "美国",
                 "name": "eCFR§145.5",
                 "period": "当前条款核读2026-10-09",
@@ -32620,12 +32581,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "具体维修与签字条件按条文适用范围核。",
+                  "具体维修与签字条件按条文适用范围核。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "ecfr-145-109",
-                "limitation": "持证修理站适航判定工具设备校准按FAA认可标准，维修数据当前可访问；不规定本页统一周期。",
+                "limitation": "具体维修与签字条件按条文适用范围核。",
                 "market": "美国",
                 "name": "eCFR§145.109",
                 "period": "当前条款核读2026-10-09",
@@ -32636,12 +32597,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "具体维修与签字条件按条文适用范围核。",
+                  "具体维修与签字条件按条文适用范围核。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "ecfr-145-153",
-                "limitation": "在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。",
+                "limitation": "具体维修与签字条件按条文适用范围核。",
                 "market": "美国",
                 "name": "eCFR§145.153",
                 "period": "当前条款核读2026-10-09",
@@ -32652,12 +32613,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "区分修理站普通检验人员的技术和语言要求。",
+                  "区分修理站普通检验人员的技术和语言要求。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "ecfr-145-155",
-                "limitation": "在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。",
+                "limitation": "区分修理站普通检验人员的技术和语言要求。",
                 "market": "美国",
                 "name": "eCFR§145.155",
                 "period": "当前条款核读2026-10-09",
@@ -32668,12 +32629,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "具体维修与签字条件按条文适用范围核。",
+                  "具体维修与签字条件按条文适用范围核。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "ecfr-145-157",
-                "limitation": "在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。",
+                "limitation": "具体维修与签字条件按条文适用范围核。",
                 "market": "美国",
                 "name": "eCFR§145.157",
                 "period": "当前条款核读2026-10-09",
@@ -32684,12 +32645,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "具体维修与签字条件按条文适用范围核。",
+                  "具体维修与签字条件按条文适用范围核。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "ecfr-145-213",
-                "limitation": "在美国境内的持证修理站，§145.153监督人员和§145.157获授权批准恢复使用人员需适用Part65机械师或修理员证书；§145.155普通检验人员要求法规、方法、工具和检验能力，不单凭该条推所有检验者均须Part65证。§145.213最终检验和维护放行签署雇员需相关证书，境外站雇员有例外。境外监督或恢复使用人员另有培训/18个月经验及能力条件，不一律套境内要求。",
+                "limitation": "具体维修与签字条件按条文适用范围核。",
                 "market": "美国",
                 "name": "eCFR§145.213",
                 "period": "当前条款核读2026-10-09",
@@ -32700,12 +32661,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "具体维修与签字条件按条文适用范围核。",
+                  "具体维修与签字条件按条文适用范围核。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "ecfr-65-101",
-                "limitation": "§65.101一般修理员申请须至少18岁、具特定工作能力、由符合条款的修理站/运营人/承运人雇用并向主管推荐，具18个月经验或主管认可正式培训及英语条件（境外限定有例外）。§65.103仅可为原雇用并推荐的雇主履行指定维修职责，须理解当前适航及维修指令；雇主推荐不等于雇主自行签发FAA证书。",
+                "limitation": "具体维修与签字条件按条文适用范围核。",
                 "market": "美国",
                 "name": "eCFR§65.101",
                 "period": "当前条款核读2026-10-09",
@@ -32716,12 +32677,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "具体维修与签字条件按条文适用范围核。",
+                  "具体维修与签字条件按条文适用范围核。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "ecfr-65-103",
-                "limitation": "§65.101一般修理员申请须至少18岁、具特定工作能力、由符合条款的修理站/运营人/承运人雇用并向主管推荐，具18个月经验或主管认可正式培训及英语条件（境外限定有例外）。§65.103仅可为原雇用并推荐的雇主履行指定维修职责，须理解当前适航及维修指令；雇主推荐不等于雇主自行签发FAA证书。",
+                "limitation": "具体维修与签字条件按条文适用范围核。",
                 "market": "美国",
                 "name": "eCFR§65.103",
                 "period": "当前条款核读2026-10-09",
@@ -32732,18 +32693,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official occupational classification",
-                  "2022年版；访问2026-10-09"
+                  "大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。",
+                  "大陆岗位先核单位维修范围、具体工作授权和适用规则。复杂航空器签署放行另核对应机型签署、人员条件及单位放行项目授权。大陆招聘名称仅作具体任务比较。"
                 ],
-                "evidence_type": "official occupational classification",
+                "evidence_type": "official legislation",
                 "id": "cn-class-2022",
-                "limitation": "2022职业分类大典相关条目：6-23-03-05航空电气安装调试工（线路敷设端接装焊和设备测试）；-09飞机无线电设备安装调试工、-10飞机雷达安装调试工；6-31-02-02航空器机械维护员涉及通信导航测试，-03航空器部件修理工含电子电气部件，-05航空器外场维护员含通信雷达检查。为相关职责映射，不认定与49-2091全部航空器/航天器、导弹、无人机职责精确互认，也不是执照依据。",
+                "limitation": "仅对应适用法规和授权。",
                 "market": "中国大陆",
-                "name": "2022职业分类大典：航空装调与维修相关条目",
-                "period": "2022年版",
-                "publisher": "人社部等三部门；锡林郭勒盟政府公开PDF",
+                "name": "中国民用航空法（2025修订）",
+                "period": "2025-12-27修订；2026-07-01施行",
+                "publisher": "中国民用航空局",
                 "scope": "combined_official",
-                "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32874,21 +32835,83 @@
                 "url": "https://www.onetonline.org/link/summary/51-2023.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "规划与安装｜让作业有依据｜依据蓝图与手册与接线图规划总成与系统的安装顺序，把依据文件与接线与走线写清。 — 50/100; weight=1/3; avionics-technicians.profile.responsibilities-block.1[0]",
-                  "连接与总装｜让装配可靠｜使用手动工具与电动工具或烙铁连接与安装电气与电子组件与总成与系统，组装开关与控制器与接线盒。 — 0/100; weight=1/3; avionics-technicians.profile.responsibilities-block.1[1]",
-                  "测试与排查｜让判断有依据｜用电路测试仪与示波器与电压表测量，设置并操作地面支持与测试设备执行功能性试验，解读测试与飞行试验数据。 — 50/100; weight=1/3; avionics-technicians.profile.responsibilities-block.1[2]"
+                  "工具可整理虚构故障记录并标出编号或版本差异。应人工核对原件与试验条件，写明证据能支持什么，再由获授权人员决定下一步。现有证据不支持航电岗位的 AI 替代比例。",
+                  "无替代率估计。",
+                  "无替代率估计。",
+                  "无替代率估计。",
+                  "无替代率估计。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "无替代率估计。",
+                "market": "编辑说明",
+                "name": "编辑部：AI 与航电记录",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "成都空客航电技术员招聘样本要求相关专业大专或相当的航空学校教育、五年以上飞机维修经历和 CCAR-66 TA，并要求基本英语。岗位在工程师指导下做航电作业，可按分工签部分工卡；招聘页未列薪酬。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "airbus",
+                "limitation": "个别岗位要求；未公布薪酬。",
+                "market": "中国大陆",
+                "name": "成都空客：航电技术员",
+                "period": "2026",
+                "publisher": "Airbus",
+                "scope": "recruitment_proxy",
+                "url": "https://cn.linkedin.com/jobs/view/4463351303"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "广州市黄埔区 2023 年 9 月发布的广州航新招聘样本：航空电子维修工程师 4 人，10,000–20,000 元/月，涉及航电部件维修和测试设备制作。该范围仅对应这则历史招聘。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "hangxin",
+                "limitation": "历史地方岗位。",
+                "market": "中国大陆",
+                "name": "黄埔区招聘：广州航新航空电子维修工程师",
+                "period": "2023-09-12",
+                "publisher": "Guangzhou Huangpu District",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/hpqgzkfqzdlyzl/jycy/zpxx/content/post_9294123.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "大陆民航维修执照的通用学历门槛为大专及以上。CCAR-66-R3 第 66.6 条的经历条件可由至少一年经授权相关维修工作满足（不含培训、实习），或由理工科大专及以上并完成适用实作培训满足。复杂航空器放行还要核对应航空器型号的签署和单位授权；首次类别机型签署须在通过机型维修培训和考试后完成至少连续六个月实习。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ccar66",
+                "limitation": "适用大陆民用航空器维修人员执照。",
+                "market": "中国大陆",
+                "name": "CCAR-66-R3",
+                "period": "2020",
+                "publisher": "CAAC",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202006/t20200608_202988.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 FAA 不单发一种航电机械师等级。核实际任务与适用规则：14 CFR §§43.3 和 43.7 分别列出可作业与可批准恢复使用的人员或机构，Part 65 和修理站规则另有限定。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "faa-av",
+                "limitation": "具体工作须查适用规则。",
+                "market": "美国",
+                "name": "FAA：怎样进入航电维修",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/education/about/how-become-aviation-maintenance-or-avionics-technician"
               }
             ]
           },
@@ -36230,7 +36253,7 @@
       },
       "hero": {
         "h1": "航空电子技术员",
-        "quick_answer": "航空电子技术员安装、检查、测试、调整或维修航空器与航天器上的航空电子设备（雷达与无线电与导航与导弹控制等）：按蓝图与手册与接线图规划安装、安装电气与电子组件与总成与系统、用电路测试仪与示波器与电压表测试与排查、设置并操作地面支持与测试设备执行功能性试验、解读飞行测试数据并保存记录；其工作不等于机体与动力系统维修，也不代替航空器维护放行签署与通电与射频与危险能量相关授权判定，并在系统状态不明或超出授权时停止升级。",
+        "quick_answer": "航空电子技术员安装、检查和排查航空器的通信、导航等电子设备。航线作业关注系统与工卡；部件维修更看重台架记录、序列号和故障复现条件。维修作业、检查和签署放行的权限分别核对。",
         "title": "航空电子技术员"
       },
       "market_signal_card": {
@@ -36770,7 +36793,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国2022相关职责分类、2025行业工资与中美维修许可",
+            "label": "大陆航电岗位样本与维修权限",
             "secondary_value": null,
             "value": {
               "$item": "avionics-technicians.profile.onet-structured-fields-block.3",
@@ -37582,7 +37605,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合航空电子技术员",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37659,7 +37682,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -37669,7 +37692,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "MBTI 人格测试"
           },
           {
             "href": {
@@ -37679,7 +37702,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格测试"
           },
           {
             "href": {
@@ -37689,7 +37712,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "智力与推理测试"
           }
         ]
       },
@@ -37797,7 +37820,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与航电记录",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37888,86 +37911,86 @@
       },
       {
         "derivation": null,
-        "display_value": "21,400人",
+        "display_value": "19,800 人",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业规模（本职业口径）",
-        "occupation_scope": "航空电子技术员",
-        "period": "2024 年；访问 2026-09-15",
+        "occupation_scope": "美国 SOC 49-2091 航空电子技术员",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "远快于平均（7% 或更高）",
+        "display_value": "9.4%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长标签（本职业口径）",
-        "occupation_scope": "航空电子技术员",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "occupation_scope": "美国 SOC 49-2091 航空电子技术员",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 1,800",
+        "display_value": "约 1,700 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "预测期职位空缺（本职业口径）",
-        "occupation_scope": "航空电子技术员",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "occupation_scope": "美国 SOC 49-2091 航空电子技术员",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "99,620美元/年（2025本职业行业中位数）",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "航空电子技术员",
-        "period": "不适用：来源未公布该字段",
+        "measure": "该行业航电技术员年工资中位数",
+        "occupation_scope": "航空运输业（Air transportation）",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "operations"
+          "ooh-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "90,720美元/年（2025本职业行业中位数）",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "航空电子技术员",
-        "period": "不适用：来源未公布该字段",
+        "measure": "该行业航电技术员年工资中位数",
+        "occupation_scope": "航空产品与零部件制造",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "operations"
+          "ooh-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "88,100美元/年（2025本职业行业中位数）",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "航空电子技术员",
-        "period": "不适用：来源未公布该字段",
+        "measure": "该行业航电技术员年工资中位数",
+        "occupation_scope": "专业、科学与技术服务",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "operations"
+          "ooh-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "72,790美元/年（2025本职业行业中位数）",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "航空电子技术员",
-        "period": "不适用：来源未公布该字段",
+        "measure": "该行业航电技术员年工资中位数",
+        "occupation_scope": "航空运输支持活动",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "operations"
+          "ooh-current"
         ]
       },
       {
@@ -38092,60 +38115,48 @@
       },
       {
         "derivation": null,
-        "display_value": "21,400人",
+        "display_value": "19,800 人",
         "fact_id": "us-employment-parent",
         "market": "美国",
         "measure": "就业规模（本职业口径）",
-        "occupation_scope": "航空电子技术员",
-        "period": "2024 年",
+        "occupation_scope": "美国 SOC 49-2091 航空电子技术员",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "远快于平均（7% 或更高）",
+        "display_value": "9.4%",
         "fact_id": "us-growth-parent",
         "market": "美国",
         "measure": "就业增长标签（本职业口径）",
-        "occupation_scope": "航空电子技术员",
-        "period": "2024—2034 年",
+        "occupation_scope": "美国 SOC 49-2091 航空电子技术员",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 1,800",
+        "display_value": "约 1,700 个/年",
         "fact_id": "us-openings-parent",
         "market": "美国",
         "measure": "预测期职位空缺（本职业口径）",
-        "occupation_scope": "航空电子技术员",
-        "period": "2024—2034 年",
+        "occupation_scope": "美国 SOC 49-2091 航空电子技术员",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+50)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "航空电子技术员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "ep-current"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与航电记录"
     },
     "badges": [
       "O*NET 49-2091.00 · Job Zone Three · 中等准备",
@@ -38163,7 +38174,7 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国就业增长（2025–2035）"
       },
       {
         "availability": "available",
@@ -38175,7 +38186,7 @@
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国预测期职位空缺（2024—2034）"
+        "label": "美国年均职位空缺（2025–2035）"
       },
       {
         "availability": "missing",
@@ -38189,17 +38200,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "航空电子技术员做什么、需要哪些学历与资格、美国与中国的收入和前景如何、AI 会改变哪些任务，以及航空器维护放行与射频与危险能量作业的授权边界；保留来源范围与数据缺口。"
+      "text": "比较航空电子技术员的航线与部件维修，核对大陆招聘和美国工资，并用虚构台架记录试做。"
     },
     "title": {
       "availability": "available",
-      "text": "航空电子技术员"
+      "text": "航空电子技术员：职责、工资与台架记录试做"
     }
   },
-  "source_content_sha256": "5f70a8e1ec03196bd401958e2b9e79a2c817089aef925ff4b845fda211eb938a",
+  "source_content_sha256": "24c848b3c1d143ed5668e135527441ea07ee0464bd941155fc0701f70087c714",
   "subject": {
     "canonical_slug": "avionics-technicians",
     "name": "航空电子技术员",
-    "summary": "航空电子技术员安装、检查、测试、调整或维修航空器与航天器上的航空电子设备（雷达与无线电与导航与导弹控制等）：按依据文件规划与安装、用仪器测量与测试与排查、设置地面支持设备执行功能性试验并保存维护记录。美国侧对应 O*NET 49-2091.00（Avionics Technicians），属 Job Zone Three（SVP 6.0 至 <7.0）；工资与就业与行业数据均为本职业口径。中国大陆侧本页未取得与该职业精确对应的公开职业条目与全国工资分布，仅以人社部职业中类作为代理，中文页面语言不构成中国等价职业或工资映射。"
+    "summary": "航空电子技术员安装、检查和排查航空器的通信、导航等电子设备。航线作业关注系统与工卡；部件维修更看重台架记录、序列号和故障复现条件。维修作业、检查和签署放行的权限分别核对。"
   }
 }

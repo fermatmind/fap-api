@@ -23675,13 +23675,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先体验称重记录、单据核对和异常沟通。观察自己能否保留原始值、分清单位、追溯批次，并在赶时间时仍按流程交接；再核目标岗位的班次和现场条件。"
+              "纸面体验｜同一批次标签为千克，表格为磅。保留原值，核单位及转换依据后再交收货负责人。 "
             ]
           },
           "id": "weighers-measurers-checkers-and-samplers-recordkeeping.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24765,12 +24764,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "称重计量工对物料、用品和设备称重、测量与核对，以保存相关记录；包括样本收集及登记。美国43-5111.00以文职记录为主，区别于生产检验员51-9061，也不等同计量检定人员。"
+              "称重、测量、检查与取样记录员核对批次、标签和读数，保留检测或收发记录，把不符项交给相应复核人。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "weighers-measurers-checkers-and-samplers-recordkeeping.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-43-5111.00"
           ],
           "type": "prose"
         }
@@ -25536,13 +25535,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先区分读数获取、记录辅助和就业预测。自动化可改变记录流程，文本工具的试用建议需逐项测试；本页没有称重计量工AI使用率或独立替代率，也没有可复核任务评分，因此分数另用编辑估算。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：同一批次标签为千克，表格为磅。保留原值，核单位及转换依据后再交收货负责人。"
             ]
           },
           "id": "weighers-measurers-checkers-and-samplers-recordkeeping.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-43-5111.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33036,6 +33035,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-43-5111.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 43-5111.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/43-5111.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38560,10 +38586,10 @@
       "text": "称重计量工"
     }
   },
-  "source_content_sha256": "5b30578b7430f270e9e465da1d5e64d812e8aebe7f008e21579273ba11a69ee4",
+  "source_content_sha256": "93a2c4ee6a616258b2db35e0bb38bd2b0a276418980a2afcb6b546e35db6bf7c",
   "subject": {
     "canonical_slug": "weighers-measurers-checkers-and-samplers-recordkeeping",
     "name": "称重计量工",
-    "summary": "称重计量工为物料、用品和设备称重、测量、核对并保存记录，也可收集和登记样本。这里采用美国 O*NET 43-5111.00 的记录型文职范围，区别于以生产检验为主的 51-9061。核心产出是可追溯的数量、重量、标签和异常记录；中国岗位须按实际职责核对。"
+    "summary": "称重、测量、检查与取样记录员核对批次、标签和读数，保留检测或收发记录，把不符项交给相应复核人。"
   }
 }

@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-counter-hangzhou": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-counter-huangpu": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:fast-food-and-counter-workers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:fast-food-and-counter-workers.sources.source-card.1": {
         "status": "mapped"
@@ -20127,60 +20133,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "id": "fast-food-and-counter-workers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-2"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "id": "fast-food-and-counter-workers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-3"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -20203,7 +20169,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -20231,7 +20197,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -22716,7 +22682,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Verify with a paper drill: give yourself a completely fictional shift assignment (outlet type and business hours, the day's menu and prices, cashiering and change rules, food hygiene and temperature requirements to observe, cleaning and restocking requirements, and possible customer complaint situations), and require you to write out the work sequence and key points within the shift, how to handle cashiering and reconciliation, the hygiene and temperature information that needs to be recorded, which situations must involve the shift manager or be reported, and the key points of cleaning and equipment safety."
+              "Paper exercise: use the K1 and K2 tickets in the entry section to calculate change and the cash difference, handle the mix-up and the out-of-range reading, and write a handoff. Work on your own before reading the reference."
             ]
           },
           "id": "fast-food-and-counter-workers.quick-decision.fit-decision-checklist.2",
@@ -24796,7 +24762,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This occupation requires on-site service and food handling experience, and O*NET lists it as Job Zone 1–2 (little to some preparation, SVP below 6.0), while BLS lists the typical entry-level education as no formal credential, no related experience and short-term on-the-job training provided; the work is mainly standing and walking and requires continuously facing customers. AI can assist with orders and information lookup but cannot replace on-site service, temperature and hygiene judgments, or complaint handling."
+              "Workers learn on-site service and food handling on the job. BLS lists no formal education or previous related experience and short-term on-the-job training as typical. Individual employers may set additional requirements."
             ]
           },
           "id": "fast-food-and-counter-workers.ai-impact.ai-impact-table.66",
@@ -26224,7 +26190,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national single-occupation monthly or hourly wage statistic precisely corresponding to this occupation in mainland China was obtained; this page provides only the industry average wage as background (non-private 62,461 yuan/year and private 55,123 yuan/year, 2025), which cannot be converted into a specific post's hourly wage or tip-inclusive income."
+              "No comparable mainland China nationwide occupational wage was verified. The 2025 accommodation and food services average is industry context. Historical postings are shown separately. Neither establishes an individual wage or tips."
             ]
           },
           "id": "fast-food-and-counter-workers.china-salary.career-snapshot-primary-locale.50",
@@ -26266,12 +26232,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other regions and employment models"
+              "Mainland job postings (different job settings)"
             ]
           },
           "id": "fast-food-and-counter-workers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "counter-hangzhou",
+            "counter-huangpu"
           ],
           "type": "prose"
         },
@@ -26280,12 +26247,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable monthly salary statistics were obtained for other regions and employment models (full-time, part-time and hourly, and labor outsourcing); differences across cities, store types and scale are large and must be checked against the store."
+              "A Hangzhou chain posting separates counter order and assembly duties from preparing menu items in the kitchen and does not show exact pay. A Huangpu caterer lists three cafeteria line attendants at CNY 4,500 per month, with serving and retaining food samples and a separate cooking role. Ask about rotation, who handles refunds or wrong orders, and whether kitchen duties or retaining food samples are included. These postings cannot establish national wages."
             ]
           },
           "id": "fast-food-and-counter-workers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "counter-hangzhou",
+            "counter-huangpu"
           ],
           "type": "prose"
         },
@@ -26294,12 +26262,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: look separately at real announcements from chain stores, group catering enterprises and independent restaurants; this round obtained no national share of their posts. A United States occupational name does not directly determine mainland China classification and qualification requirements."
+              "A corresponding national occupation wage distribution for mainland China was not verified. Compare the listed examples by actual duties and service scope."
             ]
           },
           "id": "fast-food-and-counter-workers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "internal-rubric"
+            "counter-hangzhou",
+            "counter-huangpu"
           ],
           "type": "prose"
         },
@@ -26714,12 +26683,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Growth of 5.8% (2025—2035)"
+              "BLS projects U.S. employment in SOC 35-3023 to change by +5.8%, from 3,855,900 in 2025 to 4,079,100 in 2035, with 827,400 openings per year on average, including replacement needs."
             ]
           },
           "id": "fast-food-and-counter-workers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27030,31 +26999,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Cashier direction",
@@ -28796,30 +28765,29 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Material one: fictional shift assignment",
-                  "Give the outlet type and business hours, the day's menu and prices, cashiering and change rules, food hygiene and temperature requirements to observe, cleaning and restocking requirements, and possible customer complaint situations, as the input for this exercise.",
-                  "Mark units and missing items and state that the material is entirely fictional.",
-                  "List the missing information that may affect the judgment.",
-                  "State that the exercise uses fictional materials and does not represent any real store, enterprise or employer.",
-                  "Checkable output: the work sequence and key points within the shift, cashiering and reconciliation handling, the hygiene and temperature information that needs to be recorded, situations that must involve the shift manager or be reported, and cleaning and equipment safety key points.",
-                  "State the boundary: food safety and hygiene conclusions must be made by competent authorities, testing bodies or a qualified party according to regulations."
+                  "Paper exercise at a fictional counter. Sandwiches are CNY 18 and cold drinks CNY 7.",
+                  "Ticket K1: one sandwich and two drinks. The customer tenders CNY 50 in cash.",
+                  "Ticket K2: one sandwich, CNY 18 paid electronically. The customer receives two cold drinks instead and reports the mix-up.",
+                  "Opening till float: CNY 100. No other cash movements. Closing cash count: CNY 130.",
+                  "At 17:10 the display refrigerator reads 6°C and contains a batch of packaged sandwiches. The time of the last in-range reading is missing.",
+                  "Exercise rules: refrigeration is 0–4°C. Stop selling an affected batch, label and isolate it and tell the shift manager. Verify wrong orders; a manager approves exchanges or refunds.",
+                  "Exercise rules: electronic payments are excluded from cash. Record and report any cash difference without adjusting the figures. All values are for this paper exercise."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Material two: shift work task (fictional)",
-                  "Requires writing out the work sequence and key points within the shift, cashiering and reconciliation handling, and the hygiene and temperature information that needs to be recorded, and stating which situations must involve the shift manager or be reported.",
-                  "Exercise output: an executable shift work and record summary."
+                  "First calculate K1’s total and change, expected closing cash and the difference.",
+                  "Handle the K2 mix-up and the out-of-range display separately. List what to check and hold, and who authorizes the next step.",
+                  "Write a handoff with the ticket, time, reading and cash difference. Finish before reading the reference."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material three: reference approach excerpt (fictional)",
-                  "First prepare materials and equipment by business period, then work in the order of ordering—payment—serving while keeping the dining area clean, and finally check and record according to temperature and hygiene requirements.",
-                  "For food safety or complaint questions that cannot be confirmed, keep them unknown and report to the shift manager, rather than handling them from experience.",
-                  "State that the reference approach is only an example and not the only correct method."
+                  "Finish your answer first",
+                  "After day six, open “Counter ticket reference answer (open after day six)” under FAQs and sources.",
+                  "Use the checklist there to record one difference and one correction."
                 ]
               },
               {
@@ -28943,50 +28911,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read a shift and hygiene requirement",
-                  "Excerpt one service or hygiene requirement and write out the execution key points."
+                  "Day 1: read the tickets and rules",
+                  "Record both tickets, both payment methods and the exercise authority."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: write an ordering and serving checklist",
-                  "Write out ordering, payment and serving key points by outlet type."
+                  "Day 2: calculate the order and change",
+                  "Calculate K1 and distinguish cash from electronic payment."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: write a record template",
-                  "List the information that needs to be recorded for orders, temperature and cleaning."
+                  "Day 3: reconcile closing cash",
+                  "Use the float and count to calculate expected cash and the difference."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: write cleaning and disinfection key points",
-                  "Write out the cleaning sequence for the dining area, service counter and equipment."
+                  "Day 4: check the temperature and mix-up",
+                  "Use the exercise rules to identify what to hold and who authorizes the next step."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: write safety key points",
-                  "Write out protection key points for burns, slips, chemicals and equipment operation."
+                  "Day 5: write the handoff",
+                  "Record the ticket, reading, cash difference and who takes over. Finish before reading the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: ask someone to challenge you",
-                  "Ask an experienced colleague or the shift manager to point out service and hygiene omissions and record the feedback."
+                  "Day 6: finish your own answer",
+                  "Check change, expected cash, both exceptions and the handoff before opening the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: write your judgment",
-                  "Write down whether you want to continue, what you need to make up, and which situations you cannot decide yourself."
+                  "Day 7: open the reference and review",
+                  "Open “Counter ticket reference answer (open after day six)” under FAQs and sources. Use its checklist to note a difference and a correction, then decide whether to continue or pause. Ask the employer about peak service, refunds and equipment training."
                 ]
               }
             ]
@@ -29003,13 +28971,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: whether you can find the service or hygiene requirement and write clear execution key points.",
-              "Day 2: whether you can write reasonable ordering and serving key points.",
-              "Day 3: whether you can write a complete and traceable record template.",
-              "Day 4: whether you can write an executable cleaning and disinfection sequence.",
-              "Day 5: whether you can write specific and actionable safety protection key points.",
-              "Day 6: whether you can correct your service and operation judgments after accepting criticism.",
-              "Day 7: whether you can state the capabilities you need to make up and the handling boundaries."
+              "You can identify the items and payment method on each ticket, and what went wrong.",
+              "You can recalculate the cash sale and change.",
+              "You can record the expected and counted cash and the difference without editing the figures.",
+              "You can document what you checked for K2, your decision and who approves it.",
+              "You can use the exercise rules to record the temperature, known and unknown details, your decision and the handoff.",
+              "Finish your own answer before opening the collapsed reference on day seven.",
+              "Continue exploring if the calculations, both exceptions and the handoff are clear. Repeat the exercise if key items are missing. Ask the employer about peak service, food hygiene duties and register authority."
             ]
           },
           "id": "fast-food-and-counter-workers.path.seven-day-decision.1",
@@ -31162,56 +31130,56 @@
                 ]
               },
               {
-                "answer": "United States O*NET-SOC 35-3023.00 \"Fast Food and Counter Workers\", corresponding to SOC 35-3023, in Job Zone 1–2 (SVP below 6.0), interest code CRS, and flagged as Bright Outlook; the median wage and percentiles are BLS OEWS estimates for this precise occupation (May 2025, presented via O*NET); employment and growth have a 2024—2034 projection basis presented by O*NET and a BLS OOH food preparation and serving related occupation group 2025—2035 basis, which this page marks separately.",
+                "answer": "O*NET-SOC 35-3023.00 describes fast food and counter service in the United States. This page uses 2025 OEWS wages and the BLS 2025–2035 projections for this occupation.",
                 "id": "fast-food-and-counter-workers.faq.3",
                 "question": "What is the United States statistical basis?",
                 "question_key": "career.faq.fast-food-and-counter-workers.q3",
                 "source_refs": [
                   "onet-summary",
-                  "internal-rubric"
+                  "bls-oews-2025",
+                  "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "In 2025 the median hourly wage was 15.00 USD and the median annual wage 31,200 USD; the 10th, 25th, 75th and 90th percentiles were about 22,840, 27,700, 36,070 and 42,650 USD per year (May 2025 OEWS, precise occupation 35-3023, presented via O*NET). Officials have not published an industry-specific median wage for this occupation, and this page keeps the gap rather than filling it in.",
+                "answer": "The 2025 U.S. median wage for this occupation was $15.00 an hour and $31,200 a year.",
                 "id": "fast-food-and-counter-workers.faq.4",
                 "question": "What is the United States wage?",
                 "question_key": "career.faq.fast-food-and-counter-workers.q4",
                 "source_refs": [
-                  "bls-oews-2025",
-                  "internal-rubric"
+                  "bls-oews-2025"
                 ]
               },
               {
-                "answer": "The 2024—2034 projection basis presented by O*NET: employment about 3,796,000 (2024), projected to grow faster than average (5% to 6%), with an estimated average of about 904,300 job openings per year (this value is the projected annual average and includes replacement needs). BLS OOH food preparation and serving related occupation group (35-3000) 2025—2035 basis: about 5,143,000 posts (2025), +5% (about +280,800 people), with an average of about 1,078,500 openings per year, most from replacement needs. The statistical scope and period of the two bases differ, and this page marks them separately without conversion.",
+                "answer": "BLS projects U.S. employment in SOC 35-3023 to change by +5.8%, from 3,855,900 in 2025 to 4,079,100 in 2035, with 827,400 openings per year on average, including replacement needs. For local jobs, check whether you take counter orders, serve a cafeteria line or rotate to kitchen prep, and ask about peak shifts.",
                 "id": "fast-food-and-counter-workers.faq.5",
                 "question": "What is the United States employment outlook?",
                 "question_key": "career.faq.fast-food-and-counter-workers.q5",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics data checked this time are on an industry category basis, and no national single-occupation wage statistic precisely corresponding to this occupation was obtained; this page uses the average wage of \"accommodation and food service\" urban units (2025 non-private 62,461 yuan/year, private 55,123 yuan/year) as an industry proxy, which only describes the industry background, and does not replace occupational wages with an industry average or a single recruitment quote.",
+                "answer": "A Hangzhou chain posting separates counter order and assembly duties from preparing menu items in the kitchen and does not show exact pay. A Huangpu caterer lists three cafeteria line attendants at CNY 4,500 per month, with serving and retaining food samples and a separate cooking role. Ask about rotation, who handles refunds or wrong orders, and whether kitchen duties or retaining food samples are included. These postings cannot establish national wages.",
                 "id": "fast-food-and-counter-workers.faq.6",
                 "question": "Can wages in mainland China be found?",
                 "question_key": "career.faq.fast-food-and-counter-workers.us-pay",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "counter-hangzhou",
+                  "counter-huangpu"
                 ]
               },
               {
-                "answer": "O*NET lists this occupation as Job Zone 1–2 (little to some preparation), SVP below 6.0; in the education survey about 56% indicated below a high school diploma, 24% indicated a high school diploma or equivalent and 17% indicated some college education but no degree. BLS notes that the typical entry-level education for this occupation requires no formal credential and no related work experience, with short-term on-the-job training provided. Posts involving food handling must comply with local health and hygiene requirements for food handlers and receive food hygiene and equipment operation training. In mainland China, store training plus on-the-job practice is commonly required, and the specifics are subject to recruitment announcements and local provisions.",
+                "answer": "BLS lists no formal educational credential as typical in the United States and identifies short-term on-the-job training. In mainland China, food production or business staff handling ready-to-eat food must obtain a health certificate after an annual health check before starting that work. Check the duties rather than assuming the rule applies based on the job title.",
                 "id": "fast-food-and-counter-workers.faq.7",
                 "question": "What education and qualifications are needed?",
                 "question_key": "career.faq.fast-food-and-counter-workers.education-path",
                 "source_refs": [
-                  "onet-details",
-                  "internal-rubric"
+                  "bls-projections-2025-35",
+                  "counter-cn-law"
                 ]
               },
               {
-                "answer": "A more accurate judgment is that some tasks will be assisted by tools and that the occupation as a whole will mainly see augmentation and structural adjustment. A 2023 ILO study shows that task exposure varies widely across occupations and that technical feasibility does not mean stores have already adopted it; meanwhile on-site service, food temperature and hygiene judgments, and handling equipment and customer emergencies require on-site work and responsibility, so the conclusion is that the way of working will change rather than that the occupation as a whole will be replaced.",
+                "answer": "Software may assist with order display or lookup. Staff still own temperature and hygiene checks, handoffs and exceptions. ILO research describes task exposure across occupations and does not establish adoption, productivity or replacement for this job.",
                 "id": "fast-food-and-counter-workers.faq.8",
                 "question": "Will this occupation be replaced by AI?",
                 "question_key": "career.faq.fast-food-and-counter-workers.credentials",
@@ -31238,6 +31206,15 @@
                 "source_refs": [
                   "bls-ooh-food-service",
                   "internal-rubric"
+                ]
+              },
+              {
+                "answer": "K1 totals CNY 32 and change is CNY 18. Expected closing cash is CNY 132. The count is CNY 130, a CNY 2 shortage. K2’s electronic payment is excluded. For K2, check the payment and original order, confirm the mix-up with the customer and inform the shift manager. Do not authorize an exchange or refund yourself. At 17:10 the display is at 6°C, over the exercise limit. Stop selling, label and isolate the affected sandwiches, record the unknown duration and tell the shift manager. Handoff example: “K2 payment and original ticket checked. Exchange or refund pending manager approval. Display at 6°C at 17:10, duration unknown. Stop sales immediately, label and isolate the affected batch, and notify the shift manager. In this paper handoff, record those steps as pending confirmation. Expected closing cash CNY 132, counted CNY 130, CNY 2 short. Refer to the manager.” Check four items: K1 total and change, closing cash and the difference, handling both the K2 and temperature exceptions, and handoff details and approval authority. Count each complete item. Repeat if a critical item is missing. The amounts, temperatures and authority rules are exercise assumptions. The source describes the occupation.",
+                "id": "fast-food-and-counter-workers.faq.11",
+                "question": "Counter ticket reference answer (open after day six)",
+                "question_key": "career.faq.fast-food-and-counter-workers.11",
+                "source_refs": [
+                  "onet-summary"
                 ]
               }
             ]
@@ -31270,7 +31247,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round checked O*NET35-3023 tasks, interests and education and May2025 national wage percentiles; BLS Table1.2 2025—2035; the different OOH occupation groups; the National Bureau of Statistics 2025 industry wages; the OEWS definition; and the scope of ILO WP96 and NIST AI RMF1.0."
+              "This page separates O*NET tasks, BLS projections, OEWS wages, industry context and historical postings. Tool examples do not establish store adoption or productivity."
             ]
           },
           "id": "fast-food-and-counter-workers.sources.source-card.2",
@@ -31300,12 +31277,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round obtained no precise mainland China occupational wage, national recruitment education distribution, measured AI adoption and effects for this occupation, or precise occupational wages for the listed United States industries. The accommodation and food service 62,461/55,123 yuan are annual average wages for urban units by industry; the United States national 35-3023 percentiles and the OOH occupation group are kept separate. The FAQ, Hero and shared source register still retain the old projection, the mislabeled 35-3000 and the wage exclusion of tips, and within the protected scope these are not changed, and whole-page consistency is not asserted."
+              "U.S. wage and employment figures come from OEWS and the BLS projections respectively. Mainland industry averages are background, and job postings describe particular stations and terms. This page did not verify a national occupational wage distribution in mainland China or a causal effect of AI adoption on this occupation."
             ]
           },
           "id": "fast-food-and-counter-workers.sources.source-card.4",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "bls-oews-2025",
+            "nbs-wages-2025"
           ],
           "type": "prose"
         }
@@ -31329,28 +31308,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
-                "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (English)",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
                 "entity": "MBTI (Chinese)",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Big Five (Chinese)",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the fast food and counter worker occupation page",
@@ -31381,7 +31348,8 @@
                 "details": [
                   "Official occupational scope: taking orders and providing food and beverages, serving customers at a counter or serving station, possibly collecting payment and possibly taking part in preparing food and beverages.",
                   "Interest code CRS; preparation level Job Zone 1–2 (SVP below 6.0); education survey: below a high school diploma 56%, high school diploma or equivalent 24%, some college education without a degree 17%; the occupation is flagged as Bright Outlook.",
-                  "Wages and employment trends (citing BLS data): 2025 median hourly wage 15.00 USD and median annual wage 31,200 USD; 2024 employment 3,796,000; 2024—2034 projected to grow faster than average (5% to 6%); estimated average of about 904,300 job openings per year; the main industry in 2024 is accommodation and food service."
+                  "The 2025 U.S. median wage for this occupation was $15.00 an hour and $31,200 a year.",
+                  "BLS projects U.S. employment in SOC 35-3023 to change by +5.8%, from 3,855,900 in 2025 to 4,079,100 in 2035, with 827,400 openings per year on average, including replacement needs."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31429,17 +31397,16 @@
                 "url": "https://www.bls.gov/ooh/food-preparation-and-serving/food-and-beverage-serving-and-related-workers.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Precise occupation 35-3023 (presented via O*NET): 2024 employment 3,796,000, 2024—2034 projected to grow faster than average (5% to 6%), with an estimated average of about 904,300 job openings per year.",
-                  "\"Occupational openings\" in the BLS employment projections table is an annual average for the projection period, and this page marks it as \"/year\" accordingly and does not interpret it as a ten-year cumulative figure."
+                  "BLS projects U.S. employment in SOC 35-3023 to change by +5.8%, from 3,855,900 in 2025 to 4,079,100 in 2035, with 827,400 openings per year on average, including replacement needs."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
-                "limitation": "A projection is not an actual outcome; the average annual openings include replacement needs and cannot be broken down into individual hiring probability; the two projection bases have different statistical periods.",
+                "limitation": "U.S. occupation only. Average annual openings differ from net employment change over the decade.",
                 "market": "United States",
-                "name": "BLS: occupational projections and characteristics tables (2024—2034 projection, presented via O*NET; see also the 2025—35 projection table)",
-                "period": "2024—2034 projections as presented by O*NET OnLine; 2025—35 table; accessed 2026-09-20",
+                "name": "BLS: Occupational Projections and Characteristics, 2025–2035, Table 1.2",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact occupation (SOC 35-3023)",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31453,7 +31420,7 @@
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "bls-oews-2025",
-                "limitation": "This is occupation-level wage statistics; the median is not a starting salary; OEWS excludes tips and overtime income and cannot represent part-time or service-charge-inclusive income.",
+                "limitation": "The occupational median is not starting pay. OEWS includes tips and qualifying incentive pay and excludes premium pay such as overtime.",
                 "market": "United States",
                 "name": "BLS: May 2025 Occupational Employment and Wage Statistics (OEWS, Fast Food and Counter Workers, 35-3023)",
                 "period": "May 2025 wage data; accessed 2026-09-20",
@@ -31513,17 +31480,17 @@
                 "accessed_at": "2026-09-20",
                 "details": [
                   "Used to distinguish occupational facts, statistical bases, industry proxies, food hygiene and employment boundaries, and AI assistance and human review.",
-                  "This research method and editorial synthesis are marked as internal_rubric or editorial_synthesis."
+                  "The page explains how to distinguish statistical data, job postings and editorial examples."
                 ],
                 "evidence_type": "editorial method",
                 "id": "internal-rubric",
                 "limitation": "It is not an external occupational fact source and does not replace official statistics or jurisdictional rules.",
                 "market": "Mainland China / United States",
-                "name": "FermatMind career content field and evidence basis rules",
+                "name": "Sources and methods on this page",
                 "period": "current authoring rules; accessed 2026-09-20",
                 "publisher": "FermatMind",
-                "scope": "field review and source disclosure",
-                "url": "https://fermatmind.com"
+                "scope": "Editorial methods",
+                "url": "https://fermatmind.com/en/career/jobs/fast-food-and-counter-workers#career-content-sources"
               },
               {
                 "details": [
@@ -31541,6 +31508,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The duties distinguish counter orders and assembly from preparing menu items in the kitchen and cleaning equipment. No exact pay amount was visible."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "counter-hangzhou",
+                "limitation": "One posting; not a national wage estimate or confirmation the vacancy is still open.",
+                "market": "Mainland China",
+                "name": "Yuhang, Hangzhou: counter and kitchen crew",
+                "period": "2026 posting / accessed November 9, 2026",
+                "publisher": "Zhaopin / Hangzhou KFC",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhaopin.com/jobdetail/CC140408480J40949214808.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The third employer lists three line attendants at CNY 4,500 per month. It lists serving and retaining food samples and has a separate batch-cook listing."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "counter-huangpu",
+                "limitation": "One posting; not a national wage estimate or confirmation the vacancy is still open.",
+                "market": "Mainland China",
+                "name": "Huangpu contract catering: cafeteria line attendant",
+                "period": "2026-08-18",
+                "publisher": "Huangpu District Employment Service Center, Guangzhou",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzjg/qt/ldjyfwzx/kljy/content/post_10969476.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Article 45: annual check and health certificate for ready-to-eat food handlers."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "counter-cn-law",
+                "limitation": "Mainland China food production and business activities.",
+                "market": "Mainland China",
+                "name": "Food Safety Law, 2025 revision",
+                "period": "2025-12-01",
+                "publisher": "National People’s Congress Standing Committee; Beijing Government copy",
+                "scope": "exact",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202603/t20260325_4565776.html"
               }
             ]
           },
@@ -32411,7 +32423,7 @@
               "entry": "link-16",
               "field": "url"
             },
-            "问题": "Will this occupation shrink by 2034?"
+            "问题": "How is employment projected to change in 2025–2035?"
           },
           {
             "回答": {
@@ -34401,6 +34413,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-counter-hangzhou",
+            "posting-counter-huangpu"
+          ],
           "sources_note": {
             "$item": "fast-food-and-counter-workers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34410,7 +34426,7 @@
           "ui": {
             "ai_heading": "Will AI affect the wages of fast food and counter workers?",
             "driver_heading": "Which industries and directions use this occupation?",
-            "official_heading": "Public recruitment samples and industry proxies (not statistics for this occupation)",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Education background, common post directions and verification suggestions (editorial compilation, not wage statistics)",
             "scenario_heading": "With different education and training backgrounds, which post directions do fast food and counter workers usually start from?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -34553,7 +34569,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "2024—2034 employment · average annual openings",
+            "指标": "Projected average annual openings, 2025–2035",
             "数值": {
               "$item": "fast-food-and-counter-workers.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -35434,7 +35450,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS employment projections (2024—2034) and BLS OOH (2025—2035)",
+            "label": "BLS occupational employment projections, 2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "fast-food-and-counter-workers.profile.onet-structured-fields-block.4",
@@ -36235,7 +36251,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Start checking whether fast food and counter work suits you",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36309,30 +36325,10 @@
               "$link": "fast-food-and-counter-workers.navigation.links.1",
               "block": "navigation",
               "copy_key": "career.item.navigation-links",
-              "entry": "navigation-2",
-              "field": "url"
-            },
-            "label": "MBTI (English)"
-          },
-          {
-            "href": {
-              "$link": "fast-food-and-counter-workers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-3",
-              "field": "url"
-            },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "fast-food-and-counter-workers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Explore my personality preferences"
           },
           {
             "href": {
@@ -36342,7 +36338,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Explore my Big Five traits"
           }
         ]
       },
@@ -36541,36 +36537,36 @@
       },
       {
         "derivation": null,
-        "display_value": "About 3,796,000 (2024, the BLS projection basis presented by O*NET); the BLS OOH food preparation and serving related occupation group 2025 number of posts is about 5,143,000",
+        "display_value": "3,855,900 people (2025 BLS projections base year)",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "United States employment size",
-        "occupation_scope": "Fast Food and Counter Workers (O*NET-SOC 35-3023.00)",
-        "period": "2024",
+        "measure": "2025 base-year employment",
+        "occupation_scope": "U.S. SOC 35-3023",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Faster than average growth (5% to 6%, 2024—2034, BLS projection, presented via O*NET); the BLS OOH food preparation and serving related occupation group 2025—2035 is +5%",
+        "display_value": "+5.8% (projected employment change, 2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "United States employment change",
-        "occupation_scope": "Fast Food and Counter Workers (O*NET-SOC 35-3023.00)",
-        "period": "2024–2034 projection",
+        "measure": "Projected employment change",
+        "occupation_scope": "U.S. SOC 35-3023",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 904,300 per year (2024—2034, BLS projected annual average, precise occupation 35-3023)",
+        "display_value": "827,400 per year (including replacement needs)",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "United States average annual job openings",
-        "occupation_scope": "Fast Food and Counter Workers (O*NET-SOC 35-3023.00)",
-        "period": "2024–2034 projection",
+        "measure": "Average annual openings",
+        "occupation_scope": "U.S. SOC 35-3023",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -36730,6 +36726,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The duties distinguish counter orders and assembly from preparing menu items in the kitchen and cleaning equipment. No exact pay amount was visible.",
+        "fact_id": "posting-counter-hangzhou",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Yuhang, Hangzhou: counter and kitchen crew",
+        "period": "2026 posting / accessed November 9, 2026",
+        "source_refs": [
+          "counter-hangzhou"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The third employer lists three line attendants at CNY 4,500 per month. It lists serving and retaining food samples and has a separate batch-cook listing.",
+        "fact_id": "posting-counter-huangpu",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Huangpu contract catering: cafeteria line attendant",
+        "period": "2026-08-18",
+        "source_refs": [
+          "counter-huangpu"
+        ]
       }
     ]
   },
@@ -36756,19 +36776,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "United States employment change (2024–2034)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "United States employment size (2024 projection basis)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "United States average annual job openings (2024–2034)"
+        "label": "U.S. projected annual job openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -36782,14 +36802,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What fast food and counter workers do, how to enter the field, work boundaries and development directions. Based on official O*NET and BLS occupational data, distinguishing precise occupation statistics, industry proxies and evidence gaps."
+      "text": "Compare fast food counter duties, from taking orders to serving food. See mainland China counter and cafeteria listings alongside U.S. pay and job outlook."
     },
     "title": {
       "availability": "available",
       "text": "Fast Food and Counter Workers"
     }
   },
-  "source_content_sha256": "d0195fc0da48f2812fbc478b5d232bd787eaca44fc3aa6e9994f53d34971f8be",
+  "source_content_sha256": "16ab3c5aa719052a25fac79fa50f74556812df9a2f3c7dafcce1d2e4a5a1c247",
   "subject": {
     "canonical_slug": "fast-food-and-counter-workers",
     "name": "Fast Food and Counter Workers",

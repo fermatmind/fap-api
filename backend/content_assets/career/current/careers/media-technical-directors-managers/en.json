@@ -2,9 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7230,12 +7227,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "60-minute paper exercise (all inputs fictional; no real equipment operation or broadcasting): program-relative time is 00:00—30:00. The script specifies C1 host wide shot for 00:00—10:00, C2 guest close-up for 10:00—20:00, and P1 short video for 20:00—30:00. Use a hard cut at 10:00 and a 2-second dissolve at 20:00; the dissolve belongs to the third segment and adds no time. Equipment list: C1/C2 cameras, P1 player, switcher S, and monitor M. Precheck records: C1 picture normal, C2 no signal, P1 picture normal, S selection test normal, M display normal. Exercise rules: switch only to sources confirmed normal and permitted. Permissions for C1 and C2 are confirmed; P1 permission awaits the responsible person's confirmation. Do not alter the script independently. Record anomalies first and submit them to the production lead for decisions. Write a planned switching table, an available/pending table, and two escalation questions. Write conditional branches following approval without assuming permissions have been resolved or equipment restored. Spend the first 10 minutes reading, 25 minutes making tables, 15 minutes independently reviewing, and 10 minutes writing corrections and unresolved questions. These internal rules are neither law nor real equipment test procedures."
+              "Find “Sheet S: Signal checks and handoff” under “Entering the field, qualifications, and career development.”"
             ]
           },
           "id": "media-technical-directors-managers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7267,12 +7264,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "This page covers O*NET 27-2012.05, Media Technical Directors/Managers: coordinating technical departments such as camera, editing, engineering, and maintenance to produce radio/television programs. Common reported titles include Broadcast Director, News Technical Director, Newscast Director, Operations Director, Production Director, Production Manager, Studio Director, and Technical Director. This page excludes adjacent occupations such as Project Management Specialists, Computer Systems Analysts, and Network and Computer Systems Administrators."
+              "Media technical directors and managers coordinate camera, audiovisual and engineering staff. They verify feeds, switching plans and output status and hand off faults. U.S. wage and employment figures cover the broader producers and directors group."
             ]
           },
           "id": "media-technical-directors-managers.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-summary",
             "source-pack-onet-details"
           ],
           "type": "prose"
@@ -7354,13 +7350,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Research inputs: O*NET27-2012.05 identity, tasks, context, ECR, and education concern the suboccupation; 2025 wages, 2025—2035 employment, and industries concern parent occupation Producers and Directors (27-2012). US broadcast policy task context is not extrapolated to Chinese rules, qualifications, or industries."
+              "O*NET 27-2012.05 describes this occupation’s tasks and work context. U.S. wages come from OEWS and projections from BLS Table 1.2."
             ]
           },
           "id": "media-technical-directors-managers.profile.onet-structured-fields-block.7",
           "source_refs": [
             "source-pack-onet-details",
-            "wages"
+            "source-pack-onet-localwages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7542,7 +7539,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial trial suggestion: use only fictional scripts and status records to try AI-assisted log organization, switching-table drafts, and lead retrieval. Check durations, actual states, and permissions individually. O*NET recruitment technology directories do not prove adoption of these GenAI tasks. Tools cannot issue permissions, repair equipment, or replace organizational authorization. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Editorial trial suggestion: use only fictional scripts and status records to try AI-assisted log organization, switching-table drafts, and lead retrieval. Check durations, actual states, and permissions individually. O*NET recruitment technology directories do not prove adoption of these GenAI tasks. Tools cannot issue permissions, repair equipment, or replace organizational authorization."
             ]
           },
           "id": "media-technical-directors-managers.ai-impact.ai-impact-table.2",
@@ -7712,7 +7709,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "US 2025 Wages and 2025—2035 Projections: Parent Occupation Producers and Directors (27-2012), Not Media Technical Directors/Managers Separately"
+              "O*NET displays the May 2025 BLS OEWS national wages for U.S. parent occupation 27-2012."
             ]
           },
           "fact_refs": [
@@ -7720,7 +7717,7 @@
           ],
           "id": "media-technical-directors-managers.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -7729,7 +7726,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2025 combined-scope wage data: median annual wage USD 90,360 (approximately USD 43.44 per hour); 10th percentile USD 45,780 (USD 22.01 per hour), 25th percentile USD 62,670 (USD 30.13 per hour), 75th percentile USD 134,800 (USD 64.81 per hour), and 90th percentile USD 198,540 (USD 95.45 per hour). These are O*NET's combined figures for Producers and Directors (27-2012), not this occupation separately. Percentiles are statistical positions and do not describe individual take-home income."
+              "The May 2025 national median for U.S. parent occupation 27-2012 was USD 90,360 a year and USD 43.44 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 45,780, 62,670, 90,360, 134,800, 198,540."
             ]
           },
           "fact_refs": [
@@ -7737,7 +7734,7 @@
           ],
           "id": "media-technical-directors-managers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -8026,12 +8023,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET respondents' education for this US suboccupation: 92% bachelor's degrees, 4% high school, and 1% postsecondary certificates. JobZone4 describes general preparation, not a uniform threshold or Chinese requirement. Chinese production and operation permits concern organizations conducting specified business, distinct from individual appointments, training, and material copyright."
+              "BLS lists a bachelor’s degree as typical preparation for the U.S. parent group. Check switching equipment, studio workflow, supervision and broadcast authority for each technical role."
             ]
           },
           "id": "media-technical-directors-managers.path.career-path-block.2",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8040,12 +8037,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Paper portfolio: this page's 30-minute, three-segment switching plan, five equipment prechecks, two escalations for C2's fault and P1's permission, approved conditional branches, one correction, and evidence for continuing or stopping. Do not operate equipment or submit real programs or contracts."
+              "The historical video direction vacancy called for camera and directing experience for live meeting coverage. It concerns that setting."
             ]
           },
           "id": "media-technical-directors-managers.path.career-path-block.3",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8082,12 +8079,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Separate organizational permits, individual appointments, and material copyright. Articles Two and Four of China's 2025 revised Provisions on the Administration of Radio and Television Program Production and Operation specify production and operation scope and organizational permits; Article Eleven exempts legally established radio and television stations from obtaining this additional permit. It is not an individual programming director license, a station establishment permit, or material authorization."
+              "Paper exercise “Sheet S: Signal checks and handoff.” In fictional studio sheet V2, signal records for S1 and S2 are checked, and S3 awaits review. The old log lists S3 as ready. List verified and pending inputs for handoff. In the variant, verify only S3."
             ]
           },
           "id": "media-technical-directors-managers.path.career-path-block.6",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8096,12 +8093,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Capability ladder: before entering media technical direction/management, verify the official occupational scope, actual employer requirements, education or training, local rules, and supervised tasks. Do not infer these directly from adjacent occupations. Advancement rests on reviewable switching and test records, not a guaranteed number of years."
+              "Complete both cases and save your first draft. Then open “Paper exercise answer key (open after completing)” in “Frequently asked questions and sources.” Check whether someone can trace the original values, pending items and handoff owner."
             ]
           },
           "id": "media-technical-directors-managers.path.career-path-block.7",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8132,7 +8129,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "US parent occupation 27-2012: 181,000 employed in 2025, projected 188,300 in 2035, growth of 4% over 2025—2035, and net increase of 7,300; 12,100 average annual openings include replacements. Not media technical directors/managers separately, current recruitment, or individual success rates."
+              "Occupational outlook and related work"
             ]
           },
           "id": "media-technical-directors-managers.market-signals.market-signal-card.1",
@@ -8147,12 +8144,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Employment levels, growth rates, net changes, and annual openings must be explained separately and cannot be combined into an individual employment guarantee."
+              "BLS Table 1.2 for U.S. parent occupation 27-2012 shows about 181,000 jobs in 2025 and projects 188,300 in 2035 (4.0%), with about 12,100 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "media-technical-directors-managers.market-signals.market-signal-card.2",
           "source_refs": [
-            "employment"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8266,21 +8263,22 @@
                 ]
               },
               {
-                "answer": "BLS 2025 combined-scope wage data: median USD 90,360 per year (USD 43.44 per hour); 10th percentile USD 45,780, 25th percentile USD 62,670, 75th percentile USD 134,800, and 90th percentile USD 198,540 per year. These cover Producers and Directors (27-2012), not this occupation separately. Percentiles do not describe individual take-home income.",
+                "answer": "The May 2025 national median for U.S. parent occupation 27-2012 was USD 90,360 a year and USD 43.44 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 45,780, 62,670, 90,360, 134,800, 198,540.",
                 "id": "media-technical-directors-managers.faq.7",
                 "question": "What is the US salary evidence?",
                 "question_key": "career.faq.media-technical-directors-managers.us-pay",
                 "source_refs": [
-                  "wages"
+                  "source-pack-onet-localwages"
                 ]
               },
               {
-                "answer": "US Job Zone 4: typically requires a four-year bachelor's degree, considerable work-related experience, and on-the-job training. Mainland China requirements depend on employers, broadcast permissions, and relevant rules.",
+                "answer": "BLS lists a bachelor’s degree as typical preparation for the U.S. parent group. Check switching equipment, studio workflow, supervision and broadcast authority for each technical role. The historical video direction vacancy called for camera and directing experience for live meeting coverage. It concerns that setting.",
                 "id": "media-technical-directors-managers.faq.8",
                 "question": "What are the entry and training paths?",
                 "question_key": "career.faq.media-technical-directors-managers.education-path",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
@@ -8293,12 +8291,12 @@
                 ]
               },
               {
-                "answer": "BLS projects employment for Producers and Directors (27-2012) to rise from 181,000 in 2025 to 188,300 in 2035, a 4.0% increase. Average annual openings are 12,100, including replacement demand. These parent-occupation figures are not separate estimates for Media Technical Directors/Managers or an individual’s hiring probability.",
+                "answer": "BLS Table 1.2 for U.S. parent occupation 27-2012 shows about 181,000 jobs in 2025 and projects 188,300 in 2035 (4.0%), with about 12,100 openings per year including replacements. Counts are rounded independently.",
                 "id": "media-technical-directors-managers.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.media-technical-directors-managers.outlook-transition",
                 "source_refs": [
-                  "outlook"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8315,6 +8313,15 @@
                 "id": "media-technical-directors-managers.faq.12",
                 "question": "What are the boundaries for using this page?",
                 "question_key": "career.faq.media-technical-directors-managers.boundary"
+              },
+              {
+                "answer": "There are 2 verified records in the original and 3 in the variant. Retain the original log and keep pending inputs separate. Paper checks do not authorize broadcast.",
+                "id": "media-technical-directors-managers.faq.paper-exercise",
+                "question": "Paper exercise answer key (open after completing)",
+                "question_key": "career.faq.media-technical-directors-managers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -8655,20 +8662,19 @@
                 "url": "https://www.onetonline.org/link/localtraining/27-2012.05"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "BLS 2025 combined-scope wage data: 10 / 25 / median / 75 / 90 percentiles and hourly values.",
-                  "The O*NET page labels these as Producers and Directors (27-2012) combined-scope figures, not this occupation separately."
+                  "The May 2025 national median for U.S. parent occupation 27-2012 was USD 90,360 a year and USD 43.44 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 45,780, 62,670, 90,360, 134,800, 198,540."
                 ],
                 "evidence_type": "official wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "Combined scope: Producers and Directors (27-2012) data, not 27-2012.05 separately; percentiles do not describe individual take-home income.",
+                "limitation": "National occupational distribution. Local wages and individual offers vary.",
                 "market": "United States",
                 "name": "O*NET 27-2012.05 National Wages (Producers and Directors 27-2012 Scope; BLS 2025 Wage Data)",
-                "period": "O*NET 2026 occupational profile; accessed 2026-09-25",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/27-2012.05"
+                "url": "https://www.onetonline.org/link/localwages/27-2012.00"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8751,21 +8757,46 @@
                 "url": "https://www.nrta.gov.cn/art/2015/5/21/art_1588_43694.html"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Video source switching and effects execution — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Test equipment and monitor broadcasts — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Act as liaison between engineering and production — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                  "BLS Table 1.2 for U.S. parent occupation 27-2012 shows about 181,000 jobs in 2025 and projects 188,300 in 2035 (4.0%), with about 12,100 openings per year including replacements. Counts are rounded independently.",
+                  "BLS lists a bachelor’s degree as typical preparation for the U.S. parent group. Check switching equipment, studio workflow, supervision and broadcast authority for each technical role."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "27-2012",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The historical video direction vacancy called for camera and directing experience for live meeting coverage. It concerns that setting."
+                ],
+                "id": "cn-work-example",
+                "limitation": "This case does not establish national pay, entry requirements or hiring.",
+                "market": "Mainland China",
+                "name": "NRTA service bureau: video direction recruitment example",
+                "period": "2019",
+                "publisher": "National Radio and Television Administration of China",
+                "scope": "Named work example",
+                "url": "https://www.nrta.gov.cn/art/2019/3/15/art_51_45068.html"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks the paper records only.",
+                "market": "This page",
+                "name": "Sheet S: Signal checks and handoff",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "scope": "Paper exercise",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -11138,7 +11169,7 @@
             "item": "media-technical-directors-managers.source-register.published.1"
           }
         },
-        "note": "O*NET 27-2012.05 describes Media Technical Directors/Managers. BLS wage and 2025–2035 employment figures apply to the broader Producers and Directors occupation (27-2012), not this specialty separately. Technology demand signals describe tools mentioned in job postings; they do not establish AI effects. Chinese industry figures are proxies rather than occupation-specific wages."
+        "note": "O*NET describes the tasks, OEWS provides wage estimates, and BLS Table 1.2 provides employment projections."
       },
       "work_context_block": "US O*NET survey: 100% use email daily, 94% have constant contact with others, 86% face time pressure daily, 81% consider accuracy extremely important, 81% work in controlled indoor environments daily, 94% use telephones daily, 79% have face-to-face discussions daily, and 77% usually work more than 40 hours a week. These are respondent percentages, not Chinese working hours or employer guarantees."
     },
@@ -11159,7 +11190,7 @@
     ],
     "path": "/en/career/jobs/media-technical-directors-managers",
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI tools and human review",
       "china-salary": "Mainland China Salaries",
       "direction-comparison": "Adjacent Occupation Comparison",
       "fit": "Fit Signals",
@@ -11177,51 +11208,51 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": "BLS Employment Projections Table 1.2, 2025–2035, Producers and Directors (27-2012); figures are for the parent occupation, not Media Technical Directors/Managers separately.",
-        "display_value": "181,000 people (2025; Producers and Directors combined scope)",
+        "derivation": null,
+        "display_value": "About 181,000 jobs",
         "fact_id": "us-employment-2024",
-        "market": "United States (Producers and Directors 27-2012 Combined Scope)",
-        "measure": "U.S. employment size (combined scope)",
-        "occupation_scope": "O*NET 27-2012 combined scope, not 27-2012.05 separately",
+        "market": "United States",
+        "measure": "Parent occupation · U.S. employment (2025)",
+        "occupation_scope": "27-2012",
         "period": "2025",
         "source_refs": [
-          "outlook"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "BLS Employment Projections Table 1.2, 2025–2035, Producers and Directors (27-2012); figures are for the parent occupation, not Media Technical Directors/Managers separately.",
-        "display_value": "4.0% projected employment growth (2025–2035; Producers and Directors combined scope)",
+        "derivation": null,
+        "display_value": "4.0%",
         "fact_id": "us-growth-2024-2034",
-        "market": "United States (Producers and Directors 27-2012 Combined Scope)",
-        "measure": "Projected employment growth (combined scope)",
-        "occupation_scope": "O*NET 27-2012 combined scope, not this occupation separately",
+        "market": "United States",
+        "measure": "Parent occupation · U.S. projected employment change (2025–2035)",
+        "occupation_scope": "27-2012",
         "period": "2025–2035",
         "source_refs": [
-          "outlook"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "BLS Employment Projections Table 1.2, 2025–2035, Producers and Directors (27-2012); figures are for the parent occupation, not Media Technical Directors/Managers separately.",
-        "display_value": "12,100 openings per year on average (2025–2035; Producers and Directors combined scope)",
+        "derivation": null,
+        "display_value": "About 12,100 per year",
         "fact_id": "us-openings-2024-2034",
-        "market": "United States (Producers and Directors 27-2012 Combined Scope)",
-        "measure": "Projected openings (annual average, combined scope)",
-        "occupation_scope": "O*NET 27-2012 combined scope, not this occupation separately",
+        "market": "United States",
+        "measure": "Parent occupation · U.S. annual openings (2025–2035)",
+        "occupation_scope": "27-2012",
         "period": "2025–2035",
         "source_refs": [
-          "outlook"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "Median from BLS 2025 combined-scope wage data displayed on O*NET's national wages page.",
-        "display_value": "USD 90,360 per year (approximately USD 43.44 per hour; combined scope)",
+        "derivation": null,
+        "display_value": "USD 90,360/year",
         "fact_id": "us-wage-median-2025",
-        "market": "United States (Producers and Directors 27-2012 Combined Scope)",
-        "measure": "2025 median annual wage (combined scope)",
-        "occupation_scope": "Producers and Directors (O*NET 27-2012 combined scope, not 27-2012.05 separately)",
-        "period": "2025 wage data; accessed 2026-09-25",
+        "market": "United States",
+        "measure": "Parent occupation · U.S. median annual wage (May 2025)",
+        "occupation_scope": "27-2012",
+        "period": "2025-05",
         "source_refs": [
-          "wages"
+          "source-pack-onet-localwages"
         ]
       },
       {
@@ -11235,57 +11266,45 @@
         "source_refs": [
           "wages"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Media Technical Directors/Managers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
-      "Technical Control and Signal Switching",
-      "Equipment Testing and Broadcast Monitoring",
-      "Engineering and Production Coordination"
+      "Media Technical Directors and Managers",
+      "Wages and projections use separate tables",
+      "China occupational wage distribution unavailable"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-median-2025",
         "key": "us_pay",
-        "label": "US Salary Reference"
+        "label": "Parent occupation · U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2024-2034",
         "key": "us_growth",
-        "label": "U.S. employment growth (2025–2035; parent occupation)"
+        "label": "Parent occupation · U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "U.S. employment size (2025; parent occupation)"
+        "label": "Parent occupation · U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2024-2034",
         "key": "us_openings",
-        "label": "U.S. average annual openings (2025–2035; parent occupation)"
+        "label": "Parent occupation · U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11299,17 +11318,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Explore media technical directing duties and entry paths. U.S. pay and 2025–2035 outlook use Producers and Directors data, not separate estimates for this specialty."
+      "text": "Explore media technical directors and managers tasks, U.S. wage percentiles and employment projections, with a paper exercise on checking records."
     },
     "title": {
       "availability": "available",
-      "text": "Media Technical Directors/Managers: Work, US Wages, and Entry Paths"
+      "text": "Media Technical Directors and Managers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "002bd6d68563ea143f76aa0aaf620a313847589ad66ecd3b6458b562d8d37748",
+  "source_content_sha256": "579c8c9f02834f0c387aab6c215255b3a51e7c6eeb3734e576e87698c4aa2e32",
   "subject": {
     "canonical_slug": "media-technical-directors-managers",
-    "name": "Media Technical Directors/Managers",
-    "summary": "Media technical directors/managers (O*NET27-2012.05) coordinate camera, editing, engineering, and maintenance departments to produce radio and television programs, test equipment, switch video sources, monitor pictures and broadcasts, and liaise between engineering and production. Specific control, content, and site safety responsibilities require verification against organizational authorization and applicable rules."
+    "name": "Media Technical Directors and Managers",
+    "summary": "Media technical directors and managers coordinate camera, audiovisual and engineering staff. They verify feeds, switching plans and output status and hand off faults. U.S. wage and employment figures cover the broader producers and directors group."
   }
 }

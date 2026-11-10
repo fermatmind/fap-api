@@ -1469,6 +1469,9 @@
       "item:claims-adjusters-appraisers-examiners-and-investigators.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:claims-adjusters-appraisers-examiners-and-investigators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:claims-adjusters-appraisers-examiners-and-investigators.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30440,6 +30443,21 @@
           "id": "claims-adjusters-appraisers-examiners-and-investigators.path.recruitment-sample.1",
           "title": "Notes on the use of recruitment samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. An accident photo matches the reported date but does not identify the insured vehicle. Separate the known facts from the attribution to verify for claims review."
+            ]
+          },
+          "id": "claims-adjusters-appraisers-examiners-and-investigators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Trace evidence in an insurance claim",
+          "type": "notice"
         }
       ]
     },
@@ -36879,6 +36897,13 @@
         "id": "claims-adjusters-appraisers-examiners-and-investigators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "claims-adjusters-appraisers-examiners-and-investigators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37445,7 +37470,7 @@
       "text": "Claims adjusters, examiners and investigators"
     }
   },
-  "source_content_sha256": "7a1d50138c73c17a97d132aa30f35b30d5c72948d47f6e371f25f19c5608d4db",
+  "source_content_sha256": "a892c324aa81c8f0c2de2b3672f3e1ef550ae92af717dd213d4f9252bcd6ad60",
   "subject": {
     "canonical_slug": "claims-adjusters-appraisers-examiners-and-investigators",
     "name": "Claims adjusters, examiners and investigators",

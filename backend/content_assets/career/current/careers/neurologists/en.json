@@ -188,6 +188,9 @@
       "item:neurologists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:neurologists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:neurologists.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -12378,6 +12381,21 @@
             "fsmb-licensure"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The referral says symptoms began last week, but the history says earlier this month. Preserve both sources and write one clarification question for clinical review."
+            ]
+          },
+          "id": "neurologists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Prepare a symptom timeline for neurological review",
+          "type": "notice"
         }
       ]
     },
@@ -14896,6 +14914,13 @@
         "id": "neurologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "neurologists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15225,7 +15250,7 @@
       "text": "Neurologists"
     }
   },
-  "source_content_sha256": "8749a92cc35b62bd222ba03badd25ae173fccff2658cccfd36cf5047517b7e3f",
+  "source_content_sha256": "83186cdb4ec3d9eafeff8fda0c76a53917da899061ef2e988aa17470998e1f8c",
   "subject": {
     "canonical_slug": "neurologists",
     "name": "Neurologists",

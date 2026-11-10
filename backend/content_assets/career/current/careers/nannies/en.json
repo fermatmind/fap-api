@@ -170,6 +170,9 @@
       "item:nannies.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:nannies.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nannies.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -13056,6 +13059,21 @@
             "onet-details"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. A parent message names A for pickup, while the schedule still shows B. List who and what time to confirm with the parent, and preserve the source of the change."
+            ]
+          },
+          "id": "nannies.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "Check a childcare pickup handover",
+          "type": "notice"
         }
       ]
     },
@@ -15615,6 +15633,13 @@
         "id": "nannies.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nannies.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15868,7 +15893,7 @@
       "text": "Nannies"
     }
   },
-  "source_content_sha256": "081c07ae3398b2f66134cf87feba02b4c1cf37dd24468f82bc055b5a9725a9c2",
+  "source_content_sha256": "c2a062fd5944d02f91bf79b09fb576e3d880df282822bfcfaeda4a44d0643dba",
   "subject": {
     "canonical_slug": "nannies",
     "name": "Nannies",

@@ -1478,6 +1478,9 @@
       "item:command-and-control-center-officers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:command-and-control-center-officers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:command-and-control-center-officers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30998,6 +31001,21 @@
           "id": "command-and-control-center-officers.path.recruitment-sample.1",
           "title": "Notes on using recruitment samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. A fictional civil exercise assigns the same coordination task to two accountable teams. Write what to verify with the exercise lead about ownership and document version."
+            ]
+          },
+          "id": "command-and-control-center-officers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check responsibilities in a tabletop exercise",
+          "type": "notice"
         }
       ]
     },
@@ -37718,6 +37736,13 @@
         "id": "command-and-control-center-officers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "command-and-control-center-officers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38341,7 +38366,7 @@
       "text": "Command and Control Center Officer"
     }
   },
-  "source_content_sha256": "52d371b5a0c8a0d96738e36d36e8b4d37bbe52b526f321bb39f1abaf4f42fa05",
+  "source_content_sha256": "ad07255f5db2ec5dba29f83f703bbc4b5edaa3c94f48219a7c9103640117df82",
   "subject": {
     "canonical_slug": "command-and-control-center-officers",
     "name": "Command and Control Center Officer",

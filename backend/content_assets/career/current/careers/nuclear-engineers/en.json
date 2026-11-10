@@ -182,6 +182,9 @@
       "item:nuclear-engineers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:nuclear-engineers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nuclear-engineers.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -13036,6 +13039,21 @@
             "cn-operator-rule"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The review checklist requires a model revision and boundary conditions. Results cite the new model, but the boundary table is old. Identify what should stay pending formal review."
+            ]
+          },
+          "id": "nuclear-engineers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-profile"
+          ],
+          "title": "Check model versions for nuclear engineering review",
+          "type": "notice"
         }
       ]
     },
@@ -15591,6 +15609,13 @@
         "id": "nuclear-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nuclear-engineers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15896,7 +15921,7 @@
       "text": "Nuclear engineers"
     }
   },
-  "source_content_sha256": "7b13b061c93b2134e3028940451439fccec9555006085732d3e94d48487937a8",
+  "source_content_sha256": "def117768f58f14192997eeed562d9a677b62af79618fc24031b66b4333bd6c5",
   "subject": {
     "canonical_slug": "nuclear-engineers",
     "name": "Nuclear engineers",

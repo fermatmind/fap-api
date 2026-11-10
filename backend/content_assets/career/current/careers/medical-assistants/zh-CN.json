@@ -7289,13 +7289,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页覆盖美国O*NET31-9092.00 Medical Assistants：在医师指导下执行行政和部分临床任务。报告岗位名含CMA、临床/眼科医疗助理和Doctor’s Assistant等；报告名称不是法定权限，Doctor’s Assistant不能仅由中文译名等同29-1071.00 Physician Assistants。职责包含记录、预约、诊室准备及符合当地条件的采血/给药，按具体训练、州法及机构监督核验。"
+              "美国 Medical Assistant 协助门诊或诊所的行政及临床支持工作，例如预约、记录和准备就诊。临床任务按授权分配。国内“医助”名称覆盖的实际职责差异很大。"
             ]
           },
           "id": "medical-assistants.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-summary",
-            "onet-details"
+            "onet-summary",
+            "cn-hz-assistant"
           ],
           "type": "prose"
         },
@@ -7391,12 +7391,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "先核对的内容：身份与预约、医嘱与执行范围、标本标签与去向、器械消毒状态、隐私与合规要求，以及需要医师确认的异常与超范围请求。"
+              "先分清预约、接待和记录，与需要本地资格或医师指导的临床工作。鄄城德明医院的内科医助样本涉及上级医师指导，不代表美国岗位可以直接对应。"
             ]
           },
           "id": "medical-assistants.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-details"
+            "onet-summary",
+            "cn-hz-assistant"
           ],
           "type": "prose"
         },
@@ -7405,12 +7406,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作闭环：核对、按岗位权限执行、记录、复核与交接。发现身份/单据差异或超范围请求时，按机构程序将相关未决动作交有权限者；不把暂停某项未决动作写成停止全部患者照护或急救。"
+              "这页描述的是支持岗位。具体能做哪些临床协助，由当地规则、单位与监督安排决定；不能从职位名称推定诊断、开处方或独立操作权限。"
             ]
           },
           "id": "medical-assistants.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-details"
+            "onet-summary",
+            "cn-hz-assistant"
           ],
           "type": "prose"
         },
@@ -8316,12 +8318,13 @@
                 ]
               },
               {
-                "answer": "O*NET2024—2034：811000→912200，净增101200，增长13%，年均空缺112300含替换。BLS当前2025—2035：833900→941500，净增107600，增长13%，年均空缺109700含替换。两个时期独立，不能拼接基线或把空缺当在招/录用率。",
+                "answer": "美国 BLS 表1.2：31-9092 2025 年就业约 833,900 人，预计 2035 年约 941,500 人，2025—2035 年变化 +12.9%，年均约 109,700 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。BLS当前2025—2035：833900→941500，净增107600，增长13%，年均空缺109700含替换。两个时期独立，不能拼接基线或把空缺当在招/录用率。",
                 "id": "medical-assistants.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.medical-assistants.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "onet-trends",
+                  "bls-design-ep"
                 ]
               },
               {
@@ -8548,17 +8551,17 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "811000→912200、13%、年均112300，本轮完整表核；与BLS2025—2035分开。"
+                  "2025 年约 833,900 人；2035 年约 941,500 人；+12.9%，年均约 109,700。"
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
                 "limitation": "含替换需求；不等于个人录用概率。",
                 "market": "美国",
-                "name": "O*NET 31-9092.00 全国就业趋势（BLS 2024—2034 年预测）",
-                "period": "2024—2034；查阅2026-10-03",
-                "publisher": "O*NET / BLS Employment Projections",
+                "name": "美国 BLS 表1.2：诊疗辅助人员（31-9092）",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/31-9092.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -8862,6 +8865,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "具名内科医助岗位在上级医师指导下参与病历与接诊。"
+                ],
+                "id": "cn-hz-assistant",
+                "limitation": "该样本含临床职责，不是美国 Medical Assistant 对应关系。",
+                "market": "中国大陆",
+                "name": "鄄城德明医院内科医助招聘",
+                "period": "2026",
+                "publisher": "菏泽医学专科学校",
+                "scope": "具名岗位或制度",
+                "url": "https://www.hzmc.edu.cn/lcyxx/info/1154/3783.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "2025 年约 833,900 人；2035 年约 941,500 人；+12.9%，年均约 109,700。"
+                ],
+                "id": "bls-design-ep",
+                "market": "美国",
+                "name": "美国 BLS 表1.2：诊疗辅助人员（31-9092）",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -9735,26 +9764,26 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这个职业先核对什么？",
+            "question": "看国内“医助”招聘先核对什么？",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "对象",
+                  "label": "要点一",
                   "secondary_value": null,
-                  "value": "门诊患者与病历流程"
+                  "value": "就诊状态"
                 },
                 {
                   "alternate_value": null,
-                  "label": "输入",
+                  "label": "要点二",
                   "secondary_value": null,
-                  "value": "医嘱、预约与既往记录"
+                  "value": "缺失信息"
                 },
                 {
                   "alternate_value": null,
-                  "label": "交付",
+                  "label": "要点三",
                   "secondary_value": null,
-                  "value": "可复核的诊疗支持与记录"
+                  "value": "交给谁"
                 }
               ]
             }
@@ -9767,26 +9796,26 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "怎样判断工作闭环？",
+            "question": "诊疗辅助人员能独立诊断和开处方吗？",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "闭环",
+                  "label": "要点一",
                   "secondary_value": null,
-                  "value": "登记、执行、记录与交接"
+                  "value": "预约和记录"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤一",
+                  "label": "要点二",
                   "secondary_value": null,
-                  "value": "核对身份与医嘱"
+                  "value": "临床监督"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤二",
+                  "label": "要点三",
                   "secondary_value": null,
-                  "value": "测量并记录生命体征"
+                  "value": "资格和权限"
                 },
                 {
                   "alternate_value": null,
@@ -11205,7 +11234,7 @@
           "entry": "medical-assistants.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合医疗助理",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11317,27 +11346,27 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": null,
-        "display_value": "811,000 人（2024）",
+        "derivation": "美国 BLS 表1.2：31-9092 2025 年就业约 833,900 人，预计 2035 年约 941,500 人，2025—2035 年变化 +12.9%，年均约 109,700 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 833,900 人",
         "fact_id": "us-employment-2024",
         "market": "美国",
         "measure": "2024 年就业规模",
         "occupation_scope": "O*NET 31-9092.00 本职业口径",
-        "period": "2024；查阅 2026-09-25",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET 全国就业趋势页：2024—2034 年预计远快于平均（约 13%）。",
-        "display_value": "远快于平均（约 13%，2024—2034）",
+        "derivation": "美国 BLS 表1.2：31-9092 2025 年就业约 833,900 人，预计 2035 年约 941,500 人，2025—2035 年变化 +12.9%，年均约 109,700 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "+12.9%",
         "fact_id": "us-growth-2024-2034",
         "market": "美国",
         "measure": "就业增长预测",
         "occupation_scope": "O*NET 31-9092.00 本职业口径",
-        "period": "2024—2034；查阅 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
@@ -11365,15 +11394,15 @@
         ]
       },
       {
-        "derivation": "为预测期内的职位空缺估计，含替换需求。",
-        "display_value": "约 112,300 个/年（2024—2034）",
+        "derivation": "美国 BLS 表1.2：31-9092 2025 年就业约 833,900 人，预计 2035 年约 941,500 人，2025—2035 年变化 +12.9%，年均约 109,700 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 109,700 个",
         "fact_id": "us-openings-2024-2034",
         "market": "美国",
         "measure": "预计职位空缺（年均）",
         "occupation_scope": "O*NET 31-9092.00 本职业口径",
-        "period": "2024—2034；查阅 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
@@ -11425,19 +11454,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2024-2034",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业规模（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2024-2034",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11451,17 +11480,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "医疗助理（O*NET 31-9092.00）在医师指导下执行门诊行政与临床辅助任务，负责身份与医嘱核对、生命体征记录、器械准备与标本处理。美国 BLS 2025 年中位年薪 45,690 美元；2024 年就业约 811,000 人。含工作情境、风险与入行路径。"
+      "text": "了解 Medical Assistant 的门诊支持、信息交接与岗位权限，并区分国内用人场景。"
     },
     "title": {
       "availability": "available",
-      "text": "医疗助理：工作内容、美国工资与入行 | 费马测试"
+      "text": "诊疗辅助人员做什么：接待、记录与门诊协作"
     }
   },
-  "source_content_sha256": "1549ecd214b0c94a7e77c6e291daf4b03ca2afd9ac3d2fd21c9f2f99021d2e03",
+  "source_content_sha256": "b85ec3d3a8fc9744b0f2eaee6e5491d9e96a1c91ae1dc07014a86a714c557beb",
   "subject": {
     "canonical_slug": "medical-assistants",
-    "name": "医疗助理",
-    "summary": "医疗助理（O*NET 31-9092.00）在医师指导下执行门诊行政与部分临床辅助任务，负责身份与医嘱核对、生命体征与病史记录、诊室与器械准备、标本处理与交接。"
+    "name": "诊疗辅助人员",
+    "summary": "美国 Medical Assistant 协助门诊或诊所的行政及临床支持工作，例如预约、记录和准备就诊。临床任务按授权分配。国内“医助”名称覆盖的实际职责差异很大。"
   }
 }

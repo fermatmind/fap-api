@@ -1283,6 +1283,9 @@
       "item:pile-driver-operators.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:pile-driver-operators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:pile-driver-operators.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31154,6 +31157,21 @@
             "editor-note"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The layout identifies D9 while the handover says D6. An abnormality note has no shift ID. Explain which evidence cannot be combined and who should be notified. Real operation follows site direction."
+            ]
+          },
+          "id": "pile-driver-operators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Match pile IDs to shift records",
+          "type": "notice"
         }
       ]
     },
@@ -37724,6 +37742,13 @@
         "id": "pile-driver-operators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "pile-driver-operators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38073,7 +38098,7 @@
       "text": "Pile driver operator career guide: work tasks, wages, and entry paths"
     }
   },
-  "source_content_sha256": "de057e613d26a0b18bc91430905487b1118be8c930d8568a889f9e6ee694eefc",
+  "source_content_sha256": "f12ac7a6cf70a8ff16cf684819fbd99740a4efedbfabfa1d9fed82fab1f1241f",
   "subject": {
     "canonical_slug": "pile-driver-operators",
     "name": "Pile driver operators",

@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-a26-xinfeng": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a26-yuli": {
+        "status": "pending_mapping"
+      },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
       },
@@ -1707,7 +1713,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26160,12 +26166,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              ": gaps in Chinese occupational wages and recruitment samples; compare against actual delivery duties, no one-to-one classification was verified, and industry averages do not replace position income."
+              " These are past notices. A comparable mainland occupational median remains unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "r5-nbs-transport"
+            "a26-xinfeng",
+            "a26-yuli"
           ],
           "type": "prose"
         },
@@ -26278,12 +26285,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The mainland China salary section on this page retains only the evidence boundary: it does not treat industry averages as occupation wages, does not substitute U.S. data, and does not state a national median, starting pay, or percentiles for this occupation."
+              "Use the notices to compare duties and pay terms for individual posts."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "r5-onet-current"
+            "a26-xinfeng",
+            "a26-yuli"
           ],
           "type": "prose"
         }
@@ -28699,7 +28707,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This page does not cite specific job postings and does not count historical cases as open positions; duties, safety requirements, and compensation must be verified against the target employer's public information for the relevant year.",
+              "The postings on this page describe individual cases and do not establish that these roles are still open; duties, safety requirements, and compensation must be verified against the target employer's public information for the relevant year.",
               "The training, observation, and mentoring assessment methods in the examples are editorial designs used to illustrate common verification methods and do not represent any institution's uniform process."
             ]
           },
@@ -29089,26 +29097,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional delivery scenario material (exercise input)",
-                  "Fictional scenario: a delivery driver encounters four problems in the same shift. First, before departure the right rear tire pressure is found to be noticeably low, but the day's route customers are in a hurry; second, when loading, the actual number of pieces is one box short of the shipping documents, and a warehouse colleague says to deliver first and make it up later; third, heavy rain and road flooding are encountered en route, and the navigation still prompts the original route; fourth, two customers ask to pay for goods on delivery, but one of them has not had the amount marked on the documents.",
-                  "Provided materials: vehicle inspection checklist and safety standards; shipping documents and consignee information; driving and rest time requirements; the collection and turning-in process for payment on delivery.",
-                  "Not provided: who decides whether a vehicle with low tire pressure may depart, the authority to release when documents and goods do not match, whether the original route must be followed, and whether payment may be collected when the documents do not show the amount. If these conditions are needed in the exercise, state your assumptions and the party you need to confirm with."
+                  "Paper exercise inputs",
+                  "Fictional delivery, on paper. Store A has six cases on its ticket and five in the count. Store B has four cases on its ticket and four in the count. The customer refuses one with damaged packaging.",
+                  "This shift does not authorize payment collection. Store A also asks to buy one case in cash.",
+                  "The exercise records only quantities accepted. Refer shortages, refusals and extra sales to dispatch. The driver cannot edit the original ticket."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Task requirements",
-                  "Write a one-page handling and escalation plan: including judgment and handling of an abnormal vehicle condition, verification and release handling when documents and goods do not match, the basis for adjusting the route in bad weather, and the verification and turning-in arrangements for collecting payment on delivery.",
-                  "The plan must state which information comes from the prompt materials and which is still an assumption, and explain whether it relies on the vehicle inspection checklist and safety standards, the shipping documents and consignee information, the driving and rest time requirements, or the collection and turning-in process for payment on delivery."
+                  "What to submit",
+                  "Reconcile both stops. Record differences, quantities accepted and your response to A’s cash request.",
+                  "Submit a one-page dispatch handoff with quantities to confirm and open actions. Work on paper."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference deliverable (derivable from the prompt)",
-                  "The plan should include: vehicle condition (when tire pressure is noticeably low, check again against the checklist first, and if it is judged to affect safety the vehicle must not depart, and it should be reported and replaced or repaired per procedure, adjusting the route when necessary, without releasing it because the customer is in a hurry), documents (when the actual number of pieces does not match the documents, verify again and keep records first, and do not deliver against the original documents until the warehouse and dispatch confirm and the documents are corrected, and do not verbally promise to deliver first and make it up later), weather (re-assess the route against the day's weather and road conditions and, when necessary, reroute, delay, or pause and notify dispatch and the customer, without ignoring safety because of a navigation prompt), collection (when the documents do not show the amount, do not collect payment, and handle it after confirming with dispatch or settlement; all collected payments are counted, recorded, and turned in on time per process), and handover (state the status of the four items, the actions taken, and the items pending confirmation).",
-                  "The reference deliverable lists only the elements that should be included; it does not require wording identical to the example, and it is enough to explain the basis for the judgment."
+                  "Finish your own answer first",
+                  "Open “Delivery handoff reference (open after day six)” under FAQs and sources.",
+                  "Use the checklist to record one difference and one correction."
                 ]
               },
               {
@@ -29138,50 +29146,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: read one public document",
-                  "Find a public material on road traffic safety or freight loading standards, mark three key requirements and the corresponding practices, and write down what you want to confirm."
+                  "Day 1",
+                  "Copy the tickets and counts for both stores."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: write a pre-departure inspection checklist",
-                  "List inspection items such as tires, fluids, lights, and brakes, the judgment criteria, and how to handle anomalies."
+                  "Day 2",
+                  "Calculate each difference and identify receipts to confirm."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: write a document verification process",
-                  "Write out the steps for verifying shipping documents against the physical goods, discrepancy handling, and handover confirmation methods."
+                  "Day 3",
+                  "Write the refusal record for B."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: set out a trip with rest included",
-                  "For a fictional route, lay out driving and rest arrangements and mark the step you think is most likely to run over time."
+                  "Day 4",
+                  "Draft your reply to A’s extra purchase request."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: write an anomaly escalation card",
-                  "Write out the escalation order for a delay, accident, or vehicle fault, the records to keep, and the parties to notify."
+                  "Day 5",
+                  "List the open actions for dispatch."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: have someone else review using only the materials",
-                  "Have a peer review your judgment using only your plan, and record the questions they raise."
+                  "Day 6: finish your own answer",
+                  "Check whether someone could read your handoff on its own before opening the reference."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: decide whether to continue",
-                  "Return to this page's decision checklist and write down three reasons you are willing to continue and two conditions that require caution."
+                  "Day 7: open the reference and review",
+                  "Open “Delivery handoff reference (open after day six)” under FAQs and sources. Record one difference and correction, then decide whether to continue or pause."
                 ]
               }
             ]
@@ -29200,13 +29208,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Specific change: whether, given the materials, you can write out vehicle condition judgment, document handling, route adjustment, and collection arrangements, rather than only writing that it was handled.",
+              "You can finish a one-page handoff and separate verified facts, open checks and approvals.",
               "Facts and choices: whether you would rather do urban and regional delivery, long-haul and specialized transport, or go in the logistics and customer support direction.",
-              "Exercise cost: long hours of driving and outdoor weather, frequent loading and unloading, and time pressure; which step drains you most, and can you accept it recurring in the work.",
+              "Note which paper step takes most effort. Ask the employer about actual work demands.",
               "Material boundaries: the exercise materials are all fictional or based on public information, and real customer information or unpublished business materials must not be included.",
               "Response to feedback: when the fleet or a customer changes your plan for safety or compliance reasons, are you willing to go back to the rules and the records.",
               "Process interest: even when pre-departure inspection, loading and unloading, and document verification are repetitive, are you willing to complete and record them every time.",
-              "Next step: if you are willing to continue through the first six steps, the next step is, within compliance (such as completing a real route with a mentor after obtaining the corresponding driving qualification), to complete one closed loop from departure inspection to handover and record turning-in, and ask an experienced person to review it; if one step clearly drains you, narrow the direction first and then verify."
+              "On day seven, check your handoff against the collapsed reference. Repeat if a critical item is missing. Ask the employer about training and actual responsibilities."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -31069,21 +31077,23 @@
           "data": {
             "entries": [
               {
-                "answer": "Drive a light vehicle (gross weight under 26,001 pounds) to pick up goods or parcels from distribution centers and complete delivery, and possibly load and unload the vehicle: follow traffic laws and established traffic and transport procedures; report any mechanical problem encountered with the vehicle; verify the loaded contents against the shipping documents; inspect and maintain vehicle supplies and equipment (such as fuel, oil, water, tires, lights, or brakes) to ensure the vehicle is in working order; read maps and follow written or verbal geographic guidance; load and unload the truck, van, or car; present bills and receipts and collect payment for delivered or loaded goods; maintain records such as vehicle logs, cargo records, or bills per regulations; drive vehicles with a capacity under three tons to move materials between designated destinations; turn in receipts and payments received from deliveries; use and maintain tools or equipment on commercial vehicles (such as weighing or measuring devices); report delays, accidents, or other traffic and transport conditions by telephone or mobile radio; and perform emergency repairs such as changing tires or installing bulbs, fuses, tire chains, or spark plugs.",
+                "answer": "Check and load goods at the depot, deliver to each stop and record receipt. Sales routes may add orders, payment collection and stocking. Ask who owns each task before taking a route.",
                 "id": "actors.faq.1",
                 "question": "What does a light truck driver do in a typical day?",
                 "question_key": "career.faq.delivery-truck-drivers-and-driver-sales-workers.1",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "a26-driver-sales"
                 ]
               },
               {
-                "answer": "The core of this occupation is driving a light vehicle to pick up and deliver between distribution centers, stores, customers, and consignees, ensuring the cargo, documents, and payment match; cargo and freight agents center on freight arrangement and documentation; couriers and messengers center on high-frequency small-parcel delivery; heavy and tractor-trailer truck drivers center on long-haul transport with heavy vehicles; driver/sales workers take on sales and ordering while delivering; dispatchers center on route and vehicle dispatching; industrial truck and tractor operators haul with industrial vehicles on site. Similar names do not mean duties, evaluation standards, or qualifications are interchangeable.",
+                "answer": "Light truck drivers (U.S. 53-3033) mainly pick up and deliver goods. Driver/sales workers (53-3031) may also take orders, collect payments and stock shelves. These are separate statistical lines. Heavy truck drivers are reported separately.",
                 "id": "actors.faq.2",
                 "question": "What distinguishes this occupation from adjacent transport, delivery, and dispatch directions?",
                 "question_key": "career.faq.delivery-truck-drivers-and-driver-sales-workers.2",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "a26-driver-sales"
                 ]
               },
               {
@@ -31114,21 +31124,25 @@
                 ]
               },
               {
-                "answer": "The 2025 U.S. wage data shows a median annual wage of 44,860 USD (median hourly 21.57 USD), with annual percentiles of 30,800／37,270／44,860／52,310／80,310 USD, under the O*NET-SOC 53-3033.00 definition for this subcategory itself; percentiles are statistical positions and cannot be treated as a personal quote or personal take-home income; no occupation-level figure was obtained for mainland China, and this page treats it as a gap rather than filling it with industry averages or quote samples.",
+                "answer": "In May 2025, U.S. light truck drivers had median wages of $44,860 per year and $21.57 per hour. Driver/sales workers had a separate annual median of $38,770. Xinfeng listing 21: CNY 4,000–7,000 a month. Deliver to township stores in a 4.2-metre vehicle and load and unload goods. No sales commission was stated. The Yuli notice listed one delivery driver at CNY 5,500 a month, with a C1 licence requirement for delivering drinks, instant noodles and other goods. These are past notices. A comparable mainland occupational median remains unavailable.",
                 "id": "actors.faq.6",
                 "question": "What are the typical wages for this occupation, and how should they be compared?",
                 "question_key": "career.faq.delivery-truck-drivers-and-driver-sales-workers.6",
                 "source_refs": [
-                  "oews"
+                  "r5-wages-current",
+                  "r5-bls-current",
+                  "a26-xinfeng",
+                  "a26-yuli"
                 ]
               },
               {
-                "answer": "The U.S. preparation level is O*NET Job Zone 1-2 (SVP below 6.0), and the official education survey shows that among new entrants 74% require a high school diploma or equivalent, 25% require less than high school, and 1% require an associate or other two-year degree; the common entry is to obtain the locally required driving qualification and start with ride-along and short-haul routes; mainland China mostly requires the corresponding driving qualification and safety record, verified per the target unit's rules.",
+                "answer": "Xinfeng listing 21: CNY 4,000–7,000 a month. Deliver to township stores in a 4.2-metre vehicle and load and unload goods. No sales commission was stated. The Yuli notice listed one delivery driver at CNY 5,500 a month, with a C1 licence requirement for delivering drinks, instant noodles and other goods. These are past notices. A comparable mainland occupational median remains unavailable. For an application, check the posting’s education, audition or training requirements.",
                 "id": "actors.faq.7",
                 "question": "What education does this occupation need, and how should one train for it?",
                 "question_key": "career.faq.delivery-truck-drivers-and-driver-sales-workers.7",
                 "source_refs": [
-                  "onet"
+                  "a26-xinfeng",
+                  "a26-yuli"
                 ]
               },
               {
@@ -31150,12 +31164,22 @@
                 ]
               },
               {
-                "answer": "O*NET national employment trends (using BLS data, 2024—2034 projection period, under the 53-3033.00 definition for this subcategory itself) shows about 1,079,800 people employed in 2024, about 1,158,600 projected in 2034, a projected growth of 7% (label much faster than average, Bright Outlook), and about 120,200 openings per year over the projection period including growth and replacement; the work centers on driving, loading and unloading, and recording, shifts may cover early morning, night, and weekends, and it must be verified against the local industry structure and safety requirements, with priority given to verifying route type, pay method, and driving qualification requirements.",
+                "answer": "BLS projects light truck drivers to rise from 1,068,500 jobs in 2025 to 1,136,400 in 2035 (+6.3%), with about 107,200 annual openings. Driver/sales workers go from about 442,900 to 478,100 (+7.9%), with 45,500 annual openings. Openings include replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should I consider when choosing this occupation now?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.delivery-truck-drivers-and-driver-sales-workers.10",
                 "source_refs": [
-                  "bls"
+                  "r5-bls-current"
+                ]
+              },
+              {
+                "answer": "Store A has six on the ticket and five counted, a one-case shortage. Record five received only if A accepts all five. At B, four arrived and one was refused for damaged packaging. Verify acceptance of the other three and record the refusal. Refer A’s cash request to dispatch without taking payment. Keep the original tickets and hand over the counts, accepted quantities, shortage, refusal and open request. Check four items: A quantities, B quantities and refusal, payment authority, and original records and handoff. Count each complete item. The exercise is fictional. The source provides job context.",
+                "id": "actors.faq.11",
+                "question": "Delivery handoff reference (open after day six)",
+                "question_key": "career.faq.delivery-truck-drivers-and-driver-sales-workers.11",
+                "source_refs": [
+                  "r5-onet-current",
+                  "a26-driver-sales"
                 ]
               }
             ]
@@ -31394,21 +31418,19 @@
                 "url": "https://www.onetonline.org/link/summary/53-3031.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports this occupation's employment and projection definitions (this subcategory).",
-                  "Contains no mainland China information and cannot substitute for mainland China data.",
-                  "Verified this round: its own 53-3033: about 1068500 in 2025 → about 1136400 in 2035, an official net increase of 67800, +6.3%, average annual 107200 openings including growth and replacement, self-employed 7.2%. Both endpoints and the net increase are shown rounded and are not recalculated here; the OOH's own 6% rounding and the O*NET5% to 6% classification differ from the OOH combined driver-sales 1511400/+7%/average annual 152700."
+                  "BLS projects light truck drivers to rise from 1,068,500 jobs in 2025 to 1,136,400 in 2035 (+6.3%), with about 107,200 annual openings. Driver/sales workers go from about 442,900 to 478,100 (+7.9%), with 45,500 annual openings. Openings include replacements."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "Its own 53-3033: about 1068500 in 2025 → about 1136400 in 2035, an official net increase of 67800, +6.3%, average annual 107200 openings including growth and replacement, self-employed 7.2%. Both endpoints and the net increase are shown rounded and are not recalculated here; the OOH's own 6% rounding and the O*NET5% to 6% classification differ from the OOH combined driver-sales 1511400/+7%/average annual 152700.",
+                "limitation": "Annual openings include replacements.",
                 "market": "United States",
-                "name": "O*NET National Employment Trends: Light Truck Drivers (53-3033.00, using BLS data)",
-                "period": "2024—2034 projection period; searched 2026-09-19",
+                "name": "BLS Table 1.2: occupational projections",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/53-3033.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -32008,6 +32030,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Sell or deliver on assigned routes or territories, sometimes taking orders, collecting payments or stocking goods."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a26-driver-sales",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "Driver/sales workers 53-3031.00",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/53-3031.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Xinfeng listing 21: CNY 4,000–7,000 a month. Deliver to township stores in a 4.2-metre vehicle and load and unload goods. No sales commission was stated."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a26-xinfeng",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Xinfeng township delivery driver",
+                "period": "2026-01",
+                "publisher": "Xinfeng County government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.jxxf.gov.cn/xfxxxgk/wgjy/202601/ab2ec1d724ea4db0a503ede3115c8908.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Yuli notice listed one delivery driver at CNY 5,500 a month, with a C1 licence requirement for delivering drinks, instant noodles and other goods."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a26-yuli",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Yuli retail-goods delivery driver",
+                "period": "2026-01",
+                "publisher": "Yuli County government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.yuli.gov.cn/xjylx/c110928/202601/8c164763b4b446d7b25b6c4873cf5d2a.shtml"
               }
             ]
           },
@@ -34829,7 +34896,7 @@
             },
             {
               "指标": "Scope of review",
-              "数值": "This round: NBS2025 industry wages, MOT2026 and Q&A, the permit-class table and safety regulations; no occupational wages or real recruitment quotes; searched 2026-10-09",
+              "数值": "See the two dated job postings below.",
               "说明": "For explaining only the actual scope and timing of the review, not as a basis for value conversion."
             },
             {
@@ -34966,7 +35033,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "This round: NBS2025 industry wages, MOT2026 and Q&A, the permit-class table and safety regulations; no occupational wages or real recruitment quotes",
+          "china_open": "The dated posting samples are shown alongside the national occupation-level data gap.",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -35009,7 +35076,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (recruitment or quote definition)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$join": [
                   {
@@ -35039,13 +35106,14 @@
           "china_soc_row": "U.S. 53-3033.00 itself, which cannot be directly exchanged for Chinese permit class, classification, or wages",
           "edu": "See the entry module for training and qualification",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-a26-xinfeng",
+            "posting-a26-yuli"
           ],
           "sources_note": "Source links are used according to their own statistical or announcement scope; when the statistical period, survey population, or pay definition differs they are cited separately and no cross-conversion is performed.",
           "ui": {
             "ai_heading": "Will AI or automation affect this occupation's wages?",
             "driver_heading": "How is delivery work organized by shift, time window, and peak season?",
-            "official_heading": "Official statistical definitions and gap notes",
+            "official_heading": "Scope of industry figures and job postings",
             "scenario_caption": "Education and training background, position directions, and notes (editorial compilation, not a salary statistic)",
             "scenario_heading": "Which delivery position directions correspond to different education and training backgrounds?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35875,7 +35943,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cargo-and-freight-agents",
+            "target_href": "/en/career/jobs/cargo-and-freight-agents",
             "target_slug": "cargo-and-freight-agents",
             "target_title": "Cargo and freight agents (adjacent occupation)",
             "transition_distance": {
@@ -35898,7 +35966,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/couriers-and-messengers",
+            "target_href": "/en/career/jobs/couriers-and-messengers",
             "target_slug": "couriers-and-messengers",
             "target_title": "Couriers and messengers (adjacent occupation)",
             "transition_distance": {
@@ -35921,7 +35989,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/heavy-and-tractor-trailer-truck-drivers",
+            "target_href": "/en/career/jobs/heavy-and-tractor-trailer-truck-drivers",
             "target_slug": "heavy-and-tractor-trailer-truck-drivers",
             "target_title": "Heavy and tractor-trailer truck drivers (adjacent occupation)",
             "transition_distance": {
@@ -35944,7 +36012,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/driver-sales-workers",
+            "target_href": "/en/career/jobs/driver-sales-workers",
             "target_slug": "driver-sales-workers",
             "target_title": "Driver/sales workers (adjacent occupation)",
             "transition_distance": {
@@ -35967,7 +36035,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/dispatchers-except-police-fire-and-ambulance",
+            "target_href": "/en/career/jobs/dispatchers-except-police-fire-and-ambulance",
             "target_slug": "dispatchers-except-police-fire-and-ambulance",
             "target_title": "Dispatchers (adjacent occupation)",
             "transition_distance": {
@@ -35990,7 +36058,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/industrial-truck-and-tractor-operators",
+            "target_href": "/en/career/jobs/industrial-truck-and-tractor-operators",
             "target_slug": "industrial-truck-and-tractor-operators",
             "target_title": "Industrial truck and tractor operators (adjacent occupation)",
             "transition_distance": {
@@ -36013,7 +36081,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/shuttle-drivers-and-chauffeurs",
+            "target_href": "/en/career/jobs/shuttle-drivers-and-chauffeurs",
             "target_slug": "shuttle-drivers-and-chauffeurs",
             "target_title": "Shuttle drivers and chauffeurs (adjacent occupation)",
             "transition_distance": {
@@ -36036,7 +36104,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/taxi-drivers",
+            "target_href": "/en/career/jobs/taxi-drivers",
             "target_slug": "taxi-drivers",
             "target_title": "Taxi drivers (adjacent occupation)",
             "transition_distance": {
@@ -36124,7 +36192,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -36173,7 +36241,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Explore my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -36222,7 +36290,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36271,7 +36339,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Explore my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36320,7 +36388,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36369,7 +36437,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Explore my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36991,7 +37059,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore the task interests and work preferences of light truck drivers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37105,11 +37173,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -37523,38 +37591,38 @@
       },
       {
         "derivation": null,
-        "display_value": "About 1,079,800 people (2024)",
+        "display_value": "About 1068500 people (2025 own base period)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment size (stock statistics)",
-        "occupation_scope": "Light Truck Drivers (53-3033.00) under this subcategory's own definition; the 2024 employment figure comes from the O*NET national employment trends page (using BLS data)",
-        "period": "2024 base period; searched 2026-09-19",
+        "measure": "Employment size",
+        "occupation_scope": "53-3033's own employment includes the self-employed, and is not the combination of two occupations or an individual hiring rate",
+        "period": "2025 base period and 2025—2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Growth 7% (2024—2034, label much faster than average; about 1,158,600 projected in 2034)",
+        "display_value": "Growth 6.3%, about 67800 people (2025—2035, OOH's own 6% rounding)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "Under the 53-3033.00 definition for this subcategory itself; the O*NET employment trends page shows 7% growth for 2024—2034 with the label much faster than average (Bright Outlook), which is a total change over the projection period, not an individual's probability of being hired",
-        "period": "2024—2034 projection period; searched 2026-09-19",
+        "measure": "Ten-year employment change",
+        "occupation_scope": "53-3033's own employment includes the self-employed, and is not the combination of two occupations or an individual hiring rate",
+        "period": "2025 base period and 2025—2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 120,200 per year (2024—2034, including growth and replacement need)",
+        "display_value": "About 107200 openings per year (2025—2035, including growth and replacement)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Average annual openings over the projection period (including replacement need)",
-        "occupation_scope": "Under the 53-3033.00 definition for this subcategory itself; the O*NET employment trends page gives about 120,200 per year over the projection period, including replacement needs from occupational transfers or exits from the labor market (such as retirement or job changes), not the number of net new positions each year; this scale reflects the occupation's large size and relatively high turnover",
-        "period": "2024—2034 projection period; searched 2026-09-19",
+        "measure": "Average annual openings",
+        "occupation_scope": "53-3033's own employment includes the self-employed, and is not the combination of two occupations or an individual hiring rate",
+        "period": "2025 base period and 2025—2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
@@ -37718,14 +37786,15 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: this round has no occupational wage or real recruitment quote distribution for Chinese light delivery drivers, only a matched industry background",
+        "display_value": "Xinfeng listing 21: CNY 4,000–7,000 a month. Deliver to township stores in a 4.2-metre vehicle and load and unload goods. No sales commission was stated. The Yuli notice listed one delivery driver at CNY 5,500 a month, with a C1 licence requirement for delivering drinks, instant noodles and other goods.",
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "Chinese mainland",
         "measure": "Chinese occupational wage and recruitment gap",
-        "occupation_scope": "In Chinese mainland, compare against actual delivery duties; no one-to-one classification was verified",
-        "period": "Searched 2026-10-09",
+        "occupation_scope": "Two past job notices",
+        "period": "2026",
         "source_refs": [
-          "r5-nbs-transport"
+          "a26-xinfeng",
+          "a26-yuli"
         ]
       },
       {
@@ -37738,6 +37807,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Xinfeng listing 21: CNY 4,000–7,000 a month. Deliver to township stores in a 4.2-metre vehicle and load and unload goods. No sales commission was stated.",
+        "fact_id": "posting-a26-xinfeng",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Xinfeng township delivery driver",
+        "period": "2026-01",
+        "source_refs": [
+          "a26-xinfeng"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The Yuli notice listed one delivery driver at CNY 5,500 a month, with a C1 licence requirement for delivering drinks, instant noodles and other goods.",
+        "fact_id": "posting-a26-yuli",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Yuli retail-goods delivery driver",
+        "period": "2026-01",
+        "source_refs": [
+          "a26-yuli"
         ]
       }
     ]
@@ -37765,19 +37858,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, growth 7%, label much faster than average)"
+        "label": "U.S. light truck drivers 53-3033 · projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment headcount (2024, about 1,079,800 people)"
+        "label": "U.S. light truck drivers 53-3033 · employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual openings (2024—2034, about 120,200 per year, including growth and replacement)"
+        "label": "U.S. light truck drivers 53-3033 · projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37791,17 +37884,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Light truck drivers (O*NET-SOC 53-3033.00, Bright Outlook) drive light vehicles with a gross weight under 26,001 pounds to pick up goods or parcels from distribution centers and complete delivery, and may also load and unload the vehicle: the tasks covered include following traffic laws and transport procedures, reporting vehicle mechanical problems, verifying the loaded contents against shipping documents, inspecting and maintaining vehicle supplies and equipment, reading maps and following geographic guidance, loading and unloading the vehicle, presenting bills and receipts and collecting payment for goods, maintaining vehicle logs and cargo records per regulations, moving materials between designated destinations, turning in receipts and payments, using and maintaining on-board tools and equipment, reporting delays and accidents, and performing emergency repairs such as changing tires; its U.S. employment and wage definitions must be stated: this occupation is under the O*NET-SOC 53-3033.00 definition for itself, about 1,079,800 people were employed in 2024, the 2024—2034 projection is 7% growth (label much faster than average, Bright Outlook), about 1,158,600 are projected in 2034, and about 120,200 openings per year over the projection period include growth and replacement; the 2025 wage data shows a median annual wage of 44,860 USD (median hourly 21.57 USD), with annual percentiles of 30,800／37,270／44,860／52,310／80,310 USD; the industries are transportation and warehousing 44%／retail trade 16%／wholesale trade 14%／other industries 26%; the interest code is RC and the preparation level is Job Zone 1-2; as well as the occupation-level wage gap for such positions in mainland China and the control points for pre-trip verification, fatigue and hours management, cargo and document verification, vehicle protection, and anomaly escalation."
+      "text": "Compare light truck delivery and route sales, read two mainland job notices, and practice logging shortages, refusals and handoff on paper."
     },
     "title": {
       "availability": "available",
       "text": "Light truck drivers"
     }
   },
-  "source_content_sha256": "66ba281b88ee31579e2a7a377fc866712b08b2c06ae7aae14094918718a3c3bc",
+  "source_content_sha256": "07ef1e68b578c45fe98c0afe9e99a22ccef1add42a86b673370813750bf6b594",
   "subject": {
     "canonical_slug": "delivery-truck-drivers-and-driver-sales-workers",
     "name": "Light truck drivers",
-    "summary": "In the United States, light truck drivers correspond to O*NET-SOC 53-3033.00 (Light Truck Drivers, Bright Outlook): driving a light vehicle (such as a truck or van) with a gross vehicle weight (GVW) under 26,001 pounds, mainly to pick up goods or parcels from distribution centers and complete delivery, and the vehicle may also need loading and unloading. The work includes following traffic laws and established traffic and transport procedures; reporting any mechanical problem encountered with the vehicle; verifying the loaded contents against the shipping documents; inspecting and maintaining vehicle supplies and equipment (such as fuel, oil, water, tires, lights, or brakes) to ensure the vehicle is in working order; reading maps and following written or verbal geographic guidance; loading and unloading the truck, van, or car; presenting bills and receipts and collecting payment for delivered or loaded goods; maintaining records such as vehicle logs, cargo records, or bills per regulations; driving vehicles with a capacity under three tons to move materials between designated destinations; turning in receipts and payments received from deliveries; using and maintaining tools or equipment on commercial vehicles (such as weighing or measuring devices); reporting delays, accidents, or other traffic and transport conditions by telephone or mobile radio; and performing emergency repairs such as changing tires or installing bulbs, fuses, tire chains, or spark plugs. The preparation level for this occupation is O*NET Job Zone 1-2 (requiring little to some preparation, SVP below 6.0), and the official education survey shows that among new entrants 74% require a high school diploma or equivalent, 25% require less than high school, and 1% require an associate or other two-year degree. On O*NET, this subcategory's tasks, work context, preparation level, and wages are all under its own definition: its national wages page for 2025 wage data publishes both annual and hourly percentiles, and the page is not labeled with a parent occupation or an opaque proxy; the subcategory name was once used under this O*NET code combined with delivery truck drivers and driver/sales workers, the current page title is Light Truck Drivers, and this page follows the current scope while distinguishing it from the same-family driver/sales workers (53-3031.00). Similar positions on the Chinese side are mostly freight delivery, courier delivery, or urban delivery driver positions, whose duties and employment and pay definitions are not one-to-one counterparts of this U.S. occupation subcategory and cannot be interchanged."
+    "summary": "Check and load goods at the depot, deliver to each stop and record receipt. Sales routes may add orders, payment collection and stocking. Ask who owns each task before taking a route."
   }
 }

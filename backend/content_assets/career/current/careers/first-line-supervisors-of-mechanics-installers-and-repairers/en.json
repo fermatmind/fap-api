@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a53-ankang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a53-huangpu": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:first-line-supervisors-of-mechanics-installers-and-repairers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:first-line-supervisors-of-mechanics-installers-and-repairers.sources.source-card.1": {
         "status": "mapped"
@@ -20048,60 +20054,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "first-line-supervisors-of-mechanics-installers-and-repairers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "first-line-supervisors-of-mechanics-installers-and-repairers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22581,7 +22547,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Test your fit with a paper-based exercise. Given an entirely fictional equipment maintenance shift assignment covering equipment types, quantities and operating status; inspection, servicing, fault diagnosis or installation tasks; available personnel, tools, spare parts and specialized devices; equipment history, work orders, shutdown windows and deliveries; a sudden breakdown, incorrect disassembly or safety violation; and required scheduling, assignments, repair and safety checks, records and cost estimates, write a pre-shift safety briefing and work allocation, maintenance sequence and quality standards, power disconnection, lockout, confined-space and elevated-work safety points, spare-parts, tool and equipment allocation and missing-part responses, incident handling and escalation paths, and records and reports related to work orders, working hours and costs. Identify decisions that must be made by the equipment or production manager or appropriately qualified personnel."
+              "Make two dispatch plans from the three MX49 work orders. Check staff eligibility, service windows and rescheduling notices."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.quick-decision.fit-decision-checklist.2",
@@ -22727,7 +22693,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "For exact occupation 49-1011, current 2025 employment is 629,000, 2025–2035 growth is 3% to 4%, and annual openings are 48,900; the 2025 median is USD 38.39 per hour and USD 79,860 per year. Read the older shared 2024 employment of 617,500 and 52,400 openings within their original period. Education summary: high school, 54%; some college without a degree, 17%; postsecondary certificate, 13%. ECR; Job Zone3; SVP6 to <7. The main education summary categories do not constitute a complete distribution or a uniform Chinese entry requirement."
+              "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement. The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.profile.onet-structured-fields-block.2",
@@ -22785,7 +22751,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "For exact occupation 49-1011, current 2025 employment is 629,000, 2025–2035 growth is 3% to 4%, and annual openings are 48,900; the 2025 median is USD 38.39 per hour and USD 79,860 per year. Read the older shared 2024 employment of 617,500 and 52,400 openings within their original period. Education summary: high school, 54%; some college without a degree, 17%; postsecondary certificate, 13%. ECR; Job Zone3; SVP6 to <7. The main education summary categories do not constitute a complete distribution or a uniform Chinese entry requirement."
+              "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement. The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.profile.onet-structured-fields-block.4",
@@ -23794,7 +23760,7 @@
                 "url": "https://www.onetonline.org/link/details/49-1011.00"
               },
               {
-                "entity": "BLS employment projections (2024–2034, presented through O*NET)",
+                "entity": "BLS employment projections (2025–2035, presented through O*NET)",
                 "id": "link-10",
                 "relation": "career.evidence",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24462,7 +24428,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "For exact occupation 49-1011, current 2025 employment is 629,000, 2025–2035 growth is 3% to 4%, and annual openings are 48,900; the 2025 median is USD 38.39 per hour and USD 79,860 per year. Read the older shared 2024 employment of 617,500 and 52,400 openings within their original period. Projections are not causal outcomes of AI or individual hiring probabilities."
+              "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement. The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.ai-impact.ai-impact-table.52",
@@ -24718,7 +24684,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "For exact occupation 49-1011, current 2025 employment is 629,000, 2025–2035 growth is 3% to 4%, and annual openings are 48,900; the 2025 median is USD 38.39 per hour and USD 79,860 per year. Read the older shared 2024 employment of 617,500 and 52,400 openings within their original period. Projections are not actual outcomes and do not establish AI causation."
+              "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement. The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.ai-impact.ai-impact-table.70",
@@ -24790,7 +24756,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS employment projections (2024–2034); ILO Working Paper 96"
+              "BLS employment projections (2025–2035); ILO Working Paper 96"
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.ai-impact.ai-impact-table.75",
@@ -26075,7 +26041,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National (industry proxy)"
+              "Ankang maintenance shift lead"
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.china-salary.career-snapshot-primary-locale.49",
@@ -26089,12 +26055,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National monthly and annual wage distributions for the exact occupation were not obtained in this round. National, industry and job-category averages cannot be directly converted into individual wages, nor do they establish that all official sources lack data."
+              "Ankang Tailun New Materials listed one maintenance shift lead at CNY 6,000–10,000 per month, with probation pay at 80% of post-probation pay for the role. The listing did not specify crew size or authority to assign work."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "internal-rubric"
+            "a53-ankang"
           ],
           "type": "prose"
         },
@@ -26131,7 +26097,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other regions and employment models"
+              "Guangzhou property engineering supervisor"
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.china-salary.career-snapshot-primary-locale.53",
@@ -26145,12 +26111,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable income statistics were obtained for other regions and employment models (elevator, lifting and special equipment maintenance; commercial vehicle and construction machinery repair; commercial and household appliance repair services; or equipment rental and maintenance contracting). Regions, industries and employment arrangements differ greatly and must be checked role by role."
+              "In a Guangzhou Huangpu hiring event for veterans, Guangdong Jingwei Security Services listed one property engineering supervisor at CNY 7,000–8,000 per month. The role covered shift scheduling, work assignments, maintenance quality and safety supervision for an electrical crew, alongside handling repair requests."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a53-huangpu"
           ],
           "type": "prose"
         },
@@ -26187,7 +26153,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Average (3% to 4%, 2024–2034, BLS projections presented through O*NET)"
+              "Average (3% to 4%, 2025–2035, BLS projections presented through O*NET)"
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.china-salary.career-snapshot-primary-locale.58",
@@ -26378,7 +26344,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Approximately 617,500 employed"
+              "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement. The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.us-salary.career-snapshot-secondary-locale.19",
@@ -26421,7 +26387,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Employment · Growth rate | Average (3% to 4%, 2024–2034); BLS projections (presented through O*NET) | Not an individual's probability of obtaining a job."
+              "Employment · Growth rate | Average (3% to 4%, 2025–2035); BLS projections (presented through O*NET) | Not an individual's probability of obtaining a job."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.us-salary.career-snapshot-secondary-locale.22",
@@ -26435,7 +26401,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Approximately 52,400 per year"
+              "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement. The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.us-salary.career-snapshot-secondary-locale.23",
@@ -26449,12 +26415,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Employment · Projected openings | Approximately 52,400 per year (2024–2034 projected annual average); BLS projections (presented through O*NET) | Mostly from replacement needs, not net new jobs."
+              "Employment · Projected openings | About 48,900 annually (2025–2035 average); BLS Table 1.2 | Includes growth and replacement."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "internal-rubric",
             "bls-projections-2025-35"
           ],
           "type": "prose"
@@ -26479,7 +26444,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "For exact occupation 49-1011, current 2025 employment is 629,000, 2025–2035 growth is 3% to 4%, and annual openings are 48,900; the 2025 median is USD 38.39 per hour and USD 79,860 per year. Read the older shared 2024 employment of 617,500 and 52,400 openings within their original period. Education summary: high school, 54%; some college without a degree, 17%; postsecondary certificate, 13%. Extended wage percentile tables and industry breakdowns were not obtained in this round; this does not establish official nonpublication."
+              "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement. The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.us-salary.career-snapshot-secondary-locale.26",
@@ -26579,7 +26544,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Average (3% to 4%, 2024–2034, BLS projections presented through O*NET)"
+              "Average (3% to 4%, 2025–2035, BLS projections presented through O*NET)"
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.us-salary.career-snapshot-secondary-locale.33",
@@ -26790,7 +26755,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wages are from May2025 OEWS presented through O*NET. Current employment projections cover 2025–2035; read older shared 2024–2034 cards within their original period. Wage statistics are not an employment-level survey."
+              "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement. The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.us-salary.career-snapshot-secondary-locale.48",
@@ -26895,13 +26860,13 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
@@ -28661,37 +28626,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Material one: fictional equipment maintenance shift assignment",
-                  "Provide equipment types, quantities and operating status; shift inspection, servicing, fault diagnosis or installation tasks; available personnel, tools, spare parts and specialized devices; equipment history, work orders, shutdown windows and deliveries; a sudden breakdown, incorrect disassembly or safety violation; and required scheduling, assignments, maintenance and safety checks, records and cost estimates as inputs for this exercise.",
-                  "Label units and missing items and state that the material is entirely fictional.",
-                  "List missing information that may affect judgment.",
-                  "State that the exercise uses fictional materials and represents no actual business, equipment or incident.",
-                  "Checkable outputs: pre-shift safety briefing and assignments; maintenance sequence and quality standards; power disconnection, lockout, confined-space and elevated-work safety points; spare-parts, tool and equipment allocation and missing-part responses; incident handling and escalation paths; records and reports related to work orders, working hours and costs; and decisions that must be made by the equipment or production manager or appropriately qualified personnel.",
-                  "State boundaries: conclusions on special equipment, electrical work and welding, hazardous chemicals, equipment design, labor law and taxation must be made by qualified personnel, competent authorities and professional organizations."
+                  "MX49: Schedule the line-down repair before planned work. One person cannot cover overlapping jobs.",
+                  "P11: Line down awaiting repair. The bay is confirmed for 09:00–10:00. Assign an electrical technician authorized for that bay.",
+                  "P12: Planned inspection at 09:00–10:00. Assign a mechanical technician.",
+                  "P13: Planned electrical inspection at 09:30–10:00. It requires the same authorization as P11.",
+                  "Zhou is the only electrical technician with the relevant authorization and is on shift at 09:00–10:30.",
+                  "Lin is a mechanical technician on shift at 09:00–10:00.",
+                  "The shift supervisor assigns work. The production coordinator confirms rescheduling. Restart needs a separate shift acceptance record.",
+                  "Names, permissions and service windows are fictional."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Material two: maintenance and installation safety and quality review points (fictional)",
-                  "Write pre-shift safety briefing content; confirmation of power disconnection, lockout, absence-of-voltage testing, pressure release, confined-space and elevated-work conditions; maintenance and installation quality inspection points; and exception and incident responses. State which actions exceed your qualifications and authority.",
-                  "Exercise output: an actionable set of maintenance and installation safety and quality review points."
+                  "Record the time, technician, status and next communication for each order.",
+                  "Single-change variant: the production coordinator confirms a new time for P13, 10:00–10:30. All other inputs stay the same. Show the row that changes.",
+                  "Record dispatch, rescheduling and restart status separately."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material three: reference approach excerpt (fictional)",
-                  "First complete the pre-shift safety briefing and assignments, then organize disassembly, assembly, diagnosis and checks in maintenance sequence, address spare-parts, tool and equipment exceptions, and finally complete records, work orders and handover.",
-                  "Keep unconfirmed power disconnection and residual-energy status, confined-space conditions or special equipment requirements marked as unknown, and ask the equipment or production manager or qualified personnel to confirm them rather than relying on experience.",
-                  "State that the reference approach is only an example, not the only correct method."
+                  "Finish the original and variant independently.",
+                  "Name the decision owner for conflicts or missing authorization.",
+                  "On day seven, open “MX49 maintenance dispatch reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Material four: boundary statement",
-                  "This exercise does not establish conclusions on special equipment, electrical work and welding, hazardous chemicals, equipment design, labor law or taxation. Restricted equipment, energized, confined-space and hazardous chemical work must be performed by qualified personnel, competent authorities and professional organizations under applicable procedures."
+                  "Review fictional paper records only.",
+                  "Follow site authorization for real dispatch, isolation, maintenance and acceptance."
                 ]
               }
             ]
@@ -28700,7 +28665,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "First-Line Supervisors of Mechanics, Installers, and Repairers | path",
+          "title": "MX49 fictional maintenance dispatch",
           "type": "cards"
         },
         {
@@ -28711,9 +28676,9 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Work sample one: job hiring requirements comparison table",
-                  "List the target posting's education, experience, electrical, welding and special equipment qualifications, safety training and medical examination requirements item by item in a comparison table.",
-                  "Mark requirements met, gaps to fill and items requiring verification."
+                  "Keep both dispatch plans.",
+                  "Record the overlap, the basis for any change and outstanding evidence.",
+                  "Attach the next shift handoff."
                 ]
               },
               {
@@ -28808,50 +28773,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read a special equipment, electrical or confined-space work requirement",
-                  "Extract a safety requirement and write implementation and recordkeeping points."
+                  "Day 1",
+                  "Record work order IDs and priorities."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: write pre-shift safety briefing and work assignment points",
-                  "Write check items for personnel, equipment, tools, spare parts and permits."
+                  "Day 2",
+                  "List the two technicians’ authorizations and availability."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: write maintenance sequence and quality standard points",
-                  "Write points for arranging sequences, quality and acceptance requirements by equipment and work order."
+                  "Day 3",
+                  "Check for time conflicts."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: write power disconnection, lockout, confined-space and elevated-work review points",
-                  "Write confirmation items for power disconnection, lockout, absence-of-voltage testing, pressure release, gas testing and fall protection."
+                  "Day 4",
+                  "Record why any order is held and who owns the next step."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: write records, spare-parts, working-hour, cost and handover points",
-                  "Write inspection, maintenance, test, spare-parts, working-hour and cost records and handover matters."
+                  "Day 5",
+                  "List records to verify before work or restart."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: ask someone to challenge your work",
-                  "Ask an experienced equipment supervisor or safety manager to identify omissions in maintenance and safety steps, and record the feedback."
+                  "Day 6",
+                  "Submit both versions independently and show the row that changes."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: write your assessment",
-                  "Write whether you want to continue, what gaps to fill and which decisions you cannot make yourself."
+                  "Day 7",
+                  "On day seven, open “MX49 maintenance dispatch reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -28996,14 +28961,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Verify hiring conditions, qualifications and safety requirements against original job postings, employer policies and competent authority documents. This page only suggests what to check.",
-              "Read education, experience, electrical, welding and special equipment qualifications, safety training, medical examination and on-call requirements together. Flexibility in one requirement does not mean others can be substituted."
+              "Ankang Tailun New Materials listed one maintenance shift lead at CNY 6,000–10,000 per month, with probation pay at 80% of post-probation pay for the role. The listing did not specify crew size or authority to assign work. In a Guangzhou Huangpu hiring event for veterans, Guangdong Jingwei Security Services listed one property engineering supervisor at CNY 7,000–8,000 per month. The role covered shift scheduling, work assignments, maintenance quality and safety supervision for an electrical crew, alongside handling repair requests.",
+              "Both are historical postings. Current vacancy status is unverified. Confirm supervisory authority and probation terms for each role. Comparable national occupational wage data remain unavailable."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a53-ankang",
+            "a53-huangpu"
           ],
           "title": "First-Line Supervisors of Mechanics, Installers, and Repairers | path",
           "type": "notice"
@@ -29183,7 +29148,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The education summary of high school, 54%; some college without a degree, 17%; postsecondary certificate, 13%; ECR; and Job Zone3 belongs to the exact US profile. O*NET excludes those who are only team/work leaders. Assistant shift leadership can provide preliminary training experience, but not all crew leaders fall within this occupation. For exact occupation 49-1011, current 2025 employment is 629,000, 2025–2035 growth is 3% to 4%, and annual openings are 48,900; the 2025 median is USD 38.39 per hour and USD 79,860 per year. Read the older shared 2024 employment of 617,500 and 52,400 openings within their original period. Check target specialized operating qualifications and authority separately."
+              "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement. The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.path.career-path-block.20",
@@ -30284,7 +30249,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "For exact occupation 49-1011, current 2025 employment is 629,000, 2025–2035 growth is 3% to 4%, and annual openings are 48,900; the 2025 median is USD 38.39 per hour and USD 79,860 per year. Read the older shared 2024 employment of 617,500 and 52,400 openings within their original period. Chinese industry averages provide context only and cannot replace exact occupational wages."
+              "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement. The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.market-signals.market-signal-card.8",
@@ -31027,13 +30992,13 @@
                 ]
               },
               {
-                "answer": "US O*NET-SOC 49-1011.00, First-Line Supervisors of Mechanics, Installers, and Repairers: interest code ECR; Job Zone 3 (medium preparation, SVP 6.0 to <7.0); not designated Bright Outlook. Scope: wages, employment, growth and openings presented on the O*NET page all use the exact occupation definition. The 2025 median hourly wage is USD 38.39 and median annual wage is USD 79,860. The 10th, 25th, 75th and 90th percentiles are approximately USD 49,600, 62,690, 101,360 and 126,790 per year, respectively. Employment was approximately 617,500 in 2024, with projected average growth of 3% to 4% during 2024–2034 and approximately 52,400 annual openings. Main education survey categories are published (high school diploma or equivalent, 54%; some college without a degree, 17%; postsecondary certificate, 13%). The remaining categories are not published, and this page does not fill them in. No industry wage table readable by industry was found on the occupation page.",
+                "answer": "U.S. wages and employment cover first-line supervisors of mechanics, installers, and repairers (49-1011). O*NET describes direct supervision and coordination and excludes workers who only serve as team or work leaders.",
                 "id": "first-line-supervisors-of-mechanics-installers-and-repairers.faq.3",
                 "question": "What are the US statistical scope and profile completeness (important)?",
                 "question_key": "career.faq.first-line-supervisors-of-mechanics-installers-and-repairers.q3",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "onet-details",
+                  "bls-projections-2025-35"
                 ]
               },
               {
@@ -31098,15 +31063,19 @@
                 ]
               },
               {
-                "answer": "This page presents approximately 617,500 employed in 2024, projected average growth of 3% to 4% during 2024–2034, and approximately 52,400 annual openings, using the exact occupation definition. Openings mainly arise from replacement needs, while individual development depends more on shift and maintenance experience, qualification scope and management ability. Common transitions include industrial machinery mechanics (requiring additional disassembly, assembly, measurement, alignment, commissioning and acceptance skills); automotive service technicians and mechanics (vehicle diagnosis, work orders and repeat repair management); general maintenance workers (multidisciplinary minor repairs and responsive handling); heating, air conditioning and refrigeration mechanics and installers (HVAC and refrigeration installation, commissioning and seasonal emergency response); electricians (electrical repairs and energized-work safety); maintenance and repair workers (routine maintenance, rounds and inspections); elevator and escalator installers and repairers (special equipment compliance, annual inspections and attendant duties); and first-line supervisors of production and operating workers (production planning, personnel and production-line coordination). Transition feasibility depends on the target job posting and local regulations.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement. For a move into facilities or multi-shop management, check who owns budgets, scheduling and staff supervision.",
                 "id": "first-line-supervisors-of-mechanics-installers-and-repairers.faq.10",
                 "question": "What is the employment outlook, and what other directions can this work lead to?",
                 "question_key": "career.faq.first-line-supervisors-of-mechanics-installers-and-repairers.outlook-transition",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "onet-details",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
+              },
+              {
+                "answer": "Assign Zhou to P11 and Lin to P12. P13 overlaps P11, and Lin lacks the required authorization. Send P13 to the production coordinator for rescheduling. In the variant, assign P13 to Zhou in the newly confirmed 10:00–10:30 window. P11 and P12 stay the same. Record dispatch separately. Restart for P11 still awaits the shift acceptance record. Check priority, authorization, timing and restart evidence.",
+                "id": "first-line-supervisors-of-mechanics-installers-and-repairers.faq.11",
+                "question": "MX49 maintenance dispatch reference (open after day six)",
+                "question_key": "career.faq.first-line-supervisors-of-mechanics-installers-and-repairers.11"
               }
             ]
           },
@@ -31138,7 +31107,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Sources and fact register for this page (O*NET 49-1011.00 occupational profile and detailed information; BLS OEWS May 2025 wage percentiles; BLS 2024–2034 projections presented by O*NET; National Bureau of Statistics 2025 average wages by industry section and job category; ILO Working Paper 96; NIST AI RMF)"
+              "Sources and fact register for this page (O*NET 49-1011.00 occupational profile and detailed information; BLS OEWS May 2025 wage percentiles; BLS 2025–2035 projections presented by O*NET; National Bureau of Statistics 2025 average wages by industry section and job category; ILO Working Paper 96; NIST AI RMF)"
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.sources.source-card.2",
@@ -31168,7 +31137,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "For exact occupation 49-1011, current 2025 employment is 629,000, 2025–2035 growth is 3% to 4%, and annual openings are 48,900; the 2025 median is USD 38.39 per hour and USD 79,860 per year. Read the older shared 2024 employment of 617,500 and 52,400 openings within their original period. The education summary of high school, 54%; some college without a degree, 17%; postsecondary certificate, 13%; ECR; and Job Zone3 has been verified. OEWS includes tips, commissions, piece-rate pay and production bonuses within its definition; NBS includes bonuses, allowances and overtime within its definition. These items cannot be categorically excluded. Extended percentile tables, industry details and the full education table were not obtained in this round; this does not imply official nonpublication. Exact occupational wages in China, a universal entry timeline, medical causation, AI adoption and efficiency gains, and personality-based occupational validity have not been verified."
+              "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement. The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
             ]
           },
           "id": "first-line-supervisors-of-mechanics-installers-and-repairers.sources.source-card.4",
@@ -31197,28 +31166,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the First-Line Supervisors of Mechanics, Installers, and Repairers career page",
@@ -31245,55 +31202,53 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "Official occupational scope: directly supervise and coordinate the activities of mechanics, installers and repairers; may also advise customers on recommended services (excluding team or work leaders).",
                   "Interest code ECR (Enterprising, Conventional, Realistic); preparation level Job Zone 3 (medium preparation, SVP 6.0 to <7.0); not designated Bright Outlook.",
                   "Main education survey categories: high school diploma or equivalent, 54%; some college without a degree, 17%; postsecondary certificate, 13% (the summary page does not list the remaining categories).",
-                  "Wages and employment (exact occupation definition): 2025 median hourly wage, USD 38.39; median annual wage, USD 79,860; 2024 employment, 617,500; projected average growth of 3% to 4% during 2024–2034; approximately 52,400 projected annual openings.",
-                  "The main industries for this occupation in 2024 were retail trade and construction."
+                  "The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
                 "limitation": "Only main education survey categories are published, and this page does not combine them into a complete distribution. No industry wage table readable by industry was found on the occupation page. US information does not automatically establish mainland Chinese special equipment, electrical, on-call or employment requirements.",
                 "market": "US",
                 "name": "O*NET OnLine：First-Line Supervisors of Mechanics, Installers, and Repairers（49-1011.00）",
-                "period": "current page (updated 2026); accessed 2026-09-20",
+                "period": "2026 occupation profile; 2025 wages",
                 "publisher": "O*NET OnLine",
                 "scope": "exact title 49-1011.00",
                 "url": "https://www.onetonline.org/link/summary/49-1011.00"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "Used to check tasks and work activities: inspect, test and measure completed work for compliance with standards or repair requirements; inspect and supervise work areas, tools and equipment and provide safety training; interpret specifications, drawings or work orders and mark reference points; monitor workloads and review employee performance; perform skilled repairs or maintenance; calculate estimated and actual material, labor and outside contractor costs; monitor tool and spare-parts inventories and workshop conditions; requisition materials and supplies; communicate with management, engineering, quality control, customers or union representatives; determine schedules, sequences and assignments; inspect objects, systems or facilities to determine installation, service or repair needs; advise employees and help correct skill deficiencies; recommend or initiate personnel actions; investigate accidents or injuries and write reports; conduct or arrange safety, maintenance, procedure and equipment-use training; develop, implement or evaluate maintenance policies and procedures; meet suppliers to discuss repair products; participate in budget preparation and administration and coordinate purchasing and expenditure monitoring; review, evaluate and accept contractor bids and completion; compile working-hour, production, inventory, repair statistics and test records; develop or implement electronic maintenance programs or information management systems; and design equipment configurations to meet personnel needs.",
                   "Work context (available data): irregular schedules, 51% / regular, 49%; more than 40 hours, 53% / 40 hours, 47%; constant contact with others, 90%; daily face-to-face discussions, 81%; daily telephone conversations, 86%; daily email, 82%; teamwork extremely important, 62% / very important, 24%; coordinating or leading others extremely important, 62% / very important, 12%; extremely exact or highly accurate work, 88% combined; consequences of error extremely serious, 17% / very serious, 12% / fairly serious, 30% / not serious at all, 34%; strict deadlines daily, 38% / more than once a week, 33%; conflict situations more than once a week, 16% / more than once a month, 27% / more than once a year, 48%; dealing with unpleasant, angry or discourteous people more than once a week, 18% / more than once a year, 55%; standing continually or almost continually, 20% / less than half the time, 31% / never, 11%; walking or running more than half the time, 22% / about half the time, 30%; bending or twisting continually, 28% / never, 19%; never climbing ladders, 34%; kneeling, crouching, stooping or crawling continually, 15% / never, 24%; never keeping or regaining balance, 66%; indoor controlled environments daily, 53% / never, 33%; outdoors in all weather daily, 26% / more than once a month, 33% / never, 18%; outdoors under cover more than once a month, 25% / never, 43%; contaminant exposure daily, 51%; hazardous equipment daily, 45% / never, 21%; noise daily, 52% / never, 16%; extreme heat or cold daily, 32% / never, 14%; hazardous conditions daily, 18% / never, 33%; standard protective or safety equipment daily, 61%; work slightly automated, 23% / not at all automated, 68%; responsibility for others' health and safety very high, 59% / high, 18%; decisions daily, 58% / never, 14%; decisions affect very important outcomes, 49%; considerable decision-making freedom, 54%; considerable freedom to determine tasks, priorities and goals, 66%.",
                   "Work styles: Leadership Orientation, Cooperation, Cautiousness, Attention to Detail and Dependability.",
-                  "Software skill categories include database query software (maintenance management and work order software), email, office suites, presentation software, spreadsheets, time accounting and word processing software."
+                  "Software skill categories include database query software (maintenance management and work order software), email, office suites, presentation software, spreadsheets, time accounting and word processing software.",
+                  "The 2025 U.S. medians were $38.39 per hour and $79,860 per year."
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
                 "limitation": "Work context percentages are survey responses and do not represent all positions. Special equipment, electrical, welding, on-call and employment requirements require separate verification.",
                 "market": "US",
                 "name": "O*NET OnLine: First-Line Supervisors of Mechanics, Installers, and Repairers detailed occupational information (49-1011.00)",
-                "period": "current page (updated 2026); accessed 2026-09-20",
+                "period": "2026 occupation profile; 2025 wages",
                 "publisher": "O*NET OnLine",
                 "scope": "exact title (49-1011.00)",
                 "url": "https://www.onetonline.org/link/details/49-1011.00"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "As presented through O*NET: 2024 employment of 617,500, projected average growth of 3% to 4% during 2024–2034, and approximately 52,400 projected annual openings. This occupation is not designated Bright Outlook.",
-                  "The openings presented by O*NET are annual averages over the projection period. This page therefore labels them as per year, not a cumulative total over ten years. Openings mainly arise from replacement needs.",
-                  "The main industries for this occupation in 2024 were retail trade and construction."
+                  "BLS Table 1.2 projects U.S. employment in occupation 49-1011 to rise from about 629,000 in 2025 to 654,500 in 2035, up 4.1%, with about 48,900 annual openings from growth and replacement."
                 ],
                 "evidence_type": "official employment projections (exact occupation scope)",
                 "id": "bls-projections-2025-35",
                 "limitation": "Projections are not actual outcomes. Annual openings include replacement needs and cannot be converted into an individual's probability of obtaining a job. The statistics cover employees.",
                 "market": "US",
-                "name": "BLS: Occupational projections and characteristics table (2024–2034 projections, presented through O*NET, exact occupation 49-1011.00)",
-                "period": "2024—2034 projections as presented by O*NET OnLine; accessed 2026-09-20",
+                "name": "BLS Table 1.2: First-Line Supervisors of Mechanics, Installers, and Repairers, 49-1011",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact occupation 49-1011.00",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31400,6 +31355,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Ankang Tailun New Materials listed one maintenance shift lead at CNY 6,000–10,000 per month, with probation pay at 80% of post-probation pay for the role. The listing did not specify crew size or authority to assign work."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a53-ankang",
+                "limitation": "Both are historical postings. Current vacancy status is unverified. Confirm supervisory authority and probation terms for each role. Comparable national occupational wage data remain unavailable.",
+                "market": "Mainland China",
+                "name": "Maintenance supervision job posting",
+                "period": "2025-05-30",
+                "publisher": "Ankang Municipal Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.ankang.gov.cn/Content-2838400.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "In a Guangzhou Huangpu hiring event for veterans, Guangdong Jingwei Security Services listed one property engineering supervisor at CNY 7,000–8,000 per month. The role covered shift scheduling, work assignments, maintenance quality and safety supervision for an electrical crew, alongside handling repair requests."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a53-huangpu",
+                "limitation": "Both are historical postings. Current vacancy status is unverified. Confirm supervisory authority and probation terms for each role. Comparable national occupational wage data remain unavailable.",
+                "market": "Mainland China",
+                "name": "Maintenance supervision job posting",
+                "period": "2026-10-20",
+                "publisher": "Guangzhou Huangpu District Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzhprs/gkmlpt/content/11/11070/post_11070955.html"
               }
             ]
           },
@@ -34254,6 +34239,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a53-ankang",
+            "posting-a53-huangpu"
+          ],
           "sources_note": {
             "$item": "first-line-supervisors-of-mechanics-installers-and-repairers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34406,7 +34395,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "2024–2034 employment · Annual openings",
+            "指标": "2025–2035 employment · Annual openings",
             "数值": {
               "$item": "first-line-supervisors-of-mechanics-installers-and-repairers.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -36165,7 +36154,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36175,27 +36164,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "first-line-supervisors-of-mechanics-installers-and-repairers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "first-line-supervisors-of-mechanics-installers-and-repairers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -36394,36 +36363,36 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 617,500 employed (2024, BLS occupational projections, presented through O*NET; exact occupation definition)",
+        "display_value": "About 629,000 workers in 2025",
         "fact_id": "us-employment-2025",
         "market": "US",
         "measure": "Employment level",
         "occupation_scope": "First-Line Supervisors of Mechanics, Installers, and Repairers (O*NET-SOC 49-1011.00)",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Average (3% to 4%, 2024–2034, BLS projections presented through O*NET)",
+        "display_value": "Projected growth of 4.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
         "measure": "Employment growth rate",
         "occupation_scope": "First-Line Supervisors of Mechanics, Installers, and Repairers (O*NET-SOC 49-1011.00)",
-        "period": "2024–2034 projection",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 52,400 per year (2024–2034, BLS projected annual average, presented through O*NET; mostly from replacement needs)",
+        "display_value": "About 48,900 annual openings from growth and replacement",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
         "measure": "Annual job openings",
         "occupation_scope": "First-Line Supervisors of Mechanics, Installers, and Repairers (O*NET-SOC 49-1011.00)",
-        "period": "2024–2034 projection",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -36583,6 +36552,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Ankang Tailun New Materials listed one maintenance shift lead at CNY 6,000–10,000 per month, with probation pay at 80% of post-probation pay for the role. The listing did not specify crew size or authority to assign work.",
+        "fact_id": "posting-a53-ankang",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Maintenance supervision job posting",
+        "period": "2025-05-30",
+        "source_refs": [
+          "a53-ankang"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "In a Guangzhou Huangpu hiring event for veterans, Guangdong Jingwei Security Services listed one property engineering supervisor at CNY 7,000–8,000 per month. The role covered shift scheduling, work assignments, maintenance quality and safety supervision for an electrical crew, alongside handling repair requests.",
+        "fact_id": "posting-a53-huangpu",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Maintenance supervision job posting",
+        "period": "2026-10-20",
+        "source_refs": [
+          "a53-huangpu"
+        ]
       }
     ]
   },
@@ -36609,19 +36602,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "US employment change (2024–2034)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "US employment level (2024)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "US annual job openings (2024–2034)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -36642,7 +36635,7 @@
       "text": "First-Line Supervisors of Mechanics, Installers, and Repairers"
     }
   },
-  "source_content_sha256": "529bc110e082d41d9c1bbf39c1f48b47c18bbc5e86b6d1a71d0bce508c1b23ba",
+  "source_content_sha256": "bb2ff2483f5b4da8fea316abdd8feb0bf18b7c8f79855a2d014ea8d8a3837eb9",
   "subject": {
     "canonical_slug": "first-line-supervisors-of-mechanics-installers-and-repairers",
     "name": "First-Line Supervisors of Mechanics, Installers, and Repairers",

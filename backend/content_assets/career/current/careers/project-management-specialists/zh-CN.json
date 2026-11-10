@@ -1272,7 +1272,7 @@
         "status": "mapped"
       },
       "item:project-management-specialists.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:project-management-specialists.path.interview-probation.1": {
         "status": "mapped"
@@ -23314,7 +23314,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "愿意把模糊目标拆成可验收工作包，并持续核进度、成本、风险和责任人，可进一步了解项目管理专员。"
+              "若对反复确认优先级和协调未完成事项不适应，先核岗位的客户接触、会议频率和变更权限。"
             ]
           },
           "id": "project-management-specialists.quick-decision.fit-decision-checklist.1",
@@ -23329,7 +23329,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用120条虚构项目工作项练抽核：六条样本有三处待核；3/6不能推其余114条。"
+              "到 09 用同一组虚构任务算变更前后里程碑，写一页影响单。"
             ]
           },
           "id": "project-management-specialists.quick-decision.fit-decision-checklist.2",
@@ -23343,7 +23343,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "纸笔练习：某交付清单20项，其中4项经确认验收，列16项未验收并标依赖和负责人。"
+              "适合愿意跟进跨团队依赖、记录决定并解释变更会影响哪些交付的人。"
             ]
           },
           "id": "project-management-specialists.quick-decision.fit-decision-checklist.3",
@@ -23359,7 +23359,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "提交一页项目状态卡：列目标、范围、20项交付、R2/R4/R6缺口、决策人与114项未观察记录。"
+              "到 09 用同一组虚构任务算变更前后里程碑，写一页影响单。"
             ]
           },
           "id": "project-management-specialists.quick-decision.fermat-decision-card.6",
@@ -27738,31 +27738,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "物流师",
@@ -28185,8 +28185,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能否从120条虚构记录中标出六条已核、114条未观察？",
-              "能否区分六条样本的疑点比例与120条总体？"
+              "记录前置任务与并行关系。",
+              "标明两版关键路径与交期。"
             ]
           },
           "id": "project-management-specialists.fit.personality-fit-block.20",
@@ -28707,7 +28707,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用120项虚构工作包抽六项，列三类缺口与升级。"
+              "到 09 用同一组虚构任务算变更前后里程碑，写一页影响单。"
             ]
           },
           "id": "project-management-specialists.fit.personality-fit-block.55",
@@ -29495,8 +29495,8 @@
                 "id": "education",
                 "values": [
                   "教育与相关经验",
-                  "BLS列美国典型入门教育为本科，无相关经验要求。",
-                  "按目标地区和雇主核具体要求。"
+                  "BLS 将本科列为美国典型学历，职业预测表列无典型相关先前经历。OOH 提醒部分岗位仍要求相关经验。",
+                  "彩讯 2026 年 9 月 9 日发布的北京和广东 PMO 样本含里程碑、交付物、变更风险与责任人留痕。单岗样本用来核任务和条件。"
                 ]
               },
               {
@@ -29519,8 +29519,8 @@
                 "id": "tools",
                 "values": [
                   "可展示的工作样本",
-                  "用虚构项目展示范围—计划—实际—验收对照。",
-                  "他人能复算交付并追溯三类缺口。"
+                  "到 09 用同一组虚构任务算变更前后里程碑，写一页影响单。",
+                  "核记录能否让别人复算。"
                 ]
               }
             ]
@@ -29530,7 +29530,9 @@
             "employer",
             "editor",
             "onet",
-            "bls"
+            "bls",
+            "cn-d007-job",
+            "us-d007-ooh"
           ],
           "title": "入行核查依据与编辑准备建议",
           "type": "cards"
@@ -29543,33 +29545,32 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料与设定｜全部为虚构项目纸笔练习",
-                  "虚构项目有120项工作记录；某交付清单20项，其中4项经确认验收，余16项待核。",
-                  "A1：写目标、范围、验收人和预算边界；未获批不扩范围。",
-                  "A2：从120项中抽R1–R6六条，抽样由编辑设计。"
+                  "虚构材料",
+                  "虚构项目从第 0 天起。A 需求确认 2 天。A 完成后 B 搭建 3 天与 C 内容 2 天并行。B、C 都完成后 D 联测 2 天，D 后 E 验收 1 天。人员不冲突。",
+                  "客户提出给 C 增加 2 天工作，尚未批准。已承诺第 8 天结束时交付。获授权的项目发起人决定范围和日期。交付负责人复核工期，客户经理统一传达承诺。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务与产出",
-                  "A3：R1、R3、R5完整；R2缺依赖责任人，R4缺验收标准，R6成本估算过期。A4：其余114条未观察。",
-                  "A4：练习者只记录疑点和待核原件；具名负责人决定是否扩展核查或交付。"
+                  "任务与交付",
+                  "交基线与变更两版里程碑。标出依赖、关键路径、交付影响、决策人和决定时限。",
+                  "用纸或本地表格，缺证单列。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考思路（先独立做）",
-                  "A5：六项中三项有待核缺口，3/6=50%只描述样本，不能推120项总体问题率。",
-                  "分别列R2/R4/R6需要的原件和决策人；未经批准不得改范围或预算。"
+                  "自核顺序",
+                  "先保存初稿，再看七天计划后的参考。",
+                  "可以自己完成。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界与复核",
-                  "他人能复算20-4=16、120-6=114和3/6，并看到4项必须真正验收。"
+                  "模拟权限",
+                  "在批准前保留原基线，在变更单单列试算和待决事项。"
                 ]
               }
             ]
@@ -29578,7 +29579,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：一张虚构核对项目需求书",
+          "title": "PJ-01 | 项目变更与里程碑",
           "type": "cards"
         },
         {
@@ -29589,31 +29590,31 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "项目需求书与单据摘要卡",
-                  "写20项交付、4项已验收与16项待核。",
-                  "验收证据可复查。"
+                  "依赖表",
+                  "记录前置任务与并行关系。",
+                  "用题设原值和批准状态核对。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "疑点与复核卡",
-                  "列R2责任人、R4验收标准、R6估算版本缺口。",
-                  "每项对应原件和决策人。"
+                  "前后里程碑",
+                  "标明两版关键路径与交期。",
+                  "用题设原值和批准状态核对。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "升级交接卡",
-                  "注明114项未观察，不推总体问题率。"
+                  "变更记录",
+                  "把批准版本与待核估计分开。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "方法说明卡",
-                  "列变更和预算批准人。"
+                  "决策交接",
+                  "写决定人、截止时间和客户沟通负责人。"
                 ]
               }
             ]
@@ -29645,25 +29646,25 @@
               [
                 "面试核交付",
                 "能否复算未验收数",
-                "20-4=16，4项须有验收证据。",
+                "记录前置任务与并行关系。",
                 "不得把自报完成算验收。"
               ],
               [
                 "面试抽核",
                 "能否区分样本与总体",
-                "六项三缺口，114项未观察。",
+                "标明两版关键路径与交期。",
                 "不能推总体问题率。"
               ],
               [
                 "入职项目管理",
                 "能否核责任人、标准和估算",
-                "R2/R4/R6分别列待核原件。",
+                "把批准版本与待核估计分开。",
                 "不得越权改预算。"
               ],
               [
                 "客户协作",
                 "能否说明变更影响",
-                "写时间、成本、质量和批准人。",
+                "写决定人、截止时间和客户沟通负责人。",
                 "不得擅自承诺交付。"
               ]
             ]
@@ -29684,50 +29685,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第一日",
-                  "第一日：核A1目标、范围与验收。"
+                  "第 1 天",
+                  "列每项任务、工期与现有承诺。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第二日",
-                  "第二日：核20项交付和4项已验收证据。"
+                  "第 2 天",
+                  "画出依赖关系，标明并行任务。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第三日",
-                  "第三日：抽R1–R6，对计划、依赖和预算。"
+                  "第 3 天",
+                  "算基线的最早完成时间与关键路径。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第四日",
-                  "第四日：列R2/R4/R6缺口，注明114项未观察。"
+                  "第 4 天",
+                  "按变更重算路径与日期，保留原版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第五日",
-                  "第五日：按A4/A5写三种疑点、114条未知和负责人复核请求。"
+                  "第 5 天",
+                  "把时间差、待核估计和批准时限写入变更单。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第六日",
-                  "第六日：封存初稿后看参考思路，修正疑点分类、算式或越权建议。"
+                  "第 6 天",
+                  "先独立写完交付物，再按下方参考和量规核对。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第七日",
-                  "第七日：交项目需求书、复核、升级、方法四卡，记录最费力的环节与下一步练习。"
+                  "第 7 天",
+                  "修订一处有证据的问题并标注模拟。"
                 ]
               }
             ]
@@ -29744,20 +29745,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "20项交付、4项验收、16项待核；验收人和证据须单列。",
-              "六条样本编号为R1–R6，与A2一致。",
-              "R2缺依赖责任人、R4缺验收标准、R6成本估算过期；R1、R3、R5完整。",
-              "3/6只描述六项样本，另外114项未知，不推项目总体。",
-              "异常卡须说明权限不清时暂停，交负责人判断是否扩展核查。",
-              "真实系统访问、协作方沟通和工作包放行必须先核适用范围约定与机构授权。",
-              "作品仅证明纸笔方法，不等于雇主录用、岗位授权或系统访问授权。"
+              "基线 A→B→D→E 用 2＋3＋2＋1＝8 天。",
+              "C 基线第 4 天结束，B 第 5 天结束。D 需等待两者，C 原有 1 天余量。",
+              "变更后 C 用 4 天。A→C→D→E 用 9 天，预计晚 1 天。",
+              "交付负责人复核估计和替代方案，发起人在 C 开工前决定是否批准范围或改期。客户经理在批准后传达决定。",
+              "第 8 天仍是批准基线。第 9 天仅记为提议情景，待复核及签批。",
+              "四项各 0–2 分，依赖、前后日期、变更记录、决策归属。",
+              "依据完整且可追溯得 2，部分得 1，缺失或越权得 0。"
             ]
           },
           "id": "project-management-specialists.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "题后参考与自核量规",
           "type": "list"
         },
         {
@@ -29786,7 +29787,7 @@
               [
                 "美国入门教育背景",
                 "考虑美国13-1082职业者",
-                "BLS列本科学位，无相关工作经验及统一在岗培训要求",
+                "BLS 将本科列为美国典型学历，职业预测表列无典型相关先前经历。OOH 提醒部分岗位仍要求相关经验。",
                 "不等于中国统一门槛",
                 "核所在地与雇主招聘要求",
                 "按个人路径",
@@ -29875,16 +29876,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "A1–A5与七天计划是虚构项目练习，不含真实客户资料。",
-              "岗位薪资、地区岗位授权与招聘状态按所在地和雇主核对；美国统计不能当中国条件。"
+              "彩讯 2026 年 9 月 9 日发布的北京和广东 PMO 样本含里程碑、交付物、变更风险与责任人留痕。单岗样本用来核任务和条件。",
+              "历史招聘样本和虚构练习各有用途。职级、在招状态及授权按雇主核查。"
             ]
           },
           "id": "project-management-specialists.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "cn-d007-job",
+            "editor"
           ],
           "title": "招聘记录说明",
           "type": "notice"
@@ -30112,7 +30111,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS列美国13-1082典型入门教育本科，无相关经验和统一在岗培训要求。"
+              "BLS 将本科列为美国典型学历，职业预测表列无典型相关先前经历。OOH 提醒部分岗位仍要求相关经验。"
             ]
           },
           "id": "project-management-specialists.path.career-path-block.23",
@@ -31938,10 +31937,15 @@
                 "question_key": "career.faq.project-management-specialists.us-pay"
               },
               {
-                "answer": "BLS列美国典型入门教育为本科、无相关经验要求；中国条件按雇主和项目类型核。",
+                "answer": "BLS 将本科列为美国典型学历，职业预测表列无典型相关先前经历。OOH 提醒部分岗位仍要求相关经验。 彩讯 2026 年 9 月 9 日发布的北京和广东 PMO 样本含里程碑、交付物、变更风险与责任人留痕。单岗样本用来核任务和条件。",
                 "id": "project-management-specialists.faq.7",
                 "question": "入行教育怎样？",
-                "question_key": "career.faq.project-management-specialists.education-path"
+                "question_key": "career.faq.project-management-specialists.education-path",
+                "source_refs": [
+                  "bls",
+                  "cn-d007-job",
+                  "us-d007-ooh"
+                ]
               },
               {
                 "answer": "项目管理专员协调范围、进度和资源；技术负责人负责专业实现与质量，权责依项目分工。",
@@ -31971,7 +31975,9 @@
             "nbs",
             "privacy",
             "cnclass",
-            "editor"
+            "editor",
+            "cn-d007-job",
+            "us-d007-ooh"
           ],
           "type": "faq"
         },
@@ -32057,13 +32063,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32297,7 +32303,7 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "120项虚构项目工作项与六条抽核为编辑练习。",
+                  "PJ-01 是编辑部制作的虚构试做。",
                   "六条三缺口不推整个项目质量率。"
                 ],
                 "evidence_type": "editorial synthesis",
@@ -32562,6 +32568,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "彩讯 2026 年 9 月 9 日发布的北京和广东 PMO 样本含里程碑、交付物、变更风险与责任人留痕。单岗样本用来核任务和条件。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-d007-job",
+                "limitation": "单岗样本。",
+                "market": "中国大陆",
+                "name": "南开大学就业网｜彩讯 PMO 管培生",
+                "period": "2026-09-09",
+                "publisher": "南开大学就业网｜彩讯 PMO 管培生",
+                "scope": "recruitment_proxy",
+                "url": "https://career.nankai.edu.cn/correcruit/content/id/118395.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS 将本科列为美国典型学历，职业预测表列无典型相关先前经历。OOH 提醒部分岗位仍要求相关经验。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-d007-ooh",
+                "limitation": "典型入行条件，个别岗位另核。",
+                "market": "美国",
+                "name": "美国劳工统计局职业展望手册",
+                "period": "2025–2035",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/business-and-financial/project-management-specialists.htm"
               }
             ]
           },
@@ -37259,7 +37295,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合项目管理专员工作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37817,14 +37853,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "项目管理专员协调项目范围、进度、人员、采购、预算与交付。查看O*NET 13-1082任务、美国2025工资、BLS 2025–2035预测、中国工资缺口和虚构入行练习。"
+      "text": "项目管理专员跟踪里程碑、资源和变更。比较大陆 PMO 职责、美国工资与项目变更试做，核清交付审批。"
     },
     "title": {
       "availability": "available",
       "text": "项目管理专员"
     }
   },
-  "source_content_sha256": "0858cfb7b4d8d94d2e8328d5985e6e728ca16e2ca3b37637d2a9c407b97ced05",
+  "source_content_sha256": "f65fa1fef4de42259b305115962ee5d8eb1699cf34806957f4d6dad4c8ef00eb",
   "subject": {
     "canonical_slug": "project-management-specialists",
     "name": "项目管理专员",

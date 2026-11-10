@@ -23377,14 +23377,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "下一步核当地药房技术员训练、注册或认证要求及药师监督安排；虚构练习不授予独立放行或用药咨询权限。"
+              "纸面体验｜对照两份没有个人信息的虚构录入表，找出一个遗漏字段，保留原单编号并写下请药师确认的事项。 "
             ]
           },
           "id": "pharmacy-technicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "ep",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23695,15 +23693,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "药房技术员在药师指导下按处方准备药品，承担计量计数贴签、资料记录与库存等任务；美国职业档案不直接授中国调剂或审方资格。"
+              "药房技术人员按工作场所授权录入处方信息、管理药品库存并协助准备调配。需要临床判断的疑问要交给药师处理。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "pharmacy-technicians.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "tech-cn-prescription",
-            "editor"
+            "transfer-onet-29-2052.00"
           ],
           "type": "prose"
         },
@@ -24859,16 +24854,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职生成式AI实际采用率、整体替代率和消失年份未核得。文字整理可作受控试用建议；条码库存机器人属于工具任务背景，不能算GenAI调查。总体就业预测也不归因AI。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照两份没有个人信息的虚构录入表，找出一个遗漏字段，保留原单编号并写下请药师确认的事项。"
             ]
           },
           "id": "pharmacy-technicians.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ep",
-            "ilo",
-            "nist",
-            "editor"
+            "transfer-onet-29-2052.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33034,6 +33026,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-29-2052.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 29-2052.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/29-2052.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38282,10 +38301,10 @@
       "text": "药房技术员"
     }
   },
-  "source_content_sha256": "818194a18fe1798d2a77a7a62dbc8f32c255c7d23c85ea8ef9bb2eebce3072e7",
+  "source_content_sha256": "9334b1a1d001f532fc98f3d92a1eb2291285e898b008f247faca82414bbdcda0",
   "subject": {
     "canonical_slug": "pharmacy-technicians",
     "name": "药房技术员",
-    "summary": "药房技术员（O*NET 29-2052.00）在药师指导下按处方准备药品，可计量、混合、计数、贴签并记录药品数量和剂量，接收处方并维护患者用药档案及药品储存。处方适宜性判断、最终放行和个体用药咨询按所在地法规及机构制度由有权药师负责。"
+    "summary": "药房技术人员按工作场所授权录入处方信息、管理药品库存并协助准备调配。需要临床判断的疑问要交给药师处理。"
   }
 }

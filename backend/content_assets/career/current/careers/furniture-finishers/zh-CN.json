@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -48,6 +45,18 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-q75-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-woodworkers-industry-wage-construction-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-woodworkers-industry-wage-furniture-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-woodworkers-industry-wage-wholesale-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-woodworkers-industry-wage-wood-products-2025": {
         "status": "pending_mapping"
       },
       "item:furniture-finishers.ai-impact.ai-impact-table.10": {
@@ -1509,7 +1518,7 @@
         "status": "pending_mapping"
       },
       "item:furniture-finishers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:furniture-finishers.sources.source-card.1": {
         "status": "mapped"
@@ -10846,7 +10855,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10898,7 +10907,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10950,7 +10959,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -24129,12 +24138,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对家具修整质量与职业生涯的评价。本页按美国 O*NET-SOC 51-7021.00「Furniture Finishers」编写（固定索引给本资产的中文名是「家具修整工」；主要对象是受损、磨损或用过的家具与新制高档家具，目标是把表面整形成指定颜色或涂饰效果，产出为按规格完成的修复与涂饰结果与过程与材料记录）。该职业以手工与喷涂操作为主，涉及木材与涂饰材料与溶剂与打磨粉尘与压缩空气与易燃物，须按机构与所在地安全与职业卫生与消防规程执行；涉及旧涂饰层可能含铅等有害物质与危险废物处置的情形，按所在地规定由具备条件与授权的人员与机构处置。"
+              "先问车间如何比对批准样板、标记缺陷以及谁复核返工。打磨与涂饰岗位另核粉尘、通风和防护。"
             ]
           },
           "id": "furniture-finishers.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -24143,12 +24153,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "纸面练习｜用入行板块完整F/V2合成工单、材料消耗、样板和缺件数据核算面积与预算、判定异常与待核并交接；不接触真实家具、溶剂、粉尘、喷涂设备，不自行设计或执行安全工艺。"
+              "到「入行与 F 表：家具表面验收记录」做原题和变式，再打开折叠参考解。"
             ]
           },
           "id": "furniture-finishers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24157,7 +24167,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "观察信号｜O*NET88%持续用手、67%持续站、93%每日常见防护、81%每日污染物、60%非受控室内、46%精确极重要/30%很重要、51%错误较严重、38%团队极重要。是受访者选项非个人门槛或暴露剂量；用纸面版本、计算和交接作品观察方法，不推健康耐受。"
+              "如果你愿意按工单核对原始记录、保留差异并交给指定复核人，可以进一步了解岗位。"
             ]
           },
           "id": "furniture-finishers.quick-decision.fit-decision-checklist.3",
@@ -24171,12 +24181,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜65%每日危险条件；重复21%持续/34%超半；49%任务有限自由、44%无监督有一些决策自由；49%中等竞争；33%每日期限压力、40%每周至少但非每日；38%持续接触、68%电话从未、75%规律班表。选项不等事故率、无加班或人人必然暴露。具体防护、实际工时与资格另核。"
+              "O*NET 工作情境中，49% 的受访者选择在决定任务、优先级或目标方面自由度有限，44% 选择在无监督决策方面有一定自由度。两题分开读。应聘时核通风、防护和谁复核样板。"
             ]
           },
           "id": "furniture-finishers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -24185,7 +24196,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "探索判断｜检查、修复、打磨、选材调色、涂饰装饰、检验沟通是本职任务。先独立完成F/V2四纸面作品及反例，判断是否愿意继续学习；作品不证真实工艺、安全或健康胜任，真实操作须有适用训练、设施和授权。"
+              "适合愿意对照批准样板、检查表面缺陷并交接复核记录的人。"
             ]
           },
           "id": "furniture-finishers.quick-decision.fermat-decision-card.7",
@@ -24207,7 +24218,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜家具修整工的工作大体可以分成三类：一是修复与表面准备（检查家具以判断损伤或劣化程度并决定最佳修复或复原方式，用塑料或木腻子与胶与钉与螺钉填补并抹平裂缝或凹陷、去除痕迹与瑕疵并修复破损部件，用手动工具与剥离工具与砂纸与钢丝棉与磨料与溶剂或浸洗去除旧涂饰层与损坏部件，用砂纸与浮石与钢丝棉与凿子与打磨机与磨光机打磨与整形与修整表面并处理翘曲或色斑以恢复原有轮廓与原色，拆解家具以便处理并遮蔽不应接触涂饰工艺或材料的部位），二是涂饰与上色与装饰（按木材硬度与表面类型选择油漆与着色剂与清漆与虫胶或凡立水等涂饰材料并调配颜色与色号，用刷涂与喷涂或手工擦涂把涂饰材料施于木材纹理，以木工工具或磨料做出做旧效果或在染色前处理表面以突出高光与明暗，用印花与贴金与压花与烙印与绘制图案或边框以复原旧件或装饰新件，用喷枪或静电方式涂饰金属表面并以木纹油墨模拟木纹，用漂白剂恢复木材本色，翻新与更换软包并清除多余溶剂），三是检查与协作与记录（与客户沟通确定家具颜色或涂饰效果，依据木材与时尚与款式知识推荐木材与颜色与涂饰与家具风格，按图纸制作指定设计，检查涂饰与表面质量并交付，记录材料与色号与批次与工序与异常）。三类工作循环衔接：检查与评估损伤—拆解与去旧涂饰—修复与打磨与整形—选材与调配—涂饰与装饰—检查与交件与记录。"
+              "家具表面修整工根据指定颜色和表面效果，处理新制家具或修整磨损、受损家具。工作可能涉及检查基材和旧涂层、修补、打磨、着色和复核样板。"
             ]
           },
           "id": "furniture-finishers.profile.career-quick-answers-block.1",
@@ -24296,7 +24307,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核需求 → 核工件 → 核材料 → 按工艺处理 → 检验记录 → 交接待办"
+              "接收工单 → 核对分工 → 核对批准样板和表面检查记录 → 报告差异 → 协助已分配任务 → 交接记录"
             ]
           },
           "id": "furniture-finishers.profile.career-quick-answers-block.3",
@@ -24467,12 +24478,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业画像｜本职业把受损、磨损或用过的家具或新制高档家具整形、涂饰与重新涂饰至指定颜色或涂饰效果：检查家具以判断损伤程度并决定修复方式；拆解与清洁并用手动工具与剥离工具与砂纸与磨料与溶剂或浸洗去除旧涂饰层与损坏部件；用腻子与胶与钉与螺钉填补裂缝与凹陷并修复破损部件；用砂纸与浮石与凿子与打磨机打磨与整形并处理翘曲与色斑；按木材硬度与表面类型选择并调配油漆与着色剂与清漆与虫胶或凡立水等材料；用刷涂与喷涂或手工擦涂施涂并做旧与突出明暗；用印花与贴金与压花与烙印与绘制图案复原或装饰；翻新与更换软包并以漂白或木纹油墨处理特殊表面；与客户沟通确定颜色或涂饰效果并推荐木材与风格；检查表面质量并交付并记录。常见用人单位包括家具制造与木制品企业、家具修复与翻新工坊、定制家具与高档家具厂商与建筑装饰与修理服务商；工作以长时间站立与手工与重复动作、粉尘与溶剂与喷雾暴露、佩戴防护装备为特点，错误后果较严重；涉及旧涂饰层可能含铅等有害物质与易燃溶剂与危废处置的权限与资格由具备条件或获得授权的人员与机构与所在地规程确定。官方定义原文：Shape, finish, and refinish damaged, worn, or used furniture or new high-grade furniture to specified color or finish."
+              "职业画像｜家具表面修整人员先看磨损或破损，核对目标色泽和表面效果，再按工单打磨、配色、涂饰和检验。部分工件还需要去旧涂层、修补或按要求加做装饰。中国大陆《职业分类大典》的家具制作工包含打磨、表面涂饰和质检，这些工序可对照。其范围还包括部件加工和组装，本页未确认与美国职业一一对应。"
             ]
           },
           "id": "furniture-finishers.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-furniture-making-classification"
           ],
           "type": "prose"
         },
@@ -24565,12 +24577,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位可以有兼任；材料替换、验收和危险作业权限按实际职责与法定资格核，不因邻近自动互认，也不一律没有判断权。"
+              "先核谁可替换材料、谁验收及谁做需要专项培训的任务。这些权限按岗位分工、适用资格和现场授权确认。"
             ]
           },
           "id": "furniture-finishers.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-spray",
+            "osha-hazcom"
           ],
           "type": "prose"
         },
@@ -25494,7 +25508,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职AI量化暴露、采用、效率与就业因果未取得。 编辑可试合成工单与记录草稿，但未证明显提速、中等等级或替代期限。22任务13核心9补充、4类软件仅描述当前资料，不预测未来永久由人；真实材料、工艺质量与危险作业按授权规程核。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "证据不足：本职AI量化暴露、采用、效率与就业因果未取得。 编辑可试合成工单与记录草稿，但未证明显提速、中等等级或替代期限。22任务13核心9补充、4类软件仅描述当前资料，不预测未来永久由人；真实材料、工艺质量与危险作业按授权规程核。"
             ]
           },
           "id": "furniture-finishers.ai-impact.ai-impact-table.18",
@@ -26306,12 +26320,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "学习先做F/V2合成版本、面积预算与交接四作品；记录工具输出和独立核对，真实操作及法定训练另核。"
+              "用 F 表练习标记颜色、划痕和复核对象。现场材料和工序由人员复核。"
             ]
           },
           "id": "furniture-finishers.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -26972,12 +26986,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪21.41美元 / 中位年薪44,540美元（2025美国全国OEWS）"
+              "第 10 分位年薪 32,160 美元，时薪 15.46 美元。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26986,12 +27000,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "OEWS排自雇，含基本工资、计件、佣金、生产奖金及适用生活成本或危险工作报酬；排加班溢价、班次差额、非生产奖金与雇主福利，不能一律排绩效或计件。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-7021.00"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27000,12 +27014,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "10分位32,160美元/年（2025美国全国OEWS）"
+              "第 25 分位年薪 37,670 美元，时薪 18.11 美元。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27014,12 +27028,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第10分位是分布位置，不是新手、打磨辅助或录用起薪。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-7021.00"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27028,12 +27042,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "25分位37,670美元/年（2025美国全国OEWS）"
+              "第 50 分位年薪 44,540 美元，时薪 21.41 美元。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27042,12 +27056,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第25分位是分布位置，不能据此分配学历、地区或工艺岗位。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-7021.00"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27056,12 +27070,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "75分位49,730美元/年（2025美国全国OEWS）"
+              "第 75 分位年薪 49,730 美元，时薪 23.91 美元。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27070,12 +27084,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第75分位不等骨干、配色带教或资深人员工资。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-7021.00"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27084,12 +27098,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "90分位61,020美元/年（2025美国全国OEWS）"
+              "第 90 分位年薪 61,020 美元，时薪 29.34 美元。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27098,12 +27112,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第90分位非个人上限或高端定制工资；90/10约1.9只是全国分布比。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-7021.00"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27112,12 +27126,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "就业15.9千人（2025，BLS EP含自雇）"
+              "约 15,900 个岗位（2025）"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27126,12 +27140,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "EP2025含自雇，基期自雇占9.7%；不等OEWS雇员就业或中国岗位。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27140,12 +27154,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长-3.5%（2025—2035，BLS EP）"
+              "−3.5%"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27154,12 +27168,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职EP2025—2035公布-3.5%、净减0.6千人，不能从四舍五入规模反算替代公布增长。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27168,12 +27182,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年均空缺1.5千个（2025—2035，BLS EP）"
+              "预计年均约 1,500 个"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27182,12 +27196,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年均空缺含转出退出，非十年总数、净增或实际招聘。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27210,7 +27224,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜把受损、磨损或用过的家具或新制高档家具整形、涂饰与重新涂饰至指定颜色或涂饰效果；工作含检查家具以判断损伤程度并决定修复方式、拆解与清洁并去除旧涂饰层与损坏部件、用腻子与胶与钉与螺钉填补裂缝与凹陷与修复破损部件、用砂纸与浮石与凿子与打磨机打磨与整形并处理翘曲与色斑、按木材硬度与表面类型选择并调配油漆与着色剂与清漆与虫胶或凡立水、用刷涂与喷涂或手工擦涂施涂并做旧与突出明暗、用印花与贴金与压花与烙印与绘制图案复原或装饰、翻新与更换软包并以漂白或木纹油墨处理特殊表面、与客户沟通颜色与效果并推荐木材与风格、检查表面质量并交付并记录；产出为达到指定颜色或涂饰效果的家具工件与材料与过程记录；不含依法只能由具备相应条件或获得授权的人员与机构承担的有害物质检测与危险废物处置与消防与特种作业职责。"
+              "按招聘职责区分家具表面修整、木工装配和建筑涂装。核对是否负责样板、设备和复验。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.24",
@@ -27224,7 +27238,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "低于高中文凭"
+              "工作分工"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.25",
@@ -27238,7 +27252,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国岗位职责、培训与授权另核"
+              "核对表面修整范围"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.26",
@@ -27252,7 +27266,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国新聘学历问卷36%低于高中，不等中国辅助岗比例或培训条件。"
+              "问清谁复核样板和表面质量。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.27",
@@ -27266,7 +27280,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "高中文凭或同等学历"
+              "培训与防护"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.28",
@@ -27280,7 +27294,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国岗位职责、培训与授权另核"
+              "核对带教"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.29",
@@ -27294,7 +27308,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国新聘学历问卷61%高中或同等，不等全部从业学历或中国统一入门门槛。"
+              "问清进场培训和哪些任务需另核授权。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.30",
@@ -27308,7 +27322,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中学后证书"
+              "基本报酬"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.31",
@@ -27322,7 +27336,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国岗位职责、培训与授权另核"
+              "核对计薪单位"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.32",
@@ -27336,7 +27350,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国新聘学历问卷3%中学后证书，三项合100%；不推出证书对应配色骨干。"
+              "分清日薪、小时工资或月薪。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.33",
@@ -27350,7 +27364,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "安全与职业卫生与消防培训（含危化品与防护）"
+              "额外报酬"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.34",
@@ -27364,7 +27378,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "涉及粉尘与溶剂与喷涂的岗位"
+              "核对支付条件"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.35",
@@ -27378,7 +27392,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国法定资格、培训和单位授权分别核；是否涉特种作业须按实际作业目录与项目，不能从家具喷涂、危化品或危废名称断人人同一证。单位授权不代法定证件；美国职业代码不授中国资格。"
+              "问清加班、停工和试用期计薪。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.36",
@@ -27490,7 +27504,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜家具修整工（行业与招聘中常称家具油漆工、喷漆工、打磨工、修色工、家具修理工、翻新工、涂装工、调色工；在 O*NET 中对应 51-7021.00 Furniture Finishers，与橱柜制造工与台架木工、家具软包工、涂装工及地板与砖石与水磨石等面层工种分属不同处理对象与产出）"
+              "中国大陆工资参考"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.44",
@@ -27504,12 +27518,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职精确全国、城市及用工形式工资就业；行业均值仅背景，有界查阅不证明统计不存在，不用美国或行业值代填。"
+              "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局 2025 年表 2、5 给出城镇制造业年平均工资，非私营单位 113,594 元，私营单位 76,055 元。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27518,7 +27532,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS城镇单位行业平均工资仅背景，不代本职分类；有界查阅未取得本职中国精确数据。美国OEWS2025与EP2025—2035各自口径，不拼接。"
+              "应聘时按班组、合同和实际任务核对工时、计薪单位及授权。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.46",
@@ -27560,7 +27574,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "一线城市与家具制造密集地区"
+              "城镇非私营单位 · 制造业"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.49",
@@ -27574,12 +27588,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按城市或地区核验的本职业月薪数据；不以招聘报价、行业均值或他人转述代填。"
+              "113,594 元／年"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27588,7 +27602,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "省会与区域中心城市"
+              "城镇私营单位 · 制造业"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.51",
@@ -27602,12 +27616,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按城市或地区核验的本职业月薪数据；不以招聘报价、行业均值或他人转述代填。"
+              "76,055 元／年"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27616,7 +27630,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他内陆与县域市场"
+              "全国城镇非私营单位 · 全行业"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.53",
@@ -27630,12 +27644,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按城市或地区核验的本职业月薪数据；不以招聘报价、行业均值或他人转述代填。"
+              "129,441 元／年"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27644,12 +27658,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜美国 SOC 51-7021.00 / O*NET-SOC 51-7021.00 覆盖把家具整形与涂饰与重新涂饰至指定颜色或效果的人员，与橱柜制造工与台架木工（木制构件制作）、家具软包工（软包覆装）、涂装工（表面涂装）以及地板与砖石与水磨石等面层工种分属不同处理对象与产出；中国大陆由应急管理与市场监管与卫生健康与生态环境等部门依据《安全生产法》《职业病防治法》与危险化学品与消防与危险废物相关规定对相关企业与从业人员实施管理；涉及粉尘与溶剂与喷涂与危化品与危废的作业另有专门规定与技术规范；两者分类与统计口径不同，不做数值换算。"
+              "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局 2025 年城镇制造业年平均工资为非私营单位 113,594 元、私营单位 76,055 元。"
             ]
           },
           "id": "furniture-finishers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27708,12 +27722,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 51-7021.00 职业档案与工资数据｜https://www.onetonline.org/link/summary/51-7021.00；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；O*NET 家具修整工国家工资｜https://www.onetonline.org/link/localwages/51-7021.00"
+              "O*NET 全国职业工资｜https://www.onetonline.org/link/localwages/51-7021.00；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；《中华人民共和国安全生产法》第二十八条｜https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -27722,12 +27738,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "10分位32,160美元/年"
+              "第 10 分位年薪 32,160 美元，时薪 15.46 美元。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27736,12 +27752,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国2025雇员下十分位，非新手工资。；全国工资表｜https://www.onetonline.org/link/localwages/51-7021.00?st=CA"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-7021.00"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27750,12 +27766,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "25分位37,670美元/年"
+              "第 25 分位年薪 37,670 美元，时薪 18.11 美元。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27764,12 +27780,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国2025雇员下四分位，非辅助岗工资。；全国工资表｜https://www.onetonline.org/link/localwages/51-7021.00?st=CA"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-7021.00"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27778,12 +27794,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位年薪44,540美元；时薪21.41美元"
+              "第 50 分位年薪 44,540 美元，时薪 21.41 美元。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27792,12 +27808,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国2025雇员分布中点，非起薪或个人实发。；全国工资表｜https://www.onetonline.org/link/localwages/51-7021.00?st=CA"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-7021.00"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27806,12 +27822,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "75分位49,730美元/年"
+              "第 75 分位年薪 49,730 美元，时薪 23.91 美元。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27820,12 +27836,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国2025雇员上四分位，非骨干或带教工资。；全国工资表｜https://www.onetonline.org/link/localwages/51-7021.00?st=CA"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-7021.00"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27834,12 +27850,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "90分位61,020美元/年"
+              "第 90 分位年薪 61,020 美元，时薪 29.34 美元。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27848,12 +27864,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国2025雇员上十分位，非个人工资上限。；全国工资表｜https://www.onetonline.org/link/localwages/51-7021.00?st=CA"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-7021.00"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27862,12 +27878,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "15.9千人"
+              "约 15,900 个岗位（2025）"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27876,12 +27892,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025基期EP含自雇，自雇9.7%；不等OEWS雇员就业。；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27890,12 +27906,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "-3.5%"
+              "−3.5%"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27904,12 +27920,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035公布增长-3.5%，净减0.6千人。；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27918,12 +27934,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "1.5千个/年"
+              "预计年均约 1,500 个"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27932,12 +27948,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035年均空缺含转出退出需求，非净增或十年总数。；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27946,12 +27962,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本职美国家具品类、工艺技能、计酬与地区工资差异分解未取得。全国五分位已核，CA及部分地区另有值但不能当全国；四行业工资本轮未取得，不用OOH木工组合行业工资代填。 OEWS排自雇，含基本工资、计件、佣金、生产奖金及适用生活成本或危险工作报酬；排加班溢价、班次差额、非生产奖金与雇主福利，不能一律排绩效或计件。"
+              "美国全国工资分位来自本职业 OEWS 原表。本页未取得本职业精确分行业工资，BLS 木工职业组仅用于组别比较。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -27960,12 +27977,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国2025全国OEWS雇员年工资10/25/50/75/90分位32,160/37,670/44,540/49,730/61,020美元，时薪15.46/18.11/21.41/23.91/29.34美元。 中位非起薪，90/10约1.9非个人上限，未获具体收入差异因果。"
+              "2025 年 5 月，美国家具表面修整工 51-7021 全国工资中位数为 44,540 美元／年、21.41 美元／时。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28072,12 +28089,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "制造业（Manufacturing）"
+              "建筑业"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "onet"
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -28086,12 +28103,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "48,740 美元/年"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "onet"
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -28100,12 +28117,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2026-10-11核O*NET行业页：制造65%、其他服务业10%、其余行业25%（含零售和运输仓储）；网页未标年份，非各行业工资。"
+              "BLS 木工职业组行业年薪中位数。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet"
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -28114,12 +28131,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "家具制造与木制品企业"
+              "家具及相关产品制造"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "onet"
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -28128,12 +28145,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "45,980 美元/年"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "onet"
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -28142,12 +28159,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本轮未取得家具制造木制品行业内本职工资，不套OOH木工组合行业工资。"
+              "BLS 木工职业组行业年薪中位数。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -28156,12 +28173,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "家具修复与翻新工坊"
+              "批发贸易"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "onet"
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -28170,12 +28187,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "44,890 美元/年"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -28184,12 +28201,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本轮未取得家具修复翻新工坊内本职工资，雇员工资也非自雇营业收入。"
+              "BLS 木工职业组行业年薪中位数。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -28198,12 +28215,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "定制家具与建筑装饰与修理服务"
+              "木制品制造"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "onet"
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -28212,12 +28229,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "42,630 美元/年"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "onet"
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -28226,12 +28243,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本轮未取得定制家具装饰修理行业内本职工资，不用其他职业代理。"
+              "BLS 木工职业组行业年薪中位数。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -28310,12 +28327,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下十分位是全国分布位置，不能据此断新手或辅助岗工资。"
+              "2025 年 5 月美国全国职业工资分位。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28324,12 +28341,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位是全国分布中点，不是个人起薪或能力门槛。"
+              "2025 年 5 月美国全国职业工资分位。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28338,12 +28355,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "上十分位非资深配色带教或高端定制工资，也不是个人上限。"
+              "2025 年 5 月美国全国职业工资分位。"
             ]
           },
           "id": "furniture-finishers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -28370,31 +28387,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "地板打磨修整工方向",
@@ -28536,12 +28553,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若你明显排斥粉尘与溶剂气味与喷涂环境，难以承受长时间站立与重复手工，或对颜色与表面细节缺乏耐心，兴趣问卷的高分不能改变这一现实成本。"
+              "先核工作是否需长时间站立、重复手工或近距离核表面。粉尘、溶剂和喷涂按实际工序核通风、防护和停手条件。"
             ]
           },
           "id": "furniture-finishers.fit.personality-fit-block.5",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise",
+            "osha-spray",
+            "osha-hazcom"
           ],
           "type": "prose"
         },
@@ -28635,12 +28655,15 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣体验：喜欢把一件家具从检查与修复到配色与涂饰与检查交付完整负责，并从在灰尘与气味环境中把颜色与表面做准做美中获得满足。"
+              "兴趣体验｜留意是否喜欢对照色板、辨认边角细节、按要求记下修整结果并交接。"
             ]
           },
           "id": "furniture-finishers.fit.riasec-fit-block.10",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise",
+            "osha-spray",
+            "osha-hazcom"
           ],
           "type": "prose"
         },
@@ -28777,12 +28800,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "智力与推理｜用F/V2的面积、损耗、报价和版本计算观察学习方法，分数不能证明真实配色、工艺或安全胜任。"
+              "智力与推理｜用 F 表练习按两个条件判定，观察自己如何保留待核记录。"
             ]
           },
           "id": "furniture-finishers.fit.personality-fit-block.18",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -28891,12 +28914,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的测评与方向比较只用于自我提问与探索，不构成录用标准、能力评分、资格判断或对修整质量的评价；准入以机构招聘条件、学历与经历与培训，以及所在地区对涉及粉尘与溶剂与喷涂与危化品与危废相关岗位的资格与授权要求为准。"
+              "测评用于探索偏好。核岗位实际任务、带教及所在地区适用的安全训练与授权。粉尘和溶剂须按工艺和材料控制。"
             ]
           },
           "id": "furniture-finishers.fit.personality-fit-block.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise",
+            "osha-spray",
+            "osha-hazcom"
           ],
           "type": "prose"
         },
@@ -28905,12 +28931,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答｜先独立完成F/V2四纸面作品及反例，观察核输入、计算、区分异常待核和交接方法。作品不能证明真实家具工艺、职业健康或安全能力；真实实践需适用培训与授权。"
+              "直接回答｜做 F 表原题和变式，观察自己如何核对样板、标记划痕和交接未决项。真实工序依培训和授权。"
             ]
           },
           "id": "furniture-finishers.fit.personality-fit-block.27",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -28947,12 +28973,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若难以承受粉尘与溶剂环境与长时间站立与重复手工，或对颜色与表面细节缺乏耐心，不建议选择本职业。"
+              "如果持续站立或反复核色让你吃力，先问工位安排和休息，再比较其他岗位。用纸面 F 表体会记录核对。"
             ]
           },
           "id": "furniture-finishers.fit.personality-fit-block.30",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise",
+            "osha-spray",
+            "osha-hazcom"
           ],
           "type": "prose"
         },
@@ -29255,12 +29284,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能从自评数学好坏判断资格；F/V2面积预算算术可以独立练习复核，但不等真实材料配比调色或安全胜任。"
+              "工作中会量尺寸、读工单、把观察与规定限值比较。先用 F 表练习按两条条件判断，再向用工方核实际质量标准。"
             ]
           },
           "id": "furniture-finishers.fit.personality-fit-block.52",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -29283,12 +29313,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格能用来判断我适不适合吗？不能。九型属自我探索工具，不构成职业能力或适配结论；判断适配应看能否在粉尘与溶剂环境中按客户要求稳定完成修复与配色与涂饰并承担安全与记录责任。"
+              "九型人格可用于自我反思。判断是否喜欢这份工作，可先试按色板核对编号、记录差异并交接。"
             ]
           },
           "id": "furniture-finishers.fit.personality-fit-block.54",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise",
+            "osha-spray",
+            "osha-hazcom"
           ],
           "type": "prose"
         },
@@ -29297,12 +29330,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "四纸面交付展示输入版本、面积预算、条件判定与交接；不做真实喷涂间安全复核，不设计或实施剥离溶剂工艺。"
+              "纸面提交包括原值、状态、复核人和变式的唯一改动。"
             ]
           },
           "id": "furniture-finishers.fit.personality-fit-block.55",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -29311,12 +29344,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：愿意在粉尘与溶剂环境与长时间站立手工作业中按客户指定效果完成家具修复与配色与涂饰，能对颜色与表面细节保持耐心并逐项核对材料与工序与防护，把安全与职业卫生与记录规范落实到每一步。"
+              "适配信号｜愿意多看一遍色板与边角，逐项核材料、工单和交付记录。"
             ]
           },
           "id": "furniture-finishers.fit.personality-fit-block.56",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise",
+            "osha-spray",
+            "osha-hazcom"
           ],
           "type": "prose"
         },
@@ -29325,12 +29361,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：明显排斥粉尘与溶剂气味与喷涂环境，难以承受长时间站立与重复手工，或对颜色与表面细节与安全规程明显不适。"
+              "谨慎信号｜工艺、材料或通风防护不清楚时，先问带教或现场负责人。防护或分工未确认时，暂停该任务。"
             ]
           },
           "id": "furniture-finishers.fit.personality-fit-block.57",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise",
+            "osha-spray",
+            "osha-hazcom"
           ],
           "type": "prose"
         },
@@ -29339,12 +29378,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议｜先做本页F/V2纸面任务与七日反例，再核真实招聘、训练、法定条件和单位授权，不以问卷或模拟授现场能力。"
+              "验证建议｜做完 F 表原题和变式，打开折叠参考解，再向招聘方核实际工序与培训。"
             ]
           },
           "id": "furniture-finishers.fit.personality-fit-block.58",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -29492,10 +29531,10 @@
                 "url": "https://www.onetonline.org/link/details/51-7021.00"
               },
               {
-                "entity": "OSHA1910.107适用喷涂",
+                "entity": "《中华人民共和国安全生产法》",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.107"
+                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
               },
               {
                 "entity": "中国职业病防治法",
@@ -29516,10 +29555,10 @@
                 "url": "https://www.mee.gov.cn/gzk/gz/202411/t20241129_1097688.shtml"
               },
               {
-                "entity": "中国个人信息保护法",
+                "entity": "中华人民共和国个人信息保护法",
                 "id": "link-8",
                 "relation": "career.evidence",
-                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+                "url": "https://www.gov.cn/xinwen/2021-08/20/content_5632486.htm"
               }
             ]
           },
@@ -29534,7 +29573,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界｜以下为编辑风险场景与核对提示，不是发生率或个人医疗结论。工艺变更、交件、职业卫生及危险废物按真实作业、适用法律和授权核；ONET仅任务情境，不能代法规或事故数据。"
+              "材料标签、通风或防护不明时，停止、退离并报告车间负责人。由指定人员确认作业条件后按现场程序恢复。颜色待核或表面缺陷超限时，留原记录交复核。"
             ]
           },
           "id": "furniture-finishers.risk.career-risk-cards.8",
@@ -29611,12 +29650,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "先检查与记录损伤范围与材质再确定修复方式，关键工序经工长确认；发现超出经验或工具能力的损伤立即停止并上报"
+              "先核基材、旧涂层和损伤范围。超出已确认工序时暂停并请负责人复核。"
             ]
           },
           "id": "furniture-finishers.risk.career-risk-cards.13",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -29667,13 +29707,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按实际危害落实工程控制、适用个体防护及职业健康检查，不用缩短时长代通风。中国职业病法35接触危害作业单位组织检查；异常按预案暂停相关作业报告，气味不证明剂量或安全。"
+              "吸尘或通风出现异常、材料标签或防护不明时，停止、退离并报告。"
             ]
           },
           "id": "furniture-finishers.risk.career-risk-cards.17",
           "source_refs": [
-            "operations",
-            "bls"
+            "facilities",
+            "osha-hazcom"
           ],
           "type": "prose"
         },
@@ -29724,13 +29764,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国适用1910.107(d)(2)喷涂区域须有足够机械通风，喷涂期间及其后足够排出蒸气时间持续运行；点火源与接地按适用条款核。不把所有静电作业称动火许可证；异常按设备应急预案报告，不自行改联锁。"
+              "核对适用喷涂场地的通风与防火条件。由指定人员确认条件后再恢复工序。"
             ]
           },
           "id": "furniture-finishers.risk.career-risk-cards.21",
           "source_refs": [
-            "hr",
-            "bls"
+            "osha-spray",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -29781,12 +29821,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "先做样板确认并按色号与批次与工序记录施工，关键工序与批量前经工长与客户确认；发现色差或缺陷扩大立即停线核查并上报"
+              "记录样板版本、检查状态和复核人。颜色待核或缺陷超限交相应负责人。"
             ]
           },
           "id": "furniture-finishers.risk.career-risk-cards.25",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -29899,8 +29940,8 @@
           },
           "id": "furniture-finishers.risk.career-risk-cards.33",
           "source_refs": [
-            "privacy",
-            "bls"
+            "pipl-law",
+            "onet"
           ],
           "type": "prose"
         },
@@ -29951,12 +29992,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国适用OSHA1910.107喷涂通风点火源要求；不是中国通用标准或职业事故统计。"
+              "中国大陆《安全生产法》有关岗位安全培训和防护。"
             ]
           },
           "id": "furniture-finishers.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -30068,7 +30109,7 @@
                 "id": "education",
                 "values": [
                   "美国新聘学历问卷：高中61%、低于高中36%、中学后证书3%，合计100%。",
-                  "O*NET Job Zone1–2为职业组准备度；BLS本职典型入门高中、无相关经验要求、短期在职训练。中国招聘独立核。",
+                  "BLS 表 1.2 将高中或同等学历与短期在岗培训列为该职业的典型美国入行准备。应聘时核实所用材料、样板和安全培训。",
                   "问卷为新聘要求，不代表全部从业者学历；学历、学习作品均不证明工艺或安全胜任。"
                 ]
               },
@@ -30076,7 +30117,7 @@
                 "id": "clearance",
                 "values": [
                   "核对项：岗位训练、防护、设施与真实作业条件；法定资格是否适用须按作业项目核。",
-                  "涉及旧涂饰层有害物质检测与剥离与处置与喷涂间作业的岗位须取得相应条件与机构授权，须另行核对。",
+                  "《安全生产法》第二十八条要求生产经营单位对从业人员进行安全生产教育和培训，培训合格后方可上岗。",
                   "涉及配方与工艺变更与工件放行与客户数据对外提供的事项，只能在机构授权与属地要求范围内处理。"
                 ]
               },
@@ -30100,7 +30141,8 @@
           },
           "id": "furniture-finishers.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "title": "入门前可核对哪些条件？",
           "type": "cards"
@@ -30113,41 +30155,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "F/V2全部为合成纸面数据，禁止据此实操。虚构桌面A长1.2m宽0.6m，只计单面矩形面积；B长0.8m宽0.5m，只计单面。原始工单V1颜色K1，最新V2颜色K2且替代V1。材料M是抽象预算单位，覆盖率0.2L/m²（纯题设，非涂料产品参数）；预算加10%损耗，单价100元/L；人工纸面预算30元/件、两件，不含税物流及其他成本。",
-                  "题设检验三条件AND：颜色代码等V2的K2、缺陷数≤1、材料批次记录完整，才纸面符合；已知颜色或缺陷不符优先异常，无不符但批次缺失则待核。合成检查A颜色K1/缺陷0/批次完整，B颜色K2/缺陷1/批次缺失。草稿D1把总面积写1.22m²、材料费写26.40元、总预算86.40元；以上需独立复算，不能从错误总数反推输入。",
-                  "纸或电子表格、计算器、计时器；先独立列输入与单位再核参考答案，不取真实客户、家具或材料。"
+                  "F 表：家具表面验收记录",
+                  "虚构纸面练习。工单规定与批准样板同色，且可见划痕最长不超过 2 毫米。F1 同色、划痕 2 毫米；F2 色差待确认、无划痕；F3 同色、划痕 3 毫米。两项均符合才标可提交。颜色待核交样板负责人，划痕超限交质检。变式只把 F3 划痕记为 2 毫米。分别记录两种情况下的状态、原值和复核人。",
+                  "用题面提供的两份记录，不需要现场或工具。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "90分钟15核版本/15面积/20量价/15三条件/15交接/10反例=90；交付输入版本表、面积预算表、检查条件表、交接摘要四作品。",
-                  "参考：A面积1.2×0.6=0.72m²，B0.8×0.5=0.40m²，合1.12m²；理论M量1.12×0.2=0.224L，加10%为0.2464L=246.4mL，材料24.64元，人工60元，总84.64元。D1面积多0.10m²，材料及总预算各多1.76元；10%加基量而非倒除0.9。A色K1不符V2→异常，即使缺陷0批次完整仍不符合；B缺陷1含端点但批次缺→待核，不推已放行。",
-                  "保原输入和D1错误，改稿D2列每条公式、单位与改因；未知不补成已测，纸面符合也不构成现实质量放行。"
+                  "要交付的记录",
+                  "分别写原题和变式。每行记录原值、状态和复核人。",
+                  "差异原值保留至复核完成。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "反例1：用V1会把A的K1误判；反例2：假设B新增合成批次编号并标新版本，其三条件才纸面符合，A仍异常。",
-                  "反例3：仅把A颜色改K2但新增合成缺陷2→仍异常；若将B缺陷改2，已知异常优先于批次待核。颜色代码非实物色差，缺陷数非真实质量标准。",
-                  "独立反算M预算量÷1.1÷0.2=1.12m²，总预算减60=24.64；合成改版须明确不冒原检查。"
+                  "完成后复核",
+                  "保存两种答案，再到「常见问题」打开「纸面练习参考解」。",
+                  "下方链接可跳到常见问题。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "不调配喷涂、打磨剥离、检查真实喷涂间或设计危险作业程序；抽象量与缺陷阈值纯算术题设，不是产品用量、医疗或安全参数。",
-                  "作品只证明纸面核对方法，无真实工件验收、资格、健康或现场胜任结论；无需师傅签认可独立完成。"
+                  "练习边界",
+                  "只核纸面记录。"
                 ]
               }
             ]
           },
           "id": "furniture-finishers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "paper-answer-key"
           ],
-          "title": "入行练习：一次完整的家具修复与涂饰任务（虚构材料）",
+          "title": "纸面试做",
           "type": "cards"
         },
         {
@@ -30158,38 +30201,38 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "作品1输入版本表：A/B尺寸、V1/V2颜色、抽象用量价与人工两件逐项列原值单位来源，V2替代V1。",
-                  "标D1三错和合成改版，未知批次不代填，不把纸面条件当真实工艺。"
+                  "工单与批准样板要求",
+                  "抄下两项检查条件。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "作品2面积预算表：A0.72/B0.40/合1.12，量0.224×1.1=0.2464L，24.64+60=84.64，逐式可独立反算。",
-                  "对照参考发现D1面积+0.10m²及价+1.76元，保原稿改D2，不依赖外部专家签认。"
+                  "颜色与划痕状态",
+                  "逐件记录颜色和最长划痕。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "作品3检查条件表：A颜色不符优先异常，B色与缺陷合但批次缺待核，三条件AND与端点清楚。",
-                  "附V1误判、B补合成编号和缺陷改2反例，注明假设新版本，绝不冒实测。"
+                  "待核项与复核人",
+                  "保留原值并写交给谁。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "作品4交接摘要：当前F/V2、D2算式、A异常/B待核、缺批次/待办/改因，说明未知不等合格且无人实际放行。",
-                  "使用工具则注明生成段与本人复算；只匿名合成材料，没有真实数据上传、报价承诺或设备操作。"
+                  "变式唯一改动",
+                  "只重做题目指定的改动。"
                 ]
               }
             ]
           },
           "id": "furniture-finishers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "入门时可以准备哪些可复核的作品材料？",
+          "title": "F 表要留下哪些记录？",
           "type": "cards"
         },
         {
@@ -30250,59 +30293,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天30分钟：读22任务与当前法域统计边界，写三个编辑学习问题。",
-                  "标记F/V2纯合成纸面、V2替代V1及无真实操作权限。"
+                  "读工单",
+                  "读工单，列出需要核对的字段。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天30分钟：独立列A/B尺寸和计价输入，算0.72/0.40/1.12m²。",
-                  "保D1原错误，写面积多0.10的定位。"
+                  "核对颜色",
+                  "逐行对照两份原记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天30分钟：算0.224L、加10%0.2464L及246.4mL。",
-                  "独立反算并对比倒除0.9错误，不当材料产品用量。"
+                  "比较划痕限值",
+                  "把差异分给题面指定的复核人。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4天30分钟：复算材料24.64+人工60=84.64。",
-                  "写与D1价差1.76，列未计税物流等边界。"
+                  "标出状态",
+                  "只改变式要求的一项，重做状态判断。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5天30分钟：写三条件AND及A异常/B待核。",
-                  "核缺陷1含端点和未知批次，绝不以待核当实测符合。"
+                  "写明复核人",
+                  "保留原题和变式的记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天90分钟：按15/15/20/15/15/10完整重做四作品。",
-                  "独立做V1/补合成编号/缺陷2反例，无师傅或真实设备依赖。"
+                  "重做变式",
+                  "打开折叠参考解核对。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天30分钟：根据纸面方法决定继续学习、暂缓或探索别方向。",
-                  "列真实招聘训练资格待核和下一步，不作健康或录用结论。"
+                  "核对参考解",
+                  "写下一个需要向雇主确认的分工问题。"
                 ]
               }
             ]
           },
           "id": "furniture-finishers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天体验：用虚构材料完成一次家具修整闭环",
+          "title": "纸面核对顺序",
           "type": "timeline"
         },
         {
@@ -30310,20 +30353,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续探索：能独立核V2输入和单位，区分事实假设与缺件。",
-              "继续探索：能复算1.12m²、0.2464L和84.64元并解释D1错。",
-              "继续探索：能说明A异常/B待核和反例，不冒现实放行。",
-              "暂缓：版本单位仍反复混淆，先回纸面题补方法。",
-              "暂缓：倾向把未知补为已检查，先练真实记录与改版。",
-              "探索地面方向：分别核覆盖铺装、打磨涂饰或砖石水磨石对象与训练，不自动互认。",
-              "探索家具邻近：可核柜体制作、软包或物品涂装职责；紙面决定非健康资格或录用结论。"
+              "记录差异、原值与复核人后，再核对实际岗位分工。",
+              "到常见问题打开参考解，复核记录和交接对象。",
+              "到常见问题打开参考解，复核记录和交接对象。",
+              "到常见问题打开参考解，复核记录和交接对象。",
+              "到常见问题打开参考解，复核记录和交接对象。",
+              "到常见问题打开参考解，复核记录和交接对象。",
+              "到常见问题打开参考解，复核记录和交接对象。"
             ]
           },
           "id": "furniture-finishers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "完成后的复核",
           "type": "list"
         },
         {
@@ -30350,28 +30393,28 @@
             ],
             "rows": [
               [
-                "高中文凭或同等学历",
-                "多数岗位",
-                "满足招聘的学历基础",
-                "美国典型入门；中国招聘独立核",
-                "完成高中或同等学力教育",
-                "实际学校、培训或单位安排核时长费用，不给统一期限",
-                "学历不保证取得岗位或资格"
+                "美国典型入行准备",
+                "了解美国岗位者",
+                "核对招聘与带教",
+                "BLS 表 1.2 列高中或同等学历及短期在岗培训",
+                "问雇主带教与分工",
+                "看实际岗位",
+                "培训和操作授权分别核实"
               ],
               [
                 "中学后证书（如适用）",
                 "配色与喷涂等专精岗位",
-                "形成材料与工艺与配色的基础知识",
-                "具体招聘或教育项目核",
-                "完成相关职业教育或培训课程",
-                "实际学校、培训或单位安排核时长费用，不给统一期限",
-                "证书不等于岗位资格或授权"
+                "核课程是否覆盖实际工序。",
+                "仅在学校或雇主列出时核对。",
+                "向学校核课程及考核内容，向雇主核岗位要求。",
+                "依课程和岗位安排。",
+                "培训证明的适用范围以发证方与岗位要求为准。"
               ],
               [
                 "安全与职业卫生与消防培训",
                 "所有现场岗位",
                 "降低粉尘与溶剂与喷涂与火灾与灼伤风险",
-                "现场培训按适用法律与单位制度",
+                "中国大陆《安全生产法》第二十八条要求从业人员经安全生产教育和培训合格后上岗。",
                 "参加机构或行业培训并考核",
                 "实际学校、培训或单位安排核时长费用，不给统一期限",
                 "培训不等于医疗或职业卫生处置资格"
@@ -30397,7 +30440,7 @@
               [
                 "职业健康检查与应急训练（各自范围）",
                 "接触粉尘与溶剂与喷涂的岗位",
-                "职业健康监护和应急训练分别核，不把检查当取得处置能力",
+                "按实际职业危害核适用的健康检查，另核岗位应急培训与演练。",
                 "接触危害作业按法与单位制度核",
                 "接触危害岗位单位组织适用检查，培训演练另外核",
                 "实际学校、培训或单位安排核时长费用，不给统一期限",
@@ -30407,7 +30450,12 @@
           },
           "id": "furniture-finishers.path.credential-decision.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example",
+            "osha-spray",
+            "osha-hazcom",
+            "facilities",
+            "privacy"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -30417,18 +30465,18 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜应聘条件、法定资格与机构授权是三种不同状态：满足招聘条件不等于取得岗位资格或机构配方与放行与数据对外提供授权，取得培训与证书不等于获得独立处置危化品与危废或变更配方与工艺的决定权。",
-              "资格边界（二）｜美国 O*NET 新聘学历要求问卷显示 61% 需要高中文凭或同等学历、36% 需要低于高中文凭、3% 需要中学后证书（三项合计100%，不代表全部从业者学历），Job Zone 为 1-2 级（SVP 低于 6.0）；涉及粉尘与溶剂与喷涂与危化品与危废的作业在美国另有安全与职业卫生与环保规程要求。中国大陆由应急管理与市场监管与卫生健康与生态环境等部门依据《安全生产法》《职业病防治法》与危险化学品与消防与危险废物相关规定对相关企业与从业人员实施管理；两者不可互换。",
-              "资格边界（三）｜本页列示的准备项为检索与核对方向，不构成任何机构的正式资格清单；如与机构公告或主管部门要求不一致，以后者为准。",
-              "资格边界（四）｜本页不提供个人体检结论、录用可能性或薪酬承诺。"
+              "先核班组带教与分工。",
+              "美国典型入行看 BLS 表 1.2。中国大陆上岗培训看《安全生产法》第二十八条。",
+              "材料标签、通风或防护不明时，停止、退离并报告。",
+              "向车间确认谁复核样板、谁检查缺陷、谁负责喷涂和防护。"
             ]
           },
           "id": "furniture-finishers.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "ep",
-            "operations",
-            "waste-law"
+            "bls-ep-2025-2035",
+            "cn-work-example",
+            "osha-spray",
+            "osha-hazcom"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -30491,7 +30539,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以机构招聘条件、学历与培训与经历与考核，以及所在地区对涉及粉尘与溶剂与喷涂与危化品与危废相关岗位的资格与授权要求为准，也不代表取得配方变更与工件放行与客户数据对外提供的权限。"
+              "材料标签、通风或防护不明时，停止、退离并报告车间负责人。由指定人员确认作业条件后按现场程序恢复。颜色待核或表面缺陷超限时，留原记录交复核。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.11",
@@ -30505,7 +30553,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在师傅指导下学习打磨与清洁与去旧涂饰辅助与记录辅助与材料与工具准备；不独立承担配色与配方变更与工件放行与喷涂间作业责任。"
+              "先问清可做的辅助任务与报告对象。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.12",
@@ -30519,7 +30567,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "跟随学习（打磨与辅助期）"
+              "核对任务和带教"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.13",
@@ -30533,7 +30581,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能按客户指定效果独立完成检查与拆解与修复与打磨与选材与调配与施涂与检验与交件，遇损伤超出能力或材料与安全疑点按规程上报。"
+              "在指定区域按清单核对材料，记录原值。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.14",
@@ -30547,7 +30595,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立修整岗"
+              "备料与标签"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.15",
@@ -30561,7 +30609,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能统筹多工件与多订单与配色与喷涂工艺与人员带教，负责配色与工序与质量与记录与安全落实。"
+              "样板不符或划痕超限时保留原记录，交负责人复核。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.16",
@@ -30575,7 +30623,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "熟练与带教岗"
+              "留存差异"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.17",
@@ -30589,7 +30637,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与流程与培训与材料与工艺与配色与质量与安全与合规管理，处理复杂与争议事项；需相应岗位授权并承担专业与安全与合规责任。"
+              "材料标签、通风或防护不明时，停止、退离并报告车间负责人。由指定人员确认作业条件后按现场程序恢复。颜色待核或表面缺陷超限时，留原记录交复核。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.18",
@@ -30603,7 +30651,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "工艺与合规支持岗"
+              "报告并交接"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.19",
@@ -30617,12 +30665,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑学习路径｜先核实际岗位，再学习材料工件与记录方法，完成适用培训和法定条件，在真实岗位授权下练习并考核；本页三路径四阶段只学习重心，不是固定晋升年限、普遍资历或录用保证。F/V2仅纸面方法。"
+              "看大陆家具生产或修整岗位时，询问是否从样板复核和低风险工序开始。《安全生产法》第二十八条要求上岗前通过安全生产教育和培训。向车间确认材料、设备和工序权限。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30631,7 +30679,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜「受过培训」「取得课程或证书」「取得岗位资格」「获得机构授权」是四种不同状态；本页列示的准备项不等于任何法定资格，也不自动赋予配方变更与工件放行与危化品与危废处置与客户数据对外提供的决定权。"
+              "先核岗位分工、带教和任务授权。受监管作业另核适用资格。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.21",
@@ -30645,7 +30693,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国法定资格、培训和单位授权分别核；是否涉特种作业须按实际作业目录与项目，不能从家具喷涂、危化品或危废名称断人人同一证。单位授权不代法定证件；美国职业代码不授中国资格。 美国新聘学历61/36/3问卷、Zone1—2分组、EP典型高中/无相关经验/短期OJT各自范围；不套中国。"
+              "中国大陆生产安全与受监管作业"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.22",
@@ -30662,12 +30710,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑建议｜以真实任务、适用培训、法定条件及单位授权积累岗位证据，不据本页阶段断晋升或期限。纸面四作品不替代工艺质量、安全训练和健康管理。"
+              "看大陆家具生产或修整岗位时，询问是否从样板复核和低风险工序开始。《安全生产法》第二十八条要求上岗前通过安全生产教育和培训。向车间确认材料、设备和工序权限。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31012,7 +31060,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑准备｜完成相关材料、工艺或记录培训；配方变更与放行权限按实际岗位授权核，法定条件另核。"
+              "向带教人核对应任务范围。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.48",
@@ -31026,7 +31074,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "熟悉材料与色号与配方与涂饰与干燥与检验要求。"
+              "将未决项交相应负责人。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.49",
@@ -31040,7 +31088,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "样板与材料与记录及被复核情况。"
+              "原工单、样板编号和表面检查记录。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.50",
@@ -31054,7 +31102,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "负责打磨与清洁与涂饰材料准备与色号与批次记录辅助与样板整理。"
+              "在指定区域按清单整理材料。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.51",
@@ -31068,7 +31116,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "涂饰与配色辅助岗"
+              "准备材料"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.52",
@@ -31082,7 +31130,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "机构授权与相关培训；多品类实践经历。"
+              "向带教人核对应任务范围。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.53",
@@ -31096,7 +31144,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习批量工艺与色差控制与喷涂设备与安全与环保要求。"
+              "将未决项交相应负责人。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.54",
@@ -31110,7 +31158,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "配色与工序与检验与异常记录。"
+              "原工单、样板编号和表面检查记录。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.55",
@@ -31124,7 +31172,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担配色与调色与施涂与做旧与装饰与样板制作与检验与偏差上报。"
+              "对照工单、批准样板和表面记录。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.56",
@@ -31138,7 +31186,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "涂饰与配色执行岗"
+              "核对颜色和表面缺陷"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.57",
@@ -31152,7 +31200,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理资历或机构任命。"
+              "向带教人核对应任务范围。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.58",
@@ -31166,7 +31214,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完善制度与样板与色差控制与培训与审计机制。"
+              "将未决项交相应负责人。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.59",
@@ -31180,7 +31228,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "配色与工艺结论；制度与培训与检验记录。"
+              "原工单、样板编号和表面检查记录。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.60",
@@ -31194,7 +31242,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "对材料与配方与色号与批量工艺与质量与记录体系与培训负责，制定标准并协调内外部事项。"
+              "保留颜色状态与缺陷原值，等待复核。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.61",
@@ -31208,7 +31256,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "配色与工艺负责人"
+              "留存差异"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.62",
@@ -31222,7 +31270,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理任命或机构授权。"
+              "向带教人核对应任务范围。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.63",
@@ -31236,7 +31284,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完善体系与数据与应急与考核与培训机制。"
+              "将未决项交相应负责人。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.64",
@@ -31250,7 +31298,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹结论；制度与绩效与应急与培训文件。"
+              "原工单、样板编号和表面检查记录。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.65",
@@ -31264,7 +31312,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹工艺与配色与质量与记录与对外沟通，处理复杂与争议事项。"
+              "材料标签、通风或防护不明时，停止、退离并报告车间负责人。由指定人员确认作业条件后按现场程序恢复。颜色待核或表面缺陷超限时，留原记录交复核。"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.66",
@@ -31278,7 +31326,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "机构工艺与质量统筹岗"
+              "交接未决项"
             ]
           },
           "id": "furniture-finishers.path.career-path-block.67",
@@ -31677,12 +31725,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国本职BLS51-7021：2025就业15.9千人、2035预测15.3千人，2025—2035增长-3.5%、净减0.6千人、年均空缺1.5千个；基期自雇占9.7%。年空缺含人员转出和退出需求，非十年总数、净新增或实际招聘。 美国2025全国OEWS雇员年工资10/25/50/75/90分位32,160/37,670/44,540/49,730/61,020美元，时薪15.46/18.11/21.41/23.91/29.34美元。 证据不足：本轮未取得中国本职精确全国、城市及用工形式工资就业；行业均值仅背景，有界查阅不证明统计不存在，不用美国或行业值代填。"
+              "BLS 表 1.2（美国本职业 51-7021）：2025 年约 15,900 个岗位，2035 年预计约 15,300 个，变化 −3.5%，年均约 1,500 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31691,12 +31739,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31705,12 +31753,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31747,12 +31795,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业规模与增长与岗位空缺"
+              "就业规模与变化"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31761,12 +31809,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS51-7021精确职业"
+              "51-7021"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31775,12 +31823,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国本职BLS51-7021：2025就业15.9千人、2035预测15.3千人，2025—2035增长-3.5%、净减0.6千人、年均空缺1.5千个；基期自雇占9.7%。年空缺含人员转出和退出需求，非十年总数、净新增或实际招聘。"
+              "BLS 表 1.2（美国本职业 51-7021）：2025 年约 15,900 个岗位，2035 年预计约 15,300 个，变化 −3.5%，年均约 1,500 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31789,12 +31837,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31803,12 +31851,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31845,12 +31893,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "工资（中位与分位）"
+              "预计年均空缺"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31859,12 +31907,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业 O*NET-SOC 51-7021.00（OEWS 2025）"
+              "51-7021"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31873,12 +31921,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位时薪 21.41 美元、中位年薪 44,540 美元；分位 32,160 / 37,670 / 49,730 / 61,020 美元"
+              "预计年均约 1,500 个，含替补。"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31887,12 +31935,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆"
+              "美国全国"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31901,12 +31949,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025-05"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31943,12 +31991,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "职业工资与就业（背景与缺口）"
+              "年薪中位数"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31957,12 +32005,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局城镇单位就业人员平均工资（行业门类）与有界检索"
+              "51-7021"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31971,12 +32019,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职精确全国、城市及用工形式工资就业；行业均值仅背景，有界查阅不证明统计不存在，不用美国或行业值代填。"
+              "44,540 美元/年"
             ]
           },
           "id": "furniture-finishers.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -32386,17 +32434,26 @@
           "data": {
             "entries": [
               {
-                "answer": "本职51-7021.00把受损旧家具或新制高档家具整形涂饰至指定颜色效果；22任务13核心9补充含检查修复、遮蔽拆解、打磨、材料调色、涂饰装饰及金属表面和软包任务。任务不授现场或中国资格。",
+                "answer": "原题 F1 可提交，2 毫米在题设限值内。F2 保留颜色待核，交样板负责人。F3 保留 3 毫米，交质检。变式 F1、F3 可提交，F2 仍待核。",
+                "id": "furniture-finishers.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.furniture-finishers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
+              },
+              {
+                "answer": "家具表面修整工按指定颜色与效果，处理新制家具或修整受损、磨损或使用过的家具。工序可能包括查基材和旧涂层、修补、打磨、着色及对照批准样板复核。",
                 "id": "furniture-finishers.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.furniture-finishers.q1",
                 "source_refs": [
                   "onet",
-                  "bls"
+                  "woodworkers-ooh"
                 ]
               },
               {
-                "answer": "本职重家具整形涂饰；柜体制造重木制构件、软包重覆装，任务可交叉。51-9123涂饰家具玻璃陶器皮革等物品，不等建筑墙面油漆工；47-2042排地毯木地板硬瓷砖，地面其他方向分别核。",
+                "answer": "本职重家具整形涂饰；柜体制造重木制构件、软包重覆装，任务可交叉。51-9123涂饰家具玻璃陶器皮革等物品，不等建筑墙面油漆工；47-2042 安装弹性、吸声或装饰性地面覆盖材料，排除地毯、木地板和硬质瓷砖。",
                 "id": "furniture-finishers.faq.2",
                 "question": "它和橱柜制造工、家具软包工、涂装工有什么区别？",
                 "question_key": "career.faq.furniture-finishers.q2",
@@ -32406,63 +32463,67 @@
                 ]
               },
               {
-                "answer": "美国2025全国OEWS雇员年工资10/25/50/75/90分位32,160/37,670/44,540/49,730/61,020美元，时薪15.46/18.11/21.41/23.91/29.34美元。 美国本职BLS51-7021：2025就业15.9千人、2035预测15.3千人，2025—2035增长-3.5%、净减0.6千人、年均空缺1.5千个；基期自雇占9.7%。年空缺含人员转出和退出需求，非十年总数、净新增或实际招聘。 OEWS排自雇，含基本工资、计件、佣金、生产奖金及适用生活成本或危险工作报酬；排加班溢价、班次差额、非生产奖金与雇主福利，不能一律排绩效或计件。",
+                "answer": "2025 年 5 月美国本职业 51-7021全国年薪中位数 44,540 美元，时薪中位数 21.41 美元。年薪第 10、25、50、75、90 分位依次为 32,160、37,670、44,540、49,730、61,020 美元。 BLS 表 1.2（美国本职业 51-7021）：2025 年约 15,900 个岗位，2035 年预计约 15,300 个，变化 −3.5%，年均约 1,500 个职位空缺，含人员替补。人数分别取整。",
                 "id": "furniture-finishers.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.furniture-finishers.q3",
                 "source_refs": [
                   "oews",
-                  "ep"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "证据不足：本轮未取得中国本职精确全国、城市及用工形式工资就业；行业均值仅背景，有界查阅不证明统计不存在，不用美国或行业值代填。",
+                "answer": "本页所核资料未取得中国大陆本职业全国工资分布。国家统计局表 2、5 的城镇制造业年平均工资为非私营单位 113,594 元、私营单位 76,055 元。 本页所核资料未取得中国大陆本职业的全国就业序列。 可按家具修补、样板核对和表面涂饰分工查看实际岗位。",
                 "id": "furniture-finishers.faq.4",
-                "question": "中国大陆有对应的工资数据吗？",
+                "question": "中国大陆有对应的工资和就业数据吗？",
                 "question_key": "career.faq.furniture-finishers.q4",
                 "source_refs": [
-                  "nbs",
-                  "cnclass"
+                  "nbs"
                 ]
               },
               {
-                "answer": "本职问卷93%每日防护81%污染物65%危险条件22%危险设备60%非受控室内67%持续站88%持续用手21%持续重复/34%超半、46/30%精确极/很重要51%错误较严重。是选项非剂量事故率；实际危害培训防护监护另核。",
+                "answer": "工作常要核样板和表面缺陷，打磨和涂饰可能接触粉尘、噪声和涂料蒸气。先确认车间通风、标签、个人防护和异常上报。",
                 "id": "furniture-finishers.faq.5",
                 "question": "工作环境和职业卫生情况如何？",
                 "question_key": "career.faq.furniture-finishers.q5",
                 "source_refs": [
                   "onet",
-                  "bls"
+                  "facilities",
+                  "osha-spray",
+                  "osha-hazcom"
                 ]
               },
               {
-                "answer": "证据不足：本职AI量化暴露、采用、效率与就业因果未取得。 软件与任务不证中等暴露或明显提速，EP下降非AI因果；可试F/V2合成记录并独立核对。",
+                "answer": "现有软件信息不足以估算本职业 AI 使用率、提效或就业影响。可用 F 表练习记录和交接。",
                 "id": "furniture-finishers.faq.6",
                 "question": "AI 会影响这个职业吗？",
                 "question_key": "career.faq.furniture-finishers.q6",
                 "source_refs": [
                   "onet",
-                  "bls"
+                  "bls-ep-2025-2035",
+                  "paper-exercise"
                 ]
               },
               {
-                "answer": "美国O*NET新聘学历问卷61%高中36%低于高中3%证书，合100%；Zone1—2分组准备、EP典型高中/无相关经验/短期OJT范围各自，不套中国或个体熟练期限。",
+                "answer": "BLS 表 1.2 将高中或同等学历与短期在岗培训列为该职业的典型美国入行准备。应聘时核实所用材料、样板和安全培训。 《安全生产法》第二十八条要求生产经营单位对从业人员进行安全生产教育和培训，培训合格后方可上岗。",
                 "id": "furniture-finishers.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.furniture-finishers.q7",
                 "source_refs": [
-                  "onet",
-                  "ep"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "中国法定资格、培训和单位授权分别核；是否涉特种作业须按实际作业目录与项目，不能从家具喷涂、危化品或危废名称断人人同一证。单位授权不代法定证件；美国职业代码不授中国资格。 美国喷涂按适用OSHA、危险废物属性按具体名录鉴别；不从旧家具、气味或岗位名称推法定资格。",
+                "answer": "中国大陆按材料和实际作业核《危险化学品安全法》及《特种作业目录》，旧涂层废物按名录和鉴别规则核。美国适用的易燃、可燃材料喷涂核 OSHA 1910.107；具体分工、培训和授权向车间确认。",
                 "id": "furniture-finishers.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.furniture-finishers.q8",
                 "source_refs": [
-                  "onet",
-                  "cnclass"
+                  "archivists",
+                  "special-operations-directory-2026",
+                  "waste-law",
+                  "osha-spray"
                 ]
               },
               {
@@ -32472,7 +32533,11 @@
                 "question_key": "career.faq.furniture-finishers.q9",
                 "source_refs": [
                   "onet",
-                  "cnclass"
+                  "osha-spray",
+                  "osha-hazcom",
+                  "waste-law",
+                  "privacy",
+                  "pipl-law"
                 ]
               },
               {
@@ -32498,12 +32563,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源方法｜本轮核O*NET本职定义22任务、57情境、RAC与4软件、新聘学历；全国OEWS2025工资与BLS本职EP2025—2035分开，当前行业65/10/25，网页无年份。OOH木工组合仅比较范围，法律独立实源，不借职业任务支持法条。"
+              "资料口径｜美国职业任务和情境看 O*NET，2025 年 5 月工资看 OEWS，2025–2035 年就业看 BLS 表 1.2。职业概览将行业就业标为 2025 年，行业明细列制造业 65%、其他服务业 10%、其余行业 25%。BLS 木工职业组工资用于组别参照。"
             ]
           },
           "id": "furniture-finishers.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "r2-pay-3",
+            "oews",
+            "bls-ep-2025-2035",
+            "woodworkers-ooh"
           ],
           "type": "prose"
         },
@@ -32540,12 +32609,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国精确本职全国城市用工形式工资就业、美国家具品类技能计酬因素分解及四行业工资、本职AI量化暴露采用效率因果、中国预测、六测评个体效度和代表招聘样本未取得；按具体板块标记不代填，当前industry65/10/25已核，旧共享登记49/51按保护边界待独立复核。"
+              "本页未取得中国大陆本职业的全国工资分布和就业序列、美国本职业的分行业工资，或可量化的本职业 AI 采用率。城镇制造业平均工资与美国木工组工资分别作为参照。"
             ]
           },
           "id": "furniture-finishers.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs",
+            "woodworkers-ooh"
           ],
           "type": "prose"
         }
@@ -32569,28 +32640,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "家具修整工相关方向 2",
+                "entity": "大五人格测评",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "家具修整工相关方向 3",
+                "entity": "MBTI 偏好测评",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "家具修整工相关方向 4",
+                "entity": "推理测评",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "家具修整工相关方向 5",
+                "entity": "情绪能力测评",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "家具修整工相关方向 6",
@@ -32628,7 +32699,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：家具修整工职业档案（51-7021.00）",
                 "period": "O*NET current occupation profile",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine",
                 "scope": "51-7021.00 exact occupation",
                 "url": "https://www.onetonline.org/link/summary/51-7021.00"
               },
@@ -32644,47 +32715,47 @@
                 "market": "美国",
                 "name": "O*NET OnLine：家具修整工详细资料（51-7021.00）",
                 "period": "O*NET current occupation profile",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine",
                 "scope": "51-7021.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/51-7021.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "美国本职BLS51-7021：2025就业15.9千人、2035预测15.3千人，2025—2035增长-3.5%、净减0.6千人、年均空缺1.5千个；基期自雇占9.7%。年空缺含人员转出和退出需求，非十年总数、净新增或实际招聘。",
-                  "典型入门高中、无相关经验、短期OJT；公布增长不由四舍五入规模反算。"
+                  "BLS 表 1.2（美国本职业 51-7021）：2025 年约 15,900 个岗位，2035 年预计约 15,300 个，变化 −3.5%，年均约 1,500 个职位空缺，含人员替补。人数分别取整。",
+                  "BLS 表 1.2 将高中或同等学历与短期在岗培训列为该职业的典型美国入行准备。应聘时核实所用材料、样板和安全培训。"
                 ],
                 "evidence_type": "official occupational projections table",
                 "id": "ep",
-                "limitation": "含自雇、年空缺非实际招聘或AI因果",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
                 "market": "美国",
-                "name": "BLS本职51-7021就业预测2025—2035",
-                "period": "2025—2035",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "51-7021.00 exact occupation",
+                "scope": "51-7021",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
                   "美国2025全国OEWS雇员年工资10/25/50/75/90分位32,160/37,670/44,540/49,730/61,020美元，时薪15.46/18.11/21.41/23.91/29.34美元。",
-                  "CA入口读取United States全国行，不用CA49080；分位非资历。"
+                  "读取全国工资行。分位用于描述工资分布。"
                 ],
-                "evidence_type": "official wage display",
+                "evidence_type": "OEWS 全国职业工资",
                 "id": "oews",
                 "limitation": "OEWS排自雇，含基本工资、计件、佣金、生产奖金及适用生活成本或危险工作报酬；排加班溢价、班次差额、非生产奖金与雇主福利，不能一律排绩效或计件。",
                 "market": "美国",
-                "name": "O*NET OnLine：家具修整工国家工资（51-7021.00）",
+                "name": "美国家具表面修整工全国工资（51-7021）",
                 "period": "BLS 2025 wage data via O*NET",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "51-7021.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localwages/51-7021.00?st=CA"
+                "url": "https://www.onetonline.org/link/localwages/51-7021.00"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于说明中国大陆按行业门类公布平均工资、不拆分职业。",
-                  "本页按证据政策展示缺失而不使用代理数字。"
+                  "2025 年表 2、5 的城镇制造业年平均工资，非私营单位 113,594 元、私营单位 76,055 元。",
+                  "行业统计用于比较背景。"
                 ],
                 "evidence_type": "official industry wage release",
                 "id": "nbs",
@@ -32699,18 +32770,18 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于定位历年城镇单位平均工资发布。",
-                  "用于核对年度口径发布周期与统计范围。"
+                  "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局 2025 年表 2、5 给出城镇制造业年平均工资，非私营单位 113,594 元，私营单位 76,055 元。",
+                  "城镇制造业行业工资参照"
                 ],
-                "evidence_type": "official release index",
+                "evidence_type": "城镇制造业行业工资参照",
                 "id": "cnclass",
-                "limitation": "发布索引，不含职业级数据。",
+                "limitation": "城镇制造业行业工资参照",
                 "market": "中国大陆",
-                "name": "国家统计局：城镇单位平均工资统计发布索引与口径说明",
-                "period": "2025 release index",
+                "name": "国家统计局：2025 年城镇单位就业人员年平均工资情况",
+                "period": "2025",
                 "publisher": "国家统计局",
-                "scope": "release index",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/"
+                "scope": "城镇制造业行业工资参照",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32731,18 +32802,18 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于说明生产经营单位安全生产责任与从业人员安全义务。",
-                  "涉及粉尘与溶剂与喷涂与危险作业的安全管理与培训要求。"
+                  "《安全生产法》第二十八条要求生产经营单位对从业人员进行安全生产教育和培训，培训合格后方可上岗。",
+                  "第四十四、四十五条涉及危害告知和劳动防护用品。"
                 ],
                 "evidence_type": "statute",
                 "id": "facilities",
-                "limitation": "以法律原文与主管部门规定为准。",
+                "limitation": "具体设备操作、维修及受监管任务按适用规定和现场授权核实。",
                 "market": "中国大陆",
-                "name": "中华人民共和国安全生产法",
-                "period": "current",
+                "name": "《中华人民共和国安全生产法》",
+                "period": "2021",
                 "publisher": "全国人民代表大会常务委员会",
                 "scope": "work safety",
-                "url": "https://www.gov.cn/xinwen/2021-06/11/content_5616874.htm"
+                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32788,7 +32859,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：家具修整工热门技术（51-7021.00）",
                 "period": "current page; accessed 2026-09-02",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine",
                 "scope": "51-7021.00 exact occupation",
                 "url": "https://www.onetonline.org/link/hot_tech/51-7021.00"
               },
@@ -32820,7 +32891,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：家具修整工职业兴趣（51-7021.00）",
                 "period": "current page; accessed 2026-09-02",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine",
                 "scope": "51-7021.00 exact occupation",
                 "url": "https://www.onetonline.org/link/interest/51-7021.00"
               },
@@ -32875,17 +32946,17 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于字段与证据口径与缺口登记规则。",
-                  "用于跨市场口径边界说明。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "编辑说明",
                 "id": "employer",
-                "limitation": "内部口径规则，非外部事实来源。",
-                "market": "全球",
-                "name": "FermatMind 职业内容字段与证据口径规则",
-                "period": "current authoring rules",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页任务",
                 "url": "https://fermatmind.com"
               },
               {
@@ -32900,7 +32971,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：家具修整工证书资料（51-7021.00）",
                 "period": "current page; accessed 2026-09-02",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine",
                 "scope": "51-7021.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localcert/51-7021.00"
               },
@@ -32916,7 +32987,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：家具修整工训练资料（51-7021.00）",
                 "period": "current page; accessed 2026-09-02",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine",
                 "scope": "51-7021.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localtraining/51-7021.00"
               },
@@ -32932,23 +33003,23 @@
                 "market": "美国",
                 "name": "O*NET OnLine：家具修整工定制职业页（51-7021.00）",
                 "period": "current page; accessed 2026-09-02",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "publisher": "O*NET OnLine",
                 "scope": "51-7021.00 exact occupation",
                 "url": "https://www.onetonline.org/link/custom/51-7021.00"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "制造49%、其他51%（包括其他服务业与运输仓储）。",
-                  "无各细分行业本职工资，不用组合木工行业工资代填。"
+                  "O*NET 2025 年行业就业分布：制造业 65%、其他服务业（公共行政除外）10%、其他行业 25%。",
+                  "统计年见 O*NET 职业概览的 Top industries (2025)，比例见行业分布页。分行业工资需另查。"
                 ],
                 "evidence_type": "official industry display",
                 "id": "r2-pay-3",
-                "limitation": "用于行业背景，不替代行业工资。",
+                "limitation": "就业占比。",
                 "market": "美国",
                 "name": "O*NET OnLine：家具修整工行业分布（51-7021.00）",
-                "period": "网页未标年份",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
                 "scope": "51-7021.00 exact occupation",
                 "url": "https://www.onetonline.org/link/industry/51-7021.00"
               },
@@ -32985,36 +33056,35 @@
                 "url": "https://www.bls.gov/oes/2025/may/oes_nat.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对发布时点与统计范围。",
-                  "用于核对生产与安装维护职业大类的工资与就业描述。"
+                  "2025 年 5 月美国本职业 51-7021全国年薪中位数 44,540 美元，时薪中位数 21.41 美元。年薪第 10、25、50、75、90 分位依次为 32,160、37,670、44,540、49,730、61,020 美元。"
                 ],
-                "evidence_type": "official news release",
+                "evidence_type": "OEWS 全国职业工资",
                 "id": "onet-wages",
-                "limitation": "为发布口径，不代表个人薪酬。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
-                "name": "BLS 职业就业与工资新闻稿（OEWS）",
-                "period": "2025 OEWS",
+                "name": "美国家具表面修整工全国工资（51-7021）",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "OEWS national release",
-                "url": "https://www.bls.gov/news.release/ocwage.htm"
+                "url": "https://www.onetonline.org/link/localwages/51-7021.00"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于说明危险化学品与储存与使用与应急处置的主体责任。",
-                  "涉及涂料与溶剂与稀释剂等危险化学品的采购与储存与使用管理。"
+                  "第四十七条规定使用条件和操作规程，具体资格、许可与单位责任按第五、第四十八条等适用情形核对。",
+                  "第四十七条规定使用条件和操作规程，具体资格、许可与单位责任按第五、第四十八条等适用情形核对。"
                 ],
                 "evidence_type": "regulation",
                 "id": "archivists",
-                "limitation": "旧泛链接未据本轮重新核全部条例；具体材料是否危险化学品依法目录核，不授普遍个人证。",
+                "limitation": "按材料、工序和适用条款核对。",
                 "market": "中国大陆",
-                "name": "中华人民共和国危险化学品安全管理条例",
-                "period": "current",
-                "publisher": "国务院",
-                "scope": "hazardous chemicals safety",
-                "url": "https://www.gov.cn/zhengce/2020-12/26/content_5574689.htm"
+                "name": "中华人民共和国危险化学品安全法",
+                "period": "2026-05-01",
+                "publisher": "全国人大常委会",
+                "scope": "中国大陆危化品使用安全",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2026/art_4e160e51cc134696a183a5f531f097e5.html"
               },
               {
                 "accessed_at": "2026-10-03（沿0434同轮已核方法）",
@@ -33051,8 +33121,8 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "本职工资44540与规模15900，组合工资45310和18.1千年空缺不套本职。",
-                  "组合行业工资非家具修整工行业工资。"
+                  "2025 年 5 月木工职业组的行业工资见 Pay 段。家具表面修整工全国工资单列。",
+                  "同页 Employment Projections 的职业增长显示值经过取整。精确变化用 BLS 表 1.2。"
                 ],
                 "evidence_type": "official occupational handbook",
                 "id": "woodworkers-ooh",
@@ -33065,21 +33135,119 @@
                 "url": "https://www.bls.gov/ooh/production/woodworkers.htm"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "检查家具以确定损伤程度并决定修复或复原方式 — 25/100; weight=1/3; furniture-finishers.ai-impact.ai-impact-table.97[0]",
-                  "填补裂缝、修复破损翘曲与打磨整形 — 0/100; weight=1/3; furniture-finishers.ai-impact.ai-impact-table.105[0]",
-                  "刷涂与喷涂或手工擦涂并做旧与印饰与贴金 — 0/100; weight=1/3; furniture-finishers.ai-impact.ai-impact-table.113[0]"
+                  "BLS 表 1.2（美国本职业 51-7021）：2025 年约 15,900 个岗位，2035 年预计约 15,300 个，变化 −3.5%，年均约 1,500 个职位空缺，含人员替补。人数分别取整。",
+                  "BLS 表 1.2 将高中或同等学历与短期在岗培训列为该职业的典型美国入行准备。应聘时核实所用材料、样板和安全培训。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "51-7021",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "《安全生产法》第二十八条要求生产经营单位对从业人员进行安全生产教育和培训，培训合格后方可上岗。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "具体设备操作、维修及受监管任务按适用规定和现场授权核实。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国安全生产法》第二十八条",
+                "period": "2021",
+                "publisher": "全国人民代表大会常务委员会",
+                "scope": "中国大陆生产经营单位安全培训",
+                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "F 表：家具表面验收记录",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "适用美国易燃和可燃材料喷涂的通风等控制。"
+                ],
+                "id": "osha-spray",
+                "limitation": "仅用于适用的美国一般工业工作场所。",
+                "market": "美国",
+                "name": "OSHA 1910.107",
+                "period": "29 CFR 1910",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.107"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "适用美国工作场所化学品的标签、安全数据表和培训。"
+                ],
+                "id": "osha-hazcom",
+                "limitation": "仅用于适用的美国一般工业工作场所。",
+                "market": "美国",
+                "name": "OSHA 1910.1200",
+                "period": "29 CFR 1910",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1200"
+              },
+              {
+                "details": [
+                  "完成原题和变式后打开折叠答案。"
+                ],
+                "id": "paper-answer-key",
+                "name": "纸面练习参考解（常见问题）",
+                "url": "#career-content-sources"
+              },
+              {
+                "details": [
+                  "按实际作业核适用目录。"
+                ],
+                "id": "special-operations-directory-2026",
+                "name": "特种作业目录",
+                "period": "2026-06-01",
+                "publisher": "应急管理部等",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202605/t20260526_604988.shtml"
+              },
+              {
+                "accessed_at": "2026-09-21",
+                "details": [
+                  "第四、六、十三、二十八条用于核可识别个人信息、必要范围、合法依据和敏感个人信息。",
+                  "第四、六、十三、二十八条用于核可识别个人信息、必要范围、合法依据和敏感个人信息。"
+                ],
+                "evidence_type": "statute",
+                "id": "pipl-law",
+                "limitation": "按实际数据内容与处理方式判断。",
+                "market": "中国大陆",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "2021",
+                "publisher": "全国人大常委会",
+                "scope": "可识别个人信息",
+                "url": "https://www.gov.cn/xinwen/2021-08/20/content_5632486.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "6-06-04-00 家具制作工第 8、9、11 项列打磨、表面涂饰和质量检验。"
+                ],
+                "id": "cn-furniture-making-classification",
+                "limitation": "只作工序对照。家具制作工另含其他制造和组装工作。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国职业分类大典（2022 年版）》家具制作工",
+                "period": "2022",
+                "publisher": "人力资源和社会保障部等",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
               }
             ]
           },
@@ -34416,8 +34584,8 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
-        "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为家具修整工？教育、资格与职业发展路径",
+        "entry_heading": "岗位训练与纸面试做",
+        "heading": "入行与 F 表：家具表面验收记录",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "furniture-finishers.path.career-path-block.21",
@@ -34800,7 +34968,7 @@
                 }
               }
             ],
-            "title": "涂饰与上色与装饰"
+            "title": "表面修整与样板复核"
           },
           {
             "id": "inspection-and-workshop-coordination",
@@ -35292,7 +35460,7 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "facilities"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -35323,8 +35491,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "onet"
+              "facilities",
+              "osha-hazcom"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35355,8 +35523,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "facilities",
-              "onet"
+              "osha-spray",
+              "facilities"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -35388,7 +35556,7 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "paper-exercise"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -35452,7 +35620,7 @@
             },
             "evidence_refs": [
               "pipl-law",
-              "bls"
+              "onet"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35622,6 +35790,42 @@
               "field": "entity"
             },
             "scope": "中国可识别个人信息，纯配方不自动个人信息"
+          },
+          {
+            "href": {
+              "$source": "osha-spray",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "furniture-finishers.source-register.published.1"
+            },
+            "id": "osha-spray",
+            "label": {
+              "$source": "osha-spray",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "furniture-finishers.source-register.published.1"
+            },
+            "scope": "适用美国易燃和可燃材料喷涂的通风等控制。"
+          },
+          {
+            "href": {
+              "$source": "osha-hazcom",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "furniture-finishers.source-register.published.1"
+            },
+            "id": "osha-hazcom",
+            "label": {
+              "$source": "osha-hazcom",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "furniture-finishers.source-register.published.1"
+            },
+            "scope": "适用美国工作场所化学品的标签、安全数据表和培训。"
           }
         ]
       },
@@ -35931,7 +36135,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "furniture-finishers.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35945,7 +36149,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "furniture-finishers.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35959,7 +36163,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "furniture-finishers.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35982,12 +36186,12 @@
           "ui": {
             "ai_heading": "AI 会影响家具修整工的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "中国职业工资：地区数据缺口",
-            "scenario_caption": "美国新聘学历问卷与中国实际条件分开核对",
-            "scenario_heading": "中国入门条件怎样核对？",
-            "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
-            "scenario_value_label": "实际条件核对"
+            "official_heading": "2025 年城镇单位年平均工资背景",
+            "scenario_caption": "岗位与报酬核对项",
+            "scenario_heading": "看招聘时核对哪些条件？",
+            "scenario_interpretation_label": "向用人单位确认",
+            "scenario_role_label": "核对范围",
+            "scenario_value_label": "核对项"
           },
           "us_growth": {
             "$item": "furniture-finishers.china-salary.career-snapshot-primary-locale.58",
@@ -36196,22 +36400,22 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国家具修整工工资？",
+        "factors_heading": "影响报酬的条件",
         "growth": {
           "$item": "furniture-finishers.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国家具修整工工资多少？",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "heading": "美国家具表面修整工工资",
+        "industry_heading": "美国木工职业组行业工资",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-manufacturing-2025",
+            "fact_ref": "us-woodworkers-industry-wage-construction-2025",
             "industry": {
               "$item": "furniture-finishers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36232,7 +36436,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-furniture-wood-2025",
+            "fact_ref": "us-woodworkers-industry-wage-furniture-2025",
             "industry": {
               "$item": "furniture-finishers.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -36253,7 +36457,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-restoration-2025",
+            "fact_ref": "us-woodworkers-industry-wage-wholesale-2025",
             "industry": {
               "$item": "furniture-finishers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36274,7 +36478,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-custom-repair-2025",
+            "fact_ref": "us-woodworkers-industry-wage-wood-products-2025",
             "industry": {
               "$item": "furniture-finishers.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -36295,8 +36499,8 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
-        "interpretation_heading": "这组美国工资数字应当怎么理解？",
+        "industry_value_label": "木工职业组各行业年薪中位数",
+        "interpretation_heading": "如何读工资分位",
         "interpretation_rows": [
           {
             "answer": {
@@ -36349,52 +36553,55 @@
         "wage_column_labels": [
           "工资统计位置",
           "年工资参考",
-          "折算边界",
+          "时薪",
           "怎样理解这个位置"
         ],
-        "wage_heading": "美国工资分布",
+        "wage_heading": "全国工资分位",
         "wage_tiers": [
           {
-            "equivalent": "官方年工资，非个人月收入",
+            "equivalent": "15.46 美元/小时",
             "interpretation": {
               "$item": "furniture-finishers.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "第10百分位",
-            "value": {
-              "$fact": "us-wage-low10-2025",
-              "field": "display_value"
-            }
+            "label": "第 10 百分位",
+            "value": "32,160 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "18.11 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资。",
+            "label": "第 25 百分位",
+            "value": "37,670 美元/年"
+          },
+          {
+            "equivalent": "21.41 美元/小时",
             "interpretation": {
               "$item": "furniture-finishers.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "中位数（50%）",
-            "value": {
-              "$fact": "us-wage-2025",
-              "field": "display_value"
-            }
+            "label": "第 50 百分位",
+            "value": "44,540 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "23.91 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资。",
+            "label": "第 75 百分位",
+            "value": "49,730 美元/年"
+          },
+          {
+            "equivalent": "29.34 美元/小时",
             "interpretation": {
               "$item": "furniture-finishers.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "第90百分位",
-            "value": {
-              "$fact": "us-wage-high10-2025",
-              "field": "display_value"
-            }
+            "label": "第 90 百分位",
+            "value": "61,020 美元/年"
           }
         ]
       },
@@ -36538,7 +36745,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "furniture-finishers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36583,7 +36790,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "furniture-finishers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36628,7 +36835,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "oews",
             "value": {
               "$item": "furniture-finishers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36730,6 +36937,18 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "furniture-finishers.source-register.published.1"
+            },
+            "id": "bls-ep-2025-2035",
+            "label": "BLS 就业预测表 1.2",
+            "scope": "美国全国就业与空缺预测"
           }
         ],
         "transitions": [
@@ -37193,7 +37412,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "cta_label": "了解我的智力与推理表现",
+            "cta_label": "体验矩阵推理测评",
             "evidence_level": {
               "$item": "furniture-finishers.fit.personality-fit-block.19",
               "block": "fit",
@@ -37230,7 +37449,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "cta_label": "了解我的情绪智力能力",
+            "cta_label": "用 EQ 自评梳理情绪与沟通习惯",
             "evidence_level": {
               "$item": "furniture-finishers.fit.personality-fit-block.23",
               "block": "fit",
@@ -37771,7 +37990,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合家具修整工",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37848,7 +38067,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI测评"
+            "label": "大五人格测评"
           },
           {
             "href": {
@@ -37858,7 +38077,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "大五人格测评"
+            "label": "MBTI 偏好测评"
           },
           {
             "href": {
@@ -37868,7 +38087,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "推理测评"
           },
           {
             "href": {
@@ -37878,7 +38097,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "情绪能力测评"
           }
         ]
       },
@@ -37936,7 +38155,7 @@
       "interface.fit.related_career_label": "查看相关职业：",
       "interface.navigation.desktop_heading": "职业档案",
       "interface.navigation.mobile_heading": "目录",
-      "interface.outlook.capability_gaps_label": "需补足",
+      "interface.outlook.capability_gaps_label": "转岗前要补的技能",
       "interface.outlook.detail_link_label": "查看职业详情",
       "interface.outlook.evidence_heading": "三类数据，三种不同口径",
       "interface.outlook.evidence_limitation_label": "不能说明",
@@ -37947,14 +38166,14 @@
       "interface.path.credential_boundary_label": "资格边界",
       "interface.path.entry_decisions_heading": "入行前要核对什么",
       "interface.path.next_step_label": "下一步",
-      "interface.path.promotion_evidence_label": "晋升证据",
+      "interface.path.promotion_evidence_label": "阶段记录与探索练习",
       "interface.path.responsibilities_label": "典型职责",
       "interface.profile.comparison.dimension_header": "维度",
       "interface.profile.comparison.primary_header": "主要方向",
       "interface.profile.comparison.secondary_header": "比较方向",
       "interface.profile.responsibilities_heading": "核心工作",
       "interface.quick_decision.caution_heading": "什么情况下需要慎重选择家具修整工？",
-      "interface.quick_decision.experiment_heading": "如何用一次小实验判断自己是否适合家具修整工？",
+      "interface.quick_decision.experiment_heading": "纸面试做能帮你观察什么？",
       "interface.quick_decision.suit_heading": "什么样的人更可能适合家具修整工？",
       "interface.risk.affected_roles_label": "主要岗位",
       "interface.risk.consequence_label": "可能后果",
@@ -38056,19 +38275,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资参考",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
       "market-signals": "职业前景与相关职业转向",
       "navigation": "下一步与相关入口",
-      "path": "入行、资格与职业发展",
+      "path": "入行与 F 表：家具表面验收记录",
       "profile": "职业画像",
       "quick-decision": "快速判断",
       "risk": "工作压力、风险与职业边界",
       "source-register": "资料来源",
       "sources": "常见问题与资料来源",
-      "us-salary": "美国薪资参考"
+      "us-salary": "美国家具表面修整工工资"
     }
   },
   "fact_register": {
@@ -38086,13 +38305,13 @@
         ]
       },
       {
-        "derivation": "OEWS排自雇，含基本工资、计件、佣金、生产奖金及适用生活成本或危险工作报酬；排加班溢价、班次差额、非生产奖金与雇主福利，不能一律排绩效或计件。",
-        "display_value": "44,540美元/年",
+        "derivation": "O*NET 51-7021.00 全国工资表，BLS OEWS 2025 年 5 月第 50 分位。",
+        "display_value": "44,540 美元/年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "工资中位数",
-        "occupation_scope": "本职业：家具修整工",
-        "period": "2025",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "51-7021",
+        "period": "2025-05",
         "source_refs": [
           "oews"
         ]
@@ -38106,7 +38325,7 @@
         "occupation_scope": "本职业：家具修整工",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
@@ -38118,64 +38337,64 @@
         "occupation_scope": "本职业：家具修整工",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "美国本职BLS51-7021：2025就业15.9千人、2035预测15.3千人，2025—2035增长-3.5%、净减0.6千人、年均空缺1.5千个；基期自雇占9.7%。年空缺含人员转出和退出需求，非十年总数、净新增或实际招聘。",
-        "display_value": "-3.5%",
+        "derivation": "BLS 表 1.2 的 51-7021 行。人数按千人原表换算并分别取整。",
+        "display_value": "−3.5%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长",
-        "occupation_scope": "本职业：家具修整工",
-        "period": "2025—2035",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "51-7021",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "EP含自雇，基期自雇9.7%。",
-        "display_value": "15.9千人",
+        "derivation": "BLS 表 1.2 的 51-7021 行。人数按千人原表换算并分别取整。",
+        "display_value": "约 15,900 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数",
-        "occupation_scope": "本职业：家具修整工",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "51-7021",
         "period": "2025",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "美国本职BLS51-7021：2025就业15.9千人、2035预测15.3千人，2025—2035增长-3.5%、净减0.6千人、年均空缺1.5千个；基期自雇占9.7%。年空缺含人员转出和退出需求，非十年总数、净新增或实际招聘。",
-        "display_value": "1.5千个/年",
+        "derivation": "BLS 表 1.2 的 51-7021 行。人数按千人原表换算并分别取整。",
+        "display_value": "年均约 1,500 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺",
-        "occupation_scope": "本职业：家具修整工",
-        "period": "2025—2035",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "51-7021",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足：本轮未取得中国本职精确该类用工形式工资统计，不证明不存在。",
+        "derivation": "国家统计局表 2、5，城镇单位行业平均年薪。",
+        "display_value": "113,594 元/年（城镇非私营）",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
-        "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：家具修整工",
+        "measure": "中国大陆制造业平均年薪",
+        "occupation_scope": "中国大陆城镇制造业行业门类",
         "period": "2025",
         "source_refs": [
           "nbs"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足：本轮未取得中国本职精确该类用工形式工资统计，不证明不存在。",
+        "derivation": "国家统计局表 2、5，城镇单位行业平均年薪。",
+        "display_value": "76,055 元/年（城镇私营）",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
-        "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：家具修整工",
+        "measure": "中国大陆制造业平均年薪",
+        "occupation_scope": "中国大陆城镇制造业行业门类",
         "period": "2025",
         "source_refs": [
           "nbs"
@@ -38254,49 +38473,85 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "8%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "家具修整工",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "derivation": "BLS 木工职业展望 Pay 段。",
+        "display_value": "48,740 美元/年",
+        "fact_id": "us-woodworkers-industry-wage-construction-2025",
+        "market": "美国",
+        "measure": "木工职业组行业年薪中位数：建筑业",
+        "occupation_scope": "木工职业组",
+        "period": "2025-05",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "woodworkers-ooh"
+        ]
+      },
+      {
+        "derivation": "BLS 木工职业展望 Pay 段。",
+        "display_value": "45,980 美元/年",
+        "fact_id": "us-woodworkers-industry-wage-furniture-2025",
+        "market": "美国",
+        "measure": "木工职业组行业年薪中位数：家具及相关产品制造",
+        "occupation_scope": "木工职业组",
+        "period": "2025-05",
+        "source_refs": [
+          "woodworkers-ooh"
+        ]
+      },
+      {
+        "derivation": "BLS 木工职业展望 Pay 段。",
+        "display_value": "44,890 美元/年",
+        "fact_id": "us-woodworkers-industry-wage-wholesale-2025",
+        "market": "美国",
+        "measure": "木工职业组行业年薪中位数：批发贸易",
+        "occupation_scope": "木工职业组",
+        "period": "2025-05",
+        "source_refs": [
+          "woodworkers-ooh"
+        ]
+      },
+      {
+        "derivation": "BLS 木工职业展望 Pay 段。",
+        "display_value": "42,630 美元/年",
+        "fact_id": "us-woodworkers-industry-wage-wood-products-2025",
+        "market": "美国",
+        "measure": "木工职业组行业年薪中位数：木制品制造",
+        "occupation_scope": "木工职业组",
+        "period": "2025-05",
+        "source_refs": [
+          "woodworkers-ooh"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "家具修整工 · 任务、交付与责任边界",
-      "来源范围 · 统计口径 · 人工复核",
-      "中国精确职业工资缺口按证据保留"
+      "家具表面修整工",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国薪资中位数（2025，BLS OEWS）"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2025—2035）"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国就业人数（2025，含自雇）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
@@ -38308,7 +38563,7 @@
         "availability": "available",
         "fact_ref": "cn-urban-nonprivate-2025",
         "key": "china_pay",
-        "label": "中国大陆精确职业工资（证据不足，按缺口登记）"
+        "label": "中国大陆制造业平均年薪（行业参照）"
       }
     ]
   },
@@ -38316,17 +38571,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "家具修整工做什么、需要什么能力、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围、来源口径和数据缺口。"
+      "text": "了解家具表面修整工的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "家具修整工"
+      "text": "家具表面修整工做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "4d7cb91e5581addbb0ddbd5eb2255ed8faa1ca64585f87432beabbb764279bdc",
+  "source_content_sha256": "7c36c78326d6653b7afba7a4efa664ebbbfb64754c5feea7599069e2ce5ab8ed",
   "subject": {
     "canonical_slug": "furniture-finishers",
-    "name": "家具修整工",
-    "summary": "家具修整工（O*NET-SOC 51-7021.00，Furniture Finishers）把受损、磨损或用过的家具或新制高档家具整形、涂饰与重新涂饰至指定颜色或涂饰效果。工作含检查家具以判断损伤程度并决定修复方式；拆解与清洁并用工具与砂纸与磨料与溶剂或浸洗去除旧涂饰层与损坏部件；用腻子与胶与钉与螺钉填补裂缝与凹陷并修复破损部件；用砂纸与浮石与凿子与打磨机打磨与整形并处理翘曲与色斑；按木材硬度与表面类型选择并调配油漆与着色剂与清漆与虫胶或凡立水等材料；用刷涂与喷涂或手工擦涂施涂并做旧与突出明暗；用印花与贴金与压花与烙印与绘制图案复原或装饰；翻新与更换软包并以漂白或木纹油墨处理特殊表面；与客户沟通颜色与效果并推荐木材与风格；检查表面质量并交付并记录。官方定义原文：Shape, finish, and refinish damaged, worn, or used furniture or new high-grade furniture to specified color or finish."
+    "name": "家具表面修整工",
+    "summary": "家具表面修整工根据指定颜色和表面效果，处理新制家具或修整磨损、受损家具。工作可能涉及检查基材和旧涂层、修补、打磨、着色和复核样板。"
   }
 }

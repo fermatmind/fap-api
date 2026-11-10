@@ -2,9 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7227,12 +7224,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "60分钟纸面练习（全部虚构，不真实播出）：周一至周五每天18:00—18:30，按题面内部规则排满30分钟且不重叠，每天A一次、B一次、D一次。素材A为已核实社区新闻10分钟；B为已核实体育报道12分钟；D为填充短片8分钟；三者许可均明确覆盖本虚构台周一至周五每天一次。C为15分钟音乐片，许可待确认，不能排入。本题100份虚构偏好记录中60份选择社区新闻、40份体育，只作排序理由，不预测收视。交付五天起止时间表、许可清单及异常记录。异常输入：周二日志记A18:00—18:10、B18:10—18:23、D18:23—18:31；标出与草案的差异，不能把实际日志改成预定时间。前10分钟读题，25分钟排期，15分钟独立核算，最后10分钟写需授权人确认的问题。本题内部规则不是FCC或中国法规。"
+              "见「入行、资格与职业发展」的纸面练习《P 表：节目单版本与缺项》。"
             ]
           },
           "id": "media-programming-directors.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7264,12 +7261,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页覆盖 O*NET 27-2012.03「媒体节目编排总监（Media Programming Directors）」：指导并协调从事广播/电视节目排期与节目（如体育或新闻）制作的人员活动；常见报告岗位名包括广播内容经理、新闻总监、新闻播控导演、制作总监、节目协调、节目总监、节目经理、编排总监、台长与电视节目导演。本页不含首席执行官、总经理与运营经理、公关经理等相邻岗位。"
+              "媒体节目编排主管协调广播、电视等节目的排期与制作人员，核对播出时间、版本和内容待审事项。美国工资和就业数据采用制片人与导演上位职业。"
             ]
           },
           "id": "media-programming-directors.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-summary",
             "source-pack-onet-details"
           ],
           "type": "prose"
@@ -7351,13 +7347,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入：O*NET27-2012.03身份、任务、情境、ECA、教育为子职业；2025工资、2025—2035就业及行业为Producers and Directors（27-2012）父职业。FCC任务为美国广播背景，不外推中国规则、资格或行业。"
+              "O*NET 27-2012.03 说明本职业任务和工作情境。美国工资采用 OEWS，就业预测采用 BLS 表 1.2。"
             ]
           },
           "id": "media-programming-directors.profile.onet-structured-fields-block.7",
           "source_refs": [
             "source-pack-onet-details",
-            "source-pack-onet-localwages"
+            "source-pack-onet-localwages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7539,7 +7536,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试验建议：可在虚构资料上尝试AI整理反馈、草拟排期和检索线索，再逐项核对时长、真实来源与许可。O*NET热门技术是招聘技能线索，不证明这些生成式AI任务已普遍采用；工具不能签发素材许可或代替机构授权。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "编辑试验建议：可在虚构资料上尝试AI整理反馈、草拟排期和检索线索，再逐项核对时长、真实来源与许可。O*NET热门技术是招聘技能线索，不证明这些生成式AI任务已普遍采用；工具不能签发素材许可或代替机构授权。"
             ]
           },
           "id": "media-programming-directors.ai-impact.ai-impact-table.2",
@@ -7709,7 +7706,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国2025工资、2025—2035预测：Producers and Directors（27-2012）父职业，非单列节目编排总监"
+              "美国全国工资采用 O*NET 展示的 2025 年 5 月 BLS OEWS（美国上位职业 27-2012）。"
             ]
           },
           "id": "media-programming-directors.us-salary.career-snapshot-secondary-locale.1",
@@ -7723,7 +7720,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2025 年组合口径工资数据：中位年薪 90,360 美元（约 43.44 美元/小时）；10 分位 45,780 美元（22.01 美元/小时）、25 分位 62,670 美元（30.13 美元/小时）、75 分位 134,800 美元（64.81 美元/小时）、90 分位 198,540 美元（95.45 美元/小时）。以上为 O*NET 展示的 Producers and Directors（27-2012）组合口径，不能当作单列本职业；分位是统计位置，不含个人到手收入。"
+              "2025 年 5 月美国上位职业 27-2012全国年薪中位数 90,360 美元，时薪中位数 43.44 美元。年薪第 10、25、50、75、90 分位依次为 45,780、62,670、90,360、134,800、198,540 美元。"
             ]
           },
           "id": "media-programming-directors.us-salary.career-snapshot-secondary-locale.2",
@@ -8014,12 +8011,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国本子项O*NET受访教育52%本科、31%高中、15%部分大学未获学位；JobZone4一般准备非统一门槛或中国要求。中国制作经营许可针对规定业务的机构，与个人任命、培训和素材版权不同。"
+              "美国上位职业的 BLS 典型入门学历为学士学位。节目编排岗位的内容、排期经验和授权以实际雇主为准。"
             ]
           },
           "id": "media-programming-directors.path.career-path-block.2",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8028,12 +8025,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "作品：完成本页五天30分钟排期表、A/B/D许可清单、C待确认项与周二日志差异；保留一次错误及修正，说明需授权人决定的异常处置，不提交真实观众资料、素材或合同。"
+              "密云区融媒体中心职责列有广播节目策划、录制、编排和安全播出。该例描述机构职责，个人分工须向单位核对。"
             ]
           },
           "id": "media-programming-directors.path.career-path-block.3",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8070,12 +8067,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格决策：O*NET 的认证与培训目录用于发现可能的证书与培训机会，但认证不等于播出许可、雇主任命或最终责任；证书、录用与授权是不同状态。"
+              "纸面练习《P 表：节目单版本与缺项》。 虚构节目单 V2 把 P1 排在 18:00，P2 排在 18:30，P3 的播出审查未完成。旧表把 P2 写为 18:15。记录更正和待审项。变式只把 P2 改成 18:45。"
             ]
           },
           "id": "media-programming-directors.path.career-path-block.6",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8084,12 +8081,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能力阶梯：进入媒体节目编排总监前应核对官方职业范围、真实雇主要求、教育或训练、所在地规则以及受监督任务，不能从相邻职业条件直接推断；晋级依据是可复核的排期与合规记录，不是保证年限。"
+              "先做原题和变式，保存第一稿。再到「常见问题与资料来源」打开「纸面练习参考解（完成后打开）」。复核能否追溯原值、待核原因和交接对象。"
             ]
           },
           "id": "media-programming-directors.path.career-path-block.7",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8120,7 +8117,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国27-2012父职业2025就业181,000至2035预计188,300，2025—2035增长4%、净增7,300；年均空缺12,100含替换。非单列节目编排总监、当前招聘或个人成功率。"
+              "职业前景与相关方向"
             ]
           },
           "id": "media-programming-directors.market-signals.market-signal-card.1",
@@ -8135,12 +8132,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业人数、增长率、净变化和年度空缺必须分别解释，不能合并成个人就业保证。"
+              "BLS 表 1.2（美国上位职业 27-2012）：2025 年约 181,000 个岗位，2035 年预计约 188,300 个，变化 4.0%，年均约 12,100 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "media-programming-directors.market-signals.market-signal-card.2",
           "source_refs": [
-            "source-pack-onet-localtrends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8254,7 +8251,7 @@
                 ]
               },
               {
-                "answer": "BLS 2025 年组合口径工资数据：中位 90,360 美元/年（43.44 美元/小时），10 分位 45,780、25 分位 62,670、75 分位 134,800、90 分位 198,540 美元/年；为 Producers and Directors（27-2012）组合口径，非单列本职业，分位不含个人到手收入。",
+                "answer": "2025 年 5 月美国上位职业 27-2012全国年薪中位数 90,360 美元，时薪中位数 43.44 美元。年薪第 10、25、50、75、90 分位依次为 45,780、62,670、90,360、134,800、198,540 美元。",
                 "id": "media-programming-directors.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.media-programming-directors.us-pay",
@@ -8263,12 +8260,13 @@
                 ]
               },
               {
-                "answer": "美国 Job Zone 4：通常要求四年制学士学位，并需相当的工作相关经验与在职训练；中国大陆按用人单位、播出许可与相关规则确定。",
+                "answer": "美国上位职业的 BLS 典型入门学历为学士学位。节目编排岗位的内容、排期经验和授权以实际雇主为准。 密云区融媒体中心职责列有广播节目策划、录制、编排和安全播出。该例描述机构职责，个人分工须向单位核对。",
                 "id": "media-programming-directors.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.media-programming-directors.education-path",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
@@ -8281,12 +8279,12 @@
                 ]
               },
               {
-                "answer": "美国 Producers and Directors（27-2012）组合口径 2024 年就业约 167,000 人，2034 年预计约 175,200 人，2024—2034 年预计快于平均（约 5%），年均职位空缺约 12,800 个（含替换需求）；为组合口径统计预测，不等于单列职业需求或个人录用概率。",
+                "answer": "BLS 表 1.2（美国上位职业 27-2012）：2025 年约 181,000 个岗位，2035 年预计约 188,300 个，变化 4.0%，年均约 12,100 个职位空缺，含人员替补。人数分别取整。",
                 "id": "media-programming-directors.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.media-programming-directors.outlook-transition",
                 "source_refs": [
-                  "source-pack-onet-localtrends"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8303,6 +8301,15 @@
                 "id": "media-programming-directors.faq.12",
                 "question": "页面使用边界是什么？",
                 "question_key": "career.faq.media-programming-directors.boundary"
+              },
+              {
+                "answer": "原题 P2 为 18:30，变式 18:45，均保留原表。P3 仍待审，节目单不等于批准播出。",
+                "id": "media-programming-directors.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.media-programming-directors.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -8532,33 +8539,32 @@
                 "url": "https://www.onetonline.org/link/localtraining/27-2012.03"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "BLS 2025 年组合口径工资数据 10/25/中位/75/90 分位及小时值。",
-                  "O*NET 页面标注为 Producers and Directors（27-2012）组合口径，非单列本职业。"
+                  "2025 年 5 月美国上位职业 27-2012全国年薪中位数 90,360 美元，时薪中位数 43.44 美元。年薪第 10、25、50、75、90 分位依次为 45,780、62,670、90,360、134,800、198,540 美元。"
                 ],
                 "evidence_type": "official wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "组合口径：为 Producers and Directors（27-2012）数据，非单列 27-2012.03；分位不含个人到手收入。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
                 "name": "O*NET 27-2012.03 全国工资（Producers and Directors 27-2012 口径；BLS 2025 年工资数据）",
-                "period": "2025 年工资数据；查阅 2026-09-25",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/27-2012.03"
+                "url": "https://www.onetonline.org/link/localwages/27-2012.00"
               },
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "2024 年组合口径就业约 167,000 人、2034 年预计约 175,200 人、2024—2034 年预计快于平均（约 5%）、年均空缺约 12,800 个。",
-                  "为组合口径，含替换需求，不等于单列职业净增岗位。"
+                  "本页就业预测采用 BLS 表 1.2。",
+                  "本页就业预测采用 BLS 表 1.2。"
                 ],
                 "evidence_type": "official employment projection",
                 "id": "source-pack-onet-localtrends",
                 "limitation": "组合口径：为 Producers and Directors（27-2012）数据，非单列本职业；含替换需求。",
                 "market": "美国",
-                "name": "O*NET 27-2012.03 全国就业趋势（Producers and Directors 27-2012 口径；BLS 2024—2034 年预测）",
-                "period": "2024—2034 年预测；查阅 2026-09-25",
+                "name": "BLS 表 1.2（美国上位职业 27-2012）：2025 年约 181,000 个岗位，2035 年预计约 188,300 个，变化 4.0%，年均约 12,100 个职位空缺，含人员替补。人数分别取整。",
+                "period": "职业资料或动态查询",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localtrends/27-2012.03"
@@ -8612,21 +8618,46 @@
                 "url": "https://www.nrta.gov.cn/art/2015/5/21/art_1588_43694.html"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "编排节目与活动报道 — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "监控排期、节目质量与日志 — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "指导协调制作人员与播出 — 25/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "BLS 表 1.2（美国上位职业 27-2012）：2025 年约 181,000 个岗位，2035 年预计约 188,300 个，变化 4.0%，年均约 12,100 个职位空缺，含人员替补。人数分别取整。",
+                  "美国上位职业的 BLS 典型入门学历为学士学位。节目编排岗位的内容、排期经验和授权以实际雇主为准。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "27-2012",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "密云区融媒体中心职责列有广播节目策划、录制、编排和安全播出。该例描述机构职责，个人分工须向单位核对。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "案例不代表全国职业工资、入行或招聘。",
+                "market": "中国大陆",
+                "name": "北京市密云区融媒体中心职责",
+                "period": "机构职责",
+                "publisher": "北京市密云区人民政府",
+                "scope": "具名工作实例",
+                "url": "https://www.bjmy.gov.cn/zwgk/jgzn/jgznqzfbm/rmtzx/"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "P 表：节目单版本与缺项",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -10504,7 +10535,7 @@
               "field": "name",
               "item": "media-programming-directors.source-register.published.1"
             },
-            "scope": "美国父职业2024—2034预测，非本职业单列。"
+            "scope": "2025–2035"
           },
           {
             "href": {
@@ -11019,7 +11050,7 @@
             "item": "media-programming-directors.source-register.published.1"
           }
         },
-        "note": "O*NET27-2012.03身份、任务、情境及ECA正确；2025全国五分位/小时均父职业原值已核保留。当前父职业就业181000至188300、4%、净增7300、年均12100，行业46/10/10/34；新增BLS OOH取得父职业四个细行业工资，非节目编排单列。Hot Technologies只为招聘技能线索，不证明AI效果。中国机构制作经营许可依2025修订规定，非个人证照/播出台许可/素材版权。共享FAQ/Hero与登记旧预测保护保留。"
+        "note": "O*NET 提供任务信息，OEWS 提供工资，BLS 表 1.2 提供就业预测。"
       },
       "work_context_block": "美国O*NET调查：100%每日用邮件、78%每日面对面讨论、82%每日在受控室内工作；57%通常每周超过40小时，49%每日有时间压力，56%认为精确极其重要。它们是受访者回答比例，不是中国工时或岗位保证。"
     },
@@ -11040,7 +11071,7 @@
     ],
     "path": "/zh/career/jobs/media-programming-directors",
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与人工复核",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -11058,103 +11089,91 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": "O*NET 全国工资页展示的 BLS 2025 年组合口径工资数据中位数。",
-        "display_value": "90,360 美元/年（约 43.44 美元/小时；组合口径）",
+        "derivation": null,
+        "display_value": "90,360 美元/年",
         "fact_id": "us-wage-median",
-        "market": "美国（Producers and Directors 27-2012 组合口径）",
-        "measure": "2025 年年薪中位数（组合口径）",
-        "occupation_scope": "Producers and Directors（O*NET 27-2012 组合口径，非单列 27-2012.03）",
-        "period": "2025 年工资数据；查阅 2026-09-25",
+        "market": "美国",
+        "measure": "上位职业 · 美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "27-2012",
+        "period": "2025-05",
         "source_refs": [
           "source-pack-onet-localwages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "167,000 人（组合口径）",
+        "display_value": "约 181,000 个岗位",
         "fact_id": "us-employment-2024",
-        "market": "美国（Producers and Directors 27-2012 组合口径）",
-        "measure": "2024 年就业规模（组合口径）",
-        "occupation_scope": "O*NET 27-2012 组合口径，非单列 27-2012.03",
-        "period": "2024；查阅 2026-09-25",
+        "market": "美国",
+        "measure": "上位职业 · 美国就业岗位（2025）",
+        "occupation_scope": "27-2012",
+        "period": "2025",
         "source_refs": [
-          "source-pack-onet-localtrends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "O*NET 全国就业趋势页：2024—2034 年预计快于平均（约 5%）。",
-        "display_value": "快于平均（约 5%，2024—2034；组合口径）",
+        "derivation": null,
+        "display_value": "4.0%",
         "fact_id": "us-growth",
-        "market": "美国（Producers and Directors 27-2012 组合口径）",
-        "measure": "就业增长预测（组合口径）",
-        "occupation_scope": "O*NET 27-2012 组合口径，非单列本职业",
-        "period": "2024—2034；查阅 2026-09-25",
+        "market": "美国",
+        "measure": "上位职业 · 美国预计就业变化（2025—2035）",
+        "occupation_scope": "27-2012",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-localtrends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "为预测期内的职位空缺估计，含替换需求。",
-        "display_value": "约 12,800 个/年（2024—2034；组合口径）",
+        "derivation": null,
+        "display_value": "年均约 12,100 个",
         "fact_id": "us-openings",
-        "market": "美国（Producers and Directors 27-2012 组合口径）",
-        "measure": "预计职位空缺（年均，组合口径）",
-        "occupation_scope": "O*NET 27-2012 组合口径，非单列本职业",
-        "period": "2024—2034；查阅 2026-09-25",
+        "market": "美国",
+        "measure": "上位职业 · 美国年均职位空缺（2025—2035）",
+        "occupation_scope": "27-2012",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-localtrends"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "58%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "媒体节目编排总监",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "bls-ep-2025-2035"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "节目排期与编排",
-      "内容审查与播出合规",
-      "版权许可与制作协调"
+      "媒体节目编排主管",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "上位职业 · 美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "上位职业 · 美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "上位职业 · 美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "上位职业 · 美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11168,17 +11187,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "媒体节目编排总监（O*NET 27-2012.03）负责广播/电视节目排期、内容审查与播出合规。美国 BLS 2025 年 Producers and Directors（27-2012）组合口径中位年薪 90,360 美元；2024 年组合口径就业约 167,000 人，2024—2034 年预计快于平均（约 5%）。含工作情境、风险与入行路径。"
+      "text": "了解媒体节目编排主管的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "媒体节目编排总监：工作内容、美国工资与入行 | 费马测试"
+      "text": "媒体节目编排主管做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "2564c2df333610fbe366feff7579caa05e53d1ab317b347c1f89c5a51e66b70f",
+  "source_content_sha256": "f2d338c9f3d3ebd5cc0abe1b4759de16a5470b79303e75f7365ea7cb6fb50b00",
   "subject": {
     "canonical_slug": "media-programming-directors",
-    "name": "媒体节目编排总监",
-    "summary": "媒体节目编排总监（O*NET27-2012.03）指导协调广播/电视节目排期与制作人员，规划节目和活动报道、监控质量并核对日志；素材许可、内容与现场判断的责任按机构授权和适用规则确定。"
+    "name": "媒体节目编排主管",
+    "summary": "媒体节目编排主管协调广播、电视等节目的排期与制作人员，核对播出时间、版本和内容待审事项。美国工资和就业数据采用制片人与导演上位职业。"
   }
 }

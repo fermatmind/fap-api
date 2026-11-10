@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a51-shanghai": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a51-yuzhou": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:exercise-trainers-and-group-fitness-instructors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:exercise-trainers-and-group-fitness-instructors.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "exercise-trainers-and-group-fitness-instructors.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "exercise-trainers-and-group-fitness-instructors.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23076,7 +23042,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "使用本页FT346虚构题：40分钟5+25+10阶段、最多3人和3把椅子、入口纸箱、A待核验/B膝痛/C当日胸痛/D缺资料；只核排程、四人状态与通道待确认，不真实带训或诊断。"
+              "用 GF31 的虚构场地、器材和报名记录写一页开场交接。区分可准备的事项、场馆批准和给学员的通知。"
             ]
           },
           "id": "exercise-trainers-and-group-fitness-instructors.quick-decision.fit-decision-checklist.2",
@@ -26621,7 +26587,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "全国（行业代理）"
+              "禹州教练与团操兼职"
             ]
           },
           "id": "exercise-trainers-and-group-fitness-instructors.china-salary.career-snapshot-primary-locale.49",
@@ -26635,12 +26601,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与中国大陆本职业精确对应的全国单职业月薪或年薪统计值；本页仅提供行业平均工资作为背景（非私营 129,447 元/年、私营 64,015 元/年，2025），不能换算为具体岗位月薪。"
+              "禹州尚立健身的健身教练岗列年薪 8 万–15 万元，含底薪、提成和奖金，相关证书优先。团操兼职教练单列，有带课经验优先，未给出具体金额。"
             ]
           },
           "id": "exercise-trainers-and-group-fitness-instructors.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "internal-rubric"
+            "a51-yuzhou"
           ],
           "type": "prose"
         },
@@ -26677,7 +26643,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他城市"
+              "上海教练学徒招聘"
             ]
           },
           "id": "exercise-trainers-and-group-fitness-instructors.china-salary.career-snapshot-primary-locale.53",
@@ -26691,12 +26657,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可核验的其他城市本职业月薪统计；不同城市与场馆的差异较大，需按工作地核对。"
+              "上海琪航健身在云端招聘会公告中列健身教练学徒，报价 5,000–8,000 元/月。职位说明列场地安全、器材维护和会员指导。该公告面向退役军人及随军家属。"
             ]
           },
           "id": "exercise-trainers-and-group-fitness-instructors.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a51-shanghai"
           ],
           "type": "prose"
         },
@@ -27443,13 +27409,13 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
@@ -29209,38 +29175,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料一：FT346虚构课程与限制",
-                  "仅纸面推演：课程40分钟、场地最多3人、椅子3把；入口被纸箱占用。场地规则：通道清空并由授权负责人确认前不带训。",
-                  "虚构A希望一般健身且材料无不适记录；B有当前膝痛且无专业意见；C报告当日胸痛；D未交健康限制信息。不得填补医学判断。",
-                  "虚构流程：A仍须完成授权人员入场核验；B/C不安排训练，通知授权负责人按场馆转介/应急流程处理；D待资料核验。此规则只供本题，不是通用医疗方案。",
-                  "排程模板只规定热身5分钟、主体25分钟、收尾10分钟；具体动作/强度须由合格指导者按个体情况确认。练习不让任何人试做。",
-                  "输出一页排程草稿和待确认清单；不收集真实会员姓名、病历或联系方式。",
-                  "材料、规则与人员均虚构，不代表真实场馆批准、安全判断或诊断。"
+                  "GF31：18:30 初学者团课，已确认 12 人。",
+                  "A 室限 14 人，现有 10 张检查合格的垫子。",
+                  "B 室限 10 人，有 12 张合格垫子。",
+                  "A 室与 B 室均在原时段可用。",
+                  "教练须按场馆设定为每位学员预留一张合格垫子。",
+                  "器材组 18:15 前可送两张备用垫，是否合格要以到场检查记录为准。",
+                  "场馆主管批准开课或改期，前台负责通知学员。",
+                  "仅核虚构记录，学员人数不含教练。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "材料二：FT346纸面交付要求",
-                  "写出40分钟阶段表、A/B/C/D状态及通道整改要求；区分本题规则结论、缺失信息和授权人须确认项。",
-                  "交付排程草稿与安全/授权待办清单；不得为四人直接写四周训练处方。"
+                  "为主管列两室的容量、合格垫数、当前状态和拟交接事项。",
+                  "单项变式：两张备用垫到达 A 室并通过检查，其余不变。另列变化行。",
+                  "写给前台一条消息草稿，并写发送条件。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "材料三：FT346参考交付（虚构）",
-                  "5+25+10=40分钟，阶段为热身5/主体25/收尾10，不补具体动作强度。A待入场核验，B/C不带训按给定规则交负责人，D待资料；不以最多3人且3椅作可开课批准。",
-                  "纸箱須清除并由负责人确认；材料未给确认记录，课程不执行。所有动作强度和参与条件由真实合格授权人员核。",
-                  "示例确认草稿：“负责人：FT346通道原有纸箱，A待核验，B/C依本题交您处理且不带训，D缺资料；拟5/25/10共40分钟，请核场地与人员条件。未回复前不开课，不填动作参数。”不实际发送。",
-                  "第5天仅新增给定纸箱已移走但负责人未确认、D仍缺资料；状态记录保持未开课，不造病情评估或参与者反馈。"
+                  "先独立交原题和变式。",
+                  "分别写场地容量、器材证据和开课状态。",
+                  "第七天到「常见问题与资料来源」打开「GF31 团课开场交接参考答案（完成第六天后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "材料四：边界说明",
-                  "本题只比较纸面信息处理，不进行带训、急救演练或治疗；真实紧急情况按所在地应急与医疗流程处理。"
+                  "纸面练习，无需开展课程。",
+                  "实际场地、器材和课程安排须走场馆流程。"
                 ]
               }
             ]
@@ -29249,7 +29214,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "虚构练习题面与参考交付",
+          "title": "GF31 虚构团课开场交接",
           "type": "cards"
         },
         {
@@ -29260,9 +29225,9 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "作品一：FT346输入与条件对照",
-                  "列40分钟/最多3人/3椅/通道及A/B/C/D给定状态和未决项。",
-                  "如另附真实公告，记录日期与资格要求；公告不是本题必需输入，不造在招样本。"
+                  "保留两版场地器材交接。",
+                  "写出容量和器材分别限制了什么。",
+                  "附前台消息草稿与发送条件。"
                 ]
               },
               {
@@ -29357,50 +29322,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天：读虚构规则",
-                  "列出通道、每人资料与授权三个条件，保留本题规则非医疗建议标签。"
+                  "第 1 天",
+                  "抄录报名人数与时间。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天：做40分钟排程表",
-                  "用5+25+10模板列阶段与待授权动作，不实际试做。"
+                  "第 2 天",
+                  "对照两个房间容量。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天：分列四人状态",
-                  "A待入场核验、B/C交负责人处理且不带训、D待资料；不得把无记录作已安全。"
+                  "第 3 天",
+                  "核已通过检查的垫数。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4天：复核场地条件",
-                  "发现纸箱占入口，记录整改及负责人确认要求；未确认不得开课。"
+                  "第 4 天",
+                  "列两室待解决事项。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5天：写虚构课程记录",
-                  "新增虚构反馈：纸箱已移走但负责人尚未确认，D仍缺资料。记录这些变化与未决项，不虚构已上课反应。"
+                  "第 5 天",
+                  "写给主管的交接及前台草稿。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天：自行复核或请他人挑战",
-                  "核时间合计、四人状态和授权是否一致；他人帮助可选，不必找真实同事。"
+                  "第 6 天",
+                  "交原题与变式，另列变化行。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天：写判断",
-                  "总结是否喜欢信息核对与沟通、需要补哪些能力；纸面体验不证明带训或医学判断资格。"
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「GF31 团课开场交接参考答案（完成第六天后再打开）」。 记一处修订。"
                 ]
               }
             ]
@@ -29545,14 +29510,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国仍有效且对应本职业的代表性招聘样本；雇主卡只是核对提示不是在招证明，另核日期、角色、认证监督与计酬。",
-              "招聘公告的学历、认证与经验条件须并列读取；某项可放宽不代表其他条件可替代。"
+              "禹州尚立健身的健身教练岗列年薪 8 万–15 万元，含底薪、提成和奖金，相关证书优先。团操兼职教练单列，有带课经验优先，未给出具体金额。 上海琪航健身在云端招聘会公告中列健身教练学徒，报价 5,000–8,000 元/月。职位说明列场地安全、器材维护和会员指导。该公告面向退役军人及随军家属。",
+              "两条均为历史招聘样本，当前在招状态未核。中国大陆全国健身教练细职业工资分布仍缺可比资料。"
             ]
           },
           "id": "exercise-trainers-and-group-fitness-instructors.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a51-yuzhou",
+            "a51-shanghai"
           ],
           "title": "如何读取招聘公告",
           "type": "notice"
@@ -31589,13 +31554,13 @@
                 ]
               },
               {
-                "answer": "本次所核国家统计局资料为行业门类口径，未取得与本职业精确对应的全国单职业工资统计值；本页以「文化、体育和娱乐业」城镇单位平均工资（2025 年非私营 129,447 元/年、私营 64,015 元/年）作行业代理，仅说明行业背景，不用行业均值或单条招聘报价替代职业工资。",
+                "answer": "禹州尚立健身的健身教练岗列年薪 8 万–15 万元，含底薪、提成和奖金，相关证书优先。团操兼职教练单列，有带课经验优先，未给出具体金额。 上海琪航健身在云端招聘会公告中列健身教练学徒，报价 5,000–8,000 元/月。职位说明列场地安全、器材维护和会员指导。该公告面向退役军人及随军家属。 两条均为历史招聘样本，当前在招状态未核。中国大陆全国健身教练细职业工资分布仍缺可比资料。",
                 "id": "exercise-trainers-and-group-fitness-instructors.faq.3",
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.exercise-trainers-and-group-fitness-instructors.q3",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "a51-yuzhou",
+                  "a51-shanghai"
                 ]
               },
               {
@@ -31661,14 +31626,21 @@
                 ]
               },
               {
-                "answer": "美国BLS精确SOC39-9031：2025就业388,400人、2035为416,900人，净增28,500人、变化7.3%（OOH整数7%）；2025—2035年均空缺68,000个，含更替，非净新增。 不代表AI因果或个人录用率；跨背景先核动作教学、监督与资格实际条件，FT346仅纸面探索不保证转岗。",
+                "answer": "美国 BLS 表 1.2 的 39-9031 行显示，2025 年就业约 388,400 人，2035 年预计约 416,900 人，增长 7.3%，年均岗位空缺约 68,000 个，含增长和替补。 转向运动生理或物理治疗时，另查目标岗位的教育、职责与执业要求。",
                 "id": "exercise-trainers-and-group-fitness-instructors.faq.10",
                 "question": "美国就业前景如何？转行需要补什么？",
                 "question_key": "career.faq.exercise-trainers-and-group-fitness-instructors.outlook-transition",
                 "source_refs": [
                   "bls-projections-2025-35",
-                  "bls-ooh-fitness"
+                  "adj-exercise-physiologists",
+                  "adj-physical-therapists"
                 ]
+              },
+              {
+                "answer": "原题 A 室人数容得下，缺两张合格垫子。B 室垫子够，容量少两人。两室都暂缓。原题请器材组确认送达和验收，并请主管准备改期备选。变式 A 室已有 12 张合格垫，可报主管批准开课。B 室容量不变。前台等主管批准后再发通知。自核人数、器材、审批和通知四项。",
+                "id": "exercise-trainers-and-group-fitness-instructors.faq.11",
+                "question": "GF31 团课开场交接参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.exercise-trainers-and-group-fitness-instructors.11"
               }
             ]
           },
@@ -31762,26 +31734,14 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI（英文）",
+                "entity": "MBTI 人格测评",
                 "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（英文）",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI（中文）",
-                "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five（中文）",
-                "id": "navigation-5",
+                "entity": "大五人格测评",
+                "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
@@ -31827,17 +31787,18 @@
                 "url": "https://www.onetonline.org/link/summary/39-9031.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "本轮直接核21任务、工作情境、软件、兴趣、JobZone3及教育；任务含应急急救包扎轻微慢性障碍处理、治疗娱乐体育活动。",
-                  "美国100%每日受控室内、86%持续接触、86%每日面对面；站立50%持续45%超过半时，工时43%少于40h29%40h29%更多。"
+                  "美国100%每日受控室内、86%持续接触、86%每日面对面；站立50%持续45%超过半时，工时43%少于40h29%40h29%更多。",
+                  "2025 年美国中位时薪 22.67 美元、年薪 47,160 美元。就业预测采用 BLS 表 1.2。"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
                 "limitation": "只适用于该职业描述；认证与执业要求须按所在地与场馆原文另行核验。",
                 "market": "美国",
                 "name": "O*NET OnLine：Exercise Trainers and Group Fitness Instructors 详细职业资料（39-9031.00）",
-                "period": "current page; accessed 2026-09-20",
+                "period": "2026 occupation profile; 2025 wages; 2025–2035 employment projections",
                 "publisher": "O*NET OnLine",
                 "scope": "exact occupation (SOC 39-9031)",
                 "url": "https://www.onetonline.org/link/details/39-9031.00"
@@ -31876,10 +31837,9 @@
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/fitness-trainers-and-instructors.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "美国BLS精确SOC39-9031：2025就业388,400人、2035为416,900人，净增28,500人、变化7.3%（OOH整数7%）；2025—2035年均空缺68,000个，含更替，非净新增。",
-                  "BLS典型高中或同等学历、相关经验None、短期在职训练；自雇14.8%，非工资统计覆盖比例。"
+                  "美国 BLS 表 1.2 的 39-9031 行显示，2025 年就业约 388,400 人，2035 年预计约 416,900 人，增长 7.3%，年均岗位空缺约 68,000 个，含增长和替补。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
@@ -32112,6 +32072,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "禹州尚立健身的健身教练岗列年薪 8 万–15 万元，含底薪、提成和奖金，相关证书优先。团操兼职教练单列，有带课经验优先，未给出具体金额。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a51-yuzhou",
+                "limitation": "两条均为历史招聘样本，当前在招状态未核。中国大陆全国健身教练细职业工资分布仍缺可比资料。",
+                "market": "中国大陆",
+                "name": "健身教练招聘样本",
+                "period": "2026-05-14",
+                "publisher": "禹州市人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.yuzhou.gov.cn/jczwgkbzhgfhml/031001/031001009/031001009008/031001009008002/20260514/fa985839-d8bd-48fe-ad75-5108318add1a.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "上海琪航健身在云端招聘会公告中列健身教练学徒，报价 5,000–8,000 元/月。职位说明列场地安全、器材维护和会员指导。该公告面向退役军人及随军家属。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a51-shanghai",
+                "limitation": "两条均为历史招聘样本，当前在招状态未核。中国大陆全国健身教练细职业工资分布仍缺可比资料。",
+                "market": "中国大陆",
+                "name": "健身教练招聘样本",
+                "period": "2024-11-11",
+                "publisher": "上海市退役军人事务局",
+                "scope": "recruitment_proxy",
+                "url": "https://tyjr.sh.gov.cn/shtyjrswj/tzgg/20241111/0606ae230aa9487ca3f5dfd43a4f44e6.html"
               }
             ]
           },
@@ -34972,6 +34962,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a51-yuzhou",
+            "posting-a51-shanghai"
+          ],
           "sources_note": {
             "$item": "exercise-trainers-and-group-fitness-instructors.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36883,7 +36877,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测评"
           },
           {
             "href": {
@@ -36893,27 +36887,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "exercise-trainers-and-group-fitness-instructors.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI（中文）"
-          },
-          {
-            "href": {
-              "$link": "exercise-trainers-and-group-fitness-instructors.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five（中文）"
+            "label": "大五人格测评"
           }
         ]
       },
@@ -37124,7 +37098,7 @@
       },
       {
         "derivation": null,
-        "display_value": "增长7.3%（2025—2035；OOH整数7%），净增28,500人",
+        "display_value": "预计增长 7.3%（2025–2035 年）",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "美国就业变化",
@@ -37301,6 +37275,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "禹州尚立健身的健身教练岗列年薪 8 万–15 万元，含底薪、提成和奖金，相关证书优先。团操兼职教练单列，有带课经验优先，未给出具体金额。",
+        "fact_id": "posting-a51-yuzhou",
+        "market": "中国大陆",
+        "measure": "岗位招聘记录",
+        "occupation_scope": "健身教练招聘样本",
+        "period": "2026-05-14",
+        "source_refs": [
+          "a51-yuzhou"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "上海琪航健身在云端招聘会公告中列健身教练学徒，报价 5,000–8,000 元/月。职位说明列场地安全、器材维护和会员指导。该公告面向退役军人及随军家属。",
+        "fact_id": "posting-a51-shanghai",
+        "market": "中国大陆",
+        "measure": "岗位招聘记录",
+        "occupation_scope": "健身教练招聘样本",
+        "period": "2024-11-11",
+        "source_refs": [
+          "a51-shanghai"
+        ]
       }
     ]
   },
@@ -37360,7 +37358,7 @@
       "text": "健身训练师与团体健身指导"
     }
   },
-  "source_content_sha256": "79e7d23e7b116eacf08b5001aea89136ce8818d281e4ee253db0b76043d34a13",
+  "source_content_sha256": "38fa784ccb103cc54c15bb94a6efb19e1bf5eaeb6d54b6f68c751d0ea87b04c1",
   "subject": {
     "canonical_slug": "exercise-trainers-and-group-fitness-instructors",
     "name": "健身训练师与团体健身指导",

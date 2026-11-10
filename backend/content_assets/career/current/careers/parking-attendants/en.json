@@ -170,6 +170,9 @@
       "item:parking-attendants.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:parking-attendants.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:parking-attendants.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12476,6 +12479,21 @@
             "source-pack-onet-summary"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two same-color cars have different claim-ticket suffixes. A key tag lacks a ticket number. Identify the bay and ticket evidence to check with the shift lead before return."
+            ]
+          },
+          "id": "parking-attendants.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Reconcile a parking vehicle handover",
+          "type": "notice"
         }
       ]
     },
@@ -14877,6 +14895,13 @@
         "id": "parking-attendants.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "parking-attendants.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15144,7 +15169,7 @@
       "text": "Parking attendant: work content, wages, and vehicle handoff boundaries."
     }
   },
-  "source_content_sha256": "3d69123dc0000b9e144a7ecb75fc329c078b9388286be421475c54036fc8f2fa",
+  "source_content_sha256": "14e788b1785d0f43adf112c12157d75b2573d650c01cfb432ac78355ce6b8f02",
   "subject": {
     "canonical_slug": "parking-attendants",
     "name": "Parking attendant.",

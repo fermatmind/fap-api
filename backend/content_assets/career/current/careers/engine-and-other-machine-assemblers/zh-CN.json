@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a39-jac": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a39-laiyang": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:engine-and-other-machine-assemblers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:engine-and-other-machine-assemblers.sources.source-card.1": {
         "status": "mapped"
@@ -14156,36 +14162,12 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
         "ref": {
@@ -14220,20 +14202,8 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
         "ref": {
@@ -14596,52 +14566,20 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
         "ref": {
@@ -20183,60 +20121,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23076,7 +22974,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用一次纸面演练任务验证：给你一份虚构装配图与工艺摘要、物料清单与参数要求，看能否列出装配顺序、对中与扭矩要点、检验项与记录结构。"
+              "用本页的虚构装配记录写一页交接，比较版本、复核栏和序列号，再写每项状态与接手人。"
             ]
           },
           "id": "engine-and-other-machine-assemblers.quick-decision.fit-decision-checklist.2",
@@ -26626,12 +26524,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "招聘报价（不可替代）"
+              "大陆招聘样本"
             ]
           },
           "id": "engine-and-other-machine-assemblers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a39-jac",
+            "a39-laiyang"
           ],
           "type": "prose"
         },
@@ -26640,12 +26539,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：不以单条招聘报价替代职业工资。"
+              "江淮汽车发动机事业部校招列动力总成装配工 45 人，面向 2026 届大专或高职毕业生。职责含发动机或变速箱装配、冷/热试、尺寸测量和质量管控。公告列薪资构成，未列金额。 莱阳招聘会公告列山东华源莱动内燃机有限公司柴油机装配工，标示 2,100–5,000 元/月。公告将柴油机调试工单列。"
             ]
           },
           "id": "engine-and-other-machine-assemblers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a39-jac",
+            "a39-laiyang"
           ],
           "type": "prose"
         },
@@ -26718,7 +26618,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET OnLine：Engine and Other Machine Assemblers（51-2031.00）｜https://www.onetonline.org/link/summary/51-2031.00；O*NET 全国工资五分位（51-2031.00）｜https://www.onetonline.org/link/localwages/51-2031.00；BLS 职业投影（2024—2034）｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "O*NET OnLine：Engine and Other Machine Assemblers（51-2031.00）｜https://www.onetonline.org/link/summary/51-2031.00；O*NET 全国工资五分位（51-2031.00）｜https://www.onetonline.org/link/localwages/51-2031.00；BLS 职业投影（2025—2035）｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "engine-and-other-machine-assemblers.us-salary.career-snapshot-secondary-locale.8",
@@ -26930,12 +26830,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2,100个/年"
+              "约 2,100 个/年"
             ]
           },
           "id": "engine-and-other-machine-assemblers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27390,13 +27290,13 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
@@ -28327,7 +28227,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用一次纸面演练任务做完整闭环：读虚构装配图与工艺、列出装配顺序与扭矩要点、写出检验项与记录结构。"
+              "用本页三条虚构记录写一页交接。比对版本、复核栏和序列号，写出待核依据和接手人，再处理只改动复核栏的变式。"
             ]
           },
           "id": "engine-and-other-machine-assemblers.fit.personality-fit-block.54",
@@ -29156,37 +29056,31 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料一：虚构装配图与工艺摘要",
-                  "给出装配范围、关键尺寸与工艺要求，作为本次练习输入。",
-                  "标注需核对项、缺失项与版本差异。",
-                  "列出可能影响装配质量的条件与理由。",
-                  "说明练习使用虚构材料，不代表任何真实产品或企业。",
-                  "可检查产出：装配顺序、对中与扭矩要点、记录结构。",
-                  "说明工艺与安全边界，缺件、参数不符或安全隐患须停止并说明。"
+                  "E21：装配图标 R3，随工物料单标 R2。",
+                  "E24：检验记录齐全，复核状态栏为空。",
+                  "T8：测试单序列号 M42，工单序列号 M24。",
+                  "题设分工：工艺负责人核版本，质检负责人核记录与签批，测试负责人核测试单归属。",
+                  "单项变式：E24 的复核栏改为「有复核记录」。其余记录保持原样。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "材料二：扭矩与检验要求摘录（虚构）",
-                  "给出扭矩参数与检验项要点。",
-                  "练习产出：写出本次装配与检验的依据来源与适用范围。"
+                  "交一页交接，按记录列依据、状态与接手人，写变式变化。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "材料三：物料与参数表（虚构）",
-                  "给出零件清单与关键参数，含一处缺件与一处参数矛盾。",
-                  "练习产出：标出缺件与矛盾项，并写出核实与补领要求。",
-                  "练习产出：按工艺整理关键参数与检验项。"
+                  "先独立完成",
+                  "第七天到「常见问题与资料来源」打开「发动机装配交接参考答案（完成第六天后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "材料四：交付与边界说明",
-                  "列出参考交付物与不得越界的范围（不涉及真实装配、质量判定与安全操作）。"
+                  "练习边界",
+                  "只读纸面记录，将待核项交给题设负责人。"
                 ]
               }
             ]
@@ -29195,7 +29089,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "入门案例材料",
+          "title": "虚构发动机装配交接",
           "type": "cards"
         },
         {
@@ -29214,9 +29108,9 @@
               {
                 "id": "independent-recheck",
                 "values": [
-                  "作品二：装配工序与参数记录",
-                  "对一次虚构装配写出工序、对中与扭矩参数记录。",
-                  "展示能发现缺件与参数问题并在边界处主动说明。"
+                  "作品二：装配交接",
+                  "附上一页纸面交接，保留原题记录和 E24 变式。",
+                  "标清每项依据、状态和接手人。"
                 ]
               },
               {
@@ -29303,50 +29197,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天：读一张装配图",
-                  "抄录关键尺寸与工序要点并写出适用条件与不确定处。"
+                  "第 1 天",
+                  "抄录编号。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天：做一次物料核对",
-                  "用虚构清单核对零件型号与数量，标出缺件与错件。"
+                  "第 2 天",
+                  "比较版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天：写一次装配工序",
-                  "按顺序写出部件装配与对中步骤并标出关键控制点。"
+                  "第 3 天",
+                  "核复核状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天：做一次扭矩记录",
-                  "按工艺写出扭矩值与紧固顺序并说明记录要求。"
+                  "第 4 天",
+                  "对照序列号。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天：做一次检验清单",
-                  "对一次试运转写出检验项与合格判据。"
+                  "第 5 天",
+                  "为待核项找接手人。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天：做两张变体",
-                  "分别改变一处缺件情形与一处参数变更，写清影响与调整项。"
+                  "第 6 天",
+                  "独立交一页，包含原题和变式变化。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天：复盘停止条件",
-                  "总结在哪些情况下必须停止并说明，形成一页复盘记录。"
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「发动机装配交接参考答案（完成第六天后再打开）」。 记录一处修订。"
                 ]
               }
             ]
@@ -29355,7 +29249,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "七天低成本职业体验",
+          "title": "七天纸面练习",
           "type": "timeline"
         },
         {
@@ -29363,20 +29257,16 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第 1 天：能否准确找出图纸与工艺的适用范围与例外，而不是只抄关键词。",
-              "第 2 天：能否把物料核对拆成可核对的清单并标出缺件与错件。",
-              "第 3 天：能否把装配工序写成可执行、可复核的步骤。",
-              "第 4 天：能否按工艺写清扭矩值与紧固顺序，而不凭手感。",
-              "第 5 天：能否把检验项与合格判据写完整，不遗漏关键项。",
-              "第 6 天：能否判断缺件或参数变更的影响范围并列出必须核实的项目。",
-              "第 7 天：能否写出明确的停止与说明条件，并说明由谁确认。"
+              "第六天独立交件。",
+              "第七天到「常见问题与资料来源」打开「发动机装配交接参考答案（完成第六天后再打开）」。",
+              "复查版本、复核、序列号与接手人。"
             ]
           },
           "id": "engine-and-other-machine-assemblers.path.seven-day-decision.1",
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "第七天如何判断是否继续",
+          "title": "练习结项",
           "type": "list"
         },
         {
@@ -30822,12 +30712,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "变化反映制造业装配需求，但预测不等于实际结果。"
+              "美国 BLS 表 1.2 的发动机及其他机器装配工（51-2031）就业从 2025 年约 33,500 人预计降至 2035 年约 27,800 人（-17.0%），年均空缺约 2,100 个，含替补。人数分别取整。"
             ]
           },
           "id": "engine-and-other-machine-assemblers.market-signals.market-signal-card.11",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -30906,7 +30796,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "engine-and-other-machine-assemblers.market-signals.market-signal-card.17",
@@ -30976,7 +30866,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "33,500人"
+              "2025 年约 33,500 人，2035 年预计约 27,800 人"
             ]
           },
           "id": "engine-and-other-machine-assemblers.market-signals.market-signal-card.22",
@@ -31522,13 +31412,13 @@
                 ]
               },
               {
-                "answer": "美国 O*NET-SOC 51-2031.00「Engine and Other Machine Assemblers」，为「本职业口径」（非更宽组口径）。",
+                "answer": "美国工资为 BLS OEWS 2025 年 5 月的 51-2031 职业估计。就业预测采用 BLS 表 1.2 的同一职业行，其他装配工种的统计另核。",
                 "id": "engine-and-other-machine-assemblers.faq.3",
                 "question": "美国统计口径是什么？",
                 "question_key": "career.faq.engine-and-other-machine-assemblers.q3",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "bls-projections-2025-35",
+                  "onet-summary"
                 ]
               },
               {
@@ -31542,20 +31432,23 @@
                 ]
               },
               {
-                "answer": "2024 年就业约 38,400 人，2024—2034 年预计变化为 Decline（-1% 或更低），预计空缺约 2,800 个；空缺含增长与替补，不等于个人录用概率。",
+                "answer": "美国 BLS 表 1.2 的发动机及其他机器装配工（51-2031）就业从 2025 年约 33,500 人预计降至 2035 年约 27,800 人（-17.0%），年均空缺约 2,100 个，含替补。人数分别取整。",
                 "id": "engine-and-other-machine-assemblers.faq.5",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.engine-and-other-machine-assemblers.q5",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "本次所核国家统计局资料为行业门类口径，未取得与本职业精确对应的全国单职业工资统计值；本页以「制造业」城镇单位平均工资（2025 年非私营 113,594 元/年、私营 76,055 元/年）作行业代理，仅能说明行业背景，不用行业均值或单条招聘报价替代职业工资。",
+                "answer": "江淮汽车发动机事业部校招列动力总成装配工 45 人，面向 2026 届大专或高职毕业生。职责含发动机或变速箱装配、冷/热试、尺寸测量和质量管控。公告列薪资构成，未列金额。 莱阳招聘会公告列山东华源莱动内燃机有限公司柴油机装配工，标示 2,100–5,000 元/月。公告将柴油机调试工单列。 公告只说明两家单位的岗位条件。大陆单职业工资中位数仍缺可比资料。",
                 "id": "engine-and-other-machine-assemblers.faq.6",
                 "question": "中国大陆的工资能查到吗？",
-                "question_key": "career.faq.engine-and-other-machine-assemblers.us-pay"
+                "question_key": "career.faq.engine-and-other-machine-assemblers.us-pay",
+                "source_refs": [
+                  "a39-jac",
+                  "a39-laiyang"
+                ]
               },
               {
                 "answer": "美国通常需高中文凭或同等学历并接受在职训练，部分岗位要求中学后证书；O*NET 51-2031.00 属 Job Zone 1-2，学历调查以高中（64%）、中学后证书（13%）与低于高中（11%）为主。中国大陆多要求机械、机电或相关专业背景并具备装配经验。",
@@ -31580,6 +31473,12 @@
                 "id": "engine-and-other-machine-assemblers.faq.10",
                 "question": "这些数字能用来选专业或求职吗？",
                 "question_key": "career.faq.engine-and-other-machine-assemblers.outlook-transition"
+              },
+              {
+                "answer": "E21 的物料单 R2 与图纸 R3 不一致，保留两份记录，交工艺负责人核版本。E24 的检验复核栏为空，交质检负责人，状态待核。T8 的测试单序列号与工单不一致，交测试负责人核对归属。变式 E24 有复核记录，送质检做下一步签批，不把复核记录当整机放行；E21 和 T8 处置不变。自核四项：版本差、复核状态、序列号、两版交接与权限。",
+                "id": "engine-and-other-machine-assemblers.faq.11",
+                "question": "发动机装配交接参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.engine-and-other-machine-assemblers.11"
               }
             ]
           },
@@ -31673,23 +31572,11 @@
                 "entity": "MBTI（英文）",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Big Five（英文）",
                 "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI（中文）",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（中文）",
-                "id": "navigation-5",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
@@ -31720,7 +31607,8 @@
               {
                 "accessed_at": "2026-09-20",
                 "details": [
-                  "用于核对本职业的任务、范围与准备层级；工资与就业为本职业口径。"
+                  "用于核对本职业的任务、范围与准备层级；工资与就业为本职业口径。",
+                  "美国 2025 年中位时薪 25.82 美元、年薪 53,710 美元。就业预测见 BLS 表 1.2 的 51-2031 行。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31748,16 +31636,16 @@
                 "url": "https://www.onetonline.org/link/details/51-2031.00"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对 2024 基期就业、2024—2034 变化与预计空缺。"
+                  "美国 BLS 表 1.2 的发动机及其他机器装配工（51-2031）就业从 2025 年约 33,500 人预计降至 2035 年约 27,800 人（-17.0%），年均空缺约 2,100 个，含替补。人数分别取整。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
                 "limitation": "预测不等于实际结果；空缺含增长与替补，不等于录用概率。",
                 "market": "美国",
-                "name": "BLS：2024—2034 职业投影（Engine and other machine assemblers）",
-                "period": "2024—2034 projections; accessed 2026-09-20",
+                "name": "BLS 表 1.2：发动机及其他机器装配工 51-2031",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "official projections",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31823,6 +31711,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "江淮汽车发动机事业部校招列动力总成装配工 45 人，面向 2026 届大专或高职毕业生。职责含发动机或变速箱装配、冷/热试、尺寸测量和质量管控。公告列薪资构成，未列金额。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a39-jac",
+                "limitation": "仅说明该公告。",
+                "market": "中国大陆",
+                "name": "发动机装配招聘样本",
+                "period": "2026-04-17",
+                "publisher": "安徽电子信息职业技术学院",
+                "scope": "recruitment_proxy",
+                "url": "https://www.ahdy.edu.cn/zsjy/2026/0417/c943a44492/page.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "莱阳招聘会公告列山东华源莱动内燃机有限公司柴油机装配工，标示 2,100–5,000 元/月。公告将柴油机调试工单列。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a39-laiyang",
+                "limitation": "仅说明该公告。",
+                "market": "中国大陆",
+                "name": "发动机装配招聘样本",
+                "period": "2025-03-20",
+                "publisher": "莱阳市人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.laiyang.gov.cn/art/2025/3/20/art_111048_2979210.html"
               }
             ]
           },
@@ -34318,7 +34236,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet",
+            "id": "onet-work-context",
             "label": {
               "$link": "engine-and-other-machine-assemblers.risk.career-risk-cards.7",
               "block": "risk",
@@ -34683,6 +34601,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a39-jac",
+            "posting-a39-laiyang"
+          ],
           "sources_note": {
             "$item": "engine-and-other-machine-assemblers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34835,7 +34757,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "就业 · 年均职位空缺",
+            "指标": "2025–2035 年均岗位空缺",
             "数值": {
               "$item": "engine-and-other-machine-assemblers.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -35209,6 +35131,7 @@
         "heading": "发动机和其他机器装配工的前景如何？可以转向哪些相关职业？",
         "outlook_evidence": [
           {
+            "fact_ref": "us-growth-2025-2035",
             "geography": {
               "$item": "engine-and-other-machine-assemblers.market-signals.market-signal-card.9",
               "block": "market-signals",
@@ -35246,6 +35169,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "engine-and-other-machine-assemblers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35254,6 +35178,7 @@
             }
           },
           {
+            "fact_ref": "us-employment-2025",
             "geography": {
               "$item": "engine-and-other-machine-assemblers.market-signals.market-signal-card.16",
               "block": "market-signals",
@@ -35291,6 +35216,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "engine-and-other-machine-assemblers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36591,7 +36517,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测评"
           },
           {
             "href": {
@@ -36601,27 +36527,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "engine-and-other-machine-assemblers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI（中文）"
-          },
-          {
-            "href": {
-              "$link": "engine-and-other-machine-assemblers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five（中文）"
+            "label": "大五人格测评"
           }
         ]
       },
@@ -36819,36 +36725,36 @@
       },
       {
         "derivation": null,
-        "display_value": "约 38,400 人（2024）",
+        "display_value": "约 33,500 人",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "美国就业规模",
-        "occupation_scope": "发动机和其他机器装配工（O*NET-SOC 51-2031.00）",
-        "period": "2024",
+        "occupation_scope": "美国发动机及其他机器装配工（51-2031）",
+        "period": "2025",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline（-1% 或更低，2024—2034，BLS 投影）",
+        "display_value": "-17.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "美国就业增长",
-        "occupation_scope": "发动机和其他机器装配工（O*NET-SOC 51-2031.00）",
-        "period": "2024—2034",
+        "occupation_scope": "美国发动机及其他机器装配工（51-2031）",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 2,800 个（2024—2034，BLS 投影）",
+        "display_value": "约 2,100 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "美国预计空缺",
-        "occupation_scope": "发动机和其他机器装配工（O*NET-SOC 51-2031.00）",
-        "period": "2024—2034",
+        "occupation_scope": "美国发动机及其他机器装配工（51-2031）",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -37008,6 +36914,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "江淮汽车发动机事业部校招列动力总成装配工 45 人，面向 2026 届大专或高职毕业生。职责含发动机或变速箱装配、冷/热试、尺寸测量和质量管控。公告列薪资构成，未列金额。",
+        "fact_id": "posting-a39-jac",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "发动机装配招聘样本",
+        "period": "2026-04-17",
+        "source_refs": [
+          "a39-jac"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "莱阳招聘会公告列山东华源莱动内燃机有限公司柴油机装配工，标示 2,100–5,000 元/月。公告将柴油机调试工单列。",
+        "fact_id": "posting-a39-laiyang",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "发动机装配招聘样本",
+        "period": "2025-03-20",
+        "source_refs": [
+          "a39-laiyang"
+        ]
       }
     ]
   },
@@ -37060,14 +36990,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "美国 O*NET-SOC 51-2031.00：May 2025 中位年薪 53,710 美元、中位时薪 25.82 美元；2024 年就业约 38,400 人，2024—2034 年预计 Decline；含训练与资格边界与中国大陆行业代理说明。"
+      "text": "了解发动机及其他机器装配工的工作、工资口径与就业预测，再用虚构工单练习装配交接。"
     },
     "title": {
       "availability": "available",
       "text": "发动机和其他机器装配工：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "b2f3c84be43c5eac6df64e6d9c47fb7831ae7933ccb08486c3f1e1aab3ce800f",
+  "source_content_sha256": "8a5e3e12b10f1c472bb6efdcca057292c2e8e0554f52741ea622f015365ec408",
   "subject": {
     "canonical_slug": "engine-and-other-machine-assemblers",
     "name": "发动机和其他机器装配工",

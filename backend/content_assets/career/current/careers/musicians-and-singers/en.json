@@ -161,6 +161,9 @@
       "item:musicians-and-singers.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:musicians-and-singers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:musicians-and-singers.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13256,6 +13259,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The second piece is marked as transposed, but the backing file gives no key. Write what to verify with the music lead and what to record before the run-through."
+            ]
+          },
+          "id": "musicians-and-singers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check a rehearsal handover",
+          "type": "notice"
         }
       ]
     },
@@ -15721,6 +15739,13 @@
         "id": "musicians-and-singers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "musicians-and-singers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15950,7 +15975,7 @@
       "text": "Musicians and Singers"
     }
   },
-  "source_content_sha256": "b57fcc29a6cd0634227dd048d8fee8888f4d223d00b27dfdff4fafc9976ac4ab",
+  "source_content_sha256": "fd8b7c5f064f91b8a21ff63cd00362d5ddd04e2707d6e0c6063fe6fbfe147330",
   "subject": {
     "canonical_slug": "musicians-and-singers",
     "name": "Musicians and Singers",

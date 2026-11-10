@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a29-ankang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a29-changde": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -1605,7 +1611,7 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1677,7 +1683,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26107,12 +26113,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Nationwide pretax annual averages for non-private/private manufacturing in 2025: CNY 113,594/76,055; electricity, heat, gas, and water: CNY 160,897/66,451. Broad proxies based on the employer’s actual industry, rather than occupational medians or take-home pay."
+              " These are past notices. A comparable mainland occupational median remains unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "nbs"
+            "a29-ankang",
+            "a29-changde"
           ],
           "type": "prose"
         },
@@ -26221,12 +26228,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Do not substitute industry average wages or a single recruitment offer for wages in this occupation."
+              "Use the notices to compare duties and pay terms for individual posts."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "nbs"
+            "a29-ankang",
+            "a29-changde"
           ],
           "type": "prose"
         }
@@ -28978,25 +28986,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Material one: fictional equipment materials and work order",
-                  "Provides tag numbers, circuit diagram versions, and repair requirements as exercise inputs.",
-                  "Exercise output: list equipment, versions, and safety conditions."
+                  "Paper exercise inputs",
+                  "Fictional unit L8 on a paper ticket. The report describes two intermittent stops in the morning. A connector replacement is recorded, with one no-load result.",
+                  "The exercise requires a no-load record, a load record and return confirmation on the same ticket. The load and return fields are blank.",
+                  "The maintenance lead arranges rechecks, and the production lead confirms return. The cause is not supplied. Do not operate equipment."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Material two: instrument and permitted tolerance excerpts",
-                  "Provides instrument ranges, reference instrument status, and permitted tolerances.",
-                  "Exercise output: state the source of measurement criteria and reasons for range selection."
+                  "What to submit",
+                  "Write a one-page ticket separating the fault report, repair, results and missing items. Record return status.",
+                  "Name the handoff owners. Do not infer the stop cause from the replacement."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Material three: measurement data table (fictional)",
-                  "Provides successive readings and measurement conditions, including one out-of-tolerance result and one missing condition.",
-                  "Exercise output: mark out-of-tolerance items and missing conditions, and state retest requirements."
+                  "Finish your own answer first",
+                  "Open “Equipment recheck reference (open after day six)” under FAQs and sources.",
+                  "Use the checklist to record one difference and one correction."
                 ]
               },
               {
@@ -29025,50 +29034,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: read a safety or calibration provision",
-                  "Copy an applicable electrical safety or calibration provision, stating its scope and uncertainties."
+                  "Day 1",
+                  "Copy the unit ID and fault report."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: organize equipment and version lists",
-                  "Use fictional equipment materials to organize tag numbers, circuit diagram versions, and component lists."
+                  "Day 2",
+                  "List documented work."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: compare against criteria",
-                  "Compare each reading against fictional permitted tolerances and mark out-of-tolerance items."
+                  "Day 3",
+                  "Check recheck evidence against the ticket."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: write a troubleshooting record",
-                  "Write a troubleshooting record in the order materials–hypothesis–verification–conclusion."
+                  "Day 4",
+                  "Record owners and return status."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: organize a register",
-                  "Organize items, measured values, replaced components, and outstanding issues into register entries."
+                  "Day 5",
+                  "Finish the paper handoff."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: create two variants",
-                  "Change one permitted tolerance and one reading separately, clearly stating the scope of impact and retest items."
+                  "Day 6: finish your own answer",
+                  "Check whether someone could read your handoff on its own before opening the reference."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: review stop conditions",
-                  "Summarize conditions requiring stopping and escalation in a one-page retrospective record."
+                  "Day 7: open the reference and review",
+                  "Open “Equipment recheck reference (open after day six)” under FAQs and sources. Record one difference and correction, then decide whether to continue or pause."
                 ]
               }
             ]
@@ -29087,13 +29096,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: can you accurately identify the provision's scope and exceptions rather than merely copy keywords?",
+              "You can finish a one-page handoff and separate verified facts, open checks and approvals.",
               "Day 2: can you clearly verify equipment and versions and mark unresolved items?",
-              "Day 3: can you explain the sources of criteria, range selection, and calibration conditions?",
+              "Note which paper step takes most effort. Ask the employer about actual work demands.",
               "Day 4: can you write the troubleshooting process as a record that can be rechecked rather than a conclusion-only description?",
               "Day 5: can you record measured values and replaced components without deleting data?",
               "Day 6: can you assess the scope of a change's impact and list items requiring retesting?",
-              "Day 7: can you state explicit stop and escalation conditions and explain who confirms them?"
+              "On day seven, check your handoff against the collapsed reference. Repeat if a critical item is missing. Ask the employer about training and actual responsibilities."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30978,21 +30987,21 @@
           "data": {
             "entries": [
               {
-                "answer": "Repair, test, adjust, or install commercial and industrial electronic equipment such as industrial controls, instruments, transmitters, and antennas: read drawings and manuals, measure circuits and instruments with instruments, replace or calibrate components, perform preventive maintenance and keep records, then retest and submit for confirmation by an authorized role that equipment may resume operation.",
+                "answer": "Check fault records, inspect commercial equipment or industrial controls under a work order, and document repairs, rechecks and return status. Ask which equipment and decisions are within the role.",
                 "id": "actors.faq.1",
                 "question": "What do electrical and electronics repairers, commercial and industrial equipment mainly do?",
                 "question_key": "career.faq.electrical-and-electronics-repairers-commercial-and-industrial-equipment.1",
                 "source_refs": [
-                  "onet"
+                  "a29-repair-onet"
                 ]
               },
               {
-                "answer": "This occupation focuses on control and instrumentation systems in commercial and industrial equipment; electricians focus on installing building electrical systems and code compliance; engineering technologists and technicians focus on design support and test records under engineering supervision. Levels of responsibility and entry requirements differ.",
+                "answer": "Industrial repair focuses on faults and restoration of existing equipment. Electricians may focus on wiring or supply infrastructure. Engineering technologists may also support verification or prototypes. Check actual duties and permissions.",
                 "id": "actors.faq.2",
                 "question": "How does it differ from electricians and engineering technologists?",
                 "question_key": "career.faq.electrical-and-electronics-repairers-commercial-and-industrial-equipment.2",
                 "source_refs": [
-                  "onet"
+                  "a29-repair-onet"
                 ]
               },
               {
@@ -31005,31 +31014,31 @@
                 ]
               },
               {
-                "answer": "BLS OES/O*NET reports a nationwide median annual wage of USD 74,090 in 2025 (median hourly wage USD 35.62); the five percentile values are USD 46,840/60,040/74,090/88,710/105,590.",
+                "answer": "The May 2025 U.S. annual median for this occupation was $74,090.",
                 "id": "actors.faq.4",
                 "question": "What are U.S. wages?",
                 "question_key": "career.faq.electrical-and-electronics-repairers-commercial-and-industrial-equipment.4",
                 "source_refs": [
-                  "onet"
+                  "a29-bls"
                 ]
               },
               {
-                "answer": "O*NET/BLS reports approximately 61,100 workers in 2024, with projected decline (-1% or lower) from 2024–2034, but still approximately 4,700 annual openings, mainly from replacement needs.",
+                "answer": "BLS projects U.S. SOC 49-2094 to go from about 65,500 jobs in 2025 to 65,700 in 2035 (+0.3%), with about 4,700 annual openings including replacements.",
                 "id": "actors.faq.5",
                 "question": "What is the U.S. employment outlook?",
                 "question_key": "career.faq.electrical-and-electronics-repairers-commercial-and-industrial-equipment.5",
                 "source_refs": [
-                  "onet"
+                  "a29-bls"
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics materials checked in this round cover only industries and broad personnel categories; nationwide occupation-specific wage percentiles exactly matching this occupation were not obtained. This page records insufficient evidence and does not substitute industry averages or single recruitment offers.",
+                "answer": "Five posts at CNY 3,000–5,000 per month for inspection and mechanical and basic electrical repairs on automation equipment. One broader plant maintenance post with an advertised CNY 4,500–6,000 monthly range, negotiable. Duties included power distribution, equipment and utilities. These are past notices. A comparable mainland occupational median remains unavailable.",
                 "id": "actors.faq.6",
                 "question": "Can wages for mainland China be found?",
                 "question_key": "career.faq.electrical-and-electronics-repairers-commercial-and-industrial-equipment.6",
                 "source_refs": [
-                  "onet",
-                  "nbs"
+                  "a29-ankang",
+                  "a29-changde"
                 ]
               },
               {
@@ -31067,6 +31076,15 @@
                 "question_key": "career.faq.electrical-and-electronics-repairers-commercial-and-industrial-equipment.10",
                 "source_refs": [
                   "onet"
+                ]
+              },
+              {
+                "answer": "Log the two intermittent stops on L8. The connector replacement and one no-load result are recorded. The load result and return confirmation are missing, so return remains pending. The cause is unconfirmed. The maintenance lead arranges the missing recheck record. The production lead confirms return after reviewing the complete ticket. Check four items: original fault, recorded repair and no-load result, missing load and return evidence, and ownership and handoff. Count each complete item. The exercise is fictional and the source provides job context.",
+                "id": "actors.faq.11",
+                "question": "Equipment recheck reference (open after day six)",
+                "question_key": "career.faq.electrical-and-electronics-repairers-commercial-and-industrial-equipment.11",
+                "source_refs": [
+                  "a29-repair-onet"
                 ]
               }
             ]
@@ -31298,20 +31316,19 @@
                 "url": "https://www.bls.gov/ooh/occupation-finder.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Check median wages, employment size, growth, and average annual openings for the combined scope.",
-                  "Applies only to this combined U.S. occupation."
+                  "BLS projects U.S. SOC 49-2094 to go from about 65,500 jobs in 2025 to 65,700 in 2035 (+0.3%), with about 4,700 annual openings including replacements."
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "bls",
-                "limitation": "Applies only to the combined U.S. scope; the median is not starting pay, and openings do not equal net additions.",
+                "limitation": "Annual openings include replacements.",
                 "market": "United States",
-                "name": "BLS OOH — electrical and electronics installers and repairers (combined scope)",
-                "period": "Wage data for month 5 of 2025; projections for 2025–2035",
+                "name": "BLS Table 1.2: occupational projections",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/electrical-and-electronics-installers-and-repairers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -31679,6 +31696,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Occupational tasks and work context."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a29-repair-onet",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "Industrial electrical and electronics repair tasks",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/49-2094.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS projects U.S. SOC 49-2094 to go from about 65,500 jobs in 2025 to 65,700 in 2035 (+0.3%), with about 4,700 annual openings including replacements."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a29-bls",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Five posts at CNY 3,000–5,000 per month for inspection and mechanical and basic electrical repairs on automation equipment."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a29-ankang",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Automation equipment maintenance technician",
+                "period": "2026 年第三批",
+                "publisher": "Ankang Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.ankang.gov.cn/Content-2899295.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "One broader plant maintenance post with an advertised CNY 4,500–6,000 monthly range, negotiable. Duties included power distribution, equipment and utilities."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a29-changde",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Plant mechanical and electrical maintenance worker",
+                "period": "2026 年第十七期",
+                "publisher": "Changde High-Tech Zone Administration",
+                "scope": "recruitment_proxy",
+                "url": "https://cdgxq.changde.gov.cn/slzq/gxdt__xxyw/gzdt/content_78203779"
               }
             ]
           },
@@ -34515,7 +34592,7 @@
             },
             {
               "指标": "Role scope",
-              "数值": "Names of similar mainland Chinese roles do not correspond one-to-one with the specific U.S. occupational scope",
+              "数值": "See the two dated job postings below.",
               "说明": "Check boundaries of industrial instrumentation and control repair, equipment electrical repair, communications equipment maintenance, and other roles by employer."
             },
             {
@@ -34655,7 +34732,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "Historical case status",
+          "china_open": "The dated posting samples are shown alongside the national occupation-level data gap.",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34699,7 +34776,7 @@
               }
             },
             {
-              "城市/区间": "Industry average wages (not a substitute)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$join": [
                   {
@@ -34729,7 +34806,8 @@
           "china_soc_row": "Chinese wage scope",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a29-ankang",
+            "posting-a29-changde"
           ],
           "sources_note": {
             "$join": [
@@ -34754,14 +34832,14 @@
           "ui": {
             "ai_heading": "Will AI directly change income in this occupation?",
             "driver_heading": "What should be considered when checking compensation for similar mainland Chinese roles?",
-            "official_heading": "Mainland Chinese public scopes and statistical gaps",
+            "official_heading": "Scope of industry figures and job postings",
             "scenario_caption": "Exact nationwide wages for this specific occupation were not obtained; do not substitute industry averages or recruitment offers.",
             "scenario_heading": "Can scopes of similar mainland Chinese roles be compared directly?",
             "scenario_interpretation_label": "Applicable scope and gaps",
             "scenario_role_label": "Role or scope",
             "scenario_value_label": "Pay and disclosure"
           },
-          "us_growth": "See the U.S. wage reference section for U.S. projections.",
+          "us_growth": "0.3% (2025–2035)",
           "us_median": "See the U.S. wage reference section for U.S. wages."
         }
       },
@@ -35239,7 +35317,7 @@
         "outlook_evidence": [
           {
             "geography": "United States",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.2",
               "block": "market-signals",
@@ -35254,8 +35332,8 @@
             },
             "metric": "Employment growth",
             "occupation_scope": "O*NET-SOC 49-2094.00 (commercial and industrial equipment repair)",
-            "source_id": "bls",
-            "value": "0% (overall projection)"
+            "source_id": "a29-bls",
+            "value": "0.3%"
           },
           {
             "geography": "United States",
@@ -35274,12 +35352,12 @@
             },
             "metric": "Employment size",
             "occupation_scope": "O*NET-SOC 49-2094.00 (commercial and industrial equipment repair)",
-            "source_id": "ratify",
-            "value": "65,500 workers"
+            "source_id": "a29-bls",
+            "value": "65,500"
           },
           {
             "geography": "United States",
-            "horizon": "2024—2034",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -35294,8 +35372,8 @@
             },
             "metric": "Projected openings",
             "occupation_scope": "O*NET-SOC 49-2094.00 (commercial and industrial equipment repair)",
-            "source_id": "employer",
-            "value": "Approximately 4,700 openings"
+            "source_id": "a29-bls",
+            "value": "4,700"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -35407,7 +35485,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-and-electronics-installers-and-repairers",
+            "target_href": "/en/career/jobs/electrical-and-electronics-installers-and-repairers",
             "target_slug": "electrical-and-electronics-installers-and-repairers",
             "target_title": "Electrical and electronics installers and repairers",
             "transition_distance": {
@@ -35430,7 +35508,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-and-electronics-installers-and-repairers-transportation-equipment",
+            "target_href": "/en/career/jobs/electrical-and-electronics-installers-and-repairers-transportation-equipment",
             "target_slug": "electrical-and-electronics-installers-and-repairers-transportation-equipment",
             "target_title": "Electrical and electronics installers and repairers, transportation equipment",
             "transition_distance": {
@@ -35453,7 +35531,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-and-electronics-repairers-powerhouse-substation-and-relay",
+            "target_href": "/en/career/jobs/electrical-and-electronics-repairers-powerhouse-substation-and-relay",
             "target_slug": "electrical-and-electronics-repairers-powerhouse-substation-and-relay",
             "target_title": "Electrical and electronics repairers, powerhouse, substation, and relay",
             "transition_distance": {
@@ -35476,7 +35554,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electricians",
+            "target_href": "/en/career/jobs/electricians",
             "target_slug": "electricians",
             "target_title": "Electricians",
             "transition_distance": {
@@ -35499,7 +35577,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/industrial-machinery-mechanics-and-maintenance-workers-and-millwrights",
+            "target_href": "/en/career/jobs/industrial-machinery-mechanics-and-maintenance-workers-and-millwrights",
             "target_slug": "industrial-machinery-mechanics-and-maintenance-workers-and-millwrights",
             "target_title": "Industrial machinery mechanics",
             "transition_distance": {
@@ -35522,7 +35600,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-and-electronics-engineering-technicians",
+            "target_href": "/en/career/jobs/electrical-and-electronics-engineering-technicians",
             "target_slug": "electrical-and-electronics-engineering-technicians",
             "target_title": "Electrical and electronic engineering technologists and technicians",
             "transition_distance": {
@@ -35545,7 +35623,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/security-and-fire-alarm-systems-installers",
+            "target_href": "/en/career/jobs/security-and-fire-alarm-systems-installers",
             "target_slug": "security-and-fire-alarm-systems-installers",
             "target_title": "Security and fire alarm systems installers",
             "transition_distance": {
@@ -35568,7 +35646,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/heating-air-conditioning-and-refrigeration-mechanics-and-installers",
+            "target_href": "/en/career/jobs/heating-air-conditioning-and-refrigeration-mechanics-and-installers",
             "target_slug": "heating-air-conditioning-and-refrigeration-mechanics-and-installers",
             "target_title": "Heating, air conditioning, and refrigeration mechanics and installers",
             "transition_distance": {
@@ -35656,7 +35734,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore my vocational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35705,7 +35783,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Explore my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35754,7 +35832,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35803,7 +35881,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Explore my motivational clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35852,7 +35930,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35901,7 +35979,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Explore my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36499,7 +36577,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore task interests and work preferences in electrical and electronics, commercial and industrial equipment",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37030,39 +37108,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Approximately 61,100 workers (2024)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "65,500 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "U.S. employment size",
-        "occupation_scope": "Electrical and electronics installers and repairers (combined O*NET-SOC scope)",
-        "period": "2024",
+        "occupation_scope": "U.S. 49-2094",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "a29-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Projected decline (-1% or lower, 2024–2034)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "0.3%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "U.S. employment growth",
-        "occupation_scope": "Electrical and electronics installers and repairers (combined O*NET-SOC scope)",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. 49-2094",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a29-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Approximately 4,700 openings (2024–2034, including replacements)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "4,700 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "U.S. projected openings",
-        "occupation_scope": "Electrical and electronics installers and repairers (combined O*NET-SOC scope)",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. 49-2094",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a29-bls"
         ]
       },
       {
@@ -37103,14 +37181,15 @@
       },
       {
         "derivation": "Exact Chinese occupational data were not obtained; no conversion is performed.",
-        "display_value": "Insufficient evidence: nationwide occupation-specific wage percentiles exactly matching this occupation were not obtained for mainland China",
+        "display_value": "Five posts at CNY 3,000–5,000 per month for inspection and mechanical and basic electrical repairs on automation equipment. One broader plant maintenance post with an advertised CNY 4,500–6,000 monthly range, negotiable. Duties included power distribution, equipment and utilities.",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "China",
         "measure": "Mainland Chinese scope",
-        "occupation_scope": "Electrical and electronics installers and repairers (combined O*NET-SOC scope)",
-        "period": "Consulted in 2026",
+        "occupation_scope": "Two past job notices",
+        "period": "2026",
         "source_refs": [
-          "nbs"
+          "a29-ankang",
+          "a29-changde"
         ]
       },
       {
@@ -37123,6 +37202,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Five posts at CNY 3,000–5,000 per month for inspection and mechanical and basic electrical repairs on automation equipment.",
+        "fact_id": "posting-a29-ankang",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Automation equipment maintenance technician",
+        "period": "2026 年第三批",
+        "source_refs": [
+          "a29-ankang"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One broader plant maintenance post with an advertised CNY 4,500–6,000 monthly range, negotiable. Duties included power distribution, equipment and utilities.",
+        "fact_id": "posting-a29-changde",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Plant mechanical and electrical maintenance worker",
+        "period": "2026 年第十七期",
+        "source_refs": [
+          "a29-changde"
         ]
       }
     ]
@@ -37150,19 +37253,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. 49-2094 · projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. worker count"
+        "label": "U.S. 49-2094 · employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. projected openings"
+        "label": "U.S. 49-2094 · projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37176,17 +37279,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "U.S. O*NET-SOC 49-2094.00: median annual wage USD 74,090 in 2025, approximately 61,100 workers in 2024, and projected decline from 2024–2034 (-1% or lower), but approximately 4,700 annual openings; includes entry paths, safety boundaries, and mainland Chinese scope explanations."
+      "text": "Explore fault reporting, rechecks and handoff in industrial equipment repair, compare postings and try a paper service ticket."
     },
     "title": {
       "availability": "available",
       "text": "Electrical and electronics repairers, commercial and industrial equipment: duties, wages, and entry paths"
     }
   },
-  "source_content_sha256": "35747d8f66649be5f475e9e98908777e2372a850a7769d26c20b52033ee7a000",
+  "source_content_sha256": "d758cc2843b6df3a4cf8f47186a2af03a10289bf45216ad6859adedd0a8cf2a5",
   "subject": {
     "canonical_slug": "electrical-and-electronics-repairers-commercial-and-industrial-equipment",
     "name": "Electrical and electronics repairers, commercial and industrial equipment",
-    "summary": "Under U.S. O*NET-SOC 49-2094.00, repair, test, adjust, or install commercial and industrial electronic equipment such as industrial controls, instruments, transmitters, and antennas: read drawings and manuals, measure circuits and instruments with instruments, replace or calibrate components, perform preventive maintenance and keep records, then retest and submit for confirmation by an authorized role that equipment may resume operation."
+    "summary": "Check fault records, inspect commercial equipment or industrial controls under a work order, and document repairs, rechecks and return status. Ask which equipment and decisions are within the role."
   }
 }

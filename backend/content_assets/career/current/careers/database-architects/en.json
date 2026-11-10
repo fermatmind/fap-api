@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-arch-shanghai": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-arch-shenzhen": {
+        "status": "pending_mapping"
+      },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
       },
@@ -19498,56 +19504,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19555,7 +19525,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19568,7 +19538,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19581,7 +19551,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19594,7 +19564,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -26154,12 +26124,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: This round obtained no verifiable recruitment or offer statistics for mainland China database or data platform architecture jobs. Offers from individual platforms or employers cannot represent the national level."
+              "A Shanghai CSSC Power data architect posting covers enterprise models, a lakehouse and data standards, without visible pay in the current description. A Shenzhen Chuangshiji database architect posting focuses on relational databases, availability and migration and gives no public numeric wage. Ask whether the main responsibility is database design, enterprise data governance or also running production."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "arch-shanghai",
+            "arch-shenzhen"
           ],
           "type": "prose"
         },
@@ -26246,7 +26217,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese occupational AI adoption/wage causation or actual recruitment samples have not been verified. Statistical aggregation does not establish that occupational evidence can never exist in the future."
+              "Two historical postings were verified; current vacancies and comparable pay figures were not. Industry data and postings do not establish AI adoption or wage causality."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
@@ -26283,13 +26254,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 occupation OEWS five annual wage percentiles: USD 86240/109370/139500/169290/204000; hourly figures 41.46/52.58/67.07/81.39/98.08. Annual figures are published directly, not annualized by this page. Employee straight-time pre-tax pay excludes the self-employed, includes some incentive bonuses/allowances, and excludes overtime and shift differentials, among other items. Percentiles are not starting wages, seniority, after-tax income or causal factor evidence."
+              "U.S. wages and employment projections use BLS SOC 15-1243. O*NET displays these same figures on both the 15-1243.00 Database Architects and 15-1243.01 Data Warehousing Specialists profiles. May 2025 OEWS five annual wage percentiles: USD 86240/109370/139500/169290/204000; hourly figures 41.46/52.58/67.07/81.39/98.08. Annual figures are published directly, not annualized by this page. Employee straight-time pre-tax pay excludes the self-employed, includes some incentive bonuses/allowances, and excludes overtime and shift differentials, among other items. Percentiles are not starting wages, seniority, after-tax income or causal factor evidence."
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
             "r5-wages-current",
-            "r5-oews-concepts"
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "arch-onet-warehouse-soc"
           ],
           "type": "prose"
         },
@@ -26298,13 +26271,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 occupation OEWS five annual wage percentiles: USD 86240/109370/139500/169290/204000; hourly figures 41.46/52.58/67.07/81.39/98.08. Annual figures are published directly, not annualized by this page. Employee straight-time pre-tax pay excludes the self-employed, includes some incentive bonuses/allowances, and excludes overtime and shift differentials, among other items. Percentiles are not starting wages, seniority, after-tax income or causal factor evidence."
+              "U.S. wages and employment projections use BLS SOC 15-1243. O*NET displays these same figures on both the 15-1243.00 Database Architects and 15-1243.01 Data Warehousing Specialists profiles. May 2025 OEWS five annual wage percentiles: USD 86240/109370/139500/169290/204000; hourly figures 41.46/52.58/67.07/81.39/98.08. Annual figures are published directly, not annualized by this page. Employee straight-time pre-tax pay excludes the self-employed, includes some incentive bonuses/allowances, and excludes overtime and shift differentials, among other items. Percentiles are not starting wages, seniority, after-tax income or causal factor evidence."
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
             "r5-wages-current",
-            "r5-oews-concepts"
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "arch-onet-warehouse-soc"
           ],
           "type": "prose"
         },
@@ -26313,13 +26288,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 occupation OEWS five annual wage percentiles: USD 86240/109370/139500/169290/204000; hourly figures 41.46/52.58/67.07/81.39/98.08. Annual figures are published directly, not annualized by this page. Employee straight-time pre-tax pay excludes the self-employed, includes some incentive bonuses/allowances, and excludes overtime and shift differentials, among other items. Percentiles are not starting wages, seniority, after-tax income or causal factor evidence."
+              "U.S. wages and employment projections use BLS SOC 15-1243. O*NET displays these same figures on both the 15-1243.00 Database Architects and 15-1243.01 Data Warehousing Specialists profiles. May 2025 OEWS five annual wage percentiles: USD 86240/109370/139500/169290/204000; hourly figures 41.46/52.58/67.07/81.39/98.08. Annual figures are published directly, not annualized by this page. Employee straight-time pre-tax pay excludes the self-employed, includes some incentive bonuses/allowances, and excludes overtime and shift differentials, among other items. Percentiles are not starting wages, seniority, after-tax income or causal factor evidence."
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
             "r5-wages-current",
-            "r5-oews-concepts"
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "arch-onet-warehouse-soc"
           ],
           "type": "prose"
         },
@@ -28636,15 +28613,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This page cites no specific job postings and does not count historical cases as open positions. Check duties, skills and compensation against the target employer's public information for the current year.",
+              "The two historical postings help compare responsibilities and work arrangements. Neither currently shows a numeric wage. Verify current openings and terms directly.",
               "Training, observation and supervised assessment methods in examples are editorial designs illustrating common validation methods, not any employer's uniform procedure."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "r5-onet-current",
-            "r5-bls-current",
-            "r5-cn-pipl"
+            "arch-shanghai",
+            "arch-shenzhen"
           ],
           "type": "notice"
         },
@@ -29202,13 +29178,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "U.S. occupation-specific tasks/preparation and BLS typical education; no current actual recruitment sample for China. Check personal information laws and actual organizational conditions; supporting industry-specific, sensitive-information and cross-border requirements have not been fully verified."
+              "Distinguish enterprise data architecture from relational database architecture. The Shenzhen posting describes client-site work. Check the actual contract."
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
-            "r5-onet-current",
-            "r5-cn-pipl"
+            "arch-shanghai",
+            "arch-shenzhen"
           ],
           "type": "prose"
         },
@@ -30998,21 +30974,22 @@
           "data": {
             "entries": [
               {
-                "answer": "Design strategies for enterprise databases, data warehouse systems and multidimensional networks: write and document database architecture; collaborate with system architects, software architects and design analysts to understand business or industry requirements; develop database architecture strategies during modeling, design and implementation; design databases supporting business applications to ensure scalability, security, performance and reliability; develop data models for applications, metadata tables, views or related structures; design interfaces, data transfer mechanisms, global temporary tables, data partitions and function-based indexes; develop integration methods between different products; create and enforce database development standards; document and communicate database schemas; coordinate database development and determine scope and limitations; identify and assess industry trends in database systems; set up database clusters, backup or recovery processes; demonstrate database technical functions; develop load-balancing processes to eliminate backup downtime; plan and install database management system software upgrades; evaluate and recommend software and hardware technologies; test and debug; identify and correct deviations from standards; review project requests to estimate time and cost; write logical and physical database descriptions; develop or maintain archiving processes, procedural code or queries for applications; provide technical support to junior staff or clients; determine optimal values for database parameters; and train users.",
+                "answer": "Design database or warehouse models around query, capacity and security requirements. Document design and migration plans and validate them with development and operations teams. Some roles also handle tuning and operational standards.",
                 "id": "actors.faq.1",
                 "question": "What specifically do database architects do each day?",
                 "question_key": "career.faq.database-architects.1",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "This occupation centers on designing architecture strategies and standards for enterprise databases, data warehouses and multidimensional networks, allowing new systems to integrate into scalable, reliable data infrastructure. Data warehousing specialists focus on warehouse modeling and loading; database administrators on operating, changing and controlling access to existing databases; data scientists on analytical and predictive modeling; computer systems analysts on business requirements analysis and system design; computer network architects on network architecture and connectivity solutions; and computer systems engineers and architects on system-level architecture and integration. Similar names do not mean duties, assessment standards or qualifications are interchangeable.",
+                "answer": "Administrators primarily keep databases available, recoverable and correctly permissioned. Architects primarily design models, standards and migrations. Both may test or tune systems; ask what each role delivers and who approves production changes.",
                 "id": "actors.faq.2",
-                "question": "How does this occupation differ from adjacent warehousing, operations and analysis directions?",
+                "question": "How do database administrators and database architects differ?",
                 "question_key": "career.faq.database-architects.2",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "db-neighbor"
                 ]
               },
               {
@@ -31025,12 +31002,13 @@
                 ]
               },
               {
-                "answer": "What can be checked is change at the task level: tools can partially undertake three types of tasks—schema and statement drafting, cluster and parameter automation, and monitoring, anomaly screening and documentation checks. This page has no adoption or replacement data for this individual occupation.",
+                "answer": "Tools may help draft SQL or summarize logs. Validate the output in a test environment and follow normal access and deployment procedures. The page does not measure adoption, quality gains or hours saved.",
                 "id": "actors.faq.4",
-                "question": "Which tasks in this occupation already have evidence of AI-driven change?",
+                "question": "Which tasks could tools help with?",
                 "question_key": "career.faq.database-architects.4",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "r5-nist-core"
                 ]
               },
               {
@@ -31043,21 +31021,26 @@
                 ]
               },
               {
-                "answer": "In U.S. 2025 wage data, median annual pay is 139,500 dollars (median hourly pay 67.07 dollars), with annual wage percentiles of 86,240/109,370/139,500/169,290/204,000 dollars. This is the occupation-specific scope of O*NET-SOC 15-1243.00. Percentiles are statistical positions, not personal pay quotes or take-home income. Occupational figures for mainland China have not been obtained; this page treats this as an evidence gap and displays only explicitly labeled industry-average proxies.",
+                "answer": "The 2025 U.S. median wage for BLS SOC 15-1243 was $67.07 an hour and $139,500 a year. A Shanghai CSSC Power data architect posting covers enterprise models, a lakehouse and data standards, without visible pay in the current description. A Shenzhen Chuangshiji database architect posting focuses on relational databases, availability and migration and gives no public numeric wage. Ask whether the main responsibility is database design, enterprise data governance or also running production.",
                 "id": "actors.faq.6",
                 "question": "How much does this occupation generally pay, and how should pay be compared?",
                 "question_key": "career.faq.database-architects.6",
                 "source_refs": [
-                  "oews"
+                  "r5-wages-current",
+                  "arch-shanghai",
+                  "arch-shenzhen",
+                  "arch-onet-warehouse-soc"
                 ]
               },
               {
-                "answer": "The U.S. preparation level is Job Zone Four (SVP 7.0 to below 8.0). The official education survey shows that among new entrants, 76% require a bachelor's degree, 14% a master's degree and 5% a postsecondary certificate. A common entry route is an undergraduate foundation in computing, software, information management or a related discipline, often with years of experience in database development, data engineering or operations. Mainland China commonly requires a relevant academic background and project experience; specific conditions follow the target organization's rules.",
+                "answer": "BLS lists a bachelor’s degree and less than five years of related work experience as typical in the U.S. Individual jobs can ask for more or for cross-system design. Use a test project to explain model, capacity and migration choices.",
                 "id": "actors.faq.7",
                 "question": "What education does this occupation require, and how should you train?",
                 "question_key": "career.faq.database-architects.7",
                 "source_refs": [
-                  "onet"
+                  "r5-bls-current",
+                  "arch-shanghai",
+                  "arch-shenzhen"
                 ]
               },
               {
@@ -31079,12 +31062,13 @@
                 ]
               },
               {
-                "answer": "O*NET National Employment Trends (using BLS data, projection period 2024–2034, detailed occupation 15-1243.00) shows approximately 66,900 employed in 2024, approximately 72,700 projected in 2034, and projected growth of 9% (labeled 'much faster than average', Bright Outlook), with approximately 4,000 average annual openings from growth and replacement over the projection period. The BLS Occupational Outlook Handbook separately combines database administrators and architects (growth of 4% during 2025–2035, with approximately 7,300 annual openings). The two frameworks cover different populations and periods and are cited separately. Work primarily involves architecture design, standards governance and leading migration; check local industry structure and compliance requirements, prioritizing role duty scope, data permissions and change approval processes.",
+                "answer": "BLS projects U.S. employment for SOC 15-1243 to change 9.4% from about 69,500 in 2025 to 76,000 in 2035, with about 3,900 annual openings including replacements. When comparing roles, check the daily responsibilities, production access and growth path.",
                 "id": "actors.faq.10",
                 "question": "What else should you consider when choosing this occupation now?",
                 "question_key": "career.faq.database-architects.10",
                 "source_refs": [
-                  "bls"
+                  "r5-bls-current",
+                  "r5-onet-current"
                 ]
               }
             ]
@@ -31324,21 +31308,19 @@
                 "url": "https://www.onetonline.org/link/summary/15-1211.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Supports employment and projection definitions for this occupation (detailed occupation).",
-                  "Does not include mainland China information and cannot replace mainland China data.",
-                  "Checks in this round: occupation-specific 15-1243: approximately 69500 in 2025 → approximately 76000 in 2035, net increase 6500/+9.4%, and 3900 average annual openings including growth and replacement; self-employment 2.1%. OOH9% is rounded, while O*NET7+ is a category. Combined OOH administrators and architects 144500/+4%/7300 concerns a different population and is not labeled 15-1240, which includes network occupations. These are not individual hiring rates or AI causation."
+                  "BLS projects U.S. employment for SOC 15-1243 to change 9.4% from about 69,500 in 2025 to 76,000 in 2035, with about 3,900 annual openings including replacements."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "Occupation 15-1243: Approximately 69500 in 2025 → approximately 76000 in 2035, net growth 6500/+9.4%, 3900 average annual openings including growth and replacements, and 2.1% self-employed. OOH9% is rounded; O*NET7+ is a classification. OOH's combined administrators and architects 144500/+4%/7300 concern another population and are not labeled 15-1240, which includes network occupations. These are not personal hiring probabilities or AI causation.",
+                "limitation": "U.S. projections, not current vacancies or individual hiring odds.",
                 "market": "United States",
-                "name": "O*NET National Employment Trends: Database Architects (15-1243.00, using BLS data)",
-                "period": "Projection period 2024–2034; retrieved 2026-09-19",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "BLS projections for this occupation, 2025–2035",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/15-1243.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31512,7 +31494,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "oews",
-                "limitation": "Provides access to wage statistics published by occupational code and explanations of coverage. This page's percentile figures are published through the O*NET national wages page (15-1243.00) for this detailed occupation itself. Percentiles are statistical positions, not starting salaries or personal take-home income, and cannot be converted across markets into personal pay quotes.",
+                "limitation": "Provides access to wage statistics published by occupational code and explanations of coverage. This page's percentile figures are published through the O*NET national wages page (15-1243.00) for BLS SOC 15-1243 Database Architects. Percentiles are statistical positions, not starting salaries or personal take-home income, and cannot be converted across markets into personal pay quotes.",
                 "market": "United States",
                 "name": "BLS Occupational Employment and Wage Statistics（OEWS）",
                 "period": "2025 wage data; retrieved 2026-09-19",
@@ -31594,7 +31576,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-3",
-                "limitation": "Publishes annual percentiles of 86,240/109,370/139,500/169,290/204,000 dollars (hourly percentiles 41.46/52.58/67.07/81.39/98.08 dollars) for this occupation, covering this detailed occupation itself. Percentiles are statistical positions, not skill levels; state or regional breakdowns must be queried on that page by location and period.",
+                "limitation": "Publishes annual percentiles of 86,240/109,370/139,500/169,290/204,000 dollars (hourly percentiles 41.46/52.58/67.07/81.39/98.08 dollars) for this occupation, covering BLS SOC 15-1243 Database Architects. Percentiles are statistical positions, not skill levels; state or regional breakdowns must be queried on that page by location and period.",
                 "market": "United States",
                 "name": "O*NET OnLine: Database Architects national wages (15-1243.00)",
                 "period": "2025 wage data; retrieved 2026-09-19",
@@ -31713,16 +31695,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/15-1243.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Occupation-specific 15-1243: 69.5 → 76.0 thousand, +6.5 thousand / +9.4%, 3.9 thousand average annual openings, self-employment 2.1%. OOH9% is rounded, O*NET7+ a category; this is neither the OOH combination of only database administrators and architects 144500/+4%/7300 nor the 15-1240 aggregate that includes network occupations. Typical bachelor's / less than 5 years of related experience / no on-the-job training categories do not mean a fixed minimum length of experience or no preparation needed."
+                  "BLS projects U.S. employment for SOC 15-1243 to change 9.4% from about 69,500 in 2025 to 76,000 in 2035, with about 3,900 annual openings including replacements."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r5-bls-current",
                 "limitation": "Occupation-specific 15-1243: 69.5 → 76.0 thousand, +6.5 thousand / +9.4%, 3.9 thousand average annual openings, self-employment 2.1%. OOH9% is rounded, O*NET7+ a category; this is neither the OOH combination of only database administrators and architects 144500/+4%/7300 nor the 15-1240 aggregate that includes network occupations. Typical bachelor's / less than 5 years of related experience / no on-the-job training categories do not mean a fixed minimum length of experience or no preparation needed.",
                 "market": "United States",
                 "name": "BLS table 1.2: 2025–2035 database architect projections",
-                "period": "2025 base period / 2025–2035 projections; retrieved 2026-10-09",
+                "period": "2025–2035",
                 "publisher": "Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31863,6 +31845,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The Shanghai posting covers enterprise models, lakehouse design and data standards. The current public description does not show pay."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "arch-shanghai",
+                "limitation": "A historical posting, not a national wage estimate or current vacancy.",
+                "market": "Mainland China",
+                "name": "CSSC Power Group: data architect",
+                "period": "2026",
+                "publisher": "Zhaopin",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhaopin.com/jobdetail/CCL1302542820J40841359914.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A client-site role in Shenzhen Longgang covering relational database availability, migration, performance verification and development standards. The public listing does not show a numeric wage."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "arch-shenzhen",
+                "limitation": "A historical posting, not a national wage estimate or current vacancy.",
+                "market": "Mainland China",
+                "name": "Shenzhen Chuangshiji: database architect",
+                "period": "2026",
+                "publisher": "Zhaopin",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhaopin.com/jobdetail/CC321869010J40862947013.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use the main operational or design deliverable to compare the roles."
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "db-neighbor",
+                "limitation": "Comparison occupation.",
+                "market": "United States",
+                "name": "Adjacent database occupation tasks",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/15-1242.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The 15-1243.01 profile explicitly labels wages, employment and industry data as Database Architects data."
+                ],
+                "evidence_type": "official occupation data",
+                "id": "arch-onet-warehouse-soc",
+                "limitation": "The O*NET task profiles can be read separately. Both profiles show BLS statistics for the same SOC 15-1243.",
+                "market": "United States",
+                "name": "O*NET wage and employment scope on the Data Warehousing Specialists profile",
+                "period": "2025 wages and base employment, 2025–35 employment projections",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-1243.01#WagesEmployment"
               }
             ]
           },
@@ -34694,7 +34736,7 @@
             },
             {
               "指标": "Market comparison",
-              "数值": "U.S. median annual pay 139,500 dollars (2025 wage data; detailed occupation 15-1243.00 itself, with separately published median hourly pay of 67.07 dollars)",
+              "数值": "U.S. median annual pay 139,500 dollars (2025 wage data; BLS SOC 15-1243 Database Architects, with separately published median hourly pay of 67.07 dollars)",
               "说明": "For market comparison only; not used in mainland China numerical calculations, exchange-rate conversion or purchasing-power conversion."
             }
           ],
@@ -34862,7 +34904,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (recruitment or pay-quote coverage)",
+              "城市/区间": "Mainland China database job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34874,13 +34916,14 @@
           "china_soc_row": "U.S. occupational code O*NET-SOC 15-1243.00; this round did not obtain an explicit Chinese classification mapping or separately reported wages for this occupation, and does not assert that corresponding statistics do not exist.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-arch-shanghai",
+            "posting-arch-shenzhen"
           ],
           "sources_note": "Use source links within their respective statistical or announcement scopes; cite them separately when statistical periods, survey populations and pay definitions differ, without converting between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect wages for this occupation?",
             "driver_heading": "How is data architecture work scheduled around project cycles, migration windows and audit dates?",
-            "official_heading": "Official statistical definitions and missing-data notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Education and professional background, role directions and explanations (editorial material, not wage statistics)",
             "scenario_heading": "Which data architecture role directions correspond to different educational and professional backgrounds?",
             "scenario_interpretation_label": "Explanations and checking suggestions",
@@ -36826,7 +36869,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand task interests and work preferences for database architects",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36940,19 +36983,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Explore my personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Understand my personality preferences"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Understand my Big Five traits"
+            "label": "Explore my Big Five traits"
           }
         ]
       },
@@ -37310,14 +37345,17 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "Database Architects: O*NET-SOC 15-1243.00 (Database Architects, exact single-occupation coverage; Bright Outlook)",
+        "display_value": "Database Architects (O*NET-SOC 15-1243.00)",
         "fact_id": "identity",
         "market": "United States",
         "measure": "Official occupational code (identity definition for this page)",
-        "occupation_scope": "A single detailed O*NET-SOC occupation (15-1243.00); its tasks, work contexts, preparation level, wages, employment and industry figures all concern the occupation itself. The page does not label a parent occupation or opaque proxy. The official scope excludes adjacent occupations such as data warehousing specialists (15-1243.01), database administrators (15-1242.00), data scientists (15-2051.00), computer systems analysts (15-1211.00), computer network architects (15-1241.00), blockchain engineers (15-1299.07), computer systems engineers and architects (15-1299.08), and network and computer systems administrators (15-1244.00). Similar roles in China are commonly database architecture, data platform or data architecture positions; their duties, employment and pay definitions do not correspond one-to-one.",
+        "occupation_scope": "Tasks, work context and preparation levels use the O*NET 15-1243.00 occupational profile. U.S. wages and employment projections use BLS SOC 15-1243. O*NET displays these same figures on both the 15-1243.00 Database Architects and 15-1243.01 Data Warehousing Specialists profiles.",
         "period": "O*NET-SOC 2018 SOC; page updated in 2026; retrieved 2026-09-19",
         "source_refs": [
-          "onet"
+          "onet",
+          "r5-wages-current",
+          "r5-bls-current",
+          "arch-onet-warehouse-soc"
         ]
       },
       {
@@ -37358,38 +37396,38 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 66,900 people (2024)",
+        "display_value": "69,500 people (2025)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment size (stock statistics)",
-        "occupation_scope": "Database Architects (15-1243.00) detailed-occupation coverage; 2024 employment figures come from the O*NET National Employment Trends page (using BLS data).",
-        "period": "2024 base year; retrieved 2026-09-19",
+        "measure": "U.S. employment (2025 base year)",
+        "occupation_scope": "U.S. SOC 15-1243",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Growth 9% (2024–2034, labeled 'much faster than average'; approximately 72,700 people projected in 2034)",
+        "display_value": "9.4% (2025–2035)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Projected employment change (occupational total)",
-        "occupation_scope": "15-1243.00 detailed-occupation coverage; the O*NET Employment Trends page shows 9% growth during 2024–2034, labeled 'much faster than average' (Bright Outlook). This is aggregate change over the projection period, not an individual's hiring probability. The BLS Occupational Outlook Handbook separately combines database administrators and architects (approximately 144,500 people in 2025, growth 4% during 2025–2035). The two frameworks cover different populations and periods and are cited separately, without merging them.",
-        "period": "Projection period 2024–2034; retrieved 2026-09-19",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "U.S. SOC 15-1243",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 4,000 annually (2024–2034, including growth and replacement needs)",
+        "display_value": "3,900 per year (including replacement needs)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Average annual job openings over the projection period (including replacement needs)",
-        "occupation_scope": "15-1243.00 detailed-occupation coverage; the O*NET Employment Trends page gives approximately 4,000 average annual openings over the projection period, including replacement needs resulting from transfers or exits from the labor market (such as retirement), rather than net new jobs each year.",
-        "period": "Projection period 2024–2034; retrieved 2026-09-19",
+        "measure": "U.S. projected annual openings",
+        "occupation_scope": "U.S. SOC 15-1243",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
@@ -37574,6 +37612,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The Shanghai posting covers enterprise models, lakehouse design and data standards. The current public description does not show pay.",
+        "fact_id": "posting-arch-shanghai",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "CSSC Power Group: data architect",
+        "period": "2026",
+        "source_refs": [
+          "arch-shanghai"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "A client-site role in Shenzhen Longgang covering relational database availability, migration, performance verification and development standards. The public listing does not show a numeric wage.",
+        "fact_id": "posting-arch-shenzhen",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Shenzhen Chuangshiji: database architect",
+        "period": "2026",
+        "source_refs": [
+          "arch-shenzhen"
+        ]
       }
     ]
   },
@@ -37600,25 +37662,25 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projections (2024–2034, growth 9%, labeled 'much faster than average')"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, approximately 66,900 people)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024–2034, approximately 4,000 annually, including growth and replacement)"
+        "label": "U.S. projected annual openings"
       },
       {
-        "availability": "available",
-        "fact_ref": "china-jiaojiang-featured-daily-2026",
+        "availability": "missing",
+        "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China industry-average proxy (2025 information transmission, software and information technology services; see the China salary section)"
+        "label": "Mainland China national occupational wages not established"
       }
     ]
   },
@@ -37626,17 +37688,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Database architects (O*NET-SOC 15-1243.00, Bright Outlook) design strategies for enterprise databases, data warehouse systems and multidimensional networks. Tasks include developing standards for database operations, programming, queries and security; modeling and building large relational databases or data warehouses; creating and optimizing data models for warehouse infrastructure and workflows; writing and documenting database architecture; collaborating with system and software architects to understand requirements; designing databases supporting business applications to ensure scalability, security and reliability; developing data models and database applications (interfaces, data transfer, partitions and function-based indexes); creating and enforcing database development standards; setting up clusters and backup/recovery processes; developing load balancing to eliminate backup downtime; planning and installing database management system upgrades; evaluating and recommending software and hardware technologies; testing and debugging; reviewing project requests to estimate time and cost; determining optimal database parameter values; and training users. Its U.S. employment and wage scope must be explained: this occupation is O*NET-SOC 15-1243.00 itself, with approximately 66,900 employed in 2024, projected growth of 9% during 2024–2034 (labeled 'Much faster than average', Bright Outlook), approximately 72,700 people projected in 2034, and approximately 4,000 average annual openings including growth and replacement over the projection period. In 2025 wage data, median annual pay is 139,500 dollars (median hourly pay 67.07 dollars), with annual wage percentiles 86,240/109,370/139,500/169,290/204,000 dollars. Industries are professional, scientific and technical services 36%/finance and insurance 16%/information 13%/other industries (including enterprise management and administrative support services) 35%. Interest code CI, preparation level Job Zone Four. Also address the occupational wage gap for such mainland China roles, labeling of the information transmission, software and information technology services industry-average proxy, and control points for data classification, minimum permissions, change review, independent validation, offline encrypted backups and recovery drills."
+      "text": "See how database architects design data models, migrations and standards. Compare mainland China architecture postings, U.S. data and DBA duties."
     },
     "title": {
       "availability": "available",
       "text": "Database architect"
     }
   },
-  "source_content_sha256": "ac92e7b8ba3c8ba1f1331db1f5ae3a9335cc7b2ab221182d7f18da81e02bb854",
+  "source_content_sha256": "68608bb991c5aebd5b50841f388a77d5dda6ce8fd121338323eec35252598662",
   "subject": {
     "canonical_slug": "database-architects",
     "name": "Database architect",
-    "summary": "In the United States, database architects correspond to O*NET-SOC 15-1243.00 (Database Architects), designing strategies for enterprise databases, data warehouse systems and multidimensional networks: develop standards for database operations, programming, query processes and security; model, design and build large relational databases or data warehouses; create and optimize data models for warehouse infrastructure and workflows; integrate new systems with existing warehouse structures; and improve system performance and functionality. Work includes writing and documenting database architecture; collaborating with system architects, software architects, design analysts and others to understand business or industry requirements; developing database architecture strategies during modeling, design and implementation; designing databases supporting business applications to ensure scalability, security, performance and reliability; developing data models for applications, metadata tables, views or related structures; designing database applications (such as interfaces, data transfer mechanisms, global temporary tables, data partitions and function-based indexes) to support efficient access to general database structures; developing integration methods between products; creating and enforcing database development standards; documenting and communicating database schemas using accepted notation; developing data models describing data elements and their uses according to processes; coordinating database development as a project team member and determining project scope and limitations; identifying and assessing database system industry trends and providing information and recommendations to senior management; setting up database clusters, backup or recovery processes; demonstrating database technical functions (such as performance, security and reliability); developing load-balancing processes to eliminate downtime caused by backups; planning and installing database management system software upgrades to improve performance; identifying, evaluating and recommending hardware or software technologies that meet required performance; testing programs or databases, correcting errors and making necessary modifications; identifying and correcting deviations from database development standards; reviewing project requests describing database user needs to estimate required time and cost; writing logical and physical database descriptions and specifying identifiers, or directing others to do so; developing or maintaining archiving processes, procedural code or queries for applications; providing technical support to junior staff or clients; using manuals and computational tools to determine and calculate optimal database parameter values; and training users and answering questions. The preparation level is Job Zone Four (considerable preparation needed, SVP 7.0 to below 8.0). The official education survey shows that among new entrants, 76% require a bachelor's degree, 14% a master's degree and 5% a postsecondary certificate. On O*NET, this detailed occupation's tasks, work contexts, preparation level and wages concern the occupation itself: its 2025 national wages page publishes both annual and hourly percentiles, without labeling a parent occupation or opaque proxy, and it is not the related data warehousing specialist or database administrator occupation. O*NET labels this occupation Bright Outlook (2024–2034 growth 9%, much faster than average). Similar roles in China are commonly database architecture, data platform or data architecture positions; their duties, employment and pay definitions do not correspond one-to-one to this detailed U.S. occupation and are not interchangeable."
+    "summary": "Database architects design enterprise databases and warehouses around query, capacity and security requirements. They develop models, standards and migration plans, and validate them with engineering and operations teams. Some roles also include tuning and database operations."
   }
 }

@@ -23311,7 +23311,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "核客户用途、工况、技术指标和专业限制；学习技术科学文档并解释规格、用途和限制；演示产品、持续答疑并向工程人员咨询；交付客户、产品与后续支持记录。关键能力、价格和合同条件须用原始资料与授权核。"
+              "核产品、区域、销售目标和服务分工。配置确认与商务批准分别追踪。"
             ]
           },
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.quick-decision.fit-decision-checklist.1",
@@ -23326,7 +23326,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "相邻职业按主要工作产出、知识要求和管理责任区分；共享客户沟通不代表统计、职责或资格相同。"
+              "在 09「入行、资格与职业发展」做 TS-Q01｜核仪器报价与订单交接，先完成初稿再看参考。"
             ]
           },
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.quick-decision.fit-decision-checklist.2",
@@ -23340,7 +23340,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "AI辅助资料检索、需求摘要和文案草稿；真实产品能力、报价、合同、客户数据与交付承诺由人核。"
+              "适合愿意把技术产品规格讲明白、核报价与订单细节并持续跟进客户的人。"
             ]
           },
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.quick-decision.fit-decision-checklist.3",
@@ -23356,7 +23356,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本页依据官方职业任务与虚构练习，不预测个人录用；岗位知识、学历、资格和授权按地区与雇主核。"
+              "分别跟踪规格、报价版本、安装服务与商务状态。"
             ]
           },
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.quick-decision.fermat-decision-card.6",
@@ -23371,7 +23371,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "BLS 2025年批发与制造业销售代表（技术与科学产品）年薪中位104,920美元；2025—2035就业292,000至295,500人、变化1.2%，年均23,600个空缺。中国行业均值只作背景。"
+              "适合愿意把技术产品规格讲明白、核报价与订单细节并持续跟进客户的人。"
             ]
           },
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.quick-decision.fermat-decision-card.7",
@@ -27728,31 +27728,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "销售工程师",
@@ -29489,9 +29489,9 @@
               {
                 "id": "clearance",
                 "values": [
-                  "岗位授权",
-                  "报价、合同、技术承诺和数据访问分开。",
-                  "核组织批准链。"
+                  "会璟科学仪器技术销售",
+                  "雇主原说明列区域推广、销售计划及任务。",
+                  "核产品、区域、销售目标和服务分工。配置确认与商务批准分别追踪。"
                 ]
               },
               {
@@ -29505,9 +29505,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "系统与资料",
-                  "CRM、库存、技术产品目录及售后系统需要相应培训和客户资料权限。",
-                  "核系统访问、价格版本、订单交接和信息保护规则。"
+                  "奥恒生物科研仪器销售",
+                  "原岗列科研仪器配置、客户开发、订单与回款。",
+                  "职责指南列指定区域的科学产品销售和售后协作。"
                 ]
               }
             ]
@@ -29515,7 +29515,10 @@
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d016-cn-main",
+            "d016-cn-context",
+            "d016-us-example"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29528,37 +29531,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料与设定｜全部为编辑设计的虚构专业产品规格、演示与安装",
-                  "你是受监督学员，只核资料、方案与交接；不承诺真实性能、价格或合同。",
-                  "A1｜客户工作温度80℃，产品资料标60℃上限，适配未获确认。",
-                  "A2｜演示只测12份样本，客户要求100份，不能据小演示保证容量。",
-                  "A3｜报价含额外折扣与服务合同，但没有授权批准。",
-                  "A4｜客户应用日志含身份与机密数据，不能直接发给外部工具。",
-                  "A5｜安装团队尚未完成测试，销售摘要却写已验收可用。"
+                  "虚构材料",
+                  "虚构询价 Q9：2 台 L8 分析仪，每台需 1 套启动耗材包，并要求现场安装。现行批准价表 P5：仪器 18,000 元／台，耗材 600 元／套，安装未报价。未核库存与交期。",
+                  "草稿 Q8 只列 1 套耗材，并写“含安装、下周交付”。客户尚未发采购单。",
+                  "题设要求业务负责人批准整份对外报价，服务团队核安装条件及费用，供应岗确认库存和交期。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务一：标未解决项",
-                  "按A1—A5列原始证据、冲突、未知和暂停承诺项。",
-                  "不补造缺失资料、不把模型建议当批准。"
+                  "任务与交付",
+                  "列有批准价格的小计与计价范围，写需核信息及更新报价的责任人。",
+                  "把已计价项、未报价服务和库存交期分开。",
+                  "用纸或本地表格，明确证据出处。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "任务二：写复核与交接",
-                  "按需求、版本、条件、责任人和待证据做清单。",
-                  "要求对应技术、商业、数据或交付负责人核。",
-                  "分开已报告、已验证与已批准。"
+                  "提交前提示",
+                  "先保存初稿，再看七天计划之后的参考。",
+                  "无需同伴协助。",
+                  "记录版本。",
+                  "未给的资料留待核。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习边界",
-                  "A1—A5完全虚构，不是技术产品安全认证或真实价格建议；真实电气兼容由官方资料或专业人员核实，客户资料只在获准系统内处理。"
+                  "权限边界",
+                  "使用虚构记录。",
+                  "不实际批准或对外交付。"
                 ]
               }
             ]
@@ -29567,7 +29570,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：虚构专业产品规格、演示与安装核错与交接",
+          "title": "TS-Q01 | 核仪器报价与订单交接",
           "type": "cards"
         },
         {
@@ -29578,33 +29581,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "应用规格卡",
-                  "列相关A1—A5证据、未知与接收人。",
-                  "别人可回查原始资料，不误认已批准。"
+                  "版本和材料记录",
+                  "确认原记录和生效版本。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "演示商业卡",
-                  "列相关A1—A5证据、未知与接收人。",
-                  "别人可回查原始资料，不误认已批准。"
+                  "输入与状态核对",
+                  "核对原记录、目标与差异。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "数据安装交接卡",
-                  "列相关A1—A5证据、未知与接收人。",
-                  "别人可回查原始资料，不误认已批准。"
+                  "待核交接",
+                  "分待核项目、已知结果和下一责任人。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "AI草稿复核说明",
-                  "若用工具生成比较表，逐项回看A1—A5，标臆造参数和过期价格。",
-                  "工具不决定兼容、折扣或付款成功。"
+                  "交付边界",
+                  "标实际检查与批准状态。",
+                  "用题设原始记录核对。"
                 ]
               }
             ]
@@ -29635,27 +29638,27 @@
             "rows": [
               [
                 "需求追问",
-                "关键条件未核怎么办",
-                "列已知未知并追问",
-                "模拟不授承诺权"
+                "确认原记录和生效版本。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "资料核查",
-                "版本或规格冲突怎么办",
-                "回原始资料并记录差异",
-                "不猜兼容结论"
+                "核对原记录、目标与差异。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "商业核查",
-                "报价或合同未批准怎么办",
-                "交批准人并保留限制",
-                "不代批准"
+                "分待核项目、已知结果和下一责任人。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "交接复盘",
-                "如何交代未解决项",
-                "写责任人、证据和下一步",
-                "不预测长期表现"
+                "标实际检查与批准状态。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ]
             ]
           },
@@ -29675,50 +29678,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第一日",
-                  "读A1—A2，核需求和资料冲突。"
+                  "第 1 天",
+                  "记录对象和版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第二日",
-                  "读A3—A4，核商业与数据权限。"
+                  "第 2 天",
+                  "确认原记录和生效版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第三日",
-                  "读A5，写未解决项与交接。"
+                  "第 3 天",
+                  "核对原记录、目标与差异。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第四日",
-                  "核A3库存更新时间，列实物待核项。"
+                  "第 4 天",
+                  "分待核项目、已知结果和下一责任人。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第五日",
-                  "核A4报价与CRM价，写主管接手单。"
+                  "第 5 天",
+                  "标实际检查与批准状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第六日",
-                  "用工具草拟比较文案，逐项纠错并注明来源。"
+                  "第 6 天",
+                  "先独立完成交接稿，再按下方参考和量规核对并修订一处。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第七日",
-                  "整理需求卡、价格复核单和售后交接，复盘岗位训练需求。"
+                  "第 7 天",
+                  "整理四份练习成果，保留原件和待审状态。"
                 ]
               }
             ]
@@ -29735,20 +29738,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "保留A1—A5初稿与修改依据。",
-              "检查是否补造了未知性能、价格或批准。",
-              "确认待核项仍标未知，接收人与下一步清楚。",
-              "记录自己是否愿意反复核资料和解释条件，不转成适合度评分。",
-              "向真实雇主核产品训练、客户类型、指标、计酬和授权。",
-              "重做清单，确认已知、未知与批准状态分开。",
-              "若仍不清楚偏好，比较相邻岗位任务，不据模拟结果下录用结论。"
+              "仪器 2 × 18,000＝36,000 元；耗材 2 × 600＝1,200 元。已计价小计 37,200 元。",
+              "Q8 少 1 套耗材，安装未核价，因此 37,200 元仅含仪器和耗材。",
+              "请服务岗核安装范围和费用、供应岗核库存及交期。下周交付尚无依据。",
+              "保留 Q9 和 P5，补资料后交业务负责人批准对外报价。",
+              "客户尚无采购单，记录为待报价或跟进，不登记成交。",
+              "四项各 0–2 分：版本与原件、逐项判断、未知范围、权限交接。",
+              "完整可追溯为 2，部分为 1，缺失或越权为 0。"
             ]
           },
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "题后参考与自核量规",
           "type": "list"
         },
         {
@@ -29849,7 +29852,7 @@
               "只用虚构需求、资料、报价和交接练习，不含真实客户；练习不授商业、技术或合同权。",
               "本页使用公开职业资料与虚构材料；具体知识、权限、计酬和资格按目标岗位核，不预测个人结果。",
               "本页使用公开职业资料与虚构材料；具体知识、权限、计酬和资格按目标岗位核，不预测个人结果。",
-              "本页使用公开职业资料与虚构材料；具体知识、权限、计酬和资格按目标岗位核，不预测个人结果。"
+              "核产品、区域、销售目标和服务分工。配置确认与商务批准分别追踪。"
             ]
           },
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.path.credential-boundary.1",
@@ -29866,16 +29869,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证书检索只是入口，核颁发机构、岗位相关性与认可范围，不等于签署或销售资格。",
-              "本页使用公开职业资料与虚构材料；具体知识、权限、计酬和资格按目标岗位核，不预测个人结果。"
+              "原岗列科研仪器配置、客户开发、订单与回款。",
+              "职责指南列指定区域的科学产品销售和售后协作。"
             ]
           },
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "d016-cn-main",
+            "d016-us-example"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -31953,13 +31954,13 @@
                 "question_key": "career.faq.sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.education-path"
               },
               {
-                "answer": "资料、需求、验证、报价、合同或数据权限冲突时记录并升级。",
+                "answer": "核产品、区域、销售目标和服务分工。配置确认与商务批准分别追踪。",
                 "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.faq.8",
                 "question": "哪些情况需要暂停承诺？",
                 "question_key": "career.faq.sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.credentials"
               },
               {
-                "answer": "只用虚构A1—A5材料练需求、证据、权限与交接，不接入真实客户。",
+                "answer": "在 09「入行、资格与职业发展」做 TS-Q01｜核仪器报价与订单交接，先完成初稿再看参考。",
                 "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.faq.9",
                 "question": "怎样做入门练习？",
                 "question_key": "career.faq.sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.risk-boundary"
@@ -31989,7 +31990,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "AI辅助资料与记录草稿；需求、能力、商业授权、数据和交付由人复核。"
+              "TS-Q01 为本页虚构试做。"
             ]
           },
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.sources.source-card.1",
@@ -32003,14 +32004,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业任务沿用本页O*NET和相关BLS职业资料；美国工资保留原精确或明确母类／组合口径，就业趋势采用BLS 2025—2035预测。中国工资补充国家统计局2025年批发和零售业及制造业行业及宽岗位税前均值，明确非本职业工资，非AI归因。"
+              "雇主原说明列区域推广、销售计划及任务。"
             ]
           },
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "bls",
-            "nbs"
+            "d016-cn-context"
           ],
           "type": "prose"
         },
@@ -32019,12 +32018,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页核读日期2026-09-28；来源可回查，虚构练习与统计分开。"
+              "原岗列科研仪器配置、客户开发、订单与回款。"
             ]
           },
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "d016-cn-main"
           ],
           "type": "prose"
         },
@@ -32033,13 +32032,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "虚构练习不代表雇主制度、不授工作权限、不预测个人收入与录用。"
+              "美国工资和预测分别按本页对应职业行读取。原岗和雇主说明只用于核实际分工。"
             ]
           },
           "id": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products.sources.source-card.4",
           "source_refs": [
             "editor",
-            "privacy"
+            "privacy",
+            "d016-cn-main",
+            "d016-us-example"
           ],
           "type": "prose"
         }
@@ -32066,13 +32067,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32306,8 +32307,8 @@
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "FermatMind编辑性虚构练习：用于相应任务、统计或研究范围。",
-                  "虚构桌面练习，不是实际客户方案、雇主制度或承诺授权。"
+                  "TS-Q01 为虚构纸笔试做。",
+                  "分别跟踪规格、报价版本、安装服务与商务状态。"
                 ],
                 "evidence_type": "编辑归纳",
                 "id": "editor",
@@ -32558,6 +32559,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "原岗列科研仪器配置、客户开发、订单与回款。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d016-cn-main",
+                "limitation": "仅用于任务和路径对照。",
+                "market": "中国大陆",
+                "name": "奥恒生物科研仪器销售",
+                "period": "日期见原件",
+                "publisher": "奥恒生物科研仪器销售",
+                "scope": "recruitment_proxy",
+                "url": "https://jobcareer.sdu.edu.cn/eweb/jygl/index.so?id=BDtN6ZbfidHuWbgk9trv8e&modcode=jygl_zpxxck&subsyscode=zpfw&type=ssoViewZpxx"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "雇主原说明列区域推广、销售计划及任务。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d016-cn-context",
+                "limitation": "仅用于任务和路径对照。",
+                "market": "中国大陆",
+                "name": "会璟科学仪器技术销售",
+                "period": "日期见原件",
+                "publisher": "会璟科学仪器技术销售",
+                "scope": "recruitment_proxy",
+                "url": "https://chem.ecust.edu.cn/_upload/article/files/19/78/c92751bf4aa3b045b4be9592b54c/8f0a77e2-da43-4cc9-9af2-d6626adeae05.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "职责指南列指定区域的科学产品销售和售后协作。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "d016-us-example",
+                "limitation": "仅用于任务和路径对照。",
+                "market": "美国",
+                "name": "Thermo Fisher 技术销售职责指南",
+                "period": "日期见原件",
+                "publisher": "Thermo Fisher 技术销售职责指南",
+                "scope": "contextual",
+                "url": "https://assets.thermofisher.com/TFS-Assets/BID/brochures/aspire-job-descriptions.pdf?cid=bid-pdf-COL09667"
               }
             ]
           },
@@ -35870,7 +35916,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "批发与制造业销售代表（技术与科学产品）适合什么样的人？"
+        "title": "哪些人适合做技术产品销售？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -37252,7 +37298,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合批发与制造业销售代表（技术与科学产品）",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37798,14 +37844,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "批发与制造业销售代表（技术与科学产品）职业介绍：专业需求、产品知识、演示支持、报价合同、安装测试、客户反馈、AI辅助与责任边界、美国41-4011工资就业、中国批发零售行业背景与虚构练习。"
+      "text": "了解技术和科学产品销售代表如何解释规格、核报价和跟进订单。比较仪器销售原岗、美国工资和纸面试题。"
     },
     "title": {
       "availability": "available",
       "text": "批发与制造业销售代表（技术与科学产品）"
     }
   },
-  "source_content_sha256": "f89a793181b41303d7e2524490f741bda5ed0507538d003237c630a0058667d0",
+  "source_content_sha256": "d2e7f92eae175d0a5bf9d7753bd5000f543a2d7bbf4b455e5c568bb8a1eb1e5c",
   "subject": {
     "canonical_slug": "sales-representatives-wholesale-and-manufacturing-technical-and-scientific-products",
     "name": "批发与制造业销售代表（技术与科学产品）",

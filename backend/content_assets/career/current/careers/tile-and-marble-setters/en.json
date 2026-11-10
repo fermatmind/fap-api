@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Start with dimension units, drawings and material checking: whether you can turn plane dimensions into a grid, distinguish colours and batches, and recompute and state the unknowns after a version change. You also need to understand the physical load, training and employment conditions; interest in a rendering alone is not enough."
+              "Paper check | Mark two proposed doorway edge details on a fictional layout. Note which drawing revision the site lead should verify. "
             ]
           },
           "id": "tile-and-marble-setters.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24803,13 +24802,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "According to drawings and site conditions, set hard tile, stone and similar materials on walls, floors, countertops and similar locations, checking dimensions, layout, materials and joints, and completing installation and finishing. The US occupational scope also includes some roofing and decorative tasks; specific Chinese jobs and authority are checked separately."
+              "Tile and marble setters lay out the pattern, fit pieces around corners and obstacles, and check the joints and finish. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tile-and-marble-setters.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-47-2044.00"
           ],
           "type": "prose"
         }
@@ -25589,15 +25587,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: adoption rates, construction effects, the net AI employment effect and task scores were not obtained. The BLS2025—2035 overall projection for this occupation shows 9.8% growth and about 3,300 annual openings including replacements, which is not AI causality; the following uses editorial scenarios only to explain the checking points for information assistance. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Mark two proposed doorway edge details on a fictional layout. Note which drawing revision the site lead should verify."
             ]
           },
           "id": "tile-and-marble-setters.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "nist",
-            "editorial"
+            "transfer-onet-47-2044.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33736,6 +33732,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-47-2044.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 47-2044.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/47-2044.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39215,10 +39238,10 @@
       "text": "Tile and stone setters"
     }
   },
-  "source_content_sha256": "d719d0134b3a6943bc8142fb762f3dc7a5e115b9f1ecf983fb182730336189d2",
+  "source_content_sha256": "ddab768c09dee8ec584af27b047f7537222e7eb6b23bbd92aac8a93b8aa5f8f1",
   "subject": {
     "canonical_slug": "tile-and-marble-setters",
     "name": "Tile and stone setters",
-    "summary": "According to drawings and site conditions, set hard tile, stone and similar materials on walls, floors, countertops and similar locations, checking dimensions, layout, materials and joints, and completing installation and finishing. The US occupational scope also includes some roofing and decorative tasks; specific Chinese jobs and authority are checked separately."
+    "summary": "Tile and marble setters lay out the pattern, fit pieces around corners and obstacles, and check the joints and finish."
   }
 }

@@ -6,13 +6,10 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
-      },
-      "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +33,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a24-crrc": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a24-pku": {
+        "status": "pending_mapping"
       },
       "fact:r5-current-cn-health": {
         "status": "pending_mapping"
@@ -1707,7 +1710,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -3117,16 +3120,14 @@
       },
       "ai_impact_table.authority_links.04.link": {
         "ref": {
-          "id": "actors.source-register.published.1",
           "path": [
-            "data",
-            "entries",
-            {
-              "id": "sag-moa"
-            },
-            "url"
+            "components",
+            "ai_impact_table",
+            "authority_links",
+            3,
+            "链接"
           ],
-          "source": "item"
+          "source": "display"
         },
         "status": "mapped"
       },
@@ -3149,7 +3150,7 @@
             "data",
             "entries",
             {
-              "id": "sag-moa"
+              "id": "r5-fda-cytology"
             },
             "name"
           ],
@@ -4089,16 +4090,14 @@
       },
       "ai_impact_table.evidence_rows.03.link": {
         "ref": {
-          "id": "actors.source-register.published.1",
           "path": [
-            "data",
-            "entries",
-            {
-              "id": "sag-moa"
-            },
-            "url"
+            "components",
+            "ai_impact_table",
+            "evidence_rows",
+            2,
+            "链接"
           ],
-          "source": "item"
+          "source": "display"
         },
         "status": "mapped"
       },
@@ -4109,7 +4108,7 @@
             "data",
             "entries",
             {
-              "id": "sag-moa"
+              "id": "r5-fda-cytology"
             },
             "name"
           ],
@@ -6961,7 +6960,7 @@
             "data",
             "entries",
             {
-              "id": "cn-rule"
+              "id": "r5-cn-pathology"
             },
             "url"
           ],
@@ -6976,7 +6975,7 @@
             "data",
             "entries",
             {
-              "id": "cn-rule"
+              "id": "r5-cn-pathology"
             },
             "name"
           ],
@@ -9249,7 +9248,7 @@
             "data",
             "entries",
             {
-              "id": "cn-rule"
+              "id": "r5-cn-pathology"
             },
             "url"
           ],
@@ -9264,7 +9263,7 @@
             "data",
             "entries",
             {
-              "id": "cn-rule"
+              "id": "r5-cn-pathology"
             },
             "name"
           ],
@@ -16336,17 +16335,8 @@
         "status": "mapped"
       },
       "market_signal_card.outlook_evidence.03.source_id": {
-        "ref": {
-          "path": [
-            "components",
-            "market_signal_card",
-            "outlook_evidence",
-            2,
-            "source_id"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "market_signal_card.outlook_evidence.03.value": {
         "ref": {
@@ -16421,7 +16411,7 @@
             "data",
             "entries",
             {
-              "id": "ratify"
+              "id": "r5-ct"
             },
             "url"
           ],
@@ -16436,7 +16426,7 @@
             "data",
             "entries",
             {
-              "id": "ratify"
+              "id": "r5-ct"
             },
             "name"
           ],
@@ -19570,56 +19560,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -20087,155 +20041,44 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.04.accessed_at": {
-        "ref": {
-          "id": "actors.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cn-rule"
-            },
-            "accessed_at"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.04.details.01": {
-        "ref": {
-          "id": "actors.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cn-rule"
-            },
-            "details",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.04.evidence_type": {
-        "ref": {
-          "id": "actors.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cn-rule"
-            },
-            "evidence_type"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.04.limitation": {
-        "ref": {
-          "id": "actors.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cn-rule"
-            },
-            "limitation"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.04.market": {
-        "ref": {
-          "id": "actors.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cn-rule"
-            },
-            "market"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.04.name": {
-        "ref": {
-          "id": "actors.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cn-rule"
-            },
-            "name"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.04.period": {
-        "ref": {
-          "id": "actors.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cn-rule"
-            },
-            "period"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.04.publisher": {
-        "ref": {
-          "id": "actors.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cn-rule"
-            },
-            "publisher"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.04.scope": {
-        "ref": {
-          "id": "actors.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cn-rule"
-            },
-            "scope"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.04.url": {
-        "ref": {
-          "id": "actors.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cn-rule"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.05.accessed_at": {
         "ref": {
@@ -22596,7 +22439,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Low-risk validation: using public or fictional materials, complete one exercise — \"write a specimen and patient information verification checklist — draw up a slide preparation and staining quality assessment table — write out the morphological findings and the abnormalities requiring review from fictional cell images\" — this only assesses work preferences; the exercise does not involve real patient specimens or real interpretation or diagnosis, and is not equivalent to training completion, practice qualification or diagnostic authorization."
+              "Try the paper cytology handoff on this page. Check specimen IDs, the control result and who takes each case next."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -22638,12 +22481,15 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Similar job titles among adjacent occupations do not mean the same duties; when comparing, first look at whether the focus is exfoliative cell morphology, chromosomes and karyotypes, tissue sections and immunohistochemistry, routine clinical testing, or the diagnostic and prescribing responsibility of microbiologists or pathologists, and whether the role carries screening interpretation, abnormality submission or diagnostic sign-off responsibility."
+              "Compare what each role handles and who receives its work. Cytotechnologists check and screen cell specimens and refer abnormalities for review. Microbiologists study or test microorganisms. In pathology departments of Chinese medical institutions, pathology technicians handle technical work and physicians who meet the qualification requirements issue pathology diagnostic reports."
             ]
           },
           "id": "actors.display.fermat_decision_card.caveat",
           "source_refs": [
-            "onet"
+            "onet",
+            "teacher",
+            "art",
+            "r5-cn-pathology"
           ],
           "type": "prose"
         },
@@ -22680,7 +22526,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "All paper exercises on this page use fictional materials; in real work, specimen handling, slide preparation and special staining, reagent use, infection and chemical exposure protection, and abnormality submission and report assistance must follow laboratory biosafety standards, quality management systems and institutional procedures, and any practice activity must also meet local qualification requirements, with diagnostic conclusions made by a physician with the corresponding qualification."
+              "All paper exercises on this page use fictional materials; in real work, specimen handling, slide preparation and special staining, reagent use, infection and chemical exposure protection, and abnormality submission and report assistance must follow laboratory biosafety standards, quality management systems and institutional procedures, and any practice activity must also meet local qualification requirements, with review and reporting governed by the rules for the specimen and finding."
             ]
           },
           "id": "actors.display.fit_decision_checklist.how-detail",
@@ -22954,12 +22800,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "This table compares cytotechnologists with the adjacent occupations of cytogenetic technologists, microbiologists, medical scientists (excluding epidemiologists), pathologists, and medical and clinical laboratory technologists across seven items — core purpose, main objects and basis, core process, main outputs, responsible party, collaboration and supervision, and boundary of conclusions: adjacent occupations all involve microscopic observation and medical specimens, but the objects (exfoliative cell morphology, chromosomes and karyotypes, pathogenic microorganisms, experimental models and epidemiological data, tissue and lesion diagnosis) and whether the role carries cell morphology screening do not shift just because the occupations are adjacent; compare item by item against actual duties and the testing or diagnostic stage you work in."
+              "This table compares cytotechnologists with the adjacent occupations of cytogenetic technologists, microbiologists, medical scientists (excluding epidemiologists), pathologists, and medical and clinical laboratory technologists across seven items — core purpose, main objects and basis, core process, main outputs, responsible party, collaboration and supervision, and boundary of conclusions: some adjacent occupations also use microscopy or handle medical specimens, but the objects (cell specimen morphology, chromosomes and karyotypes, microorganisms, experimental models and research data, tissue and lesion diagnosis) and whether the role carries cell morphology screening do not shift just because the occupations are adjacent; compare item by item against actual duties and the testing or diagnostic stage you work in."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.answer",
           "source_refs": [
-            "r5-onet-current"
+            "r5-onet-current",
+            "teacher"
           ],
           "type": "prose"
         },
@@ -23150,7 +22997,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Technical staff are responsible for the slides they prepare, the screening records and the handover of abnormalities; FNA tasks are assistance to the physician. Pathological technologists in China may not issue pathology diagnostic reports, and diagnostic qualification cannot be conferred by internal authorization or tool output alone."
+              "Technicians document slide preparation, screening findings and handoff. They assist the physician with fine-needle aspiration. In Chinese medical institutions with pathology departments, pathology technicians perform technical work and physicians who meet the applicable requirements issue pathology diagnostic reports."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.primary",
@@ -23207,12 +23054,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Collaboration of adjacent occupations: cytogenetic technologists collaborate with referring departments and physicians; microbiologists collaborate with clinical and infection control teams; medical scientists collaborate with research groups and research peers; pathologists collaborate with clinicians and surgical departments; medical and clinical laboratory technologists collaborate with clinical departments and laboratory management."
+              "Collaboration of adjacent occupations: cytogenetic technologists collaborate with referring departments and physicians; microbiologists’ counterparts vary by role and can include health departments, community environmental health programs or physicians receiving laboratory services; medical scientists collaborate with research groups and research peers; pathologists collaborate with clinicians and surgical departments; medical and clinical laboratory technologists collaborate with clinical departments and laboratory management."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.cooperation.secondary",
           "source_refs": [
-            "r5-onet-current"
+            "r5-onet-current",
+            "teacher"
           ],
           "type": "prose"
         },
@@ -23235,12 +23083,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Similar job titles do not mean the same duties: whether the focus is exfoliative cell morphology, chromosomes and karyotypes, pathogenic microorganisms, experimental data, or tissue and lesion diagnosis — and whether the role carries screening interpretation, abnormality submission or diagnostic sign-off responsibility — determines the scope of duties and how performance is assessed, and the roles cannot be swapped by title."
+              "Similar job titles do not mean the same duties: whether the focus is cell specimen morphology, chromosomes and karyotypes, microorganisms, experimental data, or tissue and lesion diagnosis — and whether the role carries screening interpretation, abnormality submission or diagnostic sign-off responsibility — determines the scope of duties and how performance is assessed, and the roles cannot be swapped by title."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.primary",
           "source_refs": [
-            "r5-onet-current"
+            "r5-onet-current",
+            "teacher"
           ],
           "type": "prose"
         },
@@ -23573,7 +23422,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Report along the institution's review and escalation paths; the current O*NET 29-2011.02 profile (Updated2026, not a unified survey year): 67% have face-to-face discussions every day, 43% rate collaboration with a team as very important, 32% have contact with others most of the time, 45% have telephone conversations once or more a week and 77% describe physical proximity as \"slightly close (for example, sharing an office space)\"."
+              "Report along the institution's review and escalation paths; the current O*NET 29-2011.02 profile (Updated2026, not a unified survey year): 67% have face-to-face discussions every day, 43% rate collaboration with a team as very important, 32% have contact with others most of the time, 41% report telephone conversations daily and 45% at least weekly but less than daily and 77% describe physical proximity as \"slightly close (for example, sharing an office space)\"."
             ]
           },
           "id": "actors.display.work_context_block.collaboration",
@@ -23587,12 +23436,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Review and chain of responsibility | The current O*NET 29-2011.02 profile (Updated2026, not a unified survey year): 59% say the consequences of error are extremely serious, 50% say their decisions have a \"very important result\" impact on coworkers or institutional results and 32% carry high responsibility for the health and safety of other workers; slide preparation and staining quality, screening findings and abnormality submission are reviewed according to quality control procedures; diagnostic conclusions and report sign-off are made by a pathologist with the corresponding qualification with a record kept, and matters beyond your authority or results differing from previous findings must be reported and archived according to procedure."
+              "Review and chain of responsibility | The current O*NET 29-2011.02 profile (Updated2026, not a unified survey year): 59% of respondents rate the usual consequences of hard-to-correct errors as extremely serious, 50% say their decisions have a \"very important result\" impact on coworkers or institutional results and 32% carry high responsibility for the health and safety of other workers. China’s pathology-department guideline applies to medical institutions with pathology departments. Under Article 10, pathology technicians handle technical work and physicians who meet the qualification requirements issue pathology diagnostic reports. Article 16 requires the reporting physician’s signature and the report time. U.S. CLIA separates sampled review from report signatures. Before reporting, review slides from at least 10% of gynecologic cases that qualified staff interpreted as negative for the epithelial cell abnormalities and other malignant neoplasms specified in the rule. Draw the sample at random from the entire caseload and include negative cases and cases at higher risk for cervical cancer based on available patient information. The reviewer may be a qualified technical supervisor, a qualified cytology general supervisor or a qualified cytotechnologist with the required experience. Separately, a technical supervisor confirms gynecologic preparations with reactive or reparative changes or the listed epithelial cell abnormalities and other malignant neoplasms, and reviews all nongynecologic preparations. The signatures on those reports must reflect the review. For computer-generated reports with signatures, the electronic signature must be authorized by the technical supervisor who performed the review. Unsatisfactory specimens or preparations must be identified and reported as unsatisfactory."
             ]
           },
           "id": "actors.display.work_context_block.review",
           "source_refs": [
-            "r5-onet-current"
+            "r5-onet-current",
+            "r5-cn-pathology",
+            "r5-clia-reporting"
           ],
           "type": "prose"
         },
@@ -23601,7 +23452,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "The detailed profile lists 20 work styles, with attention to detail 100, conscientiousness 88 and caution 81 as Impact scores, not percentages or only four items. The 13 tasks comprise 12 core and 1 supplementary, with the hormonal abnormality examination being supplementary; FNA involves assisting the physician in collection, not an independent aspiration right. The specific pathology quality control, safety and reporting follow the rules and position permissions."
+              "The detailed profile lists 20 work styles, with Attention to Detail 100, Dependability 88 and Cautiousness 81 as Impact scores, not percentages or only four items. The 13 tasks comprise 12 core and 1 supplementary, with the hormonal abnormality examination being supplementary; FNA involves assisting the physician in collection, not an independent aspiration right. The specific pathology quality control, safety and reporting follow the rules and position permissions."
             ]
           },
           "id": "actors.display.work_context_block.quality",
@@ -23674,7 +23525,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Article 10 of China's pathology department guidelines: professional technical staff must have the corresponding professional education and professional technical position qualification; physicians issuing diagnostic reports must additionally be verified for clinical practice physician registration, pathology position and prescribed training, and a pathology technologist may not issue a pathology diagnostic report. Technical screening findings, abnormality handover and physician diagnosis are kept separate; Article 25 covers pre-post safety education and regular hazardous chemical and biological protection training. The specific pathology centre and method conditions still require separate verification. Industry wage background does not represent occupational income."
+              "China’s pathology-department guideline applies to medical institutions with pathology departments. Article 10 requires a clinical physician qualification, at least a junior-level pathology professional qualification, and one to three years of pathology diagnostic training or specialty study for physicians issuing pathology diagnostic reports. Pathology technicians handle technical work. Article 25 covers pre-job and periodic safety training."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
@@ -23703,7 +23554,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "In the United States, cytotechnologists correspond to O*NET-SOC 29-2011.02 (Cytotechnologists). The official scope is: staining, mounting and studying cells according to established standards and convention to find evidence of cancer, hormonal abnormalities and other pathological conditions. Duties include verifying and recording patient and specimen information; examining specimens under the microscope to assess specimen quality; preparing and analysing samples such as Pap smears (PAP), body fluids and fine needle aspirates (FNA) to find abnormal conditions; examining the colour, shape or size abnormalities of cell components and their arrangement in the cell sample and examining to find abnormal hormonal conditions; submitting slides with abnormal cell structure to the pathologist for further examination; providing the pathologist with clinical data or microscopic findings to assist in writing the pathology report; assisting the pathologist or physician in collecting cell samples by methods such as fine needle aspiration when necessary; applying special staining techniques (such as chromosome staining) to distinguish cells or cell components; maintaining laboratory operation according to specimen collection, preparation and laboratory safety standards; adjusting, maintaining or repairing laboratory equipment such as microscopes; allocating and coordinating laboratory tasks; and taking part in continuing education. The preparation level for this occupation is Job Zone Five (extensive preparation needed, SVP 8.0 and above), and the respondents' education opinions are 50% bachelor's, 36% post-baccalaureate certificate and 14% master's (not the composition of employees or a statutory threshold). On O*NET, the tasks, work context and preparation level of this subcategory (29-2011.02) follow its own basis, but its wage, employment and industry data are published under the combined statistics for \"Clinical Laboratory Technologists and Technicians\" (29-2010), and citations must state the source period and the proxy relationship. On the Chinese side, comparable positions are cytology testing positions in pathology departments of medical institutions and third-party medical laboratory organisations, and the two classification systems are not one-to-one: this page does not apply U.S. preparation levels, wages or qualifications to mainland China, nor does it merge the duties of cytogenetic technologists, histology technicians, histotechnologists, medical and clinical laboratory technologists, microbiologists, medical scientists (excluding epidemiologists), pathologists, neurodiagnostic technologists or phlebotomists into this occupation; diagnostic conclusions and report sign-off are made by a physician with the corresponding qualification."
+              "In the United States, cytotechnologists correspond to O*NET-SOC 29-2011.02 (Cytotechnologists). The official scope is: staining, mounting and studying cells according to established standards and convention to find evidence of cancer, hormonal abnormalities and other pathological conditions. Duties include verifying and recording patient and specimen information; examining specimens under the microscope to assess specimen quality; preparing and analysing samples such as Pap smears (PAP), body fluids and fine needle aspirates (FNA) to find abnormal conditions; examining the colour, shape or size abnormalities of cell components and their arrangement in the cell sample and examining to find abnormal hormonal conditions; submitting slides with abnormal cell structure to the pathologist for further examination; providing the pathologist with clinical data or microscopic findings to assist in writing the pathology report; assisting the pathologist or physician in collecting cell samples by methods such as fine needle aspiration when necessary; applying special staining techniques (such as chromosome staining) to distinguish cells or cell components; maintaining laboratory operation according to specimen collection, preparation and laboratory safety standards; adjusting, maintaining or repairing laboratory equipment such as microscopes; allocating and coordinating laboratory tasks; and taking part in continuing education. The preparation level for this occupation is Job Zone Five (extensive preparation needed, SVP 8.0 and above), and the respondents' education opinions are 50% bachelor's, 36% post-baccalaureate certificate and 14% master's (not the composition of employees or a statutory threshold). On O*NET, the tasks, work context and preparation level of this subcategory (29-2011.02) follow its own basis, but its wage, employment and industry data are published under the combined statistics for \"Clinical Laboratory Technologists and Technicians\" (29-2010), and citations must state the source period and the proxy relationship. On the Chinese side, comparable positions are cytology testing positions in pathology departments of medical institutions and third-party medical laboratory organisations, and the two classification systems are not one-to-one: this page does not apply U.S. preparation levels, wages or qualifications to mainland China, nor does it merge the duties of cytogenetic technologists, histology technicians, histotechnologists, medical and clinical laboratory technologists, microbiologists, medical scientists (excluding epidemiologists), pathologists, neurodiagnostic technologists or phlebotomists into this occupation; review and reporting depend on the specimen type, findings and applicable rules."
             ]
           },
           "id": "actors.display.definition_block.definition",
@@ -23846,7 +23697,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The difference is that the objects are chromosomes and karyotypes and the outputs are karyotypes named to standard and molecular cytogenetic conclusions; this occupation centres on exfoliative cell morphology screening and abnormality submission and does not carry out chromosome karyotype interpretation."
+              "The difference is that the objects are chromosomes and karyotypes and the outputs are karyotypes named to standard and molecular cytogenetic conclusions; this occupation centres on cell specimen morphology screening and abnormality submission and does not carry out chromosome karyotype interpretation."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
@@ -23902,12 +23753,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The difference is that the objects are pathogenic microorganisms and cultures and the core is microbiological testing and research; this occupation centres on cell morphology screening and pathology abnormality flags."
+              "Microbiologists study microorganisms such as bacteria, microscopic algae and fungi, including their cultures. Medical microbiologists may study how microbes relate to disease. Cytotechnologists screen the morphology of cell specimens and refer abnormal findings."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
           "source_refs": [
-            "onet"
+            "teacher",
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -24028,7 +23880,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The difference is that it covers many routine test items across haematology, body fluids and biochemistry and immunology; this occupation focuses on exfoliative cell morphology screening, with different interpretation objects and methods."
+              "The difference is that it covers many routine test items across haematology, body fluids and biochemistry and immunology; this occupation focuses on cell specimen morphology screening, with different interpretation objects and methods."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
@@ -24112,7 +23964,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The table below compares cytotechnologists with five adjacent directions across four items — occupational direction, core work and outputs, key differences, and what it suits better; occupation codes follow the O*NET-SOC convention, and sharing a medical laboratory or pathology setting does not mean duties, interpretation methods or qualifications can be swapped."
+              "Use cytotechnologists as the reference point when comparing six adjacent occupations by tasks, outputs, responsibilities and fit. The occupation codes use O*NET-SOC."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.intro",
@@ -24126,12 +23978,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Conclusion: these directions all involve fine observation and analysis in medical laboratory, pathology or research settings, but the objects (exfoliative cell morphology, chromosomes and karyotypes, pathogenic microorganisms, experimental data, tissue and lesions, routine test items) and whether the role carries screening interpretation, abnormality submission or diagnostic sign-off responsibility differ markedly; when choosing, go by the actual duties, methods and testing or diagnostic stage of the target position, not just the occupation title."
+              "Conclusion: these directions all involve fine observation and analysis in medical laboratory, pathology or research settings, but the objects (cell specimen morphology, chromosomes and karyotypes, microorganisms, experimental data, tissue and lesions, routine test items) and whether the role carries screening interpretation, abnormality submission or diagnostic sign-off responsibility differ markedly; when choosing, go by the actual duties, methods and testing or diagnostic stage of the target position, not just the occupation title."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.conclusion",
           "source_refs": [
-            "onet"
+            "onet",
+            "teacher"
           ],
           "type": "prose"
         },
@@ -24140,12 +23993,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Basis: O*NET OnLine 29-2011.02 and the official occupational profiles of the adjacent occupations (updated in 2026); the wage, employment and industry data for this occupation follow the parent occupation \"Clinical Laboratory Technologists and Technicians\" (29-2011.00) proxy basis, the preparation levels and practice requirements of adjacent occupations do not apply to this occupation, and this page is not to be used to infer hiring chances or income."
+              "See O*NET 29-2011.02 for cytotechnology tasks and the corresponding profiles for adjacent roles. U.S. wage, employment and industry figures use the broader clinical laboratory technologists and technicians group, BLS SOC 29-2010."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.evidence_note",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-wages-current",
+            "a24-bls-projections"
           ],
           "type": "prose"
         },
@@ -24154,12 +24009,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Next step: using the fictional exercises on this page or one laboratory shadowing session, verify whether the object of the target direction is exfoliative cell morphology, chromosomes and karyotypes, pathogenic microorganisms, experimental data or tissue and lesion diagnosis, and then decide on a direction."
+              "Use the paper exercise to try this occupation’s documentation and handoff. Compare other roles using their job descriptions. Observe work only with the institution’s permission and within its privacy and safety rules."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.transition",
           "source_refs": [
-            "onet"
+            "r5-onet-current",
+            "teacher"
           ],
           "type": "prose"
         }
@@ -24324,14 +24180,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round verified 13 occupational tasks, context and hot posting keywords; AI adoption, measured efficiency gains, wage and employment causation and a displacement date were not verified. Whole slide imaging, image abnormality localisation and LIS drafting are editorial candidates awaiting verification, and imaging automation is not the same as GenAI. Real clinical use requires method validation, missed and false finding checks and human review; technical staff cannot acquire diagnostic authority because a system generates a conclusion. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "FDA documentation shows that one cervical cytology system selects regions on specified digital slides for qualified staff to interpret. Evidence here does not quantify the entire screening task, adoption across the occupation or changes in working time."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
             "r5-onet-current",
             "r5-hottech-current",
-            "r5-cn-pathology"
+            "r5-cn-pathology",
+            "r5-fda-cytology"
           ],
           "type": "prose"
         },
@@ -24414,12 +24271,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET survey of tasks, work activities and work context for Cytotechnologists (29-2011.02)"
+              "Cervical cytology image assistance system in the FDA decision"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.object",
           "source_refs": [
-            "r5-onet-current"
+            "r5-fda-cytology"
           ],
           "type": "prose"
         },
@@ -24428,12 +24285,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Lists tasks such as verifying specimen information, assessing specimen quality under the microscope, preparing and analysing Pap smear and fine needle aspirate samples, special staining, examining cell morphology abnormalities, submitting abnormal slides and assisting with the report, together with work context percentages (including 95% working indoors in a controlled environment every day, 77% rating being accurate and precise as extremely important, 73% performing repetitive motions continually or almost continually, and 59% rating the consequences of error as extremely serious)."
+              "The system selects regions on specified digital ThinPrep Pap slides for qualified staff to review and interpret."
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r5-onet-current"
+            "r5-fda-cytology"
           ],
           "type": "prose"
         },
@@ -24442,12 +24299,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This is a task and context profile and contains no technology adoption or job displacement data."
+              "Section VII, Table 31 reports case review times from a study of the specified device. The study does not estimate occupation-wide adoption, time savings or employment changes."
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.limit",
           "source_refs": [
-            "r5-onet-current"
+            "r5-fda-cytology"
           ],
           "type": "prose"
         },
@@ -24820,12 +24677,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Task and work context profile"
+              "FDA De Novo decision summary"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.type",
           "source_refs": [
-            "r5-onet-current"
+            "r5-fda-cytology"
           ],
           "type": "prose"
         },
@@ -24834,12 +24691,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Provides this occupation's tasks, work activities and work context percentages"
+              "Section VII, Table 31 reports case review times from a study of the specified device. The study does not estimate occupation-wide adoption, time savings or employment changes."
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r5-onet-current"
+            "r5-fda-cytology"
           ],
           "type": "prose"
         },
@@ -25573,7 +25430,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Retain human review for specimen quality assessment, slide preparation and special staining quality determination, morphological abnormality identification and the content of abnormality submissions, and do not let tool output replace quality control procedures and institutional authorization; diagnostic conclusions are still made by a physician with the corresponding qualification."
+              "Retain human review for specimen quality assessment, slide preparation and special staining quality determination, morphological abnormality identification and the content of abnormality submissions, and do not let tool output replace quality control procedures and institutional authorization; follow the applicable review and reporting rules for the specimen and finding."
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.2.description",
@@ -26118,7 +25975,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              ": This round has no Chinese occupational quote or one-to-one classification evidence, and a clinical technical qualification does not automatically equal physician practice or diagnostic reporting qualification."
+              " Neither notice gives a wage amount. A comparable mainland occupational wage distribution remains unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
@@ -26133,12 +25990,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain verifiable recruitment or quoted-pay statistics for cytology testing positions in mainland China; the pay disclosures of individual units or platforms cannot represent the national level"
+              "The China Rehabilitation Research Center sought a pathology technician for cytology slide preparation, frozen sections and staining, requiring a medical junior-college credential or higher and at least two years of pathology-department technician experience. Peking University listed section preparation, staining, microscopy and animal research specimens, requiring a related bachelor’s degree or higher. These are adjacent clinical and research jobs. The notices do not establish diagnostic authority or comparable wages."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "a24-crrc",
+            "a24-pku"
           ],
           "type": "prose"
         },
@@ -26162,7 +26020,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Article 10 of China's pathology department guidelines: professional technical staff must have the corresponding professional education and professional technical position qualification; physicians issuing diagnostic reports must additionally be verified for clinical practice physician registration, pathology position and prescribed training, and a pathology technologist may not issue a pathology diagnostic report. Technical screening findings, abnormality handover and physician diagnosis are kept separate; Article 25 covers pre-post safety education and regular hazardous chemical and biological protection training. The specific pathology centre and method conditions still require separate verification."
+              "China’s pathology-department guideline applies to medical institutions with pathology departments. Article 10 requires a clinical physician qualification, at least a junior-level pathology professional qualification, and one to three years of pathology diagnostic training or specialty study for physicians issuing pathology diagnostic reports. Pathology technicians handle technical work. Article 25 covers pre-job and periodic safety training."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -26176,7 +26034,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial compilation: positions involving biological specimen handling, slide preparation and special staining, reagent use, and abnormality submission and report assistance are subject to laboratory biosafety standards, quality management systems, institutional procedures and practice qualification requirements; diagnostic conclusions are made by a physician with the corresponding qualification; duties and the operable scope must be verified against the specific position and current rules, and this page does not constitute a safety or compliance determination."
+              "Editorial compilation: positions involving biological specimen handling, slide preparation and special staining, reagent use, and abnormality submission and report assistance are subject to laboratory biosafety standards, quality management systems, institutional procedures and practice qualification requirements; follow the applicable requirements for screening, review and reporting; duties and the operable scope must be verified against the specific position and current rules, and this page does not constitute a safety or compliance determination."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
@@ -26204,7 +26062,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial check suggestion: look at the actual slide preparation and screening batches, handover and review records, then verify contractual hours, shifts, bonuses and rest. This page did not check real Chinese recruitment or wages and does not infer industry-wide shift work or performance pay from the U.S. context."
+              "Ask the employer about slide preparation, screening and review. Request only blank forms or authorized de-identified examples. Confirm hours, shifts, bonuses and rest."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
@@ -26233,7 +26091,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 average annual pre-tax industry background is 146266 yuan for non-private and 75631 yuan for private units in health and social work, published on 2026-05-15. The scope of urban legal entities with 5 or more persons excludes the self-employed and freelancers; non-private does not mean state-owned only. Research institutions need matching real industries, and none of this can be extrapolated to this occupation's wages, starting pay, or take-home income."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -26328,13 +26186,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: state and regional wages were not queried this round. The national 2025 wages and the 2025—2035 projection on this page are both combined 29-2010 proxies and cannot serve as this subcategory's individual quote or Chinese income."
+              "The figures come from the May 2025 BLS OEWS survey, displayed by O*NET for the U.S. clinical laboratory technologists and technicians group (29-2010)."
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "r5-wages-current",
-            "r5-bls-current"
+            "r5-wages-current"
           ],
           "type": "prose"
         },
@@ -26418,13 +26275,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Combined 29-2010 proxy: about 343000 people in 2025; BLS Table 1.2 projects about 352400 in 2035, a net increase of about 9400, or +2.7%; the 2025—2035 annual average is about 20800 openings including growth and replacement. O*NET currently shows a Average3–4% classification label, with the precise change following BLS2.7%, and the label range is not substituted for the precise value. This is not a separately listed cytology subcategory demand, immediate recruitment, an individual probability of being hired or AI causation."
+              "Regional figures describe local wage distributions. This page uses the nationwide group. For an individual offer, confirm the location, shifts, duties and contract with the employer."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
           "source_refs": [
-            "r5-bls-current",
-            "r5-onet-current"
+            "r5-wages-current"
           ],
           "type": "prose"
         },
@@ -26647,7 +26503,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET shows 59% indicating the consequences of error are extremely serious, 73% indicating repeating the same task is extremely important, and 41% indicating daily time pressure; following quality control procedures and explaining the situation when necessary is more prudent than rushing and skipping verification."
+              "O*NET shows 59% of respondents rate the usual consequences of hard-to-correct errors as extremely serious, 73% indicating repeating the same task is extremely important, and 41% indicating daily time pressure; following quality control procedures and explaining the situation when necessary is more prudent than rushing and skipping verification."
             ]
           },
           "id": "actors.fit.personality-fit-block.4",
@@ -26815,7 +26671,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "First complete an exercise using public or fictional materials—write a specimen and patient information verification checklist, draw a slide preparation and staining quality evaluation form, and write out the morphological findings and the abnormalities requiring review submission from fictional cell images—or a lab shadowing session, then judge your preference."
+              "Try the paper cytology handoff on this page. Check specimen IDs, the control result and who takes each case next."
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -27553,7 +27409,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Centered on detecting and researching pathogenic microorganisms; transferring in requires building up microbial culture and identification skills."
+              "Centered on detecting and researching microorganisms; transferring in requires building up microbial culture and identification skills."
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
@@ -28035,7 +27891,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Evaluate specimen quality against standards, handle unacceptable specimens per protocol and state the reason, recommend recollection, and do not force a screening conclusion."
+              "Assess specimens against the laboratory’s standards. If a specimen is unsatisfactory, record the reason and refer it under the laboratory procedure. The applicable workflow and authorized staff determine whether recollection is needed."
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
@@ -28050,7 +27906,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Prepare slides and stain per the standard process and confirm controls are valid; evaluate quality before screening, redo per protocol if unacceptable, and record the reason."
+              "Check slide preparation, staining and control quality before screening. Record and refer unsatisfactory work. Authorized staff decide whether to repeat it under the applicable procedure."
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
@@ -28159,7 +28015,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "This section only explains risks and control directions; it does not replace laboratory biosafety standards, chemical safety requirements, quality control procedures, or institutional abnormality submission and report authorization systems, and it does not constitute a safety determination, diagnostic opinion, liability judgment, or legal advice; diagnostic conclusions are made by physicians holding the corresponding qualifications."
+              "This section only explains risks and control directions; it does not replace laboratory biosafety standards, chemical safety requirements, quality control procedures, or institutional abnormality submission and report authorization systems, and it does not constitute a safety determination, diagnostic opinion, liability judgment, or legal advice; review and reporting follow the rules for the specimen and finding."
             ]
           },
           "id": "actors.display.career_risk_cards.boundary",
@@ -28521,7 +28377,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "In the U.S., 73% continuous repeated motions, 73% repeating tasks is extremely important, 59% consequences of error are extremely serious, and 41% daily deadline pressure are respondent context; fatigue causing skipped verification is an editorial risk to be checked, not measured causality or an incident rate. Verify actual workload and rest against institutional policy."
+              "In the U.S., 73% repeat motions continuously or almost continuously, 73% repeating tasks is extremely important, 59% of respondents rate the usual consequences of hard-to-correct errors as extremely serious, and 41% daily deadline pressure are respondent context; fatigue causing skipped verification is an editorial risk to be checked, not measured causality or an incident rate. Verify actual workload and rest against institutional policy."
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.scenario",
@@ -28581,7 +28437,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Article 10 of China's pathology department guidelines: professional technical staff must have the corresponding professional education and professional technical position qualification; physicians issuing diagnostic reports must additionally be verified for clinical practice physician registration, pathology position and prescribed training, and a pathology technologist may not issue a pathology diagnostic report. Technical screening findings, abnormality handover and physician diagnosis are kept separate; Article 25 covers pre-post safety education and regular hazardous chemical and biological protection training. The specific pathology centre and method conditions still require separate verification."
+              "China’s pathology-department guideline applies to medical institutions with pathology departments. Article 10 requires a clinical physician qualification, at least a junior-level pathology professional qualification, and one to three years of pathology diagnostic training or specialty study for physicians issuing pathology diagnostic reports. Pathology technicians handle technical work. Article 25 covers pre-job and periodic safety training."
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
@@ -28632,7 +28488,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This page does not cite specific job postings and does not count historical hiring cases as open positions; hiring and qualification conditions must be verified against the target employer's public information for the relevant year.",
+              "The China Rehabilitation Research Center notice covers an adjacent clinical pathology role that includes cytology slide preparation. Peking University’s notice covers an adjacent research support role. Use each notice for that employer’s duties and entry requirements. Neither notice gives a wage amount. A comparable mainland occupational wage distribution remains unavailable.",
               "The training, observation, and mentoring assessment methods in the examples are editorial designs used to illustrate common verification methods and do not represent any institution's uniform process."
             ]
           },
@@ -28640,7 +28496,9 @@
           "source_refs": [
             "r5-onet-current",
             "r5-bls-current",
-            "r5-cn-pathology"
+            "r5-cn-pathology",
+            "a24-crrc",
+            "a24-pku"
           ],
           "type": "notice"
         },
@@ -28689,7 +28547,7 @@
                 "Organize abnormal slides and clinical data, submit abnormalities to the pathologist, and assist with report preparation.",
                 "Abnormality recognition, material completeness, and description accuracy.",
                 "A fictional sample of an abnormality submission list and findings description.",
-                "Focus on abnormality submission and communication, with diagnostic conclusions made by the physician."
+                "Focus on abnormality submission and communication, with review and reporting responsibilities defined by the applicable rules."
               ],
               [
                 "Cytogenetic technologists (adjacent direction)",
@@ -28719,14 +28577,14 @@
                 "values": [
                   "Education and training requirements",
                   "For this subcategory, JobZone5/SVP8 and above is the preparation level, not an IQ or a uniform degree law; O*NET respondents' opinions on required education are 50% bachelor's, 36% post-baccalaureate certificate, and 14% master's, not the employee education composition. The combined 29-2010 BLS typical education of bachelor's, no related experience, and None for on-the-job training does not mean cytology requires no specialized training.",
-                  "Chinese pathology department guideline item 10: professional technical personnel must hold the corresponding professional education and professional technical position qualification; physicians issuing diagnostic reports are separately verified for clinical practice physician status, pathology position, and required training, and pathology technicians must not issue pathology diagnostic reports. Technical screening findings, abnormality handover, and physician diagnosis are kept separate; item 25 covers pre-employment safety education and periodic hazardous chemical and biological protection training. Specific pathology centers and method conditions still require separate verification. Real Chinese recruitment was not verified."
+                  "China’s pathology-department guideline applies to medical institutions with pathology departments. Article 10 requires a clinical physician qualification, at least a junior-level pathology professional qualification, and one to three years of pathology diagnostic training or specialty study for physicians issuing pathology diagnostic reports. Pathology technicians handle technical work. Article 25 covers pre-job and periodic safety training."
                 ]
               },
               {
                 "id": "employer-1",
                 "values": [
                   "Physical stamina and adaptation to the work environment",
-                  "In the U.S., 57% sit continuously, 73% make repeated motions continuously, and 41% face daily deadline pressure; actual work and shifts are verified separately, and this is not used to infer a uniform health threshold or scheduling practice in China.",
+                  "In the U.S., 57% sit continuously or almost continuously, 73% make repeated motions continuously or almost continuously, and 41% face daily deadline pressure; actual work and shifts are verified separately, and this is not used to infer a uniform health threshold or scheduling practice in China.",
                   "This page obtains no unified public conditions for mainland China, and they must be verified against the target employer's requirements for the relevant year; this page does not constitute health or hiring advice."
                 ]
               },
@@ -28735,7 +28593,7 @@
                 "values": [
                   "Observable evidence of professional ability",
                   "Able to verify specimen and patient information against standards, evaluate specimen quality, prepare slides and apply special stains, screen field by field under the microscope and identify abnormalities in cell morphology and arrangement, record findings, and submit abnormalities per procedure (from O*NET task and work context data).",
-                  "The above are task and context observation points, not personality labels or hiring thresholds; the work context shows 73% making repeated motions continuously or almost continuously, 73% saying repeating the same task is extremely important, 77% saying being accurate and precise is extremely important, and 59% saying the consequences of error are extremely serious."
+                  "The above are task and context observation points, not personality labels or hiring thresholds; the work context shows 73% making repeated motions continuously or almost continuously, 73% saying repeating the same task is extremely important, 77% saying being accurate and precise is extremely important, and 59% of respondents rate the usual consequences of hard-to-correct errors as extremely serious."
                 ]
               },
               {
@@ -28796,9 +28654,8 @@
           },
           "id": "actors.path.entry-portfolio.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-pathology",
+            "onet"
           ],
           "title": "What portfolio pieces can I prepare without relevant experience?",
           "type": "cards"
@@ -28836,7 +28693,7 @@
                 "Morphology and abnormality submission Q&A",
                 "Whether they understand the key points for identifying abnormalities in cell morphology and arrangement, the objects of abnormality submission, and the accompanying material requirements.",
                 "Answer records or an on-site demonstration.",
-                "Assessment standards are set by the institution and this page does not infer them; diagnostic conclusions are made by the physician."
+                "Assessment standards are set by the institution and this page does not infer them; review and reporting follow the applicable rules."
               ],
               [
                 "Mentored or trial-position observation",
@@ -28848,9 +28705,9 @@
           },
           "id": "actors.path.interview-probation.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "a24-crrc",
+            "a24-pku",
+            "onet"
           ],
           "title": "What interviews and trial positions may assess",
           "type": "table"
@@ -28909,8 +28766,8 @@
                 "CT(ASCP) professional certification (U.S.)",
                 "Those who meet the corresponding pathway",
                 "Meets the certification education and examination conditions",
-                "In the U.S., CT(ASCP) is now called Cytologist; Route1 recognizes a bachelor's degree plus completion of a CAAHEP-accredited cytology program within the past 5 years, and graduates of bachelor's or post-baccalaureate master's programs may apply under that pathway, with documentation and examination required. 493.1483 sets the pathways for cytology slide examination personnel and the applicable state licensure; CMS has recognized SCT(ASCP), while CT(ASCPi)/SCT(ASCPi) cannot satisfy (b)(2) through this certification and must not be mixed. This does not replace Chinese qualifications, state licensure, or diagnostic reporting authority.",
-                "Route1 recognizes a bachelor's plus a CAAHEP program within the past 5 years; documentation and examination",
+                "CT(ASCP) is not a universal hiring requirement. For U.S. roles, check applicable CLIA personnel qualifications and state licensure separately.",
+                "ASCP BOC’s CT(ASCP) Route 1 requires a bachelor’s degree from a regionally or nationally accredited college or university and completion of a CAAHEP-accredited cytology program within the past five years. Check exam eligibility, CLIA personnel qualifications and applicable state licensure separately.",
                 "Training cost and total duration not verified",
                 "ASCPi must not be mixed with ASCP/CMS-recognized pathways"
               ],
@@ -28925,7 +28782,7 @@
               ],
               [
                 "Quality management and mentoring ability",
-                "People preparing to take on quality management or technical supervisor duties",
+                "People preparing for quality management or mentoring duties",
                 "Affects competitiveness and readiness for related roles",
                 "Not an entry threshold",
                 "Built through screening practice and quality management",
@@ -28938,7 +28795,9 @@
           "source_refs": [
             "r5-onet-current",
             "r5-bls-current",
-            "r5-cn-pathology"
+            "r5-cn-pathology",
+            "r5-ct",
+            "r5-clia-cytology"
           ],
           "title": "How to choose education, qualification, and interpretation training",
           "type": "table"
@@ -28949,9 +28808,9 @@
           "data": {
             "paragraphs": [
               "For this subcategory, JobZone5/SVP8 and above is the preparation level, not an IQ or a uniform degree law; O*NET respondents' opinions on required education are 50% bachelor's, 36% post-baccalaureate certificate, and 14% master's, not the employee education composition. The combined 29-2010 BLS typical education of bachelor's, no related experience, and None for on-the-job training does not mean cytology requires no specialized training.",
-              "Article 10 of China's pathology department guidelines: professional technical staff must have the corresponding professional education and professional technical position qualification; physicians issuing diagnostic reports must additionally be verified for clinical practice physician registration, pathology position and prescribed training, and a pathology technologist may not issue a pathology diagnostic report. Technical screening findings, abnormality handover and physician diagnosis are kept separate; Article 25 covers pre-post safety education and regular hazardous chemical and biological protection training. The specific pathology centre and method conditions still require separate verification.",
-              "In the U.S., CT(ASCP) is now called Cytologist; Route1 recognizes a bachelor's degree plus completion of a CAAHEP-accredited cytology program within the past 5 years, and graduates of bachelor's or post-baccalaureate master's programs may apply under that pathway, with documentation and examination required. 493.1483 sets the pathways for cytology slide examination personnel and the applicable state licensure; CMS has recognized SCT(ASCP), while CT(ASCPi)/SCT(ASCPi) cannot satisfy (b)(2) through this certification and must not be mixed. This does not replace Chinese qualifications, state licensure, or diagnostic reporting authority.",
-              "Insufficient evidence: real Chinese job postings, specific professional exam registration and cost cycles, and the complete current supporting conditions of third-party pathology centers and specialized methods were not verified. Professional qualification, ASCP certification, state licensure, laboratory accreditation, and method authority are verified separately."
+              "China’s pathology-department guideline applies to medical institutions with pathology departments. Article 10 requires a clinical physician qualification, at least a junior-level pathology professional qualification, and one to three years of pathology diagnostic training or specialty study for physicians issuing pathology diagnostic reports. Pathology technicians handle technical work. Article 25 covers pre-job and periodic safety training.",
+              "ASCP BOC’s CT(ASCP) Route 1 requires a bachelor’s degree from a regionally or nationally accredited college or university and completion of a CAAHEP-accredited cytology program within the past five years. Check exam eligibility, CLIA personnel qualifications and applicable state licensure separately.",
+              "Verify exam registration and costs, third-party pathology center requirements and specialized method conditions separately. Professional credentials, certification, state licensure, laboratory accreditation and method authority each have their own scope."
             ]
           },
           "id": "actors.path.credential-boundary.1",
@@ -29002,7 +28861,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Article 10 of China's pathology department guidelines: professional technical staff must have the corresponding professional education and professional technical position qualification; physicians issuing diagnostic reports must additionally be verified for clinical practice physician registration, pathology position and prescribed training, and a pathology technologist may not issue a pathology diagnostic report. Technical screening findings, abnormality handover and physician diagnosis are kept separate; Article 25 covers pre-post safety education and regular hazardous chemical and biological protection training. The specific pathology centre and method conditions still require separate verification."
+              "China’s pathology-department guideline applies to medical institutions with pathology departments. Article 10 requires a clinical physician qualification, at least a junior-level pathology professional qualification, and one to three years of pathology diagnostic training or specialty study for physicians issuing pathology diagnostic reports. Pathology technicians handle technical work. Article 25 covers pre-job and periodic safety training."
             ]
           },
           "id": "actors.path.career-path-block.3",
@@ -29019,45 +28878,45 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional screening scenario material (exercise input)",
-                  "Fictional scenario: a cytotechnologist encounters four problems during a shift. First, the submission information for a gynecologic cytology specimen does not match the specimen identifier on the receipt form; second, after a batch of specimens is prepared, the staining is too dark and the controls are unclear; third, a small number of suspicious cells appear on one slide under the microscope, but the number is insufficient for a clear judgment; fourth, the clinical department asks about the result before the report is ready and wants an answer as soon as possible.",
-                  "Provided materials: specimen and patient information verification requirements; specimen quality evaluation standards; slide preparation and special staining quality control requirements; abnormality submission and review procedures.",
-                  "Not provided: the authority for handling and communication when submission information and identifiers do not match, the authority to redo and postpone when staining fails, how to submit for review a suspicious finding that is insufficient for judgment, and the scope of what may be told to the clinical department before the report is complete. If these conditions are needed in the exercise, state your assumptions and the party you need to confirm with."
+                  "Paper exercise: at 09:10, the container says H17 and the request says H71.",
+                  "Q4 log: the expected positive control shows a signal. The observed result says “no signal.” P8 log: identity verified. The morphology entry is marked “review pending.”",
+                  "Roles in this fictional lab: the intake lead manages specimen registration, the quality lead manages controls and batch quality, and the pathologist reviews morphology findings. The records contain no approved disposition or handoff.",
+                  "You may document, hold and escalate. Authorized staff decide on repeat work or communication with the clinical team. No report time is supplied.",
+                  "Single-change variant: change only the observed Q4 positive-control result to “signal present.” Keep all other records, the expected result and the role assignments as in the original."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Task requirements",
-                  "Write a one-page handling and escalation plan: including verification and communication when submission information and identifiers do not match, handling of unacceptable staining quality, review arrangements for suspicious morphology, and how to communicate with the clinical department before the report is complete.",
-                  "The plan must state which information comes from the prompt materials and which is still an assumption, and explain whether it relies on standard operating requirements, quality control procedures, or the abnormality submission and review process."
+                  "First, write separate lines for H17/H71, Q4 and P8, with the reason and who takes over.",
+                  "Mark what is held, what is referred and which decisions need authorization.",
+                  "Draft the handoff and keep any unresolved items. Open the reference on day seven. Keep the supplied records. Leave diagnosis and report timing to authorized staff."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference deliverable (derivable from the prompt)",
-                  "The plan should include: submission information and identifier mismatch (pause processing and contact the submitting party to verify, do not proceed to interpretation before consistency is confirmed, and record the communication), unacceptable staining quality (do not force interpretation when controls are invalid or staining is too dark, redo per protocol and record the reason), suspicious morphology (draw no firm conclusion, submit to the pathologist for review per the institutional pathway, attaching clinical data and microscopic findings, and do not substitute tool output for human judgment), clinical communication (explain the stage of screening and the expected timing, and do not give an unreviewed conclusion in advance), and handover (state the status of the four items, the actions taken, and the items pending confirmation).",
-                  "The reference deliverable lists only the elements that should be included; it does not require wording identical to the example, and it is enough to explain the basis for the judgment."
+                  "Finish your own answer first",
+                  "Open “Cytology handoff reference (open after day six)” under FAQ and sources.",
+                  "On day seven, use the checklist to record one difference and correction."
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
                   "Boundaries and conclusions that cannot be inferred",
-                  "This exercise only tests awareness of information verification, judgment of specimen and staining quality, and awareness of the boundaries of abnormality submission and communication; it does not evaluate whether handling of a real case is compliant, and does not constitute a diagnostic opinion, a safety determination, or legal advice.",
-                  "Real patient specimens or un-de-identified laboratory data must not be used; handling real specimens, slide preparation and special staining, abnormality submission, and report assistance must follow laboratory biosafety standards, quality management systems, and institutional protocols, and comply with local qualification requirements; diagnostic conclusions are made by physicians with the corresponding qualifications."
+                  "Practice checking specimen identity, comparing the observed and expected control results, documenting the handoff and marking decisions that need authorization. Assessing actual specimen or staining quality and making a diagnosis require separate observations and qualified staff.",
+                  "Real patient specimens or un-de-identified laboratory data must not be used; handling real specimens, slide preparation and special staining, abnormality submission, and report assistance must follow laboratory biosafety standards, quality management systems, and institutional protocols, and comply with local qualification requirements; review and reporting follow the rules for the specimen and finding."
                 ]
               }
             ]
           },
           "id": "actors.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-pathology",
+            "onet"
           ],
-          "title": "Fictional exercise material: handling specimen information verification and staining quality problems",
+          "title": "Fictional paper exercise: three cytology handoff records",
           "type": "cards"
         },
         {
@@ -29068,59 +28927,58 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: read one public document",
-                  "Find a public educational document on medical laboratory biosafety or cytology screening, mark three key requirements and the corresponding practices, and write down what you want to confirm."
+                  "Day 1: work from the paper exercise",
+                  "Paper exercise: at 09:10, the container says H17 and the request says H71."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: run an information verification exercise",
-                  "Using fictional specimens and submission information, write out the patient and specimen information verification items and the conditions for rejection or resubmission, and note the conditions that need confirmation."
+                  "Day 2: work from the paper exercise",
+                  "First, write separate lines for H17/H71, Q4 and P8, with the reason and who takes over."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: write a slide preparation and staining quality checklist",
-                  "Using a fictional process, list the specimen handling steps, staining quality judgment criteria, and redo rules for unacceptable results, and mark the items that must be escalated."
+                  "Day 3: work from the paper exercise",
+                  "Mark what is held, what is referred and which decisions need authorization."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: do a morphology recording exercise",
-                  "Using fictional cell images, write out the field-by-field recording method, the key points for identifying morphological abnormalities, and the types of abnormalities that should be submitted for review."
+                  "Day 4: work from the paper exercise",
+                  "Draft the handoff and keep any unresolved items. Open the reference on day seven. Keep the supplied records. Leave diagnosis and report timing to authorized staff."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: write an abnormality handling record",
-                  "Using a fictional scenario, write a record of review, redo, and escalation for failed staining or an unclear image, including the basis for judgment and the handover content."
+                  "Day 5: work from the paper exercise",
+                  "Check each row against the role list. Include the original record, the reason, your proposed action and the next owner."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: have someone else review using only the materials",
-                  "Have a peer review your judgment using only your plan, and record the questions they raise."
+                  "Day 6: finish your own handoff",
+                  "Submit one page on your own. List the three original rows, then add the row that changes in the variant and explain why. Include evidence, status and the next owner for both versions. Open the reference on day seven."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: decide whether to continue",
-                  "Return to this page's decision checklist and write down three reasons you are willing to continue and two conditions that require caution."
+                  "Day 7: open the reference and review",
+                  "Open “Cytology handoff reference (open after day six)” under FAQ and sources. Record one difference and correction. Continue exploring if you can explain when to pause, who takes over and what needs authorization. Repeat if something is missing. Ask the employer about actual work conditions."
                 ]
               }
             ]
           },
           "id": "actors.path.seven-day-trial.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-pathology",
+            "onet"
           ],
           "title": "Seven-day low-cost experience plan",
           "type": "timeline"
@@ -29130,20 +28988,19 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Specific change: whether, given the materials, you can write out the basis for information verification, your judgment of specimen and staining quality, and the order of abnormality submission and review, rather than only writing that it was handled.",
+              "Check the handoff: record the identity mismatch, the difference between the observed and expected control, the status of the morphology entry, the reason for each handoff and decisions that still need authorization.",
               "Facts and choices: whether you would rather do slide preparation and special staining, microscopic screening and abnormality submission, or laboratory quality and equipment.",
-              "Exercise cost: long hours of repeated screening at the microscope, interpretation responsibility pressure, and a biological and chemical exposure environment; which step drains you most, and can you accept it recurring in the work.",
+              "Note which part of the exercise took the most effort: checking records, documenting reasons or leaving decisions for authorization.",
               "Material boundaries: the exercise materials are all fictional or based on public information, and real patient specimens or un-de-identified laboratory data must not be included.",
-              "Response to feedback: when quality control and the pathologist point out problems with your slide preparation quality or screening findings, are you willing to go back to the standard and make up the gap.",
+              "Use the day-seven reference to correct one piece of evidence, the next owner or an authorization decision.",
               "Process interest: even when slide reading is repetitive, are you willing to complete the quality evaluation and review every time, rather than skipping the protocol based on experience.",
-              "Next step: if you are willing to continue through the first six steps, the next step is, within compliance (such as lab shadowing or a training session), to complete one closed loop from specimen verification and slide preparation and staining through screening and abnormality submission, and ask an experienced person to review it; if one step clearly drains you, narrow the direction first and then verify."
+              "Use the collapsed reference to review your note on day seven. Continue exploring if you can explain when to pause, who takes over and what needs authorization. Repeat if something is missing. Ask the employer about actual work conditions."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-pathology",
+            "onet"
           ],
           "title": "How to decide on the seventh day whether to continue",
           "type": "list"
@@ -29201,7 +29058,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "U.S. preparation opinions for this subcategory, the 493.1483 cytology-specific personnel conditions, and CT/SCT certification are listed separately; Chinese pathology technicians and diagnostic physicians follow the pathology department guideline as read, third-party centers and specific method conditions are verified separately, and no real recruitment was checked this round."
+              "The U.S. references cover preparation, CLIA cytology personnel qualifications and CT/SCT certification separately. Check current local rules and employer authorization for pathology technicians and diagnosing physicians in China."
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
@@ -29233,7 +29090,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Education, professional position qualification, CT/SCT certification, state licensure, institutional accreditation, and operating authority are not interchangeable; in China a pathology technician cannot become a diagnostic report physician through internal authorization."
+              "Check professional qualifications, CT/SCT certification, applicable state licensure and laboratory authorization separately. In Chinese medical institutions with pathology departments, pathology technicians perform technical work and physicians who meet the applicable requirements issue pathology diagnostic reports."
             ]
           },
           "id": "actors.display.career_path_block.locale.credentials",
@@ -29344,7 +29201,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Technical supervisor or quality management direction"
+              "Quality management and mentoring"
             ]
           },
           "id": "actors.display.career_path_block.ladder.develop.stage",
@@ -29360,7 +29217,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Participate in quality control and quality assurance plans, equipment maintenance, method validation, and personnel mentoring, or take on a specialty direction; this stage usually requires screening practice experience and quality management ability, and the qualification conditions are set by institutional policy."
+              "Check the employer’s requirements for quality control, incident review and mentoring. A technical supervisor under U.S. CLIA is a separate role with regulatory qualifications."
             ]
           },
           "id": "actors.display.career_path_block.ladder.develop.description",
@@ -29886,7 +29743,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Review and specialty direction role"
+              "Specialty screening and case handoff"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.03.role",
@@ -29902,13 +29759,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Take on review and organization of difficult or high-attention cases, and participate in a specialty direction (such as gynecologic or non-gynecologic cytology)."
+              "Screen within your authorization, organize gynecologic or nongynecologic case materials, and document difficult or high-concern findings for the authorized reviewer."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.03.responsibility",
           "source_refs": [
             "r5-onet-current",
-            "r5-bls-current",
+            "r5-clia-reporting",
             "r5-cn-pathology"
           ],
           "type": "prose"
@@ -29934,13 +29791,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Per institutional policy and position requirements."
+              "U.S. CLIA §493.1274(c)(1) allows a qualified technical supervisor, cytology general supervisor or cytotechnologist with the required experience to review sampled negative gynecologic cases before reporting. Under (e)(1)–(3), the technical supervisor separately confirms gynecologic preparations with reactive or reparative changes or the abnormalities specified in the rule and reviews all nongynecologic preparations. Report signatures must reflect that review, and the reviewing technical supervisor must authorize electronic signatures on computer-generated reports. In Chinese medical institutions with pathology departments, technicians handle technical work and qualified physicians issue and sign pathology diagnostic reports."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.03.credentials",
           "source_refs": [
-            "r5-onet-current",
-            "r5-bls-current",
+            "r5-clia-reporting",
             "r5-cn-pathology"
           ],
           "type": "prose"
@@ -30014,7 +29870,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "In China, report assistance differs from being a diagnostic report physician, and pathology technicians must not issue pathology diagnostic reports; to serve as a physician one must separately meet guideline item 10 and the current practice specialty conditions."
+              "Ask which screening, review and reporting duties the position covers. In Chinese medical institutions with pathology departments, pathology technicians perform technical work and physicians who meet the applicable requirements issue pathology diagnostic reports."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.credentials",
@@ -30411,7 +30267,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Article 10 of China's pathology department guidelines: professional technical staff must have the corresponding professional education and professional technical position qualification; physicians issuing diagnostic reports must additionally be verified for clinical practice physician registration, pathology position and prescribed training, and a pathology technologist may not issue a pathology diagnostic report. Technical screening findings, abnormality handover and physician diagnosis are kept separate; Article 25 covers pre-post safety education and regular hazardous chemical and biological protection training. The specific pathology centre and method conditions still require separate verification."
+              "China’s pathology-department guideline applies to medical institutions with pathology departments. Article 10 requires a clinical physician qualification, at least a junior-level pathology professional qualification, and one to three years of pathology diagnostic training or specialty study for physicians issuing pathology diagnostic reports. Pathology technicians handle technical work. Article 25 covers pre-job and periodic safety training."
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
@@ -30447,7 +30303,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The combined employment projection differs from this subcategory or from actual Chinese recruitment; screening demand, institutions, and investment are factors to be verified, this round has no recruitment samples for this subcategory, and the combined net increase is not used to infer individual demand or AI substitution."
+              "The U.S. projection and the two mainland notices describe separate markets. The U.S. figures cover the broader clinical laboratory group. The mainland notices describe duties at two specific employers."
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30476,7 +30332,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "In the U.S., CT(ASCP) is now called Cytologist; Route1 recognizes a bachelor's degree plus completion of a CAAHEP-accredited cytology program within the past 5 years, and graduates of bachelor's or post-baccalaureate master's programs may apply under that pathway, with documentation and examination required. 493.1483 sets the pathways for cytology slide examination personnel and the applicable state licensure; CMS has recognized SCT(ASCP), while CT(ASCPi)/SCT(ASCPi) cannot satisfy (b)(2) through this certification and must not be mixed. This does not replace Chinese qualifications, state licensure, or diagnostic reporting authority. Certification courses and lookup portals are not evidence of recruitment demand or hiring."
+              "ASCP BOC’s CT(ASCP) Route 1 requires a bachelor’s degree from a regionally or nationally accredited college or university and completion of a CAAHEP-accredited cytology program within the past five years. Check exam eligibility, CLIA personnel qualifications and applicable state licensure separately."
             ]
           },
           "id": "actors.market-signals.market-signal-card.3",
@@ -30492,13 +30348,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial note on the basis for verifying job information: a job posting can only indicate one employer's position demand at one point in time."
+              "Beijing Bo’ai Hospital and Peking University list different duties and education requirements for their pathology technician postings. Check the target employer’s current posting for its title, duties and qualifications."
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "r5-bls-current",
-            "r5-wages-current"
+            "a24-crrc",
+            "a24-pku"
           ],
           "type": "prose"
         },
@@ -30612,7 +30468,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Distance note: moving from exfoliative cytology morphological screening to chromosome karyotype analysis."
+              "Distance note: moving from cell specimen morphology screening to chromosome karyotype analysis."
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
@@ -30657,7 +30513,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Distance note: moving from cell morphology screening to pathogenic microorganism detection and research."
+              "Distance note: moving from cell morphology screening to microorganism detection and research."
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
@@ -30958,12 +30814,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "An O*NET entry point is not demand; this round separately verifies CT(ASCP) against international certification and the CLIA distinction, and does not predict employment or wages."
+              "The ASCP BOC page lists exam eligibility. Check CLIA personnel qualifications and state licensing separately."
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "ratify",
             "r5-ct",
             "r5-clia-cytology"
           ],
@@ -31011,94 +30866,105 @@
           "data": {
             "entries": [
               {
-                "answer": "Stain, mount, and study cells according to established standards and conventions to find evidence of cancer, hormonal abnormalities, and other pathological conditions: verify and record patient and specimen information; examine specimens under the microscope to evaluate specimen quality; prepare and analyze samples such as Pap smears (PAP), body fluids, and fine-needle aspirates (FNA); examine cell components and arrangement for abnormalities in color, shape, or size and check for abnormal hormonal conditions; submit slides with abnormal cell structure to the pathologist for further examination; provide the pathologist with patient clinical data or microscopic findings to assist in preparing pathology reports; assist in collecting cell samples using methods such as fine-needle aspiration; apply special staining techniques (such as chromosome staining) to distinguish cells or cell components; maintain laboratory operations according to specimen collection, preparation, and laboratory safety standards; maintain equipment such as microscopes; assign and coordinate laboratory tasks and take part in continuing education.",
+                "answer": "Match specimens to records, prepare and stain slides, screen cell morphology under a microscope, and refer abnormal findings through the applicable review process. Review and signature requirements depend on jurisdiction, specimen type and result category.",
                 "id": "actors.faq.1",
                 "question": "What does a cytotechnologist do in a typical day?",
                 "question_key": "career.faq.cytotechnologists.1",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "r5-clia-reporting"
                 ]
               },
               {
-                "answer": "This occupation centers on exfoliative cytology morphological screening and abnormality submission, staining, mounting, and studying cells to standard to find evidence of pathological conditions; cytogenetic technologists center on chromosome karyotype and FISH／aCGH analysis; microbiologists center on pathogenic microorganism detection and research; medical scientists (except epidemiologists) are oriented around research questions and experimental design; pathologists diagnose specimens and issue pathology reports; histotechnologists center on tissue slide preparation, staining, and immunohistochemistry; and medical and clinical laboratory technologists cover multiple types of routine clinical laboratory tests. Similar names do not mean duties, qualifications, or diagnostic authority are interchangeable.",
+                "answer": "Cytology examines cell morphology and specimen quality. Cytogenetics focuses on chromosomes and karyotypes. Pathologists carry diagnostic responsibilities as assigned by their institution.",
                 "id": "actors.faq.2",
-                "question": "What distinguishes this occupation from adjacent testing, research, and diagnostic directions?",
+                "question": "How does cytogenetics differ from cytology?",
                 "question_key": "career.faq.cytotechnologists.2",
                 "source_refs": [
                   "onet"
                 ]
               },
               {
-                "answer": "Whole-slide imaging and image analysis can assist in screening fields of view, flagging suspected abnormal areas, and prioritizing them, and laboratory information systems can assist with recording, scheduling, and result aggregation, which can reduce part of the initial screening and recording work; but specimen and patient information verification, specimen quality evaluation, slide preparation and special staining quality judgment, the final judgment of morphological abnormalities and abnormality submission, and review and escalation when results conflict with previous ones still depend on people and are constrained by quality control procedures, report authorization, and the boundaries of diagnostic qualification. O*NET shows that in this occupation 73% make repeated motions continuously or almost continuously, 77% say being accurate and precise is extremely important, and 59% say the consequences of error are extremely serious; technical exposure does not equal organizational adoption or job disappearance.",
+                "answer": "The system selects regions on specified digital ThinPrep Pap slides for qualified staff to review and interpret. Section VII, Table 31 reports case review times from a study of the specified device. The study does not estimate occupation-wide adoption, time savings or employment changes.",
                 "id": "actors.faq.3",
                 "question": "How will AI affect or replace cytotechnologists?",
                 "question_key": "career.faq.cytotechnologists.3",
                 "source_refs": [
-                  "bls"
+                  "r5-fda-cytology"
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: three types of tasks—initial screening and field prioritization, slide preparation and staining quality judgment, and recording and result aggregation—can be partly taken on by tools; this page has no adoption rate or substitution data for this single occupation.",
+                "answer": "In a paper exercise, an image marker can indicate “review needed.” For clinical use, verify the authorized purpose and review responsibilities.",
                 "id": "actors.faq.4",
-                "question": "Which tasks in this occupation already have evidence of AI change?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.cytotechnologists.4",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "Specimen and patient information verification, specimen quality evaluation, slide preparation and special staining quality judgment, recognition of abnormalities in cell morphology and arrangement, the rigor and accuracy of abnormality submission, and the ability to review, escalate, and hold back conclusions per procedure.",
+                "answer": "Specimen and patient information verification, specimen quality evaluation, slide preparation and special staining quality judgment, recognition of abnormalities in cell morphology and arrangement, the rigor and accuracy of abnormality submission, and the ability to review, escalate, and hold back conclusions per procedure. In the FDA example, qualified staff still interpret the selected regions.",
                 "id": "actors.faq.5",
                 "question": "In the face of AI, which abilities should still be verified as important for this occupation?",
                 "question_key": "career.faq.cytotechnologists.5",
                 "source_refs": [
-                  "bls"
+                  "r5-onet-current",
+                  "r5-fda-cytology"
                 ]
               },
               {
-                "answer": "The 2025 U.S. wage data shows a median annual wage of 62,930 USD (hourly 30.26 USD), with percentiles of 38,910／47,650／62,930／81,450／100,990 USD (hourly 18.71／22.91／30.26／39.16／48.55), using the O*NET／OEWS parent-occupation proxy definition for Clinical Laboratory Technologists and Technicians (29-2011.00), not collected separately for this subcategory; values broken down by state or region must be queried on the O*NET local wages page by region and period and cannot be treated as a personal quote; no occupation-level figure was obtained for mainland China, and this page treats it as a gap rather than filling it with industry averages or recruitment samples.",
+                "answer": "These U.S. figures cover Clinical Laboratory Technologists and Technicians as a group, with no separate estimate for cytotechnologists. The May 2025 U.S. median wage was $62,930 per year and $30.26 per hour. The China Rehabilitation Research Center sought a pathology technician for cytology slide preparation, frozen sections and staining, requiring a medical junior-college credential or higher and at least two years of pathology-department technician experience. Peking University listed section preparation, staining, microscopy and animal research specimens, requiring a related bachelor’s degree or higher. These are adjacent clinical and research jobs. The notices do not establish diagnostic authority or comparable wages.",
                 "id": "actors.faq.6",
                 "question": "What are the typical wages for this occupation, and how should they be compared?",
                 "question_key": "career.faq.cytotechnologists.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "a24-crrc",
+                  "a24-pku"
                 ]
               },
               {
-                "answer": "The U.S. preparation level is Job Zone Five (SVP 8.0 and above), and the official education survey shows 50% requiring a bachelor's degree, 36% requiring a post-baccalaureate certificate, and 14% requiring a master's degree; mainland China mostly requires the corresponding education and cytology training, with some positions requiring a professional technical qualification or practice qualification, verified per the target employer's rules.",
+                "answer": "O*NET lists Job Zone 5. Asked what education a new hire needs, 50% of its respondents selected a bachelor’s degree, 36% a post-baccalaureate certificate and 14% a master’s degree. The rehabilitation center posting required a medical junior-college credential or higher. Peking University’s related research post required a relevant bachelor’s degree or higher. Check the target job’s screening, credentials and sign-off separately.",
                 "id": "actors.faq.7",
                 "question": "What education does this occupation need, and how should one train for it?",
                 "question_key": "career.faq.cytotechnologists.7",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "a24-crrc",
+                  "a24-pku"
                 ]
               },
               {
-                "answer": "O*NET provides certification and training lookup entry points for this subcategory, but certification does not equal a license, an employer appointment, signing authority, or local authorization; in mainland China such positions mostly take laboratory biosafety and operations training per institutional requirements, and some positions require a professional technical qualification or practice qualification under current rules; specific conditions are verified against the target employer and current regulations.",
+                "answer": "China’s pathology-department guideline requires relevant education and professional technical qualifications for technical staff in medical institutions. Physicians issuing pathology reports face separate qualification and training requirements. In the U.S., check 42 CFR 493.1483 and applicable state licensure for cytology slide examination. U.S. §493.1483 lists separate qualification routes, including graduation from a CAAHEP-accredited school of cytotechnology or cytotechnology certification from an HHS-approved agency. A current state license is required where the state requires one. Ask employers about method authorization and review responsibilities. China’s pathology-department guideline applies to medical institutions with pathology departments. Under Article 10, pathology technicians handle technical work and physicians who meet the qualification requirements issue pathology diagnostic reports. Article 16 requires the reporting physician’s signature and the report time. U.S. CLIA separates sampled review from report signatures. Before reporting, review slides from at least 10% of gynecologic cases that qualified staff interpreted as negative for the epithelial cell abnormalities and other malignant neoplasms specified in the rule. Draw the sample at random from the entire caseload and include negative cases and cases at higher risk for cervical cancer based on available patient information. The reviewer may be a qualified technical supervisor, a qualified cytology general supervisor or a qualified cytotechnologist with the required experience. Separately, a technical supervisor confirms gynecologic preparations with reactive or reparative changes or the listed epithelial cell abnormalities and other malignant neoplasms, and reviews all nongynecologic preparations. The signatures on those reports must reflect the review. For computer-generated reports with signatures, the electronic signature must be authorized by the technical supervisor who performed the review. Unsatisfactory specimens or preparations must be identified and reported as unsatisfactory.",
                 "id": "actors.faq.8",
                 "question": "Must I obtain a certificate to do this occupation?",
                 "question_key": "career.faq.cytotechnologists.8",
                 "source_refs": [
-                  "cn-rule"
+                  "r5-cn-pathology",
+                  "r5-clia-cytology",
+                  "r5-clia-reporting"
                 ]
               },
               {
-                "answer": "First complete an exercise using public or fictional materials—write a specimen and patient information verification checklist, draw a slide preparation and staining quality evaluation form, and write out the morphological findings and the abnormalities requiring review submission from fictional cell images—or a lab shadowing session, then verify the objects, methods, and qualification requirements of the target direction.",
+                "answer": "Start with the paper handoff on this page. Record the evidence, status and next owner for H17/H71, Q4 and P8, then use the collapsed reference on day seven.",
                 "id": "actors.faq.9",
                 "question": "What should I do first if I want to try this direction with no background?",
-                "question_key": "career.faq.cytotechnologists.9",
+                "question_key": "career.faq.cytotechnologists.9"
+              },
+              {
+                "answer": "BLS projects U.S. employment for U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytology separately) to go from about 343,000 in 2025 to 352,400 in 2035 (+2.7%). It projects about 20,800 openings per year, including replacements.",
+                "id": "actors.faq.10",
+                "question": "How should you read the U.S. employment projection?",
+                "question_key": "career.faq.cytotechnologists.10",
                 "source_refs": [
-                  "bls"
+                  "a24-bls-projections"
                 ]
               },
               {
-                "answer": "The O*NET summary and employment trends page (based on BLS 2024—2034 projections, parent-occupation proxy definition) shows about 351,200 people under this definition in 2024, a projection label of slower than average (1%—2%), and about 22,600 openings per year including growth and replacement; the projection is an occupation-total measure, the work centers on slide preparation and staining, microscopic screening, and abnormality submission, and it must be verified against local screening demand, institutional structure, and automation investment, with priority given to verifying biosafety protection, quality control, and the implementation of abnormality submission and report authorization.",
-                "id": "actors.faq.10",
-                "question": "What else should I consider when choosing this occupation now?",
-                "question_key": "career.faq.cytotechnologists.10",
-                "source_refs": [
-                  "bls"
-                ]
+                "answer": "This is a fictional paper exercise written by FermatMind. H17 and H71 do not match. Hold at 09:10, retain the original labels and contact the intake lead. Q4’s positive control shows no signal. Hold the batch and refer to the quality lead. Repeat work needs authorization. Preserve P8’s morphology note and refer it to the pathologist. Diagnosis, sign-off and any timing communication await authorized staff. Check four items: identity discrepancy and intake lead, positive control failure and quality lead, morphology note and pathologist, and authorization limits and open decisions. Count each complete item. Variant: “signal present” meets the stated Q4 expectation. Keep the record, remove the proposed hold based solely on a failed control, and note the quality lead as the next owner. Batch release still requires the authorized process. The H17/H71 and P8 dispositions stay the same.",
+                "id": "actors.faq.11",
+                "question": "Cytology handoff reference (open after day six)",
+                "question_key": "career.faq.cytotechnologists.11"
               }
             ]
           },
@@ -31114,8 +30980,8 @@
           "data": {
             "entries": [
               "This subcategory's 29-2011.02 tasks, context, and preparation opinions are its own; the wage, employment, and industry figures are the combined 29-2010 proxy for Clinical Laboratory Technologists and Technicians, not separate statistics for 29-2011.00 technologists.",
-              "The 2025 wage, industry, and base period and the 2025—2035 projection are listed separately; China's NBS health industry pre-tax annual average is not an occupation wage or starting pay; specific recruitment was not verified.",
-              "U.S. CT/SCT certification, ASCPi, cytology-specific CLIA, and state licensure are kept separate, and technical positions in China cannot issue pathology diagnostic reports; the fictional exercises confer no qualification or method authority."
+              "Chinese health industry averages provide background. The two notices for adjacent mainland roles give no wage amounts.",
+              "In medical institutions with pathology departments covered by the Chinese guideline, pathology technicians perform technical work and qualified physicians issue pathology diagnostic reports. In the United States, check CT/SCT certification, ASCPi, cytology CLIA and applicable state licensure separately. The paper exercise is for practicing judgment and handoffs."
             ]
           },
           "id": "actors.sources.boundary.1",
@@ -31171,7 +31037,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Updated: 2026-10-09; each statistical period, search, and jurisdiction is listed separately."
+              "Employment projections and job notices checked November 10, 2026. Statistical periods and posting dates are listed with each source."
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31302,7 +31168,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "agent",
-                "limitation": "Only supports the chromosome karyotype and molecular cytogenetic analysis tasks of cytogenetic technologists (adjacent occupation); this occupation centers on exfoliative cytology morphological screening, and the chromosome karyotype interpretation duty is not merged into this occupation.",
+                "limitation": "Only supports the chromosome karyotype and molecular cytogenetic analysis tasks of cytogenetic technologists (adjacent occupation); this occupation centers on cell specimen morphology screening, and the chromosome karyotype interpretation duty is not merged into this occupation.",
                 "market": "United States",
                 "name": "O*NET OnLine: Cytogenetic Technologists (29-2011.01) occupation profile",
                 "period": "Page updated 2026; searched 2026-09-19",
@@ -31343,38 +31209,21 @@
                 "url": "https://www.onetonline.org/link/summary/29-1222.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports this occupation's employment and projection definitions (parent-occupation proxy).",
-                  "Contains no mainland China information and cannot substitute for mainland China data.",
-                  "Verified this round: the old 2024–2034 is retained for consumer protection; the modules authorized this round use combined 29-2010 2025–2035, not separate 29-2011.00 technologist statistics."
+                  "Broader U.S. SOC 29-2010 clinical laboratory group. Cytotechnologists are not tabulated separately.",
+                  "Annual openings include replacements.",
+                  "Covers U.S. employment and projections."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "The old 2024–2034 is retained for consumer protection; the modules authorized this round use combined 29-2010 2025–2035, not separate 29-2011.00 technologist statistics.",
+                "limitation": "Broader U.S. SOC 29-2010 clinical laboratory group. Cytotechnologists are not tabulated separately.",
                 "market": "United States",
-                "name": "O*NET OnLine: Cytotechnologists 29-2011.02 summary and employment trends (based on BLS 2024—2034 projections, parent-occupation proxy definition for Clinical Laboratory Technologists and Technicians)",
-                "period": "2024—2034 projection period; searched 2026-09-19",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "name": "U.S. BLS Table 1.2 employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/summary/29-2011.02"
-              },
-              {
-                "accessed_at": "2026-09-19",
-                "details": [
-                  "Supports the classification and employment context of such positions in mainland China.",
-                  "Qualification requirements, abnormality submission or report authorization, or wage figures are not inferred from this.",
-                  "Verified this round: the gov.cn home page cannot support cytology/pathology personnel and report provisions, and the pathology department guideline as read is listed separately."
-                ],
-                "evidence_type": "official guidance",
-                "id": "cn-rule",
-                "limitation": "The gov.cn home page cannot support cytology/pathology personnel and report provisions, and the pathology department guideline as read is listed separately.",
-                "market": "Chinese mainland",
-                "name": "Public medical laboratory and health employment information for mainland China (cytology laboratory positions)",
-                "period": "Current regulations; searched 2026-09-19",
-                "publisher": "Public competent authority and industry information",
-                "scope": "contextual",
-                "url": "https://www.gov.cn/"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31416,7 +31265,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "editing",
-                "limitation": "Only supports the routine and specialized clinical laboratory testing tasks of medical and clinical laboratory technologists (adjacent occupation) and serves as the proxy source for this occupation's wage, employment, and industry data; the routine clinical laboratory testing duty is not merged into this occupation.",
+                "limitation": "Use this adjacent occupation profile to compare routine and specialized clinical laboratory testing duties.",
                 "market": "United States",
                 "name": "O*NET OnLine: Medical and Clinical Laboratory Technologists (29-2011.00) occupation profile",
                 "period": "Page updated 2026; searched 2026-09-19",
@@ -31531,7 +31380,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "oews",
-                "limitation": "Provides the wage statistics entry point published by occupation code together with coverage notes; the percentile values on this page are published by the O*NET national wages page (29-2011.02) under the parent-occupation proxy definition for Clinical Laboratory Technologists and Technicians (29-2011.00), and industry average wages must not be treated as this occupation's wages, nor percentiles as starting pay.",
+                "limitation": "Provides the wage statistics entry point published by occupation code together with coverage notes; the percentile values on this page are published by the O*NET national wages page (29-2011.02) under the parent-occupation proxy definition for Clinical Laboratory Technologists and Technicians (29-2010), and industry average wages must not be treated as this occupation's wages, nor percentiles as starting pay.",
                 "market": "United States",
                 "name": "BLS Occupational Employment and Wage Statistics（OEWS）",
                 "period": "2025 wage data; searched 2026-09-19",
@@ -31540,7 +31389,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Supports this occupation's tasks, work context, and preparation level.",
                   "Contains no technology adoption or job substitution data."
@@ -31553,7 +31402,7 @@
                 "period": "Page updated 2026; searched 2026-09-19",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/29-2011.02"
+                "url": "https://www.onetonline.org/link/details/29-2011.02"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31613,7 +31462,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-3",
-                "limitation": "Publishes this occupation's annual wage percentiles of 38,910／47,650／62,930／81,450／100,990 USD and also publishes hourly wages (18.71／22.91／30.26／39.16／48.55); the above values use the combined 29-2010 statistical proxy definition for Clinical Laboratory Technologists and Technicians, covering technologists and technicians, and are not statistics for the 29-2011.02 subcategory itself; percentiles are statistical positions, not skill grades, and cannot be converted into personal monthly or take-home pay; data broken down by state or region must be queried on that page by region and period.",
+                "limitation": "Publishes the parent occupational group’s annual wage percentiles of 38,910／47,650／62,930／81,450／100,990 USD and also publishes hourly wages (18.71／22.91／30.26／39.16／48.55); the above values use the combined 29-2010 statistical proxy definition for Clinical Laboratory Technologists and Technicians, covering technologists and technicians, and are not statistics for the 29-2011.02 subcategory itself; percentiles are statistical positions, not skill grades, and cannot be converted into personal monthly or take-home pay; data broken down by state or region must be queried on that page by region and period.",
                 "market": "United States",
                 "name": "O*NET OnLine: Cytotechnologists national wages (29-2011.02)",
                 "period": "2025 wage data; searched 2026-09-19",
@@ -31671,10 +31520,10 @@
                 "url": "https://www.onetonline.org/link/details/29-2011.02"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "For microbiological testing and research comparison in the microbiologist direction (adjacent occupation).",
-                  "The microbiology duty is not merged into this occupation."
+                  "Studies the growth, structure and development of microorganisms such as bacteria, microscopic algae and fungi. Medical microbiology may examine their relationship to disease.",
+                  "Laboratory services may support health departments, community environmental health programs or physicians."
                 ],
                 "evidence_type": "official source",
                 "id": "teacher",
@@ -31684,7 +31533,7 @@
                 "period": "Page updated 2026; searched 2026-09-19",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/19-1022.00"
+                "url": "https://www.onetonline.org/link/details/19-1022.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31734,11 +31583,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "For reference by medical institutions setting up pathology departments. Item 10: the corresponding professional education and professional technical position qualification; diagnostic report physicians have separate clinical practice/pathology position and training conditions, and pathology technicians must not issue pathology diagnostic reports; items 12–16: position procedures/quality control/reporting and physician signatures; item 22: error procedures; item 25: pre-employment education and periodic biological/chemical protection training. The original NHC link could not be read, so the government full text as read was used; no claim is made that all current supporting measures or third-party center standards have been verified."
+                  "China’s pathology-department guideline applies to medical institutions with pathology departments. Article 10 requires a clinical physician qualification, at least a junior-level pathology professional qualification, and one to three years of pathology diagnostic training or specialty study for physicians issuing pathology diagnostic reports. Pathology technicians handle technical work. Article 25 covers pre-job and periodic safety training."
                 ],
                 "evidence_type": "official guidance",
                 "id": "r5-cn-pathology",
-                "limitation": "For reference by medical institutions setting up pathology departments. Item 10: the corresponding professional education and professional technical position qualification; diagnostic report physicians have separate clinical practice/pathology position and training conditions, and pathology technicians must not issue pathology diagnostic reports; items 12–16: position procedures/quality control/reporting and physician signatures; item 22: error procedures; item 25: pre-employment education and periodic biological/chemical protection training. The original NHC link could not be read, so the government full text as read was used; no claim is made that all current supporting measures or third-party center standards have been verified.",
+                "limitation": "Applies to medical institutions with pathology departments in China.",
                 "market": "Chinese mainland",
                 "name": "Guideline for the Construction and Management of Pathology Departments (for trial implementation): division of technical and diagnostic qualifications",
                 "period": "Document Wei Ban Yi Zheng Fa 2009〔31〕; government publication 2011-07-15; searched 2026-10-09",
@@ -31747,31 +31596,31 @@
                 "url": "https://www.jiangmen.gov.cn/bmpd/jmswsjkj/zwgk/zcjd/content/post_897248.html"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Examining cytology slides must meet 493.1449(b)/(e), or the applicable state licensure plus a CAAHEP program/HHS-recognized certification pathway; there is also a provision for those continuously employed and qualified since 2024-12-28. The general 493.1489 arbitrary high-complexity education pathway cannot be applied; professional certification, state licensure, laboratory accreditation, and diagnostic authority are kept separate."
+                  "U.S. §493.1483 sets qualifications for personnel examining cytology slides. Its transition provision covers people who were qualified and working as cytotechnologists in a CLIA-certified laboratory on December 28, 2024 and have served continuously since that date. Check applicable state licensing separately."
                 ],
                 "evidence_type": "official regulation",
                 "id": "r5-clia-cytology",
-                "limitation": "Examining cytology slides must meet 493.1449(b)/(e), or the applicable state licensure plus a CAAHEP program/HHS-recognized certification pathway; there is also a provision for those continuously employed and qualified since 2024-12-28. The general 493.1489 arbitrary high-complexity education pathway cannot be applied; professional certification, state licensure, laboratory accreditation, and diagnostic authority are kept separate.",
+                "limitation": "U.S. §493.1483 sets qualifications for personnel examining cytology slides. Its transition provision covers people who were qualified and working as cytotechnologists in a CLIA-certified laboratory on December 28, 2024 and have served continuously since that date. Check applicable state licensing separately.",
                 "market": "United States",
                 "name": "42CFR493.1483: qualifications for cytology slide examination personnel",
-                "period": "eCFR current Title42 as of 2026-10-06; searched 2026-10-09",
+                "period": "42 CFR 493.1483",
                 "publisher": "Electronic Code of Federal Regulations",
                 "scope": "contextual",
                 "url": "https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-493/subpart-M/subject-group-ECFR2640b368593bdb0/section-493.1483"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "CT(ASCP) Route1 recognizes a bachelor's plus completion of a CAAHEP-accredited cytology program within the past 5 years, and graduates of either bachelor's or post-baccalaureate master's programs qualify; documentation and passing an examination are required. CT(ASCPi)/SCT(ASCPi) cannot satisfy 493.1483(b)(2) through this certification and must not be mixed with the ASCP pathway. Master's programs may alternatively choose SCTRoute3, but the unverified full SCT pathway is not expanded here. Certification does not replace state licensure/position authority/Chinese qualification."
+                  "ASCP BOC’s CT(ASCP) Route 1 requires a bachelor’s degree from a regionally or nationally accredited college or university and completion of a CAAHEP-accredited cytology program within the past five years. Check exam eligibility, CLIA personnel qualifications and applicable state licensure separately."
                 ],
                 "evidence_type": "official credential requirements",
                 "id": "r5-ct",
-                "limitation": "CT(ASCP) Route1 recognizes a bachelor's plus completion of a CAAHEP-accredited cytology program within the past 5 years, and graduates of either bachelor's or post-baccalaureate master's programs qualify; documentation and passing an examination are required. CT(ASCPi)/SCT(ASCPi) cannot satisfy 493.1483(b)(2) through this certification and must not be mixed with the ASCP pathway. Master's programs may alternatively choose SCTRoute3, but the unverified full SCT pathway is not expanded here. Certification does not replace state licensure/position authority/Chinese qualification.",
+                "limitation": "ASCP examination eligibility. Verify CLIA and state licensing separately.",
                 "market": "United States",
-                "name": "ASCP BOC: the difference between Cytologist CT(ASCP) and CT(ASCPi)",
-                "period": "Current page; searched 2026-10-09",
+                "name": "ASCP BOC Cytologist Certification and Exam Eligibility",
+                "period": "Eligibility requirements, checked November 10, 2026",
                 "publisher": "American Society for Clinical Pathology Board of Certification",
                 "scope": "contextual",
                 "url": "https://www.ascp.org/boc/explore-credentials/view-all-credentials/CT"
@@ -31794,11 +31643,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "BLS table 1.2 combined 29-2010: 2025 employment 343.0→2035352.4 thousand, +9.4 thousand/+2.7%, average annual openings 20.8 thousand; not this subcategory's own. The O*NET page for this occupation also shows 343000/20800 and the Average3–4% classification, with the precise value per BLS2.7%. The typical bachelor's/no related experience/None on-the-job training does not mean cytology needs no specialized training."
+                  "For the broader SOC 29-2010 group, BLS Table 1.2 projects about 343,000 jobs in 2025 and 352,400 in 2035 (+2.7%), with about 20,800 annual openings including replacements."
                 ],
                 "evidence_type": "official statistics",
                 "id": "r5-bls-current",
-                "limitation": "BLS table 1.2 combined 29-2010: 2025 employment 343.0→2035352.4 thousand, +9.4 thousand/+2.7%, average annual openings 20.8 thousand; not this subcategory's own. The O*NET page for this occupation also shows 343000/20800 and the Average3–4% classification, with the precise value per BLS2.7%. The typical bachelor's/no related experience/None on-the-job training does not mean cytology needs no specialized training.",
+                "limitation": "Combined group figures. Cytotechnologists are not reported separately.",
                 "market": "United States",
                 "name": "BLS table 1.2: combined statistics for 29-2010 clinical laboratory technologists and technicians",
                 "period": "2025 base period; 2025–2035 projection; searched 2026-10-09",
@@ -31883,20 +31732,96 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Slide preparation and special staining | Prepare samples and stain | Process samples such as Pap smears (PAP), body fluids and fine needle aspirates (FNA) according to the standard process, and apply special staining techniques (such as chromosome staining) to distinguish cells or cell components and make cells visible under the microscope. — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
-                  "Microscopic screening | Assess quality and screen morphology | Examine the specimen under the microscope to assess specimen quality, examine the colour, shape or size abnormalities of cell components and their arrangement in the cell sample, and examine to find evidence of cancer, hormonal abnormalities and other pathological conditions. — 75/100; weight=1/3; actors.display.responsibilities_block.03[0]",
-                  "Abnormality submission | Submit to the pathologist and assist with the report | Submit slides with abnormal cell structure to the pathologist for further examination, and provide the pathologist with clinical data or microscopic findings to assist in writing the pathology report. — 50/100; weight=1/3; actors.display.responsibilities_block.04[0]"
+                  "The evidence does not support an occupation-wide score.",
+                  "Certain cervical cytology tools select image regions for review.",
+                  "Staff follow applicable procedures for specimen quality and morphology.",
+                  "Review and reporting follow applicable rules and authorizations.",
+                  "Device labeling does not establish adoption or changes in working time."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "A device’s intended use does not quantify impact across the occupation.",
+                "name": "FermatMind: why there is no AI impact score",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment for U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytology separately) to go from about 343,000 in 2025 to 352,400 in 2035 (+2.7%). It projects about 20,800 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a24-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One contract post, junior college or higher and at least two years of pathology-department technician experience. Duties include cytology slide preparation and other pathology work. No wage amount listed."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a24-crrc",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Beijing Bo’ai Hospital pathology technician",
+                "period": "Not stated",
+                "publisher": "China Rehabilitation Research Center",
+                "scope": "recruitment_proxy",
+                "url": "https://www.crrc.com.cn/Html/News/Articles/20996.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One post requiring a related bachelor’s degree or higher. Section preparation, staining, microscopy and animal specimen support. Adjacent research job. Pay negotiable."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a24-pku",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Research pathology center technician",
+                "period": "2026-10-27",
+                "publisher": "Peking University Human Resources",
+                "scope": "recruitment_proxy",
+                "url": "https://hr.pku.edu.cn/rczp/xzjf/ldhtzp/f7849886740c4856adc10661ef85beeb.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. CLIA separates sampled review from report signatures. Before reporting, review slides from at least 10% of gynecologic cases that qualified staff interpreted as negative for the epithelial cell abnormalities and other malignant neoplasms specified in the rule. Draw the sample at random from the entire caseload and include negative cases and cases at higher risk for cervical cancer based on available patient information. The reviewer may be a qualified technical supervisor, a qualified cytology general supervisor or a qualified cytotechnologist with the required experience. Separately, a technical supervisor confirms gynecologic preparations with reactive or reparative changes or the listed epithelial cell abnormalities and other malignant neoplasms, and reviews all nongynecologic preparations. The signatures on those reports must reflect the review. For computer-generated reports with signatures, the electronic signature must be authorized by the technical supervisor who performed the review. Unsatisfactory specimens or preparations must be identified and reported as unsatisfactory."
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-clia-reporting",
+                "limitation": "U.S. federal CLIA standard. Check personnel qualifications and applicable state licensure separately.",
+                "market": "United States",
+                "name": "U.S. CLIA cytology review and reporting standards",
+                "period": "42 CFR 493.1274(c), (e)",
+                "publisher": "Electronic Code of Federal Regulations",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-493/subpart-K/subject-group-ECFRc96daead380f6ed/section-493.1274"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The system presents selected regions on specified ThinPrep Pap slide images for qualified personnel to review and interpret.",
+                  "Section VII, Table 31 reports cytologist case review times in a clinical study of the specified device."
+                ],
+                "evidence_type": "FDA De Novo decision summary",
+                "id": "r5-fda-cytology",
+                "limitation": "Indications apply to the device and specimens specified in §III.B. The timing data in §VII describe the device study and do not establish occupation-wide adoption, time savings or employment changes.",
+                "market": "United States",
+                "name": "FDA DEN210035: cervical cytology image assistance system",
+                "period": "DEN210035 §III.B (indications), §VII Table 31 (case review times)",
+                "publisher": "U.S. Food and Drug Administration",
+                "scope": "contextual",
+                "url": "https://www.accessdata.fda.gov/cdrh_docs/reviews/DEN210035.pdf"
               }
             ]
           },
@@ -32301,7 +32226,7 @@
           },
           {
             "来源": {
-              "$source": "r5-onet-current",
+              "$source": "r5-fda-cytology",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32319,13 +32244,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$source": "r5-onet-current",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            }
+            "链接": "FDA DEN210035 §III.B and §VII Table 31"
           },
           {
             "来源": {
@@ -32558,7 +32477,7 @@
             }
           },
           {
-            "source_ref": "r5-onet-current",
+            "source_ref": "r5-fda-cytology",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.3.limit",
               "block": "ai-impact",
@@ -32566,7 +32485,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "r5-onet-current",
+              "$source": "r5-fda-cytology",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32584,13 +32503,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$source": "r5-onet-current",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            }
+            "链接": "FDA DEN210035 §III.B and §VII Table 31"
           },
           {
             "source_ref": "r5-bls-current",
@@ -33512,6 +33425,23 @@
               "block": "path",
               "copy_key": "career.item.career-path-block",
               "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$source": "r5-clia-reporting",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "clia-cytology-review",
+            "label": {
+              "$source": "r5-clia-reporting",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
             }
           }
         ],
@@ -34758,7 +34688,7 @@
             {
               "指标": "Scope of review",
               "数值": "The NBS2025 wage publication, the pathology department guideline, and the U.S. occupational materials as read; searched 2026-10-09",
-              "说明": "Real Chinese job postings not verified"
+              "说明": "See “Mainland China job postings” in this section."
             },
             {
               "指标": "Occupational classification",
@@ -34768,7 +34698,7 @@
             {
               "指标": "Data and compliance",
               "数值": "Positions involving biological specimen handling, slide preparation and special staining, reagent use, abnormality submission, and report assistance are bound by laboratory biosafety standards, quality management systems, and practice qualification requirements",
-              "说明": "Operating, protection, and reporting boundaries must be verified against the specific position and current regulations; diagnostic conclusions are made by physicians with the corresponding qualifications, and this page does not constitute a diagnostic or legal opinion."
+              "说明": "Operating, protection, and reporting boundaries must be verified against the specific position and current regulations; review and reporting follow the rules for the specimen and finding, and this page does not constitute a diagnostic or legal opinion."
             },
             {
               "指标": "Statistical coverage",
@@ -34831,7 +34761,7 @@
             },
             {
               "学历段": "Editorial direction example; actual jurisdiction and hiring conditions verified separately",
-              "岗位方向": "Cytology technical supervisor or quality management direction",
+              "岗位方向": "Cytology quality management and mentoring",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
                 "block": "china-salary",
@@ -34894,7 +34824,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "This round actually read the NBS2025 wage publication; no separately listed figure for this occupation or Chinese recruitment sample was obtained",
+          "china_open": "This section lists individual mainland job postings separately from industry wages.",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34955,7 +34885,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (industry category definition)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34967,13 +34897,14 @@
           "china_soc_row": "U.S. O*NET29-2011.02 occupational identity; Chinese unified classification/wages are not inferred from the code",
           "edu": "See the entry module for training and qualification",
           "fact_refs": [
-            "r5-current-cn-health"
+            "posting-a24-crrc",
+            "posting-a24-pku"
           ],
           "sources_note": "Source links are used according to their own statistical or announcement scope; when the statistical period, survey population, or pay definition differs they are cited separately and no cross-conversion is performed.",
           "ui": {
             "ai_heading": "Will AI or automation affect this occupation's wages?",
             "driver_heading": "How is screening work organized by specimen batch?",
-            "official_heading": "Official statistical definitions and gap notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Editorial direction example, not a uniform education threshold or salary statistic",
             "scenario_heading": "Which cytology position directions correspond to different education and training backgrounds?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35171,7 +35102,7 @@
         "industry_period": "2025 (combined 29-2010 proxy)",
         "industry_rows": [
           {
-            "fact_ref": "r5-current-median",
+            "fact_ref": "r5-current-industry-theater",
             "industry": "Health care and social assistance",
             "median": {
               "$fact": "r5-current-industry-theater",
@@ -35185,7 +35116,7 @@
             }
           },
           {
-            "fact_ref": "r5-current-median",
+            "fact_ref": "r5-current-industry-education",
             "industry": "Remaining industries not listed separately",
             "median": {
               "$fact": "r5-current-industry-education",
@@ -35199,7 +35130,7 @@
             }
           },
           {
-            "fact_ref": "r5-current-median",
+            "fact_ref": "r5-current-industry-amusement",
             "industry": "Industry distribution definition",
             "median": {
               "$fact": "r5-current-industry-amusement",
@@ -35213,7 +35144,7 @@
             }
           },
           {
-            "industry": "Industries for cytotechnologists (statistical classification)",
+            "industry": "Employment industries for the U.S. clinical laboratory group (29-2010)",
             "median": "Mainly health and social assistance at 83%, the rest not listed separately (combined 29-2010)",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
@@ -35481,6 +35412,7 @@
         },
         "outlook_evidence": [
           {
+            "fact_ref": "r5-current-growth",
             "geography": "United States",
             "horizon": {
               "$fact": "r5-current-growth",
@@ -35500,7 +35432,8 @@
             },
             "metric": "Overall employment change",
             "occupation_scope": "U.S. combined 29-2010 proxy, not this subcategory itself",
-            "source_id": "r5-bls-current",
+            "source_id": "bls",
+            "source_ref": "r5-bls-current",
             "value": {
               "$fact": "r5-current-growth",
               "field": "display_value"
@@ -35508,7 +35441,7 @@
           },
           {
             "geography": "United States",
-            "horizon": "Current page (updated 2026)",
+            "horizon": "Eligibility checked November 10, 2026",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35521,13 +35454,14 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "Certification and training information",
+            "metric": "Certification exam eligibility",
             "occupation_scope": "Cytotechnologists (O*NET 29-2011.02 definition)",
             "source_id": "ratify",
-            "value": "Certification and training lookup entry point"
+            "source_ref": "r5-ct",
+            "value": "CT(ASCP) Route 1"
           },
           {
-            "geography": "Editorial compilation for this page",
+            "geography": "Editorial checklist",
             "horizon": "Editorial verification suggestion (2026-10-09)",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
@@ -35541,10 +35475,9 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "How recruitment information is verified",
+            "metric": "How to use job postings",
             "occupation_scope": "Cytotechnologists",
-            "source_id": "r5-onet-current",
-            "value": "Recruitment information verification definition (editorial compilation)"
+            "value": "One employer, one posting"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -35574,7 +35507,7 @@
           },
           {
             "href": {
-              "$source": "ratify",
+              "$source": "r5-ct",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35582,7 +35515,7 @@
             },
             "id": "ratify",
             "label": {
-              "$source": "ratify",
+              "$source": "r5-ct",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35776,6 +35709,40 @@
               "field": "name",
               "item": "actors.source-register.published.1"
             }
+          },
+          {
+            "href": {
+              "$source": "a24-crrc",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "mainland-crrc",
+            "label": {
+              "$source": "a24-crrc",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "a24-pku",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "mainland-pku",
+            "label": {
+              "$source": "a24-pku",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            }
           }
         ],
         "transitions": [
@@ -35792,7 +35759,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cytogenetic-technologists",
+            "target_href": "/en/career/jobs/cytogenetic-technologists",
             "target_slug": "cytogenetic-technologists",
             "target_title": "Cytogenetic technologists (adjacent occupation)",
             "transition_distance": {
@@ -35815,7 +35782,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/microbiologists",
+            "target_href": "/en/career/jobs/microbiologists",
             "target_slug": "microbiologists",
             "target_title": "Microbiologists (adjacent occupation)",
             "transition_distance": {
@@ -35838,7 +35805,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/medical-scientists-except-epidemiologists",
+            "target_href": "/en/career/jobs/medical-scientists-except-epidemiologists",
             "target_slug": "medical-scientists-except-epidemiologists",
             "target_title": "Medical scientists (except epidemiologists) (adjacent occupation)",
             "transition_distance": {
@@ -35861,7 +35828,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/physicians-pathologists",
+            "target_href": "/en/career/jobs/physicians-pathologists",
             "target_slug": "physicians-pathologists",
             "target_title": "Pathologists (adjacent occupation)",
             "transition_distance": {
@@ -35884,7 +35851,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/histotechnologists",
+            "target_href": "/en/career/jobs/histotechnologists",
             "target_slug": "histotechnologists",
             "target_title": "Histotechnologists (adjacent occupation)",
             "transition_distance": {
@@ -35907,7 +35874,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/histology-technicians",
+            "target_href": "/en/career/jobs/histology-technicians",
             "target_slug": "histology-technicians",
             "target_title": "Histology technicians (adjacent occupation)",
             "transition_distance": {
@@ -35930,7 +35897,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/medical-and-clinical-laboratory-technologists",
+            "target_href": "/en/career/jobs/medical-and-clinical-laboratory-technologists",
             "target_slug": "medical-and-clinical-laboratory-technologists",
             "target_title": "Medical and clinical laboratory technologists (adjacent occupation)",
             "transition_distance": {
@@ -35953,7 +35920,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/neurodiagnostic-technologists",
+            "target_href": "/en/career/jobs/neurodiagnostic-technologists",
             "target_slug": "neurodiagnostic-technologists",
             "target_title": "Neurodiagnostic technologists (adjacent occupation)",
             "transition_distance": {
@@ -36041,7 +36008,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -36090,7 +36057,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Explore my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -36139,7 +36106,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36188,7 +36155,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Explore my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36237,7 +36204,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36286,7 +36253,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Explore my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36908,7 +36875,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore the task interests and work preferences of cytotechnologists",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37020,14 +36987,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
             "label": "Explore my personality preferences"
@@ -37396,7 +37355,7 @@
         "fact_id": "identity",
         "market": "United States",
         "measure": "Official occupation code (the identity definition for this page)",
-        "occupation_scope": "A single O*NET-SOC subcategory (29-2011.02); this subcategory's tasks, work context, and preparation level are its own definition, but its wage, employment, and industry data are published on O*NET under the parent-occupation definition for Clinical Laboratory Technologists and Technicians (29-2011.00); the official scope excludes adjacent occupations such as cytogenetics (chromosome karyotype) analysis, histology technology, medical laboratory technology, and pathologist diagnosis; similar positions in China are cytology laboratory positions in medical institution pathology departments and third-party medical testing institutions, whose duty and qualification definitions are not one-to-one counterparts",
+        "occupation_scope": "A single O*NET-SOC subcategory (29-2011.02); this subcategory's tasks, work context, and preparation level are its own definition, but its wage, employment, and industry data are published on O*NET under the parent-occupation definition for Clinical Laboratory Technologists and Technicians (29-2010); the official scope excludes adjacent occupations such as cytogenetics (chromosome karyotype) analysis, histology technology, medical laboratory technology, and pathologist diagnosis; similar positions in China are cytology laboratory positions in medical institution pathology departments and third-party medical testing institutions, whose duty and qualification definitions are not one-to-one counterparts",
         "period": "O*NET-SOC 2018 SOC; page updated 2026; searched 2026-09-19",
         "source_refs": [
           "onet"
@@ -37408,10 +37367,10 @@
         "fact_id": "median",
         "market": "United States",
         "measure": "Median wage (parent-occupation proxy definition)",
-        "occupation_scope": "Cytotechnologists (29-2011.02); 2025 BLS OEWS wage data on the O*NET national wages page, labeled as the parent-occupation definition for Clinical Laboratory Technologists and Technicians (29-2011.00)",
+        "occupation_scope": "Cytotechnologists (29-2011.02); 2025 BLS OEWS wage data on the O*NET national wages page, labeled as the parent-occupation definition for Clinical Laboratory Technologists and Technicians (29-2010)",
         "period": "2025 wage data; searched 2026-09-19",
         "source_refs": [
-          "oews"
+          "r5-wages-current"
         ]
       },
       {
@@ -37432,82 +37391,82 @@
         "fact_id": "high",
         "market": "United States",
         "measure": "High-end percentile wage (parent-occupation proxy definition)",
-        "occupation_scope": "The parent-occupation proxy definition for 29-2011.02; the 90th percentile is the high-end statistical position of the distribution, usually related to institution type, region, specialty direction (cytology screening, fine-needle aspiration, molecular cytology assistance), and whether review and mentoring responsibilities are held",
+        "occupation_scope": "The 90th percentile of the national U.S. wage distribution for BLS SOC 29-2010.",
         "period": "2025 wage data; searched 2026-09-19",
         "source_refs": [
-          "oews"
+          "r5-wages-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 351,200 people (2024; parent-occupation proxy definition)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "343,000 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistics)",
-        "occupation_scope": "Cytotechnologists (29-2011.02); the 2024 employment figure comes from the O*NET summary page (based on BLS 2024—2034 projections) and is labeled as the parent-occupation definition for Clinical Laboratory Technologists and Technicians (29-2011.00)",
-        "period": "2024 base period; searched 2026-09-19",
+        "occupation_scope": "U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytology separately)",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a24-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Slower than average 1%—2% (2024—2034, label Slower than average; parent-occupation proxy definition)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+2.7%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "The parent-occupation proxy definition for 29-2011.02; the projection label is slower than average (1%—2%), a total change over the projection period, not an individual's probability of being hired",
-        "period": "2024—2034 projection period; searched 2026-09-19",
+        "occupation_scope": "U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytology separately)",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a24-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 22,600 (annual average for 2024—2034, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "20,800 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Average annual openings (including growth and replacement)",
-        "occupation_scope": "The parent-occupation proxy definition for 29-2011.02; the openings are an annual average for 2024—2034 and include positions arising from growth and replacement",
-        "period": "2024—2034 projection period; searched 2026-09-19",
+        "occupation_scope": "U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytology separately)",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a24-bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Health care and social assistance｜83% (employment share in the 2024 industry distribution; parent-occupation proxy definition)",
+        "display_value": "Health care and social assistance 83% (2025 combined 29-2010 employment, not wages)",
         "fact_id": "industry-theater",
         "market": "United States",
-        "measure": "Industry employment share (not wages)",
-        "occupation_scope": "The parent-occupation proxy definition for 29-2011.02; health care and social assistance is the highest-share category on the O*NET industry page, covering hospitals, medical testing laboratories, and clinics",
-        "period": "2024 industry distribution; searched 2026-09-19",
+        "measure": "Main industry employment share (combined statistical proxy)",
+        "occupation_scope": "U.S. wages, employment, and industry figures are all combined 29-2010 statistical proxies for Clinical Laboratory Technologists and Technicians, covering both technicians and technologists; they are not separate statistics for 29-2011.00 technologists, let alone data for 29-2011.02 cytotechnologists themselves. This occupation's own tasks, context, and preparation materials are kept separate from the combined statistics.",
+        "period": "2025 wage or industry statistics; searched 2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Other industries (including educational services)｜17% (employment share in the 2024 industry distribution; parent-occupation proxy definition)",
+        "derivation": "industry-education is the editorial arithmetic difference of 100%-83%",
+        "display_value": "The remaining 17% is only an editorial arithmetic difference, not the official other category including education",
         "fact_id": "industry-education",
         "market": "United States",
-        "measure": "Industry employment share (not wages)",
-        "occupation_scope": "The parent-occupation proxy definition for 29-2011.02; other industries is the second combined category published on the O*NET industry page, including educational services and research institutions",
-        "period": "2024 industry distribution; searched 2026-09-19",
+        "measure": "Editorial difference (not an official industry category)",
+        "occupation_scope": "U.S. wages, employment, and industry figures are all combined 29-2010 statistical proxies for Clinical Laboratory Technologists and Technicians, covering both technicians and technologists; they are not separate statistics for 29-2011.00 technologists, let alone data for 29-2011.02 cytotechnologists themselves. This occupation's own tasks, context, and preparation materials are kept separate from the combined statistics.",
+        "period": "2025 wage or industry statistics; searched 2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Statistical status: the O*NET 2024 industry distribution assigns this occupation's employment to only two categories, health care and social assistance and other industries (including educational services)",
+        "display_value": "The 2025 main industry lists only health care and social assistance at 83%, without splitting out the rest",
         "fact_id": "industry-amusement",
         "market": "United States",
-        "measure": "Industry distribution definition note (not wages)",
-        "occupation_scope": "The parent-occupation proxy definition for 29-2011.02; the O*NET industry page does not publish finer industry category shares, and this page does not further split the shares of the two categories",
-        "period": "2024 industry distribution; searched 2026-09-19",
+        "measure": "Published scope of the main industry (combined statistical proxy)",
+        "occupation_scope": "U.S. wages, employment, and industry figures are all combined 29-2010 statistical proxies for Clinical Laboratory Technologists and Technicians, covering both technicians and technologists; they are not separate statistics for 29-2011.00 technologists, let alone data for 29-2011.02 cytotechnologists themselves. This occupation's own tasks, context, and preparation materials are kept separate from the combined statistics.",
+        "period": "2025 wage or industry statistics; searched 2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
@@ -37559,39 +37518,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 343000 people (2025 combined 29-2010 base period)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "343,000 jobs (2025)",
         "fact_id": "r5-current-employment",
         "market": "United States",
         "measure": "Employment stock (combined statistical proxy)",
-        "occupation_scope": "U.S. wages, employment, and industry figures are all combined 29-2010 statistical proxies for Clinical Laboratory Technologists and Technicians, covering both technicians and technologists; they are not separate statistics for 29-2011.00 technologists, let alone data for 29-2011.02 cytotechnologists themselves. This occupation's own tasks, context, and preparation materials are kept separate from the combined statistics.",
-        "period": "2025—2035 projection; 2025 base period; searched 2026-10-09",
+        "occupation_scope": "U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytology separately)",
+        "period": "2025",
         "source_refs": [
-          "r5-bls-current"
+          "a24-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "+2.7%, about 9400 people (2025—2035 combined 29-2010 projection)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+2.7%",
         "fact_id": "r5-current-growth",
         "market": "United States",
         "measure": "Projected total change (combined statistical proxy)",
-        "occupation_scope": "U.S. wages, employment, and industry figures are all combined 29-2010 statistical proxies for Clinical Laboratory Technologists and Technicians, covering both technicians and technologists; they are not separate statistics for 29-2011.00 technologists, let alone data for 29-2011.02 cytotechnologists themselves. This occupation's own tasks, context, and preparation materials are kept separate from the combined statistics.",
-        "period": "2025—2035 projection; 2025 base period; searched 2026-10-09",
+        "occupation_scope": "U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytology separately)",
+        "period": "2025–2035",
         "source_refs": [
-          "r5-bls-current"
+          "a24-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 20800 openings per year (2025—2035 combined 29-2010, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "20,800 annually (including replacements)",
         "fact_id": "r5-current-openings",
         "market": "United States",
         "measure": "Average annual openings over the projection period (combined statistical proxy)",
-        "occupation_scope": "U.S. wages, employment, and industry figures are all combined 29-2010 statistical proxies for Clinical Laboratory Technologists and Technicians, covering both technicians and technologists; they are not separate statistics for 29-2011.00 technologists, let alone data for 29-2011.02 cytotechnologists themselves. This occupation's own tasks, context, and preparation materials are kept separate from the combined statistics.",
-        "period": "2025—2035 projection; 2025 base period; searched 2026-10-09",
+        "occupation_scope": "U.S. SOC 29-2010 Clinical Laboratory Technologists and Technicians (parent group, not cytology separately)",
+        "period": "2025–2035",
         "source_refs": [
-          "r5-bls-current"
+          "a24-bls-projections"
         ]
       },
       {
@@ -37643,23 +37602,35 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Cytotechnologists",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "derivation": null,
+        "display_value": "One contract post, junior college or higher and at least two years of pathology-department technician experience. Duties include cytology slide preparation and other pathology work. No wage amount listed.",
+        "fact_id": "posting-a24-crrc",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Beijing Bo’ai Hospital pathology technician",
+        "period": "Not stated",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "a24-crrc"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One post requiring a related bachelor’s degree or higher. Section preparation, staining, microscopy and animal specimen support. Adjacent research job. Pay negotiable.",
+        "fact_id": "posting-a24-pku",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Research pathology center technician",
+        "period": "2026-10-27",
+        "source_refs": [
+          "a24-pku"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI Impact Score"
     },
@@ -37673,31 +37644,31 @@
         "availability": "available",
         "fact_ref": "median",
         "key": "us_pay",
-        "label": "U.S. median annual wage (2025 wage data, 62,930 USD/year; parent-occupation proxy definition)"
+        "label": "U.S. median wage · Clinical Laboratory Technologists and Technicians"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, slower than average 1%—2%; parent-occupation proxy definition)"
+        "label": "U.S. projected employment change (2025–2035) · Clinical Laboratory Technologists and Technicians"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment headcount (2024, about 351,200 people; parent-occupation proxy definition)"
+        "label": "U.S. employment (2025) · Clinical Laboratory Technologists and Technicians"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual openings (2024—2034, about 22,600, including growth and replacement)"
+        "label": "U.S. projected annual openings (including replacements) · Clinical Laboratory Technologists and Technicians"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China salary reference (occupation-level definition gap; see the China salary section)"
+        "label": "Mainland China: occupation wage unavailable"
       }
     ]
   },
@@ -37705,17 +37676,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Cytotechnologists (O*NET-SOC 29-2011.02) stain, mount, and study cells according to established standards and conventions to find evidence of cancer, hormonal abnormalities, and other pathological conditions: the tasks cover verifying and recording specimen information, evaluating specimen quality under the microscope, examining abnormalities in cell morphology and arrangement, preparing and analyzing Pap smear and fine-needle aspirate samples, using special staining to distinguish cell components, submitting abnormal slides to the pathologist and assisting in writing pathology reports, assisting in collecting cell samples, maintaining laboratory operations and safety, maintaining equipment such as microscopes, and coordinating laboratory tasks and taking part in continuing education; it should be noted that its U.S. wage, employment, and industry data are published on O*NET under the parent-occupation definition for Clinical Laboratory Technologists and Technicians (29-2011.00), including a 2025 median annual wage of 62,930 USD (30.26 USD/hour), about 351,200 people employed in 2024, a 2024—2034 employment projection of slower than average (1%—2%), about 22,600 average annual openings including growth and replacement, an industry split of health care and social assistance 83%／other industries 17%, an interest code of IRC, and a preparation level of Job Zone Five; as well as the occupation-level wage gap for such positions in mainland China and the control points for specimen and patient information verification, slide preparation and staining quality, morphological interpretation and abnormality submission, and result communication and escalation."
+      "text": "See how cytotechnologists prepare slides, examine cells and refer findings. Compare related mainland jobs and U.S. parent-group wages."
     },
     "title": {
       "availability": "available",
       "text": "Cytotechnologists"
     }
   },
-  "source_content_sha256": "861892b0a81b69889b931239f3889628eacd23b629aa0c308c6f922d70324dc5",
+  "source_content_sha256": "efed269ef3b6fc49e313e72251b9886de3b9ac188103f90f36cb5349560081a5",
   "subject": {
     "canonical_slug": "cytotechnologists",
     "name": "Cytotechnologists",
-    "summary": "In the United States, cytotechnologists correspond to O*NET-SOC 29-2011.02 (Cytotechnologists), staining, mounting, and studying cells according to established standards and conventions to find evidence of cancer, hormonal abnormalities, and other pathological conditions: verifying patient and specimen information and recording the specimen source; examining specimens under the microscope for whether they meet quality requirements, and examining cell components and arrangement in cell samples for abnormalities in color, shape, or size; preparing and analyzing samples such as Pap smears (PAP), body fluids, and fine-needle aspirates (FNA), and using special staining (such as chromosome staining) to distinguish cells or cell components; submitting slides with abnormal cell structure to the pathologist for further examination and providing patient clinical data or microscopic findings to assist in preparing pathology reports; when necessary, assisting the pathologist or physician in collecting cell samples using methods such as fine-needle aspiration; maintaining laboratory operations according to specimen collection, preparation, and laboratory safety standards; adjusting, maintaining, or repairing laboratory equipment such as microscopes; assigning and coordinating laboratory tasks; and taking part in continuing education. The preparation level for this occupation is Job Zone Five (requiring extensive preparation, SVP 8.0 and above), and the official education survey shows 50% requiring a bachelor's degree, 36% requiring a post-baccalaureate certificate, and 14% requiring a master's degree. On O*NET, this subcategory's wage, employment, and industry data are published under the parent-occupation definition for Clinical Laboratory Technologists and Technicians (29-2011.00), not values collected separately for this subcategory. Similar positions on the Chinese side are cytology laboratory positions in medical institution pathology departments and third-party medical testing institutions, whose duty and qualification definitions are not one-to-one counterparts of this U.S. occupation subcategory and cannot be interchanged."
+    "summary": "Match specimens to records, prepare and stain slides, screen cell morphology under a microscope, and refer abnormal findings through the applicable review process."
   }
 }

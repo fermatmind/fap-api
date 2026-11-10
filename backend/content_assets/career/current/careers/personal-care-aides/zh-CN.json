@@ -1283,6 +1283,9 @@
       "item:personal-care-aides.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:personal-care-aides.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:personal-care-aides.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31387,6 +31390,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。服务计划列备餐与步行陪同，记录只确认备餐。把可确认的任务和未签字的任务分开，写给服务协调员。"
+            ]
+          },
+          "id": "personal-care-aides.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "核居家照护任务与记录",
+          "type": "notice"
         }
       ]
     },
@@ -37772,6 +37790,13 @@
         "id": "personal-care-aides.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "personal-care-aides.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38121,7 +38146,7 @@
       "text": "个人护理员"
     }
   },
-  "source_content_sha256": "0fa5de5a8f241b09ae73dd8ed4a8001f2523ef58dc8c010b17e3ff18cd163825",
+  "source_content_sha256": "5d08d223b5a2e7af6c8f813a7d301d7124fce2e428d8cd8fc1180fbb64702c1f",
   "subject": {
     "canonical_slug": "personal-care-aides",
     "name": "个人护理辅助员",

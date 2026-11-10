@@ -1430,6 +1430,9 @@
       "item:clergy.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:clergy.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:clergy.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30523,6 +30526,21 @@
           "id": "clergy.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。活动登记含礼拜时间询问和一条希望私下联系的留言。写下给活动同工和关怀负责人的不同交接内容。"
+            ]
+          },
+          "id": "clergy.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "区分活动安排与个人关怀",
+          "type": "notice"
         }
       ]
     },
@@ -37095,6 +37113,13 @@
         "id": "clergy.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "clergy.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37505,7 +37530,7 @@
       "text": "神职人员"
     }
   },
-  "source_content_sha256": "21f0892168a9b677f56f5d70d0b7fd8782ee4bd2befeddbd4fb00201588c6c40",
+  "source_content_sha256": "4c3b3f63ab2c15d37dd0aab05a2abe3abdb3f7d38fd25b30983b81d7994adbfc",
   "subject": {
     "canonical_slug": "clergy",
     "name": "神职人员",

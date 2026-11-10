@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-a40-huadu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a40-putuo": {
+        "status": "pending_mapping"
+      },
       "fact:r5-employment-2025": {
         "status": "pending_mapping"
       },
@@ -1695,7 +1701,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -19546,56 +19552,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22572,7 +22542,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "低风险验证：用纸板或泡沫等安全材料完成一次「按虚构工单读尺寸—写出刀具与参数设定卡—画一张试切与量测检验表—写出护罩联锁异常与锁定挂牌的停机上报流程」练习，只判断工作偏好；练习不操作运行中的真实设备、不接触真实生产订单，不等同雇主录用或设备操作授权。"
+              "用本页三张虚构分切批次记录做一页交接。核对尺寸范围、批号和复核签字，再判断单项变式改变了哪一行。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -24153,7 +24123,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下一步：用本页的虚构练习或一次车间跟做，核对目标方向的对象是通用切割与切片机器、金属冲压与剪压设备、研磨抛光机床、铣刨机床、组合机床还是纺织裁剪与木材锯切，再决定方向。"
+              "先看目标岗位的材料和设备，再问雇主由谁负责调机、检验和放行。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.transition",
@@ -26121,12 +26091,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025年城镇制造业单位税前年均工资：非私营113,594元、私营76,055元（2026-05-15发布）。覆盖城镇地区5人及以上法人单位，不含个体工商户/自由职业者；非私营不等于仅国企。仅实际雇主归制造业时作行业背景，不是本职业工资、报价或分位。"
+              "两个样本分别对应学徒与机长，报价只适用于相应公告。是否仍在招须向雇主核实。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "r5-nbs-manufacturing"
+            "a40-putuo",
+            "a40-huadu"
           ],
           "type": "prose"
         },
@@ -26813,7 +26784,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先纸面推演虚构工单的尺寸核对与异常报告；车间观察需单位允许，设备操作、装刀与维护需完成安全培训并处于权限范围，纸面练习不授予设备权限。"
+              "用本页三张虚构分切批次记录做一页交接。核对尺寸范围、批号和复核签字，再判断单项变式改变了哪一行。"
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -27865,7 +27836,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用本页虚构练习或一次车间跟做来核对真实条件，并把观察结果与目标方向的对象、设备要求与安全边界逐项对照。"
+              "纸面交接可以观察自己是否愿意反复核对记录。实际工位、节拍和权限，可向雇主询问或在其允许时观察。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.next.answer",
@@ -28602,15 +28573,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本页不引用具体招聘公告，也不把历史招聘案例计为在招岗位；招聘与任职条件须按目标单位当年公开信息核对。",
+              "上海华业通信电子胶带分切工学徒，4,000–8,500 元/月，要求初中及以上学历，公告列分切机操作、质量与设备维护，并说明无经验者可获岗前培训。 佛山市顺科彩印包装分切机长，6,000–7,000 元/月，优先有一年以上同岗位经验，公告也写明可培养新人。 两个样本分别对应学徒与机长，报价只适用于相应公告。是否仍在招须向雇主核实。",
               "示例中的培训、观察与带教考察方式为编辑设计，用于说明常见验证方式，不代表任何单位的统一流程。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "r5-onet-current",
-            "r5-bls-current",
-            "r5-cn-safety"
+            "a40-putuo",
+            "a40-huadu"
           ],
           "type": "notice"
         },
@@ -28735,9 +28705,9 @@
               {
                 "id": "scene",
                 "values": [
-                  "作品一：虚构参数与试切方案",
-                  "交付物：一份完全虚构的参数设定卡与试切方案，含工单尺寸、刀具与模板选择、参数设定值与试切检验要点。",
-                  "写明每处判断的依据（工单、图纸或作业指导书），方案不得自相矛盾。"
+                  "作品一：分切批次交接",
+                  "保存原题三条记录和 R17 变式。",
+                  "注明每项依据、状态和接手人。"
                 ]
               },
               {
@@ -28986,34 +28956,34 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "虚构生产情景材料（练习输入）",
-                  "虚构情境：一名切割与切片设备操作员在当班时遇到四个问题。第一，一套切割参数按上一批材料设定，本批材料规格略有不同；第二，试切后发现尺寸落在公差边缘，交期很紧；第三，设备运行时听到异常声音，护罩上的一处联锁指示不确定是否正常；第四，一台设备需要清理刀口，维修人员说稍后检修，班组长催着继续生产。",
-                  "已给材料：工单尺寸与图纸；参数设定与试切检验要求；机器护罩与联锁要求；锁定挂牌能源隔离与维修申报流程。",
-                  "未给材料：尺寸落在公差边缘的判定与让步规则、异常声音的处置权限、清理刀口是否需要停机隔离，以及检修与生产的优先顺序。练习中如需要这些条件，请明确写出你的假设与需要确认的对象。"
+                  "三张虚构纸卷分切记录",
+                  "R17：工单要求宽度 119–121 毫米。首件记录 122 毫米，批号一致，复核已签。",
+                  "R18：首件宽度在工单范围内，工单批号 P08，卷标批号 P80，复核已签。",
+                  "R19：首件宽度在工单范围内，批号一致，复核签字栏空白。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "任务要求",
-                  "请写出一页处置与上报方案：包含参数复核与试切安排、边缘尺寸的处置、异常声音与护罩联锁的核对与停机决定，以及清理刀口与检修的安排。",
-                  "方案要写明哪些信息来自题面材料、哪些还是假设，并说明依据的是图纸、参数要求还是机器安全与能源隔离规程。"
+                  "一页交接",
+                  "分别写三张记录的依据、状态与接手人。质检核尺寸及复核，物料负责人核批号，出货由质检签批。",
+                  "单项变式：把 R17 实测改为 120 毫米，其余记录不变。另列变化行。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "参考交付（可从题面推导）",
-                  "方案应包含：参数复核（按本批材料核对工单与参数并重新试切确认，不沿用上一批设定）、边缘尺寸（复测并核对是否在公差内，超差或不确定时停机隔离并按规程上报，不擅自放行）、异常声音与护罩联锁（先停机、不绕过联锁，按规程核对护罩与联锁并上报，确认正常后方可恢复运行）、清理刀口与检修（按能源控制程序隔离能源并挂牌后再清理，不把停机按钮当作完整隔离，检修安排按规程申报并与班组长说明）、交接（写清四项事项的状态、已采取动作与待确认事项）。",
-                  "参考交付只列应包含的要素，不要求与示例措辞一致；能说明判断依据即可。"
+                  "先独立完成",
+                  "第六天交原题和变式。",
+                  "第七天到「常见问题与资料来源」打开「分切批次交接参考答案（完成第六天后再打开）」。"
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "边界与不可推断的结论",
-                  "本题只检验参数核对意识、尺寸判定、机器安全与能源隔离处置与异常升级意识，不评价真实个案的处理是否合规，也不构成安全认定、责任判定或法律意见。",
-                  "不得使用真实生产订单或未脱敏的商业信息；涉及真实设备操作、刀具装卸、护罩与联锁、锁定挂牌与个人防护时须按机器安全规程、作业指导书与单位制度执行。"
+                  "练习边界",
+                  "用纸面记录判断并交接。",
+                  "设备操作及出货签批由实际工作场所规定。"
                 ]
               }
             ]
@@ -29024,7 +28994,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "虚构练习材料：参数核对与能源隔离问题处置",
+          "title": "虚构分切批次交接",
           "type": "cards"
         },
         {
@@ -29035,50 +29005,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "第 1 天：读一份公开材料",
-                  "找一份公开的机器安全或切割设备科普材料，标出三条关键要求与对应做法，写下你想确认的地方。"
+                  "第 1 天",
+                  "抄录批次和工单范围。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "第 2 天：做一次参数设定推演",
-                  "用虚构工单与图纸，写出刀具与参数设定卡与试切要点，并注明需确认的条件。"
+                  "第 2 天",
+                  "比较首件宽度。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第 3 天：写一份检验与公差核对清单",
-                  "用虚构工单，列出量测项目、公差判定与剔除标准，标出必须停机上报的项。"
+                  "第 3 天",
+                  "核对工单与卷标。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "第 4 天：做一次护罩与能源隔离核对",
-                  "用虚构场景写出护罩与联锁异常处置与锁定挂牌能源隔离的步骤与验证方式。"
+                  "第 4 天",
+                  "检查复核栏。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "第 5 天：写一次异常处置记录",
-                  "用虚构场景写一份异常声音或尺寸超差的停机、隔离与上报记录，含判断依据与交接内容。"
+                  "第 5 天",
+                  "为三条记录写状态和接手人。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第 6 天：让他人只凭材料复核",
-                  "让一位同伴只看你的方案复核你的判断，记录对方提出的问题。"
+                  "第 6 天",
+                  "独立交一页，写原题三条记录，并单列变式的变化行。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第 7 天：判断是否继续",
-                  "回到本页的判断清单，写下你愿意继续的三条理由与需要慎重的两条条件。"
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「分切批次交接参考答案（完成第六天后再打开）」。 记录一处修订。"
                 ]
               }
             ]
@@ -29097,13 +29067,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "具体变化：你是否能在给定材料下写清参数依据、试切与检验、护罩与能源隔离的处置顺序，而不是只写「已处理」。",
-              "事实与选择：你更愿意做装刀调机与设备操作、送料监控与检验维护，还是设备与工序协作方向。",
-              "练习消耗：设备节拍、持续站立与危险作业环境，哪一步最消耗你，你能否接受它在工作里反复出现。",
-              "材料边界：练习材料均为虚构或以公开资料为基础，不得写入真实生产订单或未脱敏的商业信息。",
-              "反馈反应：当你的参数或尺寸被检验指出问题时，你是否愿意回到图纸与标准补齐。",
-              "过程兴趣：即使送料与量测重复，你是否愿意每次都完成试切与首件核对，而不是凭经验跳过规程。",
-              "下一步：如果前六步你都愿意继续，下一步是在合规前提下（如车间跟做或一次带训）完成一次从读图、装刀调机到试切与检验的闭环并请有经验者评阅；如果某一步明显消耗，先缩小方向再验证。"
+              "交件同时保留原题和变式。",
+              "为每条记录写可查的依据。",
+              "区分记录完整与签批权限。",
+              "写明接手人。",
+              "自核并记录一处修订。",
+              "向雇主核实际职责。",
+              "把这份交接作为作品样例。"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -31014,12 +30984,14 @@
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位年薪 46,570 美元（时薪 22.39 美元），分位为 35,930／39,440／46,570／53,800／61,120 美元（时薪 17.27／18.96／22.39／25.87／29.39），为 O*NET-SOC 51-9032.00 自身口径；按州或地区细分的数值须在 O*NET 当地工资页按地区与期间查询，不能当作个人报价；中国大陆未取得职业级数值，本页按缺口处理，不使用行业均值或招聘样本代填。",
+                "answer": "美国 2025 年中位年薪 46,570 美元、时薪 22.39 美元。大陆招聘报价见上海学徒和佛山机长两个样本，工种与经验不同。 上海华业通信电子胶带分切工学徒，4,000–8,500 元/月，要求初中及以上学历，公告列分切机操作、质量与设备维护，并说明无经验者可获岗前培训。 佛山市顺科彩印包装分切机长，6,000–7,000 元/月，优先有一年以上同岗位经验，公告也写明可培养新人。",
                 "id": "actors.faq.6",
                 "question": "这个职业的工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.cutting-and-slicing-machine-setters-operators-and-tenders.6",
                 "source_refs": [
-                  "oews"
+                  "r5-onet-current",
+                  "a40-putuo",
+                  "a40-huadu"
                 ]
               },
               {
@@ -31041,7 +31013,7 @@
                 ]
               },
               {
-                "answer": "先用纸板或泡沫等安全材料完成一次「按虚构工单读尺寸—写出刀具与参数设定卡—画一张试切与量测检验表—写出护罩联锁异常与锁定挂牌的停机上报流程」练习，或一次车间跟做，再核对目标方向的对象、设备要求与安全边界。",
+                "answer": "用本页三张虚构分切批次记录做一页交接。核对尺寸范围、批号和复核签字，再判断单项变式改变了哪一行。",
                 "id": "actors.faq.9",
                 "question": "零基础想尝试这个方向，应该先做什么？",
                 "question_key": "career.faq.cutting-and-slicing-machine-setters-operators-and-tenders.9",
@@ -31050,13 +31022,19 @@
                 ]
               },
               {
-                "answer": "O*NET 摘要与就业趋势页（基于 BLS 2024—2034 年预测，51-9032.00 自身口径）显示该口径 2024 年约 49,000 人，预测标签为 Decline（下降 -1% 或更低），十年约 5,300 个含增长与替换的空缺；该预测为职业总量口径，工作以设备操作与检验为主，须按本地制造与加工订单、产品结构与自动化投资核对，并优先核对机器护罩与联锁、能源隔离与个人防护的落地情况。",
+                "answer": "美国 BLS 表 1.2 的 51-9032 行显示，2025 年约 45,900 人，2035 年预计约 45,500 人，下降 0.9%，年均岗位空缺约 5,400 个，含替补。",
                 "id": "actors.faq.10",
                 "question": "现在选择这个职业，还应考虑什么？",
                 "question_key": "career.faq.cutting-and-slicing-machine-setters-operators-and-tenders.10",
                 "source_refs": [
-                  "bls"
+                  "r5-bls-current"
                 ]
+              },
+              {
+                "answer": "R17 的 122 毫米超过 121 毫米上限，标尺寸待核，交质检。R18 工单 P08 和卷标 P80 不一致，交物料负责人核归属。R19 缺复核签字，交质检补核。变式 R17 为 120 毫米，在范围内，送质检做出货签批；尺寸符合不等于已经放行。R18 和 R19 不变。自核四项：尺寸、批号、签字，以及变式与出货权限。",
+                "id": "actors.faq.11",
+                "question": "分切批次交接参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.cutting-and-slicing-machine-setters-operators-and-tenders.11"
               }
             ]
           },
@@ -31071,7 +31049,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "美国与中国大陆数据分栏：美国工资、就业与行业数据为 O*NET-SOC 51-9032.00 自身口径（OEWS 2025 年工资数据、BLS 2025—2035 年预测）；中国大陆按缺口处理、不使用行业均值或招聘样本代填，两者不互相替代。",
+              "美国使用 51-9032 职业的工资与就业数据。中国大陆两条招聘公告仅作岗位样本，职业工资分布仍缺可比资料。",
               "统计期、调查对象与计酬口径不同时分别引用；不插值、不用相邻职业或行业均值代填本职业工资。",
               "练习材料均为虚构或以公开资料为基础，不构成培训合格证明、聘用承诺或设备操作授权。"
             ]
@@ -31292,21 +31270,19 @@
                 "url": "https://www.onetonline.org/link/summary/51-4081.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "支持该职业的就业与预测口径（本细类自身）。",
-                  "不含中国大陆信息，不能替代中国大陆数据。",
-                  "本轮核查：旧2024–2034登记供范围外历史消费者保留；本轮现期授权模块使用r5-bls-current。"
+                  "美国 BLS 表 1.2 的 51-9032 行显示，2025 年约 45,900 人，2035 年预计约 45,500 人，下降 0.9%，年均岗位空缺约 5,400 个，含替补。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "旧2024–2034登记供范围外历史消费者保留；本轮现期授权模块使用r5-bls-current。",
+                "limitation": "美国职业投影。",
                 "market": "美国",
-                "name": "O*NET OnLine：Cutting and Slicing Machine Setters, Operators, and Tenders 51-9032.00 摘要与就业趋势（基于 BLS 2024—2034 年预测，本细类自身口径）",
-                "period": "2024—2034 年预测期；检索 2026-09-19",
+                "name": "BLS 表 1.2：切割与切片设备调整工、操作员、看护员 51-9032",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/51-9032.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31802,6 +31778,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "上海华业通信电子胶带分切工学徒，4,000–8,500 元/月，要求初中及以上学历，公告列分切机操作、质量与设备维护，并说明无经验者可获岗前培训。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a40-putuo",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "分切岗位招聘样本",
+                "period": "2025-12-23",
+                "publisher": "上海市普陀区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shpt.gov.cn/bm-ms/20251223/966115.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "佛山市顺科彩印包装分切机长，6,000–7,000 元/月，优先有一年以上同岗位经验，公告也写明可培养新人。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a40-huadu",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "分切岗位招聘样本",
+                "period": "2026-05",
+                "publisher": "广州市花都区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.huadu.gov.cn/zdlyxxgk/jycy/zpxx/content/mpost_10841301.html"
               }
             ]
           },
@@ -34671,9 +34677,9 @@
               "说明": "按缺口处理，不用行业均值或人群均值代填。"
             },
             {
-              "指标": "证据不足",
-              "数值": "未取得中国大陆该类岗位招聘或报价统计与工资分位数",
-              "说明": "不使用个别单位或平台的薪酬披露冒充全国数据，也不插值。"
+              "指标": "招聘样本",
+              "数值": "上海华业通信电子胶带分切工学徒，4,000–8,500 元/月，要求初中及以上学历，公告列分切机操作、质量与设备维护，并说明无经验者可获岗前培训。 佛山市顺科彩印包装分切机长，6,000–7,000 元/月，优先有一年以上同岗位经验，公告也写明可培养新人。",
+              "说明": "两个样本分别对应学徒与机长，报价只适用于相应公告。是否仍在招须向雇主核实。"
             }
           ],
           "china_ai_row": {
@@ -34685,7 +34691,7 @@
           "china_class_row": "中国大陆用工场景：制造业与加工企业中的切割、切片与下料设备操作岗位，以及玻璃、石材、食品、纸、橡胶与隔热材料等生产企业的相关工位；本轮未取得与O*NET-SOC 51-9032.00对应的中国职业工资，不据分类推定任职资格或收入。",
           "china_edu_table": [
             {
-              "学历段": "中国目标岗位学历要求：尚未取得公告",
+              "学历段": "胶带分切学徒：初中及以上",
               "岗位方向": "编辑核对：具体辅助工位的任务与招聘条件",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34695,7 +34701,7 @@
               }
             },
             {
-              "学历段": "中国目标岗位学历与工艺培训要求：尚未取得公告",
+              "学历段": "分切机长：优先有一年以上同岗经验",
               "岗位方向": "编辑核对：具体设备操作、调机职责与授权",
               "说明": "编辑核对建议：中国雇主招聘条件、岗位安全培训合格、实际设备与维护权限分别确认。安全生产法28–30条不支持由职业名称推全部人员需特种作业证。"
             },
@@ -34817,11 +34823,15 @@
               }
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
+              "城市/区间": "上海与佛山招聘样本",
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "posting-a40-putuo",
+                    "field": "display_value"
+                  },
+                  {
+                    "$fact": "posting-a40-huadu",
                     "field": "display_value"
                   },
                   {
@@ -34831,7 +34841,7 @@
                     "type": "prose"
                   }
                 ],
-                "separator": ""
+                "separator": "\n"
               }
             },
             {
@@ -34847,7 +34857,8 @@
           "china_soc_row": "美国职业代码：O*NET-SOC 51-9032.00（Cutting and Slicing Machine Setters, Operators, and Tenders）；本轮未取得与之对应的中国大陆职业工资口径与数值。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a40-putuo",
+            "posting-a40-huadu"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
@@ -36912,20 +36923,12 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
-          {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "label": "了解我的人格偏好"
+            "label": "MBTI 人格测评"
           },
           {
             "href": "/zh/tests/big-five-personality-test-ocean-model",
-            "label": "了解我的大五特质"
+            "label": "大五人格测评"
           }
         ]
       },
@@ -37331,74 +37334,74 @@
       },
       {
         "derivation": null,
-        "display_value": "约49,000人（2024 年）",
+        "display_value": "约45,900人（2025年）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模（存量统计）",
-        "occupation_scope": "Cutting and Slicing Machine Setters, Operators, and Tenders（51-9032.00）本细类口径；2024 年就业人数来自 O*NET 摘要页（基于 BLS 2024—2034 年预测）",
-        "period": "2024 年基期；检索 2026-09-19",
+        "occupation_scope": "美国51-9032自身职业口径；现期独立事实",
+        "period": "2025基期；检索2026-10-09",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "下降 -1% 或更低（2024—2034 年，标签「Decline」）",
+        "display_value": "下降 0.9%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "预测就业变化（职业总量）",
-        "occupation_scope": "51-9032.00 本细类口径；预测标签 Decline（-1% 或更低），属于预测期总量变化，不是个人录用概率",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "美国51-9032自身职业口径；现期独立事实",
+        "period": "2025—2035预测；检索2026-10-09",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约5,300个（2024—2034 年合计，含增长与替换）",
+        "display_value": "约5,400个/年（2025—2035，含增长与替换）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "预测期职位空缺（含增长与替换）",
-        "occupation_scope": "51-9032.00 本细类口径；空缺为 2024—2034 年合计，含因增长与替换产生的位置",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "美国51-9032自身职业口径；现期独立事实",
+        "period": "2025—2035年均；检索2026-10-09",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "制造业｜82%（2024 年行业分布中的就业占比）",
+        "display_value": "制造业｜81%（2025就业占比，非工资）",
         "fact_id": "industry-theater",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
-        "occupation_scope": "51-9032.00 本细类口径；制造业是 O*NET 行业分布中占比最高的门类",
-        "period": "2024 年行业分布；检索 2026-09-19",
+        "occupation_scope": "美国51-9032自身职业口径；现期独立事实",
+        "period": "2025行业分布；检索2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "其他行业（含批发贸易）｜18%（2024 年行业分布中的就业占比）",
+        "display_value": "其余19%（编辑算术100%-81%，未核具体行业）",
         "fact_id": "industry-education",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
-        "occupation_scope": "51-9032.00 本细类口径；其他行业是 O*NET 行业页合并公布的第二类",
-        "period": "2024 年行业分布；检索 2026-09-19",
+        "occupation_scope": "美国51-9032自身职业口径；现期独立事实",
+        "period": "2025行业分布；检索2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "统计状态：O*NET 2024 年行业分布仅将本职业就业归入「制造业」与「其他行业（含批发贸易）」两类",
+        "display_value": "O*NET只列主要行业制造业81%，其余未逐项展开",
         "fact_id": "industry-amusement",
         "market": "美国",
         "measure": "行业分布口径说明（非工资）",
-        "occupation_scope": "51-9032.00 本细类口径；O*NET 行业页未公布更细的行业门类占比，本页不据两类占比再拆分",
-        "period": "2024 年行业分布；检索 2026-09-19",
+        "occupation_scope": "美国51-9032自身职业口径；现期独立事实",
+        "period": "2025行业分布；检索2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
@@ -37427,7 +37430,7 @@
       },
       {
         "derivation": null,
-        "display_value": "下降0.9%（2025—2035年；OOH取整下降1%）",
+        "display_value": "下降 0.9%",
         "fact_id": "r5-growth-2025-2035",
         "market": "美国",
         "measure": "预测就业变化（职业总量）",
@@ -37496,6 +37499,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "上海华业通信电子胶带分切工学徒，4,000–8,500 元/月，要求初中及以上学历，公告列分切机操作、质量与设备维护，并说明无经验者可获岗前培训。",
+        "fact_id": "posting-a40-putuo",
+        "market": "中国大陆",
+        "measure": "招聘月薪报价",
+        "occupation_scope": "分切岗位招聘样本",
+        "period": "2025-12-23",
+        "source_refs": [
+          "a40-putuo"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "佛山市顺科彩印包装分切机长，6,000–7,000 元/月，优先有一年以上同岗位经验，公告也写明可培养新人。",
+        "fact_id": "posting-a40-huadu",
+        "market": "中国大陆",
+        "measure": "招聘月薪报价",
+        "occupation_scope": "分切岗位招聘样本",
+        "period": "2026-05",
+        "source_refs": [
+          "a40-huadu"
+        ]
       }
     ]
   },
@@ -37522,19 +37549,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，Decline 下降 -1% 或更低）"
+        "label": "美国就业变化（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 49,000 人）"
+        "label": "美国就业人数（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国十年职位空缺（2024—2034 年，约 5,300 个，含增长与替换）"
+        "label": "美国年均岗位空缺（2025–2035 年）"
       },
       {
         "availability": "missing",
@@ -37548,14 +37575,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "切割与切片设备调整工、操作员、看护员（O*NET-SOC 51-9032.00，Cutting and Slicing Machine Setters, Operators, and Tenders）装设、操作或看护切割与切片机器，把玻璃、石材、软木、橡胶、烟草、食品、纸与隔热材料等按规格切开：覆盖按工单与图纸确定参数、安装刀具辊轮模板、送料与试切、监控与调整、量测称重核对规格、剔除不合格品并回调、取成品与码放分类、清洗润滑与磨锐刀具、记录产量尺寸与转运等任务；需说明其美国工资与就业为该细类自身口径（2025 年中位年薪 46,570 美元、时薪 22.39 美元；2024 年约 49,000 人在岗；2024—2034 年预测为下降 -1% 或更低；十年约 5,300 个含增长与替换的空缺；行业分布 制造业 82%／其他行业 18%；兴趣代码 RC），以及中国大陆该类岗位的行业口径缺口与机器护罩、锁定挂牌能源隔离、试切核对与尺寸检验等控制点。"
+      "text": "了解切割与切片设备操作员的职责、美国工资与就业预测、大陆招聘样本，再做一次虚构分切批次交接。"
     },
     "title": {
       "availability": "available",
       "text": "切割与切片设备调整工、操作员、看护员"
     }
   },
-  "source_content_sha256": "ff4a926bfade6c17b22cc3636a79579333d60d8504c040d68edfbb663f7b27ec",
+  "source_content_sha256": "b239ff5a61f815f0a69edf579654119236f35a368137095be2a8fd68e60a7136",
   "subject": {
     "canonical_slug": "cutting-and-slicing-machine-setters-operators-and-tenders",
     "name": "切割与切片设备调整工、操作员、看护员",

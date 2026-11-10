@@ -144,25 +144,31 @@
         "status": "mapped"
       },
       "item:packers-and-packagers-hand.path.credential-decision.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.path.employer-evidence.3": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.path.entry-portfolio.4": {
         "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.path.entry-role-comparison.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:packers-and-packagers-hand.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.path.interview-probation.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.path.recruitment-sample.1": {
         "status": "pending_mapping"
       },
-      "item:packers-and-packagers-hand.path.seven-day-trial.6": {
+      "item:packers-and-packagers-hand.path.seven-day-decision.1": {
         "status": "mapped"
+      },
+      "item:packers-and-packagers-hand.path.seven-day-trial.6": {
+        "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.profile.career-quick-answers-block.4": {
         "status": "mapped"
@@ -219,7 +225,7 @@
         "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.sources.faq-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -5808,52 +5814,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -6084,36 +6228,98 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
         "ref": {
@@ -12184,7 +12390,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国同口径全国职业工资分布未取得。这是一份通过手工分拣、计量、装箱、封口和贴标，把产品变成可交付包裹的岗位。美国精确职业工资可查；中国只按实际雇主展示2025行业或生产宽岗年税前参考，不作本职工资。"
+              "这些判断用来探索职业。纸面订单不判定你能否胜任，也不授权实际发货。"
             ]
           },
           "id": "packers-and-packagers-hand.quick-decision.fermat-decision-card.1",
@@ -12198,7 +12404,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "适合能持续核对订单、数量、产品状态与标签，并能在重复操作中保持准确的人。"
+              "如果你能在重复包装中一直核商品代码，并在封箱前报告不符，可以试做虚构订单。"
             ]
           },
           "id": "packers-and-packagers-hand.quick-decision.fit-decision-checklist.2",
@@ -12212,7 +12418,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "若习惯跳过破损检查、混放批次或在搬运中忽视负重与姿势，应谨慎选择。"
+              "手工包装可能需要长时间站立，重复搬提、清点和封箱。入职前问清工序轮换及重箱怎么处理。"
             ]
           },
           "id": "packers-and-packagers-hand.quick-decision.fit-decision-checklist.3",
@@ -12226,7 +12432,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用模拟订单做小批量练习：检查产品、计数装箱、贴标并记录短少、破损和错标。"
+              "到 09 找《HP-26：核对一单手工包装》。数两箱中正确商品的件数，并写出待核更正。总数会不会让你漏看代码？复核人能看懂你怎么数的吗？"
             ]
           },
           "id": "packers-and-packagers-hand.quick-decision.fermat-decision-card.4",
@@ -12324,13 +12530,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "美国该精确职业 2024 年就业约 591,800 人，不是当前招聘职位数。 此为历史；2025美国精确53-7064就业555,500至2035年528,000；2025—2035总体-5.0%，官方净减少27,500人，年均空缺61,800个含替补，非AI采用替代、个人失业、当前招聘或中国需求。"
+              "交接凭证包括分商品数量、对应订单的箱标，以及破损、缺件或错货的异常记录。"
             ]
           },
           "id": "packers-and-packagers-hand.profile.definition-block.6",
           "source_refs": [
-            "onet-summary",
-            "bls-ep-53-7064"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -12645,12 +12850,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 53-7064.00 显示美国 2025 年中位时薪 17.44 美元、年薪 36,280 美元。"
+              "原表分别给出五个年薪与时薪分位。"
             ]
           },
           "id": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12659,12 +12864,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该中位数不是起薪、当前职位报价或个人收入承诺。"
+              "来源为 2025 年 5 月美国全国工资估计。"
             ]
           },
           "id": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12673,12 +12878,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "比较岗位需核对地区、行业、班次、合同工时、计件和福利。"
+              "来源为 2025 年 5 月美国全国工资估计。"
             ]
           },
           "id": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12687,12 +12892,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025美国精确53-7064第10/25/50/75/90分位年薪27,890/32,220/36,280/43,060/47,100美元；小时13.41/15.49/17.44/20.70/22.65，非资历起薪或个人报价，不换算中国工资。"
+              "来源为 2025 年 5 月美国全国工资估计。"
             ]
           },
           "id": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12701,13 +12906,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 2024 年就业约 591,800 人，与工资和年均空缺是不同指标。 前述2024为历史；2025美国精确53-7064就业555,500至2035年528,000；2025—2035总体-5.0%，官方净减少27,500人，年均空缺61,800个含替补，非AI采用替代、个人失业、当前招聘或中国需求。"
+              "它不能确定起薪或具体雇主的报价。"
             ]
           },
           "id": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-summary",
-            "bls-ep-53-7064"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12716,12 +12920,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国数据不可直接转换为中国岗位工资。"
+              "实际工资还取决于工时、合同和加班。"
             ]
           },
           "id": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         }
@@ -12945,12 +13149,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "入门可用虚构订单和安全样品，展示人工检查、计量、装箱、贴标与异常交接，不使用真实客户资料。"
+              "泰安 2026 年 1 月一则招聘列成品服装的后道包装。",
+              "只是一家雇主的历史例子，不能据此推定全国工资、入行条件或当前在招。"
             ]
           },
           "id": "packers-and-packagers-hand.path.recruitment-sample.1",
           "source_refs": [
-            "onet-cert"
+            "cn-example-026"
           ],
           "type": "notice"
         },
@@ -12964,6 +13169,13 @@
               "career.column.boundary",
               "career.column.evidence",
               "career.column.next"
+            ],
+            "column_labels": [
+              "阶段",
+              "任务",
+              "权限边界",
+              "凭证",
+              "下一步"
             ],
             "rows": [
               [
@@ -13005,8 +13217,10 @@
           },
           "id": "packers-and-packagers-hand.path.entry-role-comparison.2",
           "source_refs": [
-            "onet-cert"
+            "onet-details",
+            "editorial-hand-09"
           ],
+          "title": "入行岗位与任务",
           "type": "table"
         },
         {
@@ -13017,30 +13231,31 @@
               {
                 "id": "packers-and-packagers-hand.employer-evidence.1",
                 "values": [
-                  "流程样本",
-                  "输入输出可追溯"
+                  "订单清单（示例）",
+                  "用虚构订单，写明包装前核了哪些代码与数量。"
                 ]
               },
               {
                 "id": "packers-and-packagers-hand.employer-evidence.2",
                 "values": [
-                  "质量清单",
-                  "能发现错误"
+                  "质检记录（示例）",
+                  "记录箱子或商品情况，写明要复核什么。"
                 ]
               },
               {
                 "id": "packers-and-packagers-hand.employer-evidence.3",
                 "values": [
-                  "交接说明",
-                  "边界和升级清楚"
+                  "交接记录（示例）",
+                  "列出不符项，写明应请谁复核。"
                 ]
               }
             ]
           },
           "id": "packers-and-packagers-hand.path.employer-evidence.3",
           "source_refs": [
-            "onet-cert"
+            "editorial-hand-09"
           ],
+          "title": "可用于展示能力的练习记录",
           "type": "cards"
         },
         {
@@ -13051,24 +13266,24 @@
               {
                 "id": "packers-and-packagers-hand.portfolio.one",
                 "values": [
-                  "包装工、手工",
-                  "公开或模拟材料",
-                  "流程与质量记录"
+                  "工单与箱记录核对",
+                  "用虚构工单和箱标签，标出应装件数、实点件数及对应品号。",
+                  "带上做过标记的核对单，用一句话说明一处差异。"
                 ]
               },
               {
                 "id": "packers-and-packagers-hand.portfolio.two",
                 "values": [
-                  "包装工、手工",
-                  "异常场景",
-                  "升级与复盘"
+                  "异常交接记录",
+                  "用一箱虚构破损或少件货物，记录箱号、所见情况和交给谁复核。",
+                  "展示原始记录和待核问题，把放行交给指定复核人。"
                 ]
               }
             ]
           },
           "id": "packers-and-packagers-hand.path.entry-portfolio.4",
           "source_refs": [
-            "onet-cert"
+            "editorial-hand-09"
           ],
           "type": "cards"
         },
@@ -13081,6 +13296,12 @@
               "career.column.action",
               "career.column.review",
               "career.column.evidence"
+            ],
+            "column_labels": [
+              "情境",
+              "应对",
+              "复核要点",
+              "凭证"
             ],
             "rows": [
               [
@@ -13111,8 +13332,10 @@
           },
           "id": "packers-and-packagers-hand.path.interview-probation.5",
           "source_refs": [
-            "onet-cert"
+            "onet-details",
+            "editorial-hand-09"
           ],
+          "title": "供讨论的虚构质量情境",
           "type": "table"
         },
         {
@@ -13123,30 +13346,56 @@
               {
                 "id": "packers-and-packagers-hand.trial.day1",
                 "values": [
-                  "第1天",
-                  "定义对象与输出"
+                  "第 1 天",
+                  "开始 W-HP。另一张虚构订单要求同一箱贴 N6 标签，并有破损检查记录。"
                 ]
               },
               {
                 "id": "packers-and-packagers-hand.trial.day3",
                 "values": [
-                  "第3天",
-                  "完成模拟与检查"
+                  "第 2 天",
+                  "J3：标签 N6，破损检查空白。记录两项。"
                 ]
               },
               {
                 "id": "packers-and-packagers-hand.trial.day7",
                 "values": [
-                  "第7天",
-                  "复盘错误与改进"
+                  "第 3 天",
+                  "J7：标签 N9，有破损检查记录。记录两项。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "第 4 天",
+                  "按订单对照并写一个待核问题。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "第 5 天",
+                  "写出有没有满足纸面规则的箱子。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "第 6 天",
+                  "先独立复核标签和破损检查记录。找同伴反馈可选。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "第 7 天",
+                  "完成第 6 天独立复核后，到常见问题展开「W-HP 第 7 天参考」。对照记录，再选一个要练的习惯。"
                 ]
               }
             ]
           },
           "id": "packers-and-packagers-hand.path.seven-day-trial.6",
-          "source_refs": [
-            "onet-cert"
-          ],
+          "title": "七天纸面体验：独立新题",
           "type": "timeline"
         },
         {
@@ -13161,6 +13410,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "主题",
+              "凭证",
+              "核验方",
+              "条件",
+              "限制",
+              "负责人",
+              "下一步"
             ],
             "rows": [
               [
@@ -13221,8 +13479,9 @@
           },
           "id": "packers-and-packagers-hand.path.credential-decision.7",
           "source_refs": [
-            "onet-cert"
+            "editorial-hand-09"
           ],
+          "title": "按职责核培训与权限",
           "type": "table"
         },
         {
@@ -13230,7 +13489,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "普通手工包装岗位的课程或认证不自动授予设备维修、叉车、危险物品处理或质量放行权限；核对所在地和雇主要求。"
+              "O*NET 是美国证书查询目录，不能代替雇主要求。针对岗位用的工具、动力设备或放行职责，向雇主核具体培训与授权。"
             ]
           },
           "id": "packers-and-packagers-hand.path.credential-boundary.8",
@@ -13249,9 +13508,71 @@
           },
           "id": "packers-and-packagers-hand.path.career-path-block.9",
           "source_refs": [
-            "onet-cert"
+            "onet-details",
+            "editorial-hand-09"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "虚构材料（约 10 分钟）",
+                  "虚构订单 H8 要 12 件 K4。",
+                  "A 箱有 7 件 K4；B 箱有 4 件 K4 和 1 件 K9。两箱均贴 H8。",
+                  "只用纸面资料，不打包或批准真实发货。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "任务与交付",
+                  "写出订单所需商品的实数，判断两箱能否交发货复核。",
+                  "写明请包装负责人核对哪项更正。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "参考入口",
+                  "独立作答后，到常见问题展开「HP-26 题后参考」。",
+                  "再与自己的记录对照。"
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "自核清单",
+                  "是否列了两条凭证、解释了判断，并指出谁能复核？"
+                ]
+              }
+            ]
+          },
+          "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+          "title": "HP-26：核对一单手工包装",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "我读了两份记录。",
+              "我核对了两条规则。",
+              "我写下了自己的比较判断。",
+              "我指出了复核人。",
+              "我只用了虚构资料。",
+              "我独立复核了结果。",
+              "我选了一个要练的习惯。"
+            ]
+          },
+          "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+          "title": "七天后的判断问题",
+          "type": "list"
         }
       ]
     },
@@ -13266,12 +13587,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 O*NET 53-7064.00 的 2024—2034 年就业预计下降（-1% 或更低）；这是全国预测。 前述2024或2024—2034为历史；2025美国精确53-7064就业555,500至2035年528,000；2025—2035总体-5.0%，官方净减少27,500人，年均空缺61,800个含替补，非AI采用替代、个人失业、当前招聘或中国需求。"
+              "BLS 表 1.2 统计本职业（53-7064）2025 年有 555,500 个美国岗位，预计 2035 年为 528,000 个，公布预计净减 27,500 个（降 5.0%）。预计年均岗位空缺 61,800 个，含替补需求。"
             ]
           },
           "id": "packers-and-packagers-hand.market-signals.market-signal-card.1",
           "source_refs": [
-            "onet-summary",
             "bls-ep-53-7064"
           ],
           "type": "prose"
@@ -13281,12 +13601,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 年美国该精确职业就业约 591,800 人，不等于实时招聘数。 前述2024或2024—2034为历史；2025美国精确53-7064就业555,500至2035年528,000；2025—2035总体-5.0%，官方净减少27,500人，年均空缺61,800个含替补，非AI采用替代、个人失业、当前招聘或中国需求。"
+              "美国"
             ]
           },
           "id": "packers-and-packagers-hand.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-summary",
             "bls-ep-53-7064"
           ],
           "type": "prose"
@@ -13296,12 +13615,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年平均每年约 74,000 个岗位空缺，包含人员更替，不能当作净增岗位。 前述2024或2024—2034为历史；2025美国精确53-7064就业555,500至2035年528,000；2025—2035总体-5.0%，官方净减少27,500人，年均空缺61,800个含替补，非AI采用替代、个人失业、当前招聘或中国需求。"
+              "2025 基期；2035 预测"
             ]
           },
           "id": "packers-and-packagers-hand.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-summary",
             "bls-ep-53-7064"
           ],
           "type": "prose"
@@ -13311,12 +13629,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "自动化可能改变部分分拣与记录任务，但职业资料不能证明特定雇主的替代率。"
+              "后一数值为预测。"
             ]
           },
           "id": "packers-and-packagers-hand.market-signals.market-signal-card.4",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-53-7064"
           ],
           "type": "prose"
         },
@@ -13325,12 +13643,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "跨向设备操作、质量检验或仓储岗位，需补设备、检验或物流技能，不只迁移“会包装”。"
+              "美国全国数据不能说明当地招聘或中国需求。"
             ]
           },
           "id": "packers-and-packagers-hand.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-53-7064"
           ],
           "type": "prose"
         }
@@ -13403,7 +13721,7 @@
                 ]
               },
               {
-                "answer": "2025精确中位17.44美元/小时、36,280美元/年。2025美国精确53-7064就业555,500至2035年528,000；2025—2035总体-5.0%，官方净减少27,500人，年均空缺61,800个含替补，非AI采用替代、个人失业、当前招聘或中国需求。 旧2024就业591800保历史。",
+                "answer": "2025 年 5 月美国全国年薪中位数为 36,280 美元，时薪中位数为 17.44 美元。 BLS 表 1.2 统计本职业（53-7064）2025 年有 555,500 个美国岗位，预计 2035 年为 528,000 个，公布预计净减 27,500 个（降 5.0%）。预计年均岗位空缺 61,800 个，含替补需求。",
                 "id": "packers-and-packagers-hand.faq.7",
                 "question": "美国工资与就业是多少？",
                 "question_key": "career.faq.packers-and-packagers-hand.7",
@@ -13421,12 +13739,26 @@
                 "source_refs": [
                   "onet-details"
                 ]
+              },
+              {
+                "answer": "K4 实有 11 件，不是 12 件。虽然两箱都贴 H8，K9 也不能充作订单商品。纸面先暂留两箱，请包装负责人核实将 K9 换成 1 件 K4。",
+                "id": "packers-and-packagers-hand.faq.trial-short-reference",
+                "question": "HP-26 题后参考",
+                "question_key": "career.faq.packers-and-packagers-hand.trial-short-reference"
+              },
+              {
+                "answer": "两箱都不满足两项条件。J3 标签正确但缺破损检查记录；J7 有检查记录但贴 N9。请核 J3 的原始破损检查记录，不在两箱之间挪用记录。",
+                "id": "packers-and-packagers-hand.faq.trial-week-reference",
+                "question": "W-HP 第 7 天参考",
+                "question_key": "career.faq.packers-and-packagers-hand.trial-week-reference"
               }
             ]
           },
           "id": "packers-and-packagers-hand.sources.faq-block.1",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "source-pack-onet-localwages",
+            "bls-ep-53-7064"
           ],
           "type": "faq"
         },
@@ -13467,25 +13799,25 @@
                 "entity": "手工包装工",
                 "id": "navigation-2",
                 "relation": "career.section",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "手工包装工",
                 "id": "navigation-3",
                 "relation": "career.section",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "手工包装工",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "手工包装工",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "手工包装工",
@@ -13514,14 +13846,14 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "Not adoption, job-loss, regulation or authorization evidence."
+                  "解释本文任务分析，不用于推断采用率、失业、法规或操作授权。"
                 ],
                 "evidence_type": "internal task rubric",
                 "id": "internal-rubric",
-                "limitation": "Not adoption, job-loss, regulation or authorization evidence.",
+                "limitation": "解释本文任务分析，不用于推断采用率、失业、法规或操作授权。",
                 "market": "GLOBAL",
-                "name": "FermatMind 包装工、手工任务影响量表",
-                "period": "FermatMind task rubric v2026.08; reviewed 2026-08-31",
+                "name": "费马测试任务分析方法",
+                "period": "2026-08 版",
                 "publisher": "FermatMind",
                 "scope": "internal_rubric",
                 "url": null
@@ -13544,14 +13876,14 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "Directory entries are not state licenses, employer authorization or proof of universal requirement."
+                  "目录不能代替法定许可或雇主的现场授权。"
                 ],
                 "evidence_type": "official credential directory",
                 "id": "onet-cert",
-                "limitation": "Directory entries are not state licenses, employer authorization or proof of universal requirement.",
+                "limitation": "目录不能代替法定许可或雇主的现场授权。",
                 "market": "US",
-                "name": "National Certifications 53-7064.00 Packers And Packagers, Hand",
-                "period": "O*NET credential data current 2026; accessed 2026-08-31",
+                "name": "O*NET 美国证书目录",
+                "period": "美国证书目录",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/53-7064.00"
@@ -13559,14 +13891,14 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "Employer tasks and local authorization vary."
+                  "说明美国手工包装职责、工作情境与新聘调查；中国入行与现场授权需另核。"
                 ],
                 "evidence_type": "official occupation detail",
                 "id": "onet-details",
-                "limitation": "Employer tasks and local authorization vary.",
+                "limitation": "说明美国手工包装职责、工作情境与新聘调查；中国入行与现场授权需另核。",
                 "market": "US",
-                "name": "Packers And Packagers, Hand detailed occupation profile",
-                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "name": "O*NET 美国手工包装工职业详情",
+                "period": "职业档案，2026 年更新",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-7064.00"
@@ -13574,29 +13906,29 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "Posting mentions do not prove proficiency, adoption or automation rate."
+                  "工具条目不说明个人熟练度、实际采用率或自动化率。"
                 ],
                 "evidence_type": "official job-posting technology summary",
                 "id": "onet-hot",
-                "limitation": "Posting mentions do not prove proficiency, adoption or automation rate.",
+                "limitation": "工具条目不说明个人熟练度、实际采用率或自动化率。",
                 "market": "US",
-                "name": "Hot Technologies 53-7064.00 Packers And Packagers, Hand",
-                "period": "O*NET technology data current 2026; accessed 2026-08-31",
+                "name": "O*NET 技术工具条目",
+                "period": "美国职业工具条目",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/53-7064.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "12任务检查计量记录封口装箱分拣标签清洁剔除灌装供料运输；历史591800/下降-1%或更低/年均74000含替补。"
+                  "美国职业任务包括检查、计量、分拣、装箱、封口、贴标和留存记录。就业预测见单列的 BLS 表。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
-                "limitation": "US occupation evidence; China mapping and authorization require separate review.",
+                "limitation": "职业任务档案不能说明中国大陆工资或入行要求。",
                 "market": "US",
                 "name": "53-7064.00 Packers And Packagers, Hand",
-                "period": "2026任务；2025工资；2024就业与2024—2034历史趋势",
+                "period": "职业档案，2026 年更新",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/53-7064.00"
@@ -13604,14 +13936,14 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "Projection is not a hiring guarantee; parent data are not exact occupation counts."
+                  "地区或合并统计不能代替 BLS 表 1.2 的本职业全国预测。"
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
-                "limitation": "Projection is not a hiring guarantee; parent data are not exact occupation counts.",
+                "limitation": "地区或合并统计不能代替 BLS 表 1.2 的本职业全国预测。",
                 "market": "US",
-                "name": "National Employment Trends 53-7064.00 Packers And Packagers, Hand",
-                "period": "current O*NET/BLS employment data; accessed 2026-08-31",
+                "name": "O*NET 就业数据入口",
+                "period": "美国就业数据入口",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/53-7064.00"
@@ -13619,7 +13951,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "五分位年薪27890/32220/36280/43060/47100；小时13.41/15.49/17.44/20.70/22.65。"
+                  "2025 年 5 月美国全国第 10、25、50、75、90 百分位：年薪 27,890／32,220／36,280／43,060／47,100 美元；时薪 13.41／15.49／17.44／20.70／22.65 美元。"
                 ],
                 "evidence_type": "official wage data",
                 "id": "onet-wages",
@@ -13634,14 +13966,14 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "仅说明美国本职业或美国目录，不能判定中国工资或资格。"
                 ],
                 "evidence_type": "official custom occupation profile",
                 "id": "source-pack-onet-custom",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "仅说明美国本职业或美国目录，不能判定中国工资或资格。",
                 "market": "US",
-                "name": "53-7064.00 - Packers and Packagers, Hand",
-                "period": "current page; accessed 2026-09-02",
+                "name": "O*NET 职业数据字段",
+                "period": "美国职业资料",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/53-7064.00"
@@ -13649,14 +13981,14 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "仅说明美国本职业或美国目录，不能判定中国工资或资格。"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "source-pack-onet-details",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "仅说明美国本职业或美国目录，不能判定中国工资或资格。",
                 "market": "US",
-                "name": "53-7064.00 - Packers and Packagers, Hand",
-                "period": "current page; accessed 2026-09-02",
+                "name": "O*NET 职业详情",
+                "period": "美国职业资料",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-7064.00"
@@ -13664,44 +13996,45 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "仅说明美国本职业或美国目录，不能判定中国工资或资格。"
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "仅说明美国本职业或美国目录，不能判定中国工资或资格。",
                 "market": "US",
-                "name": "Hot Technologies: 53-7064.00 - Packers and Packagers, Hand",
-                "period": "current page; accessed 2026-09-02",
+                "name": "O*NET 技术工具条目",
+                "period": "美国职业资料",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/53-7064.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "零售贸易 26%；制造业 24%；行政及支持服务 19%；运输与仓储 16%；其他行业 15%",
+                  "这是美国本职业的就业份额，不是行业工资。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "这是美国本职业的就业份额，不是行业工资。",
                 "market": "US",
-                "name": "Industries: 53-7064.00 - Packers and Packagers, Hand",
-                "period": "current page; accessed 2026-09-02",
+                "name": "O*NET 就业行业份额",
+                "period": "2025",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "手工包装工",
                 "url": "https://www.onetonline.org/link/industry/53-7064.00"
               },
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "仅说明美国本职业或美国目录，不能判定中国工资或资格。"
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "source-pack-onet-localcert",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "仅说明美国本职业或美国目录，不能判定中国工资或资格。",
                 "market": "US",
-                "name": "National Certifications: 53-7064.00 - Packers and Packagers, Hand",
-                "period": "current page; accessed 2026-09-02",
+                "name": "O*NET 证书目录",
+                "period": "美国职业资料",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/53-7064.00"
@@ -13709,61 +14042,63 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "仅说明美国本职业或美国目录，不能判定中国工资或资格。"
                 ],
                 "evidence_type": "official local training discovery",
                 "id": "source-pack-onet-localtraining",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "仅说明美国本职业或美国目录，不能判定中国工资或资格。",
                 "market": "US",
-                "name": "National Training: 53-7064.00 - Packers and Packagers, Hand",
-                "period": "current page; accessed 2026-09-02",
+                "name": "O*NET 培训目录",
+                "period": "美国职业资料",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/53-7064.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "五分位年薪27890/32220/36280/43060/47100；小时13.41/15.49/17.44/20.70/22.65。"
+                  "2025 年 5 月美国全国年薪中位数为 36,280 美元，时薪中位数为 17.44 美元。",
+                  "原表直接列美国全国五个年薪和时薪分位。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "精确职业全国分位非起薪、资历等级或个人雇主报价，不换算中国工资。",
+                "limitation": "美国全国职业估计不能说明个人报价或中国大陆工资。",
                 "market": "US",
-                "name": "National Wages: 53-7064.00 - Packers and Packagers, Hand",
-                "period": "2025精确53-7064工资",
+                "name": "O*NET 全国工资表",
+                "period": "2025 年 5 月（BLS OEWS）",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "手工包装工",
                 "url": "https://www.onetonline.org/link/localwages/53-7064.00"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "12任务检查计量记录封口装箱分拣标签清洁剔除灌装供料运输；历史591800/下降-1%或更低/年均74000含替补。"
+                  "仅说明美国本职业或美国目录，不能判定中国工资或资格。"
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "source-pack-onet-summary",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "仅说明美国本职业或美国目录，不能判定中国工资或资格。",
                 "market": "US",
-                "name": "53-7064.00 - Packers and Packagers, Hand",
-                "period": "2026任务；2025工资；2024就业与2024—2034历史趋势",
+                "name": "O*NET 职业概要",
+                "period": "美国职业资料",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/53-7064.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "2025就业555500至2035年528000；总体-5.0官方净减少27500；年均61800空缺含替补。"
+                  "BLS 表 1.2 统计本职业（53-7064）2025 年有 555,500 个美国岗位，预计 2035 年为 528,000 个，公布预计净减 27,500 个（降 5.0%）。预计年均岗位空缺 61,800 个，含替补需求。",
+                  "BLS 列美国典型入行不要求正式学历、通常接受短期在岗培训。具体要求随雇主而异。"
                 ],
                 "evidence_type": "official occupational statistics",
                 "id": "bls-ep-53-7064",
-                "limitation": "非AI采用替代、个人失业、当前招聘或中国需求。",
+                "limitation": "年均空缺含替补；预测不单独估计 AI 影响，也不代表当地招聘。",
                 "market": "US",
-                "name": "BLS 53-7064 Occupational projections",
-                "period": "2025就业工资；2025—2035预测",
+                "name": "BLS 表 1.2：美国本职业就业预测",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "手工包装工",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
@@ -13812,10 +14147,11 @@
                 "url": "https://www.osha.gov/etools/machine-guarding/introduction/general-requirements"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "三项代表任务等权：floor((25+0+0)/3+0.5)=8；fermatmind-ai-impact-v1；2026-11-10。这是编辑估算，不表示实际工时或失业概率。",
                   "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "确认产品、数量和包装要求 — 50/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
+                  "确认产品、数量和包装要求 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
                   "选择正确产品并计数 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
                   "封口并标识目的地 — 0/100; weight=1/3; display.ai_impact_table.task_rows.4[0]"
                 ],
@@ -13823,10 +14159,40 @@
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
                 "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "period": "2026-11-10",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "泰安 2026 年 1 月一则招聘列成品服装的后道包装。"
+                ],
+                "evidence_type": "地方历史招聘公告",
+                "id": "cn-example-026",
+                "limitation": "只是一家雇主的历史例子，不能据此推定全国工资、入行条件或当前在招。",
+                "market": "中国大陆",
+                "name": "泰安 2026 年 1 月招聘公告",
+                "period": "2026-01",
+                "publisher": "泰安市人力资源和社会保障局",
+                "scope": "手工包装工",
+                "url": "https://rsj.taian.gov.cn/art/2026/1/30/art_167727_10320176.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "用虚构订单、质检和交接记录示范怎样写凭证。"
+                ],
+                "evidence_type": "编辑练习",
+                "id": "editorial-hand-09",
+                "limitation": "仅是职业探索的虚构示例，不说明所有雇主的偏好，不授予培训认定或权限。",
+                "market": "纸面练习",
+                "name": "费马测试手工包装练习示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "编辑示例",
+                "url": null
               }
             ]
           },
@@ -14014,7 +14380,7 @@
             }
           }
         ],
-        "answer": "扫码、电子秤和订单匹配可辅助核对；真实产品、错漏、破损、重量和最终交接仍需人员复核。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
+        "answer": "工具可提示订单记录不符；包装人员仍需核实物、数量、箱子和标签。8% 为三项代表任务的编辑估算，不衡量采用率或失业风险。",
         "authority_links": [
           {
             "来源": "O*NET 53-7064.00 职业资料",
@@ -14290,19 +14656,19 @@
         },
         "competence_ladder": [
           {
-            "description": "用模拟或真实监督任务的准确率与记录验证。",
+            "description": "从工单读出品号和应装件数，并能指出两个字段。",
             "stage": "订单识别"
           },
           {
-            "description": "用模拟或真实监督任务的准确率与记录验证。",
+            "description": "把示例箱的实点件数和标签与作业要求核对。",
             "stage": "计量装箱"
           },
           {
-            "description": "用模拟或真实监督任务的准确率与记录验证。",
+            "description": "写清哪一箱、哪里不符、放行前交谁核。",
             "stage": "异常隔离"
           },
           {
-            "description": "用模拟或真实监督任务的准确率与记录验证。",
+            "description": "交接未结差异，确保接班人员能找到对应箱并跟进。",
             "stage": "班组协同"
           }
         ],
@@ -14312,7 +14678,7 @@
         "locale_requirements": {
           "credential_boundary": "普通培训不自动授予设备维修、叉车或质量放行权限。",
           "jurisdiction": "美国职业资料与中国岗位要求分开。",
-          "summary": "核对雇主带教、工具使用、搬运限制和产品要求。"
+          "summary": "BLS 列美国典型入行不要求正式学历，通常有短期在岗培训。O*NET 新聘调查中，54% 的受访者选高中或同等、33% 选低于高中、14% 选读过大学但无学位。比例有取整；实际培训问雇主。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14346,103 +14712,103 @@
             "id": "office-support",
             "stages": [
               {
-                "credentials": "核对岗位训练和工具许可。",
-                "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "观察笔记、输入清单与未知项。",
-                "responsibility": "在获准观察或模拟中学习基础学习的输入、交付与责任，不独立处理真实对象。",
-                "role": "职业探索者"
+                "credentials": "仅用练习记录。",
+                "next_moves": "增加一种商品，检查是否串号。",
+                "readiness_evidence": "一张标明两个字段的核对单。",
+                "responsibility": "用虚构工单核对品号和数量。",
+                "role": "了解岗位"
               },
               {
-                "credentials": "核对岗位训练和工具许可。",
-                "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "监督反馈、核对表与更正记录。",
-                "responsibility": "在岗位训练及监督中练习基础学习，核原始输入、记录反馈和异常。",
-                "role": "培训学员"
+                "credentials": "在带教指定工位练习。",
+                "next_moves": "问清哪些差异必须先报告。",
+                "readiness_evidence": "一项标出的差异及带教纠正记录。",
+                "responsibility": "跟带教员把工单与待包装物品逐项核对。",
+                "role": "跟岗学员"
               },
               {
-                "credentials": "核对岗位训练和工具许可。",
-                "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "对应训练权限、任务记录与接收人。",
-                "responsibility": "完成训练并取得相应权限后承担基础学习职责，保留执行与交接记录；设备、叉车、危险品及质量放行权限另核。",
-                "role": "在岗包装工"
+                "credentials": "未解决的差异交指定人员复核。",
+                "next_moves": "件数核完后再核标签。",
+                "readiness_evidence": "能解释数量差异的订单记录。",
+                "responsibility": "核对分配到的订单品号和件数。",
+                "role": "包装工"
               },
               {
-                "credentials": "核对岗位训练和工具许可。",
-                "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "异常复盘与修订反馈；不自动扩大权限。",
-                "responsibility": "在相应职责内复盘基础学习的复杂异常并改进交接；承担新任务前另核能力和权限。",
-                "role": "在岗包装工"
+                "credentials": "只在岗位分工内协调。",
+                "next_moves": "与班组确认是否需要补充核对字段。",
+                "readiness_evidence": "指出常见差异的一份交接单。",
+                "responsibility": "对照不同班次重复出现的订单差异。",
+                "role": "熟练包装工"
               }
             ],
-            "title": "基础学习"
+            "title": "核对工单"
           },
           {
             "id": "supplier-cost",
             "stages": [
               {
-                "credentials": "核对岗位训练和工具许可。",
-                "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "观察笔记、输入清单与未知项。",
-                "responsibility": "在获准观察或模拟中学习监督下包装的输入、交付与责任，不独立处理真实对象。",
-                "role": "职业探索者"
+                "credentials": "不使用生产物料和工具。",
+                "next_moves": "对照两份示例规格。",
+                "readiness_evidence": "一份写明箱型、填充物和标签的记录。",
+                "responsibility": "根据给定的虚构规格给商品匹配包装。",
+                "role": "了解岗位"
               },
               {
-                "credentials": "核对岗位训练和工具许可。",
-                "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "监督反馈、核对表与更正记录。",
-                "responsibility": "在岗位训练及监督中练习监督下包装，核原始输入、记录反馈和异常。",
-                "role": "培训学员"
+                "credentials": "只使用已接受现场培训的工具。",
+                "next_moves": "与带教员一起更正一处标签不一致。",
+                "readiness_evidence": "带教员核过的一箱成品和标签。",
+                "responsibility": "在带教安排的工位练习点数、封箱和贴标。",
+                "role": "跟岗学员"
               },
               {
-                "credentials": "核对岗位训练和工具许可。",
-                "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "对应训练权限、任务记录与接收人。",
-                "responsibility": "完成训练并取得相应权限后承担监督下包装职责，保留执行与交接记录；设备、叉车、危险品及质量放行权限另核。",
-                "role": "在岗包装工"
+                "credentials": "无权限时不变更规格、不作放行。",
+                "next_moves": "问清破损箱怎么登记。",
+                "readiness_evidence": "可与工单核对的成箱记录。",
+                "responsibility": "按作业要求包装分配到的订单，记录完成箱数。",
+                "role": "包装工"
               },
               {
-                "credentials": "核对岗位训练和工具许可。",
-                "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "异常复盘与修订反馈；不自动扩大权限。",
-                "responsibility": "在相应职责内复盘监督下包装的复杂异常并改进交接；承担新任务前另核能力和权限。",
-                "role": "在岗包装工"
+                "credentials": "作业要求有变更时由负责人确认。",
+                "next_moves": "建议在差异出现的环节增设核对。",
+                "readiness_evidence": "能定位到工单号和箱号的简短说明。",
+                "responsibility": "对照两张包装记录，找出反复出现的贴标差异。",
+                "role": "熟练包装工"
               }
             ],
-            "title": "监督下包装"
+            "title": "装箱与留记录"
           },
           {
             "id": "records-information",
             "stages": [
               {
-                "credentials": "核对岗位训练和工具许可。",
-                "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "观察笔记、输入清单与未知项。",
-                "responsibility": "在获准观察或模拟中学习独立工作与发展的输入、交付与责任，不独立处理真实对象。",
-                "role": "职业探索者"
+                "credentials": "不判断真实订单能否发出。",
+                "next_moves": "写出应由谁复核。",
+                "readiness_evidence": "一份含箱号、观察结果和待核问题的记录。",
+                "responsibility": "对照两份虚构箱记录，找破损或少件。",
+                "role": "了解岗位"
               },
               {
-                "credentials": "核对岗位训练和工具许可。",
-                "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "监督反馈、核对表与更正记录。",
-                "responsibility": "在岗位训练及监督中练习独立工作与发展，核原始输入、记录反馈和异常。",
-                "role": "培训学员"
+                "credentials": "按现场规则暂留受影响物品。",
+                "next_moves": "请带教核对能否按记录找到该箱。",
+                "readiness_evidence": "一份写明品号和所见差异的交接单。",
+                "responsibility": "向带教员指出哪箱与工单不符。",
+                "role": "跟岗学员"
               },
               {
-                "credentials": "核对岗位训练和工具许可。",
-                "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "对应训练权限、任务记录与接收人。",
-                "responsibility": "完成训练并取得相应权限后承担独立工作与发展职责，保留执行与交接记录；设备、叉车、危险品及质量放行权限另核。",
-                "role": "在岗包装工"
+                "credentials": "处置与质量放行交获授权人员。",
+                "next_moves": "问清换班时谁跟进未结报告。",
+                "readiness_evidence": "含件数、外观状态和接收岗位的报告。",
+                "responsibility": "登记破损或少件，并交给对应人员复核。",
+                "role": "包装工"
               },
               {
-                "credentials": "核对岗位训练和工具许可。",
-                "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "异常复盘与修订反馈；不自动扩大权限。",
-                "responsibility": "在相应职责内复盘独立工作与发展的复杂异常并改进交接；承担新任务前另核能力和权限。",
-                "role": "在岗包装工"
+                "credentials": "班组交接不授予质量放行或设备权限。",
+                "next_moves": "有意转质量岗时，单独核查培训和授权。",
+                "readiness_evidence": "写明箱号、处理状态和下一负责人。",
+                "responsibility": "为下一班汇总未结异常。",
+                "role": "熟练包装工"
               }
             ],
-            "title": "独立工作与发展"
+            "title": "发现异常并交接"
           }
         ]
       },
@@ -14508,7 +14874,7 @@
             }
           },
           {
-            "answer": "手工包装工可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "2025 年 5 月美国年薪中位数 36,280 美元，时薪中位数 17.44 美元。BLS 统计 2025 年有 555,500 个岗位，预计 2035 年为 528,000 个，预计年均空缺 61,800 个，含替补。",
             "key": "qa2",
             "question": "美国官方数据是什么？",
             "table": {
@@ -14533,33 +14899,33 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "美国中位年薪",
-                  "secondary_value": "美国全国职业数据",
-                  "value": "$36,280（2025）"
+                  "label": "美国年薪中位数",
+                  "secondary_value": "美国全国职业工资",
+                  "value": "36,280 美元（2025 年 5 月）"
                 },
                 {
                   "alternate_value": null,
-                  "label": "2025就业",
-                  "secondary_value": "美国2025精确基期，非实时招聘",
-                  "value": "555,500人"
+                  "label": "2025 年美国就业",
+                  "secondary_value": "BLS 全国基数",
+                  "value": "555,500 个岗位"
                 },
                 {
                   "alternate_value": null,
-                  "label": "就业预测",
-                  "secondary_value": "官方净减少27500，非AI替代概率",
-                  "value": "2025—2035总体-5.0%"
+                  "label": "2025—2035 年预计变化",
+                  "secondary_value": "2035 年预计 528,000 个岗位",
+                  "value": "−5.0%；净减 27,500 个岗位"
                 },
                 {
                   "alternate_value": null,
-                  "label": "年均空缺",
-                  "secondary_value": "含替补，非净减少27500",
-                  "value": "约61,800个/年"
+                  "label": "预计年均空缺",
+                  "secondary_value": "含替补需求",
+                  "value": "每年 61,800 个"
                 }
               ]
             }
           },
           {
-            "answer": "手工包装工可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "先在指导下核商品代码和数量、使用指定工具，并问清破损品和重物如何处理。交接箱子前先报告异常。",
             "key": "qa1",
             "question": "如何安全入门？",
             "table": {
@@ -14616,7 +14982,7 @@
         "context_links": [
           {
             "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "label": "查看就业展望与相邻职业"
           }
         ],
         "direct_answer": {
@@ -14845,7 +15211,7 @@
           "china_intl": "O*NET手工包装任务与中国映射边界｜https://www.onetonline.org/link/details/53-7064.00；美国认证目录不证明中国职业工资。",
           "china_name_row": "中国工资：按实际雇主区分宽参考",
           "china_open": "可用公开职责与技能信息做职业探索，但不能据此推导中国市场工资。",
-          "china_open_note": "如需薪资判断，应回到具体城市、雇主、岗位级别和公开招聘条件核对。",
+          "china_open_note": "泰安 2026 年 1 月一则招聘列成品服装的后道包装。 只是一家雇主的历史例子，不能据此推定全国工资、入行条件或当前在招。",
           "china_ref": "国家统计局2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "china_salary_note": {
             "$join": [
@@ -14900,53 +15266,53 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "O*NET 工资分位｜https://www.onetonline.org/link/localwages/53-7064.00；BLS 精确职业总体预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+        "authority_sources": "全国工资｜https://www.onetonline.org/link/localwages/53-7064.00；BLS 就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；就业行业份额｜https://www.onetonline.org/link/industry/53-7064.00",
         "bls_table": [
           {
             "指标": "薪资第10百分位",
-            "数值": "$27,890",
-            "说明": "2025美国精确53-7064年薪分位，非资历起薪、个人合同或中国换算。"
+            "数值": "27,890 美元/年；13.41 美元/小时",
+            "说明": "美国 2025 年 5 月全国工资估计。"
           },
           {
             "指标": "薪资第25百分位",
-            "数值": "$32,220",
-            "说明": "2025美国精确53-7064年薪分位，非资历起薪、个人合同或中国换算。"
+            "数值": "32,220 美元/年；15.49 美元/小时",
+            "说明": "美国 2025 年 5 月全国工资估计。"
           },
           {
             "指标": "薪资中位数",
-            "数值": "$36,280",
-            "说明": "2025美国精确53-7064年薪分位，非资历起薪、个人合同或中国换算。"
+            "数值": "36,280 美元/年；17.44 美元/小时",
+            "说明": "美国 2025 年 5 月全国工资估计。"
           },
           {
             "指标": "薪资第75百分位",
-            "数值": "$43,060",
-            "说明": "2025美国精确53-7064年薪分位，非资历起薪、个人合同或中国换算。"
+            "数值": "43,060 美元/年；20.70 美元/小时",
+            "说明": "美国 2025 年 5 月全国工资估计。"
           },
           {
             "指标": "薪资第90百分位",
-            "数值": "$47,100",
-            "说明": "2025美国精确53-7064年薪分位，非资历起薪、个人合同或中国换算。"
+            "数值": "47,100 美元/年；22.65 美元/小时",
+            "说明": "美国 2025 年 5 月全国工资估计。"
           },
           {
-            "指标": "就业人数",
-            "数值": "555,500",
-            "说明": "2025精确53-7064就业存量，不是当前招聘。"
+            "指标": "美国就业岗位数",
+            "数值": "2025 年美国有 555,500 个岗位；2035 年预计 528,000 个",
+            "说明": "BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "就业前景 2025—2035",
-            "数值": "-5.0%",
-            "说明": "总体下降；官方净减少27500，非AI归因或个人失业。"
+            "指标": "2025—2035 年预计岗位变化",
+            "数值": "−5.0%；美国岗位净减 27,500 个",
+            "说明": "BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "就业岗位空缺（平均年度）",
-            "数值": "约61,800/年",
-            "说明": "2025—2035平均年度空缺含替补，非净减少27500。"
+            "指标": "预计年均岗位空缺",
+            "数值": "预计年均空缺 61,800 个，含替补需求",
+            "说明": "BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
-        "boundary": "2025工资与就业、2025—2035总体预测各用本期精确口径；2024和2024—2034保历史，不混期。",
+        "boundary": "工资为 2025 年 5 月美国全国估计。预测针对美国本职业总体就业。不能用来判断当地当前空缺、个人报价或 AI 的影响。",
         "direct_answer": {
           "$join": [
-            "2025美国精确53-7064就业555,500至2035年528,000；2025—2035总体-5.0%，官方净减少27,500人，年均空缺61,800个含替补，非AI采用替代、个人失业、当前招聘或中国需求。",
+            "2025 年 5 月美国全国年薪中位数为 36,280 美元，时薪中位数为 17.44 美元",
             {
               "$item": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -14971,39 +15337,44 @@
           }
         ],
         "factors_heading": "影响实际报价的因素",
-        "growth": "-5.0%",
+        "growth": "BLS 表 1.2 统计本职业（53-7064）2025 年有 555,500 个美国岗位，预计 2035 年为 528,000 个，公布预计净减 27,500 个（降 5.0%）。预计年均岗位空缺 61,800 个，含替补需求。",
         "heading": "美国手工包装工资与就业",
-        "industry_heading": "行业与岗位差异",
-        "industry_period": "雇主条件核对；无行业工资统计",
+        "industry_heading": "就业行业份额（2025 年）",
+        "industry_period": "2025 年就业份额",
         "industry_rows": [
           {
             "industry": "零售贸易",
-            "median": "核对具体岗位",
-            "note": "订单类型和班次不同。"
+            "median": "26%",
+            "note": "这是美国本职业的就业份额，不是行业工资。"
           },
           {
             "industry": "制造业",
-            "median": "核对具体岗位",
-            "note": "产品与质量要求不同。"
+            "median": "24%",
+            "note": "这是美国本职业的就业份额，不是行业工资。"
           },
           {
-            "industry": "仓储履约",
-            "median": "核对具体岗位",
-            "note": "拣货和包装职责可能混合。"
+            "industry": "行政及支持服务",
+            "median": "19%",
+            "note": "这是美国本职业的就业份额，不是行业工资。"
           },
           {
-            "industry": "其他雇主",
-            "median": "核对具体岗位",
-            "note": "全国中位数不是个人报价。"
+            "industry": "运输与仓储",
+            "median": "16%",
+            "note": "这是美国本职业的就业份额，不是行业工资。"
+          },
+          {
+            "industry": "其他行业",
+            "median": "15%",
+            "note": "这是美国本职业的就业份额，不是行业工资。"
           }
         ],
-        "industry_value_label": "数据状态",
+        "industry_value_label": "就业份额",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
             "answer": {
               "$join": [
-                "中位工资不是起薪，也不是个人收入承诺。",
+                "它是工资分布的中点",
                 {
                   "$item": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.5",
                   "block": "us-salary",
@@ -15013,12 +15384,12 @@
               ],
               "separator": "；"
             },
-            "question": "中位工资代表什么？"
+            "question": "中位数能说明什么？"
           },
           {
             "answer": {
               "$join": [
-                "2025美国精确53-7064第10/25/50/75/90分位年薪27,890/32,220/36,280/43,060/47,100美元；小时13.41/15.49/17.44/20.70/22.65，非资历起薪或个人报价，不换算中国工资。",
+                "全国表直接发布两项指标",
                 {
                   "$item": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -15028,33 +15399,33 @@
               ],
               "separator": "；"
             },
-            "question": "分位工资如何使用？"
+            "question": "如何使用时薪和年薪估计？"
           },
           {
-            "answer": "它是职业就业存量，不是当前招聘数量。",
-            "question": "就业人数代表什么？"
+            "answer": "它统计美国本职业岗位数；它不代表当前在招岗位数。",
+            "question": "2025 年就业数衡量什么？"
           },
           {
-            "answer": "2025美国精确53-7064就业555,500至2035年528,000；2025—2035总体-5.0%，官方净减少27,500人，年均空缺61,800个含替补，非AI采用替代、个人失业、当前招聘或中国需求。",
-            "question": "增长与空缺如何使用？"
+            "answer": "这是美国总体就业预测；年均空缺含替补，不能衡量 AI 的影响。",
+            "question": "如何解读就业预测？"
           }
         ],
-        "median": "$36,280",
+        "median": "36,280 美元/年；17.44 美元/小时",
         "outlook_heading": "就业前景",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
-          "工资统计范围",
-          "年薪参考",
-          "计酬边界",
-          "解释"
+          "工资分位",
+          "年薪",
+          "时薪",
+          "如何解读"
         ],
         "wage_heading": "工资数据",
         "wage_tiers": [
           {
-            "equivalent": "未换算",
+            "equivalent": "15.49 美元/小时",
             "interpretation": {
               "$join": [
-                "仅表示中位年薪事实，不是起薪或个人报价。",
+                "约四分之一的工资在这个位置或以下，不能作为起薪",
                 {
                   "$item": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.2",
                   "block": "us-salary",
@@ -15064,14 +15435,14 @@
               ],
               "separator": "；"
             },
-            "label": "已取得的中位水平",
-            "value": "$36,280"
+            "label": "第 25 分位",
+            "value": "32,220 美元/年"
           },
           {
-            "equivalent": "未提供",
+            "equivalent": "17.44 美元/小时",
             "interpretation": {
               "$join": [
-                "全国分位不能替代地区雇主报价。",
+                "这是工资分布的中点，具体报价可能不同",
                 {
                   "$item": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.3",
                   "block": "us-salary",
@@ -15081,14 +15452,14 @@
               ],
               "separator": "；"
             },
-            "label": "岗位与地区差异",
-            "value": "按具体地区与雇主另核"
+            "label": "中位数（第 50 分位）",
+            "value": "36,280 美元/年"
           },
           {
-            "equivalent": "未提供",
+            "equivalent": "20.70 美元/小时",
             "interpretation": {
               "$join": [
-                "同职业2025五分位，不对应资历等级。",
+                "约四分之三的工资在这个位置或以下，不能对应固定工龄",
                 {
                   "$item": "packers-and-packagers-hand.us-salary.career-snapshot-secondary-locale.4",
                   "block": "us-salary",
@@ -15098,8 +15469,8 @@
               ],
               "separator": "；"
             },
-            "label": "2025年工资五分位",
-            "value": "$27,890 / $32,220 / $36,280 / $43,060 / $47,100"
+            "label": "第 75 分位",
+            "value": "43,060 美元/年"
           }
         ]
       },
@@ -15119,8 +15490,8 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "summary": "如果能在重复操作中准确核对产品、数量、标签和破损状态，并遵守搬运与工具安全，可进一步了解此岗位。",
-        "title": "手工包装工"
+        "summary": "如果你喜欢按订单核商品代码和数量，再在交接前核包装和标签，可以考虑手工包装。",
+        "title": "手工包装工作适合你吗？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -15150,12 +15521,12 @@
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-us-salary",
+            "label": "查看美国工资分位"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "比较相邻职业"
           }
         ],
         "direct_answer": {
@@ -15191,30 +15562,30 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "精确职业就业人数",
-            "occupation_scope": "O*NET 53-7064.00 精确职业",
+            "metric": "美国就业岗位数",
+            "occupation_scope": "手工包装工 (53-7064)",
             "source_id": "ep",
-            "value": "555,500人（2025）"
+            "value": "2025 年美国有 555,500 个岗位；2035 年预计 528,000 个"
           },
           {
             "geography": "美国",
-            "horizon": "2025—2035",
-            "interpretation": "总体变化与含替补空缺不同；非AI采用替代、个人失业或中国需求。",
-            "limitation": "不能外推个人录用概率或中国市场。",
-            "metric": "下降与年均空缺",
-            "occupation_scope": "O*NET 53-7064.00 精确职业",
-            "source_id": "bls",
-            "value": "总体-5.0%；净减少27500；年均61800含替补"
+            "horizon": "2025 基期；2035 预测",
+            "interpretation": "总体变化不能单独识别 AI 的影响。",
+            "limitation": "美国全国数据不能说明当地招聘或中国需求。",
+            "metric": "2025—2035 年预计岗位变化",
+            "occupation_scope": "手工包装工 (53-7064)",
+            "source_id": "ep",
+            "value": "−5.0%；美国岗位净减 27,500 个"
           },
           {
-            "geography": "中国大陆",
-            "horizon": "当前资料",
-            "interpretation": "全国预测不能代表具体企业招聘。",
-            "limitation": "不能外推个人录用概率或中国市场。",
-            "metric": "同口径就业预测",
-            "occupation_scope": "中国岗位不可直接对应",
-            "source_id": "nbs",
-            "value": "暂无可安全使用的数据"
+            "geography": "美国",
+            "horizon": "2025 基期；2035 预测",
+            "interpretation": "含转职业或离开劳动力市场后的替补需求；同一职业内更换雇主不计入。",
+            "limitation": "美国全国数据不能说明当地招聘或中国需求。",
+            "metric": "预计年均岗位空缺",
+            "occupation_scope": "手工包装工 (53-7064)",
+            "source_id": "ep",
+            "value": "预计年均空缺 61,800 个，含替补需求"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15240,8 +15611,8 @@
           {
             "href": "https://www.onetonline.org/link/summary/53-7064.00",
             "id": "onet",
-            "label": "O*NET 手工包装任务与历史趋势",
-            "scope": "12任务及2024—2034旧期，不作当前预测"
+            "label": "O*NET 职业档案：手工包装工（53-7064.00）",
+            "scope": "美国职业档案与手工包装任务。"
           }
         ],
         "transitions": [
@@ -15379,7 +15750,7 @@
           {
             "answer": "反思重复任务下的核对和异常记录习惯，带教反馈另核。",
             "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
-            "cta_label": "了解人格特质",
+            "cta_label": "了解大五人格特质",
             "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "big-five",
             "label": "大五人格",
@@ -15395,7 +15766,7 @@
           {
             "answer": "记录动手、规则与协作偏好，不据类型决定体力或能力。",
             "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "cta_label": "探索职业兴趣",
+            "cta_label": "了解 MBTI 偏好",
             "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "mbti",
             "label": "MBTI 偏好",
@@ -15411,7 +15782,7 @@
           {
             "answer": "可反思返工和节拍压力；类型未验证职业效度。",
             "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
-            "cta_label": "了解人格特质",
+            "cta_label": "了解九型人格动机",
             "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "enneagram",
             "label": "九型人格",
@@ -15427,7 +15798,7 @@
           {
             "answer": "观察数量单位和订单规则理解，不代替称重工具训练。",
             "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
-            "cta_label": "探索职业兴趣",
+            "cta_label": "试做矩阵推理测评",
             "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "iq",
             "label": "认知能力测评",
@@ -15443,7 +15814,7 @@
           {
             "answer": "关注准确说明错品、短少和交接未决项，不以自评替代工作反馈。",
             "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
-            "cta_label": "了解人格特质",
+            "cta_label": "了解情绪智力",
             "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "eq",
             "label": "情绪与沟通自评",
@@ -15637,7 +16008,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "做霍兰德职业兴趣测试",
+        "label": "探索你的霍兰德职业兴趣（RIASEC）",
         "source_page_type": "职业详情页",
         "subject_key": "packers-and-packagers-hand",
         "subject_kind": "职业",
@@ -15677,7 +16048,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业兴趣与人格探索"
+            "label": "MBTI 人格测评"
           },
           {
             "href": {
@@ -15687,7 +16058,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "职业兴趣与人格探索"
+            "label": "大五人格测评"
           },
           {
             "href": {
@@ -15697,7 +16068,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "职业兴趣与人格探索"
+            "label": "九型人格测评"
           },
           {
             "href": {
@@ -15707,7 +16078,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "职业兴趣与人格探索"
+            "label": "情绪智力测评"
           }
         ]
       },
@@ -15785,6 +16156,20 @@
         "id": "packers-and-packagers-hand.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "packers-and-packagers-hand.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "packers-and-packagers-hand.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -15850,14 +16235,14 @@
       },
       {
         "derivation": null,
-        "display_value": "17.44 美元/小时、36,280 美元/年",
+        "display_value": "36,280 美元/年；17.44 美元/小时",
         "fact_id": "us-wage",
         "market": "美国",
-        "measure": "annual wage measure",
-        "occupation_scope": "Packers And Packagers, Hand page; scope preserved",
-        "period": "2025",
+        "measure": "美国年薪与时薪",
+        "occupation_scope": "手工包装工",
+        "period": "2025-05",
         "source_refs": [
-          "onet-summary"
+          "source-pack-onet-localwages"
         ]
       },
       {
@@ -15874,38 +16259,38 @@
       },
       {
         "derivation": null,
-        "display_value": "2024—2034 年预计下降（-1% 或更低）",
+        "display_value": "−5.0%",
         "fact_id": "employment-projection",
         "market": "美国",
-        "measure": "employment projection measure",
-        "occupation_scope": "Packers And Packagers, Hand page; scope preserved",
-        "period": "2024—2034",
+        "measure": "2025—2035 年预计岗位变化",
+        "occupation_scope": "手工包装工",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-53-7064"
         ]
       },
       {
         "derivation": null,
-        "display_value": "591,800 人",
+        "display_value": "555,500 个岗位",
         "fact_id": "us-employment",
         "market": "美国",
-        "measure": "就业人数",
-        "occupation_scope": "O*NET 53-7064.00",
-        "period": "2024",
+        "measure": "美国就业岗位数",
+        "occupation_scope": "手工包装工",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-53-7064"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 74,000 个/年",
+        "display_value": "年均 61,800 个空缺",
         "fact_id": "us-openings",
         "market": "美国",
-        "measure": "预计年均空缺",
-        "occupation_scope": "O*NET 53-7064.00",
-        "period": "2024—2034",
+        "measure": "预计年均岗位空缺",
+        "occupation_scope": "手工包装工",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-53-7064"
         ]
       },
       {
@@ -15922,11 +16307,11 @@
       },
       {
         "derivation": null,
-        "display_value": "555,500人（2025）",
+        "display_value": "555,500 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数",
-        "occupation_scope": "53-7064精确职业",
+        "measure": "美国就业岗位数",
+        "occupation_scope": "手工包装工",
         "period": "2025",
         "source_refs": [
           "bls-ep-53-7064"
@@ -15934,36 +16319,36 @@
       },
       {
         "derivation": null,
-        "display_value": "-5.0%",
+        "display_value": "−5.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "总体就业变化；官方净减少27500",
-        "occupation_scope": "53-7064精确职业；非AI或个人失业中国需求",
-        "period": "2025—2035",
+        "measure": "2025—2035 年预计岗位变化",
+        "occupation_scope": "手工包装工",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ep-53-7064"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约61,800个/年",
+        "display_value": "年均 61,800 个空缺",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均空缺含替补；非净减少27500",
-        "occupation_scope": "53-7064精确职业",
-        "period": "2025—2035",
+        "measure": "预计年均岗位空缺",
+        "occupation_scope": "手工包装工",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ep-53-7064"
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "17%",
+        "derivation": "三项代表任务等权：floor((25+0+0)/3+0.5)=8；fermatmind-ai-impact-v1；2026-11-10。这是编辑估算，不表示实际工时或失业概率。",
+        "display_value": "8%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
         "measure": "AI影响度（编辑估算）",
         "occupation_scope": "包装工、手工",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "period": "2026-11-10 评估",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -15987,31 +16372,31 @@
         "availability": "available",
         "fact_ref": "us-wage",
         "key": "us_pay",
-        "label": "美国中位工资（2025）"
+        "label": "美国年薪与时薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国总体就业变化"
+        "label": "2025—2035 年预计岗位变化"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国2025就业"
+        "label": "美国 2025 年就业岗位数"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "年均空缺（含替补）"
+        "label": "预计年均岗位空缺"
       },
       {
-        "availability": "available",
-        "fact_ref": "cn-manufacturing-production-2025",
+        "availability": "missing",
+        "fact_ref": null,
         "key": "china_pay",
-        "label": "规上制造·生产宽岗"
+        "label": "中国大陆：未核实本职业全国工资"
       }
     ]
   },
@@ -16019,14 +16404,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "按订单和包装规范，人工检查、计量、分拣、装箱、封口和贴标产品，记录数量与异常，交付可核对的包裹或批次。对应美国 O*NET 53-7064.00；美国工资与中国岗位要求分别说明。"
+      "text": "了解手工包装、美国工资与岗位展望，试做一单纸面发货核对。"
     },
     "title": {
       "availability": "available",
       "text": "手工包装工：工作内容、工资与入行路径"
     }
   },
-  "source_content_sha256": "ff400edcde4a713f0671441c2875721653f509ca075c905d779df832659132cb",
+  "source_content_sha256": "96dd69313ebb45e234caf383bcd9677cf40bf34e10c655e7b49eec7ed85a13d9",
   "subject": {
     "canonical_slug": "packers-and-packagers-hand",
     "name": "手工包装工",

@@ -1442,6 +1442,9 @@
       "item:communications-teachers-postsecondary.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:communications-teachers-postsecondary.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:communications-teachers-postsecondary.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30573,6 +30576,21 @@
           "id": "communications-teachers-postsecondary.path.recruitment-sample.1",
           "title": "Notes on using recruitment samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The assignment asks students to compare two media frames, but the old rubric scores presentation delivery only. Identify what to keep and one criterion to add."
+            ]
+          },
+          "id": "communications-teachers-postsecondary.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Align a communications assignment with its objective",
+          "type": "notice"
         }
       ]
     },
@@ -37335,6 +37353,13 @@
         "id": "communications-teachers-postsecondary.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "communications-teachers-postsecondary.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37797,7 +37822,7 @@
       "text": "Communications Teacher, Postsecondary"
     }
   },
-  "source_content_sha256": "b2ff8a85235ef1b844b0cec6822d942c141ea9f27fc19ad1c67c135f9b3cc37a",
+  "source_content_sha256": "74a3ec3b4fae60dee1660851ace54a4dda7e6c2d12833a52c34fed4af7aabbd5",
   "subject": {
     "canonical_slug": "communications-teachers-postsecondary",
     "name": "Communications Teacher, Postsecondary",

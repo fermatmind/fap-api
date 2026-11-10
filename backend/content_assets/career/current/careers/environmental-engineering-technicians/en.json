@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a33-wuda": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a33-yongzhou": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:environmental-engineering-technicians.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:environmental-engineering-technicians.sources.source-card.1": {
         "status": "mapped"
@@ -26153,7 +26159,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no precise occupation-level national wage percentiles, and it is not asserted on that basis that nothing has been published nationally."
+              "The two postings below show individual hiring and pay terms. Industry wages are shown separately."
             ]
           },
           "id": "environmental-engineering-technicians.china-salary.career-snapshot-primary-locale.45",
@@ -26238,7 +26244,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "First-tier cities"
+              "Mainland China job postings"
             ]
           },
           "id": "environmental-engineering-technicians.china-salary.career-snapshot-primary-locale.51",
@@ -26252,12 +26258,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable first-tier city monthly wage statistic for this occupation was obtained; recruitment posting quotes are mostly single-employer samples and are often paid by project or shift, and cannot represent occupational wages."
+              "The Uda notice listed one wastewater laboratory post and quoted CNY 5,000 without specifying a pay period. The Huilongxu wastewater treatment post at a treatment plant required one year of related experience and started at CNY 3,500 per month, including CNY 500 contingent on performance."
             ]
           },
           "id": "environmental-engineering-technicians.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "internal-rubric"
+            "a33-wuda",
+            "a33-yongzhou"
           ],
           "type": "prose"
         },
@@ -26322,7 +26329,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "17-3025: 2025 employment 12,500, 2025—2035 growth 3.1% (OOH about 3%, about 400 more), average annual openings 1,100; overall projections are not AI job causality."
+              "3.1% (2025–2035)"
             ]
           },
           "id": "environmental-engineering-technicians.china-salary.career-snapshot-primary-locale.58",
@@ -27030,13 +27037,13 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
@@ -28796,37 +28803,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Material one: fictional sampling assignment and equipment list",
-                  "Provide the sampling purpose, points, items, and equipment list as input for this exercise.",
-                  "Flag test items, units, and required sample volume, and state that the data are fictional.",
-                  "List the on-site condition differences that may affect sample representativeness.",
-                  "State that the exercise uses fictional materials and does not represent any real site or institution.",
-                  "Reviewable output: sampling points and frequency, sample preservation and transport requirements, equipment calibration steps, and record fields.",
-                  "Explain the safety boundary: when on-site conditions do not conform to protocol, work must stop and be reported."
+                  "Paper exercise inputs",
+                  "Fictional handoff E3 lists two samples.",
+                  "The field log lists A11 at point S1.",
+                  "The field log lists B12 at point S2.",
+                  "The laboratory return lists A11 and B21.",
+                  "The receipt date for B21 is blank.",
+                  "The shift lead receives discrepancy reports. Use the supplied paper records."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Material two: recording and reporting requirements (fictional)",
-                  "Requires writing the record fields, sample numbering rules, and anomaly reporting path.",
-                  "Exercise output: a reviewable sampling record sheet and anomaly reporting note."
+                  "What to submit",
+                  "Submit a one-page exception record with the matched ID, discrepancy, missing field and next owner.",
+                  "Give each record a status and retain the original IDs."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material three: reference approach excerpt (fictional)",
-                  "Confirm points and frequency first, then verify equipment calibration and sample preservation conditions.",
-                  "Leave uncertain items in a to-be-confirmed state rather than assuming they conform.",
-                  "State that the reference approach is only an example, not the only practice."
+                  "Finish your own answer first",
+                  "Open “Sample handoff reference (open after day six)” under FAQs and sources.",
+                  "Use the checklist to record one correction.",
+                  "Finish on day six and review on day seven."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Material four: boundary description",
-                  "This exercise does not constitute a compliance conclusion or safety permit; test conclusions and disposal decisions are borne by authorized personnel."
+                  "Paper exercise scope",
+                  "Use the supplied records. Actual testing, site work and approval follow employer procedures."
                 ]
               }
             ]
@@ -28943,50 +28950,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read one sampling work protocol",
-                  "Excerpt the key points: point selection, sample volume, preservation conditions, and record fields."
+                  "Day 1",
+                  "Copy the handoff and sample IDs."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: write one sampling record sheet",
-                  "List sample numbers, on-site conditions, equipment numbers, and an anomaly column."
+                  "Day 2",
+                  "Compare the field and laboratory entries one by one."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: verify one equipment calibration",
-                  "Check the calibration requirements of a fictional instrument and write out the calibration steps and criteria."
+                  "Day 3",
+                  "Check the fields in each receipt."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: organize one set of test data",
-                  "Use fictional data to calculate concentration or removal rate, writing out the units and formulas."
+                  "Day 4",
+                  "Mark the status and next owner."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: write one anomaly report note",
-                  "Design one anomaly scenario and write out the reporting recipient and record requirements."
+                  "Day 5",
+                  "Write the one-page exception record."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: ask someone to check the records",
-                  "Ask a classmate or colleague to point out non-compliant parts of the records and record the feedback."
+                  "Day 6: finish your own answer",
+                  "Finish your own note and check whether someone else can use it."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: write your judgment",
-                  "Write down whether you want to continue, what you need to fill in, and which conclusions cannot yet be drawn."
+                  "Day 7: open the reference and review",
+                  "Open “Sample handoff reference (open after day six)” under FAQs and sources. Write down one difference and correction."
                 ]
               }
             ]
@@ -29003,13 +29010,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: can you identify the key control points of the sampling protocol, rather than just copying the steps?",
-              "Day 2: can you write all the record fields, including anomaly and to-be-confirmed columns?",
-              "Day 3: can you explain the criteria for equipment calibration and what to do when it fails?",
-              "Day 4: can you complete the calculation with correct units and formulas?",
-              "Day 5: can you clearly state the anomaly reporting recipient, time limit, and record requirements?",
-              "Day 6: after receiving inspection comments, can you revise the records rather than defending the original draft?",
-              "Day 7: can you state the training and qualifications you need to fill in and what to verify next?"
+              "Copy the IDs accurately.",
+              "Match the field and lab records.",
+              "Identify fields with missing information.",
+              "Record the status clearly.",
+              "Give the next owner a specific check.",
+              "Finish the note independently on day six.",
+              "Use the collapsed reference on day seven to make one correction and decide whether to continue."
             ]
           },
           "id": "environmental-engineering-technicians.path.seven-day-decision.1",
@@ -30448,7 +30455,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "environmental-engineering-technicians.market-signals.market-signal-card.10",
@@ -30518,12 +30525,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "3.1% (OOH about 3%, +400 people)"
+              "3.1%"
             ]
           },
           "id": "environmental-engineering-technicians.market-signals.market-signal-card.15",
           "source_refs": [
-            "internal-rubric"
+            "a33-bls"
           ],
           "type": "prose"
         },
@@ -30616,12 +30623,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "About 12,500 people"
+              "12,500 jobs"
             ]
           },
           "id": "environmental-engineering-technicians.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a33-bls"
           ],
           "type": "prose"
         },
@@ -30644,7 +30651,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "environmental-engineering-technicians.market-signals.market-signal-card.24",
@@ -30714,12 +30721,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "About 1,100 per year"
+              "1,100 annually (including replacements)"
             ]
           },
           "id": "environmental-engineering-technicians.market-signals.market-signal-card.29",
           "source_refs": [
-            "nbs-wages-2025"
+            "a33-bls"
           ],
           "type": "prose"
         },
@@ -31142,43 +31149,39 @@
           "data": {
             "entries": [
               {
-                "answer": "Under the direction of engineers or scientists, set up, test, and operate pollution prevention and remediation equipment, collect and analyze air, soil, and groundwater samples, maintain project records and data files, and inspect facility compliance as required; the work includes equipment operation, sample collection, analysis and records, document verification, planning and scheduling, and hazardous waste disposal.",
+                "answer": "Environmental engineering technicians follow procedures for sampling, tests or equipment checks, maintain field and laboratory records and route anomalies to the lead.",
                 "id": "environmental-engineering-technicians.faq.1",
                 "question": "What do environmental engineering technologists and technicians mainly do?",
                 "question_key": "career.faq.environmental-engineering-technicians.q1",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "a33-onet"
                 ]
               },
               {
-                "answer": "Environmental engineers are responsible for designing schemes and for the technical schemes; this occupation executes on-site sampling, equipment operation, and testing according to the engineer's plan and delivers traceable records.",
+                "answer": "Technicians provide traceable sample, test and anomaly records. Engineers typically use such records to evaluate controls and design assumptions. Ask who owns field work, laboratory work and design review.",
                 "id": "environmental-engineering-technicians.faq.2",
                 "question": "How is it different from environmental engineers?",
                 "question_key": "career.faq.environmental-engineering-technicians.q2",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "a33-onet"
                 ]
               },
               {
-                "answer": "May 2025 median annual wage 59,920 U.S. dollars (median hourly wage 28.81 U.S. dollars); the official release states the lowest 10% earn less than 39,910 U.S. dollars and the highest 10% earn more than 96,660 U.S. dollars; the 25th and 75th percentiles were not obtained this time.",
+                "answer": "The May 2025 U.S. occupational median was $59,920 per year.",
                 "id": "environmental-engineering-technicians.faq.3",
                 "question": "What is the U.S. wage?",
                 "question_key": "career.faq.environmental-engineering-technicians.q3",
                 "source_refs": [
-                  "bls-oews-2025",
-                  "internal-rubric"
+                  "a33-bls"
                 ]
               },
               {
-                "answer": "2025 employment about 12,500, 2025—2035 projected growth 3% (about +400), average annual openings about 1,100; openings include growth and replacements and do not equal a personal hiring probability, and automated testing may limit some growth.",
+                "answer": "BLS projects U.S. SOC 17-3025 employment to rise from about 12,500 in 2025 to 12,900 in 2035 (3.1%), with about 1,100 annual openings including replacements.",
                 "id": "environmental-engineering-technicians.faq.4",
                 "question": "What are the U.S. employment prospects?",
                 "question_key": "career.faq.environmental-engineering-technicians.q4",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "a33-bls"
                 ]
               },
               {
@@ -31202,12 +31205,13 @@
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics data checked this time are at industry-category scope, and no national single-occupation wage statistic precisely corresponding to this occupation was obtained; this page uses the average wage of urban units in \"scientific research and technical services\" (2025 non-private 182,064 yuan/year, private 83,560 yuan/year) as an industry proxy, illustrating industry background only, and does not substitute an industry average or a single recruitment quote for the occupational wage.",
+                "answer": "The Uda notice listed one wastewater laboratory post and quoted CNY 5,000 without specifying a pay period. The Huilongxu wastewater treatment post at a treatment plant required one year of related experience and started at CNY 3,500 per month, including CNY 500 contingent on performance. These past notices describe individual posts. A comparable mainland occupational median remains unavailable. Industry wages are shown separately.",
                 "id": "environmental-engineering-technicians.faq.7",
                 "question": "Can wages in mainland China be found?",
                 "question_key": "career.faq.environmental-engineering-technicians.education-path",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "a33-wuda",
+                  "a33-yongzhou"
                 ]
               },
               {
@@ -31238,6 +31242,15 @@
                 "source_refs": [
                   "onet-details",
                   "internal-rubric"
+                ]
+              },
+              {
+                "answer": "A11 matches by ID. B12 and B21 conflict, and B21 has no receipt date. Flag the second E3 entry for verification, keep both originals, and send it to the shift lead to check the source and date. Check four items: matching record, original IDs in conflict, missing field and status, and owner and verification action. Count each complete item. The source provides occupational context for this fictional exercise.",
+                "id": "environmental-engineering-technicians.faq.11",
+                "question": "Sample handoff reference (open after day six)",
+                "question_key": "career.faq.environmental-engineering-technicians.11",
+                "source_refs": [
+                  "a33-onet"
                 ]
               }
             ]
@@ -31329,28 +31342,28 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "MBTI (Chinese)",
+                "entity": "MBTI personality test",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (Chinese)",
+                "entity": "Big Five personality test",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the environmental engineering technologists and technicians career page",
@@ -31537,6 +31550,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Environmental engineering technicians follow procedures for sampling, tests or equipment checks, maintain field and laboratory records and route anomalies to the lead."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a33-onet",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "Occupational task profile",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/17-3025.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS projects U.S. SOC 17-3025 employment to rise from about 12,500 in 2025 to 12,900 in 2035 (3.1%), with about 1,100 annual openings including replacements. The May 2025 U.S. occupational median was $59,920 per year."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a33-bls",
+                "limitation": "Annual openings include replacements.",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Uda notice listed one wastewater laboratory post and quoted CNY 5,000 without specifying a pay period."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a33-wuda",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Wastewater laboratory worker",
+                "period": "2026-08-28",
+                "publisher": "Uda District government",
+                "scope": "recruitment_proxy",
+                "url": "https://wuda.gov.cn/c/2026-08-28/195954.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Huilongxu wastewater treatment post at a treatment plant required one year of related experience and started at CNY 3,500 per month, including CNY 500 contingent on performance."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a33-yongzhou",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Wastewater treatment worker (adjacent role)",
+                "period": "2026-03",
+                "publisher": "Yongzhou Huilongxu Management District",
+                "scope": "recruitment_proxy",
+                "url": "https://hlxglq.yzcity.gov.cn/hlxglq/0308/202603/609d4710ca0243a9a8a2238916baf5ac.shtml"
               }
             ]
           },
@@ -34397,6 +34470,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a33-wuda",
+            "posting-a33-yongzhou"
+          ],
           "sources_note": {
             "$item": "environmental-engineering-technicians.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34962,7 +35039,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "a33-bls",
             "value": {
               "$item": "environmental-engineering-technicians.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35007,7 +35084,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "a33-bls",
             "value": {
               "$item": "environmental-engineering-technicians.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -35052,7 +35129,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "a33-bls",
             "value": {
               "$item": "environmental-engineering-technicians.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36231,7 +36308,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Start checking whether environmental engineering technologists and technicians suits you",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36501,14 +36578,14 @@
       },
       {
         "derivation": null,
-        "display_value": "Median hourly wage 28.81 U.S. dollars; median annual wage 59,920 U.S. dollars (May 2025 OEWS)",
+        "display_value": "$59,920 per year",
         "fact_id": "us-wage-2025",
         "market": "United States",
         "measure": "U.S. median wage",
-        "occupation_scope": "Environmental Engineering Technologists and Technicians (O*NET-SOC 17-3025.00)",
+        "occupation_scope": "U.S. 17-3025",
         "period": "May 2025",
         "source_refs": [
-          "bls-oews-2025"
+          "a33-bls"
         ]
       },
       {
@@ -36537,38 +36614,38 @@
       },
       {
         "derivation": null,
-        "display_value": "About 12,500 people (2025)",
+        "display_value": "12,500 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "U.S. employment size",
-        "occupation_scope": "Environmental Engineering Technologists and Technicians (O*NET-SOC 17-3025.00)",
+        "occupation_scope": "U.S. 17-3025",
         "period": "2025",
         "source_refs": [
-          "bls-projections-2025-35"
+          "a33-bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "+3% (+400 positions, 2025—2035, BLS projections)",
+        "display_value": "3.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "U.S. employment change",
-        "occupation_scope": "Environmental Engineering Technologists and Technicians (O*NET-SOC 17-3025.00)",
+        "occupation_scope": "U.S. 17-3025",
         "period": "2025–2035 projection",
         "source_refs": [
-          "bls-projections-2025-35"
+          "a33-bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 1,100 per year (2025—2035, BLS projections)",
+        "display_value": "1,100 annually (including replacements)",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "U.S. average annual job openings",
-        "occupation_scope": "Environmental Engineering Technologists and Technicians (O*NET-SOC 17-3025.00)",
+        "occupation_scope": "U.S. 17-3025",
         "period": "2025–2035 projection",
         "source_refs": [
-          "bls-projections-2025-35"
+          "a33-bls"
         ]
       },
       {
@@ -36726,6 +36803,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The Uda notice listed one wastewater laboratory post and quoted CNY 5,000 without specifying a pay period.",
+        "fact_id": "posting-a33-wuda",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Wastewater laboratory worker",
+        "period": "2026-08-28",
+        "source_refs": [
+          "a33-wuda"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The Huilongxu wastewater treatment post at a treatment plant required one year of related experience and started at CNY 3,500 per month, including CNY 500 contingent on performance.",
+        "fact_id": "posting-a33-yongzhou",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Wastewater treatment worker (adjacent role)",
+        "period": "2026-03",
+        "source_refs": [
+          "a33-yongzhou"
+        ]
       }
     ]
   },
@@ -36778,17 +36879,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What environmental engineering technologists and technicians do, how to enter, work boundaries, and development directions. Based on O*NET and BLS official occupational materials, distinguishing occupational statistics, industry proxies, and evidence gaps."
+      "text": "See how environmental engineering technicians check sample and test records, compare job-posting pay terms and write a paper discrepancy handoff."
     },
     "title": {
       "availability": "available",
       "text": "Environmental Engineering Technologists and Technicians"
     }
   },
-  "source_content_sha256": "7cce66f71096d4e53dbf3a0dd3c6afbec40d808badc78fe2926a08854f78a5f6",
+  "source_content_sha256": "c0b09542eb7570348193eb26b438952707b467baa6da126241066738bfac32a7",
   "subject": {
     "canonical_slug": "environmental-engineering-technicians",
     "name": "Environmental Engineering Technologists and Technicians",
-    "summary": "Under the direction of engineers or scientists, operate, test, and improve equipment used to prevent, control, and remediate environmental problems, collect and analyze environmental samples, and produce traceable monitoring and treatment records."
+    "summary": "Environmental engineering technicians follow procedures for sampling, tests or equipment checks, maintain field and laboratory records and route anomalies to the lead."
   }
 }

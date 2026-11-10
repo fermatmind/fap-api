@@ -1283,6 +1283,9 @@
       "item:phlebotomists.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:phlebotomists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:phlebotomists.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31555,6 +31558,18 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。样本管标签编号 S6，申请单写 S9。写下两条原始凭证和应报告的接收人。真实样本按机构异常流程处理。"
+            ]
+          },
+          "id": "phlebotomists.path.work-sample-draft-20261110.1",
+          "title": "核采血标签与申请",
+          "type": "notice"
         }
       ]
     },
@@ -38180,6 +38195,13 @@
         "id": "phlebotomists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "phlebotomists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38537,7 +38559,7 @@
       "text": "采血技师"
     }
   },
-  "source_content_sha256": "952d25cbe94f8ff5cb0ec83abf98f7aeff874681ec8d254ba0d1d1ec3c3297ce",
+  "source_content_sha256": "7f9e95f96efac12f9830d0aaa7f0facb1b577a3fca93663cb494d41b7563f8ad",
   "subject": {
     "canonical_slug": "phlebotomists",
     "name": "采血技师",

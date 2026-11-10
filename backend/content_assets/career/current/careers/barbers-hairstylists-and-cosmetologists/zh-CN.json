@@ -36,7 +36,7 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-current-2025": {
         "status": "pending_mapping"
@@ -45,7 +45,7 @@
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-current-2025": {
         "status": "pending_mapping"
@@ -69,7 +69,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-current-2025": {
         "status": "pending_mapping"
@@ -1551,7 +1551,7 @@
         "status": "pending_mapping"
       },
       "item:barbers-hairstylists-and-cosmetologists.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:barbers-hairstylists-and-cosmetologists.sources.source-card.1": {
         "status": "mapped"
@@ -1602,7 +1602,7 @@
         "status": "mapped"
       },
       "item:barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.22": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.23": {
         "status": "mapped"
@@ -20980,7 +20980,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "accessed_at"
           ],
@@ -20995,10 +20995,10 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "details",
-            0
+            2
           ],
           "source": "item"
         },
@@ -21011,10 +21011,10 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "details",
-            1
+            3
           ],
           "source": "item"
         },
@@ -21027,7 +21027,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "evidence_type"
           ],
@@ -21042,7 +21042,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "limitation"
           ],
@@ -21070,7 +21070,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "name"
           ],
@@ -21085,7 +21085,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "period"
           ],
@@ -21100,7 +21100,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "publisher"
           ],
@@ -21115,7 +21115,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "scope"
           ],
@@ -21130,7 +21130,7 @@
             "data",
             "entries",
             {
-              "id": "cnclass"
+              "id": "cn-wages-current"
             },
             "url"
           ],
@@ -22135,7 +22135,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "accessed_at"
           ],
@@ -22150,10 +22150,10 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "details",
-            0
+            2
           ],
           "source": "item"
         },
@@ -22166,10 +22166,10 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "details",
-            1
+            3
           ],
           "source": "item"
         },
@@ -22182,7 +22182,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "evidence_type"
           ],
@@ -22197,7 +22197,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "limitation"
           ],
@@ -22225,7 +22225,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "name"
           ],
@@ -22240,7 +22240,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "period"
           ],
@@ -22255,7 +22255,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "publisher"
           ],
@@ -22270,7 +22270,7 @@
             "data",
             "entries",
             {
-              "id": "editor"
+              "id": "onet"
             },
             "scope"
           ],
@@ -23225,13 +23225,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：美发师与发型师与美容师不是「照着图片剪一下的人」，而是先沟通并观察头发与头皮状况、分析发质与脸型后给出造型与护理方案的沙龙岗位：剪断与修剪与塑形头发、洗发与冲洗与护发与吹干、漂白与染色与调色、施用水或定型与拉直与烫发溶液并用卷发器与热梳与卷发棒压卷、按摩与处理头皮、梳理与喷发定型、修眉与去除面部毛发，并保持工作台清洁与消毒剪刀与梳子等工具、维护顾客信息记录；只想凭手感发挥、不愿先确认顾客要求与做皮肤与过敏询问、也不愿把器具消毒与工位清洁与产品标签核对当作业一部分的人不适合。"
+              "到 09 做 HS-71，先交两版咨询单。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.quick-decision.fit-decision-checklist.1",
           "source_refs": [
+            "hs71-editor",
             "onet",
-            "onet"
+            "cn-hairdresser"
           ],
           "type": "prose"
         },
@@ -23240,11 +23241,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你愿意先复述顾客想要的效果并做头皮与头发与皮肤观察，能在长时间站立与精细手部控制的节拍中保持稳定，会主动核对产品标签与接触时间并按资料与规程执行，愿意在顾客临时改变要求或出现皮肤与头皮异常时先停下来确认，也能如实记录服务与产品与异常。"
+              "如果你喜欢用复述确认需求，也愿意在产品或权限未核时暂缓服务，可以先做纸面咨询单。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.quick-decision.fit-decision-checklist.2",
           "source_refs": [
+            "hs71-editor",
             "onet"
           ],
           "type": "prose"
@@ -23254,13 +23256,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停投入的条件：你还没有在任何有监督的条件下完成过一次完整的「面谈与观察—剪染烫与造型—消毒与清洁—记录」闭环，或只能靠「喜欢做造型」说明兴趣；也不要把给亲友做过头发或在家染过发当作可以独立调配化学药剂、或在顾客皮肤与头皮异常时自行处理、或独立承担场所卫生责任的证明。器具消毒与皮肤屏障、化学药剂与烫染与甲醛暴露控制、产品标签与接触时间核对、顾客形象与健康信息处理、以及执业与沙龙授权须按适用法域与主管部门与用人单位制度执行并留有可追溯记录；本页不提供任何剪染烫的配方、接触时间或作业指令。"
+              "记录咨询和实际服务授权分别核。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
+            "hs71-editor",
             "onet"
           ],
           "type": "prose"
@@ -23270,12 +23271,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历与执业许可是两条不同的线：O*NET 把 39-5012.00 列为 Job Zone Three（SVP 6.0 至 <7.0），页面「未公布各级学历占比」，仅列出三类（部分工作需要高中后证书、部分需要高中文凭或同等学历、部分需要上过大学但无学位）；BLS 职业展望手册把该职业群的典型入门教育列为「高中后非学位证书」、无相关工作经验要求、无在岗训练，并指出全美各州都要求持照、通常须毕业于州认可的美发或美容课程并通过考试。学历、职业培训、州执业执照、雇主任用与沙龙授权、以及化学药剂与仪器使用的岗位授权是不同状态，须按州与雇主与岗位逐项核验；本职业与理发师 39-5011.00 是独立相邻代码，许可范围因法域而异。"
+              "BLS 表 1.2 对 39-5012 列高中后非学位证书为典型学历，未列通常需要相关经验或在岗培训；同一手册另说明各州要求执照。许可证项目、课程、考试及服务范围按州主管机构核。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "ep-table",
+            "nbs",
+            "archivists",
             "onet"
           ],
           "type": "prose"
@@ -23285,12 +23288,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以先沟通与观察、再在长时间站立与精细手部控制与化学品接触的节拍中稳定交付的服务岗位，核心是剪染烫与造型与头皮护理与器具消毒与记录，而不是对时尚的兴趣或自媒体的想象。"
+              "如果你喜欢用复述确认需求，也愿意在产品或权限未核时暂缓服务，可以先做纸面咨询单。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
+            "hs71-editor",
             "onet"
           ],
           "type": "prose"
@@ -23313,7 +23316,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23347,7 +23349,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -23381,7 +23382,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.2",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23412,7 +23412,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23442,7 +23441,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23452,11 +23450,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "就业与前景：O*NET 展示的 BLS 数据按本职业 39-5012.00 口径给出2025 年在岗约 595,000 人、2035 年约 640,900 人（2025—2035 年 +8%，标签为远快于平均（8%））、预测期年均职位空缺约 73,400。BLS 职业展望手册的对应章节是「Barbers, Hairstylists, and Cosmetologists」合并口径：2025 年在岗 670,800 人、2025—2035 年 +7%（远快于平均）、变化 +48,400、年均空缺约 80,300（多来自替代需求）；合并口径覆盖理发与美发与美容三类人群，不能当作本职业单列口径。"
+              "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.onet-structured-fields-block.4",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -23472,7 +23471,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.5",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23482,12 +23480,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与工具信号：O*NET 现行行业分布给出其他服务业（公共管理除外）45%、其他行业（含零售贸易）55%——该页按「其他服务业」与「其他行业」两类公布，未给出更细的行业门类占比。样本职位名称包括 Beautician、Beauty Specialist、Cosmetologist、Hair Artist、Hair Dresser、Hair Stylist、Hairdresser、Hairstylist、Lash Technician、Stylist。招聘技术信号方面，O*NET 列出 6 项技术技能并标注为热门技术（Microsoft Office、Microsoft Excel、Microsoft Word 的出现比例均低于 1%；Apple iOS、Facebook、Intuit QuickBooks 未公布比例）。这些来自招聘公告文本，不代表岗位采用率或自动化程度。"
+              "O*NET 39-5012.00 行业子表列其他服务业（公共行政除外）45%、其他行业（含零售）55%；子表未单列统计年份。手册的 2025 年雇主表另列自雇 48% 和个人护理服务 45%。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.onet-structured-fields-block.5",
           "source_refs": [
             "r2-pay-2",
+            "nbs",
             "hr"
           ],
           "type": "prose"
@@ -23502,7 +23501,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23517,8 +23515,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23533,7 +23529,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23548,7 +23543,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23563,7 +23557,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23578,7 +23571,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23593,8 +23585,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23609,7 +23599,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23624,7 +23613,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23639,7 +23627,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23654,7 +23641,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23669,7 +23655,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23684,7 +23669,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23699,7 +23683,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23709,13 +23692,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 39-5012.00 列为 Job Zone Three（SVP 6.0 至 <7.0），「未公布各级学历占比」，仅列出三类（部分工作需要高中后证书、部分需要高中文凭或同等学历、部分需要上过大学但无学位）；BLS 职业展望手册把该职业群的典型入门教育列为「高中后非学位证书」、无相关工作经验要求、无在岗训练，并指出全美各州都要求持照、通常须毕业于州认可的美发或美容课程并通过考试。O*NET 培训页面显示全国 2,285 个相关培训项目（Cosmetology/Cosmetologist, General、Hair Styling、Salon/Beauty Salon Management、Permanent Cosmetics/Makeup and Tattooing、Make-Up Artist/Specialist 等方向），职业摘要的 Job Zone 说明另列出示例学徒岗位名称（Cosmetologist、Hair Stylist）。中国大陆可核美发师4-10-03-02官方任务与训练背景，具体雇主的岗前培训和带教须核其条件，并须符合适用的公共场所卫生与从业人员健康管理要求。"
+              "BLS 表 1.2 对 39-5012 列高中后非学位证书为典型学历，未列通常需要相关经验或在岗培训；同一手册另说明各州要求执照。许可证项目、课程、考试及服务范围按州主管机构核。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
+            "ep-table",
             "nbs",
+            "archivists",
+            "onet",
             "nist",
             "cn-hairdresser",
             "cn-hygiene"
@@ -23732,7 +23717,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23747,7 +23731,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23762,7 +23745,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23786,14 +23768,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国就业培训技术指导中心职业画像明确美发师4-10-03-02：使用美发工具设计、修剪、制作顾客发型，含洗、剪、染烫、束发及头皮护理。它可对照本页美发任务，不能据此与美国39-5012的全部美容服务一对一等同。美国工资按39-5012受雇口径，BLS OOH合并章内也有精确职业子表；中国精确职业薪资仍不足，行业均值只作背景。"
+              "中国就业网职业画像将美发师 4-10-03-02 的剪发、造型与护理分列，美容师是相关职业。美发师技能标准列五级至一级，技能等级、直接服务人员健康合格证和经营单位卫生许可分别核对。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.24",
           "source_refs": [
+            "cn-hairdresser",
+            "cn-hygiene",
             "onet",
             "nbs",
-            "cn-hairdresser",
             "cn-wages-current"
           ],
           "type": "prose"
@@ -23817,13 +23800,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧 O*NET 未公布各级学历占比，仅列出三类（部分工作需要高中后证书、部分需要高中文凭或同等学历、部分需要上过大学但无学位）；BLS 职业展望手册把典型入门教育列为「高中后非学位证书」并指出各州均要求持照、通常须完成州认可课程并通过考试；O*NET 列出 2,285 个相关培训项目与示例学徒岗位（Cosmetologist、Hair Stylist）。中国大陆美发师官方画像可作任务与训练对照；具体雇主岗前培训和带教须另核，并须符合适用的公共场所卫生与从业人员健康管理要求，具体学历与经验要求由用人单位规定。"
+              "BLS 表 1.2 对 39-5012 列高中后非学位证书为典型学历，未列通常需要相关经验或在岗培训；同一手册另说明各州要求执照。许可证项目、课程、考试及服务范围按州主管机构核。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
+            "ep-table",
             "nbs",
+            "archivists",
+            "onet",
             "nist",
             "cn-hairdresser",
             "cn-hygiene"
@@ -23854,7 +23839,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23878,12 +23862,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "作业环境与器具与化学品须符合适用的卫生与安全要求（器具清洁与消毒、受污染物品与化学品与废弃物处理、工位与地面清洁、通风与照明、热工具防护、以及长时间站立与重复动作防护）。O*NET 工作情境显示 88% 持续或几乎持续做重复动作、71% 持续或几乎持续站立、30% 持续或几乎持续弯腰或扭转身体、94% 每天面对面讨论、88% 持续与他人接触、88% 与他人身体距离非常近（接近接触）、42% 每天暴露于污染物、38% 每天暴露于轻微烧伤或割伤或咬伤、26% 每天处于危险条件、17% 每天暴露于疾病或感染、74% 每天佩戴常规防护或安全装备；本页不构成染烫处方、消毒步骤或化学品操作指令。"
+              "《公共场所卫生管理条例》第2条列理发店、美容店；第6条规定经营单位承担卫生管理和培训考核，第7条要求直接服务顾客的人员持健康合格证，第8条规定适用的经营单位开业前申请卫生许可证。三者与职业技能等级不同。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.30",
           "source_refs": [
-            "onet",
+            "cn-hygiene",
             "onet"
           ],
           "type": "prose"
@@ -23898,7 +23882,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23913,7 +23896,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23928,7 +23910,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23943,7 +23924,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23995,10 +23975,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -24013,8 +23989,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24029,10 +24003,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24047,7 +24017,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24062,7 +24031,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24077,7 +24045,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24092,7 +24059,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24121,7 +24087,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24136,7 +24101,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24151,7 +24115,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24180,7 +24143,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.19",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24195,7 +24157,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24210,7 +24171,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24239,7 +24199,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24254,7 +24213,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24269,7 +24227,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24298,7 +24255,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24313,7 +24269,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24328,7 +24283,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24357,7 +24311,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24372,7 +24325,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24387,7 +24339,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24464,10 +24415,10 @@
                 "url": "https://www.onetonline.org/link/industry/39-5012.00"
               },
               {
-                "entity": "O*NET 39-5012.00 职业摘要（就业与预测字段）",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 39-5012.00 全国工资分位",
@@ -24488,22 +24439,22 @@
                 "url": "https://www.onetonline.org/link/details/39-5012.00"
               },
               {
-                "entity": "O*NET 39-5012.00 技术清单（热门技术信号）",
+                "entity": "O*NET 招聘工具",
                 "id": "link-10",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/hot_tech/39-5012.00"
               },
               {
-                "entity": "O*NET 39-5012.00 2025—2035全国就业趋势",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
+                "entity": "O*NET 行业子表",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.onetonline.org/link/industry/39-5012.00"
               },
               {
                 "entity": "O*NET 39-5012.00 职业摘要",
@@ -24524,10 +24475,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET 39-5012.00 2025—2035全国就业趋势",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "OSHA《Hair Salons: Facts about Formaldehyde in Hair Products》",
@@ -24551,13 +24502,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -24572,7 +24516,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24587,7 +24530,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24602,7 +24544,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24617,7 +24558,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24632,7 +24572,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24647,7 +24586,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24662,8 +24600,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.16",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24678,8 +24614,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24689,7 +24623,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：可评估预约草稿、记录整理、款式参考与库存摘要等辅助用途，先核数据、权限和输出。证据不足：本次未取得该职业AI采用率、生产率或岗位替代结果；不将任务研究当现场安全判定。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "编辑建议：可评估预约草稿、记录整理、款式参考与库存摘要等辅助用途，先核数据、权限和输出。证据不足：本次未取得该职业AI采用率、生产率或岗位替代结果；不将任务研究当现场安全判定。 AI 任务影响估算 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.18",
@@ -24737,7 +24671,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24752,7 +24685,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24832,11 +24764,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该职业的行业分布；不能推导行业工资或就业规模。"
+              "行业子表为 45% 与 55%。 子表未单列统计年份。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.28",
           "source_refs": [
+            "r2-pay-2",
             "onet"
           ],
           "type": "prose"
@@ -24846,11 +24779,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-5012.00 职业摘要（就业与预测字段）"
+              "BLS 表 1.2：就业与预测"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.29",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -24908,7 +24842,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24923,7 +24856,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24938,7 +24870,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24953,7 +24884,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24968,7 +24898,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24983,7 +24912,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24998,7 +24926,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25207,11 +25134,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-5012.00 职业摘要（就业与预测字段）"
+              "BLS 表 1.2：39-5012 的就业与预测"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.54",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -25236,11 +25164,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 数据按本职业 39-5012.00 口径给出 2025 年在岗约 595,000 人、2035 年约 640,900 人（2025—2035 年 +8%，远快于平均（8%））、预测期年均职位空缺约 73,400。"
+              "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.56",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -25293,11 +25222,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "研究结合任务资料、专家判断与模型预测估计生成式AI潜在职业暴露；不是本职业在岗使用率、技术效果或裁员调查。"
+              "行业子表为 45% 与 55%。 子表未单列统计年份。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.60",
           "source_refs": [
+            "r2-pay-2",
             "ilo"
           ],
           "type": "prose"
@@ -25337,11 +25267,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "总体就业预测，非AI归因：美国39-5012在2025—2035年预计增长8%、年均空缺73,400。ILO任务暴露研究不测量该职业的采用率、裁员率或个人就业结果。"
+              "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.63",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "ilo"
           ],
@@ -25372,7 +25303,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25402,7 +25332,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25417,7 +25346,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25441,11 +25369,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 数据对本职业 2025—2035 年的口径为 +8%（远快于平均（8%））、预测期年均职位空缺约 73,400；该口径描述职业群体，不代表个人录用概率。"
+              "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.70",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -25456,12 +25385,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要（就业与预测字段）"
+              "BLS 表 1.2：就业与预测"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -25476,7 +25405,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25500,11 +25428,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页已核来源没有给出岗位消失年份。2025—2035年总体就业预测为增长8%，非AI归因；不能由任务暴露或预测增长推算替代日期。"
+              "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.74",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "ilo"
           ],
@@ -25520,7 +25449,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25535,7 +25463,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25550,7 +25477,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25579,7 +25505,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.79",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25594,7 +25519,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25609,7 +25533,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25624,7 +25547,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.82",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25639,7 +25561,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25654,7 +25575,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.84",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25669,7 +25589,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25684,7 +25603,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.86",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25699,7 +25617,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.87",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25728,7 +25645,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25743,7 +25659,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.90",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25758,7 +25673,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25773,7 +25687,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.92",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25788,7 +25701,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.93",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25845,7 +25757,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25902,7 +25813,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26016,7 +25926,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26073,7 +25982,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26186,7 +26094,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26201,7 +26108,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26418,11 +26324,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：精确职业全国工资分布仍未取得；以上两项为行业均值背景。"
+              "大陆历史招聘：养发师和美容师"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "cn-wages-current"
           ],
           "type": "prose"
@@ -26432,11 +26340,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业均值分别列私营与非私营，不替代个人工资；须按城市、合同、雇主和实际计酬条件比较。"
+              "弥勒市政府 2026 年第 26 期历史汇编：一心美发馆在弥勒招 10 名养发师，初中以上学历，3,000–5,000 元/月。公告岗位是养发，不推定剪染职责。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "cn-wages-current"
           ],
           "type": "prose"
@@ -26451,7 +26361,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26480,7 +26389,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26495,7 +26403,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26510,7 +26417,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26525,7 +26431,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26540,7 +26445,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26555,7 +26459,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26570,7 +26473,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26585,7 +26487,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26600,7 +26501,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26615,7 +26515,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26630,7 +26529,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26645,7 +26543,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26660,7 +26557,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26690,7 +26586,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26720,7 +26615,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26763,7 +26657,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26773,12 +26666,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "场景比较需要用人单位类型与任职方式一致；本页不提供本职业的精确月薪区间。"
+              "铜川市职业介绍中心 2026 年 7 月用工汇总：美之蔻美容院招 20 名美容师，高中及以上、1 年以上工作经验，表列 4,000–6,000 元。这里是美容岗位样本，原表该格未写计薪周期，不能视作发型师月薪。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "onet"
           ],
           "type": "prose"
@@ -26793,7 +26687,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26822,7 +26715,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26846,11 +26738,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国大陆本组合职业的全国月薪分布；美发师官方职业条目不提供全国工资分位。"
+              "两则是不同门店、岗位和口径；不据此推发型师的全国工资。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "cn-hairdresser"
           ],
           "type": "prose"
@@ -26902,7 +26796,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未有官方或可核验来源支持其他城市的美发师与美容师月薪区间。"
+              "本页未取得其他城市与上述岗位和计薪周期可比的工资报价。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.china-salary.career-snapshot-primary-locale.54",
@@ -26981,13 +26875,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 39-5012.00 全国工资分位｜https://www.onetonline.org/link/localwages/39-5012.00；O*NET 39-5012.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/39-5012.00；O*NET 39-5012.00 行业分布｜https://www.onetonline.org/link/industry/39-5012.00"
+              "O*NET 39-5012.00 全国工资分位｜https://www.onetonline.org/link/localwages/39-5012.00；BLS 表 1.2：就业与预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET 39-5012.00 行业分布｜https://www.onetonline.org/link/industry/39-5012.00"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -27154,11 +27047,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 O*NET 展示的 BLS 按 2025 年给出的本职业在岗人数；页面未声明该数据取自其他职业。；O*NET 39-5012.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/39-5012.00"
+              "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。；BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -27184,11 +27078,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 年本职业39-5012就业预计增长8%；OOH虽合并成章，但其就业表单列本职业595,000→640,900人。合并职业群增长7%，不能混用。"
+              "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。；BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -27214,11 +27109,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 O*NET 页面所示的预测期年均职位空缺口径，多来自替换需求（合并章节另给出年均空缺约 80,300），不是净增岗位数，也不构成个人录用保证。；O*NET 39-5012.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/39-5012.00"
+              "BLS 表 1.2 给出 39-5012 年均约 73,400 个空缺，含净增长和替补需求。合并组另计约 80,300 个。；BLS 表 1.2：就业与预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -27244,11 +27140,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：美国公开数据给出的是本职业的时薪与年薪分位与2025—2035 年就业与预测；可核对的是分位、中位数与预测数字，以及它们各自的口径与资料期。"
+              "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -27334,7 +27231,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27359,7 +27255,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "个人护理服务（Personal care services）"
+              "个人护理服务"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.34",
@@ -27373,7 +27269,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "17.39美元/小时（中位数，2025年5月）"
+              "17.39 美元/小时"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.35",
@@ -27387,7 +27283,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH Pay表单列39-5012在个人护理服务行业的时薪中位数；这是行业内该职业统计，不是所有沙龙或自雇收入。"
+              "2025 年 5 月 39-5012 行业时薪中位数。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.36",
@@ -27401,7 +27297,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "零售贸易（Retail trade）"
+              "零售业"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.37",
@@ -27415,7 +27311,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "14.84美元/小时（中位数，2025年5月）"
+              "14.84 美元/小时"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.38",
@@ -27429,7 +27325,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH Pay表单列39-5012在零售贸易行业的时薪中位数，不能推广至其他行业或个人到手工资。"
+              "2025 年 5 月 39-5012 行业时薪中位数。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.39",
@@ -27532,7 +27428,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27576,7 +27471,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27605,7 +27499,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27661,7 +27554,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27673,19 +27566,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "洗发师",
@@ -27766,20 +27659,15 @@
                 "url": "https://www.onetonline.org/link/industry/39-5012.00"
               },
               {
-                "entity": "O*NET 39-5012.00 职业摘要（就业与预测字段）",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -27794,7 +27682,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.2",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27824,7 +27711,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27883,7 +27769,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27912,7 +27797,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.riasec-fit-block.9",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27969,7 +27853,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28084,7 +27967,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28142,7 +28024,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28173,7 +28054,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -28216,7 +28096,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28231,7 +28110,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28246,7 +28124,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28261,7 +28138,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28276,7 +28152,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28291,7 +28166,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28306,7 +28180,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28321,7 +28194,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28336,7 +28208,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28351,7 +28222,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28366,7 +28236,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28381,7 +28250,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28396,7 +28264,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28411,8 +28278,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28427,8 +28292,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.41",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28443,8 +28306,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.42",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28459,7 +28320,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28474,7 +28334,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28489,7 +28348,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28504,7 +28362,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28519,7 +28376,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28534,7 +28390,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28563,7 +28418,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28592,7 +28446,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28607,7 +28460,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28650,7 +28502,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28665,7 +28516,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.fit.personality-fit-block.57",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28844,16 +28694,12 @@
                 "entity": "《公共场所卫生管理条例》2016历史版（第2、6、7条相关义务与2024版一致）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=785"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1755"
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -28868,8 +28714,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.8",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28884,8 +28728,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28932,7 +28774,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28947,7 +28788,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28962,7 +28802,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28987,12 +28826,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "染烫与定型与顺滑产品若含甲醛或在加热时释放甲醛，可能造成呼吸道与眼部刺激与皮肤过敏，长期暴露风险更高。"
+              "美国 OSHA 指出，部分头发顺滑产品含甲醛或在使用时释放甲醛。吸入或接触可刺激眼睛和呼吸道并导致皮肤过敏。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29021,7 +28859,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29079,7 +28916,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29109,7 +28945,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29138,7 +28973,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29168,7 +29002,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29183,7 +29016,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29198,7 +29030,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29228,7 +29059,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29238,12 +29068,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按适用法域与主管部门与用人单位授权执行服务与器具消毒与异常处置；美国侧 OSHA 要求沙龙按甲醛与危害沟通标准进行空气检测与提供通风与防护与培训，FDA 说明产品与成分安全由化妆品企业承担法律责任、并按化妆品与药品的区分管理；碰到皮肤或头皮异常与超出执业范围的情形按程序升级并建议就医。"
+              "确认门店流程和自己的授权。OSHA 甲醛和危害沟通标准适用于美国受覆盖的雇主及相关顺滑产品。遇顾客头皮异常、产品身份不明或超出服务范围时，暂停并交负责人员处理。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29258,7 +29087,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.risk.career-risk-cards.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29355,7 +29183,7 @@
             "column_labels": [
               "岗位方向",
               "起步任务",
-              "雇主要求核对建议",
+              "向雇主核对",
               "零经验可提交的证据",
               "需要区分的边界"
             ],
@@ -29363,36 +29191,36 @@
               [
                 "连锁沙龙美发岗",
                 "在有监督下按沙龙标准完成顾客沟通与剪修与造型，并按规程完成器具清洁与消毒与记录。",
-                "编辑核对建议：向目标雇主核对需求确认、剪修与造型稳定性、卫生与消毒规范程度；执业许可与上岗资格由法域与沙龙制度决定。",
-                "提交一份含虚构顾客需求单、分区图与产品标签核对与消毒处理说明的服务记录，不使用真实顾客资料或照片。",
+                "向雇主核对训练、岗位服务范围和许可。",
+                "HS-71 只交两版咨询单和一页交接。",
                 "沙龙岗位不决定卫生制度或产品采购；涉及产品与接触时间与皮肤异常须由有职责人员按规程处理。"
               ],
               [
                 "染烫与造型专精岗",
                 "在授权范围内承担漂染与烫发与热工具造型项目，按产品说明与接触时间操作并做皮肤与过敏询问。",
-                "编辑核对建议：向目标雇主核对色彩与配方原理、皮肤评估与异常处置与过程监测与记录能力。",
-                "提交一份含目标、产品与配方选择理由、皮肤与过敏询问与过程记录与评估结论的虚构说明。",
+                "向雇主核对训练、岗位服务范围和许可。",
+                "HS-71 只交两版咨询单和一页交接。",
                 "药剂调配与仪器使用与授权范围须按法域与沙龙规定执行；专精岗不等于可越界处理皮肤与头皮疾病。"
               ],
               [
                 "头皮与皮肤护理岗",
                 "按授权提供头皮按摩与处理与头部护理项目，在发现慢性或传染性头皮问题时建议顾客就医。",
-                "编辑核对建议：向目标雇主核对观察与评估、护理手法、转介与记录与顾客沟通能力。",
-                "提交一份含观察项、护理方案与转介与记录要求的虚构护理记录。",
+                "向雇主核对训练、岗位服务范围和许可。",
+                "HS-71 只交两版咨询单和一页交接。",
                 "医学治疗须由临床获授权人员承担；护理岗不等于可作医学诊断或治疗。"
               ],
               [
                 "沙龙接待与前台岗",
                 "安排预约与接待与结算与用品陈列与库存，与发型师配合安排服务顺序与顾客沟通。",
-                "编辑核对建议：向目标雇主核对预约与排程、收银与记录、顾客沟通与销售配合能力。",
-                "提交一份含预约与排班、收费与退款与记录与销售配合的虚构方案。",
+                "向雇主核对训练、岗位服务范围和许可。",
+                "HS-71 只交两版咨询单和一页交接。",
                 "价格与承诺与退款须在沙龙授权范围内；本页不提供经营指令。"
               ],
               [
                 "带教与沙龙协调岗",
                 "安排班次与分工、带教新人、维护卫生与消毒与产品与通风规程、处理顾客不满与异常。",
-                "编辑核对建议：向目标雇主核对排班与带教与异常处置与记录复核能力。",
-                "提交一份含排班与分工、卫生与产品与通风检查、异常处置与改进建议的虚构方案。",
+                "向雇主核对训练、岗位服务范围和许可。",
+                "HS-71 只交两版咨询单和一页交接。",
                 "管理与执业范围决定须按法域与沙龙规程作出；本页不提供管理指令。"
               ]
             ]
@@ -29467,42 +29295,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份顾客需求单、一份分区图与产品标签核对表、一份皮肤与过敏询问与停止条件记录表与一份器具清洁与消毒记录表。",
-                  "全部材料为虚构，不含真实顾客资料与照片、门店客户数据或内部标准文件。",
-                  "全部材料与场景为虚构，不得使用真实顾客资料、照片、门店客户数据或内部标准文件。"
+                  "HS-71 虚构沙龙咨询。S1 顾客预约记录写修剪，现场又问可否染发。题设规定新增服务必须有产品识别、顾客确认及负责人员复核。",
+                  "S2 拟用产品只写“深棕”，没有可核的产品编号。此次记录没有染发授权或已操作记录。",
+                  "S3 原版没有产品对应单。变式只改 S3：增加有可核编号的产品对应单；顾客新增服务确认与负责人复核仍未记录。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构服务写清需求确认与长度与轮廓基准、产品标签与成分与接触时间核对、皮肤与过敏询问与停止条件、过程节点与结果确认、器具清洁与消毒与一次性用品处理与收费与未决事项，以及需要复核与需要授权的环节。",
-                  "在 90 分钟内完成，允许参考公开的通用卫生与产品安全资料，但不使用真实顾客资料，也不对真人做化学处理。",
-                  "记录中把顾客需求与分区与产品标签与接触时间核对、皮肤与过敏询问与停止条件、器具清洁与消毒处理、收费与顾客反馈分开书写，并标注需复核的部分。"
+                  "把原预约和新增请求分列。",
+                  "两版分别写已核、待核与接手角色。",
+                  "提交两版咨询单和一页交接，注明 S1–S3 及接手角色。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先确认顾客要求与产品与器具与工位状态，再按规程服务与消毒与记录，最后写明结论与未决事项。",
-                  "把顾客需求与分区、产品与接触时间、皮肤与过敏询问、器具清洁与消毒处理与结果复盘分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核需求确认与产品与接触时间与消毒处理结论，并保留修改理由。"
+                  "先独立完成两版。",
+                  "把询问、产品确认与服务授权分开。",
+                  "交卷后打开「HS-71 参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成染烫处方、接触时间或消毒步骤指令，也不能替代适用法域与沙龙授权要求。",
-                  "不得在练习中接触真实顾客或操作真实染烫药剂与热工具；涉及化学品与通风与皮肤屏障与顾客状况异常的作业须由有权限人员按规程处理。",
-                  "练习不替代适用法域与沙龙授权要求，也不构成任何染烫处方、接触时间或消毒步骤指令；不得在练习中对真人做化学处理。"
+                  "仅用虚构纸面材料。",
+                  "不接触顾客、工具或产品。",
+                  "不演练配比、染烫或医疗美容。"
                 ]
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "hs71-editor"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "HS-71：沙龙咨询单核对",
           "type": "cards"
         },
         {
@@ -29513,37 +29341,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：学历、职业培训、州执业执照与续证、沙龙岗前培训、沙龙作业授权（是否含漂染与烫发与仪器项目）、以及卫生与化学品与通风与顾客信息保护培训。",
-                  "每项都注明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「职业培训」「州执业执照」「沙龙作业授权」「卫生与化学品与信息保护培训」分列，避免混为一谈。"
+                  "写两版咨询记录。",
+                  "引 S1–S3。",
+                  "标仍缺的确认。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的服务记录，重点检查需求确认与分区、产品标签与接触时间核对、皮肤与过敏询问与停止条件、器具清洁与消毒处理与结果复盘是否逐项写清。",
-                  "把复核意见与修改理由一并保留，作为判断你能否接受复核的证据。"
+                  "写一页交接。",
+                  "标接手角色。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明本次服务与顾客要求、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给同伴与主管复核，并保留复核意见与修改理由。"
+                  "记录只补哪项证据。",
+                  "区分已核与授权。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用预约或顾客管理或记录或风格可视化工具，须注明工具名称与版本、输入与依据与人工修改理由。",
-                  "顾客形象与健康信息处理须先取得授权，并记录访问范围、保留期限与销毁约定。"
+                  "交卷后对参考。",
+                  "不接触产品。"
                 ]
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "hs71-editor"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29593,7 +29421,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.interview-probation.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "title": "面试与试用期考察",
@@ -29607,57 +29434,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与边界阅读：读 O*NET 39-5012.00 与 OSHA 沙龙甲醛页与FDA 化妆品问答的公开资料，写清剪染烫与造型、器具消毒与皮肤屏障、产品标签与接触时间、执业与沙龙授权的区别。",
-                  "产出：一页术语与流程对照表，标注每项的来源。"
+                  "读 S1–S3。",
+                  "证据索引"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "顾客沟通练习：为虚构顾客写清需求确认与发质与脸型观察与可行范围说明的提问顺序。",
-                  "产出：一份需求确认与方案建议记录。"
+                  "列两项服务。",
+                  "请求对照"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "分区与剪修练习：为虚构需求单写清分区与长度基准与对称检查与调整依据。",
-                  "产出：一份剪修与塑形说明。"
+                  "核 S2 产品字段。",
+                  "待核项"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "染烫与产品核对练习：为虚构案例写清产品标签与成分与接触时间核对与过程监测与停止条件。",
-                  "产出：一份产品核对与过程记录。"
+                  "对照两版 S3。",
+                  "证据差异"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "器具消毒与工位清洁练习：为虚构器具清单写清清洁与消毒流程与受污染物品与化学品处理与通风与防护要点。",
-                  "产出：一份清洁与消毒与通风记录。"
+                  "写交接和接手。",
+                  "交接草稿"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的需求确认与产品与消毒结论，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "先交两版咨询单与一页交接。",
+                  "两版及交接"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "打开「HS-71 参考解（交卷后再打开）」。",
+                  "复核差异"
                 ]
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "hs71-editor"
           ],
           "title": "七日体验产出",
           "type": "timeline"
@@ -29667,18 +29494,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你完成了七日练习并发现自己在顾客沟通与剪修与消毒与记录上可持续投入。",
-              "继续：你能接受长时间站立与重复精细动作与持续接触顾客与化学品暴露与晚间与周末排班，并愿意按规程消毒与通风与接受复核。",
-              "暂停：你只想凭手感发挥，不愿先确认顾客要求与做皮肤与过敏询问。",
-              "暂停：你把「看起来差不多」当作已完成服务，或在器具消毒与化学品与通风防护上跳过规程与授权。",
-              "换方向：你更愿意做剪修与剃须与修须，可比较理发师方向。",
-              "换方向：你更愿意做洗发与准备与辅助，可比较洗发师方向。",
-              "信息不足：如果你还没有任何有监督的剪修或染烫经历，先补这两项再判断。"
+              "继续：能复述原预约和新增请求。",
+              "继续：能写清产品证据与授权。",
+              "暂停：如果容易把意向当确认。",
+              "暂停：如果缺证仍想直接做。",
+              "比较只做基础造型的岗位。",
+              "比较生活美容岗位。",
+              "实际训练另核。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "hs71-editor"
           ],
           "title": "七日后的判断",
           "type": "list"
@@ -29719,7 +29546,7 @@
                 "职业培训（Cosmetology／Hair Styling 方向）",
                 "希望取得执照并提升技能起点的人",
                 "决定能否满足州认可课程与考试的前置条件。",
-                "BLS 职业展望手册指出各州均要求持照、通常须毕业于州认可的美发或美容课程并通过考试，因此该培训通常是必需路径。",
+                "BLS 手册将州认可课程及考试列为通常路径。按目标州核实。",
                 "O*NET 培训页面列出全国 2,285 个相关培训项目（含一年以下证书、一至两年证书与副学士学位课程）。",
                 "按课程周期完成。",
                 "培训结业不等于取得执照，也不等于沙龙作业授权。"
@@ -29729,7 +29556,7 @@
                 "在美国从事该职业的人",
                 "决定能否合法执业与为顾客提供美容服务。",
                 "属法定要求：BLS 职业展望手册指出全美各州都要求理发与美发与美容从业者持照。",
-                "须完成州认可课程并通过考试，并按州要求续证。",
+                "通常完成州认可课程并通过考试。续证和州际互认按州主管机构规定核对。",
                 "按州主管机构安排与执照有效期维护。",
                 "执照有州与执业范围限制，跨州执业须另行核实；理发师 39-5011.00 的许可范围与本职业可能不同。"
               ],
@@ -29749,7 +29576,7 @@
                 "本页未取得其对岗位层级、晋升或招聘作用的证据；须另核具体雇主认可。",
                 "O*NET 认证页面列出 3 项：Certified Aesthetic Laser Operator、Certified Laser Hair Removal Supervisor（National Council on Laser Certification）与 Cosmetology for Career-Technical Education（Safety and Pollution Prevention）。",
                 "按发证机构安排与证书有效期维护。",
-                "认证不等于州执业执照或雇主任命，也不被所有雇主认可。"
+                "证书不替代州执照。是否被具体雇主认可须另核。"
               ],
               [
                 "中国大陆侧：场所卫生与人员健康管理要求",
@@ -29799,18 +29626,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：本节不引用具体雇主的招聘公告，只说明核对应关注的项目；公开渠道出现的岗位名称包括美发师、发型师、美容师、剪发师、染烫师、造型师、头皮护理师、美发助理、洗发师等。",
-              "核对清单：岗位属于连锁沙龙、独立沙龙、社区美发店，还是酒店与度假村与综合美容机构；是否需要州执业执照与沙龙作业授权（是否含漂染与烫发与仪器项目）；计酬方式（底薪与佣金与小费）与班次与周末安排；以及化学品与通风与顾客形象与健康信息保护培训要求。"
+              "弥勒市政府 2026 年第 26 期历史汇编：一心美发馆在弥勒招 10 名养发师，初中以上学历，3,000–5,000 元/月。公告岗位是养发，不推定剪染职责。",
+              "铜川市职业介绍中心 2026 年 7 月用工汇总：美之蔻美容院招 20 名美容师，高中及以上、1 年以上工作经验，表列 4,000–6,000 元。这里是美容岗位样本，原表该格未写计薪周期，不能视作发型师月薪。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "onet"
           ],
-          "title": "招聘信息核对",
+          "title": "大陆历史岗位样本",
           "type": "notice"
         },
         {
@@ -29840,15 +29666,12 @@
                 "entity": "《公共场所卫生管理条例》2016历史版（第2、6、7条相关义务与2024版一致）",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=785"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1755"
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -29863,7 +29686,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29878,7 +29700,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29907,7 +29728,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29936,7 +29756,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29965,7 +29784,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30011,8 +29829,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.21",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30115,7 +29931,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30144,7 +29959,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30159,7 +29973,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30188,7 +30001,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30217,7 +30029,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30232,7 +30043,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30261,7 +30071,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30290,7 +30099,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30305,7 +30113,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30334,7 +30141,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30363,7 +30169,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30378,7 +30183,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30407,7 +30211,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30436,7 +30239,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30451,7 +30253,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.51",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30480,7 +30281,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30509,7 +30309,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30524,7 +30323,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30553,7 +30351,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.58",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30582,7 +30379,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.60",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30597,7 +30393,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30626,7 +30421,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.63",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30655,7 +30449,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.65",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30670,7 +30463,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.66",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30699,7 +30491,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30728,7 +30519,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.70",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30743,7 +30533,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.71",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30772,7 +30561,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.73",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30801,7 +30589,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30816,7 +30603,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.76",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30845,7 +30631,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.78",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30874,7 +30659,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30889,7 +30673,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30918,7 +30701,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.83",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30947,7 +30729,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30962,7 +30743,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.path.career-path-block.86",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31007,19 +30787,19 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 39-5012.00 2025—2035全国就业趋势",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 39-5012.00 2025—2035全国就业趋势",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国家统计局《2025年城镇单位就业人员年平均工资情况》",
+                "entity": "国家统计局：2025 年城镇单位就业人员年平均工资",
                 "id": "link-5",
                 "relation": "career.source",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
@@ -31082,9 +30862,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -31094,11 +30871,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 展示的 BLS 数据按本职业 39-5012.00 口径给出2025 年在岗约 595,000 人、2035 年约 640,900 人（+8%，远快于平均（8%））、预测期年均职位空缺约 73,400。页面未声明该数据取自其他职业。BLS 职业展望手册的对应章节是「Barbers, Hairstylists, and Cosmetologists」合并口径（2025 年在岗 670,800 人、2025—2035 年 +7%），两者不能混用。"
+              "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.8",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -31138,11 +30916,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为 O*NET 展示的 BLS 按 2025 年给出的本职业在岗人数；页面未声明该数据取自其他职业。"
+              "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.11",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -31181,11 +30960,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "美国美发、发型与美容 39-5012"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.14",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -31195,11 +30975,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "595,000 人"
+              "595,000 个岗位"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.15",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -31239,11 +31020,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 按本职业 39-5012.00 口径归为「远快于平均（8%）」，预测期年均职位空缺约 73,400；BLS 职业展望手册的合并章节另给出 2025—2035 年 +7% 与年均空缺约 80,300，为理发与美发与美容三类人群的合并口径。需求还受人口、消费、场所租金、平台获客、复购、时尚周期与自雇比例影响；就业增长不能保证个人客源、佣金或利润。"
+              "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.18",
           "source_refs": [
+            "ep-table",
             "ep-current",
             "nbs"
           ],
@@ -31254,11 +31036,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "这是美国总体就业预测，非AI归因；不代表中国需求、个人录用概率或沙龙客源。"
+              "年均空缺含增长和替补，不等于净增。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.19",
           "source_refs": [
+            "ep-table",
             "ep-current"
           ],
           "type": "prose"
@@ -31282,11 +31065,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "美国美发、发型与美容 39-5012"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.21",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -31296,11 +31080,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "远快于平均（8%；年均职位空缺约73,400）"
+              "7.7%，年均约 73,400 个空缺"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.22",
           "source_refs": [
+            "ep-table",
             "ep-current"
           ],
           "type": "prose"
@@ -31486,7 +31271,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31529,7 +31313,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31572,7 +31355,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31615,7 +31397,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31658,7 +31439,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31743,7 +31523,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31786,7 +31565,6 @@
           },
           "id": "barbers-hairstylists-and-cosmetologists.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31831,10 +31609,13 @@
                 "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.2"
               },
               {
-                "answer": "看可复核的产出：能否先沟通与观察再动手并按反馈调整、能否按产品说明与规程完成染烫并执行器具消毒与通风防护、能否在皮肤或头皮异常或超出执业范围时停下来报告。兴趣代码 RCS 与知识字段只说明方向接近，不能替代这些实作证据。",
+                "answer": "到 09 做 HS-71，试把请求、产品资料与服务权限分开。",
                 "id": "barbers-hairstylists-and-cosmetologists.faq.3",
                 "question": "怎样判断自己适不适合做这一职业？",
-                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.3"
+                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.3",
+                "source_refs": [
+                  "hs71-editor"
+                ]
               },
               {
                 "answer": "AI 与自动化可以改变预约排程、顾客记录整理、风格可视化与款式参考检索与库存订购摘要；但剪染烫与造型过程中的判断、化学药剂配方与接触时间的控制、皮肤与头皮异常与过敏反应的识别以及是否停止服务的决定仍由本人与有权限的人员按适用法域与用人单位制度承担。任务自动化程度不等于岗位数量变化。",
@@ -31849,10 +31630,15 @@
                 "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.5"
               },
               {
-                "answer": "分六类核对：学历；职业培训；州执业执照与续证；沙龙岗前培训；沙龙作业授权（是否含漂染与烫发与仪器项目）；以及卫生与化学品与通风与顾客信息保护培训。美国侧全美各州都要求持照、通常须完成州认可课程并通过考试（BLS 职业展望手册）；O*NET 另列出 3 项国家认证（含激光类认证）。中国大陆侧适用法规要求从业人员经卫生知识培训与考核、直接为顾客服务的人员持健康合格证上岗。任何一项都不能由另一项自动推出。",
+                "answer": "美国按州核实许可类别及服务范围。大陆分别核技能等级、直接服务的健康合格证与门店卫生许可。",
                 "id": "barbers-hairstylists-and-cosmetologists.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.6"
+                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.6",
+                "source_refs": [
+                  "nbs",
+                  "archivists",
+                  "cn-hygiene"
+                ]
               },
               {
                 "answer": "工作情境显示 88% 持续或几乎持续做重复动作、71% 持续或几乎持续站立、30% 持续或几乎持续弯腰或扭转身体、54% 持续或几乎持续保持或恢复平衡、88% 与他人身体距离非常近，42% 每天暴露于污染物、38% 每天暴露于轻微烧伤或割伤或咬伤；长时间站立与重复精细动作与化学品接触需要一定体力与正确的工位与轮换与防护安排。",
@@ -31867,27 +31653,38 @@
                 "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.8"
               },
               {
-                "answer": "O*NET 展示的 BLS 数据按本职业 39-5012.00 口径给出 2024 年在岗约 575,200 人、2034 年约 607,400 人（+6%，快于平均（5% 至 6%））、预测期年均职位空缺约 75,800；BLS 职业展望手册的合并章节另给出 2025—2035 年 +7%、年均空缺约 80,300，为理发与美发与美容三类人群的合并口径。转向可比较理发师、美甲与修脚师、护肤专家、洗发师、舞台化妆师与按摩治疗师，但都需要补充相应培训与执照与授权。",
+                "answer": "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。",
                 "id": "barbers-hairstylists-and-cosmetologists.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.9"
+                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.9",
+                "source_refs": [
+                  "ep-table"
+                ]
               },
               {
-                "answer": "美国工资分位是本职业 39-5012.00 的 2025 年 OEWS 口径；中国大陆未取得本职业的精确全国职业工资分布，本页不发布中国大陆职业工资数值，也不用居民服务行业平均工资替代底薪与佣金与小费或个体经营收入。两边的职业范围、统计制度、资料期与计酬结构（佣金与小费与自雇）都不同，不能把美元换算成人民币，也不应相信缺少样本与岗位范围的报价。",
+                "answer": "美国数值为 39-5012 雇员工资。两份大陆历史报价分别用于养发和美容，不能按汇率换成同一职业工资。",
                 "id": "barbers-hairstylists-and-cosmetologists.faq.10",
                 "question": "美国工资与中国大陆工资为什么不能互相换算？",
-                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.10"
+                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.10",
+                "source_refs": [
+                  "onet-wages",
+                  "mile-hair-care-2026",
+                  "tongchuan-beauty-2026"
+                ]
+              },
+              {
+                "answer": "原版修剪仍是原预约；新增染发的产品编号、顾客确认和负责人员复核均待核。变式只补 S3，产品可识别，仍缺顾客确认和负责人复核，交负责人员核对。两版都未授权或实施染发。自核：是否把请求、产品、确认与接手角色分开？",
+                "id": "barbers-hairstylists-and-cosmetologists.faq.11",
+                "question": "HS-71 参考解（交卷后再打开）",
+                "question_key": "career.faq.barbers-hairstylists-and-cosmetologists.q11",
+                "source_refs": [
+                  "hs71-editor"
+                ]
               }
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.sources.faq.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "faq"
@@ -31897,11 +31694,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮九板块依据O*NET职业任务、工资与2025—2035就业趋势、BLS统计方法及OOH精确职业子表，中国美发师官方画像和2025城镇单位行业工资，以及OSHA、FDA、中国卫生与个人信息法规；编辑建议与统计事实分别标注。"
+              "费马测试编辑部"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.sources.source-card.1",
           "source_refs": [
+            "ep-table",
+            "cn-hygiene",
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "onet",
             "onet-wages",
             "ep-current",
@@ -31911,7 +31712,6 @@
             "cn-wages-current",
             "health",
             "msresearch",
-            "cn-hygiene",
             "cn-pipl"
           ],
           "type": "prose"
@@ -31921,11 +31721,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要资料：O*NET39-5012职业摘要、详细任务与工作情境、全国工资、就业趋势、热门技术、培训和认证；BLS OOH及May2025 OEWS方法；ILO工作论文140；中国就业培训技术指导中心美发师画像、国家统计局2025单位工资、公共场所卫生法规和个人信息保护法。"
+              "美国工资与预测按细项和合并组分列。两则大陆历史招聘各指原公告。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.sources.source-card.2",
           "source_refs": [
+            "ep-table",
+            "cn-hygiene",
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "onet",
             "facilities",
             "onet-wages",
@@ -31938,7 +31742,6 @@
             "ilo",
             "cn-hairdresser",
             "cn-wages-current",
-            "cn-hygiene",
             "cn-pipl"
           ],
           "type": "prose"
@@ -31948,11 +31751,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核读2026-10-08：O*NET职业页面2026更新，工资May2025、就业2025—2035，热门软件信号为2025美国招聘广告；中国美发师画像2022-04-15，国家统计局2025数据于2026-05-15发布，ILO论文2025-05-20。行业占比页未单列资料年；法规分别保留法域。"
+              "预测基期 2025；大陆两份为 2026 年历史公告。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.sources.source-card.3",
           "source_refs": [
+            "ep-table",
+            "cn-hygiene",
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "onet",
             "onet-wages",
             "ep-current",
@@ -31968,11 +31775,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国39-5012精确子表与39-5010合并职业群分别读；OEWS工资含佣金、小费并排除自雇经营收入。中国美发师仅对照美发任务，行业私营/非私营均值不等于本职业工资。职业任务、AI候选用途和总体就业预测不能相互替代；具体服务及资料处理须按适用法域核对。"
+              "州执照、门店卫生及医疗美容各按适用范围。HS-71 仅用纸面资料。"
             ]
           },
           "id": "barbers-hairstylists-and-cosmetologists.sources.source-card.4",
           "source_refs": [
+            "ep-table",
+            "cn-hygiene",
+            "mile-hair-care-2026",
+            "tongchuan-beauty-2026",
             "onet",
             "nbs",
             "oews-methods",
@@ -32004,7 +31815,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32016,13 +31827,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看美发师与发型师与美容师职业页面",
@@ -32055,6 +31866,8 @@
                 "accessed_at": "2026-09-15",
                 "details": [
                   "official occupation profile",
+                  "2026 年更新页面；访问 2026-09-15",
+                  "official occupation profile",
                   "2026 年更新页面；访问 2026-09-15"
                 ],
                 "evidence_type": "official occupation profile",
@@ -32086,18 +31899,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official outlook",
-                  "2024—2034 年；访问 2026-09-15"
+                  "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。",
+                  "2025—2035 年；访问 2026-09-15"
                 ],
                 "evidence_type": "official outlook",
                 "id": "ep",
-                "limitation": "为本职业口径的就业与预测；不能外推更宽职业群。",
+                "limitation": "只用于 39-5012。",
                 "market": "美国",
-                "name": "O*NET 39-5012.00 职业摘要（就业与预测字段）",
-                "period": "2024—2034 年；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：美发、发型与美容 39-5012",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32107,7 +31920,7 @@
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "oews",
-                "limitation": "2025 OEWS受雇工资分布含佣金、生产奖金和小费；不含自雇所得与加班溢价。分位不是资历等级或收入承诺；覆盖定义另见oews-methods。",
+                "limitation": "2025 OEWS受雇工资分布含佣金、生产奖金和小费；不含自雇所得与加班溢价。分位不是资历等级或收入承诺；覆盖定义另见《BLS OEWS 统计概念》。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年工资分位（39-5012.00）",
                 "period": "May 2025（OEWS）；访问 2026-09-15",
@@ -32123,29 +31936,13 @@
                 ],
                 "evidence_type": "official occupation outlook",
                 "id": "nbs",
-                "limitation": "该章节为「Barbers, Hairstylists, and Cosmetologists」合并口径：2025 年合并中位年薪 35,880 美元、合并中位时薪 17.25 美元、2025 年在岗 670,800 人、2025—2035 年 +7%（远快于平均）、变化 +48,400、年均空缺约 80,300；章节 Pay 段同时单列美发师与发型师与美容师 2025 年 5 月中位时薪 17.21 美元（与 O*NET 展示的 39-5012.00 口径一致）。合并口径不得当作单列口径；章节并指出各州均要求持照。",
+                "limitation": "手册细项工资、行业时薪和取整增长；合并职业另列。",
                 "market": "美国",
-                "name": "BLS 职业展望手册《Barbers, Hairstylists, and Cosmetologists》",
-                "period": "2025 年 5 月工资与 2025—2035 年预测；访问 2026-09-15",
+                "name": "BLS OOH：美发、发型与美容 39-5012",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "combined_group",
+                "scope": "exact",
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/barbers-hairstylists-and-cosmetologists.htm"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "official wage statistics",
-                  "2024 年数据、2025-05-16 发布；访问 2026-09-15"
-                ],
-                "evidence_type": "official wage statistics",
-                "id": "cnclass",
-                "limitation": "按区域与行业门类与登记注册统计类别与岗位大类公布城镇单位平均工资，并含居民服务、修理和其他服务业；不含本职业精确职业条目，且本页不用行业平均工资替代底薪与佣金与小费或个体经营收入，仅作证据边界说明。",
-                "market": "中国大陆",
-                "name": "国家统计局《2024 年城镇单位就业人员年平均工资情况》",
-                "period": "2024 年数据、2025-05-16 发布；访问 2026-09-15",
-                "publisher": "中华人民共和国国家统计局",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32182,18 +31979,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official outlook",
-                  "2024—2034 年；访问 2026-09-15"
+                  "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。",
+                  "2025—2035 年；访问 2026-09-15"
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
-                "limitation": "为本职业口径的就业与预测，不是个人录用概率。",
+                "limitation": "只用于 39-5012。",
                 "market": "美国",
-                "name": "O*NET 39-5012.00 职业摘要（就业与预测字段）",
-                "period": "2024—2034 年；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：美发、发型与美容 39-5012",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32224,7 +32021,7 @@
                 "name": "OSHA《Hair Salons: Facts about Formaldehyde in Hair Products》",
                 "period": "页面现行版本；访问 2026-09-15",
                 "publisher": "U.S. Occupational Safety and Health Administration",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/hair-salons"
               },
               {
@@ -32235,29 +32032,13 @@
                 ],
                 "evidence_type": "institutional task research",
                 "id": "ilo",
-                "limitation": "提供任务暴露与岗位转型的全球研究口径，不给该职业采用率或替代日期。",
+                "limitation": "全球职业暴露背景，不是本职业采用率或替代率。",
                 "market": "全球",
                 "name": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
                 "period": "2025 年；访问 2026-09-15",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "editorial record",
-                  "访问 2026-09-15"
-                ],
-                "evidence_type": "editorial record",
-                "id": "editor",
-                "limitation": "编辑组整理与口径核对记录。",
-                "market": "美国",
-                "name": "费马测试职业内容编辑组核对记录",
-                "period": "访问 2026-09-15",
-                "publisher": "费马测试职业内容编辑组",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-5012.00"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32358,34 +32139,34 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "industry distribution",
+                  "行业子表为 45% 与 55%。",
                   "现行页面；核读2026-10-08，页面未单列资料年"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "现行页面行业分布45%其他服务业、55%其他行业（含零售）；不能推行业工资，页面未单列资料年。",
+                "limitation": "未单列统计年份，不能从其他 55% 推定零售或自雇。",
                 "market": "美国",
                 "name": "O*NET 39-5012.00 行业分布",
-                "period": "现行页面；核读2026-10-08，页面未单列资料年",
+                "period": "未单列统计年份",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/39-5012.00"
               },
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "official employment trends",
+                  "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。",
                   "2025—2035年；核读2026-10-08"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "r2-pay-3",
-                "limitation": "本职业39-5012：2025年595,000人，2035年640,900人、增幅8%、年均空缺73,400；总体就业预测，非AI归因，空缺包含增长及替代，不是净增或个人录用概率。",
+                "limitation": "只用于 39-5012。",
                 "market": "美国",
-                "name": "O*NET 39-5012.00 就业趋势页（就业与空缺）",
-                "period": "2025—2035年；核读2026-10-08",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "BLS 表 1.2：美发、发型与美容 39-5012",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32411,12 +32192,12 @@
                 ],
                 "evidence_type": "official product safety guidance",
                 "id": "msresearch",
-                "limitation": "说明化妆品与药品的区分：洁肤与美颜用途的产品一般按化妆品管理（含洗发水、烫发剂、染发剂等），除着色剂（煤焦油染发剂除外）外不适用 FDA 上市前审批，产品与成分安全由化妆品企业承担法律责任；用于治疗或预防疾病或影响身体结构或功能的产品按药品管理（如去屑与痤疮治疗与防晒等），须经上市前审批或符合非处方药专论；不承认「药妆」类别。属于美国产品监管口径，不等于中国或其他市场结论。",
+                "limitation": "美国 FDA 区分清洁或美化用途的化妆品和声称治疗、预防疾病或影响身体结构功能的药品。化妆品企业对产品及成分安全负责。",
                 "market": "美国",
                 "name": "美国 FDA《Cosmetics Safety Q&A: Personal Care Products》",
                 "period": "内容更新至 2022-02-25；访问 2026-09-15",
                 "publisher": "U.S. Food and Drug Administration",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.fda.gov/cosmetics/resources-consumers-cosmetics/cosmetics-safety-qa-personal-care-products"
               },
               {
@@ -32443,13 +32224,13 @@
                 ],
                 "evidence_type": "official state licensing authority",
                 "id": "archivists",
-                "limitation": "美国理发与美发与美容执业许可由各州管理；该机构是加利福尼亚州的主管机构，其执照与场所与卫生要求仅适用于该州，不能外推到其他州或国家，本页不逐条引用其规则条号。",
+                "limitation": "仅为加州的服务范围示例。其他州要求另核。",
                 "market": "美国",
-                "name": "加州理发与美容委员会（California Board of Barbering and Cosmetology）",
+                "name": "加州美发与美容委员会：受监管服务",
                 "period": "网站为现行版本；访问 2026-09-15",
                 "publisher": "California Department of Consumer Affairs",
-                "scope": "jurisdiction_specific",
-                "url": "https://www.barbercosmo.ca.gov/"
+                "scope": "contextual",
+                "url": "https://www.barbercosmo.ca.gov/forms_pubs/publications/faqs.shtml"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32461,27 +32242,27 @@
                 "id": "oews-methods",
                 "limitation": "Wages定义含佣金与小费、排除加班溢价和自雇；2,080小时为统计折算假设。",
                 "market": "美国",
-                "name": "BLS May 2025 OEWS技术说明",
-                "period": "May 2025",
+                "name": "BLS OEWS：统计概念",
+                "period": "OEWS 工资定义",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
-                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "official employment trends",
+                  "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。",
                   "2025—2035"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep-current",
-                "limitation": "595,000→640,900人，增长8%，年均空缺73,400；总体就业预测，非AI归因。",
+                "limitation": "只用于 39-5012。",
                 "market": "美国",
-                "name": "O*NET 39-5012.00 2025—2035全国就业趋势",
-                "period": "2025—2035",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS 表 1.2：美发、发型与美容 39-5012",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/39-5012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32491,17 +32272,19 @@
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "cn-hairdresser",
-                "limitation": "4-10-03-02只对照美发任务；非美国组合职业全范围对应，不支持全国工资。",
+                "limitation": "中国就业网职业画像将美发师 4-10-03-02 的剪发、造型与护理分列，美容师是相关职业。美发师技能标准列五级至一级，技能等级、直接服务人员健康合格证和经营单位卫生许可分别核对。",
                 "market": "中国大陆",
-                "name": "中国就业培训技术指导中心《美发师》职业画像",
+                "name": "中国就业网：美发师职业画像",
                 "period": "2022-04-15",
                 "publisher": "中国就业培训技术指导中心",
-                "scope": "exact",
-                "url": "https://chinajob.mohrss.gov.cn/h5/c/2022-04-15/347806.shtml"
+                "scope": "contextual",
+                "url": "https://chinajob.mohrss.gov.cn/c/2022-04-15/347806.shtml"
               },
               {
                 "accessed_at": "2026-10-08",
                 "details": [
+                  "official wage statistics",
+                  "2025年数据；2026-05-15发布",
                   "official wage statistics",
                   "2025年数据；2026-05-15发布"
                 ],
@@ -32523,13 +32306,13 @@
                 ],
                 "evidence_type": "administrative regulation",
                 "id": "cn-hygiene",
-                "limitation": "理发店、美容店范围、经营单位卫生管理与培训、直接服务人员健康合格证；本次不引用处罚数额或其他变动条款。",
+                "limitation": "《公共场所卫生管理条例》第2条列理发店、美容店；第6条规定经营单位承担卫生管理和培训考核，第7条要求直接服务顾客的人员持健康合格证，第8条规定适用的经营单位开业前申请卫生许可证。三者与职业技能等级不同。",
                 "market": "中国大陆",
-                "name": "《公共场所卫生管理条例》官方法规正文",
-                "period": "本次核读第2、6、7条",
+                "name": "公共场所卫生管理条例（2024 年第三次修订）",
+                "period": "2024-12-06",
                 "publisher": "中华人民共和国司法部国家行政法规库",
-                "scope": "jurisdiction_specific",
-                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=785"
+                "scope": "contextual",
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1755"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32544,7 +32327,7 @@
                 "name": "《中华人民共和国个人信息保护法》",
                 "period": "2021-11-01施行",
                 "publisher": "国家市场监督管理总局",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               },
               {
@@ -32558,11 +32341,71 @@
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "name": "FermatMind AI 任务影响估算估算方法 v1",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ep-table",
+                "limitation": "美国 BLS 表 1.2 的 39-5012：2025 年 595,000 个岗位，2035 年预计 640,900 个，增长 7.7%，净增 45,900，预计年均空缺 73,400 个，自雇 48.1%。2025 年 5 月雇员年薪中位数 35,790 美元，时薪中位数 17.21 美元。手册把细项增长取整为 8%。",
+                "market": "美国",
+                "name": "BLS 表 1.2：美发、发型与美容 39-5012",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "弥勒市政府 2026 年第 26 期历史汇编：一心美发馆在弥勒招 10 名养发师，初中以上学历，3,000–5,000 元/月。公告岗位是养发，不推定剪染职责。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "mile-hair-care-2026",
+                "limitation": "弥勒市政府 2026 年第 26 期历史汇编：一心美发馆在弥勒招 10 名养发师，初中以上学历，3,000–5,000 元/月。公告岗位是养发，不推定剪染职责。",
+                "market": "中国大陆",
+                "name": "弥勒市政府：一心美发馆历史招聘",
+                "period": "2026",
+                "publisher": "弥勒市人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hhml.gov.cn/info/35871/932012.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "铜川市职业介绍中心 2026 年 7 月用工汇总：美之蔻美容院招 20 名美容师，高中及以上、1 年以上工作经验，表列 4,000–6,000 元。这里是美容岗位样本，原表该格未写计薪周期，不能视作发型师月薪。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "tongchuan-beauty-2026",
+                "limitation": "铜川市职业介绍中心 2026 年 7 月用工汇总：美之蔻美容院招 20 名美容师，高中及以上、1 年以上工作经验，表列 4,000–6,000 元。这里是美容岗位样本，原表该格未写计薪周期，不能视作发型师月薪。",
+                "market": "中国大陆",
+                "name": "铜川市职业介绍中心：美容院历史用工",
+                "period": "2026-07",
+                "publisher": "铜川市人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://rs.tongchuan.gov.cn/10/17900.jhtml?role=s"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "本页虚构纸面咨询单。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "hs71-editor",
+                "limitation": "本页虚构纸面咨询单。",
+                "market": "虚构练习",
+                "name": "FermatMind HS-71：沙龙咨询单核对",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": null
               }
             ]
           },
@@ -35897,7 +35740,7 @@
       },
       "hero": {
         "h1": "美发师、发型师与美容师",
-        "quick_answer": "美发师、发型师与美容师提供美容服务：先与顾客沟通并观察头发与头皮状况、分析发质与脸型并推荐造型与护理方案、按顾客要求与发质与面部特征用推剪与剪刀与修剪器与剃刀剪断与修剪与塑形头发或发片、用水与洗发液洗发与冲洗与护发并吹干、用涂抹器或刷子漂白与染色与调色，施用水或定型与拉直与烫发溶液并用卷发筒与卷发器与热梳与卷发棒压卷头发、用手与手指或振动设备按摩与处理头皮、梳理与喷发定型、修眉与去除面部毛发，还可能提供化妆与美甲与护肤服务；同时保持工作台清洁并消毒剪刀与梳子等工具、更新与维护顾客信息记录、演示与销售护发产品及化妆品；其工作不等于皮肤与头皮疾病的医学诊断或治疗，也不代替场所卫生管理责任与化学药剂与通风与防护的授权判定，并在顾客皮肤或头皮异常、出现过敏反应与产品状态不明以及超出本人执业范围时停止并升级。",
+        "quick_answer": "美发师与发型师和顾客确认需求，提供修剪、造型和适用的护理，并记录服务和卫生要求。此页美国统计采用 39-5012；理发师 39-5011 另列。中国大陆美发师、美容师、门店卫生和医疗美容各按适用范围核对。",
         "title": "美发师、发型师与美容师"
       },
       "market_signal_card": {
@@ -36448,7 +36291,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 就业与预测字段",
+            "label": "BLS 表 1.2：就业与预测",
             "secondary_value": null,
             "value": {
               "$item": "barbers-hairstylists-and-cosmetologists.profile.onet-structured-fields-block.4",
@@ -37249,7 +37092,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合美发师、发型师与美容师",
+        "label": "用 RIASEC 探索职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37371,7 +37214,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
-      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
+      "interface.quick_decision.experiment_heading": "怎样用纸面咨询判断是否适合？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37464,7 +37307,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 任务影响估算",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37554,61 +37397,61 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "575,200人",
+        "derivation": "发布值。",
+        "display_value": "595,000 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
-        "occupation_scope": "美发师、发型师与美容师",
-        "period": "2024 年；访问 2026-09-15",
+        "measure": "就业岗位",
+        "occupation_scope": "美国美发、发型与美容 39-5012",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "快于平均（5% 至 6%）",
+        "derivation": "发布值。",
+        "display_value": "7.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
-        "occupation_scope": "美发师、发型师与美容师",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "预计增长",
+        "occupation_scope": "美国美发、发型与美容 39-5012",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 75,800",
+        "derivation": "发布值。",
+        "display_value": "约 73,400 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "预测期年均职位空缺（本职业口径）",
-        "occupation_scope": "美发师、发型师与美容师",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "预计年均空缺",
+        "occupation_scope": "美国美发、发型与美容 39-5012",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "17.39美元/小时（2025年5月中位数）",
+        "derivation": "发布值。",
+        "display_value": "17.39 美元/小时",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "行业内39-5012时薪中位数",
-        "occupation_scope": "美发师、发型师与美容师",
-        "period": "2025年5月",
+        "measure": "行业时薪中位数",
+        "occupation_scope": "美国 39-5012",
+        "period": "2025-05",
         "source_refs": [
           "nbs"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "14.84美元/小时（2025年5月中位数）",
+        "derivation": "发布值。",
+        "display_value": "14.84 美元/小时",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "行业内39-5012时薪中位数",
-        "occupation_scope": "美发师、发型师与美容师",
-        "period": "2025年5月",
+        "measure": "行业时薪中位数",
+        "occupation_scope": "美国 39-5012",
+        "period": "2025-05",
         "source_refs": [
           "nbs"
         ]
@@ -37758,75 +37601,75 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "575,200人",
+        "derivation": "发布值。",
+        "display_value": "595,000 个岗位",
         "fact_id": "us-employment-parent",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
-        "occupation_scope": "美发师、发型师与美容师",
-        "period": "2024 年",
+        "measure": "就业岗位",
+        "occupation_scope": "美国美发、发型与美容 39-5012",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "快于平均（5% 至 6%）",
+        "derivation": "发布值。",
+        "display_value": "7.7%",
         "fact_id": "us-growth-parent",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
-        "occupation_scope": "美发师、发型师与美容师",
-        "period": "2024—2034 年",
+        "measure": "预计增长",
+        "occupation_scope": "美国美发、发型与美容 39-5012",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 75,800",
+        "derivation": "发布值。",
+        "display_value": "约 73,400 个/年",
         "fact_id": "us-openings-parent",
         "market": "美国",
-        "measure": "预测期年均职位空缺（本职业口径）",
-        "occupation_scope": "美发师、发型师与美容师",
-        "period": "2024—2034 年",
+        "measure": "预计年均空缺",
+        "occupation_scope": "美国美发、发型与美容 39-5012",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "595,000人",
+        "derivation": "发布值。",
+        "display_value": "595,000 个岗位",
         "fact_id": "us-employment-current-2025",
         "market": "美国",
-        "measure": "就业规模",
-        "occupation_scope": "39-5012 美发师、发型师与美容师",
-        "period": "2025年",
+        "measure": "就业岗位",
+        "occupation_scope": "美国美发、发型与美容 39-5012",
+        "period": "2025",
         "source_refs": [
-          "ep-current"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "8%",
+        "derivation": "发布值。",
+        "display_value": "7.7%",
         "fact_id": "us-growth-current-2025",
         "market": "美国",
-        "measure": "总体就业增长率，非AI归因",
-        "occupation_scope": "39-5012 美发师、发型师与美容师",
-        "period": "2025—2035年",
+        "measure": "预计增长",
+        "occupation_scope": "美国美发、发型与美容 39-5012",
+        "period": "2025–2035",
         "source_refs": [
-          "ep-current"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "73,400个/年",
+        "derivation": "发布值。",
+        "display_value": "约 73,400 个/年",
         "fact_id": "us-openings-current-2025",
         "market": "美国",
-        "measure": "预测期年均职位空缺",
-        "occupation_scope": "39-5012 美发师、发型师与美容师",
-        "period": "2025—2035年",
+        "measure": "预计年均空缺",
+        "occupation_scope": "美国美发、发型与美容 39-5012",
+        "period": "2025–2035",
         "source_refs": [
-          "ep-current"
+          "ep-table"
         ]
       },
       {
@@ -37834,7 +37677,7 @@
         "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
+        "measure": "AI 任务影响估算（编辑估算）",
         "occupation_scope": "美发师、发型师与美容师",
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
@@ -37848,12 +37691,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务影响估算"
     },
     "badges": [
       "O*NET 39-5012.00 · Job Zone Three · 中等准备 · Bright Outlook",
       "剪染烫与造型 / 头皮与皮肤护理 / 顾客沟通与沙龙事务",
-      "本职业口径（工资与就业未取自其他职业）· 中国大陆无精确等价职业条目 · 缺口可见标记"
+      "大陆参考：养发与美容两个历史招聘，未取得同口径全国工资"
     ],
     "metrics": [
       {
@@ -37866,19 +37709,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国预计增长（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国预测期职位空缺（2024—2034）"
+        "label": "美国预计年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -37892,17 +37735,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "美发师、发型师与美容师做什么、需要哪些培训与执照、美国的收入与前景如何、AI 会改变哪些任务，以及器具消毒与皮肤屏障、化学药剂与烫染与甲醛暴露、顾客形象与健康信息、执业范围与场所卫生责任的边界；保留来源范围与数据缺口。"
+      "text": "看美发师和发型师怎样核对顾客需求、服务范围及门店卫生，了解美发细项工资和入行，再试做沙龙咨询单。"
     },
     "title": {
       "availability": "available",
-      "text": "美发师、发型师与美容师"
+      "text": "美发师与发型师：工作、薪酬与入行｜FermatMind"
     }
   },
-  "source_content_sha256": "25f657bc96bd56f16fe6f30653df9b050c08f37251b278539641385f26de830b",
+  "source_content_sha256": "7d527ac118712e63687557c5df13e1dd8684ac876c3385f960a3f9420c5c63fb",
   "subject": {
     "canonical_slug": "barbers-hairstylists-and-cosmetologists",
     "name": "美发师、发型师与美容师",
-    "summary": "美发师、发型师与美容师提供美容服务：沟通并观察头发与头皮状况、分析发质与脸型并推荐造型与护理方案、剪断与修剪与塑形头发、洗发与冲洗与护发与吹干、漂白与染色与调色、施用水或定型与拉直与烫发溶液并用卷发器与热梳与卷发棒压卷、按摩与处理头皮、修眉与去除面部毛发，并保持工作台清洁与消毒工具与维护顾客信息记录。美国侧对应 O*NET 39-5012.00（Hairdressers, Hairstylists, and Cosmetologists），属 Job Zone Three（SVP 6.0 至 <7.0），并在 O*NET 标注为 Bright Outlook；理发师 39-5011.00 是独立相邻代码，许可范围因法域而异。工资与就业与行业数据均为本职业口径，页面未声明取自其他职业（BLS 职业展望手册章节为「Barbers, Hairstylists, and Cosmetologists」合并口径，本页分别标注）。中国大陆侧本页未取得与美发师与发型师与美容师精确对应的公开职业条目与全国工资分布，保留 暂无可安全使用的数据 边界、居民服务行业平均工资不能替代底薪与佣金与小费或个体经营收入，也不把中文页面语言当作中国等价职业或工资映射。"
+    "summary": "美发师与发型师和顾客确认需求，提供修剪、造型和适用的护理，并记录服务和卫生要求。此页美国统计采用 39-5012；理发师 39-5011 另列。中国大陆美发师、美容师、门店卫生和医疗美容各按适用范围核对。"
   }
 }

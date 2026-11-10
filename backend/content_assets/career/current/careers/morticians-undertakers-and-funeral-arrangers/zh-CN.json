@@ -155,6 +155,9 @@
       "item:morticians-undertakers-and-funeral-arrangers.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:morticians-undertakers-and-funeral-arrangers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:morticians-undertakers-and-funeral-arrangers.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12442,6 +12445,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。仪式表列两项家属选择，其中一项只有未署名便签。写出可确认的安排与需请授权联系人确认的事项。"
+            ]
+          },
+          "id": "morticians-undertakers-and-funeral-arrangers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "核殡仪服务安排的授权",
+          "type": "notice"
         }
       ]
     },
@@ -14812,6 +14830,13 @@
         "id": "morticians-undertakers-and-funeral-arrangers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "morticians-undertakers-and-funeral-arrangers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15017,7 +15042,7 @@
       "text": "殡葬师、殡仪承办人、殡葬安排员"
     }
   },
-  "source_content_sha256": "e027b59d9395b23ba251466ba5857b64cb775b5bbf8b5e711edb08a5a30c6e25",
+  "source_content_sha256": "bee3042eb0610b55b7521ca648f1dd69043d008dbb014152eb1b8725a4caf0d4",
   "subject": {
     "canonical_slug": "morticians-undertakers-and-funeral-arrangers",
     "name": "殡葬师、殡仪承办人、殡葬安排员",

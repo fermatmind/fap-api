@@ -1254,7 +1254,7 @@
         "status": "mapped"
       },
       "item:public-relations-managers.path.credential-boundary.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:public-relations-managers.path.credential-decision.1": {
         "status": "mapped"
@@ -1278,7 +1278,7 @@
         "status": "pending_mapping"
       },
       "item:public-relations-managers.path.seven-day-decision.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:public-relations-managers.path.seven-day-trial.1": {
         "status": "mapped"
@@ -8844,18 +8844,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            0,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.01.mitigation": {
         "ref": {
@@ -14220,20 +14210,8 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "public-relations-managers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
         "ref": {
@@ -14632,16 +14610,8 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "public-relations-managers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
         "ref": {
@@ -23311,7 +23281,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "愿意在事实不完整、时间紧迫时组织核查、协调发言人并权衡公众信任与组织责任，可了解公共关系经理。"
+              "若不愿在资料不全时暂缓发布，或不适应时限压力和反复跨部门核实，先看岗位的审批链和应急班次。"
             ]
           },
           "id": "public-relations-managers.quick-decision.fit-decision-checklist.1",
@@ -23326,7 +23296,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用120条虚构媒体问询练抽核六条：三条事实或授权待核；3/6只描述样本。"
+              "去 09 用虚构材料完成分工与升级单，再按参考核对。"
             ]
           },
           "id": "public-relations-managers.quick-decision.fit-decision-checklist.2",
@@ -23340,7 +23310,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "纸笔练习：把一次虚构服务中断分成已核事实、待核事实、受影响人群和发布审批。"
+              "愿意在事实不完整、时间紧迫时组织核查、协调发言人并权衡公众信任与组织责任，可了解公共关系经理。"
             ]
           },
           "id": "public-relations-managers.quick-decision.fit-decision-checklist.3",
@@ -23356,7 +23326,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "提交一页虚构回应决策卡：列R2/R4/R6缺口、消息版本、发言人、批准人和114条未观察问询。"
+              "用 09 的纸面材料交分工与升级单，写清待补证事项、复核人及暂缓答复的条件。"
             ]
           },
           "id": "public-relations-managers.quick-decision.fermat-decision-card.6",
@@ -26506,7 +26476,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "独立公关服务在行业注释归7243社会经济咨询，属商务服务；2025租赁商务服务非私营全体110,162元、私营全体68,919元税前年平均仅该雇佣场景。企业内部公关按雇主行业另核，不代表经理职业中位或个人区间。"
+              "行业注释将独立公关服务列入 7243 社会经济咨询。2025 年城镇租赁和商务服务业非私营全体 110,162 元、私营全体 68,919 元，均为税前年平均，统计覆盖整个宽行业。本文只拿它作独立公关代理机构背景。企业内设公关按雇主行业另核。"
             ]
           },
           "id": "public-relations-managers.china-salary.career-snapshot-primary-locale.22",
@@ -26867,7 +26837,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "租赁商务服务全体年平均仅独立公关代理雇佣背景，内部公关另核行业，不推个人报价。"
+              "统计覆盖宽行业全体，用来理解独立公关代理机构的雇佣背景。工资报价和企业内设公关按各自雇主核对。"
             ]
           },
           "id": "public-relations-managers.china-salary.career-snapshot-primary-locale.46",
@@ -26882,7 +26852,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025城镇单位工资｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+              "国家统计局2025城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "public-relations-managers.china-salary.career-snapshot-primary-locale.47",
@@ -26955,12 +26925,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按本地岗位公告核底薪、绩效和加班。"
+              "上海一则全职集团媒体公关经理样本要求本科及以上、通常要求三年以上相关经验，原帖列可放宽情形；职责包括年度传播计划、技术峰会与舆情应急机制。页首标 50 万–60 万元年薪，未拆分固定和浮动收入。该报价和要求只针对这条岗位，非行业通用门槛或工资。"
             ]
           },
           "id": "public-relations-managers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "r2-pay-2"
+            "r2-pay-2",
+            "cn-pr-job"
           ],
           "type": "prose"
         },
@@ -26998,13 +26969,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国SOC 11-2032不等同中国岗位分类。"
+              "大陆《职业分类大典》将组织信息传播、公众关系协调和形象管理列入公关员（3-01-02-03）。该条目没有把招聘中的公关经理单列为同口径职业；经理岗应看是否负责传播方案、资源和风险升级。"
             ]
           },
           "id": "public-relations-managers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "editor",
-            "r2-pay-1"
+            "r2-pay-1",
+            "cn-pr-class"
           ],
           "type": "prose"
         },
@@ -27013,7 +26985,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025城镇单位工资｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+              "国家统计局2025城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "public-relations-managers.china-salary.career-snapshot-primary-locale.57",
@@ -27530,7 +27502,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "宗教资助公民专业及类似组织"
+              "宗教、资助、公民、专业及类似组织"
             ]
           },
           "id": "public-relations-managers.us-salary.career-snapshot-secondary-locale.40",
@@ -27752,31 +27724,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "广告经理",
@@ -28200,8 +28172,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能否从120条虚构记录中标出六条已核、114条未观察？",
-              "能否区分六条样本的疑点比例与120条总体？"
+              "能否写清已核的是哪些证据，以及还需向谁补证？",
+              "能否区分六份证据的待核比例与 120 条问询的核查进度？"
             ]
           },
           "id": "public-relations-managers.fit.personality-fit-block.20",
@@ -28719,7 +28691,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "从120条虚构问询抽六条，三条有待核事实或授权。"
+              "用 09 的虚构记录自己核来源、日期与授权，提交样本结论和范围。"
             ]
           },
           "id": "public-relations-managers.fit.personality-fit-block.55",
@@ -29514,7 +29486,7 @@
                 "values": [
                   "教育与相关经验",
                   "BLS列美国典型入门本科和五年及以上相关经验。",
-                  "中国岗位按雇主核。"
+                  "上海一则全职集团媒体公关经理样本要求本科及以上、通常要求三年以上相关经验，原帖列可放宽情形；职责包括年度传播计划、技术峰会与舆情应急机制。页首标 50 万–60 万元年薪，未拆分固定和浮动收入。该报价和要求只针对这条岗位，非行业通用门槛或工资。"
                 ]
               },
               {
@@ -29546,7 +29518,8 @@
           "id": "public-relations-managers.path.employer-evidence.1",
           "source_refs": [
             "employer",
-            "editor"
+            "editor",
+            "cn-pr-job"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29560,32 +29533,31 @@
                 "id": "exercise-materials",
                 "values": [
                   "材料与设定｜全部为虚构传播工作纸笔练习",
-                  "虚构传播工作有120条问询；某发布成果清单20条，其中4条已获批准，余16条待批。",
-                  "A1：写目标、传播范围、复核人和预算边界；未获批不扩传播范围。",
-                  "A2：从120条中抽R1–R6六条，抽样由编辑设计。"
+                  "虚构登记簿有 120 条媒体问询记录，另有 20 条拟发布事实的台账。事实台账和记者回复的审批是两件事。",
+                  "A1｜虚构：社区文化馆周六开放日。10:00，记者问：「周六几点开放？要预约吗？团体入口在哪？」受众是到访公众；请在今天 12:00 前交拟答给值班编辑。14:00 的更新只在负责人批准后发布。",
+                  "A2｜值班编辑一名、场馆运营一名；法务 11:30 后可复核，发言授权单未到，预算不变。事实台账摘要：F01 时间、F02 地址、F03 无障碍通道、F04 媒体窗口已签字；F05–F20 尚无签字。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
                   "任务与产出",
-                  "A3：R1、R3、R5完整；R2缺来源，R4缺审批，R6引用过期。A4：其余114条未观察。",
-                  "A4：练习者只记录疑点和待核原件；具名负责人决定是否扩展核查或发布成果。"
+                  "A3｜R1–R6 是用于核对记者三问的六份证据。题面未给出证据与登记簿问询的逐条对应。R1：11 月 6 日批准日程写周六 09:30 开门；R2：「不用预约」只有未署名留言；R3：11 月 6 日批准到访说明写东门为无障碍通道；R4：内部草图画了北门团体入口，未批准发布；R5：11 月 6 日批准媒体指引写媒体问询由值班编辑汇总；R6：10 月 30 日旧指引写西门团体入口，已废止。",
+                  "A4｜交一页分工及升级单：给需要补证的记录分负责人、截止时间与复核人，写明何时暂停对外答复。分别计算事实台账未签条数和六份证据中待核项所占比例。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考思路（先独立做）",
-                  "A5：六项中三项有待核缺口，3/6=50%只描述样本，不能推120条总体问题率。",
-                  "分别列R2/R4/R6需要的原件和决策人；未经批准不得改传播范围或预算。"
+                  "提交前提示",
+                  "先保存初稿，再看七天计划后的参考。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "边界与复核",
-                  "他人能复算20−4=16、120−6=114和3/6，并核四条已批准回应的审批记录；16条待批不得直接发布。"
+                  "只做纸面模拟，保留未获授权的事项。"
                 ]
               }
             ]
@@ -29594,7 +29566,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：一张虚构核对媒体问询",
+          "title": "PR-M01｜媒体问询分工与暂停发布",
           "type": "cards"
         },
         {
@@ -29605,16 +29577,16 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "媒体问询与来源摘要卡",
-                  "写20条拟回应、4条已批准与16条待批。",
-                  "复核证据可复查。"
+                  "任务分工与升级表",
+                  "按 A4 列负责人、补证时点、复核人及暂停外发条件。",
+                  "须区分 20 条事实与记者答复。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "疑点与复核卡",
-                  "列R2来源缺失、R4审批缺失、R6引用过期及各待核原件。",
+                  "逐行记录发现的疑点，写待核原件、依据和责任人。",
                   "每项对应原件和决策人。"
                 ]
               },
@@ -29622,7 +29594,7 @@
                 "id": "report-summary",
                 "values": [
                   "升级交接卡",
-                  "注明114条未观察，不推总体问题率。"
+                  "写清已核证据、待核证据和交接限制。"
                 ]
               },
               {
@@ -29659,28 +29631,28 @@
             ],
             "rows": [
               [
-                "问询抽核",
-                "核原文、来源和批准版",
-                "虚构R2/R4/R6缺口",
-                "不得推其他114条"
+                "面试练习",
+                "如何分配核证与拟稿？",
+                "分工表含时点、负责人和复核人。",
+                "使用题设材料，保留待核。"
               ],
               [
-                "问询抽核",
-                "核原文、来源和批准版",
-                "虚构R2/R4/R6缺口",
-                "不得推其他114条"
+                "责任分派",
+                "怎样处理来源或版本有疑点的记录？",
+                "把要核的原件和升级对象列入任务。",
+                "使用题设材料，保留待核。"
               ],
               [
-                "问询抽核",
-                "核原文、来源和批准版",
-                "虚构R2/R4/R6缺口",
-                "不得推其他114条"
+                "发布控制",
+                "什么时候能考虑外发？",
+                "核事实、稿件审批和实际发言授权。",
+                "使用题设材料，保留待核。"
               ],
               [
-                "问询抽核",
-                "核原文、来源和批准版",
-                "虚构R2/R4/R6缺口",
-                "不得推其他114条"
+                "复盘",
+                "怎样说明本次核查范围？",
+                "分别说明证据核查结果和登记簿核查范围。",
+                "使用题设材料，保留待核。"
               ]
             ]
           },
@@ -29701,49 +29673,49 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "第一日",
-                  "第一日：核A1目标、传播范围与批准。"
+                  "定本次演练的受众、回应时限和需请示的事项。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "第二日",
-                  "第二日：核20条拟回应和4条已批准证据。"
+                  "把事实核对、草稿、法务复核和发言授权分给不同角色。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "第三日",
-                  "第三日：抽R1–R6，核来源、发布审批与引用有效期。"
+                  "逐条对照原件和版本，写出证据够不够。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "第四日",
-                  "第四日：列R2/R4/R6缺口，注明114条未观察。"
+                  "给需要进一步核查的项目写责任人、时限和复核步骤。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "第五日",
-                  "第五日：按A4/A5写三种疑点、114条未知和负责人批准请求。"
+                  "写一份一页决策单：现阶段可准备什么、应暂缓什么、谁向主管升级。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "第六日",
-                  "第六日：封存初稿后看参考思路，修正疑点分类、算式或越权建议。"
+                  "独立完成并保存四份初稿，保留题面来源和计算。没有同伴也能完成。第 7 天再对照参考。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "第七日",
-                  "第七日：交媒体问询、批准、升级、方法四卡，记录最费力的环节与下一步练习。"
+                  "第 6 天初稿保存后，到本页常见问题区展开「PR-M01 参考与自核量规（第 7 天展开）」。用四项量规核对，留一处修订及理由。"
                 ]
               }
             ]
@@ -29760,20 +29732,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "120条虚构问询，抽R1–R6六条；R2来源缺失、R4审批缺失、R6引用过期。",
-              "R1、R3、R5字段完整，3/6只描述样本。",
-              "其余114条未观察，不推总体错误率。",
-              "一页卡列事实、待核事项、拟回应、发言人和批准人。",
-              "任何真实发布须核组织授权。",
-              "作品只证明虚构纸笔方法，不等于雇主录用或发言授权。",
-              "真实媒体沟通和材料披露必须先核机构批准。"
+              "逐条记录原始资料、版本和确认人。",
+              "分别写可用事实、待核事项和回复的发布状态。",
+              "说明每个分母对应事实台账还是六份证据。",
+              "说明下一责任人和需要核对的原件。",
+              "对照初稿和修订稿，留一处修订理由。",
+              "给需要补证的行留状态，保留交接时间。",
+              "选一个真实岗位的带教流程再核对。"
             ]
           },
           "id": "public-relations-managers.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "交卷前后怎么自查",
           "type": "list"
         },
         {
@@ -29874,7 +29846,8 @@
               "纸笔作品和课程展示方法，不授予组织发言权。",
               "BLS美国典型入门本科且需五年及以上相关经验；中国招聘条件按机构核。",
               "真实媒体联络、资料披露和敏感声明须核授权与审批。",
-              "入职前核组织制度、发言权限、值班安排及更正责任。"
+              "入职前核组织制度、发言权限、值班安排及更正责任。",
+              "国家职业资格目录管理的是国家职业资格。公共关系岗位的对外发言与资料披露由实际机构按岗位和事项授权，取得课程证书或职业资格也须另核机构审批。"
             ]
           },
           "id": "public-relations-managers.path.credential-boundary.1",
@@ -31102,7 +31075,7 @@
                 "entity": "国家统计局 2025 年城镇单位工资",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET 职业档案",
@@ -31908,61 +31881,96 @@
                 "answer": "研判公众议题，制定沟通策略，管理团队和媒体关系，审核关键材料并协调危机回应。",
                 "id": "public-relations-managers.faq.1",
                 "question": "公共关系经理每天做什么？",
-                "question_key": "career.faq.public-relations-managers.daily-work"
+                "question_key": "career.faq.public-relations-managers.daily-work",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
                 "answer": "重大声明、法律解释与补救承诺依组织授权审批，职位名称本身不授予无限发言权。",
                 "id": "public-relations-managers.faq.2",
                 "question": "经理能独自代表机构承诺吗？",
-                "question_key": "career.faq.public-relations-managers.comparison"
+                "question_key": "career.faq.public-relations-managers.comparison",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
-                "answer": "用虚构媒体问询做事实分层、受众分析、口径卡与审批表。",
+                "answer": "用一个获准展示的项目，写清你定了什么目标、如何分配团队工作、哪些发言需另行审批，以及结果如何复盘。项目负责人和组织发言授权是两件事。",
                 "id": "public-relations-managers.faq.3",
-                "question": "怎样判断自己是否适合？",
-                "question_key": "career.faq.public-relations-managers.fit"
+                "question": "想从专员转经理，应该证明什么？",
+                "question_key": "career.faq.public-relations-managers.fit",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "工具可辅助摘要和草稿；事实、声誉风险、组织承诺与发布决策仍需人员负责。",
                 "id": "public-relations-managers.faq.4",
                 "question": "AI会取代公共关系经理吗？",
-                "question_key": "career.faq.public-relations-managers.ai-impact"
+                "question_key": "career.faq.public-relations-managers.ai-impact",
+                "source_refs": [
+                  "ilo",
+                  "editor"
+                ]
               },
               {
-                "answer": "证据不足：中国公共关系经理全国职业工资。独立公关代理服务场景可参考2025租赁商务服务非私营全体年平均110,162元、私营全体68,919元；非经理职业中位、起薪或个人收入，企业内部公关另核雇主行业。",
+                "answer": "证据不足：中国公共关系经理全国职业工资。独立公关代理服务场景可参考2025租赁商务服务非私营全体年平均110,162元、私营全体68,919元；非经理职业中位、起薪或个人收入，企业内部公关另核雇主行业。 上海一则全职集团媒体公关经理样本要求本科及以上、通常要求三年以上相关经验，原帖列可放宽情形；职责包括年度传播计划、技术峰会与舆情应急机制。页首标 50 万–60 万元年薪，未拆分固定和浮动收入。该报价和要求只针对这条岗位，非行业通用门槛或工资。",
                 "id": "public-relations-managers.faq.5",
                 "question": "中国大陆公共关系经理工资是多少？",
-                "question_key": "career.faq.public-relations-managers.china-pay"
+                "question_key": "career.faq.public-relations-managers.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "cn-industry",
+                  "cn-pr-job"
+                ]
               },
               {
                 "answer": "不是。O*NET美国2025年11-2032年薪中位146,910美元，10分位82,410、90分位284,990。",
                 "id": "public-relations-managers.faq.6",
                 "question": "美国工资中位数是新人收入吗？",
-                "question_key": "career.faq.public-relations-managers.us-pay"
+                "question_key": "career.faq.public-relations-managers.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
               },
               {
-                "answer": "BLS列美国典型入门本科和五年及以上相关经验；中国招聘按雇主核。",
+                "answer": "BLS列美国典型入门本科和五年及以上相关经验；中国招聘按雇主核。 上海全职集团媒体公关经理样本列本科及以上、通常三年以上相关经验，个别条件可以放宽；这些要求仅适用于该条招聘。",
                 "id": "public-relations-managers.faq.7",
                 "question": "入行教育怎样？",
-                "question_key": "career.faq.public-relations-managers.education-path"
+                "question_key": "career.faq.public-relations-managers.education-path",
+                "source_refs": [
+                  "bls",
+                  "cn-pr-job"
+                ]
               },
               {
                 "answer": "经理制定策略、配置资源和审核关键口径；专员侧重撰稿、媒体联络和执行。",
                 "id": "public-relations-managers.faq.8",
                 "question": "与公共关系专员有何区别？",
-                "question_key": "career.faq.public-relations-managers.credentials"
+                "question_key": "career.faq.public-relations-managers.credentials",
+                "source_refs": [
+                  "onet",
+                  "facilities"
+                ]
               },
               {
-                "answer": "未经核实发布、隐私泄露、口径冲突和危机延误；保留来源、版本、授权与更正记录。",
+                "answer": "A5：R1–R6 六份证据中有三份需要补证，3/6=50%。这个比例只适用于六份证据。\n\n台账 20 条减去 4 条已签的事实，尚有 16 条未签（20−4＝16）。签核事实仍需单独审批稿件。\n\n分别列R2/R4/R6需要的原件和决策人；未经批准不得改传播范围或预算。\n\nR2｜运营负责人 11:15 前核正式预约规定，当班编辑复核。\n\nR4｜当班编辑 11:30 交法务复核北门草图是否获准发布。\n\nR6｜运营负责人 11:30 前查现行团体入口指南，当班编辑复核。中午交内部稿，事实及发言授权齐备后再考虑外发。\n\n各项 0–2 分：可回溯的原证、分开已批事实与待批回复、按职业交出分工或问答、写明下一核证人与发布边界。完整 2、部分 1、猜测或越权 0。",
                 "id": "public-relations-managers.faq.9",
-                "question": "主要风险是什么？",
-                "question_key": "career.faq.public-relations-managers.risk-boundary"
+                "question": "PR-M01 参考与自核量规（第 7 天展开）",
+                "question_key": "career.faq.public-relations-managers.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "BLS11-2032精确职业2025–2035就业80.8千至85.4千、净增4.6千、增长5.7%、年均空缺6.1千；总体预测非AI归因，不代表中国或个人录用。",
                 "id": "public-relations-managers.faq.10",
                 "question": "美国前景如何？",
-                "question_key": "career.faq.public-relations-managers.outlook-transition"
+                "question_key": "career.faq.public-relations-managers.outlook-transition",
+                "source_refs": [
+                  "ep"
+                ]
               }
             ]
           },
@@ -31974,7 +31982,13 @@
             "nbs",
             "privacy",
             "cnclass",
-            "editor"
+            "editor",
+            "cn-pr-job",
+            "cn-pr-class",
+            "ilo",
+            "cn-industry",
+            "onet-wages",
+            "facilities"
           ],
           "type": "faq"
         },
@@ -31997,14 +32011,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "任务取O*NET 11-2032；美国工资与预测取O*NET/BLS同职业行；中国工资另核。"
+              "美国工资和就业取 O*NET 与 BLS 对应职业。大陆用职业分类大典和单个招聘样本核任务，国家统计局大类工资只作背景。"
             ]
           },
           "id": "public-relations-managers.sources.source-card.2",
           "source_refs": [
             "onet",
             "bls",
-            "nbs"
+            "nbs",
+            "cn-pr-class",
+            "cn-pr-job"
           ],
           "type": "prose"
         },
@@ -32013,7 +32029,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料核读日期：2026-10-03；媒体发布与危机审批依组织授权，个人信息处理还须符合法律。"
+              "2026 年 11 月 9 日核读本次大陆分类、招聘及美国工资和就业来源。"
             ]
           },
           "id": "public-relations-managers.sources.source-card.3",
@@ -32060,31 +32076,37 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "path",
                 "id": "navigation-6",
                 "relation": "related-evidence",
                 "url": "/zh/career/jobs/public-relations-managers"
+              },
+              {
+                "entity": "secondary_cta",
+                "id": "navigation-7",
+                "relation": "related-evidence",
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               }
             ]
           },
@@ -32110,13 +32132,13 @@
                   "制定公关策略并维护组织形象。",
                   "指导媒体材料和公众沟通。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "官方职业资料",
                 "id": "onet",
                 "limitation": "美国职业任务；对外承诺按机构授权。",
                 "market": "美国",
                 "name": "O*NET公共关系经理11-2032",
                 "period": "2026年职业档案",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "美国劳工部 O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/11-2032.00"
               },
@@ -32126,13 +32148,13 @@
                   "2025年80.8千、2035年85.4千。",
                   "净增4.6千、增长5.7%、年均空缺6.1千。"
                 ],
-                "evidence_type": "official projections",
+                "evidence_type": "官方就业预测",
                 "id": "bls",
                 "limitation": "美国11-2032精确总体预测，非AI归因；年均空缺含替代，不是净增。",
                 "market": "美国",
                 "name": "BLS 2025–2035 11-2032职业预测表",
                 "period": "2025–2035",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "publisher": "美国劳工统计局",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
@@ -32142,13 +32164,13 @@
                   "2025年80.8千、2035年85.4千。",
                   "净增4.6千、增长5.7%、年均空缺6.1千。"
                 ],
-                "evidence_type": "official projections",
+                "evidence_type": "官方就业预测",
                 "id": "ep",
                 "limitation": "美国11-2032精确总体预测，非AI归因；年均空缺含替代，不是净增。",
                 "market": "美国",
                 "name": "BLS 2025–2035 11-2032职业预测表",
                 "period": "2025–2035",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "publisher": "美国劳工统计局",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
@@ -32158,31 +32180,31 @@
                   "全国11-2032年薪10/25/50/75/90分位82410/106580/146910/204520/284990美元。",
                   "全国中位时薪70.63美元；不是个人工资或固定工时换算。"
                 ],
-                "evidence_type": "official wage table",
+                "evidence_type": "官方工资表",
                 "id": "oews",
                 "limitation": "取UnitedStates全国行，不取California；分位不是资历薪级或起薪。",
                 "market": "美国",
                 "name": "O*NET所载BLS公关经理美国全国工资分位",
                 "period": "2025年5月年薪及小时工资",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "美国劳工部 O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/11-2032.00?st=CA"
+                "url": "https://www.onetonline.org/link/localwages/11-2032.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "全国非私营全体129441元、私营全体71590元。",
                   "独立公关代理服务归商务服务背景：租赁商务服务非私营全体110162元、私营全体68919元；企业内部公关按雇主行业另核，非经理职业工资或起薪。"
                 ],
-                "evidence_type": "official wage table",
+                "evidence_type": "官方工资表",
                 "id": "nbs",
                 "limitation": "全体或行业均值不能推本职业或个人收入。",
                 "market": "中国大陆",
                 "name": "国家统计局2025年城镇单位就业人员年平均工资",
-                "period": "2025年税前年平均工资",
+                "period": "2025 年税前年平均工资；2026-05-15 发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32190,13 +32212,13 @@
                   "制定传播策略并维护组织形象。",
                   "管理媒体材料和公众沟通。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "官方职业资料",
                 "id": "cnclass",
                 "limitation": "美国职业任务；发言与承诺另核机构授权。",
                 "market": "美国",
                 "name": "O*NET公共关系经理11-2032",
                 "period": "2026年职业档案",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "美国劳工部 O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/11-2032.00"
               },
@@ -32206,7 +32228,7 @@
                   "第6条目的必要性和最小范围，第13条处理法律依据。",
                   "媒体联系或当事人资料含可识别信息时适用；公开处理与向工具提供资料须按实际法定条件核。"
                 ],
-                "evidence_type": "law",
+                "evidence_type": "法律原文",
                 "id": "privacy",
                 "limitation": "个人信息处理法律不授组织发言、合同预算或商业秘密披露权。",
                 "market": "中国大陆",
@@ -32222,13 +32244,13 @@
                   "与公关经理策略、团队预算及关键沟通责任分别核。",
                   "相邻职业工资和授权不能代本职业或直接互认。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "官方职业资料",
                 "id": "facilities",
                 "limitation": "真实相邻职业任务不能代公关经理工资或发言授权。",
                 "market": "美国",
                 "name": "O*NET 公共关系专员 27-3031",
                 "period": "2026年职业档案",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "美国劳工部 O*NET",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/summary/27-3031.00"
               },
@@ -32238,13 +32260,13 @@
                   "与公关经理策略、团队预算及关键沟通责任分别核。",
                   "相邻职业工资和授权不能代本职业或直接互认。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "官方职业资料",
                 "id": "operations",
                 "limitation": "真实相邻职业任务不能代公关经理工资或发言授权。",
                 "market": "美国",
                 "name": "O*NET 市场经理 11-2021",
                 "period": "2026年职业档案",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "美国劳工部 O*NET",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/summary/11-2021.00"
               },
@@ -32254,13 +32276,13 @@
                   "与公关经理策略、团队预算及关键沟通责任分别核。",
                   "相邻职业工资和授权不能代本职业或直接互认。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "官方职业资料",
                 "id": "hr",
                 "limitation": "真实相邻职业任务不能代公关经理工资或发言授权。",
                 "market": "美国",
                 "name": "O*NET 新闻分析师记者与新闻工作者 27-3023",
                 "period": "2026年职业档案",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "美国劳工部 O*NET",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/summary/27-3023.00"
               },
@@ -32270,13 +32292,13 @@
                   "与公关经理策略、团队预算及关键沟通责任分别核。",
                   "相邻职业工资和授权不能代本职业或直接互认。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "官方职业资料",
                 "id": "health",
                 "limitation": "真实相邻职业任务不能代公关经理工资或发言授权。",
                 "market": "美国",
                 "name": "O*NET 广告与促销经理 11-2011",
                 "period": "2026年职业档案",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "美国劳工部 O*NET",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/summary/11-2011.00"
               },
@@ -32287,23 +32309,23 @@
                   "作者区分职业中的不同任务，不能把暴露比例等同裁员比例。",
                   "跨地区与收入组别比较需要保留记录和统计口径。"
                 ],
-                "evidence_type": "research",
+                "evidence_type": "研究报告",
                 "id": "ilo",
                 "limitation": "任务暴露不等于雇主采用或职业替代率。",
                 "market": "跨地区",
-                "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "name": "生成式人工智能与就业：全球职业暴露指数修订版",
                 "period": "2025年研究",
-                "publisher": "International Labour Organization",
+                "publisher": "国际劳工组织",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "120条虚构传播工作问询记录与六条抽核为编辑练习。",
-                  "六条三缺口不推整个传播工作质量率。"
+                  "虚构的问询登记簿、事实台账和六份证据是三类练习材料。",
+                  "登记簿的已核范围留待确认。"
                 ],
-                "evidence_type": "editorial synthesis",
+                "evidence_type": "编辑整理",
                 "id": "editor",
                 "limitation": "用于练习与判断框架，不是官方统计、法定要求或雇主岗位条件。",
                 "market": "不适用",
@@ -32319,13 +32341,13 @@
                   "生成式AI风险包括信息完整性和数据保护。",
                   "公关管理系统接入前核输入许可、人工复核与权限。"
                 ],
-                "evidence_type": "risk framework",
+                "evidence_type": "风险框架",
                 "id": "nist",
                 "limitation": "自愿性AI风险框架，不是公关管理授权依据。",
                 "market": "美国/通用",
-                "name": "NIST AI RMF Generative AI Profile",
+                "name": "NIST 生成式人工智能风险管理框架应用指南",
                 "period": "2024年7月26日发布",
-                "publisher": "National Institute of Standards and Technology",
+                "publisher": "美国国家标准与技术研究院",
                 "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
@@ -32335,13 +32357,13 @@
                   "论文估计语言模型对跨职业文本任务的潜力。",
                   "不测核对访问合法性或本职业真实AI采用率。"
                 ],
-                "evidence_type": "research",
+                "evidence_type": "研究报告",
                 "id": "arxiv",
                 "limitation": "跨职业任务潜力估计；不预测公共关系经理就业或采用日期。",
                 "market": "跨地区",
-                "name": "GPTs are GPTs: An Early Look at the Labor Market Impact Potential of Large Language Models",
+                "name": "大型语言模型对劳动力市场潜在影响的早期研究",
                 "period": "2023年3月初版",
-                "publisher": "arXiv / OpenAI et al.",
+                "publisher": "arXiv 预印本平台／OpenAI 等",
                 "scope": "contextual",
                 "url": "https://arxiv.org/abs/2303.10130"
               },
@@ -32351,13 +32373,13 @@
                   "2025未来就业报告为跨行业雇主岗位与技能预期。",
                   "非11-2032实装采用率。"
                 ],
-                "evidence_type": "research",
+                "evidence_type": "研究报告",
                 "id": "weforum",
                 "limitation": "雇主主观预期；不能外推为公共关系经理实测。",
                 "market": "跨地区",
-                "name": "Future of Jobs Report 2025",
+                "name": "《未来就业报告 2025》",
                 "period": "2025年1月7日发布",
-                "publisher": "World Economic Forum",
+                "publisher": "世界经济论坛",
                 "scope": "contextual",
                 "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
               },
@@ -32367,13 +32389,13 @@
                   "制定传播策略并维护组织形象。",
                   "管理媒体材料和公众沟通。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "官方职业资料",
                 "id": "employer",
                 "limitation": "美国职业任务；发言与承诺另核机构授权。",
                 "market": "美国",
                 "name": "O*NET公共关系经理11-2032",
                 "period": "2026年职业档案",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "美国劳工部 O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/11-2032.00"
               },
@@ -32382,92 +32404,92 @@
                 "details": [
                   "募资策略活动预算和捐赠关系，与公关经理职业分别。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "官方职业资料",
                 "id": "purchasing-managers",
                 "limitation": "相邻筹款职业任务不能代公关经理工资或募资授权。",
                 "market": "美国",
                 "name": "O*NET筹款经理11-2033",
                 "period": "2026年职业档案",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "美国劳工部 O*NET",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/summary/11-2033.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "全国非私营全体129441元、私营全体71590元。",
                   "独立公关代理服务归商务服务背景：租赁商务服务非私营全体110162元、私营全体68919元；企业内部公关按雇主行业另核，非经理职业工资或起薪。"
                 ],
-                "evidence_type": "official wage statistics",
+                "evidence_type": "官方工资统计",
                 "id": "r2-pay-1",
                 "limitation": "全体或行业均值不能推本职业或个人收入。",
                 "market": "中国大陆",
                 "name": "国家统计局2025年城镇单位就业人员年平均工资",
-                "period": "2025年税前年平均工资",
+                "period": "2025 年税前年平均工资；2026-05-15 发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "全国非私营全体129441元、私营全体71590元。",
                   "独立公关代理服务归商务服务背景：租赁商务服务非私营全体110162元、私营全体68919元；企业内部公关按雇主行业另核，非经理职业工资或起薪。"
                 ],
-                "evidence_type": "official wage statistics",
+                "evidence_type": "官方工资统计",
                 "id": "r2-pay-2",
                 "limitation": "全体或行业均值不能推本职业或个人收入。",
                 "market": "中国大陆",
                 "name": "国家统计局2025年城镇单位就业人员年平均工资",
-                "period": "2025年税前年平均工资",
+                "period": "2025 年税前年平均工资；2026-05-15 发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "全国非私营全体129441元、私营全体71590元。",
                   "独立公关代理服务归商务服务背景：租赁商务服务非私营全体110162元、私营全体68919元；企业内部公关按雇主行业另核，非经理职业工资或起薪。"
                 ],
-                "evidence_type": "official wage statistics",
+                "evidence_type": "官方工资统计",
                 "id": "r2-pay-3",
                 "limitation": "全体或行业均值不能推本职业或个人收入。",
                 "market": "中国大陆",
                 "name": "国家统计局2025年城镇单位就业人员年平均工资",
-                "period": "2025年税前年平均工资",
+                "period": "2025 年税前年平均工资；2026-05-15 发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "全国非私营全体129441元、私营全体71590元。",
                   "独立公关代理服务归商务服务背景：租赁商务服务非私营全体110162元、私营全体68919元；企业内部公关按雇主行业另核，非经理职业工资或起薪。"
                 ],
-                "evidence_type": "official wage statistics",
+                "evidence_type": "官方工资统计",
                 "id": "census",
                 "limitation": "全体或行业均值不能推本职业或个人收入。",
                 "market": "中国大陆",
                 "name": "国家统计局2025年城镇单位就业人员年平均工资",
-                "period": "2025年税前年平均工资",
+                "period": "2025 年税前年平均工资；2026-05-15 发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-26",
                 "details": [
                   "ILO指数以任务暴露描述潜在变化，不提供公共关系经理净就业预测。"
                 ],
-                "evidence_type": "research",
+                "evidence_type": "研究报告",
                 "id": "msresearch",
                 "limitation": "任务暴露不等于雇主采用或职业替代率。",
                 "market": "跨地区",
-                "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "name": "生成式人工智能与就业：全球职业暴露指数修订版",
                 "period": "2025年研究",
-                "publisher": "International Labour Organization",
+                "publisher": "国际劳工组织",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
@@ -32477,15 +32499,15 @@
                   "全国11-2032年薪10/25/50/75/90分位82410/106580/146910/204520/284990美元。",
                   "全国中位时薪70.63美元；不是个人工资或固定工时换算。"
                 ],
-                "evidence_type": "official wage table",
+                "evidence_type": "官方工资表",
                 "id": "onet-wages",
                 "limitation": "取UnitedStates全国行，不取California；分位不是资历薪级或起薪。",
                 "market": "美国",
                 "name": "O*NET所载BLS公关经理美国全国工资分位",
                 "period": "2025年5月年薪及小时工资",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "美国劳工部 O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/11-2032.00?st=CA"
+                "url": "https://www.onetonline.org/link/localwages/11-2032.00"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32493,13 +32515,13 @@
                   "公共关系专员侧重写作和执行。",
                   "经理侧重策略、资源和审批。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "官方职业资料",
                 "id": "archivists",
                 "limitation": "相邻职业工资和权限不能互用。",
                 "market": "美国",
                 "name": "O*NET公共关系专员27-3031",
                 "period": "2026年职业档案",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "美国劳工部 O*NET",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/details/27-3031.00"
               },
@@ -32509,13 +32531,13 @@
                   "公关经理公司企业管理171250、专业科学技术169030、宗教资助公民专业类似组织134400、政府不含州地方教育医院127720、州地方私营教育116650美元年薪中位。",
                   "典型相关本科和多年经验，职业认证非强制；不授中国发言权。"
                 ],
-                "evidence_type": "official wage table and occupation handbook",
+                "evidence_type": "官方工资表与职业手册",
                 "id": "pr-ooh",
                 "limitation": "手册总摘要合并公关与筹款；本页只取公关经理单列行业工资，预测用EP11-2032精确行。",
                 "market": "美国",
                 "name": "BLS公关与筹款经理手册：公关经理单列工资",
                 "period": "2025年5月工资；2025–2035预测",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "publisher": "美国劳工统计局",
                 "scope": "exact wage subset",
                 "url": "https://www.bls.gov/ooh/management/public-relations-managers.htm"
               },
@@ -32525,7 +32547,7 @@
                   "PDF第520页7243包括公共关系服务，第523页广告业排除独立公共关系服务归7243。",
                   "租赁商务服务全体年平均仅公关代理服务雇佣背景。"
                 ],
-                "evidence_type": "official industry classification",
+                "evidence_type": "官方行业分类",
                 "id": "cn-industry",
                 "limitation": "按独立服务活动分类，不把所有内部公关岗位归同一雇主行业。",
                 "market": "中国大陆",
@@ -32551,6 +32573,37 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "3-01-02-03：公关员，涉及信息传播、关系协调和组织形象。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "cn-pr-class",
+                "limitation": "用于大陆任务对应；不划分企业经理职级，不提供薪资或任职资格。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国职业分类大典》公关员",
+                "period": "2022",
+                "publisher": "人力资源社会保障部等；广元市人社局转载",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "上海一则全职集团媒体公关经理样本要求本科及以上、通常要求三年以上相关经验，原帖列可放宽情形；职责包括年度传播计划、技术峰会与舆情应急机制。页首标 50 万–60 万元年薪，未拆分固定和浮动收入。该报价和要求只针对这条岗位，非行业通用门槛或工资。",
+                  "页面正文未列发布日期；结构化招聘信息的发布日期为 2026-09-21。"
+                ],
+                "evidence_type": "招聘原帖样本",
+                "id": "cn-pr-job",
+                "limitation": "单份招聘样本；当前空缺状态未核实，不能用作职业工资。",
+                "market": "中国大陆",
+                "name": "上海集团媒体公关经理样本",
+                "period": "结构化发布日期 2026-09-21",
+                "publisher": "米高蒲志",
+                "scope": "recruitment_proxy",
+                "url": "https://www.michaelpage.com.cn/en/job-detail/%E9%9B%86%E5%9B%A2%E5%AA%92%E4%BD%93%E5%85%AC%E5%85%B3%E7%BB%8F%E7%90%86%EF%BC%88%E5%85%A8%E7%90%83%E5%B8%82%E5%9C%BA%EF%BC%89/ref/jn-092026-7101718?lang=zh-hans"
               }
             ]
           },
@@ -34762,8 +34815,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "bls"
+              "onet"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -37242,7 +37294,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合公共关系经理工作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37319,7 +37371,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测试"
           },
           {
             "href": {
@@ -37329,7 +37381,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -37339,7 +37391,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格测试"
           },
           {
             "href": {
@@ -37349,7 +37401,17 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "IQ 推理测评"
+          },
+          {
+            "href": {
+              "$link": "public-relations-managers.navigation.links.1",
+              "block": "navigation",
+              "copy_key": "career.item.navigation-links",
+              "entry": "navigation-7",
+              "field": "url"
+            },
+            "label": "EQ 情商测评"
           }
         ]
       },
@@ -37611,7 +37673,7 @@
         "fact_id": "us-industry-wage-investigation-2025",
         "market": "美国",
         "measure": "公关经理职业按雇主行业年薪中位数",
-        "occupation_scope": "美国11-2032；宗教资助公民专业及类似组织",
+        "occupation_scope": "美国11-2032；宗教、资助、公民、专业及类似组织",
         "period": "2025年5月",
         "source_refs": [
           "pr-ooh"
@@ -37636,7 +37698,7 @@
         "market": "中国大陆",
         "measure": "evidence_boundary",
         "occupation_scope": "全国城镇非私营单位全体就业人员",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025 年",
         "source_refs": [
           "nbs"
         ]
@@ -37648,7 +37710,7 @@
         "market": "中国大陆",
         "measure": "evidence_boundary",
         "occupation_scope": "全国城镇私营单位全体就业人员",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025 年",
         "source_refs": [
           "nbs"
         ]
@@ -37660,7 +37722,7 @@
         "market": "中国大陆",
         "measure": "本职业全国职业工资缺口",
         "occupation_scope": "中国大陆暂无公共关系经理职业级可比统计对象",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025 年",
         "source_refs": [
           "nbs"
         ]
@@ -37672,7 +37734,7 @@
         "market": "中国大陆",
         "measure": "本职业全国职业工资缺口",
         "occupation_scope": "中国大陆暂无公共关系经理职业级可比统计对象",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025 年",
         "source_refs": [
           "nbs"
         ]
@@ -37684,7 +37746,7 @@
         "market": "中国大陆",
         "measure": "行业全体税前年平均工资",
         "occupation_scope": "租赁和商务服务业非私营单位全体；仅独立公关代理服务雇佣场景",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025 年",
         "source_refs": [
           "nbs"
         ]
@@ -37696,7 +37758,7 @@
         "market": "中国大陆",
         "measure": "行业全体税前年平均工资",
         "occupation_scope": "租赁和商务服务业私营单位全体；仅独立公关代理服务雇佣场景",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025 年",
         "source_refs": [
           "nbs"
         ]
@@ -37708,7 +37770,7 @@
         "market": "中国大陆",
         "measure": "本职业全国职业工资缺口",
         "occupation_scope": "中国大陆暂无公共关系经理职业级可比统计对象",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025 年",
         "source_refs": [
           "nbs"
         ]
@@ -37720,7 +37782,7 @@
         "market": "中国大陆",
         "measure": "本职业全国职业工资缺口",
         "occupation_scope": "中国大陆公共关系经理精确职业",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025 年",
         "source_refs": [
           "nbs"
         ]
@@ -37780,7 +37842,7 @@
         "availability": "available",
         "fact_ref": "cn-industry-rental-business-2025",
         "key": "china_pay",
-        "label": "中国商务服务非私营年平均（公关代理场景）"
+        "label": "大陆城镇非私营租赁和商务服务业全员年均（2025）"
       }
     ]
   },
@@ -37788,14 +37850,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "公共关系经理制定传播策略、管理媒体关系与危机回应。查看O*NET 11-2032任务、美国2025工资、BLS 2025–2035预测和发布授权边界。"
+      "text": "公共关系经理负责传播策略、媒体关系和危机协调。比较公关经理与专员的职责，了解转岗如何展示项目经验，以及中美工资证据的范围。"
     },
     "title": {
       "availability": "available",
       "text": "公共关系经理"
     }
   },
-  "source_content_sha256": "3af5c6e039abbaecac735929ca94ff913e56d9d051b21c83520cf39319a41c89",
+  "source_content_sha256": "d3d2a4f2d9a9fba67a795bc7feafcac7653263b38e1f5898c98c50fcb9d71e03",
   "subject": {
     "canonical_slug": "public-relations-managers",
     "name": "公共关系经理",

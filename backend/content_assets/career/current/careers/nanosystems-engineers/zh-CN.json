@@ -173,6 +173,9 @@
       "item:nanosystems-engineers.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:nanosystems-engineers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nanosystems-engineers.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13233,6 +13236,21 @@
             "onet-cert"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。原型甲达到目标读数，乙只有模拟结果。为设计评审分开列实测、模拟和下一项待验证假设。"
+            ]
+          },
+          "id": "nanosystems-engineers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核纳米系统设计的证据链",
+          "type": "notice"
         }
       ]
     },
@@ -15752,6 +15770,13 @@
         "id": "nanosystems-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nanosystems-engineers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16041,7 +16066,7 @@
       "text": "纳米系统工程师"
     }
   },
-  "source_content_sha256": "a26cee101aa55c2f26de38d1e1212342bf4182c75e65cc53e917209f47bfa357",
+  "source_content_sha256": "f099bb93e03027a48b1c1170fd1702e6ba48f872c5c4d436ccd50d6f0b806814",
   "subject": {
     "canonical_slug": "nanosystems-engineers",
     "name": "纳米系统工程师",

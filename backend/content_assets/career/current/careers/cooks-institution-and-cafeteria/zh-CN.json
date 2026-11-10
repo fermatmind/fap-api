@@ -53,6 +53,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-cafeteria-huangpu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-cafeteria-xinfeng": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -19503,56 +19509,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19560,7 +19530,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19573,7 +19543,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19586,7 +19556,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19599,7 +19569,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -22539,7 +22509,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合先试：愿意在固定供餐时段内按菜单与膳食限制大批量烹制、按份分餐并如实记录，能接受长时间站立、生产性设备与固定作息。"
+              "适合先试：愿意在固定供餐时段内按菜单与膳食限制大批量烹制、按份分餐并如实记录，能接受长时间站立、生产性设备与实际早班或轮班。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.1",
@@ -22827,7 +22797,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按供餐计划核对菜单与膳食限制 → 按用餐人数估算份数 → 验收食材并按批次核对保质期 → 按配方称量与切配 → 处理肉鱼禽并隔离过敏原相关原料 → 标注制作时间与批次"
+              "按供餐计划核对菜单与膳食限制 → 按用餐人数估算份数 → 按单位授权协助收货查验与批次核对 → 按配方称量与切配 → 处理肉鱼禽并隔离过敏原相关原料 → 标注制作时间与批次"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.camera.steps",
@@ -23135,12 +23105,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按实际职责执行菜单与膳食限制、份数温控及卫生；Core含指导协助人员和新人训练，Supplemental含菜单设计、支出和餐价计算。食品生产经营者与主要负责人承担法定责任，具体审批和人员分工另核，不能凭职业名排除全部管理协作。"
+              "按实际职责执行菜单与膳食限制、份数温控及卫生；Core含指导协助人员和新人训练，Supplemental含菜单设计、支出和餐价计算。食品生产经营者与主要负责人承担法定责任，具体审批和人员分工另核，不能凭职业名排除全部管理协作。 在中国大陆学校食堂，大宗食材由至少包含学校食品安全员和食堂管理人员的验收小组集体查验并留存记录。厨师协助核对批次和记录异常时，采购审批与正式验收按指定职责执行。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-rule",
+            "cafeteria-school-bulk-acceptance"
           ],
           "type": "prose"
         },
@@ -23401,7 +23373,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "备料与称量｜按配方与份数备料｜验收食材并按批次核对保质期，按配方称量与切配，处理肉、鱼与禽类，按份数分份并隔离与标注过敏原相关原料。"
+              "备料与称量｜按配方与份数备料｜按单位授权协助收货查验与批次核对，按配方称量与切配，处理肉、鱼与禽类，按份数分份并隔离与标注过敏原相关原料。"
             ]
           },
           "id": "actors.display.responsibilities_block.02",
@@ -23639,7 +23611,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国机构与食堂厨师Zone1–2/SVP低于6，几天至一年在职训练是层级概述，不是统一课程；受访教育71%高中或同等、14%中等后证书、7%学士，部分响应并非中国门槛。BLS本岗典型无正式学历、无相关职业经验、短期在职训练，与调查教育需求是不同指标，不等于免食品安全训练。当前兴趣R82/C56/E36/S36/A17/I14，R、C领先而E/S并列；原RC摘要可作前两类概括，不编唯一第三位。现实型对应食材设备，常规型对应程序记录；分数为职业活动轮廓，非人员比例、人格能力或录用阈值。当前行业40%卫生社会救助/30%教育/18%住宿餐饮/12%其他，行业页未明年度。"
+              "美国机构与食堂厨师Zone1–2/SVP低于6，几天至一年在职训练是层级概述，不是统一课程；受访教育71%高中或同等、14%中等后证书、7%学士，部分响应并非中国门槛。BLS本岗典型无正式学历、无相关职业经验、短期在职训练，与调查教育需求是不同指标，不等于免食品安全训练。当前兴趣R82/C56/E36/S36/A17/I14，R、C领先而E/S并列；原RC摘要可作前两类概括，不编唯一第三位。现实型对应食材设备，常规型对应程序记录；分数为职业活动轮廓，非人员比例、人格能力或录用阈值。当前行业40%卫生社会救助/30%教育/18%住宿餐饮/12%其他，分行业表未标数据年。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
@@ -23681,7 +23653,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "机构与食堂厨师（Cooks, Institution and Cafeteria）是为学校、医院、养老机构、企事业单位食堂等固定人群大批量烹制与分餐的职业，对应美国 O*NET-SOC 35-2012.00：工作内容包括按菜单与膳食或营养限制烹制、按份数与份量分餐或打包、清洁设备与作业区、清洗餐具、监控并记录食品温度、按先进先出轮换与储存、盘点库存并按需求订货收货、记录用量与支出，还可能需要安排协助备餐与分餐的同事并培训新员工。本页中国部分以中式烹调师（职业编码 4-03-02-01）等可核实实体为线索：中美两套职业分类不是一一对应，本页不把美国的准备层级、资格或工资直接套用到中国大陆，也不把餐厅厨师、快餐厨师、食品制备人员或洗碗工的职责并入本职业。"
+              "机构与食堂厨师（Cooks, Institution and Cafeteria）是为学校、医院、养老机构、企事业单位食堂等固定人群大批量烹制与分餐的职业，对应美国 O*NET-SOC 35-2012.00：工作内容包括按菜单与膳食或营养限制烹制、按份数与份量分餐或打包、清洁设备与作业区、清洗餐具、监控并记录食品温度、按先进先出轮换与储存、盘点库存并按用量提出补货申请、记录用量与支出，还可能需要安排协助备餐与分餐的同事并培训新员工。本页中国部分以中式烹调师（职业编码 4-03-02-01）等可核实实体为线索：中美两套职业分类不是一一对应，本页不把美国的准备层级、资格或工资直接套用到中国大陆，也不把餐厅厨师、快餐厨师、食品制备人员或洗碗工的职责并入本职业。"
             ]
           },
           "id": "actors.display.definition_block.definition",
@@ -23824,12 +23796,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与机构与食堂厨师的关键区别是面向点单顾客、菜品随时段变化；2024 年就业 1,460,200 人，O*NET 增速类别为「远快于平均（7% 或更高）」。"
+              "餐厅厨师多按顾客订单烹制；有明确工位分工时各自完成所负责的菜品。食堂更常按既定餐次和备餐量安排。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
           "source_refs": [
-            "onet"
+            "editor",
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23880,11 +23854,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别是按顾客点单现做、菜单固定而份数随机；2024 年就业 669,500 人，O*NET 增速为「下降（-14%）」。"
+              "快餐工位通常围绕少量品项按订单制作；食堂通常先按预计餐数备料，再在开餐前完成批量烹制。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
           "source_refs": [
+            "adjacent-summary-35-2011",
             "onet"
           ],
           "type": "prose"
@@ -23922,11 +23897,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别是工序最短、点单直接决定出品顺序；2024 年就业 151,100 人，O*NET 增速为「下降（-1% 或更低）」。"
+              "简餐厨师把短单上的多项菜品协调到同一出品时间；食堂厨师更需要安排各批次能否赶上开餐。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
           "source_refs": [
+            "adjacent-summary-35-2015",
             "onet"
           ],
           "type": "prose"
@@ -23964,11 +23940,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别是不承担烹制与分餐责任；2024 年就业 902,700 人，O*NET 增速为「下降（-1% 或更低）」，常作为进入机构厨房体系的起点。"
+              "食品备制人员通常承担称量、洗切、备料等支持工作，具体是否上灶由厨房分工决定。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.difference",
           "source_refs": [
+            "enrichment",
             "onet"
           ],
           "type": "prose"
@@ -24006,11 +23983,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别是不接触食品烹制与分餐，属支持性岗位；2024 年就业 477,700 人，O*NET 增速为「变化不大」。"
+              "洗碗工的核心责任是清洗餐具和设备；别把辅助备料当成该岗位固定职责。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
           "source_refs": [
+            "announcing",
             "onet"
           ],
           "type": "prose"
@@ -24048,11 +24026,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是管理责任与菜单主导权：承担菜单设计与成本核算、人员排班与培训、出品标准制定；准备层级为 Job Zone 3，2024 年就业 197,300 人。"
+              "厨师长通常还负责菜单、质量标准与人员安排；食堂厨师岗位是否带人，取决于雇主。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.difference",
           "source_refs": [
+            "agent",
             "onet"
           ],
           "type": "prose"
@@ -24090,12 +24069,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表把机构与食堂厨师与五个相邻方向，按职业方向、核心工作与产出、关键区别和更适合什么选择四项对照；就业与增速为美国 O*NET-SOC 口径（2024 年就业、2024—2034 年预测）。"
+              "用服务对象、点单方式和备餐节奏区分相邻岗位。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.intro",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -24118,12 +24098,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "依据：O*NET OnLine 35-2012.00 与相邻职业的摘要页、就业趋势页（2026 年更新）；就业为 2024 年、增速为 2024—2034 年预测期口径，不用于推断个人录用机会或收入。"
+              "美国职业档案提供任务参照；应聘时按实际分工判断，不用职业名称推断一个岗位的全部职责。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.evidence_note",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -26135,12 +26116,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的机构与食堂厨师招聘报价统计；单条单位或平台报价不能代表全国水平"
+              "信丰一则制造企业厨师招聘列 1 人、6,000–7,500 元/月，要求相应工厂食堂经验和健康证；黄埔团餐企业另一条公告列 3 人、7,000 元/月，工作重点是按食堂食谱烹制大锅菜。问清一餐要做多少份、你是否排菜单、早餐和留样归谁。两则历史报价不能用于估算全国食堂厨师工资。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "cafeteria-xinfeng",
+            "cafeteria-huangpu"
           ],
           "type": "prose"
         },
@@ -26450,7 +26432,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前O*NET行业页卫生社会救助40%，不是工资；未明统计年度，不以网页更新日猜测年份。"
+              "当前O*NET行业页卫生社会救助40%，不是工资；O*NET 分行业表未标数据年。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
@@ -30297,7 +30279,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "负责排班协助、订货收货与出品标准执行，并可能管理小组。"
+              "可协助排班、提出补货申请并执行出品标准。获单位授权时可协助查验来货和记录异常，正式验收与采购审批按机构分工执行。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.04.responsibility",
@@ -31006,12 +30988,13 @@
                 ]
               },
               {
-                "answer": "机构与食堂厨师面向固定人群按周期菜单与膳食限制批量供餐，并常承担用量与支出记录；餐厅厨师面向点单顾客、菜品范围更广；食品制备人员以清洗切配等前置备料为主，不承担烹制与分餐责任。",
+                "answer": "机构和食堂厨师按菜单、份数和膳食要求批量烹制；餐厅厨师按餐厅菜单或点单生产；食品制备人员侧重清洗、切配、称量，也可能分份装盘。区分时问谁负责烹制和批次交接。",
                 "id": "actors.faq.2",
                 "question": "机构与食堂厨师与餐厅厨师、食品制备人员有什么区别？",
                 "question_key": "career.faq.cooks-institution-and-cafeteria.2",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "onet-food-prep-faq"
                 ]
               },
               {
@@ -31024,9 +31007,9 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：菜单、用量与库存信息、批量烹制与供餐节拍、温控与记录三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "点单整理、库存提示和设备定时可由软件或设备辅助；这些是可能的用法。本页没有这一职业实际采用率、工时变化或岗位替代的实测数据。",
                 "id": "actors.faq.4",
-                "question": "机构与食堂厨师哪些任务已有 AI 变化证据？",
+                "question": "哪些任务可能由软件或设备辅助？",
                 "question_key": "career.faq.cooks-institution-and-cafeteria.4",
                 "source_refs": [
                   "onet"
@@ -31042,30 +31025,36 @@
                 ]
               },
               {
-                "answer": "美国 2025 年中位时薪 18.01 美元、年薪 37,450 美元（35-2012.00 单一职业口径），分位为年薪 28,480／32,440／37,450／44,800／49,670 美元；中国大陆未取得职业级工资数值，本页按缺口处理，不用行业均值代填。",
+                "answer": "美国 2025 年职业中位时薪为 18.01 美元、年工资中位数为 37,450 美元。大陆部分岗位公开报价见本页两条样本；未核到全国职业级工资分布，不能从两则招聘推算。",
                 "id": "actors.faq.6",
                 "question": "机构与食堂厨师工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.cooks-institution-and-cafeteria.6",
                 "source_refs": [
-                  "oews"
+                  "r2-pay-3",
+                  "cafeteria-xinfeng",
+                  "cafeteria-huangpu"
                 ]
               },
               {
-                "answer": "美国准备层级为 Job Zone 1–2，教育需求受访比例显示 71% 表示需要高中或同等学历、14% 表示中等后教育证书、7% 表示学士学位，技能主要靠在职训练；国内机构食堂多从分餐与备料岗做起，部分单位要求食品安全或营养培训。",
+                "answer": "BLS 将美国机构与食堂厨师的典型入行教育列为无需正式学历，并列短期在岗训练。大陆可从备料、分餐或后厨帮工了解分工；是否接受新人、是否要求大型食堂经验及健康材料，要看目标雇主。",
                 "id": "actors.faq.7",
                 "question": "机构与食堂厨师需要什么学历，又该怎样训练？",
                 "question_key": "career.faq.cooks-institution-and-cafeteria.7",
                 "source_refs": [
-                  "onet"
+                  "bls-projections",
+                  "cafeteria-xinfeng",
+                  "cafeteria-huangpu"
                 ]
               },
               {
-                "answer": "美国没有统一的强制证照；国内健康管理与食品安全培训是常见前置条件，中式烹调师技能等级通常不是机构食堂一线岗位的门槛，具体要求按目标单位与主管部门规定。",
+                "answer": "中国大陆《食品安全法》第45条要求接触直接入口食品的人员每年健康检查并在取得健康证明后上岗。教育部学校食堂通知另要求学校食堂从业人员持有效健康证明上岗、每年健康检查。医院和企业食堂按其适用规则另查。美国食品从业认证按州和地方要求。",
                 "id": "actors.faq.8",
                 "question": "做机构与食堂厨师必须考证吗？",
                 "question_key": "career.faq.cooks-institution-and-cafeteria.8",
                 "source_refs": [
-                  "cn-rule"
+                  "cn-food-law",
+                  "cafeteria-school-moe",
+                  "bls-family-context"
                 ]
               },
               {
@@ -31078,12 +31067,12 @@
                 ]
               },
               {
-                "answer": "美国官方预测显示 2024—2034 年该职业增速为「慢于平均（1% 至 2%）」，同期职位空缺约 69,700 个；机构供餐的作息相对规律，但要按目标单位类型与本地招聘核对。",
+                "answer": "BLS 预计，美国机构与食堂厨师在 2025–2035 年就业增长 2.8%，年均约 62,900 个空缺，包含替补需求。看大陆岗位时，先确认是学校、医院还是员工食堂，再问供餐人数、餐次、工位分工与资格条件。",
                 "id": "actors.faq.10",
                 "question": "现在选择机构与食堂厨师职业，还应考虑什么？",
                 "question_key": "career.faq.cooks-institution-and-cafeteria.10",
                 "source_refs": [
-                  "bls"
+                  "bls-projections"
                 ]
               }
             ]
@@ -31507,14 +31496,14 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "支持本职业的任务、工作情境与准备层级。",
                   "不含技术采用与岗位替代数据。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "35-2012身份与任务概述；具体类别、准备、情境和兴趣核详细页，当前行业40/30/18/12未明年度，不含本岗AI采用或就业因果。",
+                "limitation": "35-2012身份与任务概述；具体类别、准备、情境和兴趣核详细页，当前行业40/30/18/12O*NET 分行业表未标数据年，不含本岗AI采用或就业因果。",
                 "market": "美国",
                 "name": "O*NET OnLine：Cooks, Institution and Cafeteria（35-2012.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31869,10 +31858,10 @@
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet-industry",
-                "limitation": "40%卫生社会救助/30%教育/18%住宿餐饮/12%其他为就业分布，未明年度，不是行业工资。",
+                "limitation": "概览页将主要行业类别标为 2025；分行业表列具体就业占比，但未单标数据年。占比不是工资。",
                 "market": "美国",
                 "name": "O*NET机构与食堂厨师当前行业就业分布",
-                "period": "当前页面未明年度；查读2026-10-09",
+                "period": "分行业表未标数据年",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/35-2012.00"
@@ -31882,7 +31871,7 @@
                   "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
                   "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
                   "菜单与膳食限制｜按供餐计划核对菜单｜按周期菜单与用餐人数安排份数，核对膳食与营养限制、过敏原与忌口，把限制落到具体餐次与菜位；菜单或用餐人数变更时先与主管确认再调整。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
-                  "备料与称量｜按配方与份数备料｜验收食材并按批次核对保质期，按配方称量与切配，处理肉、鱼与禽类，按份数分份并隔离与标注过敏原相关原料。 — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
+                  "备料与称量｜按配方与份数备料｜按单位授权协助收货查验与批次核对，按配方称量与切配，处理肉、鱼与禽类，按份数分份并隔离与标注过敏原相关原料。 — 0/100; weight=1/3; actors.display.responsibilities_block.02[0]",
                   "批量烹制与分餐｜按供餐时段批量出品｜按设备产能批量加热、烘烤、蒸煮与保温，核对中心温度与成熟度，按份量分餐或按份打包，并在餐线、窗口或病房按供餐时段交付。 — 0/100; weight=1/3; actors.display.responsibilities_block.03[0]"
                 ],
                 "evidence_type": "编辑模型估算方法",
@@ -31893,6 +31882,111 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第 1 条：厨师 1 名、6,000–7,500 元/月，要求大规模制造企业厨师经验、健康证及大小锅烹饪能力。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "cafeteria-xinfeng",
+                "limitation": "仅说明该次公告和所列岗位；不代表全国薪资或当前仍有空缺。",
+                "market": "中国大陆",
+                "name": "江西信丰：制造企业食堂厨师招聘",
+                "period": "2026-10-14",
+                "publisher": "信丰县人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.jxxf.gov.cn/xfxxxgk/wgjy/202610/f42e1484f9924761a05a998bf4bb1818.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第三项北京快客利广州分公司的厨师岗 3 人、7,000 元/月；按食堂食谱烹制大锅菜，负责供应量和出品质量。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "cafeteria-huangpu",
+                "limitation": "仅说明该次公告和所列岗位；不代表全国薪资或当前仍有空缺。",
+                "market": "中国大陆",
+                "name": "广州黄埔：食堂大锅菜厨师",
+                "period": "2026-08-18",
+                "publisher": "广州市黄埔区劳动就业服务管理中心",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzjg/qt/ldjyfwzx/kljy/content/post_10969476.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "学校食堂工作人员“十不准”第一项涉及有效健康证明；校园食品安全“十必须”涉及特定学校和幼儿园的食品范围。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "cafeteria-school-moe",
+                "limitation": "学校食堂规则；不可直接套用为医院或企业食堂统一要求。",
+                "market": "中国大陆",
+                "name": "校园食品安全“十必须”和食堂工作人员“十不准”",
+                "period": "2026-03-17",
+                "publisher": "教育部办公厅",
+                "scope": "exact",
+                "url": "https://www.moe.gov.cn/srcsite/A17/moe_943/s3283/202603/t20260324_1431938.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "用于职业概述与任务对照。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "adjacent-summary-35-2011",
+                "limitation": "仅相邻职业对照；不用于本职业工资或资格。",
+                "market": "美国",
+                "name": "快餐厨师 (35-2011.00)",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2011.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "用于职业概述与任务对照。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "adjacent-summary-35-2015",
+                "limitation": "仅相邻职业对照；不用于本职业工资或资格。",
+                "market": "美国",
+                "name": "简餐厨师 (35-2015.00)",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2015.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "包括称量、切配、分份和装盘。"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "onet-food-prep-faq",
+                "limitation": "美国职责参照。",
+                "market": "美国",
+                "name": "食品制备人员职责",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/35-2021.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "学校食堂大宗食材由学校食品安全员与食堂管理人员等集体验收，并保留查验记录。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "cafeteria-school-bulk-acceptance",
+                "limitation": "适用中国大陆学校食堂的大宗食材。",
+                "market": "中国大陆",
+                "name": "学校食堂大宗食材采购验收管理工作指引",
+                "period": "2025-09",
+                "publisher": "教育部办公厅、市场监管总局办公厅",
+                "scope": "exact",
+                "url": "https://www.moe.gov.cn/srcsite/A17/moe_943/s3283/202509/t20250908_1412385.html"
               }
             ]
           },
@@ -34885,13 +34979,14 @@
           "china_soc_row": "美国35-2012.00机构与食堂厨师；中国中式烹调师等实体另核，两套职业分类非一一对应，本轮未取得对应精确工资。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-cafeteria-xinfeng",
+            "posting-cafeteria-huangpu"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响机构与食堂厨师的工资吗？",
             "driver_heading": "哪些行业与场景会用到机构与食堂厨师？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "准备方向与实际岗位要求怎样核对？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35090,7 +35185,7 @@
           },
           {
             "industry": "其他行业",
-            "median": "其他12%（当前行业页未明年度；未进一步拆分）",
+            "median": "其他12%（O*NET 分行业占比表未标数据年；未进一步拆分）",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -36651,7 +36746,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解机构与食堂厨师的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36763,14 +36858,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解我的人格偏好"
@@ -37183,72 +37270,75 @@
       },
       {
         "derivation": null,
-        "display_value": "约 466,100 人（2024 年）",
+        "display_value": "454,000人（2025）",
         "fact_id": "employment",
         "market": "美国",
-        "measure": "就业规模（单一职业口径）",
-        "occupation_scope": "Cooks, Institution and Cafeteria（O*NET-SOC 35-2012.00）",
-        "period": "2024 年；检索 2026-09-18",
+        "measure": "基期就业",
+        "occupation_scope": "35-2012机构与食堂厨师精确行，非家族",
+        "period": "2025—2035（2025基年）；查读2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "慢于平均（2024—2034 年，1% 至 2%）",
+        "display_value": "+2.8%（2025—2035；OOH/O*NET整数3%）",
         "fact_id": "growth",
         "market": "美国",
-        "measure": "就业变化率（单一职业口径）",
-        "occupation_scope": "Cooks, Institution and Cafeteria（O*NET-SOC 35-2012.00）；O*NET 分类标签为「Slower than average」",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "measure": "就业增长",
+        "occupation_scope": "35-2012机构与食堂厨师精确行，非家族",
+        "period": "2025—2035（2025基年）；查读2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 69,700 个（2024—2034 年预测期内的职位空缺，含增长与替换需求）",
+        "display_value": "62,900个/年（2025—2035年均，含替换）",
         "fact_id": "openings",
         "market": "美国",
-        "measure": "职位空缺（单一职业口径）",
-        "occupation_scope": "Cooks, Institution and Cafeteria（O*NET-SOC 35-2012.00）；O*NET 说明空缺包含增长需求与替换需求",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "measure": "年均空缺",
+        "occupation_scope": "35-2012机构与食堂厨师精确行，非家族",
+        "period": "2025—2035（2025基年）；查读2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "卫生和社会救助40%（当前本职业就业占比，行业页未明年度）",
+        "display_value": "卫生和社会救助40%（当前本职业就业占比，分行业表未标数据年）",
         "fact_id": "industry-theater",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
         "occupation_scope": "35-2012当前行业分布，非工资",
-        "period": "当前行业页未明年度；同版查读2026-10-09",
+        "period": "分行业表未标数据年",
         "source_refs": [
           "onet-industry"
         ]
       },
       {
         "derivation": null,
-        "display_value": "教育30%（当前本职业就业占比，行业页未明年度）",
+        "display_value": "教育30%（当前本职业就业占比，分行业表未标数据年）",
         "fact_id": "industry-education",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
         "occupation_scope": "35-2012当前行业分布，非工资",
-        "period": "当前行业页未明年度；同版查读2026-10-09",
+        "period": "分行业表未标数据年",
         "source_refs": [
           "onet-industry"
         ]
       },
       {
         "derivation": null,
-        "display_value": "住宿餐饮18%（当前本职业就业占比，行业页未明年度）",
+        "display_value": "住宿餐饮18%（当前本职业就业占比，分行业表未标数据年）",
         "fact_id": "industry-amusement",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
         "occupation_scope": "35-2012当前行业分布，非工资",
-        "period": "当前行业页未明年度；同版查读2026-10-09",
+        "period": "分行业表未标数据年",
         "source_refs": [
           "onet-industry"
         ]
@@ -37332,7 +37422,7 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "derivation": "按三项选定任务等权汇总的编辑估算（0–100），不表示被替代概率。 三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
         "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
@@ -37342,6 +37432,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第 1 条：厨师 1 名、6,000–7,500 元/月，要求大规模制造企业厨师经验、健康证及大小锅烹饪能力。",
+        "fact_id": "posting-cafeteria-xinfeng",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "江西信丰：制造企业食堂厨师招聘",
+        "period": "2026-10-14",
+        "source_refs": [
+          "cafeteria-xinfeng"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第三项北京快客利广州分公司的厨师岗 3 人、7,000 元/月；按食堂食谱烹制大锅菜，负责供应量和出品质量。",
+        "fact_id": "posting-cafeteria-huangpu",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "广州黄埔：食堂大锅菜厨师",
+        "period": "2026-08-18",
+        "source_refs": [
+          "cafeteria-huangpu"
+        ]
       }
     ]
   },
@@ -37350,7 +37464,7 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务辅助估算（编辑判断，三项任务）"
     },
     "badges": [
       "服务与运营 · 机构供餐与批量烹制",
@@ -37368,19 +37482,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，慢于平均 1% 至 2%）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 466,100 人）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国职位空缺（2024—2034 年，约 69,700 个）"
+        "label": "美国预计年均职位空缺（2025–2035 年）"
       },
       {
         "availability": "missing",
@@ -37394,17 +37508,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "机构与食堂厨师（O*NET-SOC 35-2012.00）为学校、医院与企事业单位食堂等固定人群按菜单与膳食限制批量烹制、分餐并记录：覆盖批量加热与分份、膳食限制与过敏原处理、温控与卫生、订货收货与库存轮换；含美国 2025 年中位时薪 18.01 美元、2024—2034 年增速「慢于平均（1% 至 2%）」与职位空缺约 69,700 个、中国大陆职业级工资缺口、灼伤烫伤与食品安全风险控制及虚构练习边界。"
+      "text": "食堂厨师怎样按餐次准备大批量菜品？看员工食堂和团餐大锅菜招聘、学校食堂安全要求及美国就业数据。"
     },
     "title": {
       "availability": "available",
       "text": "机构与食堂厨师"
     }
   },
-  "source_content_sha256": "81c68b61da19b93d9979b76dcf9ca07eaa4d2e1c439aeda6a136b8c0243549de",
+  "source_content_sha256": "bd1739c2269cf7884c545e715703596537f73c1ca5cc78469869d810500495ff",
   "subject": {
     "canonical_slug": "cooks-institution-and-cafeteria",
     "name": "机构与食堂厨师",
-    "summary": "机构与食堂厨师（Cooks, Institution and Cafeteria）在美国对应 O*NET-SOC 35-2012.00：为学校、医院、养老机构、企事业单位食堂等固定人群按菜单与膳食限制大批量烹制与分餐，可能同时负责菜单与用量核算、订货收货、库存轮换、温控记录，并指导协助备餐与分餐的同事；中国侧以中式烹调师（职业编码 4-03-02-01）等实体另行核对，两套分类不是一一对应。"
+    "summary": "机构与食堂厨师（Cooks, Institution and Cafeteria）在美国对应 O*NET-SOC 35-2012.00：为学校、医院、养老机构、企事业单位食堂等固定人群按菜单与膳食限制大批量烹制与分餐，可能同时负责菜单与用量核算、提出补货申请、库存轮换、温控记录，并指导协助备餐与分餐的同事；中国侧以中式烹调师（职业编码 4-03-02-01）等实体另行核对，两套分类不是一一对应。"
   }
 }

@@ -2,9 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -7230,12 +7227,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "证据不足：本页已查阅的国家统计局2025工资公报没有投资基金经理的精确全国职业工资分布，不能由行业均值或美国父职类数据代填。 已核事实｜谨慎信号｜本页对应 O*NET-SOC 11-3031.03「Investment Fund Managers」（精确美国职业代码）。官方范围为：为机构投资者或个人投资者提供的大型流动资产池，规划、指导或协调投资策略或运营。该职业标注 Bright Outlook。核心交付是受托管理下的投资决策与合规记录，而不是「追收益」。风险来自投资授权与限额、估值与定价口径、利益冲突与关联交易、信息披露与营销合规、以及流动性风险与赎回压力。美国工资与就业由 O*NET 以更宽父职类「Financial Managers（财务经理，上位宽类代理）」名义呈现（中位年薪 166,570 美元；2024 年就业约 868,600 人、2024—2034 增长远快于平均 7% 或更高、预计空缺 74,600 个），并标注不是本精确职业值。若你难以承受高强度决策责任、长工时与竞争压力，应把这些作为需要认真权衡的现实成本。"
+              "BLS 表 1.2（美国上位职业 11-3031）：2025 年约 879,700 个岗位，2035 年预计约 964,600 个，变化 9.7%，年均约 65,600 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "investment-fund-managers.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "cn-nbs-industry-wages"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7244,24 +7241,10 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项工作中同时完成三件事：把投资决策与执行做实（明确授权与投资目标、制定与执行策略、研究与估值、交易与执行监控、业绩与风险跟踪，产出可复核的决策与执行记录）；把受托与合规管住（投资授权与限额、估值与定价政策、利益冲突与关联交易、信息披露与营销合规、监管问询应对，按法规与机构制度执行）；并承担可界定的岗位责任（对本人投资判断与依据负责，对超出授权的产品、限额或披露事项按流程请示或转交）。建议用一次可核验的体验（用完全虚构的市场数据完成一份投资决策备忘与风险限额核对）来检验，而不是仅依据兴趣问卷的结论。"
+              "适合愿意反复核对投资依据和风险限额、记录未决问题，并在权限或数据不清时暂停决策、把未决项交给相应复核人的人。"
             ]
           },
           "id": "investment-fund-managers.quick-decision.fermat-decision-card.2",
-          "source_refs": [
-            "cn-nbs-industry-wages"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.fit-decision-checklist",
-          "data": {
-            "paragraphs": [
-              "编辑试验｜使用下文“试验题面”的100单位虚构基金，核对30%单资产上限、20%现金下限与助理交易建议；先计算再判断授权。参考答案、交付物与七日计划在入行路径板块。记录错误与升级理由，不接触真实资产或把练习当投资建议。"
-            ]
-          },
-          "id": "investment-fund-managers.quick-decision.fermat-decision-card.3",
           "source_refs": [
             "source-pack-onet-details"
           ],
@@ -7272,12 +7255,26 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜O*NET 11-3031.03 的工作活动以获取信息、分析数据、决策与解决问题、处理信息、使用计算机为主。若你愿意围绕市场与财务数据持续研究与判断、能在高强度与竞争环境下保持纪律、并把授权与合规边界放在收益之前，这些日常要求与你的工作方式更接近；兴趣与人格工具只用于设计试验，不能判断录用资格或表现。"
+              "到「入行与 F 表：定期报告材料核对」做原题和变式，再打开折叠参考解。"
+            ]
+          },
+          "id": "investment-fund-managers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "paper-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "用 F 表核对报告期和复核状态，保留两个冲突值并写明各自的交接对象。"
             ]
           },
           "id": "investment-fund-managers.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "cn-nbs-industry-wages"
+            "paper-exercise"
           ],
           "type": "prose"
         }
@@ -7294,7 +7291,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得中国大陆投资基金经理的精确全国工资分布，不能用行业均值或美国父职类代填。职业定义｜本页对应O*NET 11-3031.03 Investment Fund Managers，围绕机构或个人投资者的资产池规划、指导或协调投资策略与运营。主要交付是研究估值、组合与限额决策、交易监控及风险披露；须先核客户目标、授权与机构制度。ECI及美国学历调查的具体信息见适配与路径，父职类工资、就业及行业数据见美国薪资板块。Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）当前美国全国工资：2025年中位166,570美元/年；2025就业879,700人，2025—2035增长7%或更高（分组标签）、年均空缺65,600个（总体预测，非AI归因）。中国精确职业工资缺口保留，行业均值只作宽参考。"
+              "本页对应美国 O*NET 11-3031.03。投资基金经理按基金目标与授权组织投资研究、组合决策、风险监控和记录交接。美国工资和就业数字采用上位职业金融经理 11-3031。"
             ]
           },
           "id": "investment-fund-managers.profile.definition-block.1",
@@ -7379,12 +7376,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入｜O*NET 11-3031.03支持精确美国职业任务和工作情境。ECI兴趣描述、Job Zone5及63%硕士/33%学士/2%硕士后证书调查用于观察典型准备程度，不是统一法定任职要求；工资、就业及行业分布来自Financial Managers父职类，具体期间、数值与边界已在美国薪资及入行路径正文公开说明。Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）当前美国全国工资：2025年中位166,570美元/年；2025就业879,700人，2025—2035增长7%或更高（分组标签）、年均空缺65,600个（总体预测，非AI归因）。中国精确职业工资缺口保留，行业均值只作宽参考。"
+              "O*NET 11-3031.03 说明本职业任务和工作情境。美国工资采用 OEWS，就业预测采用 BLS 表 1.2。"
             ]
           },
           "id": "investment-fund-managers.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-pack-onet-details",
+            "source-pack-onet-localwages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7586,7 +7585,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜基于投资研究、估值、交易与披露任务，编辑建议先在虚构材料中试验数据整理、情景计算与摘要草稿辅助。生成式AI的错误、隐私和信息完整性风险须按NIST框架复核；这不是本职业效率提升或采用率的实证结论。基金决策仍按具体机构授权处理，本页不给出替代概率或时间表。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "直接回答｜基于投资研究、估值、交易与披露任务，编辑建议先在虚构材料中试验数据整理、情景计算与摘要草稿辅助。生成式AI的错误、隐私和信息完整性风险须按NIST框架复核；这不是本职业效率提升或采用率的实证结论。基金决策仍按具体机构授权处理，本页不给出替代概率或时间表。"
             ]
           },
           "id": "investment-fund-managers.ai-impact.ai-impact-table.2",
@@ -7697,7 +7696,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜投资基金经理（O*NET 11-3031.03 Investment Fund Managers，精确美国职业代码）。本页未取得中国大陆与该精确职业对应的全国职业工资分布；行业平均不能冒充中位数，中文页面语言也不构成中国等价职业或工资映射。"
+              "中国大陆工资参考"
             ]
           },
           "id": "investment-fund-managers.china-salary.career-snapshot-primary-locale.1",
@@ -7725,7 +7724,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮研究未建立投资基金经理在中国大陆的精确全国职业工资分布；行业平均、父职业或美国数据不能替代职业中位数、统一起薪或个人报价，本页不以任何代理数字代填。"
+              "国家统计局公布的是金融业城镇单位年平均工资。基金经理的职业工资、起薪和个人报酬需分别核对。"
             ]
           },
           "id": "investment-fund-managers.china-salary.career-snapshot-primary-locale.3",
@@ -7761,12 +7760,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国薪资参考｜O*NET 11-3031.03 国家工资页，2025年BLS OEWS，Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）口径；2026-10-11核对。"
+              "美国金融经理工资"
             ]
           },
           "id": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -7775,12 +7774,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025美国父职类工资｜Financial Managers11-3031.00国家工资页五分位94,310/125,490/166,570/219,980/323,270美元/年；基金经理详情明确工资/就业/行业来自该父职类，不能当作基金经理精确薪酬。依据：https://www.onetonline.org/link/localwages/11-3031.00。"
+              "2025 年 5 月美国上位职业 11-3031全国年薪中位数 166,570 美元，时薪中位数 80.08 美元。年薪第 10、25、50、75、90 分位依次为 94,310、125,490、166,570、219,980、323,270 美元。"
             ]
           },
           "id": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -7789,7 +7788,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "薪资口径｜OEWS统计受雇者正常工时税前工资，包含佣金与生产奖金，排除加班溢价、非生产奖金及雇主福利成本，不覆盖自雇收入；分位不是起薪。方法依据：https://www.bls.gov/oes/current/oes_tec.htm。"
+              "全国工资分位"
             ]
           },
           "id": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.3",
@@ -7804,7 +7803,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "解读说明｜该口径可用于理解相邻宽类的工资量级与需求方向，不能作为个人报价、录用保证或投资建议，也不能与中国大陆或任何其他市场直接比较，更不能据此推导本职业精确工资。"
+              "如何读工资分位"
             ]
           },
           "id": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.4",
@@ -7818,7 +7817,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业口径｜O*NET基金经理页面呈现Financial Managers父职类2025行业从业占比：金融保险32%、专业科学技术14%、公司企业管理10%；这些不是基金经理精确行业工资。"
+              "美国金融经理从业行业分布"
             ]
           },
           "id": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.5",
@@ -7832,7 +7831,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "影响因素｜基金类型（公募、私募、对冲、养老金）、机构规模、地区、业绩与激励机制、资格与经验会影响实际收入水平与波动；本页为父职类统计位置，不对应具体岗位或基金类型。"
+              "影响岗位报酬的条件"
             ]
           },
           "id": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.6",
@@ -7910,7 +7909,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验题面（费马原创，全部虚构）｜基金总资产100单位：A资产35、B资产25、现金40。练习授权限定：A、B各不得超过总资产30%，现金不得低于20%；不得借款，价格暂不变，交易不计费用。助理提出分别再买A、B各10单位，并声称“有现金就能买”。请计算各笔交易后的权重，判断能否执行，再提出最小纠偏方案。随后按A跌20%、B跌10%、现金不变的单次情景计算纠偏前后损失金额。交付一页备忘：输入、计算、违限理由、待审批事项；这是规则核对练习，不预测收益，不使用真实账户。"
+              "用 F 表核对报告期和复核状态，保留两个冲突值并写明各自的交接对象。"
             ]
           },
           "id": "investment-fund-managers.fit.riasec-fit-block.5",
@@ -7974,7 +7973,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "授权与限额风险｜触发：超出投资授权、限额或产品范围进行决策或交易。后果：可能造成受托违约与重大损失。控制：核对授权与限额、按审批流程执行、保留决策依据。边界：超限事项须按制度由有权限机构批准。"
+              "拟议操作超出投资授权、风险限额或产品范围，或无法确认适用限额。"
             ]
           },
           "id": "investment-fund-managers.risk.career-risk-cards.1",
@@ -8004,7 +8003,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "利益冲突与关联交易风险｜触发：关联交易、个人交易或外部利益未识别与披露。后果：可能造成合规风险与受托责任问题。控制：按利益冲突政策申报与回避、留存审批记录。边界：审批与豁免按制度由有权限机构作出。"
+              "关联交易、个人交易或外部利益产生尚未处理的冲突。"
             ]
           },
           "id": "investment-fund-managers.risk.career-risk-cards.3",
@@ -8057,7 +8056,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "怎样成为投资基金经理：入行准备、训练与责任路径。入门准备应从投资与金融分析、估值与风险、合规与受托责任、沟通与团队管理开始；培训或证书不自动授予投资授权或受托决策权限。"
+              "入行与 F 表：定期报告材料核对"
             ]
           },
           "id": "investment-fund-managers.path.career-path-block.1",
@@ -8071,12 +8070,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行参考｜O*NET美国职业调查中63%受访者选择硕士、33%选择学士、2%选择硕士后证书；Job Zone第五级是典型准备程度，不是对所有岗位的法定学历或统一五年经验门槛。核具体雇主任务与监督要求；学历、考试、资格注册、任职与投资授权分别确认。"
+              "在大陆可以先看基金公司的行业、固收或量化研究岗位。京管泰富基金校园招聘列出了行业及公司分析、量化策略研究等研究支持任务。向目标机构核对交付物、谁复核、资格登记要求，以及组合决策由谁授权。 中基协 2026 年规则对公募基金经理任职注册列有基金从业资格、相关业务经历和考试等条件，由公司办理。一般要求至少三年投管、投研等经历，且最近一年在金融机构从事相关工作，适用例外依规则核对。任职注册与公司授予的具体组合权限分别核对。"
             ]
           },
           "id": "investment-fund-managers.path.career-path-block.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "cn-fund-campus-example",
+            "amac-registration-2026"
           ],
           "type": "prose"
         },
@@ -8085,13 +8085,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "法域核对｜美国参考O*NET典型准备信息，并按实际投资顾问、机构与州/联邦规则确认法律身份。中国大陆按基金业务类型及机构核基金从业资格，协会2023修订问答第1、2问说明适用人员范围和通过所在机构申请注册；考试通过不等于注册完成，更不等于取得基金经理任职或投资授权。"
+              "在中国大陆公募证券投资基金中，组合经理按岗位授权提供组合决策依据和报告材料。定期报告由基金管理人编制和披露，董事会及董事保证报告内容，基金托管人按准则复核包括投资组合报告在内的指定内容并出具意见。准则第三十条列明期末组合及相关证券明细。"
             ]
           },
           "id": "investment-fund-managers.path.career-path-block.3",
           "source_refs": [
-            "source-pack-onet-details",
-            "amac-qualification-qa"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8115,12 +8114,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "阶段责任｜入口与试验阶段在监督与低授权范围内完成研究与记录；后续阶段按授权独立管理组合并对决策依据、限额与披露负责。"
+              "起步时，在监督下完成研究和记录。获授权后，可负责组合决策、限额核查和报告材料交接。正式报送和对外披露由相应义务主体按流程办理。"
             ]
           },
           "id": "investment-fund-managers.path.career-path-block.5",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-pack-onet-details",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8129,12 +8129,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参考交付｜原组合A=35%已超过30%练习上限，应先标记违限并在授权监督下处理。只买A10会变为45/25/30，A45%违限；只买B10会变为35/35/30，A和B均违限；同时买两笔则45/35/20，两资产均违限。最小纠偏是卖A5，组合成为30/25/45，A、B均不超30%且现金不少于20%；涉及真实机构时仍须核授权和处置程序。情景损失：原组合35×20%＋25×10%=9.5；纠偏后30×20%＋25×10%=8.5单位。两者是固定假设的算术，不是风险预测或推荐持仓。作品须附公式、模拟记录和一份“有现金不等于有授权”的异常升级单。"
+              "纸面练习《F 表：定期报告材料核对》。 虚构纸面练习。只有材料的报告期与清单相符、复核状态已确认，才标为资料齐全。F1 清单与材料均为第 1 季度，复核已确认。F2 两份均为第 2 季度，复核待确认。F3 清单第 3 季度，材料第 4 季度，复核已确认。复核状态交报告复核员，报告期不符交资料管理员。变式只把 F2 的复核改为已确认。逐项记录原值、状态和交接对象。 “资料齐全”仅用于内部交接，不能作为交易、估值裁决、报送或公开披露的批准。"
             ]
           },
           "id": "investment-fund-managers.path.career-path-block.6",
           "source_refs": [
-            "source-pack-onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8143,12 +8143,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七日计划（编辑训练建议，每日30—45分钟）｜第1日抄录上文虚构输入与三条授权限制；第2日复算原持仓权重并标记A违限；第3日分别及同时测试两笔买入，留计算表；第4日完成卖A5的纠偏及9.5/8.5损失复算；第5日写一页决策备忘与待审批清单；第6日让同伴按题面核算，记录其异议，不把同伴当授权人；第7日修订并提交输入表、计算表、备忘、异常单和变更记录。自评：权重/金额单位一致、限制无遗漏、结论可由输入复算、无真实投资建议。"
+              "先做原题和变式，保存第一稿。再到「常见问题与边界」打开折叠参考解，核对原值和交接分工。"
             ]
           },
           "id": "investment-fund-managers.path.career-path-block.7",
           "source_refs": [
-            "source-pack-onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8179,7 +8179,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "投资基金经理的市场信号与相关方向：本页只陈述来源覆盖范围内的观察。"
+              "职业前景与相关方向"
             ]
           },
           "id": "investment-fund-managers.market-signals.market-signal-card.1",
@@ -8194,12 +8194,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）总体就业预测，非AI归因｜O*NET 11-3031.03：2025年就业879,700人，2025—2035增长7%或更高（分组标签），预计年均空缺65,600个（含增长与替补）。证据不足：中国该职业全国就业预测及规范招聘样本未取得，不能转换个人录用概率。"
+              "BLS 表 1.2（美国上位职业 11-3031）：2025 年约 879,700 个岗位，2035 年预计约 964,600 个，变化 9.7%，年均约 65,600 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "investment-fund-managers.market-signals.market-signal-card.2",
           "source_refs": [
-            "source-pack-onet-industry"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8208,12 +8208,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）总体就业预测，非AI归因｜O*NET 11-3031.03：2025年就业879,700人，2025—2035增长7%或更高（分组标签），预计年均空缺65,600个（含增长与替补）。证据不足：中国该职业全国就业预测及规范招聘样本未取得，不能转换个人录用概率。"
+              "BLS 表 1.2（美国上位职业 11-3031）：2025 年约 879,700 个岗位，2035 年预计约 964,600 个，变化 9.7%，年均约 65,600 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "investment-fund-managers.market-signals.market-signal-card.3",
           "source_refs": [
-            "source-pack-onet-industry"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8302,7 +8302,7 @@
                 ]
               },
               {
-                "answer": "模型输出不能替代受托判断与披露决定。人类必须回看原始数据与授权记录并复核关键判断，并对授权与限额、估值裁决、执行决定与披露承担责任；超限与豁免事项按制度由有权限机构批准。",
+                "answer": "发现超限或授权不明时，先暂停相关操作，保留原始数据、适用限额与处置记录，并报风控或合规。内部例外只适用于制度允许的范围，法律、基金合同和产品约束仍须遵守。 估值裁决与正式披露分别交由获授权岗位和相应义务主体处理。",
                 "id": "investment-fund-managers.faq.5",
                 "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.investment-fund-managers.human-control",
@@ -8312,7 +8312,7 @@
                 ]
               },
               {
-                "answer": "证据不足：本轮研究未建立投资基金经理在中国大陆的精确全国职业工资分布；行业平均、父职业或美国数据不能替代职业中位数、统一起薪或个人报价，本页展示缺失而不使用代理数字代填。",
+                "answer": "国家统计局公布的是金融业城镇单位年平均工资。基金经理的职业工资分布、起薪与个人报酬要分别核对。",
                 "id": "investment-fund-managers.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.investment-fund-managers.china-pay",
@@ -8321,23 +8321,23 @@
                 ]
               },
               {
-                "answer": "O*NET 呈现的该宽类数据为 2025 年中位时薪 80.08 美元、中位年薪 166,570 美元，且以更宽父职类 Financial Managers 名义呈现，不是本精确职业值；O*NET 摘要页未列 10/25/75/90 分位，本页不发布。OEWS包含符合定义的激励工资、佣金及生产奖金，排除非生产奖金与雇主福利成本，不等于个人到手收入或全部薪酬。",
+                "answer": "2025 年 5 月美国上位职业 11-3031全国年薪中位数 166,570 美元，时薪中位数 80.08 美元。年薪第 10、25、50、75、90 分位依次为 94,310、125,490、166,570、219,980、323,270 美元。",
                 "id": "investment-fund-managers.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.investment-fund-managers.us-pay",
                 "source_refs": [
-                  "source-pack-onet-details",
-                  "bls-oews-methods"
+                  "source-pack-onet-localwages"
                 ]
               },
               {
-                "answer": "O*NET美国调查学历比例是典型准备信息，不是所有岗位的法定学历或统一经验门槛。中国大陆须按基金业务和机构核从业资格及注册路径；考试、资格注册、任职登记与投资授权是不同状态。",
+                "answer": "在大陆可以先看基金公司的行业、固收或量化研究岗位。京管泰富基金校园招聘列出了行业及公司分析、量化策略研究等研究支持任务。向目标机构核对交付物、谁复核、资格登记要求，以及组合决策由谁授权。 中基协 2026 年规则对公募基金经理任职注册列有基金从业资格、相关业务经历和考试等条件，由公司办理。一般要求至少三年投管、投研等经历，且最近一年在金融机构从事相关工作，适用例外依规则核对。任职注册与公司授予的具体组合权限分别核对。 在中国大陆公募证券投资基金中，组合经理按岗位授权提供组合决策依据和报告材料。定期报告由基金管理人编制和披露，董事会及董事保证报告内容，基金托管人按准则复核包括投资组合报告在内的指定内容并出具意见。准则第三十条列明期末组合及相关证券明细。",
                 "id": "investment-fund-managers.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.investment-fund-managers.education-path",
                 "source_refs": [
-                  "source-pack-onet-details",
-                  "amac-qualification-qa"
+                  "cn-fund-campus-example",
+                  "amac-registration-2026",
+                  "cn-work-example"
                 ]
               },
               {
@@ -8351,23 +8351,21 @@
                 ]
               },
               {
-                "answer": "美国侧就业与展望由 O*NET 以更宽父职类 Financial Managers 名义呈现：2024 年就业约 868,600 人、2024—2034 增长远快于平均（7% 或更高）、预计空缺 74,600 个；该值为父职类代理口径，不等于本精确职业预测，也不能直接转换为招聘规模或个人录用概率。",
+                "answer": "BLS 表 1.2（美国上位职业 11-3031）：2025 年约 879,700 个岗位，2035 年预计约 964,600 个，变化 9.7%，年均约 65,600 个职位空缺，含人员替补。人数分别取整。",
                 "id": "investment-fund-managers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.investment-fund-managers.outlook-transition",
                 "source_refs": [
-                  "source-pack-onet-summary",
-                  "source-pack-onet-details"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "本页不给出就业或录用结论，而是提供可核验的试验路径：用完全虚构的市场数据完成投资决策备忘、组合与风险限额核对、估值口径说明与合规披露要点；用可观察交付判断是否继续，而不是只凭兴趣问卷或宣传。",
+                "answer": "用 F 表核对报告期和复核状态，保留两个冲突值并写明各自的交接对象。",
                 "id": "investment-fund-managers.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.investment-fund-managers.career-worth",
                 "source_refs": [
-                  "source-pack-onet-details",
-                  "source-pack-onet-summary"
+                  "paper-exercise"
                 ]
               },
               {
@@ -8378,6 +8376,15 @@
                 "source_refs": [
                   "source-pack-onet-details",
                   "cn-nbs-industry-wages"
+                ]
+              },
+              {
+                "answer": "原题仅 F1 资料齐全。F2 交报告复核员，F3 交资料管理员，保留第 3、4 季度两个原值。变式 F1、F2 资料齐全，F3 仍待核。练习只核资料交接。 “资料齐全”仅用于内部交接，不能作为交易、估值裁决、报送或公开披露的批准。",
+                "id": "investment-fund-managers.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.investment-fund-managers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
                 ]
               }
             ]
@@ -8498,12 +8505,11 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "本 Worker 已重新打开页面，仅用于China exact occupation wage evidence boundary及声明的职业和市场范围。",
-                  "行业平均工资不是该职业的全国中位数、起薪或个人到手收入。"
+                  "表 2 和表 5 分列城镇非私营单位和私营单位金融业的年平均工资。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "cn-nbs-industry-wages",
-                "limitation": "行业平均工资不是该职业的全国中位数、起薪或个人到手收入。",
+                "limitation": "行业均值适合做背景。该表未单列投资基金经理的工资。",
                 "market": "中国",
                 "name": "2025年城镇单位就业人员年平均工资情况 - 国家统计局",
                 "period": "2025 annual wages; published 2026-05-15; retrieved 2026-08-31",
@@ -8562,18 +8568,18 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "用于核对本职业的主要行业分布（金融与保险、专业科学与技术服务）。",
+                  "用于核对美国上位职业 11-3031 的从业行业分布。",
                   "行业分布不建立中国映射。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
                 "limitation": "Financial Managers父职类行业分布；不代表投资基金经理独立行业分布或中国映射。",
                 "market": "美国",
-                "name": "Industries: 11-3031.03 - Investment Fund Managers",
+                "name": "美国金融经理从业行业（上位职业 11-3031）",
                 "period": "current page; accessed 2026-08-31",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/industry/11-3031.03"
+                "url": "https://www.onetonline.org/link/industry/11-3031.00"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -8608,33 +8614,32 @@
                 "url": "https://www.onetonline.org/link/localtraining/11-3031.03"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "工资入口访问失败；中位数已通过O*NET details的Wages & Employment Trends核验，Financial Managers父职类2025统计。",
-                  "保留所显示的期间、就业人群、地域与计量单位；直接访问 BLS 失败不影响已打开的 O*NET 页面。"
+                  "2025 年 5 月美国上位职业 11-3031全国年薪中位数 166,570 美元，时薪中位数 80.08 美元。年薪第 10、25、50、75、90 分位依次为 94,310、125,490、166,570、219,980、323,270 美元。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "O*NET OnLine 呈现的 BLS OEWS 工资数据；本页为父职类代理口径。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
-                "name": "National Wages: 11-3031.03 - Investment Fund Managers",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "name": "美国金融经理全国工资（上位职业 11-3031）",
+                "period": "2025-05",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/11-3031.03"
+                "url": "https://www.onetonline.org/link/localwages/11-3031.00"
               },
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "用于核对职业身份、入门与就业展望入口（就业与展望为父职类代理口径）。",
-                  "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。"
+                  "本页就业预测采用 BLS 表 1.2。",
+                  "本页就业预测采用 BLS 表 1.2。"
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "source-pack-onet-summary",
                 "limitation": "职业描述适用11-3031.03；工资、就业、行业数据是Financial Managers父职类口径。",
                 "market": "美国",
                 "name": "11-3031.03 - Investment Fund Managers",
-                "period": "2026职业页；工资2025、就业2024、预测2024—2034；2026-10-03核查",
+                "period": "职业资料或动态查询",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/11-3031.03"
@@ -8697,7 +8702,7 @@
                 "id": "sec-fiduciary-2019",
                 "limitation": "仅适用于该美国法律关系；不能仅凭Investment Fund Managers职位名称认定适用或外推中国要求。",
                 "market": "见适用范围",
-                "name": "SEC 投资顾问行为标准解释 IA-5248",
+                "name": "美国 SEC 投资顾问行为标准解释",
                 "period": "2019-06-05；2026-10-03核查",
                 "publisher": "U.S. Securities and Exchange Commission",
                 "scope": "contextual",
@@ -8784,21 +8789,72 @@
                 "url": "https://www.onetonline.org/link/summary/13-1141.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "研究估值并制定投资策略 — 75/100; weight=1/3; investment-fund-managers.profile.responsibilities-block.4[0]",
-                  "执行交易并监控风险 — 50/100; weight=1/3; investment-fund-managers.profile.responsibilities-block.4[0]",
-                  "复核业绩与合规披露 — 75/100; weight=1/3; investment-fund-managers.profile.responsibilities-block.4[0]"
+                  "BLS 表 1.2（美国上位职业 11-3031）：2025 年约 879,700 个岗位，2035 年预计约 964,600 个，变化 9.7%，年均约 65,600 个职位空缺，含人员替补。人数分别取整。",
+                  "BLS 表 1.2 对美国上位职业金融经理 11-3031 列出的典型准备是学士学位及五年以上相关职业经验。具体基金岗位的职责和资格应另查目标职位。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "11-3031",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中国证监会公募基金定期报告准则第三十条列出投资组合报告的披露项目，包括期末资产组合及部分股票、债券明细。该来源说明公募基金报告的工作产出。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "案例不代表全国职业工资、入行或招聘。",
+                "market": "中国大陆",
+                "name": "公募基金定期报告内容与格式准则",
+                "period": "2026-05-01",
+                "publisher": "中国证券监督管理委员会",
+                "scope": "具名工作实例",
+                "url": "https://www.csrc.gov.cn/csrc/c101954/c7619929/7619929/files/6597e7afd35843e1a6ec023ea547d126.pdf"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "F 表：定期报告材料核对",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "行业及固定收益研究员、量化研究员提供研究支持，产出行业或公司分析、量化策略研究。"
+                ],
+                "id": "cn-fund-campus-example",
+                "limitation": "单雇主的投研入口实例，开放状态和实际要求以岗位公告为准。",
+                "market": "中国大陆",
+                "name": "京管泰富基金校园招聘",
+                "period": "查阅时页面",
+                "publisher": "北京京管泰富基金管理有限责任公司",
+                "url": "https://bscomcfund.com/main/aboutus/recuritinfo/xyrecurit/index.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "附件第 2、5、7 条说明适用人员、公司办理注册及基金经理注册条件。"
+                ],
+                "id": "amac-registration-2026",
+                "limitation": "具体产品及任职例外依适用条款核对。",
+                "market": "中国大陆",
+                "name": "基金业协会投资管理人员注册登记规则（2026 年修订）",
+                "period": "2026-01-16",
+                "publisher": "中国证券投资基金业协会",
+                "url": "https://www.amac.org.cn/xwfb/tzgg/202601/t20260116_27204.html"
               }
             ]
           },
@@ -9385,7 +9441,7 @@
         "heading": "投资基金经理的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "以下阶段是基于O*NET任务的编辑训练结构，无固定晋升年限或录用保证；中国资格与美国典型准备信息分开核。",
+        "boundary": "研究与组合管理承担不同职责。可先核对投研岗的带教和复核安排，再了解组合授权、资格登记和披露分工。",
         "competence_ladder": [
           {
             "description": "确认来源、权限和版本。",
@@ -9423,7 +9479,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "中国大陆 / 美国",
+          "jurisdiction": "中国大陆公募证券投资基金",
           "summary": {
             "$item": "investment-fund-managers.path.career-path-block.3",
             "block": "path",
@@ -9504,6 +9560,42 @@
               "item": "investment-fund-managers.source-register.published.1"
             },
             "scope": "使用数字工具做模拟作品时的输出与数据核查边界。"
+          },
+          {
+            "href": {
+              "$source": "cn-fund-campus-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "investment-fund-managers.source-register.published.1"
+            },
+            "id": "investment-fund-managers.review.cn-fund-campus-example",
+            "label": {
+              "$source": "cn-fund-campus-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "investment-fund-managers.source-register.published.1"
+            },
+            "scope": "公募基金投研岗位的具名入口实例。"
+          },
+          {
+            "href": {
+              "$source": "amac-registration-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "investment-fund-managers.source-register.published.1"
+            },
+            "id": "investment-fund-managers.review.amac-registration-2026",
+            "label": {
+              "$source": "amac-registration-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "investment-fund-managers.source-register.published.1"
+            },
+            "scope": "适用公募基金经理任职注册与机构办理条件。"
           }
         ],
         "tracks": [
@@ -9566,17 +9658,17 @@
             "stages": [
               {
                 "credentials": "核具体雇主、法域及机构要求；训练作品不产生投资授权。",
-                "next_moves": "完成本页固定题面。",
-                "readiness_evidence": "持仓权重和限制核对表。",
+                "next_moves": "向带教人要一份脱敏或虚构的授权清单及限额表，确认适用范围和版本。",
+                "readiness_evidence": "标有授权来源、版本和复核人的限额核对记录。",
                 "responsibility": "读取组合授权与风险限额，不下真实订单。",
                 "role": "限额观察"
               },
               {
                 "credentials": "核具体雇主、法域及机构要求；训练作品不产生投资授权。",
-                "next_moves": "记录需要批准的处置步骤。",
-                "readiness_evidence": "变更前后持仓、限额及情景表。",
-                "responsibility": "按授权条件计算违限与纠偏。",
-                "role": "模拟纠偏"
+                "next_moves": "核对谁有权处理超限。报告材料的交接另见 F 表。",
+                "readiness_evidence": "原始数值、限额依据和待复核记录。",
+                "responsibility": "用带教人提供的虚构持仓和适用限额表核对是否超限。发现异常先记下原值和规则依据，再交带教人复核。",
+                "role": "受监督的限额核对"
               },
               {
                 "credentials": "核具体雇主、法域及机构要求；训练作品不产生投资授权。",
@@ -9791,7 +9883,7 @@
               "investment-fund-managers.review.sec-fiduciary-2019"
             ],
             "id": "risk-1",
-            "mitigation": "核对授权与限额、按审批流程执行、保留决策依据。",
+            "mitigation": "发现超限或授权不明时，先暂停相关操作，保留原始数据、适用限额与处置记录，并报风控或合规。内部例外只适用于制度允许的范围，法律、基金合同和产品约束仍须遵守。",
             "scenario": {
               "$item": "investment-fund-managers.risk.career-risk-cards.1",
               "block": "risk",
@@ -9804,8 +9896,7 @@
             "affected_roles": "投资基金经理",
             "consequence": "可能造成净值与业绩失真。",
             "evidence_refs": [
-              "investment-fund-managers.review.source-pack-onet-details",
-              "investment-fund-managers.review.sec-fiduciary-2019"
+              "investment-fund-managers.review.source-pack-onet-details"
             ],
             "id": "risk-2",
             "mitigation": "按估值政策执行、保留假设与来源、定期独立复核。",
@@ -9825,7 +9916,7 @@
               "investment-fund-managers.review.sec-fiduciary-2019"
             ],
             "id": "risk-3",
-            "mitigation": "按利益冲突政策申报与回避、留存审批记录。",
+            "mitigation": "有未决利益冲突时暂停相关决定，申报并按程序回避或交合规复核，保存处理记录。适用法律、基金合同和产品约束继续有效。",
             "scenario": {
               "$item": "investment-fund-managers.risk.career-risk-cards.3",
               "block": "risk",
@@ -9839,10 +9930,10 @@
             "consequence": "可能造成监管处罚与投资者损失。",
             "evidence_refs": [
               "investment-fund-managers.review.source-pack-onet-details",
-              "investment-fund-managers.review.sec-fiduciary-2019"
+              "investment-fund-managers.review.cn-work-example"
             ],
             "id": "risk-4",
-            "mitigation": "按披露与营销规范审查材料、保留审查与版本记录。",
+            "mitigation": "核对报告材料的版本与复核状态。发现重大缺项或冲突时暂停材料交接并报告。法定披露由适用义务主体按流程办理。",
             "scenario": {
               "$item": "investment-fund-managers.risk.career-risk-cards.4",
               "block": "risk",
@@ -9855,8 +9946,7 @@
             "affected_roles": "投资基金经理",
             "consequence": "可能造成内控失效与合规风险。",
             "evidence_refs": [
-              "investment-fund-managers.review.source-pack-onet-details",
-              "investment-fund-managers.review.sec-fiduciary-2019"
+              "investment-fund-managers.review.source-pack-onet-details"
             ],
             "id": "risk-5",
             "mitigation": "按制度完成复核与留痕、不以业绩目标替代流程。",
@@ -9872,8 +9962,7 @@
             "affected_roles": "投资基金经理",
             "consequence": "可能越过监管要求、受托责任或机构授权。",
             "evidence_refs": [
-              "investment-fund-managers.review.source-pack-onet-details",
-              "investment-fund-managers.review.sec-fiduciary-2019"
+              "investment-fund-managers.review.source-pack-onet-details"
             ],
             "id": "risk-6",
             "mitigation": "先停止相关步骤，把事实、影响与待决问题交接给有权限的责任人。",
@@ -9954,6 +10043,24 @@
               "item": "investment-fund-managers.source-register.published.1"
             },
             "scope": "生成式AI输出与信息风险框架，非基金岗位事故比例。"
+          },
+          {
+            "href": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "investment-fund-managers.source-register.published.1"
+            },
+            "id": "investment-fund-managers.review.cn-work-example",
+            "label": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "investment-fund-managers.source-register.published.1"
+            },
+            "scope": "大陆公募基金定期报告的角色分工。"
           }
         ]
       },
@@ -9990,24 +10097,24 @@
           },
           "china_edu_table": [
             {
-              "学历段": "证据不足：未建立安全映射（本科）",
-              "岗位方向": "按机构公告核验",
-              "说明": "不使用代理数字。"
+              "学历段": "岗位责任",
+              "岗位方向": "核对组合授权",
+              "说明": "问是研究支持、组合决策还是报告复核。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（硕士）",
-              "岗位方向": "按机构公告核验",
-              "说明": "不使用代理数字。"
+              "学历段": "基本报酬",
+              "岗位方向": "核对计薪单位",
+              "说明": "分清固定月薪、年薪和试用期口径。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（博士）",
-              "岗位方向": "按机构公告核验",
-              "说明": "不使用代理数字。"
+              "学历段": "浮动报酬",
+              "岗位方向": "核对考核期",
+              "说明": "问绩效奖金按个人、团队还是公司指标确定。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（其他）",
-              "岗位方向": "按具体法域核验",
-              "说明": "不使用代理数字。"
+              "学历段": "支付条件",
+              "岗位方向": "核对递延",
+              "说明": "问发放时间及递延、追索条款。"
             }
           ],
           "china_industry_table": [
@@ -10074,16 +10181,16 @@
           "china_salary_note": "中国大陆口径与美国、全球及具体单位分开，不能跨市场拼接。",
           "china_salary_table": [
             {
-              "城市/区间": "证据不足：未建立安全映射",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "城镇非私营单位 · 金融业",
+              "年工资参照（行业/岗位大类）": "211,164 元／年"
             },
             {
-              "城市/区间": "证据不足：未建立安全映射",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "城镇私营单位 · 金融业",
+              "年工资参照（行业/岗位大类）": "140,451 元／年"
             },
             {
-              "城市/区间": "证据不足：未建立安全映射",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "全国城镇非私营单位 · 全行业",
+              "年工资参照（行业/岗位大类）": "129,441 元／年"
             }
           ],
           "china_soc_row": {
@@ -10115,12 +10222,12 @@
           "ui": {
             "ai_heading": "AI 与薪资判断边界",
             "driver_heading": "影响因素",
-            "official_heading": "官方统计口径",
-            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
-            "scenario_heading": "情景化参考",
-            "scenario_interpretation_label": "解释",
-            "scenario_role_label": "岗位范围",
-            "scenario_value_label": "参考值"
+            "official_heading": "2025 年城镇单位年平均工资背景",
+            "scenario_caption": "岗位与报酬核对项",
+            "scenario_heading": "看招聘时核对哪些条件？",
+            "scenario_interpretation_label": "向用人单位确认",
+            "scenario_role_label": "核对范围",
+            "scenario_value_label": "核对项"
           },
           "us_growth": "不适用本地口径",
           "us_median": "不适用本地口径"
@@ -10132,45 +10239,45 @@
           {
             "指标": "薪资 · 10 分位",
             "数值": "94,310 美元/年",
-            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据https://www.onetonline.org/link/localwages/11-3031.00，非AI归因。"
+            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据O*NET 的美国金融经理 11-3031 工资表。"
           },
           {
             "指标": "薪资 · 25 分位",
             "数值": "125,490 美元/年",
-            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据https://www.onetonline.org/link/localwages/11-3031.00，非AI归因。"
+            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据O*NET 的美国金融经理 11-3031 工资表。"
           },
           {
             "指标": "薪资 · 中位数",
             "数值": "166,570 美元/年",
-            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据https://www.onetonline.org/link/localwages/11-3031.00，非AI归因。"
+            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据O*NET 的美国金融经理 11-3031 工资表。"
           },
           {
             "指标": "薪资 · 75 分位",
             "数值": "219,980 美元/年",
-            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据https://www.onetonline.org/link/localwages/11-3031.00，非AI归因。"
+            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据O*NET 的美国金融经理 11-3031 工资表。"
           },
           {
             "指标": "薪资 · 90 分位",
             "数值": "323,270 美元/年",
-            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据https://www.onetonline.org/link/localwages/11-3031.00，非AI归因。"
+            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据O*NET 的美国金融经理 11-3031 工资表。"
           },
           {
             "指标": "就业 · 规模",
-            "数值": "879,700 人（2025，美国）",
-            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据https://www.onetonline.org/link/localwages/11-3031.00，非AI归因。"
+            "数值": "约 879,700 个岗位（2025）",
+            "说明": "美国上位职业金融经理 11-3031，来源 BLS 就业预测表 1.2。"
           },
           {
             "指标": "就业 · 增长",
-            "数值": "7%或更高（分组标签）（2025—2035）",
-            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据https://www.onetonline.org/link/localwages/11-3031.00，非AI归因。"
+            "数值": "9.7%",
+            "说明": "美国上位职业金融经理 11-3031，来源 BLS 就业预测表 1.2。"
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "65,600 个/年（2025—2035，含增长与替补）",
-            "说明": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）；工资依据https://www.onetonline.org/link/localwages/11-3031.00，非AI归因。"
+            "数值": "预计年均约 65,600 个",
+            "说明": "美国上位职业金融经理 11-3031，来源 BLS 就业预测表 1.2。"
           }
         ],
-        "boundary": "Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计），所有分位与总体预测只作宽类参考，不含自雇或全部基金经理激励报酬。",
+        "boundary": "美国 11-3031 是金融经理上位职业。OEWS 工资包含部分激励报酬，排除非生产奖金及雇主福利成本。向雇主另核实际薪酬组成。 统计不覆盖自雇收入。",
         "direct_answer": {
           "$item": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10197,7 +10304,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "7%或更高（分组标签）（2025—2035，总体就业预测，非AI归因）",
+        "growth": "9.7%（分组标签）（2025—2035，总体就业预测，非AI归因）",
         "heading": {
           "$item": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10263,8 +10370,8 @@
         "outlook_period": "2025基期 / 2025—2035预测；2026-10-11核对",
         "wage_column_labels": [
           "统计位置",
-          "年薪参考（父职类）",
-          "换算边界",
+          "上位职业年薪",
+          "上位职业时薪",
           "解释"
         ],
         "wage_heading": {
@@ -10275,21 +10382,33 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "不推算个人月薪",
-            "interpretation": "2025Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）美国全国工资分位，不等于个人报价或经验等级。",
-            "label": "低分位",
+            "equivalent": "45.34 美元/小时",
+            "interpretation": "2025 年 5 月美国上位职业金融经理 11-3031 全国工资。年薪和时薪各取原表。",
+            "label": "第 10 百分位",
             "value": "94,310 美元/年"
           },
           {
-            "equivalent": "不推算个人月薪",
-            "interpretation": "2025Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）美国全国工资分位，不等于个人报价或经验等级。",
-            "label": "中位数",
+            "equivalent": "60.33 美元/小时",
+            "interpretation": "2025 年 5 月美国上位职业金融经理 11-3031 全国工资。年薪和时薪各取原表。",
+            "label": "第 25 百分位",
+            "value": "125,490 美元/年"
+          },
+          {
+            "equivalent": "80.08 美元/小时",
+            "interpretation": "2025 年 5 月美国上位职业金融经理 11-3031 全国工资。年薪和时薪各取原表。",
+            "label": "第 50 百分位",
             "value": "166,570 美元/年"
           },
           {
-            "equivalent": "不推算个人月薪",
-            "interpretation": "2025Financial Managers（财务经理11-3031.00父职类代理，非基金经理精确统计）美国全国工资分位，不等于个人报价或经验等级。",
-            "label": "高分位",
+            "equivalent": "105.76 美元/小时",
+            "interpretation": "2025 年 5 月美国上位职业金融经理 11-3031 全国工资。年薪和时薪各取原表。",
+            "label": "第 75 百分位",
+            "value": "219,980 美元/年"
+          },
+          {
+            "equivalent": "155.42 美元/小时",
+            "interpretation": "2025 年 5 月美国上位职业金融经理 11-3031 全国工资。年薪和时薪各取原表。",
+            "label": "第 90 百分位",
             "value": "323,270 美元/年"
           }
         ]
@@ -10324,7 +10443,7 @@
         "title": "投资基金经理适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "boundary": "若更想做研究而少承担限额与组合决策责任，先区分研究支持岗与有组合授权的岗位。",
         "how": {
           "$item": "investment-fund-managers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10370,11 +10489,11 @@
         },
         "outlook_evidence": [
           {
-            "geography": "美国",
-            "horizon": "2025—2035",
+            "geography": "美国全国",
+            "horizon": "2025–2035",
             "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
             "limitation": "不能作为个人就业保证。",
-            "metric": "父职类增长及空缺",
+            "metric": "就业规模与变化",
             "occupation_scope": "Financial Managers父职类参考，非Investment Fund Managers精确预测",
             "value": {
               "$item": "investment-fund-managers.market-signals.market-signal-card.3",
@@ -10616,7 +10735,7 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "本页不按九型类型分配岗位。可用一次对A35超限的异议讨论，记录你接受纠错、区分事实和解释的具体行为；类型描述只是自我观察提示。",
+            "answer": "在 F 表记下一条同伴提出的不同解释，将原记录和各自解释分开。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
@@ -10630,21 +10749,21 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "用100单位题面复算A/B/现金权重，并验证9.5与8.5单位的情景损失。计算作品反映本次任务表现，不能凭一次测试或一个分数推断录用资格与完整职业能力。",
+            "answer": "让同伴仅凭 F 表首稿复查每一项状态，观察两人是否得到同一记录。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "iq",
             "label": "认知能力",
-            "question": "能否独立复算权重与固定情景损失？",
+            "question": "能否逐项核对报告期与复核状态？",
             "signals": [
-              "公式与复算结果",
-              "发现原始超限"
+              "两项核对",
+              "原值留存"
             ],
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "请同伴质疑“现金足够即可买入B”的判断，记录你能否复述其理由、指出原A35超限并说明升级路径。沟通行为是本次观察，不是人格类型或表现预测。",
+            "answer": "请同伴说出一处不同判断，先复述其依据，再说明谁应复核。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
@@ -10674,7 +10793,7 @@
           {
             "direction": "组合与限额管理",
             "fit_signals": "愿意按授权与限额管理组合与风险。",
-            "watchouts": "超限必须按制度审批。"
+            "watchouts": "发现超限或授权不明时，先暂停相关操作，保留原始数据、适用限额与处置记录，并报风控或合规。内部例外只适用于制度允许的范围，法律、基金合同和产品约束仍须遵守。"
           },
           {
             "direction": "交易与执行",
@@ -10689,7 +10808,7 @@
           {
             "direction": "利益冲突管理",
             "fit_signals": "愿意申报与回避潜在冲突。",
-            "watchouts": "审批与豁免按制度。"
+            "watchouts": "未决冲突先暂停、申报，并按程序交合规复核。"
           },
           {
             "direction": "团队与沟通",
@@ -10705,36 +10824,36 @@
         },
         "questions": [
           {
-            "answer": "先选研究估值、组合限额核对或披露沟通中的一项。用下文100单位模拟基金记录你愿意反复检查的输入与产出，区分任务兴趣和追求收益的想象。",
-            "question": "喜欢哪些任务？"
+            "answer": "在 F 表区分复核待确认与报告期不符，按题面交给对应角色。",
+            "question": "怎样交接记录差异？"
           },
           {
-            "answer": "先按七日计划每天30—45分钟完成模拟，再记录限时复算与他人质疑下的压力。O*NET工作情境只能提示长工时及竞争，不能据此判断你必然适配。",
-            "question": "能否承受工作节奏？"
+            "answer": "完成首稿后，请同伴逐行对照报告期和复核状态。记下忙乱时最容易漏掉的一栏。",
+            "question": "怎样检查自己是否漏核？"
           },
           {
-            "answer": "保留输入版本、公式、每笔交易前后A/B/现金金额及升级原因。另一人应能用相同题面复算；只给出“买入/不买”结论不构成过程证据。",
-            "question": "是否愿意记录过程？"
+            "answer": "在表里分列清单期次、材料期次和复核状态，原值留存，再写处置状态。",
+            "question": "怎样保留可复核的记录？"
           },
           {
-            "answer": "原组合A=35已超过30%上限。先标记异常并请求有权者处理；“现金够”不代表交易获授权，不确定价格、规则版本或权限时先升级。",
-            "question": "能否在不确定时升级？"
+            "answer": "保留两条原记录，写下待核项和负责复核的人。在对方确认前让该条继续待核。",
+            "question": "遇到未决分歧怎么办？"
           },
           {
-            "answer": "写清练习里的无借款、单资产30%上限及现金20%下限。真实业务还须确认基金类型、法域、机构及个人授权；考试通过不自动赋予投资权限。",
-            "question": "是否理解授权边界？"
+            "answer": "它表示本次虚构记录可交接。真实交易、估值裁决、报送与公开披露各有授权流程。",
+            "question": "资料齐全能授权什么？"
           },
           {
-            "answer": "把原组合固定情景损失9.5单位与模拟纠偏后8.5单位逐项复算，记录差异来源。它们是题设算术，不代表风险模型预测或真实策略回测。",
-            "question": "能否复盘失败？"
+            "answer": "记下漏看的是报告期还是复核状态，补一个逐行核对项，再做变式。",
+            "question": "怎样复盘一处漏核？"
           },
           {
-            "answer": "交付限额核对表、交易前后资金表、一页决策备忘和固定情景损失表。检查金额合计100、每个权重可由金额复算，并单列应升级的权限问题。",
-            "question": "是否有可观察交付？"
+            "answer": "提交逐项状态、两个冲突原值及各自的交接对象，留一份首稿供同伴复核。",
+            "question": "交接时提交什么？"
           },
           {
-            "answer": "从适配板块的100单位题面开始，分别模拟买A10、买B10及同时买入，再与入行路径的参考答案比对。按七日计划完成交付和同伴复核，不使用真实资产。",
-            "question": "下一步试验是什么？"
+            "answer": "先到「入行与 F 表：定期报告材料核对」做原题，再只改题面指定的一项，最后打开折叠参考解。",
+            "question": "现在从哪里开始？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -10921,7 +11040,7 @@
             "item": "investment-fund-managers.source-register.published.1"
           }
         },
-        "note": "2026-10-11核对｜O*NET11-3031.03支持基金任务，详情明确工资/就业/行业来自Financial Managers父职类。其2025工资五分位94,310/125,490/166,570/219,980/323,270；就业879,700，2025—2035增长7%或更高分组、年均65,600空缺。工资从11-3031.00国家页核，11-3031.03工资入口未成功。NBS金融业均值不替代职业，AI为编辑试用分析；共享历史登记/FAQ保护。"
+        "note": "O*NET 提供任务信息，OEWS 提供工资，BLS 表 1.2 提供就业预测。"
       },
       "work_context_block": {
         "$item": "investment-fund-managers.profile.work-context-block.5",
@@ -10932,7 +11051,9 @@
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
-      "interface.fit.directions_heading": "你更可能适合哪条投资基金管理方向？"
+      "interface.fit.directions_heading": "你更可能适合哪条投资基金管理方向？",
+      "interface.path.promotion_evidence_label": "阶段记录与探索练习",
+      "interface.quick_decision.experiment_heading": "纸面试做能帮你观察什么？"
     },
     "locale": "zh-CN",
     "native_items": [
@@ -10946,19 +11067,19 @@
     ],
     "path": "/zh/career/jobs/investment-fund-managers",
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
       "market-signals": "市场信号",
       "navigation": "页面导航",
-      "path": "入行路径",
+      "path": "入行与 F 表：定期报告材料核对",
       "profile": "职业定义与职责",
       "quick-decision": "快速判断",
       "risk": "风险与边界",
       "source-register": "来源注册表",
       "sources": "常见问题与边界",
-      "us-salary": "美国薪资"
+      "us-salary": "美国金融经理工资"
     }
   },
   "fact_register": {
@@ -11026,102 +11147,90 @@
       },
       {
         "derivation": null,
-        "display_value": "中位时薪 80.08 美元、中位年薪 166,570 美元（2025 年，O*NET 呈现的父职类 Financial Managers 代理口径）",
+        "display_value": "166,570 美元/年",
         "fact_id": "us-wage-median-2025",
-        "market": "US",
-        "measure": "annual median wage (broader-group proxy)",
-        "occupation_scope": "Broader group proxy (Financial Managers 11-3031.00)",
-        "period": "2025 wages",
+        "market": "美国",
+        "measure": "上位职业 · 美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "11-3031",
+        "period": "2025-05",
         "source_refs": [
-          "source-pack-onet-details"
+          "source-pack-onet-localwages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "增长 远快于平均（7% 或更高，2024—2034，O*NET 呈现的父职类代理口径）",
+        "display_value": "9.7%",
         "fact_id": "us-growth-2024-2034",
-        "market": "US",
-        "measure": "projected employment percent change (broader-group proxy)",
-        "occupation_scope": "Broader group proxy (Financial Managers 11-3031.00)",
-        "period": "2024-2034 outlook",
+        "market": "美国",
+        "measure": "上位职业 · 美国预计就业变化（2025—2035）",
+        "occupation_scope": "11-3031",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "就业 约 868,600 人（2024 年，O*NET 呈现的父职类代理口径，非本精确职业值）",
+        "display_value": "约 879,700 个岗位",
         "fact_id": "us-employment-2024",
-        "market": "US",
-        "measure": "employment base (broader-group proxy)",
-        "occupation_scope": "Broader group proxy (Financial Managers 11-3031.00)",
-        "period": "2024 employment base",
+        "market": "美国",
+        "measure": "上位职业 · 美国就业岗位（2025）",
+        "occupation_scope": "11-3031",
+        "period": "2025",
         "source_refs": [
-          "source-pack-onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "预计职位空缺 74,600 个（2024—2034，O*NET 呈现的父职类代理口径，含增长与替换）",
+        "display_value": "年均约 65,600 个",
         "fact_id": "us-openings-2024-2034",
-        "market": "US",
-        "measure": "projected job openings (broader-group proxy)",
-        "occupation_scope": "Broader group proxy (Financial Managers 11-3031.00)",
-        "period": "2024-2034 outlook",
+        "market": "美国",
+        "measure": "上位职业 · 美国年均职位空缺（2025—2035）",
+        "occupation_scope": "11-3031",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-summary"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "投资基金经理",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "bls-ep-2025-2035"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "投资基金经理 · 授权、受托与披露边界",
-      "来源范围 · 统计口径 · 人工复核",
-      "美国数值为父职类代理 · 中国大陆缺口按证据保留"
+      "投资基金经理",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-median-2025",
         "key": "us_pay",
-        "label": "美国年薪中位数（2025，父职类代理口径）"
+        "label": "上位职业 · 美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2024-2034",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，远快于平均，父职类代理）"
+        "label": "上位职业 · 美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，父职类代理）"
+        "label": "上位职业 · 美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2024-2034",
         "key": "us_openings",
-        "label": "美国职位空缺（2024—2034，父职类代理）"
+        "label": "上位职业 · 美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11135,17 +11244,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "投资基金经理做什么、如何入行与训练、有哪些受托与合规边界，以及 AI 会改变哪些任务。本页对应 O*NET-SOC 11-3031.03，兴趣代码 ECI、Job Zone 第五级并标注 Bright Outlook；美国工资与就业为 O*NET 呈现的父职类代理口径，中国大陆工资缺口按证据登记。"
+      "text": "了解投资基金经理的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "投资基金经理职业判断：工作、入行与风险边界"
+      "text": "投资基金经理做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "d6cbcc84ef9a23585f3b641e21697812c961f27fa5884e329e25075e6254f11c",
+  "source_content_sha256": "6ff68bbdf4762078e353162d558c4c2ee3e28409d087d0c3bea5a73eb260b3fc",
   "subject": {
     "canonical_slug": "investment-fund-managers",
     "name": "投资基金经理",
-    "summary": "投资基金经理围绕投资者的资产池，规划或协调投资策略与运营。主要产出包括研究估值、组合决策、交易监控及风险披露；须遵守客户授权。本页美国工资与就业采用较宽父职类参考，中国大陆精确工资证据不足。"
+    "summary": "本页对应美国 O*NET 11-3031.03。投资基金经理按基金目标与授权组织投资研究、组合决策、风险监控和记录交接。美国工资和就业数字采用上位职业金融经理 11-3031。"
   }
 }

@@ -14,9 +14,6 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7208,7 +7205,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "以下判断针对船舶工程师与海军建筑师的工程与设计方式，不预测录用、注册、资格或合同结果。"
+              "以下判断针对船舶工程师与船舶总体设计师的工程与设计方式，不预测录用、注册、资格或合同结果。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.quick-decision.fermat-decision-card.1",
@@ -7222,7 +7219,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "船舶工程师与海军建筑师的核心是让船舶与船用系统在安全、效率与经济性之间平衡：研究设计与规格以确定尺寸、重量、航速、推进、排水量与吃水等基本特性，按规范与试验数据设计船体与上层建筑，开展稳性、结构、重量与振动分析，布置机舱与推进、通风、制冷、管系等功能设备，设计舱内布局，编制技术报告、方案、进度与合同文件，参与坞试与海试并评估机械与设备性能，同时监测船舶符合国际法规与防污染标准。"
+              "适合愿意反复核对图纸版本、记录假设，并把测试差异交给对应团队复核的人。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.quick-decision.fermat-decision-card.2",
@@ -7236,12 +7233,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "完全虚构的任务包：给出一份虚构的船舶设计需求与试验数据（含 1 份规格与用途说明、1 组稳性与重量数据、1 个待解决的布置约束），要求在 60 分钟内写出设计要点、稳性与结构分析框架、两套布置或推进方案与取舍依据、验证与合规要点以及风险；不使用真实船东、船级社或涉密数据。"
+              "到「入行与 N 表：图纸与测试记录交接」做原题和变式，写下待核项及交接人。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-tasks"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7250,12 +7247,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "样本输出与反思：检查是否先界定用途与规范、是否说明数据来源与假设、是否给出可比较的方案与取舍、是否写明验证与合规边界；再问自己能否在安全、性能与成本之间做工程取舍、能否与船东、船厂、船级社与监管多方沟通，以及是否愿意为设计结论与后果负责。"
+              "在 N 表里核对图纸版本和测试复核状态，保留冲突版本，并写明应找谁复核。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "onet-tasks"
+            "paper-exercise"
           ],
           "type": "prose"
         }
@@ -7272,14 +7269,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页固定职业名称对应ONet17-2121.00 Marine Engineers and Naval Architects，聚焦船舶、船体及机械/推进系统的设计、开发与工程评价。Naval architecture在此指船舶设计，涵盖民用与军用船型，不局限海军建筑物；设计工程职责与随船监督机械运行的ship engineers须区分。任务含稳性/结构/重量/振动分析、系统布置、技术合同文件、坞试海试及法规符合性监测，按项目对象与授权承担。"
+              "本页覆盖美国 O*NET 17-2121.00。船舶工程师与船舶总体设计师负责船舶及相关系统的设计和验证。工作可侧重船体布置与性能，也可侧重推进、动力和设备系统，交付图纸、计算资料及测试记录。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
-            "onet-tasks",
-            "bls-ooh-marine"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7360,13 +7355,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入：O*NET 17-2121.00 的职业身份、任务、工作活动、工作情境、技能与知识、兴趣代码、教育与 Job Zone；该页工资、就业与行业数据为本职业口径，研究结论不据此推定中国大陆的资格、工资或就业口径。"
+              "O*NET 17-2121.00 说明本职业任务和工作情境。美国工资采用 OEWS，就业预测采用 BLS 表 1.2。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.profile.onet-structured-fields-block.7",
           "source_refs": [
             "onet-summary",
-            "onet-trends"
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7403,7 +7399,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "相邻职责边界：本页只覆盖船舶工程师与海军建筑师；建筑与工程经理负责项目与团队管理、航空航天工程师负责航空器、土木工程师负责陆上结构、电气工程师负责电气系统、工业工程师负责生产系统；各专业判断与法定责任不得与本页互换。"
+              "相邻职责边界：本页只覆盖船舶工程师与船舶总体设计师；建筑与工程经理负责项目与团队管理、航空航天工程师负责航空器、土木工程师负责陆上结构、电气工程师负责电气系统、工业工程师负责生产系统；各专业判断与法定责任不得与本页互换。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.profile.definition-block.10",
@@ -7469,7 +7465,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "建筑与工程经理负责项目、团队与预算管理；船舶工程师与海军建筑师负责船舶与船用系统的设计与分析，职责不同。"
+              "建筑与工程经理负责项目、团队与预算管理；船舶工程师与船舶总体设计师负责船舶与船用系统的设计与分析，职责不同。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.direction-comparison.adjacent-career-comparison-table.2",
@@ -7483,7 +7479,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "航空航天工程师面向航空器与航天器；船舶工程师与海军建筑师面向船舶与海洋结构，介质、规范与设计约束不同。"
+              "航空航天工程师面向航空器与航天器；船舶工程师与船舶总体设计师面向船舶与海洋结构，介质、规范与设计约束不同。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.direction-comparison.adjacent-career-comparison-table.3",
@@ -7497,7 +7493,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "土木工程师负责陆上建筑与基础设施；船舶工程师与海军建筑师负责船舶与海洋结构，涉及稳性、推进与防腐等专门问题。"
+              "土木工程师负责陆上建筑与基础设施；船舶工程师与船舶总体设计师负责船舶与海洋结构，涉及稳性、推进与防腐等专门问题。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.direction-comparison.adjacent-career-comparison-table.4",
@@ -7511,7 +7507,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "电气工程师负责电气系统与设备；船舶工程师与海军建筑师负责船舶整体与系统集成，电气部分的专门结论须与电气工程协同。"
+              "电气工程师负责电气系统与设备；船舶工程师与船舶总体设计师负责船舶整体与系统集成，电气部分的专门结论须与电气工程协同。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.direction-comparison.adjacent-career-comparison-table.5",
@@ -7533,7 +7529,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "船舶工程师与海军建筑师的 AI 影响边界"
+              "船舶工程师与船舶总体设计师的 AI 影响边界"
             ]
           },
           "id": "marine-engineers-and-naval-architects.ai-impact.ai-impact-table.1",
@@ -7548,7 +7544,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务假设：经验证的CAD、计算或仿真工具可能支持船舶分析，生成式AI可起草虚构资料下的文档。传统CFD/结构仿真不等于生成式AI；未取得本职业采用率或岗位结果。规范版本、边界条件、工程计算及试验必须核验，不能用自动文本代替批准设计或法定证书。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "编辑任务假设：经验证的CAD、计算或仿真工具可能支持船舶分析，生成式AI可起草虚构资料下的文档。传统CFD/结构仿真不等于生成式AI；未取得本职业采用率或岗位结果。规范版本、边界条件、工程计算及试验必须核验，不能用自动文本代替批准设计或法定证书。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.ai-impact.ai-impact-table.2",
@@ -7604,12 +7600,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先用完全虚构的设计需求与试验数据做一次离线演练，写出设计要点、分析框架、方案与验证边界，不依赖未核实的自动计算替代工程判断。"
+              "先用 N 表核对图纸与测试记录的版本、复核状态和交接人，保留原始版本。工程设计和放行由具备相应权限的人员另行复核。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "internal-rubric"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7654,7 +7650,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本次未取得可与17-2121.00安全对应的中国全国职业工资分布。制造业城镇单位均值仅作相应雇主行业背景，不证明所有来源未发布职业数据，也不涵盖所有设计咨询岗位或个体经营收入。"
+              "中国大陆工资参考"
             ]
           },
           "fact_refs": [
@@ -7707,7 +7703,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国大陆船舶工程师与海军建筑师对应的全国职业工资中位数、统计期与口径；本页仅展示行业代理并标明其为行业口径，不使用代理数字或美国数字填补。"
+              "证据不足：未取得中国大陆船舶工程师与船舶总体设计师对应的全国职业工资中位数、统计期与口径；本页仅展示行业代理并标明其为行业口径，不使用代理数字或美国数字填补。"
             ]
           },
           "fact_refs": [
@@ -7732,7 +7728,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国船舶工程师与海军建筑师薪资与就业口径（本职业 17-2121.00）"
+              "美国船舶工程与总体设计工资"
             ]
           },
           "fact_refs": [
@@ -7749,7 +7745,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025美国全国本职业年薪中位112,230美元、时薪53.96美元，完整分位见原表分别列示。就业旧事实保留2024年8,500人及2024—2034预测，600为年均空缺。最新BLS为2025年8,400人、2025—2035增长7%、年均500；新旧覆盖期不同，不能拼接或推导个人录用。"
+              "2025 年 5 月美国本职业 17-2121全国年薪中位数 112,230 美元，时薪中位数 53.96 美元。年薪第 10、25、50、75、90 分位依次为 83,010、99,250、112,230、137,690、173,330 美元。"
             ]
           },
           "fact_refs": [
@@ -7769,7 +7765,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资位置为2025OEWS美国全国17-2121，年薪和时薪分位按原表分别列示，不是个人工时换算、起薪或到手收入。"
+              "全国工资分位"
             ]
           },
           "fact_refs": [
@@ -7786,7 +7782,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "P10/25/50/75/90描述分布位置，不是新手或资深等级；就业规模、预测年均空缺与个人机会分开。"
+              "如何读工资分位"
             ]
           },
           "fact_refs": [
@@ -7803,7 +7799,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025年5月BLS本职业分行业年薪中位：水上运输128,770、联邦政府（不含邮政）124,760、专业科学技术服务118,630、船舶与艇建造104,800美元。雇主行业占比与工资不同，细分场景不跨地区或个人收入外推。"
+              "美国分行业工资参考"
             ]
           },
           "fact_refs": [
@@ -7820,7 +7816,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "旧就业事实与最新版本分开：2024年8,500人和2024—2034年均600空缺保留；2025年8,400人、2025—2035年均500另列。空缺包括退出或转职替补，非十年合计或净新增。"
+              "影响岗位报酬的条件"
             ]
           },
           "fact_refs": [
@@ -7902,12 +7898,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作：用完全虚构的设计需求与试验数据，完成一次设计要点、分析框架、方案比较与验证边界的演练，请他人按记录复核。"
+              "先用 N 表核对图纸与测试记录的版本、复核状态和交接人，保留原始版本。工程设计和放行由具备相应权限的人员另行复核。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.fit.riasec-fit-block.5",
           "source_refs": [
-            "onet-tasks"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8044,7 +8040,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行路径与能力阶段"
+              "入行与 N 表：图纸与测试记录交接"
             ]
           },
           "id": "marine-engineers-and-naval-architects.path.career-path-block.1",
@@ -8059,13 +8055,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "ONet本职业新聘学历回答53%本科、16%高中后证书、11%部分大学未获学位；post-secondary不是“大专后”。Job Zone4为组准备程度，不证明每个入门须数年经历。BLS本职业通常需船舶/船舶设计或相关本科，具体专业与雇主要求核查。"
+              "在大陆先区分船体总体与结构、动力推进和试验支持方向。宁波大学船舶与海洋工程专业介绍列有船体制图、船舶静力学和阻力与推进，可作学习内容参照。平陆运河示范船试航展示了验船师与多方技术人员的分工。向目标船厂或设计单位核对起步任务、带教、图纸版本和测试交接。 本页讲岸基设计及项目测试，船上轮机值班另核相应岗位和资格。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.path.career-path-block.2",
           "source_refs": [
-            "onet-education",
-            "bls-ooh-marine"
+            "cn-university-nbu",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8074,14 +8070,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：工程课程与实习/项目构成准备路径；入门不要求PE，向公众提供专业工程服务和签字另核州要求。有些雇主可能偏好MMC船员证件，但不等于所有设计工程师必须或可任随船轮机岗位。本次未取得细分硕士偏好比例。中国精确资格映射未建立，船旗国法定检验/发证授权、船级任务和个人工程资格分别核查。"
+              "交通运输部报道的平陆运河智能示范船试航检验由验船师及海事、船厂和设备厂家技术人员共同核验测试。该例展示一艘船的设计验证如何跨团队交接。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.path.career-path-block.3",
           "source_refs": [
-            "onet-education",
-            "bls-ooh-marine",
-            "imo-survey-cert"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8119,12 +8113,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "展示证据：用一份可复核的设计或分析交付说明（含需求界定、数据口径、分析结论与方案比较），展示结构化工程分析并如实记录的能力。"
+              "纸面练习《N 表：图纸与测试记录交接》。 虚构纸面练习。只有图纸版本与测试记录对应、测试复核已确认，才标为资料齐全。N1 图纸及记录均为 C 版，复核已确认。N2 两者均为 D 版，复核待确认。N3 图纸为 E 版、记录为 F 版，复核已确认。测试状态交测试记录员，版本差异交图纸管理员。逐项写出状态和交接人。变式只将 N2 的复核改为已确认。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.path.career-path-block.6",
           "source_refs": [
-            "onet-education"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8133,12 +8127,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "下一步：核对目标雇主的船型与规范要求、船级社与监管约束、使用的分析工具与试验条件，并在受监督的真实项目中验证设计、分析与验证能力。"
+              "先做原题和变式，保存第一稿。再到「常见问题与边界」打开折叠参考解，核对原值和交接分工。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.path.career-path-block.7",
           "source_refs": [
-            "onet-education"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8169,7 +8163,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "市场信号与转型方向"
+              "职业前景与相关方向"
             ]
           },
           "id": "marine-engineers-and-naval-architects.market-signals.market-signal-card.1",
@@ -8183,12 +8177,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "旧2024年8,500人、2024—2034预测年均600空缺保留；最新BLS2025年8,400人、2025—2035增长7%、年均500。小职业统计不能代招聘样本、个人录用或设计岗位普遍增长。"
+              "BLS 表 1.2（美国本职业 17-2121）：2025 年约 8,400 个岗位，2035 年预计约 8,900 个，变化 6.7%，年均约 500 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8197,12 +8191,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该页 2024 年主要行业为 Manufacturing 与 Professional, Scientific, and Technical Services；就业与空缺为统计预测，须与个人机会分开解释。"
+              "BLS 表 1.2（美国本职业 17-2121）：2025 年约 8,400 个岗位，2035 年预计约 8,900 个，变化 6.7%，年均约 500 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "marine-engineers-and-naval-architects.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-industry"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8248,7 +8242,7 @@
           "data": {
             "entries": [
               {
-                "answer": "本页船舶工程师与海军建筑师指 O*NET 17-2121.00：设计、开发并评估船舶、船舶机械及相关设备（如供电与推进系统）的运行；工作包括按规范设计船体与上层建筑、开展稳性/结构/重量/振动分析、布置机舱与推进等设备、设计舱内布局、编制技术与合同文件、参与坞试与海试并监测合规。工作以办公室、船厂与试验现场为主。它不等同于建筑与工程经理、航空航天工程师、土木工程师、电气工程师或工业工程师。",
+                "answer": "本页船舶工程师与船舶总体设计师指 O*NET 17-2121.00：设计、开发并评估船舶、船舶机械及相关设备（如供电与推进系统）的运行；工作包括按规范设计船体与上层建筑、开展稳性/结构/重量/振动分析、布置机舱与推进等设备、设计舱内布局、编制技术与合同文件、参与坞试与海试并监测合规。工作以办公室、船厂与试验现场为主。它不等同于建筑与工程经理、航空航天工程师、土木工程师、电气工程师或工业工程师。",
                 "id": "marine-engineers-and-naval-architects.faq.1",
                 "question": "日常工作和工时如何？",
                 "question_key": "career.faq.marine-engineers-and-naval-architects.daily-work",
@@ -8258,7 +8252,7 @@
                 ]
               },
               {
-                "answer": "建筑与工程经理负责项目与团队；航空航天工程师面向航空器；土木工程师负责陆上结构；电气工程师负责电气系统；工业工程师负责生产系统。船舶工程师与海军建筑师聚焦船舶与船用系统的设计与分析，区分应比较对象、规范、介质与专业边界。",
+                "answer": "建筑与工程经理负责项目与团队；航空航天工程师面向航空器；土木工程师负责陆上结构；电气工程师负责电气系统；工业工程师负责生产系统。船舶工程师与船舶总体设计师聚焦船舶与船用系统的设计与分析，区分应比较对象、规范、介质与专业边界。",
                 "id": "marine-engineers-and-naval-architects.faq.2",
                 "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.marine-engineers-and-naval-architects.role-comparison",
@@ -8306,7 +8300,7 @@
                 ]
               },
               {
-                "answer": "O*NET 该页显示 2025 年 BLS OEWS 年薪中位数 112,230 美元（约 53.96 美元/小时），为该职业 17-2121.00 口径；该页未展示分位工资。这是美国全国统计口径，不含个人到手收入或起薪。",
+                "answer": "2025 年 5 月美国本职业 17-2121全国年薪中位数 112,230 美元，时薪中位数 53.96 美元。年薪第 10、25、50、75、90 分位依次为 83,010、99,250、112,230、137,690、173,330 美元。",
                 "id": "marine-engineers-and-naval-architects.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.marine-engineers-and-naval-architects.us-pay",
@@ -8315,13 +8309,13 @@
                 ]
               },
               {
-                "answer": "美国侧该职业属 Job Zone 4，多数岗位要求四年制学士学位、部分要求大专后证书并通常需数年相关经验；涉及船级社、安全与注册类结论须由具备资格的人员或机构出具。中国大陆：无与该 O*NET 精确对应的统一职业资格，按用人单位与行业要求核对。",
+                "answer": "BLS 表 1.2 列出的美国典型入行教育为学士学位。查阅具体岗位对船舶总体、动力系统、图纸或测试记录的要求。 交通运输部报道的平陆运河智能示范船试航检验由验船师及海事、船厂和设备厂家技术人员共同核验测试。该例展示一艘船的设计验证如何跨团队交接。",
                 "id": "marine-engineers-and-naval-architects.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.marine-engineers-and-naval-architects.education-path",
                 "source_refs": [
-                  "onet-education",
-                  "onet-cert"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
@@ -8335,28 +8329,38 @@
                 ]
               },
               {
-                "answer": "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 8,500 人，2024—2034 年预计高于平均（5% 至 6%），期间职位空缺约 600 个；这是职业统计，不等于个人录用概率。",
+                "answer": "BLS 表 1.2（美国本职业 17-2121）：2025 年约 8,400 个岗位，2035 年预计约 8,900 个，变化 6.7%，年均约 500 个职位空缺，含人员替补。人数分别取整。",
                 "id": "marine-engineers-and-naval-architects.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.marine-engineers-and-naval-architects.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "若能把船舶与系统需求转化为可验证的设计与分析，值得用一份完全虚构的设计需求与试验数据做一次低成本演练；转向航空航天、土木或电气工程方向需要补足对应专业与资格证据。",
+                "answer": "先用 N 表检查图纸版本与测试复核状态，保留原记录并确定交接对象。若愿继续，向目标岗位了解船体、系统或试验方向的学习与带教。",
                 "id": "marine-engineers-and-naval-architects.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.marine-engineers-and-naval-architects.career-worth",
                 "source_refs": [
-                  "onet-summary"
+                  "paper-exercise",
+                  "onet-tasks"
                 ]
               },
               {
-                "answer": "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格/资质、安全与 AI 结论不得跨范围拼接。；船舶工程师与海军建筑师页面提供职业判断与设计演练信息，不替代所在地法律、船级社规范或其他专业意见。；任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。",
+                "answer": "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格/资质、安全与 AI 结论不得跨范围拼接。船舶工程师与船舶总体设计师页面提供职业判断与设计演练信息，不替代所在地法律、船级社规范或其他专业意见。任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。",
                 "id": "marine-engineers-and-naval-architects.faq.boundary",
                 "question": "页面使用边界是什么？",
                 "question_key": "career.faq.marine-engineers-and-naval-architects.boundary"
+              },
+              {
+                "answer": "原题仅 N1 资料齐全。N2 交测试记录员，N3 交图纸管理员，保留 E、F 两版记录。变式 N1 与 N2 资料齐全，N3 仍待核。该判断仅用于纸面交接。",
+                "id": "marine-engineers-and-naval-architects.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.marine-engineers-and-naval-architects.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -8369,7 +8373,7 @@
           "data": {
             "entries": [
               "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格/资质、安全与 AI 结论不得跨范围拼接。",
-              "船舶工程师与海军建筑师页面提供职业判断与设计演练信息，不替代所在地法律、船级社规范或其他专业意见。",
+              "船舶工程师与船舶总体设计师页面提供职业判断与设计演练信息，不替代所在地法律、船级社规范或其他专业意见。",
               "任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。"
             ]
           },
@@ -8390,67 +8394,67 @@
           "data": {
             "entries": [
               {
-                "entity": "船舶工程师与海军建筑师",
+                "entity": "船舶工程师与船舶总体设计师",
                 "id": "marine-engineers-and-naval-architects.navigation.1",
                 "relation": "career.section",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "船舶工程师与海军建筑师",
+                "entity": "船舶工程师与船舶总体设计师",
                 "id": "marine-engineers-and-naval-architects.navigation.2",
                 "relation": "career.section",
                 "url": "#career-content-profile"
               },
               {
-                "entity": "船舶工程师与海军建筑师",
+                "entity": "船舶工程师与船舶总体设计师",
                 "id": "marine-engineers-and-naval-architects.navigation.3",
                 "relation": "career.section",
                 "url": "#career-content-direction-comparison"
               },
               {
-                "entity": "船舶工程师与海军建筑师",
+                "entity": "船舶工程师与船舶总体设计师",
                 "id": "marine-engineers-and-naval-architects.navigation.4",
                 "relation": "career.section",
                 "url": "#career-content-ai-impact"
               },
               {
-                "entity": "船舶工程师与海军建筑师",
+                "entity": "船舶工程师与船舶总体设计师",
                 "id": "marine-engineers-and-naval-architects.navigation.5",
                 "relation": "career.section",
                 "url": "#career-content-china-salary"
               },
               {
-                "entity": "船舶工程师与海军建筑师",
+                "entity": "船舶工程师与船舶总体设计师",
                 "id": "marine-engineers-and-naval-architects.navigation.6",
                 "relation": "career.section",
                 "url": "#career-content-us-salary"
               },
               {
-                "entity": "船舶工程师与海军建筑师",
+                "entity": "船舶工程师与船舶总体设计师",
                 "id": "marine-engineers-and-naval-architects.navigation.7",
                 "relation": "career.section",
                 "url": "#career-content-fit"
               },
               {
-                "entity": "船舶工程师与海军建筑师",
+                "entity": "船舶工程师与船舶总体设计师",
                 "id": "marine-engineers-and-naval-architects.navigation.8",
                 "relation": "career.section",
                 "url": "#career-content-risk"
               },
               {
-                "entity": "船舶工程师与海军建筑师",
+                "entity": "船舶工程师与船舶总体设计师",
                 "id": "marine-engineers-and-naval-architects.navigation.9",
                 "relation": "career.section",
                 "url": "#career-content-path"
               },
               {
-                "entity": "船舶工程师与海军建筑师",
+                "entity": "船舶工程师与船舶总体设计师",
                 "id": "marine-engineers-and-naval-architects.navigation.10",
                 "relation": "career.section",
                 "url": "#career-content-market-signals"
               },
               {
-                "entity": "船舶工程师与海军建筑师",
+                "entity": "船舶工程师与船舶总体设计师",
                 "id": "marine-engineers-and-naval-architects.navigation.11",
                 "relation": "career.section",
                 "url": "#career-content-sources"
@@ -8483,7 +8487,7 @@
                 "id": "onet-summary",
                 "limitation": "仅用于 17-2121.00 与美国市场；不建立中国映射。",
                 "market": "美国",
-                "name": "O*NET 17-2121.00 船舶工程师与海军建筑师（摘要）",
+                "name": "O*NET 17-2121.00 船舶工程师与船舶总体设计师（摘要）",
                 "period": "O*NET 2026 职业档案；查阅 2026-09-25",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
@@ -8522,17 +8526,16 @@
                 "url": "https://www.onetonline.org/link/details/17-2121.00#WorkContext"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2025 BLS OEWS 中位工资；该页为本职业（17-2121.00）口径。",
-                  "本页未展示分位工资；不以推断值替代。"
+                  "2025 年 5 月美国本职业 17-2121全国年薪中位数 112,230 美元，时薪中位数 53.96 美元。年薪第 10、25、50、75、90 分位依次为 83,010、99,250、112,230、137,690、173,330 美元。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "onet-wages",
-                "limitation": "本页未展示分位工资；中位数不代表起薪或个人到手收入。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
                 "name": "O*NET 17-2121.00 全国工资（BLS OEWS 展示）",
-                "period": "2025 BLS OEWS 工资数据；查阅 2026-09-25",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/17-2121.00"
@@ -8540,15 +8543,15 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "2024 年就业规模与 2024—2034 年增长与职位空缺预测。",
-                  "预测不是录用保证。"
+                  "本页就业预测采用 BLS 表 1.2。",
+                  "本页就业预测采用 BLS 表 1.2。"
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
                 "limitation": "预测不是录用保证；“高于平均”不等于个人机会必然增加。",
                 "market": "美国",
                 "name": "O*NET 17-2121.00 全国就业趋势",
-                "period": "2024—2034 预测；查阅 2026-09-25",
+                "period": "职业资料或动态查询",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/17-2121.00"
@@ -8572,8 +8575,7 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Job Zone 4（需要大量准备）：多数岗位要求四年制学士学位（约 53%），部分要求大专后证书；通常需要数年相关工作或职业培训。",
-                  "教育分布不等于每个雇主的硬性要求。"
+                  "O*NET Job Zone 4 为职业准备分组。新聘教育比例来自受访者对新聘要求的回答。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-education",
@@ -8652,17 +8654,17 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。",
-                  "编辑量表不等于采用率、裁员、法规或证照证据。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal task rubric",
+                "evidence_type": "编辑说明",
                 "id": "internal-rubric",
-                "limitation": "编辑量表不等于采用率、裁员、法规或证照证据。",
-                "market": "全球任务层面",
-                "name": "FermatMind 船舶工程师与海军建筑师任务影响量表",
-                "period": "FermatMind task rubric v2026.09; reviewed 2026-09-25",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "editorial_synthesis",
+                "scope": "本页任务",
                 "url": null
               },
               {
@@ -8696,21 +8698,59 @@
                 "url": "https://www.imo.org/en/ourwork/msas/pages/surveysandcertification.aspx"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "开展稳性结构与性能分析 — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "形成设计方案并编制文件 — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "参与坞试与海试并评估 — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                  "BLS 表 1.2（美国本职业 17-2121）：2025 年约 8,400 个岗位，2035 年预计约 8,900 个，变化 6.7%，年均约 500 个职位空缺，含人员替补。人数分别取整。",
+                  "BLS 表 1.2 列出的美国典型入行教育为学士学位。查阅具体岗位对船舶总体、动力系统、图纸或测试记录的要求。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "17-2121",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "交通运输部报道的平陆运河智能示范船试航检验由验船师及海事、船厂和设备厂家技术人员共同核验测试。该例展示一艘船的设计验证如何跨团队交接。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "案例不代表全国职业工资、入行或招聘。",
+                "market": "中国大陆",
+                "name": "平陆运河智能示范船试航检验",
+                "period": "2026-08",
+                "publisher": "中华人民共和国交通运输部",
+                "scope": "具名工作实例",
+                "url": "https://www.mot.gov.cn/xinwen/jiaotongyaowen/202608/t20260826_4223212.html"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "N 表：图纸与测试记录交接",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "主要课程列有船体制图、船舶静力学、船舶阻力与推进等。"
+                ],
+                "id": "cn-university-nbu",
+                "limitation": "具名院校专业示例，岗位要求和实际招生条件另核。",
+                "market": "中国大陆",
+                "name": "宁波大学船舶与海洋工程专业介绍",
+                "period": "2026-04-15",
+                "publisher": "宁波大学",
+                "url": "https://hyxy.nbu.edu.cn/info/2762/58516.htm"
               }
             ]
           },
@@ -8765,7 +8805,7 @@
         ],
         "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
         "heading": "相邻职业比较",
-        "intro": "以下按真实对象、核心交付与专业边界比较船舶工程师与海军建筑师及其相邻岗位，不按标题互换资格。",
+        "intro": "以下按真实对象、核心交付与专业边界比较船舶工程师与船舶总体设计师及其相邻岗位，不按标题互换资格。",
         "rows": [
           {
             "关键区别": "负责项目、团队与预算管理。",
@@ -9011,7 +9051,7 @@
               "field": "url",
               "item": "marine-engineers-and-naval-architects.source-register.published.1"
             },
-            "问题": "AI 会取代船舶工程师与海军建筑师吗？"
+            "问题": "AI 会取代船舶工程师与船舶总体设计师吗？"
           },
           {
             "回答": "仅列任务假设，未取得职业级采用或先后顺序研究；试验、设计批准和发证权限分别核验。",
@@ -9264,7 +9304,7 @@
         "body": [
           "编辑任务假设：经验证的CAD、计算或仿真工具可能支持船舶分析，生成式AI可起草虚构资料下的文档。传统CFD/结构仿真不等于生成式AI；未取得本职业采用率或岗位结果。规范版本、边界条件、工程计算及试验必须核验，不能用自动文本代替批准设计或法定证书。"
         ],
-        "heading": "船舶工程师与海军建筑师的工作对象与 AI 边界"
+        "heading": "船舶工程师与船舶总体设计师的工作对象与 AI 边界"
       },
       "career_path_block": {
         "boundary": "工程执业、注册与船级社资格按具体法域与主管部门核验；学位与认证不等于执业授权。",
@@ -9442,7 +9482,7 @@
                 },
                 "readiness_evidence": "保留设计与验证记录。",
                 "responsibility": "独立完成设计与分析并接受复核。",
-                "role": "船舶工程师与海军建筑师"
+                "role": "船舶工程师与船舶总体设计师"
               },
               {
                 "credentials": "按雇主要求核验。",
@@ -9624,7 +9664,7 @@
             }
           },
           {
-            "answer": "美国侧该职业属 Job Zone 4，多数岗位要求四年制学士学位并通常需数年相关经验；船级社、安全与注册类结论须由具备资格的人员或机构出具；本页不判断个人是否符合条件。",
+            "answer": "BLS 表 1.2 将学士学位列为美国 17-2121 的典型教育，相关工作经验列为无。O*NET Job Zone 4 是职业准备分组，其新聘教育栏是受访者回答。具体岗位和进阶执业条件另核。",
             "key": "qa1",
             "question": "资格边界是什么？",
             "table": {
@@ -9681,7 +9721,7 @@
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
         "evidence_scope": "依据 O*NET 17-2121.00 的任务与工作情境，以及稳性与结构、规范合规、试验判读、成本进度与专业边界中的具体要求；具体规则按雇主与适用法规核对，不跨范围外推。",
-        "heading": "船舶工程师与海军建筑师的工作风险与边界",
+        "heading": "船舶工程师与船舶总体设计师的工作风险与边界",
         "risks": [
           {
             "affected_roles": "设计与分析岗位",
@@ -9767,10 +9807,11 @@
             "affected_roles": "设计与协调岗位",
             "consequence": "可能导致返工或合规风险。",
             "evidence_refs": [
-              "marine-engineers-and-naval-architects.display.source.onet-tasks"
+              "marine-engineers-and-naval-architects.display.source.onet-tasks",
+              "marine-engineers-and-naval-architects.display.source.imo-survey-cert"
             ],
             "id": "risk-6",
-            "mitigation": "先核实并记录差异，再决定继续或升级。",
+            "mitigation": "稳性、结构、图纸版次、试验验证或法定要求有未决冲突时，暂停受影响的工程判断或放行。保留原图纸和试验记录，交有权的设计复核人、船级机构或船旗国授权检验主体按职责核清，确认后依授权恢复。N 表只核纸面交接状态。",
             "scenario": "船东、船厂与监管要求或数据不一致。",
             "title": "多方信息不一致"
           }
@@ -9896,24 +9937,24 @@
           },
           "china_edu_table": [
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与岗位聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "岗位方向",
+              "岗位方向": "核对任务",
+              "说明": "问是船体总体、结构、动力系统还是试验支持。"
             },
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与岗位聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "入门带教",
+              "岗位方向": "核对交付",
+              "说明": "问先做图纸、计算还是测试记录，谁复核。"
             },
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与岗位聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "基本报酬",
+              "岗位方向": "核对计薪",
+              "说明": "分清月薪、年薪和试用期口径。"
             },
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与岗位聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "额外报酬",
+              "岗位方向": "核对条件",
+              "说明": "问明出差、海试和加班如何计薪。"
             }
           ],
           "china_industry_table": [
@@ -9980,16 +10021,16 @@
           "china_salary_note": "中国大陆行业口径与美国职业统计分开，不能跨市场拼接。",
           "china_salary_table": [
             {
-              "城市/区间": "全国·制造业（非私营）",
-              "月薪参考": "仅发布年平均工资"
+              "城市/区间": "城镇非私营单位 · 制造业",
+              "年工资参照（行业/岗位大类）": "113,594 元／年"
             },
             {
-              "城市/区间": "全国·制造业（私营）",
-              "月薪参考": "仅发布年平均工资"
+              "城市/区间": "城镇私营单位 · 制造业",
+              "年工资参照（行业/岗位大类）": "76,055 元／年"
             },
             {
-              "城市/区间": "本职业精确工资",
-              "月薪参考": "证据不足：未取得安全对应分布"
+              "城市/区间": "全国城镇非私营单位 · 全行业",
+              "年工资参照（行业/岗位大类）": "129,441 元／年"
             }
           ],
           "china_soc_row": {
@@ -10021,12 +10062,12 @@
           "ui": {
             "ai_heading": "AI 与薪资判断边界",
             "driver_heading": "影响因素",
-            "official_heading": "官方统计口径",
-            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
-            "scenario_heading": "情景化参考",
-            "scenario_interpretation_label": "解释",
-            "scenario_role_label": "岗位范围",
-            "scenario_value_label": "参考值"
+            "official_heading": "2025 年城镇单位年平均工资背景",
+            "scenario_caption": "岗位与报酬核对项",
+            "scenario_heading": "看招聘时核对哪些条件？",
+            "scenario_interpretation_label": "向用人单位确认",
+            "scenario_role_label": "核对范围",
+            "scenario_value_label": "核对项"
           },
           "us_growth": "不适用本地口径",
           "us_median": "不适用本地口径"
@@ -10182,78 +10223,21 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "8,500 人（2024）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "marine-engineers-and-naval-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "marine-engineers-and-naval-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "约 8,400 个岗位（2025）",
+            "说明": "来源：BLS 就业预测表 1.2。"
           },
           {
             "指标": "就业 · 变化",
-            "数值": "高于平均（5%—6%，2024—2034）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "marine-engineers-and-naval-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "marine-engineers-and-naval-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "6.7%",
+            "说明": "来源：BLS 就业预测表 1.2。"
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约600个/年（旧2024—2034预测）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "marine-engineers-and-naval-architects.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "marine-engineers-and-naval-architects.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "预计年均约 500 个",
+            "说明": "来源：BLS 就业预测表 1.2。"
           }
         ],
-        "boundary": "美国17-2121、2025OEWS工资与行业值；就业保留旧2024—2034事实并注明最新2025—2035版本，不混合。分位非资历或个人收入承诺。",
+        "boundary": "BLS 表 1.2（美国本职业 17-2121）：2025 年约 8,400 个岗位，2035 年预计约 8,900 个，变化 6.7%，年均约 500 个职位空缺，含人员替补。人数分别取整。",
         "direct_answer": {
           "$item": "marine-engineers-and-naval-architects.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10280,7 +10264,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "高于平均（2024—2034）",
+        "growth": "2025–2035",
         "heading": {
           "$item": "marine-engineers-and-naval-architects.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10329,11 +10313,11 @@
             "question": "工资"
           },
           {
-            "answer": "2024 年在岗人数，不是招聘职位数。",
+            "answer": "2025 年就业基期人数。",
             "question": "就业"
           },
           {
-            "answer": "旧2024—2034与最新2025—2035分开看；最新增长7%、年均500空缺，非个人录用结果。",
+            "answer": "2025–2035",
             "question": "展望"
           },
           {
@@ -10343,11 +10327,11 @@
         ],
         "median": "$112,230/年（2025）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025–2035",
         "wage_column_labels": [
           "分位",
           "年度参考",
-          "小时等值",
+          "时薪",
           "解释"
         ],
         "wage_heading": {
@@ -10358,34 +10342,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "$39.91/小时",
-            "interpretation": "2025美国全国本职业分位；非资历或个人工时换算。",
-            "label": "P10",
-            "value": "$83,010/年"
+            "equivalent": "39.91 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资，年薪与时薪各取原表。",
+            "label": "第 10 百分位",
+            "value": "83,010 美元/年"
           },
           {
-            "equivalent": "$47.71/小时",
-            "interpretation": "2025美国全国本职业分位；非资历或个人工时换算。",
-            "label": "P25",
-            "value": "$99,250/年"
+            "equivalent": "47.71 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资，年薪与时薪各取原表。",
+            "label": "第 25 百分位",
+            "value": "99,250 美元/年"
           },
           {
-            "equivalent": "$53.96/小时",
-            "interpretation": "2025美国全国本职业分位；非资历或个人工时换算。",
-            "label": "P50（中位数）",
-            "value": "$112,230/年"
+            "equivalent": "53.96 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资，年薪与时薪各取原表。",
+            "label": "第 50 百分位",
+            "value": "112,230 美元/年"
           },
           {
-            "equivalent": "$66.20/小时",
-            "interpretation": "2025美国全国本职业分位；非资历或个人工时换算。",
-            "label": "P75",
-            "value": "$137,690/年"
+            "equivalent": "66.2 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资，年薪与时薪各取原表。",
+            "label": "第 75 百分位",
+            "value": "137,690 美元/年"
           },
           {
-            "equivalent": "$83.33/小时",
-            "interpretation": "2025美国全国本职业分位；非资历或个人工时换算。",
-            "label": "P90",
-            "value": "$173,330/年"
+            "equivalent": "83.33 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资，年薪与时薪各取原表。",
+            "label": "第 90 百分位",
+            "value": "173,330 美元/年"
           }
         ]
       },
@@ -10416,10 +10400,10 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "船舶工程师与海军建筑师适合什么样的人？"
+        "title": "船舶工程师与船舶总体设计师适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是完全虚构的船舶设计情境核对，不是人格诊断、录用结论或资格评估。",
+        "boundary": "若不适应反复改版、跨专业复核或船厂与试验现场的节奏，先问清设计与现场时间、版本管理和审核分工。",
         "how": {
           "$item": "marine-engineers-and-naval-architects.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10466,7 +10450,7 @@
         "outlook_evidence": [
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025–2035",
             "interpretation": "就业规模、变化与职位空缺必须分别解释。",
             "limitation": "为职业统计，不能作为个人就业保证。",
             "metric": "就业规模与变化",
@@ -10480,21 +10464,21 @@
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
-            "interpretation": "旧2024—2034预测年均空缺，含替补；非十年合计，最新2025—2035年均500另列。",
+            "horizon": "2025–2035",
+            "interpretation": "2025–2035",
             "limitation": "不能作为个人录用概率。",
-            "metric": "预测年均职位空缺",
+            "metric": "预计年均空缺",
             "occupation_scope": "展示口径：Marine Engineers and Naval Architects（17-2121.00）",
-            "value": "约600个/年（旧版）"
+            "value": "预计年均约 500 个"
           },
           {
             "geography": "美国全国",
-            "horizon": "2025",
+            "horizon": "2025-05",
             "interpretation": "为 BLS 2025 OEWS 全国中位数，不代表起薪或到手收入。",
             "limitation": "2025完整分位已取得；不含个人到手收入或资历结论。",
             "metric": "年薪中位数",
             "occupation_scope": "展示口径：Marine Engineers and Naval Architects（17-2121.00）",
-            "value": "$112,230/年"
+            "value": "112,230 美元/年"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -10800,8 +10784,8 @@
         },
         "questions": [
           {
-            "answer": "用本页工作样本核对需求界定。",
-            "question": "你能把用途转化为设计要求吗？"
+            "answer": "用《N 表：图纸与测试记录交接》找出待核项，写清原值和复核人。",
+            "question": "记录有差异时，你会怎样交接？"
           },
           {
             "answer": "按方法要求核对假设与数据。",
@@ -10828,7 +10812,7 @@
             "question": "你的工作如何被复核？"
           },
           {
-            "answer": "用完全虚构的设计需求与试验数据完成一次演练。",
+            "answer": "先用 N 表核对图纸与测试记录的版本、复核状态和交接人，保留原始版本。工程设计和放行由具备相应权限的人员另行复核。",
             "question": "下一步如何试验？"
           }
         ],
@@ -11050,7 +11034,7 @@
           "entry": "marine-engineers-and-naval-architects.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合船舶工程师与海军建筑师",
+        "label": "测我的职业兴趣是否适合船舶工程师与船舶总体设计师",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11118,7 +11102,7 @@
             "item": "marine-engineers-and-naval-architects.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：O*NET 17-2121.00 船舶工程师与海军建筑师（摘要）：提供 17-2121.00 的职业身份、官方描述、兴趣代码、Job Zone、技能与知识。；该页工资与就业数据为本职业口径。；O*NET 17-2121.00 任务（Tasks）：提供设计船体与上层建筑、稳性与结构分析、监测合规、布置机舱与系统、设计舱内布局、编制技术与合同文件、参与坞试与海试等任务清单。；任务样本不代表每个岗位执行全部任务。；O*NET 17-2121.00 工作情境（Work Context）：描述办公室与船厂/试验现场、频繁沟通与决策、受限空间与户外作业等情境。；美国工作情境不替代中国法律与雇主规程。；O*NET 17-2121.00 全国工资（BLS OEWS 展示）：2025 BLS OEWS 中位工资；该页为本职业口径。；本页未展示分位工资。；O*NET 17-2121.00 全国就业趋势：2024 年就业规模与 2024—2034 年增长与职位空缺预测。；预测不是录用保证。；Industries: 17-2121.00：该页 2024 年主要行业为 Manufacturing 与 Professional, Scientific, and Technical Services。；行业分布是雇主场景信号，不是增长或需求预测。；O*NET 17-2121.00 教育与职业准备：Job Zone 4：多数岗位要求四年制学士学位、部分要求大专后证书并通常需数年相关工作或培训。；教育分布不等于每个雇主的硬性要求。；Licenses & Certifications: 17-2121.00：O*NET 提供的州执照与全国认证查询入口。；认证与培训不等于执业授权或雇主录用条件。；Generative AI and Jobs (ILO Working Paper 140, 2025)：按任务层面评估生成式 AI 的职业暴露。；暴露指数不等于采用率、岗位结果或录用概率。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营与私营单位分行业门类年平均工资（含制造业）。；行业平均不是职业中位数，且不含个体工商户与自由职业者。；企业薪酬调查信息（2024年）：人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。；覆盖城镇企业，不含机关事业单位；本页未取得与本职业精确对应的条目。；FermatMind 船舶工程师与海军建筑师任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。；编辑量表不等于采用率、裁员、法规或证照证据。；"
+        "note": "O*NET 提供任务信息，OEWS 提供工资，BLS 表 1.2 提供就业预测。"
       },
       "work_context_block": {
         "$item": "marine-engineers-and-naval-architects.profile.work-context-block.5",
@@ -11130,7 +11114,9 @@
     "contract_version": "career.detail.display.v1",
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪条船舶与海洋工程方向？",
-      "interface.fit.interest_code_heading": "怎样理解 RIC 兴趣代码"
+      "interface.fit.interest_code_heading": "怎样理解 RIC 兴趣代码",
+      "interface.path.promotion_evidence_label": "阶段记录与探索练习",
+      "interface.quick_decision.experiment_heading": "纸面试做能帮你观察什么？"
     },
     "locale": "zh-CN",
     "native_items": [
@@ -11144,19 +11130,19 @@
     ],
     "path": "/zh/career/jobs/marine-engineers-and-naval-architects",
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
       "market-signals": "市场信号",
       "navigation": "页面导航",
-      "path": "入行路径",
+      "path": "入行与 N 表：图纸与测试记录交接",
       "profile": "职业定义与职责",
       "quick-decision": "快速判断",
       "risk": "风险与边界",
       "source-register": "来源注册表",
       "sources": "常见问题与边界",
-      "us-salary": "美国薪资"
+      "us-salary": "美国船舶工程与总体设计工资"
     }
   },
   "fact_register": {
@@ -11166,47 +11152,47 @@
         "display_value": "112,230 美元/年",
         "fact_id": "us-wage-median",
         "market": "美国",
-        "measure": "2025 年年薪中位数（约 53.96 美元/小时）",
-        "occupation_scope": "O*NET 展示口径：Marine Engineers and Naval Architects（17-2121.00）本职业",
-        "period": "2025 BLS OEWS；查阅 2026-09-25",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "17-2121",
+        "period": "2025-05",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "8,500 人",
+        "display_value": "约 8,400 个岗位",
         "fact_id": "us-employment-2024",
         "market": "美国",
-        "measure": "2024 年在岗人数",
-        "occupation_scope": "O*NET 展示口径：Marine Engineers and Naval Architects（17-2121.00）本职业",
-        "period": "2024；查阅 2026-09-25",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "17-2121",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "O*NET 显示 Projected growth (2024-2034) 为 Faster than average（5% to 6%）；该数据展示口径为本职业 17-2121.00。",
-        "display_value": "高于平均（5%—6%，2024—2034）",
+        "derivation": null,
+        "display_value": "6.7%",
         "fact_id": "us-growth",
         "market": "美国",
-        "measure": "就业增长预测",
-        "occupation_scope": "O*NET 展示口径：Marine Engineers and Naval Architects（17-2121.00）本职业",
-        "period": "2024—2034；查阅 2026-09-25",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "17-2121",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "O*NET 显示 Projected job openings (2024-2034) 为 600；该数字为期间合计而非年均。",
-        "display_value": "约 600 个（2024—2034 合计）",
+        "derivation": null,
+        "display_value": "年均约 500 个",
         "fact_id": "us-openings",
         "market": "美国",
-        "measure": "预计职位空缺（期间合计）",
-        "occupation_scope": "O*NET 展示口径：Marine Engineers and Naval Architects（17-2121.00）本职业",
-        "period": "2024—2034；查阅 2026-09-25",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "17-2121",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -11247,7 +11233,7 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得中国大陆船舶工程师与海军建筑师的全国职业工资中位数（2025 官方公开口径）",
+        "display_value": "证据不足：未取得中国大陆船舶工程师与船舶总体设计师的全国职业工资中位数（2025 官方公开口径）",
         "fact_id": "cn-wage-gap",
         "market": "中国大陆全国口径",
         "measure": "occupation wage availability",
@@ -11256,57 +11242,45 @@
         "source_refs": [
           "nbs-wages"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "58%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "船舶工程师与海军建筑师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "船体与系统设计",
-      "稳性与结构分析",
-      "法规与试验验证"
+      "船舶工程师与船舶总体设计师",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业变化"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国职位空缺（期合计）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11320,17 +11294,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "本页船舶工程师与海军建筑师指 O*NET 17-2121.00：按规范设计船体与上层建筑、开展稳性/结构/重量/振动分析、监测船舶符合国际法规与防污染标准、设计舱室布局、编制技术与合同文件、参与坞试与海试并评估机械与设备性能。判断这条职业路径时，应同时验证工作闭环、责任与证据边界、证据口径、风险控制和可观察的入门作品。"
+      "text": "了解船舶工程师与船舶总体设计师的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "船舶工程师与海军建筑师职业判断：工作、入行与风险边界"
+      "text": "船舶工程师与船舶总体设计师做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "4631dc4fcc8118e70b1c6dc020a77dcd58a5828b5bd22e195d449a4e335c4bab",
+  "source_content_sha256": "9a1b5cc80da6ccc8368528cad178eb227e52afd49a535de721ef06910359f4c2",
   "subject": {
     "canonical_slug": "marine-engineers-and-naval-architects",
-    "name": "船舶工程师与海军建筑师",
-    "summary": "本页船舶工程师与海军建筑师指 O*NET 17-2121.00：设计、开发并评估船舶、船舶机械及相关设备（如供电与推进系统）的运行，含轮机工程师与船舶设计师等职称。"
+    "name": "船舶工程师与船舶总体设计师",
+    "summary": "本页覆盖美国 O*NET 17-2121.00。船舶工程师与船舶总体设计师负责船舶及相关系统的设计和验证。工作可侧重船体布置与性能，也可侧重推进、动力和设备系统，交付图纸、计算资料及测试记录。"
   }
 }

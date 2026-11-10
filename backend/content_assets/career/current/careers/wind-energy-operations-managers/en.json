@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Check the quantity, cost, unknown quotes, and approval and training status in the plan and observe whether you can keep tracking and clarify with the responsible person."
+              "Paper check | A downtime log shows a return time, but the maintenance record lacks release approval. Keep the statuses separate and escalate to the shift lead. "
             ]
           },
           "id": "wind-energy-operations-managers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24803,13 +24802,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "The wind energy operations manager corresponds to O*NET11-9199.09 and manages the staff, maintenance, finances, and plans of continuous wind farm operation. The work includes operations and maintenance records, downtime and spare parts tracking, budgets and costs, contracts and warranties, training, and subcontractor supervision. Responsibility scopes differ by unit; development managers focus on opportunities and project preliminaries, engineers on design and analysis, and service technicians on specific equipment tasks, and an operations management title does not automatically grant electrical, height, or dispatch work authority."
+              "Wind operations managers coordinate staff and contractors, track downtime, work orders and parts, and schedule reviews and maintenance. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "wind-energy-operations-managers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-11-9199.09"
           ],
           "type": "prose"
         }
@@ -25453,13 +25451,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Organizing records and status drafts can be explored, with unknown costs, training, and approval checked against the original; CMMS/SCADA are not text AI adoption evidence. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: A downtime log shows a return time, but the maintenance record lacks release approval. Keep the statuses separate and escalate to the shift lead."
             ]
           },
           "id": "wind-energy-operations-managers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-11-9199.09",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33077,6 +33075,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-11-9199.09",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 11-9199.09 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/11-9199.09"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38600,10 +38625,10 @@
       "text": "Wind Energy Operations Managers"
     }
   },
-  "source_content_sha256": "1559959f31c22f3637cfdb5cef104ce56038460a608fba72d03bf5779c86d0a4",
+  "source_content_sha256": "e03ca3a9403406d15f8d0fe74a7816bba14abc344ae4375cb56d720aff5aa928",
   "subject": {
     "canonical_slug": "wind-energy-operations-managers",
     "name": "Wind Energy Operations Managers",
-    "summary": "The wind energy operations manager corresponds to O*NET11-9199.09 and manages the staff, maintenance, finances, and plans of continuous wind farm operation. The work includes operations and maintenance records, downtime and spare parts tracking, budgets and costs, contracts and warranties, training, and subcontractor supervision. Responsibility scopes differ by unit; development managers focus on opportunities and project preliminaries, engineers on design and analysis, and service technicians on specific equipment tasks, and an operations management title does not automatically grant electrical, height, or dispatch work authority."
+    "summary": "Wind operations managers coordinate staff and contractors, track downtime, work orders and parts, and schedule reviews and maintenance."
   }
 }

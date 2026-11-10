@@ -36,7 +36,7 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-current-2025": {
         "status": "pending_mapping"
@@ -45,7 +45,7 @@
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-current-2025-2035": {
         "status": "pending_mapping"
@@ -72,7 +72,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-current-2025-2035": {
         "status": "pending_mapping"
@@ -1563,7 +1563,7 @@
         "status": "pending_mapping"
       },
       "item:billing-and-posting-clerks.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:billing-and-posting-clerks.sources.source-card.1": {
         "status": "mapped"
@@ -23307,12 +23307,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：账单过账文员不是「记账的人」，而是按凭证依据与计费口径把账单与其他数值数据核算与登记并可复核的账务岗位：核对计费数据的准确性并更正错误、为服务或交付或装运的货物编制分项对账单与账单或发票并登记应收金额、保存发票与支持性凭证记录、操作打字与计算与开票设备、制作账单文件与贷项通知单、处理接听电话与订购用品等行政事务、并完成核对银行对账单与已付支票与按项目累计工时与金额计算费用与过账等簿记工作；只求「数字对上」而不愿追凭证依据、不愿按国家统一的会计制度审核原始凭证、也不愿把差异与更正留成可复核记录的人不适合。"
+              "到 09 做 BL-75：核对两版纸面账单，写一页差异交接。"
             ]
           },
           "id": "billing-and-posting-clerks.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
+            "bl75-editor",
             "onet"
           ],
           "type": "prose"
@@ -23322,11 +23322,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你愿意为每一个数字追到原始凭证并逐项核对；能长时间伏案处理表格与单据并保持细节一致；发现记载不准确或不完整的凭证时愿意退回或要求更正补充，而不是自行改动数字；愿意把账实与账证与账账与账表不符的情形先停下来报告。"
+              "试试能否耐心对比账单行、凭证和待核差异。"
             ]
           },
           "id": "billing-and-posting-clerks.quick-decision.fit-decision-checklist.2",
           "source_refs": [
+            "bl75-editor",
             "onet"
           ],
           "type": "prose"
@@ -23336,13 +23337,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停投入的条件：你还没有在任何有监督的条件下完成过一次完整的「取得并审核原始凭证—填制记账凭证—登记账簿—编制账单或对账单—核对差异并留痕」闭环，或只能靠「会记账」说明兴趣；也不要把熟悉某套软件或短期录入速度当作可以独立核定计费口径、或独立处理账单调整与退款与冲销与开票问题的证明。凭证依据与账簿登记、发票的开具与取得与保管、客户账单信息的处理，以及计费口径与调整权限须按适用法域与主管部门与用人单位制度执行并留有可追溯记录；本页不提供任何账务处理方法、开票方法或规避监管的做法。"
+              "核对资料和更改账目是两个步骤。"
             ]
           },
           "id": "billing-and-posting-clerks.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
+            "bl75-editor",
             "onet"
           ],
           "type": "prose"
@@ -23352,12 +23352,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "职业身份与口径必须分开核对：O*NET 把 43-3021.00（Billing and Posting Clerks）列为 Job Zone 1–2（SVP 低于 6.0），学历构成为要求学士学位 33%、要求高中文凭或同等学历 25%、要求副学士或其他两年制学位 22%（页面仅列出这三项）；兴趣代码为 C（常规型）。该页未为该职业标注 Bright Outlook，就业预测为「几乎无变化」（Little or no change；就业趋势页给出 2024 年 429,800 人降至 2034 年约 427,900 人、0%，同时预测期年均仍有约 42,200 个空缺）。同时必须注意：本页的工资与就业与行业数据在 O*NET 页面上均为本职业单列口径（页面未出现「Wage data for …」「Employment data for …」等取自其他职业的标注）。学历、职业培训、行业认证、雇主任用与岗位授权、以及适用法域对凭证审核与账簿登记与发票开具的要求是不同状态，须按雇主与岗位与法域逐项核验，任何一项都不能由另一项自动推出。"
+              "BLS 表 1.2 列美国 43-3021 的典型路径为高中或同等学历、通常无相关经验、中期在岗培训。岗位权限、开票及过账复核按机构流程确认。"
             ]
           },
           "id": "billing-and-posting-clerks.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -23367,12 +23367,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以凭证依据与计费口径逐笔核对、并在大量单据与表格的重复核对中稳定交付的账务岗位，核心是账单编制与过账与账簿与凭证与对账与差错处理，而不是对数字的想象；其美国工资与就业为本职业单列口径，就业预测为几乎无变化；中国大陆侧未取得精确职业工资条目，本页不以行业平均或美国数据填补。"
+              "到 09 做 BL-75：核对两版纸面账单，写一页差异交接。"
             ]
           },
           "id": "billing-and-posting-clerks.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
+            "bl75-editor",
             "onet"
           ],
           "type": "prose"
@@ -23425,18 +23425,18 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "取得与审核凭证｜让每个数字有依据｜按业务归集原始凭证，核对要素与审批与授权完整性，对不真实或不合法或记载不准确不完整的凭证按规程处理而不自行改数。",
+              "整理凭证｜留可核依据｜按授权归集、核字段并上报。",
               "核算与编制账单｜让计费口径清楚｜按合同或费率或规程核算金额，编制分项对账单与账单或发票并登记应收金额，把计算过程与依据一并留存。",
-              "登记账簿与过账｜让记录可追溯｜依据经过审核的会计凭证登记账簿，按连续编号页码顺序登记并完成过账，记录更正时按规程在更正处盖章留痕。",
+              "账簿登记｜留审查记录｜按授权用已审核凭证登记。大陆纸质账簿和电子账簿各按适用要求处理。",
               "对账与差异处理｜让账实相符｜定期把账簿记录与实物与款项及有关资料核对，保证账实与账证与账账与账表相符，发现差异先挂起再查明原因并记录处置。",
-              "档案与保管｜让资料可复核｜按规程存放与保管发票与凭证与账簿资料，保持连续编号与检索可用，按保管期限要求管理并按权限访问。",
+              "档案与保管｜保持可复核｜按机构要求保管和检索，访问和保存期限分别核对。",
               "报告与升级｜让责任可交接｜凭证不合规或差异无法解释或涉及账单调整与退款与冲销与开票口径时，按授权链报告与移交并如实记录，不自行承诺或自行调整。"
             ]
           },
           "id": "billing-and-posting-clerks.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
-            "cnclass"
+            "cnclass",
+            "onet"
           ],
           "type": "list"
         },
@@ -23445,11 +23445,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜93% 持续或几乎持续坐着，88% 认为精确或准确极其重要（另有 12% 认为非常重要）；73% 每天使用电子邮件，57% 每天有面对面讨论，58% 每天有电话交谈，56% 持续与他人接触（另有 34% 多数时间接触）；59% 与他人身体距离稍近（共用办公室），25% 与他人一起工作但不靠近（独立办公室）；58% 每天在有环境控制的室内工作（37% 从不）；28% 每天暴露于分散注意或不适的噪音（45% 从不）；16% 每周一次以上需要面对不愉快或愤怒或不礼貌的人，36% 每月一次以上处于冲突情境（41% 每年一次以上、17% 从不）；14% 每年一次以上遇到有暴力行为或身体攻击性的人（85% 从不）；100%从不接触危险条件、辐射与全身振动；高处作业为97%从不。\n主要装备与工具｜办公与账务系统：Microsoft Excel 与 Office 与 Outlook 与 Word 与 PowerPoint、Microsoft Access 与 Windows 与 Project、Intuit QuickBooks、SAP software、Epic Systems（医疗机构账单场景）、MEDITECH software；打字与加法与计算与开票设备、对账单装封与邮寄设备与称重与邮资设备、税控与电子发票相关系统（按机构与法域）、会计凭证与账簿与发票与支持性凭证的纸质与电子档案。O*NET 技术清单列出 12 项软件技能并标注热门技术，出现比例从 28%（Excel）到低于 1%（Windows 与 MEDITECH 与 Project）。\n任务节奏｜92% 的典型工作周为 40 小时，100% 为固定作息（既定常规与固定排班）；61% 认为重复相同任务极其重要（另有 25% 重要）；33% 持续或几乎持续做重复动作（另有 26% 超过一半时间、27% 少于一半时间）；47% 在确定任务与优先级上有一些自由、44% 有很大自由；59% 在决定上有一些自由、33% 有很大自由；22% 每天需要作出决定（另有 13% 每周一次以上）；21% 每天面临时间压力；70% 认为竞争程度中等、21% 认为完全无竞争。\n协作对象｜与出纳与主管会计与复核人员与业务或销售或客服与仓储或物流同事协作；59% 认为与工作组或团队合作极其重要（另有 34% 非常重要）；17% 认为协调或领导他人完成工作极其重要；42%对他人的工作成果与结果承担高责任（28% 中等、11% 有限、11% 无）。\n合规与安全｜凭证与账簿与发票的作业须符合国家统一的会计制度与机构规程；《中华人民共和国会计法》要求依法设置会计账簿并保证真实完整、对原始凭证进行审核并对不真实不合法的凭证有权不予接受并向单位负责人报告、账簿登记必须以经过审核的会计凭证为依据、并定期核对以保证账实与账证与账账与账表相符，会计机构内部应当建立稽核制度且出纳人员不得兼任稽核与会计档案保管与收入支出费用债权债务账目的登记工作；《中华人民共和国发票管理办法》要求开具发票按规定的时限、顺序、栏目、全部联次一次性如实开具；其中纸质发票须加盖发票专用章，不符合规定的发票不得作为财务报销凭证且任何单位和个人有权拒收，并禁止虚开发票与转借转让与扩大使用范围与以其他凭证代替发票。本页不提供任何账务处理方法或开票方法。\n记录与复盘｜凭证依据与审核过程、计费口径与计算过程、账单与应收金额的登记、对账与差异与更正、以及仍不确定的部分需要可追溯；原始凭证记载的各项内容均不得涂改，凭证有错误的应按规程由出具单位重开或更正并在更正处盖章，账簿记录发生错误或隔页或缺号或跳行的应按国家统一的会计制度规定更正并由相关人员盖章。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能以阅读理解 69 与口语表达 53 与积极倾听 50 与批判性思维 50 与数学 50 与监控 50 与写作 50 为主；可迁移技能以时间管理 47 与社会洞察力 44 与复杂问题解决 41 与判断与决策 41 与服务导向 41 与协调 38 为主；详细页实际有33项知识评分：英语77、数学75、行政与管理69、经济与会计67、行政64、客户与个人服务59、教育与培训51；52项能力中近距视觉69、信息排序/书面理解63、口头表达60、数学推理/数字运算50；16项工作风格中细节91、可靠82、诚信70、谨慎60。职业评分不是个人测试成绩、录用分数线或发生百分比。\n准入与授权｜学历与认证不等于计费口径与账单调整与开票的处置授权；O*NET新入职教育要求受访答案为学士学位 33%、高中文凭或同等学历 25%、副学士或其他两年制学位 22%（页面仅列出这三项）；该区职业经验要求从几乎无需到一年、在岗训练从几天到一年；O*NET 培训页面显示该目录全国未找到相关培训项目（不证明不存在培训），认证页面列出多项国家认证（医疗服务编码与账单方向、簿记方向与软件方向），不等于执业许可证或雇主任命。\n行业与雇主｜O*NET 行业分布为医疗保健与社会援助 43%、专业科学与技术服务15%、其他行业（含行政与支持服务与企业与企业管理）42%；常见雇主为医疗机构账单部门、专业服务机构计费与工单核算岗位、企业应收与账务共享中心与其他计费场景。"
+              "工作环境｜93% 持续或几乎持续坐着，88% 认为精确或准确极其重要（另有 12% 认为非常重要）；73% 每天使用电子邮件，57% 每天有面对面讨论，58% 每天有电话交谈，56% 持续与他人接触（另有 34% 多数时间接触）；59% 与他人身体距离稍近（共用办公室），25% 与他人一起工作但不靠近（独立办公室）；58% 每天在有环境控制的室内工作（37% 从不）；28% 每天暴露于分散注意或不适的噪音（45% 从不）；16% 每周一次以上需要面对不愉快或愤怒或不礼貌的人，36% 每月一次以上处于冲突情境（41% 每年一次以上、17% 从不）；14% 每年一次以上遇到有暴力行为或身体攻击性的人（85% 从不）；100%从不接触危险条件、辐射与全身振动；高处作业为97%从不。\n主要装备与工具｜办公与账务系统：Microsoft Excel 与 Office 与 Outlook 与 Word 与 PowerPoint、Microsoft Access 与 Windows 与 Project、Intuit QuickBooks、SAP software、Epic Systems（医疗机构账单场景）、MEDITECH software；打字与加法与计算与开票设备、对账单装封与邮寄设备与称重与邮资设备、税控与电子发票相关系统（按机构与法域）、会计凭证与账簿与发票与支持性凭证的纸质与电子档案。O*NET 技术清单列出 12 项软件技能并标注热门技术，出现比例从 28%（Excel）到低于 1%（Windows 与 MEDITECH 与 Project）。\n任务节奏｜92% 的典型工作周为 40 小时，100% 为固定作息（既定常规与固定排班）；61% 认为重复相同任务极其重要（另有 25% 重要）；33% 持续或几乎持续做重复动作（另有 26% 超过一半时间、27% 少于一半时间）；47% 在确定任务与优先级上有一些自由、44% 有很大自由；59% 在决定上有一些自由、33% 有很大自由；22% 每天需要作出决定（另有 13% 每周一次以上）；21% 每天面临时间压力；70% 认为竞争程度中等、21% 认为完全无竞争。\n协作对象｜与出纳与主管会计与复核人员与业务或销售或客服与仓储或物流同事协作；59% 认为与工作组或团队合作极其重要（另有 34% 非常重要）；17% 认为协调或领导他人完成工作极其重要；42%对他人的工作成果与结果承担高责任（28% 中等、11% 有限、11% 无）。\n合规与安全｜凭证与账簿与发票的作业须符合国家统一的会计制度与机构规程；《中华人民共和国会计法》要求依法设置会计账簿并保证真实完整、对原始凭证进行审核并对不真实不合法的凭证有权不予接受并向单位负责人报告、账簿登记必须以经过审核的会计凭证为依据、并定期核对以保证账实与账证与账账与账表相符，会计机构内部应当建立稽核制度且出纳人员不得兼任稽核与会计档案保管与收入支出费用债权债务账目的登记工作；《中华人民共和国发票管理办法》要求开具发票按规定的时限、顺序、栏目、全部联次一次性如实开具；其中纸质发票须加盖发票专用章，不符合规定的发票不得作为财务报销凭证且任何单位和个人有权拒收，并禁止虚开发票与转借转让与扩大使用范围与以其他凭证代替发票。本页不提供任何账务处理方法或开票方法。\n记录与复盘｜凭证依据与审核过程、计费口径与计算过程、账单与应收金额的登记、对账与差异与更正、以及仍不确定的部分需要可追溯；按大陆《会计法》第14条，原始凭证内容不得涂改。金额有误须由出具单位重开，不得在原件更正。其他错误由出具单位重开或更正，更正处加盖出具单位印章。 按大陆《会计法》第15条，依据审核后的凭证登记。纸质账簿按连续页码登记，涉及规定情形的更正按统一会计制度和盖章要求执行。使用电子计算机记账的登记、更正按统一会计制度办理。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能以阅读理解 69 与口语表达 53 与积极倾听 50 与批判性思维 50 与数学 50 与监控 50 与写作 50 为主；可迁移技能以时间管理 47 与社会洞察力 44 与复杂问题解决 41 与判断与决策 41 与服务导向 41 与协调 38 为主；详细页实际有33项知识评分：英语77、数学75、行政与管理69、经济与会计67、行政64、客户与个人服务59、教育与培训51；52项能力中近距视觉69、信息排序/书面理解63、口头表达60、数学推理/数字运算50；16项工作风格中细节91、可靠82、诚信70、谨慎60。职业评分不是个人测试成绩、录用分数线或发生百分比。\n准入与授权｜学历与认证不等于计费口径与账单调整与开票的处置授权；O*NET新入职教育要求受访答案为学士学位 33%、高中文凭或同等学历 25%、副学士或其他两年制学位 22%（页面仅列出这三项）；该区职业经验要求从几乎无需到一年、在岗训练从几天到一年；O*NET 培训页面显示该目录全国未找到相关培训项目（不证明不存在培训），认证页面列出多条具名机构证书记录（医疗服务编码与账单方向、簿记方向与软件方向），不等于执业许可证或雇主任命。\n行业与雇主｜O*NET 行业分布为医疗保健与社会援助 43%、专业科学与技术服务15%、其他行业（含行政与支持服务与企业与企业管理）42%；常见雇主为医疗机构账单部门、专业服务机构计费与工单核算岗位、企业应收与账务共享中心与其他计费场景。"
             ]
           },
           "id": "billing-and-posting-clerks.profile.work-context-block.1",
           "source_refs": [
+            "cnclass",
             "onet",
             "employer",
             "bls",
@@ -23457,7 +23458,6 @@
             "hr",
             "nist",
             "census",
-            "cnclass",
             "invoice-current"
           ],
           "type": "prose"
@@ -23540,12 +23540,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国43-3021.00，2025年就业418,000人，2035年预计417,700人；2025—2035年变化0%（几乎无变化），年均职位空缺37,000。预测期空缺包括增长与替换，不是净增岗位或个人录用概率。"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。"
             ]
           },
           "id": "billing-and-posting-clerks.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "ep-current"
+            "ep",
+            "ep-current",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -23554,13 +23556,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按业务序号归集原始凭证与记账凭证 → 核对凭证要素与审批与授权完整性 → 在依法设置的会计账簿上按连续编号顺序登记 → 定期与实物与款项相互核对 → 按规程存放与保管发票与账簿与凭证资料 → 记录差异与更正并保留可追溯痕迹。"
+              "归集原始凭证 → 核字段 → 交相应人员审核 → 按授权登记 → 核对账目 → 记录并交接差异。"
             ]
           },
           "id": "billing-and-posting-clerks.profile.career-quick-answers-block.5",
           "source_refs": [
-            "onet",
-            "cnclass"
+            "cnclass",
+            "onet"
           ],
           "type": "prose"
         },
@@ -23569,7 +23571,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "当前行业页医疗43%、专业科学技术15%、其他42%；摘要标Top industries2025。O*NET2025全年美国Lightcast招聘广告提及：Excel28%、Office20%、Outlook12%、Word6%、PowerPoint4%、SAP4%、QuickBooks3%、Epic2%、Access1%，Windows/MEDITECH/Project均低于1%；前4项标In Demand，表示招聘技能提及，不是人员短缺、软件采用率或AI暴露率。"
+              "O*NET 行业子表列医疗与社会救助 43%、专业科学技术服务 15%、其他 42%。子表未单列统计年份，行业份额不是行业工资。；摘要标Top industries2025。O*NET2025全年美国Lightcast招聘广告提及：Excel28%、Office20%、Outlook12%、Word6%、PowerPoint4%、SAP4%、QuickBooks3%、Epic2%、Access1%，Windows/MEDITECH/Project均低于1%；前4项标In Demand，表示招聘技能提及，不是人员短缺、软件采用率或AI暴露率。"
             ]
           },
           "id": "billing-and-posting-clerks.profile.onet-structured-fields-block.5",
@@ -23761,11 +23763,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "常规核对与登记与对账结论由本人按岗位职责承担；涉及计费口径的确定、账单调整与退款与冲销、发票的开具与作废与红冲与保管、客户账单信息与支付信息如何提供与保存、以及账实或账证或账账或账表不符如何处置时，由具备相应职责与授权的人员按适用法域与主管部门与用人单位制度作出，发现凭证不合规或差异无法解释或涉及超出本人授权时必须停止并报告。"
+              "账单文员按岗位权限核对、记录并报告。凭证的法定审核由会计机构、会计人员承担；计费口径、调整、退款、冲销与开票由有相应授权的人员按适用规则决定。"
             ]
           },
           "id": "billing-and-posting-clerks.profile.career-quick-answers-block.17",
           "source_refs": [
+            "cnclass",
+            "invoice-current",
             "onet",
             "editor"
           ],
@@ -23790,11 +23794,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET问的是新入职者需要多少教育，受访者33%答学士、25%高中或同等、22%副学士/两年制；不是全部从业者学历分布或统一门槛。Job Zone 1–2/SVP<6及几天至一年岗后培训是准备区间说明，不是所有雇主的精确培训承诺。当前O*NET培训目录显示全国未找到相关项目，这只说明该目录没有匹配，不能证明全美不存在课程或岗后培训。认证目录列32条相关记录，含医疗编码/账单、NACPB簿记、SAP订阅订单管理与CSBS信托检查等；关联目录不等于32项本职业普遍门槛，各证条件、费用与有效期本轮未核。"
+              "BLS 表 1.2 列美国 43-3021 的典型路径为高中或同等学历、通常无相关经验、中期在岗培训。岗位权限、开票及过账复核按机构流程确认。"
             ]
           },
           "id": "billing-and-posting-clerks.profile.career-quick-answers-block.19",
           "source_refs": [
+            "ep",
             "privacy",
             "nist",
             "census",
@@ -23870,11 +23875,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国职业43-3021.00及中位工资48,500美元/年为精确职业口径。美国43-3021.00，2025年就业418,000人，2035年预计417,700人；2025—2035年变化0%（几乎无变化），年均职位空缺37,000。预测期空缺包括增长与替换，不是净增岗位或个人录用概率。中国尚缺精确职业映射与工资分位；可参考明确标宽口径的国家统计局行业/办事人员数据，不能当个人薪资。"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。"
             ]
           },
           "id": "billing-and-posting-clerks.profile.career-quick-answers-block.24",
           "source_refs": [
+            "ep",
             "onet",
             "onet-wages",
             "ep-current",
@@ -23902,11 +23908,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET问的是新入职者需要多少教育，受访者33%答学士、25%高中或同等、22%副学士/两年制；不是全部从业者学历分布或统一门槛。Job Zone 1–2/SVP<6及几天至一年岗后培训是准备区间说明，不是所有雇主的精确培训承诺。当前O*NET培训目录显示全国未找到相关项目，这只说明该目录没有匹配，不能证明全美不存在课程或岗后培训。认证目录列32条相关记录，含医疗编码/账单、NACPB簿记、SAP订阅订单管理与CSBS信托检查等；关联目录不等于32项本职业普遍门槛，各证条件、费用与有效期本轮未核。"
+              "BLS 表 1.2 列美国 43-3021 的典型路径为高中或同等学历、通常无相关经验、中期在岗培训。岗位权限、开票及过账复核按机构流程确认。"
             ]
           },
           "id": "billing-and-posting-clerks.profile.career-quick-answers-block.26",
           "source_refs": [
+            "ep",
             "privacy",
             "nist",
             "census",
@@ -24548,10 +24555,10 @@
                 "url": "https://www.onetonline.org/link/industry/43-3021.00"
               },
               {
-                "entity": "O*NET 43-3021.00 职业摘要（就业与预测字段）",
+                "entity": "BLS 表 1.2：账单与过账文员 43-3021",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/43-3021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 43-3021.00 全国工资分位",
@@ -24590,10 +24597,10 @@
                 "url": "https://www.onetonline.org/link/details/43-3021.00"
               },
               {
-                "entity": "O*NET账单过账文员2025—2035就业趋势",
+                "entity": "BLS 表 1.2：账单与过账文员 43-3021",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/43-3021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "《中华人民共和国会计法》（2024 年修正）—— 财政部会计司公开文本",
@@ -24602,10 +24609,10 @@
                 "url": "https://kjs.mof.gov.cn/zt/kjfxcgc/kjfqw/202408/t20240814_3941788.htm"
               },
               {
-                "entity": "O*NET账单过账文员2025—2035就业趋势",
+                "entity": "BLS 表 1.2：账单与过账文员 43-3021",
                 "id": "link-18",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/43-3021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 43-3021.00 培训与教育信息",
@@ -24679,13 +24686,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把凭证要素识别与录入、账单与对账单草稿生成、费率与合同条款检索、对账差异初筛与报表整理用于提高效率，但凭证的真实性与合法性审核、计费口径的确定、账单调整与退款与冲销与开票口径的处置、以及在账实或账证或账账或账表不符时的判断仍由本人与有权限的人员按国家统一的会计制度与机构规程承担，系统输出必须经人工复核与凭证比对后才进入正式记录。"
+              "账单文员按岗位权限核对、记录并报告。凭证的法定审核由会计机构、会计人员承担；计费口径、调整、退款、冲销与开票由有相应授权的人员按适用规则决定。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
-            "cnclass"
+            "cnclass",
+            "invoice-current",
+            "onet"
           ],
           "type": "prose"
         },
@@ -24751,11 +24759,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS明确描述医疗行业需求可能增加，同时自动发票处理提高生产率、限制本职业总体增长。ILO2025研究测任务暴露，认为职业转型更可能，但未给本职业实际采用率或消失日期。以下识别、草稿、检索与差异初筛为编辑按任务提出的辅助用途，需雇主验证数据质量、权限与复核，不能视为已测替代率或每家机构现行流程。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "文字工具可整理账单和凭证草稿。;适用权限、审核及签发另核。;三个样本的 25、25、0 等权取整为 17%。这是编辑任务估算，不能理解成岗位替代率。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.18",
           "source_refs": [
+            "source-fermatmind-ai-rubric",
             "bls-ooh-current",
             "ilo",
             "bls",
@@ -24916,7 +24925,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 43-3021.00 职业摘要（就业与预测字段）"
+              "BLS 表 1.2：账单与过账文员 43-3021"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.29",
@@ -25005,13 +25014,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认原始凭证的真实性与合法性与要素完整性、确定计费口径、对账单调整与退款与冲销与开票口径负责，并承担账簿登记与对账结论是否准确的责任。"
+              "账单文员核对字段、记录差异，并依职责交会计机构或获授权人员复核。调整、退款、冲销和签发按适用规则及权限执行。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
-            "cnclass"
+            "cnclass",
+            "invoice-current",
+            "onet"
           ],
           "type": "prose"
         },
@@ -25287,11 +25297,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 43-3021.00 职业摘要（就业与预测字段）"
+              "BLS 表 1.2：账单与过账文员 43-3021"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.54",
           "source_refs": [
+            "ep",
             "onet",
             "ep-current"
           ],
@@ -25317,13 +25328,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页按本职业口径给出 2025年在岗 418,000 人、2035年约 417,700 人（2025—2035 年 0%，标签为几乎无变化（Little or no change））、预测期年均职位空缺约 37,000（含增长与替换）；「几乎无变化」与仍存在大量空缺并不矛盾，空缺主要来自替代需求。"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.56",
           "source_refs": [
+            "ep",
             "onet",
-            "ep-current"
+            "ep-current",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -25422,14 +25435,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、实际采用、生产率与就业是不同测量对象；O*NET 展示的 BLS 数据对本职业 2025—2035 年给出 0%（几乎无变化）与年均空缺约 37,000 的口径，两者不能互相替代。"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.63",
           "source_refs": [
+            "ep",
             "onet",
             "bls",
-            "ep-current"
+            "ep-current",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -25528,13 +25543,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 数据对本职业 2025—2035 年的口径为 0%（几乎无变化）、预测期年均职位空缺约 37,000；该口径描述职业群体，不代表个人录用概率。"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.70",
           "source_refs": [
+            "ep",
             "onet",
-            "ep-current"
+            "ep-current",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -25810,11 +25827,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "保存凭证与登记与更正与对账记录，注明时间、操作人、依据与人工修改痕迹，并按规程在更正处盖章。"
+              "保存凭证、登记、更正和对账记录，注明时间、经手角色和依据。更正依适用账簿规则并留痕。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.89",
           "source_refs": [
+            "cnclass",
             "onet"
           ],
           "type": "prose"
@@ -25927,11 +25945,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "要素识别可借助工具，但真实性与合法性审核责任仍由本人承担。"
+              "账单文员按岗位权限核对、记录并报告。凭证的法定审核由会计机构、会计人员承担；计费口径、调整、退款、冲销与开票由有相应授权的人员按适用规则决定。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.97",
           "source_refs": [
+            "cnclass",
+            "invoice-current",
             "onet"
           ],
           "type": "prose"
@@ -25983,11 +26003,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检索与计算可辅助，但口径确定与开单结论仍由本人与有权限人员承担。"
+              "账单文员按岗位权限核对、记录并报告。凭证的法定审核由会计机构、会计人员承担；计费口径、调整、退款、冲销与开票由有相应授权的人员按适用规则决定。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.101",
           "source_refs": [
+            "cnclass",
+            "invoice-current",
             "onet",
             "editor"
           ],
@@ -26012,11 +26034,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "依据经过审核的会计凭证在依法设置的会计账簿上按连续编号顺序登记，发生错误或隔页或缺号或跳行时按规程更正并在更正处盖章。"
+              "按大陆《会计法》第15条，依据审核后的凭证登记。纸质账簿按连续页码登记，涉及规定情形的更正按统一会计制度和盖章要求执行。使用电子计算机记账的登记、更正按统一会计制度办理。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.103",
           "source_refs": [
+            "cnclass",
             "onet"
           ],
           "type": "prose"
@@ -26040,11 +26063,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "自动化记账可辅助，但登记依据与更正责任仍由本人承担。"
+              "账单文员按岗位权限核对、记录并报告。凭证的法定审核由会计机构、会计人员承担；计费口径、调整、退款、冲销与开票由有相应授权的人员按适用规则决定。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.105",
           "source_refs": [
+            "cnclass",
+            "invoice-current",
             "onet",
             "editor"
           ],
@@ -26097,11 +26122,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异初筛可借助系统，但差异原因判断与处置责任仍由本人承担。"
+              "账单文员按岗位权限核对、记录并报告。凭证的法定审核由会计机构、会计人员承担；计费口径、调整、退款、冲销与开票由有相应授权的人员按适用规则决定。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.109",
           "source_refs": [
+            "cnclass",
+            "invoice-current",
             "onet"
           ],
           "type": "prose"
@@ -26125,11 +26152,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按机构规程存放与保管发票与凭证与账簿资料，保持连续编号与检索可用并遵循访问权限，按保管期限要求管理。"
+              "按资料类型和机构流程核对保存及访问要求。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.111",
           "source_refs": [
+            "cnclass",
+            "invoice-current",
             "onet"
           ],
           "type": "prose"
@@ -26153,11 +26182,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "归档可借助系统，但完整性与合规性责任仍由本人承担。"
+              "账单文员按岗位权限核对、记录并报告。凭证的法定审核由会计机构、会计人员承担；计费口径、调整、退款、冲销与开票由有相应授权的人员按适用规则决定。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.113",
           "source_refs": [
+            "cnclass",
+            "invoice-current",
             "onet"
           ],
           "type": "prose"
@@ -26209,11 +26240,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "流程与模板资料可辅助，但升级决定与承诺边界仍由本人与有权限人员承担。"
+              "账单文员按岗位权限核对、记录并报告。凭证的法定审核由会计机构、会计人员承担；计费口径、调整、退款、冲销与开票由有相应授权的人员按适用规则决定。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.117",
           "source_refs": [
+            "cnclass",
+            "invoice-current",
             "onet",
             "editor"
           ],
@@ -26267,11 +26300,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "制度与规范资料可辅助，但合规判断与停止作业与报告的决定仍由本人与有权限人员承担。本页不提供任何账务处理方法、开票方法或规避监管的做法。"
+              "账单文员按岗位权限核对、记录并报告。凭证的法定审核由会计机构、会计人员承担；计费口径、调整、退款、冲销与开票由有相应授权的人员按适用规则决定。"
             ]
           },
           "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.121",
           "source_refs": [
+            "cnclass",
+            "invoice-current",
             "onet",
             "editor"
           ],
@@ -26582,11 +26617,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025年行业宽口径参考：卫生和社会工作城镇非私营146,266元/年、私营75,631元/年；规模以上该行业企业108,309元/年，办事人员和有关人员84,721元/年。科学研究和技术服务业相应为182,064/83,560元/年，规模以上该行业企业173,855元/年、办事人员122,883元/年。按医疗账单或专业服务计费场景选择参照，行业覆盖全部职业且中美分类不等价；这些均不是账单过账文员工资、起薪或个人报价。"
+              "大陆开票员历史岗位样本"
             ]
           },
           "id": "billing-and-posting-clerks.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
+            "wuda-billing-2026",
+            "miyun-billing-2024",
             "nbs",
             "editor"
           ],
@@ -26597,11 +26634,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业和岗位大类参考提供雇主场景背景，精确职业、城市、月薪、起薪与收入分位缺口仍保留。"
+              "乌达区政府 2026 年 1 月 4 日历史汇编：硕桐（宁夏）供应链管理有限公司招聘开票员 5 名，大专及以上，负责货物进出厂开票协调和过磅数据记录，需适应倒班，相关经验优先。原文列薪资 5,000 元，未写计薪周期。"
             ]
           },
           "id": "billing-and-posting-clerks.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
+            "wuda-billing-2026",
+            "miyun-billing-2024",
             "nbs",
             "editor"
           ],
@@ -26754,17 +26793,17 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "账单与过账须按具体机构的账务规程与适用法域执行。美国侧 O*NET 列出多项国家认证（医疗服务编码与账单方向、簿记方向与软件方向），不等于录用门槛或雇主任命；该职业在 O*NET 属 Job Zone 1–2、未标注 Bright Outlook，就业预测为几乎无变化。中国大陆侧《中华人民共和国会计法》（2024 年修正）要求依法设置会计账簿并保证真实完整、对原始凭证进行审核并对不真实不合法的凭证有权不予接受并向单位负责人报告、账簿登记必须以经过审核的会计凭证为依据、并定期核对以保证账实与账证与账账与账表相符；《中华人民共和国发票管理办法》（国务院令第 764 号）要求开具发票按规定的时限、顺序、栏目、全部联次一次性如实开具；其中纸质发票须加盖发票专用章，不符合规定的发票不得作为财务报销凭证且任何单位和个人有权拒收。"
+              "大陆《会计法》第9、14、15、17条分别涉及实际业务记账、凭证审核、审核后的凭证登记账簿及账目核对。《发票管理办法》第21条要求如实开具发票。内部账单、会计原始凭证和税务发票用途不同；更改与签发按适用规则和授权办。"
             ]
           },
           "id": "billing-and-posting-clerks.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
+            "cnclass",
+            "invoice-current",
             "onet",
             "ep-current",
             "hr",
-            "census",
-            "cnclass",
-            "invoice-current"
+            "census"
           ],
           "type": "prose"
         },
@@ -26934,11 +26973,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "场景比较需要机构类型与用工形态一致；本页不提供本职业的精确月薪区间。"
+              "可先看用人单位的开票支持岗。乌达历史公告要求大专及以上，涉及货物单据和过磅记录，需适应倒班。密云历史表列「高中以上」，未列职责。再向目标雇主核对具体单据、交接和复核权限；两例不代表统一门槛。"
             ]
           },
           "id": "billing-and-posting-clerks.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
+            "wuda-billing-2026",
+            "miyun-billing-2024",
+            "nbs",
+            "onet-wages",
             "onet"
           ],
           "type": "prose"
@@ -26978,11 +27021,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "卫生和社会工作非私营146,266、私营75,631元/年；科学研究技术服务非私营182,064、私营83,560元/年。不是城市月薪区间。"
+              "两个公告的工作范围和计薪周期不能直接比较。先核书面岗位条件。"
             ]
           },
           "id": "billing-and-posting-clerks.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
+            "wuda-billing-2026",
+            "miyun-billing-2024",
             "nbs",
             "editor"
           ],
@@ -27037,12 +27082,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可核书面报酬的城市、雇主、用工形态、计费范围与绩效；本页只有行业和岗位大类年均值，没有职业级月薪区间。"
+              "向雇主核对实际岗位、书面计薪周期和报酬构成。"
             ]
           },
           "id": "billing-and-posting-clerks.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
+            "wuda-billing-2026",
+            "miyun-billing-2024",
             "nbs",
+            "onet-wages",
             "editor"
           ],
           "type": "prose"
@@ -27066,11 +27114,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未有官方或可核验来源支持城市级的账单过账文员月薪区间。"
+              "本页未取得其他城市同岗同口径工资。"
             ]
           },
           "id": "billing-and-posting-clerks.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
+            "wuda-billing-2026",
+            "miyun-billing-2024",
             "onet"
           ],
           "type": "prose"
@@ -27146,7 +27196,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 43-3021.00 全国工资分位（页面首行为该职业本身，未标注取自其他职业）｜https://www.onetonline.org/link/localwages/43-3021.00；O*NET 43-3021.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/43-3021.00；O*NET 43-3021.00 就业趋势页｜https://www.onetonline.org/link/localtrends/43-3021.00"
+              "O*NET 43-3021.00 全国工资分位（页面首行为该职业本身，未标注取自其他职业）｜https://www.onetonline.org/link/localwages/43-3021.00；BLS 表 1.2：账单与过账文员 43-3021｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET 43-3021.00 就业趋势页｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.8",
@@ -27326,13 +27376,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页按本职业给出的在岗人数；该职业就业规模较大且分布广，个别机构或区域的招聘需求与全国口径差异可能很大。；O*NET 43-3021.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/43-3021.00"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。；BLS 表 1.2：账单与过账文员 43-3021｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
+            "ep",
             "onet",
-            "ep-current"
+            "ep-current",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27341,11 +27393,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "几乎无变化（Little or no change）（2025—2035 年，本职业单列口径）"
+              "−0.1%"
             ]
           },
           "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -27355,13 +27408,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页按本职业口径给出 2025—2035 年变化 0%（几乎无变化）；「几乎无变化」与仍存在大量空缺并不矛盾：预测期年均仍有约 37,000 个空缺，主要来自替代需求。；O*NET 43-3021.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/43-3021.00"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。；BLS 表 1.2：账单与过账文员 43-3021｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
+            "ep",
             "onet",
-            "ep-current"
+            "ep-current",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27370,11 +27425,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 37,000（2025—2035 年，本职业单列口径，含增长与替换）"
+              "年均约 37,000 个空缺"
             ]
           },
           "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -27384,13 +27440,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页所示的预测期职位空缺口径，含增长与替换；不是净增岗位数，也不构成个人录用保证。；O*NET 43-3021.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/43-3021.00"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。；BLS 表 1.2：账单与过账文员 43-3021｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
+            "ep",
             "onet",
-            "ep-current"
+            "ep-current",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27518,11 +27576,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "几乎无变化（Little or no change）"
+              "美国预计下降 0.1%"
             ]
           },
           "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -27839,7 +27898,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27851,19 +27910,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "订单文员",
@@ -27944,10 +28003,10 @@
                 "url": "https://www.onetonline.org/link/industry/43-3021.00"
               },
               {
-                "entity": "O*NET 43-3021.00 职业摘要（就业与预测字段）",
+                "entity": "BLS 表 1.2：账单与过账文员 43-3021",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/43-3021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -29015,10 +29074,10 @@
                 "url": "https://www.onetonline.org/link/details/43-3021.00"
               },
               {
-                "entity": "O*NET 43-3021.00 职业摘要（就业与预测字段）",
+                "entity": "BLS 表 1.2：账单与过账文员 43-3021",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/43-3021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 43-3021.00 全国工资分位",
@@ -29030,7 +29089,7 @@
                 "entity": "中华人民共和国发票管理办法（2023修订全文）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://fgk.chinatax.gov.cn/zcfgk/c100010/c5195084/content.html"
+                "url": "https://guangdong.chinatax.gov.cn/gdsw/yfsw_gkwj/2023-10/19/content_4ab51acc51dd4b2398b93d2be8376f2c.shtml"
               }
             ]
           },
@@ -29196,14 +29255,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑风险核对建议：定期把会计账簿记录与实物与款项及有关资料相互核对，保证账实与账证与账账与账表相符；发现差异先挂起再查明原因并记录处置；凭证与支票退回或止付等异常按规程登记与跟踪；更正按国家统一的会计制度规定的方法进行并在更正处盖章。"
+              "编辑风险核对建议：定期把会计账簿记录与实物与款项及有关资料相互核对，保证账实与账证与账账与账表相符；发现差异先挂起再查明原因并记录处置；凭证与支票退回或止付等异常按规程登记与跟踪；按适用账簿规则更正并留痕。"
             ]
           },
           "id": "billing-and-posting-clerks.risk.career-risk-cards.17",
           "source_refs": [
+            "cnclass",
             "bls",
             "facilities",
-            "cnclass",
             "invoice-current",
             "pipl-current",
             "editor"
@@ -29375,14 +29434,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑风险核对建议：按机构规程保存凭证与账簿与账单与对账与更正记录，如实记录时间与操作人与依据与人工修改痕迹，保持连续编号与检索可用，按保管期限要求管理并按权限访问。"
+              "保留原始凭证、对账和更正记录的时间、经手角色与依据。按资料类型核对保管期限及访问权限。"
             ]
           },
           "id": "billing-and-posting-clerks.risk.career-risk-cards.29",
           "source_refs": [
+            "cnclass",
             "bls",
             "facilities",
-            "cnclass",
             "invoice-current",
             "pipl-current",
             "editor"
@@ -29570,35 +29629,35 @@
                 "医疗机构账单部门岗",
                 "在有监督下按诊疗与保险与自付信息核对计费项目并编制账单，按规程登记与跟催并处理一般查询。",
                 "编辑按任务提出的核对项（无实际招聘样本）：通常看计费与编码基础、核对准确性与记录质量、与患者或保险方沟通的分寸；上岗授权由机构岗前培训与考核决定。",
-                "提交一份含虚构诊疗项目与计费依据与账单单据与差异说明的记录，不使用真实患者与账单信息。",
+                "BL-75 交两版核对和一页交接。",
                 "中国医疗健康信息适用个人信息保护法敏感信息要求；美国医疗机构的实际权限及适用规则本轮未核，入职前另确认。计费口径与调整由机构授权。"
               ],
               [
                 "专业服务机构计费岗",
                 "按项目与工时与费率核算专业服务费用并编制账单，跟踪应收并按规程催收与对账。",
                 "编辑按任务提出的核对项（无实际招聘样本）：通常看工时与费率核算准确性、按客户或项目归集的口径一致性、记录与对账质量。",
-                "提交一份含虚构工时与费率与项目归集与账单与对账说明的记录。",
+                "BL-75 交两版核对和一页交接。",
                 "计费口径以合同与机构规程为准；本页不提供任何账务处理方法。"
               ],
               [
                 "企业应收与账务共享中心岗",
                 "按统一规程处理大量账单与收款登记与对账与差异初筛，按关账周期提交核对结果。",
                 "编辑按任务提出的核对项（无实际招聘样本）：通常看批量作业的一致性与准确率、关账节点交付能力、差异初筛与升级的规范性。",
-                "提交一份含批量账单与收款登记与对账与差异清单与升级路径的虚构记录。",
+                "BL-75 交两版核对和一页交接。",
                 "共享中心岗不等于具有账单调整与开票与冲销的裁定权。"
               ],
               [
                 "开票与票据管理岗",
                 "按规程开具与取得与保管发票与票据，处理作废与红冲与查询，并维护票据台账与档案。",
                 "编辑按任务提出的核对项（无实际招聘样本）：通常看对发票规范的掌握、开具与保管的准确性与可追溯性、异常与查询处理能力。",
-                "提交一份含虚构开票要素与台账与保管与作废红冲流程与异常的说明。",
+                "BL-75 交两版核对和一页交接。",
                 "发票开具与作废与红冲须按适用法域与机构制度执行；本页不提供任何开票方法或规避监管的做法。"
               ],
               [
                 "对账与费用审核岗",
                 "按规程核对银行对账单与已付支票与费用报销单据，调查差异并提交处置建议。",
                 "编辑按任务提出的核对项（无实际招聘样本）：通常看核对与差异调查能力、对凭证要素与审批完整性的把握、记录与沟通质量。",
-                "提交一份含虚构对账清单与差异调查与处置建议的说明。",
+                "BL-75 交两版核对和一页交接。",
                 "费用审核不等于审批或付款授权；超出范围须升级。"
               ]
             ]
@@ -29622,7 +29681,7 @@
               {
                 "id": "education",
                 "values": [
-                  "O*NET问的是新入职者需要多少教育，受访者33%答学士、25%高中或同等、22%副学士/两年制；不是全部从业者学历分布或统一门槛。Job Zone 1–2/SVP<6及几天至一年岗后培训是准备区间说明，不是所有雇主的精确培训承诺。美国43-3021.00，2025年就业418,000人，2035年预计417,700人；2025—2035年变化0%（几乎无变化），年均职位空缺37,000。预测期空缺包括增长与替换，不是净增岗位或个人录用概率。",
+                  "O*NET问的是新入职者需要多少教育，受访者33%答学士、25%高中或同等、22%副学士/两年制；不是全部从业者学历分布或统一门槛。Job Zone 1–2/SVP<6及几天至一年岗后培训是准备区间说明，不是所有雇主的精确培训承诺。美国43-3021.00，2025年就业418,000人，2035年预计417,700人；2025—2035 年下降 0.1%（手册取整为 0%），年均职位空缺37,000。预测期空缺包括增长与替换，不是净增岗位或个人录用概率。",
                   "当前O*NET培训目录显示全国未找到相关项目，这只说明该目录没有匹配，不能证明全美不存在课程或岗后培训。认证目录列32条相关记录，含医疗编码/账单、NACPB簿记、SAP订阅订单管理与CSBS信托检查等；关联目录不等于32项本职业普遍门槛，各证条件、费用与有效期本轮未核。",
                   "中国准备与录用以目标雇主核实际职责、专业能力和制度；本轮没有统一培训比例或学历门槛样本。行业工资另作宽口径参考。"
                 ]
@@ -29679,42 +29738,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份原始凭证与记账凭证与账簿与账单明细、一份费率或合同计费口径摘要、一份对账清单与差异记录表、一份更正与留痕示例。",
-                  "全部材料为虚构，不含真实客户或患者与账单信息、真实合同与费率条款、真实凭证与账簿与发票资料或机构内部制度文件。",
-                  "全部材料与场景为虚构，不得使用真实的客户或患者与账单信息、真实合同与费率条款、真实凭证与账簿与发票资料或机构内部制度文件。"
+                  "BL-75 虚构账单。B1 有 2 笔各 120 元的费用行。题设规定有已确认的服务记录和审核签字才可登记过账。",
+                  "B2 纸面台账共 240 元，只附第一笔服务记录，两行均未有审核签字。差异交账单复核员。",
+                  "B3 原版无第二笔服务记录。变式只改 B3：补到一张可核的第二笔服务记录，金额 120 元。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构业务写清凭证依据与审核过程、计费口径与计算过程、账簿登记与过账、对账与差异与处置，以及需要复核与需要授权的环节。",
-                  "在 60—90 分钟内完成，允许参考公开的会计与发票规范资料，但不使用真实凭证与客户信息，也不开具真实发票。",
-                  "记录中把凭证依据与审核过程、计费口径与计算过程、账簿登记与更正留痕、对账与差异与处置、以及复盘说明分开书写，并标注需复核的部分。"
+                  "分开写两行金额及凭证。",
+                  "核两版的已知材料、差异与接手角色。",
+                  "提交两版核对记录和一页交接，引 B1–B3。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先确认业务的凭证范围与计费依据与本人授权边界，再按规程审核与登记与对账，最后写明结论与未决事项。",
-                  "把凭证审核、计费核算、账簿登记、对账与差异、异常与复盘分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核凭证审核与登记与对账结论，并保留修改理由。"
+                  "先独立做两版。",
+                  "只比较 B3 的资料变化。",
+                  "交卷后打开「BL-75 参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成任何账务处理方法、开票方法或规避监管的做法，也不能替代适用法域与机构规程与授权要求。",
-                  "不得在练习中涂改或伪造凭证，也不得在练习中处理真实客户信息或支付信息或开具真实发票；涉及账单调整与退款与冲销与开票判定的作业须由有权限人员按规程处理。",
-                  "练习不替代适用法域与机构规程与授权要求，也不构成任何账务处理方法、开票方法或规避监管的做法；不得在练习中涂改或伪造凭证，也不得在练习中处理真实客户信息或支付信息或开具真实发票。"
+                  "仅用虚构纸面材料。",
+                  "不接触真实账目或个人信息。",
+                  "不更改、开票、过账或对外发送。"
                 ]
               }
             ]
           },
           "id": "billing-and-posting-clerks.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "bl75-editor"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "BL-75：核两版账单，写一页差异交接",
           "type": "cards"
         },
         {
@@ -29725,37 +29784,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：学历、职业培训、行业认证、机构岗前培训、系统与权限、计费口径与账单调整与退款与冲销与开票与保管授权、以及适用法域对会计凭证与账簿与发票与客户信息处理的要求。",
-                  "每项都注明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「职业培训」「行业认证」「机构授权与系统权限」「凭证与发票与客户信息合规要求」分列，避免混为一谈；并标注美国工资与就业为本职业单列口径、就业预测为几乎无变化、以及本页不发布中国大陆薪资数值。"
+                  "写两版核对。",
+                  "标 B1–B3。",
+                  "列待核。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的账务记录，重点检查凭证依据与审核过程、计费口径与计算过程、账簿登记依据与更正留痕、对账差异的原因与处置、以及是否符合国家统一的会计制度与机构规程。",
-                  "把复核意见与修改理由一并保留，作为判断你能否接受复核的证据。"
+                  "写一页交接。",
+                  "标接手角色。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明本次业务的事实与核对过程、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给同组同事与主管复核，并保留复核意见与修改理由。"
+                  "比较两版凭证。",
+                  "复核记录差异。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用账务或计费或开票或对账工具，须注明工具名称与版本、输入与依据与人工修改理由；系统与渠道权限须为机构授权。",
-                  "客户与账单信息处理须先取得授权，并记录访问范围、保留期限与销毁约定；不得在授权系统之外保存或传输客户账单信息与支付信息。"
+                  "先交卷。",
+                  "只用纸面材料。"
                 ]
               }
             ]
           },
           "id": "billing-and-posting-clerks.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "bl75-editor"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29792,7 +29851,7 @@
               [
                 "试用期",
                 "按机构规程完成凭证审核与账簿登记与账单编制与对账，接受主管与复核人员对依据与准确性与留痕的复核。",
-                "凭证依据完整；登记与更正按规程并在更正处盖章；对账做到账实与账证与账账与账表相符；差异与未决事项显式标记。",
+                "凭证依据完整；登记及更正按适用账簿规则并留痕；对账做到账实与账证与账账与账表相符；差异与未决事项显式标记。",
                 "不跳过凭证审核与登记依据要求，也不在授权不明确时处理账单调整与开票事项。"
               ],
               [
@@ -29819,57 +29878,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与口径阅读：读 O*NET 43-3021.00 公开资料，写清本职业单列口径、未标注 Bright Outlook 与就业预测为几乎无变化的含义，以及中国大陆不发布薪资数值的证据边界。",
-                  "产出：一页口径与流程对照表，标注每项的来源。"
+                  "读 B1–B3。",
+                  "证据索引"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "凭证审核练习：为虚构业务写清凭证要素与审批核对清单，以及不合规凭证的退回与报告路径。",
-                  "产出：一份凭证审核记录。"
+                  "逐行核金额。",
+                  "金额对照"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "计费核算练习：为虚构业务写清计费口径依据与计算过程与需要复核的判断。",
-                  "产出：一份计费核算与开单记录。"
+                  "核对 B2。",
+                  "待核事项"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "账簿登记与更正练习：写清登记依据与顺序、以及发生错误或隔页或缺号或跳行时的更正与盖章留痕要求。",
-                  "产出：一份登记与更正记录。"
+                  "比较两版 B3。",
+                  "证据差异"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "对账与差异练习：写清与实物与款项核对的方法、差异处置路径与账实与账证与账账与账表相符的含义。",
-                  "产出：一份对账与差异处置记录。"
+                  "写交接。",
+                  "接手角色"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的凭证依据与口径与登记结论，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "先交两版核对及一页交接。",
+                  "两版与交接"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "打开「BL-75 参考解（交卷后再打开）」。",
+                  "核对参考"
                 ]
               }
             ]
           },
           "id": "billing-and-posting-clerks.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "bl75-editor"
           ],
           "title": "七日体验产出",
           "type": "timeline"
@@ -29879,18 +29938,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你完成了七日练习并发现自己在凭证审核与登记与对账与留痕上可持续投入。",
-              "继续：你能接受长时间伏案与高频重复核对与关账周期的节奏，并愿意按规程登记与接受复核。",
-              "暂停：你只求「数字对上」而不愿为每个数字追到原始凭证。",
-              "暂停：你把「先平账再补依据」当作可接受的做法。",
-              "换方向：你更愿意做面更宽的一般行政与文书事务，可比较办公室文员方向。",
-              "换方向：你更愿意与客户直接沟通并处理咨询与投诉，可比较客户服务代表方向。",
-              "信息不足：如果你还没有任何有监督的凭证审核或账务处理经历，先补这两项再判断。"
+              "继续：能逐行核对。",
+              "继续：能把待核事项写清。",
+              "暂停：如果常漏记依据。",
+              "暂停：如果不愿交接差异。",
+              "比较开票岗位。",
+              "比较账务支持。",
+              "实际培训另核。"
             ]
           },
           "id": "billing-and-posting-clerks.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "bl75-editor"
           ],
           "title": "七日后的判断",
           "type": "list"
@@ -29993,7 +30052,7 @@
           "data": {
             "paragraphs": [
               "资格边界：学历、职业培训、行业认证、雇主任用、岗位内部的计费口径与账单调整与退款与冲销与开票与保管授权、以及适用法域对会计凭证与账簿与发票与客户信息处理的要求是不同状态，任何一项都不能由另一项自动推出；系统与权限与记录留存要求也属于作业前提，不能由学历替代。",
-              "O*NET问的是新入职者需要多少教育，受访者33%答学士、25%高中或同等、22%副学士/两年制；不是全部从业者学历分布或统一门槛。Job Zone 1–2/SVP<6及几天至一年岗后培训是准备区间说明，不是所有雇主的精确培训承诺。当前O*NET培训目录显示全国未找到相关项目，这只说明该目录没有匹配，不能证明全美不存在课程或岗后培训。认证目录列32条相关记录，含医疗编码/账单、NACPB簿记、SAP订阅订单管理与CSBS信托检查等；关联目录不等于32项本职业普遍门槛，各证条件、费用与有效期本轮未核。美国43-3021.00，2025年就业418,000人，2035年预计417,700人；2025—2035年变化0%（几乎无变化），年均职位空缺37,000。预测期空缺包括增长与替换，不是净增岗位或个人录用概率。",
+              "O*NET问的是新入职者需要多少教育，受访者33%答学士、25%高中或同等、22%副学士/两年制；不是全部从业者学历分布或统一门槛。Job Zone 1–2/SVP<6及几天至一年岗后培训是准备区间说明，不是所有雇主的精确培训承诺。当前O*NET培训目录显示全国未找到相关项目，这只说明该目录没有匹配，不能证明全美不存在课程或岗后培训。认证目录列32条相关记录，含医疗编码/账单、NACPB簿记、SAP订阅订单管理与CSBS信托检查等；关联目录不等于32项本职业普遍门槛，各证条件、费用与有效期本轮未核。美国43-3021.00，2025年就业418,000人，2035年预计417,700人；2025—2035 年下降 0.1%（手册取整为 0%），年均职位空缺37,000。预测期空缺包括增长与替换，不是净增岗位或个人录用概率。",
               "中国大陆单位办理会计事务适用《会计法》；第14条原始凭证审核主体为会计机构、会计人员，不能按英文岗位名推定所有人员都有会计审核权限。第15条登记据已审凭证，纸质连续页码与盖章要求须与电子账簿按统一会计制度登记、更正的规定区别；第27条账目不符时有权处理者及时处理，无权者立即报告，不是所有差异一律无权调整。第35条出纳不得兼任所列稽核、档案保管及收入支出费用债权债务登记。中国《发票管理办法》2023修订全文：第3条电子与纸质发票同等法律效力；第21条如实开具并禁虚开，其中发票专用章要求明确针对纸质发票；第23条还禁窃取、截留、篡改、出售、泄露发票数据；第28条已开发票存根联存5年，不能据此把全部电子发票、会计档案与客户资料统一定为5年。中国《个人信息保护法》适用境内自然人信息处理等法定情形，要求合法、必要及安全措施；医疗健康、金融账户等属敏感个人信息，需特定目的、充分必要和严格保护，具体告知、同意与例外须核适用条款。不是所有账单字段均自动敏感，也不能替代美国医疗场景要求。中国职业精确工资仍缺，行业参照另列并标宽口径。",
               "操作建议：入职前把「学历／职业培训／行业认证／机构岗前培训／系统与权限／计费口径与调整与开票授权／凭证与档案与客户信息处理要求」分列成一张表，逐项写明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。"
             ]
@@ -30017,15 +30076,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：本节不引用具体雇主的招聘公告，只说明核对应关注的项目；公开渠道出现的岗位名称包括账单员、开票员、应收文员、费用审核员、对账员等（O*NET 样本职位名称包括 Biller、Billing Accounts Representative、Billing Clerk、Billing Coordinator、Billing Specialist、IP Clerk、Pre Audit Clerk、Statement Clerk、Statement Distribution Clerk）。",
+              "乌达区政府 2026 年 1 月 4 日历史汇编：硕桐（宁夏）供应链管理有限公司招聘开票员 5 名，大专及以上，负责货物进出厂开票协调和过磅数据记录，需适应倒班，相关经验优先。原文列薪资 5,000 元，未写计薪周期。 北京市密云区 2024 年 11 月现场招聘会历史表：东方顺安（北京）环保有限公司招 2 名开票员，学历栏写「高中以上」，待遇栏列 4,500–5,000，未单写计薪周期或具体职责。两份公告不是全国职业工资统计。",
               "核对清单：岗位属于医疗机构账单部门、专业服务机构计费岗、企业应收与账务共享中心还是其他场景；用工形态为全职或外包或劳务派遣或共享服务中心；是否涉及发票开具与取得与保管；是否涉及客户账单信息与支付信息处理；是否需要计费口径与调整与开票的裁定授权；以及关账周期与绩效办法与记录留存与保密要求的落地方式。"
             ]
           },
           "id": "billing-and-posting-clerks.path.recruitment-sample.1",
           "source_refs": [
+            "wuda-billing-2026",
+            "miyun-billing-2024",
             "onet"
           ],
-          "title": "招聘信息核对",
+          "title": "大陆两份开票员历史招聘",
           "type": "notice"
         },
         {
@@ -30206,17 +30267,18 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 把 43-3021.00（Billing and Posting Clerks）列为 Job Zone 1–2（SVP 低于 6.0），新入职教育要求受访答案为学士学位 33%、要求高中文凭或同等学历 25%、要求副学士或其他两年制学位 22%（页面仅列出这三项）；该区职业的部分岗位几乎无需先前经验，其他岗位需要数月到一年经验，在岗训练从几天到一年。O*NET 培训页面显示该目录全国未找到相关培训项目（不证明不存在培训）；认证页面列出多项国家认证，集中方向为医疗服务编码与账单、簿记与软件方向。中国大陆侧记账与开票行为受《中华人民共和国会计法》与《中华人民共和国发票管理办法》约束，任何一项都不构成免于法域约束的空间。"
+              "BLS 表 1.2 列美国 43-3021 的典型路径为高中或同等学历、通常无相关经验、中期在岗培训。岗位权限、开票及过账复核按机构流程确认。 大陆《会计法》第9、14、15、17条分别涉及实际业务记账、凭证审核、审核后的凭证登记账簿及账目核对。《发票管理办法》第21条要求如实开具发票。内部账单、会计原始凭证和税务发票用途不同；更改与签发按适用规则和授权办。"
             ]
           },
           "id": "billing-and-posting-clerks.path.career-path-block.20",
           "source_refs": [
+            "ep",
+            "cnclass",
+            "invoice-current",
             "onet",
             "hr",
             "nist",
-            "census",
-            "cnclass",
-            "invoice-current"
+            "census"
           ],
           "type": "prose"
         },
@@ -30289,7 +30351,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的学历构成与经验与培训安排。"
+              "用于说明受访者对新聘人员教育要求的回答。"
             ]
           },
           "id": "billing-and-posting-clerks.path.career-path-block.25",
@@ -31202,16 +31264,16 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET账单过账文员2025—2035就业趋势",
+                "entity": "BLS 表 1.2：账单与过账文员 43-3021",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/43-3021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET账单过账文员2025—2035就业趋势",
+                "entity": "BLS 表 1.2：账单与过账文员 43-3021",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/43-3021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -31290,13 +31352,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 就业趋势页按本职业单列口径给出2025年在岗 418,000 人、2035年约 417,700 人（2025—2035 年 0%，标签为几乎无变化（Little or no change））、预测期年均职位空缺约 37,000（含增长与替换）。「几乎无变化」与仍存在大量空缺并不矛盾：空缺主要来自替代需求（从业者转岗或退出劳动力市场），而不是岗位扩张。"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。"
             ]
           },
           "id": "billing-and-posting-clerks.market-signals.market-signal-card.8",
           "source_refs": [
+            "ep",
             "onet",
-            "ep-current"
+            "ep-current",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31333,13 +31397,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页按本职业给出的在岗人数；该职业就业规模较大且分布广，个别机构或区域的招聘需求与全国口径差异可能很大。"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。"
             ]
           },
           "id": "billing-and-posting-clerks.market-signals.market-signal-card.11",
           "source_refs": [
+            "ep",
             "onet",
-            "ep-current"
+            "ep-current",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31377,11 +31443,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "official_statistic"
+              "美国账单与过账文员 43-3021"
             ]
           },
           "id": "billing-and-posting-clerks.market-signals.market-signal-card.14",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31433,14 +31500,16 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS解释医疗行业需求可能增加，自动发票处理提升生产率会限制总体增长。美国43-3021.00，2025年就业418,000人，2035年预计417,700人；2025—2035年变化0%（几乎无变化），年均职位空缺37,000。预测期空缺包括增长与替换，不是净增岗位或个人录用概率。集中共享与外包的采用率、个人需具备何种专精才被录用，本轮没有样本。"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。"
             ]
           },
           "id": "billing-and-posting-clerks.market-signals.market-signal-card.18",
           "source_refs": [
+            "ep",
             "bls-ooh-current",
             "ep-current",
-            "editor"
+            "editor",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31449,11 +31518,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "0%为取整预测，不代表就业人数完全相同；全国预测不能当个人录用保证。"
+              "手册取整为 0%。预计年均空缺与岗位净变化不同。"
             ]
           },
           "id": "billing-and-posting-clerks.market-signals.market-signal-card.19",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31478,11 +31548,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "official_statistic"
+              "美国账单与过账文员 43-3021"
             ]
           },
           "id": "billing-and-posting-clerks.market-signals.market-signal-card.21",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31492,11 +31563,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "几乎无变化（年均职位空缺约 37,000，本职业单列口径）"
+              "下降 0.1%，年均约 37,000 个空缺"
             ]
           },
           "id": "billing-and-posting-clerks.market-signals.market-signal-card.22",
           "source_refs": [
+            "ep",
             "onet",
             "ep-current"
           ],
@@ -31606,12 +31678,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页按本职业口径给出 2025年在岗 418,000 人、2035年约 417,700 人（2025—2035 年 0%，标签为几乎无变化（Little or no change））、预测期年均职位空缺约 37,000（含增长与替换）；「几乎无变化」与仍存在大量空缺并不矛盾，空缺主要来自替代需求。不是中国趋势、个人录用率或当前广告量。"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。"
             ]
           },
           "id": "billing-and-posting-clerks.market-signals.market-signal-card.30",
           "source_refs": [
-            "ep-current"
+            "ep",
+            "ep-current",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31620,12 +31694,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页按本职业口径给出 2025年在岗 418,000 人、2035年约 417,700 人（2025—2035 年 0%，标签为几乎无变化（Little or no change））、预测期年均职位空缺约 37,000（含增长与替换）；「几乎无变化」与仍存在大量空缺并不矛盾，空缺主要来自替代需求。不是中国趋势、个人录用率或当前广告量。"
+              "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。"
             ]
           },
           "id": "billing-and-posting-clerks.market-signals.market-signal-card.31",
           "source_refs": [
-            "ep-current"
+            "ep",
+            "ep-current",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -32034,28 +32110,45 @@
                 "question_key": "career.faq.billing-and-posting-clerks.2"
               },
               {
-                "answer": "看可复核的产出：能否按规程逐项审核原始凭证并核对要素与审批完整性、能否依据经过审核的会计凭证登记账簿并按顺序更正与留痕、能否在发现记载不准确或不完整或差异无法解释或超出授权时停下来报告。兴趣代码 C 与技能与知识分数只说明方向接近，不能替代这些实作证据。",
+                "answer": "到 09 做 BL-75：核对两版纸面账单，写一页差异交接。",
                 "id": "billing-and-posting-clerks.faq.3",
                 "question": "怎样判断自己适不适合做账单过账文员？",
-                "question_key": "career.faq.billing-and-posting-clerks.3"
+                "question_key": "career.faq.billing-and-posting-clerks.3",
+                "source_refs": [
+                  "bl75-editor"
+                ]
               },
               {
-                "answer": "AI 与自动化可以改变凭证要素识别与录入、账单与对账单草稿生成、费率与合同条款检索、对账差异初筛与报表整理；但原始凭证的真实性与合法性与要素完整性审核、计费口径确定、差异原因判断、以及账单调整与退款与冲销与开票口径的处置决定仍由人承担。任务自动化程度不等于岗位数量变化；官方就业预测对该职业为几乎无变化（2024—2034 年 0%）。",
+                "answer": "工具可以整理原始资料、生成账单草稿及标记差异。会计资料复核、差异处理和开票签发依岗位授权。BLS 的就业预测不能说明个人被替代的概率。",
                 "id": "billing-and-posting-clerks.faq.4",
                 "question": "AI 会改变哪些任务？",
-                "question_key": "career.faq.billing-and-posting-clerks.4"
+                "question_key": "career.faq.billing-and-posting-clerks.4",
+                "source_refs": [
+                  "ep",
+                  "cnclass",
+                  "invoice-current"
+                ]
               },
               {
-                "answer": "原始凭证的真实性与合法性审核、计费口径的确定与计算过程的核对、账簿登记与更正是否符合国家统一的会计制度与机构规程、对账差异的原因判断与处置、以及发票开具与作废与红冲与保管是否合规、是否涉及虚开或以其他凭证代替发票等禁止情形，必须由本人与有权限的人员按适用法域与机构制度承担；系统输出只能作为可回滚、可复核的辅助环节。",
+                "answer": "账单文员按岗位权限核对、记录并报告。凭证的法定审核由会计机构、会计人员承担；计费口径、调整、退款、冲销与开票由有相应授权的人员按适用规则决定。 按大陆《会计法》第14条，原始凭证内容不得涂改。金额有误须由出具单位重开，不得在原件更正。其他错误由出具单位重开或更正，更正处加盖出具单位印章。",
                 "id": "billing-and-posting-clerks.faq.5",
                 "question": "哪些环节必须保留人工复核？",
-                "question_key": "career.faq.billing-and-posting-clerks.5"
+                "question_key": "career.faq.billing-and-posting-clerks.5",
+                "source_refs": [
+                  "cnclass",
+                  "invoice-current"
+                ]
               },
               {
-                "answer": "分六类核对：学历；职业培训；行业认证（O*NET 认证页面列出多项：医疗服务编码与账单方向的 Certified Billing and Coding Specialist 与 Certified Coding Associate 与 Certified Medical Reimbursement Specialist 与 AAPC 系列编码认证，簿记方向的 Bookkeeping Certification，软件方向的 SAP Certified Associate - SAP Billing and Revenue Innovation Management 等）；机构岗前培训与系统与权限；机构内部的计费口径与账单调整与退款与冲销与开票与保管授权；以及适用法域对会计凭证与账簿与发票与客户信息处理的要求。美国侧 O*NET 学历构成为学士学位 33%、高中文凭或同等学历 25%、副学士或其他两年制学位 22%（页面仅列出这三项），该区职业经验要求从几乎无需到一年、在岗训练从几天到一年；培训页面显示全国未登记该职业的培训项目。任何一项都不能由另一项自动推出。",
+                "answer": "O*NET 问受访者新聘所需学历：33% 选学士、25% 选高中或同等学历、22% 选副学士或其他两年制学位。培训目录本次全国查询未找到匹配项目，不能据此推实际无课程或在岗培训。具名机构证书目录显示 32 条记录，不是统一准入要求。",
                 "id": "billing-and-posting-clerks.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.billing-and-posting-clerks.6"
+                "question_key": "career.faq.billing-and-posting-clerks.6",
+                "source_refs": [
+                  "privacy",
+                  "nist",
+                  "census"
+                ]
               },
               {
                 "answer": "工作情境显示 93% 持续或几乎持续坐着、88% 认为精确或准确极其重要、33% 持续或几乎持续做重复动作（另有 26% 超过一半时间）、73% 每天使用电子邮件、58% 每天有电话交谈、57% 每天有面对面讨论、56% 持续与他人接触、58% 每天在有环境控制的室内工作、28% 每天暴露于分散注意或不适的噪音（45% 从不）、16% 每周一次以上面对不愉快或愤怒或不礼貌的人、36% 每月一次以上处于冲突情境；长期伏案与高频重复动作与用眼负荷需要相应的工位与座席与显示器与照明安排，关账周期会带来阶段性强度上升，应及早报告持续不适。其中「弯腰或扭转身体」一项该页未给出百分比。",
@@ -32070,16 +32163,34 @@
                 "question_key": "career.faq.billing-and-posting-clerks.8"
               },
               {
-                "answer": "O*NET 就业趋势页按本职业单列口径给出 2024 年在岗 429,800 人、2034 年约 427,900 人（0%，几乎无变化）、预测期年均职位空缺约 42,200；「几乎无变化」与仍存在大量空缺并不矛盾，空缺主要来自替代需求。转向可比较簿记会计与审计文员、账单与账款催收员、薪资与考勤文员、订单文员、办公室文员、客户服务代表、信贷授权与核查文员、保险理赔文员、档案文员，但都需要补充相应培训与资质与授权。",
+                "answer": "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。表 1.2 列 2025 年雇员年薪中位数 48,500 美元。O*NET 展示的 2025 年 5 月 OEWS 时薪中位数是 23.32 美元。职业手册取整为 0%。",
                 "id": "billing-and-posting-clerks.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.billing-and-posting-clerks.9"
+                "question_key": "career.faq.billing-and-posting-clerks.9",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
-                "answer": "美国工资分位为本职业单列口径（O*NET 页面未标注取自其他职业）的 2025 年 OEWS 数据，中位时薪 23.32 美元、中位年薪 48,500 美元；中国大陆未取得该职业的精确职业工资条目；按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），模块级缺口以「未取得精确职业条目」标记，不以行业平均、美国数据或不透明招聘样本填补，故本页不发布任何中国大陆数值，也不展示行业平均。两边的职业范围、统计制度、资料期与用工与计酬结构都不同，不能把美元换算成人民币，也不应相信缺少样本与岗位范围的报价。",
+                "answer": "美国时薪与年薪来自 43-3021 的 OEWS 工资表。本页未取得大陆同口径全国职业工资。两份大陆历史招聘报价和国家统计局行业与岗位大类均值各自单列，不能据此比较同岗工资。",
                 "id": "billing-and-posting-clerks.faq.10",
                 "question": "美国工资与中国大陆口径为什么不能互相换算？",
-                "question_key": "career.faq.billing-and-posting-clerks.10"
+                "question_key": "career.faq.billing-and-posting-clerks.10",
+                "source_refs": [
+                  "onet-wages",
+                  "wuda-billing-2026",
+                  "miyun-billing-2024",
+                  "nbs"
+                ]
+              },
+              {
+                "answer": "两行金额之和为 240 元。原版只有第一笔 120 元有服务记录，第二笔缺凭证。变式只增加第二笔 120 元服务记录。两版均缺审核签字，不能登记过账，交账单复核员。自核：是否分开金额、凭证、审核和接手角色？",
+                "id": "billing-and-posting-clerks.faq.11",
+                "question": "BL-75 参考解（交卷后再打开）",
+                "question_key": "career.faq.billing-and-posting-clerks.q11",
+                "source_refs": [
+                  "bl75-editor"
+                ]
               }
             ]
           },
@@ -32100,18 +32211,21 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮依据美国O*NET职业原文、BLS工资/预测与Financial Clerks职业群手册，以及中国现行会计、发票和个人信息法及国家统计局2025工资表核对。编辑建议和来源缺口分别标明。"
+              "费马测试编辑部"
             ]
           },
           "id": "billing-and-posting-clerks.sources.source-card.1",
           "source_refs": [
+            "ep",
+            "wuda-billing-2026",
+            "miyun-billing-2024",
+            "cnclass",
+            "invoice-current",
             "onet",
             "bls",
             "ep-current",
             "bls-ooh-current",
             "nbs",
-            "cnclass",
-            "invoice-current",
             "pipl-current",
             "arxiv",
             "ilo"
@@ -32123,18 +32237,21 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源含O*NET九个实际访问页、BLS职业群手册/工资定义、财政部2024会计法、税务总局2023发票全文、网信办个人信息保护法、SAMR消费者权益法、国家统计局2025工资表及ILO2025任务暴露摘要。历史2019发票链接不充当2023全文。"
+              "美国工资及预测采用 43-3021 细项。大陆两个历史招聘按原表单列。"
             ]
           },
           "id": "billing-and-posting-clerks.sources.source-card.2",
           "source_refs": [
+            "ep",
+            "wuda-billing-2026",
+            "miyun-billing-2024",
+            "cnclass",
+            "invoice-current",
             "onet",
             "bls",
             "ep-current",
             "bls-ooh-current",
             "nbs",
-            "cnclass",
-            "invoice-current",
             "pipl-current",
             "arxiv",
             "ilo"
@@ -32146,18 +32263,21 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：美国2025工资、2025—2035预测；软件招聘2025全年；中国2025单位工资2026-05-15发布；会计法2024修正，发票办法2023修订，个人信息法2021施行；本轮2026-10-09访问。"
+              "美国工资为 2025 年 5 月，两份大陆历史公告不用于推当前工资。"
             ]
           },
           "id": "billing-and-posting-clerks.sources.source-card.3",
           "source_refs": [
+            "ep",
+            "wuda-billing-2026",
+            "miyun-billing-2024",
+            "cnclass",
+            "invoice-current",
             "onet",
             "bls",
             "ep-current",
             "bls-ooh-current",
             "nbs",
-            "cnclass",
-            "invoice-current",
             "pipl-current",
             "arxiv",
             "ilo"
@@ -32169,18 +32289,21 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "精确职业数据、财务文员父级行业工资、中国行业/办事人员均值各有独立样本边界。精确中国职业、城市和起薪仍缺。工作评分不作个人筛选；任务暴露不当采用/替代率；法律适用主体及纸质/电子差别另核。范围外Hero和练习原值保护。"
+              "会计、发票和内部授权分别核对。BL-75 只用虚构资料。"
             ]
           },
           "id": "billing-and-posting-clerks.sources.source-card.4",
           "source_refs": [
+            "ep",
+            "wuda-billing-2026",
+            "miyun-billing-2024",
+            "cnclass",
+            "invoice-current",
             "onet",
             "bls",
             "ep-current",
             "bls-ooh-current",
             "nbs",
-            "cnclass",
-            "invoice-current",
             "pipl-current",
             "arxiv",
             "ilo"
@@ -32210,7 +32333,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32222,13 +32345,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看账单过账文员职业页面",
@@ -32292,18 +32415,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official outlook",
-                  "2024—2034 年；访问 2026-09-15"
+                  "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。原表列 2025 年雇员年薪中位数 48,500 美元。职业手册取整为 0%。",
+                  "2025 年基期，预测至 2035 年。"
                 ],
                 "evidence_type": "official outlook",
                 "id": "ep",
-                "limitation": "为本职业单列口径的就业与预测（标签为几乎无变化（Little or no change））；不能外推更宽职业群。",
+                "limitation": "只用于 43-3021 细项。",
                 "market": "美国",
-                "name": "O*NET 43-3021.00 职业摘要（就业与预测字段）",
-                "period": "2024—2034 年；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：账单与过账文员 43-3021",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-3021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32350,7 +32473,7 @@
                 "name": "《中华人民共和国会计法》（2024 年修正）—— 财政部会计司公开文本",
                 "period": "1985-01-21 通过，1999-10-31 修订，2017-11-04 第二次修正，2024-06-28 第三次修正；访问 2026-09-15",
                 "publisher": "中华人民共和国财政部（转载自中国人大网）",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://kjs.mof.gov.cn/zt/kjfxcgc/kjfqw/202408/t20240814_3941788.htm"
               },
               {
@@ -32363,11 +32486,11 @@
                 "id": "privacy",
                 "limitation": "O*NET问的是新入职者需要多少教育，受访者33%答学士、25%高中或同等、22%副学士/两年制；不是全部从业者学历分布或统一门槛。Job Zone 1–2/SVP<6及几天至一年岗后培训是准备区间说明，不是所有雇主的精确培训承诺。",
                 "market": "美国",
-                "name": "O*NET 43-3021.00 职业摘要（学历构成）",
+                "name": "O*NET 43-3021.00：新聘所需学历问卷",
                 "period": "2026 年更新页面；访问 2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-3021.00"
+                "url": "https://www.onetonline.org/link/details/43-3021.00"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32388,18 +32511,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official outlook",
-                  "2024—2034 年；访问 2026-09-15"
+                  "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。原表列 2025 年雇员年薪中位数 48,500 美元。职业手册取整为 0%。",
+                  "2025 年基期，预测至 2035 年。"
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
-                "limitation": "为该职业单列口径的就业与预测，不是个人录用概率。",
+                "limitation": "只用于 43-3021 细项。",
                 "market": "美国",
-                "name": "O*NET 43-3021.00 职业摘要（就业与预测字段）",
-                "period": "2024—2034 年；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：账单与过账文员 43-3021",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-3021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32421,16 +32544,16 @@
                 "accessed_at": "2026-09-15",
                 "details": [
                   "official administrative regulation",
-                  "1993 年财政部令第 6 号发布，2010 年与 2019 年两次修订，2023-07-20 国务院令第 764 号第三次修订；访问 2026-09-15"
+                  "2019 年历史公报；2023 年版本另列。"
                 ],
                 "evidence_type": "official administrative regulation",
                 "id": "health",
-                "limitation": "2019历史版本，不用于当前电子/纸质开票边界；2023全文由invoice-current独立登记。",
+                "limitation": "历史文本。当前电子和纸质发票请查另列 2023 年第三次修订全文。",
                 "market": "中国大陆",
                 "name": "中华人民共和国发票管理办法（2019历史公报）",
-                "period": "2019历史公报；2023修订另见invoice-current",
+                "period": "2019 年历史公报",
                 "publisher": "中华人民共和国国务院（中国政府网国务院公报公开文本）",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.gov.cn/gongbao/content/2019/content_5468918.htm"
               },
               {
@@ -32446,7 +32569,7 @@
                 "name": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
                 "period": "2025 年；访问 2026-09-15",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -32455,13 +32578,13 @@
                   "editorial record",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "editorial record",
+                "evidence_type": "primary_document",
                 "id": "editor",
-                "limitation": "编辑解释与准备建议，关联官方职业页供核职责；不证明实测效果、招聘样本、人格效度或雇主现行SOP。",
+                "limitation": "用于核对美国职业任务。",
                 "market": "美国",
-                "name": "费马测试职业内容编辑组核对记录",
+                "name": "O*NET：账单与过账文员职业摘要",
                 "period": "访问 2026-09-15",
-                "publisher": "费马测试职业内容编辑组",
+                "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/43-3021.00"
               },
@@ -32478,7 +32601,7 @@
                 "name": "O*NET 43-3021.00 培训与教育信息",
                 "period": "2026 年更新页面；访问 2026-09-15",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localtraining/43-3021.00"
               },
               {
@@ -32494,7 +32617,7 @@
                 "name": "《中华人民共和国消费者权益保护法》（1993 年通过、2013 年第二次修正）",
                 "period": "公开文本更新至 2020-07-03；访问 2026-09-15",
                 "publisher": "中华人民共和国全国人民代表大会常务委员会（国家市场监督管理总局网站公开文本）",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.samr.gov.cn/zfjcj/tzgg/art/2023/art_615af9ed6bcd4974bf853dd2e02bc663.html"
               },
               {
@@ -32569,10 +32692,10 @@
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "当前行业页为医疗43%、专业科学技术15%、其他42%；页内未单列年份，摘要Top industries标2025。描述职业行业分布，不提供工资。",
+                "limitation": "O*NET 行业子表列医疗与社会救助 43%、专业科学技术服务 15%、其他 42%。子表未单列统计年份，行业份额不是行业工资。",
                 "market": "美国",
                 "name": "O*NET 43-3021.00 行业分布",
-                "period": "行业页未单列年份；摘要标2025；2026-10-09访问",
+                "period": "子表未列年份",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/43-3021.00"
@@ -32580,18 +32703,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official employment trends",
-                  "2024—2034 年；访问 2026-09-15"
+                  "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。原表列 2025 年雇员年薪中位数 48,500 美元。职业手册取整为 0%。",
+                  "2025 年基期，预测至 2035 年。"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "r2-pay-3",
-                "limitation": "2024 年在岗 429,800 人、2034 年约 427,900 人、2024—2034 年 0%（几乎无变化）、预测期年均职位空缺约 42,200；预测不等于个人录用概率，「几乎无变化」与仍存在大量空缺并不矛盾（空缺主要来自替代需求）。",
+                "limitation": "只用于 43-3021 细项。",
                 "market": "美国",
-                "name": "O*NET 43-3021.00 就业趋势页（就业与空缺）",
-                "period": "2024—2034 年；访问 2026-09-15",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "BLS 表 1.2：账单与过账文员 43-3021",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/43-3021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32603,10 +32726,10 @@
                 "id": "census",
                 "limitation": "当前O*NET培训目录显示全国未找到相关项目，这只说明该目录没有匹配，不能证明全美不存在课程或岗后培训。认证目录列32条相关记录，含医疗编码/账单、NACPB簿记、SAP订阅订单管理与CSBS信托检查等；关联目录不等于32项本职业普遍门槛，各证条件、费用与有效期本轮未核。",
                 "market": "美国",
-                "name": "O*NET 43-3021.00 认证发现（国家认证）",
+                "name": "O*NET：具名机构证书目录",
                 "period": "2026 年更新页面；访问 2026-09-15",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localcert/43-3021.00"
               },
               {
@@ -32617,12 +32740,12 @@
                 ],
                 "evidence_type": "official occupation classification reference",
                 "id": "msresearch",
-                "limitation": "职业分类以中类与细类划分职业；本页未取得与 43-3021.00 精确对应的中国大陆职业工资条目，账单与开票类作业分散在办事人员与租赁和商务服务人员等序列中，须按用人单位类型与岗位职责辨认。该资料为职业分类参考，不建立岗位授权。",
+                "limitation": "这是职业分类参考。本页未建立 43-3021 与某个大陆职业条目的一一对应。",
                 "market": "中国大陆",
                 "name": "《中华人民共和国职业分类大典（2022 年版）》相关说明（人力资源和社会保障部）",
                 "period": "2022 年版；访问 2026-09-15",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
               },
               {
@@ -32660,18 +32783,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official employment trends",
-                  "2025—2035"
+                  "BLS 表 1.2：美国 43-3021 在 2025 年有 418,000 个岗位，2035 年预计 417,700 个，下降 0.1%。原表单独公布净减约 200 个、自雇占比 1.5%、预计年均空缺约 37,000 个。原表列 2025 年雇员年薪中位数 48,500 美元。职业手册取整为 0%。",
+                  "2025 年基期，预测至 2035 年。"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep-current",
-                "limitation": "美国43-3021.00，2025年就业418,000人，2035年预计417,700人；2025—2035年变化0%（几乎无变化），年均职位空缺37,000。预测期空缺包括增长与替换，不是净增岗位或个人录用概率。",
+                "limitation": "只用于 43-3021 细项。",
                 "market": "美国",
-                "name": "O*NET账单过账文员2025—2035就业趋势",
-                "period": "2025—2035",
-                "publisher": "O*NET / BLS",
+                "name": "BLS 表 1.2：账单与过账文员 43-3021",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/43-3021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32697,13 +32820,13 @@
                 ],
                 "evidence_type": "official administrative regulation full text",
                 "id": "invoice-current",
-                "limitation": "中国《发票管理办法》2023修订全文：第3条电子与纸质发票同等法律效力；第21条如实开具并禁虚开，其中发票专用章要求明确针对纸质发票；第23条还禁窃取、截留、篡改、出售、泄露发票数据；第28条已开发票存根联存5年，不能据此把全部电子发票、会计档案与客户资料统一定为5年。",
+                "limitation": "大陆《会计法》第9、14、15、17条分别涉及实际业务记账、凭证审核、审核后的凭证登记账簿及账目核对。《发票管理办法》第21条要求如实开具发票。内部账单、会计原始凭证和税务发票用途不同；更改与签发按适用规则和授权办。",
                 "market": "中国大陆",
-                "name": "中华人民共和国发票管理办法（2023修订全文）",
+                "name": "《中华人民共和国发票管理办法》（2023 年第三次修订）",
                 "period": "2023-07-20第三次修订；2026-10-09访问",
-                "publisher": "国家税务总局政策法规库",
-                "scope": "jurisdiction_specific",
-                "url": "https://fgk.chinatax.gov.cn/zcfgk/c100010/c5195084/content.html"
+                "publisher": "国务院原文，广东省税务局转载",
+                "scope": "contextual",
+                "url": "https://guangdong.chinatax.gov.cn/gdsw/yfsw_gkwj/2023-10/19/content_4ab51acc51dd4b2398b93d2be8376f2c.shtml"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32718,7 +32841,7 @@
                 "name": "中华人民共和国个人信息保护法",
                 "period": "2021-08-20通过；2021-11-01施行；2026-10-09访问",
                 "publisher": "中央网信办公开法条",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
@@ -32731,28 +32854,73 @@
                 "id": "oews-basis",
                 "limitation": "OEWS为受雇者税前直时工资，纳入佣金、激励工资与生产奖金等，排除加班及非生产奖金等；未公布本职业薪酬构成拆分。外包企业受雇员工不因其公司外包就全被排除；企业合同结算额、自雇经营收入不等于员工工资。",
                 "market": "美国",
-                "name": "OEWS工资定义与统计范围",
+                "name": "BLS OEWS：统计概念",
                 "period": "当前FAQ；2026-10-09访问",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "wage_scope",
-                "url": "https://www.bls.gov/oes/oes_ques.htm"
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "三个工作样本等权的编辑估算，不是采用率或实际工时占比。；25、25、0 的均值四舍五入为 17%；2026-11-10。",
                   "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "取得与审核凭证｜让每个数字有依据｜按业务归集原始凭证，核对要素与审批与授权完整性，对不真实或不合法或记载不准确不完整的凭证按规程处理而不自行改数。 — 75/100; weight=1/3; billing-and-posting-clerks.profile.responsibilities-block.1[0]",
-                  "核算与编制账单｜让计费口径清楚｜按合同或费率或规程核算金额，编制分项对账单与账单或发票并登记应收金额，把计算过程与依据一并留存。 — 75/100; weight=1/3; billing-and-posting-clerks.profile.responsibilities-block.1[1]",
-                  "对账与差异处理｜让账实相符｜定期把账簿记录与实物与款项及有关资料核对，保证账实与账证与账账与账表相符，发现差异先挂起再查明原因并记录处置。 — 75/100; weight=1/3; billing-and-posting-clerks.profile.responsibilities-block.1[3]"
+                  "凭证检查｜字段整理｜文字助手可以整理凭证字段。真实性、完整性及审核由有职责人员复核。 — 25/100; weight=1/3; 参见本页职责及任务",
+                  "账单准备｜账单草稿｜文字助手可辅助填写草稿。费率依据和签发由授权人员核。 — 25/100; weight=1/3; 参见本页职责及任务",
+                  "差异处置｜更改与过账｜仅看更改和过账决定，文字助手不能作决定。 — 0/100; weight=1/3; 参见本页职责及任务"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "name": "FermatMind AI 任务影响估算方法 v1",
+                "period": "2026-11-10",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "乌达区政府 2026 年 1 月 4 日历史汇编：硕桐（宁夏）供应链管理有限公司招聘开票员 5 名，大专及以上，负责货物进出厂开票协调和过磅数据记录，需适应倒班，相关经验优先。原文列薪资 5,000 元，未写计薪周期。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "wuda-billing-2026",
+                "limitation": "乌达区政府 2026 年 1 月 4 日历史汇编：硕桐（宁夏）供应链管理有限公司招聘开票员 5 名，大专及以上，负责货物进出厂开票协调和过磅数据记录，需适应倒班，相关经验优先。原文列薪资 5,000 元，未写计薪周期。",
+                "market": "中国大陆",
+                "name": "乌达区历史招聘：硕桐开票员",
+                "period": "2026-01-04",
+                "publisher": "乌达区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://wuda.gov.cn/c/2026-01-04/174844.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "北京市密云区 2024 年 11 月现场招聘会历史表：东方顺安（北京）环保有限公司招 2 名开票员，学历栏写「高中以上」，待遇栏列 4,500–5,000，未单写计薪周期或具体职责。两份公告不是全国职业工资统计。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "miyun-billing-2024",
+                "limitation": "北京市密云区 2024 年 11 月现场招聘会历史表：东方顺安（北京）环保有限公司招 2 名开票员，学历栏写「高中以上」，待遇栏列 4,500–5,000，未单写计薪周期或具体职责。两份公告不是全国职业工资统计。",
+                "market": "中国大陆",
+                "name": "密云区历史招聘：东方顺安开票员",
+                "period": "2024-11",
+                "publisher": "密云区人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.bjmy.gov.cn/zwgk/jy1/202411/t20241106_451844.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "本页虚构账单与凭证记录。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "bl75-editor",
+                "limitation": "本页虚构账单与凭证记录。",
+                "market": "虚构练习",
+                "name": "FermatMind BL-75：核两版账单，写一页差异交接",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": null
               }
             ]
           },
@@ -36101,7 +36269,7 @@
       },
       "hero": {
         "h1": "账单过账文员",
-        "quick_answer": "账单过账文员为计费目的核算与登记账单与其他数值数据：核对计费数据的准确性并更正错误、为所提供的服务或交付或装运的货物编制分项对账单与账单或发票并登记应收金额、保存发票与支持性凭证的记录、操作打字与加法与计算或开票设备、制作账单文件与运输标签与贷项通知单或信用表单、接听电话与安排预约与订购用品等一般行政事务、联系客户以取得或转达账户信息；并按岗位范围审阅成本与收入数据以核定费率、回答关于费率与路径或流程的询问、把对账单或已付支票或信封装入设备或手工装封以寄送客户、按客户或项目累计工时与金额以计算专业服务费用、查阅费率手册或保险公司等来源以确定具体收费或规定、审阅采购订单与销售小票或签购单或医院记录以计算应收费用、编制成本要素报告、解决会计记录中的差异、计算信用条件与折扣与运费或费率、完成过账等簿记工作、监控设备运行、把银行对账单与已付支票核对并调节差异、称重信件以确定邮资并贴票或过机、登记止付通知、核验支票签名与必要信息并处理轻微设备卡纸；其工作不等于会计政策与报表编制与对外审计的判定，也不代替适用法域与主管部门与用人单位对会计凭证与账簿与发票开具的规范要求，并在原始凭证不真实或不合法或不准确不完整、发生账实或账证或账账或账表不符、或涉及账单调整与退款与冲销与开票口径等超出本人授权的情形时停止并升级。",
+        "quick_answer": "账单与过账文员核对原始记录、计算费用、准备账单并记录差异。美国统计采用 43-3021，财务文员合并组另列。大陆两个开票员历史样本各有岗位和计酬口径；会计凭证、税务发票及审批权限分别核对。",
         "title": "账单过账文员"
       },
       "market_signal_card": {
@@ -36652,7 +36820,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 就业与预测字段",
+            "label": "BLS 表 1.2：账单与过账文员 43-3021",
             "secondary_value": null,
             "value": {
               "$item": "billing-and-posting-clerks.profile.onet-structured-fields-block.4",
@@ -37453,7 +37621,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合账单过账文员",
+        "label": "用 RIASEC 探索职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37575,7 +37743,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
-      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
+      "interface.quick_decision.experiment_heading": "怎样用纸面账单试做？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37668,7 +37836,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 任务影响估算",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37758,37 +37926,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "429,800人",
+        "derivation": "BLS 发布值。",
+        "display_value": "418,000 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
-        "occupation_scope": "账单过账文员",
-        "period": "2024 年；访问 2026-09-15",
+        "measure": "就业岗位",
+        "occupation_scope": "美国账单与过账文员 43-3021",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "几乎无变化（Little or no change）",
+        "derivation": "BLS 发布值。",
+        "display_value": "−0.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
-        "occupation_scope": "账单过账文员",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "预计就业变化",
+        "occupation_scope": "美国账单与过账文员 43-3021",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 42,200（含增长与替换）",
+        "derivation": "BLS 发布值。",
+        "display_value": "约 37,000 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "预测期年均职位空缺（本职业口径）",
-        "occupation_scope": "账单过账文员",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "预计年均空缺",
+        "occupation_scope": "美国账单与过账文员 43-3021",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -37974,75 +38142,75 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "429,800人",
+        "derivation": "BLS 发布值。",
+        "display_value": "418,000 个岗位",
         "fact_id": "us-employment-parent",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
-        "occupation_scope": "账单过账文员",
-        "period": "2024 年",
+        "measure": "就业岗位",
+        "occupation_scope": "美国账单与过账文员 43-3021",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "几乎无变化（Little or no change）",
+        "derivation": "BLS 发布值。",
+        "display_value": "−0.1%",
         "fact_id": "us-growth-parent",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
-        "occupation_scope": "账单过账文员",
-        "period": "2024—2034 年",
+        "measure": "预计就业变化",
+        "occupation_scope": "美国账单与过账文员 43-3021",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 42,200（含增长与替换）",
+        "derivation": "BLS 发布值。",
+        "display_value": "约 37,000 个/年",
         "fact_id": "us-openings-parent",
         "market": "美国",
-        "measure": "预测期年均职位空缺（本职业口径）",
-        "occupation_scope": "账单过账文员",
-        "period": "2024—2034 年",
+        "measure": "预计年均空缺",
+        "occupation_scope": "美国账单与过账文员 43-3021",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "418,000人",
+        "derivation": "BLS 发布值。",
+        "display_value": "418,000 个岗位",
         "fact_id": "us-employment-current-2025",
         "market": "美国",
-        "measure": "就业规模",
-        "occupation_scope": "43-3021.00账单过账文员",
-        "period": "2025—2035；2026-10-09访问",
+        "measure": "就业岗位",
+        "occupation_scope": "美国账单与过账文员 43-3021",
+        "period": "2025",
         "source_refs": [
-          "ep-current"
+          "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "0%（几乎无变化）",
+        "derivation": "BLS 发布值。",
+        "display_value": "−0.1%",
         "fact_id": "us-growth-current-2025-2035",
         "market": "美国",
-        "measure": "取整就业增长",
-        "occupation_scope": "43-3021.00账单过账文员",
-        "period": "2025—2035；2026-10-09访问",
+        "measure": "预计就业变化",
+        "occupation_scope": "美国账单与过账文员 43-3021",
+        "period": "2025–2035",
         "source_refs": [
-          "ep-current"
+          "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "年均37,000（增长与替换）",
+        "derivation": "BLS 发布值。",
+        "display_value": "约 37,000 个/年",
         "fact_id": "us-openings-current-2025-2035",
         "market": "美国",
-        "measure": "预测期年均空缺",
-        "occupation_scope": "43-3021.00账单过账文员",
-        "period": "2025—2035；2026-10-09访问",
+        "measure": "预计年均空缺",
+        "occupation_scope": "美国账单与过账文员 43-3021",
+        "period": "2025–2035",
         "source_refs": [
-          "ep-current"
+          "ep"
         ]
       },
       {
@@ -38070,13 +38238,13 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "75%",
+        "derivation": "三个工作样本等权的编辑估算，不是采用率或实际工时占比。",
+        "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "账单过账文员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "measure": "AI 任务影响估算（编辑估算）",
+        "occupation_scope": "账单与过账文员三个工作样本",
+        "period": "2026-11-10",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -38088,12 +38256,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务影响估算"
     },
     "badges": [
       "O*NET 43-3021.00 · Job Zone 1–2 · 入门准备低",
       "账单编制与过账 / 账簿与凭证 / 对账与差错处理",
-      "本职业口径（工资与就业未取自其他职业）· O*NET 未标注 Bright Outlook · 中国大陆无精确等价职业条目 · 缺口可见标记"
+      "大陆两则开票员历史样本；本页未取得可比的全国职业工资"
     ],
     "metrics": [
       {
@@ -38106,7 +38274,7 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国就业增长（2025—2035）"
       },
       {
         "availability": "available",
@@ -38118,7 +38286,7 @@
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均岗位空缺（2024—2034）"
+        "label": "美国年均岗位空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -38132,17 +38300,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "账单过账文员做什么、需要哪些学历与准备、美国的收入与前景如何、AI 会改变哪些任务，以及计费口径与凭证依据错误、账目差异与重复付款与漏记、客户与账单信息泄露、长期伏案与重复动作与用眼负荷、以及账单调整与退款与冲销与开票授权的边界；保留来源范围与数据缺口。"
+      "text": "看账单与过账文员怎样核对金额、凭证与授权，比较工资口径，再试做纸面账单差异交接。"
     },
     "title": {
       "availability": "available",
-      "text": "账单过账文员"
+      "text": "账单与过账文员：工作、工资与入行｜FermatMind"
     }
   },
-  "source_content_sha256": "d652bb0a39fabff5c4496e6be9e4aedc0450134dd396998760a161428a4e0cbf",
+  "source_content_sha256": "af2416a8c08f1522910ba568d7a8dd0c0d6f7dc3aed02cc708e7eff1a4a7ceec",
   "subject": {
     "canonical_slug": "billing-and-posting-clerks",
     "name": "账单过账文员",
-    "summary": "账单过账文员为计费目的核算与登记账单与其他数值数据：核对计费数据的准确性并更正错误、编制分项对账单与账单或发票并登记应收金额、保存发票与支持性凭证记录、操作打字与计算与开票设备、制作账单文件与贷项通知单、处理接听电话与订购用品等一般行政事务、联系客户以取得或转达账户信息，并按岗位范围完成核对银行对账单与已付支票、按项目累计工时与金额计算费用、解决会计记录差异与过账等簿记工作。美国侧对应 O*NET 43-3021.00（Billing and Posting Clerks），属 Job Zone 1–2（SVP 低于 6.0）；工资与就业与行业数据均为本职业单列口径，O*NET 页面未声明取自其他职业，该职业亦未被标注 Bright Outlook；就业预测为「几乎无变化」（Little or no change；就业趋势页给出 2024 年 429,800 人 → 2034 年约 427,900 人、0%）。中国大陆侧本页未取得与该职业精确对应的公开职业工资条目，按证据口径保留 暂无可安全使用的数据 边界，不以行业平均、美国数据或不透明招聘样本填补；记账与开票行为在中国大陆受《中华人民共和国会计法》与《中华人民共和国发票管理办法》等规定约束。"
+    "summary": "账单与过账文员核对原始记录、计算费用、准备账单并记录差异。美国统计采用 43-3021，财务文员合并组另列。大陆两个开票员历史样本各有岗位和计酬口径；会计凭证、税务发票及审批权限分别核对。"
   }
 }

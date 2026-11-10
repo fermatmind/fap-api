@@ -1275,7 +1275,7 @@
         "status": "mapped"
       },
       "item:production-planning-and-expediting-clerks.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:production-planning-and-expediting-clerks.path.interview-probation.1": {
         "status": "mapped"
@@ -23317,7 +23317,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "愿意把工单、产能、库存和交期对应起来，遇缺料或停线能记录影响并找负责人决策，可进一步了解本岗位。"
+              "班次或交期常受现场变化影响。先核交接时间、紧急工单频率与排程审批权限。"
             ]
           },
           "id": "production-planning-and-expediting-clerks.quick-decision.fit-decision-checklist.1",
@@ -23332,7 +23332,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用120条虚构工单练抽核：六条样本有三类计划差异；3/6只描述样本。"
+              "到 09 用三张虚构工单做两日排程和缺料交接，保留自己的初稿。"
             ]
           },
           "id": "production-planning-and-expediting-clerks.quick-decision.fit-decision-checklist.2",
@@ -23346,7 +23346,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "纸笔练习：某批计划20件、现有合格库存4件；待生产16件须先核库存可用性和计划批准。"
+              "适合愿意核对工单、库存与班次，并在缺料时主动找责任人确认的人。"
             ]
           },
           "id": "production-planning-and-expediting-clerks.quick-decision.fit-decision-checklist.3",
@@ -23362,7 +23362,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "提交一页进度卡：写需求、库存、R1–R6抽核、R2/R4/R6差异和114条未观察工单。"
+              "到 09 用三张虚构工单做两日排程和缺料交接，保留自己的初稿。"
             ]
           },
           "id": "production-planning-and-expediting-clerks.quick-decision.fermat-decision-card.6",
@@ -27730,31 +27730,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "工业工程师",
@@ -28177,8 +28177,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能否从120条虚构记录中标出六条已核、114条未观察？",
-              "能否区分六条样本的疑点比例与120条总体？"
+              "写工单、库存来源和交期。",
+              "用工时和到料时点说明可排与待核。"
             ]
           },
           "id": "production-planning-and-expediting-clerks.fit.personality-fit-block.20",
@@ -28699,7 +28699,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用虚构120条工单抽六条，列三类差异与升级。"
+              "到 09 用三张虚构工单做两日排程和缺料交接，保留自己的初稿。"
             ]
           },
           "id": "production-planning-and-expediting-clerks.fit.personality-fit-block.55",
@@ -29487,8 +29487,8 @@
                 "id": "education",
                 "values": [
                   "教育与相关经验",
-                  "BLS列美国典型入门教育高中或同等学历，无相关经验要求。",
-                  "按目标地区和雇主核具体要求。"
+                  "BLS 的美国典型入行为高中或同等学历、中期在职训练。部分雇主偏好大学学历，实际招聘条件按岗位核对。",
+                  "北京和崎 2026 年 10 月 8 日发布的 PMC 专员样本要求本科，职责含销售订单核对、到料跟进、上线排序和部分采购。用它核工作交集，雇主授权另问。"
                 ]
               },
               {
@@ -29511,8 +29511,8 @@
                 "id": "tools",
                 "values": [
                   "可展示的工作样本",
-                  "用虚构工单展示需求—库存—计划—日报对照。",
-                  "他人能复算数量并追溯三类差异。"
+                  "到 09 用三张虚构工单做两日排程和缺料交接，保留自己的初稿。",
+                  "核记录能否让别人复算。"
                 ]
               }
             ]
@@ -29522,7 +29522,9 @@
             "employer",
             "editor",
             "onet",
-            "bls"
+            "bls",
+            "cn-d007-job",
+            "us-d007-ooh"
           ],
           "title": "入行核查依据与编辑准备建议",
           "type": "cards"
@@ -29535,33 +29537,32 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料与设定｜全部为虚构生产工单练习",
-                  "虚构工厂有120条工单待抽核；一批需求20件，合格可用库存4件，待生产16件。",
-                  "A1：核需求、工序、合格库存和批准状态；未批准不发新计划。",
-                  "A2：从120条中抽R1–R6六条，抽样由编辑设计。"
+                  "虚构材料",
+                  "一条虚构产线周一与周二各有 8 工时，批次不可跨班拆分。W01 用 5 小时、X 料 60 件，周一交付。W02 用 4 小时、X 料 40 件，周二交付。W03 用 3 小时、Y 料 20 件，周一交付。",
+                  "周一开班实点 X 70 件、Y 20 件。另有 X 30 件预计周二中午到库，未收货。周二中午后到班末仅有 3 工时，班末截单。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务与产出",
-                  "A3：R1、R3、R5完整；R2工单数量与需求不符，R4缺物料到位日，R6完工日报与计划冲突。A4：其余114条未观察。",
-                  "A4：练习者只记录疑点和待核原件；具名负责人决定是否扩展核查或交付。"
+                  "任务与交付",
+                  "交两日排程和待核单。逐批注明工时、料量、交期、未知项和下一责任人。",
+                  "用纸或本地表格，缺证单列。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考思路（先独立做）",
-                  "A5：六条中三条有待核差异，3/6=50%只描述样本，不能推全部120条差异率。",
-                  "分别列R2、R4、R6原件和升级人；未经批准不得改计划或承诺交期。"
+                  "自核顺序",
+                  "先保存初稿，再看七天计划后的参考。",
+                  "可以自己完成。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界与复核",
-                  "他人能复算20-4=16、120-6=114和3/6，并看到库存必须合格可用。"
+                  "模拟权限",
+                  "按题设分工，仓库确认实收，主管批准改排或加班，由获授权的人员传达交付承诺。"
                 ]
               }
             ]
@@ -29570,7 +29571,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：一张虚构核对生产工单",
+          "title": "PL-01 | 排产与缺料交接",
           "type": "cards"
         },
         {
@@ -29581,31 +29582,31 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "生产工单与单据摘要卡",
-                  "写需求20件、可用库存4件与待生产16件。",
-                  "库存质量状态与批准可复核。"
+                  "工单与库存表",
+                  "写工单、库存来源和交期。",
+                  "用题设原值和批准状态核对。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "疑点与复核卡",
-                  "列R2数量、R4物料日期、R6完工记录差异。",
-                  "每项对应原始工单与升级人。"
+                  "两日排程",
+                  "用工时和到料时点说明可排与待核。",
+                  "用题设原值和批准状态核对。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "升级交接卡",
-                  "注明114条未观察，不推总体差异率。"
+                  "缺料交接",
+                  "标明未知库存状态和下一责任人。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "方法说明卡",
-                  "列出插单和交期变更批准人。"
+                  "审批记录",
+                  "列出改排与交期承诺分别由谁确认。"
                 ]
               }
             ]
@@ -29637,25 +29638,25 @@
               [
                 "面试核需求",
                 "能否复算待生产量",
-                "20-4=16仅在库存合格可用时成立。",
+                "写工单、库存来源和交期。",
                 "不得跳过批准。"
               ],
               [
                 "面试抽核",
                 "能否区分样本与总体",
-                "六条三差异，114条未观察。",
+                "用工时和到料时点说明可排与待核。",
                 "不能推总体差异率。"
               ],
               [
                 "入职工单管理",
                 "能否核数量、物料和日期",
-                "R2/R4/R6分别列待核原件。",
+                "标明未知库存状态和下一责任人。",
                 "不得越权改计划。"
               ],
               [
                 "现场协作",
                 "能否识别设备和质量风险",
-                "缺料或停机先升级。",
+                "列出改排与交期承诺分别由谁确认。",
                 "不越权放行或复机；出现即时危险时按现场紧急程序停止危险作业并升级。"
               ]
             ]
@@ -29676,50 +29677,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第一日",
-                  "第一日：核A1需求、工序与批准。"
+                  "第 1 天",
+                  "记三张工单的版本、交期和资源。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第二日",
-                  "第二日：核20件需求与4件合格库存，写待生产量。"
+                  "第 2 天",
+                  "把需求和实点库存列成两栏。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第三日",
-                  "第三日：抽R1–R6，对需求、工单与日报。"
+                  "第 3 天",
+                  "按交期核周一工时与物料。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第四日",
-                  "第四日：列R2/R4/R6差异，注明114条未观察。"
+                  "第 4 天",
+                  "把预计到货时点和周二工时放在一条线上。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第五日",
-                  "第五日：按A4/A5写三种疑点、114条未知和负责人复核请求。"
+                  "第 5 天",
+                  "写待核事项、下一责任人和无法承诺的交期。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第六日",
-                  "第六日：封存初稿后看参考思路，修正疑点分类、算式或越权建议。"
+                  "第 6 天",
+                  "先独立写完交付物，再按下方参考和量规核对。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第七日",
-                  "第七日：交生产工单、复核、升级、方法四卡，记录最费力的环节与下一步练习。"
+                  "第 7 天",
+                  "修订一处有证据的问题并标注模拟。"
                 ]
               }
             ]
@@ -29736,20 +29737,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "需求20件、合格库存4件，待生产16件；批准状态须单列。",
-              "六条样本编号为R1–R6，与A2一致。",
-              "R2工单数量与需求不符、R4缺物料到位日、R6完工日报与计划冲突；R1、R3、R5完整。",
-              "3/6只描述六条样本，其他114条未知，不推整体。",
-              "异常卡须说明权限不清时暂停，交负责人判断是否扩展核查。",
-              "真实系统访问、上游部门沟通和工单放行必须先核适用生产安排与机构授权。",
-              "作品仅证明纸笔方法，不等于雇主录用、岗位授权或系统访问授权。"
+              "周一排 W01 和 W03，合计 5＋3＝8 小时。对应的 X、Y 实点数量都够。",
+              "W01 用掉 X 60 件后剩 10 件，W02 缺 X 30 件。",
+              "预计到库后的 3 小时排不下 4 小时的 W02。现有班次不能支持周二交付。",
+              "仓库查实收和可用状态，计划员核替代时段，主管决定调整或加班。交期承诺由获授权人员确认。",
+              "版本分开。把已核数量、预计到货、拟改时段和待批交期分别登记。",
+              "四项各 0–2 分，资源计算、时段可行性、未知状态、授权与交接。",
+              "依据完整且可追溯得 2，部分得 1，缺失或越权得 0。"
             ]
           },
           "id": "production-planning-and-expediting-clerks.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "题后参考与自核量规",
           "type": "list"
         },
         {
@@ -29867,16 +29868,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "A1–A5与七天计划是虚构工单练习，不含真实客户或产线数据。",
-              "岗位薪资、地区岗位授权与招聘状态按所在地和雇主核对；美国统计不能当中国条件。"
+              "北京和崎 2026 年 10 月 8 日发布的 PMC 专员样本要求本科，职责含销售订单核对、到料跟进、上线排序和部分采购。用它核工作交集，雇主授权另问。",
+              "历史招聘样本和虚构练习各有用途。职级、在招状态及授权按雇主核查。"
             ]
           },
           "id": "production-planning-and-expediting-clerks.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "cn-d007-job",
+            "editor"
           ],
           "title": "招聘记录说明",
           "type": "notice"
@@ -30104,7 +30103,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS列美国43-5061典型入门教育高中或同等学历、无需相关经验、中期在岗培训。"
+              "BLS 的美国典型入行为高中或同等学历、中期在职训练。部分雇主偏好大学学历，实际招聘条件按岗位核对。"
             ]
           },
           "id": "production-planning-and-expediting-clerks.path.career-path-block.23",
@@ -31929,10 +31928,15 @@
                 "question_key": "career.faq.production-planning-and-expediting-clerks.us-pay"
               },
               {
-                "answer": "BLS列美国典型入门教育为高中或同等学历、无相关经验要求、中期在岗培训；中国要求按雇主核。",
+                "answer": "BLS 的美国典型入行为高中或同等学历、中期在职训练。部分雇主偏好大学学历，实际招聘条件按岗位核对。 北京和崎 2026 年 10 月 8 日发布的 PMC 专员样本要求本科，职责含销售订单核对、到料跟进、上线排序和部分采购。用它核工作交集，雇主授权另问。",
                 "id": "production-planning-and-expediting-clerks.faq.7",
                 "question": "入行教育和培训怎样？",
-                "question_key": "career.faq.production-planning-and-expediting-clerks.education-path"
+                "question_key": "career.faq.production-planning-and-expediting-clerks.education-path",
+                "source_refs": [
+                  "bls",
+                  "cn-d007-job",
+                  "us-d007-ooh"
+                ]
               },
               {
                 "answer": "文员协调工单与物料流，生产主管对现场人员、质量、安全和操作负责，分工由组织制度决定。",
@@ -31962,7 +31966,9 @@
             "nbs",
             "privacy",
             "cnclass",
-            "editor"
+            "editor",
+            "cn-d007-job",
+            "us-d007-ooh"
           ],
           "type": "faq"
         },
@@ -32048,13 +32054,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32288,7 +32294,7 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "120条虚构工单和六条抽核为编辑练习。",
+                  "PL-01 是编辑部制作的虚构试做。",
                   "六条三疑点不推全体质量率。"
                 ],
                 "evidence_type": "editorial synthesis",
@@ -32523,6 +32529,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "北京和崎 2026 年 10 月 8 日发布的 PMC 专员样本要求本科，职责含销售订单核对、到料跟进、上线排序和部分采购。用它核工作交集，雇主授权另问。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-d007-job",
+                "limitation": "单岗样本。",
+                "market": "中国大陆",
+                "name": "河北工业大学就业网｜北京和崎 PMC 专员",
+                "period": "2026-10-08",
+                "publisher": "河北工业大学就业网｜北京和崎 PMC 专员",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/correcruit/content/id/81801.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS 的美国典型入行为高中或同等学历、中期在职训练。部分雇主偏好大学学历，实际招聘条件按岗位核对。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-d007-ooh",
+                "limitation": "典型入行条件，个别岗位另核。",
+                "market": "美国",
+                "name": "美国劳工统计局职业展望手册",
+                "period": "2025–2035",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/office-and-administrative-support/material-recording-clerks.htm"
               }
             ]
           },
@@ -37220,7 +37256,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合生产计划与催单文员工作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37790,14 +37826,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "生产计划与催单文员分发工单、协调物料和进度、处理缺料与延期。查看O*NET 43-5061任务、美国2025年工资、BLS 2025–2035预测、中国工资证据缺口和虚构练习。"
+      "text": "生产计划与催单文员核工单、库存和班次，跟进缺料与延期。看大陆 PMC 招聘样本、美国工资及两日排产试做。"
     },
     "title": {
       "availability": "available",
       "text": "生产计划与催单文员"
     }
   },
-  "source_content_sha256": "eb9761dbff0731140cff8524ae127b7dbde60baa61c7c99ff3ed648a74699ebd",
+  "source_content_sha256": "39ef2fec659cd7ef71a76c44e41b7e7b4c939accef010bf5a30b09f9f1fb598e",
   "subject": {
     "canonical_slug": "production-planning-and-expediting-clerks",
     "name": "生产计划与催单文员",

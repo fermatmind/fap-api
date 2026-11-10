@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a27-hengqin": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a27-shanghai": {
+        "status": "pending_mapping"
       },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
@@ -1638,7 +1644,7 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1710,7 +1716,7 @@
         "status": "pending_mapping"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26066,12 +26072,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "引用公开数字时须同时写明城市、行业与单位类型、岗位职责、是否含项目奖金与补贴与加班与驻场安排、统计量与来源日期。"
+              " 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "a27-hengqin",
+            "a27-shanghai"
           ],
           "type": "prose"
         },
@@ -26180,12 +26187,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供招聘报价或个人收入承诺；缺失项保留缺失，不用行业均值或邻近职业替代。"
+              "公告只用于核对岗位职责和计薪方式。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "a27-hengqin",
+            "a27-shanghai"
           ],
           "type": "prose"
         }
@@ -28932,25 +28940,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "虚构材料",
-                  "虚构设计条件书 1 份（含场地与空间要求）、概念草图 2 张、规格与工程计算摘要 1 份、房屋建筑制图统一标准要点清单（图层与命名与符号与标注）与图纸目录与版本与校核清单。",
-                  "材料均为虚构，不含真实项目与业主与场地信息。"
+                  "纸面工单材料",
+                  "虚构项目，纸面作业。获批的平面 A-02 Rev B 将门洞尺寸定为 900 mm，剖面 A-05 Rev A 仍标 850 mm。",
+                  "变更单 R17 只批准改门洞尺寸，没有批准改动墙体位置。",
+                  "题设约定：制图员记冲突、列影响图号。设计负责人确认更新，文件管理员发放获批版本。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "作品任务",
-                  "在 40 分钟内为一份虚构平面图建立图层与命名并标注关键尺寸与材料、写一段专业接口与出图顺序说明、列出需向建筑师或工程师确认的清单。",
-                  "只做纸面核对与方案设计，不作设计签章或结构安全或法规合规结论，不接触真实项目与系统。"
+                  "交件要求",
+                  "交一页变更记录，写尺寸差额、影响图号、已批准的范围和仍待确认的事项。",
+                  "注明谁确认修改、谁发放图纸。只用题设，无需绘制或施工。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "参考结果",
-                  "图层与命名按标准分类并可追溯；关键尺寸与材料与规格一致并标注不确定项；专业接口与出图顺序说明覆盖结构与电气与机械接口与版本；确认清单列出场地与规范与接口等待确认项。",
-                  "参考结果用于自检，不是唯一正确答案。"
+                  "先完成独立答卷",
+                  "到「常见问题与资料来源」打开「施工图变更参考答案（完成第六天后再打开）」。",
+                  "用其中的自核项记录一处差异与修订。"
                 ]
               },
               {
@@ -28979,50 +28988,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "第 1 天：读懂材料",
-                  "阅读虚构设计条件与草图与规格与标准要点，圈出不确定项并写出问题清单。"
+                  "第 1 天",
+                  "抄录图号、版次和尺寸。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "第 2 天：依据与规范",
-                  "按规范与场地与空间要求核对设计条件并列出待确认项。"
+                  "第 2 天",
+                  "复算两张图的尺寸差额。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第 3 天：图层与命名",
-                  "为一份虚构平面图按标准建立图层与命名并写出符号与图例说明。"
+                  "第 3 天",
+                  "核对 R17 的批准范围。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "第 4 天：尺寸与材料",
-                  "标注关键尺寸并编制材料表，核对尺寸与规格与数量一致性。"
+                  "第 4 天",
+                  "列出待确认图纸和负责角色。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "第 5 天：接口与出图",
-                  "写一段专业接口与版本与出图顺序说明并列出接口确认点。"
+                  "第 5 天",
+                  "写一页变更交接。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第 6 天：限时复做",
-                  "在限时条件下重做一遍并记录精力与错误类型。"
+                  "第六天：独立交件",
+                  "先不看参考，检查交件能否独立读懂。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第 7 天：比较与决定",
-                  "比较两版方案，写出继续／谨慎／停止及理由。"
+                  "第七天：打开参考并复盘",
+                  "到「常见问题与资料来源」打开「施工图变更参考答案（完成第六天后再打开）」。写下一处差异与修订，再决定继续或暂缓。"
                 ]
               }
             ]
@@ -29041,13 +29050,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第 1 天判断：材料中的不确定项是否被如实标出，而不是猜测补全。",
+              "能用题面完成一页交接，并区分已核、待核和审批。",
               "第 2 天判断：依据与规范与场地要求是否逐项核对，而不是凭印象。",
-              "第 3 天判断：图层与命名与符号是否按标准执行且可追溯。",
+              "用纸面作业记录哪一步最费力，真实工作量另向雇主核对。",
               "第 4 天判断：尺寸与材料表是否一致并标注不确定项。",
               "第 5 天判断：专业接口与版本与出图顺序说明是否完整并列出确认点。",
               "第 6 天判断：限时条件下是否仍能守住标准与校核与留痕要求。",
-              "第 7 天判断：综合两版表现，判断自己是否愿意继续在建筑与土木制图方向投入。"
+              "第七天对照折叠参考检查交件。有关键漏项先重做。真实培训及职责范围另向雇主确认。"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30893,22 +30902,21 @@
           "data": {
             "entries": [
               {
-                "answer": "分析建筑规范与地方法规与场地与空间要求，核对设计概念与草图与工程计算与规格表并获取汇总数据；用计算机辅助绘图系统（CAD）或绘图机或手工绘制地基与建筑物与结构的平面与详图，绘制道路与桥梁与管线等土木图纸与地图与剖面图；协调结构与电气与机械设计并确定图形表达方法与出图顺序，编制材料表与尺寸与标注与标注文字；审核草图与图纸与规格一致性，按复制规格完成与复制图纸与文档包，向生产或施工团队解释图纸并提供调整，必要时走访现场收集测量数据并监督与培训其他绘图人员。",
+                "answer": "把建筑或土木专业人员确认的条件转成图纸或模型，核对尺寸、图号和版本，把冲突交给设计负责人确认。",
                 "id": "actors.faq.1",
                 "question": "建筑与土木制图员每天的具体工作是什么？",
                 "question_key": "career.faq.drafters.1",
                 "source_refs": [
-                  "onet"
+                  "sag-moa"
                 ]
               },
               {
-                "answer": "本职业在建筑师或工程师的指导下按其设计意图与规范绘制与协调与校核与交付图纸；建筑师承担建筑设计与报建与执业注册与签章责任；土木工程师承担结构建模与计算与安全与设计签章。对象与授权与产出不同，不能按名称互换。",
+                "answer": "制图员把已确认的设计转成平面、剖面或场地图，并记录图纸冲突。建筑师或土木工程师通常负责提出、核定相应专业方案。谁有权修改设计和签发图纸，应按项目分工核对。",
                 "id": "actors.faq.2",
                 "question": "它与建筑师、土木工程师有什么区别？",
                 "question_key": "career.faq.drafters.2",
                 "source_refs": [
-                  "onet",
-                  "agent"
+                  "sag-moa"
                 ]
               },
               {
@@ -30940,23 +30948,24 @@
                 ]
               },
               {
-                "answer": "美国 BLS 2025 年工资数据中位为 66,150 美元/年（31.80 美元/时），年度分位 46,260／55,650／66,150／80,870／99,710 美元，小时分位 22.24／26.76／31.80／38.88／47.94 美元。中国大陆未取得与之对应的全国单职业口径，不给出中位数或分位数。比较真实岗位时须核对城市、行业与单位类型、专业方向、是绘图执行还是专业校核或负责、是否含项目奖金与加班与驻场补贴，以及税前税后口径。",
+                "answer": "美国 2025 年 5 月建筑与土木制图细项工资中位数为 66,150 美元/年。 横琴招聘表第 20 项列室内施工图绘图员 20 人，专科及以上，未列工资。 崇明招聘列 1 名深化设计师，8,000–15,000 元/月。含平面、立面、节点详图和现场协调，属于职责更宽的相邻岗位。 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。",
                 "id": "actors.faq.6",
                 "question": "工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.drafters.6",
                 "source_refs": [
-                  "oews",
-                  "r2-pay-1"
+                  "r5-bls-projections",
+                  "a27-hengqin",
+                  "a27-shanghai"
                 ]
               },
               {
-                "answer": "美国反馈显示 42% 要求学士学位，在职通常需要 1—2 年职业培训或副学士学位并可能与认可学徒计划相关。中国大陆本职业不设统一准入类职业资格，制图员技能等级按《制图员国家职业标准》参考，实际以设计单位与项目与法域要求为准。",
+                "answer": "横琴招聘表第 20 项列室内施工图绘图员 20 人，专科及以上，未列工资。 崇明招聘列 1 名深化设计师，8,000–15,000 元/月。含平面、立面、节点详图和现场协调，属于职责更宽的相邻岗位。 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。 应聘时逐项核对学历、试演或培训条件。",
                 "id": "actors.faq.7",
                 "question": "需要什么学历，又该怎样训练？",
                 "question_key": "career.faq.drafters.7",
                 "source_refs": [
-                  "onet",
-                  "teacher"
+                  "a27-hengqin",
+                  "a27-shanghai"
                 ]
               },
               {
@@ -30970,23 +30979,30 @@
                 ]
               },
               {
-                "answer": "先做本页纸面练习（为虚构平面图建立图层与命名、标注关键尺寸与材料、写专业接口与出图顺序说明、列确认清单），再争取受监督的岗位或培训体验；同时确认自己能接受长时间用屏与反复修改与节点压力，并按设计单位与项目要求确认授权与保密边界。",
+                "answer": "先做本页 R17 纸面练习。对照两张图的尺寸和版次，写出差额、批准范围和接手人。第七天再打开参考核对。",
                 "id": "actors.faq.9",
                 "question": "零基础想尝试，应该先做什么？",
                 "question_key": "career.faq.drafters.9",
                 "source_refs": [
-                  "onet",
-                  "sag"
+                  "sag-moa"
                 ]
               },
               {
-                "answer": "考虑用屏与久坐负荷（室内环境受控「每天」99%、持续坐着「超过一半时间」37%、重复相同任务「极其重要」38%）、精确与校核要求（精确或准确「极其重要」32%）、团队协作「极其重要」65%，以及设计资质与注册与签章与数据保密责任。",
+                "answer": "美国 BLS 建筑与土木制图细项 17-3011 从 2025 年约 104,100 人到 2035 年约 109,500 人（+5.2%），年均约 9,100 个空缺，含替补。整个制图组 17-3010 的同期增长为 0.6%，分属不同范围。",
                 "id": "actors.faq.10",
-                "question": "选择这个职业还应考虑什么？",
+                "question": "美国就业预测应怎么读？",
                 "question_key": "career.faq.drafters.10",
                 "source_refs": [
-                  "onet",
-                  "nist"
+                  "r5-bls-projections"
+                ]
+              },
+              {
+                "answer": "两份图纸门洞差 50 mm，记录 A-02 Rev B 900 mm 与 A-05 Rev A 850 mm。R17 只批准门洞尺寸变化，墙位沿用原批准范围。把剖面更新列为待确认，交设计负责人核定；文件管理员仅在批准后发放更新版。交接记录 R17、两张图和版次、尺寸差额、待确认事项和接手人。自核四项：尺寸复算、受影响图号与版本、变更范围、审批与交接。每项齐全计一项。题设为虚构，来源提供职业任务背景。",
+                "id": "actors.faq.11",
+                "question": "施工图变更参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.drafters.11",
+                "source_refs": [
+                  "sag-moa"
                 ]
               }
             ]
@@ -31225,19 +31241,19 @@
                 "url": "https://www.onetonline.org/link/summary/17-3012.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "美国17-3011精确职业2025全国10/25/50/75/90分位年46,260/55,650/66,150/80,870/99,710美元、时22.24/26.76/31.80/38.88/47.94美元，原数字保留。OEWS为受雇直时税前工资，含适用佣金、生产奖金和规定津贴等，排自雇、加班溢价、轮班差额及非生产奖金等；不能一概排除项目制、外包雇员或所有项目奖金/驻场津贴。分位不是经验等级、起薪、个人上限或各因素的因果证明。"
+                  "美国 BLS 建筑与土木制图细项 17-3011 从 2025 年约 104,100 人到 2035 年约 109,500 人（+5.2%），年均约 9,100 个空缺，含替补。整个制图组 17-3010 的同期增长为 0.6%，分属不同范围。"
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "bls",
-                "limitation": "美国17-3011精确职业2025全国10/25/50/75/90分位年46,260/55,650/66,150/80,870/99,710美元、时22.24/26.76/31.80/38.88/47.94美元，原数字保留。OEWS为受雇直时税前工资，含适用佣金、生产奖金和规定津贴等，排自雇、加班溢价、轮班差额及非生产奖金等；不能一概排除项目制、外包雇员或所有项目奖金/驻场津贴。分位不是经验等级、起薪、个人上限或各因素的因果证明。",
+                "limitation": "年均空缺包含替补。",
                 "market": "美国",
-                "name": "O*NET OnLine（转引 U.S. Bureau of Labor Statistics）：17-3011.00 全国工资",
-                "period": "2025 年工资数据; accessed 2026-09-19",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/17-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31725,6 +31741,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "横琴招聘表第 20 项列室内施工图绘图员 20 人，专科及以上，未列工资。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a27-hengqin",
+                "limitation": "单次公告，只说明该岗位的条件。",
+                "market": "中国大陆",
+                "name": "室内施工图绘图员",
+                "period": "2023-09",
+                "publisher": "横琴粤澳深度合作区",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hengqin.gov.cn/tmsswj/msgk/sbfw/gk/zwdt/content/post_3577420.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "崇明招聘列 1 名深化设计师，8,000–15,000 元/月。含平面、立面、节点详图和现场协调，属于职责更宽的相邻岗位。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a27-shanghai",
+                "limitation": "单次公告，只说明该岗位的条件。",
+                "market": "中国大陆",
+                "name": "精装修深化设计师",
+                "period": "2025-05-07",
+                "publisher": "上海市崇明区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shcm.gov.cn/xwzx/002009/20250507/09b7cc60-c021-4820-85a1-31cb31df7a03.html"
               }
             ]
           },
@@ -34518,7 +34564,7 @@
             },
             {
               "指标": "制图标准",
-              "数值": "标准正文/现行状态待核",
+              "数值": "查看下方有日期的两份岗位样本。",
               "说明": "证据不足：未取得GB/T50001-2017主管部门现行状态及正文，不能仅凭标准编号/旧网页把全部条款称普遍强制要求。江苏人社2022目录确有制图员3-01-02-07/2002年国家职业标准条目，仅为目录元数据；未取得标准正文或最新版本，四等级、教育和申报条件待核，不作当前普遍门槛。设计资质与注册责任另按具体法规/专业/项目核。"
             },
             {
@@ -34655,7 +34701,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "统计口径状态",
+          "china_open": "下列为有日期的招聘样本，另列全国职业工资口径缺口。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34698,7 +34744,7 @@
               }
             },
             {
-              "城市/区间": "行业均值（不可替代本职业）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$join": [
                   {
@@ -34728,13 +34774,14 @@
           "china_soc_row": "中国大陆薪资口径",
           "edu": "训练与资质与责任见入行模块",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-a27-hengqin",
+            "posting-a27-shanghai"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
             "ai_heading": "AI 与自动化会直接改变本职业的收入吗？",
             "driver_heading": "谈中国大陆同类岗位报酬时应核对什么？",
-            "official_heading": "中国大陆官方口径与统计缺口",
+            "official_heading": "行业统计与招聘样本的范围",
             "scenario_caption": "计酬方式与统计边界对照",
             "scenario_heading": "中国大陆同类岗位的计酬方式能直接比较吗？",
             "scenario_interpretation_label": "适用范围与缺口",
@@ -36531,7 +36578,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解建筑与土木制图员的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36644,11 +36691,11 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解建筑与土木制图员的任务兴趣与工作偏好"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
             "label": "了解建筑与土木制图员的任务兴趣与工作偏好"
           },
           {
@@ -37062,39 +37109,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约110,500人（2024 年，O*NET 摘要页口径）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "104,100 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模（存量统计）",
-        "occupation_scope": "本职业（17-3011.00）口径；规模随建筑与基建投资与设计出图需求与制图自动化程度变化；全国总量不说明某行业与某单位的具体机会",
-        "period": "2024 年基期；检索 2026-09-19",
+        "occupation_scope": "美国建筑与土木制图 17-3011",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "r5-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2024—2034 年预测为「平均（Average，3% 至 4%）」（O*NET 摘要页标注的类别与区间，该页未给出单一精确百分比）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "5.2%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "预测就业变化（职业总量）",
-        "occupation_scope": "本职业口径，预测期 2024—2034 年；该预测是职业总量变化，不是个人录用概率；该页只给出「平均（3% 至 4%）」类别与区间而未给出单一精确百分比，本页按口径原文表述而不自行换算百分数；本页未取得 BLS 职业展望本职业页一手口径",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "美国建筑与土木制图 17-3011",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约10,000个（2024—2034 年，含更替需求；O*NET 摘要页口径）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 9,100 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "预测期职位空缺（含更替需求）",
-        "occupation_scope": "本职业口径；为预测期内因增长与更替等形成的合计空缺，不是每年净增岗位，也不是个人机会的直接度量；O*NET 该页标注的口径期间为 2024—2034 年，页面按该口径引用，不另按年度换算",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "美国建筑与土木制图 17-3011",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-projections"
         ]
       },
       {
@@ -37272,14 +37319,15 @@
       },
       {
         "derivation": null,
-        "display_value": "精确中国全国职业工资缺口；2025建筑非私营92036/私营66275元税前年平均，仅行业背景",
+        "display_value": "横琴招聘表第 20 项列室内施工图绘图员 20 人，专科及以上，未列工资。 崇明招聘列 1 名深化设计师，8,000–15,000 元/月。含平面、立面、节点详图和现场协调，属于职责更宽的相邻岗位。",
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "中国大陆",
         "measure": "工资缺口和行业背景",
-        "occupation_scope": "国家统计局2025城镇单位工资：建筑非私营92,036/私营66,275元，科学研究和技术服务非私营182,064/私营83,560元，均税前年平均仅行业背景，不是本职业中位/分位/月薪。覆盖5人及以上法人单位就业人员，排个体经营/自由职业等；项目制/外包/兼职若属于统计单位就业人员不当然排除。未取得精确中国全国职业工资与真实招聘/企业薪酬样本，缺口保留。",
-        "period": "2025",
+        "occupation_scope": "两份历史招聘公告",
+        "period": "2023–2025",
         "source_refs": [
-          "r5-nbs-current"
+          "a27-hengqin",
+          "a27-shanghai"
         ]
       },
       {
@@ -37292,6 +37340,30 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "横琴招聘表第 20 项列室内施工图绘图员 20 人，专科及以上，未列工资。",
+        "fact_id": "posting-a27-hengqin",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "室内施工图绘图员",
+        "period": "2023-09",
+        "source_refs": [
+          "a27-hengqin"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "崇明招聘列 1 名深化设计师，8,000–15,000 元/月。含平面、立面、节点详图和现场协调，属于职责更宽的相邻岗位。",
+        "fact_id": "posting-a27-shanghai",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "精装修深化设计师",
+        "period": "2025-05-07",
+        "source_refs": [
+          "a27-shanghai"
         ]
       }
     ]
@@ -37319,19 +37391,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年「平均（3% 至 4%）」；来源只给类别与区间）"
+        "label": "美国建筑与土木制图 17-3011 · 预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年约 110,500 人）"
+        "label": "美国建筑与土木制图 17-3011 · 就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国预计职位空缺（2024—2034 年约 10,000 个，含更替需求）"
+        "label": "美国建筑与土木制图 17-3011 · 预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37345,17 +37417,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "建筑与土木制图员（O*NET-SOC 17-3011.00）在建筑工程与土木工程与专业设计与施工服务等场景做建筑与土木制图：分析建筑规范与场地与空间要求并核对设计概念与草图与工程计算与规格，用 CAD 或手工绘制建筑与结构详图与土木图纸与地形表达，协调结构与电气与机械设计并确定出图顺序，编制材料表与尺寸与标注并复核一致性，复制与交付图纸并向施工团队解释，必要时走访现场收集测量数据。美国口径：BLS 2025 年工资数据中位 66,150 美元/年（31.80 美元/时），年度分位 46,260／55,650／66,150／80,870／99,710 美元；2024 年就业约 110,500 人，2024—2034 年预测「平均（3% 至 4%）」、预计空缺约 10,000 个；准备层级 Job Zone Three，兴趣代码 RCA。中国大陆：房屋建筑制图按《房屋建筑制图统一标准》GB/T 50001-2017 执行，设计出图与签章责任由具备资质的设计单位与注册执业人员承担；公开统计未建立职业级工资口径，本页在相关位置可见标记缺口。"
+      "text": "看建筑与土木制图如何核对尺寸、图号和版次，比较招聘样本和美国就业数据，完成纸面变更交接。"
     },
     "title": {
       "availability": "available",
       "text": "建筑与土木制图员"
     }
   },
-  "source_content_sha256": "3333e1ff66888e541dce491fdc6db63cbcf757a4c9590c5daacadfe206418ce2",
+  "source_content_sha256": "d9555017ea30d1c12d29366c2070c7ef14530adebdb9ac970da0c5728611a267",
   "subject": {
     "canonical_slug": "drafters",
     "name": "建筑与土木制图员",
-    "summary": "建筑与土木制图员（美国侧 O*NET-SOC 17-3011.00，Architectural and Civil Drafters）是建筑与土木制图岗位：编制建筑物的建筑与结构特征的详细图纸，或编制用于土木工程项目（如公路、桥梁和公共工程）的图纸与地形浮雕图，并运用建筑材料与工程实践与数学知识完成绘图；工作含用计算机辅助绘图系统（CAD）或绘图机或手工制图，分析建筑规范与地方法规与空间与场地要求，依据概念与草图与工程计算与规格表绘制平面与详图，协调结构与电气与机械设计并确定图形表达方法与出图顺序，编制材料表与尺寸与标注与标注文字，审核草图与图纸与规格一致性，向生产或施工团队解释图纸并提供调整，获取并汇总数据与走访现场收集测量数据，绘制地图与图表与剖面图，按复制规格完成与复制图纸，并监督与培训其他绘图与技术员。美国口径：BLS 2025 年工资数据中位 66,150 美元/年（31.80 美元/时），年度分位 46,260／55,650／66,150／80,870／99,710 美元（小时分位 22.24／26.76／31.80／38.88／47.94）；O*NET 摘要页给出 2024 年就业约 110,500 人、2024—2034 年预测为「平均（Average，3% 至 4%）」与约 10,000 个预计职位空缺（该来源只给出类别与区间而未给出单一精确百分比，本页按口径原文表述）；准备层级为 Job Zone Three（SVP 6.0 至 <7.0），教育反馈为 42% 要求学士学位，兴趣代码 RCA，任务 27 项；工作情境包括每天使用电子邮件 85%、每天电话交谈 58%（另 31% 每周以上）、与他人大部分时间接触 50%、团队协作「极其重要」65%、精确或准确「极其重要」32%（另 62% 非常重要）、决策自由度「很大」29%、每天面对时间压力 14%、室内环境受控「每天」99%、持续坐着「超过一半时间」37%、工作时间「规律（固定日程）」94%、重复相同任务「极其重要」38%、竞争程度「高度竞争」14%。中国大陆口径：房屋建筑制图按《房屋建筑制图统一标准》GB/T 50001-2017（住房和城乡建设部 2017 年批准，2018 年 5 月 1 日施行）统一图纸幅面与图线与符号与图样画法与尺寸标注以及计算机辅助制图文件与图层与协同设计要求执行；制图员职业按《制图员国家职业标准》的四个等级（初级/五级至技师/二级）参考；设计出图与签章责任由具备相应资质的设计单位与注册执业人员承担（其余按《建设工程勘察设计管理条例》与工程设计资质与注册建筑师与建筑信息模型（BIM）相关标准名称与一般要求引用，未逐条核对条文编号）。本职业在中国大陆不设统一准入类职业资格。公开统计未建立与本职业对应的职业级工资口径，本页据实保留缺口；本页不提供设计签章、结构安全或法规合规意见。"
+    "summary": "把建筑或土木专业人员确认的条件转成图纸或模型，核对尺寸、图号和版本，把冲突交给设计负责人确认。"
   }
 }

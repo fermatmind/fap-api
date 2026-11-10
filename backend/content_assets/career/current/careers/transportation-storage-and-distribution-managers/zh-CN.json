@@ -23654,13 +23654,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "可以先观察自己是否愿意核数据、排优先级、听取团队与客户约束，并解释方案取舍。管理不仅是算出最低价格，还包括人员、服务、安全和合规责任。"
+              "纸面体验｜对照虚构收货表和发运排程，标出同批货的预计到达和可出库日期之间的冲突，写清应找哪支团队复核。 "
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.fermat_decision_card.summary",
           "source_refs": [
-            "bls-ooh",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24753,13 +24752,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "运输、仓储与配送经理按组织政策与适用法律计划、协调和监督运输、库存与配送活动，管理人员、预算、服务与安全绩效，并与跨部门及合作方处理异常。管理范围随岗位而变。"
+              "运输、仓储与配送经理安排收货、存放、发运及人员协作，并检查设备或仓库运行情况。异常会影响货物去向和后续交付。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh"
+            "transfer-onet-11-3071.00"
           ],
           "type": "prose"
         }
@@ -25403,12 +25401,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分技术能力、实际采用与就业结果。文字辅助可作为待核草稿，运输库存自动化需按具体系统和现场验证；既有外部资料未提供可直接采用的实测可复核的职业任务级评分，FermatMind分数另为编辑估算或个人失业概率。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构收货表和发运排程，标出同批货的预计到达和可出库日期之间的冲突，写清应找哪支团队复核。"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial"
+            "transfer-onet-11-3071.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32568,6 +32567,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-11-3071.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 11-3071.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/11-3071.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38074,10 +38100,10 @@
       "text": "运输、仓储与配送经理"
     }
   },
-  "source_content_sha256": "40727c9eeff2602310830d107a425dc0bc638dcc9c21505c9a9209108f358416",
+  "source_content_sha256": "6bfa8aa611df606962b0740a600681f2a447b728c1d14a365b22b8a9f0fb31e4",
   "subject": {
     "canonical_slug": "transportation-storage-and-distribution-managers",
     "name": "运输、仓储与配送经理",
-    "summary": "运输、仓储与配送经理协调货物流动、库存、人员与预算，跟踪服务、安全和运营绩效。本页以美国11-3071.00为基准，分清运输和仓储管理、相关经验与岗位权限；用虚构方案题体验容量、时限和费用取舍。"
+    "summary": "运输、仓储与配送经理安排收货、存放、发运及人员协作，并检查设备或仓库运行情况。异常会影响货物去向和后续交付。"
   }
 }

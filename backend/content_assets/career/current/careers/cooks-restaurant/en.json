@@ -53,6 +53,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-restaurant-huangpu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-restaurant-zhaoyuan": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -1692,7 +1698,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -19491,56 +19497,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19548,7 +19518,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19561,7 +19531,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19574,7 +19544,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19587,7 +19557,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23812,11 +23782,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is menu leadership and management responsibility: taking on menu design and pricing, cost accounting, staff scheduling and training, and setting output standards; the preparation level is Job Zone 3, and employment was 197,300 in 2024."
+              "Head cooks often manage menus, kitchen standards and staff. Check whether the restaurant cook role includes supervision."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
           "source_refs": [
+            "agent",
             "onet"
           ],
           "type": "prose"
@@ -23868,11 +23839,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is operational and people management responsibility: a median annual wage of 69,390 dollars (2025), employment of 352,800 in 2024, and the O*NET growth category “much faster than average (5% to 6%)”."
+              "Food service managers coordinate operations and staff for a restaurant or food service department. Restaurant cooks primarily prepare, season and cook dishes."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
           "source_refs": [
+            "teacher",
             "onet"
           ],
           "type": "prose"
@@ -23910,12 +23882,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is a fixed menu, a single station and service to customers collecting food quickly; employment was 669,500 in 2024, and the O*NET growth category is “decline (-14%)”."
+              "Fast food cooks use dedicated equipment to fill a limited menu. Restaurant duties depend on the menu and kitchen team."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
           "source_refs": [
-            "onet"
+            "editor",
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23952,12 +23926,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference is serving a fixed population to a cyclical menu, mainly in bulk, not to ordering customers; employment was 466,100 in 2024, and the O*NET growth category is “slower than average (1% to 2%)”."
+              "Cafeteria kitchens tend to plan batches for meal times and expected volumes. Restaurant kitchens usually cook to customer orders."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.difference",
           "source_refs": [
-            "onet"
+            "adjacent-summary-35-2012",
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23994,12 +23970,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference is the shortest process, with orders directly deciding the production sequence and frequent direct customer contact; employment was 151,100 in 2024, and the O*NET growth category is “decline (-1% or lower)”."
+              "Short order cooks time the items on a short ticket. In large restaurants with dedicated stations, a restaurant cook can be assigned to prepare a particular part of the menu."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
           "source_refs": [
-            "onet"
+            "cook-adjacent-short-order",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -24036,11 +24013,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference is that there is no responsibility for cooking and plating; employment was 902,700 in 2024, the O*NET growth category is “decline (-1% or lower)”, and it often serves as the entry point into the back-of-house system."
+              "Prep workers mainly cut, measure and stage ingredients. Ask whether cooking or plating is part of the job."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.difference",
           "source_refs": [
+            "enrichment",
             "onet"
           ],
           "type": "prose"
@@ -24078,11 +24056,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The table below compares restaurant cooks with five adjacent directions across four items: career direction, core work and output, key differences, and which choice suits you better; employment and growth use U.S. O*NET-SOC measures (2024 employment, 2024—2034 projection)."
+              "Compare jobs organized around customer orders, scheduled meal service, ingredient prep or managing a kitchen or restaurant."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.intro",
           "source_refs": [
+            "bls-family-context",
             "onet"
           ],
           "type": "prose"
@@ -24106,7 +24085,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Basis: O*NET OnLine 35-2014.00 and the summary pages and employment trend pages of adjacent occupations (2026 update); employment is for 2024 and growth uses the 2024—2034 projection period, and these are not used to infer an individual's chance of being hired or income."
+              "Duties are compared using O*NET profiles. Any figures in the rows apply only to the United States and the year shown. Verify the actual station duties before comparing jobs."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.evidence_note",
@@ -26067,12 +26046,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Chinese salary conclusion is therefore an evidence boundary, not zero income; U.S. statistics also cannot directly substitute for mainland China restaurant back-of-house income."
+              "National Bureau of Statistics accommodation and food service averages cover many jobs and are industry context. The survey of migrant workers covers a different population and should not be combined with urban-unit data. A national occupation wage or posting distribution was not verified. Individual postings are shown separately."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "sag-moa"
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -26081,12 +26060,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round consulted NBS2025 urban unit wages and related occupational material and obtained no precise occupational distribution; it is not claimed that all public statistics fail to publish cook wages. NBS2025 accommodation and catering urban non-private 62,461 / private 55,123 yuan pre-tax average annual wage is an all-position industry background for legal entities with 5 or more people, includes bonuses and allowances, does not cover self-employed freelancers, and does not substitute for a cook's national median, starting wage, percentiles or take-home pay. The 59,785 yuan for above-scale enterprises in that industry and the 52,018 yuan annual average for social production service and daily life service personnel are another enterprise and broad-personnel background. The migrant worker monitoring figure of 4,208 yuan a month for that industry, up +1.6% year on year, is another population and period, and is not a cook wage or a conversion of the previous tables. The precise occupational and quote gaps remain."
+              "The 2025 figures cover different groups of workers in accommodation and food service. For restaurant cook jobs, compare the station, hours and pay terms in the separate postings."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "r2-pay-1",
+            "nbs-migrant-2025"
           ],
           "type": "prose"
         },
@@ -26109,12 +26089,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025 accommodation and catering urban non-private 62,461 / private 55,123 yuan pre-tax average annual wage is an all-position industry background for legal entities with 5 or more people, includes bonuses and allowances, does not cover self-employed freelancers, and does not substitute for a cook's national median, starting wage, percentiles or take-home pay. The 59,785 yuan for above-scale enterprises in that industry and the 52,018 yuan annual average for social production service and daily life service personnel are another enterprise and broad-personnel background. The migrant worker monitoring figure of 4,208 yuan a month for that industry, up +1.6% year on year, is another population and period, and is not a cook wage or a conversion of the previous tables. The precise occupational and quote gaps remain."
+              "In 2025, average annual pre-tax wages in accommodation and food service were CNY 62,461 in urban non-private units and CNY 55,123 in urban private units. In above-scale enterprises in that industry, the annual average was CNY 59,785 overall and CNY 52,018 for the social production and daily life services occupational group. A separate survey reported average monthly income of CNY 4,208 for migrant workers in the industry that year, up 1.6%. These figures do not give a national median, starting wage or take-home pay for restaurant cooks."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "r2-pay-1",
+            "nbs-migrant-2025"
           ],
           "type": "prose"
         },
@@ -26123,12 +26104,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no verifiable statistics on restaurant cook job-posting pay offers; a single outlet's or platform's offer cannot represent the national level"
+              "A wok cook listing in Zhaoyuan, Shandong, advertises two positions at CNY 7,000–9,000 per month. It also mentions commission, social insurance and five days off per month and asks for wok experience. A cook posting for large- and small-batch cooking in Huangpu, Guangzhou, advertises CNY 6,000–7,000 per month for a role that may also include delivery. Ask about the station, evening close, base pay and commission before comparing. The two listings cannot establish an occupational pay range."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "restaurant-zhaoyuan",
+            "restaurant-huangpu"
           ],
           "type": "prose"
         },
@@ -28982,26 +28964,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional work-order material (practice input)",
-                  "Fictional scenario: a fictional restaurant has 12 tables ordering at dinner service at the same time, of which 2 tables request no nuts, 1 table requests less salt and 1 customer requests beef well done; the cold kitchen record shows a batch of chicken breast for cold dishes was taken out at 12:40 and left at room temperature until 15:20 before being returned to the fridge, and the shift temperature record says only “returned to cold”; at the same time the cutting station reports a shortage of chopping boards.",
-                  "Material provided: the dinner menu and recipe cards; the order and table number list; the take-out and return-to-cold records; refrigeration, freezer and heating temperature records; the chopping board and knife zoning note; a summary of the cleaning and disinfection procedure.",
-                  "Material not provided: the actual ambient temperature during the room-temperature period, whether the affected chicken breast has already been used in some dishes, the approval process for deciding whether to discard it, and the shift's staffing and replenishment cycle. If these conditions are needed in the exercise, state your assumptions and whom you would need to confirm them with."
+                  "Paper order: service at 16:00. Table A1 has two chicken rice bowls and a peanut allergy. B2 has three bowls with less salt. C3 has one bowl requested fully cooked.",
+                  "Each bowl uses 120 g chicken and 150 g cooked rice. The regular sauce contains peanuts. The exercise label lists no peanut in the reduced-salt sauce. There is a clean red board for raw ingredients, a blue board for cooked food and a sealed set for allergy orders.",
+                  "Batch T1 was logged on the prep counter at 12:40 and was still there at 15:20. Separately accepted stock includes 1.0 kg of chicken from batch T2 and 1.2 kg of cooked rice.",
+                  "Exercise rules: hold and report any batch kept at the prep counter for over 120 minutes. Each chicken portion must meet the exercise core temperature of 74°C before release. Verify labels and cross-contact and use separate tools for the allergy order. These values are for this exercise."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Task requirements",
-                  "Write a one-page dinner service handling and output plan covering order and special request checks, the judgement and handling of the affected ingredients, substitute arrangements when cutting and utensils are short, heat and temperature requirements, the service sequence and portion arrangements, the situations that require stopping service or reporting, and the items to hand over to the next shift.",
-                  "The plan must state which data come from the exercise material and which are still assumptions, and must say whether it relies on the orders, the temperature records or the zoning note."
+                  "First, calculate the ingredients for six portions and match each table to its request.",
+                  "Log T1’s times and decide whether it can be used. Check whether T2 covers the order, assign tools and say what to do if the temperature is below the limit.",
+                  "Write a short handoff with the batch, table and person taking over. Finish before checking the reference."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference deliverable (derivable from the exercise material)",
-                  "The plan should include: checks (apply the 3 special requests to specific dishes and tableware separately and match them one by one to the table numbers on the orders); ingredient judgement (the chicken breast left out of temperature for too long must be held back and reported, and must not be released on the strength of a “returned to cold” record alone; the batch is not used until confirmed); substitute arrangements (when chopping boards are short, wash and disinfect in separate zones and batches by raw, cooked and allergen use, prioritising dedicated use for raw and allergen meals, and slowing cold dish output and notifying the front of house if necessary); heat and temperature (check the well-done requirement and core temperature against the order, and record cold and hot dishes separately); the service sequence (order by table number and serving sequence, with special-request dishes labelled and checked separately); records and handover (set out the period of the anomaly, the batches involved, the action taken and the items still to be confirmed).",
-                  "The reference deliverable lists only the elements that should be included and does not require wording identical to the example; explaining the basis for your judgement is enough."
+                  "Finish your answer first",
+                  "After day six, open “Restaurant order reference answer (open after day six)” under FAQs and sources.",
+                  "Use the self-check there to record one difference and one correction."
                 ]
               },
               {
@@ -29031,50 +29013,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: read one publicly available food-safety material",
-                  "Find a publicly available material on food handling and hygiene requirements, mark three requirements relating to temperature control, raw and cooked zoning or allergens, and write down the points you want to confirm."
+                  "Day 1: read the order and exercise rules",
+                  "Record the tables, quantities, batch and exercise limits."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: compile a recipe and portion checklist",
-                  "Using a fictional menu and orders, turn recipes, ingredient weighing and portion counts into a workable checklist, and note the actions and whom to report to when ingredients are short, food spoils or allergens contaminate."
+                  "Day 2: calculate quantities",
+                  "Calculate the chicken and rice for six bowls and check T2 and rice stock."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: do a knife skill and cutting plan",
-                  "Using a fictional menu, write out cutting specifications and the order of work, and explain how to arrange chopping board and knife zoning to avoid mixing raw and cooked and allergens."
+                  "Day 3: match orders and equipment",
+                  "Write a plan and tools for A1, B2 and C3 before reading the reference."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: do a temperature reading",
-                  "Using fictional refrigeration, cooking and holding temperature records, judge which period has abnormal readings and the possible direction of the cause, and explain your basis."
+                  "Day 4: check time and temperature rules",
+                  "Calculate T1’s time out and use the exercise rule to decide what to do. Record the cooked-food temperature check separately."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: write an exception handling note",
-                  "Write out the sequence for handling a temperature failure, a foreign object or a missed order: stopping service, isolation, reporting, review and the conditions for resuming, and note which steps must be confirmed by authorised personnel."
+                  "Day 5: write the exception handoff",
+                  "Record your decisions for T1 and A1, pending items and who takes over."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: write an end-of-shift handover",
-                  "Using fictional data, write an end-of-shift record covering output and discard data, temperature records, key points of inventory rotation, unresolved exceptions and the items the next shift needs to confirm."
+                  "Day 6: finish your own answer",
+                  "Review your calculation, exception decisions, dietary requirements and handoff before opening the reference."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: decide whether to continue",
-                  "Return to the judgement checklist on this page and write down three reasons you are willing to continue and two conditions that need caution."
+                  "Day 7: open the reference and review",
+                  "Open “Restaurant order reference answer (open after day six)” under FAQs and sources. Use its checklist to note a difference and a correction, then decide whether to continue or pause. Ask the employer separately about actual work conditions."
                 ]
               }
             ]
@@ -29093,13 +29075,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Concrete change: can you, given a menu and orders, write out recipes, portions, heat control and the conditions for stopping service, rather than just writing “pay attention to hygiene”.",
+              "Continue exploring if you can calculate the six portions and match the requirements for A1, B2 and C3.",
               "Facts and choice: would you rather work in full-service and regional cuisine restaurants, in chain and fast-casual Chinese outlets, or in hotel and banquet catering.",
-              "Practice drain: long periods of standing and frequent hand use, hot oil and noise, repeated cutting and cleaning, and the time pressure of serving to order — which step drains you most, and can you accept it recurring on every business day.",
+              "Work conditions: ask about peak service, standing, fumes, noise and equipment training. The paper exercise checks recordkeeping and decisions.",
               "Material boundaries: the practice material is fictional or based on public sources, and real outlets' business data and customer information must not be included.",
               "Response to feedback: when your output is pointed out as not meeting standard on taste, portion or heat, are you willing to go back to the recipe and output standards and fill them in.",
               "Interest in the process: even when the menu and processes repeat, are you willing to complete recipe checks, temperature records and hygiene actions every time rather than skipping confirmation steps on the basis of experience.",
-              "Next step: if you are willing to continue with the previous six steps, the next step is, subject to compliance (for example outlet in-house training, a food-safety course or a shadowing experience), to complete the whole loop from prep and cooking to service and an end-of-shift record, and have an experienced cook review it; if a particular step clearly drains you, narrow the direction first and then verify."
+              "Next step: finish the calculation, exception decisions, dietary checks and handoff. Use the collapsed reference on day seven. Repeat if a critical item is missing. Ask the employer about actual work and training."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30984,16 +30966,17 @@
           "data": {
             "entries": [
               {
-                "answer": "Season and cook hot and cold dishes to the menu and customer orders, stir and turn to ensure even heating, taste or use a utensil to judge doneness, weigh ingredients and wash and cut fruit and vegetables, portion and trim meat and seafood, plate and garnish to portion and hand to food running or service staff, adjust oven and roaster temperatures, inspect and clean equipment and work benches, and check ingredient freshness and rotate inventory first-in-first-out; estimating usage, requisitioning ingredients and keeping records may also be required.",
+                "answer": "Prepare ingredients, season and cook to the menu, and coordinate timing with other stations when the kitchen is divided that way. Follow the kitchen’s approved checks for doneness, including temperature measurement where required, then plate and hand off the order. Duties may also include cleaning, stock rotation, records or ordering, depending on the kitchen.",
                 "id": "actors.faq.1",
                 "question": "What does the daily work of restaurant cooks involve?",
                 "question_key": "career.faq.cooks-restaurant.1",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "bls"
                 ]
               },
               {
-                "answer": "Restaurant cooks serve ordering customers, with a wider dish range and continuous service in order sequence; fast food cooks prepare in bulk to order in a limited-menu restaurant, with a single station and high repetition; institution and cafeteria cooks cook and portion in bulk to a cyclical menu for fixed populations such as schools and hospitals.",
+                "answer": "Restaurant cooks prepare dishes for the restaurant menu, sometimes to order or at dedicated stations in larger kitchens. Fast food cooks work with a limited menu. Institution and cafeteria cooks prepare batches for a defined dining group, planned menu and meal count.",
                 "id": "actors.faq.2",
                 "question": "How do restaurant cooks differ from fast food cooks and institution and cafeteria cooks?",
                 "question_key": "career.faq.cooks-restaurant.2",
@@ -31011,9 +30994,9 @@
                 ]
               },
               {
-                "answer": "What can be checked is change at the task level: three task groups — order, recipe and cost information, cooking and service pace, and temperature, hygiene and records — can be partly taken over by tools; this page has no occupation-specific adoption rate or displacement data.",
+                "answer": "Software or equipment can help organize orders, flag stock levels or run timers. These are possible uses. This page has no occupation-specific measurements of adoption, hours saved or jobs displaced.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of restaurant cooks is there evidence of AI-driven change?",
+                "question": "Which tasks could software or equipment help with?",
                 "question_key": "career.faq.cooks-restaurant.4",
                 "source_refs": [
                   "onet"
@@ -31029,30 +31012,35 @@
                 ]
               },
               {
-                "answer": "In the United States the 2025 median hourly wage is 17.98 dollars and the median annual wage is 37,390 dollars (the single-occupation measure for 35-2014.00), with percentiles of 28,700/34,010/37,390/44,620/47,900 dollars a year; no occupation-level wage figures were obtained for mainland China, and this page treats this as a gap rather than filling it in with industry averages.",
+                "answer": "The 2025 U.S. median was $17.98 an hour and $37,390 a year. A national wage distribution for this occupation in mainland China was not verified. The two job listings in the China section illustrate different terms; check duties, base pay and allowances before comparing them.",
                 "id": "actors.faq.6",
                 "question": "How much do restaurant cooks generally earn, and how should this be compared?",
                 "question_key": "career.faq.cooks-restaurant.6",
                 "source_refs": [
-                  "oews"
+                  "r2-pay-3",
+                  "restaurant-zhaoyuan",
+                  "restaurant-huangpu"
                 ]
               },
               {
-                "answer": "The U.S. preparation level is Job Zone 1–2, and respondent education requirements show 47% stating a high school diploma or equivalent is needed, 34% below high school and 12% a two-year degree, with skills coming mainly from on-the-job training; domestic back-of-house starts mostly from cutting and plating, and some outlets require food-safety training.",
+                "answer": "The U.S. Bureau of Labor Statistics lists no formal educational credential as typical and identifies on-the-job training. In mainland China, verify the actual job posting, employer training and applicable food safety rules.",
                 "id": "actors.faq.7",
                 "question": "What education do restaurant cooks need, and how should they train?",
                 "question_key": "career.faq.cooks-restaurant.7",
                 "source_refs": [
-                  "onet"
+                  "bls-projections",
+                  "cn-food-law"
                 ]
               },
               {
-                "answer": "There is no uniform mandatory licence in the United States; in mainland China health management and food-safety training are common prerequisites, and the Chinese cuisine chef skill grade is usually not a threshold for frontline outlet positions, with specific requirements following the target outlet's and the competent authority's rules.",
+                "answer": "In mainland China, Article 44 of the Food Safety Law requires food production and operating enterprises to train staff in food safety. Article 45 requires staff who handle ready-to-eat food to have an annual health check and obtain a health certificate before starting that work. This certificate is separate from a Chinese cooking skill grade. Check the job listing for any skill grade requirement. U.S. food-handler certification rules vary by state and locality.",
                 "id": "actors.faq.8",
                 "question": "Do you have to obtain a certificate to work as a restaurant cook?",
                 "question_key": "career.faq.cooks-restaurant.8",
                 "source_refs": [
-                  "cn-rule"
+                  "cn-food-law",
+                  "cn-cook-profile-2022",
+                  "bls-family-context"
                 ]
               },
               {
@@ -31065,12 +31053,21 @@
                 ]
               },
               {
-                "answer": "U.S. official projections show the growth rate for this occupation over 2024—2034 as “much faster than average (7% or higher)”, with about 250,700 job openings over the projection period; but back-of-house hours fluctuate with opening hours and holidays, and long periods of standing and a high-temperature environment must also be considered, so this should be checked against actual local outlet demand.",
+                "answer": "The U.S. Bureau of Labor Statistics projects 12.1% employment growth for restaurant cooks from 2025 to 2035, with about 218,600 openings per year on average, including replacement needs. For a local kitchen, check evening shifts, station responsibilities and whether the job requires you to cook independently.",
                 "id": "actors.faq.10",
                 "question": "What else should be considered when choosing restaurant cooking as an occupation now?",
                 "question_key": "career.faq.cooks-restaurant.10",
                 "source_refs": [
-                  "bls"
+                  "bls-projections"
+                ]
+              },
+              {
+                "answer": "six bowls need 720 g chicken and 900 g cooked rice. T1 stayed out for 160 minutes, over the 120-minute limit. Isolate it and notify the supervisor. T2 and the rice cover the order. For A1’s two bowls, hold the regular peanut sauce and verify the alternative and cross-contact before serving. Use the red board for raw ingredients, the blue board for cooked food and the sealed separate allergy tools for A1. Use the reduced-salt plan for B2’s three bowls. Cook C3’s bowl through. Verify the 74°C exercise limit for every bowl before release. Example handoff: “T1 held at 15:20 after 160 minutes from 12:40, for supervisor disposition. Allocate six portions from T2. A1’s allergy substitution and tools are pending verification.” Mark uncompleted steps as pending. Check four items: quantities and stock, the three table requirements and equipment assignments, batch timing and handling, and handoff and authority. Count each complete item. Repeat the exercise if a critical item is missing. These values are exercise assumptions. The source link describes the occupation.",
+                "id": "actors.faq.11",
+                "question": "Restaurant order reference answer (open after day six)",
+                "question_key": "career.faq.cooks-restaurant.11",
+                "source_refs": [
+                  "onet"
                 ]
               }
             ]
@@ -31494,7 +31491,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Supports the tasks, work context and preparation level of this occupation.",
                   "Contains no technology adoption or job displacement data."
@@ -31880,6 +31877,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Listing 21 advertises two wok cook positions at CNY 7,000–9,000 per month and also mentions commission, social insurance and five days off per month. It asks for wok experience."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "restaurant-zhaoyuan",
+                "limitation": "One listing; not an occupational wage estimate or confirmation that the vacancy is still open.",
+                "market": "Mainland China",
+                "name": "Zhaoyuan job fair: wok cook",
+                "period": "2026-09-03",
+                "publisher": "Zhaoyuan Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhaoyuan.gov.cn/col/col102041/art/2026/art_dc8f7a31a31548ff861688e6e3a699d6.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Listing 5 advertises five cook positions for large- and small-batch cooking at CNY 6,000–7,000 per month. It covers hot dishes, coordination and equipment checks, and may also include meal delivery. This is an adjacent mixed-duty sample."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "restaurant-huangpu",
+                "limitation": "One listing; not an occupational wage estimate or confirmation that the vacancy is still open.",
+                "market": "Mainland China",
+                "name": "Huangpu job fair: large- and small-batch cooks",
+                "period": "2026-08-18",
+                "publisher": "Huangpu District Employment Service Center, Guangzhou",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzjg/qt/ldjyfwzx/kljy/content/post_10969476.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Tasks: coordinate the timing of items served together."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "cook-adjacent-short-order",
+                "limitation": "Adjacent role task comparison only.",
+                "market": "United States",
+                "name": "O*NET: Cooks, Short Order (35-2015.00)",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2015.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Overview and Tasks for comparing the adjacent occupation."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "adjacent-summary-35-2012",
+                "limitation": "Adjacent-role comparison only; not a source for this occupation’s wages or qualifications.",
+                "market": "United States",
+                "name": "Institution and Cafeteria Cooks (35-2012.00)",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2012.00"
               }
             ]
           },
@@ -34852,16 +34909,17 @@
               }
             }
           ],
-          "china_soc_row": "For U.S. 35-2014, this job's wages and employment are checked separately, and related Chinese occupations and settings are checked separately; no precise matching wages were obtained.",
+          "china_soc_row": "Compare mainland postings by outlet and station. This page did not verify a national wage distribution for the occupation in mainland China. U.S. wage and employment figures cover the corresponding U.S. occupation only.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-restaurant-zhaoyuan",
+            "posting-restaurant-huangpu"
           ],
           "sources_note": "Source links are used according to their own statistical or announcement scope; where the statistical period, survey population and pay measure differ they are cited separately and no cross-conversion is made.",
           "ui": {
             "ai_heading": "Will AI or automation affect restaurant cook wages?",
             "driver_heading": "Which settings use restaurant cooks?",
-            "official_heading": "Official statistical measures and notes on what is missing",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Educational background, job directions and notes (editorially compiled, not wage statistics)",
             "scenario_heading": "How should preparation directions and target station conditions be checked?",
             "scenario_interpretation_label": "Notes and suggested checks",
@@ -36621,7 +36679,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of restaurant cooks",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36733,14 +36791,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
             "label": "Understand my personality preferences"
@@ -37156,38 +37206,41 @@
       },
       {
         "derivation": null,
-        "display_value": "About 1,460,200 people (2024)",
+        "display_value": "1,417,500 people (2025)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment size (single-occupation measure)",
-        "occupation_scope": "Cooks, Restaurant（O*NET-SOC 35-2014.00）",
-        "period": "2024; retrieved 2026-09-18",
+        "measure": "Base-year employment",
+        "occupation_scope": "35-2014 restaurant cook employment projection, not wages or an individual hiring rate",
+        "period": "2025—2035 (2025 base year); consulted 2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Much faster than average (2024—2034, 7% or higher)",
+        "display_value": "+12.1% (2025—2035; rounded to 12% in O*NET)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Employment change rate (single-occupation measure)",
-        "occupation_scope": "Cooks, Restaurant (O*NET-SOC 35-2014.00); the O*NET classification label is “Much faster than average”",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "measure": "Employment growth",
+        "occupation_scope": "35-2014 restaurant cook employment projection, not wages or an individual hiring rate",
+        "period": "2025—2035 (2025 base year); consulted 2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 250,700 (job openings over the 2024—2034 projection period, including growth and replacement demand)",
+        "display_value": "218,600 per year (2025—2035 average, including replacement)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Job openings (single-occupation measure)",
-        "occupation_scope": "Cooks, Restaurant (O*NET-SOC 35-2014.00); O*NET notes that openings include growth demand and replacement demand",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "measure": "Average annual openings",
+        "occupation_scope": "35-2014 restaurant cook employment projection, not wages or an individual hiring rate",
+        "period": "2025—2035 (2025 base year); consulted 2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
@@ -37304,7 +37357,7 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "derivation": "Editorial estimate on a 0–100 scale from three selected tasks. It is not a probability of replacement. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
         "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
@@ -37314,6 +37367,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Listing 21 advertises two wok cook positions at CNY 7,000–9,000 per month and also mentions commission, social insurance and five days off per month. It asks for wok experience.",
+        "fact_id": "posting-restaurant-zhaoyuan",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Zhaoyuan job fair: wok cook",
+        "period": "2026-09-03",
+        "source_refs": [
+          "restaurant-zhaoyuan"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Listing 5 advertises five cook positions for large- and small-batch cooking at CNY 6,000–7,000 per month. It covers hot dishes, coordination and equipment checks, and may also include meal delivery. This is an adjacent mixed-duty sample.",
+        "fact_id": "posting-restaurant-huangpu",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Huangpu job fair: large- and small-batch cooks",
+        "period": "2026-08-18",
+        "source_refs": [
+          "restaurant-huangpu"
+        ]
       }
     ]
   },
@@ -37322,7 +37399,7 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI task assistance estimate (editorial, three tasks)"
     },
     "badges": [
       "Service and catering · restaurant back-of-house output",
@@ -37340,19 +37417,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, much faster than average 7% or higher)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, about 1,460,200 people)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. job openings (2024—2034, about 250,700)"
+        "label": "U.S. projected annual job openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37366,14 +37443,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Restaurant cooks (O*NET-SOC 35-2014.00) cook and plate to the menu and orders in a restaurant back-of-house: this covers weighing and seasoning, judging heat and doneness, cutting and garnish, the service sequence and linking with food running, cleaning and disinfecting equipment and work surfaces, and temperature regulation and ingredient rotation; it includes the U.S. 2025 median hourly wage of 17.98 dollars, a 2024—2034 growth rate of “much faster than average (7% or higher)” and about 250,700 job openings over the projection period, the mainland China occupation-level wage gap and industry average proxy boundary, burn and cut and food-safety risk control, and the boundaries of the fictional exercises."
+      "text": "Explore restaurant cook duties and training. See U.S. pay and outlook and compare mainland China postings for wok cooking and preparing hot dishes."
     },
     "title": {
       "availability": "available",
       "text": "Restaurant cooks"
     }
   },
-  "source_content_sha256": "c4afe63327c804afb2ce63c72d10ab56ccc4108526d88f4673ec8bb1dc082e89",
+  "source_content_sha256": "35c805d8845ba7276635000dbf8a5505cdead81b7ebff7ef6cdcc3b101dd9104",
   "subject": {
     "canonical_slug": "cooks-restaurant",
     "name": "Restaurant cooks",

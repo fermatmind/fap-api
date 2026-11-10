@@ -176,6 +176,9 @@
       "item:orthotists-and-prosthetists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:orthotists-and-prosthetists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:orthotists-and-prosthetists.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12263,6 +12266,21 @@
             "source-pack-onet-summary"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The fitting sheet identifies the device, but the feedback has no fitting date. State which record is needed and who should confirm it."
+            ]
+          },
+          "id": "orthotists-and-prosthetists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Check a fitting record for an orthosis or prosthesis",
+          "type": "notice"
         }
       ]
     },
@@ -14713,6 +14731,13 @@
         "id": "orthotists-and-prosthetists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "orthotists-and-prosthetists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14991,7 +15016,7 @@
       "text": "Orthotist and prosthetist｜duties, training, and salary"
     }
   },
-  "source_content_sha256": "ccbbebb16891b5423f061bbcd2bef8e621e3ca9d06c0914f4cc9206ac76e9fb7",
+  "source_content_sha256": "84e32b5b3156cccb17e2a30fcfe34fbe487465643129014905328a077053b4a5",
   "subject": {
     "canonical_slug": "orthotists-and-prosthetists",
     "name": "Orthotist and prosthetist",

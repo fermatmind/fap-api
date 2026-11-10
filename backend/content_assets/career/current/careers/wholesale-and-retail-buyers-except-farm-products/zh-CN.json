@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "从需求、库存和已确认在途计算补货，再核包装起订、金额与交期。写清不能确定的条件，观察愿不愿持续查资料。"
+              "纸面体验｜比较两家供应商的报价。一家未含运费，先核同口径总价和到货条件，再形成建议。 "
             ]
           },
           "id": "wholesale-and-retail-buyers-except-farm-products.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24802,13 +24801,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "采购员在本页对应O*NET13-1022.00批发与零售采购员（农产品除外）：购入非农商品用于批发或零售转售，分析销售与库存、比较价格质量、选择供应商并商谈条款。包括助理买手，可按职责批准付款或退货；具体权限仍由单位核定。生产原料及运营采购13-1023、农产品采购13-1021与采购经理11-3061另分，中国岗位按商品和实际任务比较。"
+              "批发和零售采购人员比较供货商的规格、报价、交期和验收条件，再按采购权限推荐或落实订货。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "wholesale-and-retail-buyers-except-farm-products.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-13-1022.00"
           ],
           "type": "prose"
         }
@@ -25452,13 +25450,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "软件需求是任务背景，草稿辅助需独立核单位、在途和条款。本职独立采用节时及替代缺证，父组预测不作AI单因果。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比较两家供应商的报价。一家未含运费，先核同口径总价和到货条件，再形成建议。"
             ]
           },
           "id": "wholesale-and-retail-buyers-except-farm-products.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-13-1022.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33066,6 +33064,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-13-1022.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 13-1022.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/13-1022.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38559,10 +38584,10 @@
       "text": "采购员"
     }
   },
-  "source_content_sha256": "d1fe2268c1123d8760706efe63ff138bccbefc236a06a771faad6ec4e115166d",
+  "source_content_sha256": "f40b9b34e7c92416fac40b5e3ec86423499cd421efbaa317c8c6871b1a420d4f",
   "subject": {
     "canonical_slug": "wholesale-and-retail-buyers-except-farm-products",
     "name": "采购员",
-    "summary": "采购员在本页对应O*NET13-1022.00批发与零售采购员（农产品除外）：购入非农商品用于批发或零售转售，分析销售与库存、比较价格质量、选择供应商并商谈条款。包括助理买手，可按职责批准付款或退货；具体权限仍由单位核定。生产原料及运营采购13-1023、农产品采购13-1021与采购经理11-3061另分，中国岗位按商品和实际任务比较。"
+    "summary": "批发和零售采购人员比较供货商的规格、报价、交期和验收条件，再按采购权限推荐或落实订货。"
   }
 }

@@ -23666,13 +23666,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "整理虚构观察记录，保调查时长和待鉴定状态，比较每30分钟确认次数，再写短报告。"
+              "纸面体验｜两次样线调查覆盖范围不同。保留长度、时间和观测条件，先说明可比性，再讨论数量变化。 "
             ]
           },
           "id": "zoologists-and-wildlife-biologists.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24813,13 +24812,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "动物学家与野生生物学家对应O*NET19-1023.00，研究动物的分类、行为、遗传、疾病与生命过程，调查野生种群和栖息地，分析环境及人类活动影响，形成论文、报告和保护管理建议。研究可在办公室、实验室及野外进行，不等日常饲养、兽医诊疗或自行执法。学历、岗位、研究活动许可及现场安全分别核；纸面体验只比较虚构观察记录，不接触动物或推断真实种群。"
+              "动物学家与野生动物生物学家按研究设计调查种群或栖息地，记录观测条件，分析结果并向研究或管理团队说明限制。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "zoologists-and-wildlife-biologists.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-19-1023.00"
           ],
           "type": "prose"
         }
@@ -25463,14 +25461,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可探索整理和提纲，鉴定、方法和结论人核；GISPythonR背景不是生成式采用率。 美国19-1023总体2025—2035预测+3.6%、年均1,400空缺（含替补）另作就业背景，非AI归因。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：两次样线调查覆盖范围不同。保留长度、时间和观测条件，先说明可比性，再讨论数量变化。"
             ]
           },
           "id": "zoologists-and-wildlife-biologists.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial",
-            "bls"
+            "transfer-onet-19-1023.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33137,6 +33134,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-19-1023.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 19-1023.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/19-1023.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38673,10 +38697,10 @@
       "text": "动物学家与野生生物学家"
     }
   },
-  "source_content_sha256": "dbe57de83b00af76ddfe573e3d0cb4a60b9ecc4e3f72475c0dec62bf00e2df62",
+  "source_content_sha256": "f2dcd2f17d16d11ef11e9fd92fbe455f3cd19362c4f54bd30b19a357469fa03c",
   "subject": {
     "canonical_slug": "zoologists-and-wildlife-biologists",
     "name": "动物学家与野生生物学家",
-    "summary": "动物学家与野生生物学家对应O*NET19-1023.00，研究动物的分类、行为、遗传、疾病与生命过程，调查野生种群和栖息地，分析环境及人类活动影响，形成论文、报告和保护管理建议。研究可在办公室、实验室及野外进行，不等日常饲养、兽医诊疗或自行执法。学历、岗位、研究活动许可及现场安全分别核；纸面体验只比较虚构观察记录，不接触动物或推断真实种群。"
+    "summary": "动物学家与野生动物生物学家按研究设计调查种群或栖息地，记录观测条件，分析结果并向研究或管理团队说明限制。"
   }
 }

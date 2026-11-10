@@ -173,6 +173,9 @@
       "item:parking-enforcement-workers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:parking-enforcement-workers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:parking-enforcement-workers.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -13004,6 +13007,21 @@
             "road-traffic-authority"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。照片能看清标志，记录有时间但未标路段。写清所见证据与需复核的适用路段，实际处理按辖区程序。"
+            ]
+          },
+          "id": "parking-enforcement-workers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核停车记录的时段与地点",
+          "type": "notice"
         }
       ]
     },
@@ -15573,6 +15591,13 @@
         "id": "parking-enforcement-workers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "parking-enforcement-workers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15839,7 +15864,7 @@
       "text": "停车执法员：巡查、工资与执法边界"
     }
   },
-  "source_content_sha256": "7cdf1f95a6e3144fff6254b5a4fac18008a9de84178aa00033892c48d8945c80",
+  "source_content_sha256": "4bdc78be016d34c9a5e2500f5d70c78bc396370bf95187c50bce680432c57221",
   "subject": {
     "canonical_slug": "parking-enforcement-workers",
     "name": "停车执法员",

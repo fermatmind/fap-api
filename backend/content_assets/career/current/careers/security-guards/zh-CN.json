@@ -23314,7 +23314,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用虚构门岗与巡查情境练身份核验、事实记录、升级与交班；不接触真实访客或危险现场。"
+              "如果久站、夜班或反复核对门岗记录会影响你的生活安排，先问清目标岗位的班次。"
             ]
           },
           "id": "security-guards.quick-decision.fit-decision-checklist.1",
@@ -23329,7 +23329,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合愿意持续观察、准确记录、清楚沟通并守住处置权限的人；人格类型不是任职证明。"
+              "先用纸完成 09 的 SG-01，体验记门岗、巡查和交班，再打开参考。"
             ]
           },
           "id": "security-guards.quick-decision.fit-decision-checklist.2",
@@ -23343,7 +23343,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "门岗、巡查、警察执法和电子安防安装的任务及权限不同，求职须核岗位。"
+              "如果你愿意按班次核证、走固定巡线，并在交班时说明异常，值得试做。"
             ]
           },
           "id": "security-guards.quick-decision.fit-decision-checklist.3",
@@ -29017,7 +29017,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "虚构访客 V2 自称由经理批准，但名单中无记录。"
+              "访客口头说有许可时，把说法和可追溯的批准记录分开。"
             ]
           },
           "id": "security-guards.risk.career-risk-cards.14",
@@ -29195,7 +29195,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "虚构烟雾告警后只在交班时口头提及。"
+              "交班时把异常时间、地点、证据和下一位责任人写进记录。"
             ]
           },
           "id": "security-guards.risk.career-risk-cards.26",
@@ -29316,7 +29316,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "AI 把待核访客 V2 标为已授权。"
+              "核工具生成的门岗状态是否有正式记录支持。"
             ]
           },
           "id": "security-guards.risk.career-risk-cards.34",
@@ -29478,17 +29478,17 @@
               {
                 "id": "education",
                 "values": [
-                  "未采用单一中国雇主公告",
-                  "本轮未取得岗位身份、许可、场所范围和待遇均可核的公告；不推断全国门槛。",
-                  "逐条核地区、场所、班次、装备、巡查与应急权限。"
+                  "大陆门岗与巡查",
+                  "重庆通邑卫士原公告的保安员负责区域巡逻、门禁和隐患排查，报名窗口已结束。",
+                  "博物馆原公告的安保员巡查展厅、公共区和出入口，并在活动高峰协助疏导。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "虚构作品用途",
-                  "M1–M6 只展示门岗核验、巡查、记录和交班，不证明可独立值守或处置冲突。",
-                  "访客、场所和事件完全虚构。"
+                  "美国公共设施岗位",
+                  "该县历史岗位列场所巡查、访客与员工出入核验、异常报告。",
+                  "该县历史岗位列县属场所步巡或车巡，并可能协助接送人员。"
                 ]
               },
               {
@@ -29512,7 +29512,11 @@
           "id": "security-guards.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d023-chongqing",
+            "d023-museum",
+            "d023-pgc",
+            "d023-clark"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29525,37 +29529,36 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料：访客与巡查",
-                  "M1｜完全虚构的办公楼 F。门岗名单有访客 V1 与员工 E1；V2 无预约。巡查路线含东门 D、北通道 N 和机房外 M。",
-                  "M2｜V1 身份与预约一致，登记入内；E1 证件有效，按规则通过。",
-                  "M3｜V2 自称经理口头批准，但名单没有；状态为待核，不能因自述直接放行。",
-                  "M4｜巡查记录 D 门锁完好、N 通道畅通；M 未巡查，状态是未核，不得写正常。",
-                  "M5｜D 附近有烟雾告警。先保障安全，按应急程序通知有权人员，记录时间；不要自行认定误报。",
-                  "M6｜交班时 V2 仍待核、M 未巡查、烟雾告警处置结果未回；列责任人与后续核查，不能写已全部解除。"
+                  "虚构办公楼 F 的值班记录",
+                  "M1｜门岗规则：访客须与预约名单和证件核验相符；员工须持有效门禁证；例外找当班负责人确认。",
+                  "M2｜14:02，V1 的预约与证件相符。14:04，员工 E1 出示有效门禁证。",
+                  "M3｜14:08，访客 V2 报称经理口头同意，预约名单无此记录。交班前没收到负责人确认。",
+                  "M4｜巡查记录：14:11 东门 D 锁具完好；14:14 北通道 N 畅通；机房外 M 在路线表上，巡查日志无到达记录。",
+                  "M5｜14:18 东门附近报警。虚构制度要求留在安全位置，通知当班负责人并记下时间，由负责人协调现场核验。",
+                  "M6｜14:20 交班。记录含报警时间和地点，处置回执栏为空。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务：状态、事件与交班",
-                  "T1｜列 V1、E1、V2 与 D、N、M 的状态，区分核实、待核和未巡查。",
-                  "T2｜写烟雾告警通知与未解决事项交班卡，判断可否写全部安全。"
+                  "提交四份小记录",
+                  "T1｜为三个人写一张门岗状态表，为三个点位写一张巡查状态表。每行写时间、证据和下一步。",
+                  "T2｜起草一句内部报警通知和一张交班卡，写清已知、待核及谁接手。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考答案与边界",
-                  "V1 与 E1 已核通过；V2 待核；D、N 已巡查，M 未巡查。",
-                  "烟雾告警按程序通知有权人员并记录时间；不得凭猜测写误报或风险解除。",
-                  "交班列 V2、M 和告警后续，写观察事实、通知对象、待核人及时间；练习不含真实现场处置。"
+                  "交卷前核格式",
+                  "保留每行证据和时间。先保存初稿，第 7 天再展开参考。",
+                  "用简短的记录交代信息从哪里来。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "复核清单",
-                  "只用虚构资料；核两人通过、一人待核、两处已巡、一处未巡，告警未解除。"
+                  "练习边界",
+                  "仅用虚构记录，不采集身份资料或模拟现场处置。"
                 ]
               }
             ]
@@ -29564,7 +29567,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：虚构访客核验与巡查交班",
+          "title": "SG-01 | 核门岗记录并交接未决事项",
           "type": "cards"
         },
         {
@@ -29576,7 +29579,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "门岗登记卡",
-                  "列 V1/E1 已核，V2 待核及确认对象。",
+                  "按名单、证件、时间及来源分别登记。",
                   "不含真实身份资料。"
                 ]
               },
@@ -29584,7 +29587,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "巡查状态表",
-                  "D/N 已巡，M 未巡；标时间和路线。",
+                  "按点位和时间列巡查观察与缺口。",
                   "未巡不等于正常。"
                 ]
               },
@@ -29592,7 +29595,7 @@
                 "id": "report-summary",
                 "values": [
                   "告警报告页",
-                  "列观察事实、通知时间、对象与待回信息。",
+                  "写可交接的报警时间、地点和通知对象。",
                   "不自行认定误报。"
                 ]
               },
@@ -29600,7 +29603,7 @@
                 "id": "tooling-note",
                 "values": [
                   "交班纪要",
-                  "分别列 V2、M 和告警待核，指定后续责任。",
+                  "按证据给出每项状态和下一位复核人。",
                   "口头承诺不等于授权。"
                 ]
               }
@@ -29633,26 +29636,26 @@
               [
                 "面试：出入核验",
                 "谁可以通过",
-                "V1/E1 已核；V2 待核",
+                "按名单、证件、时间及来源分别登记。",
                 "仅虚构记录"
               ],
               [
                 "面试：未巡查",
-                "M 能否写正常",
-                "不能，尚未巡查",
+                "如何处理巡查日志中的空项",
+                "按点位和时间列巡查观察与缺口。",
                 "需后续检查"
               ],
               [
                 "试岗：告警",
                 "烟雾怎样处理",
-                "保障安全，按程序通知并记录",
+                "写可交接的报警时间、地点和通知对象。",
                 "不猜测误报"
               ],
               [
                 "交接：未结事件",
                 "可否写全部安全",
-                "不能；V2、M 和告警仍待核",
-                "交有权人跟进"
+                "按证据给出每项状态和下一位复核人。",
+                "区分记录人和复核人"
               ]
             ]
           },
@@ -29673,49 +29676,49 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "第一日",
-                  "读 M1–M6，列岗位规则和处置边界。"
+                  "阅读 M1–M6，列出虚构规则和信息来源。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "第二日",
-                  "做虚构 V1/E1/V2 出入登记。"
+                  "按名单、证件、时间及来源分别登记。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "第三日",
-                  "整理 D/N 已巡查证据。"
+                  "按点位和时间列巡查观察与缺口。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "第四日",
-                  "给 M 标未巡查，不推定正常。"
+                  "写可交接的报警时间、地点和通知对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "第五日",
-                  "写烟雾告警事实与通知时间。"
+                  "按证据给出每项状态和下一位复核人。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "第六日",
-                  "写三个待核事项和后续责任交班卡。"
+                  "独立完成并保存门岗表、巡查表、报警通知和交班卡。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "第七日",
-                  "整理虚构作品并核目标岗位许可、班次和应急程序。"
+                  "保存第 6 天的初稿后，在常见问题区展开「SG-01 参考与自核量规（第 7 天展开）」，核四项量规并留下一个修改理由。"
                 ]
               }
             ]
@@ -29732,13 +29735,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "保存登记初稿和修订稿，说明状态差异。",
-              "核 V1/E1 已核、V2 待核，D/N 已巡、M 未巡。",
-              "说明待核与未巡都不能写为已通过。",
-              "列烟雾告警通知与后续责任。",
-              "全部练习资料虚构，不含真实访客或摄像资料。",
-              "核目标岗位门岗、巡查、监控和应急权限。",
-              "强制处置与执法由有权人员承担。"
+              "按名单、证件、时间及来源分别登记。",
+              "按点位和时间列巡查观察与缺口。",
+              "写可交接的报警时间、地点和通知对象。",
+              "按证据给出每项状态和下一位复核人。",
+              "先留原始记录和初稿，再留修改及依据。",
+              "用虚构代号填写，不写真实证件资料。",
+              "准备求职时，向雇主核对班次、培训和复核分工。"
             ]
           },
           "id": "security-guards.path.seven-day-decision.1",
@@ -29863,15 +29866,19 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：未采纳身份、资质、值守范围和待遇均可核的中国精确公告；不从单一岗位推统一门槛。",
-              "M1–M6 不是雇主考题；真实岗位须核场所、班次、训练、装备、应急和计酬。"
+              "重庆通邑卫士原公告的保安员负责区域巡逻、门禁和隐患排查，报名窗口已结束。",
+              "博物馆原公告的安保员巡查展厅、公共区和出入口，并在活动高峰协助疏导。",
+              "该县历史岗位列场所巡查、访客与员工出入核验、异常报告。",
+              "该县历史岗位列县属场所步巡或车巡，并可能协助接送人员。",
+              "比较岗位时问清谁核门禁、巡更如何分班、何时由当班负责人接手，以及实际计酬方式。"
             ]
           },
           "id": "security-guards.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
+            "d023-chongqing",
+            "d023-museum",
+            "d023-pgc",
+            "d023-clark",
             "editor"
           ],
           "title": "招聘样本说明",
@@ -30054,7 +30061,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "先核目标岗位门岗、巡查或监控范围；用 M1–M6 虚构 V2 待核、M 未巡和烟雾告警展示事实记录与交班。"
+              "先核目标岗位的门岗、巡查或监控范围。用 SG-01 的门岗表和交班卡展示怎样追溯信息、标记未知和移交。"
             ]
           },
           "id": "security-guards.path.career-path-block.20",
@@ -31958,10 +31965,13 @@
                 "question_key": "career.faq.security-guards.credentials"
               },
               {
-                "answer": "V1/E1 已核，V2 待核；D/N 已巡，M 未巡；烟雾告警处置未回，不能写风险已解除。",
+                "answer": "门岗表：V1、E1 共两人符合门岗规则。V2 仍待确认，交当班负责人核验例外许可。\n\n巡查表：D 和 N 共两点有记录。M 没有到达记录，是否巡查待核。把点位交接给接班人员复查。\n\n报警和交班：在纸面通知中写明 14:18、东门附近，收件人为当班负责人。交班时处置回执为空，记处置情况待核。分别列出 V2、M 和报警，写清谁复查。\n\n四项各 0–2 分：门岗状态有来源；巡查状态有点位和时间；报警通知含地点、时间和对象；未决事项有下一责任人。2 分为齐全，1 分为部分，0 分为猜测或越权。",
                 "id": "security-guards.faq.9",
-                "question": "虚构练习的状态怎么判？",
-                "question_key": "career.faq.security-guards.risk-boundary"
+                "question": "SG-01 参考与自核量规（第 7 天展开）",
+                "question_key": "career.faq.security-guards.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "警察、私人调查、报警系统安装、博彩监控和安保主管有任务交集；各自许可与权限另核。",
@@ -32065,13 +32075,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32632,6 +32642,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "重庆通邑卫士原公告的保安员负责区域巡逻、门禁和隐患排查，报名窗口已结束。"
+                ],
+                "evidence_type": "雇主招聘原公告",
+                "id": "d023-chongqing",
+                "limitation": "对应雇主、场所和公告期的历史样本。全国工资和录用条件另查。",
+                "market": "中国大陆重庆",
+                "name": "重庆国资委招聘公告｜重庆通邑卫士保安员",
+                "period": "2026-04-24",
+                "publisher": "重庆国资委招聘公告",
+                "scope": "recruitment_proxy",
+                "url": "https://gzw.cq.gov.cn/gqzp/202604/t20260424_15636090.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "博物馆原公告的安保员巡查展厅、公共区和出入口，并在活动高峰协助疏导。"
+                ],
+                "evidence_type": "雇主招聘原公告",
+                "id": "d023-museum",
+                "limitation": "对应雇主、场所和公告期的历史样本。全国工资和录用条件另查。",
+                "market": "中国大陆广东",
+                "name": "连南瑶族自治县瑶族博物馆｜安保员",
+                "period": "2026-05-21",
+                "publisher": "连南瑶族自治县瑶族博物馆",
+                "scope": "recruitment_proxy",
+                "url": "https://www.liannan.gov.cn/zwgk/zpxx/content/mpost_2149223.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "该县历史岗位列场所巡查、访客与员工出入核验、异常报告。"
+                ],
+                "evidence_type": "雇主招聘原公告",
+                "id": "d023-pgc",
+                "limitation": "对应雇主、场所和公告期的历史样本。全国工资和录用条件另查。",
+                "market": "美国马里兰州",
+                "name": "美国马里兰州乔治王子县｜Security Officer I",
+                "period": "2026-07-22",
+                "publisher": "美国马里兰州乔治王子县",
+                "scope": "recruitment_proxy",
+                "url": "https://www.governmentjobs.com/careers/pgc/jobs/newprint/5420096"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "该县历史岗位列县属场所步巡或车巡，并可能协助接送人员。"
+                ],
+                "evidence_type": "雇主招聘原公告",
+                "id": "d023-clark",
+                "limitation": "对应雇主、场所和公告期的历史样本。全国工资和录用条件另查。",
+                "market": "美国内华达州",
+                "name": "美国内华达州克拉克县｜Security Officer",
+                "period": "2026-09-29",
+                "publisher": "美国内华达州克拉克县",
+                "scope": "recruitment_proxy",
+                "url": "https://www.governmentjobs.com/careers/clarkcounty/jobs/newprint/5495099"
               }
             ]
           },
@@ -37891,7 +37961,7 @@
       "text": "安全警卫"
     }
   },
-  "source_content_sha256": "9781301ec616dd97ad216bf79073d2dffb9401d77ef9ffa5f975b57af25c4f8a",
+  "source_content_sha256": "7ca7578924e2202abd1b10697b91747adec783535a5b5f24cc0790f23fd65183",
   "subject": {
     "canonical_slug": "security-guards",
     "name": "安全警卫",

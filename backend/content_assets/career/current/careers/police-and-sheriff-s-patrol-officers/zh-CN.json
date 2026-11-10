@@ -23369,14 +23369,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "路径：核所在地公安机关正式招录公告、资格、体能或专业测评和训练要求。美国 BLS 训练学院路径不等于中国报考条件。"
+              "纸面体验｜对照两份虚构事件记录，标出同一地点的两种到达时间，并注明哪份记录需要复查。 "
             ]
           },
           "id": "police-and-sheriff-s-patrol-officers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "cnclass",
-            "bls"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23667,13 +23665,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "警察巡逻人员响应社区事件、维护秩序、记录情况并按授权启动后续程序。"
+              "警察与治安官巡逻人员回应辖区事件、维持现场安全并记录处置经过。交班资料需把事件时间、地点和观察来源对应起来。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "police-and-sheriff-s-patrol-officers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls"
+            "transfer-onet-33-3051.00"
           ],
           "type": "prose"
         },
@@ -24734,15 +24731,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职AI采用率、替代率或任务级评分依据。记录草稿、时间地点提取和公开资料整理仍为编辑的待验证任务设想；ILO暴露及BLS预测不能证明AI就业因果，现场判断、公众沟通、程序和执法责任由有权人员承担。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照两份虚构事件记录，标出同一地点的两种到达时间，并注明哪份记录需要复查。"
             ]
           },
           "id": "police-and-sheriff-s-patrol-officers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "onet",
-            "ep",
-            "editor"
+            "transfer-onet-33-3051.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32496,6 +32491,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-33-3051.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 33-3051.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/33-3051.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37741,10 +37763,10 @@
       "text": "警察与治安巡逻官：工作任务、美国薪资与入行路径"
     }
   },
-  "source_content_sha256": "86eda0d0d8b20eb6f9c3df53b0cc18ca666603f4c6aa846a27887c6de48fb2b5",
+  "source_content_sha256": "01c75d6794198ca25a1f9a935231a2834a99aaa47aab0cc544934dff1bec3cc2",
   "subject": {
     "canonical_slug": "police-and-sheriff-s-patrol-officers",
     "name": "警察与治安巡逻官",
-    "summary": "警察与治安巡逻官在依法授权和机构程序下巡查辖区、响应紧急与非紧急请求、保护人员和财产、记录事实并把事项交给后续程序。巡逻现场可能有压力、轮班和伤害风险；具体职权取决于法域、正式录用、训练和机构授权。"
+    "summary": "警察与治安官巡逻人员回应辖区事件、维持现场安全并记录处置经过。交班资料需把事件时间、地点和观察来源对应起来。"
   }
 }

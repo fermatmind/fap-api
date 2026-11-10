@@ -23655,12 +23655,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "观察能否把路径、段号、单位和测试条件写清，算给定预算并指出超限，不把表格通过当真实业务恢复；再核天气、出勤和作业资格等现实条件。"
+              "纸面体验｜将虚构路由图的接点与线路测试表配对，指出一条无法确定区段的记录，并标出应复核的接点。 "
             ]
           },
           "id": "telecommunications-line-installers-and-repairers.display.fermat_decision_card.summary",
           "source_refs": [
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24751,13 +24751,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "电信线路安装与维修人员安装、接续和维修电信缆线，包括光纤，检查并分析线路测试结果，记录维护和复验、向用户说明服务。可涉及架空、地下或客户接入任务；电力输配线路与设备装维是相关但不同的职业范围。"
+              "通信线路安装维修人员布设、连接和测试线路或电缆，记录区段和测量结果，以便定位线路故障和安排后续工作。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "telecommunications-line-installers-and-repairers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-49-9052.00"
           ],
           "type": "prose"
         }
@@ -25425,12 +25424,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：既有外部资料未提供可直接采用的实测可复核的49-9052任务级AI评分。可以探索段号核对、预算表与交接草稿，但输入、算术和结论仍需本人复核，不由分数预测失业。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：将虚构路由图的接点与线路测试表配对，指出一条无法确定区段的记录，并标出应复核的接点。"
             ]
           },
           "id": "telecommunications-line-installers-and-repairers.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial"
+            "transfer-onet-49-9052.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32760,6 +32760,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-49-9052.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 49-9052.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/49-9052.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38275,10 +38302,10 @@
       "text": "电信线路安装与维修人员"
     }
   },
-  "source_content_sha256": "d0e976ad6cafb8c558900552ba0a91ed0741b1e09e8be4e033916d17b2c09ea5",
+  "source_content_sha256": "1f60e4c1ad85cf98e27d4d9dcb3feee6e9b97bc4042b72023031d4fc8a00ce0f",
   "subject": {
     "canonical_slug": "telecommunications-line-installers-and-repairers",
     "name": "电信线路安装与维修人员",
-    "summary": "安装、接续和维修电信缆线，包括光纤，检查分析线路测试，保存维护与复验记录并说明用户服务范围。可涉及架空、地下与接入任务；电力线路、设备和无线职业分别比较，中国实际资格与现场批准另核。"
+    "summary": "通信线路安装维修人员布设、连接和测试线路或电缆，记录区段和测量结果，以便定位线路故障和安排后续工作。"
   }
 }

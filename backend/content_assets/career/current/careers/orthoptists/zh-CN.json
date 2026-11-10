@@ -167,6 +167,9 @@
       "item:orthoptists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:orthoptists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:orthoptists.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -12358,6 +12361,21 @@
             "source-pack-onet-summary"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两次检查使用了不同的注视目标，但记录未标哪次对应哪个目标。写下复核所需字段与接收人。"
+            ]
+          },
+          "id": "orthoptists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "核双眼视功能检查的记录条件",
+          "type": "notice"
         }
       ]
     },
@@ -14793,6 +14811,13 @@
         "id": "orthoptists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "orthoptists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15034,7 +15059,7 @@
       "text": "视轴矫正师｜职责、培训与薪资边界"
     }
   },
-  "source_content_sha256": "f76d50a310155f9734f96b373adda52fbe11486ac6420fb35e1b1026eb7227e4",
+  "source_content_sha256": "e1b327c8ecf37cc58a25a79be84a32440b9b3c5ffd396c1ca0561b4d4c496386",
   "subject": {
     "canonical_slug": "orthoptists",
     "name": "视轴矫正师",

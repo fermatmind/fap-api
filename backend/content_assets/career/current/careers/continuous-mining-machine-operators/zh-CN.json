@@ -1430,6 +1430,9 @@
       "item:continuous-mining-machine-operators.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:continuous-mining-machine-operators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:continuous-mining-machine-operators.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30075,6 +30078,21 @@
           "id": "continuous-mining-machine-operators.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。采掘工作面编号与记录一致，但通风确认栏空白，支护记录引用另一班次。分别列出待查来源，交给有权确认现场状态的负责人。"
+            ]
+          },
+          "id": "continuous-mining-machine-operators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核连续采矿机班前交接",
+          "type": "notice"
         }
       ]
     },
@@ -36383,6 +36401,13 @@
         "id": "continuous-mining-machine-operators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "continuous-mining-machine-operators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -36796,7 +36821,7 @@
       "text": "连续采矿机操作员"
     }
   },
-  "source_content_sha256": "8343975f3c285ebb1c15c1eb7bce2a90a99f4bc84da10a5f6e4bbd9dfdbe7f0a",
+  "source_content_sha256": "04417eff9619a7fffeb91a2d7fc5ddd61661a12983374084b007ee945de5281a",
   "subject": {
     "canonical_slug": "continuous-mining-machine-operators",
     "name": "连续采矿机操作员",

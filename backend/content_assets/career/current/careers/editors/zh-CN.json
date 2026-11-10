@@ -20,6 +20,12 @@
       "fact:occupation-workflow": {
         "status": "pending_mapping"
       },
+      "fact:posting-a35-fltrp": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a35-sjtu": {
+        "status": "pending_mapping"
+      },
       "item:editors.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -158,7 +164,13 @@
       "item:editors.path.entry-role-comparison.current.v1": {
         "status": "pending_mapping"
       },
+      "item:editors.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
       "item:editors.path.interview-probation.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:editors.path.seven-day-trial.1": {
         "status": "pending_mapping"
       },
       "item:editors.profile.career-quick-answers-block.1": {
@@ -7290,7 +7302,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "练习审三张虚构编辑简报，七字段为来源、受众、目的、截止时间、风格规则、证据状态、审批安排；“待核”是已记录未确认，未记录才缺失。A：来源甲；受众甲；目的甲；截止周三；风格甲；证据待核；审批交责任编辑，缺0。B：来源未记录；受众乙；目的乙；截止周五；风格未记录；证据待核；审批交责任编辑，缺2。C：来源丙；受众丙；目的丙；截止周四；风格丙；证据已核；审批交指定发布人，缺0。答案0/2/0；只审字段，不发布内容。"
+              "用下方虚构稿件核一个数字、一处日期和一项授权。 第七天到「常见问题与资料来源」打开「稿件核对参考答案（完成第六天后再打开）」。"
             ]
           },
           "id": "editors.quick-decision.fermat-decision-card.4",
@@ -8212,7 +8224,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七日作品只用公开或虚构短稿，附核查表和版本差异。"
+              "用下方虚构稿件制作一页交接。 第七天到「常见问题与资料来源」打开「稿件核对参考答案（完成第六天后再打开）」。"
             ]
           },
           "id": "editors.path.career-path-block.5",
@@ -8457,6 +8469,100 @@
             "r5-editor"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "materials",
+                "values": [
+                  "题面记录",
+                  "虚构稿件 v3 写「所有读者都支持延期」。随附调查只有 40 份答卷，28 人同意延期。无其他抽样资料。",
+                  "稿件 v3 写活动于 6 月 8 日举办；主办方通知 v2 写 6 月 9 日，未记录作者确认。",
+                  "插图来自动画截图，交件目录的授权栏为空。题设规定作者确认日期，权利负责人确认插图，责任编辑负责签发。"
+                ]
+              },
+              {
+                "id": "deliverable",
+                "values": [
+                  "交件要求",
+                  "交一页编辑交接，写改句、依据版本、待核事项、下一位负责人和是否可签发。"
+                ]
+              },
+              {
+                "id": "reference",
+                "values": [
+                  "先独立完成",
+                  "第七天到「常见问题与资料来源」打开「稿件核对参考答案（完成第六天后再打开）」。"
+                ]
+              }
+            ]
+          },
+          "id": "editors.path.entry-work-sample-data.1",
+          "title": "纸面稿件交接",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "第 1 天",
+                  "圈出稿件中的三个待核点。"
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "第 2 天",
+                  "写一条带答卷口径的改句。"
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "第 3 天",
+                  "把稿件和通知的版本写入待核表。"
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "第 4 天",
+                  "核对插图授权记录。"
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "第 5 天",
+                  "为待核项写下一位接手人。"
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "第 6 天",
+                  "完成并保留一页独立交件。"
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「稿件核对参考答案（完成第六天后再打开）」。 写下一处修订。"
+                ]
+              }
+            ]
+          },
+          "id": "editors.path.seven-day-trial.1",
+          "title": "七天纸面练习",
+          "type": "timeline"
         }
       ]
     },
@@ -8499,12 +8605,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国2025就业105,000人、2035预计103,800人，BLS另报净变化约-1,100，三项分别取整不能用端点相减替代原表；2025—2035下降1%，年均7,900空缺全部来自转岗/退出替代，非新增。BLS提阅读需求或支持图书编辑、印刷报刊失去份额可能下降，非AI就业因果或中国需求。"
+              "BLS 表 1.2 的美国编辑（27-3041）就业预计从 2025 年约 105,000 人降至 2035 年约 103,800 人（下降 1.1%），年均空缺约 7,900 个，来自人员转岗或退出后的替补。就业与变动值分别取整。"
             ]
           },
           "id": "editors.market-signals.market-signal-card.3",
           "source_refs": [
-            "r5-ooh-current"
+            "bls-outlook"
           ],
           "type": "prose"
         },
@@ -8599,12 +8705,13 @@
                 ]
               },
               {
-                "answer": "本页所核国家统计局资料按行业和人员大类聚合，未提供与27-3041.00一一对应的中国精确职业工资。",
+                "answer": "上海交大公告列英文学术期刊编辑，负责机械工程稿件初审、格式规范和同行评审跟进，博士学历优先，未列具体工资。 外研社公告列期刊学术编辑，负责中英文稿件初审和编校，要求相关专业硕士及以上，页面列 5,000–8,000 元/月。 两个例子都来自学术出版。一般编辑、视频剪辑和其他内容岗位的薪酬需分别核对。",
                 "id": "editors.faq.6",
                 "question": "编辑：中国大陆薪资应如何核对？",
                 "question_key": "career.faq.editors.china-pay",
                 "source_refs": [
-                  "nbs"
+                  "a35-sjtu",
+                  "a35-fltrp"
                 ]
               },
               {
@@ -8635,22 +8742,25 @@
                 ]
               },
               {
-                "answer": "美国编辑2024—2034预计增长1%，年均9,800个空缺；空缺包含替补。",
+                "answer": "BLS 表 1.2 的美国编辑（27-3041）就业预计从 2025 年约 105,000 人降至 2035 年约 103,800 人（下降 1.1%），年均空缺约 7,900 个，来自人员转岗或退出后的替补。就业与变动值分别取整。",
                 "id": "editors.faq.10",
                 "question": "编辑：就业展望与相邻转向应如何理解？",
                 "question_key": "career.faq.editors.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "bls-outlook"
                 ]
               },
               {
-                "answer": "美国编辑2024年就业115,800人，2034预计116,500人。",
+                "answer": "按本页稿件题交一页修订和待核表，再按第七天参考记录一处改进。",
                 "id": "editors.faq.11",
                 "question": "编辑：如何判断这条职业路径是否值得继续验证？",
-                "question_key": "career.faq.editors.career-worth",
-                "source_refs": [
-                  "onet-trends"
-                ]
+                "question_key": "career.faq.editors.career-worth"
+              },
+              {
+                "answer": "把「所有读者都支持延期」改为「40 名答卷人中，28 人支持延期」，保留调查出处。记录稿件 v3 和通知 v2 的日期冲突，请作者确认。插图授权为空，暂不使用并交权利负责人。将待核表交责任编辑，当前暂缓签发。自核四项：分母与来源、日期和版本、插图授权、状态与接手人。每项完整记一项。",
+                "id": "editors.faq.12",
+                "question": "稿件核对参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.editors.12"
               }
             ]
           },
@@ -8818,20 +8928,19 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "仅支持所列职业、市场、时期和口径。"
+                  "BLS 表 1.2 的美国编辑（27-3041）就业预计从 2025 年约 105,000 人降至 2035 年约 103,800 人（下降 1.1%），年均空缺约 7,900 个，来自人员转岗或退出后的替补。就业与变动值分别取整。"
                 ],
                 "evidence_type": "official employment outlook",
                 "id": "bls-outlook",
                 "limitation": "仅支持所列职业、市场、时期和口径。",
                 "market": "美国",
-                "name": "BLS OOH — Editors outlook",
-                "period": "2024-2034 projections",
+                "name": "BLS 表 1.2：美国编辑就业预测",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/ooh/media-and-communication/editors.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -9175,11 +9284,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "美国2025就业105,000人、2035预计103,800人，BLS另报净变化约-1,100，三项分别取整不能用端点相减替代原表；2025—2035下降1%，年均7,900空缺全部来自转岗/退出替代，非新增。BLS提阅读需求或支持图书编辑、印刷报刊失去份额可能下降，非AI就业因果或中国需求。 美国BLS典型传播/新闻/英语或相关学士与写作校对经验，强写作的其他背景也可能进入；专业内容可需相关经验。O*NET新聘反馈69%学士、16%大学学习无学位、12%两年制副学位（所列97%），不是中国招聘比例；BLS少于5年相关工作是统计典型分类，不等统一必须5年或无需其他经验。 编辑可写标题/故事/文章、授权岗位可终审；不由代码排除写作或终审职责。"
+                  "美国2025就业105,000人、2035预计103,800人，BLS另报净变化约-1,100，三项分别取整不能用端点相减替代原表；2025—2035下降1.1%，年均7,900空缺全部来自转岗/退出替代，非新增。BLS提阅读需求或支持图书编辑、印刷报刊失去份额可能下降，非AI就业因果或中国需求。 美国BLS典型传播/新闻/英语或相关学士与写作校对经验，强写作的其他背景也可能进入；专业内容可需相关经验。O*NET新聘反馈69%学士、16%大学学习无学位、12%两年制副学位（所列97%），不是中国招聘比例；BLS少于5年相关工作是统计典型分类，不等统一必须5年或无需其他经验。 编辑可写标题/故事/文章、授权岗位可终审；不由代码排除写作或终审职责。"
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "r5-ooh-current",
-                "limitation": "美国2025就业105,000人、2035预计103,800人，BLS另报净变化约-1,100，三项分别取整不能用端点相减替代原表；2025—2035下降1%，年均7,900空缺全部来自转岗/退出替代，非新增。BLS提阅读需求或支持图书编辑、印刷报刊失去份额可能下降，非AI就业因果或中国需求。 美国BLS典型传播/新闻/英语或相关学士与写作校对经验，强写作的其他背景也可能进入；专业内容可需相关经验。O*NET新聘反馈69%学士、16%大学学习无学位、12%两年制副学位（所列97%），不是中国招聘比例；BLS少于5年相关工作是统计典型分类，不等统一必须5年或无需其他经验。 编辑可写标题/故事/文章、授权岗位可终审；不由代码排除写作或终审职责。",
+                "limitation": "美国2025就业105,000人、2035预计103,800人，BLS另报净变化约-1,100，三项分别取整不能用端点相减替代原表；2025—2035下降1.1%，年均7,900空缺全部来自转岗/退出替代，非新增。BLS提阅读需求或支持图书编辑、印刷报刊失去份额可能下降，非AI就业因果或中国需求。 美国BLS典型传播/新闻/英语或相关学士与写作校对经验，强写作的其他背景也可能进入；专业内容可需相关经验。O*NET新聘反馈69%学士、16%大学学习无学位、12%两年制副学位（所列97%），不是中国招聘比例；BLS少于5年相关工作是统计典型分类，不等统一必须5年或无需其他经验。 编辑可写标题/故事/文章、授权岗位可终审；不由代码排除写作或终审职责。",
                 "market": "美国",
                 "name": "BLS编辑2025—2035当前职业正文",
                 "period": "2025工资/2025—2035预测",
@@ -9218,6 +9327,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "上海交大公告列英文学术期刊编辑，负责机械工程稿件初审、格式规范和同行评审跟进，博士学历优先，未列具体工资。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a35-sjtu",
+                "limitation": "仅说明单次公告。",
+                "market": "中国大陆",
+                "name": "英文学术期刊编辑",
+                "period": "2026-09-30",
+                "publisher": "上海交通大学机械与动力工程学院",
+                "scope": "recruitment_proxy",
+                "url": "https://me.sjtu.edu.cn/zpxx/78034.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "外研社公告列期刊学术编辑，负责中英文稿件初审和编校，要求相关专业硕士及以上，页面列 5,000–8,000 元/月。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a35-fltrp",
+                "limitation": "仅说明单次公告。",
+                "market": "中国大陆",
+                "name": "期刊学术编辑",
+                "period": "2026 秋季校招",
+                "publisher": "外语教学与研究出版社（广东外语外贸大学就业信息网刊载）",
+                "scope": "recruitment_proxy",
+                "url": "https://career.gdufs.edu.cn/web/Index/job-detail?id=9358"
               }
             ]
           },
@@ -10591,7 +10730,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "证据不足：未取得全国单职业口径",
+          "china_open": "以下区分编辑岗位招聘样本与行业工资背景。",
           "china_ref": {
             "$join": [
               {
@@ -10623,8 +10762,8 @@
               "月薪参考": "2025文化行业年均129,447/64,015元（非私营/私营）；非编辑月薪"
             },
             {
-              "城市/区间": "招聘报价（不可替代）",
-              "月薪参考": "证据不足：不以单条报价替代职业工资"
+              "城市/区间": "大陆招聘样本",
+              "月薪参考": "上海交大公告列英文学术期刊编辑，负责机械工程稿件初审、格式规范和同行评审跟进，博士学历优先，未列具体工资。 外研社公告列期刊学术编辑，负责中英文稿件初审和编校，要求相关专业硕士及以上，页面列 5,000–8,000 元/月。"
             }
           ],
           "china_soc_row": {
@@ -10633,6 +10772,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a35-sjtu",
+            "posting-a35-fltrp"
+          ],
           "sources_note": {
             "$join": [
               {
@@ -10835,7 +10978,7 @@
           },
           {
             "指标": "美国就业增长（2025—2035）",
-            "数值": "下降 1%（Decline）",
+            "数值": "下降 1.1%（Decline）",
             "说明": {
               "$join": [
                 {
@@ -10909,7 +11052,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "2025—2035 年预计下降 1%（Decline）",
+        "growth": "2025—2035 年预计下降 1.1%（Decline）",
         "heading": {
           "$item": "editors.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -11099,6 +11242,7 @@
             "limitation": "预测不是个人录用保证。",
             "metric": "就业增长",
             "occupation_scope": "编辑（27-3041.00）",
+            "source_ref": "bls-outlook",
             "value": {
               "$item": "editors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -11113,15 +11257,17 @@
             "limitation": "预测不是个人录用保证。",
             "metric": "就业规模",
             "occupation_scope": "编辑（27-3041.00）",
+            "source_ref": "bls-outlook",
             "value": "2025约105,000人；2035预计103,800，BLS另报净变化-1,100（分别取整）"
           },
           {
             "geography": "美国",
             "horizon": "2025—2035 年",
-            "interpretation": "BLS当前预测空缺全部来自转岗/退出替代，非净新增",
+            "interpretation": "BLS 将预计空缺归因于转岗或退出后的人员替补。",
             "limitation": "预测不是个人录用保证。",
             "metric": "职位空缺",
             "occupation_scope": "编辑（27-3041.00）",
+            "source_ref": "bls-outlook",
             "value": "约 7,900 个/年（2025—2035 年）"
           }
         ],
@@ -11787,6 +11933,20 @@
         "id": "editors.path.credential-decision.current.v1",
         "location": "entry_decisions",
         "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "editors.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "editors.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
       }
     ],
     "path": "/zh/career/jobs/editors",
@@ -11822,7 +11982,7 @@
       },
       {
         "derivation": null,
-        "display_value": "2025—2035 年预计下降 1%（Decline）",
+        "display_value": "预计下降 1.1%（2025–2035 年）",
         "fact_id": "entry-boundary",
         "market": "美国",
         "measure": "projected growth",
@@ -11879,6 +12039,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "上海交大公告列英文学术期刊编辑，负责机械工程稿件初审、格式规范和同行评审跟进，博士学历优先，未列具体工资。",
+        "fact_id": "posting-a35-sjtu",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "英文学术期刊编辑",
+        "period": "2026-09-30",
+        "source_refs": [
+          "a35-sjtu"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "外研社公告列期刊学术编辑，负责中英文稿件初审和编校，要求相关专业硕士及以上，页面列 5,000–8,000 元/月。",
+        "fact_id": "posting-a35-fltrp",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "期刊学术编辑",
+        "period": "2026 秋季校招",
+        "source_refs": [
+          "a35-fltrp"
+        ]
       }
     ]
   },
@@ -11892,7 +12076,7 @@
     "badges": [
       "内容规划与审阅 · 事实核查与语言编辑 · 版本与发布协调",
       "O*NET-SOC 27-3041.00 · 2025 年 5 月工资数据",
-      "Job Zone Four · 兴趣代码 ACE · 2025—2035 年下降 1%"
+      "Job Zone Four · 兴趣代码 ACE · 2025—2035 年下降 1.1%"
     ],
     "metrics": [
       {
@@ -11905,7 +12089,7 @@
         "availability": "available",
         "fact_ref": "entry-boundary",
         "key": "us_growth",
-        "label": "美国就业预测（2025—2035 年下降 1%）"
+        "label": "美国就业预测（2025—2035 年下降 1.1%）"
       },
       {
         "availability": "available",
@@ -11931,14 +12115,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "规划、审阅和修订待发布内容，核对事实、语言、结构、风格与版本，并协调作者和发布责任人。"
+      "text": "了解编辑怎样核事实、版本与发布授权，比较编辑招聘样本，并做一次纸面稿件交接。"
     },
     "title": {
       "availability": "available",
       "text": "编辑"
     }
   },
-  "source_content_sha256": "e2a3c01a0deea90fd0906a280c6b224280267a68c65e7807e1240ec28ed1764d",
+  "source_content_sha256": "8d19805eaf0e7b3121fddd03a76ae6e18abde415bfb4e4adacf6fc0f88884384",
   "subject": {
     "canonical_slug": "editors",
     "name": "编辑",

@@ -155,6 +155,9 @@
       "item:occupational-therapy-assistants-and-aides.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:occupational-therapy-assistants-and-aides.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:occupational-therapy-assistants-and-aides.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -12983,6 +12986,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. One posting asks for documentation of responses to activities. Another mainly prepares equipment and rooms. Write a question about supervision and documentation for each."
+            ]
+          },
+          "id": "occupational-therapy-assistants-and-aides.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-aide"
+          ],
+          "title": "Compare occupational therapy assistant and aide duties",
+          "type": "notice"
         }
       ]
     },
@@ -15582,6 +15600,13 @@
         "id": "occupational-therapy-assistants-and-aides.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-therapy-assistants-and-aides.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15775,7 +15800,7 @@
       "text": "Occupational therapy assistants and aides: duty, wage, and qualification differences"
     }
   },
-  "source_content_sha256": "6784ce4b6633918efd438473721a5df7b58a2a3263132b880bd4c89c1ed3e81f",
+  "source_content_sha256": "106bde97d026bd58411d8dc01c59d57a9489238897c9bf54a9656c5221048694",
   "subject": {
     "canonical_slug": "occupational-therapy-assistants-and-aides",
     "name": "Occupational therapy assistants and aides",

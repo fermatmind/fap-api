@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-db-highgo": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-db-xian": {
+        "status": "pending_mapping"
+      },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
       },
@@ -19498,56 +19504,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19555,7 +19525,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19568,7 +19538,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19581,7 +19551,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19594,7 +19564,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -24331,7 +24301,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国去重招聘文本112项：SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%，非使用率、熟练度或GenAI采用；Under1/Notavailable不能记0。"
+              "O*NET 美国招聘数据的 112 个热门技术条目：SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%，非使用率、熟练度或GenAI采用；Under1/Notavailable不能记0。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
@@ -24626,7 +24596,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国去重招聘文本112项：SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%，非使用率、熟练度或GenAI采用；Under1/Notavailable不能记0。"
+              "O*NET 美国招聘数据的 112 个热门技术条目：SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%，非使用率、熟练度或GenAI采用；Under1/Notavailable不能记0。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -26073,7 +26043,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国DBA职业工资分布或真实当期招聘报价；NBS2025信息技术行业非私营248752/私营128166元年均税前，只限实际归属该门类的5人及以上法人单位背景，排除个体/自由职业，非私营非仅国企。"
+              "证据不足：没有大陆 DBA 全国工资分布；本页另列两条历史招聘；NBS2025信息技术行业非私营248752/私营128166元年均税前，只限实际归属该门类的5人及以上法人单位背景，排除个体/自由职业，非私营非仅国企。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
@@ -26175,12 +26145,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆数据库管理或数据库运维岗位招聘或报价统计；个别平台或单位的报价不能代表全国水平"
+              "西安中软国际的 DBA 运维招聘列 9,000–20,000 元/月，按岗位等级列要求，涉及调优、备份恢复和权限。山东大学刊登的瀚高校招数据库管理岗位在济南，含配置、监控、备份恢复和故障处理，岗位专栏未列月薪。问清谁值班、验证恢复、批权限和改生产。两条历史招聘不是全国工资。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "db-xian",
+            "db-highgo"
           ],
           "type": "prose"
         },
@@ -26189,7 +26160,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑准备观察例：数据库语言、测试、恢复和权限说明的实际表现；学历不自动分配岗位，未核中国真实招聘条件或证书统一要求。"
+              "编辑准备观察例：数据库语言、测试、恢复和权限说明的实际表现；学历不自动分配岗位，已核两条历史招聘；未核普遍入行或统一证书要求。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -26205,7 +26176,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑准备观察例：数据库语言、测试、恢复和权限说明的实际表现；学历不自动分配岗位，未核中国真实招聘条件或证书统一要求。"
+              "编辑准备观察例：数据库语言、测试、恢复和权限说明的实际表现；学历不自动分配岗位，已核两条历史招聘；未核普遍入行或统一证书要求。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -26221,7 +26192,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑准备观察例：数据库语言、测试、恢复和权限说明的实际表现；学历不自动分配岗位，未核中国真实招聘条件或证书统一要求。"
+              "编辑准备观察例：数据库语言、测试、恢复和权限说明的实际表现；学历不自动分配岗位，已核两条历史招聘；未核普遍入行或统一证书要求。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
@@ -26237,7 +26208,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑准备观察例：数据库语言、测试、恢复和权限说明的实际表现；学历不自动分配岗位，未核中国真实招聘条件或证书统一要求。"
+              "编辑准备观察例：数据库语言、测试、恢复和权限说明的实际表现；学历不自动分配岗位，已核两条历史招聘；未核普遍入行或统一证书要求。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26268,7 +26239,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按实际合同职责、数据边界和单位政策核；本轮无中国职业工资/招聘样本或工具采用因果。涉及可识别个人信息，核PIPL13合法处理依据（非一律同意）、6最小必要、51合理操作权限和定期培训；21/59涉及委托时核范围、安全和协助。去标识化或脱敏不自动等于不可复原匿名化，测试数据/账号不代合法用途。"
+              "按实际合同职责、数据边界和单位政策核；本页列两条大陆历史招聘，未核全国职业工资及工具采用因果。涉及可识别个人信息，核PIPL13合法处理依据（非一律同意）、6最小必要、51合理操作权限和定期培训；21/59涉及委托时核范围、安全和协助。去标识化或脱敏不自动等于不可复原匿名化，测试数据/账号不代合法用途。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
@@ -28771,7 +28742,7 @@
                 "id": "availability",
                 "values": [
                   "常见对象与工具范围",
-                  "2025美国去重招聘文本112项：SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%，非使用率、熟练度或GenAI采用；Under1/Notavailable不能记0。",
+                  "O*NET 美国招聘数据的 112 个热门技术条目：SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%，非使用率、熟练度或GenAI采用；Under1/Notavailable不能记0。",
                   "招聘提及非熟练度或真实用途；产品认证可能是雇主要求，仍不代合法处理依据/权限。"
                 ]
               }
@@ -31028,21 +30999,22 @@
           "data": {
             "entries": [
               {
-                "answer": "管理、测试并实施计算机数据库，应用数据库管理系统知识：修改现有数据库与数据库管理系统，或指导程序员与分析人员完成变更；规划、协调并实施安全措施以保护计算机文件中的信息；规划并安装数据库管理系统软件升级以提升性能；为数据库的每个片段指定用户与访问级别；测试数据库应用或系统的变更；测试程序或数据库、修正错误并做必要修改；培训用户并解答问题；向初级员工或客户提供技术支持；审批、排期、规划并监督新产品的安装与测试；制定软件使用与采购以及保护脆弱信息的标准与指南；编写逻辑与物理数据库描述并指定标识符；开发数据模型；选择并输入代码监测数据库性能并创建生产数据库；识别、评估并推荐能达到所需性能的硬件或软件技术；查阅数据库管理系统手册中的流程；识别并评估行业趋势；查阅程序员分析师绘制的工作流图；并修订公司数据字典中的数据定义。",
+                "answer": "监控运行与查询表现、测试数据库变更、管理访问、准备并验证恢复。具体值班、执行与审批权限由组织分工，生产变更不能由职业名推断。",
                 "id": "actors.faq.1",
                 "question": "数据库管理员每天的具体工作是什么？",
                 "question_key": "career.faq.database-administrators.1",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "本职业的核心是让既有数据库持续可用、可恢复且访问受控，并通过变更与优化支撑业务对数据的使用；数据库架构师以库结构与数据架构标准设计为核心；数据仓储专家以数据仓库建模与装载为核心；计算机系统分析师以业务需求分析与系统设计为核心；网络与计算机系统管理员以服务器与网络运维为核心；信息安全分析师以安全策略与事件响应为核心；计算机系统工程师与架构师以系统级架构与集成为核心。名称相近不代表职责、评价标准或资格可以互换。",
+                "answer": "管理员优先保障现有库的可用、恢复、权限与运行；架构师优先定义模型、标准和迁移设计。两者都可能测试、调优或处理变更，面试时问主要交付物与谁批准生产操作。",
                 "id": "actors.faq.2",
-                "question": "这个职业与相邻的架构、仓储与系统方向有什么区别？",
+                "question": "数据库管理员和数据库架构师有什么区别？",
                 "question_key": "career.faq.database-administrators.2",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "db-neighbor"
                 ]
               },
               {
@@ -31055,12 +31027,13 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：语句与脚本草拟、日志与告警归类、性能与容量初查三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "工具可帮助草拟 SQL 或汇总日志；应在测试环境验证，权限和上线仍按团队流程。这里没有该职业的实际 AI 采用率、质量变化或节省工时数据。",
                 "id": "actors.faq.4",
-                "question": "这个职业哪些任务已有 AI 变化证据？",
+                "question": "哪些任务可能由工具辅助？",
                 "question_key": "career.faq.database-administrators.4",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "r5-nist-core"
                 ]
               },
               {
@@ -31073,21 +31046,25 @@
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位年薪 104,620 美元（中位时薪 50.30 美元），年薪分位为 60,230／79,610／104,620／135,460／163,320 美元，为 O*NET-SOC 15-1242.00 本细类自身口径；分位是统计位置，不能当作个人报价或个人到手收入；中国大陆未取得职业级数值，本页按缺口处理并仅展示已明确标注的行业均值代理。",
+                "answer": "美国 2025 年职业工资中位数为 50.30 美元/小时、104,620 美元/年。 西安中软国际的 DBA 运维招聘列 9,000–20,000 元/月，按岗位等级列要求，涉及调优、备份恢复和权限。山东大学刊登的瀚高校招数据库管理岗位在济南，含配置、监控、备份恢复和故障处理，岗位专栏未列月薪。问清谁值班、验证恢复、批权限和改生产。两条历史招聘不是全国工资。",
                 "id": "actors.faq.6",
                 "question": "这个职业的工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.database-administrators.6",
                 "source_refs": [
-                  "oews"
+                  "r5-wages-current",
+                  "db-xian",
+                  "db-highgo"
                 ]
               },
               {
-                "answer": "美国准备层级为 Job Zone Four（SVP 7.0 至低于 8.0），官方教育调查显示新入职者中 89% 要求学士学位、4% 要求学士后证书、3% 要求副学士或其他两年制学位；常见入口是计算机、软件、信息管理或相关学科的本科基础，并常有系统或技术支持岗位的实践经历；中国大陆多要求相关专业背景与实操能力，具体按目标单位规定。",
+                "answer": "美国 BLS 列典型入行学历为学士。看实际招聘是否要 SQL 调优、恢复验证、特定数据库经验或值班；在演示环境练习。",
                 "id": "actors.faq.7",
                 "question": "这个职业需要什么学历，又该怎样训练？",
                 "question_key": "career.faq.database-administrators.7",
                 "source_refs": [
-                  "onet"
+                  "r5-bls-current",
+                  "db-xian",
+                  "db-highgo"
                 ]
               },
               {
@@ -31109,12 +31086,13 @@
                 ]
               },
               {
-                "answer": "O*NET 全国就业趋势（使用 BLS 数据，2024—2034 年预测期，15-1242.00 本细类口径）显示 2024 年约 78,000 人在岗、2034 年预计约 77,500 人、预测下降 1%（标签「Decline」），预测期年均约 3,800 个含增长与更替的空缺；BLS 职业展望手册另有数据库管理员与架构师合并口径（2025—2035 年增长 4%、年均约 7,300 个空缺），两套口径人群与期间不同、分别引用；工作以运行、变更与权限控制为主，须按本地行业结构与合规要求核对，并优先核对岗位职责范围、数据权限与变更审批流程。",
+                "answer": "BLS 预计美国 15-1242 就业从 2025 年约 75,000 到 2035 年约 74,900，变化 −0.1%，年均约 3,300 个空缺（含替补需求）。 选择方向时优先核日常主要任务、岗位的生产权限和成长路径。",
                 "id": "actors.faq.10",
                 "question": "现在选择这个职业，还应考虑什么？",
                 "question_key": "career.faq.database-administrators.10",
                 "source_refs": [
-                  "bls"
+                  "r5-bls-current",
+                  "r5-onet-current"
                 ]
               }
             ]
@@ -31196,7 +31174,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "官方职业统计、行业背景、法律及编辑建议分开；中国职业工资/当期招聘缺口保留，不由行业均值推个人所得或由职业标题推权限。"
+              "官方职业统计、行业背景、法律及编辑建议分开；中国另列两条历史招聘；全国职业工资及当期空缺未核保留，不由行业均值推个人所得或由职业标题推权限。"
             ]
           },
           "id": "actors.display.source_card.note",
@@ -31356,21 +31334,19 @@
                 "url": "https://www.onetonline.org/link/summary/15-1211.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "支持该职业的就业与预测口径（本细类）。",
-                  "不含中国大陆信息，不能替代中国大陆数据。",
-                  "本轮核查：BLS自身15-1242：2025约75000→2035约74900，净减约100/−0.1%，年均3300空缺含替换，自雇1.8%；O*NET基本无变化，OOH0%为取整。OOH数据库管理员与架构师合并约144500/+4%/年均7300是另一人群，非本职业自身或个人录用率，不代AI因果。"
+                  "BLS 预计美国 15-1242 就业从 2025 年约 75,000 到 2035 年约 74,900，变化 −0.1%，年均约 3,300 个空缺（含替补需求）。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "BLS自身15-1242：2025约75000→2035约74900，净减约100/−0.1%，年均3300空缺含替换，自雇1.8%；O*NET基本无变化，OOH0%为取整。OOH数据库管理员与架构师合并约144500/+4%/年均7300是另一人群，非本职业自身或个人录用率，不代AI因果。",
+                "limitation": "美国职业预测，不是招聘量或个体录用几率。",
                 "market": "美国",
-                "name": "O*NET National Employment Trends：Database Administrators（15-1242.00，使用 BLS 数据）",
-                "period": "2024—2034 年预测期；检索 2026-09-19",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "BLS 本职业就业预测（2025–2035）",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/15-1242.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31574,11 +31550,11 @@
                 "details": [
                   "支持雇主技术关键词的市场信号说明。",
                   "关键词不等于采用率或能力要求。",
-                  "本轮核查：2025美国去重招聘文本112项：SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%，非使用率、熟练度或GenAI采用；Under1/Notavailable不能记0。"
+                  "本轮核查：O*NET 美国招聘数据的 112 个热门技术条目：SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%，非使用率、熟练度或GenAI采用；Under1/Notavailable不能记0。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r2-ai",
-                "limitation": "2025美国去重招聘文本112项：SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%，非使用率、熟练度或GenAI采用；Under1/Notavailable不能记0。",
+                "limitation": "O*NET 美国招聘数据的 112 个热门技术条目：SQL62/Python42/AWS29/Azure25/Snowflake16/Spark13/PowerBI12/Java12/PostgreSQL11/Kafka10/SQLServer9/Tableau9%，非使用率、熟练度或GenAI采用；Under1/Notavailable不能记0。",
                 "market": "美国",
                 "name": "O*NET OnLine：Database Administrators 热门技术（15-1242.00）",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31747,16 +31723,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/15-1242.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "自身15-1242：75.0→74.9千、净减0.1千/−0.1%、年均3.3千空缺、自雇1.8%。OOH0%取整、O*NET基本无变化不是不同预测；非OOH数据库管理员与架构师合并的144.5千/+4%/7.3千。典型学士/无相关经验/无在岗训练类别非无需准备；架构师少于5年相关经验不可移植。"
+                  "BLS 预计美国 15-1242 就业从 2025 年约 75,000 到 2035 年约 74,900，变化 −0.1%，年均约 3,300 个空缺（含替补需求）。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r5-bls-current",
                 "limitation": "自身15-1242：75.0→74.9千、净减0.1千/−0.1%、年均3.3千空缺、自雇1.8%。OOH0%取整、O*NET基本无变化不是不同预测；非OOH数据库管理员与架构师合并的144.5千/+4%/7.3千。典型学士/无相关经验/无在岗训练类别非无需准备；架构师少于5年相关经验不可移植。",
                 "market": "美国",
                 "name": "BLS表1.2：2025—2035数据库管理员预测",
-                "period": "2025基期；2025—2035预测；检索2026-10-09",
+                "period": "2025–2035",
                 "publisher": "Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31867,6 +31843,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "职位月薪9,000–20,000元，西安全职3名。分列等级，涉及数据库备份恢复、调优与安全授权。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "db-xian",
+                "limitation": "历史样本，非全国工资或当前空缺。",
+                "market": "中国大陆",
+                "name": "西安中软国际：DBA 运维工程师",
+                "period": "2026-02",
+                "publisher": "秦创原招聘平台",
+                "scope": "recruitment_proxy",
+                "url": "https://www.qxwq.org.cn/index.php/work/position/show/28373"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "瀚高 2025 届校招数据库管理岗位，济南，含配置、监控、备份恢复、排障。该职位专栏月薪未填写。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "db-highgo",
+                "limitation": "历史样本，非全国工资或当前空缺。",
+                "market": "中国大陆",
+                "name": "山东大学刊登：瀚高数据库管理岗位",
+                "period": "2025 届校园招聘",
+                "publisher": "山东大学就业服务",
+                "scope": "recruitment_proxy",
+                "url": "https://jobcareer.sdu.edu.cn/eweb/jygl/index.so?id=H45vc2NfzLqdh22sfV7PPv&modcode=jygl_zpxxck&subsyscode=zpfw&type=ssoViewZpxx"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "以运行和设计的主要交付区别两岗。"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "db-neighbor",
+                "limitation": "相邻职业任务参照。",
+                "market": "美国",
+                "name": "相邻数据库职业任务",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/15-1243.00"
               }
             ]
           },
@@ -34805,7 +34826,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "本轮实际所读NBS2025行业工资及PIPL；职业工资/当期招聘缺口",
+          "china_open": "本轮实际所读NBS2025行业工资及PIPL；另列两条历史招聘；全国职业工资及当期空缺未核",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34866,7 +34887,7 @@
               }
             },
             {
-              "城市/区间": "中国大陆（招聘或报价口径）",
+              "城市/区间": "大陆数据库岗位招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34878,13 +34899,14 @@
           "china_soc_row": "美国职业代码O*NET-SOC 15-1242.00；本轮未取得明确中国分类映射与本职业单列工资，不断言相应统计不存在。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-db-xian",
+            "posting-db-highgo"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响这个职业的工资吗？",
             "driver_heading": "数据库运行怎样按值班、变更窗口与结算时点安排？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历与专业背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "不同学历与专业背景对应哪些数据库岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36782,7 +36804,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解数据库管理员的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36894,14 +36916,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解我的人格偏好"
@@ -37314,38 +37328,38 @@
       },
       {
         "derivation": null,
-        "display_value": "约78,000人（2024 年）",
+        "display_value": "75,000 人（2025 年）",
         "fact_id": "employment",
         "market": "美国",
-        "measure": "就业规模（存量统计）",
-        "occupation_scope": "Database Administrators（15-1242.00）本细类口径；2024 年就业人数来自 O*NET 全国就业趋势页（使用 BLS 数据）",
-        "period": "2024 年基期；检索 2026-09-19",
+        "measure": "美国基期就业（2025 年）",
+        "occupation_scope": "U.S. SOC 15-1242",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "下降 1%（2024—2034 年，标签「Decline」；2034 年预计约 77,500 人）",
+        "display_value": "−0.1%（2025–2035 年）",
         "fact_id": "growth",
         "market": "美国",
-        "measure": "预测就业变化（职业总量）",
-        "occupation_scope": "15-1242.00 本细类口径；O*NET 就业趋势页显示 2024—2034 年下降 1%（Decline），属于预测期总量变化，不是个人录用概率；BLS 职业展望手册另有数据库管理员与架构师合并口径（2025 年约 144,500 人、2025—2035 年增长 4%），两套口径人群与期间不同，分别引用不合并",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "measure": "美国就业预测（2025–2035 年）",
+        "occupation_scope": "U.S. SOC 15-1242",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均约3,800个（2024—2034 年，含增长与更替需求）",
+        "display_value": "年均 3,300 个（含替补需求）",
         "fact_id": "openings",
         "market": "美国",
-        "measure": "预测期年均职位空缺（含更替需求）",
-        "occupation_scope": "15-1242.00 本细类口径；O*NET 就业趋势页给出预测期年均约 3,800 个，含因转移或退出劳动市场（如退休）产生的更替需求，不是每年净增岗位数；即使总量预测为下降，更替需求仍会持续产生招聘",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "measure": "美国预计年均职位空缺",
+        "occupation_scope": "U.S. SOC 15-1242",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
@@ -37509,7 +37523,7 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：本轮未取得中国DBA职业工资分布或真实招聘报价；另列匹配的单位行业背景",
+        "display_value": "证据不足：未核中国 DBA 全国职业工资分布；历史招聘单列；另列匹配的单位行业背景",
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "中国内地",
         "measure": "中国职业工资/招聘缺口",
@@ -37529,6 +37543,30 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "职位月薪9,000–20,000元，西安全职3名。分列等级，涉及数据库备份恢复、调优与安全授权。",
+        "fact_id": "posting-db-xian",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "西安中软国际：DBA 运维工程师",
+        "period": "2026-02",
+        "source_refs": [
+          "db-xian"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "瀚高 2025 届校招数据库管理岗位，济南，含配置、监控、备份恢复、排障。该职位专栏月薪未填写。",
+        "fact_id": "posting-db-highgo",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "山东大学刊登：瀚高数据库管理岗位",
+        "period": "2025 届校园招聘",
+        "source_refs": [
+          "db-highgo"
         ]
       }
     ]
@@ -37556,25 +37594,25 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，下降 1%，标签「Decline」）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 78,000 人）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，年均约 3,800 个，含增长与更替）"
+        "label": "美国预计年均职位空缺"
       },
       {
-        "availability": "available",
-        "fact_ref": "china-jiaojiang-featured-daily-2026",
+        "availability": "missing",
+        "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆行业均值代理（2025 年租赁和商务服务业，见中国薪资板块）"
+        "label": "中国大陆全国职业工资未核实"
       }
     ]
   },
@@ -37582,14 +37620,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "数据库管理员（O*NET-SOC 15-1242.00）管理、测试并实施计算机数据库，应用数据库管理系统知识：覆盖协调数据库变更、规划并实施安全措施、安装数据库管理系统升级、指定用户与访问级别、测试数据库应用与系统变更、测试程序或数据库并修正错误、培训用户并提供技术支持、制定软件使用与采购标准、编写逻辑与物理数据库描述、开发数据模型、监测数据库性能、评估并推荐软硬件技术、查阅手册流程、评估行业趋势、查阅工作流图并修订数据字典等任务；需说明其美国就业与工资口径：该职业为 O*NET-SOC 15-1242.00 自身口径，2024 年约 78,000 人在岗、2024—2034 年预测下降 1%（标签「Decline」）、2034 年预计约 77,500 人、预测期年均约 3,800 个含增长与更替的空缺；2025 年工资数据中位年薪 104,620 美元（中位时薪 50.30 美元），年薪分位为 60,230／79,610／104,620／135,460／163,320 美元；行业为 专业、科学与技术服务 23%／金融与保险 12%／教育服务 11%／其他行业（含政府与信息业）54%；兴趣代码 CI、准备层级 Job Zone Four；以及中国大陆该类岗位的职业级工资缺口、行业均值代理标注与数据授权、变更留痕、备份可恢复性、权限最小化的控制点。"
+      "text": "数据库管理员（DBA）怎样监控、恢复和管权限？对照大陆 DBA 招聘、美国就业数据和架构师的职责。"
     },
     "title": {
       "availability": "available",
       "text": "数据库管理员"
     }
   },
-  "source_content_sha256": "ae348cf86268d1095c11100f2a797c25b4cba7c70cde677f19cd5b4b97665c68",
+  "source_content_sha256": "6006b5b64eb3a0ff113c34e875a28bf266ea9e16effcc075908a773079d95940",
   "subject": {
     "canonical_slug": "database-administrators",
     "name": "数据库管理员",

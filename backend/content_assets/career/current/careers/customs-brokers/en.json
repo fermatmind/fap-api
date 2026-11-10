@@ -6,7 +6,7 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
@@ -21,7 +21,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -45,7 +45,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a22-sh-docs": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a22-sh-edi": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -26137,15 +26143,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain verifiable recruitment or quoted-pay statistics for customs declaration and customs affairs positions in mainland China; the pay disclosures of individual units or platforms cannot represent the national level"
+              "A Changning bulletin listed CNY 6,000–8,000 a month and a logistics junior-college credential for an OCS Logistics EDI customs clerk. A separate Shanghai HR bulletin listed the same range and a junior-college credential for a JKI Logistics documentation role that books freight, checks paperwork and assists with declarations. The latter is an adjacent role; neither posting is national wage data."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "g5-onet-current",
-            "g5-cn-nbs2025",
-            "g5-cn-customs-law",
-            "g5-cn-cancel"
+            "a22-sh-edi",
+            "a22-sh-docs"
           ],
           "type": "prose"
         },
@@ -26256,7 +26260,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The mainland China salary section of this page only retains the evidence boundary: industry averages are not treated as occupational wages, U.S. data are not used as a substitute, and no national median, starting pay or percentiles for this occupation are stated."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -31057,7 +31061,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Prepare customs documents on behalf of importers and exporters and ensure goods comply with applicable law: classify merchandise under the tariff coding system; prepare and process import and export documents under customs laws; obtain and compile customs invoices, certificates of origin and freight control documents; calculate and track the duties and taxes owed, quote under the tariff schedule and excise taxes and pay amounts on behalf of clients; explain import and export restrictions, the tariff system, insurance requirements and quotas to clients; sign documents and arrange or assist with guarantees on behalf of clients under a power of attorney; apply for duty concessions, refunds and rebates and prepare protest materials; arrange transport, warehousing and distribution, track cargo location and arrange insurance; and report data to government agencies.",
+                "answer": "Check declarations, classification, duties and client authorization, and follow up on customs messages or exceptions. Preparing documents, representing a client and arranging transport are different responsibilities; the title alone does not establish signing authority.",
                 "id": "actors.faq.1",
                 "question": "What does the daily work of a customs broker involve?",
                 "question_key": "career.faq.customs-brokers.1",
@@ -31066,27 +31070,28 @@
                 ]
               },
               {
-                "answer": "This occupation handles customs declaration, tariff classification and import/export compliance on behalf of clients and carries authorized signing and payment of taxes on their behalf; purchasing managers center on organizational purchasing management and supplier strategy; transportation, storage and distribution managers center on logistics operations and management; buyers and purchasing agents for farm products center on farm product purchasing and quality inspection; wholesale and retail buyers (except farm products) center on merchandise purchasing and supply negotiation; cargo and freight agents center on transport arrangement and carrier coordination; compliance officers center on review and investigation of broader compliance matters. Similar titles do not mean duties or authorization can be swapped.",
+                "answer": "Customs brokerage focuses on declarations and compliance. Documentation staff assemble and check records; freight forwarders arrange bookings and transport. Check whether the job prepares data or submits filings on a client’s behalf.",
                 "id": "actors.faq.2",
-                "question": "What is the difference between this occupation and adjacent purchasing, logistics and compliance positions?",
+                "question": "How do customs brokers, documentation clerks and freight forwarders differ?",
                 "question_key": "career.faq.customs-brokers.2",
                 "source_refs": [
                   "onet"
                 ]
               },
               {
-                "answer": "Tariff databases and classification tools, document validation and tax calculation systems, and logistics tracking and record drafting tools can reduce some matching, validation and recording work; but judging classification disputes, confirming document completeness, applying relief and refunds, signing under authorization and making a lawful declaration still depend on people and remain constrained by regulations and authorization boundaries. O*NET shows 40% highly automated and 40% moderately automated for this occupation; technical exposure is not the same as organizational adoption or the disappearance of jobs.",
+                "answer": "In the United States, transacting customs business as a broker generally requires a license. Section 111.2 lists exceptions, including own-account business and broker employees who meet authorization and supervision conditions. A mainland China job title alone does not establish a U.S. license.",
                 "id": "actors.faq.3",
-                "question": "How will AI affect or replace customs brokers?",
+                "question": "When does a U.S. customs broker need a license?",
                 "question_key": "career.faq.customs-brokers.3",
                 "source_refs": [
-                  "bls"
+                  "a22-us-permit",
+                  "a22-cn-filing"
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: three types of task — classification and code matching, document validation and tax calculation, and logistics tracking and recording — can be partly handled by tools; this page has no occupation-specific adoption or displacement data.",
+                "answer": "Software can extract invoice fields and flag discrepancies. Review tariff classification, valuation, client authority and exceptional filings against the evidence and assigned authority. This is not a measurement of AI adoption or job displacement.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of this occupation is there already evidence of AI-driven change?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.customs-brokers.4",
                 "source_refs": [
                   "onet"
@@ -31102,12 +31107,14 @@
                 ]
               },
               {
-                "answer": "In the U.S. 2025 wage data, the median annual wage is 80,730 dollars (38.81 dollars per hour), with percentiles of 48,220 / 61,280 / 80,730 / 109,010 / 133,720 dollars, but these values are published under the parent occupation \"Compliance Officers\" (13-1041.00) basis and are not collected separately for this subcategory; values broken down by state or area must be looked up on the O*NET local wages page by area and period and cannot be treated as an individual offer; no occupation-level figure was obtained for mainland China, and this page treats it as a gap with the industry average proxy clearly labelled.",
+                "answer": "These U.S. figures cover the parent group, Compliance Officers, and are not broker-specific wages. The May 2025 U.S. median wage was $80,730 per year and $38.81 per hour. A Changning bulletin listed CNY 6,000–8,000 a month and a logistics junior-college credential for an OCS Logistics EDI customs clerk. A separate Shanghai HR bulletin listed the same range and a junior-college credential for a JKI Logistics documentation role that books freight, checks paperwork and assists with declarations. The latter is an adjacent role; neither posting is national wage data.",
                 "id": "actors.faq.6",
                 "question": "What is the typical wage for this occupation, and how should it be compared?",
                 "question_key": "career.faq.customs-brokers.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "a22-sh-edi",
+                  "a22-sh-docs"
                 ]
               },
               {
@@ -31138,12 +31145,12 @@
                 ]
               },
               {
-                "answer": "The O*NET summary and employment trends page (based on BLS 2024—2034 projections, parent-occupation proxy basis) shows about 418,000 people under this basis in 2024, a projection label of Average (average growth 3%—4%) and an annual average of about 33,300 openings including growth and replacement; the projection is on a parent-occupation basis, the work mainly involves documents and tax handling, and it should be verified against local import and export demand, brokerage volume and automation investment.",
+                "answer": "BLS projects U.S. employment for U.S. SOC 13-1041 Compliance Officers (parent occupation, not brokers separately) to go from about 436,400 in 2025 to 453,100 in 2035 (+3.8%). It projects about 32,700 openings per year, including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing this occupation now?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.customs-brokers.10",
                 "source_refs": [
-                  "bls"
+                  "a22-bls-projections"
                 ]
               }
             ]
@@ -31572,7 +31579,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Supports this occupation's tasks, work context and preparation level.",
                   "Contains no technology adoption or job displacement data."
@@ -31585,7 +31592,7 @@
                 "period": "Page updated in 2026; retrieved 2026-09-19",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/13-1041.08"
+                "url": "https://www.onetonline.org/link/details/13-1041.08"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31928,6 +31935,81 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment for U.S. SOC 13-1041 Compliance Officers (parent occupation, not brokers separately) to go from about 436,400 in 2025 to 453,100 in 2035 (+3.8%). It projects about 32,700 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a22-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Transacting customs business as a broker generally requires a license, subject to exceptions including own-account business and certain authorized broker employees."
+                ],
+                "evidence_type": "Official rules",
+                "id": "a22-us-permit",
+                "limitation": "Check jurisdiction, entity and authorization separately.",
+                "market": "United States",
+                "name": "19 CFR § 111.2",
+                "period": "Current guidance",
+                "publisher": "Electronic Code of Federal Regulations",
+                "scope": "regulatory_context",
+                "url": "https://www.ecfr.gov/current/title-19/chapter-I/part-111/subpart-A/section-111.2"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The filing guide applies to consignees and consignors and customs declaration enterprises. It does not establish U.S. licensing for a job applicant."
+                ],
+                "evidence_type": "Official rules",
+                "id": "a22-cn-filing",
+                "limitation": "Check jurisdiction, entity and authorization separately.",
+                "market": "Mainland China",
+                "name": "China Customs filing guide for declaration entities",
+                "period": "Current guidance",
+                "publisher": "General Administration of Customs",
+                "scope": "regulatory_context",
+                "url": "https://online.customs.gov.cn/static/pages/guides/000729011000/000729011000.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Two posts, a logistics junior-college credential, CNY 6,000–8,000 a month; clearance paperwork, flight requirements and customs messages."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a22-sh-edi",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "OCS Logistics EDI customs clerk",
+                "period": "2024-09-19",
+                "publisher": "Xinjing Town, Shanghai Changning District",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shcn.gov.cn/col5849/20240919/1266574.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Six posts, junior college, CNY 6,000–8,000 a month; booking, document checks and assisting customs clearance. Open to new graduates."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a22-sh-docs",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "JKI Logistics documentation clerk (adjacent role)",
+                "period": "2026-09-03",
+                "publisher": "Shanghai Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.sh.gov.cn/dzb/rsj/2026-09-03/aid/03-01.html"
               }
             ]
           },
@@ -35055,7 +35137,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (recruitment quoted-pay basis)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -35067,13 +35149,14 @@
           "china_soc_row": "U.S. 13-1041.08 is the task comparison; this round did not obtain comparable national occupational wage statistics for China.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a22-sh-edi",
+            "posting-a22-sh-docs"
           ],
           "sources_note": "Source links are used according to their respective statistical or announcement scopes; when the statistical period, survey population and pay basis differ, cite them separately and do not convert between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect the wages for this occupation?",
             "driver_heading": "How is customs brokerage work arranged around arrival batches and declaration deadlines?",
-            "official_heading": "Official statistical basis and gap notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Education and training background, position directions and notes (editorial compilation, not wage statistics)",
             "scenario_heading": "Which customs brokerage position directions correspond to different education and training backgrounds?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35927,7 +36010,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/purchasing-managers",
+            "target_href": "/en/career/jobs/purchasing-managers",
             "target_slug": "purchasing-managers",
             "target_title": "Purchasing Managers (adjacent occupation)",
             "transition_distance": {
@@ -35950,7 +36033,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/transportation-storage-and-distribution-managers",
+            "target_href": "/en/career/jobs/transportation-storage-and-distribution-managers",
             "target_slug": "transportation-storage-and-distribution-managers",
             "target_title": "Transportation, Storage, and Distribution Managers (adjacent occupation)",
             "transition_distance": {
@@ -35973,7 +36056,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/buyers-and-purchasing-agents-farm-products",
+            "target_href": "/en/career/jobs/buyers-and-purchasing-agents-farm-products",
             "target_slug": "buyers-and-purchasing-agents-farm-products",
             "target_title": "Buyers and Purchasing Agents, Farm Products (adjacent occupation)",
             "transition_distance": {
@@ -35996,7 +36079,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/wholesale-and-retail-buyers-except-farm-products",
+            "target_href": "/en/career/jobs/wholesale-and-retail-buyers-except-farm-products",
             "target_slug": "wholesale-and-retail-buyers-except-farm-products",
             "target_title": "Wholesale and Retail Buyers, Except Farm Products (adjacent occupation)",
             "transition_distance": {
@@ -36019,7 +36102,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cargo-and-freight-agents",
+            "target_href": "/en/career/jobs/cargo-and-freight-agents",
             "target_slug": "cargo-and-freight-agents",
             "target_title": "Cargo and Freight Agents (adjacent occupation)",
             "transition_distance": {
@@ -36042,7 +36125,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/compliance-officers",
+            "target_href": "/en/career/jobs/compliance-officers",
             "target_slug": "compliance-officers",
             "target_title": "Compliance Officers (parent occupation)",
             "transition_distance": {
@@ -36065,7 +36148,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/freight-forwarders",
+            "target_href": "/en/career/jobs/freight-forwarders",
             "target_slug": "freight-forwarders",
             "target_title": "Freight Forwarders (adjacent occupation)",
             "transition_distance": {
@@ -36088,7 +36171,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/shipping-receiving-and-inventory-clerks",
+            "target_href": "/en/career/jobs/shipping-receiving-and-inventory-clerks",
             "target_slug": "shipping-receiving-and-inventory-clerks",
             "target_title": "Shipping, Receiving, and Inventory Clerks (adjacent occupation)",
             "transition_distance": {
@@ -36176,7 +36259,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Learn about my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -36225,7 +36308,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Learn about my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -36274,7 +36357,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Learn about my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36323,7 +36406,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Learn about my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36372,7 +36455,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Learn about my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36421,7 +36504,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Learn about my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -37043,7 +37126,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of customs brokers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37157,11 +37240,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -37574,39 +37657,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 418,000 people (2024, parent-occupation proxy basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "436,400 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistics)",
-        "occupation_scope": "The parent-occupation proxy basis for 13-1041.08 (13-1041.00); the 2024 employment figure comes from the O*NET summary page (based on BLS 2024—2034 projections)",
-        "period": "2024 base year; retrieved 2026-09-19",
+        "occupation_scope": "U.S. SOC 13-1041 Compliance Officers (parent occupation, not brokers separately)",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a22-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Average growth 3%—4% (2024—2034, label \"Average\"; parent-occupation proxy basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+3.8%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "The parent-occupation proxy basis for 13-1041.08 (13-1041.00); projection label Average (3%—4%), a change in the total over the projection period, not an individual probability of being hired",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. SOC 13-1041 Compliance Officers (parent occupation, not brokers separately)",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a22-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 33,300 (annual average 2024—2034, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "32,700 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Annual average job openings (including growth and replacement)",
-        "occupation_scope": "The parent-occupation proxy basis for 13-1041.08 (13-1041.00); openings are an annual average for 2024—2034, including positions arising from growth and replacement",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. SOC 13-1041 Compliance Officers (parent occupation, not brokers separately)",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a22-bls-projections"
         ]
       },
       {
@@ -37658,39 +37741,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 436,400 people (2025; Compliance Officers 13-1041.00 parent occupation)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "436,400 jobs (2025)",
         "fact_id": "g5-employment-2025",
         "market": "United States",
         "measure": "Employment size (stock statistics)",
-        "occupation_scope": "Compliance Officers 13-1041.00 parent occupation; not a separate statistic for 13-1041.08",
-        "period": "2025 base year; retrieved 2026-10-09",
+        "occupation_scope": "U.S. SOC 13-1041 Compliance Officers (parent occupation, not brokers separately)",
+        "period": "2025",
         "source_refs": [
-          "g5-onet-current"
+          "a22-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Average growth 3%–4% (2025–2035; Compliance Officers parent occupation)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+3.8%",
         "fact_id": "g5-growth-2025-2035",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "Compliance Officers 13-1041.00 parent occupation; not a separate statistic for 13-1041.08",
-        "period": "2025–2035 projection period; retrieved 2026-10-09",
+        "occupation_scope": "U.S. SOC 13-1041 Compliance Officers (parent occupation, not brokers separately)",
+        "period": "2025–2035",
         "source_refs": [
-          "g5-onet-current"
+          "a22-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 32,700 per year (2025–2035; parent occupation, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "32,700 annually (including replacements)",
         "fact_id": "g5-openings-2025-2035",
         "market": "United States",
         "measure": "Annual average job openings (including growth and replacement)",
-        "occupation_scope": "Compliance Officers 13-1041.00 parent occupation; not a separate statistic for 13-1041.08",
-        "period": "2025–2035 projection period; retrieved 2026-10-09",
+        "occupation_scope": "U.S. SOC 13-1041 Compliance Officers (parent occupation, not brokers separately)",
+        "period": "2025–2035",
         "source_refs": [
-          "g5-onet-current"
+          "a22-bls-projections"
         ]
       },
       {
@@ -37703,6 +37786,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Two posts, a logistics junior-college credential, CNY 6,000–8,000 a month; clearance paperwork, flight requirements and customs messages.",
+        "fact_id": "posting-a22-sh-edi",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "OCS Logistics EDI customs clerk",
+        "period": "2024-09-19",
+        "source_refs": [
+          "a22-sh-edi"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Six posts, junior college, CNY 6,000–8,000 a month; booking, document checks and assisting customs clearance. Open to new graduates.",
+        "fact_id": "posting-a22-sh-docs",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "JKI Logistics documentation clerk (adjacent role)",
+        "period": "2026-09-03",
+        "source_refs": [
+          "a22-sh-docs"
         ]
       }
     ]
@@ -37724,25 +37831,25 @@
         "availability": "available",
         "fact_ref": "median",
         "key": "us_pay",
-        "label": "U.S. median annual wage (2025 wage data, 80,730 dollars/year; parent-occupation proxy basis)"
+        "label": "U.S. median wage · Compliance Officers"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, average 3%—4%; parent-occupation proxy basis)"
+        "label": "U.S. projected employment change (2025–2035) · Compliance Officers"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, about 418,000 people; parent-occupation proxy basis)"
+        "label": "U.S. employment (2025) · Compliance Officers"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. annual average job openings (2024—2034, about 33,300, including growth and replacement)"
+        "label": "U.S. projected annual openings (including replacements) · Compliance Officers"
       },
       {
         "availability": "available",
@@ -37756,17 +37863,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Customs Brokers (O*NET-SOC 13-1041.08) prepare customs documents on behalf of importers and exporters and ensure goods comply with applicable law: covering classifying merchandise under the tariff schedule, preparing and processing import and export documents, obtaining and compiling customs invoices and certificates of origin, calculating and tracking duties and taxes, paying amounts and quoting on behalf of clients, signing documents and assisting with guarantees under a power of attorney, explaining import and export restrictions and quotas, applying for duty concessions, refunds and rebates, and arranging transport, warehousing and distribution and tracking cargo; it should be noted that their U.S. wage, employment and industry data are published on O*NET under the parent occupation \"Compliance Officers\" (13-1041.00), including the 2025 median annual wage of 80,730 dollars (38.81 dollars/hour), about 418,000 people employed in 2024, a 2024—2034 employment projection of average (3%—4%), an estimated annual average of about 33,300 openings including growth and replacement, industry government 37% | finance and insurance 12% | other 51%, the interest code CE, and the industry average proxy basis for Chinese customs brokerage positions together with control points for document consistency, tariff classification, authorization scope and compliance escalation."
+      "text": "Compare customs brokers and documentation clerks, U.S. licensing boundaries, Shanghai job postings, and U.S. parent-occupation statistics."
     },
     "title": {
       "availability": "available",
       "text": "Customs Brokers"
     }
   },
-  "source_content_sha256": "1eeada50df602d2b990d565315bd85947fa10f205cc300d074b12f42348a39fb",
+  "source_content_sha256": "ac3b649028fcd02fc3e8208cd391259cdbce8c3c06e6f7ebd11d261a8a931cc4",
   "subject": {
     "canonical_slug": "customs-brokers",
     "name": "Customs Brokers",
-    "summary": "In the United States, customs brokers correspond to O*NET-SOC 13-1041.08 (Customs Brokers), preparing customs documents on behalf of importers and exporters and ensuring goods comply with applicable law in order to facilitate import and export: classifying merchandise under the tariff schedule, preparing and processing import and export documents, obtaining and compiling customs invoices, certificates of origin and freight control documents; calculating and tracking the duties and taxes owed and paying amounts on behalf of clients; signing documents and arranging or assisting with guarantees on behalf of clients under a power of attorney; advising clients on import and export restrictions, the tariff system, insurance requirements and quotas; applying for duty concessions, refunds and rebates and, where there is a basis, preparing duty protest materials for clients; arranging transport, warehousing and distribution, contracting with freight forwarders, tracking cargo location and arranging insurance; reporting data to government agencies and keeping in contact with customs brokers at other ports to expedite clearance. The preparation level for this occupation is Job Zone Three (SVP 6.0 to below 7.0); on O*NET its wage, employment and industry data are published under the parent occupation \"Compliance Officers\" (13-1041.00), not values collected separately for this subcategory. Comparable positions in China are customs declaration, customs affairs and import/export documentation positions in customs brokerage enterprises and declaring units; their duties and authorization basis do not correspond one-to-one with this U.S. occupational subcategory and cannot be interchanged."
+    "summary": "Check declarations, classification, duties and client authorization, and follow up on customs messages or exceptions. Preparing documents, representing a client and arranging transport are different responsibilities; the title alone does not establish signing authority."
   }
 }

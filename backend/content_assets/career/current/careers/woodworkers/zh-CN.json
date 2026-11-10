@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "按虚构目标、公差和测值判断单项，列C缺测与复核结果两事项，观察细节意愿。"
+              "纸面体验｜纸面核侧板长度与图纸版本。先区分尺寸不符还是图纸变更，交工单负责人核。 "
             ]
           },
           "id": "woodworkers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,13 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "橱柜制造工与台架木工对应O*NET51-7011.00，切割、成形并组装木制产品，制作橱柜、陈列设施及高档家具，或设置操作多种木工机械。工作包含读图、选材配料、尺寸检验、连接装配、五金安装及修整，材料、工艺与成品要求需对应。建筑木工、家具表面修整及专门木工机械岗位范围另分；纸面尺寸题不代设备训练、车间安全条件或实际产品检验。"
+              "木工组涵盖多种制造岗位。本页的柜体与细木工实例侧重按图备料、检查拼合、组装并复核尺寸，其他岗位按实际设备及工序了解。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "woodworkers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-7011.00"
           ],
           "type": "prose"
         }
@@ -25455,13 +25453,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可探索规格检验资料整理，独立核范围并保缺测；机器控制或CAD需求不证明文字AI采用。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：纸面核侧板长度与图纸版本。先区分尺寸不符还是图纸变更，交工单负责人核。"
             ]
           },
           "id": "woodworkers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-7011.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33116,6 +33114,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-7011.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-7011.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-7011.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38633,10 +38658,10 @@
       "text": "橱柜制造工与台架木工"
     }
   },
-  "source_content_sha256": "c0169fad8e1b5f60817cc3c116462afaac100e00cb694d6970de104a8fcc8ef0",
+  "source_content_sha256": "5dcb330ff24e8fd7ff68cc790a02f1f2d515a7920e2a60dc7a085e0e08f7eeed",
   "subject": {
     "canonical_slug": "woodworkers",
     "name": "橱柜制造工与台架木工",
-    "summary": "橱柜制造工与台架木工对应O*NET51-7011.00，切割、成形并组装木制产品，制作橱柜、陈列设施及高档家具，或设置操作多种木工机械。工作包含读图、选材配料、尺寸检验、连接装配、五金安装及修整，材料、工艺与成品要求需对应。建筑木工、家具表面修整及专门木工机械岗位范围另分；纸面尺寸题不代设备训练、车间安全条件或实际产品检验。"
+    "summary": "木工组涵盖多种制造岗位。本页的柜体与细木工实例侧重按图备料、检查拼合、组装并复核尺寸，其他岗位按实际设备及工序了解。"
   }
 }

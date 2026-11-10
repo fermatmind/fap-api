@@ -36,13 +36,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -63,7 +63,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -1542,7 +1542,7 @@
         "status": "pending_mapping"
       },
       "item:automotive-engineers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:automotive-engineers.sources.source-card.1": {
         "status": "mapped"
@@ -23186,7 +23186,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：汽车工程师不是「技术员层级的试验执行」，而是用计算机辅助设计技术为车辆结构件、发动机、变速器或其他车辆系统开发新的或改进的设计，并指导车辆或部件的建造、改装或测试：按系统级试验验证性能与安全，做失效与变异与根本原因分析，标定包括控制算法在内的车辆系统，制定工程规范与质量控制标准；只想拿现成方案、不愿为设计假设与验证依据负责的人不适合。"
+              "到 09 做 DV-67，先独立交两版方案评审和一页交接。"
             ]
           },
           "id": "automotive-engineers.quick-decision.fit-decision-checklist.1",
@@ -23201,7 +23201,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你能读懂图纸、标准与规范，愿意用工程分析（力学、热学、电子与控制）把需求转成可验证的设计方案，愿意按试验与标定方法核对性能与安全指标，能在依据不明、试验条件不满足或合规要求变化时停下来核实。"
+              "适合愿意把重量、安全、装配和成本条件写清楚，能解释方案取舍，并保留版本和验证记录的人。"
             ]
           },
           "id": "automotive-engineers.quick-decision.fit-decision-checklist.2",
@@ -23215,7 +23215,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停投入的条件：你还没有在任何有监督的条件下完成过一次完整的设计—分析—试验—复核闭环，或只能靠「喜欢车」说明兴趣；也不要把课程成绩或某个软件的熟练度当作可以独立签署设计结论、标定参数或合规判定的证明。涉及车辆安全、排放与新能源系统的设计决定必须按适用标准与机构流程执行并留有可追溯的依据；本页不提供设计、试验或现场作业指令。"
+              "先问谁拥有设计、验证和批准权限。图纸修改、试验与最终签发按实际职责分工。"
             ]
           },
           "id": "automotive-engineers.quick-decision.fit-decision-checklist.3",
@@ -23231,12 +23231,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历与权限必须分开核对：O*NET 把 17-2141.02 列为 Job Zone Four（SVP 7.0 至 <8.0），页面公布的学历构成中 71% 为要求学士学位、14% 为要求硕士学位、5% 为要求高中后证书；BLS 职业展望手册把同族职业的典型入门学历列为学士学位，并要求无相关工作经验与无在职培训，同时指出美国各州与哥伦比亚特区都要求面向公众提供服务的机械工程师取得执业许可。中国大陆侧「汽车工程师」未在《职业分类大典（2022 年版）》中单列，岗位归入工程技术人员中类，具体岗位要求由用人单位与行业规定决定。学历、工程专业认证、执业许可（PE）、机构内部设计评审授权与产品准入许可是不同状态，须按雇主、岗位与所在地逐项核验。"
+              "如果更喜欢搭试验、记录数据和复核异常，先比较汽车工程技术员。入行见 09。"
             ]
           },
           "id": "automotive-engineers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "neighbor-17-3027-01",
             "onet"
           ],
           "type": "prose"
@@ -23246,12 +23246,11 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个把需求转成可验证设计并对设计假设负责的工程岗位，核心是设计开发、分析验证、标定与试验、失效与根本原因分析、规范与质量标准制定、以及跨职能协作，而不是对车的兴趣或某款软件的熟练度。"
+              "适合愿意把重量、安全、装配和成本条件写清楚，能解释方案取舍，并保留版本和验证记录的人。"
             ]
           },
           "id": "automotive-engineers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23319,11 +23318,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜100% 每天使用电子邮件，75% 每天需要面对面讨论，70% 每天电话交谈，70% 每天在环境受控的室内工作，90% 为规律工作日程，14% 每天佩戴常规防护或安全设备。\n主要装备与系统｜计算机辅助设计（AutoCAD、CATIA、SolidWorks 等）与工程分析软件（MATLAB、Simulink、Minitab 等）、试验台与数据采集系统、标定与诊断工具、样车与试验样件。\n任务节奏｜71% 的工作周超过 40 小时，19% 每天面临时间压力，48%每周一次以上但非每天有时间压力，57% 超过一半时间坐着，70% 少于一半时间站立，84% 少于一半时间行走或跑动。\n协作对象｜与设计工程师与工程支持人员、试验与标定团队、采购与制造与质量控制等职能部门协作；70% 认为与工作团队合作极其重要，24% 与他人持续接触，协调或带领他人（题目明确非主管/组长）：45%认为很重要、20%极其重要，不能当65%担任领导。\n竞争与压力｜43% 认为竞争激烈，38% 认为中等竞争；33% 认为错误的后果非常严重，43%认为较严重（Fairly serious）；38% 认为决定对同事或公司结果有重要影响；20% 对他人的健康与安全承担非常高的责任、35% 为高责任。\n合规与安全｜中国大陆新能源汽车准入规章适用境内生产企业及其境内使用产品：企业须具备规定生产、一致性、售后与安全能力；产品须符合专项及常规标准、安全条件并经国家认定检测机构检测，技术审查与公告由规定机构和MIIT办理。不是个人工程师执照或培训证。2026年第1号准入审查要求公告自2027-01-01施行，当前不能冒已实施，附件全条件未读。 GB7258-2017官方平台状态现行（含第2号修改单）；GB7258-2026于2026-08-27发布、2027-07-01实施，当前状态即将实施。旧20250058-Q-312修订项目提出的车门、应急救援和电池监测等只是修订说明，不能当现行或最终条文。本轮仅取得两版状态元数据，未得最终标准全文及完整过渡条件，不以项目说明授现场作业。 EPA车辆测试法规页为法规概览与链接索引，说明制造商依适用CFR测试程序，1066与86等按车型和年型适用；86B仅通过2021年型条件不能当全现行车辆统一要求。本轮未读全部CFR及车型认证程序，不是个人工程师认证或全现场操作规则。\n记录与复盘｜需求、设计假设、分析方法与版本、试验与标定条件与结论需要可追溯；48% 认为精确或准确极其重要（另有 48% 认为非常重要），38% 有大量自由决定任务与优先级与目标，14%每天作出决定（24%每周但非每天），14% 认为重复相同任务极其重要。\n技能与训练｜O*NET 把该职业列为 Job Zone Four（SVP 7.0 至 <8.0）；基本技能以批判性思维（78）与阅读理解（75）最靠前，可迁移技能包含复杂问题解决、判断与决策、运营分析、系统分析与系统评估；知识以工程与技术、物理、数学、机械与设计为主；能力以演绎推理、归纳推理、口头理解、口头表达与问题敏感性最靠前。\n学历与训练补充｜O*NET新聘学历问卷：71%学士、14%硕士、5%高中后证书，是新聘需要的学历受访比例，非在岗构成、父级相同问卷或统一门槛。Zone4/SVP7至<8描述分区一般需较多技能知识经验、多数需四年学士但有例外，通常数年相关经验、在岗或职业训练，不是本职业所有岗位固定年限。BLS父级典型学士（机械工程或机械工程技术）、经验None/OJT None为统计分类，非要求没有经验或禁止培训。\n准入与授权｜BLS父级OOH：入门机械工程师职位不要求执业许可，所有州及DC对面向公众出售工程服务的机械工程师要求许可；PE可监督、签项目和向公众服务。常见认可教育、FE、相关经验（通常至少4年）及PE考试，具体州和替代路径另核；FE通过仅EIT/EI路径，不等PE或产品准入决定权。 中国特种作业培训考核规定自2026-06-01施行，按目录和实际任务核相应培训考核与持证，内部授权监督不能代法定条件；目录未全核，不要求所有汽车工程师同一电工作业证。 美国OSHA1910.333电气工作原则先断电，带电例外须条文条件和合格人员；锁挂牌验电核真实程序。1910.147管维修维护意外启动或储能危险，普通生产运行非一概适用，电气利用装置危险按Subpart S区分。所读相关适用和a—c部分，非全部燃料消防环保或停止恢复程序。\n行业与雇主｜当前O*NET宽行业数据取自父级17-2141：制造44%、专业科学技术服务32%、其他24%，非汽车细类或中国分布。OOH细行业就业为建筑工程相关服务20%、机械制造14%、运输设备制造10%、科学研发7%、计算机电子制造6%，分类层级不同。 整车零部件、试验标定及咨询作为编辑比较方向，未读真实招聘。"
+              "工作环境｜100% 每天使用电子邮件，75% 每天需要面对面讨论，70% 每天电话交谈，70% 每天在环境受控的室内工作，14% 每天佩戴常规防护或安全设备。\n主要装备与系统｜计算机辅助设计（AutoCAD、CATIA、SolidWorks 等）与工程分析软件（MATLAB、Simulink、Minitab 等）、试验台与数据采集系统、标定与诊断工具、样车与试验样件。\n任务节奏｜71% 的工作周超过 40 小时，19% 每天面临时间压力，48%每周一次以上但非每天有时间压力，57% 超过一半时间坐着，70% 少于一半时间站立。\n协作对象｜与设计工程师与工程支持人员、试验与标定团队、采购与制造与质量控制等职能部门协作；70% 认为与工作团队合作极其重要，24% 与他人持续接触，协调或带领他人（题目明确非主管/组长）：45%认为很重要、20%极其重要，不能当65%担任领导。\n竞争与压力｜43% 认为竞争激烈，38% 认为中等竞争；33% 认为错误的后果非常严重，43%认为较严重（Fairly serious）；38% 认为决定对同事或公司结果有重要影响；20% 对他人的健康与安全承担非常高的责任、35% 为高责任。\n合规与安全｜中国大陆新能源汽车准入规章适用境内生产企业及其境内使用产品：企业须具备规定生产、一致性、售后与安全能力；产品须符合专项及常规标准、安全条件并经国家认定检测机构检测，技术审查与公告由规定机构和MIIT办理。不是个人工程师执照或培训证。2026年第1号准入审查要求公告自2027-01-01施行，当前不能冒已实施，附件全条件未读。 国家标准公开平台显示 GB 7258-2017 现行。GB 7258-2026 于 2026-08-27 发布，将于 2027-07-01 实施。旧修订项目不作现行或最终条款引用。 EPA车辆测试法规页为法规概览与链接索引，说明制造商依适用CFR测试程序，1066与86等按车型和年型适用；86B仅通过2021年型条件不能当全现行车辆统一要求。本轮未读全部CFR及车型认证程序，不是个人工程师认证或全现场操作规则。\n记录与复盘｜需求、设计假设、分析方法与版本、试验与标定条件与结论需要可追溯；48% 认为精确或准确极其重要（另有 48% 认为非常重要），38% 有大量自由决定任务与优先级与目标，14%每天作出决定（24%每周但非每天），14% 认为重复相同任务极其重要。\n技能与训练｜O*NET 把该职业列为 Job Zone Four（SVP 7.0 至 <8.0）；基本技能以批判性思维（78）与阅读理解（75）最靠前，可迁移技能包含复杂问题解决、判断与决策、运营分析、系统分析与系统评估；知识以工程与技术、物理、数学、机械与设计为主；能力以演绎推理、归纳推理、口头理解、口头表达与问题敏感性最靠前。\n学历与训练补充｜O*NET新聘学历问卷：71%学士、14%硕士、5%高中后证书，是新聘需要的学历受访比例，非在岗构成、父级相同问卷或统一门槛。Zone4/SVP7至<8描述分区一般需较多技能知识经验、多数需四年学士但有例外，通常数年相关经验、在岗或职业训练，不是本职业所有岗位固定年限。BLS父级典型学士（机械工程或机械工程技术）、经验None/OJT None为统计分类，非要求没有经验或禁止培训。\n准入与授权｜BLS父级OOH：入门机械工程师职位不要求执业许可，所有州及DC对面向公众出售工程服务的机械工程师要求许可；PE可监督、签项目和向公众服务。常见认可教育、FE、相关经验（通常至少4年）及PE考试，具体州和替代路径另核；FE通过仅EIT/EI路径，不等PE或产品准入决定权。 中国特种作业培训考核规定自2026-06-01施行，按目录和实际任务核相应培训考核与持证，内部授权监督不能代法定条件；目录未全核，不要求所有汽车工程师同一电工作业证。 美国OSHA1910.333电气工作原则先断电，带电例外须条文条件和合格人员；锁挂牌验电核真实程序。1910.147管维修维护意外启动或储能危险，普通生产运行非一概适用，电气利用装置危险按Subpart S区分。所读相关适用和a—c部分，非全部燃料消防环保或停止恢复程序。\n行业与雇主｜O*NET 17-2141.02 行业子表列制造业 44%、专业科学和技术服务业 32%、其他 24%。该子表未单列统计年份，也未说明是否使用父组分母。OOH细行业就业为建筑工程相关服务20%、机械制造14%、运输设备制造10%、科学研发7%、计算机电子制造6%，分类层级不同。 北汽福田和东风为两个历史样本，整车零部件、试验标定及咨询岗位仍须按雇主核。"
             ]
           },
           "id": "automotive-engineers.profile.work-context-block.1",
           "source_refs": [
+            "onet-work-context",
+            "foton-rd-2026",
+            "dongfeng-rd-2027",
             "bls",
             "facilities",
             "census",
@@ -23420,7 +23422,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
+              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（BLS 职业展望手册取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
             ]
           },
           "id": "automotive-engineers.profile.onet-structured-fields-block.4",
@@ -23451,7 +23453,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "当前O*NET宽行业数据取自父级17-2141：制造44%、专业科学技术服务32%、其他24%，非汽车细类或中国分布。OOH细行业就业为建筑工程相关服务20%、机械制造14%、运输设备制造10%、科学研发7%、计算机电子制造6%，分类层级不同。 2025美国本职业关联唯一招聘热门技术36项，比例为提及该技能的唯一招聘数占该职业关联全部唯一招聘数：AutoCAD13%、Office13%、Excel11%、PowerPoint8%、Python8%、SolidWorks7%、MATLAB6%、Outlook4%、C++3%、Word2%、C2%，SQL/Perl/Jenkins/JIRA/Salesforce/Linux/Git各1%；C#/SAP/Visio/Project不足1%，另14项比例Not available不能填零。热门表7个InDemand标记不等摘要10个InDemand技能，标签表示招聘常列技能，不证明劳动力短缺、在岗采用率或所有岗位门槛。"
+              "O*NET 17-2141.02 行业子表列制造业 44%、专业科学和技术服务业 32%、其他 24%。该子表未单列统计年份，也未说明是否使用父组分母。OOH细行业就业为建筑工程相关服务20%、机械制造14%、运输设备制造10%、科学研发7%、计算机电子制造6%，分类层级不同。 2025美国本职业关联唯一招聘热门技术36项，比例为提及该技能的唯一招聘数占该职业关联全部唯一招聘数：AutoCAD13%、Office13%、Excel11%、PowerPoint8%、Python8%、SolidWorks7%、MATLAB6%、Outlook4%、C++3%、Word2%、C2%，SQL/Perl/Jenkins/JIRA/Salesforce/Linux/Git各1%；C#/SAP/Visio/Project不足1%，另14项比例Not available不能填零。热门表7个InDemand标记不等摘要10个InDemand技能，标签表示招聘常列技能，不证明劳动力短缺、在岗采用率或所有岗位门槛。"
             ]
           },
           "id": "automotive-engineers.profile.onet-structured-fields-block.5",
@@ -23679,12 +23681,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 17-2141.02 列为 Job Zone Four（SVP 7.0 至 <8.0），通常需要四年制学士学位，并需要大量相关工作技能、知识或经验；页面公布的学历构成中71% 为要求学士学位、14% 为要求硕士学位、5% 为要求高中后证书。BLS 职业展望手册把同族职业的典型入门学历列为学士学位（机械工程或机械工程技术方向），并要求无相关工作经验与无在职培训。O*NET 另列出 36 项热门技术（含 Autodesk AutoCAD 13%、Microsoft Office 13%、Excel 11%、PowerPoint 8%、Python 8%、SolidWorks 7%、MATLAB 6% 等，页面按雇主招聘公告中的出现比例给出）。中国大陆侧以车辆工程、机械工程与自动化等专业方向培养为主，具体要求由用人单位规定。"
+              "O*NET 17-2141.02 是 Job Zone Four。其新聘所需教育问卷中，71% 选择学士、14% 硕士、5% 高中后证书。这是细项受访回答。BLS 对 17-2141 上级职业列学士为典型学历。"
             ]
           },
           "id": "automotive-engineers.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
+            "bls",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -23753,13 +23756,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧为 O*NET 17-2141.02（Automotive Engineers）；该代码是 17-2141 Mechanical Engineers 下的细类，O*NET 展示的工资、就业与行业数据取自 17-2141.00 Mechanical Engineers。中国大陆须先辨认岗位属于整车企业的整车与系统开发部门、零部件企业的产品开发部门、新能源与三电系统开发部门、试验与标定中心，还是工程咨询与技术服务公司，因为不同用人单位的开发流程、评审与合规要求差别很大。"
+              "美国 O*NET 17-2141.02 是汽车工程师细项；工资与就业用上级机械工程师 17-2141。行业子表单列，未说明是否沿用父组分母。中国大陆岗位先核对雇主与职责，例如整车、零部件、动力系统、试验标定或工程服务。"
             ]
           },
           "id": "automotive-engineers.profile.career-quick-answers-block.24",
           "source_refs": [
             "onet",
-            "onet"
+            "ep-table",
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -23782,12 +23786,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧以学士学位（机械工程或机械工程技术方向）为主，与同族 17-2141.00 的学历构成一致（71% 学士学位、14% 硕士学位、5% 高中后证书）；中国大陆以车辆工程、机械工程与自动化、动力机械与工程等专业方向为主，具体学历要求由用人单位规定。"
+              "O*NET 17-2141.02 是 Job Zone Four。其新聘所需教育问卷中，71% 选择学士、14% 硕士、5% 高中后证书。这是细项受访回答。BLS 对 17-2141 上级职业列学士为典型学历。"
             ]
           },
           "id": "automotive-engineers.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
+            "bls",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -23840,12 +23845,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "试验与标定作业须符合适用的安全与环保要求（电气与高压、机械与旋转设备、燃料与排气、通风与消防、个人防护与应急处理）；新能源高压系统的作业须按专门规程执行。O*NET 工作情境显示 70% 每天在环境受控的室内工作、14% 每天佩戴常规防护或安全设备、48% 认为精确极其重要；GB 7258 修订项目另提出新能源汽车在事故断电等异常情况下车门应能从内外开启、须在使用说明书中给出动力电池位置与解除高压系统的应急救援要求，并增加动力电池电压、电流、温度参数监测与预警要求。本页不构成设计、试验或现场作业指令。"
+              "样车试验和标定前，核对任务授权、适用的安全要求与防护。国家标准公开平台显示 GB 7258-2017 现行，GB 7258-2026 将于 2027-07-01 实施。旧修订项目的提案不能用作现行或最终条款。这里仅核标准状态，不提供作业方法。"
             ]
           },
           "id": "automotive-engineers.profile.career-quick-answers-block.30",
           "source_refs": [
-            "onet",
+            "gb7258-2017-status",
+            "gb7258-2026-status",
             "onet"
           ],
           "type": "prose"
@@ -23870,7 +23876,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作情境显示 71% 的工作周超过 40 小时、90% 为规律工作日程、19% 每天面临时间压力、43% 认为竞争激烈；常见安排包含项目节点与样车与试验周期驱动的加班。比较岗位时把工时结构、加班与项目奖金办法写入书面条件。"
+              "工作情境显示 71% 的工作周超过 40 小时、19% 每天面临时间压力、43% 认为竞争激烈；常见安排包含项目节点与样车与试验周期驱动的加班。比较岗位时把工时结构、加班与项目奖金办法写入书面条件。"
             ]
           },
           "id": "automotive-engineers.profile.career-quick-answers-block.32",
@@ -23900,7 +23906,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "新能源与替代动力、计算机化汽车应用（远程遥测、智能交通系统、人工智能、自动控制）与控制算法与标定更新较快（O*NET 列出 36 项热门技术，其中 Python 8%、MATLAB 6%、C++ 3%、C 2%、SQL 1% 等，并另列 10 项紧缺技能），需要持续的继续培训与工具版本与方法维护；入职前确认培训安排、设计评审与变更控制与数据复核机制。"
+              "新能源与替代动力、计算机化汽车应用（远程遥测、智能交通系统、人工智能、自动控制）与控制算法与标定更新较快（O*NET 列出 36 项热门技术，其中 Python 8%、MATLAB 6%、C++ 3%、C 2%、SQL 1% 等，并另列 10 项招聘常列技能），需要持续的继续培训与工具版本与方法维护；入职前确认培训安排、设计评审与变更控制与数据复核机制。"
             ]
           },
           "id": "automotive-engineers.profile.career-quick-answers-block.34",
@@ -24426,7 +24432,7 @@
                 "url": "https://www.onetonline.org/link/industry/17-2141.02"
               },
               {
-                "entity": "O*NET 17-2141.02 职业摘要（就业与预测字段）",
+                "entity": "O*NET 17-2141.02 职业摘要（职业任务）",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/17-2141.02"
@@ -24450,22 +24456,22 @@
                 "url": "https://www.onetonline.org/link/details/17-2141.02"
               },
               {
-                "entity": "BLS 职业展望手册：Mechanical Engineers",
+                "entity": "O*NET 招聘工具：汽车工程师细项",
                 "id": "link-10",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/mechanical-engineers.htm"
+                "url": "https://www.onetonline.org/link/hot_tech/17-2141.02"
               },
               {
-                "entity": "BLS 职业展望手册：Mechanical Engineers（就业与预测）",
+                "entity": "BLS 表 1.2：机械工程师上级就业预测",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/mechanical-engineers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
+                "entity": "O*NET 17-2141.02 行业子表",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.onetonline.org/link/industry/17-2141.02"
               },
               {
                 "entity": "O*NET 17-2141.02 职业摘要",
@@ -24492,7 +24498,7 @@
                 "url": "https://www.onetonline.org/link/industry/17-2141.02"
               },
               {
-                "entity": "O*NET 17-2141.02 职业摘要（就业与预测字段）",
+                "entity": "O*NET 17-2141.02 职业摘要（职业任务）",
                 "id": "link-17",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/17-2141.02"
@@ -24652,7 +24658,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得本细类生成AI采用率、提效、整体替代或就业因果测量。建模、仿真、标定数据和文档是编辑试验方向；O*NET计算机化汽车应用研究含AI，非GenAI采用证据。全球ILO/NIST介绍不支持本细类永不替代。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "本轮未取得本细类生成AI采用率、提效、整体替代或就业因果测量。建模、仿真、标定数据和文档是编辑试验方向；O*NET计算机化汽车应用研究含AI，非GenAI采用证据。全球ILO/NIST介绍不支持本细类永不替代。 AI 任务影响估算 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "automotive-engineers.ai-impact.ai-impact-table.18",
@@ -24796,11 +24802,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "当前O*NET宽行业数据取自父级17-2141：制造44%、专业科学技术服务32%、其他24%，非汽车细类或中国分布。OOH细行业就业为建筑工程相关服务20%、机械制造14%、运输设备制造10%、科学研发7%、计算机电子制造6%，分类层级不同。"
+              "O*NET 17-2141.02 行业子表列制造业 44%、专业科学和技术服务业 32%、其他 24%。子表未单列统计年份，也未说明是否使用父组分母。"
             ]
           },
           "id": "automotive-engineers.ai-impact.ai-impact-table.28",
           "source_refs": [
+            "r2-pay-2",
             "onet"
           ],
           "type": "prose"
@@ -24810,7 +24817,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 17-2141.02 职业摘要（就业与预测字段）"
+              "O*NET 17-2141.02 职业摘要（职业任务）"
             ]
           },
           "id": "automotive-engineers.ai-impact.ai-impact-table.29",
@@ -24992,12 +24999,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为美国口径（工资、就业与行业数据取自同族 17-2141.00），不能外推为中国大陆；官方职责不等于具体机构的设计评审授权或执业与合规判定资格。"
+              "O*NET 任务为美国汽车工程师细项；工资、就业使用上级机械工程师 17-2141，不能外推为大陆数据。官方任务说明也不授予设计评审或执业权。"
             ]
           },
           "id": "automotive-engineers.ai-impact.ai-impact-table.41",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -25174,11 +25182,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 17-2141.02 职业摘要（就业与预测字段）"
+              "BLS 表 1.2 与职业展望手册：机械工程师上级 17-2141"
             ]
           },
           "id": "automotive-engineers.ai-impact.ai-impact-table.54",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -25202,7 +25211,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
+              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（BLS 职业展望手册取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
             ]
           },
           "id": "automotive-engineers.ai-impact.ai-impact-table.56",
@@ -25260,7 +25269,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "当前O*NET宽行业数据取自父级17-2141：制造44%、专业科学技术服务32%、其他24%，非汽车细类或中国分布。OOH细行业就业为建筑工程相关服务20%、机械制造14%、运输设备制造10%、科学研发7%、计算机电子制造6%，分类层级不同。"
+              "O*NET 17-2141.02 行业子表列制造业 44%、专业科学和技术服务业 32%、其他 24%。子表未单列统计年份，也未说明是否使用父组分母。"
             ]
           },
           "id": "automotive-engineers.ai-impact.ai-impact-table.60",
@@ -25305,7 +25314,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。 任务暴露、采用、生产率和就业对象不同。OOH谈创新自动化设备带来父级需求，非本细类GenAI因果。"
+              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（BLS 职业展望手册取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。 任务暴露、采用、生产率和就业对象不同。OOH谈创新自动化设备带来父级需求，非本细类GenAI因果。"
             ]
           },
           "id": "automotive-engineers.ai-impact.ai-impact-table.63",
@@ -25352,7 +25361,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方数学物理工程基础和Programming44、招聘Python8%/MATLAB6%/C++3%是群体技能信号，不证明所有入门无需编程或比例日益上升；是否要求具体工具须查真实岗位，本轮未读招聘。"
+              "O*NET 的编程技能分数与美国招聘工具出现率是不同指标。福田和东风的历史样本不能确定统一编程要求。看具体岗位要求哪些工具。"
             ]
           },
           "id": "automotive-engineers.ai-impact.ai-impact-table.66",
@@ -25412,7 +25421,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
+              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（BLS 职业展望手册取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
             ]
           },
           "id": "automotive-engineers.ai-impact.ai-impact-table.70",
@@ -25472,7 +25481,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未得本细类可靠岗位消失年份测量；美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。 预测不能推GenAI替代年份，也不断所有资料均无。"
+              "本轮未得本细类可靠岗位消失年份测量；美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（BLS 职业展望手册取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。 预测不能推GenAI替代年份，也不断所有资料均无。"
             ]
           },
           "id": "automotive-engineers.ai-impact.ai-impact-table.74",
@@ -25549,7 +25558,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核实际需求判据、模型与样件状态、法规版本、人员分工与数据范围，不以职业名称获全设计权。GB7258-2017官方平台状态现行（含第2号修改单）；GB7258-2026于2026-08-27发布、2027-07-01实施，当前状态即将实施。旧20250058-Q-312修订项目提出的车门、应急救援和电池监测等只是修订说明，不能当现行或最终条文。本轮仅取得两版状态元数据，未得最终标准全文及完整过渡条件，不以项目说明授现场作业。"
+              "核实际需求判据、模型与样件状态、法规版本、人员分工与数据范围，不以职业名称获全设计权。国家标准公开平台显示 GB 7258-2017 现行。GB 7258-2026 于 2026-08-27 发布，将于 2027-07-01 实施。旧修订项目不作现行或最终条款引用。"
             ]
           },
           "id": "automotive-engineers.ai-impact.ai-impact-table.79",
@@ -26420,11 +26429,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮未得中国精确职业工资；行业及岗位大类均值分开参照，不是零收入。"
+              "大陆历史研发岗位：北汽福田与东风"
             ]
           },
           "id": "automotive-engineers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
+            "foton-rd-2026",
+            "dongfeng-rd-2027",
             "nbs",
             "cnclass"
           ],
@@ -26435,11 +26446,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "缺口在本页以「证据不足」标记，行业代理由制造业平均工资承担、岗位类别代理由规模以上企业专业技术人员平均工资承担，两者分别展示、不合并为薪资区间；这不是零收入，而是证据无法支持该精度。"
+              "河北工业大学就业网 2026-03-05 刊载的北汽福田北京汽车研发工程师：本科，30 人，标题列 6,000–8,000 元，原页未注明该报价的计薪周期。涉及性能分析、标定、试制试验和整车或部件设计。"
             ]
           },
           "id": "automotive-engineers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
+            "foton-rd-2026",
+            "dongfeng-rd-2027",
             "nbs",
             "cnclass"
           ],
@@ -26648,11 +26661,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET70%每日受控室内、14%每日普通防护是群体问卷，非所有试验防护条件。GB7258-2017官方平台状态现行（含第2号修改单）；GB7258-2026于2026-08-27发布、2027-07-01实施，当前状态即将实施。旧20250058-Q-312修订项目提出的车门、应急救援和电池监测等只是修订说明，不能当现行或最终条文。本轮仅取得两版状态元数据，未得最终标准全文及完整过渡条件，不以项目说明授现场作业。 中国特种作业培训考核规定自2026-06-01施行，按目录和实际任务核相应培训考核与持证，内部授权监督不能代法定条件；目录未全核，不要求所有汽车工程师同一电工作业证。 全设备消防燃料废物程序未核。"
+              "O*NET70%每日受控室内、14%每日普通防护是群体问卷，非所有试验防护条件。国家标准公开平台显示 GB 7258-2017 现行。GB 7258-2026 于 2026-08-27 发布，将于 2027-07-01 实施。旧修订项目不作现行或最终条款引用。 中国特种作业培训考核规定自2026-06-01施行，按目录和实际任务核相应培训考核与持证，内部授权监督不能代法定条件；目录未全核，不要求所有汽车工程师同一电工作业证。 全设备消防燃料废物程序未核。"
             ]
           },
           "id": "automotive-engineers.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
+            "onet-work-context",
             "bls",
             "privacy",
             "gb7258-2017-status",
@@ -26784,11 +26798,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "场景比较需要用人单位性质、开发方向、项目周期与计酬口径一致；行业与岗位类别代理不能替代书面薪酬条件。"
+              "东风汽车集团研发总院 2027 届秋招所列整车工程研发岗涵盖平台布置、车身结构、热管理、整车性能及虚拟验证。公告不是某一工序的统一资格，也不把校园招聘首页金额作为该岗位工资。"
             ]
           },
           "id": "automotive-engineers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
+            "foton-rd-2026",
+            "dongfeng-rd-2027",
             "nbs",
             "cnclass"
           ],
@@ -26857,11 +26873,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与汽车工程师精确对应的全国职业月薪分布。"
+              "北汽福田报价未标计薪周期，东风校招总页不能推定该岗薪资。两者不能推算全国职业工资。"
             ]
           },
           "id": "automotive-engineers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
+            "foton-rd-2026",
+            "dongfeng-rd-2027",
             "onet"
           ],
           "type": "prose"
@@ -26994,7 +27012,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 17-2141.02 全国工资分位（同族 17-2141.00 口径）｜https://www.onetonline.org/link/localwages/17-2141.02；O*NET 17-2141.02 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/17-2141.02；BLS 职业展望手册：Mechanical Engineers｜https://www.bls.gov/ooh/architecture-and-engineering/mechanical-engineers.htm"
+              "O*NET 17-2141.02 全国工资分位（同族 17-2141.00 口径）｜https://www.onetonline.org/link/localwages/17-2141.02；O*NET 17-2141.02 职业摘要（职业任务）｜https://www.onetonline.org/link/summary/17-2141.02；BLS 职业展望手册：Mechanical Engineers｜https://www.bls.gov/ooh/architecture-and-engineering/mechanical-engineers.htm"
             ]
           },
           "id": "automotive-engineers.us-salary.career-snapshot-secondary-locale.8",
@@ -27176,7 +27194,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
+              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（BLS 职业展望手册取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
             ]
           },
           "id": "automotive-engineers.us-salary.career-snapshot-secondary-locale.20",
@@ -27208,7 +27226,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
+              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（BLS 职业展望手册取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
             ]
           },
           "id": "automotive-engineers.us-salary.career-snapshot-secondary-locale.22",
@@ -27240,7 +27258,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
+              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（BLS 职业展望手册取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
             ]
           },
           "id": "automotive-engineers.us-salary.career-snapshot-secondary-locale.24",
@@ -27418,7 +27436,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH实际5个细行业中位，此数为父级非汽车细类。另计算机电子制造106,870美元/年。宽行业44/32/24不能与细行业中位混同。"
+              "BLS OOH 工资表为上级 17-2141 雇员的行业年薪中位数。"
             ]
           },
           "id": "automotive-engineers.us-salary.career-snapshot-secondary-locale.36",
@@ -27463,7 +27481,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH实际5个细行业中位，此数为父级非汽车细类。另计算机电子制造106,870美元/年。宽行业44/32/24不能与细行业中位混同。"
+              "BLS OOH 工资表为上级 17-2141 雇员的行业年薪中位数。"
             ]
           },
           "id": "automotive-engineers.us-salary.career-snapshot-secondary-locale.39",
@@ -27508,7 +27526,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH实际5个细行业中位，此数为父级非汽车细类。另计算机电子制造106,870美元/年。宽行业44/32/24不能与细行业中位混同。"
+              "BLS OOH 工资表为上级 17-2141 雇员的行业年薪中位数。"
             ]
           },
           "id": "automotive-engineers.us-salary.career-snapshot-secondary-locale.42",
@@ -27553,7 +27571,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH实际5个细行业中位，此数为父级非汽车细类。另计算机电子制造106,870美元/年。宽行业44/32/24不能与细行业中位混同。"
+              "BLS OOH 工资表为上级 17-2141 雇员的行业年薪中位数。"
             ]
           },
           "id": "automotive-engineers.us-salary.career-snapshot-secondary-locale.45",
@@ -27713,7 +27731,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27725,19 +27743,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "航空航天工程师",
@@ -27818,7 +27836,7 @@
                 "url": "https://www.onetonline.org/link/industry/17-2141.02"
               },
               {
-                "entity": "O*NET 17-2141.02 职业摘要（就业与预测字段）",
+                "entity": "O*NET 17-2141.02 职业摘要（职业任务）",
                 "id": "link-20",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/17-2141.02"
@@ -28141,7 +28159,7 @@
           },
           "id": "automotive-engineers.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
+            "onet-work-context",
             "onet"
           ],
           "type": "prose"
@@ -28569,6 +28587,7 @@
           },
           "id": "automotive-engineers.fit.personality-fit-block.47",
           "source_refs": [
+            "onet-work-context",
             "onet",
             "bls"
           ],
@@ -28728,11 +28747,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "写一页虚构工程说明：包括需求与约束、设计假设与替代方案、分析方法与判据、数据与结论与限制，并请有经验的人复核、记录修改理由。这不构成设计、试验或现场作业指令，也不替代岗位培训与设计评审授权。"
+              "在 09 用 DV-67 核两方案、图纸版本和评审权限。先交两版判断。"
             ]
           },
           "id": "automotive-engineers.fit.personality-fit-block.58",
           "source_refs": [
+            "dv67-editor",
             "onet"
           ],
           "type": "prose"
@@ -28881,7 +28901,7 @@
                 "url": "https://www.onetonline.org/link/details/17-2141.02"
               },
               {
-                "entity": "O*NET 17-2141.02 职业摘要（就业与预测字段）",
+                "entity": "O*NET 17-2141.02 职业摘要（职业任务）",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/17-2141.02"
@@ -28915,7 +28935,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本节描述任务相关可能风险和真实法规边界，非发生率；中国大陆新能源汽车准入规章适用境内生产企业及其境内使用产品：企业须具备规定生产、一致性、售后与安全能力；产品须符合专项及常规标准、安全条件并经国家认定检测机构检测，技术审查与公告由规定机构和MIIT办理。不是个人工程师执照或培训证。2026年第1号准入审查要求公告自2027-01-01施行，当前不能冒已实施，附件全条件未读。 GB7258-2017官方平台状态现行（含第2号修改单）；GB7258-2026于2026-08-27发布、2027-07-01实施，当前状态即将实施。旧20250058-Q-312修订项目提出的车门、应急救援和电池监测等只是修订说明，不能当现行或最终条文。本轮仅取得两版状态元数据，未得最终标准全文及完整过渡条件，不以项目说明授现场作业。"
+              "本节描述任务相关可能风险和真实法规边界，非发生率；中国大陆新能源汽车准入规章适用境内生产企业及其境内使用产品：企业须具备规定生产、一致性、售后与安全能力；产品须符合专项及常规标准、安全条件并经国家认定检测机构检测，技术审查与公告由规定机构和MIIT办理。不是个人工程师执照或培训证。2026年第1号准入审查要求公告自2027-01-01施行，当前不能冒已实施，附件全条件未读。 国家标准公开平台显示 GB 7258-2017 现行。GB 7258-2026 于 2026-08-27 发布，将于 2027-07-01 实施。旧修订项目不作现行或最终条款引用。"
             ]
           },
           "id": "automotive-engineers.risk.career-risk-cards.8",
@@ -28950,11 +28970,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "US33%错误后果非常严重、43%较严重、20%对他人健康安全极高责任/35%高、48%准确极重为群体问卷，不当事故发生率。BLS父级OOH：入门机械工程师职位不要求执业许可，所有州及DC对面向公众出售工程服务的机械工程师要求许可；PE可监督、签项目和向公众服务。常见认可教育、FE、相关经验（通常至少4年）及PE考试，具体州和替代路径另核；FE通过仅EIT/EI路径，不等PE或产品准入决定权。 GB7258-2017官方平台状态现行（含第2号修改单）；GB7258-2026于2026-08-27发布、2027-07-01实施，当前状态即将实施。旧20250058-Q-312修订项目提出的车门、应急救援和电池监测等只是修订说明，不能当现行或最终条文。本轮仅取得两版状态元数据，未得最终标准全文及完整过渡条件，不以项目说明授现场作业。 EPA车辆测试法规页为法规概览与链接索引，说明制造商依适用CFR测试程序，1066与86等按车型和年型适用；86B仅通过2021年型条件不能当全现行车辆统一要求。本轮未读全部CFR及车型认证程序，不是个人工程师认证或全现场操作规则。"
+              "US33%错误后果很严重、43%较严重、20%对他人健康安全极高责任/35%高、48%准确极重为群体问卷，不当事故发生率。BLS父级OOH：入门机械工程师职位不要求执业许可，所有州及DC对面向公众出售工程服务的机械工程师要求许可；PE可监督、签项目和向公众服务。常见认可教育、FE、相关经验（通常至少4年）及PE考试，具体州和替代路径另核；FE通过仅EIT/EI路径，不等PE或产品准入决定权。 国家标准公开平台显示 GB 7258-2017 现行。GB 7258-2026 于 2026-08-27 发布，将于 2027-07-01 实施。旧修订项目不作现行或最终条款引用。 EPA车辆测试法规页为法规概览与链接索引，说明制造商依适用CFR测试程序，1066与86等按车型和年型适用；86B仅通过2021年型条件不能当全现行车辆统一要求。本轮未读全部CFR及车型认证程序，不是个人工程师认证或全现场操作规则。"
             ]
           },
           "id": "automotive-engineers.risk.career-risk-cards.10",
           "source_refs": [
+            "onet-work-context",
             "bls",
             "census",
             "health",
@@ -28999,7 +29020,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑核适用标准版本、真实设计验证及评审责任；独立验证条件按实际项目，不冒所有安全功能统一法定流程。GB7258-2017官方平台状态现行（含第2号修改单）；GB7258-2026于2026-08-27发布、2027-07-01实施，当前状态即将实施。旧20250058-Q-312修订项目提出的车门、应急救援和电池监测等只是修订说明，不能当现行或最终条文。本轮仅取得两版状态元数据，未得最终标准全文及完整过渡条件，不以项目说明授现场作业。"
+              "编辑核适用标准版本、真实设计验证及评审责任；独立验证条件按实际项目，不冒所有安全功能统一法定流程。国家标准公开平台显示 GB 7258-2017 现行。GB 7258-2026 于 2026-08-27 发布，将于 2027-07-01 实施。旧修订项目不作现行或最终条款引用。"
             ]
           },
           "id": "automotive-engineers.risk.career-risk-cards.13",
@@ -29060,7 +29081,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "核现行标准及设备任务程序；GB7258-2017官方平台状态现行（含第2号修改单）；GB7258-2026于2026-08-27发布、2027-07-01实施，当前状态即将实施。旧20250058-Q-312修订项目提出的车门、应急救援和电池监测等只是修订说明，不能当现行或最终条文。本轮仅取得两版状态元数据，未得最终标准全文及完整过渡条件，不以项目说明授现场作业。 中国特种作业培训考核规定自2026-06-01施行，按目录和实际任务核相应培训考核与持证，内部授权监督不能代法定条件；目录未全核，不要求所有汽车工程师同一电工作业证。 高压停机恢复全程序未得，不以修订方向授权。"
+              "核现行标准及设备任务程序；国家标准公开平台显示 GB 7258-2017 现行。GB 7258-2026 于 2026-08-27 发布，将于 2027-07-01 实施。旧修订项目不作现行或最终条款引用。 中国特种作业培训考核规定自2026-06-01施行，按目录和实际任务核相应培训考核与持证，内部授权监督不能代法定条件；目录未全核，不要求所有汽车工程师同一电工作业证。 高压停机恢复全程序未得，不以修订方向授权。"
             ]
           },
           "id": "automotive-engineers.risk.career-risk-cards.17",
@@ -29371,7 +29392,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "官方GB7258-2017现行状态（含修改单），非全文或完整现场程序。"
+              "官方GB7258-2017现行状态，非全文或完整现场程序。"
             ]
           },
           "id": "automotive-engineers.risk.career-risk-cards.38",
@@ -29417,7 +29438,7 @@
             "column_labels": [
               "岗位方向",
               "起步任务",
-              "编辑准备核对（未读真实招聘）",
+              "向雇主核对",
               "零经验可提交的证据",
               "需要区分的边界"
             ],
@@ -29425,35 +29446,35 @@
               [
                 "子系统设计助理岗",
                 "在有监督下完成需求整理、建模与初步分析与文档编写，按流程提交评审。",
-                "编辑比较方向；实际招聘学历课程、工具、验证及人员条件须核，本轮未读雇主公告，不冒统一录用要求。",
+                "向雇主核对学历、工具、验证任务和人员分工。两份历史样本不能推出统一招聘要求。",
                 "提交一份含需求与约束、假设与判据、分析与结论与限制的虚构工程说明，不使用真实企业资料。",
                 "助理任务、设计评审和签章权按实际法域及人员分工核，监督不代法定条件。BLS父级OOH：入门机械工程师职位不要求执业许可，所有州及DC对面向公众出售工程服务的机械工程师要求许可；PE可监督、签项目和向公众服务。常见认可教育、FE、相关经验（通常至少4年）及PE考试，具体州和替代路径另核；FE通过仅EIT/EI路径，不等PE或产品准入决定权。"
               ],
               [
                 "试验与标定助理岗",
                 "按标定与试验方法采集与处理数据、复现工况并整理记录。",
-                "编辑比较方向；实际招聘学历课程、工具、验证及人员条件须核，本轮未读雇主公告，不冒统一录用要求。",
+                "向雇主核对学历、工具、验证任务和人员分工。两份历史样本不能推出统一招聘要求。",
                 "提交一份含试验条件、量具与设备状态、原始数据与处理过程与异常说明的虚构记录。",
                 "试验与标定能力不等于设计授权或合规结论签署权。"
               ],
               [
                 "CAE 与仿真分析岗",
                 "建立并求解结构与热学或流体或控制的仿真模型，做参数研究与结果校核。",
-                "编辑比较方向；实际招聘学历课程、工具、验证及人员条件须核，本轮未读雇主公告，不冒统一录用要求。",
+                "向雇主核对学历、工具、验证任务和人员分工。两份历史样本不能推出统一招聘要求。",
                 "提交一份含模型假设与边界条件、网格与求解设置、结果与限制说明的虚构分析报告。",
                 "仿真不自动等于验证结论；交叉校核依实际方法，不冒所有项目均须同种独立分析。"
               ],
               [
                 "新能源与三电开发岗",
                 "参与电池与电机与电控系统的需求分解、方案设计与验证与安全要求落实。",
-                "编辑比较方向；实际招聘学历课程、工具、验证及人员条件须核，本轮未读雇主公告，不冒统一录用要求。",
+                "向雇主核对学历、工具、验证任务和人员分工。两份历史样本不能推出统一招聘要求。",
                 "提交一份含系统方案、安全要求与验证项的虚构设计说明。",
                 "高压系统设计与实际特种操作分开；中国特种作业培训考核规定自2026-06-01施行，按目录和实际任务核相应培训考核与持证，内部授权监督不能代法定条件；目录未全核，不要求所有汽车工程师同一电工作业证。"
               ],
               [
                 "合规与准入技术支持岗",
                 "按标准与法规整理技术文件与试验与检测资料，支持准入与型式认证申报。",
-                "编辑比较方向；实际招聘学历课程、工具、验证及人员条件须核，本轮未读雇主公告，不冒统一录用要求。",
+                "向雇主核对学历、工具、验证任务和人员分工。两份历史样本不能推出统一招聘要求。",
                 "提交一份含适用标准清单、验证项与证据清单的虚构技术文件目录。",
                 "中国大陆新能源汽车准入规章适用境内生产企业及其境内使用产品：企业须具备规定生产、一致性、售后与安全能力；产品须符合专项及常规标准、安全条件并经国家认定检测机构检测，技术审查与公告由规定机构和MIIT办理。不是个人工程师执照或培训证。2026年第1号准入审查要求公告自2027-01-01施行，当前不能冒已实施，附件全条件未读。"
               ]
@@ -29503,7 +29524,7 @@
                 "values": [
                   "官方任务共 25 项，重要性最高的包含开展或指导系统级汽车测试（81）、向其他工程师或工程支持人员提供技术指导（81）、执行失效与变异与根本原因分析（80）、标定包括控制算法或其他软件系统在内的车辆系统（79）。",
                   "工作活动按重要性以使用计算机（93）、决策与解决问题（89）、分析数据或信息（86）、获取信息（86）、评估信息以确定是否符合标准（83）最靠前；兴趣代码为 RIC（现实型 + 研究型 + 常规型）。",
-                  "工作情境：100% 每天使用电子邮件、75% 每天面对面讨论、70% 每天电话交谈、70% 每天在环境受控的室内工作、71% 工作周超过 40 小时、90% 为规律工作日程、48% 认为精确极其重要、33% 认为错误后果非常严重。这些字段描述职业群体特征，不构成个人胜任阈值。"
+                  "工作情境：100% 每天使用电子邮件、75% 每天面对面讨论、70% 每天电话交谈、70% 每天在环境受控的室内工作、71% 工作周超过 40 小时、48% 认为精确极其重要、33% 认为错误后果很严重。这些字段描述职业群体特征，不构成个人胜任阈值。"
                 ]
               },
               {
@@ -29518,6 +29539,7 @@
           },
           "id": "automotive-engineers.path.employer-evidence.1",
           "source_refs": [
+            "onet-work-context",
             "onet",
             "bls",
             "census",
@@ -29542,42 +29564,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份需求与约束说明、一份结构与系统的简化模型与参数、一份试验与标定判据表与数据记录模板。",
-                  "全部材料为虚构，不含真实企业技术资料、设计数据、样件或内部资料。",
-                  "全部材料与场景为虚构，不得使用真实企业技术资料、设计数据、样件或内部资料。"
+                  "DV-67 虚构支架评审。D1 门槛：质量不超过 18.0 千克，间隙至少 5.0 毫米。",
+                  "D2 离线数据：A 方案 17.7 千克、4.8 毫米；B 方案 18.0 千克、5.2 毫米。数据本身不改变。",
+                  "D3 原版：B 的记录标为图纸 R2，但待评图为 R3，暂无对应证明。变式只替换 D3：原记录有可核的 R3 版本凭证。两版均无工程负责人签发。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构需求写清设计假设与替代方案、分析方法与判据、试验与标定条件与数据与处理过程、结论与限制，以及需要复核与需要授权的环节。",
-                  "在 90—120 分钟内完成，允许参考公开的标准与通用工程资料，但不使用真实企业资料。",
-                  "记录中把需求与约束、设计假设、分析过程、数据与判断与结论分开书写，并标注需复核的部分。"
+                  "分别核对两案的质量、间隙与版本。",
+                  "写两版评审状态、待核项与接手人。",
+                  "交一页交接并列 D1–D3。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先核对需求与约束与判据，再建模与分析，最后写明未决事项与依据不足处。",
-                  "把需求、假设、分析过程、数据与判断与结论分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核假设与判据与结论，并保留修改理由。"
+                  "先独立交两版。",
+                  "把测量结果、版本和批准分开。",
+                  "交卷后打开「DV-67 参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成设计、试验或现场作业指令，也不能替代机构流程与设计评审授权。",
-                  "不得在练习中处理真实企业资料或操作真实试验与高压设备；涉及车辆安全、排放与新能源高压系统的事项须由有权限人员按规程处理。",
-                  "练习不替代机构流程与设计评审授权，也不构成任何设计、试验或现场处置指令。"
+                  "纸面练习，不制作、不装车。",
+                  "不运行真实试验或仿真。",
+                  "题给阈值不是法规或真实标准。"
                 ]
               }
             ]
           },
           "id": "automotive-engineers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "dv67-editor"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "DV-67：支架设计变更评审单",
           "type": "cards"
         },
         {
@@ -29588,37 +29610,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：学历与专业课程、机构岗前培训与考核、工程专业认证、执业许可或职称路径、机构设计评审与变更授权、试验作业授权、产品准入与型式认证许可，以及安全与合规与保密培训。",
-                  "每项都注明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「专业课程」「工程专业认证」「执业许可或职称」「机构设计评审授权」「试验作业授权」「准入许可」分列，避免混为一谈。"
+                  "写两版对照。",
+                  "标 D1–D3。",
+                  "记录版本。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的工程说明，重点检查需求与约束、设计假设与判据、模型与边界条件、数据与处理过程、结论与限制是否逐项写清。",
-                  "把复核意见与修改理由一并保留，作为判断你能否接受评审的证据。"
+                  "交卷后可选同伴复核。",
+                  "核对证据与结论。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明任务与需求、依据、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给同伴与评审人员复核，并保留复核意见与修改理由。"
+                  "写一页待核事项。",
+                  "标接手人。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用仿真或数据分析或生成式辅助工具，须注明工具名称与版本、输入与边界条件与人工修改理由。",
-                  "设计数据与技术资料处理须先取得授权，并记录访问范围、保留期限与销毁约定。"
+                  "用虚构记录。",
+                  "不接触设备。"
                 ]
               }
             ]
           },
           "id": "automotive-engineers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "dv67-editor"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29682,57 +29704,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与边界阅读：读 O*NET 17-2141.02 与公开的车辆安全与排放与准入法规资料，写清设计开发、试验与标定、失效分析、规范与评审各自的含义。",
-                  "产出：一页术语与流程对照表，标注每项的来源。"
+                  "读 D1–D3。",
+                  "证据索引"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "需求与判据练习：为虚构需求写清约束、可验证判据与设计假设。",
-                  "产出：一份需求与判据说明。"
+                  "列两项要求。",
+                  "要求表"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "设计与分析练习：为虚构子系统写清方案与替代方案、分析方法与模型边界条件与取舍理由。",
-                  "产出：一份设计与分析说明。"
+                  "核两案 D2。",
+                  "方案对照"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "试验与标定练习：为虚构试验写清条件、量具与设备状态、数据记录与处理过程与异常说明。",
-                  "产出：一份试验与标定记录。"
+                  "对照两版 D3。",
+                  "版本记录"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "失效分析练习：为虚构失效现象写清复现条件、区分现象与原因的依据与建议的纠正措施。",
-                  "产出：一份失效与根本原因分析记录。"
+                  "写两版判断。",
+                  "交接草稿"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的假设与判据与结论，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "先交两版评审和一页交接。",
+                  "两版及交接"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "打开「DV-67 参考解（交卷后再打开）」。",
+                  "复核差异"
                 ]
               }
             ]
           },
           "id": "automotive-engineers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "dv67-editor"
           ],
           "title": "七日体验产出",
           "type": "timeline"
@@ -29742,18 +29764,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你完成了七日练习并发现自己在需求分析、建模与验证与文档上可持续投入。",
-              "继续：你能接受项目节点与超过 40 小时的工作周与较高竞争强度，并愿意按流程记录与复核。",
-              "暂停：你只想尽快出结论，不愿按标准与流程核对假设与判据。",
-              "暂停：你把仿真或拟合结果直接当作已验证结论，或在安全与合规相关判断上跳过复核。",
-              "换方向：你更愿意做试验执行与数据采集，可比较汽车工程技术员方向。",
-              "换方向：你更愿意做更宽的机械与热力系统设计，可比较机械工程师方向。",
-              "信息不足：如果你还没有任何有监督的项目或评审经历，先补这两项再判断。"
+              "继续：能按证据解释方案差异。",
+              "继续：能写清接手人。",
+              "暂停：如果证据和判断常混在一起。",
+              "暂停：如果无法说清签发状态。",
+              "比较汽车工程技术员。",
+              "比较机械设计。",
+              "真实训练另核。"
             ]
           },
           "id": "automotive-engineers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "dv67-editor"
           ],
           "title": "七日后的判断",
           "type": "list"
@@ -29830,7 +29852,7 @@
                 "新能源汽车准入与法规培训",
                 "参与新能源产品开发与申报的人",
                 "编辑比较企业产品准入技术准备，不是个人准入决定权。",
-                "未读真实招聘，具体岗位训练另核。",
+                "按雇主公告与适用规则核对岗位培训。",
                 "中国大陆新能源汽车准入规章适用境内生产企业及其境内使用产品：企业须具备规定生产、一致性、售后与安全能力；产品须符合专项及常规标准、安全条件并经国家认定检测机构检测，技术审查与公告由规定机构和MIIT办理。不是个人工程师执照或培训证。2026年第1号准入审查要求公告自2027-01-01施行，当前不能冒已实施，附件全条件未读。",
                 "按法规更新安排复训。",
                 "培训不等于准入决定权，判定由主管部门与具资质机构作出。"
@@ -29860,14 +29882,15 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界：学历、工程专业认证（如 Autodesk 认证）、执业许可（美国侧注册工程师 PE 路径）、工程技术人员职称（中国大陆侧）、机构内部设计评审与变更授权、产品准入与型式认证许可是不同状态，任何一项都不能由另一项自动推出。",
+              "BLS 对上级机械工程师 17-2141 列学士为典型学历，未列通常需要相关经验或在岗培训。具体招聘看雇主；设计评审、工程执业资格和车辆产品准入是不同职责或条件。",
               "O*NET新聘学历问卷：71%学士、14%硕士、5%高中后证书，是新聘需要的学历受访比例，非在岗构成、父级相同问卷或统一门槛。Zone4/SVP7至<8描述分区一般需较多技能知识经验、多数需四年学士但有例外，通常数年相关经验、在岗或职业训练，不是本职业所有岗位固定年限。BLS父级典型学士（机械工程或机械工程技术）、经验None/OJT None为统计分类，非要求没有经验或禁止培训。 BLS父级OOH：入门机械工程师职位不要求执业许可，所有州及DC对面向公众出售工程服务的机械工程师要求许可；PE可监督、签项目和向公众服务。常见认可教育、FE、相关经验（通常至少4年）及PE考试，具体州和替代路径另核；FE通过仅EIT/EI路径，不等PE或产品准入决定权。",
-              "2022职业大典PDF43—44页单列2-02-07-11汽车工程技术人员L，实际包括汽车产品工艺研发、整车发动机底盘车身电气部件新材料、生产再制造及售后商务技术等7项；与US汽车工程师有关，中文名称不同不等完全无职业分类，也不能自动精确互认、决定工资或授予资格。 中国大陆新能源汽车准入规章适用境内生产企业及其境内使用产品：企业须具备规定生产、一致性、售后与安全能力；产品须符合专项及常规标准、安全条件并经国家认定检测机构检测，技术审查与公告由规定机构和MIIT办理。不是个人工程师执照或培训证。2026年第1号准入审查要求公告自2027-01-01施行，当前不能冒已实施，附件全条件未读。 GB7258-2017官方平台状态现行（含第2号修改单）；GB7258-2026于2026-08-27发布、2027-07-01实施，当前状态即将实施。旧20250058-Q-312修订项目提出的车门、应急救援和电池监测等只是修订说明，不能当现行或最终条文。本轮仅取得两版状态元数据，未得最终标准全文及完整过渡条件，不以项目说明授现场作业。 中国特种作业培训考核规定自2026-06-01施行，按目录和实际任务核相应培训考核与持证，内部授权监督不能代法定条件；目录未全核，不要求所有汽车工程师同一电工作业证。",
+              "2022职业大典PDF43—44页单列2-02-07-11汽车工程技术人员L，实际包括汽车产品工艺研发、整车发动机底盘车身电气部件新材料、生产再制造及售后商务技术等7项；与US汽车工程师有关，中文名称不同不等完全无职业分类，也不能自动精确互认、决定工资或授予资格。 中国大陆新能源汽车准入规章适用境内生产企业及其境内使用产品：企业须具备规定生产、一致性、售后与安全能力；产品须符合专项及常规标准、安全条件并经国家认定检测机构检测，技术审查与公告由规定机构和MIIT办理。不是个人工程师执照或培训证。2026年第1号准入审查要求公告自2027-01-01施行，当前不能冒已实施，附件全条件未读。 国家标准公开平台显示 GB 7258-2017 现行。GB 7258-2026 于 2026-08-27 发布，将于 2027-07-01 实施。旧修订项目不作现行或最终条款引用。 中国特种作业培训考核规定自2026-06-01施行，按目录和实际任务核相应培训考核与持证，内部授权监督不能代法定条件；目录未全核，不要求所有汽车工程师同一电工作业证。",
               "操作建议：入职前把「学历／专业课程／工程专业认证／执业或职称路径／机构设计评审与变更授权／试验作业授权／产品准入与型式认证许可／安全与合规与保密培训」分列成一张表，逐项写明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。"
             ]
           },
           "id": "automotive-engineers.path.credential-boundary.1",
           "source_refs": [
+            "ep-table",
             "onet",
             "bls",
             "census",
@@ -29889,15 +29912,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮未读真实机构招聘；设计、标定、CAE、三电和准入技术支持是编辑比较方向，不冒已核公开招聘名称或录用标准。",
-              "核对清单：岗位属于整车或零部件企业的开发部门、新能源与三电系统开发部门、试验与标定中心、工程咨询与技术服务公司还是合规与认证支持部门；是否需要设计评审与变更授权、试验作业授权或高压系统作业资格；计酬方式（月薪、项目奖金或年度绩效）；以及是否提供安全与合规与数据保密培训。以上须写入书面条件后再比较。"
+              "河北工业大学就业网 2026-03-05 刊载的北汽福田北京汽车研发工程师：本科，30 人，标题列 6,000–8,000 元，原页未注明该报价的计薪周期。涉及性能分析、标定、试制试验和整车或部件设计。",
+              "东风汽车集团研发总院 2027 届秋招所列整车工程研发岗涵盖平台布置、车身结构、热管理、整车性能及虚拟验证。公告不是某一工序的统一资格，也不把校园招聘首页金额作为该岗位工资。"
             ]
           },
           "id": "automotive-engineers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "foton-rd-2026",
+            "dongfeng-rd-2027",
             "onet"
           ],
           "title": "招聘信息核对",
@@ -30129,7 +30151,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆新能源汽车准入规章适用境内生产企业及其境内使用产品：企业须具备规定生产、一致性、售后与安全能力；产品须符合专项及常规标准、安全条件并经国家认定检测机构检测，技术审查与公告由规定机构和MIIT办理。不是个人工程师执照或培训证。2026年第1号准入审查要求公告自2027-01-01施行，当前不能冒已实施，附件全条件未读。 GB7258-2017官方平台状态现行（含第2号修改单）；GB7258-2026于2026-08-27发布、2027-07-01实施，当前状态即将实施。旧20250058-Q-312修订项目提出的车门、应急救援和电池监测等只是修订说明，不能当现行或最终条文。本轮仅取得两版状态元数据，未得最终标准全文及完整过渡条件，不以项目说明授现场作业。 EPA车辆测试法规页为法规概览与链接索引，说明制造商依适用CFR测试程序，1066与86等按车型和年型适用；86B仅通过2021年型条件不能当全现行车辆统一要求。本轮未读全部CFR及车型认证程序，不是个人工程师认证或全现场操作规则。 BLS父级OOH：入门机械工程师职位不要求执业许可，所有州及DC对面向公众出售工程服务的机械工程师要求许可；PE可监督、签项目和向公众服务。常见认可教育、FE、相关经验（通常至少4年）及PE考试，具体州和替代路径另核；FE通过仅EIT/EI路径，不等PE或产品准入决定权。"
+              "中国大陆新能源汽车准入规章适用境内生产企业及其境内使用产品：企业须具备规定生产、一致性、售后与安全能力；产品须符合专项及常规标准、安全条件并经国家认定检测机构检测，技术审查与公告由规定机构和MIIT办理。不是个人工程师执照或培训证。2026年第1号准入审查要求公告自2027-01-01施行，当前不能冒已实施，附件全条件未读。 国家标准公开平台显示 GB 7258-2017 现行。GB 7258-2026 于 2026-08-27 发布，将于 2027-07-01 实施。旧修订项目不作现行或最终条款引用。 EPA车辆测试法规页为法规概览与链接索引，说明制造商依适用CFR测试程序，1066与86等按车型和年型适用；86B仅通过2021年型条件不能当全现行车辆统一要求。本轮未读全部CFR及车型认证程序，不是个人工程师认证或全现场操作规则。 BLS父级OOH：入门机械工程师职位不要求执业许可，所有州及DC对面向公众出售工程服务的机械工程师要求许可；PE可监督、签项目和向公众服务。常见认可教育、FE、相关经验（通常至少4年）及PE考试，具体州和替代路径另核；FE通过仅EIT/EI路径，不等PE或产品准入决定权。"
             ]
           },
           "id": "automotive-engineers.path.career-path-block.22",
@@ -31136,13 +31158,13 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 17-2141.02 职业摘要（就业与预测字段）",
+                "entity": "BLS 表 1.2：上级就业",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/17-2141.02"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS父级机械工程师预测及特点表",
+                "entity": "BLS 表 1.2：上级增长与空缺",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31223,13 +31245,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。 中国精确职业工资未得，MIIT2025产销是行业信号，不是职业就业增幅。"
+              "美国 BLS 表 1.2 的上级机械工程师 17-2141：2025 年 298,500 人，2035 年预计 332,000 人，增长 11.2%，净增 33,500，年均约 17,800 个空缺，自雇 0.5%。手册将增长取整为 11%。2025 年 5 月组内年薪中位数 104,110 美元。"
             ]
           },
           "id": "automotive-engineers.market-signals.market-signal-card.8",
           "source_refs": [
-            "ep",
             "ep-table",
+            "ep",
             "census"
           ],
           "type": "prose"
@@ -31269,7 +31291,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
+              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（BLS 职业展望手册取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
             ]
           },
           "id": "automotive-engineers.market-signals.market-signal-card.11",
@@ -31315,7 +31337,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "parent_occupation_proxy"
+              "美国上级机械工程师 17-2141"
             ]
           },
           "id": "automotive-engineers.market-signals.market-signal-card.14",
@@ -31377,13 +31399,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。"
+              "美国 BLS 表 1.2 的上级机械工程师 17-2141：2025 年 298,500 人，2035 年预计 332,000 人，增长 11.2%，净增 33,500，年均约 17,800 个空缺，自雇 0.5%。手册将增长取整为 11%。2025 年 5 月组内年薪中位数 104,110 美元。"
             ]
           },
           "id": "automotive-engineers.market-signals.market-signal-card.18",
           "source_refs": [
-            "ep",
             "ep-table",
+            "ep",
             "census"
           ],
           "type": "prose"
@@ -31393,7 +31415,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "父级精确增幅11.2%真实可得，非汽车细类独立增幅或个人录用率。"
+              "空缺包括增长与替补。汽车细项无独立就业数字。"
             ]
           },
           "id": "automotive-engineers.market-signals.market-signal-card.19",
@@ -31423,7 +31445,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "parent_occupation_proxy"
+              "美国上级机械工程师 17-2141"
             ]
           },
           "id": "automotive-engineers.market-signals.market-signal-card.21",
@@ -31439,7 +31461,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "远快于平均（父级11.2%，年均17,800空缺）"
+              "11.2%，年均约 17,800 个空缺"
             ]
           },
           "id": "automotive-engineers.market-signals.market-signal-card.22",
@@ -31531,7 +31553,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "market_signal"
+              "行业及岗位大类均值"
             ]
           },
           "id": "automotive-engineers.market-signals.market-signal-card.28",
@@ -31982,10 +32004,13 @@
                 "question_key": "career.faq.automotive-engineers.2"
               },
               {
-                "answer": "更有解释力的信号是：能按标准完成设计、分析与验证并如实记录假设与限制，能把需求转成可验证判据并判断数据是否支撑结论，并在依据不明或超出授权时停下来升级；只靠「喜欢车」或「会用一个软件」无法判断。霍兰德兴趣代码为 RIC（现实型 + 研究型 + 常规型），兴趣一致只说明方向接近。",
+                "answer": "到 09 做 DV-67，试着把要求、数据、版本与接手人分开写。",
                 "id": "automotive-engineers.faq.3",
                 "question": "怎样判断自己适不适合做汽车工程师？",
-                "question_key": "career.faq.automotive-engineers.3"
+                "question_key": "career.faq.automotive-engineers.3",
+                "source_refs": [
+                  "dv67-editor"
+                ]
               },
               {
                 "answer": "AI 与自动化可以改变参数化建模与设计探索、仿真与优化计算、自动数据处理与异常标注、标定数据处理与参数拟合、文档与报告初稿生成等环节；但没有官方证据表明它会整体取代需求与约束确认、设计假设与判据判定、失效与根本原因判断、安全相关标定与合规结论。官方资料也未给出该职业的自动化替代率或岗位消失年份。",
@@ -31994,40 +32019,72 @@
                 "question_key": "career.faq.automotive-engineers.4"
               },
               {
-                "answer": "需求与约束与判据确认、设计假设与验证方案、模型与边界条件校核、试验与标定条件与数据真实性、失效与根本原因判断、以及安全相关设计与合规结论，都必须由本人与具授权的人员按机构流程承担；工具输出必须先标记为参考，经校核与试验验证与设计评审后才能进入正式设计与合规文件。",
+                "answer": "要求、验证数据、版本与安全结论由具备相应职责和授权的人分别核。自动化工具的输出需有可追溯证据，不能自行作为工程签发。",
                 "id": "automotive-engineers.faq.5",
                 "question": "哪些环节必须保留人工复核？",
-                "question_key": "career.faq.automotive-engineers.5"
+                "question_key": "career.faq.automotive-engineers.5",
+                "source_refs": [
+                  "onet",
+                  "dv67-editor"
+                ]
               },
               {
-                "answer": "美国侧：O*NET 把 17-2141.02 列为 Job Zone Four（SVP 7.0 至 <8.0），页面公布的学历构成中 71% 为要求学士学位、14% 为要求硕士学位、5% 为要求高中后证书；BLS 职业展望手册把同族职业的典型入门学历列为学士学位（机械工程或机械工程技术方向），并要求无相关工作经验与无在职培训，同时指出各州与哥伦比亚特区要求面向公众提供服务的机械工程师取得执业许可；O*NET 认证页面列出 NCEES 主办的「机械方向工程基础考试」与「控制系统工程专业考试」与 Autodesk 认证。中国大陆侧：该职业未在大典中单列，归入工程技术人员中类；新能源汽车生产企业与产品实行准入管理，产品须经国家认定的检测机构检测合格并符合安全技术条件。学历、认证、执业或职称、机构设计评审授权与产品准入许可不可互相替代。",
+                "answer": "BLS 对上级机械工程师 17-2141 列学士为典型学历，未列通常需要相关经验或在岗培训。具体招聘看雇主；设计评审、工程执业资格和车辆产品准入是不同职责或条件。",
                 "id": "automotive-engineers.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.automotive-engineers.6"
+                "question_key": "career.faq.automotive-engineers.6",
+                "source_refs": [
+                  "ep-table",
+                  "onet",
+                  "ncees-licensure"
+                ]
               },
               {
-                "answer": "相对低于技术员与技工岗位。O*NET 工作情境显示 57% 超过一半时间坐着、70% 少于一半时间站立、84% 少于一半时间行走或跑动、70% 每天在环境受控的室内工作、14% 每天佩戴常规防护或安全设备。但试验与标定与样车阶段仍可能涉及现场作业与高压系统防护要求；核心能力是工程分析与设计判断与文档与协作。",
+                "answer": "部分受访者报告多为坐姿工作，试验、标定和样车任务的现场条件随岗位而变。入职前核对具体防护与职责。",
                 "id": "automotive-engineers.faq.7",
                 "question": "这份工作体力要求高吗？",
-                "question_key": "career.faq.automotive-engineers.7"
+                "question_key": "career.faq.automotive-engineers.7",
+                "source_refs": [
+                  "onet-work-context"
+                ]
               },
               {
-                "answer": "工作情境显示 71% 的工作周超过 40 小时、90% 为规律工作日程、100% 每天使用电子邮件、75% 每天需要面对面讨论、70% 每天电话交谈、43% 认为竞争激烈；常见安排包含项目节点与样车与试验周期驱动的加班。比较岗位时把工时结构、加班与项目奖金办法、试验与高压作业条件与数据保密要求写入书面条件。",
+                "answer": "工作情境显示 71% 的工作周超过 40 小时、100% 每天使用电子邮件、75% 每天需要面对面讨论、70% 每天电话交谈、43% 认为竞争激烈；常见安排包含项目节点与样车与试验周期驱动的加班。比较岗位时把工时结构、加班与项目奖金办法、试验与高压作业条件与数据保密要求写入书面条件。",
                 "id": "automotive-engineers.faq.8",
                 "question": "工作时间和工作方式是什么样的？",
-                "question_key": "career.faq.automotive-engineers.8"
+                "question_key": "career.faq.automotive-engineers.8",
+                "source_refs": [
+                  "onet-work-context"
+                ]
               },
               {
-                "answer": "官方就业预测为同族职业 2024 年在岗约 293,100 人、2024—2034 年增长为「远快于平均（7% 或更高）」、年均约 18,100 个空缺；BLS 职业展望手册按 2025—2035 年给出同一同族职业在岗约 298,500 人、增长 11%、净增约 33,500 个岗位、年均约 17,800 个空缺，多来自替换需求。中国大陆产业侧，工业和信息化部数据显示 2025 年新能源汽车新车销量占比达到 47.9%。预测不等于个人录用概率。转向可比较机械工程师、汽车工程技术员、燃料电池工程师、航空航天工程师、电气工程师、工业工程师、验证工程师与制造工程师等方向，但资格与授权需逐项核对。",
+                "answer": "美国 BLS 表 1.2 的上级机械工程师 17-2141：2025 年 298,500 人，2035 年预计 332,000 人，增长 11.2%，净增 33,500，年均约 17,800 个空缺，自雇 0.5%。手册将增长取整为 11%。2025 年 5 月组内年薪中位数 104,110 美元。",
                 "id": "automotive-engineers.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.automotive-engineers.9"
+                "question_key": "career.faq.automotive-engineers.9",
+                "source_refs": [
+                  "ep-table"
+                ]
               },
               {
-                "answer": "美国数字来自 BLS 职业就业与工资统计（OEWS，2025 年，同族 17-2141.00 口径，中位年薪 104,110 美元）与 BLS 职业展望手册《Mechanical Engineers》（2025—2035 年）；中国大陆没有与 17-2141.02 精确对应的全国职业工资分布，本页仅分别展示制造业平均工资（行业代理，113,594 元/年）与规模以上企业专业技术人员平均工资（岗位类别代理，155,491 元/年），不合并为薪资区间。两个市场的统计口径、覆盖人群与资料期不同，不能直接换算。",
+                "answer": "美国是 17-2141 上级职业雇员工资分位。大陆行业均值与招聘报价各有对象；单位支付的奖金、津贴与加班可计入工资。不能用汇率直接比较职业薪资。",
                 "id": "automotive-engineers.faq.10",
                 "question": "美国工资与中国大陆工资为什么不能互相换算？",
-                "question_key": "career.faq.automotive-engineers.10"
+                "question_key": "career.faq.automotive-engineers.10",
+                "source_refs": [
+                  "nbs",
+                  "cnclass",
+                  "onet-wages"
+                ]
+              },
+              {
+                "answer": "A 为 17.7 千克但间隙 4.8 毫米，未达 5.0 毫米。B 的两个读数都满足 D1；原版没有 R3 版本凭证，仍待核，不能作为 R3 结论。变式只补 D3，可将 B 交工程负责人评审。A 仍不满足，两版均未签发或放行。自核：两个门槛、版本、待核项和接手人。",
+                "id": "automotive-engineers.faq.11",
+                "question": "DV-67 参考解（交卷后再打开）",
+                "question_key": "career.faq.automotive-engineers.q11",
+                "source_refs": [
+                  "dv67-editor"
+                ]
               }
             ]
           },
@@ -32048,7 +32105,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮九模块限定作者核对；公开链接、缓存和历史记录不当独立审阅通过。"
+              "费马测试编辑部"
             ]
           },
           "id": "automotive-engineers.sources.source-card.1",
@@ -32062,7 +32119,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "实际读O*NET17-2141.02摘要/详细/工资/热门/行业/趋势及相邻定义；BLS父级EP表、OOH5行业中位/学历/数学/许可及预测讨论。NBS2025相关行业岗位行、1990工资规定、OEWS方法及2022职业大典PDF43—44页同窗口同日实际版本复用。MIIT39/54号正文1—29条、2025汽车产业全文、2026年第1号未来生效公告及解读；GB2017现行及2026未来状态元数据和旧项目说明（标准全文未得）；EPA车辆法规概览非全CFR。中国特种培训相关条、OSHA333/147相关适用与a—c部分、NCEES介绍同日复用，非全目录设备或全州。ILO/NIST仅背景介绍，custom/training/cert完整项目未得。"
+              "美国用 BLS 和 O*NET；大陆用国家统计局、工信部与两份企业公开招聘。"
             ]
           },
           "id": "automotive-engineers.sources.source-card.2",
@@ -32100,7 +32157,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-09核：美国工资就业招聘2025、预测2025—2035父级；NBS工资2025、分类2022、工资规定1990。GB2017现行含修改单；GB2026于2026-08-27发布2027-07-01实施；MIIT新审查2027-01-01施行；EPA概览2026-06-23更新。未完整重读旧入口保日期。"
+              "资料核对期：2026-11-10。"
             ]
           },
           "id": "automotive-engineers.sources.source-card.3",
@@ -32114,7 +32171,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "NBS工资总额按款项性质可含奖金、绩效、计件、津贴补贴与加班工资，不能将项目奖金与年度绩效全部排除；排除项目按规定另核。行业及岗位大类均值不是汽车工程师工资。 OEWS有薪员工工资含基本工资、佣金、生产奖金等激励工资和小费，排加班溢价、轮班差额与非生产奖金等；不能按项目或绩效名称一概排除。自雇、非公司制企业所有者和合伙人、无酬家庭劳动者排除，有薪公司员工不因顾问或家庭经营名称全部排除；非个人到手总收入。 2022职业大典PDF43—44页单列2-02-07-11汽车工程技术人员L，实际包括汽车产品工艺研发、整车发动机底盘车身电气部件新材料、生产再制造及售后商务技术等7项；与US汽车工程师有关，中文名称不同不等完全无职业分类，也不能自动精确互认、决定工资或授予资格。 中国精确职业全国城市工资就业、真实招聘合同、完整认证培养职称/全州许可、全标准附件车型排放及设备安全停止恢复程序、AI因果和量表预测及转岗互认未核。共享facts/FAQ/quick-decision/定义/练习冻结，不称全页一致或正式验收。"
+              "真实工程决策按版本、证据、现行要求和项目授权核。"
             ]
           },
           "id": "automotive-engineers.sources.source-card.4",
@@ -32147,7 +32204,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32159,13 +32216,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看汽车工程师职业页面",
@@ -32229,18 +32286,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "父级298500→332000；11.2%取整11%",
-                  "净33500、年均17800、自雇0.5%"
+                  "美国 BLS 表 1.2 的上级机械工程师 17-2141：2025 年 298,500 人，2035 年预计 332,000 人，增长 11.2%，净增 33,500，年均约 17,800 个空缺，自雇 0.5%。手册将增长取整为 11%。2025 年 5 月组内年薪中位数 104,110 美元。",
+                  "数据不是汽车细项。"
                 ],
-                "evidence_type": "official outlook",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。",
+                "limitation": "机械工程师上级口径。",
                 "market": "美国",
-                "name": "O*NET 17-2141.02 职业摘要（就业与预测字段）",
-                "period": "2025就业及2025—2035预测；访问2026-10-09",
-                "publisher": "O*NET OnLine",
+                "name": "BLS：机械工程师上级职业数据",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/summary/17-2141.02"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32285,26 +32342,26 @@
                 "limitation": "NBS工资总额按款项性质可含奖金、绩效、计件、津贴补贴与加班工资，不能将项目奖金与年度绩效全部排除；排除项目按规定另核。行业及岗位大类均值不是汽车工程师工资。",
                 "market": "中国大陆",
                 "name": "国家统计局《关于工资总额组成的规定》（1990发布）",
-                "period": "1990规定；同窗口同日已读版本复用",
+                "period": "1990 年发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
+                "url": "https://www.stats.gov.cn/gk/tjfg/xzfg/202302/t20230206_1901829.html"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "20250058-Q-312强制标准修订项目",
-                  "2025-01-27下达；旧公示2024-12-23至2025-01-22"
+                  "GB 7258-2017 现行。",
+                  "核对适用于车辆和日期的标准版本。"
                 ],
-                "evidence_type": "official standard project",
+                "evidence_type": "标准状态元数据（非全文）",
                 "id": "privacy",
-                "limitation": "GB7258-2017官方平台状态现行（含第2号修改单）；GB7258-2026于2026-08-27发布、2027-07-01实施，当前状态即将实施。旧20250058-Q-312修订项目提出的车门、应急救援和电池监测等只是修订说明，不能当现行或最终条文。本轮仅取得两版状态元数据，未得最终标准全文及完整过渡条件，不以项目说明授现场作业。",
+                "limitation": "国家标准公开平台显示 GB 7258-2017 现行。GB 7258-2026 于 2026-08-27 发布，将于 2027-07-01 实施。旧修订项目不作现行或最终条款引用。",
                 "market": "中国大陆",
-                "name": "《机动车运行安全技术条件》（GB 7258）修订项目",
-                "period": "公示期 2024-12-23 至 2025-01-22；访问 2026-10-09",
-                "publisher": "国家市场监督管理总局 / 全国标准信息公共服务平台",
+                "name": "GB7258-2017现行状态元数据",
+                "period": "2018-01-01 实施；现行",
+                "publisher": "国家标准全文公开系统",
                 "scope": "contextual",
-                "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=21E2CBF090AAA9B9E06397BE0A0A1030"
+                "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=06A0C376A0CA7B14E93106194C99730F"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32325,18 +32382,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "父级298500→332000；11.2%取整11%",
-                  "净33500、年均17800、自雇0.5%"
+                  "美国 BLS 表 1.2 的上级机械工程师 17-2141：2025 年 298,500 人，2035 年预计 332,000 人，增长 11.2%，净增 33,500，年均约 17,800 个空缺，自雇 0.5%。手册将增长取整为 11%。2025 年 5 月组内年薪中位数 104,110 美元。",
+                  "数据不是汽车细项。"
                 ],
-                "evidence_type": "official outlook",
+                "evidence_type": "primary_document",
                 "id": "operations",
-                "limitation": "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。",
+                "limitation": "机械工程师上级口径。",
                 "market": "美国",
-                "name": "O*NET 17-2141.02 职业摘要（就业与预测字段）",
-                "period": "2025就业及2025—2035预测；访问2026-10-09",
-                "publisher": "O*NET OnLine",
+                "name": "BLS：机械工程师上级职业数据",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/summary/17-2141.02"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32378,12 +32435,12 @@
                 ],
                 "evidence_type": "institutional task research",
                 "id": "ilo",
-                "limitation": "同窗口同日已读介绍扩展摘要仅全球背景，未全文指数映射或本细类采用提效测量。",
+                "limitation": "全球职业暴露研究背景，未测这个岗位的本地采用率或效率。",
                 "market": "全球",
                 "name": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
                 "period": "2025 年；访问 2026-09-15",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -32392,14 +32449,14 @@
                   "实际官方摘要链接",
                   "不是独立编辑组记录"
                 ],
-                "evidence_type": "官方职业摘要",
+                "evidence_type": "primary_document",
                 "id": "editor",
                 "limitation": "链接是官方摘要，不证明独立编辑组原记录。",
                 "market": "美国",
-                "name": "O*NET17-2141.02摘要（编辑核对入口）",
+                "name": "O*NET 汽车工程师职业摘要",
                 "period": "访问 2026-10-09",
-                "publisher": "O*NET",
-                "scope": "exact",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/17-2141.02"
               },
               {
@@ -32410,7 +32467,7 @@
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "不构成上岗资格或执业许可。 本轮未输出完整培养、自定义或认证条件，不刷新旧日期或冒全文。",
+                "limitation": "培训目录可用于比较课程；实际准入和授权需另核。",
                 "market": "美国",
                 "name": "O*NET 17-2141.02 培训与教育信息",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32426,7 +32483,7 @@
                 ],
                 "evidence_type": "occupation profile",
                 "id": "arxiv",
-                "limitation": "官方档案仅提供职业身份与职责描述。 本轮未输出完整培养、自定义或认证条件，不刷新旧日期或冒全文。",
+                "limitation": "职业档案说明身份和职责；不授予执业权。",
                 "market": "美国",
                 "name": "O*NET 17-2141.02 自定义职业档案",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32501,28 +32558,28 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "父级17-2141宽行业",
-                  "制造44/专业科学技术32/其他24"
+                  "O*NET 17-2141.02 行业子表列制造业 44%、专业科学和技术服务业 32%、其他 24%。该子表未单列统计年份，也未说明是否使用父组分母。",
+                  "美国职业数据。"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "当前O*NET宽行业数据取自父级17-2141：制造44%、专业科学技术服务32%、其他24%，非汽车细类或中国分布。OOH细行业就业为建筑工程相关服务20%、机械制造14%、运输设备制造10%、科学研发7%、计算机电子制造6%，分类层级不同。",
+                "limitation": "O*NET 17-2141.02 行业子表列制造业 44%、专业科学和技术服务业 32%、其他 24%。该子表未单列统计年份，也未说明是否使用父组分母。",
                 "market": "美国",
                 "name": "O*NET 17-2141.02 行业分布",
-                "period": "2025父级当前行业数据；访问2026-10-09",
+                "period": "子表未单列年份",
                 "publisher": "O*NET OnLine",
-                "scope": "parent_occupation_proxy",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/17-2141.02"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "车型年型适用简介实际读",
-                  "页面2026-06-23更新；非全CFR"
+                  "美国 EPA 车辆试验法规索引，按车型和年型选择适用条文。",
+                  "按官方原页核适用范围。"
                 ],
                 "evidence_type": "官方法规概览（非完整CFR）",
                 "id": "r2-pay-3",
-                "limitation": "EPA车辆测试法规页为法规概览与链接索引，说明制造商依适用CFR测试程序，1066与86等按车型和年型适用；86B仅通过2021年型条件不能当全现行车辆统一要求。本轮未读全部CFR及车型认证程序，不是个人工程师认证或全现场操作规则。",
+                "limitation": "EPA 页索引按车辆和年型适用的试验法规。核对适用于具体产品的程序。",
                 "market": "美国",
                 "name": "EPA车辆测试法规概览及链接索引",
                 "period": "页面更新 2026-06-23；访问 2026-10-09",
@@ -32533,15 +32590,14 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official outlook",
-                  "2025—2035 年；访问 2026-10-09"
+                  "工作环境表列该上级职业的细行业就业占比；工资表列 2025 年 5 月各行业年薪中位数。增长显示为取整的 11%。"
                 ],
                 "evidence_type": "official outlook",
                 "id": "census",
-                "limitation": "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。 实际OOH5行业中位132040/106870/105560/103440/98620，非汽车细类；入门不要求执照、公众服务许可、数学微积分统计原文读。",
+                "limitation": "手册增长取整为 11%。工资及就业是机械工程师上级 17-2141 组的数据，不单列汽车细项。",
                 "market": "美国",
-                "name": "BLS 职业展望手册：Mechanical Engineers",
-                "period": "2025—2035 年；访问 2026-10-09",
+                "name": "BLS OOH：机械工程师上级职业 17-2141",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/mechanical-engineers.htm"
@@ -32556,10 +32612,10 @@
                 "id": "msresearch",
                 "limitation": "产业侧运行数据，来源为中国汽车工业协会；不等同于职业工资或就业统计。",
                 "market": "中国大陆",
-                "name": "工业和信息化部：2025 年 12 月汽车工业经济运行情况",
+                "name": "工信部：2025 年 12 月汽车工业经济运行情况",
                 "period": "2025 年数据；2026-01-14 发布",
                 "publisher": "中华人民共和国工业和信息化部",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.miit.gov.cn/jgsj/zbys/qcgy/art/2026/art_4c5ed7009d21485da32b2a01abcf2819.html"
               },
               {
@@ -32586,7 +32642,7 @@
                 ],
                 "evidence_type": "certification information",
                 "id": "archivists",
-                "limitation": "认证与执业考试由行业机构与各州委员会管理，不等于机构设计评审授权。 本轮未输出完整培养、自定义或认证条件，不刷新旧日期或冒全文。",
+                "limitation": "认证由各发证机构管理。核对适用资格与雇主认可。",
                 "market": "美国",
                 "name": "O*NET 17-2141.02 认证发现（国家认证）",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32597,8 +32653,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
-                  "不冒称完整职业或个案验证"
+                  "雇员工资调查口径。",
+                  "工资包含和排除项见方法页。"
                 ],
                 "evidence_type": "官方原文相关章节",
                 "id": "oews-method",
@@ -32629,12 +32685,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
-                  "访问2026-10-09"
+                  "特种作业培训与考核规定。",
+                  "具体任务按适用目录判断。"
                 ],
                 "evidence_type": "部门规章",
                 "id": "cn-special-work",
-                "limitation": "中国特种作业培训考核规定自2026-06-01施行，按目录和实际任务核相应培训考核与持证，内部授权监督不能代法定条件；目录未全核，不要求所有汽车工程师同一电工作业证。 同窗口同日相关专业培训考试持证条已读，非完整目录。",
+                "limitation": "核对实际任务是否属于适用目录及培训、考核、持证要求。",
                 "market": "中国大陆",
                 "name": "特种作业培训考核规定令19号",
                 "period": "2025-12-17公布、2026-06-01施行",
@@ -32645,8 +32701,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮124—125简介摘要实际读",
-                  "未读完整PDF"
+                  "生成式 AI 风险管理框架。",
+                  "通用指南，不是汽车工程师调查。"
                 ],
                 "evidence_type": "官方自愿风险参考简介与摘要",
                 "id": "genai-nist",
@@ -32661,12 +32717,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际所述相关部分或缓存",
-                  "访问2026-10-09"
+                  "美国工作场所电气作业要求，核对实际任务和设备。",
+                  "按官方原页核适用范围。"
                 ],
                 "evidence_type": "联邦安全标准相关条款",
                 "id": "osha-electrical-333",
-                "limitation": "美国OSHA1910.333适用电气工作原则上先断电，带电例外须满足条文条件及合格人员要求；断电锁挂牌和验电等须按真实程序。1910.147管设备维修维护中的意外启动或储能危险，普通生产运行不一概适用，电气利用装置危险按Subpart S区分。实际读适用范围及相关a—c条，非全部设备安全、通风消防、燃料废物规范或停工恢复程序。 实际读a/b/c2等相关条，不是完整Subpart S。",
+                "limitation": "美国职业安全卫生署工作场所电气作业要求。按设备和实际任务核对适用性。",
                 "market": "美国",
                 "name": "OSHA1910.333相关电气工作条款",
                 "period": "当前官方标准",
@@ -32677,12 +32733,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际所述相关部分或缓存",
-                  "访问2026-10-09"
+                  "美国危险能量控制要求，核对实际任务和设备。",
+                  "按官方原页核适用范围。"
                 ],
                 "evidence_type": "联邦安全标准相关条款",
                 "id": "osha-loto-147",
-                "limitation": "美国OSHA1910.333适用电气工作原则上先断电，带电例外须满足条文条件及合格人员要求；断电锁挂牌和验电等须按真实程序。1910.147管设备维修维护中的意外启动或储能危险，普通生产运行不一概适用，电气利用装置危险按Subpart S区分。实际读适用范围及相关a—c条，非全部设备安全、通风消防、燃料废物规范或停工恢复程序。 实际a/b、c1—c7部分，未全文d/e/f或全部例外实施。",
+                "limitation": "美国职业安全卫生署危险能量控制要求。按设备和实际任务核对适用性。",
                 "market": "美国",
                 "name": "OSHA1910.147意外能量控制相关条款",
                 "period": "当前官方标准",
@@ -32693,12 +32749,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际所述相关部分或缓存",
-                  "访问2026-10-09"
+                  "FE 考试介绍。",
+                  "州执业条件由相应机构规定。"
                 ],
                 "evidence_type": "工程基础考试介绍",
                 "id": "ncees-fe",
-                "limitation": "BLS父级OOH：入门机械工程师职位不要求执业许可，所有州及DC对面向公众出售工程服务的机械工程师要求许可；PE可监督、签项目和向公众服务。常见认可教育、FE、相关经验（通常至少4年）及PE考试，具体州和替代路径另核；FE通过仅EIT/EI路径，不等PE或产品准入决定权。 NCEES介绍同窗口同日已读，不是全州法规。",
+                "limitation": "资格与执业范围按所在地主管机构核对。",
                 "market": "美国",
                 "name": "NCEES FE官方介绍",
                 "period": "当前官方介绍",
@@ -32709,12 +32765,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际所述相关部分或缓存",
-                  "访问2026-10-09"
+                  "美国工程执业路径介绍。",
+                  "州执业条件由相应机构规定。"
                 ],
                 "evidence_type": "工程执业路径介绍",
                 "id": "ncees-licensure",
-                "limitation": "BLS父级OOH：入门机械工程师职位不要求执业许可，所有州及DC对面向公众出售工程服务的机械工程师要求许可；PE可监督、签项目和向公众服务。常见认可教育、FE、相关经验（通常至少4年）及PE考试，具体州和替代路径另核；FE通过仅EIT/EI路径，不等PE或产品准入决定权。 NCEES介绍同窗口同日已读，不是全州法规。",
+                "limitation": "资格与执业范围按所在地主管机构核对。",
                 "market": "美国",
                 "name": "NCEES工程执业路径介绍",
                 "period": "当前官方介绍",
@@ -32725,31 +32781,31 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "实际所述相关正文或元数据",
-                  "访问2026-10-09；未取得全文附件不能冒全文"
+                  "美国 BLS 表 1.2 的上级机械工程师 17-2141：2025 年 298,500 人，2035 年预计 332,000 人，增长 11.2%，净增 33,500，年均约 17,800 个空缺，自雇 0.5%。手册将增长取整为 11%。2025 年 5 月组内年薪中位数 104,110 美元。",
+                  "机械工程师组，不代表汽车细项。"
                 ],
-                "evidence_type": "官方职业预测及特点表",
+                "evidence_type": "primary_document",
                 "id": "ep-table",
-                "limitation": "美国父级17-2141机械工程师：2025就业298,500人、2035预测332,000人、增长11.2%（OOH/O*NET取整11%，远快于平均）、净增33,500人、年均约17,800空缺、自雇0.5%。非17-2141.02汽车工程师独立统计；空缺含增长和替补，不是净增、个人录用率或生成AI因果。 学士及经验None/OJT None为典型统计分类。",
+                "limitation": "就业预测不是个人录用机会。",
                 "market": "美国",
-                "name": "BLS父级机械工程师职业预测及特点表",
-                "period": "2025及2025—2035",
-                "publisher": "BLS",
+                "name": "BLS 表 1.2：上级机械工程师 17-2141",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "实际所述相关正文或元数据",
-                  "访问2026-10-09；未取得全文附件不能冒全文"
+                  "标准状态：现行；2018-01-01 实施。",
+                  "按官方原页核适用范围。"
                 ],
                 "evidence_type": "标准状态元数据（非全文）",
                 "id": "gb7258-2017-status",
-                "limitation": "GB7258-2017官方平台状态现行（含第2号修改单）；GB7258-2026于2026-08-27发布、2027-07-01实施，当前状态即将实施。旧20250058-Q-312修订项目提出的车门、应急救援和电池监测等只是修订说明，不能当现行或最终条文。本轮仅取得两版状态元数据，未得最终标准全文及完整过渡条件，不以项目说明授现场作业。",
+                "limitation": "此来源核标准版本状态；实际要求以适用条文为准。",
                 "market": "中国大陆",
                 "name": "GB7258-2017现行状态元数据",
-                "period": "2017-09-29发布、2018-01-01实施；当前现行含2号修改单",
+                "period": "2018-01-01 实施；现行",
                 "publisher": "国家标准全文公开系统",
                 "scope": "contextual",
                 "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=06A0C376A0CA7B14E93106194C99730F"
@@ -32757,12 +32813,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "实际所述相关正文或元数据",
-                  "访问2026-10-09；未取得全文附件不能冒全文"
+                  "标准状态：将于 2027-07-01 实施。",
+                  "按官方原页核适用范围。"
                 ],
                 "evidence_type": "未来生效标准元数据（非全文）",
                 "id": "gb7258-2026-status",
-                "limitation": "GB7258-2017官方平台状态现行（含第2号修改单）；GB7258-2026于2026-08-27发布、2027-07-01实施，当前状态即将实施。旧20250058-Q-312修订项目提出的车门、应急救援和电池监测等只是修订说明，不能当现行或最终条文。本轮仅取得两版状态元数据，未得最终标准全文及完整过渡条件，不以项目说明授现场作业。",
+                "limitation": "此来源核标准版本状态；实际要求以适用条文为准。",
                 "market": "中国大陆",
                 "name": "GB7258-2026即将实施状态元数据",
                 "period": "2026-08-27发布、2027-07-01实施",
@@ -32773,15 +32829,15 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "实际所述相关正文或元数据",
-                  "访问2026-10-09；未取得全文附件不能冒全文"
+                  "公告修订《道路机动车辆生产企业准入审查要求》和《道路机动车辆产品准入审查要求》。",
+                  "具体条件见对应附件。"
                 ],
                 "evidence_type": "未来生效审查要求公告",
                 "id": "miit-nev-2026-announcement",
-                "limitation": "中国大陆新能源汽车准入规章适用境内生产企业及其境内使用产品：企业须具备规定生产、一致性、售后与安全能力；产品须符合专项及常规标准、安全条件并经国家认定检测机构检测，技术审查与公告由规定机构和MIIT办理。不是个人工程师执照或培训证。2026年第1号准入审查要求公告自2027-01-01施行，当前不能冒已实施，附件全条件未读。 实际公告及官方解读，未读全附件。",
+                "limitation": "企业与产品分别核对对应附件；公告于 2027-01-01 施行。",
                 "market": "中国大陆",
-                "name": "MIIT2026年第1号准入审查要求公告",
-                "period": "2026-01-12公告、2027-01-01施行",
+                "name": "工业和信息化部 2026 年第 1 号公告：道路机动车辆准入审查",
+                "period": "2026-01-12 成文，2026-01-21 发布，2027-01-01 施行",
                 "publisher": "工业和信息化部",
                 "scope": "contextual",
                 "url": "https://www.miit.gov.cn/jgsj/zbys/wjfb/art/2026/art_cf128a767c3c44a2a0e3a58f6a97cbae.html"
@@ -32789,8 +32845,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮或同窗口同日实际定义",
-                  "非完整培养互认条件"
+                  "美国相邻职业定义。"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-17-2141-00",
@@ -32805,8 +32860,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮或同窗口同日实际定义",
-                  "非完整培养互认条件"
+                  "美国相邻职业定义。"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-17-3027-01",
@@ -32821,8 +32875,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮或同窗口同日实际定义",
-                  "非完整培养互认条件"
+                  "美国相邻职业定义。"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-17-2141-01",
@@ -32837,8 +32890,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮或同窗口同日实际定义",
-                  "非完整培养互认条件"
+                  "美国相邻职业定义。"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-17-2011-00",
@@ -32853,8 +32905,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮或同窗口同日实际定义",
-                  "非完整培养互认条件"
+                  "美国相邻职业定义。"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-17-2071-00",
@@ -32869,8 +32920,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮或同窗口同日实际定义",
-                  "非完整培养互认条件"
+                  "美国相邻职业定义。"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-17-2112-00",
@@ -32885,8 +32935,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮或同窗口同日实际定义",
-                  "非完整培养互认条件"
+                  "美国相邻职业定义。"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-17-2112-02",
@@ -32901,8 +32950,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮或同窗口同日实际定义",
-                  "非完整培养互认条件"
+                  "美国相邻职业定义。"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-17-2112-03",
@@ -32925,11 +32973,71 @@
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "name": "FermatMind AI 任务影响估算估算方法 v1",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "河北工业大学就业网 2026-03-05 刊载的北汽福田北京汽车研发工程师：本科，30 人，标题列 6,000–8,000 元，原页未注明该报价的计薪周期。涉及性能分析、标定、试制试验和整车或部件设计。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "foton-rd-2026",
+                "limitation": "河北工业大学就业网 2026-03-05 刊载的北汽福田北京汽车研发工程师：本科，30 人，标题列 6,000–8,000 元，原页未注明该报价的计薪周期。涉及性能分析、标定、试制试验和整车或部件设计。",
+                "market": "中国大陆",
+                "name": "河北工业大学：北汽福田汽车研发工程师历史招聘",
+                "period": "2026-03-05",
+                "publisher": "河北工业大学就业网",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/correcruit/content/id/12707.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "东风汽车集团研发总院 2027 届秋招所列整车工程研发岗涵盖平台布置、车身结构、热管理、整车性能及虚拟验证。公告不是某一工序的统一资格，也不把校园招聘首页金额作为该岗位工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "dongfeng-rd-2027",
+                "limitation": "东风汽车集团研发总院 2027 届秋招所列整车工程研发岗涵盖平台布置、车身结构、热管理、整车性能及虚拟验证。公告不是某一工序的统一资格，也不把校园招聘首页金额作为该岗位工资。",
+                "market": "中国大陆",
+                "name": "东风研发总院 2027 届秋招：整车工程研发岗",
+                "period": "2027 届秋招",
+                "publisher": "河北工业大学就业网",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/home/correcruit/content/id/79947.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "本页虚构纸面评审。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "dv67-editor",
+                "limitation": "本页虚构纸面评审。",
+                "market": "虚构练习",
+                "name": "费马测试编辑部 DV-67：支架设计变更评审单",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET 工作情境受访回答：71% 通常每周超过 40 小时，48% 认为准确极重要，70% 每日在受控室内工作，14% 每天佩戴常规防护。不能据此判断特定岗位工时或防护要求。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-work-context",
+                "limitation": "O*NET 工作情境受访回答：71% 通常每周超过 40 小时，48% 认为准确极重要，70% 每日在受控室内工作，14% 每天佩戴常规防护。不能据此判断特定岗位工时或防护要求。",
+                "market": "美国",
+                "name": "O*NET 汽车工程师：工作情境问卷",
+                "period": "2026 年更新页面；访问 2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/17-2141.02#WorkContext"
               }
             ]
           },
@@ -36265,7 +36373,7 @@
       },
       "hero": {
         "h1": "汽车工程师",
-        "quick_answer": "汽车工程师用计算机辅助设计技术为车辆结构件、发动机、变速器或其他车辆系统开发新的或改进的设计，并指导车辆或部件的建造、改装或测试；按系统级试验验证性能与安全，执行失效与根本原因分析，标定包括控制算法在内的车辆系统，制定工程规范与质量控制标准；其工作不等于技术员层级的试验执行，也不代替产品准入与型式认证的合规判定，并在设计假设、试验条件或合规依据不明时停止升级。",
+        "quick_answer": "汽车工程师定义整车或部件的需求，比较设计方案，组织验证，并跟踪跨团队的变更与待核风险。O*NET 17-2141.02 是汽车细项；美国工资和就业引用上级机械工程师 17-2141。",
         "title": "汽车工程师"
       },
       "market_signal_card": {
@@ -37617,7 +37725,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合汽车工程师",
+        "label": "用 RIASEC 探索职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37694,7 +37802,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "Big Five（简体中文）"
           },
           {
             "href": {
@@ -37704,7 +37812,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "MBTI（简体中文）"
           },
           {
             "href": {
@@ -37714,7 +37822,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "Enneagram（简体中文）"
           },
           {
             "href": {
@@ -37724,7 +37832,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "IQ（简体中文）"
           }
         ]
       },
@@ -37739,7 +37847,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
-      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
+      "interface.quick_decision.experiment_heading": "怎么用一次纸面练习判断自己是否适合？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37832,7 +37940,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 任务影响估算",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37922,87 +38030,87 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "293,100人",
+        "derivation": "发布值。",
+        "display_value": "298,500 人",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "2024 年在岗人数（同族 17-2141.00 口径）",
-        "occupation_scope": "汽车工程师",
-        "period": "2024 年；访问 2026-09-15",
+        "measure": "就业人数",
+        "occupation_scope": "美国上级机械工程师 17-2141",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "远快于平均（7% 或更高）",
+        "derivation": "发布值。",
+        "display_value": "11.2%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "2024—2034 年就业增长标签",
-        "occupation_scope": "汽车工程师",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "预计增长",
+        "occupation_scope": "美国上级机械工程师 17-2141",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 18,100个/年",
+        "derivation": "发布值。",
+        "display_value": "约 17,800 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "2024—2034 年平均年度岗位空缺",
-        "occupation_scope": "汽车工程师",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "年均空缺",
+        "occupation_scope": "美国上级机械工程师 17-2141",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业按行业细分的工资中位数）",
+        "derivation": "发布值。",
+        "display_value": "105,560 美元/年",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "汽车工程师",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
+        "occupation_scope": "美国上级机械工程师 17-2141",
+        "period": "2025-05",
         "source_refs": [
-          "operations"
+          "census"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业按行业细分的工资中位数）",
+        "derivation": "发布值。",
+        "display_value": "132,040 美元/年",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "汽车工程师",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
+        "occupation_scope": "美国上级机械工程师 17-2141",
+        "period": "2025-05",
         "source_refs": [
-          "operations"
+          "census"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业按行业细分的工资中位数）",
+        "derivation": "发布值。",
+        "display_value": "103,440 美元/年",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "汽车工程师",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
+        "occupation_scope": "美国上级机械工程师 17-2141",
+        "period": "2025-05",
         "source_refs": [
-          "operations"
+          "census"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业按行业细分的工资中位数）",
+        "derivation": "发布值。",
+        "display_value": "98,620 美元/年",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "汽车工程师",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
+        "occupation_scope": "美国上级机械工程师 17-2141",
+        "period": "2025-05",
         "source_refs": [
-          "operations"
+          "census"
         ]
       },
       {
@@ -38126,39 +38234,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "293,100人",
+        "derivation": "发布值。",
+        "display_value": "298,500 人",
         "fact_id": "us-employment-parent",
         "market": "美国",
-        "measure": "2024 年在岗人数（同族职业口径）",
-        "occupation_scope": "汽车工程师",
-        "period": "2024 年",
+        "measure": "就业人数",
+        "occupation_scope": "美国上级机械工程师 17-2141",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "远快于平均（7% 或更高）",
+        "derivation": "发布值。",
+        "display_value": "11.2%",
         "fact_id": "us-growth-parent",
         "market": "美国",
-        "measure": "2024—2034 年就业增长标签",
-        "occupation_scope": "汽车工程师",
-        "period": "2024—2034 年",
+        "measure": "预计增长",
+        "occupation_scope": "美国上级机械工程师 17-2141",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 18,100个/年",
+        "derivation": "发布值。",
+        "display_value": "约 17,800 个/年",
         "fact_id": "us-openings-parent",
         "market": "美国",
-        "measure": "2024—2034 年平均年度岗位空缺",
-        "occupation_scope": "汽车工程师",
-        "period": "2024—2034 年",
+        "measure": "年均空缺",
+        "occupation_scope": "美国上级机械工程师 17-2141",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
@@ -38166,7 +38274,7 @@
         "display_value": "50%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
+        "measure": "AI 任务影响估算（编辑估算）",
         "occupation_scope": "汽车工程师",
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
@@ -38180,12 +38288,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务影响估算"
     },
     "badges": [
-      "O*NET 17-2141.02 · Job Zone Four · 大量准备",
+      "汽车细项 17-2141.02 · 美国市场统计取上级 17-2141",
       "整车与系统设计 / 试验与标定 / 控制算法与验证",
-      "中国大陆无精确职业统计 · 缺口可见标记"
+      "大陆参考：研发历史岗位与行业统计分列"
     ],
     "metrics": [
       {
@@ -38198,19 +38306,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国预计增长（2025—2035，上级 17-2141）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国就业人数（2025，上级 17-2141）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均岗位空缺（2024—2034）"
+        "label": "美国年均空缺（上级 17-2141）"
       },
       {
         "availability": "missing",
@@ -38224,17 +38332,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "汽车工程师做什么、需要哪些学历与资格、美国与中国的收入和前景如何、AI 会改变哪些任务，以及车辆安全、排放与新能源高压系统的设计边界；保留来源范围与数据缺口。"
+      "text": "看汽车工程师如何定需求、比较方案并核验证据，了解研发岗位样本、上级职业工资，再试做纸面变更评审。"
     },
     "title": {
       "availability": "available",
-      "text": "汽车工程师"
+      "text": "汽车工程师：工作、薪酬与入行｜FermatMind"
     }
   },
-  "source_content_sha256": "309ababfcc3af87b528de6b72f576a9efef11f9c08550cf82122d85e6de9d2af",
+  "source_content_sha256": "c8e19e0a0ac976662282edbc24adaceea4cbd4d6b17979883462f8e8f3d1c412",
   "subject": {
     "canonical_slug": "automotive-engineers",
     "name": "汽车工程师",
-    "summary": "汽车工程师用计算机辅助设计技术为车辆结构件、发动机、变速器或其他车辆系统开发新的或改进的设计，并指导车辆或部件的建造、改装或测试，核心是设计开发、试验与标定、失效与根本原因分析、规范与标准制定。美国侧对应 O*NET 17-2141.02（Automotive Engineers），该代码是 17-2141.00 Mechanical Engineers 下的细类，O*NET 展示的工资、就业与行业数据取自该同族职业，属 Job Zone Four（SVP 7.0 至 <8.0）；中国大陆统计按行业门类与岗位大类汇总，未单列该职业，行业与岗位类别代理分别展示、不合并为薪资区间。"
+    "summary": "汽车工程师定义整车或部件的需求，比较设计方案，组织验证，并跟踪跨团队的变更与待核风险。O*NET 17-2141.02 是汽车细项；美国工资和就业引用上级机械工程师 17-2141。"
   }
 }

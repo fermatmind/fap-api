@@ -14,9 +14,6 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -27,7 +24,7 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-2035": {
         "status": "pending_mapping"
@@ -39,7 +36,7 @@
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-current": {
         "status": "pending_mapping"
@@ -72,13 +69,13 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-current": {
         "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-high10-2025": {
         "status": "pending_mapping"
@@ -1923,7 +1920,7 @@
         "status": "pending_mapping"
       },
       "item:bus-drivers-school.us-salary.career-snapshot-secondary-locale.8": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:bus-drivers-school.us-salary.career-snapshot-secondary-locale.9": {
         "status": "mapped"
@@ -23366,10 +23363,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：校车司机不是「把学生从 A 点送到 B 点」，而是按严格时刻表在固定点位接送学生、对学生上下车与乘车过程的安全负责，并维持车厢秩序。美国侧对应 O*NET-SOC 53-3051.00，O*NET 列为 Job Zone 1-2（准备程度从很少到一些，SVP 低于 6.0），未标注 Bright Outlook。核心边界是：你可以独立完成出车前车辆与安全设备检查、按核定线路与时刻表接送、执行上下车与过街安全规则、维持秩序并报告故障与事故；但不能自行改变核定线路与站点、不得超员载运学生，也不得在未取得校车驾驶资格时驾驶校车。"
+              "工作重点是接送、行前检查和异常交接。实际班次、车辆和线路由用人单位与适用规则决定。"
             ]
           },
           "id": "bus-drivers-school.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "onet-details",
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -23377,10 +23378,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你对「把一车学生安全准时送到并秩序良好」的兴趣大于「路线是否新鲜」，愿意按严格时刻表与安全规则反复执行同一路线；能在学生喧闹、路况复杂与家长沟通压力下保持镇定并坚持规程；接受早晚分段时间表与季节性安排，并愿意学习急救常识与应急处置。"
+              "先用 SB-47 纸面核对，看看自己能否保持两版记录和清楚交接。"
             ]
           },
           "id": "bus-drivers-school.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23388,7 +23392,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停高额投入的条件：你还没有在持有相应准驾车型驾驶证并取得校车驾驶资格的条件下，在带教或监督下完整完成过一次从出车前检查、按时刻表接送、上下车与过街安全执行、维持秩序、异常报告到收车记录的闭环；或者不愿按安全规则管理学生、不能接受分段时间表与季节性安排；也不要把「会开小汽车或普通客车」当作可以驾驶校车的证明。"
+              "先独立完成 SB-47。若还想深入，向雇主核对司机与照管人员的分工、班次、培训和准入条件。纸面结果不授驾驶、照管或出车权限。"
             ]
           },
           "id": "bus-drivers-school.quick-decision.fit-decision-checklist.3",
@@ -23399,10 +23403,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历、资格与授权必须分别核对：O*NET 把该职业的准备层级列为 Job Zone 1-2（SVP 低于 6.0），通常要求高中或同等学历或 GED，在岗培训从数天到一年；在美国，校车司机通常需要商业驾驶执照（CDL）中的校车与载客背书，并须满足驾驶记录、体检与视听力要求，且通常需要通过背景审查；在中国大陆，校车驾驶人应当依照《校车安全管理条例》取得校车驾驶资格：取得相应准驾车型驾驶证并具有 3 年以上驾驶经历、年龄在 25 周岁以上且不超过 60 周岁、最近连续 3 个记分周期内没有被记满 12 分记录、无致人死亡或者重伤的交通事故责任记录、无饮酒后驾驶或者醉酒驾驶机动车记录且最近 1 年内无驾驶客运车辆超员与超速等严重交通违法行为记录、无犯罪记录，并由公安机关交通管理部门在机动车驾驶证上签注准许驾驶校车。"
+              "中国《校车安全管理条例》第 14 条规定校车使用实行许可；第 23–24 条要求驾驶人依法取得校车驾驶资格，并由公安交管部门在驾驶证签注。匹配的普通驾驶证只是条件之一；校车使用许可、驾驶资格和录用分开核对。"
             ]
           },
           "id": "bus-drivers-school.quick-decision.fermat-decision-card.6",
+          "source_refs": [
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -23791,7 +23798,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "条例30核定路线遇交通管制、施工、灾害、恶劣气象或重大事故等影响通行有例外；22不符安全条件须停运维修。42事故时驾驶人及照管人员立即报警并设警示，车内继续留学生有危险由照管人员撤至安全区并联络。按实际应急程序保护与报告，不等普通线路变更审批才处理危险。 中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。经营性客运63岁不能替代校车年龄。"
+              "条例30核定路线遇交通管制、施工、灾害、恶劣气象或重大事故等影响通行有例外；22不符安全条件须停运维修。42事故时驾驶人及照管人员立即报警并设警示，车内继续留学生有危险由照管人员撤至安全区并联络。按实际应急程序保护与报告，不等普通线路变更审批才处理危险。 中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。校车资格按本条例核对。"
             ]
           },
           "id": "bus-drivers-school.profile.career-quick-answers-block.19",
@@ -23849,7 +23856,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "2022大典4-02-02-01客运车辆驾驶员涵盖驾驶客运机动车运输服务，包含但不限于客车/公交司机，也含出租网约，是较宽相关细类，不等美国53-3051校车专门范围。未单列校车名称不能推出中国无相关驾驶细类；具体用工身份及校车法定资格分别核。 O*NET2025：教育服务51%、运输与仓储36%、政府11%、其他2%。OOH校车段落另细列地方中小学48%、学校及员工巴士运输34%、地方政府（不含教育医院）11%、私立中小学2%，不是完全相同合并口径；不从美国份额推中国行业。"
+              "2022大典4-02-02-01客运车辆驾驶员涵盖驾驶客运机动车运输服务，包含但不限于客车/公交司机，也含出租网约，是较宽相关细类，不等美国53-3051校车专门范围。未单列校车名称不能推出中国无相关驾驶细类；具体用工身份及校车法定资格分别核。 O*NET2025：教育服务51%、运输与仓储36%、政府11%。OOH校车段落另细列地方中小学48%、学校及员工巴士运输34%、地方政府（不含教育医院）11%、私立中小学2%，不是完全相同合并口径；不从美国份额推中国行业。"
             ]
           },
           "id": "bus-drivers-school.profile.career-quick-answers-block.24",
@@ -23875,7 +23882,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET新入职教育问答59%高中或同等、37%未达高中、3%中等后证书，非从业者学历。JobZone1—2/SVP不足6准备区间是通用概括；BLS本职业典型高中/相关经验None/短期在岗培训，不等所有个人数天至一年。美国CDL按车辆阈值及州核，接送相应学生上下学或学校活动按P/S背书；首次证照或背书另核ELDT及例外。 中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。经营性客运63岁不能替代校车年龄。"
+              "O*NET新入职教育问答59%高中或同等、37%未达高中、3%中等后证书，非从业者学历。JobZone1—2/SVP不足6准备区间是通用概括；BLS本职业典型高中/相关经验None/短期在岗培训，不等所有个人数天至一年。美国CDL按车辆阈值及州核，接送相应学生上下学或学校活动按P/S背书；首次证照或背书另核ELDT及例外。 中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。校车资格按本条例核对。"
             ]
           },
           "id": "bus-drivers-school.profile.career-quick-answers-block.26",
@@ -23954,7 +23961,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。经营性客运63岁不能替代校车年龄。 校车使用许可由学校/服务者按14—15申请，和司机个人资格不同。"
+              "中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。校车资格按本条例核对。 校车使用许可由学校/服务者按14—15申请，和司机个人资格不同。"
             ]
           },
           "id": "bus-drivers-school.profile.career-quick-answers-block.32",
@@ -23979,7 +23986,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "OOH说明兼职及校历限制工作时长；O*NET74%规律/14%季节/13%不规律是问答。编辑核工资、早晚分段、假期、趟次津贴及取证成本；未核统一计酬频率。"
+              "OOH说明兼职及校历限制工作时长；O*NET74%规律/14%季节/13%不规律是问答。核对工资、早晚分段、假期、趟次津贴及取证成本；未核统一计酬频率。"
             ]
           },
           "id": "bus-drivers-school.profile.career-quick-answers-block.34",
@@ -24010,7 +24017,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国17任务16Core/1Supplemental、41一般/16详细活动/57情境。关键任务100/99/98/97/95正确；一般活动最高为检查83、驾驶80、识别及监测各76、获取信息73，不是与外部沟通（24）居首。"
+              "O*NET 的工作活动包括检查车辆和设备、驾驶、识别和监测信息。用人单位会按实际职责说明所需记录和交接。"
             ]
           },
           "id": "bus-drivers-school.profile.onet-structured-fields-block.1",
@@ -24064,14 +24071,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET2025：教育服务51%、运输与仓储36%、政府11%、其他2%。OOH校车段落另细列地方中小学48%、学校及员工巴士运输34%、地方政府（不含教育医院）11%、私立中小学2%，不是完全相同合并口径；不从美国份额推中国行业。 详细档案3软件类别为浏览器、地图制作（AOL MapQuest）、操作系统；Hot清单1具体Windows，招聘百分比NA非0。类别、产品、招聘提及与实际部署或AI采用不同。 O*NET兴趣R75/C62/S58/E20/I10/A4，前三RCS；41具体领域另列运输93、体力手工25、防护服务23、机械电子22、个人服务20、社会服务19，不是RIASEC排他子类或个人合格线。"
+              "O*NET 列出的美国 2025 年主要行业是教育服务 51%、运输与仓储 36%、政府 11%。BLS 手册另列选定行业内校车司机年薪中位数，统计量不同。"
             ]
           },
           "id": "bus-drivers-school.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "industry-current",
-            "hot-current",
-            "details-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -24840,7 +24846,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑工具试点：路线查询、检查记录、台账和报告可作辅助；按法域分清驾驶人、照管人员、学校与服务者职责，不把中国全部上下车及应急照管归司机。中国条例38—39要求全程随车照管人员，负责车下引导秩序、清点学生/安全落座系带/关门后示意启动、制止危险行为、核下车全部离车。驾驶员按41检查安全技术车况，禁止有隐患出车；学校和服务提供者按10—12/22承担制度、教育维护职责，不能把全部学生照管或许可归个人司机。"
+              "线路查询和记录工具可辅助整理信息，驾驶、照管和放行仍须按实际分工。"
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.13",
@@ -24866,7 +24872,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议核系统权限、数据和复核责任；驾驶、照管及学校服务者各按职责处理，照管人员依法可制止不安全开行，不给驾驶人所有现场决定的单独最终权。"
+              "建议核系统权限、数据和复核责任；驾驶、照管及学校服务者各按职责处理，照管人员依法可制止不安全开行，不给驾驶人所有现场决定的单独最终权。"
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.15",
@@ -24903,14 +24909,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、辅助流程与就业是不同指标；本轮没有本职业整体替代率或年份。工具用途为编辑试点，现行资格责任须依法执行，但不能由此证明未来岗位不会减少。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "排班或台账工具可提醒记录缺项；驾驶、现场学生照管和异常处置由实际岗位按规定负责。系统打勾不能代替人在现场核对，也不能改变线路或准许出车。"
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor-current",
-            "school-current",
-            "ilo-genai"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -25022,12 +25026,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET2025：教育服务51%、运输与仓储36%、政府11%、其他2%。OOH校车段落另细列地方中小学48%、学校及员工巴士运输34%、地方政府（不含教育医院）11%、私立中小学2%，不是完全相同合并口径；不从美国份额推中国行业。"
+              "O*NET 列出的美国 2025 年主要行业是教育服务 51%、运输与仓储 36%、政府 11%。BLS 手册另列选定行业内校车司机年薪中位数，统计量不同。"
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "industry-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -25251,7 +25256,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "17任务16Core/1Supplemental，关键任务重要度100/99/98/97/95正确；一般活动前三为检查83、驾驶80、识别及监测各76，外部沟通24不是领先活动。"
+              "可用获准的排班和记录工具整理信息；车辆检查、驾驶和照管由对应人员负责。"
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.48",
@@ -25313,12 +25318,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS同页有本职业工资、五细行业工资及预测表，也有含公交城际父级摘要；分段读，不称全部未按行业区分。"
+              "O*NET 列出的美国 2025 年主要行业是教育服务 51%、运输与仓储 36%、政府 11%。BLS 手册另列选定行业内校车司机年薪中位数，统计量不同。"
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "ooh-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -25480,13 +25486,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮典型任务未把编程列为普遍驾驶门槛；编辑建议按真实岗位学线路、通信及记录工具，资格与安全考核独立核，不承诺所有用工方完全无需编程。"
+              "向用人单位核对实际使用的线路、通信和记录系统，以及相应培训。"
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "details-current",
-            "editor-current"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -25579,10 +25584,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮查阅的O*NET、BLS及ILO资料未提供该职业整体岗位消失年份的依据；本页不据任务暴露或自动化程度推算年份。"
+              "排班和记录工具可以提示信息缺项。职业就业预测不提供职业被替代的年份。"
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.74",
+          "source_refs": [
+            "onet-details",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -25627,7 +25636,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五步是本页编辑核对建议，非所有校车系统统一法定审批程序。"
+              "向用人单位核对数据输入、权限、现场复核及交接。不同单位的流程应分别查。"
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.78",
@@ -26262,23 +26271,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮未建立与美国 O*NET Bus Drivers, School（53-3051.00）一一对应的中国大陆全国职业工资分布；按证据路由（暂无可安全使用的数据）处理，本页不展示未经支持的中国职业工资数值。"
+              "本页未找到可核验的中国大陆全国校车司机职业工资；溧阳和无锡是两种雇主样本。"
             ]
           },
           "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.7",
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "精确校车司机职业全国薪资、分位及城市月薪仍证据不足；另补实际单位行业背景。2025城镇单位税前年平均背景（元/年）：教育非私营133539/私营63908；交通运输仓储邮政非私营133981/私营73133。按实际学校或服务用工单位行业核，非校车司机工资或城市月薪。"
-            ]
-          },
-          "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "nbs-current"
+            "sb-liyang",
+            "sb-wuxi"
           ],
           "type": "prose"
         },
@@ -26287,10 +26286,28 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆的工资统计按行业门类与岗位大类汇总，本轮未取得单列校车驾驶人的全国职业工资口径。"
+              "溧阳市客运有限公司 2026 年 11 月 6 日公告分列公交 28 人、校车 7 人；校车招聘条件列 A1 持证满三年，报名期为 11 月 9–12 日。待遇按企业办法，未列金额；公告的报名条件不能代替依法取得校车驾驶资格。 无锡师范附属太湖新城小学 2020 年公告招校车司机 1 人，注明 17 座车，所需准驾车型驾驶资格满三年，3 月 13 日 16:00 截止；薪酬面议，列五险一金。"
+            ]
+          },
+          "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "sb-liyang",
+            "sb-wuxi"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局发布行业及岗位大类工资。该发布未单列校车司机全国职业工资。"
             ]
           },
           "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.9",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -26334,10 +26351,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未建立与校车司机精确对应的中国大陆全国职业工资；本页不展示职业级数值，也不用行业门类均值替代。"
+              "两个招聘样本均未列金额；按各公告说明核对实际计薪方式。"
             ]
           },
           "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.13",
+          "source_refs": [
+            "sb-liyang",
+            "sb-wuxi"
+          ],
           "type": "prose"
         },
         {
@@ -26460,10 +26481,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮仍未取得中国大陆校车司机精确工资，以及线路调度或定位工具影响职业工资统计的资料；行业均值不代精确职业数据。"
+              "行业平均数不能推算校车司机工资，也不能用调度软件清单推算加薪。"
             ]
           },
           "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.23",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -26485,7 +26509,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑岗位背景：核实际学历及训练要求，不设统一中国高中法定门槛。"
+              "向目标单位确认学历和岗前训练；美国典型入门条件不能作为中国法定学历门槛。"
             ]
           },
           "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.25",
@@ -27032,7 +27056,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET53-3051全国工资分位与BLS校车精确段落、父级摘要分别核，不笼统称OOH全部仅合并。"
+              "美国全国职业分位来自 O*NET 展示的 BLS 工资；BLS 手册另列校车司机行业中位数，并将公交城际司机分开呈现。"
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.8",
@@ -27174,12 +27198,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET2025：教育服务51%、运输与仓储36%、政府11%、其他2%。OOH校车段落另细列地方中小学48%、学校及员工巴士运输34%、地方政府（不含教育医院）11%、私立中小学2%，不是完全相同合并口径；不从美国份额推中国行业。"
+              "O*NET 列出的美国 2025 年主要行业是教育服务 51%、运输与仓储 36%、政府 11%。BLS 手册另列选定行业内校车司机年薪中位数，统计量不同。；行业就业份额与行业工资分别查阅。"
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "industry-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27300,13 +27325,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET2025：教育服务51%、运输与仓储36%、政府11%、其他2%。OOH校车段落另细列地方中小学48%、学校及员工巴士运输34%、地方政府（不含教育医院）11%、私立中小学2%，不是完全相同合并口径；不从美国份额推中国行业。 OOH按校车细行业给工资中位，兼职和校历可能限制工时；不能用份额推工资。"
+              "O*NET 列出的美国 2025 年主要行业是教育服务 51%、运输与仓储 36%、政府 11%。BLS 手册另列选定行业内校车司机年薪中位数，统计量不同。"
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "industry-current",
-            "ooh-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27326,7 +27351,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "编辑比较合同中的班次、额外职责、实际计酬与假期安排；未取得收入因果因素大小或排序，不能说职责比出车更影响收入。"
+              "比较报价时核对班次、额外职责、计薪方式和假期安排。"
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.31",
@@ -27393,12 +27418,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS校车职业在该细行业年薪中位，不是所有行业岗位平均；另列其他客运47620美元/年，不从人数份额推工资。"
+              "BLS 手册只列部分行业的本职业年薪中位数；行业就业占比不能推算工资。"
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "ooh-current"
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27435,12 +27460,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS校车职业在该细行业年薪中位，不是所有行业岗位平均；另列其他客运47620美元/年，不从人数份额推工资。"
+              "BLS 手册只列部分行业的本职业年薪中位数；行业就业占比不能推算工资。"
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "ooh-current"
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27477,12 +27502,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS校车职业在该细行业年薪中位，不是所有行业岗位平均；另列其他客运47620美元/年，不从人数份额推工资。"
+              "BLS 手册只列部分行业的本职业年薪中位数；行业就业占比不能推算工资。"
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "ooh-current"
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27505,12 +27530,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "46100美元/年（2025中位）"
+              "BLS 手册未列此项"
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "ooh-current"
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27519,12 +27544,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS校车职业在该细行业年薪中位，不是所有行业岗位平均；另列其他客运47620美元/年，不从人数份额推工资。"
+              "BLS 手册只列部分行业的本职业年薪中位数；行业就业占比不能推算工资。"
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "ooh-current"
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27559,13 +27584,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职业工资2025、预测2025—2035；OOH校车五细行业工资已列，和O*NET大类人数份额不同。"
+              "全国职业工资、行业内职业中位数和行业就业份额分别查阅。"
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "ooh-current",
-            "ep-current"
+            "bls-pay",
+            "bls-entry",
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -27618,12 +27644,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "P90年薪65730是统计高端，不代表个人或普遍水平；本轮未取得合同资历等因素分解。"
+              "2025 年美国第 90 分位是 65,730 美元/年，是全国分布位置，不是个人报价。"
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet-localwages"
+            "bls-pay"
           ],
           "type": "prose"
         }
@@ -27770,7 +27796,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27782,19 +27808,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "紧急医疗技术员",
@@ -27953,7 +27979,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据为O*NET工作风格和编辑观察；本轮未取得本职业大五专门预测或因果研究。"
+              "证据为O*NET工作风格和自查；本页不提供本职业大五专门预测或因果研究。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.7",
@@ -27967,8 +27993,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "编辑观察是否按清单核车辆、记录和信息差错。",
-              "编辑观察是否谨慎按规则、分工配合照管并接受纠正；不以人格分数作因果结论。"
+              "自查是否按清单核车辆、记录和信息差错。",
+              "自查是否谨慎按规则、分工配合照管并接受纠正；不以人格分数作因果结论。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.8",
@@ -28001,7 +28027,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本轮O*NET/BLS未提供MBTI对本职业的专门效度，不设类型或分数门槛。"
+              "O*NET/BLS未提供MBTI对本职业的专门效度，不设类型或分数门槛。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.11",
@@ -28110,7 +28136,7 @@
           "data": {
             "entries": [
               "长坐、车厢与天气问答描述美国情境，非个人健康适任诊断。",
-              "93%每日封闭车辆、59%持续坐、36%每日污染物、18%每日冷热正确；实际健康、休息防护和单位条件分别核。"
+              "O*NET 的美国情境调查中，93% 每天在封闭车辆内工作，59% 持续坐着。向用人单位了解休息、防护及实际车辆条件。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.20",
@@ -28143,7 +28169,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎93、正直75、细节68、可靠88是职业工作风格，非情绪智力测验效度；本轮未取得本职业情商预测研究。"
+              "谨慎93、正直75、细节68、可靠88是职业工作风格，非情绪智力测验效度；本页不提供本职业情商预测研究。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.23",
@@ -28158,7 +28184,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "编辑观察建议：在学生情绪激动或秩序异常时，记录是否按本人职责和适用流程处置并报告；不比较情绪分数的预测效度。",
+              "自查：在学生情绪激动或秩序异常时，记录是否按本人职责和适用流程处置并报告；不比较情绪分数的预测效度。",
               "愿意承认操作或记录偏差并立即纠正与留痕，是专业能力的一部分。"
             ]
           },
@@ -28181,7 +28207,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑观察规则执行、检查及报告、接受反馈；未比较这些线索预测效力，实际资格与岗位安排另核。"
+              "自查规则执行、检查及报告、接受反馈；未比较这些线索预测效力，实际资格与岗位安排另核。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.26",
@@ -28195,7 +28221,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑适配观察：固定线路规范驾驶、配合全程照管、检查与如实记录；不能由喜欢开车或一次材料评定胜任。"
+              "自查：固定线路规范驾驶、配合全程照管、检查与如实记录；不能由喜欢开车或一次材料评定胜任。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.27",
@@ -28225,7 +28251,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑比较：愿意从运输转向专门急救任务。"
+              "比较：愿意从运输转向专门急救任务。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.29",
@@ -28270,7 +28296,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑比较：愿意处理停车规则及公众沟通。"
+              "比较：愿意处理停车规则及公众沟通。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.32",
@@ -28315,7 +28341,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑比较：愿意了解交通警务及秩序任务差距。"
+              "比较：愿意了解交通警务及秩序任务差距。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.35",
@@ -28360,7 +28386,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑比较：愿意承担道路或学校周边通行引导。"
+              "比较：愿意承担道路或学校周边通行引导。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.38",
@@ -28405,7 +28431,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑比较：愿意全程照管学生、引导及人数核对。"
+              "比较：愿意全程照管学生、引导及人数核对。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.41",
@@ -28450,7 +28476,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑比较：驾驶检查和沟通经验可讨论。"
+              "比较：驾驶检查和沟通经验可讨论。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.44",
@@ -28491,7 +28517,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "美国工作情境问答显示67%持续与他人接触、61%每天面对面讨论，与公众打交道对33%极其重要。编辑观察建议：关注学生、家长、学校及车队之间的信息核对表现；未取得与外向性分数的比较效度研究。"
+              "美国工作情境问答显示67%持续与他人接触、61%每天面对面讨论，与公众打交道对33%极其重要。自查：关注学生、家长、学校及车队之间的信息核对表现；未取得与外向性分数的比较效度研究。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.47",
@@ -28502,7 +28528,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内外向不能单独判适配；编辑建议观察清楚沟通、驾驶注意力和接受反馈，未取得外向提高本职业表现的依据。"
+              "内外向不能单独判适配；建议观察清楚沟通、驾驶注意力和接受反馈，未取得外向提高本职业表现的依据。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.48",
@@ -28516,7 +28542,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本轮未取得某MBTI类型更适合本职业的依据；只讨论偏好，不列类型名单或预测录用。"
+              "本页不提供某MBTI类型更适合本职业的依据；只讨论偏好，不列类型名单或预测录用。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.49",
@@ -28570,7 +28596,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑建议观察压力下按规程处置与沟通；O*NET风格不提供情商合格线或预测效度，资格与训练另核。"
+              "建议观察压力下按规程处置与沟通；O*NET风格不提供情商合格线或预测效度，资格与训练另核。"
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.53",
@@ -28741,7 +28767,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "编辑适配观察：驾驶规范、照管配合、检查报告和反馈修正；本轮未比较其预测效力，真实资格另核。"
+              "自查：驾驶规范、照管配合、检查报告和反馈修正；请按实际任务比较其预测效力，真实资格另核。"
             ]
           },
           "id": "bus-drivers-school.fit.riasec-fit-block.9",
@@ -28952,7 +28978,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险线索包括长坐、重复动作、污染冷热、学生上下车、车辆隐患及事件处置。情境比例不是发生率；驾驶、照管、学校和服务者按法规分工，姿势及数据核对另为编辑建议。"
+              "风险线索包括长坐、重复动作、污染冷热、学生上下车、车辆隐患及事件处置。情境比例不是发生率；驾驶、照管、学校和服务者按法规分工，姿势及数据核对另为建议。"
             ]
           },
           "id": "bus-drivers-school.risk.career-risk-cards.9",
@@ -28968,7 +28994,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国O*NET任务及情境提供职业线索；中国校车条例给资格、使用许可、检查及照管应急分工。就业预测不用于风险证据；健康姿势、权限及复盘为编辑建议，不声称风险干预效果。"
+              "美国O*NET任务及情境提供职业线索；中国校车条例给资格、使用许可、检查及照管应急分工。就业预测不用于风险证据；健康姿势、权限及复盘为建议，不声称风险干预效果。"
             ]
           },
           "id": "bus-drivers-school.risk.career-risk-cards.10",
@@ -29006,7 +29032,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑核座椅、休息、通风和实际卫生要求；条例23健康资格条件与26年度审验依实际程序执行，不将姿势建议称已验证疾病防治。"
+              "核对座椅、休息、通风和实际卫生要求；条例23健康资格条件与26年度审验依实际程序执行，不将姿势建议称已验证疾病防治。"
             ]
           },
           "id": "bus-drivers-school.risk.career-risk-cards.13",
@@ -29201,12 +29227,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑数据建议：按单位实际权限和平台授权处理学生家长资料；本页未取得专门数据法合规或NIST依据，职业分类发布来源不能作数据安全法。"
+              "先确认单位对学生和家长资料的访问与传递要求；纸面练习使用虚构资料。"
             ]
           },
           "id": "bus-drivers-school.risk.career-risk-cards.29",
           "source_refs": [
-            "editor-current"
+            "editorial"
           ],
           "type": "prose"
         },
@@ -29248,7 +29274,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。经营性客运63岁不能替代校车年龄。 使用许可与载员、线路另核14—16/30/34，不自动因训练通过取得。"
+              "中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。校车资格按本条例核对。 使用许可与载员、线路另核14—16/30/34，不自动因训练通过取得。"
             ]
           },
           "id": "bus-drivers-school.risk.career-risk-cards.33",
@@ -29620,7 +29646,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET新入职教育问答59%高中或同等、37%未达高中、3%中等后证书，非从业者学历。JobZone1—2/SVP不足6准备区间是通用概括；BLS本职业典型高中/相关经验None/短期在岗培训，不等所有个人数天至一年。美国CDL按车辆阈值及州核，接送相应学生上下学或学校活动按P/S背书；首次证照或背书另核ELDT及例外。 中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。经营性客运63岁不能替代校车年龄。"
+              "O*NET新入职教育问答59%高中或同等、37%未达高中、3%中等后证书，非从业者学历。JobZone1—2/SVP不足6准备区间是通用概括；BLS本职业典型高中/相关经验None/短期在岗培训，不等所有个人数天至一年。美国CDL按车辆阈值及州核，接送相应学生上下学或学校活动按P/S背书；首次证照或背书另核ELDT及例外。 中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。校车资格按本条例核对。"
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.20",
@@ -29716,7 +29742,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。经营性客运63岁不能替代校车年龄。"
+              "中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。校车资格按本条例核对。"
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.27",
@@ -30588,35 +30614,35 @@
                 "义务教育学校日常接送驾驶人",
                 "在带教下完成出车检查、按固定线路与课表时刻接送、执行上下车与过街安全规则并填写运营记录。",
                 "核个人资格、实际安全记录、使用许可和学校课表，非笼统所有事故为资格排除。",
-                "提交一份受监督完成的出车检查与运营报告样例。",
+                "可提交 SB-47 两版虚构记录及一份交接作为职业探索。实际车辆训练只在符合资格、获单位授权并按训练安排时进行。",
                 "此路径不独立决定线路与点位；须按学校与车队安排与核定线路执行。"
               ],
               [
                 "学校活动与校外用车驾驶人",
                 "按活动行程完成接送，处理临时路线与较长时段任务，配合活动组织方。",
                 "核活动性质、法定校车适用、行程及培训分工，不自动套每种活动车辆。",
-                "提交一份按活动行程完成的运营与异常说明。",
+                "可提交 SB-47 两版虚构记录及一份交接作为职业探索。实际车辆训练只在符合资格、获单位授权并按训练安排时进行。",
                 "行程变更须与学校与车队确认后执行，不得自行变更。"
               ],
               [
                 "特殊教育学生接送驾驶人",
                 "按个性化安排接送需要额外照护的学生，配合随车照管人员完成上下车协助。",
                 "核随车照管及辅助安排、具体设备和训练，不由校车证推出专门照护能力。",
-                "提交一份含协助上下车与沟通说明的运营记录。",
+                "可提交 SB-47 两版虚构记录及一份交接作为职业探索。实际车辆训练只在符合资格、获单位授权并按训练安排时进行。",
                 "照护与协助方式须按学校安排与相关规定执行。"
               ],
               [
                 "农村与偏远线路驾驶人",
                 "承担较长线路与复杂路况接送，处理天气与道路变化带来的异常。",
                 "核线路避险、安全天气条件及真实应急程序，不能强求复杂条件出车。",
-                "提交一份含路况与异常处置说明的行车记录。",
+                "可提交 SB-47 两版虚构记录及一份交接作为职业探索。实际车辆训练只在符合资格、获单位授权并按训练安排时进行。",
                 "条例30核定路线遇交通管制、施工、灾害、恶劣气象或重大事故等影响通行有例外；22不符安全条件须停运维修。42事故时驾驶人及照管人员立即报警并设警示，车内继续留学生有危险由照管人员撤至安全区并联络。按实际应急程序保护与报告，不等普通线路变更审批才处理危险。"
               ],
               [
                 "相邻工种转入（客运驾驶、随车照管、交通协管）",
                 "承接常规线路接送并熟悉学生照护与安全规则执行。",
                 "核原资格与校车资格差距；照管/交通协管经验不等3年匹配驾驶经历。",
-                "提交一份从既有岗位整理的可复核行车记录，并说明与校车驾驶的差距。",
+                "可提交 SB-47 两版虚构记录及一份交接作为职业探索。实际车辆训练只在符合资格、获单位授权并按训练安排时进行。",
                 "相邻驾驶或照护经验不等于校车驾驶资格；转岗须补足安全规则与资格训练。"
               ]
             ]
@@ -30642,7 +30668,7 @@
                 "id": "clearance",
                 "values": [
                   "中国校车资格与使用许可",
-                  "中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。经营性客运63岁不能替代校车年龄。",
+                  "中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。校车资格按本条例核对。",
                   "中国条例38—39要求全程随车照管人员，负责车下引导秩序、清点学生/安全落座系带/关门后示意启动、制止危险行为、核下车全部离车。驾驶员按41检查安全技术车况，禁止有隐患出车；学校和服务提供者按10—12/22承担制度、教育维护职责，不能把全部学生照管或许可归个人司机。 条例30核定路线遇交通管制、施工、灾害、恶劣气象或重大事故等影响通行有例外；22不符安全条件须停运维修。42事故时驾驶人及照管人员立即报警并设警示，车内继续留学生有危险由照管人员撤至安全区并联络。按实际应急程序保护与报告，不等普通线路变更审批才处理危险。"
                 ]
               },
@@ -30650,7 +30676,7 @@
                 "id": "onet-traits",
                 "values": [
                   "任务活动及情境",
-                  "17任务16Core/1Supplemental、41一般/16详细活动/57情境；关键任务重要度正确，情境非事故率。",
+                  "O*NET 任务和工作情境用于了解日常分工，不能推算事故率。",
                   "O*NET兴趣R75/C62/S58/E20/I10/A4，前三RCS；41具体领域另列运输93、体力手工25、防护服务23、机械电子22、个人服务20、社会服务19，不是RIASEC排他子类或个人合格线。"
                 ]
               },
@@ -30676,33 +30702,33 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构作业包：一条简化接送线路的时刻表与点位清单、一份车辆检查表、一份运营报告模板（学生人数或趟次、工时、里程、油耗），全部为自造材料且不含真实学生与线路信息。",
-                  "工具：模拟路线与地图界面、检查与报告表单；不接触真实校车与学生。",
-                  "边界说明：练习不得用于真实接送驾驶，也不得把练习结果包装成安全行车或合规结论。",
-                  "时间安排：一次 30 分钟时刻表与点位阅读 + 一次 60 分钟检查推演与报告填写。"
+                  "SB-47：三条虚构接送记录",
+                  "原始记录（登记代码／核对代码／回执）：A K1/K1/R1；B K3/K2/R2；C K4/K4/空白。代码与回执均为自造。",
+                  "题面规则：两代码相同且回执存在才记为齐备；不相同记差异，缺回执单列待补。不要替别人填值。",
+                  "修订只给 C 新增回执 R3，其他输入不变，原版保留。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "按时刻表与点位清单排出一次早晚接送的顺序与预计用时，标注可能影响准点的因素。",
-                  "填写一份车辆检查表，列出检查项、判据与发现异常时的处置与报修路径。",
-                  "填写一份运营报告：趟次、学生人数、里程、异常事件与处置结果。"
+                  "交付",
+                  "分别给三条记录写原版与修订状态、理由及各版齐备数。",
+                  "写一份交接，标出变化、原值与仍待核项。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "练习方式：先按规程与时刻表再动手，任何计划外假设单独记录。",
-                  "把「按班次完成接送」「学生安全执行到位」「异常已按流程上报」分开书写，不把完成接送直接当成安全与服务已达标。",
-                  "对不确定的车辆状态、学生情况或处置方式先停下核对，而不是凭经验跳步。"
+                  "先交卷",
+                  "第 6 天独立交两版和一份交接。",
+                  "第 7 天展开常见问题「SB-47 参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "如果练习中出现必须接触真实道路运营、载客驾驶或学生照护的环节，应停下并把该环节标为需具备相应资格的人员实施。",
-                  "如果不确定某项做法是否符合安全规则或运营规程，应记录该疑问并请复核人确认，而不是自行决定。"
+                  "仅为纸面练习",
+                  "不使用真实学生、学校、路线、车辆或证件，不模拟真实放行决定。"
                 ]
               }
             ]
@@ -30719,31 +30745,31 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：目标法域与单位要求的准驾车型与校车驾驶资格、班次与作息安排、核定线路与车型范围、安全与应急培训要求，以及计酬与津贴口径。",
-                  "每项都注明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「准驾车型」「校车驾驶资格」「线路安排」「安全记录」「计酬口径」分列，避免混为一谈。"
+                  "核对表",
+                  "逐条抄原始记录与判定依据。",
+                  "分别统计两版。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有经验的校车驾驶人或安全管理人员复核你的时刻表理解、车辆检查项与异常处置思路，重点检查是否遗漏学生上下车与过街安全环节。",
-                  "把复核意见与修改理由一并保留，作为判断你是否能接受专业复核的证据。",
-                  "记录复核人指出的每一处偏差及你后续的修改，形成可复核的改进记录。"
+                  "变更记录",
+                  "记录唯一输入变更。",
+                  "保留原版及变更依据。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明依据、自己的接送过程、被指出的偏差与仍不确定的部分。",
-                  "把复盘交给一位有经验的人复核，并保留复核意见与修改理由。"
+                  "交接",
+                  "列明仍待核项和对应责任方。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用路线、定位或记录系统辅助运营与报告，须注明系统与版本、数据范围与人工复核方式。",
-                  "行车与运营记录须保留趟次、学生人数、里程、异常与处置结果，使他人可以复核同一趟接送。"
+                  "纸面工具",
+                  "用纸笔或表格即可。"
                 ]
               }
             ]
@@ -30807,50 +30833,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业边界阅读：读 O*NET 53-3051.00 的职业摘要与详细资料，写清该职业做什么、不做什么。",
-                  "产出：一页任务对照表，标注每项来源与口径。"
+                  "第 1 天：看分工",
+                  "区分司机、照管人员与单位责任。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "法规与资格梳理：核对准驾车型与校车驾驶资格的公开条件，整理出自身的资格缺口。",
-                  "产出：一份资格与培训对照清单。"
+                  "第 2 天：抄原始记录",
+                  "抄三条虚构记录和题面规则。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "安全与应急梳理：列出学生上下车与过街、路况天气、学生行为与车厢秩序风险及对应处置与上报要求。",
-                  "产出：一份风险与处置清单。"
+                  "第 3 天：完成原版",
+                  "做原版并统计。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "时刻表推演练习：按一条虚构接送线路排出顺序与预计用时，标注影响准点的因素。",
-                  "产出：一份线路推演说明。"
+                  "第 4 天：按指定输入做修订",
+                  "只按题面给定变更完成第二版，重算齐备数，并保留原版。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "检查与报告推演：按检查表逐项推演检查项与判据，并填写一份运营报告样例。",
-                  "产出：一份检查与报告说明。"
+                  "第 5 天：写交接",
+                  "写明原值、变化、待核项和应接手的记录责任方。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请一位有经验的人指出你的检查项与处置思路中的偏差并说明原因。",
-                  "产出：一份复核意见与修改说明。"
+                  "第 6 天：独立交卷",
+                  "独立重核三条记录，保留原值，交两版和一份交接。交卷后可自行选择请人复核。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "决策复盘：把六日产出整理成一页对照表，标出继续、暂停与需要补齐的证据。",
-                  "产出：一页决策对照表与依据说明。"
+                  "第 7 天：展开参考",
+                  "打开常见问题「SB-47 参考解（交卷后再打开）」核对。"
                 ]
               }
             ]
@@ -30864,13 +30890,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你能在七天内完成全部产出，并愿意接受对出车检查、安全规则执行与记录的逐项检查。",
+              "继续了解：如果愿意独立核对记录、保留原值并清楚交接，用这两版和一份交接整理要向雇主问的问题。",
               "暂停：你能完成练习但难以接受复核纠正，或不适应长时间坐姿、封闭车厢、早晚分段与高频学生与家长接触。",
               "换方向：你更愿意做照护与秩序管理而不承担驾驶责任，可比较校车随车照管员；更愿意做现场通行管制，可比较交通协管员与旗手。",
               "核实用工：若目标岗位为外包或劳务派遣，先核实用工形式、班次安排与责任划分。",
-              "补齐证据：把七日产出整理成可复核的出车检查与运营报告样例，用于实训申请或岗位入职。",
+              "整理两版虚构记录和一份交接，供自查。它们只能帮助了解岗位意愿，不能作为实操、资格或入职证明。",
               "成本评估：把驾驶证与校车驾驶资格取证费用、复训安排、早晚分段与假期安排列入书面计划。",
-              "补充：若仍不确定，先把七日产出交给一位从业者复核，再决定是否投入取证与求职。"
+              "先自行按具名参考核对。交卷后可选请他人反馈，不以得到他人反馈作为继续了解的前提。"
             ]
           },
           "id": "bus-drivers-school.path.seven-day-decision.1",
@@ -30914,7 +30940,7 @@
                 "驾驶校车的人员",
                 "决定能否合法驾驶校车。",
                 "属于法定要求：应当依照《校车安全管理条例》取得校车驾驶资格，由公安机关交通管理部门在机动车驾驶证上签注准许驾驶校车。",
-                "中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。经营性客运63岁不能替代校车年龄。",
+                "中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。校车资格按本条例核对。",
                 "按申请与审查流程投入（申请材料审查期 5 个工作日）。",
                 "资格签注不自动赋予线路运营安排；资格条件变化时须按规定处理。"
               ],
@@ -30967,7 +30993,7 @@
             "paragraphs": [
               "资格边界：驾驶经历、准驾车型、校车驾驶资格签注、校车使用许可、单位上岗考核与线路安排是不同状态，任何一项都不能由另一项自动推出。",
               "O*NET新入职教育问答59%高中或同等、37%未达高中、3%中等后证书，非从业者学历。JobZone1—2/SVP不足6准备区间是通用概括；BLS本职业典型高中/相关经验None/短期在岗培训，不等所有个人数天至一年。美国CDL按车辆阈值及州核，接送相应学生上下学或学校活动按P/S背书；首次证照或背书另核ELDT及例外。",
-              "中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。经营性客运63岁不能替代校车年龄。 中国条例38—39要求全程随车照管人员，负责车下引导秩序、清点学生/安全落座系带/关门后示意启动、制止危险行为、核下车全部离车。驾驶员按41检查安全技术车况，禁止有隐患出车；学校和服务提供者按10—12/22承担制度、教育维护职责，不能把全部学生照管或许可归个人司机。",
+              "中国校车条例23—26：相应驾驶证和3年以上驾驶经历、25—60周岁、连续3记分周期未满分、无致死亡重伤交通事故责任、无饮酒/醉酒驾车、最近1年无客运超员超速等严重违法、无犯罪、符合健康和无酗酒吸毒条件；经公安交通签注取得校车驾驶资格，并每年接受审验。校车资格按本条例核对。 中国条例38—39要求全程随车照管人员，负责车下引导秩序、清点学生/安全落座系带/关门后示意启动、制止危险行为、核下车全部离车。驾驶员按41检查安全技术车况，禁止有隐患出车；学校和服务提供者按10—12/22承担制度、教育维护职责，不能把全部学生照管或许可归个人司机。",
               "入职前应逐项核实准驾车型与校车驾驶资格、核定线路与班次安排、岗前培训与考核记录，以及计酬与津贴口径，并保留书面确认。"
             ]
           },
@@ -30988,11 +31014,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘核对说明：本轮没有具体雇主招聘公告；校车、学生接送等为编辑名称示例，不能称已核公开招聘頻率或相同法定身份。",
-              "阅读招聘信息时应核对用工形式（学校自营、校车服务公司或外包）、班次与作息安排、准驾车型与校车驾驶资格要求、核定线路与车型范围、工时与趟次计酬方式，并警惕把短期培训宣传为可独立驾驶校车或可自行决定线路与点位的表述。"
+              "溧阳市客运有限公司 2026 年 11 月 6 日公告分列公交 28 人、校车 7 人；校车招聘条件列 A1 持证满三年，报名期为 11 月 9–12 日。待遇按企业办法，未列金额；公告的报名条件不能代替依法取得校车驾驶资格。 无锡师范附属太湖新城小学 2020 年公告招校车司机 1 人，注明 17 座车，所需准驾车型驾驶资格满三年，3 月 13 日 16:00 截止；薪酬面议，列五险一金。 中国《校车安全管理条例》第 14 条规定校车使用实行许可；第 23–24 条要求驾驶人依法取得校车驾驶资格，并由公安交管部门在驾驶证签注。匹配的普通驾驶证只是条件之一；校车使用许可、驾驶资格和录用分开核对。"
             ]
           },
           "id": "bus-drivers-school.path.recruitment-sample.1",
+          "source_refs": [
+            "sb-liyang",
+            "sb-wuxi",
+            "faa-design-approvals"
+          ],
           "title": "招聘样本使用说明",
           "type": "notice"
         }
@@ -31254,13 +31284,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2025：教育服务51%、运输与仓储36%、政府11%、其他2%。OOH校车段落另细列地方中小学48%、学校及员工巴士运输34%、地方政府（不含教育医院）11%、私立中小学2%，不是完全相同合并口径；不从美国份额推中国行业。 OOH称学校仍依赖校车、入学人数下降约束需求，非AI预测。"
+              "O*NET 列出的美国 2025 年主要行业是教育服务 51%、运输与仓储 36%、政府 11%。BLS 手册另列选定行业内校车司机年薪中位数，统计量不同。"
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.12",
           "source_refs": [
-            "industry-current",
-            "ooh-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -31330,13 +31360,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS精确0.7%、OOH/O*NET整数1%Slower than average，现行已非旧Little or no change。"
+              "BLS 表 1.2 的校车司机就业增幅是 0.7%。BLS 手册将它四舍五入为 1%；年均空缺约 56,500 个，含替补。"
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.18",
           "source_refs": [
-            "ep-current",
-            "trends-current"
+            "bls-outlook"
           ],
           "type": "prose"
         },
@@ -31505,12 +31534,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2025：教育服务51%、运输与仓储36%、政府11%、其他2%。OOH校车段落另细列地方中小学48%、学校及员工巴士运输34%、地方政府（不含教育医院）11%、私立中小学2%，不是完全相同合并口径；不从美国份额推中国行业。"
+              "O*NET 列出的美国 2025 年主要行业是教育服务 51%、运输与仓储 36%、政府 11%。BLS 手册另列选定行业内校车司机年薪中位数，统计量不同。"
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.31",
           "source_refs": [
-            "industry-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -31569,7 +31599,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离较近：同属巴士驾驶，服务对象与班次安排不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
+              "转向时比较：距离较近：同属巴士驾驶，服务对象与班次安排不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.36",
@@ -31605,7 +31635,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离较近：同属载客驾驶，线路形式不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
+              "转向时比较：距离较近：同属载客驾驶，线路形式不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.39",
@@ -31641,7 +31671,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离中等：同属载客驾驶，运营方式不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
+              "转向时比较：距离中等：同属载客驾驶，运营方式不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.42",
@@ -31677,7 +31707,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离中等：同属营运驾驶，载运对象不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
+              "转向时比较：距离中等：同属营运驾驶，载运对象不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.45",
@@ -31716,7 +31746,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离中等：同属运输操作，作业系统不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
+              "转向时比较：距离中等：同属运输操作，作业系统不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.48",
@@ -31752,7 +31782,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离较近：同属载客运输，作业系统不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
+              "转向时比较：距离较近：同属载客运输，作业系统不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.51",
@@ -31788,7 +31818,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离很近：同一校车场景内的分工不同，不承担驾驶责任。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
+              "转向时比较：距离很近：同一校车场景内的分工不同，不承担驾驶责任。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.54",
@@ -31824,7 +31854,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑距离判断：距离中等：都在运营体系内，决策与执行责任不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
+              "转向时比较：距离中等：都在运营体系内，决策与执行责任不同。 未取得转岗成功率或统一门槛，目标法域、资格与训练另核。"
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.57",
@@ -31859,16 +31889,22 @@
                 "question_key": "career.faq.bus-drivers-school.2"
               },
               {
-                "answer": "适配信号是能在固定线路与严格时刻表下长期保持规范操作、坚持执行学生上下车与过街安全规则、在学生秩序异常时按流程处置并报告、如实记录人数与里程；喜欢开车本身不足以证明胜任。",
+                "answer": "先用 SB-47 整理原版和更新版，观察自己能否保留原始信息并把未决项说清。",
                 "id": "bus-drivers-school.faq.3",
                 "question": "怎样判断自己适不适合做这份工作？",
-                "question_key": "career.faq.bus-drivers-school.3"
+                "question_key": "career.faq.bus-drivers-school.3",
+                "source_refs": [
+                  "editorial"
+                ]
               },
               {
-                "answer": "路线与地图查询、车辆定位与到点提醒、车辆检查与里程油耗台账、报告初稿生成等环节可被辅助；驾驶决策、学生上下车与过街安全执行、乘车秩序处置、应急救护与故障事故报告仍由人负责。",
+                "answer": "排班或台账工具可提醒记录缺项；驾驶、现场学生照管和异常处置由实际岗位按规定负责。系统打勾不能代替人在现场核对，也不能改变线路或准许出车。",
                 "id": "bus-drivers-school.faq.4",
                 "question": "AI 与自动化会改变哪些环节？",
-                "question_key": "career.faq.bus-drivers-school.4"
+                "question_key": "career.faq.bus-drivers-school.4",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
                 "answer": "出车前的车辆与安全设备状态确认、按路况与时刻的安全驾驶判断、学生上下车与过街安全的现场执行、乘车秩序与突发事件的处置结论、故障与事故的报告结论，都必须由取得校车驾驶资格的驾驶人确认。",
@@ -31877,10 +31913,13 @@
                 "question_key": "career.faq.bus-drivers-school.5"
               },
               {
-                "answer": "需要分别核对准驾车型与驾驶经历、校车驾驶资格与驾驶证签注、校车使用许可与核定线路、单位上岗培训与考核记录；在中国大陆，校车驾驶人应当依照《校车安全管理条例》取得校车驾驶资格，须取得相应准驾车型驾驶证并具有 3 年以上驾驶经历、年龄在 25 周岁以上且不超过 60 周岁、最近连续 3 个记分周期内没有被记满 12 分记录，且无致人死亡或者重伤的交通事故责任记录等。",
+                "answer": "中国《校车安全管理条例》第 14 条规定校车使用实行许可；第 23–24 条要求驾驶人依法取得校车驾驶资格，并由公安交管部门在驾驶证签注。匹配的普通驾驶证只是条件之一；校车使用许可、驾驶资格和录用分开核对。",
                 "id": "bus-drivers-school.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.bus-drivers-school.6"
+                "question_key": "career.faq.bus-drivers-school.6",
+                "source_refs": [
+                  "faa-design-approvals"
+                ]
               },
               {
                 "answer": "O*NET 工作情境显示 93% 每天在封闭车辆内作业、59% 持续或几乎持续坐着、80% 持续或几乎持续用手操作物件与工具、36% 每天接触污染物、18% 每天暴露于很热或很冷的环境；44% 表示准确无误极其重要，66% 每天面临时间压力。",
@@ -31895,16 +31934,25 @@
                 "question_key": "career.faq.bus-drivers-school.8"
               },
               {
-                "answer": "O*NET 页面显示本职业 2024 年就业 387,300 人、2024—2034 年预测为变化很小或几乎没有变化、职位空缺 61,000 个；BLS 职业展望手册的合并页另给出全部巴士司机 2025—2035 年增长 2%、年均约 77,600 个空缺（覆盖范围与期间不同）。转向相邻工种须补足目标岗位的资格与规范要求。",
+                "answer": "美国 SOC 53-3051 的 2025 年工资中位数是 47,920 美元/年或 23.04 美元/小时。BLS 预计就业由 2025 年约 396,800 增至 2035 年约 399,700（+0.7%、净增约 2,900），平均每年约 56,500 个空缺，包含替补。",
                 "id": "bus-drivers-school.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.bus-drivers-school.9"
+                "question_key": "career.faq.bus-drivers-school.9",
+                "source_refs": [
+                  "bls-pay",
+                  "bls-outlook"
+                ]
               },
               {
-                "answer": "美国数值来自 O*NET 展示的 BLS 2025 年 OEWS 数据，口径为 Bus Drivers, School（SOC 53-3051），即本页身份口径；中国大陆没有该职业的全国职业工资统计，本页按证据路由不发布职业级与代理工资，并明确中文页面语言不构成中国等价职业或工资映射。",
+                "answer": "美国 2025 年工资是 SOC 53-3051 全国职业分位。本页未找到可核验的中国大陆全国校车司机职业工资数据；溧阳和无锡公告只代表各自岗位，不能通过换汇变为可比较的全国数值。",
                 "id": "bus-drivers-school.faq.10",
                 "question": "美国工资与中国大陆口径为什么不能互相换算？",
-                "question_key": "career.faq.bus-drivers-school.10"
+                "question_key": "career.faq.bus-drivers-school.10",
+                "source_refs": [
+                  "bls-pay",
+                  "sb-liyang",
+                  "sb-wuxi"
+                ]
               },
               {
                 "answer": "O*NET 技术清单共 3 项软件技能（1 项 Hot Technology），含互联网浏览器软件、地图制作软件（AOL MapQuest）与操作系统软件（Microsoft Windows）；核心能力是安全与防御性驾驶、按核定线路与严格时刻表执行、学生上下车与过街安全规则、乘车秩序与行为引导、车辆与安全设备检查、急救程序与应急疏散，以及运营报告与记录规范。",
@@ -31913,16 +31961,28 @@
                 "question_key": "career.faq.bus-drivers-school.11"
               },
               {
-                "answer": "工作涉及长时间坐姿与重复动作、封闭车厢与污染物暴露、非常热或非常冷的环境、学生上下车与过街时的交通风险以及学生行为冲突；应按安全操作规程与防御性驾驶要求行车，出车前检查车辆与安全设备，严格执行上下车与过街安全规则，按规程处置秩序与突发事件并升级，并按单位制度管理作息与疲劳。",
+                "answer": "《校车安全管理条例》第 38 条要求配车学校或服务提供者指派随车照管人员全程照管乘车学生；第 39 条另列照管职责。驾驶人负责车辆驾驶和依法履行其职责，不能由岗位名称推定兼任照管。",
                 "id": "bus-drivers-school.faq.12",
                 "question": "作业安全与防护需要注意什么？",
-                "question_key": "career.faq.bus-drivers-school.12"
+                "question_key": "career.faq.bus-drivers-school.12",
+                "source_refs": [
+                  "faa-design-approvals"
+                ]
               },
               {
                 "answer": "93% 每天在封闭车辆内作业、59% 持续或几乎持续坐着、80% 持续用手操作物件与工具、36% 每天接触污染物；67% 持续与他人接触、61% 每天进行面对面讨论，80% 每天需要做决策，74% 为规律班制但早晚分段与季节性安排常见。",
                 "id": "bus-drivers-school.faq.13",
                 "question": "校车司机的工作环境与协作方式如何？",
                 "question_key": "career.faq.bus-drivers-school.13"
+              },
+              {
+                "answer": "原版：A 两个代码一致且有回执，齐备；B 的登记 K3 与核对 K2 不同，交接差异；C 两个代码一致但没有回执，待补。原版只有 A 齐备。修订只补 C 的 R3 后，A 和 C 齐备，B 原差异仍待核。保留两版，交给模拟记录责任方。齐备只是纸面记录状态，不代表真实交接或准许出车。",
+                "id": "bus-drivers-school.faq.14",
+                "question": "SB-47 参考解（交卷后再打开）",
+                "question_key": "career.faq.bus-drivers-school.14",
+                "source_refs": [
+                  "editorial"
+                ]
               }
             ]
           },
@@ -31943,10 +32003,10 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "美国53-3051现行2025工资及2025—2035预测；BLS校车精确段落与含公交城际父级分读。保护范围原历史事实和文献保留，不能称整页统一。",
-              "中国精确职业及城市薪资就业仍缺，可补学校教育或交通运输实际用工行业年度背景；平均不是司机工资或月薪。",
-              "边界三：编辑练习与作品建议均为虚构材料，读者不应据此在真实道路上进行载客驾驶或车辆操作，也不得把练习结果包装成安全行车、运营合规或事故责任结论。",
-              "边界四：本页由 O*NET、BLS、《校车安全管理条例》《中华人民共和国道路运输条例》、《中华人民共和国职业分类大典（2022 年版）》公布信息、ILO 任务暴露研究等公开资料及编辑设计组成；每项资料的适用范围与缺口单独标记。"
+              "BLS 表 1.2 的校车司机就业增幅是 0.7%。BLS 手册将它四舍五入为 1%；年均空缺约 56,500 个，含替补。",
+              "中国大陆的两份招聘公告属于各自雇主。行业均值不能当成校车司机工资。",
+              "SB-47 使用虚构记录，不能作为真实接送、运营或安全判断。",
+              "《校车安全管理条例》第 38 条要求配车学校或服务提供者指派随车照管人员全程照管乘车学生；第 39 条另列照管职责。驾驶人负责车辆驾驶和依法履行其职责，不能由岗位名称推定兼任照管。"
             ]
           },
           "id": "bus-drivers-school.sources.boundary.1",
@@ -31971,10 +32031,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组：依据 O*NET、BLS、《校车安全管理条例》与《中华人民共和国职业分类大典（2022 年版）》公布信息等公开资料整理，逐项标注口径与数据期。"
+              "比较工作时先问学校、照管人员和驾驶人的实际分工，再查班次、资格和用工条件。"
             ]
           },
           "id": "bus-drivers-school.sources.source-card.1",
+          "source_refs": [
+            "faa-design-approvals",
+            "sb-liyang",
+            "sb-wuxi"
+          ],
           "type": "prose"
         },
         {
@@ -31982,25 +32047,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮来源：O*NET2026任务活动情境教育兴趣风格、2025行业招聘工资及2025—2035预测；BLS分节OOH/表1.2；统计局2025行业；2022大典实际驾驶细类；现行校车条例及2026道路条例适用边界；FMCSA校车CDL/P/S及ELDT。ILO同版一般任务暴露与编辑建议分标。"
+              "美国 SOC 53-3051 的 2025 年工资中位数是 47,920 美元/年或 23.04 美元/小时。BLS 预计就业由 2025 年约 396,800 增至 2035 年约 399,700（+0.7%、净增约 2,900），平均每年约 56,500 个空缺，包含替补。"
             ]
           },
           "id": "bus-drivers-school.sources.source-card.2",
           "source_refs": [
-            "details-current",
-            "industry-current",
-            "hot-current",
-            "ep-current",
-            "ooh-current",
-            "nbs-current",
-            "classification-current",
-            "school-current",
-            "transport-current",
-            "cdl-current",
-            "ps-current",
-            "eldt-current",
-            "ilo-genai",
-            "editor-current"
+            "bls-outlook",
+            "bls-pay"
           ],
           "type": "prose"
         },
@@ -32009,17 +32062,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-09核：O*NET档案2026/行业工资招聘2025/预测2025—2035；统计局2025；校车条例现行库仍2012、资格25—60；道路条例2026第六修订不能替代专门校车规定；大典2022实际原书187—188页。旧共享登记不换文献身份。"
+              "中国《校车安全管理条例》第 14 条规定校车使用实行许可；第 23–24 条要求驾驶人依法取得校车驾驶资格，并由公安交管部门在驾驶证签注。匹配的普通驾驶证只是条件之一；校车使用许可、驾驶资格和录用分开核对。"
             ]
           },
           "id": "bus-drivers-school.sources.source-card.3",
           "source_refs": [
-            "details-current",
-            "ep-current",
-            "nbs-current",
-            "school-current",
-            "transport-current",
-            "classification-current"
+            "faa-design-approvals"
           ],
           "type": "prose"
         },
@@ -32028,15 +32076,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "年均空缺非十年合计，精确本职业与父级分节读；软件NA非0、教育问答非学历构成、情境非事故率。校车定义、司机资格、使用许可、照管及维修职责分别核。精确中国工资就业、AI替代率、人格效度、招聘频率与转岗成功率仍缺。"
+              "SB-47 是虚构记录的纸面练习，不接触真实学生、路线、证件或车辆。"
             ]
           },
           "id": "bus-drivers-school.sources.source-card.4",
           "source_refs": [
-            "editor-current",
-            "school-current",
-            "ep-current",
-            "nbs-current"
+            "editorial"
           ],
           "type": "prose"
         }
@@ -32063,7 +32108,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32075,13 +32120,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看校车司机职业页面",
@@ -32140,20 +32185,20 @@
                 "url": "https://www.onetonline.org/link/summary/53-3051.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "支持 2024 年行业分布：教育服务 51%、运输与仓储 36%、政府 10%、其他行业 3%。",
-                  "2024 年分布；访问 2026-09-16"
+                  "O*NET 的 2025 年美国主要行业为教育服务 51%、运输与仓储 36%、政府 11%；这些是行业就业份额。",
+                  "不据行业占比推工资。"
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-industry",
-                "limitation": "行业分布描述统计分类，不用于推导行业工资或就业规模。",
+                "limitation": "不据行业占比推工资。",
                 "market": "美国",
-                "name": "O*NET-SOC 53-3051.00 行业分布",
-                "period": "2024 年分布；访问 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET：美国校车司机主要行业",
+                "period": "2025",
+                "publisher": "O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/53-3051.00"
+                "url": "https://www.onetonline.org/link/details/53-3051.00"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32190,12 +32235,12 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "支持合并职业口径的官方数值：2025 年中位年薪 49,390 美元、时薪中位数 23.75 美元、2025 年在岗 563,200 人、2025—2035 年增长 2%（慢于平均）、就业变化约 9,800 人、年均约 77,600 个空缺；其中校车司机 2025 年 5 月中位年薪 47,920 美元。该页为合并职业口径，不是本页身份口径。",
+                  "校车司机与公交城际司机分节；校车行业内职业年薪中位数列学校与员工巴士运输 50,040、地方政府（不含教育与医院）48,980、地方中小学 45,830 美元。",
                   "2025 年 5 月工资；2025—2035 年预测"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-entry",
-                "limitation": "该页覆盖全部巴士司机（含城际与公交客运司机等），不是本页身份口径；其期间（2025—2035 年）与覆盖范围同 O*NET 展示的 2024—2034 年本职业口径不同，须分别标注、不互换或相加。",
+                "limitation": "该页覆盖全部巴士司机（含城际与公交客运司机等），不是本页身份口径；其期间（2025—2035 年）与覆盖范围同 O*NET 展示的 2025–2035 年本职业口径不同，须分别标注、不互换或相加。",
                 "market": "美国",
                 "name": "BLS《Occupational Outlook Handbook》Bus Drivers（合并职业口径）",
                 "period": "2025 年 5 月工资；2025—2035 年预测",
@@ -32220,20 +32265,20 @@
                 "url": "https://www.onetonline.org/link/localwages/53-3051.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "支持该职业 2024 年就业 387,300 人、2024—2034 年增长标签 Little or no change与职位空缺 61,000 个。",
-                  "就业为 2024 年、预测为 2024—2034 年；访问 2026-09-16"
+                  "美国 SOC 53-3051 的 2025 年工资中位数是 47,920 美元/年或 23.04 美元/小时。BLS 预计就业由 2025 年约 396,800 增至 2035 年约 399,700（+0.7%、净增约 2,900），平均每年约 56,500 个空缺，包含替补。",
+                  "美国本职业原行；年均空缺含替补。"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-outlook",
-                "limitation": "就业与预测为该职业口径；BLS 合并页的期间（2025—2035 年）与覆盖范围不同。",
+                "limitation": "美国本职业原行；年均空缺含替补。",
                 "market": "美国",
-                "name": "O*NET-SOC 53-3051.00 职业摘要（就业与预测字段）",
-                "period": "就业为 2024 年、预测为 2024—2034 年；访问 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：校车司机 53-3051",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-3051.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32254,34 +32299,34 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "支持道路运输经营与道路运输相关业务的适用范围，以及从事道路运输经营应当依法经营、诚实信用、公平竞争的要求。",
+                  "用来区分一般道路运输与校车专门规定。",
                   "2004-07-01 施行并多次修订；访问 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
                 "id": "nasa-seh",
                 "limitation": "该条例的适用范围包括道路运输经营与道路运输相关业务；本页引用的是政府门户网站的公开转载文本，该条例此后另有修订，具体适用须以现行文本为准。",
                 "market": "中国大陆",
-                "name": "《中华人民共和国道路运输条例》（政府门户公开转载文本）",
+                "name": "国家行政法规库：《中华人民共和国道路运输条例》",
                 "period": "2004-07-01 施行并多次修订；访问 2026-09-16",
                 "publisher": "国务院",
                 "scope": "contextual",
-                "url": "https://www.gov.cn/govweb/gongbao/content/2004/content_62803.htm"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1806"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "支持校车驾驶资格与校车使用许可的法定要求：校车驾驶人应当取得校车驾驶资格，须取得相应准驾车型驾驶证并具有 3 年以上驾驶经历、年龄在 25 周岁以上且不超过 60 周岁、最近连续 3 个记分周期内没有被记满 12 分记录、无致人死亡或者重伤的交通事故责任记录、无饮酒后驾驶或者醉酒驾驶机动车记录且最近 1 年内无驾驶客运车辆超员与超速等严重交通违法行为记录、无犯罪记录并符合健康条件；申请由公安机关交通管理部门审查后在机动车驾驶证上签注准许驾驶校车；校车应当依法取得使用许可。",
-                  "2012-04-05 公布施行；访问 2026-09-16"
+                  "中国《校车安全管理条例》第 14 条规定校车使用实行许可；第 23–24 条要求驾驶人依法取得校车驾驶资格，并由公安交管部门在驾驶证签注。匹配的普通驾驶证只是条件之一；校车使用许可、驾驶资格和录用分开核对。",
+                  "国家校车规则；具体车辆、资格和职责分开。"
                 ],
                 "evidence_type": "primary_document",
                 "id": "faa-design-approvals",
-                "limitation": "该条例规定校车的使用许可与校车驾驶资格的法定条件：校车驾驶人应当取得校车驾驶资格，并在机动车驾驶证上签注准许驾驶校车；校车应当依法取得使用许可并按核定线路与规定载员运行。条例为行政法规，不建立职业工资统计口径。",
+                "limitation": "国家校车规则；具体车辆、资格和职责分开。",
                 "market": "中国大陆",
-                "name": "《校车安全管理条例》（国务院令第 617 号）",
-                "period": "2012-04-05 公布施行；访问 2026-09-16",
+                "name": "国家行政法规库：《校车安全管理条例》",
+                "period": "2012",
                 "publisher": "国务院",
                 "scope": "contextual",
-                "url": "https://www.gov.cn/zhengce/content/2012-04/10/content_5397.htm"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=342&Query=%E8%BD%A6"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32302,12 +32347,12 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "记录本页编辑设计与虚构练习的整理方式、口径标注原则与缺口登记方式。",
+                  "SB-47 三条虚构记录和一次回执变更；交两版和一份交接。",
                   "2026-09 整理"
                 ],
                 "evidence_type": "editorial_synthesis",
                 "id": "editorial",
-                "limitation": "编辑整理记录，用于说明口径与缺口，不作为事实来源。",
+                "limitation": "虚构记录不涉及真实学生、证件、车辆或路线。",
                 "market": "美国",
                 "name": "FermatMind 编辑设计与虚构练习",
                 "period": "2026-09 整理",
@@ -32462,12 +32507,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "BLS巴士司机（校车段落与父级分读）",
-                  "2025工资/2025—2035预测"
+                  "校车司机与公交城际司机分节；校车行业内职业年薪中位数列学校与员工巴士运输 50,040、地方政府（不含教育与医院）48,980、地方中小学 45,830 美元。",
+                  "全国职业工资与选定行业工资分开。"
                 ],
                 "evidence_type": "primary_document",
                 "id": "ooh-current",
-                "limitation": "校车精确段落含47920工资、五行业中位、396800就业和1%预测；父级563200/49390/2%/77600空缺另标，不是全部只有父级。",
+                "limitation": "校车分节列三类行业；公交城际分节工资不用于校车。",
                 "market": "美国",
                 "name": "BLS巴士司机（校车段落与父级分读）",
                 "period": "2025工资/2025—2035预测",
@@ -32515,7 +32560,7 @@
                 ],
                 "evidence_type": "primary_document",
                 "id": "transport-current",
-                "limitation": "道路客运经营适用另核，不直接替代校车条例年龄、资格、使用许可；不把经营性客运63改进校车25—60。",
+                "limitation": "道路客运经营适用另核，不直接替代校车条例年龄、资格、使用许可。",
                 "market": "中国大陆",
                 "name": "道路运输条例2026修訂",
                 "period": "2026-01-30第六次修订",
@@ -32591,34 +32636,66 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "费马测试校车任务核对与转岗建议",
-                  "2026-10-09作者整理"
+                  "职业探索与工作分工说明"
                 ],
                 "evidence_type": "editorial_synthesis",
                 "id": "editor-current",
-                "limitation": "工具试点、人格观察、递进及距离为编辑建议；无招聘频率、专门测评效度、替代率或干预效果证据。",
+                "limitation": "工具试点、人格观察、递进及距离为建议；无招聘频率、专门测评效度、替代率或干预效果证据。",
                 "market": "跨市场",
                 "name": "费马测试校车任务核对与转岗建议",
-                "period": "2026-10-09作者整理",
+                "period": "职业探索",
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/53-3051.00"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "按时刻表接送｜在固定的社区点位按严格时刻表接送学生，遵守交通法规并安全礼貌驾驶｜按校历与时刻表完成的学生运输服务。 — 25/100; weight=1/3; bus-drivers-school.profile.responsibilities-block.1[1]",
-                  "上下车与过街安全｜在学生上下车或停靠点附近过街时执行安全规则，护送低龄学生过马路并协助上下车｜上下车与过街安全执行记录。 — 0/100; weight=1/3; bus-drivers-school.profile.responsibilities-block.1[2]",
-                  "报告与记录｜报告车辆故障与需要维修的项目、报告延误与事故，准备并提交学生人数或趟次、工时、里程与油耗等报告｜故障与事故报告、行车与运营报告。 — 75/100; weight=1/3; bus-drivers-school.profile.responsibilities-block.1[4]"
+                  "排班或台账工具可提醒记录缺项；驾驶、现场学生照管和异常处置由实际岗位按规定负责。系统打勾不能代替人在现场核对，也不能改变线路或准许出车。",
+                  "任务清单不估计自动化率。",
+                  "任务清单不估计自动化率。",
+                  "任务清单不估计自动化率。",
+                  "任务清单不估计自动化率。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "primary_document",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "任务清单不估计自动化率。",
+                "market": "美国",
+                "name": "O*NET：校车检查与记录任务",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-3051.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "溧阳市客运有限公司 2026 年 11 月 6 日公告分列公交 28 人、校车 7 人；校车招聘条件列 A1 持证满三年，报名期为 11 月 9–12 日。待遇按企业办法，未列金额；公告的报名条件不能代替依法取得校车驾驶资格。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "sb-liyang",
+                "limitation": "具名地区与公告期。",
+                "market": "中国大陆",
+                "name": "溧阳市：校车司机招聘公告",
+                "period": "2026-11-06",
+                "publisher": "溧阳市人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.liyang.gov.cn/html/czly/2026/AQQJAIBA_1106/35959.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "无锡师范附属太湖新城小学 2020 年公告招校车司机 1 人，注明 17 座车，所需准驾车型驾驶资格满三年，3 月 13 日 16:00 截止；薪酬面议，列五险一金。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "sb-wuxi",
+                "limitation": "单一历史样本，薪资面议。",
+                "market": "中国大陆",
+                "name": "无锡教育局：太湖新城小学校车招聘",
+                "period": "2020-03-09",
+                "publisher": "无锡市教育局",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.wuxi.gov.cn/doc/2020/03/09/2858668.shtml"
               }
             ]
           },
@@ -35141,7 +35218,7 @@
               "entry": "link-7",
               "field": "entity"
             },
-            "scope": "姿势、数据权限与复盘为编辑建议，非法律合规或干预效果"
+            "scope": "姿势、数据权限与复盘为建议，非法律合规或干预效果"
           }
         ]
       },
@@ -35974,7 +36051,7 @@
       },
       "hero": {
         "h1": "校车司机",
-        "quick_answer": "本页条目对应校车司机（美国侧 O*NET-SOC 53-3051.00）：驾驶校车接送学生并确保遵守安全规则——出车前检查车辆与安全设备、在固定社区点位按严格时刻表接送、在学生上下车与过街时执行安全规则、维持车内秩序、报告故障与延误事故、提交学生人数与里程等运营报告并保持车厢清洁；工作以长时间坐姿、封闭车厢、早晚分段与高频学生与家长接触为常态，其职责不等于自行决定线路与收费，也不替代学校与主管部门的校车安全管理责任。",
+        "quick_answer": "校车司机按核定安排接送学生、检查车辆和记录异常。先区分司机、随车照管人员与校车服务单位的责任，再核岗位班次、个人驾驶资格及车辆许可。",
         "title": "校车司机"
       },
       "market_signal_card": {
@@ -37540,7 +37617,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与排班记录",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37558,7 +37635,7 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "O*NET-SOC 53-3051.00",
         "fact_id": "occupation-identity",
         "market": "美国",
@@ -37570,7 +37647,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "47,920美元/年（中位数）",
         "fact_id": "us-wage-2025",
         "market": "美国",
@@ -37582,7 +37659,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "23.04美元/小时（中位数）",
         "fact_id": "us-wage-hourly-2025",
         "market": "美国",
@@ -37594,67 +37671,67 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "387,300人（2024 年）",
+        "derivation": "按原表期间和口径展示。",
+        "display_value": "约 396,800 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
+        "measure": "2025 年在岗人数",
         "occupation_scope": "校车司机",
-        "period": "2024 年；Bus Drivers, School（SOC 53-3051）口径",
+        "period": "2025",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足：O*NET 页面未公布预测期就业人数（53-3051 口径）",
+        "derivation": "按原表期间和口径展示。",
+        "display_value": "约 399,700 个岗位",
         "fact_id": "us-employment-2035",
         "market": "美国",
-        "measure": "预测就业人数（未公布）",
+        "measure": "2035 年预测就业",
         "occupation_scope": "校车司机",
-        "period": "2024—2034 年；Bus Drivers, School（SOC 53-3051）口径",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-oews-methods"
+          "bls-outlook"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "变化很小或几乎没有变化（Little or no change）",
+        "derivation": "按原表期间和口径展示。",
+        "display_value": "+0.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
+        "measure": "2025–2035 就业增幅",
         "occupation_scope": "校车司机",
-        "period": "2024—2034 年；Bus Drivers, School（SOC 53-3051）口径",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足：O*NET 页面未公布预测期净变化人数（53-3051 口径）",
+        "derivation": "按原表期间和口径展示。",
+        "display_value": "净增约 2,900",
         "fact_id": "us-change-2025-2035",
         "market": "美国",
-        "measure": "就业净变化（未公布）",
+        "measure": "2025–2035 就业净变化",
         "occupation_scope": "校车司机",
-        "period": "2024—2034 年；Bus Drivers, School（SOC 53-3051）口径",
-        "source_refs": [
-          "bls-oews-methods"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "61,000个（2024—2034 年）",
-        "fact_id": "us-openings-2025-2035",
-        "market": "美国",
-        "measure": "预测期职位空缺合计（本职业口径）",
-        "occupation_scope": "校车司机",
-        "period": "2024—2034 年；Bus Drivers, School（SOC 53-3051）口径",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
+        "display_value": "年均约 56,500 个",
+        "fact_id": "us-openings-2025-2035",
+        "market": "美国",
+        "measure": "预计年均职位空缺",
+        "occupation_scope": "校车司机",
+        "period": "2025–2035",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      },
+      {
+        "derivation": "按原表期间和口径展示。",
         "display_value": "证据不足：未建立与校车司机精确对应的中国大陆全国职业工资；本页不展示职业级数值",
         "fact_id": "cn-industry-science-tech-2024",
         "market": "中国大陆",
@@ -37666,7 +37743,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "证据不足：行业门类均值不单列本职业，且不用于替代职业工资",
         "fact_id": "cn-industry-manufacturing-2024",
         "market": "中国大陆",
@@ -37678,7 +37755,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "证据不足：岗位大类均值不区分具体职业，本页不据此推算或展示本职业工资",
         "fact_id": "cn-professional-technical-2024",
         "market": "中国大陆",
@@ -37690,7 +37767,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "证据不足：城镇单位口径未单列本职业，本页不展示职业级数值",
         "fact_id": "cn-urban-nonprivate-2024",
         "market": "中国大陆",
@@ -37702,7 +37779,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "29,240美元/年（第 10 分位）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
@@ -37714,7 +37791,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "65,730美元/年（第 90 分位）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
@@ -37726,7 +37803,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
         "fact_id": "us-industry-wage-aerospace-mfg-2025",
         "market": "美国",
@@ -37738,7 +37815,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
         "fact_id": "us-industry-wage-engineering-services-2025",
         "market": "美国",
@@ -37750,7 +37827,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
         "fact_id": "us-industry-wage-federal-2025",
         "market": "美国",
@@ -37762,7 +37839,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
         "fact_id": "us-industry-wage-rd-2025",
         "market": "美国",
@@ -37774,7 +37851,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
         "fact_id": "us-industry-wage-instruments-2025",
         "market": "美国",
@@ -37786,7 +37863,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "38,650美元/年（第 25 分位）",
         "fact_id": "us-wage-p25-2025",
         "market": "美国",
@@ -37798,7 +37875,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "58,430美元/年（第 75 分位）",
         "fact_id": "us-wage-p75-2025",
         "market": "美国",
@@ -37810,7 +37887,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "396800人",
         "fact_id": "us-employment-current",
         "market": "美国",
@@ -37822,7 +37899,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "399700人",
         "fact_id": "us-employment-2035-current",
         "market": "美国",
@@ -37834,7 +37911,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "增长0.7%（整数1%，Slower than average）",
         "fact_id": "us-growth-current",
         "market": "美国",
@@ -37846,7 +37923,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "2900人",
         "fact_id": "us-change-current",
         "market": "美国",
@@ -37858,7 +37935,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "56500个/年",
         "fact_id": "us-openings-current",
         "market": "美国",
@@ -37870,7 +37947,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "45830美元/年",
         "fact_id": "us-industry-current-1",
         "market": "美国",
@@ -37882,7 +37959,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "50040美元/年",
         "fact_id": "us-industry-current-2",
         "market": "美国",
@@ -37894,7 +37971,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表期间和口径展示。",
         "display_value": "48980美元/年",
         "fact_id": "us-industry-current-3",
         "market": "美国",
@@ -37906,42 +37983,30 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "46100美元/年",
+        "derivation": "按原表期间和口径展示。",
+        "display_value": "本表未列私立学校细行业数值",
         "fact_id": "us-industry-current-4",
         "market": "美国",
-        "measure": "行业内校车司机年薪中位数",
+        "measure": "BLS 手册所列行业范围",
         "occupation_scope": "校车司机（SOC53-3051）",
         "period": "2025年5月",
         "source_refs": [
           "ooh-current"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "校车司机",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与排班记录"
     },
     "badges": [
-      "O*NET 53-3051.00 · 学生安全接送 / 上下车与过街规则 / 车辆与安全设备检查",
-      "按核定线路与严格时刻表运营 / 乘车秩序与行为引导 / 急救与应急准备",
-      "美国数据为本职业精确口径 · 中国大陆按证据路由只登记口径与缺口"
+      "学生接送｜出车检查｜异常交接",
+      "驾驶资格、车辆许可和用工要求分别核",
+      "美国 SOC 53-3051；中国大陆地方岗位样本"
     ],
     "metrics": [
       {
@@ -37954,19 +38019,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，53-3051.00 口径）"
+        "label": "美国就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，53-3051.00 口径）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，53-3051.00 口径）"
+        "label": "美国年均职位空缺（2025–2035）"
       },
       {
         "availability": "missing",
@@ -37980,17 +38045,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "校车司机做什么、需要哪些学历与资格、美国与中国的薪资和前景如何，以及 AI 与自动化会改变哪些环节；保留中国大陆按证据路由登记的缺口。"
+      "text": "了解接送学生、行前检查和交接的分工，比较美国工资、溧阳与无锡招聘，并试做纸面记录。"
     },
     "title": {
       "availability": "available",
-      "text": "校车司机"
+      "text": "校车司机：工作、工资与驾驶资格"
     }
   },
-  "source_content_sha256": "4ba699370dfe3ba989636897a059d02e431724b5dfc5042b0fb2c6c58e28bfcb",
+  "source_content_sha256": "4f0f9e5017fd02339d7932f74822338bb24c34a1effb34c735c30c7c9f81ee5a",
   "subject": {
     "canonical_slug": "bus-drivers-school",
     "name": "校车司机",
-    "summary": "本页条目对应校车司机（美国侧 O*NET-SOC 53-3051.00）：驾驶校车接送学生，确保遵守安全规则——出车前检查车辆与安全设备、在固定社区点位按严格时刻表接送、在学生上下车与过街时执行安全规则、维持车内秩序、报告故障与延误事故、提交学生人数与里程等运营报告并保持车厢清洁；工作以长时间坐姿、封闭车厢、早晚分段与高频学生与家长接触为常态，其职责不等于自行决定线路与收费，也不替代学校与主管部门的校车安全管理责任。"
+    "summary": "校车司机按核定安排接送学生、检查车辆和记录异常。先区分司机、随车照管人员与校车服务单位的责任，再核岗位班次、个人驾驶资格及车辆许可。"
   }
 }

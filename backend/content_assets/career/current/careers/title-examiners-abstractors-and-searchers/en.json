@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe whether you can separate parties with the same name, different parcels and document dates, and match every sentence of the abstract back to the original record. Liking law or real estate can be a starting point, but checking details repeatedly, communicating the evidence scope and keeping the unknowns closer matches the daily tasks."
+              "Paper check | Compare the parcel ID and recording date in two fictional deed abstracts. Flag a discrepancy and retain the original document references. "
             ]
           },
           "id": "title-examiners-abstractors-and-searchers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24807,12 +24806,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Title examiners, abstractors and searchers search real estate records, check title documents and abstract the relevant legal or insurance details to produce material with stated sources and limits; the actual professional re-check, registration and issuing authority are set by role and jurisdiction."
+              "Title examiners, abstractors and searchers review deeds, mortgages, restrictions and property descriptions. They summarize the document chain and open questions for authorized review. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "title-examiners-abstractors-and-searchers.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-23-2093.00"
           ],
           "type": "prose"
         }
@@ -25474,15 +25473,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the general AI adoption rate, task scores and net employment causal results for this occupation. Index abstracts can serve as a support idea, but the correspondence to the original text, the search coverage and the professional authority still need checking; the BLS2025—2035 overall growth of 2.1%, the ten-year net increase of about 1300 people and the average annual 5300 openings that includes replacements are component indicators, not an AI effect. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare the parcel ID and recording date in two fictional deed abstracts. Flag a discrepancy and retain the original document references."
             ]
           },
           "id": "title-examiners-abstractors-and-searchers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "editorial",
-            "bls"
+            "transfer-onet-23-2093.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33192,6 +33189,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-23-2093.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 23-2093.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/23-2093.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38672,10 +38696,10 @@
       "text": "Title examiners, abstractors and searchers"
     }
   },
-  "source_content_sha256": "6bf3bf2eb6ec1a8fb160bf71ad9d4fd928153732ea5a7754d5c06486d86f6107",
+  "source_content_sha256": "0bf47b777b6136a9cc478bb5907b10be17b4a27910aa91171aa9e5c60ee0e0ba",
   "subject": {
     "canonical_slug": "title-examiners-abstractors-and-searchers",
     "name": "Title examiners, abstractors and searchers",
-    "summary": "Title examiners, abstractors and searchers search real estate records, check title related documents and organise legal or insurance information abstracts, often working with law firms, real estate agencies and title insurance companies. The work requires matching the parcel description, parties, mortgages and restrictions and the source times one by one, and a search abstract must not be treated as an unconditional guarantee for a real transaction. First use the fictional document index on this page to experience time and object checking, then learn separately about the actual role, local rules and professional re-checking authority."
+    "summary": "Title examiners, abstractors and searchers review deeds, mortgages, restrictions and property descriptions. They summarize the document chain and open questions for authorized review."
   }
 }

@@ -173,6 +173,9 @@
       "item:non-destructive-testing-specialists.path.seven-day-trial.7": {
         "status": "mapped"
       },
+      "item:non-destructive-testing-specialists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:non-destructive-testing-specialists.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13371,6 +13374,21 @@
             "samr-ndt-amend-2025"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Test order T8 requires a part ID and the original test record. Report A locates an indication but omits the part. B identifies the part but lacks the original attachment. State both gaps for the authorized reviewer."
+            ]
+          },
+          "id": "non-destructive-testing-specialists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-17302901"
+          ],
+          "title": "Trace a nondestructive test record",
+          "type": "notice"
         }
       ]
     },
@@ -15940,6 +15958,13 @@
         "id": "non-destructive-testing-specialists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "non-destructive-testing-specialists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16220,7 +16245,7 @@
       "text": "Nondestructive testing specialists"
     }
   },
-  "source_content_sha256": "37c1f3a4d13f045d331b3cd94aafd01575704dc16307a691c580fafa5b089ff2",
+  "source_content_sha256": "0dbbb051a220f070034b130e8cee73a14d4bb1804ef7526925dd60e66781d437",
   "subject": {
     "canonical_slug": "non-destructive-testing-specialists",
     "name": "Nondestructive testing specialists",

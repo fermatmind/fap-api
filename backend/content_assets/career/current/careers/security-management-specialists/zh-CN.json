@@ -1530,7 +1530,7 @@
         "status": "pending_mapping"
       },
       "item:security-management-specialists.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:security-management-specialists.sources.source-card.1": {
         "status": "mapped"
@@ -23314,7 +23314,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用虚构场所资料练评估范围、威胁、控制建议、残余风险和交接；不访问真实安防系统。"
+              "如果你不喜欢在现场和台账之间反复核证，或难以在别人催结项时保留待核状态，先做一次练习。"
             ]
           },
           "id": "security-management-specialists.quick-decision.fit-decision-checklist.1",
@@ -23329,7 +23329,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合愿意收集证据、分析威胁、设计措施并沟通权衡的人；人格类型不是任职证明。"
+              "在 09「入行、资格与职业发展」做 PS-01｜核实体安保整改证据，先完成初稿再看参考。"
             ]
           },
           "id": "security-management-specialists.quick-decision.fit-decision-checklist.2",
@@ -23343,7 +23343,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "专员评估与设计，警卫值守，安装员施工，经理批准资源；求职须核岗位。"
+              "适合愿意核实体风险、写清整改证据并跟进多团队复查的人。"
             ]
           },
           "id": "security-management-specialists.quick-decision.fit-decision-checklist.3",
@@ -23359,7 +23359,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本页依据 O*NET 13-1199.07、BLS 13-1199 汇总统计和虚构练习，不预测个人录用或具体风险。"
+              "把控制目标、验证证据、未核事项和关闭权限分开。"
             ]
           },
           "id": "security-management-specialists.quick-decision.fermat-decision-card.6",
@@ -23374,7 +23374,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "AI 可辅助整理评估材料草稿；漏洞判断、现场核验、整改和风险接受由人员按授权负责。"
+              "愿意把现场观察转成可核的整改清单，并跟不同团队追到复核结果的人，可以先试做实体安保评估。"
             ]
           },
           "id": "security-management-specialists.quick-decision.fermat-decision-card.7",
@@ -23759,7 +23759,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET Job Zone 4 表示需要较多准备，许多岗位需本科或相关经验；不是统一许可。"
+              "O*NET Job Zone 4 的多数职业要求四年制本科，部分职业例外；相关知识、技能或经验也需要相当准备。具体岗位条件按雇主和当地要求核对。"
             ]
           },
           "id": "security-management-specialists.profile.career-quick-answers-block.17",
@@ -24062,6 +24062,12 @@
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/13-1199.07"
+              },
+              {
+                "entity": "O*NET 零售防损专员 33-9099.02",
+                "id": "link-6",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/33-9099.02"
               }
             ]
           },
@@ -24071,7 +24077,8 @@
             "editor",
             "editor",
             "editor",
-            "editor"
+            "editor",
+            "d017-retail-onet"
           ],
           "type": "links"
         },
@@ -24080,14 +24087,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "13-1199.07 评估安全威胁、审计控制并设计系统流程；经理批准和统筹资源，警卫值守，安装员施工，一线主管管理班组。"
+              "13-1199.07 评估安全威胁、审计控制并设计系统流程；经理批准和统筹资源，警卫值守，安装员施工，一线主管管理班组。 若更想核对门店商品损耗、账实差异和审计线索，可比较零售防损专员。两岗都可能检查现场控制，实体安保更侧重设施风险、控制测试和整改复核。"
             ]
           },
           "id": "security-management-specialists.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "editor",
             "onet",
-            "editor"
+            "d017-retail-onet"
           ],
           "type": "prose"
         },
@@ -26607,7 +26613,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 13-1199.07 Job Zone 4；多岗位需本科或相关经验"
+              "O*NET 13-1199.07 Job Zone 4：多数职业要求四年制本科，也需要相当的相关准备"
             ]
           },
           "id": "security-management-specialists.china-salary.career-snapshot-primary-locale.29",
@@ -26905,12 +26911,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国匹配招聘的岗位资质、薪酬结构与评估与整改权限未取得；不提供岗位报价。"
+              "上海人工智能实验室原岗披露招聘条件。薪酬结构和最终整改关闭权限未披露，因此此处无岗位报价。"
             ]
           },
           "id": "security-management-specialists.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "editor"
+            "editor",
+            "d017-cn-main"
           ],
           "type": "prose"
         },
@@ -26961,12 +26968,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘核查：评估与整改权限未取得"
+              "上海招聘样本：公告未披露最终整改关闭权限"
             ]
           },
           "id": "security-management-specialists.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "editor"
+            "d017-cn-main"
           ],
           "type": "prose"
         },
@@ -27722,31 +27729,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "一线安保主管",
@@ -28097,7 +28104,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有九型类型与本职业绩效的验证数据。"
+              "本页未取得九型类型与本职业绩效关系的验证数据。"
             ]
           },
           "id": "security-management-specialists.fit.personality-fit-block.15",
@@ -29475,17 +29482,17 @@
               {
                 "id": "education",
                 "values": [
-                  "未采用单一中国雇主公告",
-                  "未取得岗位身份、评估范围、授权和待遇均可核公告；不推断全国门槛。",
+                  "上海原岗的招聘条件与薪资披露",
+                  "上海人工智能实验室原岗列岗位职责和任职要求，未披露薪资。",
                   "核地区、场所、系统、差旅、资质和批准链。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "虚构作品用途",
-                  "M1–M6 只展示评估、建议和复核，不证明有权施工或接受风险。",
-                  "资产、场所和测试结果完全虚构。"
+                  "义马项目经理职责（相邻采购样本）",
+                  "义马采购文件第 32 页将组织风险评估、制定并执行安保方案列为项目经理职责。",
+                  "核岗位偏风险评估、系统规划、实施复核还是安保现场管理。"
                 ]
               },
               {
@@ -29499,9 +29506,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "雇主流程核查",
-                  "本职可评估设计，也可能参与预算排期、监督承包方、控制验收或安装维护；施工、预算批准及风险接受须核具体岗位与授权。",
-                  "培训证明不自动授批准权。"
+                  "上海人工智能实验室安全保卫专员",
+                  "原岗列园区实体控制、不同场景防护与供应商管理。",
+                  "核岗位偏风险评估、系统规划、实施复核还是安保现场管理。"
                 ]
               }
             ]
@@ -29509,7 +29516,10 @@
           "id": "security-management-specialists.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d017-cn-main",
+            "d017-cn-context",
+            "d017-us-example"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29522,37 +29532,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料：办公楼安全评估",
-                  "M1｜完全虚构的办公楼 F。资产包括东门 D、北通道 N、机房 M；范围要求覆盖三处访问控制。",
-                  "M2｜D 门禁日志显示异常开门 3 次，现场摄像可回看；状态为已发现异常，但原因未核。",
-                  "M3｜N 通道照明和摄像经记录核实正常；状态为控制已核。",
-                  "M4｜M 机房未获现场访问授权，没有检查或测试；状态为未评估，不能写通过。",
-                  "M5｜D 的报警联动尚未触发测试；状态为未测试，建议有权技术人员测试并记录。",
-                  "M6｜管理层要立即关闭项目。D 原因未核、M 未评估、D 联动未测，不能写全部安全；列负责人、期限和残余风险待批准。"
+                  "虚构材料",
+                  "虚构设施整改表 Q6：控制 A 的目标是完成三次授权测试；控制 B 要有负责人复核记录。范围仅含 A、B。",
+                  "日志 J4：A 完成两次授权测试，结果均符合。第三次未做。B 有设施组的安装完成记录，没有负责人复核。项目简报写“两项都可关闭”。",
+                  "题设由测试负责人确认测试，设施负责人复核安装，项目安保负责人批准关闭。只核模拟记录。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务：证据、对策与交接",
-                  "T1｜列 D、N、M 的证据状态，区分已核、异常、未评估和未测试。",
-                  "T2｜提出 D、M 的下一步控制和复核责任，判断能否写项目已关闭。"
+                  "任务与交付",
+                  "交两行整改证据表及简报修订。记录已做、待补、复核人和关闭权限。",
+                  "安装、测试、复核和关闭分别记。",
+                  "用纸或本地表格，明确证据出处。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考答案与边界",
-                  "N 控制已核；D 有异常但原因未核、联动未测；M 未评估。",
-                  "D 需排查开门事件并测试报警，M 需取得授权后现场评估；不能把未测或未评估写通过。",
-                  "管理层催关项目不等于风险已接受。记录证据、假设、责任人、期限、复核与有权批准；练习不含真实系统操作。"
+                  "提交前提示",
+                  "第 6 天独立保存初稿。第 7 天再按指引打开参考。",
+                  "无需同伴协助。",
+                  "记录版本。",
+                  "未给的资料留待核。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "复核清单",
-                  "只用虚构资料；核 N 已核、D 异常与联动未测、M 未评估，残余风险待决。"
+                  "权限边界",
+                  "使用虚构记录。",
+                  "不实际批准或对外交付。"
                 ]
               }
             ]
@@ -29561,7 +29571,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：虚构办公楼威胁评估与控制建议",
+          "title": "PS-01 | 核实体安保整改证据",
           "type": "cards"
         },
         {
@@ -29572,33 +29582,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "评估范围卡",
-                  "列 D/N/M 资产、授权和检查范围。",
-                  "不含真实场所布局。"
+                  "版本和材料记录",
+                  "确认原记录和生效版本。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "证据状态表",
-                  "N 已核；D 异常且联动未测；M 未评估。",
-                  "未测不等于通过。"
+                  "输入与状态核对",
+                  "核对原记录、目标与差异。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "对策与复核页",
-                  "D 排查与测试，M 授权评估，列负责人和期限。",
-                  "不自行操作真实系统。"
+                  "待核交接",
+                  "分待核项目、已知结果和下一责任人。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "风险交接纪要",
-                  "分别列发现、假设、未通过、未测和残余风险批准人。",
-                  "催关项目不等于接受风险。"
+                  "交付边界",
+                  "标实际检查与批准状态。",
+                  "用题设原始记录核对。"
                 ]
               }
             ]
@@ -29629,27 +29639,27 @@
             "rows": [
               [
                 "面试：证据分类",
-                "哪处已核",
-                "N 控制已核",
-                "仅虚构记录"
+                "确认原记录和生效版本。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "面试：未评估",
-                "M 能否写通过",
-                "不能，未获访问授权",
-                "需现场评估"
+                "核对原记录、目标与差异。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "试岗：联动测试",
-                "D 怎样处理",
-                "标未测，交有权技术人员测试",
-                "不能虚填通过"
+                "分待核项目、已知结果和下一责任人。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "交接：项目关闭",
-                "可否写已安全",
-                "不能；D、M 仍待核",
-                "残余风险批准另核"
+                "标实际检查与批准状态。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ]
             ]
           },
@@ -29669,50 +29679,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第一日",
-                  "读 M1–M6，列资产、范围和授权。"
+                  "第 1 天",
+                  "记录对象和版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第二日",
-                  "做虚构 D/N/M 证据表。"
+                  "第 2 天",
+                  "确认原记录和生效版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第三日",
-                  "整理 N 已核证据。"
+                  "第 3 天",
+                  "核对原记录、目标与差异。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第四日",
-                  "标 D 异常原因未核与联动未测。"
+                  "第 4 天",
+                  "分待核项目、已知结果和下一责任人。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第五日",
-                  "给 M 标未评估，不推定结果。"
+                  "第 5 天",
+                  "标实际检查与批准状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第六日",
-                  "写对策、责任人与期限交接卡。"
+                  "第 6 天",
+                  "独立完成并保存交接初稿，保留记录和判断依据。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第七日",
-                  "整理虚构作品并核目标岗位资质、差旅和批准链。"
+                  "第 7 天",
+                  "保存第 6 天初稿后，在常见问题展开「PS-01 参考与自核量规（第 7 天展开）」，按量规核对，记录一处修订和理由。"
                 ]
               }
             ]
@@ -29729,20 +29739,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "保存评估初稿和修订稿，说明状态变化。",
-              "核 N 已核、D 异常与未测、M 未评估。",
-              "说明未测与未评估都不能写通过。",
-              "列 D、M 的复核责任和期限。",
-              "全部练习资料虚构，不含真实布局或系统口令。",
-              "核目标岗位评估、设计、测试和批准权限。",
-              "预算和残余风险由有权管理者批准。"
+              "对照两项控制各自目标与已有记录。",
+              "分列安装、测试、复核与关闭状态。",
+              "标记尚缺的证据和核查负责人。",
+              "交代简报依据与尚需批准的事项。",
+              "仅使用题设记录，保留初稿便于复核。",
+              "第 7 天用具名参考核对。",
+              "记录一次修订和依据。"
             ]
           },
           "id": "security-management-specialists.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "交卷与复盘检查",
           "type": "list"
         },
         {
@@ -29840,10 +29850,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "M1–M6 是虚构桌面练习，不授权真实安防审计、工程施工或风险接受。",
+              "PS-01 是纸面整改复核。实际安保审计、工程和风险关闭须依组织职责。",
               "O*NET 13-1199.07 Job Zone 4 不取代当地许可或具体雇主要求；BLS 13-1199 为宽职业统计。",
               "高风险缺陷、配置泄露或整改延误按真实机构流程升级。",
-              "美国汇总工资、就业与空缺不能推为中国工资或个人录用概率。"
+              "核岗位偏风险评估、系统规划、实施复核还是安保现场管理。"
             ]
           },
           "id": "security-management-specialists.path.credential-boundary.1",
@@ -29860,16 +29870,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：未采纳身份、资质、评估范围和待遇均可核的中国精确公告；不从单一岗位推统一门槛。",
-              "M1–M6 不是雇主考题；真实岗位须核组织、系统、现场、标准、批准链和计酬。"
+              "上海人工智能实验室安全保卫专员。原岗列园区实体控制、不同场景防护与供应商管理。",
+              "美国司法部实体安保专员。联邦原岗是非主管实体安保职位，按该机构职责和条件阅读。"
             ]
           },
           "id": "security-management-specialists.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "d017-cn-main",
+            "d017-us-example"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -30050,7 +30058,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "先核目标岗位实体安全、系统设计或人员安全范围；用 M1–M6 虚构 D 异常、N 已核、M 未评估展示证据和建议。"
+              "把控制目标、验证证据、未核事项和关闭权限分开。"
             ]
           },
           "id": "security-management-specialists.path.career-path-block.20",
@@ -31905,7 +31913,7 @@
                 ]
               },
               {
-                "answer": "O*NET 把 13-1199.07 归 Job Zone 4：需较多准备，许多岗位需本科或相关经验；不是统一许可。",
+                "answer": "O*NET 将 13-1199.07 列为 Job Zone 4。该组多数职业要求四年制本科，部分职业例外，同时需要相当的相关准备。具体准入条件按岗位及当地要求核对。",
                 "id": "security-management-specialists.faq.3",
                 "question": "美国职业准备要求是什么？",
                 "question_key": "career.faq.security-management-specialists.q3",
@@ -31949,15 +31957,15 @@
                 "question_key": "career.faq.security-management-specialists.education-path"
               },
               {
-                "answer": "用虚构 M1–M6 办公楼材料，提交资产范围、证据状态、控制建议与整改交接卡。",
+                "answer": "在 09「入行、资格与职业发展」做 PS-01｜核实体安保整改证据，先完成初稿再看参考。",
                 "id": "security-management-specialists.faq.8",
                 "question": "如何展示入门能力？",
                 "question_key": "career.faq.security-management-specialists.credentials"
               },
               {
-                "answer": "N 控制已核；D 异常原因未核、联动未测；M 未评估。不能写全部安全或项目已关闭。",
+                "answer": "先确认控制目标、复测条件与证据范围。按职责确认关闭。",
                 "id": "security-management-specialists.faq.9",
-                "question": "虚构练习的状态怎么判？",
+                "question": "如何验证实体安保整改？",
                 "question_key": "career.faq.security-management-specialists.risk-boundary"
               },
               {
@@ -31965,6 +31973,15 @@
                 "id": "security-management-specialists.faq.10",
                 "question": "可转向哪些相邻职业？",
                 "question_key": "career.faq.security-management-specialists.outlook-transition"
+              },
+              {
+                "answer": "A 已完成 2 次符合条件的测试，目标是 3 次，缺 1 次。\n\nA 交测试负责人安排第三次授权测试并保留结果。\n\nB 安装已记录，设施负责人复核未给，不能填复核完成。\n\n把两项目前的证据和待补条件写入简报，留项目安保负责人批准。\n\n两项当前都留待核，关闭与剩余风险由授权人记录。\n\n四项各 0–2 分：版本与原件、逐项判断、未知范围、权限交接。\n\n完整可追溯为 2，部分为 1，缺失或越权为 0。",
+                "id": "security-management-specialists.faq.11",
+                "question": "PS-01 参考与自核量规（第 7 天展开）",
+                "question_key": "career.faq.security-management-specialists.exercise-answer-key",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31985,7 +32002,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "精确职业任务、汇总统计与虚构练习分开；AI 只辅助整理，不替代现场评估或风险接受。"
+              "PS-01 为本页虚构试做。"
             ]
           },
           "id": "security-management-specialists.sources.source-card.1",
@@ -31999,14 +32016,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 13-1199.07 描述任务；BLS 13-1199 汇总工资和预测不能当单列；中国背景取国家统计局 2025 租赁和商务服务业数据。"
+              "原技术文件列风险评估和安保方案任务。此为项目采购要求。"
             ]
           },
           "id": "security-management-specialists.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "bls",
-            "nbs"
+            "d017-cn-context"
           ],
           "type": "prose"
         },
@@ -32015,12 +32030,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮职业、工资、就业与兴趣核读日期：2026-10-12；未变来源保留历史记录。2025父级全国分位、2023父级行业均值、2025–2035父级预测与虚构材料分开；州工资页面仅取United States行。"
+              "原岗列园区实体控制、不同场景防护与供应商管理。"
             ]
           },
           "id": "security-management-specialists.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "d017-cn-main"
           ],
           "type": "prose"
         },
@@ -32029,13 +32044,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "中文解释美国分类，不建立中美安全资质或工资互认；真实评估、隐私与合同按所在地要求及雇主原文。"
+              "美国工资与就业预测采用 13-1199 宽组。招聘公告仅用于核对单岗职责。"
             ]
           },
           "id": "security-management-specialists.sources.source-card.4",
           "source_refs": [
             "editor",
-            "privacy"
+            "privacy",
+            "d017-cn-main",
+            "d017-us-example"
           ],
           "type": "prose"
         }
@@ -32062,13 +32079,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32115,7 +32132,7 @@
                 "evidence_type": "精确任务",
                 "id": "onet",
                 "limitation": "安全评估与系统流程设计；工资和就业归入 13-1199 汇总。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "O*NET 13-1199.07 职业详情",
                 "period": "2026 档案",
                 "publisher": "O*NET OnLine",
@@ -32131,7 +32148,7 @@
                 "evidence_type": "宽职业调查就业与平均工资",
                 "id": "bls",
                 "limitation": "13-1199 涵盖多种商业运营专员，不是本职业单列。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "BLS 2025 OEWS 13-1199 全国表",
                 "period": "2025 年 5 月",
                 "publisher": "U.S. Bureau of Labor Statistics",
@@ -32147,7 +32164,7 @@
                 "evidence_type": "宽职业就业、空缺与典型教育",
                 "id": "ep",
                 "limitation": "13-1199 汇总行不是 13-1199.07 单列预测。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "BLS 2025–2035 预测 13-1199",
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
@@ -32163,7 +32180,7 @@
                 "evidence_type": "宽职业年薪分位",
                 "id": "oews",
                 "limitation": "O*NET 明示数据来自 Business Operations Specialists, All Other。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "O*NET 2025 工资分位 13-1199 汇总",
                 "period": "2025 工资",
                 "publisher": "O*NET OnLine / BLS",
@@ -32302,15 +32319,15 @@
               {
                 "accessed_at": "本页编辑时点",
                 "details": [
-                  "用于组织安全管理专员的任务拆分、练习边界与决策提示；事实部分仍以同页官方来源为准。",
-                  "用于组织安全管理专员的任务拆分、练习边界与决策提示；事实部分仍以同页官方来源为准。"
+                  "PS-01 为虚构纸笔试做。",
+                  "把控制目标、验证证据、未核事项和关闭权限分开。"
                 ],
-                "evidence_type": "editorial_reasoning",
+                "evidence_type": "虚构纸面试做",
                 "id": "editor",
                 "limitation": "编辑建议与虚构练习，不是官方职业统计或法定资格结论。",
                 "market": "按页面说明",
                 "name": "FermatMind 编辑归纳",
-                "period": "本页编辑时点",
+                "period": "2026-11-09",
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
@@ -32613,6 +32630,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "原岗列园区实体控制、不同场景防护与供应商管理。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d017-cn-main",
+                "limitation": "支持该岗位的职责和招聘条件。公告未披露薪资。",
+                "market": "中国大陆",
+                "name": "上海人工智能实验室安全保卫专员",
+                "period": "2026-10-12，上海社会招聘",
+                "publisher": "上海人工智能实验室",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shlab.org.cn/joinus/detail/7654837551317158185?mode=social"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "义马采购文件第 32 页将组织风险评估、制定并执行安保方案列为项目经理职责。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "d017-cn-context",
+                "limitation": "这是相邻岗位的项目采购职责。专员准入与工资须另核。",
+                "market": "中国大陆",
+                "name": "义马安保服务采购需求",
+                "period": "日期见原件",
+                "publisher": "义马安保服务采购需求",
+                "scope": "contextual",
+                "url": "https://erqi.zfcg.henan.gov.cn/cmsweb81e27e/nas/webfile2024/sanmenxia/rootfiles/2026/02/02/424733a3e7884273972992e476020cdc.pdf#page=32"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "联邦原岗是非主管实体安保职位，按该机构职责和条件阅读。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d017-us-example",
+                "limitation": "仅用于任务和路径对照。",
+                "market": "美国",
+                "name": "美国司法部实体安全专员（华盛顿特区，非主管）",
+                "period": "日期见原件",
+                "publisher": "美国司法部（USAJOBS）",
+                "scope": "recruitment_proxy",
+                "url": "https://www.usajobs.gov/job/891258400"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务包括核查门店盗损、库存异常与门店审计。"
+                ],
+                "evidence_type": "O*NET 职业任务",
+                "id": "d017-retail-onet",
+                "limitation": "用于相邻职业任务对照。",
+                "market": "美国",
+                "name": "O*NET 零售防损专员 33-9099.02",
+                "period": "2026 职业档案",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/33-9099.02"
               }
             ]
           },
@@ -32737,6 +32814,22 @@
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "entry": "link-5",
+              "field": "entity"
+            }
+          },
+          {
+            "href": {
+              "$link": "security-management-specialists.direction-comparison.adjacent-career-comparison-table.7",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-6",
+              "field": "url"
+            },
+            "label": {
+              "$link": "security-management-specialists.direction-comparison.adjacent-career-comparison-table.7",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-6",
               "field": "entity"
             }
           }
@@ -35482,7 +35575,7 @@
           "ui": {
             "ai_heading": "AI 会影响安全管理专员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（未取得匹配样本）",
+            "official_heading": "上海招聘样本（薪资未披露）",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "安全管理专员在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35703,7 +35796,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国安全管理专员工资多少？",
+        "heading": "美国 13-1199 宽组薪资参考",
         "industry_heading": "美国 13-1199 汇总行业工资（2023）",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -35925,7 +36018,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "安全管理专员适合什么样的人？"
+        "title": "哪些人适合做实体安全管理？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -37307,7 +37400,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合安全管理专员",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37865,14 +37958,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解安全管理专员 13-1199.07 的威胁评估、流程设计、审计和风险建议，以及美国 13-1199 汇总统计的口径限制。"
+      "text": "了解实体安全管理专员如何评估风险、改进控制并复核整改。对照中美岗位，再做一次证据表。"
     },
     "title": {
       "availability": "available",
       "text": "安全管理专员"
     }
   },
-  "source_content_sha256": "0a5bf2ae998bf9e112b5e8b35adf4816f5ff1072065479414ff05abb5fa93fb4",
+  "source_content_sha256": "b1fd0dba9380d4a0945050fa54bf98a6cdaf40fcf2a98b3dad07d5ec5ef22770",
   "subject": {
     "canonical_slug": "security-management-specialists",
     "name": "安全管理专员",

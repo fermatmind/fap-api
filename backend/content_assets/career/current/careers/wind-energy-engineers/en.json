@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First compare the power units, duration, and original total, then write the known contributions and missing items. Observe whether you are willing to keep versions, recalculate, and ask about test conditions."
+              "Paper check | If two layouts show different access roads, record the revisions, assumptions and affected turbine locations for design review. "
             ]
           },
           "id": "wind-energy-engineers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24802,13 +24801,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "The wind energy engineer corresponds to O*NET17-2199.10, designing underground or overhead wind farm collector systems and preparing site specifications; the tasks also include layout models, meteorological data and production estimates, turbine component specifications and testing, operating reliability and failure analysis, and construction and commissioning technical support. A specific job may lean toward resource, mechanical, electrical, or control work, and not all tasks should be treated as done in every job; development managers, operations managers, and service technicians are separated separately, and a job title does not automatically grant design signing, electrical, or work-at-height authority."
+              "Wind energy engineers analyze layouts, equipment and infrastructure options, documenting model inputs, design revisions and interfaces that require other disciplines’ review. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "wind-energy-engineers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-17-2199.10"
           ],
           "type": "prose"
         }
@@ -25452,13 +25450,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Document draft organizing can be explored, and units, test conditions, model assumptions, and missing items still need manual review; software output is not engineering verification. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: If two layouts show different access roads, record the revisions, assumptions and affected turbine locations for design review."
             ]
           },
           "id": "wind-energy-engineers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-17-2199.10",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33052,6 +33050,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-17-2199.10",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 17-2199.10 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/17-2199.10"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38569,10 +38594,10 @@
       "text": "Wind Energy Engineers"
     }
   },
-  "source_content_sha256": "f9680d6ff723bd71425a7b4ba743777ed341d607dcfde97faa2d74a440dd103d",
+  "source_content_sha256": "a52a38714d1c114d6740ac39cc51f36b16e56d68379730452e5ea0a7730e5147",
   "subject": {
     "canonical_slug": "wind-energy-engineers",
     "name": "Wind Energy Engineers",
-    "summary": "The wind energy engineer corresponds to O*NET17-2199.10, designing underground or overhead wind farm collector systems and preparing site specifications; the tasks also include layout models, meteorological data and production estimates, turbine component specifications and testing, operating reliability and failure analysis, and construction and commissioning technical support. A specific job may lean toward resource, mechanical, electrical, or control work, and not all tasks should be treated as done in every job; development managers, operations managers, and service technicians are separated separately, and a job title does not automatically grant design signing, electrical, or work-at-height authority."
+    "summary": "Wind energy engineers analyze layouts, equipment and infrastructure options, documenting model inputs, design revisions and interfaces that require other disciplines’ review."
   }
 }

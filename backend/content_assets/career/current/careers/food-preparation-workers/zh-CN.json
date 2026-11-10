@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-prep-huangpu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-prep-zhaoyuan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -20127,60 +20133,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "id": "food-preparation-workers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-2"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "id": "food-preparation-workers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-3"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -20203,7 +20169,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -20231,7 +20197,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23076,7 +23042,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一家完全虚构的食堂需要完成一批冷食与配菜并准备供餐。请写出一份制备与卫生记录草案：（1）如何按订单或指示核对食材名称、数量与状态并检查储藏温度；（2）如何使用手工或电动器具清洗、削皮、切片与切配食材；（3）如何按批准流程制作冷食、沙拉与饮料并分装与包装与摆盘；（4）如何记录食材用量与冰箱与冷柜温度并发现异常；（5）如何在工作前后清洗与消毒工作区、设备与餐具，并在设备故障或食材异常时上报。使用公开资料与模拟数据作答，不使用任何真实企业、产品或客户信息。"
+              "纸上演练：用入行部分的虚构工单算用量、核冷藏读数和过敏提示，再写一句上报。先完成记录，再看参考。无需接触食品或设备。"
             ]
           },
           "id": "food-preparation-workers.quick-decision.fit-decision-checklist.2",
@@ -23143,7 +23109,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "安全工作样本（一份完全虚构的任务包）：给定一份模拟的冷食与配菜制备清单（沙拉与冷盘各一项、饮品两项、含一项过敏原提示与冷藏温度要求），在 60 分钟内完成一份制备与卫生记录草案：食材核对记录（名称、数量、状态与保质期）、清洗与切配方案（器具与先后顺序）、制备与分装方案（按订单或指示、份量与摆盘）、卫生与消毒方案（手部与器具与台面）、温度与储存记录（冰箱与冷柜读数）、异常处置与上报流程，并写清哪些情形必须暂停上报而不是自行处理（如食材变质、温度超限、设备故障与过敏原混入）。"
+              "安全工作样本：入行部分给出四项冷食和饮品工单、库存、读数和本题规则。先写备料、异常和交接，再对照参考。只做纸面练习，不操作设备或制售食品。"
             ]
           },
           "id": "food-preparation-workers.profile.career-quick-answers-block.1",
@@ -23751,7 +23717,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "估计与缺口｜2025BLS预测矩阵基期908,500人含自雇，非OEWS同一项目；本轮未取得全国分位原表及职业分行业工资，不从规模推未发布，也不混旧OEWS人数。"
+              "估计与缺口｜BLS 预测基期 2025 年约 908,500 个岗位，含自雇。2025 年 5 月工资表统计受雇人员，本页列全国五个工资分位。分行业中位工资未取得可核验原值。"
             ]
           },
           "id": "food-preparation-workers.profile.career-quick-answers-block.34",
@@ -26051,7 +26017,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "75 分位 38,540 美元/年（2025，BLS OEWS）"
+              "75 分位 38,550 美元/年（2025，BLS OEWS）"
             ]
           },
           "id": "food-preparation-workers.china-salary.career-snapshot-primary-locale.13",
@@ -26630,12 +26596,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "县域与下沉市场"
+              "大陆招聘样本（不同用工情境）"
             ]
           },
           "id": "food-preparation-workers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "prep-huangpu",
+            "prep-zhaoyuan"
           ],
           "type": "prose"
         },
@@ -26644,12 +26611,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按城市或地区核验的本职业月薪数据；不以招聘报价、行业均值或他人转述代填。"
+              "黄埔砧板助理公告列 5 人、5,000–5,500 元/月，涉及分规格切配、分类存放和工位清洁。招远蔬菜配菜摆盘岗位列 2 人、3,000–4,000 元/月，并提到底薪及绩效。比较时问是否要用切片设备、做冷食、负责标签和保管，别把两个样本合并成全国工资。"
             ]
           },
           "id": "food-preparation-workers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "prep-huangpu",
+            "prep-zhaoyuan"
           ],
           "type": "prose"
         },
@@ -26658,12 +26626,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜美国 SOC 35-2021 / O*NET-SOC 35-2021.00 覆盖除烹饪以外的食品制备从业者；中国大陆按国民经济行业分类与住宿和餐饮业等相关门类管理；两者分类与统计口径不同，不做数值换算。"
+              "中国大陆未核得与该美国职业一一对应的全国职业工资分布。对照下方招聘样本时，先核实际工位与服务范围。"
             ]
           },
           "id": "food-preparation-workers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "internal-rubric"
+            "prep-huangpu",
+            "prep-zhaoyuan"
           ],
           "type": "prose"
         },
@@ -26962,7 +26931,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2026-10-11已取正常May2025 Profiles本职业全国分位与行业表；雇员893600/RSE1.7%、均年35290/时16.96；年P10/P25/P50/P75/P90=25810/29950/35320/38550/45340，时=12.41/14.40/16.98/18.53/21.80。表中行业选列来自最高年中位行业表，非主要雇主排名或行业全职业工资；EP就业为另一项目，不用OEWS雇员数替换EP。保护Hero/FAQ共享历史事实另列冲突。"
+              "O*NET 转载的 2025 年美国全国工资表：年薪 P10/P25/P50/P75/P90 为 25,810 / 29,950 / 35,320 / 38,550 / 45,340 美元；不将工资调查覆盖人数当就业预测。"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.25",
@@ -26976,7 +26945,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025年薪中位35,320美元、小时16.98已核；原分位25,810/29,950/38,540/45,340本轮官方表未取，保留待核，不由分位推经验地区或工时。"
+              "这些工资分位不对应某个工龄、地区、班次或个人报价。"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.26",
@@ -27079,12 +27048,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 下降（-3.0%，2025—2035，BLS 投影，经 O*NET 呈现）"
+              "美国劳工统计局：35-2021 在 2025 年的基期就业为 908,500 人，预计 2035 年为 881,300 人，变化 −3.0%；2025–2035 年年均空缺 135,700 个，含替补需求。"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27107,7 +27076,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "60,990 美元/年（May2025，本职业在该行业中位数）"
+              "未取得可核验数值"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.35",
@@ -27121,7 +27090,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "官方最高年中位行业表选列；不代表主要雇主规模、个人工资或岗位需求。"
+              "按美国 OEWS 职业代码 35-2021 及行业查询；全国工资不能代填。"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.36",
@@ -27149,7 +27118,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "48,090 美元/年（May2025，本职业在该行业中位数）"
+              "未取得可核验数值"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.38",
@@ -27163,7 +27132,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "官方最高年中位行业表选列；不代表主要雇主规模、个人工资或岗位需求。"
+              "按美国 OEWS 职业代码 35-2021 及行业查询；全国工资不能代填。"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.39",
@@ -27191,7 +27160,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "46,960 美元/年（May2025，本职业在该行业中位数）"
+              "未取得可核验数值"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.41",
@@ -27205,7 +27174,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "官方最高年中位行业表选列；不代表主要雇主规模、个人工资或岗位需求。"
+              "按美国 OEWS 职业代码 35-2021 及行业查询；全国工资不能代填。"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.42",
@@ -27233,7 +27202,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "45,490 美元/年（May2025，本职业在该行业中位数）"
+              "未取得可核验数值"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.44",
@@ -27247,7 +27216,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "官方最高年中位行业表选列；不代表主要雇主规模、个人工资或岗位需求。"
+              "按美国 OEWS 职业代码 35-2021 及行业查询；全国工资不能代填。"
             ]
           },
           "id": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.45",
@@ -27398,31 +27367,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "洗碗工方向",
@@ -29075,7 +29044,7 @@
                 "食材预处理与备料辅助、加热与出品辅助、装盘辅助",
                 "食品安全与烹饪培训记录、跟岗经历证明",
                 "一份虚构菜品加热参数与出品记录",
-                "负责加热与烹饪制作并决定火候与出品，本职业不做热加工"
+                "快餐厨师以烹调和成品出餐为主；食品制备岗位以核对、切配、称量和分装为主，也可能按分工准备热饮或协助加热。"
               ],
               [
                 "快餐与柜台服务员",
@@ -29171,38 +29140,38 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "一份完全虚构的冷食与配菜制备清单（沙拉与冷盘各一项、饮品两项、含一项过敏原提示与冷藏温度要求）。",
-                  "一份空白食材核对与保质期记录表。",
-                  "一份空白清洗与切配方案表（器具与先后顺序、生熟分开）。",
-                  "一份空白制备与分装记录表（份量与摆盘）。",
-                  "一份空白温度与储存记录表（冰箱与冷柜读数）。",
-                  "一份工序流程图（核对食材—清洗切配—制备冷食与饮料—分装摆盘—记录温度用量—清洁消毒）。",
-                  "一支笔与计算器（用于份量与用量试算）。",
-                  "计时器（限时 60 分钟）。"
+                  "题面：虚构食堂 11:30 出餐。黄瓜胡萝卜沙拉 12 份，每份黄瓜 80 克、胡萝卜 30 克。",
+                  "豆腐冷盘 8 份，每份黄瓜 50 克、豆腐 70 克；其中餐牌 C8 标注“大豆过敏”。获批菜单没有无大豆替代餐。",
+                  "苹果汁和大麦茶各 10 杯、每杯 150 毫升。标签：豆腐含大豆，大麦茶含大麦；如需替换，交主管确认。",
+                  "库存：黄瓜 1.50 千克、胡萝卜 0.45 千克、豆腐 0.65 千克、两种饮品各 2.00 升。包装完整，标注保质期均未到。",
+                  "11:00 冷藏 A 柜 3°C，存放未开封原料；B 柜 8°C，存有上一班做的 4 份沙拉，超限时长未知。冷冻柜 −19°C。",
+                  "只用于本题的规则：冷藏 0–4°C、冷冻不高于 −18°C。超限批次暂停使用，标识隔离，记录时间、读数和批次并报主管；不自行复用。",
+                  "过敏规则：过敏餐不得按含该过敏原的原菜单出餐；先拦单并报主管，等待批准的替代方案及交叉接触核对。",
+                  "作答用纸或电子表即可。上面的温度和报告规则是题设，不当成真实场所标准。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "在 60 分钟内完成：食材核对记录、清洗与切配方案、制备与分装方案、卫生与温度与储存方案。",
-                  "完成份量与用量试算，并写出至少两条可能导致食品安全风险的情形与对应措施。",
-                  "写出哪些情形必须暂停上报而不是自行处理（如食材变质、温度超限、过敏原混入与设备故障）。"
+                  "先做：算原工单各食材和饮品的理论总量，与库存比较；把 C8 标成待确认，不能把理论总量当发料许可。",
+                  "记录 A、B、冷冻柜的读数和结论；指出两处必须拦住的事项，写清隔离、上报对象和未决事项。",
+                  "最后写两行卫生顺序和一段交接。先交出自己的版本，再看下方参考。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先列食材核对顺序与不可省略项，再逐项记录确认方式与结果。",
-                  "对清洗与切配写清器具、顺序与生熟分开安排。",
-                  "对异常写清识别信号、处置步骤与上报对象。",
-                  "最后写一段反思：哪些步骤被压缩会导致什么后果。"
+                  "做完再看｜参考用量：黄瓜 1.36 千克，胡萝卜 0.36 千克，豆腐理论 0.56 千克，苹果汁和大麦茶各 1.50 升；库存均覆盖原单。",
+                  "参考温度：A 柜与冷冻柜在题设范围内。11:00 的 B 柜 8°C 超限；隔离上一班 4 份沙拉，注明时长未知，报主管。",
+                  "参考过敏单：C8 有大豆过敏，豆腐含大豆，先拦单；不能挑掉豆腐就出餐。等主管批准替代并核对交叉接触。",
+                  "参考交接：“11:00 已隔离 B 柜 4 份沙拉（8°C，时长未知）；C8 暂停发餐，等主管确认替代。”制备前做手部与台面卫生并分开用具；结束后清洁消毒、记录交接。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "不涉及烹饪加热、配方决定与设备维修；对食材异常与温度超限一律写明先隔离停用并上报主管。",
-                  "作品只证明你能按本职业的工作方式组织任务与留痕，不构成资格或胜任证明。"
+                  "纸面演练不处理真实食材、刀具或设备。真实工作按场所规程和授权执行。",
+                  "主管负责确认超限批次处置和可用替代餐；练习者记录、拦截并上报，不自行放行。"
                 ]
               }
             ]
@@ -29230,9 +29199,9 @@
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有经验的制备人员或食品安全负责人复核你的卫生与温度方案与异常处置方案，并书面指出问题。",
-                  "记录复核意见、时间与依据，便于后续复盘。",
-                  "不要只展示成品，要展示从食材核对到清洁交接的流程与留痕。"
+                  "先把自己的记录与参考答案逐项对照，无需找他人。",
+                  "重算一次用量；检查是否同时拦住 B 柜 4 份和 C8，并写明由谁接手。",
+                  "记录一条漏项、一条修订；有受训同事时可另请复核，但不是完成条件。"
                 ]
               },
               {
@@ -29320,7 +29289,7 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "理解本职业的工作对象与流程（核对食材—清洗切配—制备冷食与饮料—分装摆盘—记录温度用量—清洁消毒）。",
-                  "记录你观察到的制备区环境、器具种类与高峰时段节奏。"
+                  "可用本页流程和公开招聘材料，记录制备区环境、器具和高峰节奏；不需要进入后厨。"
                 ]
               },
               {
@@ -29333,29 +29302,29 @@
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "完成一份食材核对与保质期与温度记录样本。",
-                  "按当班规程列出关键要求（水温与消毒、生熟分开、冷藏与冷冻温度范围、过敏原提示）。"
+                  "抄录虚构题面的 11:00 三个温度读数和批次。",
+                  "用题设范围逐项写出在范围内或待处置。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "用虚构清单完成份量与用量试算，并标注假设值。",
-                  "对两个典型风险（食材变质与生熟交叉污染）写出应对与上报对象。"
+                  "按题面算黄瓜、胡萝卜、豆腐和两种饮品的理论用量。",
+                  "比较库存，把理论用量和实际可发料分开。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "完成一次模拟清洗切配与冷食或饮品制备演练。",
-                  "对照卫生检查单找出至少两处不符合项并记录整改方式。"
+                  "独立用入行演练找出温度和过敏两处异常。",
+                  "写出拦截、隔离与上报，先不看参考。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请有经验的人挑战你的卫生与温度判断。",
-                  "记录对方的异议与你的回应，不回避反例。"
+                  "打开“做完再看”参考，自核用量、温度、过敏餐和交接四项。",
+                  "圈出一个遗漏并修正；无需请他人。"
                 ]
               },
               {
@@ -29379,11 +29348,11 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能按流程完成清洗切配与制备与分装并保持卫生与温度记录准确。",
-              "继续：能在高峰时段与临时调整下仍保留生熟分开与消毒与记录步骤，不省略关键环节。",
-              "继续：愿意从制备辅助或清洗工做起并把食品安全与卫生要求学清楚。",
-              "停止：对长时间站立与走动、重复的清洗切配工序或卫生要求明显无法适应，且短期无法改善。",
-              "停止：对食材与温度与卫生要求缺乏警觉，反复出现食品安全相关差错。",
+              "继续探索：能复算虚构工单的用量，并说明库存是否覆盖理论用量。把理论用量和实际可发料分开记录。",
+              "继续探索：能在纸面识别 B 柜读数超限和 C8 的大豆过敏提示，写清要拦截什么、读数或过敏原是什么、由谁接手，并完成一段交接。",
+              "应聘前向雇主核实高峰班次如何洗切、分装、保持卫生和留痕，以及岗位提供什么培训与监督。",
+              "暂缓：如果算不清用量，或记录漏了读数、餐单或下一步，先对照参考重做纸面练习，再决定。",
+              "暂缓：看过参考后仍反复漏掉温度或过敏拦截，记下漏项，再做一次练习后判断是否继续探索。",
               "换方向：偏好加热与出品可考虑快餐厨师；偏好顾客交互可考虑快餐与柜台服务员。",
               "换方向：偏好清洁与重复体力作业可考虑洗碗工；偏好刀具与分割分级可考虑屠夫与切肉工；偏好饮品工艺可考虑咖啡师（需另行准备）。"
             ]
@@ -29507,7 +29476,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘核对建议｜本页未取得具体招聘样本，不推全国渠道、季节规律或代表性。比较公告地点、业态、用工工时、班次、小费、健康培训条件和防护安排。"
+              "已有黄埔砧板和招远配菜摆盘两个历史样本。对照实际地点、分工、班次和从业健康条件，不据此判断当前在招或全国规律。"
             ]
           },
           "id": "food-preparation-workers.path.recruitment-sample.1",
@@ -30934,7 +30903,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位非起薪，原分位本轮官方表未取得待核；不能把经验、地区或班次列为实测差异原因。"
+              "中位工资不是起薪。全国分位是工资分布位置，不推经验、地区或工时的个人工资。"
             ]
           },
           "id": "food-preparation-workers.market-signals.market-signal-card.18",
@@ -30991,7 +30960,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位年薪 35,320 美元（中位时薪 16.98 美元）；分位 25,810 / 29,950 / 38,540 / 45,340 美元"
+              "中位年薪 35,320 美元（中位时薪 16.98 美元）；分位 25,810 / 29,950 / 38,550 / 45,340 美元"
             ]
           },
           "id": "food-preparation-workers.market-signals.market-signal-card.22",
@@ -31514,7 +31483,7 @@
           "data": {
             "entries": [
               {
-                "answer": "按 O*NET-SOC 35-2021.00，本职业执行除烹饪以外的多种食品制备工作，如制作冷食与贝类、切肉、冲煮咖啡或茶。工作包括核对食材与保质期、清洗与削皮与切片与切配并做好生熟分开、按订单或指示制作冷食与沙拉与酱料与饮料、分装与包装与摆盘并按餐单分发、测量并记录食品与冰箱与冷柜温度与食材用量、清洗与消毒工作区与器具与餐具并处理垃圾。不含烹饪与加热制作、配方与菜品决定、食品配料与混合设备操作、烹饪设备参数控制、专职餐具清洗，以及与餐饮无关的通用清洁。",
+                "answer": "食品制备以备料为主，包括清洗切配、冷食和饮品、分装、温度记录及器具清洁。可按工位使用手动或电动器具、混合沙拉、将餐盘放到保温设备上；是否兼加热或主烹制按实际任务。",
                 "id": "food-preparation-workers.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.food-preparation-workers.q1",
@@ -31534,23 +31503,24 @@
                 ]
               },
               {
-                "answer": "2025 年中位年薪 35,320 美元（中位时薪 16.98 美元）；2024 年就业约 902,700 人（BLS 职业投影基期；OEWS May 2025 呈现约 893,600 人）；2024—2034 年预计总量下降（约 -1% 或更低），但年均岗位空缺仍约 148,000 个（几乎全部来自替换需求）。上述为美国 O*NET/BLS 口径，不适用其他法域；OEWS 不含小费。",
+                "answer": "2025 年美国本职业中位时薪为 16.98 美元，年工资中位数为 35,320 美元。 OEWS 工资口径包括小费，不包括加班等额外工资。 美国劳工统计局：35-2021 在 2025 年的基期就业为 908,500 人，预计 2035 年为 881,300 人，变化 −3.0%；2025–2035 年年均空缺 135,700 个，含替补需求。",
                 "id": "food-preparation-workers.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.food-preparation-workers.q3",
                 "source_refs": [
                   "bls-oews-2025",
-                  "bls-projections-2025-35"
+                  "bls-projections-2025-35",
+                  "bls-oews-methods"
                 ]
               },
               {
-                "answer": "中国大陆未建立与本职业精确对应的公开职业工资统计。国家统计局按行业门类公布城镇单位就业人员平均工资（如住宿和餐饮业：城镇非私营 62,461 元/年、城镇私营 55,123 元/年），属行业口径、不区分职业，只能作为背景代理；本页在中国大陆部分保留「证据不足：」可见标记，不以行业均值、招聘报价或第三方估算代填。",
+                "answer": "黄埔砧板助理公告列 5 人、5,000–5,500 元/月，涉及分规格切配、分类存放和工位清洁。招远蔬菜配菜摆盘岗位列 2 人、3,000–4,000 元/月，并提到底薪及绩效。比较时问是否要用切片设备、做冷食、负责标签和保管，别把两个样本合并成全国工资。",
                 "id": "food-preparation-workers.faq.4",
                 "question": "中国大陆有对应的工资数据吗？",
                 "question_key": "career.faq.food-preparation-workers.q4",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "prep-huangpu",
+                  "prep-zhaoyuan"
                 ]
               },
               {
@@ -31574,7 +31544,7 @@
                 ]
               },
               {
-                "answer": "O*NET 将该职业归入 Job Zone 1-2（SVP 低于 6.0），通常要求高中或同等学历即可，部分岗位不要求正式教育文凭，主要通过短期在职培训掌握技能。实际以雇主招聘条件与所在地从业人员健康管理要求为准。",
+                "answer": "BLS 列美国典型入行无需正式学历，通常短期在岗培训；O*NET Job Zone 1–2 是准备分组，不是该岗位要求高中。雇主学历和适用健康条件看具体招聘。",
                 "id": "food-preparation-workers.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.food-preparation-workers.q7",
@@ -31584,13 +31554,12 @@
                 ]
               },
               {
-                "answer": "「受过培训」「取得证书」「取得健康证明」「获得雇主任命」是四种不同状态。食品安全与卫生培训多为普遍要求；接触直接入口食品的岗位常需按所在地法规完成从业人员健康管理与健康证明；涉及器具与设备操作与过敏原管理可能有专项培训要求。本页列示的准备项不构成任何机构的正式资格清单。",
+                "answer": "接触直接入口食品的中国大陆食品生产经营人员须每年体检并取得健康证明后上岗；企业培训、雇主设备授权与健康证明是不同条件，须按实际工位核对。",
                 "id": "food-preparation-workers.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.food-preparation-workers.q8",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "cn-food-safety-law"
                 ]
               },
               {
@@ -31604,7 +31573,7 @@
                 ]
               },
               {
-                "answer": "美国口径下 2024—2034 年预计总量下降（约 -1% 或更低），但年均空缺仍大且几乎全部来自替换需求；预测不等于个人机会，实际机会取决于本地餐饮业态与自动化程度。可转向快餐厨师、咖啡师、洗碗工、屠夫与切肉工、快餐与柜台服务员、服务员与食品制备与服务一线主管等相邻岗位（需重新学习工艺与器具），或转向食品安全与门店运营管理。",
+                "answer": "美国劳工统计局：35-2021 在 2025 年的基期就业为 908,500 人，预计 2035 年为 881,300 人，变化 −3.0%；2025–2035 年年均空缺 135,700 个，含替补需求。 看本地岗位时，先问是净菜、砧板、冷食还是同时上灶，核对标签记录、冷藏责任和高峰分工。 如果更想在热工位烹制或直接服务顾客，可以分别比较快餐厨师和快餐柜台员工。",
                 "id": "food-preparation-workers.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.food-preparation-workers.q10",
@@ -31629,7 +31598,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对 O*NET-SOC 35-2021.00 的职业范围、任务与工作情境，再取 BLS OEWS May 2025 与 BLS 2025—2035 就业预测的工资与就业数据，最后以国家统计局 2025 年行业门类平均工资（住宿和餐饮业）作为中国大陆的背景代理；美国与中国大陆数据分别列示，不拼接、不换算。 2026-10-11追加正常May2025 Profiles全国五分位与精确行业选列，原访问受限已解除。"
+              "来源卡｜美国全国工资为 2025 年 5 月 OEWS 的 35-2021 职业数据。就业使用 BLS 表 1.2，分行业中位工资未取得可核验原值。"
             ]
           },
           "id": "food-preparation-workers.sources.source-card.1",
@@ -31660,7 +31629,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮2026-10-11核O*NET35-2021任务情境兴趣与工资中位、BLS2025—2035精确行及OEWS方法。NBS行业代理和中国食品安全法按范围使用；原共享旧预测及工资分位已补核，不继承历史复核结论。 2026-10-11追加正常May2025 Profiles全国五分位与精确行业选列，原访问受限已解除。"
+              "美国全国工资为 2025 年 5 月 OEWS 的 35-2021 职业数据。就业使用 BLS 表 1.2，分行业中位工资未取得可核验原值。"
             ]
           },
           "id": "food-preparation-workers.sources.source-card.3",
@@ -31677,12 +31646,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "当前保留缺口：中国大陆精确职业与地区工资就业、具体招聘及AI采用因果未取得。美国本职全国五分位与明确行业工资已补核；旧宽泛行业场景没有据此取得合并工资，改为官方明确类别选列。共享来源元数据、Hero事实与FAQ保护冲突列报告，本次不等全页统一或独立验收。"
+              "美国工资和就业分别取 OEWS 与 BLS 职业预测；中国大陆行业统计只作背景，公开招聘按具体工位与用工条件解读。本页未核到全国职业工资分布或本职业 AI 采用的因果影响。"
             ]
           },
           "id": "food-preparation-workers.sources.source-card.4",
           "source_refs": [
-            "oews-profile-2025"
+            "bls-projections-2025-35",
+            "bls-oews-2025",
+            "nbs-wages-2025"
           ],
           "type": "prose"
         }
@@ -31704,18 +31675,6 @@
                 "id": "navigation-1",
                 "relation": "related-evidence",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
-              },
-              {
-                "entity": "MBTI（英文）",
-                "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（英文）",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI（中文）",
@@ -31785,17 +31744,16 @@
                 "url": "https://www.onetonline.org/link/details/35-2021.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "表中 35-2021 行：2024 年就业约 902.7 千，增长为下降（约 -1% 或更低），年均空缺约 148 千。",
-                  "预测是职业层面的统计口径，不是个人录用概率。"
+                  "美国劳工统计局：35-2021 在 2025 年的基期就业为 908,500 人，预计 2035 年为 881,300 人，变化 −3.0%；2025–2035 年年均空缺 135,700 个，含替补需求。"
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
-                "limitation": "不得把预测增量或年均空缺直接解释为个人收入或录用保证。",
+                "limitation": "美国本职业；年均空缺与十年就业净变化是不同指标。",
                 "market": "US",
-                "name": "U.S. Bureau of Labor Statistics：2024—2034 Occupational Projections and Characteristics",
-                "period": "2024—2034",
+                "name": "BLS：2025–2035 职业预测与特征，表1.2",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "35-2021 Food Preparation Workers",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31841,11 +31799,11 @@
                 "id": "internal-rubric",
                 "limitation": "不是外部职业事实来源，不替代官方统计或法域规则。",
                 "market": "CN/US",
-                "name": "FermatMind 职业内容字段与证据口径规则",
+                "name": "本页来源与方法说明",
                 "period": "current authoring rules",
                 "publisher": "FermatMind",
-                "scope": "field review and source disclosure",
-                "url": "https://fermatmind.com"
+                "scope": "编辑方法说明",
+                "url": "https://fermatmind.com/zh/career/jobs/food-preparation-workers#career-content-sources"
               },
               {
                 "accessed_at": "2026-10-11",
@@ -31915,7 +31873,7 @@
                 ],
                 "evidence_type": "official primary source",
                 "id": "oews-profile-2025",
-                "limitation": "最高行业选列非主要雇主排名，非EP就业或个人收入",
+                "limitation": "全国职业工资及行业数据应按原表分别核对。",
                 "market": "美国",
                 "name": "BLS May2025本职业全国与行业工资Profiles",
                 "period": "May2025",
@@ -31939,6 +31897,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第五项 5 名、5,000–5,500 元/月，负责挑拣、清洗、分规格切配、分类存放和工位消毒。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "prep-huangpu",
+                "limitation": "仅个案；不证明全国工资或当前仍在招。",
+                "market": "中国大陆",
+                "name": "黄埔：厨师助理（砧板）",
+                "period": "2026-08-18",
+                "publisher": "广州市黄埔区劳动就业服务管理中心",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzjg/qt/ldjyfwzx/kljy/content/post_10969476.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "蔬菜配菜摆盘 2 人、3,000–4,000 元/月，公告列底薪和绩效。不是砧板同职同档报价。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "prep-zhaoyuan",
+                "limitation": "仅个案；不证明全国工资或当前仍在招。",
+                "market": "中国大陆",
+                "name": "招远：蔬菜配菜摆盘工",
+                "period": "2026年招聘会（九）",
+                "publisher": "招远市人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhaoyuan.gov.cn/col/col102041/art/2026/art_07b32b58c83a459586daa25511972702.html"
               }
             ]
           },
@@ -34805,6 +34793,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-prep-huangpu",
+            "posting-prep-zhaoyuan"
+          ],
           "sources_note": {
             "$item": "food-preparation-workers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34814,7 +34806,7 @@
           "ui": {
             "ai_heading": "AI 会影响食品制备人员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "食品制备人员在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -34844,7 +34836,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "us-wage-low10-2025",
+            "fact_ref": "us-wage-2025",
             "指标": "薪资 · 中位年薪",
             "数值": {
               "$item": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.9",
@@ -34860,7 +34852,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-q25-2025",
+            "fact_ref": "us-wage-low10-2025",
             "指标": "薪资 · 10 分位",
             "数值": {
               "$item": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.11",
@@ -34876,7 +34868,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-2025",
+            "fact_ref": "us-wage-q25-2025",
             "指标": "薪资 · 25 分位",
             "数值": {
               "$item": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.13",
@@ -35033,7 +35025,7 @@
           "type": "prose"
         },
         "heading": "美国食品制备人员工资多少？",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "industry_heading": "怎样查询美国分行业工资？",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
@@ -35124,7 +35116,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "本职业行业中位工资",
         "interpretation_heading": "这组美国工资数字应当怎么理解？",
         "interpretation_rows": [
           {
@@ -35181,7 +35173,7 @@
         "wage_heading": "美国工资分布",
         "wage_tiers": [
           {
-            "equivalent": "原登记分位，本轮官方表待核",
+            "equivalent": "全国工资分位，非单一经验层级。",
             "interpretation": {
               "$item": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
@@ -35209,7 +35201,7 @@
             }
           },
           {
-            "equivalent": "原登记分位，本轮官方表待核",
+            "equivalent": "全国工资分位，非单一经验层级。",
             "interpretation": {
               "$item": "food-preparation-workers.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
@@ -36597,7 +36589,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "开始核对食品制备人员是否适合你",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36671,30 +36663,10 @@
               "$link": "food-preparation-workers.navigation.links.1",
               "block": "navigation",
               "copy_key": "career.item.navigation-links",
-              "entry": "navigation-2",
-              "field": "url"
-            },
-            "label": "MBTI（英文）"
-          },
-          {
-            "href": {
-              "$link": "food-preparation-workers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-3",
-              "field": "url"
-            },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "food-preparation-workers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "了解我的人格偏好"
           },
           {
             "href": {
@@ -36704,7 +36676,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "了解我的大五特质"
           }
         ]
       },
@@ -36830,7 +36802,7 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "执行除烹饪以外的多种食品制备工作，如制作冷食与贝类、切肉、冲煮咖啡或茶；通过核对食材与订单、清洗与切配、按指示制备冷食与沙拉与饮料、分装与摆盘、测量并记录温度与用量、清洁与消毒并保持卫生，产出可供烹饪或直接供餐的食品与配料；不含烹饪与加热制作、配方与菜品决定、食品配料与混合设备操作、烹饪设备参数控制、专职餐具清洗，以及与餐饮无关的通用清洁。",
+        "display_value": "食品制备以备料为主，包括清洗切配、冷食和饮品、分装、温度记录及器具清洁。可按工位使用手动或电动器具、混合沙拉、将餐盘放到保温设备上；是否兼加热或主烹制按实际任务。",
         "fact_id": "identity",
         "market": "US",
         "measure": "职业身份与职责范围",
@@ -36879,7 +36851,7 @@
       },
       {
         "derivation": null,
-        "display_value": "75 分位 38,540 美元/年（2025，BLS OEWS）",
+        "display_value": "75 分位 38,550 美元/年（2025，BLS OEWS）",
         "fact_id": "us-wage-q75-2025",
         "market": "US",
         "measure": "精确职业 75 分位年工资",
@@ -36903,36 +36875,36 @@
       },
       {
         "derivation": null,
-        "display_value": "约 902,700 人（2024，BLS 职业投影基期，经 O*NET 呈现；OEWS 呈现口径约 893,600 人）",
+        "display_value": "908,500 人（2025 年；BLS 职业预测基期）",
         "fact_id": "us-employment-2025",
         "market": "US",
-        "measure": "就业规模",
-        "occupation_scope": "食品制备人员；35-2021.00",
-        "period": "2025",
+        "measure": "2025 年基期就业",
+        "occupation_scope": "U.S. SOC 35-2021",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "增长 下降（约 -1% 或更低，2024—2034，BLS 投影，经 O*NET 呈现）",
+        "display_value": "−3.0%（2025–2035 年就业变化）",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
-        "measure": "就业增长率",
-        "occupation_scope": "食品制备人员；35-2021.00",
-        "period": "2024—2034",
+        "measure": "就业变化率",
+        "occupation_scope": "U.S. SOC 35-2021",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均岗位空缺约 148,000 个（2024—2034，主要来自替换需求）",
+        "display_value": "135,700 个/年（含替补需求）",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
         "measure": "年均职位空缺",
-        "occupation_scope": "食品制备人员；35-2021.00",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. SOC 35-2021",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -37092,6 +37064,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第五项 5 名、5,000–5,500 元/月，负责挑拣、清洗、分规格切配、分类存放和工位消毒。",
+        "fact_id": "posting-prep-huangpu",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "黄埔：厨师助理（砧板）",
+        "period": "2026-08-18",
+        "source_refs": [
+          "prep-huangpu"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "蔬菜配菜摆盘 2 人、3,000–4,000 元/月，公告列底薪和绩效。不是砧板同职同档报价。",
+        "fact_id": "posting-prep-zhaoyuan",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "招远：蔬菜配菜摆盘工",
+        "period": "2026年招聘会（九）",
+        "source_refs": [
+          "prep-zhaoyuan"
+        ]
       }
     ]
   },
@@ -37118,19 +37114,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国就业规模（2024 投影基期）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均空缺（2024—2034）"
+        "label": "美国预计年均职位空缺（2025–2035 年）"
       },
       {
         "availability": "available",
@@ -37144,14 +37140,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "食品制备人员做什么、如何入行、工作边界与发展方向。基于官方职业资料，区分职业统计、行业代理和资格缺口。"
+      "text": "食品制备人员怎样做洗切、分装、冷食与交接？看砧板、配菜招聘和美国数据，区分备料、上灶和前台服务。"
     },
     "title": {
       "availability": "available",
       "text": "食品制备人员"
     }
   },
-  "source_content_sha256": "90ecffcb0d4010358ebdc68dd3c95bc7967c01267b36657b16a04aa5b40819b9",
+  "source_content_sha256": "574c42a2b552fefe3aa65c3c4caee68897247ea4d79fc0bf078b2f18902e58de",
   "subject": {
     "canonical_slug": "food-preparation-workers",
     "name": "食品制备人员",

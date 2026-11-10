@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a27-shunde": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a27-zhengzhou": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -1605,7 +1611,7 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1677,7 +1683,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26106,12 +26112,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025全国城镇非私营/私营科学研究和技术服务业税前年平均182,064/83,560元；制造业113,594/76,055元。分别用于设计服务和制造场景宽口径参考，非制图员中位或个人收入。"
+              " 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "a27-zhengzhou",
+            "a27-shunde"
           ],
           "type": "prose"
         },
@@ -26218,12 +26225,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供招聘报价或个人收入承诺；缺失项保留缺失，不用行业均值或邻近职业替代。"
+              "公告只用于核对岗位职责和计薪方式。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "a27-zhengzhou",
+            "a27-shunde"
           ],
           "type": "prose"
         }
@@ -28975,25 +28983,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "虚构材料",
-                  "虚构技术资料与规范与工程师要求与图纸样例 1 份、匿名图层与符号与标注与明细与版本与变更数据与数据字典 1 份、依据与图层与符号与标注与明细与核对与版本与异常上报模板、制图与标准与文件隐患清单 3 项。",
-                  "材料均为虚构，不含真实项目与客户与你无关信息。"
+                  "纸面工单材料",
+                  "虚构工单，纸面作业。已批原理图 E-03 Rev C 把线号 W17 标到 T4。待发接线图 W-02 Rev B 把 W17 标到 T5。",
+                  "工单 C12 只批准更新文字标签，没有批准端子变化。设备未交付，题面不含实物或测试结果。",
+                  "题设规定：制图员记录冲突，电气工程师确认端子，文控发放获批版本。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "作品任务",
-                  "在 40 分钟内写一份电气接线图绘制的依据与图层与符号与标注与明细与版本与评审核对，并填一张核对与评审与变更与版本与异常上报单。",
-                  "只做纸面设计与核对，不接触真实项目与图纸，不作设计签章或标准或安全或法律结论，也不等同于注册执业资格或设计文件签章授权。"
+                  "交件要求",
+                  "写一页核对单，列冲突线号、两个端子、图号和版次，标出 C12 已批范围及待确认问题。",
+                  "写清交接给谁、何时发图。只做纸面核对。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "参考结果",
-                  "依据含技术资料与标准与版本与用途与范围；绘制含图层与符号与线型与标注与明细与图幅；核对含尺寸与符号与冲突与评审与意见处理；版本与变更含命名与修订与归档与权限。",
-                  "参考结果用于自检，不是唯一正确答案。"
+                  "先完成独立答卷",
+                  "到「常见问题与资料来源」打开「端子核对参考答案（完成第六天后再打开）」。",
+                  "用其中的自核项记录一处差异与修订。"
                 ]
               },
               {
@@ -29022,50 +29031,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "第 1 天：读懂材料",
-                  "阅读虚构技术资料与规范与图纸样例与制度材料，圈出不确定项并写出问题清单。"
+                  "第 1 天",
+                  "记录线号和两张图纸的版次。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "第 2 天：依据与版本",
-                  "按技术资料与标准排出用途与范围与标准与版本与接口与前提并标注待确认项。"
+                  "第 2 天",
+                  "找出端子编号差异。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第 3 天：图层与符号",
-                  "按标准写一段图层与符号与线型与标注与明细与图幅设置说明。"
+                  "第 3 天",
+                  "核 C12 已批准的内容。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "第 4 天：绘制与核对",
-                  "按依据写一份图纸绘制与尺寸与符号与冲突核对要点。"
+                  "第 4 天",
+                  "列待确认项目和接手人。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "第 5 天：版本与交付",
-                  "填写一张版本与变更与命名与归档与评审与交付与异常上报单。"
+                  "第 5 天",
+                  "写一页核对与交接。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第 6 天：限时复做",
-                  "在限时条件下重做一遍并记录精力与错误类型。"
+                  "第六天：独立交件",
+                  "先不看参考，检查交件能否独立读懂。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第 7 天：比较与决定",
-                  "比较两版方案，写出继续／谨慎／停止及理由。"
+                  "第七天：打开参考并复盘",
+                  "到「常见问题与资料来源」打开「端子核对参考答案（完成第六天后再打开）」。写下一处差异与修订，再决定继续或暂缓。"
                 ]
               }
             ]
@@ -29084,13 +29093,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第 1 天判断：材料中的不确定项是否被如实标出，而不是猜测补全。",
+              "能用题面完成一页交接，并区分已核、待核和审批。",
               "第 2 天判断：依据与范围与标准与版本是否按技术资料与要求逐项核对，而不是凭印象。",
-              "第 3 天判断：图层与符号与线型与标注与明细是否按制图标准写清。",
+              "用纸面作业记录哪一步最费力，真实工作量另向雇主核对。",
               "第 4 天判断：绘制与尺寸与符号与冲突核对是否按依据写清。",
               "第 5 天判断：版本与变更与命名与归档与交付与异常项是否可核对。",
               "第 6 天判断：限时与多方修改条件下是否仍能守住标准与核对与版本与保密要求。",
-              "第 7 天判断：综合两版表现，判断自己是否愿意继续在电气与电子制图方向投入。"
+              "第七天对照折叠参考检查交件。有关键漏项先重做。真实培训及职责范围另向雇主确认。"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30975,22 +30984,21 @@
           "data": {
             "entries": [
               {
-                "answer": "读取技术资料与规范与工程师要求并确认图纸用途与范围与标准与版本；收集与整理既有图纸与模板与块与图层与明细；核对输入与接口与前提；按制图标准与图层与符号与线型与标注与明细绘制与修改接线与布线图与原理图与布置图与图表与明细表；量取与核对尺寸与符号与冲突与图幅与标注；维护图层与块与模板与版本与命名；与工程师与审核评审与修改；按流程发布与交付与出图与电子交付；管理版本与变更与修订说明与归档与检索；配合现场与制造与安装与调试与维护并处理疑问与返工。",
+                "answer": "把确认过的电气或电子设计输入整理为原理图、接线图和清单，核对端子编号、页码和版本，把冲突交给工程人员确认。",
                 "id": "actors.faq.1",
                 "question": "电气与电子制图员每天的具体工作是什么？",
                 "question_key": "career.faq.electrical-and-electronics-drafters.1",
                 "source_refs": [
-                  "onet"
+                  "a27-electrical-onet"
                 ]
               },
               {
-                "answer": "本页职业承担电气与电子系统的图纸与文件与版本与变更与配合现场；机械制图员承担机械零件与装配与工装图纸，建筑与土木制图员承担建筑与土木与结构图纸，电气与电子工程技师与技术员承担电气与电子工程测试与调试，机电与机电一体化技师与技术员承担机电一体化设备调试与维护，土木工程技师与技术员承担土木工程现场与试验，机械工程技师与技术员承担机械工程测试与设计支持，工业工程技师与技术员承担工业工程与工艺支持，航空航天工程与运营技术员承担航空航天工程与运营支持。对象、标准与注册与授权不同，不能按专业或岗位名称互换。",
+                "answer": "电气制图侧重把已确认的设计表达清楚。电气工程岗位可能还负责计算、器件选型和调试。招聘名称可能重叠，问清谁能改设计和批准发图。",
                 "id": "actors.faq.2",
                 "question": "它与相邻职业有什么区别？",
                 "question_key": "career.faq.electrical-and-electronics-drafters.2",
                 "source_refs": [
-                  "onet",
-                  "agent"
+                  "a27-electrical-onet"
                 ]
               },
               {
@@ -31022,23 +31030,24 @@
                 ]
               },
               {
-                "answer": "美国 BLS 2025 年工资数据中位为 76,870 美元/年（36.96 美元/时）；该来源仅提供中位数，未提供 10/25/75/90 分位，本页在相应位置保留缺口。中国大陆未取得与之对应的全国职业级口径，不给出中位数或分位数，行业平均工资只作为可见行业代理。比较真实岗位时须核对城市与地区、单位类型与岗位层级、专业与图纸类型、用工方式、是否含项目奖与津贴，以及税前税后口径。",
+                "answer": "美国 2025 年 5 月电气与电子制图细项的年工资中位数为 76,870 美元。大陆两份招聘均为职责更宽的电气工程岗。 郑州公告列电气工程师 5 人，本科，含原理图、接线图、选型及调试。公告标 6,000–10,000 元，未注明计薪周期。 顺德公告标 8,501–10,000 元/月，职责含电气方案评审、选型、绘图和生产调试，范围超过单纯制图。 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。",
                 "id": "actors.faq.6",
                 "question": "工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.electrical-and-electronics-drafters.6",
                 "source_refs": [
-                  "oews",
-                  "r2-pay-1"
+                  "a27-bls-current",
+                  "a27-zhengzhou",
+                  "a27-shunde"
                 ]
               },
               {
-                "answer": "美国反馈显示 40% 要求学士学位、24% 要求副学士或两年制学位、21% 要求中学后证书（该页显示这三项、合计 85%），与 Job Zone Three 准备层级一致，多数岗位需职业培训或副学士与相关经验。中国大陆制图依据与图形符号按国家标准执行，设计文件签章依注册电气工程师执业资格制度等规定执行。",
+                "answer": "郑州公告列电气工程师 5 人，本科，含原理图、接线图、选型及调试。公告标 6,000–10,000 元，未注明计薪周期。 顺德公告标 8,501–10,000 元/月，职责含电气方案评审、选型、绘图和生产调试，范围超过单纯制图。 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。 应聘时逐项核对学历、试演或培训条件。",
                 "id": "actors.faq.7",
                 "question": "需要什么学历，又该怎样训练？",
                 "question_key": "career.faq.electrical-and-electronics-drafters.7",
                 "source_refs": [
-                  "onet",
-                  "cn-rule"
+                  "a27-zhengzhou",
+                  "a27-shunde"
                 ]
               },
               {
@@ -31052,23 +31061,30 @@
                 ]
               },
               {
-                "answer": "先做本页纸面练习（写一份电气接线图绘制的依据与图层与符号与标注与明细与版本与评审核对），再争取受监督的制图实习与工程师带教；同时确认自己能接受长时间屏幕作业与多方修改与期限压力，并按单位制度确认标准与版本与数据与文件边界。",
+                "answer": "先做本页 C12 纸面练习。对照两个端子和图纸版次，写一页核对单，第七天再打开参考核对。",
                 "id": "actors.faq.9",
                 "question": "零基础想尝试，应该先做什么？",
                 "question_key": "career.faq.electrical-and-electronics-drafters.9",
                 "source_refs": [
-                  "onet",
-                  "sag"
+                  "a27-electrical-onet"
                 ]
               },
               {
-                "answer": "考虑制图节奏（项目与评审与出图与变更与交付节点驱动、长时间用眼用手与坐姿与屏幕作业与反复修改较多）与多方修改与期限压力，以及图纸与文件与数据与知识产权与保密责任。",
+                "answer": "美国 BLS 17-3012 就业预计从 2025 年约 18,900 人到 2035 年约 18,200 人（−3.4%），年均约 1,400 个空缺，含替补。",
                 "id": "actors.faq.10",
-                "question": "选择这个职业还应考虑什么？",
+                "question": "美国就业预测应怎么读？",
                 "question_key": "career.faq.electrical-and-electronics-drafters.10",
                 "source_refs": [
-                  "onet",
-                  "nist"
+                  "a27-bls-current"
+                ]
+              },
+              {
+                "answer": "W17 在 E-03 Rev C 标 T4，在 W-02 Rev B 标 T5，端子冲突待确认。C12 只批准文字标签变化，不能据此改端子。把 W-02 标记为暂缓发放，交电气工程师确认；文控只发获批版本。交接写明 C12、线号、两个端子、图号、版次和待核人。自核四项：冲突定位、批准范围、暂缓与确认、版本与交接。每项齐全计一项。题设为虚构，来源提供职业任务背景。",
+                "id": "actors.faq.11",
+                "question": "端子核对参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.electrical-and-electronics-drafters.11",
+                "source_refs": [
+                  "a27-electrical-onet"
                 ]
               }
             ]
@@ -31300,20 +31316,19 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对制图与工程技术类职业信息与就业展望的查询入口与方法说明。",
-                  "本职业一手展望页本轮未取得；不据入口页推断本职业具体数值。"
+                  "美国 BLS 17-3012 就业预计从 2025 年约 18,900 人到 2035 年约 18,200 人（−3.4%），年均约 1,400 个空缺，含替补。"
                 ],
                 "evidence_type": "official guidance",
                 "id": "bls",
-                "limitation": "本职业一手展望页本轮未取得；不据入口页推断本职业具体数值。",
+                "limitation": "年均空缺包含替补。",
                 "market": "美国",
-                "name": "BLS Occupational Outlook Handbook / Occupation Finder",
-                "period": "accessed 2026-09-19",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.bls.gov/ooh/occupation-finder.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31494,7 +31509,7 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "核验职业定义、30 项任务、工作情境与准备层级（Job Zone Three，SVP 6.0 至 <7.0）与兴趣代码 RC 与 2024 年就业 21,600 与 2024—2034 年预测与 2025 年工资中位数。",
+                  "职业定义、任务和工作情境见 O*NET。就业预测见 BLS 表 1.2。",
                   "美国精确职业数据；2025 年工资来源仅提供中位数，不提供分位口径；不定义中国标准、工资或注册制度。"
                 ],
                 "evidence_type": "official occupation profile",
@@ -31666,6 +31681,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "绘制与修订电气、电子图纸和接线资料。"
+                ],
+                "evidence_type": "职业任务原始资料",
+                "id": "a27-electrical-onet",
+                "limitation": "仅用于美国任务对照。",
+                "market": "美国",
+                "name": "电气与电子制图 17-3012.00",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/17-3012.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "17-3012 全国就业、年均空缺与年工资中位数。"
+                ],
+                "evidence_type": "职业任务原始资料",
+                "id": "a27-bls-current",
+                "limitation": "仅用于美国任务对照。",
+                "market": "美国",
+                "name": "BLS 表 1.2 电气与电子制图",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "郑州公告列电气工程师 5 人，本科，含原理图、接线图、选型及调试。公告标 6,000–10,000 元，未注明计薪周期。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a27-zhengzhou",
+                "limitation": "单次公告，只说明该岗位的条件。",
+                "market": "中国大陆",
+                "name": "自动化电气工程师",
+                "period": "2026-02-27",
+                "publisher": "郑州市市场监督管理局",
+                "scope": "recruitment_proxy",
+                "url": "https://amr.zhengzhou.gov.cn/jycyzl/9911730.jhtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "顺德公告标 8,501–10,000 元/月，职责含电气方案评审、选型、绘图和生产调试，范围超过单纯制图。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a27-shunde",
+                "limitation": "单次公告，只说明该岗位的条件。",
+                "market": "中国大陆",
+                "name": "电气工程师",
+                "period": "2026-09-30",
+                "publisher": "顺德就业通",
+                "scope": "recruitment_proxy",
+                "url": "https://sdjyt.shunde.gov.cn/m/jobs-show.php?id=61810"
               }
             ]
           },
@@ -34484,7 +34559,7 @@
             },
             {
               "指标": "制图与图形符号标准",
-              "数值": "按国家标准执行",
+              "数值": "查看下方有日期的两份岗位样本。",
               "说明": "制图依据与图形符号与图层与文件与变更应按《中华人民共和国标准化法》与制图与电气图形符号国家标准（GB/T 系列）与单位设计与文件与变更管理制度执行。"
             },
             {
@@ -34621,7 +34696,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "统计口径状态",
+          "china_open": "下列为有日期的招聘样本，另列全国职业工资口径缺口。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34664,7 +34739,7 @@
               }
             },
             {
-              "城市/区间": "行业均值（不可替代本职业）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$join": [
                   {
@@ -34694,13 +34769,14 @@
           "china_soc_row": "中国大陆薪资口径",
           "edu": "学历与标准与注册与培训经历见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a27-zhengzhou",
+            "posting-a27-shunde"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
             "ai_heading": "AI 与自动化会直接改变本职业的收入吗？",
             "driver_heading": "谈中国大陆同类岗位报酬时应核对什么？",
-            "official_heading": "中国大陆官方口径与统计缺口",
+            "official_heading": "行业统计与招聘样本的范围",
             "scenario_caption": "计酬方式与统计边界对照",
             "scenario_heading": "中国大陆同类岗位的计酬方式能直接比较吗？",
             "scenario_interpretation_label": "适用范围与缺口",
@@ -36481,7 +36557,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解电气与电子制图员的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36594,11 +36670,11 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解电气与电子制图员的任务兴趣与工作偏好"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
             "label": "了解电气与电子制图员的任务兴趣与工作偏好"
           },
           {
@@ -37012,39 +37088,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约21,600人（2024 年，O*NET 摘要页口径）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "18,900 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模（存量统计）",
-        "occupation_scope": "本职业（17-3012.00）口径；规模随工程投资与制造业与设计外包与数字化变化；全国总量不说明某州与某单位与某专业的具体机会",
-        "period": "2024 年基期；检索 2026-09-19",
+        "occupation_scope": "美国电气与电子制图 17-3012",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "a27-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2024—2034 年预测为「下降（Decline，-1% 或更低）」（O*NET 摘要页标注的类别与区间）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "−3.4%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "预测就业变化（职业总量）",
-        "occupation_scope": "本职业口径，预测期 2024—2034 年；该预测是职业总量变化，不是个人录用概率；该页给出「下降（-1% 或更低）」类别，本页按口径原文表述而不自行换算百分数",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "美国电气与电子制图 17-3012",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a27-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约1,700个（2024—2034 年，含更替需求；O*NET 摘要页口径，为预测期合计）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 1,400 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "预测期职位空缺（含更替需求）",
-        "occupation_scope": "本职业口径；为预测期内因增长与更替等形成的合计空缺，不是每年净增岗位，也不是个人机会的直接度量；O*NET 该页标注的口径期间为 2024—2034 年，页面按该口径引用，不另按年度换算",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "美国电气与电子制图 17-3012",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a27-bls-current"
         ]
       },
       {
@@ -37085,14 +37161,15 @@
       },
       {
         "derivation": "中国大陆精确职业工资未取得；不使用美国数据、行业平均或不透明招聘报价替代本职业报酬。",
-        "display_value": "说明：中国大陆没有与美国 17-3012.00 一一对应的职业级工资口径，要求按法规与标准与单位制度区分。制图依据与图形符号与文件与变更依《中华人民共和国标准化法》与制图与电气图形符号国家标准（GB/T 系列）与单位设计与文件与变更管理制度执行；设计文件签章与执业范围依注册电气工程师执业资格制度等规定执行；图纸与文件与客户数据应按保密与知识产权要求管理。上述按法规与标准与制度名称与一般口径引用，未逐条核对条文编号。本职业相关报酬通常由岗位工资与绩效与项目奖与津贴与补贴构成，公开工资统计最高细分到行业门类与单位类型，未建立与该职业对应的职业级口径，本轮未取得可核对的中国大陆职业级工资分布，行业平均工资只作为可见行业代理并明确排除",
+        "display_value": "郑州公告列电气工程师 5 人，本科，含原理图、接线图、选型及调试。公告标 6,000–10,000 元，未注明计薪周期。 顺德公告标 8,501–10,000 元/月，职责含电气方案评审、选型、绘图和生产调试，范围超过单纯制图。",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "中国内地",
         "measure": "未取得的统计位置（中国大陆职业级工资）",
-        "occupation_scope": "中国大陆职业级口径；制图岗位报酬按单位类型与岗位与专业与职称与绩效制度确定，公开工资统计最高细分到行业门类与单位类型；页面语言为简体中文也不等于存在精确等价职业分类",
-        "period": "现行发布口径；检索 2026-09-19",
+        "occupation_scope": "两份历史招聘公告",
+        "period": "2026",
         "source_refs": [
-          "r2-pay-1"
+          "a27-zhengzhou",
+          "a27-shunde"
         ]
       },
       {
@@ -37105,6 +37182,30 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "郑州公告列电气工程师 5 人，本科，含原理图、接线图、选型及调试。公告标 6,000–10,000 元，未注明计薪周期。",
+        "fact_id": "posting-a27-zhengzhou",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "自动化电气工程师",
+        "period": "2026-02-27",
+        "source_refs": [
+          "a27-zhengzhou"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "顺德公告标 8,501–10,000 元/月，职责含电气方案评审、选型、绘图和生产调试，范围超过单纯制图。",
+        "fact_id": "posting-a27-shunde",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "电气工程师",
+        "period": "2026-09-30",
+        "source_refs": [
+          "a27-shunde"
         ]
       }
     ]
@@ -37132,19 +37233,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年「下降（-1% 或更低）」；来源只给类别）"
+        "label": "美国电气与电子制图 17-3012 · 预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年约 21,600 人）"
+        "label": "美国电气与电子制图 17-3012 · 就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国预计职位空缺（2024—2034 年约 1,700 个，含更替需求）"
+        "label": "美国电气与电子制图 17-3012 · 预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37158,17 +37259,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "电气与电子制图员（O*NET-SOC 17-3012.00）使用 CAD 与制图规范绘制与修改电气与电子系统的图纸与文件：按技术资料与标准与版本确认依据，按制图标准与图层与符号与线型与标注与明细绘制与修改接线与布线图与原理图与布置图与明细表，量取与核对尺寸与符号与冲突并与工程师评审与修改，按流程发布与交付并管理版本与变更与归档与检索，配合现场与制造与安装与调试与维护。美国口径：BLS 2025 年工资数据中位 76,870 美元/年（36.96 美元/时，仅提供中位数）；2024 年就业约 21,600 人，2024—2034 年预测「下降（-1% 或更低）」、预计空缺约 1,700 个；准备层级 Job Zone Three，兴趣代码 RC。中国大陆：制图与图形符号按国家标准执行，设计文件签章依注册电气工程师执业资格制度等规定执行；公开统计未建立职业级工资口径，本页在相关位置可见标记缺口。"
+      "text": "看电气制图如何核对端子、接线图和版次，区分工程岗招聘样本，完成一份纸面图纸核对单。"
     },
     "title": {
       "availability": "available",
       "text": "电气与电子制图员"
     }
   },
-  "source_content_sha256": "78660db95e269f894f5702076a4c11b81b0c880a1208d3561f24fbbed4c68f18",
+  "source_content_sha256": "a6d059444cc24dcd3a5130ea8a237352f64363b8fa6bb6cf136bb572d98040c4",
   "subject": {
     "canonical_slug": "electrical-and-electronics-drafters",
     "name": "电气与电子制图员",
-    "summary": "电气与电子制图员（美国侧 O*NET-SOC 17-3012.00，Electrical and Electronics Drafters）是电气与电子系统制图岗位：使用 CAD 与制图规范绘制与修改电气与电子系统的图纸与文件；工作含读取技术资料与规范与工程师要求并确认图纸用途与范围与标准与版本，收集与整理既有图纸与模板与块与图层与明细，核对输入与接口与前提，按制图标准与图层与符号与线型与标注与明细绘制与修改接线与布线图与原理图与布置图与图表与明细表，量取与核对尺寸与符号与冲突与图幅与标注，维护图层与块与模板与版本与命名，与工程师与审核评审与修改，按流程发布与交付与出图与电子交付，管理版本与变更与修订说明与归档与检索，配合现场与制造与安装与调试与维护并处理疑问与返工，参与标准与模板与流程改进并完成交接。美国口径：BLS 2025 年工资数据中位 76,870 美元/年（36.96 美元/时，该来源仅提供中位数，未提供 10/25/75/90 分位）；O*NET 摘要页给出 2024 年就业约 21,600 人、2024—2034 年预测为「下降（Decline，-1% 或更低）」与 2024—2034 年预计空缺 1,700（预测期合计口径）；准备层级为 Job Zone Three（SVP 6.0 至 <7.0），教育反馈为 40% 学士学位与 24% 副学士或两年制学位与 21% 中学后证书，兴趣代码 RC，任务 30 项。中国大陆口径：制图依据与图形符号与文件与变更依《中华人民共和国标准化法》与制图与电气图形符号国家标准（GB/T 系列）与单位制度执行，设计文件签章与执业范围依注册电气工程师执业资格制度等规定执行。公开统计未建立与本职业对应的职业级工资口径，本页据实保留缺口，行业平均工资只作为可见行业代理。"
+    "summary": "把确认过的电气或电子设计输入整理为原理图、接线图和清单，核对端子编号、页码和版本，把冲突交给工程人员确认。"
   }
 }

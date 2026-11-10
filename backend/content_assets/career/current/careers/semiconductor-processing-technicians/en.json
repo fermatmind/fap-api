@@ -15972,8 +15972,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -22954,7 +22960,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "First practice fictional batch, version and defect record exercises; real wafer equipment, chemicals and cleanroom access require on-the-job training."
+              "If shifts, cleanroom clothing, or repeated checks would be difficult, ask about the schedule and time on the floor."
             ]
           },
           "id": "semiconductor-processing-technicians.quick-decision.fit-decision-checklist.1",
@@ -22969,7 +22975,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "See whether you can verify the 24 wafers, V3, pending-defect status and log anomalies, without writing an as-yet-undetected defect as compliant."
+              "Try SPT-01 in section 09 on paper. Calculate the observation shares and draft a lot handoff."
             ]
           },
           "id": "semiconductor-processing-technicians.quick-decision.fit-decision-checklist.2",
@@ -22983,7 +22989,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Those willing to check small differences against the process, record repeatedly and escalate anomalies promptly can gain experience under coaching."
+              "This work may suit you if you enjoy checking lot IDs, work order versions, and equipment records before handing off exceptions."
             ]
           },
           "id": "semiconductor-processing-technicians.quick-decision.fit-decision-checklist.3",
@@ -25180,7 +25186,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "91.7% with no defect yet found does not equal the final yield, and an unknown log must not be written as normal."
+              "State the scope, denominator, and open items of a visual inspection."
             ]
           },
           "id": "semiconductor-processing-technicians.ai-impact.ai-impact-table.72",
@@ -25463,7 +25469,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Verify 22/24≈91.7% and do not call it the final yield."
+              "Recalculate from the source record and name the metrics that still need checking."
             ]
           },
           "id": "semiconductor-processing-technicians.ai-impact.ai-impact-table.91",
@@ -25891,7 +25897,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Can draft reports but must not write 91.7% as the final pass rate."
+              "Check the scope of the statistics and the evidence for release in the draft."
             ]
           },
           "id": "semiconductor-processing-technicians.ai-impact.ai-impact-table.121",
@@ -26540,12 +26546,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the process duties, pay structure and equipment authorization in matching Chinese announcements were not obtained."
+              "The Jiangyin technician and Wuhan chip manufacturing operator postings illustrate two sets of site duties."
             ]
           },
           "id": "semiconductor-processing-technicians.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "editor"
+            "d025-jiangyin",
+            "d025-wuhan"
           ],
           "type": "prose"
         },
@@ -26554,12 +26561,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No sample matching region, dates and wafer processes was obtained."
+              "Jiangyin lists tool operation and loading. Wuhan lists in-line checks and process records."
             ]
           },
           "id": "semiconductor-processing-technicians.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "editor"
+            "d025-jiangyin",
+            "d025-wuhan"
           ],
           "type": "prose"
         },
@@ -26568,7 +26576,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese recruitment check: pay structure not obtained"
+              "Chinese recruitment check: verify the pay structure"
             ]
           },
           "id": "semiconductor-processing-technicians.china-salary.career-snapshot-primary-locale.51",
@@ -26596,7 +26604,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese recruitment check: qualification authorization not obtained"
+              "Chinese recruitment check: equipment and release authority"
             ]
           },
           "id": "semiconductor-processing-technicians.china-salary.career-snapshot-primary-locale.53",
@@ -27516,9 +27524,9 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Show the 24 wafers, V3 and the 22/24 recalculation.",
-              "Separate the 2 wafers pending judgment, the 22 with nothing found yet and the whole batch pending verification.",
-              "When the cause of a parameter excursion is unknown, hand over promptly and do not change the recipe or restart the interlock."
+              "Can you match the work order against the tool record?",
+              "Can you label the observation behind each share?",
+              "Can you hand off the unknowns and name the next reviewer?"
             ]
           },
           "id": "semiconductor-processing-technicians.fit.personality-fit-block.4",
@@ -27576,9 +27584,9 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Show the 24 wafers, V3 and the 22/24 recalculation.",
-              "Separate the 2 wafers pending judgment, the 22 with nothing found yet and the whole batch pending verification.",
-              "When the cause of a parameter excursion is unknown, hand over promptly and do not change the recipe or restart the interlock."
+              "Can you match the work order against the tool record?",
+              "Can you label the observation behind each share?",
+              "Can you hand off the unknowns and name the next reviewer?"
             ]
           },
           "id": "semiconductor-processing-technicians.fit.personality-fit-block.8",
@@ -27679,9 +27687,9 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Show the 24 wafers, V3 and the 22/24 recalculation.",
-              "Separate the 2 wafers pending judgment, the 22 with nothing found yet and the whole batch pending verification.",
-              "When the cause of a parameter excursion is unknown, hand over promptly and do not change the recipe or restart the interlock."
+              "Can you match the work order against the tool record?",
+              "Can you label the observation behind each share?",
+              "Can you hand off the unknowns and name the next reviewer?"
             ]
           },
           "id": "semiconductor-processing-technicians.fit.personality-fit-block.12",
@@ -27751,9 +27759,9 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Show the 24 wafers, V3 and the 22/24 recalculation.",
-              "Separate the 2 wafers pending judgment, the 22 with nothing found yet and the whole batch pending verification.",
-              "When the cause of a parameter excursion is unknown, hand over promptly and do not change the recipe or restart the interlock."
+              "Can you match the work order against the tool record?",
+              "Can you label the observation behind each share?",
+              "Can you hand off the unknowns and name the next reviewer?"
             ]
           },
           "id": "semiconductor-processing-technicians.fit.personality-fit-block.16",
@@ -27810,9 +27818,9 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Show the 24 wafers, V3 and the 22/24 recalculation.",
-              "Separate the 2 wafers pending judgment, the 22 with nothing found yet and the whole batch pending verification.",
-              "When the cause of a parameter excursion is unknown, hand over promptly and do not change the recipe or restart the interlock."
+              "Can you match the work order against the tool record?",
+              "Can you label the observation behind each share?",
+              "Can you hand off the unknowns and name the next reviewer?"
             ]
           },
           "id": "semiconductor-processing-technicians.fit.personality-fit-block.20",
@@ -27869,9 +27877,9 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Show the 24 wafers, V3 and the 22/24 recalculation.",
-              "Separate the 2 wafers pending judgment, the 22 with nothing found yet and the whole batch pending verification.",
-              "When the cause of a parameter excursion is unknown, hand over promptly and do not change the recipe or restart the interlock."
+              "Can you match the work order against the tool record?",
+              "Can you label the observation behind each share?",
+              "Can you hand off the unknowns and name the next reviewer?"
             ]
           },
           "id": "semiconductor-processing-technicians.fit.personality-fit-block.24",
@@ -28820,7 +28828,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Verify V3, the work order batch and the wafer count and do not choose a process from memory."
+              "Check the order version, lot, and count against the source records."
             ]
           },
           "id": "semiconductor-processing-technicians.risk.career-risk-cards.25",
@@ -28835,7 +28843,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Fictional A1: the 24 wafers require V3 but the old process is about to be used."
+              "Record what evidence is missing when the work order and tool records differ."
             ]
           },
           "id": "semiconductor-processing-technicians.risk.career-risk-cards.26",
@@ -28895,7 +28903,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Fictional A4: one log excursion, with the cause and affected batches unknown."
+              "When a log records an excursion, note the time and route it for authorized review."
             ]
           },
           "id": "semiconductor-processing-technicians.risk.career-risk-cards.30",
@@ -28940,7 +28948,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Record 2 wafers pending judgment and 22 with nothing yet found; authorized staff decide the batch status."
+              "Record observations, disposition, and release status separately."
             ]
           },
           "id": "semiconductor-processing-technicians.risk.career-risk-cards.33",
@@ -28955,7 +28963,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Fictional A3: 22/24≈91.7% is called the final yield."
+              "Check whether the draft turns one visual inspection into a final outcome."
             ]
           },
           "id": "semiconductor-processing-technicians.risk.career-risk-cards.34",
@@ -29117,17 +29125,17 @@
               {
                 "id": "education",
                 "values": [
-                  "No single employer sample adopted",
-                  "This page obtained no semiconductor processing technician announcement in which identity, dates, duties and pay are all verifiable; no uniform threshold is inferred.",
-                  "When using an announcement, verify region, tasks, qualifications and pay item by item."
+                  "Mainland China wafer processing and production",
+                  "The Jiangyin full-time technician posting covers wafer-tool operation, loading and unloading, routine checks, and reporting faults for engineering support.",
+                  "The Wuhan graduate hiring notice lists in-line checks, routine equipment inspection, and process records for chip manufacturing operators. It asks for shift and cleanroom-garment readiness."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "Paper exercise",
-                  "On paper, 22÷24≈91.7% is the ratio with no surface defect yet found, but it cannot be treated as the final yield; the 2 wafers and the parameter excursion await judgment by QA and the process lead and the batch status is marked pending.",
-                  "The exercise does not replace formal training and authorization."
+                  "Two US sites at the same employer",
+                  "The Phoenix process technician posting covers monitoring wafer flow, tool performance, and production dashboards.",
+                  "The Camas photolithography posting includes visual wafer inspection for defects and identifier checks. It is a different site and process at the same employer."
                 ]
               },
               {
@@ -29151,7 +29159,11 @@
           "id": "semiconductor-processing-technicians.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d025-jiangyin",
+            "d025-wuhan",
+            "d025-phoenix",
+            "d025-camas"
           ],
           "title": "What do employers usually look for in recruitment?",
           "type": "cards"
@@ -29164,37 +29176,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and settings | All fictional data designed by the editor",
-                  "You are doing a paper exercise as a semiconductor processing technician trainee; the following figures and conditions are not for real work.",
-                  "A1 | A fictional batch of 24 wafers; the work order specifies process version V3; the values are for paper practice only.",
-                  "A2 | Equipment status is normal, but cleanroom access and the process recipe must still be verified by a real role.",
-                  "A3 | At inspection, 2 wafers show pending surface defects and the remaining 22 have nothing found yet.",
-                  "A4 | The equipment log shows one unexplained parameter excursion; the cause and affected batches are pending.",
-                  "A5 | Trainees may flag anomalies and hand over, but must not change recipes, restart interlocks or release batches."
+                  "Fictional work order and observations",
+                  "Use these paper records. Leave equipment and chemicals outside the exercise.",
+                  "A1 | Work order L-14 covers 24 wafers and specifies process version V3.",
+                  "A2 | The equipment status reads normal. The field for the loaded process version is blank.",
+                  "A3 | One visual inspection covers all 24 wafers. The record flags two with possible surface anomalies and records no surface anomaly for the others. The check covers appearance only.",
+                  "A4 | The 10:40 log shows one parameter excursion. The cause, affected scope, and review outcome are unrecorded.",
+                  "A5 | The trainee records and hands off. Quality staff assess appearance findings, the process lead reviews the parameter and scope, and authorized staff decide release."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Tasks and outputs",
-                  "Based on A1–A5, write the work order and process version check, the authorized process start and the anomaly escalation card; mark all unknowns pending.",
-                  "Deliver a one-page set of calculations or criteria, risk and authorization, inspection, records and handover records."
+                  "Submit a one-page lot handoff",
+                  "T1 | Check the lot, work order version, and equipment log. State the numerator, denominator, and share for each visual observation category.",
+                  "T2 | Separate records, unknowns, and next owners. Give the handoff status."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answers (view after completing independently)",
-                  "22÷24×100≈91.7% is only the ratio with no surface defect yet found; 2÷24≈8.3% is the pending ratio, not a scrap rate.",
-                  "V3, the 24 wafers and the original log are retained; the 2 pending wafers are judged by quality staff, the cause and scope of the parameter excursion are unknown and the batch status is pending. Finding no surface defect on 22 wafers does not prove that the circuits and all indicators pass.",
-                  "A5 may only record and hand over; stop the affected work on parameter anomalies and escalate, without changing recipes, restarting interlocks, scrapping or releasing. The prompt gives no repair retest and approval, so recovery must not be written."
+                  "Before submitting",
+                  "Label each calculation with its observation scope.",
+                  "Keep the time and source of each record.",
+                  "Save your draft before opening the designated key on day 7."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries and review",
-                  "All materials are fictional; stop the affected work and escalate on equipment leaks, interlock anomalies, chemical alarms or out-of-range process parameters and do not change the recipe yourself. The exercise grants no real operation, signing or public commitment authority."
+                  "Exercise boundary",
+                  "Write observations and a handoff. Site response, equipment operations, and release follow facility procedures and assigned authority."
                 ]
               }
             ]
@@ -29203,7 +29215,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Semiconductor processing technicians: tasks, evidence and boundaries",
+          "title": "SPT-01 | Reconcile wafer lot records and hand off open items",
           "type": "cards"
         },
         {
@@ -29215,7 +29227,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Task input card",
-                  "A1 | A fictional batch of 24 wafers; the work order specifies process version V3; the values are for paper practice only.",
+                  "Separate the required version and the version recorded at the tool.",
                   "Review method: check against A1–A5 and keep unknowns, authorization and versions."
                 ]
               },
@@ -29223,7 +29235,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "Calculations or criteria card",
-                  "On paper, 22÷24≈91.7% is the ratio with no surface defect yet found, but it cannot be treated as the final yield; the 2 wafers and the parameter excursion await judgment by QA and the process lead and the batch status is marked pending.",
+                  "Recalculate both visual observation shares and label the denominator.",
                   "Review method: check against A1–A5 and keep unknowns, authorization and versions."
                 ]
               },
@@ -29231,7 +29243,7 @@
                 "id": "report-summary",
                 "values": [
                   "Anomaly escalation card",
-                  "Stop the affected work and escalate on equipment leaks, interlock anomalies, chemical alarms or out-of-range process parameters and do not change the recipe yourself.",
+                  "Record the time of the excursion and the scope still to be checked.",
                   "Review method: check against A1–A5 and keep unknowns, authorization and versions."
                 ]
               },
@@ -29239,7 +29251,7 @@
                 "id": "tooling-note",
                 "values": [
                   "Handover and review card",
-                  "Review against the batch, process parameters, wafer defects and traceable records and do not scrap or release pending wafers on your own.",
+                  "Name the next owner and state the signoff and release status.",
                   "Review method: check against A1–A5 and keep unknowns, authorization and versions."
                 ]
               }
@@ -29272,25 +29284,25 @@
               [
                 "Interview task",
                 "Can you explain the work order and process version check",
-                "On paper, 22÷24≈91.7% is the ratio with no surface defect yet found, but it cannot be treated as the final yield; the 2 wafers and the parameter excursion await judgment by QA and the process lead and the batch status is marked pending.",
+                "Separate the required version and the version recorded at the tool.",
                 "Paper exercises are not a role qualification"
               ],
               [
                 "Anomaly scenario",
-                "Chemicals, cleanroom contamination, equipment interlocks and batch confusion affect people and products; escalate anomalies per the process.",
-                "Stop the affected work and escalate on equipment leaks, interlock anomalies, chemical alarms or out-of-range process parameters and do not change the recipe yourself.",
+                "How do you separate observations from unknowns?",
+                "Recalculate both visual observation shares and label the denominator.",
                 "Do not decide beyond authority"
               ],
               [
                 "Quality scenario",
                 "Review against the batch, process parameters, wafer defects and traceable records and do not scrap or release pending wafers on your own.",
-                "List evidence and pending items",
+                "Record the time of the excursion and the scope still to be checked.",
                 "Do not treat one exercise as long-term ability"
               ],
               [
                 "Trial handover",
                 "Inspection, records and handover",
-                "State the recipient and version",
+                "Name the next owner and state the signoff and release status.",
                 "Specific standards are verified by employer"
               ]
             ]
@@ -29312,49 +29324,49 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "Day one",
-                  "Read A1–A5 and mark the fictional and real work boundaries."
+                  "Read A1–A5. List the evidence sources and roles."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "Day two",
-                  "Compile the inputs needed to verify the work order and process version and to verify equipment and cleanroom requirements."
+                  "Separate the required version and the version recorded at the tool."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day three",
-                  "Complete the paper flowchart for loading wafers."
+                  "Recalculate both visual observation shares and label the denominator."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day four",
-                  "Write verifiable calculations or criteria for starting the authorized process."
+                  "Record the time of the excursion and the scope still to be checked."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day five",
-                  "For monitoring parameters and anomalies, write the anomaly, stop-work and responsible person."
+                  "Name the next owner and state the signoff and release status."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day six",
-                  "Seal the first draft and revise against the reference answers."
+                  "Complete and save your one-page first draft. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day seven",
-                  "Summarize your work and the next coaching questions without calculating a fit score."
+                  "After saving your day 6 draft, open “SPT-01 answer key and rubric (open on day 7)” in the FAQ. Apply the four checks and keep one revision."
                 ]
               }
             ]
@@ -29481,7 +29493,7 @@
           "data": {
             "paragraphs": [
               "Paper exercises cannot replace real role training, equipment authorization and on-site approval.",
-              "This round adopted no single employer recruitment case; entry information from U.S. official material and Chinese role requirements are understood separately, and unverified announcements are not written as a universal occupational threshold.",
+              "Use the postings to compare site work. Check US occupational data separately from each Chinese employer’s requirements, shifts, and training.",
               "Process recipes, equipment logs and batch materials are kept and used under role authorization; this page infers no uniform Chinese licence or material permission.",
               "Learning habits can be observed through version checks, wafer count recalculation, pending-defect records and anomaly escalation exercises; real cleaning, loading and inspection require equipment and process coaching and are not judged by personality or a single score."
             ]
@@ -29499,15 +29511,19 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no matching Chinese announcement with verifiable identity and dates, wafer processes and pay authorization for this occupation was obtained, so no uniform threshold is inferred.",
-              "When applying, verify equipment and process, shift hours, pay, cleanroom access, training and release responsibility."
+              "The Jiangyin full-time technician posting covers wafer-tool operation, loading and unloading, routine checks, and reporting faults for engineering support.",
+              "The Wuhan graduate hiring notice lists in-line checks, routine equipment inspection, and process records for chip manufacturing operators. It asks for shift and cleanroom-garment readiness.",
+              "The Phoenix process technician posting covers monitoring wafer flow, tool performance, and production dashboards.",
+              "The Camas photolithography posting includes visual wafer inspection for defects and identifier checks. It is a different site and process at the same employer.",
+              "Ask about cleanroom work, process assignments, shifts, tool supervision, and who can release a lot."
             ]
           },
           "id": "semiconductor-processing-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
+            "d025-jiangyin",
+            "d025-wuhan",
+            "d025-phoenix",
+            "d025-camas",
             "editor"
           ],
           "title": "Note on the recruitment sample",
@@ -29573,7 +29589,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "On paper, verify the 24 wafers, V3, the ratios and the pending-defect log and separate the unknowns."
+              "Use SPT-01 to reconcile the work order, visual observations, and log. Hand open items to the next reviewer."
             ]
           },
           "id": "semiconductor-processing-technicians.path.career-path-block.12",
@@ -31594,10 +31610,13 @@
                 "question_key": "career.faq.semiconductor-processing-technicians.credentials"
               },
               {
-                "answer": "On paper, 22÷24≈91.7% is the ratio with no surface defect yet found, but it cannot be treated as the final yield; the 2 wafers and the parameter excursion await judgment by QA and the process lead and the batch status is marked pending.",
+                "answer": "In this visual inspection, 22÷24≈91.7% have no recorded surface anomaly and 2÷24≈8.3% have a possible anomaly awaiting quality review. Both shares describe this visual check only. Final yield and scrap rate require disposition evidence.\n\nThe order calls for V3 and the loaded version remains unverified. Keep the original L-14 work order, visual report, and 10:40 log. The process lead checks the cause and scope of the excursion, quality staff assess the visual findings, and authorized staff decide release. Hand off the lot as pending review.\n\nScore four items from 0 to 2: traceable lot and version; correct calculation scope; log time and open questions; and named next owners with clear release authority. Give 2 for complete, 1 for partial, or 0 for guessing or exceeding authority.",
                 "id": "semiconductor-processing-technicians.faq.9",
-                "question": "How is the fictional exercise judged?",
-                "question_key": "career.faq.semiconductor-processing-technicians.risk-boundary"
+                "question": "SPT-01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.semiconductor-processing-technicians.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "You can compare electronic equipment assemblers, inspectors, testers, sorters, samplers and weighers, industrial engineering technologists and technicians, and electronics engineers; a transfer still requires adding specialised skills.",
@@ -31713,13 +31732,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the Semiconductor Processing Technicians career page",
@@ -32207,6 +32226,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Jiangyin full-time technician posting covers wafer-tool operation, loading and unloading, routine checks, and reporting faults for engineering support."
+                ],
+                "evidence_type": "Original recruitment notice",
+                "id": "d025-jiangyin",
+                "limitation": "Specific to this site, process, and posting. Verify education, pay, and release authority for the actual role.",
+                "market": "Jiangsu, China",
+                "name": "SJ Semiconductor, Jiangyin | Semiconductor technician",
+                "period": "2026-04-22",
+                "publisher": "SJ Semiconductor, Jiangyin",
+                "scope": "recruitment_proxy",
+                "url": "https://school.gxjy.sdei.edu.cn/jobqdgw/school/companyissueinfo/edit1/8474"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Wuhan graduate hiring notice lists in-line checks, routine equipment inspection, and process records for chip manufacturing operators. It asks for shift and cleanroom-garment readiness."
+                ],
+                "evidence_type": "Original recruitment notice",
+                "id": "d025-wuhan",
+                "limitation": "Specific to this site, process, and posting. Verify education, pay, and release authority for the actual role.",
+                "market": "Hubei, China",
+                "name": "YOFC Advanced Semiconductor, Wuhan | Chip manufacturing operator",
+                "period": "2026-05-11",
+                "publisher": "YOFC Advanced Semiconductor, Wuhan",
+                "scope": "recruitment_proxy",
+                "url": "https://www.wifa.edu.cn/xxjsxb/view_18313.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Phoenix process technician posting covers monitoring wafer flow, tool performance, and production dashboards."
+                ],
+                "evidence_type": "Original recruitment notice",
+                "id": "d025-phoenix",
+                "limitation": "Specific to this site, process, and posting. Verify education, pay, and release authority for the actual role.",
+                "market": "Arizona, US",
+                "name": "TSMC Arizona | Process Technician",
+                "period": "2026-10-22",
+                "publisher": "TSMC Arizona",
+                "scope": "recruitment_proxy",
+                "url": "https://ro.careers.tsmc.com/job/Phoenix-Process-Technician-AZ-85083/1328581266/"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Camas photolithography posting includes visual wafer inspection for defects and identifier checks. It is a different site and process at the same employer."
+                ],
+                "evidence_type": "Original recruitment notice",
+                "id": "d025-camas",
+                "limitation": "Specific to this site, process, and posting. Verify education, pay, and release authority for the actual role.",
+                "market": "Washington, US",
+                "name": "TSMC Washington, Camas | Process Technician – Photo",
+                "period": "2026-10-12",
+                "publisher": "TSMC Washington, Camas",
+                "scope": "recruitment_proxy",
+                "url": "https://ro.careers.tsmc.com/job/Camas-Process-Technician-Photo-WA-98607/1368707966/"
               }
             ]
           },
@@ -37023,6 +37102,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which semiconductor processing direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand interest codes",
+      "interface.quick_decision.suit_heading": "Who tends to enjoy semiconductor processing work?",
       "interface.us_salary.industry.industry_header": "National wage percentiles",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. wage reference",
@@ -37466,7 +37546,7 @@
       "text": "Semiconductor Processing Technicians"
     }
   },
-  "source_content_sha256": "582900e359b8b34c0b59ed0f6695900d6524fb2719518a23e5b5b443341e93ed",
+  "source_content_sha256": "7240c089195d26874b642bbad3e58c7af029f5a1cc83e1921ece440c8059b114",
   "subject": {
     "canonical_slug": "semiconductor-processing-technicians",
     "name": "Semiconductor Processing Technicians",

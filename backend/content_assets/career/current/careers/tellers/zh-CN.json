@@ -23655,12 +23655,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "银行柜员在金融机构办理收付、核对金额与凭证、记录交易并核平钱箱。适配重点是准确、诚信、按授权流程处理异常，以及耐心解释客户问题。柜面服务与开户、贷款审核或营销岗位可能协作，但不能据岗位名称推定权限。"
+              "纸面体验｜比较虚构交易流水和日终合计表，标出重复出现的参考号，保留两条记录供复核。 "
             ]
           },
           "id": "tellers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24727,12 +24727,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "银行柜员在金融机构接收和支付款项，并记录钱款与票据所涉及的交易。本页以美国O*NET-SOC 43-3071.00为身份基准；中国柜面综合服务的分工、条件与权限需按机构核对。"
+              "银行柜员处理存取款等柜面交易，核对凭据和金额，并在交班或日终清点现金与交易记录。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "tellers.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-43-3071.00"
           ],
           "type": "prose"
         }
@@ -25355,12 +25355,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI更可能辅助文字整理、检索和差异提示；收付、核验和交易状态需要真实系统证据。证据不足：目前已读资料未提供精确柜员生成式AI替代率，不能把自动化就业预测归因于一种技术。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比较虚构交易流水和日终合计表，标出重复出现的参考号，保留两条记录供复核。"
             ]
           },
           "id": "tellers.display.ai_impact_table.answer",
           "source_refs": [
-            "r2-ai"
+            "transfer-onet-43-3071.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32481,6 +32482,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-43-3071.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 43-3071.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/43-3071.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37974,10 +38002,10 @@
       "text": "银行柜员"
     }
   },
-  "source_content_sha256": "132ccb0ca6b2a01d9553b6fc30bf444c9d37327ac8c157086bb4efa22a99fbb7",
+  "source_content_sha256": "0f31005aae0a3e97e9f5c1cbfb2281faac19b088d70f4936f4739a1aaccee03f",
   "subject": {
     "canonical_slug": "tellers",
     "name": "银行柜员",
-    "summary": "银行柜员在金融机构办理收付、核对金额与凭证、记录交易并核平钱箱。适配重点是准确、诚信、按授权流程处理异常，以及耐心解释客户问题。柜面服务与开户、贷款审核或营销岗位可能协作，但不能据岗位名称推定权限。"
+    "summary": "银行柜员处理存取款等柜面交易，核对凭据和金额，并在交班或日终清点现金与交易记录。"
   }
 }

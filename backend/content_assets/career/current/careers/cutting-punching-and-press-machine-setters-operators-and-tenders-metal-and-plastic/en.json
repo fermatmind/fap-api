@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a23-shunde": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a23-xinfeng": {
+        "status": "pending_mapping"
       },
       "fact:r5-employment-2025": {
         "status": "pending_mapping"
@@ -26138,12 +26144,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain verifiable recruitment or quoted-pay statistics for such positions in mainland China; the pay disclosures of individual units or platforms cannot represent the national level"
+              "Shengkun in Xinfeng listed CNY 6,000–8,500 a month for experienced workers who can operate a 200-ton press and progressive dies. Jun’aobao in Shunde listed CNY 7,001–8,500 a month for a temporary part-time press role requiring one to three years’ experience. Ask about hours and overtime before comparing the figures."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "a23-xinfeng",
+            "a23-shunde"
           ],
           "type": "prose"
         },
@@ -26240,7 +26247,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The manufacturing reference and this occupation's precise wage gap are presented side by side; industry averages are not written as occupational wages, and U.S. income is not used to convert Chinese starting pay or take-home income."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -30982,7 +30989,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Set up, operate or tend machines to saw, cut, shear, slit, punch, crimp, notch, bend or straighten metal or plastic material: reading the work order or production schedule to determine the material, cutting line position, dimensions and tolerances; using gauges, templates, feeler gauges, shims and hand tools to fit, align and lock punches, dies, blades and fixtures; adjusting the stroke length and setting the positions of stops, guides and fixtures and setting the cutting speed, feed rate or table angle; placing and aligning the workpiece, loading and feeding workpieces, plastic material or chemical solutions into the machine; turning on coolant or chip-blowing air, starting the machine, monitoring the run and recording run data; measuring finished workpieces with micrometers, gauges, calipers, templates or straightedges to verify specification; checking for defects such as notches or scratches and sorting by defect type; sharpening and dressing tools with grinding wheels, oilstones or lathes and replacing damaged blades and grinding wheels; removing burrs and sharp edges with portable grinders and joining sheet metal parts with equipment such as spot welders; and cleaning and lubricating the machine and tidying the workstation.",
+                "answer": "Read work orders and drawings, set up or run cutting and press equipment, check the first piece for dimensions and burrs, and log problems. Ask whether the job runs an existing setup, changes dies independently, or adjusts the machine.",
                 "id": "actors.faq.1",
                 "question": "What does the daily work of a metal punching and shearing equipment operator involve?",
                 "question_key": "career.faq.cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic.1",
@@ -30991,9 +30998,9 @@
                 ]
               },
               {
-                "answer": "This occupation mainly uses punching and shearing dies to blank, punch, bend and straighten metal or plastic sheet and must be responsible for the dimensions and sorting results of its own batches; forging machine setters, operators and tenders centre on forging heating and plastic forming with forging dies; grinding, lapping, polishing and buffing machine tool setters, operators and tenders centre on grinding wheels, abrasives and surface processing; milling and planing machine setters, operators and tenders centre on milling cutters and planing tools and removal machining; multiple machine tool setters, operators and tenders centre on tending several machines at once across multiple operations; tool and die makers centre on designing and making precision dies and tooling; and tool grinders, filers and sharpeners centre on sharpening cutting tools and tools specifically. Similar names do not mean duties or equipment operation requirements can be swapped.",
+                "answer": "Press operation and setup can overlap. Die maintenance deals with tool defects and service life. Before a trial shift, check who can change dies, sign off the first piece and isolate faulty equipment.",
                 "id": "actors.faq.2",
-                "question": "What is the difference between this occupation and adjacent forging, grinding and tooling positions?",
+                "question": "How do press operation, setup and die maintenance differ?",
                 "question_key": "career.faq.cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic.2",
                 "source_refs": [
                   "onet"
@@ -31009,9 +31016,9 @@
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: three types of task — work order parsing and parameter setting, loading and monitoring the run, and measurement and recording — can be partly handled by tools; this page has no occupation-specific adoption or displacement data.",
+                "answer": "Systems can log machine parameters and assist in spotting surface defects. Trained staff still follow site procedures for die changes, guarding, first-piece approval and stopping the machine. This is not a measurement of AI adoption or job displacement.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of this occupation is there already evidence of AI-driven change?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic.4",
                 "source_refs": [
                   "onet"
@@ -31027,12 +31034,14 @@
                 ]
               },
               {
-                "answer": "In the U.S. 2025 wage data, the median annual wage is 46,330 dollars (22.27 dollars per hour), with percentiles of 35,760 / 38,870 / 46,330 / 55,410 / 65,510 dollars (hourly 17.19 / 18.69 / 22.27 / 26.64 / 31.50), under O*NET-SOC 51-4031.00's own basis; values broken down by state or area must be looked up on the O*NET local wages page by area and period and cannot be treated as an individual offer; no occupation-level figure was obtained for mainland China, and this page treats it as a gap without substituting industry averages or recruitment samples.",
+                "answer": "The May 2025 U.S. median wage was $46,330 per year and $22.27 per hour. Shengkun in Xinfeng listed CNY 6,000–8,500 a month for experienced workers who can operate a 200-ton press and progressive dies. Jun’aobao in Shunde listed CNY 7,001–8,500 a month for a temporary part-time press role requiring one to three years’ experience. Ask about hours and overtime before comparing the figures.",
                 "id": "actors.faq.6",
                 "question": "What is the typical wage for this occupation, and how should it be compared?",
                 "question_key": "career.faq.cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "a23-xinfeng",
+                  "a23-shunde"
                 ]
               },
               {
@@ -31063,12 +31072,12 @@
                 ]
               },
               {
-                "answer": "The O*NET summary and employment trends page (based on BLS 2024—2034 projections, 51-4031.00's own basis) shows about 174,700 people under this basis in 2024, a projection label of Decline (declining -1% or lower) and an annual average of about 14,400 openings including growth and replacement; the projection is on an occupation-total basis, the work mainly involves die fitting and machine setup, loading and monitoring and measurement and sorting, and it should be verified against local manufacturing and processing orders, product mix and automation investment, with priority given to verifying how die locking, guards and interlocks, energy isolation and personal protection are implemented.",
+                "answer": "BLS projects U.S. employment for U.S. SOC 51-4031 to go from about 171,000 in 2025 to 153,100 in 2035 (−10.5%). It projects about 13,200 openings per year, including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing this occupation now?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic.10",
                 "source_refs": [
-                  "bls"
+                  "a23-bls-projections"
                 ]
               }
             ]
@@ -31503,7 +31512,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Supports this occupation's tasks, work context and preparation level.",
                   "Contains no technology adoption or job displacement data."
@@ -31516,7 +31525,7 @@
                 "period": "Page updated in 2026; retrieved 2026-09-19",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/51-4031.00"
+                "url": "https://www.onetonline.org/link/details/51-4031.00"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31830,6 +31839,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment for U.S. SOC 51-4031 to go from about 171,000 in 2025 to 153,100 in 2035 (−10.5%). It projects about 13,200 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a23-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Four posts, CNY 6,000–8,500 a month; two or more years of experience and independent operation of a 200-ton press and progressive dies."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a23-xinfeng",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Shengkun press technician",
+                "period": "Fourth week of April 2026",
+                "publisher": "Xinfeng High-tech Zone",
+                "scope": "recruitment_proxy",
+                "url": "https://www.jxxf.gov.cn/xfxxxgk/wgjy/202604/c18e40158f6147489124175d74bdefc6.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One part-time post, CNY 7,001–8,500 a month; one to three years of experience, first-piece and in-process checks, and stopping and reporting anomalies."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a23-shunde",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Jun’aobao temporary press operator",
+                "period": "Not stated",
+                "publisher": "Shunde District Human Resources Public Service Center",
+                "scope": "recruitment_proxy",
+                "url": "https://sdjy.shunde.gov.cn/index.php/index/job/detail.html?id=61880"
               }
             ]
           },
@@ -34882,7 +34936,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (industry category basis)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34894,13 +34948,14 @@
           "china_soc_row": "U.S. occupation code: O*NET-SOC 51-4031.00 (Cutting, Punching, and Press Machine Setters, Operators, and Tenders, Metal and Plastic); this round did not obtain a corresponding mainland China occupational wage basis or figure.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a23-xinfeng",
+            "posting-a23-shunde"
           ],
           "sources_note": "Source links are used according to their respective statistical or announcement scopes; when the statistical period, survey population and pay basis differ, cite them separately and do not convert between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect the wages for this occupation?",
             "driver_heading": "How is production arranged around order batches and the equipment takt?",
-            "official_heading": "Official statistical basis and gap notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Education and training background, position directions and notes (editorial compilation, not wage statistics)",
             "scenario_heading": "Which position directions correspond to different education and training backgrounds?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35730,7 +35785,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/forging-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/forging-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "forging-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Forging Machine Setters, Operators, and Tenders, Metal and Plastic (adjacent occupation)",
             "transition_distance": {
@@ -35753,7 +35808,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Grinding, Lapping, Polishing, and Buffing Machine Tool Setters, Operators, and Tenders, Metal and Plastic (adjacent occupation)",
             "transition_distance": {
@@ -35776,7 +35831,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Milling and Planing Machine Setters, Operators, and Tenders, Metal and Plastic (adjacent occupation)",
             "transition_distance": {
@@ -35799,7 +35854,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "multiple-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic (adjacent occupation)",
             "transition_distance": {
@@ -35822,7 +35877,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/rolling-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/rolling-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "rolling-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Rolling Machine Setters, Operators, and Tenders, Metal and Plastic (adjacent occupation)",
             "transition_distance": {
@@ -35845,7 +35900,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/tool-and-die-makers",
+            "target_href": "/en/career/jobs/tool-and-die-makers",
             "target_slug": "tool-and-die-makers",
             "target_title": "Tool and Die Makers (adjacent occupation)",
             "transition_distance": {
@@ -35868,7 +35923,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/tool-grinders-filers-and-sharpeners",
+            "target_href": "/en/career/jobs/tool-grinders-filers-and-sharpeners",
             "target_slug": "tool-grinders-filers-and-sharpeners",
             "target_title": "Tool Grinders, Filers, and Sharpeners (adjacent occupation)",
             "transition_distance": {
@@ -35891,7 +35946,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cutting-and-slicing-machine-setters-operators-and-tenders",
+            "target_href": "/en/career/jobs/cutting-and-slicing-machine-setters-operators-and-tenders",
             "target_slug": "cutting-and-slicing-machine-setters-operators-and-tenders",
             "target_title": "Cutting and Slicing Machine Setters, Operators, and Tenders (adjacent occupation)",
             "transition_distance": {
@@ -35979,7 +36034,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Learn about my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -36028,7 +36083,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Learn about my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -36077,7 +36132,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Learn about my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36126,7 +36181,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Learn about my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36175,7 +36230,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Learn about my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36224,7 +36279,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Learn about my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36846,7 +36901,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of cutting, punching and press machine setters, operators and tenders, metal and plastic",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36960,11 +37015,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -37377,39 +37432,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 174,700 people (2024)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "171,000 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistics)",
-        "occupation_scope": "Cutting, Punching, and Press Machine Setters, Operators, and Tenders, Metal and Plastic (51-4031.00) own subcategory basis; the 2024 employment figure comes from the O*NET summary page (based on BLS 2024—2034 projections)",
-        "period": "2024 base year; retrieved 2026-09-19",
+        "occupation_scope": "U.S. SOC 51-4031",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a23-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Decline of -1% or lower (2024—2034, label \"Decline\")",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "−10.5%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "51-4031.00 own subcategory basis; projection label Decline (-1% or lower), a change in the total over the projection period, not an individual probability of being hired",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. SOC 51-4031",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a23-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 14,400 (annual average 2024—2034, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "13,200 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Annual average job openings (including growth and replacement)",
-        "occupation_scope": "51-4031.00 own subcategory basis; openings are an annual average for 2024—2034, including positions arising from growth and replacement",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. SOC 51-4031",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a23-bls-projections"
         ]
       },
       {
@@ -37461,39 +37516,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 171,000 people (2025)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "171,000 jobs (2025)",
         "fact_id": "r5-employment-2025",
         "market": "United States",
         "measure": "Employment size (stock statistics)",
-        "occupation_scope": "U.S. 51-4031 own occupational basis; a current independent fact",
-        "period": "2025 base year; retrieved 2026-10-09",
+        "occupation_scope": "U.S. SOC 51-4031",
+        "period": "2025",
         "source_refs": [
-          "r5-bls-current"
+          "a23-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Decline of 10.5% (2025—2035)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "−10.5%",
         "fact_id": "r5-growth-2025-2035",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "U.S. 51-4031 own occupational basis; a current independent fact",
-        "period": "2025—2035 projection; retrieved 2026-10-09",
+        "occupation_scope": "U.S. SOC 51-4031",
+        "period": "2025–2035",
         "source_refs": [
-          "r5-bls-current"
+          "a23-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 13,200 per year (2025—2035, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "13,200 annually (including replacements)",
         "fact_id": "r5-openings-2025-2035",
         "market": "United States",
         "measure": "Annual average job openings (including growth and replacement)",
-        "occupation_scope": "U.S. 51-4031 own occupational basis; a current independent fact",
-        "period": "2025—2035 annual average; retrieved 2026-10-09",
+        "occupation_scope": "U.S. SOC 51-4031",
+        "period": "2025–2035",
         "source_refs": [
-          "r5-bls-current"
+          "a23-bls-projections"
         ]
       },
       {
@@ -37543,6 +37598,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Four posts, CNY 6,000–8,500 a month; two or more years of experience and independent operation of a 200-ton press and progressive dies.",
+        "fact_id": "posting-a23-xinfeng",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Shengkun press technician",
+        "period": "Fourth week of April 2026",
+        "source_refs": [
+          "a23-xinfeng"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One part-time post, CNY 7,001–8,500 a month; one to three years of experience, first-piece and in-process checks, and stopping and reporting anomalies.",
+        "fact_id": "posting-a23-shunde",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Jun’aobao temporary press operator",
+        "period": "Not stated",
+        "source_refs": [
+          "a23-shunde"
+        ]
       }
     ]
   },
@@ -37569,19 +37648,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, Decline of -1% or lower)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, about 174,700 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. annual average job openings (2024—2034, about 14,400, including growth and replacement)"
+        "label": "U.S. projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37595,17 +37674,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Cutting, Punching, and Press Machine Setters, Operators, and Tenders, Metal and Plastic (O*NET-SOC 51-4031.00) set up, operate or tend machines to saw, cut, shear, slit, punch, crimp, notch, bend or straighten metal or plastic material: covering reading the work order to determine dimensions and tolerances, fitting, aligning and locking punches, dies and blades, adjusting the stroke and stops, setting speed, feed and table angle, loading and aligning workpieces, monitoring the run and recording data, measurement inspection and sorting, sharpening and replacing tools, cleaning and lubricating the machine, and deburring sharp edges and spot welding sheet metal parts; it should be noted that its U.S. wage and employment follow this subcategory's own basis (2025 median annual wage 46,330 dollars, hourly 22.27 dollars; about 174,700 people employed in 2024; a 2024—2034 projection of a decline of -1% or lower; about 14,400 annual average openings including growth and replacement; industry distribution manufacturing 89% | other industries 11%; interest code RC), together with the industry-level gap for such positions in mainland China and control points for die locking, guards and interlocks, stroke and stop verification and first-piece measurement and deburring."
+      "text": "See what press operators check on drawings and first pieces. Compare two Chinese job postings and U.S. wages and employment."
     },
     "title": {
       "availability": "available",
       "text": "Cutting, Punching, and Press Machine Setters, Operators, and Tenders, Metal and Plastic"
     }
   },
-  "source_content_sha256": "63351d54ee53078cc6d6ed9127491ce02ec430f62f2a171feae1ae1963b9e3ad",
+  "source_content_sha256": "1bfda5d3bd188b710945fe5d580bc0d07276c1ea889e1f88bbe3e15af99297f9",
   "subject": {
     "canonical_slug": "cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
     "name": "Cutting, Punching, and Press Machine Setters, Operators, and Tenders, Metal and Plastic",
-    "summary": "In the United States, cutting, punching and press machine setters, operators and tenders, metal and plastic, correspond to O*NET-SOC 51-4031.00 (Cutting, Punching, and Press Machine Setters, Operators, and Tenders, Metal and Plastic), setting up, operating or tending machines to saw, cut, shear, slit, punch, crimp, notch, bend or straighten metal or plastic material: reading the work order or production schedule to determine the material, cutting line position, dimensions and tolerances; measuring finished products with micrometers, gauges, calipers, templates or straightedges to verify specification, and checking for defects such as notches and scratches and sorting by defect type; using tools and measuring instruments to fit, align and lock punches, dies, blades and fixtures and adjusting the stroke length and guide stops; setting the cutting speed, feed rate or table angle to specification, starting the machine, monitoring the run and recording run data; placing and aligning the workpiece, loading, turning on coolant or chip-blowing air, and sharpening tools and replacing blades or grinding wheels and cleaning and lubricating the machine when necessary; and removing burrs or sharp edges with grinders and joining sheet metal parts with equipment such as spot welders. The preparation level for this occupation is Job Zone 1-2 (little to some preparation, SVP below 6.0), and official education feedback shows that among new entrants 63% require a high school diploma or equivalent, 35% a postsecondary certificate and 1% less than high school, with on-the-job training ranging from a few days to a year. Comparable positions in China are punching, shearing and sheet metal forming equipment operation positions in manufacturing and processing enterprises; their duties and pay basis do not correspond one-to-one with this U.S. occupational subcategory and cannot be interchanged."
+    "summary": "Read work orders and drawings, set up or run cutting and press equipment, check the first piece for dimensions and burrs, and log problems. Ask whether the job runs an existing setup, changes dies independently, or adjusts the machine."
   }
 }

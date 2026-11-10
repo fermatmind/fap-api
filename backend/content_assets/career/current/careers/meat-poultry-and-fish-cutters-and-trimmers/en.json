@@ -11,9 +11,6 @@
       "fact:cn-national-nonprivate-wage": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7238,25 +7235,10 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Meat, poultry, and fish cutters focus on routine cutting and trimming with knives, cleavers, saws, and other tools: dividing large pieces into retail-ready cuts to specification; removing bones, skin, and scales; trimming defects and excess fat; weighing, labeling, portioning, and sealing packages; and cleaning tools and equipment. Work is mainly in controlled indoor environments, with prolonged standing and continuous repetitive manual work, often under cold, slippery conditions and equipment-paced production."
+              "This work may suit people who like checking specifications repeatedly, recording batch discrepancies and handing them to quality staff or the crew lead."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.quick-decision.fermat-decision-card.2",
-          "source_refs": [
-            "onet-tasks",
-            "onet-context"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.fit-decision-checklist",
-          "data": {
-            "paragraphs": [
-              "Entirely fictional paper-based task package, 60 minutes, with no contact with food, knives, or equipment. A: Simulated package net weight specification of 500 grams ±10 grams and a target compliant-package-weight / raw-material-weight ratio of ≥70%. These are exercise conditions only, not legal or food safety standards. B: Records show 10.0 kilograms of raw material, 7.2 kilograms of finished product, and 2.0 kilograms of trimmings. The packing list shows 14 packages of 500 grams each and 1 package of 200 grams. Scale calibration records are missing. C: The raw material batch is B17, but one package is labeled B71. The hygiene inspection is unsigned, temperature records contain no measured values, and no product temperature limits are provided. You are an observer only, without authority to process food, change labels, or release products. Calculate the recorded weight balance and both yield rates, check specification and traceability discrepancies, and list knowns, unknowns, and conditions the responsible person must verify. Do not actually process food or confirm food safety."
-            ]
-          },
-          "id": "meat-poultry-and-fish-cutters-and-trimmers.quick-decision.fermat-decision-card.3",
           "source_refs": [
             "onet-tasks"
           ],
@@ -7267,12 +7249,26 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Reference deliverable: Recorded finished-product yield is 7.2 / 10 = 72%. Packages total 14 × 0.5 +0.2 = 7.2 kilograms. The 200-gram package fails the simulated 490–510-gram specification; recorded compliant packages weigh 7.0 kilograms / 10 = 70%. Raw material minus finished product minus trimmings leaves 0.8 kilograms unexplained; do not assume loss or byproducts. Missing calibration means weights remain unverified, and 70% is not certification of compliance. Refer B17/B71 to the responsible person for traceability evidence; do not guess and change labels. Missing measured temperatures, limits, and a hygiene signature prevent any declaration of safety or disposal. Deliver a calculation table, exception list, and blank records pending calibration, traceability, hygiene, and temperature-control checks. Wait for authorized personnel to decide rework or release under actual procedures. Do not handle knives, process food, or sign acceptance."
+              "Try the original and variant under “Entry and Sheet C: Cutting-lot record check.”"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "paper-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "In Sheet C, check batch IDs and specification review status. Keep conflicting IDs and name who should review each open item."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "onet-context"
+            "paper-exercise"
           ],
           "type": "prose"
         }
@@ -7289,12 +7285,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "This page covers O*NET 51-3022.00 Meat, Poultry, and Fish Cutters and Trimmers: routine cutting and trimming of meat, poultry, and seafood by hand or with hand tools, including cutting to specification, removing bones, skin, and scales, trimming defects and excess fat, weighing and labeling, portioning and sealing packages, and cleaning equipment. Common titles include deboner, meat cutter, fish processor, and trimmer. Work is mainly in controlled indoor settings with prolonged standing and repetitive manual activity. This page excludes adjacent occupations such as Slaughterers and Meat Packers (51-3023.00) and Butchers and Meat Cutters (51-3021.00)."
+              "This page covers O*NET 51-3022.00. Workers cut, debone or trim meat, poultry and fish to specifications in processing operations. They may also weigh products, clean tools and report exceptions to their crew or quality staff."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
             "onet-details"
           ],
           "type": "prose"
@@ -7375,13 +7370,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "U.S. O*NET 51-3022.00 covers routine manual cutting and trimming. Job Zone 1–2 is a preparation classification. Record 2025 wages and 2025–2035 employment projections separately. An occupational directory does not replace Chinese food hygiene and equipment qualification requirements."
+              "O*NET 51-3022.00 describes this occupation’s tasks and work context. U.S. wages come from OEWS and projections from BLS Table 1.2."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "onet-summary",
-            "onet-details"
+            "onet-details",
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7404,7 +7400,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Work cycle: Check specifications and yield, inspect raw materials and remove defects, cut by section and debone, trim and grade, weigh, label, and package, then clean equipment and record batches. Do not proceed before confirming all specifications and hygiene conditions, or release products before correcting weight or label inconsistencies."
+              "Day-to-day work includes cutting, trimming, weighing and recording lots within the assigned role. If temperature, sanitation, specification or traceability checks are unresolved, hold and identify the affected lot, document the discrepancy and report it under the site procedure. Authorized quality or food-safety staff decide disposition or release under the applicable product and site requirements."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.career-quick-answers-block.9",
@@ -7564,7 +7560,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This occupation mainly involves routine manual cutting, deboning, and trimming. Editorial recommendation: Try batch record, weight calculation, and label checking tools and evaluate each. Existing task materials do not demonstrate adoption sequence or effectiveness. Knife skills, specifications, hygiene, and safety require on-site training and authorization. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "This occupation mainly involves routine manual cutting, deboning, and trimming. Editorial recommendation: Try batch record, weight calculation, and label checking tools and evaluate each. Existing task materials do not demonstrate adoption sequence or effectiveness. Knife skills, specifications, hygiene, and safety require on-site training and authorization."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.ai-impact.ai-impact-table.2",
@@ -7621,7 +7617,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Using the fictional A / B / C materials above, discuss how software could calculate weights and flag specification or label discrepancies. Calibration, actual hygiene and temperature control, and release responsibility still require authorized personnel to verify. Software output is not a safety conclusion. Perform paper calculations and handover recommendations only, without contact with food, knives, or equipment."
+              "Software can flag differences in batch IDs and review fields in fictional Sheet C. Staff verify any real discrepancy and handle it within their authority."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.ai-impact.ai-impact-table.6",
@@ -7671,7 +7667,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China pay: Manufacturing is a broad industry proxy selected editorially for this page. No national wage correspondence for this occupation was established."
+              "Mainland China wage references"
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.china-salary.career-snapshot-primary-locale.1",
@@ -7735,7 +7731,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. 51-3022 wages and employment: 2025 wages and 2025–2035 projections"
+              "U.S. meat, poultry, and fish cutter and trimmer wages"
             ]
           },
           "fact_refs": [
@@ -7752,7 +7748,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. 51-3022: 2025 annual wages at P10/P25/P50/P75/P90 are $29,980 / $35,350 / $38,300 / $44,170 / $48,150, respectively; hourly values are $14.42 / $17.00 / $18.41 / $21.24 / $23.15. The BLS employment subtable shows 149,800 employed in 2025 and 158,300 in 2035, growth of 6%, and net growth of 8,500. O*NET reports 17,000 average annual openings. The overall projection is not attributed to AI; percentiles are not seniority or take-home income."
+              "The May 2025 national median for U.S. occupation 51-3022 was USD 38,300 a year and USD 18.41 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 29,980, 35,350, 38,300, 44,170, 48,150."
             ]
           },
           "fact_refs": [
@@ -7763,8 +7759,7 @@
           ],
           "id": "meat-poultry-and-fish-cutters-and-trimmers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages",
-            "onet-trends"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7773,7 +7768,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wage statistical positions: These are U.S. national distributions and employment projections. Percentiles do not represent seniority or experience levels. Average annual openings include replacement needs, not current vacancies or individual hiring probabilities."
+              "National wage percentiles"
             ]
           },
           "fact_refs": [
@@ -7790,7 +7785,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Understanding these positions: Percentiles are distribution points, not promotion levels. Employment growth and average annual openings are different indicators and cannot replace each other. Industry and regional differences are substantial; do not extrapolate across regions."
+              "How to read the percentiles"
             ]
           },
           "fact_refs": [
@@ -7807,7 +7802,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET's main industries for this occupation in 2025 are manufacturing and retail trade. Industry distribution is not a wage or demand projection. Industry-specific wages for this occupation were not obtained. BLS combined food processing group industry wages cannot be treated as 51-3022 wages."
+              "Industry wage references"
             ]
           },
           "fact_refs": [
@@ -7824,7 +7819,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025–2035 projections: From 149,800 to 158,300 employed, growth of 6%, net growth of 8,500, and 17,000 average annual openings. Net growth differs from openings; projections do not indicate current hiring or AI effects."
+              "What affects pay and preparation"
             ]
           },
           "fact_refs": [
@@ -7906,7 +7901,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Use the fictional A / B / C materials above for paper-based weight calculations, specification checks, and batch checks. Observe whether you maintain accuracy and proactively report missing information. Do not use knives, substitute materials, or real food. Results provide task experience only and do not prove practical skills or physical fitness for the job."
+              "In Sheet C, check batch IDs and specification review status. Keep conflicting IDs and name who should review each open item."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.fit.riasec-fit-block.5",
@@ -8048,7 +8043,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Entry pathways and capability stages"
+              "Entry and Sheet C: Cutting-lot record check"
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.1",
@@ -8063,12 +8058,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "U.S.: BLS states that the processing group typically requires no formal educational credential, though some employers prefer high school completion. On-the-job training length varies by role and employer. O*NET Job Zone 1–2 is a general preparation classification; a few days to one year must not be treated as this occupation's typical training duration."
+              "BLS lists no formal educational credential and short-term on-the-job training as typical for U.S. 51-3022. Ask the employer about supervised knife or equipment training, protective equipment, task rotation and who handles quality exceptions."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.2",
           "source_refs": [
-            "onet-jobzone"
+            "bls-ep-2025-2035",
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -8077,12 +8073,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "U.S. entry mainly uses on-the-job training, with some employers preferring high school completion. China: Article 44 of the Food Safety Law requires enterprise training; Article 45 governs health management and requires annual health checks and health certificates for personnel handling ready-to-eat food. Check applicability to raw-meat roles by product, duties, and locality. Verify equipment qualifications separately."
+              "Page 36 of the Fujian Kang’erfu project assessment published by the Quanzhou environmental bureau describes planned pork cutting and trimming to specification, followed by weighing and packing. It documents one proposed workflow."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.3",
           "source_refs": [
-            "onet-education"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8091,7 +8087,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Distinguish business licensing, employee food safety training, health management, and equipment operation qualifications. Article 45 health certificate conditions concern personnel handling ready-to-eat food; do not generalize them into a personal license for all cutters. Training certificates do not automatically confer a job or equipment authority."
+              "Distinguish business licensing, employee food safety training, health management, and equipment operation qualifications. Article 45 of mainland China’s Food Safety Law health certificate conditions concern personnel handling ready-to-eat food; do not generalize them into a personal license for all cutters. Training certificates do not automatically confer a job or equipment authority."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.4",
@@ -8119,12 +8115,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Work sample: The fictional A / B / C calculation table, knowns and unknowns, exception list, and record templates for responsible personnel to check, labeled as a paper exercise without practical operations or release. Seven-day plan, 20 minutes daily: Day 1, extract specifications, weights, and batches; Day 2, recalculate 72%, 70%, and the unexplained 0.8 kilograms; Day 3, check package specifications; Day 4, check batches and missing records; Day 5, list handover items, verification conditions, and blank authorized-person fields; Day 6, correct errors against the reference deliverable; Day 7, organize the work sample, look up one target employer's requirements, and record the date. If none are found, say so honestly rather than inventing a job sample."
+              "Paper exercise “Sheet C: Cutting-lot record check.” Fictional paper exercise. Mark a record complete when the work-order lot matches the finished-product label and the specification review is confirmed. C1: A17 on both records, review confirmed. C2: B12 on both, review pending. C3: D14 on the order and D41 on the label, review confirmed. Route review status to the quality records clerk and lot mismatches to the batch records clerk. In the variant only C2's specification review becomes confirmed. List each status, original value and handoff owner. Judge the paper records only."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.6",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8133,12 +8129,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Next step: Check the target company's product specifications, equipment and hygiene requirements, shifts, and production pace. Verify knife skills, yield, and safe operation on a supervised real production line."
+              "Finish both cases and save the first draft. Open the folded answer key under “FAQs and boundaries” and check the original records and handoffs."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.7",
           "source_refs": [
-            "onet-jobzone"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8169,7 +8165,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Market signals and transition directions"
+              "Occupational outlook and related work"
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.market-signals.market-signal-card.1",
@@ -8183,12 +8179,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 51-3022: 149,800 employed in 2025 and 158,300 in 2035, with 6% growth and net growth of 8,500 in 2025–2035. The 17,000 average annual openings include growth and replacement, not current vacancies; the projection is not attributed to AI."
+              "BLS Table 1.2 for U.S. occupation 51-3022 shows about 149,800 jobs in 2025 and projects 158,300 in 2035 (5.7%), with about 17,000 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8197,12 +8193,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "149,800 employed in 2025; 6% growth and net growth of 8,500 in 2025–2035"
+              "BLS Table 1.2 for U.S. occupation 51-3022 shows about 149,800 jobs in 2025 and projects 158,300 in 2035 (5.7%), with about 17,000 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "meat-poultry-and-fish-cutters-and-trimmers.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8305,7 +8301,7 @@
                 ]
               },
               {
-                "answer": "BLS 2025 wage data: Median of $38,300 per year ($18.41 per hour), with annual 10th, 25th, 75th, and 90th percentiles of $29,980, $35,350, $44,170, and $48,150. Percentiles are statistical positions, not individual take-home income.",
+                "answer": "The May 2025 national median for U.S. occupation 51-3022 was USD 38,300 a year and USD 18.41 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 29,980, 35,350, 38,300, 44,170, 48,150.",
                 "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.7",
                 "question": "What is the U.S. pay evidence?",
                 "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.us-pay",
@@ -8314,13 +8310,13 @@
                 ]
               },
               {
-                "answer": "Job Zone 1–2 typically requires high school or equivalent, with some positions accepting less. Experience and on-the-job training vary by role. This page does not establish universal exemption from practice or operation qualifications. In mainland China, check target employer, local food hygiene, and equipment requirements.",
+                "answer": "BLS Table 1.2 lists no formal educational credential and short-term on-the-job training as typical U.S. preparation. Ask the employer about role training, protection requirements and quality handoffs. Page 36 of the Fujian Kang’erfu project assessment published by the Quanzhou environmental bureau describes planned pork cutting and trimming to specification, followed by weighing and packing. It documents one proposed workflow.",
                 "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.8",
                 "question": "What are the entry and training pathways?",
                 "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.education-path",
                 "source_refs": [
-                  "onet-jobzone",
-                  "onet-education"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
@@ -8334,21 +8330,21 @@
                 ]
               },
               {
-                "answer": "BLS reports 146,800 employed in 2024 and projected 154,900 in 2034, with 6% growth in 2024–2034 (faster than average) and about 18,400 average annual openings including replacement needs. These are statistical projections, not an individual's hiring probability.",
+                "answer": "BLS Table 1.2 for U.S. occupation 51-3022 shows about 149,800 jobs in 2025 and projects 158,300 in 2035 (5.7%), with about 17,000 openings per year including replacements. Counts are rounded independently.",
                 "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.10",
                 "question": "How should market signals be understood?",
                 "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "Use the fictional A / B / C paper package above: Recalculate the recorded 72% finished-product yield, 70% compliant-package yield, and unexplained 0.8 kilograms. Identify the 200-gram package, B17/B71, and missing calibration, temperature, and hygiene records, and write conditions for responsible personnel to verify. You have no authority to process food, change labels, or release products. Do not actually use food, knives, or equipment. Organize the work sample against the reference deliverable.",
+                "answer": "In Sheet C, check batch IDs and specification review status. Keep conflicting IDs and name who should review each open item.",
                 "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.11",
                 "question": "Is this occupation worth exploring further?",
                 "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.career-worth",
                 "source_refs": [
-                  "onet-summary"
+                  "paper-exercise"
                 ]
               },
               {
@@ -8356,6 +8352,15 @@
                 "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.boundary",
                 "question": "What are this page's usage boundaries?",
                 "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.boundary"
+              },
+              {
+                "answer": "Only C1 is complete in the original. Send C2 to the quality records clerk and C3 to the batch records clerk, keeping D14 and D41. In the variant C1 and C2 are complete. C3 remains pending. The paper decision does not authorize product release.",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.paper-exercise",
+                "question": "Paper exercise answer key (open after completing)",
+                "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -8553,17 +8558,16 @@
                 "url": "https://www.onetonline.org/link/details/51-3022.00#JobZone"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2025 BLS wage data: 10th percentile, $29,980 per year ($14.42 per hour); 25th, $35,350 per year ($17.00 per hour); median, $38,300 per year ($18.41 per hour); 75th, $44,170 per year ($21.24 per hour); 90th, $48,150 per year ($23.15 per hour).",
-                  "Percentiles are wage distribution positions, not experience levels; they exclude individual take-home income."
+                  "The May 2025 national median for U.S. occupation 51-3022 was USD 38,300 a year and USD 18.41 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 29,980, 35,350, 38,300, 44,170, 48,150."
                 ],
                 "evidence_type": "official wage data",
                 "id": "onet-wages",
-                "limitation": "U.S. national scope and distribution positions, not individual starting pay or take-home income; no mapping to China is established.",
+                "limitation": "National occupational distribution. Local wages and individual offers vary.",
                 "market": "United States",
                 "name": "O*NET 51-3022.00 National Wages (BLS 2025 wage data)",
-                "period": "2025 wage data; accessed 2026-09-25",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine (BLS OEWS display), U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-3022.00"
@@ -8571,15 +8575,15 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "146,800 employed in 2024, projected 154,900 in 2034; 6% growth in 2024–2034 (faster than average); 18,400 average annual job openings in 2024–2034.",
-                  "Average annual openings include growth and replacement needs, not net new jobs or individual hiring probabilities."
+                  "The employment projections shown here come from BLS Table 1.2.",
+                  "The employment projections shown here come from BLS Table 1.2."
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
                 "limitation": "U.S. national statistical projections, including replacement needs; does not provide individual hiring probabilities.",
                 "market": "United States",
-                "name": "O*NET 51-3022.00 National Employment Trends (BLS 2024–2034 projections)",
-                "period": "2024–2034 projections; accessed 2026-09-25",
+                "name": "BLS Table 1.2 for U.S. occupation 51-3022 shows about 149,800 jobs in 2025 and projects 158,300 in 2035 (5.7%), with about 17,000 openings per year including replacements. Counts are rounded independently.",
+                "period": "Occupational profile or live lookup",
                 "publisher": "O*NET OnLine (BLS employment projection display), U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/51-3022.00"
@@ -8667,17 +8671,17 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Organizes tasks that can be assisted and human control points for task-level discussion of AI and fit.",
-                  "This editorial scale is not evidence of adoption rates, layoffs, regulations, or licensing."
+                  "Tools may help organize records. Verify key information against the original.",
+                  "Tools may help organize records. Verify key information against the original."
                 ],
-                "evidence_type": "editorial rubric",
+                "evidence_type": "Editorial explanation",
                 "id": "internal-rubric",
-                "limitation": "This editorial scale is not evidence of adoption rates, job outcomes, or regulations.",
-                "market": "Editorial synthesis",
-                "name": "FermatMind Meat and Fish Cutters Task Impact Scale",
-                "period": "Local editorial scale; accessed 2026-09-25",
+                "limitation": "This explanation does not measure adoption or work outcomes.",
+                "market": "This page",
+                "name": "FermatMind task and human review notes",
+                "period": "This page",
                 "publisher": "FermatMind research workflow",
-                "scope": "editorial",
+                "scope": "Tasks on this page",
                 "url": null
               },
               {
@@ -8713,21 +8717,85 @@
                 "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202603/t20260325_4565776.html"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Collect designated raw materials and check batches and specifications — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Weigh and label by weight and contents — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Cut, debone, and trim manually with knives — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                  "BLS Table 1.2 for U.S. occupation 51-3022 shows about 149,800 jobs in 2025 and projects 158,300 in 2035 (5.7%), with about 17,000 openings per year including replacements. Counts are rounded independently.",
+                  "BLS Table 1.2 lists no formal educational credential and short-term on-the-job training as typical U.S. preparation. Ask the employer about role training, protection requirements and quality handoffs."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "51-3022",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Page 36 of the Fujian Kang’erfu project assessment published by the Quanzhou environmental bureau describes planned pork cutting and trimming to specification, followed by weighing and packing. It documents one proposed workflow."
+                ],
+                "id": "cn-work-example",
+                "limitation": "This case does not establish national pay, entry requirements or hiring.",
+                "market": "Mainland China",
+                "name": "Fujian Kang’erfu green food processing project assessment",
+                "period": "2023-11",
+                "publisher": "Published by the Quanzhou Municipal Ecology and Environment Bureau",
+                "scope": "Named work example",
+                "url": "https://sthjj.quanzhou.gov.cn/hjgl/hbsp/hpslqkgk/202311/P020231123606086528800.pdf"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks the paper records only.",
+                "market": "This page",
+                "name": "Sheet C: Cutting-lot record check",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "scope": "Paper exercise",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Machine guarding and hazardous energy control."
+                ],
+                "id": "osha-meat-equipment",
+                "limitation": "For applicable U.S. equipment and tasks.",
+                "market": "United States",
+                "name": "OSHA poultry processing equipment safety",
+                "period": "29 CFR 1910",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/poultry-processing/hazards-solutions"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. meat and poultry HACCP corrective actions."
+                ],
+                "id": "us-meat-haccp-correction",
+                "limitation": "Check the applicable jurisdiction and product scope.",
+                "market": "United States",
+                "name": "9 CFR 417.3",
+                "period": "2026-11",
+                "publisher": "eCFR",
+                "url": "https://www.ecfr.gov/current/title-9/chapter-III/subchapter-E/part-417/section-417.3"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. seafood HACCP corrective actions."
+                ],
+                "id": "us-seafood-haccp-correction",
+                "limitation": "Check the applicable jurisdiction and product scope.",
+                "market": "United States",
+                "name": "21 CFR 123.7",
+                "period": "2026-11",
+                "publisher": "eCFR",
+                "url": "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-123/subpart-A/section-123.7"
               }
             ]
           },
@@ -9772,10 +9840,11 @@
             "affected_roles": "Processing plant positions",
             "consequence": "May cause slips or equipment injuries.",
             "evidence_refs": [
-              "meat-poultry-and-fish-cutters-and-trimmers.display.source.onet-context"
+              "meat-poultry-and-fish-cutters-and-trimmers.display.source.onet-context",
+              "meat-poultry-and-fish-cutters-and-trimmers.display.source.osha-meat-equipment"
             ],
             "id": "risk-3",
-            "mitigation": "Wear protective equipment and maintain floor and equipment safety.",
+            "mitigation": "Stop using the machine and report any missing or failed guard. Keep guards in place and hands clear of energized equipment. Only authorized workers handle cleaning, jam clearing or repairs involving hazardous energy under applicable isolation and lockout/tagout procedures.",
             "scenario": "Cold, slippery conditions and hazardous equipment.",
             "title": {
               "$item": "meat-poultry-and-fish-cutters-and-trimmers.risk.career-risk-cards.3",
@@ -9788,10 +9857,12 @@
             "affected_roles": "Food processing positions",
             "consequence": "May affect product safety and compliance.",
             "evidence_refs": [
-              "meat-poultry-and-fish-cutters-and-trimmers.display.source.cn-food-safety-law-2025"
+              "meat-poultry-and-fish-cutters-and-trimmers.display.source.cn-food-safety-law-2025",
+              "meat-poultry-and-fish-cutters-and-trimmers.display.source.us-meat-haccp-correction",
+              "meat-poultry-and-fish-cutters-and-trimmers.display.source.us-seafood-haccp-correction"
             ],
             "id": "risk-4",
-            "mitigation": "Implement and record temperature-control, cleaning, and disinfection procedures.",
+            "mitigation": "If temperature, sanitation, specification or traceability checks are unresolved, hold and identify the affected lot, document the discrepancy and report it under the site procedure. Authorized quality or food-safety staff decide disposition or release under the applicable product and site requirements.",
             "scenario": "Insufficient raw material temperature control, cleaning, and disinfection.",
             "title": {
               "$item": "meat-poultry-and-fish-cutters-and-trimmers.risk.career-risk-cards.4",
@@ -9919,6 +9990,60 @@
               "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
             },
             "scope": "Chinese food production and trading enterprise training, process control, and health management conditions."
+          },
+          {
+            "href": {
+              "$source": "osha-meat-equipment",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
+            },
+            "id": "meat-poultry-and-fish-cutters-and-trimmers.display.source.osha-meat-equipment",
+            "label": {
+              "$source": "osha-meat-equipment",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
+            },
+            "scope": "Guarding and hazardous energy control for applicable U.S. equipment."
+          },
+          {
+            "href": {
+              "$source": "us-meat-haccp-correction",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
+            },
+            "id": "meat-poultry-and-fish-cutters-and-trimmers.display.source.us-meat-haccp-correction",
+            "label": {
+              "$source": "us-meat-haccp-correction",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
+            },
+            "scope": "Corrective actions for covered U.S. meat and poultry establishments."
+          },
+          {
+            "href": {
+              "$source": "us-seafood-haccp-correction",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
+            },
+            "id": "meat-poultry-and-fish-cutters-and-trimmers.display.source.us-seafood-haccp-correction",
+            "label": {
+              "$source": "us-seafood-haccp-correction",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
+            },
+            "scope": "Corrective actions for covered U.S. seafood processors."
           }
         ]
       },
@@ -9955,24 +10080,24 @@
           },
           "china_edu_table": [
             {
-              "学历段": "Entry preparation",
-              "岗位方向": "Trimming and weighing assistance",
-              "说明": "U.S. Job Zone 1–2 general guidance, not mandatory Chinese education requirements."
+              "学历段": "Workstation",
+              "岗位方向": "Check conditions",
+              "说明": "Ask about cold rooms, standing work and rotation."
             },
             {
-              "学历段": "On-site training",
-              "岗位方向": "Cut and debone",
-              "说明": "Train under employer supervision and actual procedures; paper work samples do not prove practical skills."
+              "学历段": "Supervised training",
+              "岗位方向": "Check tools and equipment",
+              "说明": "Ask who trains staff on hand tools, guards and reporting."
             },
             {
-              "学历段": "Advanced experience",
-              "岗位方向": "Key sections and review",
-              "说明": "Build specific specification, traceability, and actual supervised experience; promotion is not guaranteed."
+              "学历段": "Base pay",
+              "岗位方向": "Check pay units",
+              "说明": "Separate monthly or hourly base pay from any probation rate."
             },
             {
-              "学历段": "Qualification verification",
-              "岗位方向": "Equipment and food hygiene",
-              "说明": "This page has not established a uniform qualification mapping; check locality and target position."
+              "学历段": "Additional pay",
+              "岗位方向": "Check eligibility",
+              "说明": "Ask how night shifts, overtime and piece rates are calculated."
             }
           ],
           "china_industry_table": [
@@ -10039,16 +10164,16 @@
           "china_salary_note": "Mainland China scope is separate from U.S., global, and specific-unit scopes; do not combine across markets.",
           "china_salary_table": [
             {
-              "城市/区间": "National median for the precise occupation",
-              "月薪参考": "Not obtained; do not substitute the manufacturing average divided by 12."
+              "城市/区间": "Urban non-private units · manufacturing",
+              "年工资参照（行业/岗位大类）": "113,594 CNY per year"
             },
             {
-              "城市/区间": "City and seniority breakdowns",
-              "月薪参考": "Not obtained; check actual pay quotes for target positions."
+              "城市/区间": "Urban private units · manufacturing",
+              "年工资参照（行业/岗位大类）": "76,055 CNY per year"
             },
             {
-              "城市/区间": "Individual take-home income",
-              "月薪参考": "Depends on contracts and deductions; this page does not predict it."
+              "城市/区间": "National urban non-private units · all industries",
+              "年工资参照（行业/岗位大类）": "129,441 CNY per year"
             }
           ],
           "china_soc_row": {
@@ -10080,12 +10205,12 @@
           "ui": {
             "ai_heading": "Boundaries for AI and pay assessments",
             "driver_heading": "Influencing factors",
-            "official_heading": "Official statistical scope",
-            "scenario_caption": "The table below covers training scenarios and verification boundaries only, without job pay ranges.",
-            "scenario_heading": "Scenario reference",
-            "scenario_interpretation_label": "Explanation",
-            "scenario_role_label": "Role scope",
-            "scenario_value_label": "Reference value"
+            "official_heading": "2025 annual wage context for urban units",
+            "scenario_caption": "Job and pay checks",
+            "scenario_heading": "What should you check in a job posting?",
+            "scenario_interpretation_label": "Ask the employer",
+            "scenario_role_label": "Scope",
+            "scenario_value_label": "Check"
           },
           "us_growth": "Not applicable to local statistical definitions",
           "us_median": "Not applicable to local statistical definitions"
@@ -10235,78 +10360,21 @@
           },
           {
             "指标": "Employment · Size",
-            "数值": "149,800 people (2025); projected 158,300 (2035)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "About 149,800 jobs (2025)",
+            "说明": "Source: BLS Employment Projections, Table 1.2."
           },
           {
             "指标": "Employment · Cumulative growth",
-            "数值": "6% (2025–2035); net growth of 8,500",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "5.7%",
+            "说明": "Source: BLS Employment Projections, Table 1.2."
           },
           {
             "指标": "Employment · Average annual openings",
-            "数值": "17,000 per year (2025–2035)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "About 17,000 projected per year",
+            "说明": "Source: BLS Employment Projections, Table 1.2."
           }
         ],
-        "boundary": "U.S. 51-3022: 2025 wages and 2025–2035 projections; percentiles are not seniority or take-home income. Older Hero and FAQ records are protected; the whole page cannot be described as using consistent definitions.",
+        "boundary": "U.S. wage data and employment projections for 51-3022 come from separate OEWS and BLS Table 1.2 series.",
         "direct_answer": {
           "$item": "meat-poultry-and-fish-cutters-and-trimmers.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10333,7 +10401,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "6%（2025—2035）",
+        "growth": "5.7%（2025—2035）",
         "heading": {
           "$item": "meat-poultry-and-fish-cutters-and-trimmers.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10400,7 +10468,7 @@
         "wage_column_labels": [
           "Percentile",
           "Annual reference",
-          "Hourly reference",
+          "Hourly wage",
           "Explanation"
         ],
         "wage_heading": {
@@ -10411,22 +10479,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "$14.42 per hour",
-            "interpretation": "2025 U.S. national percentile, not a beginner or senior level or individual take-home income.",
+            "equivalent": "USD 14.42/hour",
+            "interpretation": "May 2025 U.S. national figures. Annual and hourly wages come from separate rows in the source.",
             "label": "10th percentile",
-            "value": "$29,980 per year"
+            "value": "USD 29,980/year"
           },
           {
-            "equivalent": "$18.41 per hour",
-            "interpretation": "2025 U.S. national percentile, not a beginner or senior level or individual take-home income.",
+            "equivalent": "USD 17/hour",
+            "interpretation": "May 2025 U.S. national figures. Annual and hourly wages come from separate rows in the source.",
+            "label": "25th percentile",
+            "value": "USD 35,350/year"
+          },
+          {
+            "equivalent": "USD 18.41/hour",
+            "interpretation": "May 2025 U.S. national figures. Annual and hourly wages come from separate rows in the source.",
             "label": "50th percentile",
-            "value": "$38,300 per year"
+            "value": "USD 38,300/year"
           },
           {
-            "equivalent": "$23.15 per hour",
-            "interpretation": "2025 U.S. national percentile, not a beginner or senior level or individual take-home income.",
+            "equivalent": "USD 21.24/hour",
+            "interpretation": "May 2025 U.S. national figures. Annual and hourly wages come from separate rows in the source.",
+            "label": "75th percentile",
+            "value": "USD 44,170/year"
+          },
+          {
+            "equivalent": "USD 23.15/hour",
+            "interpretation": "May 2025 U.S. national figures. Annual and hourly wages come from separate rows in the source.",
             "label": "90th percentile",
-            "value": "$48,150 per year"
+            "value": "USD 48,150/year"
           }
         ]
       },
@@ -10460,7 +10540,7 @@
         "title": "Who might enjoy meat, poultry, and fish cutting and trimming?"
       },
       "fit_decision_checklist": {
-        "boundary": "This is an entirely fictional cutting and trimming scenario check, not a personality diagnosis, hiring conclusion, or qualification assessment.",
+        "boundary": "If cold rooms, prolonged standing or repetitive hand work would be difficult, ask about task rotation, breaks, protective equipment and knife training.",
         "how": {
           "$item": "meat-poultry-and-fish-cutters-and-trimmers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10506,11 +10586,11 @@
         },
         "outlook_evidence": [
           {
-            "geography": "U.S. national",
-            "horizon": "2025—2035",
-            "interpretation": "Employment rises from 149,800 in 2025 to 158,300 in 2035, with 6% growth and net growth of 8,500. The overall projection is not attributed to AI.",
+            "geography": "United States",
+            "horizon": "2025–2035",
+            "interpretation": "Employment rises from 149,800 in 2025 to 158,300 in 2035, with 5.7% growth and net growth of 8,500. The overall projection is not attributed to AI.",
             "limitation": "U.S. national statistical projections cannot serve as individual employment guarantees.",
-            "metric": "Employment size and change",
+            "metric": "Employment and projected change",
             "occupation_scope": "Display scope: Meat, Poultry, and Fish Cutters and Trimmers (51-3022.00)",
             "value": {
               "$item": "meat-poultry-and-fish-cutters-and-trimmers.market-signals.market-signal-card.3",
@@ -10520,22 +10600,22 @@
             }
           },
           {
-            "geography": "U.S. national",
-            "horizon": "2025—2035",
+            "geography": "United States",
+            "horizon": "2025–2035",
             "interpretation": "Annual average over the projection period, including growth and replacement; not net growth or current job postings.",
             "limitation": "Cannot serve as an individual's hiring probability.",
-            "metric": "Job openings (annual average)",
+            "metric": "Projected annual openings",
             "occupation_scope": "Display scope: 51-3022.00",
-            "value": "17,000 per year"
+            "value": "About 17,000 projected per year"
           },
           {
-            "geography": "U.S. national",
-            "horizon": "2025",
+            "geography": "United States",
+            "horizon": "2025-05",
             "interpretation": "Median from BLS 2025 wage data, not starting pay or take-home income.",
             "limitation": "Percentiles are statistical positions; they exclude individual take-home income.",
             "metric": "Median annual wage",
             "occupation_scope": "Display scope: 51-3022.00",
-            "value": "$38,300 per year"
+            "value": "USD 38,300/year"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -10701,7 +10781,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest exercise and design observations",
             "evidence_level": "Editorial self-check; not occupational validity evidence",
             "id": "riasec",
@@ -10720,7 +10800,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest exercise and design observations",
             "evidence_level": "Editorial self-check; not occupational validity evidence",
             "id": "big-five",
@@ -10739,7 +10819,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest exercise and design observations",
             "evidence_level": "Editorial self-check; not occupational validity evidence",
             "id": "mbti",
@@ -10753,7 +10833,7 @@
           },
           {
             "answer": "Continue checking against actual tasks, boundaries, and verifiable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest exercise and design observations",
             "evidence_level": "Editorial self-check; not occupational validity evidence",
             "id": "enneagram",
@@ -10767,7 +10847,7 @@
           },
           {
             "answer": "Continue checking against actual tasks, boundaries, and verifiable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest exercise and design observations",
             "evidence_level": "Editorial self-check; not occupational validity evidence",
             "id": "iq",
@@ -10781,7 +10861,7 @@
           },
           {
             "answer": "Continue checking against actual tasks, boundaries, and verifiable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest exercise and design observations",
             "evidence_level": "Editorial self-check; not occupational validity evidence",
             "id": "eq",
@@ -10841,8 +10921,8 @@
         },
         "questions": [
           {
-            "answer": "Paper calculations observe record accuracy only and cannot verify standing tolerance or knife skills. Physical and practical fitness require separate checks in safety training and job assessment.",
-            "question": "Can you stand for long periods and use your hands repetitively?"
+            "answer": "Use “Sheet C: Cutting-lot record check” to identify pending checks and record the original values and review owner.",
+            "question": "How would you hand off a record discrepancy?"
           },
           {
             "answer": "Check against specifications and yield.",
@@ -11091,7 +11171,7 @@
             "item": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1"
           }
         },
-        "note": "O*NET 51-3022 tasks, context, RC/2025 wages, and 2025–2035 trends have been checked. Cached wage-page versions differed and were checked against the official site's live national row. BLS processing-group entry information and the 51-3022 employment subtable are separate; combined percentiles and industry values are not reused. NBS manufacturing annual averages provide industry references only; ILO provides exposure background only. The added 2025 amended Food Safety Law reference is interpreted under Articles 44–46 applicability conditions. Older projections in the FAQ, Hero, and shared registry remain; no claim of whole-page harmonization is made."
+        "note": "O*NET describes the tasks, OEWS provides wage estimates, and BLS Table 1.2 provides employment projections."
       },
       "work_context_block": {
         "$item": "meat-poultry-and-fish-cutters-and-trimmers.profile.work-context-block.5",
@@ -11104,7 +11184,9 @@
     "interface": {
       "interface.ai_impact.evidence.heading": "What judgments does this evidence support?",
       "interface.fit.directions_heading": "Which cutting and processing direction might suit you better?",
-      "interface.fit.interest_code_heading": "How to understand the RC interest code"
+      "interface.fit.interest_code_heading": "How to understand the RC interest code",
+      "interface.path.promotion_evidence_label": "Stage records and exploration exercises",
+      "interface.quick_decision.experiment_heading": "What can you learn from a short paper exercise?"
     },
     "locale": "zh-CN",
     "native_items": [
@@ -11118,69 +11200,69 @@
     ],
     "path": "/en/career/jobs/meat-poultry-and-fish-cutters-and-trimmers",
     "section_titles": {
-      "ai-impact": "AI Impact Score",
-      "china-salary": "Mainland China pay",
+      "ai-impact": "AI tools and human review",
+      "china-salary": "Mainland China wage references",
       "direction-comparison": "Comparison with adjacent occupations",
       "fit": "Fit signals",
       "market-signals": "Market signals",
       "navigation": "Page navigation",
-      "path": "Entry pathways",
+      "path": "Entry and Sheet C: Cutting-lot record check",
       "profile": "Occupational definition and responsibilities",
       "quick-decision": "Quick assessment",
       "risk": "Risks and boundaries",
       "source-register": "Source registry",
       "sources": "FAQs and boundaries",
-      "us-salary": "U.S. pay"
+      "us-salary": "U.S. meat, poultry, and fish cutter and trimmer wages"
     }
   },
   "fact_register": {
     "facts": [
       {
-        "derivation": "Median from BLS 2025 wage data displayed on O*NET's national wage page.",
-        "display_value": "$38,300 per year (about $18.41 per hour)",
+        "derivation": null,
+        "display_value": "USD 38,300/year",
         "fact_id": "us-wage-median",
         "market": "United States",
-        "measure": "2025 median annual wage",
-        "occupation_scope": "Meat, Poultry, and Fish Cutters and Trimmers（51-3022.00）",
-        "period": "2025 BLS OEWS; accessed 2026-09-25",
+        "measure": "U.S. median annual wage (May 2025)",
+        "occupation_scope": "51-3022",
+        "period": "2025-05",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "146,800 people",
+        "display_value": "About 149,800 jobs",
         "fact_id": "us-employment-2024",
         "market": "United States",
-        "measure": "Employment size in 2024",
-        "occupation_scope": "51-3022.00",
-        "period": "2024; accessed 2026-09-25",
+        "measure": "U.S. employment (2025)",
+        "occupation_scope": "51-3022",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "O*NET national employment trends page: 146,800 in 2024, projected 154,900 in 2034.",
-        "display_value": "Faster than average (6%, 2024–2034)",
+        "derivation": null,
+        "display_value": "5.7%",
         "fact_id": "us-growth",
         "market": "United States",
-        "measure": "Projected employment growth",
-        "occupation_scope": "51-3022.00",
-        "period": "2024–2034; accessed 2026-09-25",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "51-3022",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "Includes growth and replacement needs.",
-        "display_value": "About 18,400 per year (2024–2034 annual average)",
+        "derivation": null,
+        "display_value": "About 17,000 per year",
         "fact_id": "us-openings",
         "market": "United States",
-        "measure": "Projected job openings (annual average)",
-        "occupation_scope": "51-3022.00",
-        "period": "2024–2034; accessed 2026-09-25",
+        "measure": "U.S. annual openings (2025–2035)",
+        "occupation_scope": "51-3022",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -11218,57 +11300,45 @@
         "source_refs": [
           "nbs-wages"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "25%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Meat, Poultry, and Fish Cutters and Trimmers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
-      "Meat and poultry cutting",
-      "Manual knife work and trimming",
-      "Hygiene and equipment safety"
+      "Meat, Poultry, and Fish Cutters and Trimmers",
+      "Wages and projections use separate tables",
+      "China occupational wage distribution unavailable"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "U.S. pay reference"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "U.S. employment count"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "U.S. average annual openings"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11282,17 +11352,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Meat, Poultry, and Fish Cutters and Trimmers (O*NET 51-3022.00) cut, debone, and trim meat, poultry, and fish using knives and hand tools. The 2025 BLS median annual wage was $38,300; employment was 146,800 in 2024, with 6% growth in 2024–2034. Includes work context, risks, and entry pathways."
+      "text": "Explore meat, poultry, and fish cutters and trimmers tasks, U.S. wage percentiles and employment projections, with a paper exercise on checking records."
     },
     "title": {
       "availability": "available",
-      "text": "Meat, Poultry, and Fish Cutters and Trimmers: Work, U.S. Pay, and Entry"
+      "text": "Meat, Poultry, and Fish Cutters and Trimmers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "a0c11bce1d657182f9faf6c7f957249d57effac74db7698e26604b8750d1c09f",
+  "source_content_sha256": "aed644865f1d089de26df16822201b38e3e7198736eab9f0a8cbea9383a2fe63",
   "subject": {
     "canonical_slug": "meat-poultry-and-fish-cutters-and-trimmers",
     "name": "Meat, Poultry, and Fish Cutters and Trimmers",
-    "summary": "Meat, Poultry, and Fish Cutters and Trimmers (O*NET 51-3022.00) perform routine cutting and trimming by hand or with hand tools: cutting and deboning to specification, removing defects, weighing and labeling, and cleaning tools and equipment."
+    "summary": "This page covers O*NET 51-3022.00. Workers cut, debone or trim meat, poultry and fish to specifications in processing operations. They may also weigh products, clean tools and report exceptions to their crew or quality staff."
   }
 }

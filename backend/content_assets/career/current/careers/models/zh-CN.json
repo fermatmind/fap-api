@@ -149,6 +149,9 @@
       "item:models.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:models.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:models.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -12982,6 +12985,21 @@
             "onet-training"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。拍摄通告同时列展示两套服装和一组平面照片，但交付单漏写照片用途。写下要向经纪或制作方确认的时段、交付和使用范围。"
+            ]
+          },
+          "id": "models.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核模特通告交付",
+          "type": "notice"
         }
       ]
     },
@@ -15461,6 +15479,13 @@
         "id": "models.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "models.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15630,7 +15655,7 @@
       "text": "模特：工作内容、美国工资与入行路径 | 费马测试"
     }
   },
-  "source_content_sha256": "72bbbb3d61c0e3cc25f3e2cfaf24fbda7e01f6c1ccf3d53d87bde2634eb0a39a",
+  "source_content_sha256": "bd883bce81fab9018b21dcfaa0334900ad4cbe072b1c50e6975cf1c535fc8a9a",
   "subject": {
     "canonical_slug": "models",
     "name": "模特",

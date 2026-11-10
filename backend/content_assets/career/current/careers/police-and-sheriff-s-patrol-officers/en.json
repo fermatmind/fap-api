@@ -23009,14 +23009,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Path: verify the local public security organ's formal recruitment announcement, qualifications, physical or professional assessments, and training requirements. The US BLS training academy path does not equal Chinese application conditions."
+              "Paper check | Compare two fictional incident reports. Flag conflicting arrival times for the same location and identify the record that needs rechecking. "
             ]
           },
           "id": "police-and-sheriff-s-patrol-officers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "cnclass",
-            "bls"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23307,13 +23305,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Police patrol officers respond to community incidents, maintain order, record the situation, and start follow-up procedures as authorized."
+              "Police and sheriff’s patrol officers respond to incidents in their jurisdiction, support scene safety and document actions taken. A handoff ties times and locations to the source of each observation. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "police-and-sheriff-s-patrol-officers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls"
+            "transfer-onet-33-3051.00"
           ],
           "type": "prose"
         },
@@ -24374,15 +24371,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence is insufficient: no AI adoption rate, displacement rate, or task-level scoring basis for this occupation was obtained. Record drafts, time and place extraction, and public material organization remain editorially proposed tasks awaiting verification; ILO exposure and BLS projections cannot prove an AI employment causal effect, and on-scene judgment, public communication, procedures, and enforcement responsibility rest with authorized personnel. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare two fictional incident reports. Flag conflicting arrival times for the same location and identify the record that needs rechecking."
             ]
           },
           "id": "police-and-sheriff-s-patrol-officers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "onet",
-            "ep",
-            "editor"
+            "transfer-onet-33-3051.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32136,6 +32131,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-33-3051.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 33-3051.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/33-3051.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37381,10 +37403,10 @@
       "text": "Police and sheriff's patrol officers: work tasks, US wages, and the entry path"
     }
   },
-  "source_content_sha256": "8eaeba5391d537ee4b35b8b3d521e87825d409d73c5e2dd6343ce91ef08edc41",
+  "source_content_sha256": "41658012557b7bc1b8c92b91558795de528bb7c8715299358f6d5e0a3af5f842",
   "subject": {
     "canonical_slug": "police-and-sheriff-s-patrol-officers",
     "name": "Police and Sheriff's Patrol Officers",
-    "summary": "Police and sheriff's patrol officers patrol their jurisdiction, respond to emergency and non-emergency requests, protect people and property, record facts, and refer matters to follow-up procedures under lawful authorization and agency procedures. Patrol scenes may involve stress, shift work, and injury risk; specific authority depends on the jurisdiction, formal hiring, training, and agency authorization."
+    "summary": "Police and sheriff’s patrol officers respond to incidents in their jurisdiction, support scene safety and document actions taken. A handoff ties times and locations to the source of each observation."
   }
 }

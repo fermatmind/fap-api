@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a39-jac": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a39-laiyang": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:engine-and-other-machine-assemblers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:engine-and-other-machine-assemblers.sources.source-card.1": {
         "status": "mapped"
@@ -14156,36 +14162,12 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
         "ref": {
@@ -14220,20 +14202,8 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
         "ref": {
@@ -14596,52 +14566,20 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
         "ref": {
@@ -20183,60 +20121,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "engine-and-other-machine-assemblers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22716,7 +22614,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use one paper-based exercise to verify: given a fictional assembly drawing and process summary, bill of materials, and parameter requirements, can you list the assembly sequence, alignment and torque points, inspection items, and record structure?"
+              "Use the fictional assembly records on this page to write a one-page handoff. Compare revisions, the review field and serial numbers, then record each status and next owner."
             ]
           },
           "id": "engine-and-other-machine-assemblers.quick-decision.fit-decision-checklist.2",
@@ -26266,12 +26164,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Recruitment quotes (not substitutable)"
+              "Mainland China job postings"
             ]
           },
           "id": "engine-and-other-machine-assemblers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a39-jac",
+            "a39-laiyang"
           ],
           "type": "prose"
         },
@@ -26280,12 +26179,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: do not substitute a single recruitment quote for occupational wages."
+              "JAC’s engine division campus notice listed 45 powertrain assembler openings for 2026 junior-college or higher-vocational graduates. Duties covered engine or transmission assembly, cold or hot tests, dimensional checks and quality control. The notice listed pay components without an amount. A Laiyang hiring-fair notice listed a diesel engine assembler at Shandong Huayuan Laidong Internal Combustion Engine Company at CNY 2,100–5,000 per month. It listed diesel engine testing and adjustment separately."
             ]
           },
           "id": "engine-and-other-machine-assemblers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a39-jac",
+            "a39-laiyang"
           ],
           "type": "prose"
         },
@@ -26358,7 +26258,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET OnLine: Engine and Other Machine Assemblers (51-2031.00)｜https://www.onetonline.org/link/summary/51-2031.00; O*NET national wage percentile values (51-2031.00)｜https://www.onetonline.org/link/localwages/51-2031.00; BLS occupational projections (2024—2034)｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "O*NET OnLine: Engine and Other Machine Assemblers (51-2031.00)｜https://www.onetonline.org/link/summary/51-2031.00; O*NET national wage percentile values (51-2031.00)｜https://www.onetonline.org/link/localwages/51-2031.00; BLS occupational projections (2025—2035)｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "engine-and-other-machine-assemblers.us-salary.career-snapshot-secondary-locale.8",
@@ -26570,12 +26470,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2,100 per year"
+              "About 2,100 per year"
             ]
           },
           "id": "engine-and-other-machine-assemblers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27030,13 +26930,13 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
@@ -27967,7 +27867,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use one paper-based exercise to complete the full loop: read a fictional assembly drawing and process, list the assembly sequence and torque points, and write out the inspection items and record structure."
+              "Write a one-page handoff for the three fictional records on this page. Compare revisions, the review field and serial numbers, record the evidence and next owner, then work through the variant that changes only the review field."
             ]
           },
           "id": "engine-and-other-machine-assemblers.fit.personality-fit-block.54",
@@ -28796,37 +28696,31 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Material one: fictional assembly drawing and process summary",
-                  "Provide the assembly scope, key dimensions, and process requirements as input for this exercise.",
-                  "Flag the check items, missing items, and version differences.",
-                  "List the conditions and reasons that may affect assembly quality.",
-                  "State that the exercise uses fictional materials and does not represent any real product or enterprise.",
-                  "Reviewable output: assembly sequence, alignment and torque points, record structure.",
-                  "Explain the process and safety boundaries; missing parts, non-conforming parameters, or safety hazards require stopping and explaining."
+                  "E21: the assembly drawing is R3. The parts list is R2.",
+                  "E24: the inspection entries are complete. The review status field is blank.",
+                  "T8: the test record shows serial number M42. The work order shows M24.",
+                  "Roles: the process lead checks revisions, the quality lead checks records and sign-off, and the test lead checks which unit the test record belongs to.",
+                  "Single-change variant: the E24 field reads “review recorded.” Keep all other records as given."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Material two: torque and inspection requirements excerpt (fictional)",
-                  "Provide key points of torque parameters and inspection items.",
-                  "Exercise output: write out the source of basis and scope of application for this assembly and inspection."
+                  "Submit one page. List the evidence, status and next owner for each record, and show what changes in the variant."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material three: material and parameter table (fictional)",
-                  "Provide a parts list and key parameters, including one missing part and one parameter contradiction.",
-                  "Exercise output: mark the missing part and contradictory items, and write out the requirements for verification and obtaining the missing parts.",
-                  "Exercise output: organize key parameters and inspection items according to the process."
+                  "Finish your own answer first",
+                  "On day seven, open “Engine assembly handoff reference (open after day six)” under FAQ and sources."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Material four: deliverables and boundary description",
-                  "List the reference deliverables and the scope that must not be overstepped (no real assembly, quality determination, or safety operation involved)."
+                  "Exercise boundary",
+                  "Use the paper records and hand open items to the assigned owner."
                 ]
               }
             ]
@@ -28835,7 +28729,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "Entry case materials",
+          "title": "Fictional engine assembly handoff",
           "type": "cards"
         },
         {
@@ -28854,9 +28748,9 @@
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Work two: assembly process and parameter record",
-                  "Write out the process steps and the alignment and torque parameter records for one fictional assembly.",
-                  "Show that you can find missing parts and parameter problems and proactively explain at the boundary."
+                  "Work two: assembly handoff",
+                  "Include your one-page handoff with the original records and the E24 variant.",
+                  "Show the evidence, status and next owner for each item."
                 ]
               },
               {
@@ -28943,50 +28837,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read one assembly drawing",
-                  "Copy out the key dimensions and process points and write out the applicable conditions and uncertainties."
+                  "Day 1",
+                  "Record the identifiers."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: do one material verification",
-                  "Use a fictional list to verify part models and quantities, marking missing and wrong parts."
+                  "Day 2",
+                  "Compare revisions."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: write one assembly process",
-                  "Write out the component assembly and alignment steps in sequence and mark the key control points."
+                  "Day 3",
+                  "Check the review field."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: do one torque record",
-                  "Write out the torque values and tightening sequence according to the process and state the recording requirements."
+                  "Day 4",
+                  "Compare serial numbers."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: do one inspection checklist",
-                  "Write out the inspection items and conformance criteria for one test run."
+                  "Day 5",
+                  "Identify the next owner for each open item."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: make two variants",
-                  "Change one missing-part situation and one parameter change respectively, and write out the impact and adjustments clearly."
+                  "Day 6",
+                  "Submit your own one-page handoff for the original and variant."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: review the stop conditions",
-                  "Summarize the situations in which you must stop and explain, forming a one-page review record."
+                  "Day 7",
+                  "On day seven, open “Engine assembly handoff reference (open after day six)” under FAQ and sources. Record one correction."
                 ]
               }
             ]
@@ -28995,7 +28889,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "Seven-day low-cost career experience",
+          "title": "Seven-day paper exercise",
           "type": "timeline"
         },
         {
@@ -29003,20 +28897,16 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: can you accurately identify the scope of application and exceptions of the drawing and process, rather than just copying keywords?",
-              "Day 2: can you break material verification into a checkable list and mark missing and wrong parts?",
-              "Day 3: can you write the assembly process as executable, reviewable steps?",
-              "Day 4: can you write out the torque values and tightening sequence according to the process, rather than by feel?",
-              "Day 5: can you write the inspection items and conformance criteria completely, without omitting key items?",
-              "Day 6: can you judge the scope of impact of a missing part or parameter change and list the items that must be verified?",
-              "Day 7: can you write clear stop and explanation conditions, and explain who confirms them?"
+              "Finish your own handoff on day six.",
+              "On day seven, open “Engine assembly handoff reference (open after day six)” under FAQ and sources.",
+              "Review the revisions, review status, serial numbers and owners."
             ]
           },
           "id": "engine-and-other-machine-assemblers.path.seven-day-decision.1",
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "How to judge on the seventh day whether to continue",
+          "title": "Review your work",
           "type": "list"
         },
         {
@@ -30462,12 +30352,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Changes reflect manufacturing assembly demand, but projections are not actual results."
+              "BLS Table 1.2 projects U.S. employment for engine and other machine assemblers (51-2031) from about 33,500 in 2025 to 27,800 in 2035 (-17.0%), with about 2,100 annual openings including replacements. Employment figures are rounded separately."
             ]
           },
           "id": "engine-and-other-machine-assemblers.market-signals.market-signal-card.11",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -30546,7 +30436,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "engine-and-other-machine-assemblers.market-signals.market-signal-card.17",
@@ -30616,7 +30506,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "33,500 people"
+              "About 33,500 in 2025, projected 27,800 in 2035"
             ]
           },
           "id": "engine-and-other-machine-assemblers.market-signals.market-signal-card.22",
@@ -31162,13 +31052,13 @@
                 ]
               },
               {
-                "answer": "U.S. O*NET-SOC 51-2031.00 \"Engine and Other Machine Assemblers,\" which is this occupation's own scope (not a broader group scope).",
+                "answer": "U.S. wages use May 2025 BLS OEWS estimates for 51-2031. Employment projections use the same occupation’s row in BLS Table 1.2. Other assembler occupations use separate statistical rows.",
                 "id": "engine-and-other-machine-assemblers.faq.3",
                 "question": "What is the U.S. statistical scope?",
                 "question_key": "career.faq.engine-and-other-machine-assemblers.q3",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "bls-projections-2025-35",
+                  "onet-summary"
                 ]
               },
               {
@@ -31182,20 +31072,23 @@
                 ]
               },
               {
-                "answer": "2024 employment about 38,400, 2024—2034 projected change Decline (-1% or lower), projected openings about 2,800; openings include growth and replacements and do not equal a personal hiring probability.",
+                "answer": "BLS Table 1.2 projects U.S. employment for engine and other machine assemblers (51-2031) from about 33,500 in 2025 to 27,800 in 2035 (-17.0%), with about 2,100 annual openings including replacements. Employment figures are rounded separately.",
                 "id": "engine-and-other-machine-assemblers.faq.5",
                 "question": "What are the U.S. employment prospects?",
                 "question_key": "career.faq.engine-and-other-machine-assemblers.q5",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics data checked this time are at industry-category scope, and no national single-occupation wage statistic precisely corresponding to this occupation was obtained; this page uses the average wage of urban units in \"manufacturing\" (2025 non-private 113,594 yuan/year, private 76,055 yuan/year) as an industry proxy, which can only illustrate industry background; it does not substitute an industry average or a single recruitment quote for the occupational wage.",
+                "answer": "JAC’s engine division campus notice listed 45 powertrain assembler openings for 2026 junior-college or higher-vocational graduates. Duties covered engine or transmission assembly, cold or hot tests, dimensional checks and quality control. The notice listed pay components without an amount. A Laiyang hiring-fair notice listed a diesel engine assembler at Shandong Huayuan Laidong Internal Combustion Engine Company at CNY 2,100–5,000 per month. It listed diesel engine testing and adjustment separately. These notices describe two employers. A comparable mainland median for this occupation remains unavailable.",
                 "id": "engine-and-other-machine-assemblers.faq.6",
                 "question": "Can wages in mainland China be found?",
-                "question_key": "career.faq.engine-and-other-machine-assemblers.us-pay"
+                "question_key": "career.faq.engine-and-other-machine-assemblers.us-pay",
+                "source_refs": [
+                  "a39-jac",
+                  "a39-laiyang"
+                ]
               },
               {
                 "answer": "In the U.S., typically a high school diploma or equivalent plus on-the-job training is required, and some positions require a postsecondary certificate; O*NET 51-2031.00 is Job Zone 1-2, and the education survey is mainly high school (64%), postsecondary certificate (13%), and less than high school (11%). Mainland China often requires a mechanical, electromechanical, or related educational background plus assembly experience.",
@@ -31220,6 +31113,12 @@
                 "id": "engine-and-other-machine-assemblers.faq.10",
                 "question": "Can these numbers be used to choose a major or find a job?",
                 "question_key": "career.faq.engine-and-other-machine-assemblers.outlook-transition"
+              },
+              {
+                "answer": "E21 has an R2 parts list and an R3 drawing. Keep both records and ask the process lead to verify the revision. E24 has a blank inspection review field. Keep it pending for the quality lead. T8’s test record and work order show different serial numbers. Ask the test lead to verify the match. In the E24 variant, review is recorded. Send it to quality for the next sign-off. A recorded review does not authorize final machine release. E21 and T8 stay the same. Check four items: the revision gap, review status, serial numbers, and both handoffs and their authority.",
+                "id": "engine-and-other-machine-assemblers.faq.11",
+                "question": "Engine assembly handoff reference (open after day six)",
+                "question_key": "career.faq.engine-and-other-machine-assemblers.11"
               }
             ]
           },
@@ -31322,18 +31221,6 @@
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
-              },
-              {
                 "entity": "Back to the engine and other machine assemblers career page",
                 "id": "navigation-6",
                 "relation": "related-evidence",
@@ -31360,7 +31247,8 @@
               {
                 "accessed_at": "2026-09-20",
                 "details": [
-                  "Used to verify this occupation's tasks, scope, and preparation level; wages and employment are this occupation's own scope."
+                  "Used to verify this occupation's tasks, scope, and preparation level; wages and employment are this occupation's own scope.",
+                  "The 2025 U.S. wage medians were $25.82 hourly and $53,710 annually. For employment projections, see BLS Table 1.2, row 51-2031."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31388,16 +31276,16 @@
                 "url": "https://www.onetonline.org/link/details/51-2031.00"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Used to verify 2024 base-period employment, 2024—2034 change, and projected openings."
+                  "BLS Table 1.2 projects U.S. employment for engine and other machine assemblers (51-2031) from about 33,500 in 2025 to 27,800 in 2035 (-17.0%), with about 2,100 annual openings including replacements. Employment figures are rounded separately."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
                 "limitation": "Projections are not actual results; openings include growth and replacements, and do not equal a hiring probability.",
                 "market": "United States",
-                "name": "BLS: 2024—2034 occupational projections (Engine and other machine assemblers)",
-                "period": "2024—2034 projections; accessed 2026-09-20",
+                "name": "BLS Table 1.2: Engine and Other Machine Assemblers, 51-2031",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "official projections",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31463,6 +31351,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "JAC’s engine division campus notice listed 45 powertrain assembler openings for 2026 junior-college or higher-vocational graduates. Duties covered engine or transmission assembly, cold or hot tests, dimensional checks and quality control. The notice listed pay components without an amount."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a39-jac",
+                "limitation": "Individual notice.",
+                "market": "Mainland China",
+                "name": "Engine assembly job posting",
+                "period": "2026-04-17",
+                "publisher": "Anhui Vocational College of Electronics and Information Technology",
+                "scope": "recruitment_proxy",
+                "url": "https://www.ahdy.edu.cn/zsjy/2026/0417/c943a44492/page.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A Laiyang hiring-fair notice listed a diesel engine assembler at Shandong Huayuan Laidong Internal Combustion Engine Company at CNY 2,100–5,000 per month. It listed diesel engine testing and adjustment separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a39-laiyang",
+                "limitation": "Individual notice.",
+                "market": "Mainland China",
+                "name": "Engine assembly job posting",
+                "period": "2025-03-20",
+                "publisher": "Laiyang Municipal Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.laiyang.gov.cn/art/2025/3/20/art_111048_2979210.html"
               }
             ]
           },
@@ -33958,7 +33876,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet",
+            "id": "onet-work-context",
             "label": {
               "$link": "engine-and-other-machine-assemblers.risk.career-risk-cards.7",
               "block": "risk",
@@ -34323,6 +34241,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a39-jac",
+            "posting-a39-laiyang"
+          ],
           "sources_note": {
             "$item": "engine-and-other-machine-assemblers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34475,7 +34397,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "Employment · average annual job openings",
+            "指标": "Average annual openings, 2025–2035",
             "数值": {
               "$item": "engine-and-other-machine-assemblers.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -34849,6 +34771,7 @@
         "heading": "What are the prospects for engine and other machine assemblers? Which related occupations can you move to?",
         "outlook_evidence": [
           {
+            "fact_ref": "us-growth-2025-2035",
             "geography": {
               "$item": "engine-and-other-machine-assemblers.market-signals.market-signal-card.9",
               "block": "market-signals",
@@ -34886,6 +34809,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "engine-and-other-machine-assemblers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -34894,6 +34818,7 @@
             }
           },
           {
+            "fact_ref": "us-employment-2025",
             "geography": {
               "$item": "engine-and-other-machine-assemblers.market-signals.market-signal-card.16",
               "block": "market-signals",
@@ -34931,6 +34856,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "engine-and-other-machine-assemblers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36231,7 +36157,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36241,27 +36167,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "engine-and-other-machine-assemblers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "engine-and-other-machine-assemblers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -36459,36 +36365,36 @@
       },
       {
         "derivation": null,
-        "display_value": "About 38,400 (2024)",
+        "display_value": "About 33,500 workers",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "U.S. employment size",
-        "occupation_scope": "Engine and Other Machine Assemblers (O*NET-SOC 51-2031.00)",
-        "period": "2024",
+        "occupation_scope": "U.S. Engine and Other Machine Assemblers (51-2031)",
+        "period": "2025",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline (-1% or lower, 2024—2034, BLS projections)",
+        "display_value": "-17.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "U.S. employment growth",
-        "occupation_scope": "Engine and Other Machine Assemblers (O*NET-SOC 51-2031.00)",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. Engine and Other Machine Assemblers (51-2031)",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 2,800 (2024—2034, BLS projections)",
+        "display_value": "About 2,100 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "U.S. projected openings",
-        "occupation_scope": "Engine and Other Machine Assemblers (O*NET-SOC 51-2031.00)",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. Engine and Other Machine Assemblers (51-2031)",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -36648,6 +36554,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "JAC’s engine division campus notice listed 45 powertrain assembler openings for 2026 junior-college or higher-vocational graduates. Duties covered engine or transmission assembly, cold or hot tests, dimensional checks and quality control. The notice listed pay components without an amount.",
+        "fact_id": "posting-a39-jac",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Engine assembly job posting",
+        "period": "2026-04-17",
+        "source_refs": [
+          "a39-jac"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "A Laiyang hiring-fair notice listed a diesel engine assembler at Shandong Huayuan Laidong Internal Combustion Engine Company at CNY 2,100–5,000 per month. It listed diesel engine testing and adjustment separately.",
+        "fact_id": "posting-a39-laiyang",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Engine assembly job posting",
+        "period": "2025-03-20",
+        "source_refs": [
+          "a39-laiyang"
+        ]
       }
     ]
   },
@@ -36674,19 +36604,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024–2034)"
+        "label": "U.S. employment growth (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment size (2024 projection base period)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual openings (2024–2034)"
+        "label": "U.S. average annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -36700,14 +36630,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "U.S. O*NET-SOC 51-2031.00: May 2025 median annual wage 53,710 U.S. dollars and median hourly wage 25.82 U.S. dollars; 2024 employment about 38,400, 2024—2034 projected Decline; includes training and qualification boundaries and mainland China industry proxy description."
+      "text": "Explore the work, wage estimates and outlook for engine and other machine assemblers, then practice a handoff using fictional shop records."
     },
     "title": {
       "availability": "available",
       "text": "Engine and Other Machine Assemblers: duties, wages, and entry paths"
     }
   },
-  "source_content_sha256": "cd5a319360d4c67b3f774aa434902ace6abc25637a4468ff4b58b9c268de8a62",
+  "source_content_sha256": "c58cf800f64e399a2af462b0806d48d5dbb1d27e3eb5149e22c2e5d983db9b55",
   "subject": {
     "canonical_slug": "engine-and-other-machine-assemblers",
     "name": "Engine and Other Machine Assemblers",

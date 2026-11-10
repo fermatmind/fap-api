@@ -20,6 +20,12 @@
       "fact:occupation-workflow": {
         "status": "pending_mapping"
       },
+      "fact:posting-a35-fltrp": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a35-sjtu": {
+        "status": "pending_mapping"
+      },
       "item:editors.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -158,7 +164,13 @@
       "item:editors.path.entry-role-comparison.current.v1": {
         "status": "pending_mapping"
       },
+      "item:editors.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
       "item:editors.path.interview-probation.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:editors.path.seven-day-trial.1": {
         "status": "pending_mapping"
       },
       "item:editors.profile.career-quick-answers-block.1": {
@@ -7290,7 +7302,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Practice reviewing three fictional editorial briefs, with seven fields: source, audience, purpose, deadline, style rules, evidence status, and approval arrangement; 'to be verified' means recorded but unconfirmed, and only unrecorded items count as missing. A: source A; audience A; purpose A; deadline Wednesday; style A; evidence to be verified; approval referred to the responsible editor, 0 missing. B: source not recorded; audience B; purpose B; deadline Friday; style not recorded; evidence to be verified; approval referred to the responsible editor, 2 missing. C: source C; audience C; purpose C; deadline Thursday; style C; evidence verified; approval referred to the designated publisher, 0 missing. Answers 0/2/0; review only the fields and do not publish content."
+              "Use the fictional manuscript below to check a number, a date and a permission. On day seven, open “Manuscript review reference (open after day six)” under FAQs and sources."
             ]
           },
           "id": "editors.quick-decision.fermat-decision-card.4",
@@ -8212,7 +8224,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The seven-day portfolio uses only public or fictional short manuscripts with a checklist and version differences."
+              "Build a one-page handoff from the fictional manuscript below. On day seven, open “Manuscript review reference (open after day six)” under FAQs and sources."
             ]
           },
           "id": "editors.path.career-path-block.5",
@@ -8457,6 +8469,100 @@
             "r5-editor"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "materials",
+                "values": [
+                  "Supplied records",
+                  "Fictional draft v3 says all readers support postponing the event. The supplied survey has 40 responses, of which 28 support postponement. No other sampling information is available.",
+                  "Draft v3 gives June 8 as the event date. Organizer notice v2 gives June 9. The author’s confirmation is missing.",
+                  "The illustration is a frame from an animation. The permissions field is blank. In this exercise the author confirms the date, the rights lead checks the image and the responsible editor approves publication."
+                ]
+              },
+              {
+                "id": "deliverable",
+                "values": [
+                  "What to submit",
+                  "Submit a one-page editorial handoff with a revised sentence, source versions, open issues, the next owner and publication status."
+                ]
+              },
+              {
+                "id": "reference",
+                "values": [
+                  "Finish your own answer first",
+                  "On day seven, open “Manuscript review reference (open after day six)” under FAQs and sources."
+                ]
+              }
+            ]
+          },
+          "id": "editors.path.entry-work-sample-data.1",
+          "title": "Paper manuscript handoff",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "Day 1",
+                  "Mark the three checks in the manuscript."
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "Day 2",
+                  "Revise the survey sentence with its scope."
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "Day 3",
+                  "Log the draft and notice versions."
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "Day 4",
+                  "Check the image permission field."
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "Day 5",
+                  "Name the next owner for each open issue."
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "Day 6",
+                  "Save your one-page handoff."
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "Day 7",
+                  "On day seven, open “Manuscript review reference (open after day six)” under FAQs and sources. Record one correction."
+                ]
+              }
+            ]
+          },
+          "id": "editors.path.seven-day-trial.1",
+          "title": "Seven-day paper exercise",
+          "type": "timeline"
         }
       ]
     },
@@ -8499,12 +8605,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 2025 employment 105,000 and projected 103,800 in 2035, with the BLS separately reporting a net change of about -1,100; the three figures are rounded separately and the endpoints cannot be subtracted to replace the original table; a 1% decline from 2025 to 2035, with 7,900 annual average openings all from replacement of transfers/exits rather than additions. The BLS notes that reading demand may support book editing while printed newspapers and periodicals losing share may decline, which is not AI employment causality or Chinese demand."
+              "BLS Table 1.2 projects U.S. editor employment (27-3041) to decline from about 105,000 in 2025 to 103,800 in 2035, down 1.1%. It projects about 7,900 annual openings, to replace workers who transfer or exit. Employment and change figures are rounded separately."
             ]
           },
           "id": "editors.market-signals.market-signal-card.3",
           "source_refs": [
-            "r5-ooh-current"
+            "bls-outlook"
           ],
           "type": "prose"
         },
@@ -8599,12 +8705,13 @@
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics material verified on this page is aggregated by industry and broad personnel category and does not provide a Chinese exact occupational wage corresponding one-to-one with 27-3041.00.",
+                "answer": "Shanghai Jiao Tong University listed an English-language journal editor for mechanical engineering manuscript screening, formatting and peer-review coordination. It preferred doctoral training and gave no pay figure. Foreign Language Teaching and Research Press listed preliminary review and editing of Chinese and English manuscripts, requiring a related master’s degree or higher. The posting listed CNY 5,000–8,000 per month. Both examples come from academic publishing. Check pay separately for general editorial, video editing and other content roles.",
                 "id": "editors.faq.6",
                 "question": "Editors: how should mainland China wages be verified?",
                 "question_key": "career.faq.editors.china-pay",
                 "source_refs": [
-                  "nbs"
+                  "a35-sjtu",
+                  "a35-fltrp"
                 ]
               },
               {
@@ -8635,22 +8742,25 @@
                 ]
               },
               {
-                "answer": "U.S. editors are projected to grow 1% from 2024 to 2034, with 9,800 annual average openings; the openings include replacement.",
+                "answer": "BLS Table 1.2 projects U.S. editor employment (27-3041) to decline from about 105,000 in 2025 to 103,800 in 2035, down 1.1%. It projects about 7,900 annual openings, to replace workers who transfer or exit. Employment and change figures are rounded separately.",
                 "id": "editors.faq.10",
                 "question": "Editors: how should the employment outlook and adjacent transitions be understood?",
                 "question_key": "career.faq.editors.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "bls-outlook"
                 ]
               },
               {
-                "answer": "U.S. editor employment was 115,800 in 2024 and is projected at 116,500 in 2034.",
+                "answer": "Use the manuscript exercise to deliver a one-page revision and issues log. Compare it with the day-seven reference and record one correction.",
                 "id": "editors.faq.11",
                 "question": "Editors: how do you judge whether this career path is worth continuing to verify?",
-                "question_key": "career.faq.editors.career-worth",
-                "source_refs": [
-                  "onet-trends"
-                ]
+                "question_key": "career.faq.editors.career-worth"
+              },
+              {
+                "answer": "Replace the blanket statement with “28 of 40 respondents supported postponement,” and cite the survey. Record the date conflict between draft v3 and notice v2, and ask the author to confirm. Hold the image and refer permissions to the rights lead. Send the open issues to the responsible editor and hold publication. Check four items: denominator and source, date and versions, image permission, and status and owner. Count each complete item.",
+                "id": "editors.faq.12",
+                "question": "Manuscript review reference (open after day six)",
+                "question_key": "career.faq.editors.12"
               }
             ]
           },
@@ -8818,20 +8928,19 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "The original text can be viewed through the source links listed in this item.",
-                  "Supports only the listed occupation, market, period, and definition."
+                  "BLS Table 1.2 projects U.S. editor employment (27-3041) to decline from about 105,000 in 2025 to 103,800 in 2035, down 1.1%. It projects about 7,900 annual openings, to replace workers who transfer or exit. Employment and change figures are rounded separately."
                 ],
                 "evidence_type": "official employment outlook",
                 "id": "bls-outlook",
                 "limitation": "Supports only the listed occupation, market, period, and definition.",
                 "market": "United States",
-                "name": "BLS OOH — Editors outlook",
-                "period": "2024-2034 projections",
+                "name": "BLS Table 1.2: U.S. editor employment projections",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/ooh/media-and-communication/editors.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -9175,11 +9284,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The US has 105,000 employed in 2025 and a 2035 projection of 103,800, and BLS separately reports a net change of about -1,100; the three are rounded separately and the original table cannot be replaced by subtracting endpoints; 2025—2035 declines 1%, and the 7,900 average annual openings all come from turnover and exit replacement, not new additions. BLS notes that reading demand may support book editors and that print newspapers and periodicals losing share may decline, which is not AI employment causality or Chinese demand. The typical US BLS requirement is a bachelor's in communications/journalism/English or a related field plus writing and proofreading experience, and other backgrounds with strong writing may also enter; specialty content may require relevant experience. The O*NET new-hire feedback is 69% bachelor's, 16% some college no degree, and 12% two-year associate degree (the three listed total 97%), which is not a Chinese recruitment proportion; the BLS less than 5 years of related work is a statistical typical classification and does not mean a uniform requirement of 5 years or that other experience is unnecessary. Editors may write headlines, stories, and articles, and authorized positions may give final review; the code does not exclude writing or final review duties."
+                  "The US has 105,000 employed in 2025 and a 2035 projection of 103,800, and BLS separately reports a net change of about -1,100; the three are rounded separately and the original table cannot be replaced by subtracting endpoints; 2025—2035 declines 1.1%, and the 7,900 average annual openings all come from turnover and exit replacement, not new additions. BLS notes that reading demand may support book editors and that print newspapers and periodicals losing share may decline, which is not AI employment causality or Chinese demand. The typical US BLS requirement is a bachelor's in communications/journalism/English or a related field plus writing and proofreading experience, and other backgrounds with strong writing may also enter; specialty content may require relevant experience. The O*NET new-hire feedback is 69% bachelor's, 16% some college no degree, and 12% two-year associate degree (the three listed total 97%), which is not a Chinese recruitment proportion; the BLS less than 5 years of related work is a statistical typical classification and does not mean a uniform requirement of 5 years or that other experience is unnecessary. Editors may write headlines, stories, and articles, and authorized positions may give final review; the code does not exclude writing or final review duties."
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "r5-ooh-current",
-                "limitation": "The US has 105,000 employed in 2025 and a 2035 projection of 103,800, and BLS separately reports a net change of about -1,100; the three are rounded separately and the original table cannot be replaced by subtracting endpoints; 2025—2035 declines 1%, and the 7,900 average annual openings all come from turnover and exit replacement, not new additions. BLS notes that reading demand may support book editors and that print newspapers and periodicals losing share may decline, which is not AI employment causality or Chinese demand. The typical US BLS requirement is a bachelor's in communications/journalism/English or a related field plus writing and proofreading experience, and other backgrounds with strong writing may also enter; specialty content may require relevant experience. The O*NET new-hire feedback is 69% bachelor's, 16% some college no degree, and 12% two-year associate degree (the three listed total 97%), which is not a Chinese recruitment proportion; the BLS less than 5 years of related work is a statistical typical classification and does not mean a uniform requirement of 5 years or that other experience is unnecessary. Editors may write headlines, stories, and articles, and authorized positions may give final review; the code does not exclude writing or final review duties.",
+                "limitation": "The US has 105,000 employed in 2025 and a 2035 projection of 103,800, and BLS separately reports a net change of about -1,100; the three are rounded separately and the original table cannot be replaced by subtracting endpoints; 2025—2035 declines 1.1%, and the 7,900 average annual openings all come from turnover and exit replacement, not new additions. BLS notes that reading demand may support book editors and that print newspapers and periodicals losing share may decline, which is not AI employment causality or Chinese demand. The typical US BLS requirement is a bachelor's in communications/journalism/English or a related field plus writing and proofreading experience, and other backgrounds with strong writing may also enter; specialty content may require relevant experience. The O*NET new-hire feedback is 69% bachelor's, 16% some college no degree, and 12% two-year associate degree (the three listed total 97%), which is not a Chinese recruitment proportion; the BLS less than 5 years of related work is a statistical typical classification and does not mean a uniform requirement of 5 years or that other experience is unnecessary. Editors may write headlines, stories, and articles, and authorized positions may give final review; the code does not exclude writing or final review duties.",
                 "market": "United States",
                 "name": "BLS editors 2025—2035 current occupation body text",
                 "period": "2025 wage / 2025—2035 projection",
@@ -9218,6 +9327,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Shanghai Jiao Tong University listed an English-language journal editor for mechanical engineering manuscript screening, formatting and peer-review coordination. It preferred doctoral training and gave no pay figure."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a35-sjtu",
+                "limitation": "Individual job posting.",
+                "market": "Mainland China",
+                "name": "English-language academic journal editor",
+                "period": "2026-09-30",
+                "publisher": "Shanghai Jiao Tong University School of Mechanical Engineering",
+                "scope": "recruitment_proxy",
+                "url": "https://me.sjtu.edu.cn/zpxx/78034.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Foreign Language Teaching and Research Press listed preliminary review and editing of Chinese and English manuscripts, requiring a related master’s degree or higher. The posting listed CNY 5,000–8,000 per month."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a35-fltrp",
+                "limitation": "Individual job posting.",
+                "market": "Mainland China",
+                "name": "Academic journal editor",
+                "period": "Fall 2026 campus recruitment",
+                "publisher": "Foreign Language Teaching and Research Press (posted by Guangdong University of Foreign Studies)",
+                "scope": "recruitment_proxy",
+                "url": "https://career.gdufs.edu.cn/web/Index/job-detail?id=9358"
               }
             ]
           },
@@ -10591,7 +10730,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "Insufficient evidence: no national single-occupation basis was obtained",
+          "china_open": "The following separates editor job postings from industry wage context.",
           "china_ref": {
             "$join": [
               {
@@ -10623,8 +10762,8 @@
               "月薪参考": "2025 culture industry annual average 129,447/64,015 yuan (non-private/private); not an editor monthly salary"
             },
             {
-              "城市/区间": "Recruitment quote (not substitutable)",
-              "月薪参考": "Insufficient evidence: a single quote is not used to replace the occupation wage"
+              "城市/区间": "Mainland China job postings",
+              "月薪参考": "Shanghai Jiao Tong University listed an English-language journal editor for mechanical engineering manuscript screening, formatting and peer-review coordination. It preferred doctoral training and gave no pay figure. Foreign Language Teaching and Research Press listed preliminary review and editing of Chinese and English manuscripts, requiring a related master’s degree or higher. The posting listed CNY 5,000–8,000 per month."
             }
           ],
           "china_soc_row": {
@@ -10633,6 +10772,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a35-sjtu",
+            "posting-a35-fltrp"
+          ],
           "sources_note": {
             "$join": [
               {
@@ -10835,7 +10978,7 @@
           },
           {
             "指标": "US employment growth (2025—2035)",
-            "数值": "Decline of 1% (Decline)",
+            "数值": "Decline of 1.1% (Decline)",
             "说明": {
               "$join": [
                 {
@@ -10909,7 +11052,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "Projected decline of 1% for 2025—2035 (Decline)",
+        "growth": "Projected decline of 1.1% for 2025—2035 (Decline)",
         "heading": {
           "$item": "editors.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -11099,6 +11242,7 @@
             "limitation": "A projection is not a guarantee of individual hiring.",
             "metric": "Employment growth",
             "occupation_scope": "Editors (27-3041.00)",
+            "source_ref": "bls-outlook",
             "value": {
               "$item": "editors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -11113,15 +11257,17 @@
             "limitation": "A projection is not a guarantee of individual hiring.",
             "metric": "Employment scale",
             "occupation_scope": "Editors (27-3041.00)",
+            "source_ref": "bls-outlook",
             "value": "About 105,000 in 2025; projected 103,800 in 2035, with BLS separately reporting a net change of -1,100 (each rounded separately)"
           },
           {
             "geography": "United States",
             "horizon": "2025—2035",
-            "interpretation": "All of the BLS current projected openings come from turnover/exit replacement, not net additions",
+            "interpretation": "BLS attributes the projected openings to replacing workers who transfer or exit.",
             "limitation": "A projection is not a guarantee of individual hiring.",
             "metric": "Job openings",
             "occupation_scope": "Editors (27-3041.00)",
+            "source_ref": "bls-outlook",
             "value": "About 7,900 per year (2025—2035)"
           }
         ],
@@ -11205,7 +11351,7 @@
             "capability_gaps": "To be supplemented: business analysis, organizational research, and management consulting methods",
             "shared_capabilities": "Transferable abilities an editor can verify: information organization, clear expression, and problem breakdown",
             "source_id": "onet-adjacent-management-analysts",
-            "target_href": "/zh/career/jobs/management-analysts",
+            "target_href": "/en/career/jobs/management-analysts",
             "target_slug": "management-analysts",
             "target_title": "Management analysts: the difference from this occupation in business analysis",
             "transition_distance": "Editorial comparison: medium, requiring business and management consulting methods; not an individual success rate or mutual recognition of qualifications"
@@ -11214,7 +11360,7 @@
             "capability_gaps": "To be supplemented: interface/interaction design, usability, and browser and device testing",
             "shared_capabilities": "Transferable abilities an editor can verify: content structure and audience communication",
             "source_id": "onet-adjacent-web-and-digital-interface-designers",
-            "target_href": "/zh/career/jobs/web-and-digital-interface-designers",
+            "target_href": "/en/career/jobs/web-and-digital-interface-designers",
             "target_slug": "web-and-digital-interface-designers",
             "target_title": "Web and digital interface designers: the difference from this occupation in interfaces and interaction",
             "transition_distance": "Editorial comparison: far, requiring design and usability methods; not an individual success rate or mutual recognition of qualifications"
@@ -11223,7 +11369,7 @@
             "capability_gaps": "To be supplemented: website deployment and maintenance, quality testing, permissions, and technical operations",
             "shared_capabilities": "Transferable abilities an editor can verify: content publishing and version awareness",
             "source_id": "onet-adjacent-web-administrators",
-            "target_href": "/zh/career/jobs/web-administrators",
+            "target_href": "/en/career/jobs/web-administrators",
             "target_slug": "web-administrators",
             "target_title": "Web administrators: the difference from this occupation in content operations and permissions",
             "transition_distance": "Editorial comparison: medium, requiring systems and permission management; not an individual success rate or mutual recognition of qualifications"
@@ -11232,7 +11378,7 @@
             "capability_gaps": "To be supplemented: enterprise document systems, metadata, and the retention and destruction lifecycle",
             "shared_capabilities": "Transferable abilities an editor can verify: versions, retrieval, and standard records",
             "source_id": "onet-adjacent-document-management-specialists",
-            "target_href": "/zh/career/jobs/document-management-specialists",
+            "target_href": "/en/career/jobs/document-management-specialists",
             "target_slug": "document-management-specialists",
             "target_title": "Document management specialists: the difference from this occupation in document lifecycle management",
             "transition_distance": "Editorial comparison: near, similar content but different compliance and metadata; not an individual success rate or mutual recognition of qualifications"
@@ -11241,7 +11387,7 @@
             "capability_gaps": "To be supplemented: library science field research and university teaching training, and the actual qualification",
             "shared_capabilities": "Transferable abilities an editor can verify: writing, information retrieval, and content organization",
             "source_id": "onet-adjacent-library-science-teachers-postsecondary",
-            "target_href": "/zh/career/jobs/library-science-teachers-postsecondary",
+            "target_href": "/en/career/jobs/library-science-teachers-postsecondary",
             "target_slug": "library-science-teachers-postsecondary",
             "target_title": "Postsecondary library science teachers: the difference from this occupation in teaching and research",
             "transition_distance": "Editorial comparison: far, requiring a degree and an academic path; not an individual success rate or mutual recognition of qualifications"
@@ -11250,7 +11396,7 @@
             "capability_gaps": "To be supplemented: original subject matter, narrative/style, copyright and attribution, and market development",
             "shared_capabilities": "Transferable abilities an editor can verify: language expression, structural revision, and research",
             "source_id": "onet-writers",
-            "target_href": "/zh/career/jobs/writers-and-authors",
+            "target_href": "/en/career/jobs/writers-and-authors",
             "target_slug": "writers-and-authors",
             "target_title": "Writers and authors: the difference from this occupation in original creation and attribution responsibility",
             "transition_distance": "Editorial comparison: near, similar wording but different outputs and responsibility; not an individual success rate or mutual recognition of qualifications"
@@ -11284,7 +11430,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Work sample",
             "id": "riasec",
@@ -11303,7 +11449,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Work sample",
             "id": "big-five",
@@ -11322,7 +11468,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Work sample",
             "id": "mbti",
@@ -11336,7 +11482,7 @@
           },
           {
             "answer": "Verify with actual editing project experience.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Work sample",
             "id": "enneagram",
@@ -11350,7 +11496,7 @@
           },
           {
             "answer": "Use simulated scenarios to observe the handling order and reporting method.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Work sample",
             "id": "iq",
@@ -11364,7 +11510,7 @@
           },
           {
             "answer": "Verify with handover records and counterpart feedback.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Work sample",
             "id": "eq",
@@ -11787,6 +11933,20 @@
         "id": "editors.path.credential-decision.current.v1",
         "location": "entry_decisions",
         "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "editors.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "editors.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
       }
     ],
     "path": "/en/career/jobs/editors",
@@ -11822,7 +11982,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Projected decline of 1% for 2025—2035 (Decline)",
+        "display_value": "Projected decline of 1.1% (2025–2035)",
         "fact_id": "entry-boundary",
         "market": "United States",
         "measure": "projected growth",
@@ -11879,6 +12039,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Shanghai Jiao Tong University listed an English-language journal editor for mechanical engineering manuscript screening, formatting and peer-review coordination. It preferred doctoral training and gave no pay figure.",
+        "fact_id": "posting-a35-sjtu",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "English-language academic journal editor",
+        "period": "2026-09-30",
+        "source_refs": [
+          "a35-sjtu"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Foreign Language Teaching and Research Press listed preliminary review and editing of Chinese and English manuscripts, requiring a related master’s degree or higher. The posting listed CNY 5,000–8,000 per month.",
+        "fact_id": "posting-a35-fltrp",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Academic journal editor",
+        "period": "Fall 2026 campus recruitment",
+        "source_refs": [
+          "a35-fltrp"
+        ]
       }
     ]
   },
@@ -11892,7 +12076,7 @@
     "badges": [
       "Content planning and review · fact checking and language editing · version and publication coordination",
       "O*NET-SOC 27-3041.00 · May 2025 wage data",
-      "Job Zone Four · interest code ACE · decline of 1% for 2025—2035"
+      "Job Zone Four · interest code ACE · decline of 1.1% for 2025—2035"
     ],
     "metrics": [
       {
@@ -11905,7 +12089,7 @@
         "availability": "available",
         "fact_ref": "entry-boundary",
         "key": "us_growth",
-        "label": "US employment projection (decline of 1% for 2025—2035)"
+        "label": "US employment projection (decline of 1.1% for 2025—2035)"
       },
       {
         "availability": "available",
@@ -11931,14 +12115,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Plan, review, and revise content to be published, verify facts, language, structure, style, and version, and coordinate authors and publication responsible persons."
+      "text": "See how editors verify facts, versions and publication permissions, compare job postings, and try a paper manuscript handoff."
     },
     "title": {
       "availability": "available",
       "text": "Editors"
     }
   },
-  "source_content_sha256": "e07c1c4eed30e1f8696c15c0de231646c20f888a2096051115e5eabc6472fcc4",
+  "source_content_sha256": "10014c753920339de88273ef4d80436208be4a22b4a6f306b28ac00755487893",
   "subject": {
     "canonical_slug": "editors",
     "name": "Editors",

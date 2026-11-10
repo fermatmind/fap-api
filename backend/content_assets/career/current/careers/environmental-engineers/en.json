@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a33-chuxiong": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a33-tinghu": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:environmental-engineers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:environmental-engineers.sources.source-card.1": {
         "status": "mapped"
@@ -26153,7 +26159,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no precise occupation-level national wage percentiles, and it is not asserted on that basis that nothing has been published nationally."
+              "The two postings below show individual hiring and pay terms. Industry wages are shown separately."
             ]
           },
           "id": "environmental-engineers.china-salary.career-snapshot-primary-locale.45",
@@ -26238,7 +26244,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "First-tier cities"
+              "Mainland China job postings"
             ]
           },
           "id": "environmental-engineers.china-salary.career-snapshot-primary-locale.51",
@@ -26252,12 +26258,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable first-tier city monthly wage statistic for this occupation was obtained; recruitment posting quotes are mostly single-employer samples and often project-based, and cannot represent occupational wages."
+              "Employer 89 in the Chuxiong notice advertised one wastewater treatment engineer position at CNY 5,000–6,000 per month, requiring a related bachelor’s degree and at least five years of relevant experience. Tinghu posting 019 advertised two positions, requiring graduate education in environmental or water engineering. The row does not quote pay."
             ]
           },
           "id": "environmental-engineers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "internal-rubric"
+            "a33-chuxiong",
+            "a33-tinghu"
           ],
           "type": "prose"
         },
@@ -26322,7 +26329,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "17-2081: 2025 employment 39,100, projected 41,600 in 2035, 2025—2035 growth 6.3% (OOH about 6%), about 2,400 more, average annual openings 2,300; each column is rounded separately, and the increment is not recalculated by subtracting already-rounded employment figures, and it is not AI causality."
+              "6.3% (2025–2035)"
             ]
           },
           "id": "environmental-engineers.china-salary.career-snapshot-primary-locale.58",
@@ -27030,13 +27037,13 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
@@ -28796,37 +28803,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Material one: fictional wastewater treatment requirements and site conditions",
-                  "Provide influent and effluent indicators, flow fluctuation, site constraints, and discharge standards as input for this exercise.",
-                  "Flag units, operating conditions, and missing items, and state that the data are fictional or public excerpts.",
-                  "List the key condition differences that may affect process selection.",
-                  "State that the exercise uses fictional materials and does not represent any real project or institution.",
-                  "Reviewable output: process comparison reasons, key design parameters, compliance judgment, and boundary notes.",
-                  "Explain the evidence and safety boundaries: when conditions are insufficient or the standard is unclear, stop and explain."
+                  "Paper exercise inputs",
+                  "Project W6 is fictional. The review covers one exercise metric.",
+                  "The exercise sets a cap of 30 mg/L at point P2.",
+                  "Report T18 records 34 mg/L at P2.",
+                  "Report T14 records 28 mg/L at P1.",
+                  "The reviewer checks the test conditions and point mapping. The review lead confirms the conclusion.",
+                  "Use the paper records only. The cap belongs to this exercise."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Material two: design assignment and delivery requirements (fictional)",
-                  "Requires writing the reasons for process selection, main structure and equipment parameters, and monitoring point layout, and explaining which judgments must be reviewed by a qualified engineer.",
-                  "Exercise output: a reviewable process scheme and design basis list."
+                  "What to submit",
+                  "Submit a one-page review note with the applicable point, report ID, difference from the exercise cap and evidence.",
+                  "State the conclusion status, what needs review and who takes it next."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material three: reference approach excerpt (fictional)",
-                  "Clarify indicators and flow first, then compare processes, and finally do parameter calculation and compliance verification.",
-                  "Leave uncertain items as unknown rather than filling in values.",
-                  "State that the reference approach is only an example and not the only correct method."
+                  "Finish your own answer first",
+                  "Open “Environmental design review reference (open after day six)” under FAQs and sources.",
+                  "Use the checklist to record one correction.",
+                  "Finish on day six and review on day seven."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Material four: boundary description",
-                  "This exercise does not constitute a design document or compliance conclusion; design signing and compliance responsibility are borne by qualified engineers and the authorized department."
+                  "Paper exercise scope",
+                  "Use the supplied records. Actual testing, site work and approval follow employer procedures."
                 ]
               }
             ]
@@ -28943,50 +28950,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read one discharge standard or design code",
-                  "Excerpt one indicator requirement and the corresponding treatment approach, and write out the possible design constraints."
+                  "Day 1",
+                  "Extract the exercise condition and point."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: write one design input checklist",
-                  "List inputs such as flow, water quality, site, and discharge requirements, marking sources and units."
+                  "Day 2",
+                  "List the readings by report ID."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: do one process comparison",
-                  "List the applicable conditions and pros and cons of two treatment processes, and write out the trade-off reasons."
+                  "Day 3",
+                  "Check units and calculate the difference."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: do one parameter calculation",
-                  "Complete the key parameter calculation for one treatment unit and perform one compliance verification."
+                  "Day 4",
+                  "List the evidence to review and the owners."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: write a one-page scheme note",
-                  "Explain the process, indicators, and response when standards are not met in language non-specialist readers can understand."
+                  "Day 5",
+                  "Write the one-page review note."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: ask someone to check and review",
-                  "Ask a classmate or colleague to point out weak points in the calculations and basis and record the feedback."
+                  "Day 6: finish your own answer",
+                  "Finish your own note and check whether someone else can use it."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: write your judgment",
-                  "Write down whether you want to continue, what you need to fill in, and which conclusions cannot yet be drawn."
+                  "Day 7: open the reference and review",
+                  "Open “Environmental design review reference (open after day six)” under FAQs and sources. Write down one difference and correction."
                 ]
               }
             ]
@@ -29003,13 +29010,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: can you identify the indicator requirements and corresponding treatment approach, rather than just copying clauses?",
-              "Day 2: can you write the design inputs, units, and sources clearly and explain the gaps?",
-              "Day 3: can you complete a process comparison with conditions clearly stated?",
-              "Day 4: can you complete a reviewable parameter calculation and compliance verification?",
-              "Day 5: can you let non-specialist readers understand the scheme and limitations?",
-              "Day 6: after receiving check and review comments, can you revise the design rather than defending the original scheme?",
-              "Day 7: can you state the training you need to fill in and what to verify next?"
+              "Find the applicable point.",
+              "Match both reports to their points.",
+              "Give the difference with units.",
+              "Explain where each record applies.",
+              "State the review status and next owner.",
+              "Finish the note independently on day six.",
+              "Use the collapsed reference on day seven to make one correction and decide whether to continue."
             ]
           },
           "id": "environmental-engineers.path.seven-day-decision.1",
@@ -30448,7 +30455,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "environmental-engineers.market-signals.market-signal-card.10",
@@ -30518,12 +30525,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "6.3% (OOH about 6%, about +2400 people)"
+              "6.3%"
             ]
           },
           "id": "environmental-engineers.market-signals.market-signal-card.15",
           "source_refs": [
-            "internal-rubric"
+            "a33-bls"
           ],
           "type": "prose"
         },
@@ -30616,12 +30623,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "About 39,100 people"
+              "39,100 jobs"
             ]
           },
           "id": "environmental-engineers.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a33-bls"
           ],
           "type": "prose"
         },
@@ -31142,23 +31149,21 @@
           "data": {
             "entries": [
               {
-                "answer": "Use engineering methods to solve the prevention, control, and remediation of environmental hazards: design or supervise water, air, and soil treatment systems and equipment, assess the environmental impact of construction projects, handle permit and compliance documents, and collaborate with environmental scientists, planners, and disposal organizations to write schemes and monitoring results into traceable technical documents.",
+                "answer": "Environmental engineers evaluate pollution controls, review design inputs, document evidence gaps and prepare material for design review.",
                 "id": "environmental-engineers.faq.1",
                 "question": "What do environmental engineers mainly do?",
                 "question_key": "career.faq.environmental-engineers.q1",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "a33-onet"
                 ]
               },
               {
-                "answer": "Both work in the environmental engineering field, but the deliverables differ: environmental engineering technologists and technicians operate equipment, collect samples, and record test results under the direction of engineers or scientists, executing according to the scheme; this occupation is responsible for the design scheme itself and for the technical scheme and design basis of treatment systems.",
+                "answer": "Engineers focus on selecting controls, design judgment and review materials. Technicians focus on sampling, tests and records and route anomalies for review. Sign-off follows the authority assigned to the position.",
                 "id": "environmental-engineers.faq.2",
                 "question": "How is it different from environmental engineering technologists?",
                 "question_key": "career.faq.environmental-engineers.q2",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "a33-onet"
                 ]
               },
               {
@@ -31172,32 +31177,31 @@
                 ]
               },
               {
-                "answer": "May 2025 median annual wage 107,110 U.S. dollars (median hourly wage 51.50 U.S. dollars); the officially published lowest 10% are below 69,990 U.S. dollars and the highest 10% are above 162,220 U.S. dollars; the 25th and 75th percentiles are not published, and this page does not use adjacent occupations or interpolation as a substitute.",
+                "answer": "The May 2025 U.S. occupational median was $107,110 per year.",
                 "id": "environmental-engineers.faq.4",
                 "question": "What is the U.S. wage?",
                 "question_key": "career.faq.environmental-engineers.q4",
                 "source_refs": [
-                  "bls-oews-2025",
-                  "internal-rubric"
+                  "a33-bls"
                 ]
               },
               {
-                "answer": "2025 employment 39,100, 2025—2035 projected growth 6% (about +2,400), average annual openings about 2,300; openings include growth and replacements and do not equal a personal hiring probability.",
+                "answer": "BLS projects U.S. SOC 17-2081 employment to rise from about 39,100 in 2025 to 41,600 in 2035 (6.3%), with about 2,300 annual openings including replacements.",
                 "id": "environmental-engineers.faq.5",
                 "question": "What are the U.S. employment prospects?",
                 "question_key": "career.faq.environmental-engineers.q5",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "a33-bls"
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics data checked this time are at industry-category scope, and no national single-occupation wage statistic precisely corresponding to this occupation was obtained; this page uses the average wage of urban units in \"water conservancy, environment, and public facilities management\" (2025 non-private 70,172 yuan/year, private 49,527 yuan/year) as an industry proxy, illustrating industry background only, and does not substitute an industry average or a single recruitment quote for the occupational wage.",
+                "answer": "Employer 89 in the Chuxiong notice advertised one wastewater treatment engineer position at CNY 5,000–6,000 per month, requiring a related bachelor’s degree and at least five years of relevant experience. Tinghu posting 019 advertised two positions, requiring graduate education in environmental or water engineering. The row does not quote pay. These past notices describe individual posts. A comparable mainland occupational median remains unavailable. Industry wages are shown separately.",
                 "id": "environmental-engineers.faq.6",
                 "question": "Can wages in mainland China be found?",
                 "question_key": "career.faq.environmental-engineers.us-pay",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "a33-chuxiong",
+                  "a33-tinghu"
                 ]
               },
               {
@@ -31238,6 +31242,15 @@
                 "source_refs": [
                   "onet-details",
                   "internal-rubric"
+                ]
+              },
+              {
+                "answer": "Use T18 at P2 for W6. The reading exceeds the exercise cap by 4 mg/L. T14 is for P1 and cannot substitute for P2. Hold the pass conclusion. Have the reviewer check test conditions and point mapping, then route it to the review lead. Check four items: point and report match, difference and units, conclusion status, and review actions and owners. Count each complete item. The source provides occupational context for this fictional exercise.",
+                "id": "environmental-engineers.faq.11",
+                "question": "Environmental design review reference (open after day six)",
+                "question_key": "career.faq.environmental-engineers.11",
+                "source_refs": [
+                  "a33-onet"
                 ]
               }
             ]
@@ -31329,28 +31342,28 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "MBTI (Chinese)",
+                "entity": "MBTI personality test",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (Chinese)",
+                "entity": "Big Five personality test",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the environmental engineers career page",
@@ -31537,6 +31550,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Environmental engineers evaluate pollution controls, review design inputs, document evidence gaps and prepare material for design review."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a33-onet",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "Occupational task profile",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/17-2081.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS projects U.S. SOC 17-2081 employment to rise from about 39,100 in 2025 to 41,600 in 2035 (6.3%), with about 2,300 annual openings including replacements. The May 2025 U.S. occupational median was $107,110 per year."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a33-bls",
+                "limitation": "Annual openings include replacements.",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Employer 89 in the Chuxiong notice advertised one wastewater treatment engineer position at CNY 5,000–6,000 per month, requiring a related bachelor’s degree and at least five years of relevant experience."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a33-chuxiong",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Wastewater treatment engineer",
+                "period": "2026",
+                "publisher": "Chuxiong municipal government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.cxs.gov.cn/info/6865/876949.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Tinghu posting 019 advertised two positions, requiring graduate education in environmental or water engineering. The row does not quote pay."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a33-tinghu",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Environmental engineer, wastewater treatment",
+                "period": "2026",
+                "publisher": "Tinghu District government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.tinghu.gov.cn/module/download/downfile.jsp?classid=0&filename=51eb1f1eec6c41f7a5672b3ca24cafbf.pdf"
               }
             ]
           },
@@ -34397,6 +34470,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a33-chuxiong",
+            "posting-a33-tinghu"
+          ],
           "sources_note": {
             "$item": "environmental-engineers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34962,7 +35039,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "a33-bls",
             "value": {
               "$item": "environmental-engineers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35007,7 +35084,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "a33-bls",
             "value": {
               "$item": "environmental-engineers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36231,7 +36308,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Start checking whether environmental engineers suits you",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36501,14 +36578,14 @@
       },
       {
         "derivation": null,
-        "display_value": "Median hourly wage 51.50 U.S. dollars; median annual wage 107,110 U.S. dollars (May 2025 OEWS)",
+        "display_value": "$107,110 per year",
         "fact_id": "us-wage-2025",
         "market": "United States",
         "measure": "U.S. median wage",
-        "occupation_scope": "Environmental Engineers (O*NET-SOC 17-2081.00)",
+        "occupation_scope": "U.S. 17-2081",
         "period": "May 2025",
         "source_refs": [
-          "bls-oews-2025"
+          "a33-bls"
         ]
       },
       {
@@ -36537,38 +36614,38 @@
       },
       {
         "derivation": null,
-        "display_value": "About 39,100 people (2025)",
+        "display_value": "39,100 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "U.S. employment size",
-        "occupation_scope": "Environmental Engineers (O*NET-SOC 17-2081.00)",
+        "occupation_scope": "U.S. 17-2081",
         "period": "2025",
         "source_refs": [
-          "bls-projections-2025-35"
+          "a33-bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "+6% (+2,400 positions, 2025—2035, BLS projections)",
+        "display_value": "6.3%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "U.S. employment change",
-        "occupation_scope": "Environmental Engineers (O*NET-SOC 17-2081.00)",
+        "occupation_scope": "U.S. 17-2081",
         "period": "2025–2035 projection",
         "source_refs": [
-          "bls-projections-2025-35"
+          "a33-bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 2,300 per year (2025—2035, BLS projections)",
+        "display_value": "2,300 annually (including replacements)",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "U.S. average annual job openings",
-        "occupation_scope": "Environmental Engineers (O*NET-SOC 17-2081.00)",
+        "occupation_scope": "U.S. 17-2081",
         "period": "2025–2035 projection",
         "source_refs": [
-          "bls-projections-2025-35"
+          "a33-bls"
         ]
       },
       {
@@ -36726,6 +36803,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Employer 89 in the Chuxiong notice advertised one wastewater treatment engineer position at CNY 5,000–6,000 per month, requiring a related bachelor’s degree and at least five years of relevant experience.",
+        "fact_id": "posting-a33-chuxiong",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Wastewater treatment engineer",
+        "period": "2026",
+        "source_refs": [
+          "a33-chuxiong"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Tinghu posting 019 advertised two positions, requiring graduate education in environmental or water engineering. The row does not quote pay.",
+        "fact_id": "posting-a33-tinghu",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Environmental engineer, wastewater treatment",
+        "period": "2026",
+        "source_refs": [
+          "a33-tinghu"
+        ]
       }
     ]
   },
@@ -36778,17 +36879,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What environmental engineers do, how to enter, work boundaries, and development directions. Based on O*NET and BLS official occupational materials, distinguishing occupational statistics, industry proxies, and evidence gaps."
+      "text": "See how environmental engineers review pollution control evidence, compare two job notices and try a paper design review note."
     },
     "title": {
       "availability": "available",
       "text": "Environmental Engineers"
     }
   },
-  "source_content_sha256": "3d36eed12e4a0c59693657bf7d6cd90880a1bc30e515796108fbee2d106c9e71",
+  "source_content_sha256": "a69560281210ae6f5543041f00337e2aa59cb13cb4e010bc374d6af54b2b3a36",
   "subject": {
     "canonical_slug": "environmental-engineers",
     "name": "Environmental Engineers",
-    "summary": "Apply engineering methods to research, design, plan, and implement the prevention, control, and remediation of environmental hazards: treat wastewater, waste gas, and solid waste, remediate contaminated sites, implement discharge permits and compliance documents, and produce traceable technical schemes and monitoring records according to standards."
+    "summary": "Environmental engineers evaluate pollution controls, review design inputs, document evidence gaps and prepare material for design review."
   }
 }

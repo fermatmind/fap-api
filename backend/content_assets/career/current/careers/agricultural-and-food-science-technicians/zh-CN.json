@@ -1557,7 +1557,7 @@
         "status": "pending_mapping"
       },
       "item:agricultural-and-food-science-technicians.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:agricultural-and-food-science-technicians.sources.source-card.1": {
         "status": "mapped"
@@ -23335,13 +23335,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "该职业的核心不是泛泛“做实验”，而是按标准方法取样与检测、如实记录原始数据并在授权范围内解释结果。判断适配时应看可观察的任务行为与工作条件，而不是性格标签；本页的练习与清单由编辑按公开职业资料设计，用于自我探索，不构成录用、筛选或能力评定标准。"
+              "先用两条真实招聘比较：试验基地辅助看现场记录，食品检验看抽样、原始数据和方法复核。中国样本条件不能当全国门槛。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "caas",
+            "pku"
           ],
           "type": "prose"
         },
@@ -23350,12 +23350,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "较强信号是：你愿意按标准方法重复操作、对数值与单位敏感、能在数据异常或授权不明时停下来复核并上报，并保持记录可追溯。可用一次虚构取样与检测记录练习与复盘记录来验证：方法是否执行到位、数值是否可复现、异常是否闭环。"
+              "如果你能把样品编号、方法版本和原始值接成一条记录，并能在结果赶着交时仍标明缺证，值得分别探索田间与实验室。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -23364,14 +23364,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "如果你不愿承担重复操作与记录责任、对数值与单位细节容易疏忽、难以接受田间或生产现场条件，或不习惯在授权不明时停下并上报，这类工作可能持续消耗你；不同单位（企业实验室、第三方检测机构、科研机构、农技推广）的岗位设置差异较大，建议先用一次完整的取样与检测记录练习检验表现与耐受度。"
+              "慎重比较两种代价：田间可能受天气与采样时段限制；食品现场常有重复测量和交班时限。两者都要接受返查原记录。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "r2-pay-3"
           ],
           "type": "prose"
         },
@@ -23380,13 +23378,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "测评与演练只作自我探索参考，不能预测录用、胜任能力或未来业绩。"
+              "页面比较田间试验与食品检测。纸面练习只看记录和交接，不能判断能否录用、上岗或签报告。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "practice-editor"
           ],
           "type": "prose"
         },
@@ -23395,13 +23392,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "该职业的核心不是泛泛“做实验”，而是按标准方法取样与检测、如实记录原始数据并在授权范围内解释结果。适配更依赖可观察的任务行为：是否愿意按方法重复操作、能否核对单位与质控、能否在异常与时间压力下保持记录准确。"
+              "用 QH-54 的虚构谷物记录交两版复算和一页交接；把可算的值和能否使用的判断分开。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "onet"
+            "practice-editor"
           ],
           "type": "prose"
         }
@@ -23795,13 +23791,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "结果判定、放行与报告签发由授权人决定"
+              "技术员可在岗位职责内比对、分类和记录结果。对外证明性报告签发及生产放行分别核适用规则与授权。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "rules",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24587,10 +24584,10 @@
                 "url": "https://www.onetonline.org/link/details/19-4013.00"
               },
               {
-                "entity": "BLS农业与食品科学技术员（2025数据、2025—2035预测）",
+                "entity": "BLS 就业预测表 1.2：合并职业 19-4010",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET食品19-4013全国工资分位",
@@ -24617,16 +24614,16 @@
                 "url": "https://www.onetonline.org/link/details/19-4013.00"
               },
               {
-                "entity": "BLS农业与食品科学技术员（2025数据、2025—2035预测）",
+                "entity": "BLS 就业预测表 1.2：合并职业 19-4010",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 19-4013.00 任务与工作活动详细资料",
+                "entity": "市场监管总局《检验检测机构监督管理办法》第 2、12 条",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/19-4013.00"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_bff8f35d8f114acca7643bddd77e9505.html"
               },
               {
                 "entity": "BLS农业与食品科学技术员（2025数据、2025—2035预测）",
@@ -24651,7 +24648,7 @@
             "cnclass-cross-repair",
             "onet",
             "oews",
-            "bls"
+            "ep-new"
           ],
           "type": "links"
         },
@@ -24772,7 +24769,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "农业与食品方向协助科学家测试/研究。食品19-4013情境反馈72%日决策、61%日紧期限、78%重复极其重要、56%准确极其重要。编辑提出用虚构数据探索记录/图表初稿，尚无本职业AI采用、工时或替代研究；实际方法、设备、授权和生产放行责任分别核。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "农业与食品方向协助科学家测试/研究。食品19-4013情境反馈72%日决策、61%日紧期限、78%重复极其重要、56%准确极其重要。编辑提出用虚构数据探索记录/图表初稿，尚无本职业AI采用、工时或替代研究；实际方法、设备、授权和生产放行责任分别核。 AI 任务影响估算 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.18",
@@ -25263,12 +25260,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "全国口径预测，未归因于 AI，不能推导个人录用机会。"
+              "美国全国合并职业预测。年均空缺含替代需求，不能据此推断 AI 因果或个人录用机会。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -25277,12 +25274,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS农业与食品科学技术员（2025数据、2025—2035预测）"
+              "BLS 就业预测表 1.2：合并职业 19-4010"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -25291,12 +25288,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国合并职业2025就业与2025—2035预测；食品工资另列"
+              "美国农业与食品科学技术员合并组 19-4010：2025 就业与 2025–2035 预测。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -25305,12 +25302,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS合并职业2025就业40,400、2025—2035增长5%/净增约2,100、年均5,900空缺含增长与替代。食品19-4013工资中位52,130美元/年（2025年5月）。两口径分开，预测不归因AI。"
+              "2025 年约 40,400 人，2035 年预计约 42,400 人，官方净增约 2,100（5.1%）；年均约 5,900 个空缺。人数独立取整。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -25501,12 +25498,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS合并职业2025—2035增长5%是总量预测；不是替代日期、AI效果或某实验室岗位变化，年均5,900空缺也非当前招聘库存。"
+              "BLS合并职业2025—2035增长5.1%是总量预测；不是替代日期、AI效果或某实验室岗位变化，年均5,900空缺也非当前招聘库存。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "bls"
+            "bls",
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -25515,12 +25513,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS农业与食品科学技术员（2025数据、2025—2035预测）"
+              "BLS 就业预测表 1.2：合并职业 19-4010"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -25529,12 +25527,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能自行决定。结果判定、报告签发与放行属于质量体系中的授权事项，必须由具备相应资质与权限的人完成；在中国大陆从事食品检验还须符合食品安全相关法规对检验与记录的要求，工具输出不能替代复核与签字。"
+              "AI 不能代替获授权人员签发报告或作出放行决定。 技术员可在岗位职责内比对、分类和记录结果。对外证明性报告签发及生产放行分别核适用规则与授权。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "ep"
+            "bls",
+            "rules",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25543,12 +25543,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 19-4013.00 任务与工作活动详细资料"
+              "市场监管总局《检验检测机构监督管理办法》第 2、12 条"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "ep"
+            "rules"
           ],
           "type": "prose"
         },
@@ -26775,7 +26775,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "agricultural-and-food-science-technicians.china-salary.career-snapshot-primary-locale.43",
@@ -26804,7 +26804,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得公开招聘公告样本"
+              "中国农科院烟草研究所 2026 年 8 月 17 日公告：试验基地服务科研辅助 1 人，通过劳务派遣，不入研究所事业编制；全日制本科或以上，公告标准为本科 4,100 元/月、研究生 5,100 元/月，按出勤发放。附件列工作地点为四川西昌，岗位含温室试验、实验室管理和田间试验辅助。报名截至 8 月 28 日。 北京大学餐饮中心 2026 年 11 月 4 日公告：食品检验员 1 人，抽检食材、成品和餐用具并留原始记录；相关本科或以上，两年或以上经验优先，待遇面议，公告截止 11 月 13 日。为劳务派遣岗位。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.china-salary.career-snapshot-primary-locale.45",
@@ -26819,7 +26819,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未取得可核验的公开招聘公告样本，因此本页不展示具体岗位或项目报价，仅保留官方统计口径与资格规则。"
+              "中国农科院烟草研究所 2026 年 8 月 17 日公告：试验基地服务科研辅助 1 人，通过劳务派遣，不入研究所事业编制；全日制本科或以上，公告标准为本科 4,100 元/月、研究生 5,100 元/月，按出勤发放。附件列工作地点为四川西昌，岗位含温室试验、实验室管理和田间试验辅助。报名截至 8 月 28 日。 北京大学餐饮中心 2026 年 11 月 4 日公告：食品检验员 1 人，抽检食材、成品和餐用具并留原始记录；相关本科或以上，两年或以上经验优先，待遇面议，公告截止 11 月 13 日。为劳务派遣岗位。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.china-salary.career-snapshot-primary-locale.46",
@@ -26877,12 +26877,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得中国一线城市本职业月薪/招聘样本；NBS行业税前年平均不能换算该岗位月薪，调查包含奖金津贴等且不是全部就业人员。"
+              "中国农科院烟草研究所 2026 年 8 月 17 日公告：试验基地服务科研辅助 1 人，通过劳务派遣，不入研究所事业编制；全日制本科或以上，公告标准为本科 4,100 元/月、研究生 5,100 元/月，按出勤发放。附件列工作地点为四川西昌，岗位含温室试验、实验室管理和田间试验辅助。报名截至 8 月 28 日。 北京大学餐饮中心 2026 年 11 月 4 日公告：食品检验员 1 人，抽检食材、成品和餐用具并留原始记录；相关本科或以上，两年或以上经验优先，待遇面议，公告截止 11 月 13 日。为劳务派遣岗位。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "nbs"
+            "caas",
+            "pku"
           ],
           "type": "prose"
         },
@@ -26962,7 +26963,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "agricultural-and-food-science-technicians.china-salary.career-snapshot-primary-locale.57",
@@ -27197,12 +27198,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 年预计增长 5%，净增约 2,100 人"
+              "2025—2035 年预计增长 5.1%，净增约 2,100 人"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -27254,13 +27255,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页美国数据为全国口径。O*NET 已停用合并代码 19-4011.00，拆分为 19-4012.00 农业技术员与 19-4013.00 食品科学技术员；BLS 职业展望 2025 年版仍提供合并职业的中位年薪 $51,160（$24.60/小时），而 OEWS 2025 年 5 月按拆分后的两个职业分别发布分位。本页工资分位采用食品科学技术员（19-4013）口径，并在下方列出农业技术员（19-4012）的中位数作对照；两者都不能换算为个人到手收入，也不能外推到中国大陆。"
+              "美国全国：BLS 合并 19-4010 的 2025 年 5 月中位为 $51,160／年、$24.60／小时。下列五个工资分位是食品技术员 19-4013 单一口径；另列农业技术员 19-4012 对照。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
+            "bls",
             "oews",
-            "bls"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27269,13 +27271,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国该（合并）职业 2025 年中位年薪为 $51,160（$24.60/小时，BLS 职业展望 2025 年版）。O*NET 已停用合并代码 19-4011.00，拆分为农业技术员（19-4012）与食品科学技术员（19-4013），OEWS 2025 年 5 月按拆分后的职业分别发布分位：食品科学技术员中位 $52,130/年（$25.06/小时），第 10/25/75/90 分位为 $39,820／$46,020／$63,270／$78,820；农业技术员中位 $49,630/年（$23.86/小时），第 10/25/75/90 分位为 $35,980／$40,950／$63,630／$76,480。合并职业 2025 年在岗 40,400 人，BLS 预计 2025—2035 年增长 5%（净增约 2,100 人），同期年均约 5,900 个空缺。中位数表示一半从业者高于、一半低于，不是入门工资或固定月薪；空缺主要来自转岗与退出形成的替代需求。该职业入门通常要求副学士学位，部分雇主接受高中文凭加相关经验，多在实验室、食品加工厂、农场与温室工作。"
+              "美国该（合并）职业 2025 年中位年薪为 $51,160（$24.60/小时，BLS 职业展望 2025 年版）。O*NET 已停用合并代码 19-4011.00，拆分为农业技术员（19-4012）与食品科学技术员（19-4013），OEWS 2025 年 5 月按拆分后的职业分别发布分位：食品科学技术员中位 $52,130/年（$25.06/小时），第 10/25/75/90 分位为 $39,820／$46,020／$63,270／$78,820；农业技术员中位 $49,630/年（$23.86/小时），第 10/25/75/90 分位为 $35,980／$40,950／$63,630／$76,480。合并职业 2025 年在岗 40,400 人，BLS 预计 2025—2035 年增长 5.1%（净增约 2,100 人），同期年均约 5,900 个空缺。中位数表示一半从业者高于、一半低于，不是入门工资或固定月薪；空缺主要来自转岗与退出形成的替代需求。该职业入门通常要求副学士学位，部分雇主接受高中文凭加相关经验，多在实验室、食品加工厂、农场与温室工作。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
             "oews",
-            "bls"
+            "bls",
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -27467,7 +27470,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "专业、科学和技术服务业（食品科学技术员）"
+              "批发业（农业技术员 19-4012）"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.40",
@@ -27481,7 +27484,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "50,610美元/年（2025年5月行业内中位）"
+              "54,720 美元/年（2025 年 5 月行业内中位）"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.41",
@@ -27495,7 +27498,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH食品19-4013此行业中位50,610；本次ONet其他18%不能当该行业单独占比。"
+              "仅指农业技术员的批发业工资中位数，与食品技术员的两项行业工资分开。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.42",
@@ -27581,13 +27584,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资来自2025年5月OEWS雇员口径：食品19-4013与农业19-4012分位分别列，不混成一分布；BLS就业40,400/预测5%为合并职业。范围/产品分别核，不推个人到手收入。"
+              "工资来自2025年5月OEWS雇员口径：食品19-4013与农业19-4012分位分别列，不混成一分布；BLS就业40,400/预测5.1%为合并职业。范围/产品分别核，不推个人到手收入。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -27727,19 +27731,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "环境科学与保护技术员",
@@ -29478,9 +29482,9 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "题面与输入材料",
+                  "QH-54 题面与记录",
                   "固定青禾QH-V1与A/B/C已给留样，仅纸面核水分/杂质及状态，不真实操作。",
-                  "固定虚构青禾谷物案例，仅做纸面计算，非官方标准/真实采样。方法QH-V1：预制混匀留样A/B/C，编号QH-A/B/C；每样两份测水分与杂质，记录百分数及原值。水分=（干燥前总质量－干燥后总质量）÷（干燥前总质量－空皿质量）×100%。A第1份空皿10.00g、前20.00g、后18.70g，其余已给百分数。水分平行绝对差≤0.30个百分点才可取均值；示例限值水分≤14.00%、杂质均值≤1.00%。A水分13.00/13.20、杂质0.60/0.80%；B水分14.50/14.90、杂质0.70/0.90%；C水分13.60/13.80、杂质1.20/1.40%。质控参考水分12.00±0.20%，测12.10%；杂质空白≤0.10%，测0.00%。检测日2026-10-02，水分仪M1校准有效至09-30，杂质称量设备B1至10-31；无后续校准/复测/审批记录。助理只可整理上报，不得签报告或放行，样品对整批代表性未验证。",
+                  "固定虚构青禾谷物案例，仅做纸面计算，非官方标准/真实采样。方法QH-V1：预制混匀留样A/B/C，编号QH-A/B/C；每样两份测水分与杂质，记录百分数及原值。水分=（干燥前总质量－干燥后总质量）÷（干燥前总质量－空皿质量）×100%。A第1份空皿10.00g、前20.00g、后18.70g，其余已给百分数。水分平行绝对差≤0.30个百分点才可取均值；示例限值水分≤14.00%、杂质均值≤1.00%。A 水分第 1 份由原质量算出，第 2 份为 13.20、杂质0.60/0.80%；B水分14.50/14.90、杂质0.70/0.90%；C水分13.60/13.80、杂质1.20/1.40%。质控参考水分12.00±0.20%，测12.10%；杂质空白≤0.10%，测0.00%。检测日2026-10-02，水分仪M1校准有效至09-30，杂质称量设备B1至10-31；无后续校准/复测/审批记录。助理只可整理上报，不得签报告或放行，样品对整批代表性未验证。",
                   "交编号/方法/设备状态表，复算水分、平行差、均值和质控，列停止条件与缺记录，不写整批放行。"
                 ]
               },
@@ -29488,30 +29492,30 @@
                 "id": "exercise-task",
                 "values": [
                   "任务要求",
-                  "按QH-V1列假想样品编号/平行记录流程，复算A质量分数和A/B/C差值、均值及质控。",
-                  "区分算术对照、可用结果与待授权事项；说明校准超期、B平行超差及C杂质超阈值如何上报。"
+                  "原版：独立复算三份水分、杂质及质控，逐项标证据、可用性和需交接事项。",
+                  "变式：同一纸面测试改用一份事前已有的 M1 有效校准记录，其有效期至 10 月 3 日；只替换这个输入。哪些判断改变？哪些还不能确认？"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考思路",
-                  "A第1份水分（20.00－18.70）÷（20.00－10.00）×100%=13.00%。A平行差0.20、均值13.10%，B差0.40>0.30不得用均值判定（14.70%只作算术对照），C差0.20、均值13.70%。杂质A/B/C均值0.70/0.80/1.30%，C数值超过示例1.00%；质控12.10在11.80—12.20内，空白0.00≤0.10。",
-                  "但M1在10-02已超09-30校准期限，数值通过质控也不能补有效状态；全部水分结果暂缓使用/判定，保留原始值并上报，由授权人员处理设备和复测，B还须核平行超差原因。没有给校准或复测结果，不写已补校准/已复测通过。C杂质超示例阈值仅为该留样线索，不推整批食品不安全；代表性、真实方法适用性及审批未确认，助理无报告签发或放行权。"
+                  "两版独立交卷",
+                  "用 QH-54 的虚构谷物记录交两版复算和一页交接；把可算的值和能否使用的判断分开。",
+                  "交卷后在常见问题展开「QH-54 参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "边界说明",
-                  "但M1在10-02已超09-30校准期限，数值通过质控也不能补有效状态；全部水分结果暂缓使用/判定，保留原始值并上报，由授权人员处理设备和复测，B还须核平行超差原因。没有给校准或复测结果，不写已补校准/已复测通过。C杂质超示例阈值仅为该留样线索，不推整批食品不安全；代表性、真实方法适用性及审批未确认，助理无报告签发或放行权。"
+                  "只模拟复核，保留原值。交一页给虚构实验室复核负责人，分别写明两版依据、记录缺口和责任。无真实设备操作、报告签发或生产放行。"
                 ]
               }
             ]
           },
           "id": "agricultural-and-food-science-technicians.path.entry-work-sample-data.1",
           "source_refs": [
-            "ep"
+            "practice-editor"
           ],
           "title": "入行练习：用虚构材料完成一次检测与记录任务",
           "type": "cards"
@@ -29541,7 +29545,8 @@
                 "id": "report-summary",
                 "values": [
                   "一页检测记录样例",
-                  "虚构交付：A13.10%、B超差（14.70仅算术）、C13.70%；杂质0.70/0.80/1.30。M1超期全部水分暂缓，B待核超差、C杂质超示例；无已复测/签发/整批放行。"
+                  "交两版复算表及一页给实验室复核负责人的交接。",
+                  "列原始值、方法版本、校准记录、决定及待核，不用真实样本或客户数据。"
                 ]
               },
               {
@@ -29620,49 +29625,49 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "确定练习对象",
-                  "沿用青禾QH-V1与QH-A/B/C，列全部原值、阈值、设备期限及助理权限。"
+                  "读两版记录，先列样品、方法、质控与设备字段。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "核对方法与质控",
-                  "复算A质量分数13.00%，核g/%单位，列平行差≤0.30与水分≤14.00。"
+                  "用质量原值复算 A 第一份水分并核单位。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "建立样品与字段字典",
-                  "建A/B/C双份记录，保留水分/杂质原值与M1/B1状态，不另造检测。"
+                  "录入三份样品的两次读数，不填题面没有的值。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "复算平行测量并核设备状态",
-                  "算水分差0.20/0.40/0.20；均值A13.10/C13.70，B14.70只作算术对照。"
+                  "复算平行差和均值，分开记录算术值与使用判断。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "核对固定质控与异常规则",
-                  "算杂质均值0.70/0.80/1.30与参考12.10/空白0.00；质控通过不补M1校准期限。"
+                  "独立核质控、设备记录和剩余问题。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "输出图表、偏差说明和责任边界",
-                  "写M1超期暂缓、B超差待核、C杂质超示例；无后续记录，不写已复测或整批放行。"
+                  "不看参考，交原版、单一变式及给实验室复核负责人的一页交接。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "按反馈修改并记录",
-                  "按评审改记录/计算，保留修改原因；核是否愿重复记录及异常上报，不当能力认证。"
+                  "展开常见问题「QH-54 参考解（交卷后再打开）」，记一处差异或无差异，再考虑先了解哪类岗位。"
                 ]
               }
             ]
@@ -29792,7 +29797,7 @@
             "paragraphs": [
               "美国BLS典型副学士、相关经验None及中期在职培训；雇主也可接受高中+相关经验。食品19-4013教育反馈本科32/副学士23/高中17%，Zone3为分类，不是所有岗位硬门槛。",
               "中国大陆食品检验按2025修正食品安全法第84条机构认定（法律另有规定除外）、第85条指定检验人独立检验、第86条公章及检验人签名/盖章和双方负责；第89条生产企业可自行检验。向社会出具法定证明作用数据另核机构认定业务范围，2023评审准则第9条核人员及授权签字人能力。机构资质、个人方法能力、签发和生产放行分别核，不能泛套全部农业技术任务。",
-              "培训结业只说明学习，不能代机构资质、方法能力评定、检验人指定、报告授权或生产放行。具体法域与职责分别核。",
+              "田间试验记录、企业内部质控和向社会出具具有证明作用的报告分开核。后者适用《检验检测机构监督管理办法》时，机构盖章、由授权签字人在其技术能力范围内签发；机构应保存原始记录和报告至少六年。岗位名称或完成一次计算不授予签发或生产放行权。",
               "例题只使用固定虚构资料及计算，不实际操作设备、采样、加热或使用试剂，不构成真实结果或放行。"
             ]
           },
@@ -29800,7 +29805,9 @@
           "source_refs": [
             "bls",
             "editor",
-            "r2-pay-1"
+            "r2-pay-1",
+            "rules",
+            "onet-wages"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29810,16 +29817,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得中国大陆可核验的公开招聘公告样本，因此不展示具体岗位报价与薪酬结构。可核对的入口要求按来源拆分：美国侧以 BLS 职业展望与 O*NET 教育与经验调查为准；中国大陆侧须符合《中华人民共和国食品安全法》对食品检验资质与检验人的要求。",
-              "岗位名称可能因单位而不同（如农业技术员、食品检验员、实验室技术员、质控技术员），核对时应以实际职责、方法要求与授权范围为准，而不是只看称谓。"
+              "中国农科院烟草研究所 2026 年 8 月 17 日公告：试验基地服务科研辅助 1 人，通过劳务派遣，不入研究所事业编制；全日制本科或以上，公告标准为本科 4,100 元/月、研究生 5,100 元/月，按出勤发放。附件列工作地点为四川西昌，岗位含温室试验、实验室管理和田间试验辅助。报名截至 8 月 28 日。",
+              "北京大学餐饮中心 2026 年 11 月 4 日公告：食品检验员 1 人，抽检食材、成品和餐用具并留原始记录；相关本科或以上，两年或以上经验优先，待遇面议，公告截止 11 月 13 日。为劳务派遣岗位。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "bls",
-            "editor",
-            "r2-pay-1",
-            "onet-wages-cross-repair"
+            "caas",
+            "pku"
           ],
           "title": "招聘样本与岗位名称说明",
           "type": "notice"
@@ -30047,7 +30052,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得中国精确招聘样本。美国BLS学历要求因雇主而异，食品ONet调查不能充中国门槛；食品检验适用责任见资格说明。"
+              "中国农科院烟草研究所 2026 年 8 月 17 日公告：试验基地服务科研辅助 1 人，通过劳务派遣，不入研究所事业编制；全日制本科或以上，公告标准为本科 4,100 元/月、研究生 5,100 元/月，按出勤发放。附件列工作地点为四川西昌，岗位含温室试验、实验室管理和田间试验辅助。报名截至 8 月 28 日。 北京大学餐饮中心 2026 年 11 月 4 日公告：食品检验员 1 人，抽检食材、成品和餐用具并留原始记录；相关本科或以上，两年或以上经验优先，待遇面议，公告截止 11 月 13 日。为劳务派遣岗位。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.path.career-path-block.23",
@@ -31015,10 +31020,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS农业与食品科学技术员（2025数据、2025—2035预测）",
+                "entity": "BLS 就业预测表 1.2：19-4010、19-4012、19-4013",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET食品19-4013任务与工作情境",
@@ -31030,7 +31035,7 @@
                 "entity": "NBS2025城镇单位行业/岗位平均工资",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET食品19-4013职业摘要",
@@ -31093,7 +31098,8 @@
             "bls",
             "ep",
             "nbs",
-            "onet"
+            "onet",
+            "ep-new"
           ],
           "type": "links"
         },
@@ -31102,13 +31108,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得中国大陆精确职业就业预测/转岗成功率。美国BLS合并2025就业40,400、2025—2035增长5%/净增约2,100/年均5,900空缺含替代，不推食品单岗、地区或个人录用。"
+              "美国 BLS 19-4010 合并职业：2025 年约 40,400，2035 年预计约 42,400；官方净增约 2,100（5.1%）、年均约 5,900 个空缺。细项 19-4012 农业技术员约 19,500→20,600、年均 2,800；19-4013 食品科学技术员约 20,800→21,800、年均 3,000。各数独立取整；年均空缺包含替代。 大陆精确职业就业预测未核实；岗位样本只用于比较任务。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.market-signals.market-signal-card.8",
           "source_refs": [
-            "bls",
-            "nbs"
+            "ep-new",
+            "caas",
+            "pku"
           ],
           "type": "prose"
         },
@@ -31299,12 +31306,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 5%；净增约 2,100 人；年均约 5,900 个空缺"
+              "增长 5.1%；净增约 2,100 人；年均约 5,900 个空缺"
             ]
           },
           "id": "agricultural-and-food-science-technicians.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls"
+            "bls",
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -31416,7 +31424,7 @@
           },
           "id": "agricultural-and-food-science-technicians.market-signals.market-signal-card.30",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -31894,6 +31902,15 @@
                 "id": "agricultural-and-food-science-technicians.faq.10",
                 "question": "农业与食品科学技术员能自己判定结果或签发报告吗？",
                 "question_key": "career.faq.agricultural-and-food-science-technicians.result-authority"
+              },
+              {
+                "answer": "A第1份水分（20.00－18.70）÷（20.00－10.00）×100%=13.00%。A平行差0.20、均值13.10%，B差0.40>0.30不得用均值判定（14.70%只作算术对照），C差0.20、均值13.70%。杂质A/B/C均值0.70/0.80/1.30%，C数值超过示例1.00%；质控12.10在11.80—12.20内，空白0.00≤0.10。 但M1在10-02已超09-30校准期限，数值通过质控也不能补有效状态；全部水分结果暂缓使用/判定，保留原始值并上报，由授权人员处理设备和复测，B还须核平行超差原因。没有给校准或复测结果，不写已补校准/已复测通过。C杂质超示例阈值仅为该留样线索，不推整批食品不安全；代表性、真实方法适用性及审批未确认，助理无报告签发或放行权。 变式仅补事前有效的 M1 校准记录：A、C 水分平行差合格、各均值低于虚构水分限值，可在模拟复核中列为可用；B 水分差 0.40 个百分点仍超限，不用均值判定，交复核负责人核原因。C 杂质 1.30% 的线索不变。两版都不签发、不推整批，保留原始值和依据。 B1 在测试日仍有效；按题设杂质界限 A 与 B 未超、C 超出。仅就给定留样报告这些观察。",
+                "id": "agricultural-and-food-science-technicians.faq.11",
+                "question": "QH-54 参考解（交卷后再打开）",
+                "question_key": "career.faq.agricultural-and-food-science-technicians.q11",
+                "source_refs": [
+                  "practice-editor"
+                ]
               }
             ]
           },
@@ -31944,12 +31961,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-08（本轮限定九板块修订）"
+              "2026 年 11 月：重核招聘样本、美国职业范围和纸面试做。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "caas",
+            "pku",
+            "ep-new",
+            "practice-editor"
           ],
           "type": "prose"
         },
@@ -32003,13 +32023,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看农业与食品科学技术员职业页面",
@@ -32063,7 +32083,7 @@
                 ],
                 "evidence_type": "官方职业展望",
                 "id": "bls",
-                "limitation": "合并职业全国口径；不含中国大陆数据，也不提供个人工资报价。",
+                "limitation": "合并职业全国口径；不含中国大陆数据，也不提供个人工资报价。 职业展望手册增长率取整；精确 5.1% 见就业预测表 1.2。",
                 "market": "美国",
                 "name": "U.S. BLS 职业展望手册：农业与食品科学技术员（2025 年版）",
                 "period": "2025 年版；2025—2035 年预测；访问 2026-10-02",
@@ -32113,29 +32133,29 @@
                   "城镇非私营单位：制造业 113,594 元/年",
                   "规模以上企业专业技术人员 155,491 元/年"
                 ],
-                "evidence_type": "官方工资统计",
+                "evidence_type": "primary_document",
                 "id": "nbs",
                 "limitation": "按行业门类与岗位类别的宽口径年平均工资，不是本职业单一职业、城市或单位类型的工资分布。",
                 "market": "中国大陆",
                 "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
-                "period": "2025 年；发布 2026-05-15；访问 2026-10-02",
+                "period": "2025年工资；2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "制造业约占 52%",
-                  "农、林、牧、渔业约占 23%",
-                  "其他行业（含专业技术服务）约占 25%"
+                  "制造业 53%",
+                  "农林渔猎业 29%",
+                  "其他行业 18%"
                 ],
                 "evidence_type": "官方行业分布",
                 "id": "cnclass",
                 "limitation": "只给出行业就业占比，不含行业工资；不能据此推断中国行业结构。",
                 "market": "美国",
                 "name": "O*NET 19-4013.00 行业分布",
-                "period": "当前页面未标统计年份；访问2026-10-02",
+                "period": "行业子页未标统计期",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-4013.00"
@@ -32143,8 +32163,8 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "当前目录列3认证：AMSA Food Safety & Science、Approved Chemist、Certified Food Scientist",
-                  "发现名称及发证组织；未逐项核报考条件或雇主认可"
+                  "美国 O*NET 相关认证目录。",
+                  "选择目标雇主后核实际认可条件。"
                 ],
                 "evidence_type": "官方认证发现",
                 "id": "privacy",
@@ -32175,8 +32195,8 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "Microsoft Excel 约 14%、Microsoft Office 约 11%、Word 约 7%、Outlook 约 7%、PowerPoint 约 6%",
-                  "其余工具（Linux、Access、SQL Server、Visio、SAP、SAS）未公布比例"
+                  "2025 年招聘文本中的技术词频。",
+                  "先核具体雇主的记录系统与方法要求。"
                 ],
                 "evidence_type": "官方技术清单",
                 "id": "operations",
@@ -32405,7 +32425,7 @@
                 ],
                 "evidence_type": "官方职业章节",
                 "id": "msresearch",
-                "limitation": "该章节为全国总量预测，不能推导个人失业概率或地区需求。",
+                "limitation": "该章节为全国总量预测，不能推导个人失业概率或地区需求。 职业展望手册增长率取整；精确 5.1% 见就业预测表 1.2。",
                 "market": "美国",
                 "name": "U.S. BLS 职业展望手册：农业与食品科学技术员 · 就业前景（Job Outlook）",
                 "period": "2025—2035 年预测；访问 2026-10-02",
@@ -32448,7 +32468,7 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "食品19-4013：制造业53%；农林牧渔业29%；其他行业18%。",
+                  "食品19-4013：制造业 53%、农林渔猎业 29%、其他行业 18%。",
                   "当前页面未标数据年；仅食品分支职业就业行业占比，不是全部农业技术员结构。"
                 ],
                 "evidence_type": "官方行业分布",
@@ -32456,7 +32476,7 @@
                 "limitation": "只给出行业就业占比，不含行业工资；不能据此推断中国行业结构。",
                 "market": "美国",
                 "name": "O*NET 19-4013.00 行业分布",
-                "period": "当前行业分布页面未标数据年；2026-10-08核对",
+                "period": "行业子页未标统计期",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-4013.00"
@@ -32504,11 +32524,86 @@
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "name": "FermatMind AI 任务影响估算估算方法 v1",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "中国农科院烟草研究所 2026 年 8 月 17 日公告：试验基地服务科研辅助 1 人，通过劳务派遣，不入研究所事业编制；全日制本科或以上，公告标准为本科 4,100 元/月、研究生 5,100 元/月，按出勤发放。附件列工作地点为四川西昌，岗位含温室试验、实验室管理和田间试验辅助。报名截至 8 月 28 日。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "caas",
+                "limitation": "一份历史岗位，不是全国工资。",
+                "market": "中国大陆",
+                "name": "中国农科院烟草研究所：试验基地科研辅助招聘",
+                "period": "2026-08-17",
+                "publisher": "中国农业科学院烟草研究所",
+                "scope": "recruitment_proxy",
+                "url": "https://tric.caas.cn/bsdt/ggl/5dba1ab2d6cb428599a38eca16f3f65d.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "北京大学餐饮中心 2026 年 11 月 4 日公告：食品检验员 1 人，抽检食材、成品和餐用具并留原始记录；相关本科或以上，两年或以上经验优先，待遇面议，公告截止 11 月 13 日。为劳务派遣岗位。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "pku",
+                "limitation": "单一公告，未报可比工资数值。",
+                "market": "中国大陆",
+                "name": "北京大学餐饮中心：食品检验员招聘",
+                "period": "2026-11-04",
+                "publisher": "北京大学人事部",
+                "scope": "recruitment_proxy",
+                "url": "https://hr.pku.edu.cn/rczp/xzjf/ldhtzp/e46f1d9704674292aafe3cd3207f8a50.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "田间试验记录、企业内部质控和向社会出具具有证明作用的报告分开核。后者适用《检验检测机构监督管理办法》时，机构盖章、由授权签字人在其技术能力范围内签发；机构应保存原始记录和报告至少六年。岗位名称或完成一次计算不授予签发或生产放行权。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "rules",
+                "limitation": "第2、12、13条；限适用的对社会具有证明作用的报告。",
+                "market": "中国大陆",
+                "name": "《检验检测机构监督管理办法》",
+                "period": "2025-03-18 修订",
+                "publisher": "市场监管总局",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_bff8f35d8f114acca7643bddd77e9505.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国 BLS 19-4010 合并职业：2025 年约 40,400，2035 年预计约 42,400；官方净增约 2,100（5.1%）、年均约 5,900 个空缺。细项 19-4012 农业技术员约 19,500→20,600、年均 2,800；19-4013 食品科学技术员约 20,800→21,800、年均 3,000。各数独立取整；年均空缺包含替代。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ep-new",
+                "limitation": "2025就业与2035预测；非实时招聘。",
+                "market": "美国",
+                "name": "BLS 就业预测表 1.2：19-4010、19-4012、19-4013",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "用 QH-54 的虚构谷物记录交两版复算和一页交接；把可算的值和能否使用的判断分开。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "practice-editor",
+                "limitation": "虚构纸面试做，不是检测规程或授权。",
+                "market": "编辑练习",
+                "name": "费马测试编辑部：QH-54 纸面试做",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -35849,7 +35944,7 @@
       },
       "hero": {
         "h1": "农业与食品科学技术员",
-        "quick_answer": "农业与食品科学技术员把田间、动植物或食品样本转化为可复核的试验记录和结果，核心能力是按方案采样、维护设备、控制质量并明确解释与签字边界。",
+        "quick_answer": "农业技术员常按试验方案采集和追踪作物或动物样品；食品科学技术员常制备食品样品、复核数据与质控。两类都要把编号、原值、方法和异常交接留到别人能复查的程度。",
         "title": "农业与食品科学技术员"
       },
       "market_signal_card": {
@@ -35977,7 +36072,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep-new",
             "value": {
               "$item": "agricultural-and-food-science-technicians.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36041,7 +36136,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "bls",
+            "id": "ep-new",
             "label": {
               "$link": "agricultural-and-food-science-technicians.market-signals.market-signal-card.7",
               "block": "market-signals",
@@ -37415,7 +37510,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 任务影响估算",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37513,19 +37608,19 @@
         "occupation_scope": "农业与食品科学技术员",
         "period": "2025 年",
         "source_refs": [
-          "bls"
+          "ep-new"
         ]
       },
       {
         "derivation": null,
-        "display_value": "+5%",
+        "display_value": "+5.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长率与官方净变化",
         "occupation_scope": "农业与食品科学技术员",
         "period": "2025—2035 年",
         "source_refs": [
-          "bls"
+          "ep-new"
         ]
       },
       {
@@ -37537,7 +37632,7 @@
         "occupation_scope": "农业与食品科学技术员",
         "period": "2025—2035 年平均",
         "source_refs": [
-          "bls"
+          "ep-new"
         ]
       },
       {
@@ -37566,11 +37661,11 @@
       },
       {
         "derivation": null,
-        "display_value": "50,610美元/年",
+        "display_value": "54,720 美元/年",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "食品19-4013：专业、科学和技术服务业工资中位数",
-        "occupation_scope": "食品科学技术员19-4013，各自细分行业雇员",
+        "measure": "农业19-4012：批发业工资中位数",
+        "occupation_scope": "农业技术员 19-4012，批发业雇员",
         "period": "2025年5月",
         "source_refs": [
           "bls"
@@ -37722,14 +37817,14 @@
       },
       {
         "derivation": null,
-        "display_value": "2025—2035 年增长 5%，平均每年约 5,900 个空缺",
+        "display_value": "2025—2035 年增长 5.1%，平均每年约 5,900 个空缺",
         "fact_id": "market-outlook",
         "market": "美国",
         "measure": "就业增长率与年均职位空缺",
         "occupation_scope": "农业与食品科学技术员合并职业",
         "period": "BLS OOH updated 2026-08-27; retrieved 2026-08-31",
         "source_refs": [
-          "bls"
+          "ep-new"
         ]
       },
       {
@@ -37809,7 +37904,7 @@
         "display_value": "33%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
+        "measure": "AI 任务影响估算（编辑估算）",
         "occupation_scope": "农业与食品科学技术员",
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
@@ -37823,12 +37918,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务影响估算"
     },
     "badges": [
-      "RIASEC · RCI",
+      "职业兴趣：农业 RIC／食品 RCI",
       "农业技术 / 食品检测",
-      "采样与放行责任 · AI探索"
+      "样品、质控与交接"
     ],
     "metrics": [
       {
@@ -37867,17 +37962,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "农业与食品科学技术员做什么、需要哪些能力与资格、薪资和前景如何，以及 AI 会改变哪些任务；保留来源范围与数据缺口。"
+      "text": "农业技术员怎样记录田间试验，食品科学技术员怎样复核样品？对照中国招聘和美国工资，试做一份有缺项的虚构检验交接。"
     },
     "title": {
       "availability": "available",
-      "text": "农业与食品科学技术员"
+      "text": "农业与食品科学技术员：田间试验、食品检测与入行｜FermatMind"
     }
   },
-  "source_content_sha256": "1ba45823a9ee1ad819c5f0845a4e49c813f1375f1c0691d5c5c3c22bd7fe3254",
+  "source_content_sha256": "6519ad586c55bdd06385951e019be77219933029a9f15c30aa854e68449be62d",
   "subject": {
     "canonical_slug": "agricultural-and-food-science-technicians",
     "name": "农业与食品科学技术员",
-    "summary": "农业与食品科学技术员把田间、动植物或食品样本转化为可复核的试验记录和结果，核心能力是按方案采样、维护设备、控制质量并明确解释与签字边界。"
+    "summary": "农业技术员常按试验方案采集和追踪作物或动物样品；食品科学技术员常制备食品样品、复核数据与质控。两类都要把编号、原值、方法和异常交接留到别人能复查的程度。"
   }
 }

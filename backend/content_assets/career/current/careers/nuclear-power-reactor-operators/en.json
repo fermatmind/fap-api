@@ -185,6 +185,9 @@
       "item:nuclear-power-reactor-operators.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:nuclear-power-reactor-operators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nuclear-power-reactor-operators.profile.career-quick-answers-block.5": {
         "status": "mapped"
       },
@@ -12252,6 +12255,21 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two notes describe the same alarm as reviewed and pending, with inconsistent times. Preserve the conflict and write a question for the shift supervisor."
+            ]
+          },
+          "id": "nuclear-power-reactor-operators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Flag conflicting reactor shift notes",
+          "type": "notice"
         }
       ]
     },
@@ -14701,6 +14719,13 @@
         "id": "nuclear-power-reactor-operators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nuclear-power-reactor-operators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15018,7 +15043,7 @@
       "text": "Power operators"
     }
   },
-  "source_content_sha256": "c6642befe62d155ed8e38a360733e833e4e5e8bfd4a37adfd48b695d5b52780f",
+  "source_content_sha256": "b3fe952c1466ecdbbe6ef78148a81127c4e5de1b0407dad5e9d3194ba4268bc0",
   "subject": {
     "canonical_slug": "nuclear-power-reactor-operators",
     "name": "Power operators",

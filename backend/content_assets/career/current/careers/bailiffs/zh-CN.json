@@ -36,13 +36,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -63,7 +63,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -1542,7 +1542,7 @@
         "status": "pending_mapping"
       },
       "item:bailiffs.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:bailiffs.sources.source-card.1": {
         "status": "mapped"
@@ -23146,13 +23146,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：法警不是「法庭上的保安」，而是在法院内维持秩序与安全的执法岗位：在入口用金属探测门与 X 光机等设备对进入法院的人员与物品进行安检并扣留违禁品、押解被押人员往返法院并在庭审中看管、在庭审中维持法庭秩序并保护陪审团不受外界接触、巡查法院内外并护送法官与其他法院工作人员、按程序看管证物，并按指挥链报告与升级；只想站着看门、不愿在重复程序中保持准确与警觉、也不愿面对愤怒或有攻击性人员的人不适合。"
+              "到 09 做 CT-70，先交两版再打开参考。"
             ]
           },
           "id": "bailiffs.quick-decision.fit-decision-checklist.1",
           "source_refs": [
+            "ct70-editor",
             "onet",
-            "onet"
+            "spc-second-circuit-2026"
           ],
           "type": "prose"
         },
@@ -23161,11 +23162,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你能在重复的安检与值庭程序中保持准确与警觉，对违规人员能清晰说明边界，能在冲突升高时按指挥链记录与升级，并愿意在法院环境中与法官与律师与当事人与陪审员与警务人员协同。"
+              "如果你能在打断中保持记录准确、区分报告与处置权限，可先试做纸面交接。"
             ]
           },
           "id": "bailiffs.quick-decision.fit-decision-checklist.2",
           "source_refs": [
+            "ct70-editor",
             "onet"
           ],
           "type": "prose"
@@ -23175,13 +23177,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停投入的条件：你还没有在任何有监督的条件下完成过一次完整的「安检—值庭—押送—记录—升级」闭环，或只能靠「喜欢制服与秩序感」说明兴趣；也不要把做过场所安保或前台值守当作可以独立行使强制措施或羁押看管的证明。强制措施、羁押看管、武器警械使用、非公开案件信息处理与紧急升级须按所在法域、机构与指挥链授权执行并留有可追溯记录；本页不提供任何执法或强制措施指令。"
+              "庭审指令与人员职责按机构授权；练习只写交接。"
             ]
           },
           "id": "bailiffs.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
+            "ct70-editor",
             "onet"
           ],
           "type": "prose"
@@ -23191,12 +23192,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历与资格必须分开核对：O*NET 把 33-3011.00 列为 Job Zone Three（SVP 6.0 至 <7.0），页面公布的学历构成中 40% 为要求高中文凭或同等学历（页面仅显示此一项）。美国侧典型入门为高中文凭或同等学历、无相关工作经验要求并需中期在岗训练（BLS OOH），通常先入培训学院再分配到岗位接受在岗训练；州法、县法院或雇主可有额外要求（年龄、背景审查、培训与考核）。学历、培训、行业认证、机构任用与法定权限是不同状态，须按州、县、法院与法域逐项核验。"
+              "BLS 表 1.2 对 33-3011 的典型分类是高中或同等学历、通常无需相关工作经验、中等期限在岗培训。入行条件、训练与执勤权限按司法辖区和招聘机构核。"
             ]
           },
           "id": "bailiffs.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -23206,12 +23207,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以安检与值庭与押送为重心、并对庭审秩序与他人安全负责的执法岗位，核心是程序准确、情境判断与按指挥链升级，而不是对制服或权威的想象。"
+              "如果你能在打断中保持记录准确、区分报告与处置权限，可先试做纸面交接。"
             ]
           },
           "id": "bailiffs.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
+            "ct70-editor",
             "onet"
           ],
           "type": "prose"
@@ -23234,7 +23235,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23268,7 +23268,6 @@
           },
           "id": "bailiffs.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -23278,14 +23277,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜75% 每天在环境受控的室内工作，80% 持续与他人接触（另有 12% 大部分时间与他人接触），70% 每天面对面讨论，42% 很近的身体距离（另有 25% 中等距离），36% 每天使用电话，39% 每天使用电子邮件，29% 超过一半时间站立，48% 约一半时间站立，21% 超过一半时间坐着；可能的暴露包括 16% 每天佩戴常规防护装备、13% 每天暴露于疾病或感染、12% 每天暴露于污染物、16% 每周至少一次但非每天在户外全天候环境；58% 完全不自动化。\n主要装备与工具｜金属探测门与 X 光机与手持探测器等安检设备、约束与看管器材、通讯与调度设备、法院日程与案件管理软件（如 Court docket management software、Case management system software、NCIC 数据库）、记录与办公软件、个人防护（按作业需要）。\n任务节奏｜66% 的典型工作周为 40 小时、34% 少于 40 小时；83% 为固定作息、17% 为不规律作息；43% 每天面临时间压力，42% 每天需要作出决定（25% 有很大的决策自由、41% 有一定自由）。\n协作对象｜与法官、书记员、律师、陪审员、当事人与警务人员协同；54% 认为与工作组或团队合作极其重要（另有 35% 认为非常重要），28% 认为协调或带领他人极其重要（另有 41% 非常重要），35% 对他人健康与安全承担很高责任（另有 20% 高责任）。\n竞争与压力｜37% 每天与不好打交道或不礼貌的人打交道，42% 每周至少一次但非每天与有暴力或肢体攻击行为的人打交道，25% 每天处于冲突情境，32% 认为错误的后果极其严重（另有 12% 非常严重），13%认为竞争高度激烈（Highly competitive）。\n合规与安全｜安检与值庭与押送与强制措施须符合所在法院规则与法域法规与机构规程；法院对非公开案件信息的保密与访问由所在法院规则约束，自动记录或生成工具不改变法院人员的保密责任。\n记录与复盘｜安检与押送与处置与交接需要可追溯；36% 认为精确或准确极其重要（另有 44% 认为非常重要）。\n技能与训练｜O*NET 把该职业列为 Job Zone Three（SVP 6.0 至 <7.0）；基本技能以监控 60 与口语表达 60 与积极倾听 56 与批判性思维 50 为主；可迁移技能以社会洞察力 75、判断与决策 56、时间管理 50、复杂问题解决 47、协调 47、说服 47、服务取向 47 为主；知识以公共安全与安保、法律与政府、英语语言、客户与个人服务、心理学为主；工作风格包含压力耐受、自控、谨慎、诚信与可靠性；能力包含问题敏感性、口语表达、选择性注意、言语清晰度、口语理解、言语识别、近距视力、演绎推理、归纳推理、信息排序、静态力量、躯干力量与书面理解。\n准入与任用｜学历不等于任用或执法或强制权限；美国侧 O*NET 列出 5 项法庭安全行业认证（不等于任用或法定权限）；中国大陆侧人民法院司法警察使用国家专项编制并实行警官警员职务序列。\n行业与雇主｜2025美国本职业行业分布：政府99%、其他1%；OOH另列雇主地方政府64%、州政府35%（均除教育和医院），不是中国分布或行业工资。。\n新聘人员所需教育问卷仅展示高中或同等40%，非在岗学历构成，不能推多数岗位只需高中。Zone3/SVP6至<7描述一般一至两年在岗训练及相关经验准备，非每人固定培训；OOH典型入门高中、通常学院及在岗训练，摘要无相关经验/中期训练是典型统计，非每家统一条件。 18项工作风格为Impact：正直98、可靠88、谨慎86、自控83、压力耐受76、细节65、坚持57；不是人格量表或个人录用分数。 问卷比例非个人必遇；普通防护Never回答不免实际防护；停止、求援及继续作业按实际机构程序，职责概览不构成完整作业授权。"
+              "工作环境｜75% 每天在环境受控的室内工作，80% 持续与他人接触（另有 12% 大部分时间与他人接触），70% 每天面对面讨论，42% 很近的身体距离（另有 25% 中等距离），36% 每天使用电话，39% 每天使用电子邮件，29% 超过一半时间站立，48% 约一半时间站立，21% 超过一半时间坐着；可能的暴露包括 16% 每天佩戴常规防护装备、13% 每天暴露于疾病或感染、12% 每天暴露于污染物、16% 每周至少一次但非每天在户外全天候环境；58% 完全不自动化。\n主要装备与工具｜金属探测门与 X 光机与手持探测器等安检设备、约束与看管器材、通讯与调度设备、法院日程与案件管理软件（如 Court docket management software、Case management system software、NCIC 数据库）、记录与办公软件、个人防护（按作业需要）。\n任务节奏｜66% 的典型工作周为 40 小时、34% 少于 40 小时；83% 为固定作息、17% 为不规律作息；43% 每天面临时间压力，42% 每天需要作出决定（25% 有很大的决策自由、41% 有一定自由）。\n协作对象｜与法官、书记员、律师、陪审员、当事人与警务人员协同；54% 认为与工作组或团队合作极其重要（另有 35% 认为非常重要），28% 认为协调或带领他人极其重要（另有 41% 非常重要），35% 对他人健康与安全承担很高责任（另有 20% 高责任）。\n竞争与压力｜37% 每天与不好打交道或不礼貌的人打交道，42% 每周至少一次但非每天与有暴力或肢体攻击行为的人打交道，25% 每天处于冲突情境，32% 认为错误的后果极其严重（另有 12% 非常严重），13%认为竞争高度激烈（Highly competitive）。\n合规与安全｜安检与值庭与押送与强制措施须符合所在法院规则与法域法规与机构规程；法院对非公开案件信息的保密与访问由所在法院规则约束，自动记录或生成工具不改变法院人员的保密责任。\n记录与复盘｜安检与押送与处置与交接需要可追溯；36% 认为精确或准确极其重要（另有 44% 认为非常重要）。\n技能与训练｜O*NET 把该职业列为 Job Zone Three（SVP 6.0 至 <7.0）；基本技能以监控 60 与口语表达 60 与积极倾听 56 与批判性思维 50 为主；可迁移技能以社会洞察力 75、判断与决策 56、时间管理 50、复杂问题解决 47、协调 47、说服 47、服务取向 47 为主；知识以公共安全与安保、法律与政府、英语语言、客户与个人服务、心理学为主；工作风格包含压力耐受、自控、谨慎、诚信与可靠性；能力包含问题敏感性、口语表达、选择性注意、言语清晰度、口语理解、言语识别、近距视力、演绎推理、归纳推理、信息排序、静态力量、躯干力量与书面理解。\n准入与任用｜学历不等于任用或执法或强制权限；美国侧 O*NET 列出 5 项法庭安全行业认证（不等于任用或法定权限）；中国大陆法院司法警察与聘用制警务辅助人员分列；现行职级与授权按主管机构核对。\n行业与雇主｜O*NET 33-3011.00 行业子表列政府 99%、其他 1%；子表未注明统计年份。 手册另列 2025 年地方政府 64%、州政府 35%，均不含教育和医院。\n新聘人员所需教育问卷仅展示高中或同等40%，非在岗学历构成，不能推多数岗位只需高中。Zone3/SVP6至<7描述一般一至两年在岗训练及相关经验准备，非每人固定培训；OOH典型入门高中、通常学院及在岗训练，摘要无相关经验/中期训练是典型统计，非每家统一条件。 18项工作风格为Impact：正直98、可靠88、谨慎86、自控83、压力耐受76、细节65、坚持57；不是人格量表或个人录用分数。 问卷比例非个人必遇；普通防护Never回答不免实际防护；停止、求援及继续作业按实际机构程序，职责概览不构成完整作业授权。"
             ]
           },
           "id": "bailiffs.profile.work-context-block.1",
           "source_refs": [
-            "bls",
+            "r2-pay-2",
             "health",
-            "r2-pay-2"
+            "bls"
           ],
           "type": "prose"
         },
@@ -23299,7 +23298,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.2",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23329,7 +23327,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23360,7 +23357,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23370,12 +23366,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国33-3011本职业：2025就业18,000人，2035预测17,700人，2025—2035增长取整-2%，年均空缺1,600个。空缺含替补需求，非十年净增、个人录用概率或生成式AI因果。"
+              "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。"
             ]
           },
           "id": "bailiffs.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -23389,7 +23385,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.5",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23399,13 +23394,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025美国本职业行业分布：政府99%、其他1%；OOH另列雇主地方政府64%、州政府35%（均除教育和医院），不是中国分布或行业工资。 详细资料列10类软件，7项Hot产品及1项InDemand产品Office；2025美国本职业关联唯一招聘Office5%，Adobe Acrobat、Access、Excel、Outlook、PowerPoint、SharePoint、Word比例Not available，不是0。分母是职业关联唯一招聘，非岗位使用率或中国要求。"
+              "O*NET 33-3011.00 行业子表列政府 99%、其他 1%；子表未注明统计年份。"
             ]
           },
           "id": "bailiffs.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "hr",
             "r2-pay-2",
+            "hr",
             "health"
           ],
           "type": "prose"
@@ -23420,7 +23415,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23435,8 +23429,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23451,7 +23443,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23466,7 +23457,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23481,7 +23471,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23496,7 +23485,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23511,8 +23499,6 @@
           },
           "id": "bailiffs.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23527,7 +23513,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23542,7 +23527,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23557,7 +23541,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23572,7 +23555,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23587,7 +23569,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23602,7 +23583,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23617,7 +23597,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23627,12 +23606,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 33-3011.00 列为 Job Zone Three（SVP 6.0 至 <7.0），页面公布的学历构成中 40% 为要求高中文凭或同等学历（页面仅显示此一项）；美国侧典型入门为高中文凭或同等学历、无相关工作经验要求并需中期在岗训练（BLS OOH），通常先入培训学院再分配到岗位接受在岗训练。O*NET 培训页面显示全国 540 个相关培训项目（全部属刑事司法／警务科学方向），认证页面显示 5 项行业认证（均由 National Sheriffs' Association 管理）。中国大陆侧以法院与公务员招录与专项编制要求为主，具体要求由主管部门规定。"
+              "BLS 表 1.2 对 33-3011 的典型分类是高中或同等学历、通常无需相关工作经验、中等期限在岗培训。入行条件、训练与执勤权限按司法辖区和招聘机构核。"
             ]
           },
           "id": "bailiffs.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -23647,7 +23626,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23662,7 +23640,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23677,7 +23654,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23701,13 +23677,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧为 O*NET 33-3011.00（Bailiffs）；其工资与就业与行业数据为本职业口径，页面未声明取自其他职业。BLS OOH 章节为「Correctional Officers and Bailiffs」合并口径（合并中位年薪 58,850 美元、在岗 415,800 人、2025—2035 年 -7%），须与法警单列口径区分，本页不用合并口径替代单列口径。中国大陆侧为不同编制与权限体系，本页不出数，也不把中文页面语言当作中国等价职业或工资映射。"
+              "美国 33-3011 是法庭执勤细项。BLS 手册还列惩教人员与合并口径。中国大陆两份历史公告是相关辅助岗位，国家统计局为宽行业均值；本页未取得相同口径全国职业工资。"
             ]
           },
           "id": "bailiffs.profile.career-quick-answers-block.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-table",
+            "health",
+            "nbs",
+            "spc-second-circuit-2026",
+            "ningxia-court-2026"
           ],
           "type": "prose"
         },
@@ -23730,12 +23709,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧典型入门为高中文凭或同等学历、无相关工作经验要求、中期在岗训练（BLS OOH）；O*NET 显示 Job Zone Three（SVP 6.0 至 <7.0）与 40% 高中文凭学历构成，并列出 540 个刑事司法／警务科学培训项目与 5 项法庭安全行业认证；州法、县法院或雇主可有额外要求。中国大陆以法院与公务员招录与专项编制要求为主。"
+              "BLS 表 1.2 对 33-3011 的典型分类是高中或同等学历、通常无需相关工作经验、中等期限在岗培训。入行条件、训练与执勤权限按司法辖区和招聘机构核。"
             ]
           },
           "id": "bailiffs.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -23759,12 +23738,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "安检与值庭与押送须按所在法院规则与机构规程执行；涉及强制措施、羁押看管、武器警械使用与紧急升级时，须按所在法域与机构与指挥链授权执行。美国侧 O*NET 列出 5 项法庭安全行业认证（不等于任用或法定权限）；中国大陆侧人民法院司法警察使用国家专项编制并实行警官警员职务序列，须按实际招录与专项编制要求核验，不能从学历或经验直接推断。"
+              "法庭安保、现场应急与其他任务按司法辖区、实际岗位和机构授权执行。中国大陆法院的司法警察、受指挥的聘用制司法警务辅助人员、书记员分别核对。"
             ]
           },
           "id": "bailiffs.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
+            "cnclass",
+            "spc-second-circuit-2026",
+            "ningxia-court-2026",
             "onet"
           ],
           "type": "prose"
@@ -23793,7 +23774,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23808,7 +23788,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23823,7 +23802,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23838,7 +23816,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23853,7 +23830,6 @@
           },
           "id": "bailiffs.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23896,19 +23872,15 @@
                 "url": "https://www.onetonline.org/link/industry/33-3011.00"
               },
               {
-                "entity": "O*NET 33-3011.00 全国工资分位",
+                "entity": "O*NET 33-3011.00 工资分位（州页内美国行）",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/33-3011.00"
+                "url": "https://www.onetonline.org/link/localwages/33-3011.00?st=WV"
               }
             ]
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -23923,8 +23895,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23939,10 +23909,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23957,7 +23923,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23972,7 +23937,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23987,7 +23951,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24002,7 +23965,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24031,7 +23993,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24046,7 +24007,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24061,7 +24021,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24090,7 +24049,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.19",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24105,7 +24063,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24120,7 +24077,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24144,12 +24100,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "安全警卫多为私营或场所安保，通常不具有法定执法与强制权限；法警具有法定执法与强制权限并在法院内行使。"
+              "安全警卫多为私营或场所安保，通常不具有法定执法与强制权限；美国法庭执勤人员是否具有执法或强制权限，由所在法域、机构和具体岗位决定。"
             ]
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24164,7 +24119,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24179,7 +24133,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24208,7 +24161,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24223,7 +24175,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24238,7 +24189,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24267,7 +24217,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24282,7 +24231,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24297,7 +24245,6 @@
           },
           "id": "bailiffs.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24374,16 +24321,16 @@
                 "url": "https://www.onetonline.org/link/industry/33-3011.00"
               },
               {
-                "entity": "O*NET本职业2025—2035就业趋势",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/33-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 33-3011.00 全国工资分位",
+                "entity": "O*NET 33-3011.00 工资分位（州页内美国行）",
                 "id": "link-7",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/33-3011.00"
+                "url": "https://www.onetonline.org/link/localwages/33-3011.00?st=WV"
               },
               {
                 "entity": "O*NET 33-3011.00 培训与教育信息",
@@ -24398,22 +24345,22 @@
                 "url": "https://www.onetonline.org/link/details/33-3011.00"
               },
               {
-                "entity": "O*NET 33-3011.00 认证发现（行业认证口径）",
+                "entity": "O*NET 招聘工具",
                 "id": "link-10",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/33-3011.00"
+                "url": "https://www.onetonline.org/link/hot_tech/33-3011.00"
               },
               {
-                "entity": "O*NET 33-3011.00 行业分布（行业与雇主类型口径）",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/33-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
+                "entity": "O*NET 行业子表",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.onetonline.org/link/industry/33-3011.00"
               },
               {
                 "entity": "O*NET 33-3011.00 职业摘要",
@@ -24440,10 +24387,10 @@
                 "url": "https://www.onetonline.org/link/industry/33-3011.00"
               },
               {
-                "entity": "O*NET本职业2025—2035就业趋势",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/33-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 33-3011.00 详细资料（工作情境）",
@@ -24461,13 +24408,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -24482,7 +24422,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24497,7 +24436,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24512,7 +24450,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24542,7 +24479,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24557,7 +24493,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24572,8 +24507,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.16",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24588,8 +24521,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24599,7 +24530,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得法警AI采用、提效或减员实测；检索和记录草稿为编辑候选。最高法院2024—2028改革纲要44/45提出司法数据分类分级保护、流通安全管理和人工智能应用审查监管风险评估，属于制度改革部署，非本职业已测AI采用率、操作许可或具体停工恢复程序。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "本轮未取得法警AI采用、提效或减员实测；检索和记录草稿为编辑候选。最高法院2024—2028改革纲要44/45提出司法数据分类分级保护、流通安全管理和人工智能应用审查监管风险评估，属于制度改革部署，非本职业已测AI采用率、操作许可或具体停工恢复程序。 AI 任务影响估算 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+0)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "bailiffs.ai-impact.ai-impact-table.18",
@@ -24647,7 +24578,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24662,7 +24592,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24743,11 +24672,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该职业的行业分布；不能推导行业工资或就业规模。"
+              "O*NET 33-3011.00 行业子表列政府 99%、其他 1%；子表未注明统计年份。"
             ]
           },
           "id": "bailiffs.ai-impact.ai-impact-table.28",
           "source_refs": [
+            "r2-pay-2",
             "onet"
           ],
           "type": "prose"
@@ -24757,7 +24687,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 33-3011.00 职业摘要（就业与预测字段）"
+              "BLS 表 1.2：就业与预测"
             ]
           },
           "id": "bailiffs.ai-impact.ai-impact-table.29",
@@ -24776,7 +24706,7 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -24785,7 +24715,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 33-3011.00 全国工资分位"
+              "O*NET 33-3011.00 工资分位（州页内美国行）"
             ]
           },
           "id": "bailiffs.ai-impact.ai-impact-table.31",
@@ -24818,7 +24748,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24833,7 +24762,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24848,7 +24776,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24863,7 +24790,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24878,7 +24804,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24893,7 +24818,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24908,7 +24832,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25115,11 +25038,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 33-3011.00 职业摘要（就业与预测字段）"
+              "BLS 表 1.2：33-3011 就业与预测"
             ]
           },
           "id": "bailiffs.ai-impact.ai-impact-table.54",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -25134,7 +25058,7 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -25143,12 +25067,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国33-3011本职业：2025就业18,000人，2035预测17,700人，2025—2035增长取整-2%，年均空缺1,600个。空缺含替补需求，非十年净增、个人录用概率或生成式AI因果。"
+              "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。"
             ]
           },
           "id": "bailiffs.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -25199,11 +25123,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国本职业行业分布：政府99%、其他1%；OOH另列雇主地方政府64%、州政府35%（均除教育和医院），不是中国分布或行业工资。"
+              "O*NET 33-3011.00 行业子表列政府 99%、其他 1%；子表未注明统计年份。"
             ]
           },
           "id": "bailiffs.ai-impact.ai-impact-table.60",
           "source_refs": [
+            "r2-pay-2",
             "onet"
           ],
           "type": "prose"
@@ -25218,7 +25143,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25243,12 +25167,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国33-3011本职业：2025就业18,000人，2035预测17,700人，2025—2035增长取整-2%，年均空缺1,600个。空缺含替补需求，非十年净增、个人录用概率或生成式AI因果。 OOH将需求与庭审安保及州地方预算约束联系，非AI导致下降的测量。"
+              "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。"
             ]
           },
           "id": "bailiffs.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "health"
           ],
           "type": "prose"
@@ -25263,7 +25187,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25278,7 +25201,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25308,7 +25230,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25323,7 +25244,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25347,12 +25267,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国33-3011本职业：2025就业18,000人，2035预测17,700人，2025—2035增长取整-2%，年均空缺1,600个。空缺含替补需求，非十年净增、个人录用概率或生成式AI因果。"
+              "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。"
             ]
           },
           "id": "bailiffs.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -25366,7 +25286,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25381,7 +25300,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25405,12 +25323,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "所读资料未给岗位消失年份；美国33-3011本职业：2025就业18,000人，2035预测17,700人，2025—2035增长取整-2%，年均空缺1,600个。空缺含替补需求，非十年净增、个人录用概率或生成式AI因果。"
+              "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。"
             ]
           },
           "id": "bailiffs.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -25424,7 +25342,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25439,7 +25356,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25454,7 +25370,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25469,7 +25384,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.78",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25484,7 +25398,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.79",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25499,7 +25412,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25514,7 +25426,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25529,7 +25440,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.82",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25544,7 +25454,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25559,7 +25468,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.84",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25574,7 +25482,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25589,7 +25496,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.86",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25633,7 +25539,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25648,7 +25553,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.90",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25663,7 +25567,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25678,7 +25581,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.92",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25693,7 +25595,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.93",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25750,7 +25651,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25807,7 +25707,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25864,7 +25763,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.105",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25921,7 +25819,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25978,7 +25875,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26091,7 +25987,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26106,7 +26001,6 @@
           },
           "id": "bailiffs.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26321,11 +26215,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "精确职业工资缺口保留；公共管理等相关行业均值有匹配条件可参考，非替代。"
+              "大陆相邻岗位：法院司法警务辅助"
             ]
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
+            "spc-second-circuit-2026",
+            "ningxia-court-2026",
             "nbs"
           ],
           "type": "prose"
@@ -26335,11 +26231,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "缺口在本页以「证据不足」标记；这不是零收入，而是证据无法支持该精度。若需比较，请以实际招录公告（编制、职位层级、地区、津补贴、任用条件）为准。"
+              "最高人民法院第二巡回法庭 2026-06-25 公告招 1 名聘用制司法警务辅助人员，另招 4 名书记员。辅助人员在司法警察带领下维护秩序、协助安检和应急；该岗要求法律或警务相关专业专科以上，公告未列具体金额。"
             ]
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
+            "spc-second-circuit-2026",
+            "ningxia-court-2026",
             "onet"
           ],
           "type": "prose"
@@ -26354,7 +26252,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26384,7 +26281,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26399,7 +26295,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26414,7 +26309,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26429,7 +26323,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26444,7 +26337,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26459,7 +26351,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26474,7 +26365,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26489,7 +26379,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26499,7 +26388,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "最高法院2012-11-28颁布新闻说明条例2012-12-01施行、1997暂行条例废止、国家专项编制及当时警官警员序列、双重领导与编队管理，并取消送达法律文书职责；新闻不是条例全文。2024—2028改革纲要第41项提出落实司法警察执法勤务职级序列制度；具体招录、现行职级及强制权限需核适用规定，不与美国Bailiffs互认。 O*NET本轮全国目录显示704个培训项目，所见刑事司法/警务科学课程非任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。"
+              "最高法院2012-11-28颁布新闻说明条例2012-12-01施行、1997暂行条例废止、国家专项编制及当时警官警员序列、双重领导与编队管理，并取消送达法律文书职责；新闻不是条例全文。2024—2028改革纲要第41项提出落实司法警察执法勤务职级序列制度；具体招录、现行职级及强制权限需核适用规定，不与美国Bailiffs互认。 刑事司法与警务培训课程不构成任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。"
             ]
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.33",
@@ -26521,7 +26410,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26536,7 +26424,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26551,7 +26438,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26566,7 +26452,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26576,7 +26461,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国2025行业政府99%；中国实际单位属公共管理等门类时可参考119,465元非私营年均，非本职业工资。"
+              "O*NET 行业子表列政府 99%，未注明统计年份；中国实际单位属公共管理等门类时可参考119,465元非私营年均，非本职业工资。"
             ]
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.38",
@@ -26595,7 +26480,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26610,7 +26494,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26625,7 +26508,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26668,7 +26550,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26678,12 +26559,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "场景比较需要编制类型与职位层级与地区一致；本页不提供本职业的精确月薪区间。"
+              "宁夏法院系统 2026-09-15 公告计划招 67 名聘用制司法警务辅助人员，由司法警察指挥，不占编制。公告所列约 3,000–4,000 元/月，含个人应缴社保和住房公积金，另按规定发放取暖费及符合条件的考核奖金。"
             ]
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
+            "spc-second-circuit-2026",
+            "ningxia-court-2026",
             "onet"
           ],
           "type": "prose"
@@ -26698,7 +26580,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26727,7 +26608,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26751,11 +26631,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可比且同口径的公开职业条目与全国职业月薪分布。"
+              "两份法院公告只代表对应聘用岗位，宁夏薪资不能作为全国工资或与美国工资直接换算。"
             ]
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
+            "spc-second-circuit-2026",
+            "ningxia-court-2026",
             "onet"
           ],
           "type": "prose"
@@ -26826,7 +26708,6 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26836,7 +26717,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 33-3011.00 全国工资分位（美国口径，仅作对照）｜https://www.onetonline.org/link/localwages/33-3011.00"
+              "O*NET 33-3011.00 工资分位（州页内美国行）（美国口径，仅作对照）｜https://www.onetonline.org/link/localwages/33-3011.00?st=WV"
             ]
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.57",
@@ -26855,7 +26736,7 @@
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -26886,13 +26767,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 33-3011.00 全国工资分位｜https://www.onetonline.org/link/localwages/33-3011.00；O*NET 33-3011.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/33-3011.00；O*NET 33-3011.00 行业分布｜https://www.onetonline.org/link/industry/33-3011.00"
+              "O*NET 33-3011.00 工资分位（州页内美国行）｜https://www.onetonline.org/link/localwages/33-3011.00?st=WV；BLS 表 1.2：就业与预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET 33-3011.00 行业分布｜https://www.onetonline.org/link/industry/33-3011.00"
             ]
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26944,7 +26823,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同口径为年薪第 25 分位，对应时薪第 25 分位 21.02 美元；O*NET 展示的 BLS 2025 年工资分位（本职业口径）｜https://www.onetonline.org/link/localwages/33-3011.00"
+              "同口径为年薪第 25 分位，对应时薪第 25 分位 21.02 美元；O*NET 展示的 BLS 2025 年工资分位（本职业口径）｜https://www.onetonline.org/link/localwages/33-3011.00?st=WV"
             ]
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.12",
@@ -27001,7 +26880,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同口径为年薪第 75 分位，对应时薪第 75 分位 35.88 美元；O*NET 展示的 BLS 2025 年工资分位（本职业口径）｜https://www.onetonline.org/link/localwages/33-3011.00"
+              "同口径为年薪第 75 分位，对应时薪第 75 分位 35.88 美元；O*NET 展示的 BLS 2025 年工资分位（本职业口径）｜https://www.onetonline.org/link/localwages/33-3011.00?st=WV"
             ]
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.16",
@@ -27049,7 +26928,7 @@
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -27058,13 +26937,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国33-3011本职业：2025就业18,000人，2035预测17,700人，2025—2035增长取整-2%，年均空缺1,600个。空缺含替补需求，非十年净增、个人录用概率或生成式AI因果。"
+              "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。"
             ]
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27079,7 +26958,7 @@
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -27088,13 +26967,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国33-3011本职业：2025就业18,000人，2035预测17,700人，2025—2035增长取整-2%，年均空缺1,600个。空缺含替补需求，非十年净增、个人录用概率或生成式AI因果。"
+              "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。"
             ]
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27109,7 +26988,7 @@
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -27124,7 +27003,7 @@
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -27148,13 +27027,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025美国本职业中位年薪56,600、时薪27.21；美国33-3011本职业：2025就业18,000人，2035预测17,700人，2025—2035增长取整-2%，年均空缺1,600个。空缺含替补需求，非十年净增、个人录用概率或生成式AI因果。"
+              "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。"
             ]
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27239,7 +27118,6 @@
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27255,7 +27133,7 @@
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -27264,7 +27142,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "州政府（除教育和医院）"
+              "州政府（不含教育和医院）"
             ]
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.34",
@@ -27278,7 +27156,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "74,630美元/年（2025，本职业中位数）"
+              "74,630 美元/年"
             ]
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.35",
@@ -27292,7 +27170,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OOH明确单列法警行业工资；州政府年薪中位74,630，非全部政府的统一工资。"
+              "2025 年 5 月 BLS 手册的法庭执勤人员行业年薪中位数。"
             ]
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.36",
@@ -27306,7 +27184,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "地方政府（除教育和医院）"
+              "地方政府（不含教育和医院）"
             ]
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.37",
@@ -27320,7 +27198,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "48,580美元/年（2025，本职业中位数）"
+              "48,580 美元/年"
             ]
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.38",
@@ -27334,7 +27212,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OOH明确地方政府法警年薪中位48,580，非全部其他行业工资。"
+              "2025 年 5 月 BLS 手册的法庭执勤人员行业年薪中位数。"
             ]
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.39",
@@ -27438,7 +27316,6 @@
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27469,7 +27346,7 @@
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -27483,7 +27360,6 @@
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27512,7 +27388,6 @@
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27541,7 +27416,6 @@
           },
           "id": "bailiffs.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27569,7 +27443,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27581,19 +27455,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "安全警卫",
@@ -27674,20 +27548,15 @@
                 "url": "https://www.onetonline.org/link/industry/33-3011.00"
               },
               {
-                "entity": "O*NET 33-3011.00 职业摘要（就业与预测字段）",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/33-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
           "id": "bailiffs.fit.personality-fit-block.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -27702,7 +27571,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.2",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27732,7 +27600,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27761,7 +27628,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.6",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27791,7 +27657,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27820,7 +27685,6 @@
           },
           "id": "bailiffs.fit.riasec-fit-block.9",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27877,7 +27741,6 @@
           },
           "id": "bailiffs.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27992,7 +27855,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28050,7 +27912,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28080,7 +27941,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -28123,7 +27983,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28138,7 +27997,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28153,7 +28011,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28168,7 +28025,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28183,7 +28039,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28198,7 +28053,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28213,7 +28067,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28228,7 +28081,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28243,7 +28095,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28258,7 +28109,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28273,7 +28123,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28288,7 +28137,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28303,7 +28151,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28318,8 +28165,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28334,8 +28179,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.41",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28350,8 +28193,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.42",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28366,7 +28207,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28381,7 +28221,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28396,7 +28235,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28411,7 +28249,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28426,7 +28263,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28441,7 +28277,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28470,7 +28305,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28499,7 +28333,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28514,7 +28347,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28557,7 +28389,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28572,7 +28403,6 @@
           },
           "id": "bailiffs.fit.personality-fit-block.57",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28736,16 +28566,16 @@
                 "url": "https://www.onetonline.org/link/details/33-3011.00"
               },
               {
-                "entity": "O*NET本职业2025—2035就业趋势",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/33-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 33-3011.00 全国工资分位",
+                "entity": "O*NET 33-3011.00 工资分位（州页内美国行）",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/33-3011.00"
+                "url": "https://www.onetonline.org/link/localwages/33-3011.00?st=WV"
               },
               {
                 "entity": "BLS 职业展望手册《Correctional Officers and Bailiffs》",
@@ -28757,10 +28587,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -28791,8 +28617,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28807,9 +28631,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28824,7 +28645,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28839,7 +28659,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28854,7 +28673,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28869,7 +28687,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28884,7 +28701,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28899,7 +28715,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28914,7 +28729,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28929,7 +28743,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28988,7 +28801,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29003,7 +28815,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29018,7 +28829,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29033,7 +28843,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29048,7 +28857,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29063,7 +28871,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29078,7 +28885,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29093,7 +28899,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29108,7 +28913,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29123,7 +28927,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29138,7 +28941,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29169,7 +28971,6 @@
           },
           "id": "bailiffs.risk.career-risk-cards.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29212,7 +29013,7 @@
           },
           "id": "bailiffs.risk.career-risk-cards.37",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -29268,7 +29069,7 @@
             "column_labels": [
               "岗位方向",
               "起步任务",
-              "雇主依据",
+              "向招聘机构核对",
               "零经验可提交的证据",
               "需要区分的边界"
             ],
@@ -29276,44 +29077,42 @@
               [
                 "入口安检岗",
                 "在有监督下使用金属探测门与 X 光机与手持探测器对进入法院的人员与物品安检，扣留并登记违禁品。",
-                "编辑核对项：关注设备操作、可疑物品复核、实际人员配置与登记规范程度；任用资格由机构招录与培训考核决定。 本轮无具体雇主招聘样本。",
-                "提交一份含虚构法院入口与安检流程、违禁品登记与移交说明的作业说明，不使用真实案件或人员信息。",
+                "向招聘机构核对授权、培训和现场职责。",
+                "CT-70 只交两版记录与一页交接。",
                 "安检岗不决定强制措施；涉及扣留与移交与升级须按机构规程与授权执行。"
               ],
               [
                 "值庭与秩序岗",
                 "在庭审中维持法庭秩序、执行行为规则并警告违规、在法官指示陪审团期间阻止人员进入。",
-                "编辑核对项：关注庭审秩序意识、沟通与冲突降级与站位配合能力。 本轮无具体雇主招聘样本。",
-                "提交一份含庭审安排、秩序维护要点与异常处置与升级说明的虚构记录。",
+                "向招聘机构核对授权、培训和现场职责。",
+                "CT-70 只交两版记录与一页交接。",
                 "值庭处置须在授权范围内执行；涉及强制措施与带离的由有权限人员决定。"
               ],
               [
                 "押送与看管岗",
                 "押解被押人员往返法院并在庭审中看管，按程序办理交接与清点。",
-                "编辑核对项：关注身份与羁押依据核对、看管与站位、以及交接规范程度。 本轮无具体雇主招聘样本。",
-                "提交一份含押送路线、看管要点与交接与异常处理说明的虚构记录。",
+                "向招聘机构核对授权、培训和现场职责。",
+                "CT-70 只交两版记录与一页交接。",
                 "押送与看管须按法域与机构规程执行；本页不提供作业指令。"
               ],
               [
                 "场所巡查与人员护送岗",
                 "巡查法院内外、护送法官与其他法院工作人员、保护陪审团不受外界接触并看管隔离陪审团的住宿。",
-                "编辑核对项：关注巡查与记录规范、风险预判与人员保护意识。 本轮无具体雇主招聘样本。",
-                "提交一份含巡查路线、护送要点与异常上报的虚构记录。",
+                "向招聘机构核对授权、培训和现场职责。",
+                "CT-70 只交两版记录与一页交接。",
                 "人员保护处置须在授权范围内执行；涉及人身安全与强制措施的交由有权限人员处理。"
               ],
               [
                 "班组与调度岗",
                 "安排排班与庭期配合、带教新人、协调安检与值庭与押送环节、处理异常与升级。",
-                "编辑核对项：关注调度与带教与异常处置与记录复核能力。 本轮无具体雇主招聘样本。",
-                "提交一份含排班与庭期配合、异常处置与复核与改进建议的虚构方案。",
+                "向招聘机构核对授权、培训和现场职责。",
+                "CT-70 只交两版记录与一页交接。",
                 "调度与处置决定须按机构规程与授权作出；本页不提供管理指令。"
               ]
             ]
           },
           "id": "bailiffs.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "title": "岗位方向与起步任务比较",
@@ -29328,7 +29127,7 @@
                 "id": "education",
                 "values": [
                   "新聘人员所需教育问卷仅展示高中或同等40%，非在岗学历构成，不能推多数岗位只需高中。Zone3/SVP6至<7描述一般一至两年在岗训练及相关经验准备，非每人固定培训；OOH典型入门高中、通常学院及在岗训练，摘要无相关经验/中期训练是典型统计，非每家统一条件。",
-                  "O*NET本轮全国目录显示704个培训项目，所见刑事司法/警务科学课程非任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。",
+                  "刑事司法与警务培训课程不构成任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。",
                   "最高法院2012-11-28颁布新闻说明条例2012-12-01施行、1997暂行条例废止、国家专项编制及当时警官警员序列、双重领导与编队管理，并取消送达法律文书职责；新闻不是条例全文。2024—2028改革纲要第41项提出落实司法警察执法勤务职级序列制度；具体招录、现行职级及强制权限需核适用规定，不与美国Bailiffs互认。"
                 ]
               },
@@ -29336,7 +29135,7 @@
                 "id": "clearance",
                 "values": [
                   "安检与值庭与押送须按所在法院规则与机构规程执行；涉及强制措施、羁押看管、武器警械使用与紧急升级的决定须由有权限的人员按法域与机构与指挥链作出。",
-                  "O*NET本轮全国目录显示704个培训项目，所见刑事司法/警务科学课程非任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。 最高法院2012-11-28颁布新闻说明条例2012-12-01施行、1997暂行条例废止、国家专项编制及当时警官警员序列、双重领导与编队管理，并取消送达法律文书职责；新闻不是条例全文。2024—2028改革纲要第41项提出落实司法警察执法勤务职级序列制度；具体招录、现行职级及强制权限需核适用规定，不与美国Bailiffs互认。",
+                  "刑事司法与警务培训课程不构成任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。 最高法院2012-11-28颁布新闻说明条例2012-12-01施行、1997暂行条例废止、国家专项编制及当时警官警员序列、双重领导与编队管理，并取消送达法律文书职责；新闻不是条例全文。2024—2028改革纲要第41项提出落实司法警察执法勤务职级序列制度；具体招录、现行职级及强制权限需核适用规定，不与美国Bailiffs互认。",
                   "非公开案件信息与证物可能涉及敏感信息，访问与保密要求由所在法院规则约束，须在入职前确认访问范围与合规义务。"
                 ]
               },
@@ -29378,42 +29177,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份法院平面与庭审安排、一份安检与违禁品登记表、一份押送与交接记录表与一份事件与升级记录模板。",
-                  "全部材料为虚构，不含真实案件信息、真实人员或证物、监控或内部资料。",
-                  "全部材料与场景为虚构，不得使用真实案件信息、真实人员或证物、监控或内部资料。"
+                  "CT-70 虚构记录。T1 庭审通知：时段 10:15，地点以值班负责人签发的最新通知为准。",
+                  "T2 旧通知写 C2，协助记录写 C4；两件记录都无新版签发凭证。题设规定遇冲突只记录和报告。",
+                  "T3 原版没有签发更正。变式只换 T3：值班负责人签发更正，确认 10:15 使用 C4。两版均未转送通知、安排人员或执行现场指令。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构法院场所写清入口安检与禁限品处置与值庭秩序与押送看管方法、时间与地点与参与人员、处置与依据与交接人与未决事项，以及需要复核与需要授权的环节。",
-                  "在 60—90 分钟内完成，允许参考公开的通用安保与法院程序资料，但不使用真实案件信息。",
-                  "记录中把时间与地点与参与人员、物品或违禁品、处置与依据、交接人与未决事项分开书写，并标注需复核的部分。"
+                  "核对地点、时段和签发人。",
+                  "两版各写待核或可提交复核的状态。",
+                  "交一页交接，注明 T1–T3 及接手角色。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先核对场所与庭审安排与职责范围，再按规程安检与值庭与押送，最后写明结论与未决事项。",
-                  "把时间与地点与参与人员、物品或违禁品、处置与依据、交接人分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核安检与押送与处置结论，并保留修改理由。"
+                  "先独立交两版。",
+                  "把记录确认、转送和现场处置分开。",
+                  "交卷后打开「CT-70 参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成安检、押送或强制措施指令，也不能替代机构规程与任用与权限授权。",
-                  "不得在练习中接触真实案件信息或操作真实安检与约束与案件系统；涉及强制措施与武器警械与非公开信息的作业须由有权限人员按规程处理。",
-                  "练习不替代机构规程与任用与权限授权，也不构成任何安检、押送或强制措施指令。"
+                  "纸面虚构材料，不涉及真实人员或案件。",
+                  "不进入限制区域或使用警务设备。",
+                  "不演练执法、搜索或拘束。"
                 ]
               }
             ]
           },
           "id": "bailiffs.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "ct70-editor"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "CT-70：庭审交接记录核对",
           "type": "cards"
         },
         {
@@ -29424,37 +29223,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：学历、培训学院与在岗训练、刑事司法／警务科学相关课程、行业认证（如法庭安全认证）、机构任用与背景审查与年龄要求、以及法定权限与指挥链授权。",
-                  "每项都注明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「培训」「行业认证」「机构任用」「法定权限与强制措施授权」分列，避免混为一谈。"
+                  "列地点冲突。",
+                  "引 T1–T3。",
+                  "标两版变化。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的作业说明，重点检查安检操作与违禁品登记、值庭秩序维护、押送与看管与交接、事件与升级记录是否逐项写清。",
-                  "把复核意见与修改理由一并保留，作为判断你能否接受复核的证据。"
+                  "写一页交接。",
+                  "标接手角色。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明场所与庭审安排、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给同伴与主管复核，并保留复核意见与修改理由。"
+                  "区分已核与待核。",
+                  "写明签发状态。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用法院日程或案件管理或记录工具，须注明工具名称与版本、输入与依据与人工修改理由。",
-                  "非公开案件信息与证物处理须先取得授权，并记录访问范围、保留期限与销毁约定。"
+                  "交卷后对参考。",
+                  "只用虚构纸面材料。"
                 ]
               }
             ]
           },
           "id": "bailiffs.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "ct70-editor"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29504,7 +29303,6 @@
           },
           "id": "bailiffs.path.interview-probation.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "title": "面试与试用期考察",
@@ -29518,57 +29316,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与边界阅读：读 O*NET 33-3011.00 与最高人民法院《人民法院司法警察条例》公开资料，写清安检与值庭、押送与看管、任用与法定权限的区别。",
-                  "产出：一页术语与流程对照表，标注每项的来源。"
+                  "读 T1–T3。",
+                  "证据索引"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "入口安检练习：为虚构法院入口写清设备使用与可疑物品复核与违禁品登记与移交要点。",
-                  "产出：一份安检与违禁品登记记录。"
+                  "列有效通知条件。",
+                  "条件表"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "值庭与秩序练习：为虚构庭审写清秩序维护与行为规则告知与在法官指示陪审团期间阻止人员进入的要点。",
-                  "产出：一份值庭与秩序说明。"
+                  "核 T2 两处地点。",
+                  "冲突记录"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "押送与看管练习：为虚构押送任务写清路线与看管与站位与交接与清点方法。",
-                  "产出：一份押送与交接记录。"
+                  "比较两版 T3。",
+                  "签发记录"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "事件与升级练习：为虚构冲突写清现场处置与即时求援与按指挥链升级与记录方法。",
-                  "产出：一份事件与升级记录。"
+                  "写状态和接手。",
+                  "交接草稿"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的安检与处置与升级结论，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "先交两版判断和一页交接。",
+                  "两版与交接"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "打开「CT-70 参考解（交卷后再打开）」。",
+                  "复核差异"
                 ]
               }
             ]
           },
           "id": "bailiffs.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "ct70-editor"
           ],
           "title": "七日体验产出",
           "type": "timeline"
@@ -29578,18 +29376,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你完成了七日练习并发现自己在安检与值庭与押送与记录上可持续投入。",
-              "继续：你能在重复程序中保持准确与警觉，并愿意按规程记录与接受复核。",
-              "暂停：你只想凭直觉处置，不愿按规程核对与记录。",
-              "暂停：你把「看起来没问题」当作已完成安检或已受控，或在强制措施与羁押看管与非公开信息处理上跳过权限与指挥链。",
-              "换方向：你更愿意做场所安保，可比较安全警卫方向。",
-              "换方向：你更愿意做案件调查与证据分析，可比较侦探与刑事调查员方向。",
-              "信息不足：如果你还没有任何有监督的安保或处置经历，先补这两项再判断。"
+              "继续：能分开记录和行动。",
+              "继续：能说明何处需要签发。",
+              "暂停：如果容易把口头线索当指令。",
+              "暂停：如果写不清谁接手。",
+              "比较法院书记员。",
+              "比较一般场所安全协助。",
+              "真实岗位另核。"
             ]
           },
           "id": "bailiffs.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "ct70-editor"
           ],
           "title": "七日后的判断",
           "type": "list"
@@ -29640,7 +29438,7 @@
                 "希望提升录用机会的人",
                 "编辑比较项：课程内容与目标工作任务匹配，未核统一起薪加分。",
                 "是否门槛及录用价值按实际招聘核，不由目录推出。",
-                "O*NET本轮全国目录显示704个培训项目，所见刑事司法/警务科学课程非任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。",
+                "刑事司法与警务培训课程不构成任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。",
                 "按课程周期完成。",
                 "课程与学位不等于任用或法定权限。"
               ],
@@ -29649,7 +29447,7 @@
                 "希望证明专项能力的人",
                 "目录中的专项认证，雇主认可与晋升作用未取得实测。",
                 "本轮未取得所有岗位共同认证门槛或晋升作用。",
-                "O*NET本轮全国目录显示704个培训项目，所见刑事司法/警务科学课程非任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。",
+                "刑事司法与警务培训课程不构成任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。",
                 "具体认证费用、申请、有效期及维护须核发证机构，本轮未完整取得。",
                 "目录不等于机构任用或法定权限，也不证明所有雇主认可或不认可。"
               ],
@@ -29691,7 +29489,7 @@
           "data": {
             "paragraphs": [
               "资格边界：学历、培训学院与在岗训练、行业认证（如 National Sheriffs' Association 的五项法庭安全认证）、机构任用、以及法定权限与指挥链授权是不同状态，任何一项都不能由另一项自动推出；安检与值庭与押送与强制措施受所在法域与法院与机构规程约束。",
-              "新聘人员所需教育问卷仅展示高中或同等40%，非在岗学历构成，不能推多数岗位只需高中。Zone3/SVP6至<7描述一般一至两年在岗训练及相关经验准备，非每人固定培训；OOH典型入门高中、通常学院及在岗训练，摘要无相关经验/中期训练是典型统计，非每家统一条件。 O*NET本轮全国目录显示704个培训项目，所见刑事司法/警务科学课程非任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。",
+              "新聘人员所需教育问卷仅展示高中或同等40%，非在岗学历构成，不能推多数岗位只需高中。Zone3/SVP6至<7描述一般一至两年在岗训练及相关经验准备，非每人固定培训；OOH典型入门高中、通常学院及在岗训练，摘要无相关经验/中期训练是典型统计，非每家统一条件。 刑事司法与警务培训课程不构成任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。",
               "最高法院2012-11-28颁布新闻说明条例2012-12-01施行、1997暂行条例废止、国家专项编制及当时警官警员序列、双重领导与编队管理，并取消送达法律文书职责；新闻不是条例全文。2024—2028改革纲要第41项提出落实司法警察执法勤务职级序列制度；具体招录、现行职级及强制权限需核适用规定，不与美国Bailiffs互认。",
               "操作建议：入职前把「学历／培训学院与在岗训练／相关课程／行业认证／机构任用与背景审查／法定权限与指挥链授权」分列成一张表，逐项写明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。"
             ]
@@ -29713,18 +29511,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮未引用具体雇主招聘，以下为编辑准备核对项；O*NET报告职位名称非开放岗位或统一录用标准。",
-              "核对清单：岗位属于联邦、州还是县法院系统；招录与任用与背景审查与年龄要求；职责与法定权限与强制措施范围；武器警械与羁押看管授权；培训学院与在岗训练安排；以及值班与值守与计酬口径。"
+              "最高人民法院第二巡回法庭 2026-06-25 公告招 1 名聘用制司法警务辅助人员，另招 4 名书记员。辅助人员在司法警察带领下维护秩序、协助安检和应急；该岗要求法律或警务相关专业专科以上，公告未列具体金额。",
+              "宁夏法院系统 2026-09-15 公告计划招 67 名聘用制司法警务辅助人员，由司法警察指挥，不占编制。公告所列约 3,000–4,000 元/月，含个人应缴社保和住房公积金，另按规定发放取暖费及符合条件的考核奖金。"
             ]
           },
           "id": "bailiffs.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "spc-second-circuit-2026",
+            "ningxia-court-2026",
             "onet"
           ],
-          "title": "招聘信息核对",
+          "title": "法院历史招聘样本",
           "type": "notice"
         },
         {
@@ -29760,9 +29557,6 @@
           },
           "id": "bailiffs.path.career-path-block.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -29777,7 +29571,6 @@
           },
           "id": "bailiffs.path.career-path-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29792,7 +29585,6 @@
           },
           "id": "bailiffs.path.career-path-block.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29821,7 +29613,6 @@
           },
           "id": "bailiffs.path.career-path-block.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29850,7 +29641,6 @@
           },
           "id": "bailiffs.path.career-path-block.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29879,7 +29669,6 @@
           },
           "id": "bailiffs.path.career-path-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29922,7 +29711,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET本轮全国目录显示704个培训项目，所见刑事司法/警务科学课程非任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。 学历、训练、认证、任用及权限分别核。"
+              "刑事司法与警务培训课程不构成任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。 学历、训练、认证、任用及权限分别核。"
             ]
           },
           "id": "bailiffs.path.career-path-block.21",
@@ -29965,7 +29754,6 @@
           },
           "id": "bailiffs.path.career-path-block.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30036,7 +29824,6 @@
           },
           "id": "bailiffs.path.career-path-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30065,7 +29852,6 @@
           },
           "id": "bailiffs.path.career-path-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30080,7 +29866,6 @@
           },
           "id": "bailiffs.path.career-path-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30109,7 +29894,6 @@
           },
           "id": "bailiffs.path.career-path-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30138,7 +29922,6 @@
           },
           "id": "bailiffs.path.career-path-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30153,7 +29936,6 @@
           },
           "id": "bailiffs.path.career-path-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30182,7 +29964,6 @@
           },
           "id": "bailiffs.path.career-path-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30211,7 +29992,6 @@
           },
           "id": "bailiffs.path.career-path-block.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30226,7 +30006,6 @@
           },
           "id": "bailiffs.path.career-path-block.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30255,7 +30034,6 @@
           },
           "id": "bailiffs.path.career-path-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30284,7 +30062,6 @@
           },
           "id": "bailiffs.path.career-path-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30299,7 +30076,6 @@
           },
           "id": "bailiffs.path.career-path-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30328,7 +30104,6 @@
           },
           "id": "bailiffs.path.career-path-block.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30357,7 +30132,6 @@
           },
           "id": "bailiffs.path.career-path-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30372,7 +30146,6 @@
           },
           "id": "bailiffs.path.career-path-block.51",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30401,7 +30174,6 @@
           },
           "id": "bailiffs.path.career-path-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30430,7 +30202,6 @@
           },
           "id": "bailiffs.path.career-path-block.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30445,7 +30216,6 @@
           },
           "id": "bailiffs.path.career-path-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30474,7 +30244,6 @@
           },
           "id": "bailiffs.path.career-path-block.58",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30503,7 +30272,6 @@
           },
           "id": "bailiffs.path.career-path-block.60",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30518,7 +30286,6 @@
           },
           "id": "bailiffs.path.career-path-block.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30547,7 +30314,6 @@
           },
           "id": "bailiffs.path.career-path-block.63",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30576,7 +30342,6 @@
           },
           "id": "bailiffs.path.career-path-block.65",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30591,7 +30356,6 @@
           },
           "id": "bailiffs.path.career-path-block.66",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30620,7 +30384,6 @@
           },
           "id": "bailiffs.path.career-path-block.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30649,7 +30412,6 @@
           },
           "id": "bailiffs.path.career-path-block.70",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30664,7 +30426,6 @@
           },
           "id": "bailiffs.path.career-path-block.71",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30693,7 +30454,6 @@
           },
           "id": "bailiffs.path.career-path-block.73",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30722,7 +30482,6 @@
           },
           "id": "bailiffs.path.career-path-block.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30737,7 +30496,6 @@
           },
           "id": "bailiffs.path.career-path-block.76",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30766,7 +30524,6 @@
           },
           "id": "bailiffs.path.career-path-block.78",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30795,7 +30552,6 @@
           },
           "id": "bailiffs.path.career-path-block.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30810,7 +30566,6 @@
           },
           "id": "bailiffs.path.career-path-block.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30839,7 +30594,6 @@
           },
           "id": "bailiffs.path.career-path-block.83",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30868,7 +30622,6 @@
           },
           "id": "bailiffs.path.career-path-block.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30883,7 +30636,6 @@
           },
           "id": "bailiffs.path.career-path-block.86",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30928,16 +30680,16 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET本职业2025—2035趋势",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/33-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 33-3011.00 行业分布",
+                "entity": "BLS 表 1.2：就业与预测",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/33-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "国家统计局2025行业年平均工资",
@@ -30946,10 +30698,10 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "O*NET 33-3011.00 全国工资分位",
+                "entity": "O*NET 33-3011.00 工资分位（州页内美国行）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/33-3011.00"
+                "url": "https://www.onetonline.org/link/localwages/33-3011.00?st=WV"
               },
               {
                 "entity": "警察与治安巡逻官",
@@ -31003,9 +30755,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -31015,12 +30764,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国33-3011本职业：2025就业18,000人，2035预测17,700人，2025—2035增长取整-2%，年均空缺1,600个。空缺含替补需求，非十年净增、个人录用概率或生成式AI因果。"
+              "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。"
             ]
           },
           "id": "bailiffs.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "health"
           ],
           "type": "prose"
@@ -31049,7 +30798,7 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "health"
           ],
           "type": "prose"
@@ -31059,12 +30808,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国33-3011本职业：2025就业18,000人，2035预测17,700人，2025—2035增长取整-2%，年均空缺1,600个。空缺含替补需求，非十年净增、个人录用概率或生成式AI因果。"
+              "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。"
             ]
           },
           "id": "bailiffs.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "health"
           ],
           "type": "prose"
@@ -31102,11 +30851,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "美国法庭执勤人员 33-3011"
             ]
           },
           "id": "bailiffs.market-signals.market-signal-card.14",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -31116,12 +30866,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "18,000人（2025）"
+              "18,000 个岗位"
             ]
           },
           "id": "bailiffs.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "health"
           ],
           "type": "prose"
@@ -31150,7 +30900,7 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "health"
           ],
           "type": "prose"
@@ -31160,12 +30910,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国33-3011本职业：2025就业18,000人，2035预测17,700人，2025—2035增长取整-2%，年均空缺1,600个。空缺含替补需求，非十年净增、个人录用概率或生成式AI因果。 OOH解释需求为庭审安保及州地方预算约束，非AI因果。"
+              "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。"
             ]
           },
           "id": "bailiffs.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "health"
           ],
           "type": "prose"
@@ -31175,12 +30925,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "取整-2%描述群体预测，非个人录用概率或中国增速，不由取整数算未经公布精确小数。"
+              "年均空缺含替补，不等于十年净变化。"
             ]
           },
           "id": "bailiffs.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "health"
           ],
           "type": "prose"
@@ -31204,11 +30954,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "美国法庭执勤人员 33-3011"
             ]
           },
           "id": "bailiffs.market-signals.market-signal-card.21",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -31218,12 +30969,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "-2%；年均空缺1,600个（2025—2035）"
+              "−1.9%，年均约 1,600 个空缺"
             ]
           },
           "id": "bailiffs.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "health"
           ],
           "type": "prose"
@@ -31344,7 +31095,7 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "health"
           ],
           "type": "prose"
@@ -31402,7 +31153,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31417,7 +31167,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31446,7 +31195,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31461,7 +31209,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31490,7 +31237,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31505,7 +31251,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31534,7 +31279,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31549,7 +31293,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31578,7 +31321,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31593,7 +31335,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31622,7 +31363,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31665,7 +31405,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31680,7 +31419,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31709,7 +31447,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31724,7 +31461,6 @@
           },
           "id": "bailiffs.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31770,10 +31506,13 @@
                 "question_key": "career.faq.bailiffs.2"
               },
               {
-                "answer": "看可复核的产出：能否按规程完成安检与值庭与押送并如实记录、能否按现场观察与法规判断风险与权限边界、能否在权限或依据不明时停下来按指挥链升级。兴趣代码 RCE 与工作风格只说明方向接近，不能替代这些实作证据。",
+                "answer": "到 09 做 CT-70，写清冲突、待核证据与接手角色。",
                 "id": "bailiffs.faq.3",
                 "question": "怎样判断自己适不适合做法警？",
-                "question_key": "career.faq.bailiffs.3"
+                "question_key": "career.faq.bailiffs.3",
+                "source_refs": [
+                  "ct70-editor"
+                ]
               },
               {
                 "answer": "AI 与自动化可以改变排班与庭期信息检索、记录初稿与异常分类、以及法院日程与案件系统的信息整理；但安检判定、押送动态风险、法庭冲突处置、强制措施与紧急升级仍由受训人员在权限内负责。任务自动化程度不等于岗位数量变化。",
@@ -31788,10 +31527,14 @@
                 "question_key": "career.faq.bailiffs.5"
               },
               {
-                "answer": "分六类核对：学历；培训学院与在岗训练；刑事司法／警务科学相关课程；行业认证（如法庭安全认证）；机构任用与背景审查与年龄要求；以及法定权限与指挥链授权。美国侧典型入门为高中文凭或同等学历、无相关工作经验要求、中期在岗训练（BLS OOH）；中国大陆侧人民法院司法警察使用国家专项编制并实行警官警员职务序列。任何一项都不能由另一项自动推出。",
+                "answer": "BLS 表 1.2 对 33-3011 的典型分类是高中或同等学历、通常无需相关工作经验、中等期限在岗培训。入行条件、训练与执勤权限按司法辖区和招聘机构核。",
                 "id": "bailiffs.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.bailiffs.6"
+                "question_key": "career.faq.bailiffs.6",
+                "source_refs": [
+                  "ep-table",
+                  "spc-second-circuit-2026"
+                ]
               },
               {
                 "answer": "工作情境显示 80% 持续与他人接触、70% 每天面对面讨论、37% 每天与不好打交道或不礼貌的人打交道、42% 每周一次以上与有暴力或肢体攻击行为的人打交道、25% 每天处于冲突情境、32% 认为错误的后果极其严重；工作主要在法院室内进行，需要体力与专注以及情绪自控。",
@@ -31806,27 +31549,37 @@
                 "question_key": "career.faq.bailiffs.8"
               },
               {
-                "answer": "O*NET 展示的 BLS 数据按本职业 33-3011.00 口径给出 2024 年在岗约 19,000 人、2024—2034 年变化为「下降（-1% 或更低）」、预测期职位空缺约 1,800；BLS 就业预测另给出 2025—2035 年约 -1.9%；转向可比较警察与治安巡逻官、海关与边境保护官员、侦探与刑事调查员、安全警卫、公交与铁路警察与一线主管警察侦探等，但都需要补充相应训练与任用资格。",
+                "answer": "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。",
                 "id": "bailiffs.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.bailiffs.9"
+                "question_key": "career.faq.bailiffs.9",
+                "source_refs": [
+                  "ep-table"
+                ]
               },
               {
-                "answer": "美国工资分位是本职业 33-3011.00 的 2025 年 OEWS 口径；中国大陆未取得与中国人民法院司法警察可比且同口径的公开职业条目与全国工资分布，本页不发布中国大陆职业工资数值，也不以城镇单位或行业平均工资替代。两边的职业序列、任用与权限体系、统计制度与资料期都不同，不能把美元换算成人民币，也不应相信缺少样本与岗位范围的报价。",
+                "answer": "美国工资为 33-3011 的全国雇员工资。宁夏公告仅列该招聘的聘用制辅助岗薪资，不能用汇率换算成同一口径。",
                 "id": "bailiffs.faq.10",
                 "question": "美国工资与中国大陆工资为什么不能互相换算？",
-                "question_key": "career.faq.bailiffs.10"
+                "question_key": "career.faq.bailiffs.10",
+                "source_refs": [
+                  "health",
+                  "ningxia-court-2026"
+                ]
+              },
+              {
+                "answer": "原版 C2、C4 冲突，10:15 不变，地点仍待值班负责人核对。变式只换 T3，签发更正确认 C4，可以把记录交负责人复核；两版均未转送或执行。自核：地点、时段、签发与接手分开。",
+                "id": "bailiffs.faq.11",
+                "question": "CT-70 参考解（交卷后再打开）",
+                "question_key": "career.faq.bailiffs.q11",
+                "source_refs": [
+                  "ct70-editor"
+                ]
               }
             ]
           },
           "id": "bailiffs.sources.faq.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "faq"
@@ -31836,15 +31589,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试编辑核对：O*NET本职业任务情境、工资、软件、目录、行业趋势；OOH法警单列与合并分开，最高法院新闻/改革纲要和NBS行业工资分清类型及法域。"
+              "费马测试编辑部"
             ]
           },
           "id": "bailiffs.sources.source-card.1",
           "source_refs": [
+            "ep-table",
+            "spc-second-circuit-2026",
+            "ningxia-court-2026",
+            "ct70-editor",
             "bls",
             "oews",
             "hr",
-            "onet-trends",
             "r2-pay-2",
             "nist",
             "census",
@@ -31860,15 +31616,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要资料：O*NET33-3011详情、工资、2025—2035趋势、2025行业与招聘软件、培训704及认证5；OOH含州及地方政府法警工资；最高法院2012颁布新闻与2024—2028改革纲要；NBS2025行业工资。"
+              "美国就业、工资和行业按各自原表。两份中国大陆法院历史公告单列。"
             ]
           },
           "id": "bailiffs.sources.source-card.2",
           "source_refs": [
+            "ep-table",
+            "spc-second-circuit-2026",
+            "ningxia-court-2026",
+            "ct70-editor",
             "bls",
             "oews",
             "hr",
-            "onet-trends",
             "r2-pay-2",
             "nist",
             "census",
@@ -31884,15 +31643,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "工资2025 OEWS、软件2025美国招聘、行业2025、就业2025及2025—2035；中国行业2025，2012颁布新闻与2024—2028改革纲要。本轮读原文2026-10-09，未完整读旧入口不刷新成全文已核。"
+              "预测基期 2025；两份招聘均为 2026 年。"
             ]
           },
           "id": "bailiffs.sources.source-card.3",
           "source_refs": [
+            "ep-table",
+            "spc-second-circuit-2026",
+            "ningxia-court-2026",
+            "ct70-editor",
             "bls",
             "oews",
             "hr",
-            "onet-trends",
             "r2-pay-2",
             "nist",
             "census",
@@ -31908,15 +31670,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "边界：美国Bailiffs与中国司法警察不自动互认；中国行业均值非职业工资；新闻非条例全文，改革纲要非现场许可，1997暂行条例已废止；旧ILSD2024修订稿非当前通用保密规则，当前入口2025-09-22生效，本轮全文未取得。AI候选非已测提效、所有可回滚或永久不能替代。"
+              "执勤与招录条件按司法辖区和招聘机构核对。CT-70 只作虚构纸面练习。"
             ]
           },
           "id": "bailiffs.sources.source-card.4",
           "source_refs": [
+            "ep-table",
+            "spc-second-circuit-2026",
+            "ningxia-court-2026",
+            "ct70-editor",
             "bls",
             "oews",
             "hr",
-            "onet-trends",
             "r2-pay-2",
             "nist",
             "census",
@@ -31950,7 +31715,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -31962,13 +31727,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看法警职业页面",
@@ -32032,34 +31797,34 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official outlook",
-                  "2024—2034 年；访问 2026-09-15"
+                  "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。",
+                  "2025—2035 年；访问 2026-09-15"
                 ],
                 "evidence_type": "official outlook",
                 "id": "ep",
-                "limitation": "为本职业口径的就业与预测；不能外推更宽职业群。",
+                "limitation": "美国细项，不能外推中国大陆。",
                 "market": "美国",
-                "name": "O*NET 33-3011.00 职业摘要（就业与预测字段）",
-                "period": "2024—2034 年；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：法庭执勤人员 33-3011",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/33-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official wage percentiles",
+                  "2025 年工资采用西弗吉尼亚州页的 United States 行；州值另列。",
                   "May 2025（OEWS）；访问 2026-09-15"
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "oews",
                 "limitation": "OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等；排自雇、非公司制企业所有者和合伙人和无酬家庭劳动者，受雇承包企业员工不等于自雇。 本职业分位非起薪。",
                 "market": "美国",
-                "name": "O*NET 展示的 BLS 2025 年工资分位（33-3011.00）",
+                "name": "O*NET 33-3011.00 工资分位（州页内美国行）",
                 "period": "May 2025（OEWS）；访问 2026-09-15",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/33-3011.00"
+                "url": "https://www.onetonline.org/link/localwages/33-3011.00?st=WV"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32090,7 +31855,7 @@
                 "name": "最高人民法院《人民法院司法警察条例》颁布新闻（非全文）",
                 "period": "2012-12-01 施行；访问 2026-09-15",
                 "publisher": "中华人民共和国最高人民法院",
-                "scope": "jurisdiction_identity_boundary",
+                "scope": "contextual",
                 "url": "https://www.court.gov.cn/zixun/xiangqing/4687.html"
               },
               {
@@ -32128,18 +31893,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official outlook",
-                  "2024—2034 年；访问 2026-09-15"
+                  "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。",
+                  "2025—2035 年；访问 2026-09-15"
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
-                "limitation": "为本职业口径的就业与预测，不是个人录用概率。",
+                "limitation": "美国细项，不能外推中国大陆。",
                 "market": "美国",
-                "name": "O*NET 33-3011.00 职业摘要（就业与预测字段）",
-                "period": "2024—2034 年；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：法庭执勤人员 33-3011",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/33-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32165,12 +31930,12 @@
                 ],
                 "evidence_type": "official occupation outlook",
                 "id": "health",
-                "limitation": "OOH同章含法警单列工资、行业、就业和预测，也含惩教合并；州政府74630地方48580是法警单列，年龄18—21及联邦监狱学历、最高伤害率等惩教主张不外推法警。",
+                "limitation": "手册工资表将法庭执勤人员与惩教人员分列。",
                 "market": "美国",
-                "name": "BLS 职业展望手册《Correctional Officers and Bailiffs》",
-                "period": "2025 年 5 月工资与 2025—2035 年预测；访问 2026-09-15",
+                "name": "BLS OOH：法庭执勤人员 33-3011 工资表",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "mixed_exact_and_combined",
+                "scope": "exact",
                 "url": "https://www.bls.gov/ooh/protective-service/correctional-officers.htm"
               },
               {
@@ -32181,12 +31946,12 @@
                 ],
                 "evidence_type": "institutional task research",
                 "id": "ilo",
-                "limitation": "提供任务暴露与岗位转型的全球研究口径，不给该职业采用率或替代日期。",
+                "limitation": "全球职业暴露背景；不提供本职业采用率或就业因果。",
                 "market": "全球",
                 "name": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
                 "period": "2025 年；访问 2026-09-15",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -32208,18 +31973,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "training information",
-                  "本轮目录704项目；访问2026-10-09"
+                  "33-3011 的典型培训分类。",
+                  "33-3011 的典型培训分类。"
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "O*NET本轮全国目录显示704个培训项目，所见刑事司法/警务科学课程非任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。",
+                "limitation": "细项典型训练为中等期限在岗培训；实际任用与培训看招聘机关。",
                 "market": "美国",
-                "name": "O*NET 33-3011.00 培训与教育信息",
-                "period": "2026 年更新页面；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtraining/33-3011.00"
+                "name": "BLS 表 1.2：典型入行训练",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32288,33 +32053,33 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official wage percentiles",
+                  "2025 年工资采用西弗吉尼亚州页的 United States 行；州值另列。",
                   "May 2025（OEWS）；访问 2026-09-15"
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "r2-pay-1",
                 "limitation": "OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等；排自雇、非公司制企业所有者和合伙人和无酬家庭劳动者，受雇承包企业员工不等于自雇。 本职业分位非起薪。",
                 "market": "美国",
-                "name": "O*NET 33-3011.00 全国工资分位（时薪与年薪分位）",
+                "name": "O*NET 33-3011.00 工资分位（州页内美国行）",
                 "period": "May 2025（OEWS）；访问 2026-09-15",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/33-3011.00"
+                "url": "https://www.onetonline.org/link/localwages/33-3011.00?st=WV"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "industry distribution",
+                  "O*NET 33-3011.00 行业子表列政府 99%、其他 1%；子表未注明统计年份。",
                   "2025行业分布；访问2026-10-09"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "2025美国本职业行业分布：政府99%、其他1%；OOH另列雇主地方政府64%、州政府35%（均除教育和医院），不是中国分布或行业工资。",
+                "limitation": "O*NET 33-3011.00 行业子表列政府 99%、其他 1%；子表未注明统计年份。",
                 "market": "美国",
                 "name": "O*NET 33-3011.00 行业分布",
-                "period": "2025行业分布",
+                "period": "子表未单列统计年份",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/33-3011.00"
               },
               {
@@ -32341,7 +32106,7 @@
                 ],
                 "evidence_type": "certification information",
                 "id": "census",
-                "limitation": "O*NET本轮全国目录显示704个培训项目，所见刑事司法/警务科学课程非任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。",
+                "limitation": "刑事司法与警务培训课程不构成任用证明；5项认证由National Sheriffs’ Association列示（Basic/Advanced/Master Court Security、Court Security Executive、Court and Judicial Security Manager），目录非所有认证有效期、认可或招聘加分证据。",
                 "market": "美国",
                 "name": "O*NET 33-3011.00 认证发现（行业认证）",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32357,29 +32122,29 @@
                 ],
                 "evidence_type": "official wage release",
                 "id": "msresearch",
-                "limitation": "用于核对 OEWS 将 Bailiffs 作为独立职业列示（美国全国职业雇员工资口径）；不覆盖中国岗位或个人报价。",
+                "limitation": "工资调查发布入口，按职业原表核对。",
                 "market": "美国",
                 "name": "BLS《Occupational Employment and Wage Statistics》发布与说明",
                 "period": "2025 年 OEWS 发布；访问 2026-09-15",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/news.release/ocwage.htm"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official wage percentiles",
+                  "2025 年工资采用西弗吉尼亚州页的 United States 行；州值另列。",
                   "May 2025（OEWS）；访问 2026-09-15"
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "onet-wages",
                 "limitation": "OEWS计入基本工资、佣金、生产奖金和小费，排除加班溢价、轮班差额及非生产奖金等；排自雇、未注册所有者合伙人和无酬家庭劳动者，受雇承包企业员工不等于自雇。 本职业分位非起薪。",
                 "market": "美国",
-                "name": "O*NET 全国工资分位页面（33-3011.00）",
+                "name": "O*NET 33-3011.00 工资分位（州页内美国行）",
                 "period": "May 2025（OEWS）；访问 2026-09-15",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/33-3011.00"
+                "url": "https://www.onetonline.org/link/localwages/33-3011.00?st=WV"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32389,18 +32154,18 @@
                 ],
                 "evidence_type": "official court local rules",
                 "id": "archivists",
-                "limitation": "URL为2024修订标记稿，非各法院通用保密法或当前完整规则。本轮当前规则入口显示2025-09-22生效，但PDF读取超时/404未取得条款；不用于证明自动生成工具许可或全部非公开资料强制操作。",
+                "limitation": "美国伊利诺伊州南区联邦法院历史规则材料，不能外推为全美通用要求。",
                 "market": "美国",
                 "name": "美国伊利诺伊州南区联邦地区法院《Local Rules》（2024 修订版）",
                 "period": "2024 修订版；访问 2026-09-15",
                 "publisher": "U.S. District Court for the Southern District of Illinois",
-                "scope": "historical_local_rules",
+                "scope": "contextual",
                 "url": "https://www.ilsd.uscourts.gov/sites/ilsd/files/LocalRules2024-redlined.pdf"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
+                  "查看原页适用范围。",
                   "不冒称完整职业或个案验证"
                 ],
                 "evidence_type": "官方原文相关章节",
@@ -32427,23 +32192,7 @@
                 "period": "1990年工资总额组成规定；现网页访问2026-10-09",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
-              },
-              {
-                "accessed_at": "2026-10-09",
-                "details": [
-                  "official outlook",
-                  "2025及2025—2035；访问2026-10-09"
-                ],
-                "evidence_type": "official outlook",
-                "id": "onet-trends",
-                "limitation": "美国33-3011本职业：2025就业18,000人，2035预测17,700人，2025—2035增长取整-2%，年均空缺1,600个。空缺含替补需求，非十年净增、个人录用概率或生成式AI因果。",
-                "market": "美国",
-                "name": "O*NET本职业就业趋势",
-                "period": "2025及2025—2035",
-                "publisher": "O*NET / BLS",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/33-3011.00"
+                "url": "https://www.stats.gov.cn/gk/tjfg/xzfg/202302/t20230206_1901829.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32458,7 +32207,7 @@
                 "name": "最高法院第六个五年改革纲要41/44/45",
                 "period": "2024—2028；2024-12-26公布",
                 "publisher": "最高人民法院",
-                "scope": "jurisdiction_identity_boundary",
+                "scope": "contextual",
                 "url": "https://www.court.gov.cn/zixun/xiangqing/451191.html"
               },
               {
@@ -32584,11 +32333,71 @@
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "name": "FermatMind AI 任务影响估算估算方法 v1",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "最高人民法院第二巡回法庭 2026-06-25 公告招 1 名聘用制司法警务辅助人员，另招 4 名书记员。辅助人员在司法警察带领下维护秩序、协助安检和应急；该岗要求法律或警务相关专业专科以上，公告未列具体金额。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "spc-second-circuit-2026",
+                "limitation": "最高人民法院第二巡回法庭 2026-06-25 公告招 1 名聘用制司法警务辅助人员，另招 4 名书记员。辅助人员在司法警察带领下维护秩序、协助安检和应急；该岗要求法律或警务相关专业专科以上，公告未列具体金额。",
+                "market": "中国大陆",
+                "name": "最高人民法院第二巡回法庭：2026 年历史招聘",
+                "period": "2026-06-25",
+                "publisher": "最高人民法院",
+                "scope": "recruitment_proxy",
+                "url": "https://www.court.gov.cn/zixun/xiangqing/503671.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "宁夏法院系统 2026-09-15 公告计划招 67 名聘用制司法警务辅助人员，由司法警察指挥，不占编制。公告所列约 3,000–4,000 元/月，含个人应缴社保和住房公积金，另按规定发放取暖费及符合条件的考核奖金。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ningxia-court-2026",
+                "limitation": "宁夏法院系统 2026-09-15 公告计划招 67 名聘用制司法警务辅助人员，由司法警察指挥，不占编制。公告所列约 3,000–4,000 元/月，含个人应缴社保和住房公积金，另按规定发放取暖费及符合条件的考核奖金。",
+                "market": "中国大陆",
+                "name": "宁夏法院系统：2026 年聘用制司法辅助招聘",
+                "period": "2026-09-15",
+                "publisher": "宁夏法院网",
+                "scope": "recruitment_proxy",
+                "url": "https://www.nxfy.gov.cn/xwzx/2018fyzx/202609/t20260915_5100849.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "本页虚构纸面交接。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "ct70-editor",
+                "limitation": "本页虚构纸面交接。",
+                "market": "虚构练习",
+                "name": "FermatMind CT-70：庭审交接记录核对",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国 BLS 表 1.2 的 33-3011：2025 年 18,000 个岗位，2035 年预计 17,700 个，预计下降 1.9%，净减少约 300，预计年均空缺 1,600 个。2025 年 5 月年薪中位数 56,600 美元。BLS 手册的章节还包括惩教人员，合并组数据另计。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ep-table",
+                "limitation": "美国细项，不能外推中国大陆。",
+                "market": "美国",
+                "name": "BLS 表 1.2：法庭执勤人员 33-3011",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -35929,7 +35738,7 @@
       },
       "hero": {
         "h1": "法警",
-        "quick_answer": "法警在法院内维持秩序与安全：在入口用金属探测门与 X 光机等设备对进入法院的人员进行安检并扣留未经许可的枪械与其他违禁品、押解被押人员往返法院并在庭审中看管、在庭审中维持法庭秩序并保护陪审团不受外界接触、巡查法院内外并护送法官与其他法院工作人员、按程序看管证物与展品、在需要时向治安官办公室报告警务或医疗协助需求；其工作不等于案件侦查或监所管理，也不代替法官的庭审指挥权与法定强制措施的授权，并在权限或依据不明时按指挥链停止并升级。",
+        "quick_answer": "美国 Bailiffs 在法院维持庭审秩序、协助保障安全，并按机构授权交接人员或物品。司法警察、聘用制司法警务辅助人员和书记员在中国大陆职责不同；公开招聘可作相邻岗位参考。",
         "title": "法警"
       },
       "market_signal_card": {
@@ -36012,7 +35821,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls",
             "value": {
               "$item": "bailiffs.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36057,7 +35866,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "bailiffs.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -37281,7 +37090,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合法警",
+        "label": "用 RIASEC 探索职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37403,7 +37212,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
-      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
+      "interface.quick_decision.experiment_heading": "怎样用纸面交接判断是否适合？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37496,7 +37305,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 任务影响估算",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37586,85 +37395,85 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "19,000人",
+        "derivation": "发布值。",
+        "display_value": "18,000 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
-        "occupation_scope": "法警",
-        "period": "2024 年；访问 2026-09-15",
+        "measure": "就业岗位",
+        "occupation_scope": "美国法庭执勤人员 33-3011",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "下降（-1% 或更低）",
+        "derivation": "发布值。",
+        "display_value": "−1.9%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
-        "occupation_scope": "法警",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "预计增长",
+        "occupation_scope": "美国法庭执勤人员 33-3011",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 1,800",
+        "derivation": "发布值。",
+        "display_value": "约 1,600 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "预测期职位空缺（本职业口径）",
-        "occupation_scope": "法警",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "预计年均空缺",
+        "occupation_scope": "美国法庭执勤人员 33-3011",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "derivation": "发布值。",
+        "display_value": "74,630 美元/年",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "法警",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
+        "occupation_scope": "美国法庭执勤人员 33-3011",
+        "period": "2025-05",
         "source_refs": [
-          "operations"
+          "health"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "derivation": "发布值。",
+        "display_value": "48,580 美元/年",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "法警",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
+        "occupation_scope": "美国法庭执勤人员 33-3011",
+        "period": "2025-05",
         "source_refs": [
-          "operations"
+          "health"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "本页未取得单独工资中位数",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
         "occupation_scope": "法警",
-        "period": "不适用：来源未公布该字段",
+        "period": "本页未取得",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "本页未取得单独工资中位数",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
+        "measure": "行业年薪中位数",
         "occupation_scope": "法警",
-        "period": "不适用：来源未公布该字段",
+        "period": "本页未取得",
         "source_refs": [
           "operations"
         ]
@@ -37790,39 +37599,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "19,000人",
+        "derivation": "发布值。",
+        "display_value": "18,000 个岗位",
         "fact_id": "us-employment-parent",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
-        "occupation_scope": "法警",
-        "period": "2024 年",
+        "measure": "就业岗位",
+        "occupation_scope": "美国法庭执勤人员 33-3011",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "下降（-1% 或更低）",
+        "derivation": "发布值。",
+        "display_value": "−1.9%",
         "fact_id": "us-growth-parent",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
-        "occupation_scope": "法警",
-        "period": "2024—2034 年",
+        "measure": "预计增长",
+        "occupation_scope": "美国法庭执勤人员 33-3011",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 1,800",
+        "derivation": "发布值。",
+        "display_value": "约 1,600 个/年",
         "fact_id": "us-openings-parent",
         "market": "美国",
-        "measure": "预测期职位空缺（本职业口径）",
-        "occupation_scope": "法警",
-        "period": "2024—2034 年",
+        "measure": "预计年均空缺",
+        "occupation_scope": "美国法庭执勤人员 33-3011",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
@@ -37830,7 +37639,7 @@
         "display_value": "8%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
+        "measure": "AI 任务影响估算（编辑估算）",
         "occupation_scope": "法警",
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
@@ -37844,37 +37653,37 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务影响估算"
     },
     "badges": [
       "O*NET 33-3011.00 · Job Zone Three · 中等准备",
       "法院安保 / 安检与值庭 / 押送与看管",
-      "本职业口径（工资与就业未取自其他职业）· 中国大陆为不同编制与权限体系 · 缺口可见标记"
+      "大陆参考：法院辅助岗位历史招聘；非一对一职业统计"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国年薪中位数（本职业口径）"
+        "label": "美国年薪中位数（O*NET 州页内美国行）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国预计增长（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国预测期职位空缺（2024—2034）"
+        "label": "美国预计年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -37888,17 +37697,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "法警做什么、需要哪些教育与准备、美国的收入与前景如何、AI 会改变哪些任务，以及安检与押送与法庭冲突处置与强制措施的权限与指挥边界；保留来源范围与数据缺口。"
+      "text": "了解美国 Bailiff 的庭审保障职责、工资与入行，分清大陆司法警务辅助岗位，再试做一份纸面交接。"
     },
     "title": {
       "availability": "available",
-      "text": "法警"
+      "text": "法庭执勤人员：工作、薪酬与入行｜FermatMind"
     }
   },
-  "source_content_sha256": "387478d4f898a2943bb8a86b9508e09a3450a75abe7ecd732940196e768697f7",
+  "source_content_sha256": "0b42098b62a3c3825620e69c2ac31171786c1a173ca739542f4b9da3cddddc40",
   "subject": {
     "canonical_slug": "bailiffs",
     "name": "法警",
-    "summary": "法警在法院内维持秩序与安全：入口安检与禁限品处置、押解被押人员并在庭审中看管、维持法庭秩序并保护陪审团、巡查法院与护送法官、按程序看管证物，并在需要时报告警务或医疗协助需求。美国侧对应 O*NET 33-3011.00（Bailiffs），属 Job Zone Three（SVP 6.0 至 <7.0）；工资与就业与行业数据均为本职业口径，O*NET 页面未声明取自其他职业（BLS OOH 章节为「Correctional Officers and Bailiffs」合并口径，本页分别标注）。中国大陆侧本页未取得与中国人民法院司法警察可比、且与美国 Bailiffs 同口径的全国职业工资分布，不以城镇单位或行业平均工资替代，也不把中文页面语言当作中国等价职业或工资映射。"
+    "summary": "美国 Bailiffs 在法院维持庭审秩序、协助保障安全，并按机构授权交接人员或物品。司法警察、聘用制司法警务辅助人员和书记员在中国大陆职责不同；公开招聘可作相邻岗位参考。"
   }
 }

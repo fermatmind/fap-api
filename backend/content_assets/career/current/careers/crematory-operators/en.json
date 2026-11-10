@@ -8,6 +8,12 @@
       "fact:onet-code-39-4012": {
         "status": "pending_mapping"
       },
+      "fact:posting-crematory-daoxian": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-crematory-huoshan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -8489,7 +8495,7 @@
           "data": {
             "entries": [
               {
-                "answer": "The work chain includes verifying remains identity and documents, preparation and loading, controlling furnace temperature, collecting and processing ashes, cleaning equipment, maintenance inspection, and complete records.",
+                "answer": "Verify identity, permissions and handoff records under the facility’s procedures, operate and monitor the cremation equipment, record exceptions, and identify and transfer the remains. The facility assigns operating, approval and family-service responsibilities separately.",
                 "id": "crematory-operators.faq.1",
                 "question": "Crematory operators: how does the daily work form a closed loop?",
                 "question_key": "career.faq.crematory-operators.daily-work",
@@ -8498,9 +8504,9 @@
                 ]
               },
               {
-                "answer": "Crematory operators are responsible for cremation equipment and the remains handling chain; embalmers are responsible for embalming and restoration of remains; funeral attendants lean toward ceremony and reception and process support.",
+                "answer": "Crematory operators focus on equipment and documented handoffs. Embalmers prepare remains, and funeral service staff coordinate with families. In combined jobs, ask who verifies identity, operates the equipment and approves each step.",
                 "id": "crematory-operators.faq.2",
-                "question": "Crematory operators: how do they differ from adjacent occupations?",
+                "question": "How does crematory operation differ from embalming and funeral services?",
                 "question_key": "career.faq.crematory-operators.role-comparison",
                 "source_refs": [
                   "onet-394012"
@@ -8517,12 +8523,12 @@
                 ]
               },
               {
-                "answer": "AI can assist with scheduling and document verification and equipment record summaries, but task exposure does not equal job replacement, and remains identity and equipment status and output handover must be verified by people; an automated suggestion carries no authority to start, stop, isolate hazardous energy, or dispose of remains; all key actions require on-site human review with a written trail.",
+                "answer": "Electronic records can support handoff checks and flag missing entries. Identity checks, equipment safety and incident handling still follow facility procedures and authorization. This is not a measurement of AI adoption or job displacement.",
                 "id": "crematory-operators.faq.4",
-                "question": "Crematory operators: which tasks can AI assist with?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.crematory-operators.ai-impact",
                 "source_refs": [
-                  "ilo-genai-2025"
+                  "onet-394012"
                 ]
               },
               {
@@ -8536,12 +8542,14 @@
                 ]
               },
               {
-                "answer": "The material verified on this page has not yet obtained a nationwide occupation wage distribution for crematory operators in Mainland China. The National Bureau of Statistics 'Average Wage of Employed Persons in Urban Units in 2025' provides average wages by industry and other groupings; an average for the resident services industry cannot be taken as this occupation's median or starting wage, and a gap on this page cannot be used to assert that other official material has not been published.",
+                "answer": "The May 2025 U.S. median wage was $43,650 per year and $20.98 per hour. Huoshan advertised two non-staff crematory roles for local household registrants with at least junior secondary education, with pay under the approved schedule but no amount. Dao County listed about CNY 5,400 per month including employer and employee contributions to four insurance programs, plus overtime separately. It is not take-home pay.",
                 "id": "crematory-operators.faq.6",
                 "question": "Crematory operators: how should Mainland China salaries be verified?",
                 "question_key": "career.faq.crematory-operators.china-pay",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "onet-394012",
+                  "crematory-huoshan",
+                  "crematory-daoxian"
                 ]
               },
               {
@@ -8581,16 +8589,12 @@
                 ]
               },
               {
-                "answer": "O*NET shows that this US occupation is projected to grow 3% to 4% from 2024 to 2034; O*NET shows about 600 average annual openings for this US occupation from 2024 to 2034; 3%—4% (2024—2034); about 600 per year (2024—2034).",
-                "fact_refs": [
-                  "us-outlook-2024-2034",
-                  "us-openings-2024-2034"
-                ],
+                "answer": "BLS projects U.S. employment in SOC 39-4012 to go from about 3,000 in 2025 to 3,100 in 2035 (+3.1%). It projects about 500 openings per year, including replacements.",
                 "id": "crematory-operators.faq.10",
-                "question": "Crematory operators: how should the employment outlook and adjacent transitions be understood?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.crematory-operators.outlook-transition",
                 "source_refs": [
-                  "onet-summary-394012"
+                  "a21-bls-projections"
                 ]
               },
               {
@@ -8886,7 +8890,7 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "The current US 39-4012.00 has 12 tasks: clean facilities and equipment, record separately packaged remains parts to prevent misplacement, prepare remains for embalming or dressing or viewing, explain cremation to families and offer comfort, respect the remains of the deceased or pets, process with flame/heat or alkaline hydrolysis equipment, pulverize remaining bone fragments, read documents to verify identity, remove personal items, clean the cremation room and collect ashes, and transport by vehicle. The profile gives no Core/Supplemental classification, so not all tasks are written as a daily requirement for every position; the US scope\ncannot be directly applied to Chinese human remains services or pet business.",
                   "The O*NET profile for this position is partial; the current 12 tasks and 17 detailed work activities and software and work styles are readable, and no Work Context response percentages or education response distribution for this position were obtained, so no zeros are filled in and no frequency is inferred from another occupation."
@@ -9298,6 +9302,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment in SOC 39-4012 to go from about 3,000 in 2025 to 3,100 in 2035 (+3.1%). It projects about 500 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a21-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Two non-staff positions, local household registration and junior secondary education or above. Approved basic pay schedule, no amount."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "crematory-huoshan",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Huoshan crematory workers",
+                "period": "2026-10-12",
+                "publisher": "Huoshan County Civil Affairs Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.ahhuoshan.gov.cn/zwzx/gsgg/38887949.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "About CNY 5,400 per month including employer and employee contributions to four insurance programs. Overtime separate; practical skills count for 60% of the examination."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "crematory-daoxian",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Dao County contract crematory worker",
+                "period": "2026-06-29",
+                "publisher": "Dao County Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.dx.gov.cn/dxrsj/0200/202606/0b935ab02cde454f8d4ca92b99078099.shtml"
               }
             ]
           },
@@ -10619,11 +10668,15 @@
               "月薪参考": "Not applicable (an industry average is not used to replace an occupation wage)"
             },
             {
-              "城市/区间": "Mainland China (recruitment quote basis)",
-              "月薪参考": "Insufficient evidence: no verifiable quote statistic was obtained"
+              "城市/区间": "Mainland China job postings",
+              "月薪参考": "Huoshan advertised two non-staff crematory roles for local household registrants with at least junior secondary education, with pay under the approved schedule but no amount. Dao County listed about CNY 5,400 per month including employer and employee contributions to four insurance programs, plus overtime separately. It is not take-home pay."
             }
           ],
           "china_soc_row": "China's official national vocational skill standard notice (MOHRSS General Office Document 2021 No. 82) lists the remains cremation specialist 4-10-06-03; its scope is not automatically identical to the US coverage of human/pet and alkaline hydrolysis. A skill standard is not an individual administrative practice license, and the full text PDF could not be obtained this round, so its education and application conditions and training hours are not invented.",
+          "fact_refs": [
+            "posting-crematory-huoshan",
+            "posting-crematory-daoxian"
+          ],
           "sources_note": {
             "$join": [
               {
@@ -10647,7 +10700,7 @@
           "ui": {
             "ai_heading": "Will AI or automation affect crematory operators' wages?",
             "driver_heading": "How does cremation work arrange shifts and cycles?",
-            "official_heading": "Official statistical basis and gap notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Editorial preparation observation; not a Chinese uniform education or wage statistic",
             "scenario_heading": "How should preparation ability and job direction be verified?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -11264,7 +11317,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/embalmers",
+            "target_href": "/en/career/jobs/embalmers",
             "target_slug": "embalmers",
             "target_title": "Embalmers (adjacent occupation)",
             "transition_distance": "Distance note: from equipment operation and the identity chain to embalming and restoration of remains. Editorial direction comparison; no transfer duration or success rate was obtained."
@@ -11272,7 +11325,7 @@
           {
             "capability_gaps": "To be added: reception, ceremony, and process support.",
             "shared_capabilities": "Shared abilities: funeral process and family communication.",
-            "target_href": "/zh/career/jobs/funeral-attendants",
+            "target_href": "/en/career/jobs/funeral-attendants",
             "target_slug": "funeral-attendants",
             "target_title": "Funeral attendants (adjacent occupation)",
             "transition_distance": "Attendants also assist with cremation and handling ashes and preparing remains; the main division of work and licensing are verified separately and cannot be fully separated by name. Editorial direction comparison; no transfer duration or success rate was obtained."
@@ -11280,7 +11333,7 @@
           {
             "capability_gaps": "To be added: funeral arrangement, client service, and business duties.",
             "shared_capabilities": "Shared abilities: funeral process and institutional collaboration.",
-            "target_href": "/zh/career/jobs/funeral-service-occupations",
+            "target_href": "/en/career/jobs/funeral-service-occupations",
             "target_slug": "funeral-service-occupations",
             "target_title": "Morticians, undertakers, and funeral arrangers (adjacent occupation)",
             "transition_distance": "Distance note: from equipment operation to funeral arrangement and undertaking. Editorial direction comparison; no transfer duration or success rate was obtained."
@@ -11288,7 +11341,7 @@
           {
             "capability_gaps": "To be added: embalming and cosmetic restoration of remains and funeral arrangement.",
             "shared_capabilities": "Shared abilities: norms and respect in handling remains.",
-            "target_href": "/zh/career/jobs/morticians-undertakers-and-funeral-arrangers",
+            "target_href": "/en/career/jobs/morticians-undertakers-and-funeral-arrangers",
             "target_slug": "morticians-undertakers-and-funeral-arrangers",
             "target_title": "Morticians, undertakers, and funeral arrangers (adjacent occupation)",
             "transition_distance": "Distance note: from cremation operation to remains handling and funeral arrangement. Editorial direction comparison; no transfer duration or success rate was obtained."
@@ -11296,7 +11349,7 @@
           {
             "capability_gaps": "To be added: hazardous material identification and removal and regulations.",
             "shared_capabilities": "Shared abilities: protection and isolation and procedure compliance.",
-            "target_href": "/zh/career/jobs/hazardous-materials-removal-workers",
+            "target_href": "/en/career/jobs/hazardous-materials-removal-workers",
             "target_slug": "hazardous-materials-removal-workers",
             "target_title": "Hazardous materials removal workers (adjacent occupation)",
             "transition_distance": "Distance note: from cremation equipment operation to hazardous materials removal. Editorial direction comparison; no transfer duration or success rate was obtained."
@@ -11304,7 +11357,7 @@
           {
             "capability_gaps": "To be added: mechanical diagnosis and repair and tool use.",
             "shared_capabilities": "Shared abilities: equipment inspection and maintenance awareness.",
-            "target_href": "/zh/career/jobs/maintenance-workers-machinery",
+            "target_href": "/en/career/jobs/maintenance-workers-machinery",
             "target_slug": "maintenance-workers-machinery",
             "target_title": "Maintenance workers, machinery (adjacent occupation)",
             "transition_distance": "Distance note: from operating equipment to diagnosing and repairing equipment. Editorial direction comparison; no transfer duration or success rate was obtained."
@@ -11338,7 +11391,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Official RC plus editorial activity observation (not validity)",
             "id": "riasec",
@@ -11357,7 +11410,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Career interest test (not a measure of this item)",
             "evidence_level": "Editorial observation; measurement validity for this position was not obtained",
             "id": "big-five",
@@ -11371,7 +11424,7 @@
           },
           {
             "answer": "MBTI can serve as an editorial preference question, and no fit validity for this position was obtained this round; type cannot be used to assign independent operation or team tasks.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Career interest test (not a measure of this item)",
             "evidence_level": "Editorial observation; measurement validity for this position was not obtained",
             "id": "mbti",
@@ -11385,7 +11438,7 @@
           },
           {
             "answer": "Editorial motivation observation: record the reasons for sustained commitment and verify against real task experience; no Enneagram validity for this occupation's choice or performance was obtained.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Career interest test (not a measure of this item)",
             "evidence_level": "Editorial observation; measurement validity for this position was not obtained",
             "id": "enneagram",
@@ -11399,7 +11452,7 @@
           },
           {
             "answer": "Editorial observation of attention and verification and rule judgment; this round obtained no IQ-type measurement or hiring/performance validity for this position, and no inference is made that the official side has no corresponding research at all.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Career interest test (not a measure of this item)",
             "evidence_level": "Editorial observation; measurement validity for this position was not obtained",
             "id": "iq",
@@ -11413,7 +11466,7 @@
           },
           {
             "answer": "The US tasks do include explaining to and comforting families; this round obtained no Context frequency or EQ scale fit validity. The actual service division of work and permissions are verified separately.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Career interest test (not a measure of this item)",
             "evidence_level": "Editorial observation; measurement validity for this position was not obtained",
             "id": "eq",
@@ -11778,7 +11831,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Test whether my career interests suit crematory operations",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11834,7 +11887,29 @@
           "source": "Primary material: the current US 12 tasks and 17 detailed activities and styles and software and the 2025 wages and industry recruitment words and 2025—2035 employment; the current Chinese regulations and vocational standard notice and GB13801 and National Bureau of Statistics industry averages and personal information protection; and the US OSHA service applicability. Tasks are not AI effects, a standard is not a personal license, and an institutional obligation is not each person's duty.",
           "updated_at": "Verification: 2026-10-09 (this round only the nine modules; retained content such as the protected Hero/FAQ was not signed off)"
         },
-        "note": "Source scope and limits and statistical period are verified separately against the original evidence."
+        "note": "Source scope and limits and statistical period are verified separately against the original evidence.",
+        "secondary_links": [
+          {
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "label": "Personality preferences"
+          },
+          {
+            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "label": "Big Five traits"
+          },
+          {
+            "href": "/en/tests/enneagram-personality-test-nine-types",
+            "label": "Enneagram"
+          },
+          {
+            "href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "label": "Emotional intelligence"
+          },
+          {
+            "href": "/en/tests/iq-test-intelligence-quotient-assessment",
+            "label": "Matrix reasoning"
+          }
+        ]
       },
       "work_context_block": {
         "$join": [
@@ -12069,6 +12144,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Two non-staff positions, local household registration and junior secondary education or above. Approved basic pay schedule, no amount.",
+        "fact_id": "posting-crematory-huoshan",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Huoshan crematory workers",
+        "period": "2026-10-12",
+        "source_refs": [
+          "crematory-huoshan"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "About CNY 5,400 per month including employer and employee contributions to four insurance programs. Overtime separate; practical skills count for 60% of the examination.",
+        "fact_id": "posting-crematory-daoxian",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Dao County contract crematory worker",
+        "period": "2026-06-29",
+        "source_refs": [
+          "crematory-daoxian"
+        ]
       }
     ]
   },
@@ -12095,19 +12194,19 @@
         "availability": "available",
         "fact_ref": "us-outlook-2024-2034",
         "key": "us_growth",
-        "label": "US employment projection (2024—2034, growth 3%—4%)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "US employment level (2024, about 3,100 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2024-2034",
         "key": "us_openings",
-        "label": "US average annual job openings (2024—2034, about 600 per year)"
+        "label": "U.S. projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -12121,17 +12220,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Crematory operators (O*NET-SOC 39-4012.00) control cremation equipment by authorization after the identity and document chain is confirmed, collect and verify ashes, inspect and clean equipment and keep complete records, and stop and isolate and escalate when identity or equipment status is inconsistent; includes the US 2025 median wage of 43,650 US dollars/year (20.98 US dollars/hour), the 10th percentile of 33,270 US dollars, the 90th percentile of \n62,460 US dollars, about 3,100 people employed in 2024, a projected 2024—2034 growth of 3%—4%, about 600 average annual openings, and the Mainland China occupation-level wage gap and the identity chain and zero misplacement and hazardous energy isolation and emission boundaries."
+      "text": "See how crematory operators verify identity, run equipment and document handoffs. Compare two Chinese postings and U.S. wages and outlook."
     },
     "title": {
       "availability": "available",
       "text": "Crematory operators"
     }
   },
-  "source_content_sha256": "9fae69f608f3e0184da82154b3dbfc2a8ac8389d4e21cc78f20fdb1ad7baa401",
+  "source_content_sha256": "bc5a2c42ffb349588cc2bdc338b8079228a28fbfc24355747de5bbd7c2219a75",
   "subject": {
     "canonical_slug": "crematory-operators",
     "name": "Crematory operators",
-    "summary": "Crematory operators control the cremation equipment and process by authorization after the identity and document chain is confirmed, collect and verify ashes, and inspect and clean equipment and keep complete records; the basis is the death and cremation documents and scheduling and equipment status and institutional authorization chain, not schedule pressure. The US corresponds to O*NET-SOC 39-4012.00; in China, cremation of remains and cremation certificates and funeral services are governed by the Funeral Administration Regulations and local procedures, and the two are not a one-to-one correspondence."
+    "summary": "Verify identity, permissions and handoff records under the facility’s procedures, operate and monitor the cremation equipment, record exceptions, and identify and transfer the remains. The facility assigns operating, approval and family-service responsibilities separately."
   }
 }

@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -22951,7 +22948,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Quick check: Are you willing to communicate closely with patients, assess movement and function, set measurable goals, develop a treatment plan, and adjust it after retesting? This occupation requires clinical judgment, physical stamina, documentation, and long-term learning. Practicing in the United States requires verifying a DPT program and the target state's licensure; similar positions in China require verifying local requirements separately."
+              "Pause if you would rather carry out assigned tasks than assess function, document outcomes and reassess plans. Compare the physical therapist, assistant and aide roles."
             ]
           },
           "id": "physical-therapists.quick-decision.fit-decision-checklist.1",
@@ -22966,7 +22963,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Fit signals: able to explain the limits of functional measurement and to judge by combining history, patient goals, and safety risks; respects patient feedback, documents treatment response, and communicates with the team. Interest tests can help reflect on preferences but cannot prove clinical ability, licensure eligibility, or treatment outcomes."
+              "Open “Entering the field, qualifications, and career development” and find “PT-06 | Fictional function-training record.” Use the paper record to separate the plan, work done, work not started and what to report. Then check the reference."
             ]
           },
           "id": "physical-therapists.quick-decision.fit-decision-checklist.2",
@@ -22980,7 +22977,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Safe practice: using only fully fictional patient situations and public materials, produce one page of an assessment question list, a draft of goals and retest indicators, and a risk escalation note. Do not touch real patients, medical records, or equipment, and do not deliver treatment; fictional samples do not constitute medical advice."
+              "Explore this role if you want to work closely with patients, explain measurable goals, track changes and revisit a plan when progress differs from expectations. Ask about physical demands, supervision and caseload."
             ]
           },
           "id": "physical-therapists.quick-decision.fit-decision-checklist.3",
@@ -22996,7 +22993,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The reference deliverable should state clearly the known and unknown information in the fictional situation, the functional indicators to be verified, patient goals, contraindications and referral points that require a qualified clinician's judgment, and how to retest. Do not give a real diagnosis or treatment prescription based on the sample."
+              "The PT-06 reference is a one-page handover: record V2, planned and completed work, what the person reported and what was observed, escalation status, and the device, helper and receiving role to verify."
             ]
           },
           "id": "physical-therapists.quick-decision.fermat-decision-card.6",
@@ -24398,7 +24395,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist in organizing public rehabilitation materials, generating education drafts, or flagging missing record items, but there is no evidence that it can independently and safely assess real patients or develop treatment plans. Physical therapists must verify patient changes, contraindications, and treatment response, and personally bear responsibility for clinical judgment and documentation; institutional adoption and employment changes must be verified separately. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "AI can draft records or organize reassessment sheets. Authorized staff assess patients, adjust care and respond to abnormalities. This page does not estimate adoption, time saved or displacement."
             ]
           },
           "id": "physical-therapists.ai-impact.ai-impact-table.18",
@@ -26208,13 +26205,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The National Health Commission 2023 training outline covers newly hired staff; the specific educational background is determined by the employer and local rules."
+              "The two notices specify their own education and junior title or credential requirements. Ask each employer about supervision, equipment training and the role’s scope."
             ]
           },
           "id": "physical-therapists.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "editor",
-            "employer"
+            "pt-sport",
+            "pt-child-shanghai"
           ],
           "type": "prose"
         },
@@ -26565,7 +26562,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Specific hospital hiring"
+              "Mainland rehabilitation therapist postings"
             ]
           },
           "id": "physical-therapists.china-salary.career-snapshot-primary-locale.51",
@@ -26579,12 +26576,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Current written quotes must be verified"
+              "The sports medicine institute listed one temporary role; Shanghai’s child rehabilitation center listed two. Neither gave a pay amount. See the entry section and original notices."
             ]
           },
           "id": "physical-therapists.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "r2-pay-2"
+            "r2-pay-2",
+            "pt-sport",
+            "pt-child-shanghai"
           ],
           "type": "prose"
         },
@@ -27085,7 +27084,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS May 2025 industry median, which may be affected by travel and patient types."
+              "BLS May 2025 industry median; check individual employers and locations separately."
             ]
           },
           "id": "physical-therapists.us-salary.career-snapshot-secondary-locale.36",
@@ -27183,7 +27182,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Therapist offices"
+              "Offices of physical, occupational and speech therapists, and audiologists"
             ]
           },
           "id": "physical-therapists.us-salary.career-snapshot-secondary-locale.43",
@@ -27359,31 +27358,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Occupational therapists",
@@ -29052,7 +29051,7 @@
             "column_labels": [
               "Entry positions",
               "What you mainly do at the start",
-              "What employers usually look at",
+              "What to ask the employer",
               "How to prove it without experience",
               "Differences from other directions"
             ],
@@ -29112,7 +29111,7 @@
                 "id": "education",
                 "values": [
                   "Education and clinical training",
-                  "United States PTs usually complete a DPT degree and supervised clinical training; verify the target state's rules first.",
+                  "U.S. entry usually requires an accredited Doctor of Physical Therapy program and clinical training. FSBPT administers the NPTE. Check the relevant state physical therapy licensing authority for application and renewal; passing the exam does not itself grant a license.",
                   "Verify program curriculum accreditation, internship arrangements, and state license application requirements."
                 ]
               },
@@ -29120,7 +29119,7 @@
                 "id": "clearance",
                 "values": [
                   "Licensure and institutional authorization",
-                  "Completing the program differs from obtaining a license; practice also requires meeting employer authorization and the specific treatment plan.",
+                  "The NHC’s recommended standard WS/T 893–2026 took effect September 1, 2026, for home-bed rehabilitation services delivered by primary healthcare institutions. Section 7.5.1 provides for a physician or rehabilitation therapist to deliver and document care under the plan. Section 7.5.3 assigns termination decisions in its listed situations to a physician. Section 4.3.5.5 addresses observing vital signs and responses, pausing on an abnormality and documenting the response.",
                   "Mark the credential, experience, and work setting conditions item by item in job postings."
                 ]
               },
@@ -29145,7 +29144,9 @@
           "id": "physical-therapists.path.employer-evidence.1",
           "source_refs": [
             "employer",
-            "editor"
+            "editor",
+            "pt-fsbpt",
+            "pt-homebed-893"
           ],
           "title": "What do employers usually look at in hiring?",
           "type": "cards"
@@ -29158,40 +29159,41 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and setup｜all fictional",
-                  "The fully fictional patient Lin Jia has a limited mobility situation; all dosages, pain scores, and dates below are editorial exercise only and are not medical advice.",
-                  "A1: The plan states 5 sit-to-stands, a 10-meter walk, and a person providing protection; stop exercise and report immediately if obvious dizziness or new chest pain appears.",
-                  "A2: That fictional day the patient reported an initial pain score of 2 out of 10 and became dizzy and unsteady after the 3rd sit-to-stand."
+                  "PT-06 | Fictional function-training record",
+                  "A1 | Paper plan V2: patient Lin A, 09:30. It lists five sit-to-stands and a 10-metre walk with a designated person providing support. It says to stop and report dizziness with unsteady standing or new chest pain. The handover does not name the helper or assistive device.",
+                  "A2 | Simulated after-the-fact record: the initial pain entry is 2/10. At 09:34, after three sit-to-stands, the person says “I feel dizzy”; the observation reads “unsteady standing.” Walking is marked “not started,” and the escalation field is blank.",
+                  "FermatMind Editorial wrote this fictional case. Repetitions, distance and stop rules belong only to the exercise. The home-bed standard provides context for how organizations handle risk."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Tasks and deliverables",
-                  "Write a pre-operation checklist: patient, plan version, assistive devices, staff providing patient protection, and stop conditions.",
-                  "Then write a progress record: include only the 3 completed sit-to-stands, the patient's complaints, and the observations, and do not add the walk that was not started; mark who is to be notified."
+                  "Task | One-page handover",
+                  "List the plan version, intended tasks, work done, work not started, escalation status, and the helper and equipment still to verify.",
+                  "Based on the paper plan, decide whether to continue and who should review. Write two handover sentences without inferring the cause of dizziness."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference approach",
-                  "When obvious dizziness and unsteadiness appear, stop the exercise, protect the patient, and start the corresponding emergency or referral procedure according to institutional process.",
-                  "Record the time, the patient's own words, the actual completed volume, and the reporting outcome; do not diagnose the cause of dizziness oneself and do not raise the dosage on one's own."
+                  "Reference | Compare after your own attempt",
+                  "Separate V2 from the actual record: three repetitions were completed, and walking had not started. Keep the 09:34 report and observation and the initial reading. The paper stop rule is met, so pause the remaining tasks and refer to the responsible clinician. No report is documented.",
+                  "Example: “At 09:34, after the third repetition, the person reported dizziness and was unsteady; walking had not started. Please have the responsible clinician review the plan and safety conditions and confirm receipt; the helper and device remain unverified.”"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries and review",
-                  "This exercise deals only with paper-based fictional information; do not carry out training on real patients."
+                  "Boundary | Paper records only",
+                  "Use no real person, equipment or chart. Authorized staff handle actual abnormalities under facility procedures."
                 ]
               }
             ]
           },
           "id": "physical-therapists.path.entry-work-sample-data.1",
           "source_refs": [
-            "editor"
+            "editor",
+            "pt-homebed-893"
           ],
           "title": "Fictional assessment exercise",
           "type": "cards"
@@ -29213,7 +29215,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "Abnormal handling package",
-                  "Based on the description in A2, stop and protect first, then escalate according to institutional process and reassess.",
+                  "Compare A1 and A2 on paper. Record whether the stop rule applies and who receives the report.",
                   "Check whether one diagnosed on one's own or continued training."
                 ]
               },
@@ -29221,14 +29223,14 @@
                 "id": "report-summary",
                 "values": [
                   "Progress record package",
-                  "Distinguish the 3 completed sit-to-stands from the walk that was not started, and keep the patient's complaints."
+                  "Separate completed work, work not started and what the person reported."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "Handover note card",
-                  "State the time, status, who has been notified, and the items still to be confirmed next."
+                  "Record time, report and observation. Mark no escalation record, the intended recipient and whether receipt is confirmed."
                 ]
               }
             ]
@@ -29300,14 +29302,14 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "Day One",
-                  "Read BLS and O*NET and write clearly the role differences among PT, PT, and aide."
+                  "Use the occupational sources to distinguish PT, PTA and aide roles."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "Day Two",
-                  "Verify the target state's accredited program and licensure path, and list the questions to confirm with the school."
+                  "List training and credential questions for the relevant market. Distinguish U.S. licensure from mainland professional titles."
                 ]
               },
               {
@@ -29321,21 +29323,21 @@
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day Four",
-                  "Read the fictional A2 change and write the order of stopping exercise, protection, and reporting."
+                  "Compare A2 with the stop rule in A1, then decide whether to continue and whom to inform."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day Five",
-                  "Write a progress record noting only the actual completed volume and the patient's complaints."
+                  "Record actual work, the person’s report and objective observations. Separate work not started, escalation status and items to verify."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day Six",
-                  "Ask a qualified person to challenge the record and the handover, correct omissions but keep the reasons for changes."
+                  "Check against the reference first. Optionally ask a peer to spot omissions, and record why you revised the handover."
                 ]
               },
               {
@@ -29359,13 +29361,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "First verify the DPT and licensure path.",
-              "Clinical training: learn functional assessment, goal setting, treatment, retesting, and referral under the DPT curriculum and on-site mentors.",
-              "Licensed practice: after obtaining a state license, assess, develop, and deliver plans within employer authorization, document progress, and collaborate with the team.",
-              "Deepening expertise: gain outpatient, hospital, or home rehabilitation experience, complete continuing education under state rules, and verify any new specialty requirements.",
-              "Before training, verify patient identity, the plan version, and contraindications.",
-              "For each session, record the actual completed volume, symptoms, and reasons for adjustment.",
-              "When symptoms change, stop exercise, protect the patient, reassess, and escalate according to institutional process."
+              "Ask whether you would rather check plans and actual work repeatedly, or assist within an established plan.",
+              "Use PT-06 to identify which part you would repeat: checking records, documenting observations or handing over.",
+              "If you want responsibility for assessment and planning, explore clinical training for the relevant PT or rehabilitation role.",
+              "If you prefer assigned tasks, compare assistant and aide roles and check their education and supervision requirements.",
+              "Did your paper handover capture the plan version and stop rule?",
+              "Did your record distinguish planned, completed and unstarted work, and preserve the report and observations?",
+              "Can you state escalation status and the intended recipient? Authorized staff handle real clinical decisions under facility procedures."
             ]
           },
           "id": "physical-therapists.path.seven-day-decision.1",
@@ -29446,9 +29448,9 @@
               [
                 "Rehabilitation therapy related paths in China",
                 "Those applying for similar positions in China",
-                "Verify professional training, professional titles, and institutional requirements",
+                "Check rehabilitation treatment titles, employer training and clinical authority separately.",
                 "United States PTs cannot be directly applied",
-                "Verify against local authorities and announcements",
+                "The 2026 health professional exam catalogue lists rehabilitation treatment technology codes 107 (junior technician), 209 (junior therapist) and 381 (intermediate). Check local eligibility.",
                 "Varies by specialty and institution",
                 "Does not establish mutual recognition of Chinese and United States credentials"
               ]
@@ -29460,7 +29462,9 @@
             "cnclass",
             "editor",
             "employer",
-            "privacy"
+            "privacy",
+            "pt-fsbpt",
+            "pt-exam"
           ],
           "title": "Education, training, and qualifications: which are the real thresholds for this occupation?",
           "type": "table"
@@ -29490,8 +29494,8 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "United States education and licensure information follows the BLS physical therapist occupation page; the specific DPT program, target state rules, and employer requirements should be verified separately.",
-              "The China part cites only the National Health Commission training note for rehabilitation therapy personnel and does not treat cross-occupation wages, historical hiring, or United States licensure as Chinese occupational entry."
+              "In July 2026 the General Administration of Sport’s sports medicine institute advertised one temporary rehabilitation therapist for sports rehabilitation and equipment use and management. It required relevant undergraduate education, a bachelor’s degree or higher and a junior rehabilitation therapist credential or above. Independent use of common equipment was preferred; no pay amount was listed.",
+              "In January 2026 Shanghai’s special children rehabilitation center advertised two rehabilitation therapist posts in pediatric assessment, plan implementation and documentation. It required undergraduate education or above, a related field and a junior therapist-level rehabilitation treatment title or above. Two years’ experience was generally required; new graduates were exempt from the experience requirement and the two-year experience requirement could be relaxed for candidates with a master’s degree. No pay amount was listed."
             ]
           },
           "id": "physical-therapists.path.recruitment-sample.1",
@@ -29499,7 +29503,9 @@
             "employer",
             "r2-pay-1",
             "r2-pay-2",
-            "r2-pay-3"
+            "r2-pay-3",
+            "pt-sport",
+            "pt-child-shanghai"
           ],
           "title": "Notes on the hiring sample",
           "type": "notice"
@@ -31549,7 +31555,7 @@
                 "question_key": "career.faq.physical-therapists.us-pay"
               },
               {
-                "answer": "United States physical therapists usually need a DPT degree, clinical training, and state licensure. The degree, specialty, and training requirements of similar rehabilitation therapy positions in China must be verified against local rules and employer announcements, and cannot be mutually recognized.",
+                "answer": "U.S. physical therapists generally need an accredited DPT program, supervised clinical training and state licensure. Check the NPTE and target state requirements. For comparable mainland roles, verify education, professional title, training and authority separately with the jurisdiction and employer.",
                 "id": "physical-therapists.faq.7",
                 "question": "What education and training are needed to enter the field?",
                 "question_key": "career.faq.physical-therapists.education-path"
@@ -31591,7 +31597,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind career content team (editorial compilation, not reviewed by practicing physical therapists)"
+              "FermatMind Editorial"
             ]
           },
           "id": "physical-therapists.sources.source-card.1",
@@ -31605,7 +31611,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The occupational identity and tasks are based on O*NET 29-1123.00 and the BLS occupational outlook for physical therapists; for China only the National Health Commission training and the National Bureau of Statistics cross-occupation wages are used as background."
+              "See O*NET for tasks and BLS for U.S. wages, employment and education. Mainland postings, title exam catalogue and the home-bed standard have separate sources."
             ]
           },
           "id": "physical-therapists.sources.source-card.2",
@@ -31621,7 +31627,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupation material review date on this page: 2026-09-26; wages, projections, and training materials are presented according to the years marked by the sources."
+              "Sources checked November 9, 2026."
             ]
           },
           "id": "physical-therapists.sources.source-card.3",
@@ -31668,7 +31674,7 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
                 "entity": "secondary_cta",
@@ -31680,13 +31686,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "path",
@@ -32114,20 +32120,90 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Observe on-site treatment response — 25/100; weight=1/3; physical-therapists.ai-impact.ai-impact-table.99[0]",
-                  "Deliver gait and balance treatment — 0/100; weight=1/3; physical-therapists.ai-impact.ai-impact-table.111[0]",
-                  "Reassess function and adjust the plan — 25/100; weight=1/3; physical-therapists.ai-impact.ai-impact-table.119[0]"
+                  "Compare inputs, human checks and responsibility.",
+                  "Compare inputs, human checks and responsibility.",
+                  "Compare inputs, human checks and responsibility.",
+                  "Compare inputs, human checks and responsibility.",
+                  "Compare inputs, human checks and responsibility."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "An editorial method, not a measure of adoption or clinical outcomes.",
+                "name": "FermatMind: AI task analysis method",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In July 2026 the General Administration of Sport’s sports medicine institute advertised one temporary rehabilitation therapist for sports rehabilitation and equipment use and management. It required relevant undergraduate education, a bachelor’s degree or higher and a junior rehabilitation therapist credential or above. Independent use of common equipment was preferred; no pay amount was listed."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "pt-sport",
+                "limitation": "One historical temporary job; no amount listed.",
+                "name": "Sports medicine institute: Rehabilitation therapist",
+                "period": "2026-07-13",
+                "publisher": "General Administration of Sport, Sports Medicine Institute",
+                "scope": "recruitment_proxy",
+                "url": "https://www.sport.gov.cn/yys/n27506619/c29765691/content.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In January 2026 Shanghai’s special children rehabilitation center advertised two rehabilitation therapist posts in pediatric assessment, plan implementation and documentation. It required undergraduate education or above, a related field and a junior therapist-level rehabilitation treatment title or above. Two years’ experience was generally required; new graduates were exempt from the experience requirement and the two-year experience requirement could be relaxed for candidates with a master’s degree. No pay amount was listed."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "pt-child-shanghai",
+                "limitation": "Pediatric rehabilitation recruitment requirements; no pay amount listed.",
+                "name": "Shanghai Special Children Rehabilitation Center: Rehabilitation Therapist",
+                "period": "2026-01-30",
+                "publisher": "Shanghai Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.sh.gov.cn/tzpgg_17408/20260130/t0035_1438412.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The NHC’s recommended standard WS/T 893–2026 took effect September 1, 2026, for home-bed rehabilitation services delivered by primary healthcare institutions. Section 7.5.1 provides for a physician or rehabilitation therapist to deliver and document care under the plan. Section 7.5.3 assigns termination decisions in its listed situations to a physician. Section 4.3.5.5 addresses observing vital signs and responses, pausing on an abnormality and documenting the response."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "pt-homebed-893",
+                "limitation": "Applies only to home-bed rehabilitation delivered by primary healthcare institutions.",
+                "name": "NHC: Home-bed rehabilitation standard WS/T 893–2026",
+                "period": "2026-09-01",
+                "publisher": "National Health Commission",
+                "scope": "exact",
+                "url": "https://www.nhc.gov.cn/fzs/c100048/202603/a7d6e2615e9e474fba624d2e0e5bfc83/files/WST%20893%E2%80%942026.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The 2026 health professional exam catalogue lists rehabilitation treatment technology codes 107 (junior technician), 209 (junior therapist) and 381 (intermediate). Check local eligibility."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "pt-exam",
+                "limitation": "An exam catalogue does not grant clinical authority.",
+                "name": "2026 Health Professional Qualification Exam catalogue",
+                "period": "2026",
+                "publisher": "Ganzhou Health Commission",
+                "scope": "contextual",
+                "url": "https://wjw.ganzhou.gov.cn/gzswjw/c103524/202512/676aded018bd4eee8dfbba6e8b2f838b.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "U.S. entry usually requires an accredited Doctor of Physical Therapy program and clinical training. FSBPT administers the NPTE. Check the relevant state physical therapy licensing authority for application and renewal; passing the exam does not itself grant a license."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "pt-fsbpt",
+                "limitation": "Check current requirements with the target jurisdiction.",
+                "name": "FSBPT: Getting Licensed",
+                "period": "current",
+                "publisher": "FSBPT",
+                "scope": "exact",
+                "url": "https://www.fsbpt.org/Secondary-Pages/Licensees/Getting-Licensed"
               }
             ]
           },
@@ -33579,6 +33655,36 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.sport.gov.cn/yys/n27506619/c29765691/content.html",
+            "id": "pt-sport",
+            "label": "Sports medicine institute: Rehabilitation therapist",
+            "scope": "One historical temporary job; no amount listed."
+          },
+          {
+            "href": "https://rsj.sh.gov.cn/tzpgg_17408/20260130/t0035_1438412.html",
+            "id": "pt-child-shanghai",
+            "label": "Shanghai Special Children Rehabilitation Center: Rehabilitation Therapist",
+            "scope": "Pediatric rehabilitation recruitment requirements; no pay amount listed."
+          },
+          {
+            "href": "https://www.nhc.gov.cn/fzs/c100048/202603/a7d6e2615e9e474fba624d2e0e5bfc83/files/WST%20893%E2%80%942026.pdf",
+            "id": "pt-homebed-893",
+            "label": "NHC: Home-bed rehabilitation standard WS/T 893–2026",
+            "scope": "Applies only to home-bed rehabilitation delivered by primary healthcare institutions."
+          },
+          {
+            "href": "https://wjw.ganzhou.gov.cn/gzswjw/c103524/202512/676aded018bd4eee8dfbba6e8b2f838b.shtml",
+            "id": "pt-exam",
+            "label": "2026 Health Professional Qualification Exam catalogue",
+            "scope": "An exam catalogue does not grant clinical authority."
+          },
+          {
+            "href": "https://www.fsbpt.org/Secondary-Pages/Licensees/Getting-Licensed",
+            "id": "pt-fsbpt",
+            "label": "FSBPT: Getting Licensed",
+            "scope": "Check current requirements with the target jurisdiction."
           }
         ],
         "tracks": [
@@ -36057,7 +36163,7 @@
               "entry": "link-1",
               "field": "url"
             },
-            "cta_label": "Test my Holland career interests",
+            "cta_label": "Take the Holland career interest test",
             "evidence_level": {
               "$item": "physical-therapists.fit.personality-fit-block.3",
               "block": "fit",
@@ -36094,7 +36200,7 @@
               "entry": "link-2",
               "field": "url"
             },
-            "cta_label": "See my Big Five personality traits",
+            "cta_label": "Take the Big Five personality test",
             "evidence_level": {
               "$item": "physical-therapists.fit.personality-fit-block.7",
               "block": "fit",
@@ -36131,7 +36237,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "cta_label": "Understand my MBTI preferences",
+            "cta_label": "Take the MBTI preferences test",
             "evidence_level": {
               "$item": "physical-therapists.fit.personality-fit-block.11",
               "block": "fit",
@@ -36168,7 +36274,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "cta_label": "Explore my Enneagram patterns",
+            "cta_label": "Take the Enneagram test",
             "evidence_level": {
               "$item": "physical-therapists.fit.personality-fit-block.15",
               "block": "fit",
@@ -36205,7 +36311,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "cta_label": "Understand my intelligence and reasoning performance",
+            "cta_label": "Take the matrix reasoning test",
             "evidence_level": {
               "$item": "physical-therapists.fit.personality-fit-block.19",
               "block": "fit",
@@ -36242,7 +36348,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "cta_label": "Understand my emotional intelligence abilities",
+            "cta_label": "Take the emotional skills test",
             "evidence_level": {
               "$item": "physical-therapists.fit.personality-fit-block.23",
               "block": "fit",
@@ -36819,7 +36925,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests suit physical therapist work",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36896,7 +37002,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "Take the Holland career interest test"
           },
           {
             "href": {
@@ -36906,7 +37012,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Take the Big Five personality test"
           },
           {
             "href": {
@@ -36916,7 +37022,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Take the MBTI preferences test"
           },
           {
             "href": {
@@ -36926,7 +37032,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Take the Enneagram test"
           }
         ]
       },
@@ -37033,7 +37139,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and physical therapy tasks",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37064,7 +37170,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Below 77,140 dollars per year",
+        "display_value": "USD 77,140 per year",
         "fact_id": "us-wage-low10-2025",
         "market": "United States",
         "measure": "2025 wage 10th percentile",
@@ -37112,7 +37218,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Above 135,140 dollars per year",
+        "display_value": "USD 135,140 per year",
         "fact_id": "us-wage-high10-2025",
         "market": "United States",
         "measure": "2025 wage 90th percentile",
@@ -37301,27 +37407,15 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "17%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Physical therapists",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and physical therapy tasks"
     },
     "badges": [
       "Physical therapists · task verification",
@@ -37365,17 +37459,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "The core deliverable of a physical therapist is not a set of movements but an adjustable treatment plan and medical record documentation based on functional assessment, goals, dosage, patient response, and retest results. Converted into setting measurable goals with the patient. When judging this career path, the work loop, responsibility boundaries, evidence standards, risk control, and observable entry-level work should be verified at the same time."
+      "text": "How do physical therapists assess function, document sessions and reassess progress? Compare mainland rehabilitation roles, U.S. licensing and the fictional PT-06 case."
     },
     "title": {
       "availability": "available",
       "text": "Physical therapists"
     }
   },
-  "source_content_sha256": "a52924f770767a3685505c86ae6e04d3ce509fc75626ea2a44dccfb959b433ca",
+  "source_content_sha256": "68d9ac522c8fddeaa18715ab547462b9ada04d3ce4a7002dc3d6f63533506873",
   "subject": {
     "canonical_slug": "physical-therapists",
     "name": "Physical therapists",
-    "summary": "Physical therapists assess patients' movement and functional problems, develop and adjust physical therapy plans, deliver treatment, retest progress, and guide patients in self-management. In the United States a DPT degree and state licensure are usually required; the qualifications and duties of similar rehabilitation therapy positions in China must be verified separately and cannot be directly mutually recognized."
+    "summary": "Physical therapists assess function, agree on goals, provide treatment and reassess movement. Consider whether you want to communicate closely with patients, document responses and adjust plans. U.S. PT and mainland hospital rehabilitation roles overlap in duties; verify qualifications separately."
   }
 }

@@ -23685,18 +23685,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First check the ascending order [1,2,3], 7-3=4, and 2×4=8, then record each item and unknown per the three-question rules. Correct references and paper scores do not infer reasons for a child's mastery, real teaching gains, or your own class teaching qualification."
+              "Paper check | Find a group with mismatched material and student counts on a fictional activity sheet. Note which entry to verify with the teacher. "
             ]
           },
           "id": "teaching-assistants-preschool-elementary-middle-and-secondary-school-except-special-education.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-ooh",
-            "cn-rule",
-            "employer",
-            "sag",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -25284,19 +25278,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Regular preschool and primary and secondary teaching assistants help teachers review subject content, prepare and distribute materials, and maintain attendance and response records, and supervise classroom and break activities per school rules. The teacher holds main responsibility for designing and delivering the education plan and services; the assistant must still fulfill protection and prompt handling and reporting duties within the role. This page freezes 25-9042.00 and excludes special education and postsecondary assistants; the BLS wage and projection figures are a 25-9045 non-postsecondary assistant combined reference and cannot be a separate regular assistant line. China's actual education and teaching duties, teaching qualifications, entry inquiry, school protection training, and contracts are checked separately. Entirely fictional sorting and answer checking can only observe the given rule and record process and do not prove child understanding, real teaching outcomes, or grant independent class teaching or student diagnostic authority."
+              "General education assistants in preschool and schools help with activities, materials and student participation under a teacher’s direction. The work varies with grade level and how the classroom is organized. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "teaching-assistants-preschool-elementary-middle-and-secondary-school-except-special-education.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-ooh",
-            "cn-rule",
-            "employer",
-            "sag",
-            "nist",
-            "editorial"
+            "transfer-onet-25-9043.00"
           ],
           "type": "prose"
         }
@@ -26120,19 +26107,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate fictional draft answer checking from real student support. Preserve original questions, references, duplicates, blanks, unknowns, and your own corrections, and return school division, protection, and official evaluation to the responsible staff; accurate output does not prove students learned or that you can teach a class. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Find a group with mismatched material and student counts on a fictional activity sheet. Note which entry to verify with the teacher."
             ]
           },
           "id": "teaching-assistants-preschool-elementary-middle-and-secondary-school-except-special-education.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-ooh",
-            "cn-rule",
-            "employer",
-            "sag",
-            "nist",
-            "editorial"
+            "transfer-onet-25-9043.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -35718,6 +35699,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-25-9043.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 25-9043.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/25-9043.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -41189,10 +41197,10 @@
       "text": "Teaching assistants (preschool and primary and secondary)"
     }
   },
-  "source_content_sha256": "93c568671fd8e875da79d74a28ee80680c98bd37cce3e3fdcd3423151ae69aae",
+  "source_content_sha256": "29a95fd64087c0a978344b70da6bd4bce29eb2d7185dbd83892cfef6dc199be7",
   "subject": {
     "canonical_slug": "teaching-assistants-preschool-elementary-middle-and-secondary-school-except-special-education",
     "name": "Teaching assistants (preschool and primary and secondary)",
-    "summary": "Regular preschool and primary and secondary teaching assistants help teachers review subject content, prepare and distribute materials, and maintain attendance and response records, and supervise classroom and break activities per school rules. The teacher holds main responsibility for designing and delivering the education plan and services; the assistant must still fulfill protection and prompt handling and reporting duties within the role. This page freezes 25-9042.00 and excludes special education and postsecondary assistants; the BLS wage and projection figures are a 25-9045 non-postsecondary assistant combined reference and cannot be a separate regular assistant line. China's actual education and teaching duties, teaching qualifications, entry inquiry, school protection training, and contracts are checked separately. Entirely fictional sorting and answer checking can only observe the given rule and record process and do not prove child understanding, real teaching outcomes, or grant independent class teaching or student diagnostic authority."
+    "summary": "General education assistants in preschool and schools help with activities, materials and student participation under a teacher’s direction. The work varies with grade level and how the classroom is organized."
   }
 }

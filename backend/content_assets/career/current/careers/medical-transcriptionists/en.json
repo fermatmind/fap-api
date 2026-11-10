@@ -149,6 +149,9 @@
       "item:medical-transcriptionists.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:medical-transcriptionists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:medical-transcriptionists.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13201,6 +13204,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two audio passages leave a term unclear, and an old template contains a plausible word. Keep the timestamps and mark the uncertainty for the signing reviewer."
+            ]
+          },
+          "id": "medical-transcriptionists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Flag uncertain medical dictation",
+          "type": "notice"
         }
       ]
     },
@@ -15802,6 +15820,13 @@
         "id": "medical-transcriptionists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "medical-transcriptionists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15995,7 +16020,7 @@
       "text": "Medical Transcriptionists: Duties, U.S. Pay, and Entry"
     }
   },
-  "source_content_sha256": "36a9656209da9c04106c52a712552f381892913cea491309b7750d5758f00f19",
+  "source_content_sha256": "51cce04985eeaeb4133c534339523655aa16cfa8e7a4e4345eabd4b1219ba627",
   "subject": {
     "canonical_slug": "medical-transcriptionists",
     "name": "Medical Transcriptionists",

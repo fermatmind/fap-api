@@ -1542,7 +1542,7 @@
         "status": "pending_mapping"
       },
       "item:barbers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:barbers.sources.source-card.1": {
         "status": "mapped"
@@ -22806,7 +22806,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "One-sentence judgment: A barber is not 'someone who just cuts it a bit shorter' but a shop position that provides cutting and styling and shaving and beard trimming services to customers: first asking clearly about the service and hairstyle the customer wants, cutting and trimming and styling hair with scissors and clippers and combs and blow dryers according to the customer's request or the current hairstyle, shampooing, shaving with a razor and trimming beards and mustaches with scissors, cleaning and disinfecting tools such as scissors and combs and clippers before and after cutting, cleaning the station and sweeping the floor, and recording the service and fees; people who only want to improvise by feel, are unwilling to first confirm the customer's request, and are unwilling to treat tool disinfection and station cleaning as part of the work are not suited."
+              "Confirm the length and service, then cut, record and handle tools. Find BR-57 under 09 Entering the field, qualifications, and career development. Submit both tickets and one handover, then open the named reference on Day 7."
             ]
           },
           "id": "barbers.quick-decision.fit-decision-checklist.1",
@@ -22821,7 +22821,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: you are willing to restate the service and hairstyle the customer wants before starting, can stay steady through the rhythm of close-range manual work and long periods of standing and receiving customers, will proactively check the symmetry and length baseline of the left and right and front and back outlines, are willing to clean and disinfect tools per procedure and record truthfully, and can first confirm and then adjust when a customer asks for changes or is dissatisfied."
+              "Explore this work if you like precise repeated handwork, can confirm a client’s length preference and can keep hygiene routines during a rush."
             ]
           },
           "id": "barbers.quick-decision.fit-decision-checklist.2",
@@ -22835,7 +22835,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions for pausing investment first: you have not yet completed one full closed loop of 'consultation — cutting — shaving — disinfection — cleaning — recording' under any supervised conditions, or you can only express interest by 'liking styling'; also do not treat having cut hair for family and friends at home as proof that you can independently operate a razor and chemical perm and dye agents or independently take responsibility for venue sanitation and tool disinfection. Tool disinfection and skin barrier, chemical agent and perm and dye injury control, customer privacy and personal information handling, and practice and work authorization must follow the applicable jurisdiction and competent department and employer system with traceable records retained; this page does not provide any cutting, shaving, or chemical treatment operating instructions."
+              "Check weekend shifts, standing time and wrist load. Ask who owns tool hygiene and complaints, and separate base pay, commission and hours."
             ]
           },
           "id": "barbers.quick-decision.fit-decision-checklist.3",
@@ -22851,7 +22851,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education and practice licensing are two different tracks: O*NET lists 39-5011.00 as Job Zone Three (SVP 6.0 to <7.0); of the published education composition, 45% require a high school diploma or equivalent, 39% require a postsecondary certificate, and 12% require less than a high school diploma; the BLS Occupational Outlook Handbook lists the typical entry education for this occupational group as 'postsecondary nondegree award', no related work experience requirement, and no on-the-job training, and notes that all states in the U.S. require barbers and cosmetologists to be licensed, usually requiring graduation from a state-approved barbering or cosmetology program and passing an examination. Education, vocational training, state practice license, employer appointment and shop authorization, and position authorization for tool disinfection and chemical agent use are different statuses and must be verified item by item by state and employer and position."
+              "O*NET asked respondents what education a new hire needs: 45% answered high school or equivalent, 39% a postsecondary certificate, and 12% less than high school. These are survey responses."
             ]
           },
           "id": "barbers.quick-decision.fermat-decision-card.6",
@@ -23288,13 +23288,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET lists 39-5011.00 as Job Zone Three (SVP 6.0 to <7.0); among the educational attainment the page publishes, 45% require a high school diploma or equivalent, 39% require a postsecondary certificate, and 12% require less than a high school diploma. The BLS Occupational Outlook Handbook lists the typical entry-level education for this occupational group as a postsecondary nondegree award, with no related work experience and no on-the-job training required, and notes that every U.S. state requires barbers and cosmetologists to be licensed, usually requiring graduation from a state-approved barbering or cosmetology program and passing an examination. The O*NET training page shows 1,280 related training programs nationwide (Barbering / Barber, Hair Styling, Salon Management, and Cosmetology, Barber / Styling, and Nail Instructor fields), and the certification page shows that no unified national certification is registered for this occupation. On the mainland China side, employer-provided pre-job training and on-the-job mentoring predominate, and practitioners must meet the requirements of the Regulations on the Administration of Public Place Hygiene for hygiene knowledge training and health certificates for workers."
+              "O*NET asked respondents what education a new hire needs: 45% answered high school or equivalent, 39% a postsecondary certificate, and 12% less than high school. These are survey responses. BLS Employment Projections lists a postsecondary nondegree award as typical for 39-5011. It lists no related work experience or on-the-job training as typical requirements. Check state licensure separately. Check the mainland job duties. The public venue hygiene regulation requires operators to train and assess staff on hygiene; workers who serve customers directly need a health certificate."
             ]
           },
           "id": "barbers.profile.career-quick-answers-block.19",
           "source_refs": [
             "onet",
-            "onet"
+            "ep",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -23362,13 +23363,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The U.S. side is O*NET 39-5011.00 (Barbers); its wage, employment, and industry data are for this occupational definition, and the page does not state that they are taken from another occupation, and O*NET does not mark it as Bright Outlook. The corresponding chapter of the BLS Occupational Outlook Handbook is the combined “Barbers, Hairstylists, and Cosmetologists” definition, which cannot be treated as a barber-only definition. On the mainland China side, this page has not obtained a precise national occupational wage distribution for barbers, so the boundary of no data that can be safely used is retained and is not replaced by industry or recruitment data; when comparing, first identify whether a position belongs to a chain or independent shop, a community barbershop, or a hotel, resort, and comprehensive hair and beauty establishment."
+              "O*NET 39-5011.00 identifies U.S. barbers. The BLS handbook gives barber-specific wages and employment as well as combined figures including hairstylists and cosmetologists. Keep U.S. occupational statistics separate from mainland hairdresser examples."
             ]
           },
           "id": "barbers.profile.career-quick-answers-block.24",
           "source_refs": [
             "onet",
-            "onet"
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -23391,13 +23393,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "On the U.S. side, educational attainment is mainly a high school diploma or equivalent (45%, with another 39% holding a postsecondary certificate and 12% less than a high school diploma); the BLS Occupational Outlook Handbook lists the typical entry-level education as a “postsecondary nondegree award” and notes that all states require licensure, usually requiring completion of a state-approved program and passing an examination; O*NET lists 1,280 related training programs (Barbering / Hair Styling / Salon Management fields). In mainland China, employer-provided pre-job training and on-the-job mentoring predominate, and practitioners must meet the requirements of the Regulations on the Administration of Public Place Hygiene for hygiene knowledge training and health certificates; specific education and experience requirements are set by the employer."
+              "O*NET asked respondents what education a new hire needs: 45% answered high school or equivalent, 39% a postsecondary certificate, and 12% less than high school. These are survey responses. Check the mainland job duties. The public venue hygiene regulation requires operators to train and assess staff on hygiene; workers who serve customers directly need a health certificate."
             ]
           },
           "id": "barbers.profile.career-quick-answers-block.26",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -23420,13 +23422,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Cutting, shaving, and tool disinfection must be carried out in accordance with the applicable jurisdiction, the competent authority, and employer procedures; where razor use, chemical permanent waving and dyeing and chemical products, and the handling of abnormal skin or health conditions are involved, this must be done within the scope of the practice license and shop authorization and escalated according to procedure. On the U.S. side, practice licensure is administered by each state and usually requires completion of a state-approved program and passing an examination; the O*NET certification page shows that no unified national certification is registered for this occupation. On the mainland China side, the Regulations on the Administration of Public Place Hygiene require operating units to train and assess workers in hygiene knowledge and require personnel who serve customers directly to hold a health certificate on duty; verify the training and authorization process before starting, and do not infer it directly from education or experience."
+              "Check applicable safety rules and product instructions. If something is unusual, pause, record the client’s report and observable facts, and hand it to someone authorized. Do not diagnose or resume on your own. Check the mainland job duties. The public venue hygiene regulation requires operators to train and assess staff on hygiene; workers who serve customers directly need a health certificate."
             ]
           },
           "id": "barbers.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnclass",
+            "health"
           ],
           "type": "prose"
         },
@@ -24260,7 +24262,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "No measured generative AI adoption, efficiency gains, or headcount reductions were obtained for this occupation in this round. Appointment and record drafts are editorial candidates, and a duties list cannot be used to infer full replacement or permanent non-replacement. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "No measured generative AI adoption, efficiency gains, or headcount reductions were obtained for this occupation in this round. Appointment and record drafts are editorial candidates, and a duties list cannot be used to infer full replacement or permanent non-replacement. AI task-impact estimate 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "barbers.ai-impact.ai-impact-table.18",
@@ -25789,7 +25791,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "In the 2022 Occupational Classification Code of the People's Republic of China, 4-10-03-02 hairdresser explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure. A precise national occupation wage for China was not obtained."
+              "The China Employment profile for 4-10-03-02 hairdressers explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure. A precise national occupation wage for China was not obtained."
             ]
           },
           "id": "barbers.china-salary.career-snapshot-primary-locale.7",
@@ -26042,7 +26044,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "In the 2022 Occupational Classification Code of the People's Republic of China, 4-10-03-02 hairdresser explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure."
+              "The China Employment profile for 4-10-03-02 hairdressers explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure."
             ]
           },
           "id": "barbers.china-salary.career-snapshot-primary-locale.24",
@@ -26358,13 +26360,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scenario comparisons require the employer type and employment arrangement to match; this page does not provide a precise monthly salary range for this occupation."
+              "The Dalian posting describes a quick-cut role without coloring, perms or membership sales. Its header and description differ on pay and experience, so use it only to compare service scope and check pay, experience and vacancy status separately."
             ]
           },
           "id": "barbers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -26388,7 +26389,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupational Classification Code 2022 hairdresser 4-10-03-02｜https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+              "China Employment occupational profile: Hairdresser (4-10-03-02)｜https://chinajob.mohrss.gov.cn/c/2022-04-15/347806.shtml"
             ]
           },
           "id": "barbers.china-salary.career-snapshot-primary-locale.47",
@@ -26501,7 +26502,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "In the 2022 Occupational Classification Code of the People's Republic of China, 4-10-03-02 hairdresser explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure. Pre-tax annual average wage for 2025 for Chinese urban unit residents' services, repair, and other services: 70,226 yuan for non-private units and 52,059 yuan for private units. This is only for reference when the establishment's main activity falls in that category, and is not the barber median, starting pay, percentile, or an individual's take-home monthly pay."
+              "The China Employment profile for 4-10-03-02 hairdressers explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure. Pre-tax annual average wage for 2025 for Chinese urban unit residents' services, repair, and other services: 70,226 yuan for non-private units and 52,059 yuan for private units. This is only for reference when the establishment's main activity falls in that category, and is not the barber median, starting pay, percentile, or an individual's take-home monthly pay."
             ]
           },
           "id": "barbers.china-salary.career-snapshot-primary-locale.55",
@@ -26725,14 +26726,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "75,800 people (2025)"
+              "75,800"
             ]
           },
           "id": "barbers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "r2-pay-3",
-            "nbs",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26746,9 +26745,7 @@
           },
           "id": "barbers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "r2-pay-3",
-            "nbs",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26757,14 +26754,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3% (2025—2035, rounded; average)"
+              "3.3%"
             ]
           },
           "id": "barbers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "r2-pay-3",
-            "nbs",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26778,9 +26773,7 @@
           },
           "id": "barbers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "r2-pay-3",
-            "nbs",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26789,14 +26782,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "6,900 per year on average (2025—2035)"
+              "6,900"
             ]
           },
           "id": "barbers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "r2-pay-3",
-            "nbs",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26810,9 +26801,7 @@
           },
           "id": "barbers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "r2-pay-3",
-            "nbs",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26940,14 +26929,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3% (2025—2035, rounded; average)"
+              "U.S. barbers (39-5011): 75,800 employed in 2025 and 78,300 projected in 2035 (+2,500, +3.3%), with about 6,900 annual openings from growth and replacement."
             ]
           },
           "id": "barbers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "r2-pay-3",
-            "nbs",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27276,19 +27263,19 @@
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Ability Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Shampooers",
@@ -28602,7 +28589,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: verify product instructions, jurisdiction, applicable conditions, and protection; a skin / allergy assessment does not equal a medical diagnosis, a uniform test, or a guarantee of no allergy, and the specific assistance-seeking and stop-and-resume procedures for abnormalities must be verified against actual procedures; a complete specification was not obtained this round."
+              "Check applicable safety rules and product instructions first. If something is unusual, pause, record the client’s report and observable facts, and refer the issue to authorized staff. The responsible person follows shop and local procedures before work resumes."
             ]
           },
           "id": "barbers.risk.career-risk-cards.17",
@@ -28986,9 +28973,9 @@
               ],
               [
                 "Chemical permanent waving and dyeing and styling specialist position",
-                "Take on permanent waving, dyeing, and styling projects within the authorized scope, operating according to product instructions and hygiene requirements and performing a skin assessment.",
-                "Editorial verification items: observe product and color theory, skin assessment, and exception handling and recording ability.",
-                "Submit a fictional write-up containing the objective, the reasons for product selection, the skin assessment, process records, and the assessment conclusion.",
+                "Provide chemical and styling services within authorization. Check the product instructions and shop safety rules.",
+                "Check how the role handles product instructions, records, reporting and who takes over.",
+                "Prepare a fictional example showing the goal, reason for product choice, safety checks and record format.",
                 "Chemical product use and authorization scope must follow jurisdiction and shop rules; a specialist position does not mean you may handle skin conditions beyond scope."
               ],
               [
@@ -29017,9 +29004,9 @@
               {
                 "id": "education",
                 "values": [
-                  "New-hire education survey: high school 45%, postsecondary certificate 39%, less than high school 12%, which is not the educational attainment of those employed nor does it mean most need only high school. Zone3/SVP6 to <7 is general preparation, not a fixed one or two years for everyone. The OOH typical is a postsecondary nondegree award; all states require licensure, usually a state-approved program and examination, and specific admission, age, cost, renewal, and mutual recognition must be verified by state; no on-the-job training is a typical statistical category and does not prohibit employers from mentoring.",
-                  "The O*NET national training catalog this round lists 1,280 items, and the Barbering / Barber and other programs seen are not all courses verified; the national certification page states No certifications were found, which only means none were found in this catalog and cannot be used to infer that no certification or license exists nationwide. Barber is a title available for registered apprenticeships and does not guarantee local enrollment.",
-                  "In the 2022 Occupational Classification Code of the People's Republic of China, 4-10-03-02 hairdresser explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure. The current Regulations on the Administration of Public Place Hygiene (revised 2024-12-06) apply to barbershops and beauty salons; 3 customer utensils and the like must meet national hygiene standards, 4 / 8 venue hygiene license, 6 the operating unit is responsible for hygiene systems and hygiene knowledge training and assessment for workers, 7 direct customer service personnel must hold health certificates and are restricted before curing diseases that hinder public hygiene, 9 the operating unit must properly handle health-hazard accidents and report them promptly. Venue certificates, health certificates, U.S. state occupational licenses, and employer position authority are different; this is not a unified individual barbering license in China or a complete disinfection / stop-and-resume procedure."
+                  "O*NET asked respondents what education a new hire needs: 45% answered high school or equivalent, 39% a postsecondary certificate, and 12% less than high school. These are survey responses.",
+                  "Use the O*NET catalog to identify programs. Verify school approval, apprenticeship eligibility and current enrollment with the state board or school.",
+                  "The China Employment profile for 4-10-03-02 hairdressers explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure. The current Regulations on the Administration of Public Place Hygiene (revised 2024-12-06) apply to barbershops and beauty salons; 3 customer utensils and the like must meet national hygiene standards, 4 / 8 venue hygiene license, 6 the operating unit is responsible for hygiene systems and hygiene knowledge training and assessment for workers, 7 direct customer service personnel must hold health certificates and are restricted before curing diseases that hinder public hygiene, 9 the operating unit must properly handle health-hazard accidents and report them promptly. Venue certificates, health certificates, U.S. state occupational licenses, and employer position authority are different; this is not a unified individual barbering license in China or a complete disinfection / stop-and-resume procedure."
                 ]
               },
               {
@@ -29064,42 +29051,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional materials package: a customer request form, a service and charging record sheet, a tool cleaning and disinfection record sheet, and a customer feedback record template.",
-                  "All materials are fictional and contain no real customer data, shop client data, or internal standards documents.",
-                  "All materials and scenarios are fictional, and real customer data, shop client data, or internal standards documents must not be used."
+                  "BR-57 fictional ticket, 3:10 p.m.: the client agrees to a CNY 48 haircut, sides only, keeping the top long. They decline a face shave. A CNY 12 shampoo is listed but not confirmed.",
+                  "Paper shop rules: record only agreed services. A tool may be submitted for the supervisor’s review only after the shift owner signs a traceable ready record. Clipper G2 awaits sign-off. G4 has a valid 2:50 p.m. record.",
+                  "The variant changes only G2: the shift owner signs a valid ready record at 3:08 p.m. All other information and choices are unchanged. Neither fictional service has taken place."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "For a fictional service, write clearly the requirements confirmation and the length and outline baseline, the service items and the tools and chemical products used, tool cleaning and disinfection and disposable handling, customer feedback, revisions, charges, exceptions, and open items, and which steps require review and which require authorization.",
-                  "Complete within 60—90 minutes; consulting public general hygiene, disinfection, and customer service materials is allowed, but real customer data must not be used.",
-                  "In the record, write the customer requirements, the service items and the tools and chemical products used, tool cleaning and disinfection handling, and charges and customer feedback separately, and mark the parts that need review."
+                  "Complete both versions with the request, proposed service, proposed price and tool status.",
+                  "Write a one-page handover distinguishing evidence, unknowns, next steps and the person responsible.",
+                  "Use no real clients, clippers, razors or chemicals."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First confirm the customer requirements and the condition of the tools and workstation, then provide the service, disinfect, and record according to procedure, and finally write the conclusions and open items.",
-                  "Write the customer requirements, service items and tools and chemical products, tool cleaning and disinfection handling, and charges and feedback separately, and mark anything uncertain as requiring review.",
-                  "After completion, ask an experienced person to review the requirements confirmation and the technique and disinfection handling conclusions, and retain the reasons for revisions."
+                  "Submit both versions first.",
+                  "Keep the client’s wording, times and record IDs.",
+                  "After submitting, open “BR-57 reference (open after submitting)” in the FAQ."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "The exercise does not constitute cutting, shaving, or disinfection step instructions and cannot replace the applicable jurisdiction and shop authorization requirements.",
-                  "Do not come into contact with real customers or operate real razors and permanent waving and dyeing chemicals during the exercise; work involving tool disinfection, skin barrier, chemical products, and abnormal customer conditions must be handled by authorized personnel according to procedure.",
-                  "The exercise does not replace the applicable jurisdiction and shop authorization requirements and does not constitute any cutting, shaving, or disinfection step instructions."
+                  "This exercise checks paper tickets only.",
+                  "Actual tools and client service require local and shop authorization.",
+                  "The exercise does not verify disinfection, payment or completed service."
                 ]
               }
             ]
           },
           "id": "barbers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "Low-risk practice materials and tasks",
+          "title": "BR-57: Two service tickets and one handover",
           "type": "cards"
         },
         {
@@ -29225,28 +29212,28 @@
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Shaving and beard trimming exercise: for a fictional case, write clearly the scope, technique points, skin assessment, and conditions for stopping due to an abnormality.",
+                  "Shaving and beard trimming exercise: for a fictional case, write clearly the scope, technique points, product safety checks, and conditions for stopping due to an abnormality.",
                   "Output: a shaving and beard trimming write-up."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Tool disinfection and workstation cleaning exercise: for a fictional tool list, write clearly the cleaning and disinfection process, handling of disposables and contaminated items, and recording points.",
-                  "Output: a cleaning and disinfection record."
+                  "Day 5: Read both BR-57 versions and mark evidence, unknowns and who takes over.",
+                  "Output: an evidence checklist for both versions."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Review-style self-questioning: ask an experienced person to challenge your requirements confirmation and your technique and disinfection conclusions, and record what was corrected.",
-                  "Output: review comments and a revision explanation."
+                  "Day 6: Submit both service tickets and one handover independently, without opening the reference.",
+                  "Output: both service tickets and one handover."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Final retrospective: decide whether to continue, pause, or change direction, and write clearly the basis and the parts that are still uncertain.",
+                  "Day 7: Open “BR-57 reference (open after submitting)” in the FAQ and record one difference.",
                   "Output: a one-page decision write-up with an evidence list attached."
                 ]
               }
@@ -29307,7 +29294,7 @@
                 "High school diploma or equivalent",
                 "People who hope to enter this occupation",
                 "Specific admission and employer conditions must be verified by state and actual position and cannot be used to infer a uniform requirement across most programs or positions.",
-                "New-hire education survey: high school 45%, postsecondary certificate 39%, less than high school 12%, which is not the educational attainment of those employed nor does it mean most need only high school. Zone3/SVP6 to <7 is general preparation, not a fixed one or two years for everyone. The OOH typical is a postsecondary nondegree award; all states require licensure, usually a state-approved program and examination, and specific admission, age, cost, renewal, and mutual recognition must be verified by state; no on-the-job training is a typical statistical category and does not prohibit employers from mentoring.",
+                "O*NET asked respondents what education a new hire needs: 45% answered high school or equivalent, 39% a postsecondary certificate, and 12% less than high school. These are survey responses.",
                 "Complete according to the program length.",
                 "According to the program duration.",
                 "Education does not equal a practice license or shop task authorization."
@@ -29317,7 +29304,7 @@
                 "People who want to obtain a license and improve their skill starting point",
                 "Determines whether you can meet the prerequisites for a state-approved program and examination.",
                 "The BLS Occupational Outlook Handbook notes that all states require licensure, usually requiring graduation from a state-approved barbering or cosmetology program and passing an examination, so this training is usually a necessary pathway.",
-                "The O*NET national training catalog this round lists 1,280 items, and the Barbering / Barber and other programs seen are not all courses verified; the national certification page states No certifications were found, which only means none were found in this catalog and cannot be used to infer that no certification or license exists nationwide. Barber is a title available for registered apprenticeships and does not guarantee local enrollment.",
+                "Use the O*NET catalog to identify programs. Verify school approval, apprenticeship eligibility and current enrollment with the state board or school.",
                 "Complete according to the course cycle.",
                 "Completing training does not equal obtaining a license, nor does it equal shop task authorization."
               ],
@@ -29376,9 +29363,9 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "New-hire education survey: high school 45%, postsecondary certificate 39%, less than high school 12%, which is not the educational attainment of those employed nor does it mean most need only high school. Zone3/SVP6 to <7 is general preparation, not a fixed one or two years for everyone. The OOH typical is a postsecondary nondegree award; all states require licensure, usually a state-approved program and examination, and specific admission, age, cost, renewal, and mutual recognition must be verified by state; no on-the-job training is a typical statistical category and does not prohibit employers from mentoring.",
-              "The O*NET national training catalog this round lists 1,280 items, and the Barbering / Barber and other programs seen are not all courses verified; the national certification page states No certifications were found, which only means none were found in this catalog and cannot be used to infer that no certification or license exists nationwide. Barber is a title available for registered apprenticeships and does not guarantee local enrollment.",
-              "In the 2022 Occupational Classification Code of the People's Republic of China, 4-10-03-02 hairdresser explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure. The current Regulations on the Administration of Public Place Hygiene (revised 2024-12-06) apply to barbershops and beauty salons; 3 customer utensils and the like must meet national hygiene standards, 4 / 8 venue hygiene license, 6 the operating unit is responsible for hygiene systems and hygiene knowledge training and assessment for workers, 7 direct customer service personnel must hold health certificates and are restricted before curing diseases that hinder public hygiene, 9 the operating unit must properly handle health-hazard accidents and report them promptly. Venue certificates, health certificates, U.S. state occupational licenses, and employer position authority are different; this is not a unified individual barbering license in China or a complete disinfection / stop-and-resume procedure.",
+              "O*NET asked respondents what education a new hire needs: 45% answered high school or equivalent, 39% a postsecondary certificate, and 12% less than high school. These are survey responses.",
+              "Use the O*NET catalog to identify programs. Verify school approval, apprenticeship eligibility and current enrollment with the state board or school.",
+              "The China Employment profile for 4-10-03-02 hairdressers explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure. The current Regulations on the Administration of Public Place Hygiene (revised 2024-12-06) apply to barbershops and beauty salons; 3 customer utensils and the like must meet national hygiene standards, 4 / 8 venue hygiene license, 6 the operating unit is responsible for hygiene systems and hygiene knowledge training and assessment for workers, 7 direct customer service personnel must hold health certificates and are restricted before curing diseases that hinder public hygiene, 9 the operating unit must properly handle health-hazard accidents and report them promptly. Venue certificates, health certificates, U.S. state occupational licenses, and employer position authority are different; this is not a unified individual barbering license in China or a complete disinfection / stop-and-resume procedure.",
               "Editorial verification items: verify education, coursework, state license, venue hygiene permit, worker health certificate, and shop job authority separately; specific fees, license renewal, and mutual recognition must be read from the target state's current rules."
             ]
           },
@@ -29399,16 +29386,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Job posting sample note: this section does not cite specific employers' job postings, only the items to focus on when verifying; job titles appearing in public channels include barber, hairstylist, hair cutter, shaver, shop barber, stylist assistant, shampooer, and so on.",
-              "Checklist: whether the position is in a chain shop, independent shop, community barbershop, or hotel, resort, and comprehensive hair and beauty establishment; whether a state practice license and shop task authorization are required (and whether they cover razors and chemical permanent waving and dyeing); the compensation method (base salary, commission, and tips) and shift and weekend arrangements; and the hygiene, disinfection, and customer information protection training requirements."
+              "The Dalian posting describes a quick-cut role without coloring, perms or membership sales. Its header and description differ on pay and experience, so use it only to compare service scope and check pay, experience and vacancy status separately.",
+              "Ask if the job covers quick cuts, full salon services or management. Confirm base pay, commission basis, hours and tool responsibilities separately."
             ]
           },
           "id": "barbers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "r2-pay-1",
+            "r2-pay-2",
+            "cn-class-2022",
+            "health"
           ],
           "title": "Job posting verification",
           "type": "notice"
@@ -29589,7 +29576,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "New-hire education survey: high school 45%, postsecondary certificate 39%, less than high school 12%, which is not the educational attainment of those employed nor does it mean most need only high school. Zone3/SVP6 to <7 is general preparation, not a fixed one or two years for everyone. The OOH typical is a postsecondary nondegree award; all states require licensure, usually a state-approved program and examination, and specific admission, age, cost, renewal, and mutual recognition must be verified by state; no on-the-job training is a typical statistical category and does not prohibit employers from mentoring. China's related classification and hygiene conditions must be verified separately."
+              "O*NET asked respondents what education a new hire needs: 45% answered high school or equivalent, 39% a postsecondary certificate, and 12% less than high school. These are survey responses."
             ]
           },
           "id": "barbers.path.career-path-block.20",
@@ -29608,7 +29595,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The O*NET national training catalog this round lists 1,280 items, and the Barbering / Barber and other programs seen are not all courses verified; the national certification page states No certifications were found, which only means none were found in this catalog and cannot be used to infer that no certification or license exists nationwide. Barber is a title available for registered apprenticeships and does not guarantee local enrollment."
+              "Use the O*NET catalog to identify programs. Verify school approval, apprenticeship eligibility and current enrollment with the state board or school."
             ]
           },
           "id": "barbers.path.career-path-block.21",
@@ -29627,7 +29614,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "In the 2022 Occupational Classification Code of the People's Republic of China, 4-10-03-02 hairdresser explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure. The current Regulations on the Administration of Public Place Hygiene (revised 2024-12-06) apply to barbershops and beauty salons; 3 customer utensils and the like must meet national hygiene standards, 4 / 8 venue hygiene license, 6 the operating unit is responsible for hygiene systems and hygiene knowledge training and assessment for workers, 7 direct customer service personnel must hold health certificates and are restricted before curing diseases that hinder public hygiene, 9 the operating unit must properly handle health-hazard accidents and report them promptly. Venue certificates, health certificates, U.S. state occupational licenses, and employer position authority are different; this is not a unified individual barbering license in China or a complete disinfection / stop-and-resume procedure. U.S. state licensing is in the OOH; the same OOH chapter contains a separate entry and a combined entry: 39-5010 combined 2025 employment 670,800, 2035 719,200, rounded 7%, annual average 80,300; barbers separately 75,800 → 78,300 and 3%, wage 18.37 USD / hour, and the median for barbers in the personal care services industry 18.26 USD / hour. The combined entry cannot replace the separate entry, nor can it be said that all values in that chapter are combined."
+              "The China Employment profile for 4-10-03-02 hairdressers explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure. The current Regulations on the Administration of Public Place Hygiene (revised 2024-12-06) apply to barbershops and beauty salons; 3 customer utensils and the like must meet national hygiene standards, 4 / 8 venue hygiene license, 6 the operating unit is responsible for hygiene systems and hygiene knowledge training and assessment for workers, 7 direct customer service personnel must hold health certificates and are restricted before curing diseases that hinder public hygiene, 9 the operating unit must properly handle health-hazard accidents and report them promptly. Venue certificates, health certificates, U.S. state occupational licenses, and employer position authority are different; this is not a unified individual barbering license in China or a complete disinfection / stop-and-resume procedure. U.S. state licensing is in the OOH; the same OOH chapter contains a separate entry and a combined entry: 39-5010 combined 2025 employment 670,800, 2035 719,200, rounded 7%, annual average 80,300; barbers separately 75,800 → 78,300 and 3%, wage 18.37 USD / hour, and the median for barbers in the personal care services industry 18.26 USD / hour. The combined entry cannot replace the separate entry, nor can it be said that all values in that chapter are combined."
             ]
           },
           "id": "barbers.path.career-path-block.22",
@@ -30022,7 +30009,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Under supervision, prepare and use chemical products according to product instructions, and complete skin assessments and records."
+              "Check safety requirements against product instructions under supervision and document them."
             ]
           },
           "id": "barbers.path.career-path-block.49",
@@ -30036,7 +30023,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Supervised product use, skin assessment, and process records."
+              "Record the product, authorization and person responsible."
             ]
           },
           "id": "barbers.path.career-path-block.50",
@@ -30080,7 +30067,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Complete training in color matching, permanent waving, straightening, and skin assessment."
+              "Train in color matching, perming and straightening, and check safety requirements in the instructions."
             ]
           },
           "id": "barbers.path.career-path-block.53",
@@ -30095,7 +30082,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Independently take on common permanent waving, dyeing, and styling projects, performing skin assessment and exception handling as required by the jurisdiction and shop."
+              "Check applicable safety rules and product instructions. If something is unusual, pause, record the client’s report and observable facts, and hand it to someone authorized. Do not diagnose or resume on your own."
             ]
           },
           "id": "barbers.path.career-path-block.54",
@@ -30109,7 +30096,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Independent process records, skin assessment, and exception handling records."
+              "Record the products, service stage, questions to check and receiving role."
             ]
           },
           "id": "barbers.path.career-path-block.55",
@@ -30168,7 +30155,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Mentor new hires, participate in developing procedures for chemical product use, skin assessment, and exception handling, and handle difficult cases."
+              "Coach new hires on product checks and documentation; refer difficult cases to authorized staff."
             ]
           },
           "id": "barbers.path.career-path-block.59",
@@ -30618,16 +30605,16 @@
                 "url": "https://www.onetonline.org/link/localtrends/39-5011.00"
               },
               {
-                "entity": "O*NET 39-5011.00 Industry Distribution",
+                "entity": "U.S. BLS Employment Projections Table 1.2: Barbers, 39-5011",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/39-5011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "NBS2025 wages for industries related to residents' services in urban units",
+                "entity": "NBS: 2025 urban unit wages",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "entity": "O*NET 39-5011.00 National Wage Percentiles",
@@ -30699,13 +30686,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 39-5011 barbers: 2025 employment 75,800, projected 78,300 in 2035, growth rounded to 3% over 2025—2035 (average), net increase rounded to 2,500, 6,900 openings per year on average. Openings include replacement demand, not a net increase, individual hiring probability, or AI causality. The same OOH chapter includes both the specific and combined values: 39-5010 combined 2025 employment 670,800, 719,200 in 2035, rounded 7%, 80,300 per year on average; barbers specifically 75,800→78,300 and 3%, wage 18.37 USD/hour, and barbers in the personal care services industry at a median of 18.26 USD/hour. The combined value cannot replace the specific one, nor can it be said that all values in that chapter are combined."
+              "U.S. barbers (39-5011): 75,800 employed in 2025 and 78,300 projected in 2035 (+2,500, +3.3%), with about 6,900 annual openings from growth and replacement."
             ]
           },
           "id": "barbers.market-signals.market-signal-card.8",
           "source_refs": [
-            "r2-pay-3",
-            "nbs"
+            "ep"
           ],
           "type": "prose"
         },
@@ -30844,13 +30830,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 39-5011 barbers: 2025 employment 75,800, projected 78,300 in 2035, growth rounded to 3% over 2025—2035 (average), net increase rounded to 2,500, 6,900 openings per year on average. Openings include replacement demand, not a net increase, individual hiring probability, or AI causality. The same OOH chapter includes both the specific and combined values: 39-5010 combined 2025 employment 670,800, 719,200 in 2035, rounded 7%, 80,300 per year on average; barbers specifically 75,800→78,300 and 3%, wage 18.37 USD/hour, and barbers in the personal care services industry at a median of 18.26 USD/hour. The combined value cannot replace the specific one, nor can it be said that all values in that chapter are combined."
+              "U.S. barbers (39-5011): 75,800 employed in 2025 and 78,300 projected in 2035 (+2,500, +3.3%), with about 6,900 annual openings from growth and replacement."
             ]
           },
           "id": "barbers.market-signals.market-signal-card.18",
           "source_refs": [
-            "r2-pay-3",
-            "nbs"
+            "ep"
           ],
           "type": "prose"
         },
@@ -30859,13 +30844,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The 3% is a rounded projection and cannot be used to infer individual hiring probability; the demand explanation is not AI causation."
+              "Barbers only. Employment projections include self-employment; the wage survey covers employees."
             ]
           },
           "id": "barbers.market-signals.market-signal-card.19",
           "source_refs": [
-            "r2-pay-3",
-            "nbs"
+            "ep"
           ],
           "type": "prose"
         },
@@ -30902,13 +30886,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "3% (6,900 annual openings)"
+              "3.3% (about 6,900 annual openings)"
             ]
           },
           "id": "barbers.market-signals.market-signal-card.22",
           "source_refs": [
-            "r2-pay-3",
-            "nbs"
+            "ep"
           ],
           "type": "prose"
         },
@@ -30946,7 +30929,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "In the 2022 Occupational Classification Code of the People's Republic of China, 4-10-03-02 hairdresser explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure. Pre-tax annual average wage for 2025 for Chinese urban unit residents' services, repair, and other services: 70,226 yuan for non-private units and 52,059 yuan for private units. This is only for reference when the establishment's main activity falls in that category, and is not the barber median, starting pay, percentile, or an individual's take-home monthly pay."
+              "The China Employment profile for 4-10-03-02 hairdressers explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure. Pre-tax annual average wage for 2025 for Chinese urban unit residents' services, repair, and other services: 70,226 yuan for non-private units and 52,059 yuan for private units. This is only for reference when the establishment's main activity falls in that category, and is not the barber median, starting pay, percentile, or an individual's take-home monthly pay."
             ]
           },
           "id": "barbers.market-signals.market-signal-card.25",
@@ -30990,7 +30973,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "industry_proxy"
+              "Industry context"
             ]
           },
           "id": "barbers.market-signals.market-signal-card.28",
@@ -31443,7 +31426,7 @@
                 "question_key": "career.faq.barbers.1"
               },
               {
-                "answer": "Mainly tool disinfection and skin barrier (cross-infection), chemical product and permanent waving and dyeing injuries, customer privacy and personal information leaks, repetitive motion and prolonged standing injuries, out-of-control customer and disinfection records, and unclear hygiene responsibility and scope of practice; the control method is to act in accordance with the applicable jurisdiction, the competent authority, and employer procedures, clean and disinfect tools and separate disposables, use chemical products according to product instructions and perform a skin assessment first, and adjust the workstation and rotate services while reporting discomfort early.",
+                "answer": "Repetitive work, long periods standing, tool hygiene, chemical products and privacy all carry risks. Follow local and shop rules on protection, cleaning, records and complaint handover. Check applicable safety rules and product instructions. If something is unusual, pause, record the client’s report and observable facts, and hand it to someone authorized. Do not diagnose or resume on your own.",
                 "id": "barbers.faq.2",
                 "question": "What risks should I pay attention to in advance for this job?",
                 "question_key": "career.faq.barbers.2"
@@ -31485,7 +31468,7 @@
                 "question_key": "career.faq.barbers.8"
               },
               {
-                "answer": "The BLS data displayed by O*NET give, under this occupation's 39-5011.00 definition, about 76,000 employed in 2024 and about 79,200 in 2034 (+4%, average (3% to 4%)), with about 8,400 job openings per year over the projection period; the combined chapter of the BLS Occupational Outlook Handbook gives 2025—2035 +7% and about 80,300 annual openings, which is the combined definition for the three groups of barbers, hairstylists, and cosmetologists. For transitions, hairdressers, hairstylists, and cosmetologists, manicurists and pedicurists, skincare specialists, shampooers, stage makeup artists, and massage therapists can be compared, but all require additional training, licensing, and authorization.",
+                "answer": "U.S. barbers (39-5011): 75,800 employed in 2025 and 78,300 projected in 2035 (+2,500, +3.3%), with about 6,900 annual openings from growth and replacement.",
                 "id": "barbers.faq.9",
                 "question": "How do I judge career prospects and transitions?",
                 "question_key": "career.faq.barbers.9"
@@ -31495,6 +31478,15 @@
                 "id": "barbers.faq.10",
                 "question": "Why can't U.S. wages and mainland China wages be converted into each other?",
                 "question_key": "career.faq.barbers.10"
+              },
+              {
+                "answer": "Original: do not mark unsigned G2 as ready. G4’s valid 2:50 p.m. record allows it to go to the supervisor for review. Variant: G2’s valid 3:08 p.m. sign-off is the only change; both tools may go to the supervisor for review. There is still no authorization to start work. Proposed price remains CNY 48 for sides only; keep the top long, leave the unconfirmed CNY 12 shampoo out and record that the client declined a shave. Hand over the client’s words, both tool statuses and times, the unconfirmed shampoo and the responsible supervisor. Do not record a payment or completed service.",
+                "id": "barbers.faq.11",
+                "question": "BR-57 reference (open after submitting)",
+                "question_key": "career.faq.barbers.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31515,7 +31507,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind editorial verification: the current O*NET details and statistics for this occupation, and the difference between the OOH separate and combined entries; the China 2022 hairdresser classification, the 2025 residents' services industry average, and the current hygiene regulations; and the jurisdictional boundaries of the California disinfection material."
+              "FermatMind Editorial"
             ]
           },
           "id": "barbers.sources.source-card.1",
@@ -31540,7 +31532,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Main sources: O*NET39-5011 details, 2025 wages industry and postings, 2025—2035 trends, training 1280 items and the empty certification directory; the OOH barber separate wage, industry, and employment and the combined chapter; the China classification and the NBS annual industry average, and the public place hygiene regulations; and the California disinfection fact sheet."
+              "O*NET covers U.S. tasks and education. The 2025 OEWS figures cover wages; BLS projections cover 2025–2035 employment. Mainland references cover the China Employment hairdresser profile, NBS sector wages and the current hygiene regulation."
             ]
           },
           "id": "barbers.sources.source-card.2",
@@ -31565,7 +31557,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Wages / postings / industry 2025, projections 2025—2035; China classification 2022, industry 2025; the hygiene regulations third revision in 2024, and the California disinfection fact sheet 2024-03. Read this round on 2026-10-09, and materials not read in full are not refreshed as fully verified."
+              "Sources checked November 10, 2026. The California fact sheet and Beijing inspection checklist apply in their respective jurisdictions."
             ]
           },
           "id": "barbers.sources.source-card.3",
@@ -31590,7 +31582,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Chinese hairdresser and U.S. Barbers duties overlap but are not fully mutually recognized; an industry average is not an occupational value, and the same OOH chapter contains a separate entry and a combined entry. Tips and commissions are already included in wages and the self-employed are excluded; the survey is not a threshold, the catalog is not a license, AI candidates are not measurements and not everything can be rolled back, and complete product / exception recovery and specific state qualifications still need verification; frozen shared conflicts are noted separately."
+              "U.S. wages and employment use separate OEWS and projection sources. Mainland job examples do not establish national pay; check venue rules and duties locally."
             ]
           },
           "id": "barbers.sources.source-card.4",
@@ -31645,13 +31637,13 @@
                 "entity": "Enneagram Personality Test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the barber career page",
@@ -31688,7 +31680,7 @@
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
-                "limitation": "U.S. occupational classification; does not directly prove China job sequences or practice authorization.",
+                "limitation": "U.S. occupational classification; does not directly prove China job sequences or practice authorization. Education percentages reflect respondents’ answers about what a new hire needs; they do not describe the workforce’s education distribution.",
                 "market": "United States",
                 "name": "O*NET 39-5011.00 Occupation Summary",
                 "period": "Page updated 2026; accessed 2026-09-15",
@@ -31713,67 +31705,67 @@
                 "url": "https://www.onetonline.org/link/details/39-5011.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official outlook",
-                  "2025 and 2025—2035; accessed 2026-10-09"
+                  "U.S. barbers (39-5011): 75,800 employed in 2025 and 78,300 projected in 2035 (+2,500, +3.3%), with about 6,900 annual openings from growth and replacement.",
+                  "Barbers only. Employment projections include self-employment; the wage survey covers employees."
                 ],
-                "evidence_type": "official outlook",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "U.S. 39-5011 barbers: 2025 employment 75,800, 2035 projected 78,300, 2025—2035 growth rounded to 3% (average), net increase rounded to 2,500, and 6,900 annual openings. Openings include replacement needs and are not net growth, individual hiring probability, or AI causation.",
+                "limitation": "Barbers only. Employment projections include self-employment; the wage survey covers employees.",
                 "market": "United States",
-                "name": "O*NET 39-5011.00 Occupation Summary (Employment and Projections Fields)",
-                "period": "2025 and 2025—2035",
-                "publisher": "O*NET OnLine",
+                "name": "U.S. BLS Employment Projections Table 1.2: Barbers, 39-5011",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-5011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official wage percentiles",
-                  "May 2025 (OEWS); accessed 2026-09-15"
+                  "2025 U.S. annual P10/P25/P50/P75/P90: $28,600/$31,570/$38,210/$58,960/$76,460.",
+                  "The corresponding hourly figures are $13.75/$15.18/$18.37/$28.35/$36.76."
                 ],
-                "evidence_type": "official wage percentiles",
+                "evidence_type": "primary_document",
                 "id": "oews",
-                "limitation": "OEWS includes base pay, commissions, production bonuses, and tips, and excludes overtime premiums, shift differentials, nonproduction bonuses, and so on; it excludes the self-employed and owners and partners of unincorporated businesses and unpaid family workers. OOH employment is 80% self-employed while OEWS wages exclude the self-employed, so the wage sample population cannot be treated as all employment. Percentiles are not starting pay.",
+                "limitation": "The survey excludes self-employed earnings; this is not shop revenue.",
                 "market": "United States",
-                "name": "BLS 2025 wage percentiles displayed by O*NET (39-5011.00)",
-                "period": "May 2025 (OEWS); accessed 2026-09-15",
+                "name": "O*NET presentation of BLS: national wages for 39-5011",
+                "period": "2025",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/39-5011.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official occupation outlook",
-                  "May 2025 wages and 2025—2035 projections; accessed 2026-09-15"
+                  "Residents’ services, repairs and other services: CNY 70,226 at non-private units and CNY 52,059 at private units.",
+                  "Sector-wide pre-tax averages for urban units."
                 ],
-                "evidence_type": "official occupation outlook",
+                "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "The same OOH chapter contains a separate entry and a combined entry: 39-5010 combined 2025 employment 670,800, 2035 719,200, rounded 7%, annual average 80,300; barbers separately 75,800 → 78,300 and 3%, wage 18.37 USD / hour, and the median for barbers in the personal care services industry 18.26 USD / hour. The combined entry cannot replace the separate entry, nor can it be said that all values in that chapter are combined. OEWS includes base pay, commissions, production bonuses, and tips, and excludes overtime premiums, shift differentials, nonproduction bonuses, and so on; it excludes the self-employed and unregistered owners and partners and unpaid family workers. OOH employment is 80% self-employed while OEWS wages exclude the self-employed, so the wage sample population cannot be treated as all employment.",
-                "market": "United States",
-                "name": "BLS Occupational Outlook Handbook, Barbers, Hairstylists, and Cosmetologists",
-                "period": "May 2025 wages and 2025—2035 projections; accessed 2026-09-15",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "mixed_exact_and_combined",
-                "url": "https://www.bls.gov/ooh/personal-care-and-service/barbers-hairstylists-and-cosmetologists.htm"
+                "limitation": "Industry context, not barber pay.",
+                "market": "Mainland China",
+                "name": "NBS: 2025 urban unit wages",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics of China",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "Issued 1987-04-01, revised three times on 2016-02-06, 2019-04-23, and 2024-12-06; accessed 2026-09-15"
+                  "The regulation covers barbershops and distinguishes venue permits, operator duties and health certificates for direct-service staff.",
+                  "The operator handles and promptly reports health-hazard incidents caused by failures to meet hygiene standards."
                 ],
-                "evidence_type": "official regulation",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
                 "limitation": "The current Regulations on the Administration of Public Place Hygiene (revised 2024-12-06) apply to barbershops and beauty salons; 3 customer utensils and the like must meet national hygiene standards, 4 / 8 venue hygiene license, 6 the operating unit is responsible for hygiene systems and hygiene knowledge training and assessment for workers, 7 direct customer service personnel must hold health certificates and are restricted before curing diseases that hinder public hygiene, 9 the operating unit must properly handle health-hazard accidents and report them promptly. Venue certificates, health certificates, U.S. state occupational licenses, and employer position authority are different; this is not a unified individual barbering license in China or a complete disinfection / stop-and-resume procedure.",
                 "market": "Mainland China",
                 "name": "Regulations on the Administration of Public Place Hygiene (issued by the State Council, currently effective version)",
-                "period": "Issued 1987-04-01, revised three times on 2016-02-06, 2019-04-23, and 2024-12-06; accessed 2026-09-15",
-                "publisher": "National Database of Laws and Regulations (Ministry of Justice)",
-                "scope": "official_hygiene_rule",
+                "period": "2024-12-06",
+                "publisher": "National Administrative Regulations Database (State Council regulation)",
+                "scope": "contextual",
                 "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1755"
               },
               {
@@ -31784,7 +31776,7 @@
                 ],
                 "evidence_type": "occupation profile",
                 "id": "privacy",
-                "limitation": "New-hire education survey: high school 45%, postsecondary certificate 39%, less than high school 12%, which is not the educational attainment of those employed nor does it mean most need only high school. Zone3/SVP6 to <7 is general preparation, not a fixed one or two years for everyone. The OOH typical is a postsecondary nondegree award; all states require licensure, usually a state-approved program and examination, and specific admission, age, cost, renewal, and mutual recognition must be verified by state; no on-the-job training is a typical statistical category and does not prohibit employers from mentoring.",
+                "limitation": "O*NET asked respondents what education a new hire needs: 45% answered high school or equivalent, 39% a postsecondary certificate, and 12% less than high school. These are survey responses.",
                 "market": "United States",
                 "name": "O*NET 39-5011.00 Occupation Summary (survey of the education required for new hires to perform the job)",
                 "period": "Page updated 2026; accessed 2026-09-15",
@@ -31841,20 +31833,20 @@
                 "url": "https://www.onetonline.org/link/hot_tech/39-5011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official state licensing rule",
-                  "The page is a compilation of the current version; accessed 2026-09-15"
+                  "U.S. licensure is state-based. A California board-approved barber school course requires at least 1,000 hours.",
+                  "A board-approved apprenticeship and other statutory routes may also qualify. Check exam eligibility separately from authority to work."
                 ],
-                "evidence_type": "official state licensing rule",
+                "evidence_type": "primary_document",
                 "id": "health",
-                "limitation": "U.S. barber practice licensure is administered by each state; this document is a compilation of California state-level rules setting licensing, venue, and hygiene requirements, applies only to that state, and cannot be extrapolated to other states or countries.",
+                "limitation": "California only. Check other states separately.",
                 "market": "United States",
-                "name": "California Board of Barbering and Cosmetology, Barbering and Cosmetology Act and its implementing regulations",
-                "period": "The page is a compilation of the current version; accessed 2026-09-15",
+                "name": "California Board of Barbering and Cosmetology: barber examination eligibility",
+                "period": "Current eligibility page",
                 "publisher": "California Board of Barbering and Cosmetology",
-                "scope": "jurisdiction_specific",
-                "url": "https://www.barbercosmo.ca.gov/laws_regs/act_regs.pdf"
+                "scope": "contextual",
+                "url": "https://www.barbercosmo.ca.gov/applicants/license_requirements.shtml"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -31873,20 +31865,20 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "O*NET official occupation summary; editorial interpretation on this page is kept separate from the external source publisher",
-                  "Uses the occupational codes listed on this page and the actual tasks, education, and interests fields; does not mean complete qualification conditions have been verified"
+                  "Fictional client, tools and pricing.",
+                  "Check the named reference after submitting."
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "U.S. occupation summary and group materials; the editorial verification suggestions on this page do not equal effects, qualifications, or hiring proof published by that source. The education survey indicates the education required for new hires to perform the job and cannot be treated as the educational attainment of those employed or a uniform requirement in China.",
-                "market": "United States",
-                "name": "O*NET barber occupation summary (fields cited on this page)",
-                "period": "Accessed 2026-09-15",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-5011.00"
+                "limitation": "No real clients, tools or practical work.",
+                "market": "On-page paper exercise",
+                "name": "FermatMind Editorial: BR-57 fictional service ticket",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": null
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31896,7 +31888,7 @@
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "The O*NET national training catalog this round lists 1,280 items, and the Barbering / Barber and other programs seen are not all courses verified; the national certification page states No certifications were found, which only means none were found in this catalog and cannot be used to infer that no certification or license exists nationwide. Barber is a title available for registered apprenticeships and does not guarantee local enrollment.",
+                "limitation": "Use the O*NET catalog to identify programs. Verify school approval, apprenticeship eligibility and current enrollment with the state board or school.",
                 "market": "United States",
                 "name": "O*NET 39-5011.00 Training and Education Information",
                 "period": "Page updated 2026; accessed 2026-09-15",
@@ -31969,36 +31961,36 @@
                 "url": "https://www.onetonline.org/link/summary/39-5011.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official wage percentiles",
-                  "May 2025 (OEWS); accessed 2026-09-15"
+                  "The Dalian posting describes a quick-cut role without coloring, perms or membership sales. Its header and description differ on pay and experience, so use it only to compare service scope and check pay, experience and vacancy status separately.",
+                  "No comparable pay figure was verified."
                 ],
-                "evidence_type": "official wage percentiles",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-1",
-                "limitation": "OEWS includes base pay, commissions, production bonuses, and tips, and excludes overtime premiums, shift differentials, nonproduction bonuses, and so on; it excludes the self-employed and owners and partners of unincorporated businesses and unpaid family workers. OOH employment is 80% self-employed while OEWS wages exclude the self-employed, so the wage sample population cannot be treated as all employment. Percentiles are not starting pay.",
-                "market": "United States",
-                "name": "O*NET 39-5011.00 National Wage Percentiles (hourly and annual wage percentiles)",
-                "period": "May 2025 (OEWS); accessed 2026-09-15",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/39-5011.00"
+                "limitation": "One shop’s platform listing; no national pay or current vacancy finding.",
+                "market": "Mainland China",
+                "name": "Dalian Shahekou Sujianjiang quick-cut stylist listing",
+                "period": "Posting date unverified",
+                "publisher": "VeryEast",
+                "scope": "recruitment_proxy",
+                "url": "https://m.veryeast.cn/8093886/2839943"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "industry distribution",
-                  "2025 industry distribution; accessed 2026-10-09"
+                  "The Beijing checklist calls for cleaning and disinfection after each client; untreated reusable tools must not be used for a client.",
+                  "Shops follow the applicable local rules and procedures."
                 ],
-                "evidence_type": "industry distribution",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-2",
-                "limitation": "For 2025 U.S. O*NET broad industries, other services (except public administration) is 20% and other is 80%; OOH for barbers separately lists self-employed 80% and personal care services 20%. Different levels and categories cannot be added together; OOH self-employed refers to status, and O*NET other does not mean that all other industries have been broken out.",
-                "market": "United States",
-                "name": "O*NET 39-5011.00 Industry Distribution",
-                "period": "2025 industry distribution",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/39-5011.00"
+                "limitation": "Beijing enforcement example; not a disinfection recipe or technique for all locations.",
+                "market": "Mainland China (Beijing)",
+                "name": "Beijing public-venue inspection checklist: reusable tools",
+                "period": "2025-07-14",
+                "publisher": "Beijing Disease Control and Prevention Administration",
+                "scope": "contextual",
+                "url": "https://www.bjhr.gov.cn/zt/xzzfxxgs/ztqzfbm/bjhrwjw/jcdwjw/202507/t20250714_4149214.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32024,7 +32016,7 @@
                 ],
                 "evidence_type": "certification information",
                 "id": "census",
-                "limitation": "The O*NET national training catalog this round lists 1,280 items, and the Barbering / Barber and other programs seen are not all courses verified; the national certification page states No certifications were found, which only means none were found in this catalog and cannot be used to infer that no certification or license exists nationwide. Barber is a title available for registered apprenticeships and does not guarantee local enrollment.",
+                "limitation": "Use the O*NET catalog to identify programs. Verify school approval, apprenticeship eligibility and current enrollment with the state board or school.",
                 "market": "United States",
                 "name": "O*NET 39-5011.00 Certification Findings (national certification)",
                 "period": "Page updated 2026; accessed 2026-09-15",
@@ -32035,31 +32027,31 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "shared official identity entry",
-                  "Released 2022-10-28; accessed 2026-09-15"
+                  "Publication notice for the occupational classification.",
+                  "The China Employment profile supports the hairdresser duties described here."
                 ],
-                "evidence_type": "shared official identity entry",
+                "evidence_type": "primary_document",
                 "id": "msresearch",
-                "limitation": "This URL is an entry point for occupational classification discovery; the actual hairdresser subcategory from the code was read separately this round, and the identity of the old entry point as a document is retained, which does not prove the absence of a China entry or occupational wages.",
+                "limitation": "The publication notice does not provide occupational pay or authority to practice.",
                 "market": "Mainland China",
                 "name": "Ministry of Human Resources and Social Security release page for the Occupational Classification Code of the People's Republic of China (2022 edition)",
-                "period": "Released 2022-10-28; accessed 2026-09-15",
+                "period": "2022-10-28",
                 "publisher": "Ministry of Human Resources and Social Security of the People's Republic of China",
-                "scope": "industry_proxy",
+                "scope": "contextual",
                 "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official wage percentiles",
-                  "May 2025 (OEWS); accessed 2026-09-15"
+                  "2025 U.S. annual P10/P25/P50/P75/P90: $28,600/$31,570/$38,210/$58,960/$76,460.",
+                  "The corresponding hourly figures are $13.75/$15.18/$18.37/$28.35/$36.76."
                 ],
-                "evidence_type": "official wage percentiles",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "OEWS includes base pay, commissions, production bonuses, and tips, and excludes overtime premiums, shift differentials, nonproduction bonuses, and so on; it excludes the self-employed and unregistered owners and partners and unpaid family workers. OOH employment is 80% self-employed while OEWS wages exclude the self-employed, so the wage sample population cannot be treated as all employment. Percentiles are not starting pay.",
+                "limitation": "The survey excludes self-employed earnings; this is not shop revenue.",
                 "market": "United States",
-                "name": "O*NET national wage percentiles page (39-5011.00)",
-                "period": "May 2025 (OEWS); accessed 2026-09-15",
+                "name": "O*NET presentation of BLS: national wages for 39-5011",
+                "period": "2025",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/39-5011.00"
@@ -32067,26 +32059,26 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official state hygiene rule",
-                  "Revised 2024-03; accessed 2026-10-09"
+                  "California’s regulator distinguishes tools, shears and items that cannot be disinfected.",
+                  "Steps marked with an asterisk are additional recommendations. Check the applicable requirements for each tool category."
                 ],
-                "evidence_type": "official state hygiene rule",
+                "evidence_type": "primary_document",
                 "id": "archivists",
                 "limitation": "California disinfection fact sheet, with tools / scissors and non-disinfectable items handled separately; the rinsing and drying parts are marked as recommendations rather than regulatory requirements and are not globally uniform steps; complete tool / machine procedures must be verified separately.",
                 "market": "United States",
                 "name": "California Board of Barbering and Cosmetology, Tool Cleaning and Disinfection Requirements",
                 "period": "2024-03 fact sheet",
                 "publisher": "California Board of Barbering and Cosmetology",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.barbercosmo.ca.gov/enforcement/disinfection.pdf"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The relevant parts actually read this round",
-                  "Does not claim complete occupational or individual case verification"
+                  "Wages include base rates, tips, commissions and production bonuses. Overtime pay, shift differentials and nonproduction bonuses are excluded.",
+                  "Self-employed people, owners and partners of unincorporated firms, and unpaid family workers are excluded."
                 ],
-                "evidence_type": "Relevant sections of the original official text",
+                "evidence_type": "primary_document",
                 "id": "oews-method",
                 "limitation": "OEWS wage-and-salary worker wages include base pay, commissions, production bonuses, and tips, and exclude overtime premiums, shift differentials, nonproduction bonuses, and so on; piece rates and commissions cannot all be excluded. The self-employed, owners and partners of unincorporated businesses, and unpaid family workers are outside the wage survey; wage-and-salary company employees are not automatically excluded because of a shop or in-home setting.",
                 "market": "United States",
@@ -32113,20 +32105,20 @@
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official occupational classification",
-                  "2022; accessed 2026-10-09"
+                  "The mainland hairdresser profile covers design and cutting as well as broader services such as coloring and perming.",
+                  "The occupational profile lists five skill grades, from junior worker to senior technician."
                 ],
-                "evidence_type": "official occupational classification",
+                "evidence_type": "primary_document",
                 "id": "cn-class-2022",
-                "limitation": "In the 2022 Occupational Classification Code of the People's Republic of China, 4-10-03-02 hairdresser explicitly covers designing / cutting / creating hairstyles, shampooing, haircutting, permanent waving and dyeing, hair setting, massage, razor face cleaning, hair care, and scalp care; this overlaps in duties with U.S. Barbers but the scope is not identical, and a shared name in Chinese does not imply mutual recognition of qualifications or medical licensure.",
+                "limitation": "Related tasks do not establish recognition across jurisdictions.",
                 "market": "Mainland China",
-                "name": "Occupational Classification Code 2022 hairdresser 4-10-03-02",
-                "period": "2022",
-                "publisher": "MOHRSS and others; public copy from the Xilin Gol Human Resources and Social Security Bureau",
-                "scope": "related_not_equivalent",
-                "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+                "name": "China Employment occupational profile: Hairdresser (4-10-03-02)",
+                "period": "2022-04-15",
+                "publisher": "China Employment Training and Technical Instruction Center",
+                "scope": "contextual",
+                "url": "https://chinajob.mohrss.gov.cn/c/2022-04-15/347806.shtml"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32283,7 +32275,7 @@
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "name": "FermatMind AI task-impact estimate estimation method v1",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
@@ -35621,7 +35613,7 @@
       },
       "hero": {
         "h1": "Barbers",
-        "quick_answer": "Barbers provide barbering services to customers: first asking customers what services and hairstyles they want, then using scissors, clippers, combs, and a hand-held hair dryer to cut and trim hair and style it according to customer requirements or the current hairstyle; shampooing and, after applying shaving cream to the beard, neck, and sideburn outlines, shaving with a razor and trimming the beard and mustache with scissors; before and after cutting and trimming, cleaning and disinfecting tools such as scissors, combs, and clippers, draping and pinning a protective cape on customers, cleaning workstations and sweeping floors, and recording the services provided or fees charged on the cash register slip and maintaining customer files; their work does not equal medical diagnosis or treatment or skin disease diagnosis, nor does it replace venue hygiene management responsibility or the determination of authorization to use tool disinfection and chemical products, and they stop and escalate when a customer's skin or health condition is abnormal, the condition of tools or chemical products is unknown, or the situation exceeds their own scope of practice.",
+        "quick_answer": "Barbers confirm the length, shape and service before cutting, trimming or styling. They follow the shop’s hygiene rules for tools. Compare quick-cut shops, full-service salons and shop management by workload, skills, hygiene duties and pay arrangement.",
         "title": "Barbers"
       },
       "market_signal_card": {
@@ -35749,7 +35741,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "barbers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36973,7 +36965,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit being a barber",
+        "label": "Explore my career interests with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37070,7 +37062,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Enneagram (Chinese)"
+            "label": "Enneagram (English)"
           },
           {
             "href": {
@@ -37080,7 +37072,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "IQ (Chinese)"
+            "label": "IQ (English)"
           }
         ]
       },
@@ -37188,7 +37180,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI task-impact estimate",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37279,36 +37271,36 @@
       },
       {
         "derivation": null,
-        "display_value": "76,000 people",
+        "display_value": "75,800",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Employment size (this occupational definition)",
-        "occupation_scope": "Barbers",
-        "period": "2024; accessed 2026-09-15",
+        "occupation_scope": "U.S. Barbers, 39-5011",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Average (3% to 4%)",
+        "display_value": "3.3%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth label (this occupational definition)",
-        "occupation_scope": "Barbers",
-        "period": "2024—2034; accessed 2026-09-15",
+        "occupation_scope": "U.S. Barbers, 39-5011",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 8,400",
+        "display_value": "6,900",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Projected job openings over the projection period (this occupational definition)",
-        "occupation_scope": "Barbers",
-        "period": "2024—2034; accessed 2026-09-15",
+        "occupation_scope": "U.S. Barbers, 39-5011",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -37483,36 +37475,36 @@
       },
       {
         "derivation": null,
-        "display_value": "76,000 people",
+        "display_value": "75,800",
         "fact_id": "us-employment-parent",
         "market": "United States",
         "measure": "Employment size (this occupational definition)",
-        "occupation_scope": "Barbers",
-        "period": "2024",
+        "occupation_scope": "U.S. Barbers, 39-5011",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Average (3% to 4%)",
+        "display_value": "3.3%",
         "fact_id": "us-growth-parent",
         "market": "United States",
         "measure": "Employment growth label (this occupational definition)",
-        "occupation_scope": "Barbers",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. Barbers, 39-5011",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 8,400",
+        "display_value": "6,900",
         "fact_id": "us-openings-parent",
         "market": "United States",
         "measure": "Projected job openings over the projection period (this occupational definition)",
-        "occupation_scope": "Barbers",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. Barbers, 39-5011",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -37522,7 +37514,7 @@
         "display_value": "33%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "AI task-impact estimate (editorial estimate)",
         "occupation_scope": "Barbers",
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
@@ -37536,37 +37528,37 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI task-impact estimate"
     },
     "badges": [
-      "O*NET 39-5011.00 · Job Zone Three · Medium preparation",
-      "Cutting, shaving, and styling / tool disinfection and hygiene / customer communication and shop affairs",
-      "This occupational definition (wages and employment not taken from another occupation) · no precise equivalent occupational entry in mainland China · gaps visibly marked"
+      "Confirm length and service scope",
+      "Maintain tool hygiene between clients",
+      "Check base pay, commission and shifts"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "U.S. annual salary median (this occupational definition)"
+        "label": "U.S. barber annual median (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034)"
+        "label": "U.S. barber job growth (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. number employed (2024)"
+        "label": "U.S. barber employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. projected job openings over the projection period (2024—2034)"
+        "label": "U.S. barber annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37580,17 +37572,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What barbers do, what training and licensing are required, what U.S. income and prospects look like, which tasks AI will change, and the boundaries of tool disinfection and skin barrier, chemical products and permanent waving and dyeing, customer privacy, and venue hygiene responsibility; source scope and data gaps are retained."
+      "text": "Compare quick cuts and full-service salons, check hygiene rules, wages and commission, then try a two-version service ticket and handover."
     },
     "title": {
       "availability": "available",
-      "text": "Barbers"
+      "text": "Barber: Quick Cuts, Pay and How to Enter the Trade | FermatMind"
     }
   },
-  "source_content_sha256": "1d89a4c73e114dcccf049e1818697842f0d7d95a053d57b9ccb24a6de764e6df",
+  "source_content_sha256": "4a3ff0d4f4f8d8f716d9dc03f930d63290ac5344f8e165c0f961400c2f07fea6",
   "subject": {
     "canonical_slug": "barbers",
     "name": "Barbers",
-    "summary": "Barbers provide haircutting services to customers: asking about and confirming the service and hairstyle the customer wants, cutting and trimming and styling hair with scissors and clippers and combs and blow dryers, shampooing, shaving with a razor and trimming beards and mustaches with scissors, cleaning and disinfecting tools such as scissors and combs and clippers, and maintaining customer files and fee records. On the U.S. side this corresponds to O*NET 39-5011.00 (Barbers), in Job Zone Three (SVP 6.0 to <7.0); the wage and employment and industry data are all under this occupational definition, and the O*NET page does not state that they are taken from another occupation (the BLS Occupational Outlook Handbook chapter is the combined 'Barbers, Hairstylists, and Cosmetologists' definition, marked separately on this page). On the mainland China side this page obtained no public occupational entry and national wage distribution precisely corresponding to barbers, retaining the 'no safely usable data' boundary, not substituting industry or hiring data, nor treating the Chinese page language as an equivalent Chinese occupation or a wage mapping."
+    "summary": "Barbers confirm the length, shape and service before cutting, trimming or styling. They follow the shop’s hygiene rules for tools. Compare quick-cut shops, full-service salons and shop management by workload, skills, hygiene duties and pay arrangement."
   }
 }

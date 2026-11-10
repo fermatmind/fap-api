@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-dms-dayu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-dms-longgang": {
+        "status": "pending_mapping"
       },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
@@ -26168,12 +26174,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得全国单职业工资口径。"
+              "深圳金瑞凯利生物科技的文控专员公告列 4,500–5,500 元/月，强调质量体系文件记录经验。赣州昶联的 DCC 文控岗位列 4,000–5,500 元，但未写计薪周期或职责。两条历史招聘可用于查文控方向，不是全国工资或美国 DMS 细类的直接对应。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "dms-longgang",
+            "dms-dayu"
           ],
           "type": "prose"
         },
@@ -26267,7 +26274,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供招聘报价或个人收入承诺；缺失项保留缺失，不用行业均值或邻近职业替代。"
+              "下方历史招聘仅说明具体岗位和当时的条件。全国职业工资分布仍缺可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -31093,7 +31100,7 @@
           "data": {
             "entries": [
               {
-                "answer": "参与确定文档管理政策并建立分类与元数据规范，按密级与功能与元数据识别与分类文档；与其他信息技术专业人员协同实施电子文档处理与检索与分发系统，配置用户界面与访问配置文件与文档工作流，实施访问权限与版本控制；操作扫描与影像与自动数据录入把数字化文档导入系统；在授权范围内检索电子资产并分发给用户并就访问问题提供支持与培训材料；监控法规与保存期限并按期组织到期鉴定与销毁；编写系统测试计划与技术功能与规格并分析系统绩效数据。",
+                "answer": "制定或维护文件分类和元数据，配置版本、审批、访问及发布流程，支持检索、迁移与审计。权限和最终批准由组织规则决定。",
                 "id": "actors.faq.1",
                 "question": "文档管理专员每天的具体工作是什么？",
                 "question_key": "career.faq.document-management-specialists.1",
@@ -31102,13 +31109,12 @@
                 ]
               },
               {
-                "answer": "本页职业在既定系统与制度内做文件与记录的政策与分类与系统配置与权限与版本与检索分发与保存期限管理；计算机与信息系统经理负责信息技术的整体战略与预算与团队与系统组合；行政服务经理负责机构行政事务与设施与采购与记录服务的统筹管理。职责与授权不同，不能按名称互换。",
+                "answer": "文档管理侧重控制文件版本、访问和工作流；数据录入侧重字段准确，桌面排版侧重出版页面与成品文件。遇到兼岗，确认谁管理权限、撤回旧版和交付。",
                 "id": "actors.faq.2",
-                "question": "它与计算机与信息系统经理、行政服务经理有什么区别？",
+                "question": "文档管理与数据录入、桌面出版有什么区别？",
                 "question_key": "career.faq.document-management-specialists.2",
                 "source_refs": [
-                  "onet",
-                  "agent"
+                  "onet"
                 ]
               },
               {
@@ -31122,9 +31128,9 @@
                 ]
               },
               {
-                "answer": "文档与内容管理系统、扫描与影像与光学字符识别工具、元数据与分类与工作流配置、权限与版本与审计日志、检索与去重与绩效报表工具；这些工具提高效率，但密级与权限与分发与销毁与合规判断仍由人负责。",
+                "answer": "软件可能协助版本核对、排版或文件检索。准确性、权限与正式交付仍须由人核对；本页未测本岗 AI 采用、成效或替代。",
                 "id": "actors.faq.4",
-                "question": "哪些任务已经有工具或系统支持？",
+                "question": "哪些任务可能由软件辅助？",
                 "question_key": "career.faq.document-management-specialists.4",
                 "source_refs": [
                   "onet"
@@ -31140,13 +31146,14 @@
                 ]
               },
               {
-                "answer": "本细类的工资与就业取自父类 Computer Occupations, All Other（15-1299）：BLS 2025 年工资数据中位为 116,580 美元/年（56.05 美元/时），年度分位 55,940／79,370／116,580／157,500／188,470 美元，小时分位 26.89／38.16／56.05／75.72／90.61 美元；该口径不是 15-1299.03 单职业精确值。中国大陆未取得与之对应的全国单职业口径，不给出中位数或分位数。比较真实岗位时须核对城市、行业与单位类型、是内部管理还是外部咨询或实施、是否含项目奖金与补贴，以及税前税后口径。",
+                "answer": "美国 2025 年 5 月父组 15-1299 工资中位 56.05 美元/小时、116,580 美元/年，不是文档管理细类工资。 深圳金瑞凯利生物科技的文控专员公告列 4,500–5,500 元/月，强调质量体系文件记录经验。赣州昶联的 DCC 文控岗位列 4,000–5,500 元，但未写计薪周期或职责。两条历史招聘可用于查文控方向，不是全国工资或美国 DMS 细类的直接对应。",
                 "id": "actors.faq.6",
                 "question": "工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.document-management-specialists.6",
                 "source_refs": [
-                  "oews",
-                  "nbs"
+                  "onet",
+                  "dms-longgang",
+                  "dms-dayu"
                 ]
               },
               {
@@ -31180,13 +31187,12 @@
                 ]
               },
               {
-                "answer": "考虑沟通与用屏负荷（每天使用电子邮件 100%、每天电话交谈 74%、每天面对面讨论 59%、持续坐着 35% 与超过一半时间坐着 50%）、节点时段的时间压力（每天 20%），以及密级与个人信息与保存期限与审计责任；工作时间相对规律（95% 固定日程）但项目与审计与到期节点强度上升。",
+                "answer": "美国 BLS 的 15-1299 父组就业预计从 2025 年约 471,200 增至 2035 年约 495,300（+5.1%），年均约 27,000 个空缺含替补。文档管理细类 15-1299.03 没有单列预测。",
                 "id": "actors.faq.10",
-                "question": "选择这个职业还应考虑什么？",
+                "question": "怎样读这项职业的美国就业预测？",
                 "question_key": "career.faq.document-management-specialists.10",
                 "source_refs": [
-                  "onet",
-                  "nist"
+                  "r5-bls-current"
                 ]
               }
             ]
@@ -31623,7 +31629,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "O*NET15-1299.03实施管理企业文档系统和规程，捕获存储检索共享销毁电子记录。23任务中22Core/1Supplemental，系统绩效数据分析解释传播是补充，不当全部岗位必做。政策/分类、新系统评估采购部署为协助参与，配置访问和版本控制、捕获、检索、需求、测试、法规跟踪和用户支持为核心。监控法规不自动给法务裁决权；任务与邻职可交叉，不能一律排除档案工作、系统开发配置或技术职责，只按主要产出/授权区分。 O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。 BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。"
                 ],
@@ -31635,7 +31641,7 @@
                 "period": "updated 2026; accessed 2026-09-19",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/15-1299.03"
+                "url": "https://www.onetonline.org/link/details/15-1299.03"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31835,16 +31841,16 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。 O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。"
+                  "美国 BLS 的 15-1299 父组就业预计从 2025 年约 471,200 增至 2035 年约 495,300（+5.1%），年均约 27,000 个空缺含替补。文档管理细类 15-1299.03 没有单列预测。"
                 ],
                 "evidence_type": "official projections",
                 "id": "r5-bls-current",
                 "limitation": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。 O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。",
                 "market": "美国",
                 "name": "BLS表1.2其他计算机职业父类就业预测与典型训练",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31925,6 +31931,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "4,500–5,500 元/月，要求有文控或质量管理经验并熟悉医疗器械质量体系文件记录。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "dms-longgang",
+                "limitation": "历史个案，不是全国统计或当前空缺。",
+                "market": "中国大陆",
+                "name": "深圳金瑞凯利生物科技：文控专员",
+                "period": "2021-08",
+                "publisher": "深圳龙岗政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.lg.gov.cn/zwfw/zdfw/jiuye/cjjy/wgryjy/content/post_9027121.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "1 名，4,000–5,500 元，原表该行未明周期或具体职责。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "dms-dayu",
+                "limitation": "历史个案，不是全国统计或当前空缺。",
+                "market": "中国大陆",
+                "name": "昶联材料科技（赣州）：DCC 文控专员",
+                "period": "2026-05",
+                "publisher": "大余县政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.jxdy.gov.cn/dyxxxgk/c145429gg/202606/c957d55652424130875c7919a6526fb2.shtml"
               }
             ]
           },
@@ -34917,7 +34953,7 @@
               }
             },
             {
-              "城市/区间": "招聘报价（不可替代实际待遇）",
+              "城市/区间": "大陆历史招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34929,13 +34965,14 @@
           "china_soc_row": "中国大陆薪资口径",
           "edu": "训练与授权见入行模块",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-dms-longgang",
+            "posting-dms-dayu"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
             "ai_heading": "AI 与自动化会直接改变本职业的收入吗？",
             "driver_heading": "谈中国大陆同类岗位报酬时应核对什么？",
-            "official_heading": "中国大陆官方口径与统计缺口",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "计酬方式与统计边界对照",
             "scenario_heading": "中国大陆同类岗位的计酬方式能直接比较吗？",
             "scenario_interpretation_label": "适用范围与缺口",
@@ -36732,7 +36769,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解文档管理专员的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36845,11 +36882,11 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解文档管理专员的任务兴趣与工作偏好"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
             "label": "了解文档管理专员的任务兴趣与工作偏好"
           },
           {
@@ -37228,12 +37265,12 @@
       },
       {
         "derivation": null,
-        "display_value": "116,580美元/年（中位数，2025 年工资数据，父类 Computer Occupations, All Other 口径；中位时薪 56.05 美元）",
+        "display_value": "父组中位 56.05 美元/小时、116,580 美元/年",
         "fact_id": "median",
         "market": "美国",
         "measure": "中位工资（父类代理口径，附小时口径）",
-        "occupation_scope": "父类 Computer Occupations, All Other（15-1299）口径，不是 15-1299.03 单职业精确值；该数值为受雇税前工资统计口径，不含奖金与项目与补贴，外部咨询与项目制结算收入不包含在内，不能当作个人到手收入",
-        "period": "2025 年工资数据；检索 2026-09-19",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37263,39 +37300,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约472,000人（2024 年，O*NET 摘要页口径，父类 Computer Occupations, All Other）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "471,200 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模（父类代理口径，存量统计）",
-        "occupation_scope": "父类 Computer Occupations, All Other（15-1299）口径，不是 15-1299.03 单职业规模；规模随组织电子记录增长与系统自动化程度变化，与细类任务口径覆盖人群不完全相同；全国总量不说明某行业与某组织的具体机会",
-        "period": "2024 年基期；检索 2026-09-19",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2024—2034 年预测为「远高于平均（7% 或更高）」（父类口径，O*NET 摘要页标注的类别与阈值，该页未给出单一精确百分比）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "+5.1%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "预测就业变化（父类代理口径，职业总量）",
-        "occupation_scope": "父类 Computer Occupations, All Other（15-1299）口径，预测期 2024—2034 年；该预测是职业总量变化，不是个人录用概率；该页只给出「远高于平均（7% 或更高）」类别与阈值而未给出单一精确百分比，本页按口径原文表述而不自行换算百分数；本页未取得 BLS 职业展望本职业页一手口径",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约31,300个（2024—2034 年，含更替需求；父类口径，O*NET 摘要页）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 27,000 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "预测期职位空缺（父类代理口径，含更替需求）",
-        "occupation_scope": "父类口径；为预测期内因增长与更替等形成的合计空缺，不是每年净增岗位，也不是个人机会的直接度量；O*NET 该页标注的口径期间为 2024—2034 年，页面按该口径引用，不另按年度换算",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-current"
         ]
       },
       {
@@ -37348,12 +37385,12 @@
       },
       {
         "derivation": null,
-        "display_value": "父类15-1299：116,580美元/年；56.05美元/时（2025中位）",
+        "display_value": "父组中位 56.05 美元/小时、116,580 美元/年",
         "fact_id": "r5-current-median",
         "market": "美国",
         "measure": "父类全国受雇工资分位",
-        "occupation_scope": "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。",
-        "period": "2025",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "May 2025",
         "source_refs": [
           "bls",
           "r5-oews-concepts"
@@ -37386,37 +37423,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "父类15-1299：2025就业471,200人",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "471,200 人（2025）",
         "fact_id": "r5-current-employment",
         "market": "美国",
         "measure": "父类就业存量",
-        "occupation_scope": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。",
-        "period": "2025—2035",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "2025",
         "source_refs": [
           "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "父类2025—2035增加5.1%；官方净增24,200人",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "+5.1%",
         "fact_id": "r5-current-growth",
         "market": "美国",
         "measure": "父类净变化预测",
-        "occupation_scope": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。",
-        "period": "2025—2035",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "父类2025—2035年均空缺27,000个含更替",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 27,000 个（含替补）",
         "fact_id": "r5-current-openings",
         "market": "美国",
         "measure": "父类年均空缺",
-        "occupation_scope": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。",
-        "period": "2025—2035",
+        "occupation_scope": "US parent SOC 15-1299",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-current"
         ]
@@ -37495,6 +37532,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "4,500–5,500 元/月，要求有文控或质量管理经验并熟悉医疗器械质量体系文件记录。",
+        "fact_id": "posting-dms-longgang",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "深圳金瑞凯利生物科技：文控专员",
+        "period": "2021-08",
+        "source_refs": [
+          "dms-longgang"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "1 名，4,000–5,500 元，原表该行未明周期或具体职责。",
+        "fact_id": "posting-dms-dayu",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "昶联材料科技（赣州）：DCC 文控专员",
+        "period": "2026-05",
+        "source_refs": [
+          "dms-dayu"
+        ]
       }
     ]
   },
@@ -37507,33 +37568,33 @@
     },
     "badges": [
       "文档与记录管理 · 分类与元数据 · 权限与保存期限",
-      "O*NET-SOC 15-1299.03 · 2025 年工资数据（父类口径）",
-      "Job Zone Four · 兴趣代码 CI · 2024—2034 年「远高于平均（7% 或更高）」"
+      "O*NET-SOC 15-1299.03 · 美国工资仅有 15-1299 父组数据",
+      "Job Zone Four · 兴趣代码 CI"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "median",
         "key": "us_pay",
-        "label": "美国中位工资（2025 年工资数据，父类口径 116,580 美元/年；56.05 美元/时）"
+        "label": "美国 15-1299 父组：中位工资（2025 年工资数据，父类口径 116,580 美元/年；56.05 美元/时）"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年「远高于平均（7% 或更高）」，父类口径；来源只给类别与阈值）"
+        "label": "美国 15-1299 父组：预计就业变化（2025–2035）：+5.1%"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年约 472,000 人，父类口径）"
+        "label": "美国 15-1299 父组： 2025 就业：471,200 人"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国预计职位空缺（2024—2034 年约 31,300 个，含更替需求，父类口径）"
+        "label": "美国 15-1299 父组：预计年均空缺：27,000（含替补）"
       },
       {
         "availability": "missing",
@@ -37547,17 +37608,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "文档管理专员（O*NET-SOC 15-1299.03）在信息与技术服务、金融与保险、医疗与教育、公共管理与制造等依赖大量电子记录的组织中做文件与记录管理：参与确定文档管理政策与分类体系与元数据规范，协同实施与配置文档与内容管理系统的功能与访问权限与版本控制与文档工作流，操作扫描与影像与自动数据录入实施捕获与数字化，在授权范围内检索与分发电子资产并提供支持与培训材料，监控法规动态与保存期限并组织到期鉴定与销毁，编写系统测试计划与技术功能与规格并分析系统绩效数据。美国口径：本细类工资与就业取自父类 Computer Occupations, All Other（15-1299）代理口径——2025 年工资数据父类中位 116,580 美元/年（56.05 美元/时），年度分位 55,940／79,370／116,580／157,500／188,470 美元；2024 年就业约 472,000 人，2024—2034 年预测「远高于平均（7% 或更高）」、预计空缺约 31,300 个；细类准备层级 Job Zone Four，兴趣代码 CI。中国大陆：文件与电子档案按《中华人民共和国档案法》管理，会计档案按《会计档案管理办法》管理，涉密与数据与个人信息按相关法规执行；公开统计未建立职业级工资口径，本页在相关位置可见标记缺口。"
+      "text": "文档管理专家如何控制版本、权限、元数据和发布？看中国文控招聘、美国父组数据和相邻岗位区别。"
     },
     "title": {
       "availability": "available",
       "text": "文档管理专员"
     }
   },
-  "source_content_sha256": "dc9067291c839817d13b62df0537ef1944bd1532c7058ea82b0eb4bc324d4471",
+  "source_content_sha256": "5c44ba8699bf0ba5cfb5162d93fc3ec1d10337f30432756a6f9997a503afa8cc",
   "subject": {
     "canonical_slug": "document-management-specialists",
     "name": "文档管理专员",
-    "summary": "文档管理专员（美国侧 O*NET-SOC 15-1299.03，Document Management Specialists）是面向组织的文件与记录管理岗位：实施与管理企业级文档管理系统及相关规程，使组织能够捕获、存储、检索、共享和销毁电子记录与文档；参与确定文档管理政策并建立文档与内容分类体系，按密级与功能与元数据识别与分类文档并制定标准与最佳实践与系统使用规程，开展需求评估并与其他信息技术专业人员协同实施电子文档处理与检索与分发系统；管理访问权限与版本控制，记录官方文件变更并与法务与合规及记录管理人员确认，配置用户界面与访问配置文件与文档工作流，操作扫描与影像与自动数据录入实施捕获与数字化并对文档处理与复制与分发与存储与归档实施安全监督；在授权范围内检索电子资产并分发给用户并提供支持文档与培训材料，监控法规动态与保存期限并组织到期鉴定与销毁，编写系统测试计划与技术功能与规格并分析系统绩效数据。美国口径：本细类的工资与就业与预测取自「父类 Computer Occupations, All Other（15-1299）代理口径」——BLS 2025 年工资数据父类中位 116,580 美元/年（56.05 美元/时），年度分位 55,940／79,370／116,580／157,500／188,470 美元（小时分位 26.89／38.16／56.05／75.72／90.61）；O*NET 摘要页给出 2024 年就业约 472,000 人、2024—2034 年预测为「远高于平均（7% 或更高）」与约 31,300 个预计职位空缺（该来源只给出类别与阈值而未给出单一精确百分比，本页按口径原文表述）；细类口径为：准备层级 Job Zone Four（SVP 7.0 至 <8.0），兴趣代码 CI，教育反馈为 60% 学士学位与 15% 硕士学位与 10% 副学士或两年制学位，任务 23 项；工作情境包括每天使用电子邮件 100%、每天电话交谈 74%、每天面对面讨论 59%、与他人持续接触 16%（另 47% 大部分时间接触）、团队协作「极其重要」33%、决策自由度「很大」20%、精确或准确「极其重要」35%、每天面对时间压力 20%、每天作出决定 16%、工作时间「规律（固定日程）」95%、持续坐着 35%（另 50% 超过一半时间）、与外部客户或公众打交道「非常重要」26%。中国大陆口径：文件与电子档案管理按《中华人民共和国档案法》（2020 年修订，2021 年 1 月 1 日施行）执行，电子档案应当来源可靠、程序规范、要素合规并与传统载体档案具有同等效力；会计档案按《会计档案管理办法》（财政部 国家档案局令第 79 号，2016 年 1 月 1 日施行）执行；涉密文件与网络与数据与个人信息安全按《中华人民共和国保守国家秘密法》《中华人民共和国网络安全法》《中华人民共和国数据安全法》《中华人民共和国个人信息保护法》等执行（上述专门法规外的部分按名称与一般要求引用，未逐条核对条文编号）；本职业在中国大陆不设统一准入类职业资格。公开统计未建立与本职业对应的职业级工资口径，本页据实保留缺口。"
+    "summary": "制定或维护文件分类和元数据，配置版本、审批、访问及发布流程，支持检索、迁移与审计。权限和最终批准由组织规则决定。"
   }
 }

@@ -161,6 +161,9 @@
       "item:musicians-and-singers.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:musicians-and-singers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:musicians-and-singers.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13256,6 +13259,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。排练表把第二首写成降调，但伴奏文件名没有调性。写出要向音乐负责人核实的版本和应在试演前记录的凭证。"
+            ]
+          },
+          "id": "musicians-and-singers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "准备一次排练交接",
+          "type": "notice"
         }
       ]
     },
@@ -15721,6 +15739,13 @@
         "id": "musicians-and-singers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "musicians-and-singers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15950,7 +15975,7 @@
       "text": "音乐家与歌手"
     }
   },
-  "source_content_sha256": "60a47aff34fcfe944a5ff68e41ffa408afdfa7662d8b5f282032eb7c0d94fb16",
+  "source_content_sha256": "37b15717e9a681f843d41b68a8c8e8d6e8c6707f634f0515e418fc97a5aab1d6",
   "subject": {
     "canonical_slug": "musicians-and-singers",
     "name": "音乐家与歌手",

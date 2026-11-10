@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-batch-hechuan": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-batch-jixi": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -19687,60 +19693,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "id": "food-batchmakers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-2"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "id": "food-batchmakers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-3"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19763,7 +19729,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19791,7 +19757,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -22964,14 +22930,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "US sampling | OEWS errors and missing/unreliable breakdowns; large occupation (2025 176,800 BLS base via O*NET) still may lack industries/regions. No readable industry wages obtained, visible gap, no means/third-party substitution."
+              "OEWS estimates are based on a survey. Detailed regional or industry estimates may be missing or less reliable. The industry table covers the listed occupation and industry combinations."
             ]
           },
           "id": "food-batchmakers.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet-details",
-            "bls-oews-methods",
-            "internal-rubric"
+            "oews-profile-2025",
+            "bls-oews-methods"
           ],
           "type": "prose"
         }
@@ -25215,12 +25180,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Original pending check | 10th percentile 31,990 dollars / year (2025 OEWS)"
+              "10th percentile 31,990 dollars / year (2025 OEWS)"
             ]
           },
           "id": "food-batchmakers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "nbs-wages-2025"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25245,12 +25210,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Original pending | 25th percentile 36,350 dollars / year (2025 OEWS)"
+              "25th percentile 36,350 dollars / year (2025 OEWS)"
             ]
           },
           "id": "food-batchmakers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "nbs-wages-2025"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25275,12 +25240,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Original pending | 75th percentile 49,670 dollars / year (2025 OEWS)"
+              "75th percentile 49,670 dollars / year (2025 OEWS)"
             ]
           },
           "id": "food-batchmakers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "nbs-wages-2025"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25305,12 +25270,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Original pending | 90th percentile 58,940 dollars / year (2025 OEWS)"
+              "90th percentile 58,940 dollars / year (2025 OEWS)"
             ]
           },
           "id": "food-batchmakers.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "nbs-wages-2025"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25863,12 +25828,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Counties and lower-tier markets"
+              "Mainland China job postings"
             ]
           },
           "id": "food-batchmakers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "batch-hechuan",
+            "batch-jixi"
           ],
           "type": "prose"
         },
@@ -25877,12 +25843,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No Chinese city/regional monthly wages obtained; no ads, means, hearsay substitution."
+              "A Hechuan posting from Meixiangyuan lists CNY 4,000–6,000 per month for batching and advertises cooking separately. A Jixi posting from Weixian Foods covers preparing auxiliary ingredients and spices and keeping records; it lists CNY 4,000–5,000 without stating the pay period. Ask about batch volume, weight checks, shifts and pay terms."
             ]
           },
           "id": "food-batchmakers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "batch-hechuan",
+            "batch-jixi"
           ],
           "type": "prose"
         },
@@ -26211,12 +26178,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2026-10-11 obtained normal May2025 Profiles national percentiles and industries: employees 174520 / RSE1.5%; annual mean 43750 / hourly 21.04; annual P10/P25/P50/P75/P90=31990 / 36350 / 42290 / 49670 / 58940, hourly=15.38 / 17.47 / 20.33 / 23.88 / 28.34. Selected industries are highest annual medians, not largest employers or all occupations. EP is separate, not replaced by OEWS count. Protected Hero / FAQ historical conflicts listed separately."
+              "The industry figures compare this occupation in selected industries. They are not wages for all jobs in the industry or a ranking of employers by size. OEWS wage employment and the employment projections have different coverage."
             ]
           },
           "id": "food-batchmakers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "oews-profile-2025"
+            "oews-profile-2025",
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26225,14 +26193,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 US median 42,290 dollars / year, 20.33 dollars / hour checked through current O*NET, not starting pay. Insufficient evidence: National percentile table unread this round, originals pending, not causal region/experience/shifts."
+              "National percentiles describe the distribution of wages for this occupation. The 50th percentile is the median, not a starting wage. The figures do not explain differences by region, experience or shift."
             ]
           },
           "id": "food-batchmakers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "bls-oews-methods",
-            "onet-details",
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26332,12 +26298,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Growth 6.5% (overall, not AI attribution, 2025—2035 BLS via O*NET)"
+              "BLS projects U.S. employment for SOC 51-3092 to rise 6.5% from 176,800 in 2025 to 188,200 in 2035, with about 23,100 annual openings including replacement needs."
             ]
           },
           "id": "food-batchmakers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26657,31 +26623,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Packaging/Filling direction",
@@ -28759,13 +28725,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "No representative recruitment samples, no channel/peak-scale inference.",
-              "Each ad dates/place/product/equipment/employment/shifts/pay/qualifications; US typical not Chinese requirement."
+              "Use the two historical postings to compare the duties. When applying, check the current listing, location, hours and training. These examples do not establish national wages or hiring channels."
             ]
           },
           "id": "food-batchmakers.path.recruitment-sample.1",
           "source_refs": [
-            "internal-rubric"
+            "batch-hechuan",
+            "batch-jixi"
           ],
           "title": "Food Batchmakers | path",
           "type": "notice"
@@ -30204,7 +30170,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS excludes overtime/nonproduction bonuses/benefits/self-employment, includes production incentives; industries not obtained, visible gap."
+              "OEWS excludes overtime/nonproduction bonuses/benefits/self-employment, includes production incentives; national and industry statistics are separate."
             ]
           },
           "id": "food-batchmakers.market-signals.market-signal-card.19",
@@ -30769,27 +30735,26 @@
           "data": {
             "entries": [
               {
-                "answer": "O*NET-SOC 51-3092.00 sets/operates recipe mixing equipment for food, including candy/cheese. Checks ingredients/specifications/quantities, selects/calibrates scales, mixes in order and controls time/temperature, monitors viscosity/flow and adjusts, samples moisture/acidity/gravity/milkfat, records lots/parameters, cleans/disinfects. Excludes baking/drying, cooking, generic mixing, packaging/filling, bread/pastries.",
+                "answer": "Batchmakers weigh ingredients to the production formula, run mixing or blending equipment, and record ingredients, processing time and test results for each batch. Some equipment also heats the mix; check whether the main handoff concerns formulation or cooking conditions.",
                 "id": "food-batchmakers.faq.1",
-                "question": "What does it do?",
+                "question": "What do food batchmakers do?",
                 "question_key": "career.faq.food-batchmakers.q1",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "onet-summary"
                 ]
               },
               {
-                "answer": "Baking/drying controls heat/moisture; cooking produces cooked foods; generic mixers uniformity; bakers bread/pastries; packaging equipment/net content. Batchmaking recipe weights/mixing/ratios/parameters, allergens/retained samples, differing authority/quality objects.",
+                "answer": "Batchmakers primarily check ingredients and formulas and hand off a traceable mix. Cooking operators primarily run cooking equipment, monitor readings such as time, temperature or pressure, and hand off cooked batches. Jobs on the same line can overlap, so ask what the shift records track.",
                 "id": "food-batchmakers.faq.2",
-                "question": "Difference from Food, Machine Operators and Tenders and cooking operators?",
+                "question": "How do food batchmakers differ from cooking machine operators?",
                 "question_key": "career.faq.food-batchmakers.q2",
                 "source_refs": [
                   "onet-summary",
-                  "internal-rubric"
+                  "onet-contrast"
                 ]
               },
               {
-                "answer": "2025 annual median 42,290 dollars, hourly 20.33; 2024 employment 173,500 BLS base; 2024—2034 above-average about 7% or more, annual 24,200 including replacements. US only, not elsewhere.",
+                "answer": "The 2025 U.S. occupational median wage was $20.33 an hour and $42,290 a year. BLS projects U.S. employment for SOC 51-3092 to rise 6.5% from 176,800 in 2025 to 188,200 in 2035, with about 23,100 annual openings including replacement needs.",
                 "id": "food-batchmakers.faq.3",
                 "question": "US wages/employment?",
                 "question_key": "career.faq.food-batchmakers.q3",
@@ -30799,13 +30764,13 @@
                 ]
               },
               {
-                "answer": "China no precise occupational statistics established. NBS manufacturing means non-private 113,594 yuan / year, private 76,055 yuan / year, no occupational split, background only. Visible Insufficient evidence:, no means/ads/third-party substitutions.",
+                "answer": "A Hechuan posting from Meixiangyuan lists CNY 4,000–6,000 per month for batching and advertises cooking separately. A Jixi posting from Weixian Foods covers preparing auxiliary ingredients and spices and keeping records; it lists CNY 4,000–5,000 without stating the pay period. Ask about batch volume, weight checks, shifts and pay terms.",
                 "id": "food-batchmakers.faq.4",
-                "question": "Chinese corresponding wages?",
+                "question": "How should I compare roles and pay in mainland China job postings?",
                 "question_key": "career.faq.food-batchmakers.q4",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "batch-hechuan",
+                  "batch-jixi"
                 ]
               },
               {
@@ -30829,12 +30794,11 @@
                 ]
               },
               {
-                "answer": "O*NET high school/equivalent 38%, some college no degree 27%, postsecondary 22%, on-the-job (Job Zone 1-2, SVP below 6.0). Employer/equipment requirements govern.",
+                "answer": "U.S. BLS lists a high school diploma or equivalent and moderate-term on-the-job training as typical. Ask which equipment training covers, how records are checked and when you can work independently.",
                 "id": "food-batchmakers.faq.7",
                 "question": "Education/training?",
                 "question_key": "career.faq.food-batchmakers.q7",
                 "source_refs": [
-                  "onet-summary",
                   "bls-projections-2025-35"
                 ]
               },
@@ -30859,7 +30823,7 @@
                 ]
               },
               {
-                "answer": "US 2024—2034 above-average 7% or more, replacements included; not personal opportunities, local manufacturing/automation matters. Baking/drying, cooking, mixing, packaging, bakers, inspection/sampling require relearning; maintenance/management alternatives.",
+                "answer": "BLS projects U.S. employment for SOC 51-3092 to rise 6.5% from 176,800 in 2025 to 188,200 in 2035, with about 23,100 annual openings including replacement needs. If you want to monitor steam cooking or frying equipment, compare food cooking machine operator roles. If you prefer sampling and testing to a protocol, compare food science technician roles and check the additional training.",
                 "id": "food-batchmakers.faq.10",
                 "question": "Outlook/transitions?",
                 "question_key": "career.faq.food-batchmakers.q10",
@@ -30917,15 +30881,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Author checked 2026-10-11 O*NET 51-3092.00 tasks/context/education/interests, BLS 2025—2035 exact row/OEWS methods, NBS 2025 table. Original old dates retained, protected FAQ/Hero older conflicts separate. 2026-10-11 normal May2025 five percentiles/industries added, restriction resolved."
+              "O*NET describes the work. BLS publishes separate U.S. wage and employment projection estimates. Mainland industry figures and individual postings are shown separately."
             ]
           },
           "id": "food-batchmakers.sources.source-card.3",
           "source_refs": [
-            "onet-details",
-            "bls-oews-methods",
-            "nbs-wages-2025",
-            "oews-profile-2025"
+            "onet-summary",
+            "bls-oews-2025",
+            "bls-projections-2025-35",
+            "batch-hechuan",
+            "batch-jixi"
           ],
           "type": "prose"
         },
@@ -30963,28 +30928,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
-                "id": "navigation-2",
+                "entity": "MBTI",
+                "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
+                "entity": "Big Five",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to Food Batchmakers",
@@ -31024,7 +30977,7 @@
                 "period": "2026 occupational profile",
                 "publisher": "O*NET Resource Center",
                 "scope": "exact occupation",
-                "url": "https://www.onetonline.org/link/summary/51-3092.00"
+                "url": "https://www.onetonline.org/link/details/51-3092.00"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31042,17 +30995,16 @@
                 "url": "https://www.onetonline.org/link/details/51-3092.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "51-3092: 2024 173.5 thousand, above-average 7% or more, annual 24.2 thousand.",
-                  "Projections not personal hiring odds."
+                  "BLS projects U.S. employment for SOC 51-3092 to rise 6.5% from 176,800 in 2025 to 188,200 in 2035, with about 23,100 annual openings including replacement needs."
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
                 "limitation": "Changes/openings not personal income/hiring guarantees.",
                 "market": "US",
-                "name": "U.S. Bureau of Labor Statistics：2024—2034 Occupational Projections and Characteristics",
-                "period": "2024—2034",
+                "name": "BLS: Occupational Projections Table 1.2 (2025–2035)",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "51-3092 Food Batchmakers",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31071,7 +31023,7 @@
                 "period": "May 2025 OEWS",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "51-3092 Food Batchmakers",
-                "url": "https://www.bls.gov/news.release/archives/ocwage_05152026.pdf"
+                "url": "https://www.onetonline.org/link/localwages/51-3092.00"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31196,6 +31148,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Group 10 lists ten batching workers at CNY 4,000–6,000 per month, with junior secondary education or above. The cooking job is listed separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "batch-hechuan",
+                "limitation": "One posting only; not national wages or confirmation of a current vacancy.",
+                "market": "Mainland China",
+                "name": "Chongqing Meixiangyuan: batching worker",
+                "period": "2025-05",
+                "publisher": "Hechuan District Government, Chongqing",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hc.gov.cn/bmjd/bm_100475/rlsbj/zwxx_101296/gggs_11/202505/t20250521_14645092.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The eighth role under employer ten lists three workers to prepare auxiliary ingredients and spices and document batches. It lists CNY 4,000–5,000 without specifying the pay period."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "batch-jixi",
+                "limitation": "One posting only; not national wages or confirmation of a current vacancy.",
+                "market": "Mainland China",
+                "name": "Anhui Weixian Foods: batching",
+                "period": "2026-08",
+                "publisher": "Huayang Town Government, Jixi County",
+                "scope": "recruitment_proxy",
+                "url": "https://www.cnjx.gov.cn/Jczwgk/show/3808494.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Batchmakers primarily check ingredients and formulas and hand off a traceable mix. Cooking operators primarily run cooking equipment, monitor readings such as time, temperature or pressure, and hand off cooked batches. Jobs on the same line can overlap, so ask what the shift records track."
+                ],
+                "evidence_type": "Primary task profile",
+                "id": "onet-contrast",
+                "limitation": "Occupational task comparison; individual jobs can combine duties.",
+                "market": "United States",
+                "name": "Tasks for the adjacent food production occupation",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/51-3093.00"
               }
             ]
           },
@@ -34080,6 +34077,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-batch-hechuan",
+            "posting-batch-jixi"
+          ],
           "sources_note": {
             "$item": "food-batchmakers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34089,7 +34090,7 @@
           "ui": {
             "ai_heading": "AI affect batchmaker wages?",
             "driver_heading": "Industries/directions using this job?",
-            "official_heading": "Public recruitment (historical, not official)",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Education/roles/checks (editorial, not wages)",
             "scenario_heading": "Typical starting roles by batchmaker education?",
             "scenario_interpretation_label": "Notes/checks",
@@ -35872,7 +35873,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Start checking batchmaker fit",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -35946,30 +35947,10 @@
               "$link": "food-batchmakers.navigation.links.1",
               "block": "navigation",
               "copy_key": "career.item.navigation-links",
-              "entry": "navigation-2",
-              "field": "url"
-            },
-            "label": "MBTI (English)"
-          },
-          {
-            "href": {
-              "$link": "food-batchmakers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-3",
-              "field": "url"
-            },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "food-batchmakers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Explore my personality preferences"
           },
           {
             "href": {
@@ -35979,7 +35960,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Explore my Big Five traits"
           }
         ]
       },
@@ -36178,36 +36159,36 @@
       },
       {
         "derivation": null,
-        "display_value": "173,500 (2024 BLS base through O*NET)",
+        "display_value": "176,800 people (2025)",
         "fact_id": "us-employment-2025",
         "market": "US",
-        "measure": "Employment size",
-        "occupation_scope": "Food Batchmakers; 51-3092.00",
-        "period": "2025",
+        "measure": "Base-year employment",
+        "occupation_scope": "U.S. SOC 51-3092",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Above-average 7% or more, 2024—2034 BLS via O*NET",
+        "display_value": "6.5% (2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
-        "measure": "Growth rate",
-        "occupation_scope": "Food Batchmakers; 51-3092.00",
-        "period": "2024—2034",
+        "measure": "Projected employment change",
+        "occupation_scope": "U.S. SOC 51-3092",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Annual 24,200 (2024—2034 replacements included)",
+        "display_value": "23,100 per year (including replacement needs)",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
-        "measure": "Annual openings",
-        "occupation_scope": "Food Batchmakers; 51-3092.00",
-        "period": "2024—2034",
+        "measure": "Average annual openings",
+        "occupation_scope": "U.S. SOC 51-3092",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -36367,6 +36348,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Group 10 lists ten batching workers at CNY 4,000–6,000 per month, with junior secondary education or above. The cooking job is listed separately.",
+        "fact_id": "posting-batch-hechuan",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Chongqing Meixiangyuan: batching worker",
+        "period": "2025-05",
+        "source_refs": [
+          "batch-hechuan"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The eighth role under employer ten lists three workers to prepare auxiliary ingredients and spices and document batches. It lists CNY 4,000–5,000 without specifying the pay period.",
+        "fact_id": "posting-batch-jixi",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Anhui Weixian Foods: batching",
+        "period": "2026-08",
+        "source_refs": [
+          "batch-jixi"
+        ]
       }
     ]
   },
@@ -36393,19 +36398,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "US growth (2024—2034)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "US size (2024 base)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "US annual openings (2024—2034)"
+        "label": "U.S. projected annual job openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -36419,14 +36424,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Food Batchmakers duties, entry, boundaries, development; official information distinguishing statistics/proxies/gaps."
+      "text": "See how food batchmakers weigh ingredients, run mixers and log batches. Compare mainland China postings and U.S. employment data, and distinguish batching from cooking."
     },
     "title": {
       "availability": "available",
       "text": "Food Batchmakers"
     }
   },
-  "source_content_sha256": "1893d609c2da67ccf928abc70a6b2c95de8230a828cc9c869183e3c244b3e144",
+  "source_content_sha256": "bec6b484124e9c632b5d1b00408dd862e7f581e4fd57a1d50bba6667b3e804ae",
   "subject": {
     "canonical_slug": "food-batchmakers",
     "name": "Food Batchmakers",

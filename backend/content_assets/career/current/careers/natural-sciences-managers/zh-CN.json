@@ -176,6 +176,9 @@
       "item:natural-sciences-managers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:natural-sciences-managers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:natural-sciences-managers.profile.definition-block.1": {
         "status": "pending_mapping"
       },
@@ -12202,6 +12205,21 @@
             "source-pack-onet-custom"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。项目甲临近里程碑但关键复测未完成，乙已复测但仪器预约冲突。写下下一轮人员或设备分配依据及应问项目负责人的问题。"
+            ]
+          },
+          "id": "natural-sciences-managers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "用项目证据分配下一轮资源",
+          "type": "notice"
         }
       ]
     },
@@ -14663,6 +14681,13 @@
         "id": "natural-sciences-managers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "natural-sciences-managers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14940,7 +14965,7 @@
       "text": "自然科学领域经理"
     }
   },
-  "source_content_sha256": "580a50691ccffeb0ca6999a90d25284a3551b73af5c71fd49cb418d2fe72a78f",
+  "source_content_sha256": "f6bff7e42f3eee1f0f839a05dc3ab09b338c5f8c79b3851570e23cdc58c5f857",
   "subject": {
     "canonical_slug": "natural-sciences-managers",
     "name": "自然科学领域经理",

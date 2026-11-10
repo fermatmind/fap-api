@@ -14,9 +14,6 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24,13 +21,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-2035": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-industry-wage-aerospace-mfg-2025": {
         "status": "pending_mapping"
@@ -48,10 +45,10 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-high10-2025": {
         "status": "pending_mapping"
@@ -23581,7 +23578,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：桥梁与船闸操作员不是「看门口」，而是按运行规程与通航指令操作桥梁、船闸与航标信号，控制开合时序、确认桥面净空与闸室净宽、引导船舶安全通过，并如实记录船舶与通行数据。美国侧对应 O*NET-SOC 53-6011.00，列为 Job Zone 1-2（SVP 低于 6.0）。核心边界是：你可以按授权操作设备、发布信号与记录数据，但不能自行改变运行方案、通航时段或结构安全判断，也不能在未确认净空、净宽与人员撤离的情况下放行或开合。"
+              "一句话判断：活动桥与船闸运行员不是「看门口」，而是按运行规程与通航指令操作桥梁、船闸与航标信号，控制开合时序、确认桥面净空与闸室净宽、引导船舶安全通过，并如实记录船舶与通行数据。美国侧对应 O*NET-SOC 53-6011.00，列为 Job Zone 1-2（SVP 低于 6.0）。核心边界是：你可以按授权操作设备、发布信号与记录数据，但不能自行改变运行方案、通航时段或结构安全判断，也不能在未确认净空、净宽与人员撤离的情况下放行或开合。"
             ]
           },
           "id": "bridge-and-lock-tenders.quick-decision.fit-decision-checklist.1",
@@ -23603,10 +23600,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "入行前可先完成本页 L1 虚构纸面练习：核对条件、标记未知状态、填写事件记录与交接单。练习只用于体验观察、记录和复核；真实设备操作须另经单位培训、考核与岗位授权。"
+              "到入行区做「L1｜核对六条虚构船闸事件」，先独立交事件表和交接。"
             ]
           },
           "id": "bridge-and-lock-tenders.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23614,7 +23614,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历、资格与岗位授权必须分别核对：O*NET 把该职业列为 Job Zone 1-2，受访者中 65% 认为需高中或同等学历、20% 认为需中等后证书、15% 认为需低于高中；相关工作经历与在岗培训从数天到一年不等。在中国大陆，通航建筑物的运行方案应当经负责航道管理的部门同意并公布，建设单位或管理单位应当按照规定维护保养通航建筑物、保持其正常运行；具体岗位的持证、值班与操作授权由所在单位与主管部门的规定确定。"
+              "美国 BLS 的典型入门为高中或同等学历、无需相关经历和短期在岗培训；O*NET 的 65%／20%／15% 是受访者对新聘学历要求的回答。大陆船闸、升船机岗位另核运行单位培训考核及权限；工程招聘条件以对应公告为准。"
             ]
           },
           "id": "bridge-and-lock-tenders.quick-decision.fermat-decision-card.6",
@@ -23863,7 +23863,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "桥梁与船闸操作员以通航设备的运行与放行为核心：安保人员负责人员与财产的安全防范，不操作通航设备；施工设备操作员（如挖掘机、起重机操作）负责土方与吊装作业，不承担通航放行；公路养护工负责路面与附属设施的养护，不控制船闸与桥跨；线路安装与维修工负责电力与通信线路，不承担通航信号放行；锁具与保险柜修理工处理锁具开启与维修，与通航设备无关。名称相近或同在现场作业，都不代表责任可以互换。"
+              "活动桥与船闸运行员以通航设备的运行与放行为核心：安保人员负责人员与财产的安全防范，不操作通航设备；施工设备操作员（如挖掘机、起重机操作）负责土方与吊装作业，不承担通航放行；公路养护工负责路面与附属设施的养护，不控制船闸与桥跨；线路安装与维修工负责电力与通信线路，不承担通航信号放行；锁具与保险柜修理工处理锁具开启与维修，与通航设备无关。名称相近或同在现场作业，都不代表责任可以互换。"
             ]
           },
           "id": "bridge-and-lock-tenders.profile.career-quick-answers-block.7",
@@ -24062,7 +24062,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET当前2025行业分布：政府82%、运输与仓储16%、其他2%。这描述美国53-6011就业所属行业，不是中国编制比例、收入档次或雇主采用率。中国航道管理、船闸运行、桥梁管理与外包单位的岗位另按真实职责核对，本轮未核一一对应细类代码。"
+              "O*NET 列出的 2025 年美国主要行业：政府82%、运输与仓储16%。这描述美国53-6011就业所属行业，不是中国编制比例、收入档次或雇主采用率。中国航道管理、船闸运行、桥梁管理与外包单位的岗位另按真实职责核对，这里不提供一一对应细类代码。"
             ]
           },
           "id": "bridge-and-lock-tenders.profile.career-quick-answers-block.24",
@@ -24168,7 +24168,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "在中国大陆，航道与通航建筑物的运行管理受《中华人民共和国航道法》规范：国务院交通运输主管部门主管全国航道管理工作；通航建筑物的运行应当适应船舶通行需要，运行方案应当经负责航道管理的部门同意并公布；建设或管理单位应当按照规定维护保养通航建筑物，保持其正常运行；法律同时禁止在通航建筑物及其引航道和船舶调度区内从事影响其正常运行的活动。 中国船闸、升船机适用2026修正《通航建筑物运行管理办法》：第29条要求本单位教育培训合格后上岗并明确岗位责任；第15条对运行条件、开放时间、调度及养护停航调整要求重新编制方案报原审批部门审批。开合桥、灯塔不能仅因美国归同一职业就直接套用该办法。"
+              "在中国大陆，航道与通航建筑物的运行管理受《中华人民共和国航道法》规范：国务院交通运输主管部门主管全国航道管理工作；通航建筑物的运行应当适应船舶通行需要，运行方案须经负责航道管理的部门审查同意并依法公开；建设或管理单位应当按照规定维护保养通航建筑物，保持其正常运行；法律同时禁止在通航建筑物及其引航道和船舶调度区内从事影响其正常运行的活动。 中国船闸、升船机适用2026修正《通航建筑物运行管理办法》：第29条要求本单位教育培训合格后上岗并明确岗位责任；第15条对运行条件、开放时间、调度及养护停航调整要求重新编制方案报原审批部门审批。开合桥、灯塔不能仅因美国归同一职业就直接套用该办法。 对该办法适用的船闸和升船机，第13条规定：审查同意后，航道管理部门五个工作日内在官网公开运行方案主要内容；运行单位收到通知后五个工作日内另以船方易获知的方式公开。"
             ]
           },
           "id": "bridge-and-lock-tenders.profile.career-quick-answers-block.32",
@@ -24241,7 +24241,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：国家统计局《2025 年城镇单位就业人员年平均工资情况》（2026-05-15 发布）按行业门类与岗位大类公布平均工资，但没有单列「桥梁与船闸操作员」这一职业；本页按证据路由只发布交通运输、仓储和邮政业（城镇非私营单位）行业均值 133,981 元/年作为显式代理，并明确它不是本职业的职业工资。 同一发布另有交通私营73133、公共设施非私营70172元/年，均仅为不同覆盖的行业参考。"
+              "中国大陆侧：国家统计局《2025 年城镇单位就业人员年平均工资情况》（2026-05-15 发布）按行业门类与岗位大类公布平均工资，但没有单列「活动桥与船闸运行员」这一职业；本页按证据路由只发布交通运输、仓储和邮政业（城镇非私营单位）行业均值 133,981 元/年作为显式代理，并明确它不是本职业的职业工资。 同一发布另有交通私营73133、公共设施非私营70172元/年，均仅为不同覆盖的行业参考。"
             ]
           },
           "id": "bridge-and-lock-tenders.profile.onet-structured-fields-block.3",
@@ -24255,7 +24255,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS2025—2035本职业表列就业3.1→3.1千人、净变化-0.1千人、增长-2.3%、年均空缺0.3千个；各列独立舍入。O*NET摘要已更新2025就业3100/当前预测，localtrends整数增长-2%；不能再说它仍是旧期，也不能由显示人数相减推出零增长。"
+              "BLS 预测表显示，2025 年和 2035 年就业人数分别四舍五入为 3,100，净减少约 100（−2.3%），年均约 300 个空缺。人数、净变化和增减比例各自舍入。"
             ]
           },
           "id": "bridge-and-lock-tenders.profile.onet-structured-fields-block.4",
@@ -24271,7 +24271,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET当前2025行业分布：政府82%、运输与仓储16%、其他2%。这描述美国53-6011就业所属行业，不是中国编制比例、收入档次或雇主采用率。 Hot Technology页是六项具体产品：Excel、Office、Outlook、Word、PeopleSoft、SAP，2025美国招聘资料职业内比例均未公布；详细页六类软件另含通用Email与VPN。六产品与六类的单位不同，后者非全部标Hot，不能由清单推出实际采用或替代率。"
+              "O*NET 列出的 2025 年美国主要行业：政府82%、运输与仓储16%。这描述美国53-6011就业所属行业，不是中国编制比例、收入档次或雇主采用率。 Hot Technology页是六项具体产品：Excel、Office、Outlook、Word、PeopleSoft、SAP，2025美国招聘资料职业内比例均未公布；详细页六类软件另含通用Email与VPN。六产品与六类的单位不同，后者非全部标Hot，不能由清单推出实际采用或替代率。"
             ]
           },
           "id": "bridge-and-lock-tenders.profile.onet-structured-fields-block.5",
@@ -24452,7 +24452,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "本页把桥梁与船闸操作员与五个相邻方向放在同一组维度上比较：职业方向、核心工作与产出、关键区别，以及每种偏好更适合选择哪一个方向。相邻方向按各自的官方职业说明描述，不代表工种名称可以互换。"
+              "本页把活动桥与船闸运行员与五个相邻方向放在同一组维度上比较：职业方向、核心工作与产出、关键区别，以及每种偏好更适合选择哪一个方向。相邻方向按各自的官方职业说明描述，不代表工种名称可以互换。"
             ]
           },
           "id": "bridge-and-lock-tenders.direction-comparison.adjacent-career-comparison-table.8",
@@ -24474,7 +24474,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表比较的是桥梁与船闸操作员与相邻工种，以及从相邻岗位转入的路径；判断依据是主要产出、责任对象与所需训练，而不是工种名称的相近程度。"
+              "下表比较的是活动桥与船闸运行员与相邻工种，以及从相邻岗位转入的路径；判断依据是主要产出、责任对象与所需训练，而不是工种名称的相近程度。"
             ]
           },
           "id": "bridge-and-lock-tenders.direction-comparison.adjacent-career-comparison-table.10",
@@ -24507,7 +24507,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "两者都以值守与记录为常态；但安保工作对象是人与场所的安全防范，桥梁与船闸操作员的操作对象是通航设备与船舶通行，需要按运行规程控制机械与信号。"
+              "两者都以值守与记录为常态；但安保工作对象是人与场所的安全防范，活动桥与船闸运行员的操作对象是通航设备与船舶通行，需要按运行规程控制机械与信号。"
             ]
           },
           "id": "bridge-and-lock-tenders.direction-comparison.adjacent-career-comparison-table.13",
@@ -24518,7 +24518,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做人员与场所的安全防范，优先考察安保；若你更愿意操作通航设备并引导船舶，优先考察桥梁与船闸操作员。"
+              "若你更愿意做人员与场所的安全防范，优先考察安保；若你更愿意操作通航设备并引导船舶，优先考察活动桥与船闸运行员。"
             ]
           },
           "id": "bridge-and-lock-tenders.direction-comparison.adjacent-career-comparison-table.14",
@@ -24551,7 +24551,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "施工设备操作属工程施工环节，机械能力与作业面条件为核心；桥梁与船闸操作员以定时开合与通行秩序为核心，不能自行改变通航时序。"
+              "施工设备操作属工程施工环节，机械能力与作业面条件为核心；活动桥与船闸运行员以定时开合与通行秩序为核心，不能自行改变通航时序。"
             ]
           },
           "id": "bridge-and-lock-tenders.direction-comparison.adjacent-career-comparison-table.17",
@@ -24562,7 +24562,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意操作大型机械完成工程作业，优先考察施工设备操作员；若你更愿意按规程值守并保障通航，优先考察桥梁与船闸操作员。"
+              "若你更愿意操作大型机械完成工程作业，优先考察施工设备操作员；若你更愿意按规程值守并保障通航，优先考察活动桥与船闸运行员。"
             ]
           },
           "id": "bridge-and-lock-tenders.direction-comparison.adjacent-career-comparison-table.18",
@@ -24595,7 +24595,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "公路养护以道路设施为对象，作业常在开放交通环境下；桥梁与船闸操作员以通航建筑物与其运行状态为对象，须同时关注水路与陆路通行。"
+              "公路养护以道路设施为对象，作业常在开放交通环境下；活动桥与船闸运行员以通航建筑物与其运行状态为对象，须同时关注水路与陆路通行。"
             ]
           },
           "id": "bridge-and-lock-tenders.direction-comparison.adjacent-career-comparison-table.21",
@@ -24606,7 +24606,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做道路设施养护与交通组织，优先考察公路养护工；若你更愿意做通航设备的运行值守，优先考察桥梁与船闸操作员。"
+              "若你更愿意做道路设施养护与交通组织，优先考察公路养护工；若你更愿意做通航设备的运行值守，优先考察活动桥与船闸运行员。"
             ]
           },
           "id": "bridge-and-lock-tenders.direction-comparison.adjacent-career-comparison-table.22",
@@ -24650,7 +24650,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做线路安装与检修，优先考察线路安装与维修工；若你更愿意做通航设备值守与放行，优先考察桥梁与船闸操作员。"
+              "若你更愿意做线路安装与检修，优先考察线路安装与维修工；若你更愿意做通航设备值守与放行，优先考察活动桥与船闸运行员。"
             ]
           },
           "id": "bridge-and-lock-tenders.direction-comparison.adjacent-career-comparison-table.26",
@@ -24683,7 +24683,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "锁具工作以机械与电子锁具的检修技术为核心；桥梁与船闸操作员不从事锁具检修，而是按规程操作通航机械设备。"
+              "锁具工作以机械与电子锁具的检修技术为核心；活动桥与船闸运行员不从事锁具检修，而是按规程操作通航机械设备。"
             ]
           },
           "id": "bridge-and-lock-tenders.direction-comparison.adjacent-career-comparison-table.29",
@@ -24694,7 +24694,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做锁具与安防五金的技术工作，优先考察锁具与保险柜修理工；若你更愿意做通航值守与机械操作，优先考察桥梁与船闸操作员。"
+              "若你更愿意做锁具与安防五金的技术工作，优先考察锁具与保险柜修理工；若你更愿意做通航值守与机械操作，优先考察活动桥与船闸运行员。"
             ]
           },
           "id": "bridge-and-lock-tenders.direction-comparison.adjacent-career-comparison-table.30",
@@ -25034,7 +25034,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在岗的桥梁与船闸操作员"
+              "在岗的活动桥与船闸运行员"
             ]
           },
           "id": "bridge-and-lock-tenders.ai-impact.ai-impact-table.12",
@@ -25113,10 +25113,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数字工具可辅助记录、台账与工单，设备自动化也可能改变部分控制与监测任务。现有资料不能量化本职业生成式AI替代率、净就业影响或消失年份；职业问卷、AI任务暴露和就业预测是不同证据，不能互相代替。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "软件可提示记录字段缺项、时间或信号差异；通行决定、现场处置和设备操作须按设施规程与岗位权限。没有本职业可核的 AI 替代率。"
             ]
           },
           "id": "bridge-and-lock-tenders.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25230,7 +25233,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET当前2025行业分布：政府82%、运输与仓储16%、其他2%。这描述美国53-6011就业所属行业，不是中国编制比例、收入档次或雇主采用率。"
+              "O*NET 列出的 2025 年美国主要行业：政府82%、运输与仓储16%。这描述美国53-6011就业所属行业，不是中国编制比例、收入档次或雇主采用率。"
             ]
           },
           "id": "bridge-and-lock-tenders.ai-impact.ai-impact-table.28",
@@ -25255,7 +25258,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS2025—2035本职业表列就业3.1→3.1千人、净变化-0.1千人、增长-2.3%、年均空缺0.3千个；各列独立舍入。O*NET摘要已更新2025就业3100/当前预测，localtrends整数增长-2%；不能再说它仍是旧期，也不能由显示人数相减推出零增长。"
+              "BLS 预测表显示，2025 年和 2035 年就业人数分别四舍五入为 3,100，净减少约 100（−2.3%），年均约 300 个空缺。人数、净变化和增减比例各自舍入。"
             ]
           },
           "id": "bridge-and-lock-tenders.ai-impact.ai-impact-table.30",
@@ -25736,7 +25739,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS2025—2035本职业表列就业3.1→3.1千人、净变化-0.1千人、增长-2.3%、年均空缺0.3千个；各列独立舍入。O*NET摘要已更新2025就业3100/当前预测，localtrends整数增长-2%；不能再说它仍是旧期，也不能由显示人数相减推出零增长。"
+              "BLS 预测表显示，2025 年和 2035 年就业人数分别四舍五入为 3,100，净减少约 100（−2.3%），年均约 300 个空缺。人数、净变化和增减比例各自舍入。"
             ]
           },
           "id": "bridge-and-lock-tenders.ai-impact.ai-impact-table.70",
@@ -26521,10 +26524,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本次查阅的国家统计局2025工资表未单列桥梁与船闸操作员全国职业工资分布。"
+              "没有大陆本职业全国可比工资。两个地方招聘样本均未列这些岗位的工资。"
             ]
           },
           "id": "bridge-and-lock-tenders.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "l1-hlj",
+            "l1-nt"
+          ],
           "type": "prose"
         },
         {
@@ -26532,10 +26539,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2026-10-03核查国家统计局2025年城镇单位工资发布，未见本职业单列值。该查阅范围不证明所有地方、单位或其他调查均没有相关数据；本页不代填全国职业薪资。"
+              "黑龙江省松花江航运枢纽建设运行中心 2025 年计划招船闸和泄洪闸运行调度 4 名，本科和学士及以上；大顶子山岗位为 24 小时倒班制，最低服务期 5 年含试用期。公告未列工资。 南通市 2026 年事业单位岗位表中，南通船闸列有电气和计算机相关助理工程师岗位。该表是工程与系统维护相关入口样本，不代表普通运行值守招聘，亦未列该岗工资。"
             ]
           },
           "id": "bridge-and-lock-tenders.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "l1-hlj",
+            "l1-nt"
+          ],
           "type": "prose"
         },
         {
@@ -26700,7 +26711,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑分析：数字化工具可能辅助记录、排班与设备监控，具体效果需按设施和实际工具验证。本轮所查NBS2025发布未单列本职业工资；软件或工具清单不能补足精确职业工资，也不能据此判断统计缺口的成因或未来分类。"
+              "编辑分析：数字化工具可能辅助记录、排班与设备监控，具体效果需按设施和实际工具验证。国家统计局 2025 年工资发布未单列本职业工资；软件或工具清单不能补足精确职业工资，也不能据此判断统计缺口的成因或未来分类。"
             ]
           },
           "id": "bridge-and-lock-tenders.china-salary.career-snapshot-primary-locale.23",
@@ -26777,7 +26788,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "运行须遵守《中华人民共和国航道法》：通航建筑物的运行应当适应船舶通行需要，运行方案应当经负责航道管理的部门同意并公布；建设或管理单位应当按照规定维护保养通航建筑物，保持其正常运行。 船闸/升船机还核2026办法29条本单位教育培训合格上岗，不把技校学历自动等同岗位操作授权。"
+              "运行须遵守《中华人民共和国航道法》：通航建筑物的运行应当适应船舶通行需要，运行方案须经负责航道管理的部门审查同意并依法公开；建设或管理单位应当按照规定维护保养通航建筑物，保持其正常运行。 船闸/升船机还核2026办法29条本单位教育培训合格上岗，不把技校学历自动等同岗位操作授权。 对该办法适用的船闸和升船机，第13条规定：审查同意后，航道管理部门五个工作日内在官网公开运行方案主要内容；运行单位收到通知后五个工作日内另以船方易获知的方式公开。"
             ]
           },
           "id": "bridge-and-lock-tenders.china-salary.career-snapshot-primary-locale.30",
@@ -26950,7 +26961,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本次查阅国家统计局2025年城镇单位工资表未取得该职业全国值；提供非私营/私营交通行业及公共设施行业参考，并保留职业、城市薪资缺口。"
+              "国家统计局 2025 年城镇单位工资表未单列本职业全国值；提供非私营/私营交通行业及公共设施行业参考，并保留职业、城市薪资缺口。"
             ]
           },
           "id": "bridge-and-lock-tenders.china-salary.career-snapshot-primary-locale.45",
@@ -27005,7 +27016,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与桥梁与船闸操作员精确对应的全国职业月薪分布。"
+              "证据不足：未取得与活动桥与船闸运行员精确对应的全国职业月薪分布。"
             ]
           },
           "id": "bridge-and-lock-tenders.china-salary.career-snapshot-primary-locale.50",
@@ -27471,7 +27482,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET当前2025行业分布：政府82%、运输与仓储16%、其他2%。这描述美国53-6011就业所属行业，不是中国编制比例、收入档次或雇主采用率。 比较岗位时另核雇主、班制与补贴的书面约定，不能由占比推出薪资。"
+              "O*NET 列出的 2025 年美国主要行业：政府82%、运输与仓储16%。这描述美国53-6011就业所属行业，不是中国编制比例、收入档次或雇主采用率。 比较岗位时另核雇主、班制与补贴的书面约定，不能由占比推出薪资。"
             ]
           },
           "id": "bridge-and-lock-tenders.us-salary.career-snapshot-secondary-locale.29",
@@ -27691,7 +27702,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本次查阅未取得2025年本职业行业中位数。2025全国工资分位与当前就业预测可核验；下表2023行业内职业均值为历史参考，非2025行业中位数或当前报价。"
+              "本页按 2025 年全国职业分位和 2023 年行业内职业均值分别展示。查当前行业报价时，另核行业代码、地区、排班和计薪项目。"
             ]
           },
           "id": "bridge-and-lock-tenders.us-salary.career-snapshot-secondary-locale.48",
@@ -27903,7 +27914,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27915,19 +27926,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "安保人员",
@@ -28117,7 +28128,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业适配或作业胜任的评估工具，也没有官方资料支持「某种类型最适合桥梁与船闸操作员」的说法。可用于自我反思与沟通偏好理解，但不能用于培训投入或录用筛选。"
+              "MBTI 不是职业适配或作业胜任的评估工具，也没有官方资料支持「某种类型最适合活动桥与船闸运行员」的说法。可用于自我反思与沟通偏好理解，但不能用于培训投入或录用筛选。"
             ]
           },
           "id": "bridge-and-lock-tenders.fit.personality-fit-block.10",
@@ -28252,7 +28263,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑反思：遇到通航高峰、差错或天气异常时能否保持清晰记录、按规程报告？ONet自我控制46、压力耐受36是职业描述，本轮未核情绪测验预测效度，不从分数推出安全表现。"
+              "编辑反思：遇到通航高峰、差错或天气异常时能否保持清晰记录、按规程报告？ONet自我控制46、压力耐受36是职业描述，这里不提供情绪测验预测效度，不从分数推出安全表现。"
             ]
           },
           "id": "bridge-and-lock-tenders.fit.personality-fit-block.22",
@@ -28278,7 +28289,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "编辑建议观察：在通航高峰期能否拒绝跳过确认步骤；本轮未取得这一行为与情绪量表分数的比较预测效度研究。",
+              "编辑建议观察：在通航高峰期能否拒绝跳过确认步骤；这里不提供这一行为与情绪量表分数的比较预测效度研究。",
               "愿意承认操作或记录差错并纠正，是专业能力的一部分。"
             ]
           },
@@ -28301,7 +28312,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。编辑建议在具备相应条件的带教下观察实际值守与记录表现；本轮未取得其与人格或单次测验的比较预测效度证据。"
+              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。编辑建议在具备相应条件的带教下观察实际值守与记录表现；这里不提供其与人格或单次测验的比较预测效度证据。"
             ]
           },
           "id": "bridge-and-lock-tenders.fit.personality-fit-block.26",
@@ -28543,7 +28554,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内外向不作准入判断。编辑建议观察能否准确传递信号、复述指令和接受纠正；本轮未核外向特征对本职业沟通效果的因果证据。"
+              "内外向不作准入判断。编辑建议观察能否准确传递信号、复述指令和接受纠正；这里不提供外向特征对本职业沟通效果的因果证据。"
             ]
           },
           "id": "bridge-and-lock-tenders.fit.personality-fit-block.48",
@@ -29128,7 +29139,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑风险判断：长时间值守可能使持续核对更困难，须观察漏看或误判记录；本轮未核本职业疲劳与事故因果率。ONet65%40小时/20%超过40小时不证明所有人连续超时。"
+              "编辑风险判断：长时间值守可能使持续核对更困难，须观察漏看或误判记录；这里不提供本职业疲劳与事故因果率。ONet65%40小时/20%超过40小时不证明所有人连续超时。"
             ]
           },
           "id": "bridge-and-lock-tenders.risk.career-risk-cards.20",
@@ -30516,7 +30527,7 @@
                 "航运枢纽联合调度辅助岗位",
                 "在调度岗位协助登记通行计划、跟踪队列与通知相邻值守点。",
                 "编辑核对建议：向目标单位核对记录准确性、信息传递完整性与多岗位协调能力。",
-                "提交L1三船六事件队列和时间记录，仅为模拟",
+                "整理 L1 事件和时间记录，分别统计事件和不同船只；仅作模拟。",
                 "调度指令的最终确认与发布由具备授权的人员行使，辅助岗位不得代替。"
               ],
               [
@@ -30558,7 +30569,7 @@
                 "values": [
                   "现场安全与岗位授权",
                   "真实现场需先完成单位安全教育；高处、临水或受限空间的许可、监护与防护按实际作业类型和适用制度核对。本页不把这些情境一概认定为同一法定证书或审批。",
-                  "在中国大陆，通航建筑物的运行方案应当经负责航道管理的部门同意并公布，管理单位应按规定维护保养通航建筑物。",
+                  "在中国大陆，通航建筑物的运行方案须经负责航道管理的部门审查同意并依法公开，管理单位应按规定维护保养通航建筑物。",
                   "个体防护（安全帽、防护鞋、反光背心，必要时救生衣与防坠落装备）由用工方配备并检查。"
                 ]
               },
@@ -30595,7 +30606,7 @@
                 "id": "exercise-materials",
                 "values": [
                   "L1虚构纸面记录包",
-                  "L1虚构纸面记录包，只用纸笔或本地表格，约60—90分钟；无需设备、现场、PPE、师傅或额外资料。以下数值全为编辑设定，不是任何真实桥闸标准。",
+                  "材料全在题面，用纸笔或表格核对，约 15–25 分钟。所有数值和状态是虚构规则，不是实际通航或设备作业标准。",
                   "L1规则：船宽≤8m、船高≤5m；水位1.8—2.4m（含两端）；可见度≥500m；设备正常、区域已清空、通信畅通三项都必须明确确认。全部满足只能记“模拟条件齐备”，不是放行。任一超限或通信失败记“暂停并报告”；任一未知记“待确认”，不得用未知代填正常。",
                   "输入六条事件：08:00 A（宽7、高4、水2.0、可见600；设备正常、区域清空、通信畅通）；08:10 B（宽9、高4、水2.0、可见600，其余已确认）；08:20 C（宽8、高5、水2.4、可见500；设备未知、区域清空、通信畅通）；08:30 C（同数值；设备已确认正常、区域未知、通信畅通）；08:40 C（同数值；三项均确认）；08:50 A（同08:00尺寸水位可见度；通信失败，其余确认）。全部长度m，可见度m，时间同一虚构班次。",
                   "交接资料：D1为L1题面版本，D2为额外图示版本“未确认”；练习不需要D2即可核题面，但不得写D2已匹配。记录字段固定为时间、船ID、输入条件、判定、理由、下一步；未知项保留原文。"
@@ -30606,32 +30617,33 @@
                 "values": [
                   "需要提交什么",
                   "制作一张L1条件核对表，逐行写六条事件的判定及依据；边界等于阈值按规则判定，不能额外自造安全裕量。",
-                  "写三条异常/缺项记录，并区分超限、未知与通信失败；说明为什么后续纠正不能覆盖旧记录。",
-                  "整理一份交接单：列出本班六条事件、涉及的不同船数、最后状态，以及D2版本未确认项；本班“模拟条件齐备”的事件数和不同船数分别统计。"
+                  "为所有异常或缺项逐行记录原因，区分超限、未知与通信失败；说明为何后续更新不能覆盖原记录。",
+                  "汇总事件数、不同船数、条件齐备事件数、曾出现齐备记录的不同船数。另列每船最新状态和 D2 事项。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考答案与逐项自核",
-                  "参考答案：08:00 A模拟条件齐备；08:10 B暂停并报告（9>8宽度超限）；08:20 C待确认（设备未知，8=8、5=5、2.4=上限、500=下限均符合数值条件）。",
-                  "08:30 C仍待确认（设备已确认不代表区域也确认）；08:40 C模拟条件齐备；08:50 A暂停并报告（通信失败），不得延用08:00旧状态。",
-                  "异常清单至少覆盖B宽度超限、C两次不同未知字段、A通信失败；保留全部旧时点。交接：六条事件，三艘不同船A/B/C；齐备事件2条（08:00 A、08:40 C），涉及2艘船。末状态A暂停、B暂停、C齐备；D2版本未确认，仍须保留缺项。",
-                  "自核：按输入从头重算一遍，逐格检查单位、等号、未知项和时间；核计数6条/3船/2齐备事件/2齐备船，不把事件数当船数。不需外部专家签字，留存自己的错项和改正理由。"
+                  "先交卷",
+                  "第六天独立复核事件表并交接。",
+                  "第七天打开常见问题「L1 参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习与真实权限边界",
-                  "L1只是纸面记录与条件逻辑练习；没有给出真实闸门、阀门、灯号、汽笛、航道净空或水流操作规程。禁止用这些阈值或“齐备”标签指导真实放行、设备控制或事故判断。",
-                  "不进入真实临水、高处或运行设施，不发布真实信号，不伪装授权或培训经历；真实安全措施与决定必须依据该设施规程、岗位训练、现场核对及授权链。"
+                  "纸面边界",
+                  "只使用题面；不操作设备，不发布信号，不进行实际放行。",
+                  "保留原始记录和待核事项，不自行补写。"
                 ]
               }
             ]
           },
           "id": "bridge-and-lock-tenders.path.entry-work-sample-data.1",
-          "title": "纸面案例与任务",
+          "source_refs": [
+            "editorial"
+          ],
+          "title": "L1｜核对六条虚构船闸事件",
           "type": "cards"
         },
         {
@@ -30644,7 +30656,7 @@
                 "values": [
                   "L1条件核对表",
                   "L1核对表：六条事件逐格列数值、三项状态、判定与理由；页首写“虚构纸面练习，非现场操作”。",
-                  "把条件齐备、记录完整、个人授权分列；D2版本写未确认，不猜补。"
+                  "分列条件状态、记录完整性和个人权限，并保留资料标示的版本状态。"
                 ]
               },
               {
@@ -30659,7 +30671,7 @@
                 "id": "report-summary",
                 "values": [
                   "交接复盘",
-                  "交接复盘：列A/B/C末状态、C设备与区域未知的不同时间、A通信失败及D2版本未确认；说明后续确认不抹去旧未知。",
+                  "交接复盘：逐船列最新状态，标明每条缺项的时间、原因及资料版本状态。保留后续确认之前的原记录。",
                   "一页作品仅证明练习过程，不能写成真实安全放行、现场履历或单位考核证明。"
                 ]
               },
@@ -30732,55 +30744,58 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "读本页身份与职责，区分岸基值守、船舶驾驶和维修。",
-                  "产出：五条任务边界，记录美国口径与中国单位核对项。"
+                  "第 1 天",
+                  "读题设并区分设施值守和船舶驾驶。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "读L1全题面，抄条件与记录字段，圈出含等号阈值与三个确认状态。",
-                  "产出：L1核对模板，注明虚构阈值。"
+                  "第 2 天",
+                  "复制原始事件及题设条件。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "遮住答案，逐条填写08:00至08:50六事件。",
-                  "产出：原始判定表，不接触设备或真实信号。"
+                  "第 3 天",
+                  "逐行核对条件并写判断依据。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "按参考答案核数值、未知与通信失败，检查C三个时点。",
-                  "产出：错误清单与修正理由，保留原表。"
+                  "第 4 天",
+                  "保留不明状态和变更记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "统计事件数、不同船数、齐备事件与齐备船数；核D1/D2状态。",
-                  "产出：6/3/2/2统计及D2未确认记录。"
+                  "第 5 天",
+                  "分别汇总事件、船舶和各自最新状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "整理A/B/C末状态和未结项，独立从原输入重查交接单。",
-                  "产出：交接复盘与自核日期，外部意见可选。"
+                  "第 6 天",
+                  "不看参考，独立交事件表和一页交接。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "汇总核对表、自核、交接、工具说明，评估是否愿意继续记录类训练。",
-                  "产出：继续探索或暂停理由；正式求职再核单位培训、授权、班制与安全措施。"
+                  "第 7 天",
+                  "打开常见问题「L1 参考解（交卷后再打开）」，核对差异。"
                 ]
               }
             ]
           },
           "id": "bridge-and-lock-tenders.path.seven-day-trial.1",
+          "source_refs": [
+            "editorial"
+          ],
           "title": "七天渐进体验",
           "type": "timeline"
         },
@@ -30856,7 +30871,7 @@
                 "通航建筑物运行方案依据（中国大陆）",
                 "运行单位与值班人员",
                 "决定能否开合、放行与调整运行安排。",
-                "属于法定要求：运行方案应当经负责航道管理的部门同意并公布。",
+                "属于法定要求：运行方案须经负责航道管理的部门审查同意并依法公开。",
                 "须依据《中华人民共和国航道法》与单位制度执行。",
                 "方案编制、报批与公布周期。",
                 "方案本身不替代现场条件确认与值班判断。"
@@ -30890,7 +30905,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界：训练、熟练、记录、授权和方案审批分别核；纸面练习不批准上岗。O*NET教育问项问新入职者需何种学历，65%回答高中同等、20%中等后证书、15%低于高中，是岗位学历要求回答而非从业者学历构成。Job Zone1—2/SVP低于6.0的在岗训练数天至一年是跨职业概述；相关经历另有零经验至数月/一年描述，不能合并为本职业固定期限。BLS本职业典型入门为高中同等、无需相关经历、短期在岗培训。 中国船闸、升船机适用2026修正《通航建筑物运行管理办法》：第29条要求本单位教育培训合格后上岗并明确岗位责任；第15条对运行条件、开放时间、调度及养护停航调整要求重新编制方案报原审批部门审批。开合桥、灯塔不能仅因美国归同一职业就直接套用该办法。",
+              "《通航建筑物运行管理办法》适用于与船舶通行相关的船闸、升船机等设施。按经审查同意的运行方案组织调度并记录；第 29 条要求运行单位明确岗位责任，人员经本单位教育培训合格后上岗。活动桥与设施维修另核适用规则。",
               "美国BLS本职业通常为高中或同等学历与短期在岗培训；O*NET受访者学历65%/20%/15%仅为美国背景。",
               "中国航道法2016修正第二十五条规定运行方案同意公布与维护义务，不规定本页练习通过即可上岗。",
               "求职时另核单位训练考核、岗位操作授权、安全措施、班制与结算安排，并保留书面依据。"
@@ -30911,10 +30926,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得并核验匹配本职业、近期、明确雇主与岗位条件的中国招聘公告样本。本节为编辑岗位核对建议，不能称为雇主统计或真实录用样本；纸面练习不能替代单位训练、现场考核与操作授权。"
+              "黑龙江省松花江航运枢纽建设运行中心 2025 年计划招船闸和泄洪闸运行调度 4 名，本科和学士及以上；大顶子山岗位为 24 小时倒班制，最低服务期 5 年含试用期。公告未列工资。 南通市 2026 年事业单位岗位表中，南通船闸列有电气和计算机相关助理工程师岗位。该表是工程与系统维护相关入口样本，不代表普通运行值守招聘，亦未列该岗工资。"
             ]
           },
           "id": "bridge-and-lock-tenders.path.recruitment-sample.1",
+          "source_refs": [
+            "l1-hlj",
+            "l1-nt"
+          ],
           "title": "招聘样本使用说明",
           "type": "notice"
         }
@@ -31124,10 +31143,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国BLS 2025基期本职业就业约3,100，2025—2035增长率-2.3%、年均空缺约300；人数与净变化各自舍入。中国国家统计局2025城镇单位工资发布未单列本职业，只发布行业代理与精确缺口，不声称全国所有资料都不存在。"
+              "美国 53-6011 2025 年 5 月中位数为 57,700 美元/年、27.74 美元/小时。2025 与 2035 的公布端点均约 3,100 岗，净减约 100、变化 −2.3%，年均空缺约 300（含替补）；端点与变化分别舍入。"
             ]
           },
           "id": "bridge-and-lock-tenders.market-signals.market-signal-card.8",
+          "source_refs": [
+            "bls-pay",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -31234,7 +31257,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS2025—2035本职业表列就业3.1→3.1千人、净变化-0.1千人、增长-2.3%、年均空缺0.3千个；各列独立舍入。O*NET摘要已更新2025就业3100/当前预测，localtrends整数增长-2%；不能再说它仍是旧期，也不能由显示人数相减推出零增长。"
+              "BLS 预测表显示，2025 年和 2035 年就业人数分别四舍五入为 3,100，净减少约 100（−2.3%），年均约 300 个空缺。人数、净变化和增减比例各自舍入。"
             ]
           },
           "id": "bridge-and-lock-tenders.market-signals.market-signal-card.18",
@@ -31386,7 +31409,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "实际链接ONet职业摘要：已更新2025就业3100及2025—2035预测，非仍旧期。"
+              "O*NET 职业摘要列出美国 2025 年就业和 2025–2035 年预测。"
             ]
           },
           "id": "bridge-and-lock-tenders.market-signals.market-signal-card.31",
@@ -31733,7 +31756,7 @@
               {
                 "answer": "按运行规程与通航指令值守：观察航道与桥梁区域、接收并复述指令、确认水位与天气条件、操作控制杆或阀门开合桥跨与闸门、发布信号与警报、引导船舶进闸出闸或通过桥口，并登记船舶与通行数据、水位与天气，报告异常与事故，完成清扫与场地整理。",
                 "id": "bridge-and-lock-tenders.faq.1",
-                "question": "桥梁与船闸操作员每天做什么？",
+                "question": "活动桥与船闸运行员每天做什么？",
                 "question_key": "career.faq.bridge-and-lock-tenders.1"
               },
               {
@@ -31745,14 +31768,17 @@
               {
                 "answer": "适配信号是能在长时间值守中保持注意力、准确复述指令并按规程操作设备、在条件不符或设备异常时先停下并报告；对机械设备或水岸环境的兴趣本身不足以证明胜任。",
                 "id": "bridge-and-lock-tenders.faq.3",
-                "question": "怎样判断自己适不适合做桥梁与船闸操作员？",
+                "question": "怎样判断自己适不适合做活动桥与船闸运行员？",
                 "question_key": "career.faq.bridge-and-lock-tenders.3"
               },
               {
-                "answer": "通行记录与统计、水位与天气数据整理、设备台账与维修工单流转、排班与交接记录等环节可被辅助；瞭望判断、设备操作、信号发布、船舶引导与异常处置仍由人负责。",
+                "answer": "软件可提示记录字段缺项、时间或信号差异；通行决定、现场处置和设备操作须按设施规程与岗位权限。没有本职业可核的 AI 替代率。",
                 "id": "bridge-and-lock-tenders.faq.4",
                 "question": "AI 与自动化会改变哪些环节？",
-                "question_key": "career.faq.bridge-and-lock-tenders.4"
+                "question_key": "career.faq.bridge-and-lock-tenders.4",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
                 "answer": "能见度与水流条件判断、桥面与闸室是否有障碍、人员是否撤离、设备是否存在异响或渗漏，以及放行顺序与临时安排，都必须由受过训练并获得授权的人确认。",
@@ -31761,10 +31787,13 @@
                 "question_key": "career.faq.bridge-and-lock-tenders.5"
               },
               {
-                "answer": "需要分别核对单位培训与考核记录、操作授权范围、个体防护配备以及班制与结算方式；中国大陆的通航建筑物运行方案须经负责航道管理的部门同意并公布，管理单位应按规定维护保养。",
+                "answer": "需要分别核对单位培训与考核记录、操作授权范围、个体防护配备以及班制与结算方式；中国大陆的通航建筑物运行方案须经负责航道管理的部门审查同意并依法公开，管理单位应按规定维护保养。 对该办法适用的船闸和升船机，第13条规定：审查同意后，航道管理部门五个工作日内在官网公开运行方案主要内容；运行单位收到通知后五个工作日内另以船方易获知的方式公开。",
                 "id": "bridge-and-lock-tenders.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.bridge-and-lock-tenders.6"
+                "question_key": "career.faq.bridge-and-lock-tenders.6",
+                "source_refs": [
+                  "cn-operation-current"
+                ]
               },
               {
                 "answer": "O*NET 工作情境显示 79% 每天在环境受控的室内工作、58% 每天在户外暴露于各种天气、58% 每天穿戴个体防护装备、45% 每天在较高位置作业、35% 超过一半时间保持坐姿。",
@@ -31779,10 +31808,14 @@
                 "question_key": "career.faq.bridge-and-lock-tenders.8"
               },
               {
-                "answer": "BLS当前表列本职业2025与2035就业均约3,100，独立舍入的净变化约-100，增长率-2.3%，年均空缺约300。不能把人数两列直接相减当精确净变化，也不能把空缺当净新增；转岗另核目标岗位训练与权限。",
+                "answer": "美国 53-6011 2025 年 5 月中位数为 57,700 美元/年、27.74 美元/小时。2025 与 2035 的公布端点均约 3,100 岗，净减约 100、变化 −2.3%，年均空缺约 300（含替补）；端点与变化分别舍入。",
                 "id": "bridge-and-lock-tenders.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.bridge-and-lock-tenders.9"
+                "question_key": "career.faq.bridge-and-lock-tenders.9",
+                "source_refs": [
+                  "bls-pay",
+                  "bls-outlook"
+                ]
               },
               {
                 "answer": "美国2025 OEWS给本职业工资分位；本次查阅中国2025城镇单位发布只有行业均值参考，未单列本职业。统计对象、覆盖与统计量不同，不能直接比较个人薪资或按汇率换算。",
@@ -31797,16 +31830,28 @@
                 "question_key": "career.faq.bridge-and-lock-tenders.11"
               },
               {
-                "answer": "作业涉及高处、临水、机械开合与陆路交通：应按单位安全教育与运行规程作业，正确使用安全帽、防护鞋、反光背心与必要时的救生衣、防坠落装备；在中国大陆，通航建筑物的运行方案应当经负责航道管理的部门同意并公布，管理单位应按规定维护保养通航建筑物。",
+                "answer": "作业涉及高处、临水、机械开合与陆路交通：应按单位安全教育与运行规程作业，正确使用安全帽、防护鞋、反光背心与必要时的救生衣、防坠落装备；在中国大陆，通航建筑物的运行方案须经负责航道管理的部门审查同意并依法公开，管理单位应按规定维护保养通航建筑物。 对该办法适用的船闸和升船机，第13条规定：审查同意后，航道管理部门五个工作日内在官网公开运行方案主要内容；运行单位收到通知后五个工作日内另以船方易获知的方式公开。",
                 "id": "bridge-and-lock-tenders.faq.12",
                 "question": "值守安全与培训需要注意什么？",
-                "question_key": "career.faq.bridge-and-lock-tenders.12"
+                "question_key": "career.faq.bridge-and-lock-tenders.12",
+                "source_refs": [
+                  "cn-operation-current"
+                ]
               },
               {
                 "answer": "以室内值守与户外巡查并存为主：79% 每天在环境受控的室内工作、58% 每天在户外暴露于各种天气、58% 每天穿戴个体防护装备、45% 每天在较高位置作业；65% 每周 40 小时但多按值班与轮班安排，60% 每天使用电子邮件，55% 表示与他人持续接触。",
                 "id": "bridge-and-lock-tenders.faq.13",
-                "question": "桥梁与船闸操作员的工作环境与协作方式如何？",
+                "question": "活动桥与船闸运行员的工作环境与协作方式如何？",
                 "question_key": "career.faq.bridge-and-lock-tenders.13"
+              },
+              {
+                "answer": "08:00 A 齐备；08:10 B 超宽，暂停上报；08:20 C 设备未知，待核；08:30 C 区域未知，待核；08:40 C 各项齐备；08:50 A 通信失败，暂停上报。合计 6 条事件、3 艘不同船、2 条齐备事件、2 艘曾齐备（A 和 C）；最新状态仅 C 齐备，A 和 B 均暂停上报。D1 为题面版本，D2 待核。保留原始状态及每条原因。",
+                "id": "bridge-and-lock-tenders.faq.14",
+                "question": "L1 参考解（交卷后再打开）",
+                "question_key": "career.faq.bridge-and-lock-tenders.q14",
+                "source_refs": [
+                  "editorial"
+                ]
               }
             ]
           },
@@ -31894,7 +31939,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮2026-10-09核读：ONet2026职业特征、2025工资/行业/招聘和2025—2035预测；BLS精确-2.3%及2023历史行业均值；2026船闸运行办法。NBS2025工资及ILO140/NIST AI100-1同版已读证据按当前主张复核，不继承其他职业通过结论。训练检索无全国项目仅指此目录。"
+              "决定是否进一步了解岗位前，先问清具体设施、值班安排、训练与考核、异常时的交接权限。黑龙江调度和南通工程公告是两种不同岗位；美国工资也要区分全国分位与历史行业均值。"
             ]
           },
           "id": "bridge-and-lock-tenders.sources.source-card.3",
@@ -31939,7 +31984,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -31951,16 +31996,16 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "查看桥梁与船闸操作员职业页面",
+                "entity": "查看活动桥与船闸运行员职业页面",
                 "id": "navigation-6",
                 "relation": "career.self",
                 "url": "/zh/career/jobs/bridge-and-lock-tenders"
@@ -32002,7 +32047,7 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "支持职业身份、官方职责原文、Job Zone 1-2（SVP 低于 6.0）、兴趣代码 RC 与受访者学历构成（高中 65%、中等后证书 20%、低于高中 15%），并显示未标注 Bright Outlook。",
+                  "支持职业身份、官方职责原文、Job Zone 1-2（SVP 低于 6.0）、兴趣代码 RC 与受访者对新聘学历的回答（高中 65%、中等后证书 20%、低于高中 15%），并显示未标注 Bright Outlook。",
                   "2026 年更新页面；访问 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
@@ -32018,8 +32063,8 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "支持 2024 年行业分布：政府 88%、运输与仓储 11%、其他行业 1%。",
-                  "2024 年分布；访问 2026-09-16"
+                  "政府 82%、运输与仓储 16%。",
+                  "2025 年美国本职业就业行业分布。"
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-industry",
@@ -32071,7 +32116,7 @@
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-entry",
-                "limitation": "该页为职业群口径，未把桥梁与船闸操作员单列为独立职业，只用于说明行业背景，不用于推导本职业数值。",
+                "limitation": "该页为职业群口径，未把活动桥与船闸运行员单列为独立职业，只用于说明行业背景，不用于推导本职业数值。",
                 "market": "美国",
                 "name": "BLS《Occupational Outlook Handbook》运输与物料搬运职业群概览（群体语境）",
                 "period": "2025—2035 年预测；访问 2026-09-16",
@@ -32096,20 +32141,20 @@
                 "url": "https://www.onetonline.org/link/localwages/53-6011.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "2024就业2,900与旧预测仅为历史资料；本轮当前值取新增BLS职业表。",
-                  "不能与2025基期、2025—2035模型混为同一资料期。"
+                  "美国 53-6011 2025 年 5 月中位数为 57,700 美元/年、27.74 美元/小时。2025 与 2035 的公布端点均约 3,100 岗，净减约 100、变化 −2.3%，年均空缺约 300（含替补）；端点与变化分别舍入。",
+                  "美国统计。"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-outlook",
-                "limitation": "该职业规模很小（2025 年约 3,100 人），年度数值波动对统计口径较敏感，不宜据单年推断长期趋势。",
+                "limitation": "美国统计。",
                 "market": "美国",
-                "name": "O*NET-SOC 53-6011.00 职业摘要（就业与预测字段）",
-                "period": "O*NET仍显示2024基期与2024—2034旧预测，非本轮当前值",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：53-6011",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32146,7 +32191,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "第二十五条规定通航建筑物运行方案经负责航道管理部门同意并公布，建设或管理单位维护保养。",
+                  "第二十五条规定通航建筑物运行方案须经负责航道管理的部门审查同意并依法公开，建设或管理单位维护保养。",
                   "法规不把本页L1练习、人格测试或固定培训期限设为个人操作资格。"
                 ],
                 "evidence_type": "primary_document",
@@ -32281,7 +32326,7 @@
                 "id": "bls-industry-2023",
                 "limitation": "历史行业内职业均值，非2025行业中位数，不与当前全国分位直接排序。",
                 "market": "美国",
-                "name": "BLS 2023 OEWS行业内桥梁与船闸操作员平均工资",
+                "name": "BLS 2023 OEWS行业内活动桥与船闸运行员平均工资",
                 "period": "2023年5月",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
@@ -32322,14 +32367,14 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "O*NET53-6011行业分布82%/16%/2%",
+                  "O*NET 53-6011 主要行业",
                   "2025"
                 ],
                 "evidence_type": "primary_document",
                 "id": "industry-current",
-                "limitation": "政府82%、运输仓储16%、其他2%；美国分类非中国编制比例或工资。",
+                "limitation": "政府82%、运输仓储16%；美国分类非中国编制比例或工资。",
                 "market": "美国",
-                "name": "O*NET53-6011行业分布82%/16%/2%",
+                "name": "O*NET 53-6011 主要行业",
                 "period": "2025",
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "exact",
@@ -32400,20 +32445,20 @@
                 "url": "https://www.onetonline.org/link/localwages/53-6011.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "通航建筑物运行管理办法2026修正：2/13/15/17—24/27—34条",
-                  "2026-01-14修正，公布之日起施行；官方页2026-01-20公开"
+                  "《通航建筑物运行管理办法》适用于与船舶通行相关的船闸、升船机等设施。按经审查同意的运行方案组织调度并记录；第 29 条要求运行单位明确岗位责任，人员经本单位教育培训合格后上岗。活动桥与设施维修另核适用规则。",
+                  "适用设施与岗位分开核。"
                 ],
-                "evidence_type": "regulation",
+                "evidence_type": "primary_document",
                 "id": "cn-operation-current",
-                "limitation": "适用于船闸、升船机等通航建筑物，不能泛化开合桥与灯塔；上岗训练、安全主体责任、停复航责任不能靠合同或个人清单替代。",
+                "limitation": "适用设施与岗位分开核。",
                 "market": "中国大陆",
-                "name": "通航建筑物运行管理办法2026修正：2/13/15/17—24/27—34条",
-                "period": "2026-01-14修正，公布之日起施行；官方页2026-01-20公开",
-                "publisher": "交通运输部",
+                "name": "交通运输部：通航建筑物运行管理办法",
+                "period": "2026 No. 1",
+                "publisher": "MOT",
                 "scope": "contextual",
-                "url": "https://xxgk.mot.gov.cn/jigou/fgs/202601/t20260120_4198163.html"
+                "url": "https://xxgk.mot.gov.cn/2020/gz/202601/t20260120_4198173.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32656,21 +32701,53 @@
                 "url": "https://www.onetonline.org/link/summary/53-7051.00"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "瞭望与识别｜持续观察航道、桥梁区域与来船动向，识别船舶类型与通行需求｜可复核的瞭望与识别记录。 — 25/100; weight=1/3; bridge-and-lock-tenders.profile.responsibilities-block.1[1]",
-                  "开合与放行｜操作控制杆或阀门开合桥跨、闸门或调节水位，引导船舶进出｜安全完成且留有记录的通行次数。 — 25/100; weight=1/3; bridge-and-lock-tenders.profile.responsibilities-block.1[3]",
-                  "记录与维护｜登记船舶与通行数据、水位与天气，提出并跟踪维修申请，完成日常维护｜完整的通行与维修记录。 — 75/100; weight=1/3; bridge-and-lock-tenders.profile.responsibilities-block.1[4]"
+                  "软件可提示记录字段缺项、时间或信号差异；通行决定、现场处置和设备操作须按设施规程与岗位权限。没有本职业可核的 AI 替代率。",
+                  "不提供 AI 替代率。",
+                  "不提供 AI 替代率。",
+                  "不提供 AI 替代率。",
+                  "不提供 AI 替代率。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "primary_document",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "不提供 AI 替代率。",
+                "market": "美国",
+                "name": "O*NET：通行与值守记录",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-6011.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "黑龙江省松花江航运枢纽建设运行中心 2025 年计划招船闸和泄洪闸运行调度 4 名，本科和学士及以上；大顶子山岗位为 24 小时倒班制，最低服务期 5 年含试用期。公告未列工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "l1-hlj",
+                "limitation": "第 5 页，060201 历史岗位。",
+                "market": "中国大陆",
+                "name": "黑龙江交通运输厅：船闸和泄洪闸调度招聘",
+                "period": "2025",
+                "publisher": "黑龙江省交通运输厅",
+                "scope": "recruitment_proxy",
+                "url": "https://jt.hlj.gov.cn/jt/c105088/202502/31810113/files/%E9%99%84%E4%BB%B61.2025%E5%B9%B4%E6%8B%9B%E8%81%98%E8%AE%A1%E5%88%92%E8%A1%A8.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "南通市 2026 年事业单位岗位表中，南通船闸列有电气和计算机相关助理工程师岗位。该表是工程与系统维护相关入口样本，不代表普通运行值守招聘，亦未列该岗工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "l1-nt",
+                "limitation": "工程岗位样本。",
+                "market": "中国大陆",
+                "name": "南通市：船闸助理工程师历史岗位",
+                "period": "2026",
+                "publisher": "南通市",
+                "scope": "recruitment_proxy",
+                "url": "https://dj.nantong.gov.cn/ntdjw/upload/e088790e-8858-4aed-8b15-d09c52463501.pdf"
               }
             ]
           },
@@ -32802,7 +32879,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "type": "prose"
         },
-        "heading": "桥梁与船闸操作员的职业方向与相邻工种怎么比较？",
+        "heading": "活动桥与船闸运行员的职业方向与相邻工种怎么比较？",
         "intro": {
           "$item": "bridge-and-lock-tenders.direction-comparison.adjacent-career-comparison-table.10",
           "block": "direction-comparison",
@@ -33421,7 +33498,7 @@
             }
           }
         ],
-        "heading": "AI 会取代桥梁与船闸操作员吗？",
+        "heading": "AI 会取代活动桥与船闸运行员吗？",
         "method_cards": [
           {
             "含义": {
@@ -33448,7 +33525,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "概念": "AI 会减少桥梁与船闸操作员岗位吗？"
+            "概念": "AI 会减少活动桥与船闸运行员岗位吗？"
           }
         ],
         "questions": [
@@ -33472,7 +33549,7 @@
               "entry": "link-13",
               "field": "url"
             },
-            "问题": "桥梁与船闸操作员会被 AI 取代吗？"
+            "问题": "活动桥与船闸运行员会被 AI 取代吗？"
           },
           {
             "回答": {
@@ -34008,7 +34085,7 @@
           "type": "prose"
         },
         "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为桥梁与船闸操作员？教育、资格与职业发展路径",
+        "heading": "怎样成为活动桥与船闸运行员？教育、资格与职业发展路径",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "bridge-and-lock-tenders.path.career-path-block.21",
@@ -34541,7 +34618,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "桥梁与船闸操作员的工作可以分成哪几类？",
+            "question": "活动桥与船闸运行员的工作可以分成哪几类？",
             "table": {
               "rows": [
                 {
@@ -34598,7 +34675,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "桥梁与船闸操作员和相邻工种的边界在哪里？",
+            "question": "活动桥与船闸运行员和相邻工种的边界在哪里？",
             "table": {
               "rows": [
                 {
@@ -34866,7 +34943,7 @@
           "copy_key": "career.item.career-risk-cards",
           "type": "prose"
         },
-        "heading": "桥梁与船闸操作员的压力、风险与职业边界有哪些？",
+        "heading": "活动桥与船闸运行员的压力、风险与职业边界有哪些？",
         "risks": [
           {
             "affected_roles": {
@@ -35593,7 +35670,7 @@
             "type": "prose"
           },
           "ui": {
-            "ai_heading": "AI 会影响桥梁与船闸操作员的工资吗？",
+            "ai_heading": "AI 会影响活动桥与船闸运行员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "中国大陆薪资参考：官方统计口径与缺口",
             "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
@@ -35808,14 +35885,14 @@
             }
           }
         ],
-        "factors_heading": "哪些因素真正影响桥梁与船闸操作员工资？",
+        "factors_heading": "哪些因素真正影响活动桥与船闸运行员工资？",
         "growth": {
           "$item": "bridge-and-lock-tenders.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国桥梁与船闸操作员工资多少？",
+        "heading": "美国活动桥与船闸运行员工资多少？",
         "industry_heading": "2023行业内本职业工资历史参考",
         "industry_period": "2023年5月OEWS；非2025当前工资",
         "industry_rows": [
@@ -35905,7 +35982,7 @@
           }
         ],
         "industry_value_label": "年平均工资（美元/年；2023）",
-        "interpretation_heading": "美国桥梁与船闸操作员工资怎么理解？",
+        "interpretation_heading": "美国活动桥与船闸运行员工资怎么理解？",
         "interpretation_rows": [
           {
             "answer": {
@@ -36031,7 +36108,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "桥梁与船闸操作员适合什么样的人？"
+        "title": "活动桥与船闸运行员适合什么样的人？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36054,9 +36131,9 @@
         }
       },
       "hero": {
-        "h1": "桥梁与船闸操作员",
-        "quick_answer": "桥梁与船闸操作员操作并看护桥梁、运河船闸与灯塔，按运行规程与通航指令控制开合时序、确认净空与净宽、发布信号并引导船舶安全通行，同时记录船舶与水位数据；工作以轮班值守、户外与较高位置作业为常态，其职责不等于通航规则或结构安全结论。",
-        "title": "桥梁与船闸操作员"
+        "h1": "活动桥与船闸运行员",
+        "quick_answer": "活动桥与船闸运行员按设施分工操作或值守，核对通行条件，沟通信号并记录事件。活动桥、船闸、升船机、船舶驾驶和设施维修的职责及授权各不相同。",
+        "title": "活动桥与船闸运行员"
       },
       "market_signal_card": {
         "context_links": [
@@ -36099,7 +36176,7 @@
           "copy_key": "career.item.market-signal-card",
           "type": "prose"
         },
-        "heading": "桥梁与船闸操作员的前景如何？可以转向哪些相关职业？",
+        "heading": "活动桥与船闸运行员的前景如何？可以转向哪些相关职业？",
         "outlook_evidence": [
           {
             "geography": {
@@ -36654,7 +36731,7 @@
             },
             "id": "riasec",
             "label": "霍兰德职业兴趣模型（RIASEC）",
-            "question": "霍兰德兴趣中什么类型更接近桥梁与船闸操作员？",
+            "question": "霍兰德兴趣中什么类型更接近活动桥与船闸运行员？",
             "signals": {
               "$item": "bridge-and-lock-tenders.fit.personality-fit-block.4",
               "block": "fit",
@@ -36728,7 +36805,7 @@
             },
             "id": "mbti",
             "label": "迈尔斯-布里格斯类型指标（MBTI）",
-            "question": "MBTI 能用来判断我适不适合桥梁与船闸操作员吗？",
+            "question": "MBTI 能用来判断我适不适合活动桥与船闸运行员吗？",
             "signals": {
               "$item": "bridge-and-lock-tenders.fit.personality-fit-block.12",
               "block": "fit",
@@ -36802,7 +36879,7 @@
             },
             "id": "iq",
             "label": "智力商数（IQ）与数理推理",
-            "question": "数学不好，能做桥梁与船闸操作员吗？",
+            "question": "数学不好，能做活动桥与船闸运行员吗？",
             "signals": {
               "$item": "bridge-and-lock-tenders.fit.personality-fit-block.20",
               "block": "fit",
@@ -36839,7 +36916,7 @@
             },
             "id": "eq",
             "label": "情绪智力（EI，常称“情商”）",
-            "question": "做桥梁与船闸操作员需要高情商吗？",
+            "question": "做活动桥与船闸运行员需要高情商吗？",
             "signals": {
               "$item": "bridge-and-lock-tenders.fit.personality-fit-block.24",
               "block": "fit",
@@ -37090,7 +37167,7 @@
             }
           }
         ],
-        "heading": "做桥梁与船闸操作员，哪些兴趣、能力与工作方式更重要？",
+        "heading": "做活动桥与船闸运行员，哪些兴趣、能力与工作方式更重要？",
         "questions": [
           {
             "answer": {
@@ -37099,7 +37176,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "什么性格的人更适合做桥梁与船闸操作员？"
+            "question": "什么性格的人更适合做活动桥与船闸运行员？"
           },
           {
             "answer": {
@@ -37108,7 +37185,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "内向的人适合做桥梁与船闸操作员吗？"
+            "question": "内向的人适合做活动桥与船闸运行员吗？"
           },
           {
             "answer": {
@@ -37117,7 +37194,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "外向的人能做好桥梁与船闸操作员吗？"
+            "question": "外向的人能做好活动桥与船闸运行员吗？"
           },
           {
             "answer": {
@@ -37126,7 +37203,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "哪种 MBTI 最适合桥梁与船闸操作员？"
+            "question": "哪种 MBTI 最适合活动桥与船闸运行员？"
           },
           {
             "answer": {
@@ -37153,7 +37230,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "数学不好能做桥梁与船闸操作员吗？"
+            "question": "数学不好能做活动桥与船闸运行员吗？"
           },
           {
             "answer": {
@@ -37162,7 +37239,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "做桥梁与船闸操作员需要高情商吗？"
+            "question": "做活动桥与船闸运行员需要高情商吗？"
           },
           {
             "answer": {
@@ -37407,7 +37484,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合桥梁与船闸操作员",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37621,7 +37698,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与通行记录",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37639,282 +37716,270 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "O*NET-SOC 53-6011.00",
         "fact_id": "occupation-identity",
         "market": "美国",
         "measure": "官方职业代码（本职业口径）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "O*NET 2026 年更新页面；访问 2026-09-16",
         "source_refs": [
           "onet-summary"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "57,700美元/年（中位数）",
         "fact_id": "us-wage-2025",
         "market": "美国",
         "measure": "年薪中位数（本职业口径）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2025 年；Bridge and Lock Tenders（SOC 53-6011）口径",
         "source_refs": [
           "bls-pay"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "27.74美元/小时（中位数）",
         "fact_id": "us-wage-hourly-2025",
         "market": "美国",
         "measure": "小时工资中位数（本职业口径）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2025 年；Bridge and Lock Tenders（SOC 53-6011）口径",
         "source_refs": [
           "onet-localwages"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "约3,100人（2025年；表列3.1千人）",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业规模（本职业口径）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2025年或2025—2035年预测；SOC 53-6011；访问2026-10-03",
         "source_refs": [
           "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "约3,100人（2035年；表列3.1千人）",
         "fact_id": "us-employment-2035",
         "market": "美国",
         "measure": "预测就业人数（独立舍入值）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2025年或2025—2035年预测；SOC 53-6011；访问2026-10-03",
         "source_refs": [
           "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "下降2.3%（2025—2035年）",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长率（本职业口径）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2025年或2025—2035年预测；SOC 53-6011；访问2026-10-03",
         "source_refs": [
           "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "约减少100人（表列-0.1千人）",
         "fact_id": "us-change-2025-2035",
         "market": "美国",
         "measure": "就业净变化（独立舍入值）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2025年或2025—2035年预测；SOC 53-6011；访问2026-10-03",
         "source_refs": [
           "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "约300个/年（表列0.3千个）",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "预测期年均职位空缺（本职业口径）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2025年或2025—2035年预测；SOC 53-6011；访问2026-10-03",
         "source_refs": [
           "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足：未取得与桥梁与船闸操作员精确对应的中国大陆全国职业工资",
+        "derivation": "按原表口径及期间展示。",
+        "display_value": "证据不足：未取得与活动桥与船闸运行员精确对应的中国大陆全国职业工资",
         "fact_id": "cn-industry-science-tech-2024",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资缺口（不代填）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "截至 2026-09-16",
         "source_refs": [
           "nbs-wages"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "证据不足：交通运输、仓储和邮政业等行业门类均值未单列本职业，不能替代职业工资",
         "fact_id": "cn-industry-manufacturing-2024",
         "market": "中国大陆",
         "measure": "中国大陆行业门类口径（不代填）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "截至 2026-09-16",
         "source_refs": [
           "nbs-wages"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "133,981元/年（交通运输、仓储和邮政业，城镇非私营单位，显式代理）",
         "fact_id": "cn-professional-technical-2024",
         "market": "中国大陆",
         "measure": "行业门类平均工资（显式代理口径）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2025 年；2026-05-15 发布",
         "source_refs": [
           "nbs-wages"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "证据不足：城镇单位口径未单列本职业，本页不发布职业级数值",
         "fact_id": "cn-urban-nonprivate-2024",
         "market": "中国大陆",
         "measure": "中国大陆城镇单位口径（不代填）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "截至 2026-09-16",
         "source_refs": [
           "nbs-wages"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "28,090美元/年（第 10 分位）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "年薪第 10 分位（本职业口径）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2025 年；Bridge and Lock Tenders（SOC 53-6011）口径",
         "source_refs": [
           "bls-pay"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "75,360美元/年（第 90 分位）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "年薪第 90 分位（本职业口径）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2025 年；Bridge and Lock Tenders（SOC 53-6011）口径",
         "source_refs": [
           "bls-pay"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "64,220美元/年（2023行业内本职业平均工资）",
         "fact_id": "us-industry-wage-aerospace-mfg-2025",
         "market": "美国",
         "measure": "行业内本职业年平均工资（历史参考）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2023年5月；SOC 53-6011",
         "source_refs": [
           "bls-industry-2023"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "48,120美元/年（2023行业内本职业平均工资）",
         "fact_id": "us-industry-wage-engineering-services-2025",
         "market": "美国",
         "measure": "行业内本职业年平均工资（历史参考）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2023年5月；SOC 53-6011",
         "source_refs": [
           "bls-industry-2023"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "46,090美元/年（2023行业内本职业平均工资）",
         "fact_id": "us-industry-wage-federal-2025",
         "market": "美国",
         "measure": "行业内本职业年平均工资（历史参考）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2023年5月；SOC 53-6011",
         "source_refs": [
           "bls-industry-2023"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "33,280美元/年（2023行业内本职业平均工资）",
         "fact_id": "us-industry-wage-rd-2025",
         "market": "美国",
         "measure": "行业内本职业年平均工资（历史参考）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2023年5月；SOC 53-6011",
         "source_refs": [
           "bls-industry-2023"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "53,710美元/年（2023行业内本职业平均工资）",
         "fact_id": "us-industry-wage-instruments-2025",
         "market": "美国",
         "measure": "行业内本职业年平均工资（历史参考）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2023年5月；SOC 53-6011",
         "source_refs": [
           "bls-industry-2023"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "38,640美元/年（第 25 分位）",
         "fact_id": "us-wage-p25-2025",
         "market": "美国",
         "measure": "年薪第 25 分位（本职业口径）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2025 年；Bridge and Lock Tenders（SOC 53-6011）口径",
         "source_refs": [
           "bls-pay"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "69,620美元/年（第 75 分位）",
         "fact_id": "us-wage-p75-2025",
         "market": "美国",
         "measure": "年薪第 75 分位（本职业口径）",
-        "occupation_scope": "桥梁与船闸操作员",
+        "occupation_scope": "活动桥与船闸运行员",
         "period": "2025 年；Bridge and Lock Tenders（SOC 53-6011）口径",
         "source_refs": [
           "bls-pay"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "桥梁与船闸操作员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与通行记录"
     },
     "badges": [
       "O*NET 53-6011.00 · 通航值守与设备操作 · 轮班与户外环境",
       "瞭望判断 / 桥跨与闸门开合 / 信号发布与船舶引导",
-      "行业以政府为主（88%）· 中国大陆只展示行业显式代理与缺口"
+      "美国 2025 年就业：政府行业占 82%"
     ],
     "metrics": [
       {
@@ -37953,17 +38018,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "桥梁与船闸操作员做什么、需要哪些学历与培训、美国与中国的薪资和前景如何，以及 AI 与自动化会改变哪些环节；保留中国大陆行业显式代理与精确职业缺口。"
+      "text": "了解活动桥和船闸值守、岗位培训与工资，查看大陆历史招聘并用六条纸面事件试做。"
     },
     "title": {
       "availability": "available",
-      "text": "桥梁与船闸操作员"
+      "text": "活动桥与船闸运行员：值守、工资与入行"
     }
   },
-  "source_content_sha256": "8a5cf20a6690b5f85ffd135dd5e04ed8e4c51992e7c6860b2767de529a2cf319",
+  "source_content_sha256": "71f1838bd6fa49d4030498557daab328fb1fa52c13eeda1e1b53a25c124d9b1e",
   "subject": {
     "canonical_slug": "bridge-and-lock-tenders",
-    "name": "桥梁与船闸操作员",
-    "summary": "桥梁与船闸操作员操作并看护桥梁、运河船闸与灯塔，按运行规程与通航指令控制开合时序、确认净空与净宽、发布信号并引导船舶安全通行，同时记录船舶与水位数据；工作以轮班值守、户外与较高位置作业为常态，其职责不等于通航规则或结构安全结论。"
+    "name": "活动桥与船闸运行员",
+    "summary": "活动桥与船闸运行员按设施分工操作或值守，核对通行条件，沟通信号并记录事件。活动桥、船闸、升船机、船舶驾驶和设施维修的职责及授权各不相同。"
   }
 }

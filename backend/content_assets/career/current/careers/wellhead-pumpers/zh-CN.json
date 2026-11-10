@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "从生产记录看自己是否愿意反复核井号、时间和计数，发现不符后回到原表再交接。随后再了解真实设备训练及野外班次，不能只看机械兴趣。"
+              "纸面体验｜同一时段压力记录与巡检单不符。保留时间、仪表编号和原值，交班组负责人核对。 "
             ]
           },
           "id": "wellhead-pumpers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,13 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "井口泵操作员在美国53-7073.00范围内操作动力泵及辅助设备，使油田井中石油或天然气流出。工作包括观察泵与管线状态、计量生产、监控仪表、依指定任务操作及保养并保留记录。它不是所有泵站、钻井或油藏研究岗位的统称；中国采油与井口岗位须按设备和实际任务比较，操作、维修、工程设计及应急权限分别核。"
+              "井口泵工监看泵、流量、压力和管线状态，记录产量或异常，把维修、隔离和恢复交给有相应权限的岗位。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "wellhead-pumpers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-53-7073.00"
           ],
           "type": "prose"
         }
@@ -25455,13 +25453,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业已涉及监测与仪表，但技术存在不等生成式AI采用。文字可辅助交班资料整理，井号与计量必须人工回核；未核评分、节时和独立替代不填。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：同一时段压力记录与巡检单不符。保留时间、仪表编号和原值，交班组负责人核对。"
             ]
           },
           "id": "wellhead-pumpers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-53-7073.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33027,6 +33025,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-53-7073.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 53-7073.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/53-7073.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38504,10 +38529,10 @@
       "text": "井口泵操作员"
     }
   },
-  "source_content_sha256": "5d2c2de3c366f2b3fb5bf255b0cabb33d263d333422e63d69f93de2a94116bf7",
+  "source_content_sha256": "0693ffda2804e00618ab0797735d4c8bd0b68969a3ee85e82ea5ec75c70279a3",
   "subject": {
     "canonical_slug": "wellhead-pumpers",
     "name": "井口泵操作员",
-    "summary": "井口泵操作员在美国53-7073.00范围内操作动力泵及辅助设备，使油田井中石油或天然气流出。工作包括观察泵与管线状态、计量生产、监控仪表、依指定任务操作及保养并保留记录。它不是所有泵站、钻井或油藏研究岗位的统称；中国采油与井口岗位须按设备和实际任务比较，操作、维修、工程设计及应急权限分别核。"
+    "summary": "井口泵工监看泵、流量、压力和管线状态，记录产量或异常，把维修、隔离和恢复交给有相应权限的岗位。"
   }
 }

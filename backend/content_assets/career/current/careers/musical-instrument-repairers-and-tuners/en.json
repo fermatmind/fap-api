@@ -167,6 +167,9 @@
       "item:musical-instrument-repairers-and-tuners.path.seven-day-trial.8": {
         "status": "mapped"
       },
+      "item:musical-instrument-repairers-and-tuners.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:musical-instrument-repairers-and-tuners.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -13084,6 +13087,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two instruments share a model. One has a sticking key and the other drifts out of tune. The intake swapped serial numbers. List the evidence needed to match them again."
+            ]
+          },
+          "id": "musical-instrument-repairers-and-tuners.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "Match instrument complaints to service records",
+          "type": "notice"
         }
       ]
     },
@@ -15638,6 +15656,13 @@
         "id": "musical-instrument-repairers-and-tuners.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "musical-instrument-repairers-and-tuners.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15867,7 +15892,7 @@
       "text": "Musical Instrument Repairers and Tuners"
     }
   },
-  "source_content_sha256": "dca9373f1fc5f8e9abbaf8e4f15a8304e67955de0158a8db619b5c00c5947a58",
+  "source_content_sha256": "97cafb4fb731ca02d36450d74bf12961fb23c6c8016b9e7627037a9ab6373281",
   "subject": {
     "canonical_slug": "musical-instrument-repairers-and-tuners",
     "name": "Musical Instrument Repairers and Tuners",

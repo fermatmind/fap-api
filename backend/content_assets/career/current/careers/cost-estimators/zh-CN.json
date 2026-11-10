@@ -6,7 +6,7 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
@@ -21,7 +21,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -45,7 +45,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-cost-guangan": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-cost-shanghai": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -23534,7 +23540,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。准备层级来自O*NET而非BLS。"
+              "美国13-1051：2025就业226,400、2035预测219,500，下降3.1%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。准备层级来自O*NET而非BLS。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
@@ -24364,7 +24370,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。"
+              "美国13-1051：2025就业226,400、2035预测219,500，下降3.1%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
@@ -24559,7 +24565,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。"
+              "美国13-1051：2025就业226,400、2035预测219,500，下降3.1%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
@@ -24799,7 +24805,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。"
+              "美国13-1051：2025就业226,400、2035预测219,500，下降3.1%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
@@ -26046,12 +26052,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆造价与成本岗位招聘报价统计；单条招聘公告不能代表全国水平"
+              "上海同济咨询造价见习列 2,192 元/月补贴，协助算量、预算和标底。广安造价岗要求一级造价工程师证，税前年综合收入 70,000–110,000 元，依年终绩效确定。两者的经验、职责和计薪口径不同。 广安样本要求相关工作至少五年，持对应专业一级造价工程师证，并能在入职一个月内转入。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "cost-shanghai",
+            "cost-guangan"
           ],
           "type": "prose"
         },
@@ -26144,7 +26151,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "条件匹配行业背景：NBS2025建筑非私营92,036/私营66,275，制造113,594/76,055，科学研究技术服务182,064/83,560元税前年均；单位主营行业和私营分类匹配才用，非本岗工资分位或全国月薪。城镇5人及以上法人单位，不含个体自由职业，含工资奖金津补贴。中国职业工资、招聘样本及中美精确实体映射未取得。"
+              "以下公告用于对照岗位和计薪条件。全国职业工资分布缺少可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -30359,7 +30366,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。"
+              "美国13-1051：2025就业226,400、2035预测219,500，下降3.1%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
@@ -30890,7 +30897,7 @@
           "data": {
             "entries": [
               {
-                "answer": "建立成本监控与报告口径，读取图纸、清单与规格并向工程、采购与现场人员收集资料，到现场记录通道排水地形与市政条件，判读材料与人工需求并判断自制或外购，计算工程量、套用单价与费率并核定间接费用，编制成本与支出报表，维护供应商与分包商名录，并在特殊研究中建立标准工时与成本数据。",
+                "answer": "拆解图纸或规格，核算工程量、工时和材料，记录报价依据和风险，复核后交付预算或投标估算。制造和服务也有估算工作，签章权限按岗位与当地规则核实。",
                 "id": "actors.faq.1",
                 "question": "成本估算师每天的具体工作是什么？",
                 "question_key": "career.faq.cost-estimators.1",
@@ -30899,7 +30906,7 @@
                 ]
               },
               {
-                "answer": "成本估算师为项目或产品的制造与交付估算时间、资金、材料与人工，产出是估算与报价；会计师和审计师准备并核查财务记录、编制报表；预算分析师编制并监控机构预算与拨款；施工经理在现场计划、协调并监督施工；项目管理专员统筹项目预算与进度。",
+                "answer": "造价估算面向拟做项目的成本；会计记录实际交易，预算分析更关注组织资金的分配和执行。看岗位最终交付的是清单、投标报价还是财务报告。",
                 "id": "actors.faq.2",
                 "question": "成本估算师和会计师、预算分析师有什么区别？",
                 "question_key": "career.faq.cost-estimators.2",
@@ -30917,9 +30924,9 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：量算与价格套用、报表与名录维护、资料读取与现场评估三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "估算工具可协助提取清单或提示漏项；图纸版本、工程量规则、单价来源和签审仍由相应人员核查。 这不是对本职业 AI 使用率或岗位替代的测量。",
                 "id": "actors.faq.4",
-                "question": "成本估算师哪些任务已有 AI 变化证据？",
+                "question": "哪些工作可能由软件辅助？",
                 "question_key": "career.faq.cost-estimators.4",
                 "source_refs": [
                   "onet"
@@ -30935,12 +30942,14 @@
                 ]
               },
               {
-                "answer": "美国 2025 年中位年薪 78,740 美元、时薪 37.86 美元（13-1051.00 单一职业口径），分位为年薪 48,530／61,150／78,740／101,850／130,820 美元；中国大陆未取得职业级工资数值，本页按缺口处理，不用行业均值代填。",
+                "answer": "美国 2025 年 5 月工资中位数为 78,740 美元/年、37.86 美元/小时。 上海同济咨询造价见习列 2,192 元/月补贴，协助算量、预算和标底。广安造价岗要求一级造价工程师证，税前年综合收入 70,000–110,000 元，依年终绩效确定。两者的经验、职责和计薪口径不同。 广安样本要求相关工作至少五年，持对应专业一级造价工程师证，并能在入职一个月内转入。",
                 "id": "actors.faq.6",
                 "question": "成本估算师工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.cost-estimators.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "cost-shanghai",
+                  "cost-guangan"
                 ]
               },
               {
@@ -30971,12 +30980,12 @@
                 ]
               },
               {
-                "answer": "BLS 职业展望手册显示 2025—2035 年该职业就业下降 3%（-6,900），年均约 17,600 个空缺且全部来自替换需求；总量下降但仍持续产生替换性空缺，且工作以久坐、用眼与数据核对为主，须按本地建设与制造需求核对。",
+                "answer": "美国 BLS 预计 13-1051 就业从 2025 年约 226,400 到 2035 年约 219,500（−3.1%）。年均约 17,600 个空缺，包含替补需求。",
                 "id": "actors.faq.10",
-                "question": "现在选择成本估算师职业，还应考虑什么？",
+                "question": "美国就业预测怎么读？",
                 "question_key": "career.faq.cost-estimators.10",
                 "source_refs": [
-                  "bls"
+                  "a18-bls-projections"
                 ]
               }
             ]
@@ -31210,11 +31219,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。"
+                  "美国13-1051：2025就业226,400、2035预测219,500，下降3.1%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。",
+                "limitation": "美国13-1051：2025就业226,400、2035预测219,500，下降3.1%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。",
                 "market": "美国",
                 "name": "BLS 职业展望手册：Cost Estimators",
                 "period": "2025 年中位工资与 2025—2035 年预测；检索 2026-09-18",
@@ -31395,7 +31404,7 @@
                 "url": "https://www.onetonline.org/link/localwages/13-1051.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "O*NET15项中14Core：判读图纸规格与时间材料人工；与工程业主承包商核变更；收集历史成本；评估实际成本与投标差异；与客户供应商人员商讨；建立招标流程并谈判；编制供应商选择估算；为计划组织排程编估算；建监控报告；判断自制外购；周期报表；标准工时成本研究；到场记录通道排水地形公用设施；维护供应商承包商分包名录。遥感无人机在不能到场时为1项New，类别非所有岗位日常频率或普及率。美国O*NET2025建筑54%、制造12%、其他服务除公共行政10%；其他24%由100减前三项，仅余量未核细项；行业份额非工资或中国雇主份额。BLS同年主要雇主专业承包33%、房屋建筑15%、制造12%、汽车维修9%、重土木5%口径层级另列。"
                 ],
@@ -31407,7 +31416,7 @@
                 "period": "当前页面更新2026，各调查数据非统一2026调查；核2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/13-1051.00"
+                "url": "https://www.onetonline.org/link/details/13-1051.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31564,6 +31573,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 预计 13-1051 就业从 2025 年约 226,400 到 2035 年约 219,500（−3.1%）。年均约 17,600 个空缺，包含替补需求。"
+                ],
+                "evidence_type": "官方统计",
+                "id": "a18-bls-projections",
+                "limitation": "年均空缺包含替补；不是净增或录用概率。",
+                "market": "美国",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "2,192 元/月见习补贴；做算量、施工图预算与标底辅助。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "cost-shanghai",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "上海同济咨询造价见习",
+                "period": "2026-03",
+                "publisher": "上海市杨浦区政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shyp.gov.cn/shypq/ggfw-bmgg/20260316/501553.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "岗位 13：税前年综合收入 70,000–110,000 元，依绩效；要求一级造价工程师证。 广安样本要求相关工作至少五年，持对应专业一级造价工程师证，并能在入职一个月内转入。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "cost-guangan",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "广安造价员（土建、安装、水利）",
+                "period": "2026",
+                "publisher": "广安市政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.guanganqu.gov.cn/zfxxgk/c104191/pc/content/content_2084938617040973824.html"
               }
             ]
           },
@@ -34508,10 +34562,10 @@
             },
             {
               "城市/区间": "行业背景（税前年均非月薪）",
-              "月薪参考": "条件匹配行业背景：NBS2025建筑非私营92,036/私营66,275，制造113,594/76,055，科学研究技术服务182,064/83,560元税前年均；单位主营行业和私营分类匹配才用，非本岗工资分位或全国月薪。城镇5人及以上法人单位，不含个体自由职业，含工资奖金津补贴。中国职业工资、招聘样本及中美精确实体映射未取得。"
+              "月薪参考": "国家统计局按单位所属行业公布城镇单位年平均工资，可作行业背景。不能由行业均值推出具体岗位工资。"
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34523,20 +34577,21 @@
           "china_soc_row": "美国O*NET13-1051.00/BLS13-1051；本轮未完成中国精确职业实体映射，不断言全国不存在分类。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-cost-shanghai",
+            "posting-cost-guangan"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响成本估算师的工资吗？",
             "driver_heading": "成本与报价场景怎样安排工作周期？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历与资质背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "不同学历与资质背景对应哪些成本估算岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历与资质背景",
             "scenario_value_label": "岗位方向"
           },
-          "us_growth": "下降 3%（2025—2035 年）",
+          "us_growth": "下降 3.1%（2025—2035 年）",
           "us_median": "78,740美元/年（中位数，2025 年 5 月）"
         }
       },
@@ -36280,7 +36335,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解成本估算师的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36393,12 +36448,12 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "label": "人格偏好"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "label": "大五人格特质"
           },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
@@ -36814,39 +36869,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 226,400 人（2025 年，单一职业口径）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "226,400 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模",
-        "occupation_scope": "BLS 职业展望手册 Cost Estimators（2025 年）；该页为单一职业口径",
-        "period": "2025 年（BLS）；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 13-1051",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "下降 3%（2025—2035 年；就业变化 -6,900）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "−3.1%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "就业变化率",
-        "occupation_scope": "BLS 职业展望手册 Cost Estimators（2025—2035 年预测）",
-        "period": "2025—2035 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 13-1051",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 17,600 个/年（2025—2035 年平均；全部为替换需求）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 17,600 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "年均职位空缺",
-        "occupation_scope": "BLS 说明该口径空缺全部来自替换需求（转岗或退休），不是净新增岗位",
-        "period": "2025—2035 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 13-1051",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a18-bls-projections"
         ]
       },
       {
@@ -36944,6 +36999,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2,192 元/月见习补贴；做算量、施工图预算与标底辅助。",
+        "fact_id": "posting-cost-shanghai",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "上海同济咨询造价见习",
+        "period": "2026-03",
+        "source_refs": [
+          "cost-shanghai"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "岗位 13：税前年综合收入 70,000–110,000 元，依绩效；要求一级造价工程师证。 广安样本要求相关工作至少五年，持对应专业一级造价工程师证，并能在入职一个月内转入。",
+        "fact_id": "posting-cost-guangan",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "广安造价员（土建、安装、水利）",
+        "period": "2026",
+        "source_refs": [
+          "cost-guangan"
+        ]
       }
     ]
   },
@@ -36970,19 +37049,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2025—2035 年，下降 3%）"
+        "label": "美国预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2025 年，约 226,400 人）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2025—2035 年，约 17,600 个）"
+        "label": "美国预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -36996,17 +37075,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "成本估算师（O*NET-SOC 13-1051.00）为产品制造或服务交付估算时间、资金、材料与人工：覆盖建立成本监控与报告口径、判读材料与人工需求、编制成本与支出报表、现场踏勘并记录通道与市政条件、维护供应商与分包商名录、建立标准工时与成本数据；含美国 2025 年中位年薪 78,740 美元（时薪 37.86 美元）、2025 年约 226,400 人在岗、2025—2035 年就业下降 3%、年均约 17,600 个替换性空缺、中国大陆职业级工资与执业口径缺口，以及久坐用眼、数据口径与报价责任的控制点。"
+      "text": "工程造价员怎样算工程量、估工料和复核报价？对照上海见习、广安持证岗位及美国薪资与预测。"
     },
     "title": {
       "availability": "available",
       "text": "成本估算师"
     }
   },
-  "source_content_sha256": "ef3ae3fbe71256da91dede2a3ec68615c227bbd37b180538333fa66b59d760e2",
+  "source_content_sha256": "5adc0cca43e86ae6281d1c305607b0b8bc3fe0a36b89edd9e09e9dfa42e662f2",
   "subject": {
     "canonical_slug": "cost-estimators",
     "name": "成本估算师",
-    "summary": "成本估算师在美国对应 O*NET-SOC 13-1051.00（Cost Estimators）；BLS 职业展望手册为该职业单列发布。核心是为产品制造或服务交付收集并分析数据，估算所需的时间、资金、材料与人工：建立成本监控与报告口径、判读材料与人工需求、编制成本与支出报表、现场踏勘并记录通道排水地形与市政条件、维护供应商与分包商名录、在特殊研究中建立标准工时与成本数据。中国侧，造价、成本与商务估算岗位分属不同资质体系与用人单位，与该美国职业细类不是一一对应，任职与执业口径不能互换。"
+    "summary": "拆解图纸或规格，核算工程量、工时和材料，记录报价依据和风险，复核后交付预算或投标估算。制造和服务也有估算工作，签章权限按岗位与当地规则核实。"
   }
 }

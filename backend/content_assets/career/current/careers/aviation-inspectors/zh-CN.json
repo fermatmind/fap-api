@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1542,7 +1539,7 @@
         "status": "pending_mapping"
       },
       "item:aviation-inspectors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:aviation-inspectors.sources.source-card.1": {
         "status": "mapped"
@@ -23206,12 +23203,11 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：航空检查员不是「修飞机的岗位」，而是按法规与标准核对航空器与维修过程并作出适航判断的检查岗位：核对机务人员完成的维修与改装是否符合标准与程序、查阅维修记录与飞行日志确认检查与大修是否按期执行、检查新造与修复与改装后的航空器以识别损伤或缺陷并评估适航性与符合性、审查起落架与轮胎与机身与机翼与发动机外部是否有损伤或腐蚀、并据此作出签发或拒绝签发适航证件的判断；只想凭经验放行、不愿为检查结论与放行决定负责的人不适合。"
+              "航空检查员对照维修记录、检查证据与适用标准，识别缺陷并留下可复核报告。单位内部质检、维修放行和监管执法是不同权限；先辨认岗位交付什么、由谁签字。"
             ]
           },
           "id": "aviation-inspectors.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23221,12 +23217,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你能按检查清单与法规条款逐项核对并如实记录证据，愿意依据厂家与适航文件与技术数据作出判断并保留可追溯的检查与测试记录，能在损伤程度、腐蚀范围或符合性依据不明时停下来取证并升级，并愿意与机务人员、运营方与制造方就缺陷与整改要求沟通。"
+              "愿意追查证据的适用版本、记录未决项并接受复核，可以继续探索。"
             ]
           },
           "id": "aviation-inspectors.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23235,14 +23231,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停投入的条件：你还没有在任何有监督的条件下完成过一次完整的查阅记录—现场检查—测量与测试—判定—记录归档闭环，或只能靠「喜欢飞机」说明兴趣；也不要把机务维修经验或会开飞机当作可以独立作出适航判定或签发证件的证明。适航判定、放行签署、事故调查与无人驾驶航空器合规检查必须由具相应授权的人员按适用法规与机构程序执行并留有可追溯依据；本页不提供检查、判定或放行指令。"
+              "如果容易把签字当作所有检查都完成，先练分项核证据。真实检查与签署由获授权人员负责。"
             ]
           },
           "id": "aviation-inspectors.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23251,13 +23245,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历与授权必须分开核对：O*NET 把 53-6051.01 列为 Job Zone Three（SVP 6.0 至 <7.0），页面公布的学历构成中 34% 为要求副学士或其他两年制学位、29% 为要求高中文凭或同等学历、20% 为要求高中后证书；该区大多数职业需要职业学校培训、相关在职经验或副学士学位，并要求先前相关工作技能与一到两年培训。美国侧的检查与放行权限来自主管当局的授权与任命（参见 FAA 适航审定说明与 14 CFR Part 65 关于机械师与检查授权 IA 的条款）。学历、课程与培训、行业认证、机构内部上岗资格与检查授权是不同状态，须按雇主、岗位与法域逐项核验。"
+              "从「入行、资格与职业发展」找「IN-22｜签名能否关闭两项检查？」，90 分钟交一页检查交接单，逐项写状态、原证编号、未决项和负责复核的人。"
             ]
           },
           "id": "aviation-inspectors.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23266,12 +23259,11 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以法规符合性核对、现场检查取证与适航判定为核心的技术检查岗位，核心是查阅记录、现场检查与测量测试、缺陷判定、放行或拒绝的决定以及检查记录，而不是对飞机的兴趣或维修手艺。"
+              "航空检查员对照维修记录、检查证据与适用标准，识别缺陷并留下可复核报告。单位内部质检、维修放行和监管执法是不同权限；先辨认岗位交付什么、由谁签字。"
             ]
           },
           "id": "aviation-inspectors.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23289,13 +23281,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "航空检查员的工作可分三类：检查与核对（核查机务人员执行的维护、改装或修理与大修工作是否符合标准与程序；查阅维护记录与飞行日志，判断检修与大修是否按期执行；检查新造与修复与改装后的航空器以识别损伤或缺陷，并用检查清单、手工工具与测试仪器评估适航性与符合性；检查起落架、轮胎以及机身、机翼和发动机外部是否有损伤或腐蚀迹象及是否需要修理；检查航空器检修盖板与舱门是否固定可靠）；测试与判定（启动航空器并观察仪表与其他指示器以发现故障迹象；执行飞行试验项目，在多种条件下测试设备、仪表与系统；据此作出签发或拒绝签发适航证件的判断；就航空器设备的更换、修理或改装提出建议）；调查、规则与培训（调查航空事故与投诉以确定原因；分析培训项目并进行口试与笔试，以核对操作、安装与维修航空器设备人员的胜任情况；依据运行条件与航空器改进等情况，就规则、政策、标准与法规的修改提出建议；检查无人机等无人驾驶航空器系统是否符合安全与运行法规）。三类任务都以符合性依据不明、超出授权范围或发现影响安全的缺陷时停工取证并升级为前提。"
+              "常见工作是查看维修记录和飞行日志、检查证据是否符合适用标准、记下缺陷并交指定人员复核。只有获相应授权时才参与操作或测试。适航证签发或拒发、维修放行均由各自获授权的主体按适用规则办理。"
             ]
           },
           "id": "aviation-inspectors.profile.career-quick-answers-block.1",
           "source_refs": [
             "onet",
-            "onet"
+            "faa-asi"
           ],
           "type": "prose"
         },
@@ -23304,15 +23296,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET53-6051.01定义为检查航空器、维修程序、空中航行辅助设施、空中交通管制及通信设备以符合联邦安全法规。O*NET详细资料14项任务：10 Core、3 Supplemental、1 New；无人机合规为New且无Importance，不能归入已有Supplemental。41项工作活动Importance：合规判断99、设备检查98、记录92、识别90、更新知识及计算机使用88。它们是群体重要性，不是发生频率或个人阈值。 美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。"
+              "O*NET 53-6051.01 以检查记录、维修作业或航空器状态为核心。其 14 项任务包括 10 项核心、3 项补充和 1 项新增无人机任务。企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
             ]
           },
           "id": "aviation-inspectors.profile.onet-structured-fields-block.1",
           "source_refs": [
             "onet",
-            "bls",
-            "faa-airworthiness",
-            "ia-95"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -23342,7 +23333,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜98% 每天使用电子邮件，94% 每天进行电话沟通，88% 每天需要面对面讨论，84% 身体接近度为一臂以内，51% 每周至少一次但非每天使用专门防护或安全装备，51% 每周至少一次但非每天在环境受控的室内工作，50% 每周至少一次但非每天在非环境受控的室内工作，41% 每月至少一次但非每周接触危险条件，37% 每月至少一次但非每周暴露于过亮或照明不足条件，36% 每周至少一次但非每天处于狭窄工作空间或别扭姿势，33% 每天暴露于污染物，32% 每周至少一次但非每天暴露于分散注意或不适的噪音，31% 每月至少一次但非每周接触危险设备，26% 每周至少一次但非每天佩戴常规防护或安全装备，62% 每周至少一次但非每天户外暴露于各种天气，47% 每月至少一次但非每周暴露于极热或极冷温度。\n主要装备与工具｜检查清单与测量与测试仪器、手工工具与量具、适航与技术数据与维修手册、航空器仪表与地面测试设备、个人防护（护目镜、手套、听力保护、安全鞋、高空作业防护）。\n任务节奏｜68% 的典型工作周为 40 小时；61% 约一半时间站立、61% 约一半时间坐着、41% 少于一半时间用手处理或控制工具、34% 少于一半时间弯腰或扭身、27% 约一半时间做重复动作；20% 每天面临时间压力。\n协作对象｜与机务维修人员、运营方、制造方与设计方以及主管当局内部其他专业岗位协作；50% 持续与他人接触，53% 认为需要协调或领导他人极其重要，48% 对他人工作结果承担高度责任，50% 对他人健康与安全承担很高责任，32% 认为与工作组或团队合作非常重要，34% 认为与外部客户或公众打交道极其重要。\n竞争与压力｜69% 认为错误的后果极其严重，65% 认为决策对同事或公司的结果是非常重要的结果，51% 认为精确或准确非常重要，59% 有很大的决策自由、58% 对任务与优先级与目标有很大的自由，79% 每天需要作出决定，52% 认为竞争程度中等。\n合规与安全｜检查与判定须按适用适航与运行法规与机构程序执行；美国侧适航证件签发须进行航空器检查并审阅适航数据（适航证签发规则属Part21及获授权代表Part183；Part65机械师IA为不同权限）。\n记录与复盘｜受检对象与依据文件与检查与测量与判定与放行理由需要可追溯；60% 认为重复相同任务极其重要，51% 认为精确或准确非常重要。\n技能与训练｜O*NET 把该职业列为 Job Zone Three（SVP 6.0 至 <7.0）；基本技能以批判性思维、积极倾听、阅读理解、口语表达、写作与监控为主；可迁移技能包含运行监控、质量控制分析、复杂问题解决、判断与决策、时间管理、故障排除、操作与控制、服务导向、社会洞察力与系统分析；知识以英语语言、机械、公共安全与安保、客户与个人服务、运输、教育培训、生产加工、工程与技术、数学、行政与管理、法律与政府、计算机与电子学、设计与物理为主；能力包含归纳推理、问题敏感性、演绎推理、近距视力、口语理解与表达、书面理解与表达等（详细资料公布Importance，非频率）。\n准入与授权｜学历不等于检查或放行授权，行业认证也不等于可以在任何场所作出适航判定；须按机构授权与适用法规执行。\n行业与雇主｜O*NET 行业分布为2025年运输检查员父级政府47%、运输仓储30%、其他行业23%；常见雇主为监管机构、航空器制造与维修单位、航空公司与运营方以及第三方检验与合规机构。\n权限与统计补充｜美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。 §65.81要求相关等级及具体作业能力，未曾成功完成相关工作时可按条款向主管证明或在有相应经验的持证人员直接监督下证明能力；行使权限须理解当前厂家指令和该项维修手册，不能简单写成不熟悉者永久不得作业。 O*NET新聘学历需求问卷34%要求副学士或其他两年制学位、29%高中或同等、20%高中后证书，不是在岗学历构成。Zone3/SVP6.0至<7.0是一般职业准备描述，通常一至两年训练，不是每岗固定年限。BLS EP父级典型高中、相关经验None、中期在职培训，不能用父级典型安排取消航空专项资格。 常见雇主方向是岗位核对候选，本轮没有招聘样本或中国雇主比例。"
+              "工作环境｜98% 每天使用电子邮件，94% 每天进行电话沟通，88% 每天需要面对面讨论，84% 身体接近度为一臂以内，51% 每周至少一次但非每天使用专门防护或安全装备，51% 每周至少一次但非每天在环境受控的室内工作，50% 每周至少一次但非每天在非环境受控的室内工作，41% 每月至少一次但非每周接触危险条件，37% 每月至少一次但非每周暴露于过亮或照明不足条件，36% 每周至少一次但非每天处于狭窄工作空间或别扭姿势，33% 每天暴露于污染物，32% 每周至少一次但非每天暴露于分散注意或不适的噪音，31% 每月至少一次但非每周接触危险设备，26% 每周至少一次但非每天佩戴常规防护或安全装备，62% 每周至少一次但非每天户外暴露于各种天气，47% 每月至少一次但非每周暴露于极热或极冷温度。\n主要装备与工具｜检查清单与测量与测试仪器、手工工具与量具、适航与技术数据与维修手册、航空器仪表与地面测试设备、个人防护（护目镜、手套、听力保护、安全鞋、高空作业防护）。\n任务节奏｜68% 的典型工作周为 40 小时；61% 约一半时间站立、61% 约一半时间坐着、41% 少于一半时间用手处理或控制工具、34% 少于一半时间弯腰或扭身、27% 约一半时间做重复动作；20% 每天面临时间压力。\n协作对象｜与机务维修人员、运营方、制造方与设计方以及主管当局内部其他专业岗位协作；50% 持续与他人接触，53% 认为需要协调或领导他人极其重要，48% 对他人工作结果承担高度责任，50% 对他人健康与安全承担很高责任，32% 认为与工作组或团队合作非常重要，34% 认为与外部客户或公众打交道极其重要。\n竞争与压力｜69% 认为错误的后果极其严重，65% 认为决策对同事或公司的结果是非常重要的结果，51% 认为精确或准确非常重要，59% 有很大的决策自由、58% 对任务与优先级与目标有很大的自由，79% 每天需要作出决定，52% 认为竞争程度中等。\n合规与安全｜企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。\n记录与复盘｜受检对象与依据文件与检查与测量与判定与放行理由需要可追溯；60% 认为重复相同任务极其重要，51% 认为精确或准确非常重要。\n技能与训练｜O*NET 把该职业列为 Job Zone Three（SVP 6.0 至 <7.0）；基本技能以批判性思维、积极倾听、阅读理解、口语表达、写作与监控为主；可迁移技能包含运行监控、质量控制分析、复杂问题解决、判断与决策、时间管理、故障排除、操作与控制、服务导向、社会洞察力与系统分析；知识以英语语言、机械、公共安全与安保、客户与个人服务、运输、教育培训、生产加工、工程与技术、数学、行政与管理、法律与政府、计算机与电子学、设计与物理为主；能力包含归纳推理、问题敏感性、演绎推理、近距视力、口语理解与表达、书面理解与表达等（详细资料公布Importance，非频率）。\n准入与授权｜学历不等于检查或放行授权，行业认证也不等于可以在任何场所作出适航判定；须按机构授权与适用法规执行。\n行业与雇主｜美国交通检查员母类 53-6051 的行业就业占比为政府 47%、运输仓储 30%，其余约 23% 是未细分余额。该分布不是航空检查员细分统计。\n权限与统计补充｜中国民用航空监察员承担规则所定行政执法职能；西北国际货航是企业内部监督岗位，深航是相邻维修培养路径。两则样本不等于行政执法或维修放行资格。"
             ]
           },
           "id": "aviation-inspectors.profile.work-context-block.1",
@@ -23404,14 +23395,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国精确职业工资仍证据不足。中国大陆2025年修订民用航空法自2026-07-01施行：第4条民航主管部门及地区机构依法监管；第25/28条设计、生产机构可接受委托技术检查，第30条维修机构许可，第31条适航证等飞行条件、第33条由取得许可的机构或人员维修。第36/37条航空人员培训考核执照要求须按所列岗位区分，不能由“航空检查员”名称推出统一执照或把FAA IA用于中国。未取得该美国细分的中国精确分类互认、个人监察任命及全国工资分布。 国家统计局2025年城镇单位行业年平均工资：交通运输仓储邮政非私营133,981元、私营73,133元；制造业113,594/76,055元；科学研究技术服务182,064/83,560元；公共管理社保社会组织非私营119,465元。依据实际单位主要活动选门类，不能由岗位名套行业；均非本职业中位数、起薪、城市月薪或个人到手收入。 工资总额包含计时、计件、奖金、津贴补贴和加班工资等，按款项性质判断，不能一概把外勤、值班补贴和加班费排除；统计年平均为税前口径，不是个人税后所得。"
+              "中国民用航空监察员承担规则所定行政执法职能；西北国际货航是企业内部监督岗位，深航是相邻维修培养路径。两则样本不等于行政执法或维修放行资格。"
             ]
           },
           "id": "aviation-inspectors.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "cn-civil-law-2025",
-            "nbs-wages-2025",
-            "cn-wage-definition"
+            "faa-asi",
+            "mot-inspector",
+            "northwest",
+            "shenzhen"
           ],
           "type": "prose"
         },
@@ -23435,13 +23427,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国53-6051运输检查员父级：2025年就业25,100人，2035年预测25,600人，2025—2035年增长2.2%（取整2%，低于平均），原表净增0.6千人，年均空缺2,300个，自雇0.2%。原表千人和取整人数有舍入差异，不用两个人数相减重算净增；空缺含增长及离职转岗替补。不是53-6051.01航空检查员独立统计或AI因果预测。"
+              "美国交通检查员母类 53-6051：2025 年 25,100 人，2035 年预计 25,600 人，增 2.2%，官方单独取整净增 600，年均约 2,300 个空缺。母类包含其他运输检查，不能推航空检查员独立人数或走势。"
             ]
           },
           "id": "aviation-inspectors.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -23450,13 +23441,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按规程启动与操作航空器并观察仪表 → 执行或见证飞行试验与地面测试 → 对照适航与技术数据判断是否满足要求 → 作出签发或拒绝签发适航证件的判断 → 记录测试结果与放行或拒绝的依据 → 归档并说明未决事项。"
+              "核适用记录和任务范围 → 收集检查证据 → 对照标准记录发现 → 标记未决项 → 形成记录摘要 → 交相应授权人员复核。操作航空器、试飞和签署另核权限。"
             ]
           },
           "id": "aviation-inspectors.profile.career-quick-answers-block.5",
           "source_refs": [
             "onet",
-            "onet"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -23465,13 +23457,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025年53-6051运输检查员父级行业分布：政府47%、运输仓储30%、其他行业23%（含其他服务与制造）；不是航空检查员独立占比，更不是中国雇主构成或行业工资。 15类软件技能、12项热门技术；2025年美国职业关联唯一招聘中Office8%、WebSphere MQ6%、Excel6%、PowerPoint3%、Word2%，其余未公布比例。分母是职业关联唯一招聘，非使用率、中国岗位门槛或生成式AI采用率。"
+              "美国交通检查员母类 53-6051 的行业就业占比为政府 47%、运输仓储 30%，其余约 23% 是未细分余额。该分布不是航空检查员细分统计。"
             ]
           },
           "id": "aviation-inspectors.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "r2-pay-2",
-            "hr"
+            "onet"
           ],
           "type": "prose"
         },
@@ -23526,13 +23517,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按规程完成检查与测量与测试，并留下说明受检对象与依据文件、检查与测量结果、缺陷与符合性判断、放行或拒绝的理由、以及仍不确定部分的检查记录，让主管或复核人员能据此判断。"
+              "记录受检对象、依据文件、发现的缺陷、原证编号和仍不确定的事项，再交指定人员复核。维修放行或适航批准只由相应授权岗位办理。"
             ]
           },
           "id": "aviation-inspectors.profile.career-quick-answers-block.9",
           "source_refs": [
             "onet",
-            "onet"
+            "faa-asi"
           ],
           "type": "prose"
         },
@@ -23602,13 +23593,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "调阅记录与工作单 → 按检查清单现场检查并取证 → 用工具与仪器测量与测试 → 对照依据文件判定符合性 → 作出放行或拒绝并说明理由 → 归档并说明未决事项。"
+              "核适用记录和任务范围 → 收集检查证据 → 对照标准记录发现 → 标记未决项 → 形成记录摘要 → 交相应授权人员复核。操作航空器、试飞和签署另核权限。"
             ]
           },
           "id": "aviation-inspectors.profile.career-quick-answers-block.13",
           "source_refs": [
             "onet",
-            "onet"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -23632,13 +23624,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "受检对象与依据文件、检查与测量值、发现与缺陷描述、符合性判断与替换方案、放行或拒绝的理由、以及仍不确定的部分。"
+              "记录受检对象、依据文件、发现的缺陷、原证编号和仍不确定的事项，再交指定人员复核。维修放行或适航批准只由相应授权岗位办理。"
             ]
           },
           "id": "aviation-inspectors.profile.career-quick-answers-block.15",
           "source_refs": [
             "onet",
-            "onet"
+            "faa-asi"
           ],
           "type": "prose"
         },
@@ -23692,13 +23684,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 53-6051.01 列为 Job Zone Three（SVP 6.0 至 <7.0），该区大多数职业要求职业学校培训、相关在职经验或副学士学位，并要求先前相关工作技能、知识或经验，培训通常为一到两年并可能有受认可的学徒计划；页面公布的学历构成中 34% 为要求副学士或其他两年制学位、29% 为要求高中文凭或同等学历、20% 为要求高中后证书。O*NET 页面显示该职业在全国没有登记培训项目，且列出多项行业认证（如 ETA International 的光纤与 ARINC 光纤类认证、ASTM International 的外来物消除认证、北美运输管理学会的安全总监与安全主管认证、以及美国公务航空协会的认证航空管理者）。中国大陆侧以航空器维修与适航相关专业教育与岗位培训为主，具体要求由用人单位规定。"
+              "O*NET 的新聘所需教育问卷：34% 回答副学士或两年制学位，29% 回答高中或同等，20% 回答高中后证书。Job Zone 3 是一组职业的概括。母类 BLS 典型教育与行业岗位或监管招聘要求分开核。"
             ]
           },
           "id": "aviation-inspectors.profile.career-quick-answers-block.19",
           "source_refs": [
             "onet",
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -23795,13 +23787,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧学历构成以副学士或两年制学位为主（O*NET 页面公布的学历构成中34% 为要求副学士或其他两年制学位、29% 为要求高中文凭或同等学历，另有 20% 为要求高中后证书），多数岗位要求先前相关工作技能与一到两年培训；O*NET 页面显示该职业在全国没有登记培训项目。中国大陆以航空器维修与适航相关专业教育与岗位培训为主，具体学历要求由用人单位规定。"
+              "O*NET 的新聘所需教育问卷：34% 回答副学士或两年制学位，29% 回答高中或同等，20% 回答高中后证书。Job Zone 3 是一组职业的概括。母类 BLS 典型教育与行业岗位或监管招聘要求分开核。"
             ]
           },
           "id": "aviation-inspectors.profile.career-quick-answers-block.26",
           "source_refs": [
             "onet",
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -23824,13 +23816,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "检查与判定与放行须按机构授权与适用法规执行。美国侧适航证件的签发需按 FAA 适航审定要求进行航空器检查并审阅适航数据（参见 FAA 《How Does the FAA Certify Aircraft?》）；14 CFR Part 65 规定了非飞行机组成员的航空人员认证，其中 Subpart D 规定机械师的权利与限制，§65.81 要求持证机械师不得对不熟悉的工作批准恢复使用，§65.91–§65.95 规定了检查授权（IA）的资格、有效期、续期与权利限制。O*NET 认证页面另列出光纤与外来物消除与安全总监等多项行业认证。中国大陆侧本页未取得精确等价的公开职业条目与准入依据，入职前核对岗前培训与检查与放行授权，不能从学历或认证直接推断。"
+              "FAA 的航空安全监察员岗位按运行、适航和制造等方向设具体要求。公司的维修检查、美国检查授权 IA 与 FAA 公职是不同路径。签署或批准前须查该岗位和对应法条；母类教育统计不能当 FAA 招聘条件。 中国大陆区分企业内部检查和中国民用航空监察员的行政执法。现行监察员规定按类别和专业管理资格；企业安全监察岗的名称不授予行政执法或适航批准权限。维修检查与维修放行另按适用规章及单位授权核。"
             ]
           },
           "id": "aviation-inspectors.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -23913,12 +23905,11 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "适航与运行法规、检查技术与工具、无人驾驶航空器规则以及数字化检查与记录工具更新较快（O*NET 列出 15 类技术技能，其中 12 项标记为热门技术，页面按雇主招聘公告给出出现比例：Microsoft Office 8%、IBM WebSphere MQ 6%、Microsoft Excel 6%、Microsoft PowerPoint 3%、Microsoft Word 2%，其余为未公布比例），需要持续的继续培训与依据文件维护；入职前确认培训安排、检查授权与复核机制。"
+              "O*NET 列 15 类软件技能和 12 项热门技术入口。软件要求按岗位核；不从目录推使用频率。"
             ]
           },
           "id": "aviation-inspectors.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23955,7 +23946,7 @@
                 "url": "https://www.onetonline.org/link/custom/53-6051.01"
               },
               {
-                "entity": "O*NET 53-6051.01 行业分布",
+                "entity": "O*NET 交通检查员母类 53-6051 行业分布",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/industry/53-6051.01"
@@ -24150,13 +24141,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "以实际执行维修与改装为主，通常不签发适航证件；航空检查员以检查机务工作并作出适航判定与放行或拒绝为主。"
+              "维修机械员主要执行维修和改装。航空检查员核查维修工作与适用标准，留存符合性证据并交复核。适航签发与维修放行分别由对应授权岗位办理。"
             ]
           },
           "id": "aviation-inspectors.direction-comparison.adjacent-career-comparison-table.19",
           "source_refs": [
             "onet",
-            "onet"
+            "faa-asi"
           ],
           "type": "prose"
         },
@@ -24165,12 +24156,11 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意动手维修航空器，优先比较飞机机械师技术员；若你更愿意作出检查与放行判定，则适合航空检查员。"
+              "更喜欢实际动手维修，可比较飞机维修机械员；更喜欢检查原证、写出偏差并跟进复核，可继续看航空检查。"
             ]
           },
           "id": "aviation-inspectors.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24433,7 +24423,7 @@
                 "url": "https://www.onetonline.org/link/hot_tech/53-6051.01"
               },
               {
-                "entity": "O*NET 53-6051.01 行业分布",
+                "entity": "O*NET 交通检查员母类 53-6051 行业分布",
                 "id": "link-5",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/industry/53-6051.01"
@@ -24469,7 +24459,7 @@
                 "url": "https://www.onetonline.org/link/localcert/53-6051.01"
               },
               {
-                "entity": "O*NET 53-6051.01 行业分布（行业与雇主类型口径）",
+                "entity": "O*NET 交通检查员母类 53-6051 行业分布（行业与雇主类型口径）",
                 "id": "link-11",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/industry/53-6051.01"
@@ -24499,7 +24489,7 @@
                 "url": "https://www.onetonline.org/link/hot_tech/53-6051.01"
               },
               {
-                "entity": "O*NET 53-6051.01 行业分布",
+                "entity": "O*NET 交通检查员母类 53-6051 行业分布",
                 "id": "link-16",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/industry/53-6051.01"
@@ -24557,13 +24547,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先在固定虚构材料上练熟调阅记录—现场检查—测量测试—判定—归档闭环：给一份虚构的维修记录与飞行日志与工作单、一份检查清单与测量记录表与一份适航与技术数据摘录，按顺序写出符合性判断依据、检查与测量值、缺陷描述、放行或拒绝的理由与未决事项的写法，再谈岗位；同时核对目标岗位的检查与放行授权要求。"
+              "用本页 IN-22 的两份检查记录和附件说明核对编号、签字与日期，再看参考。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -24587,14 +24576,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试验建议：在获准材料中测试法规手册检索、测量比对、检查报告草稿，记录错漏和人工复核成本；没有本职业提效实测。美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。"
+              "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "faa-airworthiness",
-            "ia-95",
-            "cn-civil-law-2025"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -24665,14 +24653,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得航空检查员生成式AI采用率、提效或减员因果测量。资料检索、数据比对和报告草稿是编辑试验候选，需实测；总体就业预测不能归因于AI。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可用工具整理非敏感检查材料和提示缺页。检查人员仍需对原件、确认适用标准和证据链，并交有授权的人处理未决项。没有可信的本职业 AI 替代比例。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "source-fermatmind-ai-rubric",
             "onet"
           ],
           "type": "prose"
@@ -24782,13 +24768,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "15类软件技能、12项热门技术；2025年美国职业关联唯一招聘中Office8%、WebSphere MQ6%、Excel6%、PowerPoint3%、Word2%，其余未公布比例。分母是职业关联唯一招聘，非使用率、中国岗位门槛或生成式AI采用率。"
+              "O*NET 列 15 类软件技能和 12 项热门技术入口。软件要求按岗位核；不从目录推使用频率。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "hr",
-            "bls"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24797,7 +24782,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 53-6051.01 行业分布"
+              "O*NET 交通检查员母类 53-6051 行业分布"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.27",
@@ -24811,7 +24796,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025年53-6051运输检查员父级行业分布：政府47%、运输仓储30%、其他行业23%（含其他服务与制造）；不是航空检查员独立占比，更不是中国雇主构成或行业工资。"
+              "美国交通检查员母类 53-6051 的行业就业占比为政府 47%、运输仓储 30%，其余约 23% 是未细分余额。该分布不是航空检查员细分统计。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.28",
@@ -25155,13 +25140,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "15类软件技能、12项热门技术；2025年美国职业关联唯一招聘中Office8%、WebSphere MQ6%、Excel6%、PowerPoint3%、Word2%，其余未公布比例。分母是职业关联唯一招聘，非使用率、中国岗位门槛或生成式AI采用率。"
+              "O*NET 列 15 类软件技能和 12 项热门技术入口。软件要求按岗位核；不从目录推使用频率。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "hr",
-            "bls"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25212,13 +25196,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国53-6051运输检查员父级：2025年就业25,100人，2035年预测25,600人，2025—2035年增长2.2%（取整2%，低于平均），原表净增0.6千人，年均空缺2,300个，自雇0.2%。原表千人和取整人数有舍入差异，不用两个人数相减重算净增；空缺含增长及离职转岗替补。不是53-6051.01航空检查员独立统计或AI因果预测。"
+              "美国交通检查员母类 53-6051：2025 年 25,100 人，2035 年预计 25,600 人，增 2.2%，官方单独取整净增 600，年均约 2,300 个空缺。母类包含其他运输检查，不能推航空检查员独立人数或走势。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25241,7 +25224,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 53-6051.01 行业分布"
+              "O*NET 交通检查员母类 53-6051 行业分布"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.58",
@@ -25269,7 +25252,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025年53-6051运输检查员父级行业分布：政府47%、运输仓储30%、其他行业23%（含其他服务与制造）；不是航空检查员独立占比，更不是中国雇主构成或行业工资。"
+              "美国交通检查员母类 53-6051 的行业就业占比为政府 47%、运输仓储 30%，其余约 23% 是未细分余额。该分布不是航空检查员细分统计。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.60",
@@ -25298,7 +25281,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "取决于机构的检查设备与工具链、受检单位数据保护规范、以及上岗与复核安排；本页不推测采用进度，也没有该职业的采用率统计。"
+              "取决于机构的检查设备与工具链、受检单位数据保护规范、以及上岗与复核安排；本页不推测采用进度；本页来源未提供该职业采用率。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.62",
@@ -25313,13 +25296,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国53-6051运输检查员父级：2025年就业25,100人，2035年预测25,600人，2025—2035年增长2.2%（取整2%，低于平均），原表净增0.6千人，年均空缺2,300个，自雇0.2%。原表千人和取整人数有舍入差异，不用两个人数相减重算净增；空缺含增长及离职转岗替补。不是53-6051.01航空检查员独立统计或AI因果预测。"
+              "美国交通检查员母类 53-6051：2025 年 25,100 人，2035 年预计 25,600 人，增 2.2%，官方单独取整净增 600，年均约 2,300 个空缺。母类包含其他运输检查，不能推航空检查员独立人数或走势。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25417,13 +25399,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国53-6051运输检查员父级：2025年就业25,100人，2035年预测25,600人，2025—2035年增长2.2%（取整2%，低于平均），原表净增0.6千人，年均空缺2,300个，自雇0.2%。原表千人和取整人数有舍入差异，不用两个人数相减重算净增；空缺含增长及离职转岗替补。不是53-6051.01航空检查员独立统计或AI因果预测。"
+              "美国交通检查员母类 53-6051：2025 年 25,100 人，2035 年预计 25,600 人，增 2.2%，官方单独取整净增 600，年均约 2,300 个空缺。母类包含其他运输检查，不能推航空检查员独立人数或走势。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25447,14 +25428,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。 工具输出须核真实授权与适用法规；本轮未完整取得自动判定系统的航空审批条件，不能由职责清单推永久技术不可能。"
+              "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "faa-airworthiness",
-            "ia-95",
-            "cn-civil-law-2025"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -25477,13 +25457,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "所读资料没有岗位消失年份；美国53-6051运输检查员父级：2025年就业25,100人，2035年预测25,600人，2025—2035年增长2.2%（取整2%，低于平均），原表净增0.6千人，年均空缺2,300个，自雇0.2%。原表千人和取整人数有舍入差异，不用两个人数相减重算净增；空缺含增长及离职转岗替补。不是53-6051.01航空检查员独立统计或AI因果预测。"
+              "美国交通检查员母类 53-6051：2025 年 25,100 人，2035 年预计 25,600 人，增 2.2%，官方单独取整净增 600，年均约 2,300 个空缺。母类包含其他运输检查，不能推航空检查员独立人数或走势。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25612,14 +25591,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。 中国大陆2025年修订民用航空法自2026-07-01施行：第4条民航主管部门及地区机构依法监管；第25/28条设计、生产机构可接受委托技术检查，第30条维修机构许可，第31条适航证等飞行条件、第33条由取得许可的机构或人员维修。第36/37条航空人员培训考核执照要求须按所列岗位区分，不能由“航空检查员”名称推出统一执照或把FAA IA用于中国。未取得该美国细分的中国精确分类互认、个人监察任命及全国工资分布。"
+              "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "faa-airworthiness",
-            "ia-95",
-            "cn-civil-law-2025"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -25762,13 +25740,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在检查记录中写明放行或拒绝与整改情况，涉及异常或隐患的按程序上报。"
+              "记录受检对象、依据文件、发现的缺陷、原证编号和仍不确定的事项，再交指定人员复核。维修放行或适航批准只由相应授权岗位办理。"
             ]
           },
           "id": "aviation-inspectors.ai-impact.ai-impact-table.93",
           "source_refs": [
             "onet",
-            "onet"
+            "faa-asi"
           ],
           "type": "prose"
         },
@@ -26439,12 +26417,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆2025年修订民用航空法自2026-07-01施行：第4条民航主管部门及地区机构依法监管；第25/28条设计、生产机构可接受委托技术检查，第30条维修机构许可，第31条适航证等飞行条件、第33条由取得许可的机构或人员维修。第36/37条航空人员培训考核执照要求须按所列岗位区分，不能由“航空检查员”名称推出统一执照或把FAA IA用于中国。未取得该美国细分的中国精确分类互认、个人监察任命及全国工资分布。"
+              "中国民用航空监察员承担规则所定行政执法职能；西北国际货航是企业内部监督岗位，深航是相邻维修培养路径。两则样本不等于行政执法或维修放行资格。"
             ]
           },
           "id": "aviation-inspectors.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "cn-civil-law-2025"
+            "faa-asi",
+            "mot-inspector",
+            "northwest",
+            "shenzhen"
           ],
           "type": "prose"
         },
@@ -26468,13 +26449,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑列为核对候选：监管机构、制造维修机构质量检查；未取得学历对应招聘比例。"
+              "内部安全监察：西北国际货航"
             ]
           },
           "id": "aviation-inspectors.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "northwest"
           ],
           "type": "prose"
         },
@@ -26483,13 +26463,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "学历与岗位序列是两条不同路径；学历不等于检查授权或放行权限。"
+              "西北国际货运航空 2026 年 3 月西咸新区安全监察岗样本为 1 人，要求本科及以上及五年以上民航经历，含规定的一线与安全管理经历。岗位做公司内部监督、跟踪整改，并配合局方；薪资面议，没有金额。"
             ]
           },
           "id": "aviation-inspectors.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "northwest"
           ],
           "type": "prose"
         },
@@ -26513,13 +26492,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑列为核对候选：运营方维修质量及第三方检验，需核实际机构许可和个人授权。"
+              "相邻培养：深航维修工程师"
             ]
           },
           "id": "aviation-inspectors.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "shenzhen"
           ],
           "type": "prose"
         },
@@ -26528,13 +26506,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "用人单位类型与授权范围不同（监管检查、制造检查、运营检查、第三方检验），岗位名称与职责须在录用条件中确认。"
+              "深航 2027 届招聘把质量与适航可靠性管理放在飞机维修菁英工程师的轮岗后职责。深圳的 75 人是两类维修工程师合计；国内毕业生门槛为相关本科及以上，未列工资金额。这是相邻培养路径。"
             ]
           },
           "id": "aviation-inspectors.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "shenzhen"
           ],
           "type": "prose"
         },
@@ -26573,14 +26550,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。 中国大陆2025年修订民用航空法自2026-07-01施行：第4条民航主管部门及地区机构依法监管；第25/28条设计、生产机构可接受委托技术检查，第30条维修机构许可，第31条适航证等飞行条件、第33条由取得许可的机构或人员维修。第36/37条航空人员培训考核执照要求须按所列岗位区分，不能由“航空检查员”名称推出统一执照或把FAA IA用于中国。未取得该美国细分的中国精确分类互认、个人监察任命及全国工资分布。"
+              "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
             ]
           },
           "id": "aviation-inspectors.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "faa-airworthiness",
-            "ia-95",
-            "cn-civil-law-2025"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -26750,13 +26726,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "场景比较需要用人单位类型与授权范围与任职职级一致；本页不提供可用作比较的月薪区间。"
+              "具名招聘均未公布薪资金额"
             ]
           },
           "id": "aviation-inspectors.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "northwest"
           ],
           "type": "prose"
         },
@@ -26765,13 +26740,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "核对报酬时先确认用人单位类型、岗位职责与检查与放行授权范围，以及任职与职级与外勤与值班与补贴安排；不要把海外数字换算成人民币预期，也不要采信缺少样本与岗位范围与期间的报价。"
+              "西北国际货运航空 2026 年 3 月西咸新区安全监察岗样本为 1 人，要求本科及以上及五年以上民航经历，含规定的一线与安全管理经历。岗位做公司内部监督、跟踪整改，并配合局方；薪资面议，没有金额。 深航 2027 届招聘把质量与适航可靠性管理放在飞机维修菁英工程师的轮岗后职责。深圳的 75 人是两类维修工程师合计；国内毕业生门槛为相关本科及以上，未列工资金额。这是相邻培养路径。"
             ]
           },
           "id": "aviation-inspectors.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "northwest",
+            "shenzhen"
           ],
           "type": "prose"
         },
@@ -26780,13 +26755,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国民用航空法（2025修订、2026-07-01施行）：机构许可与适航职能｜https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html"
+              "交通运输部：中国民用航空监察员管理规定｜https://xxgk.mot.gov.cn/gz/202112/t20211222_3632476.html"
             ]
           },
           "id": "aviation-inspectors.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "cn-civil-law-2025",
-            "onet"
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -26795,13 +26769,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆航空检查员的月薪区间；同名或近名岗位的用人单位类型与授权范围差异较大，比较时须把任职与职级、外勤与值班安排、检查与放行授权与责任范围纳入书面条件。"
+              "国家统计局 2025 年城镇非私营单位制造业平均年工资为 113,594 元，交通运输、仓储和邮政业为 133,981 元。这是行业均值；两份岗位都未列工资金额。"
             ]
           },
           "id": "aviation-inspectors.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26824,12 +26797,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与该职业精确对应的公开职业条目与全国职业月薪分布。"
+              "国家统计局 2025 年城镇非私营单位制造业平均年工资为 113,594 元，交通运输、仓储和邮政业为 133,981 元。这是行业均值；两份岗位都未列工资金额。"
             ]
           },
           "id": "aviation-inspectors.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26852,12 +26825,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可核验的城市级职业收入数据，本页不出示城市排名。"
+              "两个样本不支持城市薪资排序。"
             ]
           },
           "id": "aviation-inspectors.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26960,7 +26933,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 53-6051.01 全国工资分位｜https://www.onetonline.org/link/localwages/53-6051.01；O*NET 53-6051.01 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/53-6051.01；O*NET 53-6051.01 行业分布｜https://www.onetonline.org/link/industry/53-6051.01"
+              "O*NET 53-6051.01 全国工资分位｜https://www.onetonline.org/link/localwages/53-6051.01；O*NET 53-6051.01 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/53-6051.01；O*NET 交通检查员母类 53-6051 行业分布｜https://www.onetonline.org/link/industry/53-6051.01"
             ]
           },
           "id": "aviation-inspectors.us-salary.career-snapshot-secondary-locale.8",
@@ -27459,7 +27432,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025年53-6051运输检查员父级行业分布：政府47%、运输仓储30%、其他行业23%（含其他服务与制造）；不是航空检查员独立占比，更不是中国雇主构成或行业工资。"
+              "美国交通检查员母类 53-6051 的行业就业占比为政府 47%、运输仓储 30%，其余约 23% 是未细分余额。该分布不是航空检查员细分统计。"
             ]
           },
           "id": "aviation-inspectors.us-salary.career-snapshot-secondary-locale.42",
@@ -27653,7 +27626,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27665,19 +27638,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "机动车检验工",
@@ -27752,7 +27725,7 @@
                 "url": "https://www.onetonline.org/link/localtraining/53-6051.01"
               },
               {
-                "entity": "O*NET 53-6051.01 行业分布",
+                "entity": "O*NET 交通检查员母类 53-6051 行业分布",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/industry/53-6051.01"
@@ -28611,12 +28584,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用可复核的产出判断：一份含虚构受检对象与依据文件、检查与测量表、符合性判断与缺陷描述、放行或拒绝理由的检查说明，以及一份含异常现象、复现条件与处理依据的复核记录。"
+              "用 IN-22 做一页交接：核对签名，记录附件编号或日期缺口，再用题后参考复核。纸面试做不授予检查或签字权限。"
             ]
           },
           "id": "aviation-inspectors.fit.personality-fit-block.55",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28655,12 +28628,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "写一页虚构检查说明：包括受检对象与依据文件、检查与测量表、缺陷与符合性判断、放行或拒绝理由，并请有经验的人复核、记录修改理由。这不构成检查、判定或放行指令，也不替代岗位培训与检查授权。"
+              "用 IN-22 做一页交接：核对签名，记录附件编号或日期缺口，再用题后参考复核。纸面试做不授予检查或签字权限。"
             ]
           },
           "id": "aviation-inspectors.fit.personality-fit-block.58",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28814,10 +28787,10 @@
                 "url": "https://www.onetonline.org/link/summary/53-6051.01"
               },
               {
-                "entity": "eCFR§65.95：IA权利与限制",
+                "entity": "FAA 航空安全监察员职业说明",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-65/subpart-D/section-65.95"
+                "url": "https://www.faa.gov/jobs/career_fields/aviation_careers/aviation_careers"
               },
               {
                 "entity": "FAA：适航证签发权限与要求",
@@ -28842,17 +28815,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本节为风险背景与编辑核对建议，非完整作业或恢复程序。美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。 中国大陆2025年修订民用航空法自2026-07-01施行：第4条民航主管部门及地区机构依法监管；第25/28条设计、生产机构可接受委托技术检查，第30条维修机构许可，第31条适航证等飞行条件、第33条由取得许可的机构或人员维修。第36/37条航空人员培训考核执照要求须按所列岗位区分，不能由“航空检查员”名称推出统一执照或把FAA IA用于中国。未取得该美国细分的中国精确分类互认、个人监察任命及全国工资分布。"
+              "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
             ]
           },
           "id": "aviation-inspectors.risk.career-risk-cards.8",
           "source_refs": [
-            "faa-airworthiness",
-            "ia-91",
-            "ia-92",
-            "ia-93",
-            "ia-95",
-            "cn-civil-law-2025"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -29218,17 +29187,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。 IA申请按§65.91：有效机身及动力装置两项机械师等级至少3年、近2年积极从事航空器维修、固定基地及必要设备设施检查数据，并通过笔试。§65.92规定奇数年3月31日到期、行权仍需有效两项等级；§65.93两年续期仍有逐年活动或培训考试条件及例外，未满足首年条件须暂停IA行权，按规定通过口试后方可恢复；不能理解为两年内无条件有效。 中国权限依现行民航法和实际任命，未取得个人监察任命完整程序。"
+              "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
             ]
           },
           "id": "aviation-inspectors.risk.career-risk-cards.33",
           "source_refs": [
-            "faa-airworthiness",
-            "ia-91",
-            "ia-92",
-            "ia-93",
-            "ia-95",
-            "cn-civil-law-2025"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -29294,13 +29259,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国IA§65.95权利限制及§65.91申请条件；不是工资或中国资格。"
+              "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
             ]
           },
           "id": "aviation-inspectors.risk.career-risk-cards.38",
           "source_refs": [
-            "ia-95",
-            "ia-91"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -29309,12 +29274,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "FAA适航证签发主体和Part21/183边界，非中国统计。"
+              "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
             ]
           },
           "id": "aviation-inspectors.risk.career-risk-cards.39",
           "source_refs": [
-            "faa-airworthiness"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         }
@@ -29348,35 +29314,35 @@
               [
                 "监管机构检查岗",
                 "在授权范围内对航空器与维修过程与设备与通信导航设施开展符合性检查，编制检查记录与整改要求。",
-                "编辑核对项：法规知识、检查记录与实际任命范围；没有本轮招聘比例。",
+                "中国大陆区分企业内部检查和中国民用航空监察员的行政执法。现行监察员规定按类别和专业管理资格；企业安全监察岗的名称不授予行政执法或适航批准权限。维修检查与维修放行另按适用规章及单位授权核。",
                 "提交一份含虚构受检对象、依据文件与检查清单与测量记录与判定理由的检查说明，不使用真实受检资料。",
-                "美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。"
+                "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
               ],
               [
                 "制造方质量与适航检查岗",
                 "在新造与改装环节核对部件与装配与试验是否符合标准与技术数据，编制质量与符合性记录。",
-                "编辑核对项：机械电气基础、技术数据、检验与记录能力；非雇主样本结论。",
+                "本页未核制造方直接招聘；核质量检验范围和签字责任。",
                 "提交一份含技术数据对照、检验项目、测量值与偏差说明的虚构检验记录。",
                 "检验结论须经实测与依据文件验证；不得用系统输出代替合格判定。"
               ],
               [
                 "运营方维修质量检查岗",
                 "核查维修单位执行的标准与程序，查阅维修记录与飞行日志，跟踪缺陷整改与适航指令执行。",
-                "编辑核对项：维修过程、记录审核及沟通条件。",
+                "西北国际货运航空 2026 年 3 月西咸新区安全监察岗样本为 1 人，要求本科及以上及五年以上民航经历，含规定的一线与安全管理经历。岗位做公司内部监督、跟踪整改，并配合局方；薪资面议，没有金额。 深航 2027 届招聘把质量与适航可靠性管理放在飞机维修菁英工程师的轮岗后职责。深圳的 75 人是两类维修工程师合计；国内毕业生门槛为相关本科及以上，未列工资金额。这是相邻培养路径。",
                 "提交一份含维修记录核对、缺陷描述与整改跟踪的虚构审核记录。",
                 "缺陷整改与恢复使用须按授权与适用法规执行。"
               ],
               [
                 "第三方检验与合规检查岗",
                 "按合同与适用标准开展独立检验与合规核对，出具检验与合规报告。",
-                "编辑核对项：合同标准使用、报告质量及法定任命边界。",
+                "查第三方机构的任务与授权。",
                 "提交一份含标准对照、抽样与检验方法与结论的虚构合规核对报告。",
                 "独立检验不等于主管当局的授权或任命；不得越权作出法定判定。"
               ],
               [
                 "无人机与新型航空器合规检查岗",
                 "核对无人驾驶航空器系统与新型航空器的运行与安全与设备合规要求。",
-                "编辑核对项：对象、运行条件和适用法规；民航法第34条无人机适航许可有例外。",
+                "按无人机平台和适用规则核；本页未核对应岗位招聘。",
                 "提交一份含运行条件、设备与安全要求对照与合规结论的虚构检查方案。",
                 "新型航空器的合规判定须按适用法规与授权执行，本页不提供判定指令。"
               ]
@@ -29384,9 +29350,10 @@
           },
           "id": "aviation-inspectors.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "northwest",
+            "shenzhen",
+            "mot-inspector",
+            "faa-asi"
           ],
           "title": "岗位方向与起步任务比较",
           "type": "table"
@@ -29401,14 +29368,14 @@
                 "values": [
                   "O*NET新聘学历需求问卷34%要求副学士或其他两年制学位、29%高中或同等、20%高中后证书，不是在岗学历构成。Zone3/SVP6.0至<7.0是一般职业准备描述，通常一至两年训练，不是每岗固定年限。BLS EP父级典型高中、相关经验None、中期在职培训，不能用父级典型安排取消航空专项资格。",
                   "O*NET全国培训查询本轮未找到项目，只是该目录结果，不等于全美无航空培训；学徒入口不证明每岗有注册项目。",
-                  "中国具体岗位教育、机构许可和个人权限分开核；中国大陆2025年修订民用航空法自2026-07-01施行：第4条民航主管部门及地区机构依法监管；第25/28条设计、生产机构可接受委托技术检查，第30条维修机构许可，第31条适航证等飞行条件、第33条由取得许可的机构或人员维修。第36/37条航空人员培训考核执照要求须按所列岗位区分，不能由“航空检查员”名称推出统一执照或把FAA IA用于中国。未取得该美国细分的中国精确分类互认、个人监察任命及全国工资分布。"
+                  "中国民用航空监察员承担规则所定行政执法职能；西北国际货航是企业内部监督岗位，深航是相邻维修培养路径。两则样本不等于行政执法或维修放行资格。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
                   "检查与判定与放行须按机构授权与适用法规执行；涉及适航放行与重大修理与改装恢复使用与事故调查与无人机合规的作业决定须由具授权的人员作出。",
-                  "美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。 IA申请按§65.91：有效机身及动力装置两项机械师等级至少3年、近2年积极从事航空器维修、固定基地及必要设备设施检查数据，并通过笔试。§65.92规定奇数年3月31日到期、行权仍需有效两项等级；§65.93两年续期仍有逐年活动或培训考试条件及例外，未满足首年条件须暂停IA行权，按规定通过口试后方可恢复；不能理解为两年内无条件有效。 中国大陆2025年修订民用航空法自2026-07-01施行：第4条民航主管部门及地区机构依法监管；第25/28条设计、生产机构可接受委托技术检查，第30条维修机构许可，第31条适航证等飞行条件、第33条由取得许可的机构或人员维修。第36/37条航空人员培训考核执照要求须按所列岗位区分，不能由“航空检查员”名称推出统一执照或把FAA IA用于中国。未取得该美国细分的中国精确分类互认、个人监察任命及全国工资分布。",
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
                   "受检单位信息与运营与维修数据可能涉及敏感信息，信息安全与保密要求因机构而异，须在入职前确认访问范围与合规义务。"
                 ]
               },
@@ -29424,7 +29391,7 @@
                 "id": "tools",
                 "values": [
                   "检查清单与测量与测试仪器、手工工具与量具、适航与技术数据与维修手册、航空器仪表与地面测试设备、个人防护（护目镜、手套、听力保护、安全鞋、高空作业防护）。",
-                  "15类软件技能、12项热门技术；2025年美国职业关联唯一招聘中Office8%、WebSphere MQ6%、Excel6%、PowerPoint3%、Word2%，其余未公布比例。分母是职业关联唯一招聘，非使用率、中国岗位门槛或生成式AI采用率。",
+                  "O*NET 列 15 类软件技能和 12 项热门技术入口。软件要求按岗位核；不从目录推使用频率。",
                   "把检查与记录与数据处理工具用于检查与判定流程前，须确认依据文件版本、受检单位信息保护与人工复核安排。"
                 ]
               }
@@ -29455,42 +29422,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份受检对象与依据文件说明、一份检查清单与测量记录表、一份适航与技术数据摘录与一份检查记录模板。",
-                  "全部材料为虚构，不含真实受检单位资料、运营与维修数据、检查影像或内部资料。",
-                  "全部材料与场景为虚构，不得使用真实受检单位资料、运行与维修数据、检查影像或内部资料。"
+                  "题面：虚构检查批次 J-22，审查规则为每项须有同号签名记录，并附同编号、标明 9 月 8 日的照片。",
+                  "Q-11：签名记录齐全，附件照片编号 Q-11，日期为 9 月 8 日。",
+                  "Q-12：签名记录齐全，附件照片却标 Q-21，日期为 9 月 8 日。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构受检对象写清检查顺序与测量值、缺陷与符合性判断依据、放行或拒绝理由与未决事项，以及需要复核与需要授权的环节。",
-                  "在 60—90 分钟内完成，允许参考公开的法规与通用检查资料，但不使用真实受检资料。",
-                  "记录中把受检对象与依据文件、检查与测量值、缺陷与符合性判断、放行或拒绝理由分开书写，并标注需复核的部分。"
+                  "主问题：分别列出 Q-11 与 Q-12 的纸面状态。可用「可交复核」或「附件待核」。",
+                  "变式：资料负责人提供正确标 Q-12 的照片，但照片未标日期。只改这个条件，两项状态是否变？",
+                  "交一页检查交接单，逐项写状态、原证编号、未决项和负责复核的人。主问题和变式都写完再看参考。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先核对受检对象与依据文件与检查范围，再按检查清单测量与推理，最后写明判定结果与未决事项。",
-                  "把受检对象、依据文件、测量值、判断依据、放行或拒绝理由分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核缺陷判断与测量与放行结论，并保留修改理由。"
+                  "先完成两版",
+                  "第 6 天独立交原版、变式和一页检查交接单；把限制写在交接单内。",
+                  "第七天展开常见问题「IN-22／J-22 参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成检查、判定或放行指令，也不能替代机构规程与检查授权。",
-                  "不得在练习中接触真实航空器或操作真实通电与燃油与地面设备；涉及适航放行与事故调查与无人机合规的作业须由有权限人员按规程处理。",
-                  "练习不替代机构规程与检查授权，也不构成任何检查、判定或放行指令。"
+                  "保留原始编号与附件状态，写明需要补哪份证据。",
+                  "两版分别记录理由及转交对象。",
+                  "仅做纸面记录核对，不查真实飞机，不发批准。"
                 ]
               }
             ]
           },
           "id": "aviation-inspectors.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "IN-22｜签名能否关闭两项检查？",
           "type": "cards"
         },
         {
@@ -29501,37 +29468,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：学历与专业培训与实训、注册学徒或带教经历、行业认证（如 ETA 光纤与 ARINC 光纤、ASTM 外来物消除、NATMI 安全总监与安全主管、NBAA 认证航空管理者）、机械师证书与检查授权（14 CFR Part 65）、机构上岗资格与检查与放行授权、以及安全与防护与外来物与数据保护培训。",
-                  "每项都注明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「专业培训」「行业认证」「机械师证书与检查授权」「带教或学徒经历」「机构上岗资格」「检查与放行授权」分列，避免混为一谈。"
+                  "保留签名页和附件编号。",
+                  "写检查状态与缺口。",
+                  "交一页检查交接单，逐项写状态、原证编号、未决项和负责复核的人。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的检查说明，重点检查受检对象与依据文件核对、测量值与依据文件对照、缺陷与符合性判断、放行或拒绝理由是否逐项写清。",
-                  "把复核意见与修改理由一并保留，作为判断你能否接受现场复核的证据。"
+                  "保留签名页和附件编号。",
+                  "写检查状态与缺口。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明受检对象与依据、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给同伴与主管与复核人员复核，并保留复核意见与修改理由。"
+                  "保留签名页和附件编号。",
+                  "写检查状态与缺口。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用检查或记录或数据处理工具，须注明工具名称与版本、输入与依据与人工修改理由。",
-                  "受检单位信息与运营与维修数据与检查影像处理须先取得授权，并记录访问范围、保留期限与销毁约定。"
+                  "保留签名页和附件编号。",
+                  "写检查状态与缺口。"
                 ]
               }
             ]
           },
           "id": "aviation-inspectors.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29562,7 +29529,7 @@
               [
                 "面试中",
                 "情景提问：现场检查发现一处轻微腐蚀痕迹，依据文件的判定界限不明确，受检方要求当天出结论并放行，如何处置。",
-                "能说明应记录证据、引用依据文件与判定界限、先向主管说明不确定性并延长或补充检查，再决定是否放行。",
+                "保留观察与依据，标明标准不清；请指定人员补查，由相应授权主体决定是否放行。",
                 "不在依据不明时宣告符合或放行，也不承诺超出授权的检查与签署。"
               ],
               [
@@ -29595,57 +29562,60 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与边界阅读：读 O*NET 53-6051.01 与公开的适航与检查与运行法规资料，写清检查、缺陷判定、适航放行、事故调查与无人机合规的区别。",
-                  "产出：一页术语与流程对照表，标注每项的来源。"
+                  "第1天",
+                  "读 O*NET 检查任务及一则国内招聘，记内部检查与监管职责的差别。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "调阅与核对练习：为虚构受检对象写清维修记录与飞行日志核对、检修与大修是否按期执行的判断方式。",
-                  "产出：一份调阅与核对记录。"
+                  "第2天",
+                  "摘录题面证据规则和两项编号。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "现场检查练习：为虚构受检对象写清检查顺序、缺陷识别要点与证据记录。",
-                  "产出：一份现场检查与缺陷记录。"
+                  "第3天",
+                  "分别核签名、附件编号和日期。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "测量与测试练习：为虚构项目写清测量与测试方法、依据文件对照与判断界限。",
-                  "产出：一份测量与测试记录。"
+                  "第4天",
+                  "写待核原因、证据归属和负责人。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "判定与放行练习：为虚构检查写清符合性判断、放行或拒绝理由、整改要求与归档要点。",
-                  "产出：一份判定与放行说明。"
+                  "第5天",
+                  "独立处理缺日期的变式。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的缺陷判断与测量与放行结论，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "第6天",
+                  "不看参考，独立交原版、变式及一页检查交接单。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "第7天",
+                  "展开常见问题「IN-22／J-22 参考解（交卷后再打开）」，自核后记录差异或无差异。"
                 ]
               }
             ]
           },
           "id": "aviation-inspectors.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor",
+            "onet",
+            "northwest",
+            "shenzhen"
           ],
           "title": "七日体验产出",
           "type": "timeline"
@@ -29655,7 +29625,7 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你完成了七日练习并发现自己在查阅记录与现场检查与测量测试与判定与记录上可持续投入。",
+              "继续：能独立提交 IN-22 的分项交接单，并愿意继续核真实雇主的职责范围。",
               "继续：你能接受外勤与值班与进度压力，并愿意按法规与程序记录与接受复核。",
               "暂停：你只想过快放行，不愿按依据文件核对缺陷与符合性。",
               "暂停：你把系统输出或「暂时看不出问题」当作已确认的适航结论，或在适航放行与事故调查上跳过复核与授权。",
@@ -29733,9 +29703,9 @@
               [
                 "分别核FAA适航证签发任命、机械师IA与维修恢复使用权限",
                 "相应美国法域内具体检查或签署人员",
-                "美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。",
+                "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
                 "不同作业适用不同权限；不是所有航空检查员统一持IA。",
-                "IA申请按§65.91：有效机身及动力装置两项机械师等级至少3年、近2年积极从事航空器维修、固定基地及必要设备设施检查数据，并通过笔试。§65.92规定奇数年3月31日到期、行权仍需有效两项等级；§65.93两年续期仍有逐年活动或培训考试条件及例外，未满足首年条件须暂停IA行权，按规定通过口试后方可恢复；不能理解为两年内无条件有效。 §65.81要求相关等级及具体作业能力，未曾成功完成相关工作时可按条款向主管证明或在有相应经验的持证人员直接监督下证明能力；行使权限须理解当前厂家指令和该项维修手册，不能简单写成不熟悉者永久不得作业。",
+                "按目标岗位核当地执照、检查及放行权限。FAA 公职另按具体招考。",
                 "IA奇数年3月31日到期及逐年续期活动；FAA代表任命另核。",
                 "IA不直接授权适航证签发；机构职位、教育与行业认证不自动取得法定权限。"
               ],
@@ -29772,25 +29742,16 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界：学历、职业院校或培训机构培训、注册学徒或带教经历、行业认证（如 ETA International 的光纤与 ARINC 光纤类认证、ASTM International 的外来物消除认证、北美运输管理学会的安全总监与安全主管认证、美国公务航空协会的认证航空管理者）、机械师证书与检查授权（14 CFR Part 65，含 §65.81 与 §65.91–§65.95）、以及机构内部上岗资格与检查与放行授权是不同状态，任何一项都不能由另一项自动推出。",
-              "O*NET新聘学历需求问卷34%要求副学士或其他两年制学位、29%高中或同等、20%高中后证书，不是在岗学历构成。Zone3/SVP6.0至<7.0是一般职业准备描述，通常一至两年训练，不是每岗固定年限。BLS EP父级典型高中、相关经验None、中期在职培训，不能用父级典型安排取消航空专项资格。 美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。 当前O*NET目录列7项行业认证，不是统一上岗证。全国培训查询未找到项目，仅限此查询结果。",
-              "中国大陆2025年修订民用航空法自2026-07-01施行：第4条民航主管部门及地区机构依法监管；第25/28条设计、生产机构可接受委托技术检查，第30条维修机构许可，第31条适航证等飞行条件、第33条由取得许可的机构或人员维修。第36/37条航空人员培训考核执照要求须按所列岗位区分，不能由“航空检查员”名称推出统一执照或把FAA IA用于中国。未取得该美国细分的中国精确分类互认、个人监察任命及全国工资分布。",
-              "操作建议：入职前把「学历／培训／带教或学徒经历／行业认证／机械师证书与检查授权／机构上岗资格与检查与放行授权」分列成一张表，逐项写明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。"
+              "先确定目标是企业质检、航空公司内部安全监督还是监管机关。用实际招聘和当地规则核对。",
+              "FAA 的航空安全监察员岗位按运行、适航和制造等方向设具体要求。公司的维修检查、美国检查授权 IA 与 FAA 公职是不同路径。签署或批准前须查该岗位和对应法条；母类教育统计不能当 FAA 招聘条件。",
+              "中国大陆区分企业内部检查和中国民用航空监察员的行政执法。现行监察员规定按类别和专业管理资格；企业安全监察岗的名称不授予行政执法或适航批准权限。维修检查与维修放行另按适用规章及单位授权核。",
+              "将实际任务、交付报告、审批签字与岗位培训分列，逐条写依据和未决项。"
             ]
           },
           "id": "aviation-inspectors.path.credential-boundary.1",
           "source_refs": [
-            "bls",
-            "ep-current",
-            "faa-airworthiness",
-            "mechanic-81",
-            "ia-91",
-            "ia-92",
-            "ia-93",
-            "ia-95",
-            "cn-civil-law-2025",
-            "census",
-            "nist"
+            "mot-inspector",
+            "faa-asi"
           ],
           "title": "资格边界",
           "type": "notice"
@@ -29800,18 +29761,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本节未采用具体雇主招聘样本。岗位方向是编辑核对候选，监管、制造、维修、第三方及无人机岗位须分别核真实职责、许可及任命，不能推同名岗位精确互认。",
-              "核对清单：岗位属于监管机构检查、制造方质量与适航检查、运营方维修质量检查还是第三方检验与合规检查；是否需要检查与放行授权或专项训练与认证；任职与职级与外勤与值班安排；以及数据与受检单位信息保护义务与复核与升级机制。"
+              "西北国际货运航空 2026 年 3 月西咸新区安全监察岗样本为 1 人，要求本科及以上及五年以上民航经历，含规定的一线与安全管理经历。岗位做公司内部监督、跟踪整改，并配合局方；薪资面议，没有金额。",
+              "深航 2027 届招聘把质量与适航可靠性管理放在飞机维修菁英工程师的轮岗后职责。深圳的 75 人是两类维修工程师合计；国内毕业生门槛为相关本科及以上，未列工资金额。这是相邻培养路径。"
             ]
           },
           "id": "aviation-inspectors.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "northwest",
+            "shenzhen"
           ],
-          "title": "招聘信息核对",
+          "title": "西咸与深圳的岗位样本",
           "type": "notice"
         },
         {
@@ -29990,22 +29949,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET新聘学历需求问卷34%要求副学士或其他两年制学位、29%高中或同等、20%高中后证书，不是在岗学历构成。Zone3/SVP6.0至<7.0是一般职业准备描述，通常一至两年训练，不是每岗固定年限。BLS EP父级典型高中、相关经验None、中期在职培训，不能用父级典型安排取消航空专项资格。 美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。"
+              "先比较维修检查、企业安全监察与行政监管。西咸样本强调一线经历和整改验证；深航样本是相邻工程师培养，不承诺独立检查或放行。"
             ]
           },
           "id": "aviation-inspectors.path.career-path-block.20",
           "source_refs": [
-            "bls",
-            "ep-current",
-            "faa-airworthiness",
-            "mechanic-81",
-            "ia-91",
-            "ia-92",
-            "ia-93",
-            "ia-95",
-            "cn-civil-law-2025",
-            "census",
-            "nist"
+            "northwest",
+            "shenzhen",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -30014,14 +29965,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历、职业院校或培训机构培训、注册学徒或带教经历、行业认证（如 ETA International 的光纤与 ARINC 光纤类认证、ASTM International 的外来物消除认证、北美运输管理学会的安全总监与安全主管认证、美国公务航空协会的认证航空管理者）、机械师证书与检查授权（14 CFR Part 65，含 §65.91–§65.95）、以及机构内部上岗资格与检查与放行授权是不同状态，任何一项都不能由另一项自动推出。"
+              "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
             ]
           },
           "id": "aviation-inspectors.path.career-path-block.21",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -30030,22 +29980,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。 中国大陆2025年修订民用航空法自2026-07-01施行：第4条民航主管部门及地区机构依法监管；第25/28条设计、生产机构可接受委托技术检查，第30条维修机构许可，第31条适航证等飞行条件、第33条由取得许可的机构或人员维修。第36/37条航空人员培训考核执照要求须按所列岗位区分，不能由“航空检查员”名称推出统一执照或把FAA IA用于中国。未取得该美国细分的中国精确分类互认、个人监察任命及全国工资分布。"
+              "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
             ]
           },
           "id": "aviation-inspectors.path.career-path-block.22",
           "source_refs": [
-            "bls",
-            "ep-current",
-            "faa-airworthiness",
-            "mechanic-81",
-            "ia-91",
-            "ia-92",
-            "ia-93",
-            "ia-95",
-            "cn-civil-law-2025",
-            "census",
-            "nist"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -31023,19 +30964,19 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 53-6051.01 职业摘要（就业与预测字段）",
+                "entity": "O*NET 53-6051.01 航空检查员",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/53-6051.01"
+                "url": "https://www.onetonline.org/link/details/53-6051.01"
               },
               {
-                "entity": "O*NET：运输检查员父级2025—2035就业趋势",
+                "entity": "BLS 就业预测表 1.2：交通检查员母类",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/53-6051.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国家统计局2025城镇单位行业与岗位工资",
+                "entity": "国家统计局：2025 年城镇单位工资",
                 "id": "link-5",
                 "relation": "career.source",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
@@ -31110,13 +31051,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国53-6051运输检查员父级：2025年就业25,100人，2035年预测25,600人，2025—2035年增长2.2%（取整2%，低于平均），原表净增0.6千人，年均空缺2,300个，自雇0.2%。原表千人和取整人数有舍入差异，不用两个人数相减重算净增；空缺含增长及离职转岗替补。不是53-6051.01航空检查员独立统计或AI因果预测。"
+              "美国交通检查员母类 53-6051：2025 年 25,100 人，2035 年预计 25,600 人，增 2.2%，官方单独取整净增 600，年均约 2,300 个空缺。母类包含其他运输检查，不能推航空检查员独立人数或走势。"
             ]
           },
           "id": "aviation-inspectors.market-signals.market-signal-card.8",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31154,13 +31094,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国53-6051运输检查员父级：2025年就业25,100人，2035年预测25,600人，2025—2035年增长2.2%（取整2%，低于平均），原表净增0.6千人，年均空缺2,300个，自雇0.2%。原表千人和取整人数有舍入差异，不用两个人数相减重算净增；空缺含增长及离职转岗替补。不是53-6051.01航空检查员独立统计或AI因果预测。"
+              "美国交通检查员母类 53-6051：2025 年 25,100 人，2035 年预计 25,600 人，增 2.2%，官方单独取整净增 600，年均约 2,300 个空缺。母类包含其他运输检查，不能推航空检查员独立人数或走势。"
             ]
           },
           "id": "aviation-inspectors.market-signals.market-signal-card.11",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31211,13 +31150,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "25,100人（2025，美国53-6051运输检查员父级）"
+              "美国交通检查员母类 53-6051：2025 年 25,100 人，2035 年预计 25,600 人，增 2.2%，官方单独取整净增 600，年均约 2,300 个空缺。母类包含其他运输检查，不能推航空检查员独立人数或走势。"
             ]
           },
           "id": "aviation-inspectors.market-signals.market-signal-card.15",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31255,13 +31193,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国53-6051运输检查员父级：2025年就业25,100人，2035年预测25,600人，2025—2035年增长2.2%（取整2%，低于平均），原表净增0.6千人，年均空缺2,300个，自雇0.2%。原表千人和取整人数有舍入差异，不用两个人数相减重算净增；空缺含增长及离职转岗替补。不是53-6051.01航空检查员独立统计或AI因果预测。"
+              "美国交通检查员母类 53-6051：2025 年 25,100 人，2035 年预计 25,600 人，增 2.2%，官方单独取整净增 600，年均约 2,300 个空缺。母类包含其他运输检查，不能推航空检查员独立人数或走势。"
             ]
           },
           "id": "aviation-inspectors.market-signals.market-signal-card.18",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31312,13 +31249,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2.2%；年均2,300空缺（2025—2035，53-6051父级）"
+              "国家统计局 2025 年城镇非私营单位制造业平均年工资为 113,594 元，交通运输、仓储和邮政业为 133,981 元。这是行业均值；两份岗位都未列工资金额。"
             ]
           },
           "id": "aviation-inspectors.market-signals.market-signal-card.22",
           "source_refs": [
-            "ep-current",
-            "onet-trends"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31356,13 +31292,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局2025年城镇单位行业年平均工资：交通运输仓储邮政非私营133,981元、私营73,133元；制造业113,594/76,055元；科学研究技术服务182,064/83,560元；公共管理社保社会组织非私营119,465元。依据实际单位主要活动选门类，不能由岗位名套行业；均非本职业中位数、起薪、城市月薪或个人到手收入。 中国大陆2025年修订民用航空法自2026-07-01施行：第4条民航主管部门及地区机构依法监管；第25/28条设计、生产机构可接受委托技术检查，第30条维修机构许可，第31条适航证等飞行条件、第33条由取得许可的机构或人员维修。第36/37条航空人员培训考核执照要求须按所列岗位区分，不能由“航空检查员”名称推出统一执照或把FAA IA用于中国。未取得该美国细分的中国精确分类互认、个人监察任命及全国工资分布。"
+              "中国民用航空监察员承担规则所定行政执法职能；西北国际货航是企业内部监督岗位，深航是相邻维修培养路径。两则样本不等于行政执法或维修放行资格。"
             ]
           },
           "id": "aviation-inspectors.market-signals.market-signal-card.25",
           "source_refs": [
-            "nbs-wages-2025",
-            "cn-civil-law-2025"
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -31848,10 +31784,13 @@
           "data": {
             "entries": [
               {
-                "answer": "按法规与依据文件核对航空器与维修过程：核查机务人员执行的维护与改装与修理与大修是否符合标准与程序，查阅维修记录与飞行日志，检查新造与修复与改装后的航空器以识别损伤或缺陷并评估适航性，检查起落架与轮胎与机身与机翼与发动机外部，用工具与仪器测量与测试，作出签发或拒绝签发适航证件的判断，并编制检查与调查与认证记录；具体授权范围由机构与主管当局决定。",
+                "answer": "航空检查员对照维修记录、检查证据与适用标准，识别缺陷并留下可复核报告。单位内部质检、维修放行和监管执法是不同权限；先辨认岗位交付什么、由谁签字。",
                 "id": "aviation-inspectors.faq.1",
                 "question": "航空检查员每天做什么？",
-                "question_key": "career.faq.aviation-inspectors.1"
+                "question_key": "career.faq.aviation-inspectors.1",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
                 "answer": "主要包括机库与停机坪与高空作业与地面设备搬运伤害、航空器通电与燃油系统与危险能量暴露、受检单位与运营与维修数据泄露、检查条件与工具使用带来的伤害、检查记录与证据保管失控，以及越权签署与放行与复核机制缺失；控制方式是按适用法规与机构规程执行并在依据不明或超出授权时停止并升级。",
@@ -31866,22 +31805,34 @@
                 "question_key": "career.faq.aviation-inspectors.3"
               },
               {
-                "answer": "AI 与自动化可以改变资料检索与法规与手册查询、测量记录与参数比对、以及检查报告与放行文本的整理；但符合性判断、缺陷认定、适航放行决定、事故调查结论与无人机合规判定仍由本人按机构授权与适用法规承担。任务自动化程度不等于岗位数量变化。",
+                "answer": "可用工具整理非敏感检查材料和提示缺页。检查人员仍需对原件、确认适用标准和证据链，并交有授权的人处理未决项。没有可信的本职业 AI 替代比例。",
                 "id": "aviation-inspectors.faq.4",
                 "question": "AI 会改变哪些任务？",
-                "question_key": "career.faq.aviation-inspectors.4"
+                "question_key": "career.faq.aviation-inspectors.4",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
-                "answer": "符合性与缺陷判定、适航放行或拒绝的决定、重大修理与改装后的恢复使用批准、事故调查结论与无人机合规判定必须由具授权的人员按适用法规与机构程序承担；系统输出只能作为可回滚、可复核的辅助环节，并须经实测与依据文件核对。",
+                "answer": "记录受检对象、依据文件、发现的缺陷、原证编号和仍不确定的事项，再交指定人员复核。维修放行或适航批准只由相应授权岗位办理。",
                 "id": "aviation-inspectors.faq.5",
                 "question": "哪些环节必须保留人工复核？",
-                "question_key": "career.faq.aviation-inspectors.5"
+                "question_key": "career.faq.aviation-inspectors.5",
+                "source_refs": [
+                  "onet",
+                  "faa-asi",
+                  "mot-inspector"
+                ]
               },
               {
-                "answer": "分六类核对：学历；职业院校或培训机构培训；注册学徒或带教经历；行业认证（如 ETA 光纤与 ARINC 光纤、ASTM 外来物消除、NATMI 安全总监与安全主管、NBAA 认证航空管理者）；机械师证书与检查授权（14 CFR Part 65，含 §65.81 与 §65.91–§65.95）；以及机构内部上岗资格与检查与放行授权。任何一项都不能由另一项自动推出。",
+                "answer": "中国大陆区分企业内部检查和中国民用航空监察员的行政执法。现行监察员规定按类别和专业管理资格；企业安全监察岗的名称不授予行政执法或适航批准权限。维修检查与维修放行另按适用规章及单位授权核。 FAA 的航空安全监察员岗位按运行、适航和制造等方向设具体要求。公司的维修检查、美国检查授权 IA 与 FAA 公职是不同路径。签署或批准前须查该岗位和对应法条；母类教育统计不能当 FAA 招聘条件。",
                 "id": "aviation-inspectors.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.aviation-inspectors.6"
+                "question_key": "career.faq.aviation-inspectors.6",
+                "source_refs": [
+                  "mot-inspector",
+                  "faa-asi"
+                ]
               },
               {
                 "answer": "工作情境显示 61% 约一半时间站立、61% 约一半时间坐着、41% 少于一半时间用手处理或控制工具、34% 少于一半时间弯腰或扭身、27% 约一半时间做重复动作，另有 84% 身体接近度为一臂以内、36% 每周一次以上处于狭窄工作空间或别扭姿势；现场检查与外勤需要一定体力与机动性。",
@@ -31896,16 +31847,33 @@
                 "question_key": "career.faq.aviation-inspectors.8"
               },
               {
-                "answer": "O*NET 展示的 BLS 数据按同族职业 53-6051.00 口径给出 2024 年在岗约 25,700 人、2024—2034 年增长为「低于平均（1% 至 2%）」、预测期职位空缺约 2,500；转向可比较飞机机械师技术员、航空电子技术员、运输检查员、机动车检验工、建筑与施工检查员与政府财产检查员调查员等，但都需要补充相应训练与资格。",
+                "answer": "美国交通检查员母类 53-6051：2025 年 25,100 人，2035 年预计 25,600 人，增 2.2%，官方单独取整净增 600，年均约 2,300 个空缺。母类包含其他运输检查，不能推航空检查员独立人数或走势。",
                 "id": "aviation-inspectors.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.aviation-inspectors.9"
+                "question_key": "career.faq.aviation-inspectors.9",
+                "source_refs": [
+                  "ep-current"
+                ]
               },
               {
-                "answer": "美国工资分位是同族职业 53-6051.00 的 2025 年 OEWS 口径，中国大陆未取得与该职业精确等价的公开职业条目与全国工资分布，两边的职业范围、统计制度、资料期与计酬结构都不同，不能把美元换算成人民币，也不应相信缺少样本与岗位范围的报价。",
+                "answer": "西北国际货运航空 2026 年 3 月西咸新区安全监察岗样本为 1 人，要求本科及以上及五年以上民航经历，含规定的一线与安全管理经历。岗位做公司内部监督、跟踪整改，并配合局方；薪资面议，没有金额。 深航 2027 届招聘把质量与适航可靠性管理放在飞机维修菁英工程师的轮岗后职责。深圳的 75 人是两类维修工程师合计；国内毕业生门槛为相关本科及以上，未列工资金额。这是相邻培养路径。 美国 2025 年 5 月交通检查员母类 53-6051 工资中位数为 92,100 美元/年、44.28 美元/小时；没有航空检查员 53-6051.01 的独立工资。",
                 "id": "aviation-inspectors.faq.10",
                 "question": "美国工资与中国大陆工资为什么不能互相换算？",
-                "question_key": "career.faq.aviation-inspectors.10"
+                "question_key": "career.faq.aviation-inspectors.10",
+                "source_refs": [
+                  "northwest",
+                  "shenzhen",
+                  "oews"
+                ]
+              },
+              {
+                "answer": "主问题参考：Q-11 可交复核，Q-12 附件待核。签名不能修复附件编号不符。 保留 Q-21 原附件并注明不适用。请资料负责人取 Q-12 的匹配、带日期原件，再交指定复核人。 可交复核不等于适航批准或签署维修放行。 变式参考：Q-11 不变；Q-12 仍待核，这次缺的是日期。 记录附件状态变化及补证责任人，不回填缺失日期。",
+                "id": "aviation-inspectors.faq.11",
+                "question": "IN-22／J-22 参考解（交卷后再打开）",
+                "question_key": "career.faq.aviation-inspectors.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31947,19 +31915,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET53-6051.01详情、工资、技术、行业、趋势及认证培训目录；BLS2025—2035父级预测与OEWS方法；FAA适航证签发说明、eCFR§65.81及§65.91–95；中国民航法2025修订和NBS2025行业岗位工资。"
+              "O*NET 支持航空检查任务，BLS 支持交通检查员母类统计。FAA 职业说明与交通运输部规则仅用于界定相应职能。"
             ]
           },
           "id": "aviation-inspectors.sources.source-card.2",
           "source_refs": [
             "onet",
-            "bls",
-            "oews",
-            "ep-current",
-            "faa-airworthiness",
-            "ia-95",
-            "cn-civil-law-2025",
-            "nbs-wages-2025"
+            "ep",
+            "faa-asi",
+            "mot-inspector"
           ],
           "type": "prose"
         },
@@ -31968,19 +31932,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET2026更新；工资2025 OEWS、就业2025及2025—2035父级预测。招聘技术2025；FAA适航证页2026-04-01更新；本轮eCFR具体条款页面核读（标题内容截至2026-10-07，非各条修订日）。中国民航法2025修订自2026-07-01生效，NBS工资2025。"
+              "美国工资为 2025 年 5 月，预测为 2025–2035。大陆招聘仅按原公告年份和岗位范围读。"
             ]
           },
           "id": "aviation-inspectors.sources.source-card.3",
           "source_refs": [
-            "onet",
-            "bls",
+            "ep",
             "oews",
-            "ep-current",
-            "faa-airworthiness",
-            "ia-95",
-            "cn-civil-law-2025",
-            "nbs-wages-2025"
+            "northwest",
+            "shenzhen"
           ],
           "type": "prose"
         },
@@ -32019,7 +31979,7 @@
           "data": {
             "entries": [
               {
-                "entity": "职业兴趣测评",
+                "entity": "探索我的职业兴趣",
                 "id": "navigation-1",
                 "relation": "career.cta",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
@@ -32028,7 +31988,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32040,13 +32000,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看航空检查员职业页面",
@@ -32076,100 +32036,100 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupation profile",
-                  "2026更新；访问2026-10-09"
+                  "航空检查员对照维修记录、检查证据与适用标准，识别缺陷并留下可复核报告。单位内部质检、维修放行和监管执法是不同权限；先辨认岗位交付什么、由谁签字。",
+                  "职业任务参照。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "美国职业分类，不直接证明中国岗位序列或检查授权。",
+                "limitation": "职业任务参照。",
                 "market": "美国",
-                "name": "O*NET 53-6051.01 职业摘要",
-                "period": "2026更新；访问2026-10-09",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-6051.01"
-              },
-              {
-                "accessed_at": "2026-10-09",
-                "details": [
-                  "official occupation details",
-                  "2026更新；访问2026-10-09"
-                ],
-                "evidence_type": "official occupation details",
-                "id": "bls",
-                "limitation": "任务清单描述群体工作，不代表每个岗位都承担全部任务。",
-                "market": "美国",
-                "name": "O*NET 53-6051.01 详细资料（任务与工作活动）",
-                "period": "2026更新；访问2026-10-09",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 53-6051.01 航空检查员",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-6051.01"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official outlook",
-                  "2025及2025—2035；访问2026-10-09"
+                  "航空检查员对照维修记录、检查证据与适用标准，识别缺陷并留下可复核报告。单位内部质检、维修放行和监管执法是不同权限；先辨认岗位交付什么、由谁签字。",
+                  "职业任务参照。"
                 ],
-                "evidence_type": "official outlook",
-                "id": "ep",
-                "limitation": "运输检查员父级总体预测，非航空细分、AI归因或个人录用概率；空缺为年均。",
+                "evidence_type": "primary_document",
+                "id": "bls",
+                "limitation": "职业任务参照。",
                 "market": "美国",
-                "name": "O*NET 53-6051.01 职业摘要（就业与预测字段）",
-                "period": "2025及2025—2035；访问2026-10-09",
-                "publisher": "O*NET OnLine",
-                "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/summary/53-6051.01"
+                "name": "O*NET 53-6051.01 航空检查员",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-6051.01"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official wage percentiles",
-                  "May2025 OEWS；访问2026-10-09"
+                  "美国交通检查员母类 53-6051：2025 年 25,100 人，2035 年预计 25,600 人，增 2.2%，官方单独取整净增 600，年均约 2,300 个空缺。母类包含其他运输检查，不能推航空检查员独立人数或走势。",
+                  "母类参照。"
                 ],
-                "evidence_type": "official wage percentiles",
-                "id": "oews",
-                "limitation": "美国53-6051运输检查员父级工资分位，非航空细分；覆盖与计酬见独立OEWS方法。",
+                "evidence_type": "primary_document",
+                "id": "ep",
+                "limitation": "母类参照。",
                 "market": "美国",
-                "name": "O*NET 展示的 BLS 2025 年工资分位（同族职业 53-6051.00 口径）",
-                "period": "May2025 OEWS；访问2026-10-09",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS 就业预测表 1.2：交通检查员母类",
+                "period": "2025–2035",
+                "publisher": "BLS",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 2025 年 5 月交通检查员母类 53-6051 工资中位数为 92,100 美元/年、44.28 美元/小时；没有航空检查员 53-6051.01 的独立工资。",
+                  "母类分位，不是个体报价。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "oews",
+                "limitation": "母类分位，不是个体报价。",
+                "market": "美国",
+                "name": "O*NET 工资：交通检查员母类",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localwages/53-6051.01"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official regulatory guidance",
-                  "页面2025-07-22更新；访问2026-10-09"
+                  "国家统计局 2025 年城镇非私营单位制造业平均年工资为 113,594 元，交通运输、仓储和邮政业为 133,981 元。这是行业均值；两份岗位都未列工资金额。",
+                  "行业平均。"
                 ],
-                "evidence_type": "official regulatory guidance",
+                "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "FAA How Does the FAA Certify Aircraft说明航空器审定及ODA委托；非中国统计或机械师IA权限。",
-                "market": "美国",
-                "name": "美国 FAA《How Does the FAA Certify Aircraft?》（适航审定与检查要求）",
-                "period": "页面2025-07-22更新；访问2026-10-09",
-                "publisher": "U.S. Federal Aviation Administration",
-                "scope": "exact",
-                "url": "https://www.faa.gov/aircraft/air_cert/airworthiness_certification"
+                "limitation": "行业平均。",
+                "market": "中国大陆",
+                "name": "国家统计局：2025 年城镇单位工资",
+                "period": "2025",
+                "publisher": "NBS",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official regulation",
-                  "内容更新至 2026-09-11；访问 2026-09-15"
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
                 ],
-                "evidence_type": "official regulation",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
-                "limitation": "规定非飞行机组成员的认证，含机械师权利与限制与检查授权 IA 条款；不构成个人作业授权。",
+                "limitation": "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
                 "market": "美国",
-                "name": "eCFR 14 CFR Part 65（Certification: Airmen Other Than Flight Crewmembers）",
-                "period": "内容更新至 2026-09-11；访问 2026-09-15",
-                "publisher": "Electronic Code of Federal Regulations（美国）",
-                "scope": "exact",
-                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-C/part-65"
+                "name": "FAA 航空安全监察员职业说明",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/jobs/career_fields/aviation_careers/aviation_careers"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32222,12 +32182,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "technology signals",
-                  "2025美国招聘数据；访问2026-10-09"
+                  "O*NET 列 15 类软件技能和 12 项热门技术入口。软件要求按岗位核；不从目录推使用频率。",
+                  "O*NET 列 15 类软件技能和 12 项热门技术入口。软件要求按岗位核；不从目录推使用频率。"
                 ],
                 "evidence_type": "technology signals",
                 "id": "hr",
-                "limitation": "按雇主招聘公告公布出现比例，不代表岗位采用率或自动化程度。",
+                "limitation": "O*NET 列 15 类软件技能和 12 项热门技术入口。软件要求按岗位核；不从目录推使用频率。",
                 "market": "美国",
                 "name": "O*NET 53-6051.01 技术清单（热门技术信号）",
                 "period": "2025美国招聘数据；访问2026-10-09",
@@ -32238,18 +32198,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulatory guidance",
-                  "页面2025-07-22更新；访问2026-10-09"
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
                 ],
-                "evidence_type": "official regulatory guidance",
+                "evidence_type": "primary_document",
                 "id": "health",
-                "limitation": "FAA How Does the FAA Certify Aircraft说明航空器审定及ODA委托；非中国统计或机械师IA权限。",
+                "limitation": "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
                 "market": "美国",
-                "name": "美国 FAA《How Does the FAA Certify Aircraft?》（适航证件与检查说明）",
-                "period": "页面2025-07-22更新；访问2026-10-09",
-                "publisher": "U.S. Federal Aviation Administration",
-                "scope": "exact",
-                "url": "https://www.faa.gov/aircraft/air_cert/airworthiness_certification"
+                "name": "FAA 航空安全监察员职业说明",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/jobs/career_fields/aviation_careers/aviation_careers"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32268,20 +32228,20 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "O*NET官方职业摘要；本页编辑解释与外部来源发布者分开",
-                  "采用本页所列职业代码及实际任务、教育、兴趣字段；不表示已核完整资格条件"
+                  "IN-22｜签名能否关闭两项检查？",
+                  "仅虚构纸面。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "美国职业摘要及群体资料；本页编辑核对建议不等于该来源发布的效果、资格或招聘证明。教育问卷表示新聘履职所需教育，不能当在岗学历构成或中国统一要求。",
-                "market": "美国",
-                "name": "O*NET 航空检查员职业摘要（本页引用字段）",
-                "period": "访问 2026-09-15",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-6051.01"
+                "limitation": "仅虚构纸面。",
+                "market": "虚构案例",
+                "name": "IN-22｜签名能否关闭两项检查？",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/zh/career/jobs/aviation-inspectors#career-content-path"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32364,18 +32324,18 @@
                 "url": "https://www.onetonline.org/link/summary/53-6051.01"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official wage percentiles",
-                  "May2025 OEWS；访问2026-10-09"
+                  "美国 2025 年 5 月交通检查员母类 53-6051 工资中位数为 92,100 美元/年、44.28 美元/小时；没有航空检查员 53-6051.01 的独立工资。",
+                  "母类分位，不是个体报价。"
                 ],
-                "evidence_type": "official wage percentiles",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-1",
-                "limitation": "美国53-6051运输检查员父级工资分位，非航空细分；覆盖与计酬见独立OEWS方法。",
+                "limitation": "母类分位，不是个体报价。",
                 "market": "美国",
-                "name": "O*NET 53-6051.01 全国工资分位（时薪与年薪分位）",
-                "period": "May2025 OEWS；访问2026-10-09",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "O*NET 工资：交通检查员母类",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localwages/53-6051.01"
               },
@@ -32387,9 +32347,9 @@
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "53-6051运输检查员父级政府47%、运输仓储30%、其他23%，非行业工资或中国雇主构成。",
+                "limitation": "美国交通检查员母类 53-6051 的行业就业占比为政府 47%、运输仓储 30%，其余约 23% 是未细分余额。该分布不是航空检查员细分统计。",
                 "market": "美国",
-                "name": "O*NET 53-6051.01 行业分布",
+                "name": "O*NET 交通检查员母类 53-6051 行业分布",
                 "period": "2025行业分布；访问2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
@@ -32398,18 +32358,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulatory guidance",
-                  "页面2025-07-22更新；访问2026-10-09"
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
                 ],
-                "evidence_type": "official regulatory guidance",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
-                "limitation": "FAA How Does the FAA Certify Aircraft说明航空器审定及ODA委托；非中国统计或机械师IA权限。",
+                "limitation": "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
                 "market": "美国",
-                "name": "美国 FAA《How Does the FAA Certify Aircraft?》（适航审定与 ODA 说明）",
-                "period": "页面2025-07-22更新；访问2026-10-09",
-                "publisher": "U.S. Federal Aviation Administration",
-                "scope": "combined_official",
-                "url": "https://www.faa.gov/aircraft/air_cert/airworthiness_certification"
+                "name": "FAA 航空安全监察员职业说明",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/jobs/career_fields/aviation_careers/aviation_careers"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32430,32 +32390,32 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official regulation",
-                  "内容更新至 2026-09-11；访问 2026-09-15"
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
                 ],
-                "evidence_type": "official regulation",
+                "evidence_type": "primary_document",
                 "id": "msresearch",
-                "limitation": "用于核对机械师权利与限制与检查授权 IA 的资格与有效期与续期与权利限制；不等同于职业工资或就业统计。",
+                "limitation": "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
                 "market": "美国",
-                "name": "eCFR 14 CFR Part 65（§65.81 与 §65.91–§65.95 检查授权条款）",
-                "period": "内容更新至 2026-09-11；访问 2026-09-15",
-                "publisher": "Electronic Code of Federal Regulations（美国）",
-                "scope": "combined_official",
-                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-C/part-65"
+                "name": "FAA 航空安全监察员职业说明",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/jobs/career_fields/aviation_careers/aviation_careers"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official wage percentiles",
-                  "May2025 OEWS；访问2026-10-09"
+                  "美国 2025 年 5 月交通检查员母类 53-6051 工资中位数为 92,100 美元/年、44.28 美元/小时；没有航空检查员 53-6051.01 的独立工资。",
+                  "母类分位，不是个体报价。"
                 ],
-                "evidence_type": "official wage percentiles",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "美国53-6051运输检查员父级工资分位，非航空细分；覆盖与计酬见独立OEWS方法。",
+                "limitation": "母类分位，不是个体报价。",
                 "market": "美国",
-                "name": "O*NET 全国工资分位页面（同族职业 53-6051.00 口径）",
-                "period": "May2025 OEWS；访问2026-10-09",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "O*NET 工资：交通检查员母类",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localwages/53-6051.01"
               },
@@ -32478,12 +32438,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
-                  "不冒称完整职业或个案验证"
+                  "OEWS 工资定义和统计方法。",
+                  "OEWS 工资定义和统计方法。"
                 ],
                 "evidence_type": "官方原文相关章节",
                 "id": "oews-method",
-                "limitation": "OEWS有薪员工工资含基本工资、佣金、生产奖金及小费等，排加班溢价、轮班差额、非生产奖金等；不能把计件、提成全部排除。自雇、非公司制企业所有者和合伙人、无酬家庭劳动者不在工资调查内；有薪公司员工不因门店或上门形式自动排除。",
+                "limitation": "OEWS 工资定义和统计方法。",
                 "market": "美国",
                 "name": "BLS OEWS Concepts当前方法",
                 "period": "当前页面，更新2026-09-24",
@@ -32508,18 +32468,18 @@
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official projections table",
-                  "2025及2025—2035；访问2026-10-09"
+                  "美国交通检查员母类 53-6051：2025 年 25,100 人，2035 年预计 25,600 人，增 2.2%，官方单独取整净增 600，年均约 2,300 个空缺。母类包含其他运输检查，不能推航空检查员独立人数或走势。",
+                  "母类参照。"
                 ],
-                "evidence_type": "official projections table",
+                "evidence_type": "primary_document",
                 "id": "ep-current",
-                "limitation": "53-6051父级25.1→25.6千人、净增0.6千、增长2.2%、年均2.3千空缺；舍入差异，非航空细分。",
+                "limitation": "母类参照。",
                 "market": "美国",
-                "name": "BLS2025—2035职业预测特征表",
-                "period": "2025及2025—2035",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "name": "BLS 就业预测表 1.2：交通检查员母类",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
@@ -32542,114 +32502,114 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulatory guidance",
-                  "2026-04-01更新；访问2026-10-09"
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
                 ],
-                "evidence_type": "official regulatory guidance",
+                "evidence_type": "primary_document",
                 "id": "faa-airworthiness",
-                "limitation": "美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。",
+                "limitation": "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
                 "market": "美国",
-                "name": "FAA适航证签发权限与要求",
-                "period": "2026-04-01更新",
-                "publisher": "Federal Aviation Administration",
-                "scope": "combined_official",
-                "url": "https://www.faa.gov/aircraft/air_cert/aw_cert"
+                "name": "FAA 航空安全监察员职业说明",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/jobs/career_fields/aviation_careers/aviation_careers"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
                 ],
-                "evidence_type": "official regulation",
+                "evidence_type": "primary_document",
                 "id": "mechanic-81",
-                "limitation": "§65.81要求相关等级及具体作业能力，未曾成功完成相关工作时可按条款向主管证明或在有相应经验的持证人员直接监督下证明能力；行使权限须理解当前厂家指令和该项维修手册，不能简单写成不熟悉者永久不得作业。",
+                "limitation": "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
                 "market": "美国",
-                "name": "eCFR§65.81 机械师一般权利与限制",
-                "period": "当前条款核读2026-10-09",
-                "publisher": "Electronic Code of Federal Regulations",
-                "scope": "combined_official",
-                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-65/subpart-D/section-65.81"
+                "name": "FAA 航空安全监察员职业说明",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/jobs/career_fields/aviation_careers/aviation_careers"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
                 ],
-                "evidence_type": "official regulation",
+                "evidence_type": "primary_document",
                 "id": "ia-91",
-                "limitation": "IA申请按§65.91：有效机身及动力装置两项机械师等级至少3年、近2年积极从事航空器维修、固定基地及必要设备设施检查数据，并通过笔试。§65.92规定奇数年3月31日到期、行权仍需有效两项等级；§65.93两年续期仍有逐年活动或培训考试条件及例外，未满足首年条件须暂停IA行权，按规定通过口试后方可恢复；不能理解为两年内无条件有效。",
+                "limitation": "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
                 "market": "美国",
-                "name": "eCFR§65.91 IA申请条件",
-                "period": "当前条款核读2026-10-09",
-                "publisher": "Electronic Code of Federal Regulations",
-                "scope": "combined_official",
-                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-65/subpart-D/section-65.91"
+                "name": "FAA 航空安全监察员职业说明",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/jobs/career_fields/aviation_careers/aviation_careers"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
                 ],
-                "evidence_type": "official regulation",
+                "evidence_type": "primary_document",
                 "id": "ia-92",
-                "limitation": "IA申请按§65.91：有效机身及动力装置两项机械师等级至少3年、近2年积极从事航空器维修、固定基地及必要设备设施检查数据，并通过笔试。§65.92规定奇数年3月31日到期、行权仍需有效两项等级；§65.93两年续期仍有逐年活动或培训考试条件及例外，未满足首年条件须暂停IA行权，按规定通过口试后方可恢复；不能理解为两年内无条件有效。",
+                "limitation": "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
                 "market": "美国",
-                "name": "eCFR§65.92 IA有效期",
-                "period": "当前条款核读2026-10-09",
-                "publisher": "Electronic Code of Federal Regulations",
-                "scope": "combined_official",
-                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-65/subpart-D/section-65.92"
+                "name": "FAA 航空安全监察员职业说明",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/jobs/career_fields/aviation_careers/aviation_careers"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
                 ],
-                "evidence_type": "official regulation",
+                "evidence_type": "primary_document",
                 "id": "ia-93",
-                "limitation": "IA申请按§65.91：有效机身及动力装置两项机械师等级至少3年、近2年积极从事航空器维修、固定基地及必要设备设施检查数据，并通过笔试。§65.92规定奇数年3月31日到期、行权仍需有效两项等级；§65.93两年续期仍有逐年活动或培训考试条件及例外，未满足首年条件须暂停IA行权，按规定通过口试后方可恢复；不能理解为两年内无条件有效。",
+                "limitation": "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
                 "market": "美国",
-                "name": "eCFR§65.93 IA续期及逐年行权条件",
-                "period": "当前条款核读2026-10-09",
-                "publisher": "Electronic Code of Federal Regulations",
-                "scope": "combined_official",
-                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-65/subpart-D/section-65.93"
+                "name": "FAA 航空安全监察员职业说明",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/jobs/career_fields/aviation_careers/aviation_careers"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official regulation",
-                  "当前条款核读2026-10-09；访问2026-10-09"
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
+                  "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。"
                 ],
-                "evidence_type": "official regulation",
+                "evidence_type": "primary_document",
                 "id": "ia-95",
-                "limitation": "美国适航证由FAA Aviation Safety Inspectors或Part183获授权代表签发，适航证规则属Part21 Subpart H；雇主内部质检授权不自动具有该权力。Part65机械师IA是另一种授权：§65.95允许特定重大修理或改装后批准恢复使用（排除Part121持续适航维修计划航空器），以及年度或渐进式检查，不直接授予适航证签发权。",
+                "limitation": "企业内部质检可核对证据、记录不符合项并按分工交接。维修放行、适航证签发和行政执法分别核对应授权主体；不因岗位名称、持证或完成检查自动取得其他权限。",
                 "market": "美国",
-                "name": "eCFR§65.95 IA权利与限制",
-                "period": "当前条款核读2026-10-09",
-                "publisher": "Electronic Code of Federal Regulations",
-                "scope": "combined_official",
-                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-65/subpart-D/section-65.95"
+                "name": "FAA 航空安全监察员职业说明",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/jobs/career_fields/aviation_careers/aviation_careers"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official legislation",
-                  "2025-12-27修订；2026-07-01施行；访问2026-10-09"
+                  "中国民用航空监察员承担规则所定行政执法职能；西北国际货航是企业内部监督岗位，深航是相邻维修培养路径。两则样本不等于行政执法或维修放行资格。",
+                  "中国民用航空监察员承担规则所定行政执法职能；西北国际货航是企业内部监督岗位，深航是相邻维修培养路径。两则样本不等于行政执法或维修放行资格。"
                 ],
-                "evidence_type": "official legislation",
+                "evidence_type": "primary_document",
                 "id": "cn-civil-law-2025",
-                "limitation": "中国大陆2025年修订民用航空法自2026-07-01施行：第4条民航主管部门及地区机构依法监管；第25/28条设计、生产机构可接受委托技术检查，第30条维修机构许可，第31条适航证等飞行条件、第33条由取得许可的机构或人员维修。第36/37条航空人员培训考核执照要求须按所列岗位区分，不能由“航空检查员”名称推出统一执照或把FAA IA用于中国。未取得该美国细分的中国精确分类互认、个人监察任命及全国工资分布。",
+                "limitation": "中国民用航空监察员承担规则所定行政执法职能；西北国际货航是企业内部监督岗位，深航是相邻维修培养路径。两则样本不等于行政执法或维修放行资格。",
                 "market": "中国大陆",
-                "name": "中国民用航空法（2025修订）",
-                "period": "2025-12-27修订；2026-07-01施行",
-                "publisher": "中国民用航空局",
-                "scope": "combined_official",
-                "url": "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html"
+                "name": "交通运输部：中国民用航空监察员管理规定",
+                "period": "2020",
+                "publisher": "Ministry of Transport",
+                "scope": "contextual",
+                "url": "https://xxgk.mot.gov.cn/gz/202112/t20211222_3632476.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32796,21 +32756,83 @@
                 "url": "https://www.onetonline.org/link/summary/17-2111.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "调阅与核对｜让依据明确｜调阅工作单与维修记录与飞行日志，核对检修与大修是否按期执行，把受检对象与依据文件写清。 — 75/100; weight=1/3; aviation-inspectors.profile.responsibilities-block.1[0]",
-                  "现场检查与取证｜让发现可追溯｜按检查清单核对机务工作与航空器状态，检查起落架与轮胎与机身与机翼与发动机外部是否有损伤或腐蚀，记录发现与证据。 — 25/100; weight=1/3; aviation-inspectors.profile.responsibilities-block.1[1]",
-                  "判定与签署｜让权限清楚｜按任命与职责记录符合性结论。FAA检查员或获授权代表的适航证签发，与机械师IA的特定恢复使用批准及年度检查分别核权，不由公司质检职位或学历自动推出。 — 25/100; weight=1/3; aviation-inspectors.profile.responsibilities-block.1[3]"
+                  "可用工具整理非敏感检查材料和提示缺页。检查人员仍需对原件、确认适用标准和证据链，并交有授权的人处理未决项。没有可信的本职业 AI 替代比例。",
+                  "没有替代率估计。",
+                  "没有替代率估计。",
+                  "没有替代率估计。",
+                  "没有替代率估计。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "没有替代率估计。",
+                "market": "编辑说明",
+                "name": "编辑部：AI 与检查记录",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "西北国际货运航空 2026 年 3 月西咸新区安全监察岗样本为 1 人，要求本科及以上及五年以上民航经历，含规定的一线与安全管理经历。岗位做公司内部监督、跟踪整改，并配合局方；薪资面议，没有金额。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "northwest",
+                "limitation": "单位内部职责，非行政监察。",
+                "market": "中国大陆",
+                "name": "西北国际货航：安全监察岗",
+                "period": "2026-03-25",
+                "publisher": "Northwest International Cargo Airlines",
+                "scope": "recruitment_proxy",
+                "url": "https://nwairlines.com.cn/job.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "深航 2027 届招聘把质量与适航可靠性管理放在飞机维修菁英工程师的轮岗后职责。深圳的 75 人是两类维修工程师合计；国内毕业生门槛为相关本科及以上，未列工资金额。这是相邻培养路径。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "shenzhen",
+                "limitation": "邻近方向、两类名额合计。",
+                "market": "中国大陆",
+                "name": "深航：飞机维修工程师校招",
+                "period": "2026",
+                "publisher": "Shenzhen Airlines / Air China",
+                "scope": "recruitment_proxy",
+                "url": "https://zhaopin.airchina.com.cn/campus/jobs/2026/10/185721.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中国大陆区分企业内部检查和中国民用航空监察员的行政执法。现行监察员规定按类别和专业管理资格；企业安全监察岗的名称不授予行政执法或适航批准权限。维修检查与维修放行另按适用规章及单位授权核。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "mot-inspector",
+                "limitation": "仅行政监察边界。",
+                "market": "中国大陆",
+                "name": "交通运输部：中国民用航空监察员管理规定",
+                "period": "2020",
+                "publisher": "Ministry of Transport",
+                "scope": "contextual",
+                "url": "https://xxgk.mot.gov.cn/gz/202112/t20211222_3632476.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "FAA 的航空安全监察员岗位按运行、适航和制造等方向设具体要求。公司的维修检查、美国检查授权 IA 与 FAA 公职是不同路径。签署或批准前须查该岗位和对应法条；母类教育统计不能当 FAA 招聘条件。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "faa-asi",
+                "limitation": "联邦岗位例，不代表所有雇主。",
+                "market": "美国",
+                "name": "FAA 航空安全监察员职业说明",
+                "period": "2026",
+                "publisher": "FAA",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/jobs/career_fields/aviation_careers/aviation_careers"
               }
             ]
           },
@@ -36146,7 +36168,7 @@
       },
       "hero": {
         "h1": "航空检查员",
-        "quick_answer": "航空检查员按法规与依据文件检查航空器与维修程序与空中航行辅助设施与空中交通管制与通信设备：核查机务人员的维护与改装是否符合标准与程序、查阅维修记录与飞行日志、检查航空器并识别损伤或缺陷、评估适航性、并用工具与仪器测量与测试；其工作不等于维修执行，也不代替适航放行签署、重大修理与改装恢复使用批准、事故调查与无人机合规判定，并在依据不明、超出授权或发现影响安全的缺陷时停止升级。",
+        "quick_answer": "航空检查员对照维修记录、检查证据与适用标准，识别缺陷并留下可复核报告。单位内部质检、维修放行和监管执法是不同权限；先辨认岗位交付什么、由谁签字。",
         "title": "航空检查员"
       },
       "market_signal_card": {
@@ -37498,7 +37520,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合航空检查员",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37575,7 +37597,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -37585,7 +37607,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "MBTI 人格测试"
           },
           {
             "href": {
@@ -37595,7 +37617,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格测试"
           },
           {
             "href": {
@@ -37605,7 +37627,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "智力与推理测试"
           }
         ]
       },
@@ -37713,7 +37735,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与检查记录",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37804,38 +37826,38 @@
       },
       {
         "derivation": null,
-        "display_value": "25,700人",
+        "display_value": "25,100 人",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业规模（同族职业口径）",
-        "occupation_scope": "航空检查员",
-        "period": "2024 年；访问 2026-09-15",
+        "occupation_scope": "交通检查员母类 53-6051",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "低于平均（1% 至 2%）",
+        "display_value": "2.2%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长标签（同族职业口径）",
-        "occupation_scope": "航空检查员",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "occupation_scope": "交通检查员母类 53-6051",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 2,500",
+        "display_value": "约 2,300 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "预测期职位空缺（同族职业口径）",
-        "occupation_scope": "航空检查员",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "occupation_scope": "交通检查员母类 53-6051",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-current"
         ]
       },
       {
@@ -38008,90 +38030,78 @@
       },
       {
         "derivation": null,
-        "display_value": "25,700人",
+        "display_value": "25,100 人",
         "fact_id": "us-employment-parent",
         "market": "美国",
         "measure": "就业规模（同族职业口径）",
-        "occupation_scope": "航空检查员",
-        "period": "2024 年",
+        "occupation_scope": "交通检查员母类 53-6051",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "低于平均（1% 至 2%）",
+        "display_value": "2.2%",
         "fact_id": "us-growth-parent",
         "market": "美国",
         "measure": "就业增长标签（同族职业口径）",
-        "occupation_scope": "航空检查员",
-        "period": "2024—2034 年",
+        "occupation_scope": "交通检查员母类 53-6051",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 2,500",
+        "display_value": "约 2,300 个/年",
         "fact_id": "us-openings-parent",
         "market": "美国",
         "measure": "预测期职位空缺（同族职业口径）",
-        "occupation_scope": "航空检查员",
-        "period": "2024—2034 年",
+        "occupation_scope": "交通检查员母类 53-6051",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "航空检查员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "ep-current"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与检查记录"
     },
     "badges": [
       "O*NET 53-6051.01 · Job Zone Three · 中等准备",
       "检查与判定 / 符合性核对 / 适航放行与调查",
-      "工资与就业取自同族职业 53-6051.00 · 缺口可见标记"
+      "工资与就业取自同族职业 53-6051.00 · 没有独立统计"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国年薪中位数（同族职业口径）"
+        "label": "美国年工资中位数（交通检查员母类）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国就业增幅（母类，2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，同族职业口径）"
+        "label": "美国就业人数（母类，2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国预测期职位空缺（2024—2034）"
+        "label": "美国年均空缺（母类，2025–2035）"
       },
       {
         "availability": "missing",
@@ -38105,17 +38115,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "航空检查员做什么、需要哪些学历与资格、美国与中国的收入和前景如何、AI 会改变哪些任务，以及适航放行与检查授权与事故调查与无人机合规的授权边界；保留来源范围与数据缺口。"
+      "text": "区分航空检查员的维修检查、单位监察和监管职责，查看大陆招聘与美国工资口径，用虚构工卡做证据核对。"
     },
     "title": {
       "availability": "available",
-      "text": "航空检查员"
+      "text": "航空检查员：职责、工资参照与检查试做"
     }
   },
-  "source_content_sha256": "120f830abc4b59cadefe9738394e9a499ac8863c4ff9f1cf34ce81564b826426",
+  "source_content_sha256": "f9dad4ac422046f431b987caee1efc921217ed5cd21ddad1def3560036a3ec28",
   "subject": {
     "canonical_slug": "aviation-inspectors",
     "name": "航空检查员",
-    "summary": "航空检查员按法规与依据文件检查航空器与维修程序与空中航行辅助设施与空中交通管制与通信设备：核查机务工作、查阅维修记录与飞行日志、检查航空器、评估适航性、测量与测试并作出适航判定。美国侧对应 O*NET 53-6051.01（Aviation Inspectors），属 Job Zone Three（SVP 6.0 至 <7.0）；其工资、就业与行业数据按 O*NET 页面标注取自同族职业 53-6051.00（Transportation Inspectors）。中国大陆侧本页未取得与该职业精确等价的公开职业条目与全国工资分布，故不声称中国精确等价的职责或准入，也不发布其精确职业工资。"
+    "summary": "航空检查员对照维修记录、检查证据与适用标准，识别缺陷并留下可复核报告。单位内部质检、维修放行和监管执法是不同权限；先辨认岗位交付什么、由谁签字。"
   }
 }

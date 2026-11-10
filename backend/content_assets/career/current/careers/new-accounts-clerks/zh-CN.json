@@ -191,6 +191,9 @@
       "item:new-accounts-clerks.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:new-accounts-clerks.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:new-accounts-clerks.profile.definition-block.1": {
         "status": "pending_mapping"
       },
@@ -13017,6 +13020,21 @@
             "pbc-aml"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。系统显示申请已录入，身份核验栏仍为空。写出可确认的进度及应交给哪个授权角色核验。"
+            ]
+          },
+          "id": "new-accounts-clerks.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核开户记录的待补材料",
+          "type": "notice"
         }
       ]
     },
@@ -15587,6 +15605,13 @@
         "id": "new-accounts-clerks.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "new-accounts-clerks.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15928,7 +15953,7 @@
       "text": "新账户文员"
     }
   },
-  "source_content_sha256": "c13c3162e4bde0f6123d2cefd8785ce49c00cde192d3f5daceb22f4ee0aaf7a4",
+  "source_content_sha256": "ed1cb877231c38fe60a95fa2be641e6328378a7754cd44467c69fd86af3469ab",
   "subject": {
     "canonical_slug": "new-accounts-clerks",
     "name": "新账户文员",

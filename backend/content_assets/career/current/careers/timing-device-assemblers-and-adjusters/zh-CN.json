@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "看你是否愿意精确核读数、单位和版本，能在规则边界作判定，并保留未知项。再了解装配工具、工位训练及产品要求；题目算对不能证明已经会装配或获得放行权。"
+              "纸面体验｜比对虚构机芯流转卡与测量单，找出组件批次不匹配的一行，写清需核对的表单和时点。 "
             ]
           },
           "id": "timing-device-assemblers-and-adjusters.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24809,13 +24808,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "在窄公差要求下精密装配、安装和调校计时装置，核零件配合、运行与计时准确性并记录异常。美国51-2061为制造装配口径；钟表维修另列49-9064，中国6-26-01-02还覆盖零件制造与精饰加工，三者不能合并统计。"
+              "计时装置装配与调校人员组装微型零件，观察机芯或组件运行，测量配合和精度，并按记录复核异常。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "timing-device-assemblers-and-adjusters.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-2061.00"
           ],
           "type": "prose"
         }
@@ -25565,15 +25563,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分开文字记录辅助、实物装配测量与岗位变化。证据不足：可复核的本职业AI量化评分与实际采用、净岗位影响。本页保留分数缺失态；以下为基于任务的编辑核查建议，不由整体增长预测猜分。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比对虚构机芯流转卡与测量单，找出组件批次不匹配的一行，写清需核对的表单和时点。"
             ]
           },
           "id": "timing-device-assemblers-and-adjusters.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls",
-            "nist",
-            "editorial"
+            "transfer-onet-51-2061.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33717,6 +33713,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-2061.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-2061.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-2061.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39193,10 +39216,10 @@
       "text": "计时装置装配与调校工"
     }
   },
-  "source_content_sha256": "ab9a0c8a92dc5e5f4c9b220da6ca1144291b60b0f49eab296cec63ca54186e79",
+  "source_content_sha256": "b0631e1674794b8280363aa27427f8731403958abf5249119d2367aa7fefd4b6",
   "subject": {
     "canonical_slug": "timing-device-assemblers-and-adjusters",
     "name": "计时装置装配与调校工",
-    "summary": "在窄公差要求下精密装配、安装和调校计时装置，核零件配合、运行与计时准确性并记录异常。美国51-2061为制造装配口径；钟表维修另列49-9064，中国6-26-01-02还覆盖零件制造与精饰加工，三者不能合并统计。"
+    "summary": "计时装置装配与调校人员组装微型零件，观察机芯或组件运行，测量配合和精度，并按记录复核异常。"
   }
 }

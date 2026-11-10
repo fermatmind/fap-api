@@ -8,9 +8,6 @@
       "fact:credential-boundary": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -7234,12 +7231,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "救生员与休闲保护服务人员的核心是把场地风险与突发状况变成可复核的安全服务：持续巡查并识别风险、实施预防性提示、在事故发生时救援并实施急救、维护场地与设备安全，并按规程记录与上报。"
+              "适合能在反复巡查中保持注意力、及时向同伴报告变化，并按场馆预案交接的人。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary-lg"
           ],
           "type": "prose"
         },
@@ -7248,12 +7245,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "完全虚构的救援演练样本：给定一份虚构泳池/雪场值班说明、三条风险情形（一名疑似溺水、一名疑受伤、一处设施隐患），要求在 60 分钟内写出巡查要点、两项救援与急救步骤、一处隐患的处置与上报记录；输入不得含真实游客身份或健康信息。"
+              "到「入行与 Z 表：场区巡查记录」做纸面练习。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "internal-rubric"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7262,7 +7259,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "样本输出与反思：检查风险识别是否覆盖环境与人群、救援步骤是否符合“呼救—施救—复苏—交接”顺序、急救记录是否可复核、隐患是否按流程上报；再问自己能否长时间保持警觉、能否在突发时果断行动，以及是否愿意承担公众安全责任。"
+              "样本输出与反思：检查是否识别环境与人群风险、按预案及时呼叫支援、根据现场情况在训练和授权范围内处置，并保留可复核的交接记录；再问自己能否长时间保持警觉、能否在突发时果断行动，以及是否愿意承担公众安全责任。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.quick-decision.fermat-decision-card.4",
@@ -7284,7 +7281,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "美国33-9092覆盖泳池、海滩、滑雪场等休闲区域的监护、救援与急救；任务还可含游泳/滑雪安全指导和水质检查，并非完全排除指导。不是警察、消防或独立院前医疗资格。"
+              "这一美国职业类别涵盖泳池、海滩、雪场等休闲场所的安全观察、巡视、报告和经训练授权的应急工作。具体场所的任务和训练不同。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.profile.definition-block.1",
@@ -7374,13 +7371,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "装备按场景及培训配置：水域救生器材、通信与警戒设备、急救/AED器材，以及雪场转运与检查工具。装备不是所有细分岗位统一配置，氧气、机械和特殊救援器具须另核训练及授权。"
+              "O*NET 33-9092.00 说明本职业任务和工作情境。美国工资采用 OEWS，就业预测采用 BLS 表 1.2。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.profile.onet-structured-fields-block.7",
           "source_refs": [
             "onet-details-lg",
-            "onet-summary-lg"
+            "onet-wages-lg",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7487,13 +7485,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "休闲工作者以组织活动、值守场地与器材发放为主，通常不承担救援与急救责任；救生员与休闲保护服务人员以预防事故和实施救援/急救为核心交付。"
+              "休闲工作者多组织活动并维持场地运营，也可能按规程急救和通知急救人员。救生及休闲保护岗位则以监护、预防和应急响应为核心。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
             "onet-summary-lg",
-            "onet-details-lg"
+            "onet-details-lg",
+            "onet-recreation-tasks"
           ],
           "type": "prose"
         },
@@ -7532,13 +7531,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "急救员（EMT）提供院前医疗与转运，具备更高的医疗操作权限；本职业实施基础急救并尽快交接给专业急救系统，不承担院前医疗与转运责任。"
+              "急救员（EMT）承担院前医疗和转运职责。部分雪场巡逻员经训练和授权，可在场内照护、转运伤者并交接急救系统。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
             "onet-summary-lg",
-            "onet-details-lg"
+            "onet-details-lg",
+            "nsp-patroller-education"
           ],
           "type": "prose"
         }
@@ -7570,7 +7570,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：可在隔离环境测试人流和事件记录辅助；监控算法、调度自动化与生成式AI须分开。未取得采用率或救援效果，工具不替代持续现场监护、预案响应及支援呼叫。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "编辑建议：可在隔离环境测试人流和事件记录辅助；监控算法、调度自动化与生成式AI须分开。未取得采用率或救援效果，工具不替代持续现场监护、预案响应及支援呼叫。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.ai-impact.ai-impact-table.2",
@@ -7683,7 +7683,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮NBS行业表未单列与美国33-9092完全对应的中国职业工资；文体娱乐等仅作行业背景，未取得中国职业行业份额。"
+              "中国大陆工资：行业参考与职业数据缺口"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.china-salary.career-snapshot-primary-locale.1",
@@ -7747,13 +7747,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国救生员与休闲保护服务人员薪资与就业口径"
+              "美国工资（2025 年 5 月 OEWS）"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "onet-wages-lg",
-            "onet-trends-lg"
+            "onet-wages-lg"
           ],
           "type": "prose"
         },
@@ -7762,12 +7761,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国33-9092：2025就业约162,000人，2035约170,800人；BLS增长5.5%、另列净增约8,900（端点及变动分别取整），年均空缺45,400。2025年5月年薪五分位25,780／28,880／33,580／37,520／43,970美元，时薪中位16.14；全年折算不等于季节性实际收入。"
+              "2025 年 5 月美国本职业 33-9092全国年薪中位数 33,580 美元，时薪中位数 16.14 美元。年薪第 10、25、50、75、90 分位依次为 25,780、28,880、33,580、37,520、43,970 美元。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "review-bls-projections",
             "onet-wages-lg"
           ],
           "type": "prose"
@@ -8056,7 +8054,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行路径与能力阶段"
+              "入行与 Z 表：场区巡查记录"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.path.career-path-block.1",
@@ -8071,12 +8069,17 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国须核对目标水域/雪场与当地规则；红十字会水域救生课程含游泳先决测试、CPR/AED和急救，课程证书不是全国统一法定执照，也不证明雪上救援资格。"
+              "在中国大陆，先区分游泳救生员与滑雪巡救员。国家体育总局射运中心 2025 年 6 月游泳馆救生员招聘要求国家职业资格四级，该级别属于当次岗位。准备泳池岗可查游泳救生员考核与场馆要求。雪场岗另核巡救训练、体能和现场授权。 美国 BLS 表 1.2 将无需正式学历、短期在岗训练列为典型准备。具体岗位可要求水上救生证书，雪场巡逻可能另要求急救或野外响应资质。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.path.career-path-block.2",
           "source_refs": [
-            "review-redcross"
+            "bls-ep-2025-2035",
+            "bls-recreational-protective-ooh",
+            "cn-work-example",
+            "cn-ski-patrol-classification",
+            "review-cn-assessment",
+            "review-cn-pool"
           ],
           "type": "prose"
         },
@@ -8085,13 +8088,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国经营高危游泳项目要求游泳救生员国家职业资格及符合规定的配置；2026鉴定细则自5月1日施行。雪场巡逻、滑雪指导、山地救援的岗位与资格另核，不能用泳池证书互代。"
+              "具名游泳馆招聘列安全检查和观察泳者，另列场馆服务职责。该例覆盖游泳馆。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.path.career-path-block.3",
           "source_refs": [
-            "review-cn-pool",
-            "review-cn-assessment"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8130,13 +8132,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑建议：用一份可复核的巡查记录、一次救援演练步骤与一份事件上报，展示按规程处置与沟通能力。"
+              "纸面练习《Z 表：场区巡查记录》。 虚构交接表 V2 中，Z1 和 Z2 的巡查记录已复核，Z3 的巡查时间缺失。旧表写三区已核。重算记录齐全的区域并写交接。变式只为 Z3 补经核实的记录。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.path.career-path-block.6",
           "source_refs": [
-            "onet-summary-lg",
-            "onet-details-lg"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8145,13 +8146,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "先核对目标场所、资格证有效条件、体能与现场预案；纸面样本只验证记录判断。实际水域或雪上救援训练在合规培训及监督中完成，志愿或季节岗位不豁免资格。"
+              "先做原题和变式，保存第一稿。再到「常见问题与边界」打开「纸面练习参考解（完成后打开）」。复核能否追溯原值、待核原因和交接对象。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.path.career-path-block.7",
           "source_refs": [
-            "review-cn-pool",
-            "review-redcross"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8183,7 +8183,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "市场信号与转型方向"
+              "职业前景与相关方向"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.market-signals.market-signal-card.1",
@@ -8198,13 +8198,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 2025—2035美国33-9092增长5.5%，年均空缺45,400；空缺包含替代，不是个人机会或在招职位。"
+              "BLS 表 1.2（美国本职业 33-9092）：2025 年约 162,000 个岗位，2035 年预计约 170,800 个，变化 5.5%，年均约 45,400 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.market-signals.market-signal-card.2",
           "source_refs": [
-            "review-bls-projections",
-            "onet-details-lg"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8277,17 +8276,19 @@
                 ]
               },
               {
-                "answer": "休闲工作者以组织活动与值守场地为主，通常不承担救援与急救责任；警察具有执法与强制权限；消防员承担灭火与危化处置；急救员提供院前医疗与转运。救生员与休闲保护服务人员以预防事故和基础救援/急救为核心，重大险情呼叫专业支援。区分应比较权限、责任与资格，不能只按标题互换。",
+                "answer": "休闲工作者多组织活动并维持场地运营，也可能按规程急救和通知急救人员。救生及休闲保护岗位则以监护、预防和应急响应为核心。 急救员（EMT）承担院前医疗和转运职责。部分雪场巡逻员经训练和授权，可在场内照护、转运伤者并交接急救系统。 警察和消防岗位有各自的处置职责。比较具体训练、场地和授权。",
                 "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.faq.2",
                 "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.lifeguards-ski-patrol-and-other-recreational-protective-service-workers.role-comparison",
                 "source_refs": [
                   "onet-summary-lg",
-                  "onet-details-lg"
+                  "onet-details-lg",
+                  "onet-recreation-tasks",
+                  "nsp-patroller-education"
                 ]
               },
               {
-                "answer": "可观察信号：能在重复巡查中保持警觉、具备游泳或雪上运动能力、遇险时能按“呼救—施救—复苏—交接”顺序处置、遇不确定会呼叫支援；O*NET 的兴趣与工作风格标签只描述活动偏好，不能决定胜任或证照资格。",
+                "answer": "可观察信号：能在重复巡查中保持警觉、具备游泳或雪上运动能力、遇险时能按场馆预案及时呼叫支援，根据现场情况和指征在训练及授权范围内处置，并记录交接；O*NET 的兴趣与工作风格标签只描述活动偏好，不能决定胜任或证照资格。",
                 "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.faq.3",
                 "question": "什么信号说明我可能适合？",
                 "question_key": "career.faq.lifeguards-ski-patrol-and-other-recreational-protective-service-workers.fit",
@@ -8323,23 +8324,22 @@
                 ]
               },
               {
-                "answer": "BLS 2025 年 OEWS（经 O*NET 展示）显示该职业年薪中位数 33,580 美元（约 16.14 美元/小时），第 10 至第 90 分位为 25,780—43,970 美元。这是全国统计口径，不含个人到手收入或起薪；该职业常为季节性或兼职，实际年收入受工作时长影响。",
+                "answer": "2025 年 5 月美国本职业 33-9092全国年薪中位数 33,580 美元，时薪中位数 16.14 美元。年薪第 10、25、50、75、90 分位依次为 25,780、28,880、33,580、37,520、43,970 美元。",
                 "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.lifeguards-ski-patrol-and-other-recreational-protective-service-workers.us-pay",
                 "source_refs": [
-                  "onet-wages-lg",
-                  "onet-summary-lg"
+                  "onet-wages-lg"
                 ]
               },
               {
-                "answer": "美国侧该职业多为入门岗位，实际录用通常要求相应救生/急救培训与证照（如 CPR/AED 与急救），是否需要特定救生认证因雇主、地区与场所而异；中国大陆的岗位多按场馆或机构要求与相关培训确定，须分别核对。",
+                "answer": "美国 BLS 将无正式学历要求和短期在岗训练列为这一大类的典型准备。具体救生、雪场巡逻或其他工作需要的训练和资格按地区与场馆另核。 具名游泳馆招聘列安全检查和观察泳者，另列场馆服务职责。该例覆盖游泳馆。",
                 "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.lifeguards-ski-patrol-and-other-recreational-protective-service-workers.education-path",
                 "source_refs": [
-                  "onet-summary-lg",
-                  "onet-details-lg"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
@@ -8353,12 +8353,12 @@
                 ]
               },
               {
-                "answer": "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 149,700 人，2024—2034 年预计增长约 5%—6%（高于平均），预计年均空缺约 42,700 个；预测是职业统计，不等于个人录用概率，也不等同于招聘样本。",
+                "answer": "BLS 表 1.2（美国本职业 33-9092）：2025 年约 162,000 个岗位，2035 年预计约 170,800 个，变化 5.5%，年均约 45,400 个职位空缺，含人员替补。人数分别取整。",
                 "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.lifeguards-ski-patrol-and-other-recreational-protective-service-workers.outlook-transition",
                 "source_refs": [
-                  "onet-trends-lg"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8375,6 +8375,15 @@
                 "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.faq.boundary",
                 "question": "页面使用边界是什么？",
                 "question_key": "career.faq.lifeguards-ski-patrol-and-other-recreational-protective-service-workers.boundary"
+              },
+              {
+                "answer": "原题 2 区记录齐全，变式 3 区。留旧表和更正依据。记录齐全不能确认场馆安全或授权开放。",
+                "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.lifeguards-ski-patrol-and-other-recreational-protective-service-workers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -8524,17 +8533,16 @@
                 "url": "https://www.onetonline.org/link/details/33-9092.00"
               },
               {
-                "accessed_at": "2026-09-24",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2025 BLS OEWS 分位与中位工资（美国全国）。",
-                  "分位不是起薪；保留所示时期、人群与单位。"
+                  "2025 年 5 月美国本职业 33-9092全国年薪中位数 33,580 美元，时薪中位数 16.14 美元。年薪第 10、25、50、75、90 分位依次为 25,780、28,880、33,580、37,520、43,970 美元。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "onet-wages-lg",
-                "limitation": "展示 BLS OEWS 工资数据；分位不是起薪，保留所示时期、人群、地域与单位。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
                 "name": "O*NET 33-9092.00 全国工资（BLS OEWS 展示）",
-                "period": "2025 BLS OEWS 工资数据；查阅 2026-09-24",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/33-9092.00"
@@ -8622,17 +8630,17 @@
               {
                 "accessed_at": "2026-09-24",
                 "details": [
-                  "整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。",
-                  "编辑量表不等于采用率、裁员、法规或证照证据。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal task rubric",
+                "evidence_type": "编辑说明",
                 "id": "internal-rubric",
-                "limitation": "编辑量表不等于采用率、裁员、法规或证照证据。",
-                "market": "全球任务层面",
-                "name": "FermatMind 救生员与休闲保护服务人员任务影响量表",
-                "period": "FermatMind task rubric v2026.09; reviewed 2026-09-24",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "editorial_synthesis",
+                "scope": "本页任务",
                 "url": null
               },
               {
@@ -8688,21 +8696,86 @@
                 "url": "https://www.redcross.org/take-a-class/lifeguarding/lifeguard-preparation"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "巡查场地并提示风险 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "实施救援与基础急救 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "记录事件并上报 — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "BLS 表 1.2（美国本职业 33-9092）：2025 年约 162,000 个岗位，2035 年预计约 170,800 个，变化 5.5%，年均约 45,400 个职位空缺，含人员替补。人数分别取整。",
+                  "美国 BLS 将无正式学历要求和短期在岗训练列为这一大类的典型准备。具体救生、雪场巡逻或其他工作需要的训练和资格按地区与场馆另核。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "33-9092",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "具名游泳馆招聘列安全检查和观察泳者，另列场馆服务职责。该例覆盖游泳馆。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "案例不代表全国职业工资、入行或招聘。",
+                "market": "中国大陆",
+                "name": "射击射箭运动管理中心：游泳馆救生岗位",
+                "period": "2025 年 6 月",
+                "publisher": "国家体育总局射击射箭运动管理中心",
+                "scope": "具名工作实例",
+                "url": "https://www.sport.gov.cn/syzx/n5181/c28827320/content.html"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "Z 表：场区巡查记录",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
+              },
+              {
+                "details": [
+                  "列活动组织和场地运营，也列按规程急救和必要时通知急救人员。"
+                ],
+                "id": "onet-recreation-tasks",
+                "market": "美国",
+                "name": "O*NET 39-9032.00 Recreation Workers — Tasks",
+                "publisher": "O*NET OnLine",
+                "url": "https://www.onetonline.org/link/summary/39-9032.00#Tasks"
+              },
+              {
+                "details": [
+                  "户外应急照护及转运训练适用于该机构的巡逻体系；具体职责依岗位与场地授权。"
+                ],
+                "id": "nsp-patroller-education",
+                "market": "美国",
+                "name": "National Ski Patrol — Education Programs",
+                "publisher": "National Ski Patrol",
+                "url": "https://www.nsp.org/Web/NSPWebsite/Navigation/About-Us/Who%20We%20Are/Who%20We%20Are.aspx?hkey=56faf401-5b93-47c5-9f57-514b501c95f9"
+              },
+              {
+                "details": [
+                  "入行段分别举水上救生证书与雪巡急救、野外响应资质。"
+                ],
+                "id": "bls-recreational-protective-ooh",
+                "market": "美国",
+                "name": "BLS 休闲保护服务职业展望手册",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/ooh/protective-service/recreational-protective-service-workers.htm"
+              },
+              {
+                "details": [
+                  "2024 年发布的职业分类说明；雪场具体资格和训练按岗位与所在地核验。"
+                ],
+                "id": "cn-ski-patrol-classification",
+                "market": "中国大陆",
+                "name": "体育总局人力资源开发中心：滑雪巡救员纳入职业分类大典",
+                "publisher": "国家体育总局人力资源开发中心",
+                "url": "https://www.sport.gov.cn/rlzx/n5631/c27974278/content.html"
               }
             ]
           },
@@ -9416,6 +9489,96 @@
               "item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.source-register.published.1"
             },
             "scope": "美国工资分位；不提供个人报价。"
+          },
+          {
+            "href": {
+              "$source": "bls-recreational-protective-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.source-register.published.1"
+            },
+            "id": "bls-recreational-protective-ooh",
+            "label": {
+              "$source": "bls-recreational-protective-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.source-register.published.1"
+            },
+            "scope": "对应入行原证或具名样本"
+          },
+          {
+            "href": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.source-register.published.1"
+            },
+            "id": "cn-work-example",
+            "label": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.source-register.published.1"
+            },
+            "scope": "对应入行原证或具名样本"
+          },
+          {
+            "href": {
+              "$source": "cn-ski-patrol-classification",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.source-register.published.1"
+            },
+            "id": "cn-ski-patrol-classification",
+            "label": {
+              "$source": "cn-ski-patrol-classification",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.source-register.published.1"
+            },
+            "scope": "对应入行原证或具名样本"
+          },
+          {
+            "href": {
+              "$source": "review-cn-assessment",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.source-register.published.1"
+            },
+            "id": "review-cn-assessment",
+            "label": {
+              "$source": "review-cn-assessment",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.source-register.published.1"
+            },
+            "scope": "对应入行原证或具名样本"
+          },
+          {
+            "href": {
+              "$source": "review-cn-pool",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.source-register.published.1"
+            },
+            "id": "review-cn-pool",
+            "label": {
+              "$source": "review-cn-pool",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.source-register.published.1"
+            },
+            "scope": "对应入行原证或具名样本"
           }
         ],
         "tracks": [
@@ -9618,13 +9781,13 @@
                   "alternate_value": null,
                   "label": "步骤四",
                   "secondary_value": null,
-                  "value": "救援与基础急救"
+                  "value": "发现险情后按场馆预案及时呼叫支援，并在训练和授权范围内响应"
                 },
                 {
                   "alternate_value": null,
                   "label": "步骤五",
                   "secondary_value": null,
-                  "value": "呼叫支援并交接"
+                  "value": "向接手人员交接现场及已采取措施"
                 },
                 {
                   "alternate_value": null,
@@ -10309,7 +10472,7 @@
           {
             "equivalent": "$21.14/小时",
             "interpretation": "第 90 分位边界，不是个人报价。",
-            "label": "最高 90%",
+            "label": "第 90 百分位",
             "value": "$43,970/年"
           }
         ]
@@ -10344,7 +10507,7 @@
         "title": "救生员与休闲保护服务人员适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是完全虚构的工作样本核对，不是人格诊断、录用结论或专业资格评估。",
+        "boundary": "长时间巡查仍要保持注意力，遇险要按预案及时呼叫支援。若暂时达不到场馆体能要求，或不愿承担现场响应责任，先核对岗位要求。",
         "how": {
           "$item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10941,7 +11104,7 @@
             "item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.source-register.published.1"
           }
         },
-        "note": "2026-10-11核对：精确33-9092的2025—2035就业、空缺及2025工资分位，行业为就业份额。中国游泳资格配置和2026细则与美国水域课程分列，不代为雪上救援授权。保护事实/FAQ与实作旧值或资格简化按范围单列。"
+        "note": "O*NET 提供任务信息，OEWS 提供工资，BLS 表 1.2 提供就业预测。"
       },
       "work_context_block": {
         "$item": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.profile.work-context-block.5",
@@ -10963,13 +11126,13 @@
     ],
     "path": "/zh/career/jobs/lifeguards-ski-patrol-and-other-recreational-protective-service-workers",
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与人工复核",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
       "market-signals": "市场信号",
       "navigation": "页面导航",
-      "path": "入行路径",
+      "path": "入行与 Z 表：场区巡查记录",
       "profile": "职业定义与职责",
       "quick-decision": "快速判断",
       "risk": "风险与边界",
@@ -11010,9 +11173,9 @@
         "display_value": "33,580 美元/年",
         "fact_id": "us-median-2025",
         "market": "美国",
-        "measure": "2025 年全国年薪中位数",
-        "occupation_scope": "O*NET 33-9092.00（美国全国）",
-        "period": "2025 BLS OEWS；查阅 2026-09-24",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "33-9092",
+        "period": "2025-05",
         "source_refs": [
           "onet-wages-lg"
         ]
@@ -11067,38 +11230,38 @@
       },
       {
         "derivation": null,
-        "display_value": "149,700 人",
+        "display_value": "约 162,000 个岗位",
         "fact_id": "us-employment-2024",
         "market": "美国",
-        "measure": "2024 年在岗人数",
-        "occupation_scope": "O*NET 33-9092.00（美国全国）",
-        "period": "2024；查阅 2026-09-24",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "33-9092",
+        "period": "2025",
         "source_refs": [
-          "onet-trends-lg"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 +5%—6%（2024—2034）",
+        "display_value": "5.5%",
         "fact_id": "us-growth-2024-2034",
         "market": "美国",
-        "measure": "就业增长标签（高于平均）",
-        "occupation_scope": "O*NET 33-9092.00（美国全国）",
-        "period": "2024—2034；查阅 2026-09-24",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "33-9092",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends-lg"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "O*NET 显示 2024—2034 年预计年均约 42,700 个职位空缺；按 BLS 定义，该空缺为预测期年均值，不是十年合计。",
-        "display_value": "约 42,700 个/年（2024—2034 预测期年均）",
+        "derivation": null,
+        "display_value": "年均约 45,400 个",
         "fact_id": "us-openings-2024-2034",
         "market": "美国",
-        "measure": "预计年均职位空缺",
-        "occupation_scope": "O*NET 33-9092.00（美国全国）",
-        "period": "2024—2034；查阅 2026-09-24",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "33-9092",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends-lg"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -11125,57 +11288,45 @@
         "source_refs": [
           "nbs-wages"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "保护服务工人",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "巡查与预防",
-      "救援与急救",
-      "安全规程与记录"
+      "救生员、雪场巡逻及休闲安全人员",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-median-2025",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2024-2034",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2024-2034",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11189,17 +11340,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "救生员与休闲保护服务人员在泳池、海滩、滑雪场等场景，把巡查、安全提示、救援、急救与事件记录转化为可复核的安全服务；工作以公众安全为先，常为季节性或兼职，需按雇主要求持相应救生与急救证照。判断这条职业路径时，应同时验证工作闭环、责任边界、证据口径、风险控制和可观察的入门作品。"
+      "text": "了解救生员、雪场巡逻及休闲安全人员的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "救生员与休闲保护服务人员职业判断：工作、入行与风险边界"
+      "text": "救生员、雪场巡逻及休闲安全人员做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "e7ac96e8256e0b2f0e57ad1dea63bbd34a9ae6ac3ff6895500228c0d43445559",
+  "source_content_sha256": "f383a017a7d70ee09d52a26b262d53598f78cf4b4924335087379dac06db292a",
   "subject": {
     "canonical_slug": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers",
-    "name": "救生员与休闲保护服务人员",
-    "summary": "救生员与休闲保护服务人员在泳池、海滩、滑雪场等休闲区域巡查，实施预防性安全提示、水上或雪上救援、急救与事件记录，并执行场地与设备安全规程，守护参与者的人身安全。"
+    "name": "救生员、雪场巡逻及休闲安全人员",
+    "summary": "这组工作覆盖游泳场所监护、雪道巡查与其他休闲场所安全。中国大陆的游泳救生员、滑雪巡救员与美国 33-9092 所列部分场景对应。共同工作是持续观察风险、按场馆预案及时呼叫支援，并在训练和授权范围内响应。"
   }
 }

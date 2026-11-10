@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Use dimension and version records to test your interest: unify metres and millimetres, locate the rows and columns, calculate how many units each colour needs, then state the shortfall and unknown conditions. A willingness to correct errors supports learning more about the job but does not directly prove construction ability."
+              "Paper check | Compare a fictional stone piece map with a delivery list. Flag a piece with conflicting orientation notes and refer it to the site lead. "
             ]
           },
           "id": "tile-and-stone-setters.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24803,13 +24802,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Install hard tile, stone or similar units on building surfaces according to drawings, measuring and positioning, checking material quantities, handling layout and joints, and finishing and handing over. The US 47-2044 scope includes walls, floors, ceilings, countertops and some roofing; the actual materials, processes and authority of Chinese jobs must be confirmed separately."
+              "Tile and stone setters translate a design layout to the wall or floor and check piece dimensions, orientation and joints. A natural stone job may also call for matching the appearance to an approved sample. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tile-and-stone-setters.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-47-2044.00"
           ],
           "type": "prose"
         }
@@ -25595,15 +25593,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: adoption rates, construction effects, the net AI employment effect and task scores were not obtained. The BLS2025—2035 overall projection for this occupation shows 9.8% growth and about 3,300 annual openings including replacements, which is not AI causality; the editorial scenarios only explain the human checking points for information assistance. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional stone piece map with a delivery list. Flag a piece with conflicting orientation notes and refer it to the site lead."
             ]
           },
           "id": "tile-and-stone-setters.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "nist",
-            "editorial"
+            "transfer-onet-47-2044.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33658,6 +33654,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-47-2044.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 47-2044.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/47-2044.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39137,10 +39160,10 @@
       "text": "Tile and stone setters"
     }
   },
-  "source_content_sha256": "fd8f824811f8f992a90ad9c8f0d8520b55f8ad42c3f2d6e82b1a76557867b317",
+  "source_content_sha256": "09fa4c8296d9e5aee495aac87fc069e1839f753586dded72363575409d59760b",
   "subject": {
     "canonical_slug": "tile-and-stone-setters",
     "name": "Tile and stone setters",
-    "summary": "Install hard tile, stone or similar units on building surfaces according to drawings, measuring and positioning, checking material quantities, handling layout and joints, and finishing and handing over. The US 47-2044 scope includes walls, floors, ceilings, countertops and some roofing; the actual materials, processes and authority of Chinese jobs must be confirmed separately."
+    "summary": "Tile and stone setters translate a design layout to the wall or floor and check piece dimensions, orientation and joints. A natural stone job may also call for matching the appearance to an approved sample."
   }
 }

@@ -170,6 +170,9 @@
       "item:meter-readers-utilities.path.seven-day-trial.8": {
         "status": "mapped"
       },
+      "item:meter-readers-utilities.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:meter-readers-utilities.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -13074,6 +13077,21 @@
             "source-pack-onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。工单要读表 U5，照片显示 1083，但表号是 U8；U5 的照片读数看不清。写清哪些值不能入账，并注明由谁回核。"
+            ]
+          },
+          "id": "meter-readers-utilities.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "分辨抄表读数与表号",
+          "type": "notice"
         }
       ]
     },
@@ -15537,6 +15555,13 @@
         "id": "meter-readers-utilities.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "meter-readers-utilities.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15778,7 +15803,7 @@
       "text": "抄表员（公用事业）：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "bc403d3ef8881518482b14ec3b1c349df897782af09ecbade28129538121d344",
+  "source_content_sha256": "9bc80503675cb825dd18e6527a6c0d88ce075226d25f0603e638916d9a52c580",
   "subject": {
     "canonical_slug": "meter-readers-utilities",
     "name": "抄表员",

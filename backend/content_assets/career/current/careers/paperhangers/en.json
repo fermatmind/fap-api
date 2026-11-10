@@ -167,6 +167,9 @@
       "item:paperhangers.path.seven-day-trial.5": {
         "status": "mapped"
       },
+      "item:paperhangers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:paperhangers.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12540,6 +12543,21 @@
             "editorial-guidance"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The job calls for two rolls from one lot. The second label is incomplete, and the pattern sample identifies no wall. List the two checks for the installation lead."
+            ]
+          },
+          "id": "paperhangers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Check a wallcovering batch and layout",
+          "type": "notice"
         }
       ]
     },
@@ -14950,6 +14968,13 @@
         "id": "paperhangers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "paperhangers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15191,7 +15216,7 @@
       "text": "Paperhangers: wallpaper work, wages, and entry paths."
     }
   },
-  "source_content_sha256": "16996944e44272442736c05fbfb3a147837ed88f73cd6b9af3f7f573a54b3079",
+  "source_content_sha256": "14759f1e1e0b022416140cc700a910c455cd12704b69ae7838a061517fdfc343",
   "subject": {
     "canonical_slug": "paperhangers",
     "name": "Paperhangers.",

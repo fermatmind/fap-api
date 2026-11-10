@@ -1278,7 +1278,7 @@
         "status": "pending_mapping"
       },
       "item:public-relations-managers.path.seven-day-decision.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:public-relations-managers.path.seven-day-trial.1": {
         "status": "mapped"
@@ -8844,18 +8844,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            0,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.01.mitigation": {
         "ref": {
@@ -14220,20 +14210,8 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "public-relations-managers.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
         "ref": {
@@ -14632,16 +14610,8 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "public-relations-managers.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
         "ref": {
@@ -22951,7 +22921,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "If you are willing to organize verification, coordinate spokespeople, and weigh public trust against organizational responsibility when facts are incomplete and time is short, you can learn about public relations managers."
+              "Think twice if tight deadlines and repeated checks across teams are a poor fit, or if you would struggle to hold a reply when evidence is missing. Check the role’s approval chain and crisis coverage."
             ]
           },
           "id": "public-relations-managers.quick-decision.fit-decision-checklist.1",
@@ -22966,7 +22936,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use 120 fictional media inquiries for spot-check practice, checking six: three facts or authorizations await verification; 3/6 describes only the sample."
+              "Use the fictional materials in section 09 to draft an assignment and escalation brief, then check it against the key."
             ]
           },
           "id": "public-relations-managers.quick-decision.fit-decision-checklist.2",
@@ -22980,7 +22950,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Paper exercise: divide a fictional service outage into verified facts, facts to be verified, affected groups, and release approval."
+              "If you are willing to organize verification, coordinate spokespeople, and weigh public trust against organizational responsibility when facts are incomplete and time is short, you can learn about public relations managers."
             ]
           },
           "id": "public-relations-managers.quick-decision.fit-decision-checklist.3",
@@ -22996,7 +22966,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Submit a one-page fictional response decision card: list the R2/R4/R6 gaps, message version, spokesperson, approver, and the 114 unobserved inquiries."
+              "Use the materials in section 09 to draft an assignment and escalation brief. Name the open checks, reviewers, and conditions for holding a public reply."
             ]
           },
           "id": "public-relations-managers.quick-decision.fermat-decision-card.6",
@@ -26146,7 +26116,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Independent public relations services are classified in the industry notes under 7243 social and economic consulting, part of business services; the 2025 leasing and business services non-private all-personnel 110,162 yuan and private all-personnel 68,919 yuan pre-tax annual averages cover only that employment setting. In-house public relations is verified separately by employer industry and does not represent the manager occupational median or a personal range."
+              "Industry notes classify independent PR services under 7243, social and economic consulting. The 2025 pre-tax annual averages for the entire urban leasing and business services industry were CNY 110,162 in non-private units and CNY 68,919 in private units. Here they provide context for independent PR agencies. Check the employer industry separately for in-house roles."
             ]
           },
           "id": "public-relations-managers.china-salary.career-snapshot-primary-locale.22",
@@ -26507,7 +26477,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The leasing and business services all-personnel annual average covers only independent public relations agency employment background; in-house public relations has its own industry verified separately, and it does not derive a personal quote."
+              "The averages cover the entire broad industry and provide context for independent agencies. Check actual offers and in-house roles with each employer."
             ]
           },
           "id": "public-relations-managers.china-salary.career-snapshot-primary-locale.46",
@@ -26595,12 +26565,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Verify base pay, performance pay, and overtime against local job postings."
+              "One full-time group media relations manager listing in Shanghai asks for a bachelor’s degree or higher and typically at least three years of relevant experience, with exceptions for some candidates. Its remit includes annual communication planning, a technology summit, and an incident response process. The header advertises CNY 500,000–600,000 per year and does not break out base and variable pay. The advertised range and criteria describe one listing."
             ]
           },
           "id": "public-relations-managers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "r2-pay-2"
+            "r2-pay-2",
+            "cn-pr-job"
           ],
           "type": "prose"
         },
@@ -26638,13 +26609,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "US SOC 11-2032 is not equivalent to Chinese job classification."
+              "China’s classification includes organizational communication and reputation work under public relations practitioners (3-01-02-03). It does not separately establish equivalence for manager job titles; check who owns the plan, resources, and escalation."
             ]
           },
           "id": "public-relations-managers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "editor",
-            "r2-pay-1"
+            "r2-pay-1",
+            "cn-pr-class"
           ],
           "type": "prose"
         },
@@ -27392,31 +27364,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Advertising manager",
@@ -27840,8 +27812,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Can you mark six verified and 114 unobserved records out of 120 fictional records?",
-              "Can you distinguish the doubt ratio of the six-record sample from the 120-record whole?"
+              "Can you identify the evidence you reviewed and who can verify the remaining items?",
+              "Can you distinguish the share of evidence items needing verification from progress reviewing the 120 logged inquiries?"
             ]
           },
           "id": "public-relations-managers.fit.personality-fit-block.20",
@@ -28359,7 +28331,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Take six of 120 fictional inquiries; three have facts or authorizations to be verified."
+              "Use the fictional records in section 09 to verify sources, dates, and approval. State the limits of your findings."
             ]
           },
           "id": "public-relations-managers.fit.personality-fit-block.55",
@@ -29154,7 +29126,7 @@
                 "values": [
                   "Education and related experience",
                   "BLS lists the US typical entry as a bachelor's degree and five or more years of related experience.",
-                  "Chinese positions are verified by employer."
+                  "One full-time group media relations manager listing in Shanghai asks for a bachelor’s degree or higher and typically at least three years of relevant experience, with exceptions for some candidates. Its remit includes annual communication planning, a technology summit, and an incident response process. The header advertises CNY 500,000–600,000 per year and does not break out base and variable pay. The advertised range and criteria describe one listing."
                 ]
               },
               {
@@ -29186,7 +29158,8 @@
           "id": "public-relations-managers.path.employer-evidence.1",
           "source_refs": [
             "employer",
-            "editor"
+            "editor",
+            "cn-pr-job"
           ],
           "title": "What do employers usually look at in recruitment?",
           "type": "cards"
@@ -29200,32 +29173,31 @@
                 "id": "exercise-materials",
                 "values": [
                   "Materials and setup | all fictional communication work paper exercises",
-                  "The fictional communication work has 120 inquiries; one release deliverables list has 20 items, of which 4 are approved and the remaining 16 await approval.",
-                  "A1: write the objectives, communication scope, reviewer, and budget boundaries; do not expand the communication scope without approval.",
-                  "A2: take six, R1–R6, from the 120; sampling is designed by the editor."
+                  "The fictional inquiry log has 120 records. A separate ledger has 20 factual statements considered for release. Approval of a factual statement does not approve a reporter reply.",
+                  "A1 | Fictional community arts center open day. At 10:00, a reporter asks: “When do doors open Saturday? Are reservations required? Where should groups enter?” The audience is visitors. Send a draft to the duty editor by noon today. The 14:00 update goes out only after approval.",
+                  "A2 | One duty editor and one operations lead are available. Legal review starts at 11:30. Spokesperson authorization has not arrived; keep the budget unchanged. Ledger: F01 opening time, F02 address, F03 accessible entrance, and F04 media contact have signatures; F05–F20 do not."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
                   "Tasks and deliverables",
-                  "A3: R1, R3, and R5 are complete; R2 lacks a source, R4 lacks approval, R6 has expired citations. A4: the remaining 114 are unobserved.",
-                  "A4: the learner records only the doubts and original documents to be verified; the named responsible person decides whether to expand verification or release deliverables."
+                  "A3 | R1–R6 are six evidence items for the reporter’s three questions. The exercise gives no item-by-item mapping to the inquiry log. R1: the approved November 6 schedule says doors open at 09:30 Saturday. R2: “No reservation” comes from an unsigned note. R3: the approved November 6 visitor guide names the east accessible entrance. R4: an internal sketch shows the north group entrance but has no release approval. R5: the approved November 6 media guide assigns inquiries to the duty editor. R6: a superseded October 30 guide names the west group entrance.",
+                  "A4 | Submit an assignment and escalation brief. Give each unresolved record an owner, deadline, and reviewer. State when external replies must wait. Calculate the number of unsigned ledger entries and the share of the six evidence items that need verification."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference approach (do it independently first)",
-                  "A5: three of the six have gaps to be verified; 3/6=50% describes only the sample and cannot extrapolate to the problem rate of the 120-record whole.",
-                  "List separately the original documents and decision makers that R2/R4/R6 needs; without approval, do not change the communication scope or budget."
+                  "Before checking your work",
+                  "Save your draft before checking the key after the seven-day plan."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "Boundaries and review",
-                  "Others can recompute 20−4=16, 120−6=114, and 3/6, and verify the approval records for the four approved responses; the 16 awaiting approval must not be released directly."
+                  "Use the fictional records only and document what still needs authorization."
                 ]
               }
             ]
@@ -29234,7 +29206,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: one fictional media inquiry verification sheet",
+          "title": "PR-M01 | Media inquiry assignments and release hold",
           "type": "cards"
         },
         {
@@ -29245,16 +29217,16 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Media inquiry and source summary card",
-                  "Write the 20 proposed responses, the 4 approved, and the 16 awaiting approval.",
-                  "Review evidence is recheckable."
+                  "Assignment and escalation table",
+                  "Follow A4: record owners, verification times, reviewers, and conditions for holding external replies.",
+                  "Keep the 20 factual statements separate from reporter replies."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "Doubts and review card",
-                  "List R2 missing source, R4 missing approval, R6 expired citation, and the original documents to be verified for each.",
+                  "Record each issue you identify, the evidence to check, and its owner.",
                   "Each item corresponds to an original document and decision maker."
                 ]
               },
@@ -29262,7 +29234,7 @@
                 "id": "report-summary",
                 "values": [
                   "Escalation handover card",
-                  "Note the 114 unobserved records; do not extrapolate an overall problem rate."
+                  "Identify the evidence reviewed, the items still needing verification, and the limits of the handoff."
                 ]
               },
               {
@@ -29299,28 +29271,28 @@
             ],
             "rows": [
               [
-                "Inquiry spot check",
-                "Verify the original text, sources, and approved version",
-                "Fictional R2/R4/R6 gaps",
-                "Must not extrapolate to the other 114"
+                "Interview exercise",
+                "How would you assign verification and drafting?",
+                "Assign an owner, deadline, and reviewer to each item.",
+                "Use the supplied records and preserve open items."
               ],
               [
-                "Inquiry spot check",
-                "Verify the original text, sources, and approved version",
-                "Fictional R2/R4/R6 gaps",
-                "Must not extrapolate to the other 114"
+                "Assign ownership",
+                "How would you handle records with uncertain sources or versions?",
+                "Name the original to check and the escalation contact.",
+                "Use the supplied records and preserve open items."
               ],
               [
-                "Inquiry spot check",
-                "Verify the original text, sources, and approved version",
-                "Fictional R2/R4/R6 gaps",
-                "Must not extrapolate to the other 114"
+                "Release control",
+                "When would you consider sending the reply?",
+                "Verify facts, draft approval, and speaking authority.",
+                "Use the supplied records and preserve open items."
               ],
               [
-                "Inquiry spot check",
-                "Verify the original text, sources, and approved version",
-                "Fictional R2/R4/R6 gaps",
-                "Must not extrapolate to the other 114"
+                "Review",
+                "How would you describe the scope of your review?",
+                "Report evidence review findings separately from inquiry-log coverage.",
+                "Use the supplied records and preserve open items."
               ]
             ]
           },
@@ -29341,49 +29313,49 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "Day one",
-                  "Day one: verify A1 objectives, communication scope, and approval."
+                  "Set the audience, response deadline, and decisions that require approval."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "Day two",
-                  "Day two: verify the 20 proposed responses and the 4 approved items' evidence."
+                  "Assign fact-checking, drafting, legal review, and speaking approval to explicit owners."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day three",
-                  "Day three: take R1–R6 and verify sources, release approval, and citation validity."
+                  "Compare each record with its original and version. Decide whether the evidence is sufficient."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day four",
-                  "Day four: list the R2/R4/R6 gaps and note the 114 unobserved records."
+                  "Assign an owner, deadline, and review step to each record that needs checking."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day five",
-                  "Day five: write the three types of doubts, the 114 unknowns, and the responsible person's approval request per A4/A5."
+                  "Draft a decision brief: what can be prepared, what stays on hold, and who escalates to leadership."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day six",
-                  "Day six: after sealing the draft, review the reference approach and correct the doubt classification, calculation, or overreach suggestions."
+                  "Complete and save all four first drafts, keeping the sources and calculations. No partner is required. Review against the key on day 7."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day seven",
-                  "Day seven: hand in the four cards for media inquiries, approval, escalation, and method, and record the most labor-intensive step and the next practice."
+                  "After saving your day 6 drafts, open “PR-M01 answer key and rubric (open on day 7)” in the FAQ. Apply the four rubric checks and keep one revision with its reason."
                 ]
               }
             ]
@@ -29400,20 +29372,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "120 fictional inquiries; take six, R1–R6; R2 lacks a source, R4 lacks approval, R6 has an expired citation.",
-              "The R1, R3, and R5 fields are complete, and 3/6 describes only the sample.",
-              "The remaining 114 are unobserved; do not extrapolate an overall error rate.",
-              "A one-page card lists facts, items to be verified, proposed responses, spokesperson, and approver.",
-              "Any real release requires verifying organizational authorization.",
-              "The work only proves fictional paper-based method and does not equal employer hiring or speaking authorization.",
-              "Real media communication and material disclosure must first verify institutional approval."
+              "For each line, identify the source, version, and reviewer.",
+              "Separate usable facts, open checks, and release status.",
+              "State whether each denominator belongs to the fact ledger or the six evidence items.",
+              "Name the next owner and the documents to check.",
+              "Compare both versions and keep one reason for revising.",
+              "Record which rows need evidence and retain the handoff time.",
+              "Check the supervision and review process of one real role."
             ]
           },
           "id": "public-relations-managers.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide at the end of seven days whether to continue",
+          "title": "How to review your work",
           "type": "list"
         },
         {
@@ -31548,61 +31520,96 @@
                 "answer": "Assess public issues, develop communication strategy, manage the team and media relations, review key materials, and coordinate crisis response.",
                 "id": "public-relations-managers.faq.1",
                 "question": "What do public relations managers do each day?",
-                "question_key": "career.faq.public-relations-managers.daily-work"
+                "question_key": "career.faq.public-relations-managers.daily-work",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
                 "answer": "Major statements, legal interpretations, and remedial commitments are approved per organizational authorization, and a job title itself does not grant unlimited speaking authority.",
                 "id": "public-relations-managers.faq.2",
                 "question": "Can a manager commit on behalf of the institution alone?",
-                "question_key": "career.faq.public-relations-managers.comparison"
+                "question_key": "career.faq.public-relations-managers.comparison",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
-                "answer": "Use fictional media inquiries to practice fact layering, audience analysis, line cards, and approval tables.",
+                "answer": "Use a project you are allowed to share. Show the objective you set, how you allocated work, which statements needed separate approval, and how you evaluated results. Running the project does not confer authority to speak for the organization.",
                 "id": "public-relations-managers.faq.3",
-                "question": "How to judge whether you suit it?",
-                "question_key": "career.faq.public-relations-managers.fit"
+                "question": "What should you demonstrate when moving from specialist to manager?",
+                "question_key": "career.faq.public-relations-managers.fit",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "Tools can assist with summaries and drafts; facts, reputation risk, organizational commitments, and release decisions remain the responsibility of personnel.",
                 "id": "public-relations-managers.faq.4",
                 "question": "Will AI replace public relations managers?",
-                "question_key": "career.faq.public-relations-managers.ai-impact"
+                "question_key": "career.faq.public-relations-managers.ai-impact",
+                "source_refs": [
+                  "ilo",
+                  "editor"
+                ]
               },
               {
-                "answer": "Insufficient evidence: national Chinese public relations manager occupational wage. For the independent public relations agency services setting, reference the 2025 leasing and business services non-private all-personnel annual average of 110,162 yuan and private all-personnel 68,919 yuan; these are not the manager occupational median, starting pay, or personal income, and in-house public relations is verified by employer industry separately.",
+                "answer": "Insufficient evidence: national Chinese public relations manager occupational wage. For the independent public relations agency services setting, reference the 2025 leasing and business services non-private all-personnel annual average of 110,162 yuan and private all-personnel 68,919 yuan; these are not the manager occupational median, starting pay, or personal income, and in-house public relations is verified by employer industry separately. One full-time group media relations manager listing in Shanghai asks for a bachelor’s degree or higher and typically at least three years of relevant experience, with exceptions for some candidates. Its remit includes annual communication planning, a technology summit, and an incident response process. The header advertises CNY 500,000–600,000 per year and does not break out base and variable pay. The advertised range and criteria describe one listing.",
                 "id": "public-relations-managers.faq.5",
                 "question": "What is the wage for public relations managers in mainland China?",
-                "question_key": "career.faq.public-relations-managers.china-pay"
+                "question_key": "career.faq.public-relations-managers.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "cn-industry",
+                  "cn-pr-job"
+                ]
               },
               {
                 "answer": "No. The O*NET US 2025 median annual wage for 11-2032 is 146,910 USD, with the 10th percentile at 82,410 and the 90th percentile at 284,990.",
                 "id": "public-relations-managers.faq.6",
                 "question": "Is the US median wage a newcomer's income?",
-                "question_key": "career.faq.public-relations-managers.us-pay"
+                "question_key": "career.faq.public-relations-managers.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
               },
               {
-                "answer": "BLS lists the US typical entry as a bachelor's degree and five or more years of related experience; Chinese recruitment is verified by employer.",
+                "answer": "BLS lists the US typical entry as a bachelor's degree and five or more years of related experience; Chinese recruitment is verified by employer. The Shanghai group media relations manager listing asks for a bachelor’s degree or higher and generally at least three years of related experience, with some exceptions. These requirements apply to this posting.",
                 "id": "public-relations-managers.faq.7",
-                "question": "How is entry education?",
-                "question_key": "career.faq.public-relations-managers.education-path"
+                "question": "What education and experience help you enter this field?",
+                "question_key": "career.faq.public-relations-managers.education-path",
+                "source_refs": [
+                  "bls",
+                  "cn-pr-job"
+                ]
               },
               {
                 "answer": "Managers develop strategy, allocate resources, and review key lines; specialists focus on writing, media liaison, and execution.",
                 "id": "public-relations-managers.faq.8",
                 "question": "How does it differ from public relations specialists?",
-                "question_key": "career.faq.public-relations-managers.credentials"
+                "question_key": "career.faq.public-relations-managers.credentials",
+                "source_refs": [
+                  "onet",
+                  "facilities"
+                ]
               },
               {
-                "answer": "Unverified releases, privacy leaks, conflicting lines, and crisis delays; keep sources, versions, authorizations, and correction records.",
+                "answer": "A5: Three of the six evidence items R1–R6 need verification (3/6=50%). The percentage applies only to these six items.\n\nOf 20 ledger facts, four are signed and 16 remain unsigned (20−4=16). Approval of an individual fact does not approve a draft reply.\n\nList separately the original documents and decision makers that R2/R4/R6 needs; without approval, do not change the communication scope or budget.\n\nR2 | The operations lead checks the official reservation policy by 11:15. The duty editor reviews it.\n\nR4 | The duty editor sends the north entrance sketch to legal at 11:30 to check whether it can be shared.\n\nR6 | The operations lead finds the current group entrance guide by 11:30. The duty editor reviews it. Hand off the internal draft at noon. Wait for verified facts and spokesperson authorization before replying.\n\nScore each 0–2: traceable sources, separation of approved facts from pending replies, the role-specific brief or Q&A, and the next reviewer and release boundary. Give 2 for complete, 1 for partial, or 0 for guessing or exceeding authority.",
                 "id": "public-relations-managers.faq.9",
-                "question": "What are the main risks?",
-                "question_key": "career.faq.public-relations-managers.risk-boundary"
+                "question": "PR-M01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.public-relations-managers.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
-                "answer": "BLS11-2032 dedicated occupation 2025–2035 employment goes from 80.8 thousand to 85.4 thousand, a net increase of 4.6 thousand and growth of 5.7%, with 6.1 thousand annual openings; a total projection, not AI-attributed and not representing Chinese or individual hiring.",
+                "answer": "For U.S. occupation 11-2032, BLS projects that 2025–2035 employment goes from 80.8 thousand to 85.4 thousand, a net increase of 4.6 thousand and growth of 5.7%, with 6.1 thousand annual openings; a total projection, not AI-attributed and not representing Chinese or individual hiring.",
                 "id": "public-relations-managers.faq.10",
                 "question": "What is the US outlook?",
-                "question_key": "career.faq.public-relations-managers.outlook-transition"
+                "question_key": "career.faq.public-relations-managers.outlook-transition",
+                "source_refs": [
+                  "ep"
+                ]
               }
             ]
           },
@@ -31614,7 +31621,13 @@
             "nbs",
             "privacy",
             "cnclass",
-            "editor"
+            "editor",
+            "cn-pr-job",
+            "cn-pr-class",
+            "ilo",
+            "cn-industry",
+            "onet-wages",
+            "facilities"
           ],
           "type": "faq"
         },
@@ -31637,14 +31650,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Tasks are taken from O*NET 11-2032; US wages and projections are taken from the O*NET/BLS rows for the same occupation; Chinese wages are verified separately."
+              "U.S. pay and projections come from O*NET and BLS occupation rows. Mainland tasks are checked against the national classification and an individual job posting. Broad wage figures provide context only."
             ]
           },
           "id": "public-relations-managers.sources.source-card.2",
           "source_refs": [
             "onet",
             "bls",
-            "nbs"
+            "nbs",
+            "cn-pr-class",
+            "cn-pr-job"
           ],
           "type": "prose"
         },
@@ -31653,7 +31668,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Data verification date: 2026-10-03; media release and crisis approval follow organizational authorization, and personal information processing must also comply with the law."
+              "Mainland classification and postings, and U.S. wage and employment sources for this update, checked on November 9, 2026."
             ]
           },
           "id": "public-relations-managers.sources.source-card.3",
@@ -31712,19 +31727,25 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "path",
                 "id": "navigation-6",
                 "relation": "related-evidence",
                 "url": "/en/career/jobs/public-relations-managers"
+              },
+              {
+                "entity": "secondary_cta",
+                "id": "navigation-7",
+                "relation": "related-evidence",
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               }
             ]
           },
@@ -31806,10 +31827,10 @@
                 "period": "May 2025 annual and hourly wages",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/11-2032.00?st=CA"
+                "url": "https://www.onetonline.org/link/localwages/11-2032.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "National non-private all-personnel 129441 yuan and private all-personnel 71590 yuan.",
                   "Independent public relations agency services fall under the business services background: leasing and business services non-private all-personnel 110162 yuan and private all-personnel 68919 yuan; in-house public relations is verified by employer industry separately, and these are not manager occupational wages or starting pay."
@@ -31819,7 +31840,7 @@
                 "limitation": "All-personnel or industry averages cannot be extrapolated to this occupation or personal income.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 average annual wage of urban unit employees",
-                "period": "2025 pre-tax annual average wage",
+                "period": "2025 pre-tax annual wages; English page dated May 16, 2026",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
@@ -31940,8 +31961,8 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "The 120 fictional communication work inquiry records and the six spot-checked records are editorial exercises.",
-                  "Three gaps in six do not extrapolate an overall communication work quality rate."
+                  "The fictional inquiry log, fact ledger, and six evidence items are separate exercise inputs.",
+                  "The extent of the inquiry-log review remains unknown."
                 ],
                 "evidence_type": "editorial synthesis",
                 "id": "editor",
@@ -32033,7 +32054,7 @@
                 "url": "https://www.onetonline.org/link/summary/11-2033.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "National non-private all-personnel 129441 yuan and private all-personnel 71590 yuan.",
                   "Independent public relations agency services fall under the business services background: leasing and business services non-private all-personnel 110162 yuan and private all-personnel 68919 yuan; in-house public relations is verified by employer industry separately, and these are not manager occupational wages or starting pay."
@@ -32043,13 +32064,13 @@
                 "limitation": "All-personnel or industry averages cannot be extrapolated to this occupation or personal income.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 average annual wage of urban unit employees",
-                "period": "2025 pre-tax annual average wage",
+                "period": "2025 pre-tax annual wages; English page dated May 16, 2026",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "National non-private all-personnel 129441 yuan and private all-personnel 71590 yuan.",
                   "Independent public relations agency services fall under the business services background: leasing and business services non-private all-personnel 110162 yuan and private all-personnel 68919 yuan; in-house public relations is verified by employer industry separately, and these are not manager occupational wages or starting pay."
@@ -32059,13 +32080,13 @@
                 "limitation": "All-personnel or industry averages cannot be extrapolated to this occupation or personal income.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 average annual wage of urban unit employees",
-                "period": "2025 pre-tax annual average wage",
+                "period": "2025 pre-tax annual wages; English page dated May 16, 2026",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "National non-private all-personnel 129441 yuan and private all-personnel 71590 yuan.",
                   "Independent public relations agency services fall under the business services background: leasing and business services non-private all-personnel 110162 yuan and private all-personnel 68919 yuan; in-house public relations is verified by employer industry separately, and these are not manager occupational wages or starting pay."
@@ -32075,13 +32096,13 @@
                 "limitation": "All-personnel or industry averages cannot be extrapolated to this occupation or personal income.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 average annual wage of urban unit employees",
-                "period": "2025 pre-tax annual average wage",
+                "period": "2025 pre-tax annual wages; English page dated May 16, 2026",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "National non-private all-personnel 129441 yuan and private all-personnel 71590 yuan.",
                   "Independent public relations agency services fall under the business services background: leasing and business services non-private all-personnel 110162 yuan and private all-personnel 68919 yuan; in-house public relations is verified by employer industry separately, and these are not manager occupational wages or starting pay."
@@ -32091,7 +32112,7 @@
                 "limitation": "All-personnel or industry averages cannot be extrapolated to this occupation or personal income.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 average annual wage of urban unit employees",
-                "period": "2025 pre-tax annual average wage",
+                "period": "2025 pre-tax annual wages; English page dated May 16, 2026",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
@@ -32125,7 +32146,7 @@
                 "period": "May 2025 annual and hourly wages",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/11-2032.00?st=CA"
+                "url": "https://www.onetonline.org/link/localwages/11-2032.00"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32191,6 +32212,37 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "3-01-02-03 covers organizational communication, relationship coordination, and image management."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "cn-pr-class",
+                "limitation": "A task reference for mainland China. It does not classify corporate manager levels or establish pay or eligibility.",
+                "market": "Mainland China",
+                "name": "China occupational classification: public relations practitioners",
+                "period": "2022",
+                "publisher": "China Ministry of Human Resources and Social Security et al.; hosted by Guangyuan HRSS",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One full-time group media relations manager listing in Shanghai asks for a bachelor’s degree or higher and typically at least three years of relevant experience, with exceptions for some candidates. Its remit includes annual communication planning, a technology summit, and an incident response process. The header advertises CNY 500,000–600,000 per year and does not break out base and variable pay. The advertised range and criteria describe one listing.",
+                  "The visible posting text omits the date. The structured JobPosting record lists September 21, 2026."
+                ],
+                "evidence_type": "Recruitment posting",
+                "id": "cn-pr-job",
+                "limitation": "One recruitment sample. Current vacancy status is unverified. The advertised pay applies to this posting.",
+                "market": "Mainland China",
+                "name": "Shanghai group media relations manager posting",
+                "period": "Structured posting date: September 21, 2026",
+                "publisher": "Michael Page",
+                "scope": "recruitment_proxy",
+                "url": "https://www.michaelpage.com.cn/en/job-detail/%E9%9B%86%E5%9B%A2%E5%AA%92%E4%BD%93%E5%85%AC%E5%85%B3%E7%BB%8F%E7%90%86%EF%BC%88%E5%85%A8%E7%90%83%E5%B8%82%E5%9C%BA%EF%BC%89/ref/jn-092026-7101718?lang=zh-hans"
               }
             ]
           },
@@ -34402,8 +34454,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "bls"
+              "onet"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -36882,7 +36933,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit public relations manager work",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36959,7 +37010,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI Personality Test"
           },
           {
             "href": {
@@ -36969,7 +37020,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five Personality Test"
           },
           {
             "href": {
@@ -36979,7 +37030,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Enneagram Test"
           },
           {
             "href": {
@@ -36989,7 +37040,17 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "IQ Reasoning Assessment"
+          },
+          {
+            "href": {
+              "$link": "public-relations-managers.navigation.links.1",
+              "block": "navigation",
+              "copy_key": "career.item.navigation-links",
+              "entry": "navigation-7",
+              "field": "url"
+            },
+            "label": "EQ Assessment"
           }
         ]
       },
@@ -37276,7 +37337,7 @@
         "market": "Mainland China",
         "measure": "evidence_boundary",
         "occupation_scope": "All employed persons in urban non-private units nationwide",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025",
         "source_refs": [
           "nbs"
         ]
@@ -37288,7 +37349,7 @@
         "market": "Mainland China",
         "measure": "evidence_boundary",
         "occupation_scope": "All employed persons in urban private units nationwide",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025",
         "source_refs": [
           "nbs"
         ]
@@ -37300,7 +37361,7 @@
         "market": "Mainland China",
         "measure": "National occupational wage gap for this occupation",
         "occupation_scope": "Mainland China currently has no comparable occupational-level statistical object for public relations managers",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025",
         "source_refs": [
           "nbs"
         ]
@@ -37312,7 +37373,7 @@
         "market": "Mainland China",
         "measure": "National occupational wage gap for this occupation",
         "occupation_scope": "Mainland China currently has no comparable occupational-level statistical object for public relations managers",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025",
         "source_refs": [
           "nbs"
         ]
@@ -37324,7 +37385,7 @@
         "market": "Mainland China",
         "measure": "Industry all-personnel pre-tax annual average wage",
         "occupation_scope": "Leasing and business services non-private units all personnel; independent public relations agency services employment settings only",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025",
         "source_refs": [
           "nbs"
         ]
@@ -37336,7 +37397,7 @@
         "market": "Mainland China",
         "measure": "Industry all-personnel pre-tax annual average wage",
         "occupation_scope": "Leasing and business services private units all personnel; independent public relations agency services employment settings only",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025",
         "source_refs": [
           "nbs"
         ]
@@ -37348,7 +37409,7 @@
         "market": "Mainland China",
         "measure": "National occupational wage gap for this occupation",
         "occupation_scope": "Mainland China currently has no comparable occupational-level statistical object for public relations managers",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025",
         "source_refs": [
           "nbs"
         ]
@@ -37360,7 +37421,7 @@
         "market": "Mainland China",
         "measure": "National occupational wage gap for this occupation",
         "occupation_scope": "Mainland China public relations manager dedicated occupation",
-        "period": "2025 annual wages released 2026-05-15",
+        "period": "2025",
         "source_refs": [
           "nbs"
         ]
@@ -37420,7 +37481,7 @@
         "availability": "available",
         "fact_ref": "cn-industry-rental-business-2025",
         "key": "china_pay",
-        "label": "China business services non-private annual average (public relations agency settings)"
+        "label": "Mainland urban non-private leasing and business services: all employees, 2025 annual mean"
       }
     ]
   },
@@ -37428,14 +37489,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Public relations managers develop communication strategy and manage media relations and crisis response. See O*NET 11-2032 tasks, US 2025 wages, BLS 2025–2035 projections, and the release authorization boundaries."
+      "text": "Public relations managers lead communication strategy, media relations, and crisis coordination. Compare manager and specialist responsibilities, see what to show when moving into management, and check pay evidence."
     },
     "title": {
       "availability": "available",
       "text": "Public Relations Managers"
     }
   },
-  "source_content_sha256": "4409f25c2b2ee11928af84641a552ba26e14065f9ad0bd1620758dcb8d5ad012",
+  "source_content_sha256": "59a341b5ed9e14ee1b34fe3e53fdbd5ab0429333064f8af6a6f4d352f3611168",
   "subject": {
     "canonical_slug": "public-relations-managers",
     "name": "Public Relations Managers",

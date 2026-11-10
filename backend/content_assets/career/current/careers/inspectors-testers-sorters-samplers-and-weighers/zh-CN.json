@@ -14,9 +14,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -7214,7 +7211,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜本页对应 O*NET-SOC 51-9061.00「Inspectors, Testers, Sorters, Samplers, And Weighers」。官方范围为：检查、测试、分拣、取样或称量非农业原料，或经加工、机械加工、制造或装配的零部件或产品，以发现缺陷、磨损及与规格的偏差，可使用精密测量仪器和复杂测试设备。核心交付是可复核的检验结论与记录，而不是「挑出坏件」本身。风险来自测量与量具状态、抽样与判定规则、隔离与标识、以及越权放行或让步接收。美国工资与就业为 O*NET 呈现的 BLS 精确职业口径（中位年薪 48,570 美元；2024 年就业约 598,000 人、2024—2034 增长几乎无变化、预计空缺 69,900 个）。若你难以承受重复性检验、产线节拍压力与准确性要求，应把这些作为需要认真权衡的现实成本。"
+              "BLS 表 1.2（51-9061）：2025 年美国约 602,000 个岗位，2035 年预计约 617,200 个，变化 2.5%，年均约 66,700 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.quick-decision.fermat-decision-card.1",
@@ -7242,12 +7239,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "判断是否适合检查员、测试员、分拣员、采样员、称重员，先用公开或模拟材料做一次可核验的演练：设定一个完全虚构的检验情境（例如对一批虚构零件按规格检验），写出从确认检验计划与规格、核对量具与校准状态、按抽样方案测量、记录与判定、处理不合格品、到复核与交接的流程，标注每一步的核对点与可能出现的问题（量具失准或超期、抽样与判定规则不清、测量记录与实物不符、不合格品未隔离或误放行、危险环境防护不足）。完成后核对：是否把规格与判定规则、量具状态、隔离与标识、防护要求作为不可省略项；是否把超出个人权限的放行或让步接收写成请示或转交；是否把过程留成可复核记录。全部材料须为虚构，不使用真实产品、图纸或检测数据。"
+              "见「入行、资格与职业发展」的纸面练习《Q 单：抽样结果与复核》。"
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7278,21 +7275,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本职业O*NET51-9061检查、测试、分拣、取样或称量非农业原料与加工装配产品，识别缺陷、磨损和规格偏差，可用精密量具及复杂设备。工作闭环为编辑归纳，实际任务/授权按岗位核。2025全国年度工资10/25/50/75/90分位35,510/39,890/48,570/61,440/77,860美元，时薪中位23.35美元。 BLS2025—2035精确SOC51-9061：就业602,000至617,200人，增长3%，年均空缺66,700个；含增长与替换，非净新增或个人保证。 中国精确职业工资未取得。"
+              "生产检验与测试员按图纸或检验规程检查材料和产品，记录尺寸、外观、抽样与判定结果，把不合格或待复核的批次交给相应负责人。"
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
-            "source-pack-onet-custom",
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "source-pack-onet-localcert",
-            "source-pack-onet-localtraining",
-            "source-pack-onet-localwages",
-            "source-pack-onet-summary",
-            "onet-hot",
             "onet-details"
           ],
           "type": "prose"
@@ -7373,12 +7360,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET2026精确任务、情境与RCI；Job Zone1—2为组准备描述，教育调查70%高中/同等、27%高中后非学位证书、3%大学无学位，非统一个人门槛。2025全国年度工资10/25/50/75/90分位35,510/39,890/48,570/61,440/77,860美元，时薪中位23.35美元。 BLS2025—2035精确SOC51-9061：就业602,000至617,200人，增长3%，年均空缺66,700个；含增长与替换，非净新增或个人保证。 主要雇主制造业，行业分布不等于招聘规模。"
+              "O*NET 51-9061.00 说明本职业任务和工作情境。美国工资采用 OEWS，就业预测采用 BLS 表 1.2。"
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "onet-summary"
+            "onet-details",
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7560,7 +7549,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS明确有部分制造商采用自动视觉检测，检验员监控设备、审查输出并随机抽检；这是传统检测自动化描述，不等于生成式AI采用率。生成式AI记录和草拟为编辑候选，本轮未取得精确职业采用、效果或净岗位因果研究。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "BLS明确有部分制造商采用自动视觉检测，检验员监控设备、审查输出并随机抽检；这是传统检测自动化描述，不等于生成式AI采用率。生成式AI记录和草拟为编辑候选，本轮未取得精确职业采用、效果或净岗位因果研究。"
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.ai-impact.ai-impact-table.2",
@@ -7742,7 +7731,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国薪资参考｜取 O*NET 呈现的 BLS 数据（2025 年 5 月），为 51-9061.00 精确职业口径。"
+              "美国全国工资采用 O*NET 展示的 2025 年 5 月 BLS OEWS（51-9061）。"
             ]
           },
           "fact_refs": [
@@ -7759,7 +7748,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025全国年度工资10/25/50/75/90分位35,510/39,890/48,570/61,440/77,860美元，时薪中位23.35美元。 BLS2025—2035精确SOC51-9061：就业602,000至617,200人，增长3%，年均空缺66,700个；含增长与替换，非净新增或个人保证。"
+              "2025 年 5 月美国全国年薪中位数 48,570 美元，时薪中位数 23.35 美元。年薪第 10、25、50、75、90 分位依次为 35,510、39,890、48,570、61,440、77,860 美元。"
             ]
           },
           "fact_refs": [
@@ -8065,12 +8054,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS美国常见高中/同等加在职培训，通常超过1个月至1年；O*NET调查70%高中、27%高中后非学位证书、3%大学无学位。Job Zone1—2不是本职业固定培训期，具体产品/岗位及职责另核。"
+              "美国 BLS 将高中或同等学历和中期在岗训练列为典型路径。向雇主核实量具培训、抽样方法和最终放行权限。"
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.path.career-path-block.2",
           "source_refs": [
-            "onet-cert"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8079,12 +8068,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "特定法域要求｜美国侧以 O*NET 准备信息代表典型路径并结合在职培训；中国大陆的岗位准入、质量与安全生产要求受相关法规与机构制度约束，须分别核对，不能互相套用。"
+              "昆山具名招聘列出过程抽样、成品终检和不合格品控制，也提到量具维护。"
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.path.career-path-block.3",
           "source_refs": [
-            "onet-cert"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8121,12 +8110,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "可复核证据｜用完全虚构的检验任务包展示能力：规格与抽样方案、测量与判定记录、不合格品处置与量具状态记录；不使用真实产品、图纸或检测数据，注明依据与假设。"
+              "纸面练习《Q 单：抽样结果与复核》。 虚构检验单 V2 规定宽度 9.8 至 10.2 mm，含两端。A 为 9.8，B 为 10.3，C 没有测量值，记录员把三件都标为合格。逐件判断并写复核交接。变式只将 B 改为 10.2 mm。"
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.path.career-path-block.6",
           "source_refs": [
-            "onet-cert"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8135,12 +8124,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "下一步动作｜完成一次虚构检验任务包与复核记录，请有经验者挑战你的量具判断、判定规则与隔离处置，并据此判断是否继续投入该方向；用可观察交付而不是课程名称证明能力。"
+              "先做原题和变式，保存第一稿。再到「常见问题与资料来源」打开「纸面练习参考解（完成后打开）」。复核能否追溯原值、待核原因和交接对象。"
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.path.career-path-block.7",
           "source_refs": [
-            "onet-cert"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8185,12 +8174,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS2025—2035精确SOC51-9061：就业602,000至617,200人，增长3%，年均空缺66,700个；含增长与替换，非净新增或个人保证。 BLS2025制造业雇主占64%；部分传统自动化减少部分检验任务，不能推生成式AI净岗位因果。中国精确需求未取得。"
+              "BLS 表 1.2（51-9061）：2025 年美国约 602,000 个岗位，2035 年预计约 617,200 个，变化 2.5%，年均约 66,700 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "inspectors-testers-sorters-samplers-and-weighers.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8309,23 +8298,22 @@
                 ]
               },
               {
-                "answer": "按 O*NET 呈现的 BLS 2025 年 5 月数据（51-9061.00 精确职业）：工资中位 48,570 美元（时薪中位 23.35 美元），10/25/75/90 分位为 35,510 / 39,890 / 61,440 / 77,860 美元。OEWS 为雇主报告的工资、不含福利与奖金，分位不等于起薪或个人实发收入。",
+                "answer": "2025 年 5 月美国全国年薪中位数 48,570 美元，时薪中位数 23.35 美元。年薪第 10、25、50、75、90 分位依次为 35,510、39,890、48,570、61,440、77,860 美元。",
                 "id": "inspectors-testers-sorters-samplers-and-weighers.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.inspectors-testers-sorters-samplers-and-weighers.us-pay",
                 "source_refs": [
-                  "source-pack-onet-localwages",
                   "onet-wages"
                 ]
               },
               {
-                "answer": "O*NET 准备信息显示该职业 Job Zone 第一至二级：通常要求高中文凭或同等学历（70% 回答高中文凭、27% 回答高等教育证书、3% 部分大学无学位），训练从几天到一年在职培训。进入该职业应结合在职训练与可验证的检验记录；学历、证书、许可、岗位录用、机构授权与放行权限必须分别核对。",
+                "answer": "美国 BLS 将高中或同等学历和中期在岗训练列为典型路径。向雇主核实量具培训、抽样方法和最终放行权限。 昆山具名招聘列出过程抽样、成品终检和不合格品控制，也提到量具维护。",
                 "id": "inspectors-testers-sorters-samplers-and-weighers.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.inspectors-testers-sorters-samplers-and-weighers.education-path",
                 "source_refs": [
-                  "source-pack-onet-localtraining",
-                  "source-pack-onet-localcert"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
@@ -8339,13 +8327,12 @@
                 ]
               },
               {
-                "answer": "美国侧按 O*NET 呈现的 BLS 精确职业口径：2024—2034 增长几乎无变化（0%）、预计空缺 69,900 个、2024 年就业约 598,000 人；空缺含增长与替换需求，不等于净新增岗位，也不能直接转换为招聘规模或个人录用概率。",
+                "answer": "BLS 表 1.2（51-9061）：2025 年美国约 602,000 个岗位，2035 年预计约 617,200 个，变化 2.5%，年均约 66,700 个职位空缺，含人员替补。人数分别取整。",
                 "id": "inspectors-testers-sorters-samplers-and-weighers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.inspectors-testers-sorters-samplers-and-weighers.outlook-transition",
                 "source_refs": [
-                  "onet-trends",
-                  "source-pack-onet-summary"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8366,6 +8353,15 @@
                 "source_refs": [
                   "onet-details",
                   "nbs-wages"
+                ]
+              },
+              {
+                "answer": "原题 A 在界内、B 超差、C 待测。变式 A 和 B 在界内，C 仍待测。保留旧日志，交接待测项和更正依据。",
+                "id": "inspectors-testers-sorters-samplers-and-weighers.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.inspectors-testers-sorters-samplers-and-weighers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
                 ]
               }
             ]
@@ -8486,17 +8482,17 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "Organizes assistable tasks and human controls.",
-                  "Not adoption, job-loss, regulation or authorization evidence."
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal task rubric",
+                "evidence_type": "编辑说明",
                 "id": "internal-rubric",
-                "limitation": "Not adoption, job-loss, regulation or authorization evidence.",
-                "market": "全球任务层面",
-                "name": "FermatMind 检查员、测试员、分拣员、采样员、称重员任务影响量表",
-                "period": "FermatMind task rubric v2026.08; reviewed 2026-08-31",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页任务",
                 "url": null
               },
               {
@@ -8596,17 +8592,16 @@
                 "url": "https://www.onetonline.org/link/localtrends/51-9061.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Current wage measure shown for the occupation page.",
-                  "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay."
+                  "2025 年 5 月美国全国年薪中位数 48,570 美元，时薪中位数 23.35 美元。年薪第 10、25、50、75、90 分位依次为 35,510、39,890、48,570、61,440、77,860 美元。"
                 ],
                 "evidence_type": "official wage data",
                 "id": "onet-wages",
-                "limitation": "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay.",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
                 "name": "National Wages 51-9061.00 Inspectors, Testers, Sorters, Samplers, And Weighers",
-                "period": "2025 wage data; accessed 2026-08-31",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-9061.00"
@@ -8740,21 +8735,46 @@
                 "url": "https://www.onetonline.org/link/summary/51-9061.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "核对量具并按方案实物测量 — 25/100; weight=1/3; inspectors-testers-sorters-samplers-and-weighers.profile.responsibilities-block.4[0]",
-                  "记录结果并进行质量判定 — 75/100; weight=1/3; inspectors-testers-sorters-samplers-and-weighers.profile.responsibilities-block.4[0]",
-                  "隔离反馈并复盘不合格品 — 25/100; weight=1/3; inspectors-testers-sorters-samplers-and-weighers.profile.responsibilities-block.4[0]"
+                  "BLS 表 1.2（51-9061）：2025 年美国约 602,000 个岗位，2035 年预计约 617,200 个，变化 2.5%，年均约 66,700 个职位空缺，含人员替补。人数分别取整。",
+                  "美国 BLS 将高中或同等学历和中期在岗训练列为典型路径。向雇主核实量具培训、抽样方法和最终放行权限。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "51-9061",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "昆山具名招聘列出过程抽样、成品终检和不合格品控制，也提到量具维护。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "案例不代表全国职业工资、入行或招聘。",
+                "market": "中国大陆",
+                "name": "昆山市政府：陆家镇质检岗位招聘样本",
+                "period": "2026",
+                "publisher": "昆山市人民政府",
+                "scope": "具名工作实例",
+                "url": "https://www.ks.gov.cn/kss/qzkx/202602/fba5eea4445b440e8649f5346f7d7821.shtml"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "Q 单：抽样结果与复核",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -10298,7 +10318,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test",
+            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
             "cta_label": "了解大五人格",
             "evidence_level": "editorial",
             "id": "big-five",
@@ -10317,7 +10337,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test",
+            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
             "cta_label": "了解MBTI",
             "evidence_level": "editorial",
             "id": "mbti",
@@ -10331,7 +10351,7 @@
           },
           {
             "answer": "未取得九型人格职业绩效效度，观察实际任务偏好。",
-            "cta_href": "/zh/tests/enneagram-personality-test",
+            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
             "cta_label": "了解九型人格",
             "evidence_level": "editorial",
             "id": "enneagram",
@@ -10345,7 +10365,7 @@
           },
           {
             "answer": "未取得IQ统一门槛或本页量表职业绩效效度，核实际数据和方法任务。",
-            "cta_href": "/zh/tests/iq-test",
+            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "了解认知能力",
             "evidence_level": "editorial",
             "id": "iq",
@@ -10359,7 +10379,7 @@
           },
           {
             "answer": "未取得情绪能力量表绩效效度，观察沟通、解释依据与反馈行为。",
-            "cta_href": "/zh/tests/eq-test",
+            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "了解情绪能力",
             "evidence_level": "editorial",
             "id": "eq",
@@ -10810,7 +10830,7 @@
           "source": "https://www.onetonline.org/link/details/51-9061.00；https://www.onetonline.org/link/localwages/51-9061.00；https://www.bls.gov/ooh/production/quality-control-inspectors.htm",
           "updated_at": "2026-10-11核；工资2025、预测2025—2035；NBS英文发布2026-05-18"
         },
-        "note": "精确职责/RCI/情境核实保留，五分位及4行业工资已核；预测更新2025—2035。共享旧期、旧NBS日期及奖金口径有保护消费者，保留范围冲突。传统视觉自动化不等生成式AI，编辑控制不作技术标准。"
+        "note": "O*NET 提供任务信息，OEWS 提供工资，BLS 表 1.2 提供就业预测。"
       },
       "work_context_block": {
         "$item": "inspectors-testers-sorters-samplers-and-weighers.profile.work-context-block.5",
@@ -10832,7 +10852,7 @@
     ],
     "path": "/zh/career/jobs/inspectors-testers-sorters-samplers-and-weighers",
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与人工复核",
       "china-salary": "中国大陆薪资",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
@@ -10887,7 +10907,7 @@
       },
       {
         "derivation": null,
-        "display_value": "增长 几乎无变化（0%，2024—2034，BLS 就业预测，51-9061.00 精确职业）",
+        "display_value": "2025–2035",
         "fact_id": "employment-projection",
         "market": "美国",
         "measure": "employment projection measure",
@@ -10923,102 +10943,90 @@
       },
       {
         "derivation": null,
-        "display_value": "中位年薪 48,570 美元（2025 年 5 月，BLS OEWS，51-9061.00 精确职业）",
+        "display_value": "48,570 美元/年",
         "fact_id": "us-wage-median",
-        "market": "US",
-        "measure": "annual median wage",
-        "occupation_scope": "51-9061.00 exact occupation",
-        "period": "May 2025 wages",
+        "market": "美国",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "51-9061",
+        "period": "2025-05",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "onet-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "增长 几乎无变化（0%，2024—2034，BLS 就业预测，51-9061.00 精确职业）",
+        "display_value": "2.5%",
         "fact_id": "us-growth-2024-2034",
-        "market": "US",
-        "measure": "projected employment percent change",
-        "occupation_scope": "51-9061.00 exact occupation",
-        "period": "2024-2034 outlook",
+        "market": "美国",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "51-9061",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "就业 约 598,000 人（2024 年，BLS 就业预测基期，51-9061.00 精确职业）",
+        "display_value": "约 602,000 个岗位",
         "fact_id": "us-employment-2024",
-        "market": "US",
-        "measure": "employment base",
-        "occupation_scope": "51-9061.00 exact occupation",
-        "period": "2024 employment base",
+        "market": "美国",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "51-9061",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "预计职位空缺 69,900 个（2024—2034，BLS 就业预测，51-9061.00 精确职业，含增长与替换）",
+        "display_value": "年均约 66,700 个",
         "fact_id": "us-openings-2024-2034",
-        "market": "US",
-        "measure": "projected job openings",
-        "occupation_scope": "51-9061.00 exact occupation",
-        "period": "2024-2034 outlook",
+        "market": "美国",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "51-9061",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "检查员、测试员、分拣员、采样员、称重员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "bls-ep-2025-2035"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "检查员、测试员、分拣员、采样员、称重员 · 规格、判定与安全边界",
-      "来源范围 · 统计口径 · 人工复核",
-      "中国大陆精确职业工资缺口按证据保留"
+      "生产检验与测试员",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "美国年薪中位数（2025，精确职业口径）"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2024-2034",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，几乎无变化）"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2024-2034",
         "key": "us_openings",
-        "label": "美国预计职位空缺（2024—2034）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11032,17 +11040,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "检查员、测试员、分拣员、采样员、称重员做什么、如何入行与训练、有哪些授权与风险边界，以及 AI 会改变哪些任务。本页对应 O*NET-SOC 51-9061.00，兴趣代码 RCI、Job Zone 第一至二级；美国工资与就业为 O*NET 呈现的 BLS 精确职业口径，中国大陆工资缺口按证据登记。"
+      "text": "了解生产检验与测试员的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "检查员、测试员、分拣员、采样员、称重员职业判断：工作、入行与风险边界"
+      "text": "生产检验与测试员做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "90e18f140221b3f3f595bdc25c3213aab925f948f10949bd33b2864dcb192db1",
+  "source_content_sha256": "f16faf71a7a39ff97627551eb726afa39c79c66439eb1bc25860e524017fed67",
   "subject": {
     "canonical_slug": "inspectors-testers-sorters-samplers-and-weighers",
-    "name": "检查员、测试员、分拣员、采样员、称重员",
-    "summary": "检查员、测试员、分拣员、采样员、称重员检查、测试、分拣、取样或称量非农业原料，或经加工、机械加工、制造或装配的零部件或产品，以发现缺陷、磨损及与规格的偏差，可使用精密测量仪器和复杂测试设备。工作包括确认规格与检验计划、核对量具与校准状态、按抽样方案测量、判定并记录、隔离与反馈、复盘与改进。美国工资与就业采用 O*NET 呈现的 BLS 51-9061.00 精确职业口径（2025 年 5 月工资中位 48,570 美元；2024 年就业约 598,000 人、2024—2034 增长几乎无变化、预计空缺 69,900 个，主要行业为制造业）；中国大陆精确职业工资未取得，按可见缺口登记。"
+    "name": "生产检验与测试员",
+    "summary": "生产检验与测试员按图纸或检验规程检查材料和产品，记录尺寸、外观、抽样与判定结果，把不合格或待复核的批次交给相应负责人。"
   }
 }

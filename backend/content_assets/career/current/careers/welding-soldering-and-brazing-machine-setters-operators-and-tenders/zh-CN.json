@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先用生产记录核对观察规则理解、数量复算和异常沟通，再了解具体机器训练。兴趣不只看机器人动作，还包括准备、重复监控、检查及交接。"
+              "纸面体验｜虚构首件记录用了上一版工单。保留参数和版号，交工艺复核，不直接把记录视为放行。 "
             ]
           },
           "id": "welding-soldering-and-brazing-machine-setters-operators-and-tenders.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24814,13 +24813,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页“机器铺设工、操作员、看护员”采用美国51-4122.00范围，指设置、操作或看护焊接、锡焊与钎焊机器或机器人，包括激光切割及激光束设备操作。核心是按指定文件准备机器和工件、监控过程、检查结果并记录异常；不是道路铺设。手持焊接51-4121另列，机器编程、维修与工艺设计的权限也要分别确认。"
+              "焊接与钎焊机台人员按工单设置和监看设备，检验样件并记录停机或异常。参数变更和复工按分工处理。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "welding-soldering-and-brazing-machine-setters-operators-and-tenders.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-4122.00"
           ],
           "type": "prose"
         }
@@ -25464,13 +25462,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业操作自动化机器，仍要核配置、状态、检查与异常。文字工具可辅助整理资料但不能从能力推采用，从总体下降推独立替代率；未核评分不填写。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：虚构首件记录用了上一版工单。保留参数和版号，交工艺复核，不直接把记录视为放行。"
             ]
           },
           "id": "welding-soldering-and-brazing-machine-setters-operators-and-tenders.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-4122.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33065,6 +33063,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-4122.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-4122.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-4122.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38542,10 +38567,10 @@
       "text": "机器铺设工、操作员、看护员"
     }
   },
-  "source_content_sha256": "5c05753d3417aa9be70243c7bbe11c00d2db53dc07a96cca67bf7a33490c924e",
+  "source_content_sha256": "b2f3446f431ec3a3f89917e0ce983c1a152e3e87da030e677a8bfdb2645560e4",
   "subject": {
     "canonical_slug": "welding-soldering-and-brazing-machine-setters-operators-and-tenders",
     "name": "机器铺设工、操作员、看护员",
-    "summary": "本页“机器铺设工、操作员、看护员”采用美国51-4122.00范围，指设置、操作或看护焊接、锡焊与钎焊机器或机器人，包括激光切割及激光束设备操作。核心是按指定文件准备机器和工件、监控过程、检查结果并记录异常；不是道路铺设。手持焊接51-4121另列，机器编程、维修与工艺设计的权限也要分别确认。"
+    "summary": "焊接与钎焊机台人员按工单设置和监看设备，检验样件并记录停机或异常。参数变更和复工按分工处理。"
   }
 }

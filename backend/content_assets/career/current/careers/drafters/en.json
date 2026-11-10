@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a27-hengqin": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a27-shanghai": {
+        "status": "pending_mapping"
       },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
@@ -1638,7 +1644,7 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1710,7 +1716,7 @@
         "status": "pending_mapping"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26038,7 +26044,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editors check each contract for fixed wages, project or drawing volume settlement, and overtime or site-station arrangements; no recruitment sample was collected, so no structure is claimed to be common or dominant."
+              "Editors check each contract for fixed wages, project or drawing volume settlement, and overtime or site-station arrangements; these two postings do not establish a common pay structure."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
@@ -26066,12 +26072,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "When citing public figures, the city, industry and unit type, position duties, whether project bonuses and allowances and overtime and site-station arrangements are included, the statistic and the source date must all be stated."
+              " These are past notices. A comparable mainland occupational median remains unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "a27-hengqin",
+            "a27-shanghai"
           ],
           "type": "prose"
         },
@@ -26180,12 +26187,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page does not provide recruitment quotes or personal income promises; missing items remain missing, and industry averages or neighboring occupations are not used as substitutes."
+              "Use the notices to compare duties and pay terms for individual posts."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "a27-hengqin",
+            "a27-shanghai"
           ],
           "type": "prose"
         }
@@ -28932,25 +28940,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional materials",
-                  "1 fictional design conditions document (including site and space requirements), 2 concept sketches, 1 specification and engineering calculation summary, a key points list for the Unified Standard for Building Drawing (layers and naming and symbols and annotations) and a drawing list and version and verification checklist.",
-                  "All materials are fictional and contain no real project or client or site information."
+                  "Paper exercise inputs",
+                  "Fictional paper exercise. Approved plan A-02 Rev B shows a 900 mm opening. Section A-05 Rev A still shows 850 mm.",
+                  "Change R17 approves only the opening dimension. It does not authorize moving the wall.",
+                  "Under the exercise rules, the drafter logs the conflict and affected sheets. The design lead confirms updates. Document control issues the approved revision."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Portfolio task",
-                  "Within 40 minutes, establish layers and names for a fictional plan and annotate key dimensions and materials, write a discipline interface and drawing output order statement, and list the items that need confirmation from the architect or engineer.",
-                  "Do paper checking and plan design only; make no design sign-off or structural safety or regulatory compliance conclusions, and do not touch real projects or systems."
+                  "What to submit",
+                  "Submit a one-page change log with the dimension difference, affected sheets, approved scope and open questions.",
+                  "Name who confirms the revision and who issues it. Use only the inputs. No drawing or construction is required."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference result",
-                  "Layers and naming are classified to standard and traceable; key dimensions and materials and specifications are consistent and uncertain items are marked; the discipline interface and drawing output order statement covers structural and electrical and mechanical interfaces and versions; the confirmation list sets out the site and code and interface items to be confirmed.",
-                  "The reference result is for self-checking and is not the only correct answer."
+                  "Finish your own answer first",
+                  "Open “Drawing revision reference (open after day six)” under FAQs and sources.",
+                  "Use the checklist to record one difference and one correction."
                 ]
               },
               {
@@ -28979,50 +28988,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: understand the materials",
-                  "Read the fictional design conditions and sketches and specifications and standard key points, circle uncertain items and write out a question list."
+                  "Day 1",
+                  "Copy the sheet numbers, revisions and dimensions."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: basis and codes",
-                  "Check the design conditions against the codes and site and space requirements and list the items to be confirmed."
+                  "Day 2",
+                  "Calculate the difference."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: layers and naming",
-                  "Establish layers and names to standard for a fictional plan and write out the symbols and legends statement."
+                  "Day 3",
+                  "Check what R17 authorizes."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: dimensions and materials",
-                  "Annotate key dimensions and prepare a material table, checking consistency among dimensions and specifications and quantities."
+                  "Day 4",
+                  "List sheets to confirm and their owners."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: interfaces and drawing output",
-                  "Write a discipline interface and version and drawing output order statement and list the interface confirmation points."
+                  "Day 5",
+                  "Write the one-page change handoff."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: timed redo",
-                  "Redo the exercise under time limits and record your energy and the types of errors."
+                  "Day 6: finish your own answer",
+                  "Check whether someone could read your handoff on its own before opening the reference."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: compare and decide",
-                  "Compare the two versions of the plan and write down continue / proceed with caution / stop and the reasons."
+                  "Day 7: open the reference and review",
+                  "Open “Drawing revision reference (open after day six)” under FAQs and sources. Record one difference and correction, then decide whether to continue or pause."
                 ]
               }
             ]
@@ -29041,13 +29050,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1 judgment: whether uncertain items in the materials were truthfully marked rather than filled in by guesswork.",
+              "You can finish a one-page handoff and separate verified facts, open checks and approvals.",
               "Day 2 judgment: whether the basis and codes and site requirements are checked item by item, rather than by impression.",
-              "Day 3 judgment: whether layers and naming and symbols are executed to standard and traceable.",
+              "Note which paper step takes most effort. Ask the employer about actual work demands.",
               "Day 4 judgment: whether dimensions and material tables are consistent and uncertain items are marked.",
               "Day 5 judgment: whether the discipline interface and version and drawing output order statement is complete and lists the confirmation points.",
               "Day 6 judgment: whether the standard and verification and documentation requirements can still be held under time limits.",
-              "Day 7 judgment: combining the performance in both versions, judge whether you are willing to keep investing in the architectural and civil drafting direction."
+              "On day seven, check your handoff against the collapsed reference. Repeat if a critical item is missing. Ask the employer about training and actual responsibilities."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30893,22 +30902,21 @@
           "data": {
             "entries": [
               {
-                "answer": "Analyze building codes and local regulations and site and space requirements, check the design concept and sketches and engineering calculations and specification tables and obtain and compile the data; use computer-aided drafting systems (CAD) or plotters or hand drawing to produce plans and details for foundations and buildings and structures, and draw civil drawings and maps and sections for roads and bridges and pipelines; coordinate structural and electrical and mechanical design and determine the graphic representation method and drawing output order, and prepare material tables and dimensions and annotation text; check the consistency of sketches and drawings and specifications, complete and reproduce drawings and document packages according to the reproduction specifications, explain drawings to the production or construction team and provide adjustments, and visit the site when necessary to collect measurement data and supervise and train other drafting personnel.",
+                "answer": "Turn approved architectural or civil design inputs into drawings or models. Check dimensions, sheet numbers and revisions, and refer conflicts to the design lead.",
                 "id": "actors.faq.1",
                 "question": "What do architectural and civil drafters do every day?",
                 "question_key": "career.faq.drafters.1",
                 "source_refs": [
-                  "onet"
+                  "sag-moa"
                 ]
               },
               {
-                "answer": "The occupation on this page draws and coordinates and verifies and delivers drawings under the architect's or engineer's direction according to their design intent and codes; architects bear architectural design and permit applications and practice registration and sign-off responsibility; civil engineers bear structural modeling and calculation and safety and design sign-off. Objects and authorization and outputs differ, and the positions cannot be swapped by name.",
+                "answer": "Drafters turn confirmed inputs into plans, sections or site drawings and log conflicts. Architects or civil engineers typically develop and review the designs in their respective disciplines. Check who may change the design or issue drawings on each project.",
                 "id": "actors.faq.2",
                 "question": "What is the difference between it and architects or civil engineers?",
                 "question_key": "career.faq.drafters.2",
                 "source_refs": [
-                  "onet",
-                  "agent"
+                  "sag-moa"
                 ]
               },
               {
@@ -30940,23 +30948,24 @@
                 ]
               },
               {
-                "answer": "The BLS 2025 United States wage data median is 66,150 US dollars per year (31.80 US dollars per hour), with annual percentiles of 46,260／55,650／66,150／80,870／99,710 US dollars and hourly percentiles of 22.24／26.76／31.80／38.88／47.94 US dollars. No corresponding national single-occupation scope was obtained for the Chinese mainland, so no median or percentile is given. When comparing real positions, check the city, industry and unit type, specialty direction, whether it is drawing execution or specialty verification or responsibility, whether project bonuses and overtime and site-station allowances are included, and the pre-tax and after-tax treatment.",
+                "answer": "The May 2025 U.S. annual median for architectural and civil drafters was $66,150. Hengqin recruitment table row 20 listed 20 interior construction drawing drafters, with a junior-college credential or higher and no posted pay. The Chongming notice listed one detailing designer at CNY 8,000–15,000 per month. It included plans, elevations, details and site coordination, a broader adjacent role. These are past notices. A comparable mainland occupational median remains unavailable.",
                 "id": "actors.faq.6",
                 "question": "What is the typical pay, and how should it be compared?",
                 "question_key": "career.faq.drafters.6",
                 "source_refs": [
-                  "oews",
-                  "r2-pay-1"
+                  "r5-bls-projections",
+                  "a27-hengqin",
+                  "a27-shanghai"
                 ]
               },
               {
-                "answer": "United States responses show that 42% require a bachelor's degree, and on-the-job work usually requires 1—2 years of vocational training or an associate's degree and may be related to a recognized apprenticeship program. The Chinese mainland has no uniform access-type professional qualification for this occupation, and drafter skill grades are referenced against the National Occupational Standard for Drafters, with actual requirements governed by the design unit and project and jurisdiction.",
+                "answer": "Hengqin recruitment table row 20 listed 20 interior construction drawing drafters, with a junior-college credential or higher and no posted pay. The Chongming notice listed one detailing designer at CNY 8,000–15,000 per month. It included plans, elevations, details and site coordination, a broader adjacent role. These are past notices. A comparable mainland occupational median remains unavailable. For an application, check the posting’s education, audition or training requirements.",
                 "id": "actors.faq.7",
                 "question": "What education is needed, and how should training be done?",
                 "question_key": "career.faq.drafters.7",
                 "source_refs": [
-                  "onet",
-                  "teacher"
+                  "a27-hengqin",
+                  "a27-shanghai"
                 ]
               },
               {
@@ -30970,23 +30979,30 @@
                 ]
               },
               {
-                "answer": "First do the paper exercise on this page (establish layers and names for a fictional plan, annotate key dimensions and materials, write a discipline interface and drawing output order statement, list the confirmation items), then seek a supervised position or training experience; at the same time confirm that you can accept long screen use and repeated revision and milestone pressure, and confirm the authorization and confidentiality boundaries according to the design unit and project requirements.",
+                "answer": "Start with this page’s R17 paper exercise. Compare dimensions and revisions, and log the difference, approved scope and owners. Open the reference on day seven.",
                 "id": "actors.faq.9",
                 "question": "If I want to try it with zero background, what should I do first?",
                 "question_key": "career.faq.drafters.9",
                 "source_refs": [
-                  "onet",
-                  "sag"
+                  "sag-moa"
                 ]
               },
               {
-                "answer": "Consider the screen and sitting load (controlled indoor environment every day 99%, continuous sitting more than half the time 37%, repeating the same tasks extremely important 38%), the precision and verification requirements (precision or accuracy extremely important 32%), teamwork extremely important 65%, and design qualification and registration and sign-off and data confidentiality responsibility.",
+                "answer": "BLS projects architectural and civil drafters (17-3011) to go from 104,100 jobs in 2025 to 109,500 in 2035 (+5.2%), with 9,100 annual openings including replacements. The broader drafting group (17-3010) has a separate projection of 0.6% growth.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing this occupation?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.drafters.10",
                 "source_refs": [
-                  "onet",
-                  "nist"
+                  "r5-bls-projections"
+                ]
+              },
+              {
+                "answer": "The opening dimensions differ by 50 mm. Log A-02 Rev B at 900 mm and A-05 Rev A at 850 mm. R17 covers the opening dimension. Keep the wall position within the approved scope. List the section update as pending design-lead confirmation. Document control issues the update after approval. Record R17, both sheets and revisions, the difference, open items and owners. Check four items: difference, affected sheets and revisions, change scope, and approval and handoff. Count each complete item. The fictional exercise uses the source for occupational context.",
+                "id": "actors.faq.11",
+                "question": "Drawing revision reference (open after day six)",
+                "question_key": "career.faq.drafters.11",
+                "source_refs": [
+                  "sag-moa"
                 ]
               }
             ]
@@ -31225,19 +31241,19 @@
                 "url": "https://www.onetonline.org/link/summary/17-3012.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "United States 17-3011 exact occupation, 2025 national 10/25/50/75/90 percentiles: annual 46,260/55,650/66,150/80,870/99,710 US dollars and hourly 22.24/26.76/31.80/38.88/47.94 US dollars, with the original figures retained. OEWS is employed straight-time pre-tax wages, including applicable commissions and production bonuses and specified allowances, and excluding self-employment, overtime premiums, shift differentials and non-production bonuses; project-based or outsourced employees or all project bonuses and site-station allowances cannot be uniformly excluded. Percentiles are not experience levels, starting pay, an individual ceiling or causal proof of each factor."
+                  "BLS projects architectural and civil drafters (17-3011) to go from 104,100 jobs in 2025 to 109,500 in 2035 (+5.2%), with 9,100 annual openings including replacements. The broader drafting group (17-3010) has a separate projection of 0.6% growth."
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "bls",
-                "limitation": "United States 17-3011 exact occupation, 2025 national 10/25/50/75/90 percentiles: annual 46,260/55,650/66,150/80,870/99,710 US dollars and hourly 22.24/26.76/31.80/38.88/47.94 US dollars, with the original figures retained. OEWS is employed straight-time pre-tax wages, including applicable commissions and production bonuses and specified allowances, and excluding self-employment, overtime premiums, shift differentials and non-production bonuses; project-based or outsourced employees or all project bonuses and site-station allowances cannot be uniformly excluded. Percentiles are not experience levels, starting pay, an individual ceiling or causal proof of each factor.",
+                "limitation": "Annual openings include replacements.",
                 "market": "United States",
-                "name": "O*NET OnLine (citing the U.S. Bureau of Labor Statistics): 17-3011.00 national wages",
-                "period": "2025 wage data; accessed 2026-09-19",
+                "name": "BLS Table 1.2: occupational projections",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/17-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31725,6 +31741,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Hengqin recruitment table row 20 listed 20 interior construction drawing drafters, with a junior-college credential or higher and no posted pay."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a27-hengqin",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Interior construction drawing drafter",
+                "period": "2023-09",
+                "publisher": "Hengqin Guangdong–Macao In-Depth Cooperation Zone",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hengqin.gov.cn/tmsswj/msgk/sbfw/gk/zwdt/content/post_3577420.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Chongming notice listed one detailing designer at CNY 8,000–15,000 per month. It included plans, elevations, details and site coordination, a broader adjacent role."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a27-shanghai",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Interior detailing designer",
+                "period": "2025-05-07",
+                "publisher": "Shanghai Chongming District government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shcm.gov.cn/xwzx/002009/20250507/09b7cc60-c021-4820-85a1-31cb31df7a03.html"
               }
             ]
           },
@@ -34518,7 +34564,7 @@
             },
             {
               "指标": "Drafting standards",
-              "数值": "Standard text and current status to be checked",
+              "数值": "See the two dated job postings below.",
               "说明": "Insufficient evidence: the current status and text of the competent authority for GB/T50001-2017 were not obtained, so all clauses cannot be called universally mandatory requirements based only on the standard number or an old web page. The Jiangsu human resources and social security 2022 catalogue does contain a drafter entry 3-01-02-07 and a 2002 national occupational standard entry, but this is only catalogue metadata; the standard text or latest version was not obtained, and the four grades and education and application conditions are to be checked and are not treated as a current universal threshold. Design qualifications and registration responsibility are checked separately against the specific regulations and specialty and project."
             },
             {
@@ -34655,7 +34701,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "Statistical scope status",
+          "china_open": "The dated posting samples are shown alongside the national occupation-level data gap.",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34698,7 +34744,7 @@
               }
             },
             {
-              "城市/区间": "Industry average (cannot substitute for this occupation)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$join": [
                   {
@@ -34728,13 +34774,14 @@
           "china_soc_row": "Chinese mainland salary scope",
           "edu": "See the entry module for training and qualification and responsibility",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-a27-hengqin",
+            "posting-a27-shanghai"
           ],
           "sources_note": "Source links are used according to their respective scope of application.",
           "ui": {
             "ai_heading": "Will AI and automation directly change the income for this occupation?",
             "driver_heading": "What should be checked when discussing pay for similar positions in the Chinese mainland?",
-            "official_heading": "Chinese mainland official scope and statistical gap",
+            "official_heading": "Scope of industry figures and job postings",
             "scenario_caption": "Comparison of pay methods and statistical boundaries",
             "scenario_heading": "Can the pay methods of similar positions in the Chinese mainland be compared directly?",
             "scenario_interpretation_label": "Scope of application and gaps",
@@ -35415,7 +35462,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/architects-except-landscape-and-naval",
+            "target_href": "/en/career/jobs/architects-except-landscape-and-naval",
             "target_slug": "architects-except-landscape-and-naval",
             "target_title": "Architects: differences from this occupation in architectural design and practice sign-off",
             "transition_distance": {
@@ -35438,7 +35485,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/civil-engineers",
+            "target_href": "/en/career/jobs/civil-engineers",
             "target_slug": "civil-engineers",
             "target_title": "Civil engineers: gaps in engineering planning and design and construction and maintenance analysis",
             "transition_distance": {
@@ -35461,7 +35508,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/mechanical-drafters",
+            "target_href": "/en/career/jobs/mechanical-drafters",
             "target_slug": "mechanical-drafters",
             "target_title": "Mechanical drafters: differences from this occupation in mechanical specialty drafting",
             "transition_distance": {
@@ -35484,7 +35531,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-and-electronics-drafters",
+            "target_href": "/en/career/jobs/electrical-and-electronics-drafters",
             "target_slug": "electrical-and-electronics-drafters",
             "target_title": "Electrical and electronics drafters: differences from this occupation in electrical specialty drafting",
             "transition_distance": {
@@ -35507,7 +35554,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/surveying-and-mapping-technicians",
+            "target_href": "/en/career/jobs/surveying-and-mapping-technicians",
             "target_slug": "surveying-and-mapping-technicians",
             "target_title": "Surveying and mapping technicians: differences from this occupation in survey work",
             "transition_distance": {
@@ -35530,7 +35577,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/construction-managers",
+            "target_href": "/en/career/jobs/construction-managers",
             "target_slug": "construction-managers",
             "target_title": "Construction managers: differences from this occupation in construction organization and on-site safety",
             "transition_distance": {
@@ -35553,7 +35600,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/architectural-and-engineering-managers",
+            "target_href": "/en/career/jobs/architectural-and-engineering-managers",
             "target_slug": "architectural-and-engineering-managers",
             "target_title": "Architectural and engineering managers: differences from this occupation in design management",
             "transition_distance": {
@@ -35576,7 +35623,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-engineers",
+            "target_href": "/en/career/jobs/electrical-engineers",
             "target_slug": "electrical-engineers",
             "target_title": "Electrical engineers: professional gaps in electrical equipment system design and testing",
             "transition_distance": {
@@ -35664,7 +35711,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35713,7 +35760,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35762,7 +35809,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35811,7 +35858,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35860,7 +35907,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35909,7 +35956,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36531,7 +36578,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of architectural and civil drafters",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37062,39 +37109,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 110,500 people (2024, O*NET summary page scope)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "104,100 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistic)",
-        "occupation_scope": "Scope for this occupation (17-3011.00); the size varies with construction and infrastructure investment and design drawing output demand and the degree of drafting automation; the national total does not indicate specific opportunities in a particular industry or unit",
-        "period": "2024 base period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. architectural and civil drafters 17-3011",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "r5-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "The 2024—2034 projection is average (Average, 3% to 4%) (the category and range marked on the O*NET summary page, which does not give a single precise percentage)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "5.2%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "Scope for this occupation, projection period 2024—2034; the projection is a change in the occupation total, not individual hiring probability; the page gives only the average (3% to 4%) category and range and not a single precise percentage, so this page states it in the original wording without converting to a percentage on its own; this page did not obtain first-hand scope from the BLS Occupational Outlook page for this occupation",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. architectural and civil drafters 17-3011",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 10,000 (2024—2034, including replacement needs; O*NET summary page scope)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "9,100 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Projected period job openings (including replacement needs)",
-        "occupation_scope": "Scope for this occupation; these are total openings formed during the projection period by growth and replacement, not annual net new positions, and not a direct measure of individual opportunity; the scope period marked on that O*NET page is 2024—2034, and the page cites it under that scope without separate annual conversion",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. architectural and civil drafters 17-3011",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-projections"
         ]
       },
       {
@@ -37272,14 +37319,15 @@
       },
       {
         "derivation": null,
-        "display_value": "Precise Chinese national occupational wage gap; the 2025 annual pre-tax average for construction non-private 92036 / private 66275 yuan is only industry background",
+        "display_value": "Hengqin recruitment table row 20 listed 20 interior construction drawing drafters, with a junior-college credential or higher and no posted pay. The Chongming notice listed one detailing designer at CNY 8,000–15,000 per month. It included plans, elevations, details and site coordination, a broader adjacent role.",
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "Chinese mainland",
         "measure": "Wage gap and industry background",
-        "occupation_scope": "National Bureau of Statistics 2025 urban unit wages: construction non-private 92,036 / private 66,275 yuan, and scientific research and technical services non-private 182,064 / private 83,560 yuan, all annual pre-tax averages and only industry background, not the median or percentile or monthly pay for this occupation. The coverage is employed persons in legal person units with 5 or more employees, excluding self-employment and freelancers; project-based, outsourced or part-time work that counts as employed persons in the statistical unit is not necessarily excluded. No precise Chinese national occupational wage or real recruitment or enterprise pay sample was obtained, and the gap is retained.",
-        "period": "2025",
+        "occupation_scope": "Two past job notices",
+        "period": "2023–2025",
         "source_refs": [
-          "r5-nbs-current"
+          "a27-hengqin",
+          "a27-shanghai"
         ]
       },
       {
@@ -37292,6 +37340,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Hengqin recruitment table row 20 listed 20 interior construction drawing drafters, with a junior-college credential or higher and no posted pay.",
+        "fact_id": "posting-a27-hengqin",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Interior construction drawing drafter",
+        "period": "2023-09",
+        "source_refs": [
+          "a27-hengqin"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The Chongming notice listed one detailing designer at CNY 8,000–15,000 per month. It included plans, elevations, details and site coordination, a broader adjacent role.",
+        "fact_id": "posting-a27-shanghai",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Interior detailing designer",
+        "period": "2025-05-07",
+        "source_refs": [
+          "a27-shanghai"
         ]
       }
     ]
@@ -37319,19 +37391,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "United States employment projection (average (3% to 4%) in 2024—2034; the source gives only the category and range)"
+        "label": "U.S. architectural and civil drafters 17-3011 · projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "United States employment (about 110,500 people in 2024)"
+        "label": "U.S. architectural and civil drafters 17-3011 · employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "United States projected job openings (about 10,000 in 2024—2034, including replacement needs)"
+        "label": "U.S. architectural and civil drafters 17-3011 · projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37345,17 +37417,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Architectural and Civil Drafters (O*NET-SOC 17-3011.00) do architectural and civil drafting in scenarios such as building engineering and civil engineering and professional design and construction services: analyze building codes and site and space requirements and check the design concept and sketches and engineering calculations and specifications, use CAD or hand drawing to produce architectural and structural details and civil drawings and terrain representation, coordinate structural and electrical and mechanical design and determine the drawing output order, prepare material tables and dimensions and annotations and check consistency, reproduce and deliver drawings and explain them to the construction team, and visit the site when necessary to collect measurement data. United States scope: the BLS 2025 wage data median is 66,150 US dollars per year (31.80 US dollars per hour), with annual percentiles of 46,260／55,650／66,150／80,870／99,710 US dollars; employment was about 110,500 in 2024, the 2024—2034 projection is average (3% to 4%), with about 10,000 projected openings; the preparation level is Job Zone Three and the interest code is RCA. Chinese mainland: building drawing follows the Unified Standard for Building Drawing GB/T 50001-2017, and design drawing output and sign-off responsibility is borne by design units with the corresponding qualifications and registered practitioners; public statistics have not established an occupation-level wage scope, and this page visibly marks the gap in the relevant places."
+      "text": "See how architectural and civil drafters check dimensions, sheets and versions. Read posting examples and try a paper revision handoff."
     },
     "title": {
       "availability": "available",
       "text": "Architectural and civil drafters"
     }
   },
-  "source_content_sha256": "cce07c3838d7ec126e71b5838b4b8ad8dd918311cd0c17111994ba7d1404072b",
+  "source_content_sha256": "8990357ab799bdd4374eab1cb16792a5e253e316dade865870c6c7d0871b78d7",
   "subject": {
     "canonical_slug": "drafters",
     "name": "Architectural and civil drafters",
-    "summary": "Architectural and Civil Drafters (United States side, O*NET-SOC 17-3011.00) is an architectural and civil drafting position: preparing detailed drawings of the architectural and structural features of buildings, or drawings and topographical relief maps used for civil engineering projects such as highways, bridges and public works, applying knowledge of building materials and engineering practices and mathematics to complete the drawings; the work includes using computer-aided drafting systems (CAD) or plotters or hand drawing, analyzing building codes and local regulations and space and site requirements, drawing plans and details according to the concept and sketches and engineering calculations and specification tables, coordinating structural and electrical and mechanical design and determining the graphic representation method and drawing output order, preparing material tables and dimensions and annotations and annotation text, checking the consistency of sketches and drawings and specifications, explaining drawings to the production or construction team and providing adjustments, obtaining and compiling data and visiting the site to collect measurement data, drawing maps and charts and sections, completing and reproducing drawings according to the reproduction specifications, and supervising and training other drafting and technical personnel. United States scope: the BLS 2025 wage data median is 66,150 US dollars per year (31.80 US dollars per hour), with annual percentiles of 46,260／55,650／66,150／80,870／99,710 US dollars (hourly percentiles 22.24／26.76／31.80／38.88／47.94); the O*NET summary page gives employment of about 110,500 in 2024, a 2024—2034 projection of average (Average, 3% to 4%) and about 10,000 projected job openings (the source gives only the category and range and not a single precise percentage, and this page states it in the original wording); the preparation level is Job Zone Three (SVP 6.0 to below 7.0), the education feedback is that 42% require a bachelor's degree, the interest code is RCA, and there are 27 tasks; the work context includes use email every day 85%, telephone conversations every day 58% (another 31% weekly or more), contact with others most of the time 50%, teamwork extremely important 65%, precision or accuracy extremely important 32% (another 62% very important), decision freedom very much 29%, facing time pressure every day 14%, controlled indoor environment every day 99%, continuous sitting more than half the time 37%, working hours regular (fixed schedule) 94%, repeating the same tasks extremely important 38%, and level of competition highly competitive 14%. Chinese mainland scope: building drawing is carried out under the Unified Standard for Building Drawing GB/T 50001-2017 (approved by the Ministry of Housing and Urban-Rural Development in 2017, effective May 1, 2018), which unifies drawing sheet sizes and lines and symbols and drawing methods and dimension annotation as well as computer-aided drafting files and layers and collaborative design requirements; the drafter occupation is referenced against the four grades of the National Occupational Standard for Drafters (junior / grade five through technician / grade two); design drawing output and sign-off responsibility is borne by design units with the corresponding qualifications and registered practitioners (the rest are cited by the names and general requirements of the Regulations on the Administration of Engineering Construction Survey and Design and the standards relating to engineering design qualifications and registered architects and building information modeling (BIM), without checking article numbers item by item). This occupation has no uniform access-type professional qualification in the Chinese mainland. Public statistics have not established an occupation-level wage scope corresponding to this occupation, and this page truthfully retains the gap; this page does not provide design sign-off, structural safety or regulatory compliance opinions."
+    "summary": "Turn approved architectural or civil design inputs into drawings or models. Check dimensions, sheet numbers and revisions, and refer conflicts to the design lead."
   }
 }

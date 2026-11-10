@@ -1527,7 +1527,7 @@
         "status": "pending_mapping"
       },
       "item:printing-press-operators.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:printing-press-operators.sources.source-card.1": {
         "status": "mapped"
@@ -15961,16 +15961,34 @@
         "status": "unfilled"
       },
       "interface.quick_decision.caution_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.caution_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.experiment_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.experiment_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -23311,7 +23329,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "If you are willing to repeatedly check proofs around work orders, plates, paper, and ink, and to hold the stop and guard boundaries when the equipment is abnormal, you can learn more about printing press positions."
+              "If you dislike repeated checks or have concerns about shifts, noise, or strict stop and restart authority, ask about the actual working conditions before choosing the role."
             ]
           },
           "id": "printing-press-operators.quick-decision.fit-decision-checklist.1",
@@ -23326,7 +23344,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use a fictional work order for 1,200 sheets, double-sided four-color, to list specifications, trial prints, and spot-check points; when three of six sample sheets have defects, report only 3/6 of the sample and do not extrapolate to the whole batch."
+              "Try P-01 in section 09: check the work order and proof, calculate printed sides, and record defects and the unobserved scope before consulting the key."
             ]
           },
           "id": "printing-press-operators.quick-decision.fit-decision-checklist.2",
@@ -23340,7 +23358,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Paper-and-pencil exercise: use one fictional four-color printing work order to design first-article, per-batch spot checks, defect isolation, and shift handover records, without touching real equipment."
+              "If you enjoy checking work orders, paper and ink, verifying proofs, and writing clear handoffs, look at openings for specific press types."
             ]
           },
           "id": "printing-press-operators.quick-decision.fit-decision-checklist.3",
@@ -23356,7 +23374,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Submit a one-page work order card: 1,200 double-sided sheets make 2,400 printed sides in total, which does not equal the number of sheet feeds or the ink consumption; list the three check points of ink color, registration, and scuffing plus the escalation target for anomalies."
+              "Keep printed sides, actual sheet feeds, and ink use separate. Record exceptions and send them to the authorized reviewer. See section 09 for the exercise."
             ]
           },
           "id": "printing-press-operators.quick-decision.fermat-decision-card.6",
@@ -23473,7 +23491,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 2025–2035 Table 1.2 lists 51-5112 separately: about 144,000 people in 2025 and about 131,400 in 2035, a change of -8.7%, with about 12,100 openings per year; these are United States projections, not Chinese market values."
+              "BLS 2025–2035 Table 1.2 lists 51-5112 separately: about 144,000 U.S. jobs in the 2025 base year and a projected 131,400 jobs in 2035, a change of -8.7%, with about 12,100 projected openings per year. The figures describe the U.S. labor market."
             ]
           },
           "id": "printing-press-operators.profile.onet-structured-fields-block.2",
@@ -26524,14 +26542,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Reading work orders, setting ink feed and sheet feed, controlling registration, and trial print inspection are manufacturing production processes. In 2025 the pre-tax annual average for production, manufacturing, and related personnel in national above-scale manufacturing was 79,182 yuan; manufacturing non-private all personnel 113,594 yuan and private all personnel 76,055 yuan are listed separately for reference. None is the occupational median, entry-level starting salary, or income range for printing press operators; Chinese positions and the United States 51-5112 must still be checked separately by machine model, process, and employer conditions."
+              "Reading work orders, setting ink feed and sheet feed, controlling registration, and trial print inspection are manufacturing production processes. In 2025 the pre-tax annual average for production, manufacturing, and related personnel in national above-scale manufacturing was 79,182 yuan; manufacturing non-private all personnel 113,594 yuan and private all personnel 76,055 yuan are listed separately for reference. None is the occupational median, entry-level starting salary, or income range for printing press operators; Chinese positions and the United States 51-5112 must still be checked separately by machine model, process, and employer conditions. The NBS figures are 2025 pre-tax annual averages for all workers in the stated employer or industry groups, or for the broad production and related group. The separate posting sample cannot establish an occupational wage. Do not convert the U.S. median into a mainland pay estimate."
             ]
           },
           "id": "printing-press-operators.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
             "onet",
             "nbs-en",
-            "editor"
+            "editor",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26540,13 +26559,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Middle school or secondary vocational school"
+              "One employer’s supervised entry example"
             ]
           },
           "id": "printing-press-operators.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
             "editor",
-            "employer"
+            "employer",
+            "cn-print-trainee"
           ],
           "type": "prose"
         },
@@ -26555,13 +26575,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Basic printing press operation"
+              "Learn print tasks with a press lead"
             ]
           },
           "id": "printing-press-operators.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
             "editor",
-            "employer"
+            "employer",
+            "cn-print-trainee"
           ],
           "type": "prose"
         },
@@ -26570,13 +26591,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Understand work orders, paper specifications, and safety signs; actual equipment operation requires on-site training."
+              "A 2026 Beijing Lifeng Yagao Changcheng Printing posting describes learning plate changes, color checks, and ink adjustments under a lead. Its internship compensation differs from the page header; do not combine it with the lead-role rate."
             ]
           },
           "id": "printing-press-operators.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
             "editor",
-            "employer"
+            "employer",
+            "cn-print-trainee"
           ],
           "type": "prose"
         },
@@ -26585,7 +26607,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Vocational training"
+              "Training scope"
             ]
           },
           "id": "printing-press-operators.china-salary.career-snapshot-primary-locale.28",
@@ -26630,7 +26652,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Related associate program"
+              "Coursework or school practice"
             ]
           },
           "id": "printing-press-operators.china-salary.career-snapshot-primary-locale.31",
@@ -26675,7 +26697,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "On-the-job advancement"
+              "Experience on the job"
             ]
           },
           "id": "printing-press-operators.china-salary.career-snapshot-primary-locale.34",
@@ -26839,7 +26861,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the national occupational-level monthly or annual wage distribution for printing press operators in the Chinese mainland; when job hunting, check the specific offer by city, equipment, shift, overtime, and social insurance basis."
+              "Check training, equipment authorization, and shifts, then ask separately about base pay, allowances, overtime, and insurance. The table combines preparation tips with one historical example."
             ]
           },
           "id": "printing-press-operators.china-salary.career-snapshot-primary-locale.45",
@@ -26854,7 +26876,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The items above are 2025 pre-tax annual average background for manufacturing and the broad occupation group, and the items below are pricing check suggestions, not recruitment samples or an occupational wage range. Personal income cannot be back-calculated from an industry average, nor inferred by converting the United States 45,780 USD/year at an exchange rate. BLS 51-5112 United States precise occupation data｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "One employer’s requirements do not establish a national education threshold. A paper exercise or course does not authorize machine operation."
             ]
           },
           "id": "printing-press-operators.china-salary.career-snapshot-primary-locale.46",
@@ -26941,12 +26963,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Check base pay, piece rates, overtime, and social insurance against the employer's announcement"
+              "One Zhuhai Zhengye Packaging listing quotes CNY 8,000–10,000 per month for a lead operator for a water-based printer-slotter. The posting is undated, its current status is unverified, and it does not break out base pay, overtime, or incentives. This is one advertised rate for a lead role, not trainee pay or a mainland occupational median. Treat it as a carton-production lead posting, not a direct wage sample for occupation 6-08-01-02."
             ]
           },
           "id": "printing-press-operators.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "r2-pay-2"
+            "r2-pay-2",
+            "cn-print-posting"
           ],
           "type": "prose"
         },
@@ -26983,13 +27006,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "United States SOC 51-5112 is an occupational classification; Chinese wage statistics do not list printing press positions separately under that code."
+              "Mainland China’s classification places this work under printing operators (6-08-01-02). Compare the machine, proof checks, and lead duties in each job description rather than treating every press opening as a lead role."
             ]
           },
           "id": "printing-press-operators.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "editor",
-            "r2-pay-1"
+            "r2-pay-1",
+            "cn-print-occupation",
+            "cn-print-posting"
           ],
           "type": "prose"
         },
@@ -27048,7 +27073,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "United States precise occupational tasks: O*NET 51-5112.00｜https://www.onetonline.org/link/details/51-5112.00; 2025 wage percentiles: BLS wage table as posted on O*NET｜https://www.onetonline.org/link/localwages/51-5112.00?st=NJ; 2025–2035 employment: BLS Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "United States precise occupational tasks: O*NET 51-5112.00｜https://www.onetonline.org/link/details/51-5112.00; 2025 wage percentiles: BLS wage table as posted on O*NET｜https://www.onetonline.org/link/localwages/51-5112.00; 2025–2035 employment: BLS Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "printing-press-operators.us-salary.career-snapshot-secondary-locale.8",
@@ -27078,7 +27103,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May 2025 United States 51-5112 wage 10th percentile, not an entry-level wage.；O*NET 51-5112.00 United States wage percentile table｜https://www.onetonline.org/link/localwages/51-5112.00?st=NJ"
+              "May 2025 United States 51-5112 wage 10th percentile, not an entry-level wage.；O*NET 51-5112.00 United States wage percentile table｜https://www.onetonline.org/link/localwages/51-5112.00"
             ]
           },
           "id": "printing-press-operators.us-salary.career-snapshot-secondary-locale.10",
@@ -27106,7 +27131,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May 2025 wage 25th percentile; a percentile does not equal years of experience.；O*NET 51-5112.00 United States wage percentile table｜https://www.onetonline.org/link/localwages/51-5112.00?st=NJ"
+              "May 2025 wage 25th percentile; a percentile does not equal years of experience.；O*NET 51-5112.00 United States wage percentile table｜https://www.onetonline.org/link/localwages/51-5112.00"
             ]
           },
           "id": "printing-press-operators.us-salary.career-snapshot-secondary-locale.12",
@@ -27134,7 +27159,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May 2025 United States precise occupation annual wage median, not a personal offer.；O*NET 51-5112.00 United States wage percentile table｜https://www.onetonline.org/link/localwages/51-5112.00?st=NJ"
+              "May 2025 United States precise occupation annual wage median, not a personal offer.；O*NET 51-5112.00 United States wage percentile table｜https://www.onetonline.org/link/localwages/51-5112.00"
             ]
           },
           "id": "printing-press-operators.us-salary.career-snapshot-secondary-locale.14",
@@ -27162,7 +27187,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May 2025 wage 75th percentile, does not represent a supervisory rank.；O*NET 51-5112.00 United States wage percentile table｜https://www.onetonline.org/link/localwages/51-5112.00?st=NJ"
+              "May 2025 wage 75th percentile does not represent a supervisory rank.；O*NET 51-5112.00 United States wage percentile table｜https://www.onetonline.org/link/localwages/51-5112.00"
             ]
           },
           "id": "printing-press-operators.us-salary.career-snapshot-secondary-locale.16",
@@ -27190,7 +27215,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May 2025 wage 90th percentile, does not represent guaranteed promotion income.；O*NET 51-5112.00 United States wage percentile table｜https://www.onetonline.org/link/localwages/51-5112.00?st=NJ"
+              "May 2025 wage 90th percentile does not represent guaranteed promotion income.；O*NET 51-5112.00 United States wage percentile table｜https://www.onetonline.org/link/localwages/51-5112.00"
             ]
           },
           "id": "printing-press-operators.us-salary.career-snapshot-secondary-locale.18",
@@ -27204,7 +27229,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "About 144,000 people"
+              "About 144,000 jobs"
             ]
           },
           "id": "printing-press-operators.us-salary.career-snapshot-secondary-locale.19",
@@ -27218,7 +27243,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 base-year employment count in the BLS 2025–2035 projection, in persons.；BLS 2025–2035 occupational projections Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "The 2025 base-year employment count in the BLS 2025–2035 projection, measured in jobs.；BLS 2025–2035 occupational projections Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "printing-press-operators.us-salary.career-snapshot-secondary-locale.20",
@@ -27247,7 +27272,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS projects 144.0 thousand in 2025 and 131.4 thousand in 2035, a net decrease of 12.6 thousand in the original table; the overall employment projection is not AI-attributed. BLS 2025–2035 occupational projections Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "BLS lists 144,000 U.S. jobs in the 2025 base year and projects 131,400 jobs in 2035, a net decrease of 12,600 jobs. The projection does not attribute the change to AI.; BLS 2025–2035 occupational projections Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "printing-press-operators.us-salary.career-snapshot-secondary-locale.22",
@@ -27721,31 +27746,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Print binding and finishing workers",
@@ -28168,7 +28193,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Can you recalculate 1,200 double-sided sheets making 2,400 printed sides?",
+              "Can you work out printed sides from a work order and explain why that differs from machine sheet feeds?",
               "Can you distinguish a sample defect rate from a batch defect rate?"
             ]
           },
@@ -29193,7 +29218,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Sample sheet 201 shows registration misalignment, so hold delivery of the affected batch; then check the ink color record for sheet 401 and the scuffing record for sheet 601."
+              "When a spot check finds a registration or color issue, record the sample and observed deviation and follow the plant’s hold and escalation procedure. Use section 09 to decide which fictional samples need escalation."
             ]
           },
           "id": "printing-press-operators.risk.career-risk-cards.26",
@@ -29318,6 +29343,7 @@
           },
           "id": "printing-press-operators.risk.career-risk-cards.34",
           "source_refs": [
+            "bls",
             "onet",
             "facilities"
           ],
@@ -29375,7 +29401,7 @@
           },
           "id": "printing-press-operators.risk.career-risk-cards.38",
           "source_refs": [
-            "privacy"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -29389,7 +29415,7 @@
           },
           "id": "printing-press-operators.risk.career-risk-cards.39",
           "source_refs": [
-            "employer"
+            "operations"
           ],
           "type": "prose"
         }
@@ -29476,7 +29502,7 @@
                 "values": [
                   "Work order comprehension and education background",
                   "BLS 51-5112 lists typical entry-level education as high school or equivalent; specific employers may have other requirements.",
-                  "Check whether the announcement requires reading work orders, measurement, handling, and equipment training."
+                  "A 2026 Beijing Lifeng Yagao Changcheng Printing posting describes learning plate changes, color checks, and ink adjustments under a lead. Its internship compensation differs from the page header; do not combine it with the lead-role rate."
                 ]
               },
               {
@@ -29510,7 +29536,9 @@
             "bls",
             "onet",
             "employer",
-            "editor"
+            "editor",
+            "cn-print-trainee",
+            "cn-print-posting"
           ],
           "title": "Basis for entry checks and editorial preparation suggestions",
           "type": "cards"
@@ -29523,16 +29551,16 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and settings｜all editorial fictional paper-and-pencil exercises",
+                  "Fictional inputs",
                   "You are the work order checker at a fictional printing plant and need to make a first-article and spot-check card for 1,200 A4 double-sided four-color flyers; do not touch machines and do not fill in directly executable setting values.",
                   "A1: the work order reads A4, 1,200 conforming copies, double-sided four-color, 120 gsm paper; check the ink color and registration of the approved proof. Trial-run losses and the actual number of sheets fed are unknown.",
-                  "A2: the editors set one sheet out of every 200 for sampling, with sample numbers 1, 201, 401, 601, 801, and 1001; the sampling plan is for practice only and does not represent a plant standard."
+                  "A2: the editors set one sheet out of every 200 for sampling, with sample numbers 1, 201, 401, 601, 801, and 1001; the sampling plan is for practice only and does not represent a plant standard. Separately, the pre-release lot contains 1,200 sheets numbered 1–1,200. They have not been accepted. This lot count happens to equal the order quantity for conforming delivery."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task and output",
+                  "Task and deliverable | try it first",
                   "A3: samples 1, 801, and 1001 conform; 201 has registration misalignment, 401 is too light in cyan, and 601 has ink scuffing. A4: the batch has not been released and the other 1,194 sheets were not observed.",
                   "A5: the practitioner only records and proposes isolation; the quality inspection responsible person decides on release or rework, and only trained operators may set machines under on-site procedure. Submit the calculation, the sampling defect table, the items still to be verified, and the escalation target."
                 ]
@@ -29540,16 +29568,17 @@
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference approach (do it independently first)",
-                  "A5: 1,200 double-sided sheets make 2,400 printed sides, which is the number of sides in the finished product and does not equal the number of machine sheet passes or the ink consumption. 3 of the 6 sample sheets have defects, which is only a 50% sample share.",
-                  "List the different defects in 201, 401, and 601; suspend the affected batch and hand the scope to the quality responsible person for judgment, and machine adjustment is performed by authorized personnel."
+                  "Calculation and observations",
+                  "Complete your own work-order calculation and itemized spot-check record.",
+                  "Keep the original inputs, units, and open items."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries and review",
-                  "Others should be able to recalculate 2,400 printed sides from A1–A5 and find the six sample sheets, the three defect types, and the 1,194 unobserved sheets."
+                  "Before submitting",
+                  "Make each judgment traceable to A1–A5.",
+                  "Record any evidence still needed and who should follow up."
                 ]
               }
             ]
@@ -29558,7 +29587,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: one fictional printing work order",
+          "title": "P-01 | First-article and spot-check card",
           "type": "cards"
         },
         {
@@ -29570,23 +29599,23 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Work order and proof card",
-                  "State A4, 1,200 sheets, double-sided four-color, 120 gsm paper, and the six sample numbers.",
-                  "Others can recalculate the printed sides and check the sample numbers."
+                  "Record the order specifications and sample identifiers from A1 and A2.",
+                  "Make the quantity and sample selection easy to check."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "Defect and spot-check card",
-                  "Per A3, record registration misalignment, light cyan, and scuffing separately.",
-                  "Defect classification, position, and work order are traceable."
+                  "Use A3 to record each observation, including the location of any defect.",
+                  "Keep the sample result separate from the batch status."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "Escalation handover card",
-                  "Note the hold on release, the 1,194 unobserved sheets, and the pending decision of the quality responsible person. Do not treat the 50% of the six sample sheets as the batch defect rate."
+                  "Record the open scope, the handoff request, and the person responsible for the next decision."
                 ]
               },
               {
@@ -29624,20 +29653,20 @@
             "rows": [
               [
                 "Reading a work order in the interview",
-                "Whether you can distinguish 2 printed sides from the sheet count",
-                "Point out that A1 gives only 1,200 finished copies and that the actual sheet feed and trial-run waste sheets are unknown.",
+                "Can you distinguish the order quantity from the materials used?",
+                "Show which quantities follow from the work order and which need more information.",
                 "A paper-and-pencil exercise cannot prove real machine ability."
               ],
               [
                 "Recalculating spot checks in the interview",
-                "Whether you can calculate 1,200×2 and 3/6",
-                "Calculate 2,400 printed sides and a sample 3/6=50% and state that the batch cannot be extrapolated.",
-                "The other 1,194 sheets and the actual sheet feed and waste sheet counts are unknown."
+                "Can you recalculate the figures and explain the sampling scope?",
+                "Show your calculations, denominators, and the scope still to check.",
+                "Use only the sample supplied in the exercise."
               ],
               [
                 "Probation quality records",
                 "Whether you can record the batch, sample numbers, and defects clearly",
-                "Handover records can be traced to 201, 401, 601, and the last conforming sample.",
+                "The handoff identifies the batch, the sample numbers, and the observations.",
                 "Using real data must follow plant rules."
               ],
               [
@@ -29672,42 +29701,42 @@
                 "id": "entry-trial-day-2",
                 "values": [
                   "Day two",
-                  "Day two: recalculate 1,200×2=2,400 printed sides and distinguish the finished-product count from the machine sheet feed."
+                  "Calculate the planned printed sides from the work order and distinguish the finished quantity from the actual sheet feed."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day three",
-                  "Day three: build the sample spot-check table from A3 and record the three different defect types."
+                  "Use A3 to record observations and defects item by item."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day four",
-                  "Day four: calculate the sample 3/6=50% and note that the other 1,194 sheets are unknown."
+                  "Calculate the sample share and state the scope you have yet to observe."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day five",
-                  "Day five: based on A4/A5, write a handover request to hold release, have quality recheck, and authorize machine setting."
+                  "Use A4 and A5 to write a handoff request with open decisions and their owners."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day six",
-                  "Day six: after sealing the first draft, look at the reference approach and correct the defect classification, calculation, or over-reach suggestions."
+                  "Finish and save your own first draft, with calculations and reasons. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day seven",
-                  "Day seven: hand in the four cards for work order, spot check, escalation, and method, and record the most effortful step and the next practice."
+                  "After saving your day 6 draft, open “P-01 answer key and rubric (open on day 7)” in the FAQ. Use the rubric to review your four cards and record one revision with a reason."
                 ]
               }
             ]
@@ -29724,11 +29753,11 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "The work order card states 1,200 A4 double-sided four-color sheets and the paper weight, and does not fabricate trial-run losses.",
-              "The sample numbers are 1, 201, 401, 601, 801, and 1001; the six samples match A2.",
-              "The defects are registration misalignment in 201, light cyan in 401, and ink scuffing in 601; the other three sample sheets conform.",
-              "3/6=50% describes the sample only and does not represent the batch; the other 1,194 sheets are unknown.",
-              "The anomaly card requires isolating the affected batch and letting the quality inspection responsible person decide whether to release.",
+              "Record the specifications and quantities, with any information still to check.",
+              "Make each sample number and observation traceable to the materials.",
+              "Record observations, defects, and locations item by item.",
+              "Separate the sample share, batch status, and unobserved scope.",
+              "State the handoff request and who makes the next decision.",
               "Machine setting, jam clearing, and repairs must be done under procedure by people who are on-site trained and authorized.",
               "The work and reflection prove only the paper-and-pencil method and are not equal to employer hiring or equipment qualification."
             ]
@@ -29855,16 +29884,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "A1–A5 and the seven-day plan on this page are editorial fictional paper-and-pencil exercises and contain no real recruitment, production data, or directly executable equipment parameters.",
-              "Position salaries, equipment, and hiring status must be verified against local employers and official sources; this page does not treat United States statistics or examples as general Chinese conditions."
+              "Zhuhai Zhengye Packaging’s lead operator for a water-based printer-slotter listing includes color matching, first-piece approval, and assigning crew work. Its summary says under one year of experience, while the description asks for several years as a lead on similar equipment. Verify before applying. This cross-process example combines printing and carton production; classification 6-07-02-00 separately covers corrugated-board printing and slotting. A 2026 Beijing Lifeng Yagao Changcheng Printing posting describes learning plate changes, color checks, and ink adjustments under a lead. Its internship compensation differs from the page header; do not combine it with the lead-role rate."
             ]
           },
           "id": "printing-press-operators.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "cn-print-posting",
+            "cn-print-trainee",
+            "cn-print-occupation"
           ],
           "title": "Recruitment sample notes",
           "type": "notice"
@@ -31147,7 +31174,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 51-5112 United States overall employment projection: 144.0 thousand in 2025 to 131.4 thousand in 2035, a change of -8.7%, with about 12.1 thousand openings per year; not AI-attributed, not a personal probability of job loss, and it cannot directly describe the Chinese market."
+              "BLS 51-5112 U.S. employment was 144,000 jobs in the 2025 base year and is projected to reach 131,400 jobs in 2035, a change of -8.7%, with about 12,100 projected openings per year; not AI-attributed, not a personal probability of job loss, and it cannot directly describe the Chinese market."
             ]
           },
           "id": "printing-press-operators.market-signals.market-signal-card.8",
@@ -31892,7 +31919,7 @@
                 "question_key": "career.faq.printing-press-operators.comparison"
               },
               {
-                "answer": "Use fictional work orders to practice paper and ink specifications, first articles, and six-sheet spot checks, and observe whether you can keep checking ink color and registration under the machine pace and stop and escalate promptly on guard or quality anomalies. Interest assessments are only for framing questions.",
+                "answer": "Use P-01 to practice reading a work order, checking a proof, recording inspection results, and handing over an exception. The paper exercise tests these records, not your performance at machine speed, operating ability, or safety authorization.",
                 "id": "printing-press-operators.faq.3",
                 "question": "How do I judge whether I am suited to a printing press position?",
                 "question_key": "career.faq.printing-press-operators.fit"
@@ -31904,7 +31931,7 @@
                 "question_key": "career.faq.printing-press-operators.ai-impact"
               },
               {
-                "answer": "Insufficient evidence: the precise national occupational wage for printing press operators in the Chinese mainland. In 2025 the pre-tax annual average for production positions in above-scale manufacturing was 79,182 yuan; manufacturing non-private all personnel 113,594 yuan and private all personnel 76,055 yuan are each listed as background, not this occupation's median, entry-level offer, or income range. Actual income must be checked against the employer's announcement by city, machine model, shift, overtime, and social insurance.",
+                "answer": "No comparable nationwide occupational wage was verified for mainland China. The CNY 79,182 figure is the 2025 pre-tax annual average for production and related workers at above-scale manufacturing enterprises, for context only. One Zhuhai Zhengye Packaging listing quotes CNY 8,000–10,000 per month for a lead operator for a water-based printer-slotter. The posting is undated, its current status is unverified, and it does not break out base pay, overtime, or incentives. This is one advertised rate for a lead role, not trainee pay or a mainland occupational median. Treat it as a carton-production lead posting, not a direct wage sample for occupation 6-08-01-02.",
                 "id": "printing-press-operators.faq.5",
                 "question": "What is the wage of printing press operators in the Chinese mainland?",
                 "question_key": "career.faq.printing-press-operators.china-pay"
@@ -31916,7 +31943,7 @@
                 "question_key": "career.faq.printing-press-operators.us-pay"
               },
               {
-                "answer": "BLS lists the United States typical entry-level education for 51-5112 as high school or equivalent with moderate on-the-job training. Specific Chinese position requirements for education, experience, machine model training, and shift follow the target employer.",
+                "answer": "The U.S. BLS lists high school or equivalent as typical entry education. In mainland China, verify each employer’s requirements. Zhuhai Zhengye Packaging’s lead operator for a water-based printer-slotter listing includes color matching, first-piece approval, and assigning crew work. Its summary says under one year of experience, while the description asks for several years as a lead on similar equipment. Verify before applying. This cross-process example combines printing and carton production; classification 6-07-02-00 separately covers corrugated-board printing and slotting.",
                 "id": "printing-press-operators.faq.7",
                 "question": "What education and experience are needed to enter the field?",
                 "question_key": "career.faq.printing-press-operators.education-path"
@@ -31938,6 +31965,12 @@
                 "id": "printing-press-operators.faq.10",
                 "question": "What is the outlook in the United States, and where can I move?",
                 "question_key": "career.faq.printing-press-operators.outlook-transition"
+              },
+              {
+                "answer": "The order calls for 1,200 conforming double-sided sheets, or 2,400 planned printed sides, which is the number of sides in the finished product and does not equal the number of machine sheet passes or the ink consumption. 3 of the 6 sample sheets have defects, which is only a 50% sample share.\n\nList the different defects in 201, 401, and 601; suspend the affected batch and hand the scope to the quality responsible person for judgment, and machine adjustment is performed by authorized personnel.\n\nOthers should be able to recalculate 2,400 printed sides from A1–A5 and find the six sample sheets, the three defect types, and the 1,194 unobserved sheets.\n\nScore four checks 0–2 each: work order and arithmetic, traceable samples and defects, explicit unknowns, and the hold plus next owner. Give 2 for complete and traceable, 1 for partial, and 0 for guesses or acting without authority.",
+                "id": "printing-press-operators.faq.11",
+                "question": "P-01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.printing-press-operators.exercise-answer-key"
               }
             ]
           },
@@ -31950,7 +31983,10 @@
             "privacy",
             "cnclass",
             "editor",
-            "nbs-en"
+            "nbs-en",
+            "cn-print-posting",
+            "cn-print-occupation",
+            "onet-wages"
           ],
           "type": "faq"
         },
@@ -31973,14 +32009,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational identity and tasks are based on O*NET 51-5112.00; United States wages and the 2025–2035 outlook use the same occupation's O*NET/BLS rows; Chinese wages cite only the National Bureau of Statistics industry and broad occupation group."
+              "O*NET provides U.S. tasks and wages, and the BLS occupation row provides the outlook. Mainland occupational classification and job postings illustrate duties; the NBS broad wage groups provide context only."
             ]
           },
           "id": "printing-press-operators.sources.source-card.2",
           "source_refs": [
             "onet",
             "bls",
-            "nbs"
+            "nbs",
+            "cn-print-occupation",
+            "cn-print-posting",
+            "onet-wages",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31989,7 +32029,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Verification date for the material on this page: 2026-09-26; specific plant machine models, recruitment conditions, and wages must be checked against the announcement."
+              "The classification, postings, wage data, and employment sources for this update were checked on November 9, 2026. Confirm current vacancies, equipment, and shifts with the employer."
             ]
           },
           "id": "printing-press-operators.sources.source-card.3",
@@ -32003,7 +32043,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The Chinese text on this page is used to explain the United States official occupational scope and does not establish mutual recognition of qualifications between countries; all fictional exercise materials are editorial designs and do not represent employer standards or legal requirements. Personal results, orders, and payment information do not go onto public pages."
+              "The mainland and U.S. sources describe their own occupations and labor markets. The fictional paper exercise does not establish employer standards or machine authorization."
             ]
           },
           "id": "printing-press-operators.sources.source-card.4",
@@ -32048,19 +32088,25 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "path",
                 "id": "navigation-6",
                 "relation": "related-evidence",
                 "url": "/en/career/jobs/printing-press-operators"
+              },
+              {
+                "entity": "secondary_cta",
+                "id": "navigation-7",
+                "relation": "related-evidence",
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               }
             ]
           },
@@ -32099,7 +32145,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "United States 51-5112 employment was 144.0 thousand in 2025 and 131.4 thousand in 2035.",
+                  "U.S. employment for 51-5112 was 144,000 jobs in the 2025 base year and is projected to reach 131,400 jobs in 2035.",
                   "A change of -8.7%, with 12.1 thousand annual average openings; typical entry-level education is high school or equivalent."
                 ],
                 "evidence_type": "official projection table",
@@ -32115,12 +32161,12 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "United States 51-5112 employment was 144.0 thousand in 2025 and 131.4 thousand in 2035.",
+                  "U.S. employment for 51-5112 was 144,000 jobs in the 2025 base year and is projected to reach 131,400 jobs in 2035.",
                   "A change of -8.7%, with 12.1 thousand annual average openings; typical entry-level education is high school or equivalent."
                 ],
                 "evidence_type": "official projection table",
                 "id": "ep",
-                "limitation": "The separately listed 51-5112 row: 144.0 thousand in 2025, 131.4 thousand in 2035, a change of -8.7%, and 12.1 thousand annual average openings.",
+                "limitation": "The 51-5112 row lists 144,000 U.S. jobs in the 2025 base year, a projected 131,400 jobs in 2035, a change of -8.7%, and 12,100 projected annual openings.",
                 "market": "United States",
                 "name": "BLS 2025–2035 51-5112 occupational projections and characteristics tables",
                 "period": "2025–2035 projection",
@@ -32129,20 +32175,20 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "In 2025 the National Bureau of Statistics published urban unit wages, listed separately by private and non-private units.",
-                  "Manufacturing and the production and manufacturing broad occupation group can serve as background, but this occupation's wage percentiles cannot be extracted."
+                  "The annual wage 10th percentile is 33,330 USD and the median is 45,780 USD.",
+                  "The 90th percentile is 63,520 USD; percentiles are not entry-level wages."
                 ],
-                "evidence_type": "official wage table",
+                "evidence_type": "BLS wage table via O*NET",
                 "id": "oews",
-                "limitation": "Manufacturing and the production and manufacturing broad occupation group serve only for background comparison and cannot be called this occupation's median.",
-                "market": "Chinese mainland",
-                "name": "National Bureau of Statistics 2025 urban unit wages",
-                "period": "2025",
-                "publisher": "National Bureau of Statistics",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+                "limitation": "Take the United States row; wage percentiles are not guaranteed values for entry-level or senior positions.",
+                "market": "United States",
+                "name": "O*NET 51-5112.00 United States 2025 wage percentiles",
+                "period": "May 2025 wages",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/51-5112.00"
               },
               {
                 "accessed_at": "2026-08-30",
@@ -32173,11 +32219,11 @@
                 "name": "Work Safety Law of the People's Republic of China (2021 amendment)",
                 "period": "2021 revision; effective 2021-09-01; accessed 2026-08-30",
                 "publisher": "Standing Committee of the National People's Congress / State Administration for Market Regulation",
-                "scope": "combined_official",
+                "scope": "contextual",
                 "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "The NIST generative AI risk framework lists risk categories such as data privacy and information integrity.",
                   "Before connecting customer work orders, images, and batch records to AI, data permission and leakage should be assessed."
@@ -32187,13 +32233,13 @@
                 "limitation": "A voluntary risk framework; does not provide printing press operator adoption rates or safety authorization.",
                 "market": "United States / general",
                 "name": "NIST AI RMF Generative AI Profile",
-                "period": "2021 revision; effective 2021-09-01; accessed 2026-08-30",
+                "period": "2024-07-26",
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "OSHA machine guarding material explains that dangerous moving parts should have appropriate guards.",
                   "The specific guarding of blades, pinch points, and conveying devices must still be verified against the machine model and on-site procedure."
@@ -32203,13 +32249,13 @@
                 "limitation": "United States machine guarding requirements and guidance; Chinese contexts must follow the applicable regulations.",
                 "market": "United States",
                 "name": "OSHA Machine Guarding",
-                "period": "2021 revision; effective 2021-09-01; accessed 2026-08-30",
+                "period": "Current reference; no publication date shown",
                 "publisher": "Occupational Safety and Health Administration",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/machine-guarding"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "1910.147 sets out procedures for controlling hazardous energy during maintenance or repair in United States workplaces.",
                   "Anomaly shutdown and restart are performed by authorized personnel under the applicable process and cannot be replaced by AI suggestions."
@@ -32219,7 +32265,7 @@
                 "limitation": "United States hazardous energy control rules; Chinese contexts must follow the applicable regulations.",
                 "market": "United States",
                 "name": "OSHA 29 CFR 1910.147 Hazardous Energy Control",
-                "period": "2021 revision; effective 2021-09-01; accessed 2026-08-30",
+                "period": "Current reference; no publication date shown",
                 "publisher": "Occupational Safety and Health Administration",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
@@ -32253,7 +32299,7 @@
                 "name": "Work Safety Law of the People's Republic of China (2021 amendment)",
                 "period": "2021 revision; effective 2021-09-01; accessed 2026-08-30",
                 "publisher": "Standing Committee of the National People's Congress / State Administration for Market Regulation",
-                "scope": "combined_official",
+                "scope": "contextual",
                 "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
               },
               {
@@ -32277,7 +32323,7 @@
                 "accessed_at": "2026-08-30",
                 "details": [
                   "A1–A5 are editorial paper-and-pencil exercises for 1,200 double-sided printed sheets.",
-                  "The 50% of six sample sheets describes the sample only and does not estimate the batch defect rate."
+                  "The sample result describes only the inspected sheets and does not estimate the batch defect rate."
                 ],
                 "evidence_type": "editorial synthesis",
                 "id": "editor",
@@ -32290,7 +32336,7 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "The framework recommends identifying, measuring, and managing the error and data risks of generative AI.",
                   "This page uses it to design a process for keeping the original work order, the reviewer, and a small-scale pilot."
@@ -32300,7 +32346,7 @@
                 "limitation": "A voluntary risk framework; does not provide printing press operator adoption rates or safety authorization.",
                 "market": "United States / general",
                 "name": "NIST AI RMF Generative AI Profile",
-                "period": "2024 NIST AI 600-1",
+                "period": "2024-07-26",
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
@@ -32350,23 +32396,23 @@
                 "name": "Work Safety Law of the People's Republic of China (2021 amendment)",
                 "period": "2021 revision; effective 2021-09-01; accessed 2026-08-30",
                 "publisher": "Standing Committee of the National People's Congress / State Administration for Market Regulation",
-                "scope": "combined_official",
+                "scope": "contextual",
                 "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "51-5113 is the adjacent binding and finishing occupation after receiving printed sheets.",
                   "Printing press experience does not automatically cover cutting and binding machine authorization."
                 ],
                 "evidence_type": "occupational description",
                 "id": "purchasing-managers",
-                "limitation": "The adjacent printing press operating occupation; not printing press operator data.",
+                "limitation": "Used to compare the neighboring binding and finishing stages. This record covers print binding and finishing workers.",
                 "market": "United States",
                 "name": "O*NET 51-5113.00 print binding and finishing workers",
-                "period": "2021 revision; effective 2021-09-01; accessed 2026-08-30",
+                "period": "Current O*NET occupation profile",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/51-5113.00"
               },
               {
@@ -32449,7 +32495,7 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "The annual wage 10th percentile is 33,330 USD and the median is 45,780 USD.",
                   "The 90th percentile is 63,520 USD; percentiles are not entry-level wages."
@@ -32477,7 +32523,7 @@
                 "name": "O*NET 51-9196.00 paper goods machine operators",
                 "period": "Occupation or safety material consulted in 2026; not a Chinese law effective date",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/51-9196.00"
               },
               {
@@ -32511,6 +32557,53 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "6-08-01-02 covers printing operations, including transferring text or images to a substrate.",
+                  "6-07-02-00 covers carton and box production, including printing and slotting corrugated board."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "cn-print-occupation",
+                "limitation": "Defines mainland work stages and occupation categories. It does not establish exact U.S. equivalence or wages.",
+                "market": "Mainland China",
+                "name": "China occupational classification: printing occupations",
+                "period": "2022",
+                "publisher": "China Ministry of Human Resources and Social Security et al.; hosted by Guangyuan HRSS",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Zhuhai Zhengye Packaging’s lead operator for a water-based printer-slotter listing includes color matching, first-piece approval, and assigning crew work. Its summary says under one year of experience, while the description asks for several years as a lead on similar equipment. Verify before applying. This cross-process example combines printing and carton production.",
+                  "One Zhuhai Zhengye Packaging listing quotes CNY 8,000–10,000 per month for a lead operator for a water-based printer-slotter. The posting is undated, its current status is unverified, and it does not break out base pay, overtime, or incentives. This is one advertised rate for a lead role, not trainee pay or a mainland occupational median. Treat it as a carton-production lead posting, not a direct wage sample for occupation 6-08-01-02."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-print-posting",
+                "limitation": "One posting. Current vacancy status is unverified; it does not measure typical pay, job counts, or employment growth.",
+                "market": "Mainland China",
+                "name": "Zhuhai Zhengye Packaging: press lead posting",
+                "period": "Posting date not shown; checked 2026-11-09",
+                "publisher": "BIT Zhuhai careers portal",
+                "scope": "recruitment_proxy",
+                "url": "https://job.bitzh.edu.cn/web/Index/job-detail?id=140395"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A 2026 Beijing Lifeng Yagao Changcheng Printing posting describes learning plate changes, color checks, and ink adjustments under a lead. Its internship compensation differs from the page header; do not combine it with the lead-role rate."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-print-trainee",
+                "limitation": "One posting. Current vacancy status is unverified; it does not measure typical pay, job counts, or employment growth.",
+                "market": "Mainland China",
+                "name": "Beijing Lifeng Yagao Changcheng Printing: press trainee posting",
+                "period": "2026-05-25",
+                "publisher": "Tianjin Vocational Institute careers portal",
+                "scope": "recruitment_proxy",
+                "url": "https://jyw.tjtc.edu.cn/correcruit/content/id/14402.html"
               }
             ]
           },
@@ -34980,7 +35073,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "id": "privacy",
+            "id": "cnclass",
             "label": {
               "$link": "printing-press-operators.risk.career-risk-cards.7",
               "block": "risk",
@@ -35003,7 +35096,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "employer",
+            "id": "operations",
             "label": {
               "$link": "printing-press-operators.risk.career-risk-cards.7",
               "block": "risk",
@@ -35384,11 +35477,11 @@
             "ai_heading": "Will AI affect printing press operator wages?",
             "driver_heading": "Which industries and directions use this occupation?",
             "official_heading": "Wage reference range and employer pricing check suggestions",
-            "scenario_caption": "Education background, common position directions, and checking suggestions (editorial compilation, not wage statistics)",
-            "scenario_heading": "Which position directions do printing press operators with different education backgrounds usually start from?",
-            "scenario_interpretation_label": "Notes and checking suggestions",
-            "scenario_role_label": "Education background",
-            "scenario_value_label": "Common position directions"
+            "scenario_caption": "Entry preparation and employer checks",
+            "scenario_heading": "What should you check before applying?",
+            "scenario_interpretation_label": "Ask the employer",
+            "scenario_role_label": "What to check",
+            "scenario_value_label": "How to prepare"
           },
           "us_growth": {
             "$item": "printing-press-operators.china-salary.career-snapshot-primary-locale.58",
@@ -37208,7 +37301,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit printing press operator work",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37285,7 +37378,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI Personality Test"
           },
           {
             "href": {
@@ -37295,7 +37388,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five Personality Test"
           },
           {
             "href": {
@@ -37305,7 +37398,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Enneagram Test"
           },
           {
             "href": {
@@ -37315,7 +37408,17 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "IQ Reasoning Assessment"
+          },
+          {
+            "href": {
+              "$link": "printing-press-operators.navigation.links.1",
+              "block": "navigation",
+              "copy_key": "career.item.navigation-links",
+              "entry": "navigation-7",
+              "field": "url"
+            },
+            "label": "EQ Assessment"
           }
         ]
       },
@@ -37330,6 +37433,9 @@
     "interface": {
       "interface.fit.directions_heading": "Which printing press operation direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand interest codes",
+      "interface.quick_decision.caution_heading": "When should you think twice about this role?",
+      "interface.quick_decision.experiment_heading": "How can you try part of the job on paper?",
+      "interface.quick_decision.suit_heading": "Who might enjoy this work?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "United States salary reference",
@@ -37513,7 +37619,7 @@
       },
       {
         "derivation": null,
-        "display_value": "About 144,000 people",
+        "display_value": "About 144,000 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "2025 employment count",
@@ -37548,11 +37654,11 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "The linked O*NET table gives national occupation percentiles. No comparable figure was verified for this employer industry.",
         "display_value": "Insufficient evidence: no comparable 51-5112 wage for this industry was verified on this page",
         "fact_id": "us-industry-wage-printing-mfg-2025",
         "market": "United States",
-        "measure": "The industry-level 51-5112 annual wage median",
+        "measure": "U.S. 51-5112 industry wage evidence gap",
         "occupation_scope": "United States 51-5112 precise occupation; the industry-level value was not verified",
         "period": "updated 2026; accessed 2026-08-30",
         "source_refs": [
@@ -37560,11 +37666,11 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "The linked O*NET table gives national occupation percentiles. No comparable figure was verified for this employer industry.",
         "display_value": "Insufficient evidence: no comparable 51-5112 wage for this industry was verified on this page",
         "fact_id": "us-industry-wage-paper-mfg-2025",
         "market": "United States",
-        "measure": "The industry-level 51-5112 annual wage median",
+        "measure": "U.S. 51-5112 industry wage evidence gap",
         "occupation_scope": "United States 51-5112 precise occupation; the industry-level value was not verified",
         "period": "updated 2026; accessed 2026-08-30",
         "source_refs": [
@@ -37572,11 +37678,11 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "The linked O*NET table gives national occupation percentiles. No comparable figure was verified for this employer industry.",
         "display_value": "Insufficient evidence: no comparable 51-5112 wage for this industry was verified on this page",
         "fact_id": "us-industry-wage-commercial-printing-2025",
         "market": "United States",
-        "measure": "The industry-level 51-5112 annual wage median",
+        "measure": "U.S. 51-5112 industry wage evidence gap",
         "occupation_scope": "United States 51-5112 precise occupation; the industry-level value was not verified",
         "period": "updated 2026; accessed 2026-08-30",
         "source_refs": [
@@ -37584,11 +37690,11 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "The linked O*NET table gives national occupation percentiles. No comparable figure was verified for this employer industry.",
         "display_value": "Insufficient evidence: no comparable 51-5112 wage for this industry was verified on this page",
         "fact_id": "us-industry-wage-other-materials-2025",
         "market": "United States",
-        "measure": "The industry-level 51-5112 annual wage median",
+        "measure": "U.S. 51-5112 industry wage evidence gap",
         "occupation_scope": "United States 51-5112 precise occupation; the industry-level value was not verified",
         "period": "updated 2026; accessed 2026-08-30",
         "source_refs": [
@@ -37746,7 +37852,7 @@
         "availability": "available",
         "fact_ref": "cn-clerical-2025",
         "key": "china_pay",
-        "label": "2025 China manufacturing production position average (above-scale)"
+        "label": "Mainland China above-scale manufacturing production (2025 pre-tax annual group average)"
       }
     ]
   },
@@ -37754,14 +37860,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Printing press operators set up digital, offset, or flexographic equipment against the work order, check paper, ink, and plates, and pull trial proofs to check ink color, density, and registration; during the batch they spot-check, record defects, and escalate anomalies. See the United States 51-5112 wage and employment data, the Chinese wage evidence boundaries, work risks, entry exercises, and career paths."
+      "text": "Printing press operators read job orders, check paper and ink, inspect proofs, and sample production runs. See entry roles, pay evidence, and a paper-based print quality exercise."
     },
     "title": {
       "availability": "available",
       "text": "Printing press operators"
     }
   },
-  "source_content_sha256": "0fe43a18d2a021fc151a97f13187bb81d2d910268dd14bcb290bb8dd469d2dd9",
+  "source_content_sha256": "7c162a792899dd53666d366e45208a25bd30359452e72dee03aad5a390c8cd2f",
   "subject": {
     "canonical_slug": "printing-press-operators",
     "name": "Printing press operators",

@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a30-fengshun": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a30-shunde": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -1605,7 +1611,7 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1677,7 +1683,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26106,12 +26112,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Broad-basis reference: the 2025 national urban non-private/private unit pre-tax average annual wage in manufacturing is 113,594/76,055 yuan; it covers different manufacturing occupations and is not the median, grade-based pay or personal take-home income of electronic assemblers."
+              " These are past notices. A comparable mainland occupational median remains unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "a30-fengshun",
+            "a30-shunde"
           ],
           "type": "prose"
         },
@@ -26218,12 +26225,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page does not provide recruitment quotes or personal income promises; missing items remain missing and are not replaced with industry averages or neighboring occupations."
+              "Use the notices to compare duties and pay terms for individual posts."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "a30-fengshun",
+            "a30-shunde"
           ],
           "type": "prose"
         }
@@ -28975,25 +28983,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional materials",
-                  "1 set of fictional drawings and processes and work instructions and bill of materials and work orders, 1 set of anonymous process and self-inspection and measurement and traceability data and data dictionary, templates for material verification and assembly and self-inspection and anti-static and protection and abnormality reporting, and 3 assembly and quality and safety hazard items.",
-                  "All materials are fictional and contain no real product or customer information or information unrelated to you."
+                  "Paper exercise inputs",
+                  "Fictional work order A8 needs 12 K2 kits. The box contains 10 K2 and 2 K1. K1 has no substitution approval.",
+                  "One K2 kit has no inspection label. Under the exercise rules, only kits with the right revision and a label may be marked ready for assembly. Quality decides discrepancies.",
+                  "Check records on paper only. Do not handle equipment."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Work task",
-                  "Within 40 minutes, write the material verification and assembly steps and self-inspection and records and protection check for an assembly process, and fill out one form for self-inspection and measurement and abnormalities and traceability and reporting.",
-                  "Do only paper design and checking, without touching real products or production lines, without making quality release or safety or legal conclusions, and this is not equivalent to an occupational skill grade certificate or a work qualification."
+                  "What to submit",
+                  "Write a one-page parts log with the ready quantity, shortfall and both discrepancies.",
+                  "Name the handoff owner and keep the original ticket."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference result",
-                  "Material verification includes model and polarity and version and quantity and batch; assembly steps include process and parameters and fixtures and anti-static; self-inspection includes measurement and visual inspection and functional testing and criteria and status marking; abnormalities include quarantine and rework and reporting and traceability.",
-                  "The reference result is for self-checking and is not the only correct answer."
+                  "Finish your own answer first",
+                  "Open “Assembly batch reference (open after day six)” under FAQs and sources.",
+                  "Use the checklist to record one difference and one correction."
                 ]
               },
               {
@@ -29022,50 +29031,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: understand the materials",
-                  "Read the fictional drawings and processes and bill of materials and institutional materials, circle uncertain items and write out a question list."
+                  "Day 1",
+                  "Copy the ticket and count."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: materials and version",
-                  "Lay out key points for verifying materials and components and version and polarity by drawings and work orders and mark items to be confirmed."
+                  "Day 2",
+                  "Sort by revision."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: assembly and parameters",
-                  "Write a section of assembly steps and soldering and crimping and fastening and dispensing parameter notes according to process."
+                  "Day 3",
+                  "Check inspection labels."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: self-inspection and measurement",
-                  "Write key points for measurement and visual inspection and functional testing and status marking according to the criteria."
+                  "Day 4",
+                  "Calculate ready kits and the shortfall."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: protection and abnormalities",
-                  "Fill out one form for anti-static and protection and 5S and equipment checks and self-inspection and abnormalities and traceability reporting."
+                  "Day 5",
+                  "Write the parts handoff."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: timed repeat",
-                  "Redo it under time limits and record energy and error types."
+                  "Day 6: finish your own answer",
+                  "Check whether someone could read your handoff on its own before opening the reference."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: compare and decide",
-                  "Compare the two versions and write down continue / be cautious / stop and the reasons."
+                  "Day 7: open the reference and review",
+                  "Open “Assembly batch reference (open after day six)” under FAQs and sources. Record one difference and correction, then decide whether to continue or pause."
                 ]
               }
             ]
@@ -29084,13 +29093,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1 judgment: whether the uncertain items in the materials were honestly marked, rather than filled in by guessing.",
+              "You can finish a one-page handoff and separate verified facts, open checks and approvals.",
               "Day 2 judgment: whether material and version and polarity verification was done item by item against drawings and work orders and data, rather than by impression.",
-              "Day 3 judgment: whether the assembly steps and parameters were written clearly according to process.",
+              "Note which paper step takes most effort. Ask the employer about actual work demands.",
               "Day 4 judgment: whether self-inspection and measurement and functional testing and the criteria were written clearly according to standards.",
               "Day 5 judgment: whether the anti-static and protection and 5S and abnormality and traceability items are verifiable.",
               "Day 6 judgment: whether self-inspection and anti-static and record requirements can still be upheld under time limits and cycle time.",
-              "Day 7 judgment: take the performance on both versions together and judge whether you are willing to keep investing in electrical and electronic equipment assembly."
+              "On day seven, check your handoff against the collapsed reference. Repeat if a critical item is missing. Ask the employer about training and actual responsibilities."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30975,22 +30984,21 @@
           "data": {
             "entries": [
               {
-                "answer": "Take tasks by work orders and drawings and processes and verify the version; collect and verify materials and components and wire harnesses and connectors and fixtures and test equipment and confirm models and polarity and quantities; check anti-static and protective equipment and electrical and fixture status; complete soldering and crimping and winding and fastening and wiring and dispensing and cleaning according to process and cycle time; measure and visually inspect and functionally test according to standards and record data and mark status; maintain workstation 5S and material identification and error proofing; fill in assembly and inspection and batch and traceability records; quarantine and rework or scrap nonconforming items according to the process; honestly report abnormalities and line stop requests; cooperate with quality control and process and equipment staff on handling and take part in improvement; complete handover.",
+                "answer": "Check parts and revisions against the work order, assemble electrical or electronic equipment, record checks and refer discrepancies to quality or the shift lead.",
                 "id": "actors.faq.1",
                 "question": "What is the daily concrete work of Electrical and Electronic Equipment Assemblers?",
                 "question_key": "career.faq.electrical-and-electronic-equipment-assemblers.1",
                 "source_refs": [
-                  "onet"
+                  "a30-onet"
                 ]
               },
               {
-                "answer": "This page's occupation undertakes the assembly and self-inspection and traceability and delivery of electrical and electronic equipment and components; electromechanical equipment assemblers are responsible for electromechanical equipment and assembly assembly and commissioning, coil winders tapers and finishers specialize in coil winding and finishing, team assemblers assemble through small-group collaboration, electrical and electronic equipment installers and repairers are responsible for equipment installation and repair, quality control inspectors are responsible for inspection judgment and release, first-line supervisors of production and operating workers are responsible for crew production management, engine and other machine assemblers are responsible for engine and machine assembly, and welders, cutters, solderers, and brazers are responsible for welding and cutting. The objects and processes and authorization differ, and they cannot be interchanged by equipment or job title.",
+                "answer": "Assembly builds products from approved instructions. Quality staff focus on checks and disposition. Repair staff focus on faults in existing equipment. Employers may combine tasks within a shift.",
                 "id": "actors.faq.2",
                 "question": "How does it differ from adjacent occupations?",
                 "question_key": "career.faq.electrical-and-electronic-equipment-assemblers.2",
                 "source_refs": [
-                  "onet",
-                  "agent"
+                  "a30-onet"
                 ]
               },
               {
@@ -31022,13 +31030,14 @@
                 ]
               },
               {
-                "answer": "The United States BLS 2025 wage data median is 45,850 USD per year (22.04 USD per hour); that source provides only the median and does not provide the 10/25/75/90 percentiles, and this page keeps the gap in the corresponding places. No corresponding national occupation-level basis was obtained for mainland China, so no median or percentiles are given, and the industry average wage serves only as a visible industry proxy. When comparing real posts, check city and region, unit type and post level, employment method, whether piece rates and overtime and night shift and allowances and board and lodging are included, and the pre-tax and post-tax bases.",
+                "answer": "The May 2025 U.S. annual median was $45,850 for the broader BLS 51-2028 line. The notice listed 1,000 assembly places, accepted applicants without experience and offered coaching. It did not quote assembly pay. CNY 5,001–7,000 per month for a mixed role covering assembly, inspection and machine operation. These are past notices. A comparable mainland occupational median remains unavailable.",
                 "id": "actors.faq.6",
                 "question": "What is the general wage, and how should it be compared?",
                 "question_key": "career.faq.electrical-and-electronic-equipment-assemblers.6",
                 "source_refs": [
-                  "oews",
-                  "r2-pay-1"
+                  "a30-bls",
+                  "a30-fengshun",
+                  "a30-shunde"
                 ]
               },
               {
@@ -31052,23 +31061,30 @@
                 ]
               },
               {
-                "answer": "First do this page's paper exercise (writing the material verification and assembly steps and self-inspection and records and protection check for an assembly process), then seek supervised assembly internships and supervisor mentoring; at the same time confirm that you can accept shifts and cycle time and overtime and long periods of standing, and confirm the boundaries of anti-static control and quality and traceability and abnormality reporting according to unit rules.",
+                "answer": "Start with the A8 paper exercise. Use the ticket, physical count and labels. Open the reference after day six.",
                 "id": "actors.faq.9",
                 "question": "What should a complete beginner do first to try it?",
                 "question_key": "career.faq.electrical-and-electronic-equipment-assemblers.9",
                 "source_refs": [
-                  "onet",
-                  "sag"
+                  "a30-onet"
                 ]
               },
               {
-                "answer": "Consider the production line rhythm (driven by shifts and cycle time and overtime and changeovers and delivery points, with considerable repeated work and long periods of standing and eye and hand use) and time pressure and quality responsibility, as well as anti-static and occupational health protection and product and traceability data responsibility.",
+                "answer": "O*NET 51-2022.00 describes tasks on this page. BLS Table 1.2 uses the broader 51-2028 line, including electromechanical assembly and excluding coil winders, tapers and finishers. It projects 246,300 jobs in 2025 to 258,700 in 2035 (+5.0%), with 25,900 annual openings including replacements.",
                 "id": "actors.faq.10",
                 "question": "What else should be considered when choosing this occupation?",
                 "question_key": "career.faq.electrical-and-electronic-equipment-assemblers.10",
                 "source_refs": [
-                  "onet",
-                  "nist"
+                  "a30-bls"
+                ]
+              },
+              {
+                "answer": "Of 10 K2 kits, one lacks a label. Nine are ready, three short of the 12 required. Record two K1 kits with the wrong revision and one K2 with a missing inspection label. Keep A8 and refer both issues to quality. Check four items: nine ready kits, three short, both discrepancies, and ticket and handoff. Count each complete item. The exercise is fictional and the source provides occupational context.",
+                "id": "actors.faq.11",
+                "question": "Assembly batch reference (open after day six)",
+                "question_key": "career.faq.electrical-and-electronic-equipment-assemblers.11",
+                "source_refs": [
+                  "a30-onet"
                 ]
               }
             ]
@@ -31300,20 +31316,19 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Used for the query entry points and method notes for checking assembly occupation information and employment outlook.",
-                  "The first-hand outlook page for this occupation was not obtained this round; specific figures for this occupation are not inferred from the entry page."
+                  "O*NET 51-2022.00 describes tasks on this page. BLS Table 1.2 uses the broader 51-2028 line, including electromechanical assembly and excluding coil winders, tapers and finishers. It projects 246,300 jobs in 2025 to 258,700 in 2035 (+5.0%), with 25,900 annual openings including replacements."
                 ],
                 "evidence_type": "official guidance",
                 "id": "bls",
-                "limitation": "The first-hand outlook page for this occupation was not obtained this round; specific figures for this occupation are not inferred from the entry page.",
+                "limitation": "Annual openings include replacements.",
                 "market": "United States",
-                "name": "BLS Occupational Outlook Handbook / Occupation Finder",
-                "period": "accessed 2026-09-19",
+                "name": "BLS Table 1.2: occupational projections",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.bls.gov/ooh/occupation-finder.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31494,7 +31509,7 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "Verifies the occupation definition, the 17 tasks, work context and preparation level (Job Zone 1-2, SVP below 6.0) and interest code RCI and 2024 employment of 261,400 and the 2024—2034 projection and the 2025 wage median.",
+                  "O*NET 51-2022.00 covers tasks. BLS 51-2028 is the employment and wage reference.",
                   "Precise United States occupational data; the 2025 wage source provides only the median and does not provide percentile bases; does not define Chinese skill grades, wages or standards."
                 ],
                 "evidence_type": "official occupation profile",
@@ -31666,6 +31681,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "O*NET 51-2022.00 describes tasks on this page. BLS Table 1.2 uses the broader 51-2028 line, including electromechanical assembly and excluding coil winders, tapers and finishers. It projects 246,300 jobs in 2025 to 258,700 in 2035 (+5.0%), with 25,900 annual openings including replacements."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a30-bls",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Check parts and revisions against the work order, assemble electrical or electronic equipment, record checks and refer discrepancies to quality or the shift lead."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a30-onet",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "Detailed occupation tasks",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/51-2022.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The notice listed 1,000 assembly places, accepted applicants without experience and offered coaching. It did not quote assembly pay."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a30-fengshun",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Consumer electronics assembler",
+                "period": "2026-08-31",
+                "publisher": "Fengshun County HR bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.fengshun.gov.cn/zwgk/zdlyxxgk/jycyxxgk/content/mpost_2939856.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "CNY 5,001–7,000 per month for a mixed role covering assembly, inspection and machine operation."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a30-shunde",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Machine operator and assembler",
+                "period": "2026-08-18",
+                "publisher": "Shunde public employment service",
+                "scope": "recruitment_proxy",
+                "url": "https://sdjyt.shunde.gov.cn/m/jobs-show.php?id=54337&jobs_id=106027"
               }
             ]
           },
@@ -34484,7 +34559,7 @@
             },
             {
               "指标": "Post safety and skills training",
-              "数值": "Organized and authorized by the unit",
+              "数值": "See the two dated job postings below.",
               "说明": "The unit should organize employees' work safety education and post skills and anti-static and protection and harmful work training and clarify work authorization; anyone exposed to hazards such as chemicals and noise and dust should protect themselves as required and take part in occupational health examinations."
             },
             {
@@ -34621,7 +34696,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "Statistical basis status",
+          "china_open": "The dated posting samples are shown alongside the national occupation-level data gap.",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34664,7 +34739,7 @@
               }
             },
             {
-              "城市/区间": "Industry average (cannot replace this occupation)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$join": [
                   {
@@ -34694,20 +34769,21 @@
           "china_soc_row": "Mainland China wage basis",
           "edu": "Skill grade and safety and on-the-job training experience are covered in the entry module",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a30-fengshun",
+            "posting-a30-shunde"
           ],
           "sources_note": "Source links are used according to their respective scopes of application.",
           "ui": {
             "ai_heading": "Will AI and automation directly change the income of this occupation?",
             "driver_heading": "What should be checked when discussing pay for similar posts in mainland China?",
-            "official_heading": "Official bases and statistical gaps in mainland China",
+            "official_heading": "Scope of industry figures and job postings",
             "scenario_caption": "Comparison of pay methods and statistical boundaries",
             "scenario_heading": "Can the pay methods of similar posts in mainland China be compared directly?",
             "scenario_interpretation_label": "Scope of application and gaps",
             "scenario_role_label": "Post or scope",
             "scenario_value_label": "Pay and disclosure situation"
           },
-          "us_growth": "United States projections are in the United States wage module",
+          "us_growth": "5.0% (2025–2035)",
           "us_median": "United States wages are in the United States wage module"
         }
       },
@@ -35188,7 +35264,7 @@
         "outlook_evidence": [
           {
             "geography": "United States",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.2",
               "block": "market-signals",
@@ -35203,12 +35279,12 @@
             },
             "metric": "Overall employment change",
             "occupation_scope": "Electrical and Electronic Equipment Assemblers (O*NET-SOC 51-2022.00)",
-            "source_id": "bls-ooh-assemblers",
-            "value": "5% (51-2028 broad group, not AI attribution)"
+            "source_id": "a30-bls",
+            "value": "5.0%"
           },
           {
             "geography": "United States",
-            "horizon": "2025 base period",
+            "horizon": "2025",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35223,12 +35299,12 @@
             },
             "metric": "Employment size of this occupation",
             "occupation_scope": "Electrical and Electronic Equipment Assemblers (O*NET-SOC 51-2022.00)",
-            "source_id": "bls-ooh-assemblers",
-            "value": "246,300 people (2025 broad combined group)"
+            "source_id": "a30-bls",
+            "value": "246,300"
           },
           {
             "geography": "United States and mainland China",
-            "horizon": "Current basis",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -35243,8 +35319,8 @@
             },
             "metric": "Training and skills and quality and safety path",
             "occupation_scope": "Electrical and Electronic Equipment Assemblers (O*NET-SOC 51-2022.00)",
-            "source_id": "employer",
-            "value": "In the United States, a high school diploma or equivalent plus on-the-job training predominates (Job Zone 1-2, with 46% requiring a high school diploma or equivalent), and experience and on-the-job training range from a few days to one year; in mainland China employee safety training and labor protection are carried out in accordance with the Work Safety Law and the Law on the Prevention and Control of Occupational Diseases and unit rules, and occupational skills can be assessed for skill grades according to national occupational skill standards (electronic equipment installer and electronic device assembler, etc.)"
+            "source_id": "a30-bls",
+            "value": "25,900"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -35356,7 +35432,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electromechanical-equipment-assemblers",
+            "target_href": "/en/career/jobs/electromechanical-equipment-assemblers",
             "target_slug": "electromechanical-equipment-assemblers",
             "target_title": "Electromechanical equipment assemblers: differences from this occupation in objects and technology",
             "transition_distance": {
@@ -35379,7 +35455,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/coil-winders-tapers-and-finishers",
+            "target_href": "/en/career/jobs/coil-winders-tapers-and-finishers",
             "target_slug": "coil-winders-tapers-and-finishers",
             "target_title": "Coil winders, tapers, and finishers: differences from this occupation in processes and objects",
             "transition_distance": {
@@ -35402,7 +35478,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/team-assemblers",
+            "target_href": "/en/career/jobs/team-assemblers",
             "target_slug": "team-assemblers",
             "target_title": "Team assemblers: differences from this occupation in work organization",
             "transition_distance": {
@@ -35425,7 +35501,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-and-electronics-installers-and-repairers",
+            "target_href": "/en/career/jobs/electrical-and-electronics-installers-and-repairers",
             "target_slug": "electrical-and-electronics-installers-and-repairers",
             "target_title": "Electrical and electronic equipment installers and repairers: differences from this occupation in duties and authorization",
             "transition_distance": {
@@ -35448,7 +35524,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/quality-control-inspectors",
+            "target_href": "/en/career/jobs/quality-control-inspectors",
             "target_slug": "quality-control-inspectors",
             "target_title": "Quality control inspectors: differences from this occupation in inspection and release authorization",
             "transition_distance": {
@@ -35471,7 +35547,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/first-line-supervisors-of-production-and-operating-workers",
+            "target_href": "/en/career/jobs/first-line-supervisors-of-production-and-operating-workers",
             "target_slug": "first-line-supervisors-of-production-and-operating-workers",
             "target_title": "First-line supervisors of production and operating workers: differences from this occupation in the level of duty",
             "transition_distance": {
@@ -35494,7 +35570,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/engine-and-other-machine-assemblers",
+            "target_href": "/en/career/jobs/engine-and-other-machine-assemblers",
             "target_slug": "engine-and-other-machine-assemblers",
             "target_title": "Engine and other machine assemblers: differences from this occupation in objects and processes",
             "transition_distance": {
@@ -35517,7 +35593,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/welders-cutters-solderers-and-brazers",
+            "target_href": "/en/career/jobs/welders-cutters-solderers-and-brazers",
             "target_slug": "welders-cutters-solderers-and-brazers",
             "target_title": "Welders, cutters, solderers, and brazers: differences from this occupation in processes and authorization",
             "transition_distance": {
@@ -35605,7 +35681,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35654,7 +35730,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35703,7 +35779,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35752,7 +35828,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35801,7 +35877,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35850,7 +35926,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36472,7 +36548,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of Electrical and Electronic Equipment Assemblers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37003,39 +37079,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 261,400 people (2024, O*NET summary page basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "246,300 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistic)",
-        "occupation_scope": "Basis of this occupation (51-2022.00); the size changes with manufacturing and electronic and electrical equipment demand and automation; national totals do not indicate specific opportunities in a given state or unit or production line",
-        "period": "2024 base period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. BLS 51-2028",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "a30-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "The 2024—2034 projection is \"Faster than average (5% to 6%)\" (the category and range noted on the O*NET summary page)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "5.0%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "Basis of this occupation, projection period 2024—2034; this projection is a change in the occupation total, not an individual hiring probability; that page gives the \"faster than average (5% to 6%)\" category, and this page states it as in the original basis rather than converting it into a percentage itself",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. BLS 51-2028",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a30-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 29,600 (2024—2034, including replacement needs; O*NET summary page basis, a total for the projection period)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "25,900 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Projected period job openings (including replacement needs)",
-        "occupation_scope": "Basis of this occupation; these are total openings formed during the projection period from growth and replacement and so on, not annual net new posts, and not a direct measure of individual opportunity; the basis period noted on that O*NET page is 2024—2034, and this page cites that basis without converting it to an annual figure",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. BLS 51-2028",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a30-bls"
         ]
       },
       {
@@ -37076,14 +37152,15 @@
       },
       {
         "derivation": "No precise occupational wage for mainland China was obtained; United States data, industry averages or opaque recruitment quotes are not used to replace this occupation's pay.",
-        "display_value": "Note: mainland China has no occupation-level wage basis in one-to-one correspondence with United States 51-2022.00, and the requirement is to distinguish by law and regulation and unit rules. Employee safety training and labor protection and protection against harmful work are carried out in accordance with the Work Safety Law of the People's Republic of China and the Law of the People's Republic of China on the Prevention and Control of Occupational Diseases and unit safety and quality rules; anyone exposed to hazards such as chemicals and noise and dust should protect themselves as required and take part in occupational health examinations; occupational skills can be assessed for skill grades according to national occupational skill standards (electronic equipment installer and electronic device assembler, etc.); and assembly and inspection and release are carried out according to unit process and quality rules. The above is cited by law and regulation and standard names and general conventions, without checking article numbers one by one. Pay related to this occupation is usually composed of base wages and piece rates or hourly pay and overtime and night shift and allowances and subsidies; public wage statistics are broken down at most to industry category and unit type and no occupation-level basis corresponding to this occupation has been established, and this round obtained no checkable occupation-level wage distribution for mainland China, so the industry average wage serves only as a visible industry proxy and is expressly excluded",
+        "display_value": "The notice listed 1,000 assembly places, accepted applicants without experience and offered coaching. It did not quote assembly pay. CNY 5,001–7,000 per month for a mixed role covering assembly, inspection and machine operation.",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "Mainland China",
         "measure": "Statistical positions not obtained (mainland China occupation-level wages)",
-        "occupation_scope": "Mainland China occupation-level basis; pay for assembly posts is determined by unit type and post and skill grade and piece rate and performance rules, and public wage statistics are broken down at most to industry category and unit type; the page language being Simplified Chinese does not mean a precise equivalent occupational classification exists",
-        "period": "Current publication basis; retrieved 2026-09-19",
+        "occupation_scope": "Two past job notices",
+        "period": "2026",
         "source_refs": [
-          "r2-pay-1"
+          "a30-fengshun",
+          "a30-shunde"
         ]
       },
       {
@@ -37096,6 +37173,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The notice listed 1,000 assembly places, accepted applicants without experience and offered coaching. It did not quote assembly pay.",
+        "fact_id": "posting-a30-fengshun",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Consumer electronics assembler",
+        "period": "2026-08-31",
+        "source_refs": [
+          "a30-fengshun"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "CNY 5,001–7,000 per month for a mixed role covering assembly, inspection and machine operation.",
+        "fact_id": "posting-a30-shunde",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Machine operator and assembler",
+        "period": "2026-08-18",
+        "source_refs": [
+          "a30-shunde"
         ]
       }
     ]
@@ -37123,19 +37224,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "United States employment projection (2024—2034 \"faster than average (5% to 6%)\"; the source gives only the category)"
+        "label": "U.S. BLS 51-2028 · projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "United States employed headcount (about 261,400 people in 2024)"
+        "label": "U.S. BLS 51-2028 · employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "United States projected job openings (about 29,600 in 2024—2034, including replacement needs)"
+        "label": "U.S. BLS 51-2028 · projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37149,17 +37250,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Electrical and Electronic Equipment Assemblers (O*NET-SOC 51-2022.00) assemble electrical and electronic equipment and components according to drawings and processes and self-inspect: verifying work orders and materials and version and polarity, completing soldering and crimping and winding and fastening and wiring and dispensing and cleaning according to process and cycle time, measuring and visually inspecting and functionally testing according to standards and recording data and marking status, working according to anti-static and protection and safety requirements and maintaining 5S, and filling in batch and traceability records and quarantining and reworking and reporting nonconforming items. United States basis: BLS 2025 wage data median 45,850 USD per year (22.04 USD per hour, median only); 2024 employment about 261,400, 2024—2034 projection \"faster than average (5% to 6%)\" with about 29,600 projected openings; preparation level Job Zone 1-2, interest code RCI. Mainland China: safety training and labor protection and occupational health and skill grades are carried out in accordance with the Work Safety Law and the Law on the Prevention and Control of Occupational Diseases and national occupational skill standards; public statistics have not established an occupation-level wage basis, and this page visibly marks the gap in the relevant places."
+      "text": "See parts checks, inspection and handoff in electrical assembly. Compare two job notices and try a paper batch ticket."
     },
     "title": {
       "availability": "available",
       "text": "Electrical and Electronic Equipment Assemblers"
     }
   },
-  "source_content_sha256": "2a914e942b8d6ae680d24d388993d470b9d42c8a65324fa3834736344cf91a8b",
+  "source_content_sha256": "8476562c16dc1a571642c91d7b31b53f33dd2bd43f34a775fe0585000207126c",
   "subject": {
     "canonical_slug": "electrical-and-electronic-equipment-assemblers",
     "name": "Electrical and Electronic Equipment Assemblers",
-    "summary": "Electrical and Electronic Equipment Assemblers (United States side O*NET-SOC 51-2022.00, Electrical and Electronic Equipment Assemblers) is an assembly post for electrical and electronic equipment and components: assembling electrical and electronic equipment and components according to drawings and processes and work instructions and completing assembly and self-inspection on a production line or at a workstation to cycle time; the work includes taking tasks by work orders and drawings and processes and verifying the version, collecting and verifying materials and components and wire harnesses and connectors and fixtures and test equipment, checking anti-static and protective equipment and electrical and fixture status, completing soldering and crimping and winding and fastening and wiring and dispensing and cleaning according to process and cycle time, measuring and visually inspecting and functionally testing according to standards and recording data and marking status, maintaining workstation 5S and material identification and error proofing, filling in assembly and inspection and batch and traceability records, quarantining and reworking or scrapping nonconforming items according to the process and honestly reporting abnormalities and line stop requests, cooperating with quality control and process and equipment staff on handling and taking part in improvement, and completing handover. United States basis: BLS 2025 wage data median 45,850 USD per year (22.04 USD per hour; that source provides only the median and does not provide the 10/25/75/90 percentiles); the O*NET summary page gives 2024 employment of about 261,400, a 2024—2034 projection of \"faster than average (Faster than average, 5% to 6%)\" and about 29,600 projected openings for 2024—2034 (total for the projection period); the preparation level is Job Zone 1-2 (SVP below 6.0), education feedback is 46% high school or equivalent and 35% below high school, the interest code is RCI, and there are 17 tasks. Mainland China basis: employee safety training and labor protection and protection against harmful work are carried out in accordance with the Work Safety Law of the People's Republic of China and the Law of the People's Republic of China on the Prevention and Control of Occupational Diseases and unit safety and quality rules; occupational skills can be assessed for skill grades according to national occupational skill standards (electronic equipment installer and electronic device assembler, etc.). Public statistics have not established an occupation-level wage basis corresponding to this occupation, and this page preserves the gap faithfully, with the industry average wage serving only as a visible industry proxy."
+    "summary": "Check parts and revisions against the work order, assemble electrical or electronic equipment, record checks and refer discrepancies to quality or the shift lead."
   }
 }

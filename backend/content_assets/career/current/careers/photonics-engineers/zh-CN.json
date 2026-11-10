@@ -23377,14 +23377,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "下一步核目标地区的教育、训练和岗位权限；虚构练习不能替代真实工作授权。"
+              "纸面体验｜对照虚构需求表和原型测试表，标出一项未测的波长条件，并写明复核者需要看到哪个原始记录。 "
             ]
           },
           "id": "photonics-engineers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "ep",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23685,12 +23683,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本职研究光信息或光能技术，设计激光、光纤、成像等系统器件并开发测试原型。"
+              "光子工程师把光学系统的性能需求转成设计和测试要求，再用原型数据判断哪些指标达标、哪些需要修改。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "photonics-engineers.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "transfer-onet-17-2199.07"
           ],
           "type": "prose"
         },
@@ -24776,15 +24774,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "需求整理、模型草稿和参数比较可作工具试验；光学仿真、固定自动化与生成式AI不是同一技术。本页未核本职AI采用率、替代比例或个人失业概率，父类总体就业预测不分解AI因果。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构需求表和原型测试表，标出一项未测的波长条件，并写明复核者需要看到哪个原始记录。"
             ]
           },
           "id": "photonics-engineers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ep",
-            "nist",
-            "editor"
+            "transfer-onet-17-2199.07",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32870,6 +32866,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-17-2199.07",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 17-2199.07 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/17-2199.07"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38123,10 +38146,10 @@
       "text": "光子学工程师"
     }
   },
-  "source_content_sha256": "12a7b3aa6d3f61f480beb47e2336053ef95e00fde277803c832cdc77cc88909d",
+  "source_content_sha256": "42aadbf289bab90f3c80720520fa782d14377faa92ab97a71b86db7f3bb1b5c0",
   "subject": {
     "canonical_slug": "photonics-engineers",
     "name": "光子学工程师",
-    "summary": "光子工程师（O*NET 17-2199.07）设计、分析、集成和测试利用光的系统或器件，包括激光、光纤和成像技术，围绕系统需求、光学模型、器件规格、测试记录与安全要求形成可追溯的设计方案、原型测试结论和生产转移交接；激光、电气和实验室安全须遵守机构规程；设计验证与发布需要相应授权。岗位场景、资格和最终责任须按所在地及机构制度核对。"
+    "summary": "光子工程师把光学系统的性能需求转成设计和测试要求，再用原型数据判断哪些指标达标、哪些需要修改。"
   }
 }

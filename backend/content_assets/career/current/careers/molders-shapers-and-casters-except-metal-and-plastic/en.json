@@ -152,6 +152,9 @@
       "item:molders-shapers-and-casters-except-metal-and-plastic.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:molders-shapers-and-casters-except-metal-and-plastic.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:molders-shapers-and-casters-except-metal-and-plastic.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13245,6 +13248,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Plaster order G3 requires a mold ID and a product lot. A has the right mold but no lot. B has the right lot but cites a mold from another order. Identify the original records to check before handover."
+            ]
+          },
+          "id": "molders-shapers-and-casters-except-metal-and-plastic.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Match a mold to a nonmetal product lot",
+          "type": "notice"
         }
       ]
     },
@@ -15705,6 +15723,13 @@
         "id": "molders-shapers-and-casters-except-metal-and-plastic.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "molders-shapers-and-casters-except-metal-and-plastic.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15898,7 +15923,7 @@
       "text": "Molders, shapers, and casters, except metal and plastic"
     }
   },
-  "source_content_sha256": "27529df22b61821f65b572e1c8195c21073c78081337a334f2d0acdf834eeed5",
+  "source_content_sha256": "becb4c2592cc3777d15623840fae50482e70fe615620f083da2dd6de2ceeff83",
   "subject": {
     "canonical_slug": "molders-shapers-and-casters-except-metal-and-plastic",
     "name": "Molders, shapers, and casters, except metal and plastic",

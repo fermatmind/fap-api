@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "用同一虚构活动设定写邀请稿与组织者说明，列修改、保留和未知，观察写改耐心。"
+              "纸面体验｜拿一段虚构稿件，分开标注可核事实、人物表达和编辑建议。把待核信息列给编辑，不用改写掩盖缺口。 "
             ]
           },
           "id": "writers-and-authors.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24804,13 +24803,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "作家与作者对应O*NET27-3043.00，创作故事、剧本、文章、广告等原创文字材料，调查资料、组织结构、按受众和媒介调整语气，向客户或编辑提交并修订。可为雇员、自由职业或自雇，稿费、版税、项目收款与雇员工资分别核。写作不等编辑定稿、新闻采集、技术说明或营销管理的全部职责。纸面体验只用虚构活动设定写两版草稿，不发布或冒实际客户作品。"
+              "作家和撰稿人根据题材或委托收集材料、写作与修订，向编辑或委托方交稿，并记录待核事实与反馈。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "writers-and-authors.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-27-3043.00"
           ],
           "type": "prose"
         }
@@ -25456,13 +25454,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可探索构思改稿，事实、原创、合同和发布仍需人核；Chatbot类别不是采用率。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：拿一段虚构稿件，分开标注可核事实、人物表达和编辑建议。把待核信息列给编辑，不用改写掩盖缺口。"
             ]
           },
           "id": "writers-and-authors.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-27-3043.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33122,6 +33120,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-27-3043.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 27-3043.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/27-3043.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38639,10 +38664,10 @@
       "text": "作家与作者"
     }
   },
-  "source_content_sha256": "76a3422f2b77afa52f44c9fa0c9e39080494373f87cf41fed38c326f312c6155",
+  "source_content_sha256": "f094571528a4b745093b786921455b24aa7756949d36d6dc2eb7d45922b7305c",
   "subject": {
     "canonical_slug": "writers-and-authors",
     "name": "作家与作者",
-    "summary": "作家与作者对应O*NET27-3043.00，创作故事、剧本、文章、广告等原创文字材料，调查资料、组织结构、按受众和媒介调整语气，向客户或编辑提交并修订。可为雇员、自由职业或自雇，稿费、版税、项目收款与雇员工资分别核。写作不等编辑定稿、新闻采集、技术说明或营销管理的全部职责。纸面体验只用虚构活动设定写两版草稿，不发布或冒实际客户作品。"
+    "summary": "作家和撰稿人根据题材或委托收集材料、写作与修订，向编辑或委托方交稿，并记录待核事实与反馈。"
   }
 }

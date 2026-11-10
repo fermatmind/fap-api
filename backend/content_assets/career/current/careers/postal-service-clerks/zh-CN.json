@@ -29,6 +29,9 @@
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
+      "fact:hunan-2023-postal-wage": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -23320,7 +23323,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合愿意在柜台把收寄、称重、计费、凭证和交接逐项做准的人，可以进一步试做邮政服务文员。读懂服务要求、核对邮件外观和目的地、发现信息缺口时暂停报价，比单纯喜欢与人交谈更接近日常任务。美国 USPS 职位条件与中国岗位要求须分别看公告。"
+              "如果你很难在排队催促下重复核重量、地址与服务，或不适应久站和搬运，先了解网点实情再决定。遇资料不全时，岗位需要你能解释原因并停下来核实。"
             ]
           },
           "id": "postal-service-clerks.quick-decision.fit-decision-checklist.1",
@@ -23335,7 +23338,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "可观察信号：能在排队和重复事务中保持核对习惯；愿意向顾客解释资费依据与可办理范围；遇到地址、重量、服务种类或付款信息不一致时先复核并升级。若排斥流程、记录或站立与搬运，应先观察真实网点。"
+              "到目录「09 入行、资格与职业发展」找到《三件邮件：柜台计费与异常交接》。用虚构材料在 45 分钟内写一份柜台计费与交接记录。先做再看参考答案，按页内量规自查，不使用真实邮件、设备或客户资料。"
             ]
           },
           "id": "postal-service-clerks.quick-decision.fit-decision-checklist.2",
@@ -23349,7 +23352,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全试做：用本页完全虚构的 A1–A3 三件邮件和练习计费表，在 45 分钟内写柜台受理与交接记录。A1、A2 可计算练习点数，A3 缺目的地必须标待确认；不使用真实姓名、地址、邮资或订单。"
+              "适合愿意在柜台把收寄、称重、计费、凭证和交接逐项做准的人，可以进一步试做邮政服务文员。读懂服务要求、核对邮件外观和目的地、发现信息缺口时暂停报价，比单纯喜欢与人交谈更接近日常任务。美国 USPS 职位条件与中国岗位要求须分别看公告。"
             ]
           },
           "id": "postal-service-clerks.quick-decision.fit-decision-checklist.3",
@@ -23365,7 +23368,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "自验三点：A1 应为 9 个练习点，A2 应为 23 个练习点，已确认小计 32 点；A3 目的地缺失，不得编造总价；交接单须写明待核信息、责任人和下一步，不擅自承诺寄达时限。"
+              "用纸面试做观察自己能否按规则核对、留记录和交接；做完再对照第 09 节题后的参考答案。练习不代表岗位授权或录用条件。"
             ]
           },
           "id": "postal-service-clerks.quick-decision.fermat-decision-card.6",
@@ -23403,12 +23406,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本页只覆盖美国 O*NET 43-5051.00 Postal Service Clerks 的柜台收寄、邮资交易、邮件检查和分拣相关工作。中国邮政网点可能使用不同岗位名；服务权限、收费、用户信息处理和招聘条件依当地法律与机构制度，不由美国职业代码自动决定。"
+              "中国大陆的对应职业为邮政营业员（4-02-07-01），工作重点是柜台收寄、称重计费、解释服务与交接。 美国统计使用本页所列的 O*NET/SOC 职业，不直接对应大陆工资和招聘条件。"
             ]
           },
           "id": "postal-service-clerks.profile.career-quick-answers-block.1",
           "source_refs": [
-            "editor",
+            "cn-postal-standards-2025",
+            "cn-postal-work-example",
             "onet"
           ],
           "type": "prose"
@@ -26557,12 +26561,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国岗位名可能写邮政营业员、柜台服务或收寄人员；不能仅按英文职业代码推资格。"
+              "邮政营业员（4-02-07-01）"
             ]
           },
           "id": "postal-service-clerks.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "cnclass"
+            "cn-postal-standards-2025"
           ],
           "type": "prose"
         },
@@ -26849,13 +26853,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国USPS岗位和中国邮政机构要求不同；本页不建立资格互认。"
+              "中国大陆薪资参考：地方样本与行业背景"
             ]
           },
           "id": "postal-service-clerks.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "cnclass",
-            "editor"
+            "hunan-2023-postal-wage",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26908,15 +26912,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025年交通运输、仓储和邮政业城镇非私营单位税前年平均工资133,981元／人／年，私营单位73,133元／人／年。证据不足：中国邮政服务文员单职业工资中位数、分位和岗位月薪分布仍未取得。"
+              "湖南省 2023 年企业抽样调查中，邮政营业员年工资中位数为 96,300 元/年（职业细类表第 25 行）。包含奖金、津补贴及加班工资等，不能代表全国、起薪或到手收入。 2025年交通运输、仓储和邮政业城镇非私营单位税前年平均工资133,981元／人／年，私营单位73,133元／人／年。"
             ]
           },
           "id": "postal-service-clerks.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "nbs",
-            "bls",
-            "ep",
-            "editor"
+            "hunan-2023-postal-wage",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26985,13 +26987,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国邮政服务文员单职业工资"
+              "湖南省企业样本（2023）"
             ]
           },
           "id": "postal-service-clerks.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "nbs",
-            "editor"
+            "hunan-2023-postal-wage"
           ],
           "type": "prose"
         },
@@ -27000,13 +27001,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可比的全国职业中位数、10／90分位和岗位月薪分布；申请时核具体合同与工资构成。"
+              "湖南省 2023 年企业抽样调查中，邮政营业员年工资中位数为 96,300 元/年（职业细类表第 25 行）。包含奖金、津补贴及加班工资等，不能代表全国、起薪或到手收入。"
             ]
           },
           "id": "postal-service-clerks.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "nbs",
-            "editor"
+            "hunan-2023-postal-wage"
           ],
           "type": "prose"
         },
@@ -27015,13 +27015,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国SOC 43-5051与中国岗位分类及资费权限不自动互认。"
+              "湖南样本对应邮政营业员，重点是柜台收寄与服务。 地方职业中位数和全国行业均值口径不同；都不等于某个岗位的起薪。"
             ]
           },
           "id": "postal-service-clerks.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "editor"
+            "hunan-2023-postal-wage",
+            "nbs",
+            "cn-postal-standards-2025"
           ],
           "type": "prose"
         },
@@ -27030,11 +27031,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              "湖南省企业薪酬调查（2023）｜https://rst.hunan.gov.cn/xxgk/zfxxgknb/202410/t20241018_33479798.html；国家统计局2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "postal-service-clerks.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
+            "hunan-2023-postal-wage",
             "nbs"
           ],
           "type": "prose"
@@ -28078,7 +28080,7 @@
           "data": {
             "entries": [
               "内向者可重细节，外向者可重服务；两者都需资费核对与实物处理。",
-              "谨慎条件：先完成A1–A3核对练习，再比较柜台交易、分拣或投递任务及实际岗位要求。"
+              "先完成 09 的纸面练习，再比较柜台、分拣和投递的任务与岗位要求。"
             ]
           },
           "id": "postal-service-clerks.fit.personality-fit-block.12",
@@ -28149,7 +28151,7 @@
           "data": {
             "entries": [
               "可用来反思沟通冲突，但要回到实际柜台行为。",
-              "任务信号：人格类型不能预测准确性；用A1–A3核对金额和缺项，比套用九型标签更可查。"
+              "用练习观察自己能否核对金额、发现缺项；人格标签不能预测个人准确率。"
             ]
           },
           "id": "postal-service-clerks.fit.personality-fit-block.16",
@@ -28772,7 +28774,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "试做：用三件虚构邮件和练习价格表算A1/A2小计，A3资料不足时标待确认。"
+              "到 09 按题内规则核对虚构邮件，写清哪些可以确认、哪些还要复核。"
             ]
           },
           "id": "postal-service-clerks.fit.personality-fit-block.58",
@@ -29104,7 +29106,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "称重后核对档位、系统价格与收据；练习中A1为9点、A2为23点。"
+              "报价前，按网点现行规则核对邮件类别、重量档位、服务和适用资费。"
             ]
           },
           "id": "postal-service-clerks.risk.career-risk-cards.17",
@@ -29119,7 +29121,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "A3缺目的地且无包裹档位，不能把32点小计报成三件总价。"
+              "必要字段或适用资费缺失时，不把部分金额当成最终报价，按网点流程交接。"
             ]
           },
           "id": "postal-service-clerks.risk.career-risk-cards.18",
@@ -29428,7 +29430,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "个人信息保护法用于中国用户资料处理边界；A1–A3只用虚构数据，练习点数不代表实际收费或事故。"
+              "个人信息保护法规定适用的中国用户信息处理边界。练习只用虚构资料，不作实际报价。"
             ]
           },
           "id": "postal-service-clerks.risk.career-risk-cards.38",
@@ -29583,9 +29585,9 @@
                 "id": "exercise-materials",
                 "values": [
                   "材料设定｜全为编辑虚构",
-                  "练习网点采用虚构点数表：标准信件首档≤100克为9点；100克以上至500克为23点。仅供算术练习，不是真实邮资或服务规则。",
-                  "A1：同城标准信件80克，地址完整，选首档；应计9点。A2：异地标准信件320克，地址完整，选第二档；应计23点。",
-                  "A3：包裹1.2千克，目的地缺失；本表没有包裹档位，不能报价。三件都用虚构姓名地址，不能录入真实客户资料。"
+                  "虚构计费规则：标准信件每件先计 5 点；重量不超过 100 克的另加 4 点，超过 100 克但不超过 500 克的另加 18 点。表内没有包裹费率。点数不是真实邮资。",
+                  "A1：同城标准信件，80 克，地址完整。A2：异地标准信件，320 克，地址完整。",
+                  "A3：包裹，1.2 千克，目的地未填。三件资料均为虚构；不录入真实客户资料。"
                 ]
               },
               {
@@ -29593,7 +29595,7 @@
                 "values": [
                   "任务与交付｜45分钟",
                   "0–5分钟读材料；5–20分钟做三行表，列类别、重量、目的地、档位、已知点数、未知项与下一步；20–30分钟独立复算；30–40分钟写A3澄清与客户说明；40–45分钟按下列量规复核并修订。",
-                  "对A3至少问清目的地及所选服务，再向获授权主管核适用包裹资费；写明待确认、处理岗位和下一步，不填真实姓名地址。"
+                  "写清每件能否报价、需要向顾客补问什么，以及不能当场确认时交给谁。不使用真实资料。"
                 ]
               },
               {
@@ -29602,7 +29604,7 @@
                   "参考答案与客户说明",
                   "A1｜标准信件｜80克｜同城、地址完整｜≤100克｜9点｜档内信息齐｜按练习规则记录。A2｜标准信件｜320克｜异地、地址完整｜100<重量≤500克｜23点｜档内信息齐｜复核标签。A3｜包裹｜1.2千克=1200克｜目的地缺失｜包裹档未提供｜未知｜目的地、服务与包裹资费待核｜暂停报价并交授权主管。",
                   "已确认小计9+23=32点，仅含A1+A2；三件总价未知，A3未知不等于0。点数是编辑虚构，不可换算成人民币或美元邮资。",
-                  "客户说明示例：前两封信在练习表中的小计为32点。第三件为包裹，需要补充目的地和服务选项，且当前表没有包裹资费。我先请授权主管核实，确认前不能承诺费用或可收寄。"
+                  "客户说明示例：前两封信在练习表中的小计为32点。第三件为包裹，需要补充目的地和服务选项，且当前表没有包裹资费。我先请授权主管核实，确认前不能承诺费用或可收寄。 未核实前也不承诺寄达时限。"
                 ]
               },
               {
@@ -29611,7 +29613,7 @@
                   "复核量规｜编辑自评，不是雇主考试",
                   "四项各0–2分，总分0–8：①档位与单位：80克、320克档位及1200克换算全部正确2分，部分正确1分，套错档0分；②算术与范围：9、23、32正确且限A1+A2得2分，仅算对但小计范围不明1分，将32报作三件总价0分。",
                   "③缺项与权限：问目的地和服务、指出无包裹档位并暂停升级2分，只指出部分缺项1分，猜A3费用0分；④说明与记录：客户说明清楚标虚构点数、未知和交接岗位2分，漏一项1分，使用真实客户资料或承诺实际费用0分。",
-                  "错误示例：A3沿用信件二档23点，报三件55点。评分0／0／0／0=0分；先删猜测金额，恢复A3未知及32点小计，再补澄清和交接。分数仅帮助改作品，不能证明真实操作资格或录用。"
+                  "错误示例：给 A3 套用信件档位猜 23 点，还把已确认小计 32 点承诺成三件邮件的实际费用。评分 0／0／0／0，共 0 分。删掉猜测，保留 A3 未知，把 32 点标为 A1 和 A2 的虚构小计，再补待核问题和交接。分数不证明作业授权或录用。"
                 ]
               }
             ]
@@ -29620,7 +29622,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "三件邮件收寄练习",
+          "title": "三件邮件：柜台计费与异常交接",
           "type": "cards"
         },
         {
@@ -29762,7 +29764,7 @@
                 "id": "entry-trial-day-6",
                 "values": [
                   "第六日",
-                  "请另一人逐项按四维量规复算，指出把A3未知当0、套信件档或把32点当总价的错误。"
+                  "用页内四项量规自行复算，检查单位、计费范围、未确认信息与交接。可选请别人复核，不影响独立完成。"
                 ]
               },
               {
@@ -30109,12 +30111,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "先用虚构A1–A3练收寄核对、费用小计与异常说明，再对照真实公告的岗位和考试条件。"
+              "中国邮政的营业学习手册把网点管理、操作和服务分开。看公告时先分清岗位是否以邮件收寄为主、是否兼办其他业务，以及遇到不能受理的邮件应交给谁。 先用虚构A1–A3练收寄核对、费用小计与异常说明，再对照真实公告的岗位和考试条件。"
             ]
           },
           "id": "postal-service-clerks.path.career-path-block.20",
           "source_refs": [
-            "bls",
+            "cn-postal-work-example",
             "editor"
           ],
           "type": "prose"
@@ -30124,14 +30126,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "训练、考试与岗位授权分别核对；真实交易只依网点现行系统。"
+              "大陆对应职业的标准代码是 4-02-07-01。标准与招聘是两回事，学历、训练、班次及劳动合同主体看具体公告。"
             ]
           },
           "id": "postal-service-clerks.path.career-path-block.21",
           "source_refs": [
-            "bls",
-            "editor",
-            "privacy"
+            "cn-postal-standards-2025",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31954,9 +31955,9 @@
                 "question_key": "career.faq.postal-service-clerks.daily-work"
               },
               {
-                "answer": "柜台文员负责收寄、服务解释与计费；投递员按线路递送；分拣员在内部按目的地或路线分类。三者是O*NET不同职业，录用和训练条件分别核对。",
+                "answer": "邮政营业员负责邮件收寄、邮资计费和邮政服务；银行柜员负责金融柜面业务。国家工种目录将邮政营业员列为 4-02-07-01，邮政储汇业务员列在银行综合柜员 4-05-01-01 下。看具体网点公告是否另含储汇职责。投递员按路线交付，分拣员在处理中心按目的地分流。",
                 "id": "postal-service-clerks.faq.2",
-                "question": "邮政服务文员与投递员、分拣员有什么区别？",
+                "question": "邮政营业员和银行柜员、投递员、分拣员有什么区别？",
                 "question_key": "career.faq.postal-service-clerks.comparison"
               },
               {
@@ -31972,7 +31973,7 @@
                 "question_key": "career.faq.postal-service-clerks.ai-impact"
               },
               {
-                "answer": "证据不足：本页未取得全国单职业工资分布。国家统计局行业及单位类型平均工资不能当作邮政柜台文员工资；求职时核对具体网点、地区和合同。",
+                "answer": "湖南省 2023 年企业抽样调查中，邮政营业员年工资中位数为 96,300 元/年（职业细类表第 25 行）。包含奖金、津补贴及加班工资等，不能代表全国、起薪或到手收入。 本页未取得全国单职业工资分布。",
                 "id": "postal-service-clerks.faq.5",
                 "question": "中国大陆邮政服务文员工资是多少？",
                 "question_key": "career.faq.postal-service-clerks.china-pay"
@@ -31984,7 +31985,7 @@
                 "question_key": "career.faq.postal-service-clerks.us-pay"
               },
               {
-                "answer": "BLS列美国此职业典型入门教育为无正式学历要求，常见短期在岗训练；具体雇主可设额外条件。USPS考试按公告安排，申请和考试免费。",
+                "answer": "大陆对应职业的标准代码是 4-02-07-01。标准与招聘是两回事，学历、训练、班次及劳动合同主体看具体公告。 有相关课程或培训经历可写入简历；不要把培训证书当作录用保证。",
                 "id": "postal-service-clerks.faq.7",
                 "question": "入行需要什么学历和训练？",
                 "question_key": "career.faq.postal-service-clerks.education-path"
@@ -32017,7 +32018,11 @@
             "nbs",
             "privacy",
             "cnclass",
-            "editor"
+            "editor",
+            "cn-postal-standards-2025",
+            "employer",
+            "hunan-2023-postal-wage",
+            "cn-postal-trade-catalog"
           ],
           "type": "faq"
         },
@@ -32103,13 +32108,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32595,6 +32600,81 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "邮政营业员：4-02-07-01。"
+                ],
+                "evidence_type": "official occupation standards notice",
+                "id": "cn-postal-standards-2025",
+                "limitation": "职业标准目录；不提供招聘人数、工资或统一录用条件。",
+                "market": "中国大陆",
+                "name": "邮政营业员等4个国家职业标准的颁布通知",
+                "period": "2025-04",
+                "publisher": "人力资源社会保障部、国家邮政局",
+                "scope": "contextual",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/202504/t20250428_541226.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中国邮政的营业学习手册把网点管理、操作和服务分开。"
+                ],
+                "evidence_type": "employer public document",
+                "id": "cn-postal-work-example",
+                "limitation": "单一机构案例；不是当前在招、个人待遇或全国趋势的证据。",
+                "market": "中国大陆",
+                "name": "中国邮政：营业学习手册",
+                "period": "2023-04",
+                "publisher": "中国邮政",
+                "scope": "contextual",
+                "url": "https://www.chinapost.com.cn/cn/report/2304/10569-1.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "PSE Sales & Services/Distribution Associate"
+                ],
+                "evidence_type": "official employer guidance",
+                "id": "usps-role-examples",
+                "limitation": "例示实际岗位名称和任务；具体地点、班次、待遇及资格以公告为准。",
+                "market": "US",
+                "name": "USPS 一线岗位说明",
+                "period": "2026 页面",
+                "publisher": "USPS",
+                "scope": "contextual",
+                "url": "https://about.usps.com/careers/career-opportunities/top-jobs.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "湖南省 2023 年企业抽样调查中，邮政营业员年工资中位数为 96,300 元/年（职业细类表第 25 行）。包含奖金、津补贴及加班工资等，不能代表全国、起薪或到手收入。"
+                ],
+                "evidence_type": "official regional occupational wage survey",
+                "id": "hunan-2023-postal-wage",
+                "limitation": "湖南企业从业者样本；不代表全国或特定雇主。",
+                "market": "中国大陆·湖南",
+                "name": "湖南省2023年度企业薪酬调查信息",
+                "period": "2023",
+                "publisher": "湖南省人力资源和社会保障厅",
+                "scope": "contextual",
+                "url": "https://rst.hunan.gov.cn/xxgk/zfxxgknb/202410/t20241018_33479798.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "目录分别列邮政营业员 4-02-07-01、银行综合柜员 4-05-01-01；邮政储汇业务员列为后者工种。"
+                ],
+                "evidence_type": "official occupation classification",
+                "id": "cn-postal-trade-catalog",
+                "limitation": "职业归类不决定某个网点公告的具体兼办职责或录用条件。",
+                "market": "中国大陆",
+                "name": "邮政快递业技能类职业（工种）目录",
+                "period": "2023",
+                "publisher": "中国政府网",
+                "scope": "contextual",
+                "url": "https://www.gov.cn/zhengce/zhengceku/202312/P020231218474918473634.pdf"
               }
             ]
           },
@@ -34465,7 +34545,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "邮政服务文员的柜台任务主要分为哪几类？",
+            "question": "邮政营业员主要做什么？",
             "table": {
               "rows": [
                 {
@@ -35469,6 +35549,9 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "hunan-2023-postal-wage"
+          ],
           "sources_note": {
             "$item": "postal-service-clerks.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -35478,7 +35561,7 @@
           "ui": {
             "ai_heading": "AI 会影响邮政服务文员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "中国行业工资背景（2025年，非柜台文员工资）",
+            "official_heading": "大陆地方职业样本与全国行业背景",
             "scenario_caption": "学习与经验背景、准备方向及核对建议（编辑整理，非招聘频率或工资统计）",
             "scenario_heading": "不同学习与经验背景可核对哪些邮政服务方向？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -37300,7 +37383,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合邮政服务文员工作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37830,6 +37913,18 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "96,300 元/年",
+        "fact_id": "hunan-2023-postal-wage",
+        "market": "中国大陆·湖南",
+        "measure": "年工资中位数",
+        "occupation_scope": "邮政营业员",
+        "period": "2023",
+        "source_refs": [
+          "hunan-2023-postal-wage"
+        ]
       }
     ]
   },
@@ -37871,10 +37966,10 @@
         "label": "美国年均职位空缺"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "hunan-2023-postal-wage",
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "湖南 2023 年工资中位数"
       }
     ]
   },
@@ -37882,14 +37977,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "邮政服务文员的柜台收寄、称重计费、邮件核验和交接任务，附美国精确职业工资与就业口径、中国薪资证据边界及虚构三件邮件入行练习。"
+      "text": "邮政营业员做什么？了解柜台收寄、称重计费、解释服务与交接，并区分大陆岗位条件与美国工资、就业数据。"
     },
     "title": {
       "availability": "available",
       "text": "邮政服务文员"
     }
   },
-  "source_content_sha256": "c55dd7b9bb54985d19f6b708dfa76f3ccbfa6a193b75dfe6d2b03f876200332d",
+  "source_content_sha256": "18b3429c6a42d7408ddc26fd5ee16e63c61460c0022b746fb6b2bfe463440326",
   "subject": {
     "canonical_slug": "postal-service-clerks",
     "name": "邮政服务文员",

@@ -159,19 +159,19 @@
         "status": "mapped"
       },
       "item:network-and-computer-systems-administrators.path.credential-decision.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:network-and-computer-systems-administrators.path.employer-evidence.5": {
         "status": "pending_mapping"
       },
       "item:network-and-computer-systems-administrators.path.entry-role-comparison.4": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:network-and-computer-systems-administrators.path.entry-work-sample-data.3": {
         "status": "pending_mapping"
       },
       "item:network-and-computer-systems-administrators.path.interview-probation.6": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:network-and-computer-systems-administrators.path.recruitment-sample.2": {
         "status": "pending_mapping"
@@ -180,7 +180,7 @@
         "status": "mapped"
       },
       "item:network-and-computer-systems-administrators.path.seven-day-trial.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:network-and-computer-systems-administrators.profile.career-quick-answers-block.5": {
         "status": "mapped"
@@ -12312,7 +12312,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话判断｜如果你愿意长期处理账号权限、备份验证、变更与故障的细节，能在非工作时间按流程响应，并接受生产环境的高后果责任，这个职业才值得继续验证。"
+              "先问清变更窗口、轮值和回退由谁批准。如果你习惯跳过基线验证就继续改动，先用纸面演练观察是否适应。"
             ]
           },
           "id": "network-and-computer-systems-administrators.quick-decision.fermat-decision-card.1",
@@ -12326,7 +12326,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "核心产出｜把服务器、网络、账号与变更转成可追溯的运维结果：配置与基线、监控与告警、备份可恢复性、访问控制、故障处置与服务恢复记录。"
+              "到目录「09 入行、资格与职业发展」找《SA-07：变更与回退评审》，用虚构记录写一份继续或回退的判断与交接。做完后再对照参考和自核量规。"
             ]
           },
           "id": "network-and-computer-systems-administrators.quick-decision.fermat-decision-card.2",
@@ -12340,7 +12340,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "20—120 分钟安全试做｜在隔离的模拟或实验环境（不接入生产网络、不使用真实凭据）完成一次“变更—验证—回滚”演练：写清变更项、影响面、验证点、回滚条件与升级路径，并由他人按清单复核。"
+              "如果你愿意把每次变更写成可复核的方案，检查服务恢复，并明确谁有权批准下一步，可以体验系统运维。"
             ]
           },
           "id": "network-and-computer-systems-administrators.quick-decision.fit-decision-checklist.3",
@@ -12726,7 +12726,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可核对参照｜2025 年城镇非私营单位信息传输、软件和信息技术服务业年平均工资 248,752 元/年、城镇私营单位同门类 128,166 元/年；统计范围为城镇 5 人及以上法人单位，不含个体工商户与自由职业者。"
+              "可核对参照｜2025 年城镇非私营单位信息传输、软件和信息技术服务业年平均工资 248,752 元/年、城镇私营单位同门类 128,166 元/年；统计范围为城镇 5 人及以上法人单位。"
             ]
           },
           "id": "network-and-computer-systems-administrators.china-salary.career-snapshot-primary-locale.3",
@@ -12959,7 +12959,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证方法｜人格标签不能决定适配；用隔离模拟环境中的变更—验证—回滚演练、日志分析与交接说明接受有经验人员评价。"
+              "验证方法｜用 SA-07 纸面证据写停止、审批、回退和复测条件，再按量规自查；可请第二人复看。"
             ]
           },
           "id": "network-and-computer-systems-administrators.fit.personality-fit-block.8",
@@ -13076,12 +13076,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "练习只在隔离的模拟或实验环境进行：不接入生产网络、不使用真实账号凭据、不执行真实变更；模拟环境与数据应可丢弃，并记录其来源与版本。"
+              "上证所信息网络 2026 年 4 月 9 日的 A05 公告涉及服务器和云主机，要求相关本科及以上，列出 Linux 和虚拟化。这只说明该雇主当时的岗位，目标职位另核。本页 SA-07 只用纸面记录，不连接网络、不用凭据、不执行命令或真实变更。"
             ]
           },
           "id": "network-and-computer-systems-administrators.path.recruitment-sample.2",
           "source_refs": [
-            "onet-work"
+            "onet-work",
+            "cn-sse-a05-systems-20260409"
           ],
           "type": "notice"
         },
@@ -13089,15 +13090,46 @@
           "availability": "available",
           "copy_key": "career.item.entry-work-sample-data",
           "data": {
-            "paragraphs": [
-              "作品包包括：模拟变更单（影响面、验证点、回滚条件）、备份恢复演练记录、日志分析结论与权限清单核对结果；不包含任何真实主机名、账号或用户数据。"
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "材料：虚构变更 SA-07",
+                  "服务Q获批纸面测试窗口21:00–21:15。验收条件：20次检查至少19次成功，响应p95不超过450 ms。变更前样本20/20、310 ms。",
+                  "21:06 候选版本测得17/20、420 ms。变更记录列出前版本V1。备份任务显示完成，没有恢复测试记录。变更负责人批准后才可回退，目前未批准。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "任务与交付",
+                  "写一张决策单，逐项对比验收门槛和观测，决定是否继续扩大发布、要补什么、找谁。",
+                  "写出决定后应复测什么，以及目前不能声称哪些备份或恢复结果。只做纸面题。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "题后参考",
+                  "17/20未达19/20；420 ms未超过450 ms。不要扩大发布。把窗口、失败指标、V1记录交变更负责人，等批准后才可执行回退。",
+                  "备份完成不能证明可恢复。若获批且完成回退，应复测两项指标和用户流程、记结果；题面未证明已恢复。"
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "独立自核量规",
+                  "逐项核两项阈值、是否扩大发布、批准人和恢复证据。每项都能回指原记录才通过。只用虚构资料，不接真实主机、不用真实凭据或命令。"
+                ]
+              }
             ]
           },
           "id": "network-and-computer-systems-administrators.path.entry-work-sample-data.3",
           "source_refs": [
             "onet-work"
           ],
-          "type": "notice"
+          "title": "SA-07：变更与回退评审",
+          "type": "cards"
         },
         {
           "availability": "available",
@@ -13109,6 +13141,13 @@
               "career.column.boundary",
               "career.column.evidence",
               "career.column.next"
+            ],
+            "column_labels": [
+              "阶段",
+              "任务",
+              "边界",
+              "证据",
+              "下一步"
             ],
             "rows": [
               [
@@ -13209,6 +13248,12 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "情境",
+              "行动",
+              "复核点",
+              "证据"
+            ],
             "rows": [
               [
                 "线上服务中断",
@@ -13218,9 +13263,9 @@
               ],
               [
                 "变更后出现异常",
-                "执行回滚并保留原配置与日志",
-                "由变更审批人确认",
-                "回滚记录与根因分析"
+                "暂停扩大发布，保留观察和版本记录；获批准后才由指定人员回退并复测。",
+                "变更审批人先批准回退，再执行。",
+                "批准记录、实际回退记录（若已执行）及复测结果"
               ],
               [
                 "备份无法还原",
@@ -13250,50 +13295,50 @@
               {
                 "id": "food.day1",
                 "values": [
-                  "第1天",
-                  "学习资产清单、账号与权限字段"
+                  "第 1 天：读变更记录",
+                  "抄下窗口与两项验收门槛，建空白决策表。"
                 ]
               },
               {
                 "id": "food.day2",
                 "values": [
-                  "第2天",
-                  "完成一次模拟变更单（影响面与回滚条件）"
+                  "第 2 天：整理变更前基线",
+                  "填变更前观测及单位，另留一行给候选版本。"
                 ]
               },
               {
                 "id": "food.day3",
                 "values": [
-                  "第3天",
-                  "分析一段模拟日志并提出故障假设"
+                  "第 3 天：比较候选结果",
+                  "逐项判是否满足门槛，标出数字出处。"
                 ]
               },
               {
                 "id": "food.day4",
                 "values": [
-                  "第4天",
-                  "做一次备份恢复演练并记录结果"
+                  "第 4 天：查回退权限",
+                  "找出批准人，列前版本已知项和待补证据。"
                 ]
               },
               {
                 "id": "food.day5",
                 "values": [
-                  "第5天",
-                  "处理一次模拟配置漂移或权限过宽"
+                  "第 5 天：写交接",
+                  "写决定、请求的下一步与待复测指标。"
                 ]
               },
               {
                 "id": "food.day6",
                 "values": [
-                  "第6天",
-                  "请他人按清单复核并复盘偏差"
+                  "第 6 天：自行复核",
+                  "按四项量规自行检查，再对照题后参考改一处。同伴复核可选。"
                 ]
               },
               {
                 "id": "food.day7",
                 "values": [
-                  "第7天",
-                  "复盘可用性、变更纪律与安全边界"
+                  "第 7 天：决定是否继续",
+                  "写自己是否愿意在轮值中反复做这件事、最投入哪一步、还要练什么。"
                 ]
               }
             ]
@@ -13302,6 +13347,7 @@
           "source_refs": [
             "onet-details"
           ],
+          "title": "七天纸面体验",
           "type": "timeline"
         },
         {
@@ -13333,6 +13379,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "状态",
+              "支持凭证",
+              "权限",
+              "条件",
+              "缺证",
+              "责任角色",
+              "下一步"
             ],
             "rows": [
               [
@@ -13554,7 +13609,7 @@
                 ]
               },
               {
-                "answer": "没有与本职业精确对应的全国职业工资分布。国家统计局 2025 年按行业门类公布：城镇非私营单位信息传输、软件和信息技术服务业年平均工资 248,752 元，城镇私营单位为 128,166 元；这是行业平均，不含个体工商户与自由职业者，不能解释为该岗位起薪或分位数。",
+                "answer": "本页未核得中国大陆同口径的全国职业工资。国家统计局 2025 年信息传输、软件和信息技术服务业年平均工资为城镇非私营单位 248,752 元、城镇私营单位 128,166 元。统计的是城镇地区就业人数至少 5 人的法人单位，数字是税前行业均值，不能当作本职业的起薪、中位数或分位数。",
                 "id": "network-and-computer-systems-administrators.faq.5",
                 "question": "中国大陆有对应的工资数据吗？",
                 "question_key": "career.faq.network-and-computer-systems-administrators.5",
@@ -13572,11 +13627,13 @@
                 ]
               },
               {
-                "answer": "O*NET 未列出本职业的统一准入证书；O*NET 教育调查显示 30% 受访者称需副学士、27% 称需学士、20% 称需中等后证书，Job Zone 3 的在岗培训通常需 1—2 年。中国官方职业技能标准入口未建立与该 O*NET 代码等同的资格，具体培训与授权应按地区、系统与雇主核对。",
+                "answer": "美国 BLS 将本科学历列为该职业典型准备，在岗培训列为无。O*NET 是另一项调查，部分回答为副学士 30%、本科 27%、中等后证书 20%；Job Zone 3 说明适用于一组职业，不规定本岗培训年限。本页未核得等同的大陆准入资格；学历、认证和操作授权看目标雇主。",
                 "id": "network-and-computer-systems-administrators.faq.7",
                 "question": "需要什么资格或证书？",
                 "question_key": "career.faq.network-and-computer-systems-administrators.7",
                 "source_refs": [
+                  "bls-ep-2025-2035",
+                  "onet-entry",
                   "source-pack-onet-localcert",
                   "osta-standard"
                 ]
@@ -13635,25 +13692,25 @@
                 "entity": "网络与计算机系统管理员",
                 "id": "navigation-2",
                 "relation": "career.section",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "网络与计算机系统管理员",
                 "id": "navigation-3",
                 "relation": "career.section",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "网络与计算机系统管理员",
+                "entity": "计算机网络支持专家",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/career/jobs/computer-network-support-specialists"
               },
               {
-                "entity": "网络与计算机系统管理员",
+                "entity": "计算机支持专员",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/career/jobs/computer-support-specialists"
               },
               {
                 "entity": "网络与计算机系统管理员",
@@ -13685,11 +13742,11 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "行业门类平均工资，未单列本职业；不含个体工商户与自由职业者。"
+                  "行业门类平均工资，未单列本职业。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wage",
-                "limitation": "行业平均工资，不是该职业工资；不含个体户和自由职业者。",
+                "limitation": "行业平均工资，不是该职业工资。",
                 "market": "CN",
                 "name": "2025年城镇单位就业人员年平均工资情况",
                 "period": "2025 statistics; published 2026-05-15",
@@ -13709,7 +13766,7 @@
                 "name": "NIST SP 800-53 Rev. 5",
                 "period": "current; retrieved 2026-09-26",
                 "publisher": "National Institute of Standards and Technology",
-                "scope": "combined_official",
+                "scope": "NIST SP 800-53 Rev. 5 控制目录",
                 "url": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
               },
               {
@@ -13724,7 +13781,7 @@
                 "name": "NIST SP 800-53 Rev. 5 控制目录",
                 "period": "current; retrieved 2026-09-26",
                 "publisher": "National Institute of Standards and Technology",
-                "scope": "combined_official",
+                "scope": "NIST SP 800-53 Rev. 5 控制目录",
                 "url": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
               },
               {
@@ -13773,19 +13830,19 @@
                 "url": "https://www.onetonline.org/link/details/15-1244.00"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "美国精确职业 2024 年就业 331,500 人。"
+                  "2025年就业约323,600人。"
                 ],
                 "evidence_type": "official occupation employment",
                 "id": "onet-employment",
                 "limitation": "美国范围，不代表中国大陆需求。",
                 "market": "US",
-                "name": "National Employment — 15-1244.00",
-                "period": "2024 employment; accessed 2026-09-26",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS 15-1244就业规模",
+                "period": "2025",
+                "publisher": "美国劳工统计局",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/15-1244.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -13818,19 +13875,19 @@
                 "url": "https://www.onetonline.org/link/industry/15-1244.00"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2024—2034 年就业变化为下降（-1% 或更低），年均空缺约 14,300 个。"
+                  "323,600降至310,400；−4.1%；年均约13,400个空缺。"
                 ],
                 "evidence_type": "official occupation projection",
                 "id": "onet-projection",
                 "limitation": "宏观预测不是个人录用保证。",
                 "market": "US",
-                "name": "Employment projections — 15-1244.00",
-                "period": "2024—2034 projections; accessed 2026-09-26",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS 15-1244就业预测",
+                "period": "2025–2035",
+                "publisher": "美国劳工统计局",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/15-1244.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -13874,8 +13931,8 @@
                 "name": "国家职业技能标准查询",
                 "period": "current portal; retrieved 2026-09-26",
                 "publisher": "人力资源和社会保障部职业技能鉴定中心",
-                "scope": "combined_official",
-                "url": "https://osta.mohrss.gov.cn/skillStandard"
+                "scope": "中国职业技能标准查询门户",
+                "url": "https://www.osta.org.cn/skillStandard"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -14043,6 +14100,21 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A05样本负责服务器和云主机，要求相关本科及以上，重视Linux和虚拟化。仅是有日期的雇主样本，不代表全国准入或工资。"
+                ],
+                "evidence_type": "雇主招聘原文",
+                "id": "cn-sse-a05-systems-20260409",
+                "limitation": "仅为样本，岗位是否仍开放及代表性未核。",
+                "market": "CN",
+                "name": "上证所信息网络 A05 系统运维招聘（2026年4月9日）",
+                "period": "2026-04-09",
+                "publisher": "上证所信息网络",
+                "scope": "雇主样本：系统运维",
+                "url": "https://star.sse.com.cn/aboutus/recruitment/sseinfo/c/c_20260409_10814681.shtml"
               }
             ]
           },
@@ -14423,9 +14495,9 @@
             "风险": "服务中断"
           },
           {
-            "为什么重要": "备份任务显示成功但从未验证实际还原",
-            "控制方式": "定期恢复演练、异地副本与恢复时间目标",
-            "风险": "备份不可恢复"
+            "为什么重要": "已完成的恢复演练发现，恢复清单漏列一个业务所需数据集。",
+            "控制方式": "与业务负责人核对恢复清单，并重做受影响的恢复演练。",
+            "风险": "恢复抽测缺少所需数据集"
           },
           {
             "为什么重要": "账号权限超出职责或长期共享账号",
@@ -14523,7 +14595,7 @@
             "stage": "运维负责人"
           }
         ],
-        "direct_answer": "编辑路径：先掌握网络与系统基础，用支持/初级岗位积累记录，再按组织授权承担运维责任；不是统一阶梯。BLS典型本科，部分雇主接受证书或副学士；Job Zone3不能证明固定培训年限，目录认证不等生产权限。",
+        "direct_answer": "编辑路径：先掌握网络与系统基础，用支持/初级岗位积累记录，再按组织授权承担运维责任；不是统一阶梯。BLS典型本科，部分雇主接受证书或副学士；Job Zone3不能证明固定培训年限，目录认证不等生产权限。 本节《SA-07：变更与回退评审》可独立纸面试做。",
         "entry_heading": "从入门支持到生产环境运维",
         "heading": "网络与计算机系统管理员的入行、资格与职业发展路径",
         "locale_requirements": {
@@ -14562,6 +14634,12 @@
             "id": "bls-ooh-system-admins",
             "label": "BLS OOH Network and Computer Systems Administrators",
             "scope": "美国典型学历、雇主差异与工作安排"
+          },
+          {
+            "href": "https://star.sse.com.cn/aboutus/recruitment/sseinfo/c/c_20260409_10814681.shtml",
+            "id": "cn-sse-a05-systems-20260409",
+            "label": "上证所信息网络 A05 系统运维招聘（2026年4月9日）",
+            "scope": "A05样本负责服务器和云主机，要求相关本科及以上，重视Linux和虚拟化。仅是有日期的雇主样本，不代表全国准入或工资。"
           }
         ],
         "tracks": [
@@ -14891,15 +14969,15 @@
           },
           {
             "affected_roles": "负责生产环境变更、账号权限与备份恢复的运维人员",
-            "consequence": "数据丢失且无法在承诺时间内恢复",
+            "consequence": "缺少该数据集时，服务无法完成完整业务流程。",
             "evidence_refs": [
               "onet",
               "nist"
             ],
             "id": "record-version",
-            "mitigation": "定期恢复演练、异地副本与恢复时间目标",
-            "scenario": "备份任务显示成功，但从未验证过实际还原",
-            "title": "备份不可恢复"
+            "mitigation": "与业务负责人核对恢复清单，并重做受影响的恢复演练。",
+            "scenario": "已完成的恢复演练发现，恢复清单漏列一个业务所需数据集。",
+            "title": "恢复抽测缺少所需数据集"
           },
           {
             "affected_roles": "负责生产环境变更、账号权限与备份恢复的运维人员",
@@ -15000,7 +15078,7 @@
             {
               "指标": "行业门类（同行业，私营单位）",
               "数值": "128,166 元/年（2025 均值）",
-              "说明": "同一次统计的私营单位口径，不含个体工商户与自由职业者。"
+              "说明": "同一次统计的私营单位口径。"
             }
           ],
           "china_ai_row": {
@@ -15317,7 +15395,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "在隔离的模拟环境做一次“变更—验证—回滚”演练：写清变更项、影响面、验证点、回滚条件与升级路径，并做一次备份恢复演练与权限清单核对，再请有经验人员反馈；练习不构成系统授权、变更审批或雇主录用承诺。",
+        "summary": "用SA-07纸面记录对照变更门槛与观测，写下决定和下一责任人。不需要真实账号或同伴。 练习分数不能替代录用或生产授权。",
         "title": "网络与计算机系统管理员"
       },
       "fit_decision_checklist": {
@@ -15408,7 +15486,7 @@
             "geography": "中国大陆（行业门类口径）",
             "horizon": "2025 年数据（2026-05-15 发布）",
             "interpretation": "国家统计局按行业门类公布平均工资，该门类覆盖多种信息技术岗位，未单列本职业。",
-            "limitation": "行业门类均值不单列本职业，且不含个体工商户与自由职业者。",
+            "limitation": "行业门类均值不单列本职业，不能当作本职业工资。",
             "metric": "中国行业门类工资均值（代理值）",
             "occupation_scope": "国家统计局 2025 年城镇单位就业人员平均工资，信息传输、软件和信息技术服务业",
             "source_id": "nbs",
@@ -15758,7 +15836,7 @@
             "question": "测评结果能作为录用证据吗？"
           },
           {
-            "answer": "在隔离的模拟环境完成一次“变更—验证—回滚”演练并做一次备份恢复演练，再请有经验人员反馈。",
+            "answer": "用第 09 节 SA-07 纸面记录写判断、回退审批及待核的恢复证据，再按量规自查。",
             "question": "适合先做哪一类低成本试验？"
           }
         ],
@@ -15777,7 +15855,7 @@
             "tone": "caution"
           },
           {
-            "body": "在隔离模拟环境完成变更—验证—回滚与备份恢复演练，并接受复核反馈。",
+            "body": "用第 09 节 SA-07 写纸面判断、回退审批和恢复待证；按量规自查，第二读者可选。",
             "id": "experiment",
             "label": "低成本试验",
             "tone": "action"
@@ -15820,7 +15898,7 @@
             "usage": "主要行业（未提供占比）"
           },
           {
-            "href": "https://www.onetonline.org/link/details/15-1244.00",
+            "href": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
             "label": "NIST SP 800-53 Rev.5",
             "usage": "访问控制、审计与变更管理控制参照"
           },
@@ -15867,8 +15945,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "局部工资2025，BLS就业预测2025—2035，行业详情2025；NIST发布页注明Release5.2.0，通用控制按组织裁剪；NBS信息技术行业2025均值为代理。FAQ、快答及其共享历史事实/来源未全页同步。",
-          "updated_at": "本轮查阅2026-10-11；工资/行业2025、预测2025—2035；共享来源原版本保留。"
+          "source": "美国工资为2025年5月口径，就业预测为2025–2035年；中国大陆数值为行业均值。NIST控制须按组织范围选用。",
+          "updated_at": "关键工资与就业原表核于2026年11月9日。"
         },
         "note": "证据只支持在标注市场、职业口径与期间内的范围性判断，不构成个人收入、录用或系统授权；生产环境变更、权限授予与安全事件处置须由有权限的人在组织制度与所在地要求内执行。",
         "secondary_links": [
@@ -15900,7 +15978,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI 中文测评"
+            "label": "计算机网络支持专家"
           },
           {
             "href": {
@@ -15910,7 +15988,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "大五人格中文测评"
+            "label": "计算机支持专员"
           }
         ]
       },
@@ -15945,7 +16023,7 @@
         "copy_key": "career.item.entry-work-sample-data",
         "id": "network-and-computer-systems-administrators.path.entry-work-sample-data.3",
         "location": "entry_decisions",
-        "type": "notice"
+        "type": "cards"
       },
       {
         "block": "path",
@@ -16036,50 +16114,51 @@
       },
       {
         "derivation": null,
-        "display_value": "Job Zone 3；通常职业学校、相关经验或副学士层级准备；一至两年在岗培训",
+        "display_value": "O*NET Job Zone 3（准备层级）；BLS把学士学位列为美国典型入行学历。",
         "fact_id": "entry-training",
         "market": "美国",
         "measure": "典型入门准备",
         "occupation_scope": "精确职业 15-1244.00",
         "period": "O*NET 2026 职业档案；访问 2026-09-26",
         "source_refs": [
-          "onet-entry"
+          "onet-entry",
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "331,500 人（2024）",
+        "display_value": "2025年就业约323,600人",
         "fact_id": "us-employment",
         "market": "美国",
         "measure": "就业存量",
         "occupation_scope": "精确职业 15-1244.00（非父类口径）",
-        "period": "2024 年就业，经 O*NET 转发；访问 2026-09-26",
+        "period": "BLS就业预测表：2025年就业",
         "source_refs": [
-          "onet-employment"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "下降（-1% 或更低）",
+        "display_value": "−4.1%（2025–2035年）",
         "fact_id": "us-growth",
         "market": "美国",
         "measure": "就业预测",
         "occupation_scope": "精确职业 15-1244.00（非父类口径）",
-        "period": "2024—2034 预测，BLS 经 O*NET 转发；访问 2026-09-26",
+        "period": "BLS 2025–2035年预测",
         "source_refs": [
-          "onet-projection"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "14,300 个/年（2024—2034）",
+        "display_value": "年均约13,400个（2025–2035年）",
         "fact_id": "us-openings",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "精确职业 15-1244.00（非父类口径）",
-        "period": "2024—2034 预测，经 O*NET 转发；访问 2026-09-26",
+        "period": "BLS 2025–2035年预测",
         "source_refs": [
-          "onet-projection"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -16281,7 +16360,7 @@
         "availability": "available",
         "fact_ref": "cn-wage-nonprivate",
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆行业工资背景（本职业工资缺口）"
       }
     ]
   },
@@ -16289,14 +16368,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "网络与计算机系统管理员（O*NET 15-1244.00）安装、配置并维护组织的局域网、广域网、数据通信网络、操作系统与物理／虚拟服务器，监控系统与计划任务（含备份）的完整性和可用性，分析网络与服务器资源占用并控制用户访问，还可能协助网络建模、分析与规划协调。本页只用官方来源说明职业范围、任务、准备要求、中美统计口径与授权边界。"
+      "text": "网络与计算机系统管理员做什么、与网络支持的区别、美国工资就业数据，以及一份变更与回退纸面练习。"
     },
     "title": {
       "availability": "available",
       "text": "网络与计算机系统管理员"
     }
   },
-  "source_content_sha256": "279256552df806d924a9aad43ffc214a7fedd6f2a381ebafff2e1dad992401b8",
+  "source_content_sha256": "6fec67cf4738e4282559503d75cc37837ad1bea309914899fd09880156fc9823",
   "subject": {
     "canonical_slug": "network-and-computer-systems-administrators",
     "name": "网络与计算机系统管理员",

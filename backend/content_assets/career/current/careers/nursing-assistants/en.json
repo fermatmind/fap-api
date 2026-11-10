@@ -191,6 +191,9 @@
       "item:nursing-assistants.path.seven-day-trial.5": {
         "status": "pending_mapping"
       },
+      "item:nursing-assistants.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nursing-assistants.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12566,6 +12569,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The shift sheet says lunch was unfinished. The next worker saw only that the tray was removed. Separate direct observations from assumptions and report the facts to the nurse."
+            ]
+          },
+          "id": "nursing-assistants.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Report a daily care observation",
+          "type": "notice"
         }
       ]
     },
@@ -15159,6 +15177,13 @@
         "id": "nursing-assistants.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nursing-assistants.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15500,7 +15525,7 @@
       "text": "Nursing Assistants career profile｜tasks, wages, access, and boundaries"
     }
   },
-  "source_content_sha256": "cf5cb89aaa05cfa1f6e2306c3d9152ca07bc7b1bddc107a968dbe0301b31175d",
+  "source_content_sha256": "ded65bc8000159d22f4709194eaed9b762ca71b07225737556ad4da7b5cd0556",
   "subject": {
     "canonical_slug": "nursing-assistants",
     "name": "Nursing assistants",

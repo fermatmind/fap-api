@@ -149,6 +149,9 @@
       "item:military-careers.path.seven-day-trial.5": {
         "status": "mapped"
       },
+      "item:military-careers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:military-careers.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12350,6 +12353,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两份虚构岗位简介分别强调信息传递与物资记录。各写一个需查军种官方岗位说明的问题；细分任务、入职条件和统计以对应官方信息为准。"
+            ]
+          },
+          "id": "military-careers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "按官方岗位说明比较分工",
+          "type": "notice"
         }
       ]
     },
@@ -14670,6 +14688,13 @@
         "id": "military-careers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "military-careers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14839,7 +14864,7 @@
       "text": "军事战术行动与空中/武器专业人员：范围、数据边界 | 费马测试"
     }
   },
-  "source_content_sha256": "e4216f73354f02f317d264e8b702b3dd612b2e74ca520d5317783f29b11da410",
+  "source_content_sha256": "962feac685853fb6d8953c4aa6e11430b3620d742fa6545b3e5ecd2294f3f939",
   "subject": {
     "canonical_slug": "military-careers",
     "name": "其他军事战术行动与空中/武器专业人员",

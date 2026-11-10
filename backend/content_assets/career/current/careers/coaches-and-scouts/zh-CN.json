@@ -1490,6 +1490,9 @@
       "item:coaches-and-scouts.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:coaches-and-scouts.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:coaches-and-scouts.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31623,6 +31626,21 @@
           ],
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。同一运动员的两次观察分别来自完整比赛和三分钟剪辑。各写一条可支持的观察，再写需要看完整表现才能回答的问题。"
+            ]
+          },
+          "id": "coaches-and-scouts.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "区分训练观察与选材判断",
+          "type": "notice"
         }
       ]
     },
@@ -38417,6 +38435,13 @@
         "id": "coaches-and-scouts.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "coaches-and-scouts.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -39080,7 +39105,7 @@
       "text": "教练与球探"
     }
   },
-  "source_content_sha256": "19b35ce4222eb32033a87d70fb832f52a172ab3940f24c2d12df96e2b1cb1c1b",
+  "source_content_sha256": "a6eab8dc967a28246e42fd3ccb312815803f6bb821e0d6610a513a87ba54966e",
   "subject": {
     "canonical_slug": "coaches-and-scouts",
     "name": "教练与球探",

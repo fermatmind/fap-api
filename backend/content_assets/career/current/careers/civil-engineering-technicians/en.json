@@ -1457,6 +1457,9 @@
       "item:civil-engineering-technicians.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:civil-engineering-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:civil-engineering-technicians.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30426,6 +30429,21 @@
           "id": "civil-engineering-technicians.path.recruitment-sample.1",
           "title": "Notes on the use of recruitment samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. A survey sheet cites revision B and the quantity list uses C. Mark the quantities that should not be combined and write a question for the responsible engineer."
+            ]
+          },
+          "id": "civil-engineering-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check drawing and field records",
+          "type": "notice"
         }
       ]
     },
@@ -36891,6 +36909,13 @@
         "id": "civil-engineering-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "civil-engineering-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37409,7 +37434,7 @@
       "text": "Civil engineering technicians"
     }
   },
-  "source_content_sha256": "f6ee78abda5b11548066562bea1f8994a71bf8dad9f654f43f6029bfb8d2b6cd",
+  "source_content_sha256": "b9e2c6177ea201d218e41856da9abde5c9a50be5b300da1d02e55b35fb5f5974",
   "subject": {
     "canonical_slug": "civil-engineering-technicians",
     "name": "Civil engineering technicians",

@@ -23015,14 +23015,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Next, verify the target region and institution's post authority, product scope, qualifications, and disclosure requirements, then practice needs interviews and plan explanations with fictional material, without treating the exercise as real investment advice."
+              "Paper check | Compare a fictional household’s monthly cash-flow sheet with its deposit calendar. Flag the two dates given for the same bonus and write a question for the client. "
             ]
           },
           "id": "personal-financial-advisors.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "privacy",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23319,13 +23317,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "A US occupational classification does not equal the practice qualification for Chinese wealth management posts; securities, insurance, and tax permissions are verified under local rules."
+              "Personal financial advisors review clients’ goals, cash flow and tolerance for risk before discussing options and follow-up. In a review, they separate changes in the client’s circumstances from assumptions in the original plan. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "personal-financial-advisors.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "privacy"
+            "transfer-onet-13-2052.00"
           ],
           "type": "prose"
         },
@@ -24434,15 +24431,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence gap: no actual generative AI adoption, overall substitution rate, substitution year, or reliable time saving, error, client understanding, or pay effect for this occupation was verified. Material summaries, scenario calculations, and disclosure drafts in approved environments are editorial trials; client goals, applicable authority, and final advice are reviewed by authorized personnel. BLS states only qualitatively that AI advice tools may soften demand, and 1.4%, a net of 4.1 thousand, and annual average 17.1 thousand openings including replacements cannot support an AI effect, individual unemployment, or Chinese demand. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional household’s monthly cash-flow sheet with its deposit calendar. Flag the two dates given for the same bonus and write a question for the client."
             ]
           },
           "id": "personal-financial-advisors.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "bls",
-            "ep",
-            "ilo",
-            "editor"
+            "transfer-onet-13-2052.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32683,6 +32678,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-13-2052.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 13-2052.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/13-2052.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37933,10 +37955,10 @@
       "text": "Personal Financial Advisors"
     }
   },
-  "source_content_sha256": "97553546455702aeaf4bd251f8faaf9dc08bd84d4f6a2b6fa351b37a74087ed0",
+  "source_content_sha256": "ae6d8ab9011707b8739aa6ed7c1a87d5c872632a73411f74ec5019875c72d384",
   "subject": {
     "canonical_slug": "personal-financial-advisors",
     "name": "Personal Financial Advisors",
-    "summary": "Personal financial advisors (O*NET 13-2052.00) learn about a client's assets, liabilities, cash flow, protection, tax situation, and goals, explain available budgeting, investment, insurance, and retirement planning options, and record assumptions, fees, risks, conflicts of interest, and follow-up reviews. Securities advice or transactions must be carried out within the applicable region, institution, and individual permissions; the occupational title itself grants no license."
+    "summary": "Personal financial advisors review clients’ goals, cash flow and tolerance for risk before discussing options and follow-up. In a review, they separate changes in the client’s circumstances from assumptions in the original plan."
   }
 }

@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-a47-fogang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a47-qingcheng": {
+        "status": "pending_mapping"
+      },
       "fact:r5-employment-2025": {
         "status": "pending_mapping"
       },
@@ -1695,7 +1701,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -19546,56 +19552,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22572,7 +22542,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Low-risk validation: using safe materials such as cardboard, fabric or foam, complete one exercise — \"read the dimensions from a fictional work order — mark and position using a template — cut along the line — measure to check whether the tolerance is exceeded — pick out and mark defects — count and pack\" — this only assesses work preferences; the exercise uses no dangerous equipment other than cutting tools and does not involve real production orders or client data, and is not equivalent to employer hiring or authorization to work."
+              "Use the three fictional cut-piece records on this page for a one-page handoff. Check the width range, grain marks and notch location, then compare the variant."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -24143,7 +24113,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Next step: using the fictional exercises on this page or one workshop shadowing session, verify whether the object of the target direction is manual cutting and trimming, machine cutting and slicing, metal punching and cutting, hand grinding and polishing, machine feeding and offbearing, textile cutting or non-metallic forming, and then decide on a direction."
+              "Check the main tools and outputs. Ask whether the job is cutting and trimming, machine operation or patternmaking."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.transition",
@@ -26111,12 +26081,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              ": Comparison is made only when the actual position's tasks and materials match; this round did not verify unified education, piece-rate share or occupational wage percentiles, so each item should be checked against the target employer's public conditions."
+              "One role combined hand trimming with inspection, and the other called for both hand and electric-shear cutting. Ask the employer about tools, duties and pay. Current opening status is unverified."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "r5-cn-safety"
+            "a47-fogang",
+            "a47-qingcheng"
           ],
           "type": "prose"
         },
@@ -26804,7 +26775,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "First complete one exercise using safe materials such as cardboard, fabric or foam — \"read the dimensions from a fictional work order — mark and position using a template — cut along the line — measure to check whether the tolerance is exceeded — pick out and mark defects — count and pack\" — or one workshop shadowing session, and then judge your preference."
+              "Use the three fictional cut-piece records on this page for a one-page handoff. Check the width range, grain marks and notch location, then compare the variant."
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -27858,7 +27829,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Start with a paper-based dimensional and defect marking walkthrough, and obtain the actual position's hours, materials, equipment and training information; entering a workshop or using cutting tools requires permission and safety training, and the fictional exercises do not authorize equipment operation."
+              "Use the paper task to see how you feel about rechecking cut-piece records. Ask the employer about hand shears, electric shears or a stationary cutter, and who handles each step."
             ]
           },
           "id": "actors.display.personality_fit_block.questions.next.answer",
@@ -28597,15 +28568,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This page does not cite specific job postings and does not count historical recruitment cases as open positions; recruitment and qualification conditions must be verified against the target employer's public information for the current year.",
+              "Guangdong Boen New Materials listed one combined finishing-trim and full-inspection role with quoted total pay of CNY 4,000–6,000 per month. The posting described detailed hand work, piece-rate pay and a daytime shift. An older Qingyuan Weideng Garment notice listed two sample-room cutters. It asked for hand and electric-shear cutting skills and familiarity with fabric and pattern grainlines. The role’s row did not quote pay. One role combined hand trimming with inspection, and the other called for both hand and electric-shear cutting. Ask the employer about tools, duties and pay. Current opening status is unverified.",
               "The training, observation and mentoring assessment methods in the examples are editorial designs, used to illustrate common verification approaches and not representing any employer's unified process."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "r5-onet-current",
-            "r5-bls-current",
-            "r5-cn-safety"
+            "a47-fogang",
+            "a47-qingcheng"
           ],
           "type": "notice"
         },
@@ -28730,9 +28700,9 @@
               {
                 "id": "scene",
                 "values": [
-                  "Work sample one: a fictional cutting plan",
-                  "Deliverable: a fully fictional cutting and profiling plan, including the work order dimensions, the template positioning method, the key points of measuring and marking, and the tolerance verification method.",
-                  "State the basis for each judgement (work order, template or inspection standard); the plan must not be self-contradictory."
+                  "Work sample one: cut-piece handoff",
+                  "Keep the original and H13 variant.",
+                  "Record evidence, status and next owner."
                 ]
               },
               {
@@ -28981,34 +28951,34 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional production scenario material (exercise input)",
-                  "Fictional scenario: a hand cutter and trimmer encounters four problems during a shift. First, a batch of material has local scratches and colour differences, and the appearance grade required by the work order is unclear; second, a measured piece sits at the edge of the tolerance and it is unclear whether it can be released; third, after the bench cutting tool is pressed down there is burring and the tool is somewhat blunt; fourth, the delivery date is very tight and the team leader wants to finish the work first and add the first-piece record afterwards.",
-                  "Materials provided: work order dimensions and quantities; appearance grades and defect limit samples; inspection and first-piece confirmation requirements; tool maintenance and replacement procedures.",
-                  "Materials not provided: the rules for judging and conceding edge dimensions, the authority to perform tool replacement, the order of first-piece records, and the division of responsibility for deviation and missed defects. If the exercise requires these conditions, state your assumptions and the people you need to confirm with."
+                  "Three fictional cut-piece records",
+                  "H12: allowed width 79–81 mm, recorded width 82 mm. Grain and notch marks are present.",
+                  "H13: width is in range and notch location matches. The grain mark field is blank.",
+                  "H14: width is in range and grain matches. The template calls for a left notch, but the piece record shows a right notch."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Task requirements",
-                  "Please write a one-page handling and reporting plan covering: verification and handling recommendations for defects and colour differences, re-verification and handling of edge dimensions, handling of burring and tool problems, and the order of first-piece checks and records under delivery pressure.",
-                  "The plan must state which information comes from the given materials and which is still assumption, and indicate whether the basis is the work order, inspection standards or tool procedures."
+                  "One-page handoff",
+                  "Record evidence, status and next owner for each piece. Quality checks width and grain. The template lead checks notch location. Quality signs off on release.",
+                  "Single-change variant: add “matches template” to H13’s grain field. Leave the other records as given. Show the row that changes."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference deliverable (can be derived from the prompt)",
-                  "The plan should include: defects and colour differences (verify piece by piece against the limit samples, pick out and mark items beyond the limit, and ask inspection or the team leader to confirm when uncertain rather than relaxing the standard yourself), edge dimensions (re-measure and verify whether they are within tolerance, stop the machine and isolate and report according to procedure on deviation, and do not release on your own), burring and tools (replace or sharpen the tool according to procedure and re-set and confirm the first piece before continuing), delivery pressure (explain that the first-piece check and records cannot be omitted, and apply for an adjustment or additional resources when necessary rather than finishing first and recording later), and handover (state the status of the four items, the actions taken and the matters still to be confirmed).",
-                  "The reference deliverable only lists the elements that should be included and does not require wording identical to the example; being able to explain the basis for your judgements is enough."
+                  "Finish independently",
+                  "Submit the original and variant on day six.",
+                  "On day seven, open “Hand cutting record reference (open after day six)” under Common questions and sources."
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "Boundaries and conclusions that cannot be inferred",
-                  "This item only tests awareness of dimensional verification, inspection judgement, tool and safety handling and anomaly escalation; it does not evaluate whether the handling of any real case is compliant, and it does not constitute a safety determination, liability determination or legal advice.",
-                  "Do not use real production orders or unredacted commercial information; where real tool and equipment operation, personal protection, dust and noise protection and finished goods inspection are involved, safety procedures, work instructions and unit policies must be followed."
+                  "Exercise boundary",
+                  "Check the paper records.",
+                  "Actual cutting, rework and release follow workplace procedures."
                 ]
               }
             ]
@@ -29019,7 +28989,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "Fictional exercise material: handling cutting tolerance and tool safety issues",
+          "title": "Fictional hand cutting record handoff",
           "type": "cards"
         },
         {
@@ -29030,50 +29000,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: Read a public document",
-                  "Find a public educational document on manual cutting or work safety, mark three key requirements and the corresponding practices, and write down the points you want to confirm."
+                  "Day 1",
+                  "Copy the piece IDs and width requirements."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: Run one measuring and marking walkthrough",
-                  "Using safe material such as cardboard, write out the dimensions, the template positioning method and the marking points for a fictional work order, and note the conditions that need confirmation."
+                  "Day 2",
+                  "Compare the widths."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: Write a first-piece and tolerance verification checklist",
-                  "Using a fictional work order, list the first-piece confirmation and sampling items and the basis for judgement, marking the items that require stopping the machine and reporting."
+                  "Day 3",
+                  "Check the grain field."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: Run one safety and protection verification",
-                  "Using a fictional scenario, write out the verification points for tool operation, personal protection and dust and noise protection, and the sequence for handling anomalies."
+                  "Day 4",
+                  "Compare notch locations."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: Write an inspection and grading record",
-                  "Using fictional pieces, write a defect judgement and separation and grading record, including the basis for judgement, the isolation method and the reporting path."
+                  "Day 5",
+                  "Record the status and next owner."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: Have someone review using only the materials",
-                  "Ask a peer to review your judgements using only your plan, and write down the questions they raise."
+                  "Day 6",
+                  "Submit one page on your own with the original three records and a separate row for the changed record in the variant."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: Decide whether to continue",
-                  "Return to the judgement checklist on this page and write down three reasons you are willing to continue and two conditions that call for caution."
+                  "Day 7",
+                  "On day seven, open “Hand cutting record reference (open after day six)” under Common questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29092,13 +29062,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Concrete change: whether you can write out the sequence of measuring basis, tolerance verification, tool handling and reporting given the materials, rather than just writing \"completed\".",
-              "Facts and choices: whether you would rather do manual cutting and profiling, trimming, sanding and inspection, or equipment operation and process coordination.",
-              "Exercise load: prolonged standing, repetitive motions and repeated inspection — which step drains you most, and can you accept it recurring in the work.",
-              "Material boundaries: the exercise materials are all fictional or based on public information, and real production orders or unredacted commercial information must not be included.",
-              "Response to feedback: when inspection points out dimensional or appearance problems in your work, are you willing to go back to the work order and standards and complete them.",
-              "Interest in the process: even when measuring and cutting are repetitive, are you willing to complete the first-piece verification and records every time rather than skipping procedure based on experience.",
-              "Next step: if you are willing to continue through the first six steps, the next step is to complete, under compliant conditions (such as workshop shadowing or one mentoring session), a full loop from measuring and cutting to inspection and packing, and ask someone experienced to review it; if some step is clearly draining, narrow the direction first and then verify."
+              "Keep both versions.",
+              "Give evidence for each row.",
+              "Distinguish complete records from release.",
+              "Name the next owner.",
+              "Compare with the reference and record a correction.",
+              "Ask the employer about actual duties.",
+              "Save the handoff as a work sample."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -31011,12 +30981,14 @@
                 ]
               },
               {
-                "answer": "In the U.S. 2025 wage data, the median annual wage is 38,020 dollars (18.28 dollars per hour), with percentiles of 26,630 / 34,050 / 38,020 / 47,850 / 57,870 dollars (hourly 12.80 / 16.37 / 18.28 / 23.01 / 27.82), under O*NET-SOC 51-9031.00's own basis; values broken down by state or area must be looked up on the O*NET local wages page by area and period and cannot be treated as an individual offer; no occupation-level figure was obtained for mainland China, and this page treats it as a gap without substituting industry averages or recruitment samples.",
+                "answer": "In 2025 the U.S. median was $38,020 per year or $18.28 per hour. The mainland China examples cover different stages and employment terms. Guangdong Boen New Materials listed one combined finishing-trim and full-inspection role with quoted total pay of CNY 4,000–6,000 per month. The posting described detailed hand work, piece-rate pay and a daytime shift. An older Qingyuan Weideng Garment notice listed two sample-room cutters. It asked for hand and electric-shear cutting skills and familiarity with fabric and pattern grainlines. The role’s row did not quote pay.",
                 "id": "actors.faq.6",
                 "question": "What is the typical wage for this occupation, and how should it be compared?",
                 "question_key": "career.faq.cutters-and-trimmers-hand.6",
                 "source_refs": [
-                  "oews"
+                  "r5-onet-current",
+                  "a47-fogang",
+                  "a47-qingcheng"
                 ]
               },
               {
@@ -31038,7 +31010,7 @@
                 ]
               },
               {
-                "answer": "First complete one exercise using safe materials such as cardboard, fabric or foam — \"read the dimensions from a fictional work order — mark and position using a template — cut along the line — measure to check whether the tolerance is exceeded — pick out and mark defects — count and pack\" — or one workshop shadowing session, and then verify the object, tolerance requirements and safety boundaries of the target direction.",
+                "answer": "Use the three fictional cut-piece records on this page for a one-page handoff. Check the width range, grain marks and notch location, then compare the variant.",
                 "id": "actors.faq.9",
                 "question": "If you want to try this direction with no background, what should you do first?",
                 "question_key": "career.faq.cutters-and-trimmers-hand.9",
@@ -31047,13 +31019,19 @@
                 ]
               },
               {
-                "answer": "The O*NET summary and employment trends page (based on BLS 2024—2034 projections, 51-9031.00's own basis) shows about 7,000 people under this basis in 2024, a projection label of Decline (declining -1% or lower) and an annual average of about 600 openings including growth and replacement; the projection is on an occupation-total basis, the work mainly involves manual cutting, trimming and inspection, and it should be verified against local manufacturing and processing orders, product mix and automation investment.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 51-9031 to fall from about 5,900 in 2025 to 4,800 in 2035, a decline of 18.9%. It projects about 500 openings per year on average, including replacements.",
                 "id": "actors.faq.10",
                 "question": "What else should be considered when choosing this occupation now?",
                 "question_key": "career.faq.cutters-and-trimmers-hand.10",
                 "source_refs": [
-                  "bls"
+                  "r5-bls-current"
                 ]
+              },
+              {
+                "answer": "H12 at 82 mm exceeds the 81 mm limit. Flag it for quality. H13 lacks a grain mark. Ask quality to verify it. H14’s notch is recorded on the opposite side. Refer it to the template lead. In the variant, H13’s grain record is complete. Send it to quality for sign-off. A complete grain record does not authorize release. H12 and H14 stay the same. Check width, grain, notch and the handoff and authority in both versions.",
+                "id": "actors.faq.11",
+                "question": "Hand cutting record reference (open after day six)",
+                "question_key": "career.faq.cutters-and-trimmers-hand.11"
               }
             ]
           },
@@ -31068,7 +31046,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "U.S. wages follow the 2025 OEWS; current employment follows the 2025 base year and the 2025—2035 projection, with the basis being 51-9031 itself; the Chinese manufacturing average for 2025 serves only as industry background, and precise occupational wages and a recruitment sample are insufficient evidence.",
+              "U.S. wages and employment use occupation 51-9031. The two mainland China job notices illustrate individual roles. Comparable occupation-level wage data remain unavailable.",
               "The respondent work context, education opinions, posting technology keywords, industry averages and editorial candidates each have their own denominator and limits and are not interchangeable or used to infer individual offers, hiring or AI causation.",
               "The periods of wages, employment and industry distribution are labelled separately; comparisons follow the specific statistical period of this module's sources, and historical values are not mixed in as current."
             ]
@@ -31297,21 +31275,19 @@
                 "url": "https://www.onetonline.org/link/summary/53-7063.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports the employment and projection figures for this occupation (this subcategory's own basis).",
-                  "Does not include mainland China information and cannot replace mainland China data.",
-                  "Check this round (2026-10-09): the old 2024–2034 register is retained for out-of-scope historical consumers; the current authorized module this round cites r5-bls-current and r5-onet-current instead."
+                  "BLS Table 1.2 projects U.S. employment in occupation 51-9031 to fall from about 5,900 in 2025 to 4,800 in 2035, a decline of 18.9%. It projects about 500 openings per year on average, including replacements."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "The old 2024–2034 register is retained for out-of-scope historical consumers; the current authorized module this round cites r5-bls-current and r5-onet-current instead.",
+                "limitation": "U.S. occupational projection.",
                 "market": "United States",
-                "name": "O*NET OnLine: Cutters and Trimmers, Hand 51-9031.00 summary and employment trends (based on BLS 2024—2034 projections, this subcategory's own basis)",
-                "period": "2024—2034 projection period; retrieved 2026-09-19",
+                "name": "BLS Table 1.2: Cutters and Trimmers, Hand, 51-9031",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/51-9031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31663,7 +31639,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "51-9031 own basis: 5,900 people employed in 2025, projected to decrease by 1,100, or 19%; typical entry requires no formal educational credential, no related experience and short-term on-the-job training. Typical conditions are not the admission rules of every employer; they are not a Chinese threshold and do not prove that AI caused the decline."
+                  "BLS Table 1.2 projects U.S. employment in occupation 51-9031 to fall from about 5,900 in 2025 to 4,800 in 2035, a decline of 18.9%. It projects about 500 openings per year on average, including replacements."
                 ],
                 "evidence_type": "official statistics",
                 "id": "r5-bls-current",
@@ -31673,7 +31649,7 @@
                 "period": "2025 base year, 2025–2035 projection; May 2025 wages; retrieved 2026-10-09",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31811,6 +31787,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Guangdong Boen New Materials listed one combined finishing-trim and full-inspection role with quoted total pay of CNY 4,000–6,000 per month. The posting described detailed hand work, piece-rate pay and a daytime shift."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a47-fogang",
+                "limitation": "One employer’s quoted pay. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Cutting and trimming job posting",
+                "period": "2026-10-27",
+                "publisher": "Fogang County Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.fogang.gov.cn/zwgk/zdlyxx/jycy/zpxx/qyzpxx/content/post_2202939.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "An older Qingyuan Weideng Garment notice listed two sample-room cutters. It asked for hand and electric-shear cutting skills and familiarity with fabric and pattern grainlines. The role’s row did not quote pay."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a47-qingcheng",
+                "limitation": "One employer’s quoted pay. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Cutting and trimming job posting",
+                "period": "2017",
+                "publisher": "Qingcheng District Government, Qingyuan",
+                "scope": "recruitment_proxy",
+                "url": "https://www.qingcheng.gov.cn/xxgk/mszd/jiuye/content/post_183652.html"
               }
             ]
           },
@@ -34684,9 +34690,9 @@
               "说明": "No individual unit or platform pay disclosure is used to stand in for national data, and no interpolation is done."
             },
             {
-              "指标": "Manufacturing industry background (not occupational wages)",
-              "数值": "Non-private 113,594 yuan per year; private 76,055 yuan per year (2025 pre-tax annual averages)",
-              "说明": "Applies only when the employer is actually in manufacturing; different unit types are read separately and are not used as occupational medians, monthly wages or individual offers."
+              "指标": "Job postings",
+              "数值": "Guangdong Boen New Materials listed one combined finishing-trim and full-inspection role with quoted total pay of CNY 4,000–6,000 per month. The posting described detailed hand work, piece-rate pay and a daytime shift. An older Qingyuan Weideng Garment notice listed two sample-room cutters. It asked for hand and electric-shear cutting skills and familiarity with fabric and pattern grainlines. The role’s row did not quote pay.",
+              "说明": "One role combined hand trimming with inspection, and the other called for both hand and electric-shear cutting. Ask the employer about tools, duties and pay. Current opening status is unverified."
             }
           ],
           "china_ai_row": {
@@ -34698,7 +34704,7 @@
           "china_class_row": "Chinese positions must be matched by the actual material, the cutting and trimming process and the equipment permissions; the U.S. occupation code cannot be mapped directly onto unified Chinese education, wage or licensing conditions.",
           "china_edu_table": [
             {
-              "学历段": "Position preparation verification (editorial suggestion)",
+              "学历段": "Finishing trim and inspection: detailed hand work",
               "岗位方向": "Cutting, trimming or sanding support position",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -34708,7 +34714,7 @@
               }
             },
             {
-              "学历段": "Position preparation verification (editorial suggestion)",
+              "学历段": "Sample-room cutting: hand and electric shears",
               "岗位方向": "Cutting, trimming or quality inspection position",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34835,11 +34841,15 @@
               }
             },
             {
-              "城市/区间": "Mainland China (recruitment quoted-pay basis)",
+              "城市/区间": "Fogang and Qingcheng job postings",
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "posting-a47-fogang",
+                    "field": "display_value"
+                  },
+                  {
+                    "$fact": "posting-a47-qingcheng",
                     "field": "display_value"
                   },
                   {
@@ -34849,7 +34859,7 @@
                     "type": "prose"
                   }
                 ],
-                "separator": ""
+                "separator": "\n"
               }
             },
             {
@@ -34865,7 +34875,8 @@
           "china_soc_row": "U.S. O*NET-SOC 51-9031.00; evidence matching Chinese occupational wages is insufficient, and industry background is used according to the employer's actual classification.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a47-fogang",
+            "posting-a47-qingcheng"
           ],
           "sources_note": "Source links are used according to their respective statistical or announcement scopes; when the statistical period, survey population and pay basis differ, cite them separately and do not convert between them.",
           "ui": {
@@ -34878,7 +34889,7 @@
             "scenario_role_label": "Scope of verification",
             "scenario_value_label": "Position direction"
           },
-          "us_growth": "Decline of 19% (BLS 2025—2035 total projection for this occupation)",
+          "us_growth": "Decline of 18.9% (BLS 2025—2035 total projection for this occupation)",
           "us_median": "38,020 dollars per year (median, 2025 wage data; hourly 18.28 dollars)"
         }
       },
@@ -34980,7 +34991,7 @@
               "$fact": "r5-growth-2025-2035",
               "field": "display_value"
             },
-            "说明": "BLS projects a 19% decline over 2025—2035, a decrease of about 1,100; O*NET uses the broad label Decline, which is not AI causation or an individual probability of unemployment."
+            "说明": "BLS projects a 18.9% decline over 2025—2035, a decrease of about 1,100; O*NET uses the broad label Decline, which is not AI causation or an individual probability of unemployment."
           },
           {
             "fact_ref": "r5-openings-2025-2035",
@@ -35557,7 +35568,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cutting-and-slicing-machine-setters-operators-and-tenders",
+            "target_href": "/en/career/jobs/cutting-and-slicing-machine-setters-operators-and-tenders",
             "target_slug": "cutting-and-slicing-machine-setters-operators-and-tenders",
             "target_title": "Cutting and Slicing Machine Setters, Operators, and Tenders (adjacent occupation)",
             "transition_distance": {
@@ -35580,7 +35591,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_href": "/en/career/jobs/cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "Cutting, Punching, and Press Machine Setters, Operators, and Tenders, Metal and Plastic (adjacent occupation)",
             "transition_distance": {
@@ -35603,7 +35614,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/grinding-and-polishing-workers-hand",
+            "target_href": "/en/career/jobs/grinding-and-polishing-workers-hand",
             "target_slug": "grinding-and-polishing-workers-hand",
             "target_title": "Grinding and Polishing Workers, Hand (adjacent occupation)",
             "transition_distance": {
@@ -35626,7 +35637,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/machine-feeders-and-offbearers",
+            "target_href": "/en/career/jobs/machine-feeders-and-offbearers",
             "target_slug": "machine-feeders-and-offbearers",
             "target_title": "Machine Feeders and Offbearers (adjacent occupation)",
             "transition_distance": {
@@ -35649,7 +35660,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/molders-shapers-and-casters-except-metal-and-plastic",
+            "target_href": "/en/career/jobs/molders-shapers-and-casters-except-metal-and-plastic",
             "target_slug": "molders-shapers-and-casters-except-metal-and-plastic",
             "target_title": "Molders, Shapers, and Casters, Except Metal and Plastic (adjacent occupation)",
             "transition_distance": {
@@ -35672,7 +35683,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/textile-cutting-machine-setters-operators-and-tenders",
+            "target_href": "/en/career/jobs/textile-cutting-machine-setters-operators-and-tenders",
             "target_slug": "textile-cutting-machine-setters-operators-and-tenders",
             "target_title": "Textile Cutting Machine Setters, Operators, and Tenders (adjacent occupation)",
             "transition_distance": {
@@ -35695,7 +35706,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/sewing-machine-operators",
+            "target_href": "/en/career/jobs/sewing-machine-operators",
             "target_slug": "sewing-machine-operators",
             "target_title": "Sewing Machine Operators (adjacent occupation)",
             "transition_distance": {
@@ -35718,7 +35729,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/shoe-machine-operators-and-tenders",
+            "target_href": "/en/career/jobs/shoe-machine-operators-and-tenders",
             "target_slug": "shoe-machine-operators-and-tenders",
             "target_title": "Shoe Machine Operators and Tenders (adjacent occupation)",
             "transition_distance": {
@@ -35806,7 +35817,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Learn about my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35855,7 +35866,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Learn about my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35904,7 +35915,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Learn about my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35953,7 +35964,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Learn about my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36002,7 +36013,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Learn about my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36051,7 +36062,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Learn about my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36787,19 +36798,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "MBTI personality test"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Learn about my personality preferences"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Learn about my Big Five traits"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -37205,74 +37208,74 @@
       },
       {
         "derivation": null,
-        "display_value": "About 7,000 people (2024)",
+        "display_value": "About 5,900 people (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistics)",
-        "occupation_scope": "Cutters and Trimmers, Hand (51-9031.00) own subcategory basis; the 2024 employment figure comes from the O*NET summary page (based on BLS 2024—2034 projections)",
-        "period": "2024 base year; retrieved 2026-09-19",
+        "occupation_scope": "51-9031 own U.S. occupational basis; a current independent fact that does not alter out-of-scope historical consumers",
+        "period": "2025 base year; retrieved 2026-10-09",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline of -1% or lower (2024—2034, label \"Decline\")",
+        "display_value": "Decline of 18.9%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "51-9031.00 own subcategory basis; projection label Decline (-1% or lower), a change in the total over the projection period, not an individual probability of being hired",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "51-9031 own U.S. occupational basis; a current independent fact that does not alter out-of-scope historical consumers",
+        "period": "2025—2035 projection; retrieved 2026-10-09",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 600 (annual average 2024—2034, including growth and replacement)",
+        "display_value": "About 500 per year (2025—2035, including growth and replacement)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Annual average job openings (including growth and replacement)",
-        "occupation_scope": "51-9031.00 own subcategory basis; openings are an annual average for 2024—2034, including positions arising from growth and replacement",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "51-9031 own U.S. occupational basis; a current independent fact that does not alter out-of-scope historical consumers",
+        "period": "2025—2035 projection; retrieved 2026-10-09",
         "source_refs": [
-          "bls"
+          "r5-onet-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Manufacturing | 70% (share of employment in the 2024 industry distribution)",
+        "display_value": "Manufacturing | 65% (2025 employment share, not wages)",
         "fact_id": "industry-theater",
         "market": "United States",
         "measure": "Industry employment share (not wages)",
-        "occupation_scope": "51-9031.00 own subcategory basis; manufacturing is the largest category in the O*NET industry distribution",
-        "period": "2024 industry distribution; retrieved 2026-09-19",
+        "occupation_scope": "51-9031 own U.S. occupational basis; a current independent fact that does not alter out-of-scope historical consumers",
+        "period": "2025 industry distribution; retrieved 2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Other industries (including wholesale trade) | 30% (share of employment in the 2024 industry distribution)",
+        "display_value": "Administrative and support services | 13% (2025 employment share, not wages)",
         "fact_id": "industry-education",
         "market": "United States",
         "measure": "Industry employment share (not wages)",
-        "occupation_scope": "51-9031.00 own subcategory basis; other industries is the second category published in combination on the O*NET industry page",
-        "period": "2024 industry distribution; retrieved 2026-09-19",
+        "occupation_scope": "51-9031 own U.S. occupational basis; a current independent fact that does not alter out-of-scope historical consumers",
+        "period": "2025 industry distribution; retrieved 2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Statistical status: the O*NET 2024 industry distribution assigns this occupation's employment to only two categories, \"manufacturing\" and \"other industries (including wholesale trade)\"",
+        "display_value": "Main industries: manufacturing 65%, administrative and support services 13%; the remainder is not set out item by item on this page",
         "fact_id": "industry-amusement",
         "market": "United States",
         "measure": "Industry distribution basis note (not wages)",
-        "occupation_scope": "51-9031.00 own subcategory basis; the O*NET industry page does not publish more detailed industry category shares, and this page does not split the two categories further",
-        "period": "2024 industry distribution; retrieved 2026-09-19",
+        "occupation_scope": "51-9031 own U.S. occupational basis; a current independent fact that does not alter out-of-scope historical consumers",
+        "period": "2025 industry distribution; retrieved 2026-10-09",
         "source_refs": [
-          "onet"
+          "r5-onet-current"
         ]
       },
       {
@@ -37301,7 +37304,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Decline of 19% (2025—2035)",
+        "display_value": "Decline of 18.9%",
         "fact_id": "r5-growth-2025-2035",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
@@ -37370,6 +37373,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Guangdong Boen New Materials listed one combined finishing-trim and full-inspection role with quoted total pay of CNY 4,000–6,000 per month. The posting described detailed hand work, piece-rate pay and a daytime shift.",
+        "fact_id": "posting-a47-fogang",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Cutting and trimming job posting",
+        "period": "2026-10-27",
+        "source_refs": [
+          "a47-fogang"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "An older Qingyuan Weideng Garment notice listed two sample-room cutters. It asked for hand and electric-shear cutting skills and familiarity with fabric and pattern grainlines. The role’s row did not quote pay.",
+        "fact_id": "posting-a47-qingcheng",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Cutting and trimming job posting",
+        "period": "2017",
+        "source_refs": [
+          "a47-qingcheng"
+        ]
       }
     ]
   },
@@ -37396,19 +37423,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, Decline of -1% or lower)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, about 7,000 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. annual average job openings (2024—2034, about 600, including growth and replacement)"
+        "label": "U.S. average annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37422,14 +37449,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Cutters and Trimmers, Hand (O*NET-SOC 51-9031.00) use hand tools or hand-held power tools to cut and trim finished products such as carpet, fabric, stone, glass and rubber: covering reading the work order to determine dimensions and quantities, marking and positioning to template or measuring tool, cutting and profiling with cutting tools and shears or bench cutting equipment, separating materials by size, weight, type and colour, folding and shaping, trimming excess material and loose threads, adjusting guides and stops, replacing and sharpening tools, sanding, polishing, cleaning and marking the finished item, and counting, weighing, packing and moving; it should be noted that its U.S. wage and employment follow this subcategory's own basis (2025 median annual wage 38,020 dollars, hourly 18.28 dollars; about 7,000 people employed in 2024; a 2024—2034 projection of a decline of -1% or lower; about 600 annual average openings including growth and replacement; industry distribution manufacturing 70% | other industries 30%; interest code RC), together with the industry-level gap for such positions in mainland China and control points for tool safety, hand protection, dimensional verification and quality inspection."
+      "text": "Explore hand cutting and trimming work, U.S. wages and outlook, and mainland China job examples. Practice reviewing cut-piece records on paper."
     },
     "title": {
       "availability": "available",
       "text": "Cutters and Trimmers, Hand"
     }
   },
-  "source_content_sha256": "880188d941f2861b3b7fa171bc1613dcd8d15cdff879193ab034b189be23dffe",
+  "source_content_sha256": "a18c84bf038018ad2ff5d1148a0f1be69b50d6ed077cc17183f673e29bd8149e",
   "subject": {
     "canonical_slug": "cutters-and-trimmers-hand",
     "name": "Cutters and Trimmers, Hand",

@@ -200,6 +200,9 @@
       "item:nurse-anesthetists-nurse-midwives-and-nurse-practitioners.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:nurse-anesthetists-nurse-midwives-and-nurse-practitioners.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nurse-anesthetists-nurse-midwives-and-nurse-practitioners.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -13047,6 +13050,21 @@
             "onet-education"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。三则招聘分别写术中麻醉照护、孕产随访和门诊慢病管理。用职责匹配岗位方向，再给每则招聘写一个关于机构授权的问题。"
+            ]
+          },
+          "id": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "区分三类高级护理岗位",
+          "type": "notice"
         }
       ]
     },
@@ -15649,6 +15667,13 @@
         "id": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16029,7 +16054,7 @@
       "text": "执业护士"
     }
   },
-  "source_content_sha256": "bc0d8f40698d8d6e3ee6c81c11024cee2b0cfe42432ac4868c0f160eb81d6685",
+  "source_content_sha256": "a4e0f8ebb2fca5d6444c3808cdbe4dbf24575e6872080261a133a5f3203d85f0",
   "subject": {
     "canonical_slug": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners",
     "name": "执业护士",

@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a43-laiyang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a43-wuhan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -26625,12 +26591,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other cities"
+              "Wuhan and Laiyang job postings"
             ]
           },
           "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a43-wuhan",
+            "a43-laiyang"
           ],
           "type": "prose"
         },
@@ -26639,12 +26606,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no wage statistic for this occupation in other cities was obtained; verify the work location, duties, and pay conditions item by item, and do not substitute a national industry value."
+              "Lesso Technology Development (Wuhan) advertised an extrusion operator at piece-rate pay of CNY 5,500–7,000 per month. Duties include operating and setting up extrusion equipment, quality checks, and cleaning and maintenance. Injection molding was listed separately. Shandong Chunyurun Rainwater Harvesting and Water-Saving Irrigation Equipment advertised an extrusion operator at CNY 4,500–6,500 per month. The notice listed injection molding setup and quality inspection separately and did not specify how extrusion pay was calculated. Both postings cover extrusion work. Drawing jobs and national wages require separate evidence. Check with the employers for current openings."
             ]
           },
           "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a43-wuhan",
+            "a43-laiyang"
           ],
           "type": "prose"
         },
@@ -27431,13 +27399,13 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
@@ -28388,7 +28356,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use the four FT348 works to verify units and ranges, A's unknown appearance, B's out-of-range diameter, and C's single length update; the real conditions for different directions are checked separately, and no occupational conclusion is inferred from the item."
+              "Use FT348 to practice checking units, ranges, missing fields and the variant change. Ask the employer about actual job conditions."
             ]
           },
           "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.fit.personality-fit-block.55",
@@ -29207,7 +29175,7 @@
                   "There is no temperature, speed, pressure, die, measuring instrument accuracy, sampling frequency, production permit, or abnormal handling rule; these must not be invented.",
                   "All units, products, and records are fictional. Machine adjustment, die changes, starting or stopping equipment, and product release must not be based on this item.",
                   "The output is a three-line range verification table, missing-item to-dos, and one unsent confirmation letter.",
-                  "The only new information on day 5: record C's length is 100.8mm. The other inputs are unchanged, and A's appearance or a real quality approval are not filled in."
+                  "Single-change variant: add 100.8 mm as record C’s length. Leave the other original records unchanged."
                 ]
               },
               {
@@ -29221,10 +29189,9 @@
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material Three: reference answer",
-                  "A: both diameter and length are within the closed intervals, appearance unknown. B: diameter 10.12 is greater than 10.10, length is in range. C: diameter is in range, length unknown; the existing appearance record is transcribed only. This cannot be used to judge real quality conformity or release.",
-                  "Sample unsent letter: To the person in charge, FT348 record A's appearance is not recorded, record B's diameter 10.12 exceeds the item's upper bound of 10.10, and record C's length is missing. Please verify the original records, the specification version, and who will confirm next; until you reply, keep these to-dos open and do not fill in values or release the product.",
-                  "On day 5 only C's length is updated to 100.8, within 99.0—101.0; A's unknown appearance and B's out-of-range diameter remain. The reference answer is an item verification, not a process or quality judgment."
+                  "Finish independently",
+                  "Submit the original and variant on day six, including the unsent note.",
+                  "On day seven, open “FT348 extrusion record reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
@@ -29252,7 +29219,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Work One: requirements and inputs comparison table",
-                  "First list the FT348 ranges, the three records, and the missing items; if there is also a real posting, record the link, date, position, and each requirement, otherwise note that this item has no recruitment sample.",
+                  "Keep the FT348 ranges separate from the requirements listed in the job postings.",
                   "Do not write fictional inputs or unknown conditions as satisfied."
                 ]
               },
@@ -29260,7 +29227,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "Work Two: three-line range verification table",
-                  "Output that A is in range but appearance is unknown; B's diameter is out of range; C's length is unknown, with units and basis in each column.",
+                  "Show units, evidence and your decision for each record.",
                   "Keep the original inputs and do not write temperature or speed or fill in measured values."
                 ]
               },
@@ -29268,7 +29235,7 @@
                 "id": "report-summary",
                 "values": [
                   "Work Three: day 5 update and to-dos",
-                  "Update only that column per the given C length of 100.8; A's unknown appearance and B's out-of-range diameter remain as to-dos.",
+                  "Update the field supplied in the variant. Preserve the original record and open items.",
                   "Attach the unsent confirmation letter, and the unknown items and the item's answer can be reviewed."
                 ]
               },
@@ -29348,50 +29315,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read the FT348 item prompt",
-                  "List the units, closed intervals, three records, and explicit missing items, and do not look for external equipment."
+                  "Day 1",
+                  "List the units, ranges and three records."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: verify diameters",
-                  "A and C are within the item range, B exceeds the upper bound; write the basis for the comparison."
+                  "Day 2",
+                  "Check the diameters and record the evidence."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: verify lengths and appearance",
-                  "A and B lengths are in range, C's length is unknown; A's appearance is unknown, and no value is filled in."
+                  "Day 3",
+                  "Check lengths and appearance."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: write to-dos and the confirmation letter",
-                  "Record A's appearance, B's diameter, and C's length; write the unsent letter from the item and keep everything as is."
+                  "Day 4",
+                  "List open items and draft the unsent note."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: update per the single new input",
-                  "Only C's length of 100.8mm changes to in range; A's appearance and B's diameter to-dos are not cleared."
+                  "Day 5",
+                  "Compare the addition to record C against the original."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: independent review",
-                  "Check the units, ranges, and original inputs again; outside feedback is optional, and if none occurred, note independent review rather than fabricating it."
+                  "Day 6",
+                  "Submit the three original rows and a separate row for the changed record in the variant. Include the unsent note."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: write observations",
-                  "Organize the four works and write whether you are willing to keep verifying documents and what knowledge needs to be added; do not treat the item as an equipment capability or qualification assessment."
+                  "Day 7",
+                  "On day seven, open “FT348 extrusion record reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29408,13 +29375,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: units, ranges, and missing items are all listed.",
-              "Day 2: B's diameter exceeds 10.10 and the rest are in range.",
-              "Day 3: C's length and A's appearance remain unknown.",
-              "Day 4: the to-dos and the unsent letter are consistent with the inputs.",
-              "Day 5: only C's length is updated to 100.8, without clearing the other to-dos.",
-              "Day 6: independent re-check; record feedback only if it actually occurred.",
-              "Day 7: the four works can be reviewed, and the observation does not equal operating authorization."
+              "State units and ranges.",
+              "Keep the source of each reading.",
+              "Flag fields that remain open.",
+              "Include the unsent note.",
+              "Show the variant change separately.",
+              "Keep your independent work.",
+              "Compare with the reference and record a correction."
             ]
           },
           "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
@@ -29536,14 +29503,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain a verifiable, still valid, representative recruitment sample for this occupation; the editorial role table is not treated as a real job posting.",
-              "If you find a posting yourself, record the link, date, whether it is open, materials and equipment, education and experience, training, and pay item by item; one item being relaxed does not mean other conditions can be substituted."
+              "Lesso Technology Development (Wuhan) advertised an extrusion operator at piece-rate pay of CNY 5,500–7,000 per month. Duties include operating and setting up extrusion equipment, quality checks, and cleaning and maintenance. Injection molding was listed separately. Shandong Chunyurun Rainwater Harvesting and Water-Saving Irrigation Equipment advertised an extrusion operator at CNY 4,500–6,500 per month. The notice listed injection molding setup and quality inspection separately and did not specify how extrusion pay was calculated. Both postings cover extrusion work. Drawing jobs and national wages require separate evidence. Check with the employers for current openings."
             ]
           },
           "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a43-wuhan",
+            "a43-laiyang"
           ],
           "title": "Extruding and drawing machine setters, operators, and tenders｜path",
           "type": "notice"
@@ -31574,13 +31540,13 @@
                 ]
               },
               {
-                "answer": "Insufficient evidence: no precise national Chinese wage for this occupation was obtained. The 2025 manufacturing urban non-private 113,594 and private 76,055 yuan/year are industry averages and are background only, not an occupational median or a recruitment quote.",
+                "answer": "Lesso Technology Development (Wuhan) advertised an extrusion operator at piece-rate pay of CNY 5,500–7,000 per month. Duties include operating and setting up extrusion equipment, quality checks, and cleaning and maintenance. Injection molding was listed separately. Shandong Chunyurun Rainwater Harvesting and Water-Saving Irrigation Equipment advertised an extrusion operator at CNY 4,500–6,500 per month. The notice listed injection molding setup and quality inspection separately and did not specify how extrusion pay was calculated. Both postings cover extrusion work. Drawing jobs and national wages require separate evidence. Check with the employers for current openings. Comparable national occupation-level wage data remain unavailable.",
                 "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.faq.3",
                 "question": "Can wages in mainland China be found?",
                 "question_key": "career.faq.extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.q3",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "a43-wuhan",
+                  "a43-laiyang"
                 ]
               },
               {
@@ -31646,14 +31612,19 @@
                 ]
               },
               {
-                "answer": "BLS exact SOC51-4021: 60,900 employed in 2025 and a 2035 projection of 61,400, growth of 0.7% over 2025—2035, and an annual average of 5,400 job openings; openings include growth and replacements, are not a ten-year total or net additions, and the thousands values in the table are rounded separately. Transitions are compared by main materials, processes, and duties; specific experience, training, authority, and whether a position is open must be checked against a real posting, and this page does not guarantee a transition.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 51-4021 to increase from about 60,900 in 2025 to 61,400 in 2035, up 0.7%, with about 5,400 openings per year on average, including replacements. Employment totals are rounded separately.",
                 "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.faq.10",
                 "question": "What is the US employment outlook? What needs to be added for a career change?",
                 "question_key": "career.faq.extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.outlook-transition",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
+              },
+              {
+                "answer": "A’s diameter and length are in range. Appearance was not recorded. B’s diameter of 10.12 mm exceeds the 10.10 mm limit, while its length is in range. C’s diameter is in range, and the original length is unknown. In the variant, C’s length of 100.8 mm falls within the 99.0–101.0 mm range. A’s appearance and B’s diameter still need review. Sample unsent note: Please verify A’s appearance, B’s original reading and specification version, and C’s missing original length and the source of the update. Confirm who will follow up. These comparisons do not authorize actual release. Check four items: dimensions and units, missing fields, the variant change, and the unsent note and release boundary.",
+                "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.faq.11",
+                "question": "FT348 extrusion record reference (open after day six)",
+                "question_key": "career.faq.extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.11"
               }
             ]
           },
@@ -31742,28 +31713,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the extruding and drawing machine setters, operators, and tenders career page",
@@ -31793,8 +31752,7 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "Official occupational scope: set up, operate, or tend equipment that extrudes or draws thermoplastic or metal materials into tube, rod, hose, wire, bar stock, or profiles.",
-                  "Interest code RC; preparation level Job Zone 1-2 (little to some preparation), SVP below 6.0.",
-                  "O*NET still lists 2024 employment of 66,000 and 2024—2034 growth slower than average at 1%—2%, with an annual average of 6,500 openings; the current employment on this page uses BLS2025—2035, and the periods are not mixed."
+                  "Interest code RC; preparation level Job Zone 1-2 (little to some preparation), SVP below 6.0."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31807,11 +31765,12 @@
                 "url": "https://www.onetonline.org/link/summary/51-4021.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "Used to verify tasks, work activities, work context, technical skills, and preparation level (Job Zone 1-2).",
                   "The tasks include equipment control, product measurement, die changes, minor repair, cutting and coiling, thermoplastic mixing, loading, and inventory; 61% of education respondents answered high school or equivalent, and the current page does not list the remaining categories.",
-                  "The work context shows about 99% standing almost continuously, 100% wearing protective equipment daily, noise and heat or cold exposure are common, and about 67% work more than 40 hours per week."
+                  "The work context shows about 99% standing almost continuously, 100% wearing protective equipment daily, noise and heat or cold exposure are common, and about 67% work more than 40 hours per week.",
+                  "The 2025 U.S. wage medians were $22.94 hourly and $47,720 annually. Manufacturing accounted for 95% of employment. See BLS Table 1.2 for the projection."
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
@@ -31826,8 +31785,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "BLS exact SOC51-4021: 60,900 employed in 2025 and a 2035 projection of 61,400, growth of 0.7% over 2025—2035, and an annual average of 5,400 job openings; openings include growth and replacements, are not a ten-year total or net additions, and the thousands values in the table are rounded separately.",
-                  "Typical education is a high school diploma or equivalent, related experience None, and medium-term on-the-job training; Chinese position thresholds are not inferred."
+                  "BLS Table 1.2 projects U.S. employment in occupation 51-4021 to increase from about 60,900 in 2025 to 61,400 in 2035, up 0.7%, with about 5,400 openings per year on average, including replacements. Employment totals are rounded separately."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
@@ -32083,6 +32041,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Lesso Technology Development (Wuhan) advertised an extrusion operator at piece-rate pay of CNY 5,500–7,000 per month. Duties include operating and setting up extrusion equipment, quality checks, and cleaning and maintenance. Injection molding was listed separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a43-wuhan",
+                "limitation": "One employer’s quote. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Extrusion operator job posting",
+                "period": "2026-07-02",
+                "publisher": "Wuhan Dongxihu District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.dxh.gov.cn/ZWGK/QZFXXGKML/GGFWXX_devsavepath/JY_dev19savepath/202608/t20260826_2839156.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Shandong Chunyurun Rainwater Harvesting and Water-Saving Irrigation Equipment advertised an extrusion operator at CNY 4,500–6,500 per month. The notice listed injection molding setup and quality inspection separately and did not specify how extrusion pay was calculated."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a43-laiyang",
+                "limitation": "One employer’s quote. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Extrusion operator job posting",
+                "period": "2025-03-20",
+                "publisher": "Laiyang Municipal Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.laiyang.gov.cn/art/2025/3/20/art_111048_2979210.html"
               }
             ]
           },
@@ -34578,7 +34566,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet",
+            "id": "onet-work-context",
             "label": {
               "$link": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.risk.career-risk-cards.7",
               "block": "risk",
@@ -34943,6 +34931,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a43-wuhan",
+            "posting-a43-laiyang"
+          ],
           "sources_note": {
             "$item": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36854,7 +36846,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36864,27 +36856,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -37272,6 +37244,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Lesso Technology Development (Wuhan) advertised an extrusion operator at piece-rate pay of CNY 5,500–7,000 per month. Duties include operating and setting up extrusion equipment, quality checks, and cleaning and maintenance. Injection molding was listed separately.",
+        "fact_id": "posting-a43-wuhan",
+        "market": "Mainland China",
+        "measure": "Advertised monthly pay",
+        "occupation_scope": "Extrusion operator job posting",
+        "period": "2026-07-02",
+        "source_refs": [
+          "a43-wuhan"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Shandong Chunyurun Rainwater Harvesting and Water-Saving Irrigation Equipment advertised an extrusion operator at CNY 4,500–6,500 per month. The notice listed injection molding setup and quality inspection separately and did not specify how extrusion pay was calculated.",
+        "fact_id": "posting-a43-laiyang",
+        "market": "Mainland China",
+        "measure": "Advertised monthly pay",
+        "occupation_scope": "Extrusion operator job posting",
+        "period": "2025-03-20",
+        "source_refs": [
+          "a43-laiyang"
+        ]
       }
     ]
   },
@@ -37331,7 +37327,7 @@
       "text": "Extruding and Drawing Machine Setters, Operators, and Tenders, Metal and Plastic"
     }
   },
-  "source_content_sha256": "e8618381aee2d2306a3b22a664c8cdba8e3ae03683341d0cb4b6f15a13e9221f",
+  "source_content_sha256": "16e1ef92a1218f021d50b11e4af029cc218d05b26a71be8734eebf584f51a80f",
   "subject": {
     "canonical_slug": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic",
     "name": "Extruding and Drawing Machine Setters, Operators, and Tenders, Metal and Plastic",

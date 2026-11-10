@@ -1478,6 +1478,9 @@
       "item:commercial-and-industrial-designers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:commercial-and-industrial-designers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:commercial-and-industrial-designers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30675,6 +30678,21 @@
           "id": "commercial-and-industrial-designers.path.recruitment-sample.1",
           "title": "Notes on using recruitment samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Prototype A passed a grip test but has no assembly check. B assembles but lacks a user trial. Pick one next check and explain which design decision it informs."
+            ]
+          },
+          "id": "commercial-and-industrial-designers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Compare product prototype evidence",
+          "type": "notice"
         }
       ]
     },
@@ -37482,6 +37500,13 @@
         "id": "commercial-and-industrial-designers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "commercial-and-industrial-designers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38089,7 +38114,7 @@
       "text": "Commercial and Industrial Designer"
     }
   },
-  "source_content_sha256": "2d80d95c96d927a279b9850a49fa936bb746762b71b120efcde5429ce0cf778a",
+  "source_content_sha256": "6d1f34fb127c31ea9911a13f882137106084132604463cfdf777012a29d308a4",
   "subject": {
     "canonical_slug": "commercial-and-industrial-designers",
     "name": "Commercial and Industrial Designer",

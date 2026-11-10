@@ -1469,6 +1469,9 @@
       "item:cleaners-of-vehicles-and-equipment.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:cleaners-of-vehicles-and-equipment.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:cleaners-of-vehicles-and-equipment.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30577,6 +30580,21 @@
           "id": "cleaners-of-vehicles-and-equipment.path.recruitment-sample.1",
           "title": "Note on the use of recruiting samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Order V7 lists interior and exterior cleaning, but only the exterior is signed off. A photo also shows a scratch with no vehicle ID. List completed work, open checks and what to tell the shift lead."
+            ]
+          },
+          "id": "cleaners-of-vehicles-and-equipment.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check a vehicle cleaning handover",
+          "type": "notice"
         }
       ]
     },
@@ -37069,6 +37087,13 @@
         "id": "cleaners-of-vehicles-and-equipment.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "cleaners-of-vehicles-and-equipment.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37635,7 +37660,7 @@
       "text": "Cleaners of vehicles and equipment"
     }
   },
-  "source_content_sha256": "69b1c8828d839bf06123b17d7eeb288f7c404e8d84f99412a27f588b0316af69",
+  "source_content_sha256": "53a5025a52f90f340a371c0d8a4a1da1233d66ef04298322db59b347931300f5",
   "subject": {
     "canonical_slug": "cleaners-of-vehicles-and-equipment",
     "name": "Cleaners of vehicles and equipment",

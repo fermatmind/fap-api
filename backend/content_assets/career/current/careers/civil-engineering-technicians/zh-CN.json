@@ -1457,6 +1457,9 @@
       "item:civil-engineering-technicians.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:civil-engineering-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:civil-engineering-technicians.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30966,6 +30969,21 @@
           "id": "civil-engineering-technicians.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。测量表引用 B 版图纸，材料清单使用 C 版。标出不应直接汇总的数量，写给负责工程师一条待核问题。"
+            ]
+          },
+          "id": "civil-engineering-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核图纸尺寸与现场记录",
+          "type": "notice"
         }
       ]
     },
@@ -37431,6 +37449,13 @@
         "id": "civil-engineering-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "civil-engineering-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37949,7 +37974,7 @@
       "text": "土木工程技术员"
     }
   },
-  "source_content_sha256": "d41d9e38cafd96e20b6f7491ae4d08231958d76833aa909d5be6f937d739ed1e",
+  "source_content_sha256": "8ced3422bf5b10221289b9423e252656ca04f8b626ac2c610947ad10f73f062f",
   "subject": {
     "canonical_slug": "civil-engineering-technicians",
     "name": "土木工程技术员",

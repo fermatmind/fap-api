@@ -149,6 +149,9 @@
       "item:orderlies.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:orderlies.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:orderlies.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13222,6 +13225,21 @@
             "internal-rubric"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。转运单写接收点 B，交班记录却写 C，接收人栏空白。写出交接前要核的地点和负责人。"
+            ]
+          },
+          "id": "orderlies.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核院内转运交接",
+          "type": "notice"
         }
       ]
     },
@@ -15674,6 +15692,13 @@
         "id": "orderlies.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "orderlies.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15868,7 +15893,7 @@
       "text": "医院护工（病人运送）：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "99b9d0499f0dcd88e801eab5dc59f06f7113a33964a077c9a7c227c23f993e43",
+  "source_content_sha256": "29972d2ddfa448db6a55ff7728fec6dd901031c33d4f821e11324d03528cafee",
   "subject": {
     "canonical_slug": "orderlies",
     "name": "医院护工（病人运送）",

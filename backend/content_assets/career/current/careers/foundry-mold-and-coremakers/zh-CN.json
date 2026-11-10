@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1491,7 +1488,7 @@
         "status": "pending_mapping"
       },
       "item:foundry-mold-and-coremakers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:foundry-mold-and-coremakers.sources.source-card.1": {
         "status": "mapped"
@@ -24111,7 +24108,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "探索清单｜职业定义｜O*NET-SOC51-4071.00在铸造厂制作、成形用于金属铸件的蜡模、砂芯或砂型。官方任务含清理修补模具芯盒、筛砂填砂捣实、安放模样及砂芯、合型取模、开浇道和直浇口、装配加固、吊运或指挥搬运、看护壳型粘合设备，以及浇注熔融金属、操作烘芯或熔化撇渣加熔剂的炉。活动含检验设备材料与质量判断，不能整体排除检验或机械任务；工艺设计变更、成分判定及最终放行权限须核实际岗位和有效程序，不由名称统一裁定。 仅自我提问，不作录用、能力或生产成效评分。"
+              "先问清岗位做砂型还是制芯、是否需长时间站立、有哪些热和粉尘暴露，以及如何带教和交接异常。"
             ]
           },
           "id": "foundry-mold-and-coremakers.quick-decision.fit-decision-checklist.1",
@@ -24125,12 +24122,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "纸面虚构题设｜铸造工单T版本V2：每套砂型配2根合格砂芯，砂芯指定长度20.00±0.10毫米且端点计入尺寸合格；V1写±0.20已失效。A/B/C长度记录19.90/20.11/20.00毫米，登记误把B写20.01。目标40套，砂型记录30就绪、6待检、4不合格，共40；砂芯80根中68合格、12不合格。就绪砂型和合格砂芯才计可配套数，不把待检或不合格作可用。砂箱M有待核裂纹报告，通知Q暂停该批生产，未有恢复指令。题设未给砂配方、强度、烘烤、浇注、吊装或维修程序，均不能补造。数字、规则与状态均编辑虚构。 任务｜90分钟仅纸笔计算器：读题15、版本与配套要求10、尺寸及B抄录纠错20、数量配套15、M/Q异常交接20、复核10分钟。交付版本矩阵、尺寸更正表、配套与异常摘要、工具反思四作品，不实际造型制芯、化学配砂、烘烤、熔炼浇注或吊装。"
+              "见「入行、资格与职业发展」中的纸面练习《T 工单：砂型砂芯配套记录》。"
             ]
           },
           "id": "foundry-mold-and-coremakers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -24139,7 +24136,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "条件核查｜100%受访者选每天防护、97%室内非受控及污染物、80%每天很热很冷、79%持续站立、74%每天噪声、71%每天危险设备；是具体选项比例，非人人条件或个体胜任判断。"
+              "看自己能否在赶工时仍把可配套、待核和隔离状态分别记录。"
             ]
           },
           "id": "foundry-mold-and-coremakers.quick-decision.fit-decision-checklist.3",
@@ -24153,7 +24150,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "节奏核查｜81%选工作周超40小时，48%每天时间压力，56%每天危险条件；55%为“暴露于轻微烧伤、割伤、咬蜇等”每天选项，不能读作55%每天实际受伤或事故率。设备速度节奏39%极重要、他人健康安全38%中等责任、错误27%较严重，不能代个体风险等级。"
+              "工艺变更、设备使用与最终放行按岗位授权核对。"
             ]
           },
           "id": "foundry-mold-and-coremakers.quick-decision.fermat-decision-card.6",
@@ -24167,12 +24164,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "验证建议｜先做T/V2纸面题，核A/C、B更正、30套配套与10缺口、8根余芯、M待核及Q暂停；再核真实雇主设备、班次与培训。纸面计算不证明现场动手或安全能力。"
+              "适合愿意逐项核对砂型、砂芯和配套数量，并在记录不全时留下明确交接的人。"
             ]
           },
           "id": "foundry-mold-and-coremakers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         }
@@ -24189,12 +24186,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "纸面虚构题设｜铸造工单T版本V2：每套砂型配2根合格砂芯，砂芯指定长度20.00±0.10毫米且端点计入尺寸合格；V1写±0.20已失效。A/B/C长度记录19.90/20.11/20.00毫米，登记误把B写20.01。目标40套，砂型记录30就绪、6待检、4不合格，共40；砂芯80根中68合格、12不合格。就绪砂型和合格砂芯才计可配套数，不把待检或不合格作可用。砂箱M有待核裂纹报告，通知Q暂停该批生产，未有恢复指令。题设未给砂配方、强度、烘烤、浇注、吊装或维修程序，均不能补造。数字、规则与状态均编辑虚构。 任务｜90分钟仅纸笔计算器：读题15、版本与配套要求10、尺寸及B抄录纠错20、数量配套15、M/Q异常交接20、复核10分钟。交付版本矩阵、尺寸更正表、配套与异常摘要、工具反思四作品，不实际造型制芯、化学配砂、烘烤、熔炼浇注或吊装。"
+              "先确认车间用哪种工艺，再看是制作铸型、砂芯，还是设定造型制芯设备。佛山禅山铸造的历史招聘要求造型生产工熟悉树脂砂中、大件及冷芯造型。准备应聘时问清是否带教、如何核首件质量、是否轮班以及遇到缺陷由谁处置。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet"
+            "cn-occ-classification",
+            "cn-mold-foshan",
+            "cn-mold-qingyang",
+            "cn-mold-safety"
           ],
           "type": "prose"
         },
@@ -24236,7 +24236,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作情境｜O*NET51-4071受访者对具体选项的回答，非人人条件、事故率或个人风险。\n防护与环境｜100%每天防护、97%每天室内非受控及污染物、80%每天很热或很冷。\n噪声与照明｜74%每天令人分心噪声，44%每天极亮或不足照明。\n体位与动作｜79%持续站立、64%持续用手、32%弯腰扭转少于一半、22%重复动作少于一半。\n沟通与协作｜74%持续接触、65%每天面对面、52%团队极其重要。\n危险暴露｜71%每天危险设备、56%危险条件、55%每天暴露轻微烧伤割伤咬蜇项目，非每天实际受伤比例。\n节奏与自主｜39%设备速度节奏极重要、57%任务优先级一些自由、49%决策一些自由、31%决策频率从不。\n时间与责任｜48%每天时间压力、81%超40小时、38%健康安全中等责任、38%决策影响重要、47%协调带领重要。\n其他选项｜59%竞争度中等、33%身体距离略近、41%走动少于一半；选项不代个体胜任或健康结论。"
+              "工作情境｜O*NET51-4071受访者对具体选项的回答，非人人条件、事故率或个人风险。\n防护与环境｜100%每天防护、97%每天在室内非环境受控的场所工作、97%每天接触污染物、80%每天很热或很冷。\n噪声与照明｜74%每天令人分心噪声，44%每天极亮或不足照明。\n体位与动作｜79%持续站立、64%持续用手、32%弯腰扭转少于一半、22%重复动作少于一半。\n沟通与协作｜74%持续接触、65%每天面对面、52%团队极其重要。\n危险暴露｜71%每天危险设备、56%危险条件、55%每天暴露轻微烧伤割伤咬蜇项目，非每天实际受伤比例。\n节奏与自主｜39%设备速度节奏极重要、57%任务优先级一些自由、49%决策一些自由、31%决策频率从不。\n时间与责任｜48%每天时间压力、81%超40小时、38%健康安全中等责任、38%决策影响重要、47%协调带领重要。\n其他选项｜59%竞争度中等、33%身体距离略近、41%走动少于一半；选项不代个体胜任或健康结论。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.work-context-block.1",
@@ -24379,12 +24379,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻比较｜制型制芯与设备装调、模样模型、工具模具、精密切削及热处理重心不同，活动可能交叉；不按名称统一排除检验或模具制作，也不定义最终权限。"
+              "造型制芯交付准备合型或浇注的铸型和型芯；熔炼浇注处理金属熔体；模样制作交付用于形成型腔的模样。一个岗位可能兼做多个工序，实际任务和安全授权以厂内规程为准。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-occ-classification"
           ],
           "type": "prose"
         },
@@ -24408,7 +24409,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：中国具体招聘、证照法域与培训清单本轮未核。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。"
+              "证据不足：已核大陆具名招聘样本；证照适用范围与培训清单仍需逐岗核实。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.career-quick-answers-block.9",
@@ -24452,12 +24453,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业定义｜O*NET-SOC51-4071.00在铸造厂制作、成形用于金属铸件的蜡模、砂芯或砂型。官方任务含清理修补模具芯盒、筛砂填砂捣实、安放模样及砂芯、合型取模、开浇道和直浇口、装配加固、吊运或指挥搬运、看护壳型粘合设备，以及浇注熔融金属、操作烘芯或熔化撇渣加熔剂的炉。活动含检验设备材料与质量判断，不能整体排除检验或机械任务；工艺设计变更、成分判定及最终放行权限须核实际岗位和有效程序，不由名称统一裁定。"
+              "铸造造型工做出铸件外形所需的铸型；制芯工做出形成内腔或其他内部特征的型芯。两类产出都交给后续铸造工序。大陆招聘可查“铸造造型工”“制芯工”，与美国 O*NET 51-4071 有任务交集。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-occ-classification"
           ],
           "type": "prose"
         },
@@ -24565,7 +24567,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
+              "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.career-quick-answers-block.19",
@@ -24607,7 +24609,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
+              "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.career-quick-answers-block.22",
@@ -24621,7 +24623,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
+              "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.career-quick-answers-block.23",
@@ -24663,7 +24665,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
+              "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.career-quick-answers-block.26",
@@ -24677,7 +24679,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
+              "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.career-quick-answers-block.27",
@@ -24691,7 +24693,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
+              "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.career-quick-answers-block.28",
@@ -24719,7 +24721,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "期间｜工资May2025，EP基期2025终期2035、空缺为整段年均预测；不能与旧O*NET2024—2034字段混用。"
+              "期间｜工资May2025，EP基期2025终期2035、空缺为整段年均预测。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.career-quick-answers-block.30",
@@ -24776,7 +24778,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "正常May2025Profiles全国及四明确行业工资已取；当前专项2025—2035就业12.7至9.8千、净减2.9千、-23%、年均空缺.8千含替换非新增，非AI因果。"
+              "2025 年 5 月美国全国及四个行业的工资数据"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.career-quick-answers-block.34",
@@ -24800,13 +24802,13 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 铸造模具型芯工职业范围",
+                "entity": "O*NET 铸造造型工与制芯工职业范围",
                 "id": "link-1",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/51-4071.00"
               },
               {
-                "entity": "O*NET 铸造模具型芯工详细资料",
+                "entity": "O*NET 铸造造型工与制芯工详细资料",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/51-4071.00"
@@ -24818,13 +24820,13 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 铸造模具型芯工国家工资",
+                "entity": "O*NET 铸造造型工与制芯工国家工资",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localwages/51-4071.00"
               },
               {
-                "entity": "O*NET 铸造模具型芯工职业兴趣",
+                "entity": "O*NET 铸造造型工与制芯工职业兴趣",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/interest/51-4071.00"
@@ -24926,7 +24928,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "本职业：铸造模具型芯工"
+              "本职业：铸造造型工与制芯工"
             ]
           },
           "id": "foundry-mold-and-coremakers.direction-comparison.adjacent-career-comparison-table.14",
@@ -25243,7 +25245,7 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 铸造模具型芯工详细资料",
+                "entity": "O*NET 铸造造型工与制芯工详细资料",
                 "id": "link-1",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/51-4071.00"
@@ -25261,31 +25263,31 @@
                 "url": "https://www.bls.gov/news.release/ocwage.htm"
               },
               {
-                "entity": "ILO 未来工作（生成式 AI 与就业）专题",
+                "entity": "ILO Working Paper 140: Generative AI and Jobs",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.ilo.org/global/topics/future-of-work/lang--en/index.htm"
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
+                "entity": "NIST AI RMF 1.0",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "O*NET 铸造模具型芯工职业范围",
+                "entity": "O*NET 铸造造型工与制芯工职业范围",
                 "id": "link-6",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/51-4071.00"
               },
               {
-                "entity": "O*NET 铸造模具型芯工职业兴趣",
+                "entity": "O*NET 铸造造型工与制芯工职业兴趣",
                 "id": "link-7",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/interest/51-4071.00"
               },
               {
-                "entity": "O*NET 铸造模具型芯工详细资料",
+                "entity": "O*NET 铸造造型工与制芯工详细资料",
                 "id": "link-8",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/51-4071.00"
@@ -25339,7 +25341,7 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "NIST通用治理非付款授权",
+                "entity": "NIST AI 风险管理框架：通用人工复核原则",
                 "id": "link-17",
                 "relation": "career.authority",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
@@ -25481,7 +25483,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得51-4071精确生成式AI暴露评分、企业采用率或就业因果资料，不定中等偏低、短期不替代或最易受影响任务。编辑辅助候选为有效工艺检索、记录校核与报表草稿；CAD、CAM、机器控制及库存软件不等于生成式AI采用或统一编程要求。现场状态、工艺调整与放行仍核实际人员授权及有效程序。 AI影响度 0% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+0)/3+0.5)=0; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可用工具辅助查找现行工艺文件、核对记录和起草交接报告。配砂、制芯和合型的现场状态仍须人工核验，复产与质量放行由具备相应权限的人决定。现有资料不足以给这一职业整体评分。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.18",
@@ -25537,7 +25539,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。O*NETsummary仍列旧2024—2034与900空缺，本文使用BLS更新表。"
+              "BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。本页按 BLS 2025—2035 职业原表。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.22",
@@ -25579,7 +25581,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 未来工作与生成式 AI 任务暴露研究"
+              "ILO Working Paper 140: Generative AI and Jobs"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.25",
@@ -25593,7 +25595,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO2025WP140按任务调查、专家与模型估计全球ISCO08潜在暴露，不是制造流程占比、本SOC采用效率或就业因果；原专题入口不当论文全文。"
+              "全球任务潜在暴露，不是该职业的实测。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.26",
@@ -25622,7 +25624,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于治理与风险控制的一般原则；不是铸造安全与质量或职业健康标准。"
+              "通用风险与人工复核框架。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.28",
@@ -25692,12 +25694,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑比较｜工具检索、校核与汇总为候选分析，未核采用和效率；实际工序及权限另核，技术可行、制度采用与岗位结果分别取证。"
+              "这是对本页所选工作任务的编辑判断，帮助识别可试用的辅助工具。它不衡量实际工时、工厂采用率或失业概率。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet"
+            "onet",
+            "ilo-2025-study",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25790,12 +25794,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据前言｜引用规则：只引用能支持本页主张的来源；标明法域、期间与统计范围；以职业大组为主的通用研究不得用来推断本职业个人岗位变化；技术清单不等于已采用；来源不能替代操作员对砂型与砂芯与浇注与安全的现场判断。"
+              "这是对本页所选工作任务的编辑判断，帮助识别可试用的辅助工具。它不衡量实际工时、工厂采用率或失业概率。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.40",
           "source_refs": [
-            "onet"
+            "onet",
+            "ilo-2025-study",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -26070,7 +26076,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。O*NETsummary仍列旧2024—2034与900空缺，本文使用BLS更新表。"
+              "BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。本页按 BLS 2025—2035 职业原表。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.60",
@@ -26210,7 +26216,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。O*NETsummary仍列旧2024—2034与900空缺，本文使用BLS更新表。 预测下降不等已发生AI替代。"
+              "BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。本页按 BLS 2025—2035 职业原表。 预测下降不等已发生AI替代。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.70",
@@ -26238,7 +26244,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "权限｜工具文本不产生合同签署或付款权限，须核机构与人员实际授权；NIST是通用治理非支付授权法规。"
+              "不能。工具可以整理记录、标出不一致，但砂箱裂纹报告或停工指令尚未闭环时继续保持待处理。由现场指定人员按批准的规程决定复产，由具备质量授权的人员决定砂型砂芯是否放行。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.72",
@@ -26252,7 +26258,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST通用治理非付款授权"
+              "NIST AI 风险管理框架：通用人工复核原则"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.73",
@@ -27044,12 +27050,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "75 分位 57,350 美元/年（2025，BLS OEWS）"
+              "57,350 美元/年（美国全国第 75 分位，2025 年 5 月 BLS OEWS）"
             ]
           },
           "id": "foundry-mold-and-coremakers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27479,7 +27485,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "名称边界｜固定索引中文为铸造模具型芯工，美国51-4071；不是已核中国别名或班组长职位表。"
+              "名称边界｜固定索引中文为铸造造型工与制芯工，美国51-4071；不是已核中国别名或班组长职位表。"
             ]
           },
           "id": "foundry-mold-and-coremakers.china-salary.career-snapshot-primary-locale.44",
@@ -27493,7 +27499,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
+              "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
             ]
           },
           "id": "foundry-mold-and-coremakers.china-salary.career-snapshot-primary-locale.45",
@@ -27507,7 +27513,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。 美国工资May2025、EP2025—2035分别用，不拼接换算。"
+              "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。 美国工资May2025、EP2025—2035分别用，不拼接换算。"
             ]
           },
           "id": "foundry-mold-and-coremakers.china-salary.career-snapshot-primary-locale.46",
@@ -27536,7 +27542,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
+              "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
             ]
           },
           "id": "foundry-mold-and-coremakers.china-salary.career-snapshot-primary-locale.48",
@@ -27699,7 +27705,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 51-4071.00 职业与工资数据｜https://www.onetonline.org/link/summary/51-4071.00；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；O*NET 铸造模具型芯工国家工资｜https://www.onetonline.org/link/localwages/51-4071.00"
+              "O*NET 51-4071.00 职业与工资数据｜https://www.onetonline.org/link/summary/51-4071.00；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；O*NET 铸造造型工与制芯工国家工资｜https://www.onetonline.org/link/localwages/51-4071.00"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.8",
@@ -27797,12 +27803,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "75 分位 57,350 美元/年（2025，BLS OEWS）"
+              "57,350 美元/年（美国全国第 75 分位，2025 年 5 月 BLS OEWS）"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27937,13 +27943,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "正常Profiles已核May2025雇员12790/RSE3.1%、均年49860、中位48110及全分位；EP12700是另一项目。四明确行业中位已核，不外推中国或个人实发；OEWS含全兼职雇员，排自雇、加班溢价、班次差额及雇主福利成本。"
+              "O*NET 显示制造业就业占比，不能据此推断行业工资；只有直接核实 BLS 的同职业、同年份行业行才可比较。 城镇单位统计覆盖城镇地域内有 5 人及以上的法人单位，不含个体工商户和自由职业者。2025 年制造业城镇非私营、私营单位年平均工资分别为 113,594、76,055 元；是行业平均，不是该职业中位数或到手工资。"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
             "oews-profile-2025",
-            "ep"
+            "ep",
+            "onet-wages",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27952,13 +27960,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国May2025全国中位时薪23.13美元、年工资48,110美元，五分位37,160/41,870/48,110/57,350/62,640美元年，上下十分位约1.7倍。分布不证明企业、地区、技能或班次导致差异，中位非起薪。OEWS覆盖全职及兼职领取工资雇员，排自雇；正常工时税前工资包含基本、计件、佣金、生产奖金、生活费用及危险工作报酬等，排加班溢价、班次差额、非生产奖金与雇主福利成本。不能把所有津贴或派遣季节身份一概排除。年工资通常按时薪乘2080折算，不等于个人实际工时、实发或全年所得。"
+              "美国全国（51-4071，2025 年 5 月 OEWS，经 O*NET 显示）：第 10、25、50、75、90 百分位年薪依次为 37,160 / 41,870 / 48,110 / 57,350 / 62,640 美元；对应时薪为 17.87 / 20.13 / 23.13 / 27.57 / 30.12 美元。"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
             "hr",
-            "oews"
+            "oews",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -28096,7 +28105,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025该行业内SOC51-4071年工资中位，非行业全员工资、起薪或雇主规模排名，不推差异因果。"
+              "美国 BLS 2025 年 5 月 OEWS 同职业行业年薪中位数（OEUN000000033910051407113）；不能据此推起薪或工资差异成因。"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.36",
@@ -28138,7 +28147,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025该行业内SOC51-4071年工资中位，非行业全员工资、起薪或雇主规模排名，不推差异因果。"
+              "美国 BLS 2025 年 5 月 OEWS 同职业行业年薪中位数（OEUN000000099910051407113）；不能据此推起薪或工资差异成因。"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.39",
@@ -28180,7 +28189,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025该行业内SOC51-4071年工资中位，非行业全员工资、起薪或雇主规模排名，不推差异因果。"
+              "美国 BLS 2025 年 5 月 OEWS 同职业行业年薪中位数（OEUN000000033140051407113）；不能据此推起薪或工资差异成因。"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.42",
@@ -28222,7 +28231,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025该行业内SOC51-4071年工资中位，非行业全员工资、起薪或雇主规模排名，不推差异因果。"
+              "美国 BLS 2025 年 5 月 OEWS 同职业行业年薪中位数（OEUN00000003330A151407113）；不能据此推起薪或工资差异成因。"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.45",
@@ -28371,31 +28380,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "金属与塑料模型工方向",
@@ -28410,7 +28419,7 @@
                 "url": "/zh/career/jobs/molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic"
               },
               {
-                "entity": "本职业（铸造模具型芯工）方向",
+                "entity": "本职业（铸造造型工与制芯工）方向",
                 "id": "link-9",
                 "relation": "career.tool",
                 "url": "/zh/career/jobs/foundry-mold-and-coremakers"
@@ -28470,7 +28479,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 铸造模具型芯工国家工资",
+                "entity": "O*NET 铸造造型工与制芯工国家工资",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localwages/51-4071.00"
@@ -28594,7 +28603,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议｜先做T/V2纸面题，复核A/C尺寸、B20.01→20.11、30套配套缺10余8合格芯及M/Q；只观察读题、计算、留痕，不能验证造型浇注安全。真实培训与授权另核。"
+              "见「入行、资格与职业发展」中的纸面练习《T 工单：砂型砂芯配套记录》。"
             ]
           },
           "id": "foundry-mold-and-coremakers.fit.personality-fit-block.9",
@@ -28821,7 +28830,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议｜先做T/V2纸面题，复核A/C尺寸、B20.01→20.11、30套配套缺10余8合格芯及M/Q；只观察读题、计算、留痕，不能验证造型浇注安全。真实培训与授权另核。"
+              "见「入行、资格与职业发展」中的纸面练习《T 工单：砂型砂芯配套记录》。"
             ]
           },
           "id": "foundry-mold-and-coremakers.fit.personality-fit-block.21",
@@ -28906,7 +28915,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议｜先做T/V2纸面题，复核A/C尺寸、B20.01→20.11、30套配套缺10余8合格芯及M/Q；只观察读题、计算、留痕，不能验证造型浇注安全。真实培训与授权另核。"
+              "见「入行、资格与职业发展」中的纸面练习《T 工单：砂型砂芯配套记录》。"
             ]
           },
           "id": "foundry-mold-and-coremakers.fit.personality-fit-block.27",
@@ -28920,7 +28929,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "铸造模具型芯工｜编辑探索重心为制型制芯，含机械、炉及浇注；任务可重叠，不按名称统一定义权限。"
+              "铸造造型工与制芯工｜编辑探索重心为制型制芯，含机械、炉及浇注；任务可重叠，不按名称统一定义权限。"
             ]
           },
           "id": "foundry-mold-and-coremakers.fit.personality-fit-block.28",
@@ -29243,7 +29252,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据不足：中国具体招聘、证照法域与培训清单本轮未核。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。"
+              "证据不足：已核大陆具名招聘样本；证照适用范围与培训清单仍需逐岗核实。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。"
             ]
           },
           "id": "foundry-mold-and-coremakers.fit.personality-fit-block.51",
@@ -29286,7 +29295,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据不足：中国具体招聘、证照法域与培训清单本轮未核。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。"
+              "证据不足：已核大陆具名招聘样本；证照适用范围与培训清单仍需逐岗核实。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。"
             ]
           },
           "id": "foundry-mold-and-coremakers.fit.personality-fit-block.54",
@@ -29301,7 +29310,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议｜先做T/V2纸面题，复核A/C尺寸、B20.01→20.11、30套配套缺10余8合格芯及M/Q；只观察读题、计算、留痕，不能验证造型浇注安全。真实培训与授权另核。"
+              "见「入行、资格与职业发展」中的纸面练习《T 工单：砂型砂芯配套记录》。"
             ]
           },
           "id": "foundry-mold-and-coremakers.fit.personality-fit-block.55",
@@ -29343,7 +29352,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议｜先做T/V2纸面题，复核A/C尺寸、B20.01→20.11、30套配套缺10余8合格芯及M/Q；只观察读题、计算、留痕，不能验证造型浇注安全。真实培训与授权另核。"
+              "见「入行、资格与职业发展」中的纸面练习《T 工单：砂型砂芯配套记录》。"
             ]
           },
           "id": "foundry-mold-and-coremakers.fit.personality-fit-block.58",
@@ -29484,13 +29493,13 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "O*NET 铸造模具型芯工职业档案",
+                "entity": "O*NET 铸造造型工与制芯工职业档案",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/51-4071.00"
               },
               {
-                "entity": "O*NET 铸造模具型芯工详细资料",
+                "entity": "O*NET 铸造造型工与制芯工详细资料",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/51-4071.00"
@@ -29502,7 +29511,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 铸造模具型芯工国家工资",
+                "entity": "O*NET 铸造造型工与制芯工国家工资",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localwages/51-4071.00"
@@ -29554,7 +29563,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围｜官方选项100%每天防护、97%室内非受控及污染物、80%每天很热冷、81%超40小时、79%持续站立、74%每天噪声与持续接触、71%危险设备；55%为每天暴露轻微烧伤割伤咬蜇项目，不是每天受伤比例。情境不证明事故率或疾病因果。"
+              "证据范围｜官方选项100%每天防护、97%每天在室内非环境受控的场所工作、97%每天接触污染物、80%每天很热冷、81%超40小时、79%持续站立、74%每天噪声与持续接触、71%危险设备；55%为每天暴露轻微烧伤割伤咬蜇项目，不是每天受伤比例。情境不证明事故率或疾病因果。"
             ]
           },
           "id": "foundry-mold-and-coremakers.risk.career-risk-cards.10",
@@ -30037,7 +30046,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "铸造模具型芯工｜path",
+          "title": "铸造造型工与制芯工｜path",
           "type": "table"
         },
         {
@@ -30049,7 +30058,7 @@
                 "id": "education",
                 "values": [
                   "学历与训练",
-                  "证据不足：中国具体招聘、证照法域与培训清单本轮未核。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。",
+                  "证据不足：已核大陆具名招聘样本；证照适用范围与培训清单仍需逐岗核实。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。",
                   "典型入门及问卷不构成中国资格或个人授权。"
                 ]
               },
@@ -30065,7 +30074,7 @@
                 "id": "onet-traits",
                 "values": [
                   "兴趣与情境",
-                  "官方RC；100%每天防护、97%每天室内非受控及污染物、79%持续站立等为问卷选项。",
+                  "官方RC；100%每天防护、97%每天在室内非环境受控的场所工作、97%每天接触污染物、79%持续站立等为问卷选项。",
                   "不推个体胜任、事故率或医学结论。"
                 ]
               },
@@ -30083,7 +30092,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "铸造模具型芯工｜path",
+          "title": "铸造造型工与制芯工｜path",
           "type": "cards"
         },
         {
@@ -30094,8 +30103,8 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "T/V2完整题设",
-                  "纸面虚构题设｜铸造工单T版本V2：每套砂型配2根合格砂芯，砂芯指定长度20.00±0.10毫米且端点计入尺寸合格；V1写±0.20已失效。A/B/C长度记录19.90/20.11/20.00毫米，登记误把B写20.01。目标40套，砂型记录30就绪、6待检、4不合格，共40；砂芯80根中68合格、12不合格。就绪砂型和合格砂芯才计可配套数，不把待检或不合格作可用。砂箱M有待核裂纹报告，通知Q暂停该批生产，未有恢复指令。题设未给砂配方、强度、烘烤、浇注、吊装或维修程序，均不能补造。数字、规则与状态均编辑虚构。",
+                  "T 工单：砂型砂芯配套记录",
+                  "纸面虚构题设｜铸造工单T版本V2：每套砂型配2根合格砂芯，砂芯指定长度20.00±0.10毫米且端点计入尺寸合格；V1写±0.20已失效。A/B/C长度记录19.90/20.11/20.00毫米，登记误把B写20.01。目标40套，砂型记录30就绪、6待检、4不合格，共40；砂芯80根中68合格、12不合格。就绪砂型和合格砂芯才计可配套数，不把待检或不合格作可用。砂箱M有待核裂纹报告，通知Q暂停该批生产，未有恢复指令。题设未给砂配方、强度、烘烤、浇注、吊装或维修程序，均不能补造。数字、规则与状态均编辑虚构。\n单变量变式：80 个砂芯中合格数由 68 改为 58，其余不合格；可用砂型仍是 30 套，目标仍是 40 套。重新计算可配套数、缺口和剩余合格砂芯。",
                   "全部编辑虚构，程序未给不补造。"
                 ]
               },
@@ -30110,8 +30119,8 @@
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考答案与复算",
-                  "参考答案｜V2有效，19.90至20.10毫米含端点；A/C尺寸符合题设，B20.11超上限0.01毫米。保B误录20.01并更正20.11，不能改原测量制造合格。40=30+6+4，80=68+12，68÷2=34套芯，min(30,34)=30套纸面可配套，目标缺40−30=10套；配置30套需60根，余8根合格芯。待检6套不作就绪，4套及12根不合格不擅报废返工。纸面尺寸或配套符合不等于可生产或整批放行；M裂纹待核，Q暂停仍有效，未给程序列资料及责任方待核，不解除暂停、不填配方温度。时间15+10+20+15+20+10=90。",
+                  "完成第 6 天独立答卷后，再到第 7 天看原题和变式参考。",
+                  "完成第 6 天独立答卷后，再到第 7 天看原题和变式参考。",
                   "保持暂停、待核和原记录，不造审核人。"
                 ]
               },
@@ -30128,7 +30137,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "铸造模具型芯工｜path",
+          "title": "铸造造型工与制芯工｜path",
           "type": "cards"
         },
         {
@@ -30140,7 +30149,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "版本与要求矩阵",
-                  "列V2/V1、2根芯每型、20±.10含端点、Q状态及未给程序。",
+                  "记录应使用的版本、原文依据、尚缺的资料和限制。",
                   "区分题设事实与真实工艺未知。"
                 ]
               },
@@ -30148,7 +30157,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "尺寸与纠错表",
-                  "列A19.90/C20.00符合尺寸、B20.11超.01；保20.01误录并更正。",
+                  "逐项判断尺寸，保留原始测量和误抄记录，写出更正依据。",
                   "本人独立复算，不冒称外部复核。"
                 ]
               },
@@ -30156,7 +30165,7 @@
                 "id": "report-summary",
                 "values": [
                   "配套与异常摘要",
-                  "列40=30+6+4、80=68+12、34套芯、30套配套、缺10余8，M待核Q暂停。",
+                  "列可用数量的计算过程和异常交接事项，不提前看参考。",
                   "配套可用为题内状态，不等生产放行或返工报废授权。"
                 ]
               },
@@ -30174,7 +30183,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "铸造模具型芯工｜path",
+          "title": "铸造造型工与制芯工｜path",
           "type": "cards"
         },
         {
@@ -30224,7 +30233,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "铸造模具型芯工｜path",
+          "title": "铸造造型工与制芯工｜path",
           "type": "table"
         },
         {
@@ -30236,7 +30245,7 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "第1天：版本与对象",
-                  "30分钟，读官方定义及T题，列V2有效V1失效。"
+                  "30 分钟：读职责和题设，建立空白版本记录，暂不看第 7 天参考。"
                 ]
               },
               {
@@ -30250,35 +30259,35 @@
                 "id": "entry-trial-day-3",
                 "values": [
                   "第3天：尺寸与纠错",
-                  "30分钟，算19.90—20.10，列A/C符合、B超.01及原误录。"
+                  "30 分钟：写出有效版本、公差边界与逐件判定的核对步骤，不看参考。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "第4天：数量配套",
-                  "30分钟，核34套芯、30配套、缺10余8，区分待检与不合格。"
+                  "30 分钟：建立原记录和更正记录，再按可交付口径列算式，不填参考数值。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "第5天：异常交接",
-                  "30分钟，写M待核Q暂停及资料责任方待核，不擅恢复。"
+                  "30 分钟：为 M/Q 列已知、待核、责任人和恢复条件，保留未知。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "第6天：整题演练",
-                  "90分钟按15/10/20/15/20/10做四作品，自查不造外部评价。"
+                  "90 分钟：从空白独立完成四项纸面成果和单变量变式，封存第一稿；不要看第 7 天参考。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "第7天：复盘选择",
-                  "30分钟对照答案列两处问题或说明未发现，记录继续学习、停止或相邻探索依据。"
+                  "先独立完成第 6 天，再到「常见问题与资料来源」打开「T 工单参考解（完成第 6 天后再打开）」。用 30 分钟核对差异，写下一条复核规则和下一步。"
                 ]
               }
             ]
@@ -30287,7 +30296,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "铸造模具型芯工｜path",
+          "title": "铸造造型工与制芯工｜path",
           "type": "timeline"
         },
         {
@@ -30308,7 +30317,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "铸造模具型芯工｜path",
+          "title": "铸造造型工与制芯工｜path",
           "type": "list"
         },
         {
@@ -30394,7 +30403,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "铸造模具型芯工｜path",
+          "title": "铸造造型工与制芯工｜path",
           "type": "table"
         },
         {
@@ -30402,17 +30411,19 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜应聘条件、法定资质与企业授权是三种不同状态：满足招聘条件不等于取得造型与浇注或吊装与特种设备作业资格，取得培训与证书不等于获得工艺变更与质量判定与停线处置权限。",
-              "证据不足：中国具体招聘、证照法域与培训清单本轮未核。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。",
+              "先按实际任务和适用地区查主管部门的官方证照目录，再向雇主确认设备、培训和作业授权。GB/T 47256-2026 规定设备安全要求，不能据此判断个人须持哪种证照。",
+              "佛山和青阳是具名岗位样本，不能据此确定中国典型入行路径。美国 BLS 专项行列为高中或同等学历、无需相关工作经验和中期在岗训练。",
               "资格边界（三）｜本页列示的准备项为检索与核对方向，不构成任何机构的正式资格清单；如与企业公告或主管机关要求不一致，以后者为准。",
               "资格边界（四）｜本页不提供个人体检结论、录用可能性或薪酬承诺。"
             ]
           },
           "id": "foundry-mold-and-coremakers.path.credential-boundary.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-mold-safety",
+            "ep"
           ],
-          "title": "铸造模具型芯工｜path",
+          "title": "铸造造型工与制芯工｜path",
           "type": "notice"
         },
         {
@@ -30420,15 +30431,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得具体招聘公告样本，不统计渠道、频率或薪酬；以下仅后续采样建议。",
+              "佛山、青阳公开岗位样本分别列铸造造型和制芯条件；岗位需求、计薪和班次只适用对应雇主和招聘期。",
               "核对建议｜查看招聘信息时应记录发布时间、地点、企业类型（汽车与机械与五金与管件铸造、精密铸造与有色合金厂、模样与模具与维修服务）、用工形式（正式工、劳务与派遣、计件与加班与夜班）、班次与加班与高温与粉尘与技能津贴、学历与证书与安全培训要求，以及是否涉及熔炼与浇注与质量判定；这些信息比页面往往更能反映真实条件。"
             ]
           },
           "id": "foundry-mold-and-coremakers.path.recruitment-sample.1",
           "source_refs": [
-            "onet"
+            "cn-mold-foshan",
+            "cn-mold-qingyang"
           ],
-          "title": "铸造模具型芯工｜path",
+          "title": "铸造造型工与制芯工｜path",
           "type": "notice"
         },
         {
@@ -30437,22 +30449,22 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 铸造模具型芯工职业档案",
+                "entity": "O*NET 铸造造型工与制芯工职业档案",
                 "id": "link-1",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/51-4071.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "广佛同城招聘：佛山禅山铸造造型生产工",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.huadu.gov.cn/zdlyxxgk/jycy/zpxx/content/post_10214252.html"
               },
               {
-                "entity": "O*NET 铸造模具型芯工国家工资",
+                "entity": "青阳县2026年第一季度企业用工需求目录",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/51-4071.00"
+                "url": "https://www.ahqy.gov.cn/qyxzgh/News/show/768093.html"
               },
               {
                 "entity": "O*NET 资格与训练资料",
@@ -30599,13 +30611,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "证据不足：中国具体招聘、证照法域与培训清单本轮未核。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。"
+              "先看岗位做造型、制芯还是浇注，再准备能说明工艺步骤和质量检查点的记录。佛山历史岗位提到树脂砂和冷芯造型；青阳目录另列制芯工。具体培训和作业授权须按岗位核对。"
             ]
           },
           "id": "foundry-mold-and-coremakers.path.career-path-block.20",
           "source_refs": [
-            "onet",
-            "ep"
+            "cn-mold-foshan"
           ],
           "type": "prose"
         },
@@ -30628,13 +30639,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "证据不足：中国具体招聘、证照法域与培训清单本轮未核。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。"
+              "佛山、青阳具名原件说明造型、制芯分工，不代表大陆全国门槛；现场培训、设备和授权另核。"
             ]
           },
           "id": "foundry-mold-and-coremakers.path.career-path-block.22",
           "source_refs": [
-            "onet",
-            "ep"
+            "cn-mold-foshan",
+            "cn-mold-qingyang"
           ],
           "type": "prose"
         },
@@ -30671,12 +30682,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对美国工资的时点估计口径；不用于个人收入预测。"
+              "佛山样本列造型任务；青阳目录另列制芯。均为地方样本。"
             ]
           },
           "id": "foundry-mold-and-coremakers.path.career-path-block.25",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-mold-foshan"
           ],
           "type": "prose"
         },
@@ -30685,12 +30697,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与空缺口径；预测不等于实际招聘。"
+              "佛山样本列造型任务；青阳目录另列制芯。均为地方样本。"
             ]
           },
           "id": "foundry-mold-and-coremakers.path.career-path-block.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-mold-qingyang"
           ],
           "type": "prose"
         },
@@ -31580,7 +31593,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 铸造模具型芯工国家工资",
+                "entity": "O*NET 铸造造型工与制芯工国家工资",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localwages/51-4071.00"
@@ -31592,7 +31605,7 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "O*NET 铸造模具型芯工职业档案",
+                "entity": "O*NET 铸造造型工与制芯工职业档案",
                 "id": "link-6",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/51-4071.00"
@@ -31658,7 +31671,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。 BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。O*NETsummary仍列旧2024—2034与900空缺，本文使用BLS更新表。"
+              "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。 BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。本页按 BLS 2025—2035 职业原表。"
             ]
           },
           "id": "foundry-mold-and-coremakers.market-signals.market-signal-card.8",
@@ -31757,7 +31770,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。O*NETsummary仍列旧2024—2034与900空缺，本文使用BLS更新表。"
+              "BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。本页按 BLS 2025—2035 职业原表。"
             ]
           },
           "id": "foundry-mold-and-coremakers.market-signals.market-signal-card.15",
@@ -31855,12 +31868,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位时薪 23.13 美元、中位年薪 48,110 美元；分位 37,160 / 41,870 / 57,350 / 62,640 美元"
+              "2025 年 5 月美国全国：中位年薪 48,110 美元；第 10 和第 90 分位分别为 37,160 和 62,640 美元/年。下文另列已核对的四个美国行业工资行。"
             ]
           },
           "id": "foundry-mold-and-coremakers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -31954,7 +31968,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
+              "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。"
             ]
           },
           "id": "foundry-mold-and-coremakers.market-signals.market-signal-card.29",
@@ -32369,47 +32383,49 @@
           "data": {
             "entries": [
               {
-                "answer": "职业定义｜O*NET-SOC51-4071.00在铸造厂制作、成形用于金属铸件的蜡模、砂芯或砂型。官方任务含清理修补模具芯盒、筛砂填砂捣实、安放模样及砂芯、合型取模、开浇道和直浇口、装配加固、吊运或指挥搬运、看护壳型粘合设备，以及浇注熔融金属、操作烘芯或熔化撇渣加熔剂的炉。活动含检验设备材料与质量判断，不能整体排除检验或机械任务；工艺设计变更、成分判定及最终放行权限须核实际岗位和有效程序，不由名称统一裁定。",
+                "answer": "铸造造型工做出铸件外形所需的铸型；制芯工做出形成内腔或其他内部特征的型芯。两类产出都交给后续铸造工序。大陆招聘可查“铸造造型工”“制芯工”，与美国 O*NET 51-4071 有任务交集。",
                 "id": "foundry-mold-and-coremakers.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.foundry-mold-and-coremakers.q1",
                 "source_refs": [
                   "onet",
-                  "employer"
+                  "cn-occ-classification"
                 ]
               },
               {
-                "answer": "机器造型51-4072、模样51-4062、模型51-4061、工具模具51-4111及机械师51-4041比较任务重心，工序可交叉，具体训练与权限另核。",
+                "answer": "造型制芯交付准备合型或浇注的铸型和型芯；熔炼浇注处理金属熔体；模样制作交付用于形成型腔的模样。一个岗位可能兼做多个工序，实际任务和安全授权以厂内规程为准。",
                 "id": "foundry-mold-and-coremakers.faq.2",
-                "question": "它和铸造与制芯与浇注机操作员、模样工、机械师有什么区别？",
+                "question": "造型制芯、熔炼浇注和模样制作怎么分？",
                 "question_key": "career.faq.foundry-mold-and-coremakers.q2",
                 "source_refs": [
                   "onet",
-                  "employer"
+                  "cn-occ-classification"
                 ]
               },
               {
-                "answer": "美国May2025全国中位时薪23.13美元、年工资48,110美元，五分位37,160/41,870/48,110/57,350/62,640美元年，上下十分位约1.7倍。分布不证明企业、地区、技能或班次导致差异，中位非起薪。OEWS覆盖全职及兼职领取工资雇员，排自雇；正常工时税前工资包含基本、计件、佣金、生产奖金、生活费用及危险工作报酬等，排加班溢价、班次差额、非生产奖金与雇主福利成本。不能把所有津贴或派遣季节身份一概排除。年工资通常按时薪乘2080折算，不等于个人实际工时、实发或全年所得。 BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。O*NETsummary仍列旧2024—2034与900空缺，本文使用BLS更新表。",
+                "answer": "2025 年 5 月美国全国中位年薪为 48,110 美元，中位时薪为 23.13 美元。薪资章节另列四个已核行业的本职业工资，不能用其中一行代表全国或某厂报价。BLS 预计美国该职业就业人数由 2025 年约 12,700 降至 2035 年约 9,800（下降 23.0%），十年期间年均约 800 个职位空缺，含人员替补。",
                 "id": "foundry-mold-and-coremakers.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.foundry-mold-and-coremakers.q3",
                 "source_refs": [
-                  "oews",
+                  "onet-wages",
+                  "oews-profile-2025",
                   "ep"
                 ]
               },
               {
-                "answer": "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。",
+                "answer": "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。 广佛同城2025年招聘中，佛山禅山铸造对造型生产工标示4,000—10,000元/月。这是单一单位当时的招聘报价，未核实际到手金额、工时和薪酬构成。",
                 "id": "foundry-mold-and-coremakers.faq.4",
                 "question": "中国大陆有对应的工资数据吗？",
                 "question_key": "career.faq.foundry-mold-and-coremakers.q4",
                 "source_refs": [
                   "nbs",
-                  "cnclass"
+                  "cnclass",
+                  "cn-mold-foshan"
                 ]
               },
               {
-                "answer": "证据范围｜官方选项100%每天防护、97%室内非受控及污染物、80%每天很热冷、81%超40小时、79%持续站立、74%每天噪声与持续接触、71%危险设备；55%为每天暴露轻微烧伤割伤咬蜇项目，不是每天受伤比例。情境不证明事故率或疾病因果。",
+                "answer": "证据范围｜官方选项100%每天防护、97%每天在室内非环境受控的场所工作、97%每天接触污染物、80%每天很热冷、81%超40小时、79%持续站立、74%每天噪声与持续接触、71%危险设备；55%为每天暴露轻微烧伤割伤咬蜇项目，不是每天受伤比例。情境不证明事故率或疾病因果。",
                 "id": "foundry-mold-and-coremakers.faq.5",
                 "question": "工作环境和体力要求如何？",
                 "question_key": "career.faq.foundry-mold-and-coremakers.q5",
@@ -32429,13 +32445,15 @@
                 ]
               },
               {
-                "answer": "证据不足：中国具体招聘、证照法域与培训清单本轮未核。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。",
+                "answer": "先确认车间用哪种工艺，再看是制作铸型、砂芯，还是设定造型制芯设备。佛山禅山铸造的历史招聘要求造型生产工熟悉树脂砂中、大件及冷芯造型。准备应聘时问清是否带教、如何核首件质量、是否轮班以及遇到缺陷由谁处置。",
                 "id": "foundry-mold-and-coremakers.faq.7",
-                "question": "需要什么学历和培训？",
+                "question": "应聘造型工或制芯工，需要会什么？",
                 "question_key": "career.faq.foundry-mold-and-coremakers.q7",
                 "source_refs": [
-                  "onet",
-                  "ep"
+                  "cn-occ-classification",
+                  "cn-mold-foshan",
+                  "cn-mold-qingyang",
+                  "cn-mold-safety"
                 ]
               },
               {
@@ -32459,13 +32477,22 @@
                 ]
               },
               {
-                "answer": "BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。O*NETsummary仍列旧2024—2034与900空缺，本文使用BLS更新表。 相邻方向仅编辑探索，岗位条件与训练需另核。",
+                "answer": "BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。本页按 BLS 2025—2035 职业原表。 相邻方向仅编辑探索，岗位条件与训练需另核。",
                 "id": "foundry-mold-and-coremakers.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.foundry-mold-and-coremakers.q10",
                 "source_refs": [
                   "ep",
                   "onet"
+                ]
+              },
+              {
+                "answer": "T/V2 有效，V1 作废；19.90—20.10 毫米含两端。A/C 合格，B 不合格；保留误抄 20.01，更正为 20.11。68 芯可配 34 组但仅 30 套砂型就绪，故 30 套、缺 10、余 8 个合格芯。M 待核，Q 继续暂停。变式 58 芯可配 29 套、缺 11、余 0 个合格芯。",
+                "id": "foundry-mold-and-coremakers.faq.11",
+                "question": "T 工单参考解（完成第 6 天后再打开）",
+                "question_key": "career.faq.foundry-mold-and-coremakers.q11",
+                "source_refs": [
+                  "employer"
                 ]
               }
             ]
@@ -32530,7 +32557,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "全国及四明确行业中位已核；中国职业城市工资、招聘及具体设备证照、AI采用效率因果与问卷效度未取。受保护及共享冲突列作者报告。"
+              "城镇单位统计覆盖城镇地域内有 5 人及以上的法人单位，不含个体工商户和自由职业者。2025 年制造业城镇非私营、私营单位年平均工资分别为 113,594、76,055 元；是行业平均，不是该职业中位数或到手工资。 具名地方样本用于理解职责，不代表全国岗位、工资或准入。 美国工资同时提供 O*NET 全国分位和 BLS 同职业行业行，两类统计不能混用。"
             ]
           },
           "id": "foundry-mold-and-coremakers.sources.source-card.4",
@@ -32555,37 +32582,37 @@
           "data": {
             "entries": [
               {
-                "entity": "铸造模具型芯工相关方向 1",
+                "entity": "铸造造型工与制芯工相关方向 1",
                 "id": "navigation-1",
                 "relation": "related-evidence",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "铸造模具型芯工相关方向 2",
+                "entity": "铸造造型工与制芯工相关方向 2",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "铸造模具型芯工相关方向 3",
+                "entity": "铸造造型工与制芯工相关方向 3",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "铸造模具型芯工相关方向 4",
+                "entity": "锻造工",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/career/jobs/forging-machine-setters-operators-and-tenders-metal-and-plastic"
               },
               {
-                "entity": "铸造模具型芯工相关方向 5",
+                "entity": "造型、制芯和铸造设备操作员",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/career/jobs/molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic"
               },
               {
-                "entity": "铸造模具型芯工相关方向 6",
+                "entity": "铸造造型工与制芯工相关方向 6",
                 "id": "navigation-6",
                 "relation": "related-evidence",
                 "url": "/zh/career/jobs/foundry-mold-and-coremakers"
@@ -32618,7 +32645,7 @@
                 "id": "onet",
                 "limitation": "职业级描述，不代表资格或许可要求。",
                 "market": "美国",
-                "name": "O*NET OnLine：铸造模具型芯工职业档案（51-4071.00）",
+                "name": "O*NET OnLine：铸造造型工与制芯工职业档案（51-4071.00）",
                 "period": "O*NET 2026 occupational profile",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "51-4071.00 exact occupation",
@@ -32634,7 +32661,7 @@
                 "id": "bls",
                 "limitation": "职业级描述，非自动化风险评估。",
                 "market": "美国",
-                "name": "O*NET OnLine：铸造模具型芯工详细职业资料",
+                "name": "O*NET OnLine：铸造造型工与制芯工详细职业资料",
                 "period": "O*NET 2026 occupational profile",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "51-4071.00 exact occupation",
@@ -32643,7 +32670,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。O*NETsummary仍列旧2024—2034与900空缺，本文使用BLS更新表。",
+                  "BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。本页按 BLS 2025—2035 职业原表。",
                   "51-4071基期12.7千、终期9.8千、净减2.9千、变化-23.0%、年均空缺0.8千。"
                 ],
                 "evidence_type": "official employment projections",
@@ -32660,7 +32687,7 @@
                 "accessed_at": "2026-09-21",
                 "details": [
                   "中位时薪 23.13 美元、中位年薪 48,110 美元。",
-                  "10% 分位 37,160 美元/年，25% 分位 41,870 美元/年，75% 分位 57,350 美元/年，90% 分位 62,640 美元/年。"
+                  "全国职业工资分位与行业行分别读取。本文列出的四个行业行已逐项核对；其余行业及具体工厂报价不据此推定。"
                 ],
                 "evidence_type": "official wage estimates",
                 "id": "oews",
@@ -32675,12 +32702,12 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "城镇非私营单位制造业门类平均工资 113,594 元/年；城镇私营单位 76,055 元/年。",
-                  "为税前工资总额口径，含单位代扣的个人所得税与个人缴纳的社会保险和住房公积金。"
+                  "城镇单位统计覆盖城镇地域内有 5 人及以上的法人单位，不含个体工商户和自由职业者。2025 年制造业城镇非私营、私营单位年平均工资分别为 113,594、76,055 元；是行业平均，不是该职业中位数或到手工资。",
+                  "制造业门类平均，不是职业分位。"
                 ],
                 "evidence_type": "official industry wage release",
                 "id": "nbs",
-                "limitation": "行业门类口径，不区分职业；为背景代理。",
+                "limitation": "制造业门类平均，不是职业分位。",
                 "market": "中国大陆",
                 "name": "国家统计局：2025 年城镇单位就业人员平均工资",
                 "period": "2025 annual wage",
@@ -32691,7 +32718,7 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "证据不足：本轮未取得中国本职业工资、就业或招聘样本，不据此断言全国不存在。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。",
+                  "证据不足：未取得大陆本职业全国工资及就业统计。具名招聘只能说明该雇主在该期的岗位条件。NBS2025制造业非私营113,594、私营76,055元/年是行业代理，非职业工资；城镇5人及以上法人单位范围排个体工商户和自由职业者，工资总额含规定奖金津补贴，不一概排计件、加班或零散用工身份。",
                   "工资总额包含规定奖金津补贴和加班工资，不能统一排季节零散身份。"
                 ],
                 "evidence_type": "official methodology note",
@@ -32714,7 +32741,7 @@
                 "id": "privacy",
                 "limitation": "兴趣数据不构成录用或适配结论。",
                 "market": "美国",
-                "name": "O*NET OnLine：铸造模具型芯工职业兴趣（51-4071.00）",
+                "name": "O*NET OnLine：铸造造型工与制芯工职业兴趣（51-4071.00）",
                 "period": "O*NET 2026 occupational profile",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "51-4071.00 exact occupation",
@@ -32723,14 +32750,14 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "证据不足：中国具体招聘、证照法域与培训清单本轮未核。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。",
+                  "证据不足：已核大陆具名招聘样本；证照适用范围与培训清单仍需逐岗核实。美国BLS专项典型入门为高中或同等学历、无相关工作经验、中期在职培训；O*NET64%高中、36%低于高中为受访者对新聘所需学历的回答，非实际从业者分布。Zone1—2/SVP<6及数天至一年是层级概述，非个人统一耗时，不编中国主流路径。",
                   "新聘所需学历问卷64/36不是从业者实际学历，Zone层级不是个人期限。"
                 ],
                 "evidence_type": "official training directory",
                 "id": "facilities",
                 "limitation": "培训路径不等于资格或许可。",
                 "market": "美国",
-                "name": "O*NET OnLine：铸造模具型芯工资格与训练（51-4071.00）",
+                "name": "O*NET OnLine：铸造造型工与制芯工资格与训练（51-4071.00）",
                 "period": "O*NET training data current 2026",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "51-4071.00 exact occupation",
@@ -32746,7 +32773,7 @@
                 "id": "operations",
                 "limitation": "证书目录不等同于企业聘任或特种作业资格。",
                 "market": "美国",
-                "name": "O*NET OnLine：铸造模具型芯工证书资料（51-4071.00）",
+                "name": "O*NET OnLine：铸造造型工与制芯工证书资料（51-4071.00）",
                 "period": "O*NET credential data current 2026",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "51-4071.00 exact occupation",
@@ -32762,7 +32789,7 @@
                 "id": "hr",
                 "limitation": "OEWS覆盖全职及兼职领取工资雇员，排自雇；正常工时税前工资包含基本、计件、佣金、生产奖金、生活费用及危险工作报酬等，排加班溢价、班次差额、非生产奖金与雇主福利成本。不能把所有津贴或派遣季节身份一概排除。年工资通常按时薪乘2080折算，不等于个人实际工时、实发或全年所得。",
                 "market": "美国",
-                "name": "O*NET OnLine：铸造模具型芯工国家工资（51-4071.00）",
+                "name": "O*NET OnLine：铸造造型工与制芯工国家工资（51-4071.00）",
                 "period": "2025 wage data",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "51-4071.00 exact occupation",
@@ -32787,16 +32814,16 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于治理与风险控制原则。",
-                  "用于明确采用数字工具时的责任归属与回退方案。"
+                  "核对工具输出的风险、责任和人工复核。",
+                  "风险管理框架，不是行业工位成效研究。"
                 ],
                 "evidence_type": "governance framework",
                 "id": "ilo",
-                "limitation": "非铸造安全与质量或职业健康标准。",
+                "limitation": "风险管理框架，不是行业工位成效研究。",
                 "market": "美国",
-                "name": "NIST 人工智能风险管理框架（AI RMF 1.0）",
-                "period": "AI RMF 1.0",
-                "publisher": "NIST",
+                "name": "NIST AI Risk Management Framework 1.0",
+                "period": "2023-01",
+                "publisher": "National Institute of Standards and Technology",
                 "scope": "AI risk governance",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
@@ -32810,7 +32837,7 @@
                 "id": "editor",
                 "limitation": "用于边界与要素核对。",
                 "market": "美国",
-                "name": "O*NET OnLine：铸造模具型芯工定制职业页（51-4071.00）",
+                "name": "O*NET OnLine：铸造造型工与制芯工定制职业页（51-4071.00）",
                 "period": "O*NET 2026 occupational profile",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "51-4071.00 exact occupation",
@@ -32867,18 +32894,18 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于字段与证据口径与缺口登记规则。",
-                  "用于跨市场口径边界说明。"
+                  "版本、尺寸、数量与停工情境均为虚构。",
+                  "在「入行、资格与职业发展」找到《T 工单：砂型砂芯配套记录》，第 7 天再核对参考解。"
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "虚构纸面练习",
                 "id": "employer",
-                "limitation": "内部口径规则，非外部事实来源。",
-                "market": "全球",
-                "name": "FermatMind 职业内容字段与证据口径规则",
-                "period": "current authoring rules",
+                "limitation": "只用于纸面练习，不能证明现场能力或操作权限。",
+                "market": "适用于本页",
+                "name": "T 工单：砂型砂芯配套记录",
+                "period": "本页练习",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
-                "url": "https://fermatmind.com"
+                "scope": "版本、尺寸与交接",
+                "url": "#career-content-path"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32906,7 +32933,7 @@
                 "id": "r2-pay-1",
                 "limitation": "细分地区可能缺失或不可靠。",
                 "market": "美国",
-                "name": "BLS OEWS：铸造模具型芯工职业工资页（51-4071）",
+                "name": "BLS OEWS：铸造造型工与制芯工职业工资页（51-4071）",
                 "period": "2025 OEWS",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "51-4071 OEWS detail page",
@@ -32979,18 +33006,18 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于核对时点工资与就业口径。",
-                  "用于核对全国分位与就业规模。"
+                  "美国全国（51-4071，2025 年 5 月 OEWS，经 O*NET 显示）：第 10、25、50、75、90 百分位年薪依次为 37,160 / 41,870 / 48,110 / 57,350 / 62,640 美元；对应时薪为 17.87 / 20.13 / 23.13 / 27.57 / 30.12 美元。",
+                  "读取 United States 行，华盛顿州及地方行另列。"
                 ],
                 "evidence_type": "official statistics index",
                 "id": "onet-wages",
-                "limitation": "不适用于其他法域。",
+                "limitation": "读取 United States 行，华盛顿州及地方行另列。",
                 "market": "美国",
-                "name": "BLS 职业就业与工资统计（OEWS）主页",
-                "period": "2025 OEWS",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "name": "O*NET：美国全国工资百分位（2025）",
+                "period": "2025-05",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "OEWS national estimates",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/localwages/51-4071.00?st=WA"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -33011,51 +33038,104 @@
               {
                 "accessed_at": "2026-10-11",
                 "details": [
-                  "SOC51-4071全国及行业内工资",
-                  "具体企业采用及任命另核"
+                  "Medical Equipment and Supplies Manufacturing | 年薪中位数 USD 76,900 | OEUN000000033910051407113",
+                  "Federal Executive Branch (OEWS Designation) | 年薪中位数 USD 71,180 | OEUN000000099910051407113",
+                  "Nonferrous Metal (except Aluminum) Production and Processing | 年薪中位数 USD 57,350 | OEUN000000033140051407113",
+                  "Machinery Manufacturing (3331, 3332, 3334, and 3339 only) | 年薪中位数 USD 54,900 | OEUN00000003330A151407113"
                 ],
                 "evidence_type": "official primary source",
                 "id": "oews-profile-2025",
-                "limitation": "不外推个人结果或具体任命",
+                "limitation": "同一美国职业在所列行业的年薪中位数；不代表全行业员工或起薪。",
                 "market": "美国",
-                "name": "BLS May2025铸造模具型芯工工资Profiles",
-                "period": "May2025",
-                "publisher": "BLS",
+                "name": "美国 BLS：2025 年 5 月该职业的行业内工资中位数",
+                "period": "2025-05",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "SOC51-4071全国及行业内工资",
-                "url": "https://data.bls.gov/oesprofile/?year=2025&major_group=510000&occupation=514071&measure=13&areas=INDUSTRY,STATE,MSA"
+                "url": "https://data.bls.gov/oesprofile/?year=2025&major_group=510000&occupation=514071&measure=13&areas=INDUSTRY"
               },
               {
                 "accessed_at": "2026-10-11",
                 "details": [
-                  "全球ISCO08潜在任务暴露",
-                  "具体企业采用及任命另核"
+                  "全球 ISCO-08 任务潜在暴露研究。",
+                  "不提供本站两个美国职业的实测 AI 效率、采用率或就业因果。"
                 ],
                 "evidence_type": "official primary source",
                 "id": "ilo-2025-study",
-                "limitation": "不外推个人结果或具体任命",
+                "limitation": "不提供本站两个美国职业的实测 AI 效率、采用率或就业因果。",
                 "market": "全球",
-                "name": "ILO2025生成式AI任务暴露研究",
-                "period": "2025",
-                "publisher": "ILO",
+                "name": "ILO Working Paper 140: Generative AI and Jobs",
+                "period": "2025-05",
+                "publisher": "International Labour Organization",
                 "scope": "全球ISCO08潜在任务暴露",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+0)/3+0.5)=0; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "选砂与配砂与造型 — 0/100; weight=1/3; foundry-mold-and-coremakers.ai-impact.ai-impact-table.95[0]",
-                  "安放模样与合型 — 0/100; weight=1/3; foundry-mold-and-coremakers.ai-impact.ai-impact-table.99[0]",
-                  "制芯与安放砂芯 — 0/100; weight=1/3; foundry-mold-and-coremakers.ai-impact.ai-impact-table.103[0]"
+                  "锻造工 6-18-02-02 使用加热、锻造设备加工金属毛坯；铸造工 6-18-02-01 下含铸造造型（芯）工。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "cn-occ-classification",
+                "limitation": "公示稿用于比较任务，职业名称和编码另以人社部技能标准公告核对；中美分类不互换。",
+                "market": "中国大陆",
+                "name": "中华人民共和国职业分类大典（2022年版社会公示稿）",
+                "period": "2022 年社会公示稿",
+                "publisher": "职业分类大典修订工作机构",
+                "scope": "具名分类、招聘或设备标准",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "该岗位样本要求熟悉树脂砂中、大件及冷芯造型；招聘标示每月 4,000–10,000 元。"
+                ],
+                "id": "cn-mold-foshan",
+                "limitation": "单一雇主历史招聘报价，未核实实际工资、工时和构成。",
+                "market": "中国大陆",
+                "name": "广佛同城招聘：佛山禅山铸造造型生产工",
+                "period": "2025-04-15",
+                "publisher": "广州市花都区人民政府网站",
+                "scope": "具名分类、招聘或设备标准",
+                "url": "https://www.huadu.gov.cn/zdlyxxgk/jycy/zpxx/content/post_10214252.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "目录分列造型和制芯岗位，不同岗位用工、计件方式不同。"
+                ],
+                "id": "cn-mold-qingyang",
+                "limitation": "地方招聘汇编，不是统计工资、就业或岗位统一门槛。",
+                "market": "中国大陆",
+                "name": "青阳县2026年第一季度企业用工需求目录",
+                "period": "2026年第一季度",
+                "publisher": "青阳县总工会",
+                "scope": "具名分类、招聘或设备标准",
+                "url": "https://www.ahqy.gov.cn/qyxzgh/News/show/768093.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "现行推荐性国家标准，针对造型制芯设备安全。"
+                ],
+                "id": "cn-mold-safety",
+                "limitation": "只核标准公开条目，不解读技术参数；不是个人上岗证。",
+                "market": "中国大陆",
+                "name": "GB/T 47256-2026 铸造机械 造型制芯设备 安全技术规范",
+                "period": "2026-09-01实施",
+                "publisher": "国家市场监督管理总局、国家标准化管理委员会",
+                "scope": "具名分类、招聘或设备标准",
+                "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=12685955EFBB20B92E27775EB90BD298"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "目录核铸造工 6-18-02-01。"
+                ],
+                "id": "cn-occupation-skill-release",
+                "market": "中国大陆",
+                "name": "人社部国家职业技能标准发布通知",
+                "period": "2019-03-26",
+                "publisher": "人力资源和社会保障部",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/202112/t20211227_431367.html"
               }
             ]
           },
@@ -33187,7 +33267,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "type": "prose"
         },
-        "heading": "铸造模具型芯工的工作方向与相邻职业怎么比较？",
+        "heading": "铸造造型工与制芯工的工作方向与相邻职业怎么比较？",
         "intro": {
           "$item": "foundry-mold-and-coremakers.direction-comparison.adjacent-career-comparison-table.10",
           "block": "direction-comparison",
@@ -33806,7 +33886,7 @@
             }
           }
         ],
-        "heading": "AI 会取代铸造模具型芯工吗？",
+        "heading": "AI 会取代铸造造型工与制芯工吗？",
         "method_cards": [
           {
             "含义": {
@@ -33833,7 +33913,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "概念": "AI 会减少铸造模具型芯工岗位吗？"
+            "概念": "AI 会减少铸造造型工与制芯工岗位吗？"
           }
         ],
         "questions": [
@@ -33857,7 +33937,7 @@
               "entry": "link-13",
               "field": "url"
             },
-            "问题": "铸造模具型芯工会被 AI 取代吗？"
+            "问题": "铸造造型工与制芯工会被 AI 取代吗？"
           },
           {
             "回答": {
@@ -33945,7 +34025,7 @@
               "entry": "link-17",
               "field": "url"
             },
-            "问题": "AI 能签署合同或批准付款吗？"
+            "问题": "AI 能批准铸造复产或砂型砂芯放行吗？"
           },
           {
             "回答": {
@@ -34393,7 +34473,7 @@
           "type": "prose"
         },
         "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为铸造模具型芯工？教育、资格与职业发展路径",
+        "heading": "怎样成为铸造造型工与制芯工？教育、资格与职业发展路径",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "foundry-mold-and-coremakers.path.career-path-block.21",
@@ -34926,7 +35006,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "铸造模具型芯工需要什么准备？",
+            "question": "应聘造型工或制芯工，需要会什么？",
             "table": {
               "rows": [
                 {
@@ -34983,7 +35063,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "本职业的任务、准备与工具有哪些证据边界？",
+            "question": "造型制芯、熔炼浇注和模样制作怎么分？",
             "table": {
               "rows": [
                 {
@@ -35109,7 +35189,7 @@
               "type": "prose"
             },
             "key": "qa1",
-            "question": "铸造模具型芯工的工资数据覆盖哪些人群？",
+            "question": "铸造造型工与制芯工的工资数据覆盖哪些人群？",
             "table": {
               "rows": [
                 {
@@ -35251,7 +35331,7 @@
           "copy_key": "career.item.career-risk-cards",
           "type": "prose"
         },
-        "heading": "铸造模具型芯工的工作有哪些压力、风险与职业边界？",
+        "heading": "铸造造型工与制芯工的工作有哪些压力、风险与职业边界？",
         "risks": [
           {
             "affected_roles": {
@@ -35920,7 +36000,7 @@
             "type": "prose"
           },
           "ui": {
-            "ai_heading": "AI 会影响铸造模具型芯工的工资吗？",
+            "ai_heading": "AI 会影响铸造造型工与制芯工的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "中国工资与招聘证据边界",
             "scenario_caption": "编辑探索方向，非中国招聘学历映射",
@@ -36134,14 +36214,14 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国铸造模具型芯工工资？",
+        "factors_heading": "哪些因素会影响美国铸造造型工与制芯工工资？",
         "growth": {
           "$item": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国铸造模具型芯工工资多少？",
+        "heading": "美国铸造造型工与制芯工工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -36359,7 +36439,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "铸造模具型芯工适合什么样的人？"
+        "title": "铸造造型工与制芯工适合什么样的人？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36433,7 +36513,7 @@
           "copy_key": "career.item.market-signal-card",
           "type": "prose"
         },
-        "heading": "铸造模具型芯工的前景如何？可以转向哪些相关职业？",
+        "heading": "铸造造型工与制芯工的前景如何？可以转向哪些相关职业？",
         "outlook_evidence": [
           {
             "geography": {
@@ -36988,7 +37068,7 @@
             },
             "id": "riasec",
             "label": "霍兰德职业兴趣模型（RIASEC）",
-            "question": "霍兰德兴趣中什么类型更接近铸造模具型芯工？",
+            "question": "霍兰德兴趣中什么类型更接近铸造造型工与制芯工？",
             "signals": {
               "$item": "foundry-mold-and-coremakers.fit.personality-fit-block.4",
               "block": "fit",
@@ -37062,7 +37142,7 @@
             },
             "id": "mbti",
             "label": "迈尔斯-布里格斯类型指标（MBTI）",
-            "question": "MBTI 能用来判断我适不适合铸造模具型芯工吗？",
+            "question": "MBTI 能用来判断我适不适合铸造造型工与制芯工吗？",
             "signals": {
               "$item": "foundry-mold-and-coremakers.fit.personality-fit-block.12",
               "block": "fit",
@@ -37136,7 +37216,7 @@
             },
             "id": "iq",
             "label": "智力商数（IQ）与数理推理",
-            "question": "数学不好，能做铸造模具型芯工吗？",
+            "question": "数学不好，能做铸造造型工与制芯工吗？",
             "signals": {
               "$item": "foundry-mold-and-coremakers.fit.personality-fit-block.20",
               "block": "fit",
@@ -37173,7 +37253,7 @@
             },
             "id": "eq",
             "label": "情绪智力（EI，常称“情商”）",
-            "question": "做铸造模具型芯工需要高情商吗？",
+            "question": "做铸造造型工与制芯工需要高情商吗？",
             "signals": {
               "$item": "foundry-mold-and-coremakers.fit.personality-fit-block.24",
               "block": "fit",
@@ -37223,7 +37303,7 @@
                 "field": "url"
               },
               "slug": "foundry-mold-and-coremakers",
-              "title": "本职业（铸造模具型芯工）方向"
+              "title": "本职业（铸造造型工与制芯工）方向"
             },
             "watchouts": {
               "$item": "foundry-mold-and-coremakers.fit.personality-fit-block.30",
@@ -37388,7 +37468,7 @@
             }
           }
         ],
-        "heading": "做铸造模具型芯工，哪些兴趣、能力与工作方式更重要？",
+        "heading": "做铸造造型工与制芯工，哪些兴趣、能力与工作方式更重要？",
         "questions": [
           {
             "answer": {
@@ -37705,7 +37785,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合铸造模具型芯工",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37802,7 +37882,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "锻造工"
           },
           {
             "href": {
@@ -37812,7 +37892,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "造型、制芯和铸造设备操作员"
           }
         ]
       },
@@ -37862,7 +37942,7 @@
       "interface.fit.assessments_heading": "不要用一个测试替你决定职业",
       "interface.fit.direction_caution_label": "注意：",
       "interface.fit.direction_match_label": "更匹配：",
-      "interface.fit.directions_heading": "你更可能适合哪条铸造模具型芯工工作方向？",
+      "interface.fit.directions_heading": "你更可能适合哪条铸造造型工与制芯工工作方向？",
       "interface.fit.interest_baseline_label": "O*NET 职业兴趣基线",
       "interface.fit.interest_code_heading": "怎样理解职业兴趣代码",
       "interface.fit.interest_experience_heading": "这类工作的兴趣体验",
@@ -37887,9 +37967,9 @@
       "interface.profile.comparison.primary_header": "主要方向",
       "interface.profile.comparison.secondary_header": "比较方向",
       "interface.profile.responsibilities_heading": "核心工作",
-      "interface.quick_decision.caution_heading": "什么情况下需要慎重选择铸造模具型芯工？",
-      "interface.quick_decision.experiment_heading": "如何用一次小实验判断自己是否适合铸造模具型芯工？",
-      "interface.quick_decision.suit_heading": "什么样的人更可能适合铸造模具型芯工？",
+      "interface.quick_decision.caution_heading": "什么情况下需要慎重选择铸造造型工与制芯工？",
+      "interface.quick_decision.experiment_heading": "如何用一次小实验判断自己是否适合铸造造型工与制芯工？",
+      "interface.quick_decision.suit_heading": "什么样的人更可能适合铸造造型工与制芯工？",
       "interface.risk.affected_roles_label": "主要岗位",
       "interface.risk.consequence_label": "可能后果",
       "interface.risk.evidence_label": "依据",
@@ -37990,7 +38070,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与人工复核",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38013,46 +38093,46 @@
         "fact_id": "identity",
         "market": "美国",
         "measure": "职业身份代码",
-        "occupation_scope": "本职业：铸造模具型芯工",
+        "occupation_scope": "本职业：铸造造型工与制芯工",
         "period": "O*NET 2026 occupational profile",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "本轮实际全国May2025五分位37,160/41,870/48,110/57,350/62,640美元年；中位时薪23.13美元。",
+        "derivation": "直接读取 O*NET 展示的 2025 年 5 月 BLS OEWS 美国全国行（SOC 51-4071）中的中位时薪和中位年薪，未做换算。",
         "display_value": "中位时薪 23.13 美元 / 中位年薪 48,110 美元（2025，BLS OEWS）",
         "fact_id": "us-wage-2025",
         "market": "美国",
         "measure": "工资中位数",
-        "occupation_scope": "本职业：铸造模具型芯工",
+        "occupation_scope": "本职业：铸造造型工与制芯工",
         "period": "2025",
         "source_refs": [
-          "hr"
+          "onet-wages"
         ]
       },
       {
-        "derivation": "本轮实际全国May2025五分位37,160/41,870/48,110/57,350/62,640美元年；中位时薪23.13美元。",
+        "derivation": "直接读取 O*NET 展示的 2025 年 5 月 BLS OEWS 美国全国行（SOC 51-4071）中的第 10 分位的年薪原列，未做换算。",
         "display_value": "10 分位 37,160 美元/年（2025，BLS OEWS）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "工资第10分位",
-        "occupation_scope": "本职业：铸造模具型芯工",
+        "occupation_scope": "本职业：铸造造型工与制芯工",
         "period": "2025",
         "source_refs": [
-          "hr"
+          "onet-wages"
         ]
       },
       {
-        "derivation": "本轮实际全国May2025五分位37,160/41,870/48,110/57,350/62,640美元年；中位时薪23.13美元。",
+        "derivation": "直接读取 O*NET 展示的 2025 年 5 月 BLS OEWS 美国全国行（SOC 51-4071）中的第 90 分位的年薪原列，未做换算。",
         "display_value": "90 分位 62,640 美元/年（2025，BLS OEWS）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "工资第90分位",
-        "occupation_scope": "本职业：铸造模具型芯工",
+        "occupation_scope": "本职业：铸造造型工与制芯工",
         "period": "2025",
         "source_refs": [
-          "hr"
+          "onet-wages"
         ]
       },
       {
@@ -38061,7 +38141,7 @@
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长",
-        "occupation_scope": "本职业：铸造模具型芯工",
+        "occupation_scope": "本职业：铸造造型工与制芯工",
         "period": "2025—2035",
         "source_refs": [
           "ep"
@@ -38073,7 +38153,7 @@
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数",
-        "occupation_scope": "本职业：铸造模具型芯工",
+        "occupation_scope": "本职业：铸造造型工与制芯工",
         "period": "2025",
         "source_refs": [
           "ep"
@@ -38085,7 +38165,7 @@
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
-        "occupation_scope": "本职业：铸造模具型芯工",
+        "occupation_scope": "本职业：铸造造型工与制芯工",
         "period": "2025—2035",
         "source_refs": [
           "ep"
@@ -38114,30 +38194,18 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+0)/3+0.5)=0; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "0%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "铸造模具型芯工",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "铸造模具型芯工 · 任务、交付与责任边界",
+      "铸造造型工与制芯工 · 任务、交付与责任边界",
       "来源范围 · 统计口径 · 人工复核",
       "中国精确职业工资缺口按证据保留"
     ],
@@ -38178,17 +38246,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "铸造模具型芯工做什么、需要什么能力、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围、来源口径和数据缺口。"
+      "text": "看铸造造型和制芯的区别、砂型和砂芯交付前怎么查缺陷，以及大陆岗位要求与工资样本如何读。"
     },
     "title": {
       "availability": "available",
-      "text": "铸造模具型芯工"
+      "text": "铸造造型工与制芯工：砂型砂芯、岗位区别和入行"
     }
   },
-  "source_content_sha256": "dc3edf8097ab09a4af1af4eab7aabd0c1c93d75439db9c12eedb1145f8af02c3",
+  "source_content_sha256": "cf24b87bb2deefd977867922accda3bdd44f35e461b84aee06632eb140640402",
   "subject": {
     "canonical_slug": "foundry-mold-and-coremakers",
-    "name": "铸造模具型芯工",
-    "summary": "职业定义｜O*NET-SOC51-4071.00在铸造厂制作、成形用于金属铸件的蜡模、砂芯或砂型。官方任务含清理修补模具芯盒、筛砂填砂捣实、安放模样及砂芯、合型取模、开浇道和直浇口、装配加固、吊运或指挥搬运、看护壳型粘合设备，以及浇注熔融金属、操作烘芯或熔化撇渣加熔剂的炉。活动含检验设备材料与质量判断，不能整体排除检验或机械任务；工艺设计变更、成分判定及最终放行权限须核实际岗位和有效程序，不由名称统一裁定。"
+    "name": "铸造造型工与制芯工",
+    "summary": "铸造造型工做出铸件外形所需的铸型；制芯工做出形成内腔或其他内部特征的型芯。两类产出都交给后续铸造工序。大陆招聘可查“铸造造型工”“制芯工”，与美国 O*NET 51-4071 有任务交集。"
   }
 }

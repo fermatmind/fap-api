@@ -53,6 +53,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-short-huangpu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-short-mile": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -19491,56 +19497,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19548,7 +19518,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19561,7 +19531,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19574,7 +19544,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19587,7 +19557,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -22527,7 +22497,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合先试：愿意直接接收顾客点单并现场快速出餐，能在同一时段并行处理多张短单，并愿意承担点单、制作、装盘交付与收款之间的衔接。"
+              "适合先试：愿意按短单做快速菜品，安排同单不同品项尽量同时完成，再交接出餐。是否接单、端送或收款，按实际工位核对。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.1",
@@ -22815,7 +22785,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "接收顾客点单并按要求记录 → 安排同批出餐的作业顺序 → 按需从冷藏取料 → 按时间与日期标注食品 → 备制三明治、切肉与汤品沙拉 → 备齐配套餐具与配料"
+              "核对短单并安排同单品项的制作顺序；按需备料和标记，再准备配套餐具。接单由岗位决定。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.camera.steps",
@@ -22955,7 +22925,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "在柜台或简餐档口直接接收顾客点单，现场制作短时加工菜品，按点单快速交付并在需要时完成收款。"
+              "按短单烹制短时菜品并交接；部分岗位在柜台接单、端送或收款。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.primary",
@@ -23039,7 +23009,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "接收点单 → 安排同批出餐顺序 → 煎炸烤制短时菜品 → 保温餐台取餐装盘 → 交付并收款 → 清洁与轮换补货。"
+              "核对短单 → 安排同单制作顺序 → 烹制、装盘并交接 → 清洁和补货。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.primary",
@@ -23361,12 +23331,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "清洁补货核效期；异常暂缓受影响食品，核批次并留待办交接，恢复须适用安全依据。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "清洁补货核效期；异常暂缓受影响食品，核批次并留待办交接，恢复须适用安全依据。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -23375,7 +23346,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "点单与作业排序｜接收点单并安排顺序｜直接接收顾客点单并按要求记录，把同一批要一起上桌的菜品排在一起，按加工时限安排先后顺序。"
+              "按单制作与排序｜按品项用时安排制作｜先核清短单，把同单品项尽量在同一时段交接。是否自己接单按工位决定。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
@@ -23557,12 +23528,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "当前健康安全责任28%很高/22%高，决策26%每日；错误28%严重/21%较严重，其他未完整显示不补总数，非事故率。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "当前健康安全责任28%很高/22%高，决策26%每日；错误28%严重/21%较严重，其他未完整显示不补总数，非事故率。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.display.work_context_block.review",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -23627,7 +23599,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET Zone1–2/SVP低于6，几天至一年在职训练是层级概述；教育响应66%高中、14%低于高中、9%部分大学无学位，非中国门槛。BLS本岗典型不要求正式学历、不要求相关经验、短期在职训练，不等于无需学习或安全条件。兴趣R86C56E45S37A21I0，前三RCE为活动类型非能力或人口比例；当前行业78%住宿餐饮14%零售8%其他，未明年度。"
+              "O*NET Zone1–2/SVP低于6，几天至一年在职训练是层级概述；教育响应66%高中、14%低于高中、9%部分大学无学位，非中国门槛。BLS本岗典型不要求正式学历、不要求相关经验、短期在职训练，不等于无需学习或安全条件。兴趣R86C56E45S37A21I0，前三RCE为活动类型非能力或人口比例；当前行业78%住宿餐饮14%零售8%其他，O*NET 分行业表未标数据年。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
@@ -23812,12 +23784,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与简餐厨师的关键区别是菜品加工深度与出品体系：需按完整菜谱完成多道工序；2024 年就业 1,460,200 人，O*NET 增速类别为「远快于平均（7% 或更高）」。"
+              "餐厅厨师按菜单烹制，在有明确分工时负责各自工位。简餐厨师要协调同单品项的完成时间。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
           "source_refs": [
-            "onet"
+            "editor",
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23868,11 +23842,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是菜单固定、以批量加热为主、通常不直接承担完整备制与饮品制作；2024 年就业 669,500 人，O*NET 增速为「下降（-14%）」。"
+              "快餐后厨多用标准流程和专用设备做少数固定品项；简餐工位可能直接接单，再按顾客要求安排制作。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
           "source_refs": [
+            "adjacent-summary-35-2011",
             "onet"
           ],
           "type": "prose"
@@ -23910,12 +23885,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别是按周期菜单服务固定人群、以批量出餐为主，不面向点单顾客；2024 年就业 466,100 人，O*NET 增速为「慢于平均（1% 至 2%）」。"
+              "机构食堂通常围绕餐次和预估人数分批准备；简餐厨师按顾客订单安排制作。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
           "source_refs": [
-            "onet"
+            "adjacent-summary-35-2012",
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23952,11 +23929,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别是不承担制作与交付责任；2024 年就业 902,700 人，O*NET 增速为「下降（-1% 或更低）」，常作为进入餐饮体系的起点。"
+              "食品备制人员多负责洗切、称量或备料；是否需要独立接单和出品，须核实际岗位。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.difference",
           "source_refs": [
+            "enrichment",
             "onet"
           ],
           "type": "prose"
@@ -23994,11 +23972,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是菜单主导权与管理责任：承担菜单设计与成本核算、人员排班与培训；准备层级为 Job Zone 3，2024 年就业 197,300 人。"
+              "厨师长承担菜单、出品标准和人员安排；简餐工位主要承担短单执行和交接。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
           "source_refs": [
+            "agent",
             "onet"
           ],
           "type": "prose"
@@ -24036,11 +24015,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与本职业的关键区别是经营与人员管理责任：中位年薪 69,390 美元（2025 年），2024 年就业 352,800 人，O*NET 增速类别为「远快于平均（5% 至 6%）」。"
+              "餐饮服务经理组织班次和运营；如果更想在档口做菜、安排短单顺序，先看一线工位的职责。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.difference",
           "source_refs": [
+            "teacher",
             "onet"
           ],
           "type": "prose"
@@ -24078,12 +24058,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表把简餐厨师与五个相邻方向，按职业方向、核心工作与产出、关键区别和更适合什么选择四项对照；就业与增速为美国 O*NET-SOC 口径（2024 年就业、2024—2034 年预测）。"
+              "用服务对象、点单方式和备餐节奏区分相邻岗位。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.intro",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -24106,12 +24087,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "依据：O*NET OnLine 35-2015.00 与相邻职业的摘要页、就业趋势页（2026 年更新）；就业为 2024 年、增速为 2024—2034 年预测期口径，不用于推断个人录用机会或收入。"
+              "美国职业档案提供任务参照；应聘时按实际分工判断，不用职业名称推断一个岗位的全部职责。"
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.evidence_note",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -25627,7 +25609,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑控制建议：按适用菜品设备及现行要求核安全温度时间，用食品温度计确认；顾客熟度偏好、感官和定时设定不能证明食安，疑似污染不得试吃。异常暂缓受影响食品，恢复须适用安全依据，主管同意不等于安全；本轮未取得各菜品完整中止恢复程序。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "编辑控制建议：按适用菜品设备及现行要求核安全温度时间，用食品温度计确认；顾客熟度偏好、感官和定时设定不能证明食安，疑似污染不得试吃。异常暂缓受影响食品，恢复须适用安全依据，主管同意不等于安全；本轮未取得各菜品完整中止恢复程序。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.4.description",
@@ -26123,12 +26105,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的简餐厨师招聘报价统计；单条档口或平台的报价不能代表全国水平"
+              "弥勒一条小吃厨师招聘要求至少一年特色小吃、简餐制作经验，列 4,500–4,851 元/月；黄埔食堂的风味小吃岗区分大工 7,000 元/月与小工 5,000 元/月，列面条、米粉等制作。问清是否逐单现做、谁收单，以及在高峰如何并行出餐。两条报价不同场景，不能当作全国简餐厨师工资。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "short-mile",
+            "short-huangpu"
           ],
           "type": "prose"
         },
@@ -26151,12 +26134,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑学习方向：核真实档口带训、工位与招聘条件，本轮无全国带训形式或学历分布。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "编辑学习方向：核真实档口带训、工位与招聘条件，本轮无全国带训形式或学历分布。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "sag-moa",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -26438,7 +26422,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前行业页78%住宿和餐饮服务，页面未明年度，非82%或工资。"
+              "当前行业页78%住宿和餐饮服务，分行业表未标数据年，非82%或工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
@@ -26468,7 +26452,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前其他8%，未明年度且未细分，不编具体行业份额，非工资。"
+              "当前其他8%，O*NET 分行业表未标数据年且未细分，不编具体行业份额，非工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
@@ -28020,7 +28004,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑控制建议：按适用菜品设备及现行要求核安全温度时间，用食品温度计确认；顾客熟度偏好、感官和定时设定不能证明食安，疑似污染不得试吃。异常暂缓受影响食品，恢复须适用安全依据，主管同意不等于安全；本轮未取得各菜品完整中止恢复程序。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "编辑控制建议：按适用菜品设备及现行要求核安全温度时间，用食品温度计确认；顾客熟度偏好、感官和定时设定不能证明食安，疑似污染不得试吃。异常暂缓受影响食品，恢复须适用安全依据，主管同意不等于安全；本轮未取得各菜品完整中止恢复程序。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
@@ -28035,7 +28019,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
@@ -28364,7 +28348,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
@@ -28690,7 +28674,7 @@
                 "id": "employer-1",
                 "values": [
                   "健康管理与食品安全条件",
-                  "中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。",
+                  "中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。",
                   "全国学历证书使用分布未取得；该缺口不豁免适用法定健康和食安培训要求。"
                 ]
               },
@@ -28716,7 +28700,8 @@
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "title": "雇主通常会核对什么",
           "type": "cards"
@@ -28856,7 +28841,7 @@
                 "直接接触食品的档口人员",
                 "依法核健康与食安训练的适用对象",
                 "接触直接入口食品须年度健康证明，企业食安培训依法核",
-                "中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。",
+                "中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。",
                 "未取得全国统一时长费用和具体办理程序",
                 "培训记录不等于岗位授权，具体要求按现行规定。"
               ],
@@ -28902,7 +28887,8 @@
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "title": "训练、资格与工位授权怎么选择",
           "type": "table"
@@ -28912,7 +28898,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "学历、健康证明、培训、技能等级及工位权限分别核，不能替代。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。",
+              "学历、健康证明、培训、技能等级及工位权限分别核，不能替代。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。",
               "O*NET Zone1–2/SVP低于6，几天至一年在职训练是层级概述；教育响应66%高中、14%低于高中、9%部分大学无学位，非中国门槛。BLS本岗典型不要求正式学历、不要求相关经验、短期在职训练，不等于无需学习或安全条件。",
               "中国中式烹调师4-03-02-01职业信息列初中或相当和五级至一级，为相关实体资料非所有档口统一学历。全国证书要求分布、现行评价费用条件未取得留缺。",
               "真实任职按现行适用法规、招聘和评价机构条件核，不构成录用或异常恢复授权。"
@@ -28922,7 +28908,8 @@
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "title": "训练、资格与作业边界",
           "type": "notice"
@@ -28932,14 +28919,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑路径：在受指导准备清洁及点单任务基础上核独立制作和同步排序，再探索多工位；本轮无国内多数路线或无学历分布。O*NET Zone1–2/SVP低于6，几天至一年在职训练是层级概述；教育响应66%高中、14%低于高中、9%部分大学无学位，非中国门槛。BLS本岗典型不要求正式学历、不要求相关经验、短期在职训练，不等于无需学习或安全条件。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "编辑路径：在受指导准备清洁及点单任务基础上核独立制作和同步排序，再探索多工位；本轮无国内多数路线或无学历分布。O*NET Zone1–2/SVP低于6，几天至一年在职训练是层级概述；教育响应66%高中、14%低于高中、9%部分大学无学位，非中国门槛。BLS本岗典型不要求正式学历、不要求相关经验、短期在职训练，不等于无需学习或安全条件。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.path.career-path-block.1",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -28964,14 +28952,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国代码与中国相关实体非一一对应，本轮未取得精确工资，不推中国无相关职业。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "美国代码与中国相关实体非一一对应，本轮未取得精确工资，不推中国无相关职业。中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.path.career-path-block.3",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -29405,14 +29394,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学历技能按真实招聘核；中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "学历技能按真实招聘核；中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -29485,14 +29475,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学历技能按真实招聘核；中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "学历技能按真实招聘核；中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.credentials",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -29741,14 +29732,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学历技能按真实招聘核；中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "学历技能按真实招聘核；中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -30077,14 +30069,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学历技能按真实招聘核；中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；第47条潜在食安事故风险须停止食品生产经营并报告县级监管部门，不能只报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
+              "学历技能按真实招聘核；中国食品安全法2025修正第44条企业员工食安知识培训及食安管理人员培训考核；第45条接触直接入口食品者年度健康检查、取得证明后上岗；依据第47条，有发生食品安全事故的潜在风险时，食品生产经营者应立即停止食品生产经营活动，并向所在地县级食品安全监督管理部门报告。简餐厨师按门店流程暂停使用或供应受影响食品、记录批次与异常，并立即上报主管。经营主体、健康证明、技能等级、培训和工位权限分开核；未取得全国学历证书普及比例或统一培训时长。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -30985,7 +30978,7 @@
           "data": {
             "entries": [
               {
-                "answer": "直接接收顾客点单并按短时加工要求制作，用铁板、炸炉与烤箱制作薯条、鸡蛋、煎饼与肉饼等菜品，按点单安排作业顺序使同批菜品同时完成，从保温餐台取餐装盘并在餐桌或柜台交付，备制三明治、切肉、汤与沙拉并烘焙或冲煮饮品，补货轮换食品并按时间与日期标注冷藏食品，以及清洁食品制备设备与工作区与餐台，还可能需要订料、上架与收款找零。",
+                "answer": "根据短单准备能较快完成的菜品，例如鸡蛋、煎饼或三明治，使用本工位设备安排各项制作并交接；部分岗位也直接接单、收款或端送。",
                 "id": "actors.faq.1",
                 "question": "简餐厨师每天的具体工作是什么？",
                 "question_key": "career.faq.cooks-short-order.1",
@@ -30994,7 +30987,7 @@
                 ]
               },
               {
-                "answer": "简餐厨师在柜台或档口直接接收顾客点单、以短时加工菜品为主并按点单快速交付；餐厅厨师按完整菜谱在餐厅后厨连续出餐，菜品范围更广；快餐厨师在菜单有限的快餐店按订单批量加热与装盒，工位单一、重复性高。",
+                "answer": "简餐厨师集中做能较快完成的短单，部分岗位在柜台接单；餐厅厨师负责餐厅菜单的一部分或多项菜品；快餐厨师使用门店限定菜单和固定配方。实际分工可能重叠。",
                 "id": "actors.faq.2",
                 "question": "简餐厨师与餐厅厨师、快餐厨师有什么区别？",
                 "question_key": "career.faq.cooks-short-order.2",
@@ -31012,9 +31005,9 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：点单、备料与库存信息，短时制作与出餐节拍，温度、标注与清洁记录三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "点单整理、库存提示和设备定时可由软件或设备辅助；这些是可能的用法。本页没有这一职业实际采用率、工时变化或岗位替代的实测数据。",
                 "id": "actors.faq.4",
-                "question": "简餐厨师哪些任务已有 AI 变化证据？",
+                "question": "哪些任务可能由软件或设备辅助？",
                 "question_key": "career.faq.cooks-short-order.4",
                 "source_refs": [
                   "onet"
@@ -31030,12 +31023,14 @@
                 ]
               },
               {
-                "answer": "美国 2025 年中位时薪 17.25 美元、年薪 35,880 美元（35-2015.00 单一职业口径），分位为年薪 23,440／30,610／35,880／42,450／46,460 美元；中国大陆未取得职业级工资数值，本页按缺口处理，不用行业均值代填。",
+                "answer": "美国 2025 年职业中位时薪为 17.25 美元、年工资中位数为 35,880 美元。大陆部分岗位公开报价见本页两条样本；未核到全国职业级工资分布，不能从两则招聘推算。",
                 "id": "actors.faq.6",
                 "question": "简餐厨师工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.cooks-short-order.6",
                 "source_refs": [
-                  "oews"
+                  "r2-pay-3",
+                  "short-mile",
+                  "short-huangpu"
                 ]
               },
               {
@@ -31048,12 +31043,14 @@
                 ]
               },
               {
-                "answer": "美国没有统一的强制证照；中国大陆健康管理与食品安全培训是常见前置条件，中式烹调师技能等级通常不是档口一线岗位的门槛，具体要求按目标门店与主管部门规定。",
+                "answer": "中国大陆《食品安全法》第45条要求接触直接入口食品的从业人员每年体检并取得健康证明后方可上岗。健康证明和中式烹调师技能等级不同；核对招聘中的技能等级、试做和带教条件。美国食品从业认证因州和地方而异。",
                 "id": "actors.faq.8",
                 "question": "做简餐厨师必须考证吗？",
                 "question_key": "career.faq.cooks-short-order.8",
                 "source_refs": [
-                  "cn-rule"
+                  "cn-food-law",
+                  "cn-cook-profile-2022",
+                  "bls-family-context"
                 ]
               },
               {
@@ -31066,12 +31063,12 @@
                 ]
               },
               {
-                "answer": "美国官方预测显示 2024—2034 年该职业就业增速为「下降（-1% 或更低）」，预测期职位空缺约 20,600 个；总量下降但仍持续产生替换性空缺，且档口作息随营业时段波动，须按本地实际需求核对。",
+                "answer": "BLS 预计，美国简餐厨师在 2025–2035 年就业减少 5.2%，同期年均约 17,400 个空缺，包含替补需求。减少的是就业总量，年均空缺是另一指标。看本地档口岗位时，另查现点现做比例、前台分工与高峰班次。",
                 "id": "actors.faq.10",
                 "question": "现在选择简餐厨师职业，还应考虑什么？",
                 "question_key": "career.faq.cooks-short-order.10",
                 "source_refs": [
-                  "bls"
+                  "bls-projections"
                 ]
               }
             ]
@@ -31495,7 +31492,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "支持本职业的任务、工作情境与准备层级。",
                   "不含技术采用与岗位替代数据。"
@@ -31639,13 +31636,14 @@
                 "url": "https://www.onetonline.org/link/summary/11-9051.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "只支持本轮实际查读的相关段落；未核条款、法域与岗位另核。"
+                  "第44条涉及企业职工的食品安全知识培训及食品安全管理人员的培训和考核。第45条涉及接触直接入口食品人员的年度健康检查及健康证明。",
+                  "第47条规定，存在食品安全事故潜在风险时，由食品生产经营者立即停业并向所在地县级食品安全监督管理部门报告。"
                 ],
                 "evidence_type": "official source",
                 "id": "cn-food-law",
-                "limitation": "中国食品安全法2025修正第44条要求食品生产经营企业对职工开展食品安全知识培训；第45条要求从事接触直接入口食品工作的食品生产经营人员每年健康检查、取得健康证明后上岗，并规定有碍食品安全疾病的岗位限制。适用范围是法定生产经营活动，不把所有私人家庭做饭一概等同餐饮经营，也不把健康证明当技能等级或设备许可。实际第42/47/54—57条支持追溯、自查停报、储存原料设备及食堂责任；个人岗位分工与技术限值另核。",
+                "limitation": "中国食品安全法2025修正第44条要求食品生产经营企业对职工开展食品安全知识培训；第45条要求从事接触直接入口食品工作的食品生产经营人员每年健康检查、取得健康证明后上岗，并规定有碍食品安全疾病的岗位限制。适用范围是法定生产经营活动，不把所有私人家庭做饭一概等同餐饮经营，也不把健康证明当技能等级或设备许可。厨师在工位按门店流程暂停使用或供应受影响食品、记录异常并上报主管。岗位处置与食品生产经营者的法定停业报告义务分别核对。",
                 "market": "中国内地",
                 "name": "食品安全法（2025修正）",
                 "period": "2025修正，2025-12-01施行；实际相关条款",
@@ -31857,10 +31855,10 @@
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet-industry",
-                "limitation": "当前78%住宿餐饮14%零售8%其他，页未明年度，非工资或具体子行业份额。",
+                "limitation": "概览页将主要行业类别标为 2025；分行业表列具体就业占比，但未单标数据年。占比不是工资。",
                 "market": "美国",
                 "name": "O*NET简餐厨师行业就业分布",
-                "period": "当前页面未明年度；查读2026-10-09",
+                "period": "分行业表未标数据年",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/35-2015.00"
@@ -31896,6 +31894,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第48–50条中的小吃厨师1名、4,500–4,851元/月，要求1年以上特色小吃及简餐制作经验。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "short-mile",
+                "limitation": "仅说明该次公告和所列岗位；不代表全国薪资或当前仍有空缺。",
+                "market": "中国大陆",
+                "name": "云南弥勒：小吃厨师",
+                "period": "2026-06-30",
+                "publisher": "弥勒市人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hhml.gov.cn/info/35871/922982.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第三项地方风味小吃厨师 3 人；大工 7,000 元/月、小工 5,000 元/月，列面条、米粉等小吃制作。它是食堂场景，不证明接单或送餐属于该工位。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "short-huangpu",
+                "limitation": "仅说明该次公告和所列岗位；不代表全国薪资或当前仍有空缺。",
+                "market": "中国大陆",
+                "name": "广州黄埔：食堂风味小吃厨师",
+                "period": "2026-08-18",
+                "publisher": "广州市黄埔区劳动就业服务管理中心",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzjg/qt/ldjyfwzx/kljy/content/post_10969476.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "用于职业概述与任务对照。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "adjacent-summary-35-2011",
+                "limitation": "仅相邻职业对照；不用于本职业工资或资格。",
+                "market": "美国",
+                "name": "快餐厨师 (35-2011.00)",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2011.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "用于职业概述与任务对照。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "adjacent-summary-35-2012",
+                "limitation": "仅相邻职业对照；不用于本职业工资或资格。",
+                "market": "美国",
+                "name": "机构与食堂厨师 (35-2012.00)",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2012.00"
               }
             ]
           },
@@ -34871,13 +34929,14 @@
           "china_soc_row": "美国35-2015本岗工资就业人群分别核；中国相关实体和主体另核，精确职业工资未取得。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-short-mile",
+            "posting-short-huangpu"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响简餐厨师的工资吗？",
             "driver_heading": "哪些场景会用到简餐厨师？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "准备方向与目标档口要求怎样核对？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35030,7 +35089,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "当前行业页未明年度：78%住宿餐饮/14%零售/8%其他",
+        "industry_period": "O*NET 分行业占比表未标数据年：78%住宿餐饮/14%零售/8%其他",
         "industry_rows": [
           {
             "fact_ref": "industry-theater",
@@ -35076,7 +35135,7 @@
           },
           {
             "industry": "就业归类口径",
-            "median": "当前78%住宿餐饮/14%零售/8%其他，未明年度，非工资。",
+            "median": "当前78%住宿餐饮/14%零售/8%其他，O*NET 分行业表未标数据年，非工资。",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -36637,7 +36696,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解简餐厨师的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36749,14 +36808,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解我的人格偏好"
@@ -37172,72 +37223,75 @@
       },
       {
         "derivation": null,
-        "display_value": "约 151,100 人（2024 年）",
+        "display_value": "138,700人（2025）",
         "fact_id": "employment",
         "market": "美国",
-        "measure": "就业规模（单一职业口径）",
-        "occupation_scope": "Cooks, Short Order（O*NET-SOC 35-2015.00）",
-        "period": "2024 年；检索 2026-09-18",
+        "measure": "基期就业",
+        "occupation_scope": "35-2015简餐厨师就业预测，非工资或录用率",
+        "period": "2025—2035（2025基年）；查读2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "下降（2024—2034 年，-1% 或更低）",
+        "display_value": "-5.2%（2025—2035；O*NET整数-5%）",
         "fact_id": "growth",
         "market": "美国",
-        "measure": "就业变化率（单一职业口径）",
-        "occupation_scope": "Cooks, Short Order（O*NET-SOC 35-2015.00）；O*NET 分类标签为「Decline」",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "measure": "就业变化率",
+        "occupation_scope": "35-2015简餐厨师就业预测，非工资或录用率",
+        "period": "2025—2035（2025基年）；查读2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 20,600 个（2024—2034 年预测期内的职位空缺，含增长与替换需求）",
+        "display_value": "17,400个/年（2025—2035年均，含替换）",
         "fact_id": "openings",
         "market": "美国",
-        "measure": "职位空缺（单一职业口径）",
-        "occupation_scope": "Cooks, Short Order（O*NET-SOC 35-2015.00）；O*NET 说明空缺包含增长需求与替换需求",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "measure": "年均空缺",
+        "occupation_scope": "35-2015简餐厨师就业预测，非工资或录用率",
+        "period": "2025—2035（2025基年）；查读2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "住宿和餐饮服务78%（当前行业页未明年度，非工资）",
+        "display_value": "住宿和餐饮服务78%（O*NET 分行业占比表未标数据年，非工资）",
         "fact_id": "industry-theater",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
         "occupation_scope": "35-2015行业分布，未细分不猜子行业",
-        "period": "当前行业页未明年；查读2026-10-09",
+        "period": "分行业表未标数据年",
         "source_refs": [
           "onet-industry"
         ]
       },
       {
         "derivation": null,
-        "display_value": "零售贸易14%（当前行业页未明年度，非工资）",
+        "display_value": "零售贸易14%（O*NET 分行业占比表未标数据年，非工资）",
         "fact_id": "industry-education",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
         "occupation_scope": "35-2015行业分布，未细分不猜子行业",
-        "period": "当前行业页未明年；查读2026-10-09",
+        "period": "分行业表未标数据年",
         "source_refs": [
           "onet-industry"
         ]
       },
       {
         "derivation": null,
-        "display_value": "其他行业8%（当前行业页未明年度，非工资）",
+        "display_value": "其他行业8%（O*NET 分行业占比表未标数据年，非工资）",
         "fact_id": "industry-amusement",
         "market": "美国",
         "measure": "行业就业占比（非工资）",
         "occupation_scope": "35-2015行业分布，未细分不猜子行业",
-        "period": "当前行业页未明年；查读2026-10-09",
+        "period": "分行业表未标数据年",
         "source_refs": [
           "onet-industry"
         ]
@@ -37320,7 +37374,7 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "derivation": "按三项选定任务等权汇总的编辑估算（0–100），不表示被替代概率。 三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
         "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
@@ -37330,6 +37384,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第48–50条中的小吃厨师1名、4,500–4,851元/月，要求1年以上特色小吃及简餐制作经验。",
+        "fact_id": "posting-short-mile",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "云南弥勒：小吃厨师",
+        "period": "2026-06-30",
+        "source_refs": [
+          "short-mile"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第三项地方风味小吃厨师 3 人；大工 7,000 元/月、小工 5,000 元/月，列面条、米粉等小吃制作。它是食堂场景，不证明接单或送餐属于该工位。",
+        "fact_id": "posting-short-huangpu",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "广州黄埔：食堂风味小吃厨师",
+        "period": "2026-08-18",
+        "source_refs": [
+          "short-huangpu"
+        ]
       }
     ]
   },
@@ -37338,7 +37416,7 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务辅助估算（编辑判断，三项任务）"
     },
     "badges": [
       "服务与餐饮 · 柜台与简餐档口出品",
@@ -37356,19 +37434,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，下降 -1% 或更低）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 151,100 人）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国职位空缺（2024—2034 年，约 20,600 个）"
+        "label": "美国预计年均职位空缺（2025–2035 年）"
       },
       {
         "availability": "missing",
@@ -37382,17 +37460,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "简餐厨师（O*NET-SOC 35-2015.00）在柜台与简餐档口接收点单、现场制作短时菜品并交付：覆盖煎炸烤制、保温餐台装盘、柜台点单与收款、备制三明治汤品与饮品、食品标注与库存轮换、设备与餐区清洁；含美国 2025 年中位时薪 17.25 美元、2024—2034 年增速「下降（-1% 或更低）」与预测期职位空缺约 20,600 个、中国大陆职业级工资缺口与行业均值代理边界、灼伤割伤与食品安全风险控制及虚构练习边界。"
+      "text": "简餐厨师怎样同时处理多张短单？看现点现做和快餐工位的区别、弥勒小吃厨师和黄埔食堂风味小吃招聘样本，以及美国就业数据。"
     },
     "title": {
       "availability": "available",
       "text": "简餐厨师"
     }
   },
-  "source_content_sha256": "b5a9179a6d00b79d97cf32570dfaef741786189f4e0f8d13ca9155a54d83d44d",
+  "source_content_sha256": "beb928928a3b36209f4fe7b051e29a5cb29d42dfc90b6392dbbbfc8d2d349ef4",
   "subject": {
     "canonical_slug": "cooks-short-order",
     "name": "简餐厨师",
-    "summary": "简餐厨师（Cooks, Short Order）在美国对应 O*NET-SOC 35-2015.00：在柜台、简餐档口与小吃店等场所直接接收顾客点单，现场制作煎、炸、烤类短时菜品（如薯条、鸡蛋、煎饼、汉堡等），从保温餐台完成订单装盘并在餐桌或柜台交付，可能同时收款与找零；还需备制三明治、汤与沙拉、烘焙面包或甜点、冲煮咖啡与茶，并按时间与日期标注冷藏食品、轮换库存与补货。中国侧以中式烹调师（职业编码 4-03-02-01）等实体另行核对，两套分类不是一一对应。"
+    "summary": "简餐厨师按单快速制作煎、烤、炸等单品，并协调同一张单的出餐顺序。典型场景有短单档口、小吃店和餐厅柜台；接单、收款和交餐由具体岗位安排，不是所有简餐厨师都承担。美国对应 O*NET-SOC 35-2015.00。"
   }
 }

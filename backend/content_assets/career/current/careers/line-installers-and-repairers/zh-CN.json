@@ -14,9 +14,6 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7234,7 +7231,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "电力线路安装维修人员的核心是把电力与配电系统的架设与检修要求变成可交付的安全作业：按图纸与工单开闭开关、验电并接地隔离，攀杆或使用高空作业车安装维护导管、电缆、导线、变压器与开关设备，用仪器检测并定位故障，架设或扶正电杆、张紧导线、敷设地下电缆，并在作业前后记录与交接。"
+              "适合愿意在天气或时间压力下仍按班组分工复核记录、遇到不明状态就暂停报告的人。"
             ]
           },
           "id": "line-installers-and-repairers.quick-decision.fermat-decision-card.2",
@@ -7248,12 +7245,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "完全虚构的线路作业样本：给出一份虚构的配电线路单线图与工单（含 1 段架空线路、1 台柱上变压器、2 处需接地的作业点）和两条异常情形（某用户侧无电、某档导线弧垂异常），要求在 60 分钟内写出停电与验电接地顺序、个人防护要点、作业步骤与异常处置记录；不使用真实电网信息或未授权素材。"
+              "到「入行与 L 表：巡检照片归档交接」做原题和变式，写下待核项及交接人。"
             ]
           },
           "id": "line-installers-and-repairers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "internal-rubric"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7262,12 +7259,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "样本输出与反思：检查是否先核对停电范围与工作许可、是否按先验电后接地的顺序执行、是否保留接地与作业记录；再问自己能否在户外、高空与带电风险下保持专注、能否严格执行安全规程，以及是否愿意承担个人与他人的健康安全责任。"
+              "在 L 表里核对工单与照片编号，区分待核图像和编号冲突，再写清各自交给谁。"
             ]
           },
           "id": "line-installers-and-repairers.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "internal-rubric"
+            "paper-exercise"
           ],
           "type": "prose"
         }
@@ -7284,12 +7281,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "电力线路安装维修人员安装或维修电力与配电系统中使用的电缆和电线，可能架设电线杆以及轻型或重型输电塔；本页覆盖 O*NET 49-9051.00，不含电工、电信线路安装维修工、管道铺设工等相邻岗位。"
+              "电力线路安装维修人员负责输配电线路的安装、检查和维修，可能参与杆塔相关作业。现场通常由团队按授权和安全程序分工。这里使用美国 O*NET 49-9051.00。"
             ]
           },
           "id": "line-installers-and-repairers.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
             "onet-details"
           ],
           "type": "prose"
@@ -7370,13 +7366,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入：O*NET 49-9051.00 的职业身份与官方范围、任务与工作活动、工作情境与工作风格，以及工具与技术；研究结论按美国精确职业范围使用，不据此推定中国大陆的执照、工资或就业口径。"
+              "O*NET 49-9051.00 说明本职业任务和工作情境。美国工资采用 OEWS，就业预测采用 BLS 表 1.2。"
             ]
           },
           "id": "line-installers-and-repairers.profile.onet-structured-fields-block.7",
           "source_refs": [
             "onet-details",
-            "onet-summary"
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7399,12 +7396,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作闭环：从核对工单与停电条件开始，经过验电接地、安装检修、检测与故障处置，到恢复送电前检查、拆除接地并完成记录与交接；任一环节未确认前不进入下一步。"
+              "停电控制、隔离、工作许可、无电压确认和适用的保护接地均须由授权人员按规程核实。任一条件未确认，按带电状态对待，暂停并报告。恢复供电由授权人员确认人员撤离、各班组许可释放及适用防护依规解除后组织。"
             ]
           },
           "id": "line-installers-and-repairers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-details"
+            "osha-power-lines",
+            "mem-special-operations-19"
           ],
           "type": "prose"
         },
@@ -7562,7 +7560,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：数字化工具可能辅助图纸、工单和缺陷记录整理；停电许可、设备状态与现场安全仍由具备适用资格和授权的人员按规程核对。工具不自动授予作业权限。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "编辑建议：数字化工具可能辅助图纸、工单和缺陷记录整理；停电许可、设备状态与现场安全仍由具备适用资格和授权的人员按规程核对。工具不自动授予作业权限。"
             ]
           },
           "id": "line-installers-and-repairers.ai-impact.ai-impact-table.2",
@@ -7619,7 +7617,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先用完全虚构的线路单线图与工单做离线核对演练，记录判断与复核结果，不依赖未经核实的自动化提示替代现场检查。"
+              "在 L 表中核对工单与照片编号、复核状态和交接人，保留冲突编号。实际线路状态和作业许可由授权人员按现场程序核实。"
             ]
           },
           "id": "line-installers-and-repairers.ai-impact.ai-impact-table.6",
@@ -7669,7 +7667,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页未取得中国大陆本职业全国工资中位数。国家统计局公开行业年平均工资，可供电力、公用事业或建筑企业岗位作宽口径参考，不能证明所有官方渠道均未发布职业工资。"
+              "中国大陆工资参考"
             ]
           },
           "id": "line-installers-and-repairers.china-salary.career-snapshot-primary-locale.1",
@@ -7683,7 +7681,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径说明：国家统计局 2025 年城镇非私营单位分行业中，电力、热力、燃气及水生产和供应业就业人员年平均工资为 {{fact:cn-power-nonprivate-wage}}；建筑业为 {{fact:cn-construction-nonprivate-wage}}；全国合计为 {{fact:cn-national-nonprivate-wage}}。均为行业口径，不等于本职业中位数或起薪。"
+              "本页未核得与电力线路安装维修人员对应的大陆全国职业工资分布。行业均值仅供了解相关雇主的背景。"
             ]
           },
           "id": "line-installers-and-repairers.china-salary.career-snapshot-primary-locale.2",
@@ -7733,13 +7731,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国电力线路安装维修人员薪资与就业口径"
+              "美国电力线路安装维修人员工资"
             ]
           },
           "id": "line-installers-and-repairers.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "onet-wages",
-            "onet-trends"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7748,14 +7745,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国全国49-9051：2025年年薪中位数95,320美元，官方小时中位数45.83美元；第10、90分位为51,470和128,690美元。2025年就业131,900人，2025—2035预计增长10%，2035年145,500人，年均空缺10,900个；空缺含增长及替代需求，不是当前招聘数。"
+              "2025 年 5 月美国本职业 49-9051全国年薪中位数 95,320 美元，时薪中位数 45.83 美元。年薪第 10、25、50、75、90 分位依次为 51,470、67,270、95,320、109,740、128,690 美元。"
             ]
           },
           "id": "line-installers-and-repairers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages",
-            "onet-trends",
-            "bls-ooh-line"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7764,7 +7759,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计位置：2025美国全国职业工资分位；不代表个人起薪或到手收入。部分线路岗位有加班和值班，但不能据此认定该统计值包含个人加班收入。"
+              "全国工资分位"
             ]
           },
           "id": "line-installers-and-repairers.us-salary.career-snapshot-secondary-locale.3",
@@ -7778,7 +7773,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第10与第90分位是工资分布位置，不代表新手、资深或个人到手收入；该分位表不能识别地区、资历、值班或工会安排各自的影响。"
+              "如何读工资分位"
             ]
           },
           "id": "line-installers-and-repairers.us-salary.career-snapshot-secondary-locale.4",
@@ -7792,7 +7787,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET当前主要行业表标注2025：公用事业50%、建筑业36%、政府12%。雇主行业分布不等于行业工资或需求预测；分行业职业工资另按BLS OOH的2025年子表解释。"
+              "美国分行业工资参考"
             ]
           },
           "id": "line-installers-and-repairers.us-salary.career-snapshot-secondary-locale.5",
@@ -7808,7 +7803,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前美国全国2025年就业131,900人，2025—2035增长预测10%；Bright Outlook是职业前景标签，不是个人录用保证，不能与中国工资或资格拼接。"
+              "影响岗位报酬的条件"
             ]
           },
           "id": "line-installers-and-repairers.us-salary.career-snapshot-secondary-locale.6",
@@ -7886,7 +7881,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作：用完全虚构的线路单线图与工单，写出停电与验电接地顺序、个人防护要点、两条异常处置与记录，请他人按记录复核。"
+              "在 L 表中核对工单与照片编号、复核状态和交接人，保留冲突编号。实际线路状态和作业许可由授权人员按现场程序核实。"
             ]
           },
           "id": "line-installers-and-repairers.fit.riasec-fit-block.5",
@@ -8031,7 +8026,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行路径与能力阶段"
+              "入行与 L 表：巡检照片归档交接"
             ]
           },
           "id": "line-installers-and-repairers.path.career-path-block.1",
@@ -8046,14 +8041,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业通常通过在职训练或注册学徒进入，常见起点为高中文凭或同等学历，并逐步取得独立作业所需的经验与授权；O*NET 显示多数受访者具备高中文凭或同等学历，教育与训练要求按雇主与地区核对。"
+              "在大陆可先区分输配电巡检记录、安装检修和带电作业岗位。蓝山县 2022 年案例展示班组如何记录导线、绝缘子和金具巡检。向用人单位核实线路类别、电压范围、带教及作业授权，再按现行特种作业目录和岗位任务核相应取证。 郑州电力高专的配电线路实训室介绍可用于了解配电设备安装与运维的教学内容。"
             ]
           },
           "id": "line-installers-and-repairers.path.career-path-block.2",
           "source_refs": [
-            "onet-summary",
-            "onet-training",
-            "bls-ooh-line"
+            "cn-work-example",
+            "mem-special-operations-19",
+            "mem-special-operations-catalog",
+            "cn-distribution-lab"
           ],
           "type": "prose"
         },
@@ -8062,14 +8058,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国按学徒、雇主培训和具体州要求核验，认证不自动授予作业权限。中国大陆按实际作业类别和特种作业目录核验；列入目录的特种作业须经专门培训、考核合格并取得操作证，不能用O*NET代码未直接映射推定无准入要求。"
+              "蓝山县政府发布的 2022 年案例记录了当地国网输电运检班在巡检导线、绝缘子和金具时拍照，并记录现场观察。该例说明巡检如何留下可复核记录。"
             ]
           },
           "id": "line-installers-and-repairers.path.career-path-block.3",
           "source_refs": [
-            "onet-cert",
-            "onet-summary",
-            "mem-special-operations-19"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8106,12 +8100,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "展示证据：用一份可复核的作业方案、安全清单与演练记录，说明按规程执行与协同能力。"
+              "纸面练习《L 表：巡检照片归档交接》。 虚构纸面练习。照片归档须同时满足工单与照片编号一致、照片复核状态已确认。L1 两边均为 T07，照片已复核。L2 两边均为 T08，照片未复核。L3 工单 T09、照片 T90，照片已复核。先记归档状态和待核负责人。照片状态交图像复核员，编号不符交巡检记录员。变式仅将 L2 的照片状态改为已复核。只判断归档记录是否齐全。"
             ]
           },
           "id": "line-installers-and-repairers.path.career-path-block.6",
           "source_refs": [
-            "onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8120,12 +8114,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "下一步：核对目标岗位对学徒、培训与安全规程的要求，并在受监督的真实作业中验证架设、检修与故障处置能力。"
+              "先做原题和变式，保存第一稿。再到「常见问题与边界」打开折叠参考解，核对原值和交接分工。"
             ]
           },
           "id": "line-installers-and-repairers.path.career-path-block.7",
           "source_refs": [
-            "onet-summary"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8156,7 +8150,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "市场信号与转型方向"
+              "职业前景与相关方向"
             ]
           },
           "id": "line-installers-and-repairers.market-signals.market-signal-card.1",
@@ -8171,13 +8165,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国49-9051当前全国预测：2025年131,900人，2035年145,500人，2025—2035增长10%，年均空缺10,900个；属于总体就业预测，非AI归因、非当前招聘数或个人机会。"
+              "BLS 表 1.2（美国本职业 49-9051）：2025 年约 131,900 个岗位，2035 年预计约 145,500 个，变化 10.3%，年均约 10,900 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "line-installers-and-repairers.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends",
-            "bls-ooh-line"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8186,13 +8179,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "当前O*NET主要行业表标注2025，公用事业50%、建筑业36%、政府12%；这是雇主场景分布，不是需求预测。"
+              "BLS 表 1.2（美国本职业 49-9051）：2025 年约 131,900 个岗位，2035 年预计约 145,500 个，变化 10.3%，年均约 10,900 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "line-installers-and-repairers.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-trends",
-            "onet-industry"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8277,12 +8269,13 @@
                 ]
               },
               {
-                "answer": "必须由人负责的包括：作业前核对停电范围与工作许可、验电与接地顺序、邻近带电或带电作业是否超出授权、现场安全与公众防护，以及如实记录作业与异常。",
+                "answer": "停电控制、隔离、工作许可、无电压确认和适用的保护接地均须由授权人员按规程核实。任一条件未确认，按带电状态对待，暂停并报告。恢复供电由授权人员确认人员撤离、各班组许可释放及适用防护依规解除后组织。",
                 "id": "line-installers-and-repairers.faq.5",
                 "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.line-installers-and-repairers.human-control",
                 "source_refs": [
-                  "internal-rubric"
+                  "osha-power-lines",
+                  "mem-special-operations-19"
                 ]
               },
               {
@@ -8296,7 +8289,7 @@
                 ]
               },
               {
-                "answer": "BLS 2025 年 OEWS（经 O*NET 展示）显示该职业年薪中位数 95,320 美元（约 45.83 美元/小时），第 10 至第 90 分位为 51,470—128,690 美元。这是全国统计口径，不含个人到手收入或起薪；该职业常按小时计酬并含加班与抢修值班，实际年收入受工时与地区影响。",
+                "answer": "2025 年 5 月美国本职业 49-9051全国年薪中位数 95,320 美元，时薪中位数 45.83 美元。年薪第 10、25、50、75、90 分位依次为 51,470、67,270、95,320、109,740、128,690 美元。",
                 "id": "line-installers-and-repairers.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.line-installers-and-repairers.us-pay",
@@ -8305,13 +8298,13 @@
                 ]
               },
               {
-                "answer": "美国侧该职业通常通过在职训练与注册学徒（如线路工、电缆接头工等）进入，常见起点为高中文凭或同等学历；相关认证不等于许可或独立作业授权。中国大陆：无与该 O*NET 精确对应的统一职业资格，岗位多按雇主与电网作业规程确定。",
+                "answer": "BLS 表 1.2 将高中或同等学历和长期在岗培训列为美国典型入行路径。现场授权和资格要求按目标雇主及适用规则核对。 蓝山县政府发布的 2022 年案例记录了当地国网输电运检班在巡检导线、绝缘子和金具时拍照，并记录现场观察。该例说明巡检如何留下可复核记录。",
                 "id": "line-installers-and-repairers.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.line-installers-and-repairers.education-path",
                 "source_refs": [
-                  "onet-summary",
-                  "onet-cert"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
@@ -8325,21 +8318,22 @@
                 ]
               },
               {
-                "answer": "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 127,400 人，2024—2034 年预计增长约 7%（远高于平均），2034 年约 135,800 人，年均职位空缺约 10,700 个；预测是职业统计，不等于个人录用概率，也不等同于招聘样本。",
+                "answer": "BLS 表 1.2（美国本职业 49-9051）：2025 年约 131,900 个岗位，2035 年预计约 145,500 个，变化 10.3%，年均约 10,900 个职位空缺，含人员替补。人数分别取整。",
                 "id": "line-installers-and-repairers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.line-installers-and-repairers.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "若能接受户外、高空与带电风险下的作业方式、愿意承担安全责任并遵守规程，值得用一份完全虚构的线路单线图与工单做一次低成本的核对与演练；向工作负责人、带电作业或电网运行方向转型需要补足对应的经验、资格与责任证据。",
+                "answer": "先用 L 表核对照片编号、复核状态与交接。实际线路作业所需的资质、带教和现场授权，另向目标班组核对。",
                 "id": "line-installers-and-repairers.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.line-installers-and-repairers.career-worth",
                 "source_refs": [
-                  "onet-summary"
+                  "paper-exercise",
+                  "osha-power-lines"
                 ]
               },
               {
@@ -8347,6 +8341,15 @@
                 "id": "line-installers-and-repairers.faq.boundary",
                 "question": "页面使用边界是什么？",
                 "question_key": "career.faq.line-installers-and-repairers.boundary"
+              },
+              {
+                "answer": "原题仅 L1 可归档。L2 交图像复核员，L3 交巡检记录员并保留 T09 与 T90。变式 L1 和 L2 可归档，L3 仍待核。该判定只针对纸面归档。",
+                "id": "line-installers-and-repairers.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.line-installers-and-repairers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -8496,17 +8499,16 @@
                 "url": "https://www.onetonline.org/link/details/49-9051.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2025 BLS OEWS 分位与中位工资（美国全国）。",
-                  "分位不是起薪；保留所示时期、人群与单位。"
+                  "2025 年 5 月美国本职业 49-9051全国年薪中位数 95,320 美元，时薪中位数 45.83 美元。年薪第 10、25、50、75、90 分位依次为 51,470、67,270、95,320、109,740、128,690 美元。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "onet-wages",
-                "limitation": "展示 BLS OEWS 工资数据；分位不是起薪，保留所示时期、人群、地域与单位。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
                 "name": "O*NET 49-9051.00 全国工资（BLS OEWS 展示）",
-                "period": "2025 BLS OEWS 工资数据；查阅 2026-09-25",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/49-9051.00"
@@ -8514,7 +8516,7 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "49-9051.00 的就业规模与 2024—2034 年预测增长与年均职位空缺。",
+                  "2025–2035",
                   "预测不是录用保证。"
                 ],
                 "evidence_type": "official employment data",
@@ -8658,17 +8660,17 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。",
-                  "编辑量表不等于采用率、裁员、法规或证照证据。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal task rubric",
+                "evidence_type": "编辑说明",
                 "id": "internal-rubric",
-                "limitation": "编辑量表不等于采用率、裁员、法规或证照证据。",
-                "market": "全球任务层面",
-                "name": "FermatMind 电力线路安装维修人员任务影响量表",
-                "period": "FermatMind task rubric v2026.09; reviewed 2026-09-25",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "editorial_synthesis",
+                "scope": "本页任务",
                 "url": null
               },
               {
@@ -8702,21 +8704,85 @@
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "整理工单与缺陷记录 — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "架设、检修与故障处置 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "停电、验电与带电作业判定 — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                  "BLS 表 1.2（美国本职业 49-9051）：2025 年约 131,900 个岗位，2035 年预计约 145,500 个，变化 10.3%，年均约 10,900 个职位空缺，含人员替补。人数分别取整。",
+                  "BLS 表 1.2 将高中或同等学历和长期在岗培训列为美国典型入行路径。现场授权和资格要求按目标雇主及适用规则核对。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "49-9051",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "蓝山县政府发布的 2022 年案例记录了当地国网输电运检班在巡检导线、绝缘子和金具时拍照，并记录现场观察。该例说明巡检如何留下可复核记录。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "案例不代表全国职业工资、入行或招聘。",
+                "market": "中国大陆",
+                "name": "蓝山县供电公司输电巡检案例",
+                "period": "2022-06-06",
+                "publisher": "蓝山县人民政府",
+                "scope": "具名工作实例",
+                "url": "https://www.lanshan.gov.cn/lanshan/bmdt/202206/5836140ac6ca49fface1f2840ded84d8.shtml"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "L 表：巡检照片归档交接",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "第 (m)、(n) 款分别说明停电控制和保护接地。"
+                ],
+                "id": "osha-power-lines",
+                "limitation": "用于适用的美国输配电场景；其他地区按适用规程核对。",
+                "market": "美国",
+                "name": "OSHA 29 CFR 1910.269",
+                "period": "29 CFR 1910.269",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.269"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "按操作项目核电工作业范围及相关条件。"
+                ],
+                "id": "mem-special-operations-catalog",
+                "limitation": "资格核对限实际任务，不推为整岗统一证书。",
+                "market": "中国大陆",
+                "name": "2026 年特种作业目录",
+                "period": "2026-06-01",
+                "publisher": "应急管理部、住房城乡建设部、国家矿山安监局",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202605/t20260526_604988.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "院校实训室资料介绍配电设备安装与运维训练。"
+                ],
+                "id": "cn-distribution-lab",
+                "limitation": "历史教学场景，实际入职条件按雇主核对。",
+                "market": "中国大陆",
+                "name": "配电线路实训室简介",
+                "period": "2014-05-11",
+                "publisher": "郑州电力高等专科学校",
+                "url": "https://dianli.zepc.edu.cn/info/1742/10212.htm"
               }
             ]
           },
@@ -9083,7 +9149,7 @@
         "risk_rows": [
           {
             "为什么重要": "可能导致触电或误送电。",
-            "控制方式": "核对工单、验电并可靠接地。",
+            "控制方式": "停电和隔离状态、工作许可未确认时暂停报告。现场验电和保护接地由符合要求的人员按适用程序核实，各自承担不同功能。",
             "风险": "错误停电范围或漏接地"
           },
           {
@@ -9612,7 +9678,7 @@
             }
           },
           {
-            "answer": "美国侧该职业通常通过在职训练与注册学徒进入，相关认证不等于许可或独立作业授权；是否需特定电压等级或带电作业资质取决于作业范围、雇主与地区；本页不判断个人是否符合条件。",
+            "answer": "BLS 将高中或同等学历和长期在岗训练列为美国 49-9051 的典型准备。学徒项目是可核对的训练途径，实际任务及现场授权以雇主与适用要求为准。",
             "key": "qa1",
             "question": "资格边界是什么？",
             "table": {
@@ -9694,7 +9760,7 @@
               "line-installers-and-repairers.display.source.onet-details"
             ],
             "id": "risk-2",
-            "mitigation": "按顺序验电并可靠接地、确认工作许可覆盖全部作业点。",
+            "mitigation": "停电控制、隔离、工作许可、无电压确认和适用的保护接地均须由授权人员按规程核实。任一条件未确认，按带电状态对待，暂停并报告。恢复供电由授权人员确认人员撤离、各班组许可释放及适用防护依规解除后组织。",
             "scenario": "停电范围或验电接地不当时。",
             "title": {
               "$item": "line-installers-and-repairers.risk.career-risk-cards.2",
@@ -9758,7 +9824,7 @@
               "line-installers-and-repairers.display.source.onet-details"
             ],
             "id": "risk-6",
-            "mitigation": "以现场验电、接地与安全条件核对为准，保留复核与升级记录。",
+            "mitigation": "提示或照片只提供待核线索。现场状态由授权人员按适用规程核实，记录并报告差异。",
             "scenario": "把系统或工单提示未经现场核实当作可用时。",
             "title": "自动化或提示信息的直接采信"
           }
@@ -9872,24 +9938,24 @@
           },
           "china_edu_table": [
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与项目聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "岗位类型",
+              "岗位方向": "核对任务",
+              "说明": "区分巡检记录、安装检修和带电作业。"
             },
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与项目聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "训练与授权",
+              "岗位方向": "核对范围",
+              "说明": "问清线路类别、电压、带教与现场授权。"
             },
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与项目聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "基本报酬",
+              "岗位方向": "核对计薪",
+              "说明": "分清月薪、小时工资和试用期口径。"
             },
             {
-              "学历段": "不单独统计",
-              "岗位方向": "按雇主与项目聘任",
-              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+              "学历段": "额外报酬",
+              "岗位方向": "核对条件",
+              "说明": "问明待命、抢修、夜班与出差如何计算。"
             }
           ],
           "china_industry_table": [
@@ -9998,11 +10064,11 @@
             "ai_heading": "AI 与薪资判断边界",
             "driver_heading": "影响因素",
             "official_heading": "官方统计口径",
-            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
-            "scenario_heading": "情景化参考",
-            "scenario_interpretation_label": "解释",
-            "scenario_role_label": "岗位范围",
-            "scenario_value_label": "参考值"
+            "scenario_caption": "岗位与报酬核对项",
+            "scenario_heading": "看招聘时核对哪些条件？",
+            "scenario_interpretation_label": "向用人单位确认",
+            "scenario_role_label": "核对范围",
+            "scenario_value_label": "核对项"
           },
           "us_growth": "不适用本地口径",
           "us_median": "不适用本地口径"
@@ -10152,75 +10218,18 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "131,900人（2025）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "line-installers-and-repairers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "line-installers-and-repairers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "约 131,900 个岗位（2025）",
+            "说明": "来源：BLS 就业预测表 1.2。"
           },
           {
             "指标": "就业 · 增长",
-            "数值": "10%（2025—2035）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "line-installers-and-repairers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "line-installers-and-repairers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "10.3%",
+            "说明": "来源：BLS 就业预测表 1.2。"
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "10,900个/年（2025—2035年均）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "line-installers-and-repairers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "line-installers-and-repairers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "预计年均约 10,900 个",
+            "说明": "来源：BLS 就业预测表 1.2。"
           }
         ],
         "boundary": "美国全国49-9051：工资为2025 OEWS，就业为2025基期及2025—2035预测；分位不是资历等级，预测非AI归因、非个人录用保证。",
@@ -10250,7 +10259,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "10%（2025—2035，美国49-9051）",
+        "growth": "10.3%（2025—2035，美国49-9051）",
         "heading": {
           "$item": "line-installers-and-repairers.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10303,7 +10312,7 @@
             "question": "就业"
           },
           {
-            "answer": "2025—2035预计增长10%，非AI归因、非个人录用概率。",
+            "answer": "2025—2035预计增长10.3%，非AI归因、非个人录用概率。",
             "question": "展望"
           },
           {
@@ -10317,7 +10326,7 @@
         "wage_column_labels": [
           "分位",
           "年度参考",
-          "小时等值",
+          "时薪",
           "解释"
         ],
         "wage_heading": {
@@ -10328,22 +10337,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "$24.74/小时",
-            "interpretation": "第 10 分位边界，不是个人报价。",
-            "label": "第10百分位",
-            "value": "$51,470/年"
+            "equivalent": "24.74 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资，年薪与时薪各取原表。",
+            "label": "第 10 百分位",
+            "value": "51,470 美元/年"
           },
           {
-            "equivalent": "$45.83/小时",
-            "interpretation": "2025 美国全国年薪中位数。",
-            "label": "中位数（50%）",
-            "value": "$95,320/年"
+            "equivalent": "32.34 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资，年薪与时薪各取原表。",
+            "label": "第 25 百分位",
+            "value": "67,270 美元/年"
           },
           {
-            "equivalent": "$61.87/小时",
-            "interpretation": "第 90 分位边界，不是个人报价。",
-            "label": "第90百分位",
-            "value": "$128,690/年"
+            "equivalent": "45.83 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资，年薪与时薪各取原表。",
+            "label": "第 50 百分位",
+            "value": "95,320 美元/年"
+          },
+          {
+            "equivalent": "52.76 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资，年薪与时薪各取原表。",
+            "label": "第 75 百分位",
+            "value": "109,740 美元/年"
+          },
+          {
+            "equivalent": "61.87 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资，年薪与时薪各取原表。",
+            "label": "第 90 百分位",
+            "value": "128,690 美元/年"
           }
         ]
       },
@@ -10377,7 +10398,7 @@
         "title": "电力线路安装维修人员适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是完全虚构的线路作业样本核对，不是人格诊断、录用结论或安全资质评估。",
+        "boundary": "若难以接受户外轮班、抢修和高处作业风险，先问目标岗位是否上杆、如何带教，以及谁负责作业许可与监护。",
         "how": {
           "$item": "line-installers-and-repairers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10424,10 +10445,10 @@
         "outlook_evidence": [
           {
             "geography": "美国全国",
-            "horizon": "2025—2035",
-            "interpretation": "2025就业131,900人、2035预计145,500人，增长10%；非AI归因。",
+            "horizon": "2025–2035",
+            "interpretation": "2025就业131,900人、2035预计145,500人，增长10.3%；非AI归因。",
             "limitation": "不能作为个人就业保证。",
-            "metric": "2025基期就业与总体预测",
+            "metric": "就业规模与变化",
             "occupation_scope": "O*NET 49-9051.00（美国全国）",
             "value": {
               "$item": "line-installers-and-repairers.market-signals.market-signal-card.3",
@@ -10438,21 +10459,21 @@
           },
           {
             "geography": "美国全国",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": "含替代与新增需求，不等于在招岗位数。",
             "limitation": "不能作为个人录用概率。",
-            "metric": "年均职位空缺",
+            "metric": "预计年均空缺",
             "occupation_scope": "O*NET 49-9051.00（美国全国）",
-            "value": "10,900个/年"
+            "value": "预计年均约 10,900 个"
           },
           {
             "geography": "美国全国",
-            "horizon": "2025",
+            "horizon": "2025-05",
             "interpretation": "为 BLS 2025 OEWS 全国中位数，不代表起薪或到手收入。",
             "limitation": "不含个人到手收入。",
             "metric": "年薪中位数",
             "occupation_scope": "O*NET 49-9051.00（美国全国）",
-            "value": "$95,320/年"
+            "value": "95,320 美元/年"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -10582,12 +10603,12 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补土方设备操控、场地判断与具体机械培训。",
-            "shared_capabilities": "现场协作、设备检查与作业警戒。",
-            "target_href": "/zh/career/jobs/operating-engineers-and-other-construction-equipment-operators",
-            "target_slug": "operating-engineers-and-other-construction-equipment-operators",
-            "target_title": "建筑施工工程师操作员",
-            "transition_distance": "需补证据"
+            "capability_gaps": "电信岗位侧重通信线路与信号服务，设备、测试及授权范围需另核。",
+            "shared_capabilities": "现场协作、线路标识核对和施工记录。",
+            "target_href": "/zh/career/jobs/telecommunications-line-installers-and-repairers",
+            "target_slug": "telecommunications-line-installers-and-repairers",
+            "target_title": "电信线路安装维修人员",
+            "transition_distance": "相邻岗位，另核通信技能与授权"
           }
         ]
       },
@@ -10758,8 +10779,8 @@
         },
         "questions": [
           {
-            "answer": "用本页工作样本核对户外与抢修下的专注度。",
-            "question": "你能在天气与抢修压力下保持专注吗？"
+            "answer": "用《L 表：巡检照片归档交接》找出待核项，写清原值和复核人。",
+            "question": "记录有差异时，你会怎样交接？"
           },
           {
             "answer": "按岗位安全要求与体能核对。",
@@ -10770,7 +10791,7 @@
             "question": "面对临时改单你如何反应？"
           },
           {
-            "answer": "先停止并核对停电与验电接地，按流程升级。",
+            "answer": "停电和隔离状态、工作许可未确认时暂停报告。现场验电和保护接地由符合要求的人员按适用程序核实，各自承担不同功能。",
             "question": "遇到不确定会怎么做？"
           },
           {
@@ -11110,7 +11131,7 @@
             "item": "line-installers-and-repairers.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：O*NET 49-9051.00 电力线路安装维修人员（摘要）：提供 49-9051.00 的职业身份、官方范围、任务、就业、增长标签与 Bright Outlook 标注。；摘要与详细档案需合并解释。；O*NET 49-9051.00（详细档案）：提供 49-9051.00 的任务、工作活动、工作情境、工作风格与工具技术细节。；任务与所在地授权存在差异。；O*NET 49-9051.00 全国工资（BLS OEWS 展示）：2025 BLS OEWS 分位与中位工资（美国全国）。；分位不是起薪；保留所示时期、人群与单位。；O*NET 49-9051.00 全国就业趋势：49-9051.00 的就业规模与 2024—2034 年预测增长与年均职位空缺。；预测不是录用保证。；Hot Technologies: 49-9051.00：与该职业关联的技术与软件提及（如工单/资产管理系统、GIS、检测与调度相关软件）。；招聘提及不证明熟练度、采用率或自动化比例。；Industries: 49-9051.00：49-9051.00 的行业分布（公用事业、建筑业等）。；行业分布是雇主场景信号，不是增长或需求预测。；National Certifications: 49-9051.00：与该职业相关的全国性认证发现入口。；认证不等于许可、授权或雇佣决定。；National Training: 49-9051.00：与该职业相关的全国性训练与学徒入口。；训练完成不自动授予作业授权。；O*NET Database：O*NET 数据库版本、职业代码与教育准备等结构化字段入口。；不等于雇主录用或法定许可。；O*NET-SOC Taxonomy：O*NET-SOC 职业分类与相邻职业边界。；分类邻近不代表权限可互换。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营与私营单位分行业门类年平均工资，用于核对中国工资公开口径。；行业平均不是职业中位数，且不含个体工商户与自由职业者。；企业薪酬调查信息（2024年）：人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。；覆盖城镇企业，不含机关事业单位；本页未取得与 49-9051.00 精确对应的条目。；FermatMind 电力线路安装维修人员任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。；编辑量表不等于采用率、裁员、法规或证照证据。； 本次局部修订另核BLS OOH线路工Pay/Training/Outlook与应急管理部令第19号，见来源登记。当前就业预测为2025—2035；旧共享来源说明及FAQ未获修改授权，保留范围冲突，不宣称全页同步。"
+        "note": "O*NET 提供任务信息，OEWS 提供工资，BLS 表 1.2 提供就业预测。"
       },
       "work_context_block": {
         "$item": "line-installers-and-repairers.profile.work-context-block.5",
@@ -11120,6 +11141,10 @@
       }
     },
     "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.path.promotion_evidence_label": "阶段记录与探索练习",
+      "interface.quick_decision.experiment_heading": "纸面试做能帮你观察什么？"
+    },
     "locale": "zh-CN",
     "native_items": [
       {
@@ -11132,19 +11157,19 @@
     ],
     "path": "/zh/career/jobs/line-installers-and-repairers",
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "相邻职业比较",
       "fit": "适配信号",
       "market-signals": "市场信号",
       "navigation": "页面导航",
-      "path": "入行路径",
+      "path": "入行与 L 表：巡检照片归档交接",
       "profile": "职业定义与职责",
       "quick-decision": "快速判断",
       "risk": "风险与边界",
       "source-register": "来源注册表",
       "sources": "常见问题与边界",
-      "us-salary": "美国薪资"
+      "us-salary": "美国电力线路安装维修人员工资"
     }
   },
   "fact_register": {
@@ -11154,9 +11179,9 @@
         "display_value": "95,320 美元/年",
         "fact_id": "us-wage-median",
         "market": "美国",
-        "measure": "2025 年全国年薪中位数（约 45.83 美元/小时）",
-        "occupation_scope": "O*NET 49-9051.00（美国全国）",
-        "period": "2025 BLS OEWS；查阅 2026-09-25",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "49-9051",
+        "period": "2025-05",
         "source_refs": [
           "onet-wages"
         ]
@@ -11211,38 +11236,38 @@
       },
       {
         "derivation": null,
-        "display_value": "127,400 人",
+        "display_value": "约 131,900 个岗位",
         "fact_id": "us-employment-2024",
         "market": "美国",
-        "measure": "2024 年在岗人数",
-        "occupation_scope": "O*NET 49-9051.00（美国全国）",
-        "period": "2024；查阅 2026-09-25",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "49-9051",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 7%（远高于平均，2024—2034）",
+        "display_value": "10.3%",
         "fact_id": "us-growth",
         "market": "美国",
-        "measure": "就业增长预测",
-        "occupation_scope": "O*NET 49-9051.00（美国全国）",
-        "period": "2024—2034；查阅 2026-09-25",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "49-9051",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "O*NET 显示 2024—2034 年年均职位空缺约 10,700 个；该数字为年均，不是十年合计。",
-        "display_value": "约 10,700 个/年（2024—2034 年均）",
+        "derivation": null,
+        "display_value": "年均约 10,900 个",
         "fact_id": "us-openings",
         "market": "美国",
-        "measure": "预计年均职位空缺",
-        "occupation_scope": "O*NET 49-9051.00（美国全国）",
-        "period": "2024—2034；查阅 2026-09-25",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "49-9051",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -11292,57 +11317,45 @@
         "source_refs": [
           "nbs-wages"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "电力线路安装维修人员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "架空与地下线路",
-      "配电与输电设备",
-      "电气安全规程"
+      "电力线路安装维修人员",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11356,17 +11369,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "电力线路安装维修人员安装或维修电力与配电系统中的电缆和电线，可能架设电线杆及轻型或重型输电塔：开闭与接地隔离、攀杆或高空车作业、安装维护配电与输电设备、用仪器定位故障、架线张紧与地下电缆敷设；工作户外、高空且带有电气危险，须执行安全规程。判断这条职业路径时，应同时验证工作闭环、责任边界、证据口径、风险控制和可观察的入门作品。"
+      "text": "了解电力线路安装维修人员的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "电力线路安装维修人员职业判断：工作、入行与风险边界"
+      "text": "电力线路安装维修人员做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "c678f577548e1f50b4c4702b0d685499281714793bd50c53db672556e424aa72",
+  "source_content_sha256": "37f5cf249a16f3edb0d2d7bd36ce516b006c1290659c88b9cae8f494c8fe2cab",
   "subject": {
     "canonical_slug": "line-installers-and-repairers",
     "name": "电力线路安装维修人员",
-    "summary": "电力线路安装维修人员安装或维修电力与配电系统中使用的电缆和电线，可能架设电线杆以及轻型或重型输电塔；工作以户外、高空和带电环境为主，需要严格执行停电、验电、接地与个人防护等安全规程，并承担个人与他人的健康安全责任。本页覆盖 O*NET 49-9051.00，不含电工、电信线路安装维修工、管道铺设工等相邻岗位。"
+    "summary": "电力线路安装维修人员负责输配电线路的安装、检查和维修，可能参与杆塔相关作业。现场通常由团队按授权和安全程序分工。这里使用美国 O*NET 49-9051.00。"
   }
 }

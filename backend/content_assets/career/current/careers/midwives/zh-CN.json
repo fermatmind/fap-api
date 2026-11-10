@@ -158,6 +158,9 @@
       "item:midwives.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:midwives.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:midwives.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12176,6 +12179,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。随访表 P4 写了预约日期，却未记录转介是否被接收。列出当前可确认的安排，并写一句给随访或转介负责人的问题。"
+            ]
+          },
+          "id": "midwives.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "复核孕产随访记录",
+          "type": "notice"
         }
       ]
     },
@@ -14530,6 +14548,13 @@
         "id": "midwives.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "midwives.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14735,7 +14760,7 @@
       "text": "助产士：工作内容、美国工资与就业 | 费马测试"
     }
   },
-  "source_content_sha256": "a03d97bf071f62703dd7b267150c03b7342b81bff07c478e9d1766bfd160dd34",
+  "source_content_sha256": "632a37f91bc6c52a6de0427ab22be9674a4860afdd53c374870ff0a97e57c1fc",
   "subject": {
     "canonical_slug": "midwives",
     "name": "助产士",

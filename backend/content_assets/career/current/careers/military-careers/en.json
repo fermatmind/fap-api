@@ -149,6 +149,9 @@
       "item:military-careers.path.seven-day-trial.5": {
         "status": "mapped"
       },
+      "item:military-careers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:military-careers.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12350,6 +12353,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two fictional descriptions emphasize message relay and inventory records. Write one question to check against the relevant service’s official description for each. Confirm duties, eligibility and figures with that service."
+            ]
+          },
+          "id": "military-careers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Compare duties in military role descriptions",
+          "type": "notice"
         }
       ]
     },
@@ -14670,6 +14688,13 @@
         "id": "military-careers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "military-careers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14839,7 +14864,7 @@
       "text": "Military Tactical Operations and Air / Weapons Specialists: Scope and Data Boundaries"
     }
   },
-  "source_content_sha256": "597542c1ab3769c0213eb784d90d04af3eb3b5ec489549ed47841a6a2ee68f2f",
+  "source_content_sha256": "f558bbcb141d25cd97e174c43b4517c79a69797cc27507bca7ae39d567f4c2d3",
   "subject": {
     "canonical_slug": "military-careers",
     "name": "Military Enlisted Tactical Operations and Air / Weapons Specialists and Crew Members, All Other",

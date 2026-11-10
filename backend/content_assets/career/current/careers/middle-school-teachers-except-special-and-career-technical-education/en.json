@@ -149,6 +149,9 @@
       "item:middle-school-teachers-except-special-and-career-technical-education.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:middle-school-teachers-except-special-and-career-technical-education.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:middle-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13121,6 +13124,21 @@
             "onet-cert"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Both postings say middle school. One teaches general subject units and the other emphasizes vocational workshops. Choose the closer match and ask one question about curriculum and assessment."
+            ]
+          },
+          "id": "middle-school-teachers-except-special-and-career-technical-education.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Compare general middle school teaching postings",
+          "type": "notice"
         }
       ]
     },
@@ -15530,6 +15548,13 @@
         "id": "middle-school-teachers-except-special-and-career-technical-education.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "middle-school-teachers-except-special-and-career-technical-education.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15723,7 +15748,7 @@
       "text": "Middle School Teachers: Duties, U.S. Wages, and Entry"
     }
   },
-  "source_content_sha256": "ebbffaa72e639eac7a99d3d8cd9992e02f2b6f9ade243265cd852b36f7ac3c15",
+  "source_content_sha256": "cc61d985f33422c2b1fccdcafb4ebdf289169c8b11f0a06cb70c8657b8f3735a",
   "subject": {
     "canonical_slug": "middle-school-teachers-except-special-and-career-technical-education",
     "name": "Middle School Teachers",

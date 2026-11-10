@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "从需求和商品匹配开始，再核包装、报价算式与未确认条款。体验持续跟进和说明未知的过程，再调查真实客户开发与薪酬条件。"
+              "纸面体验｜报价单与客户确认单的交期不同。把两份日期并列，向有报价权限的人核实，再回复客户。 "
             ]
           },
           "id": "wholesale-and-manufacturing-sales-representatives.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,13 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "批发与制造业销售代表（不含技术与科学产品）在美国41-4012.00范围内向企业或团体销售批发商、制造商的商品，需充分了解所售商品。日常包括理解需求、推荐商品、报价与条款沟通、准备订单合同、跟进售后及销售记录。技术科学商品销售41-4011、工程销售41-9031与消费者零售另分；中国岗位按商品和实际职责比较。"
+              "批发与制造销售代表了解客户用途，核产品规格、库存及交货条件，按内部权限报价并交接售后事项。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "wholesale-and-manufacturing-sales-representatives.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-41-4012.00"
           ],
           "type": "prose"
         }
@@ -25455,13 +25453,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "线上销售和CRM是任务背景；文字工具可辅助草稿，商品条款仍人工核。独立采用、评分、节时与替代缺证，不能用销售额或总体预测补。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：报价单与客户确认单的交期不同。把两份日期并列，向有报价权限的人核实，再回复客户。"
             ]
           },
           "id": "wholesale-and-manufacturing-sales-representatives.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-41-4012.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33065,6 +33063,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-41-4012.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 41-4012.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/41-4012.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38561,10 +38586,10 @@
       "text": "批发与制造业销售代表（不含技术与科学产品）"
     }
   },
-  "source_content_sha256": "1f2cddc1e3c7ebd99a5efc6b7274b87a4583c55192b97b07c5d926fbd5067ecf",
+  "source_content_sha256": "6bd0a73e11d9b71faa0a8497c24f9baa715277f915b3de36d4bd286250016e77",
   "subject": {
     "canonical_slug": "wholesale-and-manufacturing-sales-representatives",
     "name": "批发与制造业销售代表（不含技术与科学产品）",
-    "summary": "批发与制造业销售代表（不含技术与科学产品）在美国41-4012.00范围内向企业或团体销售批发商、制造商的商品，需充分了解所售商品。日常包括理解需求、推荐商品、报价与条款沟通、准备订单合同、跟进售后及销售记录。技术科学商品销售41-4011、工程销售41-9031与消费者零售另分；中国岗位按商品和实际职责比较。"
+    "summary": "批发与制造销售代表了解客户用途，核产品规格、库存及交货条件，按内部权限报价并交接售后事项。"
   }
 }

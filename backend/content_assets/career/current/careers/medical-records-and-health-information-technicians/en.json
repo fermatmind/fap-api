@@ -5,9 +5,6 @@
       "fact:employment": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:growth": {
         "status": "pending_mapping"
       },
@@ -207,7 +204,7 @@
         "status": "pending_mapping"
       },
       "item:medical-records-and-health-information-technicians.sources.faq-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -12183,7 +12180,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Direct assessment: If you are willing to organize, check, and protect medical records under coding rules and compliance requirements, leave a traceable record of each coding and review decision, and stop and escalate when a task exceeds your authority, this direction is worth exploring further. Use only entirely fictional record packets for a safe trial, with no real patient information or restricted data."
+              "This work may suit people who like organizing records against a standard and leaving evidence another person can check."
             ]
           },
           "id": "medical-records-and-health-information-technicians.quick-decision.fermat-decision-card.1",
@@ -12198,7 +12195,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observable signals: Can you check coding support against standard classification systems and manuals, check record completeness and compliance using a checklist, and stop and escalate first when privacy or release questions arise? Personality labels cannot determine fit or eligibility."
+              "Try identifying which record needs clarification and which can go to the next reviewer."
             ]
           },
           "id": "medical-records-and-health-information-technicians.quick-decision.fit-decision-checklist.2",
@@ -12212,7 +12209,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions supporting fit: A willingness to do highly repetitive work requiring precision and compliance over the long term, continue checking and documenting under time pressure, and accept review and authorization chains. Reasons for caution: If repetitive tasks and high precision demands are difficult to tolerate, or privacy and compliance responsibilities cause uncomfortable pressure, first compare adjacent directions such as health informatics or document management."
+              "The job calls for consistent checks during repetitive work and care with access to private records."
             ]
           },
           "id": "medical-records-and-health-information-technicians.quick-decision.fit-decision-checklist.3",
@@ -12226,12 +12223,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "60-minute paper file exercise (editor-created fiction): Use the exercise dictionary D2, where label K maps to ordinary classification code C1 and L to C2. A file may move forward only if its file number matches its attachment number, its label is in D2, and approval is yes. U101: label K, attachment U101, approval yes; U102: label L, attachment U120, approval yes; U103: label ?, attachment U103, approval pending. List classification, ownership, approval, and unresolved requests, retaining the original values. K/L/C1/C2 are ordinary document codes, not ICD, DRG, or diagnostic codes. Reference answer: U101 maps to C1, has matching ownership, and is approved, meeting the exercise conditions for moving forward. U102 maps to C2, but U102 ≠ U120, so do not merge or move the file forward; request confirmation of attachment ownership. U103 has matching ownership, but label ? is absent from D2 and approval is pending. Request the label basis and approval status separately; do not guess the classification or supply approval. Spend 10 minutes reading, 20 minutes making tables, 20 minutes writing confirmation requests for the two problematic records, and 10 minutes redoing the exercise with the answer hidden and saving a corrected version. Movement within this exercise does not mean real medical records may be released."
+              "Try the paper exercise under “Entry and File U: Ownership and classification.”"
             ]
           },
           "id": "medical-records-and-health-information-technicians.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "source-pack-onet-details"
+            "paper-exercise"
           ],
           "type": "prose"
         }
@@ -12248,12 +12245,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Medical records specialists correspond to O*NET 29-2072.00. Their official duties are to compile, process, and maintain hospital and clinic patient medical records under medical, administrative, ethical, legal, and regulatory requirements, and code diagnoses, procedures, and other information. This page does not equate record organization with clinical judgment or authority to release information."
+              "Medical records specialists check record ownership, organize and classify or code information under applicable rules, and refer missing documentation or mismatched records to the responsible person."
             ]
           },
           "id": "medical-records-and-health-information-technicians.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -12560,7 +12557,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page has not obtained a nationwide occupational wage distribution for mainland China precisely corresponding to U.S. 29-2072.00. It does not generate a Chinese occupational median, percentiles, or stable monthly salary. This is not a claim that no public data exist nationwide."
+              "Mainland China: national occupational wage data unavailable in the sources checked"
             ]
           },
           "id": "medical-records-and-health-information-technicians.china-salary.career-snapshot-primary-locale.1",
@@ -12638,7 +12635,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The official U.S. scope for medical records specialists is occupational statistics for O*NET 29-2072.00. These values apply only to the listed market and period; they are not entry-level wages, Chinese wages, or personal guarantees."
+              "O*NET displays the May 2025 BLS OEWS national wages for U.S. occupation 29-2072."
             ]
           },
           "id": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.1",
@@ -12652,7 +12649,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The five U.S. nationwide occupational wage percentiles for 2025 are annual wages of $37,000 / $43,490 / $51,140 / $64,820 / $81,150, with officially displayed hourly wages of $17.79 / $20.91 / $24.59 / $31.17 / $39.01, respectively (10th / 25th / 50th / 75th / 90th percentiles). Percentiles are not starting pay, an experience ladder, or take-home income. Do not replace source hourly wages by dividing annual wages by working hours."
+              "The May 2025 national median for U.S. occupation 29-2072 was USD 51,140 a year and USD 24.59 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 37,000, 43,490, 51,140, 64,820, 81,150."
             ]
           },
           "id": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.2",
@@ -12666,12 +12663,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Current U.S. employment in occupation 29-2072 is 200,700 in 2025, projected to reach 216,300 in 2035. The official figures are 8% growth, a net increase of 15,600, and 14,000 average annual openings (2025–2035). Openings include growth and replacement needs; they are not current vacancies or an individual's hiring probability. Current O*NET and BLS figures cover the same period; do not guess why a baseline was updated."
+              "BLS Table 1.2 for U.S. occupation 29-2072 shows about 200,700 jobs in 2025 and projects 216,300 in 2035 (7.8%), with about 14,000 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -12680,7 +12677,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Current O*NET industry shares for this occupation are 63% in healthcare and social assistance, 10% in professional, scientific, and technical services, and 27% in other industries including administrative support and company management. These are employment shares, not wages or forecasts. BLS 2025 annual wage medians for five detailed industries are listed separately."
+              "In 2025, U.S. employment for medical records specialists was split across health care and social assistance (63%), professional, scientific and technical services (10%) and other industries (27%). For wages by industry, see the BLS wage evidence."
             ]
           },
           "id": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.4",
@@ -12836,7 +12833,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "60-minute paper file exercise (editor-created fiction): Use the exercise dictionary D2, where label K maps to ordinary classification code C1 and L to C2. A file may move forward only if its file number matches its attachment number, its label is in D2, and approval is yes. U101: label K, attachment U101, approval yes; U102: label L, attachment U120, approval yes; U103: label ?, attachment U103, approval pending. List classification, ownership, approval, and unresolved requests, retaining the original values. K/L/C1/C2 are ordinary document codes, not ICD, DRG, or diagnostic codes. Reference answer: U101 maps to C1, has matching ownership, and is approved, meeting the exercise conditions for moving forward. U102 maps to C2, but U102 ≠ U120, so do not merge or move the file forward; request confirmation of attachment ownership. U103 has matching ownership, but label ? is absent from D2 and approval is pending. Request the label basis and approval status separately; do not guess the classification or supply approval. Spend 10 minutes reading, 20 minutes making tables, 20 minutes writing confirmation requests for the two problematic records, and 10 minutes redoing the exercise with the answer hidden and saving a corrected version. Movement within this exercise does not mean real medical records may be released."
+              "Try the paper exercise under “Entry and File U: Ownership and classification.”"
             ]
           },
           "id": "medical-records-and-health-information-technicians.fit.personality-fit-block.8",
@@ -12936,12 +12933,12 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Editorial job comparison checklist: Compare medical records, coding, record review, and medical administrative tasks. No employer recruitment sample was obtained; the following is not recruitment statistics and does not establish equivalent scope across different job titles."
+              "The named Guangxi high-level recruitment lists a medical records information post at row 36. Its requirements apply to that institution and recruitment level."
             ]
           },
           "id": "medical-records-and-health-information-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "cn-work-example"
           ],
           "type": "notice"
         },
@@ -13017,7 +13014,7 @@
                 "id": "medical-records-and-health-information-technicians.employer-evidence.1",
                 "values": [
                   "Preparation checks",
-                  "U.S. BLS states that this occupation typically requires a postsecondary certificate. Some positions accept a high school education plus experience in a healthcare setting; others require an associate degree or higher education. Courses commonly cover medical terminology, health data requirements, and classification and coding. Employers may require or prefer certification, or require it after hiring. O*NET JobZone3 is a medium-preparation occupational group; its training duration is not a uniform requirement for this occupation. Check education, certification, and institutional information permissions separately. Chinese requirements cannot be inferred from U.S. classifications or credentials."
+                  "BLS lists a postsecondary nondegree award as typical U.S. entry education. Verify employer requirements for coding training, certification and record access."
                 ]
               },
               {
@@ -13039,7 +13036,8 @@
           "id": "medical-records-and-health-information-technicians.path.employer-evidence.3",
           "source_refs": [
             "bls-ooh",
-            "onet-summary"
+            "onet-summary",
+            "bls-ep-2025-2035"
           ],
           "type": "cards"
         },
@@ -13051,8 +13049,8 @@
               {
                 "id": "medical-records-and-health-information-technicians.portfolio.one",
                 "values": [
-                  "Paper work sample",
-                  "60-minute paper file exercise (editor-created fiction): Use the exercise dictionary D2, where label K maps to ordinary classification code C1 and L to C2. A file may move forward only if its file number matches its attachment number, its label is in D2, and approval is yes. U101: label K, attachment U101, approval yes; U102: label L, attachment U120, approval yes; U103: label ?, attachment U103, approval pending. List classification, ownership, approval, and unresolved requests, retaining the original values. K/L/C1/C2 are ordinary document codes, not ICD, DRG, or diagnostic codes.",
+                  "File U: Ownership and classification",
+                  "In fictional dictionary D2, K maps to C1 and L maps to C2. A file moves forward only if identifiers match, the label is in D2 and approval is yes. U101: K, attachment U101, approved. U102: L, attachment U120, approved. U103: unknown label, attachment U103, approval pending. In the variant, change only U102’s attachment ID to U102.",
                   "Use no real or supposedly de-identified patient material; this is an entirely fictional ordinary file exercise."
                 ]
               },
@@ -13061,14 +13059,14 @@
                 "values": [
                   "Inspectable outputs",
                   "Three file checklists, classification support, unresolved requests about ownership / labels / approval, and a corrected version.",
-                  "Reference answer: U101 maps to C1, has matching ownership, and is approved, meeting the exercise conditions for moving forward. U102 maps to C2, but U102 ≠ U120, so do not merge or move the file forward; request confirmation of attachment ownership. U103 has matching ownership, but label ? is absent from D2 and approval is pending. Request the label basis and approval status separately; do not guess the classification or supply approval. Spend 10 minutes reading, 20 minutes making tables, 20 minutes writing confirmation requests for the two problematic records, and 10 minutes redoing the exercise with the answer hidden and saving a corrected version. Movement within this exercise does not mean real medical records may be released."
+                  "Retain the original values and record the correction basis, pending items and handoff owner. After completing both cases, open the folded answer key in the FAQ."
                 ]
               }
             ]
           },
           "id": "medical-records-and-health-information-technicians.path.entry-portfolio.4",
           "source_refs": [
-            "source-pack-onet-details"
+            "paper-exercise"
           ],
           "type": "cards"
         },
@@ -13131,21 +13129,21 @@
                 "id": "medical-records-and-health-information-technicians.trial.day1",
                 "values": [
                   "Days 1–2, 30–60 minutes per day",
-                  "Read the exercise dictionary D2 and the three files, and create a classification / ownership / approval table. Check that U102 ≠ U120. Do not access real patient material."
+                  "Read both cases and list inputs and gaps."
                 ]
               },
               {
                 "id": "medical-records-and-health-information-technicians.trial.day3",
                 "values": [
                   "Days 3–5, 30–60 minutes per day",
-                  "Redo the exercise with the answer hidden. Write an ownership query for U102 and separate requests for the label basis and approval for U103. Do not guess classifications or supply approval."
+                  "Check identifiers, labels and approvals and preserve original records."
                 ]
               },
               {
                 "id": "medical-records-and-health-information-technicians.trial.day7",
                 "values": [
                   "Days 6–7, 30–60 minutes per day",
-                  "Ask someone to challenge your work using only the exercise, then compare it with the reference answer. Save the original, corrected version, and your experience, and decide whether to continue training or compare other directions. This is not medical coding certification."
+                  "Complete both cases independently, then open the answer key in the FAQ."
                 ]
               }
             ]
@@ -13286,7 +13284,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Current U.S. employment in occupation 29-2072 is 200,700 in 2025, projected to reach 216,300 in 2035. The official figures are 8% growth, a net increase of 15,600, and 14,000 average annual openings (2025–2035). Openings include growth and replacement needs; they are not current vacancies or an individual's hiring probability. Current O*NET and BLS figures cover the same period; do not guess why a baseline was updated."
+              "Occupational outlook and related work"
             ]
           },
           "id": "medical-records-and-health-information-technicians.market-signals.market-signal-card.1",
@@ -13300,12 +13298,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Employment, growth rate, net change, and annual openings must be explained separately and cannot be combined into a personal employment guarantee. Institutions and regions differ substantially; do not extrapolate across regions."
+              "BLS Table 1.2 for U.S. occupation 29-2072 shows about 200,700 jobs in 2025 and projects 216,300 in 2035 (7.8%), with about 14,000 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "medical-records-and-health-information-technicians.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13328,7 +13326,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The BLS occupational handbook projects that efficiency gains from AI-driven coding may affect staffing demand. This is a judgment within an occupational projection, without institutional adoption rates, layoff proportions, or replacement dates. O*NET tasks and software listed in recruitment provide duty / skill context; ILO global exposure research is not a measured adoption rate for this occupation. The editorial trial only lets a tool organize the U101/U102/U103 exercise. A person reviews D2 classification, the U102 attachment mismatch, and the two unresolved items for U103. Do not enter real medical data."
+              "Try the paper exercise under “Entry and File U: Ownership and classification.”"
             ]
           },
           "id": "medical-records-and-health-information-technicians.market-signals.market-signal-card.4",
@@ -13397,13 +13395,12 @@
                 ]
               },
               {
-                "answer": "The BLS occupational handbook projects that efficiency gains from AI-driven coding may affect staffing demand. This is a judgment within an occupational projection, without institutional adoption rates, layoff proportions, or replacement dates. O*NET tasks and software listed in recruitment provide duty / skill context; ILO global exposure research is not a measured adoption rate for this occupation. The editorial trial only lets a tool organize the U101/U102/U103 exercise. A person reviews D2 classification, the U102 attachment mismatch, and the two unresolved items for U103. Do not enter real medical data.",
+                "answer": "BLS says wider use of AI tools that speed up medical coding may affect U.S. demand for this occupation. Approved tools may help organize documents or flag missing fields. Staff still verify record ownership, coding evidence and permission to disclose. BLS provides no adoption or job-loss rate for this occupation.",
                 "id": "medical-records-and-health-information-technicians.faq.4",
                 "question": "How will AI affect work in this occupation?",
                 "question_key": "career.faq.medical-records-and-health-information-technicians.4",
                 "source_refs": [
                   "bls-ooh",
-                  "ilo-ai",
                   "onet-summary"
                 ]
               },
@@ -13427,7 +13424,7 @@
                 ]
               },
               {
-                "answer": "The five U.S. nationwide occupational wage percentiles for 2025 are annual wages of $37,000 / $43,490 / $51,140 / $64,820 / $81,150, with officially displayed hourly wages of $17.79 / $20.91 / $24.59 / $31.17 / $39.01, respectively (10th / 25th / 50th / 75th / 90th percentiles). Percentiles are not starting pay, an experience ladder, or take-home income. Do not replace source hourly wages by dividing annual wages by working hours.",
+                "answer": "The May 2025 national median for U.S. occupation 29-2072 was USD 51,140 a year and USD 24.59 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 37,000, 43,490, 51,140, 64,820, 81,150.",
                 "id": "medical-records-and-health-information-technicians.faq.7",
                 "question": "What wage evidence is available for the United States?",
                 "question_key": "career.faq.medical-records-and-health-information-technicians.7",
@@ -13436,14 +13433,22 @@
                 ]
               },
               {
-                "answer": "U.S. BLS states that this occupation typically requires a postsecondary certificate. Some positions accept a high school education plus experience in a healthcare setting; others require an associate degree or higher education. Courses commonly cover medical terminology, health data requirements, and classification and coding. Employers may require or prefer certification, or require it after hiring. O*NET JobZone3 is a medium-preparation occupational group; its training duration is not a uniform requirement for this occupation. Check education, certification, and institutional information permissions separately. Chinese requirements cannot be inferred from U.S. classifications or credentials.",
+                "answer": "BLS lists a postsecondary nondegree award as typical U.S. entry education. Verify employer requirements for coding training, certification and record access. The named Guangxi high-level recruitment lists a medical records information post at row 36. Its requirements apply to that institution and recruitment level.",
                 "id": "medical-records-and-health-information-technicians.faq.8",
                 "question": "What does the entry and training path usually look like?",
                 "question_key": "career.faq.medical-records-and-health-information-technicians.8",
                 "source_refs": [
-                  "bls-ooh",
-                  "onet-summary",
-                  "onet-cert"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
+                ]
+              },
+              {
+                "answer": "Original: U101 moves forward as C1 because K maps to C1, the attachment matches U101 and approval is recorded. U102 maps from L to C2 and is approved, but attachment U120 does not match U102. Pause the handoff and ask the records clerk to verify ownership. U103 has matching identifiers, but the label is unknown and approval is pending. Hold classification and handoff, and ask the label maintainer and approver to verify their respective items. Variant: correcting only the attachment ID to U102 satisfies all three checks. Forward U102 as C2. The decisions on U101 and U103 stay the same. Retain U120 in the original log and record the corrected value and verification basis in the correction log.",
+                "id": "medical-records-and-health-information-technicians.faq.paper-exercise",
+                "question": "Paper exercise answer key (open after completing)",
+                "question_key": "career.faq.medical-records-and-health-information-technicians.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
                 ]
               }
             ]
@@ -13504,13 +13509,13 @@
                 "entity": "Medical Records Specialists",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Medical Records Specialists",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Medical Records Specialists",
@@ -13614,7 +13619,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "This round checked 16 tasks, CI, JobZone3, and the response options for each work-context question."
+                  "Employment projections use BLS Table 1.2. Read the named vacancy within its own scope."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -13629,29 +13634,29 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "194,800 → 208,600; official growth 7%; 14,200 average annual openings."
+                  "The employment projections shown here come from BLS Table 1.2."
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
                 "limitation": "An earlier projection period for this occupation, not the new BLS period or a hiring probability.",
                 "market": "US",
                 "name": "National Employment Trends 29-2072.00 Medical Records Specialists",
-                "period": "2024–2034 projection; accessed 2026-10-03",
+                "period": "Occupational profile or live lookup",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/29-2072.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "This round checked all five annual / hourly wage values: 37,000 / 43,490 / 51,140 / 64,820 / 81,150; 17.79 / 20.91 / 24.59 / 31.17 / 39.01."
+                  "The May 2025 national median for U.S. occupation 29-2072 was USD 51,140 a year and USD 24.59 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 37,000, 43,490, 51,140, 64,820, 81,150."
                 ],
                 "evidence_type": "official wage data",
                 "id": "onet-wages",
-                "limitation": "U.S. nationwide figures for occupation 29-2072.00. Percentiles are not starting wages and are not converted into Chinese wages.",
+                "limitation": "National occupational distribution. Local wages and individual offers vary.",
                 "market": "US",
                 "name": "National Wages 29-2072.00 Medical Records Specialists",
-                "period": "2025 BLS wages; accessed 2026-10-03",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/29-2072.00"
@@ -13702,16 +13707,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/29-2072.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "This round checked 64% in healthcare and social assistance and 36% in other industries. Employment shares are not wages or projections."
+                  "In 2025, U.S. employment for medical records specialists was split across health care and social assistance (63%), professional, scientific and technical services (10%) and other industries (27%). These are employment shares."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "This distribution covers U.S. occupation 29-2072.00. Wage and employment projections use separate source tables.",
                 "market": "US",
                 "name": "Industries: 29-2072.00 - Medical Records Specialists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "2025 U.S. employment",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/29-2072.00"
@@ -13764,7 +13769,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "This round checked 16 tasks, CI, JobZone3, and the response options for each work-context question."
+                  "Employment projections use BLS Table 1.2. Read the named vacancy within its own scope."
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "source-pack-onet-summary",
@@ -13912,21 +13917,46 @@
                 "url": "https://www.onetonline.org/link/summary/15-1242.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Compile and maintain patient medical records and indexes — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Code diagnoses and procedures using standard coding systems — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
-                  "Check record completeness, accuracy, and compliance — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "BLS Table 1.2 for U.S. occupation 29-2072 shows about 200,700 jobs in 2025 and projects 216,300 in 2035 (7.8%), with about 14,000 openings per year including replacements. Counts are rounded independently.",
+                  "BLS lists a postsecondary nondegree award as typical U.S. entry education. Verify employer requirements for coding training, certification and record access."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "29-2072",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The named Guangxi high-level recruitment lists a medical records information post at row 36. Its requirements apply to that institution and recruitment level."
+                ],
+                "id": "cn-work-example",
+                "limitation": "This case does not establish national pay, entry requirements or hiring.",
+                "market": "Mainland China",
+                "name": "Guangxi People’s Hospital: 2026 medical records information recruitment",
+                "period": "2026",
+                "publisher": "Guangxi Health Commission",
+                "scope": "Named work example",
+                "url": "https://wsjkw.gxzf.gov.cn/xxgk_49493/fdzdgk/rsxx/klzp/P020260127604838581182.pdf"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks the paper records only.",
+                "market": "This page",
+                "name": "File U: Ownership and classification",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "scope": "Paper exercise",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -14151,7 +14181,7 @@
             }
           }
         ],
-        "answer": "The BLS occupational handbook projects that efficiency gains from AI-driven coding may affect staffing demand. This is a judgment within an occupational projection, without institutional adoption rates, layoff proportions, or replacement dates. O*NET tasks and software listed in recruitment provide duty / skill context; ILO global exposure research is not a measured adoption rate for this occupation. The editorial trial only lets a tool organize the U101/U102/U103 exercise. A person reviews D2 classification, the U102 attachment mismatch, and the two unresolved items for U103. Do not enter real medical data. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
+        "answer": "Approved tools can organize documents or flag missing fields. Authorized staff still verify record ownership, coding evidence and permission to disclose.",
         "authority_links": [
           {
             "来源": "29-2072.00 Medical Records Specialists",
@@ -14241,14 +14271,14 @@
             "使用限制": "Industry distribution signals employer settings, not forecast demand.",
             "来源": "Industries: 29-2072.00 - Medical Records Specialists",
             "研究对象": "Industry distribution (O*NET Industries)",
-            "结论": "Current employment industry shares for this occupation: healthcare and social assistance 63%; professional, scientific, and technical services 10%; other industries, including administrative support and company management, 27%. These do not indicate GenAI adoption or workforce outcomes.",
+            "结论": "In 2025, U.S. employment for medical records specialists was split across health care and social assistance (63%), professional, scientific and technical services (10%) and other industries (27%). The industry shares do not measure AI adoption or staffing changes.",
             "链接": "https://www.onetonline.org/link/industry/29-2072.00"
           },
           {
             "使用限制": "A projection judgment, not measured layoffs / institutional adoption or a replacement date.",
             "来源": "BLS Occupational Outlook Handbook: Medical Records Specialists",
             "研究对象": "2025–2035 employment outlook for this occupation",
-            "结论": "AI coding efficiency may affect demand; official projected growth is 8%, with 14,000 average annual openings.",
+            "结论": "The BLS handbook notes that coding efficiency may affect demand. It rounds projected growth to 8%. Table 1.2 reports 7.8% growth and about 14,000 annual openings.",
             "链接": "https://www.bls.gov/ooh/healthcare/medical-records-and-health-information-technicians.htm"
           }
         ],
@@ -14269,7 +14299,7 @@
         ],
         "questions": [
           {
-            "回答": "The BLS occupational handbook projects that efficiency gains from AI-driven coding may affect staffing demand. This is a judgment within an occupational projection, without institutional adoption rates, layoff proportions, or replacement dates. O*NET tasks and software listed in recruitment provide duty / skill context; ILO global exposure research is not a measured adoption rate for this occupation. The editorial trial only lets a tool organize the U101/U102/U103 exercise. A person reviews D2 classification, the U102 attachment mismatch, and the two unresolved items for U103. Do not enter real medical data.",
+            "回答": "BLS says more efficient AI-assisted coding may affect U.S. demand. Its outlook does not establish that the occupation will be replaced or estimate a job-loss rate.",
             "来源": "BLS outlook for this occupation",
             "链接": "https://www.bls.gov/ooh/healthcare/medical-records-and-health-information-technicians.htm",
             "问题": "Will AI replace this occupation?"
@@ -14438,7 +14468,7 @@
         ],
         "direct_answer": "U.S. BLS states that this occupation typically requires a postsecondary certificate. Some positions accept a high school education plus experience in a healthcare setting; others require an associate degree or higher education. Courses commonly cover medical terminology, health data requirements, and classification and coding. Employers may require or prefer certification, or require it after hiring. O*NET JobZone3 is a medium-preparation occupational group; its training duration is not a uniform requirement for this occupation. Check education, certification, and institutional information permissions separately. Chinese requirements cannot be inferred from U.S. classifications or credentials.",
         "entry_heading": "Entry paths and inspectable evidence",
-        "heading": "Medical Records Specialists: Entry Paths, Qualification Boundaries, and Career Development",
+        "heading": "Entry and File U: Ownership and classification",
         "locale_requirements": {
           "credential_boundary": "Certificates, degrees, coding certification, institutional authorization, and information release are different statuses. Permission to release records depends on employer policy and regulatory authorization.",
           "jurisdiction": "Separate the U.S. BLS educational path for this occupation from the O*NET occupational group. Verify specific Chinese requirements against the actual position and local rules.",
@@ -15213,8 +15243,8 @@
           },
           {
             "指标": "Employment outlook 2025–2035",
-            "数值": "8%",
-            "说明": "Integer growth rate on the BLS website; do not replace it with a self-calculated ratio"
+            "数值": "7.8%",
+            "说明": "BLS Employment Projections, Table 1.2."
           },
           {
             "指标": "Job openings (annual average)",
@@ -15260,7 +15290,7 @@
           }
         ],
         "factors_heading": "Factors affecting actual offers",
-        "growth": "8%",
+        "growth": "7.8%",
         "heading": "Boundaries of U.S. Wage and Employment Data for Medical Records Specialists",
         "industry_heading": "Industry and job differences",
         "industry_period": "2025",
@@ -15372,7 +15402,7 @@
         }
       },
       "fermat_decision_card": {
-        "caveat": "This page supports exploration of U.S. occupation 29-2072.00. Interpretation of medical documentation serves coding and does not confer clinical diagnostic authority. Actual coding, record corrections, access, and disclosure depend on applicable rules, training, and institutional authorization. The trial uses only the following editor-created fictional ordinary files, contains no patient information, and is not real medical coding, release, or qualification assessment.",
+        "caveat": "The exercise uses fictional records. Actual coding, corrections and disclosure depend on applicable rules and institutional authorization.",
         "summary": {
           "$join": [
             {
@@ -15393,7 +15423,7 @@
         "title": "Who may be suited to medical records work?"
       },
       "fit_decision_checklist": {
-        "boundary": "Reasons for caution: If you still skip record ownership or approval after prompting, guess missing items, or alter original values to move files forward, strengthen checking and querying skills before trying again. One paper error does not determine professional eligibility. This page supports exploration of U.S. occupation 29-2072.00. Interpretation of medical documentation serves coding and does not confer clinical diagnostic authority. Actual coding, record corrections, access, and disclosure depend on applicable rules, training, and institutional authorization. The trial uses only the following editor-created fictional ordinary files, contains no patient information, and is not real medical coding, release, or qualification assessment.",
+        "boundary": "If you tend to skip an ID or approval check under time pressure, practice logging the discrepancy and routing it for review.",
         "how": {
           "$item": "medical-records-and-health-information-technicians.quick-decision.fermat-decision-card.4",
           "block": "quick-decision",
@@ -15488,7 +15518,7 @@
             "metric": "Employment size and change",
             "occupation_scope": "Displayed scope: 29-2072.00",
             "source_id": "bls",
-            "value": "200,700 → 216,300; net +15,600; officially 8%"
+            "value": "200,700 → 216,300; net +15,600; officially 7.8%"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15665,7 +15695,7 @@
             "alternate_value": null,
             "label": "U.S. growth (2025–2035)",
             "secondary_value": null,
-            "value": "Officially 8%; net increase of 15,600, not a personal hiring guarantee"
+            "value": "BLS Table 1.2 projects 7.8% growth and a net increase of about 15,600 jobs."
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15679,7 +15709,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest trial and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
             "id": "riasec",
@@ -15695,7 +15725,7 @@
           },
           {
             "answer": "Use self-reports about conscientiousness, pressure, and collaboration to form hypotheses, then check whether ownership or approval was missed in the exercise.",
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Go to the career interest trial and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
             "id": "big-five",
@@ -15711,7 +15741,7 @@
           },
           {
             "answer": "Types cannot establish coding training, accuracy, or permissions. Evaluate specific checking behavior.",
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Go to the career interest trial and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
             "id": "mbti",
@@ -15727,7 +15757,7 @@
           },
           {
             "answer": "Reflect only on behavior during repetitive checking, pressure to hurry, and errors; this does not confer qualifications.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest trial and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
             "id": "enneagram",
@@ -15741,7 +15771,7 @@
           },
           {
             "answer": "Cannot cover medical terminology, coding system training, and compliance experience.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest trial and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
             "id": "iq",
@@ -15757,7 +15787,7 @@
           },
           {
             "answer": "Check whether unresolved issues and permission limits are communicated accurately. Smooth communication does not remove privacy responsibilities.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Go to the career interest trial and design observations",
             "evidence_level": "Editorial self-check; not validity evidence for this occupation",
             "id": "eq",
@@ -15853,7 +15883,7 @@
             "question": "What does CI indicate?"
           },
           {
-            "answer": "Redo the exercise with the answer hidden and record whether you detect the U102 mismatch and the two unresolved items for U103.",
+            "answer": "Before opening the answer key, check each file’s identifiers, label and approval. Record the handoff decision and the reason for any hold.",
             "question": "How can accuracy be observed?"
           },
           {
@@ -16020,7 +16050,7 @@
           "source": "O*NET2026 summary / 2025 wages and recruitment / 2025–2035 trends; current BLS handbook for the same occupation",
           "updated_at": "Accessed in this round on 2026-10-11"
         },
-        "note": "This round checked 16 tasks, CI, work context, and 23 recruitment software entries; the 25 certification and 1013 program candidates were retained. All five annual / hourly wage percentiles matched. The fifth BLS detailed industry value of 46800 was added to the table. Industry shares were updated to 63 / 10 / 27, and employment was aligned to the current 2025–2035 period: 200700 to 216300 / 8% / net increase 15600 / annual average 14000. BLS only expects AI coding efficiency to potentially affect demand and provides no measured institutional adoption / layoffs. Eight transition targets and capability gaps are consistent; the local secretary page combines occupations. Chinese occupational wages, real employer samples, and jurisdiction-specific privacy provisions were not obtained. The original U101/U102/U103 ordinary file exercise, answers, work samples, and seven-day trial were preserved. Shared facts / Hero earlier-period trends were unchanged; no claim of full-page consistency is made.",
+        "note": "O*NET describes the tasks, OEWS provides wage estimates, and BLS Table 1.2 provides employment projections.",
         "secondary_links": [
           {
             "href": {
@@ -16153,13 +16183,13 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI tools and human review",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Compare career directions",
       "fit": "Career fit guide",
       "market-signals": "Career outlook and transitions to related occupations",
       "navigation": "Next steps and related links",
-      "path": "Entry, qualifications, and career development",
+      "path": "Entry and File U: Ownership and classification",
       "profile": "Occupational profile",
       "quick-decision": "Quick assessment",
       "risk": "Work pressure, risks, and professional boundaries",
@@ -16183,13 +16213,13 @@
         ]
       },
       {
-        "derivation": "Median from BLS 2025 wage data displayed on the O*NET national wages page.",
-        "display_value": "$51,140 / year (approximately $24.59 / hour)",
+        "derivation": null,
+        "display_value": "USD 51,140/year",
         "fact_id": "us-median",
-        "market": "United States (Medical Records Specialists 29-2072.00)",
-        "measure": "2025 median annual wage",
-        "occupation_scope": "Medical Records Specialists (O*NET 29-2072.00, occupation-specific scope)",
-        "period": "2025 wage data; accessed 2026-10-03",
+        "market": "United States",
+        "measure": "U.S. median annual wage (May 2025)",
+        "occupation_scope": "29-2072",
+        "period": "2025-05",
         "source_refs": [
           "onet-wages"
         ]
@@ -16220,38 +16250,38 @@
       },
       {
         "derivation": null,
-        "display_value": "194,800 employed (2024)",
+        "display_value": "About 200,700 jobs",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "2024 employment size",
-        "occupation_scope": "O*NET 29-2072.00 occupation-specific scope",
-        "period": "2024; accessed 2026-10-03",
+        "measure": "U.S. employment (2025)",
+        "occupation_scope": "29-2072",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "O*NET national employment trends page: approximately 7% projected growth for 2024–2034.",
-        "display_value": "Much faster than average (approximately 7%, 2024–2034)",
+        "derivation": null,
+        "display_value": "7.8%",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Projected employment growth",
-        "occupation_scope": "O*NET 29-2072.00 occupation-specific scope",
-        "period": "2024–2034; accessed 2026-10-03",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "29-2072",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "Includes replacement needs.",
-        "display_value": "Approximately 14,200 / year (2024–2034)",
+        "derivation": null,
+        "display_value": "About 14,000 per year",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Projected openings (annual average)",
-        "occupation_scope": "O*NET 29-2072.00 occupation-specific scope",
-        "period": "2024–2034; accessed 2026-10-03",
+        "measure": "U.S. annual openings (2025–2035)",
+        "occupation_scope": "29-2072",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -16265,57 +16295,45 @@
         "source_refs": [
           "source-pack-onet-summary"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "75%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Medical Records Specialists",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
-      "Medical records and coding",
-      "Completeness and compliance review",
-      "Data confidentiality and release"
+      "Medical Records Specialists",
+      "Wages and projections use separate tables",
+      "China occupational wage distribution unavailable"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-median",
         "key": "us_pay",
-        "label": "U.S. wage reference"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual openings"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -16329,17 +16347,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Medical records specialists (O*NET 29-2072.00) compile, process, and maintain medical records and code diagnoses and procedures using standard coding systems. U.S. BLS median annual pay was $51,140 in 2025, with approximately 194,800 employed in 2024. Includes work context, compliance risks, and entry paths."
+      "text": "Explore medical records specialists tasks, U.S. wage percentiles and employment projections, with a paper exercise on checking records."
     },
     "title": {
       "availability": "available",
-      "text": "Medical Records Specialists: Duties, U.S. Pay, and Entry"
+      "text": "Medical Records Specialists: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "a1c02b70d9062571b2eabf9b21e9af206f0ff3be8e3aebf8fc840ff3efcb2b24",
+  "source_content_sha256": "b07be9d68d4d94c53767086715c87dbfa8ddd10dc510310afe3f44424925af75",
   "subject": {
     "canonical_slug": "medical-records-and-health-information-technicians",
     "name": "Medical Records Specialists",
-    "summary": "Medical records specialists (O*NET 29-2072.00) compile, process, and maintain patient medical records, code diagnoses and procedures using standard coding systems, and maintain record confidentiality, completeness, and compliance. Coding judgments and release require authorized confirmation."
+    "summary": "Medical records specialists check record ownership, organize and classify or code information under applicable rules, and refer missing documentation or mismatched records to the responsible person."
   }
 }

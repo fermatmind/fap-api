@@ -32,9 +32,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1305,7 +1302,7 @@
         "status": "pending_mapping"
       },
       "item:ambulance-drivers-and-attendants-except-emergency-medical-technicians.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:ambulance-drivers-and-attendants-except-emergency-medical-technicians.path.entry-role-comparison.1": {
         "status": "mapped"
@@ -23298,15 +23295,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "This page corresponds to the US O*NET53-3011.00 Ambulance Drivers and Attendants, excluding EMTs; the work objects are ill, injured, or recovering persons and vehicle equipment, and the outputs are safe transport, vehicle readiness, and clear handovers. The US occupation 53-3011.00 explicitly excludes EMTs (29-2042), but O*NET tasks also list basic first aid, assisting EMTs, and pre- and post-transport vital-sign checks; 'excluding EMTs' does not mean all basic first aid is forbidden. An individual's actual practice must be checked against state rules, training, qualifications, and institutional authorization; no medical authority comes from the occupational classification alone."
+              "If you expect driving experience to qualify you for medical care, or are unsure about shifts, lifting or employer training, compare other roles first."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.quick-decision.fit-decision-checklist.1",
           "source_refs": [
             "onet",
-            "operations",
-            "onet-emt",
-            "emt-ooh"
+            "cnems"
           ],
           "type": "prose"
         },
@@ -23315,12 +23310,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Check R1/R2/R3 against the entry-section model A, handle the F1 and F2 feedback separately, and keep the original records, the three-state table, the two modification logs, and the handover summary. Even after F2 supplies the missing data, one defect remains unclosed, and 'records complete' must not be treated as 'released'. The works only demonstrate a preparation method and prove no driving, lifting, first-aid, or hiring qualification."
+              "Open “Entry, qualifications, and career development” and find “AM-12 | Check vehicle records and hand over”. Fill out the handover table and write two sentences before reading the sample."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "operations"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23329,12 +23324,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "People more likely to adapt: those who can follow checklists and procedures step by step without skipping, are willing to stay attentive and courteous through long driving and shift work, can safely lift and secure patients in coordinated roles while protecting themselves and patients, and can stay calm at noisy and emotionally tense scenes while recording and handing over truthfully. Those unwilling to check by procedure, unable to bear shifts and long-distance driving, uncomfortable in infection and emotional-risk environments, or unprepared for the sustained physical demands of lifting usually face greater risk."
+              "Explore this work if you like checking vehicle IDs, equipment and records and can keep unverified items visible during shift handovers."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23343,18 +23339,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no China-specific precise wage distribution for this occupation was obtained this round. The US 2025, month 5 (May) annual wages at the 10/25/50/75/90 percentiles are 27,350／30,750／35,450／38,410／45,960 USD, with a median hourly wage of 17.04 USD. BLS Table 1.2 US exact occupation 53-3011: 14,300 employed in 2025, projected 14,100 in 2035; 2025–2035 growth rate -1.3%, official net decrease 200, average annual openings 1,400. Headcounts are converted from the official thousands unit; openings include demand from turnover and exits and do not equal net new jobs. The table does not prove the decline is caused by automation or any service model, and cannot be extrapolated to mainland China or to individual hiring. No China precise-occupation wage was obtained, and industry averages serve only as contrast. Mainland China's Pre-hospital Medical Emergency Care Management Measures Articles 19–20 distinguish physicians, nurses, and medical rescue attendants; medical rescue attendants may perform prescribed auxiliary work such as on-scene initial first aid and transport escort. Article 19 as originally written mentions the national vocational qualification and municipal emergency-center pre-job assessment requirements; the vocational-qualification evaluation system has since been reformed, and the current form of proof must be checked with competent authorities and regular evaluation institutions — the article must not be turned into a universal certificate requirement for all drivers or stretcher bearers. The 2020 guidance, item (Eight), separately calls for strengthening the business training and assessment of dispatchers, drivers, and stretcher bearers. Driving positions also require a driver's license for the matching vehicle type; driving experience, health, probation, and refresher conditions are checked item by item against the specific position."
+              "Jinan’s health commission says drivers need a licence matching the vehicle and at least three years’ driving experience. The employer arranges training and assessment through the city emergency center after hiring. This is a local example."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "oews",
-            "ep",
-            "nbs",
-            "cnems",
-            "cntraffic",
-            "cn-guidance-2020",
-            "credential-reform"
+            "jinan-driver-2026"
           ],
           "type": "prose"
         },
@@ -23363,12 +23353,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: a transport-support position that drives safely at emergency scenes and during transport, assists with lifting and securing patients, keeps the vehicle and equipment ready, and completes records and handovers (excluding emergency medical technicians)."
+              "This role drives or assists on an ambulance and helps prepare the vehicle, restock supplies and hand over information. U.S. occupation 53-3011 excludes EMTs. Duties depend on training, local rules and employer authorization. Mainland driving, stretcher support and medical rescue roles have separate requirements."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnems"
           ],
           "type": "prose"
         }
@@ -23460,7 +23451,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The US 2025, month 5 (May) median wage is 35,450 USD or 17.04 USD per hour; national wage percentiles are in the US salary section. The O*NET question asks how much education new hires need to perform this occupation's work: 36% answered a post-secondary non-degree certificate, 24% a high school diploma or equivalent, and 15% less than high school; this is not the incumbent education composition or a statutory entry threshold. The Job Zone 1–2 description of several days to one year of training is a group-level general description and must not be taken as this occupation's uniform training period. BLS Table 1.2 US exact occupation 53-3011: 14,300 employed in 2025, projected 14,100 in 2035; 2025–2035 growth rate -1.3%, official net decrease 200, average annual openings 1,400. Headcounts are converted from the official thousands unit; openings include demand from turnover and exits and do not equal net new jobs. The table does not prove the decline is caused by automation or any service model, and cannot be extrapolated to mainland China or to individual hiring."
+              "The US May 2025 median wage is 35,450 USD or 17.04 USD per hour; national wage percentiles are in the US salary section. The O*NET question asks how much education new hires need to perform this occupation's work: 36% answered a post-secondary non-degree certificate, 24% a high school diploma or equivalent, and 15% less than high school; this is not the incumbent education composition or a statutory entry threshold. The Job Zone 1–2 description of several days to one year of training is a group-level general description and must not be taken as this occupation's uniform training period. BLS Table 1.2 US exact occupation 53-3011: 14,300 employed in 2025, projected 14,100 in 2035; 2025–2035 growth rate -1.3%, official net decrease 200, average annual openings 1,400. Headcounts are converted from the official thousands unit; openings include demand from turnover and exits and do not equal net new jobs. The table does not prove the decline is caused by automation or any service model, and cannot be extrapolated to mainland China or to individual hiring."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.profile.onet-structured-fields-block.2",
@@ -23548,7 +23539,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Mainland China's Pre-hospital Medical Emergency Care Management Measures Articles 19–20 distinguish physicians, nurses, and medical rescue attendants; medical rescue attendants may perform prescribed auxiliary work such as on-scene initial first aid and transport escort. Article 19 as originally written mentions the national vocational qualification and municipal emergency-center pre-job assessment requirements; the vocational-qualification evaluation system has since been reformed, and the current form of proof must be checked with competent authorities and regular evaluation institutions — the article must not be turned into a universal certificate requirement for all drivers or stretcher bearers. The 2020 guidance, item (Eight), separately calls for strengthening the business training and assessment of dispatchers, drivers, and stretcher bearers. Driving positions also require a driver's license for the matching vehicle type; driving experience, health, probation, and refresher conditions are checked item by item against the specific position. Article 27 of the Measures constrains emergency centers (stations) and network hospitals from using their ambulances for non-pre-hospital-emergency services, and other units and individuals from using ambulances to provide pre-hospital medical emergency care. Not all non-emergency transport follows from this as illegal, and 120 emergency vehicles must not be mixed with non-emergency transport business; the target institution, service, and vehicle permits are checked against local official rules. The 2022 Occupational Classification Dictionary 4-02-02 covers road transport service personnel and 4-02-02-01 is passenger-vehicle drivers, with listed job types not including ambulance driver separately; 4-14-01-01 medical clinical auxiliary service workers includes medical rescue attendants among its job types. This is only a relevant task-classification contrast: the US 53-3011 cannot be precisely mapped onto a single Chinese subcategory, still less does it grant driving or medical authority."
+              "Mainland China's Pre-hospital Medical Emergency Care Management Measures Articles 19–20 distinguish physicians, nurses, and medical rescue attendants; medical rescue attendants may perform prescribed auxiliary work such as on-scene initial first aid and transport escort. Article 19 as originally written mentions the national vocational qualification and municipal emergency-center pre-job assessment requirements; the vocational-qualification evaluation system has since been reformed, and the current form of proof must be checked with competent authorities and regular evaluation institutions — the article must not be turned into a universal certificate requirement for all drivers or stretcher bearers. The 2020 guidance, item (Eight), separately calls for strengthening the business training and assessment of dispatchers, drivers, and stretcher bearers. Driving positions also require a driver's license for the matching vehicle type; driving experience, health, probation, and refresher conditions are checked item by item against the specific position. Article 27 of the Measures constrains emergency centers (stations) and network hospitals from using their ambulances for non-pre-hospital-emergency services, and other units and individuals from using ambulances to provide pre-hospital medical emergency care. Not all non-emergency transport follows from this as illegal, and 120 emergency vehicles must not be mixed with non-emergency transport business; the target institution, service, and vehicle permits are checked against local official rules. The 2022 Occupational Classification Dictionary 4-02-02 covers road transport service personnel and 4-02-02-01 is passenger-vehicle drivers; 4-14-01-01 medical clinical auxiliary service workers includes medical rescue attendants among its job types. This is only a relevant task-classification contrast: the US 53-3011 cannot be precisely mapped onto a single Chinese subcategory, still less does it grant driving or medical authority."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.profile.onet-structured-fields-block.5",
@@ -24022,7 +24013,7 @@
                 "url": "https://www.onetonline.org/link/summary/53-3011.00"
               },
               {
-                "entity": "BLS2025, month 5 (May) national wage percentiles shown by O*NET (53-3011)",
+                "entity": "BLS May 2025 national wage percentiles shown by O*NET (53-3011)",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localwages/53-3011.00"
@@ -24515,7 +24506,7 @@
                 "url": "https://www.onetonline.org/link/details/53-3011.00"
               },
               {
-                "entity": "BLS2025, month 5 (May) wage percentiles shown by O*NET",
+                "entity": "BLS May 2025 wage percentiles shown by O*NET",
                 "id": "link-9",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localwages/53-3011.00"
@@ -24545,7 +24536,7 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS2025, month 5 (May) wage percentiles shown by O*NET",
+                "entity": "BLS May 2025 wage percentiles shown by O*NET",
                 "id": "link-14",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localwages/53-3011.00"
@@ -24715,14 +24706,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial judgment: material organization, route information, and inspection ledgers can be assistance candidates; this page has no evidence on AI adoption rates, effects, or substitution rates for this occupation. Safe driving, moving, and handovers must follow personnel qualifications and institutional rules. BLS Table 1.2 US exact occupation 53-3011: 14,300 employed in 2025, projected 14,100 in 2035; 2025–2035 growth rate -1.3%, official net decrease 200, average annual openings 1,400. Headcounts are converted from the official thousands unit; openings include demand from turnover and exits and do not equal net new jobs. The table does not prove the decline is caused by automation or any service model, and cannot be extrapolated to mainland China or to individual hiring. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Try organizing fictional records, aligning timestamps and flagging missing information. Designated staff remain responsible for real dispatch, checks and handovers."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "operations",
-            "cntraffic",
-            "ep"
+            "editor",
+            "cnems"
           ],
           "type": "prose"
         },
@@ -24773,7 +24763,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "National wage distribution for month 5 (May), 2025"
+              "National wage distribution for May 2025"
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.ai-impact.ai-impact-table.22",
@@ -25115,7 +25105,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2025, month 5 (May) wage percentiles shown by O*NET (53-3011.00)"
+              "BLS May 2025 wage percentiles shown by O*NET (53-3011.00)"
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.ai-impact.ai-impact-table.46",
@@ -25143,7 +25133,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The 2025, month 5 (May) median annual wage is 35,450 USD (17.04 USD per hour); the 10th percentile is 27,350 USD (13.15 USD/hour), the 25th percentile is 30,750 USD (14.78 USD/hour), the 75th percentile is 38,410 USD (18.47 USD/hour), and the 90th percentile is 45,960 USD (22.10 USD/hour)."
+              "The May 2025 median annual wage is 35,450 USD (17.04 USD per hour); the 10th percentile is 27,350 USD (13.15 USD/hour), the 25th percentile is 30,750 USD (14.78 USD/hour), the 75th percentile is 38,410 USD (18.47 USD/hour), and the 90th percentile is 45,960 USD (22.10 USD/hour)."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.ai-impact.ai-impact-table.48",
@@ -25399,7 +25389,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no China wage distribution for this occupation was obtained this round. The US 53-3011 median wage for month 5 (May), 2025, is 35,450 USD/year or 17.04 USD/hour; the 10th and 90th percentiles are 27,350 and 45,960 USD/year respectively. No China national wage distribution for this occupation was obtained this round; only industry and unit broad-scope references are listed and cannot be taken as occupational wages."
+              "Insufficient evidence: no China wage distribution for this occupation is given in the cited sources. The US 53-3011 median wage for May 2025, is 35,450 USD/year or 17.04 USD/hour; the 10th and 90th percentiles are 27,350 and 45,960 USD/year respectively. No China national wage distribution for this occupation is given in the cited sources; only industry and unit broad-scope references are listed and cannot be taken as occupational wages."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.ai-impact.ai-impact-table.66",
@@ -25414,7 +25404,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2025, month 5 (May) wage percentiles shown by O*NET, and BLS OEWS"
+              "BLS May 2025 wage percentiles shown by O*NET, and BLS OEWS"
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.ai-impact.ai-impact-table.67",
@@ -26453,7 +26443,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page's China side uses broad industry-sector and unit-type proxies (health and social work; transportation, warehousing, and postal services; etc.), not this occupation's national wage distribution; these sectors cover many non-occupation positions, and industry figures must not be treated as this occupation's median. The NBS tables this time do not list this occupation separately, and no precise-occupation wage was obtained this round; it cannot be asserted that no other official data exist."
+              "This page's China side uses broad industry-sector and unit-type proxies (health and social work; transportation, warehousing, and postal services; etc.), not this occupation's national wage distribution; these sectors cover many non-occupation positions, and industry figures must not be treated as this occupation's median. The NBS tables this time do not list this occupation separately, and no precise-occupation wage is given in the cited sources; it cannot be asserted that no other official data exist."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.china-salary.career-snapshot-primary-locale.24",
@@ -26768,12 +26758,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "When checking your own expectations, first confirm institution type (emergency centers and network hospitals / non-emergency transport providers / hospital and nursing-facility transport positions), driving and work qualification requirements, shift and night arrangements, and whether lifting and in-vehicle duties are included; do not substitute industry proxies for written pay terms, and do not convert US figures into RMB expectations."
+              "The Shenzhen posting does not list pay, and the Beijing contract budget is not a wage. Industry averages only provide context."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet"
+            "amb-shenzhen",
+            "amb-beijing",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26796,11 +26788,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS data cover legal-entity units in urban areas with 5 or more employees and exclude individual businesses and freelancers; wages are gross total wages including individual social insurance, housing fund contributions, and income tax. Industry-sector figures are not this occupation's wage. This occupation's pay is set by the employer's rules, position, and shifts."
+              "The Shenzhen posting does not list pay, and the Beijing contract budget is not a wage. Industry averages only provide context."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
+            "amb-shenzhen",
+            "amb-beijing",
             "nbs"
           ],
           "type": "prose"
@@ -26894,7 +26888,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2022 Occupational Classification Dictionary 4-02-02 covers road transport service personnel and 4-02-02-01 is passenger-vehicle drivers, with listed job types not including ambulance driver separately; 4-14-01-01 medical clinical auxiliary service workers includes medical rescue attendants among its job types. This is only a relevant task-classification contrast: the US 53-3011 cannot be precisely mapped onto a single Chinese subcategory, still less does it grant driving or medical authority. Industry wages are classified by the employer's main economic activity; occupation and industry are two different scopes. The NBS tables this time do not list this occupation, and it cannot be asserted from this that no official data exist. US contrast: 2025–2035 decline of 1.3% (US EP); 35,450 USD/year (US OEWS national median). Neither is a Chinese indicator."
+              "The 2022 Occupational Classification Dictionary 4-02-02 covers road transport service personnel and 4-02-02-01 is passenger-vehicle drivers; 4-14-01-01 medical clinical auxiliary service workers includes medical rescue attendants among its job types. This is only a relevant task-classification contrast: the US 53-3011 cannot be precisely mapped onto a single Chinese subcategory, still less does it grant driving or medical authority. Industry wages are classified by the employer's main economic activity; occupation and industry are two different scopes. The NBS tables this time do not list this occupation, and it cannot be asserted from this that no official data exist. US contrast: 2025–2035 decline of 1.3% (US EP); 35,450 USD/year (US OEWS national median). Neither is a Chinese indicator."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.china-salary.career-snapshot-primary-locale.55",
@@ -26961,7 +26955,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "US national wage percentiles for month 5 (May), 2025｜https://www.onetonline.org/link/localwages/53-3011.00；coverage and wage composition｜https://www.bls.gov/oes/oes_ques.htm；2025–2035 employment projections｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "US national wage percentiles for May 2025｜https://www.onetonline.org/link/localwages/53-3011.00；coverage and wage composition｜https://www.bls.gov/oes/oes_ques.htm；2025–2035 employment projections｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-salary.career-snapshot-secondary-locale.8",
@@ -26991,7 +26985,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025, month 5 (May) 10th percentile: 27,350 USD or 13.15 USD/hour; about 10% of wages are no higher than this value, which does not represent a starting or minimum wage.｜https://www.onetonline.org/link/localwages/53-3011.00"
+              "May 2025 10th percentile: 27,350 USD or 13.15 USD/hour; about 10% of wages are no higher than this value, which does not represent a starting or minimum wage.｜https://www.onetonline.org/link/localwages/53-3011.00"
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-salary.career-snapshot-secondary-locale.10",
@@ -27019,7 +27013,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 25th percentile of annual wages (14.78 USD per hour).; BLS 2025, month 5 (May) wage percentiles shown by O*NET｜https://www.onetonline.org/link/localwages/53-3011.00"
+              "The 25th percentile of annual wages (14.78 USD per hour).; BLS May 2025 wage percentiles shown by O*NET｜https://www.onetonline.org/link/localwages/53-3011.00"
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-salary.career-snapshot-secondary-locale.12",
@@ -27047,7 +27041,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025, month 5 (May) 53-3011 median annual wage (17.04 USD per hour).; BLS Occupational Employment and Wage Statistics (OEWS): 53-3011｜https://www.bls.gov/oes/current/oes533011.htm"
+              "The May 2025 53-3011 median annual wage (17.04 USD per hour).; BLS Occupational Employment and Wage Statistics (OEWS): 53-3011｜https://www.bls.gov/news.release/ocwage.t01.htm"
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-salary.career-snapshot-secondary-locale.14",
@@ -27075,7 +27069,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 75th percentile of annual wages (18.47 USD per hour).; BLS 2025, month 5 (May) wage percentiles shown by O*NET｜https://www.onetonline.org/link/localwages/53-3011.00"
+              "The 75th percentile of annual wages (18.47 USD per hour).; BLS May 2025 wage percentiles shown by O*NET｜https://www.onetonline.org/link/localwages/53-3011.00"
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-salary.career-snapshot-secondary-locale.16",
@@ -27187,7 +27181,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025–2035 average annual openings of 1,400, including turnover and exit demand, do not equal new jobs.｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；this round's O*NET summary already displays the 2025–2035 projection; the precise growth rate and net change follow the BLS detailed tables｜https://www.onetonline.org/link/details/53-3011.00"
+              "2025–2035 average annual openings of 1,400, including turnover and exit demand, do not equal new jobs.｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；the O*NET summary already displays the 2025–2035 projection; the precise growth rate and net change follow the BLS detailed tables｜https://www.onetonline.org/link/details/53-3011.00"
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-salary.career-snapshot-secondary-locale.24",
@@ -27201,7 +27195,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wages are the OEWS2025, month 5 (May) national percentiles, covering wage and salary employees; employment is EP2025 and the 2025–2035 projections, whose scope may include the self-employed. The exact occupation 53-3011 excludes EMTs, cannot be extrapolated to China, and the two programs' employment counts must not be mixed."
+              "Wages are the May 2025 OEWS national percentiles, covering wage and salary employees; employment is EP2025 and the 2025–2035 projections, whose scope may include the self-employed. The exact occupation 53-3011 excludes EMTs, cannot be extrapolated to China, and the two programs' employment counts must not be mixed."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-salary.career-snapshot-secondary-locale.25",
@@ -27217,7 +27211,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The US 53-3011 ambulance drivers and attendants' median wage for month 5 (May), 2025, is 35,450 USD/year or 17.04 USD/hour; the 10th and 90th percentiles are 27,350 and 45,960 USD/year respectively. The median is not a starting salary; the occupation excludes EMTs."
+              "The US 53-3011 ambulance drivers and attendants' median wage for May 2025, is 35,450 USD/year or 17.04 USD/hour; the 10th and 90th percentiles are 27,350 and 45,960 USD/year respectively. The median is not a starting salary; the occupation excludes EMTs."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-salary.career-snapshot-secondary-locale.26",
@@ -27485,7 +27479,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This occupation's 2025, month 5 (May) national median annual wage (BLS OEWS / shown by O*NET), used for contrast; not an industry figure."
+              "This occupation's May 2025 national median annual wage (BLS OEWS / shown by O*NET), used for contrast; not an industry figure."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-salary.career-snapshot-secondary-locale.45",
@@ -27499,7 +27493,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "No. 35,450 USD is the 2025, month 5 (May) national median annual wage, representing the distribution midpoint; entry wages depend on institution type, driving and work qualifications, and shift arrangements, and this page provides no starting-salary figure."
+              "No. 35,450 USD is the May 2025 national median annual wage, representing the distribution midpoint; entry wages depend on institution type, driving and work qualifications, and shift arrangements, and this page provides no starting-salary figure."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-salary.career-snapshot-secondary-locale.46",
@@ -27528,7 +27522,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wages come from OEWS2025, month 5 (May), shown via O*NET; employment and projections come separately from BLS EP2025–2035, and they cannot be called the same statistical program."
+              "Wages come from May 2025 OEWS, shown via O*NET; employment and projections come separately from BLS EP2025–2035, and they cannot be called the same statistical program."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-salary.career-snapshot-secondary-locale.48",
@@ -27643,19 +27637,19 @@
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional competence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Paramedics",
@@ -27700,7 +27694,7 @@
                 "url": "https://www.onetonline.org/link/summary/53-3011.00"
               },
               {
-                "entity": "BLS2025, month 5 (May) national wage percentiles shown by O*NET (53-3011)",
+                "entity": "BLS May 2025 national wage percentiles shown by O*NET (53-3011)",
                 "id": "link-14",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localwages/53-3011.00"
@@ -27875,7 +27869,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Check R1/R2/R3 against the entry-section model A, handle the F1 and F2 feedback separately, and keep the original records, the three-state table, the two modification logs, and the handover summary. Even after F2 supplies the missing data, one defect remains unclosed, and 'records complete' must not be treated as 'released'. The works only demonstrate a preparation method and prove no driving, lifting, first-aid, or hiring qualification."
+              "Try AM-12 in the entry section. Check the target vehicle, time, pending item and owner. This is paper handover practice."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.fit.riasec-fit-block.9",
@@ -28565,7 +28559,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Check R1/R2/R3 against the entry-section model A, handle the F1 and F2 feedback separately, and keep the original records, the three-state table, the two modification logs, and the handover summary. Even after F2 supplies the missing data, one defect remains unclosed, and 'records complete' must not be treated as 'released'. The works only demonstrate a preparation method and prove no driving, lifting, first-aid, or hiring qualification."
+              "Try AM-12 in the entry section. Check the target vehicle, time, pending item and owner. This is paper handover practice."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.fit.personality-fit-block.55",
@@ -28607,7 +28601,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Model A is an editorially designed fictional crew-record verification exercise observing only data attribution, missing items, and modification trails. The exercise fields and criteria are not actual vehicle release, patient transport, or clinical procedures; the whole exercise is on paper and touches no real vehicles, patients, or equipment. Check R1/R2/R3 against the entry-section model A, handle the F1 and F2 feedback separately, and keep the original records, the three-state table, the two modification logs, and the handover summary. Even after F2 supplies the missing data, one defect remains unclosed, and 'records complete' must not be treated as 'released'. The works only demonstrate a preparation method and prove no driving, lifting, first-aid, or hiring qualification."
+              "Use the AM-12 fictional records to check vehicle IDs, times and pending status, then hand over to the crew lead."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.fit.personality-fit-block.58",
@@ -28635,7 +28629,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "OEWS2025, month 5 (May) national wage percentiles shown by O*NET; not evidence of personality versus job performance."
+              "May 2025 OEWS national wage percentiles shown by O*NET; not evidence of personality versus job performance."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.fit.personality-fit-block.60",
@@ -28706,7 +28700,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The 2022 Occupational Classification Dictionary 4-02-02 covers road transport service personnel and 4-02-02-01 is passenger-vehicle drivers, with listed job types not including ambulance driver separately; 4-14-01-01 medical clinical auxiliary service workers includes medical rescue attendants among its job types. This is only a relevant task-classification contrast: the US 53-3011 cannot be precisely mapped onto a single Chinese subcategory, still less does it grant driving or medical authority."
+              "The 2022 Occupational Classification Dictionary 4-02-02 covers road transport service personnel and 4-02-02-01 is passenger-vehicle drivers; 4-14-01-01 medical clinical auxiliary service workers includes medical rescue attendants among its job types. This is only a relevant task-classification contrast: the US 53-3011 cannot be precisely mapped onto a single Chinese subcategory, still less does it grant driving or medical authority."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.fit.personality-fit-block.65",
@@ -28758,7 +28752,7 @@
                 "url": "https://www.onetonline.org/link/details/53-3011.00"
               },
               {
-                "entity": "BLS2025, month 5 (May) national wage percentiles shown by O*NET (53-3011)",
+                "entity": "BLS May 2025 national wage percentiles shown by O*NET (53-3011)",
                 "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localwages/53-3011.00"
@@ -28826,7 +28820,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET53-3011 tasks and US respondent context support the driving, moving, vehicle-readiness, and record duties and the exposure shares; these shares are not accident, infection, or injury incidence rates. Wages use OEWS2025, month 5 (May), and employment uses EP2025–2035 separately. Chinese institution, personnel, and vehicle boundaries follow the pre-hospital management measures and traffic law; the risk list is an editorial summary."
+              "O*NET53-3011 tasks and US respondent context support the driving, moving, vehicle-readiness, and record duties and the exposure shares; these shares are not accident, infection, or injury incidence rates. Wages use May 2025 OEWS, and employment uses EP2025–2035 separately. Chinese institution, personnel, and vehicle boundaries follow the pre-hospital management measures and traffic law; the risk list is an editorial summary."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.risk.career-risk-cards.10",
@@ -29195,7 +29189,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "OEWS2025, month 5 (May) 53-3011 national wage percentiles shown by O*NET; not evidence of occupational risk or employment projections."
+              "May 2025 OEWS 53-3011 national wage percentiles shown by O*NET; not evidence of occupational risk or employment projections."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.risk.career-risk-cards.36",
@@ -29279,35 +29273,35 @@
                 "Emergency crew driving direction",
                 "Obtain a driver's license and work training, do ride-along practice, and learn the dispatch procedure.",
                 "Good safe-driving record, complete vehicle inspections and handovers.",
-                "Model A version matrix, three-state table, F1/F2 logs, and handover summary; shows only data preparation.",
+                "Use the AM-12 fictional records to check vehicle IDs, times and pending status, then hand over to the crew lead.",
                 "US 53-3011 excludes EMTs, but tasks list basic first aid; the actual scope is checked per qualifications and position authority."
               ],
               [
                 "In-vehicle lifting and support direction",
                 "Learn lifting-securing, infection protection, and disinfection-restocking standards.",
                 "Safe lifting and securing, adequate disinfection and restocking, complete records.",
-                "Model A version matrix, three-state table, F1/F2 logs, and handover summary; shows only data preparation.",
+                "Use the AM-12 fictional records to check vehicle IDs, times and pending status, then hand over to the crew lead.",
                 "In-vehicle non-drivers are not universally required to hold a driver's license; patient-moving and medical-assistance duties are checked separately."
               ],
               [
                 "Non-emergency medical transport direction",
                 "Learn transport procedures, patient communication, and handover standards.",
                 "Standardized procedures, proper communication, complete records and handovers.",
-                "Model A version matrix, three-state table, F1/F2 logs, and handover summary; shows only data preparation.",
+                "Use the AM-12 fictional records to check vehicle IDs, times and pending status, then hand over to the crew lead.",
                 "Non-emergency transport requires checking service and vehicle permits; it must not be mixed with 120 pre-hospital emergency vehicle duties."
               ],
               [
                 "Dispatch preparation and vehicle readiness",
                 "Check the vehicle, stretcher, and consumables per the checklist and complete cleaning and restocking.",
                 "Inspection and disinfection records complete, consumables restocked.",
-                "Model A version matrix, three-state table, F1/F2 logs, and handover summary; shows only data preparation.",
+                "Use the AM-12 fictional records to check vehicle IDs, times and pending status, then hand over to the crew lead.",
                 "Different from dispatchers: performs on-scene driving and vehicle readiness, not command dispatch."
               ],
               [
                 "Records and handover",
                 "Report facts to hospital personnel or law enforcement and complete handover records.",
                 "Truthful and complete records, events reported per procedure, traceable.",
-                "Model A version matrix, three-state table, F1/F2 logs, and handover summary; shows only data preparation.",
+                "Use the AM-12 fictional records to check vehicle IDs, times and pending status, then hand over to the crew lead.",
                 "Different from paramedics: does not perform advanced emergency handling or medication decisions."
               ]
             ]
@@ -29331,52 +29325,43 @@
               {
                 "id": "education",
                 "values": [
-                  "New-hire education and Chinese position qualifications",
-                  "The O*NET question asks how much education new hires need to perform this occupation's work: 36% answered a post-secondary non-degree certificate, 24% a high school diploma or equivalent, and 15% less than high school; this is not the incumbent education composition or a statutory entry threshold. The Job Zone 1–2 description of several days to one year of training is a group-level general description and must not be taken as this occupation's uniform training period.",
-                  "Mainland China's Pre-hospital Medical Emergency Care Management Measures Articles 19–20 distinguish physicians, nurses, and medical rescue attendants; medical rescue attendants may perform prescribed auxiliary work such as on-scene initial first aid and transport escort. Article 19 as originally written mentions the national vocational qualification and municipal emergency-center pre-job assessment requirements; the vocational-qualification evaluation system has since been reformed, and the current form of proof must be checked with competent authorities and regular evaluation institutions — the article must not be turned into a universal certificate requirement for all drivers or stretcher bearers. The 2020 guidance, item (Eight), separately calls for strengthening the business training and assessment of dispatchers, drivers, and stretcher bearers. Driving positions also require a driver's license for the matching vehicle type; driving experience, health, probation, and refresher conditions are checked item by item against the specific position.",
-                  "Regional example: the Jinan Municipal Health Commission's reply of 2026-07-06 states that in that city drivers are hired by medical institutions, which then arrange unified pre-job training and assessment, and individuals cannot apply on their own for the city's ambulance-driver work qualification certificate; the driver's license must match the vehicle and have at least three years of driving experience. This applies only to that city's statement and cannot be extrapolated to a nationally uniform driving-experience requirement or application method."
+                  "Shenzhen recruitment",
+                  "In 2026 Dapeng Hospital, part of Shenzhen Second People’s Hospital, advertised two ambulance driver jobs. It required a junior college qualification or higher, a class B driver’s licence and at least five years of driving experience. Applications closed April 30. The notice did not list pay; its licence requirement is specific to this employer.",
+                  "An expired employer posting."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "Driving and institutional vehicle boundaries",
-                  "China's Road Traffic Safety Law Article 53: ambulances performing emergency tasks may use sirens and warning lights and enjoy the passage exceptions listed in that article on the premise of ensuring safety; non-emergency tasks must not use sirens or warning lights and do not enjoy that priority. Being in a hurry never justifies ignoring safety; Article 22 prohibits driving in an over-fatigued state that affects safe driving.",
-                  "Article 27 of the Pre-hospital Medical Emergency Care Management Measures constrains emergency centers (stations) and network hospitals from using their ambulances for non-pre-hospital-emergency services, and other units and individuals from using ambulances to provide pre-hospital medical emergency care. Not all non-emergency transport follows from this as illegal, and 120 emergency vehicles must not be mixed with non-emergency transport business; the target institution, service, and vehicle permits are checked against local official rules.",
-                  "Moving, basic first aid, or restraint is checked against one's own training, qualifications, and institutional authority; paper works authorize no actual operations."
+                  "Jinan training",
+                  "Jinan’s health commission says drivers need a licence matching the vehicle and at least three years’ driving experience. The employer arranges training and assessment through the city emergency center after hiring. This is a local example.",
+                  "Check the relevant locality."
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "Interpretation boundary of the task interests RSC",
-                  "The O*NET interest order RSC (Realistic, Social, Conventional) describes occupational task tendencies and is not a personal diagnosis.",
-                  "86% daily contact with disease or infection and 77% work weeks exceeding 40 hours are US occupational respondent descriptions, not Chinese shift schedules or disease risk rates.",
-                  "This page's fit judgments are editorial suggestions and do not screen by type, IQ, or personality scores."
+                  "Beijing staffing procurement",
+                  "The Mentougou Hospital 120 subcenter in Beijing procured two years of driver staffing. The tender budget was CNY 2.11 million; the August 27 award was CNY 2,102,394.24. Both are project amounts and do not establish individual wages or current vacancies.",
+                  "Look for an individual posting if applying."
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "Boundary of technology lists and hiring mentions",
-                  "The O*NET software list includes email, computer-aided dispatch, mapping, office suites, spreadsheets, and word-processing tools; a listing is not a usage rate.",
-                  "Hot Technologies lists Excel, Office, Outlook, and Word, with all 2025 US ad shares Not available; they cannot be called this occupation's penetration rates or software hard requirements.",
-                  "The target institution's actual vehicles, systems, equipment, and training are checked against official position information."
+                  "Licence and work scope",
+                  "Check the vehicle class and employer training.",
+                  "Check driving and medical authority separately."
                 ]
               }
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.path.employer-evidence.1",
           "source_refs": [
-            "editor",
-            "privacy",
-            "operations",
-            "facilities",
+            "amb-shenzhen",
             "jinan-driver-2026",
-            "cnems",
-            "cntraffic",
-            "cn-guidance-2020",
-            "credential-reform"
+            "amb-beijing",
+            "amb-award"
           ],
           "title": "Position materials and entry verification (not hiring statistics)",
           "type": "cards"
@@ -29389,46 +29374,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Model A: complete fictional materials",
-                  "Model A is an editorially designed fictional crew-record verification exercise observing only data attribution, missing items, and modification trails. The exercise fields and criteria are not actual vehicle release, patient transport, or clinical procedures; the whole exercise is on paper and touches no real vehicles, patients, or equipment.",
-                  "All materials: target task T-A and target vehicle V-A. The old v1 table had only task, vehicle number, and handover fields and is void; v2 requires five items simultaneously: task T-A, vehicle V-A, complete inspection records, no defects or defects recorded with professional recheck closed, and the handover recipient recorded. Only data satisfying the exercise is verified, and real-vehicle availability is not judged from it.",
-                  "Original R1: T-A / V-A / inspection complete / no defects / handover J1 / recording time 12 minutes. R2: T-B / V-A / inspection complete / no defects / handover J2 / recording time 18 minutes. R3: T-A / V-A / inspection incomplete / stretcher-lock defect awaiting professional recheck / handover J3 / recording time 10 minutes.",
-                  "Feedback F1 only corrects R2's task T-B to T-A; feedback F2 only completes R3's inspection records, with the defect still awaiting professional recheck. Neither feedback carries a timestamp, and none may be invented; F2 must not be read as a repair or release authorization."
+                  "Materials | Three fictional records",
+                  "E1: The handover is for V-12. The crew lead follows up on equipment gaps.",
+                  "E2: At 18:30 the V-12 record says the spare restraint strap is unverified. E3: An 18:35 addendum says the strap was checked on V-21."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Three-state verification task and reference answers",
-                  "Task: verify the five items state by state across original, after F1, and after F2, listing records eligible for summarization and blocking reasons; sum only the recording times of eligible records.",
-                  "Reference answers: originally only R1 is eligible, 1 record at 12 minutes; R2's task is wrong and R3's inspection is incomplete with the defect awaiting recheck. After F1, R1/R2 are eligible, 2 records at 30 minutes; R3 is still blocked by two items. After F2, still only R1/R2, 2 records at 30 minutes; R3's inspection is complete but the defect is not closed.",
-                  "These minutes are a verification total of fictional recording times, not response times, vehicle-release deadlines, or actual task performance; the 12+18+10=40-minute result must not be treated as a summarizable outcome."
+                  "Task | Make a handover table",
+                  "Record the target vehicle, the two timestamps, what remains unverified and who owns the follow-up.",
+                  "Use only the exercise records. Write two sentences before reading the sample."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Two feedback rounds and modification trails",
-                  "When handling F1, save the old T-B and new T-A separately with the F1 grounds and the summarization change; when handling F2, save the inspection from incomplete to complete and keep the defect awaiting professional recheck. Original records are not overwritten.",
-                  "The logs must be two entries pointing to the record, field, before/after values, and feedback; with no timestamp, write 'not provided'. The v1/v2 version matrix is saved separately, and the voided three-field table must not be carried over to include R3.",
-                  "The handover carries queries: who rechecks R3's stretcher-lock defect, when, with what result and evidence, and whether it satisfies the target institution's actual requirements; if the exercise does not answer, leave it as to be confirmed and do not fill in 'already repaired' yourself."
+                  "Sample | To the crew lead",
+                  "The V-12 strap is unverified as of 18:30, and the 18:35 addendum refers to V-21.",
+                  "Please confirm the V-12 record and update the result; leave it pending for now."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Four reference deliverables",
-                  "Submit four works: original records and version matrix, the three-state five-item verification table, the two F1/F2 modification logs, and the handover summary including R3's open queries.",
-                  "Only data verification, record honesty, and communication preparation are validated; no driving, moving, repair, first-aid, or hiring qualification is proven. On-scene training and practical assessments must be completed in formal position systems."
+                  "Self-check and limits",
+                  "Keep both times, the vehicle IDs, the pending status and the owner. Evidence for another vehicle does not close the gap.",
+                  "Paper only. Do not inspect a vehicle, lift anyone, handle patient information or contact dispatch."
                 ]
               }
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.path.entry-work-sample-data.1",
           "source_refs": [
-            "operations"
+            "editor"
           ],
-          "title": "Entry exercise: fictional crew records and an unclosed defect",
+          "title": "AM-12 | Check vehicle records and hand over",
           "type": "cards"
         },
         {
@@ -29439,42 +29420,36 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Work one: original materials and version matrix",
-                  "Keep R1/R2/R3 and the two feedback entries; list v1's voiding and v2's five rules, noting that the fictional records and fields are not real compliance standards.",
-                  "Additionally list official sources for the target position's jurisdiction, driving and in-vehicle duties, vehicle permits, and training requirements; unknown individual qualifications are not filled in."
+                  "Handover table",
+                  "Vehicle, time, pending item and owner."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Work two: three-state verification and modification logs",
-                  "Each row shows the five criteria, blocking items, and eligibility status: originally 1 record at 12 minutes, after F1 2 records at 30 minutes, and after F2 still 2 records at 30 minutes.",
-                  "The two logs keep the old values, new values, and F1/F2; R3's defect awaiting recheck must not be overwritten by the complete records, and timestamps are written as not provided."
+                  "Evidence check",
+                  "Keep records for the two vehicles separate."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Work three: one-page handover summary",
-                  "State the target T-A/V-A, the use of v2, the eligible R1/R2, and R3's unclosed defect; attach query items on who rechecks, when, with what result, and what evidence.",
-                  "Fictional recording times do not indicate real-vehicle release, emergency performance, or driving ability; professional judgments absent from the exercise are not filled in."
+                  "Two-sentence handover",
+                  "Keep the pending status and next owner."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Review and personal choice",
-                  "The reviewer recomputes from the exercise text alone the 1 → 2 → 2 records and the 12 → 30 → 30 minutes, and checks the two logs and R3's unclosed reason.",
-                  "Reproducing the results only proves the exercise was completed; review whether you are willing to check missing items, report anomalies, and train per formal procedures long term, and do not predict hiring from the exercise."
+                  "Next step",
+                  "Choose a route to explore."
                 ]
               }
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.path.entry-portfolio.1",
           "source_refs": [
-            "operations",
-            "cntraffic",
-            "cnems"
+            "editor"
           ],
           "title": "What verifiable work materials can be prepared at entry?",
           "type": "cards"
@@ -29539,60 +29514,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Read the exercise and check the position",
-                  "Read all of model A, list the target T-A/V-A, v1's voiding, and v2's five rules; additionally list the target jurisdiction's driving, stretcher, and medical-duty verification items."
+                  "Read the roles",
+                  "Separate driving, stretcher support and medical rescue."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Preserve the original materials",
-                  "Copy the three records verbatim, marking R2's task error and R3's two unmet items; do not modify old values or add repair or release conclusions."
+                  "Check a posting",
+                  "Choose a location and note licence, experience and employer training."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Recompute the original state",
-                  "Verify the five items row by row: only R1 is eligible, 1 record at 12 minutes; check R2's and R3's blocking reasons, with the minutes only a fictional record check."
+                  "Read the handover",
+                  "Identify the target vehicle and the responsible role."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Handle F1",
-                  "Save R2's correction from T-B to T-A and the F1 grounds separately: R1/R2 eligible, 2 records at 30 minutes; R3 still has the incomplete inspection and the defect awaiting recheck."
+                  "Compare records",
+                  "Keep vehicle IDs and times separate."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Handle F2",
-                  "Add R3's inspection records but keep the defect awaiting professional recheck: still 2 records at 30 minutes; complete data must not be equated with a closed defect."
+                  "Write two sentences",
+                  "Report only the status supported by the exercise."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Form the handover works",
-                  "Complete the two modification logs and the queries on R3's rechecker, time, result, and evidence; organize the original materials, version matrix, three-state table, and summary."
+                  "Review it yourself",
+                  "Check vehicle IDs, times and pending items against the sample. Record one correction."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Independent recomputation and choice",
-                  "Recompute from the exercise text alone the 1 → 2 → 2 records and 12 → 30 → 30 minutes; then check official position conditions and review meticulousness and communication preparation; actual skills require formal training and assessment."
+                  "Choose a next step",
+                  "Pick driving, support or a pause and record any requirements you still need to check."
                 ]
               }
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.path.seven-day-trial.1",
           "source_refs": [
-            "operations",
-            "cn-guidance-2020"
+            "editor"
           ],
-          "title": "Seven-day experience: complete one full task loop of an ambulance driver-attendant with fictional materials",
+          "title": "Seven days: check the role, compare records and decide",
           "type": "timeline"
         },
         {
@@ -29600,21 +29574,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Does model A preserve the original records, v1's voiding, and v2's five rules?",
-              "Can the 1 → 2 → 2 records and 12 → 30 → 30 minutes be recomputed from the exercise text, with an explanation of why F2 did not close R3's defect?",
-              "Do the logs keep the T-B-to-T-A change and the inspection from incomplete to complete, with unknown feedback timestamps left blank?",
-              "Does the handover list R3's professional rechecker, time, result, and evidence as open queries, rather than writing 'already repaired' itself?",
-              "Does the target position involve driving? Non-driving in-vehicle positions do not uniformly require a driver's license; medical, medical-rescue-attendant, and stretcher duties are checked separately.",
-              "Are regional training rules and vehicle service permits checked against official sources, with non-emergency transport not diverting 120 emergency vehicles?",
-              "Completing the works only demonstrates paper preparation; further driving, moving, repair, or first-aid training and assessments must take place in formal systems."
+              "Explore driving if your handover matches the vehicle and times and you have identified the relevant licence and training route.",
+              "Ask the employer about shifts, assessment and training after hiring.",
+              "Explore attendant work if equipment records and handovers interest you more; check local training and physical requirements.",
+              "Ask whether the attendant role includes driving and confirm its duties.",
+              "Pause if the vehicle class or authorization is unclear; check local rules and the actual posting.",
+              "If you used the V-21 addendum to close V-12, use the sample to check your work again.",
+              "Record one condition you still need to confirm before deciding."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.path.seven-day-decision.1",
           "source_refs": [
-            "operations",
-            "cnems",
-            "cntraffic",
-            "jinan-driver-2026"
+            "editor"
           ],
           "title": "How to decide whether to continue after seven days",
           "type": "list"
@@ -29720,7 +29691,7 @@
               "Mainland China's Pre-hospital Medical Emergency Care Management Measures Articles 19–20 distinguish physicians, nurses, and medical rescue attendants; medical rescue attendants may perform prescribed auxiliary work such as on-scene initial first aid and transport escort. Article 19 as originally written mentions the national vocational qualification and municipal emergency-center pre-job assessment requirements; the vocational-qualification evaluation system has since been reformed, and the current form of proof must be checked with competent authorities and regular evaluation institutions — the article must not be turned into a universal certificate requirement for all drivers or stretcher bearers. The 2020 guidance, item (Eight), separately calls for strengthening the business training and assessment of dispatchers, drivers, and stretcher bearers. Driving positions also require a driver's license for the matching vehicle type; driving experience, health, probation, and refresher conditions are checked item by item against the specific position.",
               "China's Road Traffic Safety Law Article 53: ambulances performing emergency tasks may use sirens and warning lights and enjoy the passage exceptions listed in that article on the premise of ensuring safety; non-emergency tasks must not use sirens or warning lights and do not enjoy that priority. Being in a hurry never justifies ignoring safety; Article 22 prohibits driving in an over-fatigued state that affects safe driving.",
               "Article 27 of the Pre-hospital Medical Emergency Care Management Measures constrains emergency centers (stations) and network hospitals from using their ambulances for non-pre-hospital-emergency services, and other units and individuals from using ambulances to provide pre-hospital medical emergency care. Not all non-emergency transport follows from this as illegal, and 120 emergency vehicles must not be mixed with non-emergency transport business; the target institution, service, and vehicle permits are checked against local official rules.",
-              "The 2022 Occupational Classification Dictionary 4-02-02 covers road transport service personnel and 4-02-02-01 is passenger-vehicle drivers, with listed job types not including ambulance driver separately; 4-14-01-01 medical clinical auxiliary service workers includes medical rescue attendants among its job types. This is only a relevant task-classification contrast: the US 53-3011 cannot be precisely mapped onto a single Chinese subcategory, still less does it grant driving or medical authority.",
+              "The 2022 Occupational Classification Dictionary 4-02-02 covers road transport service personnel and 4-02-02-01 is passenger-vehicle drivers; 4-14-01-01 medical clinical auxiliary service workers includes medical rescue attendants among its job types. This is only a relevant task-classification contrast: the US 53-3011 cannot be precisely mapped onto a single Chinese subcategory, still less does it grant driving or medical authority.",
               "Regional example: the Jinan Municipal Health Commission's reply of 2026-07-06 states that in that city drivers are hired by medical institutions, which then arrange unified pre-job training and assessment, and individuals cannot apply on their own for the city's ambulance-driver work qualification certificate; the driver's license must match the vehicle and have at least three years of driving experience. This applies only to that city's statement and cannot be extrapolated to a nationally uniform driving-experience requirement or application method."
             ]
           },
@@ -29741,16 +29712,19 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Historical hiring sample of 1 notice: Wuxi Emergency Center, published on the official site 2023-12-25, applications closing 2024-01-05, now expired; 6 emergency-driver positions, senior high school or above, with the position table requiring a class-B or above driving license and A1 allowing age relaxation. The age appears as 35/40 years in the position table versus the basic conditions; this must not be reconciled into a current uniform condition and requires the publishing unit's explanation.",
-              "That assessment was skills operation and interview at 50% each, with a passing total of 60; it only evidences that historical announcement's conditions and method, not a national threshold, current vacancies, or a wage distribution. The announcement has no usable pay figures, and this page leaves them blank rather than filling them in. Source: https://wjw.wuxi.gov.cn/doc/2023/12/25/4143115.shtml",
-              "Search scope: 2026-10-03 searches of official sites for 'emergency center hiring driver driver's license', selecting the 1 driver announcement actually read; dispatcher-only, fire-driver, and third-party reposts excluded. National demand cannot be inferred from a single sample."
+              "In 2026 Dapeng Hospital, part of Shenzhen Second People’s Hospital, advertised two ambulance driver jobs. It required a junior college qualification or higher, a class B driver’s licence and at least five years of driving experience. Applications closed April 30. The notice did not list pay; its licence requirement is specific to this employer.",
+              "Jinan’s health commission says drivers need a licence matching the vehicle and at least three years’ driving experience. The employer arranges training and assessment through the city emergency center after hiring. This is a local example.",
+              "The Mentougou Hospital 120 subcenter in Beijing procured two years of driver staffing. The tender budget was CNY 2.11 million; the August 27 award was CNY 2,102,394.24. Both are project amounts and do not establish individual wages or current vacancies."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "wuxi-recruitment-2023"
+            "amb-shenzhen",
+            "jinan-driver-2026",
+            "amb-beijing",
+            "amb-award"
           ],
-          "title": "Hiring-sample note",
+          "title": "Mainland examples: recruitment, training and procurement",
           "type": "notice"
         },
         {
@@ -29765,7 +29739,7 @@
                 "url": "https://www.onetonline.org/link/details/53-3011.00"
               },
               {
-                "entity": "BLS2025, month 5 (May) national wage percentiles shown by O*NET (53-3011)",
+                "entity": "BLS May 2025 national wage percentiles shown by O*NET (53-3011)",
                 "id": "link-2",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localwages/53-3011.00"
@@ -30014,7 +29988,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS2025, month 5 (May) national wage percentiles shown by O*NET (53-3011); this link provides no EP employment projections."
+              "BLS May 2025 national wage percentiles shown by O*NET (53-3011); this link provides no EP employment projections."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.path.career-path-block.25",
@@ -31721,10 +31695,14 @@
           "data": {
             "entries": [
               {
-                "answer": "US tasks include driving or assisting driving, patient moving, vehicle cleaning and restocking, reporting and handovers, and basic first aid and vital-sign checks within the trained scope. The US occupation 53-3011.00 explicitly excludes EMTs (29-2042), but O*NET tasks also list basic first aid, assisting EMTs, and pre- and post-transport vital-sign checks; 'excluding EMTs' does not mean all basic first aid is forbidden. An individual's actual practice must be checked against state rules, training, qualifications, and institutional authorization; no medical authority comes from the occupational classification alone.",
+                "answer": "This role drives or assists on an ambulance and helps prepare the vehicle, restock supplies and hand over information. U.S. occupation 53-3011 excludes EMTs. Duties depend on training, local rules and employer authorization. Mainland driving, stretcher support and medical rescue roles have separate requirements.",
                 "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.faq.1",
                 "question": "What do ambulance drivers and attendants do every day?",
-                "question_key": "career.faq.ambulance-drivers-and-attendants-except-emergency-medical-technicians.daily-work"
+                "question_key": "career.faq.ambulance-drivers-and-attendants-except-emergency-medical-technicians.daily-work",
+                "source_refs": [
+                  "onet",
+                  "cnems"
+                ]
               },
               {
                 "answer": "The US occupation 53-3011.00 explicitly excludes EMTs (29-2042), but O*NET tasks also list basic first aid, assisting EMTs, and pre- and post-transport vital-sign checks; 'excluding EMTs' does not mean all basic first aid is forbidden. An individual's actual practice must be checked against state rules, training, qualifications, and institutional authorization; no medical authority comes from the occupational classification alone. Chinese pre-hospital emergency physicians, nurses, medical rescue attendants, drivers, and stretcher bearers' duties are checked separately, and the US classification is not directly converted into Chinese qualifications.",
@@ -31739,22 +31717,39 @@
                 "question_key": "career.faq.ambulance-drivers-and-attendants-except-emergency-medical-technicians.ai"
               },
               {
-                "answer": "Insufficient evidence: no China precise wage distribution for this occupation was obtained. No national wage distribution for China's ambulance drivers and attendants exact occupation was obtained this round; the NBS 2025 tables do not list this occupation. The health-and-social-work non-private 146,266 yuan/year and the transportation-warehousing-postal non-private 133,981 yuan/year figures are multi-occupation industry averages, not this occupation's wages.",
+                "answer": "The Shenzhen posting does not list pay, and the Beijing contract budget is not a wage. Industry averages only provide context.",
                 "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.faq.4",
                 "question": "How should mainland China wages be understood?",
-                "question_key": "career.faq.ambulance-drivers-and-attendants-except-emergency-medical-technicians.china-pay"
+                "question_key": "career.faq.ambulance-drivers-and-attendants-except-emergency-medical-technicians.china-pay",
+                "source_refs": [
+                  "amb-shenzhen",
+                  "jinan-driver-2026",
+                  "amb-beijing",
+                  "amb-award",
+                  "nbs"
+                ]
               },
               {
-                "answer": "US scope: the 2025, month 5 (May) 53-3011 median annual wage is 35,450 USD (17.04 USD per hour), the 10th percentile 27,350 USD, the 25th percentile 30,750 USD, the 75th percentile 38,410 USD, and the 90th percentile 45,960 USD (BLS Occupational Employment and Wage Statistics, OEWS, shown via O*NET). Percentiles are positions in a statistical distribution and do not represent starting salaries; this occupation excludes emergency medical technicians.",
+                "answer": "For U.S. 53-3011 in May 2025, median wages were $35,450 annually and $17.04 hourly. Annual P10, P25, P50, P75 and P90 were $27,350, $30,750, $35,450, $38,410 and $45,960. The mainland posting did not list pay; a procurement budget is not a wage.",
                 "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.faq.5",
                 "question": "What is this occupation's wage in the US?",
-                "question_key": "career.faq.ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-pay"
+                "question_key": "career.faq.ambulance-drivers-and-attendants-except-emergency-medical-technicians.us-pay",
+                "source_refs": [
+                  "bls",
+                  "oews",
+                  "amb-shenzhen",
+                  "amb-beijing"
+                ]
               },
               {
-                "answer": "The O*NET question asks how much education new hires need to perform this occupation's work: 36% answered a post-secondary non-degree certificate, 24% a high school diploma or equivalent, and 15% less than high school; this is not the incumbent education composition or a statutory entry threshold. The Job Zone 1–2 description of several days to one year of training is a group-level general description and must not be taken as this occupation's uniform training period. Mainland China's Pre-hospital Medical Emergency Care Management Measures Articles 19–20 distinguish physicians, nurses, and medical rescue attendants; medical rescue attendants may perform prescribed auxiliary work such as on-scene initial first aid and transport escort. Article 19 as originally written mentions the national vocational qualification and municipal emergency-center pre-job assessment requirements; the vocational-qualification evaluation system has since been reformed, and the current form of proof must be checked with competent authorities and regular evaluation institutions — the article must not be turned into a universal certificate requirement for all drivers or stretcher bearers. The 2020 guidance, item (Eight), separately calls for strengthening the business training and assessment of dispatchers, drivers, and stretcher bearers. Driving positions also require a driver's license for the matching vehicle type; driving experience, health, probation, and refresher conditions are checked item by item against the specific position. Regional example: the Jinan Municipal Health Commission's reply of 2026-07-06 states that in that city drivers are hired by medical institutions, which then arrange unified pre-job training and assessment, and individuals cannot apply on their own for the city's ambulance-driver work qualification certificate; the driver's license must match the vehicle and have at least three years of driving experience. This applies only to that city's statement and cannot be extrapolated to a nationally uniform driving-experience requirement or application method.",
+                "answer": "Jinan’s health commission says drivers need a licence matching the vehicle and at least three years’ driving experience. The employer arranges training and assessment through the city emergency center after hiring. This is a local example. In 2026 Dapeng Hospital, part of Shenzhen Second People’s Hospital, advertised two ambulance driver jobs. It required a junior college qualification or higher, a class B driver’s licence and at least five years of driving experience. Applications closed April 30. The notice did not list pay; its licence requirement is specific to this employer.",
                 "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.faq.6",
                 "question": "How can one become an ambulance driver or attendant in this occupation?",
-                "question_key": "career.faq.ambulance-drivers-and-attendants-except-emergency-medical-technicians.education"
+                "question_key": "career.faq.ambulance-drivers-and-attendants-except-emergency-medical-technicians.education",
+                "source_refs": [
+                  "jinan-driver-2026",
+                  "amb-shenzhen"
+                ]
               },
               {
                 "answer": "Mainly unsafe driving and emergency-vehicle rule violations, improper patient lifting and securing, insufficient protection against infection and contaminant exposure, improper patient restraint and conflict handling, inadequate vehicle and equipment readiness, and incomplete records and handovers. Obeying road-traffic safety laws and regulations, lifting and securing per coordinated roles and standards, using protective equipment and performing cleaning-disinfection per rules, handling conflicts per institutional standards and requesting support, and completing inspections and records per checklists are the basic control measures; specific rules follow law, standards, and institutional rules.",
@@ -31763,10 +31758,13 @@
                 "question_key": "career.faq.ambulance-drivers-and-attendants-except-emergency-medical-technicians.risk"
               },
               {
-                "answer": "BLS Table 1.2 US exact occupation 53-3011: 14,300 employed in 2025, projected 14,100 in 2035; 2025–2035 growth rate -1.3%, official net decrease 200, average annual openings 1,400. Headcounts are converted from the official thousands unit; openings include demand from turnover and exits and do not equal net new jobs. The table does not prove the decline is caused by automation or any service model, and cannot be extrapolated to mainland China or to individual hiring.",
+                "answer": "For U.S. BLS occupation 53-3011, employment is projected to fall from 14,300 in 2025 to 14,100 in 2035, down 1.3% or about 200 jobs. Around 1,400 openings per year include replacement needs.",
                 "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.faq.8",
                 "question": "What are the US employment prospects?",
-                "question_key": "career.faq.ambulance-drivers-and-attendants-except-emergency-medical-technicians.outlook"
+                "question_key": "career.faq.ambulance-drivers-and-attendants-except-emergency-medical-technicians.outlook",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
                 "answer": "Mainly in ambulances and at transport scenes: 86% are exposed to disease or infection daily, 87% work at very close distances, 21% contact contaminants daily, and 24% contact hazardous equipment daily; 66% consider precision or accuracy extremely important, 60% consider error consequences extremely serious, and 93% make decisions every day; 77% work weeks exceed 40 hours and 90% have regular fixed schedules; 27% need to deal with violent or physically aggressive persons at least once a week (O*NET 53-3011.00 respondent shares).",
@@ -31819,7 +31817,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET53-3011.00 identity, tasks, and respondent context; OEWS2025, month 5 (May) national wage percentiles and methodology; EP2025–2035 projections; China's pre-hospital management measures, the 2021 revision of the traffic law, the 2020 guidance, the 2022 occupational classification, NBS 2025 wages, and the Jinan 2026 driver-training reply; the Wuxi 2023 historical hiring sample."
+              "O*NET53-3011.00 identity, tasks, and respondent context; May 2025 OEWS national wage percentiles and methodology; EP2025–2035 projections; China's pre-hospital management measures, the 2021 revision of the traffic law, the 2020 guidance, the 2022 occupational classification, NBS 2025 wages, and the Jinan 2026 driver-training reply; the Wuxi 2023 historical hiring sample."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.sources.source-card.2",
@@ -31845,7 +31843,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Materials checked on 2026-10-08; wages as of month 5 (May), 2025; industry distribution 2025; employment projections 2025–2035; legal and regional-example data periods noted separately."
+              "Materials checked on 2026-10-08; wages as of May 2025; industry distribution 2025; employment projections 2025–2035; legal and regional-example data periods noted separately."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.sources.source-card.3",
@@ -31859,7 +31857,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no US industry-by-industry wage median for this occupation was obtained this round. Wages are the OEWS2025, month 5 (May) national wage-and-salary-employee percentiles; employment is EP2025 and the 2025–2035 projections, and the two programs are not mixed. The occupation 53-3011 excludes EMTs, but basic-first-aid tasks exist and specific authority is checked separately. No US industry-by-industry annual wage median was obtained this round: the official index has a download entry, and a failed download does not prove the government published nothing. China provides only industry or occupational-group averages, which cannot be taken as this occupation's median; the 2022 classification does not correspond one-to-one with pre-hospital personnel categories, and current qualification proof and local rules are checked separately. Historical hiring samples do not mean applications are open now or indicate national demand."
+              "Insufficient evidence: no US industry-by-industry wage median for this occupation is given in the cited sources. Wages are the May 2025 OEWS national wage-and-salary-employee percentiles; employment is EP2025 and the 2025–2035 projections, and the two programs are not mixed. The occupation 53-3011 excludes EMTs, but basic-first-aid tasks exist and specific authority is checked separately. No US industry-by-industry annual wage median is given in the cited sources: the official index has a download entry, and a failed download does not prove the government published nothing. China provides only industry or occupational-group averages, which cannot be taken as this occupation's median; the 2022 classification does not correspond one-to-one with pre-hospital personnel categories, and current qualification proof and local rules are checked separately. Historical hiring samples do not mean applications are open now or indicate national demand."
             ]
           },
           "id": "ambulance-drivers-and-attendants-except-emergency-medical-technicians.sources.source-card.4",
@@ -31903,19 +31901,19 @@
                 "entity": "MBTI personality test",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram personality test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the ambulance drivers and attendants occupation page",
@@ -31948,9 +31946,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "Occupation page updated 2026",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet",
                 "limitation": "Occupational identity and tasks; the current page's employment is 2025–2035, with wages and projections checked separately per OEWS and EP, and no income inferred from the task survey.",
                 "market": "United States",
@@ -31961,28 +31959,28 @@
                 "url": "https://www.onetonline.org/link/summary/53-3011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "OEWS2025, month 5 (May)",
-                  "Reviewed this round on 2026-10-03"
+                  "Hourly median $17.04; OEWS survey employment estimate 12,630.",
+                  "Hourly median $17.04; OEWS survey employment estimate 12,630."
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "bls",
-                "limitation": "The historical OEWS original entry is retained; this round's values were verified against the readable O*NET national percentiles and are not used for EP employment or projections",
+                "limitation": "OEWS survey employment is separate from EP base-year employment.",
                 "market": "United States",
-                "name": "BLS Occupational Employment and Wage Statistics (OEWS): 53-3011",
-                "period": "OEWS2025, month 5 (May)",
+                "name": "BLS OEWS: national hourly wages for 53-3011",
+                "period": "May 2025",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/oes/current/oes533011.htm"
+                "url": "https://www.bls.gov/news.release/ocwage.t01.htm"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
                   "2025 employment; 2025–2035 projections",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "ep",
                 "limitation": "Exact 53-3011; thousands-unit conversion, average annual openings not equal to net new jobs, and no proof of automation causation",
                 "market": "United States",
@@ -31995,15 +31993,15 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Month 5 (May), 2025",
-                  "Reviewed this round on 2026-10-03"
+                  "May 2025",
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "oews",
                 "limitation": "National annual and hourly wage percentiles at the 10/25/50/75/90 percentiles; not starting salaries, personal take-home pay, or industry wages",
                 "market": "United States",
-                "name": "BLS 2025, month 5 (May) wage percentiles shown by O*NET (53-3011.00)",
-                "period": "Month 5 (May), 2025",
+                "name": "BLS May 2025 wage percentiles shown by O*NET (53-3011.00)",
+                "period": "May 2025",
                 "publisher": "O*NET OnLine (BLS OEWS data)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-3011.00"
@@ -32012,7 +32010,7 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "2025; published 2026-05-15",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
                 "evidence_type": "industry_proxy",
                 "id": "nbs",
@@ -32028,9 +32026,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "Issued 2013-11-29; effective 2014-02-01",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "cnems",
                 "limitation": "Articles 19–20 and 27; personnel categories and institutional vehicle limits; the qualification original text is read together with the current system and is not a universal certificate requirement for all drivers",
                 "market": "Mainland China",
@@ -32041,30 +32039,30 @@
                 "url": "https://www.nhc.gov.cn/wjw/c100221/202201/26ea3c97e82d466f9aa2b4a9901ae187/files/%E9%99%A2%E5%89%8D%E5%8C%BB%E7%96%97%E6%80%A5%E6%95%91%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95.pdf"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Third amendment of 2021-04-29; official repost of 2026-06-02",
-                  "Reviewed this round on 2026-10-03"
+                  "Article 19: the licence must cover the vehicle class.",
+                  "Articles 22 and 53: safe driving and conditions for emergency tasks."
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "cntraffic",
                 "limitation": "Articles 19, 22, and 53; the emergency-task passage exceptions take ensuring safety as the premise, and non-emergency tasks carry no priority",
                 "market": "Mainland China",
                 "name": "\"Road Traffic Safety Law of the People's Republic of China\"",
-                "period": "Third amendment of 2021-04-29; official repost of 2026-06-02",
+                "period": "Third amendment, 2021",
                 "publisher": "Standing Committee of the National People's Congress",
                 "scope": "contextual",
-                "url": "https://www.xjkz.gov.cn/xjkz/c102116/202606/3e969421cc9a4468b5e952da2b13b55c.shtml"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_79dc72ea621f4a9b8adec327abf5d0e1.html"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
                   "2022 edition",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "cnclass",
-                "limitation": "PDF pages 194–195 related road transport entries and pages 287–288 medical auxiliary job types; not a US exact-occupation correspondence or an authority permit",
+                "limitation": "Printed pp. 188 and 280–281 give related classifications, not work authorization or a cross-country equivalence.",
                 "market": "Mainland China",
                 "name": "Occupational Classification Dictionary 2022: road transport and medical clinical assistance entries",
                 "period": "2022 edition",
@@ -32076,9 +32074,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "privacy",
                 "limitation": "Used for work-context shares (infection exposure, physical proximity, precision, and work hours).",
                 "market": "United States",
@@ -32092,9 +32090,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "Hiring ads from 2025-01-01 to 2025-12-31",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "facilities",
                 "limitation": "Excel, Office, Outlook, and Word percentages all Not available; software entries are not adoption rates",
                 "market": "United States",
@@ -32108,9 +32106,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "operations",
                 "limitation": "Used for the task list and work activities.",
                 "market": "United States",
@@ -32124,9 +32122,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "hr",
                 "limitation": "Used for shares such as work-week length, schedule regularity, and violence and infection exposure.",
                 "market": "United States",
@@ -32140,9 +32138,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "2025; published 2026-05-15",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "health",
                 "limitation": "Total-wage, pre-tax, and coverage definitions in this statistical note; not a basis for the US OEWS methodology",
                 "market": "Mainland China",
@@ -32156,9 +32154,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "ilo",
                 "limitation": "Used for the RSC (Realistic, Social, Conventional) interest-code explanation.",
                 "market": "United States",
@@ -32169,28 +32167,28 @@
                 "url": "https://www.onetonline.org/link/summary/53-3011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Crew, vehicles, records and defects are fictional.",
+                  "Crew, vehicles, records and defects are fictional."
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "New-hire education-need answers and the Job Zone group's general description, not incumbent education or a statutory threshold",
+                "limitation": "No real vehicle, stretcher, patient or communication equipment.",
                 "market": "United States",
-                "name": "O*NET OnLine 53-3011.00 details (education and training requirements)",
-                "period": "O*NET occupation page updated 2026",
-                "publisher": "O*NET OnLine",
-                "scope": "contextual",
-                "url": "https://www.onetonline.org/link/details/53-3011.00"
+                "name": "AM-12 | Check vehicle records and hand over",
+                "period": "Fictional paper exercise",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/en/career/jobs/ambulance-drivers-and-attendants-except-emergency-medical-technicians#career-content-path"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "nist",
                 "limitation": "Used for the occupation overview and related occupation entries.",
                 "market": "United States",
@@ -32204,9 +32202,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "arxiv",
                 "limitation": "Used for task and duty reference.",
                 "market": "United States",
@@ -32220,9 +32218,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "weforum",
                 "limitation": "Used for task and dispatch-procedure explanations.",
                 "market": "United States",
@@ -32236,9 +32234,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "employer",
                 "limitation": "Reporting and records in occupational tasks, not specific employer hiring announcements",
                 "market": "United States",
@@ -32252,9 +32250,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "purchasing-managers",
                 "limitation": "Used for task-list reference.",
                 "market": "United States",
@@ -32268,9 +32266,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "r2-pay-1",
                 "limitation": "Used for task descriptions and duty boundaries.",
                 "market": "United States",
@@ -32284,9 +32282,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "r2-pay-2",
                 "limitation": "Used for occupation-attribute explanations.",
                 "market": "United States",
@@ -32300,9 +32298,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "r2-pay-3",
                 "limitation": "Used for data-scope explanations.",
                 "market": "United States",
@@ -32316,11 +32314,11 @@
                 "accessed_at": "2026-10-08",
                 "details": [
                   "Industry distribution 2025; page updated 2026",
-                  "Reviewed this round on 2026-10-08"
+                  "Accessed 2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "census",
-                "limitation": "The current page shows health care and social assistance at 71% and government at 15%; employment shares are not industry wages. The former 2024 figures of 75%/18% are kept only as prior records; no same-version historical snapshot was obtained this round, and the old values are not judged wrong from the new page.",
+                "limitation": "O*NET lists health care and social assistance and government among major employing industries. Employment does not establish industry pay.",
                 "market": "United States",
                 "name": "O*NET OnLine 53-3011.00 industry distribution",
                 "period": "Industry distribution 2025",
@@ -32332,9 +32330,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "msresearch",
                 "limitation": "Used for task and duty reference.",
                 "market": "United States",
@@ -32347,15 +32345,15 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Month 5 (May), 2025",
-                  "Reviewed this round on 2026-10-03"
+                  "May 2025",
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
                 "limitation": "Used for national wage percentile values and the data period.",
                 "market": "United States",
                 "name": "O*NET OnLine 53-3011.00 national wage percentiles page",
-                "period": "Month 5 (May), 2025",
+                "period": "May 2025",
                 "publisher": "O*NET OnLine (BLS OEWS data)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-3011.00"
@@ -32364,9 +32362,9 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "US 53-3011.00",
-                  "Reviewed this round on 2026-10-03"
+                  "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "archivists",
                 "limitation": "Used for inspection, cleaning-disinfection, and record processes.",
                 "market": "United States",
@@ -32382,7 +32380,7 @@
                   "Current methodology page",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "oews-methods",
                 "limitation": "Wage-and-salary employee coverage, wage composition, percentiles, and the 2080-hour statistical conversion; provides no industry medians",
                 "market": "United States",
@@ -32395,15 +32393,15 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Month 5 (May), 2025",
+                  "May 2025",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "oews-industry",
-                "limitation": "Insufficient evidence: no medians for the three listed industries were obtained this round. The index has download and data-query entries; this round's download tool errored and 403 was read directly, and no three-industry annual wage medians were obtained; this is not proof of non-publication",
+                "limitation": "Verify industry and occupation coverage before using industry estimates. The national median is not an industry wage.",
                 "market": "United States",
                 "name": "BLS OEWS 2025 industry index",
-                "period": "Month 5 (May), 2025",
+                "period": "May 2025",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/oes/2025/may/oessrci.htm"
@@ -32414,15 +32412,15 @@
                   "Issued 2020-09-17; reposted 2020-09-28",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "cn-guidance-2020",
-                "limitation": "Item (Eight) of the reposted full text was actually read, listing training separately for professionals and dispatchers, drivers, and stretcher bearers; no nationally uniform certificate is inferred from it. The original health-commission entry 412 is recorded, and the readable official version is used.",
+                "limitation": "Item 8 calls for training for drivers, stretcher attendants and dispatchers alongside training for clinical personnel. It does not establish a national driver credential.",
                 "market": "Mainland China",
                 "name": "Guidance on Further Improving Pre-hospital Medical Emergency Care Services",
                 "period": "Issued 2020-09-17; reposted by the Hunan Provincial Government 2020-09-28",
                 "publisher": "National Health Commission and eight other departments (reposted by the Hunan Provincial Government)",
                 "scope": "contextual",
-                "url": "https://www.hunan.gov.cn/zqt/zcsd/202009/t20200917_13771666.html"
+                "url": "https://www.gov.cn/gbgl/c7499189dd9745218442045e0fa84fcb/files/6daa25b99a0a4a1c854032818c198b1b.pdf"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32430,7 +32428,7 @@
                   "2021-12-03",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "credential-reform",
                 "limitation": "General skill-level evaluation reform and proof system; it is not claimed from this that the medical rescue attendant's specific qualification was cancelled",
                 "market": "Mainland China",
@@ -32441,19 +32439,19 @@
                 "url": "https://chinajob.mohrss.gov.cn/c/2021-12-03/333837.shtml"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2026-07-06",
-                  "Accessed 2026-10-03"
+                  "Jinan’s health commission says drivers need a licence matching the vehicle and at least three years’ driving experience. The employer arranges training and assessment through the city emergency center after hiring. This is a local example.",
+                  "The employer arranges training under the Jinan rules."
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "jinan-driver-2026",
-                "limitation": "Institution-arranged unified training and assessment after employment, a matching driver's license, and at least three years of driving experience; not a nationally uniform condition",
+                "limitation": "Applies to the Jinan example.",
                 "market": "Jinan, mainland China",
-                "name": "Jinan Municipal Health Commission: reply on handling the ambulance-driver work qualification",
+                "name": "Jinan Health Commission ambulance driver qualification guidance",
                 "period": "2026-07-06",
-                "publisher": "Jinan Municipal Health Commission",
-                "scope": "contextual",
+                "publisher": "Jinan Health Commission",
+                "scope": "exact",
                 "url": "https://www.jinan.gov.cn/col/col118356/art/2026/art_2dd84f7469a64b62a851203b048fd7ba.html"
               },
               {
@@ -32462,7 +32460,7 @@
                   "Published 2023-12-25; applications closing 2024-01-05",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "recruitment_proxy",
+                "evidence_type": "Recruitment notice",
                 "id": "wuxi-recruitment-2023",
                 "limitation": "1 historical announcement for 6 emergency-driver positions; the conditions and assessment method are a single-employer signal, the inconsistent age wording awaits the publisher's explanation, and there are no wage figures, so it cannot be taken as a current vacancy",
                 "market": "Wuxi, mainland China",
@@ -32478,7 +32476,7 @@
                   "Occupation page updated 2026",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-paramedic",
                 "limitation": "Duty comparison of the exact adjacent occupations; transfer distance is an editorial suggestion and does not prove individual license recognition",
                 "market": "United States",
@@ -32494,7 +32492,7 @@
                   "Occupation page updated 2026",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-emt",
                 "limitation": "Duty comparison of the exact adjacent occupations; transfer distance is an editorial suggestion and does not prove individual license recognition",
                 "market": "United States",
@@ -32510,7 +32508,7 @@
                   "Occupation page updated 2026",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-dispatch",
                 "limitation": "Duty comparison of the exact adjacent occupations; transfer distance is an editorial suggestion and does not prove individual license recognition",
                 "market": "United States",
@@ -32526,7 +32524,7 @@
                   "Occupation page updated 2026",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-orderly",
                 "limitation": "Duty comparison of the exact adjacent occupations; transfer distance is an editorial suggestion and does not prove individual license recognition",
                 "market": "United States",
@@ -32542,7 +32540,7 @@
                   "Occupation page updated 2026",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-nursing",
                 "limitation": "Duty comparison of the exact adjacent occupations; transfer distance is an editorial suggestion and does not prove individual license recognition",
                 "market": "United States",
@@ -32558,7 +32556,7 @@
                   "Occupation page updated 2026",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-truck",
                 "limitation": "Duty comparison of the exact adjacent occupations; transfer distance is an editorial suggestion and does not prove individual license recognition",
                 "market": "United States",
@@ -32574,7 +32572,7 @@
                   "Occupation page updated 2026",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-bus",
                 "limitation": "Duty comparison of the exact adjacent occupations; transfer distance is an editorial suggestion and does not prove individual license recognition",
                 "market": "United States",
@@ -32590,7 +32588,7 @@
                   "Occupation page updated 2026",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-industrial",
                 "limitation": "Duty comparison of the exact adjacent occupations; transfer distance is an editorial suggestion and does not prove individual license recognition",
                 "market": "United States",
@@ -32603,35 +32601,73 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "The education and state-licensure paragraphs were read this round",
+                  "Typical education and state licensure for EMTs and paramedics",
                   "Accessed 2026-10-03"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary document",
                 "id": "emt-ooh",
                 "limitation": "Adjacent medical professions' education, certification, and state licensure; not the education threshold for all 53-3011 drivers, and their combined wage and employment figures are not used.",
                 "market": "United States",
                 "name": "BLS OOH: EMT and paramedic education and licensure",
-                "period": "Current occupational handbook; verified 2026-10-03 this round",
+                "period": "Current occupational handbook; verified 2026-10-03",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/healthcare/emts-and-paramedics.htm"
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Vehicle dispatch and preparation | dispatch and inspection | respond per dispatch and check the vehicle, stretcher and securing devices, consumables, and disinfection status. — 25/100; weight=1/3; ambulance-drivers-and-attendants-except-emergency-medical-technicians.profile.responsibilities-block.1[0]",
-                  "Driving and transport | safe driving | drive the ambulance or assist the driver in transporting ill, injured, or recovering persons, obeying traffic laws and emergency-vehicle rules. — 25/100; weight=1/3; ambulance-drivers-and-attendants-except-emergency-medical-technicians.profile.responsibilities-block.1[2]",
-                  "Patient movement | stretcher and securing | place patients on stretchers and assist lifting them into the ambulance, restraining violent patients as needed. — 0/100; weight=1/3; ambulance-drivers-and-attendants-except-emergency-medical-technicians.profile.responsibilities-block.1[3]"
+                  "Tools can organize fictional records and flag gaps."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "Does not estimate job displacement.",
+                "name": "FermatMind: limits of crew record tools",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In 2026 Dapeng Hospital, part of Shenzhen Second People’s Hospital, advertised two ambulance driver jobs. It required a junior college qualification or higher, a class B driver’s licence and at least five years of driving experience. Applications closed April 30. The notice did not list pay; its licence requirement is specific to this employer."
+                ],
+                "evidence_type": "primary_document",
+                "id": "amb-shenzhen",
+                "limitation": "Historical recruitment by one hospital.",
+                "name": "Dapeng Hospital ambulance driver recruitment",
+                "period": "2026-02-26 / 2026-04-30",
+                "publisher": "Shenzhen Second People’s Hospital",
+                "scope": "recruitment_proxy",
+                "url": "https://www.szrch.com.cn/xxgk/rczp/content/post_1657260.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The Mentougou Hospital 120 subcenter in Beijing procured two years of driver staffing. The tender budget was CNY 2.11 million; the August 27 award was CNY 2,102,394.24. Both are project amounts and do not establish individual wages or current vacancies."
+                ],
+                "evidence_type": "primary_document",
+                "id": "amb-beijing",
+                "limitation": "Procurement project, not individual pay.",
+                "name": "Mentougou Hospital 120 subcenter driver staffing procurement",
+                "period": "2026-07-15",
+                "publisher": "Beijing Public Resources Trading Service Platform",
+                "scope": "contextual",
+                "url": "https://ggzyfw.beijing.gov.cn/jyxxcggg/20260715/5624854.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The August 27, 2026 notice reports a CNY 2,102,394.24 award."
+                ],
+                "evidence_type": "primary_document",
+                "id": "amb-award",
+                "limitation": "Contract amounts are separate from individual wages.",
+                "name": "Mentougou Hospital driver staffing procurement award",
+                "period": "2026-08-27",
+                "publisher": "Beijing Public Resources Trading Service Platform",
+                "scope": "contextual",
+                "url": "https://ggzyfw.beijing.gov.cn/jyxxzbjggg/20260827/5687388.html"
               }
             ]
           },
@@ -35143,7 +35179,7 @@
             }
           },
           {
-            "href": "https://www.xjkz.gov.cn/xjkz/c102116/202606/3e969421cc9a4468b5e952da2b13b55c.shtml",
+            "href": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_79dc72ea621f4a9b8adec327abf5d0e1.html",
             "id": "cntraffic",
             "label": "Road Traffic Safety Law of the People's Republic of China",
             "scope": "Articles 19, 22, and 53: licenses, fatigue, and emergency-task passage"
@@ -35962,7 +35998,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person suits being an ambulance driver or attendant (excluding EMTs)?"
+        "title": "Who might suit ambulance driving and support?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -35985,9 +36021,9 @@
         }
       },
       "hero": {
-        "h1": "Ambulance Drivers and Attendants",
-        "quick_answer": "Scope note: the frozen occupation name contains 'emergency medical technicians', but this page actually corresponds to the US 53-3011.00 ambulance drivers and attendants, explicitly excluding EMTs. The core is driving or assisting driving, patient moving, vehicle cleaning-restocking, and record handovers; O*NET also lists basic-first-aid tasks, and actual authority is checked separately. The US 2025, month 5 (May) median wage is 35,450 USD; the employment projections run through 2025–2035. Chinese industry average wages serve only as broad-scope contrast.",
-        "title": "Ambulance Drivers and Attendants"
+        "h1": "Ambulance Drivers and Attendants (Except EMTs)",
+        "quick_answer": "This role drives or assists on an ambulance and helps prepare the vehicle, restock supplies and hand over information. U.S. occupation 53-3011 excludes EMTs. Duties depend on training, local rules and employer authorization. Mainland driving, stretcher support and medical rescue roles have separate requirements.",
+        "title": "Ambulance Drivers and Attendants (Except EMTs)"
       },
       "market_signal_card": {
         "context_links": [
@@ -37338,7 +37374,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Check whether my career interests fit ambulance drivers and attendants",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37415,7 +37451,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five personality test"
           },
           {
             "href": {
@@ -37425,7 +37461,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -37435,7 +37471,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Enneagram (Chinese)"
+            "label": "Enneagram personality test"
           },
           {
             "href": {
@@ -37445,7 +37481,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Intelligence and reasoning (Chinese)"
+            "label": "Intelligence and reasoning test"
           }
         ]
       },
@@ -37460,6 +37496,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which direction are you more likely to fit?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
+      "interface.quick_decision.experiment_heading": "How can I try a crew handover?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "US salary reference",
@@ -37552,7 +37589,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "Where can AI help with crew records?",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -37588,7 +37625,7 @@
         "market": "United States",
         "measure": "Upper bound of the annual wage 10th percentile",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37600,7 +37637,7 @@
         "market": "United States",
         "measure": "25th percentile of annual wages",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37612,7 +37649,7 @@
         "market": "United States",
         "measure": "Median annual wage",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37624,7 +37661,7 @@
         "market": "United States",
         "measure": "75th percentile of annual wages",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37636,7 +37673,7 @@
         "market": "United States",
         "measure": "Lower bound of the annual wage 90th percentile",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37684,7 +37721,7 @@
         "market": "United States",
         "measure": "Median wage of this occupation within the industry (health care and social assistance)",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025; queried this round on 2026-10-03",
+        "period": "May 2025; accessed 2026-10-03",
         "source_refs": [
           "oews-industry"
         ]
@@ -37696,7 +37733,7 @@
         "market": "United States",
         "measure": "Median wage of this occupation within the industry (hospitals and ambulance services)",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025; queried this round on 2026-10-03",
+        "period": "May 2025; accessed 2026-10-03",
         "source_refs": [
           "oews-industry"
         ]
@@ -37708,7 +37745,7 @@
         "market": "United States",
         "measure": "Median wage of this occupation within the industry (government)",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025; queried this round on 2026-10-03",
+        "period": "May 2025; accessed 2026-10-03",
         "source_refs": [
           "oews-industry"
         ]
@@ -37720,7 +37757,7 @@
         "market": "United States",
         "measure": "Median wage of this occupation within the industry (other industries)",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025; queried this round on 2026-10-03",
+        "period": "May 2025; accessed 2026-10-03",
         "source_refs": [
           "oews-industry"
         ]
@@ -37828,7 +37865,7 @@
         "market": "United States",
         "measure": "Median annual wage",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37840,7 +37877,7 @@
         "market": "United States",
         "measure": "10th percentile of annual wages",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37852,7 +37889,7 @@
         "market": "United States",
         "measure": "90th percentile of annual wages",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37924,7 +37961,7 @@
         "market": "United States",
         "measure": "Median hourly wage",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37936,7 +37973,7 @@
         "market": "United States",
         "measure": "Median annual wage",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37948,7 +37985,7 @@
         "market": "United States",
         "measure": "Occupational wage scope (median)",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Month 5 (May), 2025",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37960,7 +37997,7 @@
         "market": "United States",
         "measure": "Technology entries and hiring-mention signals, not adoption rates",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "2025 hiring ads; verified this round on 2026-10-03",
+        "period": "2025 hiring ads; accessed 2026-10-03",
         "source_refs": [
           "operations",
           "facilities"
@@ -37973,7 +38010,7 @@
         "market": "United States",
         "measure": "New-hire education-need answers and the Job Zone description",
         "occupation_scope": "US 53-3011 ambulance drivers and attendants, excluding EMTs",
-        "period": "Occupation page updated 2026; verified this round on 2026-10-03",
+        "period": "Occupation page updated 2026; accessed 2026-10-03",
         "source_refs": [
           "editor"
         ]
@@ -37989,32 +38026,20 @@
         "source_refs": [
           "ep"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "17%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Ambulance Drivers and Attendants",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and crew records"
     },
     "badges": [
-      "Transport support: safe driving and dispatch checks · patient lifting and securing · cleaning, disinfection, and records",
-      "AI: task-level change explanations · no substitution year given",
-      "US OEWS wage percentiles and BLS projections (declining) · mainland China industry scope and pre-hospital emergency care framework · data gaps labeled"
+      "Ambulance driving and transport support",
+      "Separate from EMTs",
+      "Vehicle preparation and crew handover"
     ],
     "metrics": [
       {
@@ -38053,17 +38078,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What ambulance drivers and attendants do, which driver's licenses and work training are needed, how the US wage percentiles and the declining employment projections look, and the mainland China counterpart positions (emergency crew drivers and stretcher-assistance personnel), the Pre-hospital Medical Emergency Care Management Measures, and the road-traffic laws and regulations framework; explains data scopes and gaps."
+      "text": "Compare ambulance driving and attendant duties, local requirements and U.S. wages for non-EMT roles. Try a paper-only crew handover exercise."
     },
     "title": {
       "availability": "available",
-      "text": "Ambulance drivers and attendants (excluding emergency medical technicians): tasks, wages, and declining employment trends (O*NET 53-3011)"
+      "text": "Ambulance Drivers and Attendants (Except EMTs): Duties, Pay and Entry"
     }
   },
-  "source_content_sha256": "cbe5bb06408223910d85d64a8b2852d6eb4fb84b1280a6960cae59accf391736",
+  "source_content_sha256": "28c9d2316dd69c705e7197c7f64395c0791234ab9c91ad9e1671ecd7481a099b",
   "subject": {
     "canonical_slug": "ambulance-drivers-and-attendants-except-emergency-medical-technicians",
-    "name": "Ambulance Drivers and Attendants",
-    "summary": "Ambulance drivers and attendants drive or assist in driving ambulances, move patients, keep the vehicle and equipment ready, and record handovers. The US 53-3011.00 excludes EMTs, but the tasks include basic first aid within the trained scope; qualifications and authorities for Chinese driving, stretcher, and medical-rescue positions must be checked separately."
+    "name": "Ambulance Drivers and Attendants (Except EMTs)",
+    "summary": "This role drives or assists on an ambulance and helps prepare the vehicle, restock supplies and hand over information. U.S. occupation 53-3011 excludes EMTs. Duties depend on training, local rules and employer authorization. Mainland driving, stretcher support and medical rescue roles have separate requirements."
   }
 }

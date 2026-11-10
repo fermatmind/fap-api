@@ -53,6 +53,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-fast-hangzhou": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-fast-loudi": {
+        "status": "pending_mapping"
+      },
       "fact:retail-employment-share-gap": {
         "status": "pending_mapping"
       },
@@ -1695,7 +1701,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -19506,56 +19512,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19563,7 +19533,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19576,7 +19546,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19589,7 +19559,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19602,7 +19572,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -22584,7 +22554,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Low-risk verification: use a fictional order ticket and a fast food recipe to do one “order—prep—heat—box—record” exercise; it only gauges work preferences and is not equivalent to a qualification, training or hiring."
+              "Start with the four fictional tickets on this page. Write a one-page handoff to see how you feel about checking quantities, restrictions and shift records."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -22830,7 +22800,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Read the order ticket or take a verbal instruction → accept the order and take payment according to store procedure → weigh ingredients to the fast food recipe → wash and cut the ingredients to be cooked → isolate and label allergen-related ingredients → label the production sequence and batch"
+              "Read the ticket or station instruction, prepare ingredients to the recipe and check quantities and batch details. Order taking and payment depend on the store assignment."
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.camera.steps",
@@ -23054,7 +23024,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Take the order and payment → weigh, cut and prepare → heat according to the equipment programme → check doneness and quantity → box or hold → deliver and clean and restock."
+              "Prepare to the ticket → cook using the station equipment → check quantity and doneness → pack and hand off → clean and restock."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.primary",
@@ -23376,12 +23346,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "For exceptions, stop the affected work, isolate and escalate according to the actual procedure, and record the conditions still to be checked; Article 47 of the Food Safety Law provides that where there is a potential risk of an incident the operator must stop operating and report to the regulatory department, and an internal report alone cannot substitute for this. The handover method follows the unit's procedure."
+              "Pause the affected work, record what still needs to be checked, and tell the shift lead immediately. See the risk section’s Food Safety Law link and the certification FAQ for the operator’s reporting duties."
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
           "source_refs": [
-            "onet"
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -23390,7 +23360,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "Order taking and payment ｜ read the order and check payment ｜ read the order ticket or take a verbal instruction, accept the order and take payment and give change according to store procedure, handling several orders at once and stating the waiting time; if an order is unclear or changed at short notice, confirm with the counter or the customer before cooking."
+              "Check the order | Read the ticket and station instruction | Confirm changes with the person taking orders. The store determines who handles orders and payment."
             ]
           },
           "id": "actors.display.responsibilities_block.01",
@@ -23642,7 +23612,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "U.S. fast food cooks are Zone1–2/SVP below 6; a few days to a year of training is a level summary, not a uniform course. Respondent education was 63% below high school, 21% high school or equivalent and 12% some college courses without earning a degree; these are partial responses and not a Chinese threshold. The BLS entry for this occupation typically shows no formal credential, no related work experience and short-term on-the-job training, which does not equal an exemption from food-safety training or from checking employment qualifications. Current R89/C55/E39/S24/A14/I6, with RCE as the top three, and the original code is correct. Realistic corresponds to equipment and ingredients, conventional to procedural checking, and enterprising to work coordination; the scores are an occupational activity profile, not proportions of people, personality ability or hiring thresholds. The current industry split is 97% accommodation and food services and 3% other, with the year not stated."
+              "U.S. fast food cooks are Zone1–2/SVP below 6; a few days to a year of training is a level summary, not a uniform course. Asked about the education needed by a new hire to perform the job, 63% of respondents selected below high school, 21% high school or equivalent and 12% some college courses without earning a degree; these are partial responses and not a Chinese threshold. The BLS entry for this occupation typically shows no formal credential, no related work experience and short-term on-the-job training, which does not equal an exemption from food-safety training or from checking employment qualifications. Current R89/C55/E39/S24/A14/I6, with RCE as the top three, and the original code is correct. Realistic corresponds to equipment and ingredients, conventional to procedural checking, and enterprising to work coordination; the scores are an occupational activity profile, not proportions of people, personality ability or hiring thresholds. O*NET reports that accommodation and food services accounted for 97% of U.S. fast food cook employment in 2025."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
@@ -23670,12 +23640,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "NBS2025 accommodation and catering urban unit pre-tax average annual wage: 62,461 yuan for non-private units and 55,123 yuan for private units, with the original figures correct; it covers all positions in legal entities with 5 or more people and includes bonuses and allowances, excludes the self-employed and freelancers, and is not a fast food cook median or take-home pay. In addition, migrant workers in that industry averaged 4,208 yuan a month, up 1.6% year on year, which is a different population measure; they are not combined into a wage range or converted into each other. The gaps in precise occupational wages, percentiles and recruitment statistics remain."
+              "In 2025, average annual wages in accommodation and food services were CNY 62,461 in urban non-private units and CNY 55,123 in urban private units. In a separate survey, migrant workers in the industry earned CNY 4,208 a month on average, up 1.6% year over year. The two surveys cover different populations and periods of pay. Both figures describe the industry."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "r2-pay-1",
+            "nbs-migrant-context"
           ],
           "type": "prose"
         },
@@ -23684,7 +23655,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Fast food cooks (Cooks, Fast Food) is the occupation that prepares and cooks food in a fast food restaurant with a limited menu, corresponding to U.S. O*NET-SOC 35-2011.00: duties are limited to a few basic items, usually operating large-capacity single-purpose cooking equipment (grills, fryers, griddles). The work includes reading order tickets or verbal instructions, taking orders and payment, weighing and cutting to the fast food recipe, cooking in bulk to the order quantity and boxing, checking quality and quantity, delivering at the window or counter, and cleaning, restocking and keeping records. The China section of this page uses verifiable entities such as the Chinese cuisine chef (occupation code 4-03-02-01) as leads: the two occupational classifications are not one-to-one, and this page does not apply U.S. preparation levels, qualifications or wages directly to mainland China, nor does it merge the duties of restaurant cooks, fast food and counter workers, food preparation workers or dishwashers into this occupation."
+              "Fast food cooks prepare items on a limited menu using standard recipes. Duties can include preparation, packing and cleaning. Some stores also assign orders, payment or handoff. Check the actual station and training rather than applying the U.S. classification to mainland jobs."
             ]
           },
           "id": "actors.display.definition_block.definition",
@@ -23711,7 +23682,7 @@
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet"
+            "adjacent-details-35-3023"
           ],
           "type": "prose"
         },
@@ -23725,7 +23696,7 @@
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet"
+            "adjacent-details-35-2021"
           ],
           "type": "prose"
         },
@@ -23739,7 +23710,7 @@
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet"
+            "adjacent-details-35-9021"
           ],
           "type": "prose"
         },
@@ -23753,7 +23724,7 @@
           },
           "id": "actors.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet"
+            "adjacent-details-35-1011"
           ],
           "type": "prose"
         },
@@ -23813,12 +23784,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Serve continuously in a restaurant back-of-house according to the menu and orders: the dish range is wider and there are more stations, requiring both reproducing flavours to recipe and aligning service timing with the plating and food-running roles at peak times."
+              "Cook to the menu and order in a restaurant kitchen. Where stations are assigned, prepare your assigned dishes or steps and coordinate service."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.work",
           "source_refs": [
-            "onet"
+            "editor",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23827,12 +23799,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from fast food cooks is menu breadth and the number of stations: restaurant cooks need to master more dishes and heating methods; employment was 1,460,200 in 2024, and the O*NET growth category is “much faster than average (7% or higher)”."
+              "Restaurant menus are often broader than fast food menus. In kitchens with distinct stations, cooks prepare the dishes assigned to their station."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.difference",
           "source_refs": [
-            "onet"
+            "editor",
+            "onet",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23841,12 +23815,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Better suited to people willing to collaborate on service in a faster-paced, multi-dish environment and able to accept evening and weekend shifts."
+              "Ask the target restaurant about menu scope, station assignments, teamwork and evening or weekend shifts."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.01.choice",
           "source_refs": [
-            "onet"
+            "editor",
+            "bls-family-context"
           ],
           "type": "prose"
         },
@@ -23874,7 +23849,7 @@
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.work",
           "source_refs": [
-            "onet"
+            "cook-adjacent-short-order"
           ],
           "type": "prose"
         },
@@ -23883,11 +23858,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The difference from fast food cooks is a narrower menu, faster output and more random orders; employment was 151,100 in 2024, and the O*NET growth category is “decline (-1% or lower)”."
+              "Short order cooks may take their own tickets and time the items on each order to finish together."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.02.difference",
           "source_refs": [
+            "cook-adjacent-short-order",
             "onet"
           ],
           "type": "prose"
@@ -23925,11 +23901,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference is the focus on front-counter service and assembly rather than heating and boxing to recipe; employment was 3,796,000 in 2024, and the O*NET growth category is “faster than average (5% to 6%)”."
+              "Counter workers primarily take orders, assemble and serve. Check whether the employer also assigns cooking."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.03.difference",
           "source_refs": [
+            "dancing",
             "onet"
           ],
           "type": "prose"
@@ -23967,11 +23944,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference is that there is no responsibility for heating and producing to order; employment was 902,700 in 2024, the O*NET growth category is “decline (-1% or lower)”, and it often serves as the entry point into the kitchen system."
+              "Prep workers focus on washing, cutting and measuring ingredients. Confirm whether the job also includes a cooking station."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.04.difference",
           "source_refs": [
+            "enrichment",
             "onet"
           ],
           "type": "prose"
@@ -24009,11 +23987,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference is that the role does not touch food preparation or output and is a support position; employment was 477,700 in 2024, and the O*NET growth category is “little or no change”."
+              "Dishwashers primarily clean dishes and equipment and may perform other support duties."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.05.difference",
           "source_refs": [
+            "announcing",
             "onet"
           ],
           "type": "prose"
@@ -24051,11 +24030,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The key difference from this occupation is management responsibility: taking on menu design and cost accounting, staff scheduling and training, and setting output standards; the preparation level is Job Zone 3, and employment was 197,300 in 2024."
+              "Head cooks often oversee menus, standards and staff. Compare that responsibility with running a station on a set menu."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.rows.06.difference",
           "source_refs": [
+            "agent",
             "onet"
           ],
           "type": "prose"
@@ -24093,11 +24073,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The table below compares fast food cooks with five adjacent directions across four items: career direction, core work and output, key differences, and which choice suits you better; employment and growth use U.S. O*NET-SOC measures (2024 employment, 2024—2034 projection)."
+              "Compare fast food cooking with counter service, ingredient prep, short order cooking and kitchen supervision."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.intro",
           "source_refs": [
+            "bls-family-context",
             "onet"
           ],
           "type": "prose"
@@ -24121,7 +24102,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Basis: O*NET OnLine 35-2011.00 and the summary pages and employment trend pages of adjacent occupations (2026 update); employment is for 2024 and growth uses the 2024—2034 projection period, and these are not used to infer an individual's chance of being hired or income."
+              "Duties are compared using O*NET profiles. Any figures in the rows apply only to the United States and the year shown. Verify the actual station duties before comparing jobs."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.evidence_note",
@@ -24135,7 +24116,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Next step: use the exercise material on this page, or one shadowing shift, to check the target direction's real scheduling, temperature-control and collaboration requirements, and then decide."
+              "Use the paper exercise to check scheduling, temperature records and teamwork. With the store’s consent, you can also observe a shift while store staff operate equipment and decide what can be served."
             ]
           },
           "id": "actors.display.adjacent_career_comparison_table.transition",
@@ -24232,13 +24213,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "There is no verifiable causal data for this occupation. Technical capability, organisational adoption and employment numbers are three different levels, and this page does not write any one of them as a conclusion."
+              "The sources reviewed here did not provide occupation-specific adoption rates or causal evidence on employment. O*NET provides the task and work-context background."
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26073,7 +26053,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "sag-moa"
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -26082,12 +26062,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025 accommodation and catering urban unit pre-tax average annual wage: 62,461 yuan for non-private units and 55,123 yuan for private units, with the original figures correct; it covers all positions in legal entities with 5 or more people and includes bonuses and allowances, excludes the self-employed and freelancers, and is not a fast food cook median or take-home pay. In addition, migrant workers in that industry averaged 4,208 yuan a month, up 1.6% year on year, which is a different population measure; they are not combined into a wage range or converted into each other. The gaps in precise occupational wages, percentiles and recruitment statistics remain."
+              "National Bureau of Statistics accommodation and food service averages cover many jobs and are industry context. The survey of migrant workers covers a different population and should not be combined with urban-unit data. A national occupation wage or posting distribution was not verified. Individual postings are shown separately."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "sag-moa"
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -26129,7 +26109,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -26138,12 +26118,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no verifiable statistics on fast food cook job-posting pay offers; a single employer's or platform's offer cannot represent the national level"
+              "A KFC part-time listing in Loudi separates food preparation and equipment cleaning from counter service. It lists CNY 3,000–3,500 in total pay, with hourly wages settled monthly and attendance, shift and holiday allowances included. A kitchen and assembly posting in Yuhang, Hangzhou, names prep and equipment sanitation but does not show an exact amount in the job body visible without signing in. Before comparing offers, check the station, base hourly rate, expected hours and allowance terms. These are two listings, not a national pay estimate."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "fast-loudi",
+            "fast-hangzhou"
           ],
           "type": "prose"
         },
@@ -26152,7 +26133,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial: under the U.S. measure most fast food cook positions do not require a formal credential, and the preparation level is Job Zone 1–2 (SVP below 6.0); the respondent education proportions on the O*NET summary page show 63% below a high school diploma, 21% high school or equivalent and 12% some college without a degree. U.S. measures and domestic requirements cannot be equated directly, and the target unit's recruitment and training requirements for the year in question apply."
+              "Editorial: under the U.S. measure most fast food cook positions do not require a formal credential, and the preparation level is Job Zone 1–2 (SVP below 6.0); the O*NET responses about education needed by a new hire to perform the job show 63% below a high school diploma, 21% high school or equivalent and 12% some college without a degree. U.S. measures and domestic requirements cannot be equated directly, and the target unit's recruitment and training requirements for the year in question apply."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -26171,6 +26152,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
+            "cn-food-law",
             "sag-moa"
           ],
           "type": "prose"
@@ -26236,12 +26218,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025 accommodation and catering urban unit pre-tax average annual wage: 62,461 yuan for non-private units and 55,123 yuan for private units, with the original figures correct; it covers all positions in legal entities with 5 or more people and includes bonuses and allowances, excludes the self-employed and freelancers, and is not a fast food cook median or take-home pay. In addition, migrant workers in that industry averaged 4,208 yuan a month, up 1.6% year on year, which is a different population measure; they are not combined into a wage range or converted into each other. The gaps in precise occupational wages, percentiles and recruitment statistics remain."
+              "In 2025, average annual wages in accommodation and food services were CNY 62,461 in urban non-private units and CNY 55,123 in urban private units. In a separate survey, migrant workers in the industry earned CNY 4,208 a month on average, up 1.6% year over year. The two surveys cover different populations and periods of pay. Both figures describe the industry."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "r2-pay-1",
+            "nbs-migrant-context"
           ],
           "type": "prose"
         }
@@ -26453,13 +26436,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Current O*NET fast food: 97% accommodation and food services and 3% other, which is an employment industry share with no stated year, not wages. Whether a specific convenience store or group catering role is this occupation must be checked against the actual tasks."
+              "O*NET reports that accommodation and food services accounted for 97% of U.S. fast food cook employment in 2025. Whether a specific convenience store or group catering role is this occupation must be checked against the actual tasks."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26468,13 +26450,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Other industries together account for 3%, which O*NET does not break down further; that row is not a median wage but simply the employment distribution."
+              "The other industries combined account for about 3%, as listed on O*NET’s separate industry table, which does not show a year."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -26483,7 +26464,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Convenience store hot food can serve as a task setting, but the current industry page does not break down the other 3% further; this round obtained no fast food wages by industry, and they are not filled in from family industry hourly wages."
+              "Check the actual duties to see if a convenience-store hot-food role falls within this occupation. Available sources lack wages by industry for this occupation."
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
@@ -27871,7 +27852,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use the fictional exercises on this page, or a single shadowing shift, to check the real conditions, and compare your observations item by item against the target store's scheduling, equipment and collaboration requirements."
+              "Use the fictional tickets to see how you feel about checking records and writing a handoff. To learn about actual shifts, equipment and teamwork, ask the store or observe a shift with its permission."
             ]
           },
           "id": "actors.display.personality_fit_block.questions.next.answer",
@@ -28513,13 +28494,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Long-term exposure may cause skin, hearing and joint problems and affect sustained attendance."
+              "Check shift conditions such as heat, noise and repetitive movements. Follow store procedures for controls and reporting."
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28528,13 +28508,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS table 1.2 fast food cooks 35-2011: 640,500 jobs in 2025 and a projection of 644,100 in 2035, a published net increase of 3,600 and growth of 0.6%, with an average of 86,400 openings per year (including replacement from career changes and exits from the labour force). OOH and O*NET round the growth rate to 1%. This is not the family's 7% growth or short order's 5% decline, and openings are not net increases, current hiring or an individual hiring rate; the self-employment share is not provided in the table and cannot be interpreted as zero. No injury ranking or diagnosis is provided."
+              "If staff identify a potential food safety incident risk, they escalate it immediately under store procedures. Under Article 47 of China’s Food Safety Law, the food producer or operator must immediately stop food production and business activities and report to the food safety supervisory department of the local county-level people’s government."
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -28611,15 +28590,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This page does not cite specific live job postings and does not count historical recruitment cases as open positions; recruitment conditions in mainland China must be checked against the target unit's announcement for the year in question.",
+              "The page cites two job postings from Loudi and Hangzhou. Check the employer’s latest notice for current openings and conditions.",
               "The questions and scenario observations are candidate verification methods designed editorially; this page has no distribution of real employer verification processes, so they are not called a common or uniform recruitment method."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "fast-loudi",
+            "fast-hangzhou"
           ],
           "type": "notice"
         },
@@ -28698,7 +28676,7 @@
                 "values": [
                   "Educational and academic background requirements",
                   "BLS shows this job typically requires no formal credential; the domestic share preferring junior high or senior high schooling or favouring secondary vocational education was not obtained and should be checked against the actual announcement, not extrapolated from the U.S. education distribution.",
-                  "U.S. fast food cooks are Zone1–2/SVP below 6; a few days to a year of training is a level summary, not a uniform course. Respondent education was 63% below high school, 21% high school or equivalent and 12% some college courses without earning a degree; these are partial responses and not a Chinese threshold. The BLS entry for this occupation typically shows no formal credential, no related work experience and short-term on-the-job training, which does not equal an exemption from food-safety training or from checking employment qualifications."
+                  "U.S. fast food cooks are Zone1–2/SVP below 6; a few days to a year of training is a level summary, not a uniform course. Asked about the education needed by a new hire to perform the job, 63% of respondents selected below high school, 21% high school or equivalent and 12% some college courses without earning a degree; these are partial responses and not a Chinese threshold. The BLS entry for this occupation typically shows no formal credential, no related work experience and short-term on-the-job training, which does not equal an exemption from food-safety training or from checking employment qualifications."
                 ]
               },
               {
@@ -28729,6 +28707,7 @@
           },
           "id": "actors.path.employer-evidence.1",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -28915,6 +28894,7 @@
           },
           "id": "actors.path.credential-decision.1",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -28928,13 +28908,14 @@
           "data": {
             "paragraphs": [
               "The health certificate, food-safety knowledge training, skill assessment and equipment training are each checked separately; unit rules cannot replace the applicable statutory health and food-safety requirements, and an educational credential does not represent food-safety skill.",
-              "U.S. fast food cooks are Zone1–2/SVP below 6; a few days to a year of training is a level summary, not a uniform course. Respondent education was 63% below high school, 21% high school or equivalent and 12% some college courses without earning a degree; these are partial responses and not a Chinese threshold. The BLS entry for this occupation typically shows no formal credential, no related work experience and short-term on-the-job training, which does not equal an exemption from food-safety training or from checking employment qualifications.",
+              "U.S. fast food cooks are Zone1–2/SVP below 6; a few days to a year of training is a level summary, not a uniform course. Asked about the education needed by a new hire to perform the job, 63% of respondents selected below high school, 21% high school or equivalent and 12% some college courses without earning a degree; these are partial responses and not a Chinese threshold. The BLS entry for this occupation typically shows no formal credential, no related work experience and short-term on-the-job training, which does not equal an exemption from food-safety training or from checking employment qualifications.",
               "Article 44 of the 2025 amendment to China's Food Safety Law requires food production and operation enterprises to provide food-safety knowledge training for employees; Article 45 requires food production and operation personnel who handle directly consumed food to undergo an annual health examination and obtain a health certificate before taking up their posts, and sets restrictions on posts for diseases that affect food safety. The health certificate, skill grade, food-safety training and equipment training are each checked separately, and unit rules cannot replace the applicable statutory requirements. The current registration for skill assessment and equipment training are checked separately, and it is not said that all nationwide conditions were unobtainable.",
               "Any qualification or employment requirement should follow the current rules of the employer and the competent authority; this page does not constitute a hiring promise, a qualification opinion or advice on work authorisation."
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -28947,14 +28928,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Entering the trade usually does not require a formal credential: fast food stores mostly start people in prep, frying and assembly positions; which station can be run independently, whether portion and temperature-control standards are maintained, and whether records can be kept in the required format are more verifiable evidence of preparation than a certificate."
+              "The U.S. Bureau of Labor Statistics lists no formal educational credential as typical and identifies short-term on-the-job training. In mainland China, check whether a store assigns prep, cooking or assembly. Ask about training and authorization before running a station on your own."
             ]
           },
           "id": "actors.path.career-path-block.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "bls-projections",
+            "fast-loudi",
+            "fast-hangzhou"
           ],
           "type": "prose"
         },
@@ -28963,7 +28944,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "U.S. fast food cooks are Zone1–2/SVP below 6; a few days to a year of training is a level summary, not a uniform course. Respondent education was 63% below high school, 21% high school or equivalent and 12% some college courses without earning a degree; these are partial responses and not a Chinese threshold. The BLS entry for this occupation typically shows no formal credential, no related work experience and short-term on-the-job training, which does not equal an exemption from food-safety training or from checking employment qualifications."
+              "U.S. fast food cooks are Zone1–2/SVP below 6; a few days to a year of training is a level summary, not a uniform course. Asked about the education needed by a new hire to perform the job, 63% of respondents selected below high school, 21% high school or equivalent and 12% some college courses without earning a degree; these are partial responses and not a Chinese threshold. The BLS entry for this occupation typically shows no formal credential, no related work experience and short-term on-the-job training, which does not equal an exemption from food-safety training or from checking employment qualifications."
             ]
           },
           "id": "actors.path.career-path-block.2",
@@ -28984,6 +28965,7 @@
           },
           "id": "actors.path.career-path-block.3",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -28998,34 +28980,35 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional work-order material (practice input)",
-                  "Fictional scenario: a fictional fast food store receives four orders before Friday dinner service — two double beef burger sets, one fried chicken set (the customer notes a peanut allergy) and one vegetarian wrap (dairy-free); the shift's fryer temperature log shows an abnormal rise of 35 minutes around midday, and the shift record says only “handled”.",
-                  "Material provided: the recipes and portion standards for the four orders; the shift's fryer and holding cabinet temperature records; the ingredient batch and shelf-life ledger; the allergen ingredient list; a summary of the cleaning and disinfection procedure.",
-                  "Material not provided: the specific cause of the temperature anomaly, whether the affected ingredients and frying oil have already been used, the approval process for deciding whether to discard them, and the shift's staffing. If these conditions are needed in the exercise, state your assumptions and whom you would need to confirm them with."
+                  "Four fictional tickets and their shift records",
+                  "B1 and B2 each request a double beef burger. Each burger takes two patties. The stock record lists four patties allocated to this station.",
+                  "C1 is a fried chicken order marked peanut allergy. Fryer F2 has a 35-minute midday anomaly. The shift note says “handled” and carries no review signature. There is no separate utensil check for C1.",
+                  "V1 is a vegetarian wrap requested without dairy. The sauce ingredient field is blank. The shift lead verifies ingredients, utensils and F2 status, and decides on replenishment, order changes, substitutions and release. The counter relays confirmed information only.",
+                  "Single-change variant: the stock record changes from four patties to three. The four tickets, utensil record and F2 record remain the same."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Task requirements",
-                  "Write a one-page shift handling and service plan covering order and allergen checks, the judgement and handling of the affected ingredients and frying oil, equipment heating and holding requirements, boxing and delivery arrangements, the situations that require stopping service or reporting, and the items to hand over to the next shift.",
-                  "The plan must state which data come from the exercise material and which are still assumptions, and must say whether it relies on the recipe, the temperature-control records or the procedure summary."
+                  "One-page handoff",
+                  "Record each ticket’s requirements, restrictions, evidence, status and next owner. Add separate rows for B1/B2 shared stock and F2.",
+                  "Keep both versions and show the variant’s shared-stock row and the reason it changes."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference deliverable (derivable from the exercise material)",
-                  "The plan should include: checks (label the allergens and dietary restrictions for each of the four orders separately, and exclude peanut cross-contact from the fried chicken set); ingredient and frying oil judgement (the frying oil and affected ingredients from the midday temperature anomaly must be held back from use and reported, and must not be released on the strength of a “handled” record alone); equipment heating and holding (check the core temperature and holding time of the burger meat and fried chicken against the item requirements); boxing and delivery (dedicated allergen utensils and station isolation, and checking batch and timeliness for delivery orders); exception handling (stop using the affected frying oil and ingredients and report before the temperature anomaly is characterised, with authorised personnel deciding whether to discard or release them); records and handover (set out the period of the temperature anomaly, the batches involved, the action taken and the items still to be confirmed).",
-                  "The reference deliverable lists only the elements that should be included and does not require wording identical to the example; explaining the basis for your judgement is enough."
+                  "Finish independently first",
+                  "Keep your own judgment until you finish the day-six handoff.",
+                  "On day seven, open “Fast food cook dinner tickets: reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "Boundaries and conclusions that cannot be drawn",
-                  "This exercise tests only hygiene and temperature-control awareness, allergen checking and the ability to organise records; it does not evaluate the safety of a real store and does not constitute a hiring or qualification judgement or advice on real food-safety handling.",
-                  "Real stores' customer information, business data or accident records must not be used; where real food-safety judgements are involved, the rules of the unit and the competent authority must be followed."
+                  "Exercise boundaries",
+                  "Compare paper tickets and records. Real kitchens follow local requirements and workplace procedures.",
+                  "Your role is to record, flag open items and hand them off."
                 ]
               }
             ]
@@ -29036,7 +29019,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "Fictional exercise material: handling orders at a store's dinner service",
+          "title": "Fictional dinner shift: check the tickets before service",
           "type": "cards"
         },
         {
@@ -29047,50 +29030,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: read one publicly available food-safety material",
-                  "Find a publicly available material on food handling and hygiene requirements (for example official food-safety guidance), mark three requirements relating to temperature control, raw and cooked zoning or allergens, and write down the points you want to confirm."
+                  "Day 1",
+                  "Copy the restrictions on B1, B2, C1 and V1."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: compile a portion check checklist",
-                  "Using a fictional fast food recipe, turn receiving, weighing, portioning and boxing into a workable checklist, and note the actions and whom to report to when spoilage, foreign objects or allergen contamination are found."
+                  "Day 2",
+                  "Count the patties needed and compare the stock."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: do an equipment temperature-control reading",
-                  "Using fictional refrigeration, frying and holding temperature records, judge which period has abnormal readings and the possible direction of the cause, and explain your basis."
+                  "Day 3",
+                  "Check the F2 shift note and review field."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: write an exception handling note",
-                  "Write out the sequence for handling an equipment temperature anomaly or a foreign object: stopping service, isolation, reporting, review and the conditions for resuming, and note which steps must be confirmed by authorised personnel."
+                  "Day 4",
+                  "Check the C1 utensil record and V1 ingredient field."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: write an allergen check",
-                  "Using a fictional order, write an isolation plan for allergen ingredients, utensils and workstations, and how you would explain it to the counter or the customer."
+                  "Day 5",
+                  "Record the next owner and source for each open item."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: write an end-of-shift handover",
-                  "Using fictional data, write an end-of-shift record covering output, discards and temperature-control data, unresolved exceptions and the items the next shift needs to confirm."
+                  "Day 6",
+                  "Submit one page on your own. Include the four original tickets, F2 and the B1/B2 shared stock. Show the variant’s shared-stock row with evidence, status and next owner."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: decide whether to continue",
-                  "Return to the judgement checklist on this page and write down three reasons you are willing to continue and two conditions that need caution."
+                  "Day 7",
+                  "On day seven, open “Fast food cook dinner tickets: reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29109,13 +29092,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Concrete change: can you, given orders and equipment temperature-control conditions, write out the conditions for stopping service, isolation and resuming, rather than just writing “pay attention to hygiene”.",
-              "Facts and choice: would you rather work in a chain fast food store, convenience store hot food, or delivery-focused stores and group catering counters.",
-              "Practice drain: long periods of standing, heat and oil, repeated weighing and boxing, and filling in records in the required format — which step drains you most, and can you accept it recurring in every shift.",
-              "Material boundaries: the practice material is fictional or based on public sources, and real stores' customer information, business data or accident records must not be included.",
-              "Response to feedback: when your plan is pointed out as missing allergen isolation or temperature-control record items, are you willing to go back to the recipe and procedure basis and fill them in.",
-              "Interest in the process: even when the process repeats, are you willing to complete order checks, portion checks and records every time rather than skipping confirmation steps on the basis of experience.",
-              "Next step: if you are willing to continue with the previous six steps, the next step is, subject to compliance (for example in-store training, a food-safety course or an open-kitchen experience), to complete one full loop from order taking and prep through heating to boxing and an end-of-shift record, and have an experienced store staff member review it; if a particular step clearly drains you, narrow the direction first and then verify."
+              "Use the reference to check quantities, open fields and handoffs.",
+              "Separate stock sufficiency from approval to serve.",
+              "Note which field was easiest to overlook.",
+              "Use fictional tickets and logs.",
+              "Improve the evidence you recorded for one open item.",
+              "Keep a record of both the original and the variant.",
+              "Ask the employer about shifts, training and working conditions."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -29217,6 +29200,7 @@
           },
           "id": "actors.display.career_path_block.locale.credentials",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -29425,6 +29409,7 @@
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -29761,6 +29746,7 @@
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -30097,6 +30083,7 @@
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -30257,6 +30244,7 @@
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.03.credentials",
           "source_refs": [
+            "cn-food-law",
             "onet",
             "bls",
             "cn-rule"
@@ -30369,9 +30357,7 @@
           },
           "id": "actors.display.career_path_block.source.bls",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -31000,7 +30986,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Read order tickets or verbal instructions, take orders and payment, weigh and cut to the fast food recipe, operate large-capacity equipment to cook in bulk to the order and box, check quality and quantity, deliver at the window or counter, then clean, restock and record; chain stores, convenience store hot food and group catering counters place different emphasis on these.",
+                "answer": "Prepare ingredients to the recipe, cook with the station’s equipment and check portions against orders or instructions. Packing, cleaning and restocking can be part of the shift. Some employers also assign order taking, payment or handoff; check how the store divides work.",
                 "id": "actors.faq.1",
                 "question": "What does the daily work of fast food cooks involve?",
                 "question_key": "career.faq.cooks-fast-food.1",
@@ -31009,85 +30995,95 @@
                 ]
               },
               {
-                "answer": "Restaurant cooks have a wider dish range and more stations; fast food and counter workers focus on front-counter order taking, assembly and delivery; fast food cooks' duties are limited to a few basic items on a limited menu and usually involve operating large-capacity single-purpose equipment.",
+                "answer": "Fast food cooks prepare items on a limited menu. Restaurant cooks prepare dishes for the restaurant menu and may work at dedicated stations in larger kitchens. Counter workers may take orders, assemble food and hand it over. Individual fast food jobs can combine these duties.",
                 "id": "actors.faq.2",
                 "question": "How do fast food cooks differ from restaurant cooks and fast food and counter workers?",
                 "question_key": "career.faq.cooks-fast-food.2",
+                "source_refs": [
+                  "onet",
+                  "editor",
+                  "adjacent-details-35-3023"
+                ]
+              },
+              {
+                "answer": "Editorial assessment: order summaries, prep forecasting, stock alerts and timers are possible uses. Store staff still check ingredients, equipment faults, allergens, portions and temperature records under store procedures. The occupational profile describes the work. Adoption and employment effects for this occupation remain unmeasured here. O*NET is cited for the occupational tasks.",
+                "id": "actors.faq.3",
+                "question": "How will AI affect or replace fast food cooks?",
+                "question_key": "career.faq.cooks-fast-food.3",
                 "source_refs": [
                   "onet"
                 ]
               },
               {
-                "answer": "Order consolidation, prep forecasting, inventory alerts and equipment timing can be handled by software and programmed equipment, and self-service ordering and service conveyance may also change the division of labour in some stores; but judging ingredient condition, handling equipment faults, isolating allergens, checking boxing portions and temperature-control records still depend on on-site staff. Technology exposure does not equal organisational adoption or the disappearance of jobs.",
-                "id": "actors.faq.3",
-                "question": "How will AI affect or replace fast food cooks?",
-                "question_key": "career.faq.cooks-fast-food.3",
-                "source_refs": [
-                  "bls"
-                ]
-              },
-              {
-                "answer": "What can be checked is change at the task level: three task groups — order and inventory information, equipment heating pace, and temperature control and recording — can be partly taken over by tools; this page has no occupation-specific adoption rate or displacement data.",
+                "answer": "Editorial examples include using software to organize orders and flag stock levels, and equipment to run timers. Store staff still check equipment, records and exceptions. O*NET is cited for the occupational tasks.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of fast food cooks is there evidence of AI-driven change?",
+                "question": "Which tasks could software or equipment help with?",
                 "question_key": "career.faq.cooks-fast-food.4",
                 "source_refs": [
                   "onet"
                 ]
               },
               {
-                "answer": "Equipment operation and portion checking, allergen isolation, temperature-control records, exception handling and handover, and the basic operation of order, inventory and temperature-control systems.",
+                "answer": "Editorial suggestion: practice checking portions, allergens and temperature records, and handing off exceptions under store procedures. Ask the target store which ordering, stock and temperature systems it uses. O*NET is cited for the occupational tasks.",
                 "id": "actors.faq.5",
                 "question": "Faced with AI, which abilities should fast food cooks still focus on verifying?",
                 "question_key": "career.faq.cooks-fast-food.5",
-                "source_refs": [
-                  "bls"
-                ]
-              },
-              {
-                "answer": "In the United States the 2025 median hourly wage is 14.85 dollars and the median annual wage is 30,890 dollars (the single-occupation measure for 35-2011.00), with percentiles of 22,580/27,260/30,890/37,260/42,910 dollars a year; no occupation-level wage figures were obtained for mainland China, and this page treats this as a gap rather than filling it in with industry averages.",
-                "id": "actors.faq.6",
-                "question": "How much do fast food cooks generally earn, and how should this be compared?",
-                "question_key": "career.faq.cooks-fast-food.6",
-                "source_refs": [
-                  "oews"
-                ]
-              },
-              {
-                "answer": "Most U.S. positions do not require a formal credential, the preparation level is Job Zone 1–2, and skills come mainly from on-the-job training; domestic stores often start people in prep and assembly roles, and some chain enterprises require completion of in-company training or food-safety training.",
-                "id": "actors.faq.7",
-                "question": "What education do fast food cooks need, and how should they train?",
-                "question_key": "career.faq.cooks-fast-food.7",
                 "source_refs": [
                   "onet"
                 ]
               },
               {
-                "answer": "There is no uniform mandatory licence in the United States; domestically health management and food-safety training are common prerequisites, and the Chinese cuisine chef skill grade is usually not a threshold for frontline fast food store positions, with specific requirements following the target unit's and the competent authority's rules.",
+                "answer": "The 2025 U.S. median was $14.85 an hour and $30,890 a year. A national wage distribution for this occupation in mainland China was not verified. The two job listings in the China section illustrate different terms; check duties, base pay and allowances before comparing them.",
+                "id": "actors.faq.6",
+                "question": "How much do fast food cooks generally earn, and how should this be compared?",
+                "question_key": "career.faq.cooks-fast-food.6",
+                "source_refs": [
+                  "r2-pay-3",
+                  "fast-loudi",
+                  "fast-hangzhou"
+                ]
+              },
+              {
+                "answer": "The U.S. Bureau of Labor Statistics lists no formal educational credential as typical and identifies on-the-job training. In mainland China, verify the actual job posting, employer training and applicable food safety rules.",
+                "id": "actors.faq.7",
+                "question": "What education do fast food cooks need, and how should they train?",
+                "question_key": "career.faq.cooks-fast-food.7",
+                "source_refs": [
+                  "bls-projections",
+                  "cn-food-law"
+                ]
+              },
+              {
+                "answer": "In mainland China, Article 44 of the Food Safety Law requires food production and operating enterprises to train staff in food safety. Article 45 requires staff who handle ready-to-eat food to have an annual health check and obtain a health certificate before starting that work. This certificate is separate from a Chinese cooking skill grade. Check the job listing for any skill grade requirement. U.S. food-handler certification rules vary by state and locality. If staff identify a potential food safety incident risk, they escalate it immediately under store procedures. Under Article 47 of China’s Food Safety Law, the food producer or operator must immediately stop food production and business activities and report to the food safety supervisory department of the local county-level people’s government.",
                 "id": "actors.faq.8",
                 "question": "Do you have to obtain a certificate to work as a fast food cook?",
                 "question_key": "career.faq.cooks-fast-food.8",
                 "source_refs": [
-                  "cn-rule"
+                  "cn-food-law",
+                  "cn-cook-profile-2022",
+                  "bls-family-context"
                 ]
               },
               {
-                "answer": "First complete one “order—prep—heat—box—record” exercise using the fictional order on this page, or do one shadowing shift at a store, and then check the target store's scheduling, equipment and hygiene requirements.",
+                "answer": "Start with the fictional dinner tickets on this page. Write a one-page handoff covering quantities, order restrictions and shift records. Then ask the target store about scheduling, equipment and hygiene requirements.",
                 "id": "actors.faq.9",
                 "question": "If you have no background and want to try fast food cooking work, what should you do first?",
-                "question_key": "career.faq.cooks-fast-food.9",
-                "source_refs": [
-                  "bls"
-                ]
+                "question_key": "career.faq.cooks-fast-food.9"
               },
               {
-                "answer": "U.S. official projections show employment for this occupation declining -14% over 2024—2034, but there are still about 82,100 average annual openings over the same period, mainly from replacement demand; when choosing a career, check against the target store type and local recruitment.",
+                "answer": "The U.S. Bureau of Labor Statistics projects 0.6% employment growth for fast food cooks from 2025 to 2035, with about 86,400 openings per year on average, including replacement needs. For your local search, check whether a listing is for a cooking station, a combined counter and kitchen shift, or prep work.",
                 "id": "actors.faq.10",
                 "question": "What else should be considered when choosing fast food cooking as an occupation now?",
                 "question_key": "career.faq.cooks-fast-food.10",
                 "source_refs": [
-                  "bls"
+                  "bls-projections"
                 ]
+              },
+              {
+                "answer": "B1/B2 shared stock: the two tickets need four patties in total. The original allocation of four covers the count. Release remains the shift lead’s decision. The variant allocates three, one short. Mark both tickets pending a decision. Leave allocation and substitutions to the shift lead, who decides on replenishment, order changes, substitutions and release. The F2 note lacks a review signature. Preserve the entry and mark the station and affected batches pending for the shift lead. C1 has a peanut allergy note with utensils unverified. V1 requests no dairy and has a blank sauce ingredient field. Keep both pending for the shift lead to verify. The counter relays confirmed information. Check four items: the quantity difference between versions, F2 evidence, the separate C1 and V1 open items, and status and next owner. Count each complete item.",
+                "id": "actors.faq.11",
+                "question": "Fast food cook dinner tickets: reference (open after day six)",
+                "question_key": "career.faq.cooks-fast-food.11"
               }
             ]
           },
@@ -31132,7 +31128,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Current fast food tasks, context, recruitment technologies and industries are checked in O*NET; the 2025—2035 projection is checked in BLS table 1.2 and O*NET for the same period, and the 2025 wage against the national quintiles; Chinese background is checked in NBS and health and food safety in the 2025 amendment to the Food Safety Law; ILO/NIST are method and voluntary governance, and adjacent tasks are used only for the corresponding transition."
+              "Current fast food tasks, context, recruitment technologies and industries are checked in O*NET; the 2025—2035 projection is checked in BLS table 1.2 and O*NET for the same period, and the 2025 wage against the national selected wage percentiles; Chinese background is checked in NBS and health and food safety in the 2025 amendment to the Food Safety Law; ILO/NIST are method and voluntary governance, and adjacent tasks are used only for the corresponding transition."
             ]
           },
           "id": "actors.display.source_card.source",
@@ -31421,7 +31417,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "employer",
-                "limitation": "Supports the preparation level of fast food cooks (Job Zone 1–2), the respondent education proportions (63% below a high school diploma, 21% high school or equivalent and 12% some college without a degree) and the interest code (RCE); it does not represent a specific employer's hiring conditions and does not equal mainland China's requirements.",
+                "limitation": "Supports the preparation level of fast food cooks (Job Zone 1–2), the responses about education needed by a new hire to perform the job (63% below a high school diploma, 21% high school or equivalent and 12% some college without a degree) and the interest code (RCE); it does not represent a specific employer's hiring conditions and does not equal mainland China's requirements.",
                 "market": "United States",
                 "name": "O*NET OnLine: Cooks, Fast Food summary (35-2011.00)",
                 "period": "Page updated in 2026; retrieved 2026-09-18",
@@ -31510,14 +31506,14 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Supports the tasks, work context and preparation level of this occupation.",
                   "Contains no technology adoption or job displacement data."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "The fast food summary supports identity and the task overview; the detailed page is checked for the segment category, context and interests, and the industry split of 97/3 currently has no stated year; it contains no AI adoption or employment causality for this job.",
+                "limitation": "The profile supports occupational identity, tasks, work context and Job Zone. It lists selected responses about education for a new hire: less than high school 63%, high school or equivalent 21%, and some college without a degree 12%. These are U.S. survey responses. The profile does not measure AI adoption or employment effects in this occupation.",
                 "market": "United States",
                 "name": "O*NET OnLine: Cooks, Fast Food (35-2011.00) occupational profile",
                 "period": "Page updated in 2026; retrieved 2026-09-18",
@@ -31549,7 +31545,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "NBS2025 accommodation and catering urban unit pre-tax average annual wage: 62,461 yuan for non-private units and 55,123 yuan for private units, with the original figures correct; it covers all positions in legal entities with 5 or more people and includes bonuses and allowances, excludes the self-employed and freelancers, and is not a fast food cook median or take-home pay. In addition, migrant workers in that industry averaged 4,208 yuan a month, up 1.6% year on year, which is a different population measure; they are not combined into a wage range or converted into each other. The gaps in precise occupational wages, percentiles and recruitment statistics remain. There are also wholesale and retail 2025 annual averages of 135749 yuan for non-private units and 69622 yuan for private units, chosen according to the main activity and not an occupational wage.",
+                "limitation": "Tables 2 and 5 give the 2025 average annual wages for urban non-private and private units in accommodation and food services. They cover multiple jobs in the industry. Fast food cooks’ occupational wages require a separate source. Tables 2 and 5 also list wholesale and retail trade separately.",
                 "market": "Mainland China",
                 "name": "Average annual wages of urban unit employees in 2025 (accommodation and catering)",
                 "period": "2025 wages; reread from the same batch and version on 2026-10-09",
@@ -31826,7 +31822,7 @@
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls-projections",
-                "limitation": "BLS table 1.2 fast food cooks 35-2011: 640,500 jobs in 2025 and a projection of 644,100 in 2035, a published net increase of 3,600 and growth of 0.6%, with an average of 86,400 openings per year (including replacement from career changes and exits from the labour force). OOH and O*NET round the growth rate to 1%. This is not the family's 7% growth or short order's 5% decline, and openings are not net increases, current hiring or an individual hiring rate; the self-employment share is not provided in the table and cannot be interpreted as zero. U.S. fast food cooks are Zone1–2/SVP below 6; a few days to a year of training is a level summary, not a uniform course. Respondent education was 63% below high school, 21% high school or equivalent and 12% some college courses without earning a degree; these are partial responses and not a Chinese threshold. The BLS entry for this occupation typically shows no formal credential, no related work experience and short-term on-the-job training, which does not equal an exemption from food-safety training or from checking employment qualifications.",
+                "limitation": "BLS Table 1.2 gives base-year employment, projections and annual openings for U.S. occupation 35-2011. Openings include growth and replacement. The table also lists typical entry education, related experience and on-the-job training.",
                 "market": "United States",
                 "name": "BLS table 1.2 fast food cooks 35-2011",
                 "period": "2025—2035 projection and 2025 typical preparation; consulted 2026-10-09",
@@ -31835,16 +31831,16 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "A page update date does not automatically equal the statistical year."
+                  "The other industries combined account for about 3%, as listed on O*NET’s separate industry table, which does not show a year."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet-industry",
-                "limitation": "97% accommodation and food services and 3% other is this occupation's industry employment share; it is not wages, and the other category is not broken down further.",
+                "limitation": "The standalone table does not show a year. See the occupation detail page for the 97% share dated 2025.",
                 "market": "United States",
                 "name": "O*NET fast food industry employment distribution",
-                "period": "The current page does not state the year; consulted 2026-10-09",
+                "period": "The industry table does not state a data year",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/35-2011.00"
@@ -31896,6 +31892,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The opened listing shows ten part-time crew positions and distinguishes food preparation and cleaning from front-of-house work. It advertises CNY 3,000–3,500 in total pay, with hourly pay settled monthly and bonuses and allowances included. Current vacancy status is unverified."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "fast-loudi",
+                "limitation": "One listing; not an occupational wage estimate or confirmation that the vacancy is still open.",
+                "market": "Mainland China",
+                "name": "Tongcheng store, Loudi: part-time kitchen and assembly crew",
+                "period": "Opened 2026-11-09",
+                "publisher": "Loudi Talent Network / KFC Loudi",
+                "scope": "recruitment_proxy",
+                "url": "https://www.ldrcw.com/post/3035736.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The part-time posting distinguishes counter duties from food preparation and equipment sanitation. No exact pay amount was visible."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "fast-hangzhou",
+                "limitation": "One listing; not an occupational wage estimate or confirmation that the vacancy is still open.",
+                "market": "Mainland China",
+                "name": "Yuhang, Hangzhou: KFC kitchen and assembly crew",
+                "period": "Opened 2026-11-09",
+                "publisher": "Zhaopin / Hangzhou KFC",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhaopin.com/jobdetail/CC140408480J40949214808.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Tasks: coordinate the timing of items served together."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "cook-adjacent-short-order",
+                "limitation": "Adjacent role task comparison only.",
+                "market": "United States",
+                "name": "O*NET: Cooks, Short Order (35-2015.00)",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2015.00"
               }
             ]
           },
@@ -31963,6 +32004,14 @@
           {
             "href": "https://www.onetonline.org/link/summary/35-1011.00",
             "label": "O*NET: Chefs and Head Cooks 35-1011.00"
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/35-2021.00",
+            "label": "O*NET Food Preparation Workers 35-2021"
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/35-9021.00",
+            "label": "O*NET Dishwashers 35-9021"
           }
         ],
         "evidence_note": {
@@ -32808,13 +32857,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "来源": {
-              "$source": "sag-moa",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "actors.source-register.published.1"
-            },
+            "来源": "O*NET task and work-context background",
             "链接": {
               "$source": "sag-moa",
               "block": "source-register",
@@ -33423,15 +33466,15 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
-            "id": "bls",
+            "id": "bls-projections",
             "label": {
-              "$source": "bls",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34565,15 +34608,15 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "cn-food-law",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
-            "id": "bls",
+            "id": "cn-food-law",
             "label": {
-              "$source": "bls",
+              "$source": "cn-food-law",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34677,24 +34720,6 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
-          },
-          {
-            "href": {
-              "$source": "cn-food-law",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            },
-            "id": "food-law",
-            "label": {
-              "$source": "cn-food-law",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "actors.source-register.published.1"
-            },
-            "scope": "Food business activity in China: the statutory duties under Articles 44/45/55/56/57 of the Food Safety Law, with the operator and position division of labour checked separately"
           }
         ]
       },
@@ -34840,7 +34865,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_ref": "National Bureau of Statistics Average Annual Wages of Urban Unit Employees in 2025 ｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_ref": "National Bureau of Statistics Average Annual Wages of Urban Unit Employees in 2025 ｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html; National Bureau of Statistics 2025 Survey Report on Migrant Workers｜https://www.stats.gov.cn/sj/zxfb/202604/t20260430_1963472.html",
           "china_salary_note": {
             "$item": "actors.display.career_snapshot_primary_locale.boundary",
             "block": "china-salary",
@@ -34885,16 +34910,17 @@
               }
             }
           ],
-          "china_soc_row": "U.S. occupational code: O*NET-SOC 35-2011.00 (Cooks, Fast Food); the U.S. wage and employment figures use that single-occupation measure, and mainland China has not established a corresponding occupation-level wage measure.",
+          "china_soc_row": "Compare mainland postings by outlet and station. This page did not verify a national wage distribution for the occupation in mainland China. U.S. wage and employment figures cover the corresponding U.S. occupation only.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-fast-loudi",
+            "posting-fast-hangzhou"
           ],
           "sources_note": "Source links are used according to their own statistical or announcement scope; where the statistical period, survey population and pay measure differ they are cited separately and no cross-conversion is made.",
           "ui": {
             "ai_heading": "Will AI or automation affect fast food cook wages?",
             "driver_heading": "Which industries and settings use fast food cooks?",
-            "official_heading": "Official statistical measures and notes on what is missing",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Educational background, job directions and notes (editorially compiled, not wage statistics)",
             "scenario_heading": "How should preparation directions and job tasks be checked?",
             "scenario_interpretation_label": "Notes and suggested checks",
@@ -36654,7 +36680,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of fast food cooks",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36766,14 +36792,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
             "label": "Understand my personality preferences"
@@ -37186,60 +37204,63 @@
       },
       {
         "derivation": null,
-        "display_value": "About 669,500 people (2024)",
+        "display_value": "640,500 people (2025)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment size (single-occupation measure)",
-        "occupation_scope": "Cooks, Fast Food（O*NET-SOC 35-2011.00）",
-        "period": "2024; retrieved 2026-09-18",
+        "measure": "Base-year employment",
+        "occupation_scope": "35-2011 fast food cook exact row, not the family",
+        "period": "2025—2035 (2025 base year); consulted 2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Declining -14% (2024—2034; employment falls from 669,500 to 579,200, a net change of about -90,300)",
+        "display_value": "+0.6% (2025—2035; rounded to 1% in OOH/O*NET)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Employment change rate (single-occupation measure)",
-        "occupation_scope": "Cooks, Fast Food (O*NET-SOC 35-2011.00); the O*NET classification label is “Decline (-1% or lower)”",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "measure": "Percentage change",
+        "occupation_scope": "35-2011 fast food cook exact row, not the family",
+        "period": "2025—2035 (2025 base year); consulted 2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 82,100 per year (average annual job openings for 2024—2034, including growth and replacement demand)",
+        "display_value": "86,400 per year (2025—2035 average, including replacement)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Average annual job openings (single-occupation measure)",
-        "occupation_scope": "Cooks, Fast Food (O*NET-SOC 35-2011.00); O*NET notes that average annual openings include growth demand and replacement demand",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "measure": "Average annual openings",
+        "occupation_scope": "35-2011 fast food cook exact row, not the family",
+        "period": "2025—2035 (2025 base year); consulted 2026-10-09",
         "source_refs": [
-          "onet"
+          "bls-projections",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Accommodation and food services 97% (current fast food industry employment share, year not stated)",
+        "display_value": "Accommodation and food services 97%",
         "fact_id": "industry-theater",
         "market": "United States",
         "measure": "Industry employment share (not wages)",
         "occupation_scope": "35-2011 fast food current industry distribution, not wages",
-        "period": "Currently no stated year; consulted 2026-10-09",
+        "period": "2025",
         "source_refs": [
-          "onet-industry"
+          "sag-moa"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Other industries 3% (current fast food employment share, year not stated)",
+        "display_value": "Other industries 3% (standalone table does not show a year)",
         "fact_id": "industry-education",
         "market": "United States",
         "measure": "Industry employment share (not wages)",
         "occupation_scope": "35-2011 fast food current industry distribution, not wages",
-        "period": "Currently no stated year; consulted 2026-10-09",
+        "period": "The industry table does not state a data year",
         "source_refs": [
           "onet-industry"
         ]
@@ -37347,7 +37368,7 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
+        "derivation": "Editorial estimate on a 0–100 scale from three selected tasks. It is not a probability of replacement. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
         "display_value": "25%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
@@ -37357,6 +37378,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The opened listing shows ten part-time crew positions and distinguishes food preparation and cleaning from front-of-house work. It advertises CNY 3,000–3,500 in total pay, with hourly pay settled monthly and bonuses and allowances included. Current vacancy status is unverified.",
+        "fact_id": "posting-fast-loudi",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Tongcheng store, Loudi: part-time kitchen and assembly crew",
+        "period": "Opened 2026-11-09",
+        "source_refs": [
+          "fast-loudi"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The part-time posting distinguishes counter duties from food preparation and equipment sanitation. No exact pay amount was visible.",
+        "fact_id": "posting-fast-hangzhou",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Yuhang, Hangzhou: KFC kitchen and assembly crew",
+        "period": "Opened 2026-11-09",
+        "source_refs": [
+          "fast-hangzhou"
+        ]
       }
     ]
   },
@@ -37365,7 +37410,7 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "Editorial AI impact index: 25/100 across three tasks"
     },
     "badges": [
       "Service and operations · fast food preparation and service",
@@ -37383,19 +37428,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, declining -14%; net change of about -90,300)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, about 669,500 people)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024—2034, about 82,100)"
+        "label": "U.S. projected annual job openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37409,14 +37454,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Fast food cooks (O*NET-SOC 35-2011.00) prepare and cook food in a fast food restaurant with a limited menu: weighing, cutting, heating and boxing according to order tickets or verbal instructions, operating large-capacity single-purpose equipment, checking quality and quantity, boxing, delivering and cleaning and restocking; it includes the U.S. 2025 median hourly wage of 14.85 dollars, a projected employment decline of -14% for 2024—2034 and about 82,100 average annual openings, the mainland China occupation-level wage gap, burn and cut and food-safety risk control, and the boundaries of the fictional exercises."
+      "text": "What do fast food cooks do on a limited-menu line? Compare kitchen and counter duties, U.S. pay and job outlook, training, and sample job listings in mainland China."
     },
     "title": {
       "availability": "available",
       "text": "Fast food cooks"
     }
   },
-  "source_content_sha256": "91bd41c2a466c04784de1a1bda6940f17e4a0c2104b571715d0188a1b54070e8",
+  "source_content_sha256": "bb179e203d2d92cc2f289b4c208443c569bff1de0114faddae2309139124a01a",
   "subject": {
     "canonical_slug": "cooks-fast-food",
     "name": "Fast food cooks",

@@ -152,6 +152,9 @@
       "item:music-directors-and-composers.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:music-directors-and-composers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:music-directors-and-composers.profile.career-quick-answers-block.5": {
         "status": "mapped"
       },
@@ -13550,6 +13553,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。总谱新版改了结束小节，声部分谱仍是旧版。分别写出应给作曲或编配者、排练负责人的信息。"
+            ]
+          },
+          "id": "music-directors-and-composers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "区分作曲稿与排练指示",
+          "type": "notice"
         }
       ]
     },
@@ -16043,6 +16061,13 @@
         "id": "music-directors-and-composers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "music-directors-and-composers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16236,7 +16261,7 @@
       "text": "音乐总监与作曲家"
     }
   },
-  "source_content_sha256": "b2aef9dc4d98e0ce50170e3f8d2947544986b3b80f4ab774f7d57bbc27a4a8e7",
+  "source_content_sha256": "e732575538b590237134d7c1db47142bd7a777dc58133670379de71ceac069c9",
   "subject": {
     "canonical_slug": "music-directors-and-composers",
     "name": "音乐总监与作曲家",

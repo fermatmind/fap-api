@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a44-rongchang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a44-yuechi": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23075,7 +23041,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "FT350全部虚构：产品Z、批次CP350，题设质量闭区间98—102g。P1批CP350、质量100g、外观未记；P2批CP350、质量103g、外观原文“长方形”；P3批CP350、质量缺失、外观原文“边缘缺口”。只核题设质量范围并照录外观，不判真实合格或设备状态。"
+              "用 FT350 的三条纸面记录，核质量范围、照录外观、标待核，并另记单项变式的变化。"
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.quick-decision.fit-decision-checklist.2",
@@ -26647,12 +26613,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他城市"
+              "荣昌与合川招聘样本"
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a44-rongchang",
+            "a44-yuechi"
           ],
           "type": "prose"
         },
@@ -26661,12 +26628,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可核验的其他城市本职业月薪统计；不同地区与产品类型的差异较大，需按工作地核对。"
+              "重庆唯美陶瓷列压机手 4 人，初中及以上、三班倒，接受无经验者。薪资栏为 4,500–5,000，未在该岗位行标明计薪周期。 岳池县发布的川渝招聘表列重庆合川星源玻璃器皿压机师傅，4,000–8,000 元/月，要求三年以上玻璃压机操作经验。吹机和机修岗位另列。 两条样本分别来自陶瓷压机与玻璃压机，经验条件不同。对比前应核计薪周期、班次及当前在招状态。"
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a44-rongchang",
+            "a44-yuechi"
           ],
           "type": "prose"
         },
@@ -27424,13 +27392,13 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
@@ -27812,7 +27780,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "FT350中保P1外观未知、P2质量超限及P3质量缺失，不猜测现场处置",
+              "用 FT350 的三条纸面记录，核质量范围、照录外观、标待核，并另记单项变式的变化。",
               "接受原记录与核对表被独立复查"
             ]
           },
@@ -28337,7 +28305,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "FT350只需比较g单位闭区间：100在98—102内、103超、缺失保未知；第5天只补P3=99为内。可复核资料判断不等于真实称重、调机或质量资格。"
+              "用 FT350 的三条纸面记录，核质量范围、照录外观、标待核，并另记单项变式的变化。"
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.fit.personality-fit-block.52",
@@ -28367,7 +28335,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型仅反思入口，不从类型判适合。观察FT350能否保P1未知、P2超限、P3原文及接受复核；真实训练与环境另核。"
+              "用 FT350 的三条纸面记录，核质量范围、照录外观、标待核，并另记单项变式的变化。"
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.fit.personality-fit-block.54",
@@ -29207,24 +29175,23 @@
                   "缺失不补零，外观原文不推真实质量",
                   "全题作者虚构，不是机构标准",
                   "产出为三行质量范围/外观核对与未发送函",
-                  "未给设备参数、材料配方、实测授权，不自行补设"
+                  "单项变式：P3 的质量补录为 99 克，其余记录不变。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
                   "材料二：任务",
-                  "逐行比较质量范围，照录外观或未知；整理P1外观未知、P2超范围、P3质量缺失",
+                  "逐行核对质量范围，照录外观或标为未知，再写待核项和依据。",
                   "纯资料核对，不称重、不操机、不放行、不决定停机"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "材料三：可独立复核答案",
-                  "初始：P1质量在范围内、外观未知；P2质量超上限、照录“长方形”；P3质量未知、照录“边缘缺口”。第5天唯一补P3质量99g，质量改为在范围内；P1外观未知、P2超限与P3外观原文均保留。",
-                  "未发送函：列P1外观未知、P2质量超范围、P3质量缺失，请责任人核原标签和规格版本；姓名未给、无回复不造发送或闭环",
-                  "第5天只接受P3质量99g，不补其他字段"
+                  "先独立完成",
+                  "第六天交原题与变式，并保留未发送函。",
+                  "第七天到「常见问题与资料来源」打开「FT350 压制记录参考答案（完成第六天后再打开）」。"
                 ]
               },
               {
@@ -29252,7 +29219,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "作品一：输入来源表",
-                  "列产品Z、CP350、g及98—102闭区间、三张标签；当前招聘未取记无",
+                  "分开列 FT350 题设范围和招聘样本的岗位要求。",
                   "保虚构标注及未知，不当真实生产材料"
                 ]
               },
@@ -29260,7 +29227,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "作品二：三行核对表",
-                  "P1在范围外观未知；P2超范围照录长方形；P3质量未知照录边缘缺口",
+                  "逐条记录质量、依据与外观。",
                   "对照答案独立复核，不推真实合格"
                 ]
               },
@@ -29268,8 +29235,8 @@
                 "id": "report-summary",
                 "values": [
                   "作品三：待核函草稿与更新",
-                  "写三待核，标未发送、责任人未给无回复；第5天唯一补P3质量99g",
-                  "P1未知P2超与P3外观均保留"
+                  "保留原记录，另写变式的变化行。",
+                  "附未发送函并注明待核项。"
                 ]
               },
               {
@@ -29348,50 +29315,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天：读输入",
-                  "照录Z、CP350、g、闭区间98—102及三标签"
+                  "第 1 天",
+                  "抄录批次、单位和范围。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天：核质量",
-                  "写P1范围内、P2超限、P3未知及依据"
+                  "第 2 天",
+                  "逐条比质量并记依据。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天：核外观",
-                  "P1未知、P2长方形、P3边缘缺口照录，不推合格"
+                  "第 3 天",
+                  "照录外观并标空白项。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4天：写待核函",
-                  "列三待核和规格版本请求，标未发送姓名未给无回复"
+                  "第 4 天",
+                  "列待核项，写未发送函。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5天：唯一输入更新",
-                  "只补P3质量99g为内，其他记录不变"
+                  "第 5 天",
+                  "比较 P3 的补录与原题。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天：独立复核",
-                  "对照材料三核四作品；外部反馈可选，无则记无"
+                  "第 6 天",
+                  "独立交原题三行和变式的变化行，附上未发送函。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天：反思",
-                  "记录核对习惯修改与剩余未知，不推操机能力或录用"
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「FT350 压制记录参考答案（完成第六天后再打开）」。 写一处修订。"
                 ]
               }
             ]
@@ -29408,13 +29375,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第1天：单位批次范围原值是否完整",
-              "第2天：内、超限、未知是否正确",
-              "第3天：外观原文与未知是否照录",
-              "第4天：是否标未发送、姓名未给、无回复",
-              "第5天：是否只补P3质量99g，保其余项目",
-              "第6天：四作品复核与工具反馈说明是否真实",
-              "第7天：是否保未知及纸面能力边界"
+              "记录单位和范围。",
+              "写每条依据。",
+              "照录外观或标未知。",
+              "附未发送函。",
+              "单列变式变化。",
+              "保留独立交件。",
+              "对照参考记录修订。"
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.path.seven-day-decision.1",
@@ -29535,12 +29502,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "编辑招聘核对：读取真实公告日期、当前招聘状态、产品设备与职责。 证据不足：未取得中国代表性当前招聘条件、逐法域设备与健康卫生规则、具体训练费用周期；不能设统一学历、复训期限或设备权限。"
+              "重庆唯美陶瓷列压机手 4 人，初中及以上、三班倒，接受无经验者。薪资栏为 4,500–5,000，未在该岗位行标明计薪周期。 岳池县发布的川渝招聘表列重庆合川星源玻璃器皿压机师傅，4,000–8,000 元/月，要求三年以上玻璃压机操作经验。吹机和机修岗位另列。 两条样本分别来自陶瓷压机与玻璃压机，经验条件不同。对比前应核计薪周期、班次及当前在招状态。"
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.path.recruitment-sample.1",
           "source_refs": [
-            "internal-rubric"
+            "a44-rongchang",
+            "a44-yuechi"
           ],
           "title": "挤压、成型、压制与压实设备操作工｜path",
           "type": "notice"
@@ -31590,13 +31558,13 @@
                 ]
               },
               {
-                "answer": "2025中国城镇制造业就业人员税前年平均工资：非私营113,594元/年、私营76,055元/年。成型与压制作业属于制造生产任务，采用制造业作宽行业背景；覆盖多职业，非本职业中位、起薪、到手工资或城市报价。 证据不足：未取得中国精确职业全国城市工资和当前代表招聘样本。",
+                "answer": "重庆唯美陶瓷列压机手 4 人，初中及以上、三班倒，接受无经验者。薪资栏为 4,500–5,000，未在该岗位行标明计薪周期。 岳池县发布的川渝招聘表列重庆合川星源玻璃器皿压机师傅，4,000–8,000 元/月，要求三年以上玻璃压机操作经验。吹机和机修岗位另列。 两条样本分别来自陶瓷压机与玻璃压机，经验条件不同。对比前应核计薪周期、班次及当前在招状态。 全国职业工资分布仍缺可比数据。",
                 "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.faq.3",
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.q3",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "a44-rongchang",
+                  "a44-yuechi"
                 ]
               },
               {
@@ -31664,15 +31632,19 @@
                 ]
               },
               {
-                "answer": "BLS精确SOC51-9041：2025就业58,300人，2035预测59,200人；2025—2035增长1.5%、官方净变化900人、年均职位空缺5,200个。千人列分别舍入；空缺含增长与更替，不是十年合计或净新增。 转向按真实目标任务与条件核；FT350三行记录与未发送函只能观察资料核对，不证明操机或录用。",
+                "answer": "BLS 表 1.2 的美国 51-9041 行：2025 年约 58,300 人，2035 年预计约 59,200 人，增长 1.5%，年均岗位空缺约 5,200 个，含替补。人数分别取整。",
                 "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.faq.10",
                 "question": "美国就业前景如何？转行需要补什么？",
                 "question_key": "career.faq.extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.outlook-transition",
                 "source_refs": [
-                  "onet-wages-2025",
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
+              },
+              {
+                "answer": "P1 为 100 克，在 98–102 克范围内，外观未记录。P2 为 103 克，超出 102 克上限，外观照录「长方形」。P3 原题质量未知，外观照录「边缘缺口」。变式 P3 补录 99 克，在范围内，其他项不变。未发送函示例：请核 P1 的外观、P2 的原始读数及规格版本，以及 P3 的补录来源，并确认接手人。题设核对不能用于实际放行。 自核四项：质量与单位、外观原文、变式变化、未发送函与权限。",
+                "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.faq.11",
+                "question": "FT350 压制记录参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.11"
               }
             ]
           },
@@ -31761,26 +31733,14 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI（英文）",
+                "entity": "MBTI 人格测评",
                 "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（英文）",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI（中文）",
-                "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five（中文）",
-                "id": "navigation-5",
+                "entity": "大五人格测评",
+                "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
@@ -31812,8 +31772,7 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "美国O*NET51-9041.00指设定、操作或看护玻璃成型机、plodder和tuber等机器，把玻璃器皿、食品、橡胶、肥皂、砖瓦、黏土、蜡、烟草或化妆品等产品成型。官方任务包括参数与物料控制、测量称重、仪表监视、卡料与不良品处理及生产记录；安装部件和拆修等属任务集合中的补充项，不要求每岗做全部任务。",
-                  "兴趣量尺R92 C55 I21 A5 E4 S1，不是个人适合率；JobZone1—2泛分组。",
-                  "2025中位45,760/22.00；旧2024就业57,300、2024—2034增长1%—2%和空缺5,200；旧制造业93%仅美国背景。"
+                  "兴趣量尺R92 C55 I21 A5 E4 S1，不是个人适合率；JobZone1—2泛分组。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31826,11 +31785,12 @@
                 "url": "https://www.onetonline.org/link/summary/51-9041.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "本轮实读26任务含core参数、测量称重、仪表、卡料与记录；部件安装拆修为supplemental，不每岗全做。",
                   "美国调查每日常规防护100%、噪声85%、污染物79%、冷热63%；65%几乎持续站立、61%每日面对面；不代表中国规则或事故率。",
-                  "教育显示78%高中同等、9%高中后证书、8%大学无学位；三类95%不补未知其余。7软件类别含SAP数据库排程办公，不推每岗编程。"
+                  "教育显示78%高中同等、9%高中后证书、8%大学无学位；三类95%不补未知其余。7软件类别含SAP数据库排程办公，不推每岗编程。",
+                  "2025 美国中位时薪 22.00 美元、中位年薪 45,760 美元，制造业就业占 93%。就业预测见 BLS 表 1.2。"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
@@ -31845,8 +31805,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "BLS精确SOC51-9041：2025就业58,300人，2035预测59,200人；2025—2035增长1.5%、官方净变化900人、年均职位空缺5,200个。千人列分别舍入；空缺含增长与更替，不是十年合计或净新增。",
-                  "美国BLS典型入口为高中或同等学历、无需相关职业经验、中期在职训练。O*NET教育调查78%回答高中或同等、9%高中后证书、8%有大学经历无学位；显示三类合计95%不是完整分布。JobZone1—2为泛准备分组，不是该职业专属训练天数。"
+                  "BLS 表 1.2 的美国 51-9041 行：2025 年约 58,300 人，2035 年预计约 59,200 人，增长 1.5%，年均岗位空缺约 5,200 个，含替补。人数分别取整。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
@@ -32088,6 +32047,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "重庆唯美陶瓷列压机手 4 人，初中及以上、三班倒，接受无经验者。薪资栏为 4,500–5,000，未在该岗位行标明计薪周期。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a44-rongchang",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "压机岗位招聘样本",
+                "period": "2026-02-09",
+                "publisher": "重庆市荣昌区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.rongchang.gov.cn/bm/qrlsbj/zwgk_70831/zfxxgkml_160179/cjjy/zpxx/myqyzp/202602/t20260209_15397532.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "岳池县发布的川渝招聘表列重庆合川星源玻璃器皿压机师傅，4,000–8,000 元/月，要求三年以上玻璃压机操作经验。吹机和机修岗位另列。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a44-yuechi",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "压机岗位招聘样本",
+                "period": "2024-04-29",
+                "publisher": "岳池县人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.scyc.gov.cn/ycxrmzfw/wgjy/pc/content/content_1784861546425794560.html"
               }
             ]
           },
@@ -34948,6 +34937,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a44-rongchang",
+            "posting-a44-yuechi"
+          ],
           "sources_note": {
             "$item": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36859,7 +36852,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测评"
           },
           {
             "href": {
@@ -36869,27 +36862,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI（中文）"
-          },
-          {
-            "href": {
-              "$link": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five（中文）"
+            "label": "大五人格测评"
           }
         ]
       },
@@ -37277,6 +37250,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "重庆唯美陶瓷列压机手 4 人，初中及以上、三班倒，接受无经验者。薪资栏为 4,500–5,000，未在该岗位行标明计薪周期。",
+        "fact_id": "posting-a44-rongchang",
+        "market": "中国大陆",
+        "measure": "招聘报价",
+        "occupation_scope": "压机岗位招聘样本",
+        "period": "2026-02-09",
+        "source_refs": [
+          "a44-rongchang"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "岳池县发布的川渝招聘表列重庆合川星源玻璃器皿压机师傅，4,000–8,000 元/月，要求三年以上玻璃压机操作经验。吹机和机修岗位另列。",
+        "fact_id": "posting-a44-yuechi",
+        "market": "中国大陆",
+        "measure": "招聘报价",
+        "occupation_scope": "压机岗位招聘样本",
+        "period": "2024-04-29",
+        "source_refs": [
+          "a44-yuechi"
+        ]
       }
     ]
   },
@@ -37336,7 +37333,7 @@
       "text": "挤压、成型、压制与压实设备操作工"
     }
   },
-  "source_content_sha256": "804a3c029611859704e8cdc22b75c4d4301a2705c86c5bd1d2fbf1c620d65631",
+  "source_content_sha256": "0c235b537248d4acc16ed6d14da6a969003e3597272f586134b0198b9791051c",
   "subject": {
     "canonical_slug": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders",
     "name": "挤压、成型、压制与压实设备操作工",

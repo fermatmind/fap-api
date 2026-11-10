@@ -155,6 +155,9 @@
       "item:occupational-therapy-assistants-and-aides.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:occupational-therapy-assistants-and-aides.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:occupational-therapy-assistants-and-aides.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -12983,6 +12986,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。一则岗位要求记录治疗活动反应，另一则主要准备器材与场地。分别写一个关于监督人及记录职责的问题。"
+            ]
+          },
+          "id": "occupational-therapy-assistants-and-aides.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-aide"
+          ],
+          "title": "区分作业治疗记录与准备工作",
+          "type": "notice"
         }
       ]
     },
@@ -15582,6 +15600,13 @@
         "id": "occupational-therapy-assistants-and-aides.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-therapy-assistants-and-aides.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15775,7 +15800,7 @@
       "text": "作业治疗助理与辅助员：职责、工资及资格差异"
     }
   },
-  "source_content_sha256": "c61fbb6b1c0d45cf9e693699bb9844848100aa6d3465bdf2ead3d2a4da0c15a6",
+  "source_content_sha256": "db9bbcc23d9e7631f0ed2bbab1d7a2563a6b0f632d18ddcd440930972c4ca158",
   "subject": {
     "canonical_slug": "occupational-therapy-assistants-and-aides",
     "name": "作业治疗助理与辅助员",

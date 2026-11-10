@@ -1478,6 +1478,9 @@
       "item:coil-winders-tapers-and-finishers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:coil-winders-tapers-and-finishers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:coil-winders-tapers-and-finishers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31312,6 +31315,21 @@
           "id": "coil-winders-tapers-and-finishers.path.recruitment-sample.1",
           "title": "Notes on using hiring samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Order C4 requires a traceable winding ID and material lot. Record A has the winding ID but no lot. B has a lot for another order. Write what is missing and who should verify it. Leave winding equipment to authorized staff."
+            ]
+          },
+          "id": "coil-winders-tapers-and-finishers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check a coil winding record",
+          "type": "notice"
         }
       ]
     },
@@ -38203,6 +38221,13 @@
         "id": "coil-winders-tapers-and-finishers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "coil-winders-tapers-and-finishers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38807,7 +38832,7 @@
       "text": "Coil winders, tapers, and finishers"
     }
   },
-  "source_content_sha256": "9d2d94e447c34ca9be7a50a3187300d5a83f430a7f1c21fce6e23dc775325ddf",
+  "source_content_sha256": "b777486b3d90bc5b2909513314cf178cdc05c843dd2d67836dba3f0ec424de5e",
   "subject": {
     "canonical_slug": "coil-winders-tapers-and-finishers",
     "name": "Coil winders, tapers, and finishers",

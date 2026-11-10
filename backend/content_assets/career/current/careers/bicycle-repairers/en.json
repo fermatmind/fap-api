@@ -45,13 +45,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -72,7 +72,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -1551,7 +1551,7 @@
         "status": "pending_mapping"
       },
       "item:bicycle-repairers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:bicycle-repairers.sources.source-card.1": {
         "status": "mapped"
@@ -1602,7 +1602,7 @@
         "status": "mapped"
       },
       "item:bicycle-repairers.us-salary.career-snapshot-secondary-locale.22": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:bicycle-repairers.us-salary.career-snapshot-secondary-locale.23": {
         "status": "mapped"
@@ -23225,12 +23225,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "One-sentence judgment: a bicycle repairer is not “someone who can change an inner tube,” but a technical position that inspects, repairs, adjusts, assembles, and maintains bicycles according to manufacturer specifications and work sequence: receiving the bicycle and asking about riding use and symptoms, performing visual and functional inspection and locating faults by symptom, estimating labor and parts and opening a repair work order, installing and adjusting shifting and gearing, installing and adjusting brakes and brake pads, installing new tires and inner tubes, cleaning and lubricating parts, truing wheels (lateral and radial), disassembling and assembling axles to repair or adjust or replace defective parts, installing and replacing accessories and attachments such as handlebars and lights and saddles, adjusting riding position to the customer's build and use, and explaining repair plans and parts trade-offs to customers; it is not suitable for people who tighten screws by feel only, are unwilling to verify torque and clearance against model manuals and specifications, and are unwilling to treat brake and wheel rechecks and work order records as part of the job."
+              "Go to BR-73 in section 09. Check two paper work orders and submit a one-page handoff."
             ]
           },
           "id": "bicycle-repairers.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
+            "br73-editor",
             "onet"
           ],
           "type": "prose"
@@ -23240,11 +23240,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: you are willing to repeatedly locate the same mechanical error until the recheck passes, you can keep details consistent using hands and visual inspection and measuring tools, you recheck brakes and wheels and fasteners in order and stop when out of specification, you are willing to check the manual before starting when the model or part version is unclear, you can explain technical trade-offs in language the customer understands, and you can truthfully record work orders and parts and torque and exceptions."
+              "Try this if you like checking parts records and explaining unresolved issues."
             ]
           },
           "id": "bicycle-repairers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
+            "br73-editor",
             "onet"
           ],
           "type": "prose"
@@ -23254,13 +23255,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions for pausing investment first: you have not yet completed a full receive—inspect—locate—adjust—recheck—hand over loop under any supervised conditions, or you can only explain your interest by saying “I have repaired my own bike”; also do not treat personal disassembly experience or a hobby course as proof that you can independently judge whether brakes and wheels and fasteners are safe, or independently release a bicycle for the road. Specifications for brakes and fasteners and wheel tension, the compatibility of e-assist and batteries and chargers, the use of greases and cleaners and tools, customer information and vehicle information handling, and inspection and release and stoppage authority must be carried out in accordance with the applicable jurisdiction and the competent authority and the employer and the manufacturer manual and must leave traceable records; this page does not provide any torque values, assembly sequence, or methods for modification and removing speed limits."
+              "Check work records and release authority separately."
             ]
           },
           "id": "bicycle-repairers.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
+            "br73-editor",
             "onet"
           ],
           "type": "prose"
@@ -23270,12 +23270,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Occupational identity and definition must be verified separately: O*NET lists 49-3091.00 (Bicycle Repairers) as Job Zone 1–2 (SVP below 6.0), and the page lists only three education levels (some jobs require a high school diploma or equivalent, some require having attended college without a degree, and some require less than a high school diploma) without publishing the percentage at each level; the page also does not mark this occupation as Bright Outlook, and the employment projection is a decline (the employment trends page gives 13,200 in 2024 falling to about 12,900 in 2034, -2%, while still projecting about 1,600 annual openings over the projection period). It must also be noted: the wage, employment, and industry data on this page are all under this occupation's separate definition on the O*NET page (the page does not contain labels such as “Wage data for …” or “Employment data for …” taken from another occupation). Education, occupational training, industry certification, employer hiring and store task authorization, and jurisdictional requirements involving e-assist and batteries and modification and removing speed limits are different statuses and must be verified item by item according to employer and position and jurisdiction."
+              "BLS Table 1.2 lists a high school diploma or equivalent, no typical related work experience and moderate-term on-the-job training for 49-3091. Check the employer’s hiring requirements, work order review and release authority separately."
             ]
           },
           "id": "bicycle-repairers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -23285,12 +23285,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: this is a technical position that delivers steadily by verifying item by item against model manuals and specifications and working through the rhythm of repeatedly locating mechanical errors and rechecking, with the core being repair and adjustment and brake and wheel rechecks and work order records — not an interest in cycling or an imagination about social media; its U.S. wage and employment are under this occupation's separate definition, and growth is projected to be negative."
+              "Go to BR-73 in section 09. Check two paper work orders and submit a one-page handoff."
             ]
           },
           "id": "bicycle-repairers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
+            "br73-editor",
             "onet"
           ],
           "type": "prose"
@@ -23357,7 +23357,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Work environment | 98% have face-to-face discussions every day, 92% have telephone conversations every day, 41% are in contact with others continuously (another 59% most of the time), 36% work at moderate proximity (arm's length) to others, and 11% consider dealing with external customers or the public very important; 78% continuously or almost continuously stand (another 17% more than half the time), 91% sit less than half the time, 24% continuously or almost continuously need to keep their balance (another 56% less than half the time and 17% never), 11% bend or twist the body about half the time, and 89% never climb ladders or scaffolds; indoors without environmental control: 76% at least once a week and 12% never; the page this round does not show a daily proportion, 26% are outdoors in all weather every day, 24% are exposed to contaminants every day, 11% are exposed to distracting or uncomfortable noise at least once a week, 14% encounter minor burns, cuts, bites, or stings at least once a year, and 12% never come into contact with hazardous equipment; 91% consider the work not at all automated and 98% consider the pace determined by equipment speed not at all important; the page also has about 29 context items (including whether common or specialized protective equipment is worn, time pressure, and frequency and precision requirements) whose percentage distributions are not published, and this page does not fill in values on their behalf.\nMain equipment and tools | Hand tools (hex keys, sockets, wrenches, spoke wrenches, chain tools), specialized measuring tools (spoke tension meters, calipers, specification gauges) and truing equipment, lifts and repair stands and workbenches, cleaners and lubricants and solvents and greases, bench grinders and welding and painting equipment (according to position scope), tire and inner tube and tubeless system tools, repair management software and point-of-sale systems, and personal protection (eye protection and gloves and ventilation as the work requires).\nTask rhythm | 11% have a typical workweek of less than 40 hours (the rest of the distribution is not published); 65% have a lot of freedom in decisions and 32% some freedom; 62% have a lot of freedom in determining tasks and priorities and 28% some freedom; 80% consider competition moderate; 23% consider repeating the same tasks very important; 13% are in conflict situations at least once a month; 24% consider the consequences of error extremely serious.\nCollaboration | Collaborate with technicians and sales and inventory staff in the same shop; 12% consider working with a work group or team very important; 32% bear very high responsibility for others' work results and outcomes; 11% bear moderate responsibility for the health and safety of others.\nCompliance and safety | Repair and adjustment and assembly must be carried out according to the manufacturer manual and specifications for the specific model and parts; where e-assist and lithium-ion batteries and chargers are involved, use chargers provided or recommended by the manufacturer and batteries confirmed as compatible, and do not use battery packs that have been modified or reworked by unqualified persons; this guidance does not provide repair authorization and recommends charging while someone is present (U.S. CPSC micromobility product safety guidance); on the mainland China side, electric bicycles are subject to the mandatory national standard GB 17761-2024 Safety Technical Specification for Electric Bicycles (issued 2024-12-31, effective 2025-09-01, fully replacing GB 17761-2018), with CCC product certification for related production / certification / sales, not a repair technician license; O*NET lists 1 national certification (Certified Bicycle Technician).\nRecords and retrospective | Work orders and model and part version, faults and the locating process, adjustments performed and specifications, brake and wheel and fastener recheck results, parts and labor and costs, and customer feedback and exceptions need to be traceable.\nSkills and training | O*NET lists this occupation as Job Zone 1–2 (SVP below 6.0); basic skills are led by active listening 66, critical thinking 63, reading comprehension 50, speaking 50, monitoring 44, and writing 44; transferable skills are led by repairing 72, troubleshooting 60, service orientation 56, time management 53, equipment maintenance 50, quality control analysis 50, social perceptiveness 50, complex problem solving 47, equipment selection 47, and installation 47; knowledge is led by mechanical 92, customer and personal service 86, sales and marketing 69, public safety and security 65, production and processing 60, and engineering and technology 58 (33 items in total with scores); there are 52 abilities in total with scores (near vision 72, finger dexterity 69, visualization 69, arm-hand steadiness 66, and others); there are 19 work styles, with attention to detail 75, dependability 71, and caution 50; these are occupational characteristic scores, not individual thresholds.\nEntry and authorization | Education and certification do not equal inspection and release or modification determination authority; the O*NET educational composition lists only three levels and does not publish proportions, and jobs in this zone require experience ranging from little to a few months and on-the-job training ranging from a few days to a year; O*NET lists 1 national certification, which does not equal a hiring threshold or employer appointment.\nIndustry and employers | The O*NET industry distribution is retail trade 80% and other industries (including real estate and rental and leasing and other services) 20%; the editor lists as job-search verification scenarios: brand stores, independent bike shops, sporting goods retail repair, and shared mobility operations; no occupational share sample for each type of employer was obtained this round."
+              "Work environment | 98% have face-to-face discussions every day, 92% have telephone conversations every day, 41% are in contact with others continuously (another 59% most of the time), 36% work at moderate proximity (arm's length) to others, and 11% consider dealing with external customers or the public very important; 78% continuously or almost continuously stand (another 17% more than half the time), 91% sit less than half the time, 24% continuously or almost continuously need to keep their balance (another 56% less than half the time and 17% never), 11% bend or twist the body about half the time, and 89% never climb ladders or scaffolds; indoors without environmental control: 76% at least once a week and 12% never; the page this round does not show a daily proportion, 26% are outdoors in all weather every day, 24% are exposed to contaminants every day, 11% are exposed to distracting or uncomfortable noise at least once a week, 14% encounter minor burns, cuts, bites, or stings at least once a year, and 12% never come into contact with hazardous equipment; 91% consider the work not at all automated and 98% consider the pace determined by equipment speed not at all important; the page also has about 29 context items (including whether common or specialized protective equipment is worn, time pressure, and frequency and precision requirements) whose percentage distributions are not published, and this page does not fill in values on their behalf.\nMain equipment and tools | Hand tools (hex keys, sockets, wrenches, spoke wrenches, chain tools), specialized measuring tools (spoke tension meters, calipers, specification gauges) and truing equipment, lifts and repair stands and workbenches, cleaners and lubricants and solvents and greases, bench grinders and welding and painting equipment (according to position scope), tire and inner tube and tubeless system tools, repair management software and point-of-sale systems, and personal protection (eye protection and gloves and ventilation as the work requires).\nTask rhythm | 11% have a typical workweek of less than 40 hours (the rest of the distribution is not published); 65% have a lot of freedom in decisions and 32% some freedom; 62% have a lot of freedom in determining tasks and priorities and 28% some freedom; 80% consider competition moderate; 23% consider repeating the same tasks very important; 13% are in conflict situations at least once a month; 24% consider the consequences of error extremely serious.\nCollaboration | Collaborate with technicians and sales and inventory staff in the same shop; 12% consider working with a work group or team very important; 32% bear very high responsibility for others' work results and outcomes; 11% bear moderate responsibility for the health and safety of others.\nCompliance and safety | Repair and adjustment and assembly must be carried out according to the manufacturer manual and specifications for the specific model and parts; where e-assist and lithium-ion batteries and chargers are involved, use chargers provided or recommended by the manufacturer and batteries confirmed as compatible, and do not use battery packs that have been modified or reworked by unqualified persons; this guidance does not provide repair authorization and recommends charging while someone is present (U.S. CPSC micromobility product safety guidance); on the mainland China side, electric bicycles are subject to the mandatory national standard GB 17761-2024 Safety Technical Specification for Electric Bicycles (issued 2024-12-31, effective 2025-09-01, fully replacing GB 17761-2018), with CCC product certification for related production / certification / sales, not a repair technician license; O*NET lists one credential from an industry body (Certified Bicycle Technician).\nRecords and retrospective | Work orders and model and part version, faults and the locating process, adjustments performed and specifications, brake and wheel and fastener recheck results, parts and labor and costs, and customer feedback and exceptions need to be traceable.\nSkills and training | O*NET lists this occupation as Job Zone 1–2 (SVP below 6.0); basic skills are led by active listening 66, critical thinking 63, reading comprehension 50, speaking 50, monitoring 44, and writing 44; transferable skills are led by repairing 72, troubleshooting 60, service orientation 56, time management 53, equipment maintenance 50, quality control analysis 50, social perceptiveness 50, complex problem solving 47, equipment selection 47, and installation 47; knowledge is led by mechanical 92, customer and personal service 86, sales and marketing 69, public safety and security 65, production and processing 60, and engineering and technology 58 (33 items in total with scores); there are 52 abilities in total with scores (near vision 72, finger dexterity 69, visualization 69, arm-hand steadiness 66, and others); there are 19 work styles, with attention to detail 75, dependability 71, and caution 50; these are occupational characteristic scores, not individual thresholds.\nEntry and authorization | Education and certification do not equal inspection and release or modification determination authority; the O*NET educational composition lists only three levels and does not publish proportions, and jobs in this zone require experience ranging from little to a few months and on-the-job training ranging from a few days to a year; O*NET lists one credential from an industry body, which does not equal a hiring threshold or employer appointment.\nIndustry and employers | The O*NET industry distribution is retail trade 80% and other industries (including real estate and rental and leasing and other services) 20%; the editor lists as job-search verification scenarios: brand stores, independent bike shops, sporting goods retail repair, and shared mobility operations; no occupational share sample for each type of employer was obtained this round."
             ]
           },
           "id": "bicycle-repairers.profile.work-context-block.1",
@@ -23420,7 +23420,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The Chinese official position category code table (2022 code classification, PDF page 44 / printed page 77) lists 4-12-04-01 bicycle and electric bicycle repair worker, belonging to daily-use product repair service personnel. This Chinese name includes electric bicycles, a broader scope than U.S. 49-3091.00, and cannot be directly equated. The occupational name and code have a basis, but a precise national occupational wage distribution has still not been obtained. National Bureau of Statistics 2025 residents' services, repair, and other services: urban non-private units 70,226 yuan / year and private units 52,059 yuan / year; the average monthly income of migrant workers in that industry is 4,130 yuan, growth of 2.7%, and industry employment accounts for 12.5% of migrant workers. The first two are pre-tax industry averages and the third is the employment income / months worked of a specific population, none of which is a bicycle repairer's wage. The Jining Human Resources and Social Security Bureau published the 2022 annual wage price attachment, page 9 line 186, occupation bicycle and electric bicycle repair worker, unit yuan / year: low 29,873, lower quartile 31,084, median 36,294, upper quartile 38,973, high 42,083. This serves only as local historical reference with a broader occupational scope; the sample size, taxes, and commission details for this line were not obtained this round, and it cannot be treated as a national or current quote or a U.S. occupational equivalent."
+              "China’s occupational classification lists bicycle and electric bicycle repair workers under 4-12-04-01. That category includes e-bikes and is broader than the U.S. bicycle repairer code used here. The codes do not make the wage figures comparable."
             ]
           },
           "id": "bicycle-repairers.profile.onet-structured-fields-block.3",
@@ -23452,11 +23452,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability."
+              "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour."
             ]
           },
           "id": "bicycle-repairers.profile.onet-structured-fields-block.4",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -23481,7 +23482,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The current industry page lists retail trade 80% and other industries 20%, with no separate data year, and the industry proportion does not measure wages. Sample job titles include Bicycle Fitter, Bicycle Mechanic, Bicycle Repair Technician, and others, and titles cannot prove a specific employer distribution. O*NET2025 U.S. Lightcast job postings list Excel, Outlook, and Word, all three with rates Not available; a posting mention does not equal an adoption rate, an AI effect, or a nationally uniform hiring requirement. The detail page also lists software examples such as repair management and point-of-sale, and examples do not equal measured prevalence in job postings."
+              "The O*NET industry subtable lists retail trade at 80% and other industries at 20%. It does not state a year or show industry wages or the share of specialist shops."
             ]
           },
           "id": "bicycle-repairers.profile.onet-structured-fields-block.5",
@@ -23707,11 +23708,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET lists 49-3091.00 (Bicycle Repairers) as Job Zone 1–2 (SVP below 6.0), and the page lists only three education levels (some jobs require a high school diploma or equivalent, some require having attended college without a degree, and some require less than a high school diploma) without publishing the percentage at each level; jobs in this zone usually involve on-the-job training ranging from a few days to a year, and related experience requirements ranging from little to a few months. The O*NET training page shows 3 related training programs nationwide (Bicycle Mechanics and Repair Technology / Technician), and the occupation summary also lists a registered apprenticeship position Bicycle Repair Technician and provides an Apprenticeship.gov entry point; the certification page lists 1 national certification (Certified Bicycle Technician, United Bicycle Institute). Specific hiring and training requirements in mainland China must be verified separately with the employer, and the applicable electric bicycle and battery and product safety requirements must be met."
+              "BLS Table 1.2 lists a high school diploma or equivalent, no typical related work experience and moderate-term on-the-job training for 49-3091. Check the employer’s hiring requirements, work order review and release authority separately."
             ]
           },
           "id": "bicycle-repairers.profile.career-quick-answers-block.19",
           "source_refs": [
+            "ep",
             "onet",
             "nist",
             "census",
@@ -23739,7 +23741,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Education, training, certification, employer hiring, in-store internal authority, and statutory product requirements are verified separately and do not automatically substitute for one another. U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability."
+              "Education, training, certification, employer hiring, in-store internal authority, and statutory product requirements are verified separately and do not automatically substitute for one another. U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of −5.7%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability."
             ]
           },
           "id": "bicycle-repairers.profile.career-quick-answers-block.21",
@@ -23785,11 +23787,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability. The Chinese official position category code table (2022 code classification, PDF page 44 / printed page 77) lists 4-12-04-01 bicycle and electric bicycle repair worker, belonging to daily-use product repair service personnel. This Chinese name includes electric bicycles, a broader scope than U.S. 49-3091.00, and cannot be directly equated. The occupational name and code have a basis, but a precise national occupational wage distribution has still not been obtained. National Bureau of Statistics 2025 residents' services, repair, and other services: urban non-private units 70,226 yuan / year and private units 52,059 yuan / year; the average monthly income of migrant workers in that industry is 4,130 yuan, growth of 2.7%, and industry employment accounts for 12.5% of migrant workers. The first two are pre-tax industry averages and the third is the employment income / months worked of a specific population, none of which is a bicycle repairer's wage. Local historical materials are listed separately and are not an individual quote."
+              "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour."
             ]
           },
           "id": "bicycle-repairers.profile.career-quick-answers-block.24",
           "source_refs": [
+            "ep",
             "ep-current",
             "cn-career-code",
             "cn-wages-current",
@@ -23817,13 +23820,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The current U.S. O*NET catalog lists 3 related college programs: Minneapolis Community and Technical College (less than 1 year, 5 completers), Northwest Arkansas Community College (1—2 years, 4), and Andrews University (1—2 years, 0). The college catalog is IPEDS2025—26, and completers are for the 2024—25 year; this does not represent current enrollment, the training duration an individual needs, or a hiring threshold. The summary lists the registered apprenticeship Bicycle Repair Technician; the certification page has 1 certification, Certified Bicycle Technician (United Bicycle Institute), which is not a mandatory entry requirement. The Chinese official position category code table (2022 code classification, PDF page 44 / printed page 77) lists 4-12-04-01 bicycle and electric bicycle repair worker, belonging to daily-use product repair service personnel. This Chinese name includes electric bicycles, a broader scope than U.S. 49-3091.00, and cannot be directly equated. The occupational name and code have a basis, but a precise national occupational wage distribution has still not been obtained. Specific hiring conditions must be verified with the employer."
+              "The O*NET query returned three related program records. The 2025–26 directory shows 5, 4 and 0 awards from IPEDS 2024–25. Check current enrollment with each school."
             ]
           },
           "id": "bicycle-repairers.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
             "nist",
+            "onet",
             "census",
             "cn-career-code"
           ],
@@ -23848,7 +23851,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Repair and adjustment and assembly and cleaning and lubrication must be carried out according to the manufacturer manual and specifications for the specific model and parts; where determinations of whether brakes and fasteners and wheel tension have reached a releasable state, whether e-assist and batteries and chargers are compatible, whether modification or removing speed limits is involved, and whether the frame or rim has structural damage are involved, this must be done according to the manufacturer manual and the applicable jurisdiction and store authorization. On the U.S. side, O*NET lists 1 national certification (which does not equal a hiring threshold or employer appointment); on the mainland China side, electric bicycles are subject to the mandatory national standard GB 17761-2024 Safety Technical Specification for Electric Bicycles (issued 2024-12-31, effective 2025-09-01, fully replacing GB 17761-2018, and CCC is a product certification, not an individual repair technician license). Verify the pre-job training and authorization and manufacturer training process before starting, and do not infer them directly from education or experience."
+              "Repair and adjustment and assembly and cleaning and lubrication must be carried out according to the manufacturer manual and specifications for the specific model and parts; where determinations of whether brakes and fasteners and wheel tension have reached a releasable state, whether e-assist and batteries and chargers are compatible, whether modification or removing speed limits is involved, and whether the frame or rim has structural damage are involved, this must be done according to the manufacturer manual and the applicable jurisdiction and store authorization. On the U.S. side, O*NET lists one credential from an industry body (which does not equal a hiring threshold or employer appointment); on the mainland China side, electric bicycles are subject to the mandatory national standard GB 17761-2024 Safety Technical Specification for Electric Bicycles (issued 2024-12-31, effective 2025-09-01, fully replacing GB 17761-2018, and CCC is a product certification, not an individual repair technician license). Verify the pre-job training and authorization and manufacturer training process before starting, and do not infer them directly from education or experience."
             ]
           },
           "id": "bicycle-repairers.profile.career-quick-answers-block.28",
@@ -23910,7 +23913,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Work context shows 11% have a typical workweek of less than 40 hours; 80% consider competition moderate; 24% consider the consequences of error extremely serious (the rest of the distribution is not published), so the recheck and release of brakes and wheels and fasteners is especially critical; 13% are in conflict situations at least once a month; 65% have a lot of freedom in decisions and 32% some freedom, and 62% have a lot of freedom in determining tasks and priorities and 28% some freedom, indicating high job autonomy and also that individuals are responsible for specification determinations. When comparing positions, write the employment arrangement (full-time or part-time), seasonal fluctuation, and commission rules into the written terms."
+              "Work context shows 11% have a typical workweek of less than 40 hours; 80% consider competition moderate; 24% consider the consequences of error extremely serious (the rest of the distribution is not published), so the recheck and release of brakes and wheels and fasteners is especially critical; 13% are in conflict situations at least once a month; 65% have a lot of freedom in decisions and 32% some freedom, and 62% have a lot of freedom in determining tasks and priorities and 28% some freedom, which describes respondents’ day-to-day discretion. Specification rechecks and release authority depend on the role. When comparing positions, write the employment arrangement (full-time or part-time), seasonal fluctuation, and commission rules into the written terms."
             ]
           },
           "id": "bicycle-repairers.profile.career-quick-answers-block.32",
@@ -24466,10 +24469,10 @@
                 "url": "https://www.onetonline.org/link/industry/49-3091.00"
               },
               {
-                "entity": "O*NET bicycle repairer 2025—2035 national employment trends",
+                "entity": "BLS Table 1.2: Bicycle repairers (49-3091)",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 49-3091.00 National Wage Percentiles",
@@ -24496,10 +24499,10 @@
                 "url": "https://www.onetonline.org/link/hot_tech/49-3091.00"
               },
               {
-                "entity": "O*NET bicycle repairer 2025—2035 national employment trends",
+                "entity": "BLS Table 1.2: Bicycle repairers (49-3091)",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "International Labour Organization, Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140)",
@@ -24526,10 +24529,10 @@
                 "url": "https://www.onetonline.org/link/details/49-3091.00"
               },
               {
-                "entity": "O*NET bicycle repairer 2025—2035 national employment trends",
+                "entity": "BLS Table 1.2: Bicycle repairers (49-3091)",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "Park Tool, Wheel Truing (Lateral & Radial) (manufacturer wheel truing technical guide)",
@@ -24692,11 +24695,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The occupational materials and ILO research read this round do not give an overall replacement rate or a disappearance year for bicycle repairers. Text organization can be trialed first, and specific mechanical inspection, repair, and delivery are reviewed by those holding the position duties; task exposure does not equal adoption, efficiency, or employment outcomes. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "A text tool can help organize fault notes and work orders.;Staff perform physical checks, repairs and handovers.;Scores of 25, 0 and 25 give a rounded estimate of 17%.;This is an editorial estimate, not a replacement rate.;See the method for each sample."
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.18",
           "source_refs": [
+            "source-fermatmind-ai-rubric",
             "ilo",
             "bls",
             "editor"
@@ -24850,11 +24854,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 49-3091.00 Occupation Summary (Employment and Projections Fields)"
+              "BLS Table 1.2: Bicycle repairers (49-3091)"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.29",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -24864,11 +24869,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability."
+              "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour."
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.30",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -25208,11 +25214,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET49-3091.00 national employment trends 2025—2035"
+              "BLS Table 1.2: Bicycle repairers (49-3091)"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.54",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -25236,11 +25243,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability."
+              "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour."
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.56",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -25337,11 +25345,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Task exposure, adoption, efficiency, wages, and employment are measured separately. U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability."
+              "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour."
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.63",
           "source_refs": [
+            "ep",
             "ilo",
             "ep-current"
           ],
@@ -25446,11 +25455,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability."
+              "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour."
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.70",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -26229,15 +26239,17 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Chinese official position category code table (2022 code classification, PDF page 44 / printed page 77) lists 4-12-04-01 bicycle and electric bicycle repair worker, belonging to daily-use product repair service personnel. This Chinese name includes electric bicycles, a broader scope than U.S. 49-3091.00, and cannot be directly equated. The occupational name and code have a basis, but a precise national occupational wage distribution has still not been obtained."
+              "China’s occupational classification lists bicycle and electric bicycle repair workers under 4-12-04-01. That category includes e-bikes and is broader than the U.S. bicycle repairer code used here. The codes do not make the wage figures comparable."
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
             "cn-career-code",
+            "cn-local-wages",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "cn-wages-current",
-            "cn-farmers-current",
-            "cn-local-wages"
+            "cn-farmers-current"
           ],
           "type": "prose"
         },
@@ -26455,15 +26467,17 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The precise national occupational distribution is still insufficient evidence. National Bureau of Statistics 2025 residents' services, repair, and other services: urban non-private units 70,226 yuan / year and private units 52,059 yuan / year; the average monthly income of migrant workers in that industry is 4,130 yuan, growth of 2.7%, and industry employment accounts for 12.5% of migrant workers. The first two are pre-tax industry averages and the third is the employment income / months worked of a specific population, none of which is a bicycle repairer's wage. The Jining Human Resources and Social Security Bureau published the 2022 annual wage price attachment, page 9 line 186, occupation bicycle and electric bicycle repair worker, unit yuan / year: low 29,873, lower quartile 31,084, median 36,294, upper quartile 38,973, high 42,083. This serves only as local historical reference with a broader occupational scope; the sample size, taxes, and commission details for this line were not obtained this round, and it cannot be treated as a national or current quote or a U.S. occupational equivalent."
+              "Jining’s 2022 historical wage table, page 9 row 186, reports for bicycle and electric bicycle repair workers, in CNY per year: low 29,873, lower quartile 31,084, median 36,294, upper quartile 38,973 and high 42,083. This page does not have the sample size, tax treatment or commission details for the row."
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
             "cn-career-code",
+            "cn-local-wages",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "cn-wages-current",
-            "cn-farmers-current",
-            "cn-local-wages"
+            "cn-farmers-current"
           ],
           "type": "prose"
         },
@@ -26504,15 +26518,17 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Chinese official position category code table (2022 code classification, PDF page 44 / printed page 77) lists 4-12-04-01 bicycle and electric bicycle repair worker, belonging to daily-use product repair service personnel. This Chinese name includes electric bicycles, a broader scope than U.S. 49-3091.00, and cannot be directly equated. The occupational name and code have a basis, but a precise national occupational wage distribution has still not been obtained."
+              "China’s occupational classification lists bicycle and electric bicycle repair workers under 4-12-04-01. That category includes e-bikes and is broader than the U.S. bicycle repairer code used here. The codes do not make the wage figures comparable."
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
             "cn-career-code",
+            "cn-local-wages",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "cn-wages-current",
-            "cn-farmers-current",
-            "cn-local-wages"
+            "cn-farmers-current"
           ],
           "type": "prose"
         },
@@ -26641,7 +26657,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Chinese government website's publication and interpretation of GB17761-2024: issued 2024-12-31, effective 2025-09-01; from 2025-12-01, new bicycles sold must comply with the new standard, and already purchased old bicycles are not thereby forcibly phased out. MIIT joint consumer document [2025] No. 144 requires related production, certification, and sales stages to implement the new standard and CCC; CCC is a product certification and cannot be interpreted as a repair technician license. The U.S. Certified Bicycle Technician catalog is not a Chinese certificate or store release authorization."
+              "MIIT's release and explanation of GB 17761–2024: issued 2024-12-31, effective 2025-09-01; from 2025-12-01, new electric bicycles sold must comply with the new standard, and these dates concern production and sales. Check local requirements for use or retirement of bikes already in service separately. MIIT joint consumer document [2025] No. 144 requires related production, certification, and sales stages to implement the new standard and CCC; CCC is a product certification and cannot be interpreted as a repair technician license. The U.S. Certified Bicycle Technician catalog is not a Chinese certificate or store release authorization."
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.33",
@@ -26828,12 +26844,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scenario comparisons require the store type and employment arrangement to match; this page does not provide a precise monthly salary range for this occupation."
+              "The Yuhang tender specification for public bicycle services in 2025–2026 lists bicycle inspections and repairs separately from redistribution and station maintenance. It describes fleet services, not a hiring notice or individual pay."
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
+            "cn-career-code",
+            "cn-local-wages",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "onet"
           ],
           "type": "prose"
@@ -26875,15 +26894,17 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "A precise national occupational monthly salary range was not obtained. The industry and migrant worker background are listed separately; there is also the 2022 Jining broader-occupation historical price range, which cannot be combined into a current individual quote."
+              "Suzhou’s city administration lists bicycle maintenance alongside redistribution and customer service in its 2026 public bicycle budget. This is part of a local service phaseout plan. The budget and service fee do not show worker wages or a nationwide trend."
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
             "cn-career-code",
+            "cn-local-wages",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "cn-wages-current",
-            "cn-farmers-current",
-            "cn-local-wages"
+            "cn-farmers-current"
           ],
           "type": "prose"
         },
@@ -26971,15 +26992,17 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Jining Human Resources and Social Security Bureau published the 2022 annual wage price attachment, page 9 line 186, occupation bicycle and electric bicycle repair worker, unit yuan / year: low 29,873, lower quartile 31,084, median 36,294, upper quartile 38,973, high 42,083. This serves only as local historical reference with a broader occupational scope; the sample size, taxes, and commission details for this line were not obtained this round, and it cannot be treated as a national or current quote or a U.S. occupational equivalent."
+              "Jining’s 2022 historical wage table, page 9 row 186, reports for bicycle and electric bicycle repair workers, in CNY per year: low 29,873, lower quartile 31,084, median 36,294, upper quartile 38,973 and high 42,083. This page does not have the sample size, tax treatment or commission details for the row."
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
             "cn-career-code",
+            "cn-local-wages",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "cn-wages-current",
-            "cn-farmers-current",
-            "cn-local-wages"
+            "cn-farmers-current"
           ],
           "type": "prose"
         },
@@ -26988,15 +27011,17 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Chinese official position category code table (2022 code classification, PDF page 44 / printed page 77) lists 4-12-04-01 bicycle and electric bicycle repair worker, belonging to daily-use product repair service personnel. This Chinese name includes electric bicycles, a broader scope than U.S. 49-3091.00, and cannot be directly equated. The occupational name and code have a basis, but a precise national occupational wage distribution has still not been obtained. U.S. wages, employment, and industry are all for this occupation 49-3091.00; the broader Chinese occupation, industry, and population cannot be directly equated."
+              "China’s occupational classification lists bicycle and electric bicycle repair workers under 4-12-04-01. That category includes e-bikes and is broader than the U.S. bicycle repairer code used here. The codes do not make the wage figures comparable."
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "cn-career-code",
+            "cn-local-wages",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "cn-wages-current",
-            "cn-farmers-current",
-            "cn-local-wages"
+            "cn-farmers-current"
           ],
           "type": "prose"
         },
@@ -27019,11 +27044,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "-6% (2025—2035, U.S. this occupation)"
+              "U.S. projected employment decline: 5.7%"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
+            "cn-career-code",
+            "cn-local-wages",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "ep-current"
           ],
           "type": "prose"
@@ -27055,7 +27084,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 49-3091.00 National Wage Percentiles (the first line of the page is the occupation itself and is not labeled as taken from another occupation)｜https://www.onetonline.org/link/localwages/49-3091.00; O*NET 49-3091.00 Occupation Summary (Employment and Projections Fields)｜https://www.onetonline.org/link/summary/49-3091.00; O*NET 49-3091.00 employment trends page｜https://www.onetonline.org/link/localtrends/49-3091.00; O*NET 49-3091.00 Industry Distribution｜https://www.onetonline.org/link/industry/49-3091.00"
+              "O*NET 49-3091.00 National Wage Percentiles (the first line of the page is the occupation itself and is not labeled as taken from another occupation)｜https://www.onetonline.org/link/localwages/49-3091.00; BLS Table 1.2: Bicycle repairers (49-3091)｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET 49-3091.00 employment trends page｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET 49-3091.00 Industry Distribution｜https://www.onetonline.org/link/industry/49-3091.00"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.8",
@@ -27229,12 +27258,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The number employed given by the O*NET employment trends page for this occupation; the occupational employment scale is relatively small, and hiring demand for an individual store or region may differ greatly from the national definition.; O*NET 49-3091.00 Occupation Summary (Employment and Projections Fields)｜https://www.onetonline.org/link/summary/49-3091.00"
+              "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour.; BLS Table 1.2: Bicycle repairers (49-3091)｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet",
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -27244,11 +27273,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "-6% (2025—2035, decline)"
+              "−5.7%"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -27258,11 +27288,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability."
+              "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour.; BLS Table 1.2: Bicycle repairers (49-3091)｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -27272,11 +27303,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "1,200 annual openings (2025—2035, including growth and replacement)"
+              "About 1,200 annual openings"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -27286,12 +27318,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This is the job openings definition over the projection period shown on the O*NET employment trends page, including growth and replacement; it is not the net increase in positions and does not constitute an individual hiring guarantee.; O*NET 49-3091.00 Occupation Summary (Employment and Projections Fields)｜https://www.onetonline.org/link/summary/49-3091.00"
+              "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour.; BLS Table 1.2: Bicycle repairers (49-3091)｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet",
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -27424,11 +27456,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "-6%（2025—2035）"
+              "5.7% projected decline, 2025–2035"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -27770,19 +27803,19 @@
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Ability Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Outdoor power equipment and other small engine mechanics",
@@ -28881,7 +28914,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The Chinese official position category code table (2022 code classification, PDF page 44 / printed page 77) lists 4-12-04-01 bicycle and electric bicycle repair worker, belonging to daily-use product repair service personnel. This Chinese name includes electric bicycles, a broader scope than U.S. 49-3091.00, and cannot be directly equated. The occupational name and code have a basis, but a precise national occupational wage distribution has still not been obtained. National Bureau of Statistics 2025 residents' services, repair, and other services: urban non-private units 70,226 yuan / year and private units 52,059 yuan / year; the average monthly income of migrant workers in that industry is 4,130 yuan, growth of 2.7%, and industry employment accounts for 12.5% of migrant workers. The first two are pre-tax industry averages and the third is the employment income / months worked of a specific population, none of which is a bicycle repairer's wage."
+              "The Chinese official position category code table (2022 classification) lists 4-12-04-01 bicycle and electric bicycle repair worker, belonging to daily-use product repair service personnel. This Chinese name includes electric bicycles, a broader scope than U.S. 49-3091.00, and cannot be directly equated. The occupational name and code have a basis, but a precise national occupational wage distribution has still not been obtained. National Bureau of Statistics 2025 residents' services, repair, and other services: urban non-private units 70,226 yuan / year and private units 52,059 yuan / year; the average monthly income of migrant workers in that industry is 4,130 yuan, growth of 2.7%, and industry employment accounts for 12.5% of migrant workers. The first two are pre-tax industry averages and the third is the employment income / months worked of a specific population, none of which is a bicycle repairer's wage."
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.65",
@@ -28897,7 +28930,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The Chinese government website's publication and interpretation of GB17761-2024: issued 2024-12-31, effective 2025-09-01; from 2025-12-01, new bicycles sold must comply with the new standard, and already purchased old bicycles are not thereby forcibly phased out. MIIT joint consumer document [2025] No. 144 requires related production, certification, and sales stages to implement the new standard and CCC; CCC is a product certification and cannot be interpreted as a repair technician license. Product certification does not equal employee task authorization."
+              "MIIT's release and explanation of GB 17761–2024: issued 2024-12-31, effective 2025-09-01; from 2025-12-01, new electric bicycles sold must comply with the new standard, and these dates concern production and sales. Check local requirements for use or retirement of bikes already in service separately. MIIT joint consumer document [2025] No. 144 requires related production, certification, and sales stages to implement the new standard and CCC; CCC is a product certification and cannot be interpreted as a repair technician license. Product certification does not equal employee task authorization."
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.66",
@@ -28939,10 +28972,10 @@
                 "url": "https://www.onetonline.org/link/details/49-3091.00"
               },
               {
-                "entity": "O*NET bicycle repairer 2025—2035 national employment trends",
+                "entity": "BLS Table 1.2: Bicycle repairers (49-3091)",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 49-3091.00 National Wage Percentiles",
@@ -29109,7 +29142,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The CPSC lists charging fire hazards and requires chargers and replacement batteries to be confirmed as compatible by the manufacturer and avoids unqualified battery modification; this round has no occupational risk multiplier for compatibility errors."
+              "The U.S. CPSC recommends the charger supplied or recommended by the vehicle manufacturer. It recommends replacement batteries that have been tested and confirmed compatible by that manufacturer. This is consumer guidance."
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.16",
@@ -29487,35 +29520,35 @@
                 "Brand store repair position",
                 "Under supervision, complete receiving and adjustment and rechecks according to brand and manufacturer specifications, and open orders and record parts and labor according to procedure.",
                 "The editor lists these as employer verification questions, with no corresponding posting sample obtained: verify specification execution and recheck compliance, work order and parts record quality, and stability under peak customer flow; product compliance, employee hiring, and internal division of labor are verified separately and are not automatically inferred from training.",
-                "Submit a repair work order containing a fictional model and parts list, symptom and inspection records, and adjustment and recheck result notes, without using real customer or vehicle information.",
+                "For BR-73, submit both work orders and one handoff.",
                 "A store position does not determine model specifications or product compliance determinations; matters involving e-assist and batteries and modification must be handled by responsible personnel according to the jurisdiction and manufacturer requirements."
               ],
               [
                 "Independent bike shop technician position",
                 "In a smaller team, independently complete receiving and repair and adjustment, while also handling inventory and parts ordering and customer communication.",
                 "The editor lists these as employer verification questions, with no corresponding posting sample obtained: verify fault locating and adjustment consistency, wheel truing and assembly ability, and customer communication and cost explanation ability.",
-                "Submit a fictional work order containing fault locating records, adjustment and recheck records, and customer communication notes.",
+                "For BR-73, submit both work orders and one handoff.",
                 "Inspection and release must be carried out according to store authorization; this page does not provide work instructions or torque values."
               ],
               [
                 "Sporting goods retail repair position",
                 "In a retail setting, complete assembly and adjustment and maintenance according to chain standards, and support sales in bicycle selection and accessory compatibility.",
                 "The editor lists these as employer verification questions, with no corresponding posting sample obtained: verify standardized assembly consistency and speed, sales support, and work order and inventory and safety record ability.",
-                "Submit a fictional record containing assembly and adjustment records, accessory compatibility notes, and an exception reporting plan.",
+                "For BR-73, submit both work orders and one handoff.",
                 "Assembly standards and safety requirements must be implemented according to the competent authority and employer rules; this page does not provide management instructions."
               ],
               [
                 "Shared mobility operations position",
                 "Complete vehicle inspection and replacement and adjustment according to batch work procedures, and handle centralized repair requests and parts recovery.",
                 "The editor lists these as employer verification questions, with no corresponding posting sample obtained: verify batch work consistency and efficiency, and the ability to identify and report exceptions and safety hazards.",
-                "Submit a fictional record containing batch inspection and replacement records and a hazard identification and reporting plan.",
+                "For BR-73, submit both work orders and one handoff.",
                 "Work involving e-assist and batteries must follow manufacturer and jurisdictional requirements; an operations position does not mean having release and modification determination authority."
               ],
               [
                 "Wheel building and assembly specialist position",
                 "Within the authorized scope, build and true wheels and complete high-end assembly and tuning, and keep tension and specification records.",
                 "The editor lists these as employer verification questions, with no corresponding posting sample obtained: verify wheel building and tension control and specification recording ability.",
-                "Submit a fictional write-up containing the objective, spoke and tension records, and assembly and recheck notes.",
+                "For BR-73, submit both work orders and one handoff.",
                 "Professional specifications must follow the manufacturer manual; a specialist position does not mean whole-bicycle compliance determination authority."
               ]
             ]
@@ -29537,16 +29570,16 @@
               {
                 "id": "education",
                 "values": [
-                  "U.S. side: O*NET lists 49-3091.00 (Bicycle Repairers) as Job Zone 1–2 (SVP below 6.0), and lists only three education levels (some jobs require a high school diploma or equivalent, some require having attended college without a degree, and some require less than a high school diploma) without publishing the percentage at each level; jobs in this zone require experience ranging from little to a few months and on-the-job training ranging from a few days to a year. This occupation is not marked Bright Outlook on O*NET, and the employment projection is a decline (the employment trends page shows 2025—2035 at -6%, 12,200 → 11,500).",
-                  "The current U.S. O*NET catalog lists 3 related college programs: Minneapolis Community and Technical College (less than 1 year, 5 completers), Northwest Arkansas Community College (1—2 years, 4), and Andrews University (1—2 years, 0). The college catalog is IPEDS2025—26, and completers are for the 2024—25 year; this does not represent current enrollment, the training duration an individual needs, or a hiring threshold. The summary lists the registered apprenticeship Bicycle Repair Technician; the certification page has 1 certification, Certified Bicycle Technician (United Bicycle Institute), which is not a mandatory entry requirement.",
-                  "The Chinese official position category code table (2022 code classification, PDF page 44 / printed page 77) lists 4-12-04-01 bicycle and electric bicycle repair worker, belonging to daily-use product repair service personnel. This Chinese name includes electric bicycles, a broader scope than U.S. 49-3091.00, and cannot be directly equated. The occupational name and code have a basis, but a precise national occupational wage distribution has still not been obtained. Actual education and training conditions must be verified with the employer; this round has no posting sample proving a universal requirement."
+                  "BLS Table 1.2 lists a high school diploma or equivalent, no typical related work experience and moderate-term on-the-job training for 49-3091. Check the employer’s hiring requirements, work order review and release authority separately.",
+                  "The O*NET query returned three related program records. The 2025–26 directory shows 5, 4 and 0 awards from IPEDS 2024–25. Check current enrollment with each school.",
+                  "China’s occupational classification lists bicycle and electric bicycle repair workers under 4-12-04-01. That category includes e-bikes and is broader than the U.S. bicycle repairer code used here. The codes do not make the wage figures comparable."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
                   "Repair and adjustment and assembly and cleaning and lubrication must be carried out according to the manufacturer manual and specifications for the specific model and parts; matters involving whether brakes and fasteners and wheel tension may be released, whether e-assist and batteries and chargers are compatible, and whether modification or removing speed limits is involved must be carried out within the manufacturer manual and the applicable jurisdiction and store authorization.",
-                  "On the U.S. side, O*NET lists 1 national certification (which does not equal a hiring threshold or employer appointment); this occupation is Job Zone 1–2 with experience requirements ranging from little to a few months, so the boundaries of onboarding training and inspection and release and stoppage authorization especially need to be clarified at hire.",
+                  "The O*NET nationwide directory lists Certified Bicycle Technician from United Bicycle Institute. It does not establish a license or a universal hiring requirement.",
                   "Customer information and vehicle information and repair history may involve privacy and data security; information protection requirements vary by jurisdiction and store and must be confirmed before starting, along with access scope and compliance obligations; work involving e-assist and lithium-ion batteries must also comply with the manufacturer's charging and battery compatibility requirements."
                 ]
               },
@@ -29570,13 +29603,14 @@
           },
           "id": "bicycle-repairers.path.employer-evidence.1",
           "source_refs": [
+            "ep",
+            "nist",
+            "cn-career-code",
             "onet",
             "bls",
-            "nist",
             "census",
             "hr",
             "ep-current",
-            "cn-career-code",
             "cn-product-policy",
             "cn-pipl",
             "editor"
@@ -29592,42 +29626,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional materials package: a model and parts list, a symptom and inspection record sheet, an adjustment and specification basis sheet, and a brake and wheel and fastener recheck and work order sheet.",
-                  "All materials are fictional and contain no real manufacturer manual clauses, real customer or vehicle information, or transaction data.",
-                  "All materials and scenarios are fictional, and real manufacturer manual clauses, real customer and vehicle information, transaction data, or store internal standards documents must not be used."
+                  "BR-73 fictional work order. R1 the customer reports a rear brake concern. In this exercise, release can be recorded only after parts identification, independent recheck and signoff.",
+                  "R2 an inspection is recorded. The independent recheck and signoff fields are blank. The workshop shift lead receives open items.",
+                  "R3 the original parts label cannot be matched to the model. In the variant only R3 changes: a verifiable part number and model record are provided."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "For a fictional symptom, write clearly the inspection sequence, the items to be measured, the adjustments performed and the specification basis, the brake and wheel and fastener recheck results, work orders and parts and time and cost, and which steps require review and which require authorization.",
-                  "Complete within 60—90 minutes; consulting public general mechanical and safety materials is allowed, but real torque values must not be used, and high-tension parts of a real bicycle must not be disassembled or assembled.",
-                  "In the record, write inspection and locating, the adjustments performed and the specification basis, the brake and wheel and fastener recheck results, and work orders and parts and exceptions and the retrospective note separately, and mark the parts that need review."
+                  "Separate the reported concern from the recorded inspection.",
+                  "For each version, list verified items, open items and the receiver.",
+                  "Submit both work orders and a one-page handoff citing R1–R3."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First confirm the model and part version and symptoms and tool condition, then inspect and adjust and recheck and open the order according to the manual sequence, and finally write the conclusions and open items.",
-                  "Write inspection and locating, adjustment and specification basis, recheck results, work orders and parts, and exceptions and the retrospective note separately, and mark anything uncertain as requiring review.",
-                  "After completion, ask an experienced person to review the specification execution and recheck and work order conclusions, and retain the reasons for revisions."
+                  "Complete both versions independently.",
+                  "Compare the R3 record only.",
+                  "Open “BR-73 reference (open after submitting)” after submitting."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "The exercise does not constitute torque values, assembly sequence, or methods for modification and removing speed limits, and cannot replace the applicable jurisdiction and manufacturer manual and store authorization requirements.",
-                  "Do not disassemble or assemble the brake or high-tension wheel parts of a real bicycle during the exercise, and do not use real customer and vehicle information; work involving release and stoppage and modification determinations must be handled by authorized personnel according to procedure.",
-                  "The exercise does not replace the applicable jurisdiction and manufacturer manual and store authorization requirements and does not constitute any torque values, assembly sequence, or methods for modification and removing speed limits; the brake or high-tension wheel parts of a real bicycle must not be disassembled or assembled during the exercise."
+                  "Use fictional paper records only.",
+                  "Do not handle bikes, tools or batteries or test brakes.",
+                  "Do not repair, ride, sign off or release a bicycle."
                 ]
               }
             ]
           },
           "id": "bicycle-repairers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "br73-editor"
           ],
-          "title": "Low-risk practice materials and tasks",
+          "title": "BR-73: Check two work orders and write one handoff",
           "type": "cards"
         },
         {
@@ -29638,37 +29672,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Job requirements checklist: education, occupational training, industry certification, store pre-job training, manufacturer training and authorization, inspection and release and stoppage and fee determination authorization, and jurisdictional requirements involving e-assist and batteries and modification and removing speed limits.",
-                  "Note the source, data period, and jurisdiction for each item; leave items that cannot be verified blank and mark them as insufficient evidence, and do not fill them in with speculation.",
-                  "List “education,” “occupational training,” “industry certification,” “store task and release authorization,” and “jurisdictional requirements on batteries and modification” separately to avoid conflating them; also note that U.S. wages and employment are under this occupation's separate definition and that the employment projection is a decline."
+                  "Write both work orders.",
+                  "Cite R1–R3.",
+                  "List open checks."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Ask an experienced person to review your repair record, focusing on whether the specification basis and adjustment execution, torque and clearance and spoke tension verification, brake and wheel and fastener recheck results, and exception handling and work order quality are written clearly item by item.",
-                  "Keep the review comments and the reasons for revisions together as evidence of whether you can accept review."
+                  "Write a one-page handoff.",
+                  "Name the receiver."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "One-page retrospective: write this symptom and locating, your own judgments, the parts that were corrected, and the parts that are still uncertain.",
-                  "Hand the retrospective to peers and supervisors for review, and retain the review comments and the reasons for revisions."
+                  "Compare R3.",
+                  "Check both evidence sets."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool use note: if diagnostic or work order or parts matching or inventory tools are used, note the tool name and version, the inputs and basis, and the reasons for manual edits; measuring and torque tools must note their calibration status.",
-                  "Handling customer and vehicle information requires prior authorization, and the access scope, retention period, and destruction arrangements must be recorded."
+                  "Submit first.",
+                  "Do not operate a bicycle."
                 ]
               }
             ]
           },
           "id": "bicycle-repairers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "br73-editor"
           ],
           "title": "Preparation materials that can be submitted",
           "type": "cards"
@@ -29732,57 +29766,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Occupational and definition reading: read the public O*NET 49-3091.00 materials and write clearly the meaning of this occupation's separate definition, the absence of a Bright Outlook label, and the declining employment projection (-2%).",
-                  "Output: a one-page definition and process comparison table, noting the source of each item."
+                  "Read R1–R3.",
+                  "Evidence index"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Inspection and locating exercise: for a fictional symptom, write clearly the inspection sequence, the items to be measured, and the distinction between adjustable items and items requiring replacement.",
-                  "Output: an inspection and locating record."
+                  "Separate the report and inspection.",
+                  "Draft work order"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Adjustment and specification basis exercise: for a fictional model, write clearly the adjustment items, the source of the specification basis, and the judgments requiring review.",
-                  "Output: an adjustment and specification basis record."
+                  "Review R2.",
+                  "Open items"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Recheck and release exercise: for a fictional bicycle, write clearly the brake and wheel and fastener recheck sequence, the handling when specifications are not met, and the conditions for refusing release.",
-                  "Output: a recheck and release record."
+                  "Compare both R3 records.",
+                  "Evidence change"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Safety and battery exercise: write clearly tool and chemical and debris protection points, and the compatibility and charging safety conditions of e-assist batteries and chargers.",
-                  "Output: a safety and battery work verification record."
+                  "Name the receiver.",
+                  "Draft handoff"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Review-style self-questioning: ask an experienced person to challenge your specification basis and recheck and release conclusions, and record what was corrected.",
-                  "Output: review comments and a revision explanation."
+                  "Submit both work orders and a one-page handoff first.",
+                  "Both records and handoff"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Final retrospective: decide whether to continue, pause, or change direction, and write clearly the basis and the parts that are still uncertain.",
-                  "Output: a one-page decision write-up with an evidence list attached."
+                  "Open “BR-73 reference (open after submitting)”.",
+                  "Check the reference"
                 ]
               }
             ]
           },
           "id": "bicycle-repairers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "br73-editor"
           ],
           "title": "Seven-day experience output",
           "type": "timeline"
@@ -29792,18 +29826,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: you completed the seven-day exercise and found that you can sustain investment in specification execution and adjustment and rechecks and work order records.",
-              "Continue: you can accept prolonged standing and peak-season intensity and outdoor and ambient-temperature work and customer disputes, and you are willing to recheck according to specifications and accept review.",
-              "Pause: you tighten or adjust by feel only and are unwilling to check manufacturer specifications and torque and clearance.",
-              "Pause: you treat “it feels fine when riding” as valid release, or you skip brake and wheel rechecks and part version verification.",
-              "Change direction: if you prefer whole-vehicle power and electronic diagnostics, compare the automotive service technician and mechanic direction.",
-              "Change direction: if you prefer electrical and motor systems, compare the electric motor and power tool repairer direction.",
-              "Insufficient information: if you have no supervised repair or adjustment experience at all, gain those two first before deciding."
+              "Continue if you can distinguish a customer report from an inspection record.",
+              "Continue if you are willing to list unresolved checks.",
+              "Pause if you tend to omit handoffs when busy.",
+              "Pause if you do not want to verify parts identity.",
+              "Compare retail repair roles.",
+              "Compare how public fleets assign repairs.",
+              "Verify real training separately."
             ]
           },
           "id": "bicycle-repairers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "br73-editor"
           ],
           "title": "Judgment after seven days",
           "type": "list"
@@ -29835,7 +29869,7 @@
                 "High school diploma or equivalent",
                 "People who hope to enter this occupation",
                 "Determines whether you can meet the basic requirements of some positions.",
-                "The O*NET entry for this occupation lists only three education levels (some jobs require a high school diploma or equivalent, some require having attended college without a degree, and some require less than a high school diploma) and does not publish the percentage at each level; jobs in this zone require experience ranging from little to a few months.",
+                "The O*NET question lists three education categories for some jobs without percentages. BLS typical preparation does not determine every hiring decision.",
                 "Complete according to the program length.",
                 "According to the program duration.",
                 "Education does not equal inspection and release or modification determination authority."
@@ -29859,10 +29893,10 @@
                 "A certification does not equal a hiring threshold or employer appointment, nor does it equal the store's release authorization."
               ],
               [
-                "Registered apprenticeship position (Bicycle Repair Technician)",
+                "Example title for registered apprenticeships",
                 "People who want to learn through an on-the-job route",
                 "Provides an on-the-job learning and skill accumulation pathway.",
-                "Not a universal threshold; the O*NET occupation summary lists the registered apprenticeship position Bicycle Repair Technician and provides an Apprenticeship.gov entry point.",
+                "The O*NET summary lists Bicycle Repair Technician as an approved job-title example for registered apprenticeships. That reference does not establish a current opening.",
                 "According to employer and apprenticeship program arrangements.",
                 "According to the apprenticeship program cycle.",
                 "Apprenticeship experience does not equal inspection and release authorization."
@@ -29904,16 +29938,16 @@
           "data": {
             "paragraphs": [
               "Qualification boundary: education, occupational training, industry certification, employer hiring, in-store inspection and release and stoppage and fee authorization, and jurisdictional requirements involving e-assist and batteries and modification and removing speed limits are different statuses, and none can be automatically inferred from another; manufacturer specifications and the calibration of specialized tools and gauges are also work prerequisites and cannot be replaced by education.",
-              "U.S. side: O*NET lists 49-3091.00 (Bicycle Repairers) as Job Zone 1–2 (SVP below 6.0), lists only three education levels without publishing proportions, and jobs in this zone require experience ranging from little to a few months and on-the-job training ranging from a few days to a year; O*NET registers 3 Bicycle Mechanics and Repair Technology / Technician training programs nationwide, the occupation summary lists the registered apprenticeship position Bicycle Repair Technician, and the certification page lists 1 national certification (Certified Bicycle Technician); this occupation is not marked Bright Outlook on O*NET, and the employment projection is a decline (the employment trends page shows 2025—2035 at -6%, 12,200 → 11,500, while still projecting about 1,200 annual openings over the projection period). Its wage and employment and industry data are all under this occupation's separate definition on the O*NET page.",
+              "The O*NET nationwide query for this occupation lists three program records. Two show recent graduates in the 2025–26 IPEDS directory. The third shows zero. The O*NET summary lists Bicycle Repair Technician as an approved job-title example for registered apprenticeships. That reference does not establish a current opening. The O*NET nationwide directory lists Certified Bicycle Technician from United Bicycle Institute. It does not establish a license or a universal hiring requirement.",
               "Mainland China side: electric bicycles are subject to the mandatory national standard GB 17761-2024 Safety Technical Specification for Electric Bicycles (issued 2024-12-31, effective 2025-09-01, fully replacing GB 17761-2018), and mandatory product certification is carried out under that specification; the specification strengthens fire retardancy requirements for non-metallic materials and braking performance requirements and improves anti-tampering requirements for battery packs and controllers and speed limiters; this page did not obtain a public mainland China occupational wage entry precisely corresponding to 49-3091.00 and shows only three official proxies with clearly labeled populations and industry scope.",
               "Operational suggestion: before starting, set out “education / occupational training / industry certification / store pre-job training / manufacturer training and authorization / inspection and release and stoppage authorization / fee determination authorization / jurisdictional requirements on batteries and modification” in one table, writing the source, data period, and jurisdiction for each item; leave items that cannot be verified blank and mark them as insufficient evidence, and do not fill them in with speculation."
             ]
           },
           "id": "bicycle-repairers.path.credential-boundary.1",
           "source_refs": [
+            "nist",
             "onet",
-            "onet",
-            "onet"
+            "census"
           ],
           "title": "Qualification boundaries",
           "type": "notice"
@@ -29923,18 +29957,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Job posting sample note: this section does not cite specific employers' job postings, only the items to focus on when verifying; job titles appearing in public channels include bicycle technician, bicycle repair technician, bike repair technician, assembly technician, repair apprentice, shop technician, and so on.",
+              "The Yuhang tender specification for public bicycle services in 2025–2026 lists bicycle inspections and repairs separately from redistribution and station maintenance. It describes fleet services, not a hiring notice or individual pay. Suzhou’s city administration lists bicycle maintenance alongside redistribution and customer service in its 2026 public bicycle budget. This is part of a local service phaseout plan. The budget and service fee do not show worker wages or a nationwide trend.",
               "Checklist: whether the position is in a brand store, independent bike shop, sporting goods retail repair, or shared mobility operations team; whether the employment arrangement is full-time or part-time or self-employed; whether inspection and release and fee determination authorization is required; whether there is commission and seasonal fluctuation; and the arrangements for obtaining and calibrating manufacturer manuals and specialized tools and gauges."
             ]
           },
           "id": "bicycle-repairers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "onet"
           ],
-          "title": "Job posting verification",
+          "title": "Mainland public fleet examples",
           "type": "notice"
         },
         {
@@ -30115,11 +30148,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET is Job Zone1–2 with SVP below 6.0, and the three education levels have no published proportions; this is an occupational description, not a uniform threshold for all employers. The current U.S. O*NET catalog lists 3 related college programs: Minneapolis Community and Technical College (less than 1 year, 5 completers), Northwest Arkansas Community College (1—2 years, 4), and Andrews University (1—2 years, 0). The college catalog is IPEDS2025—26, and completers are for the 2024—25 year; this does not represent current enrollment, the training duration an individual needs, or a hiring threshold. The summary lists the registered apprenticeship Bicycle Repair Technician; the certification page has 1 certification, Certified Bicycle Technician (United Bicycle Institute), which is not a mandatory entry requirement. The Chinese official position category code table (2022 code classification, PDF page 44 / printed page 77) lists 4-12-04-01 bicycle and electric bicycle repair worker, belonging to daily-use product repair service personnel. This Chinese name includes electric bicycles, a broader scope than U.S. 49-3091.00, and cannot be directly equated. The occupational name and code have a basis, but a precise national occupational wage distribution has still not been obtained."
+              "BLS Table 1.2 lists a high school diploma or equivalent, no typical related work experience and moderate-term on-the-job training for 49-3091. Check the employer’s hiring requirements, work order review and release authority separately."
             ]
           },
           "id": "bicycle-repairers.path.career-path-block.20",
           "source_refs": [
+            "ep",
             "nist",
             "onet",
             "census",
@@ -30132,7 +30166,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Education, training, the Certified Bicycle Technician catalog, employer hiring, internal division of labor, and product certification are verified separately. U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability."
+              "Education, training, the Certified Bicycle Technician catalog, employer hiring, internal division of labor, and product certification are verified separately. U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of −5.7%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability."
             ]
           },
           "id": "bicycle-repairers.path.career-path-block.21",
@@ -30149,7 +30183,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The U.S. CPSC material is product safety usage guidance; the Chinese government website's publication and interpretation of GB17761-2024: issued 2024-12-31, effective 2025-09-01; from 2025-12-01, new bicycles sold must comply with the new standard, and already purchased old bicycles are not thereby forcibly phased out. MIIT joint consumer document [2025] No. 144 requires related production, certification, and sales stages to implement the new standard and CCC; CCC is a product certification and cannot be interpreted as a repair technician license. Specific model repair/modification authority and local implementation must be verified separately, and employee permission cannot be inferred from CCC."
+              "The U.S. CPSC material is product safety usage guidance; MIIT’s release and explanation of GB 17761–2024: issued 2024-12-31, effective 2025-09-01; from 2025-12-01, new electric bicycles sold must comply with the new standard, and these dates concern production and sales. Check local requirements for use or retirement of bikes already in service separately. MIIT joint consumer document [2025] No. 144 requires related production, certification, and sales stages to implement the new standard and CCC; CCC is a product certification and cannot be interpreted as a repair technician license. Specific model repair/modification authority and local implementation must be verified separately, and employee permission cannot be inferred from CCC."
             ]
           },
           "id": "bicycle-repairers.path.career-path-block.22",
@@ -31138,16 +31172,16 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET bicycle repairer 2025—2035 national employment trends",
+                "entity": "BLS Table 1.2: Bicycle repairers (49-3091)",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET bicycle repairer 2025—2035 national employment trends",
+                "entity": "BLS Table 1.2: Bicycle repairers (49-3091)",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "National Bureau of Statistics 2025 average annual wages of urban unit employees",
@@ -31225,11 +31259,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability."
+              "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour."
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.8",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31267,11 +31302,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. this occupation employed 12,200 in 2025; the national scale does not equal the hiring demand of a particular store."
+              "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour."
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.11",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31309,11 +31345,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "official_statistic"
+              "U.S. bicycle repairers, 49-3091"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.14",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31365,11 +31402,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability. Editorial verification suggestion: compare actual city demand, job duties, supply, and compensation conditions; this round has no data proving the specific causal effect of e-assist, tariffs, or outsourcing on this occupation's projection."
+              "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour."
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.18",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31379,11 +31417,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The projections cannot be merged and interpreted as an individual hiring guarantee, nor can they be used to derive a precise growth rate for this occupation."
+              "Annual openings include growth and replacements and differ from net employment change."
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.19",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31407,11 +31446,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "official_statistic"
+              "U.S. bicycle repairers, 49-3091"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.21",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31421,11 +31461,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "-6%; 1,200 annual openings (U.S. this occupation, 2025—2035)"
+              "5.7% decline and about 1,200 annual openings"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.22",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31465,7 +31506,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The Chinese official position category code table (2022 code classification, PDF page 44 / printed page 77) lists 4-12-04-01 bicycle and electric bicycle repair worker, belonging to daily-use product repair service personnel. This Chinese name includes electric bicycles, a broader scope than U.S. 49-3091.00, and cannot be directly equated. The occupational name and code have a basis, but a precise national occupational wage distribution has still not been obtained. National Bureau of Statistics 2025 residents' services, repair, and other services: urban non-private units 70,226 yuan / year and private units 52,059 yuan / year; the average monthly income of migrant workers in that industry is 4,130 yuan, growth of 2.7%, and industry employment accounts for 12.5% of migrant workers. The first two are pre-tax industry averages and the third is the employment income / months worked of a specific population, none of which is a bicycle repairer's wage. The Jining Human Resources and Social Security Bureau published the 2022 annual wage price attachment, page 9 line 186, occupation bicycle and electric bicycle repair worker, unit yuan / year: low 29,873, lower quartile 31,084, median 36,294, upper quartile 38,973, high 42,083. This serves only as local historical reference with a broader occupational scope; the sample size, taxes, and commission details for this line were not obtained this round, and it cannot be treated as a national or current quote or a U.S. occupational equivalent."
+              "China’s occupational classification lists bicycle and electric bicycle repair workers under 4-12-04-01. That category includes e-bikes and is broader than the U.S. bicycle repairer code used here. The codes do not make the wage figures comparable."
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.25",
@@ -31983,16 +32024,22 @@
                 "question_key": "career.faq.bicycle-repairers.2"
               },
               {
-                "answer": "Look at reviewable output: whether you can complete disassembly and adjustment according to manufacturer specifications and verify torque and clearance, whether you can recheck brakes and wheels and fasteners according to specifications, and whether you can stop and report when the recheck does not pass or the model and part version is unknown or the situation exceeds authorization. The interest code RC and the knowledge and abilities scores only indicate a similar direction and cannot replace this practical evidence.",
+                "answer": "Go to BR-73 in section 09. Check two paper work orders and submit a one-page handoff.",
                 "id": "bicycle-repairers.faq.3",
                 "question": "How do I judge whether I am suited to being a bicycle repairer?",
-                "question_key": "career.faq.bicycle-repairers.3"
+                "question_key": "career.faq.bicycle-repairers.3",
+                "source_refs": [
+                  "br73-editor"
+                ]
               },
               {
-                "answer": "AI and automation can change fault questioning and repair document searches, work order summaries, parts matching pre-screening, inventory and ordering summaries, and appointment scheduling; but disassembly and measurement and adjustment, abnormal-noise and feel judgments under real load, and the recheck and release decisions for brakes and wheels and fasteners are still borne by you according to the manufacturer manual and specifications. The degree of task automation does not equal a change in the number of positions; the official employment projection for this occupation is a decline (2024—2034 at -2%).",
+                "answer": "Text tools can organize fault descriptions and draft work orders. Staff perform the physical inspection and repair recheck, and authorized personnel decide whether to release the bike. BLS Table 1.2 projects a 5.7% employment decline for U.S. occupation 49-3091 from 2025 to 2035. That projection does not measure the effect of AI.",
                 "id": "bicycle-repairers.faq.4",
                 "question": "Which tasks will AI change?",
-                "question_key": "career.faq.bicycle-repairers.4"
+                "question_key": "career.faq.bicycle-repairers.4",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
                 "answer": "Confirmation of the model and part version and the specification basis, disassembly and adjustment and abnormal-noise and feel judgments, decisions on whether brakes and wheels and fasteners may be released, and compliance determinations on e-assist and battery compatibility and modification and removing speed limits must be borne by you and authorized personnel according to the manufacturer manual and the applicable jurisdiction and employer systems; system output can only serve as a rollback-capable, reviewable assistance step.",
@@ -32001,10 +32048,15 @@
                 "question_key": "career.faq.bicycle-repairers.5"
               },
               {
-                "answer": "Verify under six categories: education; occupational training; industry certification (Certified Bicycle Technician, with O*NET listing only 1 national certification); employer pre-job training; in-store inspection and release and stoppage and fee authorization; and jurisdictional requirements involving e-assist and batteries and modification and removing speed limits. On the U.S. side, O*NET lists only three education levels without publishing proportions, and jobs in this zone require experience ranging from little to a few months and on-the-job training ranging from a few days to a year; 2 bicycle mechanics and repair technology training programs are registered nationwide, plus the registered apprenticeship position Bicycle Repair Technician. None of these can be automatically inferred from another.",
+                "answer": "The O*NET nationwide query for this occupation lists three program records. Two show recent graduates in the 2025–26 IPEDS directory. The third shows zero. The O*NET summary lists Bicycle Repair Technician as an approved job-title example for registered apprenticeships. That reference does not establish a current opening. The O*NET nationwide directory lists Certified Bicycle Technician from United Bicycle Institute. It does not establish a license or a universal hiring requirement.",
                 "id": "bicycle-repairers.faq.6",
                 "question": "Which qualifications must be verified to enter this occupation?",
-                "question_key": "career.faq.bicycle-repairers.6"
+                "question_key": "career.faq.bicycle-repairers.6",
+                "source_refs": [
+                  "nist",
+                  "onet",
+                  "census"
+                ]
               },
               {
                 "answer": "Work context shows 78% continuously or almost continuously stand (another 17% more than half the time), 24% continuously or almost continuously need to keep their balance (another 56% less than half the time), 24% are exposed to contaminants every day, 26% are outdoors in all weather every day, 14% encounter minor burns, cuts, bites, or stings more than once a year, and 11% are exposed to distracting or uncomfortable noise more than once a week; prolonged standing and repeated bending and hand tool work require a certain level of physical stamina and proper workstation and securing and lifting and protection arrangements.",
@@ -32013,22 +32065,34 @@
                 "question_key": "career.faq.bicycle-repairers.7"
               },
               {
-                "answer": "Work context shows 11% have a typical workweek of less than 40 hours (the rest of the distribution is not published); 65% have a lot of freedom in decisions and 62% have a lot of freedom in determining tasks and priorities, indicating high job autonomy and also that individuals are responsible for specification determinations; 80% consider competition moderate and 24% consider the consequences of error extremely serious. When comparing positions, write the employment arrangement (full-time or part-time or self-employed), commission, and peak-season scheduling rules into the written terms.",
+                "answer": "Work context shows 11% have a typical workweek of less than 40 hours (the rest of the distribution is not published); 65% have a lot of freedom in decisions and 62% have a lot of freedom in determining tasks and priorities, which describes respondents’ day-to-day discretion. Specification rechecks and release authority depend on the role; 80% consider competition moderate and 24% consider the consequences of error extremely serious. When comparing positions, write the employment arrangement (full-time or part-time or self-employed), commission, and peak-season scheduling rules into the written terms.",
                 "id": "bicycle-repairers.faq.8",
                 "question": "What are the working hours and the way of working like?",
                 "question_key": "career.faq.bicycle-repairers.8"
               },
               {
-                "answer": "The O*NET employment trends page, under this occupation's separate definition, gives 13,200 employed in 2024 and about 12,900 in 2034 (-2%, decline (-1% or lower)), with about 1,600 job openings per year over the projection period; negative growth and the continued existence of openings are not contradictory, as openings come mainly from replacement needs. For transitions, automotive service technicians and mechanics, motorcycle mechanics, electric motor and power tool repairers, outdoor power equipment and other small engine mechanics, tire repairers and changers, and recreational vehicle service technicians can be compared, but all require additional training, qualifications, and authorization.",
+                "answer": "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour.",
                 "id": "bicycle-repairers.faq.9",
                 "question": "How do I judge career prospects and transitions?",
-                "question_key": "career.faq.bicycle-repairers.9"
+                "question_key": "career.faq.bicycle-repairers.9",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
                 "answer": "The U.S. wage percentiles are 2025 OEWS data under this occupation's separate definition (the O*NET page does not label them as taken from another occupation), with a median hourly wage of 20.57 USD and a median annual salary of 42,780 USD; for mainland China no precise occupational wage entry for this occupation was obtained, and this page shows only three official proxies (residents' services, repair, and other services urban non-private units 68,159 yuan / year and urban private units 52,139 yuan / year; the average monthly income of migrant workers in that industry 4,023 yuan), and makes clear that they are respectively an industry category average and a population monthly average income, neither of which is this occupation's wage. The occupational scope, statistical systems, data periods, and compensation structures (commission and self-employment) differ on both sides, so USD cannot be converted into RMB, and quotes that lack sample and position scope should not be trusted.",
                 "id": "bicycle-repairers.faq.10",
                 "question": "Why can't U.S. wages and mainland China proxy definitions be converted into each other?",
                 "question_key": "career.faq.bicycle-repairers.10"
+              },
+              {
+                "answer": "The original leaves the part unidentified, and independent recheck and signoff are missing. The variant only makes the R3 part identification verifiable. Both R2 checks are still open. Do not record release in either version. Hand the work orders to the workshop shift lead. Did you separate the customer report, inspection, evidence change and receiver?",
+                "id": "bicycle-repairers.faq.11",
+                "question": "BR-73 reference (open after submitting)",
+                "question_key": "career.faq.bicycle-repairers.q11",
+                "source_refs": [
+                  "br73-editor"
+                ]
               }
             ]
           },
@@ -32049,11 +32113,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The author this round verified U.S. 49-3091.00 identity, tasks/activities/context, knowledge abilities/styles, wages/employment, software/industry, and training and certification; the Chinese code, 2025 industry/migrant worker background, and the 2022 Jining historical price range; CPSC, Park Tool, China's product implementation policy, and the personal information law. Editorial trials and occupational pathways are listed separately from statistics and law."
+              "FermatMind Editorial"
             ]
           },
           "id": "bicycle-repairers.sources.source-card.1",
           "source_refs": [
+            "ep",
+            "cn-local-wages",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "bls",
             "ep-current",
             "onet-wages",
@@ -32063,7 +32131,6 @@
             "cn-career-code",
             "cn-wages-current",
             "cn-farmers-current",
-            "cn-local-wages",
             "health",
             "archivists",
             "cn-product-policy",
@@ -32077,11 +32144,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Main original texts: O*NET occupation summary/detail pages, wages/trends, industry/hot technology, and training/certification for this occupation; BLSMay2025OEWS technical note; National Bureau of Statistics 2025 unit wages and the migrant worker report; the government position category code table and the Jining 2022 wage price range; the GB17761-2024 publication interpretation and the 2025 implementation opinions; CPSC micromobility, the Park Tool wheel guide, the personal information law, and ILO Working Paper 140. Retaining out-of-scope historical sources does not mean their body text has been updated in sync."
+              "U.S. occupation wages and projections use their original tables. The Mainland classification, historical Jining wage table and two fleet examples are separate."
             ]
           },
           "id": "bicycle-repairers.sources.source-card.2",
           "source_refs": [
+            "ep",
+            "cn-local-wages",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "onet",
             "bls",
             "onet-wages",
@@ -32094,7 +32165,6 @@
             "cn-career-code",
             "cn-wages-current",
             "cn-farmers-current",
-            "cn-local-wages",
             "msresearch",
             "cn-product-policy",
             "health",
@@ -32109,11 +32179,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Verified and read this round on 2026-10-09; U.S. wages May2025, employment 2025—2035, software from 2025 U.S. postings, and the industry page does not list a separate data year; training catalog 2025—26 and completers 2024—25. China national background 2025, local wages 2022 historical, and the occupational classification 2022 code table; the product standard effective 2025-09-01 and new-standard sales from 2025-12-01, with the implementation opinions in 2025; the personal information law effective 2021, the Park Tool2021 page, and ILO2025."
+              "U.S. wages are from May 2025 and projections cover 2025–2035. Jining wages are from a historical 2022 table."
             ]
           },
           "id": "bicycle-repairers.sources.source-card.3",
           "source_refs": [
+            "ep",
+            "cn-local-wages",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "ep-current",
             "onet-wages",
             "hr",
@@ -32121,7 +32195,6 @@
             "r2-pay-2",
             "cn-wages-current",
             "cn-farmers-current",
-            "cn-local-wages",
             "cn-career-code",
             "msresearch",
             "cn-product-policy",
@@ -32136,15 +32209,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "U.S. wages and employment are for this occupation; the national occupational wage gap and the existing Chinese classification code must be kept separate, and the Jining historical entry covers bicycles and electric bicycles and does not equal a U.S. occupation or a current national quote. CPSC is usage guidance, CCC is a product certification, and the manufacturer wheel literature is not a general regulation or a model repair manual. There is no measured AI adoption/efficiency, personality validity, employer preference, or transition rate for this occupation; editorial suggestions are labeled separately. The shared Hero / seven-day and other out-of-scope historical values are retained, and related conflicts are recorded in the author report."
+              "The fleet documents do not establish vacancies or worker wages. BR-73 uses fictional paper records."
             ]
           },
           "id": "bicycle-repairers.sources.source-card.4",
           "source_refs": [
+            "ep",
+            "cn-local-wages",
+            "yuhang-fleet-2025-26",
+            "suzhou-fleet-2026",
             "oews-methods",
             "ep-current",
             "cn-career-code",
-            "cn-local-wages",
             "cn-wages-current",
             "health",
             "archivists",
@@ -32189,13 +32265,13 @@
                 "entity": "Enneagram Personality Test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the bicycle repairer career page",
@@ -32259,18 +32335,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official outlook",
-                  "2024—2034; accessed 2026-09-15"
+                  "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour.",
+                  "2025 baseline and 2035 projection."
                 ],
                 "evidence_type": "official outlook",
                 "id": "ep",
-                "limitation": "Employment and projections under this occupation's separate definition (decline (-1% or lower)); cannot be extrapolated to a broader occupational group.",
+                "limitation": "Line item 49-3091.",
                 "market": "United States",
-                "name": "O*NET 49-3091.00 Occupation Summary (Employment and Projections Fields)",
-                "period": "2024—2034; accessed 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Table 1.2: Bicycle repairers (49-3091)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/49-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32292,33 +32368,33 @@
                 "accessed_at": "2026-09-15",
                 "details": [
                   "official survey report",
-                  "2024 data, released 2025-04-30; accessed 2026-09-15"
+                  "2025; released 2026-04-30"
                 ],
                 "evidence_type": "official survey report",
                 "id": "nbs",
-                "limitation": "The report gives a total of 29,973 ten-thousand migrant workers and an average monthly income of 4,961 yuan; of these, migrant workers engaged in residents' services, repair, and other services account for 12.3% and average 4,023 yuan per month (growth of 1.5%). This is a “population + industry” definition, not a bicycle repairer's position wage, and cannot be used to estimate an individual quote.",
+                "limitation": "Migrant workers engaged in residents' services, repair, and other services average 4,130 yuan per month, up 2.7% year on year, 12.5% of the population; this is not an occupational wage or the same pre-tax unit wage definition.",
                 "market": "Mainland China",
-                "name": "National Bureau of Statistics, 2024 Migrant Worker Monitoring Survey Report (average monthly income of migrant workers engaged in residents' services, repair, and other services)",
-                "period": "2024 data, released 2025-04-30; accessed 2026-09-15",
+                "name": "National Bureau of Statistics 2025 Migrant Worker Monitoring Survey Report",
+                "period": "2025; released 2026-04-30",
                 "publisher": "National Bureau of Statistics of the People's Republic of China",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202504/t20250430_1959523.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202604/t20260430_1963472.html"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
                   "official wage statistics",
-                  "2024 data, released 2025-05-16; accessed 2026-09-15"
+                  "2025; released 2026-05-15"
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "cnclass",
-                "limitation": "This category is 68,159 yuan / year for urban non-private units and 52,139 yuan / year for urban private units; the industry category average does not contain a precise entry for this occupation, and the category contains many positions unrelated to this occupation, so it cannot replace a bicycle repairer's wage and serves only as an explicitly stated industry proxy.",
+                "limitation": "Residents' services, repair, and other services non-private 70,226 and private 52,059 yuan / year, pre-tax industry averages; not a bicycle repair occupational wage.",
                 "market": "Mainland China",
-                "name": "National Bureau of Statistics, Average Annual Wages of Urban Unit Employees in 2024 (residents' services, repair, and other services)",
-                "period": "2024 data, released 2025-05-16; accessed 2026-09-15",
+                "name": "National Bureau of Statistics 2025 average annual wages of urban unit employees",
+                "period": "2025; released 2026-05-15",
                 "publisher": "National Bureau of Statistics of the People's Republic of China",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202505/t20250516_1959826.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32328,13 +32404,13 @@
                 ],
                 "evidence_type": "occupation profile",
                 "id": "privacy",
-                "limitation": "The page lists only three education levels (some jobs require a high school diploma or equivalent, some require having attended college without a degree, and some require less than a high school diploma) and does not publish the percentage at each level; education is not a uniform hiring threshold.",
+                "limitation": "Respondents describe three education categories for some jobs. The page reports no shares.",
                 "market": "United States",
-                "name": "O*NET 49-3091.00 Occupation Summary (educational composition)",
+                "name": "O*NET: Education needed by new hires",
                 "period": "Page updated 2026; accessed 2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/49-3091.00"
+                "url": "https://www.onetonline.org/link/details/49-3091.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32355,18 +32431,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official outlook",
-                  "2024—2034; accessed 2026-09-15"
+                  "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour.",
+                  "2025 baseline and 2035 projection."
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
-                "limitation": "Employment and projections under this occupation's separate definition, not individual hiring probability; the employment scale is relatively small (13,200 in 2024) and the projected change is negative.",
+                "limitation": "Line item 49-3091.",
                 "market": "United States",
-                "name": "O*NET 49-3091.00 Occupation Summary (Employment and Projections Fields)",
-                "period": "2024—2034; accessed 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Table 1.2: Bicycle repairers (49-3091)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/49-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32392,12 +32468,12 @@
                 ],
                 "evidence_type": "official product safety guidance",
                 "id": "health",
-                "limitation": "Explains two main categories of micromobility product hazards: residential fires caused by lithium-ion batteries while charging (requiring charging only while someone is present, using only chargers provided or recommended by the manufacturer, using only tested replacement batteries confirmed as compatible by the manufacturer, and never using battery packs modified or reworked by unqualified persons), and falls and collisions caused by brake and control failures (recall cases include collision and injury risks from electric bicycle disc brake calipers and fire and burn risks from electric bicycles); it also requires using products that comply with applicable voluntary safety standards, inspecting handlebars and brakes and throttles and cables and frames before riding, and wearing a helmet. This page is the U.S. federal product safety definition and does not equal repair specifications or release conclusions for any specific model.",
+                "limitation": "The U.S. CPSC recommends the charger supplied or recommended by the vehicle manufacturer. It recommends replacement batteries that have been tested and confirmed compatible by that manufacturer. This is consumer guidance.",
                 "market": "United States",
                 "name": "U.S. CPSC, Micromobility: E-Bikes, E-Scooters and Hoverboards (micromobility product safety information center)",
                 "period": "Current version of the page; accessed 2026-09-15",
                 "publisher": "U.S. Consumer Product Safety Commission",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Micromobility-Information-Center"
               },
               {
@@ -32413,7 +32489,7 @@
                 "name": "International Labour Organization, Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140)",
                 "period": "2025; accessed 2026-09-15",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -32422,13 +32498,13 @@
                   "editorial record",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "editorial record",
+                "evidence_type": "primary_document",
                 "id": "editor",
-                "limitation": "Editorial team compilation and definition verification record.",
+                "limitation": "Use to verify U.S. occupation tasks.",
                 "market": "United States",
-                "name": "FermatMind career content editorial team verification record",
+                "name": "O*NET: Bicycle Repairers occupation summary",
                 "period": "Accessed 2026-09-15",
-                "publisher": "FermatMind career content editorial team",
+                "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/49-3091.00"
               },
@@ -32440,10 +32516,10 @@
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "The current U.S. O*NET catalog lists 3 related college programs: Minneapolis Community and Technical College (less than 1 year, 5 completers), Northwest Arkansas Community College (1—2 years, 4), and Andrews University (1—2 years, 0). The college catalog is IPEDS2025—26, and completers are for the 2024—25 year; this does not represent current enrollment, the training duration an individual needs, or a hiring threshold. The summary lists the registered apprenticeship Bicycle Repair Technician; the certification page has 1 certification, Certified Bicycle Technician (United Bicycle Institute), which is not a mandatory entry requirement.",
+                "limitation": "The O*NET query returned three related program records. The 2025–26 directory shows 5, 4 and 0 awards from IPEDS 2024–25. Check current enrollment with each school.",
                 "market": "United States",
                 "name": "O*NET 49-3091.00 Training and Education Information",
-                "period": "Page updated 2026; accessed 2026-09-15",
+                "period": "2025–26 directory, IPEDS 2024–25",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/49-3091.00"
@@ -32536,10 +32612,10 @@
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "Retail trade 80% and other industries (including real estate and rental and leasing and other services) 20%; the industry distribution describes statistical categories and does not provide industry wage levels.",
+                "limitation": "The O*NET industry subtable lists retail trade at 80% and other industries at 20%. It does not state a year or show industry wages or the share of specialist shops.",
                 "market": "United States",
                 "name": "O*NET 49-3091.00 Industry Distribution",
-                "period": "The current industry page does not list a separate data year; read this round on 2026-10-09",
+                "period": "Year unspecified on subtable",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/49-3091.00"
@@ -32547,18 +32623,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official employment trends",
-                  "2025—2035"
+                  "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour.",
+                  "2025 baseline and 2035 projection."
                 ],
                 "evidence_type": "official employment trends",
                 "id": "r2-pay-3",
-                "limitation": "U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability.",
+                "limitation": "Line item 49-3091.",
                 "market": "United States",
-                "name": "O*NET 49-3091.00 employment trends page (employment and openings)",
-                "period": "2025—2035; verified and read 2026-10-09",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "BLS Table 1.2: Bicycle repairers (49-3091)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32568,9 +32644,9 @@
                 ],
                 "evidence_type": "certification information",
                 "id": "census",
-                "limitation": "The page lists 1 national certification: Certified Bicycle Technician (United Bicycle Institute); a certification is proof of ability and does not equal a hiring threshold or employer appointment.",
+                "limitation": "The O*NET nationwide directory lists Certified Bicycle Technician from United Bicycle Institute. It does not establish a license or a universal hiring requirement.",
                 "market": "United States",
-                "name": "O*NET 49-3091.00 Certification Findings (national certification)",
+                "name": "O*NET: Industry credential directory",
                 "period": "Page updated 2026; accessed 2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -32584,13 +32660,13 @@
                 ],
                 "evidence_type": "official standard release interpretation",
                 "id": "msresearch",
-                "limitation": "The Chinese government website's publication and interpretation of GB17761-2024: issued 2024-12-31, effective 2025-09-01; from 2025-12-01, new bicycles sold must comply with the new standard, and already purchased old bicycles are not thereby forcibly phased out. MIIT joint consumer document [2025] No. 144 requires related production, certification, and sales stages to implement the new standard and CCC; CCC is a product certification and cannot be interpreted as a repair technician license. That page is a publication interpretation, and the full standard text and specific model manufacturer repair manuals were not obtained.",
+                "limitation": "Explanation of the e-bike product standard. Product and sales compliance do not establish a worker’s authorization.",
                 "market": "Mainland China",
-                "name": "Mandatory national standard GB 17761-2024 Safety Technical Specification for Electric Bicycles (revised under the organization of the Ministry of Industry and Information Technology and the State Administration for Market Regulation together with the Ministry of Public Security, the Ministry of Emergency Management, and the National Fire and Rescue Administration)",
+                "name": "MIIT: Release of GB 17761–2024",
                 "period": "Issued 2024-12-31, effective 2025-09-01, fully replacing GB 17761-2018; accessed 2026-09-15",
-                "publisher": "Ministry of Industry and Information Technology and State Administration for Market Regulation and others of the People's Republic of China (published on the Chinese government website)",
-                "scope": "jurisdiction_specific",
-                "url": "https://www.gov.cn/lianbo/bumen/202501/content_6998230.htm"
+                "publisher": "Ministry of Industry and Information Technology and State Administration for Market Regulation and others of the People's Republic of China (Ministry of Industry and Information Technology)",
+                "scope": "contextual",
+                "url": "https://www.miit.gov.cn/jgsj/xfpgys/qg/art/2025/art_b9cc3e2d6ea34c6caba99329614a3cda.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32627,18 +32703,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official employment trends",
-                  "2025—2035"
+                  "BLS Table 1.2 shows 12,200 U.S. jobs for 49-3091 in 2025 and projects 11,500 in 2035: a 5.7% decline, about 700 fewer jobs, and 1,200 annual openings. Self-employment is 2.5%. May 2025 employee medians were $42,780 a year and $20.57 an hour.",
+                  "2025 baseline and 2035 projection."
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep-current",
-                "limitation": "U.S. 49-3091.00 bicycle repairers: 12,200 employed in 2025, projected 11,500 in 2035; 2025—2035 change of -6%, with 1,200 annual openings (including growth and replacement). Decline and replacement openings can coexist; the overall projection does not measure AI causation or individual hiring probability.",
+                "limitation": "Line item 49-3091.",
                 "market": "United States",
-                "name": "O*NET bicycle repairer 2025—2035 national employment trends",
-                "period": "2025—2035",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS Table 1.2: Bicycle repairers (49-3091)",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32680,12 +32756,12 @@
                 ],
                 "evidence_type": "official occupational classification table",
                 "id": "cn-career-code",
-                "limitation": "The Chinese official position category code table (2022 code classification, PDF page 44 / printed page 77) lists 4-12-04-01 bicycle and electric bicycle repair worker, belonging to daily-use product repair service personnel. This Chinese name includes electric bicycles, a broader scope than U.S. 49-3091.00, and cannot be directly equated. The occupational name and code have a basis, but a precise national occupational wage distribution has still not been obtained. This attachment is not the full text of an occupational skill standard.",
+                "limitation": "China’s occupational classification lists bicycle and electric bicycle repair workers under 4-12-04-01. That category includes e-bikes and is broader than the U.S. bicycle repairer code used here. The codes do not make the wage figures comparable.",
                 "market": "Mainland China",
                 "name": "Government public position category code table (2022 Occupational Classification Code classification)",
                 "period": "2022 classification; 2023 attachment",
                 "publisher": "Guangyuan Municipal Human Resources and Social Security Bureau",
-                "scope": "partial_mapping",
+                "scope": "contextual",
                 "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2023/03/28/33236d995ac3404a99de2429f1e92f52.pdf"
               },
               {
@@ -32696,12 +32772,12 @@
                 ],
                 "evidence_type": "official local wage price table",
                 "id": "cn-local-wages",
-                "limitation": "The Jining Human Resources and Social Security Bureau published the 2022 annual wage price attachment, page 9 line 186, occupation bicycle and electric bicycle repair worker, unit yuan / year: low 29,873, lower quartile 31,084, median 36,294, upper quartile 38,973, high 42,083. This serves only as local historical reference with a broader occupational scope; the sample size, taxes, and commission details for this line were not obtained this round, and it cannot be treated as a national or current quote or a U.S. occupational equivalent.",
+                "limitation": "Jining’s 2022 historical wage table, page 9 row 186, reports for bicycle and electric bicycle repair workers, in CNY per year: low 29,873, lower quartile 31,084, median 36,294, upper quartile 38,973 and high 42,083. This page does not have the sample size, tax treatment or commission details for the row.",
                 "market": "Mainland China (local historical attachment)",
                 "name": "Jining 2022 partial position (job type) human resources market wage price attachment 1",
                 "period": "2022",
                 "publisher": "Jining Municipal Human Resources and Social Security Bureau",
-                "scope": "partial_mapping",
+                "scope": "contextual",
                 "url": "https://hrss.jining.gov.cn/attach/0/7b30cc10a29c4d8caff0881efdcbcaf2.pdf"
               },
               {
@@ -32714,10 +32790,10 @@
                 "id": "cn-product-policy",
                 "limitation": "Implementation policy for the production / CCC / sales stages; the prohibition on unlawful modification cannot be interpreted as prohibiting all normal repair or as a personal CCC for employees.",
                 "market": "Mainland China",
-                "name": "Opinions on Strengthening the Implementation of the Mandatory National Standard for Electric Bicycles and Promoting Product Quality and Safety Improvement",
+                "name": "Four authorities: Implementing the mandatory e-bike standard and accelerating supply of new products",
                 "period": "MIIT joint consumer document [2025] No. 144; 2025-06-04 document, published on the web 2025-07-24",
                 "publisher": "Ministry of Industry and Information Technology and others",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.miit.gov.cn/jgsj/xfpgys/wjfb/art/2025/art_346cbdc6d642418998c2be5baa56c17b.html"
               },
               {
@@ -32730,11 +32806,11 @@
                 "id": "oews-methods",
                 "limitation": "Includes full-time and part-time wage-and-salary workers, commissions, and production bonuses and tips, and excludes the self-employed and overtime premiums; it is usually annualized at 2,080 hours and is not an individual's actual annual income.",
                 "market": "United States",
-                "name": "BLS May2025OEWS technical note",
+                "name": "BLS OEWS: Concepts",
                 "period": "May2025; updated 2026-05-15",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
-                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32749,25 +32825,70 @@
                 "name": "Personal Information Protection Law of the People's Republic of China",
                 "period": "Effective 2021-11-01",
                 "publisher": "Regulation reprint by the State Administration for Market Regulation",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "An equally weighted editorial estimate of three work samples, not a measure of adoption or working time.; scores of 25, 0 and 25 average to 17% after rounding; 2026-11-10.",
                   "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Inspection and location | Make the fault reproducible | Perform visual and functional inspection, locate the fault by symptom, and distinguish adjustable problems from already damaged parts. — 25/100; weight=1/3; bicycle-repairers.profile.responsibilities-block.1[1]",
-                  "Repair and adjustment | Give the result a specification | Disassemble and assemble and adjust and clean and lubricate according to the manufacturer manual and specifications, and install and adjust brakes and shifting and replace tires and inner tubes. — 0/100; weight=1/3; bicycle-repairers.profile.responsibilities-block.1[2]",
-                  "Work orders and parts | Make the process traceable | Open repair work orders and record parts and labor and costs and specifications, and order and verify parts and batches. — 75/100; weight=1/3; bicycle-repairers.profile.responsibilities-block.1[4]"
+                  "Inspection | Fault notes | A text tool can organize the reported symptoms. Staff perform physical checks. — 25/100; weight=1/3; bicycle-repairers.profile.responsibilities-block.1[1]",
+                  "Repair | Physical adjustments | This sample covers adjustments and physical rechecks. A text tool performs neither. — 0/100; weight=1/3; bicycle-repairers.profile.responsibilities-block.1[2]",
+                  "Work orders | Record drafts | A text tool can organize the existing fields. Parts verification and signoff remain authorized staff decisions. — 25/100; weight=1/3; bicycle-repairers.profile.responsibilities-block.1[4]"
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "name": "FermatMind AI task impact method v1",
+                "period": "2026-11-10",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Yuhang tender specification for public bicycle services in 2025–2026 lists bicycle inspections and repairs separately from redistribution and station maintenance. It describes fleet services, not a hiring notice or individual pay."
+                ],
+                "evidence_type": "primary_document",
+                "id": "yuhang-fleet-2025-26",
+                "limitation": "The Yuhang tender specification for public bicycle services in 2025–2026 lists bicycle inspections and repairs separately from redistribution and station maintenance. It describes fleet services, not a hiring notice or individual pay.",
+                "market": "Mainland China",
+                "name": "Yuhang public bicycle service: inspections and repairs",
+                "period": "2025–2026",
+                "publisher": "Hangzhou Yuhang Public Bicycle Service Co.",
+                "scope": "contextual",
+                "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/c70cc497ed8445b9a3c8e19263c4985f.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Suzhou’s city administration lists bicycle maintenance alongside redistribution and customer service in its 2026 public bicycle budget. This is part of a local service phaseout plan. The budget and service fee do not show worker wages or a nationwide trend."
+                ],
+                "evidence_type": "primary_document",
+                "id": "suzhou-fleet-2026",
+                "limitation": "Suzhou’s city administration lists bicycle maintenance alongside redistribution and customer service in its 2026 public bicycle budget. This is part of a local service phaseout plan. The budget and service fee do not show worker wages or a nationwide trend.",
+                "market": "Mainland China",
+                "name": "Suzhou City Administration: public bicycle operation and maintenance",
+                "period": "2026",
+                "publisher": "Suzhou City Administration",
+                "scope": "contextual",
+                "url": "https://cgj.suzhou.gov.cn/srsz/czxx/202602/f84c832609c248418fe5694a73d37ddb/files/fc8ae82c3db74e739c84a68efc07faf5.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Fictional work order and parts record created for this page."
+                ],
+                "evidence_type": "editorial_design",
+                "id": "br73-editor",
+                "limitation": "Fictional work order and parts record created for this page.",
+                "market": "Fictional exercise",
+                "name": "FermatMind BR-73: Check two work orders and write one handoff",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": null
               }
             ]
           },
@@ -36138,7 +36259,7 @@
       },
       "hero": {
         "h1": "Bicycle Repairers",
-        "quick_answer": "Bicycle repairers inspect, repair, adjust, assemble, and maintain bicycles: receiving bicycles and asking about riding use and symptoms, performing visual and functional inspection and locating faults by symptom, estimating labor and parts and opening repair work orders, installing and adjusting shifting and gearing, installing and adjusting brakes and brake pads, installing new tires and inner tubes, cleaning and lubricating parts, truing wheels (including lateral and radial), disassembling and assembling axles to repair or adjust or replace defective parts, installing and replacing accessories and attachments such as handlebars and kickstands and lights and saddles, adjusting riding position to the customer's build and use, cutting new spokes for wheel building as needed, dressing replacement parts with a bench grinder, and explaining repair plans and parts trade-offs to customers; their work does not equal judging on the customer's behalf whether a bicycle may continue on the road, nor does it replace the release determination for model manuals and brake and fastener and battery-related specifications, and they stop and escalate when the model does not match, a part is damaged, the brake or wheel recheck does not pass, or the situation exceeds their authorization.",
+        "quick_answer": "Bicycle repairers check the customer’s description, bike and parts, inspect brakes, gears and wheels, and document work and rechecks. U.S. statistics use 49-3091. The Mainland category also covers e-bikes. This page presents Jining’s historical wage table and public fleet service examples separately.",
         "title": "Bicycle Repairers"
       },
       "market_signal_card": {
@@ -36689,7 +36810,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET employment and projections fields",
+            "label": "BLS Table 1.2: Bicycle repairers (49-3091)",
             "secondary_value": null,
             "value": {
               "$item": "bicycle-repairers.profile.onet-structured-fields-block.4",
@@ -37490,7 +37611,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit being a bicycle repairer",
+        "label": "Explore my career interests with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37612,7 +37733,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which adjacent direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
-      "interface.quick_decision.experiment_heading": "What does this work mainly involve?",
+      "interface.quick_decision.experiment_heading": "How can I try the work with a paper work order?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. salary reference",
@@ -37705,7 +37826,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI task-impact estimate",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37795,37 +37916,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "13,200 people",
+        "derivation": "BLS published value.",
+        "display_value": "12,200 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment size (this occupational definition)",
-        "occupation_scope": "Bicycle Repairers",
-        "period": "2024; accessed 2026-09-15",
+        "measure": "Employment",
+        "occupation_scope": "U.S. bicycle repairers (49-3091)",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Decline (-1% or lower)",
+        "derivation": "BLS published value.",
+        "display_value": "−5.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Employment growth label (this occupational definition)",
-        "occupation_scope": "Bicycle Repairers",
-        "period": "2024—2034; accessed 2026-09-15",
+        "measure": "Projected employment change",
+        "occupation_scope": "U.S. bicycle repairers (49-3091)",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 1,600 (including growth and replacement)",
+        "derivation": "BLS published value.",
+        "display_value": "About 1,200 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Projected annual job openings over the projection period (this occupational definition)",
-        "occupation_scope": "Bicycle Repairers",
-        "period": "2024—2034; accessed 2026-09-15",
+        "measure": "Projected annual openings",
+        "occupation_scope": "U.S. bicycle repairers (49-3091)",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -38003,37 +38124,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "13,200 people",
+        "derivation": "BLS published value.",
+        "display_value": "12,200 jobs",
         "fact_id": "us-employment-parent",
         "market": "United States",
-        "measure": "Employment size (this occupational definition)",
-        "occupation_scope": "Bicycle Repairers",
-        "period": "2024",
+        "measure": "Employment",
+        "occupation_scope": "U.S. bicycle repairers (49-3091)",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Decline (-1% or lower)",
+        "derivation": "BLS published value.",
+        "display_value": "−5.7%",
         "fact_id": "us-growth-parent",
         "market": "United States",
-        "measure": "Employment growth label (this occupational definition)",
-        "occupation_scope": "Bicycle Repairers",
-        "period": "2024—2034",
+        "measure": "Projected employment change",
+        "occupation_scope": "U.S. bicycle repairers (49-3091)",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 1,600 (including growth and replacement)",
+        "derivation": "BLS published value.",
+        "display_value": "About 1,200 per year",
         "fact_id": "us-openings-parent",
         "market": "United States",
-        "measure": "Projected annual job openings over the projection period (this occupational definition)",
-        "occupation_scope": "Bicycle Repairers",
-        "period": "2024—2034",
+        "measure": "Projected annual openings",
+        "occupation_scope": "U.S. bicycle repairers (49-3091)",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -38052,7 +38173,7 @@
       },
       {
         "derivation": null,
-        "display_value": "-6%",
+        "display_value": "−5.7%",
         "fact_id": "revision-us-growth-current",
         "market": "United States",
         "measure": "Employment growth rate",
@@ -38075,13 +38196,13 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
+        "derivation": "An equally weighted editorial estimate of three work samples, not a measure of adoption or working time.",
+        "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Bicycle Repairers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "measure": "AI task-impact estimate (editorial estimate)",
+        "occupation_scope": "Three selected bicycle repair work samples",
+        "period": "2026-11-10",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -38093,12 +38214,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI task-impact estimate"
     },
     "badges": [
       "O*NET 49-3091.00 · Job Zone 1–2 · Low entry preparation",
       "Wheel and brake and drivetrain repair / assembly and adjustment / customer reception and sales",
-      "This occupational definition (wages and employment not taken from another occupation) · O*NET does not mark Bright Outlook · no precise equivalent occupational entry in mainland China · gaps visibly marked"
+      "Mainland China: Jining historical wages and Yuhang and Suzhou fleet examples. Comparable nationwide wages were unavailable in these sources."
     ],
     "metrics": [
       {
@@ -38137,17 +38258,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What bicycle repairers do, what preparation is needed, what U.S. income and prospects look like, which tasks AI will change, and the boundaries of brake and fastener failure, wheel and spoke and frame structural damage, grease contaminating braking surfaces, customer information and vehicle information, and inspection and release and stoppage authority; source scope and data gaps are retained."
+      "text": "Explore bicycle repair duties, pay and training, and try a paper exercise in checking work orders and handing off open issues."
     },
     "title": {
       "availability": "available",
-      "text": "Bicycle Repairers"
+      "text": "Bicycle Repairer: Duties, Pay and Training | FermatMind"
     }
   },
-  "source_content_sha256": "055bc43d4b049dfe2edc7a10a5dbef89d9477216d519ec94cf347197578bcee4",
+  "source_content_sha256": "41443e96fb73615d3c3a1ca5db8233169be6a4e546dd9dfbd209643880294a81",
   "subject": {
     "canonical_slug": "bicycle-repairers",
     "name": "Bicycle Repairers",
-    "summary": "Bicycle repairers inspect, repair, adjust, assemble, and maintain bicycles: receiving bicycles and asking about symptoms, visual and functional inspection, locating faults, estimating labor and parts and opening work orders, installing and adjusting shifting and braking, replacing tires and inner tubes, cleaning and lubricating parts, truing wheels, disassembling and assembling axles to replace defective parts, installing and replacing accessories and attachments, adjusting riding position to the customer's build and use, and explaining repair plans to customers. The U.S. side corresponds to O*NET 49-3091.00 (Bicycle Repairers), which is Job Zone 1–2 (SVP below 6.0); the wage, employment, and industry data are all under this occupation's separate definition, and the O*NET page does not state that they are taken from another occupation; O*NET does not mark this occupation as Bright Outlook, and the employment projection is a decline (-1% or lower). On the mainland China side, this page has not obtained a public occupational wage entry precisely corresponding to this occupation and shows only three official proxies with clearly labeled populations and industry scope (annual average wages of urban non-private and private units in residents' services, repair, and other services, and the average monthly income of migrant workers in that industry), and does not treat industry or population definitions as an individual bicycle repairer's quote."
+    "summary": "Bicycle repairers check the customer’s description, bike and parts, inspect brakes, gears and wheels, and document work and rechecks. U.S. statistics use 49-3091. The Mainland category also covers e-bikes. This page presents Jining’s historical wage table and public fleet service examples separately."
   }
 }

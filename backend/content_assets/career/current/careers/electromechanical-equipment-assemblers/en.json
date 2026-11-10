@@ -14,6 +14,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a34-huainan": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a34-xinhui": {
+        "status": "pending_mapping"
+      },
       "fact:wage": {
         "status": "pending_mapping"
       },
@@ -143,7 +149,16 @@
       "item:electromechanical-equipment-assemblers.path.entry-role-comparison.current.v1": {
         "status": "pending_mapping"
       },
+      "item:electromechanical-equipment-assemblers.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
       "item:electromechanical-equipment-assemblers.path.interview-probation.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:electromechanical-equipment-assemblers.path.seven-day-decision.1": {
+        "status": "pending_mapping"
+      },
+      "item:electromechanical-equipment-assemblers.path.seven-day-trial.1": {
         "status": "pending_mapping"
       },
       "item:electromechanical-equipment-assemblers.profile.career-quick-answers-block.1": {
@@ -8076,7 +8091,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Fictional records: A has drawings and bill of materials both at v4, matching parts, compliant tolerances, and approved, complete test conditions; B has v4 drawings but a v3 bill of materials; C has a measurement above the upper limit; D has unknown test isolation status."
+              "Check revisions, measurements and test records using the paper exercise. On day seven, open “Electromechanical assembly handoff reference (open after day six)” under FAQs and sources."
             ]
           },
           "id": "electromechanical-equipment-assemblers.path.career-path-block.3",
@@ -8090,7 +8105,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Rule: only complete versions, parts, tolerances, and test conditions allow paper release; isolate conflicts, review rework for out-of-tolerance results, and pause when isolation is unknown."
+              "Check revisions, measurements and test records using the paper exercise. On day seven, open “Electromechanical assembly handoff reference (open after day six)” under FAQs and sources."
             ]
           },
           "id": "electromechanical-equipment-assemblers.path.career-path-block.4",
@@ -8104,7 +8119,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Independent reasoning: A meets all version, part, tolerance, and test condition requirements and proceeds to paper release; isolate B for version conflicts; send C for rework review because it is out of tolerance; pause D because isolation status is unknown. All four records are accounted for."
+              "Check revisions, measurements and test records using the paper exercise. On day seven, open “Electromechanical assembly handoff reference (open after day six)” under FAQs and sources."
             ]
           },
           "id": "electromechanical-equipment-assemblers.path.career-path-block.5",
@@ -8118,7 +8133,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The seven-day trial uses only the same materials for checks, triage, recording, and retrospective review."
+              "Check revisions, measurements and test records using the paper exercise. On day seven, open “Electromechanical assembly handoff reference (open after day six)” under FAQs and sources."
             ]
           },
           "id": "electromechanical-equipment-assemblers.path.career-path-block.6",
@@ -8319,6 +8334,114 @@
           },
           "id": "electromechanical-equipment-assemblers.path.credential-decision.current.v1",
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Supplied records",
+                  "Fictional units A, B, C and D. The exercise requires a v4 drawing and parts list, matching parts, a passing measurement and recorded test approval.",
+                  "A has all four records. B has a v4 drawing and v3 parts list, with the remaining checks documented.",
+                  "C has an above-limit measurement and the other checks documented. D has only the test-condition field missing.",
+                  "The release owner reviews complete records. Quality reviews exceptions, and the test owner checks missing test fields. Use the paper records only."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "What to submit",
+                  "Submit a one-page handoff with the status, evidence and next owner for each unit A through D."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Finish your own answer first",
+                  "On day seven, open “Electromechanical assembly handoff reference (open after day six)” under FAQs and sources."
+                ]
+              }
+            ]
+          },
+          "id": "electromechanical-equipment-assemblers.path.entry-work-sample-data.1",
+          "title": "Paper handoff exercise",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "Day 1",
+                  "List the four review conditions."
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "Day 2",
+                  "Copy the drawing and parts-list revisions."
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "Day 3",
+                  "Identify differences in measurements."
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "Day 4",
+                  "Check the test-condition field."
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "Day 5",
+                  "Draft a four-line handoff."
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "Day 6",
+                  "Finish your handoff before opening the reference."
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "Day 7",
+                  "On day seven, open “Electromechanical assembly handoff reference (open after day six)” under FAQs and sources. Record one correction."
+                ]
+              }
+            ]
+          },
+          "id": "electromechanical-equipment-assemblers.path.seven-day-trial.1",
+          "title": "Seven-day paper exercise",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "Finish your own answer on day six.",
+              "Use the collapsed reference on day seven to record a correction."
+            ]
+          },
+          "id": "electromechanical-equipment-assemblers.path.seven-day-decision.1",
+          "title": "Review your work",
+          "type": "list"
         }
       ]
     },
@@ -8363,7 +8486,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Combined projections cannot establish exact additions for 51-2023, AI causation, or individual hiring probabilities; check overall demand context and task assistance separately."
+              "5.0% (2025–2035)"
             ]
           },
           "id": "electromechanical-equipment-assemblers.market-signals.market-signal-card.3",
@@ -8417,26 +8540,21 @@
           "data": {
             "entries": [
               {
-                "answer": "Core work includes reading drawings and specifications, aligning and fastening parts, connecting cables and tubing, taking precision measurements, inspecting and testing, and adjusting finished products.",
+                "answer": "Check drawings and parts lists, assemble electromechanical units, record identifiers and measurements, and route revision or measurement discrepancies to quality review.",
                 "id": "electromechanical-equipment-assemblers.faq.1",
                 "question": "Electromechanical equipment assemblers: how does daily work form a complete cycle?",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.daily-work",
                 "source_refs": [
-                  "onet"
+                  "a34-onet"
                 ]
               },
               {
-                "answer": "Assemblers produce physical components according to specifications; electronics engineers handle design, engineering technicians support development and testing, robotics technicians install and maintain automated systems, calibration roles ensure measurement values, and repairers diagnose and repair equipment already in use.",
+                "answer": "Assemblers build units and record production steps against the current drawing. Engineering technicians support development, tests and discrepancy checks. Ask who can change drawings, approve rework or authorize release.",
                 "id": "electromechanical-equipment-assemblers.faq.2",
                 "question": "Electromechanical equipment assemblers: how does this differ from adjacent occupations?",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.role-comparison",
                 "source_refs": [
-                  "adj-cal",
-                  "adj-eng",
-                  "adj-repair",
-                  "adj-robot",
-                  "adj-tech",
-                  "onet"
+                  "a34-onet"
                 ]
               },
               {
@@ -8467,21 +8585,22 @@
                 ]
               },
               {
-                "answer": "National Bureau of Statistics 2025 wage materials by industry and personnel category do not establish a nationwide Chinese occupation-specific wage distribution corresponding one-to-one with O*NET 51-2023.00.",
+                "answer": "Xinhui listed ten electrical assembly positions at CNY 2,200–7,000 per month. The work involved assembling switchgear equipment, with mentoring for beginners. Employer 53 in the Huainan notice listed ten assembly electrician positions at CNY 4,200–6,500 per month, requiring one to two years of cabinet assembly experience and the ability to read wiring diagrams. These past notices describe individual posts. A comparable mainland occupational median remains unavailable.",
                 "id": "electromechanical-equipment-assemblers.faq.6",
                 "question": "Electromechanical equipment assemblers: how should mainland Chinese wages be checked?",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.china-pay",
                 "source_refs": [
-                  "nbs"
+                  "a34-xinhui",
+                  "a34-huainan"
                 ]
               },
               {
-                "answer": "U.S. 2025 combined occupational data: combined electrical, electronics, and electromechanical assemblers scope, with median annual wages of USD 45,850 and median hourly wages of USD 22.04.",
+                "answer": "The May 2025 annual wage median for U.S. BLS 51-2028 combined group was $45,850. This group covers electrical, electronic and electromechanical assemblers, excluding coil winders, tapers and finishers. It does not report 51-2023.00 separately.",
                 "id": "electromechanical-equipment-assemblers.faq.7",
                 "question": "Electromechanical equipment assemblers: how should U.S. wage data be interpreted?",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.us-pay",
                 "source_refs": [
-                  "wage"
+                  "a34-bls"
                 ]
               },
               {
@@ -8512,12 +8631,12 @@
                 ]
               },
               {
-                "answer": "U.S. combined occupational data project employment rising from 261,400 in 2024 to 273,300 in 2034, growth of 5%, with 29,600 annual openings.",
+                "answer": "U.S. BLS 51-2028 combined group employment is projected to increase from about 246,300 in 2025 to 258,700 in 2035 (+5.0%), with about 25,900 annual openings including replacements.",
                 "id": "electromechanical-equipment-assemblers.faq.11",
                 "question": "Electromechanical equipment assemblers: how should employment outlook and adjacent transitions be understood?",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.outlook-transition",
                 "source_refs": [
-                  "trend"
+                  "a34-bls"
                 ]
               },
               {
@@ -8528,6 +8647,12 @@
                 "source_refs": [
                   "editorial"
                 ]
+              },
+              {
+                "answer": "Send A’s complete records to the release owner for paper review. B has a revision conflict for quality to check against the current parts list. C goes to quality for rework review. D goes to the test owner to verify the missing record. Hold release for B, C and D. Check four items: A’s review status, B’s revision conflict, C’s out-of-range measurement, and D’s missing field and owner. Count each complete item.",
+                "id": "electromechanical-equipment-assemblers.faq.13",
+                "question": "Electromechanical assembly handoff reference (open after day six)",
+                "question_key": "career.faq.electromechanical-equipment-assemblers.13"
               }
             ]
           },
@@ -8818,20 +8943,20 @@
                 "url": "https://www.onetonline.org/link/details/51-2023.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports combined occupational projections from 2024 to 2034.",
-                  "Applies only to listed occupations or combined scopes, markets, and periods."
+                  "U.S. BLS 51-2028 combined group employment is projected to increase from about 246,300 in 2025 to 258,700 in 2035 (+5.0%), with about 25,900 annual openings including replacements.",
+                  "Combined occupational data."
                 ],
                 "evidence_type": "official source",
                 "id": "trend",
-                "limitation": "Applies only to listed occupations or combined scopes, markets, and periods.",
+                "limitation": "Does not report electromechanical equipment assemblers separately.",
                 "market": "United States",
-                "name": "National Employment Trends: 51-2023.00",
-                "period": "2024-2034",
+                "name": "BLS Table 1.2 combined employment projections",
+                "period": "2025–2035",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "combined_official",
-                "url": "https://www.onetonline.org/link/localtrends/51-2023.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-06",
@@ -8895,6 +9020,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Check drawings and parts lists, assemble electromechanical units, record identifiers and measurements, and route revision or measurement discrepancies to quality review."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a34-onet",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "Occupational task profile",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/51-2023.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. BLS 51-2028 combined group employment is projected to increase from about 246,300 in 2025 to 258,700 in 2035 (+5.0%), with about 25,900 annual openings including replacements. The May 2025 annual wage median for U.S. BLS 51-2028 combined group was $45,850. This group covers electrical, electronic and electromechanical assemblers, excluding coil winders, tapers and finishers. It does not report 51-2023.00 separately."
+                ],
+                "evidence_type": "Official employment and wage statistics",
+                "id": "a34-bls",
+                "limitation": "Combined U.S. group. Electromechanical equipment assemblers are not reported separately.",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Xinhui listed ten electrical assembly positions at CNY 2,200–7,000 per month. The work involved assembling switchgear equipment, with mentoring for beginners."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a34-xinhui",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Electrical assembler",
+                "period": "2023-10-09",
+                "publisher": "Xinhui District government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.xinhui.gov.cn/zwgk/zdlyxxgk/jycyxxgk/zpxx/content/post_2995402.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Employer 53 in the Huainan notice listed ten assembly electrician positions at CNY 4,200–6,500 per month, requiring one to two years of cabinet assembly experience and the ability to read wiring diagrams."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a34-huainan",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Assembly electrician",
+                "period": "2026 年第二季度",
+                "publisher": "Huainan Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.huainan.gov.cn/gzqk/tzgg/551864645.html"
               }
             ]
           },
@@ -10132,8 +10317,8 @@
               "月薪参考": "No reliable figure currently available"
             },
             {
-              "城市/区间": "Nationwide specific occupation",
-              "月薪参考": "No reliable figure currently available"
+              "城市/区间": "Mainland China job postings",
+              "月薪参考": "Xinhui listed ten electrical assembly positions at CNY 2,200–7,000 per month. The work involved assembling switchgear equipment, with mentoring for beginners. Employer 53 in the Huainan notice listed ten assembly electrician positions at CNY 4,200–6,500 per month, requiring one to two years of cabinet assembly experience and the ability to read wiring diagrams."
             }
           ],
           "china_soc_row": {
@@ -10142,6 +10327,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a34-xinhui",
+            "posting-a34-huainan"
+          ],
           "sources_note": {
             "$join": [
               {
@@ -10656,6 +10845,7 @@
             "limitation": "Cannot guarantee individual employment.",
             "metric": "Overall projection",
             "occupation_scope": "51-2028 combined occupation, rather than exact data for 51-2023",
+            "source_id": "a34-bls",
             "value": {
               "$item": "electromechanical-equipment-assemblers.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -10670,6 +10860,7 @@
             "limitation": "Cannot guarantee individual employment.",
             "metric": "Worker count",
             "occupation_scope": "51-2028 combined occupation, rather than exact data for 51-2023",
+            "source_id": "a34-bls",
             "value": "246,300 workers"
           },
           {
@@ -10679,6 +10870,7 @@
             "limitation": "Cannot guarantee individual employment.",
             "metric": "Average annual openings",
             "occupation_scope": "51-2028 combined occupation, rather than exact data for 51-2023",
+            "source_id": "a34-bls",
             "value": "25,900 openings/year (including replacements)"
           }
         ],
@@ -10771,15 +10963,15 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electronic-engineers-except-computer",
-            "target_slug": "electronic-engineers-except-computer",
+            "target_href": "/en/career/jobs/electronics-engineers-except-computer",
+            "target_slug": "electronics-engineers-except-computer",
             "target_title": "Electronics engineering, except computer",
             "transition_distance": "Evidence of target tasks and authority needed"
           },
           {
             "capability_gaps": "Willing to develop instrument, circuit testing, and engineering assistance skills. Check engineering technicians’ testing scopes separately.",
             "shared_capabilities": "Drawing reading, part checks, measurement records, and anomaly handovers can serve as starting points.",
-            "target_href": "/zh/career/jobs/electrical-and-electronics-engineering-technicians",
+            "target_href": "/en/career/jobs/electrical-and-electronics-engineering-technicians",
             "target_slug": "electrical-and-electronics-engineering-technicians",
             "target_title": "Electrical and electronics engineering technical support",
             "transition_distance": "Evidence of target tasks and authority needed"
@@ -10787,7 +10979,7 @@
           {
             "capability_gaps": "Willing to develop robot programming, sensing, and system diagnosis skills. Operating automated assembly machines does not equal qualifications for robot commissioning.",
             "shared_capabilities": "Drawing reading, part checks, measurement records, and anomaly handovers can serve as starting points.",
-            "target_href": "/zh/career/jobs/robotics-technicians",
+            "target_href": "/en/career/jobs/robotics-technicians",
             "target_slug": "robotics-technicians",
             "target_title": "Robotics technical support",
             "transition_distance": "Evidence of target tasks and authority needed"
@@ -10795,7 +10987,7 @@
           {
             "capability_gaps": "Willing to develop reference standard, measurement traceability, and calibration record skills. Knowing how to use measuring instruments does not equal authority to issue calibration approvals.",
             "shared_capabilities": "Drawing reading, part checks, measurement records, and anomaly handovers can serve as starting points.",
-            "target_href": "/zh/career/jobs/calibration-technologists-and-technicians",
+            "target_href": "/en/career/jobs/calibration-technologists-and-technicians",
             "target_slug": "calibration-technologists-and-technicians",
             "target_title": "Calibration technical support",
             "transition_distance": "Evidence of target tasks and authority needed"
@@ -10803,7 +10995,7 @@
           {
             "capability_gaps": "Willing to develop disassembly and inspection, fault localization, repair, and retesting skills. Production assembly and user equipment repair carry different responsibilities.",
             "shared_capabilities": "Drawing reading, part checks, measurement records, and anomaly handovers can serve as starting points.",
-            "target_href": "/zh/career/jobs/electric-motor-power-tool-and-related-repairers",
+            "target_href": "/en/career/jobs/electric-motor-power-tool-and-related-repairers",
             "target_slug": "electric-motor-power-tool-and-related-repairers",
             "target_title": "Electric motor and tool repair",
             "transition_distance": "Evidence of target tasks and authority needed"
@@ -10811,7 +11003,7 @@
           {
             "capability_gaps": "Willing to keep practicing tolerances, defect triage, and handovers. Editorial development example; employers must specify review and mentorship authority.",
             "shared_capabilities": "Drawing reading, part checks, measurement records, and anomaly handovers can serve as starting points.",
-            "target_href": "/zh/career/jobs/electromechanical-equipment-assemblers",
+            "target_href": "/en/career/jobs/electromechanical-equipment-assemblers",
             "target_slug": "electromechanical-equipment-assemblers",
             "target_title": "Quality and mentorship within the same occupation",
             "transition_distance": "Evidence of target tasks and authority needed"
@@ -10845,7 +11037,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the vocational interest test",
             "evidence_level": "Work sample",
             "id": "riasec",
@@ -10864,7 +11056,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the vocational interest test",
             "evidence_level": "Work sample",
             "id": "big-five",
@@ -10883,7 +11075,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the vocational interest test",
             "evidence_level": "Work sample",
             "id": "mbti",
@@ -10897,7 +11089,7 @@
           },
           {
             "answer": "Verify using actual samples.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the vocational interest test",
             "evidence_level": "Work sample",
             "id": "enneagram",
@@ -10911,7 +11103,7 @@
           },
           {
             "answer": "Verify using actual samples.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the vocational interest test",
             "evidence_level": "Work sample",
             "id": "iq",
@@ -10925,7 +11117,7 @@
           },
           {
             "answer": "Verify using actual samples.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the vocational interest test",
             "evidence_level": "Work sample",
             "id": "eq",
@@ -11212,7 +11404,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Test whether my vocational interests fit electromechanical equipment assemblers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11342,6 +11534,27 @@
         "id": "electromechanical-equipment-assemblers.path.credential-decision.current.v1",
         "location": "entry_decisions",
         "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "electromechanical-equipment-assemblers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "electromechanical-equipment-assemblers.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "electromechanical-equipment-assemblers.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": "/en/career/jobs/electromechanical-equipment-assemblers",
@@ -11401,15 +11614,14 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 261,400 workers in 2024; approximately 273,300 in 2034; growth of 5% from 2024–2034 (faster than average); approximately 29,600 annual openings (combined scope)",
+        "display_value": "U.S. BLS 51-2028 combined group employment is projected to increase from about 246,300 in 2025 to 258,700 in 2035 (+5.0%), with about 25,900 annual openings including replacements.",
         "fact_id": "employment",
         "market": "United States",
         "measure": "employment projection",
         "occupation_scope": "Combined occupational data: U.S. electrical, electronics, and electromechanical assemblers",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "trend",
-          "wage"
+          "a34-bls"
         ]
       },
       {
@@ -11435,6 +11647,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Xinhui listed ten electrical assembly positions at CNY 2,200–7,000 per month. The work involved assembling switchgear equipment, with mentoring for beginners.",
+        "fact_id": "posting-a34-xinhui",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Electrical assembler",
+        "period": "2023-10-09",
+        "source_refs": [
+          "a34-xinhui"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Employer 53 in the Huainan notice listed ten assembly electrician positions at CNY 4,200–6,500 per month, requiring one to two years of cabinet assembly experience and the ability to read wiring diagrams.",
+        "fact_id": "posting-a34-huainan",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Assembly electrician",
+        "period": "2026 年第二季度",
+        "source_refs": [
+          "a34-huainan"
+        ]
       }
     ]
   },
@@ -11455,13 +11691,13 @@
         "availability": "available",
         "fact_ref": "wage",
         "key": "us_pay",
-        "label": "U.S. wage reference"
+        "label": "U.S. combined group · U.S. wage reference"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. combined group · U.S. employment growth"
       },
       {
         "availability": "missing",
@@ -11487,17 +11723,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Electromechanical equipment assemblers position and fasten parts, wire, measure, test, and document according to approved drawings and specifications. The core goes beyond putting components together: maintain consistent versions, tolerances, wiring, and test conditions, and stop whenever conflicts arise or safety status is unclear."
+      "text": "See how electromechanical assemblers check drawings, measurements and test records, compare job notices and write a paper assembly handoff."
     },
     "title": {
       "availability": "available",
       "text": "Electromechanical equipment assemblers"
     }
   },
-  "source_content_sha256": "64424741631d7c4df9cfff24c896c147b87b28b9fdad3fcf63cdc2e5ecf0ed2f",
+  "source_content_sha256": "879f7ec02a88c7cd236a1e707927d78daa7959cc6924860e3aa030eba8862d34",
   "subject": {
     "canonical_slug": "electromechanical-equipment-assemblers",
     "name": "Electromechanical equipment assemblers",
-    "summary": "Electromechanical equipment assemblers position and fasten parts, wire, measure, test, and document according to approved drawings and specifications. The core goes beyond putting components together: maintain consistent versions, tolerances, wiring, and test conditions, and stop whenever conflicts arise or safety status is unclear."
+    "summary": "Check drawings and parts lists, assemble electromechanical units, record identifiers and measurements, and route revision or measurement discrepancies to quality review."
   }
 }

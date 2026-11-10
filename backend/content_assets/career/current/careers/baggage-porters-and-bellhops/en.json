@@ -36,13 +36,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -63,7 +63,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -1542,7 +1542,7 @@
         "status": "pending_mapping"
       },
       "item:baggage-porters-and-bellhops.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:baggage-porters-and-bellhops.sources.source-card.1": {
         "status": "mapped"
@@ -22806,12 +22806,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "One-sentence judgment: A baggage porter and bellhop is not a 'help out at the door' role but a frontline service position that carries baggage and belongings for travelers at transportation terminals or for guests at hotels and similar establishments: receiving and tagging baggage and claim checks, carrying suitcases and luggage and parcels by hand or with luggage carts between guest rooms and the loading area and vehicles and the terminal, greeting and escorting guests to their rooms, providing directions and transportation and facility information, delivering messages and room service orders and running errands, and in some positions also assisting with venue order and security; people who only want to stand around waiting for work, are unwilling to verify item counts and ownership and damage condition piece by piece, and are unwilling to work outdoors under high physical intensity are not suited."
+              "Find BT-69 in section 09 and submit both versions independently."
             ]
           },
           "id": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
+            "bt69-editor",
             "onet"
           ],
           "type": "prose"
@@ -22821,11 +22821,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: you are willing to stay patient in crowded, noisy, and changing-weather environments, can verify item counts and tags and claim checks piece by piece following the process, truthfully log handovers and damage and left-behind items, are willing to use luggage carts and correct lifting posture to protect yourself, and can handle pushing and dissatisfied guests with courtesy and restraint."
+              "Try a paper claim ticket if you like checking numbers and bag counts and can pause and hand off a mismatch."
             ]
           },
           "id": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.2",
           "source_refs": [
+            "bt69-editor",
             "onet"
           ],
           "type": "prose"
@@ -22835,13 +22836,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions for pausing investment first: you have not yet completed one full closed loop of 'receive — tag — carry — hand over — log' under any supervised conditions, or you can only express interest by 'liking dealing with people'; also do not treat having done volunteer reception or a moving part-time job as proof that you can independently safeguard valuables or handle guest disputes and fee settlement. The safekeeping and handover of baggage and belongings, the handling of valuables and cash, venue safety and security duties, and the handling of guest personal information must follow employer rules and applicable provisions with traceable records retained; this page does not provide any handover, fee, or security instructions."
+              "Check who may verify claim tickets, access records and release exceptions."
             ]
           },
           "id": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
+            "bt69-editor",
             "onet"
           ],
           "type": "prose"
@@ -22851,12 +22851,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education and preparation must be checked separately: O*NET lists 39-6011.00 as Job Zone 1–2 (SVP below 6.0, that is, preparation from little to some); of the published education composition, 42% require less than a high school diploma, 41% require a high school diploma or equivalent, and 9% require some college but no degree; entry-level training for occupations in this zone usually ranges from a few days to a year, and related experience may require little or none. Education, vocational training, employer pre-job training, and job duties and authorization are different statuses and must be verified item by item by employer, position, and jurisdiction."
+              "BLS Table 1.2 lists a high school diploma or equivalent, typically no related work experience, and short-term on-the-job training for 39-6011. With Mainland employers, ask about duties, shifts, language, training and authority to release bags."
             ]
           },
           "id": "baggage-porters-and-bellhops.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -22866,12 +22866,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "One sentence: This is a frontline position centered on piece-by-piece verification and carrying and handover, and on serving guests and travelers in outdoor and high-contact environments, with the core being baggage receipt and tagging, carrying and safekeeping and handover, and guest and venue service, rather than an imagination about the service industry."
+              "Try a paper claim ticket if you like checking numbers and bag counts and can pause and hand off a mismatch."
             ]
           },
           "id": "baggage-porters-and-bellhops.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
+            "bt69-editor",
             "onet"
           ],
           "type": "prose"
@@ -22894,7 +22894,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -22928,7 +22927,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -22938,11 +22936,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Work environment | 93% work indoors in an environmentally controlled setting every day, 91% work outdoors exposed to all weather every day, 85% work indoors in an enclosed vehicle or operate enclosed equipment every day, 64% are in continual contact with others (another 20% are in contact with others most of the time), 59% continually or almost continually stand, 60% have face-to-face discussions every day, 42% continually or almost continually walk or run, 34% work indoors in a non-environmentally controlled setting every day, 35% are exposed to distracting or uncomfortable noise every day, 29% are exposed to contaminants every day, 23% are exposed to extremely hot or cold temperatures every day, 28% are in very bright or inadequate lighting every day, 19% continually or almost continually use hands to handle and control or feel objects and tools, 16% continually or almost continually need to keep or regain balance, 15% report highly automated work and 16% report moderately automated work. Main equipment and tools | luggage carts and hand trucks, baggage tags and claim checks, weighing equipment, fee and registration terminals, communication and paging equipment, personal protection (safety shoes and gloves and so on, as the work requires). Task pace | 71% of typical workweeks are 40 hours, 81% have a regular schedule and 16% an irregular one; 23% face time pressure every day, 38% have a lot of decision freedom (another 59% have some freedom), 61% must make decisions every day. Collaborators | collaborate with front desk and housekeeping and food and beverage positions and coordinate with drivers and the carrying crew; 59% consider working with a work group or team extremely important (another 21% consider it very important), 21% have very high responsibility for the health and safety of others (another 35% high responsibility), 62% consider decisions to be important results for colleagues or the company. Competition and pressure | 13% consider the consequences of error extremely serious (another 52% serious), 27% deal with unpleasant or discourteous people every day, 17% are in conflict situations every day, 11% consider competition extremely fierce (another 33% slightly competitive), 16% are exposed to violent or physically aggressive people at least once a month but not every week. Compliance and safety | carrying and handover and fees must conform to employer procedures and applicable consumer protection and venue safety requirements; on the mainland China side the Implementing Regulations of the Law on the Protection of Consumer Rights and Interests require operators to safeguard consumers' personal and property safety, inform truthfully and comprehensively, indicate prices clearly, and protect personal information. Records and review | the item count and owner and tags and claim checks and handovers and damage and left-behind items need to be traceable; 16% consider precision or accuracy extremely important (another 36% consider it very important). Skills and training | O*NET lists this occupation as Job Zone 1–2 (SVP below 6.0); basic skills are mainly active listening 66 and speaking 66 and critical thinking 50 and monitoring 47 and reading comprehension 47; transferable skills are mainly service orientation 69, coordination 50, complex problem solving 47, social perceptiveness 47, and time management 47; knowledge is mainly customer and personal service 90, English language 67, public safety and security 60, and transportation 60; work styles include social orientation, cooperation, and dependability; work styles using Impact for 17 items: social orientation 76, dependability 75, cooperation 74, integrity 57, optimism 56, empathy 51, self control 50, attention to detail 42, stress tolerance 41; not a personality score or task frequency. Entry and authorization | education does not equal work or fee or security authorization; O*NET shows that this occupation has no registered national certification, and the specific duty boundaries must follow employer rules and applicable provisions. Industry and employers | the O*NET industry distribution for 2025 for this occupation in the U.S.: accommodation and food services 56%, transportation and warehousing 17%, other services (except public administration) 13%, other 14% (including real estate and rental and leasing); not a Chinese share or an industry wage; common employers are hotels and lodging establishments, transportation terminals such as airports and stations, and conference and event venues. Survey shares are group responses and are not necessarily encountered by an individual; the 75% who never wear common protection does not exempt actual protection. The new-hire education requirement survey: 42% require less than high school, 41% high school or equivalent, 9% some college but no degree, not the on-the-job education composition. Zone1–2/SVP<6 is a general job preparation grouping, describing a few days to a year of on-the-job training and varying degrees of experience, not a fixed training requirement for every position or a guarantee that no experience is needed."
+              "Work environment | The O*NET 39-6011.00 industry subtable lists accommodation and food services 56%, transportation and warehousing 17%, other services except public administration 13%, and other industries 14%. It does not state a statistical year."
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.work-context-block.1",
           "source_refs": [
+            "r2-pay-2",
             "bls",
             "health"
           ],
@@ -22958,7 +22957,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.2",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -22988,7 +22986,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23019,7 +23016,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23029,12 +23025,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "U.S. 39-6011 this occupation: 2025 employment 29,200, projected 28,400 in 2035, growth rounded to -3% over 2025—2035 (decline), 3,800 openings per year on average. Openings include replacement demand and are not a ten-year net increase, individual hiring probability, or a causal measurement of generative AI."
+              "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080."
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -23048,7 +23044,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.5",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23058,7 +23053,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025 U.S. industry distribution for this occupation: accommodation and food services 56%, transportation and warehousing 17%, other services (except public administration) 13%, other 14% (including real estate and rental and leasing); not a Chinese share or an industry wage. The detailed data list 4 software categories and 4 Hot items: among 2025 U.S. occupation-linked unique job postings Office1%, with Excel, Outlook, and Word each less than 1%. The denominator is occupation-linked unique job postings for this occupation, not a position usage rate, an AI adoption rate, or a Chinese requirement; the number of software categories does not equal the number of software products."
+              "The O*NET 39-6011.00 industry subtable lists accommodation and food services 56%, transportation and warehousing 17%, other services except public administration 13%, and other industries 14%. It does not state a statistical year."
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.onet-structured-fields-block.5",
@@ -23078,7 +23073,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23093,8 +23087,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23109,7 +23101,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23124,7 +23115,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23139,7 +23129,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23154,7 +23143,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23169,8 +23157,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23185,7 +23171,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23200,7 +23185,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23215,7 +23199,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23230,7 +23213,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23245,7 +23227,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23260,7 +23241,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23275,7 +23255,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23285,12 +23264,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET lists 39-6011.00 as Job Zone 1–2 (SVP below 6.0); entry-level training in this zone usually ranges from a few days to a year, and related experience may require little or none; of the published education composition, 42% require less than a high school diploma, 41% require a high school diploma or equivalent, and 9% require some college but no degree. The O*NET training page shows that this occupation has no registered training program nationwide, and the certification page shows no registered national certification. On the mainland China side it is mainly employer pre-job training and on-the-job mentoring, with specific requirements set by the employer."
+              "BLS Table 1.2 lists a high school diploma or equivalent, typically no related work experience, and short-term on-the-job training for 39-6011. With Mainland employers, ask about duties, shifts, language, training and authority to release bags."
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -23305,7 +23284,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23320,7 +23298,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23335,7 +23312,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23359,12 +23335,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "On the U.S. side it is O*NET 39-6011.00 (Baggage Porters and Bellhops); its wage and employment and industry data are under this occupational definition, and the page does not state that they are taken from another occupation. On the mainland China side this page obtained no public occupational entry precisely corresponding to this occupation, and the Chinese page language does not constitute an equivalent Chinese occupation or a wage mapping; when comparing, first identify whether the position belongs to hotels and lodging, a transportation terminal and transport, or another service venue."
+              "A national standards catalog published by Jiangsu’s human resources authority lists front desk attendants (4-03-01-01) separately from railway baggage staff (4-02-01-04). The entries help identify related work. They do not combine hotel and terminal staff into one statistical group or set one hiring requirement."
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.24",
           "source_refs": [
-            "onet",
+            "front-desk-rail-catalog",
             "onet"
           ],
           "type": "prose"
@@ -23388,12 +23364,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "On the U.S. side the education composition is mainly less than a high school diploma and a high school diploma or equivalent (42%/41%, with another 9% some college but no degree), entry-level training usually ranges from a few days to a year, and related experience may require little or none; O*NET has no registered national training program or national certification for this occupation. In mainland China it is mainly employer pre-job training and on-the-job mentoring, with specific education and experience requirements set by the employer."
+              "BLS Table 1.2 lists a high school diploma or equivalent, typically no related work experience, and short-term on-the-job training for 39-6011. With Mainland employers, ask about duties, shifts, language, training and authority to release bags."
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -23417,12 +23393,11 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Carrying and handover must follow employer processes and applicable provisions; when valuables and cash and fees, venue safety and security handling, or the handling of guest personal information are involved, they must follow employer rules and authorization. On the U.S. side O*NET has no registered national certification for this occupation, and there is no uniform federal admission certificate; on the mainland China side this page obtained no precisely equivalent public occupational entry and admission basis, so before onboarding, check pre-job training and the authorization process, which cannot be inferred directly from education or experience."
+              "Ask the employer about pre-job training and baggage handling authority. An O*NET directory search does not determine legal eligibility. Follow site procedures and actual authority for valuables, fees and guest information."
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23451,7 +23426,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23466,7 +23440,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23481,7 +23454,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23496,7 +23468,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23511,7 +23482,6 @@
           },
           "id": "baggage-porters-and-bellhops.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23563,10 +23533,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -23581,8 +23547,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23597,10 +23561,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23615,7 +23575,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23630,7 +23589,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23645,7 +23603,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23660,7 +23617,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23689,7 +23645,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23704,7 +23659,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23719,7 +23673,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23748,7 +23701,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.19",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23763,7 +23715,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23778,7 +23729,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23807,7 +23757,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23822,7 +23771,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23837,7 +23785,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23866,7 +23813,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23881,7 +23827,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23896,7 +23841,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23925,7 +23869,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23940,7 +23883,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23955,7 +23897,6 @@
           },
           "id": "baggage-porters-and-bellhops.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24032,10 +23973,10 @@
                 "url": "https://www.onetonline.org/link/industry/39-6011.00"
               },
               {
-                "entity": "O*NET this occupation 2025—2035 employment trend",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 39-6011.00 national wage percentiles",
@@ -24056,22 +23997,22 @@
                 "url": "https://www.onetonline.org/link/details/39-6011.00"
               },
               {
-                "entity": "O*NET 39-6011.00 certification findings (industry certification definition)",
+                "entity": "O*NET job posting tools",
                 "id": "link-10",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/39-6011.00"
+                "url": "https://www.onetonline.org/link/hot_tech/39-6011.00"
               },
               {
-                "entity": "O*NET 39-6011.00 industry distribution (industry and employer type definition)",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "International Labour Organization 'Generative AI and Jobs: A Refined Global Index of Occupational Exposure' (ILO Working Paper 140)",
+                "entity": "O*NET industry subtable",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.onetonline.org/link/industry/39-6011.00"
               },
               {
                 "entity": "O*NET 39-6011.00 occupational summary",
@@ -24098,10 +24039,10 @@
                 "url": "https://www.onetonline.org/link/industry/39-6011.00"
               },
               {
-                "entity": "O*NET this occupation 2025—2035 employment trend",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 39-6011.00 detailed data (work context)",
@@ -24119,13 +24060,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -24140,7 +24074,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24155,7 +24088,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24170,7 +24102,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24185,7 +24116,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24200,7 +24130,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24215,7 +24144,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24230,8 +24158,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.16",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24246,8 +24172,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24257,12 +24181,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Generative AI adoption rate and efficiency evidence have still not been obtained; registration retrieval and drafts are editorial trial candidates. The BLS occupational utilization factor table for air transportation support, 488100, notes that changing traveler preferences and self-service bag drop machines reduce demand for skycaps, and for casino hotels, 721120, notes that cutting non-essential services lowers this occupation's share; these are within-industry share projection reasons, not a generative AI adoption rate, a measured headcount reduction, or a replacement conclusion for all hotels. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Generative AI adoption rate and efficiency evidence have still not been obtained; registration retrieval and drafts are editorial trial candidates. The BLS occupational utilization factor table for air transportation support, 488100, notes that changing traveler preferences and self-service bag drop machines reduce demand for skycaps, and for casino hotels, 721120, notes that cutting non-essential services lowers this occupation's share; these are within-industry share projection reasons, not a generative AI adoption rate, a measured headcount reduction, or a replacement conclusion for all hotels. AI task-impact estimate 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -24305,7 +24229,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24320,7 +24243,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24401,11 +24323,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025 U.S. industry distribution for this occupation: accommodation and food services 56%, transportation and warehousing 17%, other services (except public administration) 13%, other 14% (including real estate and rental and leasing); not a Chinese share or an industry wage."
+              "The O*NET 39-6011.00 industry subtable lists accommodation and food services 56%, transportation and warehousing 17%, other services except public administration 13%, and other industries 14%. It does not state a statistical year."
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.28",
           "source_refs": [
+            "r2-pay-2",
             "onet"
           ],
           "type": "prose"
@@ -24415,7 +24338,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-6011.00 occupational summary (employment and projection fields)"
+              "BLS Table 1.2: Employment and projections"
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.29",
@@ -24434,7 +24357,7 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -24476,7 +24399,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24491,7 +24413,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24506,7 +24427,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24521,7 +24441,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24536,7 +24455,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24551,7 +24469,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24566,7 +24483,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24773,11 +24689,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-6011.00 occupational summary (employment and projection fields)"
+              "BLS Table 1.2: Employment and projections for 39-6011"
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.54",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -24792,7 +24709,7 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -24801,12 +24718,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. 39-6011 this occupation: 2025 employment 29,200, projected 28,400 in 2035, growth rounded to -3% over 2025—2035 (decline), 3,800 openings per year on average. Openings include replacement demand and are not a ten-year net increase, individual hiring probability, or a causal measurement of generative AI."
+              "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080."
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -24857,11 +24774,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025 U.S. industry distribution for this occupation: accommodation and food services 56%, transportation and warehousing 17%, other services (except public administration) 13%, other 14% (including real estate and rental and leasing); not a Chinese share or an industry wage."
+              "The O*NET 39-6011.00 industry subtable lists accommodation and food services 56%, transportation and warehousing 17%, other services except public administration 13%, and other industries 14%. It does not state a statistical year."
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.60",
           "source_refs": [
+            "r2-pay-2",
             "onet"
           ],
           "type": "prose"
@@ -24876,7 +24794,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24891,7 +24808,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24901,12 +24817,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. 39-6011 this occupation: 2025 employment 29,200, projected 28,400 in 2035, growth rounded to -3% over 2025—2035 (decline), 3,800 openings per year on average. Openings include replacement demand and are not a ten-year net increase, individual hiring probability, or a causal measurement of generative AI. The BLS occupational utilization factor table for air transportation support, 488100, notes that changing traveler preferences and self-service bag drop machines reduce demand for skycaps, and for casino hotels, 721120, notes that cutting non-essential services lowers this occupation's share; these are within-industry share projection reasons, not a generative AI adoption rate, a measured headcount reduction, or a replacement conclusion for all hotels."
+              "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080."
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -24921,7 +24837,7 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -24936,7 +24852,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24966,7 +24881,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24981,7 +24895,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25005,12 +24918,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. 39-6011 this occupation: 2025 employment 29,200, projected 28,400 in 2035, growth rounded to -3% over 2025—2035 (decline), 3,800 openings per year on average. Openings include replacement demand and are not a ten-year net increase, individual hiring probability, or a causal measurement of generative AI."
+              "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080."
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -25024,7 +24937,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25039,7 +24951,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25063,12 +24974,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The material reviewed does not give the year the position disappears; U.S. 39-6011 this occupation: 2025 employment 29,200, projected 28,400 in 2035, growth rounded to -3% over 2025—2035 (decline), 3,800 openings per year on average. Openings include replacement demand and are not a ten-year net increase, individual hiring probability, or a causal measurement of generative AI."
+              "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080."
             ]
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -25082,7 +24993,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25097,7 +25007,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25112,7 +25021,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25127,7 +25035,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.78",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25142,7 +25049,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.79",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25157,7 +25063,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25172,7 +25077,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25187,7 +25091,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.82",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25216,7 +25119,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.84",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25231,7 +25133,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25288,7 +25189,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25303,7 +25203,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.90",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25318,7 +25217,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25333,7 +25231,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.92",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25348,7 +25245,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.93",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25405,7 +25301,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25462,7 +25357,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25519,7 +25413,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.105",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25576,7 +25469,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25633,7 +25525,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25746,7 +25637,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25761,7 +25651,6 @@
           },
           "id": "baggage-porters-and-bellhops.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25976,11 +25865,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The precise occupational wage gap is retained; the related classification and industry averages with matching conditions can be referenced."
+              "Mainland hotel examples: Shanghai internship and a combined Kunming role"
             ]
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
             "nbs"
           ],
           "type": "prose"
@@ -25990,11 +25881,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The gap is marked on this page as 'insufficient evidence'; this is not zero income, but that the evidence cannot support that precision. If comparison is needed, use the written employment conditions (city, employer type, job duties, shifts and tips, pre-tax or after-tax)."
+              "A posting dated April 21, 2026 at Anhui Finance and Trade Vocational College lists six baggage porter internships for the Holiday Inn and InterContinental hotels at Shanghai Pudong Airport. The listing quotes CNY 2,800 monthly in months 1–6, CNY 3,000 from month 7, and a separate probation rate of CNY 4,000–4,500 monthly."
             ]
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
             "onet"
           ],
           "type": "prose"
@@ -26009,7 +25902,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26038,7 +25930,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26053,7 +25944,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26082,7 +25972,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26097,7 +25986,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26112,7 +26000,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26127,7 +26014,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26142,7 +26028,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26173,7 +26058,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26188,7 +26072,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26219,7 +26102,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26248,7 +26130,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26277,7 +26158,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26320,7 +26200,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26330,12 +26209,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scenario comparison requires consistent employer type and job duties and shifts; this page does not provide a precise monthly wage range for this occupation."
+              "Mile City’s 2026 recruitment bulletin No. 7 lists five front desk receptionist (concierge baggage porter) openings at Grand Hyatt Kunming. It calls for a junior college diploma or higher and good English and quotes CNY 3,000–3,800 monthly plus commission. The hotel is in Kunming, and this combined role does not establish pay for baggage-only work."
             ]
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
             "onet"
           ],
           "type": "prose"
@@ -26350,7 +26230,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26379,7 +26258,6 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26403,11 +26281,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the national wage distribution for this occupation has not been obtained; the related trade classification has been obtained, but it is not whole one-to-one occupational mutual recognition."
+              "These are two dated examples. Do not combine internship, probation and hybrid front-desk pay into a national wage estimate."
             ]
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
             "cn-class-2022"
           ],
           "type": "prose"
@@ -26459,7 +26339,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no official or verifiable source supports a monthly wage range for baggage porters and bellhops in other cities."
+              "Comparable listings for other cities are not available in these sources."
             ]
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.54",
@@ -26506,7 +26386,7 @@
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -26537,13 +26417,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 39-6011.00 national wage percentiles｜https://www.onetonline.org/link/localwages/39-6011.00; O*NET 39-6011.00 occupational summary (employment and projection fields)｜https://www.onetonline.org/link/summary/39-6011.00; O*NET 39-6011.00 industry distribution｜https://www.onetonline.org/link/industry/39-6011.00"
+              "O*NET 39-6011.00 national wage percentiles｜https://www.onetonline.org/link/localwages/39-6011.00; BLS Table 1.2: Employment and projections｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET 39-6011.00 industry distribution｜https://www.onetonline.org/link/industry/39-6011.00"
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26700,7 +26578,7 @@
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -26709,13 +26587,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. 39-6011 this occupation: 2025 employment 29,200, projected 28,400 in 2035, growth rounded to -3% over 2025—2035 (decline), 3,800 openings per year on average. Openings include replacement demand and are not a ten-year net increase, individual hiring probability, or a causal measurement of generative AI."
+              "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080."
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26724,13 +26602,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "-3% (2025—2035, rounded projection)"
+              "Projected decline of 3.0% (2025–2035)"
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26739,13 +26617,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. 39-6011 this occupation: 2025 employment 29,200, projected 28,400 in 2035, growth rounded to -3% over 2025—2035 (decline), 3,800 openings per year on average. Openings include replacement demand and are not a ten-year net increase, individual hiring probability, or a causal measurement of generative AI."
+              "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080."
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26760,7 +26638,7 @@
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -26775,7 +26653,7 @@
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -26799,13 +26677,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Direct answer: 2025 median annual wage for this occupation 37,080 USD, hourly 17.83; U.S. 39-6011 this occupation: 2025 employment 29,200, projected 28,400 in 2035, growth rounded to -3% over 2025—2035 (decline), 3,800 openings per year on average. Openings include replacement demand and are not a ten-year net increase, individual hiring probability, or a causal measurement of generative AI."
+              "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080."
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26890,7 +26768,6 @@
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26900,13 +26777,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "-3% (2025—2035, rounded projection)"
+              "Projected decline of 3.0% (2025–2035)"
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "oews",
-            "onet-trends"
+            "ep-table",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26943,11 +26820,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 U.S. industry distribution accommodation and food services 56%; the share does not provide an industry wage."
+              "Accommodation and food services share comes from the O*NET industry subtable, which does not report wages."
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
+            "r2-pay-2",
             "onet"
           ],
           "type": "prose"
@@ -26985,7 +26863,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 U.S. industry distribution transportation and warehousing 17%; the share cannot be used to infer an industry wage."
+              "Transportation and warehousing accounts for 17% in the O*NET industry subtable. It gives no statistical year, and the share does not estimate industry wages."
             ]
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.39",
@@ -27089,7 +26967,6 @@
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27120,7 +26997,7 @@
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
             "oews",
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -27134,7 +27011,6 @@
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27163,7 +27039,6 @@
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27192,7 +27067,6 @@
           },
           "id": "baggage-porters-and-bellhops.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27232,19 +27106,19 @@
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Ushers",
@@ -27325,20 +27199,15 @@
                 "url": "https://www.onetonline.org/link/industry/39-6011.00"
               },
               {
-                "entity": "O*NET 39-6011.00 occupational summary (employment and projection fields)",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -27382,7 +27251,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27440,7 +27308,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27469,7 +27336,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.riasec-fit-block.9",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27526,7 +27392,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27641,7 +27506,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27728,7 +27592,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27771,7 +27634,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27786,7 +27648,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27801,7 +27662,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27816,7 +27676,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27831,7 +27690,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27846,7 +27704,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27861,7 +27718,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27876,7 +27732,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27891,7 +27746,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27906,7 +27760,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27921,7 +27774,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27936,7 +27788,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27951,7 +27802,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27966,8 +27816,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28010,7 +27858,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28025,7 +27872,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28040,7 +27886,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28055,7 +27900,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28154,7 +27998,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28197,7 +28040,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28212,7 +28054,6 @@
           },
           "id": "baggage-porters-and-bellhops.fit.personality-fit-block.57",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28375,10 +28216,10 @@
                 "url": "https://www.onetonline.org/link/details/39-6011.00"
               },
               {
-                "entity": "O*NET this occupation 2025—2035 employment trend",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 39-6011.00 national wage percentiles",
@@ -28396,10 +28237,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -28429,8 +28266,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28445,9 +28280,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28462,7 +28294,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28477,7 +28308,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28507,7 +28337,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28522,7 +28351,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28537,7 +28365,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28552,7 +28379,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28567,7 +28393,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28624,7 +28449,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28639,7 +28463,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28654,7 +28477,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28684,7 +28506,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28699,7 +28520,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28714,7 +28534,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28729,7 +28548,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28744,7 +28562,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28759,7 +28576,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28774,7 +28590,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28803,7 +28618,6 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28846,7 +28660,7 @@
           },
           "id": "baggage-porters-and-bellhops.risk.career-risk-cards.37",
           "source_refs": [
-            "onet-trends"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -28901,7 +28715,7 @@
             "column_labels": [
               "Job directions",
               "Starting tasks",
-              "Employer basis",
+              "Ask the employer",
               "Evidence that can be submitted with zero experience",
               "Boundaries that need to be distinguished"
             ],
@@ -28909,44 +28723,42 @@
               [
                 "Hotel baggage and guest service position",
                 "Under supervision, receive and tag baggage and claim checks, carry suitcases to guest rooms, and greet and escort guests and explain room facilities.",
-                "Editorial verification items: focus on item count and owner verification, carrying safety, courtesy and etiquette, and handover discipline; duties and authorization are determined by the employer's pre-job training and assessment. This round has no specific employer hiring sample.",
-                "Submit a work write-up containing a fictional hotel scenario, a baggage receipt and handover record, and damage and left-behind item notes, without using real guest information.",
+                "Ask the employer about shifts, language, training and authority to release bags.",
+                "BT-69 requires both evidence comparisons and a one-page handoff. Check permission for actual baggage work separately.",
                 "O*NET has supplemental tasks for charging and the security team, and the Chinese front desk entry also includes charging and safekeeping; it is not the case that all hotel positions prohibit these duties—check against the actual division of work and provisions."
               ],
               [
                 "Transportation terminal baggage service position",
                 "Receive and carry baggage and suitcases and parcels at airports and stations, and assist travelers and travelers with disabilities.",
-                "Editorial verification items: focus on carrying motions and luggage cart use, and traveler service and order cooperation ability. This round has no specific employer hiring sample.",
-                "Submit a fictional work record containing the traveler service process, the carrying route, and handover and assistance notes.",
+                "Ask the employer about shifts, language, training and authority to release bags.",
+                "BT-69 requires both evidence comparisons and a one-page handoff. Check permission for actual baggage work separately.",
                 "Steps involving shipping and safety and security screening must follow the venue and carrier procedures; this page does not provide work instructions."
               ],
               [
                 "Checking and fee service position",
                 "Accept checking and shipping, complete fee receipts and records and baggage insurance documents, and weigh and charge.",
-                "Editorial verification items: focus on charging and registration accuracy, receipt discipline, and cash and item responsibility awareness. This round has no specific employer hiring sample.",
-                "Submit a fictional record containing prices and charging and registration and handover and anomaly handling.",
+                "Ask the employer about shifts, language, training and authority to release bags.",
+                "BT-69 requires both evidence comparisons and a one-page handoff. Check permission for actual baggage work separately.",
                 "Charging and receipts must follow employer procedures; fees must not be reduced on one's own or collected on behalf of others."
               ],
               [
                 "Venue patrol and security assistance position",
                 "Keep the lobby and entrance area tidy, check guest room items, and assist with order and security per procedure.",
-                "Editorial verification items: focus on patrol and record discipline, anomaly reporting, and authorization boundary awareness. This round has no specific employer hiring sample.",
-                "Submit a fictional record containing the patrol route, inspection items, and anomaly reporting and authorization boundary.",
+                "Ask the employer about shifts, language, training and authority to release bags.",
+                "BT-69 requires both evidence comparisons and a one-page handoff. Check permission for actual baggage work separately.",
                 "Security handling must be carried out within the authorized scope; matters involving personal safety and law enforcement are handed to responsible personnel."
               ],
               [
                 "Lead and crew coordination position",
                 "Arrange shifts and division of work, mentor newcomers, coordinate front desk and housekeeping and transport links, and handle difficult problems and complaints.",
-                "Editorial verification items: focus on coordination and mentoring and anomaly handling and record review ability. This round has no specific employer hiring sample.",
-                "Submit a fictional plan containing scheduling and division of work, anomaly handling, and review and improvement suggestions.",
+                "Ask the employer about shifts, language, training and authority to release bags.",
+                "BT-69 requires both evidence comparisons and a one-page handoff. Check permission for actual baggage work separately.",
                 "Management and handling decisions must be made per employer procedures and authorization; this page does not provide management instructions."
               ]
             ]
           },
           "id": "baggage-porters-and-bellhops.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "title": "Comparison of job directions and starting tasks",
@@ -29012,42 +28824,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "A fictional material package: a venue and shift description, a baggage receipt and handover record sheet, a checking and fee registration sheet, and a damage and left-behind item log template.",
-                  "All materials are fictional and contain no real guest information, real baggage or belongings, surveillance, or internal materials.",
-                  "All materials and scenarios are fictional; real guest information, real baggage or belongings, surveillance, or internal materials must not be used."
+                  "BT-69 fictional claim ticket. H1: ticket B72 is for two bags, tagged B72-1 and B72-2.",
+                  "H2: both bags in storage carry B72-1. In this exercise each bag must have a unique matching tag. Matching the bag count is insufficient.",
+                  "H3 original: no exception record covers the second bag. Variant: only H3 changes. The shift supervisor supplies a signed correction identifying a misprinted tag and traceable B72-2 identity. Neither version records an actual handover."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "For a fictional venue, write out clearly the receipt and tagging and carrying route and handover and logging methods, the item count and owner and tags and claim checks and packaging condition, damage and left-behind items and open items, and the steps requiring review and requiring authorization.",
-                  "Complete within 60 to 90 minutes; referring to public general service and carrying safety material is allowed, but real guest information must not be used.",
-                  "In the record, write the item count and owner and tag, the carrying route and time, the receiving person, and damage and left-behind items separately, and mark the parts that need review."
+                  "Compare the count, tags and correction record.",
+                  "For each version, say whether it can go to handover review and list open checks.",
+                  "Submit a one-page handoff citing H1–H3 and naming the receiver."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First verify the venue and shift and duty scope, then receive and carry and hand over per procedure, and finally write out the conclusion and open items.",
-                  "Write the item count and owner and tag, the carrying route and time, the receiving person, and damage and left-behind items separately, and mark any uncertain point as requiring review.",
-                  "When finished, have an experienced person review the item count and attribution verification and the handover conclusion, and keep the reasons for revisions."
+                  "Submit both versions independently.",
+                  "Separate matching records from a completed handover.",
+                  "Open “BT-69 reference (open after submitting)” after submitting."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "The exercise does not constitute carrying, fee, or security instructions, and cannot replace employer procedures and duty authorization.",
-                  "Real guests must not be contacted and real fee and security and checking systems must not be operated in the exercise; work involving valuables and cash and security handling must be handled by responsible personnel according to procedure.",
-                  "The exercise does not replace employer procedures and duty authorization and does not constitute any carrying, fee, or security instruction."
+                  "Use fictional paper records only.",
+                  "Do not handle real luggage or guest information.",
+                  "Do not use equipment or enter restricted areas."
                 ]
               }
             ]
           },
           "id": "baggage-porters-and-bellhops.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "bt69-editor"
           ],
-          "title": "Low-risk exercise materials and tasks",
+          "title": "BT-69: Baggage claim handoff",
           "type": "cards"
         },
         {
@@ -29058,37 +28870,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Position requirement checklist: education, vocational training, employer pre-job training, related work experience, language and communication ability, first aid and fire and venue safety training, and job duties and fee and security authorization.",
-                  "Note the source and data date for each item; leave items that cannot be verified blank and mark them as insufficient evidence, without filling them in with speculation.",
-                  "List 'education', 'vocational training', 'pre-job training', 'related experience', 'job duties', and 'fee and security authorization' separately to avoid conflating them."
+                  "Compare the tags in both versions.",
+                  "Cite H1–H3.",
+                  "Record missing evidence."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Have an experienced person review your work write-up, focusing on whether the item count and owner verification, the carrying route and safety, the face-to-face handover, and the damage and left-behind item log are each written out clearly.",
-                  "Keep the review comments together with the reasons for revisions as evidence for judging whether you can accept review."
+                  "Submit a one-page handoff.",
+                  "Name the next reviewer."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "A one-page debrief: write out the venue and shift, your own judgment, the parts that were corrected, and the parts that remain uncertain.",
-                  "Give the debrief to peers and supervisors for review, and keep the review comments and the reasons for revisions."
+                  "Separate matching and handover.",
+                  "Record that only H3 changed."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool use notes: if registration or fee or dispatch tools are used, note the tool name and version, the inputs and the basis, and the reasons for manual revisions.",
-                  "Handling guest and resident information and itinerary records requires prior authorization, and the access scope, retention period, and destruction arrangements must be recorded."
+                  "Check the reference after submitting.",
+                  "Use fictional materials throughout."
                 ]
               }
             ]
           },
           "id": "baggage-porters-and-bellhops.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "bt69-editor"
           ],
           "title": "Preparation materials that can be submitted",
           "type": "cards"
@@ -29138,7 +28950,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.interview-probation.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "title": "Interview and probation-period assessment",
@@ -29152,57 +28963,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Occupational and boundary reading: read O*NET 39-6011.00 and the OSHA baggage handling ergonomics guidance, and write out clearly the differences between receipt and carrying, handover and logging, and duties and authorization.",
-                  "Output: a one-page terminology and process comparison table, noting the source of each item."
+                  "Read H1–H3.",
+                  "Evidence index"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Receipt and tagging exercise: for a fictional venue, write out clearly the item count and owner verification and the tag and claim check and logging points.",
-                  "Output: a receipt and tagging record."
+                  "List the count and expected tags.",
+                  "Claim requirements"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Carrying and safety exercise: for a fictional route, write out clearly the carrying method, luggage cart use, and safety points at ramps, doorways, and elevators.",
-                  "Output: a carrying and safety note."
+                  "Check both H2 records.",
+                  "Tag comparison"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Handover and logging exercise: for a fictional scenario, write out clearly the face-to-face handover, the item count check, and the damage and left-behind item logging method.",
-                  "Output: a handover and logging record."
+                  "Compare both versions of H3.",
+                  "Correction record"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Fee and shipping exercise: for fictional prices, write out clearly the fee receipt, baggage insurance documents, weighing and charging, and anomaly handling.",
-                  "Output: a fee and shipping note."
+                  "List open checks and the receiver.",
+                  "Handoff draft"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Review-style self-questioning: have an experienced person challenge your item count and attribution verification and handover conclusions, and record what was corrected.",
-                  "Output: review comments and a revision note."
+                  "Submit both tickets and a one-page handoff first.",
+                  "Two tickets and handoff"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Final debrief: decide whether to continue, pause, or change direction, and write out clearly the basis and the parts that remain uncertain.",
-                  "Output: a one-page decision statement with an evidence list."
+                  "Open “BT-69 reference (open after submitting)”.",
+                  "Check the difference"
                 ]
               }
             ]
           },
           "id": "baggage-porters-and-bellhops.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "bt69-editor"
           ],
           "title": "Seven-day experience output",
           "type": "timeline"
@@ -29212,18 +29023,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: you completed the seven-day exercise and found that you can sustain effort in item count and owner verification and carrying and handover and logging.",
-              "Continue: you can accept outdoor work and shifts and a relatively large physical load, and are willing to record and accept review per procedure.",
-              "Pause: you only want to finish as fast as possible and are unwilling to verify the item count and owner piece by piece.",
-              "Pause: you treat 'it looks fine' as a completed handover, or you skip procedure and authorization on valuables and cash and security handling.",
-              "Change direction: you would rather do information and arrangement services — compare the concierge direction.",
-              "Change direction: you would rather do registration and settlement — compare the hotel front desk clerk direction.",
-              "Insufficient information: if you do not yet have any supervised carrying or handover experience, gain these two first before judging."
+              "Continue if you can verify each tag.",
+              "Continue if you can record open items and the receiver.",
+              "Pause if you rely on the count alone.",
+              "Pause if you confuse matching records with handover.",
+              "Compare hotel front desk work.",
+              "Compare terminal passenger service.",
+              "Check actual work conditions separately."
             ]
           },
           "id": "baggage-porters-and-bellhops.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "bt69-editor"
           ],
           "title": "Judgment after seven days",
           "type": "list"
@@ -29325,14 +29136,16 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "This round the O*NET national training directory shows 'No training programs were found nationwide' and the certification directory shows 'No certifications were found'; these are only directory search results and do not prove that all training, employer requirements, or legal admission requirements do not exist. Education, training, certificates, and position authority are checked separately.",
-              "The new-hire education requirement survey: 42% require less than high school, 41% high school or equivalent, 9% some college but no degree, not the on-the-job education composition. Zone1–2/SVP<6 is a general job preparation grouping, describing a few days to a year of on-the-job training and varying degrees of experience, not a fixed training requirement for every position or a guarantee that no experience is needed. The OSHA baggage eTool addresses air ticketing, sorting, and ramp handling, identifying lifting, pushing and pulling, repetitive motion, and awkward posture risks; for ticket counters it recommends marking heavy items, asking others or using assistive devices, reducing lifting, and rotating tasks. It can serve as a bounded carrying reference for hotels, to be checked separately against the venue's equipment procedures, and the eTool does not add legal obligations.",
-              "2022 Occupational Classification Code: 4-03-01-01 front desk attendant includes the guest baggage handler trade, with duties covering carrying baggage, safekeeping belongings, inquiry, and fee settlement; 4-02-01-04 railway baggage and parcel transport attendant includes railway baggage handlers, 4-02-02-03 road passenger transport attendant includes checking and accepting and handing over and loading and unloading and returning baggage, 4-02-03-03 port passenger attendant includes port baggage handlers, and 4-02-04-02 air transport ground attendant includes baggage arrival, departure, and transfer. These are related-duty references, not one-to-one mutual recognition with U.S. 39-6011 as a whole or an admission license. China's Implementing Regulations of the Law on the Protection of Consumer Rights and Interests took effect on 2024-07-01: Article 7 requires operators to safeguard personal and property safety and venue facility safety, Articles 9/10 require truthful and comprehensive information and clearly indicated service prices, and Article 23 protects personal information and prohibits excessive collection. The obligated party is the operator, not a uniform admission certificate or specific handling authorization for all baggage handlers.",
-              "Practical suggestion: before onboarding, list 'education / vocational training / employer pre-job training / related experience / job duties and authorization / safety and fire training' in one table and note the source and data date for each; leave items that cannot be verified blank and mark them as insufficient evidence, without filling them in with speculation."
+              "BLS Table 1.2 lists a high school diploma or equivalent, typically no related work experience, and short-term on-the-job training for 39-6011. With Mainland employers, ask about duties, shifts, language, training and authority to release bags.",
+              "A national standards catalog published by Jiangsu’s human resources authority lists front desk attendants (4-03-01-01) separately from railway baggage staff (4-02-01-04). The entries help identify related work. They do not combine hotel and terminal staff into one statistical group or set one hiring requirement.",
+              "Check site training and handover permissions.",
+              "Check access rules for restricted areas."
             ]
           },
           "id": "baggage-porters-and-bellhops.path.credential-boundary.1",
           "source_refs": [
+            "ep-table",
+            "front-desk-rail-catalog",
             "bls",
             "census",
             "nist",
@@ -29349,15 +29162,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This round cites no specific employer posting, and the following preparation and pathway are editorial candidates; the O*NET reported job title does not equal an open position, a general Chinese hiring threshold, or a promotion probability.",
-              "Checklist: whether the position belongs to hotels and lodging, transportation terminals and transport, or conference and event venues; whether pre-job training or duty and fee and security authorization are required; the shift and rotation and tip arrangements; and the carrying and fire and venue safety requirements and valuables handling rules."
+              "A posting dated April 21, 2026 at Anhui Finance and Trade Vocational College lists six baggage porter internships for the Holiday Inn and InterContinental hotels at Shanghai Pudong Airport. The listing quotes CNY 2,800 monthly in months 1–6, CNY 3,000 from month 7, and a separate probation rate of CNY 4,000–4,500 monthly.",
+              "Mile City’s 2026 recruitment bulletin No. 7 lists five front desk receptionist (concierge baggage porter) openings at Grand Hyatt Kunming. It calls for a junior college diploma or higher and good English and quotes CNY 3,000–3,800 monthly plus commission. The hotel is in Kunming, and this combined role does not establish pay for baggage-only work."
             ]
           },
           "id": "baggage-porters-and-bellhops.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
             "onet"
           ],
           "title": "Job posting verification",
@@ -29396,9 +29208,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -29413,7 +29222,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29428,7 +29236,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29457,7 +29264,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29486,7 +29292,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29515,7 +29320,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29604,7 +29408,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29675,7 +29478,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29704,7 +29506,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29719,7 +29520,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29748,7 +29548,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29777,7 +29576,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29792,7 +29590,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29821,7 +29618,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29850,7 +29646,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29865,7 +29660,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29894,7 +29688,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29923,7 +29716,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29938,7 +29730,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29967,7 +29758,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29996,7 +29786,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30011,7 +29800,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.51",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30040,7 +29828,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30069,7 +29856,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30084,7 +29870,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30113,7 +29898,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.58",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30142,7 +29926,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.60",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30157,7 +29940,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30186,7 +29968,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.63",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30215,7 +29996,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.65",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30230,7 +30010,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.66",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30259,7 +30038,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30288,7 +30066,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.70",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30303,7 +30080,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.71",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30332,7 +30108,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.73",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30361,7 +30136,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30376,7 +30150,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.76",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30405,7 +30178,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.78",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30434,7 +30206,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30449,7 +30220,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30478,7 +30248,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.83",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30507,7 +30276,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30522,7 +30290,6 @@
           },
           "id": "baggage-porters-and-bellhops.path.career-path-block.86",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30567,16 +30334,16 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET this occupation 2025—2035 employment trend",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 39-6011.00 industry distribution",
+                "entity": "BLS Table 1.2: Employment and projections",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "National Bureau of Statistics 2025 industry average annual wage",
@@ -30642,9 +30409,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -30654,12 +30418,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 39-6011 this occupation: 2025 employment 29,200, projected 28,400 in 2035, growth rounded to -3% over 2025—2035 (decline), 3,800 openings per year on average. Openings include replacement demand and are not a ten-year net increase, individual hiring probability, or a causal measurement of generative AI."
+              "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080."
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -30688,7 +30452,7 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -30698,12 +30462,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 39-6011 this occupation: 2025 employment 29,200, projected 28,400 in 2035, growth rounded to -3% over 2025—2035 (decline), 3,800 openings per year on average. Openings include replacement demand and are not a ten-year net increase, individual hiring probability, or a causal measurement of generative AI."
+              "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080."
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -30741,11 +30505,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "U.S. baggage porters and bellhops 39-6011"
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.14",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -30755,12 +30520,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "29,200 (2025, U.S. this occupation)"
+              "29,200 jobs"
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -30789,7 +30554,7 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -30799,12 +30564,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 39-6011 this occupation: 2025 employment 29,200, projected 28,400 in 2035, growth rounded to -3% over 2025—2035 (decline), 3,800 openings per year on average. Openings include replacement demand and are not a ten-year net increase, individual hiring probability, or a causal measurement of generative AI. The BLS occupational utilization factor table for air transportation support, 488100, notes that changing traveler preferences and self-service bag drop machines reduce demand for skycaps, and for casino hotels, 721120, notes that cutting non-essential services lowers this occupation's share; these are within-industry share projection reasons, not a generative AI adoption rate, a measured headcount reduction, or a replacement conclusion for all hotels."
+              "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080."
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -30814,12 +30579,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "-3% is a rounded overall projection that can describe group change, not individual hiring probability or Chinese growth; the industry utilization factors are explanatory, not an AI measurement."
+              "Projected annual openings include replacements and are separate from the ten-year net change."
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -30843,11 +30608,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "U.S. baggage porters and bellhops 39-6011"
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.21",
           "source_refs": [
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -30857,12 +30623,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "-3%; 3,800 openings per year on average (2025—2035)"
+              "−3.0%, about 3,800 annual openings"
             ]
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -30980,7 +30746,7 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet-trends",
+            "ep-table",
             "bls-utilization"
           ],
           "type": "prose"
@@ -31037,7 +30803,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31052,7 +30817,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31081,7 +30845,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31096,7 +30859,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31125,7 +30887,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31140,7 +30901,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31169,7 +30929,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31184,7 +30943,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31213,7 +30971,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31228,7 +30985,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31257,7 +31013,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31300,7 +31055,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31315,7 +31069,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31344,7 +31097,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31359,7 +31111,6 @@
           },
           "id": "baggage-porters-and-bellhops.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31404,10 +31155,13 @@
                 "question_key": "career.faq.baggage-porters-and-bellhops.2"
               },
               {
-                "answer": "Look at reviewable output: whether you can complete receipt and carrying and handover per procedure and log truthfully, whether you can judge attribution and damage through on-site verification and physical confirmation, and whether you can stop and escalate when attribution is unclear or the work exceeds authorization. The RCS interest code and work styles only indicate that the direction is close and cannot replace this hands-on evidence.",
+                "answer": "Try BT-69 in section 09. Record the count, tag match and exception handoff separately.",
                 "id": "baggage-porters-and-bellhops.faq.3",
                 "question": "How do I judge whether I am suited to being a baggage porter and bellhop?",
-                "question_key": "career.faq.baggage-porters-and-bellhops.3"
+                "question_key": "career.faq.baggage-porters-and-bellhops.3",
+                "source_refs": [
+                  "bt69-editor"
+                ]
               },
               {
                 "answer": "AI and automation can change registration and fee entry, checking and dispatch information retrieval, and the organization of handover and left-behind item records; but item count and owner verification, on-site carrying and face-to-face handover, and damage and dispute judgment are still undertaken by the person per employer procedures. The degree of task automation does not equal a change in the number of positions.",
@@ -31422,10 +31176,14 @@
                 "question_key": "career.faq.baggage-porters-and-bellhops.5"
               },
               {
-                "answer": "Check in six categories: education; vocational training; employer pre-job training; related work experience; language and communication ability; first aid and fire and venue safety training. O*NET shows that this occupation has no registered training program nationwide, no registered national certification, and no uniform federal admission certificate; none of them can be automatically inferred from another, and the actual requirements are set by the employer.",
+                "answer": "BLS Table 1.2 lists a high school diploma or equivalent, typically no related work experience, and short-term on-the-job training for 39-6011. With Mainland employers, ask about duties, shifts, language, training and authority to release bags.",
                 "id": "baggage-porters-and-bellhops.faq.6",
                 "question": "What qualifications need to be checked to enter this occupation?",
-                "question_key": "career.faq.baggage-porters-and-bellhops.6"
+                "question_key": "career.faq.baggage-porters-and-bellhops.6",
+                "source_refs": [
+                  "ep-table",
+                  "front-desk-rail-catalog"
+                ]
               },
               {
                 "answer": "Work context shows 59% continually or almost continually stand, 42% continually or almost continually walk or run, 91% work outdoors exposed to all weather every day, 85% work indoors in an enclosed vehicle or operate enclosed equipment every day; repeatedly lifting and pushing and pulling and carrying baggage requires a certain amount of physical strength and correct carrying posture, and the OSHA guidance recommends assessing weight and route first and using luggage carts wherever possible.",
@@ -31440,27 +31198,38 @@
                 "question_key": "career.faq.baggage-porters-and-bellhops.8"
               },
               {
-                "answer": "The BLS data displayed by O*NET give, under this occupation 39-6011.00, about 32,500 employed in 2024, a change of 'decline (-1% or lower)' over 2024—2034, and about 4,600 job openings over the projection period (mostly from replacement demand); for redirection, compare concierges, ushers, checkroom and cloakroom attendants, amusement and recreation attendants, passenger attendants, parking attendants, and couriers and messengers, but all require the corresponding additional training and position authorization.",
+                "answer": "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080.",
                 "id": "baggage-porters-and-bellhops.faq.9",
                 "question": "How should career prospects and redirection be judged?",
-                "question_key": "career.faq.baggage-porters-and-bellhops.9"
+                "question_key": "career.faq.baggage-porters-and-bellhops.9",
+                "source_refs": [
+                  "ep-table"
+                ]
               },
               {
-                "answer": "The U.S. wage percentiles are the 2025 OEWS definition for this occupation 39-6011.00; for mainland China no public occupational entry and national wage distribution precisely corresponding to this occupation were obtained, and this page does not publish a mainland China occupational wage figure, nor does it substitute an industry or broad job category. The occupational scope, statistical system, data date, and tip and shift structure differ on both sides, so U.S. dollars cannot be converted into yuan, and quotations lacking sample and position scope should not be credited.",
+                "answer": "U.S. wage percentiles cover employees in occupation 39-6011. Shanghai internship and probation rates and the Kunming combined role’s pay apply to those listings only. Currency conversion does not make them comparable.",
                 "id": "baggage-porters-and-bellhops.faq.10",
                 "question": "Why can't U.S. wages and mainland China wages be converted into each other?",
-                "question_key": "career.faq.baggage-porters-and-bellhops.10"
+                "question_key": "career.faq.baggage-porters-and-bellhops.10",
+                "source_refs": [
+                  "onet-wages",
+                  "shanghai-pudong-hotel-2026",
+                  "kunming-hotel-2026"
+                ]
+              },
+              {
+                "answer": "In the original the count matches, but B72-1 is duplicated and B72-2 is unverified. Hold the bags and refer the mismatch to the shift supervisor. The variant adds only H3: a signed traceable correction. The record can go to handover review. Neither version records an actual handover. Check each tag, exception evidence, the receiver and handover status.",
+                "id": "baggage-porters-and-bellhops.faq.11",
+                "question": "BT-69 reference (open after submitting)",
+                "question_key": "career.faq.baggage-porters-and-bellhops.q11",
+                "source_refs": [
+                  "bt69-editor"
+                ]
               }
             ]
           },
           "id": "baggage-porters-and-bellhops.sources.faq.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "faq"
@@ -31470,15 +31239,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind editorial verification: the current O*NET duties, wages, industry, hiring software, projection, and directories for this occupation; the BLS industry utilization factors, OSHA aviation carrying, the consumer protection regulation, China's 2022 related trades, and the 2025 industry wages, distinguishing statistics, regulations, suggestions, and gaps."
+              "FermatMind Editorial"
             ]
           },
           "id": "baggage-porters-and-bellhops.sources.source-card.1",
           "source_refs": [
+            "ep-table",
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
+            "bt69-editor",
             "onet",
             "bls",
             "oews",
-            "onet-trends",
             "bls-utilization",
             "r2-pay-3",
             "health",
@@ -31492,15 +31264,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Main sources: O*NET39-6011 details, wages, trend, industry, Hot, and directories; the BLS utilization factors for this occupation's two industries; the OSHA aviation baggage eTool; Articles 7/9/10/23 of the Implementing Regulations of the Consumer Protection Law; the 2022 Occupational Classification Code and the NBS2025 industry wages."
+              "See BLS for U.S. employment and the separate sources for wages and industry. Both Mainland examples link to the original listings."
             ]
           },
           "id": "baggage-porters-and-bellhops.sources.source-card.2",
           "source_refs": [
+            "ep-table",
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
+            "bt69-editor",
             "onet",
             "bls",
             "oews",
-            "onet-trends",
             "bls-utilization",
             "r2-pay-3",
             "health",
@@ -31514,15 +31289,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Data dates: wages 2025 OEWS, software 2025 U.S. hiring, employment 2025 and 2025—2035, industry 2025; China classification 2022, industry wages 2025, the consumer protection implementing regulations effective 2024-07-01. This round read the original text on 2026-10-09, and an old entry not read is not refreshed to fully verified."
+              "Projections cover 2025–2035. The Mainland listings are historical examples from 2026."
             ]
           },
           "id": "baggage-porters-and-bellhops.sources.source-card.3",
           "source_refs": [
+            "ep-table",
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
+            "bt69-editor",
             "onet",
             "bls",
             "oews",
-            "onet-trends",
             "bls-utilization",
             "r2-pay-3",
             "health",
@@ -31536,15 +31314,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Boundary: China's guest baggage handler and others are related trades, not whole mutual recognition of 39-6011; the industry averages are not the occupational wage; the aviation OSHA guidance is not a mandatory procedure for all hotels, and the traveler packing leaflet is not an employee safety manual; no directory result does not prove that all training or admission does not exist; the AI suggestions are not measured adoption or a position disappearance prediction."
+              "Follow employer rules for baggage release, restricted areas and equipment. BT-69 uses fictional records."
             ]
           },
           "id": "baggage-porters-and-bellhops.sources.source-card.4",
           "source_refs": [
+            "ep-table",
+            "shanghai-pudong-hotel-2026",
+            "kunming-hotel-2026",
+            "bt69-editor",
             "onet",
             "bls",
             "oews",
-            "onet-trends",
             "bls-utilization",
             "r2-pay-3",
             "health",
@@ -31588,13 +31369,13 @@
                 "entity": "Enneagram test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the baggage porters and bellhops career page",
@@ -31658,18 +31439,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official outlook",
+                  "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080.",
                   "2025 and 2025—2035; accessed 2026-10-09"
                 ],
                 "evidence_type": "official outlook",
                 "id": "ep",
-                "limitation": "Overall employment projection for this occupation; the openings are the annual average, not AI causality.",
+                "limitation": "Projected openings do not measure individual hiring chances.",
                 "market": "United States",
-                "name": "O*NET 39-6011.00 occupational summary (employment and projection fields)",
-                "period": "2025 and 2025—2035",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Table 1.2: Baggage porters and bellhops 39-6011",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31713,10 +31494,10 @@
                 "id": "cnclass",
                 "limitation": "Used to explain the official entry point and intermediate class definition of the mainland China occupational classification; a shared classification entry does not equal a precise mapping of this occupation, and this page does not claim an equivalent Chinese occupation on that basis.",
                 "market": "Mainland China",
-                "name": "Ministry of Human Resources and Social Security release of digital occupation markers in the Occupational Classification Code of the People's Republic of China (2022 edition)",
+                "name": "MOHRSS: Release of the 2022 occupational classification",
                 "period": "Published 2022-10-28; accessed 2026-09-15",
                 "publisher": "Ministry of Human Resources and Social Security of the People's Republic of China",
-                "scope": "shared_official_identity_entry",
+                "scope": "contextual",
                 "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
               },
               {
@@ -31754,18 +31535,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official outlook",
+                  "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080.",
                   "2025 and 2025—2035; accessed 2026-10-09"
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
-                "limitation": "Overall employment projection for this occupation; the openings are the annual average, not AI causality.",
+                "limitation": "Projected openings do not measure individual hiring chances.",
                 "market": "United States",
-                "name": "O*NET 39-6011.00 occupational summary (employment and projection fields)",
-                "period": "2025 and 2025—2035",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Table 1.2: Baggage porters and bellhops 39-6011",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/39-6011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31807,12 +31588,12 @@
                 ],
                 "evidence_type": "institutional task research",
                 "id": "ilo",
-                "limitation": "Provides a global research definition of task exposure and job transformation, and does not give the adoption rate or replacement date for this occupation.",
+                "limitation": "Global occupational exposure research, not an adoption or replacement rate for this occupation.",
                 "market": "Global",
                 "name": "International Labour Organization 'Generative AI and Jobs: A Refined Global Index of Occupational Exposure' (ILO Working Paper 140)",
                 "period": "2025; accessed 2026-09-15",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -31930,17 +31711,17 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "industry distribution",
-                  "2025 industry distribution; accessed 2026-10-09"
+                  "The O*NET 39-6011.00 industry subtable lists accommodation and food services 56%, transportation and warehousing 17%, other services except public administration 13%, and other industries 14%. It does not state a statistical year.",
+                  "The subtable does not state a statistical year."
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "2025 U.S. industry distribution for this occupation: accommodation and food services 56%, transportation and warehousing 17%, other services (except public administration) 13%, other 14% (including real estate and rental and leasing); not a Chinese share or an industry wage.",
+                "limitation": "The O*NET 39-6011.00 industry subtable lists accommodation and food services 56%, transportation and warehousing 17%, other services except public administration 13%, and other industries 14%. It does not state a statistical year.",
                 "market": "United States",
-                "name": "O*NET 39-6011.00 industry distribution",
-                "period": "2025 industry distribution",
+                "name": "O*NET baggage porter and bellhop industry subtable",
+                "period": "Subtable gives no statistical year",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/39-6011.00"
               },
               {
@@ -31953,10 +31734,10 @@
                 "id": "r2-pay-3",
                 "limitation": "The OSHA baggage eTool addresses air ticketing, sorting, and ramp handling, identifying lifting, pushing and pulling, repetitive motion, and awkward posture risks; for ticket counters it recommends marking heavy items, asking others or using assistive devices, reducing lifting, and rotating tasks. It can serve as a bounded carrying reference for hotels, to be checked separately against the venue's equipment procedures, and the eTool does not add legal obligations.",
                 "market": "United States",
-                "name": "OSHA 'Baggage Handling eTool' (baggage handling ergonomics guidance)",
+                "name": "OSHA: Airline Baggage Handling eTool",
                 "period": "Accessed 2026-09-15",
                 "publisher": "Occupational Safety and Health Administration (U.S.)",
-                "scope": "related_task_proxy",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/etools/baggage-handling"
               },
               {
@@ -31967,7 +31748,7 @@
                 ],
                 "evidence_type": "certification information",
                 "id": "census",
-                "limitation": "This round the O*NET national training directory shows 'No training programs were found nationwide' and the certification directory shows 'No certifications were found'; these are only directory search results and do not prove that all training, employer requirements, or legal admission requirements do not exist.",
+                "limitation": "Use the directory as a starting point. Verify training, authorization and eligibility with the employer and applicable rules.",
                 "market": "United States",
                 "name": "O*NET 39-6011.00 certification findings (industry certifications)",
                 "period": "2026 updated page; accessed 2026-09-15",
@@ -31978,17 +31759,17 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "institutional traveler packing guidance",
-                  "Accessed 2026-09-15"
+                  "Packing and checked baggage context for airline travelers.",
+                  "Packing and checked baggage context for airline travelers."
                 ],
                 "evidence_type": "institutional traveler packing guidance",
                 "id": "msresearch",
-                "limitation": "It is actually a 2-page traveler baggage packing injury prevention leaflet, not an aviation baggage handler safety manual; it reminds that wheels do not eliminate lifting risk, there is no universal safe weight for all positions, and it cannot serve as employee work authorization.",
+                "limitation": "Packing advice for airline travelers. It does not establish hotel training or authority to work.",
                 "market": "United States",
-                "name": "OSHA-hosted NSC leaflet 'Packing Travel Baggage and Avoiding Injury'",
+                "name": "Airline baggage packing brochure hosted by OSHA",
                 "period": "Accessed 2026-09-15",
                 "publisher": "Occupational Safety and Health Administration (U.S.)",
-                "scope": "related_task_proxy",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/sites/default/files/2019-11/nsc_airline_packingbrochure.pdf"
               },
               {
@@ -32015,7 +31796,7 @@
                 ],
                 "evidence_type": "certification information",
                 "id": "archivists",
-                "limitation": "This round the O*NET national training directory shows 'No training programs were found nationwide' and the certification directory shows 'No certifications were found'; these are only directory search results and do not prove that all training, employer requirements, or legal admission requirements do not exist.",
+                "limitation": "Use the directory as a starting point. Verify training, authorization and eligibility with the employer and applicable rules.",
                 "market": "United States",
                 "name": "O*NET 39-6011.00 certification findings (national certifications)",
                 "period": "2026 updated page; accessed 2026-09-15",
@@ -32026,7 +31807,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The relevant parts were actually read this round",
+                  "See the scope described by the source.",
                   "Does not claim complete occupational or case-by-case verification"
                 ],
                 "evidence_type": "Relevant sections of the original official text",
@@ -32050,26 +31831,10 @@
                 "limitation": "The National Bureau of Statistics total wage can include time-based pay, piece rate, bonuses, allowances and subsidies, and overtime pay, and commission and variable pay cannot be excluded entirely; the scope of inclusion must be checked by the nature of the payment. Average annual wage is not take-home after tax, shop operating profit, or a percentile for this occupation.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics Provisions on the Composition of Total Wages (wage definition note)",
-                "period": "1990 provisions on the composition of total wages; current web page accessed 2026-10-09",
+                "period": "1990 provisions",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
-              },
-              {
-                "accessed_at": "2026-10-09",
-                "details": [
-                  "official outlook",
-                  "2025 and 2025—2035; accessed 2026-10-09"
-                ],
-                "evidence_type": "official outlook",
-                "id": "onet-trends",
-                "limitation": "U.S. 39-6011 this occupation: 2025 employment 29,200, projected 28,400 in 2035, growth rounded to -3% over 2025—2035 (decline), 3,800 openings per year on average. Openings include replacement demand and are not a ten-year net increase, individual hiring probability, or a causal measurement of generative AI.",
-                "market": "United States",
-                "name": "O*NET employment trend for this occupation",
-                "period": "2025 and 2025—2035",
-                "publisher": "O*NET / BLS",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/39-6011.00"
+                "url": "https://www.stats.gov.cn/gk/tjfg/xzfg/202302/t20230206_1901829.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32097,10 +31862,10 @@
                 "id": "osha-ticket",
                 "limitation": "The OSHA baggage eTool addresses air ticketing, sorting, and ramp handling, identifying lifting, pushing and pulling, repetitive motion, and awkward posture risks; for ticket counters it recommends marking heavy items, asking others or using assistive devices, reducing lifting, and rotating tasks. It can serve as a bounded carrying reference for hotels, to be checked separately against the venue's equipment procedures, and the eTool does not add legal obligations.",
                 "market": "United States",
-                "name": "OSHA aviation ticket counter baggage handling",
+                "name": "OSHA: Airline Baggage Handling at the Ticket Counter",
                 "period": "Current public guidance",
                 "publisher": "Occupational Safety and Health Administration",
-                "scope": "related_task_proxy",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/etools/baggage-handling/ticket-counter"
               },
               {
@@ -32113,10 +31878,10 @@
                 "id": "cn-class-2022",
                 "limitation": "2022 Occupational Classification Code: 4-03-01-01 front desk attendant includes the guest baggage handler trade, with duties covering carrying baggage, safekeeping belongings, inquiry, and fee settlement; 4-02-01-04 railway baggage and parcel transport attendant includes railway baggage handlers, 4-02-02-03 road passenger transport attendant includes checking and accepting and handing over and loading and unloading and returning baggage, 4-02-03-03 port passenger attendant includes port baggage handlers, and 4-02-04-02 air transport ground attendant includes baggage arrival, departure, and transfer. These are related-duty references, not one-to-one mutual recognition with U.S. 39-6011 as a whole or an admission license.",
                 "market": "Mainland China",
-                "name": "2022 Occupational Classification Code: guest and transportation baggage service related trades",
+                "name": "China’s Occupational Classification (2022 edition)",
                 "period": "2022 edition",
                 "publisher": "Three departments including MOHRSS; public government PDF of Xilingol League",
-                "scope": "related_occupation_proxy",
+                "scope": "contextual",
                 "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
               },
               {
@@ -32274,11 +32039,86 @@
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "name": "FermatMind AI task-impact estimate estimation method v1",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ep-table",
+                "limitation": "BLS Table 1.2 lists 29,200 jobs in 2025 and projects 28,400 in 2035 for U.S. occupation 39-6011. It projects a 3.0% decline and gives the net change as −0.9 thousand. The displayed figures are rounded separately. It projects 3,800 annual openings and reports a 1.7% self-employed share. The May 2025 median was $37,080.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Baggage porters and bellhops 39-6011",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A posting dated April 21, 2026 at Anhui Finance and Trade Vocational College lists six baggage porter internships for the Holiday Inn and InterContinental hotels at Shanghai Pudong Airport. The listing quotes CNY 2,800 monthly in months 1–6, CNY 3,000 from month 7, and a separate probation rate of CNY 4,000–4,500 monthly."
+                ],
+                "evidence_type": "primary_document",
+                "id": "shanghai-pudong-hotel-2026",
+                "limitation": "A posting dated April 21, 2026 at Anhui Finance and Trade Vocational College lists six baggage porter internships for the Holiday Inn and InterContinental hotels at Shanghai Pudong Airport. The listing quotes CNY 2,800 monthly in months 1–6, CNY 3,000 from month 7, and a separate probation rate of CNY 4,000–4,500 monthly.",
+                "market": "Mainland China",
+                "name": "Anhui Finance and Trade Vocational College: Shanghai Pudong hotel internships",
+                "period": "2026-04-21",
+                "publisher": "Anhui Finance and Trade Vocational College",
+                "scope": "recruitment_proxy",
+                "url": "https://www.afc.edu.cn/whcyxy/info/1115/7102.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Mile City’s 2026 recruitment bulletin No. 7 lists five front desk receptionist (concierge baggage porter) openings at Grand Hyatt Kunming. It calls for a junior college diploma or higher and good English and quotes CNY 3,000–3,800 monthly plus commission. The hotel is in Kunming, and this combined role does not establish pay for baggage-only work."
+                ],
+                "evidence_type": "primary_document",
+                "id": "kunming-hotel-2026",
+                "limitation": "Mile City’s 2026 recruitment bulletin No. 7 lists five front desk receptionist (concierge baggage porter) openings at Grand Hyatt Kunming. It calls for a junior college diploma or higher and good English and quotes CNY 3,000–3,800 monthly plus commission. The hotel is in Kunming, and this combined role does not establish pay for baggage-only work.",
+                "market": "Mainland China",
+                "name": "Mile City Government: historical Grand Hyatt Kunming listing",
+                "period": "2026",
+                "publisher": "Mile City Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hhml.gov.cn/info/35871/908402.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A national standards catalog published by Jiangsu’s human resources authority lists front desk attendants (4-03-01-01) separately from railway baggage staff (4-02-01-04). The entries help identify related work. They do not combine hotel and terminal staff into one statistical group or set one hiring requirement."
+                ],
+                "evidence_type": "primary_document",
+                "id": "front-desk-rail-catalog",
+                "limitation": "A national standards catalog published by Jiangsu’s human resources authority lists front desk attendants (4-03-01-01) separately from railway baggage staff (4-02-01-04). The entries help identify related work. They do not combine hotel and terminal staff into one statistical group or set one hiring requirement.",
+                "market": "Mainland China",
+                "name": "Jiangsu human resources authority: national occupational standards catalog",
+                "period": "2022-05-19",
+                "publisher": "Jiangsu Department of Human Resources and Social Security",
+                "scope": "contextual",
+                "url": "https://jshrss.jiangsu.gov.cn/art/2022/5/19/art_85534_10454317.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Fictional paper handoff created for this page."
+                ],
+                "evidence_type": "editorial_design",
+                "id": "bt69-editor",
+                "limitation": "Fictional paper handoff created for this page.",
+                "market": "Fictional exercise",
+                "name": "FermatMind BT-69: Baggage claim handoff",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": null
               }
             ]
           },
@@ -35620,7 +35460,7 @@
       },
       "hero": {
         "h1": "Baggage Porters and Bellhops",
-        "quick_answer": "Baggage porters and bellhops carry baggage and belongings for travelers at transportation terminals or for guests at hotels and similar establishments: receiving and tagging baggage and claim checks, carrying suitcases and luggage and parcels by hand or with luggage carts between guest rooms and the loading area and vehicles and the terminal, greeting and escorting guests to their rooms, providing directions and transportation and facility information, and delivering messages and room service orders and running errands; their work does not equal valuables safekeeping or hotel front desk settlement, nor does it replace security and venue safety duties, and they stop and escalate when the item information or attribution is unclear or the work exceeds their authorization.",
+        "quick_answer": "Baggage porters and bellhops receive, tag and move luggage and verify handoffs. Hotel bell staff may also guide guests. U.S. occupation 39-6011 groups those duties; compare concierge and other terminal jobs separately.",
         "title": "Baggage Porters and Bellhops"
       },
       "market_signal_card": {
@@ -35703,7 +35543,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls",
             "value": {
               "$item": "baggage-porters-and-bellhops.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35748,7 +35588,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "baggage-porters-and-bellhops.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36972,7 +36812,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests suit baggage porters and bellhops",
+        "label": "Explore my career interests with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37094,7 +36934,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which adjacent direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
-      "interface.quick_decision.experiment_heading": "What does this job mainly do?",
+      "interface.quick_decision.experiment_heading": "How can I try a paper exercise to see if the work fits?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. wage reference",
@@ -37187,7 +37027,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI task-impact estimate",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37277,85 +37117,85 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "32,500",
+        "derivation": "Published value.",
+        "display_value": "29,200 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment size (this occupational definition)",
-        "occupation_scope": "Baggage Porters and Bellhops",
-        "period": "2024; accessed 2026-09-15",
+        "measure": "Employment",
+        "occupation_scope": "U.S. baggage porters and bellhops 39-6011",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Decline (-1% or lower)",
+        "derivation": "Published value.",
+        "display_value": "−3.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Employment growth label (this occupational definition)",
-        "occupation_scope": "Baggage Porters and Bellhops",
-        "period": "2024—2034; accessed 2026-09-15",
+        "measure": "Projected growth",
+        "occupation_scope": "U.S. baggage porters and bellhops 39-6011",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 4,600",
+        "derivation": "Published value.",
+        "display_value": "About 3,800 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Projected job openings over the projection period (this occupational definition)",
-        "occupation_scope": "Baggage Porters and Bellhops",
-        "period": "2024—2034; accessed 2026-09-15",
+        "measure": "Projected annual openings",
+        "occupation_scope": "U.S. baggage porters and bellhops 39-6011",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry-level median wage for this occupation)",
+        "display_value": "Industry median not available in these sources",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "United States",
-        "measure": "Not applicable: the source does not publish this field",
+        "measure": "Industry median annual wage",
         "occupation_scope": "Baggage Porters and Bellhops",
-        "period": "Not applicable: the source does not publish this field",
+        "period": "Not available in these sources",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry-level median wage for this occupation)",
+        "display_value": "Industry median not available in these sources",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "United States",
-        "measure": "Not applicable: the source does not publish this field",
+        "measure": "Industry median annual wage",
         "occupation_scope": "Baggage Porters and Bellhops",
-        "period": "Not applicable: the source does not publish this field",
+        "period": "Not available in these sources",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry-level median wage for this occupation)",
+        "display_value": "Industry median not available in these sources",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "United States",
-        "measure": "Not applicable: the source does not publish this field",
+        "measure": "Industry median annual wage",
         "occupation_scope": "Baggage Porters and Bellhops",
-        "period": "Not applicable: the source does not publish this field",
+        "period": "Not available in these sources",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry-level median wage for this occupation)",
+        "display_value": "Industry median not available in these sources",
         "fact_id": "us-industry-wage-education-2025",
         "market": "United States",
-        "measure": "Not applicable: the source does not publish this field",
+        "measure": "Industry median annual wage",
         "occupation_scope": "Baggage Porters and Bellhops",
-        "period": "Not applicable: the source does not publish this field",
+        "period": "Not available in these sources",
         "source_refs": [
           "operations"
         ]
@@ -37481,39 +37321,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "32,500",
+        "derivation": "Published value.",
+        "display_value": "29,200 jobs",
         "fact_id": "us-employment-parent",
         "market": "United States",
-        "measure": "Employment size (this occupational definition)",
-        "occupation_scope": "Baggage Porters and Bellhops",
-        "period": "2024",
+        "measure": "Employment",
+        "occupation_scope": "U.S. baggage porters and bellhops 39-6011",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Decline (-1% or lower)",
+        "derivation": "Published value.",
+        "display_value": "−3.0%",
         "fact_id": "us-growth-parent",
         "market": "United States",
-        "measure": "Employment growth label (this occupational definition)",
-        "occupation_scope": "Baggage Porters and Bellhops",
-        "period": "2024—2034",
+        "measure": "Projected growth",
+        "occupation_scope": "U.S. baggage porters and bellhops 39-6011",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 4,600",
+        "derivation": "Published value.",
+        "display_value": "About 3,800 per year",
         "fact_id": "us-openings-parent",
         "market": "United States",
-        "measure": "Projected job openings over the projection period (this occupational definition)",
-        "occupation_scope": "Baggage Porters and Bellhops",
-        "period": "2024—2034",
+        "measure": "Projected annual openings",
+        "occupation_scope": "U.S. baggage porters and bellhops 39-6011",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
@@ -37521,7 +37361,7 @@
         "display_value": "25%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "AI task-impact estimate (editorial estimate)",
         "occupation_scope": "Baggage Porters and Bellhops",
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
@@ -37535,12 +37375,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI task-impact estimate"
     },
     "badges": [
       "O*NET 39-6011.00 · Job Zone 1–2 · low entry preparation",
       "Hotels and transportation terminals / Baggage receipt and carrying / Guest and baggage service",
-      "This occupational definition (wages and employment not taken from another occupation) · no precisely equivalent occupation in mainland China · gap visibly marked"
+      "Mainland China: two historical job listings; no comparable national wages in these sources"
     ],
     "metrics": [
       {
@@ -37553,19 +37393,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034)"
+        "label": "U.S. projected growth (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment headcount (2024)"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. projected job openings over the projection period (2024—2034)"
+        "label": "U.S. projected annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37579,17 +37419,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What baggage porters and bellhops do, what education and preparation are needed, how income and prospects look in the U.S., which tasks AI will change, and the boundaries of baggage handover, guest privacy, tips, and carrying safety; source scope and data gaps are retained."
+      "text": "See how hotel and terminal baggage staff receive, tag and hand off luggage. Explore U.S. wages, two Mainland job examples and a paper claim ticket."
     },
     "title": {
       "availability": "available",
-      "text": "Baggage Porters and Bellhops"
+      "text": "Baggage Porter and Bellhop: Duties, Pay and Entry | FermatMind"
     }
   },
-  "source_content_sha256": "b6ac1192504d00cdc88f796b092864c84edf84b1b3ec15525803e5272ca1d1e3",
+  "source_content_sha256": "11f2b482d817d6dd00db6039719d8be043ac5ede85df1e208cf5e0af1b2d4dfa",
   "subject": {
     "canonical_slug": "baggage-porters-and-bellhops",
     "name": "Baggage Porters and Bellhops",
-    "summary": "Baggage porters and bellhops carry baggage and belongings for travelers at transportation terminals or for guests at hotels and similar establishments: receiving and tagging baggage and issuing claim checks, carrying suitcases and luggage and parcels by hand or with luggage carts, greeting and escorting guests to their rooms, providing directions and facility explanations, delivering messages and room service orders and running errands, and in some positions also assisting with venue order and security. On the U.S. side this corresponds to O*NET 39-6011.00 (Baggage Porters and Bellhops), in Job Zone 1–2 (SVP below 6.0); the wage and employment and industry data are all under this occupational definition, and the O*NET page does not state that they are taken from another occupation. On the mainland China side this page obtained no public occupational entry and national wage distribution precisely corresponding to this occupation, and the Chinese page language does not constitute an equivalent Chinese occupation or a wage mapping, nor does it substitute an industry or broad job category for the occupational wage."
+    "summary": "Baggage porters and bellhops receive, tag and move luggage and verify handoffs. Hotel bell staff may also guide guests. U.S. occupation 39-6011 groups those duties; compare concierge and other terminal jobs separately."
   }
 }

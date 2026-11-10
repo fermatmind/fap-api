@@ -1401,7 +1401,7 @@
         "status": "mapped"
       },
       "item:blockchain-engineers.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:blockchain-engineers.path.interview-probation.1": {
         "status": "mapped"
@@ -23654,10 +23654,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education, qualifications, and job authorization must be verified separately: O*NET lists this occupation as Job Zone Four (SVP 7.0 to less than 8.0), and among respondents 38% consider a bachelor's degree necessary, 19% consider some college education without a degree necessary, and 13% consider a master's degree necessary; the O*NET education and training information is not a list of occupational licenses, and entry conditions must be verified separately by the target jurisdiction, service content, and employer requirements. These are survey and public material definitions, not statutory thresholds; real requirements follow the employer, the project client, and local regulations, and production release authority and key custody authority additionally require institutional authorization."
+              "Try BC-83 in section 09: trace two ledger versions on paper or in local memory and write one page for a reviewer."
             ]
           },
           "id": "blockchain-engineers.quick-decision.fermat-decision-card.6",
+          "source_refs": [
+            "bc83-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23665,10 +23668,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: this is a technical role centered on distributed ledgers, cryptographic protocols, node and deployment security, and testing and monitoring, and its output is reviewable, reproducible, and rollback-capable systems and evidence, not investment advice or compliance judgments made on behalf of the institution. The U.S. wage, employment, and projections data follow the Computer Occupations, All Other (SOC 15-1299) definition rather than a separate 15-1299.07 listing; mainland China has no national occupation-level wage statistics corresponding to this occupation, and this page marks this honestly rather than filling in figures."
+              "Try both BC-83 versions to see whether you like tracing permission changes, failure paths and release evidence."
             ]
           },
           "id": "blockchain-engineers.quick-decision.fermat-decision-card.7",
+          "source_refs": [
+            "onet-summary",
+            "bc83-paper"
+          ],
           "type": "prose"
         }
       ]
@@ -24231,10 +24238,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Blockchain engineers (U.S. counterpart O*NET-SOC 15-1299.07, Blockchain Engineers) maintain and support distributed, decentralized blockchain networks or blockchain applications (such as cryptocurrency transactions, payment processing, document sharing, and digital voting); they use advanced technology to design and deploy secure blockchain design patterns and solutions across geographically distributed networks; and they may assist with infrastructure setup and testing to keep applications transparent and secure. It is neither a trading or investment position nor one that bears compliance approval responsibility."
+              "Blockchain engineers design, implement and test distributed ledgers, nodes, smart contracts or applications that connect on-chain and off-chain work. They document permissions, failure handling, tests and release evidence. Roles may focus on protocols, integration or platform operations."
             ]
           },
           "id": "blockchain-engineers.profile.definition-block.11",
+          "source_refs": [
+            "onet-summary"
+          ],
           "type": "prose"
         },
         {
@@ -24440,7 +24450,7 @@
                 "entity": "O*NET parent category 2025 wage percentiles (United States national row)",
                 "id": "link-1",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/15-1299.00?st=NH"
+                "url": "https://www.onetonline.org/link/localwages/15-1299.07"
               },
               {
                 "entity": "O*NET-SOC 15-1299.07 detailed information (tasks and work activities)",
@@ -24476,7 +24486,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "This page compares blockchain engineers with five adjacent directions on the same set of dimensions: career direction, core work and output, key differences, and which direction better fits each preference. Adjacent directions are described according to their own official occupational descriptions and do not mean job titles are interchangeable."
+              "This page compares blockchain engineers with six adjacent directions on the same set of dimensions: career direction, core work and output, key differences, and which direction better fits each preference. Adjacent directions are described according to their own official occupational descriptions and do not mean job titles are interchangeable."
             ]
           },
           "id": "blockchain-engineers.direction-comparison.adjacent-career-comparison-table.8",
@@ -25012,7 +25022,7 @@
                 "entity": "O*NET parent category 2025 wage percentiles (United States national row)",
                 "id": "link-7",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/15-1299.00?st=NH"
+                "url": "https://www.onetonline.org/link/localwages/15-1299.07"
               },
               {
                 "entity": "O*NET-SOC 15-1299.07 occupation summary",
@@ -25200,11 +25210,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial reasoning from the tasks: tools can assist code and test drafts and log and document organization; the materials read this round give no causal data on overall replacement, adoption, or time savings for this occupation, so perpetual non-replacement cannot be inferred. Protocol, permission, security, and release responsibility are still verified by the actual jurisdiction and institutional authorization, and task exposure, adoption rates, and employment counts are kept separate. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Use fictional inputs to draft tests and handoffs. People review permissions, failures, state changes and release evidence. Actual keys and releases follow organizational authority."
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.18",
           "source_refs": [
+            "source-fermatmind-ai-rubric",
             "editor-current",
             "details-current",
             "ilo-genai"
@@ -26613,10 +26624,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No mainland China national occupation wage distribution precisely corresponding to blockchain engineers was obtained."
+              "Beihang University’s October 16, 2026 notice lists one consortium blockchain engineer to design, develop and integrate ChainMaker systems. It asks for a related master’s degree or higher and at least three years in backend or blockchain development. It lists a labor dispatch contract, negotiable pay and a November 27, 2026 application deadline."
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "buaa-blockchain-2026"
+          ],
           "type": "prose"
         },
         {
@@ -26624,11 +26638,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "As of 2026-10-09, the NBS and other materials consulted still contain no precise national wage for this occupation; matched broad-category annual average references are listed below."
+              "Use these notices to compare employer requirements. They do not establish a national education threshold, occupational pay or current vacancy status."
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
+            "buaa-blockchain-2026",
             "nbs-current"
           ],
           "type": "prose"
@@ -26638,11 +26653,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025 IT services non-private 248,752 yuan per year; an industry-wide pre-tax annual average."
+              "Huawei Cloud Blockchain Lab’s experienced-hire page lists a developer role for Shenzhen, Beijing and Xi’an with at least one year of experience. The role covers blockchain core components, decentralized identity, privacy computing and cross-chain modules, and asks for Go. The row gives neither pay nor headcount."
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
+            "huawei-cloud-blockchain",
             "nbs-current"
           ],
           "type": "prose"
@@ -26652,11 +26668,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025 information transmission, software, and IT services: urban non-private 248,752 and private 128,166 yuan per year; above-scale enterprises in this industry: 242,019 overall, 275,504 for professional and technical, and 472,496 for middle management and above, yuan per year. Match only by the actual unit industry and scale and your own duties; these are pre-tax annual averages, not the blockchain occupation median, starting salary, or city monthly wage."
+              "Use these notices to compare employer requirements. They do not establish a national education threshold, occupational pay or current vacancy status."
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
+            "huawei-cloud-blockchain",
             "nbs-current"
           ],
           "type": "prose"
@@ -28154,7 +28171,7 @@
                 "entity": "O*NET parent category 2025 wage percentiles (United States national row)",
                 "id": "link-17",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/15-1299.00?st=NH"
+                "url": "https://www.onetonline.org/link/localwages/15-1299.07"
               },
               {
                 "entity": "O*NET-SOC 15-1299.07 occupation summary",
@@ -29154,10 +29171,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Direct answer: main risks include asset losses from improper key and credential management, exploitation of contract or protocol defects, vulnerabilities introduced by dependencies and configuration, releasing to production with insufficient testing, changes that cannot be rolled back, and unclear content and compliance boundaries for external services; control depends on least privilege, controlled environment testing, code review, and traceable change and rollback records."
+              "Article 2 of the blockchain information services rules covers services offered to the public in mainland China through websites, apps and similar channels. Article 11 requires covered providers to file within ten working days after starting the service. Check personal data, production access, keys and public release under the relevant rules and organizational authority."
             ]
           },
           "id": "blockchain-engineers.risk.career-risk-cards.9",
+          "source_refs": [
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -29816,10 +29836,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Direct answer: on the U.S. side this occupation is listed as Job Zone Four (SVP 7.0 to less than 8.0), and 38% of respondents consider a bachelor's degree necessary; the actual entry route depends on the position type — software development and information technology services, financial technology, internet platforms, and blockchain information services differ in training and permission requirements — and should follow the specific employer's job description and institutional authorization."
+              "Article 2 of the blockchain information services rules covers services offered to the public in mainland China through websites, apps and similar channels. Article 11 requires covered providers to file within ten working days after starting the service. Check personal data, production access, keys and public release under the relevant rules and organizational authority. The Beihang and Huawei Cloud examples differ in education, experience and development scope."
             ]
           },
           "id": "blockchain-engineers.path.career-path-block.20",
+          "source_refs": [
+            "faa-design-approvals",
+            "buaa-blockchain-2026",
+            "huawei-cloud-blockchain"
+          ],
           "type": "prose"
         },
         {
@@ -30704,42 +30729,41 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional local ledger scenario",
-                  "Simulated only on paper or in local memory, with no network, no funds, and no real keys; the initial state is ledger=[], writer_epoch=1, and the set of committed request_id values is empty. The writer role may only append, admin may only rotate, and reader may only read; the writer labels W1/W2 represent generations 1 and 2 respectively, and the admin label A is only a fictional input and does not provide real authentication security.",
-                  "Event fields are (request_id,role,tag,action,payload). Input in order: E1=(r1,writer,W1,append,10); E2=(r1,writer,W1,append,10); E3=(r2,reader,R,append,20); E4=(r3,admin,A,rotate,2); E5=(r4,writer,W1,append,20); E6=(r5,writer,W2,append,20); E7=(r6,writer,W2,append,30, with an exception injected before commit). rotate may only change the epoch to the current epoch +1; append payloads may only be integers.",
-                  "120 minutes in total: 40 minutes for the rules and threat list, 50 minutes for the simulated implementation, and 30 minutes for event-by-event testing and limitation statements. Any familiar language may be used for the implementation, and a complete paper trace is also acceptable; extra installations and cloud accounts are not necessary."
+                  "BC-83 is a fictional local ledger. Start with ledger=[], writer_epoch=1 and no committed IDs. A writer can only append, an admin can only rotate, and a reader can only read. W1 and W2 stand for epochs 1 and 2. A is a fictional admin tag.",
+                  "Process E1=(r1,writer,W1,append,10), E2=(r1,writer,W1,append,10), E3=(r2,reader,R,append,20), E4=(r3,admin,A,rotate,2), E5=(r4,writer,W1,append,20), E6=(r5,writer,W2,append,20), and E7=(r6,writer,W2,append,30, with an injected failure before commit).",
+                  "Restart from the same initial state for the variant. Change only E6 from W2 to W1. All other events stay the same."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Rules and deliverables",
-                  "First check whether the role is allowed to perform the action; if not, return DENIED and record one alert. After allowing append, check the writer tag against the current epoch; if invalid, return STALE and record an alert; then check the committed request_id and return DUPLICATE if it already exists; finally add the payload to a temporary copy and commit atomically, registering the request_id at the same time. On an exception, return FAILED, record an alert, and leave the ledger and the committed set unchanged. rotate is performed by admin A, adding 1 to the epoch and returning ROTATED without writing to the ledger; DENIED, STALE, DUPLICATE, and FAILED all do not write to the ledger.",
-                  "Submit a seven-row results table (event, return code, ledger after handling, epoch, committed IDs, alerts), the permission matrix, runnable functions, and tests or a complete paper trace; explain why the idempotency check cannot bypass current permissions, and how to handle the case where the same r6 is retried after E7 with the injection canceled."
+                  "Check the role first. Unauthorized actions return DENIED and raise an alert. For append, a stale epoch returns STALE with an alert, then a committed ID returns DUPLICATE. Otherwise commit the integer and ID together and return APPENDED. A failure before commit returns FAILED with an alert and writes neither. A valid rotate returns ROTATED and updates only the epoch.",
+                  "For each version, record the return code, ledger, epoch, committed IDs and alerts for E1–E7. Retry E7 with the same r6 and without the injected failure.",
+                  "Send one page to a change reviewer naming the input that changed, the output differences and the limits of the local model."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answers and review",
-                  "E1: APPENDED, [10], epoch1, {r1}; E2: DUPLICATE, [10], epoch1, {r1}; E3: DENIED, [10], epoch1, {r1}; E4: ROTATED, [10], epoch2, {r1}; E5: STALE, [10], epoch2, {r1}; E6: APPENDED, [10,20], epoch2, {r1,r5}; E7: FAILED, [10,20], epoch2, {r1,r5}. Alerts are one each for E3, E5, and E7, and the log records only the event ID, role, action, and result, not the tag; 3 alerts in total.",
-                  "E7 did not register r6, so after canceling the injection a retry of the same event should be APPENDED with ledger=[10,20,30], epoch2, and committed set={r1,r5,r6}, with the alert count still 3. Minimum verification: all seven rows are consistent, failures leave no residual payload or ID, W1 becomes invalid after rotation, and duplicate requests are not written twice. This exercise is only a permission, idempotency, and atomicity model and does not implement cryptographic signatures, distributed consensus, or immutability guarantees."
+                  "Trace each version separately, using the state from the previous row.",
+                  "Check permissions, failure without a write and retry behavior separately.",
+                  "Submit both traces and the handoff before opening the reference."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Limitation and risk statements",
-                  "Write at least three limitations: tag comparison is not security authentication, a single-process memory model has no multi-node consensus, and the data do not persist across process restarts. You may add unverified items such as network partitions, concurrent races, and cryptographic proofs; do not rewrite APPENDED or passing tests as production security conclusions, and do not connect to mainnet or real accounts."
+                  "Use paper or local memory only. No network, real funds or keys.",
+                  "The fictional tags do not authenticate anyone. The model does not implement persistence or distributed consensus."
                 ]
               }
             ]
           },
           "id": "blockchain-engineers.path.entry-work-sample-data.1",
           "source_refs": [
-            "editorial"
+            "bc83-paper"
           ],
-          "title": "Paper case and tasks",
+          "title": "BC-83: Two fictional ledger traces",
           "type": "cards"
         },
         {
@@ -30750,40 +30774,40 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Job requirement checklist",
-                  "List education, training, service applicability scope, and institutional permissions by target jurisdiction; attach a specific source, data period, and gaps to each item, plus the writer, admin, and reader permission matrix from this exercise.",
-                  "Do not merge degrees, technical proficiency assessments, public information service filing, and institutional production permissions."
+                  "Permission table",
+                  "List three roles and their permitted actions.",
+                  "Distinguish exercise rules from real authority."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Event-by-event review records",
-                  "Submit the results table for E1 to E7 and for the E7 retry, compare it row by row with the reference answers, and keep the before-and-after differences of your corrections.",
-                  "You may ask an experienced person to review; when no one is available, review against the answers yourself and note that no external review was obtained, since the seven-day experience does not depend on someone else being free."
+                  "Two traces",
+                  "Show E1–E7 and the E7 retry.",
+                  "Complete them before viewing the reference."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "One-page retrospective",
-                  "Explain the requirements, the validation order, the E7 atomicity, the W1 invalidation, the duplicate r1, and the three limitations, with a decision to continue or pause.",
-                  "Distinguish verified local behavior, model assumptions, and cryptographic authentication, consensus, and persistence that are not yet implemented, and do not claim production security."
+                  "One-page handoff",
+                  "Record the one change, output differences and limits.",
+                  "Name the next reviewer."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool and reproducibility notes",
-                  "Attach the functions or the paper trace, the language and runtime version, the input data, and the execution method; if AI was used, note the assisted scope and manual corrections.",
-                  "No deployment to a network is required; use only fictional labels, do not copy labels into the log, and do not upload real credentials."
+                  "Reproduction notes",
+                  "Provide a paper trace or in-memory function.",
+                  "No mainnet or real keys."
                 ]
               }
             ]
           },
           "id": "blockchain-engineers.path.entry-portfolio.1",
           "source_refs": [
-            "editorial"
+            "bc83-paper"
           ],
           "title": "Work and evidence preparation",
           "type": "cards"
@@ -30846,59 +30870,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Occupational boundaries",
-                  "Complete a one-page task comparison using the O*NET definition and China's 2-02-38-08 definition; distinguish architecture, application, testing, operations, and public service obligations."
+                  "Roles and state",
+                  "Read the roles and initial state rules."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Scenario and permissions",
-                  "Copy out E1 to E7, draw the writer, admin, and reader permission matrix and the initial epoch state; use only fictional labels."
+                  "Original events",
+                  "List the original events and check order."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Rules and threats",
-                  "Write one page on the validation order, state transitions, and the rule that failures do not commit, and mark three model limitations."
+                  "Original trace",
+                  "Trace the original one event at a time."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Simulated implementation",
-                  "Complete single-process local functions or a step-by-step state table, retaining the ledger, epoch, committed IDs, and a log without labels."
+                  "One change",
+                  "Restart from the initial state and change only E6."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Answer verification",
-                  "Check E1 to E7 row by row, cancel the E7 injection and retry, and keep the differences between your results table and the reference answers; no real accounts or mainnet are needed."
+                  "Variant and retry",
+                  "Trace the variant and both E7 retries."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Review and correction",
-                  "Review row by row yourself or ask a peer to review, recording permission, idempotency, and atomicity problems and changes; when no peer is available, note that no external review was obtained."
+                  "Submit first",
+                  "Submit both traces and a one-page reviewer handoff. Leave the reference closed."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Decision and work",
-                  "Organize the rules, code or trace, results table, permission matrix, and limitations; decide from your completion level and how you felt about debugging whether to continue, build foundations, or compare adjacent positions."
+                  "Open the reference",
+                  "Open “BC-83 reference (open after submitting)” and check permissions, state, alerts and limits."
                 ]
               }
             ]
           },
           "id": "blockchain-engineers.path.seven-day-trial.1",
           "source_refs": [
-            "editorial"
+            "bc83-paper"
           ],
-          "title": "Seven-day progressive experience",
+          "title": "BC-83 seven-day trial",
           "type": "timeline"
         },
         {
@@ -31052,11 +31076,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the bounded search this round did not obtain a specific blockchain engineering job posting that allows simultaneous verification of posting date, duties, education, and pay; the O*NET group profile and the editorially drafted position table are not packaged as real recruitment samples. When reading actual postings, record the institution, duties, education, access permissions, pay method, and posting date item by item."
+              "Beihang University’s October 16, 2026 notice lists one consortium blockchain engineer to design, develop and integrate ChainMaker systems. It asks for a related master’s degree or higher and at least three years in backend or blockchain development. It lists a labor dispatch contract, negotiable pay and a November 27, 2026 application deadline.",
+              "Huawei Cloud Blockchain Lab’s experienced-hire page lists a developer role for Shenzhen, Beijing and Xi’an with at least one year of experience. The role covers blockchain core components, decentralized identity, privacy computing and cross-chain modules, and asks for Go. The row gives neither pay nor headcount.",
+              "Use these notices to compare employer requirements. They do not establish a national education threshold, occupational pay or current vacancy status."
             ]
           },
           "id": "blockchain-engineers.path.recruitment-sample.1",
-          "title": "Notes on using the recruitment sample",
+          "source_refs": [
+            "buaa-blockchain-2026",
+            "huawei-cloud-blockchain"
+          ],
+          "title": "Two mainland blockchain development notices",
           "type": "notice"
         }
       ]
@@ -31265,7 +31295,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "In the BLS 2025—2035 projections table, the parent category Computer Occupations, All Other (SOC 15-1299) grows from 471,200 to 495,300 employed, a 5.1% increase, with a listed net gain of 24,200 and 27,000 annual openings; this is not a separate blockchain engineer statistic and is not a personal employment guarantee. The computer and information technology occupational group has another approximately 280,000 annual openings, which cannot be combined into demand for this sub-occupation; the sources consulted for mainland China do not provide national wage and employment distributions for this occupation."
+              "BLS projects the U.S. parent group Computer Occupations, All Other (15-1299) from about 471,200 jobs in 2025 to 495,300 in 2035. The published net gain is about 24,200 (5.1%), with about 27,000 annual openings from growth and replacement. The baseline includes 4.9% self-employment. The data do not isolate blockchain engineers."
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.8",
@@ -31960,10 +31990,13 @@
           "data": {
             "entries": [
               {
-                "answer": "Blockchain engineers maintain and support distributed, decentralized blockchain networks or applications: they plan systems with architects and systems and security personnel, design and validate cryptographic protocols and blockchain design patterns, write maintainable code using object-oriented principles and update client and server applications, design and implement data repositories and logging, automate deployment of updates across distributed nodes, and test the security and performance of the infrastructure.",
+                "answer": "Blockchain engineers design, implement and test distributed ledgers, nodes, smart contracts or applications that connect on-chain and off-chain work. They document permissions, failure handling, tests and release evidence. Roles may focus on protocols, integration or platform operations.",
                 "id": "blockchain-engineers.faq.1",
                 "question": "What do blockchain engineers do every day?",
-                "question_key": "career.faq.blockchain-engineers.1"
+                "question_key": "career.faq.blockchain-engineers.1",
+                "source_refs": [
+                  "onet-summary"
+                ]
               },
               {
                 "answer": "Risks to note in advance include asset losses from improper key and credential management, exploitation of contract or protocol defects, vulnerabilities introduced by dependencies and configuration, releasing to production with insufficient testing, changes that cannot be rolled back, and unclear content and compliance boundaries for external services; control depends on least privilege, controlled environment testing, code review, and traceable change and rollback records.",
@@ -31972,16 +32005,22 @@
                 "question_key": "career.faq.blockchain-engineers.2"
               },
               {
-                "answer": "Fit signals are being able to turn requirements and threats into reviewable designs and code, being willing to check dependencies and permissions item by item, accepting review of code and changes, and stating conclusion boundaries clearly when evidence is insufficient; curiosity about technology alone is not enough to prove competence.",
+                "answer": "Try BC-83 in section 09: trace two ledger versions on paper or in local memory and write one page for a reviewer.",
                 "id": "blockchain-engineers.faq.3",
                 "question": "How do I judge whether I am suited to being a blockchain engineer?",
-                "question_key": "career.faq.blockchain-engineers.3"
+                "question_key": "career.faq.blockchain-engineers.3",
+                "source_refs": [
+                  "bc83-paper"
+                ]
               },
               {
-                "answer": "AI and development tools can assist rollback-capable steps such as dependency and interface search, code drafts and completion, test samples and configuration snippets, and log and document organization; protocol and design pattern choices, the key and permission model, deployment and rollback plans, and security conclusions remain with people.",
+                "answer": "Use fictional inputs to draft tests and handoffs. People review permissions, failures, state changes and release evidence. Actual keys and releases follow organizational authority.",
                 "id": "blockchain-engineers.faq.4",
                 "question": "Which tasks will AI change?",
-                "question_key": "career.faq.blockchain-engineers.4"
+                "question_key": "career.faq.blockchain-engineers.4",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
                 "answer": "Determining requirements and the threat model, protocol and permission design, dependency and version trade-offs, exception and failure paths, deployment and rollback conditions, and the signing of external security conclusions and production releases must all be reviewed and owned by trained and authorized people.",
@@ -31990,10 +32029,15 @@
                 "question_key": "career.faq.blockchain-engineers.5"
               },
               {
-                "answer": "Education and course training, proof of skills or vendor certification, institutional authorization, production environment and key access authorization, code and change review rules, and filing and security assessment obligations for external services must each be verified; O*NET lists it as Job Zone Four (SVP 7.0 to less than 8.0), the O*NET education and training information is not a list of occupational licenses, and entry conditions must be verified separately by the target jurisdiction, service content, and employer requirements.",
+                "answer": "Article 2 of the blockchain information services rules covers services offered to the public in mainland China through websites, apps and similar channels. Article 11 requires covered providers to file within ten working days after starting the service. Check personal data, production access, keys and public release under the relevant rules and organizational authority.",
                 "id": "blockchain-engineers.faq.6",
                 "question": "Which qualifications must be verified to enter this occupation?",
-                "question_key": "career.faq.blockchain-engineers.6"
+                "question_key": "career.faq.blockchain-engineers.6",
+                "source_refs": [
+                  "faa-design-approvals",
+                  "buaa-blockchain-2026",
+                  "huawei-cloud-blockchain"
+                ]
               },
               {
                 "answer": "O*NET work context shows that 69% of respondents sit continually or almost continually and 60% work indoors in a controlled environment every day; 38% use their hands to handle tools or controls continually or almost continually and 31% do repetitive motions continually or almost continually.",
@@ -32008,16 +32052,24 @@
                 "question_key": "career.faq.blockchain-engineers.8"
               },
               {
-                "answer": "In the BLS 2025—2035 projections table, the parent category Computer Occupations, All Other (SOC 15-1299) grows from 471,200 to 495,300 employed, a 5.1% increase, with a listed net gain of 24,200 and 27,000 annual openings; this is not a separate blockchain engineer statistic and is not a personal employment guarantee.",
+                "answer": "BLS projects the U.S. parent group Computer Occupations, All Other (15-1299) from about 471,200 jobs in 2025 to 495,300 in 2035. The published net gain is about 24,200 (5.1%), with about 27,000 annual openings from growth and replacement. The baseline includes 4.9% self-employment. The data do not isolate blockchain engineers.",
                 "id": "blockchain-engineers.faq.9",
                 "question": "How should I judge career prospects and transitions?",
-                "question_key": "career.faq.blockchain-engineers.9"
+                "question_key": "career.faq.blockchain-engineers.9",
+                "source_refs": [
+                  "bls-ep"
+                ]
               },
               {
-                "answer": "The U.S. figures come from the BLS 2025 OEWS data shown by O*NET, under the Computer Occupations, All Other (SOC 15-1299) definition; mainland China has no national occupation wage statistic for this occupation, only industry category average wages, and the two differ in occupational definition, statistical period, and coverage.",
+                "answer": "Use these notices to compare employer requirements. They do not establish a national education threshold, occupational pay or current vacancy status.",
                 "id": "blockchain-engineers.faq.10",
                 "question": "Why can't U.S. wages and mainland China figures be converted into each other?",
-                "question_key": "career.faq.blockchain-engineers.10"
+                "question_key": "career.faq.blockchain-engineers.10",
+                "source_refs": [
+                  "buaa-blockchain-2026",
+                  "huawei-cloud-blockchain",
+                  "nbs-current"
+                ]
               },
               {
                 "answer": "The O*NET technology list groups tools into 21 categories and marks 34 Hot Technologies and 20 In-Demand skills; common areas include languages such as Go, C and C++, Java, C#, and TypeScript, and tools such as Docker, Kubernetes, AWS, Terraform, MySQL, PostgreSQL, MongoDB, Kafka, and Git; being able to write reviewable, reproducible code matters more than how many languages you know.",
@@ -32036,6 +32088,15 @@
                 "id": "blockchain-engineers.faq.13",
                 "question": "What are the working environment and ways of collaborating for blockchain engineers?",
                 "question_key": "career.faq.blockchain-engineers.13"
+              },
+              {
+                "answer": "Both versions return APPENDED, DUPLICATE, DENIED, ROTATED and STALE for E1–E5. After E5 both have [10], epoch 2, IDs {r1} and two alerts. Original E6 appends 20 and adds r5. Variant E6 is STALE, keeping [10] and {r1} and raising one extra alert. E7 fails in both, writes neither a value nor an ID, and adds one alert each. The retry succeeds: original [10,20,30], {r1,r5,r6}, three alerts; variant [10,30], {r1,r6}, four alerts. Both stay at epoch 2. Hand the differences and the untested authentication, persistence and consensus boundaries to the change reviewer.",
+                "id": "blockchain-engineers.faq.bc83-reference",
+                "question": "BC-83 reference (open after submitting)",
+                "question_key": "career.faq.blockchain-engineers.bc83_reference",
+                "source_refs": [
+                  "bc83-paper"
+                ]
               }
             ]
           },
@@ -32103,10 +32164,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Main sources: O*NET-SOC 15-1299.07 occupation summary, detailed information, custom occupation profile, technology list, industry distribution, training and education information, and national wage percentiles page; BLS Computer and Information Technology Occupations Occupational Outlook Handbook; National Bureau of Statistics 2025 average annual wages of urban unit employees; ILO Working Paper 140."
+              "Read O*NET for tasks and the BLS parent group for wages and projections. Use the employer notices for mainland jobs and CAC’s rules for service scope."
             ]
           },
           "id": "blockchain-engineers.sources.source-card.2",
+          "source_refs": [
+            "onet-summary",
+            "bls-ep",
+            "wages-current",
+            "buaa-blockchain-2026",
+            "huawei-cloud-blockchain",
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -32114,11 +32183,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round, 2026-10-09: O*NET2026 updated, with wages and industry base year 2025, current projections 2025—2035, the 2025 job posting, and training IPEDS2025—26 and degrees awarded 2024—25; the precise BLS parent category table must be verified separately. China NBS2025, CAC2019 service clauses and the 2020 occupation release and the 2026 Fuzhou code line; the 2022 code entry had no body text and no claim is made that the full text was read. Historical protected-zone periods are retained as scope conflicts."
+              "Checked November 10, 2026. U.S. wages cover 2025 and projections span 2025–2035. Job notices and regulations retain their dates."
             ]
           },
           "id": "blockchain-engineers.sources.source-card.3",
           "source_refs": [
+            "bls-ep",
+            "buaa-blockchain-2026",
+            "huawei-cloud-blockchain",
+            "faa-design-approvals",
             "details-current",
             "industry-current",
             "trends-current",
@@ -32168,19 +32241,19 @@
                 "entity": "MBTI personality test",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test"
               },
               {
                 "entity": "View the blockchain engineer career page",
@@ -32287,20 +32360,20 @@
                 "url": "https://www.onetonline.org/link/details/15-1299.07"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports the typical entry-level education of a bachelor's degree for most occupations in this group, and overall growth faster than average from 2025—2035 with about 280,000 job openings per year.",
+                  "BLS projects the U.S. parent group Computer Occupations, All Other (15-1299) from about 471,200 jobs in 2025 to 495,300 in 2035. The published net gain is about 24,200 (5.1%), with about 27,000 annual openings from growth and replacement. The baseline includes 4.9% self-employment. The data do not isolate blockchain engineers.",
                   "2025—2035 projections; accessed 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-entry",
-                "limitation": "This follows the occupational group definition, not a separate 15-1299.07 statistic.",
+                "limitation": "BLS projects the U.S. parent group Computer Occupations, All Other (15-1299) from about 471,200 jobs in 2025 to 495,300 in 2035. The published net gain is about 24,200 (5.1%), with about 27,000 annual openings from growth and replacement. The baseline includes 4.9% self-employment. The data do not isolate blockchain engineers.",
                 "market": "United States",
-                "name": "BLS Computer and Information Technology Occupations Occupational Outlook Handbook (entry requirements)",
-                "period": "2025—2035 projections; accessed 2026-09-16",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "name": "U.S. BLS Table 1.2: Computer Occupations, All Other, 15-1299",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.bls.gov/ooh/computer-and-information-technology/home.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32312,27 +32385,27 @@
                 "id": "bls-pay",
                 "limitation": "The United States national row is cited; the NH selection and state and metropolitan area rows on the page are not used on this page; SOC15-1299 is not a separate blockchain sub-occupation statistic.",
                 "market": "United States",
-                "name": "O*NET parent category 2025 wage percentiles (15-1299.00, United States national row)",
+                "name": "O*NET: U.S. wages for Computer Occupations, All Other",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/15-1299.00?st=NH"
+                "url": "https://www.onetonline.org/link/localwages/15-1299.07"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports the parent category definition employment size (472,000 people in 2024), the 2024—2034 growth label, and the projected annual job openings (31,300).",
+                  "BLS projects the U.S. parent group Computer Occupations, All Other (15-1299) from about 471,200 jobs in 2025 to 495,300 in 2035. The published net gain is about 24,200 (5.1%), with about 27,000 annual openings from growth and replacement. The baseline includes 4.9% self-employment. The data do not isolate blockchain engineers.",
                   "Employment is for 2024 and projections are for 2024—2034; accessed 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-outlook",
-                "limitation": "The employment and projections definition is Computer Occupations, All Other (SOC 15-1299), not a precise 15-1299.07 statistic.",
+                "limitation": "BLS projects the U.S. parent group Computer Occupations, All Other (15-1299) from about 471,200 jobs in 2025 to 495,300 in 2035. The published net gain is about 24,200 (5.1%), with about 27,000 annual openings from growth and replacement. The baseline includes 4.9% self-employment. The data do not isolate blockchain engineers.",
                 "market": "United States",
-                "name": "O*NET-SOC 15-1299.07 occupation summary (employment and projections fields)",
-                "period": "Employment is for 2024 and projections are for 2024—2034; accessed 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "U.S. BLS Table 1.2: Computer Occupations, All Other, 15-1299",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/summary/15-1299.07"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32367,17 +32440,17 @@
                 "url": "https://www.nist.gov/cyberframework"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports the requirements that providing blockchain information services to the public in mainland China requires implementing content security management responsibilities, real identity information authentication, security assessment for new products, filing, and record retention (no less than six months).",
+                  "Article 2 of the blockchain information services rules covers services offered to the public in mainland China through websites, apps and similar channels. Article 11 requires covered providers to file within ten working days after starting the service. Check personal data, production access, keys and public release under the relevant rules and organizational authority.",
                   "Effective 2019-02-15; accessed 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
                 "id": "faa-design-approvals",
-                "limitation": "The provisions govern blockchain information service activities and do not establish an occupational statistical definition.",
+                "limitation": "Article 2 of the blockchain information services rules covers services offered to the public in mainland China through websites, apps and similar channels. Article 11 requires covered providers to file within ten working days after starting the service. Check personal data, production access, keys and public release under the relevant rules and organizational authority.",
                 "market": "Mainland China",
-                "name": "Provisions on the Administration of Blockchain Information Services",
-                "period": "Effective 2019-02-15; accessed 2026-09-16",
+                "name": "Cyberspace Administration of China: Blockchain Information Services Rules, Articles 2 and 11",
+                "period": "2019-02-15",
                 "publisher": "Cyberspace Administration of China",
                 "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2019-01/10/c_1123971164.htm"
@@ -32440,11 +32513,11 @@
                 "id": "onet-localwages",
                 "limitation": "The United States national row is cited; the NH selection and state and metropolitan area rows on the page are not used on this page; SOC15-1299 is not a separate blockchain sub-occupation statistic.",
                 "market": "United States",
-                "name": "O*NET parent category 2025 wage percentiles (15-1299.00, United States national row)",
+                "name": "O*NET: U.S. wages for Computer Occupations, All Other",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/15-1299.00?st=NH"
+                "url": "https://www.onetonline.org/link/localwages/15-1299.07"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32479,17 +32552,17 @@
                 "url": "https://www.bls.gov/opub/hom/oes/"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "471.2 to 495.3 thousand; the table lists a net gain of 24.2 thousand, growth of 5.1%, and 27.0 thousand annual openings."
+                  "BLS projects the U.S. parent group Computer Occupations, All Other (15-1299) from about 471,200 jobs in 2025 to 495,300 in 2035. The published net gain is about 24,200 (5.1%), with about 27,000 annual openings from growth and replacement. The baseline includes 4.9% self-employment. The data do not isolate blockchain engineers."
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-ep",
-                "limitation": "The parent category contains several sub-occupations; the difference between rounded endpoints differs from the listed net gain, and the listed values are not back-calculated or overwritten.",
+                "limitation": "BLS projects the U.S. parent group Computer Occupations, All Other (15-1299) from about 471,200 jobs in 2025 to 495,300 in 2035. The published net gain is about 24,200 (5.1%), with about 27,000 annual openings from growth and replacement. The baseline includes 4.9% self-employment. The data do not isolate blockchain engineers.",
                 "market": "United States",
-                "name": "BLS occupational projections and worker characteristics Table 1.2 (SOC15-1299)",
-                "period": "2025—2035 projections; employment in thousands",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "name": "U.S. BLS Table 1.2: Computer Occupations, All Other, 15-1299",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
@@ -32646,20 +32719,20 @@
                 "url": "https://www.onetonline.org/link/industry/15-1299.07"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "2025—2035 other computer occupations parent category projections",
+                  "BLS projects the U.S. parent group Computer Occupations, All Other (15-1299) from about 471,200 jobs in 2025 to 495,300 in 2035. The published net gain is about 24,200 (5.1%), with about 27,000 annual openings from growth and replacement. The baseline includes 4.9% self-employment. The data do not isolate blockchain engineers.",
                   "Updated 2026; industry and wages 2025; projections 2025—2035; training directory 2025—26 and degrees awarded 2024—25"
                 ],
                 "evidence_type": "primary_document",
                 "id": "trends-current",
-                "limitation": "Group fields are not an individual threshold; the parent category is not a blockchain sub-occupation value; the training directory is not the same as real-time enrollment, and certification is not the same as an occupational license.",
+                "limitation": "BLS projects the U.S. parent group Computer Occupations, All Other (15-1299) from about 471,200 jobs in 2025 to 495,300 in 2035. The published net gain is about 24,200 (5.1%), with about 27,000 annual openings from growth and replacement. The baseline includes 4.9% self-employment. The data do not isolate blockchain engineers.",
                 "market": "United States",
-                "name": "2025—2035 other computer occupations parent category projections",
-                "period": "Updated 2026; industry and wages 2025; projections 2025—2035; training directory 2025—26 and degrees awarded 2024—25",
-                "publisher": "O*NET OnLine",
+                "name": "U.S. BLS Table 1.2: Computer Occupations, All Other, 15-1299",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/15-1299.07"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32671,7 +32744,7 @@
                 "id": "wages-current",
                 "limitation": "Group fields are not an individual threshold; the parent category is not a blockchain sub-occupation value; the training directory is not the same as real-time enrollment, and certification is not the same as an occupational license.",
                 "market": "United States",
-                "name": "2025 other computer occupations parent category national wage percentiles",
+                "name": "O*NET: U.S. wages for Computer Occupations, All Other",
                 "period": "Updated 2026; industry and wages 2025; projections 2025—2035; training directory 2025—26 and degrees awarded 2024—25",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
@@ -32933,6 +33006,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Beihang University’s October 16, 2026 notice lists one consortium blockchain engineer to design, develop and integrate ChainMaker systems. It asks for a related master’s degree or higher and at least three years in backend or blockchain development. It lists a labor dispatch contract, negotiable pay and a November 27, 2026 application deadline."
+                ],
+                "evidence_type": "primary_document",
+                "id": "buaa-blockchain-2026",
+                "limitation": "Beihang University’s October 16, 2026 notice lists one consortium blockchain engineer to design, develop and integrate ChainMaker systems. It asks for a related master’s degree or higher and at least three years in backend or blockchain development. It lists a labor dispatch contract, negotiable pay and a November 27, 2026 application deadline.",
+                "market": "Mainland China",
+                "name": "Beihang University: blockchain engineer vacancy notice",
+                "period": "2026-10-16",
+                "publisher": "Beihang University",
+                "scope": "recruitment_proxy",
+                "url": "https://rsc.buaa.edu.cn/info/1049/7331.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Huawei Cloud Blockchain Lab’s experienced-hire page lists a developer role for Shenzhen, Beijing and Xi’an with at least one year of experience. The role covers blockchain core components, decentralized identity, privacy computing and cross-chain modules, and asks for Go. The row gives neither pay nor headcount."
+                ],
+                "evidence_type": "primary_document",
+                "id": "huawei-cloud-blockchain",
+                "limitation": "Huawei Cloud Blockchain Lab’s experienced-hire page lists a developer role for Shenzhen, Beijing and Xi’an with at least one year of experience. The role covers blockchain core components, decentralized identity, privacy computing and cross-chain modules, and asks for Go. The row gives neither pay nor headcount.",
+                "market": "Mainland China",
+                "name": "Huawei Cloud Blockchain Lab: experienced hiring",
+                "period": "observed 2026-11-10",
+                "publisher": "Huawei Cloud",
+                "scope": "recruitment_proxy",
+                "url": "https://www.huaweicloud.com/lab/blockchain/career.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Try BC-83 in section 09: trace two ledger versions on paper or in local memory and write one page for a reviewer."
+                ],
+                "evidence_type": "editorial_design",
+                "id": "bc83-paper",
+                "limitation": "Try BC-83 in section 09: trace two ledger versions on paper or in local memory and write one page for a reviewer.",
+                "market": "Fictional exercise",
+                "name": "FermatMind BC-83: Ledger state and review handoff",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
               }
             ]
           },
@@ -34384,6 +34502,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://rsc.buaa.edu.cn/info/1049/7331.htm",
+            "id": "buaa-blockchain-2026",
+            "label": "Beihang University: blockchain engineer vacancy notice",
+            "scope": "recruitment_proxy"
+          },
+          {
+            "href": "https://www.huaweicloud.com/lab/blockchain/career.html",
+            "id": "huawei-cloud-blockchain",
+            "label": "Huawei Cloud Blockchain Lab: experienced hiring",
+            "scope": "recruitment_proxy"
+          },
+          {
+            "href": "https://www.cac.gov.cn/2019-01/10/c_1123971164.htm",
+            "id": "faa-design-approvals",
+            "label": "Cyberspace Administration of China: Blockchain Information Services Rules, Articles 2 and 11",
+            "scope": "contextual"
           }
         ],
         "tracks": [
@@ -35446,7 +35582,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "Occupation definition (mainland China)",
+              "指标": "Beihang consortium blockchain",
               "数值": {
                 "$item": "blockchain-engineers.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -35461,7 +35597,7 @@
               }
             },
             {
-              "指标": "Broad industry category",
+              "指标": "Huawei Cloud Blockchain Lab",
               "数值": {
                 "$item": "blockchain-engineers.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -36271,7 +36407,7 @@
       },
       "hero": {
         "h1": "Blockchain engineers",
-        "quick_answer": "Blockchain engineers maintain distributed, decentralized blockchain networks and applications, design and validate cryptographic protocols and secure design patterns, write and deploy node and client code, and test its security and performance; their work is not trading or investment and does not replace compliance judgments made by the institution.",
+        "quick_answer": "Blockchain engineers design, implement and test distributed ledgers, nodes, smart contracts or applications that connect on-chain and off-chain work. They document permissions, failure handling, tests and release evidence. Roles may focus on protocols, integration or platform operations.",
         "title": "Blockchain engineers"
       },
       "market_signal_card": {
@@ -37623,7 +37759,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests suit blockchain engineers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37710,7 +37846,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "MBTI (English)"
           },
           {
             "href": {
@@ -37720,7 +37856,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Enneagram (Chinese)"
+            "label": "Enneagram (English)"
           },
           {
             "href": {
@@ -37730,7 +37866,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Intelligence and reasoning (Chinese)"
+            "label": "IQ (English)"
           }
         ]
       },
@@ -38130,7 +38266,7 @@
     "badges": [
       "O*NET 15-1299.07 · Bright Outlook · security and release responsibility",
       "Distributed ledgers, cryptographic protocols, and node and deployment security",
-      "No separate occupation statistic for mainland China · visible gap markers"
+      "U.S. wages and employment use parent group 15-1299 · Mainland employer notices"
     ],
     "metrics": [
       {
@@ -38169,17 +38305,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What blockchain engineers do, what education and training is needed, what salaries and prospects look like in the United States and China, and which tasks AI will change; the parent category proxy definition and the mainland China data gap are retained."
+      "text": "Explore blockchain engineering, permissions and tests, compare two mainland employers and U.S. parent group data, and try a local ledger exercise."
     },
     "title": {
       "availability": "available",
       "text": "Blockchain engineers"
     }
   },
-  "source_content_sha256": "93e3f8d279bc0b64065877abce3c83702c66bf1a33784727c1130461cb2a8d90",
+  "source_content_sha256": "04c298e3238c66f809c001f35a6c533e2a88696d68ce02becbec9abf726738db",
   "subject": {
     "canonical_slug": "blockchain-engineers",
     "name": "Blockchain engineers",
-    "summary": "Blockchain engineers maintain distributed, decentralized blockchain networks and applications, design and validate cryptographic protocols and secure design patterns, write and deploy node and client code, and test its security and performance; their work is not trading or investment and does not replace compliance judgments made by the institution."
+    "summary": "Blockchain engineers design, implement and test distributed ledgers, nodes, smart contracts or applications that connect on-chain and off-chain work. They document permissions, failure handling, tests and release evidence. Roles may focus on protocols, integration or platform operations. BLS projects the U.S. parent group Computer Occupations, All Other (15-1299) from about 471,200 jobs in 2025 to 495,300 in 2035. The published net gain is about 24,200 (5.1%), with about 27,000 annual openings from growth and replacement. The baseline includes 4.9% self-employment. The data do not isolate blockchain engineers."
   }
 }

@@ -23371,13 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "若希望承担临床评估与治疗职责，先核认可PA项目、临床轮转、目标州执照和监督/协作规则，再比较成本、轮班和科室。若更偏好护理路径，应单独核护士执业资格和培养体系。"
+              "纸面体验｜给一张虚构交接单补一列复核状态，标出一条编号对不上且仍待核的结果，保留双方记录。 "
             ]
           },
           "id": "physician-assistants.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23665,14 +23664,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "医师助理收集病史、检查患者、安排并解释检验、判断和治疗疾病，教育患者，记录进展并与医师及其他团队成员协作；实际权限取决于州法和机构授权。"
+              "医师助理在适用执业范围和团队安排内评估患者、记录诊疗信息并参与后续照护。待复核的结果应交给有权限的临床人员。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "physician-assistants.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "cnclass"
+            "transfer-onet-29-1071.00"
           ],
           "type": "prose"
         },
@@ -24758,15 +24755,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可辅助整理获授权的病历、检索指南和拟写患者说明，但没有证据证明可独立安全诊断或开处方。PA必须核患者身份、病史、检查、药物、过敏与异常结果，按州法和医师协作规则亲自负责临床判断、沟通和记录。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：给一张虚构交接单补一列复核状态，标出一条编号对不上且仍待核的结果，保留双方记录。"
             ]
           },
           "id": "physician-assistants.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-29-1071.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32494,6 +32489,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-29-1071.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 29-1071.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/29-1071.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37738,10 +37760,10 @@
       "text": "医师助理"
     }
   },
-  "source_content_sha256": "fa184226ba5808ba8453ca88ac63b09b21b8b94dde47b53fb43db3a7c4b5ee43",
+  "source_content_sha256": "62035826c0bac717cda740476a22575c363da913e18195a007241849f5d95eac",
   "subject": {
     "canonical_slug": "physician-assistants",
     "name": "医师助理",
-    "summary": "美国医师助理（PA）在医师协作与各州规定的监督框架内询问病史、检查患者、判断问题、安排检查、治疗、记录并提供健康教育。通常需完成认可的硕士课程并取得州执照；美国PA-C不能直接转为中国医师执业资格。"
+    "summary": "医师助理在适用执业范围和团队安排内评估患者、记录诊疗信息并参与后续照护。待复核的结果应交给有权限的临床人员。"
   }
 }

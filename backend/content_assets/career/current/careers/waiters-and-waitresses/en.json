@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First see whether you are willing to listen to needs, take orders accurately, follow up with the kitchen, and correct omissions; then check whether long standing, busy meal periods, complaint communication, and shifts fit your personal conditions. Testing record-keeping and change ability with two paper table orders is more concrete than only judging whether you are outgoing."
+              "Paper check | Compare two slips for table 12. If the kitchen copy omits a confirmed allergy note, keep both slips and ask the shift lead to confirm before serving. "
             ]
           },
           "id": "waiters-and-waitresses.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24804,13 +24803,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Waiters take orders from table-side customers in restaurants and similar dining venues, relay order requirements to the kitchen, serve food, handle dining feedback, and check bills. Reliable delivery means the food, table number, quantity, and confirmed changes agree; on-site service, hygiene, and payment authority follow store arrangements. This page corresponds to O*NET-SOC 35-3031.00 and does not cover room cleaning or customer service in general."
+              "Servers take orders, relay modifications and timing to the kitchen, check the table and bill, and handle feedback within their assignment. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "waiters-and-waitresses.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-35-3031.00"
           ],
           "type": "prose"
         }
@@ -25487,18 +25485,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no adoption rate, replacement probability, or reviewable scoring basis for this occupation. The tasks checked show that order information handling differs from on-site food service; the US industry interviews and decision-maker survey give technology background only. Seeing how a specific system takes orders, checks food, and authorizes is more useful than one occupational replacement percentage. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare two slips for table 12. If the kitchen copy omits a confirmed allergy note, keep both slips and ask the shift lead to confirm before serving."
             ]
           },
           "id": "waiters-and-waitresses.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "bls",
-            "sag",
-            "r2-ai",
-            "nist",
-            "editorial"
+            "transfer-onet-35-3031.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33315,6 +33308,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-35-3031.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 35-3031.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/35-3031.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38812,10 +38832,10 @@
       "text": "Waiters and waitresses"
     }
   },
-  "source_content_sha256": "b8af3711eb294642c467b65bb8bbb5d4d17ccb29523fca8309843a366af49a02",
+  "source_content_sha256": "f1454e776c3a414619f3d78b87a0d1db88ec0772106473f7a1b4958bc0e1474d",
   "subject": {
     "canonical_slug": "waiters-and-waitresses",
     "name": "Waiters and waitresses",
-    "summary": "Waiters take orders from table-side customers in restaurants and similar dining venues, relay order requirements to the kitchen, serve food, handle dining feedback, and check bills. Reliable delivery means the food, table number, quantity, and confirmed changes agree; on-site service, hygiene, and payment authority follow store arrangements. This page corresponds to O*NET-SOC 35-3031.00 and does not cover room cleaning or customer service in general."
+    "summary": "Servers take orders, relay modifications and timing to the kitchen, check the table and bill, and handle feedback within their assignment."
   }
 }

@@ -32,9 +32,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:fit": {
         "status": "pending_mapping"
       },
@@ -1554,7 +1551,7 @@
         "status": "pending_mapping"
       },
       "item:aircraft-and-avionics-equipment-mechanics-and-technicians.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:aircraft-and-avionics-equipment-mechanics-and-technicians.sources.source-card.1": {
         "status": "mapped"
@@ -23268,13 +23265,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Aircraft and avionics equipment mechanics and technicians (the U.S. counterpart is BLS/O*NET 49-3011 aircraft mechanics and service technicians and 49-2091 avionics technicians) diagnose, adjust, repair or overhaul aircraft engines, airframe structures and onboard systems, and complete inspections and release sign-offs as required. The workplace is a hangar, a maintenance station or the apron, and the core measures are airworthiness, maintenance to the manual and traceable records, not flight operations or airline operations. People worth exploring this usually want to work step by step to the manual and the job card, judge faults with instruments and measuring tools, and are prepared for airworthiness responsibility and a noisy environment."
+              "Pause if you would rather treat an instrument alert and a mechanical record as one conclusion, or treat a completed card as a release. Appropriately authorized staff decide release."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23283,12 +23280,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Three short self-test tasks: from public material put together a landing-gear inspection job card that includes the steps, the tools and the inspection points; complete one component measurement record using fictional figures (with the readings, the tolerance and the verdict); and write up one troubleshooting exercise as a record containing the symptom, the hypothesis, the test, the conclusion and the release judgement. Doing them incompletely is normal; the point is to observe your own real reaction to working step by step to the manual, to precision requirements and to leaving a documented trail. (Editorial suggestion, not a hiring or licence test.)"
+              "Find “AG-20 | Handover across mechanics and avionics” in “Entry, qualifications and career development”. Assign evidence and owners, then answer the variant before checking the reference."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23313,13 +23310,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The U.S. wages and employment on this page come from the same BLS basis shown by the BLS Occupational Outlook Handbook and O*NET: 49-3011 aircraft mechanics and service technicians, a median annual wage of 79,870 U.S. dollars in 2025, month 5 (May); the combined group (49-3011 and 49-2091) had about 159,800 people employed in 2025, growth of 6% over 2025—2035 and about 13,100 openings a year; the 49-3011 employment shown by O*NET is about 139,400 people in 2024, growth of 4% over 2024—2034 and on average about 11,300 job openings a year across the projection period. The two bases and periods differ, and each item is labelled on this page. Mainland China has no precise national wage distribution for this occupation, so the industry-category and unit-type figures serve only as a broad-basis reference; the maintenance personnel licence, type ratings and release authority follow the Rules on the Administration of Licences for Civil Aircraft Maintenance Personnel and the employer's own rules, and this page is not a legal opinion."
+              "Try AG-20 and produce a one-page cross-team handover with two evidence items, their owners, one shared open item and the authority boundary. No equipment or real manuals are required."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23328,13 +23324,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: a technical post that diagnoses, repairs or overhauls aircraft airframes, engines and onboard systems in a hangar, a maintenance station or the apron under continuing airworthiness documents, carries out inspections and signs off a maintenance release within the authority granted."
+              "This profile covers both aircraft maintenance and avionics equipment work. Mechanics focus on airframes, powerplants and mechanical systems. Avionics technicians focus on electronics, signals and fault records. Both preserve work-card evidence, with separate limits for performing, reviewing and releasing work."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
+            "bls",
             "onet",
-            "onet"
+            "avionics-onet"
           ],
           "type": "prose"
         }
@@ -23351,13 +23348,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The tasks of aircraft and avionics equipment mechanics and technicians fall into four groups: inspection and diagnosis (inspect airframes, landing gear, hydraulic and de-icing systems to the job card and the manual, locate cracks, distortion and wear with X-rays, magnetic-particle testing and precision measuring tools, and listen to a running engine to judge a fault); repair and overhaul (replace or repair worn, defective or damaged parts, remove and install engines and components, and adjust and overhaul to the manual); inspection and release (check whether completed work meets the standards and the continuing airworthiness documents, carry out routine and special inspections as required, and sign off the release within the authority granted); and records and reporting (maintain the maintenance log, record preventive and corrective maintenance, and report a defect or unairworthy condition as required)."
+              "Aircraft mechanics inspect and troubleshoot airframes, powerplants and mechanical systems, then record work. Avionics technicians test electronic components, wiring, communications and navigation signals or equipment software and record faults. Both identify the reviewer and the scope of authority."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.1",
           "source_refs": [
+            "bls",
             "onet",
-            "onet"
+            "avionics-onet"
           ],
           "type": "prose"
         },
@@ -23415,13 +23413,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The four task groups carry different weight in the airframe, powerplant and avionics directions."
+              "The examples below emphasize mechanical maintenance. For avionics, also consider wiring, signal tests, equipment software and fault records."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.2",
           "source_refs": [
+            "bls",
             "onet",
-            "onet"
+            "avionics-onet"
           ],
           "type": "prose"
         },
@@ -23430,7 +23429,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS Occupational Outlook Handbook combined basis (49-3011 and 49-2091): a combined-group median annual wage in 2025, month 5 (May) of 80,180 U.S. dollars (an hourly wage of 38.55 U.S. dollars), of which aircraft mechanics and service technicians 79,870 U.S. dollars and avionics technicians 82,280 U.S. dollars; about 159,800 people employed in 2025; growth of 6% over 2025—2035 (faster than the average for all occupations, a net gain of about 9,400); and about 13,100 openings a year, mostly from replacement demand. The typical entry-level education is a post-secondary certificate (such as an FAA-approved course), and some posts require an associate degree or a high school diploma plus on-the-job training."
+              "The May 2025 U.S. combined median was $80,180 a year or $38.55 an hour. The medians were $79,870 for aircraft mechanics (49-3011) and $82,280 for avionics technicians (49-2091). The group median is not the average of these two. The BLS Handbook combined group has 159,800 jobs in 2025 and projects 169,200 in 2035: 6% rounded growth, about 9,400 net jobs and about 13,100 annual openings including replacements."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.onet-structured-fields-block.2",
@@ -23444,13 +23443,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Receive the job card and the manual: confirm the work order, the applicable manual and the version of the continuing airworthiness documents. → Inspection and diagnosis: inspect to the job card and locate defects with measuring tools and test equipment. → Decide the plan: determine the repair or replacement plan and the required parts to the manual. → Carry out the repair: work to the manual and record the torque, the dimensions and the replaced parts. → Inspect and sign off: review the completed work and sign off the release within the authority granted. → Record and report: complete the maintenance record, and report a defect or unairworthy condition."
+              "Confirm the work card: check document revisions. → Inspect: identify evidence for the assigned task. → Decide: document unresolved issues. → Perform: follow approved procedures. → Review: record results and submit them for review. → Release: appropriately authorized people decide."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23518,12 +23519,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "China's CCAR-66-R3 application conditions are checked under Article 66.6 for age, colour vision, a college diploma, basic-knowledge training, maintenance experience or qualifying practical training, the licence examination and completion of the technical English level test. The English test is completed and graded, and no uniform pass threshold may be invented; releasing a complex aircraft additionally requires the corresponding type rating, while non-complex aircraft and component authority are checked separately."
+              "The general education minimum for a mainland civil aircraft maintenance license is a junior-college diploma or higher. CCAR-66-R3 §66.6 also sets conditions on age, color vision, training, examinations and practical assessment, completion of the technical English level test, and no serious maintenance-related dishonesty record. The experience condition can be met by at least a year of authorized relevant maintenance work, excluding training and internships, or by a junior-college qualification or higher in science or engineering plus applicable practical training. Complex aircraft release also requires the corresponding aircraft type endorsement and organization authorization."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "editor"
+            "ccar66",
+            "ccar145"
           ],
           "type": "prose"
         },
@@ -23547,14 +23549,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The boundary comes down to four things: who sets the repair plan and the release standard, who carries out the maintenance and the inspection, who flies the aircraft, and who is responsible for operations and airworthiness oversight. Maintenance technicians carry out maintenance and inspection to the manual and the continuing airworthiness documents and sign off the release within the authority granted; flight operations are the pilot's responsibility; the repair plan and the release standard are set by the continuing airworthiness documents and the civil aviation authority; airworthiness oversight rests with the civil aviation authority; and a modification or design change beyond the authority granted must go through the airworthiness certification procedure."
+              "Maintenance staff inspect, repair and document assigned work. Verify review and release authority separately. Flight operations, design compliance and regulatory oversight have separate responsibilities."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23563,13 +23566,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Carry out maintenance to the manual and the job card, and sign off the release within the authority granted."
+              "Complete and document assigned work cards. Only appropriately authorized staff approve return to service."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23608,13 +23613,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The object is the aircraft airframe, engine, propeller and onboard systems; the basis is the continuing airworthiness documents, the maintenance manual, the job card, and the licence with its type ratings."
+              "Work may involve airframes, engines, propellers or onboard systems. Use applicable maintenance documents and work cards. Verify task, inspection and release authority separately."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -23623,14 +23629,16 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Aircraft and avionics equipment mechanics and technicians (the U.S. counterpart is BLS/O*NET 49-3011 aircraft mechanics and service technicians and 49-2091 avionics technicians) diagnose, adjust, repair or overhaul aircraft airframes, engines and onboard systems: inspect to the job card and the manual with non-destructive testing, replace or repair parts, test and adjust systems, complete inspections and sign off a maintenance release within the authority granted, and keep traceable maintenance records. The workplace is a hangar, a maintenance station or the apron. On the mainland China side, civil aircraft maintenance personnel are under a licence system, the licence is issued uniformly by the Civil Aviation Administration of China, is classified by aeroplane and rotorcraft and states the engine category, and releasing a complex aircraft requires an added type rating. As a boundary, this is not the same as a pilot who flies the aircraft, nor the same as a regulatory post that sets airworthiness standards or performs airworthiness certification."
+              "This profile covers both aircraft maintenance and avionics equipment work. Mechanics focus on airframes, powerplants and mechanical systems. Avionics technicians focus on electronics, signals and fault records. Both preserve work-card evidence, with separate limits for performing, reviewing and releasing work."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.definition-block.11",
           "source_refs": [
+            "bls",
             "onet",
-            "onet",
-            "onet"
+            "avionics-onet",
+            "ccar66",
+            "ccar145"
           ],
           "type": "prose"
         },
@@ -23654,13 +23662,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Receive the job card and the manual → inspection and diagnosis → decide the repair plan → work to the manual → inspect and sign off the release → record and report."
+              "Confirm the applicable work card and instructions → inspect and troubleshoot → confirm the plan under the applicable authority → perform assigned work → document inspection results → hand over to authorized review and release staff."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23699,13 +23709,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Work is divided by aircraft type and system, and before starting you should check the licence category, the type ratings and the scope of the authority."
+              "Check local rules and organization authorization for the task. Verify independent work, inspection and return-to-service signing separately. If signing for release of a complex aircraft in mainland China, also check the aircraft type endorsement and organizational release authority."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -23714,13 +23725,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Maintenance, inspection and release are each checked against the jurisdiction and the specific authority. The U.S. BLS distinguishes approved courses, on-the-job training and military training; an approved course can substitute for part of the examination eligibility and experience requirement, and an uncertificated person may perform maintenance under the supervision of a certificated A&P holder. Avionics posts may carry employer certification and similar requirements, and A&P or a course must not be generalised into a threshold for every post. In China, releasing a complex aircraft requires the licence and the corresponding type rating, while non-complex aircraft and component authority are checked under CCAR66.5/20, and not all supervised maintenance is treated as requiring an independent licence to release."
+              "Under U.S. Part 65, approved maintenance school documentation and qualifying practical experience are separate routes. Verify applicable written, oral and practical tests separately. Avionics job requirements depend on the employer and authorized work. For mainland China, check personal license and complex-aircraft type endorsement under CCAR-66. Under CCAR-145, verify the organization’s distinct authorization for maintenance and release."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.17",
           "source_refs": [
-            "editor",
-            "bls"
+            "faa",
+            "ccar66",
+            "ccar145"
           ],
           "type": "prose"
         },
@@ -23729,13 +23741,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The licence category, the type ratings and the release authority are set out in the maintenance regulations and the organisation's authorisation documents."
+              "Check local rules and organization authorization for the task. Verify independent work, inspection and return-to-service signing separately. If signing for release of a complex aircraft in mainland China, also check the aircraft type endorsement and organizational release authority."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -23744,13 +23757,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "A maintenance release must be carried out within the licence category and the type ratings; the licence privileges must not be exercised when the physiological condition is unsuitable (such as intoxication or illness); and work that does not meet the standard must not be released."
+              "In mainland China, release personnel at domestic maintenance organizations need a CAAC maintenance license, a technical English level matching the maintenance documents and authorization for the specific release task. They also need substantial maintenance experience on the applicable aircraft or component, including at least two years of relevant maintenance experience for aircraft release personnel. Non-complex aircraft follow the license category. Complex aircraft also require the valid matching aircraft type endorsement. Component release also follows organization requirements. Do not exercise license privileges when physically unfit or sign for work that does not meet the standard."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145"
           ],
           "type": "prose"
         },
@@ -23789,13 +23802,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Before starting, check at least six things: the licence and type ratings (category, engine category, complex-aircraft types); the employer type (airline, maintenance organisation MRO, manufacturer or general aviation); the scope of work (heavy check, line maintenance, component repair or avionics); the tooling and manual conditions (special tools, non-destructive testing equipment and the manual version); the duty pattern and work environment (shift work, apron and hangar, noise and temperature); and the training and authorisation path."
+              "Before taking a role, check the jurisdiction, organization maintenance scope, training and supervision, independent work authority, who handles inspection and release, and shifts and tool or document access. If the duties include signing for release, check personal qualifications and organizational authorization for that jurisdiction and task."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -23804,12 +23818,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Look at the licence category and the type ratings, not at the job title."
+              "Check local rules and organization authorization for the task. Verify independent work, inspection and return-to-service signing separately. If signing for release of a complex aircraft in mainland China, also check the aircraft type endorsement and organizational release authority."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.23",
           "source_refs": [
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -23818,13 +23834,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Licence and type ratings: the aeroplane or rotorcraft category, the engine category, and whether the type rating for the complex aircraft being maintained is within its validity period."
+              "If signing for release of a complex aircraft in mainland China, check the license, valid corresponding aircraft type endorsement and authorization for the specific release task. Verify regular work and inspection authority separately for the tasks assigned."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.profile.career-quick-answers-block.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -24035,14 +24052,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Suggested order of choice: first decide the direction (airframe, powerplant or avionics), then check the employer's maintenance scope against the licence category and the type ratings required, and finally confirm the tooling and manual conditions, the duty pattern and the authorisation path. The three directions share working to the manual, precision measurement, inspection records and airworthiness responsibility; moving to an adjacent occupation requires filling in different capabilities such as engineering design, industrial equipment or compliance oversight, and the licence and authorisation systems differ, so it cannot be transferred directly."
+              "Compare the actual work in airframes, powerplants and avionics. Check organization scope, supervision and assigned authority. The jurisdiction and duties determine whether to check an individual license, release qualifications or aircraft type. Then check tools, documents and shifts."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -24438,12 +24455,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Once the direction is decided, check the licence categories, type ratings and release authorisations that actually exist in each direction."
+              "Check local rules and organization authorization for the task. Verify independent work, inspection and return-to-service signing separately. If signing for release of a complex aircraft in mainland China, also check the aircraft type endorsement and organizational release authority."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.direction-comparison.adjacent-career-comparison-table.35",
           "source_refs": [
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         }
@@ -24716,15 +24735,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no AI adoption rate, effect, substitution ratio or wage/headcount causal study for this occupation. Test data, job-card records and parts scheduling are editorial candidate assistance scenarios only; a task description and a job-posting software mention cannot show that it is already adopted or will replace the work as a whole. Maintenance and release are carried out under the specific jurisdiction, the manual and the actual authority. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Tools can organize fictional fault records, locate document revisions or draft handovers. For actual work, verify approved procedures and original records. People with the appropriate authority decide fault attribution, review and release across mechanics and avionics. There is no measured displacement rate for the group here."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.ai-impact.ai-impact-table.18",
           "source_refs": [
+            "editor",
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "avionics-onet"
           ],
           "type": "prose"
         },
@@ -24775,7 +24793,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Used for the median wage in 2025, month 5 (May), the employment size and the 2025—2035 projection; both the combined-group and the per-occupation bases are labelled."
+              "Used for the median wage in May 2025, the employment size and the 2025—2035 projection; both the combined-group and the per-occupation bases are labelled."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.ai-impact.ai-impact-table.22",
@@ -25092,7 +25110,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "A combined-group median annual wage in 2025, month 5 (May) of 80,180 U.S. dollars (of which 49-3011 is 79,870 and 49-2091 is 82,280 U.S. dollars); in 2025 about 159,800 people were employed; growth of 6% over 2025—2035 and about 13,100 openings a year, mostly from replacement demand."
+              "The May 2025 U.S. combined median was $80,180 a year or $38.55 an hour. The medians were $79,870 for aircraft mechanics (49-3011) and $82,280 for avionics technicians (49-2091). The group median is not the average of these two. The BLS Handbook combined group has 159,800 jobs in 2025 and projects 169,200 in 2035: 6% rounded growth, about 9,400 net jobs and about 13,100 annual openings including replacements."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.ai-impact.ai-impact-table.44",
@@ -25763,13 +25781,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Carrying out maintenance or a release beyond the licence category, the type ratings or the organisation's authorisation is a breach and multiplies the risk."
+              "Working or signing beyond the applicable authority creates safety and compliance risk. Check the local rules, task and organization authorization first."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.ai-impact.ai-impact-table.90",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -26524,12 +26543,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Article 66.6 of the Rules on the Administration of Licences for Civil Aircraft Maintenance Personnel (CCAR-66-R3) requires a college diploma or above, and completion of basic-knowledge training, passing the examination and the aviation maintenance technical English level test; a diploma is not a licence."
+              "CCAR-66-R3 §66.6 requires junior-college education or above, completion of specified basic training, and passing the applicable examinations and practical assessment. Applicants must complete the technical English level test. A diploma alone does not confer a license."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "editor"
+            "ccar66"
           ],
           "type": "prose"
         },
@@ -26552,12 +26571,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Practical training can substitute for part of the experience requirement"
+              "Practical training route for the experience condition"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "editor"
+            "ccar66"
           ],
           "type": "prose"
         },
@@ -26566,12 +26585,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The rule allows a person with a college diploma or above in a science or engineering field to substitute practical training for the corresponding part of the requirement of at least 1 year of maintenance work experience; the specific outcome is subject to the civil aviation authority's review conclusion."
+              "Applicants with a junior-college qualification or higher in science or engineering can meet the experience condition through applicable practical training. A year of authorized relevant maintenance work is a separate route."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "editor"
+            "ccar66"
           ],
           "type": "prose"
         },
@@ -26654,12 +26673,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Applying for the licence requires at least 1 year of maintenance experience authorised by the organisation (training and internships do not count); a first application for a type rating in a category additionally requires at least 6 consecutive months of type maintenance internship."
+              "Under CCAR-66-R3 §66.6, verify either at least a year of authorized relevant maintenance work, excluding training and internships, or a junior-college qualification or higher in science or engineering plus applicable practical training. Under §66.19, a first type endorsement in a category also requires at least six consecutive months of internship after passing the aircraft type maintenance training and examinations."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "editor"
+            "ccar66"
           ],
           "type": "prose"
         },
@@ -26683,12 +26702,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The main source of posts; a maintenance release must be within the licence category and the type ratings."
+              "In mainland China, release personnel at domestic maintenance organizations need a CAAC maintenance license, a technical English level matching the maintenance documents and authorization for the specific release task. They also need substantial maintenance experience on the applicable aircraft or component, including at least two years of relevant maintenance experience for aircraft release personnel. Non-complex aircraft follow the license category. Complex aircraft also require the valid matching aircraft type endorsement. Component release also follows organization requirements."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "editor"
+            "ccar66",
+            "ccar145"
           ],
           "type": "prose"
         },
@@ -26785,13 +26805,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "A like-for-like comparison needs the licence category, the type ratings, the nature of the organisation and the duty pattern to match; an industry proxy cannot replace the written pay terms."
+              "Two named hiring examples; no pay listed"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "ag-ku",
+            "ag-cr"
           ],
           "type": "prose"
         },
@@ -26800,13 +26820,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "When checking your own expectations, first confirm the licence category and the type ratings, the nature of the organisation (airline / MRO / manufacturer / general aviation), the aircraft type and the post, and the duty and travel arrangements; do not use an industry proxy in place of the written pay terms."
+              "Kunming Airlines lists 15 aircraft maintenance engineers in Kunming on Air China Group’s site. Domestic 2027 graduates need a related bachelor’s degree or higher; check its English conditions. Duties include work cards, records and reporting to release personnel. The listing gives a November 20, 2026 deadline and no pay. Cronda lists 30 mechanical/electromechanical accessory maintenance worker positions across Beijing, Chongqing, Shenzhen, Xi’an and Jiaxing. It lists associate-level education or higher and prefers relevant licensing and experience. Work includes radio, instrument and mechanical accessory maintenance. The deadline is December 31, 2026 and no pay is listed."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "ag-ku",
+            "ag-cr"
           ],
           "type": "prose"
         },
@@ -26829,7 +26849,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics data cover urban corporate units with 5 or more persons and exclude sole proprietors and the self-employed; the wage is gross pay before tax and includes the individual's social insurance, housing fund and income tax contributions. A sector figure is not the wage for this occupation. Maintenance personnel pay follows the employer's own rules."
+              "Neither named example lists pay. There is no nationwide mainland wage for this combined group here. NBS reports a 2025 urban non-private transport, storage and postal average of CNY 133,981 a year as industry context only."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.china-salary.career-snapshot-primary-locale.48",
@@ -26969,12 +26989,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "79,870 U.S. dollars/year"
+              "U.S. combined group: $80,180/year"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.china-salary.career-snapshot-primary-locale.59",
           "source_refs": [
-            "oews"
+            "bls"
           ],
           "type": "prose"
         }
@@ -26991,7 +27011,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS Occupational Outlook Handbook: aircraft and avionics equipment mechanics and technicians｜https://www.bls.gov/ooh/installation-maintenance-and-repair/aircraft-and-avionics-equipment-mechanics-and-technicians.htm ; the BLS OEWS wage percentiles for 2025, month 5 (May) shown by O*NET: 49-3011.00｜https://www.onetonline.org/link/localwages/49-3011.00 ; O*NET 49-3011.00 Aircraft Mechanics and Service Technicians occupation summary｜https://www.onetonline.org/link/summary/49-3011.00"
+              "BLS Occupational Outlook Handbook: aircraft and avionics equipment mechanics and technicians｜https://www.bls.gov/ooh/installation-maintenance-and-repair/aircraft-and-avionics-equipment-mechanics-and-technicians.htm ; the BLS OEWS wage percentiles for May 2025 shown by O*NET: 49-3011.00｜https://www.onetonline.org/link/localwages/49-3011.00 ; O*NET 49-3011.00 Aircraft Mechanics and Service Technicians occupation summary｜https://www.onetonline.org/link/summary/49-3011.00"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.8",
@@ -27019,7 +27039,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The upper bound of the 10th annual-wage percentile (hourly wage 23.45 U.S. dollars), a position in a statistical distribution that does not represent a starting wage or a minimum wage.; the BLS 2025, month 5 (May) wage percentiles shown by O*NET｜https://www.onetonline.org/link/localwages/49-3011.00"
+              "The upper bound of the 10th annual-wage percentile (hourly wage 23.45 U.S. dollars), a position in a statistical distribution that does not represent a starting wage or a minimum wage.; the BLS May 2025 wage percentiles shown by O*NET｜https://www.onetonline.org/link/localwages/49-3011.00"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.10",
@@ -27047,7 +27067,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 25th annual-wage percentile (hourly wage 30.11 U.S. dollars).; the BLS 2025, month 5 (May) wage percentiles shown by O*NET｜https://www.onetonline.org/link/localwages/49-3011.00"
+              "The 25th annual-wage percentile (hourly wage 30.11 U.S. dollars).; the BLS May 2025 wage percentiles shown by O*NET｜https://www.onetonline.org/link/localwages/49-3011.00"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.12",
@@ -27061,12 +27081,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "79,870 U.S. dollars/year"
+              "Combined group: $80,180/year; $38.55/hour"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "oews"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27075,7 +27095,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The median annual wage for 49-3011 in 2025, month 5 (May) (hourly wage 38.40 U.S. dollars); the combined-group median is 80,180 U.S. dollars and 49-2091 is 82,280 U.S. dollars.; BLS Occupational Outlook Handbook: aircraft and avionics equipment mechanics and technicians｜https://www.bls.gov/ooh/installation-maintenance-and-repair/aircraft-and-avionics-equipment-mechanics-and-technicians.htm"
+              "The group and each suboccupation have separate published medians.; BLS Occupational Outlook Handbook: combined aircraft and avionics group｜https://www.bls.gov/ooh/installation-maintenance-and-repair/aircraft-and-avionics-equipment-mechanics-and-technicians.htm"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.14",
@@ -27103,7 +27123,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 75th annual-wage percentile (hourly wage 47.66 U.S. dollars).; the BLS 2025, month 5 (May) wage percentiles shown by O*NET｜https://www.onetonline.org/link/localwages/49-3011.00"
+              "The 75th annual-wage percentile (hourly wage 47.66 U.S. dollars).; the BLS May 2025 wage percentiles shown by O*NET｜https://www.onetonline.org/link/localwages/49-3011.00"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.16",
@@ -27145,12 +27165,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "About 140,000 people (2025, 49-3011 single occupation)"
+              "Combined group: 159,800 in 2025 → 169,200 in 2035"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "ep"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27159,13 +27179,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET49-3011 single occupation 140,000 people in 2025, a growth category of 5%—6% over 2025—2035 and 11,400 openings a year; it cannot stand in for the combined-group figures. The BLS combined group on the same base year is 159,800 people, a different scope."
+              "Combined U.S. group; do not extrapolate to China."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27188,7 +27207,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Combined group 2025—2035 growth 6% and a net gain of about 9,400; the aircraft 49-3011 single-occupation OOH figure is rounded to 5%, with no older period spliced on and no mixed occupational scope."
+              "Official rounded growth of 6%; a net gain of about 9,400."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.22",
@@ -27216,7 +27235,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The combined-group annual openings, most of them from replacement demand, which are not the same as net new posts.; BLS Occupational Outlook Handbook: aircraft and avionics equipment mechanics and technicians｜https://www.bls.gov/ooh/installation-maintenance-and-repair/aircraft-and-avionics-equipment-mechanics-and-technicians.htm"
+              "Annual openings include replacements and are not net new jobs.; BLS Occupational Outlook Handbook: combined aircraft and avionics group｜https://www.bls.gov/ooh/installation-maintenance-and-repair/aircraft-and-avionics-equipment-mechanics-and-technicians.htm"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.24",
@@ -27230,7 +27249,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The wage is labelled 2025, month 5 (May), and the projection 2025—2035; the BLS combined group and the 49-3011/49-2091 per-occupation scopes are used separately and cannot be swapped or extrapolated to China."
+              "The wage is labelled May 2025, and the projection 2025—2035; the BLS combined group and the 49-3011/49-2091 per-occupation scopes are used separately and cannot be swapped or extrapolated to China."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.25",
@@ -27244,7 +27263,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025, month 5 (May) median annual wage for U.S. 49-3011 aircraft mechanics and service technicians is 79,870 U.S. dollars (hourly wage 38.40 U.S. dollars); the 10th percentile is below 48,780 U.S. dollars and the 90th percentile is above 128,890 U.S. dollars. The combined group (including 49-2091 avionics technicians) has a median of 80,180 U.S. dollars. The median is the midpoint of a distribution, not a starting wage."
+              "The May 2025 U.S. combined median was $80,180 a year or $38.55 an hour. The medians were $79,870 for aircraft mechanics (49-3011) and $82,280 for avionics technicians (49-2091). The group median is not the average of these two. The BLS Handbook combined group has 159,800 jobs in 2025 and projects 169,200 in 2035: 6% rounded growth, about 9,400 net jobs and about 13,100 annual openings including replacements."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.26",
@@ -27370,7 +27389,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no median wage for 49-3011 within this broad industry category, and the employment share is not used to fill it in; the BLS OOH lists finer industry wages separately, so it cannot be said that none are published."
+              "No combined-group wage median for this broad industry was found."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.35",
@@ -27384,7 +27403,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The O*NET49-3011 industry distribution is the 2025 broad-category employment share; BLS2025 OOH wages list finer industries, and the two cannot be equated directly or a wage inferred from a share."
+              "O*NET lists employment shares for the aircraft mechanics suboccupation, not industry wages. BLS lists some narrower industry wages separately."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.36",
@@ -27413,7 +27432,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no median wage for 49-3011 within this broad industry category, and the employment share is not used to fill it in; the BLS OOH lists finer industry wages separately, so it cannot be said that none are published."
+              "No combined-group wage median for this broad industry was found."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.38",
@@ -27427,7 +27446,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The O*NET49-3011 industry distribution is the 2025 broad-category employment share; BLS2025 OOH wages list finer industries, and the two cannot be equated directly or a wage inferred from a share."
+              "O*NET lists employment shares for the aircraft mechanics suboccupation, not industry wages. BLS lists some narrower industry wages separately."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.39",
@@ -27456,7 +27475,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no median wage for 49-3011 within this broad industry category, and the employment share is not used to fill it in; the BLS OOH lists finer industry wages separately, so it cannot be said that none are published."
+              "No combined-group wage median for this broad industry was found."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.41",
@@ -27470,7 +27489,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The O*NET49-3011 industry distribution is the 2025 broad-category employment share; BLS2025 OOH wages list finer industries, and the two cannot be equated directly or a wage inferred from a share."
+              "O*NET lists employment shares for the aircraft mechanics suboccupation, not industry wages. BLS lists some narrower industry wages separately."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.42",
@@ -27499,12 +27518,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "79,870 U.S. dollars/year"
+              "Combined group: $80,180/year"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "oews"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27513,7 +27532,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The national median annual wage for this occupation in 2025, month 5 (May) (BLS Occupational Outlook Handbook / OEWS), used for comparison and not an industry figure."
+              "The national median annual wage for this occupation in May 2025 (BLS Occupational Outlook Handbook / OEWS), used for comparison and not an industry figure."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.45",
@@ -27527,7 +27546,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "No. The 79,870 U.S. dollars is the national median annual wage for 2025, month 5 (May) and represents the midpoint of a distribution; entry-level pay depends on the training stage, the licence and type authorisation, the organisation and the region, and this page provides no starting-wage figure."
+              "No. The group’s $80,180 is a statistical median. Check each employer, role, location and hours for an offer."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.46",
@@ -27541,12 +27560,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "No. The hourly and annual wages are two expressions of the same statistical distribution (a median of 38.40 U.S. dollars per hour corresponding to 79,870 U.S. dollars per year); actual income also depends on overtime, night-shift allowances and travel arrangements."
+              "The combined hourly median is $38.55. It does not establish take-home pay."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "oews"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27555,7 +27574,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "From the U.S. Bureau of Labor Statistics Occupational Employment and Wage Statistics (OEWS) for 2025, month 5 (May), shown by O*NET and consistent with the 49-3011 basis of the BLS Occupational Outlook Handbook; the combined-group basis is given separately in the Occupational Outlook Handbook."
+              "From the U.S. Bureau of Labor Statistics Occupational Employment and Wage Statistics (OEWS) for May 2025, shown by O*NET and consistent with the 49-3011 basis of the BLS Occupational Outlook Handbook; the combined-group basis is given separately in the Occupational Outlook Handbook."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.48",
@@ -27583,12 +27602,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "79,870 U.S. dollars/year"
+              "Combined group: $80,180/year"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "oews"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27611,7 +27630,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Median: 79,870 U.S. dollars/year (49-3011), the midpoint of a distribution rather than an average wage; the combined group is 80,180 U.S. dollars on a different basis."
+              "The May 2025 U.S. combined median was $80,180 a year or $38.55 an hour. The medians were $79,870 for aircraft mechanics (49-3011) and $82,280 for avionics technicians (49-2091). The group median is not the average of these two."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.52",
@@ -27669,19 +27688,19 @@
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Aircraft mechanics and technicians",
@@ -27961,12 +27980,11 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "RCI"
+              "RCI (49-3011.00 only)"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28207,13 +28225,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Start with three observable behaviours: whether the person can work step by step to the manual and the job card without skipping steps, whether they can use measuring tools repeatedly and keep the readings accurate, and whether they hold to the inspection points and the documented trail under noise, temperature and schedule pressure. The RCI interest code is a reviewable starting point, but fitness is ultimately decided by the training, examination and licence standards."
+              "Use AG-20 to see whether you can distinguish mechanical and avionics records and route each to the right reviewer. RCI applies only to the O*NET 49-3011.00 aircraft mechanics profile. The combined group has no separate interest code."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.fit.personality-fit-block.27",
           "source_refs": [
             "onet",
-            "onet"
+            "editor",
+            "avionics-onet"
           ],
           "type": "prose"
         },
@@ -28252,13 +28271,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Qualification must be obtained through the training and licence path, and a release must be within the authority granted."
+              "Check local rules and organization authorization for the task. Verify independent work, inspection and return-to-service signing separately. If signing for release of a complex aircraft in mainland China, also check the aircraft type endorsement and organizational release authority."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -28641,13 +28661,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The fit signals come from observable behaviour: whether the person can work step by step to the manual and the job card, whether they can use measuring tools repeatedly and keep the readings accurate, and whether they hold to the inspection points and the documented trail under noise, temperature and schedule pressure. The RCI interest code is a reviewable starting point."
+              "Use AG-20 to see whether you can distinguish mechanical and avionics records and route each to the right reviewer. RCI applies only to the O*NET 49-3011.00 aircraft mechanics profile. The combined group has no separate interest code."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.fit.personality-fit-block.56",
           "source_refs": [
             "onet",
-            "onet"
+            "editor",
+            "avionics-onet"
           ],
           "type": "prose"
         },
@@ -29100,13 +29121,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Carrying out maintenance or a release beyond the licence category, the type ratings or the organisation's authorisation is a breach and multiplies the risk."
+              "Working or signing beyond the applicable authority creates safety and compliance risk. Check the local rules, task and organization authorization first."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -29360,7 +29382,7 @@
               [
                 "Airframe and structural maintenance direction",
                 "Carry out cleaning, inspection and simple removal and installation under supervision, and complete the job card.",
-                "Able to complete the inspection items to the job card and record the readings faithfully.",
+                "Kunming Airlines lists 15 aircraft maintenance engineers in Kunming on Air China Group’s site. Domestic 2027 graduates need a related bachelor’s degree or higher; check its English conditions. Duties include work cards, records and reporting to release personnel. The listing gives a November 20, 2026 deadline and no pay.",
                 "An inspection job card and a list of safety points compiled from public material (no real maintenance data used).",
                 "This direction carries out aircraft structural maintenance and inspection; the inspector role and the additional authorised certification roles have their tasks and authority checked separately, and the occupation title does not uniformly exclude all inspection or oversight duties."
               ],
@@ -29374,7 +29396,7 @@
               [
                 "Avionics direction",
                 "Carry out wiring inspection and simple testing under supervision, and record it.",
-                "Able to carry out basic measurements to the wiring diagram and record them.",
+                "Cronda lists 30 mechanical/electromechanical accessory maintenance worker positions across Beijing, Chongqing, Shenzhen, Xi’an and Jiaxing. It lists associate-level education or higher and prefers relevant licensing and experience. Work includes radio, instrument and mechanical accessory maintenance. The deadline is December 31, 2026 and no pay is listed.",
                 "A written exercise on reading wiring diagrams and recording measurements.",
                 "This direction centres on avionics maintenance, testing and troubleshooting, and O*NET also lists modification design and prototype tasks; design, certification or additional inspection authority is a matter of the actual qualification and authorisation and is not uniformly excluded by the occupation title."
               ],
@@ -29387,18 +29409,21 @@
               ],
               [
                 "Inspection and release",
-                "Complete the inspection and sign off the release within the authority granted.",
+                "Carry out authorized inspections and preserve results. Release requires separate authority.",
                 "Able to explain the basis of the conformity judgement and the scope of the authority.",
-                "A written review framework for one inspection and one release judgement.",
-                "Unlike a quality-system management post: the individual bears the release responsibility for their own job card scope."
+                "List inspection evidence, the reviewer and gaps in a paper handover.",
+                "Completing a work card does not confer release authority. Check the applicable license, type and organization authorization."
               ]
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "ag-ku",
+            "ag-cr",
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "title": "How do the entry posts and the early tasks of aircraft and avionics equipment mechanics and technicians compare?",
           "type": "table"
@@ -29411,16 +29436,16 @@
               {
                 "id": "education",
                 "values": [
-                  "The U.S. BLS distinguishes approved courses, on-the-job or military training; an approved course can substitute for part of the examination eligibility and experience requirement, and an uncertificated person may perform maintenance under the supervision of a certificated A&P holder. Avionics posts may carry employer certification and similar requirements, and A&P or a course must not be generalised into a threshold for every post. The Chinese maintenance licence education condition and the O*NET respondent education distribution are handled separately.",
-                  "The BLS lists a post-secondary certificate as the entry-level education for this occupation; the O*NET education survey shows 66% with a post-secondary certificate, 15% with an associate degree and 10% with a high school diploma (respondent shares).",
-                  "The education and training requirements are governed by official FAA and Civil Aviation Administration of China information, and this page does not substitute third-party statistics for them."
+                  "Under U.S. Part 65, approved maintenance school documentation and qualifying practical experience are separate routes. Verify applicable written, oral and practical tests separately. Avionics job requirements depend on the employer and authorized work.",
+                  "BLS lists a postsecondary nondegree award as typical entry education for both U.S. occupations. That is an occupational classification, not a universal licensing or hiring requirement.",
+                  "For mainland China, check personal license and complex-aircraft type endorsement under CCAR-66. Under CCAR-145, verify the organization’s distinct authorization for maintenance and release."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
                   "A China CCAR66.6/7 licence application must be checked for the colour-vision condition and its supporting evidence, the training and the examinations; the U.S. certification and the conditions of each post are checked separately, and Chinese medical conditions are not extrapolated.",
-                  "A maintenance release must be within the licence category and the type ratings; the licence privileges must not be exercised when the physiological condition is unsuitable (such as intoxication or illness).",
+                  "In mainland China, release personnel at domestic maintenance organizations need a CAAC maintenance license, a technical English level matching the maintenance documents and authorization for the specific release task. They also need substantial maintenance experience on the applicable aircraft or component, including at least two years of relevant maintenance experience for aircraft release personnel. Non-complex aircraft follow the license category. Complex aircraft also require the valid matching aircraft type endorsement. Component release also follows organization requirements.",
                   "The mainland China side is governed by the Rules on the Administration of Licences for Civil Aircraft Maintenance Personnel (CCAR-66-R3); work that does not meet the standard must not be released."
                 ]
               },
@@ -29448,7 +29473,11 @@
             "editor",
             "onet",
             "census",
-            "facilities"
+            "facilities",
+            "ep",
+            "ccar66",
+            "faa",
+            "ccar145"
           ],
           "title": "What do employers usually look at in recruitment?",
           "type": "cards"
@@ -29461,42 +29490,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional task one: from public material, put together a landing-gear inspection job card containing the steps, the tools and the inspection points.",
-                  "Fictional task two: complete one component measurement record with fictional figures (readings, tolerance and verdict).",
-                  "Fictional task three: write up one troubleshooting record (symptom, hypothesis, test, conclusion and release judgement).",
-                  "All material uses public sources and fictional figures; no real maintenance data and no internal organisation documents are used."
+                  "Case: a fictional trainer K20, with separate mechanics and avionics teams.",
+                  "M-20: the mechanical card says the visual check was completed, with no replacement recorded; it has a card number and recorder. A-20: an avionics alert is logged at 10:02 with an equipment ID but no clock check.",
+                  "Rules: send the mechanical card to a mechanics reviewer and the alert and clock evidence to an avionics reviewer. Compare across teams only when the event time is traceable. The paper comparison establishes neither cause nor release.",
+                  "Shared context: the mechanical card says only “morning” and has no shared event ID. Equipment, alerts and records are fictional."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Job card writing: list the steps, the tools and measuring tools used, and the inspection points.",
-                  "Measurement record: list the measuring tools, the readings, the tolerance and the verdict.",
-                  "Troubleshooting record: set out the basis and the release judgement in order from the symptom to the conclusion."
+                  "First route M-20 and A-20. Record the evidence and each reviewer, then state whether a shared conclusion is possible and what is missing.",
+                  "Variant: add a traceable clock check for A-20 only. M-20 still says “morning.” Which gap can close? Can you link the events?",
+                  "Complete both cases and produce a one-page cross-team handover with two evidence items, their owners, one shared open item and the authority boundary before checking the reference."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First confirm the applicability and the version of the public material, then compile from it, and do not use an internal manual.",
-                  "Keep the reading and the verification record for every measurement, and re-measure anything out of tolerance.",
-                  "For every anomaly, write down the basis for identifying it, the action taken and the reporting path."
+                  "Submit both versions independently",
+                  "The one-page cross-team handover lists both originals, their reviewers, the shared open item and the authority boundary.",
+                  "After submitting, open “K20 cross-team handover reference (open after submitting)” in the FAQ."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "The work is used only to show the level of preparation and the method; it is not a licence or hiring test and does not represent any maintenance qualification.",
-                  "No real maintenance data and no internal organisation documents may be included, inferred or circulated in the work; the actual training and authorisation are governed by official information."
+                  "Record the evidence and outstanding items for the original and the one-change variant separately.",
+                  "Use no real manuals or equipment. Paper review is not actual maintenance or release."
                 ]
               }
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "Entry exercise: one complete aircraft and avionics equipment mechanics and technicians task (fictional material)",
+          "title": "AG-20 | Handover across mechanics and avionics",
           "type": "cards"
         },
         {
@@ -29523,8 +29552,8 @@
               {
                 "id": "report-summary",
                 "values": [
-                  "A one-page preparation summary: the target direction, the items already met and still to be strengthened, and the timetable.",
-                  "Attach the list of public sources and the source links, noting the date they were checked."
+                  "Cross-team handover",
+                  "Produce a one-page cross-team handover with two evidence items, their owners, one shared open item and the authority boundary. Keep both records and list any unresolved evidence."
                 ]
               },
               {
@@ -29564,7 +29593,7 @@
                 "Application and qualification review",
                 "Whether the education, age and physical condition (including colour vision) requirements for training or recruitment are met.",
                 "Able to provide the supporting documents the official process requires and to report faithfully.",
-                "Fraud or applying through an unofficial intermediary leads directly to disqualification."
+                "Apply through official channels and provide accurate documents. Falsification or improperly obtained credentials are handled under applicable rules; the authority determines the result."
               ],
               [
                 "Training and examinations",
@@ -29589,7 +29618,7 @@
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.interview-probation.1",
           "source_refs": [
             "onet",
-            "onet"
+            "ccar66"
           ],
           "title": "What may be assessed in interviews and the trial period, and which conclusions cannot be inferred?",
           "type": "table"
@@ -29602,57 +29631,61 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1｜Checking the requirements",
-                  "Check the education, training, colour-vision and licence requirements through official channels, and record the items still to confirm."
+                  "Day 1",
+                  "Compare the two O*NET profiles or the Kunming and Cronda postings. Note separate mechanics and avionics outputs."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2｜Reading the manual",
-                  "Choose one piece of public maintenance material and practise locating the job-card steps, the measuring tools and the inspection points."
+                  "Day 2",
+                  "Copy both original records and mark missing fields."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3｜Measurement practice",
-                  "Complete one measurement record with fictional figures (readings, tolerance and verdict)."
+                  "Day 3",
+                  "Identify each record’s reviewer and evidence."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4｜Writing a job card",
-                  "Put together an inspection job card containing the steps, the tools and the inspection points."
+                  "Day 4",
+                  "Compare timing and event IDs, and formulate the shared evidence request."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5｜Writing up troubleshooting",
-                  "Write up one troubleshooting record (symptom, hypothesis, test and conclusion)."
+                  "Day 5",
+                  "Complete the A-20 clock variant and note which status can change."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6｜Protection and safety",
-                  "Set out the protection points and the order for putting equipment on for noise, chemicals and work at height."
+                  "Day 6",
+                  "Complete the original and one-change variant independently without opening the reference. The one-page cross-team handover lists both originals, their reviewers, the shared open item and the authority boundary."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7｜Review and decision",
-                  "Review the week of preparation: whether you are willing to work to the manual long term, to measure repeatedly and to bear airworthiness responsibility, and decide from that whether to continue."
+                  "Day 7",
+                  "Open “K20 cross-team handover reference (open after submitting)” in the FAQ. Record a difference or confirm there was none, then decide what to explore next."
                 ]
               }
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor",
+            "onet",
+            "avionics-onet",
+            "ag-ku",
+            "ag-cr"
           ],
           "title": "Seven-day experience: close the loop on one aircraft and avionics equipment mechanics and technicians task with fictional material",
           "type": "timeline"
@@ -29662,18 +29695,21 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "After the week of preparation, answer first: am I willing to work step by step to the manual and the job card, to measure repeatedly and to bear airworthiness and release responsibility long term?",
+              "Review both records: did you identify the evidence, separate findings from open questions and name the right reviewer?",
               "Judging the direction: airframe and structural maintenance, powerplant maintenance, or avionics.",
               "Judging preparation: whether the colour-vision and medical conditions are met, and whether the mechanical or electrical grounding needs strengthening.",
               "Judging the boundary: whether it is clear that an aviation maintenance qualification belongs to a different system from engineering design and airworthiness certification, and that the two cannot be converted into each other.",
               "Judging tolerance: whether you can adapt to noise, temperature and contaminant environments and to shift work.",
-              "After entry, progress within the system: obtain the licence, accumulate type experience, obtain type ratings and release independently, and eventually take on inspection or mentoring duties.",
-              "Turning public-material work, measurement practice and record-keeping habits into a reviewable preparation history is more reliable than trusting the promises of unofficial bodies."
+              "Verify requirements for the target role, jurisdiction, aircraft type or license category, and employer authority. Work-card completion, review and release are different duties; there is no universal progression.",
+              "Use any observed difference to choose mechanics, avionics or more recordkeeping practice."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "editor",
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "title": "How to decide at the end of the seven days whether to continue",
           "type": "list"
@@ -29770,15 +29806,17 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "The maintenance personnel licence is distinguished by aircraft category and engine category and must correspond to a type rating; a complex aircraft must not be released without the corresponding type rating.",
-              "The duties and qualifications for maintenance, design and airworthiness certification are checked separately; how existing education, experience and qualifications are recognised depends on the target jurisdiction and its rules, and neither automatic general validity nor a blanket non-convertibility is asserted.",
-              "This page provides no education-distribution proportions and no wage figures: the U.S. part is on the BLS Occupational Outlook Handbook and O*NET 49-3011 basis; the mainland China part is governed by the Rules on the Administration of Licences for Civil Aircraft Maintenance Personnel.",
-              "Those interested should check the education, training, colour-vision and experience requirements in the official information and apply through official channels."
+              "Mainland CCAR-66-R3 distinguishes airplane and rotorcraft licenses and marks the engine category. For complex-aircraft release, check the type endorsement. Under CCAR-145-R4, the maintenance organization assigns separate authority for independent work and release.",
+              "The FAA mechanic certificate may carry Airframe, Powerplant or both ratings. Check the school, experience and test routes in Part 65. Avionics employers may have task authorizations. Check A&P ratings, employer credentials and release privileges separately.",
+              "Verify hiring conditions in each posting and jurisdiction.",
+              "A paper handover does not replace training, authorization or release."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.credential-boundary.1",
           "source_refs": [
-            "bls",
+            "ccar66",
+            "ccar145",
+            "faa",
             "editor"
           ],
           "title": "Notes on qualification and authorisation boundaries",
@@ -29789,18 +29827,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Scope of the sample: this page does not cite any recruitment announcement as evidence of wages or demand; recruitment and admission conditions change with time and organisation, so the official publication governs.",
-              "To judge whether a post belongs to this occupation, look at the task description rather than the title: whether it involves inspecting, maintaining and checking aircraft airframes, engines or onboard systems under continuing airworthiness documents, and releasing within the authority granted."
+              "Kunming Airlines lists 15 aircraft maintenance engineers in Kunming on Air China Group’s site. Domestic 2027 graduates need a related bachelor’s degree or higher; check its English conditions. Duties include work cards, records and reporting to release personnel. The listing gives a November 20, 2026 deadline and no pay.",
+              "Cronda lists 30 mechanical/electromechanical accessory maintenance worker positions across Beijing, Chongqing, Shenzhen, Xi’an and Jiaxing. It lists associate-level education or higher and prefers relevant licensing and experience. Work includes radio, instrument and mechanical accessory maintenance. The deadline is December 31, 2026 and no pay is listed."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ag-ku",
+            "ag-cr"
           ],
-          "title": "Notes on the recruitment sample",
+          "title": "Kunming Airlines and Cronda hiring examples",
           "type": "notice"
         },
         {
@@ -29878,12 +29914,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Complete training and obtain the licence"
+              "If pursuing a license: check training, experience and assessment"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.13",
           "source_refs": [
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -29921,13 +29959,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Complete the type maintenance training and internship, obtain the type rating and release independently within the authority granted."
+              "In mainland China a first aircraft type endorsement in a category has training, exam and internship conditions. After obtaining it, check the organization’s work authorization and the specific release task separately."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145"
           ],
           "type": "prose"
         },
@@ -29936,12 +29974,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Obtain the type rating and release independently"
+              "Verify type and task authorization for the role"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.17",
           "source_refs": [
-            "onet"
+            "ccar66",
+            "ccar145"
           ],
           "type": "prose"
         },
@@ -29979,13 +30018,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The U.S. BLS distinguishes approved courses, on-the-job or military training; an approved course can substitute for part of the examination eligibility and experience requirement, and an uncertificated person may perform maintenance under the supervision of a certificated A&P holder. Avionics posts may carry employer certification and similar requirements, and A&P or a course must not be generalised into a threshold for every post. China's CCAR-66-R3 application conditions are checked under Article 66.6 for age, colour vision, a college diploma, basic-knowledge training, maintenance experience or qualifying practical training, the licence examination and completion of the technical English level test. The English test is completed and graded, and no uniform pass threshold may be invented; releasing a complex aircraft additionally requires the corresponding type rating, while non-complex aircraft and component authority are checked separately."
+              "Under U.S. Part 65, approved maintenance school documentation and qualifying practical experience are separate routes. Verify applicable written, oral and practical tests separately. Avionics job requirements depend on the employer and authorized work. For mainland China, check personal license and complex-aircraft type endorsement under CCAR-66. Under CCAR-145, verify the organization’s distinct authorization for maintenance and release."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.20",
           "source_refs": [
-            "bls",
-            "editor"
+            "faa",
+            "ccar66",
+            "ccar145"
           ],
           "type": "prose"
         },
@@ -30025,13 +30065,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The entry elements are: education (in the U.S. mainly an aviation maintenance course certificate or an associate degree; in mainland China a college diploma or above), training and assessment, maintenance experience or practical training, licence issue and type ratings, and the 24-month validity of a type rating together with the maintenance release work records needed for renewal. The progression path expands with the licence category and the type ratings and moves towards inspection, mentoring and quality roles."
+              "BLS lists a postsecondary nondegree award as typical entry education for both U.S. suboccupations; an associate degree is one possible education route. In mainland China, a junior-college qualification or above is one CCAR-66-R3 personal licensing condition. Check the applicable training, exams, type and organizational authorizations separately."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "ep",
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30096,13 +30139,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Pass selection and training; under FAA or Civil Aviation Administration of China requirements."
+              "Check employer training, supervision and authorization for initial airframe tasks. If pursuing a license, check the applicable local rules separately."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30111,12 +30155,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Obtain the basic maintenance personnel licence qualification."
+              "Confirm the airframe tasks and work cards assigned under supervision."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.29",
           "source_refs": [
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30169,13 +30215,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Obtain the licence and complete the corresponding training; under the organisation's authorisation."
+              "Check jurisdiction and employer requirements for training, work and inspection on the assigned airframe tasks."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30184,12 +30231,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Accumulate type experience and apply for the type rating."
+              "Verify assigned airframe tasks and inspection authority. For release of a complex aircraft in mainland China, check the corresponding aircraft type endorsement and organization authorization. For U.S. tasks, check the applicable FAA rules."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.34",
           "source_refs": [
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30242,13 +30291,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Obtain the corresponding type rating and the organisation's release authorisation."
+              "Check organization authorization for the assigned airframe duties. For release of a complex aircraft in mainland China, check the corresponding aircraft type endorsement and organization authorization. For U.S. tasks, check the applicable FAA rules."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30388,13 +30438,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Pass selection and training; under FAA or Civil Aviation Administration of China requirements."
+              "Check employer training, supervision and authorization for initial powerplant tasks. If pursuing a license, check the applicable local rules separately."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30403,12 +30454,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Obtain the basic maintenance personnel licence qualification."
+              "Confirm the powerplant tasks and work cards assigned under supervision."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.49",
           "source_refs": [
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30461,13 +30514,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Obtain the licence and complete the engine-related training."
+              "Check jurisdiction and employer requirements for training, work and inspection on the assigned powerplant tasks."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30476,12 +30530,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Obtain the engine type rating and the run-up authorisation."
+              "Verify assigned powerplant tasks and run-up authorization. For release of a complex aircraft in mainland China, check the corresponding aircraft type endorsement and organization authorization. For U.S. tasks, check the applicable FAA rules."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.54",
           "source_refs": [
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30534,13 +30590,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Obtain the corresponding type rating and the organisation's authorisation."
+              "Check organization authorization for the assigned powerplant duties. For release of a complex aircraft in mainland China, check the corresponding aircraft type endorsement and organization authorization. For U.S. tasks, check the applicable FAA rules."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.58",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30680,13 +30737,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Pass selection and training; under FAA or Civil Aviation Administration of China requirements."
+              "Check employer training, supervision and authorization for initial avionics tasks. If pursuing a license, check the applicable local rules separately."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.68",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30695,12 +30753,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Obtain the basic maintenance personnel licence qualification."
+              "Confirm the avionics tasks and work cards assigned under supervision."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.69",
           "source_refs": [
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30753,13 +30813,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Obtain the licence and complete the avionics-related training."
+              "Check jurisdiction and employer requirements for training, work and inspection on the assigned avionics tasks."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.73",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30768,12 +30829,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Obtain the type rating relevant to the avionics systems."
+              "Verify organization authorization for the assigned avionics systems tasks. For release of a complex aircraft in mainland China, check the corresponding aircraft type endorsement and organization authorization. For U.S. tasks, check the applicable FAA rules."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.74",
           "source_refs": [
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30826,13 +30889,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Obtain the corresponding type rating and the organisation's authorisation."
+              "Check organization authorization for the assigned avionics duties. For release of a complex aircraft in mainland China, check the corresponding aircraft type endorsement and organization authorization. For U.S. tasks, check the applicable FAA rules."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.path.career-path-block.78",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -30993,22 +31057,22 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS Occupational Outlook Handbook: aircraft and avionics equipment mechanics and technicians",
+                "entity": "BLS Occupational Outlook Handbook: combined aircraft and avionics group",
                 "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/aircraft-and-avionics-equipment-mechanics-and-technicians.htm"
               },
               {
-                "entity": "O*NET 49-3011.00 tasks and work activities",
+                "entity": "BLS Employment Projections Table 1.2: two suboccupations",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/49-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "National Bureau of Statistics, 'Average Annual Wages of Employed Persons in Urban Units in 2025'",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "entity": "O*NET 49-3011.00 Aircraft Mechanics and Service Technicians occupation summary",
@@ -31080,7 +31144,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS2025—2035 combined group 49-3011 and 49-2091: 159,800 people in 2025 → 169,200 in 2035, growth 6% and a net gain of about 9,400, with 13,100 openings a year; openings and net gain are different things, and the projection does not measure AI causation. O*NET49-3011 single occupation 140,000 people in 2025, a growth category of 5%—6% over 2025—2035 and 11,400 openings a year; it cannot stand in for the combined-group figures. A national projection does not stand in for Chinese recruitment or an individual's chances."
+              "The BLS Handbook combined group has 159,800 jobs in 2025 and projects 169,200 in 2035: 6% rounded growth, about 9,400 net jobs and about 13,100 annual openings including replacements. BLS Table 1.2: aircraft mechanics (49-3011) go from 140,000 to 147,600, +5.4%, with about 11,400 annual openings; avionics (49-2091) go from 19,800 to 21,600, +9.4%, with about 1,700 annually. Columns are rounded independently."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.market-signals.market-signal-card.8",
@@ -31095,7 +31159,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. national (49-3011 single occupation)"
+              "United States"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.market-signals.market-signal-card.9",
@@ -31123,12 +31187,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The O*NET49-3011 single occupation was about 140,000 people in 2025; the BLS combined group on the same base year is about 159,800 people, a different scope."
+              "The Handbook group covers both suboccupations."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.market-signals.market-signal-card.11",
           "source_refs": [
-            "ep",
             "bls"
           ],
           "type": "prose"
@@ -31138,12 +31201,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The single-occupation and combined-group scopes for the same base year 2025 differ, and the difference must not be treated as an increase in demand."
+              "Not a mainland job count."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.market-signals.market-signal-card.12",
           "source_refs": [
-            "ep"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31166,7 +31229,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Aircraft mechanics and service technicians (49-3011)"
+              "Combined aircraft and avionics maintenance"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.market-signals.market-signal-card.14",
@@ -31180,12 +31243,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "About 140,000 people (2025, 49-3011 single occupation)"
+              "159,800 jobs (2025)"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.market-signals.market-signal-card.15",
           "source_refs": [
-            "ep"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31236,7 +31299,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Growth above the average for the combined group over 2025—2035 does not mean posts are plentiful, and the openings are mainly replacement; the 49-3011 single occupation uses the same period separately, and no older period may be mixed in."
+              "This is a U.S. group projection. It does not establish mainland demand. Openings include replacements."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.market-signals.market-signal-card.19",
@@ -31264,7 +31327,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Aircraft and avionics equipment mechanics and technicians (49-3011 and 49-2091)"
+              "Combined aircraft and avionics maintenance"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.market-signals.market-signal-card.21",
@@ -31320,7 +31383,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The BLS combined group has 13,100 openings a year over 2025—2035; the O*NET49-3011 single occupation has 11,400 over the same period. The scopes differ, so they cannot be substituted directly and the openings are not net new posts."
+              "The Handbook group has about 13,100 annual openings. BLS Table 1.2 gives about 11,400 for aircraft mechanics and 1,700 for avionics, in their separate rows."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.market-signals.market-signal-card.25",
@@ -31363,7 +31426,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Aircraft and avionics equipment mechanics and technicians (combined group)"
+              "Combined aircraft and avionics maintenance"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.market-signals.market-signal-card.28",
@@ -31447,13 +31510,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Qualification must be obtained through the training and licence path, and a release must be within the authority granted."
+              "Check local rules and organization authorization for the task. Verify independent work, inspection and return-to-service signing separately. If signing for release of a complex aircraft in mainland China, also check the aircraft type endorsement and organizational release authority."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "ccar66",
+            "ccar145",
+            "faa"
           ],
           "type": "prose"
         },
@@ -31814,10 +31878,15 @@
           "data": {
             "entries": [
               {
-                "answer": "Inspect and diagnose aircraft to the job card and the manual: inspect airframes, landing gear, hydraulic and de-icing systems, locate cracks, distortion and wear with non-destructive testing and precision measuring tools, and listen to a running engine to judge a fault; then replace or repair parts, remove and install engines, test and adjust systems, complete the inspection and sign off the release within the authority granted, while maintaining the maintenance records.",
+                "answer": "This profile covers both aircraft maintenance and avionics equipment work. Mechanics focus on airframes, powerplants and mechanical systems. Avionics technicians focus on electronics, signals and fault records. Both preserve work-card evidence, with separate limits for performing, reviewing and releasing work.",
                 "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.faq.1",
                 "question": "What do aircraft and avionics equipment mechanics and technicians do every day?",
-                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.daily-work"
+                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.daily-work",
+                "source_refs": [
+                  "bls",
+                  "onet",
+                  "avionics-onet"
+                ]
               },
               {
                 "answer": "This occupation carries out maintenance and inspection under the continuing airworthiness documents and releases within the authority granted; flight operations are the pilot's responsibility; the repair plan and the release standard are set by the continuing airworthiness documents and the civil aviation authority; airworthiness oversight rests with the civil aviation authority; and aircraft design and airworthiness certification belong to another system and cannot be converted into this occupation's qualification or vice versa.",
@@ -31826,28 +31895,46 @@
                 "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.comparison"
               },
               {
-                "answer": "There is no evidence to support wholesale replacement. Automation may improve the interpretation of test data, fault-trend prompts and records, but working to the manual, precision measurement, the inspection judgement and the release sign-off within the authority granted are still borne by licensed personnel; the BLS projects growth of 6% for the combined group over 2025—2035 (faster than the average for all occupations).",
+                "answer": "Tools can organize fictional fault records, locate document revisions or draft handovers. For actual work, verify approved procedures and original records. People with the appropriate authority decide fault attribution, review and release across mechanics and avionics. There is no measured displacement rate for the group here.",
                 "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.faq.3",
                 "question": "Will aircraft and avionics equipment mechanics and technicians be replaced by AI?",
-                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.ai"
+                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.ai",
+                "source_refs": [
+                  "editor",
+                  "onet",
+                  "avionics-onet"
+                ]
               },
               {
-                "answer": "No precise national wage distribution for this occupation was obtained. The National Bureau of Statistics publishes annual average wages by industry sector and unit type, of which transport, storage and postal services (non-private) for 2025 is 133,981 yuan/year and manufacturing (non-private) is 113,594 yuan/year, which serve only as a broad-basis reference; maintenance personnel pay follows the employer's own rules, and an industry average cannot be used to infer an individual's terms.",
+                "answer": "Kunming Airlines lists 15 aircraft maintenance engineers in Kunming on Air China Group’s site. Domestic 2027 graduates need a related bachelor’s degree or higher; check its English conditions. Duties include work cards, records and reporting to release personnel. The listing gives a November 20, 2026 deadline and no pay. Cronda lists 30 mechanical/electromechanical accessory maintenance worker positions across Beijing, Chongqing, Shenzhen, Xi’an and Jiaxing. It lists associate-level education or higher and prefers relevant licensing and experience. Work includes radio, instrument and mechanical accessory maintenance. The deadline is December 31, 2026 and no pay is listed. Neither named example lists pay. There is no nationwide mainland wage for this combined group here. NBS reports a 2025 urban non-private transport, storage and postal average of CNY 133,981 a year as industry context only.",
                 "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.faq.4",
                 "question": "How should mainland China maintenance technician pay be understood?",
-                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.china-pay"
+                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.china-pay",
+                "source_refs": [
+                  "ag-ku",
+                  "ag-cr",
+                  "nbs"
+                ]
               },
               {
-                "answer": "No. The 49-3011 median annual wage in 2025, month 5 (May) is 79,870 U.S. dollars (hourly wage 38.40 U.S. dollars), the lowest 10% is below 48,780 U.S. dollars and the highest 10% is above 128,890 U.S. dollars; the combined-group median is 80,180 U.S. dollars. These are positions in a statistical distribution, not an individual quote or a starting-wage guarantee.",
+                "answer": "The May 2025 U.S. combined median was $80,180 a year or $38.55 an hour. The medians were $79,870 for aircraft mechanics (49-3011) and $82,280 for avionics technicians (49-2091). The group median is not the average of these two.",
                 "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.faq.5",
                 "question": "Does the median U.S. maintenance technician wage represent a starting wage?",
-                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.us-pay"
+                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.us-pay",
+                "source_refs": [
+                  "bls"
+                ]
               },
               {
-                "answer": "The U.S. path is usually an FAA-approved aviation maintenance course (a post-secondary certificate) or an associate degree from an aviation college, leading to an airframe and powerplant (A&P) qualification. Mainland China, under the Rules on the Administration of Licences for Civil Aircraft Maintenance Personnel (CCAR-66-R3), requires a college diploma or above, completion of training at a CCAR-147 organisation, and passing the examination and the aviation maintenance technical English level test; releasing a complex aircraft additionally requires a type rating.",
+                "answer": "Mainland CCAR-66-R3 distinguishes airplane and rotorcraft licenses and marks the engine category. For complex-aircraft release, check the type endorsement. Under CCAR-145-R4, the maintenance organization assigns separate authority for independent work and release. The FAA mechanic certificate may carry Airframe, Powerplant or both ratings. Check the school, experience and test routes in Part 65. Avionics employers may have task authorizations. Check A&P ratings, employer credentials and release privileges separately.",
                 "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.faq.6",
                 "question": "How do you become a maintenance technician, and what education and qualifications are needed?",
-                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.education"
+                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.education",
+                "source_refs": [
+                  "ccar66",
+                  "ccar145",
+                  "faa"
+                ]
               },
               {
                 "answer": "Mainly skipping the manual and the inspection points, a false measurement or torque record, a misjudged or missed non-destructive test, carrying out maintenance and release beyond the licence or the type rating, using an unapproved part, and the occupational-health risk from noise and contaminants. Working to the manual, verifying the measuring tools, checking the source of the parts and recording faithfully are the basic controls.",
@@ -31856,10 +31943,14 @@
                 "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.risk"
               },
               {
-                "answer": "The BLS Occupational Outlook Handbook projects U.S. combined-group employment growth of 6% over 2025—2035 (for 49-3011 and 49-2091) (faster than the average for all occupations, a net gain of about 9,400 people), with about 13,100 job openings a year, most of them from replacement demand; the O*NET figure for 49-3011 over 2024—2034 is 4%.",
+                "answer": "The BLS Handbook combined group has 159,800 jobs in 2025 and projects 169,200 in 2035: 6% rounded growth, about 9,400 net jobs and about 13,100 annual openings including replacements. BLS Table 1.2: aircraft mechanics (49-3011) go from 140,000 to 147,600, +5.4%, with about 11,400 annual openings; avionics (49-2091) go from 19,800 to 21,600, +9.4%, with about 1,700 annually. Columns are rounded independently.",
                 "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.faq.8",
                 "question": "What are the U.S. employment prospects?",
-                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.outlook"
+                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.outlook",
+                "source_refs": [
+                  "bls",
+                  "ep"
+                ]
               },
               {
                 "answer": "Work takes place in a hangar, a maintenance station or on the apron. O*NET 49-3011.00 shows that 76% of respondents are exposed to distracting or uncomfortable noise every day, 72% work indoors in a non-environmentally-controlled setting every day, 63% are exposed to contaminants every day, 77% consider precision or accuracy extremely important, and 76% work a 40-hour week, with shifts and overtime common in hangars and maintenance stations.",
@@ -31872,6 +31963,15 @@
                 "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.faq.10",
                 "question": "How do you choose among the airframe, powerplant and avionics directions?",
                 "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.direction-choice"
+              },
+              {
+                "answer": "Reference: mechanics review completed work in M-20. Avionics review the alert and clock evidence in A-20. Keep the shared item open. Without verified event timing or a common ID, do not connect the records or determine the cause. Record the reviewers and evidence needed. Preserve both originals; actual release is a separate authorized decision. Variant: the A-20 clock gap may close. M-20 still has no matching time or event ID, so the cross-team link remains open.",
+                "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.faq.11",
+                "question": "K20 cross-team handover reference (open after submitting)",
+                "question_key": "career.faq.aircraft-and-avionics-equipment-mechanics-and-technicians.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31906,14 +32006,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 49-3011.00 aircraft mechanics and service technicians occupation profile and task material; BLS Occupational Outlook Handbook: aircraft and avionics equipment mechanics and technicians; the Rules on the Administration of Licences for Civil Aircraft Maintenance Personnel (Ministry of Transport Order No. 10 of 2020); National Bureau of Statistics, 'Average Annual Wages of Employed Persons in Urban Units in 2025'."
+              "Use the BLS Handbook for the combined group, Table 1.2 and O*NET for suboccupations, and the postings and NBS industry context for mainland China."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.sources.source-card.2",
           "source_refs": [
+            "bls",
+            "ep",
             "onet",
-            "onet",
-            "onet"
+            "avionics-onet",
+            "ag-ku",
+            "ag-cr",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31922,12 +32026,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Checked and updated in this round on 2026-09-15."
+              "2026-11-09"
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31936,13 +32040,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The U.S. data cover two bases, the O*NET/BLS 49-3011 single occupation and the 49-3011 plus 49-2091 combined group (the periods being the 2025, month 5 (May) wage and the 2024—2034 and 2025—2035 projections respectively); the Chinese data are a broad-basis proxy by industry sector and unit type and contain no separately listed wage for this occupation. The maintenance personnel licence, the type ratings and the release requirements follow the Rules on the Administration of Licences for Civil Aircraft Maintenance Personnel and the rules of the Civil Aviation Administration of China. This page is not a legal opinion, and the two systems are not extrapolated from each other."
+              "U.S. wages are May 2025 and projections span 2025–2035. Mainland industry pay does not establish either occupation’s wage. Check applicable work and release authority."
             ]
           },
           "id": "aircraft-and-avionics-equipment-mechanics-and-technicians.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "ep",
+            "nbs",
+            "ccar66",
+            "ccar145"
           ],
           "type": "prose"
         }
@@ -31981,13 +32088,13 @@
                 "entity": "Enneagram personality test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the aircraft and avionics equipment mechanics and technicians occupation page",
@@ -32017,84 +32124,84 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "Accessed 2026-09-15"
+                  "Inspects, maintains and records work on airframes, powerplants and mechanical systems.",
+                  "Aircraft mechanics suboccupation only."
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "Used for the occupational identity, the tasks, the interest code and the work context; a U.S. single-occupation basis.",
-                "market": "Source coverage regions",
-                "name": "O*NET OnLine 49-3011.00 Aircraft Mechanics and Service Technicians occupation summary",
-                "period": "A dynamic occupational description/navigation; no applicable wage-statistics year",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/49-3011.00"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "exact",
-                  "Accessed 2026-09-15"
-                ],
-                "evidence_type": "primary_document",
-                "id": "bls",
-                "limitation": "Used for the combined-group median of 80,180 U.S. dollars in 2025, month 5 (May) (49-3011 at 79,870 and 49-2091 at 82,280 U.S. dollars), the 159,800 people employed in 2025, growth of 6% over 2025—2035, about 13,100 openings a year, and the entry-level education; a combined-group basis, with the per-occupation data shown separately by O*NET.",
-                "market": "Source coverage regions",
-                "name": "U.S. BLS Occupational Outlook Handbook: aircraft and avionics equipment mechanics and technicians",
-                "period": "2025, month 5 (May) wage; 2025—2035 projection",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "officially_combined",
-                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/aircraft-and-avionics-equipment-mechanics-and-technicians.htm"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "exact",
-                  "Accessed 2026-09-15"
-                ],
-                "evidence_type": "primary_document",
-                "id": "ep",
-                "limitation": "Used for the tasks, the detailed work activities and the work context; a U.S. single-occupation basis.",
-                "market": "Source coverage regions",
-                "name": "O*NET OnLine 49-3011.00 occupation details (tasks and work activities)",
-                "period": "A dynamic occupational description/navigation; no applicable wage-statistics year",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "limitation": "Aircraft mechanics suboccupation only.",
+                "market": "United States",
+                "name": "O*NET aircraft mechanics 49-3011.00",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/49-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "Accessed 2026-09-15"
+                  "The May 2025 U.S. combined median was $80,180 a year or $38.55 an hour. The medians were $79,870 for aircraft mechanics (49-3011) and $82,280 for avionics technicians (49-2091). The group median is not the average of these two. The BLS Handbook combined group has 159,800 jobs in 2025 and projects 169,200 in 2035: 6% rounded growth, about 9,400 net jobs and about 13,100 annual openings including replacements.",
+                  "National combined scope; suboccupations listed separately."
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls",
+                "limitation": "National combined scope; suboccupations listed separately.",
+                "market": "United States",
+                "name": "BLS Occupational Outlook Handbook: combined aircraft and avionics group",
+                "period": "May 2025; 2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/aircraft-and-avionics-equipment-mechanics-and-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS Table 1.2: aircraft mechanics (49-3011) go from 140,000 to 147,600, +5.4%, with about 11,400 annual openings; avionics (49-2091) go from 19,800 to 21,600, +9.4%, with about 1,700 annually. Columns are rounded independently.",
+                  "The two rows are not interchangeable."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ep",
+                "limitation": "The two rows are not interchangeable.",
+                "market": "United States",
+                "name": "BLS Employment Projections Table 1.2: two suboccupations",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Aircraft mechanics wage percentiles only, not the combined group.",
+                  "Not starting pay."
                 ],
                 "evidence_type": "primary_document",
                 "id": "oews",
-                "limitation": "Used for the annual-wage percentiles and the median hourly wage; a single-occupation basis.",
-                "market": "Source coverage regions",
-                "name": "The BLS OEWS wage percentiles for 2025, month 5 (May) shown by O*NET: 49-3011.00",
-                "period": "2025, month 5 (May) national wage",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "limitation": "Not starting pay.",
+                "market": "United States",
+                "name": "O*NET OEWS: 49-3011 aircraft mechanics percentiles",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localwages/49-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "industry_proxy",
-                  "Accessed 2026-09-15"
+                  "Neither named example lists pay. There is no nationwide mainland wage for this combined group here. NBS reports a 2025 urban non-private transport, storage and postal average of CNY 133,981 a year as industry context only.",
+                  "Industry context."
                 ],
                 "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "Used for mainland China annual average wages by industry sector and unit type; it contains no separate wage for this occupation.",
-                "market": "Source coverage regions",
-                "name": "National Bureau of Statistics, 'Average Annual Wages of Employed Persons in Urban Units in 2025'",
-                "period": "The 2025 annual wage; published 2026-05-15",
+                "limitation": "Industry context.",
+                "market": "Mainland China",
+                "name": "NBS urban unit wages",
+                "period": "2025",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32109,13 +32216,13 @@
                 "name": "Public notice on the Occupational Classification Code of the People's Republic of China (2022 edition)",
                 "period": "2022 occupational classification public notice",
                 "publisher": "Ministry of Human Resources and Social Security of the People's Republic of China",
-                "scope": "parent",
+                "scope": "contextual",
                 "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/dongtaixinwen/buneiyaowen/rsxw/202207/t20220714_457800.html"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
@@ -32131,10 +32238,10 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
-                "evidence_type": "recruitment",
+                "evidence_type": "primary_document",
                 "id": "facilities",
                 "limitation": "Used for the types of software and technology appearing in job postings (7 items); it does not indicate an organisation's adoption rate or a technology effect.",
                 "market": "Source coverage regions",
@@ -32145,17 +32252,17 @@
                 "url": "https://www.onetonline.org/link/hot_tech/49-3011.00"
               },
               {
-                "accessed_at": "2026-10-08",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "Accessed 2026-09-15"
+                  "U.S. aircraft mechanics employment shares: transportation and warehousing 59%, manufacturing 19%, government 10%, other 12%.",
+                  "Read on November 9, 2026."
                 ],
                 "evidence_type": "primary_document",
                 "id": "operations",
-                "limitation": "The 49-3011 single occupation: transport and warehousing 59%, manufacturing 19%, government 10% and other 12%; not the combined-group industry wage.",
+                "limitation": "Not industry wages or combined-group data.",
                 "market": "Source coverage regions",
-                "name": "O*NET OnLine 49-3011.00 industry distribution",
-                "period": "The 2025 industry employment distribution",
+                "name": "O*NET: 49-3011 aircraft mechanics employment by industry",
+                "period": "No data year shown",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/49-3011.00"
@@ -32163,7 +32270,7 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
@@ -32179,7 +32286,7 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
@@ -32205,24 +32312,24 @@
                 "name": "Labour Contract Law of the People's Republic of China",
                 "period": "A 2007 historical entry point to the Labour Contract Law; the current amended version was not checked",
                 "publisher": "The State Council website of China",
-                "scope": "parent",
+                "scope": "contextual",
                 "url": "https://www.gov.cn/jrzg/2007-06/29/content_667720.htm"
               },
               {
-                "accessed_at": "2026-10-08",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "Accessed 2026-09-15"
+                  "AG-20 | Handover across mechanics and avionics",
+                  "Fictional paper handover."
                 ],
-                "evidence_type": "primary_document",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "The Chinese maintenance licence application, the completion of the English level test, the release and the type ratings are checked against the specific provisions; they do not stand in for U.S. certification, or for the medical or recruitment conditions of every post.",
-                "market": "Source coverage regions",
-                "name": "The Rules on the Administration of Licences for Civil Aircraft Maintenance Personnel (CCAR-66-R3, Ministry of Transport Order No. 10 of 2020, in force from 2020-07-01)",
-                "period": "CCAR-66-R3; in force from 2020-07-01, marked valid by the CAAC",
-                "publisher": "Ministry of Transport (full text republished on The State Council website of China)",
-                "scope": "exact",
-                "url": "https://www.caac.gov.cn/big5/www.caac.gov.cn/XXGK/XXGK/MHGZ/202006/t20200608_202988.html"
+                "limitation": "Fictional paper handover.",
+                "market": "Exercise",
+                "name": "AG-20 | Handover across mechanics and avionics",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/en/career/jobs/aircraft-and-avionics-equipment-mechanics-and-technicians#career-content-path"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32237,13 +32344,13 @@
                 "name": "National Bureau of Statistics, 'Provisions on the Composition of the Total Wage Bill'",
                 "period": "A dynamic occupational description/navigation; no applicable wage-statistics year",
                 "publisher": "National Bureau of Statistics",
-                "scope": "parent",
+                "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
               },
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
@@ -32259,7 +32366,7 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
@@ -32275,7 +32382,7 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
@@ -32291,7 +32398,7 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
@@ -32307,7 +32414,7 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
@@ -32321,17 +32428,16 @@
                 "url": "https://www.onetonline.org/link/details/49-3011.00"
               },
               {
-                "accessed_at": "2026-10-08",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "exact",
-                  "Accessed 2026-09-15"
+                  "U.S. aircraft mechanics employment shares: transportation and warehousing 59%, manufacturing 19%, government 10%, other 12%."
                 ],
                 "evidence_type": "primary_document",
                 "id": "r2-pay-2",
-                "limitation": "The 49-3011 single occupation: transport and warehousing 59%, manufacturing 19%, government 10% and other 12%; not the combined-group industry wage.",
+                "limitation": "Not industry wages or combined-group data.",
                 "market": "Source coverage regions",
-                "name": "O*NET OnLine 49-3011.00 industry distribution",
-                "period": "The 2025 industry employment distribution",
+                "name": "O*NET: 49-3011 aircraft mechanics employment by industry",
+                "period": "No data year shown",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/49-3011.00"
@@ -32339,15 +32445,15 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
                 "id": "r2-pay-3",
                 "limitation": "Used as a reference for the wage percentiles.",
                 "market": "Source coverage regions",
-                "name": "The BLS OEWS wage percentiles for 2025, month 5 (May) shown by O*NET: 49-3011.00",
-                "period": "2025, month 5 (May) national wage",
+                "name": "The BLS OEWS wage percentiles for May 2025 shown by O*NET: 49-3011.00",
+                "period": "May 2025 national wage",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/49-3011.00"
@@ -32355,7 +32461,7 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
@@ -32371,7 +32477,7 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
@@ -32387,7 +32493,7 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
@@ -32395,7 +32501,7 @@
                 "limitation": "Supports only the 49-3011 national wage percentiles; it is not a source for the employment size or the combined-group wage.",
                 "market": "Source coverage regions",
                 "name": "The BLS Occupational Employment and Wage Statistics shown by O*NET (49-3011.00)",
-                "period": "2025, month 5 (May) national wage",
+                "period": "May 2025 national wage",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/49-3011.00"
@@ -32403,7 +32509,7 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "exact",
+                  "Applies within the stated occupation, jurisdiction or statistical scope.",
                   "Accessed 2026-09-15"
                 ],
                 "evidence_type": "primary_document",
@@ -32417,21 +32523,113 @@
                 "url": "https://www.onetonline.org/link/details/49-3011.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Inspection and diagnosis｜Finding the problem｜Inspect airframes, landing gear, hydraulic and de-icing systems to the job card and the manual, and locate cracks, distortion and wear with non-destructive testing and precision measuring tools. — 50/100; weight=1/3; aircraft-and-avionics-equipment-mechanics-and-technicians.profile.responsibilities-block.1[0]",
-                  "Repair and replacement｜Restoring airworthiness｜Use hand tools, measuring tools and test equipment to replace or repair worn, defective or damaged parts. — 0/100; weight=1/3; aircraft-and-avionics-equipment-mechanics-and-technicians.profile.responsibilities-block.1[1]",
-                  "Records and reporting｜A traceable trail｜Maintain the maintenance log, record preventive and corrective maintenance, and report a defect or unairworthy condition as required. — 75/100; weight=1/3; aircraft-and-avionics-equipment-mechanics-and-technicians.profile.responsibilities-block.1[5]"
+                  "Tools can organize fictional fault records, locate document revisions or draft handovers. For actual work, verify approved procedures and original records. People with the appropriate authority decide fault attribution, review and release across mechanics and avionics. There is no measured displacement rate for the group here.",
+                  "No displacement estimate.",
+                  "No displacement estimate.",
+                  "No displacement estimate.",
+                  "No displacement estimate."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "No displacement estimate.",
+                "market": "Editorial guidance",
+                "name": "Editorial note: AI and maintenance handovers",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Tests, diagnoses and records avionics equipment issues."
+                ],
+                "evidence_type": "primary_document",
+                "id": "avionics-onet",
+                "limitation": "Avionics suboccupation only.",
+                "market": "United States",
+                "name": "O*NET avionics technicians 49-2091.00",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/49-2091.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Kunming Airlines lists 15 aircraft maintenance engineers in Kunming on Air China Group’s site. Domestic 2027 graduates need a related bachelor’s degree or higher; check its English conditions. Duties include work cards, records and reporting to release personnel. The listing gives a November 20, 2026 deadline and no pay."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ag-ku",
+                "limitation": "Excludes separately listed dispatch roles.",
+                "market": "Mainland China",
+                "name": "Kunming Airlines: aircraft maintenance engineer",
+                "period": "2026",
+                "publisher": "Kunming Airlines / Air China Group",
+                "scope": "recruitment_proxy",
+                "url": "https://zhaopin.airchina.com.cn/campus/jobs/2026/10/185715.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Cronda lists 30 mechanical/electromechanical accessory maintenance worker positions across Beijing, Chongqing, Shenzhen, Xi’an and Jiaxing. It lists associate-level education or higher and prefers relevant licensing and experience. Work includes radio, instrument and mechanical accessory maintenance. The deadline is December 31, 2026 and no pay is listed."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ag-cr",
+                "limitation": "Accessory worker listing only.",
+                "market": "Mainland China",
+                "name": "Cronda: mechanical/electromechanical accessory maintenance worker",
+                "period": "2026",
+                "publisher": "Beijing Cronda",
+                "scope": "recruitment_proxy",
+                "url": "https://www.cronda.cn/Recruitment-positions/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Mainland CCAR-66-R3 distinguishes airplane and rotorcraft licenses and marks the engine category. For complex-aircraft release, check the type endorsement. Under CCAR-145-R4, the maintenance organization assigns separate authority for independent work and release."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ccar66",
+                "limitation": "Personal licensing provisions.",
+                "market": "Mainland China",
+                "name": "Personal maintenance licenses: CCAR-66-R3",
+                "period": "2020",
+                "publisher": "CAAC",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202006/t20200608_202988.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Mainland CCAR-66-R3 distinguishes airplane and rotorcraft licenses and marks the engine category. For complex-aircraft release, check the type endorsement. Under CCAR-145-R4, the maintenance organization assigns separate authority for independent work and release."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ccar145",
+                "limitation": "Check organization and project authority.",
+                "market": "Mainland China",
+                "name": "Maintenance organizations: CCAR-145-R4",
+                "period": "2022",
+                "publisher": "CAAC",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202203/t20220302_212092.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The FAA mechanic certificate may carry Airframe, Powerplant or both ratings. Check the school, experience and test routes in Part 65. Avionics employers may have task authorizations. Check A&P ratings, employer credentials and release privileges separately."
+                ],
+                "evidence_type": "primary_document",
+                "id": "faa",
+                "limitation": "U.S. credential routes.",
+                "market": "United States",
+                "name": "U.S. 14 CFR Part 65 Subpart D",
+                "period": "2026",
+                "publisher": "U.S. eCFR",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-65/subpart-D"
               }
             ]
           },
@@ -35331,7 +35529,7 @@
         "bls_table": [
           {
             "fact_ref": "us-wage-low10-2025",
-            "指标": "Pay · 10th percentile",
+            "指标": "Aircraft mechanics only (49-3011) · Pay · 10th percentile",
             "数值": {
               "$item": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35347,7 +35545,7 @@
           },
           {
             "fact_ref": "us-wage-q25-2025",
-            "指标": "Pay · 25th percentile",
+            "指标": "Aircraft mechanics only (49-3011) · Pay · 25th percentile",
             "数值": {
               "$item": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.11",
               "block": "us-salary",
@@ -35379,7 +35577,7 @@
           },
           {
             "fact_ref": "us-wage-q75-2025",
-            "指标": "Pay · 75th percentile",
+            "指标": "Aircraft mechanics only (49-3011) · Pay · 75th percentile",
             "数值": {
               "$item": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.15",
               "block": "us-salary",
@@ -35395,7 +35593,7 @@
           },
           {
             "fact_ref": "us-wage-high10-2025",
-            "指标": "Pay · 90th percentile",
+            "指标": "Aircraft mechanics only (49-3011) · Pay · 90th percentile",
             "数值": {
               "$item": "aircraft-and-avionics-equipment-mechanics-and-technicians.us-salary.career-snapshot-secondary-locale.17",
               "block": "us-salary",
@@ -35680,7 +35878,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Lowest 10%",
+            "label": "Aircraft mechanics 49-3011: Lowest 10%",
             "value": {
               "$fact": "us-wage-low10-2025",
               "field": "display_value"
@@ -35694,7 +35892,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Median (50%)",
+            "label": "Combined median",
             "value": {
               "$fact": "us-wage-2025",
               "field": "display_value"
@@ -35708,7 +35906,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Highest 10%",
+            "label": "Aircraft mechanics 49-3011: Highest 10%",
             "value": {
               "$fact": "us-wage-high10-2025",
               "field": "display_value"
@@ -35766,9 +35964,9 @@
         }
       },
       "hero": {
-        "h1": "Aircraft and avionics equipment mechanics and technicians",
-        "quick_answer": "Aircraft and avionics equipment mechanics and technicians diagnose, repair or overhaul aircraft airframes, engines and onboard systems in a hangar, a maintenance station or on the apron under continuing airworthiness documents, carry out inspections and sign off the release within the authority granted; it suits people who would rather start with one job-card writing and measurement-record exercise to test whether they accept working step by step to the manual, repeated verification and airworthiness responsibility.",
-        "title": "Aircraft and avionics equipment mechanics and technicians"
+        "h1": "Aircraft and Avionics Equipment Mechanics and Technicians",
+        "quick_answer": "This profile covers both aircraft maintenance and avionics equipment work. Mechanics focus on airframes, powerplants and mechanical systems. Avionics technicians focus on electronics, signals and fault records. Both preserve work-card evidence, with separate limits for performing, reviewing and releasing work.",
+        "title": "Aircraft and Avionics Equipment Mechanics and Technicians"
       },
       "market_signal_card": {
         "context_links": [
@@ -35850,7 +36048,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "onet",
+            "source_id": "bls",
             "value": {
               "$item": "aircraft-and-avionics-equipment-mechanics-and-technicians.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -37119,7 +37317,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my vocational interests suit aircraft and avionics equipment mechanics and technicians",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37196,7 +37394,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five Personality Test"
           },
           {
             "href": {
@@ -37206,7 +37404,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI Personality Test"
           },
           {
             "href": {
@@ -37216,7 +37414,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Enneagram (Chinese)"
+            "label": "Enneagram Personality Test"
           },
           {
             "href": {
@@ -37226,7 +37424,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "IQ (Chinese)"
+            "label": "IQ and Reasoning Test"
           }
         ]
       },
@@ -37241,6 +37439,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
+      "interface.outlook.evidence_heading": "Three measures of U.S. group employment",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. pay reference",
@@ -37333,7 +37532,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and maintenance handovers",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of work directions",
       "fit": "Occupation fit guide",
@@ -37352,14 +37551,14 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "O*NET/BLS 49-3011.00",
+        "display_value": "BLS Handbook group: includes 49-3011 and 49-2091",
         "fact_id": "identity",
         "market": "United States",
         "measure": "Official occupation code",
         "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
         "period": "A page updated in 2026; accessed 2026-09-15",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
@@ -37368,8 +37567,8 @@
         "fact_id": "us-wage-low10-2025",
         "market": "United States",
         "measure": "The upper bound of the 10th annual-wage percentile",
-        "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "2025, month 5 (May)",
+        "occupation_scope": "49-3011 aircraft mechanics only",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37380,20 +37579,20 @@
         "fact_id": "us-wage-q25-2025",
         "market": "United States",
         "measure": "The 25th annual-wage percentile",
-        "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "2025, month 5 (May)",
+        "occupation_scope": "49-3011 aircraft mechanics only",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "79,870 U.S. dollars/year",
+        "display_value": "$80,180 per year; $38.55 per hour",
         "fact_id": "us-wage-2025",
         "market": "United States",
         "measure": "Median annual wage",
-        "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "2025, month 5 (May)",
+        "occupation_scope": "Aircraft and Avionics Equipment Mechanics and Technicians",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37404,8 +37603,8 @@
         "fact_id": "us-wage-q75-2025",
         "market": "United States",
         "measure": "The 75th annual-wage percentile",
-        "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "2025, month 5 (May)",
+        "occupation_scope": "49-3011 aircraft mechanics only",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37416,94 +37615,94 @@
         "fact_id": "us-wage-high10-2025",
         "market": "United States",
         "measure": "The lower bound of the 90th annual-wage percentile",
-        "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "2025, month 5 (May)",
+        "occupation_scope": "49-3011 aircraft mechanics only",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "139,400 people (2024)",
+        "display_value": "159,800 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Employment headcount",
         "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "6%",
+        "display_value": "6% (BLS rounded)",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth rate",
         "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 13,100 a year",
+        "display_value": "About 13,100 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Average annual job openings",
         "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: no median wage for this occupation in this industry was obtained (OEWS does not publish this occupation's median by industry, and this page used no third-party estimate)",
+        "display_value": "No combined-group wage median for this broad industry was found.",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "United States",
-        "measure": "Median wage for this occupation in the industry (Transportation and Warehousing)",
+        "measure": "Combined-group broad-industry wage gap (no estimate found)",
         "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "Checked on 2026-09-15",
+        "period": "Checked November 9, 2026",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: no median wage for this occupation in this industry was obtained (OEWS does not publish this occupation's median by industry, and this page used no third-party estimate)",
+        "display_value": "No combined-group wage median for this broad industry was found.",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "United States",
-        "measure": "Median wage for this occupation in the industry (Manufacturing)",
+        "measure": "Combined-group broad-industry wage gap (no estimate found)",
         "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "Checked on 2026-09-15",
+        "period": "Checked November 9, 2026",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: no median wage for this occupation in this industry was obtained (OEWS does not publish this occupation's median by industry, and this page used no third-party estimate)",
+        "display_value": "No combined-group wage median for this broad industry was found.",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "United States",
-        "measure": "Median wage for this occupation in the industry (Government)",
+        "measure": "Combined-group broad-industry wage gap (no estimate found)",
         "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "Checked on 2026-09-15",
+        "period": "Checked November 9, 2026",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: no median wage for this occupation in this industry was obtained (OEWS does not publish this occupation's median by industry, and this page used no third-party estimate)",
+        "display_value": "No combined-group wage median for this broad industry was found.",
         "fact_id": "us-industry-wage-education-2025",
         "market": "United States",
-        "measure": "Median wage for this occupation in the industry (Other industries)",
+        "measure": "Combined-group broad-industry wage gap (no estimate found)",
         "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "Checked on 2026-09-15",
+        "period": "Checked November 9, 2026",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
@@ -37652,24 +37851,24 @@
       },
       {
         "derivation": null,
-        "display_value": "O*NET 49-3011.00",
+        "display_value": "BLS Handbook group: includes 49-3011 and 49-2091",
         "fact_id": "occupation-identity",
         "market": "United States",
         "measure": "The exact U.S. occupation code",
         "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
         "period": "A page updated in 2026; accessed 2026-09-15",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "79,870 U.S. dollars/year",
+        "display_value": "$80,180 per year; $38.55 per hour",
         "fact_id": "us-wage",
         "market": "United States",
         "measure": "Occupational wage basis",
-        "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "2025, month 5 (May)",
+        "occupation_scope": "Aircraft and Avionics Equipment Mechanics and Technicians",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37700,41 +37899,29 @@
       },
       {
         "derivation": null,
-        "display_value": "6%（2025—2035）",
+        "display_value": "6% (BLS rounded)",
         "fact_id": "employment-projection",
         "market": "United States",
         "measure": "Employment projection basis",
         "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "bls"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Aircraft and avionics equipment mechanics and technicians",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and maintenance handovers"
     },
     "badges": [
-      "Tasks: inspection and non-destructive testing · repair and overhaul · inspection and release",
-      "AI: task-level change statement · no substitution year given",
-      "Basis labelling · data gaps retained"
+      "Airframe and powerplant",
+      "Avionics and fault records",
+      "Cross-team handover"
     ],
     "metrics": [
       {
@@ -37773,17 +37960,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What aircraft and avionics equipment mechanics and technicians do, what education and licences they need, how U.S. and mainland China pay and employment prospects look, and which tasks AI will change; the source scope and the data gaps are retained."
+      "text": "Compare aircraft mechanics and avionics work, read group and suboccupation pay correctly, and try a fictional maintenance handover."
     },
     "title": {
       "availability": "available",
-      "text": "Aircraft and avionics equipment mechanics and technicians: the work, the pay and the employment outlook"
+      "text": "Aircraft and Avionics Maintenance: Roles, Pay and Entry"
     }
   },
-  "source_content_sha256": "cf13046bf291ab3a0f54eaa3fd7903098803c772044c4dafbebd02958206ddcb",
+  "source_content_sha256": "41e4e4ffa3a3972097ce8f6b15dd78a8b29c0965f79da5fc1ae40929706a76bc",
   "subject": {
     "canonical_slug": "aircraft-and-avionics-equipment-mechanics-and-technicians",
-    "name": "Aircraft and avionics equipment mechanics and technicians",
-    "summary": "Aircraft and avionics equipment mechanics and technicians inspect, diagnose, repair or overhaul aircraft airframes, engines and onboard systems under continuing airworthiness documents, carry out inspections and sign off a maintenance release within the authority granted; entry is centred on training, examinations, a licence and type ratings."
+    "name": "Aircraft and Avionics Equipment Mechanics and Technicians",
+    "summary": "This profile covers both aircraft maintenance and avionics equipment work. Mechanics focus on airframes, powerplants and mechanical systems. Avionics technicians focus on electronics, signals and fault records. Both preserve work-card evidence, with separate limits for performing, reviewing and releasing work."
   }
 }

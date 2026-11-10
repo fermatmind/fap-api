@@ -152,6 +152,9 @@
       "item:model-makers-wood.path.seven-day-trial.8": {
         "status": "pending_mapping"
       },
+      "item:model-makers-wood.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:model-makers-wood.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -13179,6 +13182,21 @@
             "onet-education"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。产品评审要求按 M4 版做缩比模型。记录 A 的尺寸齐全，图纸栏仍写 M3；B 写 M4，但缺轮廓复核。分别写出该向设计或模型负责人核实的事项，再问雇主谁签模型评审。"
+            ]
+          },
+          "id": "model-makers-wood.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "复核木质产品模型的版本",
+          "type": "notice"
         }
       ]
     },
@@ -15645,6 +15663,13 @@
         "id": "model-makers-wood.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "model-makers-wood.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15814,7 +15839,7 @@
       "text": "木模工"
     }
   },
-  "source_content_sha256": "9582d3602bd34cc2045d98eeda4537418ecb50a3ae5d77a14d2fecc594262112",
+  "source_content_sha256": "e42dcef0c1089ebe8ecdc665dbb546591d864012b9835e90c5800315e68f6665",
   "subject": {
     "canonical_slug": "model-makers-wood",
     "name": "木模工",

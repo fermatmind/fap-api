@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1497,7 +1494,7 @@
         "status": "pending_mapping"
       },
       "item:helpers-production-workers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:helpers-production-workers.sources.source-card.1": {
         "status": "mapped"
@@ -10834,7 +10831,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10886,7 +10883,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10938,7 +10935,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -24117,7 +24114,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对岗位胜任度的评价，也不构成任何安全、职业健康或法律意见。本页对应美国 O*NET/SOC 51-9198.00「Helpers--Production Workers」（生产辅助工）这一精确职业：以较低技能要求的作业协助生产工人：供应或扶住材料与工具，并清洁作业区与设备。官方范围原文：Help production workers by performing duties requiring less skill. Duties include supplying or holding materials or tools, and cleaning work area and equipment. O*NET 列出的核心任务包括（该页列出 34 项任务，页面默认展示前 5 项）：人工或使用起重设备搬运原材料、成品与包装件；在零件上打标记或贴标识；观察设备运行以及时发现故障并把任何故障通知操作员；清点成品以判断订单是否完成；检查产品以确认是否符合质量标准。常见职位名称包括 Production Helper 与 Machine Helper 与 Machine Operator Helper 与 Assembly Line Worker 与 Press Helper 与 Welder Helper。口径提示：O*NET 在 51-9198.00 页呈现的美国工资与就业数据未标注取自上级或相邻职业，本页按本职业（51-9198.00）自身口径如实标注；该职业在美国属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；本页不把美国口径外推为中国大陆的岗位名称、资格或工资。"
+              "若不适应搬运、久站、现场噪声或反复核料，先问清材料重量、轮换和班组分工。"
             ]
           },
           "id": "helpers-production-workers.quick-decision.fit-decision-checklist.1",
@@ -24131,12 +24128,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一份完全虚构的生产配合任务包（仅用于练习流程，不代表任何真实企业、产线或数据）。请写出方案草案：（1）如何根据一份虚构的生产工单与图纸或工艺卡，按结构化思路协助一次生产与搬运与检查作业（产品与工单编号、材料与零件与规格、上料与下料与搬运、机器运行观察、打标识与计数、检验与分拣、能源隔离与防护、作业后清洁与整理与记录），并写明哪些信息不足需要补充（工艺与质量要求、设备状态与保养记录、安全与准入与作业许可要求、材料到货与生产节拍）；（2）如何为一份虚构的生产与检验记录表设计填写与复核要点（字段与口径、产品与批次标识、材料与用量、数量与计数、检验与分拣、异常与返工与遗留项、原始记录与修订留痕）；（3）如何撰写一份可交接的班次与生产摘要（产品与工单—材料与数量—设备运行—检验结果—异常与处置—遗留项与建议）；（4）如何记录与保存生产与检验数据，并区分可公开信息与涉及企业与客户的受控资料；（5）如何在发现机器或能源未隔离或起重或粉尘与化学品风险、超出岗位授权或安全风险时暂停并复核与隔离与上报。使用公开资料与模拟数据作答，不使用任何真实企业或产线数据。"
+              "到「入行与 S 表：生产批次交接」做原题和变式，再打开折叠参考解。"
             ]
           },
           "id": "helpers-production-workers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24145,7 +24142,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜美国 O*NET 51-9198.00 的工作活动重要性显示：搬运与移动物体（87）与进行一般身体活动（84）与识别对象、动作与事件（72）与评估信息以判断是否符合标准（71）与判断对象、服务或人的质量（71）与监控过程、材料或环境（71）是该职业最重要的活动；工作情境显示：精确性要求高（66% 极其重要）、生产节拍带来时间压力（80% 每天）、面对面讨论频繁（83% 每天）、接触危险设备 常见（56% 每天）、接触污染物 常见（74% 每天）、受生产计划与节拍与订单约束。若你愿意围绕材料与设备与产线动手配合、能按操作员指令与工艺把上料与搬运与检验与记录做扎实，并对作业安全与生产质量与现场秩序负责，本职业的日常要求与你的工作方式更接近。"
+              "如果你愿意按工单核对原始记录、保留差异并交给指定复核人，可以进一步了解岗位。"
             ]
           },
           "id": "helpers-production-workers.quick-decision.fit-decision-checklist.3",
@@ -24159,7 +24156,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜O*NET 同时显示（51-9198.00，工作情境与任务口径）：接触危险设备 常见（56% 每天）；接触污染物 常见（74% 每天）；长时间站立（51% 持续或几乎持续、13% 超过一半时间）；生产节拍带来时间压力（80% 每天）；错误的后果较严重（21% 极其严重、28% 非常严重）；接触极热或极冷温度。本职业以设备与产线与材料与成品为对象：一次能源未隔离即清理或拆装、一次起重或搬运不当、一次上料或计数或检验失误、一次清洁或整理不到位，都可能造成设备损坏、产品返工、人身伤害与产线中断与合规风险。O*NET 将该职业列入 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；该页学历部分显示 35% 表示要求低于高中文凭、32% 表示要求高中文凭或同等学历、20% 表示要求高中后证书（该页列出上述三项）；增长标为 Decline（-9%），该页未标注 Bright Outlook。若你难以在粉尘与污染物与噪声与高温或低温与产线节拍下作业、难以接受随生产计划与订单变化与可能加班与倒班的节奏，或不愿对安全与生产质量承担责任，应把这些作为现实成本。"
+              "生产助手常在设备附近重复备料、搬运和清点。看岗位时问清材料重量、轮换、异常上报和可接触的设备范围。"
             ]
           },
           "id": "helpers-production-workers.quick-decision.fermat-decision-card.6",
@@ -24173,7 +24170,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项作业上同时完成三件事：把技术做实（依据工单与工艺完成上料与搬运与检验与计数与清洁与记录，产出可用的生产与检验记录）、把安全与合规与边界管住（按能源隔离与上锁挂牌与起重与搬运与机械与粉尘与化学品与个人防护与作业许可要求工作并留痕、区分可公开信息与涉及企业与客户的受控资料并按制度处理、不在无授权时操作关键设备或越界处置）、并承担可界定的岗位责任（对本人上料与搬运与检验与计数与清洁与记录负责，对超出岗位授权或涉及特种设备与重大安全事项按制度提请相应岗位或机构处理）。建议用一次可核验的体验（为一份虚构工单完成一份协助作业方案与一份生产与检验记录说明，或一次机器或起重或质量异常的处置复盘）来检验，而不是仅依据兴趣问卷的结论。"
+              "适合愿意重复核对批次标签与放行记录、搬运并记录材料，以及及时把未决差异交给负责人的人。"
             ]
           },
           "id": "helpers-production-workers.quick-decision.fermat-decision-card.7",
@@ -24195,7 +24192,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜本页的「生产辅助工」是 O*NET 51-9198.00（Helpers--Production Workers）这一精确职业，工作可以分成几类：（一）材料与搬运——人工或使用起重设备搬运原材料、成品与包装件，在仓储与作业区之间转移成品与原材料与工具与设备；（二）上料与下料——从机器与输送机与运载工具装卸物品，从机器取出产品与附件或废料，按工艺把原材料送入机器料斗或准备加工；（三）生产配合——操作生产过程中的机器或协助机器操作员，启动机器或设备，放置产品以进行后续加工或包装；（四）检验与标识——在零件上打标记或贴标识，清点成品以判断订单是否完成，检查产品以确认是否符合质量标准，按重量与等级与尺寸或成分分选产品；（五）清洁与记录——清洁作业区与机器与设备与产品，打包与存放材料与产品，读数并记录数据与数量与时间。"
+              "生产助手按工单准备和递送材料或工具，清理指定区域，并记录物料批次与未决问题。班组会按设备、工序和授权划定任务。"
             ]
           },
           "id": "helpers-production-workers.profile.career-quick-answers-block.1",
@@ -24209,7 +24206,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 与 BLS 职业档案要点｜本页对应 O*NET/SOC 51-9198.00「Helpers--Production Workers」（生产辅助工）这一精确职业，官方范围原文：Help production workers by performing duties requiring less skill. Duties include supplying or holding materials or tools, and cleaning work area and equipment. 该页列出 34 项任务，页面默认展示前 5 项：人工或使用起重设备搬运原材料与成品与包装件、在零件上打标记或贴标识、观察设备运行以及时发现故障并把任何故障通知操作员、清点成品以判断订单是否完成、检查产品以确认是否符合质量标准。该页工作活动重要性：搬运与移动物体（87）、进行一般身体活动（84）、识别对象与动作与事件（72）、评估信息以判断是否符合标准（71）、判断对象与服务或人的质量（71）。该页学历部分显示 35% 表示要求低于高中文凭、32% 表示要求高中文凭或同等学历、20% 表示要求高中后证书（该页列出上述三项），增长标为 Decline（-9%），未标注 Bright Outlook；该页标注无可达最低分数的必备与可迁移技能，工作风格仅列可靠性。"
+              "O*NET 描述备料、工具供应和工作区清理等辅助任务。应聘时核对设备、搬运、记录和带教分工。"
             ]
           },
           "id": "helpers-production-workers.profile.onet-structured-fields-block.1",
@@ -24228,12 +24225,14 @@
               "生产配合｜协助操作与放置产品｜操作生产过程中的机器或协助机器操作员，启动机器或设备，放置产品以进行后续加工或检验或包装。",
               "检验与标识｜标识与计数与检验｜在零件上打标记或贴标识，清点成品以判断订单是否完成，检查产品以确认是否符合质量标准，按重量与等级与尺寸分选。",
               "清洁与记录｜清洁与打包与读数｜清洁作业区与机器与设备与产品，打包与存放材料与产品，读数并记录数据与数量与时间。",
-              "安全与协作｜能源隔离与起重与防护｜按能源隔离与上锁挂牌与起重与搬运与机械与粉尘与化学品与个人防护要求配合操作员与班组作业，处置异常并上报。"
+              "安全与协作｜设备与吊运防护｜防护失效、设备或吊运出现异常、分工不清时，助手先停手、退离并报告现场负责人，按分工保留原始记录。 涉及适用的检维修危险能量控制时，由受训授权人员按程序隔离、验证并决定何时恢复。"
             ]
           },
           "id": "helpers-production-workers.profile.responsibilities-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-energy",
+            "osha-guarding"
           ],
           "type": "list"
         },
@@ -24242,7 +24241,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "场所与环境｜工厂与产线与仓储区为主要作业场所；常在产线与设备与仓储区作业（O*NET 工作情境与任务口径，下同）\n防护与暴露｜接触危险设备 常见（56% 每天）；接触污染物 常见（74% 每天）；接触机器与生产噪声 常见；暴露于机器与手持工具振动\n体力与姿势｜长时间站立（51% 持续或几乎持续、13% 超过一半时间）；常在产线与设备与仓储区作业；身体接近程度中等（47% 一臂之距、15% 稍有接近）\n沟通与协作｜与操作员与产线同事紧密协作（47% 持续与他人接触）；面对面讨论频繁（83% 每天）\n精确与责任｜精确性要求高（66% 极其重要）；错误的后果较严重（21% 极其严重、28% 非常严重）；对他人的健康与安全责任较高（39% 极高责任、31% 高责任）\n进度与节奏｜受生产计划与节拍与订单约束；生产节拍带来时间压力（80% 每天）；节奏由产线节拍与操作员决定\n设备与材料｜机器与输送机与起重与搬运设备与材料与成品\n排班与现场｜排班以规律为主（67% 规律、33% 不规律）；以团队协作作业为主；工作日程以规律为主、随生产与合同期变化（67% 规律、33% 不规律）\n自动化｜自动化程度中等偏低（38% 中度自动化、35% 完全不自动化）"
+              "场所与环境｜工厂与产线与仓储区为主要作业场所；常在产线与设备与仓储区作业（O*NET 工作情境与任务口径，下同）\n防护与暴露｜接触危险设备 常见（56% 每天）；接触污染物 常见（74% 每天）；接触机器与生产噪声 常见；暴露于机器与手持工具振动\n体力与姿势｜长时间站立（51% 持续或几乎持续、13% 超过一半时间）；常在产线与设备与仓储区作业；身体接近程度中等（47% 一臂之距、15% 稍有接近）\n沟通与协作｜与操作员与产线同事紧密协作（47% 持续与他人接触）；面对面讨论频繁（83% 每天）\n精确与责任｜精确性要求高（66% 极其重要）；错误的后果较严重（21% 极其严重、28% 非常严重）；对他人的健康与安全责任较高（39% 极高责任、31% 高责任）\n进度与节奏｜O*NET 受访者中，80% 报告每天需要满足严格期限。产线节拍与轮换由用人单位说明。\n设备与材料｜机器与输送机与起重与搬运设备与材料与成品\n排班与现场｜排班以规律为主（67% 规律、33% 不规律）；以团队协作作业为主；工作日程以规律为主、随生产与合同期变化（67% 规律、33% 不规律）\n自动化｜自动化程度中等偏低（38% 中度自动化、35% 完全不自动化）"
             ]
           },
           "id": "helpers-production-workers.profile.work-context-block.1",
@@ -24284,7 +24283,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工单与材料核对 → 能源隔离与防护确认 → 上料与搬运与备料 → 机器运行观察与协助操作 → 打标识与计数与检验 → 清洁与整理与记录与交接"
+              "接收工单 → 核对分工 → 核对批次和放行记录 → 报告差异 → 协助已分配任务 → 交接记录"
             ]
           },
           "id": "helpers-production-workers.profile.career-quick-answers-block.3",
@@ -24312,12 +24311,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "安全与合规说明｜按安全生产与能源隔离与上锁挂牌与起重与搬运与机械与粉尘与化学品与职业健康与记录要求组织工作：上料与搬运与检验与计数与清洁须与工艺与现行标准一致并标明来源与局限，不得替代设备安全检验、特种设备检验或安全许可要求；涉及能源隔离与上锁挂牌与起重与搬运与受限空间作业的须按规定办理作业许可与个人防护；涉及企业与客户与设备厂商技术资料的收集与使用与对外提供须具有合法依据并限于最小必要范围并按制度审批与留痕。"
+              "一般搬运按岗位规程和授权执行。吊装、有限空间或设备检维修按实际任务核适用资格和现场安排。美国 1910.147 用于适用检维修的危险能量控制。"
             ]
           },
           "id": "helpers-production-workers.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "osha-energy"
           ],
           "type": "prose"
         },
@@ -24326,12 +24327,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国51-9198.00本职业2025就业167,400人；2025—2035总体预测Decline（-1%或更低），年均空缺20,900个含增长及更替；非净新增、当前招聘或AI因果，未核更替占比。"
+              "应聘时核现场培训、物料和设备分工。"
             ]
           },
           "id": "helpers-production-workers.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -24340,7 +24342,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "接受工单与材料核对 → 能源隔离与防护确认 → 上料与下料与搬运 → 机器运行观察与协助操作 → 检验与计数与标识 → 清洁与打包与记录与交接"
+              "接受工单与材料核对 → 按岗位核对防护与分工 → 上料与下料与搬运 → 机器运行观察与协助操作 → 检验与计数与标识 → 清洁与打包与记录与交接"
             ]
           },
           "id": "helpers-production-workers.profile.career-quick-answers-block.5",
@@ -24368,12 +24370,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录与协作｜按企业生产与质量与安全管理制度记录工单、材料与规格与用量、上料与下料与搬运、机器运行观察、打标识与计数、检验与分拣、清洁与整理与异常与返工与遗留项与班次交接与原始记录与修订留痕，并与操作员与班组与质检与安全人员核对产品与批次，异常须及时隔离并上报。"
+              "记录与协作｜防护失效、设备或吊运出现异常时，助手先停手、退离并报告。按分工保留原始记录。适用检维修的危险能量隔离、验证和恢复由受训授权人员处理。"
             ]
           },
           "id": "helpers-production-workers.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-energy",
+            "osha-guarding"
           ],
           "type": "prose"
         },
@@ -24382,7 +24386,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本页对应 O*NET 51-9198.00（生产辅助工），与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以设备与产线与材料与成品与现场配合为对象，产出为按工单与工艺完成的配合作业（材料与上料与搬运与检验与计数与清洁）与可追溯的生产与检验记录，凭材料与设备与现场配合能力在操作员与岗位授权范围内完成作业，对作业安全与生产质量与现场秩序负责；装配工与制造工与机器送料工与包装机器操作员与检验员与手工搬运工以各自专业作业为产出，责任与授权层级不同。"
+              "边界结论｜本页对应 O*NET 51-9198.00（生产辅助工），与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以设备与产线与材料与成品与现场配合为对象，产出为按工单与工艺完成的配合作业（材料与上料与搬运与检验与计数与清洁）与可追溯的生产与检验记录，凭材料与设备与现场配合能力在操作员与岗位授权范围内完成作业，对作业安全与生产质量与现场秩序负责；团队装配工与机器送料工与包装机器操作员与检验员与手工搬运工以各自专业作业为产出，责任与授权层级不同。"
             ]
           },
           "id": "helpers-production-workers.profile.career-quick-answers-block.7",
@@ -24424,7 +24428,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的主要对象与依据｜装配工与制造工依据装配与制造工艺；机器送料工与下料工依据上料与下料规程；包装机器操作员依据包装与灌装工艺；检验员与分拣员依据检验与抽样标准；手工搬运工依据搬运与仓储规程。它们多以独立操作与装配与检验或搬运为对象，与本职业的生产现场配合不同。"
+              "相邻岗位的主要对象与依据｜团队装配工依据装配与制造工艺；机器送料工与下料工依据上料与下料规程；包装机器操作员依据包装与灌装工艺；检验员与分拣员依据检验与抽样标准；手工搬运工依据搬运与仓储规程。它们多以独立操作与装配与检验或搬运为对象，与本职业的生产现场配合不同。"
             ]
           },
           "id": "helpers-production-workers.profile.career-quick-answers-block.10",
@@ -24466,7 +24470,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的核心过程｜装配工与制造工以装配与制造为主；机器送料工与下料工以上料与下料为主；包装机器操作员以包装与灌装为主；检验员与分拣员以检验与抽样与分选为主；本职业以材料与上料与搬运与检验与清洁配合为主。"
+              "相邻岗位的核心过程｜团队装配工以装配与制造为主；机器送料工与下料工以上料与下料为主；包装机器操作员以包装与灌装为主；检验员与分拣员以检验与抽样与分选为主；本职业以材料与上料与搬运与检验与清洁配合为主。"
             ]
           },
           "id": "helpers-production-workers.profile.career-quick-answers-block.12",
@@ -24480,7 +24484,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的核心过程｜接受工单与材料核对、能源隔离与防护确认、上料与下料与搬运、机器运行观察与协助操作、检验与计数与标识、清洁与打包与记录与交接；每一步都要按工单与工艺与操作员指令执行并可被操作员与质检与安全人员复核。"
+              "本职业的核心过程｜接受工单与材料核对、按岗位核对防护与分工、上料与下料与搬运、机器运行观察与协助操作、检验与计数与标识、清洁与打包与记录与交接；每一步都要按工单与工艺与操作员指令执行并可被操作员与质检与安全人员复核。"
             ]
           },
           "id": "helpers-production-workers.profile.career-quick-answers-block.13",
@@ -24494,7 +24498,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的主要产出｜装配工与制造工产出装配件与制造记录；机器送料工与下料工产出上料与下料与产量记录；包装机器操作员产出包装成品与包装记录；检验员与分拣员产出检验与分选与合格判定记录；它们与本职业的配合作业与生产与检验记录不同。"
+              "相邻岗位的主要产出｜团队装配工产出装配件与制造记录；机器送料工与下料工产出上料与下料与产量记录；包装机器操作员产出包装成品与包装记录；检验员与分拣员产出检验与分选与合格判定记录；它们与本职业的配合作业与生产与检验记录不同。"
             ]
           },
           "id": "helpers-production-workers.profile.career-quick-answers-block.14",
@@ -24676,7 +24680,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜美国 O*NET 将 51-9198.00（生产辅助工）列入 Job Zone 1-2（几乎无需至需要一定准备），SVP 区间为 低于 6.0（SVP Below 6.0）；学历部分显示 35% 表示要求低于高中文凭、32% 表示要求高中文凭或同等学历、20% 表示要求高中后证书（该页列出上述三项）；增长标为 Decline（-9%），未标注 Bright Outlook；在美国该职业准备通常为几天到一年的在岗训练。"
+              "大陆招聘可用「生产物料员」查备料与线边配送分工。面谈时核是否兼做设备、清点或质检，以及授权范围。"
             ]
           },
           "id": "helpers-production-workers.profile.career-quick-answers-block.27",
@@ -24839,7 +24843,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "结论｜本页（O*NET 51-9198.00 生产辅助工）与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以设备与产线与材料与成品与现场配合为对象，产出为按工单与工艺完成的配合作业与可追溯的生产与检验记录；装配工与制造工与机器送料工与包装机器操作员与检验员与手工搬运工以各自对象为主，产出与授权层级不同。"
+              "结论｜本页（O*NET 51-9198.00 生产辅助工）与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以设备与产线与材料与成品与现场配合为对象，产出为按工单与工艺完成的配合作业与可追溯的生产与检验记录；团队装配工与机器送料工与包装机器操作员与检验员与手工搬运工以各自对象为主，产出与授权层级不同。"
             ]
           },
           "id": "helpers-production-workers.direction-comparison.adjacent-career-comparison-table.8",
@@ -24979,7 +24983,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "装配工与制造工（装配工与制造工，51-2092.00）"
+              "团队装配工（团队装配工，51-2092.00）"
             ]
           },
           "id": "helpers-production-workers.direction-comparison.adjacent-career-comparison-table.18",
@@ -25264,16 +25268,16 @@
                 "url": "https://www.onetonline.org/link/localwages/51-9198.00"
               },
               {
-                "entity": "O*NET 51-9198.00 就业趋势（本职业自身口径，BLS 就业预测 2025—2035）",
+                "entity": "ILO 生成式 AI 与就业职业暴露指数研究",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/51-9198.00"
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET 51-9198.00 行业分布",
+                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/industry/51-9198.00"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
                 "entity": "O*NET 51-9198.00 热门技术（软件技能）",
@@ -25478,12 +25482,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务分析（编辑整理）｜材料搬运、标识、清点、初检和现场清理与数字记录环节分开。可在获准数据上试验工单、物料和数量记录初稿并核对；O*NET职责不证明系统已采用、效率提高或本职业AI暴露高低。美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。 AI影响度 8% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "软件能帮助整理批次、计数和放行记录。真实物料、设备状态、异常处置与放行由班组或质检按分工核对。"
             ]
           },
           "id": "helpers-production-workers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -25562,12 +25567,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "ILO 研究用于理解任务的潜在暴露。"
             ]
           },
           "id": "helpers-production-workers.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25940,12 +25945,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "投影含增长与替换需求"
+              "美国全国职业就业与年均空缺预测"
             ]
           },
           "id": "helpers-production-workers.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -25954,12 +25959,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "BLS 表 1.2（美国本职业 51-9198）：2025 年约 167,400 个岗位，2035 年预计约 153,600 个，变化 −8.2%，年均约 20,900 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "helpers-production-workers.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26108,12 +26113,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "就业预测与 AI 采用率、实测提效分开阅读。"
             ]
           },
           "id": "helpers-production-workers.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26206,7 +26211,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "由指定人员核对原工单、库存标签与放行记录。"
             ]
           },
           "id": "helpers-production-workers.ai-impact.ai-impact-table.70",
@@ -26388,12 +26393,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "变更与披露：材料与数量与工艺信息披露与工艺或设备变更须在授权与制度范围内进行，发现机器或起重或质量或超授权异常时按制度暂停与隔离与上报。"
+              "防护失效、设备或吊运出现异常、分工不清时，助手先停手、退离并报告现场负责人，按分工保留原始记录。"
             ]
           },
           "id": "helpers-production-workers.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-energy",
+            "osha-guarding"
           ],
           "type": "prose"
         },
@@ -26822,12 +26829,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "能源隔离与上锁挂牌由本人按资质负责（人的控制点）"
+              "涉及适用的检维修危险能量控制时，由受训授权人员按程序隔离、验证并决定何时恢复。"
             ]
           },
           "id": "helpers-production-workers.ai-impact.ai-impact-table.114",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-energy",
+            "osha-guarding"
           ],
           "type": "prose"
         },
@@ -26878,12 +26887,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "异常识别与隔离与上报与返工提请由本人按授权完成（人的控制点）"
+              "防护失效、设备或吊运出现异常、分工不清时，助手先停手、退离并报告现场负责人，按分工保留原始记录。"
             ]
           },
           "id": "helpers-production-workers.ai-impact.ai-impact-table.118",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-energy",
+            "osha-guarding"
           ],
           "type": "prose"
         },
@@ -26920,12 +26931,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "识别机器或起重或质量异常并隔离与上报"
+              "防护失效、设备或吊运出现异常、分工不清时，助手先停手、退离并报告现场负责人，按分工保留原始记录。"
             ]
           },
           "id": "helpers-production-workers.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-energy",
+            "osha-guarding"
           ],
           "type": "prose"
         },
@@ -26956,12 +26969,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位时薪 14.97 美元 / 年薪 31,140 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）"
+              "第 10 分位年薪 31,140 美元，时薪 14.97 美元。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26970,12 +26983,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国本职业2025年全国工资分布位置；边界｜非中国工资、经验等级或个人起薪，不证明学历、资格、地区的收入效应；第10/90年薪与当前国家工资页一致，25/75沿用原登记，本轮未重取。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-9198.00"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26984,12 +26997,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 25 分位时薪 16.93 美元 / 年薪 35,220 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）"
+              "第 25 分位年薪 35,220 美元，时薪 16.93 美元。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26998,12 +27011,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国本职业2025年全国工资分布位置；边界｜非中国工资、经验等级或个人起薪，不证明学历、资格、地区的收入效应；第10/90年薪与当前国家工资页一致，25/75沿用原登记，本轮未重取。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-9198.00"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27012,12 +27025,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 18.78 美元 / 中位年薪 39,070 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）"
+              "第 50 分位年薪 39,070 美元，时薪 18.78 美元。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27026,12 +27039,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国本职业2025年全国工资分布位置；边界｜非中国工资、经验等级或个人起薪，不证明学历、资格、地区的收入效应；第10/90年薪与当前国家工资页一致，25/75沿用原登记，本轮未重取。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-9198.00"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27040,12 +27053,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 75 分位时薪 22.11 美元 / 年薪 45,990 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）"
+              "第 75 分位年薪 45,990 美元，时薪 22.11 美元。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27054,12 +27067,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国本职业2025年全国工资分布位置；边界｜非中国工资、经验等级或个人起薪，不证明学历、资格、地区的收入效应；第10/90年薪与当前国家工资页一致，25/75沿用原登记，本轮未重取。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-9198.00"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27068,12 +27081,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位时薪 25.68 美元 / 年薪 53,410 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）"
+              "第 90 分位年薪 53,410 美元，时薪 25.68 美元。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27082,12 +27095,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国本职业2025年全国工资分布位置；边界｜非中国工资、经验等级或个人起薪，不证明学历、资格、地区的收入效应；第10/90年薪与当前国家工资页一致，25/75沿用原登记，本轮未重取。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-9198.00"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27096,12 +27109,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "约 167,400 个岗位（2025）"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27110,12 +27123,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS就业预测2025—2035，经O*NET本职业详情呈现；边界｜与OEWS工资范围不同；美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27124,12 +27137,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "−8.2%"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27138,12 +27151,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS就业预测2025—2035，经O*NET本职业详情呈现；边界｜与OEWS工资范围不同；美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27152,12 +27165,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "预计年均约 20,900 个"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27166,12 +27179,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS就业预测2025—2035，经O*NET本职业详情呈现；边界｜与OEWS工资范围不同；美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27194,7 +27207,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜生产辅助工以较低技能要求任务协助生产工人；美国Job Zone1—2是准备程度描述，新聘学历要求非在岗学历构成、中国统一门槛或完成训练期限。"
+              "按招聘职责识别辅助岗位。师傅工种与助手的任务和授权分别核对。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.24",
@@ -27208,7 +27221,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "制造或生产或仓储相关学历与训练"
+              "工作分工"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.25",
@@ -27222,7 +27235,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按目标岗位招聘条件核对"
+              "核对辅助范围"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.26",
@@ -27236,7 +27249,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国新聘者要求35%低于高中、32%高中或同等、20%高中后证书；不是在岗人群比例或中国学历门槛。"
+              "问清备料、搬运和交接由谁复核。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.27",
@@ -27250,7 +27263,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "材料与上料与搬运与检验与计数能力"
+              "培训与防护"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.28",
@@ -27264,7 +27277,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "所有岗位"
+              "核对带教"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.29",
@@ -27278,7 +27291,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位通常要求能上料与下料与搬运与检验与计数与清洁，并遵守能源隔离与上锁挂牌与起重与机械与粉尘与化学品安全要求"
+              "问清进场培训和哪些任务需另核授权。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.30",
@@ -27292,7 +27305,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "起重与特种设备与危险作业等资格"
+              "基本报酬"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.31",
@@ -27306,7 +27319,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "涉及相应作业岗位"
+              "核对计薪单位"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.32",
@@ -27320,7 +27333,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "仅相应法定目录作业涉及资格要求；证书、企业岗位授权与现场作业许可分别核对，不等同。"
+              "分清日薪、小时工资或月薪。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.33",
@@ -27334,7 +27347,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业健康与劳动保护要求"
+              "额外报酬"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.34",
@@ -27348,7 +27361,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "涉及粉尘与污染物与噪声与高温或低温岗位"
+              "核对支付条件"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.35",
@@ -27362,7 +27375,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "危害岗位按适用职业健康规定和企业制度核检查、防护及报告安排；不推所有岗位必须轮岗。"
+              "问清加班、停工和试用期计薪。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.36",
@@ -27476,7 +27489,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜生产辅助工（O*NET/SOC 51-9198.00 Helpers--Production Workers；招聘与行业内常称生产辅助工、操作工辅助人员、装配辅助人员、包装工、产线辅助人员）。"
+              "中国大陆工资参考"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.44",
@@ -27490,12 +27503,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮所核国家统计局2025年行业工资发布未提供51-9198.00对应中国全国职业工资分布；制造业均值只是行业背景，不代填职业中位、起薪、到手收入。"
+              "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局 2025 年表 2、5 给出城镇制造业年平均工资，非私营单位 113,594 元，私营单位 76,055 元。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27504,7 +27517,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮所核国家统计局2025年行业工资发布未提供51-9198.00对应中国全国职业工资分布；制造业均值只是行业背景，不代填职业中位、起薪、到手收入。"
+              "应聘时按班组、合同和实际任务核对工时、计薪单位及授权。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.46",
@@ -27546,7 +27559,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国制造业：城镇非私营单位，2025年"
+              "城镇非私营单位 · 制造业"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.49",
@@ -27561,13 +27574,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年平均工资113,594元；全国城镇非私营制造业就业人员，含税工资总额口径，覆盖多职业，非本职业中位、月薪或到手收入。"
+              "113,594 元／年"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "nbs-wage-release-2025",
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27576,7 +27588,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国制造业：城镇私营单位，2025年"
+              "城镇私营单位 · 制造业"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.51",
@@ -27591,13 +27603,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年平均工资76,055元；全国城镇私营制造业就业人员，含税工资总额口径，覆盖多职业，非本职业中位、月薪或到手收入。"
+              "76,055 元／年"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "nbs-wage-release-2025",
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27606,7 +27617,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆本职业精确全国职业工资"
+              "全国城镇非私营单位 · 全行业"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.53",
@@ -27620,12 +27631,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮所核国家统计局2025年行业工资发布未提供51-9198.00对应中国全国职业工资分布；制造业均值只是行业背景，不代填职业中位、起薪、到手收入。"
+              "129,441 元／年"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27634,12 +27645,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜本页为 O*NET 51-9198.00（生产辅助工）这一精确职业，与装配工与制造工（51-2092.00）、机器送料工与下料工（53-7063.00）、包装与灌装机器操作员与看管员（51-9111.00）、检查员与测试员与分拣员与采样员与称重员（51-9061.00）、劳工与货运与物料搬运工（手工）（53-7062.00）等相邻职业不同；工资与就业须按各自职业代码与统计口径核对，不能互相套用。"
+              "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局 2025 年城镇制造业年平均工资为非私营单位 113,594 元、私营单位 76,055 元。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27662,7 +27673,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含人员替补。预测非实际招聘、净新增或AI归因，不能推个人结果。"
             ]
           },
           "id": "helpers-production-workers.china-salary.career-snapshot-primary-locale.58",
@@ -27698,12 +27709,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OEWS工资定义｜https://www.bls.gov/oes/oes_ques.htm；当前就业预测经O*NET详情｜https://www.onetonline.org/link/details/51-9198.00；本职业国家工资｜https://www.onetonline.org/link/localwages/51-9198.00"
+              "O*NET 全国职业工资｜https://www.onetonline.org/link/localwages/51-9198.00；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；《中华人民共和国安全生产法》第二十八条｜https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -27712,12 +27725,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 18.78 美元 / 中位年薪 39,070 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）"
+              "第 50 分位年薪 39,070 美元，时薪 18.78 美元。"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27726,12 +27739,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国本职业（51-9198.00）全国中位数（2025 年，BLS OEWS，经 O*NET 在 51-9198.00 页呈现）；边界｜含生产奖金等规定工资项目，不含加班费、轮班差额、非生产奖金和雇主福利成本，中位为分布中点；来源｜O*NET 国家工资（BLS OEWS 2025）"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-9198.00"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27740,12 +27753,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位时薪 14.97 美元 / 年薪 31,140 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）"
+              "第 10 分位年薪 31,140 美元，时薪 14.97 美元。"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27754,12 +27767,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜2025年第10百分位；边界｜不是新手工资或最低工资；来源｜O*NET本职业国家工资页"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-9198.00"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27768,12 +27781,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 25 分位时薪 16.93 美元 / 年薪 35,220 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）"
+              "第 25 分位年薪 35,220 美元，时薪 16.93 美元。"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27782,12 +27795,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜2025年第25百分位，沿用原登记；边界｜本轮未重取，不证明经验或地区对收入的影响；来源｜原O*NET工资登记"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-9198.00"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27796,12 +27809,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 75 分位时薪 22.11 美元 / 年薪 45,990 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）"
+              "第 75 分位年薪 45,990 美元，时薪 22.11 美元。"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27810,12 +27823,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜2025年第75百分位，沿用原登记；边界｜非资深工资，不证明岗位职责的收入效应；来源｜原O*NET工资登记"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-9198.00"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27824,12 +27837,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位时薪 25.68 美元 / 年薪 53,410 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）"
+              "第 90 分位年薪 53,410 美元，时薪 25.68 美元。"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27838,12 +27851,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜2025年第90百分位；边界｜非最高工资或资深等级；来源｜O*NET本职业国家工资页"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/51-9198.00"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27852,12 +27865,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "约 167,400 个岗位（2025）"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27866,12 +27879,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS就业预测2025—2035；边界｜美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。；来源｜https://www.onetonline.org/link/details/51-9198.00"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27880,12 +27893,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "−8.2%"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27894,12 +27907,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS就业预测2025—2035；边界｜美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。；来源｜https://www.onetonline.org/link/details/51-9198.00"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27908,12 +27921,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "预计年均约 20,900 个"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27922,12 +27935,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS就业预测2025—2035；边界｜美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。；来源｜https://www.onetonline.org/link/details/51-9198.00"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27950,12 +27963,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国本职业2025年中位时薪18.78美元、年薪39,070美元；OEWS为税前正常工时工资，包括生产奖金等规定项目，不含加班费、轮班差额、非生产奖金和雇主福利成本。中位非起薪；分位非经验等级，不识别收入差异原因。美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "2025 年 5 月，美国生产助手 51-9198 全国工资中位数为 39,070 美元／年、18.78 美元／时。"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28048,7 +28061,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含人员替补。预测非实际招聘、净新增或AI归因，不能推个人结果。"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.33",
@@ -28076,7 +28089,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业精确读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "未核实"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.35",
@@ -28118,7 +28131,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业精确读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "未核实"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.38",
@@ -28160,7 +28173,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业精确读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "未核实"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.41",
@@ -28202,7 +28215,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业精确读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "未核实"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.44",
@@ -28272,7 +28285,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资分位与就业预测分开阅读；中位非起薪，美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "工资分位与就业预测分开阅读；中位非起薪，美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含人员替补。预测非实际招聘、净新增或AI归因，不能推个人结果。"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.49",
@@ -28300,12 +28313,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第10百分位描述工资分布下段边界，不识别新手、搬运清洁职责或进入该位置的原因。"
+              "2025 年 5 月美国全国职业工资分位。"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28314,12 +28327,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位为全国分布中点，非个人起薪，不预测技能或资格带来的上涨。"
+              "2025 年 5 月美国全国职业工资分位。"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28328,12 +28341,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第90百分位描述分布上段位置，非资深薪酬、最高工资或工资上限。"
+              "2025 年 5 月美国全国职业工资分位。"
             ]
           },
           "id": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -28360,31 +28373,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "包装与灌装机器操作员与看管员",
@@ -28393,7 +28406,7 @@
                 "url": "/zh/career/jobs/packaging-and-filling-machine-operators-and-tenders"
               },
               {
-                "entity": "装配工与制造工",
+                "entity": "装配与制造工（职业大类）",
                 "id": "link-8",
                 "relation": "career.related",
                 "url": "/zh/career/jobs/assemblers-and-fabricators"
@@ -28923,12 +28936,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能在操作员与岗位授权与工单工艺范围内独立完成上料与搬运与检验与计数与清洁与记录"
+              "能按分工核对工单、物料批次和放行记录，将未决项交库管或质检。"
             ]
           },
           "id": "helpers-production-workers.fit.personality-fit-block.29",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -28951,7 +28965,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "装配工与制造工方向｜以装配工与制造工的核心产出为参照：见方向比较表；与本职业在对象与专业与授权层级上不同"
+              "装配与制造工大类方向｜以装配与制造工大类的核心产出为参照：见方向比较表；与本职业在对象与专业与授权层级上不同"
             ]
           },
           "id": "helpers-production-workers.fit.personality-fit-block.31",
@@ -29301,12 +29315,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：愿意在能源隔离与上锁挂牌与起重与搬运与机械与粉尘与化学品要求下对作业安全与生产质量负责，能在上料与搬运与检验与计数与清洁之间切换并保持对依据与记录的重视，能在产线节拍与交货压力下坚持规程与证据与复核，并在设备或质量异常或超授权时按制度隔离与上报。"
+              "适配信号｜能在规定的上料、计数、分选和清洁任务之间切换，按工单记录数量、标签和差异，遇到异常先停手、退离并报告。"
             ]
           },
           "id": "helpers-production-workers.fit.personality-fit-block.56",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-energy",
+            "osha-guarding"
           ],
           "type": "prose"
         },
@@ -29385,7 +29401,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对工作情境（生产节拍带来时间压力（80% 每天）、面对面讨论频繁（83% 每天）、接触危险设备 常见（56% 每天）、接触污染物 常见（74% 每天））。"
+              "用于核对工作情境（80% 的受访者报告每天需要满足严格期限、面对面讨论频繁（83% 每天）、接触危险设备 常见（56% 每天）、接触污染物 常见（74% 每天））。"
             ]
           },
           "id": "helpers-production-workers.fit.personality-fit-block.62",
@@ -29441,12 +29457,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "试做后核实际岗位的搬运重量、轮换和班次。"
             ]
           },
           "id": "helpers-production-workers.fit.personality-fit-block.66",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise"
           ],
           "type": "prose"
         }
@@ -29512,12 +29529,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界｜风险是依据任务识别的编辑失效示例，非事故发生率或风险评级。一般质量放行按企业授权；特种设备检验、事故认定和职业病诊断等另依法定资格与程序处理。"
+              "设备防护缺失、卡料或能量状态不明时，停止、退离并报告班组负责人。设备处置和实际放行交现场指定人员。"
             ]
           },
           "id": "helpers-production-workers.risk.career-risk-cards.8",
           "source_refs": [
-            "onet"
+            "osha-guarding",
+            "osha-energy",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29540,7 +29559,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围｜本页依据 O*NET 51-9198.00 的任务与工作情境（搬运原材料与成品与包装件、在零件上打标记或贴标识、观察设备运行并及时报告故障、清点成品并检查产品是否符合质量标准；接触危险设备 常见（56% 每天）、接触污染物 常见（74% 每天）、生产节拍带来时间压力（80% 每天）、错误的后果较严重（21% 极其严重、28% 非常严重））与美国职业分类口径，用于识别失效类型与控制要点，不构成法律或安全结论。"
+              "证据范围｜本页依据 O*NET 51-9198.00 的任务与工作情境（搬运原材料与成品与包装件、在零件上打标记或贴标识、观察设备运行并及时报告故障、清点成品并检查产品是否符合质量标准；接触危险设备 常见（56% 每天）、接触污染物 常见（74% 每天）、80% 的受访者报告每天需要满足严格期限、错误的后果较严重（21% 极其严重、28% 非常严重））与美国职业分类口径，用于识别失效类型与控制要点，不构成法律或安全结论。"
             ]
           },
           "id": "helpers-production-workers.risk.career-risk-cards.10",
@@ -29582,12 +29601,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按能源隔离与上锁挂牌与锁定确认与验证要求作业并落实防护；发现能源或设备异常立即停止并复核对并与上报"
+              "防护缺失、设备卡料或能量状态不明时，停止、退离并报告班组负责人。美国适用设备检修的能量控制由授权人员按程序执行。"
             ]
           },
           "id": "helpers-production-workers.risk.career-risk-cards.13",
           "source_refs": [
-            "onet"
+            "osha-guarding",
+            "osha-energy"
           ],
           "type": "prose"
         },
@@ -29638,12 +29658,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按起重与搬运与堆放规程作业并检查吊具与堆载与固定；发现起重或堆载异常立即撤离并隔离与上报"
+              "先核材料重量、搬运路线和允许使用的器具。发现吊装区域未隔离或堆放不稳，避开并报告现场负责人。"
             ]
           },
           "id": "helpers-production-workers.risk.career-risk-cards.17",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -29694,12 +29715,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按通风与除尘与个人防护与物质安全要求作业并使用合适防护用品；发现粉尘或化学品异常立即停止并复核对并与上报"
+              "先向班组核材料危害、防护和报告流程。标签或防护不明时停止接触并报告。"
             ]
           },
           "id": "helpers-production-workers.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -29750,12 +29772,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "机器与高温作业须按防护与断电与隔离要求执行；发现机械或高温异常立即停止并隔离与上报"
+              "暂停受影响的工作，离开暴露区域并报告现场负责人。由指定人员确认防护恢复后再复工。"
             ]
           },
           "id": "helpers-production-workers.risk.career-risk-cards.25",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -29764,12 +29787,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜机器防护与断电手续尚未齐备，被要求先行清理并稍后补办手续。"
+              "场景｜高温或噪声防护失效，现场仍要求继续备料。"
             ]
           },
           "id": "helpers-production-workers.risk.career-risk-cards.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -29806,12 +29830,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按工单与工艺完成上料与搬运与检验与计数；发现不合格或返工立即隔离并上报与配合返修"
+              "保留不合格的数量、检验原值和批号，标记待核，并交仓储、质检或获授权的放行人。"
             ]
           },
           "id": "helpers-production-workers.risk.career-risk-cards.29",
           "source_refs": [
-            "onet"
+            "onet",
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -29983,7 +30008,7 @@
             ],
             "rows": [
               [
-                "装配工与制造工",
+                "团队装配工",
                 "零部件装配与制造与检验辅助",
                 "装配训练记录或产线经历",
                 "一份虚构的装配与检验要点表",
@@ -30035,7 +30060,7 @@
                 "id": "education",
                 "values": [
                   "美国 O*NET 将 51-9198.00（生产辅助工）列入 Job Zone 1-2（几乎无需至需要一定准备），SVP 区间为 低于 6.0（SVP Below 6.0）；学历部分显示 35% 表示要求低于高中文凭、32% 表示要求高中文凭或同等学历、20% 表示要求高中后证书（该页列出上述三项）；该描述不取代企业与主管机关对资格与作业许可的要求。",
-                  "能否独立完成上料与搬运与检验与计数不取决于学历本身，而取决于是否经过技能训练与取得相应资格并在岗位授权范围内作业。",
+                  "BLS 表 1.2 将高中或同等学历及短期在岗培训列为该职业的典型美国入行准备。向雇主核实带教、允许使用的工具和报告对象。",
                   "学历与训练只影响准入起点，能否熟练完成上料与下料与搬运与检验与计数与清洁主要取决于在岗训练与带教与考核结果。"
                 ]
               },
@@ -30043,7 +30068,7 @@
                 "id": "clearance",
                 "values": [
                   "常见要求：安全操作与个人防护要求；能源隔离与上锁挂牌与锁定确认要求；起重与搬运与特种设备与危险作业许可要求；粉尘与化学品与噪声与高温防护要求；生产与检验记录要求。",
-                  "涉及特种设备检验、质量合格判定、事故认定、职业病诊断的须由具备相应资格的岗位或机构处理。",
+                  "《安全生产法》第二十八条要求生产经营单位对从业人员进行安全生产教育和培训，培训合格后方可上岗。",
                   "涉及企业与客户与设备厂商技术资料的数据须按保密与最小必要要求管理，不得外发至未授权环境。"
                 ]
               },
@@ -30067,7 +30092,8 @@
           },
           "id": "helpers-production-workers.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -30080,41 +30106,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "练习材料（全部虚构）",
-                  "一份生产工单与一张零件图或工艺卡与一份材料清单（材料与零件与规格）、一份质量要求与计数说明、量具与起重与搬运设备使用说明。",
-                  "一份空白材料与上料与数量与检验与清洁记录表。"
+                  "S 表：生产批次交接",
+                  "虚构纸面练习。工单要领批次 A17 的三个料箱。S1 标签 A17，放行栏为已放行；S2 标签 A71，放行栏为已放行；S3 标签 A17，放行栏为空。批次相符且有放行记录才标可交接。批次冲突交库管，缺放行记录交质检。变式只把 S3 的放行栏补为已放行。分别记录两种情况下的状态、原值与复核人。",
+                  "用题面提供的两份记录，不需要现场或工具。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "练习任务",
-                  "为一份虚构工单编制一份协助作业方案并填写一份生产与检验记录。",
-                  "说明材料与搬运与备料、能源隔离与防护确认、上料与下料、机器运行观察与协助操作、打标识与计数与检验、清洁与记录与异常预案。"
+                  "要交付的记录",
+                  "分别写原题和变式。每行记录原值、状态和复核人。",
+                  "差异原值保留至复核完成。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "做法建议",
-                  "先核对产品与工单与材料与安全条件，再按工单与工艺确定上料与搬运与检验与计数步骤。",
-                  "执行时记录数量与检验与用量数据，完成后清洁与核对；对信息不足处明确标注并说明为何不代填。"
+                  "完成后复核",
+                  "保存两种答案，再到「常见问题」打开「纸面练习参考解」。",
+                  "下方链接可跳到常见问题。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界说明",
-                  "本练习只用于检验流程理解与记录能力，所有企业与产线与数据均为虚构。"
+                  "练习边界",
+                  "只核纸面记录。"
                 ]
               }
             ]
           },
           "id": "helpers-production-workers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "paper-answer-key"
           ],
-          "title": "入行练习：一次完整的上料与搬运与检验与计数配合任务（虚构材料）",
+          "title": "纸面试做",
           "type": "cards"
         },
         {
@@ -30126,28 +30153,28 @@
                 "id": "requirements-matrix",
                 "values": [
                   "作品矩阵",
-                  "把一份虚构的协助作业方案、一份材料与规格与用量记录、一份上料与搬运与计数记录、一份检验与清洁与异常处置说明整理成作品集，逐项对应招聘要求中的上料与搬运与检验与计数与清洁与安全与记录能力。"
+                  "把两份原记录并排，注明差异。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "独立复核",
-                  "把方案与记录交给他人按工单与工艺复核，检查上料与计数与检验是否自洽；能被他人在不看说明的情况下复核，才说明方案与记录可交接。"
+                  "保留待核项及各自复核人。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "汇报摘要",
-                  "用一页说明本批次的产品与工单—材料与数量—设备运行—检验结果—遗留项，便于面试或带教时展示你如何把产品与依据与记录串起来。"
+                  "分别写原题和变式的一行摘要。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "工具说明",
-                  "说明你所用计数与量具与称重设备的读数与误差与校准情况，以及哪些判断依赖经验而非工具，体现对数据与依据边界的把握。"
+                  "使用纸笔核对，完成后读参考解。"
                 ]
               }
             ]
@@ -30217,59 +30244,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（接受工单—能源隔离与防护确认—上料与下料与搬运—机器运行观察与协助操作—检验与计数与标识—清洁与记录）。",
-                  "记录你观察到的能源隔离与上锁挂牌与起重与机械安全要求。"
+                  "理解本职业的工作对象与流程（接受工单—按岗位核对防护与分工—上料与下料与搬运—机器运行观察与协助操作—检验与计数与标识—清洁与记录）。",
+                  "读工单，列出需要核对的字段。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "随操作员观摩一次上料与检验，记录步骤与数量与安全动作。",
-                  "整理一份你观察到的上料与检验步骤与判据清单。"
+                  "逐行对照两份原记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "在带教下参与工具与量具准备与记录填写与材料整理。",
-                  "写出你认为最容易出错的三个环节及原因。"
+                  "把差异分给题面指定的复核人。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "在带教下参与一次机器运行观察与故障报告。",
-                  "说明如果机器或起重或质量异常你会如何停止与上报。"
+                  "只改变式要求的一项，重做状态判断。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "在带教下参与一次计数与检验与清洁并填写记录。",
-                  "列出判定合格与否的依据与不合格的隔离处置步骤。"
+                  "保留原题和变式的记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "整理一份虚构批次的上料与数量与检验记录说明并与操作员核对。",
-                  "记录你与操作员在计数或检验或判定上的分歧及处理方式。"
+                  "打开折叠参考解核对。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "复盘七天体验：哪一类任务你有把握、哪一类需要更多训练，并据此决定是否继续投入。",
-                  "把复盘结论写成一页，作为是否入行的依据而不是凭兴趣判断。"
+                  "做完 S 表原题和变式后，打开折叠参考解核对批次和放行。",
+                  "写下一个需要向雇主确认的分工问题。"
                 ]
               }
             ]
           },
           "id": "helpers-production-workers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天体验：用虚构材料完成一次上料与检验与记录闭环",
+          "title": "纸面核对顺序",
           "type": "timeline"
         },
         {
@@ -30277,20 +30304,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能在安全与规程与质量要求下完成上料与搬运与检验与计数与清洁并使过程与依据可复核。",
-              "继续：在产线节拍与交货压力下坚持规程与证据与留痕，不因赶工跳过核对或放宽安全或伪造记录。",
-              "继续：能用一次可核验的配合任务或异常处置复盘证明自己的材料与生产与配合能力。",
-              "继续：愿意在粉尘与污染物与噪声与产线节拍环境中长期动手工作并对作业安全与生产质量负责。",
-              "谨慎：若七天体验中反复对安全规章或规程核对感到难以坚持，应重新评估适配。",
-              "谨慎：若难以接受随生产计划与订单变化的加班与倒班与节奏，或难以承受产线节拍环境，应重新评估适配。",
-              "谨慎：若对机器或起重或质量异常倾向先处置后补依据，应重新评估职业适配与风险意识。"
+              "记录差异、原值与复核人后，再核对实际岗位分工。",
+              "到常见问题打开参考解，复核记录和交接对象。",
+              "到常见问题打开参考解，复核记录和交接对象。",
+              "到常见问题打开参考解，复核记录和交接对象。",
+              "到常见问题打开参考解，复核记录和交接对象。",
+              "到常见问题打开参考解，复核记录和交接对象。",
+              "到常见问题打开参考解，复核记录和交接对象。"
             ]
           },
           "id": "helpers-production-workers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "完成后的复核",
           "type": "list"
         },
         {
@@ -30317,22 +30344,22 @@
             ],
             "rows": [
               [
-                "职业学校训练或相关在岗经验",
-                "按目标招聘条件",
-                "满足入门的材料与设备与安全知识起点",
-                "无证据支持所有岗位必须职业学校或先有经验；美国学历项为新聘要求描述",
-                "核目标岗位学历与训练条件",
-                "本轮未取得统一期限",
-                "学历与训练不等于资格或作业授权"
+                "美国典型入行准备",
+                "了解美国岗位者",
+                "核对招聘与带教",
+                "BLS 表 1.2 列高中或同等学历及短期在岗培训",
+                "问雇主带教与分工",
+                "看实际岗位",
+                "培训和操作授权分别核实"
               ],
               [
                 "安全与技能培训与考核",
                 "所有岗位",
-                "满足安全与能源隔离与起重与机械作业要求",
-                "中国生产经营单位从业者上岗前须安全教育培训合格；岗位技能与企业要求另核",
-                "参加企业或机构的安全与技能培训并通过考核",
-                "依实际计划，不给统一期限",
-                "培训与考核不等于起重或关键设备操作授权"
+                "掌握适用岗位的安全规程和报告对象",
+                "中国大陆按《安全生产法》第二十八条培训合格后方可上岗",
+                "向单位核培训、分工和异常上报流程",
+                "依岗位安排",
+                "受限任务另核资格和授权"
               ],
               [
                 "在岗训练或师徒带教",
@@ -30364,7 +30391,7 @@
               [
                 "企业岗位与作业授权",
                 "所有独立作业岗位",
-                "取得独立上料与检验与关键设备配合的权限前提",
+                "按分工核对批次与放行记录。由质检或现场指定人员确认实际放行。",
                 "按企业生产与安全管理制度要求",
                 "经考核合格并在岗位与作业授权范围内作业",
                 "随岗位安排",
@@ -30374,7 +30401,10 @@
           },
           "id": "helpers-production-workers.path.credential-decision.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example",
+            "osha-guarding",
+            "osha-energy"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -30384,15 +30414,18 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜招聘学历、训练记录、法定资格与企业授权分别核；美国Job Zone1—2描述准备程度，不设中国入行门槛或统一训练期限。",
-              "资格边界（二）｜中国上岗前安全教育培训按安全生产法第28条；特种作业及特种设备相应人员资格依法核适用目录与规定。一般质量放行按企业授权，不一概要求法定证书。",
-              "资格边界（三）｜准备材料不授予设备操作、质量放行或披露权限，真实任务在训练和相应授权内承担。",
-              "资格边界（四）｜人员证书、企业岗位授权与现场作业许可分别核范围和有效状态，不以其中一种代替其他要求。"
+              "先核班组带教与分工。",
+              "美国典型入行看 BLS 表 1.2。中国大陆上岗培训看《安全生产法》第二十八条。",
+              "设备防护缺失、卡料或能量状态不明时，停止、退离并报告。",
+              "向现场负责人确认谁复核批次、谁确认放行以及谁可处置设备。"
             ]
           },
           "id": "helpers-production-workers.path.credential-boundary.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example",
+            "osha-guarding",
+            "osha-energy"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -30437,7 +30470,7 @@
                 "url": "https://www.onetonline.org/link/localtraining/51-9198.00"
               },
               {
-                "entity": "O*NET 51-9198.00 证书目录",
+                "entity": "美国证书检索",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localcert/51-9198.00"
@@ -30455,7 +30488,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以安全与技能训练与资格与企业授权与考核为准，也不代表取得独立操作关键设备或起重或特种设备检验的权限。"
+              "设备防护缺失、卡料或能量状态不明时，停止、退离并报告班组负责人。由现场指定人员按程序处置，助手在分工范围内备料与记录。放行由质检或现场指定人员确认。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.11",
@@ -30469,7 +30502,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在带教下承担材料与工具准备与上料与搬运协助与清洁与记录协助；不独立操作关键设备或起重或出具检验结论。"
+              "先问清可做的辅助任务与报告对象。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.12",
@@ -30483,7 +30516,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "跟岗与辅助岗"
+              "核对任务和带教"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.13",
@@ -30497,7 +30530,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在操作员与岗位授权与工单工艺范围内独立完成上料与搬运与检验与计数与清洁与记录，遇异常或安全或超授权按制度隔离与上报。"
+              "在指定区域按清单核对材料，记录原值。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.14",
@@ -30511,7 +30544,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立配合岗"
+              "备料与标签"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.15",
@@ -30525,7 +30558,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "经相应任务训练与企业授权，且实际作业涉及法定资格时符合其要求，才可承担关键设备操作、复杂产线配合和带教；不是按资历自动晋升。"
+              "批次不符或放行记录缺失时保留原记录，交负责人复核。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.16",
@@ -30539,7 +30572,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "熟练与专科岗"
+              "留存差异"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.17",
@@ -30553,7 +30586,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能承担班组与产线安排与质量与安全与材料与产量落实与评估与异常会签与多方协调。"
+              "设备防护缺失、卡料或能量状态不明时，停止、退离并报告班组负责人。由现场指定人员按程序处置，助手在分工范围内备料与记录。放行由质检或现场指定人员确认。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.18",
@@ -30567,7 +30600,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "班组长与产线管理岗"
+              "报告并交接"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.19",
@@ -30581,12 +30614,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑准备路径｜先核目标岗位的学历、训练、防护与任务范围，再在带教和授权内熟悉材料、计数、检验与记录；设备操作和法定资格按实际任务另核。没有所有岗位统一必须经过的职业学校或证书路径。"
+              "先看大陆制造企业的产线备料、搬运和记录辅助岗。《安全生产法》第二十八条要求上岗前通过安全生产教育和培训。向班组确认带教、批次复核和设备操作的分工。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30595,7 +30628,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜接受职业训练、完成跟岗与实务、取得学历或训练证明、通过安全与技能考核与起重与特种设备资格、并入职业健康管理、取得企业岗位与作业授权是不同状态；本页列示的准备项不等于授权，也不自动带来关键设备操作或质量合格判定或对外披露权限。"
+              "先核岗位分工、带教和任务授权。受监管作业另核适用资格。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.21",
@@ -30609,7 +30642,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "法域与依据｜美国Job Zone1—2与35%低于高中、32%高中或同等、20%高中后证书为新聘要求描述；中国培训、法定资格及企业授权按实际任务适用规定，不能跨法域拼接门槛。"
+              "中国大陆生产安全与受监管作业"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.22",
@@ -30623,12 +30656,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑小结｜学习和跟岗帮助认识任务，资格及企业授权分别核；准备路径不保证录用、晋升或独立设备权限。"
+              "先看大陆制造企业的产线备料、搬运和记录辅助岗。《安全生产法》第二十八条要求上岗前通过安全生产教育和培训。向班组确认带教、批次复核和设备操作的分工。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30805,12 +30838,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按工单独立完成材料与搬运与备料与准备与记录，发现异常按制度隔离与上报。"
+              "按分工核物料、数量和标签。设备或吊运异常时停手、退离并报告，留存原始记录。适用检维修隔离由受训授权人员处理。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.36",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-energy",
+            "osha-guarding"
           ],
           "type": "prose"
         },
@@ -30973,7 +31008,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "工艺与工具基础训练记录；安全培训。"
+              "向带教人核对应任务范围。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.48",
@@ -30987,7 +31022,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "熟悉上料与下料与观察与安全要点。"
+              "将未决项交相应负责人。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.49",
@@ -31001,7 +31036,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "上料协助记录与带教评价；能复述观察与安全要点。"
+              "原工单、批次标签和放行记录。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.50",
@@ -31015,7 +31050,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在带教下承担上料与下料与观察与协助与工具准备，不独立操作关键设备。"
+              "在指定区域按清单整理材料。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.51",
@@ -31029,7 +31064,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "生产配合跟岗岗"
+              "准备材料"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.52",
@@ -31043,7 +31078,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "岗位授权与安全与资格；产线配合经历。"
+              "向带教人核对应任务范围。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.53",
@@ -31057,7 +31092,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在不同产线与工序条件下积累经验，练习上料与观察与协助方法。"
+              "将未决项交相应负责人。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.54",
@@ -31071,7 +31106,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "上料与观察与协助记录及复核意见。"
+              "原工单、批次标签和放行记录。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.55",
@@ -31085,7 +31120,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按工单完成上料与下料与观察与协助操作与记录，发现异常按制度上报。"
+              "对照工单、批次标签和放行记录。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.56",
@@ -31099,7 +31134,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "生产配合岗"
+              "核对批次与放行"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.57",
@@ -31113,7 +31148,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应岗位授权与专项资格；复杂产线经验。"
+              "向带教人核对应任务范围。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.58",
@@ -31127,7 +31162,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习复杂产线上料与观察与故障初判方法。"
+              "将未决项交相应负责人。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.59",
@@ -31141,7 +31176,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "复杂产线与异常处置记录。"
+              "原工单、批次标签和放行记录。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.60",
@@ -31155,7 +31190,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担复杂产线上料与观察与故障初判与带教与工艺配合。"
+              "保留批次与放行记录原值，等待复核。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.61",
@@ -31169,7 +31204,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "生产配合骨干岗"
+              "留存差异"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.62",
@@ -31183,7 +31218,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理任命或企业授权。"
+              "向带教人核对应任务范围。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.63",
@@ -31197,7 +31232,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完善班组与产线与产量管理机制。"
+              "将未决项交相应负责人。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.64",
@@ -31211,7 +31246,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹结论；班组与产线与产量文件。"
+              "原工单、批次标签和放行记录。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.65",
@@ -31225,7 +31260,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹班组与产线与产量与安全与会签并指导新人。"
+              "设备防护缺失、卡料或能量状态不明时，停止、退离并报告班组负责人。由现场指定人员按程序处置，助手在分工范围内备料与记录。放行由质检或现场指定人员确认。"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.66",
@@ -31239,7 +31274,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "班组与产线主管岗"
+              "交接未决项"
             ]
           },
           "id": "helpers-production-workers.path.career-path-block.67",
@@ -31560,16 +31595,16 @@
                 "url": "https://www.onetonline.org/link/summary/51-9198.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "BLS Employment Projections, Table 1.2",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS 就业预测（2025—2035）",
+                "entity": "国家统计局 2025 年工资表 2、5",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/51-9198.00"
+                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET 51-9198.00 行业分布",
@@ -31578,7 +31613,7 @@
                 "url": "https://www.onetonline.org/link/industry/51-9198.00"
               },
               {
-                "entity": "装配工与制造工",
+                "entity": "装配与制造工（职业大类）",
                 "id": "link-7",
                 "relation": "career.related",
                 "url": "/zh/career/jobs/assemblers-and-fabricators"
@@ -31638,12 +31673,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国本职业2025年中位时薪18.78美元、年薪39,070美元；OEWS为税前正常工时工资，包括生产奖金等规定项目，不含加班费、轮班差额、非生产奖金和雇主福利成本。中位非起薪；分位非经验等级，不识别收入差异原因。美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。本轮所核国家统计局2025年行业工资发布未提供51-9198.00对应中国全国职业工资分布；制造业均值只是行业背景，不代填职业中位、起薪、到手收入。"
+              "BLS 表 1.2（美国本职业 51-9198）：2025 年约 167,400 个岗位，2035 年预计约 153,600 个，变化 −8.2%，年均约 20,900 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31652,12 +31687,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31666,12 +31701,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31708,12 +31743,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "工资（中位与分位，本职业自身口径）"
+              "就业规模与变化"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31722,12 +31757,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 51-9198.00（OEWS 2025 年，经 O*NET 呈现）"
+              "51-9198"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31736,12 +31771,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位时薪 18.78 美元与中位年薪 39,070 美元；第 10 分位时薪 14.97 与年薪 31,140、第 25 分位时薪 16.93 与年薪 35,220、第 75 分位时薪 22.11 与年薪 45,990、第 90 分位时薪 25.68 与年薪 53,410"
+              "BLS 表 1.2（美国本职业 51-9198）：2025 年约 167,400 个岗位，2035 年预计约 153,600 个，变化 −8.2%，年均约 20,900 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31750,12 +31785,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31764,12 +31799,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31778,7 +31813,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含人员替补。预测非实际招聘、净新增或AI归因，不能推个人结果。"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.18",
@@ -31806,12 +31841,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业规模与增长与岗位空缺（本职业自身口径）"
+              "预计年均空缺"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31820,12 +31855,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 51-9198.00（BLS 就业预测，经 O*NET 呈现）"
+              "51-9198"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31834,12 +31869,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "预计年均约 20,900 个，含替补。"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31848,12 +31883,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆"
+              "美国全国"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31862,12 +31897,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025-05"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31904,12 +31939,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "职业工资与就业（统计口径与缺口）"
+              "年薪中位数"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31918,12 +31953,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局城镇单位就业人员平均工资（行业门类口径）与有界检索"
+              "51-9198"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31932,12 +31967,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本轮所核国家统计局2025年行业工资发布未提供51-9198.00对应中国全国职业工资分布；制造业均值只是行业背景，不代填职业中位、起薪、到手收入。"
+              "39,070 美元/年"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31960,12 +31995,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国51-9198.00：2025年就业167,400人，2025—2035总体增长类别Decline（-1%或更低），预计年均空缺20,900个，含增长与人员更替。预测非实际招聘、净新增或AI归因，不能推个人结果。"
+              "美国就业预测表 1.2。"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31974,12 +32009,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对中国大陆的统计口径与缺口，美国数据不可直接外推至中国大陆同岗位；本页只登记统计口径与可见缺口。"
+              "中国大陆城镇制造业工资参照。"
             ]
           },
           "id": "helpers-production-workers.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -32347,64 +32382,104 @@
           "data": {
             "entries": [
               {
+                "answer": "原题仅 S1 可交接。S2 保留 A17 与 A71，交库管；S3 保留放行栏空白，交质检。变式 S1、S3 可交接，S2 仍待核。",
+                "id": "helpers-production-workers.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.helpers-production-workers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
+              },
+              {
                 "answer": "本页的生产辅助工是 O*NET 51-9198.00（Helpers--Production Workers）这一精确职业：以较低技能要求的作业协助生产工人：供应或扶住材料与工具，并清洁作业区与设备。该页列出 34 项任务，最重要的包括人工或使用起重设备搬运原材料与成品与包装件、在零件上打标记或贴标识、观察设备运行以及时发现故障并把任何故障通知操作员、清点成品以判断订单是否完成、检查产品以确认是否符合质量标准。常见职位名称包括 Production Helper 与 Machine Helper 与 Machine Operator Helper 与 Assembly Line Worker。",
                 "id": "helpers-production-workers.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.helpers-production-workers.q1"
               },
               {
-                "answer": "美国侧：O*NET 51-9198.00 页呈现的 2025 年工资与就业为本职业自身口径（该页未标注取自上级或相邻职业）；中国大陆侧：公开统计未建立与本职业精确对应的全国职业工资分布，本页登记缺口而不使用代理数字；两侧制度与统计口径不同，不做拼接与换算。",
+                "answer": "美国工资采用 OEWS 的 51-9198 全国数据，就业采用 BLS 同职业预测。本页所核资料未取得中国大陆本职业全国工资分布或就业序列，国家统计局制造业工资可供行业参照。",
                 "id": "helpers-production-workers.faq.2",
                 "question": "在美国和中国大陆分别是什么口径？",
-                "question_key": "career.faq.helpers-production-workers.q2"
+                "question_key": "career.faq.helpers-production-workers.q2",
+                "source_refs": [
+                  "oews",
+                  "bls-ep-2025-2035",
+                  "nbs-wage-release-2025"
+                ]
               },
               {
-                "answer": "2025 年美国本职业中位时薪 18.78 美元与中位年薪 39,070 美元（BLS OEWS，经 O*NET 呈现，本职业自身口径）；第 10 分位年薪 31,140 美元、第 25 分位 35,220 美元、第 75 分位 45,990 美元、第 90 分位 53,410 美元；不含福利与奖金，中位数不是入职起薪。中国大陆未建立与本职业精确对应的全国职业工资分布。",
+                "answer": "2025 年 5 月美国本职业 51-9198全国年薪中位数 39,070 美元，时薪中位数 18.78 美元。年薪第 10、25、50、75、90 分位依次为 31,140、35,220、39,070、45,990、53,410 美元。 本页所核资料未取得中国大陆本职业全国工资分布。国家统计局表 2、5 的城镇制造业年平均工资为非私营单位 113,594 元、私营单位 76,055 元。",
                 "id": "helpers-production-workers.faq.3",
-                "question": "工资是多少？",
-                "question_key": "career.faq.helpers-production-workers.q3"
+                "question": "美国和中国大陆工资如何？",
+                "question_key": "career.faq.helpers-production-workers.q3",
+                "source_refs": [
+                  "oews",
+                  "nbs-wage-release-2025"
+                ]
               },
               {
-                "answer": "O*NET 在 51-9198.00 页呈现的 BLS 就业预测显示：就业 2024 年 168,500 人、2034 年预计 153,500 人，2024—2034 年增长为 Decline（-9%，该页未标注 Bright Outlook），期间年均空缺约 23,600 个（含增长与替补）。预测不等于个人岗位结果；即使总量收缩，因人员流动与替换仍存在招人。",
+                "answer": "BLS 表 1.2（美国本职业 51-9198）：2025 年约 167,400 个岗位，2035 年预计约 153,600 个，变化 −8.2%，年均约 20,900 个职位空缺，含人员替补。人数分别取整。 本页所核资料未取得中国大陆本职业的全国就业序列。 大陆可按备料、搬运、记录和班次职责查看实际招聘。",
                 "id": "helpers-production-workers.faq.4",
-                "question": "就业前景如何？",
-                "question_key": "career.faq.helpers-production-workers.q4"
+                "question": "美国和中国大陆的就业前景如何？",
+                "question_key": "career.faq.helpers-production-workers.q4",
+                "source_refs": [
+                  "bls-ep-2025-2035"
+                ]
               },
               {
-                "answer": "O*NET 将本职业列入 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；学历部分显示 35% 表示要求低于高中文凭、32% 表示要求高中文凭或同等学历、20% 表示要求高中后证书（该页列出上述三项）；增长标为 Decline（-9%）。在中国大陆，涉及起重与特种设备与机械的岗位须满足安全生产与职业健康要求并取得相应资格或作业许可；具体以企业与主管机关要求为准。",
+                "answer": "BLS 表 1.2 将高中或同等学历及短期在岗培训列为该职业的典型美国入行准备。向雇主核实带教、允许使用的工具和报告对象。 《安全生产法》第二十八条要求生产经营单位对从业人员进行安全生产教育和培训，培训合格后方可上岗。",
                 "id": "helpers-production-workers.faq.5",
                 "question": "需要什么学历和资格？",
-                "question_key": "career.faq.helpers-production-workers.q5"
+                "question_key": "career.faq.helpers-production-workers.q5",
+                "source_refs": [
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
+                ]
               },
               {
-                "answer": "不需要。本职业使用生产记录与工单系统与电子表格与办公工具即可；编程不是本职业的入职要求。",
+                "answer": "编程通常不是这一辅助岗位的入门任务。向雇主核工单、扫码或库存记录用什么工具。",
                 "id": "helpers-production-workers.faq.6",
                 "question": "入行要会写代码吗？",
-                "question_key": "career.faq.helpers-production-workers.q6"
+                "question_key": "career.faq.helpers-production-workers.q6",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "不会整体被取代。工单与数量与物料与产量与知识检索可被系统辅助，但现场上料与搬运与检验与能源隔离与安全责任仍由有经验人员负责；O*NET 显示本职业 2024—2034 年增长为 Decline -9%，自动化更多改变任务构成而非取消岗位。",
+                "answer": "软件可以整理批次记录和放行状态。现场物料、设备防护和实际放行仍由指定人员按流程核实。就业预测没有测量 AI 采用或提效。",
                 "id": "helpers-production-workers.faq.7",
                 "question": "这个职业会被 AI 或自动化取代吗？",
-                "question_key": "career.faq.helpers-production-workers.q7"
+                "question_key": "career.faq.helpers-production-workers.q7",
+                "source_refs": [
+                  "onet",
+                  "osha-guarding",
+                  "bls-ep-2025-2035"
+                ]
               },
               {
-                "answer": "O*NET 工作情境显示：生产节拍带来时间压力（80% 每天）、面对面讨论频繁（83% 每天）、接触危险设备 常见（56% 每天）、接触污染物 常见（74% 每天）、错误的后果较严重（21% 极其严重、28% 非常严重）、对他人的健康与安全责任较高（39% 极高责任、31% 高责任）。",
+                "answer": "O*NET 工作情境显示：80% 的受访者报告每天需要满足严格期限、面对面讨论频繁（83% 每天）、接触危险设备 常见（56% 每天）、接触污染物 常见（74% 每天）、错误的后果较严重（21% 极其严重、28% 非常严重）、对他人的健康与安全责任较高（39% 极高责任、31% 高责任）。",
                 "id": "helpers-production-workers.faq.8",
                 "question": "工作环境怎么样？",
                 "question_key": "career.faq.helpers-production-workers.q8"
               },
               {
-                "answer": "相邻职业包括装配工与制造工（51-2092.00）、机器送料工与下料工（53-7063.00）、包装与灌装机器操作员与看管员（51-9111.00）、检查员与分拣员与采样员与称重员（51-9061.00）、劳工与货运与物料搬运工（手工）（53-7062.00）等；转型须补足新岗位的资格与责任证据。",
+                "answer": "相邻职业包括团队装配工（51-2092.00）、机器送料工与下料工（53-7063.00）、包装与灌装机器操作员与看管员（51-9111.00）、检查员与分拣员与采样员与称重员（51-9061.00）、劳工与货运与物料搬运工（手工）（53-7062.00）等；转型须补足新岗位的资格与责任证据。",
                 "id": "helpers-production-workers.faq.9",
                 "question": "有哪些相邻职业可以比较或转型？",
                 "question_key": "career.faq.helpers-production-workers.q9"
               },
               {
-                "answer": "本页以 O*NET 51-9198.00 与美国 BLS OEWS 2025 与 BLS 就业预测 2024—2034 为主要来源，并引用 ILO 与 NIST 的职业暴露与治理研究；所有数值为美国本职业自身口径，不覆盖中国大陆；中国大陆只登记统计口径与可见缺口；本页不构成安全或特种设备或质量或法律意见。",
+                "answer": "O*NET 描述岗位任务；OEWS 给全国工资分位；BLS 表 1.2 给预测和年均空缺。国家统计局表 2、5 是城镇制造业单位年平均工资，具名雇主公告只说明该岗位的分工。",
                 "id": "helpers-production-workers.faq.10",
                 "question": "本页来源与口径边界是什么？",
-                "question_key": "career.faq.helpers-production-workers.q10"
+                "question_key": "career.faq.helpers-production-workers.q10",
+                "source_refs": [
+                  "onet",
+                  "oews",
+                  "bls-ep-2025-2035",
+                  "nbs-wage-release-2025",
+                  "cn-work-example"
+                ]
               }
             ]
           },
@@ -32461,12 +32536,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "当前详情列有技能和多项工作风格，OEWS包含生产奖金等工资项目；本地旧说法已修。精确中国职业工资、美国职业×行业中位、AI实测采用及效果仍缺。受保护Hero/FAQ/共享事实及来源元数据残留旧预测或工资解释，不能称全页一致。"
+              "OEWS 工资含生产奖金等符合口径的款项，排除非生产奖金、加班溢价、班次差额及雇主福利成本。"
             ]
           },
           "id": "helpers-production-workers.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-oews-questions"
           ],
           "type": "prose"
         }
@@ -32490,28 +32566,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "大五人格测试",
+                "entity": "大五人格测评",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "MBTI 人格测试",
+                "entity": "MBTI 偏好测评",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "智力与推理测试",
+                "entity": "推理测评",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "情绪智力测试",
+                "entity": "情绪能力测评",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "本职业（生产辅助工）",
@@ -32549,7 +32625,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：生产辅助工详细资料（51-9198.00）",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "51-9198.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/51-9198.00"
               },
@@ -32557,7 +32633,7 @@
                 "accessed_at": "2026-09-22",
                 "details": [
                   "用于核对官方范围（Help production workers by performing duties requiring less skill. Duties include supplying or holding materials or tools, and cleaning work area and equipment.）与常见职位名称。",
-                  "用于核对兴趣代码（RC）与 Job Zone 1-2（几乎无需至需要一定准备） 与行业分布（制造业；行政与支持服务）；该页未标注 Bright Outlook。"
+                  "BLS 表 1.2（美国本职业 51-9198）：2025 年约 167,400 个岗位，2035 年预计约 153,600 个，变化 −8.2%，年均约 20,900 个职位空缺，含人员替补。人数分别取整。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "bls",
@@ -32565,25 +32641,25 @@
                 "market": "美国",
                 "name": "O*NET OnLine：生产辅助工职业档案与官方范围（51-9198.00）",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "51-9198.00 exact occupation",
                 "url": "https://www.onetonline.org/link/summary/51-9198.00"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对就业 2024 年 168,500 人与 2034 年 153,500 人与 2024—2034 年增长 -9% 与期间年均空缺约 23,600 个（含增长与替补）。",
-                  "用于说明就业预测与 OEWS 时点就业估计口径不同，且预测不等于个人岗位结果、空缺主要由替换需求构成。"
+                  "BLS 表 1.2（美国本职业 51-9198）：2025 年约 167,400 个岗位，2035 年预计约 153,600 个，变化 −8.2%，年均约 20,900 个职位空缺，含人员替补。人数分别取整。",
+                  "BLS 表 1.2 将高中或同等学历及短期在岗培训列为该职业的典型美国入行准备。向雇主核实带教、允许使用的工具和报告对象。"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
-                "limitation": "为 O*NET 在 51-9198.00 页呈现的本职业口径；增长 Decline -9%，未标注 Bright Outlook。",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
                 "market": "美国",
-                "name": "O*NET OnLine：生产辅助工就业趋势（51-9198.00，本职业自身口径）",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "51-9198.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/51-9198.00"
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "51-9198",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32591,11 +32667,11 @@
                   "用于核对中位时薪 18.78 美元与中位年薪 39,070 美元与第 10/25/75/90 分位（时薪 14.97 / 16.93 / 22.11 / 25.68 美元，年薪 31,140 / 35,220 / 45,990 / 53,410 美元）。",
                   "用于说明工资分位不是经验等级，也不等于个人起薪。"
                 ],
-                "evidence_type": "official wage display",
+                "evidence_type": "OEWS 全国职业工资",
                 "id": "oews",
-                "limitation": "O*NET 在该页未标注工资数据取自上级或相邻职业；本页按本职业自身口径呈现，不含福利与奖金。",
+                "limitation": "O*NET 在该页未标注工资数据取自上级或相邻职业；本页按本职业自身口径呈现，排除雇主福利成本和非生产奖金。",
                 "market": "美国",
-                "name": "O*NET OnLine：生产辅助工国家工资（51-9198.00，本职业自身口径）",
+                "name": "美国生产助手全国工资（51-9198）",
                 "period": "2025 BLS OEWS wage data via O*NET",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "51-9198.00 exact occupation",
@@ -32620,18 +32696,18 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明公开企业薪酬调查未建立与本职业精确对应的全国工资分布。",
-                  "不作为本职业工资代理数字使用。"
+                  "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局 2025 年表 2、5 给出城镇制造业年平均工资，非私营单位 113,594 元，私营单位 76,055 元。",
+                  "城镇制造业行业工资参照"
                 ],
-                "evidence_type": "official survey release",
+                "evidence_type": "城镇制造业行业工资参照",
                 "id": "cnclass",
-                "limitation": "为岗位大类聚合口径，未建立与本职业精确对应的统计值。",
+                "limitation": "城镇制造业行业工资参照",
                 "market": "中国大陆",
-                "name": "人力资源和社会保障部：企业薪酬调查信息",
-                "period": "current; accessed 2026-09-22",
-                "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "occupation major class proxy",
-                "url": "https://www.mohrss.gov.cn/"
+                "name": "国家统计局2025年城镇单位工资发布",
+                "period": "2025",
+                "publisher": "国家统计局",
+                "scope": "城镇制造业行业工资参照",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32652,18 +32728,18 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明能源隔离与上锁挂牌与起重与机械与受限空间等安全生产要求。",
-                  "涉及特种作业的须经安全技术培训与考核并持证作业。"
+                  "《安全生产法》第二十八条要求生产经营单位对从业人员进行安全生产教育和培训，培训合格后方可上岗。",
+                  "第四十三至四十五条分别涉及特定危险作业现场管理、危害告知和防护用品。"
                 ],
-                "evidence_type": "regulator portal",
+                "evidence_type": "法律原文（机关转载）",
                 "id": "facilities",
-                "limitation": "以主管机关发布的法规与要求为准。",
+                "limitation": "具体设备操作、维修及受监管任务按适用规定和现场授权核实。",
                 "market": "中国大陆",
-                "name": "中华人民共和国应急管理部：安全生产与特种作业与危险作业管理",
-                "period": "current; accessed 2026-09-22",
-                "publisher": "应急管理部",
+                "name": "《中华人民共和国安全生产法》",
+                "period": "2021",
+                "publisher": "全国人民代表大会常务委员会",
                 "scope": "work safety and special operations",
-                "url": "https://www.mem.gov.cn/"
+                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32741,7 +32817,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：生产辅助工职业范围与工作情境（51-9198.00）",
                 "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "51-9198.00 exact occupation",
                 "url": "https://www.onetonline.org/link/custom/51-9198.00"
               },
@@ -32789,24 +32865,24 @@
                 "market": "美国",
                 "name": "O*NET OnLine：生产辅助工热门技术（51-9198.00）",
                 "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "51-9198.00 exact occupation",
                 "url": "https://www.onetonline.org/link/hot_tech/51-9198.00"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于字段与证据口径与缺口登记规则。",
-                  "用于跨市场与法域口径边界说明。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "编辑说明",
                 "id": "employer",
-                "limitation": "内部口径规则，非外部事实来源。",
-                "market": "全球",
-                "name": "FermatMind 职业内容字段与证据口径规则",
-                "period": "current authoring rules",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页任务",
                 "url": "https://fermatmind.com"
               },
               {
@@ -32821,7 +32897,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：生产辅助工证书目录（51-9198.00）",
                 "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "51-9198.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localcert/51-9198.00"
               },
@@ -32837,7 +32913,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：生产辅助工国家培训（51-9198.00）",
                 "period": "current page; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "51-9198.00 exact occupation",
                 "url": "https://www.onetonline.org/link/localtraining/51-9198.00"
               },
@@ -32851,9 +32927,9 @@
                 "id": "r2-pay-2",
                 "limitation": "相邻职业口径，不等于本职业。",
                 "market": "美国",
-                "name": "O*NET OnLine：装配工与制造工（51-2092.00）",
+                "name": "O*NET OnLine：团队装配工（51-2092.00）",
                 "period": "current; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "51-2092.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/51-2092.00"
               },
@@ -32869,7 +32945,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：机器送料工与下料工（53-7063.00）",
                 "period": "current; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "53-7063.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/53-7063.00"
               },
@@ -32906,20 +32982,19 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对制造业与行政与支持服务为主要行业。",
-                  "用于说明主要用人单位类型。"
+                  "2025 年 5 月美国本职业 51-9198全国年薪中位数 39,070 美元，时薪中位数 18.78 美元。年薪第 10、25、50、75、90 分位依次为 31,140、35,220、39,070、45,990、53,410 美元。"
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "OEWS 全国职业工资",
                 "id": "onet-wages",
-                "limitation": "该口径为美国分布，不建立中国大陆映射。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
-                "name": "O*NET OnLine：生产辅助工行业分布（51-9198.00）",
-                "period": "current page; accessed 2026-09-22",
+                "name": "美国生产助手全国工资（51-9198）",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "51-9198.00 exact occupation",
-                "url": "https://www.onetonline.org/link/industry/51-9198.00"
+                "url": "https://www.onetonline.org/link/localwages/51-9198.00"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32933,7 +33008,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：生产辅助工工作情境与详细工作活动（51-9198.00）",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine",
                 "scope": "51-9198.00 exact occupation",
                 "url": "https://www.onetonline.org/link/longview/51-9198.00"
               },
@@ -32955,7 +33030,7 @@
               {
                 "accessed_at": "2026-10-11",
                 "details": [
-                  "D3工资包括生产奖金等项目，排除加班、轮班差额、非生产奖金和雇主福利成本；D4百分位非经验等级。"
+                  "OEWS 工资含生产奖金等符合口径的款项，排除非生产奖金、加班溢价、班次差额及雇主福利成本。"
                 ],
                 "evidence_type": "official statistics / methodology",
                 "id": "bls-oews-questions",
@@ -32968,21 +33043,80 @@
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "材料与搬运 — 0/100; weight=1/3; helpers-production-workers.ai-impact.ai-impact-table.95[0]",
-                  "上料与下料 — 0/100; weight=1/3; helpers-production-workers.ai-impact.ai-impact-table.99[0]",
-                  "检验与标识 — 25/100; weight=1/3; helpers-production-workers.ai-impact.ai-impact-table.107[0]"
+                  "BLS 表 1.2（美国本职业 51-9198）：2025 年约 167,400 个岗位，2035 年预计约 153,600 个，变化 −8.2%，年均约 20,900 个职位空缺，含人员替补。人数分别取整。",
+                  "BLS 表 1.2 将高中或同等学历及短期在岗培训列为该职业的典型美国入行准备。向雇主核实带教、允许使用的工具和报告对象。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "51-9198",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "《安全生产法》第二十八条要求生产经营单位对从业人员进行安全生产教育和培训，培训合格后方可上岗。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "具体设备操作、维修及受监管任务按适用规定和现场授权核实。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国安全生产法》第二十八条",
+                "period": "2021",
+                "publisher": "全国人民代表大会常务委员会",
+                "scope": "中国大陆生产经营单位安全培训",
+                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "S 表：生产批次交接",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国一般工业设备防护，包括适用的操作点危险。"
+                ],
+                "id": "osha-guarding",
+                "limitation": "仅用于适用的美国一般工业工作场所。",
+                "market": "美国",
+                "name": "OSHA 1910.212",
+                "period": "29 CFR 1910",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.212"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "适用设备检修、维护的危险能量控制，依条文适用范围及例外。"
+                ],
+                "id": "osha-energy",
+                "limitation": "仅用于适用的美国一般工业工作场所。",
+                "market": "美国",
+                "name": "OSHA 1910.147",
+                "period": "29 CFR 1910",
+                "publisher": "OSHA",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "details": [
+                  "完成原题和变式后打开折叠答案。"
+                ],
+                "id": "paper-answer-key",
+                "name": "纸面练习参考解（常见问题）",
+                "url": "#career-content-sources"
               }
             ]
           },
@@ -34319,8 +34453,8 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
-        "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为生产辅助工？教育、资格与职业发展路径",
+        "entry_heading": "岗位训练与纸面试做",
+        "heading": "入行与 S 表：生产批次交接",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "helpers-production-workers.path.career-path-block.21",
@@ -34703,7 +34837,7 @@
                 }
               }
             ],
-            "title": "生产配合与操作方向"
+            "title": "产线备料与交接"
           },
           {
             "id": "quality-and-records",
@@ -35194,8 +35328,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "facilities"
+              "osha-guarding",
+              "osha-energy"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -35227,7 +35361,7 @@
             },
             "evidence_refs": [
               "onet",
-              "privacy"
+              "facilities"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35323,7 +35457,7 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "paper-exercise"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35489,6 +35623,42 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "osha-guarding",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-production-workers.source-register.published.1"
+            },
+            "id": "osha-guarding",
+            "label": {
+              "$source": "osha-guarding",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-production-workers.source-register.published.1"
+            },
+            "scope": "美国一般工业设备防护，包括适用的操作点危险。"
+          },
+          {
+            "href": {
+              "$source": "osha-energy",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-production-workers.source-register.published.1"
+            },
+            "id": "osha-energy",
+            "label": {
+              "$source": "osha-energy",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "helpers-production-workers.source-register.published.1"
+            },
+            "scope": "适用设备检修、维护的危险能量控制，依条文适用范围及例外。"
           }
         ]
       },
@@ -35798,7 +35968,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-production-workers.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35812,7 +35982,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-production-workers.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35826,7 +35996,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "helpers-production-workers.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35849,12 +36019,12 @@
           "ui": {
             "ai_heading": "AI 会影响生产辅助工的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "中国制造业平均工资参考与本职业缺口",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "生产辅助工在不同学历背景下通常从哪些岗位方向开始？",
-            "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "official_heading": "2025 年城镇单位年平均工资背景",
+            "scenario_caption": "岗位与报酬核对项",
+            "scenario_heading": "看招聘时核对哪些条件？",
+            "scenario_interpretation_label": "向用人单位确认",
+            "scenario_role_label": "核对范围",
+            "scenario_value_label": "核对项"
           },
           "us_growth": {
             "$item": "helpers-production-workers.china-salary.career-snapshot-primary-locale.58",
@@ -36063,15 +36233,15 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国生产辅助工工资？",
+        "factors_heading": "影响报酬的条件",
         "growth": {
           "$item": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国生产辅助工工资多少？",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "heading": "美国生产助手工资",
+        "industry_heading": "美国行业工资资料",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
@@ -36159,7 +36329,7 @@
           }
         ],
         "industry_value_label": "该行业内本职业工资中位数",
-        "interpretation_heading": "这组美国工资数字应当怎么理解？",
+        "interpretation_heading": "如何读工资分位",
         "interpretation_rows": [
           {
             "answer": {
@@ -36209,52 +36379,55 @@
         "wage_column_labels": [
           "工资统计位置",
           "年工资参考",
-          "折算边界",
+          "时薪",
           "怎样理解这个位置"
         ],
-        "wage_heading": "美国工资分布",
+        "wage_heading": "全国工资分位",
         "wage_tiers": [
           {
-            "equivalent": "官方年工资，非个人月收入",
+            "equivalent": "14.97 美元/小时",
             "interpretation": {
               "$item": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "第10百分位",
-            "value": {
-              "$fact": "us-wage-low10-2025",
-              "field": "display_value"
-            }
+            "label": "第 10 百分位",
+            "value": "31,140 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "16.93 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资。",
+            "label": "第 25 百分位",
+            "value": "35,220 美元/年"
+          },
+          {
+            "equivalent": "18.78 美元/小时",
             "interpretation": {
               "$item": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "中位数（50%）",
-            "value": {
-              "$fact": "us-wage-2025",
-              "field": "display_value"
-            }
+            "label": "第 50 百分位",
+            "value": "39,070 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "22.11 美元/小时",
+            "interpretation": "2025 年 5 月美国全国工资。",
+            "label": "第 75 百分位",
+            "value": "45,990 美元/年"
+          },
+          {
+            "equivalent": "25.68 美元/小时",
             "interpretation": {
               "$item": "helpers-production-workers.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "第90百分位",
-            "value": {
-              "$fact": "us-wage-high10-2025",
-              "field": "display_value"
-            }
+            "label": "第 90 百分位",
+            "value": "53,410 美元/年"
           }
         ]
       },
@@ -36398,7 +36571,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "helpers-production-workers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36443,7 +36616,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "helpers-production-workers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36488,7 +36661,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "oews",
             "value": {
               "$item": "helpers-production-workers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36590,6 +36763,18 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "helpers-production-workers.source-register.published.1"
+            },
+            "id": "bls-ep-2025-2035",
+            "label": "BLS 就业预测表 1.2",
+            "scope": "美国全国就业与空缺预测"
           }
         ],
         "transitions": [
@@ -36614,7 +36799,7 @@
               "field": "url"
             },
             "target_slug": "assemblers-and-fabricators",
-            "target_title": "装配工与制造工",
+            "target_title": "装配与制造工（职业大类）",
             "transition_distance": {
               "$item": "helpers-production-workers.market-signals.market-signal-card.36",
               "block": "market-signals",
@@ -36866,7 +37051,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034，本职业自身口径）",
+            "label": "2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "helpers-production-workers.profile.onet-structured-fields-block.4",
@@ -37053,7 +37238,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "cta_label": "了解我的智力与推理表现",
+            "cta_label": "体验矩阵推理测评",
             "evidence_level": {
               "$item": "helpers-production-workers.fit.personality-fit-block.19",
               "block": "fit",
@@ -37090,7 +37275,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "cta_label": "了解我的情绪智力能力",
+            "cta_label": "用 EQ 自评梳理情绪与沟通习惯",
             "evidence_level": {
               "$item": "helpers-production-workers.fit.personality-fit-block.23",
               "block": "fit",
@@ -37180,7 +37365,7 @@
                 "field": "url"
               },
               "slug": "assemblers-and-fabricators",
-              "title": "装配工与制造工方向"
+              "title": "装配与制造工（职业大类）"
             },
             "watchouts": {
               "$item": "helpers-production-workers.fit.personality-fit-block.33",
@@ -37631,7 +37816,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合生产辅助工",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37708,7 +37893,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "大五人格测评"
           },
           {
             "href": {
@@ -37718,7 +37903,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "MBTI 偏好测评"
           },
           {
             "href": {
@@ -37728,7 +37913,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "推理测评"
           },
           {
             "href": {
@@ -37738,7 +37923,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "情绪能力测评"
           }
         ]
       },
@@ -37807,14 +37992,14 @@
       "interface.path.credential_boundary_label": "资格边界",
       "interface.path.entry_decisions_heading": "入行前要核对什么",
       "interface.path.next_step_label": "下一步",
-      "interface.path.promotion_evidence_label": "晋升证据",
+      "interface.path.promotion_evidence_label": "阶段记录与探索练习",
       "interface.path.responsibilities_label": "典型职责",
       "interface.profile.comparison.dimension_header": "维度",
       "interface.profile.comparison.primary_header": "主要方向",
       "interface.profile.comparison.secondary_header": "比较方向",
       "interface.profile.responsibilities_heading": "核心工作",
       "interface.quick_decision.caution_heading": "什么情况下需要慎重选择生产辅助工？",
-      "interface.quick_decision.experiment_heading": "如何用一次小实验判断自己是否适合生产辅助工？",
+      "interface.quick_decision.experiment_heading": "纸面试做能帮你观察什么？",
       "interface.quick_decision.suit_heading": "什么样的人更可能适合生产辅助工？",
       "interface.risk.affected_roles_label": "主要岗位",
       "interface.risk.consequence_label": "可能后果",
@@ -37916,19 +38101,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资参考",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
       "market-signals": "职业前景与相关职业转向",
       "navigation": "下一步与相关入口",
-      "path": "入行、资格与职业发展",
+      "path": "入行与 S 表：生产批次交接",
       "profile": "职业画像",
       "quick-decision": "快速判断",
       "risk": "工作压力、风险与职业边界",
       "source-register": "资料来源",
       "sources": "常见问题与资料来源",
-      "us-salary": "美国薪资参考"
+      "us-salary": "美国生产助手工资"
     }
   },
   "fact_register": {
@@ -37946,19 +38131,19 @@
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 51-9198.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
-        "display_value": "中位时薪 18.78 美元 / 中位年薪 39,070 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）",
+        "derivation": "O*NET 51-9198.00 全国工资表，BLS OEWS 2025 年 5 月第 50 分位。",
+        "display_value": "39,070 美元/年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "工资中位数",
-        "occupation_scope": "本职业：生产辅助工",
-        "period": "2025",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "51-9198",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 51-9198.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "OEWS 工资含生产奖金等符合口径的款项，排除非生产奖金、加班溢价、班次差额及雇主福利成本。",
         "display_value": "第 10 分位时薪 14.97 美元 / 年薪 31,140 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
@@ -37966,11 +38151,11 @@
         "occupation_scope": "本职业：生产辅助工",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 51-9198.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "OEWS 工资含生产奖金等符合口径的款项，排除非生产奖金、加班溢价、班次差额及雇主福利成本。",
         "display_value": "第 90 分位时薪 25.68 美元 / 年薪 53,410 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
@@ -37978,71 +38163,71 @@
         "occupation_scope": "本职业：生产辅助工",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 2024—2034（经 O*NET 在 51-9198.00 页呈现，本职业自身口径，增长标为 Decline -9%、该页未标注 Bright Outlook）；O*NET 该页就业基期为 2024 年 168,500 人、2034 年预计 153,500 人；预测含替换需求、不等于实际招聘或裁员。",
-        "display_value": "增长 下降 Decline（-9%）（2024—2034，BLS 就业预测，本职业（51-9198.00）自身口径；该页未标注 Bright Outlook）",
+        "derivation": "BLS 表 1.2 的 51-9198 行。人数按千人原表换算并分别取整。",
+        "display_value": "−8.2%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长",
-        "occupation_scope": "本职业：生产辅助工",
-        "period": "2024—2034",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "51-9198",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测基期（2024 年本职业约 168,500 人，经 O*NET 呈现）；与 BLS OEWS 的时点就业估计口径不同（OEWS 只覆盖被抽样非农机构雇主、不含自雇），本页分别标注不混用。",
-        "display_value": "就业 约 168,500 人（2024，BLS 就业预测基期，本职业（51-9198.00）自身口径）",
+        "derivation": "BLS 表 1.2 的 51-9198 行。人数按千人原表换算并分别取整。",
+        "display_value": "约 167,400 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数",
-        "occupation_scope": "本职业：生产辅助工",
-        "period": "2024",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "51-9198",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测的期间空缺（2024—2034 本职业年均约 23,600 个，含增长与替补，经 O*NET 呈现）；为期间年均口径、主要由替换需求构成，即使总量收缩仍存在招人，不可读作净新增岗位。",
-        "display_value": "预计年均岗位空缺约 23,600 个（2024—2034，BLS 就业预测，本职业（51-9198.00）自身口径，含增长与替补）",
+        "derivation": "BLS 表 1.2 的 51-9198 行。人数按千人原表换算并分别取整。",
+        "display_value": "年均约 20,900 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺",
-        "occupation_scope": "本职业：生产辅助工",
-        "period": "2024—2034",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "51-9198",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜中国大陆公开职业统计未建立与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业；生产与机械与化学品与粉尘作业另受安全生产与职业健康与环境保护等法规与标准约束；本页按证据政策登记缺口而不使用代理数字。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与 O*NET 51-9198.00（生产辅助工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "国家统计局表 2、5，城镇单位行业平均年薪。",
+        "display_value": "城镇非私营 113,594 元，城镇私营 76,055 元",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
-        "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：生产辅助工",
+        "measure": "中国大陆制造业平均年薪",
+        "occupation_scope": "中国大陆城镇制造业行业门类",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs-wage-release-2025"
         ]
       },
       {
-        "derivation": "口径｜中国大陆公开职业统计未建立与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业；生产与机械与化学品与粉尘作业另受安全生产与职业健康与环境保护等法规与标准约束；本页按证据政策登记缺口而不使用代理数字。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与 O*NET 51-9198.00（生产辅助工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "国家统计局表 2、5，城镇单位行业平均年薪。",
+        "display_value": "城镇非私营 113,594 元，城镇私营 76,055 元",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
-        "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：生产辅助工",
+        "measure": "中国大陆制造业平均年薪",
+        "occupation_scope": "中国大陆城镇制造业行业门类",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs-wage-release-2025"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 51-9198.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "OEWS 工资含生产奖金等符合口径的款项，排除非生产奖金、加班溢价、班次差额及雇主福利成本。",
         "display_value": "第 25 分位时薪 16.93 美元 / 年薪 35,220 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）",
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
@@ -38050,11 +38235,11 @@
         "occupation_scope": "本职业：生产辅助工",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 51-9198.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "OEWS 工资含生产奖金等符合口径的款项，排除非生产奖金、加班溢价、班次差额及雇主福利成本。",
         "display_value": "第 75 分位时薪 22.11 美元 / 年薪 45,990 美元（2025 年，BLS OEWS，本职业（51-9198.00）自身口径）",
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
@@ -38062,65 +38247,53 @@
         "occupation_scope": "本职业：生产辅助工",
         "period": "2025",
         "source_refs": [
-          "onet"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+0+25)/3+0.5)=8; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "8%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "生产辅助工",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "oews"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "生产辅助工 · 任务、交付与责任边界",
-      "上料与搬运与检验 · 数量与质量留痕 · 产线与人身责任",
-      "美国职业资料；中国精确职业工资缺口按来源保留"
+      "生产助手",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国薪资中位数（2025，BLS OEWS，本职业（51-9198.00）自身口径）"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，本职业（51-9198.00）自身口径）"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，本职业（51-9198.00）自身口径）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，本职业（51-9198.00）自身口径）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "cn-urban-nonprivate-2025",
         "key": "china_pay",
-        "label": "中国大陆（暂无精确职业工资）"
+        "label": "中国大陆制造业平均年薪（行业参照）"
       }
     ]
   },
@@ -38128,17 +38301,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "生产辅助工做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET 51-9198.00）、Job Zone 1-2（几乎无需至需要一定准备） 与学历说明、美国工资与就业的本职业自身口径与中国大陆数据缺口。"
+      "text": "了解生产助手的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "生产辅助工"
+      "text": "生产助手做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "39aa9f20a7026477af698d7146a2a598ad928aee44e8f9d49a273c1b33432966",
+  "source_content_sha256": "4c1b6487b8367ffca12d5be885e02b070c5c37ca5534d816eddaa198276305a8",
   "subject": {
     "canonical_slug": "helpers-production-workers",
-    "name": "生产辅助工",
-    "summary": "生产辅助工对应 O*NET/SOC 51-9198.00「Helpers--Production Workers」这一精确职业：以较低技能要求的作业协助生产工人：供应或扶住材料与工具，并清洁作业区与设备。核心任务包括人工或使用起重设备搬运原材料与成品与包装件、在零件上打标记或贴标识、观察设备运行以及时发现故障并把任何故障通知操作员、清点成品以判断订单是否完成、检查产品以确认是否符合质量标准；常见职位名称包括 Production Helper 与 Machine Helper 与 Machine Operator Helper 与 Assembly Line Worker 与 Press Helper。官方范围原文：Help production workers by performing duties requiring less skill. Duties include supplying or holding materials or tools, and cleaning work area and equipment. 口径说明：O*NET 在 51-9198.00 页呈现的美国工资与就业与行业数据未标注取自上级或相邻职业，本页按本职业（51-9198.00）自身口径如实标注；该职业属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0）），2024—2034 年增长为 Decline（-9%）。本页内容不构成安全、特种设备、职业健康或法律意见。"
+    "name": "生产助手",
+    "summary": "生产助手按工单准备和递送材料或工具，清理指定区域，并记录物料批次与未决问题。班组会按设备、工序和授权划定任务。"
   }
 }

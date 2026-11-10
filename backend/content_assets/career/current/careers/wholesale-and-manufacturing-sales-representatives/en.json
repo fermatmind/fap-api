@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Start with needs and product matching, then check packaging, the quote formula, and unconfirmed terms. Experience the process of continuous follow-up and stating unknowns, then investigate real customer development and pay conditions."
+              "Paper check | If the quote and customer confirmation show different delivery dates, keep both and check with the person authorized to make the commitment before replying. "
             ]
           },
           "id": "wholesale-and-manufacturing-sales-representatives.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,13 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Wholesale and manufacturing sales representatives, except technical and scientific products, sell wholesalers' and manufacturers' goods to businesses or groups within U.S. 41-4012.00 and need thorough knowledge of the goods sold. Daily work includes understanding needs, recommending products, quote and term communication, preparing orders and contracts, following up after sales, and sales records. Technical and scientific product sales 41-4011, sales engineers 41-9031, and consumer retail are separated separately; Chinese jobs are compared by product and actual duties."
+              "Wholesale and manufacturing sales representatives ask about intended use, check specifications and availability, quote within their authority, and hand off follow-up issues. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "wholesale-and-manufacturing-sales-representatives.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-41-4012.00"
           ],
           "type": "prose"
         }
@@ -25455,13 +25453,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Online sales and CRM are task background; text tools can assist drafts, and product terms are still checked manually. Independent adoption, scores, time savings, and replacement lack evidence and cannot be filled in with sales volume or an overall projection. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: If the quote and customer confirmation show different delivery dates, keep both and check with the person authorized to make the commitment before replying."
             ]
           },
           "id": "wholesale-and-manufacturing-sales-representatives.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-41-4012.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33065,6 +33063,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-41-4012.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 41-4012.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/41-4012.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38561,10 +38586,10 @@
       "text": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products"
     }
   },
-  "source_content_sha256": "ab2b96272a08e3300f7cdfd4d529880dc17b0542da53a66c822e47ed54332b44",
+  "source_content_sha256": "bee16ca31967d2535fc97972f2d0af063e42f14f9c0d1de0e3b57217168d2f45",
   "subject": {
     "canonical_slug": "wholesale-and-manufacturing-sales-representatives",
     "name": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products",
-    "summary": "Wholesale and manufacturing sales representatives, except technical and scientific products, sell wholesalers' and manufacturers' goods to businesses or groups within U.S. 41-4012.00 and need thorough knowledge of the goods sold. Daily work includes understanding needs, recommending products, quote and term communication, preparing orders and contracts, following up after sales, and sales records. Technical and scientific product sales 41-4011, sales engineers 41-9031, and consumer retail are separated separately; Chinese jobs are compared by product and actual duties."
+    "summary": "Wholesale and manufacturing sales representatives ask about intended use, check specifications and availability, quote within their authority, and hand off follow-up issues."
   }
 }

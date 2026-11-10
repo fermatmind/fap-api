@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先观察能否核同一期间的水量单位，保留生态预留和未知项，并在新条件下重算。W24帮助探索数据与方案沟通；真实水文模型、监测、论证和团队责任仍需专业训练和岗位实践。"
+              "纸面体验｜两个方案的来水量单位不同。先换到同一时间尺度，再列明情景、缺测点和谁复核转换。 "
             ]
           },
           "id": "water-resource-specialists.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24821,12 +24820,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "水资源专员调查和评估区域水量、水质与用水需求，开展水文水力分析、流域保护规划、方案比较和技术报告，并与监测、工程及管理人员协调。工作重在数据、模型条件和决策依据，不能把一张用水表当作取水许可或工程安全结论。"
+              "水资源专员用流域、供水和水质资料分析方案，说明模型假设和数据缺口，并把影响决策的不确定性交项目团队核对。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "water-resource-specialists.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-11-9121.02"
           ],
           "type": "prose"
         }
@@ -25569,13 +25568,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：区分生成式文字辅助、专业水文模型和岗位结果。可先用W24虚构资料练草稿复核；真实数据权限、模型适用、技术审查与审批仍需对应人员。本页未取得可复核的职业任务级评分、专员采用或替代比例，另列编辑估算分数。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：两个方案的来水量单位不同。先换到同一时间尺度，再列明情景、缺测点和谁复核转换。"
             ]
           },
           "id": "water-resource-specialists.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-11-9121.02",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33108,6 +33107,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-11-9121.02",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 11-9121.02 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/11-9121.02"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38572,10 +38598,10 @@
       "text": "水资源专员：任务、上位工资参考与水量方案体验"
     }
   },
-  "source_content_sha256": "61e8fe71bae7ec76e8f19edfa084b2abd8edf83a5b5461a67a4b8188af65c83f",
+  "source_content_sha256": "03084b0cd4e8f51a2bb2f1ec525023b9336074d234899fb5fc53c4548c06a1bd",
   "subject": {
     "canonical_slug": "water-resource-specialists",
     "name": "水资源专员",
-    "summary": "水资源专员调查和评估区域水量、水质与用水需求，开展水文水力分析、流域保护规划、方案比较和技术报告，并与监测、工程及管理人员协调。工作重在数据、模型条件和决策依据，不能把一张用水表当作取水许可或工程安全结论。"
+    "summary": "水资源专员用流域、供水和水质资料分析方案，说明模型假设和数据缺口，并把影响决策的不确定性交项目团队核对。"
   }
 }

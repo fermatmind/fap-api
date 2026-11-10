@@ -149,6 +149,9 @@
       "item:models.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:models.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:models.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -12982,6 +12985,21 @@
             "onet-training"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The call sheet lists two outfit looks and a photo set. The brief omits how the images will be used. List the timing, deliverables and intended use to clarify with the agency or producer."
+            ]
+          },
+          "id": "models.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check a modeling call sheet",
+          "type": "notice"
         }
       ]
     },
@@ -15461,6 +15479,13 @@
         "id": "models.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "models.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15630,7 +15655,7 @@
       "text": "Models: Work, U.S. Wages, and Entry Paths"
     }
   },
-  "source_content_sha256": "d9d27e7f715fe9393a4fb53b6266d553a238f38033a59b6ca10ac4f67520a091",
+  "source_content_sha256": "23dc898b9847aa7aa28ca4b7dab6b623a897c2dbb17b7cd652a1b595e9bc2271",
   "subject": {
     "canonical_slug": "models",
     "name": "Models",

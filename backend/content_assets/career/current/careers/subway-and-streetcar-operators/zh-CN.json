@@ -23668,14 +23668,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "观察能否分开计划时段、实际记录、资料收讫和交接确认，发现无依据表述能具体纠正。虚构文书题只看核查习惯，不测驾驶反应、健康适岗或资格。"
+              "纸面体验｜在虚构车次记录与调度日志中对照站名、车次和延误时点，标出需调度复核的一处差异。 "
             ]
           },
           "id": "subway-and-streetcar-operators.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "cn-rule",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24878,15 +24876,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "地铁与有轨电车司机驾驶轨道公共交通运送乘客，涉及运行环境注意、主管调度沟通、乘客信息和班次报告。美国代码不代中国准入；资格训练、单位分工与线路权限分别核。"
+              "地铁和有轨电车驾驶员按线路要求驾驶载客车辆，监看信号、站台和路口情况，并把延误或设备异常报告给调度。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "subway-and-streetcar-operators.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule",
-            "editor"
+            "transfer-onet-53-4041.00"
           ],
           "type": "prose"
         }
@@ -25682,17 +25677,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分虚构文本核查、真实运营采用、自动运行系统和就业后果。本文不填FermatMind任务评分，不预测个人失业概率，也不验证列车控制。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：在虚构车次记录与调度日志中对照站名、车次和延误时点，标出需调度复核的一处差异。"
             ]
           },
           "id": "subway-and-streetcar-operators.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "sag",
-            "r2-ai",
-            "nist",
-            "bls-ors",
-            "editor"
+            "transfer-onet-53-4041.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33902,6 +33893,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-53-4041.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 53-4041.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/53-4041.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39470,10 +39488,10 @@
       "text": "地铁与有轨电车司机"
     }
   },
-  "source_content_sha256": "a1990e532f60861d3bdb231c6f66250a7553398e3bf47002d12cbd82abb44f8b",
+  "source_content_sha256": "f4fb488d2b8551ebb39a4e0d745470484ce0b3b13e6eca36daa096496781e92b",
   "subject": {
     "canonical_slug": "subway-and-streetcar-operators",
     "name": "地铁与有轨电车司机",
-    "summary": "地铁与有轨电车司机负责驾驶轨道公共交通运送乘客，并按岗位要求观察运行环境、与调度沟通、提供乘客信息及留下班次记录。安全、规则执行和准确报告比单纯喜欢列车更关键。美国本页对应53-4041，中国准入、运营单位考核与线路任务另核，自动运行系统不等于生成式AI。"
+    "summary": "地铁和有轨电车驾驶员按线路要求驾驶载客车辆，监看信号、站台和路口情况，并把延误或设备异常报告给调度。"
   }
 }

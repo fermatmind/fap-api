@@ -23655,12 +23655,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "看自己是否愿意把研究问题变成可检验的问卷与样本方案，追查缺失和分母，清楚说明资料支持什么、不支持什么。沟通对象包括委托方、访员及分析同事；耐心修订和证据纪律比单纯爱提问更值得体验。"
+              "纸面体验｜检查虚构问卷的两版选项是否一致，并在样表上标出哪些答案在合并统计前需要重新编码。 "
             ]
           },
           "id": "survey-researchers.display.fermat_decision_card.summary",
           "source_refs": [
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24891,14 +24891,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "调查研究员计划、开发、实施调查，分析并解释资料，明确目标、测试问卷、监测收集并制作结果摘要与方法记录。职责可以覆盖设计、收集管理和分析；访问执行与总体推断须按实际分工和证据区分。"
+              "调查研究人员把研究问题转成抽样与问卷设计，组织收集资料，并向使用结果的人说明样本、方法和限制。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "survey-researchers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "editorial"
+            "transfer-onet-19-3022.00"
           ],
           "type": "prose"
         }
@@ -25699,15 +25697,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文字、编码与分析可探索辅助，但问卷有效性、样本来源、缺失处理和结论范围仍需人核查。跨职业暴露不等于本职替代率，既有资料没有代表性采用比例；FermatMind分数另为编辑估算。先检验具体任务，再决定使用方式。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：检查虚构问卷的两版选项是否一致，并在样表上标出哪些答案在合并统计前需要重新编码。"
             ]
           },
           "id": "survey-researchers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "bls",
-            "r2-ai"
+            "transfer-onet-19-3022.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -34611,6 +34607,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-19-3022.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 19-3022.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/19-3022.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -40115,10 +40138,10 @@
       "text": "调查研究员"
     }
   },
-  "source_content_sha256": "25bb02cf51f23e21609d905c20f7ae744ad1cc636ac88a2abae843fdffdb779c",
+  "source_content_sha256": "376a83176f8a964293a217446900ec29cddfbfdcfe32862cfdbdca9c88b6f355",
   "subject": {
     "canonical_slug": "survey-researchers",
     "name": "调查研究员",
-    "summary": "调查研究员设计和实施调查，明确研究问题、样本与问卷，监测收集质量，再把回答转为可核查的表格、分析与方法说明。访员执行、问卷设计和统计解释相互协作，但不能混为同一职责。先用虚构记录检验自己是否愿意处理缺失、核对分母并约束结论。"
+    "summary": "调查研究人员把研究问题转成抽样与问卷设计，组织收集资料，并向使用结果的人说明样本、方法和限制。"
   }
 }

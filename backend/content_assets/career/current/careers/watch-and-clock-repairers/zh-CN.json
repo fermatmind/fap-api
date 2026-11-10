@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先观察是否愿意准确记录细小差异、保持零件和工单对应、接受复测与指导，并向客户说清已知与未知。兴趣只是起点，动手能力、训练资源、工作条件和报价范围都需验证。"
+              "纸面体验｜两张纸面维修单的机芯编号不同。先留存编号和走时读数，交维修师确认来件和工单对应，暂缓结案。 "
             ]
           },
           "id": "watch-and-clock-repairers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24810,13 +24809,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "钟表维修工使用专业工具和检测仪器检查、维修、清洁、保养和调整手表、时钟等计时器具。工作包括询问症状、记录服务历史、处理零件与机构、复核走时功能及交付说明；维修、制造装配、鉴定和收藏交易分别有不同任务边界。"
+              "钟表维修人员检查磨损和走时偏差，按机芯情况拆检、清洁、修整或复装，并记录返还前的状态。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "watch-and-clock-repairers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "cn-rule"
+            "transfer-onet-49-9064.00"
           ],
           "type": "prose"
         }
@@ -25465,13 +25463,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可作为记录和提问的辅助，但本页没有钟表维修采用率、维修效果或岗位替代率证据。机械和电子检测、方案确认与实际工艺仍需专业人员核查；尚未形成可复核的任务评分，暂另列编辑估算分数。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：两张纸面维修单的机芯编号不同。先留存编号和走时读数，交维修师确认来件和工单对应，暂缓结案。"
             ]
           },
           "id": "watch-and-clock-repairers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-49-9064.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32860,6 +32858,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-49-9064.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 49-9064.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/49-9064.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38354,10 +38379,10 @@
       "text": "钟表维修工：工作内容、工资、资格与入门体验"
     }
   },
-  "source_content_sha256": "ded43b78c37966333ca731386fff4633fcf030350f1bbb603779a74c1de3b861",
+  "source_content_sha256": "9c4c2275c0ed6a5677517867cd63b08d00bde171a01ba99d58a42661a72484d3",
   "subject": {
     "canonical_slug": "watch-and-clock-repairers",
     "name": "钟表维修工",
-    "summary": "钟表维修工检查手表与时钟的故障，清洁、维修和调整计时机构，复核走时与功能，并记录零件、费用和服务历史。精密动手、准确检测和客户沟通共同构成工作；入门应先做纸面工单与数据复核，再在合格指导下学习实际维修。"
+    "summary": "钟表维修人员检查磨损和走时偏差，按机芯情况拆检、清洁、修整或复装，并记录返还前的状态。"
   }
 }

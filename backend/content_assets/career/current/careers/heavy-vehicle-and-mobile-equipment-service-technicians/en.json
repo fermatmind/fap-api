@@ -23835,7 +23835,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Direct answer | The \"Mobile Heavy Equipment Mechanics\" on this page is the exact occupation O*NET 49-3042.00 (Mobile Heavy Equipment Mechanics, Except Engines), and the work can be divided into several categories: first, diagnosis and inspection — operating and inspecting equipment to diagnose defects, reading manuals and drawings and diagrams, and using diagnostic equipment and measuring tools to judge faults; second, repair and replacement — repairing or replacing damaged or worn parts, repairing electrical systems, welding or brazing damaged parts, and installing bearings; third, overhaul and assembly — disassembling and reassembling equipment using rigging and hand tools, adjusting or maintaining or repairing subassemblies, and assembling gear systems; fourth, testing and acceptance — testing equipment after repair or assembly to ensure proper performance and conformity with manufacturer specifications; fifth, maintenance and records — arranging maintenance and cleaning and lubrication and spare parts management, and recording repairs and tests and anomalies."
+              "Write a fictional fault report with the machine model, operating conditions, symptoms and questions for the next technician. Describe which decisions you would escalate."
             ]
           },
           "id": "heavy-vehicle-and-mobile-equipment-service-technicians.profile.career-quick-answers-block.1",
@@ -23966,12 +23966,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The BLS 49-3042 projection for 2025—2035 is about 180,300 → 192,500 people, growth 6.7%, average annual openings 15,000 including replacements, and self-employment in the base period 1.8%; employment includes self-employment, and this is not real-time hiring, net new jobs, or AI causality."
+              "BLS Table 1.2 for 49-3042: about 180,300 U.S. jobs in 2025, about 192,500 projected in 2035 (+6.7%), and about 15,000 projected openings per year. Openings include replacements."
             ]
           },
           "id": "heavy-vehicle-and-mobile-equipment-service-technicians.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -24022,7 +24022,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Boundary conclusion | This page corresponds to O*NET 49-3042.00 (Mobile Heavy Equipment Mechanics), and the core difference from adjacent positions lies in \"subject matter and outputs and authorization level\": this occupation takes the mobile heavy machinery and hydraulic and pneumatic and electrical systems used in construction and logging and mining as its subject matter, produces equipment diagnosed and repaired and overhauled and tested and conforming to manufacturer specifications together with traceable repair and inspection records, completes work and judgments within the scope of qualifications and job authorization based on mechanical and hydraulic and electrical and diagnostic ability, and is responsible for equipment and personal safety and repair quality; operators take equipment operation as the subject matter, diesel engine specialists take engines as the subject matter, and crane operators take lifting operations as the subject matter, with different responsibility and authorization levels."
+              "This U.S. occupation covers mobile heavy equipment other than engine specialist work. Truck repair commonly concerns road vehicles. Employers may combine assignments, so check the equipment and systems listed."
             ]
           },
           "id": "heavy-vehicle-and-mobile-equipment-service-technicians.profile.career-quick-answers-block.7",
@@ -24092,7 +24092,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Occupational profile | The Mobile Heavy Equipment Mechanics on this page is the exact occupation O*NET 49-3042.00 (Mobile Heavy Equipment Mechanics, Except Engines), and takes on diagnosis and repair and overhaul tasks for mobile heavy equipment in equipment repair positions at construction and mining and logging and equipment rental and wholesale trade enterprises; the work is mainly on-site and workshop diagnosis and disassembly and repair and testing, accompanied by operation and inspection and records and collaboration, often performed in oily and dusty and noisy and confined and outdoor environments, and organized according to equipment downtime and project schedules."
+              "This page covers mobile heavy equipment mechanics, except engines, in U.S. occupation 49-3042. They inspect and repair mechanical, hydraulic or pneumatic systems on mobile equipment used in settings such as construction."
             ]
           },
           "id": "heavy-vehicle-and-mobile-equipment-service-technicians.profile.definition-block.11",
@@ -27996,13 +27996,13 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
@@ -28014,13 +28014,13 @@
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Bus and truck mechanics and diesel engine specialists",
@@ -32002,10 +32002,13 @@
                 "question_key": "career.faq.heavy-vehicle-and-mobile-equipment-service-technicians.q3"
               },
               {
-                "answer": "The BLS employment projections presented by O*NET on the 49-3042.00 page show: employment of 188,700 in 2024, 2024—2034 growth of Faster than average (5% to 6%) and marked Bright Outlook, with average annual openings of about 16,500 during the period (including growth and replacements). A projection is not equal to an individual job outcome.",
+                "answer": "BLS Table 1.2: U.S. occupation 49-3042 had about 180,300 jobs in 2025 and is projected to have about 192,500 in 2035 (+6.7%), with about 15,000 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. A projection is not equal to an individual job outcome.",
                 "id": "heavy-vehicle-and-mobile-equipment-service-technicians.faq.4",
                 "question": "What are the employment prospects?",
-                "question_key": "career.faq.heavy-vehicle-and-mobile-equipment-service-technicians.q4"
+                "question_key": "career.faq.heavy-vehicle-and-mobile-equipment-service-technicians.q4",
+                "source_refs": [
+                  "bls-design-ep"
+                ]
               },
               {
                 "answer": "O*NET places this occupation in Job Zone Three (medium preparation required) (6.0 to less than 7.0 (SVP 6.0 to < 7.0)), and the education section shows 55% requiring a post-secondary certificate, 30% a high school diploma or equivalent, and 8% some college courses but no degree (the page does not account for the remaining 7%); this occupation is marked Bright Outlook. In mainland China, positions involving lifting and hot work and electrical and working at height and confined spaces must meet work safety and occupational health requirements and obtain the corresponding qualifications or work permits; the specifics are governed by the requirements of the enterprise and the competent authority.",
@@ -32020,10 +32023,13 @@
                 "question_key": "career.faq.heavy-vehicle-and-mobile-equipment-service-technicians.q6"
               },
               {
-                "answer": "It will not be replaced as a whole. Work orders and readings and spare parts and reports and knowledge retrieval can be assisted by systems, but on-site diagnosis and disassembly and repair and hydraulic and electrical judgment and safety responsibility remain with certified personnel; O*NET shows this occupation's 2024—2034 growth is Faster than average 5% to 6% and marked Bright Outlook, and automation changes the composition of tasks more than it eliminates positions.",
+                "answer": "It will not be replaced as a whole. BLS Table 1.2: U.S. occupation 49-3042 had about 180,300 jobs in 2025 and is projected to have about 192,500 in 2035 (+6.7%), with about 15,000 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
                 "id": "heavy-vehicle-and-mobile-equipment-service-technicians.faq.7",
                 "question": "Will this occupation be replaced by AI or automation?",
-                "question_key": "career.faq.heavy-vehicle-and-mobile-equipment-service-technicians.q7"
+                "question_key": "career.faq.heavy-vehicle-and-mobile-equipment-service-technicians.q7",
+                "source_refs": [
+                  "bls-design-ep"
+                ]
               },
               {
                 "answer": "The O*NET work context shows: exposure to hazardous equipment and heavy machinery is common, exposure to oil and grime and dust and exhaust is common, working under equipment and in narrow spaces is common, often outdoors and in workshops and exposed to extremely hot or extremely cold temperatures, serious consequences of error (equipment damage and personal injury), and high responsibility for others' health and safety.",
@@ -32038,10 +32044,13 @@
                 "question_key": "career.faq.heavy-vehicle-and-mobile-equipment-service-technicians.q9"
               },
               {
-                "answer": "This page uses O*NET 49-3042.00 and U.S. BLS OEWS 2025 and BLS employment projections 2024—2034 as its main sources, and cites ILO and NIST research on occupational exposure and governance; all values are the U.S. this occupation's own scope and do not cover mainland China; for mainland China only the statistical scope and visible gaps are registered; this page does not constitute safety or special operations or quality or legal advice.",
+                "answer": "This page uses O*NET 49-3042.00 and U.S. BLS Table 1.2: U.S. occupation 49-3042 had about 180,300 jobs in 2025 and is projected to have about 192,500 in 2035 (+6.7%), with about 15,000 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
                 "id": "heavy-vehicle-and-mobile-equipment-service-technicians.faq.10",
                 "question": "What are the sources and scope boundaries of this page?",
-                "question_key": "career.faq.heavy-vehicle-and-mobile-equipment-service-technicians.q10"
+                "question_key": "career.faq.heavy-vehicle-and-mobile-equipment-service-technicians.q10",
+                "source_refs": [
+                  "bls-design-ep"
+                ]
               }
             ]
           },
@@ -32130,25 +32139,25 @@
                 "entity": "Big Five personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Intelligence and reasoning test",
+                "entity": "Heavy and Tractor-Trailer Truck Drivers",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/career/jobs/heavy-and-tractor-trailer-truck-drivers"
               },
               {
-                "entity": "Emotional intelligence test",
+                "entity": "Highway Maintenance Workers",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/en/career/jobs/highway-maintenance-workers"
               },
               {
                 "entity": "This occupation (Mobile Heavy Equipment Mechanics)",
@@ -32209,18 +32218,18 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to check employment of 188,700 in 2024, 2024—2034 growth of 5% to 6%, and average annual openings of about 16,500 during the period (including growth and replacements).",
+                  "BLS Table 1.2: U.S. occupation 49-3042 had about 180,300 jobs in 2025 and is projected to have about 192,500 in 2035 (+6.7%), with about 15,000 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
                   "Used to explain that employment projections and OEWS point-in-time employment estimates have different scopes, and that a projection is not equal to an individual job outcome and openings consist mainly of replacement needs."
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
                 "limitation": "This is the occupation's scope as presented by O*NET on the 49-3042.00 page; growth 5% to 6% and marked Bright Outlook.",
                 "market": "United States",
-                "name": "O*NET OnLine: Mobile Heavy Equipment Mechanics employment trend (49-3042.00, this occupation's own scope)",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "U.S. BLS Table 1.2: Occupational projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "49-3042.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/49-3042.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32621,6 +32630,18 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS Table 1.2: U.S. occupation 49-3042 had about 180,300 jobs in 2025 and is projected to have about 192,500 in 2035 (+6.7%), with about 15,000 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring."
+                ],
+                "id": "bls-design-ep",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -34491,7 +34512,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "What categories can the work of Mobile Heavy Equipment Mechanics be divided into?",
+            "question": "How can you explore field service without handling equipment?",
             "table": {
               "rows": [
                 {
@@ -34548,7 +34569,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "Where are the boundaries between Mobile Heavy Equipment Mechanics and adjacent positions?",
+            "question": "How does this job differ from truck or engine repair?",
             "table": {
               "rows": [
                 {
@@ -36501,7 +36522,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS employment projections (2024—2034, this occupation's own scope)",
+            "label": "U.S. BLS employment projections (2025–2035)",
             "secondary_value": null,
             "value": {
               "$item": "heavy-vehicle-and-mobile-equipment-service-technicians.profile.onet-structured-fields-block.4",
@@ -37266,7 +37287,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests suit Mobile Heavy Equipment Mechanics",
+        "label": "Explore work activities with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37343,7 +37364,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five"
           },
           {
             "href": {
@@ -37353,7 +37374,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "MBTI"
           },
           {
             "href": {
@@ -37363,7 +37384,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Intelligence and Reasoning (Chinese)"
+            "label": "Heavy and Tractor-Trailer Truck Drivers"
           },
           {
             "href": {
@@ -37373,7 +37394,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Emotional Intelligence (Chinese)"
+            "label": "Highway Maintenance Workers"
           }
         ]
       },
@@ -37617,39 +37638,39 @@
         ]
       },
       {
-        "derivation": "Scope | BLS employment projections 2024—2034 (as presented by O*NET on the 49-3042.00 page, this occupation's own scope, with growth labeled Faster than average 5% to 6% and marked Bright Outlook); the employment base period on that O*NET page is 188,700 in 2024; the projection includes replacement needs and is not equal to actual hiring or layoffs.",
-        "display_value": "Growth Faster than average (5% to 6%) (2024—2034, BLS employment projections, this occupation's (49-3042.00) own scope)",
+        "derivation": "BLS Table 1.2: U.S. occupation 49-3042 had about 180,300 jobs in 2025 and is projected to have about 192,500 in 2035 (+6.7%), with about 15,000 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "+6.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth",
         "occupation_scope": "This occupation: Mobile Heavy Equipment Mechanics",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "Scope | BLS employment projection base period (about 188,700 for this occupation in 2024, as presented by O*NET); this differs in scope from the BLS OEWS point-in-time employment estimate (OEWS covers only sampled non-farm establishment employers and excludes self-employment), and this page labels them separately without mixing them.",
-        "display_value": "Employment about 188,700 (2024, BLS employment projection base period, this occupation's (49-3042.00) own scope)",
+        "derivation": "BLS Table 1.2: U.S. occupation 49-3042 had about 180,300 jobs in 2025 and is projected to have about 192,500 in 2035 (+6.7%), with about 15,000 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 180,300 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Employment figure",
         "occupation_scope": "This occupation: Mobile Heavy Equipment Mechanics",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "Scope | Period openings in the BLS employment projections (about 16,500 per year on average for this occupation in 2024—2034, including growth and replacements, as presented by O*NET); this is a period annual average scope consisting mainly of replacement needs, and it cannot be read as net new positions.",
-        "display_value": "Projected average annual job openings of about 16,500 (2024—2034, BLS employment projections, this occupation's (49-3042.00) own scope, including growth and replacements)",
+        "derivation": "BLS Table 1.2: U.S. occupation 49-3042 had about 180,300 jobs in 2025 and is projected to have about 192,500 in 2035 (+6.7%), with about 15,000 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 15,000 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Average annual job openings",
         "occupation_scope": "This occupation: Mobile Heavy Equipment Mechanics",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-design-ep"
         ]
       },
       {
@@ -37737,19 +37758,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034, this occupation's (49-3042.00) own scope)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment (2024, this occupation's (49-3042.00) own scope)"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024—2034, this occupation's (49-3042.00) own scope)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -37763,17 +37784,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What Mobile Heavy Equipment Mechanics do, what capabilities and qualifications are needed, what the wages and prospects are, and which tasks AI will change. Retains the occupational scope (O*NET 49-3042.00), Job Zone Three (medium preparation required) and the education note, the U.S. wages and employment under this occupation's own scope, and the mainland China data gap."
+      "text": "Learn what mobile heavy equipment mechanics service and how this work differs from engine or truck repair."
     },
     "title": {
       "availability": "available",
-      "text": "Mobile Heavy Equipment Mechanics"
+      "text": "Mobile Heavy Equipment Mechanic: Diagnostics and Field Service"
     }
   },
-  "source_content_sha256": "be729eb9d276315b78955774548fc3a78570b2083a52ba483e3aeb1daa3f1f34",
+  "source_content_sha256": "097225d8a8e74a570d4099cf54ec7f87d06c6e7eeda6926728d61edd4ae36e78",
   "subject": {
     "canonical_slug": "heavy-vehicle-and-mobile-equipment-service-technicians",
-    "name": "Mobile Heavy Equipment Mechanics",
-    "summary": "Mobile Heavy Equipment Mechanics corresponds to the exact occupation O*NET/SOC 49-3042.00 \"Mobile Heavy Equipment Mechanics, Except Engines\": diagnose, adjust, repair, or overhaul mobile mechanical, hydraulic, and pneumatic equipment used in construction, logging, and mining, such as cranes, bulldozers, graders, and conveyors. Core tasks include operating and inspecting equipment to diagnose defects, repairing or replacing damaged or worn parts, disassembling and overhauling and reassembling, reading and understanding materials according to manuals and drawings, and testing equipment to ensure it meets manufacturer specifications; common job titles include Heavy Equipment Mechanic and Mobile Heavy Equipment Mechanic and Field Service Technician and Heavy Equipment Technician. Official scope text: Diagnose, adjust, repair, or overhaul mobile mechanical, hydraulic, and pneumatic equipment, such as cranes, bulldozers, graders, and conveyors, used in construction, logging, and mining. Scope note: the U.S. wage and employment and industry data presented by O*NET on the 49-3042.00 page are not marked as taken from a parent or adjacent occupation, and this page labels them faithfully according to this occupation's (49-3042.00) own scope; this occupation is Job Zone Three (medium preparation required) (6.0 to less than 7.0 (SVP 6.0 to < 7.0)), with 2024—2034 growth of Faster than average (5% to 6%) and marked Bright Outlook. The content of this page does not constitute safety, special operations, occupational health, or legal advice."
+    "name": "Mobile Heavy Equipment Mechanic",
+    "summary": "This page covers mobile heavy equipment mechanics, except engines, in U.S. occupation 49-3042. They inspect and repair mechanical, hydraulic or pneumatic systems on mobile equipment used in settings such as construction."
   }
 }

@@ -23373,13 +23373,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "偏好教育现场、人员协调与制度执行者可继续核此职业；与班级教师比较。"
+              "纸面体验｜将虚构班表与当日活动单逐行比对，圈出一个临时换班未同步的位置，写明请谁确认。 "
             ]
           },
           "id": "preschool-and-childcare-center-directors.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23671,13 +23670,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "11-9031负责机构与项目运行；学前教师25-2011负责班级教学，儿童照护工39-9011承担具体照护。负责人可能兼任教学，但岗位工资和资格不得互借。"
+              "学前教育和托育中心主任组织人员、日常项目和家园沟通，并管理预算或运行记录。变动的排班需要与当日服务安排同步核对。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "preschool-and-childcare-center-directors.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "ep"
+            "transfer-onet-11-9031.00"
           ],
           "type": "prose"
         },
@@ -24871,15 +24869,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "排班差异整理和家长通知初稿是待验证的编辑辅助设想；本页未核岗位级采用效果。儿童监督、人员资格、接送和应急仍须实际授权人员核查；任务暴露研究不提供11-9031裁员因果。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：将虚构班表与当日活动单逐行比对，圈出一个临时换班未同步的位置，写明请谁确认。"
             ]
           },
           "id": "preschool-and-childcare-center-directors.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-11-9031.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32837,6 +32833,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-11-9031.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 11-9031.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/11-9031.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38112,10 +38135,10 @@
       "text": "学前教育与托育机构管理者"
     }
   },
-  "source_content_sha256": "b3c54f9d70af50ae198b9d30c11eb456ba70c632163334404237f2ee87e15fb0",
+  "source_content_sha256": "34c51e92ff7f23f158f9c43234f4eb967a8dddd6cd4a1ebc86421fb737ebb8ba",
   "subject": {
     "canonical_slug": "preschool-and-childcare-center-directors",
     "name": "学前教育与托育机构管理者",
-    "summary": "学前教育与托育机构管理者规划、协调学前或托育项目的教育与非教育活动，安排人员、资源、家长沟通和机构运行。O*NET 11-9031.00涵盖托育中心及课前课后项目；个别负责人也可能教学或直接照护，但管理职责不等于班级教师职责。人员配备、接送、隐私和安全须依所在地规定及机构制度。"
+    "summary": "学前教育和托育中心主任组织人员、日常项目和家园沟通，并管理预算或运行记录。变动的排班需要与当日服务安排同步核对。"
   }
 }

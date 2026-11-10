@@ -23377,14 +23377,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Next, check the education, training, and job authority required in the target location; a fictional exercise cannot replace real work authorization."
+              "Paper check | Compare fictional requirements and prototype results. Flag an untested wavelength condition and identify the original record a reviewer would need. "
             ]
           },
           "id": "photonics-engineers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "ep",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23685,12 +23683,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "This occupation researches optical information or optical energy technologies, designs systems and devices such as lasers, fiber optics, and imaging, and develops and tests prototypes."
+              "Photonics engineers turn optical performance needs into designs and test requirements. Prototype data helps them identify which specifications are met and where a design needs revision. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "photonics-engineers.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "transfer-onet-17-2199.07"
           ],
           "type": "prose"
         },
@@ -24776,15 +24774,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Requirements organization, draft models, and parameter comparisons may serve as tool trials; optical simulation, fixed automation, and generative AI are different technologies. This page has no verified occupational AI adoption rate, replacement share, or individual unemployment probability; parent category overall employment projections do not isolate AI causation. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare fictional requirements and prototype results. Flag an untested wavelength condition and identify the original record a reviewer would need."
             ]
           },
           "id": "photonics-engineers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ep",
-            "nist",
-            "editor"
+            "transfer-onet-17-2199.07",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32870,6 +32866,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-17-2199.07",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 17-2199.07 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/17-2199.07"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38123,10 +38146,10 @@
       "text": "Photonics Engineers"
     }
   },
-  "source_content_sha256": "03452ce7ea9139cb00c97b4e5832124e1c992492197b96a18a18857aa5060dc4",
+  "source_content_sha256": "16d7c050f8ef9b40f63c5ffc8456efc60d8219389ae763ac56832789648904f9",
   "subject": {
     "canonical_slug": "photonics-engineers",
     "name": "Photonics Engineers",
-    "summary": "Photonics engineers (O*NET 17-2199.07) design, analyze, integrate, and test light-based systems or devices, including laser, fiber-optic, and imaging technologies. Working with system requirements, optical models, device specifications, test records, and safety requirements, they produce traceable designs, prototype test conclusions, and production transfer handovers. Laser, electrical, and laboratory safety must follow institutional procedures; design validation and release require corresponding authorization. Work settings, qualifications, and final responsibility must be checked against local and institutional rules."
+    "summary": "Photonics engineers turn optical performance needs into designs and test requirements. Prototype data helps them identify which specifications are met and where a design needs revision."
   }
 }

@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-a25-nanpu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a25-xinfeng": {
+        "status": "pending_mapping"
+      },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
       },
@@ -1707,7 +1713,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26150,12 +26156,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The editorial scenarios must verify pay against actual duties, contract, and settlement; no one-to-one Chinese-U.S. classification or uniform national structure was verified."
+              " These are past notices. A comparable mainland occupational median remains unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "r5-nbs-retail"
+            "a25-xinfeng",
+            "a25-nanpu"
           ],
           "type": "prose"
         },
@@ -26266,12 +26273,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The mainland China salary section on this page retains only the evidence boundary: it does not treat industry averages as occupation wages, does not substitute U.S. data, and does not state a national median, starting pay, or percentiles for this occupation."
+              "Use the notices to compare duties and pay terms for individual posts."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "r5-onet-current"
+            "a25-xinfeng",
+            "a25-nanpu"
           ],
           "type": "prose"
         }
@@ -29041,26 +29049,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional demonstration and promotion scenario material (exercise input)",
-                  "Fictional scenario: an in-store demonstrator encounters four problems during the same promotion. First, a customer asks whether an effect is supported by third-party testing, but the product materials do not say; second, a customer asks to settle at a ten percent discount, but the day's authorization only goes as far as five percent; third, a trial sample is knocked over and scattered on the demonstration table, and the floor is slippery; fourth, a customer hopes the product can be used for children, but the materials do not state the applicable age.",
-                  "Provided materials: product materials and the authorized offer scope; the demonstration process and on-site safety standards; sales and demonstration record forms.",
-                  "Not provided: whether the effect can be described as third-party tested, whether a discount beyond authorization can be requested, whether the demonstration must be paused when samples are scattered and the floor is slippery, and whether one can answer that it can be used for children when the materials do not state the applicable age. If these conditions are needed in the exercise, state your assumptions and the party you need to confirm with."
+                  "Paper exercise inputs",
+                  "Fictional demo booth. Work on paper. The product card lists use and specifications, with no third-party testing or age guidance. Customers ask whether it has independent testing and whether children can use it.",
+                  "The shift authorizes discounts up to 5%. A customer asks for 10%. The supervisor can confirm product information or handle requests beyond your authority.",
+                  "At 14:20 a sample spills, leaving a slick patch in front of the booth. The exercise requires a pause, a warning marker and notification to the floor lead when there is a walking hazard. Reopening requires a recheck."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Task requirements",
-                  "Write a one-page handling and escalation plan: including how to respond to and verify the question about the effect, how to handle a discount beyond authorization, on-site handling when a sample is scattered and the floor is slippery, and how to answer and record when the materials do not state the applicable age.",
-                  "The plan must state which information comes from the prompt materials and which is still an assumption, and explain whether it relies on the product materials and authorized offer scope, the demonstration process and on-site safety standards, or the sales and demonstration record forms."
+                  "What to submit",
+                  "Submit a one-page ticket with both customer replies, the discount decision, the booth response and a handoff.",
+                  "Record the time, what the card confirms, open questions, who takes over and when the booth can reopen. Use only the exercise inputs."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference deliverable (derivable from the prompt)",
-                  "The plan should include: effect (when the materials do not state whether there is third-party testing, do not endorse testing or the effect, explain that the responsible person must confirm before answering, and do not guess), discount (when the day's authorization only goes as far as five percent, do not promise a ten percent discount, ask the responsible person whether it can be requested, and keep the communication record), on-site safety (when a sample is scattered and the floor is slippery, pause the demonstration first, clean up and put the samples back, place a warning, and continue only after safety is confirmed), applicable age (when the materials do not state the applicable age, do not answer affirmatively, explain that it must be verified and suggest the customer refer to the instructions or ask the responsible person), and records (state the status of the four items, the actions taken, and the items pending confirmation).",
-                  "The reference deliverable lists only the elements that should be included; it does not require wording identical to the example, and it is enough to explain the basis for the judgment."
+                  "Finish your own answer first",
+                  "Open “Product demo ticket reference (open after day six)” under FAQs and sources.",
+                  "Use the checklist to record one difference and one correction."
                 ]
               },
               {
@@ -29090,50 +29098,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: read one public document",
-                  "Find a public material on consumer rights protection or advertising truthfulness, mark three key requirements and the corresponding practices, and write down what you want to confirm."
+                  "Day 1",
+                  "Record both product questions and the price request."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: write a demonstration script",
-                  "Write a three-minute demonstration script for a fictional product, including the opening, feature explanation, usage limits, and three possible questions."
+                  "Day 2",
+                  "Draft both replies and mark what remains unverified."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: rewrite one page of selling points and limitations",
-                  "Rewrite a fictional product information sheet as one page of accurate selling points and limitations, and mark which statements require authorization."
+                  "Day 3",
+                  "Use the discount authorization to write your quote and referral decision."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: lay out a demonstration area setup",
-                  "Lay out a setup and safety checklist for a fictional demonstration, and mark the step you think is most prone to safety hazards."
+                  "Day 4",
+                  "Use the exercise procedure to record the booth response and reopening conditions."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: write a demonstration record and anomaly escalation card",
-                  "Write out the demonstration information recording items and the escalation order for anomalies, the records to keep, and the parties to notify."
+                  "Day 5",
+                  "Add time, open questions and handoff owners to the ticket."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: have someone else review using only the materials",
-                  "Have a peer review whether your statements are truthful and the authorization is clear using only your plan, and record the questions they raise."
+                  "Day 6: finish your own answer",
+                  "Check whether someone could read your handoff on its own before opening the reference."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: decide whether to continue",
-                  "Return to this page's decision checklist and write down three reasons you are willing to continue and two conditions that require caution."
+                  "Day 7: open the reference and review",
+                  "Open “Product demo ticket reference (open after day six)” under FAQs and sources. Record one difference and correction, then decide whether to continue or pause."
                 ]
               }
             ]
@@ -29152,13 +29160,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Specific change: whether, given the materials, you can write out how to handle the effect question, the discount authorization handling, on-site handling, and the applicable age answer, rather than only writing that it was handled.",
+              "You can finish a one-page handoff and separate verified facts, open checks and approvals.",
               "Facts and choices: whether you would rather do resident in-store demonstration, trade show and event demonstration, or go in the retail and customer support direction.",
-              "Exercise cost: long standing, frequent walking and carrying, repeated explanation, and customer refusal; which step drains you most, and can you accept it recurring in the work.",
+              "Note which paper step takes most effort. Ask the employer about actual work demands.",
               "Material boundaries: the exercise materials are all fictional or based on public information, and real brand materials or customer information must not be used.",
               "Response to feedback: when the brand or supervisor changes your promotional wording for compliance reasons, are you willing to go back to the materials and authorization.",
               "Process interest: even when demonstrating the same product repeatedly and answering similar questions, are you willing to explain fully and record every time.",
-              "Next step: if you are willing to continue through the first six steps, the next step is, within compliance (such as after obtaining brand authorization and pre-employment training), to complete one closed loop from preparing materials to live demonstration, recording, and returning materials, and ask an experienced person to review it; if one step clearly drains you, narrow the direction first and then verify."
+              "On day seven, check your handoff against the collapsed reference. Repeat if a critical item is missing. Ask the employer about training and actual responsibilities."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -31002,21 +31010,21 @@
           "data": {
             "entries": [
               {
-                "answer": "Demonstrates goods and answers customer questions to raise purchase interest, and may also sell the demonstrated product: providing samples, coupons, or promotional materials to customers; selling and keeping sales records; keeping the area tidy and putting items back after the demonstration; demonstrating or explaining goods, methods, or services; recording and reporting demonstration-related information; making purchase suggestions based on customer needs; researching the product in advance; setting up displays and the demonstration area; identifying interested customers; traveling to trade shows, stores, or other venues to demonstrate and answer questions; moving, assembling, and disassembling demonstration materials; rehearsing the demonstration; learning about competitors or customer concerns; guiding customers in modifying the product; collaborating with the demonstration team at large events; adjusting the demonstration content for a specific audience; restocking shelves; providing product information through explanation, films, charts, or slides; training other demonstrators; suggesting improvements to the employer's goods or services; and walking around public places in costumes or signs to promote goods, services, or events.",
+                "answer": "Demonstrate products in stores or at booths, explain use and limits, answer questions and log common questions. Before taking a shift, ask whether it includes tastings, checkout or stock duties.",
                 "id": "actors.faq.1",
                 "question": "What does a demonstrator and product promoter do in a typical day?",
                 "question_key": "career.faq.demonstrators-and-product-promoters.1",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "The core of this occupation is demonstrating goods in stores, booths, or at event sites and answering customer questions to raise purchase interest and prompt immediate purchase or trial; retail salespersons center on routine store reception, sales, and checkout; merchandise displayers and window trimmers center on visual display and spatial arrangement; service sales representatives sell service solutions to business customers; wholesale and manufacturing sales representatives do bulk sales to institutional customers; counter and rental clerks handle counter or rental procedures; telemarketers promote through outbound telephone calls. Similar names do not mean duties, evaluation standards, or assessment methods are interchangeable.",
+                "answer": "Demonstrators help customers understand or try a product. Retail associates may focus on sales and checkout. Display staff focus on presentation. Stores can combine these duties within a shift, so ask what is included.",
                 "id": "actors.faq.2",
                 "question": "What distinguishes this occupation from adjacent store retail, display, and sales directions?",
                 "question_key": "career.faq.demonstrators-and-product-promoters.2",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current"
                 ]
               },
               {
@@ -31047,21 +31055,24 @@
                 ]
               },
               {
-                "answer": "The 2025 U.S. wage data shows a median annual wage of 39,320 USD (median hourly 18.91 USD), with annual percentiles of 31,200／35,160／39,320／53,640／63,850 USD, under the O*NET-SOC 41-9011.00 definition for this subcategory itself; percentiles are statistical positions and cannot be treated as a personal quote or personal take-home income; no occupation-level figure was obtained for mainland China, and this page treats it as a gap rather than filling it with industry averages or quote samples.",
+                "answer": "May 2025 U.S. median wages were $39,320 per year and $18.91 per hour. Compare the mainland daily rate and half-day-shift monthly rate separately. The notice listed CNY 120/day for an April 11–12 tasting assignment and CNY 110/day for an apple tasting assignment. Both required product explanations, tastings and a health certificate. Two half-day-shift factory-brand promoter posts at CNY 2,200/month or more. Duties covered promotion, displays, restocking and stock. The notice did not list tastings. These are past notices. A comparable mainland occupational median remains unavailable.",
                 "id": "actors.faq.6",
                 "question": "What are the typical wages for this occupation, and how should they be compared?",
                 "question_key": "career.faq.demonstrators-and-product-promoters.6",
                 "source_refs": [
-                  "oews"
+                  "r5-wages-current",
+                  "a25-xinfeng",
+                  "a25-nanpu"
                 ]
               },
               {
-                "answer": "The U.S. preparation level is O*NET Job Zone 1-2 (SVP below 6.0), and the official education survey shows that among new entrants 64% require a high school diploma or equivalent, 35% require less than high school, and 1% require a master's degree; the common entry is to start with basic demonstration and customer communication after short pre-employment training; mainland China mostly accepts short pre-employment training, and positions involving food demonstration may require a health certificate, verified per the target unit's rules.",
+                "answer": "The notice listed CNY 120/day for an April 11–12 tasting assignment and CNY 110/day for an apple tasting assignment. Both required product explanations, tastings and a health certificate. Two half-day-shift factory-brand promoter posts at CNY 2,200/month or more. Duties covered promotion, displays, restocking and stock. The notice did not list tastings. These are past notices. A comparable mainland occupational median remains unavailable. For an application, check the posting’s education, audition or training requirements.",
                 "id": "actors.faq.7",
                 "question": "What education does this occupation need, and how should one train for it?",
                 "question_key": "career.faq.demonstrators-and-product-promoters.7",
                 "source_refs": [
-                  "onet"
+                  "a25-xinfeng",
+                  "a25-nanpu"
                 ]
               },
               {
@@ -31083,12 +31094,21 @@
                 ]
               },
               {
-                "answer": "O*NET national employment trends (using BLS data, 2024—2034 projection period, under the 41-9011.00 definition for this subcategory itself) shows about 79,200 people employed in 2024, about 79,100 projected in 2034, a projected growth of 0% (label little or no change), and about 14,000 openings per year over the projection period including growth and replacement; the work centers on customer communication, live demonstration, and recording, shifts may cover weekends and promotional periods, and it must be verified against the local industry structure and compliance requirements, with priority given to verifying demonstration format, pay method, and authorization requirements.",
+                "answer": "BLS projects U.S. SOC 41-9011 to grow from about 70,400 jobs in 2025 to 70,500 in 2035 (+0.2%), with about 11,400 annual openings including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should I consider when choosing this occupation now?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.demonstrators-and-product-promoters.10",
                 "source_refs": [
-                  "bls"
+                  "r5-bls-current"
+                ]
+              },
+              {
+                "answer": "Say that the card gives neither third-party testing nor an applicable age. Refer both to the supervisor without confirming either. The shift allows 5%, so do not promise 10%. Log and refer the request. Pause the demo immediately at 14:20, mark the slick area and tell the floor lead. Reopen only after the exercise recheck. In the paper log, mark the action status pending confirmation. Hand over what the card says, the three customer requests, spill location, time and who takes over. Check four items: both information replies, discount authority, pause and reopening, and records and handoff. Count each complete item. This fictional exercise uses the source only for occupational context.",
+                "id": "actors.faq.11",
+                "question": "Product demo ticket reference (open after day six)",
+                "question_key": "career.faq.demonstrators-and-product-promoters.11",
+                "source_refs": [
+                  "r5-onet-current"
                 ]
               }
             ]
@@ -31330,21 +31350,19 @@
                 "url": "https://www.onetonline.org/link/summary/41-4012.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports this occupation's employment and projection definitions (this subcategory).",
-                  "Contains no mainland China information and cannot substitute for mainland China data.",
-                  "Verified this round: 41-9011 itself goes from about 70400 in 2025 → about 70500 in 2035, an official net increase of about 100, +0.2%, average annual 11400 openings including growth and replacement, self-employed 9.0%. The O*NET little or no change classification does not equal exactly 0; the combined 41-9010 models and promoters figures are not used to fill in, or to infer turnover, seasonal proportions, or AI causality."
+                  "BLS projects U.S. SOC 41-9011 to grow from about 70,400 jobs in 2025 to 70,500 in 2035 (+0.2%), with about 11,400 annual openings including replacements."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "41-9011 itself goes from about 70400 in 2025 → about 70500 in 2035, an official net increase of about 100, +0.2%, average annual 11400 openings including growth and replacement, self-employed 9.0%. The O*NET classification of little or no change does not equal exactly 0; the combined 41-9010 models and promoters figures are not used to fill in, or to infer turnover, seasonal proportions, or AI causality.",
+                "limitation": "Annual openings include replacements.",
                 "market": "United States",
-                "name": "O*NET National Employment Trends: Demonstrators and Product Promoters (41-9011.00, using BLS data)",
-                "period": "2024—2034 projection period; searched 2026-09-19",
+                "name": "BLS Table 1.2: occupational projections",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/41-9011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31677,7 +31695,7 @@
                 "url": "https://www.onetonline.org/link/summary/27-1026.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "21 tasks, 15 core and 6 supplementary, with adjusting content for the audience, restocking, lectures with films, charts, or slides, training demonstrators, making improvement suggestions, and walking around in branded clothing as supplementary, and guiding customers in modifying the product as core but not a repair license. The 19 work style Impact scores are not percentages; the interest E73/C43/A39/S38/R37/I15 is not ability; the education figures 64 high school, 35 less than high school, and 1 master's are required opinions. The 2025 industries are professional and technical 34, manufacturing 17, and retail 15%, with the remaining 34 an editorial difference."
                 ],
@@ -31722,7 +31740,7 @@
                 "url": "https://www.onetonline.org/link/hot_tech/41-9011.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "41-9011 itself 70.4→70.5 thousand, a net increase of 0.1 thousand, +0.2%, average annual 11.4 thousand openings, self-employed 9.0%, with the typical no formal educational credential, no related experience, and short-term on-the-job training being statistical categories. The O*NET little or no change classification does not equal exactly 0; the combined 41-9010 models and promoters is not itself."
                 ],
@@ -31902,6 +31920,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The notice listed CNY 120/day for an April 11–12 tasting assignment and CNY 110/day for an apple tasting assignment. Both required product explanations, tastings and a health certificate."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a25-xinfeng",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Xinfeng supermarket tasting promoter",
+                "period": "2026-04-08",
+                "publisher": "Xinfeng County government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.jxxf.gov.cn/xfxxxgk/wgjy/202604/cab80ffce31e4b1a9cf7317e0c3b6ad4.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Two half-day-shift factory-brand promoter posts at CNY 2,200/month or more. Duties covered promotion, displays, restocking and stock. The notice did not list tastings."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a25-nanpu",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Tangshan factory-brand promoter",
+                "period": "2026-04-30",
+                "publisher": "Tangshan Nanpu Economic Development Zone HR bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.nanpu.gov.cn/news_detail/1220.html"
               }
             ]
           },
@@ -34796,7 +34844,7 @@
             },
             {
               "指标": "Scope of review",
-              "数值": "This round: the NBS2025 industry table, advertising law and the 2026 regulatory notice, the consumer regulations, the 2025 food law and PIPL; no occupational wages or real recruitment quotes; searched 2026-10-09",
+              "数值": "The Xinfeng and Tangshan Nanpu notices report daily pay and a half-day-shift monthly rate separately.",
               "说明": "For explaining only the actual scope and timing of the review, not as a basis for value conversion."
             },
             {
@@ -34933,7 +34981,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "This round: the NBS2025 industry table, advertising law and the 2026 regulatory notice, the consumer regulations, the 2025 food law and PIPL; no occupational wages or real recruitment quotes",
+          "china_open": "The dated posting samples are shown alongside the national occupation-level data gap.",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34976,7 +35024,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (recruitment or quote definition)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$join": [
                   {
@@ -35006,13 +35054,14 @@
           "china_soc_row": "U.S. 41-9011.00 itself, which does not directly correspond to Chinese classification, wages, or qualification",
           "edu": "See the entry module for training and qualification",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-a25-xinfeng",
+            "posting-a25-nanpu"
           ],
           "sources_note": "Source links are used according to their own statistical or announcement scope; when the statistical period, survey population, or pay definition differs they are cited separately and no cross-conversion is performed.",
           "ui": {
             "ai_heading": "Will AI or automation affect this occupation's wages?",
             "driver_heading": "How is promotion work organized by schedule, session, and promotional peak?",
-            "official_heading": "Official statistical definitions and gap notes",
+            "official_heading": "Scope of industry figures and job postings",
             "scenario_caption": "Education and training background, position directions, and notes (editorial compilation, not a salary statistic)",
             "scenario_heading": "Which promotion and promotion position directions correspond to different education and training backgrounds?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35842,7 +35891,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/retail-salespersons",
+            "target_href": "/en/career/jobs/retail-salespersons",
             "target_slug": "retail-salespersons",
             "target_title": "Retail salespersons (adjacent occupation)",
             "transition_distance": {
@@ -35865,7 +35914,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/merchandise-displayers-and-window-trimmers",
+            "target_href": "/en/career/jobs/merchandise-displayers-and-window-trimmers",
             "target_slug": "merchandise-displayers-and-window-trimmers",
             "target_title": "Merchandise displayers and window trimmers (adjacent occupation)",
             "transition_distance": {
@@ -35888,7 +35937,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel",
+            "target_href": "/en/career/jobs/sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel",
             "target_slug": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel",
             "target_title": "Service sales representatives (adjacent occupation)",
             "transition_distance": {
@@ -35911,7 +35960,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/sales-representatives-wholesale-and-manufacturing-except-technical-and-scientific-products",
+            "target_href": "/en/career/jobs/sales-representatives-wholesale-and-manufacturing-except-technical-and-scientific-products",
             "target_slug": "sales-representatives-wholesale-and-manufacturing-except-technical-and-scientific-products",
             "target_title": "Wholesale and manufacturing sales representatives (adjacent occupation)",
             "transition_distance": {
@@ -35934,7 +35983,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/counter-and-rental-clerks",
+            "target_href": "/en/career/jobs/counter-and-rental-clerks",
             "target_slug": "counter-and-rental-clerks",
             "target_title": "Counter and rental clerks (adjacent occupation)",
             "transition_distance": {
@@ -35957,7 +36006,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/parts-salespersons",
+            "target_href": "/en/career/jobs/parts-salespersons",
             "target_slug": "parts-salespersons",
             "target_title": "Parts salespersons (adjacent occupation)",
             "transition_distance": {
@@ -35980,7 +36029,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/stockers-and-order-fillers",
+            "target_href": "/en/career/jobs/stockers-and-order-fillers",
             "target_slug": "stockers-and-order-fillers",
             "target_title": "Stockers and order fillers (adjacent occupation)",
             "transition_distance": {
@@ -36003,7 +36052,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/telemarketers",
+            "target_href": "/en/career/jobs/telemarketers",
             "target_slug": "telemarketers",
             "target_title": "Telemarketers (adjacent occupation)",
             "transition_distance": {
@@ -36091,7 +36140,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -36140,7 +36189,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Explore my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -36189,7 +36238,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36238,7 +36287,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Explore my motivation clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36287,7 +36336,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36336,7 +36385,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Explore my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36958,7 +37007,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore the task interests and work preferences of demonstrators and product promoters",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37072,11 +37121,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -37490,38 +37539,38 @@
       },
       {
         "derivation": null,
-        "display_value": "About 79,200 people (2024)",
+        "display_value": "About 70400 people (2025 own base period)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment size (stock statistics)",
-        "occupation_scope": "Demonstrators and Product Promoters (41-9011.00) under this subcategory's own definition; the 2024 employment figure comes from the O*NET national employment trends page (using BLS data)",
-        "period": "2024 base period; searched 2026-09-19",
+        "measure": "Employment size",
+        "occupation_scope": "41-9011 itself includes the self-employed, and is not the combined models and promoters figure or personal opportunity",
+        "period": "2025 base period and 2025—2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Essentially unchanged (2024—2034, 0%, label little or no change; about 79,100 projected in 2034)",
+        "display_value": "Growth 0.2%, about 100 people (2025—2035 own, not exactly 0)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "Under the 41-9011.00 definition for this subcategory itself; the O*NET employment trends page shows 0% growth for 2024—2034 with the label little or no change, which is a total change over the projection period, not an individual's probability of being hired",
-        "period": "2024—2034 projection period; searched 2026-09-19",
+        "measure": "Ten-year employment change",
+        "occupation_scope": "41-9011 itself includes the self-employed, and is not the combined models and promoters figure or personal opportunity",
+        "period": "2025 base period and 2025—2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 14,000 per year (2024—2034, including growth and replacement need)",
+        "display_value": "About 11400 openings per year (2025—2035, including growth and replacement)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Average annual openings over the projection period (including replacement need)",
-        "occupation_scope": "Under the 41-9011.00 definition for this subcategory itself; the O*NET employment trends page gives about 14,000 per year over the projection period, including replacement needs from occupational transfers or exits from the labor market (such as retirement or job changes), not the number of net new positions each year; this scale reflects relatively high turnover with a certain proportion of part-time and seasonal positions",
-        "period": "2024—2034 projection period; searched 2026-09-19",
+        "measure": "Average annual openings",
+        "occupation_scope": "41-9011 itself includes the self-employed, and is not the combined models and promoters figure or personal opportunity",
+        "period": "2025 base period and 2025—2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
@@ -37685,14 +37734,15 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: this round has no occupational wage or real recruitment quote distribution for Chinese demonstration and promotion work, only a matched industry background",
+        "display_value": "The notice listed CNY 120/day for an April 11–12 tasting assignment and CNY 110/day for an apple tasting assignment. Both required product explanations, tastings and a health certificate. Two half-day-shift factory-brand promoter posts at CNY 2,200/month or more. Duties covered promotion, displays, restocking and stock. The notice did not list tastings.",
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "Chinese mainland",
         "measure": "Chinese occupational wage and recruitment gap",
-        "occupation_scope": "In Chinese mainland, compare against actual demonstration and promotion duties; no one-to-one classification was verified",
-        "period": "Searched 2026-10-09",
+        "occupation_scope": "Two past job notices",
+        "period": "2026",
         "source_refs": [
-          "r5-nbs-retail"
+          "a25-xinfeng",
+          "a25-nanpu"
         ]
       },
       {
@@ -37705,6 +37755,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The notice listed CNY 120/day for an April 11–12 tasting assignment and CNY 110/day for an apple tasting assignment. Both required product explanations, tastings and a health certificate.",
+        "fact_id": "posting-a25-xinfeng",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Xinfeng supermarket tasting promoter",
+        "period": "2026-04-08",
+        "source_refs": [
+          "a25-xinfeng"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Two half-day-shift factory-brand promoter posts at CNY 2,200/month or more. Duties covered promotion, displays, restocking and stock. The notice did not list tastings.",
+        "fact_id": "posting-a25-nanpu",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Tangshan factory-brand promoter",
+        "period": "2026-04-30",
+        "source_refs": [
+          "a25-nanpu"
         ]
       }
     ]
@@ -37732,19 +37806,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, essentially unchanged, label little or no change)"
+        "label": "U.S. 41-9011 · projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment headcount (2024, about 79,200 people)"
+        "label": "U.S. 41-9011 · employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. average annual openings (2024—2034, about 14,000 per year, including growth and replacement)"
+        "label": "U.S. 41-9011 · projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37758,17 +37832,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Demonstrators and product promoters (O*NET-SOC 41-9011.00) demonstrate goods and answer customer questions to raise public purchase interest in the goods, and may also sell the demonstrated goods: the tasks covered include providing samples and promotional materials, selling and recording, keeping the demonstration area tidy, explaining the goods in a demonstration, recording demonstration-related information, making purchase suggestions, researching the goods in advance, setting up displays and the demonstration area, identifying target customers, traveling to trade shows or stores to demonstrate, moving and assembling demonstration materials, rehearsing the demonstration, learning about competitors and customer concerns, guiding product modification, team collaboration, adjusting content for the audience, restocking, providing information through explanation and audio-visual materials, training other demonstrators, and making improvement suggestions; its U.S. employment and wage definitions must be stated: this occupation is under the O*NET-SOC 41-9011.00 definition for itself, about 79,200 people were employed in 2024, the 2024—2034 projection is essentially unchanged (label little or no change), about 79,100 are projected in 2034, and about 14,000 openings per year over the projection period include growth and replacement; the 2025 wage data shows a median annual wage of 39,320 USD (median hourly 18.91 USD), with annual percentiles of 31,200／35,160／39,320／53,640／63,850 USD; the industries are professional, scientific, and technical services 30%／manufacturing 15%／retail trade 14%／other industries (including wholesale trade) 41%; the interest code is EC and the preparation level is Job Zone 1-2; as well as the occupation-level wage gap for such positions in mainland China and the control points for product fact verification, truthful promotional statements, display and on-site safety, and documentation."
+      "text": "See what product demonstrators do, compare tasting and half-day promotion postings, and try a paper counter handoff."
     },
     "title": {
       "availability": "available",
       "text": "Demonstrators and product promoters"
     }
   },
-  "source_content_sha256": "36a527f380475022900fcaf82d5fb8731c753410a687361ab34613436c065ebd",
+  "source_content_sha256": "524e6c5fef0857f40875abd0859cf693de8c5bc64d362a0d0a4e482eb0acd28b",
   "subject": {
     "canonical_slug": "demonstrators-and-product-promoters",
     "name": "Demonstrators and product promoters",
-    "summary": "In the United States, demonstrators and product promoters correspond to O*NET-SOC 41-9011.00 (Demonstrators and Product Promoters): demonstrating goods and answering customer questions to raise public purchase interest in the goods, and possibly selling the demonstrated goods. The work includes providing customers with samples, coupons, promotional materials, or other incentives to prompt a purchase; selling the promoted goods and keeping sales records; keeping the area tidy during the work and putting items back after the demonstration; demonstrating or explaining goods, methods, or services to persuade customers to buy or use them; recording and reporting demonstration-related information (such as the number of customer questions or coupons distributed); making specific purchase suggestions based on customer needs; researching or learning about the goods to be demonstrated in advance; setting up or arranging displays and the demonstration area to attract potential customers' attention; identifying interested and eligible customers and giving them more information; traveling to trade shows, stores, community organizations, or other venues to demonstrate goods or services and answer questions; moving, assembling, and disassembling materials needed for the demonstration; rehearsing the demonstration to ensure the flow runs smoothly; learning about competitors or customer concerns to answer more completely; guiding customers in modifying the product; collaborating with the demonstration team at large events; adjusting the demonstration content for a specific audience; restocking shelves; providing product information through explanation, films, charts, or slides; training other demonstrators to introduce the company's goods or services; suggesting improvements to the employer's goods or services; and walking around public places in costumes or signs to promote goods, services, or events. The preparation level for this occupation is O*NET Job Zone 1-2 (requiring little to some preparation, SVP below 6.0), and the official education survey shows that among new entrants 64% require a high school diploma or equivalent, 35% require less than high school, and 1% require a master's degree. On O*NET, this subcategory's (41-9011.00) tasks, work context, preparation level, wages, employment, and industry are all its own definition, and the page is not labeled with a parent occupation or an opaque proxy: its national wages page for 2025 wage data publishes both annual and hourly percentiles. Similar positions on the Chinese side are mostly in-store promotion, sales assistant, demonstration, and promotion positions, whose duties and employment and pay definitions are not one-to-one counterparts of this U.S. occupation subcategory and cannot be interchanged."
+    "summary": "Demonstrate products in stores or at booths, explain use and limits, answer questions and log common questions. Before taking a shift, ask whether it includes tastings, checkout or stock duties."
   }
 }

@@ -1269,7 +1269,7 @@
         "status": "mapped"
       },
       "item:quality-control-systems-managers.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:quality-control-systems-managers.path.interview-probation.1": {
         "status": "mapped"
@@ -9022,18 +9022,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -23326,7 +23316,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先观察自己能否把模糊的质量问题拆成对象、规格、证据和责任人，并在缺陷反复出现时追到根因。再用入行模块的虚构材料 E1—E5 做一次完整练习：写清不合格事实、涉及的图纸与规格版本、量具状态和待批准事项；练习只需纸面和文本文件，不需要他人配合，也不需要真实生产。"
+              "到 09「入行、资格与职业发展」做 QC-M01｜跨线异常的停放行与恢复条件。比较两线缺记录率，写暂缓范围、调查分工和恢复签批。"
             ]
           },
           "id": "quality-control-systems-managers.quick-decision.fit-decision-checklist.2",
@@ -23443,13 +23433,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通方式｜官方工作环境数据显示：100% 的从业者每天使用电子邮件，76% 每天进行面对面讨论，83% 每天使用电话。\n工作场所｜约 81% 每天在室内受控环境中工作。\n精确性要求｜约 48% 认为工作「极其精确或准确」很重要，判定与记录直接影响放行结论。\n决策自由度｜约 56% 报告有一定决策自由，约 43% 可自行确定任务与优先级。\n责任范围｜约 48% 对他人健康与安全负很高责任，约 43% 对他人工作结果负很高责任。\n时间压力｜约 36% 每周至少经历一次时间压力。\n坐姿时长｜约 44% 约一半时间处于坐姿，其余用于现场与设备核对。\n重复任务｜约 47% 认为重复同样任务非常重要。\n冲突情境｜约 61% 每月至少遇到一次冲突情境，约 60% 会与不愉快或愤怒的人打交道，多与不合格品争执相关。"
+              "沟通方式｜本段比例来自 O*NET 美国受访者自报。100% 报告每天使用电子邮件，76% 报告每天面对面讨论，83% 报告每天使用电话。\n工作场所｜81% 的受访者报告每天在室内受控环境中工作。\n精确性要求｜48% 的受访者认为履行这项工作时做到精确或准确极为重要。\n决策自由度｜56% 报告有一定独立决策自由，43% 报告在确定工作任务、优先级或目标方面有一定自由。\n责任范围｜48% 的受访者报告对他人健康与安全负很高责任，43% 报告对他人的工作结果负很高责任。\n时间压力｜36% 报告每周至少一次、但并非每天需要应对严格截止期限。\n坐姿时长｜44% 报告约一半工作时间处于坐姿。\n重复任务｜约 47% 认为重复同样任务非常重要。\n冲突情境｜61% 报告每月至少一次但不到每周面对冲突。60% 报告以同一频率与不愉快、愤怒或不礼貌的人打交道。"
             ]
           },
           "id": "quality-control-systems-managers.profile.work-context-block.1",
           "source_refs": [
-            "onet",
-            "bls"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -25506,7 +25495,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测 11-3051 大类 2025—2035 增长 3%、净增约 6,500 人；预测不能证明 AI 采用或就业因果。"
+              "BLS 预测 11-3051 大类 2025—2035 增长 3%、净增约 6,500 个岗位；预测不能证明 AI 采用或就业因果。"
             ]
           },
           "id": "quality-control-systems-managers.ai-impact.ai-impact-table.70",
@@ -26583,7 +26572,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本科学历为常见起点或要求"
+              "BLS 11-3051 大类：典型学历为本科"
             ]
           },
           "id": "quality-control-systems-managers.china-salary.career-snapshot-primary-locale.28",
@@ -26613,7 +26602,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国官方常见路径为本科加相关经验；中国岗位要求由雇主决定，需逐条核对。"
+              "BLS 的美国工业生产经理大类（11-3051）通常要求本科学历和相关工作经验。中国具体要求按雇主公告逐项核对。"
             ]
           },
           "id": "quality-control-systems-managers.china-salary.career-snapshot-primary-locale.30",
@@ -26837,7 +26826,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "下表是编辑提出的学历背景与方向核对建议，未取得本职业当前招聘原文；不是基于招聘样本归纳的普遍要求或薪资统计。"
+              "下表是编辑提出的学历和岗位方向核对建议。页面引用的雇主样本未核实是否仍在招聘，现行入职条件与待遇请以雇主公告为准。"
             ]
           },
           "id": "quality-control-systems-managers.china-salary.career-snapshot-primary-locale.45",
@@ -26867,7 +26856,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局 2025 年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/"
+              "国家统计局 2025 年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "quality-control-systems-managers.china-salary.career-snapshot-primary-locale.47",
@@ -26980,13 +26969,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同一称谓在中国内地覆盖的岗位差异很大：既有执行层的检验岗，也有承担质量体系、放行批准与法规职责的复合管理岗。核对时应看职责与授权，而不是只看头衔。"
+              "质量管理工程技术人员（2-02-29-03）覆盖产品、工程和服务质量管理等工作，与质量体系经理有部分任务交集。该职业分类不等于经理职级，也不自动赋予停线、放行或复产权。"
             ]
           },
           "id": "quality-control-systems-managers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "editor",
-            "r2-pay-1"
+            "r2-pay-1",
+            "cn-qc-class"
           ],
           "type": "prose"
         },
@@ -26995,7 +26985,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局 2025 年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/"
+              "国家统计局 2025 年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "quality-control-systems-managers.china-salary.career-snapshot-primary-locale.57",
@@ -27075,7 +27065,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 年 5 月该职业最低 10% 的工资低于此值（官方职业展望给出下端界值）。这是统计分布位置，不是入门工资。；美国劳工统计局职业展望（工业生产经营经理，SOC 11-3051 大类）｜https://www.bls.gov/ooh/management/industrial-production-managers.htm"
+              "2025 年 5 月美国工业生产经理大类（11-3051）最低 10% 的工资低于此值（官方职业展望给出下端界值）。这是统计分布位置，不是入门工资。；美国劳工统计局职业展望（工业生产经营经理，SOC 11-3051 大类）｜https://www.bls.gov/ooh/management/industrial-production-managers.htm"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.10",
@@ -27103,7 +27093,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May 2025美国SOC11-3051大类第25分位年工资，来自O*NET地区页的United States全国行；非质量体系经理单列或资历等级。；O*NET全国工资（BLS2025派生）｜https://www.onetonline.org/link/localwages/11-3051.01?st=NJ"
+              "May 2025美国SOC11-3051大类第25分位年工资，来自O*NET地区页的United States全国行；非质量体系经理单列或资历等级。；O*NET全国工资（BLS2025派生）｜https://www.onetonline.org/link/localwages/11-3051.01"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.12",
@@ -27159,7 +27149,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May 2025美国SOC11-3051大类第75分位年工资，来自O*NET地区页的United States全国行；非质量体系经理单列或资历等级。；O*NET全国工资（BLS2025派生）｜https://www.onetonline.org/link/localwages/11-3051.01?st=NJ"
+              "May 2025美国SOC11-3051大类第75分位年工资，来自O*NET地区页的United States全国行；非质量体系经理单列或资历等级。；O*NET全国工资（BLS2025派生）｜https://www.onetonline.org/link/localwages/11-3051.01"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.16",
@@ -27187,7 +27177,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 年 5 月该职业最高 10% 的工资高于此值（官方职业展望给出上端界值）。高分位需要结合行业、地区与管理范围理解。；美国劳工统计局职业展望（工业生产经营经理，SOC 11-3051 大类）｜https://www.bls.gov/ooh/management/industrial-production-managers.htm"
+              "2025 年 5 月美国工业生产经理大类（11-3051）最高 10% 的工资高于此值（官方职业展望给出上端界值）。高分位需要结合行业、地区与管理范围理解。；美国劳工统计局职业展望（工业生产经营经理，SOC 11-3051 大类）｜https://www.bls.gov/ooh/management/industrial-production-managers.htm"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.18",
@@ -27201,7 +27191,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "252,100 人（2025 年）"
+              "252,100 个岗位（2025 年）"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.19",
@@ -27230,7 +27220,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 3%（2025—2035 年）"
+              "约 3%（由 2.6% 四舍五入）（2025—2035 年）"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.21",
@@ -27244,7 +27234,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "EP表11-3051精确变化率2.6%，概览取整为3%；252.1→258.6千人、净增6.5千与年均17千空缺为大类指标。；BLS EP 2025—2035｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "EP表11-3051精确变化率2.6%，概览取整为3%（由 2.6% 四舍五入）；基期252.1千个岗位、预测258.6千个岗位、净增6.5千个岗位与年均17千空缺为大类指标。；BLS EP 2025—2035｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.22",
@@ -27302,7 +27292,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "质量控制系统经理在美国属于管理类职业：2025 年 5 月年工资中位数为 126,060 美元（$60.61/小时），官方预测 2025—2035 年增长约 3%（净增约 6,500 人、年均空缺约 17,000 个）；以上为 SOC 11-3051 大类口径，不是更窄的单列职业值。"
+              "质量控制系统经理在美国属于管理类职业：2025 年 5 月年工资中位数为 126,060 美元（$60.61/小时），官方预测 2025—2035 年增长约 3%（由 2.6% 四舍五入）（净增约 6,500 个岗位、年均空缺约 17,000 个）；以上为 SOC 11-3051 大类口径，不是更窄的单列职业值。"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.26",
@@ -27656,7 +27646,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最低 10% 是统计分布的下端位置：把该职业全国受薪雇员的年工资从低到高排列，有 10% 的人低于 78,000 美元。"
+              "最低 10% 是统计分布的下端位置：把美国工业生产经理大类（11-3051）受薪雇员的年工资从低到高排列，有 10% 的人低于 78,000 美元。"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.51",
@@ -27685,7 +27675,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最高 10% 是统计分布的上端：有 10% 的受薪雇员年工资高于 205,520 美元。分位表只给出位置数值，没有说明这些人的职级或管理范围。"
+              "最高 10% 是统计分布的上端：美国工业生产经理大类（11-3051）中有 10% 的受薪雇员年工资高于 205,520 美元。分位表只给出位置数值，没有说明这些人的职级或管理范围。"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.53",
@@ -27718,31 +27708,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "质量控制检查员",
@@ -27805,28 +27795,28 @@
                 "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
               },
               {
-                "entity": "O*NET 兴趣（Interests）",
+                "entity": "O*NET 合规经理 (11-9199.02)",
                 "id": "link-17",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/11-3051.01#Interests"
+                "url": "https://www.onetonline.org/link/summary/11-9199.02"
               },
               {
-                "entity": "O*NET 任务与工作活动",
+                "entity": "O*NET 法规事务经理 (11-9199.01)",
                 "id": "link-18",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/11-3051.01#Tasks"
+                "url": "https://www.onetonline.org/link/summary/11-9199.01"
               },
               {
-                "entity": "O*NET 教育与 Job Zone",
+                "entity": "O*NET 项目管理专家 (13-1082.00)",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/11-3051.01#Education"
+                "url": "https://www.onetonline.org/link/summary/13-1082.00"
               },
               {
-                "entity": "中华人民共和国个人信息保护法",
+                "entity": "O*NET 自然科学经理 (11-9121.00)",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+                "url": "https://www.onetonline.org/link/summary/11-9121.00"
               }
             ]
           },
@@ -28136,7 +28126,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业不以智商测试为门槛，但需要数值核对与逻辑排序（公差上下限、抽样数量、趋势判断），这是可练习的工作方法。"
+              "已核职业资料和本页招聘样本未列 IQ 分数。应聘时核雇主实际要求。试做观察数值核对、记录和交接。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.18",
@@ -28282,12 +28272,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "检验与判定方向"
+              "生产管理方向"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.28",
           "source_refs": [
-            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28297,12 +28286,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "对规格、量具与判定方法有兴趣"
+              "对排产、团队协调以及产量与质量之间的取舍感兴趣。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.29",
           "source_refs": [
-            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28312,12 +28300,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "共享判定能力不等于可直接互换岗位。"
+              "核目标岗位是否负责人员、预算和交付。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.30",
           "source_refs": [
-            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28327,12 +28314,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "质量体系与审核方向"
+              "合规体系与审计方向"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.31",
           "source_refs": [
-            "purchasing-managers",
             "editor"
           ],
           "type": "prose"
@@ -28342,12 +28328,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "对体系文件、审核与培训管理有兴趣"
+              "对控制流程、审计证据和整改感兴趣。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.32",
           "source_refs": [
-            "purchasing-managers",
             "editor"
           ],
           "type": "prose"
@@ -28357,12 +28342,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需另补体系与审核方法，检验经历不自动等于体系资格。"
+              "补齐所在机构适用的法规和内部控制要求。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.33",
           "source_refs": [
-            "purchasing-managers",
             "editor"
           ],
           "type": "prose"
@@ -28372,12 +28356,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "法规与合规方向"
+              "实验室与质量分析方向"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.34",
           "source_refs": [
-            "archivists",
             "editor"
           ],
           "type": "prose"
@@ -28387,12 +28370,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意研究法规条文与合规风险"
+              "对检测方法、结果分析和偏差记录感兴趣。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.35",
           "source_refs": [
-            "archivists",
             "editor"
           ],
           "type": "prose"
@@ -28402,12 +28384,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需法规与内控知识，质量经验不自动等于合规资格。"
+              "核方法培训以及独立判定或签署结果的授权。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.36",
           "source_refs": [
-            "archivists",
             "editor"
           ],
           "type": "prose"
@@ -28417,12 +28398,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "生产管理方向"
+              "检验判定方向"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.37",
           "source_refs": [
-            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -28432,12 +28412,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更愿意带团队、安排生产与承担交付压力"
+              "对规格、量具、抽样和单件检验判定感兴趣。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.38",
           "source_refs": [
-            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -28447,12 +28426,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "质量经验不自动等于生产管理，产量与成本责任须另行承担。"
+              "核目标产品的检验方法与自己的判定权限。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.39",
           "source_refs": [
-            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -28462,13 +28440,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "校准与计量方向"
+              "法规事务方向"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.40",
           "source_refs": [
-            "hr",
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -28478,13 +28454,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更愿意做量值、校准与误差分析"
+              "对申报资料、批准事项变更和产品合规感兴趣。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.41",
           "source_refs": [
-            "hr",
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -28494,13 +28468,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需另补计量知识，检验经历不自动等于校准资格。"
+              "核目标辖区及产品适用的申报流程。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.42",
           "source_refs": [
-            "hr",
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -28510,12 +28482,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "实验室与检测方向"
+              "质量改进项目方向"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.43",
           "source_refs": [
-            "health",
             "editor"
           ],
           "type": "prose"
@@ -28525,12 +28496,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意在实验室按方法执行检测与记录"
+              "对定义范围、协调责任人和跨团队跟进整改感兴趣。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.44",
           "source_refs": [
-            "health",
             "editor"
           ],
           "type": "prose"
@@ -28540,12 +28510,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需实验室方法与资质要求，管理经验不自动授权检测签字。"
+              "核岗位负责项目预算与排期，还是只负责其中的质量工作。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.45",
           "source_refs": [
-            "health",
             "editor"
           ],
           "type": "prose"
@@ -28731,7 +28700,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做一次入行练习：用 E1—E5 复核一批虚构抽检记录并与参考交付对照。"
+              "用 09 的两条虚构生产线练停放行范围、调查分工和恢复条件。"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.58",
@@ -28806,7 +28775,7 @@
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.63",
           "source_refs": [
-            "facilities"
+            "onet-compliance-manager"
           ],
           "type": "prose"
         },
@@ -28820,7 +28789,7 @@
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.64",
           "source_refs": [
-            "hr"
+            "onet-regulatory-affairs-manager"
           ],
           "type": "prose"
         },
@@ -28834,7 +28803,7 @@
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.65",
           "source_refs": [
-            "purchasing-managers"
+            "onet-project-management-specialists"
           ],
           "type": "prose"
         },
@@ -28848,7 +28817,7 @@
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.66",
           "source_refs": [
-            "privacy"
+            "onet-natural-sciences-managers"
           ],
           "type": "prose"
         }
@@ -29092,7 +29061,7 @@
           },
           "id": "quality-control-systems-managers.risk.career-risk-cards.19",
           "source_refs": [
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29106,7 +29075,7 @@
           },
           "id": "quality-control-systems-managers.risk.career-risk-cards.20",
           "source_refs": [
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29115,12 +29084,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "使用前核对校准状态与到期日，异常时停用并升级，复测后重新判定。"
+              "在这个虚构场景中，先停用量具并按现场授权流程升级。是否复测及如何重新判定，由有权限的人员按适用方法决定。"
             ]
           },
           "id": "quality-control-systems-managers.risk.career-risk-cards.21",
           "source_refs": [
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29129,13 +29098,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "千分尺校准有效至 2026-05-31，而 2026-06-02 仍被登记为有效并出具读数。"
+              "虚构场景：准备使用量具判定一批零件时，发现校准标识已过期，台账里也查不到后续校准记录。"
             ]
           },
           "id": "quality-control-systems-managers.risk.career-risk-cards.22",
           "source_refs": [
-            "privacy",
-            "employer"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29420,14 +29388,14 @@
                 "进料与过程检验岗",
                 "按图纸与抽样方案对来料或在线产品做尺寸、外观检验，记录读数并按公差判定，把不合格隔离并上报。",
                 "能否按方法测量、复算读数、说明判定依据；被追问时能否指出量具状态与规格版本。",
-                "用练习中的检验记录与判定说明做法，并标注当时哪些信息未确认。",
+                "另做一张虚构的尺寸检验记录，写明量具状态、规格版本和判定依据。",
                 "偏执行与判定，一般不负责方法开发与体系审核，放行权由岗位授权确定。"
               ],
               [
                 "终检与出货检验岗",
                 "对成品做全检或抽检，核对外观与功能，标记接收或拒收并出具检验记录。",
                 "能否在时间压力下保持记录完整，能否区分「待复核」与「合格」。",
-                "用 E1—E5 练习说明如何核对抽检数量与判定边界。",
+                "另做一张虚构的终检记录，分开列出抽检数量、外观结果和待复核项。",
                 "对象是成品与出货批次，与过程检验的关注点不同。"
               ],
               [
@@ -29472,22 +29440,22 @@
                 "values": [
                   "学历与经验要求",
                   "O*NET精确职业Job Zone4是教育培训经验的综合背景；EP学士加5年及以上经验描述11-3051大类，不是该精确职业所有岗位或中国统一要求。",
-                  "核对方式：把目标公告中的每条要求对应到一项可展示的能力或经历。"
+                  "ContiTech 常州工厂质量负责人样本涉及预算、厂级质量体系、检验与实验室运行，并列明质量不达标时可停生产流程并推动纠正。权限只描述该岗位。 中国大冢制药天津食品 QA 体系岗有内审、管理评审、外审整改和计量台账等工作。该样本说明体系工作，也提示岗位名写“体系管理”未必等同负责团队的经理。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
                   "培训与上岗核查",
-                  "O*NET 说明该职业通常需要数年的相关工作经验和在职培训；具体形式与授权随雇主与产线不同。",
+                  "O*NET Job Zone 4 表示较多准备。常见教育和训练仅作分区背景，经验与授权按目标岗位核。",
                   "核对方式：确认雇主的培训安排、带教方式与可独立判定的授权范围。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "兴趣与工作情境要求",
-                  "O*NET 兴趣代码为 CEI，工作情境显示 100% 每日使用电子邮件、76% 每日面对面讨论、48% 报告准确性极重要；这些均为美国自报口径。",
+                  "兴趣与工作情境",
+                  "O*NET 兴趣代码为 CEI，工作情境显示 100% 每日使用电子邮件、76% 每日面对面讨论、48% 的受访者认为工作精确或准确极为重要；这些均为美国自报口径。",
                   "核对方式：把公告要求对应到可展示的判定与记录能力。"
                 ]
               },
@@ -29504,7 +29472,10 @@
           "id": "quality-control-systems-managers.path.employer-evidence.1",
           "source_refs": [
             "employer",
-            "editor"
+            "editor",
+            "cn-contitech-quality",
+            "cn-otsuka-qa",
+            "onet-details"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29517,32 +29488,33 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料与设定｜全部为编辑设计的虚构数据",
-                  "你是虚构企业「澄川精密制造」的质量控制系统经理，需要复核抽检批次 Q-1120 的质量记录并给出放行或退回建议。以下材料与数值完全虚构，不是真实检验结果或公差标准。",
-                  "E1 批次与样品记录：Q-1120 分装为 Q-1120-01 至 03，检验项为外径、硬度与外观；批次记录与样品登录表的编号不完全一致。E2 量具与设备日志：外径千分尺校准有效至 2026-05-31，硬度计与检验平台在有效期内。E3 质量数据与规格：外径 20.03 mm（规格 20.00±0.05 mm）、硬度 58 HRC（规格 55—60 HRC）、外观无划伤；外径于 2026-06-02 测定。E4 不合格与纠正措施：一件样品外径 20.11 mm 超上限，已登记但未启动纠正措施，样品标识不一致记为待确认。E5 放行建议与批准栏：初稿写「建议放行」，批准栏为空。"
+                  "虚构材料",
+                  "只使用页内原始记录。",
+                  "E1｜虚构工厂同一产品有 A、B 两线。每线本周抽检 50 件，A 有 5 件缺密封测试记录，B 有 1 件。上周各抽 50 件，两线均为 1 件。E2｜A 线复用了未列明复核人的旧作业表，B 线有当班复核签字。根因仍未知。",
+                  "E3｜A 线关联批 A17 和 A18 均在仓，B 线 B22 有 1 件缺证。E4｜模拟规程规定：缺测试记录的物品不得放行。经理可发内部暂缓令，质量负责人签批次处置，质量和生产负责人共同批准恢复。E5｜拟恢复条件由经理提交，目前没有批准。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务",
-                  "逐项核 E1—E5，写出：哪些项目可接受、哪些不得放行、哪些数据不可用，以及放行建议应包含的未确认项与批准人。",
-                  "不得新增题面未给的读数、公差、授权或客户信息；未知项单列。"
+                  "任务与交付",
+                  "交一页决策单，比较两线本周与上周的记录缺失率，提出暂缓范围、核查分工、恢复条件和复查时间。",
+                  "缺证单列，不补写数据或签批。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考交付",
-                  "可接受：外径 20.03 mm 与硬度 58 HRC 在规格内，且外观无划伤。不得放行：一件外径 20.11 mm 高于上限 20.05 mm，应判不合格并启动纠正措施。数据不可用：外径于 2026-06-02 测定，而千分尺校准 2026-05-31 已到期，须重新校准后复测。",
-                  "放行建议须写明样品标识待确认、纠正措施未完成，并由组织授权的角色批准；质量控制系统经理只提交建议。"
+                  "提交前提示",
+                  "先保存初稿，再看七天计划之后的参考。",
+                  "读者无需设备、实物或同伴。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界",
-                  "本练习不涉及真实检验、留样或放行；实际检验、判定、放行与隔离按所在组织质量体系与授权执行。若无法判断，允许写「不足以判断」并说明缺少什么证据。"
+                  "权限边界",
+                  "只做纸面模拟，不接触生产或实验设备，不实际批准、放行或复机。"
                 ]
               }
             ]
@@ -29551,7 +29523,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：一次完整的办公支持任务（虚构材料）",
+          "title": "QC-M01｜跨线异常的停放行与恢复条件",
           "type": "cards"
         },
         {
@@ -29562,33 +29534,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "范围比较包",
-                  "用 E1—E3 填写批次标识、检验项目、量具与规格版本对照表，标出未知项与需澄清问题。",
-                  "复核方式：他人仅凭该表即可判断哪一项数据不可用及原因。"
+                  "范围与证据表",
+                  "按 E1 写对象和范围。",
+                  "只用题设可复核。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "独立复核说明",
-                  "对 E3 逐项写出数据、公差方向与判定结论，并注明量具状态。",
-                  "复核方式：结论与原始数据、规格版本一致，且标明依据。"
+                  "比较记录",
+                  "用 E1 分别算两线本周和上周的记录缺失率，列出比较分母。",
+                  "只用题设可复核。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "不合格与纠正措施记录",
-                  "用 E4 写一份不合格记录：事件、影响、待答问题与升级对象；记录可追溯到批次与量具，处置责任明确。",
-                  "复核方式：能看出隔离范围与下一步。"
+                  "异常交接",
+                  "按 E4、E5 写待核、建议处置及下一责任人。",
+                  "只用题设可复核。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "放行建议草稿",
-                  "用 E5 写放行建议，列出可接受项、不得放行项、未确认项与批准人；不出现自行批准或代签。",
-                  "复核方式：建议与证据一致且无越权。"
+                  "决策稿",
+                  "交一页决策单，比较两线本周与上周的记录缺失率，提出暂缓范围、核查分工、恢复条件和复查时间。",
+                  "只用题设可复核。"
                 ]
               }
             ]
@@ -29620,25 +29592,25 @@
               [
                 "核批次与样品标识",
                 "能否发现编号与交接不一致",
-                "能指出不一致并说明先隔离再报告",
+                "明确记录对象、版本与关联范围。",
                 "单个雇主的提问方式不能推广为行业统一考试"
               ],
               [
                 "校准状态确认",
                 "能否识别量具校准到期",
-                "能指出校准已过期并要求重新校准后复测",
+                "说明依据是否足够作判断。",
                 "量具与校准要求随实验室与产线体系不同"
               ],
               [
                 "公差方向判断",
                 "能否判断公差上下限方向",
-                "能读规格并判断超上限与超下限",
+                "出示算式或限值比较。",
                 "限值与规格随产品与法规不同"
               ],
               [
                 "放行与停产边界",
                 "能否区分建议与批准",
-                "能指出批准栏为空，放行须由授权角色决定",
+                "写明处置权限与复核对象。",
                 "授权范围由组织决定，不能沿用他处假设"
               ]
             ]
@@ -29659,50 +29631,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "读材料并写角色边界卡",
-                  "读 E1—E5，写一张角色边界卡：可做（按标准检验与记录）、须复核（判定与超差处置）、禁止动作（自行批准放行）；确认不做真实检验或放行。"
+                  "第 1 天",
+                  "读 E1–E5，列出记录和实际授权。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "用 E1 完成批次登录核对表",
-                  "用 E1 核对批次编号、检验项目与数量，标出不一致与待确认项。"
+                  "第 2 天",
+                  "按 E1 写对象和范围。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "用 E2 核对量具状态",
-                  "用 E2 核对量具校准日期与有效状态，写出哪一件量具的数据不能用于判定。"
+                  "第 3 天",
+                  "核 E2 的记录版本和调查线索。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "用 E3 完成数据与公差对照",
-                  "逐项写出数据、公差方向与结论，标出超上限项与数据不可用项。"
+                  "第 4 天",
+                  "用 E1 分别算两线本周和上周的记录缺失率，列出比较分母。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "用 E4 写不合格记录",
-                  "用 E4 写一份不合格记录：事件、影响、待答问题与升级对象。"
+                  "第 5 天",
+                  "用 E3 追溯批次，再用 E4、E5 列暂缓、调查与恢复审批。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "用 E5 写放行建议草稿",
-                  "写出可接受项、不得放行项、未确认项与批准人；不自行批准。"
+                  "第 6 天",
+                  "独立完成并保存初稿，保留判断依据。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "对照参考并修订",
-                  "对照参考交付修订前六天输出，记录最易遗漏的一步与下一步练习。"
+                  "第 7 天",
+                  "保存第 6 天初稿后，在常见问题区展开「QC-M01 参考与自核量规（第 7 天展开）」，按四项量规核对，留一处修订和理由。"
                 ]
               }
             ]
@@ -29711,7 +29683,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "七天体验：用虚构材料完成一次办公支持闭环",
+          "title": "七天试做与自核",
           "type": "timeline"
         },
         {
@@ -29719,11 +29691,11 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "七天判断要核对的项：职业范围（SOC 11-3051 大类代理）、雇主要求、教育与训练、所在地资格、受监督任务。",
-              "以「哪一步最需外部确认」为判断点：批次标识、量具状态与放行授权通常需要组织确认。",
-              "区分可核事实与编辑判断：数据与公差是可核事实，适合度是编辑判断；结论须回指原始数据。",
-              "投入估算：每天 30—60 分钟，以读材料与复算为主，无需购买量具或设备。",
-              "若七天中反复卡在同一环节（如公差方向判断），把它列为下一步优先练习项。",
+              "写明比较的线别、时段和各自分母。",
+              "记录暂缓依据、调查分工和恢复审批角色。",
+              "将已知记录、暂缓建议与待批准事项分开，分别回指依据。",
+              "每天约 30–60 分钟，用纸面记录比较和复算。",
+              "如果一直卡在追溯范围或恢复签批，把它列为下一步练习项。",
               "若无法判断某一步，写「不足以判断」并说明缺少什么证据，不猜测。",
               "完成后，把输出与真实岗位的质量记录格式对照，观察差额。"
             ]
@@ -29732,7 +29704,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "交卷与复盘检查",
           "type": "list"
         },
         {
@@ -29850,8 +29822,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得职责、检验项目与授权范围匹配且状态已核实的中国公开招聘原文。",
-              "本轮未取得职责、检验项目与授权范围匹配且状态已核实的中国公开招聘原文；保留缺口，不用相邻层级样本替代。"
+              "ContiTech 常州工厂质量负责人样本涉及预算、厂级质量体系、检验与实验室运行，并列明质量不达标时可停生产流程并推动纠正。权限只描述该岗位。 中国大冢制药天津食品 QA 体系岗有内审、管理评审、外审整改和计量台账等工作。该样本说明体系工作，也提示岗位名写“体系管理”未必等同负责团队的经理。"
             ]
           },
           "id": "quality-control-systems-managers.path.recruitment-sample.1",
@@ -29859,7 +29830,9 @@
             "employer",
             "r2-pay-1",
             "r2-pay-2",
-            "r2-pay-3"
+            "r2-pay-3",
+            "cn-contitech-quality",
+            "cn-otsuka-qa"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -31070,7 +31043,7 @@
                 "entity": "国家统计局 2025 年城镇单位就业人员年平均工资情况",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET 11-3051.01 职业档案",
@@ -31142,7 +31115,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 SOC 11-3051 大类 2025—2035 预计增长 3%（净增约 6,500 人），年均空缺约 17,000 个（含替换）；工资中位 126,060 美元/年属 2025 年 5 月，两个口径与期间不同。中国区未取得本职业精确工资。"
+              "美国 SOC 11-3051 大类 2025—2035 预计增长 3%（由 2.6% 四舍五入）（净增约 6,500 个岗位），年均空缺约 17,000 个（含替换）；工资中位 126,060 美元/年属 2025 年 5 月，两个口径与期间不同。中国区未取得本职业精确工资。"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.8",
@@ -31186,7 +31159,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 3% 属官方预测，不是承诺；净增量、增长率与年均空缺是三个不同指标。"
+              "增长 3%（由 2.6% 四舍五入） 属官方预测，不是承诺；净增量、增长率与年均空缺是三个不同指标。"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.11",
@@ -31242,7 +31215,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长3%，净增约6,500人"
+              "增长3%（由 2.6% 四舍五入），净增约6,500 个岗位"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.15",
@@ -31508,13 +31481,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需核目标检验方法、量具操作、抽样与现场岗位授权"
+              "需补生产计划与成本管理"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.34",
           "source_refs": [
-            "facilities",
-            "onet"
+            "editor",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -31523,13 +31496,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "检验与质量记录"
+              "现场与过程控制"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.35",
           "source_refs": [
-            "facilities",
-            "editor"
+            "editor",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -31538,58 +31511,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移：质量标准与记录；需补：目标产品的具体测量操作和检验方法，体系管理经历不自动证明实操能力。"
+              "可迁移：过程控制；需补：生产与成本责任"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.36",
           "source_refs": [
-            "facilities",
-            "editor"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "需补数据分析与统计方法"
-            ]
-          },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.37",
-          "source_refs": [
-            "purchasing-managers",
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "质量数据与规格判定"
-            ]
-          },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.38",
-          "source_refs": [
-            "purchasing-managers",
-            "editor"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "可迁移：质量数据；需补：统计与调查方法"
-            ]
-          },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.39",
-          "source_refs": [
-            "purchasing-managers",
-            "editor"
+            "editor",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -31601,10 +31529,9 @@
               "需补法规与内控知识"
             ]
           },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.40",
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.37",
           "source_refs": [
-            "operations",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31616,9 +31543,8 @@
               "质量体系与审核"
             ]
           },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.41",
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.38",
           "source_refs": [
-            "operations",
             "editor"
           ],
           "type": "prose"
@@ -31631,9 +31557,8 @@
               "可迁移：体系与审核；需补：法规与内控"
             ]
           },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.42",
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.39",
           "source_refs": [
-            "operations",
             "editor"
           ],
           "type": "prose"
@@ -31643,13 +31568,57 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补监管提交经验"
+              "需补数据分析与统计方法"
+            ]
+          },
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.40",
+          "source_refs": [
+            "editor",
+            "archivists"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "质量数据与规格判定"
+            ]
+          },
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.41",
+          "source_refs": [
+            "editor",
+            "archivists"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "可迁移：质量数据；需补：统计与调查方法"
+            ]
+          },
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.42",
+          "source_refs": [
+            "editor",
+            "archivists"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "需核目标检验方法、量具操作、抽样与现场岗位授权"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.43",
           "source_refs": [
-            "hr",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31658,12 +31627,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "质量文件与记录"
+              "检验与质量记录"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.44",
           "source_refs": [
-            "hr",
             "editor"
           ],
           "type": "prose"
@@ -31673,57 +31641,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移：质量文件；需补：法规提交"
+              "可迁移：质量标准与记录；需补：目标产品的具体测量操作和检验方法，体系管理经历不自动证明实操能力。"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.45",
           "source_refs": [
-            "hr",
-            "editor"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "需补生产计划与成本管理"
-            ]
-          },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.46",
-          "source_refs": [
-            "health",
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "现场与过程控制"
-            ]
-          },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.47",
-          "source_refs": [
-            "health",
-            "editor"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "可迁移：过程控制；需补：生产与成本责任"
-            ]
-          },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.48",
-          "source_refs": [
-            "health",
             "editor"
           ],
           "type": "prose"
@@ -31736,10 +31658,9 @@
               "需补实验室与研究管理"
             ]
           },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.49",
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.46",
           "source_refs": [
-            "editor",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31749,6 +31670,48 @@
           "data": {
             "paragraphs": [
               "实验室与检测方法"
+            ]
+          },
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.47",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "可迁移：实验室管理；需补：研究管理经验"
+            ]
+          },
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.48",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "需补监管提交经验"
+            ]
+          },
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.49",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "质量文件与记录"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.50",
@@ -31762,7 +31725,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移：实验室管理；需补：研究管理经验"
+              "可迁移：质量文件；需补：法规提交"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.51",
@@ -31781,7 +31744,6 @@
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31796,7 +31758,6 @@
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31811,7 +31772,6 @@
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.54",
           "source_refs": [
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31826,7 +31786,6 @@
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31841,7 +31800,6 @@
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31856,7 +31814,6 @@
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31878,61 +31835,98 @@
                 "answer": "规划与协调质量保证计划：制定质量控制政策，规定检验与抽样，监督检验与实验室活动并判定符合性；记录质量数据、组织缺陷根因分析并推动纠正措施。O*NET 11-3051.01 为美国口径，实际按岗位授权核定。",
                 "id": "quality-control-systems-managers.faq.1",
                 "question": "质量控制系统经理每天做什么？",
-                "question_key": "career.faq.quality-control-systems-managers.daily-work"
+                "question_key": "career.faq.quality-control-systems-managers.daily-work",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "本职业以质量体系与符合性判定为主；工业生产经营经理对产量、成本与交付负责，合规与法规事务经理对监管提交与合规风险负责，两者的对象与责任不同。",
+                "answer": "现场质检员多交抽检和不合格记录，实验室分析员多交检测数据及偏差说明，体系经理管跨工序规则、复核和整改。行业与企业授权会改变交界。",
                 "id": "quality-control-systems-managers.faq.2",
                 "question": "质量控制系统经理和相邻岗位有什么区别？",
-                "question_key": "career.faq.quality-control-systems-managers.comparison"
+                "question_key": "career.faq.quality-control-systems-managers.comparison",
+                "source_refs": [
+                  "onet",
+                  "editor",
+                  "cn-qc-class"
+                ]
               },
               {
-                "answer": "看可观察行为：能否按标准判定、如实记录、把缺陷推动到纠正，并接受放行由授权角色决定；可用 E1—E5 练习与 O*NET CEI 兴趣核对，测评与单次表现不能决定任职或适合度。",
+                "answer": "参考：A 为 10%，B 为 2%，上周两线均 2%。只描述抽检记录缺失率，不推断产品漏测或不良总体。A17/A18 暂缓，B22 的缺证件暂缓，其余范围按追溯核定。生产核旧表使用，质量核记录和隔离，工程查系统或流程变更。恢复前需完成追溯和受影响记录复核、核实新版表与复核人，再由质量与生产共同审批。记录纠正措施后一周的抽检缺失率，作为复查指标。\n\n各项 0–2 分：两线分母与趋势、暂缓范围、调查分工、恢复门槛与复查指标。 每项完整且可追溯得 2，部分得 1，缺失或越权得 0。",
                 "id": "quality-control-systems-managers.faq.3",
-                "question": "怎样判断自己适不适合做质量控制系统经理？",
-                "question_key": "career.faq.quality-control-systems-managers.fit"
+                "question": "QC-M01 参考与自核量规（第 7 天展开）",
+                "question_key": "career.faq.quality-control-systems-managers.fit",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "研究支持标准、记录与检索类文本任务受影响较大，不支持整个职业被替代；ILO、GPTs are GPTs 与 WEF 提供潜在暴露与雇主预期，不能据此计算本职业岗位替代。",
                 "id": "quality-control-systems-managers.faq.4",
                 "question": "AI 会减少质量控制系统经理岗位吗？",
-                "question_key": "career.faq.quality-control-systems-managers.ai-impact"
+                "question_key": "career.faq.quality-control-systems-managers.ai-impact",
+                "source_refs": [
+                  "ilo",
+                  "editor"
+                ]
               },
               {
                 "answer": "本轮未取得中国大陆质量控制系统经理精确职业的全国或城市工资；国家统计局行业平均工资只作统计背景，不用美国值换算。",
                 "id": "quality-control-systems-managers.faq.5",
                 "question": "中国大陆质量控制系统经理的工资是多少？",
-                "question_key": "career.faq.quality-control-systems-managers.china-pay"
+                "question_key": "career.faq.quality-control-systems-managers.china-pay",
+                "source_refs": [
+                  "nbs"
+                ]
               },
               {
-                "answer": "美国 SOC 11-3051 大类 2025 年 5 月中位 126,060 美元/年是分布中点，不是新人收入；10 分位低于 78,000、90 分位高于 205,520 也不对应职级。",
+                "answer": "美国工业生产经理大类（11-3051）2025 年 5 月年工资中位数为 126,060 美元，表示分布的中点。第 10 分位为 78,000 美元，第 90 分位为 205,520 美元。三个值都不能对应新人收入或职级。",
                 "id": "quality-control-systems-managers.faq.6",
                 "question": "美国工资中位数代表新人收入吗？",
-                "question_key": "career.faq.quality-control-systems-managers.us-pay"
+                "question_key": "career.faq.quality-control-systems-managers.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
               },
               {
-                "answer": "O*NET 显示 Job Zone 4，典型入职学历为学士学位，相关工作经验 5 年及以上；这是美国典型背景，中国以目标公告为准。",
+                "answer": "O*NET 将质量控制体系经理列为 Job Zone 4，表示这项工作通常需要较充分的准备。BLS 为美国工业生产经理大类（11-3051）列出的典型背景是本科学历及至少 5 年相关工作经验。中国具体门槛看目标岗位。 ContiTech 常州工厂质量负责人样本涉及预算、厂级质量体系、检验与实验室运行，并列明质量不达标时可停生产流程并推动纠正。权限只描述该岗位。",
                 "id": "quality-control-systems-managers.faq.7",
                 "question": "入行需要什么学历和经验？",
-                "question_key": "career.faq.quality-control-systems-managers.education-path"
+                "question_key": "career.faq.quality-control-systems-managers.education-path",
+                "source_refs": [
+                  "bls",
+                  "onet",
+                  "cn-contitech-quality"
+                ]
               },
               {
                 "answer": "本轮未核到中国统一强制资格证书；O*NET 与 BLS 描述的是美国典型学历与培训。培训证书、录用资格与放行批准权是三件事，证书不等于签字权。",
                 "id": "quality-control-systems-managers.faq.8",
                 "question": "需要考什么证书吗？",
-                "question_key": "career.faq.quality-control-systems-managers.credentials"
+                "question_key": "career.faq.quality-control-systems-managers.credentials",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
-                "answer": "六类编辑风险：未获授权放行或停产、使用过期规格版本、量具或设备校准过期、不合格品标识与隔离出错、质量记录不可追溯、供应商或外部实验室质量计划审核不到位。以 E1—E5 为例，需核千分尺 2026-05-31 到期后数据不可用，以及外径 20.11 mm 超上限 20.05 mm。",
+                "answer": "管理层需明确停放行权限、适用规程、受影响范围和纠正措施。没有足够记录时登记待核，由授权角色分别审批处置和恢复。",
                 "id": "quality-control-systems-managers.faq.9",
                 "question": "质量控制系统经理有哪些风险？",
-                "question_key": "career.faq.quality-control-systems-managers.risk-boundary"
+                "question_key": "career.faq.quality-control-systems-managers.risk-boundary",
+                "source_refs": [
+                  "onet",
+                  "editor"
+                ]
               },
               {
-                "answer": "美国 SOC 11-3051 大类 2025—2035 预计增长 3%、净增约 6,500 人、年均空缺约 17,000 个（含替换）；空缺不等于净增或中国招聘数。可探索工业生产经营、合规、法规事务、项目管理与自然科学管理等相邻方向。",
+                "answer": "美国 SOC 11-3051 大类 2025—2035 预计增长 3%（由 2.6% 四舍五入）、净增约 6,500 个岗位、年均空缺约 17,000 个（含替换）；空缺不等于净增或中国招聘数。可探索工业生产经营、合规、法规事务、项目管理与自然科学管理等相邻方向。",
                 "id": "quality-control-systems-managers.faq.10",
                 "question": "这个职业的前景和转向方向？",
-                "question_key": "career.faq.quality-control-systems-managers.outlook"
+                "question_key": "career.faq.quality-control-systems-managers.outlook",
+                "source_refs": [
+                  "ep",
+                  "editor"
+                ]
               }
             ]
           },
@@ -31944,7 +31938,11 @@
             "nbs",
             "privacy",
             "cnclass",
-            "editor"
+            "editor",
+            "cn-qc-class",
+            "ilo",
+            "onet-wages",
+            "cn-contitech-quality"
           ],
           "type": "faq"
         },
@@ -32030,13 +32028,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32087,7 +32085,7 @@
                 "name": "ILO 生成式人工智能与就业：职业暴露度全球指数（工作论文 140）",
                 "period": "2025",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -32109,8 +32107,8 @@
               {
                 "accessed_at": "2026-09-30",
                 "details": [
-                  "2025 年 5 月中位工资 126,060 美元/年（60.61 美元/小时）；10 分位低于 78,000、90 分位高于 205,520。",
-                  "2025 年就业 252,100；2025—2035 增长 3%、净增 6,500、年均空缺约 17,000。"
+                  "美国工业生产经理大类（11-3051）2025 年 5 月工资中位数为 126,060 美元/年（60.61 美元/小时）。最低 10% 年工资低于 78,000 美元，最高 10% 高于 205,520 美元。",
+                  "2025 年就业 252,100 个岗位；2025—2035 增长 3%（由 2.6% 四舍五入）、净增 6,500 个岗位、年均空缺约 17,000。"
                 ],
                 "evidence_type": "official occupational outlook and wage statistics",
                 "id": "bls",
@@ -32130,7 +32128,7 @@
                 ],
                 "evidence_type": "official employment projections",
                 "id": "ep",
-                "limitation": "11-3051 行：基期 252,100、增长 3%、净增 6,500、年均空缺约 17,000；预测不是承诺。",
+                "limitation": "11-3051 行：基期 252,100 个岗位、增长 3%（由 2.6% 四舍五入）、净增 6,500 个岗位、年均空缺约 17,000；预测不是承诺。",
                 "market": "美国",
                 "name": "BLS 2025—2035 就业预测与职业特征表（表 1.2）",
                 "period": "2025—2035",
@@ -32141,7 +32139,7 @@
               {
                 "accessed_at": "2026-10-12",
                 "details": [
-                  "中位 126,060 美元/年；10 分位低于 78,000、90 分位高于 205,520。",
+                  "美国工业生产经理大类（11-3051）2025 年 5 月年工资第 10 分位为 78,000 美元，中位数为 126,060 美元，第 90 分位为 205,520 美元。",
                   "覆盖受薪雇员，不覆盖自雇人员。"
                 ],
                 "evidence_type": "official wage statistics",
@@ -32152,7 +32150,7 @@
                 "period": "May 2025",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/11-3051.01?st=NJ"
+                "url": "https://www.onetonline.org/link/localwages/11-3051.01"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -32168,7 +32166,7 @@
                 "period": "2025 年统计；发布 2026-05",
                 "publisher": "国家统计局",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -32183,7 +32181,7 @@
                 "name": "中华人民共和国职业分类大典与职业资格相关说明",
                 "period": "现行版本",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "中国大陆",
+                "scope": "contextual",
                 "url": "https://www.mohrss.gov.cn/"
               },
               {
@@ -32199,7 +32197,7 @@
                 "name": "中华人民共和国个人信息保护法",
                 "period": "2021 施行",
                 "publisher": "全国人民代表大会常务委员会",
-                "scope": "中国大陆",
+                "scope": "contextual",
                 "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12c401d9a13e0a97f1c60d5.html"
               },
               {
@@ -32215,7 +32213,7 @@
                 "name": "O*NET 11-3051.00 Industrial Production Managers（相邻职业）",
                 "period": "O*NET 更新 2026",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3051.00"
               },
               {
@@ -32231,7 +32229,7 @@
                 "name": "O*NET 11-1021.00 General and Operations Managers（相邻职业）",
                 "period": "O*NET 更新 2026",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-1021.00"
               },
               {
@@ -32247,7 +32245,7 @@
                 "name": "O*NET 11-3121.00 Human Resources Managers（相邻职业）",
                 "period": "O*NET 更新 2026",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3121.00"
               },
               {
@@ -32263,13 +32261,13 @@
                 "name": "O*NET 11-9111.00 Medical and Health Services Managers（相邻职业）",
                 "period": "O*NET 更新 2026",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-9111.00"
               },
               {
                 "accessed_at": "2026-09-30",
                 "details": [
-                  "虚构企业「澄川精密制造」与批次 Q-1120、材料 E1—E5。",
+                  "虚构企业「澄川精密制造」与批次 A17、A18、B22、材料 E1—E5。",
                   "任何实际检验、判定、放行与隔离须按所在组织质量体系与授权执行。"
                 ],
                 "evidence_type": "editorial design",
@@ -32279,7 +32277,7 @@
                 "name": "费马测试职业内容编辑：虚构练习与作品样本",
                 "period": "2026-09",
                 "publisher": "费马测试内容编辑",
-                "scope": "editorial",
+                "scope": "editorial_synthesis",
                 "url": null
               },
               {
@@ -32295,7 +32293,7 @@
                 "name": "NIST 生成式人工智能风险管理画像（AI 600-1）",
                 "period": "2024 发布",
                 "publisher": "National Institute of Standards and Technology",
-                "scope": "general",
+                "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
@@ -32311,7 +32309,7 @@
                 "name": "GPTs are GPTs：大型语言模型对劳动力市场的影响潜力",
                 "period": "2023",
                 "publisher": "Eloundou et al.",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://arxiv.org/abs/2303.10130"
               },
               {
@@ -32327,7 +32325,7 @@
                 "name": "世界经济论坛《未来就业报告 2025》",
                 "period": "2025 发布",
                 "publisher": "World Economic Forum",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
               },
               {
@@ -32343,7 +32341,7 @@
                 "name": "公开雇主招聘样本（编辑整理）",
                 "period": "2026",
                 "publisher": "公开招聘平台",
-                "scope": "individual_employer",
+                "scope": "recruitment_proxy",
                 "url": null
               },
               {
@@ -32376,7 +32374,7 @@
                 "period": "May 2025",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/11-3051.01?st=NJ"
+                "url": "https://www.onetonline.org/link/localwages/11-3051.01"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -32391,7 +32389,7 @@
                 "name": "O*NET 11-3061.00 Purchasing Managers（相邻职业）",
                 "period": "O*NET 更新 2026",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3061.00"
               },
               {
@@ -32407,7 +32405,7 @@
                 "name": "O*NET 19-4099.01 Quality Control Analysts（相邻职业）",
                 "period": "O*NET 更新 2026",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-4099.01"
               },
               {
@@ -32423,7 +32421,7 @@
                 "name": "U.S. Census Bureau 行业与制造业统计",
                 "period": "最近年度",
                 "publisher": "U.S. Census Bureau",
-                "scope": "general",
+                "scope": "contextual",
                 "url": "https://www.census.gov/"
               },
               {
@@ -32439,7 +32437,7 @@
                 "name": "中国公开招聘薪酬样本（本轮未取得）",
                 "period": "2026",
                 "publisher": "公开招聘公告",
-                "scope": "中国大陆",
+                "scope": "contextual",
                 "url": null
               },
               {
@@ -32455,7 +32453,7 @@
                 "name": "中国公开招聘薪酬样本（本轮未取得）",
                 "period": "2026",
                 "publisher": "公开招聘公告",
-                "scope": "中国大陆",
+                "scope": "contextual",
                 "url": null
               },
               {
@@ -32471,7 +32469,7 @@
                 "name": "中国公开招聘薪酬样本（本轮未取得）",
                 "period": "2026",
                 "publisher": "公开招聘公告",
-                "scope": "中国大陆",
+                "scope": "contextual",
                 "url": null
               },
               {
@@ -32490,6 +32488,111 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "质量管理工程技术人员（2-02-29-03）覆盖产品、工程和服务质量管理等工作，与质量体系经理有部分任务交集。该职业分类不等于经理职级，也不自动赋予停线、放行或复产权。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-qc-class",
+                "limitation": "部分任务对应，不能当职级、授权或工资。",
+                "market": "中国大陆",
+                "name": "职业分类大典：质量管理工程技术人员",
+                "period": "2022",
+                "publisher": "人力资源社会保障部等；地方政府转载",
+                "scope": "contextual",
+                "url": "https://www.szns.gov.cn/attachment/1/1509/1509585/11457700.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "ContiTech 常州工厂质量负责人样本涉及预算、厂级质量体系、检验与实验室运行，并列明质量不达标时可停生产流程并推动纠正。权限只描述该岗位。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-contitech-quality",
+                "limitation": "单帖样本，仅作职责对照；不确认在招、市场工资或全国门槛。",
+                "market": "中国大陆",
+                "name": "ContiTech 常州｜Head of Quality",
+                "period": "原帖未显示发布日期",
+                "publisher": "ContiTech 常州",
+                "scope": "recruitment_proxy",
+                "url": "https://jobs.smartrecruiters.com/ContinentalGroupSectorContiTech/744000148024736-head-of-quality-changzhou"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中国大冢制药天津食品 QA 体系岗有内审、管理评审、外审整改和计量台账等工作。该样本说明体系工作，也提示岗位名写“体系管理”未必等同负责团队的经理。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-otsuka-qa",
+                "limitation": "单帖样本，仅作职责对照；不确认在招、市场工资或全国门槛。",
+                "market": "中国大陆",
+                "name": "中国大冢制药｜食品 QA 体系管理岗",
+                "period": "2026-09-08",
+                "publisher": "中国大冢制药",
+                "scope": "recruitment_proxy",
+                "url": "https://job.tiangong.edu.cn/correcruit/content/id/55906.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "用于比较相邻职业。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-compliance-manager",
+                "limitation": "相邻职业档案，不代表本职业职责或任职条件。",
+                "market": "美国",
+                "name": "O*NET 合规经理 (11-9199.02)",
+                "period": "2026 年 11 月核读",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-9199.02"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "用于比较相邻职业。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-regulatory-affairs-manager",
+                "limitation": "相邻职业档案，不代表本职业职责或任职条件。",
+                "market": "美国",
+                "name": "O*NET 法规事务经理 (11-9199.01)",
+                "period": "2026 年 11 月核读",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-9199.01"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "用于比较相邻职业。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-project-management-specialists",
+                "limitation": "相邻职业档案，不代表本职业职责或任职条件。",
+                "market": "美国",
+                "name": "O*NET 项目管理专家 (13-1082.00)",
+                "period": "2026 年 11 月核读",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/13-1082.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "用于比较相邻职业。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-natural-sciences-managers",
+                "limitation": "相邻职业档案，不代表本职业职责或任职条件。",
+                "market": "美国",
+                "name": "O*NET 自然科学经理 (11-9121.00)",
+                "period": "2026 年 11 月核读",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-9121.00"
               }
             ]
           },
@@ -34765,8 +34868,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "facilities"
+              "editor"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34996,6 +35098,12 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://fermatmind.com",
+            "id": "editor",
+            "label": "费马测试编辑情境",
+            "scope": "处置按所在单位授权程序执行。"
           }
         ]
       },
@@ -35387,7 +35495,7 @@
         "bls_table": [
           {
             "fact_ref": "us-wage-low10-2025",
-            "指标": "薪资 · 10 分位",
+            "指标": "工资 · 最低 10% 的雇员",
             "数值": {
               "$item": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35451,7 +35559,7 @@
           },
           {
             "fact_ref": "us-wage-high10-2025",
-            "指标": "薪资 · 90 分位",
+            "指标": "工资 · 最高 10% 的雇员",
             "数值": {
               "$item": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.17",
               "block": "us-salary",
@@ -37181,7 +37289,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合质量控制系统经理工作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37258,7 +37366,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测试"
           },
           {
             "href": {
@@ -37268,7 +37376,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -37278,7 +37386,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格测试"
           },
           {
             "href": {
@@ -37288,7 +37396,11 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "IQ 推理测评"
+          },
+          {
+            "href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "label": "EQ 情商测评"
           }
         ]
       },
@@ -37301,7 +37413,7 @@
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
-      "interface.fit.directions_heading": "你更可能适合哪条行政服务方向？",
+      "interface.fit.directions_heading": "你更可能适合哪条质量管理方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
@@ -37429,9 +37541,9 @@
         "display_value": "低于78,000美元/年",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
-        "measure": "工资第 10 分位上界",
+        "measure": "最低 10% 年工资区间",
         "occupation_scope": "美国 SOC 11-3051 大类；非更窄的单列职业值，非职级线",
-        "period": "May 2025 或 2025—2035",
+        "period": "2025 年 5 月",
         "source_refs": [
           "bls"
         ]
@@ -37455,7 +37567,7 @@
         "market": "美国",
         "measure": "年工资中位数",
         "occupation_scope": "美国 SOC 11-3051 大类；非更窄的单列职业值，不推算个人收入",
-        "period": "May 2025 或 2025—2035",
+        "period": "2025 年 5 月",
         "source_refs": [
           "bls"
         ]
@@ -37477,33 +37589,33 @@
         "display_value": "高于205,520美元/年",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
-        "measure": "工资第 90 分位下界",
+        "measure": "最高 10% 年工资区间",
         "occupation_scope": "美国 SOC 11-3051 大类；非更窄的单列职业值",
-        "period": "May 2025 或 2025—2035",
+        "period": "2025 年 5 月",
         "source_refs": [
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "252,100人（2025年）",
+        "display_value": "252,100 个岗位（2025年）",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数（BLS 就业预测表 1.2）",
+        "measure": "就业岗位数（BLS 就业预测表 1.2）",
         "occupation_scope": "美国 SOC 11-3051 大类；与 OEWS 调查就业为不同项目，不混用",
-        "period": "May 2025 或 2025—2035",
+        "period": "2025 年基期",
         "source_refs": [
           "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "2025—2035预计增长3%，净增约6,500人",
+        "display_value": "2025—2035预计增长3%，净增约6,500 个岗位",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业变化率与官方净变化",
         "occupation_scope": "美国 SOC 11-3051 大类；增长率、净增量与年均空缺是三个不同指标",
-        "period": "May 2025 或 2025—2035",
+        "period": "2025–2035 年预测",
         "source_refs": [
           "ep"
         ]
@@ -37515,7 +37627,7 @@
         "market": "美国",
         "measure": "年均职位空缺，含替换需求",
         "occupation_scope": "美国 SOC 11-3051 大类；空缺包含离岗替换，不等于净增岗位或中国招聘数",
-        "period": "May 2025 或 2025—2035",
+        "period": "2025–2035 年预测",
         "source_refs": [
           "ep"
         ]
@@ -37527,7 +37639,7 @@
         "market": "美国",
         "measure": "行业分列中位工资",
         "occupation_scope": "美国 SOC 11-3051 大类；仅覆盖该行业工作的本类职业人员（化工制造）",
-        "period": "May 2025 或 2025—2035",
+        "period": "2025 年 5 月",
         "source_refs": [
           "bls"
         ]
@@ -37539,7 +37651,7 @@
         "market": "美国",
         "measure": "行业分列中位工资",
         "occupation_scope": "美国 SOC 11-3051 大类；仅覆盖该行业工作的本类职业人员（运输设备制造）",
-        "period": "May 2025 或 2025—2035",
+        "period": "2025 年 5 月",
         "source_refs": [
           "bls"
         ]
@@ -37551,7 +37663,7 @@
         "market": "美国",
         "measure": "行业分列中位工资",
         "occupation_scope": "美国 SOC 11-3051 大类；仅覆盖该行业工作的本类职业人员（机械制造）",
-        "period": "May 2025 或 2025—2035",
+        "period": "2025 年 5 月",
         "source_refs": [
           "bls"
         ]
@@ -37563,7 +37675,7 @@
         "market": "美国",
         "measure": "行业分列中位工资",
         "occupation_scope": "美国 SOC 11-3051 大类；仅覆盖该行业工作的本类职业人员（食品制造）",
-        "period": "May 2025 或 2025—2035",
+        "period": "2025 年 5 月",
         "source_refs": [
           "bls"
         ]
@@ -37707,7 +37819,7 @@
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国 11-3051 大类职业基期人数"
+        "label": "美国 11-3051 大类基期就业岗位数"
       },
       {
         "availability": "available",
@@ -37727,14 +37839,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "质量控制系统经理 11-3051.01 的质量政策、检验与抽样、判定与记录任务；核对美国 SOC 11-3051 大类的工资分位与 2025—2035 预测、中国证据缺口、入行路径与可独立完成的纸面质量练习。"
+      "text": "质量控制体系经理制定检验规则、协调实验室和生产，并追踪异常整改。对照大陆工厂样本、美国工资宽类和停线决策练习。"
     },
     "title": {
       "availability": "available",
       "text": "质量控制系统经理"
     }
   },
-  "source_content_sha256": "d17924291febfb1568456ffb57b29b7374459e4f540bcba8dc6cf4f803849529",
+  "source_content_sha256": "639f82250d8c6340ca50c3c7a8854063f0478d03a99c9e763c7e6bbe126b6054",
   "subject": {
     "canonical_slug": "quality-control-systems-managers",
     "name": "质量控制系统经理",

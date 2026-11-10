@@ -159,19 +159,19 @@
         "status": "mapped"
       },
       "item:network-and-computer-systems-administrators.path.credential-decision.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:network-and-computer-systems-administrators.path.employer-evidence.5": {
         "status": "pending_mapping"
       },
       "item:network-and-computer-systems-administrators.path.entry-role-comparison.4": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:network-and-computer-systems-administrators.path.entry-work-sample-data.3": {
         "status": "pending_mapping"
       },
       "item:network-and-computer-systems-administrators.path.interview-probation.6": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:network-and-computer-systems-administrators.path.recruitment-sample.2": {
         "status": "pending_mapping"
@@ -180,7 +180,7 @@
         "status": "mapped"
       },
       "item:network-and-computer-systems-administrators.path.seven-day-trial.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:network-and-computer-systems-administrators.profile.career-quick-answers-block.5": {
         "status": "mapped"
@@ -12312,7 +12312,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "One-sentence judgment: this occupation is worth further verification only if you are willing to handle account permissions, backup verification, changes, and incident details over the long term, respond per process outside working hours, and accept high-consequence responsibility for production environments."
+              "Ask how maintenance windows, on-call duty and rollback approval work. If you tend to continue a change before verifying the baseline, start with a paper review."
             ]
           },
           "id": "network-and-computer-systems-administrators.quick-decision.fermat-decision-card.1",
@@ -12326,7 +12326,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Core output: turning servers, networks, accounts, and changes into traceable operations results: configurations and baselines, monitoring and alerts, backup recoverability, access control, incident handling, and service recovery records."
+              "In 09 Entering the field, qualifications, and career development, find “SA-07: Review a Change and Rollback.” Use the fictional records to write a continue-or-rollback decision and handoff. Finish before comparing with the answer key."
             ]
           },
           "id": "network-and-computer-systems-administrators.quick-decision.fermat-decision-card.2",
@@ -12340,7 +12340,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "20 to 120 minute safe trial: in an isolated simulation or laboratory environment (not connected to the production network, without using real credentials), complete one change-verify-rollback exercise: state the change items, impact surface, verification points, rollback conditions, and escalation path, and have someone else review against the checklist."
+              "Explore systems administration if you enjoy making changes repeatable, checking service recovery and recording who can authorize the next step."
             ]
           },
           "id": "network-and-computer-systems-administrators.quick-decision.fit-decision-checklist.3",
@@ -12726,7 +12726,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Checkable reference: in 2025 the average annual wage for information transmission, software, and information technology services was 248,752 yuan per year for urban non-private units and 128,166 yuan per year for urban private units in the same category; the statistical scope is urban legal entities with 5 or more employees and excludes self-employed individuals and freelancers."
+              "Checkable reference: in 2025 the average annual wage for information transmission, software, and information technology services was 248,752 yuan per year for urban non-private units and 128,166 yuan per year for urban private units in the same category; the statistical scope is urban legal entities with 5 or more employees."
             ]
           },
           "id": "network-and-computer-systems-administrators.china-salary.career-snapshot-primary-locale.3",
@@ -12959,7 +12959,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Verification method: personality labels cannot determine fit; use change-verify-rollback exercises, log analysis, and handover explanations in an isolated simulation environment to be evaluated by experienced staff."
+              "Verification method: try SA-07 on paper, then check whether the evidence supports your stop, approval, rollback and retest conditions. A second reader is optional."
             ]
           },
           "id": "network-and-computer-systems-administrators.fit.personality-fit-block.8",
@@ -13076,12 +13076,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Practice takes place only in an isolated simulation or laboratory environment: not connected to the production network, without using real account credentials, and without performing real changes; the simulation environment and data should be disposable, and their source and version recorded."
+              "The April 9, 2026 SSE Infonet A05 posting covered servers and cloud hosts, asked for a relevant bachelor’s degree or higher, and listed Linux and virtualization. It describes that employer’s role at the time; check your target posting. The SA-07 exercise on this page uses paper only: no network, credentials, commands or actual changes."
             ]
           },
           "id": "network-and-computer-systems-administrators.path.recruitment-sample.2",
           "source_refs": [
-            "onet-work"
+            "onet-work",
+            "cn-sse-a05-systems-20260409"
           ],
           "type": "notice"
         },
@@ -13089,15 +13090,46 @@
           "availability": "available",
           "copy_key": "career.item.entry-work-sample-data",
           "data": {
-            "paragraphs": [
-              "The portfolio includes: a simulated change request (impact surface, verification points, rollback conditions), a backup restore drill record, log analysis conclusions, and permission list verification results; it contains no real hostnames, accounts, or user data."
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Materials: fictional change SA-07",
+                  "A paper change for service Q has an approved test window 21:00–21:15. The success conditions are at least 19 of 20 successful checks and p95 response at most 450 ms. The pre-change sample is 20/20 and 310 ms.",
+                  "At 21:06 the staged version returns 17/20 and 420 ms. The prior version V1 is listed in the change record. Backup job says completed; there is no restore-test record. The note says the change lead approves rollback; none has approved yet."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Write a decision log with each threshold compared to the observation, then state whether to continue rollout, what to request and from whom.",
+                  "List what to recheck after a decision and which statements about backup or recovery are unsupported. Use paper only."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Answer key",
+                  "17/20 misses 19/20; 420 ms meets 450 ms. Do not expand rollout. Give the change lead the window, failing measure and V1 reference; request approval before anyone acts.",
+                  "Backup job completion does not prove restoration. If a rollback is authorized and performed, recheck both measures and the service workflow and log the results; no recovery is established by the exercise."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Check both threshold comparisons, the rollout decision, authorization and restore evidence. Each should point to a line of the record. Use fictional data only; no real credentials, hosts, commands or changes."
+                ]
+              }
             ]
           },
           "id": "network-and-computer-systems-administrators.path.entry-work-sample-data.3",
           "source_refs": [
             "onet-work"
           ],
-          "type": "notice"
+          "title": "SA-07: Review a Change and Rollback",
+          "type": "cards"
         },
         {
           "availability": "available",
@@ -13109,6 +13141,13 @@
               "career.column.boundary",
               "career.column.evidence",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Stage",
+              "Task",
+              "Boundary",
+              "Evidence",
+              "Next step"
             ],
             "rows": [
               [
@@ -13209,6 +13248,12 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "Scenario",
+              "Action",
+              "Review point",
+              "Evidence"
+            ],
             "rows": [
               [
                 "Online service interruption",
@@ -13218,9 +13263,9 @@
               ],
               [
                 "Anomalies appear after a change",
-                "Perform rollback and keep the original configuration and logs",
-                "Confirmed by the change approver",
-                "Rollback records and root cause analysis"
+                "Pause rollout and preserve the observations and version record. Only designated staff may roll back and retest after approval.",
+                "The change approver authorizes rollback before it is performed.",
+                "Approval, rollback record if performed, and retest results"
               ],
               [
                 "Backups cannot be restored",
@@ -13250,50 +13295,50 @@
               {
                 "id": "food.day1",
                 "values": [
-                  "Day 1",
-                  "Learn the asset inventory and the account and permission fields"
+                  "Day 1: Read the change record",
+                  "Copy the window and two success thresholds into a blank decision sheet."
                 ]
               },
               {
                 "id": "food.day2",
                 "values": [
-                  "Day 2",
-                  "Complete one simulated change request (impact surface and rollback conditions)"
+                  "Day 2: Build a baseline table",
+                  "Record the before-change observations with units; leave a separate row for the staged version."
                 ]
               },
               {
                 "id": "food.day3",
                 "values": [
-                  "Day 3",
-                  "Analyze a simulated log segment and propose failure hypotheses"
+                  "Day 3: Compare staged results",
+                  "Compute which checks pass and record the source for each."
                 ]
               },
               {
                 "id": "food.day4",
                 "values": [
-                  "Day 4",
-                  "Do one backup restore drill and record the results"
+                  "Day 4: Trace rollback authority",
+                  "Identify who can approve; list what is known about the prior version and what evidence is missing."
                 ]
               },
               {
                 "id": "food.day5",
                 "values": [
-                  "Day 5",
-                  "Handle one simulated configuration drift or overly broad permission"
+                  "Day 5: Draft the handoff",
+                  "Write the decision, requested next step and measurements to recheck."
                 ]
               },
               {
                 "id": "food.day6",
                 "values": [
-                  "Day 6",
-                  "Ask someone else to review against the checklist and discuss the deviations"
+                  "Day 6: Check and revise",
+                  "Use the four rubric checks on your own. Then compare with the answer key and revise one point. A second reader is optional."
                 ]
               },
               {
                 "id": "food.day7",
                 "values": [
-                  "Day 7",
-                  "Review availability, change discipline, and security boundaries"
+                  "Day 7: Decide whether to continue",
+                  "Note whether you would repeat the procedure on a rota, what you enjoyed and what you would practice next."
                 ]
               }
             ]
@@ -13302,6 +13347,7 @@
           "source_refs": [
             "onet-details"
           ],
+          "title": "Seven-day paper trial",
           "type": "timeline"
         },
         {
@@ -13333,6 +13379,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Status",
+              "Supporting evidence",
+              "Authority",
+              "Condition",
+              "Evidence gap",
+              "Responsible role",
+              "Next step"
             ],
             "rows": [
               [
@@ -13554,7 +13609,7 @@
                 ]
               },
               {
-                "answer": "There is no national occupational wage distribution precisely corresponding to this occupation. The National Bureau of Statistics of China publishes by industry category for 2025: the average annual wage for information transmission, software, and information technology services was 248,752 yuan for urban non-private units and 128,166 yuan for urban private units; this is an industry average that excludes self-employed individuals and freelancers and cannot be interpreted as starting pay or percentiles for this position.",
+                "answer": "This guide did not verify a comparable national wage distribution for this occupation in mainland China. In the National Bureau of Statistics’ 2025 release, average annual wages in information transmission, software and information technology services were 248,752 yuan in urban non-private units and 128,166 yuan in urban private units. These are pre-tax industry averages for urban legal entities with five or more employees. They do not give this occupation’s starting pay, median or percentiles.",
                 "id": "network-and-computer-systems-administrators.faq.5",
                 "question": "Is there corresponding wage data for mainland China?",
                 "question_key": "career.faq.network-and-computer-systems-administrators.5",
@@ -13572,11 +13627,13 @@
                 ]
               },
               {
-                "answer": "O*NET does not list a unified entry certificate for this occupation; the O*NET education survey shows that 30% of respondents report needing an associate degree, 27% a bachelor's degree, and 20% a postsecondary certificate, and on-the-job training in Job Zone 3 usually requires 1—2 years. The Chinese official vocational skills standard entry point has not established a qualification equivalent to this O*NET code, and specific training and authorization must be verified by region, system, and employer.",
+                "answer": "For the U.S. occupation, BLS lists a bachelor’s degree as typical and no typical on-the-job training requirement. The separate O*NET education survey shows partial responses: 30% associate degree, 27% bachelor’s, 20% postsecondary certificate. Its Job Zone 3 description covers a group of occupations and does not set a training period for this job. This page did not verify an equivalent mainland Chinese credential; check the target employer’s education, certifications and operating authorization.",
                 "id": "network-and-computer-systems-administrators.faq.7",
                 "question": "What qualifications or certificates are needed?",
                 "question_key": "career.faq.network-and-computer-systems-administrators.7",
                 "source_refs": [
+                  "bls-ep-2025-2035",
+                  "onet-entry",
                   "source-pack-onet-localcert",
                   "osta-standard"
                 ]
@@ -13644,16 +13701,16 @@
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Network and computer systems administrators",
+                "entity": "Computer network support specialists",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/career/jobs/computer-network-support-specialists"
               },
               {
-                "entity": "Network and computer systems administrators",
+                "entity": "Computer support specialists",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/career/jobs/computer-support-specialists"
               },
               {
                 "entity": "Network and computer systems administrators",
@@ -13685,11 +13742,11 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "Industry category average wages, not listed separately for this occupation; excludes self-employed individuals and freelancers."
+                  "Industry category average wages, not listed separately for this occupation."
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wage",
-                "limitation": "Industry average wages, not wages for this occupation; excludes the self-employed and freelancers.",
+                "limitation": "Industry average wages, not wages for this occupation.",
                 "market": "CN",
                 "name": "Average wages of urban unit employees in 2025",
                 "period": "2025 statistics; published 2026-05-15",
@@ -13709,7 +13766,7 @@
                 "name": "NIST SP 800-53 Rev. 5",
                 "period": "current; retrieved 2026-09-26",
                 "publisher": "National Institute of Standards and Technology",
-                "scope": "combined_official",
+                "scope": "NIST SP 800-53 Rev. 5 control catalog",
                 "url": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
               },
               {
@@ -13724,7 +13781,7 @@
                 "name": "NIST SP 800-53 Rev. 5 control catalog",
                 "period": "current; retrieved 2026-09-26",
                 "publisher": "National Institute of Standards and Technology",
-                "scope": "combined_official",
+                "scope": "NIST SP 800-53 Rev. 5 control catalog",
                 "url": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
               },
               {
@@ -13773,19 +13830,19 @@
                 "url": "https://www.onetonline.org/link/details/15-1244.00"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "United States exact occupation employment of 331,500 in 2024."
+                  "323,600 employed in 2025."
                 ],
                 "evidence_type": "official occupation employment",
                 "id": "onet-employment",
                 "limitation": "United States scope, not representing demand in mainland China.",
                 "market": "US",
-                "name": "National Employment — 15-1244.00",
-                "period": "2024 employment; accessed 2026-09-26",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS 15-1244 employment",
+                "period": "2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/15-1244.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -13818,19 +13875,19 @@
                 "url": "https://www.onetonline.org/link/industry/15-1244.00"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "The 2024—2034 employment change is a decline (-1% or lower), with about 14,300 openings per year."
+                  "323,600 to 310,400; −4.1%; 13,400 annual openings."
                 ],
                 "evidence_type": "official occupation projection",
                 "id": "onet-projection",
                 "limitation": "A macro projection is not a personal hiring guarantee.",
                 "market": "US",
-                "name": "Employment projections — 15-1244.00",
-                "period": "2024—2034 projections; accessed 2026-09-26",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "BLS 15-1244 projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/15-1244.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -13874,8 +13931,8 @@
                 "name": "National vocational skills standard inquiry",
                 "period": "current portal; retrieved 2026-09-26",
                 "publisher": "Occupational Skill Testing Authority, Ministry of Human Resources and Social Security",
-                "scope": "combined_official",
-                "url": "https://osta.mohrss.gov.cn/skillStandard"
+                "scope": "China vocational skills standards portal",
+                "url": "https://www.osta.org.cn/skillStandard"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -14043,6 +14100,21 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The A05 example covers servers and cloud hosts, calls for a relevant bachelor’s degree and emphasizes Linux and virtualization. It is a dated employer example and does not establish national eligibility or wages."
+                ],
+                "evidence_type": "employer recruitment notice",
+                "id": "cn-sse-a05-systems-20260409",
+                "limitation": "Example only; availability and representativeness are unverified.",
+                "market": "CN",
+                "name": "SSE Infonet A05 systems operations recruitment (9 April 2026)",
+                "period": "2026-04-09",
+                "publisher": "SSE Infonet",
+                "scope": "Employer example: systems operations",
+                "url": "https://star.sse.com.cn/aboutus/recruitment/sseinfo/c/c_20260409_10814681.shtml"
               }
             ]
           },
@@ -14423,9 +14495,9 @@
             "风险": "Service interruption"
           },
           {
-            "为什么重要": "The backup job shows success but actual restoration was never verified",
-            "控制方式": "Periodic restore drills, off-site copies, and recovery time objectives",
-            "风险": "Unrecoverable backups"
+            "为什么重要": "A completed restore drill shows that a required dataset was excluded from the recovery inventory.",
+            "控制方式": "Reconcile the recovery inventory with service owners and re-run the affected restore drill.",
+            "风险": "Partial restore misses a required dataset"
           },
           {
             "为什么重要": "Account permissions exceed duties or accounts are shared long term",
@@ -14523,7 +14595,7 @@
             "stage": "Operations lead"
           }
         ],
-        "direct_answer": "Editorial path: first master network and system fundamentals, accumulate records through support or junior positions, and then take on operations responsibility per organizational authorization; this is not a uniform ladder. The typical BLS education is a bachelor's degree, with some employers accepting a certificate or associate degree; Job Zone3 cannot prove a fixed training duration, and directory certifications are not production permissions.",
+        "direct_answer": "Editorial path: first master network and system fundamentals, accumulate records through support or junior positions, and then take on operations responsibility per organizational authorization; this is not a uniform ladder. The typical BLS education is a bachelor's degree, with some employers accepting a certificate or associate degree; Job Zone3 cannot prove a fixed training duration, and directory certifications are not production permissions. For a paper trial, use “SA-07: Review a Change and Rollback” in this section.",
         "entry_heading": "From entry support to production environment operations",
         "heading": "Entry, qualifications, and career development paths for network and computer systems administrators",
         "locale_requirements": {
@@ -14562,6 +14634,12 @@
             "id": "bls-ooh-system-admins",
             "label": "BLS OOH Network and Computer Systems Administrators",
             "scope": "United States typical education, employer differences, and work arrangements"
+          },
+          {
+            "href": "https://star.sse.com.cn/aboutus/recruitment/sseinfo/c/c_20260409_10814681.shtml",
+            "id": "cn-sse-a05-systems-20260409",
+            "label": "SSE Infonet A05 systems operations recruitment (9 April 2026)",
+            "scope": "The A05 example covers servers and cloud hosts, calls for a relevant bachelor’s degree and emphasizes Linux and virtualization. It is a dated employer example and does not establish national eligibility or wages."
           }
         ],
         "tracks": [
@@ -14891,15 +14969,15 @@
           },
           {
             "affected_roles": "Operations staff responsible for production changes, account permissions, and backup recovery",
-            "consequence": "Data is lost and cannot be recovered within the committed time",
+            "consequence": "The service cannot complete its full workflow until the missing dataset is restored.",
             "evidence_refs": [
               "onet",
               "nist"
             ],
             "id": "record-version",
-            "mitigation": "Periodic restore drills, off-site copies, and recovery time objectives",
-            "scenario": "The backup job shows success, but actual restoration was never verified",
-            "title": "Unrecoverable backups"
+            "mitigation": "Reconcile the recovery inventory with service owners and re-run the affected restore drill.",
+            "scenario": "A completed restore drill shows that a required dataset was excluded from the recovery inventory.",
+            "title": "Partial restore misses a required dataset"
           },
           {
             "affected_roles": "Operations staff responsible for production changes, account permissions, and backup recovery",
@@ -15317,7 +15395,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "In an isolated simulation environment, do one change-verify-rollback exercise: state the change items, impact surface, verification points, rollback conditions, and escalation path, and also do one backup restore drill and permission list verification, then ask experienced staff for feedback; the exercise does not constitute system authorization, change approval, or an employer hiring promise.",
+        "summary": "Use the SA-07 paper record to compare staged measurements with the change thresholds and write a decision with a next owner. No live account or colleague is required. Exercise scores neither determine hiring nor authorize production work.",
         "title": "Network and computer systems administrators"
       },
       "fit_decision_checklist": {
@@ -15408,7 +15486,7 @@
             "geography": "Mainland China (industry category scope)",
             "horizon": "2025 data (released 2026-05-15)",
             "interpretation": "The National Bureau of Statistics of China publishes average wages by industry category; that category covers many information technology positions and does not list this occupation separately.",
-            "limitation": "The industry category average does not list this occupation separately and excludes self-employed individuals and freelancers.",
+            "limitation": "The industry category average does not list this occupation separately.",
             "metric": "China industry category wage average (proxy value)",
             "occupation_scope": "Average wages of urban unit employees in 2025 from the National Bureau of Statistics of China, information transmission, software, and information technology services",
             "source_id": "nbs",
@@ -15758,7 +15836,7 @@
             "question": "Can assessment results serve as hiring evidence?"
           },
           {
-            "answer": "In an isolated simulation environment, complete one change-verify-rollback exercise and one backup restore drill, and then ask experienced staff for feedback.",
+            "answer": "Use the SA-07 records in section 09. Write a paper decision, the approval needed for rollback and the evidence needed to verify recovery. Check it against the rubric.",
             "question": "What kind of low-cost trial is best to start with?"
           }
         ],
@@ -15777,7 +15855,7 @@
             "tone": "caution"
           },
           {
-            "body": "In an isolated simulation environment, complete the change-verify-rollback and backup restore drill, and accept review feedback.",
+            "body": "Use SA-07 in section 09 to write a paper decision, rollback approval and recovery evidence to request. Check against the rubric; a second reader is optional.",
             "id": "experiment",
             "label": "Low-cost trial",
             "tone": "action"
@@ -15820,7 +15898,7 @@
             "usage": "Main industries (shares not provided)"
           },
           {
-            "href": "https://www.onetonline.org/link/details/15-1244.00",
+            "href": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
             "label": "NIST SP 800-53 Rev.5",
             "usage": "Access control, audit, and change management control reference"
           },
@@ -15867,8 +15945,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "Partial wages 2025, BLS employment projection 2025—2035, industry detail 2025; the NIST release page notes Release5.2.0, and general controls are tailored per organization; the NBS information technology industry average for 2025 is a proxy. The FAQ, quick answers, and their shared historical facts and sources are not synchronized across the whole page.",
-          "updated_at": "Consulted 2026-10-11 this round; wages and industry data 2025, projections 2025—2035; shared sources keep their original versions."
+          "source": "U.S. wage figures are May 2025; projections are for 2025–2035. Mainland China figures are averages for the industry, not occupation wages. NIST controls apply only as tailored by the organization.",
+          "updated_at": "Key wage and employment references checked on 9 November 2026."
         },
         "note": "The evidence only supports scope-limited judgments within the stated market, occupation scope, and period, and does not constitute personal income, hiring, or system authorization; production changes, permission granting, and security incident handling must be performed by authorized people within organizational systems and local requirements.",
         "secondary_links": [
@@ -15900,7 +15978,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI Chinese assessment"
+            "label": "Computer network support specialists"
           },
           {
             "href": {
@@ -15910,7 +15988,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five personality Chinese assessment"
+            "label": "Computer support specialists"
           }
         ]
       },
@@ -15945,7 +16023,7 @@
         "copy_key": "career.item.entry-work-sample-data",
         "id": "network-and-computer-systems-administrators.path.entry-work-sample-data.3",
         "location": "entry_decisions",
-        "type": "notice"
+        "type": "cards"
       },
       {
         "block": "path",
@@ -16036,50 +16114,51 @@
       },
       {
         "derivation": null,
-        "display_value": "Job Zone 3; usually vocational school, related experience, or associate degree level preparation; one to two years of on-the-job training",
+        "display_value": "O*NET Job Zone 3 (general preparation category); BLS lists a bachelor’s degree as typical U.S. entry education.",
         "fact_id": "entry-training",
         "market": "United States",
         "measure": "Typical entry preparation",
         "occupation_scope": "Exact occupation 15-1244.00",
         "period": "O*NET 2026 occupation profile; accessed 2026-09-26",
         "source_refs": [
-          "onet-entry"
+          "onet-entry",
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "331,500 people (2024)",
+        "display_value": "323,600 employed (2025)",
         "fact_id": "us-employment",
         "market": "United States",
         "measure": "Employment stock",
         "occupation_scope": "Exact occupation 15-1244.00 (not a parent category scope)",
-        "period": "2024 employment, relayed by O*NET; accessed 2026-09-26",
+        "period": "2025 BLS Employment Projections",
         "source_refs": [
-          "onet-employment"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline (-1% or lower)",
+        "display_value": "−4.1% (2025–2035)",
         "fact_id": "us-growth",
         "market": "United States",
         "measure": "Employment projection",
         "occupation_scope": "Exact occupation 15-1244.00 (not a parent category scope)",
-        "period": "2024—2034 projection, BLS relayed by O*NET; accessed 2026-09-26",
+        "period": "BLS 2025–2035 projection",
         "source_refs": [
-          "onet-projection"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "14,300 per year (2024—2034)",
+        "display_value": "13,400 per year (2025–2035)",
         "fact_id": "us-openings",
         "market": "United States",
         "measure": "Average annual job openings",
         "occupation_scope": "Exact occupation 15-1244.00 (not a parent category scope)",
-        "period": "2024—2034 projection, relayed by O*NET; accessed 2026-09-26",
+        "period": "BLS 2025–2035 projection",
         "source_refs": [
-          "onet-projection"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -16281,7 +16360,7 @@
         "availability": "available",
         "fact_ref": "cn-wage-nonprivate",
         "key": "china_pay",
-        "label": "Mainland China salary reference"
+        "label": "Mainland China industry wage background; occupation wage unavailable"
       }
     ]
   },
@@ -16289,14 +16368,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Network and computer systems administrators (O*NET 15-1244.00) install, configure, and maintain an organization's local area networks, wide area networks, data communication networks, operating systems, and physical and virtual servers, monitor the integrity and availability of systems and scheduled tasks (including backups), analyze network and server resource usage and control user access, and may also assist with network modeling, analysis, and planning coordination. This page uses only official sources to explain the occupation scope, tasks, preparation requirements, Chinese and United States statistical scopes, and authorization boundaries."
+      "text": "What systems administrators do, how they differ from network support, U.S. salary and employment data, and a paper change and rollback exercise."
     },
     "title": {
       "availability": "available",
       "text": "Network and computer systems administrators"
     }
   },
-  "source_content_sha256": "e4c8c87fc6f5443ffa1e2b2d35d215c80b7860bd32d5f5e365f5a885b72b2282",
+  "source_content_sha256": "c8ac125a9b0e0cc15036f927889e9736dadae6aeba3d3b0e5ff49c75c1435d09",
   "subject": {
     "canonical_slug": "network-and-computer-systems-administrators",
     "name": "Network and computer systems administrators",

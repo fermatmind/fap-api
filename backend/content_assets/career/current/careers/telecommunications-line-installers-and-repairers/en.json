@@ -23655,12 +23655,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe whether you can clearly document routes, segment identifiers, units, and test conditions, calculate given budgets, and identify exceeded limits without treating a passing table as real service recovery; then check practical conditions such as weather, attendance, and work qualifications."
+              "Paper check | Match splice points on a fictional route map to line-test records. Flag a result with an uncertain section and identify the splice point to verify. "
             ]
           },
           "id": "telecommunications-line-installers-and-repairers.display.fermat_decision_card.summary",
           "source_refs": [
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24751,13 +24751,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Telecommunications line installers and repairers install, splice, and repair telecommunications cables, including optical fiber; inspect and analyze line test results, record maintenance and retesting, and explain services to users. Tasks may involve overhead, underground, or customer access work; electrical power transmission and distribution lines and equipment installation and repair are related but distinct occupational scopes."
+              "Telecommunications line installers and repairers install, connect and test lines or cables. They record sections and readings to help locate faults and plan follow-up work. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "telecommunications-line-installers-and-repairers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-49-9052.00"
           ],
           "type": "prose"
         }
@@ -25425,12 +25424,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has no verifiable 49-9052 task-level AI ratings. Segment checks, budget tables, and handover drafts can be explored, but you still need to review inputs, arithmetic, and conclusions yourself; scores do not predict unemployment. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Match splice points on a fictional route map to line-test records. Flag a result with an uncertain section and identify the splice point to verify."
             ]
           },
           "id": "telecommunications-line-installers-and-repairers.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial"
+            "transfer-onet-49-9052.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32760,6 +32760,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-49-9052.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 49-9052.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/49-9052.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38275,10 +38302,10 @@
       "text": "Telecommunications Line Installers and Repairers"
     }
   },
-  "source_content_sha256": "4288452b95b4db0340563fc61582e52fe6a58b348756454ebc0b6bd20b981d72",
+  "source_content_sha256": "95c7d2a8f19a202591348347235268c3004387b0fdcdfc30bcbe0406f49ff46c",
   "subject": {
     "canonical_slug": "telecommunications-line-installers-and-repairers",
     "name": "Telecommunications Line Installers and Repairers",
-    "summary": "Install, splice, and repair telecommunications cables, including optical fiber; inspect and analyze line tests, retain maintenance and retest records, and explain user-service scope. Tasks may involve overhead, underground, and access work; compare power-line, equipment, and radio occupations separately, and check actual Chinese qualifications and site approval separately."
+    "summary": "Telecommunications line installers and repairers install, connect and test lines or cables. They record sections and readings to help locate faults and plan follow-up work."
   }
 }

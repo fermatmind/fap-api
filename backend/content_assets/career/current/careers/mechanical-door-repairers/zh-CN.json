@@ -7269,18 +7269,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页覆盖 O*NET 49-9011.00「机械门维修工（Mechanical Door Repairers）」：安装、检修或修理自动门机构与液压门，包含车库门机械；常见岗位名包括商用门安装工、门安装工、车库门安装工、门维修工与上翻门技术员。工作以户内外现场安装与检修、搬抬门板、登高作业和使用电动工具为主。本页不含电工（47-2111.00）、玻璃工（47-2121.00）、木工等相邻岗位。"
+              "机械门与自动门维修工安装、检查或维修自动门、液压门和车库门机构，核对设备运行并交接服务结果。具体门型与安全责任取决于场所和授权。"
             ]
           },
           "id": "mechanical-door-repairers.profile.definition-block.1",
           "source_refs": [
             "onet-summary",
-            "onet-tasks",
-            "onet-context",
-            "onet-industry",
-            "onet-education",
-            "onet-details",
-            "onet-wages"
+            "cn-cmuh-door"
           ],
           "type": "prose"
         },
@@ -7374,12 +7369,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "先核对的内容：现场开口与门型、图纸与作业要求、轨道与承力部件状态、开闭力度与电控动作、低压线路与安全条件，以及授权范围、工单记录与交接要求。"
+              "问门型、常见故障、谁负责复核和恢复使用。用虚构场所记录开关异常出现的时段和影响；医院维保采购只说明门类服务的一个场景。"
             ]
           },
           "id": "mechanical-door-repairers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-summary"
+            "onet-summary",
+            "cn-cmuh-door"
           ],
           "type": "prose"
         },
@@ -7388,12 +7384,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作闭环：从现场勘查与核对图纸开始，经过安装或固定轨道与门体、装配五金并调整力度、安装电控与低压线路，到测试系统并完成工单交接；任一开口条件或安全条件未确认前不进入安装，任一开闭力度或电控测试不通过前不交付。"
+              "机械门岗位面向特定门体和机构；综合维修覆盖多类设施，往往负责初步记录并转交。实际分工按合同和授权。"
             ]
           },
           "id": "mechanical-door-repairers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-summary"
+            "onet-summary",
+            "cn-cmuh-door"
           ],
           "type": "prose"
         },
@@ -8186,7 +8183,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025就业约28,400人；2025—2035增长6.4%、净增约1,800，2035约30,300；端点与净增独立取整。"
+              "美国 BLS 表1.2 49-9011：2025 年约 28,400 人，预计 2035 年约 30,300 人（+6.4%），年均约 2,100 个空缺。空缺包含替换。"
             ]
           },
           "id": "mechanical-door-repairers.market-signals.market-signal-card.3",
@@ -8323,12 +8320,13 @@
                 ]
               },
               {
-                "answer": "BLS/O*NET 2024 年就业约 28,400 人，2024—2034 年预计增长快于平均（约 7%），年均职位空缺约 2,700 个（含替换需求）；为统计预测，不等于个人录用概率。",
+                "answer": "美国 BLS 表1.2：49-9011 2025 年就业约 28,400 人，预计 2035 年约 30,300 人，2025—2035 年变化 +6.4%，年均约 2,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                 "id": "mechanical-door-repairers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.mechanical-door-repairers.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "onet-trends",
+                  "bls-projections-2025"
                 ]
               },
               {
@@ -8560,18 +8558,17 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "2024 年就业 28,400 人、2024—2034 年增长快于平均（约 7%）、年均空缺约 2,700 个。",
-                  "含替换需求，不等于净增岗位。"
+                  "美国 BLS 表1.2 49-9011：2025 年约 28,400 人，预计 2035 年约 30,300 人（+6.4%），年均约 2,100 个空缺。空缺包含替换。"
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
                 "limitation": "含替换需求，不等于净增岗位。",
                 "market": "美国",
-                "name": "O*NET 49-9011.00 全国就业趋势（BLS 2024—2034 年预测）",
-                "period": "2024—2034 年预测；查阅 2026-09-25",
-                "publisher": "O*NET OnLine（BLS 就业预测展示）, U.S. Department of Labor",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/49-9011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8678,8 +8675,8 @@
                 "id": "bls-projections-2025",
                 "limitation": "数值单位千人，四舍五入独立；预测不是就业保证或AI因果。",
                 "market": "美国",
-                "name": "BLS 2025—2035职业预测及准备要求表",
-                "period": "当前原文；查阅2026-10-11",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "reference",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -8730,6 +8727,20 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "项目把自动门呼叫铃等装置列入机电维保范围。"
+                ],
+                "id": "cn-cmuh-door",
+                "limitation": "采购范围样本，非个人招聘或资格。",
+                "market": "中国大陆",
+                "name": "晋江市中医院机电设备维保采购意向",
+                "period": "2026",
+                "publisher": "晋江市人民政府",
+                "scope": "具名岗位或制度",
+                "url": "https://www.jinjiang.gov.cn/xxgk/zdxxgk/jbylws/ywgk/202606/t20260606_3298322.htm"
               }
             ]
           },
@@ -9580,7 +9591,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这份工作先核对什么？",
+            "question": "第一次了解自动门维保岗位该问什么？",
             "table": {
               "rows": [
                 {
@@ -9612,7 +9623,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "怎样判断工作闭环？",
+            "question": "机械门维修和物业综合维修怎么分？",
             "table": {
               "rows": [
                 {
@@ -10237,7 +10248,7 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "28,400人（2025）；30,300人（2035）",
+            "数值": "约 28,400 人（2025）",
             "说明": {
               "$join": [
                 {
@@ -10261,7 +10272,7 @@
           },
           {
             "指标": "就业 · 增长",
-            "数值": "6.4%（2025—2035）；净增约1,800人",
+            "数值": "+6.4%；2035 年约 30,300 人",
             "说明": {
               "$join": [
                 {
@@ -10285,7 +10296,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "2,100个/年（2025—2035）",
+            "数值": "年均约 2,100 个",
             "说明": {
               "$join": [
                 {
@@ -10308,7 +10319,7 @@
             }
           }
         ],
-        "boundary": "美国精确职业与相邻职业范围必须分开；分位为统计位置，不等于个人到手收入。",
+        "boundary": "工资和就业数据属于美国职业口径；预测不代表当前招聘或个人录用。",
         "direct_answer": {
           "$item": "mechanical-door-repairers.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10335,7 +10346,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "6.4%（BLS 2025—2035；O*NET取整6%）",
+        "growth": "+6.4%",
         "heading": {
           "$item": "mechanical-door-repairers.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10398,7 +10409,7 @@
         ],
         "median": "55,720 美元/年",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2025—2035",
+        "outlook_period": "2025–2035",
         "wage_column_labels": [
           "分位",
           "年度参考",
@@ -10509,9 +10520,9 @@
         "outlook_evidence": [
           {
             "geography": "美国全国",
-            "horizon": "2025—2035",
-            "interpretation": "总体就业预测非AI归因；规模、净增、年均空缺分开，各数独立取整。",
-            "limitation": "为美国全国统计预测，不能作为个人就业保证。",
+            "horizon": "2025–2035",
+            "interpretation": "美国 BLS 表1.2 49-9011：2025 年约 28,400 人，预计 2035 年约 30,300 人（+6.4%），年均约 2,100 个空缺。空缺包含替换。",
+            "limitation": "工资和就业数据属于美国职业口径；预测不代表当前招聘或个人录用。",
             "metric": "就业规模与变化",
             "occupation_scope": "展示口径：Mechanical Door Repairers（49-9011.00）",
             "value": {
@@ -10523,12 +10534,12 @@
           },
           {
             "geography": "美国全国",
-            "horizon": "2025—2035",
-            "interpretation": "2025—2035每年平均，含增长替换；非十年合计或当前招聘。",
-            "limitation": "不能作为个人录用概率。",
+            "horizon": "2025–2035",
+            "interpretation": "年均空缺包含替换。",
+            "limitation": "工资和就业数据属于美国职业口径；预测不代表当前招聘或个人录用。",
             "metric": "职位空缺（年均）",
             "occupation_scope": "展示口径：49-9011.00",
-            "value": "2,100个/年"
+            "value": "年均约 2,100 个"
           },
           {
             "geography": "美国全国",
@@ -11213,7 +11224,7 @@
           "entry": "mechanical-door-repairers.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合机械门维修工",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11281,7 +11292,7 @@
             "item": "mechanical-door-repairers.source-register.published.1"
           }
         },
-        "note": "当前O*NET任务、RC、情境及2025全国五分位已核并正确保留；BLS预测表更新2025—2035的规模、6.4%、1800净增与2100年均。官网行业当前72/18/10，分行业工资未取得。NBS2025建筑业92036/66275和全国129441正确，行业非职业；官网发布5月15日，旧共享登记5月16日受保护。ILO仅暴露。DASMA车库门安全建议与2026中国目录用途分开；FAQ/Hero旧趋势和免执照等未改。"
+        "note": "工资和就业数据属于美国职业口径；预测不代表当前招聘或个人录用。"
       },
       "work_context_block": {
         "$item": "mechanical-door-repairers.profile.work-context-block.5",
@@ -11333,39 +11344,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "28,400 人",
+        "derivation": "美国 BLS 表1.2：49-9011 2025 年就业约 28,400 人，预计 2035 年约 30,300 人，2025—2035 年变化 +6.4%，年均约 2,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 28,400 人",
         "fact_id": "us-employment-2024",
         "market": "美国",
         "measure": "2024 年就业规模",
         "occupation_scope": "49-9011.00",
-        "period": "2024；查阅 2026-09-25",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-projections-2025"
         ]
       },
       {
-        "derivation": "O*NET 全国就业趋势页：2024 年 28,400 人，2024—2034 年预计增长快于平均（约 7%）。",
-        "display_value": "快于平均（约 7%，2024—2034）",
+        "derivation": "美国 BLS 表1.2：49-9011 2025 年就业约 28,400 人，预计 2035 年约 30,300 人，2025—2035 年变化 +6.4%，年均约 2,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "+6.4%",
         "fact_id": "us-growth",
         "market": "美国",
         "measure": "就业增长预测",
         "occupation_scope": "49-9011.00",
-        "period": "2024—2034；查阅 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-projections-2025"
         ]
       },
       {
-        "derivation": "为预测期内的职位空缺估计，含增长与替换需求。",
-        "display_value": "约 2,700 个/年（2024—2034）",
+        "derivation": "美国 BLS 表1.2：49-9011 2025 年就业约 28,400 人，预计 2035 年约 30,300 人，2025—2035 年变化 +6.4%，年均约 2,100 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 2,100 个",
         "fact_id": "us-openings",
         "market": "美国",
         "measure": "预计职位空缺（年均）",
         "occupation_scope": "49-9011.00",
-        "period": "2024—2034；查阅 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-projections-2025"
         ]
       },
       {
@@ -11441,19 +11452,19 @@
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业规模（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11467,17 +11478,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "机械门维修工（O*NET 49-9011.00）安装、检修自动门与液压门，含车库门。2025 年 BLS 中位年薪 55,720 美元；2024 年就业 28,400 人，2024—2034 年增长快于平均（约 7%）。含工作情境、风险与入行路径。"
+      "text": "了解机械门维修涉及什么设备、怎样记录故障，以及与综合物业维修的分工。"
     },
     "title": {
       "availability": "available",
-      "text": "机械门维修工：工作内容、美国工资与入行 | 费马测试"
+      "text": "机械门与自动门维修工做什么：门体、控制与维保交接"
     }
   },
-  "source_content_sha256": "015fd87ccba1b08e5d2fe043cbafd41efa1a2ac293513961e7303e7df08dac9b",
+  "source_content_sha256": "9e903964add9bae43495840eb0e60a988d52e294417937d0137c8d63cbe3a91b",
   "subject": {
     "canonical_slug": "mechanical-door-repairers",
-    "name": "机械门维修工",
-    "summary": "机械门维修工（O*NET 49-9011.00）安装、检修自动门机构与液压门，含车库门机械：装配轨道与后吊架、更换弹簧与磨损部件、调整开闭力度、布设低压线路并按图纸测试电控系统。"
+    "name": "机械门与自动门维修工",
+    "summary": "机械门与自动门维修工安装、检查或维修自动门、液压门和车库门机构，核对设备运行并交接服务结果。具体门型与安全责任取决于场所和授权。"
   }
 }

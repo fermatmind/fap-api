@@ -1554,7 +1554,7 @@
         "status": "pending_mapping"
       },
       "item:regulatory-affairs-managers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:regulatory-affairs-managers.sources.source-card.1": {
         "status": "mapped"
@@ -15996,8 +15996,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -23338,7 +23344,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Coordinates product regulatory strategy, filing review, agency responses, and post-market affairs; legal opinions, quality release, recalls, and formal submissions each require verified jurisdiction and organizational authorization, which D1 does not grant."
+              "Think twice if you prefer finishing work independently and would find it draining to negotiate schedules across teams, reset priorities, or raise deadline risks early."
             ]
           },
           "id": "regulatory-affairs-managers.quick-decision.fit-decision-checklist.1",
@@ -23353,7 +23359,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Start with the 30-minute D1 fictional materials to verify six items with four verified and two pending, plus C1/C0, R1/R2, and Q1/RA1; hand over the differences and responsible persons, and do not make a real submission."
+              "In section 09, “Entry, qualifications, and career development,” try RA-M01: Allocate filing review slots and escalate risks. Save a first draft before checking the key."
             ]
           },
           "id": "regulatory-affairs-managers.quick-decision.fit-decision-checklist.2",
@@ -23367,7 +23373,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Those willing to keep reading the rules, verify original documents, and coordinate across departments, and who can preserve gaps and refuse overreach commitments under project pressure, can explore this first."
+              "Consider this work if you like turning regulatory strategy into priorities, review plans, and decisions across teams."
             ]
           },
           "id": "regulatory-affairs-managers.quick-decision.fit-decision-checklist.3",
@@ -23382,7 +23388,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "O*NET defines the real tasks of 11-9199.01; any submission, regulatory response, recall, and product release follows the applicable jurisdiction, product category, and organizational authorization."
+              "Ask who sets priorities, schedules internal review, and approves external filing."
             ]
           },
           "id": "regulatory-affairs-managers.quick-decision.fermat-decision-card.6",
@@ -23397,7 +23403,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe whether the person can distinguish current from proposed rules, trace evidence versions, and list responsibility and approval; interest assessments cannot prove regulatory judgment, filing sign-off, or product licensing."
+              "Consider this work if you like turning regulatory strategy into priorities, review plans, and decisions across teams."
             ]
           },
           "id": "regulatory-affairs-managers.quick-decision.fermat-decision-card.7",
@@ -23452,7 +23458,7 @@
               "Strategy planning｜Verify the product classification, target market, and applicable rules.｜Output the regulatory pathway and gap matrix.",
               "Filing review｜Verify the original evidence, labeling, technical documents, and versions.｜Keep missing items pending.",
               "Agency communication｜Organize authorized responses and material submissions.｜Record inquiries, sources, and sign-offs.",
-              "Cross-department collaboration｜Verify materials with R&D, quality, clinical, and marketing.｜Keep duties and the approval chain separate.",
+              "Coordinate priorities and escalate deadline risks｜Allocate review capacity based on package readiness and sign-off dependencies. Agree on milestones with R&D, quality, and clinical teams and escalate deadlines at risk to the project owner.｜Hand off affected commitments, fallback options, approval owners, and the review schedule.",
               "Post-market affairs｜Handle complaints, changes, audits, and recall coordination.｜Do not make release or recall decisions beyond authority.",
               "Regulatory updates｜Track proposed and effective rules and train staff.｜Mark effective dates and product applicability."
             ]
@@ -24445,7 +24451,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The strategy and filing direction verifies the product category, jurisdiction, applicable rules, and evidence matrix; the proposed text of R2 in D1 must not be treated as current."
+              "For strategy and filing, identify the product category, market, and effective requirements before organizing the evidence review."
             ]
           },
           "id": "regulatory-affairs-managers.direction-comparison.adjacent-career-comparison-table.27",
@@ -24734,7 +24740,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Learn the product, market, rule effective dates, and material versions first; tools organize only the D1 fictional directory."
+              "Learn to identify the market, effective dates, and document versions before using tools to organize the checklist."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.11",
@@ -25528,7 +25534,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "No. The model can calculate four verified and two pending out of the six D1 items, while real evidence and rules are verified by professionals."
+              "A tool can flag blank fields. A qualified reviewer must verify the applicability and validity of each source."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.64",
@@ -25543,7 +25549,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET tasks and the D1 editorial exercise"
+              "O*NET occupational tasks and the editorial example on this page."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.65",
@@ -25647,7 +25653,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "No. Tools cannot generate the real T1 test or sign Q1/RA1."
+              "A tool can organize existing test records. Results and signatures come from the people responsible for them."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.72",
@@ -25706,7 +25712,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Use the fictional D1 to keep the prompt, versions, tool drafts, human revisions, and pending approvals."
+              "Keep the original index, tool draft, human edits, and subsequent review."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.76",
@@ -25721,7 +25727,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The A1—A5 editorial design"
+              "Fictional paper exercise on this page."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.77",
@@ -25781,7 +25787,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence review: T1/E1, L2/V3, and R1/R2 are verified by the professional team."
+              "Evidence review: check applicable versions, test scope, labeling, and signatures separately."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.81",
@@ -25796,7 +25802,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Trail and handoff: keep the D1 material versions, the T1/E1 gaps, inquiry deadlines, and the next responsible person."
+              "For a traceable handoff, log the source, discovery time, gap, response date, and next owner."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.82",
@@ -25855,7 +25861,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Writing the pending T1/E1 as complete creates false completeness."
+              "Leave files without a signature or source document in the review queue."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.86",
@@ -25885,7 +25891,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "A model cannot judge whether the L2-C1 claim has real evidence."
+              "Trace each product claim to its supporting evidence and applicable scope."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.88",
@@ -25899,7 +25905,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Compare against V3 and the original tests and escalate."
+              "Check the original version, scope, and authority before updating the tool-assisted record."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.89",
@@ -25914,7 +25920,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "An automatic draft may write the proposed R2 as a current rule."
+              "Check publication status and effective dates against the issuing source."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.90",
@@ -26031,7 +26037,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Verify the four verified and the pending T1/E1."
+              "Check the active version, gaps, and approval status for each file."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.98",
@@ -26088,7 +26094,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Verify the difference between L2-C1 and V3-C0."
+              "Compare the draft label line by line with verified technical evidence."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.102",
@@ -26144,7 +26150,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Authorized regulatory personnel verify whether R1 is effective and whether R2 is proposed."
+              "Have regulatory staff verify the applicable rules, effective date, and product scope."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.106",
@@ -26201,7 +26207,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Verify the Q1/RA1 sign-off and agency requirements."
+              "Verify agency requirements and the approval record before filing."
             ]
           },
           "id": "regulatory-affairs-managers.ai-impact.ai-impact-table.110",
@@ -27835,31 +27841,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Compliance managers",
@@ -28011,7 +28017,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "RIASEC should not be used as a hiring threshold; use the D1 paper materials to observe verification behavior."
+              "Use interest results to guide exploration. Try section 09 to observe which tasks suit you."
             ]
           },
           "id": "regulatory-affairs-managers.fit.personality-fit-block.5",
@@ -28099,7 +28105,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This page does not judge filing competence by MBTI; the D1 situation where the rule version is unclear can be used to observe verification habits, and type is not used to infer strategy or sign-off ability."
+              "Observe evidence review and communication through actual tasks. An MBTI type does not establish job readiness."
             ]
           },
           "id": "regulatory-affairs-managers.fit.personality-fit-block.10",
@@ -28156,7 +28162,7 @@
           "data": {
             "entries": [
               "Coordinates regulatory, quality, and R&D when the product changes.",
-              "The proposed R2 text is not written as current."
+              "Use section 09 to see how you handle evidence tracking."
             ]
           },
           "id": "regulatory-affairs-managers.fit.personality-fit-block.12",
@@ -28256,7 +28262,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Do not screen by IQ score; observe whether the person can distinguish the six documents with four verified and two pending, plus R1/R2 and C1/C0."
+              "Observe whether the person can interpret documents, explain gaps, and keep a traceable record."
             ]
           },
           "id": "regulatory-affairs-managers.fit.personality-fit-block.18",
@@ -28285,8 +28291,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Verify the six documents, four verified and the two pending under T1/E1.",
-              "Distinguish the difference between L2-C1 and V3-C0."
+              "Use section 09 to see how you handle evidence tracking.",
+              "Use section 09 to see how you handle evidence tracking."
             ]
           },
           "id": "regulatory-affairs-managers.fit.personality-fit-block.20",
@@ -28343,7 +28349,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Still explains that Q1/RA1 is unsigned when facing a deadline.",
+              "Use section 09 to see how you handle evidence tracking.",
               "Hands the responsible person and pending materials over clearly."
             ]
           },
@@ -28387,7 +28393,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Do the D1 fictional filing exercise first, then observe under supervision on a real project; the portfolio grants no sign-off authority."
+              "Try the exercise independently, then ask about mentoring and review in the role."
             ]
           },
           "id": "regulatory-affairs-managers.fit.personality-fit-block.27",
@@ -28717,7 +28723,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This page does not recommend a best MBTI type; use the fictional D1 and supervised tasks to explore verification behavior."
+              "Use section 09 to see how you feel about revisiting evidence and explaining discrepancies."
             ]
           },
           "id": "regulatory-affairs-managers.fit.personality-fit-block.49",
@@ -28760,7 +28766,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "It can be trained. First verify the six documents with four verified and two pending, then distinguish the effective R1 from the proposed R2 and the label difference."
+              "Practice checking source files and versions, then explaining impacts and follow-up."
             ]
           },
           "id": "regulatory-affairs-managers.fit.personality-fit-block.52",
@@ -28804,7 +28810,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Deliver the D1 paper package: evidence matrix, regulatory versions, label differences, and pending approvals, then verify the position requirements."
+              "Save your draft, review notes, and reasons for revisions so you can explain the evidence trail."
             ]
           },
           "id": "regulatory-affairs-managers.fit.personality-fit-block.55",
@@ -28833,7 +28839,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "When T1/E1 or Q1/RA1 is missing, pause the affected submission and escalate."
+              "Record the gap and escalate if signatures or evidence are incomplete."
             ]
           },
           "id": "regulatory-affairs-managers.fit.personality-fit-block.57",
@@ -28848,7 +28854,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use the 30-minute D1 to verify the six documents with four verified and two pending, the label C1/C0, and the rules R1/R2 and Q1/RA1; hand over the evidence matrix and responsible persons, all fictional with no formal submission."
+              "Try section 09 independently, then use the key to check the evidence and next steps."
             ]
           },
           "id": "regulatory-affairs-managers.fit.personality-fit-block.58",
@@ -29035,7 +29041,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "This card centers on regulatory strategy, filing review, agency communication, and post-market affairs; the D1 paper exercise does not replace any real product filing."
+              "Work includes filing review, agency questions, and post-market work. Responsibilities vary by product and role."
             ]
           },
           "id": "regulatory-affairs-managers.risk.career-risk-cards.8",
@@ -29066,7 +29072,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET describes regulatory manager tasks; the R1/R2 in D1 and the product materials are all fictional and do not represent specific jurisdictional requirements."
+              "O*NET describes the occupation. Check real filing requirements and authority by market."
             ]
           },
           "id": "regulatory-affairs-managers.risk.career-risk-cards.10",
@@ -29097,7 +29103,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "A wrong product classification or treating the proposed R2 as an effective rule leads to the wrong submission pathway."
+              "Misclassification or relying on a rule before it takes effect can change the filing assessment."
             ]
           },
           "id": "regulatory-affairs-managers.risk.career-risk-cards.12",
@@ -29127,7 +29133,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The D1 index mixes the effective R1 with the proposed R2."
+              "Without the source, publication status, and effective date, reviewers cannot verify the rule."
             ]
           },
           "id": "regulatory-affairs-managers.risk.career-risk-cards.14",
@@ -29158,7 +29164,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Missing the final T1 signature or an unclear applicable version of E1 breaks the evidence chain."
+              "A missing final signature or unclear evidence version breaks traceability."
             ]
           },
           "id": "regulatory-affairs-managers.risk.career-risk-cards.16",
@@ -29190,7 +29196,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Of the six documents, T1/E1 is pending but written as complete."
+              "Marking an unchecked record as verified hides unfinished evidence review."
             ]
           },
           "id": "regulatory-affairs-managers.risk.career-risk-cards.18",
@@ -29222,7 +29228,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The label claim C1 under L2 exceeding the technical scope V3 of C0 may be misleading."
+              "Refer a label claim that exceeds verified technical evidence for qualified review."
             ]
           },
           "id": "regulatory-affairs-managers.risk.career-risk-cards.20",
@@ -29254,7 +29260,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Approving labeling without supporting evidence for C1."
+              "Record the evidence gap and review owner. Preserve the source version."
             ]
           },
           "id": "regulatory-affairs-managers.risk.career-risk-cards.22",
@@ -29315,7 +29321,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Submitting the draft while Q1/RA1 is blank."
+              "Keep a draft out of the submitted status while approval is pending."
             ]
           },
           "id": "regulatory-affairs-managers.risk.career-risk-cards.26",
@@ -29442,7 +29448,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Disclosing a real T1 report or using a model to write test results."
+              "Follow permissions when sharing real documents, and keep fabricated test results out of the record."
             ]
           },
           "id": "regulatory-affairs-managers.risk.career-risk-cards.34",
@@ -29500,7 +29506,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The tasks of this occupation support the review and response context, and D1 is only a fictional case rather than a real compliance conclusion."
+              "Use the risk checklist to practice review and handoff. Actual compliance requires case-specific assessment."
             ]
           },
           "id": "regulatory-affairs-managers.risk.career-risk-cards.38",
@@ -29556,14 +29562,14 @@
                 "Materials assistance",
                 "Under supervision, identify the product, market, regulations, and document versions",
                 "Can explain missing evidence and items to verify clearly",
-                "Fictional D1 materials matrix",
+                "Keep the source materials, discrepancies, and next steps in the practice record.",
                 "Do not sign real filings"
               ],
               [
                 "Filing coordination",
                 "Organize evidence, labeling, and approval records",
                 "Material versions and responsible persons are traceable",
-                "D1 difference sheet",
+                "Keep the source materials, discrepancies, and next steps in the practice record.",
                 "Does not replace quality or legal approval"
               ],
               [
@@ -29613,9 +29619,9 @@
               {
                 "id": "clearance",
                 "values": [
-                  "Product and market",
-                  "Verify the product classification, target jurisdiction, and applicable rule versions.",
-                  "Paper classification does not replace the competent authority's determination."
+                  "Guangming District profile: international device registration manager",
+                  "Item 13 on page 47 of the official PDF lists scheduling, risk control, and cross-functional coordination for international registration.",
+                  "Ask about the product, target market, approval authority, and team responsibilities. Read experience requirements per role."
                 ]
               },
               {
@@ -29629,9 +29635,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "Post-market management",
-                  "Track complaints, changes, audits, and recall communication.",
-                  "Formal recalls and release follow organizational and regulatory authority."
+                  "Shenzhen Medical Academy: clinical registration manager (Shenzhen, China)",
+                  "The posting assigns team leadership for overseas market access, registration strategy, and work with R&D.",
+                  "Read team responsibilities in the posting."
                 ]
               }
             ]
@@ -29639,7 +29645,10 @@
           "id": "regulatory-affairs-managers.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d014-cn-main",
+            "d014-cn-context",
+            "d014-us-example"
           ],
           "title": "What do employers usually look for in hiring?",
           "type": "cards"
@@ -29652,37 +29661,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and setup｜A1—A5 are entirely fictional and do not correspond to real jurisdictions or product rules",
-                  "Use 30 minutes to complete the D1 pre-filing paper review: read the product and materials, list evidence differences, and write the pause and escalation; do not make a real filing based on it.",
-                  "A1｜The fictional product D1 plans to enter the M1 market, and material directory version 3 lists six required documents; this is only an exercise assumption and does not represent any real category.",
-                  "A2｜Of the six documents in the directory, four are marked verified and two are pending: the test report T1 has no final signature yet, and the applicable product version of the clinical or use evidence E1 is unverified.",
-                  "A3｜The label L2 states the function claim C1, and the technical material V3 covers only C0; without original evidence or approval supporting C1, the label is not written as compliant.",
-                  "A4｜The regulatory index lists both the effective text R1 and the proposed text R2, and R2 is not yet in force; the applicable date and jurisdiction must be verified, and proposed requirements must not be written as current law.",
-                  "A5｜The submission draft is marked “ready to send”, but the quality sign-off Q1 and the regulatory sign-off RA1 are both blank; all differences remain open, and authorized personnel decide whether to add evidence, revise, or postpone."
+                  "Fictional inputs",
+                  "On Tuesday morning a fictional project has two review slots. Each package requires both consecutive slots. The R8 owner confirmed readiness in writing, with an internal review commitment of Tuesday noon. R9 lacks a final quality signature, with an internal commitment of Tuesday end of day.",
+                  "The quality owner expects to report R9’s signature status at 14:00 Tuesday. No afternoon review slot is confirmed. Two Wednesday slots are proposed but unapproved. Neither package has external filing authority.",
+                  "The manager may propose the internal schedule and must flag any risk to the project owner the same day. Quality owns its signature, and the authorized role controls external submission."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Tasks and deliverables",
-                  "Verify six documents with four verified and two pending; list T1/E1, the L2 claim C1, R1/R2, and the Q1/RA1 sign-off status separately.",
-                  "Submit a one-page evidence matrix, version differences, and pending approval list; do not write that marketing authorization or a formal regulatory response has been obtained."
+                  "Task and deliverable",
+                  "Write a scheduling recommendation covering Tuesday’s slots, the R9 risk, the responsible owners, and the status of the fallback.",
+                  "Separate confirmed readiness, expected updates, and proposed scheduling.",
+                  "Use paper or a local spreadsheet and identify the evidence."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answer (complete it independently first)",
-                  "Of the six required documents, four are verified and two are pending; numerical completeness is not evidence validity.",
-                  "T1 lacks the final signature and the E1 version is unclear; the L2 claim C1 is not directly supported by the C0 scope of V3.",
-                  "R2 is proposed text and cannot serve as an effective requirement; Q1 and RA1 are blank, so the submission status should be pending and handed to authorized personnel."
+                  "Before checking your work",
+                  "Save your draft before checking the key after the seven-day plan.",
+                  "Work independently.",
+                  "Keep the versions.",
+                  "Leave missing evidence open."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries and review",
-                  "D1, M1, R1/R2, and all materials are fictional. Real classification, regulatory applicability, trials, quality release, external submission, or recall are judged by professionals per product and jurisdiction authorization."
+                  "Authority boundaries",
+                  "Use the fictional records only.",
+                  "Do not approve or release real work."
                 ]
               }
             ]
@@ -29691,7 +29700,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: evidence, labeling, and sign-off for the fictional D1 product filing package",
+          "title": "RA-M01 | Allocate filing review slots and escalate risks",
           "type": "cards"
         },
         {
@@ -29702,33 +29711,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "D1 evidence matrix",
-                  "List the six documents, the four verified, the two pending under T1/E1, and the evidence sources.",
-                  "Review: the number of documents is not treated as a compliance conclusion."
+                  "Review capacity table",
+                  "Record available slots, the consecutive-review requirement, and provisional slots.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Label and regulatory difference sheet",
-                  "Verify the scope difference between L2-C1 and V3-C0, and the effective R1 versus the proposed R2.",
-                  "Review: do not treat proposed text as current law."
+                  "Signature status sheet",
+                  "Separate confirmed, awaiting response, and unapproved statuses.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Submission pause and sign-off handoff package",
-                  "List the blank Q1/RA1, the T1/E1 gap, the responsible person, and the deadline to verify.",
-                  "Review: authorized personnel decide on submission."
+                  "Deadline risk handoff",
+                  "Show the commitment at risk, escalation owner, and next check.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Source and assumption card",
-                  "Mark the O*NET tasks and the A1—A5 fictional setup, and all regulatory clauses are assumptions.",
-                  "Review: the portfolio contains no real product trade secrets."
+                  "Scheduling recommendation",
+                  "Explain priorities, fallback timing, and approval ownership.",
+                  "Use the supplied records."
                 ]
               }
             ]
@@ -29759,27 +29768,27 @@
             "rows": [
               [
                 "Document status",
-                "Whether the four verified and two pending can be distinguished",
-                "T1/E1 is still pending",
-                "Quantity is not compliance"
+                "Identify the original record and current version.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Label claims",
-                "Whether the inconsistency between C1 and C0 can be identified",
-                "Mark the L2 claim as pending proof",
-                "Do not approve labeling on your own"
+                "Compare source records, targets, and discrepancies.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Rule versions",
-                "Whether effective and proposed can be distinguished",
-                "R1/R2 are kept separate",
-                "Do not guess the applicable rule"
+                "Separate open checks, verified findings, and owners.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Sign-off",
-                "Whether the blank Q1/RA1 can be verified",
-                "Pause submission and hand it to the responsible person",
-                "Do not sign external documents on someone's behalf"
+                "Record physical checks and approval status.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ]
             ]
           },
@@ -29799,50 +29808,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day one",
-                  "Read A1—A5 and draw the boundaries among regulatory, R&D, quality, and the formal submitter."
+                  "Day 1",
+                  "Record the subject and versions."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day two",
-                  "Verify the six documents and list the four verified and the two pending under T1/E1."
+                  "Day 2",
+                  "Identify the original record and current version."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day three",
-                  "Compare the L2 claim C1 with the V3 scope C0 and record the differences."
+                  "Day 3",
+                  "Compare source records, targets, and discrepancies."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day four",
-                  "Distinguish the effective R1 from the proposed R2 and list the dates and jurisdictions to verify."
+                  "Day 4",
+                  "Separate open checks, verified findings, and owners."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day five",
-                  "Review the blank Q1/RA1 and write why submission is not being made."
+                  "Day 5",
+                  "Record physical checks and approval status."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day six",
-                  "Produce versioned differences, responsible persons, and the next approval list."
+                  "Day 6",
+                  "Complete and save your first scheduling recommendation and risk handoff on your own. No partner is required. Keep the original work for review on day 7."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day seven",
-                  "Compare with the target position and verify the product category, market, experience, and sign-off authority."
+                  "Day 7",
+                  "In the FAQ, open “RA-M01 answer key and rubric (open on day 7)”. Apply the four rubric checks and record one revision and why you made it."
                 ]
               }
             ]
@@ -29859,20 +29868,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep the first and revised drafts of the D1 evidence matrix and mark the fictional sources item by item.",
-              "Verify the six documents, the four verified, and the pending T1/E1, and note that quantity is not compliance.",
-              "Record whether you are willing to keep tracking rules, verifying evidence, and communicating across teams.",
-              "Redo the L2-C1 and V3-C0 differences to avoid hasty release.",
-              "List the proposed R2 and the blank Q1/RA1 as items to verify next round.",
-              "Compare with the position and mark knowledge gaps in products, jurisdictions, quality, and clinical evidence.",
-              "Keep unfinished items honestly and do not substitute assessment labels for professional ability."
+              "On day 6, save your first draft and note which input records you used.",
+              "Separate confirmed items, pending signatures, and pending approvals.",
+              "List available and unconfirmed review slots separately.",
+              "Name the person to follow up on each risk.",
+              "Record who can approve the fallback schedule.",
+              "Keep internal scheduling separate from external filing authority.",
+              "On day 7, open the named FAQ key and record one revision and its reason."
             ]
           },
           "id": "regulatory-affairs-managers.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide at the end of seven days whether to continue",
+          "title": "Save and review your draft",
           "type": "list"
         },
         {
@@ -29967,10 +29976,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "A1—A5 are fictional paper cases and grant no regulatory sign-off, product release, regulatory filing, or legal opinion qualification.",
+              "RA-M01 is a fictional paper exercise. Verify real sign-off, release, and filing authority separately.",
               "O*NET 11-9199.01 is a US occupational classification and does not establish Chinese product regulatory permits.",
               "The portfolio must not contain real product trials, trade secrets, regulatory correspondence, or personal information.",
-              "Regulatory, quality, clinical, and legal responsibilities cannot be mutually recognized merely because they share a filing team."
+              "Ask about the product, target market, approval authority, and team responsibilities. Read experience requirements per role."
             ]
           },
           "id": "regulatory-affairs-managers.path.credential-boundary.1",
@@ -29986,14 +29995,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics broad industry averages are not the precise wage of regulatory affairs managers.",
-              "Insufficient evidence: a 2026 recruitment offer in mainland China for the same position as a regulatory affairs manager with verifiable product, market jurisdiction, region, experience, sign-off authority, hours, and pay."
+              "Shenzhen Medical Academy: clinical registration manager (Shenzhen, China). The posting assigns team leadership for overseas market access, registration strategy, and work with R&D.",
+              "Stryker: manager, regulatory affairs (Portage, Michigan, U.S.). The posting covers medical-device lifecycle strategy, cross-functional leadership, and team development."
             ]
           },
           "id": "regulatory-affairs-managers.path.recruitment-sample.1",
           "source_refs": [
-            "nbs",
-            "editor"
+            "d014-cn-main",
+            "d014-us-example"
           ],
           "title": "Recruitment sample note",
           "type": "notice"
@@ -30174,7 +30183,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET describes 11-9199.01 management tasks, and specific education and experience depend on the product and employer. Do the D1 paper exercise first, then take part in filings under real authorization."
+              "Check the employer and product, then distinguish knowledge requirements, internal review, and filing authority."
             ]
           },
           "id": "regulatory-affairs-managers.path.career-path-block.20",
@@ -30219,7 +30228,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The 11-9199 broad group wage and employment figures are background only, and D1 is entirely fictional and does not represent a real permit or offer."
+              "U.S. figures are for the broader occupation. Read hiring requirements at the posting level."
             ]
           },
           "id": "regulatory-affairs-managers.path.career-path-block.23",
@@ -30320,7 +30329,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The D1 six-document status, the R1/R2 versions, and the gap matrix."
+              "Record the original material, discrepancies, and responsible owners together."
             ]
           },
           "id": "regulatory-affairs-managers.path.career-path-block.30",
@@ -30612,7 +30621,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The T1/E1 and L2/V3 differences stay pending."
+              "Track missing evidence separately and recheck new material against the active list."
             ]
           },
           "id": "regulatory-affairs-managers.path.career-path-block.50",
@@ -30904,7 +30913,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The D1 inquiry draft is not written as submitted."
+              "File drafts awaiting review separately from submission records."
             ]
           },
           "id": "regulatory-affairs-managers.path.career-path-block.70",
@@ -32058,7 +32067,7 @@
                 ]
               },
               {
-                "answer": "Use the D1 fictional materials to practice the four verified and two pending items, regulatory versions, label differences, and the sign-off chain, then see whether you are willing to handle evidence and cross-department communication long term.",
+                "answer": "Check the target product, market, and actual role responsibilities.",
                 "id": "regulatory-affairs-managers.faq.5",
                 "question": "How can I judge whether it suits me?",
                 "question_key": "career.faq.regulatory-affairs-managers.q5",
@@ -32086,7 +32095,7 @@
                 ]
               },
               {
-                "answer": "No. D1 is entirely fictional and grants no legal opinion, regulatory agent status, external signature, or marketing authorization.",
+                "answer": "Use the paper exercise for practice. Authorized staff handle real filings under the applicable product and market rules.",
                 "id": "regulatory-affairs-managers.faq.8",
                 "question": "After the paper exercise, can I make a formal filing?",
                 "question_key": "career.faq.regulatory-affairs-managers.credentials",
@@ -32095,19 +32104,15 @@
                 ]
               },
               {
-                "answer": "When the product classification, rule effective date, trial originals, label claims, quality sign-off, or external authorization is unconfirmed, pause the affected submission and hand it to the responsible person.",
+                "answer": "Escalate when evidence lacks sign-off, review capacity puts a commitment at risk, or ownership across teams is unclear.",
                 "id": "regulatory-affairs-managers.faq.9",
                 "question": "Which situations require pausing and escalation?",
-                "question_key": "career.faq.regulatory-affairs-managers.risk-boundary",
-                "source_refs": [
-                  "onet",
-                  "editor"
-                ]
+                "question_key": "career.faq.regulatory-affairs-managers.risk-boundary"
               },
               {
-                "answer": "Regulatory specialists, quality managers, compliance managers, and document management can be compared, but the corresponding technical skills, experience, and authorization must be added.",
+                "answer": "In section 09, “Entry, qualifications, and career development,” try RA-M01: Allocate filing review slots and escalate risks. Save a first draft before checking the key.",
                 "id": "regulatory-affairs-managers.faq.10",
-                "question": "What adjacent paths are there?",
+                "question": "How can I try the work and check my result?",
                 "question_key": "career.faq.regulatory-affairs-managers.outlook-transition",
                 "source_refs": [
                   "onet",
@@ -32115,6 +32120,15 @@
                   "operations",
                   "hr",
                   "document"
+                ]
+              },
+              {
+                "answer": "Recommend assigning both Tuesday morning slots to R8, meeting the consecutive-slot requirement and preserving its noon commitment.\n\nR9 lacks its quality signature and cannot fit into the remaining Tuesday morning schedule. The 14:00 update is an estimate rather than approval.\n\nEscalate the risk to R9’s Tuesday commitment to the project owner the same day while requesting a signature update from quality.\n\nKeep both Wednesday slots provisional. Confirm the signature and get the project owner’s approval before changing the commitment.\n\nRecord the versions, internal decision, and next check. Leave external submission pending authorization for both.\n\nScore each item 0–2: allocation of review slots, signature and evidence status, deadline risk and escalation, and fallback scheduling and approval.\n\nAward 2 for complete and traceable work, 1 for partial work, and 0 for missing evidence or exceeding authority.",
+                "id": "regulatory-affairs-managers.faq.ra-m01-answer-key",
+                "question": "RA-M01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.regulatory-affairs-managers.ra-m01-answer-key",
+                "source_refs": [
+                  "editor"
                 ]
               }
             ]
@@ -32127,7 +32141,8 @@
             "nbs",
             "privacy",
             "editor",
-            "editor"
+            "editor",
+            "d014-cn-context"
           ],
           "type": "faq"
         },
@@ -32136,7 +32151,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind editorial summary"
+              "RA-M01 is a fictional exercise for this page."
             ]
           },
           "id": "regulatory-affairs-managers.sources.source-card.1",
@@ -32150,14 +32165,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational tasks are based on O*NET 11-9199.01; US wages and projections are 11-9199 broad group proxies, and Chinese broad unit wages serve only as gap context."
+              "Item 13 on page 47 of the official PDF lists scheduling, risk control, and cross-functional coordination for international registration."
             ]
           },
           "id": "regulatory-affairs-managers.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "bls",
-            "nbs"
+            "d014-cn-context"
           ],
           "type": "prose"
         },
@@ -32166,15 +32179,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round was verified 2026-10-12, and the original 2026-10-03 was the historical date. The O*NET precise tasks, the 11-9199 Managers, All Other 2025 wages and 2025—2035 projection, and Chinese 2025 pre-tax annual averages are kept separate. Occupational tasks do not provide filing, release, or sign-off permissions for a specific product jurisdiction."
+              "The posting assigns team leadership for overseas market access, registration strategy, and work with R&D."
             ]
           },
           "id": "regulatory-affairs-managers.sources.source-card.3",
           "source_refs": [
-            "onet",
-            "bls",
-            "ep",
-            "nbs"
+            "d014-cn-main"
           ],
           "type": "prose"
         },
@@ -32183,13 +32193,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The Chinese text explains the US occupational classification and does not establish mutual recognition of product permits between countries. D1 is entirely fictional and cannot replace real rules or filing approval."
+              "BLS publishes wages and projections for broader groups. Job postings illustrate duties, while industry rules define the applicable scope."
             ]
           },
           "id": "regulatory-affairs-managers.sources.source-card.4",
           "source_refs": [
             "editor",
-            "privacy"
+            "privacy",
+            "d014-cn-main",
+            "d014-us-example"
           ],
           "type": "prose"
         }
@@ -32228,13 +32240,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the regulatory affairs managers occupation page",
@@ -32455,15 +32467,15 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "D1, M1, and R1/R2 are entirely fictional.",
-                  "Not for real filings."
+                  "RA-M01 is a fictional paper exercise for this page.",
+                  "Use it to practice review and handoff."
                 ],
-                "evidence_type": "The D1 paper filing exercise",
+                "evidence_type": "FermatMind fictional paper exercise",
                 "id": "editor",
                 "limitation": "Not real products, regulations, or permits",
                 "market": "Fictional",
                 "name": "FermatMind editorial design",
-                "period": "2026-10-03 editorial verification; the fictional D1 exercise",
+                "period": "2026-11-09",
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
@@ -32519,15 +32531,15 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "D1, M1, and R1/R2 are entirely fictional.",
-                  "Not for real filings."
+                  "RA-M01 is a fictional paper exercise for this page.",
+                  "Use it to practice review and handoff."
                 ],
-                "evidence_type": "The D1 paper filing exercise",
+                "evidence_type": "FermatMind fictional paper exercise",
                 "id": "employer",
                 "limitation": "Not real products, regulations, or permits",
                 "market": "Fictional",
                 "name": "FermatMind editorial design",
-                "period": "2026-09-28",
+                "period": "2026-11-09",
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
@@ -32567,15 +32579,15 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "D1, M1, and R1/R2 are entirely fictional.",
-                  "Not for real filings."
+                  "RA-M01 is a fictional paper exercise for this page.",
+                  "Use it to practice review and handoff."
                 ],
-                "evidence_type": "The D1 paper filing exercise",
+                "evidence_type": "FermatMind fictional paper exercise",
                 "id": "r2-pay-2",
                 "limitation": "Not real products, regulations, or permits",
                 "market": "Fictional",
                 "name": "FermatMind editorial design",
-                "period": "2026-09-28",
+                "period": "2026-11-09",
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
@@ -32583,15 +32595,15 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "D1, M1, and R1/R2 are entirely fictional.",
-                  "Not for real filings."
+                  "RA-M01 is a fictional paper exercise for this page.",
+                  "Use it to practice review and handoff."
                 ],
-                "evidence_type": "The D1 paper filing exercise",
+                "evidence_type": "FermatMind fictional paper exercise",
                 "id": "r2-pay-3",
                 "limitation": "Not real products, regulations, or permits",
                 "market": "Fictional",
                 "name": "FermatMind editorial design",
-                "period": "2026-09-28",
+                "period": "2026-11-09",
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
@@ -32772,6 +32784,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The posting assigns team leadership for overseas market access, registration strategy, and work with R&D."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d014-cn-main",
+                "limitation": "For task and pathway comparison.",
+                "market": "Mainland China",
+                "name": "Shenzhen Medical Academy: clinical registration manager",
+                "period": "Date shown where available",
+                "publisher": "Shenzhen Medical Academy: clinical registration manager",
+                "scope": "recruitment_proxy",
+                "url": "https://smart.org.cn/career/administrative/327.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Item 13 on page 47 of the official PDF lists scheduling, risk control, and cross-functional coordination for international registration."
+                ],
+                "evidence_type": "primary_document",
+                "id": "d014-cn-context",
+                "limitation": "For task and pathway comparison.",
+                "market": "Mainland China",
+                "name": "Guangming District profile: international device registration manager",
+                "period": "Date shown where available",
+                "publisher": "Guangming District profile: international device registration manager",
+                "scope": "contextual",
+                "url": "https://www.szgm.gov.cn/attachment/1/1720/1720066/12370278.pdf#page=47"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The posting covers medical-device lifecycle strategy, cross-functional leadership, and team development."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d014-us-example",
+                "limitation": "For task and pathway comparison.",
+                "market": "United States",
+                "name": "Stryker: manager, regulatory affairs",
+                "period": "Date shown where available",
+                "publisher": "Stryker: manager, regulatory affairs",
+                "scope": "recruitment_proxy",
+                "url": "https://careers.stryker.com/manager-regulatory-affairs/job/5D22999D95C541A69AE45EF9E815B329"
               }
             ]
           },
@@ -33708,7 +33765,7 @@
               "entry": "link-19",
               "field": "url"
             },
-            "问题": "How should tool output be checked against D1?"
+            "问题": "How should I review a document list prepared by a tool?"
           }
         ],
         "responsibility_intro": {
@@ -36084,7 +36141,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person suits being a regulatory affairs manager?"
+        "title": "Would regulatory affairs management suit me?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -37466,7 +37523,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit regulatory affairs manager",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37588,6 +37645,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which work direction of this occupation are you more likely to suit?",
       "interface.fit.interest_code_heading": "How to understand interest codes",
+      "interface.quick_decision.suit_heading": "Who tends to enjoy regulatory affairs management?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "US salary reference",
@@ -38120,14 +38178,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "How do regulatory affairs managers develop filing strategy, verify regulatory evidence, and hand off audits and recalls? Plus the definitions behind US broad occupation wages and projections, the Chinese wage gap, and a fictional filing material exercise."
+      "text": "Explore regulatory strategy, review scheduling, and team coordination. Compare employer roles and try a filing review prioritization exercise."
     },
     "title": {
       "availability": "available",
       "text": "Regulatory affairs managers"
     }
   },
-  "source_content_sha256": "717b0b782e40e9dde48be0d5b94737e1fd99edcfd257bcd56781c5069937e1c9",
+  "source_content_sha256": "f8c5ec708976d4f3c1f545202b6067bf299284bfcfb8487a9a97e34cfa11875f",
   "subject": {
     "canonical_slug": "regulatory-affairs-managers",
     "name": "Regulatory affairs managers",

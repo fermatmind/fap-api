@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1233,7 +1230,7 @@
         "status": "mapped"
       },
       "item:industrial-ecologists.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:industrial-ecologists.path.interview-probation.1": {
         "status": "mapped"
@@ -1491,7 +1488,7 @@
         "status": "pending_mapping"
       },
       "item:industrial-ecologists.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:industrial-ecologists.sources.source-card.1": {
         "status": "mapped"
@@ -1518,7 +1515,7 @@
         "status": "mapped"
       },
       "item:industrial-ecologists.us-salary.career-snapshot-secondary-locale.14": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:industrial-ecologists.us-salary.career-snapshot-secondary-locale.15": {
         "status": "mapped"
@@ -1536,19 +1533,19 @@
         "status": "mapped"
       },
       "item:industrial-ecologists.us-salary.career-snapshot-secondary-locale.20": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:industrial-ecologists.us-salary.career-snapshot-secondary-locale.21": {
         "status": "mapped"
       },
       "item:industrial-ecologists.us-salary.career-snapshot-secondary-locale.22": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:industrial-ecologists.us-salary.career-snapshot-secondary-locale.23": {
         "status": "mapped"
       },
       "item:industrial-ecologists.us-salary.career-snapshot-secondary-locale.24": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:industrial-ecologists.us-salary.career-snapshot-secondary-locale.25": {
         "status": "mapped"
@@ -10828,7 +10825,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10880,7 +10877,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10932,7 +10929,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -24011,12 +24008,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对岗位胜任度的评价，也不构成任何环境、工程、安全、合规或投资意见。本页对应美国 O*NET/SOC 19-2041.03「Industrial Ecologists」（工业生态学家）这一精确职业：把自然生态系统的原理与过程应用于建立高效工业系统的模型；运用物理与社会科学知识，在商品与服务的生产和使用中最大化自然资源的有效利用；考察社会议题及其与技术系统和环境的关系。官方范围原文：Apply principles and processes of natural ecosystems to develop models for efficient industrial systems. Use knowledge from the physical and social sciences to maximize effective use of natural resources in the production and use of goods and services. Examine societal issues and their relationship with both technical systems and the environment. 本页美国工资与就业取自 O*NET 呈现的 BLS OEWS 2025 年与 BLS 就业预测 2024—2034，但 O*NET 在该页把工资与就业一并标注为 Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径，不是 19-2041.03 单一精确值；中国大陆精确职业工资未取得，按可见缺口登记；两侧法域与环保制度不可互相套用。"
+              "用纸面记录探索自己是否喜欢反复核对和交接。"
             ]
           },
           "id": "industrial-ecologists.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -24025,12 +24023,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "判断是否适合工业生态学家，先用公开或模拟材料做一次可核验的分析演练：设定一个虚构的工业系统（例如某制造企业的物质与能源流），写出从明确系统边界与目标、采集物质与能源流数据、建立物质流或物质流分析（MFA/SFA）模型、识别环境影响与改进机会、评估闭环与替代方案的可行性与副作用、到撰写技术报告并向企业与政府沟通的分步流程，标注每一步的核对点与可能出现的问题（数据缺失或口径不一致、模型假设不成立、结论超出数据支持、改进方案带来新的负面后果、建议被误读为合规或工程结论）。完成后核对：是否把数据质量、模型假设与不确定性、以及跨学科协作中的口径一致性作为不可省略项；是否把超出个人权限的环境结论、工程判断与合规决定写成请示或转交；是否把数据与分析过程留成可复核记录。用真实可交付物检验，而不是只凭兴趣问卷作答。"
+              "到「入行与I 表：工业清单口径复核」做原题和变式，再打开常见问题参考解。"
             ]
           },
           "id": "industrial-ecologists.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24039,12 +24037,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜美国 O*NET 19-2041.03 的任务与工作活动显示：该职业以识别产品与系统的环境影响、开发减少影响的策略、进行可持续性评估（MFA/SFA）、把线性或开环系统重新设计为闭环系统、审查研究文献、并编写技术报告与沟通结果为主；工作以数据分析、建模与跨学科沟通为主，兼有室内办公与部分现场工作。兴趣代码为 IRC（研究型—现实型—常规型），技能以阅读理解、批判性思维、科学与数学以及系统分析为主。若你愿意把自然科学与社会科学结合、围绕物质与能量流做严谨分析与建模，并承担结论责任，这些日常要求与你的工作方式更接近。"
+              "做《I 表：工业清单口径复核》的原题和单项变式，核对功能单位、系统边界和源记录，保留原值并标明复核人。"
             ]
           },
           "id": "industrial-ecologists.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24053,7 +24051,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜从官方范围与任务看，工作涉及跨学科结论、数据与模型、以及改进方案：一次数据口径不一致或模型假设不成立、一次结论超出数据支持、一次改进方案带来未预料的负面后果、一次建议被误读为合规或工程结论，都可能造成决策误导或资源浪费。因此本页把数据与模型质量、跨学科口径一致性、结论与授权边界、以及改进方案的副作用评估单列。美国侧该职业本身未标注 Bright Outlook，O*NET 摘要与就业趋势显示 2024—2034 年预计增长为平均（4%）、年均约 8,500 个岗位空缺、2024 年就业约 90,300 人（均为父职业组合并口径）。若你难以承受长期数据分析、跨学科沟通或模型不确定性，应把这些作为需要认真权衡的现实成本。"
+              "工作中常需反复核对和交接。先用纸面题看自己是否愿意保留功能单位、系统边界和源记录的原始记录。"
             ]
           },
           "id": "industrial-ecologists.quick-decision.fermat-decision-card.6",
@@ -24067,7 +24065,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项分析中同时完成三件事：把分析与建模做实（明确系统边界、采集与整理物质与能源流数据、建立并验证模型、产出可复核的报告）；把规范与口径管住（数据质量控制、模型假设与不确定性、跨学科口径一致，按机构与法规要求执行）；并承担可界定的专业责任（对本人分析与结论的质量负责，对超出权限的环境、工程与合规结论请示或转交）。建议用一次可核验的体验（完成一份分步分析流程与物质流分析记录，或对一组模拟数据做质量核查与建模演练）来检验，而不是仅依据兴趣问卷的结论。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.quick-decision.fermat-decision-card.7",
@@ -24089,7 +24087,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工业生态学家的日常工作可以按三条线来拆：（1）影响与分析——识别产品与系统的环境影响，采集与整理物质与能源流数据，开展可持续性评估（MFA/SFA）；（2）策略与设计——开发减少环境影响的策略，把线性或开环系统重设计为闭环系统，并评估替代方案的可行性与副作用；（3）报告与沟通——编写环境影响报告等技术报告，并向产业界、政府与公众沟通结果。三条线共用同一套数据与口径要求，但产出对象不同：影响与分析面向证据，策略与设计面向改进，报告与沟通面向决策与公众。"
+              "工业生态学工作者研究工业活动如何使用材料和能源、产生废物或排放，以及不同过程和场所之间的联系。常见交付包括物质与能源清单、边界与假设说明、结果对照和改进建议。 核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.profile.career-quick-answers-block.1",
@@ -24103,12 +24101,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 19-2041.03「Industrial Ecologists」：把自然生态系统的原理与过程应用于建立高效工业系统的模型；运用物理与社会科学知识，在商品与服务的生产和使用中最大化自然资源的有效利用；考察社会议题及其与技术系统和环境的关系。核心任务是识别环境影响、开发减少影响的策略、开展可持续性评估（物料流MFA/特定物质流SFA）、把开环系统重设计为闭环系统、审查研究文献并编写技术报告。Job Zone 第五级（需要大量准备），SVP 区间 8.0 及以上。"
+              "美国全国工资采用 O*NET 展示的 2025 年 5 月 BLS OEWS（美国上位职业 19-2041）。"
             ]
           },
           "id": "industrial-ecologists.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -24164,12 +24162,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025父职业中位82,220美元/年、39.53美元/时；非工业生态细分独立工资。BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。"
+              "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。 任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
             ]
           },
           "id": "industrial-ecologists.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -24178,12 +24176,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "明确系统边界与目标 → 采集物质与能源流数据 → 建立与验证模型 → 识别影响与改进机会 → 评估闭环与替代方案 → 撰写报告并沟通"
+              "接收记录 → 核来源编号 → 核当班记录 → 保留差异 → 标记复核人 → 交接"
             ]
           },
           "id": "industrial-ecologists.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -24220,12 +24220,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。"
+              "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。 任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
             ]
           },
           "id": "industrial-ecologists.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -24556,12 +24556,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对学历与训练要求（Job Zone 第五级，多数要求研究生学历，通常需要多年相关经验）。"
+              "可练环境科学、系统边界、清单质量和结果沟通。BLS 19-2041 上位组列本科为典型入门学历。雇主要求、核证资格与披露权限按项目核对。"
             ]
           },
           "id": "industrial-ecologists.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -25372,12 +25373,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得工业生态学家生成式AI采用率、净岗位效果或替代时间表。编辑分析：文献检索、流量数据整理、模型代码与报告草拟可作试用候选；系统边界、方法、模型验证和环境影响解释须核实。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "工具可辅助记录比对和汇总。原值冲突、例外处理和最终交接由授权人员复核。BLS 就业预测没有测量生成式 AI 的采用率。"
             ]
           },
           "id": "industrial-ecologists.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -25428,12 +25431,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。"
+              "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。 任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
             ]
           },
           "id": "industrial-ecologists.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -25904,12 +25907,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。"
+              "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。 任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
             ]
           },
           "id": "industrial-ecologists.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26002,12 +26005,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。 本页未取得生成式AI净岗位因果研究。"
+              "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。 任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
             ]
           },
           "id": "industrial-ecologists.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26100,12 +26103,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。"
+              "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。 任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
             ]
           },
           "id": "industrial-ecologists.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26850,12 +26853,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与美国 O*NET/SOC 19-2041.03（Industrial Ecologists 工业生态学家）精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "52,520 美元／年 · 25.25 美元／时"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -26864,12 +26867,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "市场口径｜本页只登记中国大陆市场的检索范围与缺口；工业生态学家对应的美国职业为 SOC 19-2041.03，两者不做数值换算。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/19-2041.03；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26878,12 +26882,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 年（国家统计局城镇单位就业人员年平均工资统计）"
+              "64,490 美元／年 · 31.01 美元／时"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -26892,12 +26896,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计时期｜公开统计未按本职业单列；国家统计局按行业门类公布，因此本页不呈现职业级数值。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/19-2041.03；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26906,12 +26911,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "元/年（城镇单位就业人员年平均工资口径）"
+              "82,220 美元／年 · 39.53 美元／时"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -26920,12 +26925,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "计量单位｜国家统计局按年公布平均工资，本页不据此换算月薪或个人到手收入。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/19-2041.03；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26934,12 +26940,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可按本职业读取的覆盖人群数值；行业门类口径含水利、环境等相关行业内各类职业，不能代表工业生态学家这一职业。"
+              "107,970 美元／年 · 51.91 美元／时"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -26948,12 +26954,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "覆盖人群｜行业门类口径，含相关行业内各类职业，不能代表工业生态学家这一职业。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/19-2041.03；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26962,12 +26969,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与美国 O*NET/SOC 19-2041.03（Industrial Ecologists 工业生态学家）精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "140,010 美元／年 · 67.31 美元／时"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -26976,12 +26983,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业范围｜国家统计不按本职业单列，本页保留检索范围与缺口。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/19-2041.03；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26990,12 +26998,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与美国 O*NET/SOC 19-2041.03（Industrial Ecologists 工业生态学家）精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "2025 年约 93,400 个岗位，2035 年预计约 99,200 个。"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27004,12 +27012,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "抽样与缺失限制｜不以个别机构、个别招聘报价或个别地区样本代填职业级数值。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27018,12 +27027,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局：2025 年城镇单位就业人员平均工资情况"
+              "+6.1%"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27032,12 +27041,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "来源｜原始链接与数据期见本页来源区；使用前须核对口径与限制。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27046,12 +27056,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "建议只把行业门类平均工资用于理解量级，不用其推断个人起薪或到手收入。"
+              "年均约 7,300 个，含替补。"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27060,12 +27070,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "使用建议｜职业级结论需等待官方单列数据；本页登记缺口而非代填。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27368,12 +27379,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜工业生态学家（美国 SOC 19-2041.03 Industrial Ecologists；招聘中常称生态学家、环境顾问、研究科学家等；与环境科学家与专家、环境工程师、可持续发展专员、首席可持续发展官、棕地再开发专家与场地经理、水资源专员、气候变化政策分析师等分属不同职业）"
+              "中国大陆工资参考"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27382,12 +27393,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜中国大陆从事工业生态与可持续性分析的岗位与工业生态学家在任务上相近，其资格与环境保护制度受相关法规与机构制度约束。公开职业统计未按本职业单列全国职业工资分布：国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业。按证据政策，本页只登记统计口径与可见缺口，不以行业均值、招聘报价或美国工资代填本职业精确数值。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27396,12 +27407,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "宽参考：若目标单位归科学研究和技术服务业，NBS2025表2/表5非私营/私营平均年工资182,064/83,560元；均为税前全国行业全职业年均、分列，单位行业须核，不能从职业名判定。不是工业生态学家中位、新人或到手收入，精确职业工资仍未取得。"
+              "国家统计局 2025 年城镇科学研究和技术服务业年平均工资，非私营单位 182,064 元、私营单位 83,560 元，覆盖行业内多工种。"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27438,12 +27449,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆城镇非私营单位（相关行业门类，行业代理）"
+              "科学研究和技术服务业 · 城镇非私营单位"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27452,12 +27463,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可按本职业读取的全国职业工资；国家统计局按行业门类公布平均工资、不区分职业，本页不以行业口径代填。"
+              "182,064 元／年"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27466,12 +27477,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆城镇私营单位（相关行业门类，行业代理）"
+              "科学研究和技术服务业 · 城镇私营单位"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27480,12 +27491,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可按本职业读取的全国职业工资；私营单位口径同样按行业门类公布，不能当作工业生态学家工资。"
+              "83,560 元／年"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27494,12 +27505,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆本职业精确全国职业工资"
+              "全国职业工资资料"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27508,12 +27519,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与美国 O*NET/SOC 19-2041.03（Industrial Ecologists 工业生态学家）精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27522,12 +27533,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜美国 SOC 19-2041.03 属生命、物理与社会科学类职业下的「工业生态学家」，是 19-2041（环境科学家与专家，含健康）的细化职业之一，与环境工程师（17-2081.00）、可持续发展专员（13-1199.05）、首席可持续发展官（11-1011.03）、棕地再开发专家与场地经理（11-9199.11）、气候变化政策分析师（19-2041.01）等分属不同职业；国际职业分类（如 ISCO-08）只能说明工业生态类岗位的宽泛位置，不能替代美国 SOC 或中国大陆的职业分类与统计口径。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27550,7 +27561,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 平均（4%，2024—2034，BLS 就业预测，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）"
+              "BLS 表 1.2（美国上位职业 19-2041）：2025 年约 93,400 个岗位，2035 年预计约 99,200 个，变化 +6.1%，年均约 7,300 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "industrial-ecologists.china-salary.career-snapshot-primary-locale.58",
@@ -27586,12 +27597,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS，2025 年）｜https://www.bls.gov/oes/；BLS Occupational Outlook Handbook：环境科学家与专家｜https://www.bls.gov/ooh/life-physical-and-social-science/environmental-scientists-and-specialists.htm；O*NET 19-2041.03 国家工资｜https://www.onetonline.org/link/localwages/19-2041.03；工资及预测对应19-2041父职业组，不能称工业生态学家专属统计。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/19-2041.03；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS 职业手册｜https://www.epa.gov/sites/default/files/widgets/newr-calculator/resources.html"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27600,12 +27613,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位年薪 52,520 美元（2025 年，BLS OEWS，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）"
+              "52,520 美元／年 · 25.25 美元／时"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27614,12 +27627,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国该父职业组全国第 10 分位年薪（2025 年，经 O*NET 呈现）；边界｜处于分布下段，不等于入职起薪，也不代表任一雇主或地区；该值为父职业组口径，不是 19-2041.03 单一精确值。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/19-2041.03；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27628,12 +27642,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 25 分位年薪 64,490 美元（2025 年，BLS OEWS，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）"
+              "64,490 美元／年 · 31.01 美元／时"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27642,12 +27656,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国该父职业组第 25 分位年薪（2025 年，经 O*NET 呈现）；边界｜处于下四分位，行业与地区会影响实际收入；该值为父职业组口径。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/19-2041.03；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27656,12 +27671,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位年薪 82,220 美元（2025 年，BLS OEWS，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）"
+              "82,220 美元／年 · 39.53 美元／时"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27670,12 +27685,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS为税前常规工资率，含生产奖金等激励支付，不含加班溢价、班次差额、非生产奖金和雇主福利成本。 82,220美元中位、39.53时薪均为父职业SOC19-2041，非本细分独立工资或起薪。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/19-2041.03；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27684,12 +27700,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 75 分位年薪 107,970 美元（2025 年，BLS OEWS，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）"
+              "107,970 美元／年 · 51.91 美元／时"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27698,12 +27714,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国该父职业组第 75 分位年薪（2025 年，经 O*NET 呈现）；边界｜处于上四分位，通常与行业、地区与专项能力相关；该值为父职业组口径。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/19-2041.03；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27712,12 +27729,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位年薪 140,010 美元（2025 年，BLS OEWS，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）"
+              "140,010 美元／年 · 67.31 美元／时"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27726,12 +27743,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国该父职业组第 90 分位年薪（2025 年，经 O*NET 呈现）；边界｜处于分布上段，受行业、地区与职责范围影响较大，不代表多数从业者；该值为父职业组口径。"
+              "美国 OEWS 全国工资｜https://www.onetonline.org/link/localwages/19-2041.03；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27740,12 +27758,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 90,300 人（2024 年，BLS 就业预测基期，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）"
+              "2025 年约 93,400 个岗位，2035 年预计约 99,200 个。"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27754,12 +27772,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前期：BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。 上方共享历史值有未选消费者，本轮保留范围冲突。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27768,12 +27787,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 平均（4%，2024—2034，BLS 就业预测，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）"
+              "+6.1%"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27782,12 +27801,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前期：BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。 上方共享历史值有未选消费者，本轮保留范围冲突。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27796,12 +27816,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预计年均岗位空缺 约 8,500 个（2024—2034，BLS 就业预测，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径，含增长与替补）"
+              "年均约 7,300 个，含替补。"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27810,12 +27830,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前期：BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。 上方共享历史值有未选消费者，本轮保留范围冲突。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS 调查口径｜https://www.onetonline.org/link/localwages/19-2041.03"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27838,12 +27859,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025父职业SOC19-2041全国工资10/25/50/75/90分位52,520/64,490/82,220/107,970/140,010美元，时薪中位39.53美元；不是19-2041.03细分独立工资。BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。"
+              "2025 年 5 月美国上位组 19-2041（环境科学家与专业人员（含健康方向））全国工资中位数为 82,220 美元／年、39.53 美元／时。 O*NET 19-2041.03 提供本职业任务。BLS 和 OEWS 只发布到上位组 19-2041，本页所核资料未取得细分职业的单列全国工资或就业预测。"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27936,12 +27958,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 平均（4%，2024—2034，BLS 就业预测，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）"
+              "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。 O*NET 19-2041.03 提供本职业任务。BLS 和 OEWS 只发布到上位组 19-2041，本页所核资料未取得细分职业的单列全国工资或就业预测。"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -28174,12 +28197,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位年薪 82,220 美元（2025 年，BLS OEWS，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）"
+              "2025 年 5 月美国上位组 19-2041（环境科学家与专业人员（含健康方向））全国工资中位数为 82,220 美元／年、39.53 美元／时。"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -28188,12 +28212,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第10分位是工资分布阈值，非最低工资、起薪或低资历人群认定。"
+              "2025 年 5 月美国上位组 19-2041 全国工资。"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -28202,12 +28226,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位为分布中点，非典型资历、个人起薪或涨薪路径。"
+              "2025 年 5 月美国上位组 19-2041 全国工资。"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -28216,12 +28240,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第90分位为工资分布阈值，不识别人员学历、资历、资格或任务构成。"
+              "2025 年 5 月美国上位组 19-2041 全国工资。"
             ]
           },
           "id": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         }
@@ -28248,31 +28272,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
-                "entity": "智力与推理测试",
+                "entity": "矩阵推理",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "情绪智力测试",
+                "entity": "情绪沟通习惯自评",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "可持续发展专员",
@@ -28485,7 +28509,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "如何理解这一兴趣代码：IRC 表示研究型（Investigative，倾向于研究与分析自然与物理现象）、现实型（Realistic，倾向于实地观察与使用工具）与常规型（Conventional，倾向于按固定程序与规程处理数据）。它提示本职业偏向研究探究、实地观察与数据处理的组合，而不是给人贴标签。"
+              "O*NET 19-2041.03 的兴趣代码为 IRC（研究型、现实型、常规型），可用来理解职业任务偏好。"
             ]
           },
           "id": "industrial-ecologists.fit.riasec-fit-block.9",
@@ -28541,7 +28565,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "RIASEC 兴趣代码（O*NET）：I 研究型 + R 现实型 + C 常规型；具体兴趣领域涉及物理科学、自然与户外以及数学与统计。"
+              "IRC"
             ]
           },
           "id": "industrial-ecologists.fit.riasec-fit-block.11",
@@ -28570,7 +28594,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣代码 IRC"
+              "研究型、现实型、常规型"
             ]
           },
           "id": "industrial-ecologists.fit.riasec-fit-block.12",
@@ -28655,7 +28679,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "建议用物料平衡、单位换算、统计与模型假设任务核数学基础；本页没有IQ或数学成绩录用阈值，邮件等情境比例不能回答数学门槛。"
+              "工作中的数字核对看实际岗位任务。可先练记录与单位核对。 通过矩阵图形观察自己的推理过程。"
             ]
           },
           "id": "industrial-ecologists.fit.personality-fit-block.18",
@@ -28698,7 +28722,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工作情境数据为受访者报告的比例，不构成对个人工作的预测。"
+              "测评用于个人探索。岗位培训与授权按实际要求核实。"
             ]
           },
           "id": "industrial-ecologists.fit.personality-fit-block.21",
@@ -28712,7 +28736,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需与工程、经济、政策团队核对系统边界和假设并解释结果；本页未取得情绪智力分数统一录用阈值或绩效验证。"
+              "实际沟通要能听清差异并准确交接。 通过自评回顾日常情绪沟通习惯。"
             ]
           },
           "id": "industrial-ecologists.fit.personality-fit-block.22",
@@ -28755,7 +28779,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该自评为编辑设计，不是录用标准，也不构成能力评分。"
+              "测评用于个人探索。岗位培训与授权按实际要求核实。"
             ]
           },
           "id": "industrial-ecologists.fit.personality-fit-block.25",
@@ -29358,31 +29382,31 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "O*NET 19-2041.03 职业档案与任务列表",
+                "entity": "O*NET OnLine：工业生态学家职业档案与官方定义（19-2041.03）",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/19-2041.03"
+                "url": "https://www.onetonline.org/link/details/19-2041.03"
               },
               {
-                "entity": "BLS Occupational Outlook Handbook：环境科学家与专家",
+                "entity": "Occupational Outlook Handbook：环境科学家与专家（Environmental Scientists and Specialists）",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/environmental-scientists-and-specialists.htm"
               },
               {
-                "entity": "《中华人民共和国环境保护法》（现行文本）",
+                "entity": "生态环境部产品碳足迹核算通则发布说明",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://flk.npc.gov.cn/"
+                "url": "https://www.mee.gov.cn/xxgk/hjyw/202409/t20240910_1085619.shtml"
               },
               {
-                "entity": "《中华人民共和国安全生产法》（现行文本）",
+                "entity": "生态环境部产品碳足迹核算通则发布说明",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://flk.npc.gov.cn/"
+                "url": "https://www.mee.gov.cn/xxgk/hjyw/202409/t20240910_1085619.shtml"
               },
               {
-                "entity": "FermatMind 职业内容字段与证据口径规则",
+                "entity": "本站任务与人工复核说明",
                 "id": "link-6",
                 "relation": "career.authority",
                 "url": "https://fermatmind.com"
@@ -29400,12 +29424,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界｜本页列出的是本职业在分析结论、数据与模型、以及跨学科协作上的常见风险，用于提醒控制重点；不构成分析方法、安全规范或环保意见。具体处置须按机构制度与适用法规执行。"
+              "按项目、地区和任务核授权。 生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。"
             ]
           },
           "id": "industrial-ecologists.risk.career-risk-cards.8",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29414,12 +29439,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答｜工业生态学家的主要风险集中在四类：分析结论超出数据或方法支持、数据与模型质量缺陷、报告或建议被误用、以及跨学科协作中的口径不一致。控制重点是把数据、假设与复核留成可追溯记录，并在不确定性与超出权限时作出恰当表述与升级。"
+              "高频核对、差额与权限冲突需保留原件并交接。"
             ]
           },
           "id": "industrial-ecologists.risk.career-risk-cards.9",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29470,12 +29497,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在数据与假设范围内表述结论并标注不确定性"
+              "保留原始记录和差异，交授权复核人。"
             ]
           },
           "id": "industrial-ecologists.risk.career-risk-cards.13",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -29526,12 +29554,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "执行数据质量控制、模型验证与结果复核"
+              "核对票据、记录版本和当班责任人。"
             ]
           },
           "id": "industrial-ecologists.risk.career-risk-cards.17",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -29582,11 +29611,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "明确分析报告边界，法定合规评价、许可和工程签署按具体授权及法域核有权主体。"
+              "按岗位权限使用系统，记录例外并交负责人。"
             ]
           },
           "id": "industrial-ecologists.risk.career-risk-cards.21",
           "source_refs": [
+            "us-work-standard",
             "onet"
           ],
           "type": "prose"
@@ -29638,12 +29668,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "统一系统边界、数据口径与假设并记录"
+              "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。"
             ]
           },
           "id": "industrial-ecologists.risk.career-risk-cards.25",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29694,12 +29725,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按机构信息要求处理，使用前确认授权与最小必要范围"
+              "工作中遇争议或威胁时，按现场程序报告主管。"
             ]
           },
           "id": "industrial-ecologists.risk.career-risk-cards.29",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -29750,12 +29782,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "评估闭环与替代方案的副作用并设置复核节点"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.risk.career-risk-cards.33",
           "source_refs": [
-            "onet"
+            "onet",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -29778,7 +29811,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "适用范围：美国 19-2041.03 的任务与工作情境。"
+              "任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
             ]
           },
           "id": "industrial-ecologists.risk.career-risk-cards.35",
@@ -29806,12 +29839,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "适用范围：资格与环境保护制度，须以现行法规与机构制度为准。"
+              "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。"
             ]
           },
           "id": "industrial-ecologists.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29820,12 +29853,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "安全生产法律检索入口，不单独支持企业数据与信息管理措施。"
+              "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。"
             ]
           },
           "id": "industrial-ecologists.risk.career-risk-cards.38",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29922,32 +29955,32 @@
               {
                 "id": "education",
                 "values": [
-                  "O*NET教育受访者65%硕士、22%学士、9%博士，Job Zone第五级为职业组准备描述，非统一年限。",
-                  "中国目标机构教育、方法、模型与现场要求核公告；未取得多数岗位样本。",
+                  "美国典型入行",
+                  "可练环境科学、系统边界、清单质量和结果沟通。BLS 19-2041 上位组列本科为典型入门学历。雇主要求、核证资格与披露权限按项目核对。",
                   "分别核教育、数据与模型能力及授权；没有比较其胜任预测效力。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "常见要求：数据分析与建模能力（MFA/SFA、生命周期评价）、跨学科沟通能力、环境法规与评价知识、报告写作能力。",
-                  "美国相关岗位按雇主与项目要求执行；中国大陆的资格与安全要求以所在地规定与机构制度为准。",
+                  "美国方法或规则",
+                  "EPA 方法示例把材料和能源投入与功能单位关联。比较方案时核对共同功能单位、边界和数据来源，最终报告及外部披露按项目授权。 按项目、地区和任务核授权。",
                   "企业数据、客户与供应商信息、未公开报告须按机构要求在最小必要范围内处理与留存。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 兴趣代码为 IRC（研究型—现实型—常规型），偏向研究探究、实地观察与数据处理。",
-                  "编辑观察建议：分析需严谨、细致与可复核；当前O*NET细分页无Work Styles项，不冒充官方风格数据。",
+                  "大陆法律边界",
+                  "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。",
                   "核心技能为阅读理解、积极倾听、批判性思维与科学；可迁移技能含复杂问题解决、判断与决策、系统分析与系统评估。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。",
-                  "岗位多通过政府机构、科研院所与专业及技术服务等渠道进入；项目制与跨学科协作常见。",
+                  "实际任务与权限",
+                  "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。 生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。",
                   "中国大陆岗位受地区、机构类型与项目经费影响，考核口径以机构公告为准。"
                 ]
               }
@@ -29955,7 +29988,12 @@
           },
           "id": "industrial-ecologists.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "us-work-standard",
+            "cn-work-example",
+            "onet",
+            "cn-work-example",
+            "cn-work-example"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29968,42 +30006,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "一份完全虚构的工业系统说明（含工艺环节与物质/能源投入产出样例）。",
-                  "一套模拟的物质与能源流数据（含正常、缺失与口径不一致样例）。",
-                  "一份空白的物质流分析（MFA/SFA）记录模板。",
-                  "一份空白的改进与替代方案评估清单。"
+                  "I 表：工业清单口径复核",
+                  "虚构纸面练习。比较仅纳入功能单位为“每 100 件”且边界为“厂内”的记录。功能单位不符先交数据负责人；单位一致但边界不符交方法复核人。I1 为每 100 件、厂内；I2 为每 10 件、厂内；I3 为每 100 件、含运输。变式只将 I3 的边界字段改为厂内。分别写原值、纳入状态和复核人。",
+                  "只使用虚构题面。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "在 120 分钟内完成：一次分析任务的分步流程（明确系统边界与目标→采集物质与能源流数据→建立与验证模型→识别影响与改进机会→评估闭环与替代方案→撰写报告并沟通），标注每步的核对点与依据。",
-                  "对给出的三类问题（数据缺失或口径不一致、模型假设不成立、结论超出数据支持）写出识别特征与处置方式。",
-                  "写出哪些事项超出个人权限（环境结论、工程判断、合规决定与报告发布）。"
+                  "要交付的记录",
+                  "分别写原题和变式。每行记录原值、状态和复核人。",
+                  "保留原值与缺失状态，并记复核人。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先列从边界界定到报告沟通的完整步骤与不可省略项，再逐项记录依据。",
-                  "对每处问题写清识别依据与处置后果，对被压缩或省略的步骤说明风险。",
-                  "最后写一段反思：若改进方案带来新的负面后果，你会如何停止并重新评估。"
+                  "完成后复核",
+                  "完成两种答案后，到常见问题打开折叠参考解。",
+                  "下方链接可跳到常见问题。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "不涉及环境结论、工程判断与合规决定的最终决定。",
-                  "不涉及真实企业、真实工艺或可识别商业数据。"
+                  "练习边界",
+                  "只用虚构纸面记录和编号。记录齐备仅指题面的文件状态。"
                 ]
               }
             ]
           },
           "id": "industrial-ecologists.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "paper-answer-key"
           ],
-          "title": "入行练习：一次完整的工业生态分析任务（虚构材料）",
+          "title": "纸面试做",
           "type": "cards"
         },
         {
@@ -30014,40 +30052,40 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "用边界—数据—结论三列列出你在模拟分析任务中完成的每一步。",
-                  "标注每一步是独立完成还是他人指导下完成。",
-                  "标注哪些步骤涉及口径一致性、数据质量与结论边界，必须按规范处理而非自行决定。"
+                  "并列原件",
+                  "保留编号和原值。",
+                  "只用虚构纸面记录和编号。记录齐备仅指题面的文件状态。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有工业生态或环境分析经验的导师或研究者复核你的分析流程与模型，并书面指出问题。",
-                  "记录复核意见、时间与依据，便于后续复盘。",
-                  "不要只展示结论，要展示从边界界定到数据分析和模型验证到报告建议的完整链条。"
+                  "标记差异",
+                  "区分不符与缺失。",
+                  "只用虚构纸面记录和编号。记录齐备仅指题面的文件状态。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "写一份可交接的分析摘要（边界与假设、数据与方法、结果与不确定性、结论与待办）。",
-                  "摘要中不得出现真实企业或工艺的可识别信息，并注明依据与假设。"
+                  "指定复核人",
+                  "按题面指定规则交接。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "若使用了检索、统计或代码辅助工具，标注哪些部分由工具生成、哪些由本人核对。",
-                  "说明工具输出在使用前经过了哪次数据或方法核对；数值若为示例须标明。"
+                  "区分原题和变式",
+                  "只改变式指定的一项。"
                 ]
               }
             ]
           },
           "id": "industrial-ecologists.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "入门时可以准备哪些可复核的作品材料？",
+          "title": "练习记录",
           "type": "cards"
         },
         {
@@ -30108,59 +30146,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（明确边界—采集数据—建模与验证—识别影响—评估方案—报告与沟通）。",
-                  "记录你观察到的数据口径、模型假设、结论边界与信息要求。"
+                  "读题",
+                  "列题面字段。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "核对工作条件：室内数据分析为主、跨学科协作、报告写作、项目周期与加班。",
-                  "写下你最不适应的一个现实成本并判断能否接受。"
+                  "核第一项",
+                  "保留原值。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "完成一份分步分析流程与物质流分析记录模板。",
-                  "按规范列出关键要求（系统边界、数据来源与口径、模型假设与验证、结论与不确定性表述）。"
+                  "核第二项",
+                  "核差异或缺项。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "对三类常见问题（数据缺失或口径不一致、模型假设不成立、结论超出数据支持）写出识别与处置方案。",
-                  "对两个典型风险（企业数据外发、建议被误用为合规结论）写出处置与升级方案。"
+                  "保留差异",
+                  "写下原值与复核人。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在指导下完成一次模拟物质流分析与建模，并做一次数据质量控制。",
-                  "对照分析规范找出至少两处偏差并记录整改方式。"
+                  "做变式",
+                  "只改题面给定的一项。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请导师或研究者挑战你的方法与结论依据。",
-                  "记录对方的异议与你的回应，不回避不确定性与反例。"
+                  "记结果",
+                  "分别保存原题和变式。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "复盘这一周：哪些环节让你投入，哪些环节让你消耗。",
-                  "据此判断是否继续投入该方向，并写下一步要验证的具体问题。"
+                  "对答案",
+                  "打开常见问题折叠解。"
                 ]
               }
             ]
           },
           "id": "industrial-ecologists.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天体验：用虚构材料完成一次工业生态分析闭环",
+          "title": "纸面核对顺序",
           "type": "timeline"
         },
         {
@@ -30168,20 +30206,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能界定工业系统边界并完成物质与能量流分析与建模。",
-              "继续：愿意通过数据质量控制与模型验证保证结论可用，并如实表述不确定性。",
-              "继续：愿意识别超出权限的结论并请示或转交，遵守环境与安全要求。",
-              "停止：难以承受长期数据分析、建模或报告写作，且短期无法改善。",
-              "停止：对分析规范、数据口径与结论边界缺乏警觉，反复出现方法问题。",
-              "换方向：偏好广义环境监测可考虑环境科学家与专家方向；偏好工程设计可考虑环境工程师方向。",
-              "换方向：偏好项目执行可考虑可持续发展专员方向；偏好规划与政策可考虑水资源专员或气候变化政策分析师方向。"
+              "核对原值。",
+              "区分差异和缺项。",
+              "核对复核对象。",
+              "检查变式是否只改一项。",
+              "按题设判断记录状态。",
+              "记录仍未解决的差异。",
+              "想一个可向研究负责人确认的分工问题。"
             ]
           },
           "id": "industrial-ecologists.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "完成后的复核",
           "type": "list"
         },
         {
@@ -30208,64 +30246,66 @@
             ],
             "rows": [
               [
-                "学士、硕士或博士相关教育（核目标岗位）",
-                "研究与分析岗位",
-                "核目标机构教育要求，学士路径不能排除",
-                "中国须核公告，美国受访教育比例另列",
-                "完成相关专业学习",
-                "按学制",
-                "学历不保证获得岗位授权或报告发布权限"
+                "美国岗位准备",
+                "相关岗位",
+                "核实际职责",
+                "查官方资料",
+                "问带教与职责",
+                "按实际岗位",
+                "授权分别核对"
               ],
               [
-                "数据分析与物质流分析训练",
-                "研究岗位",
-                "提供物料流（MFA）与特定物质流（SFA）分析基础",
-                "较普遍",
-                "参加课程或在项目中练习",
-                "证据不足：未核具体课程时长与费用",
-                "训练不替代方法选择与结论责任"
+                "美国适用规则",
+                "受规则约束的任务",
+                "核适用项目和任务",
+                "见美国来源",
+                "向机构核相应资格",
+                "按适用规则",
+                "范围依实际项目"
               ],
               [
-                "建模与统计方法训练",
-                "承担建模任务的岗位",
-                "提升建模、验证与不确定性分析能力",
-                "视岗位而定",
-                "参加课程或在实际项目中练习",
-                "证据不足：未核具体课程时长与费用",
-                "工具使用不替代方法选择与解释责任"
+                "大陆适用范围",
+                "适用岗位",
+                "核机构、职责与权限",
+                "见大陆来源",
+                "向机构核对分工",
+                "按实际岗位",
+                "超权限交负责人"
               ],
               [
-                "环境评价或安全相关训练（视岗位要求）",
-                "涉及环境评价或现场作业的岗位",
-                "明确环境评价与现场作业的制度边界",
-                "视岗位类别而定",
-                "按机构或主管机关要求参加培训",
-                "证据不足：未核具体课程时长与费用",
-                "培训不自动取得法定评价、工程签署或报告发布授权，按具体任务核"
+                "大陆适用范围",
+                "适用岗位",
+                "核机构、职责与权限",
+                "见大陆来源",
+                "向机构核对分工",
+                "按实际岗位",
+                "超权限交负责人"
               ],
               [
-                "跨学科与政策知识",
-                "分析与咨询岗位",
-                "支撑与工程、经济与政策团队协作",
-                "较普遍",
-                "课程训练或跨学科项目积累",
-                "证据不足：未核具体课程时长与费用",
-                "知识不替代专业结论责任"
+                "大陆适用范围",
+                "适用岗位",
+                "核机构、职责与权限",
+                "见大陆来源",
+                "向机构核对分工",
+                "按实际岗位",
+                "超权限交负责人"
               ],
               [
-                "报告写作与传播训练",
-                "研究与报告岗位",
-                "提升技术报告撰写与沟通能力",
-                "较普遍",
-                "通过项目写作与同行审阅练习",
-                "证据不足：未核具体课程时长与费用",
-                "写作能力不替代数据与结论的质量"
+                "大陆适用范围",
+                "适用岗位",
+                "核机构、职责与权限",
+                "见大陆来源",
+                "向机构核对分工",
+                "按实际岗位",
+                "超权限交负责人"
               ]
             ]
           },
           "id": "industrial-ecologists.path.credential-decision.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -30275,15 +30315,16 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜教育、训练、具体项目及现场活动要求、岗位授权与发布授权分别核；工业生态分析不自动等同法定建设项目环评。",
-              "资格边界（二）｜在中国大陆，工业生态与环境分析岗位的准入、安全与环境保护要求受相关法规与机构制度约束；相关要求属法域敏感事项，须以现行法规与主管机关要求为准。",
-              "资格边界（三）｜美国侧 O*NET 将本职业（19-2041.03）列入 Job Zone 第五级（需要大量准备），教育调查显示 65% 要求硕士学位、22% 要求学士学位、9% 要求博士学位；该描述不取代雇主对分析能力与经验的要求，也不适用于中国大陆。",
-              "资格边界（四）｜本页列示的准备项为检索与核对方向，不构成任何机构的正式资格清单；如与机构公告或主管机关要求不一致，以后者为准。本页不提供个人能力或背景结论、录用可能性或薪酬承诺。"
+              "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。",
+              "EPA 方法示例把材料和能源投入与功能单位关联。比较方案时核对共同功能单位、边界和数据来源，最终报告及外部披露按项目授权。",
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。",
+              "纸面练习只用虚构资料。"
             ]
           },
           "id": "industrial-ecologists.path.credential-boundary.1",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -30293,13 +30334,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本页不引用任何具体招聘公告的数量或薪酬数字。工业生态学家岗位多通过政府机构、科研院所与专业及技术服务等渠道进入，公开渠道的样本难以代表整体市场；机构类型、项目经费与地区会明显影响用人规模。",
-              "核对建议｜查看招聘信息时应记录发布时间、地点、机构类型、行业与分析范围、学历与经验要求、方法与工具要求、项目安排、薪酬结构；这些信息比职位名称更能反映真实条件。以上为编辑整理的核对建议，不是对在招岗位的引用。"
+              "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。",
+              "按实际岗位核任务、机构和授权。"
             ]
           },
           "id": "industrial-ecologists.path.recruitment-sample.1",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -30310,13 +30351,13 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 19-2041.03 职业档案与官方定义",
+                "entity": "O*NET OnLine：工业生态学家职业档案与官方定义（19-2041.03）",
                 "id": "link-1",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/19-2041.03"
+                "url": "https://www.onetonline.org/link/details/19-2041.03"
               },
               {
-                "entity": "BLS Occupational Outlook Handbook：环境科学家与专家",
+                "entity": "Occupational Outlook Handbook：环境科学家与专家（Environmental Scientists and Specialists）",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/environmental-scientists-and-specialists.htm"
@@ -30325,13 +30366,13 @@
                 "entity": "国家统计局：2025 年城镇单位就业人员平均工资情况",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "《中华人民共和国环境保护法》（现行文本）",
+                "entity": "生态环境部产品碳足迹核算通则发布说明",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://flk.npc.gov.cn/"
+                "url": "https://www.mee.gov.cn/xxgk/hjyw/202409/t20240910_1085619.shtml"
               }
             ]
           },
@@ -30346,12 +30387,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本模块的能力阶段与路径轨道是编辑归纳，用于表达能力发展的常见形态，不是统一的岗位年限表或晋升保证；实际要求以机构与安全制度为准。学历、训练、环境评价或安全资格、岗位授权与报告及结论发布权限必须分别核对。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。 生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。 EPA 方法示例把材料和能源投入与功能单位关联。比较方案时核对共同功能单位、边界和数据来源，最终报告及外部披露按项目授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.11",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30472,11 +30514,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对路径：美国O*NET教育调查65%硕士、22%学士、9%博士，不能忽略学士路径；中国条件核目标公告。训练系统边界、流分析、模型与报告，按具体任务核评价或现场要求；课程不取得发布授权。"
+              "可练环境科学、系统边界、清单质量和结果沟通。BLS 19-2041 上位组列本科为典型入门学历。雇主要求、核证资格与披露权限按项目核对。 EPA 方法示例把材料和能源投入与功能单位关联。比较方案时核对共同功能单位、边界和数据来源，最终报告及外部披露按项目授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.20",
           "source_refs": [
+            "bls-ep-2025-2035",
+            "us-work-standard",
             "onet"
           ],
           "type": "prose"
@@ -30486,12 +30530,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "教育、方法训练、具体项目评价或现场活动要求、岗位授权和报告发布分别核；工业生态分析不自动等同法定建设项目环评，不设统一评价或安全个人证书。"
+              "EPA 方法示例把材料和能源投入与功能单位关联。比较方案时核对共同功能单位、边界和数据来源，最终报告及外部披露按项目授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.21",
           "source_refs": [
-            "onet"
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30500,12 +30544,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆 / 美国"
+              "按工作地点和任务核范围"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.22",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30514,12 +30560,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：工业生态与环境分析岗位的准入、安全与环境保护要求受相关法规与机构制度约束，是否需评价资格或安全资格以现行法规与主管机关要求为准。美国侧：O*NET 将本职业列入 Job Zone 第五级（需要大量准备），65% 要求硕士学位、22% 要求学士学位、9% 要求博士学位。两侧的资格与安全制度不同，须分别核对，不能互相套用。"
+              "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30528,7 +30574,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于支撑入门岗位与起步任务的描述（精确职业任务列表）。"
+              "任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.24",
@@ -30570,12 +30616,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于支撑中国大陆环境保护与评价相关制度边界，属法域敏感事项。"
+              "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30584,12 +30630,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "视机构要求；需具备数据与方法基础。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.28",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30598,7 +30645,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "争取独立完成物质流分析与建模。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.29",
@@ -30612,7 +30659,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "提交数据分析与记录样本，并获得带教反馈。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.30",
@@ -30626,12 +30673,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在指导下整理物质与能源流数据、参与分析。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.31",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30654,12 +30703,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "若实际参与法定评价或特定现场活动，按具体项目、角色及法域核要求；不能把所有环境分析写成需统一资质。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.33",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30668,7 +30718,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习主导专项分析与跨部门项目。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.34",
@@ -30682,7 +30732,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "提交分析报告与模型验证记录。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.35",
@@ -30696,12 +30746,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成边界界定、数据采集、建模与报告。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.36",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30724,12 +30776,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "视机构要求；通常需经验与专项训练。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.38",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30738,7 +30791,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "把经验整理为可复用的方法与规范。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.39",
@@ -30752,7 +30805,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "提交复杂分析案例与记录。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.40",
@@ -30766,12 +30819,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "主导专项分析并带教新人。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.41",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30794,12 +30849,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "由机构治理要求确定。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.43",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30808,7 +30864,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与机构或行业分析方法建设。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.44",
@@ -30822,7 +30878,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "提交方向与评估记录。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.45",
@@ -30836,12 +30892,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹分析方向与方法体系。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.46",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30864,12 +30922,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "视机构要求；需具备环境与数据基础。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.48",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30878,7 +30937,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习独立完成环境影响评估。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.49",
@@ -30892,7 +30951,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "提交数据整理与评估材料样本。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.50",
@@ -30906,12 +30965,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "协助采集环境数据与整理评估材料。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.51",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30934,12 +30995,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "视机构要求；通常需分析方法基础。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.53",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -30948,7 +31010,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与评估方法与企业改进方案。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.54",
@@ -30962,7 +31024,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "提交评估与建议记录。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.55",
@@ -30976,12 +31038,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "开展环境影响与可持续性评估并编制报告。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.56",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31004,12 +31068,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "由机构与主管机关要求确定。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.58",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31018,7 +31083,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "推动评估标准与工具完善。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.59",
@@ -31032,7 +31097,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "提交方法与评估记录。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.60",
@@ -31046,12 +31111,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "开发评估方法并推动标准应用。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.61",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31074,12 +31141,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "由机构治理要求确定。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.63",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31088,7 +31156,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与机构与环境治理决策。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.64",
@@ -31102,7 +31170,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "提交体系与评估记录。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.65",
@@ -31116,12 +31184,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹评估体系与结论发布。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.66",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31144,12 +31214,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "视机构要求；需具备环境与政策基础。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.68",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31158,7 +31229,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习独立完成政策与环境咨询分析。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.69",
@@ -31172,7 +31243,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "提交整理与分析材料。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.70",
@@ -31186,12 +31257,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "协助整理政策与咨询材料。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.71",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31214,12 +31287,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "视机构要求；通常需分析经验。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.73",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31228,7 +31302,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与企业可持续战略与方案设计。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.74",
@@ -31242,7 +31316,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "提交咨询分析与建议记录。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.75",
@@ -31256,12 +31330,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "为客户提供环境影响与合规分析支持。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.76",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31284,12 +31360,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "由机构与主管机关要求确定。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.78",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31298,7 +31375,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "推动政策与企业实践衔接。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.79",
@@ -31312,7 +31389,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "提交政策与方案材料。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.80",
@@ -31326,12 +31403,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与政策分析与方案设计并推动实施。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.81",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31354,12 +31433,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "由机构治理要求确定。"
+              "按具体岗位核培训、职责与授权。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.83",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31368,7 +31448,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与行业政策与标准建设。"
+              "向用人单位核对下一阶段职责。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.84",
@@ -31382,7 +31462,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "提交业务与评估记录。"
+              "保留原件编号、差异与交接对象。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.85",
@@ -31396,12 +31476,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹政策分析与咨询业务。"
+              "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。"
             ]
           },
           "id": "industrial-ecologists.path.career-path-block.86",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "us-work-standard"
           ],
           "type": "prose"
         },
@@ -31445,13 +31527,13 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 19-2041.03 国家工资（BLS OEWS 2025，父职业组口径）",
+                "entity": "美国上位组 19-2041（环境科学家与专业人员（含健康方向））全国工资原表",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localwages/19-2041.03"
               },
               {
-                "entity": "BLS Occupational Outlook Handbook：环境科学家与专家",
+                "entity": "Occupational Outlook Handbook：环境科学家与专家（Environmental Scientists and Specialists）",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/environmental-scientists-and-specialists.htm"
@@ -31460,13 +31542,13 @@
                 "entity": "国家统计局：2025 年城镇单位就业人员平均工资情况",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "O*NET 19-2041.03 职业档案",
+                "entity": "O*NET OnLine：工业生态学家职业档案与官方定义（19-2041.03）",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/19-2041.03"
+                "url": "https://www.onetonline.org/link/details/19-2041.03"
               },
               {
                 "entity": "环境科学家与专家（含健康）",
@@ -31529,12 +31611,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。 转岗为编辑任务比较，目标方法与授权另核，中国精确职业工资仍缺口。"
+              "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。 O*NET 19-2041.03 提供本职业任务。BLS 和 OEWS 只发布到上位组 19-2041，本页所核资料未取得细分职业的单列全国工资或就业预测。"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31543,12 +31626,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31557,12 +31640,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31571,12 +31654,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "总体就业预测非AI因果；增长是总就业变化，空缺含增长与替补，不是净新增。"
+              "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31585,12 +31668,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家预测不等于实际招聘或个人就业；增长与替换空缺分别理解。"
+              "就业人数分别取整。"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31599,12 +31682,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业增长"
+              "就业规模与变化"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31613,12 +31696,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Environmental Scientists and Specialists, Including Health 父职业组口径（非 19-2041.03 单一精确值）"
+              "上位组 19-2041"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31627,12 +31710,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "6%（父职业）"
+              "93,400 → 99,200，+6.1%"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31641,12 +31724,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31655,12 +31738,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31669,12 +31752,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "总体就业预测非AI因果；增长是总就业变化，空缺含增长与替补，不是净新增。"
+              "预计空缺含人员替补。"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31683,12 +31766,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家预测不等于实际招聘或个人就业；增长与替换空缺分别理解。"
+              "预计空缺与净增就业是不同指标。"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31697,12 +31780,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "年均职位空缺"
+              "预计年均空缺"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31711,12 +31794,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Environmental Scientists and Specialists, Including Health 父职业组口径"
+              "上位组 19-2041"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31725,12 +31808,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "7,300个/年（父职业）"
+              "年均约 7,300 个"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31739,12 +31822,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆"
+              "美国全国"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31753,12 +31836,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年（行业统计期）"
+              "2025-05"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31767,12 +31850,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类公布平均工资、不区分职业，无法据此得到工业生态学家职业级数值。"
+              "O*NET 19-2041.03 提供本职业任务。BLS 和 OEWS 只发布到上位组 19-2041，本页所核资料未取得细分职业的单列全国工资或就业预测。"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31781,12 +31864,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业代理；不以行业均值、招聘报价或美国数据代填。"
+              "实际报价按地区、雇主与班次核对。"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31795,12 +31878,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆职业工资"
+              "工资中位数"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31809,12 +31892,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "未有本职业精确口径；仅有行业门类平均工资（行业代理）"
+              "上位组 19-2041"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31823,12 +31906,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足"
+              "2025 年 5 月美国上位组 19-2041（环境科学家与专业人员（含健康方向））全国工资中位数为 82,220 美元／年、39.53 美元／时。"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31837,12 +31920,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025全国本职业工资分布，不单独支持就业预测。"
+              "任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31851,12 +31934,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。"
+              "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。 任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31879,7 +31962,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明本职业的任务与工作活动，支撑相邻方向比较。"
+              "任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
             ]
           },
           "id": "industrial-ecologists.market-signals.market-signal-card.33",
@@ -32238,64 +32321,111 @@
           "data": {
             "entries": [
               {
-                "answer": "依据 O*NET 19-2041.03，本职业把自然生态系统的原理与过程应用于建立高效工业系统的模型，运用物理与社会科学知识在商品与服务的生产和使用中最大化自然资源利用，并考察社会议题与技术系统和环境的关系。典型任务包括识别产品与系统的环境影响、开发减少影响的策略、使用物质流分析（MFA/SFA）开展可持续性评估、把线性或开环系统重设计为闭环系统、审查研究文献、并编写环境影响报告等技术报告并向产业界、政府与公众沟通。",
+                "answer": "原题只纳入 I1；I2 保留每 10 件和厂内，交数据负责人；I3 保留每 100 件和含运输，交方法复核人。变式 I3 改厂内后纳入，I1、I2 状态保持。只按题面口径比较。",
+                "id": "industrial-ecologists.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.industrial-ecologists.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
+              },
+              {
+                "answer": "工业生态学工作者研究工业活动如何使用材料和能源、产生废物或排放，以及不同过程和场所之间的联系。常见交付包括物质与能源清单、边界与假设说明、结果对照和改进建议。 核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。",
                 "id": "industrial-ecologists.faq.1",
                 "question": "工业生态学家具体做什么？",
-                "question_key": "career.faq.industrial-ecologists.q1"
+                "question_key": "career.faq.industrial-ecologists.q1",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "环境科学家与专家范围更广（含健康方向）；环境工程师以环境治理工程设计为主；可持续发展专员以机构可持续项目的执行与协调为主；水资源专员以水资源规划与管理为主；气候变化政策分析师以政策分析与建议为主；自然保护科学家面向生态保护。工作对象、资质与责任边界不同，不能只按职位名称互换。",
+                "answer": "工业生态侧重系统边界、物质能源流与方案影响。环境工程更侧重工程设计，环境合规侧重许可及报告，专业认证和最终披露各有权限。",
                 "id": "industrial-ecologists.faq.2",
                 "question": "它和相邻职业有什么区别？",
-                "question_key": "career.faq.industrial-ecologists.q2"
+                "question_key": "career.faq.industrial-ecologists.q2",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "O*NET 在 19-2041.03 页把工资与就业一并标注为 Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组：BLS OEWS 2025 年中位年薪 82,220 美元、时薪中位 39.53 美元，第 10/25/75/90 分位 52,520 / 64,490 / 107,970 / 140,010 美元/年；就业展望 2024—2034 年增长平均（4%）、年均约 8,500 个岗位空缺，2024 年就业约 90,300 人、2034 年约 94,300 人。以上均为父职业组合并口径，不是 19-2041.03 单一精确值。",
+                "answer": "2025 年 5 月美国上位组 19-2041（环境科学家与专业人员（含健康方向））全国工资中位数为 82,220 美元／年、39.53 美元／时。 BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。 O*NET 19-2041.03 提供本职业任务。BLS 和 OEWS 只发布到上位组 19-2041，本页所核资料未取得细分职业的单列全国工资或就业预测。",
                 "id": "industrial-ecologists.faq.3",
                 "question": "美国工资和就业情况如何？",
-                "question_key": "career.faq.industrial-ecologists.q3"
+                "question_key": "career.faq.industrial-ecologists.q3",
+                "source_refs": [
+                  "onet-wages",
+                  "bls-ep-2025-2035"
+                ]
               },
               {
-                "answer": "没有可按本职业精确读取的全国职业工资。国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，无法据此得到工业生态学家职业级数值。本页按证据政策登记缺口而不代填。",
+                "answer": "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。 国家统计局 2025 年城镇科学研究和技术服务业年平均工资，非私营单位 182,064 元、私营单位 83,560 元，覆盖行业内多工种。",
                 "id": "industrial-ecologists.faq.4",
                 "question": "中国大陆有对应的工资数据吗？",
-                "question_key": "career.faq.industrial-ecologists.q4"
+                "question_key": "career.faq.industrial-ecologists.q4",
+                "source_refs": [
+                  "nbs"
+                ]
               },
               {
-                "answer": "O*NET 工作情境显示：电子邮件 87% 每天使用、自主确定任务与优先级 52% 很大自由度、面对面讨论 48% 每天、决策自由度 43% 很大自由度、电话交谈 41% 每天、久坐 43% 持续或几乎持续、精确或准确的重要性 43% 极其重要、典型工作周 52% 超过 40 小时。主要风险包括分析结论超出数据或方法支持、数据或模型质量缺陷、报告或建议被误用、跨学科协作口径或假设不一致、企业数据与客户信息处理不当，以及改进方案带来未预料的负面后果。",
+                "answer": "常见情境有反复核对、现场沟通和轮班交接。站立或久坐、噪声和夜班随地点与岗位变化。",
                 "id": "industrial-ecologists.faq.5",
                 "question": "工作环境和职业风险如何？",
-                "question_key": "career.faq.industrial-ecologists.q5"
+                "question_key": "career.faq.industrial-ecologists.q5",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "会影响信息处理类任务，而非取代系统边界界定、方法选择、模型验证与专业解释。生成式 AI 可辅助数据处理与统计、代码与模型辅助、报告与图表草拟、资料与文献检索；系统边界界定、方法选择、数据质量控制、模型验证与结果解释仍由人承担。本页不给出替代概率、采用率或时间表。",
+                "answer": "工具可辅助记录比对和汇总。原值冲突、例外处理和最终交接由授权人员复核。BLS 就业预测没有测量生成式 AI 的采用率。",
                 "id": "industrial-ecologists.faq.6",
                 "question": "AI 会影响这个职业吗？",
-                "question_key": "career.faq.industrial-ecologists.q6"
+                "question_key": "career.faq.industrial-ecologists.q6",
+                "source_refs": [
+                  "bls-ep-2025-2035",
+                  "onet"
+                ]
               },
               {
-                "answer": "O*NET 将本职业（19-2041.03）列入 Job Zone 第五级（需要大量准备），SVP 区间 8.0 及以上：教育调查显示 65% 要求硕士学位、22% 要求学士学位、9% 要求博士学位。中国大陆相关岗位通常要求环境、生态、工程或相关专业学历并具备数据分析与建模能力。",
+                "answer": "可练环境科学、系统边界、清单质量和结果沟通。BLS 19-2041 上位组列本科为典型入门学历。雇主要求、核证资格与披露权限按项目核对。 按实际岗位核任务、机构和授权。",
                 "id": "industrial-ecologists.faq.7",
                 "question": "需要什么学历和培训？",
-                "question_key": "career.faq.industrial-ecologists.q7"
+                "question_key": "career.faq.industrial-ecologists.q7",
+                "source_refs": [
+                  "bls-ep-2025-2035",
+                  "onet"
+                ]
               },
               {
-                "answer": "本页不虚构统一证书清单。学历、训练、环境评价或安全资格、岗位授权与报告及结论发布权限是不同状态：训练不等于持证，持证不等于获得环境结论、工程判断与合规决定的授权。在中国大陆以现行法规与主管机关要求为准。",
+                "answer": "EPA 方法示例把材料和能源投入与功能单位关联。比较方案时核对共同功能单位、边界和数据来源，最终报告及外部披露按项目授权。 生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。",
                 "id": "industrial-ecologists.faq.8",
                 "question": "需要证书或资格吗？",
-                "question_key": "career.faq.industrial-ecologists.q8"
+                "question_key": "career.faq.industrial-ecologists.q8",
+                "source_refs": [
+                  "us-work-standard",
+                  "cn-work-example",
+                  "cn-work-example"
+                ]
               },
               {
-                "answer": "主要风险包括分析结论超出数据或方法支持、数据或模型质量缺陷、报告或建议被误用为合规或工程结论、跨学科协作口径或假设不一致、企业数据与客户信息处理不当，以及改进方案带来未预料的负面后果；控制重点是把数据、假设与复核留成可追溯记录，并在不确定性与超出权限时恰当表述与升级。",
+                "answer": "核对功能单位、边界、清单版本和数据缺项。保留差异并请数据或方法负责人复核；披露由授权方确认。 对异常先留原件、标未决状态，再按岗位分工升级。",
                 "id": "industrial-ecologists.faq.9",
                 "question": "这个职业有哪些主要风险？",
-                "question_key": "career.faq.industrial-ecologists.q9"
+                "question_key": "career.faq.industrial-ecologists.q9",
+                "source_refs": [
+                  "onet",
+                  "us-work-standard"
+                ]
               },
               {
-                "answer": "美国侧相关父职业组 2024—2034 年增长为平均（4%）、年均约 8,500 个岗位空缺（父职业组口径）；中国大陆侧登记工资缺口。可转向方向包括广义环境监测与评估、环境工程、可持续项目执行、水资源规划、气候政策分析、场地修复与再开发等，但都需补足相应训练或资质；能力迁移不等于自动晋升。",
+                "answer": "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。 本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。 按实际岗位核任务、机构和授权。",
                 "id": "industrial-ecologists.faq.10",
                 "question": "前景如何、能转向哪些方向？",
-                "question_key": "career.faq.industrial-ecologists.q10"
+                "question_key": "career.faq.industrial-ecologists.q10",
+                "source_refs": [
+                  "bls-ep-2025-2035",
+                  "nbs",
+                  "onet"
+                ]
               }
             ]
           },
@@ -32310,12 +32440,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核O*NET19-2041.03定义、任务、兴趣、教育和情境；当前细分页无Work Styles项。工资与就业为父职业SOC19-2041。BLS当前2025—2035父职业环境科学家与专家（含健康）SOC19-2041：就业93,400人至99,200人，增长6%，年均空缺7,300个，含增长与替补，非净新增或实际招聘；不是工业生态学家19-2041.03独立统计，也非生成式AI因果。 2025父职业工资全部分位已核；中国NBS为条件性行业参考。"
+              "费马测试编辑部"
             ]
           },
           "id": "industrial-ecologists.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-wages",
+            "bls-ep-2025-2035",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32324,12 +32457,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜来源登记：本页来源登记列出 O*NET 19-2041.03 的职业档案、详细资料、国家工资、行业分布、热门技术、证书目录与国家培训条目，BLS 职业就业与工资统计（OEWS 2025 年）、就业预测与方法说明，国家统计局城镇单位就业人员年平均工资，《中华人民共和国环境保护法》《中华人民共和国安全生产法》《中华人民共和国个人信息保护法》，ILO 生成式 AI 与就业职业暴露指数、NIST 人工智能风险管理框架，以及与相邻职业（环境科学家与专家、环境工程师、可持续发展专员等）相关的条目。"
+              "O*NET 为任务，OEWS 为美国工资，BLS 表 1.2 为美国就业。"
             ]
           },
           "id": "industrial-ecologists.sources.source-card.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-wages",
+            "bls-ep-2025-2035",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32338,12 +32474,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮2026-10-11核O*NET Updated2025、2025父职业工资全部分位与行业中位、BLS2025—2035父级预测、NBS2025及OEWS定义；共享历史元数据仍保留冲突。"
+              "来源核查日期：2026 年 11 月 10 日。"
             ]
           },
           "id": "industrial-ecologists.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-wages",
+            "bls-ep-2025-2035",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32352,12 +32491,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "父职业SOC19-2041统计不能当工业生态学家独立工资、行业或就业；中国精确工资、AI采用效果及人格测试效度未取得。共享旧期与受保护快答仍保留冲突。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "industrial-ecologists.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -32381,28 +32520,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "大五人格测试",
+                "entity": "大五人格测评",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "MBTI 人格测试",
+                "entity": "MBTI 偏好测评",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "智力与推理测试",
+                "entity": "矩阵推理",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "情绪智力测试",
+                "entity": "情绪沟通习惯自评",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "工业生态学家",
@@ -32440,63 +32579,63 @@
                 "market": "美国",
                 "name": "O*NET OnLine：工业生态学家职业档案与官方定义（19-2041.03）",
                 "period": "O*NET updated 2026; accessed 2026-09-23",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/19-2041.03"
+                "url": "https://www.onetonline.org/link/details/19-2041.03"
               },
               {
                 "accessed_at": "2026-09-23",
                 "details": [
-                  "相关父职业组 2024—2034 年预计增长为平均（3%—4%）。",
-                  "用于说明相关职业的就业展望与规模。"
+                  "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。",
+                  "任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
                 ],
                 "evidence_type": "official occupation outlook",
                 "id": "bls",
                 "limitation": "覆盖相关父职业组，为合并口径，不能读作个人就业结论。",
                 "market": "美国",
-                "name": "Occupational Outlook Handbook：环境科学家与专家（Environmental Scientists and Specialists）",
-                "period": "2024-2034",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "职业资料或动态查询",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/environmental-scientists-and-specialists.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-23",
                 "details": [
-                  "2024 年就业约 90,300 人、2034 年约 94,300 人，增长平均（4%），年均约 8,500 个空缺。",
-                  "该口径为父职业组合并口径，不构成个人就业结论。"
+                  "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。",
+                  "任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "ep",
                 "limitation": "父职业组合并口径，不能归因于生成式 AI，也不等于 19-2041.03 单一规模。",
                 "market": "美国",
-                "name": "BLS 就业预测：环境科学家与专家（父职业组口径）",
-                "period": "2024-2034",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/19-2041.03"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-23",
                 "details": [
-                  "用于说明 OEWS 的抽样、估算、覆盖范围与不适用情形。",
-                  "用于核对全国口径与不含福利的说明。"
+                  "2025 年 5 月美国上位组 19-2041（环境科学家与专业人员（含健康方向））全国工资中位数为 82,220 美元／年、39.53 美元／时。",
+                  "O*NET 19-2041.03 提供本职业任务。BLS 和 OEWS 只发布到上位组 19-2041，本页所核资料未取得细分职业的单列全国工资或就业预测。"
                 ],
-                "evidence_type": "official methodology",
+                "evidence_type": "OEWS 全国工资",
                 "id": "oews",
-                "limitation": "以方法文档原文为准。",
+                "limitation": "任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。",
                 "market": "美国",
-                "name": "BLS：职业就业与工资统计（OEWS）方法说明",
-                "period": "2025 OEWS methodology; accessed 2026-09-23",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "OEWS methodology",
-                "url": "https://www.bls.gov/oes/oes_method.htm"
+                "name": "美国上位组 19-2041（环境科学家与专业人员（含健康方向））全国工资原表",
+                "period": "2025-05",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "19-2041",
+                "url": "https://www.onetonline.org/link/localwages/19-2041.03"
               },
               {
                 "accessed_at": "2026-09-23",
                 "details": [
-                  "用于说明中国大陆按行业门类公布平均工资、不拆分职业。",
-                  "本页按证据政策登记缺口而不代填职业级数值。"
+                  "国家统计局 2025 年城镇科学研究和技术服务业年平均工资，非私营单位 182,064 元、私营单位 83,560 元，覆盖行业内多工种。",
+                  "国家统计局公布行业和岗位大类统计。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs",
@@ -32506,23 +32645,23 @@
                 "period": "2025",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-23",
                 "details": [
-                  "用于说明现场作业安全生产与从业人员义务的一般框架。",
-                  "涉及危险作业的具体许可与培训要求以现行法规与机构制度为准。"
+                  "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。",
+                  "任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
                 ],
                 "evidence_type": "statute",
                 "id": "cnclass",
                 "limitation": "以现行法规文本与主管机关要求为准。",
                 "market": "中国",
-                "name": "《中华人民共和国安全生产法》（现行文本）",
+                "name": "生态环境部产品碳足迹核算通则发布说明",
                 "period": "current as of 2026-09-23",
-                "publisher": "国家法律法规数据库",
+                "publisher": "生态环境部",
                 "scope": "work safety law",
-                "url": "https://flk.npc.gov.cn/"
+                "url": "https://www.mee.gov.cn/xxgk/hjyw/202409/t20240910_1085619.shtml"
               },
               {
                 "accessed_at": "2026-09-23",
@@ -32538,23 +32677,23 @@
                 "period": "effective 2021-11-01",
                 "publisher": "全国人民代表大会常务委员会 / 中国政府网",
                 "scope": "personal information protection",
-                "url": "https://www.gov.cn/xinwen/2021-08/20/content_5632486.htm"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "accessed_at": "2026-09-23",
                 "details": [
-                  "用于说明环境保护与评价相关的一般制度框架。",
-                  "具体评价、名录与成果发布要求以现行法规与主管机关要求为准。"
+                  "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。",
+                  "任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
                 ],
                 "evidence_type": "statute",
                 "id": "facilities",
                 "limitation": "以现行法规文本与主管机关要求为准。",
                 "market": "中国",
-                "name": "《中华人民共和国环境保护法》（现行文本）",
+                "name": "生态环境部产品碳足迹核算通则发布说明",
                 "period": "current as of 2026-09-23",
-                "publisher": "国家法律法规数据库",
+                "publisher": "生态环境部",
                 "scope": "environmental protection law",
-                "url": "https://flk.npc.gov.cn/"
+                "url": "https://www.mee.gov.cn/xxgk/hjyw/202409/t20240910_1085619.shtml"
               },
               {
                 "accessed_at": "2026-09-23",
@@ -32568,7 +32707,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：工业生态学家行业分布（19-2041.03）",
                 "period": "current page; accessed 2026-09-23",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-2041.03"
               },
@@ -32584,7 +32723,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：工业生态学家详细资料（任务与工作活动）",
                 "period": "O*NET updated 2026; accessed 2026-09-23",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/19-2041.03"
               },
@@ -32600,7 +32739,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：工业生态学家证书目录（19-2041.03）",
                 "period": "current page; accessed 2026-09-23",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/19-2041.03"
               },
@@ -32623,17 +32762,17 @@
               {
                 "accessed_at": "2026-09-23",
                 "details": [
-                  "用于字段与证据口径与缺口登记规则。",
-                  "用于跨市场与法域口径边界说明。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "编辑说明",
                 "id": "editor",
-                "limitation": "内部口径规则，非外部事实来源。",
-                "market": "全球",
-                "name": "FermatMind：职业内容字段与证据口径规则",
-                "period": "current authoring rules",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页任务",
                 "url": "https://fermatmind.com"
               },
               {
@@ -32664,7 +32803,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：工业生态学家热门技术（19-2041.03）",
                 "period": "current page; accessed 2026-09-23",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/19-2041.03"
               },
@@ -32680,24 +32819,24 @@
                 "market": "美国",
                 "name": "O*NET OnLine：工业生态学家国家培训（19-2041.03）",
                 "period": "current page; accessed 2026-09-23",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/19-2041.03"
               },
               {
                 "accessed_at": "2026-09-23",
                 "details": [
-                  "用于说明适配信号、风险场景与练习设计为编辑归纳。",
-                  "不构成对任何机构流程或要求的承诺。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "editorial_synthesis",
+                "evidence_type": "编辑说明",
                 "id": "employer",
-                "limitation": "编辑设计，不是雇主统一要求或录用标准。",
-                "market": "全球",
-                "name": "FermatMind：页内编辑归纳与练习设计说明",
-                "period": "current authoring rules",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页任务",
                 "url": "https://fermatmind.com"
               },
               {
@@ -32712,7 +32851,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：工业生态学家职业范围与工作情境（19-2041.03）",
                 "period": "current page; accessed 2026-09-23",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/19-2041.03"
               },
@@ -32728,7 +32867,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：环境科学家与专家（含健康，19-2041.00）",
                 "period": "current; accessed 2026-09-23",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/19-2041.00"
               },
@@ -32744,7 +32883,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：气候变化政策分析师（19-2041.01）",
                 "period": "current; accessed 2026-09-23",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/19-2041.01"
               },
@@ -32760,7 +32899,7 @@
                 "market": "美国",
                 "name": "O*NET OnLine：环境工程师（17-2081.00）",
                 "period": "current; accessed 2026-09-23",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-2081.00"
               },
@@ -32797,53 +32936,97 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-23",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对年薪分位：第 10 分位 52,520 美元、第 25 分位 64,490 美元、中位 82,220 美元、第 75 分位 107,970 美元、第 90 分位 140,010 美元（2025 年）；时薪中位 39.53 美元。",
-                  "用于说明工资按年度披露、不据此推算个人月收入或到手收入，且为父职业组口径。"
+                  "2025 年 5 月美国上位组 19-2041（环境科学家与专业人员（含健康方向））全国工资中位数为 82,220 美元／年、39.53 美元／时。",
+                  "O*NET 19-2041.03 提供本职业任务。BLS 和 OEWS 只发布到上位组 19-2041，本页所核资料未取得细分职业的单列全国工资或就业预测。"
                 ],
-                "evidence_type": "official wage display",
+                "evidence_type": "OEWS 全国工资",
                 "id": "onet-wages",
-                "limitation": "O*NET 将该页工资标注为 Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组；不含福利与奖金；分位不等于起薪或经验等级。",
+                "limitation": "任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。",
                 "market": "美国",
-                "name": "O*NET OnLine：工业生态学家国家工资（BLS OEWS 2025 年，父职业组口径）",
-                "period": "2025 BLS OEWS wage data via O*NET",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "parent_occupation_proxy",
+                "name": "美国上位组 19-2041（环境科学家与专业人员（含健康方向））全国工资原表",
+                "period": "2025-05",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "19-2041",
                 "url": "https://www.onetonline.org/link/localwages/19-2041.03"
               },
               {
                 "accessed_at": "2026-09-23",
                 "details": [
-                  "用于核对就业规模（2024 年约 90,300 人、2034 年约 94,300 人）、增长（4%）与年均空缺（约 8,500 个）。",
-                  "就业预期为平均，趋势解读需结合环境政策与企业可持续需求。"
+                  "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。",
+                  "任务采用 O*NET 19-2041.03，工资及就业采用美国上位组 19-2041。"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "archivists",
                 "limitation": "就业趋势为 O*NET 呈现的美国父职业组口径；本页就业展望使用同一口径。",
                 "market": "美国",
-                "name": "O*NET OnLine：工业生态学家就业趋势（19-2041.03，父职业组口径）",
-                "period": "2024-2034",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "职业资料或动态查询",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/19-2041.03"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。",
+                  "可练环境科学、系统边界、清单质量和结果沟通。BLS 19-2041 上位组列本科为典型入门学历。雇主要求、核证资格与披露权限按项目核对。"
+                ],
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "19-2041",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "案例不代表全国职业工资、入行或招聘。",
+                "market": "中国大陆",
+                "name": "生态环境部产品碳足迹核算通则发布说明",
+                "period": "2024",
+                "publisher": "生态环境部",
+                "scope": "具名工作实例",
+                "url": "https://www.mee.gov.cn/xxgk/hjyw/202409/t20240910_1085619.shtml"
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "影响识别 — 50/100; weight=1/3; industrial-ecologists.ai-impact.ai-impact-table.95[0]",
-                  "评估与分析 — 75/100; weight=1/3; industrial-ecologists.ai-impact.ai-impact-table.103[0]",
-                  "系统重设计 — 50/100; weight=1/3; industrial-ecologists.ai-impact.ai-impact-table.107[0]"
+                  "记录与结果均为虚构。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "I 表：工业清单口径复核",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "前往纸面试做",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "EPA 方法示例把材料和能源投入与功能单位关联。比较方案时核对共同功能单位、边界和数据来源，最终报告及外部披露按项目授权。"
+                ],
+                "id": "us-work-standard",
+                "market": "美国方法或法域",
+                "name": "美国 EPA 生命周期评估方法示例",
+                "publisher": "U.S. Environmental Protection Agency",
+                "url": "https://www.epa.gov/sites/default/files/widgets/newr-calculator/resources.html"
+              },
+              {
+                "details": [
+                  "完成原题与变式后打开折叠答案。"
+                ],
+                "id": "paper-answer-key",
+                "name": "纸面练习参考解（常见问题）",
+                "url": "#career-content-sources"
               }
             ]
           },
@@ -34180,8 +34363,8 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
-        "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为工业生态学家？教育、资格与职业发展路径",
+        "entry_heading": "入行与I 表：工业清单口径复核",
+        "heading": "入行与I 表：工业清单口径复核",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "industrial-ecologists.path.career-path-block.21",
@@ -34295,6 +34478,42 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "industrial-ecologists.source-register.published.1"
+            },
+            "id": "cn-work-example",
+            "label": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "industrial-ecologists.source-register.published.1"
+            },
+            "scope": "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。"
+          },
+          {
+            "href": {
+              "$source": "us-work-standard",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "industrial-ecologists.source-register.published.1"
+            },
+            "id": "us-work-standard",
+            "label": {
+              "$source": "us-work-standard",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "industrial-ecologists.source-register.published.1"
+            },
+            "scope": "EPA 方法示例把材料和能源投入与功能单位关联。比较方案时核对共同功能单位、边界和数据来源，最终报告及外部披露按项目授权。"
           }
         ],
         "tracks": [
@@ -35056,7 +35275,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "us-work-standard"
             ],
             "id": "conclusion-overreach",
             "mitigation": {
@@ -35088,7 +35307,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "us-work-standard"
             ],
             "id": "data-model-quality",
             "mitigation": {
@@ -35119,8 +35338,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "editor"
+              "us-work-standard",
+              "onet"
             ],
             "id": "misuse-of-report",
             "mitigation": {
@@ -35151,8 +35370,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "editor"
+              "cn-work-example",
+              "cn-work-example"
             ],
             "id": "cross-disciplinary",
             "mitigation": {
@@ -35184,7 +35403,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "us-work-standard"
             ],
             "id": "data-leak",
             "mitigation": {
@@ -35216,7 +35435,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "us-work-standard"
             ],
             "id": "unintended-consequence",
             "mitigation": {
@@ -35350,6 +35569,24 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "industrial-ecologists.source-register.published.1"
+            },
+            "id": "cn-work-example",
+            "label": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "industrial-ecologists.source-register.published.1"
+            },
+            "scope": "生态环境部介绍 GB/T 24067-2024 产品碳足迹量化通则。碳足迹只覆盖其规定的气候指标。项目采用的边界、方法和核证要求分别查标准或合同。"
           }
         ]
       },
@@ -35357,7 +35594,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "市场口径",
+              "指标": "第 10 百分位",
               "数值": {
                 "$item": "industrial-ecologists.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -35372,7 +35609,7 @@
               }
             },
             {
-              "指标": "统计时期",
+              "指标": "第 25 百分位",
               "数值": {
                 "$item": "industrial-ecologists.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -35387,7 +35624,7 @@
               }
             },
             {
-              "指标": "计量单位",
+              "指标": "第 50 百分位（中位数）",
               "数值": {
                 "$item": "industrial-ecologists.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -35402,7 +35639,7 @@
               }
             },
             {
-              "指标": "覆盖人群",
+              "指标": "第 75 百分位",
               "数值": {
                 "$item": "industrial-ecologists.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -35417,7 +35654,7 @@
               }
             },
             {
-              "指标": "职业范围",
+              "指标": "第 90 百分位",
               "数值": {
                 "$item": "industrial-ecologists.china-salary.career-snapshot-primary-locale.15",
                 "block": "china-salary",
@@ -35659,7 +35896,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "industrial-ecologists.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35673,7 +35910,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "industrial-ecologists.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35687,7 +35924,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "industrial-ecologists.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35710,7 +35947,7 @@
           "ui": {
             "ai_heading": "AI 会影响工业生态学家的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
+            "official_heading": "2025 年城镇行业年平均工资",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "工业生态学家在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35741,7 +35978,7 @@
         "bls_table": [
           {
             "fact_ref": "us-wage-low10-2025",
-            "指标": "薪资 · 10 分位",
+            "指标": "第 10 百分位",
             "数值": {
               "$item": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35756,7 +35993,7 @@
             }
           },
           {
-            "指标": "薪资 · 25 分位",
+            "指标": "第 25 百分位",
             "数值": {
               "$item": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.11",
               "block": "us-salary",
@@ -35772,7 +36009,7 @@
           },
           {
             "fact_ref": "us-wage-2025",
-            "指标": "薪资 · 中位数",
+            "指标": "第 50 百分位（中位数）",
             "数值": {
               "$item": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.13",
               "block": "us-salary",
@@ -35787,7 +36024,7 @@
             }
           },
           {
-            "指标": "薪资 · 75 分位",
+            "指标": "第 75 百分位",
             "数值": {
               "$item": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.15",
               "block": "us-salary",
@@ -35803,7 +36040,7 @@
           },
           {
             "fact_ref": "us-wage-high10-2025",
-            "指标": "薪资 · 90 分位",
+            "指标": "第 90 百分位",
             "数值": {
               "$item": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.17",
               "block": "us-salary",
@@ -35929,8 +36166,8 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国工业生态学家工资多少？",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "heading": "美国上位职业组工资",
+        "industry_heading": "美国行业工资资料",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
@@ -36066,50 +36303,62 @@
         "outlook_heading": "美国就业前景",
         "outlook_period": "2025-2035",
         "wage_column_labels": [
-          "工资统计位置",
-          "年工资参考",
-          "折算边界",
-          "怎样理解这个位置"
+          "分位",
+          "年薪",
+          "时薪",
+          "统计口径"
         ],
-        "wage_heading": "美国工资分布",
+        "wage_heading": "2025 年 5 月美国上位组全国工资分位",
         "wage_tiers": [
           {
-            "equivalent": "官方年工资，非个人月收入",
+            "equivalent": "25.25 美元／时",
             "interpretation": {
               "$item": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最低 10%",
+            "label": "第 10 百分位",
             "value": {
               "$fact": "us-wage-low10-2025",
               "field": "display_value"
             }
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "31.01 美元／时",
+            "interpretation": "2025 年 5 月美国上位组 19-2041 全国工资。",
+            "label": "第 25 百分位",
+            "value": "64,490 美元／年"
+          },
+          {
+            "equivalent": "39.53 美元／时",
             "interpretation": {
               "$item": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "中位数（50%）",
+            "label": "第 50 百分位（中位数）",
             "value": {
               "$fact": "us-wage-2025",
               "field": "display_value"
             }
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "51.91 美元／时",
+            "interpretation": "2025 年 5 月美国上位组 19-2041 全国工资。",
+            "label": "第 75 百分位",
+            "value": "107,970 美元／年"
+          },
+          {
+            "equivalent": "67.31 美元／时",
             "interpretation": {
               "$item": "industrial-ecologists.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最高 10%",
+            "label": "第 90 百分位",
             "value": {
               "$fact": "us-wage-high10-2025",
               "field": "display_value"
@@ -36257,7 +36506,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "industrial-ecologists.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36302,7 +36551,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "industrial-ecologists.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36347,7 +36596,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "onet-wages",
             "value": {
               "$item": "industrial-ecologists.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36449,6 +36698,24 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "industrial-ecologists.source-register.published.1"
+            },
+            "id": "bls-ep-2025-2035",
+            "label": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "industrial-ecologists.source-register.published.1"
+            },
+            "scope": "BLS 表 1.2 的美国上位组 19-2041（环境科学家与专业人员（含健康方向））职业行显示，2025 年约 93,400 个岗位，2035 年预计约 99,200 个，表列变化 +6.1%，预计年均约 7,300 个空缺，含替补。人数分别取整。"
           }
         ],
         "transitions": [
@@ -36912,7 +37179,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "cta_label": "了解我的智力与推理表现",
+            "cta_label": "矩阵推理",
             "evidence_level": {
               "$item": "industrial-ecologists.fit.personality-fit-block.19",
               "block": "fit",
@@ -36920,7 +37187,7 @@
               "type": "prose"
             },
             "id": "iq",
-            "label": "智力商数（IQ）与数理推理",
+            "label": "矩阵推理",
             "question": "数学不好，能做工业生态学家吗？",
             "signals": {
               "$item": "industrial-ecologists.fit.personality-fit-block.20",
@@ -36949,7 +37216,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "cta_label": "了解我的情绪智力能力",
+            "cta_label": "情绪沟通习惯自评",
             "evidence_level": {
               "$item": "industrial-ecologists.fit.personality-fit-block.23",
               "block": "fit",
@@ -36957,7 +37224,7 @@
               "type": "prose"
             },
             "id": "eq",
-            "label": "情绪智力（EI，常称“情商”）",
+            "label": "情绪沟通习惯自评",
             "question": "做工业生态学家需要高情商吗？",
             "signals": {
               "$item": "industrial-ecologists.fit.personality-fit-block.24",
@@ -37526,7 +37793,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合工业生态学家",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37603,7 +37870,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "大五人格"
+            "label": "大五人格测评"
           },
           {
             "href": {
@@ -37613,7 +37880,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI"
+            "label": "MBTI 偏好测评"
           },
           {
             "href": {
@@ -37623,7 +37890,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "智力与推理"
+            "label": "矩阵推理"
           },
           {
             "href": {
@@ -37633,7 +37900,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "情绪智力"
+            "label": "情绪沟通习惯自评"
           }
         ]
       },
@@ -37811,19 +38078,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资参考",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
       "market-signals": "职业前景与相关职业转向",
       "navigation": "下一步与相关入口",
-      "path": "入行、资格与职业发展",
+      "path": "入行与I 表：工业清单口径复核",
       "profile": "职业画像",
       "quick-decision": "快速判断",
       "risk": "工作压力、风险与职业边界",
       "source-register": "资料来源",
       "sources": "常见问题与资料来源",
-      "us-salary": "美国薪资参考"
+      "us-salary": "美国上位职业组工资"
     }
   },
   "fact_register": {
@@ -37841,92 +38108,92 @@
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 19-2041.03 页呈现，但 O*NET 将其标注为 Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组 合并口径，不是本职业单一精确数据；不含福利与奖金；分位是分布位置，不对应个人起薪或经验等级。",
-        "display_value": "中位年薪 82,220 美元（2025 年，BLS OEWS，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "82,220 美元／年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "工资中位数",
-        "occupation_scope": "本职业：工业生态学家",
-        "period": "2025",
+        "measure": "上位职业 · 美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "19-2041",
+        "period": "2025-05",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 19-2041.03 页呈现，但 O*NET 将其标注为 Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组 合并口径，不是本职业单一精确数据；不含福利与奖金；分位是分布位置，不对应个人起薪或经验等级。",
-        "display_value": "第 10 分位年薪 52,520 美元（2025 年，BLS OEWS，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "52,520 美元／年",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "工资第10分位",
-        "occupation_scope": "本职业：工业生态学家",
-        "period": "2025",
+        "occupation_scope": "19-2041",
+        "period": "2025-05",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 19-2041.03 页呈现，但 O*NET 将其标注为 Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组 合并口径，不是本职业单一精确数据；不含福利与奖金；分位是分布位置，不对应个人起薪或经验等级。",
-        "display_value": "第 90 分位年薪 140,010 美元（2025 年，BLS OEWS，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "140,010 美元／年",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "工资第90分位",
-        "occupation_scope": "本职业：工业生态学家",
-        "period": "2025",
+        "occupation_scope": "19-2041",
+        "period": "2025-05",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组 合并口径（2024—2034）；增长为平均，主要受环境政策与企业可持续需求影响，不能归因于生成式 AI；含替换需求，不等于实际招聘数，也不等于 19-2041.03 单一规模。",
-        "display_value": "增长 平均（4%，2024—2034，BLS 就业预测，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）",
+        "derivation": "BLS 表 1.2 上位组职业行。",
+        "display_value": "+6.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长",
-        "occupation_scope": "本职业：工业生态学家",
-        "period": "2024-2034",
+        "measure": "上位职业 · 美国预计就业变化（2025—2035）",
+        "occupation_scope": "19-2041",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组 合并口径（2024—2034）；增长为平均，主要受环境政策与企业可持续需求影响，不能归因于生成式 AI；含替换需求，不等于实际招聘数，也不等于 19-2041.03 单一规模。",
-        "display_value": "就业 约 90,300 人（2024 年，BLS 就业预测基期，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径）",
+        "derivation": "BLS 表 1.2 上位组职业行。",
+        "display_value": "约 93,400 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数",
-        "occupation_scope": "本职业：工业生态学家",
-        "period": "2024",
+        "measure": "上位职业 · 美国就业岗位（2025）",
+        "occupation_scope": "19-2041",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组 合并口径（2024—2034）；增长为平均，主要受环境政策与企业可持续需求影响，不能归因于生成式 AI；含替换需求，不等于实际招聘数，也不等于 19-2041.03 单一规模。",
-        "display_value": "预计年均岗位空缺 约 8,500 个（2024—2034，BLS 就业预测，Environmental Scientists and Specialists, Including Health（环境科学家与专家，含健康）父职业组口径，含增长与替补）",
+        "derivation": "BLS 表 1.2 上位组职业行。",
+        "display_value": "年均约 7,300 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺",
-        "occupation_scope": "本职业：工业生态学家",
-        "period": "2024-2034",
+        "measure": "上位职业 · 美国年均职位空缺（2025—2035）",
+        "occupation_scope": "19-2041",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "未取得可按本职业读取的全国职业工资；国家统计局按行业门类公布、不区分职业。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与美国 O*NET/SOC 19-2041.03 精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "国家统计局表 2、5 的行业年平均工资。",
+        "display_value": "城镇非私营单位 182,064 元／年，城镇私营单位 83,560 元／年",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：工业生态学家",
+        "occupation_scope": "行业背景",
         "period": "2025",
         "source_refs": [
           "nbs"
         ]
       },
       {
-        "derivation": "未取得可按本职业读取的全国职业工资；私营单位口径同样按行业门类公布。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与美国 O*NET/SOC 19-2041.03 精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "国家统计局行业背景和本页职业证据缺口分开。",
+        "display_value": "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
@@ -37935,63 +38202,51 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "58%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "工业生态学家",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "工业生态学家 · 任务、交付与责任边界",
-      "来源范围 · 统计口径 · 人工复核",
-      "中国大陆精确职业工资缺口按证据保留"
+      "工业生态学工作者",
+      "美国工资与就业采用上位组 19-2041",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国年薪中位数（2025，BLS OEWS，父职业组口径）"
+        "label": "上位职业 · 美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，父职业组口径）"
+        "label": "上位职业 · 美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，父职业组口径）"
+        "label": "上位职业 · 美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，父职业组口径）"
+        "label": "上位职业 · 美国年均职位空缺（2025—2035）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "cn-urban-nonprivate-2025",
         "key": "china_pay",
-        "label": "中国大陆精确职业工资（未取得）"
+        "label": "中国大陆城镇科学研究和技术服务业平均年工资（行业参照）"
       }
     ]
   },
@@ -37999,17 +38254,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "工业生态学家做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET/SOC 19-2041.03）、BLS OEWS 2025 工资分位与 BLS 就业预测 2024—2034（父职业组口径）、中国大陆资格与环保制度边界与全国职业工资缺口。"
+      "text": "了解工业生态学工作者的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "工业生态学家"
+      "text": "工业生态学工作者做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "49e2b8f8da3f154358a7cba4ef410ae2f4aff297ad2ce9d13c9bc736aedb96df",
+  "source_content_sha256": "5ad1c33faff53bab2fad681c98e10a9620e95c022234cd68695237fc17d97c53",
   "subject": {
     "canonical_slug": "industrial-ecologists",
-    "name": "工业生态学家",
-    "summary": "工业生态学家对应美国 O*NET/SOC 19-2041.03「Industrial Ecologists」这一精确职业：把自然生态系统的原理与过程应用于建立高效工业系统的模型；运用物理与社会科学知识，在商品与服务的生产和使用中最大化自然资源的有效利用；考察社会议题及其与技术系统和环境的关系。官方范围原文：Apply principles and processes of natural ecosystems to develop models for efficient industrial systems. Use knowledge from the physical and social sciences to maximize effective use of natural resources in the production and use of goods and services. Examine societal issues and their relationship with both technical systems and the environment. 核心任务是识别环境影响、开发减少影响的策略、开展物质流分析（MFA/SFA）可持续性评估、把开环系统重设计为闭环系统、审查研究文献并编写环境影响报告。本页美国工资与就业取自 O*NET 呈现的 BLS OEWS 2025 年与 BLS 就业预测 2024—2034，且 O*NET 在该职业页把两者标注为 Environmental Scientists and Specialists, Including Health 父职业组口径；中国大陆精确职业工资未取得，按可见缺口登记；中国侧资格与环保制度边界单独标注。"
+    "name": "工业生态学工作者",
+    "summary": "工业生态学工作者研究工业活动如何使用材料和能源、产生废物或排放，以及不同过程和场所之间的联系。常见交付包括物质与能源清单、边界与假设说明、结果对照和改进建议。"
   }
 }

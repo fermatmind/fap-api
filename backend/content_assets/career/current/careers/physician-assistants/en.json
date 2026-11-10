@@ -23011,13 +23011,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "If you want to take on clinical assessment and treatment responsibility, first verify accredited PA programs, clinical rotations, target state licensure, and supervision or collaboration rules, then compare costs, shifts, and departments. If you prefer a nursing path, verify nursing practice qualifications and the training system separately."
+              "Paper check | Add a review-status column to a fictional handoff. Flag a pending result with a mismatched ID and retain both records. "
             ]
           },
           "id": "physician-assistants.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23305,14 +23304,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Physician assistants collect history, examine patients, order and interpret tests, judge and treat illness, educate patients, document progress, and collaborate with physicians and other team members; actual authority depends on state law and institutional authorization."
+              "Physician assistants assess patients, document care and participate in follow-up within applicable practice rules and team arrangements. Pending results go to the authorized clinician for review. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "physician-assistants.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "cnclass"
+            "transfer-onet-29-1071.00"
           ],
           "type": "prose"
         },
@@ -24398,15 +24395,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI can assist in organizing authorized medical records, retrieving guidelines, and drafting patient explanations, but there is no evidence that it can independently and safely diagnose or prescribe. PAs must verify patient identity, history, examination, medication, allergies, and abnormal results, and personally take responsibility for clinical judgment, communication, and documentation under state law and physician collaboration rules. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Add a review-status column to a fictional handoff. Flag a pending result with a mismatched ID and retain both records."
             ]
           },
           "id": "physician-assistants.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-29-1071.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32134,6 +32129,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-29-1071.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 29-1071.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/29-1071.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37378,10 +37400,10 @@
       "text": "Physician assistants"
     }
   },
-  "source_content_sha256": "6ce5f4430f919249e98efa4b739369d065f0ffab1bf345c032e2814410b51ca2",
+  "source_content_sha256": "62c242545f655bf805c3dfd1ffe3f0c97dc71f60dd5614772a856afe3b9e4548",
   "subject": {
     "canonical_slug": "physician-assistants",
     "name": "Physician assistants",
-    "summary": "United States physician assistants (PAs) take histories, examine patients, identify problems, order tests, treat, document, and provide health education within the framework of physician collaboration and each state's rules. They usually need to complete an accredited master's program and obtain a state license; a United States PA-C cannot be converted directly into Chinese physician practice qualifications."
+    "summary": "Physician assistants assess patients, document care and participate in follow-up within applicable practice rules and team arrangements. Pending results go to the authorized clinician for review."
   }
 }

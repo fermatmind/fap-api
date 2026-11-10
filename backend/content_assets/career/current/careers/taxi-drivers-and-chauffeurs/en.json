@@ -23670,15 +23670,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First observe whether you can keep original values and numbers, find time conflicts on the same resource and leave them pending, and neither delete bookings nor fill in unknowns on your own. Actual driving and specialized passenger assistance also require lawful conditions and training, and one scheduling pass does not prove driving or first aid ability."
+              "Paper check | Put a fictional on-demand trip and a scheduled shuttle run in departure order. Flag the pickup point to verify and name the contact for the scheduled trip. "
             ]
           },
           "id": "taxi-drivers-and-chauffeurs.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "cn-rule",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -25183,18 +25180,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Shuttle drivers and chauffeurs drive vehicles to transport passengers per a prior plan or schedule, possibly for a fee; this includes non-emergency medical transport and hearse driving, but does not thereby confer medical or emergency service qualification. This page fixes O*NET-SOC53-3053.00 to the current Shuttle Drivers and Chauffeurs, with the old URL name retained; on-demand fare taxi 53-3054 is listed separately. Actual business first separates unit self-use pickup, commercial shuttle and charter, or taxi bookings, then checks personnel permitted class, vehicle operation, permitted areas, and safety training; paper schedule checking grants no driving or operating qualification."
+              "Taxi drivers usually handle on-demand trips, while shuttle drivers and chauffeurs generally work to agreed times and locations. Both check passenger trip details and vehicle arrangements. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "taxi-drivers-and-chauffeurs.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-ooh",
-            "employer",
-            "cn-rule",
-            "sag",
-            "editorial"
+            "transfer-onet-53-3054.00",
+            "transfer-onet-53-3053.00"
           ],
           "type": "prose"
         }
@@ -26018,19 +26010,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate text schedule checking, navigation and dispatch, and vehicle control. Keep the original booking, vehicle, and time slots, duplicates, and unknowns, and real business safety, training, and permits are checked by the corresponding responsible personnel; a tool does not turn a plan into completion. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Put a fictional on-demand trip and a scheduled shuttle run in departure order. Flag the pickup point to verify and name the contact for the scheduled trip."
             ]
           },
           "id": "taxi-drivers-and-chauffeurs.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-ooh",
-            "cn-rule",
-            "employer",
-            "sag",
-            "nist",
-            "editorial"
+            "transfer-onet-53-3054.00",
+            "transfer-onet-53-3053.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -35473,6 +35460,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-53-3054.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 53-3054.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/53-3054.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-53-3053.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 53-3053.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/53-3053.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -40945,10 +40973,10 @@
       "text": "Shuttle Drivers and Chauffeurs"
     }
   },
-  "source_content_sha256": "8fd79b0f18511f2af383f085baf22ee65055a174f4d76e0fb43ec98c83e83a9f",
+  "source_content_sha256": "21bbedb5d0e5d224aff76e594db6f965d962c221811d5934bba7a1b545c596a8",
   "subject": {
     "canonical_slug": "taxi-drivers-and-chauffeurs",
     "name": "Shuttle Drivers and Chauffeurs",
-    "summary": "Shuttle drivers and chauffeurs drive vehicles to transport passengers per a prior plan or schedule, possibly for a fee; this includes non-emergency medical transport and hearse driving, but does not thereby confer medical or emergency service qualification. This page fixes O*NET-SOC53-3053.00 to the current Shuttle Drivers and Chauffeurs, with the old URL name retained; on-demand fare taxi 53-3054 is listed separately. Actual business first separates unit self-use pickup, commercial shuttle and charter, or taxi bookings, then checks personnel permitted class, vehicle operation, permitted areas, and safety training; paper schedule checking grants no driving or operating qualification."
+    "summary": "Taxi drivers usually handle on-demand trips, while shuttle drivers and chauffeurs generally work to agreed times and locations. Both check passenger trip details and vehicle arrangements."
   }
 }

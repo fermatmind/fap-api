@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a54-airchina": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a54-spring": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:flight-attendants.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:flight-attendants.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "flight-attendants.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "flight-attendants.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23076,7 +23042,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一趟满客中枢航线航班在巡航阶段遇到持续颠簸，随后一名旅客出现呼吸急促并拒绝系安全带。请写出一份值班乘务员从发现到落地的处置草案：（1）如何在保证自身安全的前提下接近并稳定该旅客；（2）颠簸期间对客舱其他旅客的指令与广播顺序；（3）向乘务长与驾驶舱报告的内容与时机；（4）落地后如何与地面医疗、地服与公司安全部门交接并留痕。以公开的客舱安全资料与模拟情境作答，不涉及任何真实航班或旅客信息。"
+              "用 CA31 的虚构座位和预订记录写一页服务交接。区分已确认的变更、缺件和给乘务长的待核事项。"
             ]
           },
           "id": "flight-attendants.quick-decision.fit-decision-checklist.2",
@@ -23143,7 +23109,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "安全工作样本（一份完全虚构的空乘人员任务包）：执飞一段 3 小时 20 分的国内干线航班，客座率 92%。起飞前完成客舱应急设备检查（灭火器、氧气瓶、急救包、便携式氧气瓶、逃生滑梯压力表）并在检查单上留痕；起飞后按顺序完成安全演示与客舱巡视，处置 3 项旅客需求（婴儿摇篮安装、无成人陪伴儿童交接、餐食过敏说明）；巡航中段遇中度颠簸，需广播并停止服务、固定餐车、检查旅客安全带；落地前完成客舱整理与遗失物品登记，落地后向乘务长交接并以书面记录提交异常项。请说明你如何在 60 分钟内排定优先级、哪些步骤不能省略、哪些异常必须升级给乘务长或驾驶舱。"
+              "工作样本：用虚构的 CA31 用品包记录核对座位、预订编号和用品状态，明确下一位接手人。把仍需确认的事项交给乘务长。"
             ]
           },
           "id": "flight-attendants.profile.career-quick-answers-block.1",
@@ -23251,12 +23217,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "相邻职责边界｜本页只覆盖 Flight Attendants（O*NET-SOC 53-2031.00）。同属运输与客舱服务链条的其他岗位各有独立授权与责任：机场安检人员负责旅客与行李的安全检查与禁限物品处置；航空器服务人员负责客舱清洁与供应品补充；行李搬运与行李员负责行李装卸与递送；售票与预订人员负责客票与座位业务。相邻岗位的执照、签字、处置权与最终责任不得由本职业代为承担，跨岗协作须按各自授权与交接程序办理。"
+              "相邻职责边界｜空乘负责机上客舱安全和旅客服务。安检人员按地面安检流程检查旅客和行李。 航空器地面服务人员为飞机加油，并可能承担除冰、供水等机外保障。客舱清洁另按岗位分工。"
             ]
           },
           "id": "flight-attendants.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "nbs-wages-2025"
+            "onet-summary",
+            "a54-ground"
           ],
           "type": "prose"
         },
@@ -23474,7 +23441,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "就业证据边界｜本页引用的就业与增长来自 BLS 职业就业与工资统计（OEWS，May 2025）与 BLS 就业预测（2024—2034），均为美国口径，且覆盖受雇者、不含自雇与部分兼职形态；O*NET 呈现的 2024 年就业 130,800 人与 OEWS 的 131,650 人属不同统计口径，不能混用作同一序列。中国大陆未建立与空乘人员精确对应的公开职业工资统计，本页不以美国数值或不相关行业数值替代中国结论。"
+              "就业证据边界｜就业预测采用 BLS 表 1.2。OEWS 工资统计另有抽样口径。中国大陆全国细职业工资仍缺可比资料。"
             ]
           },
           "id": "flight-attendants.profile.career-quick-answers-block.15",
@@ -23564,13 +23531,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆薪资证据—计量单位｜中国大陆：行业平均工资以「元/年」表示，为税前应发口径，不含加班与飞行小时费与各类补贴；本职业实际收入通常由基本工资加飞行小时费与驻外补贴构成，二者不可直接比较。"
+              "中国大陆薪资证据—计量单位｜国家统计局的城镇单位平均工资为税前，按定义可包括奖金、津贴补贴及加班工资。行业均值不能代表空乘个人收入。"
             ]
           },
           "id": "flight-attendants.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -23608,7 +23574,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国薪资证据—统计时期｜美国：OEWS May 2025 工资估计（年度发布），就业预测采用 BLS 2024—2034 预测期；两者发布周期与口径不同，比较时须分列。"
+              "美国薪资证据—统计时期｜美国：OEWS May 2025 工资估计（年度发布），就业预测采用 BLS 2025–2035 预测期；两者发布周期与口径不同，比较时须分列。"
             ]
           },
           "id": "flight-attendants.profile.career-quick-answers-block.24",
@@ -23666,13 +23632,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国薪资证据—抽样与缺失限制｜美国：OEWS 为抽样调查估计，存在抽样误差与行业/地区细分下的缺失；本页本轮**未取得可按行业读取的本职业分行业工资中位数**，该位置按可见缺口登记；中位时薪未公布，也不以年薪除以常规工时折算填充。"
+              "美国薪资证据—抽样与缺失限制｜BLS 手册列定期与非定期航空运输两项空乘年薪中位数。其余承运人细分在本次所核表中未单列。O*NET 全国表列年薪五档。"
             ]
           },
           "id": "flight-attendants.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a54-ooh-pay",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -23724,13 +23690,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "任务信号（适配信号 4）｜进入路径要求可核验的资质与训练：民航管理机关要求客舱乘务员完成公司初始训练并通过考核（美国为 FAA 认证与《演示能力证书》，并按机型分别取证、每年复训；中国为按 CCAR-121 部要求的客舱乘务员训练与资格管理），工作经历要求通常在 5 年以下，教育要求以高中/同等学历为主。适配者通常能在几周到几个月的集中训练与严格考核中稳定完成学习任务。"
+              "任务信号（适配信号 4）｜美国 FAA 对适用的 Part 121 或 Part 135 承运人、20 个或以上乘客座位航空器的乘务员签发演示能力证书。个人持一张证书，证书列航空器组别，承运人的机型训练另核。在中国大陆，AC-121-FS-27R3 适用于按 CCAR-121 部运行的合格证持有人。"
             ]
           },
           "id": "flight-attendants.profile.career-quick-answers-block.32",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "a54-faa",
+            "a54-caac"
           ],
           "type": "prose"
         },
@@ -23790,7 +23756,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS 就业预测（2024—2034）",
+                "entity": "BLS 就业预测（2025–2035）",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/"
@@ -23851,7 +23817,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "场景 1（旅客医疗突发事件）｜触发：巡航中旅客出现胸痛、呼吸困难或意识改变。后果：处置延误可能危及生命，且现场判断越界会带来法律与责任风险。控制：立即按手册取急救包与自动体外除颤器、广播寻求机上医疗专业人员、记录时间与症状、经乘务长向机长报告并按机长决定考虑备降或地面医疗。边界：不做诊断、不给药，不承诺医疗结果；医疗判断由机上医疗专业人员或地面医疗机构承担。"
+              "场景 1（旅客医疗突发事件）｜触发：巡航中旅客出现胸痛、呼吸困难或意识改变。后果：处置延误可能危及生命，且现场判断越界会带来法律与责任风险。控制：立即按手册取急救包与自动体外除颤器、广播寻求机上医疗专业人员、记录时间与症状、经乘务长向机长报告并按机长决定考虑备降或地面医疗。边界：诊断交医疗专业人员，涉及药品的处置按航司手册、实际训练及授权执行。"
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.10",
@@ -23938,12 +23904,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "雇主证据｜O*NET 的证书与职业页只能作为美国准备度的检索入口，不能替代所在地的法定资格、雇主授权或签字责任。在中国大陆，客舱乘务员的训练、机型资格与年度复训按民航管理机关的运行规章与承运人手册执行；在美国则为 FAA 认证与按机型取证（《演示能力证书》）。引用来源时必须标明法域、年份与口径。"
+              "雇主证据｜美国 FAA 对适用的 Part 121 或 Part 135 承运人、20 个或以上乘客座位航空器的乘务员签发演示能力证书。个人持一张证书，证书列航空器组别，承运人的机型训练另核。在中国大陆，AC-121-FS-27R3 适用于按 CCAR-121 部运行的合格证持有人。"
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
-            "internal-rubric"
+            "a54-faa",
+            "a54-caac"
           ],
           "type": "prose"
         },
@@ -23952,7 +23919,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "无经验作品｜一份完全虚构的空乘人员任务包：在 60 分钟内完成一次模拟航班的客舱安全准备（应急设备清点与记录）、旅客安全符合性检查清单、以及一次颠簸处置的广播稿与处置记录，并写出复核点与升级条件。不得使用任何真实航班、真实旅客信息或承运人内部资料。"
+              "无经验作品｜完成 CA31 两版用品包交接，另列变式的变化行，保留一条交给乘务长的待确认事项。"
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.17",
@@ -23981,7 +23948,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "七天试验｜前两天理解本职业的对象与流程（客舱安全与旅客服务的并行节拍、号位分工与手册体系）；中间三天完成一次完整的工作样本与复核（设备检查、安全演示稿、一次异常处置记录）；第六天请一位有航空或客运服务经验的人挑战你的判断与记录；第七天写下继续、停止或换方向的证据。"
+              "七天试验｜第 1–2 天记录座位与预订编号，核对已确认变动。第 3–5 天逐件核对用品、标记待核记录并写给乘务长。第 6 天独立提交 CA31 两版交接并另列变化行。第 7 天打开同页 CA31 参考答案并记一处修订。"
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.19",
@@ -23995,12 +23962,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "资格决策｜入门决策要分开三件事：法定资格（民航管理机关要求的训练与资格管理、美国为 FAA 认证与按机型取证）、雇主条件（招聘公告中的学历、外语、体能、体检与背景审查要求）、个人准备（体能、作息耐受、服务沟通与应急处置学习能力）。三者不满足其一，就不能仅凭兴趣或薪酬预期做决定。"
+              "资格决策｜美国 FAA 对适用的 Part 121 或 Part 135 承运人、20 个或以上乘客座位航空器的乘务员签发演示能力证书。个人持一张证书，证书列航空器组别，承运人的机型训练另核。在中国大陆，AC-121-FS-27R3 适用于按 CCAR-121 部运行的合格证持有人。"
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
-            "internal-rubric"
+            "a54-faa",
+            "a54-caac"
           ],
           "type": "prose"
         },
@@ -24066,7 +24034,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "官方与行业信号｜O*NET 53-2031.00 摘要页与 BLS 数据库提供的是美国职业展望口径：2024—2034 年增长 7% 或更高（远高于平均）、预测期岗位空缺 19,800 个、2025 年中位年薪 63,580 美元。该口径不能外推为中国航空运输业的招聘需求，也不能作为个人录用或薪酬的保证。"
+              "官方与行业信号｜O*NET 53-2031.00 摘要页与 BLS 数据库提供的是美国职业展望口径：2025–2035 年增长 8.8%（远高于平均）、年均岗位空缺 18,500 个、2025 年中位年薪 63,580 美元。该口径不能外推为中国航空运输业的招聘需求，也不能作为个人录用或薪酬的保证。"
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.25",
@@ -24125,13 +24093,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "相邻转型｜能力相邻的岗位包括：航空器服务人员（客舱清洁与供应品补充）、客户服务代表（投诉与信息处理）、预订与票务代理及旅行事务员（客票与行程业务）、急救医疗技术员（现场初步救护与转运交接）、非餐馆餐饮服务人员（餐饮服务交付）、住宿经理（服务现场运营管理）。上述方向的资格、授权与法域要求各不相同，转型需按目标岗位的法定准入重新准备。"
+              "相邻转型｜能力相邻的岗位包括：航空器地面服务人员（加油、除冰或补水等机外保障）、客户服务代表（投诉与信息处理）、预订与票务代理及旅行事务员（客票与行程业务）、急救医疗技术员（现场初步救护与转运交接）、非餐馆餐饮服务人员（餐饮服务交付）、住宿经理（服务现场运营管理）。上述方向的资格、授权与法域要求各不相同，转型需按目标岗位的法定准入重新准备。"
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
             "onet-summary",
-            "internal-rubric"
+            "internal-rubric",
+            "a54-ground"
           ],
           "type": "prose"
         },
@@ -24140,7 +24109,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "中国、美国、全球与具体法域证据分别陈述：工资、就业、资格、安全与 AI 结论不得跨范围拼接。本页的美国数值来自 BLS OEWS May 2025 与 BLS 就业预测 2024—2034；中国大陆部分仅说明缺少与空乘人员精确对应的公开职业工资统计，并列出可核验的授权来源（民航管理机关运行规章与承运人手册）；两者不互相换算、不互相佐证。"
+              "中国、美国、全球与具体法域证据分别陈述：工资、就业、资格、安全与 AI 结论不得跨范围拼接。本页的美国数值来自 BLS OEWS May 2025 与 BLS 就业预测 2025–2035；中国大陆部分仅说明缺少与空乘人员精确对应的公开职业工资统计，并列出可核验的授权来源（民航管理机关运行规章与承运人手册）；两者不互相换算、不互相佐证。"
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.30",
@@ -24169,12 +24138,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "任何 暂无可安全使用的数据 都只表示在有界检索后没有建立安全可用的数据，不允许用代理值或模型记忆伪造数字。本页对美国空乘人员分行业工资与中位时薪均按此处理：分行业工资未取得可按本职业读取的行业细分中位数，中位时薪 OEWS 未公布，因此两处均保留可见缺口标记，不以职业大类工资、行业平均工资或按常规工时折算来填充。"
+              "BLS 手册列定期与非定期航空运输两项空乘年薪中位数。其余承运人细分在本次所核表中未单列。O*NET 全国表列年薪五档。"
             ]
           },
           "id": "flight-attendants.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
-            "internal-rubric"
+            "a54-ooh-pay",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -24262,10 +24232,10 @@
                 "entity": "BLS 职业就业与工资统计（OEWS，May 2025）",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes532031.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-2031.00"
               },
               {
-                "entity": "BLS 就业预测（2024—2034）职业与特征表",
+                "entity": "BLS 就业预测（2025–2035）职业与特征表",
                 "id": "link-6",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24277,10 +24247,10 @@
                 "url": "https://www.bls.gov/ooh/transportation-and-material-moving/flight-attendants.htm"
               },
               {
-                "entity": "BLS OEWS 数据主页",
+                "entity": "BLS 2025 年 5 月 OEWS 全国表 1",
                 "id": "link-8",
                 "relation": "career.evidence",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.bls.gov/news.release/ocwage.t01.htm"
               },
               {
                 "entity": "ILO 工作论文 96（2023）：生成式 AI 的任务暴露国际研究",
@@ -24340,7 +24310,7 @@
                 "entity": "BLS 职业就业与工资统计（职业页）",
                 "id": "link-18",
                 "relation": "career.evidence",
-                "url": "https://www.bls.gov/oes/current/oes532031.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-2031.00"
               },
               {
                 "entity": "BLS 就业预测数据库",
@@ -24633,7 +24603,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（2024—2034）职业与特征表"
+              "BLS 就业预测（2025–2035）职业与特征表"
             ]
           },
           "id": "flight-attendants.ai-impact.ai-impact-table.29",
@@ -24803,12 +24773,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "来源｜BLS 职业就业与工资统计（OEWS）数据主页（美国）。"
+              "来源｜BLS 2025 年 5 月 OEWS 全国表 1。"
             ]
           },
           "id": "flight-attendants.ai-impact.ai-impact-table.41",
           "source_refs": [
-            "internal-rubric"
+            "a54-oews-national"
           ],
           "type": "prose"
         },
@@ -24817,12 +24787,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "口径｜雇主调查的年度工资与就业估计，按 SOC 53-2031 单列本职业：2025 年中位年薪 63,580 美元、年均 77,440 美元、分位 35,110/51,760/95,640/136,430 美元、就业 131,650 人。"
+              "口径｜53-2031 的全国受雇岗位估计为 131,650 个，平均年薪为 77,440 美元。工资分位见本页美国工资区。"
             ]
           },
           "id": "flight-attendants.ai-impact.ai-impact-table.42",
           "source_refs": [
-            "internal-rubric"
+            "a54-oews-national"
           ],
           "type": "prose"
         },
@@ -24831,12 +24801,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "OEWS统计受雇者税前正常工时工资，包含佣金、激励工资、生产奖金和小费；排除加班溢价、非生产奖金及雇主福利成本，不覆盖自雇者。地区和行业差异反映在工资分布中，不能概括为未计入。 职业页旧URL目前跳转OEWS表入口，均值、就业与25/75未重取，不断言未公布中位时薪。"
+              "OEWS统计受雇者税前正常工时工资，包含佣金、激励工资、生产奖金和小费；排除加班溢价、非生产奖金及雇主福利成本，不覆盖自雇者。地区和行业差异反映在工资分布中，不能概括为未计入。"
             ]
           },
           "id": "flight-attendants.ai-impact.ai-impact-table.43",
           "source_refs": [
-            "internal-rubric"
+            "a54-oews-national"
           ],
           "type": "prose"
         },
@@ -25069,7 +25039,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "当前2025—2035年均空缺18500，非净新增或十年合计；原19800旧版单位未重取，不以量级推合计。"
+              "美国 BLS 表 1.2 的 53-2031 行显示，2025 年就业约 133,700 个岗位，2035 年预计约 145,500 个岗位，增长 8.8%，年均岗位空缺约 18,500 个，含增长和替补。"
             ]
           },
           "id": "flight-attendants.ai-impact.ai-impact-table.60",
@@ -25313,7 +25283,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "当前2025就业133700、2025—2035增长9%、年均空缺18500；不是净新增或十年合计。原2024—2034登记为历史，原19800单位未重新核旧表，不能凭数量级断言合计。 OEWS与投影不同；任务和制度分别核，不用三层一致推个人就业概率。"
+              "美国 BLS 表 1.2 的 53-2031 行显示，2025 年就业约 133,700 个岗位，2035 年预计约 145,500 个岗位，增长 8.8%，年均岗位空缺约 18,500 个，含增长和替补。"
             ]
           },
           "id": "flight-attendants.ai-impact.ai-impact-table.77",
@@ -25994,12 +25964,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘报价：证据不足，本轮未取得可核验样本"
+              "国航与春秋航空的历史招培公告可作样本，两份公告未提供可比岗位工资分布。"
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "nbs-wages-2025"
+            "a54-airchina",
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -26008,12 +25979,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜未列中国具体历史公告；边界｜不把美国平均工资当中国招聘样本。"
+              "口径｜国航北京校招是历史招聘样本，春秋首班结业是历史培训样本。两份公告均未列岗位工资分布。"
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "nbs-wages-2025"
+            "a54-airchina",
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -26248,13 +26220,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮未取得中国承运人招聘样本，不断言高中/中专是多数学历下限，也不设外语与服务能力权重。"
+              "国航与春秋航空的历史招培公告可作样本，两份公告未提供可比岗位工资分布。"
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "a54-airchina",
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -26513,13 +26485,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国空乘人员精确匹配职业工资、就业与招聘样本；不估算。"
+              "国航与春秋航空的历史招培公告可作样本，两份公告未提供可比岗位工资分布。"
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs-wages-2025",
-            "internal-rubric"
+            "a54-airchina",
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -26570,7 +26542,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "一线城市主基地（北京、上海、广州、深圳等）"
+              "国航北京校招简章"
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.49",
@@ -26584,12 +26556,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按城市或基地核验的空乘人员月薪数据；不以招聘报价、行业均值或他人转述代填。"
+              "国航 2026 届校园招聘简章列北京客舱乘务员，职责含客舱安全、旅客服务与机上用品管理。该批报名已截止，简章未公布工资。"
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "internal-rubric"
+            "a54-airchina"
           ],
           "type": "prose"
         },
@@ -26626,7 +26598,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国际航线派遣与驻外岗位"
+              "春秋航空培训公告"
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.53",
@@ -26640,12 +26612,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按航线类型或驻外结构核验的收入数据；不以招聘报价或第三方估算代填。"
+              "春秋航空公布在上海、兰州启动的客舱乘务专项招聘首班结业。这份公告说明该批培训已结束，未列工资，也未宣布新一轮招聘。"
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -26682,7 +26654,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "当前2025就业133700、2025—2035增长9%、年均空缺18500；不是净新增或十年合计。原2024—2034登记为历史，原19800单位未重新核旧表，不能凭数量级断言合计。"
+              "美国 BLS 表 1.2 的 53-2031 行显示，2025 年就业约 133,700 个岗位，2035 年预计约 145,500 个岗位，增长 8.8%，年均岗位空缺约 18,500 个，含增长和替补。"
             ]
           },
           "id": "flight-attendants.china-salary.career-snapshot-primary-locale.58",
@@ -26718,13 +26690,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 53-2031.00 空乘人员职业档案｜https://www.onetonline.org/link/summary/53-2031.00；BLS 职业就业与工资统计（OEWS，May 2025）｜https://www.bls.gov/oes/current/oes532031.htm；BLS 就业预测（2024—2034）职业与特征表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "O*NET 53-2031.00 空乘人员职业档案｜https://www.onetonline.org/link/summary/53-2031.00；BLS 职业就业与工资统计（OEWS，May 2025）｜https://www.onetonline.org/link/localwages/53-2031.00；BLS 就业预测（2025–2035）职业与特征表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
+            "bls-oews-2025",
             "bls-projections-2025-35",
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -26733,12 +26706,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位年薪 63,580 美元（2025，BLS OEWS）"
+              "63,580 美元/年"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26747,12 +26720,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜OEWS受雇者税前正常工时工资；边界｜不能一概排除飞行劳动报酬或全部津贴；本轮未重取中位时薪原表，不自行折算。"
+              "中位数 · 63,580 美元/年 · May 2025 OEWS；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/53-2031.00"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26761,12 +26734,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "10 分位 35,110 美元/年（2025，BLS OEWS）"
+              "35,110 美元/年"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26775,12 +26748,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜May2025低10%低于35110美元；边界｜不是起薪，不据分位认定入职初期或承运人类型。"
+              "第 10 百分位 · 35,110 美元/年 · May 2025 OEWS；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/53-2031.00"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26789,12 +26762,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "25 分位 51,760 美元/年（2025，BLS OEWS）"
+              "51,760 美元/年"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26803,12 +26776,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜原登记下四分位51760美元，本轮未重取原表；边界｜不据此认定基地、机型或资历原因。"
+              "第 25 百分位 · 51,760 美元/年 · May 2025 OEWS；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/53-2031.00"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26817,12 +26790,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "75 分位 95,640 美元/年（2025，BLS OEWS）"
+              "95,640 美元/年"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26831,12 +26804,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜原登记上四分位95640美元，本轮未重取原表；边界｜不对应统一乘务长或资历等级。"
+              "第 75 百分位 · 95,640 美元/年 · May 2025 OEWS；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/53-2031.00"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26845,12 +26818,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "90 分位 136,430 美元/年（2025，BLS OEWS）"
+              "136,430 美元/年"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26859,12 +26832,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜May2025高10%高于136430美元；边界｜不是总体上限，不推具体承运人或个人可达性。"
+              "第 90 百分位 · 136,430 美元/年 · May 2025 OEWS；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/53-2031.00"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26873,7 +26846,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业 131,650 人（OEWS May 2025；BLS 职业投影 2024 基期 130,800 人）"
+              "美国 BLS 表 1.2 的 53-2031 行显示，2025 年就业约 133,700 个岗位，2035 年预计约 145,500 个岗位，增长 8.8%，年均岗位空缺约 18,500 个，含增长和替补。"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.19",
@@ -26887,7 +26860,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜原OEWS131650与2024投影130800历史登记未重取；边界｜当前2025投影133700，与OEWS不同，投影总体含自雇/无薪家庭劳动但不得推本职业其人数。"
+              "口径｜BLS 2025 年就业预测基期。；边界｜与 OEWS 调查覆盖范围不同。"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.20",
@@ -26902,7 +26875,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 7% 或更高（远高于平均，2024—2034，BLS 投影）"
+              "增长 8.8%（远高于平均，2025–2035，BLS 投影）"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.21",
@@ -26930,7 +26903,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预测期岗位空缺约 19,800 个（2024—2034，含替换需求）"
+              "年均岗位空缺约 18,500 个（2025–2035，含替换需求）"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.23",
@@ -26944,7 +26917,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜当前2025就业133700、2025—2035增长9%、年均空缺18500；不是净新增或十年合计。原2024—2034登记为历史，原19800单位未重新核旧表，不能凭数量级断言合计。；边界｜空缺包含增长与替补，不代表个人录用。"
+              "口径｜美国 BLS 表 1.2 的 53-2031 行显示，2025 年就业约 133,700 个岗位，2035 年预计约 145,500 个岗位，增长 8.8%，年均岗位空缺约 18,500 个，含增长和替补；边界｜空缺包含增长与替补，不代表个人录用。"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.24",
@@ -26959,7 +26932,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "US口径：May2025中位63580、10/90阈值35110/136430仍可核；25/75、均值与OEWS就业原表未重取。当前2025就业133700、2025—2035增长9%、年均空缺18500；不是净新增或十年合计。原2024—2034登记为历史，原19800单位未重新核旧表，不能凭数量级断言合计。已取得部分真实行业中位，不作中国工资。"
+              "美国 BLS 表 1.2 的 53-2031 行显示，2025 年就业约 133,700 个岗位，2035 年预计约 145,500 个岗位，增长 8.8%，年均岗位空缺约 18,500 个，含增长和替补。"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.25",
@@ -27074,7 +27047,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 7% 或更高（远高于平均，2024—2034，BLS 投影，经 O*NET 呈现）"
+              "增长 8.8%（远高于平均，2025–2035，BLS 投影，经 O*NET 呈现）"
             ]
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.33",
@@ -27093,7 +27066,7 @@
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a54-ooh-pay"
           ],
           "type": "prose"
         },
@@ -27107,7 +27080,7 @@
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a54-ooh-pay"
           ],
           "type": "prose"
         },
@@ -27121,7 +27094,7 @@
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a54-ooh-pay"
           ],
           "type": "prose"
         },
@@ -27135,7 +27108,7 @@
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a54-ooh-pay"
           ],
           "type": "prose"
         },
@@ -27149,7 +27122,7 @@
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a54-ooh-pay"
           ],
           "type": "prose"
         },
@@ -27163,7 +27136,7 @@
           },
           "id": "flight-attendants.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "bls-projections-2025-35"
+            "a54-ooh-pay"
           ],
           "type": "prose"
         },
@@ -27390,13 +27363,13 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
@@ -27468,10 +27441,10 @@
                 "entity": "BLS 职业就业与工资统计（OEWS）",
                 "id": "link-15",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes532031.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-2031.00"
               },
               {
-                "entity": "BLS 就业预测（2024—2034）",
+                "entity": "BLS 就业预测（2025–2035）",
                 "id": "link-16",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -28137,7 +28110,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "US FAA演示能力证书适用于Part121/135承运人20座以上航空器客舱人员；证书标注Group1螺旋桨/Group2涡喷，一个人持一张证书，不是每机型分别发证；机型训练与证书Group评级分别核。中国另核，不互换。"
+              "US FAA演示能力证书适用于Part121/135承运人20 个或以上乘客座位航空器客舱人员；证书标注Group1螺旋桨/Group2涡喷，一个人持一张证书，不是每机型分别发证；机型训练与证书Group评级分别核。中国另核，不互换。"
             ]
           },
           "id": "flight-attendants.fit.personality-fit-block.41",
@@ -28327,7 +28300,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "US FAA演示能力证书适用于Part121/135承运人20座以上航空器客舱人员；证书标注Group1螺旋桨/Group2涡喷，一个人持一张证书，不是每机型分别发证；机型训练与证书Group评级分别核。中国另核，不互换。 JobZone1—2是一般准备层级，不是本职业全部训练时间或中国要求；CAACR3页面仍标有效，2026征求意见稿不作正式替代。"
+              "US FAA演示能力证书适用于Part121/135承运人20 个或以上乘客座位航空器客舱人员；证书标注Group1螺旋桨/Group2涡喷，一个人持一张证书，不是每机型分别发证；机型训练与证书Group评级分别核。中国另核，不互换。 JobZone1—2是一般准备层级，不是本职业全部训练时间或中国要求；CAACR3页面仍标有效，2026征求意见稿不作正式替代。"
             ]
           },
           "id": "flight-attendants.fit.personality-fit-block.54",
@@ -29059,7 +29032,7 @@
                 "地面航空器服务（含燃油等）",
                 "按真实设备与岗位执行地面航空器服务；不限定客舱清洁",
                 "核地面作业安全、设备及真实授权；非空乘资格自动等价",
-                "一份虚构航班的客舱清洁与补给清单：分区顺序、用品盘点表、缺陷报告样张（含位置与现象）",
+                "一张虚构的机外保障工单，记录设备状态、异常位置、交接对象和待确认事项。",
                 "地面航空器服务与飞行中客舱安全分别核，非已验证过渡路线"
               ],
               [
@@ -29156,34 +29129,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "全部使用公开资料与虚构情境：一份模拟航班任务书、空白的航前应急设备检查单（含滑梯压力表、氧气瓶、急救包与自动体外除颤器、应急照明项目）、一份异常事件报告模板。",
-                  "不得使用真实航班号、真实旅客信息、承运人内部文件或任何个人数据。",
-                  "可用 O*NET 53-2031.00 的公开任务与工作情境描述作为背景，但不得直接引用其英文原文充当自己的作品内容。",
-                  "补充材料：一份标准广播用语清单（含颠簸、医疗、落地提示三类场景），用于练习用语规范。"
+                  "CA31：服务清单上的物品是旅客预订的封装用品包。",
+                  "S11：预订 P11 原列 11A，登机后记录已确认换到 12C。",
+                  "S12：预订 P12 列 14D，物品清单有一包，实物未找到。",
+                  "S13：预订 P13 列 16B，座位与实物均核对一致。",
+                  "每笔预订只能按其编号交付。",
+                  "物品组核查 S12 缺件，乘务长负责批准差异记录并安排沟通。",
+                  "所有座位、物品和记录均为虚构。",
+                  "只写服务交接。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "在 60 分钟内完成：客舱应急设备检查记录（逐项写明确认方式与结果）、起飞前安全符合性检查清单（逐排确认项与纠正记录）、一次颠簸处置的广播稿与处置记录（含时间、位置、处置动作、报告对象）。",
-                  "另需为一次旅客医疗事件写出一页处置与升级说明：现场做了什么、向谁报告、不做哪些事。",
-                  "最后为自己的三项判断标注依据来源（手册条款类型、训练内容或公开资料），并说明哪些属于必须升级的范围。"
+                  "逐条写座位、物品状态、下一步和接手人。",
+                  "单项变式：S12 的 P12 用品包已在备用箱中找到并核对编号。其他条件不变。另列变化行。",
+                  "写给乘务长一条待确认事项。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先列检查顺序与不可省略项，再逐项记录确认方式；对异常项写清位置、现象、判断依据与升级对象；最后写一段反思：哪些步骤如果被压缩会导致什么后果。",
-                  "把「服务完成」与「安全合规」分开记录，避免安全项被服务项淹没。",
-                  "用「他人能否仅凭记录接手」作为自检标准，而不是文笔或篇幅。",
-                  "方法补充：把「必须升级的四类事项」单独列成检查表，处置前先对照，避免越界。"
+                  "先独立交原题和变式。",
+                  "分开写座位证据和实物证据。",
+                  "第七天到「常见问题与资料来源」打开「CA31 客舱服务交接参考答案（完成第六天后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "不涉及任何医疗诊断、不给药、不实施治安强制措施、不判断适航与放行；凡涉及上述事项一律写清「按程序升级到谁」。",
-                  "作品只证明你能按本职业的工作方式组织任务与留痕，不构成资格或胜任证明。"
+                  "只用虚构纸面记录。",
+                  "真实客舱服务按航司程序和机组分工执行。"
                 ]
               }
             ]
@@ -29192,7 +29168,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "空乘人员｜path",
+          "title": "CA31 虚构客舱服务交接",
           "type": "cards"
         },
         {
@@ -29203,33 +29179,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "把「岗位任务—所需能力—可出示证据」做成三列矩阵，逐行对齐：例如「航前设备检查—实地确认与记录—带确认方式的检查单」；「安全符合性检查—逐排当面确认与纠正—纠正记录」；「异常处置—按路径升级—含时间与报告对象的异常报告」。",
-                  "矩阵至少覆盖 6 行：应急设备检查、安全符合性确认、颠簸收束、医疗事件升级、冲突处置、记录与交接。每一行都要写出「不可省略的动作」与「必须升级的条件」。",
-                  "补充说明：矩阵完成后请标注哪些行属于「必须升级」而非自己判断，避免把越界动作写进作品。"
+                  "保留两版交接。",
+                  "写座位和物品证据及交接人。",
+                  "保留需乘务长确认的事项。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有航空或客运服务经验的人复核你的两项判断：一是你是否把「确认」当作亲手完成的动作而非口头广播；二是你的升级条件是否覆盖医疗、治安、适航与事故征候四类。",
-                  "复核后记录被指出的遗漏项与你的修正动作，并把「仍不确定的问题」单列，避免把不确定当作已完成。",
-                  "补充说明：复核意见应书面留存，写明指出问题的人、时间与其依据，便于后续复盘。"
+                  "第 6 天独立复核两版交接。",
+                  "对照座位、预订编号、用品状态和接手人。",
+                  "第 7 天展开同页 CA31 参考，记录一处修订。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "作品集中应包含一份可直接交接的记录摘要：时间、位置、现象、处置动作、报告对象、待决问题。判断标准是「他人能否仅凭该摘要接手」，而不是文笔是否漂亮。",
-                  "摘要需区分事实与推测：事实写具体现象与时间，推测必须标注为推测并说明依据不足。",
-                  "补充说明：交接摘要中不得出现旅客姓名、证件号或任何可识别信息。"
+                  "一页交接写明座位、预订编号、用品状态和接手人。",
+                  "另列变式变化行。",
+                  "保留一条给乘务长的待确认事项。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "若作品使用电子检查单或报告模板，需同时说明：记录如何留痕、异常时如何回退到纸质与人工流程、旅客敏感信息如何最小化处理。",
-                  "同时说明工具不可用（无网络、电量耗尽、系统故障）时的替代流程，以及谁负责在异常时接管。",
-                  "补充说明：若使用了自动生成内容，需标注哪些部分由工具生成、哪些由本人核对修订。"
+                  "纸面核对即可。",
+                  "保留两版的证据和差异记录。",
+                  "真实客舱服务按航司程序。"
                 ]
               }
             ]
@@ -29300,50 +29276,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的对象与流程：客舱安全的日常动作（设备检查、安全符合性确认、应急程序）与旅客服务的交付方式，并区分两者的优先级。",
-                  "产出：一页流程笔记，标出哪些步骤在任何情况下都不能省略。"
+                  "第 1 天",
+                  "抄录座位和预订编号。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "整理工作条件：客舱密闭环境、噪音与辐射暴露、时间压力与冲突情境的应对方式；核对自己能否接受长期倒班与驻外。",
-                  "产出：一份个人的「可接受／不可接受」清单，写明理由。"
+                  "第 2 天",
+                  "对照已确认的座位变动。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "完成一份虚构航班的安全准备样本：应急设备检查单（写明确认方式）、安全符合性检查清单、异常报告草稿。",
-                  "产出：可直接展示的检查记录样张（不含任何真实数据）。"
+                  "第 3 天",
+                  "逐件核对用品包。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "完成一次情景演练：颠簸处置的广播与收束流程；旅客医疗事件的初步处置与升级路径（不诊断、不给药）。",
-                  "产出：广播稿与升级说明各一份，写明报告对象与顺序。"
+                  "第 4 天",
+                  "标记可以交接和需复核的记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "对样本做自我复核：检查是否有跳项、代签、记录不含时间与报告对象等问题，并写下改进。",
-                  "产出：问题清单与修订后的记录各一份。"
+                  "第 5 天",
+                  "写给乘务长的待确认事项。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请一位有航空或客运服务经验的人挑战你的判断：他应能指出你遗漏的升级条件或不可省略的步骤。",
-                  "产出：复核意见与你的修正记录。"
+                  "第 6 天",
+                  "独立交原题和变式，另列变化行。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "写结论：继续（准备招聘与训练）、停止（发现无法接受倒班或近距离服务）、或换方向（转向航空服务链条内的其他岗位），并写明支持该结论的具体证据。",
-                  "产出：一页结论，含证据、仍待确认的问题与下一步动作。"
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「CA31 客舱服务交接参考答案（完成第六天后再打开）」。 写一处修订。"
                 ]
               }
             ]
@@ -29360,13 +29336,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你能在不省略步骤的前提下按清单完成安全准备，并能准确说出医疗、治安、适航、事故征候四类事项的升级对象。",
-              "继续：你接受长期倒班与频繁驻外，并已核对目标承运人当年度招聘条件（学历、外语、体检与背景审查）。",
-              "继续：你在冲突情境演练中能先解释规定与安全理由，再按程序升级，而不是对抗或放任。",
-              "停止：你在连续重复核对与逐排确认中持续感到消耗，或无法接受密闭客舱的近距离服务。",
-              "停止：你不愿受运行规章与手册的严格约束，倾向于凭个人经验调整安全步骤。",
-              "换方向：你认同航空服务但更偏好固定场所的客户服务（客户服务代表）、行程与票务业务（预订与票务代理）或地面服务岗位。",
-              "换方向：你更关注现场急救与医疗处置，愿意投入时间考取急救医疗技术员等岗位的执业资格，且清楚两者资格不互通。"
+              "继续：两版均能写清座位、编号、用品状态和接手人。",
+              "继续：只改单项变式，能指出哪一行变化。",
+              "继续：将待核事项明确交给乘务长。",
+              "复盘：找出一处证据缺口并改写。",
+              "观察：记录自己对重复核对和近距离服务的感受。",
+              "核对：向目标航司了解排班、训练与真实岗位职责。",
+              "决定：根据纸面练习与实际岗位要求写下一步。"
             ]
           },
           "id": "flight-attendants.path.seven-day-decision.1",
@@ -29422,7 +29398,7 @@
                 "已通过招聘筛选的入职者",
                 "法定准入的核心环节，决定能否执行客舱安全职责",
                 "必需（由承运人组织并考核）",
-                "US FAA演示能力证书适用于Part121/135承运人20座以上航空器客舱人员；证书标注Group1螺旋桨/Group2涡喷，一个人持一张证书，不是每机型分别发证；机型训练与证书Group评级分别核。中国另核，不互换。",
+                "US FAA演示能力证书适用于Part121/135承运人20 个或以上乘客座位航空器客舱人员；证书标注Group1螺旋桨/Group2涡喷，一个人持一张证书，不是每机型分别发证；机型训练与证书Group评级分别核。中国另核，不互换。",
                 "数周至数月，入职后集中培训",
                 "证书Group评级与机型训练分开；US BLS年度复训，中国按实际批准要求核"
               ],
@@ -29470,7 +29446,7 @@
           "data": {
             "paragraphs": [
               "本职业的资格与授权必须分开理解：学历与语言证明属于应聘条件，承运人初始训练与机型资格属于法定准入，体检与背景审查属于适航与安保条件；三者的有效期与维持方式各不相同，任何一项失效都可能影响排班与执飞。",
-              "US FAA演示能力证书适用于Part121/135承运人20座以上航空器客舱人员；证书标注Group1螺旋桨/Group2涡喷，一个人持一张证书，不是每机型分别发证；机型训练与证书Group评级分别核。中国另核，不互换。",
+              "US FAA演示能力证书适用于Part121/135承运人20 个或以上乘客座位航空器客舱人员；证书标注Group1螺旋桨/Group2涡喷，一个人持一张证书，不是每机型分别发证；机型训练与证书Group评级分别核。中国另核，不互换。",
               "本页不提供个人体检结论、录用可能性或薪酬承诺；涉及资格认定的最终判断以承运人、民航管理机关与具备资质的体检机构为准。",
               "任何一项资格失效（复训过期、体检不再符合标准、机型资格未更新）都可能直接影响排班与执飞；因此准备路径应把「维持有效」与「取得资格」同等看待。"
             ]
@@ -29488,14 +29464,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本的代表性边界｜承运人的招聘公告按基地、机队与航线结构分批发布，集中招聘期往往对应机队扩张或人员补充计划，不能读作全国性或长期性需求。阅读公告时应同时记录发布时间、工作地点、用工形式（直聘、劳务派遣、分子公司）、学历与外语门槛、体检标准，以及是否要求先完成指定训练。",
-              "本页不引用任何具体招聘公告的岗位数量或薪酬数字；如需据此判断个人机会，应直接核对目标承运人当前有效的招聘文件与训练要求。"
+              "国航 2026 届校园招聘简章列北京客舱乘务员，职责含客舱安全、旅客服务与机上用品管理。该批报名已截止，简章未公布工资。 春秋航空公布在上海、兰州启动的客舱乘务专项招聘首班结业。这份公告说明该批培训已结束，未列工资，也未宣布新一轮招聘。",
+              "两条是航司往期招聘与培训样本。中国大陆空乘人员全国工资分布仍缺可比职业统计。"
             ]
           },
           "id": "flight-attendants.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a54-airchina",
+            "a54-spring"
           ],
           "title": "空乘人员｜path",
           "type": "notice"
@@ -29521,7 +29497,7 @@
                 "entity": "BLS 职业就业与工资统计（OEWS）",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes532031.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-2031.00"
               },
               {
                 "entity": "O*NET 53-2031.00 资格与训练资料",
@@ -29675,7 +29651,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "US FAA演示能力证书适用于Part121/135承运人20座以上航空器客舱人员；证书标注Group1螺旋桨/Group2涡喷，一个人持一张证书，不是每机型分别发证；机型训练与证书Group评级分别核。中国另核，不互换。 招聘、训练与上岗资格分别核，具体条件按目标承运人有效公告。"
+              "US FAA演示能力证书适用于Part121/135承运人20 个或以上乘客座位航空器客舱人员；证书标注Group1螺旋桨/Group2涡喷，一个人持一张证书，不是每机型分别发证；机型训练与证书Group评级分别核。中国另核，不互换。 招聘、训练与上岗资格分别核，具体条件按目标承运人有效公告。"
             ]
           },
           "id": "flight-attendants.path.career-path-block.20",
@@ -29705,14 +29681,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "US FAA演示能力证书适用于Part121/135承运人20座以上航空器客舱人员；证书标注Group1螺旋桨/Group2涡喷，一个人持一张证书，不是每机型分别发证；机型训练与证书Group评级分别核。中国另核，不互换。 CAACR3页面仍标有效，2026稿为征求意见，未取得全部正式修订及附件正文。"
+              "美国 FAA 对适用的 Part 121 或 Part 135 承运人、20 个或以上乘客座位航空器的乘务员签发演示能力证书。个人持一张证书，证书列航空器组别，承运人的机型训练另核。在中国大陆，AC-121-FS-27R3 适用于按 CCAR-121 部运行的合格证持有人。"
             ]
           },
           "id": "flight-attendants.path.career-path-block.22",
           "source_refs": [
-            "nbs-wages-2025",
-            "bls-projections-2025-35",
-            "onet-summary"
+            "a54-faa",
+            "a54-caac"
           ],
           "type": "prose"
         },
@@ -30695,7 +30670,7 @@
                 "url": "https://www.bls.gov/ooh/transportation-and-material-moving/flight-attendants.htm"
               },
               {
-                "entity": "BLS 就业预测（2024—2034）职业与特征表",
+                "entity": "BLS 就业预测（2025–2035）职业与特征表",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -30710,7 +30685,7 @@
                 "entity": "BLS 职业就业与工资统计（OEWS）",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes532031.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-2031.00"
               },
               {
                 "entity": "航空器服务人员方向",
@@ -30776,7 +30751,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "USMay2025中位63580、10/90阈值35110/136430；当前2025就业133700、2025—2035增长9%、年均空缺18500；不是净新增或十年合计。原2024—2034登记为历史，原19800单位未重新核旧表，不能凭数量级断言合计。 中国工资与就业本轮未取得，不导入US值。"
+              "美国 BLS 表 1.2 的 53-2031 行显示，2025 年就业约 133,700 个岗位，2035 年预计约 145,500 个岗位，增长 8.8%，年均岗位空缺约 18,500 个，含增长和替补。"
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.8",
@@ -30805,7 +30780,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034（BLS 就业预测）"
+              "2025–2035（BLS 就业预测）"
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.10",
@@ -30819,7 +30794,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "现行2025—2035增长9%、年均空缺18500，包含增长与替补，不直接得出替补占比或个人录用。"
+              "现行2025—2035增长 8.8%、年均空缺18500，包含增长与替补，不直接得出替补占比或个人录用。"
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.11",
@@ -30847,7 +30822,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业规模、增长率与预测期岗位空缺"
+              "就业规模、增长率与年均岗位空缺"
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.13",
@@ -30875,7 +30850,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业约 130,800 人（2024 基期；OEWS May 2025 约 131,650 人）；增长 7% 或更高（远高于平均）；预测期岗位空缺约 19,800 个（合计量级）"
+              "美国 BLS 表 1.2 的 53-2031 行显示，2025 年就业约 133,700 个岗位，2035 年预计约 145,500 个岗位，增长 8.8%，年均岗位空缺约 18,500 个，含增长和替补。"
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.15",
@@ -31071,12 +31046,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国精确职业工资、就业和招聘样本，不估算。"
+              "国航与春秋航空的历史招培公告可作样本，两份公告未提供可比岗位工资分布。"
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.29",
           "source_refs": [
-            "nbs-wages-2025"
+            "a54-airchina",
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -31141,12 +31117,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补：客舱清洁与供应品补充的作业标准、地面保障与转场协作流程、缺陷报告的提报路径；不涉及飞行中的旅客安全责任。"
+              "需补：核对目标岗位的地面设备、加油或除冰安全程序及缺陷报告流程。客舱清洁另看实际分工。"
             ]
           },
           "id": "flight-attendants.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet-summary"
+            "a54-ground"
           ],
           "type": "prose"
         },
@@ -31509,16 +31485,17 @@
                 ]
               },
               {
-                "answer": "空乘人员在飞行中的客舱内承担安全监控与服务责任；航空器服务人员负责落地后的客舱清洁与供应品补充，不承担飞行中的旅客安全责任；运输安检员在登机前对旅客与随身物品实施检查，其处置权来自安保管制授权。三者授权与责任范围不同，不构成能力等价。",
+                "answer": "空乘负责客舱安全与旅客服务。机场安检人员的职责集中在地面安检。 航空器地面服务人员为飞机加油，并可能承担除冰、供水等机外保障。客舱清洁另按岗位分工。",
                 "id": "flight-attendants.faq.2",
                 "question": "空乘人员和航空器服务人员、安检员有什么区别？",
                 "question_key": "career.faq.flight-attendants.q2",
                 "source_refs": [
-                  "onet-summary"
+                  "onet-summary",
+                  "a54-ground"
                 ]
               },
               {
-                "answer": "BLS OEWS（May 2025）：中位年薪 63,580 美元、年均 77,440 美元，分位为 35,110 / 51,760 / 95,640 / 136,430 美元，就业约 131,650 人；OEWS 未公布本职业中位时薪，本页不折算。BLS 就业预测（2024—2034）：增长 7% 或更高（远高于平均），预测期岗位空缺约 19,800 个（含替换需求，为预测期合计）。",
+                "answer": "美国 2025 年中位年薪 63,580 美元。年薪的第 10、25、50、75 和 90 百分位分别为 35,110、51,760、63,580、95,640、136,430 美元。 美国 BLS 表 1.2 的 53-2031 行显示，2025 年就业约 133,700 个岗位，2035 年预计约 145,500 个岗位，增长 8.8%，年均岗位空缺约 18,500 个，含增长和替补。",
                 "id": "flight-attendants.faq.3",
                 "question": "美国空乘人员的工资与就业情况如何？",
                 "question_key": "career.faq.flight-attendants.q3",
@@ -31528,12 +31505,13 @@
                 ]
               },
               {
-                "answer": "没有。国家统计局按行业门类公布城镇单位就业人员平均工资，不按职业拆分；民航客舱乘务员的实际收入常由基本工资、飞行小时费、驻外补贴与津贴构成，口径不同。因此本页只登记缺口与授权来源（民航管理机关规章与承运人手册），不提供估算数值，也不以美国数值或不相关行业均值代填。",
+                "answer": "国航 2026 届校园招聘简章列北京客舱乘务员，职责含客舱安全、旅客服务与机上用品管理。该批报名已截止，简章未公布工资。 春秋航空公布在上海、兰州启动的客舱乘务专项招聘首班结业。这份公告说明该批培训已结束，未列工资，也未宣布新一轮招聘。 两条是航司往期招聘与培训样本。中国大陆空乘人员全国工资分布仍缺可比职业统计。",
                 "id": "flight-attendants.faq.4",
                 "question": "中国大陆有与空乘人员对应的精确工资统计吗？",
                 "question_key": "career.faq.flight-attendants.q4",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "a54-airchina",
+                  "a54-spring"
                 ]
               },
               {
@@ -31546,7 +31524,7 @@
                 ]
               },
               {
-                "answer": "不会以整体替代的方式发生。记录、清单提醒、排班与信息汇总可被工具增强；应急设备实地确认、逐排安全符合性检查、旅客行为判断、应急撤离指挥与医疗事件现场处置必须由受过训练的乘务员承担。是否采用某项工具取决于民航管理机关规章与承运人手册的审定，而不是工具本身的能力。",
+                "answer": "可在获准范围内试用记录整理、盘点提示或草拟报告，并复核输出。客舱安全、现场核查与异常升级按航司手册和训练执行。现有任务证据不足以判断整个职业将如何变化。",
                 "id": "flight-attendants.faq.6",
                 "question": "AI 会替代空乘人员吗？",
                 "question_key": "career.faq.flight-attendants.q6",
@@ -31555,21 +31533,24 @@
                 ]
               },
               {
-                "answer": "美国口径：O*NET 准备层级为 Job Zone 1-2，通常高中/同等学历，几天到一年的在职训练；入职后由承运人提供初始训练并通过考核，取得 FAA 认证并按机型分别取证，每年复训。中国大陆：以民航管理机关运行规章与承运人手册对客舱乘务员的训练与资格管理为准，招聘条件由承运人公布。两者不可互换。",
+                "answer": "美国 BLS 将高中或同等学历和客户服务经历列为常见准备。获聘后先完成航司初始训练，训练通常持续数周至数月。中国大陆应先看目标航司当期学历、语言与报名条件，再核获聘后的训练和考核。",
                 "id": "flight-attendants.faq.7",
                 "question": "成为空乘人员需要什么学历和训练？",
                 "question_key": "career.faq.flight-attendants.q7",
                 "source_refs": [
-                  "onet-summary"
+                  "a54-ooh-training",
+                  "a54-airchina",
+                  "a54-caac"
                 ]
               },
               {
-                "answer": "核心不是「一张证书」，而是三类条件的组合：应聘条件（学历、服务英语能力证明）、法定准入（承运人初始训练与机型资格；美国为 FAA 认证并按机型取证与年度复训）、适航与安保条件（指定体检与背景审查）。此外通常要求急救与自动体外除颤器培训在有效期内；国际航线可能另要求第二外语。",
+                "answer": "美国适用的 Part 121 或 Part 135 运行中，20 个或以上乘客座位航空器的乘务员需持 FAA 演示能力证书。证书记录航空器组别，具体机型训练另核。中国大陆按 CCAR-121 部运行的合格证持有人按 R3 核有效体检、经批准的训练和检查，以及承运人颁发的训练合格证。",
                 "id": "flight-attendants.faq.8",
                 "question": "空乘人员需要哪些证书或资格？",
                 "question_key": "career.faq.flight-attendants.q8",
                 "source_refs": [
-                  "onet-summary"
+                  "a54-faa",
+                  "a54-caac"
                 ]
               },
               {
@@ -31582,14 +31563,19 @@
                 ]
               },
               {
-                "answer": "美国：2024—2034 年增长 7% 或更高，岗位空缺主要来自替换需求；内部可向乘务长、区域乘务长、教员与检查员发展，也可转向客舱服务管理与训练标准、地面服务与旅客关系岗位。涉及执照或授权变更的岗位（机务、签派、安检等）须另行取得对应资格。中国大陆部分缺少可核验的职业级统计，本页不作数量预测。",
+                "answer": "美国 BLS 表 1.2 的 53-2031 行显示，2025 年就业约 133,700 个岗位，2035 年预计约 145,500 个岗位，增长 8.8%，年均岗位空缺约 18,500 个，含增长和替补。 航司内部的乘务长、培训或地面服务岗位各有条件，具体看对应职位公告。",
                 "id": "flight-attendants.faq.10",
                 "question": "空乘人员的前景与转型方向如何？",
                 "question_key": "career.faq.flight-attendants.q10",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "onet-summary"
+                  "bls-projections-2025-35"
                 ]
+              },
+              {
+                "answer": "S11 按已确认记录改到 12C，用品仍对应 P11。S12 先标缺件，由物品组核查并交乘务长。S13 记录相符。变式仅把 S12 改为实物已找到，仍要更新差异记录并由乘务长确认。S11 与 S13 不变。自核座位、编号、差异与接手人。",
+                "id": "flight-attendants.faq.11",
+                "question": "CA31 客舱服务交接参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.flight-attendants.11"
               }
             ]
           },
@@ -31607,7 +31593,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先用 O*NET 53-2031.00 获取官方定义、样本任务、工作活动与工作情境百分比；再用 BLS OEWS（May 2025）核对美国工资与就业，用 BLS 就业预测（2024—2034）核对增长与推算岗位空缺；最后用中国民用航空局与国家统计局来源说明中国大陆的口径与授权边界。所有数值均标明法域、期间与统计口径。"
+              "来源卡｜研究流程：先用 O*NET 53-2031.00 获取官方定义、样本任务、工作活动与工作情境百分比；再用 BLS OEWS（May 2025）核对美国工资与就业，用 BLS 就业预测（2025–2035）核对增长与推算岗位空缺；最后用中国民用航空局与国家统计局来源说明中国大陆的口径与授权边界。所有数值均标明法域、期间与统计口径。"
             ]
           },
           "id": "flight-attendants.sources.source-card.1",
@@ -31621,7 +31607,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜来源登记：O*NET OnLine（53-2031.00 摘要与详细资料）、BLS 职业就业与工资统计（May 2025）、BLS 就业预测（2024—2034）、国家统计局 2025 年城镇单位就业人员平均工资、FermatMind 职业内容字段与证据口径规则。每条来源均标注发布机构、市场与统计期；未经登记的来源不用于支持主张。"
+              "来源卡｜来源登记：O*NET OnLine（53-2031.00 摘要与详细资料）、BLS 职业就业与工资统计（May 2025）、BLS 就业预测（2025–2035）、国家统计局 2025 年城镇单位就业人员平均工资、FermatMind 职业内容字段与证据口径规则。每条来源均标注发布机构、市场与统计期；未经登记的来源不用于支持主张。"
             ]
           },
           "id": "flight-attendants.sources.source-card.2",
@@ -31637,12 +31623,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮查阅：2026-10-11；作者修订待独立复核"
+              "美国工资为 2025 年 5 月，就业预测期为 2025–2035 年。中国大陆航司公告用于比较历史招培样本。"
             ]
           },
           "id": "flight-attendants.sources.source-card.3",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025",
+            "bls-projections-2025-35",
+            "a54-airchina",
+            "a54-spring"
           ],
           "type": "prose"
         },
@@ -31651,7 +31640,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核O*NET CSR、JobZone1—2与情境；BLSOOH May2025中位63580、10/90阈值35110/136430，定期航空63570、非定期70700；25/75、均值、OEWS就业及时薪原表未重取。当前2025就业133700、2025—2035增长9%、年均空缺18500，不能凭量级写十年合计。FAA证书Group评级与机型训练分开；CAACR3页面标有效、2026稿为征求意见，附件访问失败不作未发布。中国标签下移除US数据充作招聘样本。NBS与OEWS不一概排除飞行劳动报酬；数据分类与保留、应急/安保按真实批准程序核，撤回通用体位、给药与颠簸巡查指令。共享来源登记混急诊医师、旧预测与Hero/FAQ保护冲突留档，不能当已修复。AI效果、测验效度、中国工资招聘及全法域操作细则未核。未HTML、独立复核、Git或发布。"
+              "美国 BLS 表 1.2 的 53-2031 行显示，2025 年就业约 133,700 个岗位，2035 年预计约 145,500 个岗位，增长 8.8%，年均岗位空缺约 18,500 个，含增长和替补。"
             ]
           },
           "id": "flight-attendants.sources.source-card.4",
@@ -31680,26 +31669,14 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI（英文）",
+                "entity": "MBTI 人格测评",
                 "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（英文）",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI（中文）",
-                "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five（中文）",
-                "id": "navigation-5",
+                "entity": "大五人格测评",
+                "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
@@ -31730,8 +31707,7 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "官方职业范围：评估伤病并实施基础急救；可能将伤病者运送至医疗机构。",
-                  "用于职业身份、任务范围与相邻职业边界。"
+                  "客舱乘务员承担客舱安全与旅客服务，分工因航司和航班而异。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31759,42 +31735,39 @@
                 "url": "https://www.onetonline.org/link/details/53-2031.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "表中 53-2031 行：2025 年就业 34.9 千，2035 年就业 36.1 千，净增约 1.1 千，增长约 3.2%，年均空缺约 1.1 千。",
-                  "预测是职业层面的统计口径，不是个人录用概率。"
+                  "美国 BLS 表 1.2 的 53-2031 行显示，2025 年就业约 133,700 个岗位，2035 年预计约 145,500 个岗位，增长 8.8%，年均岗位空缺约 18,500 个，含增长和替补。"
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
                 "limitation": "不得把预测增量或年均空缺直接解释为个人收入或录用保证。",
                 "market": "US",
                 "name": "U.S. Bureau of Labor Statistics：2025–2035 Occupational Projections and Characteristics",
-                "period": "2025–2035 projections",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "53-2031 Emergency medicine physicians",
+                "scope": "美国空乘人员 53-2031 就业预测",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "53-2031 行：2025 年工资中位数 335,550 美元/年、161.32 美元/时；10% 分位为 103,610 美元/年，90% 分位为 495,910 美元/年。",
-                  "本页区分工资中位数、分位数与就业投影，不把统计值当作个人合同报价。"
+                  "美国 2025 年中位年薪 63,580 美元。年薪的第 10、25、50、75 和 90 百分位分别为 35,110、51,760、63,580、95,640、136,430 美元。"
                 ],
                 "evidence_type": "official wage table",
                 "id": "bls-oews-2025",
                 "limitation": "工资统计与就业投影不是同一统计项目，不能混算成个人起薪或个人收入保证。",
                 "market": "US",
-                "name": "U.S. Bureau of Labor Statistics：May 2025 Occupational Employment and Wage Statistics",
+                "name": "O*NET 空乘人员全国工资表（BLS OEWS）",
                 "period": "May 2025 OEWS",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "53-2031 Emergency medicine physicians",
-                "url": "https://www.bls.gov/oes/current/oes532031.htm"
+                "scope": "美国空乘人员 53-2031 全国工资分位",
+                "url": "https://www.onetonline.org/link/localwages/53-2031.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "城镇非私营单位卫生和社会工作平均工资 146,266 元/年；城镇私营单位卫生和社会工作平均工资 75,631 元/年。",
-                  "这是行业代理值，不是空乘人员职业中位数、起薪或个人报价。"
+                  "全国城镇单位平均工资及行业表提供背景。交通运输、仓储和邮政业包含多个行业和岗位。"
                 ],
                 "evidence_type": "official industry proxy",
                 "id": "nbs-wages-2025",
@@ -31803,8 +31776,8 @@
                 "name": "国家统计局：2025 年城镇单位就业人员平均工资",
                 "period": "2025 annual wage",
                 "publisher": "国家统计局",
-                "scope": "health and social work industry proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260516_1960136.html"
+                "scope": "中国城镇单位行业平均工资",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31837,6 +31810,127 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "国航 2026 届校园招聘简章列北京客舱乘务员，职责含客舱安全、旅客服务与机上用品管理。该批报名已截止，简章未公布工资。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a54-airchina",
+                "limitation": "两条是航司往期招聘与培训样本。中国大陆空乘人员全国工资分布仍缺可比职业统计。",
+                "market": "中国大陆",
+                "name": "空乘招培样本",
+                "period": "2025-11-19",
+                "publisher": "中国国际航空",
+                "scope": "recruitment_proxy",
+                "url": "https://et.airchina.com.cn/cn/about_us/recruitment/184869.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "春秋航空公布在上海、兰州启动的客舱乘务专项招聘首班结业。这份公告说明该批培训已结束，未列工资，也未宣布新一轮招聘。"
+                ],
+                "evidence_type": "航司培训公告",
+                "id": "a54-spring",
+                "limitation": "两条是航司往期招聘与培训样本。中国大陆空乘人员全国工资分布仍缺可比职业统计。",
+                "market": "中国大陆",
+                "name": "客舱乘务历史培训公告",
+                "period": "2026-04-29",
+                "publisher": "春秋航空",
+                "scope": "recruitment_proxy",
+                "url": "https://news.ch.com/news/2026-04-29-00-00.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "适用范围、证书及航空器组别说明。"
+                ],
+                "evidence_type": "官方原证",
+                "id": "a54-faa",
+                "limitation": "按美国适用运行范围核对，证书组别与承运人机型训练分别核。",
+                "market": "美国",
+                "name": "FAA 客舱乘务员演示能力证书说明",
+                "period": "现行 FAA 说明",
+                "publisher": "Federal Aviation Administration",
+                "scope": "contextual",
+                "url": "https://www.faa.gov/Flight_Attendant_Certificate_Demonstrated_Proficiency_Information"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "民航局页面标记 AC-121-FS-27R3 有效。",
+                  "在中国大陆，AC-121-FS-27R3 适用于按 CCAR-121 部运行的合格证持有人。"
+                ],
+                "evidence_type": "官方原证",
+                "id": "a54-caac",
+                "limitation": "承运人招聘条件另查目标公告。",
+                "market": "中国大陆",
+                "name": "民航局《客舱乘务员的资格和训练》",
+                "period": "AC-121-FS-27R3",
+                "publisher": "Civil Aviation Administration of China",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202006/t20200608_202987.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "2025 年 5 月定期航空运输中位数 63,570 美元、非定期 70,700 美元。"
+                ],
+                "evidence_type": "官方原证",
+                "id": "a54-ooh-pay",
+                "limitation": "只适用于该表列出的行业。",
+                "market": "美国",
+                "name": "BLS 空乘人员分行业工资",
+                "period": "2025 年 5 月",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/transportation-and-material-moving/flight-attendants.htm#tab-5"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "核对加油、除冰和其他航空器地面保障任务。"
+                ],
+                "evidence_type": "官方原证",
+                "id": "a54-ground",
+                "limitation": "用于相邻岗位比较。",
+                "market": "美国",
+                "name": "O*NET 航空器地面服务人员 53-6032",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/53-6032.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "53-2031 行列就业估计及平均年薪。"
+                ],
+                "evidence_type": "official wage table",
+                "id": "a54-oews-national",
+                "limitation": "OEWS 受雇岗位统计，区别于就业预测基期。",
+                "market": "US",
+                "name": "BLS 2025 年 5 月 OEWS 全国表 1",
+                "period": "May 2025 OEWS",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "美国空乘人员 53-2031 全国工资分位",
+                "url": "https://www.bls.gov/news.release/ocwage.t01.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国常见的学历、服务经历、获聘及初始训练。"
+                ],
+                "evidence_type": "官方原证",
+                "id": "a54-ooh-training",
+                "limitation": "美国职业概览，招聘要求以目标航司为准。",
+                "market": "美国",
+                "name": "BLS 空乘人员入行与训练",
+                "period": "职业手册",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/transportation-and-material-moving/flight-attendants.htm#tab-4"
               }
             ]
           },
@@ -33291,6 +33385,42 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "a54-faa",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "flight-attendants.source-register.published.1"
+            },
+            "id": "a54-faa",
+            "label": {
+              "$source": "a54-faa",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "flight-attendants.source-register.published.1"
+            },
+            "scope": "按美国适用运行范围核对，证书组别与承运人机型训练分别核。"
+          },
+          {
+            "href": {
+              "$source": "a54-caac",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "flight-attendants.source-register.published.1"
+            },
+            "id": "a54-caac",
+            "label": {
+              "$source": "a54-caac",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "flight-attendants.source-register.published.1"
+            },
+            "scope": "承运人招聘条件另查目标公告。"
           }
         ],
         "tracks": [
@@ -34697,6 +34827,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a54-airchina",
+            "posting-a54-spring"
+          ],
           "sources_note": {
             "$item": "flight-attendants.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34849,7 +34983,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "就业 · 预测期岗位空缺",
+            "指标": "就业 · 年均岗位空缺",
             "数值": {
               "$item": "flight-attendants.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -34977,7 +35111,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-localgov-2025",
             "industry": {
               "$item": "flight-attendants.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -34998,7 +35131,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-education-2025",
             "industry": {
               "$item": "flight-attendants.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -35263,6 +35395,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "flight-attendants.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35307,7 +35440,8 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "flight-attendants.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -35353,6 +35487,7 @@
               "type": "prose"
             },
             "source_id": "nbs",
+            "source_ref": "nbs-wages-2025",
             "value": {
               "$item": "flight-attendants.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -35730,7 +35865,7 @@
           },
           {
             "alternate_value": null,
-            "label": "2024—2034",
+            "label": "2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "flight-attendants.profile.onet-structured-fields-block.4",
@@ -36572,7 +36707,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测评"
           },
           {
             "href": {
@@ -36582,27 +36717,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "flight-attendants.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI（中文）"
-          },
-          {
-            "href": {
-              "$link": "flight-attendants.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five（中文）"
+            "label": "大五人格测评"
           }
         ]
       },
@@ -36801,7 +36916,7 @@
       },
       {
         "derivation": null,
-        "display_value": "约 130,800 人（2024，BLS 职业投影基期，经 O*NET 呈现；OEWS May 2025 约 131,650 人）",
+        "display_value": "2025 年约 133,700 个岗位",
         "fact_id": "us-employment-2025",
         "market": "US",
         "measure": "就业规模",
@@ -36813,24 +36928,24 @@
       },
       {
         "derivation": null,
-        "display_value": "增长 7% 或更高（远高于平均，2024—2034，BLS 投影，经 O*NET 呈现）",
+        "display_value": "预计增长 8.8%",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
         "measure": "就业增长率",
         "occupation_scope": "空乘人员；53-2031.00",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 19,800 个（2024—2034 预测期合计，含替换需求；本页不作年均表述）",
+        "display_value": "年均约 18,500 个，含增长与替补",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
         "measure": "年均职位空缺",
         "occupation_scope": "空乘人员；53-2031.00",
-        "period": "2025–2035 projection",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -36844,7 +36959,7 @@
         "occupation_scope": "53-2031 Flight Attendants；Scheduled air transportation",
         "period": "May 2025",
         "source_refs": [
-          "bls-oews-2025"
+          "a54-ooh-pay"
         ]
       },
       {
@@ -36856,7 +36971,7 @@
         "occupation_scope": "53-2031 Flight Attendants；Nonscheduled air transportation",
         "period": "May 2025",
         "source_refs": [
-          "bls-oews-2025"
+          "a54-ooh-pay"
         ]
       },
       {
@@ -36990,6 +37105,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "国航 2026 届校园招聘简章列北京客舱乘务员，职责含客舱安全、旅客服务与机上用品管理。该批报名已截止，简章未公布工资。",
+        "fact_id": "posting-a54-airchina",
+        "market": "中国大陆",
+        "measure": "岗位招聘记录",
+        "occupation_scope": "空乘招培样本",
+        "period": "2025-11-19",
+        "source_refs": [
+          "a54-airchina"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "春秋航空公布在上海、兰州启动的客舱乘务专项招聘首班结业。这份公告说明该批培训已结束，未列工资，也未宣布新一轮招聘。",
+        "fact_id": "posting-a54-spring",
+        "market": "中国大陆",
+        "measure": "培训结业公告",
+        "occupation_scope": "空乘招培样本",
+        "period": "2026-04-29",
+        "source_refs": [
+          "a54-spring"
+        ]
       }
     ]
   },
@@ -37016,19 +37155,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2025–2035）"
+        "label": "美国就业变化（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国就业规模（2025 投影基期）"
+        "label": "美国就业岗位数（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均空缺（2025–2035）"
+        "label": "美国年均岗位空缺（2025–2035 年）"
       },
       {
         "availability": "available",
@@ -37049,7 +37188,7 @@
       "text": "空乘人员"
     }
   },
-  "source_content_sha256": "d7bc15fcd14bc54e5a88d7c81525e5bbdbfb551cc9fdc3270b08cd06f30646b3",
+  "source_content_sha256": "4287b84190a5c56fdbe4882f30f5e4dad487dabf0571c0ca91f7e0702914b0eb",
   "subject": {
     "canonical_slug": "flight-attendants",
     "name": "空乘人员",

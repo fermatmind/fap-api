@@ -9,7 +9,7 @@
         "status": "pending_mapping"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:employment-g04-current": {
         "status": "pending_mapping"
@@ -18,7 +18,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:growth-g04-current": {
         "status": "pending_mapping"
@@ -54,9 +54,15 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:openings-g04-current": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-courier-beijing": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-courier-nanjing": {
         "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
@@ -26133,12 +26139,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain verifiable job posting offer statistics for courier and pickup and delivery positions in mainland China; a single posting or platform unit price cannot represent the national level"
+              "A Nanjing Yuhuatai notice listed CNY 6,000–7,000 per month for Jiangsu SF couriers. A Beijing Fangshan notice listed CNY 7,000 per month and up for a pickup and delivery role. Ask about hours, pay rules and route coverage before comparing offers."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "courier-nanjing",
+            "courier-beijing"
           ],
           "type": "prose"
         },
@@ -26234,7 +26241,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics 2025 urban unit pretax annual average industry background: non-private/private transportation, warehousing and postal services 133,981/73,133 yuan, and health and social work 146,266/75,631 yuan. These must be matched to the employer legal entity's main industry and private classification, and are not the courier occupation's median, platform piece rates or monthly take-home pay; urban legal entities with 5 or more people, excluding self-employed and freelance workers. China's national wage distribution for this occupation, recruitment offer samples, the full-time, part-time, piece-rate and outsourced ratio, and a precise cross-country mapping were not obtained."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -28622,7 +28629,7 @@
           "data": {
             "paragraphs": [
               "This page does not cite specific active recruitment announcements and does not count historical recruitment cases as active positions; recruiting and employment conditions must be checked against the target unit's announcement for the relevant year.",
-              "Scenario judgment, route checking and observation methods are editorially designed task observation threads; no recruitment sample was obtained and a verification process commonly used by employers is not proven."
+              "Scenario judgment, route checking and observation methods are editorially designed task observation threads; the historical notices do not show a standard assessment procedure across employers."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
@@ -28959,7 +28966,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The editors suggest first observing sorting, pickup and delivery and recording ability; there is no recruitment sample this round, and the predictive power of certificates and task evidence is not compared. U.S. JobZone1–2, SVP<6 is a cross-occupation preparation level, and a few days to one year of training is a level overview rather than the duration for each person; new-hire education responses for this occupation are 80% high school or equivalent, 13% some college no degree and 7% less than high school, which is not a China threshold."
+              "The editors suggest first observing sorting, pickup and delivery and recording ability; the two notices describe individual jobs, and the predictive power of certificates and task evidence is not compared. U.S. JobZone1–2, SVP<6 is a cross-occupation preparation level, and a few days to one year of training is a level overview rather than the duration for each person; new-hire education responses for this occupation are 80% high school or equivalent, 13% some college no degree and 7% less than high school, which is not a China threshold."
             ]
           },
           "id": "actors.path.career-path-block.1",
@@ -30991,7 +30998,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Receive the items to be delivered and the delivery information (recipient name, address, telephone and delivery instructions), sort by route and plan the most time-saving route, load the vehicle by list and pay attention to hazardous goods, walk, ride, drive or take public transport to deliver and collect letters, documents, parcels and similar items at the destination, record the items collected and delivered and the recipient's response, obtain signatures or cash-on-collection payments, unload and sort, transfer cargo from larger vehicles to small vehicles, open and sort incoming items, and complete routine vehicle maintenance and general receiving, dispatch and clerical affairs.",
+                "answer": "Pick up messages, documents or packages, check addresses and handling requirements, deliver along a route, and record receipt, exceptions and returns. Lab specimens and valuable or confidential items can require special handoffs.",
                 "id": "actors.faq.1",
                 "question": "What does the daily work of couriers and messengers involve?",
                 "question_key": "career.faq.couriers-and-messengers.1",
@@ -31000,9 +31007,9 @@
                 ]
               },
               {
-                "answer": "Couriers and messengers pick up, deliver and hand over items within or between institutions and carry responsibility for item count checking, signatures and cash-on-collection payments; light truck drivers mainly drive trucks to transport whole loads and load and unload; dispatchers arrange staff, vehicles and routes and issue dispatch orders without delivering on route themselves; cargo and freight agents handle freight documents and transport arrangements; shipping, receiving and inventory clerks handle receiving, dispatch and inventory registration; and mail clerks sort and process mail indoors.",
+                "answer": "Couriers focus on pickup, delivery and proof of handoff. Light truck drivers also handle vehicle and loading duties, and driver/sales workers sell and collect payments. Check what the employer assigns as the main responsibility.",
                 "id": "actors.faq.2",
-                "question": "How do couriers and messengers differ from light truck drivers and dispatchers?",
+                "question": "How do couriers differ from light truck drivers and driver/sales workers?",
                 "question_key": "career.faq.couriers-and-messengers.2",
                 "source_refs": [
                   "onet"
@@ -31018,9 +31025,9 @@
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: the three task categories of route planning and dispatch, delivery status and notification, and end-point sending and collection and smart lockers can be partly taken on by tools; this page has no single-occupation adoption rate or displacement data.",
+                "answer": "Routing and scanning tools can update addresses, track parcels and sort exceptions. Staff still verify recipients, proof of handoff, damage and missing items. This is not a measurement of AI adoption or job displacement.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of couriers and messengers is there already AI change evidence?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.couriers-and-messengers.4",
                 "source_refs": [
                   "onet"
@@ -31036,12 +31043,14 @@
                 ]
               },
               {
-                "answer": "Among the U.S. 2025 wage data, the median annual wage is 39,200 USD and the hourly wage 18.85 USD (single-occupation basis for 43-5021.00), with percentiles at annual wages 31,550／36,070／39,200／45,280／50,330 USD; no occupation-level wage value was obtained for mainland China, and this page treats it as a gap rather than filling it with an industry average.",
+                "answer": "The May 2025 U.S. median wage was $39,200 per year and $18.85 per hour. A Nanjing Yuhuatai notice listed CNY 6,000–7,000 per month for Jiangsu SF couriers. A Beijing Fangshan notice listed CNY 7,000 per month and up for a pickup and delivery role. Ask about hours, pay rules and route coverage before comparing offers.",
                 "id": "actors.faq.6",
                 "question": "What is the usual wage for couriers and messengers, and how should it be compared?",
                 "question_key": "career.faq.couriers-and-messengers.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "courier-nanjing",
+                  "courier-beijing"
                 ]
               },
               {
@@ -31072,12 +31081,12 @@
                 ]
               },
               {
-                "answer": "The O*NET employment trend page (based on BLS 2024—2034 projections) shows about 247,200 people in this detailed occupation in 2024 and a projected label of Much faster than average (7% or higher), with about 27,900 cumulative openings including growth and replacement; the work is mainly driving and riding and outdoor and weather exposure, with morning, evening and holiday shifts concentrated, so it must be checked against local branches and business demand.",
+                "answer": "BLS projects U.S. employment in SOC 43-5021 to go from about 228,900 in 2025 to 247,100 in 2035 (+8.0%). It projects about 23,800 openings per year, including replacements. In the BLS projections base, 69.9% are self-employed. OEWS wages exclude the self-employed.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing a courier or messenger career now?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.couriers-and-messengers.10",
                 "source_refs": [
-                  "bls"
+                  "a19-bls-projections"
                 ]
               }
             ]
@@ -31494,7 +31503,7 @@
                 "url": "https://www.onetonline.org/link/localwages/43-5021.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "The 16 tasks of U.S. 43-5021.00 are 10 Core and 6 Supplemental: Core includes picking up and delivering medical records, specimens and medicines, walking, cycling, driving or using public transport, loading by list and hazardous goods prevention, receiving items and delivery information, picking up and delivering documents, newspapers and parcels at institutions and homes, recording items and responses, unloading and sorting, sequencing along the route, planning time-saving routes, and routine maintenance such as oil and fuel; Supplemental includes obtaining signatures or arranging payment, transferring from larger to smaller vehicles, opening and sorting incoming items, contacting the unit after delivery, verbal messaging by telephone, and general clerical errands. Core is not daily frequency, and Supplemental is not required for every position. U.S. 2025 industry employment distribution: healthcare and social assistance 11% and other industries 89% including transportation and warehousing; these are not wages or a Chinese employer distribution, and undisclosed industries and self-employment details are not inferred."
                 ],
@@ -31506,7 +31515,7 @@
                 "period": "2026 page update; 2025 industry data, different task surveys",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-5021.00"
+                "url": "https://www.onetonline.org/link/details/43-5021.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31691,6 +31700,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment in SOC 43-5021 to go from about 228,900 in 2025 to 247,100 in 2035 (+8.0%). It projects about 23,800 openings per year, including replacements. In the BLS projections base, 69.9% are self-employed. OEWS wages exclude the self-employed."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a19-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Five openings, CNY 6,000–7,000 per month."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "courier-nanjing",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Jiangsu SF courier",
+                "period": "2025-02-17",
+                "publisher": "Nanjing Yuhuatai District",
+                "scope": "recruitment_proxy",
+                "url": "https://www.njyh.gov.cn/yhtqrmzf/202502/t20250217_5075870.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Twelve openings, CNY 7,000 per month and up."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "courier-beijing",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Fangshan pickup and delivery worker",
+                "period": "2024-07",
+                "publisher": "Beijing Fangshan District",
+                "scope": "recruitment_proxy",
+                "url": "https://www.bjfsh.gov.cn/zwgk/qrlsbj/zdly_999/fshcyjy/rlzyscgqxx/202407/t20240726_40079183.shtml"
               }
             ]
           },
@@ -34655,7 +34709,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (job posting offer basis)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34667,13 +34721,14 @@
           "china_soc_row": "U.S. 43-5021 includes internal and medical couriers; China's 4-02-07-08 has been identified, but a precise mapping and national occupational wages remain unavailable.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-courier-nanjing",
+            "posting-courier-beijing"
           ],
           "sources_note": "Source links are used according to their respective statistical or announcement scope; when the statistical period, survey subjects and pay basis differ they are cited separately, with no conversion between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect the wages of couriers and messengers?",
             "driver_heading": "How are shifts arranged in delivery and distribution settings?",
-            "official_heading": "Official statistical basis and missing data notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Preparation threads for different jurisdictions, not a hiring mapping from education to position",
             "scenario_heading": "How should education, training and position requirements be checked?",
             "scenario_interpretation_label": "Notes and verification suggestions",
@@ -35317,7 +35372,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/dispatchers-except-police-fire-and-ambulance",
+            "target_href": "/en/career/jobs/dispatchers-except-police-fire-and-ambulance",
             "target_slug": "dispatchers-except-police-fire-and-ambulance",
             "target_title": "Dispatchers (except police, fire and ambulance, adjacent occupation)",
             "transition_distance": {
@@ -35340,7 +35395,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/shipping-receiving-and-inventory-clerks",
+            "target_href": "/en/career/jobs/shipping-receiving-and-inventory-clerks",
             "target_slug": "shipping-receiving-and-inventory-clerks",
             "target_title": "Shipping, receiving and inventory clerks (adjacent occupation)",
             "transition_distance": {
@@ -35363,7 +35418,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/mail-clerks-and-mail-machine-operators-except-postal-service",
+            "target_href": "/en/career/jobs/mail-clerks-and-mail-machine-operators-except-postal-service",
             "target_slug": "mail-clerks-and-mail-machine-operators-except-postal-service",
             "target_title": "Mail clerks and mail machine operators (adjacent occupation)",
             "transition_distance": {
@@ -35386,7 +35441,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/postal-service-mail-carriers",
+            "target_href": "/en/career/jobs/postal-service-mail-carriers",
             "target_slug": "postal-service-mail-carriers",
             "target_title": "Postal service mail carriers (adjacent occupation)",
             "transition_distance": {
@@ -35409,7 +35464,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/driver-sales-workers",
+            "target_href": "/en/career/jobs/driver-sales-workers",
             "target_slug": "driver-sales-workers",
             "target_title": "Driver/sales workers (adjacent occupation)",
             "transition_distance": {
@@ -35432,7 +35487,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/baggage-porters-and-bellhops",
+            "target_href": "/en/career/jobs/baggage-porters-and-bellhops",
             "target_slug": "baggage-porters-and-bellhops",
             "target_title": "Baggage porters and bellhops (adjacent occupation)",
             "transition_distance": {
@@ -35455,7 +35510,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/light-truck-drivers",
+            "target_href": "/en/career/jobs/light-truck-drivers",
             "target_slug": "light-truck-drivers",
             "target_title": "Light truck drivers (adjacent occupation)",
             "transition_distance": {
@@ -35478,7 +35533,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cargo-and-freight-agents",
+            "target_href": "/en/career/jobs/cargo-and-freight-agents",
             "target_slug": "cargo-and-freight-agents",
             "target_title": "Cargo and freight agents (adjacent occupation)",
             "transition_distance": {
@@ -35566,7 +35621,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35615,7 +35670,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Explore my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35664,7 +35719,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35713,7 +35768,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Explore my motivation cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35762,7 +35817,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35811,7 +35866,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Explore my communication cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36433,7 +36488,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore the task interests and work preferences of couriers and messengers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36547,11 +36602,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -36967,39 +37022,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 247,200 people (2024, single-occupation basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "228,900 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size",
-        "occupation_scope": "The O*NET employment trend page (based on BLS 2024—2034 projections) employment estimate for this detailed occupation in 2024",
-        "period": "2024 (O*NET/BLS); retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-5021",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a19-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Growth of 7% or higher (2024—2034, label Much faster than average)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+8.0%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Employment change rate",
-        "occupation_scope": "The O*NET employment trend page (based on BLS 2024—2034 projections) projection label for this detailed occupation is 'Much faster than average'",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-5021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a19-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 27,900 (2024—2034 cumulative, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "23,800 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Job openings",
-        "occupation_scope": "The O*NET employment trend page's cumulative openings for this detailed occupation over 2024—2034, stated to include growth and replacement demand",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-5021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a19-bls-projections"
         ]
       },
       {
@@ -37145,6 +37200,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Five openings, CNY 6,000–7,000 per month.",
+        "fact_id": "posting-courier-nanjing",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Jiangsu SF courier",
+        "period": "2025-02-17",
+        "source_refs": [
+          "courier-nanjing"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Twelve openings, CNY 7,000 per month and up.",
+        "fact_id": "posting-courier-beijing",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Fangshan pickup and delivery worker",
+        "period": "2024-07",
+        "source_refs": [
+          "courier-beijing"
+        ]
       }
     ]
   },
@@ -37171,19 +37250,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, growth of 7% or higher, much faster than average)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employed persons (2024, about 247,200 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. job openings (2024—2034, about 27,900)"
+        "label": "U.S. projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37197,17 +37276,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Couriers and messengers (O*NET-SOC 43-5021.00) pick up, deliver and hand over letters, documents, parcels and other items within or between institutions: this covers collecting items and delivery information, planning routes, loading and pickup and delivery, recording collection and delivery, unloading and sorting, obtaining signatures and cash-on-collection payments, routine vehicle maintenance and receiving and dispatch and clerical affairs; it includes the U.S. 2025 median annual wage of 39,200 USD (hourly wage 18.85 USD), about 247,200 people employed in 2024, a 2024—2034 employment projection much faster than average (7% or higher), the mainland China occupation-level wage and employment basis gap, and the control points for road and weather exposure, time pressure and item safety responsibility."
+      "text": "See how couriers handle pickups, routes and proof of delivery. Compare two Chinese postings and U.S. wages and outlook."
     },
     "title": {
       "availability": "available",
       "text": "Couriers and messengers"
     }
   },
-  "source_content_sha256": "0b5b628b95e98ab59401fe66799294352b51961697098c8603d7019e8c247d10",
+  "source_content_sha256": "503218c2b463a69b4c031bc9f12fe86ba1690508f9097520f762051c05a07ec4",
   "subject": {
     "canonical_slug": "couriers-and-messengers",
     "name": "Couriers and messengers",
-    "summary": "Couriers and messengers correspond in the United States to O*NET-SOC 43-5021.00 (Couriers and Messengers). The core is picking up, delivering and handing over letters, documents, parcels and other items within or between institutions: collecting items and delivery information by dispatch or route, planning and following the most time-saving route, loading the vehicle and paying attention to hazardous goods, picking up and delivering en route, recording collection and delivery information, unloading and sorting by route, obtaining signatures and cash-on-collection payments, completing routine vehicle maintenance and attendance confirmation, and taking on receiving and dispatch and general clerical affairs when needed. On the China side, similar positions are mostly called couriers, same-city delivery riders, parcel deliverers, or internal couriers and receiving and dispatch clerks and are not a one-to-one correspondence with this U.S. detailed occupation, so appointment and pay bases cannot be interchanged."
+    "summary": "Pick up messages, documents or packages, check addresses and handling requirements, deliver along a route, and record receipt, exceptions and returns. Lab specimens and valuable or confidential items can require special handoffs."
   }
 }

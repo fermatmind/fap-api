@@ -23377,14 +23377,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "下一步核目标地区的教育、训练和岗位权限；虚构练习不能替代真实工作授权。"
+              "纸面体验｜在一段虚构学生答卷上分别标记论点、依据和反例，写一条反馈，说明哪个结论还需要论证。 "
             ]
           },
           "id": "philosophy-and-religion-teachers-postsecondary.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "ep",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23701,13 +23699,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "教授哲学、宗教学和神学课程，包含主要教学以及教学研究兼做岗位。课程主题、研究方法与聘任职责按院系明确；不能把高校宗教学教学直接等同宗教活动服务。"
+              "高校哲学与宗教学教师围绕原典、概念和研究文献组织课程与讨论，评阅学生能否准确理解材料、提出论点并回应异议。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "philosophy-and-religion-teachers-postsecondary.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-onet-25-1126.00"
           ],
           "type": "prose"
         },
@@ -24978,19 +24975,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未核得本职实际GenAI采用、替代或个人失业率。可考虑文献整理、课程初稿与反馈草拟，实际教学研究判断须人工核；就业预测不是AI因果。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：在一段虚构学生答卷上分别标记论点、依据和反例，写一条反馈，说明哪个结论还需要论证。"
             ]
           },
           "id": "philosophy-and-religion-teachers-postsecondary.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ep",
-            "ilo",
-            "arxiv",
-            "weforum",
-            "nist",
-            "phil-cn-pipl",
-            "editor"
+            "transfer-onet-25-1126.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -34016,6 +34007,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-25-1126.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 25-1126.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/25-1126.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39268,10 +39286,10 @@
       "text": "高校哲学与宗教学教师"
     }
   },
-  "source_content_sha256": "7ebc5ea9f52a5a219e04147f1bc376c95178da1f1327845f2f5f50b704cc38f5",
+  "source_content_sha256": "a49f23db129edc2e8ee50e11e6f76f2ac0150f9d4ab79033062c6ca281878616",
   "subject": {
     "canonical_slug": "philosophy-and-religion-teachers-postsecondary",
     "name": "高校哲学与宗教学教师",
-    "summary": "高校哲学与宗教学教师（O*NET 25-1126.00）教授哲学、宗教学或神学课程，设计讲授与讨论，评价作业和考试，并按岗位开展研究，围绕课程目标、阅读材料、论证、学生作业和评分标准形成课程大纲、课堂讨论、反馈与可复核的评分记录；具体任教资格、课程内容、学术研究和学生评价按学校与所在地制度确定。岗位场景、资格和最终责任须按所在地及机构制度核对。"
+    "summary": "高校哲学与宗教学教师围绕原典、概念和研究文献组织课程与讨论，评阅学生能否准确理解材料、提出论点并回应异议。"
   }
 }

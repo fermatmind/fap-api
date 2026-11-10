@@ -23326,7 +23326,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use E1–E5 to independently review a set of fictional test records and write a release recommendation, sealing them first and then comparing against the reference; observe whether you can cite the original records, recalculate values, compare them with specifications and control limits, and give specific rework feedback."
+              "Under 09 “Entry, qualifications, and career development,” try “QC-L01 | Can these lab records support release?” Build a four-row results table and record test conditions, open investigation items, and your recommendation."
             ]
           },
           "id": "quality-control-analysts.quick-decision.fit-decision-checklist.2",
@@ -26953,13 +26953,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 19-4099.01 does not automatically map to Chinese occupational codes, qualifications, or wages; the actual responsibility of a Chinese target position should be checked against test items, methods, and release authorization."
+              "Chemical inspection technicians (6-31-03-01) overlap with laboratory QC in sample preparation, instrumental analysis, and records. Check separately who investigates deviations, recommends release, or authorizes it."
             ]
           },
           "id": "quality-control-analysts.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "cnclass",
-            "editor"
+            "editor",
+            "cn-qc-class"
           ],
           "type": "prose"
         },
@@ -27695,31 +27696,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Food science technician",
@@ -28113,7 +28114,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Generally yes. This occupation does not use IQ tests as a threshold, but it requires steady numerical checking and logical ordering: comparing results with specification limits, judging the direction of upper and lower limits, and checking units and periods; these are work methods that can be practiced."
+              "The occupational sources and job sample here do not list an IQ score. Check each employer’s requirements. Use the exercise to observe how you check numbers, document findings, and hand them off."
             ]
           },
           "id": "quality-control-analysts.fit.personality-fit-block.18",
@@ -28989,7 +28990,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "E1 the sample numbers in the log-in sheet and the batch record are not fully consistent; if the test data are assigned to the same batch without clarification, the basis for the decision becomes unclear."
+              "Trace each sample ID to the original batch record. Hold the result for review when the relationship is unclear."
             ]
           },
           "id": "quality-control-analysts.risk.career-risk-cards.14",
@@ -29049,7 +29050,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "E2 states that the pH meter calibration is valid until 2026-05-31, but the pH in E3 was measured on 2026-06-02; the scenario is treated as unusable data, and the assessment of the actual impact is confirmed by the laboratory's authorized role according to procedure."
+              "If the test date conflicts with the calibration window, retain the reading and log. Ask the authorized reviewer to assess its use under the procedure."
             ]
           },
           "id": "quality-control-analysts.risk.career-risk-cards.18",
@@ -29106,7 +29107,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The microbiological result in E3 is 1,200 CFU/g, above the upper limit of 1,000; E4 states that no investigation was started, and E5 still recommends release; first record the out-of-specification result and the unfinished investigation, and do not treat the recommendation as approval."
+              "For a result outside a stated limit, preserve the raw record, document investigation status, and escalate to the authorized role. Section 09 supplies fictional data to review."
             ]
           },
           "id": "quality-control-analysts.risk.career-risk-cards.22",
@@ -29226,7 +29227,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The approval column in E5 is empty, and currently there is only a draft recommending release; the analyst must state the pending items and the out-of-specification investigation and cannot hand the recommendation over as an approved release."
+              "Record draft and approval status separately. Investigate out-of-specification results or missing evidence under the procedure."
             ]
           },
           "id": "quality-control-analysts.risk.career-risk-cards.30",
@@ -29449,14 +29450,14 @@
                 "values": [
                   "Education and experience in recruitment requirements",
                   "The O*NET detailed occupation is Job Zone 3; the EP associate degree and None experience are typical US descriptions for the broader 19-4099 category and cannot be viewed as uniform requirements for all employers of the detailed analyst occupation or for China.",
-                  "How to check: match each requirement in the target posting to a demonstrable ability or experience."
+                  "Akeso’s fall recruiting table lists a physicochemical QC analyst in Zhongshan and Guangzhou Huangpu, with pH and other product tests, chromatography equipment upkeep, and reports. The row lists a bachelor’s degree. The posting header does not establish pay for this role. The QC section of a Zhejiang Huishi Pharmaceutical QA/QC posting covers testing raw materials, intermediates, finished products and stability samples, reporting, and method validation. Its combined title does not establish analyst-only duties or pay."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
                   "Training and job-entry verification",
-                  "O*NET states that the occupation usually requires one to two years of on-the-job training and experience and may use a registered apprenticeship path; the specific form varies with the employer and laboratory.",
+                  "O*NET Job Zone 3 describes occupations with medium preparation. Its examples are context. Check each laboratory’s experience and training requirements.",
                   "How to check: confirm the employer's training arrangements, the mentoring approach, and the authorized scope for taking up the position."
                 ]
               },
@@ -29481,7 +29482,9 @@
           "id": "quality-control-analysts.path.employer-evidence.1",
           "source_refs": [
             "employer",
-            "editor"
+            "editor",
+            "cn-akeso-qc",
+            "cn-huishi-qc"
           ],
           "title": "What do employers usually look at in recruitment?",
           "type": "cards"
@@ -29494,33 +29497,33 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and setup | all editorially designed fictional data",
-                  "You are an analyst in the quality control laboratory of the fictional company \"Qinglan Biological Products\" and need to review the test records of batch L-2405 and give a release recommendation. The following materials and values are entirely fictional and are not real test results or market offers.",
-                  "E1 Sample log-in and batch record: L-2405 is divided into L-2405-01 to 03, and the test items are assay, moisture, pH, and microbiology; the numbers in the log-in sheet and the batch record are not fully consistent. E2 Instrument calibration and equipment log: the pH meter calibration is valid until 2026-05-31, and the balance and incubator are within their validity periods.",
-                  "E3 Raw data and specifications: assay 98.6% (specification 95.0—105.0%), moisture 0.42% (specification ≤0.50%), pH measured on 2026-06-02, microbiology 1,200 CFU/g (upper limit 1,000). E4 Deviation and out-of-specification record: the microbiological result was registered but no investigation was started, and the inconsistent sample identification is recorded as pending confirmation. E5 Release recommendation and approval column: the draft says \"recommend release\" and the approval column is empty."
+                  "Fictional inputs",
+                  "Use the records provided here.",
+                  "E1 | Fictional lot L-2405. The intake log lists L-2405-01, 02, and 03, while the raw pH record says L-2405-08. Other records match the lot. E2 | The pH meter calibration was valid through May 31. The measurement was taken June 2. The assay, moisture, and microbiology equipment records show valid status on the test date.",
+                  "E3 | Assay 98.6%, specification 95.0%–105.0%. Moisture 0.42%, limit 0.50%. pH 6.8, with no applicable limit supplied. Microbiology 1,200 CFU/g, limit 1,000. E4 | The microbiology result is logged and the investigation field is blank. E5 | The draft recommends release, with no authorized approval recorded."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task",
-                  "Check E1—E5 item by item and write out: which items are acceptable, which must not be released, which data are unusable, and the unconfirmed items and the approver that the release recommendation should include.",
-                  "Do not add test results, limits, authorizations, or customer information that the scenario does not give; list unknown items separately."
+                  "Task and deliverable",
+                  "Submit a four-row results table with each reading, its specification, and the instrument or sample status. Recommend a disposition and list the missing evidence.",
+                  "List evidence gaps. Do not invent readings or approvals."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference deliverable",
-                  "Acceptable: assay 98.6% and moisture 0.42% are within specification and the instruments are within the calibration period. Must not be released: microbiology 1,200 CFU/g is above the upper limit of 1,000, which should be judged non-conforming and trigger an out-of-specification investigation. Unusable data: pH was measured on 2026-06-02, while the calibration expired on 2026-05-31, so recalibration and retesting are required.",
-                  "The release recommendation must state that the sample identification is pending confirmation and the out-of-specification investigation is not complete, and it must be approved by a role authorized by the organization; the analyst submits only a recommendation."
+                  "Before checking your work",
+                  "Save your draft before checking the key after the seven-day plan.",
+                  "You need no equipment, physical samples, or partner."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries",
-                  "This exercise does not involve real testing, sample retention, or release; actual testing, decisions, and deviation handling follow the quality system and authorization of the organization concerned. If you cannot judge, you are allowed to write \"insufficient to judge\" and explain what evidence is missing."
+                  "Authority boundaries",
+                  "This is a paper exercise. Do not operate equipment, approve release, or restart production."
                 ]
               }
             ]
@@ -29529,7 +29532,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: a complete test record review task (fictional materials)",
+          "title": "QC-L01 | Can these lab records support release?",
           "type": "cards"
         },
         {
@@ -29540,31 +29543,31 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Scope comparison package",
-                  "Use E1—E3 to fill in a comparison table of sample identification, test items, method, and specification version, marking unknown items and questions that need clarification.",
-                  "How to review: from this table alone, another person can judge which data item is unusable and why."
+                  "Scope and evidence sheet",
+                  "Record the subject and scope from E1.",
+                  "Verify against the supplied inputs."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Independent review statement",
-                  "For E3, write out the value, the specification direction, and the decision conclusion item by item, and note the instrument status.",
-                  "How to review: the conclusion is consistent with the raw data and the specification version and states the basis."
+                  "Comparison record",
+                  "Use E3 to make the comparison and show the denominator or limits.",
+                  "Verify against the supplied inputs."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Deviation and escalation record",
-                  "Use E4 to write a deviation record: event, impact, open questions, and escalation target; the record can be traced back to the sample and equipment, and the disposition responsibility is clear."
+                  "Exception handoff",
+                  "Use E4 and E5 to record open items, the proposed disposition, and its owner."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Draft release recommendation",
-                  "Use E5 to write a release recommendation listing acceptable items, items that must not be released, unconfirmed items, and the approver; no self-approval or signing on behalf of others may appear."
+                  "Decision draft",
+                  "Submit a four-row results table with each reading, its specification, and the instrument or sample status. Recommend a disposition and list the missing evidence."
                 ]
               }
             ]
@@ -29596,25 +29599,25 @@
               [
                 "Check sample identification and status",
                 "Whether inconsistency between the number and the handover can be found",
-                "Can point out the inconsistency and explain that isolation comes before reporting",
+                "Identify the record, version, and scope.",
                 "A single employer's process cannot be generalized into a uniform industry requirement"
               ],
               [
                 "Check instrument status",
                 "Whether an expired calibration can be identified",
-                "Can point out that the calibration has expired and require recalibration and retesting",
+                "Explain whether the evidence supports a decision.",
                 "Equipment and calibration requirements vary with the laboratory system"
               ],
               [
                 "Check specification and decision",
                 "Whether the direction of the upper and lower limits can be judged",
-                "Can explain that 1,200 is above the upper limit of 1,000 and should be judged non-conforming",
+                "Show the calculation or specification comparison.",
                 "Limits and methods vary with product and regulation"
               ],
               [
                 "Check release authorization",
                 "Whether a recommendation can be distinguished from an approval",
-                "Can point out that the approval column is empty and release must be decided by an authorized role",
+                "Name the disposition authority and reviewer.",
                 "The scope of authority is determined by the organization and cannot be carried over from assumptions made elsewhere"
               ]
             ]
@@ -29635,50 +29638,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day one",
-                  "Read E1—E5 and the task instructions, and write a role boundary card with one column each for what you may do, what must be reviewed, and what is prohibited; confirm that you will not do real testing or release."
+                  "Day 1",
+                  "Read E1–E5 and identify records and authority."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day two",
-                  "Use E1 to complete a sample log-in check sheet, marking number inconsistencies and pending items."
+                  "Day 2",
+                  "Record the subject and scope from E1."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day three",
-                  "Use E2 to check instrument calibration and the equipment log, marking items that are overdue or of unclear status."
+                  "Day 3",
+                  "Check the status and evidence in E2."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day four",
-                  "Use E3 to recalculate values and compare them with specifications item by item, and write out the items that are acceptable and those that must not be released, with reasons."
+                  "Day 4",
+                  "Use E3 to make the comparison and show the denominator or limits."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day five",
-                  "Use E4 to write a deviation record: event, impact, open questions, and escalation target."
+                  "Day 5",
+                  "Use E4 and E5 to record open items, the proposed disposition, and its owner."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day six",
-                  "Use E5 to write a draft release recommendation listing unconfirmed items and the approver, without approving on your own."
+                  "Day 6",
+                  "Finish and save your first draft with the evidence behind your judgments. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day seven",
-                  "Review all materials against the reference deliverable, note missed items, wrong judgments, and remaining uncertainties, and write down the abilities to verify next."
+                  "Day 7",
+                  "After saving your day 6 draft, open “QC-L01 answer key and rubric (open on day 7)” in the FAQ. Apply the four rubric checks and record one revision and its reason."
                 ]
               }
             ]
@@ -29687,7 +29690,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Seven-day experience: complete one test record review loop with fictional materials",
+          "title": "Seven-day practice and self-check",
           "type": "timeline"
         },
         {
@@ -29695,8 +29698,8 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Ability ladder: before entering this occupation, check the official occupational scope, real employer requirements, education and training, local qualifications, and supervised tasks; the conditions of adjacent occupations cannot be used to infer them directly.",
-              "Change judgment: after completing E1—E5, which step most needs external confirmation? Sample identification, instrument status, and release authorization should all be pointed out item by item.",
+              "Check whether each result traces to the sample and lot.",
+              "Keep the test conditions, applicable limits, and open items for each row.",
               "Facts and choices: write verifiable facts (specification limits, calibration dates, test values) separately from editorial judgments, and the judgment conclusions must point back to the raw data.",
               "Exercise cost: about 30—60 minutes per day for the seven-day plan, mainly reading materials and recalculating, with no need to buy equipment or reagents.",
               "Material boundaries: E1—E5 are entirely fictional, cannot replace real testing, and cannot serve as a basis for reports.",
@@ -29708,7 +29711,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide at the end of seven days whether to continue",
+          "title": "Submission and review checklist",
           "type": "list"
         },
         {
@@ -29826,8 +29829,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "The recruitment sample on this page was read and verified on 2026-09-30 and deduplicated by employer and position: this round obtained no verifiable original public recruitment text for quality control analysts in mainland China, so none is included as an offer; the US part uses only O*NET and BLS official occupational and statistical materials. The wording is used to explain duty combinations and condition differences, does not calculate industry shares, and does not mean the positions are still open.",
-              "Insufficient evidence: this round obtained no verified Chinese recruitment notice whose duties, test items, and authorization scope match, so the China salary module retains a gap; recruitment information does not constitute evidence of an occupational threshold."
+              "Akeso’s fall recruiting table lists a physicochemical QC analyst in Zhongshan and Guangzhou Huangpu, with pH and other product tests, chromatography equipment upkeep, and reports. The row lists a bachelor’s degree. The posting header does not establish pay for this role. The QC section of a Zhejiang Huishi Pharmaceutical QA/QC posting covers testing raw materials, intermediates, finished products and stability samples, reporting, and method validation. Its combined title does not establish analyst-only duties or pay."
             ]
           },
           "id": "quality-control-analysts.path.recruitment-sample.1",
@@ -29835,7 +29837,9 @@
             "employer",
             "r2-pay-1",
             "r2-pay-2",
-            "r2-pay-3"
+            "r2-pay-3",
+            "cn-akeso-qc",
+            "cn-huishi-qc"
           ],
           "title": "Recruitment sample note",
           "type": "notice"
@@ -31854,61 +31858,98 @@
                 "answer": "Perform routine and non-routine testing on raw materials, intermediates, finished products, and stability samples, compare results with specifications and control limits and propose release recommendations, while also calibrating and maintaining equipment, completing records, writing deviation reports, and participating in out-of-specification investigations. O*NET 19-4099.01 is on the US basis; actual work is checked against the position's test items and authorization.",
                 "id": "quality-control-analysts.faq.1",
                 "question": "What does a quality control analyst do every day?",
-                "question_key": "career.faq.quality-control-analysts.daily-work"
+                "question_key": "career.faq.quality-control-analysts.daily-work",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "Calibration technicians and chemical technicians are adjacent occupations listed by O*NET, focusing respectively on instrument calibration and chemical laboratory operations; quality control analysts place more emphasis on decisions against specifications, release recommendations, and deviation investigations. Shared laboratory skills do not mean positions are interchangeable or carry the same authorization, and the specific scope should be checked against the corresponding official occupational definition.",
+                "answer": "Inspectors often submit inspection and nonconformance records; lab analysts submit test results and deviation documentation; systems managers oversee rules, review, and follow-up across processes. Exact authority varies by employer and industry.",
                 "id": "quality-control-analysts.faq.2",
                 "question": "How is a quality control analyst different from adjacent positions?",
-                "question_key": "career.faq.quality-control-analysts.comparison"
+                "question_key": "career.faq.quality-control-analysts.comparison",
+                "source_refs": [
+                  "onet",
+                  "editor",
+                  "cn-qc-class"
+                ]
               },
               {
-                "answer": "First observe whether you can test batch by batch per method, record exceptions truthfully, stop use and escalate when equipment or data are unreliable, and accept that release is decided by an authorized role. Use E1—E5 to review records independently and compare with the reference; the O*NET interest code is CIR (Conventional > Investigative > Realistic), and assessments or a single paper performance cannot determine employment or fit.",
+                "answer": "Key: assay and moisture are within the stated limits. Microbiology exceeds its limit by 200 CFU/g. Record the out-of-specification result and request investigation under the scenario’s process. Do not use pH for the decision because of the sample ID, calibration, and specification gaps. Recommend holding the lot pending traceability, valid testing conditions, and investigation. Route the recommendation to the authorized reviewer.\n\nScore each item 0–2: specification comparison, record validity, investigation and open items, and release authority. Award 2 for complete and traceable, 1 for partial, and 0 for missing evidence or exceeding authority.",
                 "id": "quality-control-analysts.faq.3",
-                "question": "How do I judge whether I am suited to being a quality control analyst?",
-                "question_key": "career.faq.quality-control-analysts.fit"
+                "question": "QC-L01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.quality-control-analysts.fit",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "Insufficient evidence: this round obtained no AI adoption rate, layoff rate, or year of position disappearance for this occupation. ILO and GPTs are GPTs study task potential, and WEF reports employer expectations; none of them can be used to calculate job replacement for this occupation. The AI uses on this page are editorial trial suggestions, and decisions and release are still reviewed by responsible personnel.",
                 "id": "quality-control-analysts.faq.4",
                 "question": "Will AI reduce quality control analyst positions?",
-                "question_key": "career.faq.quality-control-analysts.ai-impact"
+                "question_key": "career.faq.quality-control-analysts.ai-impact",
+                "source_refs": [
+                  "ilo",
+                  "editor"
+                ]
               },
               {
                 "answer": "Insufficient evidence: this round obtained no verifiable national or city wage for quality control analysts in mainland China and no current recruitment sample matching the duties. The National Bureau of Statistics 2025 industry average wage is statistical background, not the wage for this occupation; US wages are not converted to fill a national value.",
                 "id": "quality-control-analysts.faq.5",
                 "question": "What is the wage of quality control analysts in mainland China?",
-                "question_key": "career.faq.quality-control-analysts.china-pay"
+                "question_key": "career.faq.quality-control-analysts.china-pay",
+                "source_refs": [
+                  "nbs"
+                ]
               },
               {
                 "answer": "No. In BLS May 2025 OEWS the 19-4099 category median is 62,280 US dollars per year, the lowest 10% is below 39,000, and the highest 10% is above 102,690; these are distribution positions of the 19-4099 category, not the 19-4099.01 detailed occupation, and cannot be treated as entry or senior levels.",
                 "id": "quality-control-analysts.faq.6",
                 "question": "Does the US median wage represent entry-level income?",
-                "question_key": "career.faq.quality-control-analysts.us-pay"
+                "question_key": "career.faq.quality-control-analysts.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
               },
               {
-                "answer": "O*NET Job Zone 3 (medium preparation), with the new employee education distribution including high school or equivalent, associate degree, and bachelor's degree; the BLS 2025—2035 table lists the typical entry-level education as an associate degree and related work experience as None. This is the typical US background, not a uniform Chinese threshold; check the test items and experience requirements of the Chinese target position.",
+                "answer": "O*NET Job Zone 3 (medium preparation), with the new employee education distribution including high school or equivalent, associate degree, and bachelor's degree; the BLS 2025—2035 table lists the typical entry-level education as an associate degree and related work experience as None. This is the typical US background, not a uniform Chinese threshold; check the test items and experience requirements of the Chinese target position. Akeso’s fall recruiting table lists a physicochemical QC analyst in Zhongshan and Guangzhou Huangpu, with pH and other product tests, chromatography equipment upkeep, and reports. The row lists a bachelor’s degree. The posting header does not establish pay for this role.",
                 "id": "quality-control-analysts.faq.7",
                 "question": "What education and experience are needed to enter the field?",
-                "question_key": "career.faq.quality-control-analysts.education-path"
+                "question_key": "career.faq.quality-control-analysts.education-path",
+                "source_refs": [
+                  "bls",
+                  "onet",
+                  "cn-akeso-qc"
+                ]
               },
               {
                 "answer": "Insufficient evidence: this round did not verify a cross-industry uniform qualification requirement for quality control analysts in China. O*NET provides a certification lookup entry point, but a certificate does not equal a state license, employer authorization, or a universal requirement; education, training, specific qualifications, and organizational authorization are checked separately, and the exercises on this page grant no test signing or release authority.",
                 "id": "quality-control-analysts.faq.8",
                 "question": "Do I need to take any certification exams?",
-                "question_key": "career.faq.quality-control-analysts.credentials"
+                "question_key": "career.faq.quality-control-analysts.credentials",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
-                "answer": "The editorial risk list on this page includes errors in sample identification and chain of custody, expired or unclear instrument calibration, improper handling of out-of-specification results, untraceable original records and versions, exceeding decision and release authorization, and external sharing of test data; no frequency is counted. In E1—E5 the microbiological result of 1,200 CFU/g is above the upper limit of 1,000, and the pH meter calibration expired on 2026-05-31 while the instrument was still in use on 06-02, so release is not permitted.",
+                "answer": "Sample receipt, instrument status, the applicable specification, and original records can affect a result. Preserve gaps and request investigation under the procedure. Route any release decision to authorized staff.",
                 "id": "quality-control-analysts.faq.9",
                 "question": "What is the most error-prone part of this work?",
-                "question_key": "career.faq.quality-control-analysts.risk-boundary"
+                "question_key": "career.faq.quality-control-analysts.risk-boundary",
+                "source_refs": [
+                  "onet",
+                  "editor"
+                ]
               },
               {
                 "answer": "BLS 2025—2035 projects 19-4099 category employment rising from 89,500 to 93,400 people, a 4.4% increase, a net gain of about 3,900, and about 11,200 annual average openings including replacement; openings do not equal net additions or the number of hires in China. Adjacent directions require comparing real tasks and method responsibility, and the exploration on this page does not guarantee a successful transfer.",
                 "id": "quality-control-analysts.faq.10",
                 "question": "What is the outlook for this occupation? Where can I move?",
-                "question_key": "career.faq.quality-control-analysts.outlook-transition"
+                "question_key": "career.faq.quality-control-analysts.outlook-transition",
+                "source_refs": [
+                  "ep",
+                  "editor"
+                ]
               }
             ]
           },
@@ -31920,7 +31961,11 @@
             "nbs",
             "privacy",
             "cnclass",
-            "editor"
+            "editor",
+            "cn-qc-class",
+            "ilo",
+            "onet-wages",
+            "cn-akeso-qc"
           ],
           "type": "faq"
         },
@@ -32018,13 +32063,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "path",
@@ -32466,6 +32511,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Chemical inspection technicians (6-31-03-01) overlap with laboratory QC in sample preparation, instrumental analysis, and records. Check separately who investigates deviations, recommends release, or authorizes it."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-qc-class",
+                "limitation": "Task overlap does not establish a grade, authority, or wage.",
+                "market": "Mainland China",
+                "name": "China occupational classification: Chemical inspection technician",
+                "period": "2022",
+                "publisher": "China Ministry of Human Resources and Social Security et al.; government-hosted copy",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Akeso’s fall recruiting table lists a physicochemical QC analyst in Zhongshan and Guangzhou Huangpu, with pH and other product tests, chromatography equipment upkeep, and reports. The row lists a bachelor’s degree. The posting header does not establish pay for this role."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-akeso-qc",
+                "limitation": "One posting for task comparison. It does not establish current availability, market pay, or national requirements.",
+                "market": "Mainland China",
+                "name": "Akeso: physicochemical QC analyst",
+                "period": "2026-09-23",
+                "publisher": "Akeso",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/correcruit/content/id/81205.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The QC section of a Zhejiang Huishi Pharmaceutical QA/QC posting covers testing raw materials, intermediates, finished products and stability samples, reporting, and method validation. Its combined title does not establish analyst-only duties or pay."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-huishi-qc",
+                "limitation": "One posting for task comparison. It does not establish current availability, market pay, or national requirements.",
+                "market": "Mainland China",
+                "name": "Zhejiang Huishi Pharmaceutical: QA/QC",
+                "period": "2026-08-24",
+                "publisher": "Zhejiang Huishi Pharmaceutical",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/correcruit/content/id/79349.html"
               }
             ]
           },
@@ -37157,7 +37247,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit quality control analyst work",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37234,7 +37324,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI Personality Test"
           },
           {
             "href": {
@@ -37244,7 +37334,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five Personality Test"
           },
           {
             "href": {
@@ -37254,7 +37344,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Enneagram Test"
           },
           {
             "href": {
@@ -37264,7 +37354,11 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "IQ Reasoning Assessment"
+          },
+          {
+            "href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "label": "EQ Assessment"
           }
         ]
       },
@@ -37703,14 +37797,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Sampling, testing, decisions, equipment calibration, and out-of-specification investigation tasks of quality control analyst 19-4099.01; checks the US SOC 19-4099 category wage percentiles and the 2025—2035 projection, the Chinese evidence gap, entry paths, and paper-based testing exercises that can be completed independently."
+      "text": "Quality control analysts test samples, check results against specifications, and document deviations. Compare lab roles, U.S. wage scope, and a testing exercise."
     },
     "title": {
       "availability": "available",
       "text": "Quality Control Analysts"
     }
   },
-  "source_content_sha256": "17758ef0841bdd22776b6d9c5eb03e0dcd50027b88503a29015c2f2444fa4e20",
+  "source_content_sha256": "decb7d707c22d1e79539e2ebb2de7972432c4c34feecca50179b58eb95c8c9c8",
   "subject": {
     "canonical_slug": "quality-control-analysts",
     "name": "Quality Control Analysts",

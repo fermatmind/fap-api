@@ -1283,6 +1283,9 @@
       "item:photographic-process-workers-and-processing-machine-operators.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:photographic-process-workers-and-processing-machine-operators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:photographic-process-workers-and-processing-machine-operators.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31281,6 +31284,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。工单 P8 要求影像 F3、两张哑光。甲用了 F3 却只有一张，乙两张哑光却引用 F2。写下应暂停交付的原因和给订单复核人的问题。"
+            ]
+          },
+          "id": "photographic-process-workers-and-processing-machine-operators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "核冲印订单与输出",
+          "type": "notice"
         }
       ]
     },
@@ -37824,6 +37842,13 @@
         "id": "photographic-process-workers-and-processing-machine-operators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "photographic-process-workers-and-processing-machine-operators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38181,7 +38206,7 @@
       "text": "摄影冲印操作工"
     }
   },
-  "source_content_sha256": "d35939bd3e2686a0af1bed5b7bff7a26e2e6f9f11253610408f6adc49b43ed4c",
+  "source_content_sha256": "c1e49e4a84f4303211b0160ec7cef1775bae89670d77d89deb0d2a3235d47da6",
   "subject": {
     "canonical_slug": "photographic-process-workers-and-processing-machine-operators",
     "name": "摄影冲印操作工",

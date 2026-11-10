@@ -44,9 +44,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1326,13 +1323,13 @@
         "status": "pending_mapping"
       },
       "item:acute-care-nurses.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:acute-care-nurses.path.entry-role-comparison.1": {
         "status": "mapped"
       },
       "item:acute-care-nurses.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:acute-care-nurses.path.interview-probation.1": {
         "status": "mapped"
@@ -23374,13 +23371,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "需谨慎的信号是忽视注册、岗位范围或拒绝团队交接。本页不授予诊断、处置、签署或机构岗位权限；中国已注册护士的法定危急通知及必要紧急救护责任另有明确规定。"
+              "如果班次、科室训练或临床授权尚不清楚，先查目标岗位。纸面练习不能代替护士资格。"
             ]
           },
           "id": "acute-care-nurses.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-reg",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23389,12 +23386,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "可先用虚构的观察记录练习区分事实、未知、交接对象与升级问题，再核对真实注册和岗位要求。"
+              "到「入行、资格与职业发展」找到「AC-13｜把未确认事项交给下一班」，先填状态表并写两句交接，再看参考。"
             ]
           },
           "id": "acute-care-nurses.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23403,14 +23400,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合探索的信号是愿意在变化快、信息不全时准确记录、表达未知、清楚交接并主动寻求支援，还愿意完成工作地注册与受监督培训。"
+              "如果你愿意反复观察、核对记录、交代未知，并能接受夜班及跨团队协作，可以继续了解。"
             ]
           },
           "id": "acute-care-nurses.quick-decision.fit-decision-checklist.3",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "acn-gl"
           ],
           "type": "prose"
         },
@@ -23419,13 +23415,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "用虚构时间线完成一份非临床交接摘要：标出时间、已知事实、未知项、接收者和需确认问题；不涉及真人患者、诊断、用药或处置。"
+              "《护士条例》把护士执业资格、注册与医疗机构聘用分开。通过资格考试后仍需按规定申请执业注册；急诊、监护和 ICU 的岗位培训与授权另按科室和机构核对。 美国急症护理工作常见于急性病房、术前术后及较高监护需求的病区。先核当地 RN 执照，再查岗位的带训与权限。PCCN、CCRN 对应不同病情与实践，按 AACN 现行资格核对；它们不授予 RN 或 APRN 执业权限。"
             ]
           },
           "id": "acute-care-nurses.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-reg",
+            "acn-aacn",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23434,13 +23431,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "急症护理的核心不是单独“处理紧急情况”，而是在注册和岗位授权范围内持续观察、照护协同、清晰交接，并在超范围时升级。"
+              "急症护理护士在病情变化快的场景中观察、记录、沟通和协助照护。大陆可对照急诊、重症和监护岗位，按护士执业注册、科室训练与单位授权核对。"
             ]
           },
           "id": "acute-care-nurses.quick-decision.fermat-decision-card.7",
           "source_refs": [
             "onet",
-            "onet"
+            "acn-gl",
+            "acn-sixth"
           ],
           "type": "prose"
         }
@@ -24793,14 +24791,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得急症护理护士任务级AI评分、医院实际采用、患者结局或因果就业替代数据。 AI用途仅为受控信息整理的编辑候选；不替代临床判断、授权处置、异常升级或记录责任。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "工具可辅助整理虚构交接文本和提示遗漏。使用真实记录前核单位批准和访问权限；分诊、病情判断、签核与交接由授权人员负责。"
             ]
           },
           "id": "acute-care-nurses.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "source-onet-acute-2026-revision",
-            "source-ilo-ai-2025-revision",
-            "source-nist-ai-rmf-revision"
+            "editor",
+            "cn-reg"
           ],
           "type": "prose"
         },
@@ -26845,12 +26842,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "求职时核具体医院基本工资、夜班补贴、绩效、试用期和税前税后口径；行业均值不等于该院报价。"
+              "国家统计局 2025 年城镇卫生和社会工作年平均工资：非私营单位 146,266 元、私营单位 75,631 元。两份医院公告不列工资；上述数字只是行业背景。"
             ]
           },
           "id": "acute-care-nurses.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "source-nbs-health-2025-revision"
+            "nbs",
+            "acn-gl",
+            "acn-sixth"
           ],
           "type": "prose"
         },
@@ -26873,13 +26872,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国 RN 工资不能当中国参考；职业范围、市场、计酬制度和法域均不同。"
+              "国家统计局 2025 年城镇卫生和社会工作年平均工资：非私营单位 146,266 元、私营单位 75,631 元。两份医院公告不列工资；上述数字只是行业背景。"
             ]
           },
           "id": "acute-care-nurses.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "source-bls-rn-2026-revision",
-            "source-cn-nurse-reg-revision"
+            "nbs",
+            "acn-gl",
+            "acn-sixth"
           ],
           "type": "prose"
         },
@@ -26972,7 +26972,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业年均值不代表急症护士起薪、中位数或个人报价。 美国RN母类2025–2035增长6%、2025年中位数97,550美元/年，两个市场不得外推。 美国RN母类2025–2035增长6%；不是中国或急症专科预测。 美国RN母类2025中位数97,550美元/年；不是中国工资。"
+              "行业年均值不代表急症护士起薪、中位数或个人报价。 美国RN母类2025–2035增长5.6%、2025年中位数97,550美元/年，两个市场不得外推。 美国RN母类2025–2035增长5.6%；不是中国或急症专科预测。 美国RN母类2025中位数97,550美元/年；不是中国工资。"
             ]
           },
           "id": "acute-care-nurses.china-salary.career-snapshot-primary-locale.55",
@@ -27001,7 +27001,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国RN母类2025–2035增长6%；不是中国或急症专科预测。"
+              "美国RN母类2025–2035增长5.6%；不是中国或急症专科预测。"
             ]
           },
           "id": "acute-care-nurses.china-salary.career-snapshot-primary-locale.58",
@@ -27205,12 +27205,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 RN母类在岗存量，非急症护士人数；BLS Registered Nurses 职业展望｜https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+              "2025 RN母类在岗存量，非急症护士人数；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27219,7 +27219,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "6%"
+              "5.6%"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.21",
@@ -27233,12 +27233,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025–2035 RN母类净增194700人，非AI因果效应；BLS Registered Nurses 职业展望｜https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+              "2025–2035 RN母类净增194,700人，非AI因果效应；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27261,12 +27261,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025–2035 RN母类年均空缺，含退休转岗替代；BLS Registered Nurses 职业展望｜https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+              "2025–2035 RN母类年均空缺，含退休转岗替代；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27275,7 +27275,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "以下全为Registered Nurses母类（SOC29-1141）工资与就业参考，不是急症护理专科统计或个人报价。2025–2035增长6%；州许可、医院角色与专科培训另核。"
+              "以下全为Registered Nurses母类（SOC29-1141）工资与就业参考，不是急症护理专科统计或个人报价。2025–2035增长5.6%；州许可、医院角色与专科培训另核。"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.25",
@@ -27290,7 +27290,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025美国RN母类中位数97,550美元/年、46.90美元/小时；急症护理页面借用母类统计，不把它写成急症护士专属工资。 2025–2035年：RN母类增长6%；2025年：RN母类97,550美元/年。"
+              "2025美国RN母类中位数97,550美元/年、46.90美元/小时；急症护理页面借用母类统计，不把它写成急症护士专属工资。 2025–2035年：RN母类增长5.6%；2025年：RN母类97,550美元/年。"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.26",
@@ -27388,7 +27388,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025–2035年：RN母类增长6%"
+              "2025–2035年：RN母类增长5.6%"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.33",
@@ -27528,12 +27528,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育服务：州、地方与私营"
+              "政府（不含州和地方教育及医院）"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27542,12 +27542,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "78,620美元/年"
+              "110,780 美元/年"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27561,7 +27561,7 @@
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27704,31 +27704,31 @@
                 "entity": "大五人格测试（英文）",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 测试（中文）",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试（中文）",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试（中文）",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "呼吸治疗师",
@@ -29412,14 +29412,14 @@
               [
                 "住院病区 RN 入口",
                 "核对注册、岗位定向、记录和交接要求",
-                "O*NET 任务资料支持母类任务；具体医院条件未核验",
+                "O*NET 说明美国急症护理任务；医院岗位条件见对应公告",
                 "虚构时间线与交接摘要",
                 "不是急诊/重症专科授权"
               ],
               [
                 "急诊/急性照护岗位探索",
                 "核对科室培训、监督、升级和班次要求",
-                "本轮无可复核雇主公告；以机构当前说明为准",
+                "参照本页两份上海医院历史公告；当前要求以目标医院公告为准",
                 "虚构观察记录中的事实/未知/交接对象",
                 "不能凭网页或练习处理真人患者"
               ],
@@ -29461,40 +29461,44 @@
               {
                 "id": "education",
                 "values": [
-                  "证据不足：未取得可复核急症护理雇主公告中的学历、注册、培训与经验要求。",
-                  "不能把 O*NET 职业资料冒充招聘条件",
-                  "求职时向目标机构核对学历、注册、培训和经验要求"
+                  "公利医院重症岗",
+                  "上海浦东公利医院 2026 年 3 月公告招重症医学科护士 8 名，要求护理本科及以上；有 ICU 专科护士适任证书可放宽至大专。要求三级综合医院重症医学科至少 2 年经历，需值夜班，3 月 31 日截止，未列工资。",
+                  "过期岗位样本。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "证据不足：未取得特定医院当期筛选流程的可复核材料。",
-                  "背景、健康、培训或系统要求因机构而异",
-                  "只以目标机构当前书面材料为准"
+                  "市六医院相邻护理岗",
+                  "上海市第六人民医院同月招聘国际医疗部专职护士，本科及以上，ICU 或急诊经历优先，并要求中英文沟通及病房翻班。3 月 31 日截止，原公告未列人数或工资。它是借重症经验的相邻岗位样本。",
+                  "急诊/ICU 经历是优先条件。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 可用作任务与工作情境背景",
-                  "可据此准备非临床记录与交接样本",
-                  "它不证明某医院正在招聘或会录用"
+                  "大陆护士注册",
+                  "《护士条例》把护士执业资格、注册与医疗机构聘用分开。通过资格考试后仍需按规定申请执业注册；急诊、监护和 ICU 的岗位培训与授权另按科室和机构核对。",
+                  "资格与科室授权分开。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "系统和设备培训应由目标机构确认",
-                  "不要把课程、证书或同事示范当作授权",
-                  "任何患者数据或临床操作不用于本页练习"
+                  "美国 RN 与专科认证",
+                  "美国急症护理工作常见于急性病房、术前术后及较高监护需求的病区。先核当地 RN 执照，再查岗位的带训与权限。PCCN、CCRN 对应不同病情与实践，按 AACN 现行资格核对；它们不授予 RN 或 APRN 执业权限。",
+                  "按机构和认证方核对。"
                 ]
               }
             ]
           },
           "id": "acute-care-nurses.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "acn-gl",
+            "acn-sixth",
+            "cn-reg",
+            "bls",
+            "acn-aacn"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29507,41 +29511,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构学习记录：成人患者“甲”在 08:00、08:30、09:00 的观察表分别写为“清醒、能简短回答”“表示更喘、需要停顿说话”“仍表示更喘；记录中没有血氧、诊断、医嘱或既往史”。交接单显示接收护士为“乙”，主管为“丙”。",
-                  "已知：时间、患者自述、可观察沟通变化、接收/主管角色；未知：诊断、生命体征、用药、处置权限、医嘱和机构升级阈值。变化：09:00 时家属询问“现在该怎么处理”。",
-                  "限制：只供非临床学习者练习观察、记录与转交；不得接触真人患者、作诊断、解释病情、给出用药/处置建议或模拟紧急临床操作。"
+                  "材料｜三条虚构记录",
+                  "E1：交接目标为床位记录 B-13；当班负责人确认是否已向接班同事发送状态更新。",
+                  "E2：19:05 的 B-13 记录写“已拟更新，未见发送确认”；E3：19:10 有发送回执，但对应 B-31。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "30分钟内完成一页交接草稿：按时间列事实、患者原话、未知项、拟通知对象及待确认事项。题面未给已通知状态，不得写成已完成通知。",
-                  "针对 09:00 的变化，写出不超过三句的升级信息：必须说明时间、事实、未知项和请求有权人员评估；不得给出诊断或具体处置。",
-                  "写一项边界说明：家属提问不由练习者回答，应交由机构指定的有权临床责任人。"
+                  "任务｜写交接表与两句提示",
+                  "记录目标编号、时间、可确认状态、待核和负责人。",
+                  "先写两句给当班负责人，再看参考。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考推导：记录可以写“09:00，患者仍表示更喘；本练习未提供生命体征、诊断或医嘱”。这来自题面，不增加任何临床结论。",
-                  "拟交接可写“请乙/丙按机构流程评估；已知为主诉持续变化，未知为生命体征、诊断和医嘱”。乙为接收护士、丙为主管；不虚构已经通知或已经处置，不把“更喘”推成病因。",
-                  "可核对产出是时间线、事实/未知区分、通知对象和边界；不是病情判断、处置记录或能力证明。"
+                  "参考｜交给当班负责人",
+                  "19:05 的 B-13 已拟更新但发送未确认，19:10 的回执属于 B-31。",
+                  "请核对 B-13 是否已发送并回填结果，目前保持待核。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "答案只从虚构题面推导，不能用于真实分诊、急救、临床沟通、患者教育或医嘱执行。",
-                  "任何关键资料缺失、患者状态变化或超出角色授权时，练习应显示“记录并按机构路径升级”，而不是自行判断或处置。"
+                  "自核与边界",
+                  "要保留两条时间、两个编号和发送待确认。",
+                  "只做纸面练习，不提供真实分诊、诊疗或患者信息处理。"
                 ]
               }
             ]
           },
           "id": "acute-care-nurses.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "入行练习：一次完整的急症护理护士任务任务（虚构材料）",
+          "title": "AC-13｜把未确认事项交给下一班",
           "type": "cards"
         },
         {
@@ -29552,38 +29557,36 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "作品一：虚构时间线。核验：每条信息有时间、来源和“事实/未知”标记。",
-                  "作品二：交接摘要。核验：接收对象、拟通知对象、通知状态待确认、待确认事项和边界可复查；题面未给已通知，不虚构完成。",
-                  "作品三：岗位要求清单。核验：分开注册、雇主培训、患者群体和监督要求。"
+                  "状态表",
+                  "目标编号、时间、证据、待核项。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "作品四：角色边界页。核验：能清楚说出模拟练习不授予临床处置、签署或独立决定权。",
-                  "作品只用虚构、去标识化材料；不替代护士注册、临床实习、机构授权或专科培训。",
-                  "交付前自查：是否加入题面没有的临床结论，是否遗漏未知项，是否明确升级对象。"
+                  "两句交接",
+                  "先写事实，再写请谁核。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "面试中展示的是信息整理、沟通和边界意识，而非声称会处理真实急症。",
-                  "可用一页摘要说明已具备的准备、仍待完成的注册/训练和希望在监督下学习的任务。"
+                  "自核记录",
+                  "对照参考写一处修正。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具可为纸笔或获准文档；不得输入真实患者信息、机构受控信息或未获准临床记录。",
-                  "AI 若用于语言润色，只能处理虚构题面且必须人工逐项复核；不能替代临床判断。"
+                  "下一步",
+                  "比较一份重症或相邻护理岗位公告。"
                 ]
               }
             ]
           },
           "id": "acute-care-nurses.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "入门时可以准备哪些可复核的作品材料？",
           "type": "cards"
@@ -29646,59 +29649,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天：阅读职业任务与边界，写出三项急症护理任务和三项不可从网页获得的权限。",
-                  "产出：任务边界清单；全程不用真实患者数据。"
+                  "读职责",
+                  "区别急性病房、重症与急诊。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天：用虚构材料做时间线，标出事实、患者原话、未知项和角色。",
-                  "产出：时间线；全程不用真实患者数据。"
+                  "核公告",
+                  "从两份样本选一个，标学历、经历与班次。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天：完成一份不含诊断或处置的交接摘要。",
-                  "产出：交接摘要；全程不用真实患者数据。"
+                  "读交接",
+                  "标记目标编号和负责人。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天：把题面中09:00变化改写为面向有权人员的升级信息。",
-                  "产出：升级草稿；全程不用真实患者数据。"
+                  "对照记录",
+                  "分别抄两条时间及对应编号。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天：制作岗位要求清单，分开注册、培训、授权和专科经验。",
-                  "产出：岗位要求表；全程不用真实患者数据。"
+                  "写两句",
+                  "保留发送待确认。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天：请成人同伴或隔天按题面独立复查；查是否增加诊断、通知或处置事实，发现实际错误才记录修订，没有错误不强造两处。",
-                  "产出：同伴复核记录；全程不用真实患者数据。"
+                  "自主复核",
+                  "对照题后参考与自核项，写一处改动。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天：汇总四件虚构作品，决定下一步是核对资格、寻求受监督观察或比较相邻护理岗位。",
-                  "产出：个人决策说明；全程不用真实患者数据。"
+                  "选下一步",
+                  "继续了解急症护理、比较相邻方向或暂缓。"
                 ]
               }
             ]
           },
           "id": "acute-care-nurses.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "七天体验：用虚构材料完成一次急症护理护士任务闭环",
+          "title": "七天体验：读岗位、做交接、选方向",
           "type": "timeline"
         },
         {
@@ -29706,18 +29709,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "能否区分题面事实与未知项？不能则先练习结构化记录。",
-              "能否在变化时写出“谁、何时、观察到什么、需要谁确认”？不能则练习交接而非临床判断。",
-              "是否愿意完成工作地护士注册与雇主要求的培训？不能则不应进入真实护理环节。",
-              "能否接受轮班、记录、团队协作和高后果复核？不确定则寻求职业访谈或受监督观察。",
-              "是否能拒绝超出授权的处置、签署或建议？不能则先学习岗位边界。",
-              "是否能保护患者和机构信息，不输入未获准工具？不能则先补数据治理基础。",
-              "下一步只选一个：核对资格、制作虚构作品、寻求受监督机会，或暂停转向计划。"
+              "继续：能核对编号与时间，愿意重复检查交接。",
+              "继续：找到目标科室及其训练要求。",
+              "对比：如果更偏沟通与跨团队协作，可看相邻护理岗。",
+              "对比：区分已有经验和公告优先项。",
+              "暂缓：若执业注册、带训或班次还不清楚，先核条件。",
+              "暂缓：如果把 B-31 回执当成 B-13 的，按题后参考重核。",
+              "写下一项仍待验证的要求。"
             ]
           },
           "id": "acute-care-nurses.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "七天结束时如何判断要不要继续",
           "type": "list"
@@ -29804,7 +29807,12 @@
           "id": "acute-care-nurses.path.credential-decision.1",
           "source_refs": [
             "source-cn-nurse-reg-revision",
-            "source-bls-rn-2026-revision"
+            "source-bls-rn-2026-revision",
+            "acn-aacn",
+            "cn-reg",
+            "bls",
+            "acn-gl",
+            "acn-sixth"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29835,15 +29843,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可复核的急症护理雇主公告，不能把O*NET、课程或编辑练习写成正在招聘的岗位条件。",
-              "求职时应直接向目标机构核对岗位名称、注册地点、患者群体、科室培训、班次、监督、薪酬和截止日期。"
+              "上海浦东公利医院 2026 年 3 月公告招重症医学科护士 8 名，要求护理本科及以上；有 ICU 专科护士适任证书可放宽至大专。要求三级综合医院重症医学科至少 2 年经历，需值夜班，3 月 31 日截止，未列工资。",
+              "上海市第六人民医院同月招聘国际医疗部专职护士，本科及以上，ICU 或急诊经历优先，并要求中英文沟通及病房翻班。3 月 31 日截止，原公告未列人数或工资。它是借重症经验的相邻岗位样本。"
             ]
           },
           "id": "acute-care-nurses.path.recruitment-sample.1",
           "source_refs": [
-            "onet"
+            "acn-gl",
+            "acn-sixth"
           ],
-          "title": "招聘样本说明",
+          "title": "大陆两则岗位：重症医学科与国际医疗部",
           "type": "notice"
         },
         {
@@ -31042,22 +31051,22 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS Registered Nurses 职业展望",
+                "entity": "BLS 就业预测表 1.2：注册护士",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS Registered Nurses 职业展望",
+                "entity": "BLS 就业预测表 1.2：注册护士",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS Registered Nurses 职业展望",
+                "entity": "BLS 就业预测表 1.2：注册护士",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET Acute Care Nurses 29-1141.01",
@@ -31129,13 +31138,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS预计美国RN母类2025–2035增长6%，年均空缺180800；不能叫急症护理专科或中国岗位预测。转向按患者场景、教育许可和团队任务比较；本页不提供个人录用概率。"
+              "BLS预计美国RN母类2025–2035增长5.6%，年均空缺180,800；不能叫急症护理专科或中国岗位预测。转向按患者场景、教育许可和团队任务比较；本页不提供个人录用概率。"
             ]
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.8",
           "source_refs": [
-            "source-bls-rn-2026-revision",
-            "source-onet-acute-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31149,7 +31157,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.9",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31163,7 +31171,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.10",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31177,7 +31185,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.11",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31186,12 +31194,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "非急症专科、中国招聘或个人录用概率。"
+              "不能估计急症护理专科的就业人数。"
             ]
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.12",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31205,7 +31213,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.13",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31219,7 +31227,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.14",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31233,7 +31241,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.15",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31247,7 +31255,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.16",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31261,7 +31269,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.17",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31270,12 +31278,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "预计净增194700，由3465400至3660100；不是AI因果效果。"
+              "母类预计增加约 194,700 人，从 3,465,400 增至 3,660,100。"
             ]
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.18",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31284,12 +31292,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "非急症专科、中国招聘或个人录用概率。"
+              "不能估计急症护理专科的就业增长。"
             ]
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.19",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31303,7 +31311,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.20",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31317,7 +31325,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.21",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31326,12 +31334,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "6%"
+              "5.6%"
             ]
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.22",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31345,7 +31353,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.23",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31359,7 +31367,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.24",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31373,7 +31381,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.25",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31382,12 +31390,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "非急症专科、中国招聘或个人录用概率。"
+              "不能估计急症护理专科的年均空缺。"
             ]
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.26",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31401,7 +31409,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.27",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31415,7 +31423,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.28",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31429,7 +31437,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.29",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31443,7 +31451,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.30",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31457,7 +31465,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.31",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31471,7 +31479,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.32",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31893,28 +31901,45 @@
                 "question_key": "career.faq.acute-care-nurses.human-control"
               },
               {
-                "answer": "2025卫生和社会工作行业年平均工资为非私营146266元、私营75631元，涵盖多职业和社会工作。它不是急症护士中位数、应届起薪或城市月薪；专科精确工资与招聘报价仍有缺口。",
+                "answer": "国家统计局 2025 年城镇卫生和社会工作年平均工资：非私营单位 146,266 元、私营单位 75,631 元。两份医院公告不列工资；上述数字只是行业背景。",
                 "id": "acute-care-nurses.faq.6",
                 "question": "中国大陆的急症护理护士工资如何理解？",
-                "question_key": "career.faq.acute-care-nurses.china-pay"
+                "question_key": "career.faq.acute-care-nurses.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "acn-gl",
+                  "acn-sixth"
+                ]
               },
               {
-                "answer": "不是。97550美元/年是2025美国Registered Nurses母类中位数，非急症护理专科或新人收入。10/25/50/75/90分位为68940/80330/97550/112350/137470美元；分位不能当职级或个人报价。",
+                "answer": "O*NET 29-1141.01 的工资页采用美国注册护士 29-1141 母类数据。2025 年 5 月年工资中位数为 97,550 美元，时薪中位数 46.90 美元。这不是急症护理专科、新人或中国岗位的工资。",
                 "id": "acute-care-nurses.faq.7",
-                "question": "美国急症护理护士工资中位数代表新人收入吗？",
-                "question_key": "career.faq.acute-care-nurses.us-pay"
+                "question": "美国注册护士母类工资能代表急症护理新人吗？",
+                "question_key": "career.faq.acute-care-nurses.us-pay",
+                "source_refs": [
+                  "oews",
+                  "bls"
+                ]
               },
               {
-                "answer": "中国大陆分别核护理/助产教育与临床实习、资格考试、执业注册和地点，再核科室培训、监督与岗位任用。美国RN州许可与高级实践教育权限另核；认证目录和网页练习不替代注册。",
+                "answer": "《护士条例》把护士执业资格、注册与医疗机构聘用分开。通过资格考试后仍需按规定申请执业注册；急诊、监护和 ICU 的岗位培训与授权另按科室和机构核对。 美国急症护理工作常见于急性病房、术前术后及较高监护需求的病区。先核当地 RN 执照，再查岗位的带训与权限。PCCN、CCRN 对应不同病情与实践，按 AACN 现行资格核对；它们不授予 RN 或 APRN 执业权限。",
                 "id": "acute-care-nurses.faq.8",
                 "question": "入行急症护理护士需要核对哪些资格？",
-                "question_key": "career.faq.acute-care-nurses.credentials"
+                "question_key": "career.faq.acute-care-nurses.credentials",
+                "source_refs": [
+                  "cn-reg",
+                  "acn-aacn",
+                  "bls"
+                ]
               },
               {
-                "answer": "BLS预测美国Registered Nurses母类2025—2035增长6%、净增194700人、年均空缺180800个，后者含退休和转岗替代。不是急症护理专科、中国需求或AI因果效果；转向须重新核患者场景、教育及许可。",
+                "answer": "美国 BLS 注册护士 29-1141 母类：2025 年就业 3,465,400，2035 年预计 3,660,100，增长 5.6%（职业手册取整为 6%）；净增约 194,700，年均约 180,800 个空缺，包含替补。不是 29-1141.01 急症护理专科统计。",
                 "id": "acute-care-nurses.faq.9",
                 "question": "急症护理护士的前景与转向如何判断？",
-                "question_key": "career.faq.acute-care-nurses.outlook-transition"
+                "question_key": "career.faq.acute-care-nurses.outlook-transition",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
                 "answer": "只用虚构题面做时间线、交接草稿、角色边界和岗位要求清单。标出时间、事实、未知和拟通知对象；未给通知状态就不写已通知，不给诊断、用药或处置建议，不处理真实患者数据。",
@@ -31985,7 +32010,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业任务、RN母类统计、中国行业参考与编辑练习分别使用；美国任务目录含高级实践角色，不当中国普通护士共同权限。专科工资、就业及AI效果缺口保留，FAQ按当前正文核对，旧历史记录不充当本轮自审。"
+              "职业任务、RN母类统计、中国行业参考与编辑练习分别使用；美国任务目录含高级实践角色，不当中国普通护士共同权限。专科工资、就业及AI效果缺口保留，FAQ按当前正文核对，科室岗位条件以现行公告为准。"
             ]
           },
           "id": "acute-care-nurses.sources.source-card.4",
@@ -32021,25 +32046,25 @@
                 "entity": "大五人格（英文）",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI（中文）",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格（中文）",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理（中文）",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看急症护理护士职业页面",
@@ -32069,84 +32094,84 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official custom occupation profile",
-                  "current page; accessed 2026-09-04"
+                  "职业任务与工作环境。",
+                  "工资和就业使用 RN 母类。"
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "工资和就业使用 RN 母类。",
                 "market": "美国",
-                "name": "29-1141.01 - Acute Care Nurses",
-                "period": "current page; accessed 2026-09-04",
+                "name": "O*NET：急症护理护士 29-1141.01",
+                "period": "2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/custom/29-1141.01"
+                "url": "https://www.onetonline.org/link/summary/29-1141.01"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupation details",
-                  "current page; accessed 2026-09-04"
+                  "O*NET 29-1141.01 的工资页采用美国注册护士 29-1141 母类数据。2025 年 5 月年工资中位数为 97,550 美元，时薪中位数 46.90 美元。这不是急症护理专科、新人或中国岗位的工资。",
+                  "母类口径；手册增长率取整。"
                 ],
-                "evidence_type": "官方母类职业背景",
+                "evidence_type": "primary_document",
                 "id": "bls",
-                "limitation": "Registered Nurses 母类背景，不是急症护理护士专属工资、就业或 AI 效果证据。",
+                "limitation": "母类口径；手册增长率取整。",
                 "market": "美国",
-                "name": "Registered Nurses: Occupational Outlook Handbook",
-                "period": "当前职业展望页；访问 2026-09-13",
+                "name": "BLS：注册护士职业手册",
+                "period": "May 2025 / 2025–35",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official technology profile",
-                  "current page; accessed 2026-09-04"
+                  "美国 BLS 注册护士 29-1141 母类：2025 年就业 3,465,400，2035 年预计 3,660,100，增长 5.6%（职业手册取整为 6%）；净增约 194,700，年均约 180,800 个空缺，包含替补。不是 29-1141.01 急症护理专科统计。",
+                  "不单列急症护理专科。"
                 ],
-                "evidence_type": "official technology profile",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "不单列急症护理专科。",
                 "market": "美国",
-                "name": "Hot Technologies: 29-1141.01 - Acute Care Nurses",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/hot_tech/29-1141.01"
+                "name": "BLS 表 1.2：注册护士就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official industry distribution",
-                  "current page; accessed 2026-09-04"
+                  "O*NET 29-1141.01 的工资页采用美国注册护士 29-1141 母类数据。2025 年 5 月年工资中位数为 97,550 美元，时薪中位数 46.90 美元。这不是急症护理专科、新人或中国岗位的工资。",
+                  "第 50 分位为中位数。"
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "primary_document",
                 "id": "oews",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "第 50 分位为中位数。",
                 "market": "美国",
-                "name": "Industries: 29-1141.01 - Acute Care Nurses",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/29-1141.01"
+                "name": "O*NET：注册护士母类全国工资",
+                "period": "May 2025",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localwages/29-1141.01"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "国家统计局 2025 年城镇卫生和社会工作年平均工资：非私营单位 146,266 元、私营单位 75,631 元。两份医院公告不列工资；上述数字只是行业背景。",
+                  "非急症护理专科工资。"
                 ],
-                "evidence_type": "official certification discovery",
+                "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "非急症护理专科工资。",
                 "market": "美国",
-                "name": "National Certifications: 29-1141.01 - Acute Care Nurses",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localcert/29-1141.01"
+                "name": "国家统计局：2025 年城镇单位年平均工资",
+                "period": "2025",
+                "publisher": "国家统计局 / National Bureau of Statistics",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -32247,34 +32272,34 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "2023跨职业潜在任务影响研究。",
-                  "不报告急症护理单院部署、患者结局或因果替代率。"
+                  "用任务数据估计潜在暴露。",
+                  "不测量急症护理的实际采用、离职或患者结果。"
                 ],
                 "evidence_type": "跨职业任务影响研究",
                 "id": "ilo",
                 "limitation": "不报告急症护理或单一医院的部署、患者结局、替代率或时间表。",
                 "market": "全球",
-                "name": "Generative AI and Jobs: A global analysis of potential effects on job quantity and quality",
-                "period": "2023 年研究；访问 2026-09-13",
+                "name": "ILO 工作论文 140：职业任务暴露",
+                "period": "2025",
                 "publisher": "International Labour Organization",
                 "scope": "cross_occupation_context",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-global-analysis-potential-effects-task-automation"
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "只使用虚构交接记录和编号。",
+                  "不做分诊、诊断、用药或真实交接。"
                 ],
-                "evidence_type": "认证检索入口",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "不证明个人注册、医院岗位权限或患者处置授权。",
+                "limitation": "不做分诊、诊断、用药或真实交接。",
                 "market": "美国职业资料",
-                "name": "National Certifications: 29-1141.01 - Acute Care Nurses",
-                "period": "当前页面；访问 2026-09-13",
-                "publisher": "O*NET OnLine",
-                "scope": "credential_discovery",
-                "url": "https://www.onetonline.org/link/localcert/29-1141.01"
+                "name": "AC-13｜把未确认事项交给下一班",
+                "period": "虚构纸面练习",
+                "publisher": "费马测试编辑部",
+                "scope": "editorial_synthesis",
+                "url": "/zh/career/jobs/acute-care-nurses#career-content-path"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -32469,36 +32494,36 @@
                 "url": "https://www.onetonline.org/link/custom/29-1141.01"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "国家卫生健康委员会规章",
-                  "护士注册、执业地点、教育/实习和考试条件"
+                  "《护士条例》把护士执业资格、注册与医疗机构聘用分开。通过资格考试后仍需按规定申请执业注册；急诊、监护和 ICU 的岗位培训与授权另按科室和机构核对。",
+                  "科室训练与授权向雇主核对。"
                 ],
-                "evidence_type": "护士执业注册规则",
+                "evidence_type": "primary_document",
                 "id": "cn-reg",
-                "limitation": "用于中国大陆护士注册与地点边界；不提供急症护理工资、岗位录用或具体机构授权。",
+                "limitation": "科室训练与授权向雇主核对。",
                 "market": "中国大陆",
-                "name": "护士执业注册管理办法",
-                "period": "2021 年修订文本；访问 2026-09-13",
-                "publisher": "国家卫生健康委员会",
+                "name": "国家行政法规库：《护士条例》",
+                "period": "2020 revision",
+                "publisher": "国务院 / State Council",
                 "scope": "contextual",
-                "url": "https://www.nhc.gov.cn/wjw/c100221/202201/924b1bc5efd7489e8041f98799e06037.shtml"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=209"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "美国 Registered Nurses 行业就业与平均工资表",
-                  "2023 年行业统计"
+                  "O*NET 29-1141.01 的工资页采用美国注册护士 29-1141 母类数据。2025 年 5 月年工资中位数为 97,550 美元，时薪中位数 46.90 美元。这不是急症护理专科、新人或中国岗位的工资。",
+                  "第 50 分位为中位数。"
                 ],
-                "evidence_type": "官方行业工资统计",
+                "evidence_type": "primary_document",
                 "id": "oews-rn-2023",
-                "limitation": "Registered Nurses 母类行业平均工资，非急症护理专科工资或个人报价。",
+                "limitation": "第 50 分位为中位数。",
                 "market": "美国",
-                "name": "Registered Nurses — May 2023 OEWS industry estimates",
-                "period": "May 2023",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "name": "O*NET：注册护士母类全国工资",
+                "period": "May 2025",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.bls.gov/oes/2023/may/oes291141.htm"
+                "url": "https://www.onetonline.org/link/localwages/29-1141.01"
               },
               {
                 "accessed_at": "2026-10-07",
@@ -32517,33 +32542,33 @@
                 "url": "https://www.onetonline.org/link/summary/29-1141.01"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "注册护士母类2025中位数97550美元、就业3465400人；增长6%、净增194700、年均空缺180800。",
-                  "医院中位数100220、门诊91230、护理居住机构84300、教育78620美元/年。"
+                  "O*NET 29-1141.01 的工资页采用美国注册护士 29-1141 母类数据。2025 年 5 月年工资中位数为 97,550 美元，时薪中位数 46.90 美元。这不是急症护理专科、新人或中国岗位的工资。",
+                  "母类口径；手册增长率取整。"
                 ],
-                "evidence_type": "官方母类工资与就业预测",
+                "evidence_type": "primary_document",
                 "id": "source-bls-rn-2026-revision",
-                "limitation": "不是急症护理专科、单院招聘或中国数据；年均空缺含替代需求。",
+                "limitation": "母类口径；手册增长率取整。",
                 "market": "美国",
-                "name": "BLS Registered Nurses 职业展望",
-                "period": "工资2025；预测2025–2035",
+                "name": "BLS：注册护士职业手册",
+                "period": "May 2025 / 2025–35",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "年工资10/25/50/75/90分位68940/80330/97550/112350/137470美元。"
+                  "O*NET 29-1141.01 的工资页采用美国注册护士 29-1141 母类数据。2025 年 5 月年工资中位数为 97,550 美元，时薪中位数 46.90 美元。这不是急症护理专科、新人或中国岗位的工资。"
                 ],
-                "evidence_type": "官方工资分布",
+                "evidence_type": "primary_document",
                 "id": "source-onet-rn-wage-2025-revision",
-                "limitation": "页面明确Wage data collected from Registered Nurses；分位不等同职级和起薪。",
+                "limitation": "第 50 分位为中位数。",
                 "market": "美国",
-                "name": "O*NET 全国工资（Registered Nurses母类）",
-                "period": "2025",
-                "publisher": "O*NET OnLine / BLS",
+                "name": "O*NET：注册护士母类全国工资",
+                "period": "May 2025",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localwages/29-1141.01"
               },
@@ -32564,20 +32589,20 @@
                 "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "注册取得执业证书后按注册地点从事护理；教育、实习、考试、健康和申请条件分别核对。",
-                  "第六条为普通全日制3年以上护理/助产课程，含8个月以上护理临床实习及相应学历。"
+                  "《护士条例》把护士执业资格、注册与医疗机构聘用分开。通过资格考试后仍需按规定申请执业注册；急诊、监护和 ICU 的岗位培训与授权另按科室和机构核对。",
+                  "科室训练与授权向雇主核对。"
                 ],
-                "evidence_type": "官方注册规则",
+                "evidence_type": "primary_document",
                 "id": "source-cn-nurse-reg-revision",
-                "limitation": "不提供工资或具体医院专科权限；本轮直连受限，核官方搜索索引与现行政府办事引用，不假称全文直连成功。",
+                "limitation": "科室训练与授权向雇主核对。",
                 "market": "中国大陆",
-                "name": "护士执业注册管理办法（2021修订）",
-                "period": "2008公布；2021修订",
-                "publisher": "国家卫生健康委员会",
+                "name": "护士执业注册管理办法（2021 年修订）",
+                "period": "2021 revision",
+                "publisher": "国家卫生健康委员会（无锡卫健委转载）",
                 "scope": "contextual",
-                "url": "https://www.nhc.gov.cn/wjw/c100221/202201/924b1bc5efd7489e8041f98799e06037.shtml"
+                "url": "https://wjw.wuxi.gov.cn/doc/2023/02/11/3880777.shtml"
               },
               {
                 "accessed_at": "2026-10-07",
@@ -32601,7 +32626,7 @@
                 ],
                 "evidence_type": "任务暴露研究",
                 "id": "source-ilo-ai-2025-revision",
-                "limitation": "沿用本批已读研究；不提供急症护理单一医院部署、患者结局或裁员因果数据。",
+                "limitation": "不测量急症护理的实际采用、离职或患者结果。",
                 "market": "全球",
                 "name": "Generative AI and jobs: A refined global index of occupational exposure",
                 "period": "2025",
@@ -32612,17 +32637,17 @@
               {
                 "accessed_at": "2026-10-07",
                 "details": [
-                  "54项元分析汇总尽责性与表现的总体关联。"
+                  "Zell 和 Lesick 汇总 54 篇元分析，研究大五特质与表现的关联。"
                 ],
                 "evidence_type": "元分析",
                 "id": "source-big-five-meta-revision",
-                "limitation": "沿用本批已核研究；不是急症护理胜任阈值、患者安全或录用预测。",
+                "limitation": "不能用于急症护理能力或安全筛选。",
                 "market": "跨职业学业样本",
                 "name": "Big Five traits and performance meta-analysis",
                 "period": "2022",
                 "publisher": "Journal of Personality / Wiley",
                 "scope": "contextual",
-                "url": "https://onlinelibrary.wiley.com/doi/10.1111/jopy.12683"
+                "url": "https://doi.org/10.1111/jopy.12683"
               },
               {
                 "accessed_at": "2026-10-07",
@@ -32631,7 +32656,7 @@
                 ],
                 "evidence_type": "模型机构使用边界",
                 "id": "source-mbti-career-revision",
-                "limitation": "沿用本批已读官方边界；不证明最佳护士类型。",
+                "limitation": "偏好不是能力，不用于录用判断。",
                 "market": "一般职业探索",
                 "name": "Myers & Briggs Foundation: personality type and careers",
                 "period": "访问2026-10-07",
@@ -32646,7 +32671,7 @@
                 ],
                 "evidence_type": "系统综述",
                 "id": "source-enneagram-review-revision",
-                "limitation": "沿用本批已读摘要；不是护士能力或执业筛选验证。",
+                "limitation": "不能用于护士执业或录用筛选。",
                 "market": "104独立样本",
                 "name": "Enneagram systematic review",
                 "period": "2021",
@@ -32655,20 +32680,20 @@
                 "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/jclp.23097"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "危急病情立即通知医师；紧急情况下为抢救垂危患者先行必要紧急救护。",
-                  "发现违法或违反诊疗规范的医嘱须向医师提出，必要时向负责人报告。"
+                  "《护士条例》把护士执业资格、注册与医疗机构聘用分开。通过资格考试后仍需按规定申请执业注册；急诊、监护和 ICU 的岗位培训与授权另按科室和机构核对。",
+                  "科室训练与授权向雇主核对。"
                 ],
-                "evidence_type": "官方法规文本",
+                "evidence_type": "primary_document",
                 "id": "source-cn-nurse-ordinance-2020-revision",
-                "limitation": "职责说明不提供具体急救操作；非临床网页练习者不因此取得护士身份。",
+                "limitation": "科室训练与授权向雇主核对。",
                 "market": "中国大陆",
-                "name": "护士条例（2020修订）第17条",
-                "period": "2008公布；2020-03-27修订",
-                "publisher": "国务院法规；北京市卫生健康委公布整合文本",
+                "name": "国家行政法规库：《护士条例》",
+                "period": "2020 revision",
+                "publisher": "国务院 / State Council",
                 "scope": "contextual",
-                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230408_2993021.html"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=209"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32747,20 +32772,58 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "评估｜病情与风险识别｜收集并核对患者状态和已有信息，发现急性变化时按机构路径升级。 — 25/100; weight=1/3; acute-care-nurses.profile.responsibilities-block.1[0]",
-                  "处置｜依法履行护理责任｜已注册护士按职责处理获准护理；危急病情立即通知医师，紧急抢救履行必要救护责任，不把护士写成只能等待指令。网页练习不提供操作步骤。 — 0/100; weight=1/3; acute-care-nurses.profile.responsibilities-block.1[3]",
-                  "记录｜追溯、转诊与边界｜完整记录评估、已执行事项、反应和交接；超范围或信息不足时停止并交由有权人员。 — 75/100; weight=1/3; acute-care-nurses.profile.responsibilities-block.1[5]"
+                  "纸面整理交接及来源，保留未确认状态。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "limitation": "不估计岗位替代。",
+                "name": "费马测试：护理记录工具边界",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "上海浦东公利医院 2026 年 3 月公告招重症医学科护士 8 名，要求护理本科及以上；有 ICU 专科护士适任证书可放宽至大专。要求三级综合医院重症医学科至少 2 年经历，需值夜班，3 月 31 日截止，未列工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "acn-gl",
+                "limitation": "已过期的单院岗位。",
+                "name": "上海浦东公利医院：重症医学科护士招聘",
+                "period": "2026-03-13",
+                "publisher": "上海浦东公利医院",
+                "scope": "recruitment_proxy",
+                "url": "https://www.glhospital.com/news/content/id/600/pid/46197.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "上海市第六人民医院同月招聘国际医疗部专职护士，本科及以上，ICU 或急诊经历优先，并要求中英文沟通及病房翻班。3 月 31 日截止，原公告未列人数或工资。它是借重症经验的相邻岗位样本。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "acn-sixth",
+                "limitation": "相邻岗位，不表示 ICU 在招。",
+                "name": "上海市第六人民医院：国际医疗部专职护士招聘",
+                "period": "2026-03-20",
+                "publisher": "上海市第六人民医院",
+                "scope": "recruitment_proxy",
+                "url": "https://www.6thhosp.com/Content/News/9970"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国急症护理工作常见于急性病房、术前术后及较高监护需求的病区。先核当地 RN 执照，再查岗位的带训与权限。PCCN、CCRN 对应不同病情与实践，按 AACN 现行资格核对；它们不授予 RN 或 APRN 执业权限。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "acn-aacn",
+                "limitation": "专科认证与执照分开。",
+                "name": "AACN: CCRN and PCCN",
+                "period": "当前说明",
+                "publisher": "American Association of Critical-Care Nurses",
+                "scope": "contextual",
+                "url": "https://www.aacn.org/certification/ccrn-or-pccn"
               }
             ]
           },
@@ -35946,7 +36009,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "美国 RN 母类在该行业的年工资中位数",
         "interpretation_heading": "美国急症护理护士工资怎么理解？",
         "interpretation_rows": [
           {
@@ -36093,9 +36156,7 @@
         "h1": {
           "$subject": "name"
         },
-        "quick_answer": {
-          "$subject": "summary"
-        },
+        "quick_answer": "急症护理护士在病情变化快的场景中观察、记录、沟通和协助照护。大陆可对照急诊、重症和监护岗位，按护士执业注册、科室训练与单位授权核对。",
         "title": {
           "$subject": "name"
         }
@@ -37449,7 +37510,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合急症护理护士",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37571,9 +37632,11 @@
     "interface": {
       "interface.fit.directions_heading": "相邻护理角色：任务兴趣与准入条件比较",
       "interface.fit.interest_code_heading": "怎样理解 SI 兴趣代码",
+      "interface.outlook.evidence_heading": "美国注册护士母类的三项就业指标",
       "interface.profile.comparison.dimension_header": "比较维度",
       "interface.profile.comparison.primary_header": "急症护理任务范围",
       "interface.profile.comparison.secondary_header": "注册护士母类（美国）",
+      "interface.quick_decision.experiment_heading": "怎样试做一次护理交接？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37666,7 +37729,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 能辅助哪些护理文书？",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37757,180 +37820,184 @@
       },
       {
         "derivation": null,
-        "display_value": "3,391,000 人",
+        "display_value": "3,465,400",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "Registered Nurses 母类就业基数",
         "occupation_scope": "Registered Nurses（母类参考；不等于急症护理护士专属统计）",
-        "period": "2024 年就业；Registered Nurses 母类",
+        "period": "2025",
         "source_refs": [
-          "privacy"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "5%–6%（区间标签）",
+        "display_value": "5.6%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "预测就业增长区间",
         "occupation_scope": "Registered Nurses（母类参考；不等于急症护理护士专属统计）",
-        "period": "2024–2034；Registered Nurses 母类",
+        "period": "2025–2035",
         "source_refs": [
-          "privacy"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均 189,100 个职位空缺",
+        "display_value": "约 180,800 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "增长与替代需求导致的年均空缺",
         "occupation_scope": "Registered Nurses（母类参考；不等于急症护理护士专属统计）",
-        "period": "2024–2034；Registered Nurses 母类",
+        "period": "2025–2035",
         "source_refs": [
-          "privacy"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "本轮未取得同一官方表中的 Registered Nurses 母类行业工资值",
+        "display_value": "110,780 美元/年",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "查阅缺口；不得用全国工资替代行业工资",
-        "occupation_scope": "Registered Nurses（母类参考；不等于急症护理护士专属统计）",
-        "period": "本轮核对范围：O*NET National Wages 与职业页",
+        "measure": "行业内 RN 年工资中位数",
+        "occupation_scope": "政府（不含州和地方教育及医院）｜美国 RN 母类",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "privacy"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "本轮未取得同一官方表中的 Registered Nurses 母类行业工资值",
+        "display_value": "100,220 美元/年",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "查阅缺口；不得用全国工资替代行业工资",
-        "occupation_scope": "Registered Nurses（母类参考；不等于急症护理护士专属统计）",
-        "period": "本轮核对范围：O*NET National Wages 与职业页",
+        "measure": "行业内 RN 年工资中位数",
+        "occupation_scope": "医院（州、地方及私营）｜美国 RN 母类",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "privacy"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "本轮未取得同一官方表中的 Registered Nurses 母类行业工资值",
+        "display_value": "91,230 美元/年",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "查阅缺口；不得用全国工资替代行业工资",
-        "occupation_scope": "Registered Nurses（母类参考；不等于急症护理护士专属统计）",
-        "period": "本轮核对范围：O*NET National Wages 与职业页",
+        "measure": "行业内 RN 年工资中位数",
+        "occupation_scope": "门诊医疗服务｜美国 RN 母类",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "privacy"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "本轮未取得同一官方表中的 Registered Nurses 母类行业工资值",
+        "display_value": "84,300 美元/年",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "查阅缺口；不得用全国工资替代行业工资",
-        "occupation_scope": "Registered Nurses（母类参考；不等于急症护理护士专属统计）",
-        "period": "本轮核对范围：O*NET National Wages 与职业页",
+        "measure": "行业内 RN 年工资中位数",
+        "occupation_scope": "护理及住宿照护机构｜美国 RN 母类",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "privacy"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "documented_unavailable（2025 官方公开口径）",
+        "display_value": "国家统计局 2025 年城镇卫生和社会工作年平均工资：非私营单位 146,266 元、私营单位 75,631 元。两份医院公告不列工资；上述数字只是行业背景。",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "全国城镇非私营单位就业人员年平均工资",
         "occupation_scope": "急症护理护士",
-        "period": "2025 annual wage release; published 2026-05-16; accessed 2026-08-31",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs",
+          "acn-gl",
+          "acn-sixth"
         ]
       },
       {
         "derivation": null,
-        "display_value": "documented_unavailable（2025 官方公开口径）",
+        "display_value": "国家统计局 2025 年城镇卫生和社会工作年平均工资：非私营单位 146,266 元、私营单位 75,631 元。两份医院公告不列工资；上述数字只是行业背景。",
         "fact_id": "cn-private-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "全国城镇私营单位就业人员年平均工资",
         "occupation_scope": "急症护理护士",
-        "period": "2025 annual wage release; published 2026-05-16; accessed 2026-08-31",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs",
+          "acn-gl",
+          "acn-sixth"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（急症护理护士专属研究包未提供该统计项）",
+        "display_value": "该资料未提供急症护理专科数值",
         "fact_id": "cn-mid-managers-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "规模以上企业中层及以上管理人员年平均工资",
         "occupation_scope": "急症护理护士",
-        "period": "资料期以来源为准",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（急症护理护士专属研究包未提供该统计项）",
+        "display_value": "该资料未提供急症护理专科数值",
         "fact_id": "cn-clerical-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "规模以上企业办事人员和有关人员年平均工资",
         "occupation_scope": "急症护理护士",
-        "period": "资料期以来源为准",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（急症护理护士专属研究包未提供该统计项）",
+        "display_value": "该资料未提供急症护理专科数值",
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业门类年平均工资（城镇非私营单位）",
         "occupation_scope": "急症护理护士",
-        "period": "资料期以来源为准",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（急症护理护士专属研究包未提供该统计项）",
+        "display_value": "该资料未提供急症护理专科数值",
         "fact_id": "cn-industry-science-tech-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业门类年平均工资（城镇非私营单位）",
         "occupation_scope": "急症护理护士",
-        "period": "资料期以来源为准",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（急症护理护士专属研究包未提供该统计项）",
+        "display_value": "该资料未提供急症护理专科数值",
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业门类年平均工资（城镇非私营单位）",
         "occupation_scope": "急症护理护士",
-        "period": "资料期以来源为准",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "未取得（急症护理护士专属研究包未提供该统计项）",
+        "display_value": "该资料未提供急症护理专科数值",
         "fact_id": "cn-industry-public-admin-2025",
         "market": "中国大陆与美国分开核对",
         "measure": "行业门类年平均工资（城镇非私营单位）",
         "occupation_scope": "急症护理护士",
-        "period": "资料期以来源为准",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
@@ -37949,14 +38016,16 @@
       },
       {
         "derivation": null,
-        "display_value": "documented_unavailable（2025 官方公开口径）",
+        "display_value": "国家统计局 2025 年城镇卫生和社会工作年平均工资：非私营单位 146,266 元、私营单位 75,631 元。两份医院公告不列工资；上述数字只是行业背景。",
         "fact_id": "cn-wage-unavailable",
         "market": "中国大陆全国口径",
         "measure": "occupation wage availability",
         "occupation_scope": "急症护理护士",
-        "period": "2025 annual wage release; published 2026-05-16; accessed 2026-08-31",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs",
+          "acn-gl",
+          "acn-sixth"
         ]
       },
       {
@@ -38081,38 +38150,38 @@
       },
       {
         "derivation": null,
-        "display_value": "3,465,400人",
+        "display_value": "3,465,400",
         "fact_id": "us-employment-2025-revision",
         "market": "美国",
         "measure": "就业存量",
         "occupation_scope": "Registered Nurses母类（SOC29-1141），非急症专科",
-        "period": "2025年",
+        "period": "2025",
         "source_refs": [
-          "source-bls-rn-2026-revision"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "6%",
+        "display_value": "5.6%",
         "fact_id": "us-growth-2025-2035-revision",
         "market": "美国",
         "measure": "预测净就业增长率",
         "occupation_scope": "Registered Nurses母类（SOC29-1141），非急症专科",
-        "period": "2025–2035年",
+        "period": "2025–2035",
         "source_refs": [
-          "source-bls-rn-2026-revision"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "180,800个/年",
+        "display_value": "约 180,800 个/年",
         "fact_id": "us-openings-2025-2035-revision",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "Registered Nurses母类（SOC29-1141），非急症专科",
-        "period": "2025–2035年",
+        "period": "2025–2035",
         "source_refs": [
-          "source-bls-rn-2026-revision"
+          "ep"
         ]
       },
       {
@@ -38153,14 +38222,14 @@
       },
       {
         "derivation": null,
-        "display_value": "78,620美元/年",
+        "display_value": "110,780 美元/年",
         "fact_id": "us-rn-education-revision",
         "market": "美国",
         "measure": "行业内母类年工资中位数",
-        "occupation_scope": "教育服务业内注册护士母类",
-        "period": "2025年",
+        "occupation_scope": "政府（不含州和地方教育及医院）｜美国注册护士 29-1141",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "source-bls-rn-2026-revision"
+          "bls"
         ]
       },
       {
@@ -38186,27 +38255,15 @@
         "source_refs": [
           "source-nbs-health-2025-revision"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "急症护理护士",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与护理记录"
     },
     "badges": [
       "急性状态观察 · 护理协同 · 信息交接",
@@ -38250,17 +38307,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解急症护理护士的任务、工作边界、入行准备与美国 Registered Nurses 母类统计口径。"
+      "text": "急症护理护士做什么？比较大陆重症与相邻护理招聘、美国 RN 母类工资和专科认证，再用虚构记录试做交接。"
     },
     "title": {
       "availability": "available",
       "text": "急症护理护士：职责、资格、薪资口径与职业路径"
     }
   },
-  "source_content_sha256": "cb3c454aa3f897cc3a6345f753680d01ab81a97eba1957a3ef261b78b5c10f88",
+  "source_content_sha256": "f390fc1ceb6ec9c69c142647a80c3f6626cb3c397d7089207a1203944d86d404",
   "subject": {
     "canonical_slug": "acute-care-nurses",
     "name": "急症护理护士",
-    "summary": "急症护理护士为急性病情或可能快速恶化的患者提供高级护理，涉及评估、监测、照护协同、记录与跨团队交接。具体临床行为以工作地护士注册、机构制度、岗位授权与监督安排为准。"
+    "summary": "急症护理护士在病情变化快的场景中观察、记录、沟通和协助照护。大陆可对照急诊、重症和监护岗位，按护士执业注册、科室训练与单位授权核对。"
   }
 }

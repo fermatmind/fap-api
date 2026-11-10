@@ -23666,13 +23666,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First see whether you can match the drawing requirements, the grinding object and the measurement records, then see whether you are willing to re-check repeatedly, accept process feedback and pause under unknown conditions. The paper experience on this page can reveal judgement and recording habits and cannot prove that you can already operate equipment safely and independently."
+              "Paper check | Find two profile IDs on a fictional sharpening order and inspection sheet. Note the sample and work order for review. "
             ]
           },
           "id": "tool-grinders-filers-and-sharpeners.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24832,13 +24831,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Tool grinders, filers and sharpeners carry out precision grinding, sharpening, polishing or filing on metal objects, select and dress grinding wheels according to drawings, monitor the machining, measure dimensions and surface condition, handle defects and record results. Some roles involve saw tooth adjustment or CNC tool grinding; equipment repair, forging forming and rolling have separate duties."
+              "Tool grinders, filers and sharpeners finish tools, parts or dies to a specified shape and check the profile, surface and dimensions against the work order. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tool-grinders-filers-and-sharpeners.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-4194.00"
           ],
           "type": "prose"
         }
@@ -25512,15 +25510,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: reviewable task scores, the national AI adoption rate and net employment causal data for this occupation. Specific equipment dressing monitoring, measurement and compensation features do not prove widespread deployment or whole-job replacement; the BLS2025—2035 overall decline of 6.8%, the ten-year net reduction of about 400 people and the average annual 500 openings that includes replacements are component indicators, not AI-only job cuts or an individual's probability of unemployment. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Find two profile IDs on a fictional sharpening order and inspection sheet. Note the sample and work order for review."
             ]
           },
           "id": "tool-grinders-filers-and-sharpeners.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "editorial",
-            "bls"
+            "transfer-onet-51-4194.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33360,6 +33356,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-4194.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-4194.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-4194.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39036,10 +39059,10 @@
       "text": "Tool grinders, filers and sharpeners"
     }
   },
-  "source_content_sha256": "d4edf67e051a99d3d958c6fb6723fabb3bbc22119a08042c6c447b9b1a65f4ce",
+  "source_content_sha256": "e91d6de2ed177dbc608bf3f01faf8573297588c817436a619991039f40f53de4",
   "subject": {
     "canonical_slug": "tool-grinders-filers-and-sharpeners",
     "name": "Tool grinders, filers and sharpeners",
-    "summary": "Tool grinders, filers and sharpeners carry out precision grinding, dressing, polishing and filing on metal tools, cutting edges or related workpieces according to drawings and process requirements, select and dress grinding wheels, measure dimensions and surface condition, isolate nonconforming pieces and record anomalies. CNC sharpening, saw tooth trimming and hand finishing differ in equipment and tasks, and \"being able to run a grinder\" cannot replace understanding tolerances, instruments and safety boundaries."
+    "summary": "Tool grinders, filers and sharpeners finish tools, parts or dies to a specified shape and check the profile, surface and dimensions against the work order."
   }
 }

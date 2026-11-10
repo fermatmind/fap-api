@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a45-yanhu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a45-yuanyuan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23076,7 +23042,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "FT349虚构标签记录题：产品Y、批次GX349，题设长度闭区间950—1050m；F1批次GX349、长度1000m、连续性未记；F2批次GX349、长度1060m、连续性原文“无断丝记录”；F3批次GX349、长度缺失、连续性原文“观察到断丝”。只核题设长度、照录原文并保留未知，不判真实产品合格或设备状态。"
+              "用 FT349 的三条纸面标签核长度范围，照录连续性，标待核并另记单项变式的变化。"
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.quick-decision.fit-decision-checklist.2",
@@ -26630,12 +26596,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他城市"
+              "上犹县纤维产线招聘样本"
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a45-yanhu",
+            "a45-yuanyuan"
           ],
           "type": "prose"
         },
@@ -26644,12 +26611,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得其他城市本职业月薪统计；须另核地域、岗位、时期与计酬。"
+              "上犹县沿湖玻纤列拉丝工 3 人，月薪 6,000–9,000 元。巡检与质检分别列岗，拉丝工的设备与计酬构成未详列。 元源新材料列跟班漏板工／引丝工合计 8 人，月薪 6,000–8,000 元，要求高中及以上。卷取、捻线分别列岗。 两条报价对应上犹县不同雇主的岗位，需向雇主核实具体设备、分工和当前是否仍在招。"
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a45-yanhu",
+            "a45-yuanyuan"
           ],
           "type": "prose"
         },
@@ -27411,13 +27379,13 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
@@ -28360,7 +28328,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用FT349四作品核F1连续性未知、F2长度超限、F3长度缺失及第五天唯一980m更新；不由纸面推现场能力或转向资格。"
+              "用 FT349 的三条纸面标签核长度范围，照录连续性，标待核并另记单项变式的变化。"
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.fit.personality-fit-block.55",
@@ -28405,7 +28373,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "FT349：题设950—1050m闭区间，F1=1000m且连续性未知，F2=1060m且照录“无断丝记录”，F3长度缺失且照录“观察到断丝”；只核资料，第五天仅补F3=980m，保其他未知与原文。"
+              "用 FT349 的三条纸面标签核长度范围，照录连续性，标待核并另记单项变式的变化。"
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.fit.personality-fit-block.58",
@@ -29185,24 +29153,23 @@
                   "缺失不能补为零，原文不能改为质量结论",
                   "全题为作者虚构，不代表机构标准",
                   "可检查产出：三行长度/连续性核对和未发送函",
-                  "题目未给材料配方、温度、流量、纤度、强度或设备权限，不得自行补设"
+                  "单项变式：F3 的长度补录为 980 米，其余记录不变。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
                   "材料二：任务",
-                  "逐标签比较长度范围，连续性照录或记未知；整理F1未知、F2超限、F3缺失待核",
+                  "逐条核对长度范围，照录连续性或标为未知，再写待核项和依据。",
                   "仅资料核对，不实测、不操机、不放行、不决定停机"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "材料三：独立复核答案",
-                  "初始答案：F1长度在范围内、连续性未知；F2长度超上限、照录“无断丝记录”；F3长度未知、照录“观察到断丝”。第五天仅补F3长度980m，长度改为在范围内；F1连续性未知、F2超限及F3断丝原文均不变。",
-                  "未发送函列F1连续性未知、F2超限、F3长度缺失，请责任人核原标签及规格版本；未给责任人姓名和回复，不虚构",
-                  "第五天只接受题设F3长度980m，不补其他项目"
+                  "先独立完成",
+                  "第六天交原题与变式，并保留未发送函。",
+                  "第七天到「常见问题与资料来源」打开「FT349 纤维标签记录参考答案（完成第六天后再打开）」。"
                 ]
               },
               {
@@ -29230,7 +29197,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "作品一：输入来源表",
-                  "列FT349产品、批次、m单位、闭区间和三行原记录；招聘样本未取记无",
+                  "分开列 FT349 题设范围和招聘样本的岗位要求。",
                   "标虚构来源及未知；不是真实作业材料"
                 ]
               },
@@ -29238,7 +29205,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "作品二：三行核对表",
-                  "逐行写长度在范围/超限/未知，连续性原文或未知",
+                  "逐条记录长度、依据与连续性。",
                   "对照材料三独立复核，不把无断丝记录等同合格"
                 ]
               },
@@ -29246,8 +29213,8 @@
                 "id": "report-summary",
                 "values": [
                   "作品三：待核函草稿与更新",
-                  "写F1未知、F2超限、F3缺失，标未发送及责任人未给；第五天仅更新F3长度980m",
-                  "无回复不伪造闭环；F1未知和F2超限保留"
+                  "保留原记录，另写变式的变化行。",
+                  "附未发送函并注明待核项。"
                 ]
               },
               {
@@ -29326,50 +29293,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天：读输入",
-                  "整理产品Y、GX349、m单位及950—1050闭区间，照录三张标签"
+                  "第 1 天",
+                  "抄录批次、单位和范围。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天：核长度",
-                  "F1在范围、F2超上限、F3未知；写比较依据"
+                  "第 2 天",
+                  "逐条比长度并记依据。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天：核连续性",
-                  "F1未知、F2照录无断丝记录、F3照录观察到断丝；不推质量合格"
+                  "第 3 天",
+                  "照录连续性并标空白项。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4天：写待核函",
-                  "写三项待核与规格版本核对请求；标未发送、责任人未给、无回复"
+                  "第 4 天",
+                  "列待核项，写未发送函。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5天：唯一新输入",
-                  "题设只补F3长度980m，在范围内；其他原文和待核不变"
+                  "第 5 天",
+                  "比较 F3 的补录与原题。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天：独立复核",
-                  "对照材料三检查四作品；外部反馈可选，未取得记无"
+                  "第 6 天",
+                  "独立交原题三行和变式的变化行，附上未发送函。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天：反思",
-                  "记录是否愿意继续核资料、修改及仍存未知；不是设备能力或职业适合结论"
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「FT349 纤维标签记录参考答案（完成第六天后再打开）」。 写一处修订。"
                 ]
               }
             ]
@@ -29386,13 +29353,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第1天：输入值、单位、批次和边界是否完整",
-              "第2天：是否区分在范围、超限和未知",
-              "第3天：是否照录连续性而不改成质量结论",
-              "第4天：待核函是否明确未发送、无责任姓名与无回复",
-              "第5天：是否只更新F3长度980m，保其余记录",
-              "第6天：是否独立核四作品，工具与反馈说明真实",
-              "第7天：是否保留未知，不由资料题推现场能力"
+              "记录单位和范围。",
+              "写每条依据。",
+              "照录连续性或标未知。",
+              "附未发送函。",
+              "单列变式变化。",
+              "保留独立交件。",
+              "对照参考记录修订。"
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.path.seven-day-decision.1",
@@ -29514,14 +29481,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮未取得代表性当前招聘样本；以下是编辑核查提示。核目标岗位材料与产品、设备、质量及安全职责，记录公告日期与是否仍在招。",
-              "招聘公告的学历、训练与经验条件须并列读取；某项可放宽不代表其他条件可替代。"
+              "上犹县沿湖玻纤列拉丝工 3 人，月薪 6,000–9,000 元。巡检与质检分别列岗，拉丝工的设备与计酬构成未详列。 元源新材料列跟班漏板工／引丝工合计 8 人，月薪 6,000–8,000 元，要求高中及以上。卷取、捻线分别列岗。 两条报价对应上犹县不同雇主的岗位，需向雇主核实具体设备、分工和当前是否仍在招。"
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a45-yanhu",
+            "a45-yuanyuan"
           ],
           "title": "合成与玻璃纤维挤压成型设备操作工｜path",
           "type": "notice"
@@ -31562,13 +31528,13 @@
                 ]
               },
               {
-                "answer": "2025中国城镇制造业就业人员税前年平均工资：非私营113,594元/年、私营76,055元/年。长丝设备操作属于制造生产任务，采用制造业作宽行业背景；覆盖多个职业，非本职业中位、起薪、到手工资或城市报价。 证据不足：未取得精确中国单职业全国或城市工资。",
+                "answer": "上犹县沿湖玻纤列拉丝工 3 人，月薪 6,000–9,000 元。巡检与质检分别列岗，拉丝工的设备与计酬构成未详列。 元源新材料列跟班漏板工／引丝工合计 8 人，月薪 6,000–8,000 元，要求高中及以上。卷取、捻线分别列岗。 两条报价对应上犹县不同雇主的岗位，需向雇主核实具体设备、分工和当前是否仍在招。 全国职业工资分布仍缺可比数据。",
                 "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.faq.3",
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.q3",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "a45-yanhu",
+                  "a45-yuanyuan"
                 ]
               },
               {
@@ -31632,14 +31598,19 @@
                 ]
               },
               {
-                "answer": "BLS精确SOC51-6091：2025就业13,500人，2035预测13,000人，2025—2035增长-3.3%，官方净变化-400人，年均职位空缺1,100个；千人列分别舍入，不能由两端重新计算官方变化。空缺含增长与更替，不是十年合计或净新增。 总体就业预测，非AI归因。转向先按目标主任务、训练和权限比较；没有代表性招聘样本，不承诺个人转岗可行。",
+                "answer": "BLS 表 1.2 的美国 51-6091 行：2025 年约 13,500 人，2035 年预计约 13,000 人，下降 3.3%，年均岗位空缺约 1,100 个，含替补。人数分别取整。",
                 "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.faq.10",
                 "question": "美国就业前景如何？转行需要补什么？",
                 "question_key": "career.faq.extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.outlook-transition",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
+              },
+              {
+                "answer": "F1 长度 1,000 米，在 950–1,050 米范围内，连续性未记录。F2 长度 1,060 米，超出 1,050 米上限，照录「无断丝记录」。F3 原题长度未知，照录「观察到断丝」。变式 F3 补录 980 米，在范围内，其余项目保持原样。未发送函示例：请核对 F1 的连续性记录、F2 的原标签及规格版本，以及 F3 的补录来源，并确认接手人。范围核对不能用于实际放行。 自核四项：长度与单位、连续性原文、变式变化、未发送函与权限。",
+                "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.faq.11",
+                "question": "FT349 纤维标签记录参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.11"
               }
             ]
           },
@@ -31731,26 +31702,14 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI（英文）",
+                "entity": "MBTI 人格测评",
                 "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（英文）",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI（中文）",
-                "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five（中文）",
-                "id": "navigation-5",
+                "entity": "大五人格测评",
+                "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
@@ -31781,26 +31740,26 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "美国O*NET51-6091.00指设定、操作或看护把液态聚合物、人造丝或玻璃纤维等合成材料挤压成型为连续长丝的机器。任务包括控制设备与上料速度、观察控制板和仪表、识别堵塞或涂覆装置异常、记录故障和作业标签、通知相关人员，以及清洁维护。任务集合不代表每个岗位均负责全部操作。",
-                  "RC；2024就业15,200，2024—2034下降（-1%或更低）、年均空缺2,000；98%制造业是旧周期美国背景，当前预测使用独立BLS来源。"
+                  "美国O*NET51-6091.00指设定、操作或看护把液态聚合物、人造丝或玻璃纤维等合成材料挤压成型为连续长丝的机器。任务包括控制设备与上料速度、观察控制板和仪表、识别堵塞或涂覆装置异常、记录故障和作业标签、通知相关人员，以及清洁维护。任务集合不代表每个岗位均负责全部操作。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
                 "limitation": "美国职业资料不自动推导中国大陆的设备、安全或雇主要求；也不构成安全操作或质量判定结论。",
                 "market": "美国",
                 "name": "O*NET OnLine：Extruding and Forming Machine Setters, Operators, and Tenders, Synthetic and Glass Fibers（51-6091.00）",
-                "period": "2026 profile; 2024 old employment / 2024—2034 old projections; accessed 2026-10-03",
+                "period": "2026 职业资料页",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-6091.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "美国O*NET51-6091.00指设定、操作或看护把液态聚合物、人造丝或玻璃纤维等合成材料挤压成型为连续长丝的机器。任务包括控制设备与上料速度、观察控制板和仪表、识别堵塞或涂覆装置异常、记录故障和作业标签、通知相关人员，以及清洁维护。任务集合不代表每个岗位均负责全部操作。",
                   "美国情境100%每日常规防护、95%每日面对面、75%每日噪声、72%每日污染物、70%每日受控室内、54%每日冷热、58%工周>40小时；非事故率。",
                   "美国BLS典型入口为高中或同等学历、无需相关职业经验、中期在职训练；O*NET教育调查74%回答高中或同等学历、19%低于高中、6%高中后证书，舍入合计99%不补余项。Job Zone1—2为泛准备分组，不是该职业专属训练周期。",
-                  "技术目录含Camstar MES/SPC、SAP、Office等；非所有岗位必需编程。"
+                  "技术目录含Camstar MES/SPC、SAP、Office等；非所有岗位必需编程。",
+                  "2025 美国中位时薪 22.29 美元、中位年薪 46,350 美元，制造业为主要就业行业。就业预测见 BLS 表 1.2。"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
@@ -31815,8 +31774,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "BLS精确SOC51-6091：2025就业13,500人，2035预测13,000人，2025—2035增长-3.3%，官方净变化-400人，年均职位空缺1,100个；千人列分别舍入，不能由两端重新计算官方变化。空缺含增长与更替，不是十年合计或净新增。",
-                  "总体就业预测，非AI归因；典型教育高中或同等学历，相关经验None，中期在职训练。"
+                  "BLS 表 1.2 的美国 51-6091 行：2025 年约 13,500 人，2035 年预计约 13,000 人，下降 3.3%，年均岗位空缺约 1,100 个，含替补。人数分别取整。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
@@ -32057,6 +32015,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "上犹县沿湖玻纤列拉丝工 3 人，月薪 6,000–9,000 元。巡检与质检分别列岗，拉丝工的设备与计酬构成未详列。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a45-yanhu",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "纤维产线招聘样本",
+                "period": "2026-09-01",
+                "publisher": "上犹县人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shangyou.gov.cn/syxxxgk/c103978/202609/a525dd14aa524fd3953982dd97b7f62a.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "元源新材料列跟班漏板工／引丝工合计 8 人，月薪 6,000–8,000 元，要求高中及以上。卷取、捻线分别列岗。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a45-yuanyuan",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "纤维产线招聘样本",
+                "period": "2026-02-13",
+                "publisher": "上犹县人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shangyou.gov.cn/syxrmzfw/c124549re/202602/7cf03cd1dfc042768965f22a966ef5fa.shtml"
               }
             ]
           },
@@ -34917,6 +34905,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a45-yanhu",
+            "posting-a45-yuanyuan"
+          ],
           "sources_note": {
             "$item": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36828,7 +36820,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测评"
           },
           {
             "href": {
@@ -36838,27 +36830,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI（中文）"
-          },
-          {
-            "href": {
-              "$link": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five（中文）"
+            "label": "大五人格测评"
           }
         ]
       },
@@ -37246,6 +37218,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "上犹县沿湖玻纤列拉丝工 3 人，月薪 6,000–9,000 元。巡检与质检分别列岗，拉丝工的设备与计酬构成未详列。",
+        "fact_id": "posting-a45-yanhu",
+        "market": "中国大陆",
+        "measure": "招聘报价",
+        "occupation_scope": "纤维产线招聘样本",
+        "period": "2026-09-01",
+        "source_refs": [
+          "a45-yanhu"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "元源新材料列跟班漏板工／引丝工合计 8 人，月薪 6,000–8,000 元，要求高中及以上。卷取、捻线分别列岗。",
+        "fact_id": "posting-a45-yuanyuan",
+        "market": "中国大陆",
+        "measure": "招聘报价",
+        "occupation_scope": "纤维产线招聘样本",
+        "period": "2026-02-13",
+        "source_refs": [
+          "a45-yuanyuan"
+        ]
       }
     ]
   },
@@ -37305,7 +37301,7 @@
       "text": "合成与玻璃纤维挤压成型设备操作工"
     }
   },
-  "source_content_sha256": "29cdbad26cafdd8e090bc1ce6950624af807b70c03e0f4deabb5a6bb4ff49feb",
+  "source_content_sha256": "91b63f9243a4665c45f7ac3b8455ff14b26f3ab081760ac14927df7fc6502373",
   "subject": {
     "canonical_slug": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers",
     "name": "合成与玻璃纤维挤压成型设备操作工",

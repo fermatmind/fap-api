@@ -23375,13 +23375,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "下一步核目标岗位偏炼油装置、泵站、储罐计量还是管线流量，了解班次、现场训练、防护及作业授权；虚构练习不代替真实岗位带教。"
+              "纸面体验｜比对虚构交班单和储罐读数表，找出储罐编号相同而采样时点不同的一行，把两条原值交给班组核对。 "
             ]
           },
           "id": "petroleum-pump-system-operators-refinery-operators-and-gaugers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23672,13 +23671,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET美国分类不等于中国特种作业资格；真实岗位按当地制度和雇主授权核。"
+              "这一组岗位分别涉及油品输送、炼厂运行与储罐计量。操作员按站点要求监看仪表和设备状态，交班时交代读数、变化及待复核项。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "petroleum-pump-system-operators-refinery-operators-and-gaugers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-onet-51-8093.00"
           ],
           "type": "prose"
         },
@@ -24765,13 +24763,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未核得本职生成式AI实际采用、整体替代率或消失年份；日志计量趋势及交班草稿仅获准编辑试用，仪表流向设备巡检过程安全和授权由受训班组核。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比对虚构交班单和储罐读数表，找出储罐编号相同而采样时点不同的一行，把两条原值交给班组核对。"
             ]
           },
           "id": "petroleum-pump-system-operators-refinery-operators-and-gaugers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "editor"
+            "transfer-onet-51-8093.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32858,6 +32856,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-8093.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-8093.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-8093.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38122,10 +38147,10 @@
       "text": "石油泵系统操作员与炼油厂计量员"
     }
   },
-  "source_content_sha256": "093b16bb4c2442ad8b2319a63432aef5445dd029b80d5b458778f43afca697ec",
+  "source_content_sha256": "f344b12c1acba81db6e22c1fe4f248f5387c52a930c1e798d193609e9b6c3c31",
   "subject": {
     "canonical_slug": "petroleum-pump-system-operators-refinery-operators-and-gaugers",
     "name": "石油泵系统操作员与炼油厂计量员",
-    "summary": "石油泵系统操作员与炼油厂计量员（O*NET 51-8093.00）监控炼油或石油加工单元的仪表、泵、阀门、储罐与管线，按批准的工艺计划协调流向、核计量和产品状态，记录读数并报告异常。真实控制和故障处理必须依站场规程、训练与授权执行；本页不提供设备操作参数。"
+    "summary": "这一组岗位分别涉及油品输送、炼厂运行与储罐计量。操作员按站点要求监看仪表和设备状态，交班时交代读数、变化及待复核项。"
   }
 }

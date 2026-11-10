@@ -182,6 +182,9 @@
       "item:nanotechnology-engineering-technologists-and-technicians.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:nanotechnology-engineering-technologists-and-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nanotechnology-engineering-technologists-and-technicians.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -12326,6 +12329,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。样品 N4 的显微图带倍率但缺批号，N6 有批号却没写仪器设置。写出复核记录应补的两项。"
+            ]
+          },
+          "id": "nanotechnology-engineering-technologists-and-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核纳米材料测试样本",
+          "type": "notice"
         }
       ]
     },
@@ -14839,6 +14857,13 @@
         "id": "nanotechnology-engineering-technologists-and-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nanotechnology-engineering-technologists-and-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15140,7 +15165,7 @@
       "text": "纳米技术工程技师与技术人员"
     }
   },
-  "source_content_sha256": "c08c2674af7afaeb9c5958deed42147c915bcd8426bc0157c1b33712f51c654d",
+  "source_content_sha256": "a1632ab9f86eb145f9ae329a3cec5f485df56286fa02c72505b19c6e858dd00b",
   "subject": {
     "canonical_slug": "nanotechnology-engineering-technologists-and-technicians",
     "name": "纳米技术工程技师与技术人员",

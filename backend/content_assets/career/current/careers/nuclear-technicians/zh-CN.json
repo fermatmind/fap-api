@@ -188,6 +188,9 @@
       "item:nuclear-technicians.path.seven-day-trial.8": {
         "status": "pending_mapping"
       },
+      "item:nuclear-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nuclear-technicians.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -13191,6 +13194,21 @@
             "onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两份测量结果批号不同却共用一张样本交接单。写下如何向技术负责人核实样本身份、测量记录和接收签字。"
+            ]
+          },
+          "id": "nuclear-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "核核技术样品交接记录",
+          "type": "notice"
         }
       ]
     },
@@ -15820,6 +15838,13 @@
         "id": "nuclear-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nuclear-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16139,7 +16164,7 @@
       "text": "核技术员"
     }
   },
-  "source_content_sha256": "233be4e38f283255634ee2877f54f8c2182c8c7325d02d3cb71e45cc0ee7f59d",
+  "source_content_sha256": "e6449bb7f418788cd4d3cb6701f2995413b3282fc42562fb83b6321e9f82b032",
   "subject": {
     "canonical_slug": "nuclear-technicians",
     "name": "核技术员",

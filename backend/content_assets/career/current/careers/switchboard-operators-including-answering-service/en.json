@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe whether you can restate the request accurately, check extensions and the public scope, leave a clear message when the line is busy and hand over the unknown status. Both service attitude and process accuracy matter, and a connected call or fluent speech cannot be treated as the problem already solved."
+              "Paper check | Compare a fictional duty directory with a message log. Flag an outdated extension and identify the duty contact who can verify it. "
             ]
           },
           "id": "switchboard-operators-including-answering-service.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,13 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Switchboard operators operate a corporate telephone system or switchboard, answer and transfer internal and external calls, provide approved information and record messages; some posts also handle visitors, alarm notifications, telephone directories and administrative records. The core deliverable is accurate routing, a traceable message and reporting through the organisational process, and a successful answer does not mean the business is resolved."
+              "Switchboard and answering-service operators answer, route or log calls and use the duty directory to reach the appropriate department. Messages record who needs a callback, when and where the message was sent. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "switchboard-operators-including-answering-service.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-43-2011.00"
           ],
           "type": "prose"
         }
@@ -25442,13 +25440,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Distinguish tool ability, actual organisational adoption and employment outcomes. Summaries, dictation or directory suggestions are only candidates, and people must check the purpose, number, time, public permission and business status; this page has no net effect for this occupation or a personal unemployment forecast. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional duty directory with a message log. Flag an outdated extension and identify the duty contact who can verify it."
             ]
           },
           "id": "switchboard-operators-including-answering-service.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-43-2011.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33024,6 +33022,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-43-2011.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 43-2011.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/43-2011.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38496,10 +38521,10 @@
       "text": "Switchboard operator (including answering service)"
     }
   },
-  "source_content_sha256": "4f69acdbf592661678041205d195159d746688dd76b4da9d2ff2d295000b921e",
+  "source_content_sha256": "509d4567a8a9d301985b4a8ad4efcdddc455ce28683f2892eb0ac9100b0e9626",
   "subject": {
     "canonical_slug": "switchboard-operators-including-answering-service",
     "name": "Switchboard operator (including answering service)",
-    "summary": "Switchboard operators operate a corporate telephone system or switchboard, answer and transfer internal and external calls, provide approved information and record messages; some posts also handle visitors, alarm notifications, telephone directories and administrative records. The core deliverable is accurate routing, a traceable message and reporting through the organisational process, and a successful answer does not mean the business is resolved."
+    "summary": "Switchboard and answering-service operators answer, route or log calls and use the duty directory to reach the appropriate department. Messages record who needs a callback, when and where the message was sent."
   }
 }

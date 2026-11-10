@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a37-haidian": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a37-henan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:file-clerks.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:file-clerks.sources.source-card.1": {
         "status": "mapped"
@@ -14156,36 +14162,12 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": {
-          "id": "file-clerks.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": {
-          "id": "file-clerks.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
         "ref": {
@@ -14220,20 +14202,8 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "file-clerks.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
         "ref": {
@@ -14596,52 +14566,20 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": {
-          "id": "file-clerks.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": {
-          "id": "file-clerks.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": {
-          "id": "file-clerks.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "file-clerks.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
         "ref": {
@@ -20183,60 +20121,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "file-clerks.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "file-clerks.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23280,12 +23178,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS Table1.2, 43-4071: employment of 76,200 in 2025, a projected decline of 15.8% over 2025—2035, and an estimated 5,600 openings annually on average, including replacement needs. The OOH information clerks page combines the ten occupations listed there, rather than the full 43-4000 group; its industry wage table cannot substitute for file clerk wages."
+              "BLS Table 1.2 projects U.S. employment for file clerks (43-4071) from about 76,200 in 2025 to 64,200 in 2035 (-15.8%), with about 5,600 annual openings including replacements. Employment figures are rounded separately."
             ]
           },
           "id": "file-clerks.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26626,12 +26524,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other regions and employment arrangements"
+              "Mainland China job postings"
             ]
           },
           "id": "file-clerks.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a37-haidian",
+            "a37-henan"
           ],
           "type": "prose"
         },
@@ -26640,12 +26539,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable monthly wage statistics were obtained for other regions and employment arrangements (established public-sector posts, corporate full-time employment, and outsourced records work). Cities, institution types, and sizes vary considerably; check each employer."
+              "A Haidian notice for Beijing Yousibaite listed an archives processing role covering collection, classification, retention periods and missing records. It asked for archives or related experience. Pay was negotiable. Henan University of Technology published Henan Xintai’s 11 library, archives or records jobs. Duties included classification, scanning and data entry, and quality checks. It listed junior college or higher, no experience requirement and CNY 4,000–6,000 per month."
             ]
           },
           "id": "file-clerks.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a37-haidian",
+            "a37-henan"
           ],
           "type": "prose"
         },
@@ -26930,12 +26830,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "5,600 openings per year"
+              "About 5,600 per year"
             ]
           },
           "id": "file-clerks.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27390,13 +27290,13 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
@@ -29156,30 +29056,23 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Material one: fictional document filing assignment",
-                  "Provide record types and quantities, filing rules and numbering methods, retention and confidentiality requirements, available storage containers and systems, and inquiry scenarios as the exercise inputs.",
-                  "Label units and missing items, and state that the materials are entirely fictional.",
-                  "List missing information that could affect judgments.",
-                  "State that the exercise uses fictional materials and represents no actual institution, business, or employer.",
-                  "Checkable outputs: a classification and numbering plan, filing and registration procedures, methods for recording retrieval and checkout/return, criteria for removal and disposal at the end of retention periods, situations requiring supervisor confirmation, and confidentiality and authorized access considerations.",
-                  "State the boundaries: records management, personal information protection, and destruction compliance conclusions must be made by the records manager, legal team, or competent authority."
+                  "F12: the receipt is dated June 3 and the index is dated June 8.",
+                  "F19: the index lists four pages. The scan contains pages 1, 2 and 4.",
+                  "R7: a copy was requested. The permissions field is blank.",
+                  "Roles: the intake lead checks receipts and indexes, the scanning lead checks page counts, and the access owner checks copy requests. Preserve source records for unresolved fields."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Material two: filing and retrieval assignment (fictional)",
-                  "Write a classification and numbering plan, filing and registration procedures, and methods for recording retrieval and checkout/return, explaining which situations require supervisor confirmation.",
-                  "Exercise output: actionable filing and retrieval operating points."
+                  "Submit a one-page handoff listing the evidence, status and next owner for each row."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material three: reference approach excerpt (fictional)",
-                  "First determine classification and numbering under the rules, then file by index and register materials, and finally retrieve and manage checkout/return on request with records. Seek approval to dispose of expired materials according to retention periods.",
-                  "Leave unconfirmed retention periods or access authorization as unknown and seek records manager confirmation rather than relying on experience.",
-                  "Explain that the reference approach is an example, not the only correct method."
+                  "Finish your own answer first",
+                  "On day seven, open “Records handoff reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
@@ -29195,7 +29088,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "File Clerks | path",
+          "title": "Fictional records handoff",
           "type": "cards"
         },
         {
@@ -29303,50 +29196,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read a filing rule or retention schedule",
-                  "Extract a classification or retention requirement and write its implementation points."
+                  "Day 1",
+                  "Record the three IDs."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: write a classification and numbering plan",
-                  "Specify classification, numbering, and indexing methods by record type."
+                  "Day 2",
+                  "Compare the dates."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: create a filing and checkout/return record template",
-                  "List the information that filing, retrieval, and checkout/return require recording."
+                  "Day 3",
+                  "Compare page counts and page numbers."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: write confidentiality and authorization guidelines",
-                  "Write checking points for restricted material access and registration."
+                  "Day 4",
+                  "Check the copy permission field."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: write retention and destruction guidelines",
-                  "Write procedures for organizing expired materials and seeking disposal approval."
+                  "Day 5",
+                  "Draft the handoff and name each owner."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: invite someone to challenge your work",
-                  "Ask an experienced records worker or supervisor to identify filing and compliance omissions, and record the feedback."
+                  "Day 6",
+                  "Finish your own one-page handoff."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: write your judgment",
-                  "Write whether you want to continue, what you need to learn, and which disposal decisions you cannot make yourself."
+                  "Day 7",
+                  "On day seven, open “Records handoff reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29355,7 +29248,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "File Clerks | path",
+          "title": "Seven-day paper exercise",
           "type": "timeline"
         },
         {
@@ -29363,20 +29256,16 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: can you identify classification or retention requirements and clearly explain implementation points?",
-              "Day 2: can you write a reasonable classification and numbering plan?",
-              "Day 3: can you create a complete, traceable filing and checkout/return record template?",
-              "Day 4: can you write specific, actionable confidentiality and authorization checking points?",
-              "Day 5: can you write an actionable retention and destruction procedure?",
-              "Day 6: can you revise filing and compliance judgments after receiving corrections?",
-              "Day 7: can you identify abilities to develop and boundaries on disposal decisions?"
+              "Finish your own handoff on day six.",
+              "On day seven, open “Records handoff reference (open after day six)” under Frequently asked questions and sources.",
+              "Review the dates, pages, permissions and next owner."
             ]
           },
           "id": "file-clerks.path.seven-day-decision.1",
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "File Clerks | path",
+          "title": "Review your work",
           "type": "list"
         },
         {
@@ -30906,7 +30795,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "file-clerks.market-signals.market-signal-card.17",
@@ -30976,7 +30865,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "76,200 workers (2025)"
+              "About 76,200 in 2025, projected 64,200 in 2035"
             ]
           },
           "id": "file-clerks.market-signals.market-signal-card.22",
@@ -31522,13 +31411,13 @@
                 ]
               },
               {
-                "answer": "U.S. O*NET-SOC 43-4071.00, File Clerks, corresponds to SOC 43-4071, belongs to Job Zone 1–2 (SVP below 6.0), has interest code C (Conventional), and is not designated Bright Outlook. Median wages and percentiles are BLS OEWS estimates for this exact occupation (May 2025, presented through O*NET). Employment and growth use both O*NET's presentation of 2024—2034 projections and the BLS OOH information clerks group's 2025—2035 scope; this page labels them separately.",
+                "answer": "U.S. wages use May 2025 BLS OEWS estimates for 43-4071. Employment projections use the same occupation’s row in BLS Table 1.2. The broader information clerks group uses a different scope.",
                 "id": "file-clerks.faq.3",
                 "question": "What is the scope of U.S. statistics?",
                 "question_key": "career.faq.file-clerks.q3",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "bls-projections-2025-35",
+                  "onet-summary"
                 ]
               },
               {
@@ -31542,22 +31431,22 @@
                 ]
               },
               {
-                "answer": "O*NET's presentation of 2024—2034 projections: employment of approximately 84,300 (2024), a projected decline (-1% or lower), and approximately 7,300 annual job openings on average (an annual average over the projection period, including replacement needs). The BLS OOH information clerks group (43-4000), 2025—2035 scope: approximately 1,287,600 jobs (2025), -2% (approximately -30,100 workers), and approximately 125,600 annual openings, all from replacement needs. Statistical coverage and periods differ; this page labels them separately without conversion.",
+                "answer": "BLS Table 1.2 projects U.S. employment for file clerks (43-4071) from about 76,200 in 2025 to 64,200 in 2035 (-15.8%), with about 5,600 annual openings including replacements. Employment figures are rounded separately.",
                 "id": "file-clerks.faq.5",
                 "question": "What is the U.S. employment outlook?",
                 "question_key": "career.faq.file-clerks.q5",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics materials checked in this round cover industry categories. No national wage statistic precisely matching this occupation was obtained. This page uses average urban-unit wages in leasing and business services (2025: non-private units CNY 110,162 per year; private units CNY 68,919 per year) as an industry proxy for context only. Neither industry averages nor individual recruitment quotations substitute for occupational wages.",
+                "answer": "A Haidian notice for Beijing Yousibaite listed an archives processing role covering collection, classification, retention periods and missing records. It asked for archives or related experience. Pay was negotiable. Henan University of Technology published Henan Xintai’s 11 library, archives or records jobs. Duties included classification, scanning and data entry, and quality checks. It listed junior college or higher, no experience requirement and CNY 4,000–6,000 per month. These notices describe two employers. A comparable mainland median for this occupation remains unavailable.",
                 "id": "file-clerks.faq.6",
                 "question": "Are wage data available for mainland China?",
                 "question_key": "career.faq.file-clerks.us-pay",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "a37-haidian",
+                  "a37-henan"
                 ]
               },
               {
@@ -31599,6 +31488,12 @@
                   "bls-ooh-information-clerks",
                   "internal-rubric"
                 ]
+              },
+              {
+                "answer": "Keep the F12 index and receipt, flag the date conflict and ask the intake lead to verify it. Mark F19 incomplete because page 3 is missing and refer it to the scanning lead. Hold the R7 request and ask the access owner to verify permission before releasing a copy. Check four items: date and evidence, missing page and evidence, authorization and owner, and handoff status.",
+                "id": "file-clerks.faq.11",
+                "question": "Records handoff reference (open after day six)",
+                "question_key": "career.faq.file-clerks.11"
               }
             ]
           },
@@ -31701,18 +31596,6 @@
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
-              },
-              {
                 "entity": "Return to the File Clerks career page",
                 "id": "navigation-6",
                 "relation": "related-evidence",
@@ -31741,7 +31624,7 @@
                 "details": [
                   "Official occupational scope: file correspondence, cards, invoices, receipts, and other records alphabetically, numerically, or according to the filing system used, and locate and retrieve materials on request.",
                   "Interest code C (Conventional); preparation level Job Zone 1–2 (SVP below 6.0); education survey: associate degree or other two-year qualification 38%, high school diploma or equivalent 30%, some college without a degree 23%. This occupation is not designated Bright Outlook.",
-                  "Wage and employment trends (citing BLS data): median hourly wage USD 20.96 and median annual wage USD 43,600 in 2025; employment of 84,300 in 2024; projected decline (-1% or lower) over 2024—2034; approximately 7,300 annual openings on average. Major industries in 2024 were government and professional, scientific, and technical services."
+                  "The 2025 U.S. wage medians were $20.96 hourly and $43,600 annually. For employment projections, see BLS Table 1.2, row 43-4071."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31789,17 +31672,16 @@
                 "url": "https://www.bls.gov/ooh/office-and-administrative-support/information-clerks.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Exact occupation 43-4071 (presented through O*NET): employment of 84,300 in 2024, a projected decline (-1% or lower) over 2024—2034, and approximately 7,300 annual job openings on average.",
-                  "Occupational openings in BLS employment projections are annual averages over the projection period. This page therefore labels them as per year, not a cumulative ten-year total."
+                  "BLS Table 1.2 projects U.S. employment for file clerks (43-4071) from about 76,200 in 2025 to 64,200 in 2035 (-15.8%), with about 5,600 annual openings including replacements. Employment figures are rounded separately."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
                 "limitation": "Projections do not equal actual outcomes. Annual openings include replacement needs and cannot be interpreted as individual hiring probabilities. The two projection scopes cover different periods.",
                 "market": "United States",
-                "name": "BLS: Occupational Projections and Characteristics Table (2024—2034 projections presented through O*NET; see also the 2025—35 projections table)",
-                "period": "2024—2034 projections as presented by O*NET OnLine; 2025—35 table; accessed 2026-09-20",
+                "name": "BLS Table 1.2: File Clerks, 43-4071",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact occupation (SOC 43-4071)",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31901,6 +31783,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A Haidian notice for Beijing Yousibaite listed an archives processing role covering collection, classification, retention periods and missing records. It asked for archives or related experience. Pay was negotiable."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a37-haidian",
+                "limitation": "Individual notice.",
+                "market": "Mainland China",
+                "name": "Records processing job posting",
+                "period": "2026-01-14",
+                "publisher": "Beijing Haidian Veterans Service Center",
+                "scope": "recruitment_proxy",
+                "url": "https://www.bjhd.gov.cn/hdjyzd/Article_2424.aspx"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Henan University of Technology published Henan Xintai’s 11 library, archives or records jobs. Duties included classification, scanning and data entry, and quality checks. It listed junior college or higher, no experience requirement and CNY 4,000–6,000 per month."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a37-henan",
+                "limitation": "Individual notice.",
+                "market": "Mainland China",
+                "name": "Records processing job posting",
+                "period": "2026-10-08",
+                "publisher": "Henan University of Technology employment site",
+                "scope": "recruitment_proxy",
+                "url": "https://job.haut.edu.cn/module/position_details/id-170738/nid-8957"
               }
             ]
           },
@@ -34396,7 +34308,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet",
+            "id": "onet-work-context",
             "label": {
               "$link": "file-clerks.risk.career-risk-cards.7",
               "block": "risk",
@@ -34767,6 +34679,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a37-haidian",
+            "posting-a37-henan"
+          ],
           "sources_note": {
             "$item": "file-clerks.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34919,7 +34835,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "2024—2034 Employment · Annual average openings",
+            "指标": "Average annual openings, 2025–2035",
             "数值": {
               "$item": "file-clerks.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -35296,6 +35212,7 @@
         "heading": "File Clerks Employment Outlook and Transitions to Related Occupations",
         "outlook_evidence": [
           {
+            "fact_ref": "us-growth-2025-2035",
             "geography": {
               "$item": "file-clerks.market-signals.market-signal-card.9",
               "block": "market-signals",
@@ -35333,6 +35250,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "file-clerks.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35341,6 +35259,7 @@
             }
           },
           {
+            "fact_ref": "us-employment-2025",
             "geography": {
               "$item": "file-clerks.market-signals.market-signal-card.16",
               "block": "market-signals",
@@ -35378,6 +35297,7 @@
               "type": "prose"
             },
             "source_id": "bls",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "file-clerks.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -35800,7 +35720,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Employment Projections (2024—2034) and BLS OOH Information Clerks Group (2025—2035)",
+            "label": "U.S. BLS file clerk employment projections (2025–2035)",
             "secondary_value": null,
             "value": {
               "$item": "file-clerks.profile.onet-structured-fields-block.4",
@@ -36678,7 +36598,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36688,27 +36608,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "file-clerks.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "file-clerks.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -36907,36 +36807,36 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 84,300 workers (2024, BLS projection scope presented through O*NET); approximately 1,287,600 jobs in the BLS OOH information clerks group in 2025",
+        "display_value": "About 76,200 workers",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "U.S. employment size",
-        "occupation_scope": "File Clerks (O*NET-SOC 43-4071.00)",
-        "period": "2024",
+        "occupation_scope": "U.S. File Clerks (43-4071)",
+        "period": "2025",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline (-1% or lower, 2024—2034, BLS projections presented through O*NET); -2% for the BLS OOH information clerks group over 2025—2035",
+        "display_value": "-15.8%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "U.S. employment change",
-        "occupation_scope": "File Clerks (O*NET-SOC 43-4071.00)",
-        "period": "2024–2034 projection",
+        "occupation_scope": "U.S. File Clerks (43-4071)",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 7,300 per year (2024—2034, BLS projection annual average, exact occupation 43-4071)",
+        "display_value": "About 5,600 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "U.S. annual average job openings",
-        "occupation_scope": "File Clerks (O*NET-SOC 43-4071.00)",
-        "period": "2024–2034 projection",
+        "occupation_scope": "U.S. File Clerks (43-4071)",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -37096,6 +36996,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "A Haidian notice for Beijing Yousibaite listed an archives processing role covering collection, classification, retention periods and missing records. It asked for archives or related experience. Pay was negotiable.",
+        "fact_id": "posting-a37-haidian",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Records processing job posting",
+        "period": "2026-01-14",
+        "source_refs": [
+          "a37-haidian"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Henan University of Technology published Henan Xintai’s 11 library, archives or records jobs. Duties included classification, scanning and data entry, and quality checks. It listed junior college or higher, no experience requirement and CNY 4,000–6,000 per month.",
+        "fact_id": "posting-a37-henan",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Records processing job posting",
+        "period": "2026-10-08",
+        "source_refs": [
+          "a37-henan"
+        ]
       }
     ]
   },
@@ -37122,19 +37046,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment change (2024–2034)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment size (2024 projection scope)"
+        "label": "U.S. employment size (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. annual average job openings (2024–2034)"
+        "label": "U.S. annual average job openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -37155,7 +37079,7 @@
       "text": "File Clerks"
     }
   },
-  "source_content_sha256": "ed9c908ea676e132b3d681e158cb2b44c4815976fba434b043ded5b320198485",
+  "source_content_sha256": "66da84338a0874ed1f4cfb9f67d9a4e0386b40511f08158b4d712ccc3eeb4ee7",
   "subject": {
     "canonical_slug": "file-clerks",
     "name": "File Clerks",

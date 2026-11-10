@@ -146,6 +146,9 @@
       "item:mining-and-geological-engineers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:mining-and-geological-engineers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:mining-and-geological-engineers.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -13013,6 +13016,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。开发比较表有两套场址数据，但一套缺勘测日期，另一套将初测结果标作复核结果。写清哪些比较需暂缓，以及要向勘测负责人确认的内容。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "employment"
+          ],
+          "title": "写矿区勘测方案的待核项",
+          "type": "notice"
         }
       ]
     },
@@ -15523,6 +15541,13 @@
         "id": "mining-and-geological-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mining-and-geological-engineers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15680,7 +15705,7 @@
       "text": "采矿与地质工程师：工作内容、美国工资与安全 | 费马测试"
     }
   },
-  "source_content_sha256": "c084de866968bc3f6cfe5bb5ec78e1ab585401a8b21e402cd8c92e6c2b180dc2",
+  "source_content_sha256": "86f2d1dc001dcdf02c7a49332220a7f0c1eb79014b27e3b94f3daf60ee163cb7",
   "subject": {
     "canonical_slug": "mining-and-geological-engineers",
     "name": "采矿与地质工程师",

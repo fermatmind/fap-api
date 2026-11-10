@@ -158,6 +158,9 @@
       "item:multimedia-artists-and-animators.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:multimedia-artists-and-animators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:multimedia-artists-and-animators.profile.career-quick-answers-block.5": {
         "status": "mapped"
       },
@@ -13325,6 +13328,21 @@
             "onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。镜头 S7 的分镜写近景，动画预览用了旧构图，音轨已同步新版。说明应保留哪项并请谁确认重做范围。"
+            ]
+          },
+          "id": "multimedia-artists-and-animators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "交接一个动画镜头的版本",
+          "type": "notice"
         }
       ]
     },
@@ -15806,6 +15824,13 @@
         "id": "multimedia-artists-and-animators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "multimedia-artists-and-animators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16047,7 +16072,7 @@
       "text": "特效艺术家与动画师"
     }
   },
-  "source_content_sha256": "0f04b9a8dc8a947f18064005b820d2ae17320140be5c43581ba6e0e7f31fe0e9",
+  "source_content_sha256": "a930b563dd857dc33779665a48c2936962d247ee93b133eea2b337703e0a1aea",
   "subject": {
     "canonical_slug": "multimedia-artists-and-animators",
     "name": "特效艺术家与动画师",

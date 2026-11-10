@@ -2,6 +2,18 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:cleaning-us-industry-breakdown-boundary": {
+        "status": "pending_mapping"
+      },
+      "fact:cleaning-us-industry-wage-unverified": {
+        "status": "pending_mapping"
+      },
+      "fact:cleaning-us-manufacturing-job-share": {
+        "status": "pending_mapping"
+      },
+      "fact:cleaning-us-other-industry-job-share": {
+        "status": "pending_mapping"
+      },
       "fact:cn-industry-manufacturing-2024": {
         "status": "pending_mapping"
       },
@@ -50,19 +62,7 @@
       "fact:pickle-us-growth-2025-2035": {
         "status": "pending_mapping"
       },
-      "fact:pickle-us-industry-wage-aerospace-mfg-2025": {
-        "status": "pending_mapping"
-      },
-      "fact:pickle-us-industry-wage-engineering-services-2025": {
-        "status": "pending_mapping"
-      },
-      "fact:pickle-us-industry-wage-federal-2025": {
-        "status": "pending_mapping"
-      },
       "fact:pickle-us-industry-wage-instruments-2025": {
-        "status": "pending_mapping"
-      },
-      "fact:pickle-us-industry-wage-rd-2025": {
         "status": "pending_mapping"
       },
       "fact:pickle-us-openings-2025-2035": {
@@ -23567,7 +23567,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：清洗与金属酸洗设备操作员不是「把东西丢进机器」，而是按工艺规格操作与看管清洗与酸洗设备，配制与补充化学药剂，监控温度与浓度与循环时间，检查设备与清洗效果，并对溶液状态与生产日志负责；O*NET 把该职业定义为操作或看管机器清洗产品（如桶与玻璃制品与马口铁与食品与纸浆与煤与塑料或橡胶）以去除杂质。"
+              "如果你很难让证据不全的记录保持待核，先做一次纸面体验。"
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.quick-decision.fit-decision-checklist.1",
@@ -23578,7 +23578,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你愿意在噪声与化学品与高温环境中按规程重复作业，能按要求佩戴防护装备，也能按仪表读数判断并记录；O*NET 工作情境显示 100% 每天佩戴常规防护或安全装备、70% 持续或几乎持续站立、70% 每天暴露于令人分心或不适的噪声、41% 每天接触污染物、39% 每天在非环境受控的室内作业，且 72% 的典型工作周为 40 小时。"
+              "到目录「09 入行、资格与职业发展」找《CW-20：追查两份清洗批次记录》，先用约 10 分钟作答，再看题后参考。"
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.quick-decision.fit-decision-checklist.2",
@@ -23589,7 +23589,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停高投入的条件：你还没有按工艺卡完整走过一次清洗或酸洗循环，也没有核对过化学药剂的配比与浓度与安全要求；该职业准备层级为 Job Zone 1-2（很少到一些准备），SVP 区间低于 6.0，该职业页面未给出教育分布的百分比，只列出三类岗位要求（部分岗位要求高中或同等学历、部分岗位要求低于高中、部分岗位要求上过大学但无学位），岗位机会更多取决于按规程操作与安全意识，但腐蚀性化学品与高温与转动设备与密闭槽罐的安全责任不能省，该职业页面也未列出全国认证。"
+              "如果你愿意核对批次记录、写清下一班还要核实什么，可以考虑这类工作。"
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.quick-decision.fit-decision-checklist.3",
@@ -23611,7 +23611,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个「参数看得准不准、溶液与设备状态守不守住、异常能不能及时停机报告」比手快更决定成败的职业；如果你愿意按工艺规格重复作业并为自己经手的化学品与设备安全负责，它值得认真考虑。"
+              "如果你愿意核对批次记录、写清下一班还要核实什么，可以考虑这类工作。"
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.quick-decision.fermat-decision-card.7",
@@ -24448,7 +24448,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "六个方向与本职业共享一部分能力：按工艺参数操作设备、观察仪表并按需调整、检查与维护设备、记录过程数据、遵守安全与防护要求。真正的区别在于处理对象与工艺介质（食品原料、食品成品、金属与塑料表面、金属熔体、组织与性能、低温环境）与所需的专业判断（卫生要求、尺寸精度、成分控制、组织控制、冷链）。选择时建议先用一次可交付的参数监控与记录验证，而不是先比名称。"
+              "六个方向与本职业共享一部分能力：按工艺参数操作设备、观察仪表并按需调整、检查与维护设备、记录过程数据、遵守安全与防护要求。真正的区别在于处理对象与工艺介质（食品原料、食品成品、金属与塑料表面、金属熔体、组织与性能、低温环境）与所需的专业判断（卫生要求、尺寸精度、成分控制、组织控制、冷链）。到第 09 节用 CW-20 核虚构批次编号和签名，写两行纸面交接。W-CW 另核设备编号及带日期的复核凭证。只用题给记录。"
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.8",
@@ -24921,10 +24921,10 @@
                 "url": "https://www.onetonline.org/link/summary/51-9192.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（51-9192.00，显示 BLS 就业预测）",
+                "entity": "美国劳工统计局表 1.2（2025—2035 年）",
                 "id": "link-7",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/51-9192.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 51-9192.00 职业详细资料",
@@ -25270,7 +25270,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 全国就业趋势页面（51-9192.00，显示 BLS 就业预测）"
+              "BLS 表 1.2：2025—2035 年就业预测"
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.ai-impact.ai-impact-table.31",
@@ -27261,7 +27261,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 全国工资分位页面（51-9192.00）｜https://www.onetonline.org/link/localwages/51-9192.00；O*NET-SOC 51-9192.00 职业详细资料｜https://www.onetonline.org/link/details/51-9192.00；O*NET-SOC 51-9192.00 职业摘要｜https://www.onetonline.org/link/summary/51-9192.00"
+              "O*NET 全国工资分位｜https://www.onetonline.org/link/localwages/51-9192.00；BLS 表 1.2 就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET 就业行业份额｜https://www.onetonline.org/link/industry/51-9192.00"
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.us-salary.career-snapshot-secondary-locale.8",
@@ -27387,7 +27387,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "16,200人（2025）"
+              "16,200 个岗位（2025）"
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.us-salary.career-snapshot-secondary-locale.19",
@@ -28249,7 +28249,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "适配信号：愿意用「先做一次工艺与防护方案并请带班复核」而不是「先开设备再说」来验证自己是否适合。",
+              "适配信号：愿意依据 CW-20 的题给凭证，说明对两条记录的判断。",
               "适配信号：能在被指出加药量算错或点检遗漏后主动改正并形成核对习惯。"
             ]
           },
@@ -28731,7 +28731,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用可交付物判断：能否按虚构工艺卡写出加药与配比与参数设定方案；能否按虚构化学品标签写出相容性与防护与泄漏处置清单并说明停机条件；能否写出一份设备异常的停机与报告记录。哪一类任务让你愿意重复，就是更值得试的方向。"
+              "到第 09 节用 CW-20 核虚构批次编号和签名，写两行纸面交接。W-CW 另核设备编号及带日期的复核凭证。只用题给记录。"
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.fit.personality-fit-block.55",
@@ -28764,7 +28764,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用页内「入行、资格与职业发展」的虚构材料完成一次从工艺卡到参数设定到异常记录的闭环，再判断自己是否愿意重复这件事。"
+              "到第 09 节用 CW-20 核虚构批次编号和签名，写两行纸面交接。W-CW 另核设备编号及带日期的复核凭证。只用题给记录。"
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.fit.personality-fit-block.58",
@@ -30699,39 +30699,39 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构任务：依据一份虚构工艺卡与一台虚构清洗与酸洗设备的规格，完成加药与参数设定与作业记录方案并写出异常处置。",
-                  "虚构材料：虚构工艺卡（含槽液浓度范围与温度与循环时长范围）、虚构化学品标签（含配比与相容性限制与防护要求）与虚构设备说明书摘要（含不得超出的参数上限）。",
-                  "虚构条件：一份虚构班组安排（含批次顺序与交付时限）。",
-                  "虚构约束：一份虚构化学品与密闭空间管理要求（含防护装备与废液处置与进入许可与异常上报）。"
+                  "虚构材料（约 10 分钟）",
+                  "虚构车间规定，清洗批次交接须满足两点：批次编号与班次表一致，且有复核签名。",
+                  "W6 在两份记录都写 W6，有签名。W7 的批次卡写 W7，班次表写 W9，也有签名。",
+                  "只用虚构纸面记录，不接触设备或清洗材料。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "第一步：写出加药与配比方案（药剂种类与用量与补水与浓度目标与测量方法）并列出需要的防护装备。",
-                  "第二步：按工艺卡写出参数设定与监控方案（温度与循环时长与取样周期），并指出两处最容易出错的地方（如药剂相容性或超温超压）与对应的核对方法。",
-                  "第三步：写出异常处置与记录模板（停机与隔离与报告与恢复作业的条件），并说明哪些事项超出你的操作授权需要提交带班或安全岗位。"
+                  "任务与交付",
+                  "给每个批次写一行交接记录。",
+                  "判断每个批次能否交接；如有缺项或矛盾，写出有权限的复核人可查什么。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考交付：一份加药与配比方案、一份参数设定与监控方案、一份异常处置与记录模板。",
-                  "评价依据：配比与浓度是否可核对、参数是否在设备允许范围内、防护与相容性是否写明、异常处置是否含停机与报告与恢复条件、是否区分授权内外事项。",
-                  "允许多种合理写法；若认为某些信息不足以判断，应明确写出不足以判断的部分与所需补充信息。"
+                  "参考入口",
+                  "独立作答后，到常见问题展开「CW-20 题后参考」。",
+                  "再对照自己的交接记录。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "本练习全部材料为虚构，不得用于真实生产线或槽罐作业；真实作业须按工艺文件与作业规程与所在地要求由具备相应授权与资格的人员执行。",
-                  "题面给定的工艺参数与化学品配比均为虚构值，仅用于练习工艺方案与安全判断方法。"
+                  "自核清单",
+                  "是否核对了记录、说明了判断，并指出谁能复核凭证？"
                 ]
               }
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.path.entry-work-sample-data.1",
-          "title": "纸面案例与任务",
+          "title": "CW-20：追查两份清洗批次记录",
           "type": "cards"
         },
         {
@@ -30805,9 +30805,9 @@
               ],
               [
                 "实操或情境演练",
-                "在给定工艺卡下写出加药与配比与参数设定方案并说明依据。",
-                "配比计算、参数范围、防护装备、异常识别与记录意识。",
-                "演练环境与真实产线条件不同，结果用于参考而非定论。"
+                "用 CW-20 的题给纸面记录拟交接。",
+                "说明每项判断依据、待核项和指定复核角色。",
+                "纸面题不操作设备、不接触材料，也不授予作业权限。"
               ],
               [
                 "试用或带岗期",
@@ -30834,56 +30834,56 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天：读懂工艺卡",
-                  "把虚构工艺卡的槽液浓度与温度与循环时长与取样周期摘成核对表。"
+                  "第 1 天",
+                  "开始新题 W-CW。虚构记录要求两页设备编号一致，且有带日期的班次复核。抄下两条规则。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天：准备与配比",
-                  "按虚构化学品标签写出配比与相容性核对清单与防护装备与废液处置清单。"
+                  "第 2 天",
+                  "P2 两页都写 P2，没有复核日期。抄下可用证据。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天：排出作业顺序",
-                  "把加药与设定与监控与取样与装卸排成有序步骤并标出安全节点。"
+                  "第 3 天",
+                  "P3 的交接表写 P3、日志写 P8，有复核日期。写下差异。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天：设定与监控参数",
-                  "按工艺卡写出温度与循环时长与取样周期并说明不可超出的上限。"
+                  "第 4 天",
+                  "按两条规则逐一核对，每组写一行。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天：写出异常处置",
-                  "写出一份异常处置流程（停机与隔离与报告与恢复条件与进入许可）。"
+                  "第 5 天",
+                  "给有权限的复核人写一个问题，指出可查的原始凭证。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天：写出记录与交接",
-                  "写出生产日志与点检表模板与交接要点，并说明哪些事项须上报或移交。"
+                  "第 6 天",
+                  "先独立重读两组编号和复核日期，再与第一遍记录核对。找同伴反馈可选。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天：做出判断",
-                  "回答三个问题：你是否愿意重复这件事；哪一步让你最投入；下一周你会补哪一项能力（设备操作与监控、溶液与药剂管理、化学品与密闭空间安全还是记录与交接）。"
+                  "第 7 天",
+                  "完成第 6 天独立复核后，到常见问题展开「W-CW 第 7 天参考」。对照自己的记录，再选一个要练的习惯。"
                 ]
               }
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.path.seven-day-trial.1",
-          "title": "七天渐进体验",
+          "title": "七天纸面体验：独立新题",
           "type": "timeline"
         },
         {
@@ -30891,13 +30891,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "变化：做完这七天练习后，你对「清洗与酸洗设备操作」的印象与开始时有什么不同？请写具体变化。",
-              "事实与选择：过程中你依赖了哪些给定信息，哪些是你自行假设的？假设是否都写明了。",
-              "练习消耗：这七天里最花时间的是读工艺卡、配比核对还是排出安全节点？哪一步让你觉得吃力。",
-              "材料边界：你是否意识到题面材料是虚构的，以及方案不能用于真实生产线作业。",
-              "反馈反应：当带班指出你的配比或参数问题时，你的第一反应是解释还是重新核对？这会影响你后续的成长速度。",
-              "过程兴趣：如果把这套流程重复十次并逐步提高工序复杂度与产量压力，你的兴趣是上升还是下降。",
-              "下一步：写出你接下来两周要补的一项能力，以及验证它的方式。"
+              "我读了两份记录。",
+              "我核对了两条条件。",
+              "我把缺失证据保留待核。",
+              "我指出了复核人。",
+              "我只用了虚构记录。",
+              "我独立复核了结果。",
+              "我选了一个要练的记录习惯。"
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.path.seven-day-decision.1",
@@ -31029,11 +31029,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "关于招聘样本：本页不使用招聘平台报价作为工资依据，也不把单条招聘公告写成统一门槛；招聘条件中的学历、工序类型、设备与安全要求会随机构与地区变化。",
+              "广州市生态环境局资料在电镀前处理的除锈环节列出酸洗槽。这是一种工艺场景，不是招聘公告、操作指引或全国准入规定。",
               "关于岗位名称：该类岗位可能使用清洗工、酸洗工、表面处理操作工、在线清洗（CIP）操作员等名称，比较时应以实际职责与工序类型与安全要求为准，而不是名称。"
             ]
           },
           "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.path.recruitment-sample.1",
+          "source_refs": [
+            "cn-career-example-020"
+          ],
           "title": "招聘样本使用说明",
           "type": "notice"
         }
@@ -31162,10 +31165,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（51-9192.00，显示 BLS 就业预测）",
+                "entity": "BLS 表 1.2：51-9192 就业预测",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/51-9192.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
@@ -31868,52 +31871,93 @@
                 "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.human-skills"
               },
               {
-                "answer": "O*NET 该职业页面显示 2025 年该职业时薪中位数为 20.93 美元、年薪中位数为 43,530 美元，年薪 10 与 25 与 75 与 90 分位分别为 33,790 与 37,310 与 49,320 与 58,570 美元。该统计不含自雇主与业主收入；该职业在 BLS Occupational Outlook Handbook 中属未详列职业，其职业群组数值不能当作本职业数值。中国大陆本页不发布数值，只登记统计口径与缺口。",
+                "answer": "美国 2025 年 5 月年工资中位数 43,530 美元。 BLS 表 1.2 的清洗与金属酸洗设备操作员 (51-9192)：2025 年 16,200 个美国岗位，2035 年预计 16,800 个，公布净增 500 个（3.4%），预计年均空缺 1,700 个，含替换需求。",
                 "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.faq.6",
                 "question": "这个职业的收入大概是多少？",
-                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.salary"
+                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.salary",
+                "source_refs": [
+                  "bls-pay",
+                  "pickle-ep-current"
+                ]
               },
               {
-                "answer": "该职业页面未给出教育分布的百分比，只列出三类岗位要求：部分岗位要求高中或同等学历、部分岗位要求低于高中、部分岗位要求上过大学但无学位；准备层级为 Job Zone 1-2，通常提供几天到一年不等的在职培训，多数岗位更看重设备操作与安全意识与作业纪律。",
+                "answer": "BLS 将高中或同等学历、中期在岗培训列为本职业美国典型口径。 O*NET 的教育栏列高中或同等学历、低于高中、读过大学但未取得学位等部分岗位回答，现页未公布比例。",
                 "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.faq.7",
                 "question": "做这一行需要什么学历？",
-                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.education"
+                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.education",
+                "source_refs": [
+                  "onet-newhire-education",
+                  "onet-training",
+                  "pickle-ep-current"
+                ]
               },
               {
                 "answer": "O*NET 该职业页面未列出全国认证。在美国，涉及危险化学品与压力容器与特种作业的岗位可能有法定安全要求；在中国大陆，危险化学品使用与特种作业另有各自的安全与资格要求。教育背景、在职培训、法定资格与机构工艺与操作授权作用不同，不能互相替代。",
                 "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.faq.8",
                 "question": "需要哪些执照或认证？",
-                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.credentials"
+                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.credentials",
+                "source_refs": [
+                  "pickle-cert-current",
+                  "pickle-chemical-current",
+                  "pickle-special-current",
+                  "pickle-catalog-current"
+                ]
               },
               {
-                "answer": "可行：有设备操作或化工或表面处理或体力作业经历的人可以把参数监控与安全防护能力迁移过来，从操作岗位开始积累设备与溶液与安全经验。但需要系统学习工艺规格与化学品安全与设备操作与异常处置要求。",
+                "answer": "到第 09 节用 CW-20 核虚构批次编号和签名，写两行纸面交接。W-CW 另核设备编号及带日期的复核凭证。只用题给记录。 实际岗位操作设备前，须核雇主培训、作业规程与实际授权。",
                 "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.faq.9",
                 "question": "转行做清洗与金属酸洗设备操作员现实吗？",
-                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.career-change"
+                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.career-change",
+                "source_refs": [
+                  "onet-details",
+                  "cn-career-example-020"
+                ]
               },
               {
-                "answer": "取决于你是否愿意按工艺规格重复作业并承受噪声与化学品与班次安排。O*NET 该职业页面显示的 BLS 就业预测为 2024 至 2034 年增长平均（Average，3% 至 4%）、年均空缺约 1,600 个（含替补需求），该职业页面未标注 Bright Outlook。建议先用页面里的七日练习验证自己是否愿意重复这套流程。",
+                "answer": "先做七天纸面体验，看看你是否愿意反复核对记录、把交接写清。BLS 表 1.2 的清洗与金属酸洗设备操作员 (51-9192)：2025 年 16,200 个美国岗位，2035 年预计 16,800 个，公布净增 500 个（3.4%），预计年均空缺 1,700 个，含替换需求。",
                 "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.faq.10",
                 "question": "这个职业值得投入吗？",
-                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.career-worth"
+                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.career-worth",
+                "source_refs": [
+                  "pickle-ep-current"
+                ]
               },
               {
-                "answer": "本条证据路由把精确职业工资登记为已核实不可得（数据状态：暂无可安全使用的数据），处理说明 为「已打开国家统计局行业工资来源，但没有本职业精确全国工资口径」。因此本页不给出月薪区间或城市排名，也不以相邻岗位报价推算。",
+                "answer": "本次未取得中国大陆本职业的全国工资序列。行业均值和单雇主样本都不能代表全国职业工资。",
                 "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.faq.12",
                 "question": "中国大陆的数据为什么没有给出？",
-                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.china-data-scope"
+                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.china-data-scope",
+                "source_refs": [
+                  "pickle-nbs-current"
+                ]
               },
               {
-                "answer": "本页美国工资与就业数值来自 O*NET 该职业页面显示的 BLS OEWS 2025 年工资数据与 BLS 就业预测（2024 至 2034 年），描述受雇工资薪金岗位，不含自雇主与业主收入；O*NET 该职业页面未提供按行业或地区细分的工资中位数，本页已登记对应缺口；该职业在 BLS Occupational Outlook Handbook 中属未详列职业，本页不据此推算个人年收入。",
+                "answer": "美国 2025 年 5 月年工资中位数 43,530 美元。 BLS 表 1.2 的清洗与金属酸洗设备操作员 (51-9192)：2025 年 16,200 个美国岗位，2035 年预计 16,800 个，公布净增 500 个（3.4%），预计年均空缺 1,700 个，含替换需求。",
                 "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.faq.13",
                 "question": "美国数据是什么口径？",
-                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.us-data-scope"
+                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.us-data-scope",
+                "source_refs": [
+                  "pickle-ep-current",
+                  "onet-details"
+                ]
               },
               {
-                "answer": "练习与七日安排是费马测试编辑设计的虚构材料，用于帮助读者判断自己是否愿意重复这套工作流程，不是研究发现也不是行业事实；不得用于真实生产线或槽罐作业，真实作业须按工艺文件与作业规程与所在地要求由具备相应授权与资格的人员执行。",
+                "answer": "短题和七天新题都只用虚构记录，不授权上机、接触化学品或放行批次。",
                 "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.faq.14",
                 "question": "页面里的练习是什么性质？",
                 "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.exercise-boundary"
+              },
+              {
+                "answer": "W6 两项记录条件都满足；W7 有签名但编号冲突，保留待核。 请复核人查原批次卡和班次表。纸面核对不能证明实物质量。",
+                "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.faq.trial-short-reference",
+                "question": "CW-20 题后参考",
+                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.trial-short-reference"
+              },
+              {
+                "answer": "P2 的设备编号一致，但缺复核日期；P3 有复核日期，但两份设备编号不一致。按虚构规则，两组都保留待核。请复核人查 P2 的带日期班次记录及 P3 两份原表上的设备编号。",
+                "id": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.faq.trial-week-reference",
+                "question": "W-CW 第 7 天参考",
+                "question_key": "career.faq.cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.trial-week-reference"
               }
             ]
           },
@@ -32135,7 +32179,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "onet-details",
-                "limitation": "支持精确职业身份、11 项任务、工作活动与工作情境；不含中国大陆的安全与资格要求。",
+                "limitation": "O*NET 工作情境部分报告美国受访者对暴露、体位、责任、节奏和协作的回答分布。分布不代表每个岗位，也不能证明作业授权。",
                 "market": "美国",
                 "name": "O*NET-SOC 51-9192.00 职业详细资料（任务与工作活动）",
                 "period": "2026 年更新页面；检索 2026-09",
@@ -32160,17 +32204,17 @@
                 "url": "https://www.onetonline.org/link/summary/51-9192.00"
               },
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "官方行业分布",
-                  "美国就业行业结构"
+                  "O*NET 显示制造业 76%、其他行业合计 24%，原页举例为行政与支持服务。",
+                  "这些是就业份额，不是工资或预计需求。"
                 ],
                 "evidence_type": "official source",
                 "id": "onet-industry",
-                "limitation": "支持美国就业行业结构（制造业 76%、其他行业合计 24%，含行政与支持服务与批发贸易）；不是个人收入保证。",
+                "limitation": "这些是就业份额，不是工资或预计需求。",
                 "market": "美国",
                 "name": "O*NET-SOC 51-9192.00 行业分布",
-                "period": "当前页面；检索 2026-09",
+                "period": "2026-11-10 读回 O*NET 原页；原页未标统计年份",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/51-9192.00"
@@ -32210,18 +32254,18 @@
               {
                 "accessed_at": "2026-09-17",
                 "details": [
-                  "官方职业群说明（未详列职业）",
-                  "无独立页面的官方发布说明"
+                  "BLS 将高中或同等学历、中期在岗培训列为本职业美国典型口径。",
+                  "不同雇主的具体要求可能不同。"
                 ],
                 "evidence_type": "official source",
                 "id": "bls-entry",
-                "limitation": "该职业在 BLS Occupational Outlook Handbook 中属未详列职业，无独立页面；本页美国数值以 O*NET 该职业页面显示的数据为准，不使用职业群组数值替代本职业数值。",
+                "limitation": "BLS 将高中或同等学历、中期在岗培训列为本职业美国典型口径。",
                 "market": "美国",
-                "name": "BLS Occupational Outlook Handbook：生产职业群（该职业无独立页面）",
-                "period": "当前页面；检索 2026-09",
+                "name": "美国劳工统计局表 1.2：典型入行与培训",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "combined_official",
-                "url": "https://www.bls.gov/ooh/production/home.htm"
+                "scope": "清洗与金属酸洗设备操作员 (51-9192)",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -32240,36 +32284,36 @@
                 "url": "https://www.onetonline.org/link/localwages/51-9192.00"
               },
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "官方就业预测",
-                  "2024 至 2034 年预测与年均空缺"
+                  "BLS 表 1.2 的清洗与金属酸洗设备操作员 (51-9192)：2025 年 16,200 个美国岗位，2035 年预计 16,800 个，公布净增 500 个（3.4%），预计年均空缺 1,700 个，含替换需求。",
+                  "采用公布净变化，不用舍入后的端点相减。"
                 ],
                 "evidence_type": "official source",
                 "id": "bls-outlook",
-                "limitation": "支持就业预测（2024 年约 14,600 人、增长平均（Average，3% 至 4%）、年均空缺约 1,600 个）；预测含假设与误差。",
+                "limitation": "BLS 表 1.2 的清洗与金属酸洗设备操作员 (51-9192)：2025 年 16,200 个美国岗位，2035 年预计 16,800 个，公布净增 500 个（3.4%），预计年均空缺 1,700 个，含替换需求。",
                 "market": "美国",
-                "name": "O*NET 全国就业趋势页面（51-9192.00，显示 BLS 就业预测）",
-                "period": "2024 至 2034 年预测",
-                "publisher": "U.S. Bureau of Labor Statistics / O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/51-9192.00"
+                "name": "美国劳工统计局表 1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "清洗与金属酸洗设备操作员 (51-9192)",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-17",
                 "details": [
-                  "官方统计入口",
-                  "行业门类与人员大类聚合口径"
+                  "行业平均工资不是本职业工资。",
+                  "私营与非私营单位统计总体不同。"
                 ],
                 "evidence_type": "official source",
                 "id": "nbs-wages",
                 "limitation": "为行业门类与人员大类聚合口径，并非本职业精确口径；本页据此只登记缺口，不发布数值。",
                 "market": "中国大陆",
-                "name": "国家统计局《城镇单位就业人员年平均工资情况》检索入口",
-                "period": "2025 年及以前已发布资料",
+                "name": "国家统计局：2025 年城镇单位年平均工资",
+                "period": "2025",
                 "publisher": "国家统计局（中华人民共和国）",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -32338,18 +32382,18 @@
               {
                 "accessed_at": "2026-09-17",
                 "details": [
-                  "官方工作情境字段",
-                  "工作情境百分比分布"
+                  "通用风险管理框架，非职业采用率估计。",
+                  "人工复核应对应具体决定与组织。"
                 ],
                 "evidence_type": "official source",
                 "id": "nist-ai-rmf",
-                "limitation": "支持工作情境的百分比分布（暴露、体位、责任、节奏与协作）；为受访分布，不是个人岗位保证。",
+                "limitation": "通用 AI 风险管理背景，不提供本职业的工作情境比例或实际采用率。",
                 "market": "美国",
-                "name": "O*NET-SOC 51-9192.00 工作情境（Work Context 字段）",
+                "name": "NIST AI Risk Management Framework",
                 "period": "当前页面；检索 2026-09",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/51-9192.00#WorkContext"
+                "publisher": "NIST",
+                "scope": "通用 AI 风险管理框架",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -32430,16 +32474,16 @@
                 "url": "https://www.onetonline.org/link/localwages/51-9192.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "Industry及details Top industries"
                 ],
                 "evidence_type": "official occupational database",
                 "id": "pickle-industry-current",
-                "limitation": "制造76%、其他24%，当前其他举行政支持服务；不当工资或分项比例，未展示批发细分",
+                "limitation": "制造76%、其他24%，当前其他举行政支持服务；非工资或分项比例",
                 "market": "美国",
                 "name": "O*NET51-9192行业就业结构",
-                "period": "2025结构，当前页",
+                "period": "2026-11-10 读回 O*NET 原页；原页未标统计年份",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/51-9192.00"
@@ -32655,6 +32699,34 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "details": [
+                  "广州市生态环境局资料在电镀前处理的除锈环节列出酸洗槽。这是一种工艺场景，不是招聘公告、操作指引或全国准入规定。"
+                ],
+                "id": "cn-career-example-020",
+                "limitation": "广州市生态环境局资料在电镀前处理的除锈环节列出酸洗槽。这是一种工艺场景，不是招聘公告、操作指引或全国准入规定。",
+                "market": "CN",
+                "name": "广州市生态环境局：电镀前处理中的酸洗槽",
+                "period": "2026-11-10 来源读回",
+                "publisher": "广州市生态环境局",
+                "scope": "广州市生态环境局：电镀前处理中的酸洗槽",
+                "url": "https://sthjj.gz.gov.cn/tzggwj/content/post_8667402.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "为受访者对新聘学历要求的回答，不是现职人员学历。"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "onet-newhire-education",
+                "limitation": "为受访者对新聘学历要求的回答，不是现职人员学历。",
+                "market": "US",
+                "name": "O*NET：新聘学历问卷",
+                "period": "2026-11-10 实读",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/51-9192.00#Education"
               }
             ]
           },
@@ -35761,10 +35833,10 @@
         },
         "heading": "美国清洗与金属酸洗设备操作员工资与就业数据？",
         "industry_heading": "美国行业就业结构与工资细分缺口",
-        "industry_period": "本轮2026-10-09读取的O*NET行业就业结构，非工资期",
+        "industry_period": "2026-11-10 读回 O*NET 行业分布，非工资统计期间。",
         "industry_rows": [
           {
-            "fact_ref": "pickle-us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "cleaning-us-manufacturing-job-share",
             "industry": {
               "$item": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -35785,7 +35857,7 @@
             }
           },
           {
-            "fact_ref": "pickle-us-industry-wage-engineering-services-2025",
+            "fact_ref": "cleaning-us-other-industry-job-share",
             "industry": {
               "$item": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -35806,7 +35878,7 @@
             }
           },
           {
-            "fact_ref": "pickle-us-industry-wage-federal-2025",
+            "fact_ref": "cleaning-us-industry-breakdown-boundary",
             "industry": {
               "$item": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -35827,7 +35899,7 @@
             }
           },
           {
-            "fact_ref": "pickle-us-industry-wage-rd-2025",
+            "fact_ref": "cleaning-us-industry-wage-unverified",
             "industry": {
               "$item": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -37605,12 +37677,12 @@
       },
       {
         "derivation": null,
-        "display_value": "43,530美元/年（中位数）",
+        "display_value": "43,530 美元/年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "O*NET 页面显示的 BLS OEWS 全国工资中位数（受雇工资薪金岗位）",
-        "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "2025 年",
+        "measure": "OEWS 年工资中位数",
+        "occupation_scope": "清洗与金属酸洗设备操作员 (51-9192)",
+        "period": "2025 年 5 月",
         "source_refs": [
           "onet-localwages",
           "bls-pay"
@@ -37630,60 +37702,60 @@
       },
       {
         "derivation": null,
-        "display_value": "14,600人（2024 年）",
+        "display_value": "16,200 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "O*NET 页面显示的 BLS 就业预测就业人数",
-        "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "2024 年",
+        "measure": "就业岗位数",
+        "occupation_scope": "清洗与金属酸洗设备操作员 (51-9192)",
+        "period": "2025",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 15,038—15,184人（2034 年预计）",
+        "display_value": "预计 16,800 个岗位",
         "fact_id": "us-employment-2035",
         "market": "美国",
-        "measure": "按 O*NET 页面显示的 2024 年 14,600 人与增长 3% 至 4% 计算",
-        "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "2034 年（预测）",
+        "measure": "预计就业岗位数",
+        "occupation_scope": "清洗与金属酸洗设备操作员 (51-9192)",
+        "period": "2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "增长 3% 至 4%（Average，2024—2034 年）",
+        "display_value": "+3.4%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "O*NET 页面显示的 BLS 就业预测就业变化率（Average）",
-        "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "2024—2034 年（预测）",
+        "measure": "预计岗位增幅",
+        "occupation_scope": "清洗与金属酸洗设备操作员 (51-9192)",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 +438—+584人（2024—2034 年）",
+        "display_value": "500 个净增岗位",
         "fact_id": "us-change-2025-2035",
         "market": "美国",
-        "measure": "按 O*NET 页面显示的 2024 年 14,600 人与增长 3% 至 4% 计算",
-        "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "2024—2034 年（预测）",
+        "measure": "公布预计岗位净增",
+        "occupation_scope": "清洗与金属酸洗设备操作员 (51-9192)",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 1,600个（2024—2034 年累计）",
+        "display_value": "1,700 个预计年均空缺",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "O*NET 页面显示的 BLS 就业预测年均空缺约 1,600 个（含替补需求）",
-        "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "2024—2034 年（预测）",
+        "measure": "预计年均空缺，含替换需求",
+        "occupation_scope": "清洗与金属酸洗设备操作员 (51-9192)",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
@@ -37762,12 +37834,12 @@
       },
       {
         "derivation": null,
-        "display_value": "制造业就业占比 76%、其他行业合计 24%（含行政与支持服务与批发贸易）（O*NET 行业分布，非工资数据）",
+        "display_value": "制造业就业占比 76%、其他行业合计 24%（原页举例为行政与支持服务）（O*NET 行业分布，非工资数据）",
         "fact_id": "us-industry-wage-aerospace-mfg-2025",
         "market": "美国",
         "measure": "行业分布（非工资数据）",
         "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "当前页面；检索 2026-09",
+        "period": "2026-11-10 读回 O*NET 原页；原页未标统计年份",
         "source_refs": [
           "onet-industry"
         ]
@@ -37779,7 +37851,7 @@
         "market": "美国",
         "measure": "来源未提供（缺口）",
         "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "2025 年",
+        "period": "2026-11-10 读回 O*NET 原页；原页未标统计年份",
         "source_refs": [
           "onet-industry"
         ]
@@ -37870,62 +37942,62 @@
       },
       {
         "derivation": null,
-        "display_value": "16,200人",
+        "display_value": "16,200 个岗位",
         "fact_id": "pickle-us-employment-2025",
         "market": "美国",
-        "measure": "BLS表1.2基期就业",
-        "occupation_scope": "SOC51-9192；就业含自雇，表值各自取整",
+        "measure": "就业岗位数",
+        "occupation_scope": "清洗与金属酸洗设备操作员 (51-9192)",
         "period": "2025",
         "source_refs": [
-          "pickle-ep-current"
+          "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "16,800人（预测）",
+        "display_value": "预计 16,800 个岗位",
         "fact_id": "pickle-us-employment-2035",
         "market": "美国",
-        "measure": "BLS表1.2预测就业",
-        "occupation_scope": "SOC51-9192；就业含自雇，表值各自取整",
-        "period": "2035（预测）",
+        "measure": "预计就业岗位数",
+        "occupation_scope": "清洗与金属酸洗设备操作员 (51-9192)",
+        "period": "2035",
         "source_refs": [
-          "pickle-ep-current"
+          "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "增长3.4%",
+        "display_value": "+3.4%",
         "fact_id": "pickle-us-growth-2025-2035",
         "market": "美国",
-        "measure": "BLS表1.2就业变化率",
-        "occupation_scope": "SOC51-9192；就业含自雇，表值各自取整",
-        "period": "2025—2035预测",
+        "measure": "预计岗位增幅",
+        "occupation_scope": "清洗与金属酸洗设备操作员 (51-9192)",
+        "period": "2025–2035",
         "source_refs": [
-          "pickle-ep-current"
+          "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "净增约500人",
+        "display_value": "500 个净增岗位",
         "fact_id": "pickle-us-change-2025-2035",
         "market": "美国",
-        "measure": "BLS表1.2净就业变化（取整）",
-        "occupation_scope": "SOC51-9192；就业含自雇，表值各自取整",
-        "period": "2025—2035预测",
+        "measure": "公布预计岗位净增",
+        "occupation_scope": "清洗与金属酸洗设备操作员 (51-9192)",
+        "period": "2025–2035",
         "source_refs": [
-          "pickle-ep-current"
+          "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "1,700个/年",
+        "display_value": "1,700 个预计年均空缺",
         "fact_id": "pickle-us-openings-2025-2035",
         "market": "美国",
-        "measure": "BLS年均空缺，非累计或净增",
-        "occupation_scope": "SOC51-9192；就业含自雇，表值各自取整",
-        "period": "2025—2035年均预测",
+        "measure": "预计年均空缺，含替换需求",
+        "occupation_scope": "清洗与金属酸洗设备操作员 (51-9192)",
+        "period": "2025–2035",
         "source_refs": [
-          "pickle-ep-current"
+          "bls-outlook"
         ]
       },
       {
@@ -38006,54 +38078,50 @@
       },
       {
         "derivation": null,
-        "display_value": "制造业76%、其他24%（含行政支持服务；就业占比非工资）",
-        "fact_id": "pickle-us-industry-wage-aerospace-mfg-2025",
+        "display_value": "76%",
+        "fact_id": "cleaning-us-manufacturing-job-share",
         "market": "美国",
-        "measure": "就业结构或本轮工资细分缺口，非行业工资",
+        "measure": "美国制造业岗位份额",
         "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "当前就业结构，工资细分本轮未取得",
+        "period": "2026-11-10 读回 O*NET 原页；原页未标统计年份",
         "source_refs": [
-          "pickle-industry-current",
-          "pickle-wage-current"
+          "onet-industry"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：本轮未取得本职业行业、地区或工序细分工资，不断言资料不存在",
-        "fact_id": "pickle-us-industry-wage-engineering-services-2025",
+        "display_value": "24%",
+        "fact_id": "cleaning-us-other-industry-job-share",
         "market": "美国",
-        "measure": "就业结构或本轮工资细分缺口，非行业工资",
+        "measure": "美国其他行业岗位份额",
         "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "当前就业结构，工资细分本轮未取得",
+        "period": "2026-11-10 读回 O*NET 原页；原页未标统计年份",
         "source_refs": [
-          "pickle-industry-current",
-          "pickle-wage-current"
+          "onet-industry"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：本轮未取得本职业行业工资细分；OOH未详列页有精确职业条目",
-        "fact_id": "pickle-us-industry-wage-federal-2025",
+        "display_value": "O*NET 合并显示其他行业",
+        "fact_id": "cleaning-us-industry-breakdown-boundary",
         "market": "美国",
-        "measure": "就业结构或本轮工资细分缺口，非行业工资",
+        "measure": "就业分布口径",
         "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "当前就业结构，工资细分本轮未取得",
+        "period": "2026-11-10 读回 O*NET 原页；原页未标统计年份",
         "source_refs": [
-          "pickle-industry-current",
-          "pickle-wage-current"
+          "onet-industry"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：本轮未取得本职业行业、地区或工序细分工资，不断言资料不存在",
-        "fact_id": "pickle-us-industry-wage-rd-2025",
+        "display_value": "未核实本职业行业或地区工资中位数",
+        "fact_id": "cleaning-us-industry-wage-unverified",
         "market": "美国",
-        "measure": "就业结构或本轮工资细分缺口，非行业工资",
+        "measure": "工资证据缺口",
         "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "当前就业结构，工资细分本轮未取得",
+        "period": "2026-11-10 读回 O*NET 原页；原页未标统计年份",
         "source_refs": [
-          "pickle-industry-current",
-          "pickle-wage-current"
+          "onet-industry"
         ]
       },
       {
@@ -38063,7 +38131,7 @@
         "market": "美国",
         "measure": "就业结构或本轮工资细分缺口，非行业工资",
         "occupation_scope": "清洗与金属酸洗设备操作员",
-        "period": "当前就业结构，工资细分本轮未取得",
+        "period": "2026-11-10 读回 O*NET 原页；原页未标统计年份",
         "source_refs": [
           "pickle-industry-current",
           "pickle-wage-current"
@@ -38148,31 +38216,31 @@
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国工资中位数（本职业分项口径）"
+        "label": "美国年工资中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（本职业分项口径）"
+        "label": "美国预计岗位增幅（2025—2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（本职业分项口径，2024 年）"
+        "label": "美国 2025 年岗位数"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（本职业分项口径）"
+        "label": "美国预计年均空缺"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考（本条路由不发布数值）"
+        "label": "中国大陆：未核实本职业全国工资"
       }
     ]
   },
@@ -38180,14 +38248,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "清洗与金属酸洗设备操作员操作与看管清洗与酸洗设备以去除杂质，以设备操作与监控、溶液与药剂管理、取样与记录为核心：任务与工作情境、O*NET 页面显示的美国工资与就业口径、中国大陆统计缺口、入行与资格路径、风险与练习一次看清。"
+      "text": "了解清洗与金属酸洗设备操作员的工作、交接和入行条件，做一次批次记录练习，并查看美国工资与就业数据。"
     },
     "title": {
       "availability": "available",
       "text": "清洗与金属酸洗设备操作员"
     }
   },
-  "source_content_sha256": "9ffb5e6ba0bc98a502fac577be8e3b5a8c9f5447c503666d5d6b415b5b8f230b",
+  "source_content_sha256": "e23c4e2da981e7fee803692ca66f44ab88db4e52a558e9d5fe0108c366d7e402",
   "subject": {
     "canonical_slug": "cleaning-washing-and-metal-pickling-equipment-operators-and-tenders",
     "name": "清洗与金属酸洗设备操作员",

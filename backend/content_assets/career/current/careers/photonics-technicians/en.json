@@ -23377,14 +23377,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Next, check the education, training, and job authority required in the target location; a fictional exercise cannot replace real work authorization."
+              "Paper check | Compare a fictional test sheet with an instrument register. Flag a conflicting calibration ID and give both original references to the test lead. "
             ]
           },
           "id": "photonics-technicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "ep",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23690,12 +23688,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Photonics technicians build, install, test, or maintain lasers, lenses, mirrors, fiber optics, and other equipment, using tools such as spectrometers and interferometers to record data and hand over."
+              "Photonics technicians help set up and maintain optical test equipment, check calibration status and record samples and readings against the designated procedure. Engineers use those records to trace measurement conditions. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "photonics-technicians.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "transfer-onet-17-3029.08"
           ],
           "type": "prose"
         },
@@ -24776,14 +24774,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Trial work order organization, label comparison, and draft handovers; fixed equipment automation, simulation, and GenAI differ. This page has no verified occupational adoption rate, replacement share, or individual unemployment probability; parent category overall projections do not isolate AI causation. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional test sheet with an instrument register. Flag a conflicting calibration ID and give both original references to the test lead."
             ]
           },
           "id": "photonics-technicians.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ep",
-            "onet-wages",
-            "editor"
+            "transfer-onet-17-3029.08",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33099,6 +33096,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-17-3029.08",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 17-3029.08 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/17-3029.08"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38348,10 +38372,10 @@
       "text": "Photonics Technicians"
     }
   },
-  "source_content_sha256": "5cdeabee4124a149f7e474b22deff5c6bb5dfc4702728cfab0b663aa6ec89f73",
+  "source_content_sha256": "672c458bd98db51547b3597cb305cd0ec17452ac8c82fb57e28bc0b6b3b2eb96",
   "subject": {
     "canonical_slug": "photonics-technicians",
     "name": "Photonics Technicians",
-    "summary": "Photonics technicians (O*NET 17-3029.08) assemble, install, test, or maintain optical equipment such as lasers, lenses, mirrors, and fiber optics and record test data. Working with work orders, device batches, calibration status, test conditions, and safety authorization, they produce reviewable assembly and test records, anomaly isolation, and equipment maintenance handovers. Laser, electrical, cleanroom, and precision equipment operations must follow institutional training and authorization. Work settings, qualifications, and final responsibility must be checked against local and institutional rules."
+    "summary": "Photonics technicians help set up and maintain optical test equipment, check calibration status and record samples and readings against the designated procedure. Engineers use those records to trace measurement conditions."
   }
 }

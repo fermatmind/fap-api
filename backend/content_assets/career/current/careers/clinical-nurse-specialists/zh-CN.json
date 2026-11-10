@@ -1490,6 +1490,9 @@
       "item:clinical-nurse-specialists.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:clinical-nurse-specialists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:clinical-nurse-specialists.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31158,6 +31161,21 @@
           "id": "clinical-nurse-specialists.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。甲病区的新交接表已启用但无复核日期，乙病区的复核结果仍引用旧版。写下改进负责人需要补核的依据。"
+            ]
+          },
+          "id": "clinical-nurse-specialists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "读专科护理改进记录",
+          "type": "notice"
         }
       ]
     },
@@ -37898,6 +37916,13 @@
         "id": "clinical-nurse-specialists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "clinical-nurse-specialists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38560,7 +38585,7 @@
       "text": "临床护士专员"
     }
   },
-  "source_content_sha256": "6a8760c72c51912b60d655a8ce52c00f99cd8e6dbfbcb5cbdd9fbf1010e4d9f4",
+  "source_content_sha256": "2c5467c7f54bc908046b6bc8ba63a7d21a9538a4199b9028ea4edfe1704fdb99",
   "subject": {
     "canonical_slug": "clinical-nurse-specialists",
     "name": "临床护士专员",

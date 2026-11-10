@@ -191,6 +191,9 @@
       "item:new-accounts-clerks.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:new-accounts-clerks.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:new-accounts-clerks.profile.definition-block.1": {
         "status": "pending_mapping"
       },
@@ -13017,6 +13020,21 @@
             "pbc-aml"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The application is entered, but the identity-check field is blank. State what is complete and which authorized role should verify the missing step."
+            ]
+          },
+          "id": "new-accounts-clerks.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check a new account intake",
+          "type": "notice"
         }
       ]
     },
@@ -15587,6 +15605,13 @@
         "id": "new-accounts-clerks.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "new-accounts-clerks.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15928,7 +15953,7 @@
       "text": "New accounts clerks"
     }
   },
-  "source_content_sha256": "bf85057e4e840f2f60b15e8c5a80851b124d7613c6776cb05bc25202a94246ac",
+  "source_content_sha256": "79102fec153d3523775200fe36819132bda139fda6840013f135278e26fd4595",
   "subject": {
     "canonical_slug": "new-accounts-clerks",
     "name": "New accounts clerks",

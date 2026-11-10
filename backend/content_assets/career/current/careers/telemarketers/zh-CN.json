@@ -23665,14 +23665,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "观察自己能否听完问题、核对产品价格版本、如实说明不确定内容并记录客户选择。面对拒绝停止推销，遇到退款或专业问题交授权人员处理；同时评估目标压力、重复通话与收入条件。"
+              "纸面体验｜对照虚构通话记录与跟进列表，找出一条明确拒绝再次联系却仍排入队列的记录，交给主管核对。 "
             ]
           },
           "id": "telemarketers.display.fermat_decision_card.summary",
           "source_refs": [
-            "editorial",
-            "onet",
-            "cn-rule"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24849,12 +24847,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "电话销售员通过电话介绍商品服务并征求订单或捐赠，倾听需求、解释已核价格条件、维护联系和交易记录及预约。中国商业电话需先核消费者同意，取消后立即停止；具体产品权限和订单流程按组织及法域核。"
+              "电话营销人员通过来电或外呼介绍商品、服务或募捐项目，回答问题并记录反馈、订单或后续安排。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "telemarketers.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-41-9041.00"
           ],
           "type": "prose"
         }
@@ -25533,15 +25531,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：既有外部资料未提供可直接采用的实测可复核的41-9041任务级AI评分。可探索记录与价目核对草稿，但联系依据、价格和客户取消由人按组织流程核；不给个人失业概率。 另列美国41-9041的2025—2035总体就业预测-21.4%、年均5,800个空缺（含替补），仅作就业背景，非AI归因。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构通话记录与跟进列表，找出一条明确拒绝再次联系却仍排入队列的记录，交给主管核对。"
             ]
           },
           "id": "telemarketers.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial",
-            "onet",
-            "nist",
-            "bls"
+            "transfer-onet-41-9041.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33102,6 +33098,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-41-9041.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 41-9041.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/41-9041.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38585,10 +38608,10 @@
       "text": "电话销售员"
     }
   },
-  "source_content_sha256": "e38cd2611dd585399bbaea066f311b7b26953811ed49f42fea15dfaff2f8241e",
+  "source_content_sha256": "68c786c586adad8aa11e78e9a3c11c43e367f1c1f990cc0a255adc65e11363b6",
   "subject": {
     "canonical_slug": "telemarketers",
     "name": "电话销售员",
-    "summary": "通过电话介绍商品服务并征求订单或捐赠，听清需求、解释已核费用、维护联系与交易记录。中国商业电话需先核消费者同意，取消后立即停止；产品权限和实际交易按组织及法域核。"
+    "summary": "电话营销人员通过来电或外呼介绍商品、服务或募捐项目，回答问题并记录反馈、订单或后续安排。"
   }
 }

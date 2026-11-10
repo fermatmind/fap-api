@@ -132,7 +132,7 @@
         "status": "mapped"
       },
       "item:operating-engineers-and-other-construction-equipment-operators.path.credential-boundary.8": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:operating-engineers-and-other-construction-equipment-operators.path.credential-decision.7": {
         "status": "mapped"
@@ -146,6 +146,9 @@
       "item:operating-engineers-and-other-construction-equipment-operators.path.entry-role-comparison.2": {
         "status": "mapped"
       },
+      "item:operating-engineers-and-other-construction-equipment-operators.path.entry-work-sample-data.10": {
+        "status": "pending_mapping"
+      },
       "item:operating-engineers-and-other-construction-equipment-operators.path.interview-probation.5": {
         "status": "mapped"
       },
@@ -153,7 +156,7 @@
         "status": "pending_mapping"
       },
       "item:operating-engineers-and-other-construction-equipment-operators.path.seven-day-trial.6": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:operating-engineers-and-other-construction-equipment-operators.profile.career-quick-answers-block.4": {
         "status": "mapped"
@@ -12230,7 +12233,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Direct judgment: If you are willing to operate heavy equipment at outdoor construction sites, follow signals and underground utility protection, and can stop work and escalate when anomalies occur, you can explore this occupation"
+              "If schedule pressure makes you overlook equipment condition, personnel in the work area or who gives clearance, try the paper handoff before seeking site training."
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.quick-decision.fermat-decision-card.1",
@@ -12244,7 +12247,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Positive evidence: Can continuously observe personnel positions, equipment blind spots, and ground conditions amid noise, weather, and multi-person coordination."
+              "In 09 Getting started, qualifications, and career development, find “OE-08: Review a Shift Handoff.” Use the fictional records to write a start-or-hold decision and a handoff from the fictional records. Read the answer key after finishing."
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.quick-decision.fit-decision-checklist.2",
@@ -12258,7 +12261,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Safe trial: Use a fictional site plan to mark equipment travel routes, underground utilities, blind spots, and stop-work conditions; do not actually operate machinery"
+              "Explore this work if you can stop at an incomplete handoff and record exactly what must be verified."
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.quick-decision.fit-decision-checklist.3",
@@ -12980,13 +12983,10 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Safe exploration uses fictional samples only: use a fictional site plan to mark equipment travel routes, underground utilities, blind spots, and stop-work conditions; do not actually operate machinery; real work must first meet training and authorization requirements."
+              "Start with the fictional OE-08 and W-OE handoff records on this page. Record missing evidence and who can check it. Real equipment work requires appropriate training and authorization."
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.path.recruitment-sample.1",
-          "source_refs": [
-            "onet-cert"
-          ],
           "type": "notice"
         },
         {
@@ -13052,30 +13052,74 @@
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.employer-evidence.1",
                 "values": [
-                  "Pre-shift inspection sample",
-                  "Check equipment, hydraulics, brakes, warnings, and the work zone."
+                  "Authorized work: pre-shift records",
+                  "Employers may check how authorized staff document inspection results and unresolved defects."
                 ]
               },
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.employer-evidence.2",
                 "values": [
-                  "Route confirmation sample",
-                  "Read drawings, terrain, underground utilities, and personnel access routes."
+                  "Authorized work: route coordination",
+                  "Employers may check how authorized staff confirm the work area and pass unresolved issues to the site lead."
                 ]
               },
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.employer-evidence.3",
                 "values": [
-                  "Equipment operation sample",
-                  "Start, move, and control excavation or grading by signals."
+                  "Authorized work: equipment operation",
+                  "Employers may observe trained and authorized staff during assigned work. Use only the supplied fictional records for the paper exercise."
                 ]
               }
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.path.employer-evidence.3",
           "source_refs": [
-            "onet-cert"
+            "onet-details"
           ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Materials: fictional OE-08",
+                  "Shift record S-18 marks routine inspection complete. The defect line still reads “unresolved,” with no maintenance sign-off.",
+                  "The work-area sheet says ground crew was assigned. It has no clearance time or named lead’s release; the prior shift’s release is marked expired.",
+                  "For this paper exercise, the site rule requires a maintenance sign-off for unresolved defects and a current work-area release before work can start."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Write what the record proves, whether work can start, and which two records you would request.",
+                  "Identify who verifies each item and who can release the assignment. Do not simulate machine controls."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Answer key",
+                  "The inspection completion does not resolve the open defect. The ground-crew assignment and expired release do not clear the work area. Hold the assignment.",
+                  "Request maintenance sign-off and current work-area clearance. Refer the revised record to the designated site lead for the release decision."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Check the two missing records, decision and approval owner. Use only paper records; no actual equipment or site access.",
+                  "One point per item only if it refers to supplied evidence."
+                ]
+              }
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.path.entry-work-sample-data.10",
+          "title": "OE-08: Review a Shift Handoff",
           "type": "cards"
         },
         {
@@ -13086,25 +13130,22 @@
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.portfolio.one",
                 "values": [
-                  "Pre-shift inspection sample",
-                  "Check equipment, hydraulics, brakes, warnings, and the work zone.",
-                  "Pre-shift inspection, travel routes, work records, and anomaly stop-work handover"
+                  "OE-08: record check",
+                  "Use the supplied fictional handoff to list what is documented and which approvals are missing.",
+                  "Write the current status and who can verify each record."
                 ]
               },
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.portfolio.two",
                 "values": [
-                  "Route confirmation sample",
-                  "Read drawings, terrain, underground utilities, and personnel access routes.",
-                  "Pre-shift inspection, travel routes, work records, and anomaly stop-work handover"
+                  "W-OE: handoff note",
+                  "Compare the equipment IDs in the supplied paper records.",
+                  "Write the follow-up questions and identify who can clear the next step. Self-check against the records."
                 ]
               }
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.path.entry-portfolio.4",
-          "source_refs": [
-            "onet-cert"
-          ],
           "type": "cards"
         },
         {
@@ -13158,30 +13199,56 @@
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.trial.day1",
                 "values": [
-                  "Pre-shift inspection sample",
-                  "Check equipment, hydraulics, brakes, warnings, and the work zone."
+                  "Day 1",
+                  "Start W-OE. A current release is signed, but the records use two machine IDs: Q2 on inspection and Q7 on dispatch. Copy both IDs and label their sources."
                 ]
               },
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.trial.day3",
                 "values": [
-                  "Route confirmation sample",
-                  "Read drawings, terrain, underground utilities, and personnel access routes."
+                  "Day 2",
+                  "Add the maintenance note: the defect is marked resolved for Q2 only. Identify which document applies to which unit."
                 ]
               },
               {
                 "id": "operating-engineers-and-other-construction-equipment-operators.trial.day7",
                 "values": [
-                  "Equipment operation sample",
-                  "Start, move, and control excavation or grading by signals."
+                  "Day 3",
+                  "Compare the records to the required machine identity before any work. List what still cannot be verified."
+                ]
+              },
+              {
+                "id": "entry-trial-extra-day-4",
+                "values": [
+                  "Day 4",
+                  "Write one request to dispatch and one to maintenance to reconcile the records."
+                ]
+              },
+              {
+                "id": "entry-trial-extra-day-5",
+                "values": [
+                  "Day 5",
+                  "Draft a decision for the site lead with evidence, missing information and release responsibility."
+                ]
+              },
+              {
+                "id": "entry-trial-extra-day-6",
+                "values": [
+                  "Day 6",
+                  "Independently trace each status and request to the supplied records, then revise one line. A second reader is optional."
+                ]
+              },
+              {
+                "id": "entry-trial-extra-day-7",
+                "values": [
+                  "Day 7",
+                  "Decide whether the work of stopping and handing off ambiguity suits you. No live operation is required."
                 ]
               }
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.path.seven-day-trial.6",
-          "source_refs": [
-            "onet-cert"
-          ],
+          "title": "Seven-day paper trial: a separate case",
           "type": "timeline"
         },
         {
@@ -13256,7 +13323,7 @@
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.path.credential-decision.7",
           "source_refs": [
-            "onet-cert"
+            "bls-2025-35-47-2073"
           ],
           "type": "table"
         },
@@ -13265,12 +13332,16 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "BLS lists a high school diploma or equivalent, usually with moderate-term on-the-job training; specific equipment permits and site authorization are verified by region and employer.; Real duties depend on local rules and employer authorization, and changing roles requires training for the target position."
+              "In BLS Table 1.2, U.S. 47-2073 typically enters with a high school diploma or equivalent, no related work experience and moderate-term on-the-job training. Actual hiring, equipment qualifications and site authorization vary.",
+              "The historical Qinshui vacancy required an excavator operating certificate and a practical test. Applications closed June 5, 2026. The notice does not identify the certificate issuer or grant site clearance.",
+              "The national standard 6-30-05-05 is for skill assessment; check certificate type and project authorization separately."
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.path.credential-boundary.8",
           "source_refs": [
-            "onet-cert"
+            "bls-2025-35-47-2073",
+            "cn-qinshui-excavator-20260601",
+            "cn-mohrss-6300505"
           ],
           "type": "notice"
         },
@@ -13398,12 +13469,12 @@
                 ]
               },
               {
-                "answer": "BLS lists a high school diploma or equivalent, usually with moderate-term on-the-job training; specific equipment permits and site authorization are verified by region and employer.",
+                "answer": "In BLS Table 1.2, U.S. 47-2073 typically enters with a high school diploma or equivalent, no related work experience and moderate-term on-the-job training. Actual hiring, equipment qualifications and site authorization vary.",
                 "id": "operating-engineers-and-other-construction-equipment-operators.faq.3",
                 "question": "What is needed to enter?",
                 "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.fit",
                 "source_refs": [
-                  "onet-details"
+                  "bls-2025-35-47-2073"
                 ]
               },
               {
@@ -13434,7 +13505,7 @@
                 ]
               },
               {
-                "answer": "The U.S. 47-2073 had a 2025 median annual wage of 59850 U.S. dollars; overall growth of 4.6% and a net increase of 22300 people over 2025—2035, with annual average openings of 39200 including replacements, not current hiring, AI adoption replacement, or individual layoffs.",
+                "answer": "BLS 47-2073: $59,850 median annual wage in May 2025; 489,500 jobs in 2025 and 511,800 projected for 2035 (+4.6%); about 39,200 annual openings. The wider 47-2070 group includes separate paving and pile-driver occupations.",
                 "id": "operating-engineers-and-other-construction-equipment-operators.faq.7",
                 "question": "U.S. wages and outlook?",
                 "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.us-pay",
@@ -13443,39 +13514,37 @@
                 ]
               },
               {
-                "answer": "Use a fictional site plan to mark equipment travel routes, underground utilities, blind spots, and stop-work conditions; do not actually operate machinery",
+                "answer": "Use the fictional OE-08 and W-OE records in Section 09 to check what is missing and who can authorize the next step. No map or equipment is needed.",
                 "id": "operating-engineers-and-other-construction-equipment-operators.faq.8",
                 "question": "How to explore safely?",
-                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.education-path",
-                "source_refs": [
-                  "onet-details"
-                ]
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.education-path"
               },
               {
-                "answer": "Operate powered construction equipment such as excavators, bulldozers, graders, and loaders to excavate, move, and grade; follow site safety rules, inspect equipment, and coordinate with ground personnel.",
+                "answer": "Check current records, exceptions and who holds authorization before deciding. Section 09 has the paper handoff exercise.",
                 "id": "operating-engineers-and-other-construction-equipment-operators.faq.9",
-                "question": "What do construction equipment operators do?",
+                "question": "Does inspection alone clear a shift?",
                 "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.risk-boundary",
                 "source_refs": [
                   "onet-details"
                 ]
               },
               {
-                "answer": "Check equipment, hydraulics, brakes, warnings, and the work zone.; Read drawings, terrain, underground utilities, and personnel access routes.; Start, move, and control excavation or grading by signals.; Excavate, load, and move materials within the permitted scope.",
+                "answer": "Record what you observe and identify the authorized maintenance and site roles for review.",
                 "id": "operating-engineers-and-other-construction-equipment-operators.faq.10",
-                "question": "What are the key tasks?",
+                "question": "Who verifies a shift handoff?",
                 "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.outlook-transition",
                 "source_refs": [
                   "onet-details"
                 ]
               },
               {
-                "answer": "BLS lists a high school diploma or equivalent, usually with moderate-term on-the-job training; specific equipment permits and site authorization are verified by region and employer.",
+                "answer": "The historical Qinshui vacancy required an excavator operating certificate and a practical test. Applications closed June 5, 2026. The notice does not identify the certificate issuer or grant site clearance. The national standard 6-30-05-05 is for skill assessment; check certificate type and project authorization separately.",
                 "id": "operating-engineers-and-other-construction-equipment-operators.faq.11",
-                "question": "What is needed to enter?",
+                "question": "What may a China vacancy ask for?",
                 "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.career-worth",
                 "source_refs": [
-                  "onet-details"
+                  "cn-qinshui-excavator-20260601",
+                  "cn-mohrss-6300505"
                 ]
               }
             ]
@@ -13520,28 +13589,28 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Construction equipment operator",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Construction equipment operator",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Construction equipment operator",
+                "entity": "Construction equipment work overview",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/career/jobs/construction-equipment-operators"
               },
               {
-                "entity": "Construction equipment operator",
+                "entity": "Construction laborers",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/career/jobs/construction-laborers"
               },
               {
                 "entity": "Construction equipment operator",
@@ -13869,6 +13938,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The June 2026 dispatch recruitment required an excavator operating certificate and a practical test for the excavator role. Its application window is past; requirements apply to this example."
+                ],
+                "evidence_type": "Original notice",
+                "id": "cn-qinshui-excavator-20260601",
+                "limitation": "The June 2026 dispatch recruitment required an excavator operating certificate and a practical test for the excavator role. Its application window is past; requirements apply to this example.",
+                "market": "CN",
+                "name": "Qinshui excavator operator recruitment notice",
+                "period": "2026-06-01",
+                "publisher": "Qinshui County Government",
+                "scope": "Historical vacancy example",
+                "url": "https://www.qinshui.gov.cn/zwgk_372/gkzp/202606/t20260601_2355704.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Skill assessment for excavation, earthmoving and piling machinery operators. Site operating authority is determined separately."
+                ],
+                "evidence_type": "Official original",
+                "id": "cn-mohrss-6300505",
+                "limitation": "Skill assessment for excavation, earthmoving and piling machinery operators. Site operating authority is determined separately.",
+                "market": "CN",
+                "name": "MOHRSS national occupational skill standard 6-30-05-05",
+                "period": "2023 edition",
+                "publisher": "Ministry of Human Resources and Social Security; Ministry of Housing and Urban-Rural Development",
+                "scope": "Skill assessment for excavation, earthmoving and piling machinery operators. Site operating authority is determined separately.",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/zyyjnpj/202304/W020230414729511815491.pdf"
               }
             ]
           },
@@ -14375,6 +14474,18 @@
             "id": "faa",
             "label": "Work activities",
             "scope": "U.S. 47-2073.00 precise occupation"
+          },
+          {
+            "href": "https://www.qinshui.gov.cn/zwgk_372/gkzp/202606/t20260601_2355704.shtml",
+            "id": "cn-qinshui-excavator-20260601",
+            "label": "Qinshui excavator operator recruitment notice",
+            "scope": "The June 2026 dispatch recruitment required an excavator operating certificate and a practical test for the excavator role. Its application window is past; requirements apply to this example."
+          },
+          {
+            "href": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/zyyjnpj/202304/W020230414729511815491.pdf",
+            "id": "cn-mohrss-6300505",
+            "label": "MOHRSS national occupational skill standard 6-30-05-05",
+            "scope": "Skill assessment for excavation, earthmoving and piling machinery operators. Site operating authority is determined separately."
           }
         ],
         "tracks": [
@@ -15307,11 +15418,11 @@
             "transition_distance": "Check training and authorization separately for the target occupation."
           },
           {
-            "capability_gaps": "Job classification and industry differ",
+            "capability_gaps": "Surface mining has its own site and equipment requirements.",
             "shared_capabilities": "Machine control, spatial judgment, site observation, crew communication, and safe stop-work",
-            "target_href": "/zh/career/jobs/excavating-and-loading-machine-and-dragline-operators",
-            "target_slug": "excavating-and-loading-machine-and-dragline-operators",
-            "target_title": "Excavating and loading machine operator",
+            "target_href": "/en/career/jobs/excavating-and-loading-machine-and-dragline-operators-surface-mining",
+            "target_slug": "excavating-and-loading-machine-and-dragline-operators-surface-mining",
+            "target_title": "Excavating and loading machine operator (surface mining)",
             "transition_distance": "Check training and authorization separately for the target occupation."
           },
           {
@@ -15528,12 +15639,12 @@
             "watchouts": "Target occupation education, qualifications, and responsibility scope require separate verification."
           },
           {
-            "direction": "Excavating and loading machine operator",
+            "direction": "Excavating and loading machine operator (surface mining)",
             "fit_signals": "Likes specific excavation equipment",
             "target": {
-              "href": "/en/career/jobs/excavating-and-loading-machine-and-dragline-operators",
-              "slug": "excavating-and-loading-machine-and-dragline-operators",
-              "title": "Excavating and loading machine operator"
+              "href": "/en/career/jobs/excavating-and-loading-machine-and-dragline-operators-surface-mining",
+              "slug": "excavating-and-loading-machine-and-dragline-operators-surface-mining",
+              "title": "Excavating and loading machine operator (surface mining)"
             },
             "watchouts": "Target occupation education, qualifications, and responsibility scope require separate verification."
           },
@@ -15714,7 +15825,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI assessment (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -15724,7 +15835,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five personality assessment (English)"
+            "label": "Big Five personality test"
           },
           {
             "href": {
@@ -15734,7 +15845,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI assessment (Chinese)"
+            "label": "Construction equipment work overview"
           },
           {
             "href": {
@@ -15744,7 +15855,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five personality assessment (Chinese)"
+            "label": "Construction laborers"
           }
         ]
       },
@@ -15771,6 +15882,13 @@
         "block": "path",
         "copy_key": "career.item.employer-evidence",
         "id": "operating-engineers-and-other-construction-equipment-operators.path.employer-evidence.3",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "operating-engineers-and-other-construction-equipment-operators.path.entry-work-sample-data.10",
         "location": "entry_decisions",
         "type": "cards"
       },
@@ -16020,14 +16138,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Understand the real tasks of construction equipment operators, U.S. 2025 occupational wages and 2025—2035 employment projections, and the boundaries of Chinese wage evidence."
+      "text": "Explore the 47-2073 operator role, an excavator hiring example, U.S. pay and a paper exercise on shift clearance."
     },
     "title": {
       "availability": "available",
-      "text": "Construction equipment operator: work, wages, and entry paths"
+      "text": "Construction equipment operator: inspection and shift handoff"
     }
   },
-  "source_content_sha256": "22aecd70c1c3b6e8beee2ab34856a1c4664a9ffcdd225e829bb3e7a042ff055f",
+  "source_content_sha256": "89052fb9ee299b33dcb642900527a3638bdecac5edc97f55be983268ed7d3d1c",
   "subject": {
     "canonical_slug": "operating-engineers-and-other-construction-equipment-operators",
     "name": "Construction equipment operator",

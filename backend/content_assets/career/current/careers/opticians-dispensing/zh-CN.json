@@ -158,6 +158,9 @@
       "item:opticians-dispensing.path.seven-day-trial.8": {
         "status": "mapped"
       },
+      "item:opticians-dispensing.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:opticians-dispensing.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -13056,6 +13059,21 @@
             "onet-education"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。订单确认了镜架型号，但顾客试戴记录用了另一尺寸。写下要核的订单字段、实物标签和要交接给谁。"
+            ]
+          },
+          "id": "opticians-dispensing.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "核配镜订单与镜架交接",
+          "type": "notice"
         }
       ]
     },
@@ -15567,6 +15585,13 @@
         "id": "opticians-dispensing.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "opticians-dispensing.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15760,7 +15785,7 @@
       "text": "配镜师：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "835c283865fbc641cd52e0795f766837f338dbb7a6e549f7b1a882fd9388e8c4",
+  "source_content_sha256": "436646c0629a1d7d9a38319ba6953a5b9d368754254408251a6998e292f538da",
   "subject": {
     "canonical_slug": "opticians-dispensing",
     "name": "配镜师",

@@ -23659,13 +23659,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "You can observe whether you can keep checking specifications, materials and process records that recur, and accurately explain inconsistencies to the person in charge when you find them. Both machine tire building and used tire retreading require carrying out instructions, but the specific materials, processes and training differ; experience results still need to be judged together with actual factory conditions."
+              "Paper check | Compare casing and tread batches on a fictional work order. Flag an ID that appears only on the handoff and refer it to the crew. "
             ]
           },
           "id": "tire-builders.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24803,13 +24802,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Tire builders operate equipment to build designated rubber compound and components into tires or treads; the tasks may include used tire retreading. The work result is this operation's processing and assembly result together with the corresponding records; specific quality and safety requirements are confirmed according to factory specifications, training and the division of responsibility."
+              "Tire builders process casings or assemble treads to production requirements and inspect materials and output. Some work in retreading. Batch and process records need to trace back to the casing. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tire-builders.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-9197.00"
           ],
           "type": "prose"
         }
@@ -25473,13 +25471,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: reviewable task scores, national adoption and net AI employment impact for tire builders. Official tasks and general methods issue no scores; the BLS2025—2035 overall growth of 0.8%, the ten-year net increase of about 200 people and the annual average of 1900 openings that includes replacements are component indicators, not AI causality. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+25)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare casing and tread batches on a fictional work order. Flag an ID that appears only on the handoff and refer it to the crew."
             ]
           },
           "id": "tire-builders.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-9197.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32902,6 +32900,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-9197.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-9197.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-9197.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38378,10 +38403,10 @@
       "text": "Tire builders"
     }
   },
-  "source_content_sha256": "b9ab76d3c36527ad95fe6eb3c2a43200abe2e10cf98093c06dba11ea382405c4",
+  "source_content_sha256": "4e489eb98af9b008d32c048855ee166dd07bd6e855c7b09740a5760ad392bac7",
   "subject": {
     "canonical_slug": "tire-builders",
     "name": "Tire builders",
-    "summary": "Tire builders operate equipment to assemble components such as rubber compound and cord fabric into a casing or tread to specification, and may also process used casings on a retreading line. The focus is specification correspondence, material identification, joining quality and anomaly records; it carries out different tasks from shop tire mounting and dismounting, formula research and development, and equipment repair. You can start with the paper work order checking practice on this page to observe whether you are willing to check batch numbers, quantities and conditions awaiting confirmation repeatedly, then learn about the shifts and training in an actual factory."
+    "summary": "Tire builders process casings or assemble treads to production requirements and inspect materials and output. Some work in retreading. Batch and process records need to trace back to the casing."
   }
 }

@@ -143,6 +143,9 @@
       "item:mobile-heavy-equipment-mechanics-except-engines.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:mobile-heavy-equipment-mechanics-except-engines.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:mobile-heavy-equipment-mechanics-except-engines.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13218,6 +13221,21 @@
             "onet-cert"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。挖掘机 H3 报液压动作变慢，交接单另附一张未标机号的漏油照片。把已记录的症状与待确认的照片分开，写给维修负责人的待核项。"
+            ]
+          },
+          "id": "mobile-heavy-equipment-mechanics-except-engines.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "写移动重型设备维修交接",
+          "type": "notice"
         }
       ]
     },
@@ -15653,6 +15671,13 @@
         "id": "mobile-heavy-equipment-mechanics-except-engines.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mobile-heavy-equipment-mechanics-except-engines.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15810,7 +15835,7 @@
       "text": "移动重型设备机械师：工作内容、美国工资与安全 | 费马测试"
     }
   },
-  "source_content_sha256": "34eff3e94a9fadf9961d07541ac1e3c455532c54095cf494c1143c34f3967e33",
+  "source_content_sha256": "f57e6456db779a867a6497930f41b34a1ddac0e7232932f70d718e68fd6d4f08",
   "subject": {
     "canonical_slug": "mobile-heavy-equipment-mechanics-except-engines",
     "name": "移动重型设备机械师",

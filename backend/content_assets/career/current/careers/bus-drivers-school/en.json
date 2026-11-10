@@ -14,9 +14,6 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -27,7 +24,7 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-2035": {
         "status": "pending_mapping"
@@ -39,7 +36,7 @@
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-current": {
         "status": "pending_mapping"
@@ -72,13 +69,13 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-current": {
         "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-high10-2025": {
         "status": "pending_mapping"
@@ -23366,10 +23363,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "One-sentence judgment: a school bus driver is not \"taking students from point A to point B,\" but picking up and dropping off students at fixed points on a strict schedule, being responsible for student safety while boarding, alighting, and riding, and maintaining order in the cabin. The U.S. side corresponds to O*NET-SOC 53-3051.00, which O*NET lists as Job Zone 1-2 (preparation from little to some, SVP below 6.0), and Bright Outlook is not marked. The core boundary is: you may independently complete pre-departure vehicle and safety equipment inspections, run the approved route and schedule, apply boarding, alighting, and crossing safety rules, maintain order, and report faults and accidents; but you may not change the approved route and stops on your own, may not carry students beyond capacity, and may not drive a school bus without holding a school bus driving qualification."
+              "The work centers on student transport, pre-trip checks and exception handovers. The employer and applicable rules determine shifts, vehicle and route."
             ]
           },
           "id": "bus-drivers-school.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "onet-details",
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -23377,10 +23378,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: your interest in \"delivering a busload of students safely and on time with good order\" is greater than in \"whether the route is new,\" and you are willing to repeatedly execute the same route per a strict schedule and safety rules; you can stay calm and adhere to procedures amid noisy students, complex road conditions, and parent communication pressure; you accept split morning and afternoon schedules and seasonal arrangements and are willing to learn first aid basics and emergency handling."
+              "Try the SB-47 paper check to see how you keep two versions and hand off open items."
             ]
           },
           "id": "bus-drivers-school.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23388,7 +23392,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions for pausing high-cost investment first: you have not yet, while holding the driving license for the corresponding vehicle class and having obtained the school bus driving qualification, completed under mentoring or supervision a full closed loop from pre-departure inspection, on-schedule pickup and drop-off, boarding, alighting, and crossing safety execution, order maintenance, and anomaly reporting, to end-of-shift records; or you are unwilling to manage students per safety rules and cannot accept split schedules and seasonal arrangements; also, do not treat \"can drive a car or an ordinary bus\" as proof that you can drive a school bus."
+              "Complete SB-47 independently first. If you want to explore the role further, ask the employer about driver and attendant duties, shifts, training and eligibility. The paper exercise grants no authority to drive, supervise students or authorize a trip."
             ]
           },
           "id": "bus-drivers-school.quick-decision.fit-decision-checklist.3",
@@ -23399,10 +23403,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education, qualifications, and authorization must be verified separately: O*NET lists this occupation's preparation level as Job Zone 1-2 (SVP below 6.0), usually requiring a high school diploma or equivalent or GED, with on-the-job training from a few days to a year; in the United States, school bus drivers usually need the school bus and passenger endorsements on a commercial driver's license (CDL) and must meet driving record, medical examination, and vision and hearing requirements, and usually pass a background check; in mainland China, school bus drivers shall obtain the school bus driving qualification under the Regulations on the Safety Management of School Buses: hold the driving license for the corresponding vehicle class with more than 3 years of driving experience, be at least 25 and no older than 60, have no record of a full 12 points in the most recent 3 consecutive scoring cycles, have no liability record for a traffic accident causing death or serious injury, have no drink-driving or drunk-driving record and no record of serious traffic violations such as overloading or speeding in passenger transport within the most recent 1 year, have no criminal record, and have the public security traffic management department endorse the motor vehicle driving license to permit driving a school bus."
+              "China’s school bus safety regulations require a school bus use permit under Article 14. Articles 23–24 separately require the driver to obtain school bus qualification, endorsed on the license by the traffic authority. A matching standard license is one condition; verify the vehicle permit, driver qualification and hiring separately."
             ]
           },
           "id": "bus-drivers-school.quick-decision.fermat-decision-card.6",
+          "source_refs": [
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -23791,7 +23798,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Article 30 of the regulation provides exceptions where the approved route is affected by traffic control, construction, disasters, severe weather, or major accidents; Article 22 requires suspension of operation and repair when safety conditions are not met. Under Article 42, at an accident the driver and attendant immediately call the police and set up warnings; if students remaining in the vehicle are in danger, the attendant evacuates them to a safe area and makes contact. Protect and report per the actual emergency procedures, and do not wait for approval of an ordinary route change before handling danger. China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. The commercial passenger transport age of 63 cannot replace the school bus age."
+              "Article 30 of the regulation provides exceptions where the approved route is affected by traffic control, construction, disasters, severe weather, or major accidents; Article 22 requires suspension of operation and repair when safety conditions are not met. Under Article 42, at an accident the driver and attendant immediately call the police and set up warnings; if students remaining in the vehicle are in danger, the attendant evacuates them to a safe area and makes contact. Protect and report per the actual emergency procedures, and do not wait for approval of an ordinary route change before handling danger. China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. Apply the school bus qualification rules to school bus driving."
             ]
           },
           "id": "bus-drivers-school.profile.career-quick-answers-block.19",
@@ -23849,7 +23856,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The 2022 Classification Code 4-02-02-01 passenger vehicle driver covers driving motor vehicles to provide passenger transport services, including but not limited to bus and transit drivers and also taxi and ride-hailing drivers, which is a broader related detailed class and does not equal the dedicated U.S. school bus scope 53-3051. The absence of a separately listed school bus title does not imply that China has no related driving detailed class; the specific employment identity and the statutory school bus qualification are verified separately. O*NET2025: education services 51%, transportation and warehousing 36%, government 11%, and other 2%. The OOH school bus section separately details local elementary and secondary schools 48%, school and employee bus transportation 34%, local government (excluding education and hospitals) 11%, and private elementary and secondary schools 2%, which are not exactly the same combined basis; Chinese industries are not inferred from U.S. shares."
+              "The 2022 Classification Code 4-02-02-01 passenger vehicle driver covers driving motor vehicles to provide passenger transport services, including but not limited to bus and transit drivers and also taxi and ride-hailing drivers, which is a broader related detailed class and does not equal the dedicated U.S. school bus scope 53-3051. The absence of a separately listed school bus title does not imply that China has no related driving detailed class; the specific employment identity and the statutory school bus qualification are verified separately. O*NET2025: education services 51%, transportation and warehousing 36%, government 11%. The OOH school bus section separately details local elementary and secondary schools 48%, school and employee bus transportation 34%, local government (excluding education and hospitals) 11%, and private elementary and secondary schools 2%, which are not exactly the same combined basis; Chinese industries are not inferred from U.S. shares."
             ]
           },
           "id": "bus-drivers-school.profile.career-quick-answers-block.24",
@@ -23875,7 +23882,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET new-entrant education Q&A: 59% high school or equivalent, 37% less than high school, and 3% postsecondary certificate, not the education of practitioners. JobZone1—2/SVP below 6 as a preparation range is a general summary; the BLS typical entry for this occupation is a high school diploma / None related experience / short-term on-the-job training, which does not equal several days to one year for every individual. The U.S. CDL is verified by vehicle threshold and state, and transporting the corresponding students to and from school or school activities uses the P/S endorsements; initial licenses or endorsements require separate verification of ELDT and exceptions. China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. The commercial passenger transport age of 63 cannot replace the school bus age."
+              "O*NET new-entrant education Q&A: 59% high school or equivalent, 37% less than high school, and 3% postsecondary certificate, not the education of practitioners. JobZone1—2/SVP below 6 as a preparation range is a general summary; the BLS typical entry for this occupation is a high school diploma / None related experience / short-term on-the-job training, which does not equal several days to one year for every individual. The U.S. CDL is verified by vehicle threshold and state, and transporting the corresponding students to and from school or school activities uses the P/S endorsements; initial licenses or endorsements require separate verification of ELDT and exceptions. China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. Apply the school bus qualification rules to school bus driving."
             ]
           },
           "id": "bus-drivers-school.profile.career-quick-answers-block.26",
@@ -23954,7 +23961,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. The commercial passenger transport age of 63 cannot replace the school bus age. The school bus use permit is applied for by the school or service provider per 14—15 and differs from the driver's individual qualification."
+              "China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. Apply the school bus qualification rules to school bus driving. The school bus use permit is applied for by the school or service provider per 14—15 and differs from the driver's individual qualification."
             ]
           },
           "id": "bus-drivers-school.profile.career-quick-answers-block.32",
@@ -23979,7 +23986,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The OOH notes that part-time work and the school calendar limit working hours; O*NET74% regular / 14% seasonal / 13% irregular is Q&A. Editorially verify wages, split morning and afternoon periods, holidays, trip allowances, and certification costs; no uniform pay frequency was verified."
+              "The OOH notes that part-time work and the school calendar limit working hours; O*NET74% regular / 14% seasonal / 13% irregular is Q&A. Check wages, split morning and afternoon periods, holidays, trip allowances, and certification costs; no uniform pay frequency was verified."
             ]
           },
           "id": "bus-drivers-school.profile.career-quick-answers-block.34",
@@ -24010,7 +24017,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "U.S. 17 tasks as 16Core/1Supplemental, 41 general / 16 detailed activities / 57 context items. The key task ratings 100/99/98/97/95 are correct; the highest general activities are inspecting 83, driving 80, identifying and monitoring each 76, and getting information 73, and it is not communicating with people outside the organization (24) that ranks first."
+              "O*NET work activities include inspecting vehicles and equipment, driving, identifying information and monitoring conditions. Ask the employer which records and handovers belong to the role."
             ]
           },
           "id": "bus-drivers-school.profile.onet-structured-fields-block.1",
@@ -24064,14 +24071,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET2025: education services 51%, transportation and warehousing 36%, government 11%, and other 2%. The OOH school bus section separately details local elementary and secondary schools 48%, school and employee bus transportation 34%, local government (excluding education and hospitals) 11%, and private elementary and secondary schools 2%, which are not exactly the same combined basis; Chinese industries are not inferred from U.S. shares. The detailed profile's 3 software categories are browsers, map creation (AOL MapQuest), and operating systems; the Hot list has 1 specific product, Windows, with hiring percentages NA rather than 0. Categories, products, hiring mentions, and actual deployment or AI adoption are different. O*NET interests R75/C62/S58/E20/I10/A4, with the top three RCS; the 41 specific areas separately list transportation 93, physical and manual 25, protective service 23, mechanical and electrical 22, personal service 20, and social service 19, which are not exclusive RIASEC subcategories or an individual pass line."
+              "O*NET lists educational services (51%), transportation and warehousing (36%), and government (11%) as leading U.S. industries in 2025. BLS separately gives school bus driver median annual wages for selected industries."
             ]
           },
           "id": "bus-drivers-school.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "industry-current",
-            "hot-current",
-            "details-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -24840,7 +24846,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial tool pilot: route queries, inspection records, ledgers, and reports can assist; distinguish the duties of drivers, attendants, schools, and service providers by jurisdiction, and do not attribute all Chinese boarding, alighting, and emergency care to the driver. Articles 38—39 of the Chinese regulation require an on-board attendant throughout the trip, responsible for guiding order beside the vehicle, counting students and confirming safe seating and belting and signaling departure after the door is closed, stopping dangerous behavior, and verifying that all students have left the vehicle on alighting. Drivers inspect the safety and technical condition of the vehicle per Article 41 and are prohibited from departing with hidden hazards; schools and service providers bear system, education, and maintenance duties per 10—12/22, and all student care or permits cannot be attributed to the individual driver."
+              "Route lookup and record tools can help organize information. Driving, supervision and trip authorization follow the actual division of duties."
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.13",
@@ -24866,7 +24872,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorially suggest verifying system authority, data, and review responsibility; drivers, attendants, and school service providers each handle matters per their duties, and the attendant may lawfully stop unsafe operation, so the driver is not given sole final say over all on-site decisions."
+              "Check system authority, data, and review responsibility; drivers, attendants, and school service providers each handle matters per their duties, and the attendant may lawfully stop unsafe operation, so the driver is not given sole final say over all on-site decisions."
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.15",
@@ -24903,14 +24909,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Task exposure, assisting processes, and employment are different indicators; there is no overall replacement rate or year for this occupation in this round. Tool uses are editorial pilots, and current qualification duties must be carried out in accordance with law, but this cannot prove that positions will not decrease in the future. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Scheduling and record tools can flag missing information. Driving, supervising students and handling exceptions remain with the responsible people under local rules. A system checkmark does not replace an on-site check, change a route or authorize departure."
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor-current",
-            "school-current",
-            "ilo-genai"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -25022,12 +25026,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET2025: education services 51%, transportation and warehousing 36%, government 11%, and other 2%. The OOH school bus section separately details local elementary and secondary schools 48%, school and employee bus transportation 34%, local government (excluding education and hospitals) 11%, and private elementary and secondary schools 2%, which are not exactly the same combined basis; Chinese industries are not inferred from U.S. shares."
+              "O*NET lists educational services (51%), transportation and warehousing (36%), and government (11%) as leading U.S. industries in 2025. BLS separately gives school bus driver median annual wages for selected industries."
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "industry-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -25251,7 +25256,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "17 tasks as 16Core/1Supplemental, and the key task importance ratings 100/99/98/97/95 are correct; the top three general activities are inspecting 83, driving 80, and identifying and monitoring each 76, and communication with people outside the organization 24 is not a leading activity."
+              "Approved scheduling and record tools can organize information. The responsible people still handle vehicle checks, driving and student supervision."
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.48",
@@ -25313,12 +25318,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The same BLS page has this occupation's wages, five detailed industry wages, and the projection table, and also the parent summary including transit and intercity; read by section, and do not say that everything is not broken down by industry."
+              "O*NET lists educational services (51%), transportation and warehousing (36%), and government (11%) as leading U.S. industries in 2025. BLS separately gives school bus driver median annual wages for selected industries."
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "ooh-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -25414,7 +25420,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial pilot to verify whether tools can access permitted positioning and on-site data, efficiency, and error; it cannot be assumed that all tools lack on-site information or that efficiency is guaranteed. Output is reviewed against the actual situation, school bus rules, and the division of personnel duties."
+              "Check whether tools can access permitted positioning and on-site data, efficiency, and error; it cannot be assumed that all tools lack on-site information or that efficiency is guaranteed. Output is reviewed against the actual situation, school bus rules, and the division of personnel duties."
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.61",
@@ -25480,13 +25486,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The typical tasks in this round do not list programming as a general driving threshold; editorially suggest learning route, communication, and recording tools per the real position, verify qualifications and safety assessment independently, and do not promise that all employers completely require no programming."
+              "Ask the employer which route, communication and record systems it uses and what training it provides."
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "details-current",
-            "editor-current"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -25579,10 +25584,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the O*NET, BLS, and ILO materials consulted in this round do not provide a basis for the year this occupation will disappear as a whole; this page does not infer a year from task exposure or the degree of automation."
+              "Scheduling and record tools can flag missing information. Occupational projections do not give a date when the job will be replaced."
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.74",
+          "source_refs": [
+            "onet-details",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -25627,7 +25636,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The five steps are this page's editorial verification suggestions, not a uniform statutory approval procedure for all school bus systems."
+              "Ask the employer about data entry, authority, on-site checks and handover. Procedures can differ by operator."
             ]
           },
           "id": "bus-drivers-school.ai-impact.ai-impact-table.78",
@@ -26262,23 +26271,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round did not establish a mainland China national occupational wage distribution that corresponds one-to-one with the U.S. O*NET Bus Drivers, School (53-3051.00); it is handled under the evidence routing (no data that can be safely used), and this page does not display unsupported Chinese occupational wage figures."
+              "This page does not provide a verified mainland national school bus driver wage. Liyang and Wuxi are separate employer examples."
             ]
           },
           "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.7",
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Exact national wages, percentiles, and city monthly salaries for school bus drivers remain insufficient evidence; the actual unit industry background is supplemented separately. 2025 urban unit pre-tax annual average background (yuan/year): education non-private 133539 / private 63908; transportation, warehousing, and postal services non-private 133981 / private 73133. Verify by the actual school or service employer's industry; these are not school bus driver wages or city monthly salaries."
-            ]
-          },
-          "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "nbs-current"
+            "sb-liyang",
+            "sb-wuxi"
           ],
           "type": "prose"
         },
@@ -26287,10 +26286,28 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Wage statistics in mainland China are aggregated by industry category and major occupational group, and this round did not obtain a national occupational wage basis that lists school bus drivers separately."
+              "On November 6, 2026, Liyang Passenger Transport listed 28 transit driver and seven school bus driver posts separately. The school bus posting listed an A1 license held for at least three years, with applications November 9–12. Pay followed company rules and no amount was listed. Applying under the notice does not establish the legal school bus driver qualification. In 2020, the Taihu New Town Primary School affiliated with Wuxi Normal School advertised one school bus driver for a 17-seat vehicle, with three years in the applicable license class. The deadline was March 13 at 16:00. Pay was negotiable, with the listed social insurance and housing fund benefits."
+            ]
+          },
+          "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "sb-liyang",
+            "sb-wuxi"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "NBS publishes wages by industry and broad job group. This release does not separately list national occupational pay for school bus drivers."
             ]
           },
           "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.9",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -26334,10 +26351,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not establish a mainland China national occupational wage precisely matching school bus drivers; this page does not display occupation-level figures, nor does it substitute an industry category average."
+              "Neither posting lists a pay amount. Check the employer’s actual pay terms separately."
             ]
           },
           "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.13",
+          "source_refs": [
+            "sb-liyang",
+            "sb-wuxi"
+          ],
           "type": "prose"
         },
         {
@@ -26460,10 +26481,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round still did not obtain exact wages for school bus drivers in mainland China, nor material on how route scheduling or positioning tools affect occupational wage statistics; industry averages do not replace exact occupational data."
+              "Industry averages do not give a school bus driver’s wage. A list of dispatch tools cannot establish a pay effect."
             ]
           },
           "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.23",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -26485,7 +26509,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial position background: verify the actual education and training requirements, and do not set a uniform Chinese statutory high school threshold."
+              "Confirm education and training with the employer. Typical U.S. entry education does not set a Chinese legal threshold."
             ]
           },
           "id": "bus-drivers-school.china-salary.career-snapshot-primary-locale.25",
@@ -27032,7 +27056,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET53-3051 national wage percentiles and the exact BLS school bus section and the parent summary are verified separately, and it is not broadly said that all of the OOH is only combined."
+              "O*NET displays national BLS occupational percentiles. The BLS handbook lists selected school bus driver industry medians and reports transit and intercity drivers separately."
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.8",
@@ -27174,12 +27198,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET2025: education services 51%, transportation and warehousing 36%, government 11%, and other 2%. The OOH school bus section separately details local elementary and secondary schools 48%, school and employee bus transportation 34%, local government (excluding education and hospitals) 11%, and private elementary and secondary schools 2%, which are not exactly the same combined basis; Chinese industries are not inferred from U.S. shares."
+              "O*NET lists educational services (51%), transportation and warehousing (36%), and government (11%) as leading U.S. industries in 2025. BLS separately gives school bus driver median annual wages for selected industries.;Compare employment shares and wages separately."
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "industry-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27300,13 +27325,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET2025: education services 51%, transportation and warehousing 36%, government 11%, and other 2%. The OOH school bus section separately details local elementary and secondary schools 48%, school and employee bus transportation 34%, local government (excluding education and hospitals) 11%, and private elementary and secondary schools 2%, which are not exactly the same combined basis; Chinese industries are not inferred from U.S. shares. The OOH gives median wages by detailed school bus industry, and part-time work and the school calendar may limit hours; shares cannot be used to infer wages."
+              "O*NET lists educational services (51%), transportation and warehousing (36%), and government (11%) as leading U.S. industries in 2025. BLS separately gives school bus driver median annual wages for selected industries."
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "industry-current",
-            "ooh-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27326,7 +27351,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Editorially compare shifts, additional duties, actual pay, and vacation arrangements in the contract; no magnitude or ranking of income causal factors was obtained, and duties cannot be said to affect income more than driving."
+              "When comparing offers, check shifts, extra duties, pay terms and holiday arrangements."
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.31",
@@ -27393,12 +27418,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS median annual wage for the school bus occupation in that detailed industry, not the average of all industry positions; the same page separately lists other passenger transport at 47620 dollars/year, and wages are not inferred from headcount shares."
+              "The BLS handbook lists occupational annual medians for selected industries. Employment shares do not give wages."
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "ooh-current"
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27435,12 +27460,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS median annual wage for the school bus occupation in that detailed industry, not the average of all industry positions; the same page separately lists other passenger transport at 47620 dollars/year, and wages are not inferred from headcount shares."
+              "The BLS handbook lists occupational annual medians for selected industries. Employment shares do not give wages."
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "ooh-current"
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27477,12 +27502,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS median annual wage for the school bus occupation in that detailed industry, not the average of all industry positions; the same page separately lists other passenger transport at 47620 dollars/year, and wages are not inferred from headcount shares."
+              "The BLS handbook lists occupational annual medians for selected industries. Employment shares do not give wages."
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "ooh-current"
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27505,12 +27530,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "46100 dollars/year (2025 median)"
+              "Not listed in the BLS handbook"
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "ooh-current"
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27519,12 +27544,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS median annual wage for the school bus occupation in that detailed industry, not the average of all industry positions; the same page separately lists other passenger transport at 47620 dollars/year, and wages are not inferred from headcount shares."
+              "The BLS handbook lists occupational annual medians for selected industries. Employment shares do not give wages."
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "ooh-current"
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -27559,13 +27584,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Occupational wages 2025 and projection 2025—2035; the OOH has listed school bus wages for five detailed industries, which differs from the O*NET major category headcount shares."
+              "Check national occupational pay, within-industry occupational medians and employment shares separately."
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "ooh-current",
-            "ep-current"
+            "bls-pay",
+            "bls-entry",
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -27618,12 +27644,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "P90 annual wage 65730 is the statistical high end and does not represent an individual or a universal level; no decomposition by contract, seniority, or other factors was obtained in this round."
+              "The 2025 U.S. 90th percentile was $65,730 a year. That is a position in the national distribution, not an individual offer."
             ]
           },
           "id": "bus-drivers-school.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet-localwages"
+            "bls-pay"
           ],
           "type": "prose"
         }
@@ -27782,19 +27808,19 @@
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Emergency Medical Technicians",
@@ -27953,7 +27979,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The evidence is O*NET work styles and editorial observation; no dedicated Big Five predictive or causal research for this occupation was obtained in this round."
+              "The evidence is O*NET work styles and editorial observation; no dedicated Big Five predictive or causal research for this occupation was obtained on this page."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.7",
@@ -27967,8 +27993,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Editorially observe whether you verify the vehicle, records, and information errors against the checklist.",
-              "Editorially observe whether you act cautiously per the rules, cooperate with the division of care duties, and accept correction; personality scores are not used for causal conclusions."
+              "Notice whether you verify the vehicle, records, and information errors against the checklist.",
+              "Notice whether you act cautiously per the rules, cooperate with the division of care duties, and accept correction; personality scores are not used for causal conclusions."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.8",
@@ -28001,7 +28027,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The O*NET/BLS materials in this round do not provide specific MBTI validity for this occupation, and no type or score threshold is set."
+              "The O*NET/BLS materials on this page do not provide specific MBTI validity for this occupation, and no type or score threshold is set."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.11",
@@ -28110,7 +28136,7 @@
           "data": {
             "entries": [
               "The prolonged sitting, cabin, and weather Q&A describes the U.S. context, not an individual health fitness diagnosis.",
-              "93% daily in an enclosed vehicle, 59% sitting continuously, 36% daily contaminants, and 18% daily cold or heat are correct; actual health, rest protection, and unit conditions are verified separately."
+              "In the U.S. O*NET survey, 93% reported working in an enclosed vehicle daily and 59% reported sitting continually. Ask the employer about rest breaks, protection and vehicle conditions."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.20",
@@ -28143,7 +28169,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Caution 93, integrity 75, attention to detail 68, and dependability 88 are occupational work styles, not emotional intelligence test validity; no emotional intelligence predictive research for this occupation was obtained in this round."
+              "Caution 93, integrity 75, attention to detail 68, and dependability 88 are occupational work styles, not emotional intelligence test validity; no emotional intelligence predictive research for this occupation was obtained on this page."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.23",
@@ -28181,7 +28207,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorially observe rule execution, inspection and reporting, and accepting feedback; the predictive power of these clues was not compared, and actual qualifications and position arrangements are verified separately."
+              "Notice rule execution, inspection and reporting, and accepting feedback; the predictive power of these clues was not compared, and actual qualifications and position arrangements are verified separately."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.26",
@@ -28225,7 +28251,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial comparison: willing to shift from transport to dedicated first aid tasks."
+              "Compare: willing to shift from transport to dedicated first aid tasks."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.29",
@@ -28270,7 +28296,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial comparison: willing to handle parking rules and public communication."
+              "Compare: willing to handle parking rules and public communication."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.32",
@@ -28315,7 +28341,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial comparison: willing to understand the gap relative to traffic policing and order tasks."
+              "Compare: willing to understand the gap relative to traffic policing and order tasks."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.35",
@@ -28360,7 +28386,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial comparison: willing to take on road or school-area passage guidance."
+              "Compare: willing to take on road or school-area passage guidance."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.38",
@@ -28405,7 +28431,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial comparison: willing to care for students throughout the trip, guide them, and verify headcounts."
+              "Compare: willing to care for students throughout the trip, guide them, and verify headcounts."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.41",
@@ -28450,7 +28476,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial comparison: driving, inspection, and communication experience can be discussed."
+              "Compare: driving, inspection, and communication experience can be discussed."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.44",
@@ -28502,7 +28528,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Introversion and extroversion cannot determine fit alone; editorially suggest observing clear communication, driving attention, and accepting feedback, and no basis was obtained that extroversion improves performance in this occupation."
+              "Introversion and extroversion cannot determine fit alone; observe clear communication, driving attention, and accepting feedback, and no basis was obtained that extroversion improves performance in this occupation."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.48",
@@ -28516,7 +28542,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "No basis was obtained in this round for a particular MBTI type being better suited to this occupation; only preferences are discussed, without a type list or predicting hiring."
+              "No basis was obtained on this page for a particular MBTI type being better suited to this occupation; only preferences are discussed, without a type list or predicting hiring."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.49",
@@ -28570,7 +28596,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorially suggest observing handling and communication per procedures under pressure; O*NET styles do not provide an emotional intelligence pass line or predictive validity, and qualifications and training are verified separately."
+              "Observe handling and communication per procedures under pressure; O*NET styles do not provide an emotional intelligence pass line or predictive validity, and qualifications and training are verified separately."
             ]
           },
           "id": "bus-drivers-school.fit.personality-fit-block.53",
@@ -28741,7 +28767,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial fit observation: driving standards, cooperation with care duties, inspection reporting, and revision based on feedback; its predictive power was not compared in this round, and actual qualifications are verified separately."
+              "Editorial fit observation: driving standards, cooperation with care duties, inspection reporting, and revision based on feedback; its predictive power was not compared on this page, and actual qualifications are verified separately."
             ]
           },
           "id": "bus-drivers-school.fit.riasec-fit-block.9",
@@ -29006,7 +29032,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Editorially verify seating, rest, ventilation, and actual hygiene requirements; the health qualification conditions under regulation 23 and the annual review under 26 are implemented per actual procedures, and the posture suggestions are not called verified disease prevention."
+              "Check seating, rest, ventilation, and actual hygiene requirements; the health qualification conditions under regulation 23 and the annual review under 26 are implemented per actual procedures, and the posture suggestions are not called verified disease prevention."
             ]
           },
           "id": "bus-drivers-school.risk.career-risk-cards.13",
@@ -29201,12 +29227,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Editorial data suggestion: handle student and parent materials per the unit's actual authority and platform authorization; no dedicated data law compliance or NIST basis was obtained for this page, and an occupational classification publication source cannot serve as a data security law."
+              "Check the employer’s rules for access to and transfer of student and parent information. Use fictional records in the exercise."
             ]
           },
           "id": "bus-drivers-school.risk.career-risk-cards.29",
           "source_refs": [
-            "editor-current"
+            "editorial"
           ],
           "type": "prose"
         },
@@ -29248,7 +29274,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "China's school bus regulation 23—26: the corresponding driving license and more than 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. The commercial passenger transport age of 63 cannot replace the school bus age. Use permits, passenger capacity, and routes are verified separately under 14—16/30/34 and are not automatically obtained by passing training."
+              "China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. Apply the school bus qualification rules to school bus driving. Use permits, passenger capacity, and routes are verified separately under 14—16/30/34 and are not automatically obtained by passing training."
             ]
           },
           "id": "bus-drivers-school.risk.career-risk-cards.33",
@@ -29620,7 +29646,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET new-entrant education Q&A: 59% high school or equivalent, 37% less than high school, and 3% postsecondary certificate, not the education of practitioners. JobZone1—2/SVP below 6 as a preparation range is a general summary; the BLS typical entry for this occupation is a high school diploma / None related experience / short-term on-the-job training, which does not equal several days to one year for every individual. The U.S. CDL is verified by vehicle threshold and state, and transporting the corresponding students to and from school or school activities uses the P/S endorsements; initial licenses or endorsements require separate verification of ELDT and exceptions. China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. The commercial passenger transport age of 63 cannot replace the school bus age."
+              "O*NET new-entrant education Q&A: 59% high school or equivalent, 37% less than high school, and 3% postsecondary certificate, not the education of practitioners. JobZone1—2/SVP below 6 as a preparation range is a general summary; the BLS typical entry for this occupation is a high school diploma / None related experience / short-term on-the-job training, which does not equal several days to one year for every individual. The U.S. CDL is verified by vehicle threshold and state, and transporting the corresponding students to and from school or school activities uses the P/S endorsements; initial licenses or endorsements require separate verification of ELDT and exceptions. China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. Apply the school bus qualification rules to school bus driving."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.20",
@@ -29716,7 +29742,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. The commercial passenger transport age of 63 cannot replace the school bus age."
+              "China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. Apply the school bus qualification rules to school bus driving."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.27",
@@ -29730,7 +29756,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: the corresponding vehicle class driving license and school bus driving qualification endorsement are required, and the unit's pre-job safety training and assessment must be completed.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
+              "Check the training: the corresponding vehicle class driving license and school bus driving qualification endorsement are required, and the unit's pre-job safety training and assessment must be completed.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.28",
@@ -29745,7 +29771,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: take on fixed routes and timetable shifts under supervision and become familiar with point and schedule execution.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
+              "Possible next step: take on fixed routes and timetable shifts under supervision and become familiar with point and schedule execution.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.29",
@@ -29760,7 +29786,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable departure inspection records and complete operating reports.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
+              "Evidence to bring: reviewable departure inspection records and complete operating reports.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.30",
@@ -29800,7 +29826,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: qualification conditions such as age, scoring cycle, and accident record must be met, and the emergency handling training and assessment passed.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
+              "Check the training: qualification conditions such as age, scoring cycle, and accident record must be met, and the emergency handling training and assessment passed.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.33",
@@ -29815,7 +29841,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: independently take on fixed route shifts, handle student order and road condition anomalies, and record completely.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
+              "Possible next step: independently take on fixed route shifts, handle student order and road condition anomalies, and record completely.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.34",
@@ -29830,7 +29856,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable order handling records, operating reports, and safe driving records.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
+              "Evidence to bring: reviewable order handling records, operating reports, and safe driving records.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.35",
@@ -29870,7 +29896,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: multi-route driving experience and safe driving records are required.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
+              "Check the training: multi-route driving experience and safe driving records are required.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.38",
@@ -29885,7 +29911,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: take on mentoring new drivers and vehicle safety inspection tasks and participate in route and point optimization suggestions.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
+              "Possible next step: take on mentoring new drivers and vehicle safety inspection tasks and participate in route and point optimization suggestions.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.39",
@@ -29900,7 +29926,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: mentoring records, safety inspection records, and incident debrief materials.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
+              "Evidence to bring: mentoring records, safety inspection records, and incident debrief materials.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.40",
@@ -29940,7 +29966,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: training experience and assessment results related to school bus safety management or operations management are required.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
+              "Check the training: training experience and assessment results related to school bus safety management or operations management are required.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.43",
@@ -29955,7 +29981,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: participate in route scheduling and safety system improvement and organize training and emergency drills.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
+              "Possible next step: participate in route scheduling and safety system improvement and organize training and emergency drills.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.44",
@@ -29970,7 +29996,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable safety system documents, drill records, and training and assessment records.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
+              "Evidence to bring: reviewable safety system documents, drill records, and training and assessment records.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.45",
@@ -30010,7 +30036,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: the corresponding vehicle class driving license and school bus driving qualification endorsement are required, and the unit's pre-job training and assessment completed.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
+              "Check the training: the corresponding vehicle class driving license and school bus driving qualification endorsement are required, and the unit's pre-job training and assessment completed.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.48",
@@ -30025,7 +30051,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: take on single-point pickup and drop-off and short activity tasks under supervision and become familiar with trip sheets and communication with the activity organizer.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
+              "Possible next step: take on single-point pickup and drop-off and short activity tasks under supervision and become familiar with trip sheets and communication with the activity organizer.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.49",
@@ -30040,7 +30066,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable trip execution records and safe driving records.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
+              "Evidence to bring: reviewable trip execution records and safe driving records.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.50",
@@ -30080,7 +30106,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: qualification conditions must be met and communication and service specification training completed.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
+              "Check the training: qualification conditions must be met and communication and service specification training completed.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.53",
@@ -30095,7 +30121,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: independently take on school activity and off-campus practice vehicle tasks, execute per the trip sheet, and handle changes.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
+              "Possible next step: independently take on school activity and off-campus practice vehicle tasks, execute per the trip sheet, and handle changes.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.54",
@@ -30110,7 +30136,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: trip sheet execution records, change confirmation records, and order reports.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
+              "Evidence to bring: trip sheet execution records, change confirmation records, and order reports.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.55",
@@ -30150,7 +30176,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: multi-point pickup and drop-off and cross-regional operating experience are required.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
+              "Check the training: multi-point pickup and drop-off and cross-regional operating experience are required.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.58",
@@ -30165,7 +30191,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: take on cross-regional or multi-day activity transport tasks and coordinate with the school and fleet.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
+              "Possible next step: take on cross-regional or multi-day activity transport tasks and coordinate with the school and fleet.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.59",
@@ -30180,7 +30206,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: cross-regional trip records, coordination records, and anomaly handling statements.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
+              "Evidence to bring: cross-regional trip records, coordination records, and anomaly handling statements.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.60",
@@ -30220,7 +30246,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: safety and service management training experience and assessment results are required.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
+              "Check the training: safety and service management training experience and assessment results are required.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.63",
@@ -30235,7 +30261,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: participate in the organizational process and safety debriefs of activity vehicles.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
+              "Possible next step: participate in the organizational process and safety debriefs of activity vehicles.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.64",
@@ -30250,7 +30276,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable organizational process documents and debrief reports.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
+              "Evidence to bring: reviewable organizational process documents and debrief reports.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.65",
@@ -30290,7 +30316,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: the corresponding vehicle class driving license and school bus driving qualification endorsement are required, and care and emergency training and assessment completed.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
+              "Check the training: the corresponding vehicle class driving license and school bus driving qualification endorsement are required, and care and emergency training and assessment completed.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.68",
@@ -30305,7 +30331,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: take on special education student transport or longer rural routes under supervision and become familiar with individualized arrangements.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
+              "Possible next step: take on special education student transport or longer rural routes under supervision and become familiar with individualized arrangements.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.69",
@@ -30320,7 +30346,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable care cooperation records and safe driving records.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
+              "Evidence to bring: reviewable care cooperation records and safe driving records.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.70",
@@ -30360,7 +30386,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: qualification conditions must be met and boarding and alighting assistance and communication skills mastered.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
+              "Check the training: qualification conditions must be met and boarding and alighting assistance and communication skills mastered.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.73",
@@ -30375,7 +30401,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: independently take on special education student transport or complex road condition routes and handle road and student situation anomalies.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
+              "Possible next step: independently take on special education student transport or complex road condition routes and handle road and student situation anomalies.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.74",
@@ -30390,7 +30416,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: operating records including boarding and alighting assistance and road condition handling statements.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
+              "Evidence to bring: operating records including boarding and alighting assistance and road condition handling statements.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.75",
@@ -30430,7 +30456,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: a relatively long safe driving record and passing an emergency handling assessment are required.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
+              "Check the training: a relatively long safe driving record and passing an emergency handling assessment are required.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.78",
@@ -30460,7 +30486,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: emergency handling records, drill evaluations, and safe driving records.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
+              "Evidence to bring: emergency handling records, drill evaluations, and safe driving records.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.80",
@@ -30500,7 +30526,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: safety and care management training experience and assessment results are required.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
+              "Check the training: safety and care management training experience and assessment results are required.; Specific qualifications, courses, and personnel arrangements are verified by jurisdiction, task, and unit, without setting a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.83",
@@ -30515,7 +30541,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: participate in safety management, vehicle inspection standards, and training improvement for special education and rural routes.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
+              "Possible next step: participate in safety management, vehicle inspection standards, and training improvement for special education and rural routes.; Personal qualifications, actual permits, and arrangements must be in place, and mentoring does not replace qualifications; promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.84",
@@ -30530,7 +30556,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable management documents and training improvement records.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
+              "Evidence to bring: reviewable management documents and training improvement records.; Accept the actual assessment based on verifiable facts, and the material does not automatically grant driving qualifications."
             ]
           },
           "id": "bus-drivers-school.path.career-path-block.85",
@@ -30588,35 +30614,35 @@
                 "Daily transport driver for compulsory education schools",
                 "Complete departure inspection, on-schedule pickup and drop-off on fixed routes and timetables, apply boarding, alighting, and crossing safety rules, and fill in operating records under supervision.",
                 "Verify personal qualifications, actual safety records, the use permit, and the school timetable, and do not treat all accidents broadly as qualification exclusions.",
-                "Submit a supervised departure inspection and operating report sample.",
+                "Use both fictional SB-47 versions and a handover to explore the role. Vehicle training is separate and takes place only when the participant meets the requirements and has employer authorization under the training arrangements.",
                 "This path does not independently decide routes and points; it must follow school and fleet arrangements and approved routes."
               ],
               [
                 "School activity and off-campus vehicle driver",
                 "Complete pickup and drop-off per the activity itinerary, handle temporary routes and longer-duration tasks, and cooperate with the activity organizer.",
                 "Verify the nature of the activity, the statutory applicability of school buses, the itinerary, and the training division, and do not automatically apply the school bus to every kind of activity vehicle.",
-                "Submit an operation and anomaly statement completed per the activity itinerary.",
+                "Use both fictional SB-47 versions and a handover to explore the role. Vehicle training is separate and takes place only when the participant meets the requirements and has employer authorization under the training arrangements.",
                 "Itinerary changes must be executed after confirmation with the school and fleet and may not be made unilaterally."
               ],
               [
                 "Special education student transport driver",
                 "Transport students needing additional care per individualized arrangements and cooperate with the on-board attendant on boarding and alighting assistance.",
                 "Verify the on-board attendant and assistance arrangements, specific equipment, and training, and do not infer dedicated care ability from a school bus certificate.",
-                "Submit an operating record including boarding and alighting assistance and communication statements.",
+                "Use both fictional SB-47 versions and a handover to explore the role. Vehicle training is separate and takes place only when the participant meets the requirements and has employer authorization under the training arrangements.",
                 "Care and assistance methods must follow school arrangements and relevant provisions."
               ],
               [
                 "Rural and remote route driver",
                 "Take on longer routes and complex road conditions and handle anomalies caused by weather and road changes.",
                 "Verify route avoidance, safe weather conditions, and real emergency procedures, and do not force departure under complex conditions.",
-                "Submit a driving record including road condition and anomaly handling statements.",
+                "Use both fictional SB-47 versions and a handover to explore the role. Vehicle training is separate and takes place only when the participant meets the requirements and has employer authorization under the training arrangements.",
                 "Article 30 of the regulation provides exceptions where the approved route is affected by traffic control, construction, disasters, severe weather, or major accidents; Article 22 requires suspension of operation and repair when safety conditions are not met. Under Article 42, at an accident the driver and attendant immediately call the police and set up warnings; if students remaining in the vehicle are in danger, the attendant evacuates them to a safe area and makes contact. Protect and report per the actual emergency procedures, and do not wait for approval of an ordinary route change before handling danger."
               ],
               [
                 "Transition from adjacent trades (passenger transport driving, on-board attendant, crossing guard)",
                 "Take on routine route pickup and drop-off and become familiar with student care and safety rule execution.",
                 "Verify the gap between prior qualifications and the school bus qualification; attendant or crossing guard experience does not equal the 3 years of matching driving experience.",
-                "Submit a reviewable driving record compiled from an existing position and explain the gap relative to school bus driving.",
+                "Use both fictional SB-47 versions and a handover to explore the role. Vehicle training is separate and takes place only when the participant meets the requirements and has employer authorization under the training arrangements.",
                 "Adjacent driving or care experience does not equal a school bus driving qualification; a transfer requires additional safety rules and qualification training."
               ]
             ]
@@ -30642,7 +30668,7 @@
                 "id": "clearance",
                 "values": [
                   "China school bus qualification and use permit",
-                  "China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. The commercial passenger transport age of 63 cannot replace the school bus age.",
+                  "China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. Apply the school bus qualification rules to school bus driving.",
                   "Articles 38—39 of the Chinese regulation require an on-board attendant throughout the trip, responsible for guiding order beside the vehicle, counting students and confirming safe seating and belting and signaling departure after the door is closed, stopping dangerous behavior, and verifying that all students have left the vehicle on alighting. Drivers inspect the safety and technical condition of the vehicle per Article 41 and are prohibited from departing with hidden hazards; schools and service providers bear system, education, and maintenance duties per 10—12/22, and all student care or permits cannot be attributed to the individual driver. Article 30 of the regulation provides exceptions where the approved route is affected by traffic control, construction, disasters, severe weather, or major accidents; Article 22 requires suspension of operation and repair when safety conditions are not met. Under Article 42, at an accident the driver and attendant immediately call the police and set up warnings; if students remaining in the vehicle are in danger, the attendant evacuates them to a safe area and makes contact. Protect and report per the actual emergency procedures, and do not wait for approval of an ordinary route change before handling danger."
                 ]
               },
@@ -30650,7 +30676,7 @@
                 "id": "onet-traits",
                 "values": [
                   "Tasks, activities, and context",
-                  "17 tasks as 16Core/1Supplemental, 41 general / 16 detailed activities / 57 context items; the key task importance ratings are correct, and the context is not an accident rate.",
+                  "O*NET tasks and work context describe day-to-day duties and do not give accident rates.",
                   "O*NET interests R75/C62/S58/E20/I10/A4, with the top three RCS; the 41 specific areas separately list transportation 93, physical and manual 25, protective service 23, mechanical and electrical 22, personal service 20, and social service 19, which are not exclusive RIASEC subcategories or an individual pass line."
                 ]
               },
@@ -30676,33 +30702,33 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional work package: a simplified pickup and drop-off route timetable and point list, a vehicle inspection form, and an operating report template (student counts or trips, work hours, mileage, fuel consumption), all self-made materials containing no real student or route information.",
-                  "Tools: simulated route and map interfaces, inspection and report forms; no contact with real school buses or students.",
-                  "Boundary note: practice must not be used for real pickup and drop-off driving, nor may practice results be packaged as safe driving or compliance conclusions.",
-                  "Time arrangement: one 30-minute timetable and point reading session + one 60-minute inspection walkthrough and report filling session."
+                  "SB-47: three fictional pickup records",
+                  "Original records (entry code / check code / receipt): A K1/K1/R1; B K3/K2/R2; C K4/K4/blank. All codes and receipts are fictional.",
+                  "Exercise rule: mark a record complete only if the codes match and a receipt is present. Record mismatches as discrepancies and missing receipts separately. Do not invent values.",
+                  "For the revision, add only receipt R3 for C. Keep all other inputs and preserve the original."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Lay out the sequence and estimated times for one morning and afternoon pickup and drop-off run per the timetable and point list, marking the factors that may affect punctuality.",
-                  "Fill in a vehicle inspection form listing the inspection items, criteria, and the handling and repair request path when an anomaly is found.",
-                  "Fill in an operating report: trips, student counts, mileage, anomalous events, and handling results."
+                  "Deliver",
+                  "For each record, list both statuses and reasons. Count complete records in each version.",
+                  "Write a handover with the change, original values and open items."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Practice method: follow the procedures and timetable before starting work, and record any unplanned assumption separately.",
-                  "Write \"pickup and drop-off completed per shift,\" \"student safety execution in place,\" and \"anomalies reported per procedures\" as separate items, and do not treat completing pickup and drop-off directly as meeting safety and service standards.",
-                  "Stop and verify uncertain vehicle conditions, student situations, or handling methods first, rather than skipping steps on experience."
+                  "Submit first",
+                  "Submit two versions and a handover independently on Day 6.",
+                  "On Day 7 open “SB-47 reference (open after submitting)” in the FAQ."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "If a practice step requires contact with real road operations, passenger-carrying driving, or student care, stop and mark that step as one that must be performed by personnel with the corresponding qualifications.",
-                  "If you are unsure whether a practice complies with safety rules or operating procedures, record the question and ask the reviewer to confirm, rather than deciding on your own."
+                  "Paper exercise only",
+                  "Use no actual students, schools, routes, vehicles or permits. Do not simulate a real departure decision."
                 ]
               }
             ]
@@ -30719,31 +30745,31 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Job requirement checklist: the vehicle class and school bus driving qualification required by the target jurisdiction and unit, shift and schedule arrangements, approved route and vehicle model scope, safety and emergency training requirements, and the pay and allowance basis.",
-                  "Note the source and material date for each item; leave items that cannot be verified blank and mark them as insufficient evidence, without filling them in with speculation.",
-                  "List \"vehicle class,\" \"school bus driving qualification,\" \"route arrangements,\" \"safety record,\" and \"pay basis\" separately to avoid conflating them."
+                  "Check sheet",
+                  "Copy the inputs and explain each status.",
+                  "Count both versions separately."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Ask an experienced school bus driver or safety manager to review your timetable understanding, vehicle inspection items, and anomaly handling reasoning, focusing on whether student boarding, alighting, and crossing safety steps were omitted.",
-                  "Keep the review comments and reasons for revisions together, as evidence of whether you can accept professional review.",
-                  "Record each deviation the reviewer points out and your subsequent revisions to form a reviewable improvement record."
+                  "Change log",
+                  "Record the single input change.",
+                  "Keep the original and the basis for the change."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "One-page debrief: state the basis, your own pickup and drop-off process, the deviations pointed out, and the parts that remain uncertain.",
-                  "Give the debrief to an experienced person for review and keep the review comments and reasons for revisions."
+                  "Handover",
+                  "List open items and the responsible party."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool usage note: if a route, positioning, or recording system is used to assist operation and reports, note the system and version, data scope, and manual review method.",
-                  "Driving and operating records must retain trips, student counts, mileage, anomalies, and handling results so that others can review the same pickup and drop-off run."
+                  "Paper tools",
+                  "Use paper or a spreadsheet."
                 ]
               }
             ]
@@ -30807,50 +30833,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Occupational boundary reading: read the occupation summary and detailed information for O*NET 53-3051.00 and write clearly what the occupation does and does not do.",
-                  "Output: a one-page task comparison table marking the source and basis for each item."
+                  "Day 1: check the division of duties",
+                  "Distinguish driver, attendant and operator duties."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Regulatory and qualification review: verify the public conditions for the vehicle class and school bus driving qualification and organize your own qualification gaps.",
-                  "Output: a qualification and training comparison checklist."
+                  "Day 2: copy the original records",
+                  "Copy the three fictional entries and rules."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Safety and emergency review: list student boarding, alighting, and crossing, road and weather, and student behavior and cabin order risks and the corresponding handling and reporting requirements.",
-                  "Output: a risk and handling checklist."
+                  "Day 3: complete the original",
+                  "Complete and count the original."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Timetable walkthrough practice: lay out the sequence and estimated times for a fictional pickup and drop-off route and mark the factors affecting punctuality.",
-                  "Output: a route walkthrough statement."
+                  "Day 4: apply the specified change",
+                  "Apply only the specified change, count complete records again and keep the original."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Inspection and reporting walkthrough: work through the inspection items and criteria per the checklist, and fill in an operating report sample.",
-                  "Output: an inspection and reporting statement."
+                  "Day 5: write the handover",
+                  "Note original values, what changed, what remains open and who should check it."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Review-based self-questioning: ask an experienced person to point out the deviations in your inspection items and handling reasoning and explain why.",
-                  "Output: review comments and a revision statement."
+                  "Day 6: submit independently",
+                  "Independently recheck all three records, preserve the original values, and submit both versions and a handover. Feedback from someone else is optional after submitting."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Decision debrief: organize the six-day outputs into a one-page comparison table, marking what to continue, what to pause, and what evidence still needs to be completed.",
-                  "Output: a one-page decision comparison table and a statement of reasons."
+                  "Day 7: open the reference",
+                  "Open “SB-47 reference (open after submitting)” in the FAQ and compare."
                 ]
               }
             ]
@@ -30864,13 +30890,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: you can complete all outputs within seven days and are willing to accept item-by-item checks of departure inspection, safety rule execution, and records.",
+              "Keep exploring if you want to check records independently, preserve original values and hand off clearly. Use both versions and your handover to frame questions for employers.",
               "Pause: you can complete the exercises but find it hard to accept review corrections, or you do not adapt to long periods of sitting, an enclosed cabin, split morning and afternoon periods, and high-frequency contact with students and parents.",
               "Change direction: if you prefer care and order management without driving responsibility, compare school bus monitors; if you prefer on-site passage control, compare crossing guards and flaggers.",
               "Verify employment: if the target position is outsourced or labor dispatch, first verify the form of employment, shift arrangements, and division of responsibility.",
-              "Complete the evidence: organize the seven-day outputs into reviewable departure inspection and operating report samples for use in practical training applications or job onboarding.",
+              "Keep the two fictional versions and your handover for self-review. They can help you explore the role; they do not prove practical skills, eligibility or readiness for employment.",
               "Cost assessment: include driving license and school bus driving qualification certification fees, refresher training arrangements, and split morning and afternoon periods and vacation arrangements in a written plan.",
-              "Supplement: if you are still unsure, first give the seven-day outputs to a practitioner for review, then decide whether to invest in certification and job hunting."
+              "Check independently against the named reference first. Feedback from another person after submitting is optional."
             ]
           },
           "id": "bus-drivers-school.path.seven-day-decision.1",
@@ -30914,7 +30940,7 @@
                 "People who drive school buses",
                 "Determines whether you can lawfully drive a school bus.",
                 "This is a statutory requirement: the school bus driving qualification shall be obtained under the Regulations on the Safety Management of School Buses, and the public security traffic management department endorses the motor vehicle driving license to permit driving a school bus.",
-                "China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. The commercial passenger transport age of 63 cannot replace the school bus age.",
+                "China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. Apply the school bus qualification rules to school bus driving.",
                 "Invest per the application and review process (application material review period 5 working days).",
                 "The qualification endorsement does not automatically confer route operating arrangements; changes in qualification conditions must be handled per the rules."
               ],
@@ -30967,7 +30993,7 @@
             "paragraphs": [
               "Qualification boundary: driving experience, vehicle class, school bus driving qualification endorsement, school bus use permit, employer onboarding assessment, and route arrangements are different states, and none can be automatically inferred from another.",
               "O*NET new-entrant education Q&A: 59% high school or equivalent, 37% less than high school, and 3% postsecondary certificate, not the education of practitioners. JobZone1—2/SVP below 6 as a preparation range is a general summary; the BLS typical entry for this occupation is a high school diploma / None related experience / short-term on-the-job training, which does not equal several days to one year for every individual. The U.S. CDL is verified by vehicle threshold and state, and transporting the corresponding students to and from school or school activities uses the P/S endorsements; initial licenses or endorsements require separate verification of ELDT and exceptions.",
-              "China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. The commercial passenger transport age of 63 cannot replace the school bus age. Articles 38—39 of the Chinese regulation require an on-board attendant throughout the trip, responsible for guiding order beside the vehicle, counting students and confirming safe seating and belting and signaling departure after the door is closed, stopping dangerous behavior, and verifying that all students have left the vehicle on alighting. Drivers inspect the safety and technical condition of the vehicle per Article 41 and are prohibited from departing with hidden hazards; schools and service providers bear system, education, and maintenance duties per 10—12/22, and all student care or permits cannot be attributed to the individual driver.",
+              "China's school bus regulation 23—26: the corresponding driving license and at least 3 years of driving experience, age 25—60, no full points in 3 consecutive scoring cycles, no liability for a traffic accident causing death or serious injury, no drink-driving or drunk driving, no serious violations such as passenger overloading or speeding in the most recent 1 year, no criminal record, and compliance with health conditions and no alcoholism or drug use; the school bus driving qualification is obtained through public security traffic endorsement and is reviewed annually. Apply the school bus qualification rules to school bus driving. Articles 38—39 of the Chinese regulation require an on-board attendant throughout the trip, responsible for guiding order beside the vehicle, counting students and confirming safe seating and belting and signaling departure after the door is closed, stopping dangerous behavior, and verifying that all students have left the vehicle on alighting. Drivers inspect the safety and technical condition of the vehicle per Article 41 and are prohibited from departing with hidden hazards; schools and service providers bear system, education, and maintenance duties per 10—12/22, and all student care or permits cannot be attributed to the individual driver.",
               "Before onboarding, verify item by item the vehicle class and school bus driving qualification, the approved route and shift arrangements, pre-job training and assessment records, and the pay and allowance basis, and keep written confirmation."
             ]
           },
@@ -30988,11 +31014,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Recruitment verification note: there were no specific employer job postings in this round; school bus and student transport are editorial name examples and cannot be called verified public recruitment frequency or the same statutory identity.",
-              "When reading recruitment information, verify the form of employment (school-operated, school bus service company, or outsourcing), shift and schedule arrangements, vehicle class and school bus driving qualification requirements, approved route and vehicle model scope, and hours and trip pay method, and be wary of wording that markets short-term training as enabling independent school bus driving or independent decisions on routes and points."
+              "On November 6, 2026, Liyang Passenger Transport listed 28 transit driver and seven school bus driver posts separately. The school bus posting listed an A1 license held for at least three years, with applications November 9–12. Pay followed company rules and no amount was listed. Applying under the notice does not establish the legal school bus driver qualification. In 2020, the Taihu New Town Primary School affiliated with Wuxi Normal School advertised one school bus driver for a 17-seat vehicle, with three years in the applicable license class. The deadline was March 13 at 16:00. Pay was negotiable, with the listed social insurance and housing fund benefits. China’s school bus safety regulations require a school bus use permit under Article 14. Articles 23–24 separately require the driver to obtain school bus qualification, endorsed on the license by the traffic authority. A matching standard license is one condition; verify the vehicle permit, driver qualification and hiring separately."
             ]
           },
           "id": "bus-drivers-school.path.recruitment-sample.1",
+          "source_refs": [
+            "sb-liyang",
+            "sb-wuxi",
+            "faa-design-approvals"
+          ],
           "title": "How to use the recruitment sample",
           "type": "notice"
         }
@@ -31254,13 +31284,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2025: education services 51%, transportation and warehousing 36%, government 11%, and other 2%. The OOH school bus section separately details local elementary and secondary schools 48%, school and employee bus transportation 34%, local government (excluding education and hospitals) 11%, and private elementary and secondary schools 2%, which are not exactly the same combined basis; Chinese industries are not inferred from U.S. shares. The OOH notes that schools still rely on school buses and that declining enrollment constrains demand, which is not an AI forecast."
+              "O*NET lists educational services (51%), transportation and warehousing (36%), and government (11%) as leading U.S. industries in 2025. BLS separately gives school bus driver median annual wages for selected industries."
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.12",
           "source_refs": [
-            "industry-current",
-            "ooh-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -31330,13 +31360,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS exact 0.7% and OOH/O*NET a rounded 1% Slower than average, and the current label is no longer the old Little or no change."
+              "BLS Table 1.2 projects 0.7% employment growth for school bus drivers. The handbook rounds it to 1%. About 56,500 annual openings include replacements."
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.18",
           "source_refs": [
-            "ep-current",
-            "trends-current"
+            "bls-outlook"
           ],
           "type": "prose"
         },
@@ -31505,12 +31534,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2025: education services 51%, transportation and warehousing 36%, government 11%, and other 2%. The OOH school bus section separately details local elementary and secondary schools 48%, school and employee bus transportation 34%, local government (excluding education and hospitals) 11%, and private elementary and secondary schools 2%, which are not exactly the same combined basis; Chinese industries are not inferred from U.S. shares."
+              "O*NET lists educational services (51%), transportation and warehousing (36%), and government (11%) as leading U.S. industries in 2025. BLS separately gives school bus driver median annual wages for selected industries."
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.31",
           "source_refs": [
-            "industry-current"
+            "onet-industry",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -31569,7 +31599,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: relatively close: both are bus driving, with different service objects and shift arrangements. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
+              "Compare the work: relatively close: both are bus driving, with different service objects and shift arrangements. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.36",
@@ -31605,7 +31635,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: relatively close: both are passenger-carrying driving, with different route forms. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
+              "Compare the work: relatively close: both are passenger-carrying driving, with different route forms. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.39",
@@ -31641,7 +31671,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: moderate distance: both are passenger-carrying driving, with different operating methods. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
+              "Compare the work: moderate distance: both are passenger-carrying driving, with different operating methods. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.42",
@@ -31677,7 +31707,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: moderate distance: both are commercial driving, with different carried objects. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
+              "Compare the work: moderate distance: both are commercial driving, with different carried objects. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.45",
@@ -31716,7 +31746,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: moderate distance: both are transport operations, with different operating systems. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
+              "Compare the work: moderate distance: both are transport operations, with different operating systems. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.48",
@@ -31752,7 +31782,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: relatively close: both are passenger transport, with different operating systems. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
+              "Compare the work: relatively close: both are passenger transport, with different operating systems. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.51",
@@ -31788,7 +31818,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: very close: the division of labor differs within the same school bus setting, without driving responsibility. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
+              "Compare the work: very close: the division of labor differs within the same school bus setting, without driving responsibility. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.54",
@@ -31824,7 +31854,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: moderate distance: both are within the operating system, with different decision and execution responsibilities. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
+              "Compare the work: moderate distance: both are within the operating system, with different decision and execution responsibilities. No transfer success rate or uniform threshold was obtained; target jurisdiction, qualifications, and training are verified separately."
             ]
           },
           "id": "bus-drivers-school.market-signals.market-signal-card.57",
@@ -31859,16 +31889,22 @@
                 "question_key": "career.faq.bus-drivers-school.2"
               },
               {
-                "answer": "A fit signal is maintaining compliant operation over the long term under fixed routes and a strict schedule, insisting on applying student boarding, alighting, and crossing safety rules, handling and reporting per procedures when student order is abnormal, and recording counts and mileage truthfully; liking to drive alone is not enough to prove competence.",
+                "answer": "Use SB-47 to compare an original and an updated log. See whether you can preserve the old entries and explain open items.",
                 "id": "bus-drivers-school.faq.3",
                 "question": "How do you judge whether you are suited to this job?",
-                "question_key": "career.faq.bus-drivers-school.3"
+                "question_key": "career.faq.bus-drivers-school.3",
+                "source_refs": [
+                  "editorial"
+                ]
               },
               {
-                "answer": "Steps such as route and map queries, vehicle positioning and arrival reminders, vehicle inspection and mileage and fuel consumption ledgers, and draft report generation can be assisted; driving decisions, student boarding, alighting, and crossing safety execution, riding order handling, emergency aid, and fault and accident reporting still rest with people.",
+                "answer": "Scheduling and record tools can flag missing information. Driving, supervising students and handling exceptions remain with the responsible people under local rules. A system checkmark does not replace an on-site check, change a route or authorize departure.",
                 "id": "bus-drivers-school.faq.4",
                 "question": "Which steps will AI and automation change?",
-                "question_key": "career.faq.bus-drivers-school.4"
+                "question_key": "career.faq.bus-drivers-school.4",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
                 "answer": "Vehicle and safety equipment condition confirmation before departure, safe driving judgments per road conditions and schedule, on-site execution of student boarding, alighting, and crossing safety, handling conclusions for riding order and emergencies, and fault and accident reporting conclusions must all be confirmed by drivers holding the school bus driving qualification.",
@@ -31877,10 +31913,13 @@
                 "question_key": "career.faq.bus-drivers-school.5"
               },
               {
-                "answer": "The vehicle class and driving experience, the school bus driving qualification and driving license endorsement, the school bus use permit and approved route, and employer onboarding training and assessment records must each be verified separately; in mainland China, school bus drivers shall obtain the school bus driving qualification under the Regulations on the Safety Management of School Buses, which requires holding the driving license for the corresponding vehicle class with more than 3 years of driving experience, being at least 25 and no older than 60, having no record of a full 12 points in the most recent 3 consecutive scoring cycles, and having no liability record for a traffic accident causing death or serious injury, among others.",
+                "answer": "China’s school bus safety regulations require a school bus use permit under Article 14. Articles 23–24 separately require the driver to obtain school bus qualification, endorsed on the license by the traffic authority. A matching standard license is one condition; verify the vehicle permit, driver qualification and hiring separately.",
                 "id": "bus-drivers-school.faq.6",
                 "question": "What qualifications must be verified to enter this occupation?",
-                "question_key": "career.faq.bus-drivers-school.6"
+                "question_key": "career.faq.bus-drivers-school.6",
+                "source_refs": [
+                  "faa-design-approvals"
+                ]
               },
               {
                 "answer": "O*NET work context shows 93% work inside an enclosed vehicle every day, 59% sit continuously or almost continuously, 80% use their hands to handle objects and tools continuously or almost continuously, 36% are exposed to contaminants daily, and 18% are exposed to very hot or very cold environments daily; 44% say being exact or accurate is extremely important, and 66% face time pressure every day.",
@@ -31895,16 +31934,25 @@
                 "question_key": "career.faq.bus-drivers-school.8"
               },
               {
-                "answer": "The O*NET page shows employment of 387,300 for this occupation in 2024, a 2024—2034 projection of little or no change, and 61,000 job openings; the Occupational Outlook Handbook's combined page separately gives all bus drivers 2% growth from 2025 to 2035 and about 77,600 annual openings (the coverage and period differ). Moving to an adjacent trade requires filling in the target position's qualification and specification requirements.",
+                "answer": "For U.S. SOC 53-3051, 2025 median pay was $47,920 a year or $23.04 an hour. BLS projects about 396,800 jobs in 2025 and 399,700 in 2035, up 0.7%, a gain of about 2,900. Around 56,500 annual openings include replacements.",
                 "id": "bus-drivers-school.faq.9",
                 "question": "How should career prospects and transitions be judged?",
-                "question_key": "career.faq.bus-drivers-school.9"
+                "question_key": "career.faq.bus-drivers-school.9",
+                "source_refs": [
+                  "bls-pay",
+                  "bls-outlook"
+                ]
               },
               {
-                "answer": "The U.S. figures come from the BLS 2025 OEWS data displayed by O*NET, with the basis of Bus Drivers, School (SOC 53-3051), which is this page's identity basis; mainland China has no national occupational wage statistics for this occupation, and under the evidence routing this page does not publish occupation-level or proxy wages, and it is clarified that the Chinese page language does not constitute a Chinese equivalent occupation or wage mapping.",
+                "answer": "U.S. 2025 wages are national occupational percentiles for SOC 53-3051. This page does not provide a verified mainland national school bus driver wage. Liyang and Wuxi describe individual jobs, which do not become comparable national figures when converted.",
                 "id": "bus-drivers-school.faq.10",
                 "question": "Why can U.S. wages and the mainland China basis not be converted into each other?",
-                "question_key": "career.faq.bus-drivers-school.10"
+                "question_key": "career.faq.bus-drivers-school.10",
+                "source_refs": [
+                  "bls-pay",
+                  "sb-liyang",
+                  "sb-wuxi"
+                ]
               },
               {
                 "answer": "The O*NET technology list has 3 software skills (1 Hot Technology), including internet browser software, map creation software (AOL MapQuest), and operating system software (Microsoft Windows); the core abilities are safe and defensive driving, executing per the approved route and a strict schedule, student boarding, alighting, and crossing safety rules, riding order and behavior guidance, vehicle and safety equipment inspection, first aid procedures and emergency evacuation, and operating report and record standards.",
@@ -31913,16 +31961,28 @@
                 "question_key": "career.faq.bus-drivers-school.11"
               },
               {
-                "answer": "The work involves long periods of sitting and repetitive motion, an enclosed cabin and contaminant exposure, very hot or very cold environments, traffic risk when students board, alight, and cross, and student behavior conflicts; drive per safety operating procedures and defensive driving requirements, inspect the vehicle and safety equipment before departure, strictly apply boarding, alighting, and crossing safety rules, handle and escalate order and emergencies per procedures, and manage schedules and fatigue per institutional rules.",
+                "answer": "Article 38 requires the school or service provider to assign an attendant to supervise students throughout the ride. Article 39 sets out attendant duties. Check the driver’s duties and do not assume the driver also serves as attendant.",
                 "id": "bus-drivers-school.faq.12",
                 "question": "What should be noted about work safety and protection?",
-                "question_key": "career.faq.bus-drivers-school.12"
+                "question_key": "career.faq.bus-drivers-school.12",
+                "source_refs": [
+                  "faa-design-approvals"
+                ]
               },
               {
                 "answer": "93% work inside an enclosed vehicle every day, 59% sit continuously or almost continuously, 80% use their hands continuously to handle objects and tools, and 36% are exposed to contaminants daily; 67% are in constant contact with others, 61% have face-to-face discussions every day, 80% need to make decisions every day, and 74% are on a regular schedule, though split morning and afternoon periods and seasonal arrangements are common.",
                 "id": "bus-drivers-school.faq.13",
                 "question": "What are the working environment and ways of collaborating for school bus drivers?",
                 "question_key": "career.faq.bus-drivers-school.13"
+              },
+              {
+                "answer": "Original: A has matching codes and a receipt, so it is complete. B lists K3 and K2, so hand off the discrepancy. C has matching codes but no receipt. Only A is complete in the original. After adding R3 for C, A and C are complete and B stays open. Keep both versions and hand the issue to the fictional record owner. Complete only describes the paper record; it does not authorize a real handoff or departure.",
+                "id": "bus-drivers-school.faq.14",
+                "question": "SB-47 reference (open after submitting)",
+                "question_key": "career.faq.bus-drivers-school.14",
+                "source_refs": [
+                  "editorial"
+                ]
               }
             ]
           },
@@ -31943,10 +32003,10 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "U.S. 53-3051 current 2025 wages and the 2025—2035 projection; the exact BLS school bus section and the parent including transit and intercity are read separately. The historical facts and documents within the protection scope are retained, and the whole page cannot be claimed to be unified.",
-              "Exact Chinese occupations and city wages and employment are still missing, and the annual background of the actual school education or transport employer industry can be supplemented; an average is not a driver's wage or monthly salary.",
-              "Boundary three: the editorial exercises and work sample suggestions are all fictional materials, and readers should not use them to carry out passenger-carrying driving or vehicle operation on real roads, nor may they package practice results as safe driving, operational compliance, or accident responsibility conclusions.",
-              "Boundary four: this page is composed of public materials such as O*NET, BLS, the Regulations on the Safety Management of School Buses, the Regulations on Road Transport of the People's Republic of China, information published in the Classification Code of Occupations of the People's Republic of China (2022 edition), and ILO task exposure research, plus editorial design; the applicable scope and gaps of each material are marked separately."
+              "BLS Table 1.2 projects 0.7% employment growth for school bus drivers. The handbook rounds it to 1%. About 56,500 annual openings include replacements.",
+              "The two mainland notices describe individual employers. Industry averages do not give school bus driver pay.",
+              "SB-47 uses fictional records and does not authorize student transport or an operating or safety decision.",
+              "Article 38 requires the school or service provider to assign an attendant to supervise students throughout the ride. Article 39 sets out attendant duties. Check the driver’s duties and do not assume the driver also serves as attendant."
             ]
           },
           "id": "bus-drivers-school.sources.boundary.1",
@@ -31971,10 +32031,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind career content editorial team: compiled from public materials such as O*NET, BLS, the Regulations on the Safety Management of School Buses, and information published in the Classification Code of Occupations of the People's Republic of China (2022 edition), with the basis and data period marked for each item."
+              "Ask how the school, onboard attendant and driver divide the work before checking schedules, qualifications and employment terms."
             ]
           },
           "id": "bus-drivers-school.sources.source-card.1",
+          "source_refs": [
+            "faa-design-approvals",
+            "sb-liyang",
+            "sb-wuxi"
+          ],
           "type": "prose"
         },
         {
@@ -31982,25 +32047,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Sources for this round: O*NET2026 tasks, activities, context, education, interests, and styles, 2025 industry, hiring, and wages, and the 2025—2035 projection; the sectioned BLS OOH/Table 1.2; NBS 2025 industry; the actual driving detailed class in the 2022 Classification Code; the applicable boundaries of the current school bus regulation and the 2026 road regulation; and FMCSA school bus CDL/P/S and ELDT. The same-version ILO general task exposure and editorial suggestions are marked separately."
+              "For U.S. SOC 53-3051, 2025 median pay was $47,920 a year or $23.04 an hour. BLS projects about 396,800 jobs in 2025 and 399,700 in 2035, up 0.7%, a gain of about 2,900. Around 56,500 annual openings include replacements."
             ]
           },
           "id": "bus-drivers-school.sources.source-card.2",
           "source_refs": [
-            "details-current",
-            "industry-current",
-            "hot-current",
-            "ep-current",
-            "ooh-current",
-            "nbs-current",
-            "classification-current",
-            "school-current",
-            "transport-current",
-            "cdl-current",
-            "ps-current",
-            "eldt-current",
-            "ilo-genai",
-            "editor-current"
+            "bls-outlook",
+            "bls-pay"
           ],
           "type": "prose"
         },
@@ -32009,17 +32062,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Verified 2026-10-09: O*NET profile 2026 / industry, wages, and hiring 2025 / projection 2025—2035; NBS 2025; the current school bus regulation database is still 2012, with qualification age 25—60; the 2026 sixth amendment of the road regulation cannot replace the dedicated school bus provisions; the 2022 Classification Code actual original book pages 187—188. Old shared registrations do not swap document identities."
+              "China’s school bus safety regulations require a school bus use permit under Article 14. Articles 23–24 separately require the driver to obtain school bus qualification, endorsed on the license by the traffic authority. A matching standard license is one condition; verify the vehicle permit, driver qualification and hiring separately."
             ]
           },
           "id": "bus-drivers-school.sources.source-card.3",
           "source_refs": [
-            "details-current",
-            "ep-current",
-            "nbs-current",
-            "school-current",
-            "transport-current",
-            "classification-current"
+            "faa-design-approvals"
           ],
           "type": "prose"
         },
@@ -32028,15 +32076,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Annual openings are not a ten-year total, and the exact occupation and the parent are read by section; software NA is not 0, the education Q&A is not educational composition, and context is not an accident rate. The school bus definition, driver qualification, use permit, attendant, and repair duties are verified separately. Exact Chinese wages and employment, AI replacement rates, personality validity, recruitment frequency, and transfer success rates are still missing."
+              "SB-47 is a paper exercise with fictional records. It uses no real students, routes, permits or vehicles."
             ]
           },
           "id": "bus-drivers-school.sources.source-card.4",
           "source_refs": [
-            "editor-current",
-            "school-current",
-            "ep-current",
-            "nbs-current"
+            "editorial"
           ],
           "type": "prose"
         }
@@ -32075,13 +32120,13 @@
                 "entity": "Enneagram test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the school bus driver career page",
@@ -32140,20 +32185,20 @@
                 "url": "https://www.onetonline.org/link/summary/53-3051.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports the 2024 industry distribution: education services 51%, transportation and warehousing 36%, government 10%, and other industries 3%.",
-                  "2024 distribution; accessed 2026-09-16"
+                  "O*NET lists education services (51%), transportation and warehousing (36%), and government (11%) as the leading U.S. industries in 2025. These figures are employment shares.",
+                  "Shares do not give wages."
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-industry",
-                "limitation": "The industry distribution is a statistical classification description and is not used to infer industry wages or employment size.",
+                "limitation": "Shares do not give wages.",
                 "market": "United States",
-                "name": "O*NET-SOC 53-3051.00 industry distribution",
-                "period": "2024 distribution; accessed 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET: top U.S. industries for school bus drivers",
+                "period": "2025",
+                "publisher": "O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/53-3051.00"
+                "url": "https://www.onetonline.org/link/details/53-3051.00"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32190,12 +32235,12 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "Supports the official figures under the combined occupation basis: a 2025 median annual wage of 49,390 dollars, median hourly wage 23.75 dollars, 563,200 employed in 2025, 2% growth from 2025 to 2035 (slower than average), an employment change of about 9,800, and about 77,600 annual openings; within this, school bus drivers have a May 2025 median annual wage of 47,920 dollars. That page uses the combined occupation basis, not this page's identity basis.",
+                  "School and transit drivers are reported separately. Selected school bus driver annual medians were $50,040 in school and employee bus transportation, $48,980 in local government excluding education and hospitals, and $45,830 in local elementary and secondary schools.",
                   "May 2025 wages; the 2025—2035 projection"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-entry",
-                "limitation": "This page covers all bus drivers (including intercity and transit drivers, etc.) and is not this page's identity basis; its period (2025—2035) and coverage differ from the 2024—2034 basis for this occupation shown by O*NET and must be marked separately, not swapped or added.",
+                "limitation": "This page covers all bus drivers (including intercity and transit drivers, etc.) and is not this page's identity basis; its period (2025—2035) and coverage differ from the 2025–2035 basis for this occupation shown by O*NET and must be marked separately, not swapped or added.",
                 "market": "United States",
                 "name": "BLS Occupational Outlook Handbook Bus Drivers (combined occupation basis)",
                 "period": "May 2025 wages; the 2025—2035 projection",
@@ -32220,20 +32265,20 @@
                 "url": "https://www.onetonline.org/link/localwages/53-3051.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports employment of 387,300 for this occupation in 2024, a 2024—2034 growth label of Little or no change, and 61,000 job openings.",
-                  "Employment is 2024 and projections are 2024—2034; accessed 2026-09-16"
+                  "For U.S. SOC 53-3051, 2025 median pay was $47,920 a year or $23.04 an hour. BLS projects about 396,800 jobs in 2025 and 399,700 in 2035, up 0.7%, a gain of about 2,900. Around 56,500 annual openings include replacements.",
+                  "U.S. occupation row; annual openings include replacements."
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-outlook",
-                "limitation": "Employment and projections use this occupation's basis; the BLS combined page's period (2025—2035) and coverage differ.",
+                "limitation": "U.S. occupation row; annual openings include replacements.",
                 "market": "United States",
-                "name": "O*NET-SOC 53-3051.00 occupation summary (employment and projection fields)",
-                "period": "Employment is 2024 and projections are 2024—2034; accessed 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Table 1.2: school bus drivers 53-3051",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-3051.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32254,34 +32299,34 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "Supports the scope of road transport business and road transport related business and the requirement that those engaging in road transport business operate lawfully, honestly, and with fair competition.",
+                  "Separates general road transport from school bus rules.",
                   "Effective 2004-07-01 and revised several times; accessed 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
                 "id": "nasa-seh",
                 "limitation": "The regulation's scope includes road transport business and road transport related business; the text cited on this page is a publicly reposted text on a government portal, and the regulation has been revised since, so specific application must follow the current text.",
                 "market": "Mainland China",
-                "name": "Regulations on Road Transport of the People's Republic of China (publicly reposted text on a government portal)",
+                "name": "China national regulations database: Road Transport Regulations",
                 "period": "Effective 2004-07-01 and revised several times; accessed 2026-09-16",
                 "publisher": "State Council",
                 "scope": "contextual",
-                "url": "https://www.gov.cn/govweb/gongbao/content/2004/content_62803.htm"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1806"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports the statutory requirements for the school bus driving qualification and the school bus use permit: school bus drivers shall obtain the school bus driving qualification, which requires holding the driving license for the corresponding vehicle class with more than 3 years of driving experience, being at least 25 and no older than 60, having no record of a full 12 points in the most recent 3 consecutive scoring cycles, having no liability record for a traffic accident causing death or serious injury, having no drink-driving or drunk-driving record and no record of serious traffic violations such as overloading or speeding in passenger transport within the most recent 1 year, having no criminal record, and meeting health conditions; the application is reviewed by the public security traffic management department, which then endorses the motor vehicle driving license to permit driving a school bus; school buses shall lawfully obtain a use permit.",
-                  "Promulgated and effective 2012-04-05; accessed 2026-09-16"
+                  "China’s school bus safety regulations require a school bus use permit under Article 14. Articles 23–24 separately require the driver to obtain school bus qualification, endorsed on the license by the traffic authority. A matching standard license is one condition; verify the vehicle permit, driver qualification and hiring separately.",
+                  "National school bus rules; verify vehicle, driver and duty requirements separately."
                 ],
                 "evidence_type": "primary_document",
                 "id": "faa-design-approvals",
-                "limitation": "The regulation sets out the statutory conditions for school bus use permits and the school bus driving qualification: school bus drivers shall obtain the school bus driving qualification and have the motor vehicle driving license endorsed to permit driving a school bus; school buses shall lawfully obtain a use permit and operate per the approved route and the specified passenger capacity. The regulation is an administrative regulation and does not establish a wage statistical basis.",
+                "limitation": "National school bus rules; verify vehicle, driver and duty requirements separately.",
                 "market": "Mainland China",
-                "name": "Regulations on the Safety Management of School Buses (State Council Order No. 617)",
-                "period": "Promulgated and effective 2012-04-05; accessed 2026-09-16",
+                "name": "China national regulations database: school bus safety",
+                "period": "2012",
                 "publisher": "State Council",
                 "scope": "contextual",
-                "url": "https://www.gov.cn/zhengce/content/2012-04/10/content_5397.htm"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=342&Query=%E8%BD%A6"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32302,12 +32347,12 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "Records how this page's editorial design and fictional exercises were compiled, the principles for marking the basis, and how gaps are registered.",
+                  "SB-47 uses three fictional records and one receipt update. Submit both versions and a handover.",
                   "Compiled 2026-09"
                 ],
                 "evidence_type": "editorial_synthesis",
                 "id": "editorial",
-                "limitation": "Editorial compilation record, used to describe the basis and gaps, and not as a factual source.",
+                "limitation": "Fictional records involve no actual students, permits, vehicles or routes.",
                 "market": "United States",
                 "name": "FermatMind editorial design and fictional exercises",
                 "period": "Compiled 2026-09",
@@ -32462,12 +32507,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "BLS bus drivers (the school bus section and the parent read separately)",
-                  "2025 wages / 2025—2035 projection"
+                  "School and transit drivers are reported separately. Selected school bus driver annual medians were $50,040 in school and employee bus transportation, $48,980 in local government excluding education and hospitals, and $45,830 in local elementary and secondary schools.",
+                  "Separates national wages and selected industry medians."
                 ],
                 "evidence_type": "primary_document",
                 "id": "ooh-current",
-                "limitation": "The exact school bus section contains a 47920 wage, five industry medians, 396800 employment, and a 1% projection; the parent 563200/49390/2%/77600 openings is marked separately, and it is not the case that everything is only the parent.",
+                "limitation": "Three industries are listed in the school bus section. Transit and intercity wages are separate.",
                 "market": "United States",
                 "name": "BLS bus drivers (the school bus section and the parent read separately)",
                 "period": "2025 wages / 2025—2035 projection",
@@ -32515,7 +32560,7 @@
                 ],
                 "evidence_type": "primary_document",
                 "id": "transport-current",
-                "limitation": "The applicability of road passenger transport business is verified separately and does not directly replace the school bus regulation's age, qualification, and use permit requirements; the commercial passenger transport age of 63 is not changed into the school bus 25—60.",
+                "limitation": "The applicability of road passenger transport business is verified separately and does not directly replace the school bus regulation's age, qualification, and use permit requirements.",
                 "market": "Mainland China",
                 "name": "Road Transport Regulations 2026 amendment",
                 "period": "Sixth amendment on 2026-01-30",
@@ -32591,34 +32636,66 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "FermatMind school bus task verification and transfer suggestions",
-                  "Compiled by the author on 2026-10-09"
+                  "Role exploration and division of duties"
                 ],
                 "evidence_type": "editorial_synthesis",
                 "id": "editor-current",
                 "limitation": "Tool pilots, personality observation, progression, and distances are editorial suggestions; there is no evidence of recruitment frequency, dedicated assessment validity, replacement rates, or intervention effects.",
                 "market": "Cross-market",
                 "name": "FermatMind school bus task verification and transfer suggestions",
-                "period": "Compiled by the author on 2026-10-09",
+                "period": "Role exploration",
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/53-3051.00"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Pickup and drop-off per schedule | Pick up and drop off students at fixed neighborhood points on a strict schedule, obeying traffic laws and driving safely and courteously | Student transport service completed per the school calendar and schedule. — 25/100; weight=1/3; bus-drivers-school.profile.responsibilities-block.1[1]",
-                  "Boarding, alighting, and crossing safety | Apply safety rules when students board or alight or cross near stops, escort young students across the road, and assist with boarding and alighting | Boarding, alighting, and crossing safety execution records. — 0/100; weight=1/3; bus-drivers-school.profile.responsibilities-block.1[2]",
-                  "Reporting and records | Report vehicle faults and items needing repair, report delays and accidents, and prepare and submit reports on student counts or trips, work hours, mileage, and fuel consumption | Fault and accident reports, driving and operating reports. — 75/100; weight=1/3; bus-drivers-school.profile.responsibilities-block.1[4]"
+                  "Scheduling and record tools can flag missing information. Driving, supervising students and handling exceptions remain with the responsible people under local rules. A system checkmark does not replace an on-site check, change a route or authorize departure.",
+                  "The task list does not estimate automation rates.",
+                  "The task list does not estimate automation rates.",
+                  "The task list does not estimate automation rates.",
+                  "The task list does not estimate automation rates."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "primary_document",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "The task list does not estimate automation rates.",
+                "market": "United States",
+                "name": "O*NET: school bus checks and records",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-3051.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "On November 6, 2026, Liyang Passenger Transport listed 28 transit driver and seven school bus driver posts separately. The school bus posting listed an A1 license held for at least three years, with applications November 9–12. Pay followed company rules and no amount was listed. Applying under the notice does not establish the legal school bus driver qualification."
+                ],
+                "evidence_type": "primary_document",
+                "id": "sb-liyang",
+                "limitation": "Dated employer example.",
+                "market": "Mainland China",
+                "name": "Liyang: school bus driver notice",
+                "period": "2026-11-06",
+                "publisher": "Liyang municipal government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.liyang.gov.cn/html/czly/2026/AQQJAIBA_1106/35959.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "In 2020, the Taihu New Town Primary School affiliated with Wuxi Normal School advertised one school bus driver for a 17-seat vehicle, with three years in the applicable license class. The deadline was March 13 at 16:00. Pay was negotiable, with the listed social insurance and housing fund benefits."
+                ],
+                "evidence_type": "primary_document",
+                "id": "sb-wuxi",
+                "limitation": "One historical example with negotiable pay.",
+                "market": "Mainland China",
+                "name": "Wuxi education bureau: Taihu New Town Primary School notice",
+                "period": "2020-03-09",
+                "publisher": "Wuxi Education Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.wuxi.gov.cn/doc/2020/03/09/2858668.shtml"
               }
             ]
           },
@@ -35973,9 +36050,9 @@
         }
       },
       "hero": {
-        "h1": "Bus Drivers, School",
-        "quick_answer": "The entry on this page corresponds to school bus drivers (U.S. side O*NET-SOC 53-3051.00): driving a school bus to transport students and ensure adherence to safety rules — inspecting the vehicle and safety equipment before departure, picking up and dropping off at fixed neighborhood points on a strict schedule, applying safety rules when students board, alight, and cross, maintaining cabin order, reporting faults and delays and accidents, submitting operating reports on student counts and mileage, and keeping the cabin clean; the work routinely involves long periods of sitting, an enclosed cabin, split morning and afternoon periods, and high-frequency contact with students and parents, and its duties do not equal deciding routes and fees on its own, nor do they replace the school bus safety management responsibility of the school and the competent department.",
-        "title": "Bus Drivers, School"
+        "h1": "School Bus Drivers",
+        "quick_answer": "School bus drivers transport students on assigned runs, check the vehicle and record exceptions. Check which duties belong to the driver, onboard attendant and operator, along with the work schedule, driver qualification and vehicle permit.",
+        "title": "School Bus Drivers"
       },
       "market_signal_card": {
         "context_links": [
@@ -37540,7 +37617,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and scheduling records",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37558,7 +37635,7 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "O*NET-SOC 53-3051.00",
         "fact_id": "occupation-identity",
         "market": "United States",
@@ -37570,7 +37647,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "47,920 dollars/year (median)",
         "fact_id": "us-wage-2025",
         "market": "United States",
@@ -37582,7 +37659,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "23.04 dollars/hour (median)",
         "fact_id": "us-wage-hourly-2025",
         "market": "United States",
@@ -37594,67 +37671,67 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "387,300 people (2024)",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "About 396,800 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment size (this occupation's basis)",
+        "measure": "2025 employment",
         "occupation_scope": "Bus Drivers, School",
-        "period": "2024; Bus Drivers, School (SOC 53-3051) basis",
+        "period": "2025",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Insufficient evidence: the O*NET page does not publish projected employment figures (53-3051 basis)",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "About 399,700 jobs",
         "fact_id": "us-employment-2035",
         "market": "United States",
-        "measure": "Projected employment (not published)",
+        "measure": "2035 projected employment",
         "occupation_scope": "Bus Drivers, School",
-        "period": "2024—2034; Bus Drivers, School (SOC 53-3051) basis",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-oews-methods"
+          "bls-outlook"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Little or no change",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "+0.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Employment growth label (this occupation's basis)",
+        "measure": "Employment growth, 2025–2035",
         "occupation_scope": "Bus Drivers, School",
-        "period": "2024—2034; Bus Drivers, School (SOC 53-3051) basis",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Insufficient evidence: the O*NET page does not publish the projected net change in employment (53-3051 basis)",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "Net gain of about 2,900",
         "fact_id": "us-change-2025-2035",
         "market": "United States",
-        "measure": "Net employment change (not published)",
+        "measure": "Net employment change, 2025–2035",
         "occupation_scope": "Bus Drivers, School",
-        "period": "2024—2034; Bus Drivers, School (SOC 53-3051) basis",
-        "source_refs": [
-          "bls-oews-methods"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "61,000 (2024—2034)",
-        "fact_id": "us-openings-2025-2035",
-        "market": "United States",
-        "measure": "Total projected job openings over the projection period (this occupation's basis)",
-        "occupation_scope": "Bus Drivers, School",
-        "period": "2024—2034; Bus Drivers, School (SOC 53-3051) basis",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "About 56,500 annually",
+        "fact_id": "us-openings-2025-2035",
+        "market": "United States",
+        "measure": "Projected annual openings",
+        "occupation_scope": "Bus Drivers, School",
+        "period": "2025–2035",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      },
+      {
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence: no mainland China national occupational wage precisely matching school bus drivers was established; this page does not display occupation-level figures",
         "fact_id": "cn-industry-science-tech-2024",
         "market": "Mainland China",
@@ -37666,7 +37743,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence: the industry category average does not list this occupation separately, and is not used to replace an occupational wage",
         "fact_id": "cn-industry-manufacturing-2024",
         "market": "Mainland China",
@@ -37678,7 +37755,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence: the major occupational group average does not distinguish specific occupations, and this page does not infer or display this occupation's wage from it",
         "fact_id": "cn-professional-technical-2024",
         "market": "Mainland China",
@@ -37690,7 +37767,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence: the urban unit basis does not list this occupation separately, and this page does not display occupation-level figures",
         "fact_id": "cn-urban-nonprivate-2024",
         "market": "Mainland China",
@@ -37702,7 +37779,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "29,240 dollars/year (10th percentile)",
         "fact_id": "us-wage-low10-2025",
         "market": "United States",
@@ -37714,7 +37791,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "65,730 dollars/year (90th percentile)",
         "fact_id": "us-wage-high10-2025",
         "market": "United States",
@@ -37726,7 +37803,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry median wage for this occupation)",
         "fact_id": "us-industry-wage-aerospace-mfg-2025",
         "market": "United States",
@@ -37738,7 +37815,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry median wage for this occupation)",
         "fact_id": "us-industry-wage-engineering-services-2025",
         "market": "United States",
@@ -37750,7 +37827,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry median wage for this occupation)",
         "fact_id": "us-industry-wage-federal-2025",
         "market": "United States",
@@ -37762,7 +37839,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry median wage for this occupation)",
         "fact_id": "us-industry-wage-rd-2025",
         "market": "United States",
@@ -37774,7 +37851,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry median wage for this occupation)",
         "fact_id": "us-industry-wage-instruments-2025",
         "market": "United States",
@@ -37786,7 +37863,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "38,650 dollars/year (25th percentile)",
         "fact_id": "us-wage-p25-2025",
         "market": "United States",
@@ -37798,7 +37875,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "58,430 dollars/year (75th percentile)",
         "fact_id": "us-wage-p75-2025",
         "market": "United States",
@@ -37810,7 +37887,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "396800 people",
         "fact_id": "us-employment-current",
         "market": "United States",
@@ -37822,7 +37899,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "399700 people",
         "fact_id": "us-employment-2035-current",
         "market": "United States",
@@ -37834,7 +37911,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Growth of 0.7% (a rounded 1%, Slower than average)",
         "fact_id": "us-growth-current",
         "market": "United States",
@@ -37846,7 +37923,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "2900 people",
         "fact_id": "us-change-current",
         "market": "United States",
@@ -37858,7 +37935,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "56500/year",
         "fact_id": "us-openings-current",
         "market": "United States",
@@ -37870,7 +37947,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "45830 dollars/year",
         "fact_id": "us-industry-current-1",
         "market": "United States",
@@ -37882,7 +37959,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "50040 dollars/year",
         "fact_id": "us-industry-current-2",
         "market": "United States",
@@ -37894,7 +37971,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "48980 dollars/year",
         "fact_id": "us-industry-current-3",
         "market": "United States",
@@ -37906,42 +37983,30 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "46100 dollars/year",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "No private-school figure in this table",
         "fact_id": "us-industry-current-4",
         "market": "United States",
-        "measure": "Median annual wage for school bus drivers within the industry",
+        "measure": "Industry scope of the BLS handbook",
         "occupation_scope": "Bus Drivers, School (SOC53-3051)",
         "period": "May 2025",
         "source_refs": [
           "ooh-current"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Bus Drivers, School",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and scheduling records"
     },
     "badges": [
-      "O*NET 53-3051.00 · safe student transport / boarding, alighting, and crossing rules / vehicle and safety equipment inspection",
-      "operating per the approved route and a strict schedule / riding order and behavior guidance / first aid and emergency readiness",
-      "U.S. data uses this occupation's exact basis · mainland China registers only the basis and gaps under the evidence routing"
+      "Student transport | vehicle checks | exception handover",
+      "Check driver qualification, vehicle permits and hiring separately",
+      "U.S. SOC 53-3051; mainland local job examples"
     ],
     "metrics": [
       {
@@ -37954,19 +38019,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034, 53-3051.00 basis)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment (2024, 53-3051.00 basis)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024—2034, 53-3051.00 basis)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37980,17 +38045,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What school bus drivers do, what education and qualifications are needed, how U.S. and Chinese salaries and prospects look, and which steps AI and automation will change; the gaps registered under the mainland China evidence routing are retained."
+      "text": "Learn about student transport, pre-trip checks and handovers. Compare U.S. pay with Liyang and Wuxi examples and try a paper exercise."
     },
     "title": {
       "availability": "available",
-      "text": "Bus Drivers, School"
+      "text": "School Bus Drivers: Duties, Pay and Qualifications"
     }
   },
-  "source_content_sha256": "a5c3c190fca65c72621379b9f65687b42520ac23315c2cd56c1af3c17d651ad3",
+  "source_content_sha256": "da6b89c20bebd06742a55450c3fbdb3fc6ccb0db68fe27fd6f09452d82f56565",
   "subject": {
     "canonical_slug": "bus-drivers-school",
-    "name": "Bus Drivers, School",
-    "summary": "The entry on this page corresponds to school bus drivers (U.S. side O*NET-SOC 53-3051.00): driving a school bus to transport students and ensure adherence to safety rules — inspecting the vehicle and safety equipment before departure, picking up and dropping off at fixed neighborhood points on a strict schedule, applying safety rules when students board, alight, and cross, maintaining cabin order, reporting faults and delays and accidents, submitting operating reports on student counts and mileage, and keeping the cabin clean; the work routinely involves long periods of sitting, an enclosed cabin, split morning and afternoon periods, and high-frequency contact with students and parents, and its duties do not equal deciding routes and fees on its own, nor do they replace the school bus safety management responsibility of the school and the competent department."
+    "name": "School Bus Drivers",
+    "summary": "School bus drivers transport students on assigned runs, check the vehicle and record exceptions. Check which duties belong to the driver, onboard attendant and operator, along with the work schedule, driver qualification and vehicle permit."
   }
 }

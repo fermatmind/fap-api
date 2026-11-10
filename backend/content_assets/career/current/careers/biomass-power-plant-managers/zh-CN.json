@@ -57,13 +57,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -84,7 +84,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -1572,7 +1572,7 @@
         "status": "pending_mapping"
       },
       "item:biomass-power-plant-managers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:biomass-power-plant-managers.sources.source-card.1": {
         "status": "mapped"
@@ -23031,12 +23031,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "职业身份与口径必须分开核对：O*NET 把 11-3051.04（Biomass Power Plant Managers）列为 Job Zone Four（需要相当准备）：该页学历字段显示受访者回答为学士学位 61%、副学士或其他两年制学位 17%、post-secondary certificate 13%，多数岗位需要四年制学士学位但并非全部如此；兴趣代码为 CRE（常规型 72、现实型 69、企业型 64），其余兴趣类型为研究型 37、社会型 12、艺术型 0。该职业的身份与任务与工作情境与技能为 11-3051.04 本职业口径；而工资与就业与预测在 O*NET 页面上明确标注取自父职业 Industrial Production Managers（11-3051.00）：地方工资页写明「Wage data for Industrial Production Managers.」并给出「Workers on average earn $126,060」，年薪分位为第 10 分位 78,000 美元、第 25 分位 98,160 美元、中位数 126,060 美元、第 75 分位 161,880 美元、第 90 分位 205,520 美元；时薪分位为 37.50 与 47.19 与 60.61 与 77.83 与 98.81 美元；就业趋势页写明「Employment data for Industrial Production Managers.」并给出2024 年在岗 241,900 人、2034 年约 246,500 人（2024—2034 年 2%，标签为慢于平均（Slower than average））、预测期年均职位空缺 17,100；行业分布为 11-3051.04 本职业口径：制造业 73%、其他行业（含批发贸易）27%。本页据此分别按本职业口径与父职业口径发布并逐处标注资料期。学历、职业培训、行业认证、雇主任用、锅炉与压力容器与电力生产与高处与受限空间作业许可、停机与启动与事故处置与检修与采购的签字权限是不同状态，须按机构与岗位与法域逐项核验。中国大陆侧本轮未建立与该职业一一对应的全国工资口径，本页不发布任何中国大陆薪资数值，只保留可见缺口标记。"
+              "第 09 节 PM-82：核两版虚构整改交接，写一页给运行主管。"
             ]
           },
           "id": "biomass-power-plant-managers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "pm82-paper",
             "onet"
           ],
           "type": "prose"
@@ -23046,13 +23046,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以安全与生产与设备与人员与合规管理为核心、并在电力生产与作业许可与监管要求下工作的运营管理岗位，核心是把指标与现场与人员与记录与整改写清楚并接受检查，而不是「管人不管现场」；其美国工资与就业与预测数据在 O*NET 页面上按父职业 11-3051.00 口径给出并逐处标注，行业分布为本职业 11-3051.04 口径；中国大陆侧未取得与该职业一一对应的全国工资口径，本页不发布中国大陆薪资数值并可见标记为证据不足。"
+              "用 PM-82 试做记录核对。看看自己是否愿意追查整改出处、写清未决项并协调接手人。"
             ]
           },
           "id": "biomass-power-plant-managers.quick-decision.fermat-decision-card.7",
           "source_refs": [
             "onet",
-            "onet"
+            "pm82-paper"
           ],
           "type": "prose"
         }
@@ -23120,7 +23120,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "美国57工作情境回答：安全责任94%很高，面对面93%、邮件92%、常用PPE94%、非环境受控室内91%/受控90%每天；两种室内环境不互斥。92%典型周超过40小时；噪声72%、污染物48%、户外天气40%、高处39%每天。决策60%每天/16%每周非每天/14%每月非每周，决策自由68%很大/18%一些/14%有限；任务优先级自由55%很大/30%一些/15%有限。期限24%每天/65%每周非每天；准确47%极重要/37%非常/15%重要，重复41%极/30%非常/15%重要；错误40%极严重/31%严重/18%较严重。日程44%不规律、56%规律且有固定安排，不等于固定白班或无轮班。自动化37%高/16%中/25%轻微/23%无是传统系统情境，非GenAI采用率；四舍五入不强行归一。团队、坐姿、站立、平衡未显示比例；对其他员工工作成果与结果的责任84%很高；另一字段“决策对同事或公司结果的影响”仅显示11%重要/15%中等，两者不可混同，未显示类别不补造。走动17%超过半时/19%约半时/64%少于半时，特殊PPE73%每年非每月/19%从不；轻微烧割咬蜇伤暴露29%每月非每周/41%每年非每月/16%从不，疾病感染84%从不/14%每月非每周。暴露频率不是伤害、疾病或心理问题发生率。\n工具：5项软件招聘信号Excel、Office、Outlook、PowerPoint、Word全部Not available。Lightcast2025全年美国唯一招聘广告，分母为本职业全部唯一广告；缺比例不填0，不推出在岗采用、GenAI采用或无软件需求。详细页另列9类软件，含日历排程、设施管理、工业控制、库存等，DCS/PLC控制与生成式AI不是同一技术。\n准备：O*NET Updated2025的新入职所需教育回答为学士61%、副学士/其他两年制17%、高中后证书13%；不是现职学历分布，显示项不强行归一到100%。Job Zone4/SVP7至低于8是职业群准备程度，不能当作个人固定培训年限或中国职业资格。4,520项美国相关训练目录依据IPEDS2025—26目录、2024—25学位记录及CIP交叉映射，含通用工商管理/运营管理；不等于4,520个生物质电厂专属实时招生项目。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。关联认证目录列APPA Public Power Customer Service Manager、Public Power Manager与WPI Certified Biosolids Land Appliers Class II三项；仅关联第三方认证，不是中国国家资格、全体经理门槛或雇主任命。\n行业：2025美国行业分布为制造业74%、其他（含批发贸易）26%；详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。"
+              "美国57工作情境回答：安全责任94%很高，面对面93%、邮件92%、常用PPE94%、非环境受控室内91%/受控90%每天；两种室内环境不互斥。92%典型周超过40小时；噪声72%、污染物48%、户外天气40%、高处39%每天。决策60%每天/16%每周非每天/14%每月非每周，决策自由68%很大/18%一些/14%有限；任务优先级自由55%很大/30%一些/15%有限。期限24%每天/65%每周非每天；准确47%极重要/37%非常/15%重要，重复41%极/30%非常/15%重要；错误40%极严重/31%严重/18%较严重。日程44%不规律、56%规律且有固定安排，不等于固定白班或无轮班。自动化37%高/16%中/25%轻微/23%无是传统系统情境，非GenAI采用率；四舍五入不强行归一。团队、坐姿、站立、平衡未显示比例；对其他员工工作成果与结果的责任84%很高；另一字段“决策对同事或公司结果的影响”仅显示11%重要/15%中等，两者不可混同，未显示类别不补造。走动17%超过半时/19%约半时/64%少于半时，特殊PPE73%每年非每月/19%从不；轻微烧割咬蜇伤暴露29%每月非每周/41%每年非每月/16%从不，疾病感染84%从不/14%每月非每周。暴露频率不是伤害、疾病或心理问题发生率。\n工具：5项软件招聘信号Excel、Office、Outlook、PowerPoint、Word全部Not available。Lightcast2025全年美国唯一招聘广告，分母为本职业全部唯一广告；缺比例不填0，不推出在岗采用、GenAI采用或无软件需求。详细页另列9类软件，含日历排程、设施管理、工业控制、库存等，DCS/PLC控制与生成式AI不是同一技术。\n准备：O*NET Updated2025的新入职所需教育回答为学士61%、副学士/其他两年制17%、高中后证书13%；不是现职学历分布，显示项不强行归一到100%。Job Zone4/SVP7至低于8是职业群准备程度，不能当作个人固定培训年限或中国职业资格。O*NET 显示 4,520 个培训目录项目，含通用工商管理等方向。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。关联认证目录列APPA Public Power Customer Service Manager、Public Power Manager与WPI Certified Biosolids Land Appliers Class II三项；仅关联第三方认证，不是中国国家资格、全体经理门槛或雇主任命。\n行业：美国 O*NET 上位组详情标注 2025 年制造业 74%。行业子表另列其他行业（含批发贸易）26%，该行未单列年份。数据不描述生物质电厂自身的雇主占比。详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。"
             ]
           },
           "id": "biomass-power-plant-managers.profile.work-context-block.1",
@@ -23183,7 +23183,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国职业中位/起薪/城市月薪证据不足；匹配宽口径参照另列。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、管理267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。城镇地域5人及以上法人单位，不含个体工商户/自由职业者；非私营含机关事业及港澳台外商。规模以上口径为规定16行业企业法人单位。税前工资含个人代扣税社保公积金，不含股权激励兑现、入股分红和资本收益；按实际支付单位核派遣/委托运营，不一概排除所有承包雇员。"
+              "中国职业中位/起薪/城市月薪证据不足；匹配宽口径参照另列。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、中层及以上管理人员267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。城镇地域5人及以上法人单位，不含个体工商户/自由职业者；非私营含机关事业及港澳台外商。规模以上口径为规定16行业企业法人单位。税前工资含个人代扣税社保公积金，不含股权激励兑现、入股分红和资本收益；按实际支付单位核派遣/委托运营，不一概排除所有承包雇员。"
             ]
           },
           "id": "biomass-power-plant-managers.profile.onet-structured-fields-block.3",
@@ -23212,11 +23212,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
+              "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。"
             ]
           },
           "id": "biomass-power-plant-managers.profile.onet-structured-fields-block.4",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -23242,7 +23243,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025美国行业分布为制造业74%、其他（含批发贸易）26%；详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。5项软件招聘信号Excel、Office、Outlook、PowerPoint、Word全部Not available。Lightcast2025全年美国唯一招聘广告，分母为本职业全部唯一广告；缺比例不填0，不推出在岗采用、GenAI采用或无软件需求。详细页另列9类软件，含日历排程、设施管理、工业控制、库存等，DCS/PLC控制与生成式AI不是同一技术。"
+              "美国 O*NET 上位组详情标注 2025 年制造业 74%。行业子表另列其他行业（含批发贸易）26%，该行未单列年份。数据不描述生物质电厂自身的雇主占比。 O*NET 列出 Excel、Office、Outlook、PowerPoint 和 Word，未公布 2025 年美国关联职位广告提及率。缺值不等于零。"
             ]
           },
           "id": "biomass-power-plant-managers.profile.onet-structured-fields-block.5",
@@ -23357,11 +23358,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "19任务13核心6补充，全部有重要性分：核心安全方案91、监管指标88、日志报告79、人员/设备活动监督78、现场检查72、燃料除灰检修安排71、预算70、趋势/气化工艺65、报告64、库存60、通信57。停复机78、运行数据73、DCS监测70、调控69、测试维修配电68、调节生产64是补充，不要求每个经理亲自完成。41工作活动、24详细活动、57情境；基本10/迁移25/知识33/能力52均有评分。安装0是实际技能评分，美术/食品生产知识1、能力最低3；未列工作风格和具体兴趣领域，不补造。"
+              "生物质发电厂经理组织电厂运行、检修与安全工作，核对运行记录、人员安排、燃料供应和预算，并跟踪异常由谁处理。职位可能主管某一专业或全厂。具体指挥和审批权限以实际岗位、设备与制度为准。"
             ]
           },
           "id": "biomass-power-plant-managers.profile.definition-block.11",
           "source_refs": [
+            "onet",
             "details-current"
           ],
           "type": "prose"
@@ -23478,7 +23480,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET Updated2025的新入职所需教育回答为学士61%、副学士/其他两年制17%、高中后证书13%；不是现职学历分布，显示项不强行归一到100%。Job Zone4/SVP7至低于8是职业群准备程度，不能当作个人固定培训年限或中国职业资格。4,520项美国相关训练目录依据IPEDS2025—26目录、2024—25学位记录及CIP交叉映射，含通用工商管理/运营管理；不等于4,520个生物质电厂专属实时招生项目。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。关联认证目录列APPA Public Power Customer Service Manager、Public Power Manager与WPI Certified Biosolids Land Appliers Class II三项；仅关联第三方认证，不是中国国家资格、全体经理门槛或雇主任命。O*NET认证详情6195-A称PPCSM面向客服主管/经理/高管，5门课程、笔试与服务部门评估/业务计划须首课起3年内完成、2年继续教育续证；6196-A称PPM面向公共电力主管/经理，考试及2年继续教育续证。APPA当前目录列Leadership Essentials等，未见这两个同名项目，本轮未核同名证当前开放、报名/学时/费用或名称承继，不把其他项目自动等同。O*NET8161-B称Biosolids Land Appliers Class II须超过2年经验、考试、2年继续教育续证；不要求超过2年高中后教育，不能读成完全无学历门槛。WPI现行自愿认证通用过程审核资格，考试通过证2年、重考间隔30天。通用续证须24小时继续教育、签署声明和110美元；逾期超过6个月另35，超过2年不能续或须重考。该项目是生物固体土地施用，不因名字含bio就证明电厂燃料/锅炉管理能力；具体ClassII初始费用/替代条件未核。新考试页2026-09-25仍显示平台迁移移除报名链接、预计10-02恢复；10-09读取仍为该通知，当前报名可用性未核，不把预计日期当已恢复。"
+              "O*NET 细分新聘所需教育问项：61% 的受访者答学士、17% 答副学士或其他两年制学位、13% 答高中后证书。这不是现职学历构成。BLS 上位组的典型条件为学士及相关工作经验至少 5 年。 O*NET 显示 4,520 个培训目录项目。CareerOneStop 关联目录列三项：美国公共电力协会的公共电力客户服务经理、公共电力经理，以及 Water Professionals International 的二级生物固体土地施用人员。目录命中不代表正在招生或法定任职要求。"
             ]
           },
           "id": "biomass-power-plant-managers.profile.career-quick-answers-block.19",
@@ -23486,6 +23488,7 @@
             "details-current",
             "training-current",
             "cert-current",
+            "ep",
             "cert-6195-a",
             "cert-6196-a",
             "cert-8161-b",
@@ -23516,7 +23519,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "学历、培训、第三方认证、雇主任用、国家操作证、设备资格和本次作业审批分别核。2025美国行业分布为制造业74%、其他（含批发贸易）26%；详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、管理267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
+              "学历、培训、第三方认证、雇主任用、国家操作证、设备资格和本次作业审批分别核。美国 O*NET 上位组详情标注 2025 年制造业 74%。行业子表另列其他行业（含批发贸易）26%，该行未单列年份。数据不描述生物质电厂自身的雇主占比。详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、中层及以上管理人员267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
             ]
           },
           "id": "biomass-power-plant-managers.profile.career-quick-answers-block.21",
@@ -23567,7 +23570,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "身份、任务、技能与情境是本职业；工资、就业与行业为父职业。美国9样本职称含Fuel Manager、Maintenance Manager/Superintendent/Supervisor、Operations and Maintenance Manager、Operations Superintendent/Supervisor、Plant Manager、Utilities Superintendent；不当作中国实采招聘。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、管理267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
+              "身份、任务、技能与情境是本职业；工资、就业与行业为父职业。美国9样本职称含Fuel Manager、Maintenance Manager/Superintendent/Supervisor、Operations and Maintenance Manager、Operations Superintendent/Supervisor、Plant Manager、Utilities Superintendent；不当作中国实采招聘。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、中层及以上管理人员267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
             ]
           },
           "id": "biomass-power-plant-managers.profile.career-quick-answers-block.24",
@@ -23598,14 +23601,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET Updated2025的新入职所需教育回答为学士61%、副学士/其他两年制17%、高中后证书13%；不是现职学历分布，显示项不强行归一到100%。Job Zone4/SVP7至低于8是职业群准备程度，不能当作个人固定培训年限或中国职业资格。4,520项美国相关训练目录依据IPEDS2025—26目录、2024—25学位记录及CIP交叉映射，含通用工商管理/运营管理；不等于4,520个生物质电厂专属实时招生项目。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。关联认证目录列APPA Public Power Customer Service Manager、Public Power Manager与WPI Certified Biosolids Land Appliers Class II三项；仅关联第三方认证，不是中国国家资格、全体经理门槛或雇主任命。中国主流学历/在岗晋升全国占比未核，按真实招聘条件判断。"
+              "O*NET 细分新聘所需教育问项：61% 的受访者答学士、17% 答副学士或其他两年制学位、13% 答高中后证书。这不是现职学历构成。BLS 上位组的典型条件为学士及相关工作经验至少 5 年。 O*NET 显示 4,520 个培训目录项目。CareerOneStop 关联目录列三项：美国公共电力协会的公共电力客户服务经理、公共电力经理，以及 Water Professionals International 的二级生物固体土地施用人员。目录命中不代表正在招生或法定任职要求。"
             ]
           },
           "id": "biomass-power-plant-managers.profile.career-quick-answers-block.26",
           "source_refs": [
             "details-current",
             "training-current",
-            "cert-current"
+            "cert-current",
+            "ep"
           ],
           "type": "prose"
         },
@@ -23628,7 +23632,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "国家能源局2023版二十五项重点要求印发通知要求各电力企业在规划设计、安装调试、运行维护、更新改造落实要求并宣传培训，监管部门监督指导。此处已读通知，未以通知正文冒充附件的全部具体技术条款；具体控制/隔离/停复机按相应设备规程、风险判断与授权执行。2014项目管理通知是历史政策原文：鼓励符合技术经济条件的生物质热电联产，规划指导项目；农林生物质项目禁止掺烧煤等化石能源。对象限定农林项目，不能借O*NET美国任务出现coal证明中国此类项目合法掺煤；旧核准/补贴条文不当作本轮已核的完整2026项目手续。管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处安装维护拆除排除附于设备设施、有标准护栏的固定用具和平台。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证限规定危险化学品达到规定量的化工企业（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。"
+              "国家能源局2023版二十五项重点要求印发通知要求各电力企业在规划设计、安装调试、运行维护、更新改造落实要求并宣传培训，监管部门监督指导。此处已读通知，未以通知正文冒充附件的全部具体技术条款；具体控制/隔离/停复机按相应设备规程、风险判断与授权执行。2014项目管理通知是历史政策原文：鼓励符合技术经济条件的生物质热电联产，规划指导项目；农林生物质项目禁止掺烧煤等化石能源。对象限定农林项目，不能借O*NET美国任务出现coal证明中国此类项目合法掺煤；旧核准/补贴条文不当作本轮已核的完整2026项目手续。管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处作业按目录适用范围核。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证适用于使用国家规定种类危险化学品从事生产且用量达到规定数量的化工企业，危险化学品生产企业除外（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。"
             ]
           },
           "id": "biomass-power-plant-managers.profile.career-quick-answers-block.28",
@@ -23825,13 +23829,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表把生物质电厂经理与五条相邻方向放在同一组维度上比较：职业方向、核心工作与产出、关键区别，以及每种偏好更适合的选择。"
+              "对照六个相邻方向，先分清发电运行协调、现场操作、燃料生产和技术开发。"
             ]
           },
           "id": "biomass-power-plant-managers.direction-comparison.adjacent-career-comparison-table.10",
           "source_refs": [
             "onet",
-            "onet"
+            "details-current"
           ],
           "type": "prose"
         },
@@ -23855,7 +23859,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做多行业的生产与成本与交付管理，优先比较工业生产经理；若你更愿意做生物质发电设施的安全与运行管理，则适合本职业。"
+              "若你更愿意做多行业的生产与成本与交付管理，优先比较工业生产经理；若你更愿意做生物质发电设施的安全与运行管理，可进一步了解本职业。"
             ]
           },
           "id": "biomass-power-plant-managers.direction-comparison.adjacent-career-comparison-table.12",
@@ -23914,7 +23918,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做生物燃料生产与质量管理，优先比较生物燃料生产经理；若你更愿意做发电侧设施运行管理，则适合本职业。"
+              "若你更愿意做生物燃料生产与质量管理，优先比较生物燃料生产经理；若你更愿意做发电侧设施运行管理，可进一步了解本职业。"
             ]
           },
           "id": "biomass-power-plant-managers.direction-comparison.adjacent-career-comparison-table.16",
@@ -23973,7 +23977,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做地热资源与井口与地面系统管理，优先比较地热生产经理；若你更愿意做生物质机组运行组织，则适合本职业。"
+              "若你更愿意做地热资源与井口与地面系统管理，优先比较地热生产经理；若你更愿意做生物质机组运行组织，可进一步了解本职业。"
             ]
           },
           "id": "biomass-power-plant-managers.direction-comparison.adjacent-career-comparison-table.20",
@@ -24032,7 +24036,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做现场操作与巡检与维护，优先比较生物质电厂技术员；若你更愿意做组织与人员与预算与合规管理，则适合本职业。"
+              "若你更愿意做现场操作与巡检与维护，优先比较生物质电厂技术员；若你更愿意做组织与人员与预算与合规管理，可进一步了解本职业。"
             ]
           },
           "id": "biomass-power-plant-managers.direction-comparison.adjacent-career-comparison-table.24",
@@ -24091,7 +24095,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做工艺与产品开发与放大，优先比较生物燃料/生物柴油技术与产品开发经理；若你更愿意做既有设施的运行管理，则适合本职业。"
+              "若你更愿意做工艺与产品开发与放大，优先比较生物燃料/生物柴油技术与产品开发经理；若你更愿意做既有设施的运行管理，可进一步了解本职业。"
             ]
           },
           "id": "biomass-power-plant-managers.direction-comparison.adjacent-career-comparison-table.28",
@@ -24150,7 +24154,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做水库与机组与水力调度管理，优先比较水电生产经理；若你更愿意做生物质机组运行组织，则适合本职业。"
+              "若你更愿意做水库与机组与水力调度管理，优先比较水电生产经理；若你更愿意做生物质机组运行组织，可进一步了解本职业。"
             ]
           },
           "id": "biomass-power-plant-managers.direction-comparison.adjacent-career-comparison-table.32",
@@ -24247,7 +24251,7 @@
                 "url": "https://www.onetonline.org/link/industry/11-3051.04"
               },
               {
-                "entity": "O*NET 11-3051.04 职业摘要（就业与预测字段）",
+                "entity": "美国 BLS 表 1.2：工业生产经理 11-3051",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/11-3051.04"
@@ -24289,7 +24293,7 @@
                 "url": "https://www.onetonline.org/link/hot_tech/11-3051.04"
               },
               {
-                "entity": "O*NET 11-3051.04 职业摘要（就业与预测字段）",
+                "entity": "美国 BLS 表 1.2：工业生产经理 11-3051",
                 "id": "link-17",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/11-3051.04"
@@ -24449,11 +24453,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务判断：GenAI可在获准数据内尝试离线检索、报表/工单草稿与核对提示；本轮未取得本职业采用率、效果、替代测量或雇主SOP。工业控制、DCS/PLC、预测性维护与生成式AI区分；系统输出不能自动确认设备/人员状态或许可，现场控制与停复机按正式规程及授权。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可用虚构资料试做整改记录和交接草稿。人核编号、原件和未决项，并按权限确认真实整改、审批和复运。"
             ]
           },
           "id": "biomass-power-plant-managers.ai-impact.ai-impact-table.18",
           "source_refs": [
+            "source-fermatmind-ai-rubric",
             "editor",
             "details-current",
             "hr-current"
@@ -24591,7 +24596,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国行业分布为制造业74%、其他（含批发贸易）26%；详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。"
+              "美国 O*NET 上位组详情标注 2025 年制造业 74%。行业子表另列其他行业（含批发贸易）26%，该行未单列年份。数据不描述生物质电厂自身的雇主占比。详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。"
             ]
           },
           "id": "biomass-power-plant-managers.ai-impact.ai-impact-table.28",
@@ -24619,7 +24624,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
+              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长2.6%（约与平均相当），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
             ]
           },
           "id": "biomass-power-plant-managers.ai-impact.ai-impact-table.30",
@@ -24993,7 +24998,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
+              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长2.6%（约与平均相当），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
             ]
           },
           "id": "biomass-power-plant-managers.ai-impact.ai-impact-table.56",
@@ -25049,7 +25054,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国行业分布为制造业74%、其他（含批发贸易）26%；详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。"
+              "美国 O*NET 上位组详情标注 2025 年制造业 74%。行业子表另列其他行业（含批发贸易）26%，该行未单列年份。数据不描述生物质电厂自身的雇主占比。详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。"
             ]
           },
           "id": "biomass-power-plant-managers.ai-impact.ai-impact-table.60",
@@ -25095,12 +25100,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、实际采用、安全绩效与就业是不同测量对象；O*NET 展示的 BLS 数据对该职业给出 2025—2035年3% 与年均空缺 17,000 的父职业 11-3051.00 口径，两者不能互相替代。"
+              "费马 AI 子任务编辑指数：整理虚构整改记录 25、起草交接 25、作业签字和复运决定 0。等权取整为 17%，不代表真实采用、工时或替代。"
             ]
           },
           "id": "biomass-power-plant-managers.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
+            "source-fermatmind-ai-rubric",
             "onet"
           ],
           "type": "prose"
@@ -25202,7 +25207,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
+              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长2.6%（约与平均相当），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
             ]
           },
           "id": "biomass-power-plant-managers.ai-impact.ai-impact-table.70",
@@ -25216,7 +25221,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。不能据正增长证明永不替代。"
+              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长2.6%（约与平均相当），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。不能据正增长证明永不替代。"
             ]
           },
           "id": "biomass-power-plant-managers.ai-impact.ai-impact-table.71",
@@ -26092,11 +26097,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国本职业全国中位、起薪、分位与城市月薪；宽口径参照另列，不填精确项。"
+              "北京电投数智能源科技有限公司的南宫生物质电厂生产副总岗位，职责包括生产计划、检修、环保设施与生产队伍管理。岗位正文要求相关专业专科及以上、5 年以上生物质发电生产管理经验及 3 年以上同层级任职。该岗位正文列计酬结构，没有可核的固定工资额。"
             ]
           },
           "id": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
+            "nangong-operations-deputy",
             "nbs-current",
             "editor"
           ],
@@ -26107,11 +26113,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、管理267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
+              "两份招聘用于比较发电运营管理和燃料生产管理。不能据此推断目前仍在招、全国任职门槛或职业薪资。"
             ]
           },
           "id": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
+            "nangong-operations-deputy",
             "nbs-current",
             "editor"
           ],
@@ -26122,11 +26129,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "160,897元/年（2025；该行业城镇非私营年平均）"
+              "阜阳师范大学就业页刊载龙基能源 2026 年招聘，列福建三明生物质颗粒厂厂长。它是燃料生产管理邻岗，公告列集团报酬结构，没有为该厂长单列工资金额。"
             ]
           },
           "id": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
+            "longji-pellet-manager-2026",
             "nbs-current",
             "editor"
           ],
@@ -26137,11 +26145,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "城镇地域5人及以上法人单位，不含个体工商户/自由职业者；非私营含机关事业及港澳台外商。规模以上口径为规定16行业企业法人单位。税前工资含个人代扣税社保公积金，不含股权激励兑现、入股分红和资本收益；按实际支付单位核派遣/委托运营，不一概排除所有承包雇员。"
+              "两份招聘用于比较发电运营管理和燃料生产管理。不能据此推断目前仍在招、全国任职门槛或职业薪资。"
             ]
           },
           "id": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
+            "longji-pellet-manager-2026",
             "nbs-current",
             "editor"
           ],
@@ -26152,7 +26161,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "66,451元/年（2025；该行业城镇私营年平均）"
+              "2025 年电力、热力、燃气及水生产和供应业城镇私营单位：66,451 元/年。"
             ]
           },
           "id": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.11",
@@ -26317,7 +26326,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、管理267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。书面核城市、机组与管理幅度、合同、值班检修和计酬。"
+              "国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、中层及以上管理人员267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。书面核城市、机组与管理幅度、合同、值班检修和计酬。"
             ]
           },
           "id": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.22",
@@ -26377,7 +26386,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑核对雇主实体与发电/供热/委托运营职责，未引用本轮中国招聘样本。"
+              "编辑核对雇主实体与发电/供热/委托运营职责。"
             ]
           },
           "id": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.26",
@@ -26509,7 +26518,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "关联认证目录列APPA Public Power Customer Service Manager、Public Power Manager与WPI Certified Biosolids Land Appliers Class II三项；仅关联第三方认证，不是中国国家资格、全体经理门槛或雇主任命。O*NET认证详情6195-A称PPCSM面向客服主管/经理/高管，5门课程、笔试与服务部门评估/业务计划须首课起3年内完成、2年继续教育续证；6196-A称PPM面向公共电力主管/经理，考试及2年继续教育续证。APPA当前目录列Leadership Essentials等，未见这两个同名项目，本轮未核同名证当前开放、报名/学时/费用或名称承继，不把其他项目自动等同。O*NET8161-B称Biosolids Land Appliers Class II须超过2年经验、考试、2年继续教育续证；不要求超过2年高中后教育，不能读成完全无学历门槛。WPI现行自愿认证通用过程审核资格，考试通过证2年、重考间隔30天。通用续证须24小时继续教育、签署声明和110美元；逾期超过6个月另35，超过2年不能续或须重考。该项目是生物固体土地施用，不因名字含bio就证明电厂燃料/锅炉管理能力；具体ClassII初始费用/替代条件未核。新考试页2026-09-25仍显示平台迁移移除报名链接、预计10-02恢复；10-09读取仍为该通知，当前报名可用性未核，不把预计日期当已恢复。国家能源局2023版二十五项重点要求印发通知要求各电力企业在规划设计、安装调试、运行维护、更新改造落实要求并宣传培训，监管部门监督指导。此处已读通知，未以通知正文冒充附件的全部具体技术条款；具体控制/隔离/停复机按相应设备规程、风险判断与授权执行。"
+              "O*NET 显示 4,520 个培训目录项目。CareerOneStop 关联目录列三项：美国公共电力协会的公共电力客户服务经理、公共电力经理，以及 Water Professionals International 的二级生物固体土地施用人员。目录命中不代表正在招生或法定任职要求。"
             ]
           },
           "id": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.33",
@@ -26709,11 +26718,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "实际机组类型、容量、管理幅度和任职形式分别核；职业级月薪缺口不按年均/12填。"
+              "两份招聘用于比较发电运营管理和燃料生产管理。不能据此推断目前仍在招、全国任职门槛或职业薪资。"
             ]
           },
           "id": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
+            "nangong-operations-deputy",
+            "longji-pellet-manager-2026",
             "nbs-current",
             "editor"
           ],
@@ -26753,11 +26764,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业中国月薪区间未取得。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、管理267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
+              "两份招聘用于比较发电运营管理和燃料生产管理。不能据此推断目前仍在招、全国任职门槛或职业薪资。"
             ]
           },
           "id": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
+            "nangong-operations-deputy",
+            "longji-pellet-manager-2026",
             "nbs-current",
             "editor"
           ],
@@ -26853,7 +26866,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业身份与任务是美国11-3051.04；工资、就业、行业均为父职业11-3051.00。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、管理267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
+              "职业身份与任务是美国11-3051.04；工资、就业、行业均为父职业11-3051.00。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、中层及以上管理人员267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
             ]
           },
           "id": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.55",
@@ -26882,7 +26895,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "平均（Average）；父职业2025—2035增长3%"
+              "平均（Average）；父职业2025—2035增长 2.6%"
             ]
           },
           "id": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.58",
@@ -26919,7 +26932,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 11-3051.04 地方工资页（父职业 11-3051.00 口径）｜https://www.onetonline.org/link/localwages/11-3051.04；O*NET 11-3051.04 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/11-3051.04；O*NET 11-3051.04 就业趋势页｜https://www.onetonline.org/link/localtrends/11-3051.04"
+              "O*NET 11-3051.04 地方工资页（父职业 11-3051.00 口径）｜https://www.onetonline.org/link/localwages/11-3051.04；美国 BLS 表 1.2：工业生产经理 11-3051｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；美国 BLS 表 1.2：工业生产经理 11-3051｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "biomass-power-plant-managers.us-salary.career-snapshot-secondary-locale.8",
@@ -27090,7 +27103,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
+              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长2.6%（约与平均相当），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
             ]
           },
           "id": "biomass-power-plant-managers.us-salary.career-snapshot-secondary-locale.20",
@@ -27104,7 +27117,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3%（Average；父职业11-3051.00）"
+              "2.6%（约与平均相当；父职业11-3051.00）"
             ]
           },
           "id": "biomass-power-plant-managers.us-salary.career-snapshot-secondary-locale.21",
@@ -27118,7 +27131,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
+              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长2.6%（约与平均相当），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
             ]
           },
           "id": "biomass-power-plant-managers.us-salary.career-snapshot-secondary-locale.22",
@@ -27146,7 +27159,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
+              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长2.6%（约与平均相当），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
             ]
           },
           "id": "biomass-power-plant-managers.us-salary.career-snapshot-secondary-locale.24",
@@ -27160,7 +27173,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "身份/任务/情境是本职业，工资/就业/行业父职业。2025美国行业分布为制造业74%、其他（含批发贸易）26%；详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、管理267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
+              "身份/任务/情境是本职业，工资/就业/行业父职业。美国 O*NET 上位组详情标注 2025 年制造业 74%。行业子表另列其他行业（含批发贸易）26%，该行未单列年份。数据不描述生物质电厂自身的雇主占比。详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、中层及以上管理人员267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
             ]
           },
           "id": "biomass-power-plant-managers.us-salary.career-snapshot-secondary-locale.25",
@@ -27602,7 +27615,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27626,7 +27639,7 @@
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/emotional-intelligence-test"
               },
               {
                 "entity": "生物质电厂技术员",
@@ -27707,7 +27720,7 @@
                 "url": "https://www.onetonline.org/link/industry/11-3051.04"
               },
               {
-                "entity": "O*NET 11-3051.04 职业摘要（就业与预测字段）",
+                "entity": "美国 BLS 表 1.2：工业生产经理 11-3051",
                 "id": "link-20",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/11-3051.04"
@@ -28726,7 +28739,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "实际链接为摘要预测，不是中国法。美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
+              "实际链接为摘要预测，不是中国法。美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长2.6%（约与平均相当），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
             ]
           },
           "id": "biomass-power-plant-managers.fit.personality-fit-block.66",
@@ -28773,10 +28786,10 @@
                 "url": "https://www.onetonline.org/link/localwages/11-3051.04"
               },
               {
-                "entity": "O*NET 11-3051.04 就业趋势页",
+                "entity": "美国 BLS 表 1.2：工业生产经理 11-3051",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/11-3051.04"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "《防止电力生产事故的二十五项重点要求（2023版）》（国家能源局）",
@@ -28801,11 +28814,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "国家能源局2023版二十五项重点要求印发通知要求各电力企业在规划设计、安装调试、运行维护、更新改造落实要求并宣传培训，监管部门监督指导。此处已读通知，未以通知正文冒充附件的全部具体技术条款；具体控制/隔离/停复机按相应设备规程、风险判断与授权执行。2014项目管理通知是历史政策原文：鼓励符合技术经济条件的生物质热电联产，规划指导项目；农林生物质项目禁止掺烧煤等化石能源。对象限定农林项目，不能借O*NET美国任务出现coal证明中国此类项目合法掺煤；旧核准/补贴条文不当作本轮已核的完整2026项目手续。管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处安装维护拆除排除附于设备设施、有标准护栏的固定用具和平台。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证限规定危险化学品达到规定量的化工企业（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。"
+              "电力重大事故隐患判定标准及治理监督管理规定自 2026 年 7 月 1 日施行。第 3 条说明电力领域范围，并保留危化、消防和特种设备等领域另有判定标准时的规则。第 4 条由电力企业承担排查治理主体责任。项目经理按岗位权限组织、记录和上报，不从职位名称推定有权签字或复运。"
             ]
           },
           "id": "biomass-power-plant-managers.risk.career-risk-cards.8",
           "source_refs": [
+            "power-major-hazards-2026",
             "nea-current",
             "nea-2014",
             "boiler-current",
@@ -28821,11 +28835,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑风险/控制核对：直接回答：关键风险包括作业许可与管理授权越界、电力生产与锅炉与压力容器与超温超压风险、安全与运行与培训与整改记录不可追溯、自动控制与系统提示与自动报表被当成设备与人员状态、现场与噪声与污染物与高处与超时工作暴露负荷，以及安全与环保与成本数据与信息对外提供越界；控制方式是先确认作业许可与本人授权与班组资质与设备隔离状态并做风险辨识、按制度组织与检查并如实记录指标与异常与人员执行、按程序处置事故与违规与越限与泄漏、按授权范围上报与提供数据，并在超出授权或发现异常时停止并升级。具体停复机/隔离/外发按实际规程、风险判断及权限，不把此页当机构SOP。"
+              "电力重大事故隐患判定标准及治理监督管理规定自 2026 年 7 月 1 日施行。第 3 条说明电力领域范围，并保留危化、消防和特种设备等领域另有判定标准时的规则。第 4 条由电力企业承担排查治理主体责任。项目经理按岗位权限组织、记录和上报，不从职位名称推定有权签字或复运。"
             ]
           },
           "id": "biomass-power-plant-managers.risk.career-risk-cards.9",
           "source_refs": [
+            "power-major-hazards-2026",
             "editor",
             "details-current",
             "nea-current"
@@ -29188,7 +29203,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Job Zone不是中国权限依据；单位任用/审批、设备资格和国家目录作业证分别核。管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处安装维护拆除排除附于设备设施、有标准护栏的固定用具和平台。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证限规定危险化学品达到规定量的化工企业（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。"
+              "Job Zone不是中国权限依据；单位任用/审批、设备资格和国家目录作业证分别核。管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处作业按目录适用范围核。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证适用于使用国家规定种类危险化学品从事生产且用量达到规定数量的化工企业，危险化学品生产企业除外（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。"
             ]
           },
           "id": "biomass-power-plant-managers.risk.career-risk-cards.33",
@@ -29266,7 +29281,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "实际链接是2025—2035父职业预测，不是工资。美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
+              "实际链接是2025—2035父职业预测，不是工资。美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长2.6%（约与平均相当），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
             ]
           },
           "id": "biomass-power-plant-managers.risk.career-risk-cards.38",
@@ -29318,38 +29333,38 @@
             "rows": [
               [
                 "运行管理岗（机组与班组）",
-                "编辑岗位核对：按安全规程与运行规程组织当班运行与巡检与操作与指标管理，处理异常与报警并与检修方协调。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。",
-                "编辑岗位核对：通常看安全规程与作业许可执行力、指标判读与异常处置与记录质量、以及班组沟通与接受检查的态度；停机启动与作业许可边界由机构与岗位安排决定。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。",
-                "提交一份含虚构班前确认与现场检查与异常处置与交接说明的运行管理复盘，不使用真实机组或真实事故数据。",
-                "编辑岗位核对：停机启动与设备隔离属受规范约束作业，须按适用法域与机构许可执行；不得自行决定。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。"
+                "编辑岗位核对：按安全规程与运行规程组织当班运行与巡检与操作与指标管理，处理异常与报警并与检修方协调。真实要求、具体程序和授权按雇主/设备核。",
+                "编辑岗位核对：通常看安全规程与作业许可执行力、指标判读与异常处置与记录质量、以及班组沟通与接受检查的态度；停机启动与作业许可边界由机构与岗位安排决定。真实要求、具体程序和授权按雇主/设备核。",
+                "先做 PM-82 两版核对和一页交接，真实机组及岗位权限另核。",
+                "编辑岗位核对：停机启动与设备隔离属受规范约束作业，须按适用法域与机构许可执行；不得自行决定。真实要求、具体程序和授权按雇主/设备核。"
               ],
               [
                 "检修与设备管理岗",
-                "编辑岗位核对：按计划与工单组织设备与电气与仪控的检修与试验与技术改造，并配合运行方完成隔离与恢复。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。",
-                "编辑岗位核对：通常看检修组织与质量控制与验收能力、对挂牌上锁与隔离与恢复送电与试验要求的把握、以及与运行与安全方协调能力。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。",
-                "提交一份含虚构检修计划与隔离与验收与遗留问题说明的材料。",
-                "编辑岗位核对：检修与试验作业须取得作业许可并落实隔离与验证；不得跳过安全措施。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。"
+                "编辑岗位核对：按计划与工单组织设备与电气与仪控的检修与试验与技术改造，并配合运行方完成隔离与恢复。真实要求、具体程序和授权按雇主/设备核。",
+                "编辑岗位核对：通常看检修组织与质量控制与验收能力、对挂牌上锁与隔离与恢复送电与试验要求的把握、以及与运行与安全方协调能力。真实要求、具体程序和授权按雇主/设备核。",
+                "先做 PM-82 两版核对和一页交接，真实机组及岗位权限另核。",
+                "编辑岗位核对：检修与试验作业须取得作业许可并落实隔离与验证；不得跳过安全措施。真实要求、具体程序和授权按雇主/设备核。"
               ],
               [
                 "安全与应急管理岗",
-                "编辑岗位核对：组织安全方案与风险辨识与培训与演练与事故调查整改，对接监管检查与整改跟踪。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。",
-                "编辑岗位核对：通常看安全体系与法规要求掌握程度、风险辨识与演练组织与事故调查能力、以及整改闭环与对外沟通能力。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。",
-                "提交一份含虚构风险辨识与演练与整改跟踪说明的材料。",
-                "编辑岗位核对：安全与应急内容须按机构与法域要求执行；本页不提供任何规避监管的做法。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。"
+                "编辑岗位核对：组织安全方案与风险辨识与培训与演练与事故调查整改，对接监管检查与整改跟踪。真实要求、具体程序和授权按雇主/设备核。",
+                "编辑岗位核对：通常看安全体系与法规要求掌握程度、风险辨识与演练组织与事故调查能力、以及整改闭环与对外沟通能力。真实要求、具体程序和授权按雇主/设备核。",
+                "先做 PM-82 两版核对和一页交接，真实机组及岗位权限另核。",
+                "编辑岗位核对：安全与应急内容须按机构与法域要求执行；本页不提供任何规避监管的做法。真实要求、具体程序和授权按雇主/设备核。"
               ],
               [
                 "燃料与供应管理岗",
-                "编辑岗位核对：组织生物质燃料的采购与到厂与计量与质量与堆放与除灰渣与库存与供应商管理。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。",
-                "编辑岗位核对：通常看燃料质量判别与计量与堆放与防火防尘能力、对项目合规与补贴与结算要求的把握、以及供应商与运输协调能力。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。",
-                "提交一份含虚构燃料批次与质量与堆放与库存管理说明的材料。",
-                "编辑岗位核对：燃料堆放与粉尘与自燃风险须按机构与法域要求管理；不得以降低质检标准换取成本。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。"
+                "编辑岗位核对：组织生物质燃料的采购与到厂与计量与质量与堆放与除灰渣与库存与供应商管理。真实要求、具体程序和授权按雇主/设备核。",
+                "编辑岗位核对：通常看燃料质量判别与计量与堆放与防火防尘能力、对项目合规与补贴与结算要求的把握、以及供应商与运输协调能力。真实要求、具体程序和授权按雇主/设备核。",
+                "先做 PM-82 两版核对和一页交接，真实机组及岗位权限另核。",
+                "编辑岗位核对：燃料堆放与粉尘与自燃风险须按机构与法域要求管理；不得以降低质检标准换取成本。真实要求、具体程序和授权按雇主/设备核。"
               ],
               [
                 "环保与排放管理岗",
-                "编辑岗位核对：组织环保设施运行与排放监测与数据上报与环保整改与信息公开配合。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。",
-                "编辑岗位核对：通常看环保设施与监测与数据管理能力、对排放限值与信息公开与整改要求的把握、以及与环保与监管部门配合能力。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。",
-                "提交一份含虚构环保运行与监测与整改说明的材料。",
-                "编辑岗位核对：排放监测与数据上报须按机构与法域要求执行；不得篡改或选择性上报监测数据。真实要求、具体程序和授权按雇主/设备核，本轮未引用招聘样本。"
+                "编辑岗位核对：组织环保设施运行与排放监测与数据上报与环保整改与信息公开配合。真实要求、具体程序和授权按雇主/设备核。",
+                "编辑岗位核对：通常看环保设施与监测与数据管理能力、对排放限值与信息公开与整改要求的把握、以及与环保与监管部门配合能力。真实要求、具体程序和授权按雇主/设备核。",
+                "先做 PM-82 两版核对和一页交接，真实机组及岗位权限另核。",
+                "编辑岗位核对：排放监测与数据上报须按机构与法域要求执行；不得篡改或选择性上报监测数据。真实要求、具体程序和授权按雇主/设备核。"
               ]
             ]
           },
@@ -29371,14 +29386,14 @@
                 "id": "education",
                 "values": [
                   "O*NET Updated2025的新入职所需教育回答为学士61%、副学士/其他两年制17%、高中后证书13%；不是现职学历分布，显示项不强行归一到100%。Job Zone4/SVP7至低于8是职业群准备程度，不能当作个人固定培训年限或中国职业资格。",
-                  "4,520项美国相关训练目录依据IPEDS2025—26目录、2024—25学位记录及CIP交叉映射，含通用工商管理/运营管理；不等于4,520个生物质电厂专属实时招生项目。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。关联认证目录列APPA Public Power Customer Service Manager、Public Power Manager与WPI Certified Biosolids Land Appliers Class II三项；仅关联第三方认证，不是中国国家资格、全体经理门槛或雇主任命。O*NET认证详情6195-A称PPCSM面向客服主管/经理/高管，5门课程、笔试与服务部门评估/业务计划须首课起3年内完成、2年继续教育续证；6196-A称PPM面向公共电力主管/经理，考试及2年继续教育续证。APPA当前目录列Leadership Essentials等，未见这两个同名项目，本轮未核同名证当前开放、报名/学时/费用或名称承继，不把其他项目自动等同。O*NET8161-B称Biosolids Land Appliers Class II须超过2年经验、考试、2年继续教育续证；不要求超过2年高中后教育，不能读成完全无学历门槛。WPI现行自愿认证通用过程审核资格，考试通过证2年、重考间隔30天。通用续证须24小时继续教育、签署声明和110美元；逾期超过6个月另35，超过2年不能续或须重考。该项目是生物固体土地施用，不因名字含bio就证明电厂燃料/锅炉管理能力；具体ClassII初始费用/替代条件未核。新考试页2026-09-25仍显示平台迁移移除报名链接、预计10-02恢复；10-09读取仍为该通知，当前报名可用性未核，不把预计日期当已恢复。美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。2025美国行业分布为制造业74%、其他（含批发贸易）26%；详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。",
-                  "中国主要培养路径全国占比未核，按真实雇主条件核。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、管理267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
+                  "O*NET 显示 4,520 个培训目录项目。CareerOneStop 关联目录列三项：美国公共电力协会的公共电力客户服务经理、公共电力经理，以及 Water Professionals International 的二级生物固体土地施用人员。目录命中不代表正在招生或法定任职要求。",
+                  "中国主要培养路径全国占比未核，按真实雇主条件核。国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、中层及以上管理人员267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处安装维护拆除排除附于设备设施、有标准护栏的固定用具和平台。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证限规定危险化学品达到规定量的化工企业（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。",
+                  "管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处作业按目录适用范围核。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证适用于使用国家规定种类危险化学品从事生产且用量达到规定数量的化工企业，危险化学品生产企业除外（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。",
                   "国家能源局2023版二十五项重点要求印发通知要求各电力企业在规划设计、安装调试、运行维护、更新改造落实要求并宣传培训，监管部门监督指导。此处已读通知，未以通知正文冒充附件的全部具体技术条款；具体控制/隔离/停复机按相应设备规程、风险判断与授权执行。2014项目管理通知是历史政策原文：鼓励符合技术经济条件的生物质热电联产，规划指导项目；农林生物质项目禁止掺烧煤等化石能源。对象限定农林项目，不能借O*NET美国任务出现coal证明中国此类项目合法掺煤；旧核准/补贴条文不当作本轮已核的完整2026项目手续。",
                   "记录/数据按实际单位、接收方和监管规则核，任用及作业审批不由学历自动推出。"
                 ]
@@ -29436,42 +29451,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份安全方案与运行规程摘要、一份虚构指标与报警与检修与培训台账、一份虚构事故与违规与整改记录、一份班前确认与检查与复盘与交接模板。",
-                  "全部材料为虚构，不含真实机组运行与事故与环保数据或未公开的管理与检查资料或真实机构内部资料。",
-                  "全部材料与场景为虚构，不得使用真实机组与真实事故与环保与人员数据或未公开的运行与管理资料、真实合作方信息或真实机构内部资料。"
+                  "PM-82 是虚构纸面交接。M1：整改任务单指定 F-20。题设要求同编号的复核记录和运行主管签字齐全才可结单。",
+                  "M2：交班摘要 H-4 写 F-20 已处理，未附复核记录。M3：运行主管未签字。",
+                  "变式只换 M2：复核单 V-6 记录同一任务 F-20 的复核。M1 和 M3 不变。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构班次或检查周期写清班前风险与任务与人员与许可确认步骤、现场检查与指标与人员执行记录方式、异常与事故与违规的复核与处置与上报流程、以及整改闭环与交接与需复核环节。",
-                  "在 90—120 分钟内完成，允许参考公开的安全管理与电力生产常识资料，但不使用真实机组或事故数据，也不开展任何真实现场作业。",
-                  "复盘中把班前风险与任务与许可、现场检查与指标与人员执行、异常与事故与违规处置与上报、整改与闭环分开书写，并标注需复核与需整改的部分。"
+                  "分别写两版整改核对。",
+                  "逐项引用 M1–M3。",
+                  "交一页给运行主管。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先确认班前风险与任务与人员与许可与设备状态是否明确，再按流程检查与组织与记录，最后写明异常与整改与未决事项。",
-                  "把班前确认与许可、现场检查与指标、人员执行与培训、异常与事故与违规与整改分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核安全规程执行与管理判断与记录完整性，并保留修改理由。"
+                  "对照编号与记录出处。",
+                  "把复核证据和结单状态分开。",
+                  "独立完成两版后再比较。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成任何规避监管的做法，也不能替代适用法域与机构电力生产安全与环保与作业许可管理规定。",
-                  "不得在练习中伪造或修改安全与运行与整改记录，也不得在练习中使用任何真实机组或事故数据；涉及停机启动与受限空间与高处与动火与锅炉及压力容器作业的操作须由有权限人员按规程处理。",
-                  "练习不替代适用法域与机构电力生产安全与环保与作业许可管理规定，也不构成任何规避监管的做法；不得在练习中伪造或修改安全与运行与整改记录，也不得在练习中使用任何真实机组或事故数据；涉及停机启动与受限空间与高处与动火作业须由有权限人员按规程处理。"
+                  "只用题内纸面记录。",
+                  "不进入现场，不接触设备。",
+                  "不做真实整改、复运或签字。"
                 ]
               }
             ]
           },
           "id": "biomass-power-plant-managers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "pm82-paper"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "PM-82：两版整改复核",
           "type": "cards"
         },
         {
@@ -29482,37 +29497,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：学历、职业培训、行业认证、安全与运行与作业许可培训、作业许可签发与停机启动与事故处置与检修与采购与人员管理授权、锅炉与压力容器与受限空间与高处与动火作业许可、安全与运行与环保记录与整改要求，以及适用法域对电力生产安全与环保与人员资质的要求。",
-                  "每项都注明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「职业培训」「行业认证」「安全与运行培训」「作业许可签发与停机启动与事故处置授权」「锅炉与压力容器与受限空间与高处与动火作业许可」「安全与运行与环保记录与整改要求」分列，避免混为一谈；并标注本职业身份与任务为 11-3051.04 本职业口径、工资与就业与预测为 O*NET 页面上标注的父职业 11-3051.00 口径并逐处标注、以及中国大陆侧未取得职业级条目且本页不出数。"
+                  "逐条引 M1–M3。",
+                  "逐条引 M1–M3。 独立复核。",
+                  "逐条引 M1–M3。 交一页。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的管理复盘，重点检查班前风险与许可确认依据、现场检查与指标与人员执行记录、异常与事故与违规处置与上报过程、以及整改闭环与未决事项是否与证据一致。",
-                  "把复核意见与修改理由一并保留，作为判断你能否接受检查与复核的证据。"
+                  "核整改编号。",
+                  "核整改编号。 独立复核。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明本次班次或检查周期的事实与过程与结果、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给上级或安全环保部门复核，并保留复核意见与修改理由。"
+                  "写未决事项。",
+                  "写未决事项。 独立复核。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用自动控制或预测性维护或管理信息系统，须注明设备与位号与规程版本与参数与输入与人工修改理由；数据与系统权限须为机构授权。",
-                  "安全与人员与运行与成本数据处理须先取得授权，并记录接收与使用与保存与销毁与共享限制；不得在授权区域与系统之外保存或转移受限制数据。"
+                  "标接手人。",
+                  "标接手人。 独立复核。"
                 ]
               }
             ]
           },
           "id": "biomass-power-plant-managers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "pm82-paper"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29576,59 +29591,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与口径阅读：读 O*NET 11-3051.04 公开资料，写清本职业身份与任务为 11-3051.04 本职业口径、工资与就业与预测为 O*NET 页面上标注的父职业 11-3051.00 口径的含义，以及中国大陆侧未取得职业级条目且本页不出数的证据边界。",
-                  "产出：一页口径与流程对照表，标注每项的来源。"
+                  "读题内规则。",
+                  "标 M1–M3。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "班前确认练习：为一个虚构班次写清风险与任务与人员与作业许可与本人授权边界。",
-                  "产出：一份班前确认与风险说明。"
+                  "读原版记录。",
+                  "列出处。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "现场检查练习：写清检查路线与指标与设备与安全条件与人员执行的记录格式与异常标记要求。",
-                  "产出：一份现场检查与记录说明。"
+                  "写原版核对。",
+                  "写未决项。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "异常与事故练习：为虚构事故或违规写清处置与隔离与上报与调查配合与记录要求。",
-                  "产出：一份异常与事故处置说明。"
+                  "只替换 M2。",
+                  "写变式核对。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "整改与合规练习：写清整改方案与责任人与期限与闭环与对监管检查的配合与记录要求。",
-                  "产出：一份整改与合规记录。"
+                  "对照两版。",
+                  "写一页交接。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的安全规程执行与管理判断与记录完整性，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "先交两版和交接。",
+                  "保持参考闭合。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "展开「PM-82 参考解（交卷后再打开）」。",
+                  "核编号、来源、签字和接手人。"
                 ]
               }
             ]
           },
           "id": "biomass-power-plant-managers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "pm82-paper"
           ],
-          "title": "七日体验产出",
+          "title": "PM-82 七天试做",
           "type": "timeline"
         },
         {
@@ -29636,13 +29651,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你完成了七日练习并发现自己能在安全与运行与人员与整改管理上持续投入。",
-              "继续：你能接受事故与检查与成本压力与超时工作与不规律日程，并愿意按制度记录并接受检查。",
-              "暂停：你只求产量与成本而不愿读规程与记录与到现场检查。",
-              "暂停：你把「先恢复生产再补手续」当作可接受的做法。",
-              "换方向：你更愿意做现场设备操作与巡检与维护，可比较生物质电厂技术员方向。",
-              "换方向：你更愿意做多行业生产与成本与交付管理，可比较工业生产经理方向。",
-              "信息不足：如果你还没有任何有监督的班组或专责或检修组织经历，先补这两项再判断。"
+              "继续：愿意核记录和责任人。",
+              "继续：能区分整改记录与结单。",
+              "暂停：只看摘要不看来源。",
+              "暂停：常跳过签字条件。",
+              "比较现场操作岗位。",
+              "比较燃料生产管理。",
+              "真实岗位权限另核。"
             ]
           },
           "id": "biomass-power-plant-managers.path.seven-day-decision.1",
@@ -29697,16 +29712,16 @@
                 "三项美国关联第三方认证",
                 "对应公共电力管理/客服或生物固体施用人员",
                 "证明特定范围训练/认证，非电厂通用许可",
-                "关联认证目录列APPA Public Power Customer Service Manager、Public Power Manager与WPI Certified Biosolids Land Appliers Class II三项；仅关联第三方认证，不是中国国家资格、全体经理门槛或雇主任命。",
-                "O*NET认证详情6195-A称PPCSM面向客服主管/经理/高管，5门课程、笔试与服务部门评估/业务计划须首课起3年内完成、2年继续教育续证；6196-A称PPM面向公共电力主管/经理，考试及2年继续教育续证。APPA当前目录列Leadership Essentials等，未见这两个同名项目，本轮未核同名证当前开放、报名/学时/费用或名称承继，不把其他项目自动等同。O*NET8161-B称Biosolids Land Appliers Class II须超过2年经验、考试、2年继续教育续证；不要求超过2年高中后教育，不能读成完全无学历门槛。WPI现行自愿认证通用过程审核资格，考试通过证2年、重考间隔30天。通用续证须24小时继续教育、签署声明和110美元；逾期超过6个月另35，超过2年不能续或须重考。该项目是生物固体土地施用，不因名字含bio就证明电厂燃料/锅炉管理能力；具体ClassII初始费用/替代条件未核。新考试页2026-09-25仍显示平台迁移移除报名链接、预计10-02恢复；10-09读取仍为该通知，当前报名可用性未核，不把预计日期当已恢复。",
-                "APPA同名证当前费用/开放未核；WPI通用续证24小时/2年、110美元，逾期条件见上；ClassII初始费用/总成本未核。",
+                "O*NET 显示 4,520 个培训目录项目。CareerOneStop 关联目录列三项：美国公共电力协会的公共电力客户服务经理、公共电力经理，以及 Water Professionals International 的二级生物固体土地施用人员。目录命中不代表正在招生或法定任职要求。",
+                "核发证机构适用业务、考试和续期要求。",
+                "适用时核当前发证机构条件。",
                 "不将别的APPA项目自动改名等同，不因bio就外推设备管理资格。"
               ],
               [
                 "学徒通用入口",
                 "需核具体训练路径者",
                 "进一步查项目/雇主",
-                "4,520项美国相关训练目录依据IPEDS2025—26目录、2024—25学位记录及CIP交叉映射，含通用工商管理/运营管理；不等于4,520个生物质电厂专属实时招生项目。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。",
+                "O*NET 显示 4,520 个培训目录项目，含通用工商管理等方向。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。",
                 "本轮未核具体在招项目条件。",
                 "周期、费用、报酬未核。",
                 "通用入口不证明本职业有或没有在招学徒。"
@@ -29715,7 +29730,7 @@
                 "职业培训与继续教育（安全与运行与设备与环保）",
                 "希望补充安全与管理能力的人",
                 "作为安全与运行与设备与环保管理的训练证明。",
-                "4,520项美国相关训练目录依据IPEDS2025—26目录、2024—25学位记录及CIP交叉映射，含通用工商管理/运营管理；不等于4,520个生物质电厂专属实时招生项目。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。",
+                "O*NET 显示 4,520 个培训目录项目，含通用工商管理等方向。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。",
                 "按培训机构与雇主安排完成课程与考核。",
                 "按机构安排与课程有效期维护。",
                 "培训结业有课程与版本范围限制，不等于作业许可与管理授权。"
@@ -29724,8 +29739,8 @@
                 "中国单位要求、设备资格与目录作业证",
                 "实际承担对应管理/操作活动者",
                 "核企业要求与本人活动边界",
-                "国家能源局2023版二十五项重点要求印发通知要求各电力企业在规划设计、安装调试、运行维护、更新改造落实要求并宣传培训，监管部门监督指导。此处已读通知，未以通知正文冒充附件的全部具体技术条款；具体控制/隔离/停复机按相应设备规程、风险判断与授权执行。2014项目管理通知是历史政策原文：鼓励符合技术经济条件的生物质热电联产，规划指导项目；农林生物质项目禁止掺烧煤等化石能源。对象限定农林项目，不能借O*NET美国任务出现coal证明中国此类项目合法掺煤；旧核准/补贴条文不当作本轮已核的完整2026项目手续。管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处安装维护拆除排除附于设备设施、有标准护栏的固定用具和平台。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证限规定危险化学品达到规定量的化工企业（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。",
-                "管理任用、操作证、设备资格、内部签字和本次作业审批分开。",
+                "电力重大事故隐患判定标准及治理监督管理规定自 2026 年 7 月 1 日施行。第 3 条说明电力领域范围，并保留危化、消防和特种设备等领域另有判定标准时的规则。第 4 条由电力企业承担排查治理主体责任。项目经理按岗位权限组织、记录和上报，不从职位名称推定有权签字或复运。",
+                "按设备、作业、现场规则及本人权限分别核对。",
                 "特种作业证6年/换证时点见上；个人培训学时费用与锅炉考核续证本轮未核。",
                 "不要求所有经理持全套操作证，不将旧项目核准/补贴通知当完整现行手续。"
               ]
@@ -29733,9 +29748,10 @@
           },
           "id": "biomass-power-plant-managers.path.credential-decision.1",
           "source_refs": [
+            "power-major-hazards-2026",
+            "cert-current",
             "details-current",
             "training-current",
-            "cert-current",
             "cert-6195-a",
             "cert-6196-a",
             "cert-8161-b",
@@ -29760,8 +29776,8 @@
           "data": {
             "paragraphs": [
               "学历、训练、第三方认证、国家操作证、设备资格、雇主任用与本次作业审批不同。",
-              "O*NET Updated2025的新入职所需教育回答为学士61%、副学士/其他两年制17%、高中后证书13%；不是现职学历分布，显示项不强行归一到100%。Job Zone4/SVP7至低于8是职业群准备程度，不能当作个人固定培训年限或中国职业资格。4,520项美国相关训练目录依据IPEDS2025—26目录、2024—25学位记录及CIP交叉映射，含通用工商管理/运营管理；不等于4,520个生物质电厂专属实时招生项目。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。关联认证目录列APPA Public Power Customer Service Manager、Public Power Manager与WPI Certified Biosolids Land Appliers Class II三项；仅关联第三方认证，不是中国国家资格、全体经理门槛或雇主任命。O*NET认证详情6195-A称PPCSM面向客服主管/经理/高管，5门课程、笔试与服务部门评估/业务计划须首课起3年内完成、2年继续教育续证；6196-A称PPM面向公共电力主管/经理，考试及2年继续教育续证。APPA当前目录列Leadership Essentials等，未见这两个同名项目，本轮未核同名证当前开放、报名/学时/费用或名称承继，不把其他项目自动等同。O*NET8161-B称Biosolids Land Appliers Class II须超过2年经验、考试、2年继续教育续证；不要求超过2年高中后教育，不能读成完全无学历门槛。WPI现行自愿认证通用过程审核资格，考试通过证2年、重考间隔30天。通用续证须24小时继续教育、签署声明和110美元；逾期超过6个月另35，超过2年不能续或须重考。该项目是生物固体土地施用，不因名字含bio就证明电厂燃料/锅炉管理能力；具体ClassII初始费用/替代条件未核。新考试页2026-09-25仍显示平台迁移移除报名链接、预计10-02恢复；10-09读取仍为该通知，当前报名可用性未核，不把预计日期当已恢复。",
-              "国家能源局2023版二十五项重点要求印发通知要求各电力企业在规划设计、安装调试、运行维护、更新改造落实要求并宣传培训，监管部门监督指导。此处已读通知，未以通知正文冒充附件的全部具体技术条款；具体控制/隔离/停复机按相应设备规程、风险判断与授权执行。2014项目管理通知是历史政策原文：鼓励符合技术经济条件的生物质热电联产，规划指导项目；农林生物质项目禁止掺烧煤等化石能源。对象限定农林项目，不能借O*NET美国任务出现coal证明中国此类项目合法掺煤；旧核准/补贴条文不当作本轮已核的完整2026项目手续。管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处安装维护拆除排除附于设备设施、有标准护栏的固定用具和平台。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证限规定危险化学品达到规定量的化工企业（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。",
+              "O*NET 显示 4,520 个培训目录项目。CareerOneStop 关联目录列三项：美国公共电力协会的公共电力客户服务经理、公共电力经理，以及 Water Professionals International 的二级生物固体土地施用人员。目录命中不代表正在招生或法定任职要求。",
+              "国家能源局2023版二十五项重点要求印发通知要求各电力企业在规划设计、安装调试、运行维护、更新改造落实要求并宣传培训，监管部门监督指导。此处已读通知，未以通知正文冒充附件的全部具体技术条款；具体控制/隔离/停复机按相应设备规程、风险判断与授权执行。2014项目管理通知是历史政策原文：鼓励符合技术经济条件的生物质热电联产，规划指导项目；农林生物质项目禁止掺烧煤等化石能源。对象限定农林项目，不能借O*NET美国任务出现coal证明中国此类项目合法掺煤；旧核准/补贴条文不当作本轮已核的完整2026项目手续。管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处作业按目录适用范围核。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证适用于使用国家规定种类危险化学品从事生产且用量达到规定数量的化工企业，危险化学品生产企业除外（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。",
               "编辑核真实岗位/设备/管理幅度、有效资格和内部授权、班次/合同/计酬，未核项保持精确缺口。"
             ]
           },
@@ -29794,16 +29810,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮未引用中国具体招聘公告；中文方向名为编辑场景，不当全国岗位分布。美国9样本职称见O*NET摘要，非中国雇主实采。",
-              "编辑核雇主实体、机组/容量、管理幅度、合同计酬、轮班检修、资格和签字/作业权限。"
+              "北京电投数智能源科技有限公司的南宫生物质电厂生产副总岗位，职责包括生产计划、检修、环保设施与生产队伍管理。岗位正文要求相关专业专科及以上、5 年以上生物质发电生产管理经验及 3 年以上同层级任职。该岗位正文列计酬结构，没有可核的固定工资额。",
+              "阜阳师范大学就业页刊载龙基能源 2026 年招聘，列福建三明生物质颗粒厂厂长。它是燃料生产管理邻岗，公告列集团报酬结构，没有为该厂长单列工资金额。",
+              "两份招聘用于比较发电运营管理和燃料生产管理。不能据此推断目前仍在招、全国任职门槛或职业薪资。"
             ]
           },
           "id": "biomass-power-plant-managers.path.recruitment-sample.1",
           "source_refs": [
-            "onet-current",
-            "editor"
+            "nangong-operations-deputy",
+            "longji-pellet-manager-2026"
           ],
-          "title": "招聘信息核对",
+          "title": "发电生产管理与燃料生产管理招聘样本",
           "type": "notice"
         },
         {
@@ -29986,12 +30003,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET Updated2025的新入职所需教育回答为学士61%、副学士/其他两年制17%、高中后证书13%；不是现职学历分布，显示项不强行归一到100%。Job Zone4/SVP7至低于8是职业群准备程度，不能当作个人固定培训年限或中国职业资格。4,520项美国相关训练目录依据IPEDS2025—26目录、2024—25学位记录及CIP交叉映射，含通用工商管理/运营管理；不等于4,520个生物质电厂专属实时招生项目。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。关联认证目录列APPA Public Power Customer Service Manager、Public Power Manager与WPI Certified Biosolids Land Appliers Class II三项；仅关联第三方认证，不是中国国家资格、全体经理门槛或雇主任命。管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处安装维护拆除排除附于设备设施、有标准护栏的固定用具和平台。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证限规定危险化学品达到规定量的化工企业（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。"
+              "O*NET 细分新聘所需教育问项：61% 的受访者答学士、17% 答副学士或其他两年制学位、13% 答高中后证书。这不是现职学历构成。BLS 上位组的典型条件为学士及相关工作经验至少 5 年。 电力重大事故隐患判定标准及治理监督管理规定自 2026 年 7 月 1 日施行。第 3 条说明电力领域范围，并保留危化、消防和特种设备等领域另有判定标准时的规则。第 4 条由电力企业承担排查治理主体责任。项目经理按岗位权限组织、记录和上报，不从职位名称推定有权签字或复运。"
             ]
           },
           "id": "biomass-power-plant-managers.path.career-path-block.20",
           "source_refs": [
             "details-current",
+            "ep",
+            "power-major-hazards-2026",
+            "nangong-operations-deputy",
+            "longji-pellet-manager-2026",
             "training-current",
             "cert-current",
             "nea-current",
@@ -30009,7 +30030,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学历、认证、国家操作证、设备资格、雇主任用与机构权限分开。美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。2025美国行业分布为制造业74%、其他（含批发贸易）26%；详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。"
+              "学历、认证、国家操作证、设备资格、雇主任用与机构权限分开。美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长2.6%（约与平均相当），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。美国 O*NET 上位组详情标注 2025 年制造业 74%。行业子表另列其他行业（含批发贸易）26%，该行未单列年份。数据不描述生物质电厂自身的雇主占比。详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。"
             ]
           },
           "id": "biomass-power-plant-managers.path.career-path-block.21",
@@ -30025,7 +30046,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "国家能源局2023版二十五项重点要求印发通知要求各电力企业在规划设计、安装调试、运行维护、更新改造落实要求并宣传培训，监管部门监督指导。此处已读通知，未以通知正文冒充附件的全部具体技术条款；具体控制/隔离/停复机按相应设备规程、风险判断与授权执行。2014项目管理通知是历史政策原文：鼓励符合技术经济条件的生物质热电联产，规划指导项目；农林生物质项目禁止掺烧煤等化石能源。对象限定农林项目，不能借O*NET美国任务出现coal证明中国此类项目合法掺煤；旧核准/补贴条文不当作本轮已核的完整2026项目手续。管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处安装维护拆除排除附于设备设施、有标准护栏的固定用具和平台。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证限规定危险化学品达到规定量的化工企业（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。"
+              "国家能源局2023版二十五项重点要求印发通知要求各电力企业在规划设计、安装调试、运行维护、更新改造落实要求并宣传培训，监管部门监督指导。此处已读通知，未以通知正文冒充附件的全部具体技术条款；具体控制/隔离/停复机按相应设备规程、风险判断与授权执行。2014项目管理通知是历史政策原文：鼓励符合技术经济条件的生物质热电联产，规划指导项目；农林生物质项目禁止掺烧煤等化石能源。对象限定农林项目，不能借O*NET美国任务出现coal证明中国此类项目合法掺煤；旧核准/补贴条文不当作本轮已核的完整2026项目手续。管理职责不自动要求本人持全套操作证。市场监管总局2021年第41号公告、2022年6月实施：工业锅炉司炉G1、电站锅炉司炉G2、锅炉水处理G3分别认定。G2认定限300MW以下、不含300MW；300MW及以上由使用单位按电力行业规范自行技能培训。压力容器目录含快开门式操作R1/移动充装R2/氧舱R3，不把所有压力容器操作写成同一种证。具体机组/设备及本人职责须核。应急管理部令19号2026年6月施行：直接从事目录特种作业须培训、理论及实操考试合格并取证；相关学历/技能等级证书满足条件可免培训，不自动免考试。证有效6年，期满前6个月内完成换证理论培训考试、期满前60日内申请；地方收费公示，个人总费用/学时未核。2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处作业按目录适用范围核。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证适用于使用国家规定种类危险化学品从事生产且用量达到规定数量的化工企业，危险化学品生产企业除外（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。工贸有限空间规定2024施行，适用于列明工贸行业，不能直接证明所有发电企业均属该范围。适用单位须辨识、审批、培训、监护，先通风再检测后作业；不符合条件停受影响作业，异常撤离并按方案科学救援，禁止盲目施救。具体电厂还应核能源行业、设备及单位作业制度；作业审批与国家操作证不同。"
             ]
           },
           "id": "biomass-power-plant-managers.path.career-path-block.22",
@@ -30088,7 +30109,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "4,520项美国相关训练目录依据IPEDS2025—26目录、2024—25学位记录及CIP交叉映射，含通用工商管理/运营管理；不等于4,520个生物质电厂专属实时招生项目。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。"
+              "O*NET 显示 4,520 个培训目录项目，含通用工商管理等方向。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。"
             ]
           },
           "id": "biomass-power-plant-managers.path.career-path-block.26",
@@ -31044,7 +31065,7 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 11-3051.04 职业摘要（就业与预测字段）",
+                "entity": "美国 BLS 表 1.2：工业生产经理 11-3051",
                 "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/11-3051.04"
@@ -31056,10 +31077,10 @@
                 "url": "https://www.onetonline.org/link/industry/11-3051.04"
               },
               {
-                "entity": "O*NET 11-3051.04 就业趋势页",
+                "entity": "美国 BLS 表 1.2：工业生产经理 11-3051",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/11-3051.04"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 11-3051.04 地方工资页（父职业 11-3051.00 口径）",
@@ -31131,11 +31152,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
+              "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。"
             ]
           },
           "id": "biomass-power-plant-managers.market-signals.market-signal-card.8",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31173,7 +31195,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页给出的在岗人数，该页标注为父职业 11-3051.00 口径；个别机构或区域的机组与项目阶段与合同差异可能很大。"
+              "为 美国 BLS 表 1.2：工业生产经理 11-3051给出的在岗人数，该页标注为父职业 11-3051.00 口径；个别机构或区域的机组与项目阶段与合同差异可能很大。"
             ]
           },
           "id": "biomass-power-plant-managers.market-signals.market-signal-card.11",
@@ -31271,11 +31293,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
+              "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。"
             ]
           },
           "id": "biomass-power-plant-managers.market-signals.market-signal-card.18",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31285,11 +31308,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "预测不能合并解读为个人录用保证，也不能推导该职业的精确增幅；该组数字为 O*NET 页面上标注的父职业 11-3051.00 口径。"
+              "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。"
             ]
           },
           "id": "biomass-power-plant-managers.market-signals.market-signal-card.19",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31327,11 +31351,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "3%（Average；年均空缺17,000；父职业）"
+              "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。"
             ]
           },
           "id": "biomass-power-plant-managers.market-signals.market-signal-card.22",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31369,7 +31394,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、管理267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
+              "国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、中层及以上管理人员267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。"
             ]
           },
           "id": "biomass-power-plant-managers.market-signals.market-signal-card.25",
@@ -31453,7 +31478,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "实际链接为2025父职业行业分布，不是预测。2025美国行业分布为制造业74%、其他（含批发贸易）26%；详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。"
+              "美国 O*NET 上位组详情标注 2025 年制造业 74%。行业子表另列其他行业（含批发贸易）26%，该行未单列年份。数据不描述生物质电厂自身的雇主占比。"
             ]
           },
           "id": "biomass-power-plant-managers.market-signals.market-signal-card.31",
@@ -31467,11 +31492,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "实际链接为2025—2035父职业就业预测，不是中国工资。美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。"
+              "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。"
             ]
           },
           "id": "biomass-power-plant-managers.market-signals.market-signal-card.32",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31864,28 +31890,40 @@
           "data": {
             "entries": [
               {
-                "answer": "管理生物质发电设施的运行并监督运行与维护人员。常见工作包括管理发电设施的安全方案；审查生物质运行绩效指标以确保符合监管要求；审查日志与数据表与报告以确认产量充足与生产环境安全或识别异常；监督以木材与煤与纸浆污泥或其他废弃物或残渣为燃料的发电运行与维护人员；监督生物质电厂或变电站的运行与维护与检修与试验活动；对生物质电厂与电站或变电站开展现场检查；计划并安排燃料到厂与除灰与定期检修等电厂活动；编制并管理生物质电厂预算；评估发电或需求趋势以识别改进运行的机会；检查生物质气化工艺与设备与设施以最大化产能并最小化运行成本；编写生物质电厂运行与状态与维护等报告；管理电厂备件与供应库存；监测并操作移动电台等通信系统；在紧急情况或设备维护与检修与更换时停机与重启电厂或设备；在表单或台账上汇总并记录运行数据；通过观察控制系统参数与分散控制系统与配电盘仪表等监测电厂运行状态；调整设备控制以发出规定量的电力；以及使用手动与电动工具与测试装置测试与维护或修理配电机械或设备。",
+                "answer": "生物质发电厂经理组织电厂运行、检修与安全工作，核对运行记录、人员安排、燃料供应和预算，并跟踪异常由谁处理。职位可能主管某一专业或全厂。具体指挥和审批权限以实际岗位、设备与制度为准。",
                 "id": "biomass-power-plant-managers.faq.1",
                 "question": "生物质电厂经理每天做什么？",
-                "question_key": "career.faq.biomass-power-plant-managers.1"
+                "question_key": "career.faq.biomass-power-plant-managers.1",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "关键风险包括作业许可与管理授权越界、电力生产与锅炉与压力容器与超温超压风险、安全与运行与培训与整改记录不可追溯、自动控制与系统提示与自动报表被当成设备与人员状态、现场与噪声与污染物与高处与超时工作暴露负荷，以及安全与环保与成本数据与信息对外提供越界；控制方式是先确认作业许可与本人授权与班组资质与设备隔离状态并做风险辨识、按制度组织与检查并如实记录指标与异常与人员执行、按程序处置事故与违规与越限与泄漏、按授权范围上报与提供数据，并在超出授权或发现异常时停止并升级。",
+                "answer": "电力重大事故隐患判定标准及治理监督管理规定自 2026 年 7 月 1 日施行。第 3 条说明电力领域范围，并保留危化、消防和特种设备等领域另有判定标准时的规则。第 4 条由电力企业承担排查治理主体责任。项目经理按岗位权限组织、记录和上报，不从职位名称推定有权签字或复运。",
                 "id": "biomass-power-plant-managers.faq.2",
                 "question": "这份工作最需要提前注意什么风险？",
-                "question_key": "career.faq.biomass-power-plant-managers.2"
+                "question_key": "career.faq.biomass-power-plant-managers.2",
+                "source_refs": [
+                  "power-major-hazards-2026"
+                ]
               },
               {
-                "answer": "看可复核的产出：能否按安全规程与作业许可组织作业并如实记录指标与异常与人员执行、能否按制度处理电力生产与锅炉与压力容器与高处与受限空间风险、能否在事故或违规或超出授权时按程序停机或隔离并上报。兴趣代码 CRE 与技能与知识分数只说明方向接近，不能替代这些实作证据。",
+                "answer": "第 09 节 PM-82：核两版虚构整改交接，写一页给运行主管。",
                 "id": "biomass-power-plant-managers.faq.3",
                 "question": "怎样判断自己适不适合做生物质电厂经理？",
-                "question_key": "career.faq.biomass-power-plant-managers.3"
+                "question_key": "career.faq.biomass-power-plant-managers.3",
+                "source_refs": [
+                  "pm82-paper"
+                ]
               },
               {
-                "answer": "AI 与自动化可以改变运行数据汇总与报表生成、检修工单派发与备件库存管理、培训台账与整改跟踪；但班前风险与许可与人员状态确认、现场检查与指挥与调整、异常与事故与违规判断、以及停机启动与人员管理仍由人承担。自动化程度提高不等于岗位数量变化；官方公开的就业与预测在 O*NET 页面上标注为父职业 11-3051.00 口径（2024—2034 年 2%，慢于平均）。",
+                "answer": "可用虚构资料试做整改记录和交接草稿。人核编号、原件和未决项，并按权限确认真实整改、审批和复运。",
                 "id": "biomass-power-plant-managers.faq.4",
                 "question": "AI 会改变哪些任务？",
-                "question_key": "career.faq.biomass-power-plant-managers.4"
+                "question_key": "career.faq.biomass-power-plant-managers.4",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
                 "answer": "班前风险与作业许可与人员资质与设备状态确认、现场检查与指挥与调整、异常与事故与违规判断、以及涉及停机启动与设备隔离与恢复送电与动火与受限空间与高处作业与事故处置的决定，必须由本人与有权限的人员按适用法域与机构制度承担；系统提示与自动报表与预测性维护结论只能作为可回滚、可复核的辅助环节。",
@@ -31894,10 +31932,15 @@
                 "question_key": "career.faq.biomass-power-plant-managers.5"
               },
               {
-                "answer": "分六类核对：学历（该职业属 Job Zone Four，学历字段显示学士学位 61%、副学士或其他两年制学位 17%、post-secondary certificate 13%）；职业培训与继续教育（培训页面显示全国登记 4,520 个培训项目）；行业认证（认证页面显示 3 项国家认证）；已登记的学徒岗位（学徒机会区域未列出具体数量）；安全与运行与作业许可培训与停机启动与事故处置与检修与采购与人员管理授权；以及适用法域对电力生产安全与环保与人员资质的要求。任何一项都不能由另一项自动推出。",
+                "answer": "O*NET 细分新聘所需教育问项：61% 的受访者答学士、17% 答副学士或其他两年制学位、13% 答高中后证书。这不是现职学历构成。BLS 上位组的典型条件为学士及相关工作经验至少 5 年。 电力重大事故隐患判定标准及治理监督管理规定自 2026 年 7 月 1 日施行。第 3 条说明电力领域范围，并保留危化、消防和特种设备等领域另有判定标准时的规则。第 4 条由电力企业承担排查治理主体责任。项目经理按岗位权限组织、记录和上报，不从职位名称推定有权签字或复运。",
                 "id": "biomass-power-plant-managers.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.biomass-power-plant-managers.6"
+                "question_key": "career.faq.biomass-power-plant-managers.6",
+                "source_refs": [
+                  "details-current",
+                  "ep",
+                  "power-major-hazards-2026"
+                ]
               },
               {
                 "answer": "工作情境显示 94% 认为对他人健康与安全承担很高责任、93% 每天有面对面讨论、92% 每天使用电子邮件、94% 每天佩戴常见防护或安全装备、91% 每天在非环境受控的室内工作、90% 每天在环境受控的室内工作、92% 每周工时超过 40 小时、72% 每天暴露于噪音、60% 每天需要作出决定、47% 认为精确或准确极其重要、40% 认为错误后果极其严重（31% 严重）、48% 每天暴露于污染物、40% 每天在户外暴露于各种天气、39% 每天暴露于高处、44% 为不规律工作日程；长时间现场走动与佩戴防护装备与室外与噪声与超时工作需要工效与排班安排，检修期与事故处置期会带来阶段性强度上升，应及早报告持续不适。",
@@ -31912,16 +31955,33 @@
                 "question_key": "career.faq.biomass-power-plant-managers.8"
               },
               {
-                "answer": "O*NET 就业趋势页明确标注「Employment data for Industrial Production Managers.」，并按该父职业 11-3051.00 口径给出 2024 年在岗 241,900 人、2034 年约 246,500 人（2%，慢于平均（Slower than average））、预测期年均职位空缺 17,100；增长与空缺是不同指标、空缺含替代需求，行业政策信号不能直接推导个人招聘增长。转向可比较工业生产经理、生物燃料生产经理、地热生产经理、水电生产经理、风能运营经理、生物质电厂技术员、能源工程师（风电与太阳能除外），但都需要补充相应训练与管理授权经验。",
+                "answer": "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。",
                 "id": "biomass-power-plant-managers.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.biomass-power-plant-managers.9"
+                "question_key": "career.faq.biomass-power-plant-managers.9",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
-                "answer": "美国侧 O*NET 地方工资页明确标注「Wage data for Industrial Production Managers.」并按该父职业 11-3051.00 口径给出「Workers on average earn $126,060」；本页据页面数值发布 2025 年 BLS 数值并逐处标注（年薪中位数 126,060 美元、时薪中位数 60.61 美元，均为父职业口径）。中国大陆国家统计局仅提供行业或岗位大类口径，未取得与该职业精确对应的职业工资分布；按本页证据口径（暂无可安全使用的数据），本页不发布任何中国大陆薪资数值并保留可见缺口标记，也不用行业或岗位大类均值替代本职业中位数或起薪。两边的职业范围、统计制度、资料期与用工与计酬结构都不同，不能把美元换算成人民币，也不应相信缺少样本与岗位范围的报价。",
+                "answer": "两份招聘用于比较发电运营管理和燃料生产管理。不能据此推断目前仍在招、全国任职门槛或职业薪资。",
                 "id": "biomass-power-plant-managers.faq.10",
                 "question": "美国工资与中国大陆口径为什么不能互相换算？",
-                "question_key": "career.faq.biomass-power-plant-managers.10"
+                "question_key": "career.faq.biomass-power-plant-managers.10",
+                "source_refs": [
+                  "nangong-operations-deputy",
+                  "longji-pellet-manager-2026",
+                  "nbs-current"
+                ]
+              },
+              {
+                "answer": "原版 M1、M2 都指 F-20，但 H-4 只有摘要，缺复核。变式只换 M2，V-6 补足同编号复核。两版仍缺 M3 签字，均不能结单，交运行主管。自核：编号、两版出处、签字缺口和接手人是否齐全？",
+                "id": "biomass-power-plant-managers.faq.11",
+                "question": "PM-82 参考解（交卷后再打开）",
+                "question_key": "career.faq.biomass-power-plant-managers.q11",
+                "source_refs": [
+                  "pm82-paper"
+                ]
               }
             ]
           },
@@ -31976,16 +32036,22 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "当前来源为O*NET九入口及三项认证详情、BLS父职业OOH、NBS2025、APPA当前目录/WPI过程续证与迁移通知、NEA2023印发通知及2014历史项目通知、特种作业令19号/2026目录、锅炉资格分类、危化法2026和工贸有限空间规定；原来源完整保留。"
+              "职业职责读 O*NET；美国工资和预测读工业生产经理上位组。大陆按问题查岗位公告、行业工资或监管文件。"
             ]
           },
           "id": "biomass-power-plant-managers.sources.source-card.2",
           "source_refs": [
+            "onet",
+            "ep",
+            "oews",
+            "nangong-operations-deputy",
+            "longji-pellet-manager-2026",
+            "nbs-current",
+            "power-major-hazards-2026",
             "onet-current",
             "details-current",
             "ep-current",
             "industry-current",
-            "nbs-current",
             "bls-parent-industry",
             "cert-current",
             "cert-6195-a",
@@ -32010,11 +32076,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "工资2025年5月父职业中位126,060/时薪60.61；父职业预测2025—2035增长3%/年均17,000，2025行业也父职业。中国2025行业/管理人员税前年平均；证书目录不代表当前可报名。"
+              "核对日 2026-11-10。美国工资为 2025 年，预测为 2025–2035 年；招聘和监管文件各按原件日期。"
             ]
           },
           "id": "biomass-power-plant-managers.sources.source-card.3",
           "source_refs": [
+            "ep",
+            "oews",
+            "nangong-operations-deputy",
+            "longji-pellet-manager-2026",
+            "power-major-hazards-2026",
             "onet-current",
             "details-current",
             "ep-current",
@@ -32096,7 +32167,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -32176,20 +32247,20 @@
                 "url": "https://www.onetonline.org/link/details/11-3051.04"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official outlook",
-                  "2024—2034 年；O*NET 页面标注父职业 11-3051.00 口径；访问 2026-09-16"
+                  "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。",
+                  "上位组基期、预测期与年均空缺。"
                 ],
-                "evidence_type": "official outlook",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "就业与预测在 O*NET 页面上标注取自父职业 Industrial Production Managers（2%，慢于平均），不能外推更宽职业群。",
+                "limitation": "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。",
                 "market": "美国",
-                "name": "O*NET 11-3051.04 职业摘要（就业与预测字段，父职业 11-3051.00 口径）",
-                "period": "2024—2034 年；O*NET 页面标注父职业 11-3051.00 口径；访问 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "美国 BLS 表 1.2：工业生产经理 11-3051",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/summary/11-3051.04"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32210,15 +32281,15 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "official wage statistics entry",
-                  "2025 年；访问 2026-09-16"
+                  "国家统计局 2025 年电力、热力、燃气及水生产和供应业年均工资：城镇非私营单位 160,897 元，城镇私营单位 66,451 元。同业规模以上企业另表：中层及以上管理人员 267,035 元，全部就业人员 164,371 元。均为税前年均工资，非本职业工资。",
+                  "2025"
                 ],
                 "evidence_type": "official wage statistics entry",
                 "id": "nbs",
-                "limitation": "该发布按行业门类与单位类型与人员大类公布城镇单位就业人员平均工资；本页只用其说明统计口径与覆盖范围边界，不取任何行业门类或岗位大类数值替代本职业工资，也不发布中国大陆薪资数值。",
+                "limitation": "国家统计局 2025 年电力、热力、燃气及水生产和供应业年均工资：城镇非私营单位 160,897 元，城镇私营单位 66,451 元。同业规模以上企业另表：中层及以上管理人员 267,035 元，全部就业人员 164,371 元。均为税前年均工资，非本职业工资。",
                 "market": "中国大陆",
-                "name": "国家统计局（2025 年城镇单位就业人员年平均工资情况）",
-                "period": "2025 年；访问 2026-09-16",
+                "name": "国家统计局：城镇单位和规模以上企业工资",
+                "period": "2025",
                 "publisher": "中华人民共和国国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
@@ -32236,7 +32307,7 @@
                 "name": "《防止电力生产事故的二十五项重点要求（2023版）》—— 国家能源局",
                 "period": "国能发安全〔2023〕22号；访问 2026-09-16",
                 "publisher": "国家能源局",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://zfxxgk.nea.gov.cn/2023-03/09/c_1310705209.htm"
               },
               {
@@ -32252,7 +32323,7 @@
                 "name": "《关于加强和规范生物质发电项目管理有关要求的通知》—— 国家发展改革委办公厅 / 国家能源局",
                 "period": "2014 年；访问 2026-09-16",
                 "publisher": "国家发展改革委办公厅（国家能源局公开文本）",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.nea.gov.cn/2014-12/30/c_133887836.htm"
               },
               {
@@ -32275,14 +32346,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "official outlook",
-                  "2024—2034 年；O*NET 页面标注父职业 11-3051.00 口径；访问 2026-09-16"
+                  "2025–2035 年；O*NET 页面标注父职业 11-3051.00 口径；访问 2026-09-16"
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
-                "limitation": "为 O*NET 页面上标注的父职业口径的就业与预测（2%，慢于平均），不是个人录用概率。",
+                "limitation": "为 O*NET 页面上标注的父职业口径的就业与预测（2025–2035 年 2.6%），不是个人录用概率。",
                 "market": "美国",
                 "name": "O*NET 11-3051.04 职业摘要（就业与预测字段，父职业 11-3051.00 口径）",
-                "period": "2024—2034 年；O*NET 页面标注父职业 11-3051.00 口径；访问 2026-09-16",
+                "period": "2025–2035 年；O*NET 页面标注父职业 11-3051.00 口径；访问 2026-09-16",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/summary/11-3051.04"
@@ -32291,14 +32362,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "technology signals",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "2025"
                 ],
                 "evidence_type": "technology signals",
                 "id": "hr",
-                "limitation": "页面列出 5 项软件技能（Microsoft Excel 与 Microsoft Office software 与 Microsoft Outlook 与 Microsoft PowerPoint 与 Microsoft Word），该页对这 5 项均标注「Not available」，即未给出比例；来源为 Lightcast 招聘公告，未给出比例时不能推断岗位采用率。",
+                "limitation": "O*NET 列出 Excel、Office、Outlook、PowerPoint 和 Word，未公布 2025 年美国关联职位广告提及率。缺值不等于零。",
                 "market": "美国",
                 "name": "O*NET 11-3051.04 技术清单（软件技能信号）",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "period": "2025",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/11-3051.04"
@@ -32311,7 +32382,7 @@
                 ],
                 "evidence_type": "certification information",
                 "id": "health",
-                "limitation": "页面显示 3 项国家认证（Public Power Customer Service Manager 与 Public Power Manager，由 American Public Power Association 颁发；Certified Biosolids Land Appliers Class II 由 Water Professionals International 颁发）；认证不等于作业许可签发或管理授权或执业许可。",
+                "limitation": "页面显示 3 条具名机构关联认证（Public Power Customer Service Manager 与 Public Power Manager，由 American Public Power Association 颁发；Certified Biosolids Land Appliers Class II 由 Water Professionals International 颁发）；认证不等于作业许可签发或管理授权或执业许可。",
                 "market": "美国",
                 "name": "O*NET 11-3051.04 认证发现（国家认证）",
                 "period": "2025 年更新页面；访问 2026-09-16",
@@ -32332,7 +32403,7 @@
                 "name": "国际劳工组织《生成式 AI 与就业：2025 年更新》（ILO Working Paper 140 后续更新）",
                 "period": "2025 年；访问 2026-09-16",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -32355,14 +32426,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "training information",
-                  "2025 年更新页面；访问 2026-09-16"
+                  "美国培训目录"
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
                 "limitation": "页面显示全国登记 4,520 个培训项目；职业准备信息说明该职业属 Job Zone Four（需要相当准备），多数岗位要求四年制学士学位但并非全部如此；培训信息不构成作业许可签发或管理授权或雇主任命。",
                 "market": "美国",
                 "name": "O*NET 11-3051.04 培训与教育信息",
-                "period": "2025 年更新页面；访问 2026-09-16",
+                "period": "美国培训目录",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/11-3051.04"
@@ -32451,33 +32522,33 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "industry distribution",
-                  "该页未标注资料期年份；访问 2026-09-16"
+                  "美国上位组行业"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "制造业 73%、其他行业（含批发贸易）27%；行业分布描述统计分类，不提供行业工资水平。",
+                "limitation": "美国 O*NET 上位组详情标注 2025 年制造业 74%。行业子表另列其他行业（含批发贸易）26%，该行未单列年份。数据不描述生物质电厂自身的雇主占比。",
                 "market": "美国",
                 "name": "O*NET 11-3051.04 行业分布（本职业 11-3051.04 口径）",
-                "period": "该页未标注资料期年份；访问 2026-09-16",
+                "period": "美国上位组行业",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/industry/11-3051.04"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official employment trends",
-                  "2024—2034 年；O*NET 页面标注父职业 11-3051.00 口径；访问 2026-09-16"
+                  "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。",
+                  "上位组基期、预测期与年均空缺。"
                 ],
-                "evidence_type": "official employment trends",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
-                "limitation": "页面明确标注「Employment data for Industrial Production Managers.」；2024 年在岗 241,900 人、2034 年约 246,500 人、2024—2034 年 2%（标签为慢于平均（Slower than average））、预测期年均职位空缺 17,100。",
+                "limitation": "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。",
                 "market": "美国",
-                "name": "O*NET 11-3051.04 就业趋势页（父职业 11-3051.00 口径）",
-                "period": "2024—2034 年；O*NET 页面标注父职业 11-3051.00 口径；访问 2026-09-16",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "美国 BLS 表 1.2：工业生产经理 11-3051",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/11-3051.04"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32508,7 +32579,7 @@
                 "name": "《中华人民共和国职业分类大典（2022 年版）》相关说明（人力资源和社会保障部）",
                 "period": "2022 年版；访问 2026-09-16",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
               },
               {
@@ -32592,33 +32663,33 @@
                 "url": "https://www.onetonline.org/link/custom/11-3051.04"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official occupation data",
-                  "2025—2035"
+                  "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。",
+                  "上位组基期、预测期与年均空缺。"
                 ],
-                "evidence_type": "official occupation data",
+                "evidence_type": "primary_document",
                 "id": "ep-current",
-                "limitation": "美国父职业11-3051.00工业生产经理：2025就业252,100人，2035预计258,600人；2025—2035增长3%（Average），年均空缺17,000，含增长与替换。非生物质电厂经理11-3051.04独立预测、中国需求、个人录用率或GenAI因果预测。",
+                "limitation": "美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。",
                 "market": "美国",
-                "name": "O*NET11-3051.04 就业预测",
-                "period": "2025—2035",
-                "publisher": "O*NET OnLine",
+                "name": "美国 BLS 表 1.2：工业生产经理 11-3051",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/11-3051.04"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation data",
-                  "2025"
+                  "美国上位组行业"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "industry-current",
-                "limitation": "2025美国行业分布为制造业74%、其他（含批发贸易）26%；详细页明确Industry data for Industrial Production Managers，为父职业11-3051.00口径。行业页以本职业为标题不改变统计对象，不提供中国雇主分布或行业工资。",
+                "limitation": "美国 O*NET 上位组详情标注 2025 年制造业 74%。行业子表另列其他行业（含批发贸易）26%，该行未单列年份。数据不描述生物质电厂自身的雇主占比。",
                 "market": "美国",
                 "name": "O*NET11-3051.04 行业分布",
-                "period": "2025",
+                "period": "美国上位组行业",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/industry/11-3051.04"
@@ -32627,14 +32698,14 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation data",
-                  "2025全年"
+                  "2025"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "hr-current",
-                "limitation": "5项软件招聘信号Excel、Office、Outlook、PowerPoint、Word全部Not available。Lightcast2025全年美国唯一招聘广告，分母为本职业全部唯一广告；缺比例不填0，不推出在岗采用、GenAI采用或无软件需求。详细页另列9类软件，含日历排程、设施管理、工业控制、库存等，DCS/PLC控制与生成式AI不是同一技术。",
+                "limitation": "O*NET 列出 Excel、Office、Outlook、PowerPoint 和 Word，未公布 2025 年美国关联职位广告提及率。缺值不等于零。",
                 "market": "美国",
                 "name": "O*NET11-3051.04 招聘软件",
-                "period": "2025全年",
+                "period": "2025",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/11-3051.04"
@@ -32643,14 +32714,14 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation data",
-                  "IPEDS2025—26/2024—25"
+                  "美国培训目录"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "training-current",
-                "limitation": "4,520项美国相关训练目录依据IPEDS2025—26目录、2024—25学位记录及CIP交叉映射，含通用工商管理/运营管理；不等于4,520个生物质电厂专属实时招生项目。学徒区域仅通用入口，未核具体在招项目、条件、报酬与费用。",
+                "limitation": "O*NET 显示 4,520 个培训目录项目。CareerOneStop 关联目录列三项：美国公共电力协会的公共电力客户服务经理、公共电力经理，以及 Water Professionals International 的二级生物固体土地施用人员。目录命中不代表正在招生或法定任职要求。",
                 "market": "美国",
                 "name": "O*NET11-3051.04 训练目录",
-                "period": "IPEDS2025—26/2024—25",
+                "period": "美国培训目录",
                 "publisher": "O*NET OnLine",
                 "scope": "education_directory",
                 "url": "https://www.onetonline.org/link/localtraining/11-3051.04"
@@ -32659,14 +32730,14 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation data",
-                  "2026-10-09读取"
+                  "目录读回 2026-11-10"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "cert-current",
-                "limitation": "关联认证目录列APPA Public Power Customer Service Manager、Public Power Manager与WPI Certified Biosolids Land Appliers Class II三项；仅关联第三方认证，不是中国国家资格、全体经理门槛或雇主任命。",
+                "limitation": "O*NET 显示 4,520 个培训目录项目。CareerOneStop 关联目录列三项：美国公共电力协会的公共电力客户服务经理、公共电力经理，以及 Water Professionals International 的二级生物固体土地施用人员。目录命中不代表正在招生或法定任职要求。",
                 "market": "美国",
                 "name": "O*NET11-3051.04 认证目录",
-                "period": "2026-10-09读取",
+                "period": "目录读回 2026-11-10",
                 "publisher": "O*NET OnLine",
                 "scope": "credential_directory",
                 "url": "https://www.onetonline.org/link/localcert/11-3051.04"
@@ -32674,15 +32745,15 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official wage statistics",
-                  "2025；2026-05-15发布"
+                  "国家统计局 2025 年电力、热力、燃气及水生产和供应业年均工资：城镇非私营单位 160,897 元，城镇私营单位 66,451 元。同业规模以上企业另表：中层及以上管理人员 267,035 元，全部就业人员 164,371 元。均为税前年均工资，非本职业工资。",
+                  "2025"
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "nbs-current",
-                "limitation": "国家统计局2025电力、热力、燃气及水生产和供应业城镇非私营160,897、私营66,451元/年；规模以上该行业企业全部164,371、管理267,035、专业技术190,929、生产制造及有关149,114元/年。是行业/人员大类税前年平均参照，不是本职业中位、起薪或月薪；实际雇主行业与本人职责分别核。城镇地域5人及以上法人单位，不含个体工商户/自由职业者；非私营含机关事业及港澳台外商。规模以上口径为规定16行业企业法人单位。税前工资含个人代扣税社保公积金，不含股权激励兑现、入股分红和资本收益；按实际支付单位核派遣/委托运营，不一概排除所有承包雇员。",
+                "limitation": "国家统计局 2025 年电力、热力、燃气及水生产和供应业年均工资：城镇非私营单位 160,897 元，城镇私营单位 66,451 元。同业规模以上企业另表：中层及以上管理人员 267,035 元，全部就业人员 164,371 元。均为税前年均工资，非本职业工资。",
                 "market": "中国大陆",
-                "name": "NBS2025城镇单位平均工资",
-                "period": "2025；2026-05-15发布",
+                "name": "国家统计局：城镇单位和规模以上企业工资",
+                "period": "2025",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
@@ -32700,7 +32771,7 @@
                 "name": "BLS OEWS工资定义与范围",
                 "period": "当前定义；2026-10-09核对",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "wage_scope",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
@@ -32716,7 +32787,7 @@
                 "name": "官方 boiler-current",
                 "period": "2021公告；2022年6月实施",
                 "publisher": "市场监管总局",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.samr.gov.cn/tzsbj/dtzb/gzdt/art/2021/art_ab36c6d55fde4d7daf8264578997607e.html"
               },
               {
@@ -32732,7 +32803,7 @@
                 "name": "官方 special-current",
                 "period": "2026年6月施行",
                 "publisher": "应急管理部",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
               },
               {
@@ -32743,12 +32814,12 @@
                 ],
                 "evidence_type": "official law or regulatory catalog",
                 "id": "special-catalog",
-                "limitation": "2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处安装维护拆除排除附于设备设施、有标准护栏的固定用具和平台。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。",
+                "limitation": "2026特种作业目录须按实际电压/作业项目核；有效高压电工作业证可从事低压，有效电工/焊热切割证在本职作业可不再考高处证。高处作业按目录适用范围核。有限空间监护证项目限目录规定行业/风险活动，2028年6月开始考核，不能写成当前所有电厂进入空间者统一须此证。",
                 "market": "中国大陆",
                 "name": "官方 special-catalog",
                 "period": "2026年6月目录；有关项目2028考核",
                 "publisher": "应急管理部",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202605/W020260526532904903760.pdf"
               },
               {
@@ -32759,12 +32830,12 @@
                 ],
                 "evidence_type": "official law",
                 "id": "chemical-current",
-                "limitation": "危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证限规定危险化学品达到规定量的化工企业（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。",
+                "limitation": "危险化学品安全法2026年5月施行：使用条件、安全制度、操作规程与从业培训按化学品种类/危险性/用量/方式核。安全使用许可证适用于使用国家规定种类危险化学品从事生产且用量达到规定数量的化工企业，危险化学品生产企业除外（第48条），不把所有电厂或所有领用一律写成须此证；实际作业审批另核。",
                 "market": "中国大陆",
                 "name": "危险化学品安全法市场监管总局全文",
                 "period": "2026-05-01施行；本轮核46—52/127条",
                 "publisher": "全国人大；市场监管总局公开全文",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2026/art_4e160e51cc134696a183a5f531f097e5.html"
               },
               {
@@ -32780,7 +32851,7 @@
                 "name": "官方 finite-space",
                 "period": "2024年1月施行",
                 "publisher": "应急管理部",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202312/t20231208_471426.shtml"
               },
               {
@@ -32791,7 +32862,7 @@
                 ],
                 "evidence_type": "official credential information",
                 "id": "cert-6195-a",
-                "limitation": "O*NET认证详情6195-A称PPCSM面向客服主管/经理/高管，5门课程、笔试与服务部门评估/业务计划须首课起3年内完成、2年继续教育续证；6196-A称PPM面向公共电力主管/经理，考试及2年继续教育续证。APPA当前目录列Leadership Essentials等，未见这两个同名项目，本轮未核同名证当前开放、报名/学时/费用或名称承继，不把其他项目自动等同。",
+                "limitation": "按发证机构核申请或维护条件。美国专项证书不替代国内岗位权限。",
                 "market": "美国",
                 "name": "PPCSM认证详情",
                 "period": "2026-10-09读取",
@@ -32807,7 +32878,7 @@
                 ],
                 "evidence_type": "official credential information",
                 "id": "cert-6196-a",
-                "limitation": "O*NET认证详情6195-A称PPCSM面向客服主管/经理/高管，5门课程、笔试与服务部门评估/业务计划须首课起3年内完成、2年继续教育续证；6196-A称PPM面向公共电力主管/经理，考试及2年继续教育续证。APPA当前目录列Leadership Essentials等，未见这两个同名项目，本轮未核同名证当前开放、报名/学时/费用或名称承继，不把其他项目自动等同。",
+                "limitation": "按发证机构核申请或维护条件。美国专项证书不替代国内岗位权限。",
                 "market": "美国",
                 "name": "PPM认证详情",
                 "period": "2026-10-09读取",
@@ -32823,7 +32894,7 @@
                 ],
                 "evidence_type": "official credential information",
                 "id": "cert-8161-b",
-                "limitation": "O*NET8161-B称Biosolids Land Appliers Class II须超过2年经验、考试、2年继续教育续证；不要求超过2年高中后教育，不能读成完全无学历门槛。WPI现行自愿认证通用过程审核资格，考试通过证2年、重考间隔30天。通用续证须24小时继续教育、签署声明和110美元；逾期超过6个月另35，超过2年不能续或须重考。该项目是生物固体土地施用，不因名字含bio就证明电厂燃料/锅炉管理能力；具体ClassII初始费用/替代条件未核。新考试页2026-09-25仍显示平台迁移移除报名链接、预计10-02恢复；10-09读取仍为该通知，当前报名可用性未核，不把预计日期当已恢复。",
+                "limitation": "按发证机构核申请或维护条件。美国专项证书不替代国内岗位权限。",
                 "market": "美国",
                 "name": "生物固体土地施用ClassII认证详情",
                 "period": "2026-10-09读取",
@@ -32839,7 +32910,7 @@
                 ],
                 "evidence_type": "official credential information",
                 "id": "appa-current",
-                "limitation": "O*NET认证详情6195-A称PPCSM面向客服主管/经理/高管，5门课程、笔试与服务部门评估/业务计划须首课起3年内完成、2年继续教育续证；6196-A称PPM面向公共电力主管/经理，考试及2年继续教育续证。APPA当前目录列Leadership Essentials等，未见这两个同名项目，本轮未核同名证当前开放、报名/学时/费用或名称承继，不把其他项目自动等同。",
+                "limitation": "按发证机构核申请或维护条件。美国专项证书不替代国内岗位权限。",
                 "market": "美国",
                 "name": "APPA当前证书目录",
                 "period": "2026-10-09读取",
@@ -32855,7 +32926,7 @@
                 ],
                 "evidence_type": "official credential information",
                 "id": "wpi-process",
-                "limitation": "O*NET8161-B称Biosolids Land Appliers Class II须超过2年经验、考试、2年继续教育续证；不要求超过2年高中后教育，不能读成完全无学历门槛。WPI现行自愿认证通用过程审核资格，考试通过证2年、重考间隔30天。通用续证须24小时继续教育、签署声明和110美元；逾期超过6个月另35，超过2年不能续或须重考。该项目是生物固体土地施用，不因名字含bio就证明电厂燃料/锅炉管理能力；具体ClassII初始费用/替代条件未核。新考试页2026-09-25仍显示平台迁移移除报名链接、预计10-02恢复；10-09读取仍为该通知，当前报名可用性未核，不把预计日期当已恢复。",
+                "limitation": "按发证机构核申请或维护条件。美国专项证书不替代国内岗位权限。",
                 "market": "美国",
                 "name": "WPI认证通用过程",
                 "period": "2026-10-09读取",
@@ -32871,7 +32942,7 @@
                 ],
                 "evidence_type": "official credential information",
                 "id": "wpi-renew",
-                "limitation": "O*NET8161-B称Biosolids Land Appliers Class II须超过2年经验、考试、2年继续教育续证；不要求超过2年高中后教育，不能读成完全无学历门槛。WPI现行自愿认证通用过程审核资格，考试通过证2年、重考间隔30天。通用续证须24小时继续教育、签署声明和110美元；逾期超过6个月另35，超过2年不能续或须重考。该项目是生物固体土地施用，不因名字含bio就证明电厂燃料/锅炉管理能力；具体ClassII初始费用/替代条件未核。新考试页2026-09-25仍显示平台迁移移除报名链接、预计10-02恢复；10-09读取仍为该通知，当前报名可用性未核，不把预计日期当已恢复。",
+                "limitation": "按发证机构核申请或维护条件。美国专项证书不替代国内岗位权限。",
                 "market": "美国",
                 "name": "WPI认证续证",
                 "period": "2026-10-09读取",
@@ -32887,7 +32958,7 @@
                 ],
                 "evidence_type": "official credential information",
                 "id": "wpi-exam-current",
-                "limitation": "O*NET8161-B称Biosolids Land Appliers Class II须超过2年经验、考试、2年继续教育续证；不要求超过2年高中后教育，不能读成完全无学历门槛。WPI现行自愿认证通用过程审核资格，考试通过证2年、重考间隔30天。通用续证须24小时继续教育、签署声明和110美元；逾期超过6个月另35，超过2年不能续或须重考。该项目是生物固体土地施用，不因名字含bio就证明电厂燃料/锅炉管理能力；具体ClassII初始费用/替代条件未核。新考试页2026-09-25仍显示平台迁移移除报名链接、预计10-02恢复；10-09读取仍为该通知，当前报名可用性未核，不把预计日期当已恢复。",
+                "limitation": "按发证机构核申请或维护条件。美国专项证书不替代国内岗位权限。",
                 "market": "美国",
                 "name": "WPI考试平台迁移通知",
                 "period": "2026-10-09读取",
@@ -32908,7 +32979,7 @@
                 "name": "国家能源局2023反事故重点要求印发通知",
                 "period": "2023-03-09；2026-10-09已读通知",
                 "publisher": "国家能源局",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://zfxxgk.nea.gov.cn/2023-03/09/c_1310705209.htm"
               },
               {
@@ -32924,7 +32995,7 @@
                 "name": "生物质发电项目历史管理通知",
                 "period": "2014-12-09历史通知",
                 "publisher": "国家发展改革委办公厅/国家能源局",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.nea.gov.cn/2014-12/30/c_133887836.htm"
               },
               {
@@ -32947,146 +33018,206 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation definition",
-                  "Updated2025/2026；2026-10-09已读定义"
+                  "美国职业定义"
                 ],
                 "evidence_type": "official occupation definition",
                 "id": "adj-11-3051.00",
                 "limitation": "制造产品所需工作活动/资源，满足成本质量数量规格；仅支持目标职责，距离与差距为编辑建议，非自动转换资格。",
                 "market": "美国",
                 "name": "O*NET相邻职业 11-3051.00",
-                "period": "Updated2025/2026；2026-10-09已读定义",
+                "period": "美国职业定义",
                 "publisher": "O*NET",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3051.00"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation definition",
-                  "Updated2025/2026；2026-10-09已读定义"
+                  "美国职业定义"
                 ],
                 "evidence_type": "official occupation definition",
                 "id": "adj-11-3051.03",
                 "limitation": "生物燃料生产/运行与绩效信息、问题诊断和纠正程序；仅支持目标职责，距离与差距为编辑建议，非自动转换资格。",
                 "market": "美国",
                 "name": "O*NET相邻职业 11-3051.03",
-                "period": "Updated2025/2026；2026-10-09已读定义",
+                "period": "美国职业定义",
                 "publisher": "O*NET",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3051.03"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation definition",
-                  "Updated2025/2026；2026-10-09已读定义"
+                  "美国职业定义"
                 ],
                 "evidence_type": "official occupation definition",
                 "id": "adj-11-3051.02",
                 "limitation": "管理地热发电设施运行，维护监测设备以安全高效运行；仅支持目标职责，差距为编辑建议，非资格自动互认。",
                 "market": "美国",
                 "name": "O*NET相邻职业 11-3051.02",
-                "period": "Updated2025/2026；2026-10-09已读定义",
+                "period": "美国职业定义",
                 "publisher": "O*NET",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3051.02"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation definition",
-                  "Updated2025/2026；2026-10-09已读定义"
+                  "美国职业定义"
                 ],
                 "evidence_type": "official occupation definition",
                 "id": "adj-51-8013.03",
                 "limitation": "控制监测生物质电厂并按需维护；仅支持目标职责，距离与差距为编辑建议，非自动转换资格。",
                 "market": "美国",
                 "name": "O*NET相邻职业 51-8013.03",
-                "period": "Updated2025/2026；2026-10-09已读定义",
+                "period": "美国职业定义",
                 "publisher": "O*NET",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/51-8013.03"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation definition",
-                  "Updated2025/2026；2026-10-09已读定义"
+                  "美国职业定义"
                 ],
                 "evidence_type": "official occupation definition",
                 "id": "adj-11-9041.01",
                 "limitation": "生物柴油技术/产品研发活动，包括工程测试/生产设计；仅支持目标职责，距离与差距为编辑建议，非自动转换资格。",
                 "market": "美国",
                 "name": "O*NET相邻职业 11-9041.01",
-                "period": "Updated2025/2026；2026-10-09已读定义",
+                "period": "美国职业定义",
                 "publisher": "O*NET",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-9041.01"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation definition",
-                  "Updated2025/2026；2026-10-09已读定义"
+                  "美国职业定义"
                 ],
                 "evidence_type": "official occupation definition",
                 "id": "adj-11-3051.06",
                 "limitation": "管理水电发电设施运行，维护监测设备以安全高效运行；仅支持目标职责，差距为编辑建议，非资格自动互认。",
                 "market": "美国",
                 "name": "O*NET相邻职业 11-3051.06",
-                "period": "Updated2025/2026；2026-10-09已读定义",
+                "period": "美国职业定义",
                 "publisher": "O*NET",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3051.06"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation definition",
-                  "Updated2025/2026；2026-10-09已读定义"
+                  "美国职业定义"
                 ],
                 "evidence_type": "official occupation definition",
                 "id": "adj-11-9199.09",
                 "limitation": "风场人员、维护、财务和计划；仅支持目标职责，距离与差距为编辑建议，非自动转换资格。",
                 "market": "美国",
                 "name": "O*NET相邻职业 11-9199.09",
-                "period": "Updated2025/2026；2026-10-09已读定义",
+                "period": "美国职业定义",
                 "publisher": "O*NET",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-9199.09"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation definition",
-                  "Updated2025/2026；2026-10-09已读定义"
+                  "美国职业定义"
                 ],
                 "evidence_type": "official occupation definition",
                 "id": "adj-17-2199.03",
                 "limitation": "设计/开发/评估降低能源成本或提高效率的项目，可含电气HVAC绿色建筑等；仅支持目标职责，距离与差距为编辑建议，非自动转换资格。",
                 "market": "美国",
                 "name": "O*NET相邻职业 17-2199.03",
-                "period": "Updated2025/2026；2026-10-09已读定义",
+                "period": "美国职业定义",
                 "publisher": "O*NET",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/17-2199.03"
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "费马 AI 子任务编辑指数：整理虚构整改记录 25、起草交接 25、作业签字和复运决定 0。等权取整为 17%，不代表真实采用、工时或替代。 floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-11-10.",
                   "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "现场检查与核对｜让判断有依据｜到现场检查设备与安全条件并核对指标与燃料与排放数据，如实记录异常与偏差。 — 25/100; weight=1/3; biomass-power-plant-managers.profile.responsibilities-block.1[1]",
-                  "指挥与调整｜让生产可控｜按授权指挥运行与检修并调整参数，在许可范围内处置并如实记录指令与依据与执行情况。 — 25/100; weight=1/3; biomass-power-plant-managers.profile.responsibilities-block.1[2]",
-                  "记录与整改｜让结果可交接｜记录指标与异常与违规与处置与整改与闭环情况，按规程交接与复盘并跟踪整改，不选择性记录。 — 75/100; weight=1/3; biomass-power-plant-managers.profile.responsibilities-block.1[4]"
+                  "整改复核｜记录结构｜人核编号、来源与未决项。 — 25/100; weight=1/3; 本页编辑样本",
+                  "交接｜交接草稿｜人核证据与接手责任。 — 25/100; weight=1/3; 本页编辑样本",
+                  "复运｜签字与复运决定｜由有权限人员按规程处理。 — 0/100; weight=1/3; 本页编辑样本"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "name": "费马 AI 子任务编辑方法",
+                "period": "2026-11-10",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "北京电投数智能源科技有限公司的南宫生物质电厂生产副总岗位，职责包括生产计划、检修、环保设施与生产队伍管理。岗位正文要求相关专业专科及以上、5 年以上生物质发电生产管理经验及 3 年以上同层级任职。该岗位正文列计酬结构，没有可核的固定工资额。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nangong-operations-deputy",
+                "limitation": "北京电投数智能源科技有限公司的南宫生物质电厂生产副总岗位，职责包括生产计划、检修、环保设施与生产队伍管理。岗位正文要求相关专业专科及以上、5 年以上生物质发电生产管理经验及 3 年以上同层级任职。该岗位正文列计酬结构，没有可核的固定工资额。",
+                "market": "中国大陆",
+                "name": "招聘平台雇主页：南宫生物质发电生产副总",
+                "period": "observed 2026-11-10",
+                "publisher": "Beijing Diantou Digital Energy",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhaopin.com/jobdetail/CCL1503185390J40875500701.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "阜阳师范大学就业页刊载龙基能源 2026 年招聘，列福建三明生物质颗粒厂厂长。它是燃料生产管理邻岗，公告列集团报酬结构，没有为该厂长单列工资金额。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "longji-pellet-manager-2026",
+                "limitation": "阜阳师范大学就业页刊载龙基能源 2026 年招聘，列福建三明生物质颗粒厂厂长。它是燃料生产管理邻岗，公告列集团报酬结构，没有为该厂长单列工资金额。",
+                "market": "中国大陆",
+                "name": "阜阳师范大学就业页：龙基能源颗粒厂厂长",
+                "period": "2026",
+                "publisher": "Fuyang Normal University",
+                "scope": "recruitment_proxy",
+                "url": "https://www.fynu.edu.cn/jyxxw/info/1015/11423.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "电力重大事故隐患判定标准及治理监督管理规定自 2026 年 7 月 1 日施行。第 3 条说明电力领域范围，并保留危化、消防和特种设备等领域另有判定标准时的规则。第 4 条由电力企业承担排查治理主体责任。项目经理按岗位权限组织、记录和上报，不从职位名称推定有权签字或复运。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "power-major-hazards-2026",
+                "limitation": "电力重大事故隐患判定标准及治理监督管理规定自 2026 年 7 月 1 日施行。第 3 条说明电力领域范围，并保留危化、消防和特种设备等领域另有判定标准时的规则。第 4 条由电力企业承担排查治理主体责任。项目经理按岗位权限组织、记录和上报，不从职位名称推定有权签字或复运。",
+                "market": "中国大陆",
+                "name": "国家发改委第 41 号令：电力重大事故隐患第 3、4 条",
+                "period": "2026-07-01",
+                "publisher": "National Development and Reform Commission",
+                "scope": "contextual",
+                "url": "https://www.nea.gov.cn/20260409/f20a03a64bea4a4791c1db72cbdccd28/20260409f20a03a64bea4a4791c1db72cbdccd28_143ef48bf0e11e49b88fbf89935455bdff.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "第 09 节 PM-82：核两版虚构整改交接，写一页给运行主管。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "pm82-paper",
+                "limitation": "第 09 节 PM-82：核两版虚构整改交接，写一页给运行主管。",
+                "market": "虚构练习",
+                "name": "费马 PM-82：整改复核与交接",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
               }
             ]
           },
@@ -33840,7 +33971,7 @@
             }
           }
         ],
-        "heading": "AI 会取代生物质电厂经理吗？",
+        "heading": "AI 能辅助哪些管理子任务？",
         "method_cards": [
           {
             "含义": {
@@ -34517,6 +34648,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.zhaopin.com/jobdetail/CCL1503185390J40875500701.htm",
+            "id": "nangong-operations-deputy",
+            "label": "招聘平台雇主页：南宫生物质发电生产副总",
+            "scope": "recruitment_proxy"
+          },
+          {
+            "href": "https://www.fynu.edu.cn/jyxxw/info/1015/11423.htm",
+            "id": "longji-pellet-manager-2026",
+            "label": "阜阳师范大学就业页：龙基能源颗粒厂厂长",
+            "scope": "recruitment_proxy"
+          },
+          {
+            "href": "https://www.nea.gov.cn/20260409/f20a03a64bea4a4791c1db72cbdccd28/20260409f20a03a64bea4a4791c1db72cbdccd28_143ef48bf0e11e49b88fbf89935455bdff.pdf",
+            "id": "power-major-hazards-2026",
+            "label": "国家发改委第 41 号令：电力重大事故隐患第 3、4 条",
+            "scope": "contextual"
           }
         ],
         "tracks": [
@@ -35698,6 +35847,12 @@
               "field": "limitation",
               "item": "biomass-power-plant-managers.source-register.published.1"
             }
+          },
+          {
+            "href": "https://www.nea.gov.cn/20260409/f20a03a64bea4a4791c1db72cbdccd28/20260409f20a03a64bea4a4791c1db72cbdccd28_143ef48bf0e11e49b88fbf89935455bdff.pdf",
+            "id": "power-major-hazards-2026",
+            "label": "国家发改委第 41 号令：电力重大事故隐患第 3、4 条",
+            "scope": "contextual"
           }
         ]
       },
@@ -35705,7 +35860,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "职业精确工资缺口",
+              "指标": "生物质发电生产副总",
               "数值": {
                 "$item": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -35720,7 +35875,7 @@
               }
             },
             {
-              "指标": "电热燃气水非私营年平均",
+              "指标": "颗粒燃料生产管理邻岗",
               "数值": {
                 "$item": "biomass-power-plant-managers.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -36525,7 +36680,7 @@
       },
       "hero": {
         "h1": "生物质电厂经理",
-        "quick_answer": "生物质电厂经理管理生物质发电设施的运行并监督运行与维护人员，官方职责原文为「Manage operations at biomass power generation facilities. Supervise operations and maintenance personnel.」（管理生物质发电设施的运行；监督运行与维护人员。）；常见工作包括管理发电设施的安全方案、审查运行绩效指标以确保符合监管要求、审查日志与数据表与报告以确认产量充足与生产环境安全或识别异常、监督以木材与煤与纸浆污泥或其他废弃物或残渣为燃料的发电运行与维护人员、监督生物质电厂或变电站的运行与维护与检修与试验活动、对生物质电厂与电站或变电站开展现场检查、计划并安排燃料到厂与除灰与定期检修等电厂活动、编制并管理生物质电厂预算、评估发电或需求趋势以识别改进运行的机会、检查生物质气化工艺与设备与设施以最大化产能并最小化运行成本、编写运行与状态与维护等报告、管理备件与供应库存、监测并操作移动电台等通信系统、在紧急情况或设备维护与检修与更换时停机与重启电厂或设备、汇总并记录运行数据、通过观察控制系统参数与分散控制系统与配电盘仪表等监测运行状态、调整设备控制以发出规定量的电力、以及测试与维护或修理配电机械或设备；其工作不等于可以直接签发作业许可或决定事故处置，也不代替适用法域与主管部门与机构制度对电力生产安全与锅炉与压力容器与受限空间与高处作业与环保的规范要求，并在作业许可或隔离状态不明、涉及停机启动或事故与环保事件或受限空间与动火作业等需专门许可的情形、或发现人员违规或设备缺陷或超出本人授权的情形时停止并升级。",
+        "quick_answer": "生物质发电厂经理组织电厂运行、检修与安全工作，核对运行记录、人员安排、燃料供应和预算，并跟踪异常由谁处理。职位可能主管某一专业或全厂。具体指挥和审批权限以实际岗位、设备与制度为准。",
         "title": "生物质电厂经理"
       },
       "market_signal_card": {
@@ -37901,7 +38056,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合生物质电厂经理",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37978,7 +38133,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "大五人格（中文）"
           },
           {
             "href": {
@@ -38008,7 +38163,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "智力与推理（中文）"
+            "label": "IQ（中文）"
           }
         ]
       },
@@ -38116,7 +38271,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 子任务编辑指数",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38206,37 +38361,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "241,900人（2024 年，父职业 11-3051.00 口径）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "约 252,100 人",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业规模（O*NET 页面标注的父职业口径）",
-        "occupation_scope": "生物质电厂经理",
-        "period": "2024 年；O*NET 页面标注父职业 11-3051.00 口径；访问 2026-09-16",
+        "occupation_scope": "美国工业生产经理 11-3051 上位组",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2%（慢于平均（Slower than average），父职业 11-3051.00 口径）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "2.6%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长率（O*NET 页面标注的父职业口径）",
-        "occupation_scope": "生物质电厂经理",
-        "period": "2024—2034 年；O*NET 页面标注父职业 11-3051.00 口径；访问 2026-09-16",
+        "occupation_scope": "美国工业生产经理 11-3051 上位组",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "17,100（含增长与替换，父职业 11-3051.00 口径）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "年均约 17,000 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "预测期年均职位空缺（O*NET 页面标注的父职业口径）",
-        "occupation_scope": "生物质电厂经理",
-        "period": "2024—2034 年；O*NET 页面标注父职业 11-3051.00 口径；访问 2026-09-16",
+        "occupation_scope": "美国工业生产经理 11-3051 上位组",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -38410,75 +38565,75 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "241,900人（2024 年）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "约 252,100 人",
         "fact_id": "us-employment-parent",
         "market": "美国",
         "measure": "就业规模（O*NET 页面标注的父职业口径）",
-        "occupation_scope": "生物质电厂经理",
-        "period": "2024 年；父职业 11-3051.00 口径",
+        "occupation_scope": "美国工业生产经理 11-3051 上位组",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2%（慢于平均（Slower than average））",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "2.6%",
         "fact_id": "us-growth-parent",
         "market": "美国",
         "measure": "就业增长率（O*NET 页面标注的父职业口径）",
-        "occupation_scope": "生物质电厂经理",
-        "period": "2024—2034 年；父职业 11-3051.00 口径",
+        "occupation_scope": "美国工业生产经理 11-3051 上位组",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "17,100（含增长与替换）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "年均约 17,000 个",
         "fact_id": "us-openings-parent",
         "market": "美国",
         "measure": "预测期年均职位空缺（O*NET 页面标注的父职业口径）",
-        "occupation_scope": "生物质电厂经理",
-        "period": "2024—2034 年；父职业 11-3051.00 口径",
+        "occupation_scope": "美国工业生产经理 11-3051 上位组",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "252,100人（2025；父职业）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "约 252,100 人",
         "fact_id": "employment-current",
         "market": "美国",
         "measure": "就业规模",
-        "occupation_scope": "父职业11-3051.00，非11-3051.04独立口径",
-        "period": "2025—2035；父职业11-3051.00",
+        "occupation_scope": "美国工业生产经理 11-3051 上位组",
+        "period": "2025",
         "source_refs": [
-          "ep-current"
+          "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "3%（Average；父职业）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "2.6%",
         "fact_id": "growth-current",
         "market": "美国",
         "measure": "就业增长率",
-        "occupation_scope": "父职业11-3051.00，非11-3051.04独立口径",
-        "period": "2025—2035；父职业11-3051.00",
+        "occupation_scope": "美国工业生产经理 11-3051 上位组",
+        "period": "2025–2035",
         "source_refs": [
-          "ep-current"
+          "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "17,000（年均；含增长与替换；父职业）",
+        "derivation": "BLS 原表发布值。",
+        "display_value": "年均约 17,000 个",
         "fact_id": "openings-current",
         "market": "美国",
         "measure": "年均空缺",
-        "occupation_scope": "父职业11-3051.00，非11-3051.04独立口径",
-        "period": "2025—2035；父职业11-3051.00",
+        "occupation_scope": "美国工业生产经理 11-3051 上位组",
+        "period": "2025–2035",
         "source_refs": [
-          "ep-current"
+          "ep"
         ]
       },
       {
@@ -38530,13 +38685,13 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
+        "derivation": "费马 AI 子任务编辑指数：整理虚构整改记录 25、起草交接 25、作业签字和复运决定 0。等权取整为 17%，不代表真实采用、工时或替代。",
+        "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "生物质电厂经理",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "measure": "AI 子任务编辑指数（编辑估算）",
+        "occupation_scope": "三个纸面管理子任务",
+        "period": "2026-11-10",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -38548,43 +38703,43 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 子任务编辑指数"
     },
     "badges": [
-      "O*NET 11-3051.04 · Job Zone Four（需要相当准备）· 学历字段为学士学位 61%",
+      "O*NET 11-3051.04 · 职业准备区 4 · 61% 的受访者认为新入职需学士",
       "安全与合规管理 / 生产与设备与人员管理 / 预算与供应与对外",
-      "身份与任务为 O*NET 11-3051.04 本职业口径 · 工资与就业与预测为 O*NET 页面标注的父职业 11-3051.00 口径并逐处标注 · 中国大陆薪资未取得职业级条目"
+      "职业任务 11-3051.04 · 美国工资和就业为工业生产经理上位组"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国年薪中位数（父职业 11-3051.00 口径）"
+        "label": "美国上位组年薪中位数（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，父职业 11-3051.00 口径）"
+        "label": "美国上位组就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，父职业 11-3051.00 口径）"
+        "label": "美国上位组就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，父职业 11-3051.00 口径）"
+        "label": "美国上位组年均空缺（2025–2035）"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考（未取得职业级条目，本页不出数）"
+        "label": "大陆全国职业工资（未核实）"
       }
     ]
   },
@@ -38592,17 +38747,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "生物质电厂经理做什么、需要哪些学历与准备、美国的收入与前景如何、AI 会改变哪些任务，以及作业许可与管理授权越界、电力生产与锅炉与压力容器与超温超压风险、安全与运行与培训与整改记录不可追溯、自动控制与系统提示与自动报表被当成设备与人员状态、现场与噪声与污染物与高处与超时工作暴露负荷、以及安全与环保与成本数据与信息对外提供的边界；保留口径、来源范围与数据缺口。"
+      "text": "了解生物质发电厂经理的生产、检修和安全协调，比较大陆岗位与美国工业生产经理上位组数据。"
     },
     "title": {
       "availability": "available",
       "text": "生物质电厂经理"
     }
   },
-  "source_content_sha256": "5ef61dbb8a6398c3c714158e395fb6b0507fdfa8f9fa5d4881c6a40a4f18f243",
+  "source_content_sha256": "7cc37fe283c3300cafb514a535437b7a7a3411a4ab2fbdf014a0e34089b66243",
   "subject": {
     "canonical_slug": "biomass-power-plant-managers",
     "name": "生物质电厂经理",
-    "summary": "生物质电厂经理管理生物质发电设施的运行并监督运行与维护人员，常见工作包括管理安全方案、审查运行绩效指标与日志与报告、监督发电运行与维护人员与电厂或变电站的运行与检修与试验活动、开展现场检查、计划并安排燃料到厂与除灰与定期检修、编制并管理预算、评估发电或需求趋势、检查气化工艺与设备、编写运行与状态与维护报告、管理备件与供应库存、在紧急情况或维护与检修时停机与重启、汇总并记录运行数据、调整设备控制以发出规定量的电力、以及测试与维护或修理配电机械或设备。美国侧对应 O*NET 11-3051.04（Biomass Power Plant Managers），属 Job Zone Four（需要相当准备）；该职业的身份与任务与工作情境与技能为本职业 11-3051.04 口径；工资与就业与预测在 O*NET 页面上明确标注取自父职业 Industrial Production Managers（11-3051.00），本页据页面数值发布并逐处标注父职业口径与资料期；行业分布为本职业 11-3051.04 口径。中国大陆侧国家统计局仅提供行业或岗位大类口径，未取得与该职业精确对应的职业工资分布，按证据口径本页不发布任何中国大陆薪资数值并保留可见缺口标记，也不用行业或岗位大类均值替代本职业中位数或起薪；电力生产与生物质发电项目管理在中国大陆受《防止电力生产事故的二十五项重点要求（2023版）》与《关于加强和规范生物质发电项目管理有关要求的通知》等要求约束。"
+    "summary": "生物质发电厂经理组织电厂运行、检修与安全工作，核对运行记录、人员安排、燃料供应和预算，并跟踪异常由谁处理。职位可能主管某一专业或全厂。具体指挥和审批权限以实际岗位、设备与制度为准。 美国 BLS 工业生产经理上位组 11-3051：2025 年约 252,100 人，2035 年预计 258,600 人，净增约 6,500 人，增长 2.6%，年均约 17,000 个空缺，含增长和替补。基期含 2.4% 自雇，未单列生物质发电厂经理。"
   }
 }

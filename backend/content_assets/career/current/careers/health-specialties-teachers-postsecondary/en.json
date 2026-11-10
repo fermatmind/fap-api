@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1239,7 +1236,7 @@
         "status": "mapped"
       },
       "item:health-specialties-teachers-postsecondary.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:health-specialties-teachers-postsecondary.path.interview-probation.1": {
         "status": "mapped"
@@ -1497,7 +1494,7 @@
         "status": "pending_mapping"
       },
       "item:health-specialties-teachers-postsecondary.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:health-specialties-teachers-postsecondary.sources.source-card.1": {
         "status": "mapped"
@@ -10834,7 +10831,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10886,7 +10883,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10938,7 +10935,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -23757,7 +23754,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "This checklist is for self-questioning only; it does not constitute hiring criteria, competency scoring, or an evaluation of job competence, nor does it constitute any medical, diagnostic, treatment, medication, legal, or education policy advice. This page corresponds to the exact occupation U.S. O*NET/SOC 25-1071.00 \"Health Specialties Teachers, Postsecondary\" (Health Specialties Teachers, Postsecondary): teach courses in health specialties, covering fields such as dentistry, laboratory technology, medicine, pharmacy, public health, therapy, and veterinary medicine. Official scope text: Teach courses in health specialties, in fields such as dentistry, laboratory technology, medicine, pharmacy, public health, therapy, and veterinary medicine. The core tasks listed by O*NET include: preparing course materials (such as syllabi, assignments, and handouts; importance 84); following developments in the field by reading current literature, talking with colleagues, and participating in professional conferences (83); evaluating and grading students' class work and assignments and papers (81); supervising laboratory sessions (80); compiling, administering, and grading examinations, or assigning that work to others (79); maintaining student attendance and grade and other necessary records (79); initiating, facilitating, and moderating classroom discussions (78); planning, evaluating, and revising curricula and course content and materials and teaching methods (75); supervising undergraduate or graduate teaching and internship and research work (74); participating in admissions and registration and job placement activities (72); selecting and obtaining materials and supplies such as textbooks and laboratory equipment (70); collaborating with colleagues on teaching and research issues (68); serving on academic or administrative committees dealing with institutional policy and departmental and academic affairs (68); advising students on academic and career curricula and career issues (68); keeping regular office hours to advise and assist students (67); conducting research in a particular field of knowledge and publishing findings in professional journals, books, or electronic media (64); participating in campus and community activities (51); preparing and delivering topics such as public health and stress management and workplace health promotion for undergraduate or graduate students (79); performing administrative duties (such as serving as department head; 77); writing grant proposals to obtain external research funding (69); serving as an adviser to student organizations (60); and compiling specialized bibliographies of materials for outside reading assignments (56). Common job titles include Assistant Professor and Associate Professor and Clinical Professor and Instructor and Lecturer and Occupational Therapy Professor and Pharmacology Professor and Physical Therapy Professor and Professor and Public Health Professor. Scope note: the wage and employment and industry data presented by O*NET on the 25-1071.00 page are not marked as taken from a parent occupation, so this page labels them faithfully according to this occupation's own scope (25-1071.00); the wages on that page show only the annual wage distribution (no hourly wage), and this page does not fill in an hourly wage; the page also shows a projected 2024—2034 growth of \"Much faster than average (7% or higher)\" (much faster than average) and marks it Bright Outlook (good prospects). Scope and boundaries are described in the sections below."
+              "BLS Table 1.2 for U.S. occupation 25-1071 shows about 278,400 jobs in 2025 and projects 328,300 in 2035 (+17.9%), with about 24,900 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.quick-decision.fit-decision-checklist.1",
@@ -23771,12 +23768,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Exercise prompt | A completely fictional higher education health specialties course design and teaching task package (for practice workflow only; it does not represent any real institution, program, student, or data). Write a draft plan: (1) how, based on a fictional program of study along with a course syllabus and prerequisites, to arrange a health specialties course in a structured way (program objectives and learning outcomes, course content and sequence and basis, teaching and laboratory and clinical or internship arrangements, assessment and grading and feedback, academic integrity and teaching ethics and safety, evaluation and improvement, and records and files), and state which information is insufficient and needs to be supplemented (prerequisites and academic background, professional and industry standards and accreditation requirements, laboratory or clinical site and safety requirements, assessment and grading definitions and fairness, accessibility and language requirements, and academic integrity and data and privacy requirements); (2) how to design the completion and review points for a fictional teaching, assessment, and grade record table (fields and definitions, students and courses and classes, grades and grading basis and review, exceptions and appeals and corrections, and original records and revision audit trails); (3) how to write a handover-ready course description (program objectives—content and basis—teaching and assessment—ethics and safety—evaluation and improvement—open items); (4) how to record and preserve student grades and teaching files and research data, and distinguish disclosable information from controlled materials or materials involving students' and participants' personal information; (5) how to pause, review, and escalate when academic or academic integrity problems or laboratory or clinical safety risks are found, when privacy or ethics issues are involved, or when the task exceeds the position's authorization. Answer using public materials and simulated data; do not use any real student or participant data."
+              "Try both versions of Sheet J in the entry section and open the first folded FAQ answer."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -23785,12 +23782,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Fit signals | The work activity importance scores for U.S. O*NET 25-1071.00 show that Training and Teaching Others (89), Updating and Using Relevant Knowledge (89), Getting Information (87), Working with Computers (86), Thinking Creatively (83), Establishing and Maintaining Interpersonal Relationships (81), Organizing, Planning, and Prioritizing Work (79), Interpreting the Meaning of Information for Others (78), Identifying Objects, Actions, and Events (76), and Making Decisions and Solving Problems (76) are the most important activities for this occupation; the work context (percentage response scope) shows face-to-face discussions 95% every day, electronic mail 90% every day, contact with others 76%, public speaking 35% every day and 53% once a week or more, indoors, environmentally controlled 86% every day, work with a work group or team 62% extremely important, decision freedom 86% a lot of freedom, importance of being exact or highly accurate 67% very important, responsibility for others' health and safety 42% very high, and work schedule 85% regular. If you are willing to keep learning in the health specialties field and explain knowledge clearly, can collaborate with students and colleagues and the industry, and are willing to take responsibility for teaching quality and academic integrity and the safety of students, colleagues, and patients, the daily requirements of this occupation are closer to the way you work."
+              "Compare course versions and grading instructions and record pending items and reviewers."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -23835,7 +23832,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Direct answer | The \"Health Specialties Teachers, Postsecondary\" on this page is the exact occupation O*NET 25-1071.00 (Health Specialties Teachers, Postsecondary), and the work can be divided into several categories: first, course and teaching preparation — preparing course materials (such as syllabi and assignments and handouts; importance 84), planning, evaluating, and revising curricula and course content and materials and teaching methods (75), and selecting and obtaining materials and supplies such as textbooks and laboratory equipment (70); second, instruction and seminars and laboratories — preparing and delivering topics such as public health and stress management and workplace health promotion for undergraduate or graduate students (79), initiating, facilitating, and moderating classroom discussions (78), supervising laboratory sessions (80), and keeping regular office hours to advise students (67); third, assessment and evaluation — evaluating and grading students' class work and assignments and papers (81), compiling, administering, and grading examinations or assigning that work to others (79), and maintaining student attendance and grade and other necessary records (79); fourth, advising and mentoring — supervising undergraduate or graduate teaching and internship and research work (74), advising students on academic and career curricula and career issues (68), and serving as an adviser to student organizations (60); fifth, teaching research and research — following developments in the field by reading current literature and talking with colleagues and attending professional conferences (83), conducting research in a particular field of knowledge and publishing findings in professional journals and books or electronic media (64), and writing grant proposals to obtain external research funding (69); sixth, academic service and administration — collaborating with colleagues on teaching and research issues (68), serving on academic or administrative committees dealing with institutional policy and departmental and academic affairs (68), performing administrative duties (such as serving as department head; 77), participating in admissions and registration and job placement activities (72), participating in campus and community activities (51), and compiling specialized bibliographies of materials for outside reading assignments (56). Work cycle links: identifying course and teaching needs—designing and preparing courses and materials—instruction and seminars and mentoring—assessment and grading and feedback—teaching research and research and publication—records and review and academic service. This page does not conflate this occupation with adjacent ones such as postsecondary nursing teachers, health education specialists, clinical nurse specialists, postsecondary biological science teachers, career and technical education teachers, education teachers, postsecondary psychology teachers, or postsecondary social work teachers, nor does it expand teaching duties to the point of replacing clinical diagnosis, treatment, medication, or medical decisions."
+              "Postsecondary health specialties teachers teach subjects such as medicine, pharmacy, public health, therapy, veterinary medicine and laboratory technology. Roles may include curriculum, grading, clinical supervision or research."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.profile.career-quick-answers-block.1",
@@ -23924,7 +23921,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Course and teaching needs identification → course and materials design and preparation → instruction and seminars and mentoring → assessment and grading and feedback → teaching research and research and publication → records and review and academic service"
+              "Receive the work order → Check assignments → Verify course versions and grading instructions → Report discrepancies → Assist with assigned tasks → Hand off records"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.profile.career-quick-answers-block.3",
@@ -24904,7 +24901,7 @@
                 "url": "https://www.onetonline.org/link/hot_tech/25-1071.00"
               },
               {
-                "entity": "O*NET 25-1071.00 employment trends (this occupation's (25-1071.00) own scope, BLS employment projections 2024—2034)",
+                "entity": "BLS Table 1.2 for U.S. occupation 25-1071 shows about 278,400 jobs in 2025 and projects 328,300 in 2035 (+17.9%), with about 24,900 openings per year including replacements. Counts are rounded independently.",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
@@ -25118,7 +25115,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | Course materials, examinations, grade records, student advising, and teaching research are tasks of this occupation. Material drafts, literature organization, and record checking can serve as tool-assistance candidates; this is an editorial judgment. Ordinary teaching software, automation, and generative AI are different. This page has not obtained measured or causal evidence on this occupation's adoption rate, hours saved, or job displacement, and cannot guarantee that efficiency gains have already occurred or that the occupation as a whole will not be replaced. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Direct answer | Course materials, examinations, grade records, student advising, and teaching research are tasks of this occupation. Material drafts, literature organization, and record checking can serve as tool-assistance candidates; this is an editorial judgment. Ordinary teaching software, automation, and generative AI are different. This page has not obtained measured or causal evidence on this occupation's adoption rate, hours saved, or job displacement, and cannot guarantee that efficiency gains have already occurred or that the occupation as a whole will not be replaced."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -26596,12 +26593,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "10th percentile annual wage $59,270 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; annual wage only)"
+              "10th percentile: USD 59,270 per year."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26610,12 +26607,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26624,12 +26621,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "25th percentile annual wage $75,690 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; annual wage only)"
+              "25th percentile: USD 75,690 per year."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26638,12 +26635,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26652,12 +26649,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Median annual wage $107,310 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; that page shows annual wage only)"
+              "50th percentile: USD 107,310 per year."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26666,12 +26663,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26680,12 +26677,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "75th percentile annual wage $210,370 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; annual wage only)"
+              "75th percentile: USD 210,370 per year."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26694,12 +26691,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26708,12 +26705,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "90th percentile annual wage $322,020 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; annual wage only)"
+              "90th percentile: USD 322,020 per year."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26722,12 +26719,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26736,12 +26733,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 employment about 278,400 people"
+              "About 278,400 jobs (2025)"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26750,12 +26747,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26764,12 +26761,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 growth 17.9% (O*NET displays 7% or higher)"
+              "+17.9%"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26778,12 +26775,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26792,12 +26789,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 average annual openings about 24,900 (including growth and replacement)"
+              "About 24,900 projected per year"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26806,12 +26803,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26834,12 +26831,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupational definition | The Health Specialties Teachers, Postsecondary on this page is the exact occupation O*NET 25-1071.00 (Health Specialties Teachers, Postsecondary): teach courses in health specialties, covering fields such as dentistry, laboratory technology, medicine, pharmacy, public health, therapy, and veterinary medicine. Common job titles include Assistant Professor and Associate Professor and Clinical Professor and Instructor and Lecturer and Occupational Therapy Professor and Pharmacology Professor and Physical Therapy Professor and Professor and Public Health Professor. The output is courses and teaching materials and assessment and grading and advising and teaching research and research findings records; the above is the U.S. scope, and mainland China's higher education and clinical teaching and teacher management systems and statistical scope are described separately on this page."
+              "The sources checked did not provide a mainland China national wage distribution for this occupation. NBS tables 2 and 5 report 2025 annual average wages for urban education: CNY 133,539 at non-private units and CNY 63,908 at private units."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27114,7 +27111,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupational title cross-reference | Health Specialties Teachers, Postsecondary (O*NET/SOC 25-1071.00 Health Specialties Teachers, Postsecondary; commonly called full-time teachers at medical schools, specialty teachers at nursing schools, clinical instructors, specialty teachers in public health and pharmacy and medical laboratory science, and health specialties lecturers and associate professors and professors, etc. in job postings and the industry; it differs from Postsecondary Nursing Instructors and Teachers, Health Education Specialists, Clinical Nurse Specialists, Postsecondary Biological Science Teachers, Career/Technical Education Teachers, Education Teachers, Postsecondary Psychology Teachers, and Postsecondary Social Work Teachers in subject matter and authorization level)"
+              "Mainland China wage references"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.44",
@@ -27128,12 +27125,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China section | In mainland China, there are positions in higher medical education and nursing education and applied undergraduate and higher vocational health specialties teaching and continuing medical education that are similar to Health Specialties Teachers, Postsecondary (such as full-time teachers at medical and nursing schools, clinical instructors at affiliated hospitals, specialty teachers at health vocational colleges, and continuing medical education faculty); their work and qualifications and standards and records are governed by the Education Law of the People's Republic of China, the Higher Education Law of the People's Republic of China, the Teachers Law of the People's Republic of China, the Academic Degrees Law of the People's Republic of China, and the Basic Medical and Health Promotion Law of the People's Republic of China, as well as the code of professional conduct for higher education teachers and regulations on clinical teaching and research ethics and personal information protection: higher education teaching and clinical teaching must follow standards and specifications; matters involving diagnosis, treatment, and medication must be carried out by institutions and personnel with the corresponding qualifications; and students' and patients' and participants' personal information must be protected in accordance with the law and handled under the minimum necessary principle. However, this round did not obtain a national occupational wage distribution precisely corresponding to U.S. O*NET 25-1071.00 (Health Specialties Teachers, Postsecondary): the National Bureau of Statistics publishes average wages of urban unit employees by industry category, which is an industry scope that does not distinguish occupations and does not list this occupation separately. Under the evidence policy, this page only registers the statistical scope and the visible gaps (marked \"Evidence insufficient:\"), shows the absence without using proxy numbers, and does not infer starting salaries, medians, or personal income from industry averages, job posting offers, U.S. wages, or overseas data."
+              "The sources checked did not provide a mainland China national wage distribution for this occupation. NBS tables 2 and 5 report 2025 annual average wages for urban education: CNY 133,539 at non-private units and CNY 63,908 at private units."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27184,12 +27181,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 Education / urban non-private units (industry reference)"
+              "Urban non-private · education"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27198,12 +27195,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Average annual wage 133,539 yuan/year; an average for all employed persons in the industry, not this occupation's wage."
+              "CNY 133,539/year"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet",
             "nbs-wage-release-2025"
           ],
           "type": "prose"
@@ -27213,26 +27209,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 Education / urban private units (industry reference)"
+              "Urban private · education"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Average annual wage 63,908 yuan/year; an average for all employed persons in the industry, not this occupation's wage."
-            ]
-          },
-          "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.52",
-          "source_refs": [
-            "onet",
             "nbs-wage-release-2025"
           ],
           "type": "prose"
@@ -27242,12 +27223,26 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Precise national occupational wage for this occupation in mainland China"
+              "CNY 63,908/year"
+            ]
+          },
+          "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.52",
+          "source_refs": [
+            "nbs-wage-release-2025"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "Urban non-private · all industries"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27256,12 +27251,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Evidence insufficient: this round did not obtain a national occupational wage distribution for mainland China precisely corresponding to U.S. O*NET 25-1071.00 (Health Specialties Teachers, Postsecondary); the National Bureau of Statistics publishes average wages by industry category without distinguishing occupations, and this page does not fill in with industry averages, job posting offers, or U.S. data."
+              "CNY 129,441/year"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27270,12 +27265,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Classification cross-reference note | This page is the exact occupation O*NET 25-1071.00 (Health Specialties Teachers, Postsecondary), which differs from Postsecondary Nursing Instructors and Teachers (25-1072.00), Health Education Specialists (21-1091.00), Clinical Nurse Specialists (29-1141.04), Postsecondary Biological Science Teachers (25-1042.00), Career/Technical Education Teachers, Postsecondary (25-1194.00), Education Teachers, Postsecondary (25-1081.00), Postsecondary Psychology Teachers (25-1066.00), and Postsecondary Social Work Teachers (25-1113.00) in subject matter and authorization level. International occupational classifications (such as ISCO-08) can only indicate the broad location of education and health specialties teaching positions and cannot replace the U.S. SOC or mainland China's professional and qualification and occupational classification and statistical scope. The two have different statistical scopes and legal environments, and no numerical conversion is made."
+              "The sources checked did not provide a mainland China national wage distribution for this occupation. NBS tables 2 and 5 report 2025 annual average wages for urban education: CNY 133,539 at non-private units and CNY 63,908 at private units."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27334,12 +27329,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "National wages | https://www.onetonline.org/link/localwages/25-1071.00; employment projections | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; tasks and industry background | https://www.onetonline.org/link/details/25-1071.00"
+              "O*NET national occupational wages | https://www.onetonline.org/link/localwages/25-1071.00; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; Fujian Medical University 2026 recruitment plan | https://www.fjmu.edu.cn/2026/0310/c86a214125/page.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -27348,12 +27345,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "10th percentile annual wage $59,270 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; annual wage only)"
+              "10th percentile: USD 59,270 per year."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27362,12 +27359,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27376,12 +27373,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "25th percentile annual wage $75,690 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; annual wage only)"
+              "25th percentile: USD 75,690 per year."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27390,12 +27387,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27404,12 +27401,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Median annual wage $107,310 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; that page shows annual wage only)"
+              "50th percentile: USD 107,310 per year."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27418,12 +27415,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27432,12 +27429,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "75th percentile annual wage $210,370 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; annual wage only)"
+              "75th percentile: USD 210,370 per year."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27446,12 +27443,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27460,12 +27457,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "90th percentile annual wage $322,020 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; annual wage only)"
+              "90th percentile: USD 322,020 per year."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27474,12 +27471,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "May 2025 U.S. national occupational wage.; O*NET national wage table | https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27488,12 +27485,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 employment about 278,400 people"
+              "About 278,400 jobs (2025)"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27502,12 +27499,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27516,12 +27513,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 growth 17.9% (O*NET displays 7% or higher)"
+              "+17.9%"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27530,12 +27527,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27544,12 +27541,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 average annual openings about 24,900 (including growth and replacement)"
+              "About 24,900 projected per year"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27558,12 +27555,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Scope | U.S. SOC25-1071, May 2025 wages, and the 2025—2035 projection; boundaries | wages are annual only, percentiles are not equivalent to seniority or starting salary, and openings are not equal to net additions."
+              "2025–2035 U.S. national occupational projection.; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27586,12 +27583,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Direct answer | The 2025 U.S. median annual wage presented by O*NET on the 25-1071.00 (Health Specialties Teachers, Postsecondary) page is $107,310; in the distribution, the 10th percentile annual wage is $59,270, the 25th percentile $75,690, the 75th percentile $210,370, and the 90th percentile $322,020 (BLS OEWS 2025, as presented by O*NET). Employment and growth: 2025 employment 278,400, projected growth for 2025—2035 of 7% or higher (much faster than average, marked Bright Outlook), with about 24,900 average annual openings during the period (including growth and replacements). It should be emphasized that the O*NET 25-1071.00 page does not mark this data as taken from a parent or higher-level occupation, and this page presents it according to this occupation's (25-1071.00) own scope without borrowing values from adjacent occupations; the wages on that page show only annual wages and not the hourly wage, and this page does not fill in an hourly wage; the differences mainly come from institution type and discipline and region and academic rank and clinical or research duties; the median does not represent a starting salary, and it includes incentive pay such as production bonuses while excluding overtime pay, shift differentials, non-production bonuses, and employer benefit costs."
+              "Used to check the median annual wage of $107,310 and the 10th/25th/75th/90th percentiles ($59,270 / $75,690 / $210,370 / $322,020 USD/year)."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27936,12 +27933,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "A national wage distribution position; individual seniority, starting salary, track, or duties cannot be inferred from it; this occupation lists annual wages only and does not convert them to hourly wages."
+              "May 2025 national annual occupational wages."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27950,12 +27947,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "A national wage distribution position; individual seniority, starting salary, track, or duties cannot be inferred from it; this occupation lists annual wages only and does not convert them to hourly wages."
+              "May 2025 national annual occupational wages."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27964,12 +27961,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "A national wage distribution position; individual seniority, starting salary, track, or duties cannot be inferred from it; this occupation lists annual wages only and does not convert them to hourly wages."
+              "May 2025 national annual occupational wages."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27996,31 +27993,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Clinical Nurse Specialist direction",
@@ -28095,7 +28092,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS employment projections (2024—2034)",
+                "entity": "2025–2035",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/"
@@ -29671,7 +29668,7 @@
                 "id": "education",
                 "values": [
                   "U.S. O*NET places 25-1071.00 (Health Specialties Teachers, Postsecondary) in Job Zone Five (extensive preparation needed), with an SVP range of 8.0 and above; the education section shows 36% master's degree, 25% doctoral degree, and 19% post-doctoral training; this description does not replace the competent authority's and employer's requirements for education and training and qualifications and continuing education and professional qualifications.",
-                  "Whether one can independently offer courses and supervise graduate students and issue grades and research conclusions depends not on the degree itself but on whether the corresponding qualifications and continuing education have been obtained and the corresponding duties are assumed within the scope of institutional authorization.",
+                  "BLS Table 1.2 lists a doctoral or professional degree and less than five years of related experience as typical U.S. preparation, with no typical on-the-job training. Check discipline, teaching and clinical supervision requirements with the institution.",
                   "The editors recommend observing the learning process of course design, teaching, and assessment; there is no research on the relative predictive validity of degrees versus practical ability for this occupation."
                 ]
               },
@@ -29679,7 +29676,7 @@
                 "id": "clearance",
                 "values": [
                   "Common requirements: academic integrity and examination discipline and grading and grade review requirements; teaching and research ethics and ethics review and informed consent requirements; requirements for accessing and storing and sharing and disclosing students' and patients' and participants' personal information; data protection and information security requirements; laboratory or clinical site safety and protection and exposure handling requirements; conflict of interest and funding and authorship standards; and accessibility and language and fairness requirements.",
-                  "Matters involving clinical judgment and medical advice and grades and academic sanctions and external disclosure and the handling of student and patient personal information must be carried out by positions or institutions with the corresponding qualifications.",
+                  "The Fujian Medical University 2026 posting lists a teaching and research role in basic medical sciences with fields including basic medicine, clinical medicine, public health and preventive medicine.",
                   "The retention, provision, and disclosure of controlled materials or materials involving students' and patients' or participants' personal information must be managed according to privacy and minimum necessary requirements; controlled materials must not be sent to unauthorized environments."
                 ]
               },
@@ -29703,7 +29700,8 @@
           },
           "id": "health-specialties-teachers-postsecondary.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "title": "What do employers usually look at in hiring?",
           "type": "cards"
@@ -29716,45 +29714,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "A completely fictional program of study and course syllabus and prerequisites (containing no real student data).",
-                  "A fictional description of professional and industry standards and accreditation and assessment requirements.",
-                  "A blank course design and assessment and grading record template.",
-                  "A blank grade and attendance and academic integrity record template.",
-                  "A blank teaching and research ethics and privacy and safety key-points template.",
-                  "An available slide and spreadsheet and item bank and statistics tool environment (for course and assessment and data reconciliation)."
+                  "Sheet J: Course materials pre-release check",
+                  "Fictional paper exercise. Submit course materials for review only if they use approved V3 and have grading instructions recorded. J1 is V3 with instructions recorded. J2 is V2 with instructions recorded. J3 is V3 with instructions blank. Refer version mismatches to the course owner and missing instructions to the teaching reviewer. In the variant only J3 gains recorded instructions. Record both cases with status, original entries and reviewer.",
+                  "Use the two records in the prompt. No site access or tools are needed."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Complete within 90 minutes: a course and assessment plan, a grade and record note, and a draft of teaching and research ethics and privacy and safety key points.",
-                  "Complete one round of grade and learning outcome reconciliation, and write at least two situations that could lead to unfair grading or teaching failure or ethics risk, with the corresponding measures.",
-                  "Write out which situations require stopping and reviewing or reporting or handing over (academic or academic integrity problems, laboratory or clinical safety risks, privacy or ethics issues, involvement of clinical advice or out-of-authorization determinations)."
+                  "What to hand over",
+                  "Record both cases. Keep the original values, status and review owner for each row.",
+                  "Retain discrepant values through review."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First list the key steps and non-omissible items from course and teaching needs identification through course and materials design to instruction and mentoring to assessment and grading to teaching research and publication, then record the basis and results for each item.",
-                  "State the basis and definitions clearly for the program objectives and courses and assessment and grading and reviewers, and retain original records and versions.",
-                  "For risks, state the identification signals and handling steps and reporting recipients clearly.",
-                  "Finally write a reflection paragraph: what consequences result if certain steps are compressed or omitted, and which conclusions cannot be drawn with the available information."
+                  "Check after finishing",
+                  "Save both answers, then open “Paper exercise answer key” in the FAQ.",
+                  "The link below opens the FAQ."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "No real student or patient or participant data or real institutions or personal information are involved; for academic or academic integrity problems or safety or privacy or ethics risks or out-of-authorization requests, always state that work pauses and is reviewed and reported and handed over; also state that all courses and grades and disclosure must be carried out by personnel and institutions with the corresponding qualifications and authorization within ethics and compliance requirements, and that the practice uses fictional materials.",
-                  "The work only demonstrates that you can organize course and teaching and assessment and record work in this occupation's way of working, and does not constitute proof of authorization or competence."
+                  "Exercise scope",
+                  "Check the paper records only."
                 ]
               }
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "paper-answer-key"
           ],
-          "title": "Entry practice: one complete course design and teaching and assessment and academic integrity task (fictional materials)",
+          "title": "Paper work sample",
           "type": "cards"
         },
         {
@@ -29765,32 +29760,32 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "List each step you completed in the simulated task in three columns: basis (program objectives and professional and industry standards)—method (course design and teaching and assessment and grading)—results and recommendations.",
-                  "Note whether each step was completed independently or under someone else's guidance.",
+                  "Approved version",
+                  "Record required and actual versions.",
                   "Note which steps involve academic integrity and student or patient information or clinical-related statements and must be completed by you or the corresponding position according to authorization and policy."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Ask an experienced teaching or research or ethics or academic affairs professional to review your course and assessment and record notes and state the problems in writing.",
-                  "Record the review comments, time, and basis to support later retrospective review.",
+                  "Grading instructions",
+                  "Record whether instructions are present.",
                   "Do not just show that you finished teaching; show the process and audit trail from program objectives to courses to assessment to grading to records and archiving."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Write a handover-ready course summary (program objectives and course and assessment basis, grading and grades and attendance, laboratory or clinical mentoring and safety, academic integrity and ethics and privacy, improvement and open items).",
-                  "The summary must not contain real student or patient or participant data or identifiable personal information; use codes and synthetic data when necessary.",
+                  "Pending issues",
+                  "Name the reviewer and keep source values.",
                   "State the information sources and assumptions and distinguish measured facts from judgment inferences and items pending verification."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "If generative tools or automated grading or slide or data and document generation tools were used, note which parts were produced by equipment or tools and which were checked and revised by you.",
-                  "Explain who reviewed the course and grades and conclusions before use and submission, and which basis check was performed.",
+                  "Single change",
+                  "Change only the specified field.",
                   "If values and conclusions are illustrative, they must be labeled, with a statement that personnel with the corresponding authorization must give final confirmation."
                 ]
               }
@@ -29798,9 +29793,9 @@
           },
           "id": "health-specialties-teachers-postsecondary.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "What reviewable work materials can be prepared when starting out?",
+          "title": "Paper work-sample handoff",
           "type": "cards"
         },
         {
@@ -29861,59 +29856,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Understand the work objects and process of this occupation (course and teaching needs identification—course and materials design and preparation—instruction and seminars and mentoring—assessment and grading and feedback—teaching research and research and publication—records and review and academic service).",
-                  "Record the academic integrity and teaching and research ethics and student and patient privacy requirements you have observed."
+                  "Read criteria",
+                  "Read the order and list the fields to check."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Verify working conditions: working hours and semester and examination and research checkpoint arrangements, teaching platforms and laboratory or clinical sites and tools and data and literature permissions, ownership of student and patient information and confidentiality agreements, and the way of collaborating with teaching administration and research administration and the ethics committee.",
-                  "Write down the one real cost you find hardest to adapt to and judge whether you can accept it."
+                  "Check versions",
+                  "Compare the original records row by row."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Complete a course and assessment plan and a grade and record note.",
-                  "List the key requirements according to standards (program objectives, course content and basis, assessment and grading definitions, academic integrity and ethics and privacy)."
+                  "Check grading",
+                  "Send discrepancies to the review owners given in the prompt."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Complete one round of grade and learning outcome reconciliation and note the assumptions and data sources.",
-                  "Write verification and reporting plans for two typical risks (academic or academic integrity problems, safety or privacy or ethics risk)."
+                  "Preserve values",
+                  "Change only the specified input and reevaluate the rows."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Under guidance, complete one simulated grading review and pre-submission grade review drill.",
-                  "Against the checklist, find at least two deviations and record how they were corrected."
+                  "Name reviewers",
+                  "Keep records for both cases."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Ask an experienced person to challenge your understanding of the teaching basis and academic integrity and ethics and disclosure boundaries.",
-                  "Record the other party's objections and your responses, without avoiding counterexamples."
+                  "Try the variant",
+                  "Open the folded answer key to check."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Write out your decision to continue, stop, or change direction, with the evidence.",
-                  "List the capabilities and experience to be filled in if you continue (such as disciplinary and teaching and assessment and research capabilities, teaching qualifications and professional qualifications and continuing education, and experience in specific disciplines or clinical teaching directions), plus the next steps."
+                  "Check the answer",
+                  "Write one question about work assignments to ask an employer."
                 ]
               }
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "Seven-day experience: complete one closed loop of course design and teaching and assessment and review using fictional materials",
+          "title": "Paper exercise steps",
           "type": "timeline"
         },
         {
@@ -29921,20 +29916,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: able to complete course design and teaching and assessment and teaching research and records within academic integrity and ethics and institutional authorization and make the process and basis reviewable.",
-              "Continue: upholds the basis and integrity and audit trails under semester and examination and research and application pressure, and does not skip review or relax academic integrity or exaggerate teaching quality to meet deadlines.",
-              "Continue: willing to learn the discipline and teaching and academic integrity and ethics and record standards thoroughly during teaching internships and mentoring.",
-              "Stop: hard to teach and communicate with students and peers over the long term, with no short-term improvement possible.",
-              "Stop: lacking vigilance about academic integrity and ethics and privacy boundaries, with repeated unfair grading or academic misconduct or unauthorized handling of student data or record distortion.",
-              "Change direction: if you prefer nursing specialty teaching and clinical mentoring, consider Postsecondary Nursing Instructors and Teachers; if you prefer population-facing health education programs, consider Health Education Specialists.",
-              "Change direction: if you prefer direct clinical care, consider Clinical Nurse Specialists; if you prefer biological science discipline teaching, consider Postsecondary Biological Science Teachers; if you prefer career and technical courses and practical training, consider the Career and Technical Education Teacher direction."
+              "Record status and reviewer for both cases.",
+              "Use only the fictional course records.",
+              "Use only the fictional course records.",
+              "Use only the fictional course records.",
+              "Use only the fictional course records.",
+              "Use only the fictional course records.",
+              "Use only the fictional course records."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "How to decide at the end of the seven days whether to continue",
+          "title": "Review after the exercise",
           "type": "list"
         },
         {
@@ -30046,7 +30041,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Recruitment sample note | This page does not cite the volume or compensation figures of any specific job posting. Health Specialties Teacher, Postsecondary positions are mostly recruited through universities and medical schools and nursing schools and clinical teaching hospitals, and are affected by discipline and institution and region, so samples from public channels can hardly represent the overall market; the wages and employment on this page follow this occupation's (25-1071.00) own scope as presented by O*NET on the 25-1071.00 page (annual wage only), and the 2024—2034 projection is growth of 7% or higher with a Bright Outlook marker.",
+              "BLS Table 1.2 for U.S. occupation 25-1071 shows about 278,400 jobs in 2025 and projects 328,300 in 2035 (+17.9%), with about 24,900 openings per year including replacements. Counts are rounded independently.",
               "Verification advice | When reviewing job postings, record the posting date and location and institution type and discipline, academic rank and track (tenure-track and non-tenure-track and part-time), working hours and semester and research checkpoint arrangements, education and qualification and continuing education requirements, student and patient information and research data handling requirements, teaching and research platform provisions, and contract term and research start-up and performance criteria; this information often reflects the real conditions better than the job title."
             ]
           },
@@ -30075,7 +30070,7 @@
                 "url": "https://www.onetonline.org/link/details/25-1071.00"
               },
               {
-                "entity": "O*NET 25-1071.00 certification directory",
+                "entity": "U.S. certification directory",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localcert/25-1071.00"
@@ -30099,12 +30094,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Boundaries | The preparation path and capability ladder on this page are intended to help you plan learning and accumulate evidence and do not constitute hiring, promotion, or qualification determinations. Actual entry is based on education and training and qualifications and continuing education and institutional authorization and assessment, and does not represent obtaining the authority to independently offer courses or issue grade determinations or research conclusions; matters involving student and patient and participant data and disclosure must be carried out within ethics and compliance requirements."
+              "For mainland China teaching, check higher education teacher qualifications and the school’s appointment rules. Where duties involve medical practice, verify registration, scope of practice and institutional authorization separately."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.career-path-block.11",
           "source_refs": [
-            "onet"
+            "teacher-qualifications",
+            "physician-law"
           ],
           "type": "prose"
         },
@@ -30225,13 +30221,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The typical entry-level education for U.S. BLS25-1071 is a doctoral or professional degree and related experience of less than five years; O*NET is Job Zone Five, and 36% master's, 25% doctoral, and 19% post-doctoral are respondents' answers about requirements for newly hired personnel, not a uniform entry checklist. The editors recommend accumulating course, laboratory supervision, assessment, and teaching research experience. China's higher education institutions operate a qualification system, and Article 46 of the Higher Education Law lists education, teaching ability, and recognition conditions; the actual hiring education and title conditions must be verified separately. Health specialties certification, continuing education, and clinical qualifications apply according to the specific matter and do not automatically confer clinical or grade and sanction authority."
+              "BLS Table 1.2 lists a doctoral or professional degree and less than five years of related experience as typical U.S. preparation, with no typical on-the-job training. Check discipline, teaching and clinical supervision requirements with the institution. The Fujian Medical University 2026 posting lists a teaching and research role in basic medical sciences with fields including basic medicine, clinical medicine, public health and preventive medicine."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.career-path-block.20",
           "source_refs": [
-            "onet",
-            "moe-higher-education-law"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30240,12 +30236,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Degrees, teaching qualifications, health specialties certification and clinical qualifications, institutional appointment, and teaching or data authorization are different states. The O*NET certification directory is not a mandatory examination list for all teachers; China's teaching qualification system for those specifically engaged in school education and teaching should be verified separately under the applicable regulations."
+              "For mainland China teaching, check higher education teacher qualifications and the school’s appointment rules. Where duties involve medical practice, verify registration, scope of practice and institutional authorization separately."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.career-path-block.21",
           "source_refs": [
-            "onet"
+            "teacher-qualifications",
+            "physician-law"
           ],
           "type": "prose"
         },
@@ -30268,12 +30265,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Verify separately the typical U.S. entry preparation, China's higher education teaching qualifications, and the specific institution's hiring conditions. Degrees, teaching qualifications, health specialties certification, continuing education, and teaching or clinical authorization differ; research ethics review applies according to the actual project."
+              "For mainland China teaching, check higher education teacher qualifications and the school’s appointment rules. Where duties involve medical practice, verify registration, scope of practice and institutional authorization separately."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "teacher-qualifications",
+            "physician-law",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31283,12 +31282,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Direct answer | U.S. scope: the wages and employment on this page follow this occupation's own scope as presented by O*NET on the 25-1071.00 (Health Specialties Teachers, Postsecondary) page (that page does not mark them as taken from a parent or higher-level occupation)—2025 median annual wage $107,310; 10th percentile annual wage $59,270, 25th percentile $75,690, 75th percentile $210,370, 90th percentile $322,020 (BLS OEWS 2025, as presented by O*NET; that page shows only annual wages and not the hourly wage, and this page does not fill in an hourly wage). Employment and growth: 2025 employment 278,400, projected growth for 2025—2035 of 7% or higher (much faster than average, marked Bright Outlook), with about 24,900 average annual openings during the period (including growth and replacements). It should be noted that the openings consist mainly of replacement needs; this occupation is affected by the structure of higher education enrollment and institutional funding and clinical teaching demand; this does not represent individual job outcomes, nor does it represent adjacent occupations. Mainland China section: this round did not obtain a national occupational wage distribution precisely corresponding to this occupation, so under the evidence policy this page only registers the statistical scope and the gap and does not provide proxy values."
+              "BLS Table 1.2 for U.S. occupation 25-1071 shows about 278,400 jobs in 2025 and projects 328,300 in 2035 (+17.9%), with about 24,900 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31302,7 +31301,7 @@
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31311,12 +31310,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31353,12 +31352,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Wages (median and percentiles, this occupation's (25-1071.00) own scope, annual wage only)"
+              "Employment and projected change"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31367,12 +31366,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 25-1071.00 (OEWS 2025, as presented by O*NET)"
+              "25-1071"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31381,12 +31380,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Median annual wage $107,310; 10th percentile $59,270, 25th percentile $75,690, 75th percentile $210,370, 90th percentile $322,020 (USD/year)"
+              "BLS Table 1.2 for U.S. occupation 25-1071 shows about 278,400 jobs in 2025 and projects 328,300 in 2035 (+17.9%), with about 24,900 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31400,7 +31399,7 @@
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31409,12 +31408,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31451,12 +31450,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Employment size and growth and job openings (this occupation's (25-1071.00) own scope)"
+              "Projected annual openings"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31465,12 +31464,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 25-1071.00 (BLS employment projections, as presented by O*NET)"
+              "25-1071"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31479,12 +31478,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "About 278,400 people in 2025 → 328,300 people in 2035, growth 17.9%; about 24,900 average annual openings."
+              "About 24,900 projected per year, including replacements."
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31493,12 +31492,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Mainland China"
+              "United States"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31507,12 +31506,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025-05"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31549,12 +31548,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Occupational wages and employment (statistical scope and gaps)"
+              "Median annual wage"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31563,12 +31562,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics average wages of urban unit employees (industry category scope) and bounded search"
+              "25-1071"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31577,12 +31576,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Evidence insufficient: this round did not obtain a national occupational wage distribution for mainland China precisely corresponding to U.S. O*NET 25-1071.00 (Health Specialties Teachers, Postsecondary); the National Bureau of Statistics publishes average wages by industry category without distinguishing occupations, and this page shows the absence without using proxy numbers."
+              "USD 107,310/year"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31992,6 +31991,15 @@
           "data": {
             "entries": [
               {
+                "answer": "Only J1 is ready for review in the original. Keep J2’s V2 and the required V3 and refer it to the course owner. Retain the blank field for J3 and refer it to the teaching reviewer. In the variant J1 and J3 are ready and J2 remains pending.",
+                "id": "health-specialties-teachers-postsecondary.faq.paper-exercise",
+                "question": "Paper exercise answer key (open after completing)",
+                "question_key": "career.faq.health-specialties-teachers-postsecondary.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
+              },
+              {
                 "answer": "The Health Specialties Teachers, Postsecondary on this page is the exact occupation O*NET 25-1071.00 (Health Specialties Teachers, Postsecondary): teach courses in health specialties, covering fields such as dentistry, laboratory technology, medicine, pharmacy, public health, therapy, and veterinary medicine. Core tasks include preparing course materials (importance 84), following developments in the field by reading literature and talking with colleagues and attending conferences (83), evaluating and grading student assignments and papers (81), supervising laboratory sessions (80), compiling and administering and grading examinations (79), maintaining student attendance and grade records (79), initiating and facilitating and moderating classroom discussions (78), preparing and delivering topics such as public health and stress management and workplace health promotion for undergraduate or graduate students (79), planning and evaluating and revising curricula (75), supervising teaching and internships and research (74), participating in admissions and registration and job placement (72), and conducting research and publishing and applying for funding (64 and 69). Common job titles include Assistant Professor and Associate Professor and Clinical Professor and Instructor and Lecturer and Occupational Therapy Professor and Pharmacology Professor and Physical Therapy Professor and Professor and Public Health Professor; on the 25-1071.00 page, O*NET shows that the main industry for this occupation in the United States is educational services. What is described on this page is the U.S. occupational classification scope, and wages and employment follow this occupation's (25-1071.00) own scope (annual wage only); the content on this page does not constitute any medical, diagnostic, treatment, medication, legal, or education policy advice.",
                 "id": "health-specialties-teachers-postsecondary.faq.1",
                 "question": "What exactly does this occupation do?",
@@ -32013,83 +32021,84 @@
                 ]
               },
               {
-                "answer": "The scope must be stated first: O*NET does not mark this data on the 25-1071.00 page as taken from a parent or higher-level occupation, and this page presents it faithfully according to this occupation's (25-1071.00) own scope; the wages on that page show only the annual wage distribution and not the hourly wage, and this page does not fill in an hourly wage. For this occupation in 2025, the median annual wage is $107,310; the 10th percentile annual wage is $59,270, the 25th percentile $75,690, the 75th percentile $210,370, and the 90th percentile $322,020 (BLS OEWS 2025, as presented by O*NET). Employment and growth: 2024 employment 289,600, projected growth for 2024—2034 of 7% or higher (much faster than average, marked Bright Outlook), with about 27,400 average annual openings during the period (including growth and replacements). The above excludes benefits and bonuses, does not apply to other jurisdictions, and does not represent adjacent occupations; the openings consist mainly of replacement needs, and demand is affected by the structure of higher education enrollment and institutional funding and clinical teaching demand.",
+                "answer": "Used to check the median annual wage of $107,310 and the 10th/25th/75th/90th percentiles ($59,270 / $75,690 / $210,370 / $322,020 USD/year). BLS Table 1.2 for U.S. occupation 25-1071 shows about 278,400 jobs in 2025 and projects 328,300 in 2035 (+17.9%), with about 24,900 openings per year including replacements. Counts are rounded independently.",
                 "id": "health-specialties-teachers-postsecondary.faq.3",
                 "question": "What are the U.S. wages and employment like?",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q3",
                 "source_refs": [
                   "oews",
-                  "ep"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "There is no national occupational wage distribution precisely corresponding to this U.S. occupation. Mainland China has similar positions in the fields of higher medical education and nursing education and applied health specialties teaching and continuing medical education, and their work and qualifications and standards and records are governed by the Education Law of the People's Republic of China, the Higher Education Law of the People's Republic of China, the Teachers Law of the People's Republic of China, the Academic Degrees Law of the People's Republic of China, and the Basic Medical and Health Promotion Law of the People's Republic of China, as well as the code of professional conduct for higher education teachers and regulations on clinical teaching and research ethics and personal information protection (higher education teaching and clinical teaching must follow standards and specifications; matters involving diagnosis, treatment, and medication must be carried out by institutions and personnel with the corresponding qualifications; and students' and patients' and participants' personal information must be protected in accordance with the law and handled under the minimum necessary principle), but public occupational statistics do not list this occupation separately: the National Bureau of Statistics publishes average wages of urban unit employees by industry category, which is an industry scope that does not distinguish occupations. Under the evidence policy of this page, the China section only registers the statistical scope and the visible \"Evidence insufficient:\" marker and does not use industry averages, job posting offers, or U.S. data for cross-jurisdiction extrapolation of starting salaries, medians, or personal income. The content on this page does not constitute medical or legal advice.",
+                "answer": "The sources checked did not provide a mainland China national wage distribution for this occupation. NBS tables 2 and 5 report 2025 annual average wages for urban education: CNY 133,539 at non-private units and CNY 63,908 at private units.",
                 "id": "health-specialties-teachers-postsecondary.faq.4",
                 "question": "Is there corresponding wage data for mainland China?",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q4",
                 "source_refs": [
-                  "nbs",
-                  "cnclass"
+                  "nbs-wage-release-2025"
                 ]
               },
               {
-                "answer": "The work activity importance for O*NET 25-1071.00 is highest for Training and Teaching Others (89), Updating and Using Relevant Knowledge (89), Getting Information (87), Working with Computers (86), and Thinking Creatively (83); the work context (percentage response scope) shows face-to-face discussions 95% every day, electronic mail 90% every day, contact with others 76%, public speaking 35% every day and 53% once a week or more, indoors, environmentally controlled 86% every day, work with a work group or team 62% extremely important, decision freedom 86% a lot of freedom, importance of being exact or highly accurate 67% very important, responsibility for others' health and safety 42% very high, consequence of error 47% very serious, work schedule 85% regular, and working more than 40 hours per week 46%. The work is characterized by teaching and communicating with students and peers and teaching research, and semesters and examinations and research and application checkpoints may lead to concentrated overtime, requiring work in line with academic integrity and teaching and research ethics and privacy requirements.",
+                "answer": "Work can span classrooms, labs and clinical teaching sites. Ask the institution about teaching load, research, grading and placement supervision.",
                 "id": "health-specialties-teachers-postsecondary.faq.5",
                 "question": "What are the work environment and work intensity like?",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q5",
                 "source_refs": [
                   "onet",
-                  "bls"
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "In this occupation, course materials and handouts and item bank drafts and literature and data and grade and attendance ledger steps can already be assisted by generative and teaching and statistics tools, with moderate automation exposure; the direct impact of generative AI itself is concentrated in material and item bank drafts and document and data organization. The O*NET hot technologies page lists 9 software skills (Microsoft Office software 4%, Microsoft PowerPoint 2%, Microsoft Excel 2%, Microsoft Outlook 1%, Microsoft Word under 1%, Microsoft Access under 1%, etc.). Course design judgments and teaching and assessment and grading judgments, academic integrity and teaching and research ethics judgments, student advising and office hours, and teaching research and research judgments and responsibility remain with personnel who have the corresponding qualifications and authorization; O*NET shows a projected growth of 7% or higher for this occupation in 2024—2034 with a Bright Outlook marker, but projections are not equal to individual job outcomes.",
+                "answer": "Tools can organize course versions and draft feedback. Assigned educators review curriculum quality, grading and clinical teaching.",
                 "id": "health-specialties-teachers-postsecondary.faq.6",
                 "question": "Will AI affect this occupation?",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q6",
                 "source_refs": [
-                  "weforum",
-                  "nist"
+                  "onet"
                 ]
               },
               {
-                "answer": "U.S. O*NET places 25-1071.00 (Health Specialties Teachers, Postsecondary) in Job Zone Five (extensive preparation needed, SVP 8.0 and above); the education section shows 36% master's degree, 25% doctoral degree, and 19% post-doctoral training. In mainland China, higher education teaching and clinical teaching must follow standards and specifications, and matters involving diagnosis, treatment, and medication must be carried out by institutions and personnel with the corresponding qualifications. This description does not replace the competent authority's and institution's requirements for education and training and qualifications and continuing education and professional qualifications.",
+                "answer": "BLS Table 1.2 lists a doctoral or professional degree and less than five years of related experience as typical U.S. preparation, with no typical on-the-job training. Check discipline, teaching and clinical supervision requirements with the institution. The Fujian Medical University 2026 posting lists a teaching and research role in basic medical sciences with fields including basic medicine, clinical medicine, public health and preventive medicine.",
                 "id": "health-specialties-teachers-postsecondary.faq.7",
                 "question": "What education and training are needed?",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q7",
                 "source_refs": [
-                  "r2-pay-1",
-                  "editor"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "Education, proof of training, teaching qualifications and health specialties-related certification and continuing education, health and occupational health examinations, institutional and position authorization, and grade and academic sanction and external disclosure authority must be distinguished. The O*NET certification directory lists several certifications related to this occupation, such as the National Board of Public Health Examiners' Certified in Public Health, the National Certification Board for Diabetes Educators' Certified Diabetes Educator, the American Medical Technologists' Allied Health Instructor, the Biofeedback Certification International Alliance's Academic Certification in Biofeedback and Academic Certification in Neurofeedback, and the National Board for Respiratory Care's Asthma Educator Specialist, etc.; in mainland China, matters involving diagnosis, treatment, and medication must be carried out by institutions and personnel with the corresponding qualifications, and matters involving higher education teaching must comply with teacher and degree and teaching standards.",
+                "answer": "For mainland China teaching, check higher education teacher qualifications and the school’s appointment rules. Where duties involve medical practice, verify registration, scope of practice and institutional authorization separately.",
                 "id": "health-specialties-teachers-postsecondary.faq.8",
                 "question": "Are certificates or qualifications needed?",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q8",
                 "source_refs": [
-                  "purchasing-managers",
-                  "health"
+                  "teacher-qualifications",
+                  "physician-law",
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "Common failures include: improper course design or assessment or grading, or improper handling of coursework and academic integrity, or out-of-bounds provision of clinical and medication judgments; improper handling of student or patient or participant personal information and research data, missing informed consent or ethics review, or out-of-bounds sharing; distorted or version-uncontrolled grade or attendance or course or assessment or teaching research or funding records, or improper handling of academic integrity and conflicts of interest; making grade and academic sanction or clinical advice or external disclosure decisions beyond authorization; critical qualification or disciplinary or research or clinical mentoring capability resting on a single point; and insufficient adaptation of courses and assessment or accessibility and language and culture, or insufficient safety protection for students, colleagues, and patients. The control points are to verify and review and document according to program objectives and professional and industry standards and academic integrity and teaching and research ethics and privacy requirements, and to pause and report immediately when academic or academic integrity problems or safety or privacy or ethics risks or matters exceeding authorization arise. The content on this page does not constitute medical, diagnostic, treatment, medication, or legal advice.",
+                "answer": "Check course versions and grading consistency, student and patient information, and clinical supervision limits. Pause submission and refer unapproved materials or tasks to the responsible person.",
                 "id": "health-specialties-teachers-postsecondary.faq.9",
                 "question": "What are the main risks of this occupation?",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q9",
                 "source_refs": [
                   "onet",
-                  "nist"
+                  "privacy",
+                  "teacher-qualifications",
+                  "physician-law"
                 ]
               },
               {
-                "answer": "The scope must be stated first: the employment and growth on this page follow this occupation's (25-1071.00) own scope as presented by O*NET on the 25-1071.00 page (2024 employment 289,600, projected growth of 7% or higher for 2024—2034 with a Bright Outlook marker, and about 27,400 average annual openings during the period including replacements), and do not represent adjacent occupations or individual employment opportunities; the openings consist mainly of replacement needs, and demand is affected by the structure of higher education enrollment and institutional funding and clinical teaching demand. One can move to adjacent directions such as Postsecondary Biological Science Teachers, Career and Technical Education Teachers, Clinical Nurse Specialists, Education Teachers, Health Education Specialists, Postsecondary Nursing Instructors and Teachers, Postsecondary Psychology Teachers, and Postsecondary Social Work Teachers (requiring relearning and filling in that direction's subject matter and standards and qualifications and experience). Related positions and standards and statistical scope in mainland China are described separately on this page.",
+                "answer": "BLS Table 1.2 for U.S. occupation 25-1071 shows about 278,400 jobs in 2025 and projects 328,300 in 2035 (+17.9%), with about 24,900 openings per year including replacements. Counts are rounded independently. The sources checked did not provide a matching mainland China national employment series. Compare teaching, research and clinical supervision by actual duties.",
                 "id": "health-specialties-teachers-postsecondary.faq.10",
                 "question": "What are the prospects, and which directions can one move to?",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q10",
                 "source_refs": [
-                  "ep",
-                  "onet"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               }
             ]
@@ -32176,28 +32185,28 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Big Five Personality Test",
+                "entity": "Big Five personality assessment",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "MBTI Personality Test",
+                "entity": "MBTI preference assessment",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Intelligence and Reasoning Test",
+                "entity": "Reasoning assessment",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "Emotional Intelligence Test",
+                "entity": "Emotional intelligence assessment",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "This occupation (Health Specialties Teachers, Postsecondary)",
@@ -32256,20 +32265,20 @@
                 "url": "https://www.onetonline.org/link/summary/25-1071.00"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Used to check employment of 289,600 in 2024, projected growth of 7% or higher for 2024—2034, and about 27,400 average annual openings during the period (including growth and replacements).",
-                  "Used to explain that the employment projection and the OEWS point-in-time employment estimate differ in scope, and that projections are not equal to individual job outcomes and the openings consist mainly of replacement needs."
+                  "BLS Table 1.2 for U.S. occupation 25-1071 shows about 278,400 jobs in 2025 and projects 328,300 in 2035 (+17.9%), with about 24,900 openings per year including replacements. Counts are rounded independently.",
+                  "BLS Table 1.2 lists a doctoral or professional degree and less than five years of related experience as typical U.S. preparation, with no typical on-the-job training. Check discipline, teaching and clinical supervision requirements with the institution."
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
-                "limitation": "This occupation's scope as presented by O*NET on the 25-1071.00 page; projected growth of 7% or higher with a Bright Outlook marker.",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
                 "market": "United States",
-                "name": "O*NET OnLine: Health Specialties Teachers, Postsecondary employment trends (25-1071.00, this occupation's own scope)",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "25-1071.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/25-1071.00"
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "25-1071",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32306,18 +32315,18 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to explain that public enterprise compensation surveys have not established a national wage distribution precisely corresponding to this occupation.",
-                  "Not used as a proxy figure for this occupation's wages."
+                  "The sources checked did not provide a mainland China national wage distribution for this occupation. NBS tables 2 and 5 report 2025 annual average wages for urban education: CNY 133,539 at non-private units and CNY 63,908 at private units.",
+                  "Urban education industry wage context"
                 ],
                 "evidence_type": "official survey release",
                 "id": "cnclass",
-                "limitation": "This is a broad job-category aggregation scope, and no statistical value precisely corresponding to this occupation has been established.",
+                "limitation": "Urban education industry wage context",
                 "market": "Mainland China",
-                "name": "Ministry of Human Resources and Social Security: enterprise compensation survey information",
-                "period": "2025 survey; accessed 2026-09-22",
-                "publisher": "Ministry of Human Resources and Social Security of the People's Republic of China",
-                "scope": "occupation major class proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
+                "name": "National Bureau of Statistics: average annual wages of urban unit employees in 2025",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics",
+                "scope": "Urban education industry wage context",
+                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32338,34 +32347,34 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to explain the standards and requirements related to medical education and clinical teaching and research ethics and clinical mentoring.",
-                  "Matters involving diagnosis, treatment, and medication must be carried out by institutions and personnel with the corresponding qualifications."
+                  "For mainland China teaching, check higher education teacher qualifications and the school’s appointment rules. Where duties involve medical practice, verify registration, scope of practice and institutional authorization separately.",
+                  "For mainland China teaching, check higher education teacher qualifications and the school’s appointment rules. Where duties involve medical practice, verify registration, scope of practice and institutional authorization separately."
                 ],
                 "evidence_type": "regulator portal",
                 "id": "facilities",
                 "limitation": "Subject to the standards and requirements issued by the competent authority.",
                 "market": "Mainland China",
-                "name": "National Health Commission of the People's Republic of China: medical education and clinical teaching and research ethics management",
+                "name": "Physicians Law of the PRC",
                 "period": "current; accessed 2026-09-22",
                 "publisher": "National Health Commission",
                 "scope": "medical education and research ethics",
-                "url": "https://www.nhc.gov.cn/"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202204/t20220412_2674457.html"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to explain the requirements related to higher education and the professional conduct of higher education teachers and teaching management.",
-                  "Teaching and degree and academic integrity requirements are subject to the competent authority's and institution's requirements."
+                  "For mainland China teaching, check higher education teacher qualifications and the school’s appointment rules. Where duties involve medical practice, verify registration, scope of practice and institutional authorization separately.",
+                  "For mainland China teaching, check higher education teacher qualifications and the school’s appointment rules. Where duties involve medical practice, verify registration, scope of practice and institutional authorization separately."
                 ],
                 "evidence_type": "regulator portal",
                 "id": "operations",
                 "limitation": "Subject to the policies and requirements issued by the competent authority.",
                 "market": "Mainland China",
-                "name": "Ministry of Education of the People's Republic of China: higher education and higher education teacher management",
+                "name": "Regulations on Teacher Qualifications",
                 "period": "current; accessed 2026-09-22",
                 "publisher": "Ministry of Education of the People's Republic of China",
                 "scope": "higher education",
-                "url": "https://www.moe.gov.cn/"
+                "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyxzfg/202204/t20220422_620496.html"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32482,17 +32491,17 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used for field and evidence scope and gap registration rules.",
-                  "Used for cross-market and cross-jurisdiction scope boundary notes."
+                  "Tools may help organize records. Verify key information against the original.",
+                  "Tools may help organize records. Verify key information against the original."
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "Editorial explanation",
                 "id": "employer",
-                "limitation": "Internal scope rules, not an external factual source.",
-                "market": "Global",
-                "name": "FermatMind career content field and evidence scope rules",
-                "period": "current authoring rules",
+                "limitation": "This explanation does not measure adoption or work outcomes.",
+                "market": "This page",
+                "name": "FermatMind task and human review notes",
+                "period": "This page",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "Tasks on this page",
                 "url": "https://fermatmind.com"
               },
               {
@@ -32592,20 +32601,19 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Used to check the educational services industry.",
-                  "Used to explain the main employer types."
+                  "The May 2025 national annual median for U.S. occupation 25-1071 was USD 107,310. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 59,270, 75,690, 107,310, 210,370, 322,020. The table does not report hourly figures."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "onet-wages",
-                "limitation": "This scope is the U.S. distribution and does not establish a mainland China mapping.",
+                "limitation": "National occupational distribution. Local wages and individual offers vary.",
                 "market": "United States",
                 "name": "O*NET OnLine: Health Specialties Teachers, Postsecondary industry distribution (25-1071.00)",
-                "period": "current page; accessed 2026-09-22",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "25-1071.00 exact occupation",
-                "url": "https://www.onetonline.org/link/industry/25-1071.00"
+                "url": "https://www.onetonline.org/link/localwages/25-1071.00"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32626,17 +32634,17 @@
               {
                 "accessed_at": "2026-10-11",
                 "details": [
-                  "Uses Table 2 for non-private units and Table 5 for private units for the same industry category, in yuan/year; individual monthly pay is not converted.",
-                  "School health specialties teaching can be grouped under the education industry; affiliated hospitals must be verified separately according to the actual employer's industry, and nursing teachers belong to an adjacent occupation, so statistical values cannot be mixed"
+                  "The sources checked did not provide a mainland China national wage distribution for this occupation. NBS tables 2 and 5 report 2025 annual average wages for urban education: CNY 133,539 at non-private units and CNY 63,908 at private units.",
+                  "Urban education industry wage context"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wage-release-2025",
-                "limitation": "Average wages of all employed persons in the industry, not this occupation's median, starting salary, or personal income; non-private and private units are listed separately.",
+                "limitation": "Urban education industry wage context",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics: average annual wages of urban unit employees in 2025",
                 "period": "2025; released 2026-05-15",
                 "publisher": "National Bureau of Statistics",
-                "scope": "Education; urban unit employees in China, broad industry category scope",
+                "scope": "Urban education industry wage context",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
@@ -32655,21 +32663,70 @@
                 "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202204/t20220421_620257.html"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Course and instructional design — 75/100; weight=1/3; health-specialties-teachers-postsecondary.ai-impact.ai-impact-table.95[0]",
-                  "Instruction and seminars and laboratories — 25/100; weight=1/3; health-specialties-teachers-postsecondary.ai-impact.ai-impact-table.99[0]",
-                  "Advising and mentoring — 25/100; weight=1/3; health-specialties-teachers-postsecondary.ai-impact.ai-impact-table.107[0]"
+                  "BLS Table 1.2 for U.S. occupation 25-1071 shows about 278,400 jobs in 2025 and projects 328,300 in 2035 (+17.9%), with about 24,900 openings per year including replacements. Counts are rounded independently.",
+                  "BLS Table 1.2 lists a doctoral or professional degree and less than five years of related experience as typical U.S. preparation, with no typical on-the-job training. Check discipline, teaching and clinical supervision requirements with the institution."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "25-1071",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Fujian Medical University 2026 posting lists a teaching and research role in basic medical sciences with fields including basic medicine, clinical medicine, public health and preventive medicine."
+                ],
+                "id": "cn-work-example",
+                "limitation": "The named posting illustrates one teaching and research role.",
+                "market": "Mainland China",
+                "name": "Fujian Medical University 2026 recruitment plan",
+                "period": "2026",
+                "publisher": "Fujian Medical University",
+                "scope": "Mainland China medical university recruitment example",
+                "url": "https://www.fjmu.edu.cn/2026/0310/c86a214125/page.htm"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks the paper records only.",
+                "market": "This page",
+                "name": "Sheet J: Course materials pre-release check",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "scope": "Paper exercise",
+                "url": "#career-content-path"
+              },
+              {
+                "details": [
+                  "Article 5 lists higher education teacher qualifications. Article 13 addresses recognition."
+                ],
+                "id": "teacher-qualifications",
+                "name": "Regulations on Teacher Qualifications",
+                "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyxzfg/202204/t20220422_620496.html"
+              },
+              {
+                "details": [
+                  "Article 13 establishes registration requirements for medical practice."
+                ],
+                "id": "physician-law",
+                "name": "Physicians Law of the PRC",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202204/t20220412_2674457.html"
+              },
+              {
+                "details": [
+                  "Open the folded answer after completing both cases."
+                ],
+                "id": "paper-answer-key",
+                "name": "Paper exercise answer key (FAQ)",
+                "url": "#career-content-sources"
               }
             ]
           },
@@ -34006,8 +34063,8 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
-        "entry_heading": "How new graduates or career changers can verify and get started",
-        "heading": "How to become a Health Specialties Teacher, Postsecondary: education, qualifications, and career development paths",
+        "entry_heading": "Teaching, practice and paper work sample",
+        "heading": "Entry and Sheet J course review",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "health-specialties-teachers-postsecondary.path.career-path-block.21",
@@ -35485,7 +35542,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35499,7 +35556,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35513,7 +35570,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35567,7 +35624,7 @@
         "bls_table": [
           {
             "fact_ref": "us-wage-low10-2025",
-            "指标": "Wage · 10th percentile",
+            "指标": "Annual wage · 10th percentile",
             "数值": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35583,7 +35640,7 @@
           },
           {
             "fact_ref": "us-wage-q25-2025",
-            "指标": "Wage · 25th percentile",
+            "指标": "Annual wage · 25th percentile",
             "数值": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.11",
               "block": "us-salary",
@@ -35599,7 +35656,7 @@
           },
           {
             "fact_ref": "us-wage-2025",
-            "指标": "Wage · median",
+            "指标": "Annual wage · 50th percentile",
             "数值": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.13",
               "block": "us-salary",
@@ -35615,7 +35672,7 @@
           },
           {
             "fact_ref": "us-wage-q75-2025",
-            "指标": "Wage · 75th percentile",
+            "指标": "Annual wage · 75th percentile",
             "数值": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.15",
               "block": "us-salary",
@@ -35631,7 +35688,7 @@
           },
           {
             "fact_ref": "us-wage-high10-2025",
-            "指标": "Wage · 90th percentile",
+            "指标": "Annual wage · 90th percentile",
             "数值": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.17",
               "block": "us-salary",
@@ -35754,7 +35811,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "What are the U.S. wages for Health Specialties Teachers, Postsecondary (this occupation's (25-1071.00) own scope)?",
+        "heading": "U.S. health specialties teaching wages",
         "industry_heading": "How much do U.S. wages differ across industries?",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -35893,52 +35950,55 @@
         "wage_column_labels": [
           "Wage statistical position",
           "Annual wage reference",
-          "Conversion boundaries",
+          "Hourly wage in source",
           "How to understand this position"
         ],
         "wage_heading": "U.S. wage distribution",
         "wage_tiers": [
           {
-            "equivalent": "Official annual wage, not individual monthly income",
+            "equivalent": "Not reported",
             "interpretation": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Lowest 10%",
-            "value": {
-              "$fact": "us-wage-low10-2025",
-              "field": "display_value"
-            }
+            "label": "10th percentile",
+            "value": "USD 59,270/year"
           },
           {
-            "equivalent": "Official annual wage, not an individual's actual take-home pay",
+            "equivalent": "Not reported",
+            "interpretation": "May 2025 U.S. national wage.",
+            "label": "25th percentile",
+            "value": "USD 75,690/year"
+          },
+          {
+            "equivalent": "Not reported",
             "interpretation": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Median (50%)",
-            "value": {
-              "$fact": "us-wage-2025",
-              "field": "display_value"
-            }
+            "label": "50th percentile",
+            "value": "USD 107,310/year"
           },
           {
-            "equivalent": "Official annual wage, not an individual's actual take-home pay",
+            "equivalent": "Not reported",
+            "interpretation": "May 2025 U.S. national wage.",
+            "label": "75th percentile",
+            "value": "USD 210,370/year"
+          },
+          {
+            "equivalent": "Not reported",
             "interpretation": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Highest 10%",
-            "value": {
-              "$fact": "us-wage-high10-2025",
-              "field": "display_value"
-            }
+            "label": "90th percentile",
+            "value": "USD 322,020/year"
           }
         ]
       },
@@ -36082,7 +36142,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36127,7 +36187,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36172,7 +36232,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "oews",
             "value": {
               "$item": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36274,6 +36334,18 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "health-specialties-teachers-postsecondary.source-register.published.1"
+            },
+            "id": "bls-ep-2025-2035",
+            "label": "BLS Employment Projections, Table 1.2",
+            "scope": "U.S. employment and openings for this occupation"
           }
         ],
         "transitions": [
@@ -36550,7 +36622,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS employment projections (2024—2034, this occupation's (25-1071.00) own scope)",
+            "label": "BLS Table 1.2 for U.S. occupation 25-1071 shows about 278,400 jobs in 2025 and projects 328,300 in 2035 (+17.9%), with about 24,900 openings per year including replacements. Counts are rounded independently.",
             "secondary_value": null,
             "value": {
               "$item": "health-specialties-teachers-postsecondary.profile.onet-structured-fields-block.4",
@@ -37392,7 +37464,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality assessment"
           },
           {
             "href": {
@@ -37402,7 +37474,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "MBTI preference assessment"
           },
           {
             "href": {
@@ -37412,7 +37484,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Intelligence and Reasoning Assessment (Chinese)"
+            "label": "Reasoning assessment"
           },
           {
             "href": {
@@ -37422,7 +37494,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Emotional Intelligence Assessment (Chinese)"
+            "label": "Emotional intelligence assessment"
           }
         ]
       },
@@ -37491,14 +37563,14 @@
       "interface.path.credential_boundary_label": "Qualification boundaries",
       "interface.path.entry_decisions_heading": "What to verify before entering the field",
       "interface.path.next_step_label": "Next steps",
-      "interface.path.promotion_evidence_label": "Promotion evidence",
+      "interface.path.promotion_evidence_label": "Stage records and exploration exercises",
       "interface.path.responsibilities_label": "Typical duties",
       "interface.profile.comparison.dimension_header": "Dimension",
       "interface.profile.comparison.primary_header": "Main direction",
       "interface.profile.comparison.secondary_header": "Comparison direction",
       "interface.profile.responsibilities_heading": "Core work",
       "interface.quick_decision.caution_heading": "In what situations should choosing Health Specialties Teachers, Postsecondary be approached with caution?",
-      "interface.quick_decision.experiment_heading": "How can a small experiment help judge whether you suit Health Specialties Teachers, Postsecondary?",
+      "interface.quick_decision.experiment_heading": "What can you learn from a short paper exercise?",
       "interface.quick_decision.suit_heading": "What kind of person is more likely suited to Health Specialties Teachers, Postsecondary?",
       "interface.risk.affected_roles_label": "Main positions",
       "interface.risk.consequence_label": "Possible consequences",
@@ -37600,19 +37672,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
-      "china-salary": "Mainland China salary reference",
+      "ai-impact": "AI tools and human review",
+      "china-salary": "Mainland China wage references",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
       "market-signals": "Career prospects and moving to related occupations",
       "navigation": "Next steps and related entry points",
-      "path": "Entry, qualifications, and career development",
+      "path": "Entry and Sheet J course review",
       "profile": "Occupational profile",
       "quick-decision": "Quick assessment",
       "risk": "Work pressure, risks, and occupational boundaries",
       "source-register": "Sources",
       "sources": "Frequently asked questions and sources",
-      "us-salary": "U.S. salary reference"
+      "us-salary": "U.S. health specialties teaching wages"
     }
   },
   "fact_register": {
@@ -37630,19 +37702,19 @@
         ]
       },
       {
-        "derivation": "Scope | 2025 BLS OEWS national wages, as presented by O*NET on the 25-1071.00 page; O*NET does not mark this data on that page as taken from a parent or higher-level occupation, and this page labels it faithfully according to this occupation's (25-1071.00) own scope and does not borrow values from adjacent occupations; that page shows only annual wages and not the hourly wage, and this page does not fill in an hourly wage; benefits and bonuses are excluded; the median is the midpoint of the distribution and percentiles are distribution positions, and neither corresponds to an individual's starting salary; later updates are subject to a query for the current period on the official page.",
-        "display_value": "Median annual wage $107,310 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; that page shows annual wage only)",
+        "derivation": "O*NET national wage table, May 2025 U.S. OEWS annual wages.",
+        "display_value": "USD 107,310/year",
         "fact_id": "us-wage-2025",
         "market": "United States",
-        "measure": "Median wage",
-        "occupation_scope": "This occupation: Health Specialties Teachers, Postsecondary",
-        "period": "2025",
+        "measure": "U.S. median annual wage (May 2025)",
+        "occupation_scope": "25-1071",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "Scope | 2025 BLS OEWS national wages, as presented by O*NET on the 25-1071.00 page; O*NET does not mark this data on that page as taken from a parent or higher-level occupation, and this page labels it faithfully according to this occupation's (25-1071.00) own scope and does not borrow values from adjacent occupations; that page shows only annual wages and not the hourly wage, and this page does not fill in an hourly wage; benefits and bonuses are excluded; the median is the midpoint of the distribution and percentiles are distribution positions, and neither corresponds to an individual's starting salary; later updates are subject to a query for the current period on the official page.",
+        "derivation": "O*NET national wage table, May 2025 U.S. OEWS annual wages.",
         "display_value": "10th percentile annual wage $59,270 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; annual wage only)",
         "fact_id": "us-wage-low10-2025",
         "market": "United States",
@@ -37650,11 +37722,11 @@
         "occupation_scope": "This occupation: Health Specialties Teachers, Postsecondary",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "Scope | 2025 BLS OEWS national wages, as presented by O*NET on the 25-1071.00 page; O*NET does not mark this data on that page as taken from a parent or higher-level occupation, and this page labels it faithfully according to this occupation's (25-1071.00) own scope and does not borrow values from adjacent occupations; that page shows only annual wages and not the hourly wage, and this page does not fill in an hourly wage; benefits and bonuses are excluded; the median is the midpoint of the distribution and percentiles are distribution positions, and neither corresponds to an individual's starting salary; later updates are subject to a query for the current period on the official page.",
+        "derivation": "O*NET national wage table, May 2025 U.S. OEWS annual wages.",
         "display_value": "90th percentile annual wage $322,020 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; annual wage only)",
         "fact_id": "us-wage-high10-2025",
         "market": "United States",
@@ -37662,71 +37734,71 @@
         "occupation_scope": "This occupation: Health Specialties Teachers, Postsecondary",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "Scope | BLS employment projections 2024—2034 (as presented by O*NET on the 25-1071.00 page, taken from this occupation (25-1071.00), projected growth of 7% or higher with a Bright Outlook marker); the employment base period shown as an example on that O*NET page is 289,600 in 2024; the projection includes replacement needs, is not equal to actual hiring or layoffs, and is affected by the structure of higher education enrollment and institutional funding and clinical teaching demand; it does not represent individual job security.",
-        "display_value": "Growth Much faster than average, 7% or higher (2024—2034, BLS employment projections, this occupation's (25-1071.00) own scope)",
+        "derivation": "BLS Table 1.2, row 25-1071.",
+        "display_value": "+17.9%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Employment growth",
-        "occupation_scope": "This occupation: Health Specialties Teachers, Postsecondary",
-        "period": "2024—2034",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "25-1071",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "Scope | BLS employment projection base period (about 289,600 for this occupation (25-1071.00) in 2024, as presented by O*NET); this differs in scope from the BLS OEWS point-in-time employment estimate (OEWS covers only sampled non-farm establishment employers and excludes self-employment), and this page labels them separately without mixing them; this occupation is affected by the structure of higher education enrollment and institutional funding and clinical teaching demand.",
-        "display_value": "Employment about 289,600 (2024, BLS employment projection base period, this occupation's (25-1071.00) own scope)",
+        "derivation": "BLS Table 1.2, row 25-1071.",
+        "display_value": "About 278,400 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment figure",
-        "occupation_scope": "This occupation: Health Specialties Teachers, Postsecondary",
-        "period": "2024",
+        "measure": "U.S. employment (2025)",
+        "occupation_scope": "25-1071",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "Scope | Period openings in the BLS employment projections (about 27,400 per year on average for this occupation (25-1071.00) in 2024—2034, including growth and replacements, as presented by O*NET); this is a period annual average scope consisting mainly of replacement needs and cannot be read as net new positions.",
-        "display_value": "Projected average annual job openings of about 27,400 (2024—2034, BLS employment projections, this occupation's (25-1071.00) own scope, including growth and replacements)",
+        "derivation": "BLS Table 1.2, row 25-1071.",
+        "display_value": "About 24,900 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Average annual job openings",
-        "occupation_scope": "This occupation: Health Specialties Teachers, Postsecondary",
-        "period": "2024—2034",
+        "measure": "U.S. annual openings (2025–2035)",
+        "occupation_scope": "25-1071",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "Scope | Public occupational statistics in mainland China have not established a national occupational wage distribution precisely corresponding to this occupation; the National Bureau of Statistics publishes average wages of urban unit employees by industry category without distinguishing occupations; higher education and clinical teaching and academic integrity and privacy are carried out according to the corresponding standards and requirements; this page registers the gap according to the evidence policy without using proxy numbers.",
-        "display_value": "Evidence insufficient: public occupational statistics in mainland China have not established a national occupational wage distribution precisely corresponding to O*NET 25-1071.00 (Health Specialties Teachers, Postsecondary); industry averages, job posting offers, or U.S. data are not used to fill in.",
+        "derivation": "NBS Tables 2 and 5, industry averages.",
+        "display_value": "CNY 133,539/year non-private; CNY 63,908/year private",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "Mainland China",
-        "measure": "Precise occupational wage in mainland China",
+        "measure": "Urban education industry wage context",
         "occupation_scope": "This occupation: Health Specialties Teachers, Postsecondary",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs-wage-release-2025"
         ]
       },
       {
-        "derivation": "Scope | Public occupational statistics in mainland China have not established a national occupational wage distribution precisely corresponding to this occupation; the National Bureau of Statistics publishes average wages of urban unit employees by industry category without distinguishing occupations; higher education and clinical teaching and academic integrity and privacy are carried out according to the corresponding standards and requirements; this page registers the gap according to the evidence policy without using proxy numbers.",
-        "display_value": "Evidence insufficient: public occupational statistics in mainland China have not established a national occupational wage distribution precisely corresponding to O*NET 25-1071.00 (Health Specialties Teachers, Postsecondary); industry averages, job posting offers, or U.S. data are not used to fill in.",
+        "derivation": "NBS Tables 2 and 5, industry averages.",
+        "display_value": "CNY 133,539/year non-private; CNY 63,908/year private",
         "fact_id": "cn-private-2025",
         "market": "Mainland China",
-        "measure": "Precise occupational wage in mainland China",
+        "measure": "Urban education industry wage context",
         "occupation_scope": "This occupation: Health Specialties Teachers, Postsecondary",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs-wage-release-2025"
         ]
       },
       {
-        "derivation": "Scope | 2025 BLS OEWS national wages, as presented by O*NET on the 25-1071.00 page; O*NET does not mark this data on that page as taken from a parent or higher-level occupation, and this page labels it faithfully according to this occupation's (25-1071.00) own scope and does not borrow values from adjacent occupations; that page shows only annual wages and not the hourly wage, and this page does not fill in an hourly wage; benefits and bonuses are excluded; the median is the midpoint of the distribution and percentiles are distribution positions, and neither corresponds to an individual's starting salary; later updates are subject to a query for the current period on the official page.",
+        "derivation": "O*NET national wage table, May 2025 U.S. OEWS annual wages.",
         "display_value": "25th percentile annual wage $75,690 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; annual wage only)",
         "fact_id": "us-wage-q25-2025",
         "market": "United States",
@@ -37734,11 +37806,11 @@
         "occupation_scope": "This occupation: Health Specialties Teachers, Postsecondary",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "Scope | 2025 BLS OEWS national wages, as presented by O*NET on the 25-1071.00 page; O*NET does not mark this data on that page as taken from a parent or higher-level occupation, and this page labels it faithfully according to this occupation's (25-1071.00) own scope and does not borrow values from adjacent occupations; that page shows only annual wages and not the hourly wage, and this page does not fill in an hourly wage; benefits and bonuses are excluded; the median is the midpoint of the distribution and percentiles are distribution positions, and neither corresponds to an individual's starting salary; later updates are subject to a query for the current period on the official page.",
+        "derivation": "O*NET national wage table, May 2025 U.S. OEWS annual wages.",
         "display_value": "75th percentile annual wage $210,370 (2025, BLS OEWS, this occupation's (25-1071.00) own scope; annual wage only)",
         "fact_id": "us-wage-q75-2025",
         "market": "United States",
@@ -37746,65 +37818,53 @@
         "occupation_scope": "This occupation: Health Specialties Teachers, Postsecondary",
         "period": "2025",
         "source_refs": [
-          "onet"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Health Specialties Teachers, Postsecondary",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "oews"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
-      "Health Specialties Teachers, Postsecondary · tasks, deliverables, and responsibility boundaries",
-      "Source scope · statistical scope · human review",
-      "The precise occupational wage gap for China is retained according to the evidence"
+      "Postsecondary Health Specialties Teachers",
+      "Wages and projections use separate tables",
+      "China occupational wage distribution unavailable"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "U.S. median annual wage (2025, BLS OEWS, this occupation's (25-1071.00) own scope)"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034, this occupation's (25-1071.00) own scope)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment (2024, this occupation's (25-1071.00) own scope)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024—2034, this occupation's (25-1071.00) own scope)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "cn-urban-nonprivate-2025",
         "key": "china_pay",
-        "label": "Mainland China (no precise occupational wage available yet)"
+        "label": "Urban education industry wage context"
       }
     ]
   },
@@ -37812,17 +37872,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What Health Specialties Teachers, Postsecondary do, what capabilities and qualifications are needed, what the wages and prospects are, and which tasks AI will change. Retains the occupational scope (O*NET/SOC 25-1071.00), Job Zone Five and the education distribution, the U.S. wages and employment under this occupation's (25-1071.00) own scope (annual wage only), and the mainland China data gap."
+      "text": "Explore postsecondary health specialties teachers tasks, U.S. wage percentiles and employment projections, with a paper exercise on checking records."
     },
     "title": {
       "availability": "available",
-      "text": "Health Specialties Teachers, Postsecondary"
+      "text": "Postsecondary Health Specialties Teachers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "e1cdf9c51bae0667efe725e9d659d1ca8f9ab872c9f1fce6a7ce121ab65bd6fb",
+  "source_content_sha256": "f69c054b4197c50409332db73bdd8e9390edb87d0298cfff840b23b2efdc0aa8",
   "subject": {
     "canonical_slug": "health-specialties-teachers-postsecondary",
-    "name": "Health Specialties Teachers, Postsecondary",
-    "summary": "The Health Specialties Teachers, Postsecondary corresponds to the exact occupation O*NET/SOC 25-1071.00 \"Health Specialties Teachers, Postsecondary\": teach courses in health specialties, covering fields such as dentistry, laboratory technology, medicine, pharmacy, public health, therapy, and veterinary medicine; core tasks include preparing course materials and teaching courses and leading discussions and supervising laboratories, evaluating and grading assignments and papers and compiling and administering and grading examinations, maintaining student attendance and grade records, supervising teaching and internships and research and holding office hours, conducting research and publishing and applying for funding, and participating in admissions and committees and academic service; common job titles include Assistant Professor and Associate Professor and Clinical Professor and Instructor and Lecturer and Professor and Public Health Professor. Official scope text: Teach courses in health specialties, in fields such as dentistry, laboratory technology, medicine, pharmacy, public health, therapy, and veterinary medicine. Scope note: the U.S. wage and employment and industry data presented by O*NET on the 25-1071.00 page are not marked as taken from a parent occupation, so this page labels them faithfully according to this occupation's own scope (25-1071.00); the wages on that page show only the annual wage distribution and not the hourly wage, and this page does not fill in an hourly wage; this occupation is projected to grow 7% or higher over 2024—2034 and is marked Bright Outlook, and O*NET places it in Job Zone Five (extensive preparation needed, SVP 8.0 and above). The content on this page does not constitute medical, diagnostic, treatment, medication, legal, or education policy advice."
+    "name": "Postsecondary Health Specialties Teachers",
+    "summary": "Postsecondary health specialties teachers teach subjects such as medicine, pharmacy, public health, therapy, veterinary medicine and laboratory technology. Roles may include curriculum, grading, clinical supervision or research."
   }
 }

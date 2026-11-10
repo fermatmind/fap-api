@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "用虚构旧稿和V5校订稿形成待复核通知，列两改一保留一未知，观察细节耐心。"
+              "纸面体验｜目录里有两份同名文件。对照修订记录与批准标记，再登记交付版，保留另一份。 "
             ]
           },
           "id": "word-processors-and-typists.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,13 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "文字处理员与打字员对应O*NET43-9022.00，使用文字处理设备或计算机，从草稿、校订稿、录音或旧版形成信函、报告及表格，核拼写标点格式、调整版式、保存检索和传递文件，也可能承担其他文书任务。重点是忠实对应来源与版本，不等原创写作、全部办公室事务或所有数据录入。Word及Office需求不等生成式AI采用。纸面校订稿题只用虚构通知，不处理真实人员或文件，不发送或代业务批准。"
+              "文字处理与打字人员把来稿整理成规定格式，核版本、样式和文件名，并按流程存档或发送。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "word-processors-and-typists.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-43-9022.00"
           ],
           "type": "prose"
         }
@@ -25455,13 +25453,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可探索获准资料的转写和校订清单，原材料逐项回核；Word需求不证明生成式采用。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：目录里有两份同名文件。对照修订记录与批准标记，再登记交付版，保留另一份。"
             ]
           },
           "id": "word-processors-and-typists.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-43-9022.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33098,6 +33096,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-43-9022.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 43-9022.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/43-9022.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38615,10 +38640,10 @@
       "text": "文字处理员与打字员"
     }
   },
-  "source_content_sha256": "91bb2d30c7f407415445881509bb59573ae2025e25a32c3ca5cb9f34490fbffd",
+  "source_content_sha256": "05a85136c04e8c54e454845834e23fb7338b1819524ab5cd2980db5f960655b6",
   "subject": {
     "canonical_slug": "word-processors-and-typists",
     "name": "文字处理员与打字员",
-    "summary": "文字处理员与打字员对应O*NET43-9022.00，使用文字处理设备或计算机，从草稿、校订稿、录音或旧版形成信函、报告及表格，核拼写标点格式、调整版式、保存检索和传递文件，也可能承担其他文书任务。重点是忠实对应来源与版本，不等原创写作、全部办公室事务或所有数据录入。Word及Office需求不等生成式AI采用。纸面校订稿题只用虚构通知，不处理真实人员或文件，不发送或代业务批准。"
+    "summary": "文字处理与打字人员把来稿整理成规定格式，核版本、样式和文件名，并按流程存档或发送。"
   }
 }

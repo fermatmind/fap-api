@@ -149,6 +149,9 @@
       "item:ophthalmic-laboratory-technicians.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:ophthalmic-laboratory-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:ophthalmic-laboratory-technicians.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12981,6 +12984,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Order L6 lists both lens specifications, but the inspection sheet omits the right lens ID. Identify records to recheck. Actual assembly and release follow lab procedures."
+            ]
+          },
+          "id": "ophthalmic-laboratory-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "employment"
+          ],
+          "title": "Check an optical lab order",
+          "type": "notice"
         }
       ]
     },
@@ -15487,6 +15505,13 @@
         "id": "ophthalmic-laboratory-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "ophthalmic-laboratory-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15656,7 +15681,7 @@
       "text": "Ophthalmic laboratory technician: work, wages, and entry paths"
     }
   },
-  "source_content_sha256": "8e75d56baa0889aed1ea1e381df3097b6a6c2685867a2b0769b5955c03bd9b6c",
+  "source_content_sha256": "4d81f4adc84f79f162e589c47a42532c39458b389ba06e96ace7b327fbf4588c",
   "subject": {
     "canonical_slug": "ophthalmic-laboratory-technicians",
     "name": "Ophthalmic laboratory technician",

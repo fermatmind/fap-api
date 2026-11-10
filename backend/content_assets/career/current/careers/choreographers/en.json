@@ -1427,6 +1427,9 @@
       "item:choreographers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:choreographers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:choreographers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30102,6 +30105,21 @@
           "id": "choreographers.path.recruitment-sample.1",
           "title": "Notes on the use of recruitment samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Entrance A conflicts with a musical cue. Section B has no formation-change note. Choose what to revise first and write the version update for dancers and stage staff."
+            ]
+          },
+          "id": "choreographers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Explain a choreography revision",
+          "type": "notice"
         }
       ]
     },
@@ -36534,6 +36552,13 @@
         "id": "choreographers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "choreographers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -36932,7 +36957,7 @@
       "text": "Choreographers"
     }
   },
-  "source_content_sha256": "3a33c720e9ac6d84b9d7b39f4aeaa0bef652614e46a699c820d890943a20d04d",
+  "source_content_sha256": "50a07d72417f8e2b1c04ad2c9c9288141086ca757ad70e92ef33fab501a55e4d",
   "subject": {
     "canonical_slug": "choreographers",
     "name": "Choreographers",

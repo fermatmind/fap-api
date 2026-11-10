@@ -152,6 +152,9 @@
       "item:ophthalmologists-except-pediatric.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:ophthalmologists-except-pediatric.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:ophthalmologists-except-pediatric.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13229,6 +13232,21 @@
             "onet-cert"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。成人转诊单所写眼别与影像标签冲突。写给临床复核人的说明要包含两种来源、缺项及原件，避免自行推定眼别。"
+            ]
+          },
+          "id": "ophthalmologists-except-pediatric.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "整理成人眼科复核所需记录",
+          "type": "notice"
         }
       ]
     },
@@ -15712,6 +15730,13 @@
         "id": "ophthalmologists-except-pediatric.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "ophthalmologists-except-pediatric.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15905,7 +15930,7 @@
       "text": "非儿科眼科医生：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "5af5a7d76a80d80d318787afaa402cad3530bdc03f4421157f93279d92c2bc40",
+  "source_content_sha256": "60683513aa03af916e7cbbf36e4529e856c76806d99988531bd27a2b74408be1",
   "subject": {
     "canonical_slug": "ophthalmologists-except-pediatric",
     "name": "非儿科眼科医生",

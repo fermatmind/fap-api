@@ -32,9 +32,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -42,7 +39,7 @@
         "status": "mapped"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-industry-wage-education-2025": {
         "status": "pending_mapping"
@@ -1533,7 +1530,7 @@
         "status": "pending_mapping"
       },
       "item:speech-language-pathologists.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:speech-language-pathologists.sources.source-card.1": {
         "status": "mapped"
@@ -23333,7 +23330,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Do the L1 to L5 fictional material check: keep the five original records, calculate valid entry minutes by version and confirmation conditions, list the differences and four pending items, and submit four works. Paper only, with no contact with patients and no training or treatment plan provided, and read the answers after sealing the first draft."
+              "Open “Entry, qualifications and career development” and find “Entry exercise: L1 to L5 fictional record checking”. Keep the original rows, check versions, calculate minutes and the completion rate separately, and draft a handover. Write your draft before reading the sample."
             ]
           },
           "id": "speech-language-pathologists.quick-decision.fit-decision-checklist.2",
@@ -23365,7 +23362,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Assessment and treatment must comply with local licensure and personal competence, and support staff, parents and ordinary language training cannot independently diagnose or change a treatment plan based on this page. Chinese team roles and U.S. SLP are not directly mutually recognized."
+              "Check U.S. state licensure and mainland China employer requirements separately. A shared job title does not establish local eligibility."
             ]
           },
           "id": "speech-language-pathologists.quick-decision.fermat-decision-card.6",
@@ -23381,14 +23378,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the precise Chinese equivalent wage and this occupation's AI net substitution rate were not obtained. The U.S. 2025 median annual wage is 97870 dollars, with a 2025–2035 projection of 17% and an annual average of 12500 openings; neither is a starting salary or a hiring promise."
+              "For U.S. occupation 29-1127, May 2025 median pay was $97,870 per year or $47.05 per hour. BLS projects 193,400 to 225,500 jobs from 2025 to 2035, up 16.6% (17% rounded), with about 12,500 annual openings including replacements. Check mainland China pay with employers and contract terms."
             ]
           },
           "id": "speech-language-pathologists.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
             "bls",
-            "editor"
+            "ep"
           ],
           "type": "prose"
         }
@@ -23910,7 +23906,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Chinese and U.S. practice qualifications are verified separately and are not mutually recognized from a shared title."
+              "Check U.S. state licensure and mainland China employer requirements separately. A shared job title does not establish local eligibility."
             ]
           },
           "id": "speech-language-pathologists.profile.career-quick-answers-block.23",
@@ -23975,7 +23971,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The California example requires a relevant master's degree and so on, 300 hours of supervised practicum across three settings, 36 full-time or 72 part-time weeks under the RPE temporary licence and Praxis162; this is that state's path only."
+              "California RPE route: a relevant master’s or equivalent, 300 hours of supervised clinical practicum across three settings, and 36 weeks full-time or 72 weeks part-time supervised professional experience. California-based RPE requires a temporary license. Praxis minimum: 162. The board lists separate routes for equivalent qualifications, out-of-state licensees and foreign education."
             ]
           },
           "id": "speech-language-pathologists.profile.career-quick-answers-block.27",
@@ -24664,7 +24660,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Every adjacent occupation requires the target occupation's formal qualifications; Chinese rehabilitation roles and U.S. SLP licences are not directly mutually recognized."
+              "Check U.S. state licensure and mainland China employer requirements separately. A shared job title does not establish local eligibility."
             ]
           },
           "id": "speech-language-pathologists.direction-comparison.adjacent-career-comparison-table.35",
@@ -24977,17 +24973,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this occupation's real generative AI adoption rate, effects and empirical evidence of net job substitution were not obtained. ASHA already has professional ethics and consent guidance, and potential paperwork assistance does not equal diagnostic authorization, treatment effect or headcount reduction. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Start with fictional material when trying a note template, plain-language draft or checklist for omissions, then verify each detail. Authorized clinicians remain responsible for assessment, goals, swallowing safety and sign-off. Keep real recordings and clinical records out of tools the institution has not approved."
             ]
           },
           "id": "speech-language-pathologists.ai-impact.ai-impact-table.18",
           "source_refs": [
             "onet",
-            "bls",
-            "privacy",
-            "employer",
-            "nist",
-            "editor"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -25259,7 +25251,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "A person checks the current 48, the conditional 50 and the fixed 3/4 denominator."
+              "Have a person verify record status, signature and denominator separately."
             ]
           },
           "id": "speech-language-pathologists.ai-impact.ai-impact-table.37",
@@ -25301,7 +25293,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Tasks, statistics, general methods and professional guidance are kept separate; general research in the table is not synthesized into a clinical adoption score, and ASHA professional materials are found in the sources and FAQ.\nU.S. SOC29-1127 overall projections, BLS2025 to 2035: a 2025 base of 193,400 people and a 2035 end of 225,500 people, a net increase of 32,100; the OOH rounds the growth to 17%, with an annual average of 12,500 openings including transfers, exits and replacements. The projection and salaried wage coverage differ, so this is not current recruitment, AI causality, a clinical effect or an individual unemployment probability."
+              "Task descriptions, employment figures and professional guidance answer different questions. BLS Table 1.2 projects 16.6% growth; the Occupational Outlook Handbook rounds this to 17%. That projection does not measure the effect of AI tools."
             ]
           },
           "id": "speech-language-pathologists.ai-impact.ai-impact-table.40",
@@ -25756,7 +25748,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The 2025–2035 BLS projection puts this occupation's growth at 17%, which cannot be attributed to AI or used to promise an individual job."
+              "The 2025–2035 BLS projection puts this occupation's growth at 16.6%, which cannot be attributed to AI or used to promise an individual job."
             ]
           },
           "id": "speech-language-pathologists.ai-impact.ai-impact-table.70",
@@ -25918,7 +25910,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Check that Q2 is not duplicated, r4 is unknown, the 48 subtotal, the conditional 50, the 3/4 rate and the signature."
+              "Check for duplicate versions, missing data and approval for any update."
             ]
           },
           "id": "speech-language-pathologists.ai-impact.ai-impact-table.81",
@@ -25974,7 +25966,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Return to L2/L4 and keep both the 12 and 14 statuses, checking 3/4 against the four numbers."
+              "Distinguish signed records from pending drafts and trace each field to its source."
             ]
           },
           "id": "speech-language-pathologists.ai-impact.ai-impact-table.85",
@@ -26048,7 +26040,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Writing 75% as a treatment effect, or filling unknown with 0, leads to a wrong clinical interpretation."
+              "Treating the completion rate as a clinical outcome or filling missing values with zero can mislead readers."
             ]
           },
           "id": "speech-language-pathologists.ai-impact.ai-impact-table.90",
@@ -26275,7 +26267,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "20+16+12=48min"
+              "Calculate verified minutes from eligible records."
             ]
           },
           "id": "speech-language-pathologists.ai-impact.ai-impact-table.103",
@@ -26351,7 +26343,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "3/4=75% recording rate"
+              "Use unique record IDs to calculate the completion rate."
             ]
           },
           "id": "speech-language-pathologists.ai-impact.ai-impact-table.107",
@@ -26427,7 +26419,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Only when both conditions are met does 50min still give 75%"
+              "Recalculate only after the update conditions are met. Keep the original result."
             ]
           },
           "id": "speech-language-pathologists.ai-impact.ai-impact-table.111",
@@ -26969,7 +26961,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Chinese name on this page does not establish full mutual recognition with the U.S. SLP licence; rehabilitation treatment position qualifications, institutions and team duties are verified separately."
+              "Check U.S. state licensure and mainland China employer requirements separately. A shared job title does not establish local eligibility."
             ]
           },
           "id": "speech-language-pathologists.china-salary.career-snapshot-primary-locale.24",
@@ -27117,7 +27109,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Usually a relevant master's degree plus supervised clinical experience and an examination, with specific state rules verified separately and no direct mutual recognition of Chinese degrees."
+              "Check U.S. state licensure and mainland China employer requirements separately. A shared job title does not establish local eligibility."
             ]
           },
           "id": "speech-language-pathologists.china-salary.career-snapshot-primary-locale.33",
@@ -27329,14 +27321,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Public rehabilitation policy does not equal a current recruitment contract or personal reimbursement; check the target institution's qualifications, duties, salary composition and payment rules."
+              "Neither therapy posting gives a salary amount. The CNY 600–800 monthly payment is for the Fuzhou student assistant placement. Comparable nationwide therapist pay in China was not established."
             ]
           },
           "id": "speech-language-pathologists.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "cnclass",
-            "speech-language-pathologists",
-            "editor"
+            "slp-zhejiang",
+            "slp-lih",
+            "slp-fuzhou"
           ],
           "type": "prose"
         },
@@ -27359,16 +27351,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: three complete precise Chinese amounts for this occupation were not obtained, with the amount n=0; qualification policy and broad wage statistics are not amount samples. Medical rehabilitation employers may refer to the 2025 health and social work non-private 146,266 and private 75,631 yuan pre-tax annual average; the school direction may also refer to education non-private 133,539 and private 63,908 yuan. All are all-employed populations across different unit industries and are not this occupation's individual wage range or practice qualification proof."
+              "Neither therapy posting gives a salary amount. The CNY 600–800 monthly payment is for the Fuzhou student assistant placement. Comparable nationwide therapist pay in China was not established. The 2025 urban health and social work industry averages were CNY 146,266 at non-private units and CNY 75,631 at private units. These are industry-wide annual averages before tax."
             ]
           },
           "id": "speech-language-pathologists.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "nbs",
-            "cnclass",
-            "employer",
-            "census",
-            "editor"
+            "slp-zhejiang",
+            "slp-lih",
+            "slp-fuzhou",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27485,7 +27476,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Unit industry averages, patient payments, hospital charges and personal business income are not employee wages for this occupation; without a safe precise mapping the gap is kept. Insufficient evidence: this occupation's precise Chinese headcount, growth and openings were not obtained, and the U.S. 17% is not applied. Insufficient evidence: this occupation's precise Chinese wage percentiles were not obtained."
+              "Unit industry averages, patient payments, hospital charges and personal business income are not employee wages for this occupation; without a safe precise mapping the gap is kept. Insufficient evidence: this occupation's precise Chinese headcount, growth and openings were not obtained, and the U.S. 16.6% is not applied. Insufficient evidence: this occupation's precise Chinese wage percentiles were not obtained."
             ]
           },
           "id": "speech-language-pathologists.china-salary.career-snapshot-primary-locale.55",
@@ -27519,7 +27510,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this occupation's precise Chinese headcount, growth and openings were not obtained, and the U.S. 17% is not applied."
+              "Insufficient evidence: this occupation's precise Chinese headcount, growth and openings were not obtained, and the U.S. 16.6% is not applied."
             ]
           },
           "id": "speech-language-pathologists.china-salary.career-snapshot-primary-locale.58",
@@ -27784,7 +27775,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "17%"
+              "16.6%"
             ]
           },
           "id": "speech-language-pathologists.us-salary.career-snapshot-secondary-locale.21",
@@ -27869,7 +27860,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The May2025 national annual wage median is 97,870 dollars; the 10th percentile is 62,900, the 25th percentile 77,730, the 75th percentile 114,570 and the 90th percentile 134,160. This is not a starting salary or monthly net pay; the projected annual average of 12,500 openings includes exits, transfers and replacements. The 2025–2035 growth is 17%, a net increase of 32,100; the annual average of about 12,500 openings includes replacements, and the two are not the same indicator. This is independent occupational statistics for U.S. 29-1127; Chinese precise mapping and wages cannot be inferred from it by currency conversion."
+              "The May2025 national annual wage median is 97,870 dollars; the 10th percentile is 62,900, the 25th percentile 77,730, the 75th percentile 114,570 and the 90th percentile 134,160. This is not a starting salary or monthly net pay; the projected annual average of 12,500 openings includes exits, transfers and replacements. The 2025–2035 growth is 16.6%, a net increase of 32,100; the annual average of about 12,500 openings includes replacements, and the two are not the same indicator. This is independent occupational statistics for U.S. 29-1127; Chinese precise mapping and wages cannot be inferred from it by currency conversion."
             ]
           },
           "id": "speech-language-pathologists.us-salary.career-snapshot-secondary-locale.26",
@@ -27987,7 +27978,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025–2035 growth is 17%, a net increase of 32,100; the annual average of about 12,500 openings includes replacements, and the two are not the same indicator."
+              "The 2025–2035 growth is 16.6%, a net increase of 32,100; the annual average of about 12,500 openings includes replacements, and the two are not the same indicator."
             ]
           },
           "id": "speech-language-pathologists.us-salary.career-snapshot-secondary-locale.33",
@@ -28362,31 +28353,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Internal: material version checking",
@@ -28851,7 +28842,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "No uniform IQ threshold for this occupation was obtained, and a 48-minute subtotal does not imply treatment ability."
+              "This guide sets no IQ threshold for entry. The paper exercise does not assess clinical ability."
             ]
           },
           "id": "speech-language-pathologists.fit.personality-fit-block.21",
@@ -29327,7 +29318,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Introversion does not mean an inability to communicate; whether the person can explain the L version conflict and the basis for 48 minutes can be observed, and hiring is not inferred."
+              "Introversion does not rule out good communication. Try explaining a conflict in the records and identifying who should review it."
             ]
           },
           "id": "speech-language-pathologists.fit.personality-fit-block.47",
@@ -29406,7 +29397,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The exercise requires correctly distinguishing the current 48, the conditional 50 and the completion-rate denominator, and the calculation can be practised; treatment ability is not judged from arithmetic results."
+              "Separate current and conditional subtotals, then check the completion rate by unique ID. This is a paper record review."
             ]
           },
           "id": "speech-language-pathologists.fit.personality-fit-block.52",
@@ -29486,7 +29477,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Treating draft 14 as confirmed 12, treating unknown as 0 or claiming a treatment effect from 75% would mislead, and the L original conditions must be re-checked."
+              "An unconfirmed draft cannot replace the signed record. Check the conditions against the original rows."
             ]
           },
           "id": "speech-language-pathologists.fit.personality-fit-block.57",
@@ -30274,7 +30265,7 @@
                 "id": "clearance",
                 "values": [
                   "The actual California licence entry",
-                  "The regulatory page lists a relevant master's degree and so on, 300 supervised practicum hours across three settings, the temporary licence RPE36 full-time / 72 part-time weeks and Praxis162.",
+                  "California lists a relevant master’s or equivalent, 300 hours of supervised practicum across three clinical settings, and a Praxis score of at least 162. Its RPE route lists 36 weeks full time or 72 part time; California-based RPE requires a temporary license.",
                   "Only a California path example; complete requirements such as fingerprints and examination validity follow the regulator and are not a nationwide uniform standard."
                 ]
               },
@@ -30282,16 +30273,16 @@
                 "id": "onet-traits",
                 "values": [
                   "ASHA certification and state licence",
-                  "ASHA's international application guidance states that the CCC and the state licence are independent and holding either does not guarantee the other; foreign education must be checked against the target process.",
+                  "ASHA’s CCC-SLP is a professional certification with a separate mentored Clinical Fellowship. State boards issue licenses; check both application routes if educated abroad.",
                   "Certification does not automatically confer Chinese physician status or practice rights in all states."
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "Chinese rehabilitation team background",
-                  "The NHC general hospital guideline distinguishes the rehabilitation physician's clinical medical practice from the professional rehabilitation services organized under it, including speech and swallowing therapy.",
-                  "The historical management guideline is combined with the current physician registration jurisdiction and is not an SLP precise recruitment amount or a nationwide uniform title."
+                  "Home-bed rehabilitation: language therapy",
+                  "Effective September 1, 2026, WS/T 893–2026 covers home-bed rehabilitation delivered by primary healthcare institutions. Section 6.4.3 covers speech, language, cognitive communication and augmentative communication within that service.",
+                  "This standard neither grants credentials nor governs every healthcare, school or rehabilitation role."
                 ]
               }
             ]
@@ -30301,13 +30292,8 @@
             "bls",
             "employer",
             "census",
-            "cnclass",
-            "speech-language-pathologists",
-            "archivists",
-            "oews-method",
-            "privacy",
-            "msresearch",
-            "editor"
+            "slp-asha-path",
+            "slp-homebed"
           ],
           "title": "How are qualification materials and employer information kept separate?",
           "type": "cards"
@@ -30321,11 +30307,11 @@
                 "id": "exercise-materials",
                 "values": [
                   "The L1 to L5 materials | all are author-fictional records, with no patients or clinical testing",
-                  "L1 | You only organize paper records and differences; A signs and decides versions, and B confirms the original status and minutes. You must not change the original text, sign clinical conclusions, diagnose or suggest treatment; fictional deadline is 15:00 on October 4.",
+                  "L1 | A fictional team is sorting records of communication support for a handover. You organize the paper entries and discrepancies. A approves and signs versions; B confirms original status and minutes. Do not change the originals, diagnose or recommend therapy. The fictional deadline is October 4 at 15:00.",
                   "L2 | Five original rows, minutes in min: r1, Q1, v2, complete, signed, 20; r2, Q2, v1, complete, signed, 18; r3, Q2, v2, complete, signed, 16; r4, Q3, v2, planned, unsigned, minutes blank; r5, Q4, v2, complete, signed, 12. Four numbers, five rows, and all subjects are fictional material labels.",
                   "L3 | This question selects only the current v2, counting each number at most once; only rows that are complete, signed and have clear minutes are included in the verifiable minute subtotal. The completion recording rate denominator is fixed at the four different numbers, and the numerator is the number of numbers that are complete and signed on the current v2, with unknown minutes not treated as 0. This rate is not a clinical effect, a patient recovery rate or real service billing.",
                   "L4 | At 12:00 a r5 v3 draft of 14 minutes was received, without A's signature or B's confirmation; this question keeps the signed v2 12 and lists the draft separately. It asks how the subtotal and the completion recording rate would change if B later confirms 14 and A signs the replacement version with everything else unchanged, and it is not adopted in advance.",
-                  "L5 | Submit the authority card, the five-row version table, the current and conditional minutes and completion recording rate summary, and the pending handover. The four pending items are the Q2 version trade-off for A, the Q3 status for B, the missing Q3 minutes for B and the confirmation and signing of the new Q4 draft coordinated by A with B, with a deadline of 15:00 on October 4. Real medical records, audio recordings, testing and patient training must not be touched."
+                  "L5 | Submit the authority card, the five-row version table, the current and conditional minutes and completion recording rate summary, and the pending handover. The four pending items are the Q2 version trade-off for A, the Q3 status for B, the missing Q3 minutes for B and the confirmation and signing of the new Q4 draft coordinated by A with B, with a deadline of 15:00 on October 4. Real medical records, audio recordings, testing and patient training must not be touched. No acknowledgement is supplied; mark receipt as unconfirmed."
                 ]
               },
               {
@@ -30333,18 +30319,18 @@
                 "values": [
                   "Tasks and deliverables",
                   "First write the authority card for what can be done, what must be decided by A and B and what must not be done following L1, then keep all original fields of the five L2 rows and the L4 draft.",
-                  "Following L3, select rows, calculate minutes and the completion recording rate and explain each exclusion item by item; submit the four L5 works and read the answers after sealing."
+                  "Work out both the current state and the L4 conditional variant. Explain inclusions, exclusions and who takes each next step."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answers | read after sealing the first draft",
-                  "Five rows and four numbers, Q2 has v1/v2; take v2 as the current version under L3, and 18 and 16 cannot be added twice. r4 is planned, unsigned and missing minutes, and cannot be treated as 0 and counted as complete.",
-                  "The currently verifiable minutes are r1/r3/r5: 20+16+12=48min, which is the subtotal of the three records meeting the conditions, not the total minutes of the five rows or the total service volume; the unknown r4 is kept.",
-                  "The completion recording rate numerator Q1/Q2/Q4 is 3, and the denominator of different numbers Q1 to Q4 is 4, giving 3/4=75%. Five rows are not used as the denominator, and this is not called a treatment response rate or real patient completion.",
-                  "The r5 v3 draft 14 is unconfirmed and unsigned, so it is still 48min and 75%; only when the two L4 conditions are met in future does 20+16+14=50min, and the number of complete and signed numbers is still 3, so it remains 3/4=75%, and a change in minutes does not mean a change in treatment effect.",
-                  "Four pending items and two responsible people: the Q2 version for A, the Q3 status for B, the Q3 minutes for B, and the confirmation and signing of the Q4 draft coordinated by A with B. B confirming minutes does not substitute for A signing the version; keep the five original rows, the 12 and the draft 14, the current 48 and conditional 50 and the 3/4 denominator, the 15:00 deadline on October 4 and the receiving status."
+                  "Complete both versions independently",
+                  "Submit both versions with an authority card, version table, minutes and record rates, plus one-page handover.",
+                  "Keep original values, sources and open checks.",
+                  "Distinguish findings you can support from open questions.",
+                  "Mark the changed input for the variant.",
+                  "After submitting, open “L1–L5 records review reference (open after submitting)” in the FAQ."
                 ]
               },
               {
@@ -30389,8 +30375,8 @@
                 "id": "report-summary",
                 "values": [
                   "L four work 3: quantity and denominator summary",
-                  "List 20+16+12=48min and 3/4=75%; only future confirmation and signing gives 50min and still 75%, and the unknown Q3 is not filled with 0.",
-                  "Review: the subtotal is not the full total and the recording rate is not a treatment effect; changed minutes do not change the denominator."
+                  "Compute verified minutes and record rates for both versions. Show numerator, denominator and evidence.",
+                  "Review: explain the limits of the subtotal and rate."
                 ]
               },
               {
@@ -30435,20 +30421,20 @@
               ],
               [
                 "Material judgment",
-                "Why Q2 cannot be 18+16",
-                "Point out the current v2 and the unique number",
+                "Which records meet the rules in the scenario?",
+                "Explain version and inclusion criteria.",
                 "Not a clinical assessment tutorial"
               ],
               [
                 "Quantity explanation",
-                "What are the premises of the 48 and the 75%?",
-                "The 3-item subtotal and the different 3/4 denominator",
+                "How do you report the subtotal and the recording rate separately?",
+                "Show the calculation, numerator, denominator and limits.",
                 "Not called a treatment effect or a billing quantity"
               ],
               [
                 "Change handover",
-                "Whether the r5 draft 14 changes the current value",
-                "Keep 48; only after confirmation and signing does it become 50 with the rate still 75%",
+                "When could a record in use be updated?",
+                "Compare the change conditions and signing authority in the scenario. Record open checks.",
                 "Do not substitute for a professional signature"
               ]
             ]
@@ -30484,35 +30470,35 @@
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day three",
-                  "Following L3, check r1/r3/r5, subtotal 48min and calculate 3/4=75% separately."
+                  "Use L3 to mark the eligible rows. Calculate verified minutes and the completion rate by unique record ID separately."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day four",
-                  "Keep the L4 signed 12 and draft 14, and check the conditions for a future 50min with the rate still 75%."
+                  "Keep the signed version and the draft separate. Record the current figures and the conditions for updating them."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day five",
-                  "List the four pending items and the two responsible people A and B, the October 4 15:00 and the receiving status."
+                  "List the four pending items, two owners and October 4 at 15:00 deadline. Mark receipt as unconfirmed."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day six",
-                  "After sealing the first draft, read the answers and check against the original records, versions, signatures and formula denominators, keeping the revision basis."
+                  "Submit independently without opening the reference. Submit both versions with an authority card, version table, minutes and record rates, plus one-page handover."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day seven",
-                  "Record time, energy and questions about formal education and licensure; the work does not prove clinical competence."
+                  "Open “L1–L5 records review reference (open after submitting)” in the FAQ. Record a difference or confirm there was none, then choose what to explore next."
                 ]
               }
             ]
@@ -30532,9 +30518,9 @@
               "Mark each judgment with its L1 to L5 source and keep the first draft.",
               "5 rows and 4 numbers, Q2 only by v2, without repetition.",
               "Keep the planned, unsigned and blank-minute Q3 separately; unknown is not 0.",
-              "The current 20+16+12=48min, and the three-item subtotal is not the full quantity.",
-              "3/4=75% is a recording rate and is not called a clinical effect.",
-              "Only future confirmation and signing of the replacement version gives 50min, with the numbers unchanged and still 75%.",
+              "Select verifiable rows and show the calculation.",
+              "List the numerator and denominator and explain what the measure describes.",
+              "Record the conditional variant and its evidence separately and keep all originals.",
               "The four pending items, two responsible people, deadline and receiving status are clear, and clinical ability is not scored."
             ]
           },
@@ -30580,11 +30566,11 @@
                 "The CCC does not automatically substitute for a state licence"
               ],
               [
-                "The full California licence example",
+                "California RPE route example",
                 "Applicants targeting California",
                 "That state's SLP licence entry",
                 "California Board",
-                "A relevant master's degree and so on, 300 hours across three settings, the temporary RPE36/72 weeks, Praxis162 and other requirements",
+                "California RPE route: a relevant master’s or equivalent, 300 hours of supervised clinical practicum across three settings, and 36 weeks full-time or 72 weeks part-time supervised professional experience. California-based RPE requires a temporary license. Praxis minimum: 162. The board lists separate routes for equivalent qualifications, out-of-state licensees and foreign education.",
                 "Complete requirements such as an examination within 5 years and fingerprints are verified separately",
                 "Not generalized nationwide or to China"
               ],
@@ -30670,18 +30656,18 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "BLS is occupational background, state regulators and ASHA are qualification entries and the Chinese NHC is team duty background, and none is falsely presented as a current employer position or wage contract.",
-              "Insufficient evidence: this round's bounded gov, NHC and edu queries did not obtain three precise complete amounts for Chinese speech-language pathologists, with the amount n=0; commercial aggregation or the broad rehabilitation category does not substitute for a precise match."
+              "In June 2026, Zhejiang Rehabilitation Hospital advertised seven agency-hire pediatric rehabilitation posts; one explicitly included speech therapy and articulation work. It asked for a relevant bachelor’s degree or higher, a junior rehabilitation credential or above (some flexibility for strong applicants), and at least three years of pediatric rehabilitation experience. The notice gave no pay amount.",
+              "LIH Healthcare lists a senior speech therapist example in Beijing, Shanghai, Shenzhen and Kunming. The listing asks for a bachelor’s degree or above in speech-language pathology, the specified license and at least three years of clinical speech therapy experience with children with special needs. It gives no pay amount; verify availability with the employer.",
+              "Fujian Vocational College of Art posted a Fuzhou Aixingyu Rehabilitation Medical Center speech rehabilitation assistant placement for students in relevant fields. It lists a CNY 600–800 monthly internship stipend. This is an assistant placement, not therapist pay."
             ]
           },
           "id": "speech-language-pathologists.path.recruitment-sample.1",
           "source_refs": [
-            "bls",
-            "employer",
-            "cnclass",
-            "editor"
+            "slp-zhejiang",
+            "slp-lih",
+            "slp-fuzhou"
           ],
-          "title": "Recruitment amount sample boundaries",
+          "title": "Mainland examples: clinical jobs, senior roles and a student placement",
           "type": "notice"
         },
         {
@@ -30891,7 +30877,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Usually a relevant master's degree and supervised clinical training, applying for a licence in the target state; the CCC is independent. Chinese rehabilitation teams are verified for local qualifications separately and are not mutually recognized through U.S. standards."
+              "Check U.S. state licensure and mainland China employer requirements separately. A shared job title does not establish local eligibility."
             ]
           },
           "id": "speech-language-pathologists.path.career-path-block.20",
@@ -32226,7 +32212,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The U.S. 2025–2035 projection for this occupation is growth of 17%, with an annual average of about 12500 openings including replacements, which cannot imply individual hiring or Chinese headcount. China's precise wages, employment and AI net effects were not obtained, and practice licensure and demand statistics stand separately."
+              "The U.S. 2025–2035 projection for this occupation is growth of 16.6%, with an annual average of about 12500 openings including replacements, which cannot imply individual hiring or Chinese headcount. China's precise wages, employment and AI net effects were not obtained, and practice licensure and demand statistics stand separately."
             ]
           },
           "id": "speech-language-pathologists.market-signals.market-signal-card.8",
@@ -32280,7 +32266,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "29-1127 is projected at 17%, from a base of 193400 to 225500 in 2035, a net 32100."
+              "29-1127 is projected at 16.6%, from a base of 193400 to 225500 in 2035, a net 32100."
             ]
           },
           "id": "speech-language-pathologists.market-signals.market-signal-card.11",
@@ -32352,7 +32338,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "17%, 2025–2035 projection"
+              "16.6%, 2025–2035 projection"
             ]
           },
           "id": "speech-language-pathologists.market-signals.market-signal-card.15",
@@ -33071,9 +33057,9 @@
                 ]
               },
               {
-                "answer": "The regulator lists a relevant master's degree and so on, 300 supervised clinical hours across three settings, 36 full-time or 72 part-time weeks under the temporary RPE licence, Praxis162 and other requirements; this is that state only and the complete process follows the regulator.",
+                "answer": "California RPE route: a relevant master’s or equivalent, 300 hours of supervised clinical practicum across three settings, and 36 weeks full-time or 72 weeks part-time supervised professional experience. California-based RPE requires a temporary license. Praxis minimum: 162. The board lists separate routes for equivalent qualifications, out-of-state licensees and foreign education.",
                 "id": "speech-language-pathologists.faq.3",
-                "question": "What is an example of the full California licence?",
+                "question": "What does California’s RPE route require?",
                 "question_key": "career.faq.speech-language-pathologists.q3",
                 "source_refs": [
                   "employer"
@@ -33090,7 +33076,7 @@
                 ]
               },
               {
-                "answer": "The May2025 national median is 97870 dollars/year, the 2025–2035 projection is 17% and the annual average of about 12500 openings includes replacements; this is not a starting salary, individual net pay or 12500 net additions.",
+                "answer": "The May2025 national median is 97870 dollars/year, the 2025–2035 projection is 16.6% and the annual average of about 12500 openings includes replacements; this is not a starting salary, individual net pay or 12500 net additions.",
                 "id": "speech-language-pathologists.faq.5",
                 "question": "How should the U.S. wages and prospects be read?",
                 "question_key": "career.faq.speech-language-pathologists.q5",
@@ -33100,17 +33086,19 @@
                 ]
               },
               {
-                "answer": "Insufficient evidence: three precise complete amounts for this Chinese occupation were not obtained, with the amount n=0; the existing bounded query limits are retained. Medical rehabilitation employers may refer to the 2025 health and social work non-private 146,266 and private 75,631 yuan pre-tax annual average; school education employers may also refer to education non-private 133,539 and private 63,908 yuan. All are industry all-employed populations and are not this occupation's wage range or qualification proof, and are not converted into amount samples for this occupation.",
+                "answer": "Neither therapy posting gives a salary amount. The CNY 600–800 monthly payment is for the Fuzhou student assistant placement. Comparable nationwide therapist pay in China was not established.",
                 "id": "speech-language-pathologists.faq.6",
-                "question": "Are there three precise Chinese amounts?",
+                "question": "Is comparable speech therapist pay available for mainland China?",
                 "question_key": "career.faq.speech-language-pathologists.us-pay",
                 "source_refs": [
-                  "nbs",
-                  "cnclass"
+                  "slp-zhejiang",
+                  "slp-lih",
+                  "slp-fuzhou",
+                  "nbs"
                 ]
               },
               {
-                "answer": "Insufficient evidence: direct empirical evidence of this occupation's AI adoption effects and net job substitution was not obtained. Generated documents must be reviewed by professionals, and tools do not grant licences or replace clinical responsibility; ethical guidance is not an adoption survey.\nU.S. SOC29-1127 overall projections, BLS2025 to 2035: a 2025 base of 193,400 people and a 2035 end of 225,500 people, a net increase of 32,100; the OOH rounds the growth to 17%, with an annual average of 12,500 openings including transfers, exits and replacements. The projection and salaried wage coverage differ, so this is not current recruitment, AI causality, a clinical effect or an individual unemployment probability.",
+                "answer": "No. The clinician must review generated content and remains accountable for sign-off. For real records, check institutional, payer and local requirements. ASHA’s guidance does not measure clinical adoption or employment effects.",
                 "id": "speech-language-pathologists.faq.7",
                 "question": "Can AI sign clinical conclusions?",
                 "question_key": "career.faq.speech-language-pathologists.education-path",
@@ -33121,18 +33109,18 @@
                 ]
               },
               {
-                "answer": "Following L3, only the current v2 rows that are complete, signed and have clear minutes are counted: 20+16+12=48; Q2 is not double-counted as 18, Q3 is planned, unsigned and missing a value and is not treated as 0, and the three-item subtotal is not the total.",
+                "answer": "Mark the inclusion criteria in the scenario and retain original records before calculating. Open the named reference after submitting for the worked answer.",
                 "id": "speech-language-pathologists.faq.8",
-                "question": "Why is the L subtotal 48min?",
+                "question": "How do you check a subtotal of minutes?",
                 "question_key": "career.faq.speech-language-pathologists.credentials",
                 "source_refs": [
                   "editor"
                 ]
               },
               {
-                "answer": "The current 12 has not been replaced by draft 14, so it is still 48; only a future confirmation by B and signature by A of the replacement gives 50. The complete and signed numbers are still 3/4=75%, which is a recording rate, not a treatment effect.",
+                "answer": "Keep the original and the draft separate, and check who confirms and who signs. Hand both versions and open items to the people designated in the scenario.",
                 "id": "speech-language-pathologists.faq.9",
-                "question": "How should the 14 draft and the 75% be explained?",
+                "question": "How do you hand over a new draft?",
                 "question_key": "career.faq.speech-language-pathologists.risk-boundary",
                 "source_refs": [
                   "editor"
@@ -33146,6 +33134,15 @@
                 "source_refs": [
                   "editor",
                   "employer"
+                ]
+              },
+              {
+                "answer": "Five rows and four numbers, Q2 has v1/v2; take v2 as the current version under L3, and 18 and 16 cannot be added twice. r4 is planned, unsigned and missing minutes, and cannot be treated as 0 and counted as complete. The currently verifiable minutes are r1/r3/r5: 20+16+12=48min, which is the subtotal of the three records meeting the conditions, not the total minutes of the five rows or the total service volume; the unknown r4 is kept. The completion recording rate numerator Q1/Q2/Q4 is 3, and the denominator of different numbers Q1 to Q4 is 4, giving 3/4=75%. Five rows are not used as the denominator, and this is not called a treatment response rate or real patient completion. The r5 v3 draft 14 is unconfirmed and unsigned, so it is still 48min and 75%; only when the two L4 conditions are met in future does 20+16+14=50min, and the number of complete and signed numbers is still 3, so it remains 3/4=75%, and a change in minutes does not mean a change in treatment effect. Four pending items and two owners: A handles the Q2 version; B verifies the Q3 status and missing minutes separately; A coordinates confirmation of the Q4 draft with B and signs the replacement. Keep all five rows, the signed 12 and draft 14. The denominator remains four unique IDs. Deadline October 4 at 15:00; receipt unconfirmed.",
+                "id": "speech-language-pathologists.faq.11",
+                "question": "L1–L5 records review reference (open after submitting)",
+                "question_key": "career.faq.speech-language-pathologists.q11",
+                "source_refs": [
+                  "editor"
                 ]
               }
             ]
@@ -33335,7 +33332,7 @@
                 "period": "May2025 wages; 2025–2035 projection; accessed 2026-10-01",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
-                "url": "https://www.bls.gov/ooh/healthcare/speech-language-pathologists.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -33372,12 +33369,12 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "The 2011 management guideline team division of labor, not this occupation's precise licence or wages; this round direct web opening failed, and the public browser original text verified the eighth article and the twelfth article",
+                  "Articles 8 and 12 of the 2011 guidance describe rehabilitation team responsibilities in general hospitals. The guidance does not establish this occupation’s pay or licensure.",
                   "Supports only its occupational, jurisdictional, material or payment scope, not individual hiring or a clinical competence guarantee."
                 ],
                 "evidence_type": "official or professional guidance",
                 "id": "cnclass",
-                "limitation": "The 2011 management guideline team division of labor, not this occupation's precise licence or wages; this round direct web opening failed, and the public browser original text verified the eighth article and the twelfth article",
+                "limitation": "Articles 8 and 12 of the 2011 guidance describe rehabilitation team responsibilities in general hospitals. The guidance does not establish this occupation’s pay or licensure.",
                 "market": "Mainland China",
                 "name": "The division of labor in Chinese rehabilitation medicine departments",
                 "period": "Public materials; accessed 2026-10-01",
@@ -33468,7 +33465,7 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "Only the general methods or enterprise survey subjects are reused, and no claim is made that everything was re-read this round.",
+                  "General technology research, not evidence of outcomes in this occupation.",
                   "Potential processing does not equal clinical effectiveness, licensure or real adoption."
                 ],
                 "evidence_type": "official research",
@@ -33484,12 +33481,12 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "Five rows and four numbers, v2, complete and signed with clear minutes; the 48 subtotal and the 75% recording rate do not equal a treatment effect.",
-                  "A signs versions and B confirms data, draft 14 does not replace 12, and only both future conditions give 50 with the rate still 75%."
+                  "L1–L5 is a fictional paper record exercise designed by the editors, rather than a clinical trial.",
+                  "Check versions, record rates, verified minutes and handover separately."
                 ],
                 "evidence_type": "editorial exercise",
                 "id": "editor",
-                "limitation": "Paper only and no diagnosis or treatment, 5 rows and 4 numbers, 48 current and 50 conditional, 3/4=75%, four pending items and two responsible people",
+                "limitation": "Fictional paper exercise. It does not assess clinical ability.",
                 "market": "Fictional paper work",
                 "name": "Author L1 to L5 fictional records",
                 "period": "Original, 2026-10-01",
@@ -33500,12 +33497,12 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "Only the general methods or enterprise survey subjects are reused, and no claim is made that everything was re-read this round.",
+                  "General technology research, not evidence of outcomes in this occupation.",
                   "Potential processing does not equal clinical effectiveness, licensure or real adoption."
                 ],
                 "evidence_type": "official voluntary framework",
                 "id": "nist",
-                "limitation": "NIST600-1 re-checks erroneous content and material risk this round and does not provide real SLP adoption or substitution rates.",
+                "limitation": "NIST describes generated-content errors and data risks. It does not measure adoption or displacement in this occupation.",
                 "market": "U.S. / methodological reference",
                 "name": "NIST AI600-1 generative AI risk framework",
                 "period": "2024-07",
@@ -33516,7 +33513,7 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "Only the general methods or enterprise survey subjects are reused, and no claim is made that everything was re-read this round.",
+                  "General technology research, not evidence of outcomes in this occupation.",
                   "Potential processing does not equal clinical effectiveness, licensure or real adoption."
                 ],
                 "evidence_type": "research paper",
@@ -33532,7 +33529,7 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "Only the general methods or enterprise survey subjects are reused, and no claim is made that everything was re-read this round.",
+                  "General technology research, not evidence of outcomes in this occupation.",
                   "Potential processing does not equal clinical effectiveness, licensure or real adoption."
                 ],
                 "evidence_type": "employer expectations",
@@ -33548,12 +33545,12 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "A master's degree and so on, 300 hours across three settings, RPE temporary licence 36/72 weeks, Praxis162 and other requirements; a that-state example only",
+                  "California RPE route: a relevant master’s or equivalent, 300 hours of supervised clinical practicum across three settings, and 36 weeks full-time or 72 weeks part-time supervised professional experience. California-based RPE requires a temporary license. Praxis minimum: 162. The board lists separate routes for equivalent qualifications, out-of-state licensees and foreign education.",
                   "Supports only its occupational, jurisdictional, material or payment scope, not individual hiring or a clinical competence guarantee."
                 ],
                 "evidence_type": "official or professional guidance",
                 "id": "employer",
-                "limitation": "A master's degree and so on, 300 hours across three settings, RPE temporary licence 36/72 weeks, Praxis162 and other requirements; a that-state example only",
+                "limitation": "California only. See the state board for the applicable application route.",
                 "market": "California, United States",
                 "name": "California SLP licence path",
                 "period": "Public materials; accessed 2026-10-01",
@@ -33707,20 +33704,90 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Assess communication function — 50/100; weight=1/3; speech-language-pathologists.profile.responsibilities-block.1[0]",
-                  "Treat speech language and communication disorders — 25/100; weight=1/3; speech-language-pathologists.profile.definition-block.11[0]",
-                  "Document service progress and review changes — 75/100; weight=1/3; speech-language-pathologists.profile.responsibilities-block.1[2]"
+                  "Try record formats on fictional material first.",
+                  "Verify versions, omissions and generated content.",
+                  "Keep assessment and signing with authorized people.",
+                  "Use institution-approved permissions for real records.",
+                  "No measured adoption, treatment effect or replacement rate."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "Career exploration only; no measured adoption or treatment effect.",
+                "name": "FermatMind: limits on tool use",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In June 2026, Zhejiang Rehabilitation Hospital advertised seven agency-hire pediatric rehabilitation posts; one explicitly included speech therapy and articulation work. It asked for a relevant bachelor’s degree or higher, a junior rehabilitation credential or above (some flexibility for strong applicants), and at least three years of pediatric rehabilitation experience. The notice gave no pay amount."
+                ],
+                "evidence_type": "primary_document",
+                "id": "slp-zhejiang",
+                "limitation": "One recruitment example; no pay amount.",
+                "name": "Zhejiang Rehabilitation Hospital pediatric rehabilitation posting",
+                "period": "2026-06-03",
+                "publisher": "Zhejiang Rehabilitation Hospital",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zjmzkf.cn/M/rczp/show/id/1746.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "LIH Healthcare lists a senior speech therapist example in Beijing, Shanghai, Shenzhen and Kunming. The listing asks for a bachelor’s degree or above in speech-language pathology, the specified license and at least three years of clinical speech therapy experience with children with special needs. It gives no pay amount; verify availability with the employer."
+                ],
+                "evidence_type": "primary_document",
+                "id": "slp-lih",
+                "limitation": "Employer-specific example; current availability unverified.",
+                "name": "LIH Healthcare senior speech therapist",
+                "period": "Undated",
+                "publisher": "LIH Healthcare",
+                "scope": "recruitment_proxy",
+                "url": "https://www.lih-invest.com/joinus/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Fujian Vocational College of Art posted a Fuzhou Aixingyu Rehabilitation Medical Center speech rehabilitation assistant placement for students in relevant fields. It lists a CNY 600–800 monthly internship stipend. This is an assistant placement, not therapist pay."
+                ],
+                "evidence_type": "primary_document",
+                "id": "slp-fuzhou",
+                "limitation": "Internship stipend only.",
+                "name": "Fuzhou Aixingyu student speech rehabilitation assistant placement",
+                "period": "2026-04-10",
+                "publisher": "Fujian Vocational College of Art careers site",
+                "scope": "recruitment_proxy",
+                "url": "https://www.fjys.edu.cn/jyfw/2026/0410/c373a100925/page.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "ASHA’s CCC-SLP is a professional certification with a separate mentored Clinical Fellowship. State boards issue licenses; check both application routes if educated abroad."
+                ],
+                "evidence_type": "primary_document",
+                "id": "slp-asha-path",
+                "limitation": "Separate from state licensure.",
+                "name": "ASHA certification pathway",
+                "period": "Current guidance",
+                "publisher": "ASHA",
+                "scope": "exact",
+                "url": "https://www.asha.org/certification/speech-language-pathology-pathway-to-certification/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Effective September 1, 2026, WS/T 893–2026 covers home-bed rehabilitation delivered by primary healthcare institutions. Section 6.4.3 covers speech, language, cognitive communication and augmentative communication within that service."
+                ],
+                "evidence_type": "primary_document",
+                "id": "slp-homebed",
+                "limitation": "This standard neither grants credentials nor governs every healthcare, school or rehabilitation role.",
+                "name": "NHC: WS/T 893–2026 home-bed rehabilitation",
+                "period": "2026-09-01",
+                "publisher": "National Health Commission",
+                "scope": "exact",
+                "url": "https://www.nhc.gov.cn/fzs/c100048/202603/a7d6e2615e9e474fba624d2e0e5bfc83/files/WST%20893%E2%80%942026.pdf"
               }
             ]
           },
@@ -38561,7 +38628,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit speech-language pathologists",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -38777,7 +38844,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "Where can AI help with documentation?",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38881,16 +38948,16 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "17%",
+        "derivation": "BLS Table 1.2 reports 16.6%; the Occupational Outlook Handbook rounds it to 17%.",
+        "display_value": "16.6%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "2025–2035 employment growth",
         "occupation_scope": "U.S. 29-1127 speech-language pathologists",
         "period": "2025–2035 projection",
         "source_refs": [
-          "bls",
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
@@ -39085,27 +39152,15 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Speech-language pathologists",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and speech-language pathology tasks"
     },
     "badges": [
       "Communication and swallowing · Professional assessment and treatment",
@@ -39141,7 +39196,7 @@
         "availability": "available",
         "fact_ref": "cn-health-social-nonprivate-reference-2025",
         "key": "china_pay",
-        "label": "2025 non-private health and social work annual average reference (not an occupational wage)"
+        "label": "Health and social work: annual average at urban non-private units"
       }
     ]
   },
@@ -39149,17 +39204,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Understanding the assessment and treatment and team record duties of speech-language pathologists, the difference between U.S. state licensure and ASHA certification, and Chinese rehabilitation team authority, checking the 2025 wages and the 2025–2035 projection, and using fully fictional records to practise observing material checking and handover habits."
+      "text": "Explore what speech-language pathologists do in schools and hospitals, mainland China job examples, U.S. licensure and pay, and a fictional communication-record exercise."
     },
     "title": {
       "availability": "available",
       "text": "Speech-language pathologists"
     }
   },
-  "source_content_sha256": "529f1ad3de4a2a08d57f7b04e1b657c6fd2580895f1e03e12f9fcba3047f9d5c",
+  "source_content_sha256": "04ce3b4e4565953428eaab94a95a64abee9a2c236f5c7edc8290dbde363f798b",
   "subject": {
     "canonical_slug": "speech-language-pathologists",
     "name": "Speech-language pathologists",
-    "summary": "Speech-language pathologists correspond to U.S. 29-1127.00 and assess and treat communication disorders involving speech, language, voice and fluency, and the work may also involve swallowing and augmentative communication. Work must be carried out according to the practising state's licence, personal professional competence and the service setting; ASHA certification does not equal a state licence, and the Chinese name does not automatically confer a Chinese physician qualification. Only a high-level occupational overview is given below, and the fictional exercises do not diagnose or treat."
+    "summary": "Speech-language pathologists assess and treat communication difficulties. Some roles also address swallowing. Schools focus on access to learning, while hospital work emphasizes clinical assessment and handover. Check the job duties, training requirements and supervision in your target setting."
   }
 }

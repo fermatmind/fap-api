@@ -2,6 +2,15 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:dws-parent-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:dws-parent-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:dws-parent-openings": {
+        "status": "pending_mapping"
+      },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
@@ -18,6 +27,12 @@
         "status": "pending_mapping"
       },
       "fact:path-parent": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-dws-beijing": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-dws-yixun": {
         "status": "pending_mapping"
       },
       "fact:r5-current-market": {
@@ -7301,7 +7316,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "低风险验证：用本页完全虚构的订单与客户材料完成一次「定义目标粒度—设计维度与事实—写出接收、隔离与排除规则—计算并核对三类行数与原始记录金额」练习，只判断工作偏好；练习不接触真实客户数据、密钥或生产连接，不等同岗位培训合格或数据授权。"
+              "低风险验证：自建一小份完全虚构的订单与客户数据，用这些数据完成一次「定义目标粒度—设计维度与事实—写出接收、隔离与排除规则—计算并核对三类行数与原始记录金额」练习，只判断工作偏好；练习不接触真实客户数据、密钥或生产连接，不等同岗位培训合格或数据授权。"
             ]
           },
           "id": "data-warehousing-specialists.quick-decision.fermat-decision-card.3",
@@ -7755,12 +7770,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑合同核对：岗位职级、合同主体、月薪/奖金/工时与外包安排；本轮无真实在招样本，不宣称全职或某付薪形式占主流。"
+              "广东亿迅科技的校园招聘将数仓建设、ETL 和建模列入大数据开发工程师职责，公告列 9,000–13,000 元/月，要求计算机相关本科及以上。中国人民银行官网另一份附件列北京数据仓库研发工程师 1 名，要求硕士研究生及以上，涉及数据集市、ETL 和质量监控，未列工资。两个历史岗位不能代表全国工资或学历门槛。"
             ]
           },
           "id": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "r5-nbs-it"
+            "dws-yixun",
+            "dws-beijing"
           ],
           "type": "prose"
         },
@@ -7783,13 +7799,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "数据缺口不表示没有报价：保存原公告、工资组成、岗位范围与访问日期，并区分税前税后、计薪周期与统计期，不以行业或邻近职业数值替代，也不做汇率换算。"
+              "比对岗位时确认月薪是税前还是税后、是否另有奖金、用工主体及值班要求；不按美国数据折算。"
             ]
           },
           "id": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "r5-editorial-dws",
-            "r5-nbs-it"
+            "dws-yixun",
+            "dws-beijing"
           ],
           "type": "prose"
         }
@@ -7967,7 +7983,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "验证动作：用本页完全虚构的订单与客户材料完成一次「定义粒度—设计维度与事实—写分流规则—核对三类行数与金额」练习，或一次真实需求澄清练习，再判断偏好；练习不接触真实数据与生产连接。"
+              "验证动作：自建一小份完全虚构的订单与客户数据，用这些数据完成一次「定义粒度—设计维度与事实—写分流规则—核对三类行数与金额」练习，或一次真实需求澄清练习，再判断偏好；练习不接触真实数据与生产连接。"
             ]
           },
           "id": "data-warehousing-specialists.fit.riasec-fit-block.5",
@@ -8148,7 +8164,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "自身任务/所需学历意见与父代理工资/就业分开；中国实际职责对照未核一一对应分類或真实招聘。中国含可识别个人信息处理应核PIPL13合法依据（非一律同意）、6最小必要/8质量、51合理权限与定期安全培训；账号不代合法依据。21外包委托范围/监督/转委托条件和59受托安全协助分别核，单位制度不取代法律。"
+              "自身任务/所需学历意见与父代理工资/就业分开；已核两条中国大陆历史招聘，用于对照实际任务；尚未核实一对一职业分类或当前空缺。中国含可识别个人信息处理应核PIPL13合法依据（非一律同意）、6最小必要/8质量、51合理权限与定期安全培训；账号不代合法依据。21外包委托范围/监督/转委托条件和59受托安全协助分别核，单位制度不取代法律。"
             ]
           },
           "id": "data-warehousing-specialists.path.career-path-block.3",
@@ -8440,7 +8456,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "官方父预测、真实单位安排与当期招聘样本分开；业务量/数据决策为编辑待调查条件，非已证实决定岗位分布；本轮无中国真实招聘。"
+              "官方父预测、真实单位安排与当期招聘样本分开；业务量/数据决策为编辑待调查条件，非已证实决定岗位分布；本页有两条历史招聘，不能推断当前空缺或市场分布。"
             ]
           },
           "fact_refs": [
@@ -8513,23 +8529,24 @@
           "data": {
             "entries": [
               {
-                "answer": "设计、建模或实施企业数据仓库活动，为数据库信息仓库编程与配置，并向仓库用户提供支持：开发包含来源、装载、转换与抽取的仓库过程模型；核对结构与准确性；在来源系统、数据仓库与数据市场之间映射数据；设计并实现仓库结构；创建元数据与文档、编写测试脚本、排查故障并支持用户。",
+                "answer": "数仓工作从理解源字段开始：定好数据粒度和映射，用 ETL 抽取、转换与装载，核对行数、重复与关键指标，再发布数据表和维护说明。失败时定位源数据、转换逻辑或调度问题，并验证重跑不会重复计数。",
                 "id": "data-warehousing-specialists.faq.1",
-                "question": "数据仓库专家：日常工作如何形成闭环？",
+                "question": "数据仓库专家每天做什么？",
                 "question_key": "career.faq.data-warehousing-specialists.daily-work",
                 "source_refs": [
-                  "onet-dws"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "数据库管理员偏数据库运行、性能、容量与访问安全；数据库架构师偏体系级数据架构与标准设计（本页薪资与就业即其代理口径）；数据科学家偏建模与结论解释；商业智能分析师偏指标与报表交付；计算机系统分析师与系统工程师偏业务系统与流程分析；数据仓库专家偏分析数据层的模型、装载、质量与可用性。",
+                "answer": "数仓岗位主要交付可核对的数据表和装载链路；DBA 主要管库的可用、恢复和权限；数据库架构师主要定跨系统模型与标准；BI 分析岗通常用数据解答业务问题。分工可重叠，面试时问谁写映射、谁定指标、谁对故障负责。",
                 "id": "data-warehousing-specialists.faq.2",
-                "question": "数据仓库专家：它与相邻职业有什么区别？",
+                "question": "数仓、DBA、数据库架构和 BI 有什么区别？",
                 "question_key": "career.faq.data-warehousing-specialists.role-comparison",
                 "source_refs": [
-                  "onet-dws",
+                  "r5-onet-current",
                   "onet-dba",
-                  "onet-sys"
+                  "r5-target-dbarch",
+                  "r5-target-bi"
                 ]
               },
               {
@@ -8553,23 +8570,24 @@
                 ]
               },
               {
-                "answer": "美国 2025 年 5 月工资中位年薪 139,500 美元（67.07 美元/时），第 10 分位 86,240 美元、第 90 分位 204,000 美元；该页明确标注为父职业 Database Architects（15-1243.00）代理口径，不是本细分精确工资，分位也不是个人报价。中国大陆未取得职业级数值，本页按证据缺口处理，不以行业均值或报价样本代填。",
+                "answer": "美国 2025 年 $67.07/小时和 $139,500/年为数据库架构师父组中位数，不能当成数仓细类或中国工资。 广东亿迅科技的校园招聘将数仓建设、ETL 和建模列入大数据开发工程师职责，公告列 9,000–13,000 元/月，要求计算机相关本科及以上。中国人民银行官网另一份附件列北京数据仓库研发工程师 1 名，要求硕士研究生及以上，涉及数据集市、ETL 和质量监控，未列工资。两个历史岗位不能代表全国工资或学历门槛。",
                 "id": "data-warehousing-specialists.faq.5",
-                "question": "数据仓库专家：工资怎样比较才不失真？",
+                "question": "数仓工资数据和招聘报价怎么看？",
                 "question_key": "career.faq.data-warehousing-specialists.pay",
                 "source_refs": [
-                  "bls-dbarch-wage",
-                  "nbs-wages"
+                  "r5-wages-current",
+                  "dws-yixun",
+                  "dws-beijing"
                 ]
               },
               {
-                "answer": "O*NET 15-1243.01 准备层级为 Job Zone Four（SVP 7.0 至低于 8.0），教育调查显示 78% 要求学士学位、4% 要求高中或同等学历、4% 要求中等后证书；BLS 职业展望手册的父职业口径通常要求计算机或信息技术相关学士学位。中国大陆多要求信息技术相关专业背景与项目能力，具体按目标单位规定。",
+                "answer": "先核目标职位的学历：两个历史样本分别要求相关本科及以上、硕士研究生及以上。可用公开数据做一个可重跑的小数仓，展示数据粒度、装载日志和对账。",
                 "id": "data-warehousing-specialists.faq.6",
-                "question": "数据仓库专家：需要什么学历与训练？",
+                "question": "做数仓需要什么学历和练习？",
                 "question_key": "career.faq.data-warehousing-specialists.education",
                 "source_refs": [
-                  "onet-dws",
-                  "bls-dbarch-path"
+                  "dws-yixun",
+                  "dws-beijing"
                 ]
               },
               {
@@ -8583,7 +8601,7 @@
                 ]
               },
               {
-                "answer": "先用本页完全虚构的订单与客户材料完成一次「定义目标粒度—设计维度与事实—写出接收、隔离与排除规则—计算并核对三类行数与原始记录金额」练习，数字应与题目给定材料一致；练习不接触真实数据、密钥或生产连接。",
+                "answer": "先自建一小份完全虚构的订单与客户数据，用这些数据完成一次「定义目标粒度—设计维度与事实—写出接收、隔离与排除规则—计算并核对三类行数与原始记录金额」练习，用自行创建的输入合计核对结果；练习不接触真实数据、密钥或生产连接。",
                 "id": "data-warehousing-specialists.faq.8",
                 "question": "数据仓库专家：零基础可以先做什么练习？",
                 "question_key": "career.faq.data-warehousing-specialists.work-sample",
@@ -8592,13 +8610,12 @@
                 ]
               },
               {
-                "answer": "O*NET 就业趋势页（数据为父职业 Database Architects）显示 2024 年约 66,900 人、2034 年约 72,700 人、2024—2034 年增长 9%、年均约 4,000 个含增长与更替的空缺；BLS 职业展望手册的合并口径为 2025 年约 144,500 人、2025—2035 年增长 4%、年均约 7,300 个空缺。两套口径期间与人群不同，分别引用不合并，也不代表个人录用概率。",
+                "answer": "美国数据库架构师父组（SOC 15-1243）就业预计从 2025 年约 69,500 人增至 2035 年约 76,000 人（+9.4%），年均约 3,900 个空缺，含替补。数仓细类 15-1243.01 无单列预测。",
                 "id": "data-warehousing-specialists.faq.9",
-                "question": "数据仓库专家：就业前景怎样读？",
+                "question": "数据仓库专家的美国就业前景怎么看？",
                 "question_key": "career.faq.data-warehousing-specialists.outlook",
                 "source_refs": [
-                  "bls-dbarch-outlook",
-                  "bls-dbarch-wage"
+                  "r5-bls-current"
                 ]
               },
               {
@@ -8789,21 +8806,19 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "支持父职业 Database Architects 2024 年约 66,900 人、2034 年约 72,700 人、2024—2034 年增长 9%（远快于平均）、年均约 4,000 个含增长与更替的空缺。",
-                  "O*NET 就业趋势页明确标注该数据为 Database Architects（父职业）口径。",
-                  "本轮当前2025—2035父代理9.4%、3900；自身任务/学历意见与父统计分开，保护旧事实仍保留"
+                  "美国数据库架构师父组（SOC 15-1243）就业预计从 2025 年约 69,500 人增至 2035 年约 76,000 人（+9.4%），年均约 3,900 个空缺，含替补。数仓细类 15-1243.01 无单列预测。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "bls-dbarch-outlook",
                 "limitation": "这是父职业代理口径；BLS 职业展望手册的合并口径（2025—2035 年增长 4%）期间与人群不同，不能与本页数字合并使用。",
                 "market": "美国",
                 "name": "O*NET OnLine：Data Warehousing Specialists 就业趋势（数据为 Database Architects）",
-                "period": "2024—2034 年预测期；检索 2026-09-19",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/15-1243.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -8967,7 +8982,7 @@
                 "url": "https://www.onetonline.org/link/summary/15-1211.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "18任务均核心；19风格Impact细节100尽责87好奇72谨慎69正直69，非比例。CI评分C90I63E34R32S17A10非员工人格。学历78学士4高中4中等后证书为所需意见非员工构成；Updated非统一调查年。工资/就业/行业按15-1243父职业代理。"
                 ],
@@ -9012,16 +9027,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/15-1243.01"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "15-1243：2025 69.5千→2035 76.0千，+6.5千/+9.4%、年均3.9千空缺、自雇2.1%；不是数据仓库自身统计或OOH数据库管理员与架构师合并。典型学士/少于5年相关经验/无在岗训练类别非固定最少年资或中国法律。"
+                  "美国数据库架构师父组（SOC 15-1243）就业预计从 2025 年约 69,500 人增至 2035 年约 76,000 人（+9.4%），年均约 3,900 个空缺，含替补。数仓细类 15-1243.01 无单列预测。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r5-bls-current",
                 "limitation": "15-1243：2025 69.5千→2035 76.0千，+6.5千/+9.4%、年均3.9千空缺、自雇2.1%；不是数据仓库自身统计或OOH数据库管理员与架构师合并。典型学士/少于5年相关经验/无在岗训练类别非固定最少年资或中国法律。",
                 "market": "美国",
                 "name": "BLS表1.2：数据库架构师父职业预测",
-                "period": "2025基期/2025—2035预测；检索2026-10-09",
+                "period": "2025–2035",
                 "publisher": "Bureau of Labor Statistics",
                 "scope": "parent proxy",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -9192,6 +9207,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "9,000–13,000 元/月；数仓建设、ETL、模型，计算机相关本科及以上。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "dws-yixun",
+                "limitation": "历史样本，非全国工资或当前空缺。",
+                "market": "中国大陆",
+                "name": "广东亿迅科技：大数据开发工程师校园招聘",
+                "period": "2025-09–2026-04",
+                "publisher": "福州外语外贸学院",
+                "scope": "recruitment_proxy",
+                "url": "https://www.fzfu.com/bigdata/info/1058/4870.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "北京 1 名，硕士研究生及以上；数据集市、ETL、质量监控；未列薪资。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "dws-beijing",
+                "limitation": "历史样本，非全国工资或当前空缺。",
+                "market": "中国大陆",
+                "name": "北京数据仓库研发工程师招聘附件",
+                "period": "2025-12",
+                "publisher": "中国人民银行官网",
+                "scope": "recruitment_proxy",
+                "url": "https://www.pbc.gov.cn/renshisi/144501/144513/5836227/5836240/2025121214564112292/2025121214560356519.pdf"
               }
             ]
           },
@@ -9338,12 +9383,12 @@
           },
           {
             "关键区别": "核心责任是数据层口径一致、装载可重跑、质量可验证、血缘可追溯；本页只覆盖该单一职业口径。",
-            "更适合什么选择": "先用本页虚构订单材料完成一次分流与对账练习，不接触真实数据与生产连接。",
+            "更适合什么选择": "先用自行创建的虚构订单数据完成一次分流与对账练习，不接触真实数据与生产连接。",
             "核心工作与产出": "设计、建模或实施企业数据仓库活动，为数据库信息仓库编程与配置，并向仓库用户提供支持。",
             "职业方向": "数据仓库专家（15-1243.01，本职业）"
           }
         ],
-        "transition": "下一步：用本页虚构订单材料跟做一次粒度设计、分流与对账，核对目标方向的职责范围、数据授权与责任边界，再决定方向。"
+        "transition": "下一步：用自行创建的虚构订单数据跟做一次粒度设计、分流与对账，核对目标方向的职责范围、数据授权与责任边界，再决定方向。"
       },
       "ai_impact_table": {
         "action_rows": [
@@ -9821,7 +9866,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "美国自身O*NET任务/教育意见与BLS父代理准备分开；中国所读PIPL，未核真实招聘/全部行业或跨境配套",
+          "jurisdiction": "美国自身O*NET任务/教育意见与BLS父代理准备分开；大陆列两条历史招聘，未核全国行业分布和跨境配套；个人信息规则按具体情境核对",
           "summary": {
             "$item": "data-warehousing-specialists.path.career-path-block.3",
             "block": "path",
@@ -10292,7 +10337,7 @@
               "field": "url",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
-            "id": "onet-dws",
+            "id": "r5-onet-current",
             "label": {
               "$source": "r5-onet-current",
               "block": "source-register",
@@ -10406,22 +10451,22 @@
             {
               "学历段": "目标公告的学历与训练条件（编辑核对项）",
               "岗位方向": "按实际数据开发/支持职责核对，不由专科本科分配",
-              "说明": "本轮未取得中国学历与岗位分布/招聘样本；这里只列目标单位需核条件，不构成全国规律。"
+              "说明": "两条历史招聘只说明各自岗位条件，未核大陆全国学历与岗位分布。"
             },
             {
               "学历段": "数据建模、装载与测试训练（编辑核对项）",
               "岗位方向": "按目标仓库/平台职责核准备，不推本科学历即具备",
-              "说明": "本轮未取得中国学历与岗位分布/招聘样本；这里只列目标单位需核条件，不构成全国规律。"
+              "说明": "两条历史招聘只说明各自岗位条件，未核大陆全国学历与岗位分布。"
             },
             {
               "学历段": "拟承担架构或主管职责时的任命条件（编辑核对项）",
               "岗位方向": "按目标单位经验与职责核，不把学历经验组合视为统一晋级",
-              "说明": "本轮未取得中国学历与岗位分布/招聘样本；这里只列目标单位需核条件，不构成全国规律。"
+              "说明": "两条历史招聘只说明各自岗位条件，未核大陆全国学历与岗位分布。"
             },
             {
               "学历段": "拟承担治理或管理职责时的授权条件（编辑核对项）",
               "岗位方向": "另核管理范围、协作及授权，不由治理经验自动任命",
-              "说明": "本轮未取得中国学历与岗位分布/招聘样本；这里只列目标单位需核条件，不构成全国规律。"
+              "说明": "两条历史招聘只说明各自岗位条件，未核大陆全国学历与岗位分布。"
             }
           ],
           "china_industry_table": [
@@ -10448,7 +10493,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "实际所读NBS2025行业工资与PIPL；未取得本职业当期招聘/职业工资",
+          "china_open": "有两个历史招聘样本，未核实当前空缺或全国职业工资。",
           "china_ref": {
             "$join": [
               {
@@ -10469,7 +10514,7 @@
             ],
             "separator": ""
           },
-          "china_salary_note": "中国公开来源仅用于说明口径边界。",
+          "china_salary_note": "招聘样本只说明该公告所列岗位和报价。",
           "china_salary_table": [
             {
               "城市/区间": "中国大陆（全国职业级口径）",
@@ -10480,16 +10525,20 @@
               "月薪参考": "不适用（不用行业均值替代职业工资）"
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
-              "月薪参考": "证据不足：未取得可核对报价统计"
+              "城市/区间": "中国大陆历史招聘样本",
+              "月薪参考": {
+                "$item": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.2",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
             }
           ],
-          "china_soc_row": {
-            "$item": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
+          "china_soc_row": "按岗位实际交付比较，不把中美职业编码视为一一对应。",
+          "fact_refs": [
+            "posting-dws-yixun",
+            "posting-dws-beijing"
+          ],
           "sources_note": {
             "$join": [
               {
@@ -10513,7 +10562,7 @@
           "ui": {
             "ai_heading": "AI 或自动化会影响数据仓库专家的工资吗？",
             "driver_heading": "数据仓库工作怎样按发布与业务周期安排？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历、训练与岗位方向（编辑整理，不是薪资统计）",
             "scenario_heading": "不同学历与训练对应哪些岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -11249,7 +11298,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
+            "cta_label": "探索我的职业兴趣",
             "evidence_level": "工作样本",
             "id": "riasec",
             "label": "兴趣与任务",
@@ -11262,8 +11311,8 @@
           },
           {
             "answer": "编辑观察执行/学习体验，未核大五在本职业预测效度或最直接关系",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
+            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_label": "了解我的大五特质",
             "evidence_level": "工作样本",
             "id": "big-five",
             "label": "稳定执行",
@@ -11276,8 +11325,8 @@
           },
           {
             "answer": "MBTI 类工具描述偏好，不是职业分配工具；建模与方法深化、用户支持与协作的差异主要在工作形式，而不是偏好类型。请用实际体验核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
+            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "了解我的人格偏好",
             "evidence_level": "工作样本",
             "id": "mbti",
             "label": "偏好核对",
@@ -11290,8 +11339,8 @@
           },
           {
             "answer": "动机线索不同，对应的选择不同；把它当作提问工具，不当作岗位结论。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
+            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_label": "了解我的行为动机",
             "evidence_level": "工作样本",
             "id": "enneagram",
             "label": "动机观察",
@@ -11304,8 +11353,8 @@
           },
           {
             "answer": "自身O*NET JobZone4/SVP7至低于8，78%学士/4%高中/4%中等后证书是新雇员所需学历意见，非员工构成。BLS父职业典型学士/少于5年相关经验/无在岗训练类别，非固定最低年资/无需训练或中国法律。IQ类量表不代实际能力与项目观察",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
+            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_label": "了解我的推理表现",
             "evidence_level": "工作样本",
             "id": "iq",
             "label": "问题解决",
@@ -11323,8 +11372,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
+            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_label": "了解我的情绪应对",
             "evidence_level": "工作样本",
             "id": "eq",
             "label": "协作边界",
@@ -11665,7 +11714,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "测我的职业兴趣是否适合数据仓库专家",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11733,7 +11782,7 @@
             "item": "data-warehousing-specialists.source-register.published.1"
           }
         },
-        "note": "自身任务/教育意见与父代理工资/就业/行业分开；中国职业工资/招聘缺口，NBS行业背景不代个人所得"
+        "note": "O*NET 细类用于核任务；美国工资和就业来自数据库架构师父组。大陆招聘样本仅说明具体岗位，不能推断全国工资。"
       },
       "work_context_block": {
         "$join": [
@@ -11901,25 +11950,24 @@
       },
       {
         "derivation": null,
-        "display_value": "2024年约66,900人→2034年约72,700人；2024—2034年增长9%（标签「远快于平均」）；年均约4,000个含增长与更替的空缺",
+        "display_value": "美国数据库架构师父组（SOC 15-1243）就业预计从 2025 年约 69,500 人增至 2035 年约 76,000 人（+9.4%），年均约 3,900 个空缺，含替补。数仓细类 15-1243.01 无单列预测。",
         "fact_id": "market",
         "market": "美国",
         "measure": "就业预测（父职业代理口径）",
-        "occupation_scope": "父职业代理口径：O*NET 就业趋势页标注「Employment data for Database Architects」，2024 年 66,900 人、2034 年 72,700 人、2024—2034 年增长 9%、十年内年均约 4,000 个含增长与更替的空缺；不是本细分的精确就业数据，也不代表个人录用概率；BLS 职业展望手册另有数据库管理员与架构师合并口径（2025 年约 144,500 人、2025—2035 年增长 4%、年均约 7,300 个空缺），两套口径期间与人群不同，分别引用不合并",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "美国父组数据库架构师（SOC 15-1243）",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-dws",
-          "bls-dbarch-outlook"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "父职业15-1243代理：2025约69500→2035约76000，净增6500/+9.4%，年均3900空缺含增长与替换，自雇2.1%；O*NET7%及以上只是分类，非本细类或个人录用概率。",
+        "display_value": "美国数据库架构师父组（SOC 15-1243）就业预计从 2025 年约 69,500 人增至 2035 年约 76,000 人（+9.4%），年均约 3,900 个空缺，含替补。数仓细类 15-1243.01 无单列预测。",
         "fact_id": "r5-current-market",
         "market": "美国",
         "measure": "父职业就业预测",
-        "occupation_scope": "15-1243父代理，非15-1243.01精确统计",
-        "period": "2025基期/2025—2035",
+        "occupation_scope": "美国父组数据库架构师（SOC 15-1243）",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-current"
         ]
@@ -11934,6 +11982,66 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "9,000–13,000 元/月；数仓建设、ETL、模型，计算机相关本科及以上。",
+        "fact_id": "posting-dws-yixun",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "广东亿迅科技：大数据开发工程师校园招聘",
+        "period": "2025-09–2026-04",
+        "source_refs": [
+          "dws-yixun"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "北京 1 名，硕士研究生及以上；数据集市、ETL、质量监控；未列薪资。",
+        "fact_id": "posting-dws-beijing",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "北京数据仓库研发工程师招聘附件",
+        "period": "2025-12",
+        "source_refs": [
+          "dws-beijing"
+        ]
+      },
+      {
+        "derivation": "15-1243 父组统计，不是数仓细类。",
+        "display_value": "+9.4%",
+        "fact_id": "dws-parent-growth",
+        "market": "美国",
+        "measure": "父组就业增速",
+        "occupation_scope": "美国数据库架构师父组 SOC 15-1243",
+        "period": "2025–2035",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": "15-1243 父组统计，不是数仓细类。",
+        "display_value": "69,500 人",
+        "fact_id": "dws-parent-employment",
+        "market": "美国",
+        "measure": "父组基期就业",
+        "occupation_scope": "美国数据库架构师父组 SOC 15-1243",
+        "period": "2025",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": "15-1243 父组统计，不是数仓细类。",
+        "display_value": "年均约 3,900 个（含替补）",
+        "fact_id": "dws-parent-openings",
+        "market": "美国",
+        "measure": "父组预计年均空缺",
+        "occupation_scope": "美国数据库架构师父组 SOC 15-1243",
+        "period": "2025–2035",
+        "source_refs": [
+          "r5-bls-current"
         ]
       }
     ]
@@ -11959,21 +12067,21 @@
       },
       {
         "availability": "available",
-        "fact_ref": "market",
+        "fact_ref": "dws-parent-growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，增长 9%，远快于平均；父职业代理口径）"
+        "label": "美国父组就业预测：+9.4%（2025–2035）"
       },
       {
         "availability": "available",
-        "fact_ref": "market",
+        "fact_ref": "dws-parent-employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 66,900 人；父职业代理口径）"
+        "label": "美国父组基期就业：69,500 人（2025）"
       },
       {
         "availability": "available",
-        "fact_ref": "market",
+        "fact_ref": "dws-parent-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，约 4,000 个，含增长与更替）"
+        "label": "美国父组年均空缺：3,900（含替补）"
       },
       {
         "availability": "missing",
@@ -11987,17 +12095,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "数据仓库专家（O*NET-SOC 15-1243.01）设计、建模或实施企业数据仓库活动，为数据库信息仓库编程与配置并向仓库用户提供支持：覆盖来源映射、抽取转换装载、仓库结构与元数据、质量核对、测试与排错等任务；含美国 2025 年 5 月工资中位 139,500 美元/年（67.07 美元/时）、第 10 分位 86,240 美元、第 90 分位 204,000 美元，2024 年约 66,900 人、2024—2034 年增长 9%（远快于平均）、年均约 4,000 个含增长与更替的空缺（以上工资与就业为父职业数据库架构师代理口径），以及中国大陆职业级工资缺口、口径与粒度、装载可重跑、质量对账与数据权限边界。"
+      "text": "数据仓库专家怎样做字段映射、ETL、建模和质量核对？看真实招聘、美国父组数据，以及与 DBA、架构师和 BI 岗的区别。"
     },
     "title": {
       "availability": "available",
       "text": "数据仓库专家"
     }
   },
-  "source_content_sha256": "de55ffd287890ccae04c1ef76a49af5c8ae86592b8859180ca3d1030e4068843",
+  "source_content_sha256": "099ebff9c695bdd383c158ca8b3697e83bee84cde3045fdb6b7f02da1ed6ff69",
   "subject": {
     "canonical_slug": "data-warehousing-specialists",
     "name": "数据仓库专家",
-    "summary": "数据仓库专家把分散的源系统数据转成可分析的数据层：定义业务口径与粒度，设计维度与事实模型，实现可重跑的抽取、转换与装载，核对结构与数据质量，维护元数据与血缘，并向仓库用户提供支持；依据是业务定义、数据权限与质量规则，而不是进度压力。美国对应 O*NET-SOC 15-1243.01（Data Warehousing Specialists）；其薪资与就业在该页按父职业数据库架构师（15-1243.00）代理口径公布；中国大陆公开工资统计未建立与该细分对应的职业级口径，本页按证据缺口处理。"
+    "summary": "数仓工作从理解源字段开始：定好数据粒度和映射，用 ETL 抽取、转换与装载，核对行数、重复与关键指标，再发布数据表和维护说明。失败时定位源数据、转换逻辑或调度问题，并验证重跑不会重复计数。 美国工资与就业使用数据库架构师父组统计；中国大陆保留两条历史招聘样本及全国职业工资缺口。"
   }
 }

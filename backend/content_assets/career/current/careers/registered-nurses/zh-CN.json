@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -41,10 +38,10 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
-      "fact:us-industry-wage-education-2025": {
+      "fact:us-industry-wage-finance-2025": {
         "status": "pending_mapping"
       },
-      "fact:us-industry-wage-finance-2025": {
+      "fact:us-industry-wage-government-2025": {
         "status": "pending_mapping"
       },
       "fact:us-industry-wage-localgov-2025": {
@@ -1530,7 +1527,7 @@
         "status": "pending_mapping"
       },
       "item:registered-nurses.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:registered-nurses.sources.source-card.1": {
         "status": "mapped"
@@ -23314,7 +23311,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "评估患者、实施获授权护理、观察记录交接；中国有效注册、美国州许可、医嘱和机构权限分别核，N1纸面练习不授资格。"
+              "如果你更希望独立决定诊断或处方，或不愿在多次打断后重新核对记录，先比较医生、护士与护理员的分工。实际临床权限由注册、岗位和机构流程共同限定。"
             ]
           },
           "id": "registered-nurses.quick-decision.fit-decision-checklist.1",
@@ -23331,7 +23328,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用N1虚构三十分钟交接练习核N1/N2身份、V1/V2医嘱、1.2°C纸面变化及过敏栏，保留四未决交有权人员，不用于诊疗。"
+              "打开目录「入行、资格与职业发展」，找到「入行练习：虚构N1患者身份、医嘱版本与病情交接」。用纸面材料找出相互冲突或仍未知的记录，写一份交接，不用真实患者资料。"
             ]
           },
           "id": "registered-nurses.quick-decision.fit-decision-checklist.2",
@@ -23345,7 +23342,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "愿意照护沟通与反复核对，能接受轮班、防护和监督训练，并在中断催促时如实报告信息冲突者，可先探索。"
+              "如果你愿意反复核对身份、观察和医嘱，把差异如实报出，并希望在团队里持续照护患者，可以先试。再向目标单位了解轮班、带教与实际护理任务。"
             ]
           },
           "id": "registered-nurses.quick-decision.fit-decision-checklist.3",
@@ -23569,7 +23566,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国护士注册取得执业证后按注册地点护理；危急病情立即通知医师，必要紧急救护依职责实施。纸面暂停受影响操作不代现场救护判断。"
+              "执业地点与变更手续应按注册办法核对；第 18 条另列可免办变更的情形。 按《护士条例》第 17 条，发现患者病情危急，应立即通知医师；在紧急情况下为抢救垂危患者生命，应先行实施必要的紧急救护。 纸面暂停不应延误真实紧急救护。"
             ]
           },
           "id": "registered-nurses.profile.onet-structured-fields-block.5",
@@ -23585,7 +23582,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "保留患者识别、护理实施、反应观察、未完成事项和接收人；N1四冲突及1.2°C仅纸面核查，不代真实病历。"
+              "记录身份核对、实施的护理、观察来源及时间、未决事项和接收责任人。N1 是纸面核对练习。"
             ]
           },
           "id": "registered-nurses.profile.career-quick-answers-block.6",
@@ -24511,7 +24508,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "直接照护方向核患者身份、医嘱、观察和护理计划；N1身份冲突必须先保持未决。"
+              "直接护理涉及核对患者身份、医嘱、观察与护理计划。用纸面题分别练习证据核对和交接。"
             ]
           },
           "id": "registered-nurses.direction-comparison.adjacent-career-comparison-table.27",
@@ -24905,7 +24902,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页讨论去识别文书草稿和交接核查的可能用途；本轮未取得中国大陆与美国注册护士岗位级AI采用率、替代率或工资变化因果估计，不由跨职业研究推定临床部署。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "生成式 AI 可用虚构材料草拟交接结构；必须由人逐项核对来源、时间和未决事项。它不能确认患者身份、判定病情或授权医嘱。未取得本职业采用率、工时节省或失业概率。"
             ]
           },
           "id": "registered-nurses.ai-impact.ai-impact-table.18",
@@ -25595,7 +25592,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。模型可算N1纸面37.0至38.2差1.2°C，真实患者与病情由有权人员核。"
+              "工具可以复算虚构记录的差值。身份和记录归属须由有权人员确认，工具不能判断真实病情。"
             ]
           },
           "id": "registered-nurses.ai-impact.ai-impact-table.64",
@@ -25865,7 +25862,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "留痕交接：保留N1/N2、V1/V2、原观察时间与温度、过敏未决及下一接收责任人。"
+              "按 N1 题面逐项核身份、医嘱、观察及过敏栏。记录原值、来源、算式、证据支持的状态及下一责任人。"
             ]
           },
           "id": "registered-nurses.ai-impact.ai-impact-table.82",
@@ -26102,7 +26099,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核N1/N2冲突和未决状态。"
+              "按 N1 题面逐项核身份、医嘱、观察及过敏栏。记录原值、来源、算式、证据支持的状态及下一责任人。"
             ]
           },
           "id": "registered-nurses.ai-impact.ai-impact-table.98",
@@ -26159,7 +26156,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核V1/V2签发与过敏栏。"
+              "对照原件核签发、记录和权限边界。"
             ]
           },
           "id": "registered-nurses.ai-impact.ai-impact-table.102",
@@ -26257,7 +26254,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可算1.2°C，不诊断。"
+              "工具可复算两条纸面观察，临床解释另由有权团队负责。"
             ]
           },
           "id": "registered-nurses.ai-impact.ai-impact-table.109",
@@ -26676,7 +26673,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆2025年注册护士全国精确职业工资；国家统计局未单列，卫生和社会工作宽行业税前年均不能代填。"
+              "本页未找到可单独对应注册护士的大陆全国工资分布。下面列两个医院的岗位条件和卫生行业参考。"
             ]
           },
           "id": "registered-nurses.china-salary.career-snapshot-primary-locale.21",
@@ -27088,7 +27085,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆2025年注册护士全国精确职业工资；国家统计局未单列，卫生和社会工作宽行业税前年均不能代填。"
+              "本页未找到可单独对应注册护士的大陆全国工资分布。下面列两个医院的岗位条件和卫生行业参考。"
             ]
           },
           "id": "registered-nurses.china-salary.career-snapshot-primary-locale.48",
@@ -27102,7 +27099,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘样本：证据条件不足"
+              "医院招聘条件：上海与深圳"
             ]
           },
           "id": "registered-nurses.china-salary.career-snapshot-primary-locale.49",
@@ -27116,7 +27113,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆2026年注册身份、地区、机构、科室、职称、班次、工时及计酬均可核的注册护士同岗报价。"
+              "华东医院列 141 个护理岗位；深圳龙岗区人民医院列两档院部护士，15 人和 1 人。均未列工资金额，详见入行模块及原件。"
             ]
           },
           "id": "registered-nurses.china-salary.career-snapshot-primary-locale.50",
@@ -27130,7 +27127,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "医师报价不可互换"
+              "报价先核班次与工时"
             ]
           },
           "id": "registered-nurses.china-salary.career-snapshot-primary-locale.51",
@@ -27144,7 +27141,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "医师诊断和治疗职责不同。"
+              "先问夜班安排、加班怎么记录、是否另列补贴。"
             ]
           },
           "id": "registered-nurses.china-salary.career-snapshot-primary-locale.52",
@@ -27158,7 +27155,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "护理助理报价不可互换"
+              "再核基本工资和绩效"
             ]
           },
           "id": "registered-nurses.china-salary.career-snapshot-primary-locale.53",
@@ -27172,7 +27169,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "辅助照护不等同注册护士执业。"
+              "核绩效条件、试用期和社保待遇，保留书面口径。"
             ]
           },
           "id": "registered-nurses.china-salary.career-snapshot-primary-locale.54",
@@ -27751,7 +27748,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "州、地方及私营教育服务"
+              "政府（不含州及地方教育机构和医院）"
             ]
           },
           "id": "registered-nurses.us-salary.career-snapshot-secondary-locale.43",
@@ -27765,7 +27762,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "78,620美元/年"
+              "110,780美元/年"
             ]
           },
           "id": "registered-nurses.us-salary.career-snapshot-secondary-locale.44",
@@ -27779,7 +27776,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025本职业在教育行业中位，非护理助理工资或教师职业工资。"
+              "美国 2025 年 5 月注册护士 29-1141 行业中位数；医院另列。"
             ]
           },
           "id": "registered-nurses.us-salary.career-snapshot-secondary-locale.45",
@@ -27927,31 +27924,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "执业护师",
@@ -28248,7 +28245,7 @@
           "data": {
             "entries": [
               "患者变化时协调医师、护士与接班人。",
-              "未核N1/N2时保持身份未决。"
+              "逐项核对题设标记和证据，写下状态与下一责任人。"
             ]
           },
           "id": "registered-nurses.fit.personality-fit-block.12",
@@ -28348,7 +28345,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不用IQ分数筛选；应观察能否核N1/N2身份、医嘱版本和时间记录。"
+              "不以智力测评分数筛选；观察能否按原记录核身份、版本和时间。"
             ]
           },
           "id": "registered-nurses.fit.personality-fit-block.18",
@@ -28377,8 +28374,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能辨N1/N2及V1/V2矛盾。",
-              "算1.2°C纸面差，不由此诊断。"
+              "能逐项核对题设身份标记和医嘱版本。",
+              "复算两条观察记录的差值，标明来源和时间。"
             ]
           },
           "id": "registered-nurses.fit.personality-fit-block.20",
@@ -28392,7 +28389,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "37.0到38.2的差1.2°C不等于诊断；需按程序报告。"
+              "把纸面观察数值和算术差，与真实记录归属和临床解释分开。"
             ]
           },
           "id": "registered-nurses.fit.personality-fit-block.21",
@@ -28435,7 +28432,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "被催促仍说明过敏和医嘱未确认。",
+              "压力下仍按纸面证据说明每项状态及核对对象。",
               "把责任人、时间和待核项交清楚。"
             ]
           },
@@ -28852,7 +28849,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可训练。先核N1/N2和V1/V2状态，能算纸面1.2°C差但不作诊断。"
+              "可以训练：先分列身份和医嘱，再复算两条记录的差值；观察你是否愿意逐项留痕。"
             ]
           },
           "id": "registered-nurses.fit.personality-fit-block.52",
@@ -28896,7 +28893,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "交N1纸面包：身份、医嘱、观察、过敏四项未决和责任交接，再核岗位要求。"
+              "按 N1 题面逐项核身份、医嘱、观察及过敏栏。记录原值、来源、算式、证据支持的状态及下一责任人。"
             ]
           },
           "id": "registered-nurses.fit.personality-fit-block.55",
@@ -28941,7 +28938,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用30分钟N1纸面练习保留身份、医嘱、观察、过敏四未决，复算1.2°C并写接收责任；不选医嘱、不诊断或给药。"
+              "按 N1 题面逐项核身份、医嘱、观察及过敏栏。记录原值、来源、算式、证据支持的状态及下一责任人。"
             ]
           },
           "id": "registered-nurses.fit.personality-fit-block.58",
@@ -29128,7 +29125,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本卡说明护理工作中身份、医嘱、病情、感染和交接风险；N1纸面案例不提供临床处理或用药指令。"
+              "以下为护理工作中可能遇到的身份、记录、感染防护与交接风险，具体按机构程序和岗位授权办理。"
             ]
           },
           "id": "registered-nurses.risk.career-risk-cards.8",
@@ -29144,7 +29141,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "有效注册、患者身份、医嘱过敏和观察来源须核；不明暂停受影响动作并升级。中国病情危急立即通知医师，必要紧急救护按法定职责与机构程序实施。"
+              "信息有冲突时记录原始来源，按机构程序暂停受影响步骤并上报。 按《护士条例》第 17 条，发现患者病情危急，应立即通知医师；在紧急情况下为抢救垂危患者生命，应先行实施必要的紧急救护。 纸面暂停不应延误真实紧急救护。"
             ]
           },
           "id": "registered-nurses.risk.career-risk-cards.9",
@@ -29192,7 +29189,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "N1/N2腕带与交接单不一致可能导致患者特定操作错误。"
+              "患者标识或记录归属不清，可能使操作对象选错。"
             ]
           },
           "id": "registered-nurses.risk.career-risk-cards.12",
@@ -29222,7 +29219,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "N1记录写N1，腕带写N2。"
+              "例如，同名患者的转运标签没有附可区分的第二标记。"
             ]
           },
           "id": "registered-nurses.risk.career-risk-cards.14",
@@ -29251,7 +29248,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "V1/V2医嘱签发状态不明或过敏栏冲突可导致错误执行。"
+              "医嘱来源、签发或版本不清，可能让接班人员误用旧记录。"
             ]
           },
           "id": "registered-nurses.risk.career-risk-cards.16",
@@ -29281,7 +29278,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "V2状态未核却要求立即执行。"
+              "例如，打印件未标版本，电子记录又显示有更新。"
             ]
           },
           "id": "registered-nurses.risk.career-risk-cards.18",
@@ -29341,7 +29338,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "纸面37.0至38.2变化未标时间和接收人。"
+              "例如，转科时两份观察摘要的量表不同，且新接收人员尚未回读。"
             ]
           },
           "id": "registered-nurses.risk.career-risk-cards.22",
@@ -29521,7 +29518,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把N1案例当真实病历上传公开作品。"
+              "例如，把含个人信息的排班表误作公开作品发布。"
             ]
           },
           "id": "registered-nurses.risk.career-risk-cards.34",
@@ -29592,7 +29589,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "护士条例第17条规定危急报告与必要紧急救护，第18条要求保护患者隐私；不替代具体患者程序。"
+              "第 18 条另要求保护患者隐私。 按《护士条例》第 17 条，发现患者病情危急，应立即通知医师；在紧急情况下为抢救垂危患者生命，应先行实施必要的紧急救护。 纸面暂停不应延误真实紧急救护。"
             ]
           },
           "id": "registered-nurses.risk.career-risk-cards.39",
@@ -29623,7 +29620,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "要向雇主核对什么",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -29631,35 +29628,35 @@
               [
                 "入门观察",
                 "在监督下核患者身份、病历与风险",
-                "能指出不一致和未确认项",
+                "核护理学历和有效注册；问具体病区、带教方式、轮班及独立操作前的复核。",
                 "虚构N1交接表",
                 "不实施真实给药"
               ],
               [
                 "受监督护理",
                 "观察病情并按职责记录、报告",
-                "原始时间和数值可追溯",
+                "核护理学历和有效注册；问具体病区、带教方式、轮班及独立操作前的复核。",
                 "纸面异常升级单",
                 "不自行诊断或改医嘱"
               ],
               [
                 "专科实践",
                 "按培训与注册范围参与专科护理",
-                "能展示连续观察与团队交接",
+                "核护理学历和有效注册；问具体病区、带教方式、轮班及独立操作前的复核。",
                 "专科案例复盘",
                 "专科权限另核"
               ],
               [
                 "质量协调",
                 "复核记录、沟通和未完成事项",
-                "能识别交班遗漏",
+                "核护理学历和有效注册；问具体病区、带教方式、轮班及独立操作前的复核。",
                 "交接核查清单",
                 "不代替医师决定"
               ],
               [
                 "带教与管理",
                 "训练安全核对和复盘",
-                "真实带教与授权链清楚",
+                "核护理学历和有效注册；问具体病区、带教方式、轮班及独立操作前的复核。",
                 "质量改进记录",
                 "管理头衔不扩大执业范围"
               ]
@@ -29684,7 +29681,7 @@
                 "id": "education",
                 "values": [
                   "职业准备",
-                  "BLS列学士为美国典型入行，OOH也列副学士或获批护理项目文凭；须许可。",
+                  "美国 BLS 将学士列为典型入行学历。职业手册也列获批副学士和护理文凭等路径；须核州护理委员会条件及 NCLEX-RN，考试通过本身不等于州许可。",
                   "美国教育与许可不等于中国执业注册。"
                 ]
               },
@@ -29692,7 +29689,7 @@
                 "id": "clearance",
                 "values": [
                   "中国执业注册",
-                  "按国家卫健委护士执业注册规定核证书、地点和有效期。",
+                  "护士执业注册办法第 6、8、10–12 条区分全日制课程、临床实习、考试和实际注册：规定课程至少 3 年、在教学或综合医院护理实习至少 8 个月；通过考试后 3 年内申请，逾期另需规定机构 3 个月临床护理培训并考核合格。注册有效期 5 年，继续执业应在届满前 30 日申请延续。",
                   "练习或学历不能代替有效执业注册。"
                 ]
               },
@@ -29720,7 +29717,9 @@
             "health",
             "privacy",
             "msresearch",
-            "editor"
+            "editor",
+            "nurse-regulation",
+            "rn-ncsbn"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29735,35 +29734,35 @@
                 "values": [
                   "材料与设定｜A1—A5为完全虚构、去识别纸面案例，不是诊疗或给药指令",
                   "用30分钟完成N1交接：5分钟读记录、20分钟核矛盾和风险、5分钟写升级；不得据此给药或处理真实患者。",
-                  "A1｜交接表写患者代号N1，床旁腕带写N2；没有真实姓名、身份证或病历号。身份未确认，暂停受影响的患者特定操作。",
-                  "A2｜纸面医嘱列表有V1与V2两个版本，V2签发状态未核；不比较药物剂量，也不选一个版本执行。",
-                  "A3｜交班记录写09:00体温37.0°C，10:00记录38.2°C；这些只是虚构观察值，需记录时间、来源并向有权临床人员报告变化，不自行诊断原因。",
-                  "A4｜过敏栏一个版本标“待核”，另一个为空白；空白不是“无过敏”，先核原始记录和本人报告。",
-                  "A5｜纸面交接要求列身份、医嘱、观察、过敏四项未决事项及责任人；接收人确认后才按实际机构程序决定后续。"
+                  "A1｜09:00 交班表的患者代号是 N1，床旁腕带照片的代号是 N2。",
+                  "A2｜纸面医嘱列表有 V1、V2；V1 标注“上一班留档”，V2 的签发栏为空。题目没有剂量或可执行指令。",
+                  "A3｜交班记录写 09:00 体温 37.0°C，10:00 写 38.2°C；两条记录来源均是纸面观察表。",
+                  "A4｜过敏栏一个版本写“待核”，另一个空白。",
+                  "A5｜纸面交接单有记录时间、观察来源、未决事项、接收角色和回读确认栏。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
                   "任务与产出",
-                  "列N1/N2身份冲突、V1/V2医嘱版本未核、37.0至38.2的纸面差1.2°C和过敏栏冲突。",
-                  "交一页异常交接表，逐项写原始时间、风险、暂停范围、升级对象和待确认事项；不写诊断、剂量或治疗。"
+                  "核对两处患者标记、两份医嘱、两条观察和过敏栏。计算两条观察的数值差，再标出哪些仍需确认。",
+                  "写一页交接：逐项列来源或时间、未决状态、要暂停的范围和应接收的角色。写两句请求核对的话，不给剂量、诊断或治疗建议。 变式：只在 A1 加一条题设授权的身份核对回执，确认两条标签都指向 N1、照片旧标签保留。A2–A5 仍原样。分别写两版。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考答案（先独立完成再看）",
-                  "身份标记N1与N2不一致，应先保持未确认，停止受影响的患者特定操作并核权威身份来源。",
-                  "V2签发状态未核，不能凭较新版本推定有效；过敏栏空白也不能当无过敏。",
-                  "38.2减37.0为1.2°C纸面变化；不凭差值诊断或处理，保留原始记录并交有权人员评估。"
+                  "先独立写两版",
+                  "交两版及一页接班交接，列各待核项、接收角色和回读状态。",
+                  "保留原值、来源和待核事项。",
+                  "交卷后再展开常见问题「N1 记录交接参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "边界与复核",
-                  "N1/N2、温度和医嘱版本完全虚构。真实患者识别、药物和治疗需持证护理人员依机构程序及有效医嘱执行；本练习不授执业资格。"
+                  "真实身份核验、给药、治疗等由具备相应资质与授权的人员按机构程序执行，适用时核有效医嘱。N1 不授任何权限。"
                 ]
               }
             ]
@@ -29784,7 +29783,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "N1身份与医嘱核查单",
-                  "分列N1/N2标记及V1/V2签发状态，保持待核。",
+                  "两版分别列身份标记、核对依据与医嘱状态。",
                   "复核：不选未确认患者或医嘱执行。"
                 ]
               },
@@ -29792,7 +29791,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "观察与过敏差异单",
-                  "核09:00为37.0、10:00为38.2、差1.2°C；过敏栏空白仍待核。",
+                  "照录两条观察的时间、数值和来源，另算差值；分列两处过敏状态。",
                   "复核：变化不等于诊断。"
                 ]
               },
@@ -29800,7 +29799,7 @@
                 "id": "report-summary",
                 "values": [
                   "安全交接包",
-                  "列身份、医嘱、观察、过敏四个未决及各自接收人。",
+                  "交两版及一页接班交接，列各待核项、接收角色和回读状态。",
                   "复核：由有权临床团队决定后续。"
                 ]
               },
@@ -29840,26 +29839,26 @@
             "rows": [
               [
                 "身份",
-                "能否辨N1/N2冲突",
-                "保留未确认并升级",
+                "怎样核两份身份标记？",
+                "标依据、当前状态与接手人。",
                 "不凭一个标签给药"
               ],
               [
                 "医嘱",
-                "能否辨V1/V2状态",
-                "签发未核，暂停受影响执行",
+                "怎样核版本与签发证据？",
+                "列证据出处、记录状态与待核对象。",
                 "不按版本新旧自行选医嘱"
               ],
               [
                 "观察",
-                "能否核时间和值",
-                "纸面1.2°C变化与原始时间可追溯",
+                "怎样保留观察依据？",
+                "留来源、时间和原值，说明计算与归属依据。",
                 "不诊断或开治疗"
               ],
               [
                 "过敏",
-                "能否辨空白与无过敏",
-                "空白保持待核",
+                "怎样记录过敏栏？",
+                "照录原栏，分别标状态、依据与下一责任人。",
                 "不推定安全"
               ]
             ]
@@ -29888,42 +29887,42 @@
                 "id": "entry-trial-day-2",
                 "values": [
                   "第二日",
-                  "标N1/N2身份冲突及应停的患者特定操作。"
+                  "分列交接单和腕带标记，再写出需要核实的角色及来源。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "第三日",
-                  "区分V1/V2医嘱状态；写明为什么不选一版执行。"
+                  "核两份纸面医嘱各自的签发状态，写应由谁确认。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "第四日",
-                  "复算37.0与38.2差1.2°C，只保留观察和报告。"
+                  "计算两次观察差，并记录时间及来源；由有权人员评估真实病情。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "第五日",
-                  "核过敏栏空白和待核，不写成“无过敏”。"
+                  "分别照录两份过敏栏，标记未确认项。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "第六日",
-                  "合并四个未决并写责任人、时间和待复核来源。"
+                  "不看参考，独立提交。 交两版及一页接班交接，列各待核项、接收角色和回读状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "第七日",
-                  "对照真实岗位核执业注册、专科培训、患者配比与班次。"
+                  "展开常见问题「N1 记录交接参考解（交卷后再打开）」，记一处差异或无差异，再选择下一项职业探索。"
                 ]
               }
             ]
@@ -29941,10 +29940,10 @@
           "data": {
             "entries": [
               "保存N1身份、医嘱、观察和过敏初稿及修订，标注全部虚构。",
-              "核N1/N2、V1/V2、1.2°C变化，保持未决性质。",
+              "交卷后逐项复核两版状态、原值、归属和接手人。",
               "记录能否接受患者沟通、轮班与持续精确核对。",
-              "重做身份冲突的暂停与升级交接，不写给药许可。",
-              "把医嘱版本、过敏信息与观察变化列下一轮待核。",
+              "交卷后核两版证据与交接，记录自己哪项判断要改。",
+              "按两版各自的记录列仍需复查的事项。",
               "对照目标岗位，标执业注册和专科培训缺口。",
               "未完成项如实保留，不用人格测评替代临床能力。"
             ]
@@ -30051,7 +30050,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "A1—A5是虚构纸面案例，不证明护士执业注册、患者识别、给药或设备操作资格。 中国危急病情报告与必要紧急救护依护士条例第17条，不能由本练习的停点规则延误。",
+              "A1–A5 只是虚构练习。 按《护士条例》第 17 条，发现患者病情危急，应立即通知医师；在紧急情况下为抢救垂危患者生命，应先行实施必要的紧急救护。 纸面暂停不应延误真实紧急救护。",
               "美国BLS教育与州许可不是中国护士执业注册；两国均须按所在地规则核。",
               "公开作品不得含真实患者身份、病历、医嘱或机构内部资料。",
               "护理助理、医师及高级实践护理的资格与职责不能自动互认。"
@@ -30072,14 +30071,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "国家统计局2025宽行业均值不是中国注册护士精确职业工资。",
-              "证据不足：未取得地区、机构、职称、班次和计酬均可比较的中国全国单岗报价。"
+              "上海华东医院 2026 年 8 月公告列 141 个护理岗位，要求护理本科及以上和公告所列护士资格执业证书，三甲医院经历优先；待遇按有关规定，未列金额。",
+              "深圳龙岗区人民医院 2026 年聘员第二批列两档院部护士：15 人的岗位最低本科及学士、1 人的岗位最低研究生学历及博士学位，均列护士初级资格。招聘计划表未列工资。"
             ]
           },
           "id": "registered-nurses.path.recruitment-sample.1",
           "source_refs": [
-            "nbs",
-            "editor"
+            "rn-huadong",
+            "rn-longgang"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -30410,7 +30409,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "N1纸面身份、医嘱、观察和过敏未决清单。"
+              "按 N1 题面逐项核身份、医嘱、观察及过敏栏。记录原值、来源、算式、证据支持的状态及下一责任人。"
             ]
           },
           "id": "registered-nurses.path.career-path-block.30",
@@ -30704,7 +30703,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "N1四项冲突均保持待核。"
+              "分别记两版身份、医嘱签发、观察和过敏栏的证据与交接，纸面记录不授予临床判断权限。"
             ]
           },
           "id": "registered-nurses.path.career-path-block.50",
@@ -30997,7 +30996,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "N1/N2、V1/V2与1.2°C纸面差分开。"
+              "把身份和医嘱未核事项与可计算的纸面观察差分开记录。"
             ]
           },
           "id": "registered-nurses.path.career-path-block.70",
@@ -32131,7 +32130,7 @@
                 ]
               },
               {
-                "answer": "不能。AI可辅助去识别文书草稿；真实患者身份、医嘱、过敏和病情由持证人员按机构程序核。",
+                "answer": "不能。可以用虚构材料练习草拟交接结构；真实患者记录是否可用于任何工具，先核机构授权和适用保护要求。身份、医嘱、过敏与病情由有权人员核对。",
                 "id": "registered-nurses.faq.3",
                 "question": "AI能判断患者或批准给药吗？",
                 "question_key": "career.faq.registered-nurses.q3",
@@ -32142,7 +32141,7 @@
                 ]
               },
               {
-                "answer": "证据不足：中国大陆2025年注册护士全国精确职业工资；国家统计局未单列，卫生和社会工作宽行业税前年均不能代填。 卫生和社会工作非私营146266元、私营75631元税前年均仅供雇主行业背景。",
+                "answer": "本页未找到大陆全国注册护士工资分布。卫生和社会工作城镇单位 2025 年年均为非私营 146,266 元、私营 75,631 元，覆盖多种职业。两则医院公告均未列工资金额。",
                 "id": "registered-nurses.faq.4",
                 "question": "中国大陆注册护士工资是多少？",
                 "question_key": "career.faq.registered-nurses.q4",
@@ -32151,7 +32150,7 @@
                 ]
               },
               {
-                "answer": "用虚构N1案例观察能否发现身份、医嘱、过敏和观察冲突，再评估轮班、患者沟通与持续核对；人格测试不是临床能力证据。",
+                "answer": "用虚构 N1 练习逐项核对证据及交接责任，再考虑轮班、患者沟通和重复核对。人格测试不代表临床胜任。",
                 "id": "registered-nurses.faq.5",
                 "question": "如何判断自己适合？",
                 "question_key": "career.faq.registered-nurses.q5",
@@ -32191,7 +32190,7 @@
                 ]
               },
               {
-                "answer": "患者身份或过敏未确认、医嘱签发状态不明、病情变化或设备异常时，暂停受影响步骤并交有权人员按机构程序判断。 中国危急病情应立即通知医师并依法实施必要紧急救护，不由纸面停点延误。",
+                "answer": "身份或医嘱等记录不明时，按机构程序核对并报告。 按《护士条例》第 17 条，发现患者病情危急，应立即通知医师；在紧急情况下为抢救垂危患者生命，应先行实施必要的紧急救护。 纸面暂停不应延误真实紧急救护。",
                 "id": "registered-nurses.faq.9",
                 "question": "何时暂停并升级？",
                 "question_key": "career.faq.registered-nurses.risk-boundary",
@@ -32211,6 +32210,15 @@
                   "onet",
                   "facilities",
                   "hr"
+                ]
+              },
+              {
+                "answer": "身份标记N1与N2不一致，应先保持未确认，停止受影响的患者特定操作并核权威身份来源。 医嘱开具人员核 V2 签发；V1 只是留档，V2 未核签发，两份均不能据以执行。接班护士按原始记录和机构程序核过敏，空白不等于无过敏。 38.2 − 37.0 = 1.2°C，只是纸面差。保留两条时间和来源；身份、记录归属未确认前，不写成同一患者的病情变化。示例交接两句：「接班护士请核 09:00 交接单和腕带的身份差异，并核原过敏记录；两条观察先按原时间和来源分列。」 「请开具医嘱的医师核 V2 签发；V1 仅留档，两份暂不作为执行依据。」 变式仅关闭题设 A1 的身份矛盾，保留旧标记与核对回执。A2 签发、A4 过敏与 A3 记录归属均未因这条回执得到确认；1.2°C 仍只作纸面差。记录应转接班护士和开具医嘱人员，不推诊疗。",
+                "id": "registered-nurses.faq.11",
+                "question": "N1 记录交接参考解（交卷后再打开）",
+                "question_key": "career.faq.registered-nurses.q11",
+                "source_refs": [
+                  "editor"
                 ]
               }
             ]
@@ -32265,7 +32273,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核读2026-10-12，原2026-10-03为历史日期。任务2026、工资2025、预测2025—2035、中国2025宽行业与注册办法2021修订、护士条例2020修订及CDC2024分别标期。条例原登记网页本轮未返回全文，核同2020修订司法部官方PDF，不新建重复权威。"
+              "资料核对日期：2026 年 11 月 9 日。护士条例按国家行政法规库 2020 年修订文本；执业注册按国家卫健委规章。工资与就业预测分别标明年份和适用范围。"
             ]
           },
           "id": "registered-nurses.sources.source-card.3",
@@ -32318,13 +32326,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32336,7 +32344,7 @@
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "回到注册护士职业页",
@@ -32526,7 +32534,7 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "美国护理教育多路径、州许可、轮班与职业暴露背景。",
-                  "2025医院100220、流动医疗91230、护理及居住机构84300、教育78620美元年工资中位，均29-1141。"
+                  "2025 年 5 月行业年工资中位数：政府（不含州及地方教育机构和医院）110,780；医院 100,220；门诊医疗 91,230；护理与居住照护机构 84,300 美元。"
                 ],
                 "evidence_type": "教育、工作场所和任务背景",
                 "id": "health",
@@ -32557,7 +32565,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "N1/N2、V1/V2和温度均虚构。",
+                  "所有试做记录由编辑虚构。",
                   "不用于真实诊疗给药。"
                 ],
                 "evidence_type": "N1纸面练习",
@@ -32779,20 +32787,20 @@
                 "url": "https://www.onetonline.org/link/localwages/29-1141.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "第17条危急报告及必要紧急救护。",
-                  "第18条患者隐私，第21条临床实习在护士指导下。"
+                  "第 2 条界定护士，第 7–9 条涉及注册与延续。 按《护士条例》第 17 条，发现患者病情危急，应立即通知医师；在紧急情况下为抢救垂危患者生命，应先行实施必要的紧急救护。 发现医嘱不合规，及时向开具医嘱的医师提出；必要时向该医师所在科室负责人或机构医疗服务管理人员报告。",
+                  "真实紧急情况须按法律、岗位权限和机构流程处理。"
                 ],
-                "evidence_type": "注册、危急报告及隐私义务",
+                "evidence_type": "官方原始资料",
                 "id": "nurse-regulation",
-                "limitation": "不得作为单次护理操作许可",
+                "limitation": "真实紧急情况须按法律、岗位权限和机构流程处理。",
                 "market": "中国大陆",
-                "name": "护士条例（2020修订官方文本）",
-                "period": "2020修订；2022公开",
-                "publisher": "国务院／溧阳市卫生健康局公开",
-                "scope": "contextual",
-                "url": "https://www.liyang.gov.cn/html/czly/2022/AQBIAJIP_1115/30393.html"
+                "name": "《护士条例》（2020 年修订）",
+                "period": "2020-03-27",
+                "publisher": "国务院；国家行政法规库",
+                "scope": "exact",
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=209"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32860,20 +32868,62 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "患者评估｜核身份、病史、生命体征和症状。｜异常及时升级。 — 25/100; weight=1/3; registered-nurses.profile.responsibilities-block.1[0]",
-                  "给药治疗｜核医嘱、患者、药物及反应。｜不凭AI草稿或旧版医嘱实施。 — 0/100; weight=1/3; registered-nurses.profile.responsibilities-block.1[2]",
-                  "记录交接｜准确记录时间、观察和未完成事项。｜保留原始信息与更正痕迹。 — 75/100; weight=1/3; registered-nurses.profile.responsibilities-block.1[3]"
+                  "分别核输入、人工复核与工作责任。",
+                  "分别核输入、人工复核与工作责任。",
+                  "分别核输入、人工复核与工作责任。",
+                  "分别核输入、人工复核与工作责任。",
+                  "分别核输入、人工复核与工作责任。"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "limitation": "编辑方法，不测采用率和工作结果。",
+                "name": "费马测试：AI 任务分析方法",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "上海华东医院 2026 年 8 月公告列 141 个护理岗位，要求护理本科及以上和公告所列护士资格执业证书，三甲医院经历优先；待遇按有关规定，未列金额。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "rn-huadong",
+                "limitation": "历史公告，不提供金额。",
+                "name": "华东医院：2026 年护理招聘",
+                "period": "2026-08-13",
+                "publisher": "上海市人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.sh.gov.cn/tzpgg_17408/20260813/t0035_1443026.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "深圳龙岗区人民医院 2026 年聘员第二批列两档院部护士：15 人的岗位最低本科及学士、1 人的岗位最低研究生学历及博士学位，均列护士初级资格。招聘计划表未列工资。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "rn-longgang",
+                "limitation": "岗位表只支持该院该批次。",
+                "name": "深圳龙岗区人民医院：2026 年聘员第二批",
+                "period": "2026",
+                "publisher": "深圳市龙岗区人民医院",
+                "scope": "recruitment_proxy",
+                "url": "https://www.lg.gov.cn/attachment/1/1714/1714074/12784299.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 将学士列为典型入行学历。职业手册也列获批副学士和护理文凭等路径；须核州护理委员会条件及 NCLEX-RN，考试通过本身不等于州许可。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "rn-ncsbn",
+                "limitation": "以目标州护理委员会当期要求为准。",
+                "name": "NCSBN：注册护士与 NCLEX-RN",
+                "period": "current",
+                "publisher": "NCSBN",
+                "scope": "exact",
+                "url": "https://www.ncsbn.org/resources/nursing-terms.page"
               }
             ]
           },
@@ -34328,6 +34378,30 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://rsj.sh.gov.cn/tzpgg_17408/20260813/t0035_1443026.html",
+            "id": "rn-huadong",
+            "label": "华东医院：2026 年护理招聘",
+            "scope": "历史公告，不提供金额。"
+          },
+          {
+            "href": "https://www.lg.gov.cn/attachment/1/1714/1714074/12784299.pdf",
+            "id": "rn-longgang",
+            "label": "深圳龙岗区人民医院：2026 年聘员第二批",
+            "scope": "岗位表只支持该院该批次。"
+          },
+          {
+            "href": "https://xzfg.moj.gov.cn/front/law/detail?LawID=209",
+            "id": "nurse-regulation",
+            "label": "《护士条例》（2020 年修订）",
+            "scope": "真实紧急情况须按法律、岗位权限和机构流程处理。"
+          },
+          {
+            "href": "https://www.ncsbn.org/resources/nursing-terms.page",
+            "id": "rn-ncsbn",
+            "label": "NCSBN：注册护士与 NCLEX-RN",
+            "scope": "以目标州护理委员会当期要求为准。"
           }
         ],
         "tracks": [
@@ -36035,7 +36109,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-education-2025",
+            "fact_ref": "us-industry-wage-government-2025",
             "industry": {
               "$item": "registered-nurses.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -36806,7 +36880,7 @@
               "entry": "link-1",
               "field": "url"
             },
-            "cta_label": "测我的霍兰德职业兴趣",
+            "cta_label": "做霍兰德职业兴趣测试",
             "evidence_level": {
               "$item": "registered-nurses.fit.personality-fit-block.3",
               "block": "fit",
@@ -36843,7 +36917,7 @@
               "entry": "link-2",
               "field": "url"
             },
-            "cta_label": "查看我的大五人格特质",
+            "cta_label": "做大五人格测试",
             "evidence_level": {
               "$item": "registered-nurses.fit.personality-fit-block.7",
               "block": "fit",
@@ -36880,7 +36954,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "cta_label": "了解我的 MBTI 偏好",
+            "cta_label": "做 MBTI 偏好测试",
             "evidence_level": {
               "$item": "registered-nurses.fit.personality-fit-block.11",
               "block": "fit",
@@ -36917,7 +36991,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "cta_label": "探索我的九型人格模式",
+            "cta_label": "做九型人格测试",
             "evidence_level": {
               "$item": "registered-nurses.fit.personality-fit-block.15",
               "block": "fit",
@@ -36954,7 +37028,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "cta_label": "了解我的智力与推理表现",
+            "cta_label": "做矩阵推理测试",
             "evidence_level": {
               "$item": "registered-nurses.fit.personality-fit-block.19",
               "block": "fit",
@@ -36991,7 +37065,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "cta_label": "了解我的情绪智力能力",
+            "cta_label": "做情绪能力测试",
             "evidence_level": {
               "$item": "registered-nurses.fit.personality-fit-block.23",
               "block": "fit",
@@ -37568,7 +37642,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合注册护士",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37645,7 +37719,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "做霍兰德职业兴趣测试"
           },
           {
             "href": {
@@ -37655,7 +37729,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "做大五人格测试"
           },
           {
             "href": {
@@ -37665,7 +37739,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "做 MBTI 偏好测试"
           },
           {
             "href": {
@@ -37675,7 +37749,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "做九型人格测试"
           }
         ]
       },
@@ -37782,7 +37856,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与护理任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37946,11 +38020,11 @@
       },
       {
         "derivation": null,
-        "display_value": "78,620美元/年",
-        "fact_id": "us-industry-wage-education-2025",
+        "display_value": "110,780美元/年",
+        "fact_id": "us-industry-wage-government-2025",
         "market": "美国",
-        "measure": "2025美国29-1141在州地方及私营教育服务的年工资中位数",
-        "occupation_scope": "美国注册护士29-1141；州地方及私营教育服务",
+        "measure": "2025年5月政府行业注册护士年工资中位数",
+        "occupation_scope": "美国 29-1141；政府（不含州及地方教育机构和医院）",
         "period": "2025年5月",
         "source_refs": [
           "health"
@@ -38063,27 +38137,15 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "注册护士",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与护理任务"
     },
     "badges": [
       "患者评估 · 护理计划 · 病情观察",
@@ -38127,17 +38189,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "注册护士做什么、如何核对中国执业注册和美国工资就业数据，附虚构护理交接练习、患者安全及AI边界。"
+      "text": "注册护士如何观察病情、记录和交接？比较大陆执业注册与两则招聘、美国工资和就业数据，并做一次虚构 N1 护理交接练习。"
     },
     "title": {
       "availability": "available",
       "text": "注册护士"
     }
   },
-  "source_content_sha256": "daddf19098c3d09182f9685c8ee9bc8ea24558ff57ad5c0604b64db252a79b60",
+  "source_content_sha256": "116071384ad725d9dd6ed7573c9c0b2c73122f8bb09af8b60ab30dc38daf4d7e",
   "subject": {
     "canonical_slug": "registered-nurses",
     "name": "注册护士",
-    "summary": "评估患者状况，制定或执行护理计划，实施获授权的护理、给药和治疗，记录病情变化并与医疗团队交接。执业注册、患者身份核对、医嘱、感染防护与异常升级是关键边界；不同国家的教育和许可制度不得互认。"
+    "summary": "注册护士评估护理需要、按权限实施护理，观察反应并把变化和未决事项交给接班人员。大陆看护士执业注册和具体岗位要求，美国看州护理委员会许可。先用 N1 虚构交接观察自己是否愿意反复核对。"
   }
 }

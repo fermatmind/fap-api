@@ -5,11 +5,14 @@
       "fact:china-jiaojiang-featured-daily-2026": {
         "status": "mapped"
       },
+      "fact:ds-pku-pay-notice": {
+        "status": "pending_mapping"
+      },
+      "fact:ds-scu-pay-notice": {
+        "status": "pending_mapping"
+      },
       "fact:employment": {
         "status": "mapped"
-      },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
       },
       "fact:growth": {
         "status": "mapped"
@@ -1707,7 +1710,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -22534,7 +22537,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Worth trying first: you are willing to check data meaning and quality first, accept spending much of your time on cleaning and validation rather than modeling, actively try to disprove your own models and check for leakage and bias item by item, report uncertainty honestly when results are uncertain, and explain findings and limitations to business stakeholders in nontechnical language."
+              "Explore data science if you enjoy checking data sources, finding where a model can fail, and explaining its limits to colleagues."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.1",
@@ -22548,7 +22551,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Consider carefully: if you only want to model and tune parameters, are unwilling to check data sources and permissions, find it hard to accept models being rejected by business or compliance teams, or are unwilling to invest time in documentation, reproduction and communication, the actual work will differ from your expectations."
+              "Compare data engineering if you prefer pipelines, table reliability and latency. Compare business analysis if you prefer defining operational metrics and maintaining reports."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.2",
@@ -22576,7 +22579,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Low-risk exploration: use public or fictional data to complete an exercise of writing a data description and quality checklist, building a baseline model with validation and error analysis, and writing conclusions and uncertainty statements in nontechnical language. Assess only your work preferences; the exercise involves no real business data or personal information and does not constitute successful job training, data authorization or a promise of employment."
+              "Open “Entry, certificates and career development” and find “Fictional exercise material: handling data leakage and bias.” DS-04 provides field times, errors for two groups and release rules. Write a one-page decision before checking the reference."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -22604,7 +22607,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Work mainly takes place in offices or remotely, with long periods spent on code, data and documentation and frequent communication with business stakeholders, engineering and compliance teams. Data availability, business cycles and model risks vary significantly across employers such as professional and technical services, finance and insurance, information services and corporate management."
+              "Much of this work is office based. It includes investigating data, writing code, reproducing evaluations and explaining findings. Ask the employer about remote work, model ownership and post-release responsibilities."
             ]
           },
           "id": "actors.display.fermat_decision_card.summary",
@@ -23600,7 +23603,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Review and accountability chain | In the current O*NET data scientists profile (Updated2026, not a common survey year), 40% rate being accurate and exact as Extremely important, 44% rate the impact of decisions on coworkers or company results as Moderate results, 56% report Some freedom in how to make decisions, and 52% face time pressure once or more a week. Models and methods are checked through peer review or by reviewers under established procedures. Data use and model deployment must stay within authorized scope and leave records; exceeding authorization, discovering bias or encountering unclear compliance boundaries requires escalation and archiving under established policies."
+              "Review and accountability chain | In the current O*NET data scientists profile (Updated2026, not a common survey year), 40% rate being accurate and exact as Extremely important, 44% rate the impact of decisions on coworkers or company results as Moderate results, 56% report Some freedom in how to make decisions, and 52% face time pressure at least weekly but not daily. Models and methods are checked through peer review or by reviewers under established procedures. Data use and model deployment must stay within authorized scope and leave records; exceeding authorization, discovering bias or encountering unclear compliance boundaries requires escalation and archiving under established policies."
             ]
           },
           "id": "actors.display.work_context_block.review",
@@ -23686,7 +23689,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "For identifiable personal information in China, check lawful grounds under PIPL13 (not consent in all cases), minimum necessity under Article 6, and reasonable permissions/regular security education under Article 51; an employer account does not replace a lawful basis. Automated decision-making using personal information additionally falls under Article 24 on transparency, fairness and corresponding individual rights, Article 55 on prior impact assessment, and Article 56 requiring reports and records to be retained for at least 3 years. Do not apply these uniformly to all data science models. Gaps in occupation-specific wages and actual employer hiring data remain separately recorded."
+              "Check the legal basis, purpose and permissions for processing personal information in China. Automated decisions using personal information also raise transparency, fairness, applicable individual rights and prior impact assessment requirements."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
@@ -24340,7 +24343,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Tasks, work context and technology terms in recruitment have been verified. Code/feature drafts, reporting and experimental assistance are editorial candidates awaiting validation. This round did not measure efficiency gains, employer GenAI adoption or replacement dates. Model validation requires checking data and methods; employer accounts do not replace lawful grounds for processing personal information. Separate voluntary NIST governance from statutory PIPL duties; projected growth is not an observed causal effect of tools. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Generative AI can draft code, field descriptions or reports. People still check prediction timing, data sources, validation separation and group errors. Employment projections do not measure the effects of a tool."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24447,7 +24450,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Lists tasks such as analyzing and cleaning large datasets with statistical software, creating visualizations, testing, validating and redesigning models, comparing model performance metrics, applying feature selection algorithms, reporting modeling and analysis results, and identifying relationships, trends and influencing factors, plus work-context percentages (including 40% rating accuracy and exactness Extremely important, 65% rating competition Highly competitive, 52% facing time pressure more than once a week, and 56% reporting Some freedom in decisions)."
+              "Lists tasks such as analyzing and cleaning large datasets with statistical software, creating visualizations, testing, validating and redesigning models, comparing model performance metrics, applying feature selection algorithms, reporting modeling and analysis results, and identifying relationships, trends and influencing factors, plus work-context percentages (including 40% rating accuracy and exactness Extremely important, 65% rating competition Highly competitive, 52% facing time pressure at least weekly but not daily, and 56% reporting Some freedom in decisions)."
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
@@ -26053,7 +26056,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no China occupation-level wage distribution matching 15-2051.00. The NBS material read covers industry wages; this search does not establish that nationwide figures have never been published or that all statistics can only reach industry level."
+              "This page did not find a national mainland wage distribution comparable to U.S. 15-2051. The two notices show how employers describe roles and pay; industry averages are separate context."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
@@ -26067,7 +26070,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial contract checks: actual role/grade, contracting entity, monthly pay/bonuses/equity, working hours and outsourcing arrangements. This round has no actual recruitment sample and does not claim nationwide full-time work or any pay form predominates."
+              "The Peking University notice leaves pay open for discussion. The Sichuan University posting omits a pay period. Ask each employer about the contracting entity, base pay, bonuses, equity and hours."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
@@ -26109,7 +26112,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Note: failure to obtain separately listed occupational figures does not mean official figures have never been published. This page records only the actual material consulted and results, without filling gaps using US data, industry averages or opaque quote samples."
+              "Separate regular employment, agency contracts, internships and project contracts before comparing the pay period, fixed pay and variable pay."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
@@ -26137,12 +26140,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial duty comparison: Chinese job titles cannot map directly to US detailed occupations. This round did not verify a nationwide one-to-one classification match or uniform pay method; recruitment/quote gaps remain."
+              "Covers many roles in the industry. It does not estimate data scientist pay."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "r5-onet-current",
             "r5-nbs-it"
           ],
           "type": "prose"
@@ -26152,12 +26154,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no verifiable recruitment or pay quote statistics for data science or modeling roles in mainland China. Quotes from individual platforms or employers cannot represent nationwide levels."
+              "The notices describe their own terms. There is no comparable nationwide distribution here: Peking University leaves pay open; the Sichuan University posting lists 8,000–12,000 without a period or separate amounts for full-time and internship work."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "ds-pku",
+            "ds-scu"
           ],
           "type": "prose"
         },
@@ -26166,14 +26169,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET JobZone4/SVP7 to below 8; respondents' opinions on education needed for new hires are 48% bachelor's, 44% master's and 4% associate's, not workforce composition or law. BLS categories of typical bachelor's/no related experience/no on-the-job training do not mean no preparation is needed; OOH says some employers require/prefer master's or doctoral degrees or industry experience. These do not represent hiring or IQ thresholds in China."
+              "In October 2026 Peking University School of Public Health advertised one contract data scientist for health data governance, features, modeling and validation. It required a related master’s degree or higher and SQL and Spark/Hive skills; two years or more of relevant experience was preferred. The initial term was two years through a staffing agency, with pay discussed individually."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "r5-onet-current",
-            "r5-bls-current",
-            "r5-bls-ooh"
+            "ds-pku"
           ],
           "type": "prose"
         },
@@ -26182,13 +26183,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial preparation suggestions: check statistical/programming/business requirements of target roles. Common discipline/degree preferences in actual Chinese roles have not been verified; a master's degree guarantees neither an algorithm role nor income, and accounts do not replace lawful purposes."
+              "An employer posting on Sichuan University’s careers site lists a medical data statistics trainee role requiring a master’s degree, with data cleaning, modeling and reporting duties. The pay column reads 8,000–12,000, without a period or separate figures for the full-time and internship options. It does not establish a monthly wage. The posting lists an end date of November 29, 2026; check the employer for current availability."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "r5-onet-current",
-            "r5-cn-pipl"
+            "ds-scu"
           ],
           "type": "prose"
         },
@@ -26202,7 +26202,9 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "r5-cn-pipl"
+            "r5-cn-pipl",
+            "ds-cn-catalogue",
+            "ds-moe-standard"
           ],
           "type": "prose"
         },
@@ -26254,7 +26256,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Gaps in China occupational wages/recruitment samples remain. NBS information technology industry 2025 non-private 248752/private 128166 CNY average annual pre-tax wages provide context only where the actual employer belongs to that industry; they do not replace occupational wages or map directly to the US information industry."
+              "Urban information, software and IT services units averaged CNY 248,752 in non-private units and CNY 128,166 in private units in 2025. These pretax figures cover many occupations and apply as context only for employers in that industry."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -26832,7 +26834,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "First use public or fictional data to complete an exercise of writing a data description and quality checklist, building a baseline model with validation and error analysis, and writing conclusions and uncertainty statements in nontechnical language, or conduct a retrospective on a real project, then assess preferences."
+              "Start with DS-04: read field timing, calculate errors and write a release recommendation. Reflect on whether you would rather check fields, validate results or explain limits."
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -28630,13 +28632,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This round has no current China recruitment sample. The entry-level/advanced/evidence items below are editorial checking suggestions, not uniform employer practices or assumed independence on appointment.",
-              "For identifiable personal information in China, check lawful grounds under PIPL13 (not consent in all cases), minimum necessity under Article 6, and reasonable permissions/regular security education under Article 51; an employer account does not replace a lawful basis. Automated decision-making using personal information additionally falls under Article 24 on transparency, fairness and corresponding individual rights, Article 55 on prior impact assessment, and Article 56 requiring reports and records to be retained for at least 3 years. Do not apply these uniformly to all data science models."
+              "In October 2026 Peking University School of Public Health advertised one contract data scientist for health data governance, features, modeling and validation. It required a related master’s degree or higher and SQL and Spark/Hive skills; two years or more of relevant experience was preferred. The initial term was two years through a staffing agency, with pay discussed individually.",
+              "An employer posting on Sichuan University’s careers site lists a medical data statistics trainee role requiring a master’s degree, with data cleaning, modeling and reporting duties. The pay column reads 8,000–12,000, without a period or separate figures for the full-time and internship options. It does not establish a monthly wage. The posting lists an end date of November 29, 2026; check the employer for current availability."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "r5-cn-pipl"
+            "r5-cn-pipl",
+            "ds-pku",
+            "ds-scu"
           ],
           "type": "notice"
         },
@@ -28731,7 +28735,7 @@
                 "values": [
                   "Observable evidence of professional ability",
                   "Able to independently complete a cycle from data checks and modeling through validation and interpretation, check common leakage and bias, and honestly explain uncertainty (from O*NET task and work-context data).",
-                  "These are task and context observation points, not personality labels or hiring thresholds. Work context shows 40% rating accuracy and exactness Extremely important, 65% rating competition Highly competitive, 52% facing time pressure once or more a week, and 56% reporting Some freedom in decisions."
+                  "These are task and context observation points, not personality labels or hiring thresholds. Work context shows 40% rating accuracy and exactness Extremely important, 65% rating competition Highly competitive, 52% facing time pressure at least weekly but not daily, and 56% reporting Some freedom in decisions."
                 ]
               },
               {
@@ -28995,12 +28999,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Check actual duties/hiring conditions for Chinese roles; this round has no actual recruitment sample or proof of a one-to-one classification match. For identifiable personal information in China, check lawful grounds under PIPL13 (not consent in all cases), minimum necessity under Article 6, and reasonable permissions/regular security education under Article 51; an employer account does not replace a lawful basis. Automated decision-making using personal information additionally falls under Article 24 on transparency, fairness and corresponding individual rights, Article 55 on prior impact assessment, and Article 56 requiring reports and records to be retained for at least 3 years. Do not apply these uniformly to all data science models."
+              "China’s digital occupation list includes data analysis and processing engineering (2-02-30-09) and big data engineering (2-02-38-03). The Ministry of Education’s big data engineering teaching standard lists both. These categories help compare duties with U.S. 15-2051 without a one-to-one mapping."
             ]
           },
           "id": "actors.path.career-path-block.3",
           "source_refs": [
-            "r5-cn-pipl"
+            "r5-cn-pipl",
+            "ds-cn-catalogue",
+            "ds-moe-standard"
           ],
           "type": "prose"
         },
@@ -29012,43 +29018,41 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional analytical scenario material (exercise input)",
-                  "Fictional scenario: a data scientist encounters four problems within one project cycle. First, a field in training data is only available in the prediction period but has been used as a feature. Second, business stakeholders want a model for high-risk decisions deployed within two weeks. Third, evaluation metrics meet targets across the whole sample, but errors for one group are noticeably higher. Fourth, some data contains customers' personal information, and a colleague requests exporting raw data to an external tool for processing.",
-                  "Supplied material: business problem and evaluation metrics; field descriptions and data dictionary; data usage and traceability requirements; model deployment and review procedures.",
-                  "Missing material: rules for deciding whether the field constitutes leakage, whether validation scope may be reduced when time is short, authority for handling high bias, and whether personal information may be exported to external tools. If these conditions are needed in the exercise, state your assumptions and whom you need to consult explicitly."
+                  "DS-04 | Paper release review",
+                  "Task: predict a missed appointment 24 hours before the start, for bookings already made at the prediction cutoff. booked_lead_hours is recorded and fixed when the booking is created; checkout_status is entered after the appointment ends. The candidate model used both fields.",
+                  "The same held-out set has 100 records: 8 errors among 80 in group A, and 7 among 20 in group B. Groups do not overlap. The exercise requires at most 16% overall error and 20% per group, at least 20 records per group, and every feature available at prediction time.",
+                  "Release is requested in two weeks. A colleague asks to upload a raw table containing contact details; the exercise authorizes internal aggregates only. The model owner and data protection lead must approve release; neither has signed. No new evaluation exists after removing the field."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Task requirements",
-                  "Write a one-page handling and escalation plan covering assessment and handling of the suspected leakage field, communication and minimum validation requirements when time is short, a response route for high bias, and permissions and traceability when personal information is involved.",
-                  "State which information comes from the scenario and which remains an assumption, and whether the basis is field descriptions and the data dictionary, validation standards or data security and compliance requirements."
+                  "Task | Write a one-page decision",
+                  "Calculate group and overall error rates and apply the thresholds. Identify the unavailable field and outline the next split, training and evaluation steps.",
+                  "Decide whether to release or export the raw table now. Name reviewers and what is still unknown. Explain the decision to the project lead in two sentences. Variant: change only the reported B error count to 4 in the same holdout. Its denominator stays 20; features, approvals and export permissions are unchanged. Write both versions."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference deliverable (deducible from the scenario)",
-                  "The plan should include: suspected leakage field (check availability at prediction time, redo features and validation based on availability if needed, and record the rationale); insufficient time (explain risks through established procedures, specify indispensable validation steps, and suggest narrowing deployment scope or delaying if needed, without skipping validation to meet schedules); high bias (analyze group-level errors and identify causes, restrict use cases if needed and escalate approval through compliance procedures, retaining assessment records); personal information (process within authorized scope without exporting to external tools; where genuinely needed, apply under established policies and process through compliant channels); handover (state the status, actions taken and pending confirmations for all four matters).",
-                  "The reference deliverable lists required elements only; wording need not match the example if the judgment rationale is explained."
+                  "Complete both versions independently",
+                  "Submit both calculations and a one-page handover for the project lead. Give the decision, both reviewers and the next evidence needed.",
+                  "After submitting, open “DS-04 release review reference (open after submitting)” in the FAQ."
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "Boundaries and conclusions that cannot be inferred",
-                  "This exercise checks awareness of data availability and leakage assessment, minimum validation requirements, bias handling and data compliance only. It does not assess whether real workplace handling is compliant, nor constitute compliance, security or legal advice.",
-                  "Do not use actual employer data or nonpublic business material. Real personal information and restricted data processing, model deployment and industry regulatory requirements must follow employer information management policies, data security and personal information protection rules, and industry compliance requirements; obtain corresponding authorization under current rules where needed."
+                  "Boundary | Use fictional inputs only",
+                  "The thresholds are for DS-04 only. Passing overall error does not establish performance across groups or legal compliance.",
+                  "No code, accounts or real patient data are needed. If you continue, compare whether you prefer checking fields, analyzing errors or explaining results."
                 ]
               }
             ]
           },
           "id": "actors.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "ds04-editor"
           ],
           "title": "Fictional exercise material: handling data leakage and bias",
           "type": "cards"
@@ -29062,58 +29066,56 @@
                 "id": "day-1",
                 "values": [
                   "Day 1: read a public resource",
-                  "Find a public introduction to data quality or model validation, mark three key requirements and corresponding practices, and record what you want to confirm."
+                  "Read the DS-04 prediction time and draw a timeline for the two fields."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
                   "Day 2: check fields and quality",
-                  "Using public or fictional data, list field meanings, possible missing values or anomalies and checking methods."
+                  "Write each group’s denominator and errors, then the combined denominator."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: build a baseline model",
-                  "Build a simple baseline using public or fictional data and state the split method and metrics used."
+                  "Day 3: calculate error rates and check thresholds",
+                  "Calculate overall and group error rates and compare each threshold."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
                   "Day 4: write validation and error analysis",
-                  "Explain how you validated, the main sources of error and whether leakage or bias risks exist."
+                  "Plan a time split and holdout. Explain what each version’s numbers support."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
                   "Day 5: write conclusions and limitations",
-                  "Write a one-page conclusion in nontechnical language, including applicable conditions, uncertainty and uses that are not recommended."
+                  "Explain the release and export decisions in two sentences."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: let someone review using only the material",
-                  "Ask a peer to review your judgments using only your plan, and record their questions."
+                  "Day 6: submit independently",
+                  "Submit independently without opening the reference. Submit both calculations and a one-page handover for the project lead. Give the decision, both reviewers and the next evidence needed."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: decide whether to continue",
-                  "Return to this page's assessment checklist and write three reasons to continue and two conditions requiring caution."
+                  "Day 7: check against the reference",
+                  "Open “DS-04 release review reference (open after submitting)” in the FAQ. Record a difference or confirm there was none, then choose what to explore next."
                 ]
               }
             ]
           },
           "id": "actors.path.seven-day-trial.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-sklearn-leakage"
           ],
           "title": "Seven-day low-cost exploration plan",
           "type": "timeline"
@@ -29194,7 +29196,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "US tasks/preparation follow 15-2051.00 and BLS; China personal information processing follows the PIPL material consulted. Actual recruitment/nationwide one-to-one occupational classification and all industry, sensitive-information and cross-border supporting rules have not been verified."
+              "U.S. tasks and preparation follow O*NET and BLS. The two mainland hiring examples follow their notices. Check applicable privacy rules and data permissions separately."
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
@@ -29433,7 +29435,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial checks: target role education/professional training, experience, actual duties and permissions/appointments. This round has no uniform China conditions or actual live recruitment sample; years of service do not guarantee automatic progression."
+              "Check education, experience, duties and data permissions for the target role. The two examples apply to their own jobs only."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
@@ -29512,7 +29514,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial checks: target role education/professional training, experience, actual duties and permissions/appointments. This round has no uniform China conditions or actual live recruitment sample; years of service do not guarantee automatic progression."
+              "Check education, experience, duties and data permissions for the target role. The two examples apply to their own jobs only."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.credentials",
@@ -29591,7 +29593,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial checks: target role education/professional training, experience, actual duties and permissions/appointments. This round has no uniform China conditions or actual live recruitment sample; years of service do not guarantee automatic progression."
+              "Check education, experience, duties and data permissions for the target role. The two examples apply to their own jobs only."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.03.credentials",
@@ -29670,7 +29672,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial checks: target role education/professional training, experience, actual duties and permissions/appointments. This round has no uniform China conditions or actual live recruitment sample; years of service do not guarantee automatic progression."
+              "Check education, experience, duties and data permissions for the target role. The two examples apply to their own jobs only."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
@@ -29765,7 +29767,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial checks: target role education/professional training, experience, actual duties and permissions/appointments. This round has no uniform China conditions or actual live recruitment sample; years of service do not guarantee automatic progression."
+              "Check education, experience, duties and data permissions for the target role. The two examples apply to their own jobs only."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
@@ -29844,7 +29846,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial checks: target role education/professional training, experience, actual duties and permissions/appointments. This round has no uniform China conditions or actual live recruitment sample; years of service do not guarantee automatic progression."
+              "Check education, experience, duties and data permissions for the target role. The two examples apply to their own jobs only."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.02.credentials",
@@ -29923,7 +29925,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial checks: target role education/professional training, experience, actual duties and permissions/appointments. This round has no uniform China conditions or actual live recruitment sample; years of service do not guarantee automatic progression."
+              "Check education, experience, duties and data permissions for the target role. The two examples apply to their own jobs only."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.03.credentials",
@@ -30002,7 +30004,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial checks: target role education/professional training, experience, actual duties and permissions/appointments. This round has no uniform China conditions or actual live recruitment sample; years of service do not guarantee automatic progression."
+              "Check education, experience, duties and data permissions for the target role. The two examples apply to their own jobs only."
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.credentials",
@@ -30097,7 +30099,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial checks: target role education/professional training, experience, actual duties and permissions/appointments. This round has no uniform China conditions or actual live recruitment sample; years of service do not guarantee automatic progression."
+              "Check education, experience, duties and data permissions for the target role. The two examples apply to their own jobs only."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -30176,7 +30178,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial checks: target role education/professional training, experience, actual duties and permissions/appointments. This round has no uniform China conditions or actual live recruitment sample; years of service do not guarantee automatic progression."
+              "Check education, experience, duties and data permissions for the target role. The two examples apply to their own jobs only."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.02.credentials",
@@ -30255,7 +30257,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial checks: target role education/professional training, experience, actual duties and permissions/appointments. This round has no uniform China conditions or actual live recruitment sample; years of service do not guarantee automatic progression."
+              "Check education, experience, duties and data permissions for the target role. The two examples apply to their own jobs only."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.03.credentials",
@@ -30334,7 +30336,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial checks: target role education/professional training, experience, actual duties and permissions/appointments. This round has no uniform China conditions or actual live recruitment sample; years of service do not guarantee automatic progression."
+              "Check education, experience, duties and data permissions for the target role. The two examples apply to their own jobs only."
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.04.credentials",
@@ -30433,7 +30435,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Demand layers: occupation-wide projections, actual employer arrangements and current recruitment samples. OOH's expectation that data-driven demand and AI integration support growth is a projection explanation, not a share of observed effects caused by tools. This round has no China sample; technology mentions do not imply current net job additions."
+              "Distinguish the U.S. employment projection, two mainland job notices and technology keywords in a source sample. Compare the duties of the actual roles you are considering."
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30478,13 +30480,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial explanation of how to check job information: a recruitment announcement only indicates demand at one employer or role at one point in time."
+              "In October 2026 Peking University School of Public Health advertised one contract data scientist for health data governance, features, modeling and validation. It required a related master’s degree or higher and SQL and Spark/Hive skills; two years or more of relevant experience was preferred. The initial term was two years through a staffing agency, with pay discussed individually."
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "r5-bls-current",
-            "r5-wages-current"
+            "ds-pku"
           ],
           "type": "prose"
         },
@@ -30493,13 +30494,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "A recruitment announcement only indicates demand at one employer or role at one point in time. The three cannot substitute for one another."
+              "An employer posting on Sichuan University’s careers site lists a medical data statistics trainee role requiring a master’s degree, with data cleaning, modeling and reporting duties. The pay column reads 8,000–12,000, without a period or separate figures for the full-time and internship options. It does not establish a monthly wage. The posting lists an end date of November 29, 2026; check the employer for current availability."
             ]
           },
           "id": "actors.market-signals.market-signal-card.5",
           "source_refs": [
-            "r5-bls-current",
-            "r5-wages-current"
+            "ds-scu"
           ],
           "type": "prose"
         },
@@ -31014,7 +31014,7 @@
                 ]
               },
               {
-                "answer": "Generative assistants can handle some boilerplate code, feature exploration, documentation and model prototypes, and machine learning platforms have shortened training and experiment turnaround times, reducing some repetitive coding and organization. But rapid generation does not mean data is usable, methods are correct or results ready for deployment: data authorization, leakage checks, model validation, bias identification, deployment monitoring and domain decisions still require human review. Technical capability does not equal business or regulatory authorization. O*NET shows 40% rating accuracy and exactness Extremely important, 65% rating competition Highly competitive, and 52% facing time pressure more than once a week. Technology exposure does not equal organizational adoption or job disappearance and cannot be interpreted as the probability of job loss.",
+                "answer": "Generative AI can draft code, field descriptions or reports. This page does not estimate occupation-level time savings. Authorized reviewers still check feature availability, leakage, group errors, data permissions and release.",
                 "id": "actors.faq.3",
                 "question": "How will AI affect or replace data scientists?",
                 "question_key": "career.faq.data-scientists.3",
@@ -31068,7 +31068,7 @@
                 ]
               },
               {
-                "answer": "First use public or fictional data to complete an exercise of writing a data description and quality checklist, building a baseline model with validation and error analysis, and writing conclusions and uncertainty statements in nontechnical language, then check the objects, methodological requirements and compliance boundaries of the target track.",
+                "answer": "Try DS-04 in “Entry, certificates and career development.” Calculate error rates, identify the late field, and write release and export decisions. Then check duties and training for roles that match the tasks you would repeat.",
                 "id": "actors.faq.9",
                 "question": "What should a complete beginner do first to try this field?",
                 "question_key": "career.faq.data-scientists.9",
@@ -31077,12 +31077,21 @@
                 ]
               },
               {
-                "answer": "The BLS Occupational Outlook Handbook (2025–2035 projection period, this detailed occupation 15-2051.00) shows approximately 275,600 employed in 2025, projected growth of 35% (much faster than average), employment change of about +95,400, and an average of about 24,800 annual openings over ten years including replacement demand. This is an occupation-wide projection. The O*NET summary currently still lists 2024–2034; the periods differ and are cited separately. Work mainly involves data processing, modeling and validation; check local industry structures and data governance requirements, prioritizing role scope, data permissions and compliance requirements.",
+                "answer": "BLS Table 1.2 projects U.S. employment from 275,600 jobs in 2025 to 371,000 in 2035, up about 95,400 or 34.6%. The handbook rounds this to 35%. About 24,800 annual openings include growth and replacement. For a specific job, check the industry, duties and data permissions.",
                 "id": "actors.faq.10",
                 "question": "What else should I consider when choosing this occupation now?",
                 "question_key": "career.faq.data-scientists.10",
                 "source_refs": [
                   "bls"
+                ]
+              },
+              {
+                "answer": "A: 8/80 = 10%; B: 7/20 = 35%; overall: 15/100 = 15%. The sample sizes and overall rate pass, but B fails. checkout_status is too late for prediction. Removing it does not preserve the old score. Hold release. Use only authorized internal aggregates and do not upload the raw table containing contact details. The aggregates support arithmetic checks, not retraining; submit a validation plan only. After obtaining approval for suitable row-level inputs and confirmed outcome labels, split by time, fit on training data, and check overall and group results on an independent holdout. New results and both approvals are still needed. Example: “The old model used a post-appointment field and group B missed its threshold, so hold release. Ask the model owner to check the new evaluation on approved data and the data protection lead to confirm permitted inputs; do not export the raw table.” Variant: A is 8/80=10%, B is 4/20=20%, and overall is 12/100=12%. Both group thresholds, overall rate and sample sizes pass. The late field and missing approvals remain; hold release and do not export the raw table.",
+                "id": "data-scientists.faq.11",
+                "question": "DS-04 release review reference (open after submitting)",
+                "question_key": "career.faq.data-scientists.q11",
+                "source_refs": [
+                  "ds04-editor"
                 ]
               }
             ]
@@ -31098,7 +31107,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "Separate coverage of this US occupation's 2025 wages from 2025–2035 employment. OOH35% rounds 34.6%, and O*NET now uses the same period. China occupational wage/recruitment gaps remain; NBS information technology provides matching industry context only.",
+              "U.S. wages and employment projections have different coverage. Mainland recruitment notices and industry wages also answer different questions.",
               "17 tasks: 15 Core, 1 Supplemental, 1 New. Opinions on needed education, 21 work-style Impact scores and 6 interest scores are not employee proportions/personality thresholds. Editorial tool and risk discussions do not replace measured adoption/incidents; separate voluntary NIST guidance and applicable PIPL articles.",
               "Exercises and development examples are editorial designs, not employment, qualifications or data/deployment authorization. Check specific roles' statistical methods, data permissions and industry conditions separately."
             ]
@@ -31118,7 +31127,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind career content editorial team (source checking and exercise design)"
+              "FermatMind Editorial"
             ]
           },
           "id": "actors.display.source_card.author",
@@ -31132,7 +31141,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Read in this round: O*NET occupation-specific details/2025 wages/recruitment terms and adjacent definitions, BLS tables/OOH/OEWS methodology, NBS information technology industry, PIPL and scikit-learn methodology. ILO/NIST are limited broad-scope references; see records for unverified scope."
+              "See O*NET for tasks, OEWS for wages and BLS Table 1.2 for projections. Mainland industry, occupation categories and job requirements have separate sources."
             ]
           },
           "id": "actors.display.source_card.source",
@@ -31152,7 +31161,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Updated: 2026-10-09 (source retrieval dates are in the source register)"
+              "Sources checked November 9, 2026."
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31166,7 +31175,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Separate official statistics, laws, methodological/voluntary guidance and editorial suggestions. Gaps in China occupational wages and current recruitment samples remain; broad-scope context does not imply personal income or role permissions."
+              "Two job notices cannot establish nationwide hiring or pay. DS-04 data and permissions are fictional."
             ]
           },
           "id": "actors.display.source_card.note",
@@ -31326,13 +31335,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "Supports this occupation's employment and projection scope (this detailed occupation).",
+                  "BLS projects employment for 2025–2035. The handbook rounds 34.6% to 35%.",
                   "Contains no mainland China information and cannot replace mainland China data.",
-                  "Checked in this round: current 34.6% for 2025–2035, rounded to OOH35; old facts retained, and current O*NET also uses 2025–2035."
+                  "National U.S. projections do not measure individual hiring chances."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "Current 34.6% for 2025–2035, rounded to OOH35; old facts retained, and current O*NET also uses 2025–2035.",
+                "limitation": "National U.S. projections do not measure individual hiring chances.",
                 "market": "United States",
                 "name": "BLS Occupational Outlook Handbook：Data Scientists（15-2051）",
                 "period": "2025–2035 projection period; retrieved 2026-09-19",
@@ -31343,13 +31352,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "Supports classification, employment and compliance context for such roles in mainland China.",
+                  "Check the applicable Chinese personal information and sector rules for the use case.",
                   "Do not infer appointment qualifications, data authorization or wage figures from this.",
-                  "Checked in this round: the retained old gov homepage does not support specific legal articles; the actual PIPL consulted is listed separately. This is not a complete industry legal review."
+                  "The government portal does not provide individual data authorization."
                 ],
                 "evidence_type": "official guidance",
                 "id": "cn-rule",
-                "limitation": "The retained old gov homepage does not support specific legal articles; the actual PIPL consulted is listed separately. This is not a complete industry legal review.",
+                "limitation": "The government portal does not provide individual data authorization.",
                 "market": "Mainland China",
                 "name": "Public employment and data compliance information for mainland China (data analysis and modeling roles)",
                 "period": "Current rules; retrieved 2026-09-19",
@@ -31424,13 +31433,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "Supports observation points on entry preparation levels, interest codes and industry distribution.",
+                  "O*NET reports occupational tasks, preparation and survey responses on education.",
                   "Does not constitute specific employer hiring conditions or mainland China thresholds.",
-                  "Checked in this round: 2025 broad industries 25/19/12/10; 34 is an editorial remainder, and 48/44/4 are opinions on needed education."
+                  "Survey responses do not establish employer or mainland hiring requirements."
                 ],
                 "evidence_type": "official source",
                 "id": "employer",
-                "limitation": "2025 broad industries 25/19/12/10; 34 is an editorial remainder, and 48/44/4 are opinions on needed education.",
+                "limitation": "Survey responses do not establish employer or mainland hiring requirements.",
                 "market": "United States",
                 "name": "O*NET OnLine: Data Scientists summary (15-2051.00)",
                 "period": "Page updated in 2026; retrieved 2026-09-19",
@@ -31489,13 +31498,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "Explains governance, documentation and human oversight requirements when introducing AI systems.",
+                  "The NIST framework helps organizations manage AI risk and human review.",
                   "The framework does not replace divisions of responsibility under employer policies and compliance requirements.",
-                  "Checked in this round: voluntary governance, not mandatory law/methodology or occupational adoption rates."
+                  "The voluntary framework does not replace law or release authorization."
                 ],
                 "evidence_type": "institutional framework",
                 "id": "nist",
-                "limitation": "Voluntary governance, not mandatory law/methodology or occupational adoption rates.",
+                "limitation": "The voluntary framework does not replace law or release authorization.",
                 "market": "United States",
                 "name": "NIST：Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
                 "period": "AI RMF 1.0; retrieved 2026-09-19",
@@ -31538,13 +31547,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "Supports explanation of market signals from employer technology keywords.",
+                  "O*NET technology keywords come from U.S. job postings.",
                   "Keywords do not equal adoption rates or ability requirements.",
-                  "Checked in this round: 2025 full-year US job-posting text lists 55 items: Python66/SQL51/R34/Tableau22/PowerBI19/AWS17/Azure13/TensorFlow11/PyTorch10/SAS9/Excel8/Snowflake8%. These are not actual usage, proficiency or GenAI rates; do not sum them or infer business uses from them."
+                  "Keyword shares do not measure tool adoption or proficiency."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r2-ai",
-                "limitation": "2025 full-year US job-posting text lists 55 items: Python66/SQL51/R34/Tableau22/PowerBI19/AWS17/Azure13/TensorFlow11/PyTorch10/SAS9/Excel8/Snowflake8%. These are not actual usage, proficiency or GenAI rates; do not sum them or infer business uses from them.",
+                "limitation": "Keyword shares do not measure tool adoption or proficiency.",
                 "market": "United States",
                 "name": "O*NET OnLine: Data Scientists hot technologies (15-2051.00)",
                 "period": "Page updated in 2026; retrieved 2026-09-19",
@@ -31555,13 +31564,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "Records the level of detail in mainland China's public wage statistics.",
+                  "The National Bureau of Statistics publishes urban unit wages by industry and other categories.",
                   "No separately listed figures for this occupation were obtained; no proxy values are supplied.",
-                  "Checked in this round: the old homepage is retained; actual NBS information technology industry context consulted in this round is listed separately."
+                  "Industry wages do not estimate data scientist pay."
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "The old homepage is retained; actual NBS information technology industry context consulted in this round is listed separately.",
+                "limitation": "Industry wages do not estimate data scientist pay.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics of China: 2025 average annual wages of employees in urban units",
                 "period": "2025 publication scope; retrieved 2026-09-19",
@@ -31572,13 +31581,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "Explains that statistical percentiles and personal income are not directly interchangeable.",
+                  "OEWS wages include some incentive pay and exclude items such as overtime premiums and shift differentials.",
                   "Provides no personal income conclusions.",
-                  "Checked in this round: wages include some incentive bonuses/allowances and cannot uniformly be described as excluding them; the methodology consulted is listed separately."
+                  "Survey percentiles are not take-home pay."
                 ],
                 "evidence_type": "official methodology",
                 "id": "r2-pay-2",
-                "limitation": "Wages include some incentive bonuses/allowances and cannot uniformly be described as excluding them; the methodology consulted is listed separately.",
+                "limitation": "Survey percentiles are not take-home pay.",
                 "market": "United States",
                 "name": "BLS Handbook of Methods: OEWS wage and conversion scope",
                 "period": "Current methodology; retrieved 2026-09-19",
@@ -31621,13 +31630,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "Explains task-level exposure measurement methodology.",
+                  "The ILO study estimates generative AI exposure by task.",
                   "Task exposure does not equal automation adoption or job replacement outcomes.",
-                  "Checked in this round: the abstract read in this round did not verify matching scores; this does not establish that the full study lacks occupation-specific scores."
+                  "Potential exposure does not measure adoption or job loss."
                 ],
                 "evidence_type": "institutional research",
                 "id": "sag",
-                "limitation": "The abstract read in this round did not verify matching scores; this does not establish that the full study lacks occupation-specific scores.",
+                "limitation": "Potential exposure does not measure adoption or job loss.",
                 "market": "Global",
                 "name": "ILO：Generative AI and Jobs — A Refined Global Index of Occupational Exposure",
                 "period": "Study publication date; retrieved 2026-09-19",
@@ -31775,11 +31784,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "ILO broad-scope task exposure methodology; the abstract read in this round did not verify matching 15-2051 scores. Do not claim the full study lacks scores or interpret exposure as layoff probabilities."
+                  "The ILO study examines potential effects of generative AI at the task level."
                 ],
                 "evidence_type": "institutional research",
                 "id": "r5-ilo-index",
-                "limitation": "ILO broad-scope task exposure methodology; the abstract read in this round did not verify matching 15-2051 scores. Do not claim the full study lacks scores or interpret exposure as layoff probabilities.",
+                "limitation": "This page does not use the study to estimate adoption or displacement.",
                 "market": "Global",
                 "name": "ILO: Generative AI and Jobs—Refined Global Index (abstract)",
                 "period": "2025-05-20 research abstract; retrieved 2026-10-09",
@@ -31830,24 +31839,95 @@
                 "period": "Current official methodology documentation; retrieved 2026-10-09",
                 "publisher": "scikit-learn developers",
                 "scope": "contextual",
-                "url": "https://scikit-learn.org/stable/common_pitfalls.html"
+                "url": "https://scikit-learn.org/stable/common_pitfalls.html#data-leakage"
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Problem definition and communication | Identifying management objectives that data analysis can address is Core; interviewing stakeholders is New without an importance rating, so it cannot be described as rated Core or mandatory for everyone. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
-                  "Data preparation | Cleaning/processing and sampling techniques are Core; designing survey instruments is Supplemental. Editors suggest checking fields/quality/lawful purposes, rather than uniformly treating optional surveys as job responsibilities. — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
-                  "Modeling and comparison | Build and compare models | Apply feature selection algorithms to build models, compare models using statistical performance metrics such as loss functions or the proportion of variance explained, and identify relationships, trends or factors that may affect outcomes. — 75/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                  "Assess possible uses by input, human checks and accountability.",
+                  "Assess possible uses by input, human checks and accountability.",
+                  "Assess possible uses by input, human checks and accountability.",
+                  "Assess possible uses by input, human checks and accountability.",
+                  "Assess possible uses by input, human checks and accountability."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "Does not measure adoption, productivity or displacement.",
+                "name": "FermatMind: AI task analysis method",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In October 2026 Peking University School of Public Health advertised one contract data scientist for health data governance, features, modeling and validation. It required a related master’s degree or higher and SQL and Spark/Hive skills; two years or more of relevant experience was preferred. The initial term was two years through a staffing agency, with pay discussed individually."
+                ],
+                "evidence_type": "Primary public evidence",
+                "id": "ds-pku",
+                "limitation": "One contract role with individually discussed pay.",
+                "name": "Peking University School of Public Health: Data Scientist",
+                "period": "2026-10-21",
+                "publisher": "Peking University Health Science Center",
+                "scope": "recruitment_proxy",
+                "url": "https://rsc.bjmu.edu.cn/rczp/jfxz/adf356a6d157414e81d8d9b76b2e1b44.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "An employer posting on Sichuan University’s careers site lists a medical data statistics trainee role requiring a master’s degree, with data cleaning, modeling and reporting duties. The pay column reads 8,000–12,000, without a period or separate figures for the full-time and internship options. It does not establish a monthly wage. The posting lists an end date of November 29, 2026; check the employer for current availability."
+                ],
+                "evidence_type": "Primary public evidence",
+                "id": "ds-scu",
+                "limitation": "Adjacent role; pay period and employment type are not separated.",
+                "name": "Sichuan University Careers: Medical data statistics trainee",
+                "period": "2026-10-12",
+                "publisher": "Employer posting via Sichuan University Careers",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh5eZiKk7bOynbddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "China’s digital occupation list includes data analysis and processing engineering (2-02-30-09) and big data engineering (2-02-38-03). The Ministry of Education’s big data engineering teaching standard lists both. These categories help compare duties with U.S. 15-2051 without a one-to-one mapping."
+                ],
+                "evidence_type": "Primary public evidence",
+                "id": "ds-cn-catalogue",
+                "limitation": "Occupational comparison, without individual credentials or wages.",
+                "name": "MOHRSS digital occupation list",
+                "period": "2022",
+                "publisher": "Ministry of Human Resources and Social Security",
+                "scope": "contextual",
+                "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Section 5 lists data analysis and processing engineering (2-02-30-09) and big data engineering (2-02-38-03)."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "ds-moe-standard",
+                "limitation": "The teaching standard describes training pathways, not a universal job-entry requirement.",
+                "name": "Ministry of Education: Big Data Engineering teaching standard",
+                "period": "2025",
+                "publisher": "Ministry of Education",
+                "scope": "contextual",
+                "url": "https://hudong.moe.gov.cn/s78/A07/zcs_ztzl/2017_zt06/17zt06_bznr/bznr_zyjyzyjxbz/gdzyjy_bk/bk_dzyxxdl/dzxxdl_jsjl/202502/P020250207566821328685.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The DS-04 data, thresholds and approvals are fictional editorial inputs."
+                ],
+                "evidence_type": "editorial_design",
+                "id": "ds04-editor",
+                "limitation": "Paper exercise, rather than real approvals, organization data or a professional standard.",
+                "market": "Editorial exercise",
+                "name": "FermatMind Editorial: DS-04 fictional exercise",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -33464,6 +33544,30 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://rsc.bjmu.edu.cn/rczp/jfxz/adf356a6d157414e81d8d9b76b2e1b44.htm",
+            "id": "ds-pku",
+            "label": "Peking University School of Public Health: Data Scientist",
+            "scope": "One contract role with individually discussed pay."
+          },
+          {
+            "href": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh5eZiKk7bOynbddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E",
+            "id": "ds-scu",
+            "label": "Sichuan University Careers: Medical data statistics trainee",
+            "scope": "Adjacent role; pay period and employment type are not separated."
+          },
+          {
+            "href": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html",
+            "id": "ds-cn-catalogue",
+            "label": "MOHRSS digital occupation list",
+            "scope": "Occupational comparison, without individual credentials or wages."
+          },
+          {
+            "href": "https://hudong.moe.gov.cn/s78/A07/zcs_ztzl/2017_zt06/17zt06_bznr/bznr_zyjyzyjxbz/gdzyjy_bk/bk_dzyxxdl/dzxxdl_jsjl/202502/P020250207566821328685.pdf",
+            "id": "ds-moe-standard",
+            "label": "Ministry of Education: Big Data Engineering teaching standard",
+            "scope": "The teaching standard describes training pathways, not a universal job-entry requirement."
           }
         ],
         "tracks": [
@@ -34679,8 +34783,8 @@
             },
             {
               "指标": "Insufficient evidence",
-              "数值": "No recruitment or project quote statistics and wage percentiles obtained for such mainland China roles",
-              "说明": "Do not present individual platform or employer quotes as nationwide data, or interpolate."
+              "数值": "No comparable nationwide mainland wage distribution identified",
+              "说明": "Recruitment notices are separate. Peking University pay is discussed individually; the Sichuan University posting omits a period."
             }
           ],
           "china_ai_row": {
@@ -34689,7 +34793,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_class_row": "Editorial duty comparison; a one-to-one China-US classification match or actual China recruitment has not been verified. Confirm actual roles/permissions separately",
+          "china_class_row": "Compare duties across categories without treating the U.S. and mainland codes as equivalent. See both notices in the entry section.",
           "china_edu_table": [
             {
               "学历段": "Bachelor's (mathematics, statistics, computing or related disciplines)",
@@ -34786,7 +34890,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "Actually read in this round: NBS2025 industry wages and PIPL; China occupational wages and current recruitment not obtained",
+          "china_open": "Mainland sources: two job notices, the digital occupation list and 2025 industry wages.",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34829,7 +34933,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (recruitment or project quote scope)",
+              "城市/区间": "Industry context (not occupational pay)",
               "月薪参考": {
                 "$join": [
                   {
@@ -34843,11 +34947,11 @@
                     "type": "prose"
                   }
                 ],
-                "separator": ""
+                "separator": "\n"
               }
             },
             {
-              "城市/区间": "Mainland China (industry-category scope)",
+              "城市/区间": "Two job notices (no comparable monthly pay)",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34859,7 +34963,9 @@
           "china_soc_row": "US code O*NET-SOC15-2051.00; no directly comparable China occupation-level wage scope obtained in this round. The search gap does not establish that none exists nationwide.",
           "edu": "See the entry section for training and qualifications",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "r5-current-china-jiaojiang-featured-daily-2026",
+            "ds-pku-pay-notice",
+            "ds-scu-pay-notice"
           ],
           "sources_note": "Use source links within their respective statistical or announcement scope; cite different statistical periods, populations and pay definitions separately without mutual conversion.",
           "ui": {
@@ -35292,7 +35398,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         },
         "how": {
           "$join": [
@@ -35309,7 +35415,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         },
         "suit": {
           "$join": [
@@ -35326,7 +35432,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         }
       },
       "hero": {
@@ -35366,7 +35472,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         },
         "heading": {
           "$item": "actors.display.market_signal_card.heading",
@@ -35936,8 +36042,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Understand my vocational interests",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
+            "cta_label": "Take the Holland career interest test",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
               "block": "fit",
@@ -35985,8 +36091,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
-            "cta_label": "Understand my Big Five traits",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
+            "cta_label": "Take the Big Five personality test",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
               "block": "fit",
@@ -36034,8 +36140,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "cta_label": "Understand my personality preferences",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "Take the MBTI preferences test",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
               "block": "fit",
@@ -36083,8 +36189,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
-            "cta_label": "Understand my motivational clues",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
+            "cta_label": "Take the Enneagram test",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
               "block": "fit",
@@ -36132,8 +36238,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
-            "cta_label": "Understand my cognitive performance",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
+            "cta_label": "Take the matrix reasoning test",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
               "block": "fit",
@@ -36181,8 +36287,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
-            "cta_label": "Understand my communication clues",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "cta_label": "Take the emotional skills test",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
               "block": "fit",
@@ -36803,7 +36909,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore task interests and work preferences for data scientists",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36916,20 +37022,20 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "href": "/en/tests/holland-career-interest-test-riasec",
+            "label": "Take the Holland career interest test"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Take the Big Five personality test"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Understand my personality preferences"
+            "label": "Take the MBTI preferences test"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Understand my Big Five traits"
+            "href": "/en/tests/enneagram-personality-test-nine-types",
+            "label": "Take the Enneagram test"
           }
         ]
       },
@@ -37268,7 +37374,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and data science tasks",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career track comparison",
       "fit": "Career fit guide",
@@ -37351,7 +37457,7 @@
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation-wide)",
-        "occupation_scope": "15-2051.00, this detailed occupation's scope; BLS projects 35% growth in 2025–2035 (Much faster than average), an aggregate change over the projection period, not individual hiring probabilities. The O*NET summary currently still lists 2024–2034 (approximately 245,900 people in 2024, +34%); the two scopes cover different periods and are cited separately without combining",
+        "occupation_scope": "U.S. SOC 15-2051, national 2025–2035 projection. Table 1.2 reports 34.6%; the handbook rounds to 35%.",
         "period": "2025–2035 projection period; retrieved 2026-09-19",
         "source_refs": [
           "bls"
@@ -37530,36 +37636,48 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: this round obtained no occupational wage distribution or recruitment quote sample for China data science roles. Compare Chinese roles by actual duties; a one-to-one China-US classification match has not been verified",
+        "display_value": "2025 pretax annual averages: CNY 248,752 in non-private units and CNY 128,166 in private units.",
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "Mainland China",
-        "measure": "China occupational wage/recruitment gaps",
-        "occupation_scope": "Mainland China; 15-2051.00 is a duty reference only, not proof of classification correspondence",
-        "period": "Retrieved 2026-10-09",
+        "measure": "Average annual wages in urban information, software and IT services",
+        "occupation_scope": "Mainland urban industry units across occupations; not specific to data scientists.",
+        "period": "2025",
         "source_refs": [
           "r5-nbs-it"
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Data Scientists",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "derivation": null,
+        "display_value": "Peking University School of Public Health did not list an amount.",
+        "fact_id": "ds-pku-pay-notice",
+        "market": "Mainland China",
+        "measure": "Peking University posting: pay discussed individually",
+        "occupation_scope": "One employer’s posting.",
+        "period": "2026-10-21",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "ds-pku"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The posting lists 8,000–12,000 without a pay period or separate internship and full-time figures.",
+        "fact_id": "ds-scu-pay-notice",
+        "market": "Mainland China",
+        "measure": "Sichuan University posting: pay period unspecified",
+        "occupation_scope": "One employer’s posting.",
+        "period": "2026-10-12",
+        "source_refs": [
+          "ds-scu"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and data science tasks"
     },
     "badges": [
       "Data cleaning and modeling · model validation · visualization and business interpretation",
@@ -37603,17 +37721,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Data scientists (O*NET-SOC 15-2051.00) use data-oriented programming languages and visualization software to turn raw data into meaningful information. Tasks include analyzing and cleaning large datasets with statistical software, creating charts and other visualizations, testing, validating and redesigning models, comparing statistical model performance metrics, applying feature selection algorithms, identifying relationships, trends and influencing factors, writing new functions or applications for analysis, reading scientific articles to identify emerging analytical trends, interviewing stakeholders to define problems, designing data collection instruments, reporting modeling and analysis results to management and end users, and recommending data-driven solutions. The US employment and wage scope must be explained: approximately 275,600 employed in 2025, projected growth of 35% in 2025–2035 (Much faster than average), and approximately 24,800 average annual openings over ten years including replacement demand. Wage data for month 5 of 2025 show median annual wages of USD 120,230 (median hourly wages USD 57.80), with annual percentiles USD 67,240/85,660/120,230/158,880/199,130. Industries are professional, scientific and technical services 28%/finance and insurance 19%/information 11%/company and general management 10%/other industries 32%; interest code IC and preparation level Job Zone Four; also covered are mainland China's occupation-level wage gap and control points for data authorization, leakage checks, model validation, bias and drift monitoring, and domain decision review."
+      "text": "How do data scientists spot leakage, validate models and explain results? Compare mainland China job examples and U.S. pay, then try the DS-04 paper review."
     },
     "title": {
       "availability": "available",
       "text": "Data Scientists"
     }
   },
-  "source_content_sha256": "8f2f160af5f801982cc903c123abc42c2310c7ffb5b0b26a38c1539013038054",
+  "source_content_sha256": "9b766522907473a2a545f470409803e5cba10c710b16f0556a4d1bae782228fb",
   "subject": {
     "canonical_slug": "data-scientists",
     "name": "Data Scientists",
-    "summary": "Data scientists in the United States correspond to O*NET-SOC 15-2051.00 (Data Scientists), developing and implementing techniques or analytical applications using data-oriented programming languages and visualization software to turn raw data into meaningful information. They apply data mining, data modeling, natural language processing and machine learning to extract and analyze information from large structured and unstructured datasets; use statistical software to analyze, process and clean large datasets; create charts and other visualizations to communicate analytical results; test, validate and redesign models to ensure accurate prediction of target outcomes; compare statistical model performance metrics such as loss functions or the proportion of variance explained; apply feature selection algorithms; identify relationships, trends or factors that may affect research outcomes; write new functions or applications in programming languages for analysis; read scientific articles and conference papers to identify emerging analytical trends and technologies; interview stakeholders to identify problems to analyze; design surveys or data collection instruments; report modeling and analysis results orally or in writing to management and other end users; and recommend data-driven solutions to key stakeholders. They may also create dynamic data reports. The preparation level is Job Zone Four (considerable preparation needed, SVP 7.0 to below 8.0); the official education survey shows that among new entrants, 48% require a bachelor's degree, 44% a master's degree, and 4% an associate's or other two-year degree. On O*NET, tasks, work context and preparation level use this detailed occupation's own scope; its national wage page publishes annual and hourly percentiles for 2025. Comparable Chinese roles are commonly data analysis, algorithm or modeling positions; duties, employment and pay definitions do not correspond one-to-one with this US detailed occupation and cannot be interchanged."
+    "summary": "Data scientists answer questions with data. They check sources and what information exists at prediction time, compare a baseline and group errors, and explain limitations. Their outputs include findings, validation records and a release recommendation. Try that process with DS-04."
   }
 }

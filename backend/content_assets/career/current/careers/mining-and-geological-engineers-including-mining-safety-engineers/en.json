@@ -149,6 +149,9 @@
       "item:mining-and-geological-engineers-including-mining-safety-engineers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:mining-and-geological-engineers-including-mining-safety-engineers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:mining-and-geological-engineers-including-mining-safety-engineers.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -12176,6 +12179,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. One corrective action has a photo with no location ID. Another lists an owner and due date but no verification. Identify the evidence gaps and who should confirm closure."
+            ]
+          },
+          "id": "mining-and-geological-engineers-including-mining-safety-engineers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Review closure of mine safety findings",
+          "type": "notice"
         }
       ]
     },
@@ -14515,6 +14533,13 @@
         "id": "mining-and-geological-engineers-including-mining-safety-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mining-and-geological-engineers-including-mining-safety-engineers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14684,7 +14709,7 @@
       "text": "Mining and Geological Engineers, Including Mining Safety Engineers: Duties, U.S. Wages, and Safety"
     }
   },
-  "source_content_sha256": "66b7180b95a6704eb0cb8a62dc967f1fe47fc3e62c74eb4a4c7383dbc7074172",
+  "source_content_sha256": "99471bb6959928286471f70df975060b0c6e1d148ec4b86fb3486aa1f55c216b",
   "subject": {
     "canonical_slug": "mining-and-geological-engineers-including-mining-safety-engineers",
     "name": "Mining and Geological Engineers, Including Mining Safety Engineers",

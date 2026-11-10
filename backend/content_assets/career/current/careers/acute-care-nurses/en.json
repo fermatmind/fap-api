@@ -44,9 +44,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1326,13 +1323,13 @@
         "status": "pending_mapping"
       },
       "item:acute-care-nurses.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:acute-care-nurses.path.entry-role-comparison.1": {
         "status": "mapped"
       },
       "item:acute-care-nurses.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:acute-care-nurses.path.interview-probation.1": {
         "status": "mapped"
@@ -23374,13 +23371,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "A caution signal is ignoring registration or the role scope, or refusing team handoff. This page grants no diagnostic, treatment, signing or institutional role authority; registered nurses in China have separately specified statutory duties to notify in critical conditions and to provide necessary emergency rescue."
+              "If shifts, unit training or clinical authority are unclear, check the role first. Paper practice does not replace nursing qualifications."
             ]
           },
           "id": "acute-care-nurses.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-reg",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23389,12 +23386,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Begin with a fictional observation record to practise distinguishing facts, unknowns, handoff recipients and escalation questions, then verify the real registration and role requirements."
+              "Open “Entering the field, qualification and career development” and find “AC-13 | Hand over an unconfirmed item”. Fill the status table and write two sentences before reading the sample."
             ]
           },
           "id": "acute-care-nurses.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23403,14 +23400,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "A signal of suitability to explore is being willing to record accurately, state unknowns, hand off clearly and actively seek support when change is rapid and information is incomplete, and also being willing to complete workplace registration and supervised training."
+              "Explore this work if you enjoy close observation, careful notes and clear handovers and can consider shifts and team coordination."
             ]
           },
           "id": "acute-care-nurses.quick-decision.fit-decision-checklist.3",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "acn-gl"
           ],
           "type": "prose"
         },
@@ -23419,13 +23415,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Using a fictional timeline, complete a non-clinical handoff summary: mark the time, the known facts, the unknown items, the recipient and the questions needing confirmation; it involves no real patient, diagnosis, medication or intervention."
+              "China’s nursing regulation distinguishes the qualifying examination, registration and employer appointment. Apply for registration after meeting the requirements. Verify the employer’s unit training and authorization for emergency, monitoring or ICU duties separately. Acute care nursing includes acute wards, perioperative care and units that require closer monitoring. Verify RN licensure for the jurisdiction, then employer training and scope. AACN’s PCCN and CCRN address different patient acuity and practice; neither grants RN or APRN authority."
             ]
           },
           "id": "acute-care-nurses.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-reg",
+            "acn-aacn",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23434,13 +23431,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The core of acute care is not “handling emergencies” alone, but continuous observation, care coordination and clear handoff within registration and role authorization, and escalation when the situation is beyond scope."
+              "Acute care nurses monitor changes, document care and hand over information when patients’ needs can change quickly. In mainland China, compare emergency, intensive care and monitoring roles with their registration, training and employer requirements."
             ]
           },
           "id": "acute-care-nurses.quick-decision.fermat-decision-card.7",
           "source_refs": [
             "onet",
-            "onet"
+            "acn-gl",
+            "acn-sixth"
           ],
           "type": "prose"
         }
@@ -24793,14 +24791,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no task-level AI scoring for acute care nurses, actual hospital adoption, patient outcomes or causal employment displacement data were obtained. AI use is only an editorial candidate for controlled information organization; it does not replace clinical judgment, authorized interventions, anomaly escalation or documentation responsibility. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Tools can organize fictional notes and flag omissions. Before using real records, check employer approval and access rules. Authorized staff retain responsibility for clinical judgments, sign-off and handovers."
             ]
           },
           "id": "acute-care-nurses.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "source-onet-acute-2026-revision",
-            "source-ilo-ai-2025-revision",
-            "source-nist-ai-rmf-revision"
+            "editor",
+            "cn-reg"
           ],
           "type": "prose"
         },
@@ -26845,12 +26842,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "When job hunting, verify the specific hospital's base pay, night-shift allowance, performance pay, probation period and pre-tax/post-tax basis; the industry average is not that hospital's quote."
+              "NBS 2025 urban annual averages for health and social work were CNY 146,266 at non-private units and CNY 75,631 at private units. The hospital notices do not list pay, and these figures are industry context only."
             ]
           },
           "id": "acute-care-nurses.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "source-nbs-health-2025-revision"
+            "nbs",
+            "acn-gl",
+            "acn-sixth"
           ],
           "type": "prose"
         },
@@ -26873,13 +26872,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "United States RN wages cannot serve as a Chinese reference; the occupational scope, market, pay system and jurisdiction all differ."
+              "NBS 2025 urban annual averages for health and social work were CNY 146,266 at non-private units and CNY 75,631 at private units. The hospital notices do not list pay, and these figures are industry context only."
             ]
           },
           "id": "acute-care-nurses.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "source-bls-rn-2026-revision",
-            "source-cn-nurse-reg-revision"
+            "nbs",
+            "acn-gl",
+            "acn-sixth"
           ],
           "type": "prose"
         },
@@ -26972,7 +26972,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The industry annual average does not represent acute care nurse starting pay, the median or a personal quote. The United States RN parent category is projected to grow 6% over 2025–2035, with a 2025 median of 97,550 USD per year; the two markets must not be extrapolated. United States RN parent-category growth 6% over 2025–2035; not a Chinese or acute care specialty projection. United States RN parent-category 2025 median 97,550 USD per year; not Chinese wages."
+              "The industry annual average does not represent acute care nurse starting pay, the median or a personal quote. The United States RN parent category is projected to grow 5.6% over 2025–2035, with a 2025 median of 97,550 USD per year; the two markets must not be extrapolated. United States RN parent-category growth 5.6% over 2025–2035; not a Chinese or acute care specialty projection. United States RN parent-category 2025 median 97,550 USD per year; not Chinese wages."
             ]
           },
           "id": "acute-care-nurses.china-salary.career-snapshot-primary-locale.55",
@@ -27001,7 +27001,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "United States RN parent-category growth 6% over 2025–2035; not a Chinese or acute care specialty projection."
+              "United States RN parent-category growth 5.6% over 2025–2035; not a Chinese or acute care specialty projection."
             ]
           },
           "id": "acute-care-nurses.china-salary.career-snapshot-primary-locale.58",
@@ -27205,12 +27205,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 RN parent-category employed stock, not the number of acute care nurses; BLS Registered Nurses Occupational Outlook｜https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+              "2025 RN parent-category employed stock, not the number of acute care nurses; BLS Employment Projections Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27219,7 +27219,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "6%"
+              "5.6%"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.21",
@@ -27233,12 +27233,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025–2035 RN parent-category net increase of 194700 people, not an AI causal effect; BLS Registered Nurses Occupational Outlook｜https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+              "2025–2035 RN parent-category net increase of 194,700 people, not an AI causal effect; BLS Employment Projections Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27261,12 +27261,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025–2035 RN parent-category average annual openings, including replacement from retirement and job changes; BLS Registered Nurses Occupational Outlook｜https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+              "2025–2035 RN parent-category average annual openings, including replacement from retirement and job changes; BLS Employment Projections Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27275,7 +27275,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "All of the following are Registered Nurses parent-category (SOC29-1141) wage and employment references, not acute care specialty statistics or personal quotes. Growth 6% over 2025–2035; state licensure, hospital roles and specialty training are verified separately."
+              "All of the following are Registered Nurses parent-category (SOC29-1141) wage and employment references, not acute care specialty statistics or personal quotes. Growth 5.6% over 2025–2035; state licensure, hospital roles and specialty training are verified separately."
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.25",
@@ -27290,7 +27290,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "In 2025 the United States RN parent-category median was 97,550 USD per year and 46.90 USD per hour; the acute care page borrows parent-category statistics and does not present them as wages exclusive to acute care nurses. 2025–2035: RN parent-category growth 6%; 2025: RN parent category 97,550 USD per year."
+              "In 2025 the United States RN parent-category median was 97,550 USD per year and 46.90 USD per hour; the acute care page borrows parent-category statistics and does not present them as wages exclusive to acute care nurses. 2025–2035: RN parent-category growth 5.6%; 2025: RN parent category 97,550 USD per year."
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.26",
@@ -27388,7 +27388,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025–2035: RN parent-category growth 6%"
+              "2025–2035: RN parent-category growth 5.6%"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.33",
@@ -27528,12 +27528,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Educational services: state, local and private"
+              "Government, excluding state and local education and hospitals"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27542,12 +27542,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$78,620 per year"
+              "$110,780 per year"
             ]
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27561,7 +27561,7 @@
           },
           "id": "acute-care-nurses.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27704,31 +27704,31 @@
                 "entity": "Big Five personality test (English)",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI test (Chinese)",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test (Chinese)",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test (Chinese)",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Respiratory therapists",
@@ -29419,7 +29419,7 @@
               [
                 "Emergency/acute care role exploration",
                 "Verify the department training, supervision, escalation and shift requirements",
-                "No reviewable employer announcement this round; rely on the institution's current description",
+                "Compare the two historical Shanghai examples and check the target employer’s current posting",
                 "Facts/unknowns/handoff recipients in a fictional observation record",
                 "A web page or an exercise cannot be used to treat real patients"
               ],
@@ -29461,40 +29461,44 @@
               {
                 "id": "education",
                 "values": [
-                  "Insufficient evidence: no education, registration, training and experience requirements from a reviewable acute care employer announcement were obtained.",
-                  "O*NET occupational material must not be passed off as a hiring condition",
-                  "When job hunting, verify the education, registration, training and experience requirements with the target institution"
+                  "Gongli Hospital ICU post",
+                  "Pudong Gongli Hospital in Shanghai advertised eight ICU nursing posts in March 2026. It required a nursing bachelor’s degree, allowing a junior college qualification with the specified ICU specialty credential. Applicants needed at least two years of ICU work in a tertiary general hospital. The roles included night shifts; applications closed March 31 and pay was not listed.",
+                  "Expired posting."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "Insufficient evidence: no reviewable material on a specific hospital's current screening process was obtained.",
-                  "Background, health, training or system requirements vary by institution",
-                  "Rely only on the target institution's current written material"
+                  "Shanghai Sixth People’s Hospital related nursing post",
+                  "Shanghai Sixth People’s Hospital advertised a full-time international medicine department nurse that March. It required a bachelor’s degree, preferred ICU or emergency experience, and called for Chinese and English communication and rotating ward shifts. Applications closed March 31. The notice did not specify headcount or pay. This is a related role that values acute care experience.",
+                  "ICU or emergency experience was preferred."
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET can be used as task and work-context background",
-                  "Can be used to prepare non-clinical documentation and handoff samples",
-                  "It does not demonstrate that a hospital is currently hiring or will hire"
+                  "Mainland nurse registration",
+                  "China’s nursing regulation distinguishes the qualifying examination, registration and employer appointment. Apply for registration after meeting the requirements. Verify the employer’s unit training and authorization for emergency, monitoring or ICU duties separately.",
+                  "Registration and employer authorization are separate."
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "System and equipment training should be confirmed by the target institution",
-                  "Do not treat a course, a certificate or a colleague's demonstration as authorization",
-                  "No patient data or clinical procedure is used in the exercises on this page"
+                  "U.S. RN and specialty credentials",
+                  "Acute care nursing includes acute wards, perioperative care and units that require closer monitoring. Verify RN licensure for the jurisdiction, then employer training and scope. AACN’s PCCN and CCRN address different patient acuity and practice; neither grants RN or APRN authority.",
+                  "Check the employer and issuing body."
                 ]
               }
             ]
           },
           "id": "acute-care-nurses.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "acn-gl",
+            "acn-sixth",
+            "cn-reg",
+            "bls",
+            "acn-aacn"
           ],
           "title": "What do employers usually look at in hiring?",
           "type": "cards"
@@ -29507,41 +29511,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional learning record: for adult patient “A”, the observation sheets at 08:00, 08:30 and 09:00 read respectively “awake, able to answer briefly”, “reports more breathlessness, needs to pause to speak”, and “still reports more breathlessness; the record contains no oxygen saturation, diagnosis, physician order or past history”. The handoff sheet shows the receiving nurse as “B” and the supervisor as “C”.",
-                  "Known: the times, the patient's own words, the observable communication change, the receiving/supervisory roles; unknown: the diagnosis, vital signs, medication, intervention authority, physician orders and the institutional escalation threshold. Change: at 09:00 a family member asks “what should be done now”.",
-                  "Limit: for non-clinical learners to practise observation, documentation and handoff only; they must not contact real patients, diagnose, interpret the condition, give medication/intervention advice or simulate emergency clinical procedures."
+                  "Materials | Three fictional records",
+                  "E1: This handover concerns bed record B-13. The shift lead verifies whether its update was sent to the incoming team.",
+                  "E2: The 19:05 B-13 entry says an update was drafted but sending is unconfirmed. E3: A 19:10 receipt is for B-31."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Within 30 minutes, complete a one-page handoff draft: list the facts by time, the patient's own words, the unknown items, the intended notification recipient and the items pending confirmation. The prompt does not state a notified status, so it must not be written as notification completed.",
-                  "For the change at 09:00, write an escalation message of no more than three sentences: it must state the time, the facts, the unknown items and the request for an authorized person to assess; it must not give a diagnosis or a specific intervention.",
-                  "Write one boundary statement: the family's question is not answered by the learner but handed to the authorized clinical person designated by the institution."
+                  "Task | Build a status table and a note",
+                  "Record the target identifier, timestamps, confirmed status, open question and owner.",
+                  "Write two sentences to the shift lead before reading the sample."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference reasoning: the record may read “09:00, the patient still reports more breathlessness; this exercise provides no vital signs, diagnosis or physician order”. This comes from the prompt and adds no clinical conclusion.",
-                  "The proposed handoff may read “ask B/C to assess according to institutional procedure; the known item is the persistent change in the chief complaint, and the unknown items are the vital signs, diagnosis and physician order”. B is the receiving nurse and C the supervisor; do not invent that notification or intervention has occurred, and do not turn “more breathlessness” into a cause.",
-                  "The checkable output is the timeline, the fact/unknown separation, the notification recipient and the boundaries; it is not a judgment of the condition, an intervention record or proof of ability."
+                  "Sample | To the shift lead",
+                  "The 19:05 update for B-13 was drafted but sending remains unconfirmed; the 19:10 receipt is for B-31.",
+                  "Please verify whether the B-13 update was sent and record the result; keep it pending for now."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "The answer is derived only from the fictional prompt and cannot be used for real triage, emergency care, clinical communication, patient education or executing physician orders.",
-                  "Whenever key material is missing, the patient's status changes or the role authorization is exceeded, the exercise should show “record and escalate through the institutional pathway” rather than making one's own judgment or intervention."
+                  "Self-check and limits",
+                  "Keep both times, both record IDs and the unconfirmed sending status.",
+                  "Paper only. No real triage, treatment or patient information."
                 ]
               }
             ]
           },
           "id": "acute-care-nurses.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "Entry exercise: one complete acute care nurse task (fictional materials)",
+          "title": "AC-13 | Hand over an unconfirmed item",
           "type": "cards"
         },
         {
@@ -29552,38 +29557,36 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Work piece one: the fictional timeline. Verification: each piece of information has a time, a source and a “fact/unknown” mark.",
-                  "Work piece two: the handoff summary. Verification: the recipient, the intended notification recipient, the notification status pending confirmation, the items pending confirmation and the boundaries are reviewable; the prompt gives no completed notification, so none is invented.",
-                  "Work piece three: the role requirements checklist. Verification: registration, employer training, patient population and supervision requirements are separated."
+                  "Status table",
+                  "Target ID, times, evidence and the open question."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Work piece four: the role boundary page. Verification: it can state clearly that a simulation exercise grants no clinical intervention, signing or independent decision authority.",
-                  "The work pieces use fictional, de-identified material only; they do not replace nurse registration, clinical placement, institutional authorization or specialty training.",
-                  "Self-check before submission: whether a clinical conclusion absent from the prompt was added, whether an unknown item was omitted, and whether the escalation target is explicit."
+                  "Two sentences",
+                  "State the facts, then name who should verify them."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "What is demonstrated at interview is information organization, communication and boundary awareness, not a claim to handle real emergencies.",
-                  "A one-page summary can state the preparation already held, the registration/training still to be completed, and the tasks one wishes to learn under supervision."
+                  "Self-review",
+                  "Compare with the sample and note one correction."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "The tool may be paper or an approved document; real patient information, controlled institutional information or unapproved clinical records must not be entered.",
-                  "If AI is used for language polishing, it may process only the fictional prompt and must be reviewed item by item by a person; it cannot replace clinical judgment."
+                  "Next step",
+                  "Compare an ICU or related nursing posting."
                 ]
               }
             ]
           },
           "id": "acute-care-nurses.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "What reviewable work materials can be prepared at the entry level?",
           "type": "cards"
@@ -29646,59 +29649,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read the occupational tasks and boundaries, and write three acute care tasks and three authorities that cannot be obtained from a web page.",
-                  "Output: a task boundary checklist; no real patient data used throughout."
+                  "Read the roles",
+                  "Compare acute wards, intensive care and emergency settings."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: build a timeline with fictional materials, marking the facts, the patient's own words, the unknown items and the roles.",
-                  "Output: the timeline; no real patient data used throughout."
+                  "Check a posting",
+                  "Choose one example and note education, experience and shifts."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: complete a handoff summary containing no diagnosis or intervention.",
-                  "Output: the handoff summary; no real patient data used throughout."
+                  "Read the handover",
+                  "Identify the target record and owner."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: rewrite the 09:00 change in the prompt as an escalation message addressed to an authorized person.",
-                  "Output: the escalation draft; no real patient data used throughout."
+                  "Compare records",
+                  "Record both timestamps and identifiers."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: produce a role requirements checklist, separating registration, training, authorization and specialty experience.",
-                  "Output: the role requirements table; no real patient data used throughout."
+                  "Write two sentences",
+                  "Keep the sending status unconfirmed."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: ask an adult companion, or yourself on another day, to recheck independently against the prompt; look for added diagnosis, notification or intervention facts, record a revision only when a real error is found, and do not force two errors where there are none.",
-                  "Output: a companion review record; no real patient data used throughout."
+                  "Review it yourself",
+                  "Compare with the sample and self-check, then record one change."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: consolidate the four fictional work pieces and decide whether the next step is to verify qualification, seek supervised observation or compare adjacent nursing roles.",
-                  "Output: a personal decision note; no real patient data used throughout."
+                  "Choose the next step",
+                  "Explore acute care, compare an adjacent role or pause."
                 ]
               }
             ]
           },
           "id": "acute-care-nurses.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "Seven-day experience: complete one acute care nurse task cycle with fictional materials",
+          "title": "Seven days: read the roles, try the handover and choose",
           "type": "timeline"
         },
         {
@@ -29706,18 +29709,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Can prompt facts and unknown items be distinguished? If not, practise structured documentation first.",
-              "Can you write “who, when, what was observed, and who needs to confirm” when a change occurs? If not, practise handoff rather than clinical judgment.",
-              "Are you willing to complete workplace nurse registration and the training the employer requires? If not, you should not enter real nursing practice.",
-              "Can you accept shifts, documentation, teamwork and high-consequence verification? If unsure, seek a career interview or supervised observation.",
-              "Can you refuse interventions, signing or advice beyond your authorization? If not, learn the role boundaries first.",
-              "Can you protect patient and institutional information and avoid entering it into unapproved tools? If not, fill in the data-governance basics first.",
-              "Choose only one next step: verify qualification, produce fictional work pieces, seek a supervised opportunity, or pause the transition plan."
+              "Continue if you can match record IDs and times and are willing to double-check handovers.",
+              "Identify a target unit and check its training requirements.",
+              "Compare adjacent nursing roles if you prefer communication across teams.",
+              "Separate your current experience from what each employer prefers.",
+              "Pause if registration, training or shifts are still unclear.",
+              "If you used B-31’s receipt for B-13, check again against the sample.",
+              "Write down one requirement you still need to verify."
             ]
           },
           "id": "acute-care-nurses.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "How to decide at the end of the seven days whether to continue",
           "type": "list"
@@ -29804,7 +29807,12 @@
           "id": "acute-care-nurses.path.credential-decision.1",
           "source_refs": [
             "source-cn-nurse-reg-revision",
-            "source-bls-rn-2026-revision"
+            "source-bls-rn-2026-revision",
+            "acn-aacn",
+            "cn-reg",
+            "bls",
+            "acn-gl",
+            "acn-sixth"
           ],
           "title": "Education, training and qualification: which are the real thresholds of this occupation?",
           "type": "table"
@@ -29835,15 +29843,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no reviewable acute care employer announcement was obtained, so O*NET, a course or an editorial exercise must not be written as the conditions of a role that is currently hiring.",
-              "When job hunting, verify the job title, registration location, patient population, departmental training, shifts, supervision, pay and closing date directly with the target institution."
+              "Pudong Gongli Hospital in Shanghai advertised eight ICU nursing posts in March 2026. It required a nursing bachelor’s degree, allowing a junior college qualification with the specified ICU specialty credential. Applicants needed at least two years of ICU work in a tertiary general hospital. The roles included night shifts; applications closed March 31 and pay was not listed.",
+              "Shanghai Sixth People’s Hospital advertised a full-time international medicine department nurse that March. It required a bachelor’s degree, preferred ICU or emergency experience, and called for Chinese and English communication and rotating ward shifts. Applications closed March 31. The notice did not specify headcount or pay. This is a related role that values acute care experience."
             ]
           },
           "id": "acute-care-nurses.path.recruitment-sample.1",
           "source_refs": [
-            "onet"
+            "acn-gl",
+            "acn-sixth"
           ],
-          "title": "Note on hiring samples",
+          "title": "Mainland examples: ICU and international medicine",
           "type": "notice"
         },
         {
@@ -31042,22 +31051,22 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS Registered Nurses Occupational Outlook",
+                "entity": "BLS Employment Projections Table 1.2: Registered Nurses",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS Registered Nurses Occupational Outlook",
+                "entity": "BLS Employment Projections Table 1.2: Registered Nurses",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS Registered Nurses Occupational Outlook",
+                "entity": "BLS Employment Projections Table 1.2: Registered Nurses",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET Acute Care Nurses 29-1141.01",
@@ -31129,13 +31138,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The BLS projects United States RN parent-category growth of 6% over 2025–2035, with 180800 average annual openings; this cannot be called an acute care specialty or a Chinese role projection. Transitions are compared by patient setting, education/licensure and team tasks; this page provides no individual hiring probability."
+              "The BLS projects United States RN parent-category growth of 5.6% over 2025–2035, with 180,800 average annual openings; this cannot be called an acute care specialty or a Chinese role projection. Transitions are compared by patient setting, education/licensure and team tasks; this page provides no individual hiring probability."
             ]
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.8",
           "source_refs": [
-            "source-bls-rn-2026-revision",
-            "source-onet-acute-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31149,7 +31157,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.9",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31163,7 +31171,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.10",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31177,7 +31185,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.11",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31186,12 +31194,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Not an acute care specialty, Chinese recruitment or individual hiring probability."
+              "Does not estimate employment for acute care nurses alone."
             ]
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.12",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31205,7 +31213,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.13",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31219,7 +31227,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.14",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31233,7 +31241,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.15",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31247,7 +31255,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.16",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31261,7 +31269,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.17",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31270,12 +31278,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Projected net increase of 194700, from 3465400 to 3660100; not an AI causal effect."
+              "The parent occupation is projected to add about 194,700 jobs, from 3,465,400 to 3,660,100."
             ]
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.18",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31284,12 +31292,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Not an acute care specialty, Chinese recruitment or individual hiring probability."
+              "Does not estimate employment growth for acute care nurses alone."
             ]
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.19",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31303,7 +31311,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.20",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31317,7 +31325,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.21",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31326,12 +31334,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "6%"
+              "5.6%"
             ]
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.22",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31345,7 +31353,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.23",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31359,7 +31367,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.24",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31373,7 +31381,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.25",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31382,12 +31390,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Not an acute care specialty, Chinese recruitment or individual hiring probability."
+              "Does not estimate annual openings for acute care nurses alone."
             ]
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.26",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31401,7 +31409,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.27",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31415,7 +31423,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.28",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31429,7 +31437,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.29",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31443,7 +31451,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.30",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31457,7 +31465,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.31",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31471,7 +31479,7 @@
           },
           "id": "acute-care-nurses.market-signals.market-signal-card.32",
           "source_refs": [
-            "source-bls-rn-2026-revision"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31893,28 +31901,45 @@
                 "question_key": "career.faq.acute-care-nurses.human-control"
               },
               {
-                "answer": "The 2025 annual average wage for the health and social work industry is 146266 yuan for non-private units and 75631 yuan for private units, covering many occupations and social work. It is not the acute care nurse median, new-graduate starting pay or city monthly pay; the exact specialty wage and hiring quotes remain gaps.",
+                "answer": "NBS 2025 urban annual averages for health and social work were CNY 146,266 at non-private units and CNY 75,631 at private units. The hospital notices do not list pay, and these figures are industry context only.",
                 "id": "acute-care-nurses.faq.6",
                 "question": "How should acute care nurse wages in mainland China be understood?",
-                "question_key": "career.faq.acute-care-nurses.china-pay"
+                "question_key": "career.faq.acute-care-nurses.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "acn-gl",
+                  "acn-sixth"
+                ]
               },
               {
-                "answer": "No. 97550 USD per year is the 2025 United States Registered Nurses parent-category median, not an acute care specialty or newcomer income. The 10/25/50/75/90 percentiles are 68940/80330/97550/112350/137470 USD; a percentile cannot be treated as a grade level or a personal quote.",
+                "answer": "O*NET’s 29-1141.01 wage page uses the U.S. registered nurse parent occupation (29-1141). The May 2025 median was $97,550 annually and $46.90 hourly. It does not give specialty pay, starting pay or mainland wages.",
                 "id": "acute-care-nurses.faq.7",
-                "question": "Does the United States median acute care nurse wage represent a newcomer's income?",
-                "question_key": "career.faq.acute-care-nurses.us-pay"
+                "question": "Does U.S. registered nurse pay represent a new acute care nurse?",
+                "question_key": "career.faq.acute-care-nurses.us-pay",
+                "source_refs": [
+                  "oews",
+                  "bls"
+                ]
               },
               {
-                "answer": "In mainland China, verify nursing/midwifery education and clinical placement, the qualification examination, practice registration and the location separately, then verify departmental training, supervision and role appointment. United States RN state licensure and advanced practice education authority are verified separately; a certification directory and web exercises do not replace registration.",
+                "answer": "China’s nursing regulation distinguishes the qualifying examination, registration and employer appointment. Apply for registration after meeting the requirements. Verify the employer’s unit training and authorization for emergency, monitoring or ICU duties separately. Acute care nursing includes acute wards, perioperative care and units that require closer monitoring. Verify RN licensure for the jurisdiction, then employer training and scope. AACN’s PCCN and CCRN address different patient acuity and practice; neither grants RN or APRN authority.",
                 "id": "acute-care-nurses.faq.8",
                 "question": "Which qualifications must be verified to enter acute care nursing?",
-                "question_key": "career.faq.acute-care-nurses.credentials"
+                "question_key": "career.faq.acute-care-nurses.credentials",
+                "source_refs": [
+                  "cn-reg",
+                  "acn-aacn",
+                  "bls"
+                ]
               },
               {
-                "answer": "The BLS projects United States Registered Nurses parent-category growth of 6% over 2025–2035, a net increase of 194700 people and 180800 average annual openings, the latter including replacement from retirement and job changes. This is not an acute care specialty, Chinese demand or an AI causal effect; a transition requires the patient setting, education and licensure to be verified afresh.",
+                "answer": "BLS projects U.S. registered nurse employment (29-1141) to rise from 3,465,400 in 2025 to 3,660,100 in 2035, up 5.6% (6% rounded in the handbook). It projects about 194,700 net new jobs and 180,800 annual openings including replacement. These are parent occupation figures, not estimates for acute care nurses alone.",
                 "id": "acute-care-nurses.faq.9",
                 "question": "How should the outlook for, and transitions from, acute care nursing be judged?",
-                "question_key": "career.faq.acute-care-nurses.outlook-transition"
+                "question_key": "career.faq.acute-care-nurses.outlook-transition",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
                 "answer": "Use only the fictional prompt to make a timeline, a handoff draft, role boundaries and a role requirements checklist. Mark the time, the facts, the unknowns and the intended notification recipient; if no notification status is given, do not write that notification occurred, give no diagnosis, medication or intervention advice, and handle no real patient data.",
@@ -31985,7 +32010,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational tasks, RN parent-category statistics, the Chinese industry reference and the editorial exercises are used separately; the United States task list includes advanced practice roles and is not treated as the shared authority of Chinese general nurses. Gaps in specialty wages, employment and AI effects are retained, the FAQ is verified against the current body text, and old historical records do not serve as this round's self-review."
+              "Occupational tasks, RN parent-category statistics, the Chinese industry reference and the editorial exercises are used separately; the United States task list includes advanced practice roles and is not treated as the shared authority of Chinese general nurses. Gaps in specialty wages, employment and AI effects are retained, the FAQ is verified against the current body text, and old historical records do not serve as 's self-review."
             ]
           },
           "id": "acute-care-nurses.sources.source-card.4",
@@ -32021,25 +32046,25 @@
                 "entity": "Big Five (English)",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI (Chinese)",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram (Chinese)",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning (Chinese)",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the acute care nurse career page",
@@ -32069,84 +32094,84 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official custom occupation profile",
-                  "current page; accessed 2026-09-04"
+                  "Occupation tasks and settings.",
+                  "Pay and employment use parent RN data."
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Pay and employment use parent RN data.",
                 "market": "United States",
-                "name": "29-1141.01 - Acute Care Nurses",
-                "period": "current page; accessed 2026-09-04",
+                "name": "O*NET: Acute Care Nurses 29-1141.01",
+                "period": "2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/custom/29-1141.01"
+                "url": "https://www.onetonline.org/link/summary/29-1141.01"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official occupation details",
-                  "current page; accessed 2026-09-04"
+                  "O*NET’s 29-1141.01 wage page uses the U.S. registered nurse parent occupation (29-1141). The May 2025 median was $97,550 annually and $46.90 hourly. It does not give specialty pay, starting pay or mainland wages.",
+                  "Parent occupation figures; handbook growth is rounded."
                 ],
-                "evidence_type": "Official parent-category occupational background",
+                "evidence_type": "primary_document",
                 "id": "bls",
-                "limitation": "Registered Nurses parent-category background, not wage, employment or AI-effect evidence specific to acute care nurses.",
+                "limitation": "Parent occupation figures; handbook growth is rounded.",
                 "market": "United States",
-                "name": "Registered Nurses: Occupational Outlook Handbook",
-                "period": "Current career outlook page; visited 2026-09-13",
+                "name": "BLS Occupational Outlook Handbook: Registered Nurses",
+                "period": "May 2025 / 2025–35",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official technology profile",
-                  "current page; accessed 2026-09-04"
+                  "BLS projects U.S. registered nurse employment (29-1141) to rise from 3,465,400 in 2025 to 3,660,100 in 2035, up 5.6% (6% rounded in the handbook). It projects about 194,700 net new jobs and 180,800 annual openings including replacement. These are parent occupation figures, not estimates for acute care nurses alone.",
+                  "No separate acute care nursing estimate."
                 ],
-                "evidence_type": "official technology profile",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "No separate acute care nursing estimate.",
                 "market": "United States",
-                "name": "Hot Technologies: 29-1141.01 - Acute Care Nurses",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/hot_tech/29-1141.01"
+                "name": "BLS Table 1.2: registered nurse projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official industry distribution",
-                  "current page; accessed 2026-09-04"
+                  "O*NET’s 29-1141.01 wage page uses the U.S. registered nurse parent occupation (29-1141). The May 2025 median was $97,550 annually and $46.90 hourly. It does not give specialty pay, starting pay or mainland wages.",
+                  "P50 is the median."
                 ],
-                "evidence_type": "official industry distribution",
+                "evidence_type": "primary_document",
                 "id": "oews",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "P50 is the median.",
                 "market": "United States",
-                "name": "Industries: 29-1141.01 - Acute Care Nurses",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/29-1141.01"
+                "name": "O*NET: national wages for registered nurses",
+                "period": "May 2025",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localwages/29-1141.01"
               },
               {
-                "accessed_at": "2026-09-04",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "NBS 2025 urban annual averages for health and social work were CNY 146,266 at non-private units and CNY 75,631 at private units. The hospital notices do not list pay, and these figures are industry context only.",
+                  "No acute care specialty wage."
                 ],
-                "evidence_type": "official certification discovery",
+                "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "No acute care specialty wage.",
                 "market": "United States",
-                "name": "National Certifications: 29-1141.01 - Acute Care Nurses",
-                "period": "current page; accessed 2026-09-04",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localcert/29-1141.01"
+                "name": "NBS: 2025 annual wages of urban units",
+                "period": "2025",
+                "publisher": "国家统计局 / National Bureau of Statistics",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-04",
@@ -32247,34 +32272,34 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "2023 study of potential cross-occupation task impact.",
-                  "Does not report single-hospital deployment, patient outcomes or a causal substitution rate for acute care."
+                  "Estimates potential exposure with task-level data.",
+                  "Does not measure adoption, displacement or patient outcomes in acute care."
                 ],
                 "evidence_type": "Cross-occupation task impact study",
                 "id": "ilo",
                 "limitation": "Does not report deployment, patient outcomes, substitution rates or a timeline for acute care or for a single hospital.",
                 "market": "Global",
-                "name": "Generative AI and Jobs: A global analysis of potential effects on job quantity and quality",
-                "period": "2023 study; visited 2026-09-13",
+                "name": "ILO Working Paper 140: occupational task exposure",
+                "period": "2025",
                 "publisher": "International Labour Organization",
                 "scope": "cross_occupation_context",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-global-analysis-potential-effects-task-automation"
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "Uses fictional handover records and identifiers.",
+                  "No triage, diagnosis, medication or real handovers."
                 ],
-                "evidence_type": "Certification search entry point",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "Does not demonstrate individual registration, hospital role authority or patient-treatment authorization.",
+                "limitation": "No triage, diagnosis, medication or real handovers.",
                 "market": "United States occupational material",
-                "name": "National Certifications: 29-1141.01 - Acute Care Nurses",
-                "period": "Current page; visited 2026-09-13",
-                "publisher": "O*NET OnLine",
-                "scope": "credential_discovery",
-                "url": "https://www.onetonline.org/link/localcert/29-1141.01"
+                "name": "AC-13 | Hand over an unconfirmed item",
+                "period": "Fictional paper exercise",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/en/career/jobs/acute-care-nurses#career-content-path"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -32469,36 +32494,36 @@
                 "url": "https://www.onetonline.org/link/custom/29-1141.01"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "National Health Commission regulation",
-                  "Nurse registration, practice location, education/placement and examination conditions"
+                  "China’s nursing regulation distinguishes the qualifying examination, registration and employer appointment. Apply for registration after meeting the requirements. Verify the employer’s unit training and authorization for emergency, monitoring or ICU duties separately.",
+                  "Check unit training and authorization with the employer."
                 ],
-                "evidence_type": "Nurse practice registration rules",
+                "evidence_type": "primary_document",
                 "id": "cn-reg",
-                "limitation": "Used for mainland China nurse registration and location boundaries; does not provide acute care wages, role appointment or specific institutional authorization.",
+                "limitation": "Check unit training and authorization with the employer.",
                 "market": "Mainland China",
-                "name": "Measures for the administration of nurse practice registration",
-                "period": "2021 revised text; visited 2026-09-13",
-                "publisher": "National Health Commission",
+                "name": "China’s Regulation on Nurses",
+                "period": "2020 revision",
+                "publisher": "国务院 / State Council",
                 "scope": "contextual",
-                "url": "https://www.nhc.gov.cn/wjw/c100221/202201/924b1bc5efd7489e8041f98799e06037.shtml"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=209"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "United States Registered Nurses industry employment and mean wage table",
-                  "2023 industry statistics"
+                  "O*NET’s 29-1141.01 wage page uses the U.S. registered nurse parent occupation (29-1141). The May 2025 median was $97,550 annually and $46.90 hourly. It does not give specialty pay, starting pay or mainland wages.",
+                  "P50 is the median."
                 ],
-                "evidence_type": "Official industry wage statistics",
+                "evidence_type": "primary_document",
                 "id": "oews-rn-2023",
-                "limitation": "Registered Nurses parent-category industry average wage, not an acute care specialty wage or a personal quote.",
+                "limitation": "P50 is the median.",
                 "market": "United States",
-                "name": "Registered Nurses — May 2023 OEWS industry estimates",
-                "period": "May 2023",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "name": "O*NET: national wages for registered nurses",
+                "period": "May 2025",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.bls.gov/oes/2023/may/oes291141.htm"
+                "url": "https://www.onetonline.org/link/localwages/29-1141.01"
               },
               {
                 "accessed_at": "2026-10-07",
@@ -32517,33 +32542,33 @@
                 "url": "https://www.onetonline.org/link/summary/29-1141.01"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Registered Nurses parent category 2025 median 97550 USD, employment 3465400; growth 6%, net increase 194700, average annual openings 180800.",
-                  "Hospital median 100220, outpatient 91230, nursing and residential facilities 84300, education 78620 USD per year."
+                  "O*NET’s 29-1141.01 wage page uses the U.S. registered nurse parent occupation (29-1141). The May 2025 median was $97,550 annually and $46.90 hourly. It does not give specialty pay, starting pay or mainland wages.",
+                  "Parent occupation figures; handbook growth is rounded."
                 ],
-                "evidence_type": "Official parent-category wage and employment projection",
+                "evidence_type": "primary_document",
                 "id": "source-bls-rn-2026-revision",
-                "limitation": "Not acute care specialty, single-hospital recruitment or Chinese data; average annual openings include replacement needs.",
+                "limitation": "Parent occupation figures; handbook growth is rounded.",
                 "market": "United States",
-                "name": "BLS Registered Nurses Occupational Outlook",
-                "period": "Wages 2025; projection 2025–2035",
+                "name": "BLS Occupational Outlook Handbook: Registered Nurses",
+                "period": "May 2025 / 2025–35",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Annual wages at the 10/25/50/75/90 percentiles are 68940/80330/97550/112350/137470 USD."
+                  "O*NET’s 29-1141.01 wage page uses the U.S. registered nurse parent occupation (29-1141). The May 2025 median was $97,550 annually and $46.90 hourly. It does not give specialty pay, starting pay or mainland wages."
                 ],
-                "evidence_type": "Official wage distribution",
+                "evidence_type": "primary_document",
                 "id": "source-onet-rn-wage-2025-revision",
-                "limitation": "The page explicitly states Wage data collected from Registered Nurses; a percentile is not equivalent to a grade level or starting pay.",
+                "limitation": "P50 is the median.",
                 "market": "United States",
-                "name": "O*NET national wages (Registered Nurses parent category)",
-                "period": "2025",
-                "publisher": "O*NET OnLine / BLS",
+                "name": "O*NET: national wages for registered nurses",
+                "period": "May 2025",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localwages/29-1141.01"
               },
@@ -32564,20 +32589,20 @@
                 "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "After registration and obtaining the practice certificate, perform nursing at the registered location; the education, placement, examination, health and application conditions are verified separately.",
-                  "Article six covers a standard full-time nursing/midwifery programme of 3 years or more, including 8 months or more of clinical nursing placement, and the corresponding qualification."
+                  "China’s nursing regulation distinguishes the qualifying examination, registration and employer appointment. Apply for registration after meeting the requirements. Verify the employer’s unit training and authorization for emergency, monitoring or ICU duties separately.",
+                  "Check unit training and authorization with the employer."
                 ],
-                "evidence_type": "Official registration rules",
+                "evidence_type": "primary_document",
                 "id": "source-cn-nurse-reg-revision",
-                "limitation": "Provides no wages or specific hospital specialty authority; direct connection was restricted this round, so the official search index and current government service references were checked, and full-text direct access is not claimed.",
+                "limitation": "Check unit training and authorization with the employer.",
                 "market": "Mainland China",
-                "name": "Measures for the administration of nurse practice registration (revised 2021)",
-                "period": "Published 2008; revised 2021",
-                "publisher": "National Health Commission",
+                "name": "Measures for Administration of Nurse Practice Registration (2021 revision)",
+                "period": "2021 revision",
+                "publisher": "National Health Commission, republished by Wuxi Health Commission",
                 "scope": "contextual",
-                "url": "https://www.nhc.gov.cn/wjw/c100221/202201/924b1bc5efd7489e8041f98799e06037.shtml"
+                "url": "https://wjw.wuxi.gov.cn/doc/2023/02/11/3880777.shtml"
               },
               {
                 "accessed_at": "2026-10-07",
@@ -32601,7 +32626,7 @@
                 ],
                 "evidence_type": "Task exposure study",
                 "id": "source-ilo-ai-2025-revision",
-                "limitation": "Uses the studies already read in this batch; provides no single-hospital deployment, patient outcomes or causal layoff data for acute care.",
+                "limitation": "Does not measure adoption, displacement or patient outcomes in acute care.",
                 "market": "Global",
                 "name": "Generative AI and jobs: A refined global index of occupational exposure",
                 "period": "2025",
@@ -32612,17 +32637,17 @@
               {
                 "accessed_at": "2026-10-07",
                 "details": [
-                  "A meta-analysis of 54 studies summarising the overall association between conscientiousness and performance."
+                  "Zell and Lesick synthesized 54 meta-analyses of associations between Big Five traits and performance."
                 ],
                 "evidence_type": "Meta-analysis",
                 "id": "source-big-five-meta-revision",
-                "limitation": "Uses the studies already verified in this batch; not an acute care competence threshold, patient-safety or hiring prediction.",
+                "limitation": "Does not validate acute care nursing competence or safety screening.",
                 "market": "Cross-occupation academic samples",
                 "name": "Big Five traits and performance meta-analysis",
                 "period": "2022",
                 "publisher": "Journal of Personality / Wiley",
                 "scope": "contextual",
-                "url": "https://onlinelibrary.wiley.com/doi/10.1111/jopy.12683"
+                "url": "https://doi.org/10.1111/jopy.12683"
               },
               {
                 "accessed_at": "2026-10-07",
@@ -32631,7 +32656,7 @@
                 ],
                 "evidence_type": "Model institution usage boundary",
                 "id": "source-mbti-career-revision",
-                "limitation": "Uses the official boundary already read in this batch; does not demonstrate a best nurse type.",
+                "limitation": "Preferences are not abilities or hiring criteria.",
                 "market": "General career exploration",
                 "name": "Myers & Briggs Foundation: personality type and careers",
                 "period": "Visit 2026-10-07",
@@ -32646,7 +32671,7 @@
                 ],
                 "evidence_type": "Systematic review",
                 "id": "source-enneagram-review-revision",
-                "limitation": "Uses the abstracts already read in this batch; not validation of nurse competence or practice screening.",
+                "limitation": "Does not establish screening validity for nursing practice or employment.",
                 "market": "104 independent samples",
                 "name": "Enneagram systematic review",
                 "period": "2021",
@@ -32655,20 +32680,20 @@
                 "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/jclp.23097"
               },
               {
-                "accessed_at": "2026-10-07",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Notify the physician immediately of a critical condition; in an emergency, give necessary emergency rescue first in order to save a dying patient.",
-                  "An order found to be unlawful or to violate diagnostic and treatment standards must be raised with the physician and, if necessary, reported to the person in charge."
+                  "China’s nursing regulation distinguishes the qualifying examination, registration and employer appointment. Apply for registration after meeting the requirements. Verify the employer’s unit training and authorization for emergency, monitoring or ICU duties separately.",
+                  "Check unit training and authorization with the employer."
                 ],
-                "evidence_type": "Official regulatory text",
+                "evidence_type": "primary_document",
                 "id": "source-cn-nurse-ordinance-2020-revision",
-                "limitation": "The duty description provides no specific first-aid procedure; a non-clinical web exercise learner does not thereby obtain nurse status.",
+                "limitation": "Check unit training and authorization with the employer.",
                 "market": "Mainland China",
-                "name": "Article 17 of the Nurses Regulation (revised 2020)",
-                "period": "Published 2008; revised 2020-03-27",
-                "publisher": "State Council regulation; consolidated text published by the Beijing Municipal Health Commission",
+                "name": "China’s Regulation on Nurses",
+                "period": "2020 revision",
+                "publisher": "国务院 / State Council",
                 "scope": "contextual",
-                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230408_2993021.html"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=209"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32747,20 +32772,58 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Assess｜Condition and risk identification｜Collect and verify the patient's status and existing information, and escalate through the institutional pathway when an acute change is found. — 25/100; weight=1/3; acute-care-nurses.profile.responsibilities-block.1[0]",
-                  "Treat｜Fulfil nursing duties lawfully｜Registered nurses handle permitted nursing care according to their duties; they notify the physician immediately of a critical condition and perform the necessary rescue duties in an emergency, and a nurse must not be portrayed as only waiting for instructions. The web exercise provides no procedural steps. — 0/100; weight=1/3; acute-care-nurses.profile.responsibilities-block.1[3]",
-                  "Document｜Traceability, referral and boundaries｜Record the assessment, what was performed, the reactions and the handoff completely; when out of scope or when information is insufficient, stop and hand over to an authorized person. — 75/100; weight=1/3; acute-care-nurses.profile.responsibilities-block.1[5]"
+                  "Organize fictional notes and preserve unconfirmed status."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "Does not estimate displacement.",
+                "name": "FermatMind: limits of documentation tools",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Pudong Gongli Hospital in Shanghai advertised eight ICU nursing posts in March 2026. It required a nursing bachelor’s degree, allowing a junior college qualification with the specified ICU specialty credential. Applicants needed at least two years of ICU work in a tertiary general hospital. The roles included night shifts; applications closed March 31 and pay was not listed."
+                ],
+                "evidence_type": "primary_document",
+                "id": "acn-gl",
+                "limitation": "Expired posting at one hospital.",
+                "name": "Pudong Gongli Hospital: ICU nurse recruitment",
+                "period": "2026-03-13",
+                "publisher": "Pudong Gongli Hospital",
+                "scope": "recruitment_proxy",
+                "url": "https://www.glhospital.com/news/content/id/600/pid/46197.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Shanghai Sixth People’s Hospital advertised a full-time international medicine department nurse that March. It required a bachelor’s degree, preferred ICU or emergency experience, and called for Chinese and English communication and rotating ward shifts. Applications closed March 31. The notice did not specify headcount or pay. This is a related role that values acute care experience."
+                ],
+                "evidence_type": "primary_document",
+                "id": "acn-sixth",
+                "limitation": "Related role, not an ICU vacancy.",
+                "name": "Shanghai Sixth People’s Hospital: international medicine nursing",
+                "period": "2026-03-20",
+                "publisher": "Shanghai Sixth People’s Hospital",
+                "scope": "recruitment_proxy",
+                "url": "https://www.6thhosp.com/Content/News/9970"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Acute care nursing includes acute wards, perioperative care and units that require closer monitoring. Verify RN licensure for the jurisdiction, then employer training and scope. AACN’s PCCN and CCRN address different patient acuity and practice; neither grants RN or APRN authority."
+                ],
+                "evidence_type": "primary_document",
+                "id": "acn-aacn",
+                "limitation": "Specialty certification is separate from licensure.",
+                "name": "AACN: CCRN and PCCN",
+                "period": "Current guidance",
+                "publisher": "American Association of Critical-Care Nurses",
+                "scope": "contextual",
+                "url": "https://www.aacn.org/certification/ccrn-or-pccn"
               }
             ]
           },
@@ -35946,7 +36009,7 @@
             }
           }
         ],
-        "industry_value_label": "Median wage for this occupation within the industry",
+        "industry_value_label": "Median annual pay for U.S. registered nurses in this industry",
         "interpretation_heading": "How should United States acute care nurse wages be understood?",
         "interpretation_rows": [
           {
@@ -36093,9 +36156,7 @@
         "h1": {
           "$subject": "name"
         },
-        "quick_answer": {
-          "$subject": "summary"
-        },
+        "quick_answer": "Acute care nurses monitor changes, document care and hand over information when patients’ needs can change quickly. In mainland China, compare emergency, intensive care and monitoring roles with their registration, training and employer requirements.",
         "title": {
           "$subject": "name"
         }
@@ -37449,7 +37510,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my vocational interests suit acute care nurses",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37571,9 +37632,11 @@
     "interface": {
       "interface.fit.directions_heading": "Adjacent nursing roles: comparison of task interests and entry conditions",
       "interface.fit.interest_code_heading": "How to understand the SI interest code",
+      "interface.outlook.evidence_heading": "Three measures of U.S. registered nurse employment",
       "interface.profile.comparison.dimension_header": "Comparison dimension",
       "interface.profile.comparison.primary_header": "Acute care task scope",
       "interface.profile.comparison.secondary_header": "Registered Nurses parent category (United States)",
+      "interface.quick_decision.experiment_heading": "How can I try a nursing handover?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "United States pay reference",
@@ -37666,7 +37729,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "Where can AI help with nursing documentation?",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -37757,180 +37820,184 @@
       },
       {
         "derivation": null,
-        "display_value": "3,391,000 people",
+        "display_value": "3,465,400",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Registered Nurses parent-category employment base",
         "occupation_scope": "Registered Nurses (parent-category reference; not equivalent to statistics exclusive to acute care nurses)",
-        "period": "2024 employment; Registered Nurses parent category",
+        "period": "2025",
         "source_refs": [
-          "privacy"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "5%–6% (range label)",
+        "display_value": "5.6%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Projected employment growth range",
         "occupation_scope": "Registered Nurses (parent-category reference; not equivalent to statistics exclusive to acute care nurses)",
-        "period": "2024–2034; Registered Nurses parent category",
+        "period": "2025–2035",
         "source_refs": [
-          "privacy"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 189,100 job openings per year",
+        "display_value": "About 180,800 annually",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Average annual openings arising from growth and replacement needs",
         "occupation_scope": "Registered Nurses (parent-category reference; not equivalent to statistics exclusive to acute care nurses)",
-        "period": "2024–2034; Registered Nurses parent category",
+        "period": "2025–2035",
         "source_refs": [
-          "privacy"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "This round obtained no Registered Nurses parent-category industry wage value in the same official table",
+        "display_value": "$110,780 annually",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "United States",
-        "measure": "A gap to be looked up; national wages must not be substituted for industry wages",
-        "occupation_scope": "Registered Nurses (parent-category reference; not equivalent to statistics exclusive to acute care nurses)",
-        "period": "Scope checked this round: O*NET National Wages and the occupation page",
+        "measure": "Industry median annual wage for RNs",
+        "occupation_scope": "Government, excluding state and local education and hospitals | U.S. registered nurses",
+        "period": "May 2025",
         "source_refs": [
-          "privacy"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "This round obtained no Registered Nurses parent-category industry wage value in the same official table",
+        "display_value": "$100,220 annually",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "United States",
-        "measure": "A gap to be looked up; national wages must not be substituted for industry wages",
-        "occupation_scope": "Registered Nurses (parent-category reference; not equivalent to statistics exclusive to acute care nurses)",
-        "period": "Scope checked this round: O*NET National Wages and the occupation page",
+        "measure": "Industry median annual wage for RNs",
+        "occupation_scope": "Hospitals: state, local and private | U.S. registered nurses",
+        "period": "May 2025",
         "source_refs": [
-          "privacy"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "This round obtained no Registered Nurses parent-category industry wage value in the same official table",
+        "display_value": "$91,230 annually",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "United States",
-        "measure": "A gap to be looked up; national wages must not be substituted for industry wages",
-        "occupation_scope": "Registered Nurses (parent-category reference; not equivalent to statistics exclusive to acute care nurses)",
-        "period": "Scope checked this round: O*NET National Wages and the occupation page",
+        "measure": "Industry median annual wage for RNs",
+        "occupation_scope": "Ambulatory healthcare services | U.S. registered nurses",
+        "period": "May 2025",
         "source_refs": [
-          "privacy"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "This round obtained no Registered Nurses parent-category industry wage value in the same official table",
+        "display_value": "$84,300 annually",
         "fact_id": "us-industry-wage-education-2025",
         "market": "United States",
-        "measure": "A gap to be looked up; national wages must not be substituted for industry wages",
-        "occupation_scope": "Registered Nurses (parent-category reference; not equivalent to statistics exclusive to acute care nurses)",
-        "period": "Scope checked this round: O*NET National Wages and the occupation page",
+        "measure": "Industry median annual wage for RNs",
+        "occupation_scope": "Nursing and residential care facilities | U.S. registered nurses",
+        "period": "May 2025",
         "source_refs": [
-          "privacy"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "documented_unavailable (2025 official public basis)",
+        "display_value": "NBS 2025 urban annual averages for health and social work were CNY 146,266 at non-private units and CNY 75,631 at private units. The hospital notices do not list pay, and these figures are industry context only.",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "Mainland China and the United States verified separately",
         "measure": "National annual average wage of urban non-private unit employees",
         "occupation_scope": "Acute care nurses",
-        "period": "2025 annual wage release; published 2026-05-16; accessed 2026-08-31",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs",
+          "acn-gl",
+          "acn-sixth"
         ]
       },
       {
         "derivation": null,
-        "display_value": "documented_unavailable (2025 official public basis)",
+        "display_value": "NBS 2025 urban annual averages for health and social work were CNY 146,266 at non-private units and CNY 75,631 at private units. The hospital notices do not list pay, and these figures are industry context only.",
         "fact_id": "cn-private-2025",
         "market": "Mainland China and the United States verified separately",
         "measure": "National annual average wage of urban private unit employees",
         "occupation_scope": "Acute care nurses",
-        "period": "2025 annual wage release; published 2026-05-16; accessed 2026-08-31",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs",
+          "acn-gl",
+          "acn-sixth"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the acute care nurse-specific research package did not provide this statistic)",
+        "display_value": "The cited data do not isolate acute care nursing",
         "fact_id": "cn-mid-managers-2025",
         "market": "Mainland China and the United States verified separately",
         "measure": "Average annual wage of middle-level and above managers in enterprises above a designated size",
         "occupation_scope": "Acute care nurses",
-        "period": "The reference period is governed by the source",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the acute care nurse-specific research package did not provide this statistic)",
+        "display_value": "The cited data do not isolate acute care nursing",
         "fact_id": "cn-clerical-2025",
         "market": "Mainland China and the United States verified separately",
         "measure": "Average annual wage of clerical and related personnel in enterprises above a designated size",
         "occupation_scope": "Acute care nurses",
-        "period": "The reference period is governed by the source",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the acute care nurse-specific research package did not provide this statistic)",
+        "display_value": "The cited data do not isolate acute care nursing",
         "fact_id": "cn-industry-rental-business-2025",
         "market": "Mainland China and the United States verified separately",
         "measure": "Average annual wage by industry sector (urban non-private units)",
         "occupation_scope": "Acute care nurses",
-        "period": "The reference period is governed by the source",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the acute care nurse-specific research package did not provide this statistic)",
+        "display_value": "The cited data do not isolate acute care nursing",
         "fact_id": "cn-industry-science-tech-2025",
         "market": "Mainland China and the United States verified separately",
         "measure": "Average annual wage by industry sector (urban non-private units)",
         "occupation_scope": "Acute care nurses",
-        "period": "The reference period is governed by the source",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the acute care nurse-specific research package did not provide this statistic)",
+        "display_value": "The cited data do not isolate acute care nursing",
         "fact_id": "cn-industry-education-2025",
         "market": "Mainland China and the United States verified separately",
         "measure": "Average annual wage by industry sector (urban non-private units)",
         "occupation_scope": "Acute care nurses",
-        "period": "The reference period is governed by the source",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not obtained (the acute care nurse-specific research package did not provide this statistic)",
+        "display_value": "The cited data do not isolate acute care nursing",
         "fact_id": "cn-industry-public-admin-2025",
         "market": "Mainland China and the United States verified separately",
         "measure": "Average annual wage by industry sector (urban non-private units)",
         "occupation_scope": "Acute care nurses",
-        "period": "The reference period is governed by the source",
+        "period": "2025",
         "source_refs": [
           "onet"
         ]
@@ -37949,14 +38016,16 @@
       },
       {
         "derivation": null,
-        "display_value": "documented_unavailable (2025 official public basis)",
+        "display_value": "NBS 2025 urban annual averages for health and social work were CNY 146,266 at non-private units and CNY 75,631 at private units. The hospital notices do not list pay, and these figures are industry context only.",
         "fact_id": "cn-wage-unavailable",
         "market": "Mainland China national basis",
         "measure": "occupation wage availability",
         "occupation_scope": "Acute care nurses",
-        "period": "2025 annual wage release; published 2026-05-16; accessed 2026-08-31",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs",
+          "acn-gl",
+          "acn-sixth"
         ]
       },
       {
@@ -38081,38 +38150,38 @@
       },
       {
         "derivation": null,
-        "display_value": "3,465,400 people",
+        "display_value": "3,465,400",
         "fact_id": "us-employment-2025-revision",
         "market": "United States",
         "measure": "Employed stock",
         "occupation_scope": "Registered Nurses parent category (SOC29-1141), not an acute care specialty",
         "period": "2025",
         "source_refs": [
-          "source-bls-rn-2026-revision"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "6%",
+        "display_value": "5.6%",
         "fact_id": "us-growth-2025-2035-revision",
         "market": "United States",
         "measure": "Projected net employment growth rate",
         "occupation_scope": "Registered Nurses parent category (SOC29-1141), not an acute care specialty",
         "period": "2025–2035",
         "source_refs": [
-          "source-bls-rn-2026-revision"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "180,800 per year",
+        "display_value": "About 180,800 annually",
         "fact_id": "us-openings-2025-2035-revision",
         "market": "United States",
         "measure": "Average annual job openings",
         "occupation_scope": "Registered Nurses parent category (SOC29-1141), not an acute care specialty",
         "period": "2025–2035",
         "source_refs": [
-          "source-bls-rn-2026-revision"
+          "ep"
         ]
       },
       {
@@ -38153,14 +38222,14 @@
       },
       {
         "derivation": null,
-        "display_value": "$78,620 per year",
+        "display_value": "$110,780 per year",
         "fact_id": "us-rn-education-revision",
         "market": "United States",
         "measure": "Industry parent-category median annual wage",
-        "occupation_scope": "Registered Nurses parent category in educational services",
-        "period": "2025",
+        "occupation_scope": "Government, excluding state and local education and hospitals | U.S. registered nurses 29-1141",
+        "period": "May 2025",
         "source_refs": [
-          "source-bls-rn-2026-revision"
+          "bls"
         ]
       },
       {
@@ -38186,27 +38255,15 @@
         "source_refs": [
           "source-nbs-health-2025-revision"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Acute care nurses",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and nursing documentation"
     },
     "badges": [
       "Acute status observation · nursing coordination · information handoff",
@@ -38250,17 +38307,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Understand acute care nurse tasks, work boundaries, entry preparation and the United States Registered Nurses parent-category statistical basis."
+      "text": "Explore acute care nursing, ICU and related hiring in mainland China, U.S. RN wage benchmarks and specialty credentials. Try a fictional handover."
     },
     "title": {
       "availability": "available",
       "text": "Acute care nurses: duties, qualifications, pay basis and career path"
     }
   },
-  "source_content_sha256": "24ece13cbf55bfe5077623eb934964dea3cd560a7afccfb96dfbdefb4b3c33d6",
+  "source_content_sha256": "d904ff7ef7bb4416dda1b3e0d0817b4524f8bb5ae2d7be4004c6c4d31e649ced",
   "subject": {
     "canonical_slug": "acute-care-nurses",
     "name": "Acute care nurses",
-    "summary": "Acute care nurses provide advanced nursing care to patients with acute conditions or conditions that may deteriorate rapidly, involving assessment, monitoring, care coordination, documentation and cross-team handoff. The specific clinical acts are governed by the workplace nursing registration, institutional rules, role authorization and supervision arrangements."
+    "summary": "Acute care nurses monitor changes, document care and hand over information when patients’ needs can change quickly. In mainland China, compare emergency, intensive care and monitoring roles with their registration, training and employer requirements."
   }
 }

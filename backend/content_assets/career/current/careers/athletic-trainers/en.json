@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -36,13 +33,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -63,7 +60,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -22826,13 +22823,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "One-sentence judgement: an athletic trainer is not someone who stretches players or a physical education teacher but evaluates and treats musculoskeletal injuries under medical supervision and provides prevention, first aid, treatment and rehabilitation care on site; the role links injury assessment, emergency handling and referral, return-to-play clearance, rehabilitation plans and record keeping into a reviewable chain of responsibility; people who only want to do fitness training and are unwilling to take on injury judgement and referral responsibility are not suited."
+              "Open “Getting started, qualifications, and career development” and find “AT-10 | Venue handover tabletop exercise”. Draft a status table and two sentences before reading the sample."
             ]
           },
           "id": "athletic-trainers.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -22841,11 +22837,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals for continued exploration: you can complete a preliminary assessment by procedure under pressure and explain clearly when a referral to a physician is mandatory, are willing to record and review over long periods and accept review and correction by the team doctor and supervising physician, can explain the boundaries of care clearly to athletes, students and parents, and are willing to take on duty and travelling arrangements at competitions and training venues."
+              "Explore this work if you enjoy checking risks, documenting changes and coordinating with venue staff, clinicians and coaches."
             ]
           },
           "id": "athletic-trainers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -22855,14 +22852,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions for pausing investment first: you have not yet completed an injury assessment and first aid process under any qualified supervision, or you can only explain your ability through personal sports experience; also do not treat being a former athlete, a gym instructor certificate or a first aid training certificate as proof that you can diagnose, prescribe or independently decide return to play. Do not handle medication and return to play on your own."
+              "If you mainly want to coach fitness or expect a short course to qualify you to handle injuries independently, compare the roles and formal training first."
             ]
           },
           "id": "athletic-trainers.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "ath-boc"
           ],
           "type": "prose"
         },
@@ -22871,13 +22867,16 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education and training must be checked separately: O*NET lists 29-9091.00 as Job Zone Five (SVP 8.0+), and among respondents 54% consider a master's necessary, 37% a bachelor's and 8% high school or equivalent; in the United States the occupation is certified by a national certifying body (such as the Board of Certification for the Athletic Trainer) and most states require a licence to practise. Mainland China has no corresponding unified occupational registration, and related posts are spread across sports protection, rehabilitation therapy and physical education sequences. Certification does not equal a licence, and a licence does not mean it is transferable across institutions or jurisdictions; this page provides no diagnostic, medication or return-to-play standard."
+              "The typical U.S. path has three distinct steps: a CAATE-accredited program, BOC certification and authorization to practice in the relevant jurisdiction. BOC reports that 49 states and the District of Columbia regulate practice. Check the required form of authorization, scope and renewal rules with the relevant regulator. Mainland China’s occupational classification lists a sports injury protection occupation. Beijing’s title rules and individual recruitment notices have separate scopes. Check qualifications, duties and authority with the relevant locality and employer."
             ]
           },
           "id": "athletic-trainers.quick-decision.fermat-decision-card.6",
           "source_refs": [
             "onet",
-            "onet"
+            "caate-professional",
+            "ath-boc",
+            "ath-boc-state",
+            "cn-classification-2022"
           ],
           "type": "prose"
         },
@@ -22886,13 +22885,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: this is an occupation whose core is evaluating and treating musculoskeletal injuries under medical supervision and providing prevention, first aid, treatment and rehabilitation care. Competence depends on assessment and referral judgement, manual and technical skills, communication and record keeping, and the ability to stay within the scope of practice, not sports results or a single certificate."
+              "Injury protection involves observation, documentation and handovers as well as movement. If you want to work with a team, check travel and shift requirements."
             ]
           },
           "id": "athletic-trainers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "ath-fujian"
           ],
           "type": "prose"
         }
@@ -22990,7 +22989,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "For 2025 OEWS the annual wages for this occupation are P10 48,180, P25 55,130, median 62,520, P75 74,630 and P90 88,760 US dollars; this round the O*NET wage table gives only annual wages, no n/a text was read, so it is not inferred that all official sources never have an hourly wage, and an individual hourly wage or starting pay is not converted. OEWS covers wage and salary employees only and excludes self-employed people; some incentive pay is included and non-production bonuses and similar are excluded, so not all performance pay and allowances can be uniformly excluded."
+              "May 2025 annual wages were $48,180 at the 10th percentile, $55,130 at the 25th, $62,520 at the median, $74,630 at the 75th and $88,760 at the 90th. The cited O*NET table reports annual wages only. OEWS covers wage and salary workers and excludes self-employed workers. It includes some incentive pay and excludes nonproduction bonuses. These figures do not give an individual hourly rate or starting pay."
             ]
           },
           "id": "athletic-trainers.profile.onet-structured-fields-block.2",
@@ -23050,11 +23049,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The current O*NET and BLS2025 employment for this occupation is 35,200, 2025—2035 growth is 13%, about 39,600 in 2035, a net increase of 4,400; the 2,400 average annual openings include growth and replacement, not a net increase or an individual probability of obtaining certification, a licence or a job."
+              "BLS estimates 35,200 jobs in 2025 and projects 39,600 in 2035, an increase of 12.7% or 4,400 jobs. About 2,400 openings are projected per year, including growth and replacement."
             ]
           },
           "id": "athletic-trainers.profile.onet-structured-fields-block.4",
           "source_refs": [
+            "ep",
             "trends",
             "bls-ooh"
           ],
@@ -23308,13 +23308,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET lists 29-9091.00 as Job Zone Five (SVP 8.0+), and among respondents 54% consider a master's necessary, 37% a bachelor's and 8% high school or equivalent; in the United States the occupation usually requires an accredited degree programme and clinical internship, certification from a national certifying body and a licence in most states. Mainland China has no corresponding unified occupational registration, and related posts are spread across sports protection, rehabilitation therapy and physical education sequences, with standards set by the employer and the competent department."
+              "O*NET’s Job Zone Five and respondents’ education answers describe preparation. Check current program and exam eligibility separately. BOC reports that 49 states and the District of Columbia regulate practice. Check the required form of authorization, scope and renewal rules with the relevant regulator. Mainland China’s occupational classification lists a sports injury protection occupation. Beijing’s title rules and individual recruitment notices have separate scopes. Check qualifications, duties and authority with the relevant locality and employer."
             ]
           },
           "id": "athletic-trainers.profile.career-quick-answers-block.19",
           "source_refs": [
             "onet",
-            "onet"
+            "ath-boc",
+            "ath-boc-state",
+            "cn-classification-2022"
           ],
           "type": "prose"
         },
@@ -23440,13 +23442,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Most US states require a licence to practise, and the scope of practice and the situations requiring referral to a physician are set by state law and institutional procedures; before applying, check the licence requirements, validity period and renewal conditions, which cannot be inferred directly from an adjacent occupation's qualification."
+              "BOC reports that 49 states and the District of Columbia regulate practice. Check the required form of authorization, scope and renewal rules with the relevant regulator. Follow local requirements and employer procedures for physician collaboration and referral."
             ]
           },
           "id": "athletic-trainers.profile.career-quick-answers-block.28",
           "source_refs": [
             "onet",
-            "onet"
+            "ath-boc-state",
+            "boc-standards"
           ],
           "type": "prose"
         },
@@ -24233,7 +24236,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: clarify the trial use and material authority and check the actual medical, minor protection and emergency systems. This round did not read the complete legislation of each state, and no tool process sets a uniform final authority for the supervising physician or on-site command authority."
+              "Editorial suggestion: clarify the trial use and material authority and check the actual medical, minor protection and emergency systems. Verify physician collaboration and on-site command duties under local rules and employer procedures."
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.15",
@@ -24280,15 +24283,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round obtained no AI product effect, adoption or employment causality for this occupation; O*NET tasks and software hiring, and the overall BLS projection, measure different objects. The ILO introduction / extended summary and the NIST introduction are cross-occupation background, and the full text or the mapping for this occupation was not read. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Try timeline formats, contact checklists and omission prompts with fictional material. Use approved tools for real health records. Authorized people remain responsible for assessment, activating the response and return-to-play decisions."
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.18",
           "source_refs": [
             "onet",
-            "bls-ooh",
-            "genai-ilo",
-            "genai-nist"
+            "editor"
           ],
           "type": "prose"
         },
@@ -24369,7 +24370,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "custom is only a custom report entry and no complete report was selected for output this round, and no individual threshold is set."
+              "An O*NET custom report is an optional view of occupation data and does not set an individual hiring threshold."
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.24",
@@ -24540,7 +24541,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Wearable and imaging data collection and trend generation are system candidates to be validated and require checking the device, measurement measure and error; no product validation was read this round."
+              "Wearable and imaging data collection and trend generation are system candidates to be validated and require checking the device, measurement measure and error; check product validation before use."
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.36",
@@ -24824,11 +24825,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The current 2025 employment is 35,200, about 39,600 in 2035, growth 13%, a net increase of 4,400; the 2,400 average annual openings include growth and replacement, and this is not AI attribution or an individual hiring probability."
+              "The current 2025 employment is 35,200, about 39,600 in 2035, growth 12.7%, a net increase of 4,400; the 2,400 average annual openings include growth and replacement, and this is not AI attribution or an individual hiring probability."
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.56",
           "source_refs": [
+            "ep",
             "trends"
           ],
           "type": "prose"
@@ -24909,7 +24911,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Actual use requires checking the institution's equipment, material authority and professional validation; this round obtained no adoption rate for this occupation, and it cannot be inferred that all statistics are absent or that any clinical use is permitted."
+              "Actual use requires checking the institution's equipment, material authority and professional validation; the cited sources give no adoption rate for this occupation, and it cannot be inferred that all statistics are absent or that any clinical use is permitted."
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.62",
@@ -24924,11 +24926,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Exposure, adoption, productivity and employment are kept separate; the overall BLS2025—2035 growth of 13% does not prove AI adoption or employment causality."
+              "Exposure, adoption, productivity and employment are kept separate; the overall BLS2025—2035 growth of 12.7% does not prove AI adoption or employment causality."
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.63",
           "source_refs": [
+            "ep",
             "bls-ooh"
           ],
           "type": "prose"
@@ -24938,7 +24941,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round obtained no evidence of wholesale substitution, and it cannot be guaranteed that a type of task will never be automated; clinical and competition duties follow the applicable profession and jurisdiction and are not obtained from model output."
+              "The cited sources do not establish wholesale substitution, and it cannot be guaranteed that a type of task will never be automated; clinical and competition duties follow the applicable profession and jurisdiction and are not obtained from model output."
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.64",
@@ -25028,11 +25031,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The overall 2025—2035 growth for this occupation is 13%, and the 2,400 average annual openings include growth and replacement; this is not AI causality or a certification or licensing pass rate."
+              "The overall 2025—2035 growth for this occupation is 12.7%, and the 2,400 average annual openings include growth and replacement; this is not AI causality or a certification or licensing pass rate."
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.70",
           "source_refs": [
+            "ep",
             "trends"
           ],
           "type": "prose"
@@ -25087,7 +25091,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This round obtained no disappearance year for this occupation; exposure, adoption and job numbers are kept separate and no year prediction is made."
+              "The cited sources do not establish when or whether the occupation might disappear; exposure, adoption and job numbers are kept separate and no year prediction is made."
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.74",
@@ -25267,7 +25271,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial risk scenario: if patient health, imaging or location data is protected, improper external transfer may breach the applicable law and system; this round did not verify the sensitive information classification of all jurisdictions and does not classify all material indiscriminately."
+              "Editorial risk scenario: if patient health, imaging or location data is protected, improper external transfer may breach the applicable law and system; check how the applicable jurisdiction classifies the information and what can be shared."
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.86",
@@ -25715,7 +25719,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Producing fictional explanations is an editorial trial candidate; the content of real patient disclosure, authority and system are checked separately, and no product effect was read."
+              "Draft explanations using fictional records. Check disclosure and access rules before using real patient information."
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.117",
@@ -25826,7 +25830,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The NBS2025 release this round gives no precise national income distribution for athletic trainers, and a single read does not justify concluding that all Chinese sources lack statistics; no national monthly salary or starting pay is filled in."
+              "The cited NBS release does not report an occupation-specific national income distribution, and a single read does not justify concluding that all Chinese sources lack statistics; no national monthly salary or starting pay is filled in."
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.8",
@@ -26020,7 +26024,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round lacks precise Chinese occupational income; the relevant NBS broad industries can serve as background and do not substitute for the median, starting pay or an individual's total income."
+              "The cited figures do not establish pay for this occupation in mainland China; the relevant NBS broad industries can serve as background and do not substitute for the median, starting pay or an individual's total income."
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.21",
@@ -26049,7 +26053,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round obtained no Chinese AI income causality for this occupation; the statistical scope follows the corresponding release's definition, and a technical idea cannot be used to infer that the measure will change or never change."
+              "The cited Chinese sources do not show how AI affects pay in this occupation; the statistical scope follows the corresponding release's definition, and a technical idea cannot be used to infer that the measure will change or never change."
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.23",
@@ -26243,7 +26247,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The specific first aid training, qualification validity and renewal conditions must be checked against the real institution and jurisdiction; this round did not read the complete Chinese system and no uniform cycle is set."
+              "The specific first aid training, qualification validity and renewal conditions must be checked against the real institution and jurisdiction; renewal intervals depend on local and employer requirements."
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.36",
@@ -26392,13 +26396,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "When checking a quote, first confirm the employer's nature, the post duties and scope of practice and whether pay is by fixed monthly salary, performance or project; do not treat an industry average as an individual's income or convert overseas figures into an expected yuan amount."
+              "Neither mainland posting lists pay. Travel duties and employment terms differ. NBS 2025 urban health and social work annual averages of CNY 146,266 for non-private units and CNY 75,631 for private units are broad industry context."
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "ath-fujian",
+            "ath-sport",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26421,13 +26426,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page does not provide a monthly salary range for athletic trainers in mainland China; posts with the same title may use a fixed monthly salary, performance pay, duty pay and travelling-with-team allowances, and when comparing, the scheduling structure, qualification requirements and responsibility scope must be included in the written conditions."
+              "Neither mainland posting lists pay. Travel duties and employment terms differ. NBS 2025 urban health and social work annual averages of CNY 146,266 for non-private units and CNY 75,631 for private units are broad industry context."
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "ath-fujian",
+            "ath-sport",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26506,7 +26512,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no verifiable monthly salary distribution for this occupation in other cities."
+              "Insufficient evidence: the cited sources do not establish an occupation-specific monthly pay distribution for other cities."
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.54",
@@ -26548,11 +26554,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "13% (2025—2035 overall employment growth)"
+              "12.7% (2025—2035 overall employment growth)"
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
+            "ep",
             "trends"
           ],
           "type": "prose"
@@ -26614,7 +26621,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The P10 annual wage of 48,180 US dollars is a statistical position that about 10% are not above, not the distribution minimum or a new entrant's starting pay; this round the O*NET table gives annual wages only."
+              "The P10 annual wage of 48,180 US dollars is a statistical position that about 10% are not above, not the distribution minimum or a new entrant's starting pay; the O*NET table gives annual wages only."
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.10",
@@ -26642,7 +26649,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The P25 annual wage is 55,130 US dollars; this round's table gives no hourly percentile, and it is not inferred from this that all official sources never have an hourly wage."
+              "The P25 annual wage is 55,130 US dollars; the cited table gives no hourly percentile, and it is not inferred from this that all official sources never have an hourly wage."
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.12",
@@ -26768,11 +26775,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "13%（2025—2035）"
+              "12.7%（2025—2035）"
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
+            "ep",
             "bls-ooh"
           ],
           "type": "prose"
@@ -26782,11 +26790,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The overall BLS2025—2035 growth is 13%, with about 39,600 expected in 2035 and a net increase of 4,400; this is not AI attribution."
+              "The overall BLS2025—2035 growth is 12.7%, with about 39,600 expected in 2035 and a net increase of 4,400; this is not AI attribution."
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
+            "ep",
             "bls-ooh"
           ],
           "type": "prose"
@@ -26824,7 +26833,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 OEWS annual wages, covering wage employees and excluding self-employed people; some incentive pay may be included and non-production bonuses and similar are excluded, so not all performance, duty and travelling-with-team allowances are uniformly excluded. Employment 2025 and projection 2025—2035; this round's wage table gives annual wages only, and an individual hourly wage or Chinese wage is not calculated."
+              "2025 OEWS annual wages, covering wage employees and excluding self-employed people; some incentive pay may be included and non-production bonuses and similar are excluded, so not all performance, duty and travelling-with-team allowances are uniformly excluded. Employment 2025 and projection 2025—2035; the cited wage table gives annual wages only, and an individual hourly wage or Chinese wage is not calculated."
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.25",
@@ -26840,7 +26849,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The US material gives the annual wage percentiles and the overall employment projection for this occupation, and the actual wage population, the annual data and the projection period are kept separate; this round the O*NET table gives annual wages only, and no claim is made to have read an n/a entry."
+              "The US material gives the annual wage percentiles and the overall employment projection for this occupation, and the actual wage population, the annual data and the projection period are kept separate; the O*NET table gives annual wages only, without an hourly series."
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.26",
@@ -26941,11 +26950,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "13%（2025—2035）"
+              "12.7%（2025—2035）"
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
+            "ep",
             "bls-ooh"
           ],
           "type": "prose"
@@ -27137,7 +27147,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This round the O*NET wage table gives annual wages only; without individual working hours and contracts, an individual hourly wage or take-home pay is not calculated from it, nor is it inferred that all official sources lack an hourly wage."
+              "The O*NET wage table gives annual wages only; without individual working hours and contracts, an individual hourly wage or take-home pay is not calculated from it, nor is it inferred that all official sources lack an hourly wage."
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.47",
@@ -27266,19 +27276,19 @@
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Ability Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Coaches and scouts",
@@ -27441,7 +27451,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial observation suggestion: check records, process execution, communication under pressure and collaboration; this round obtained no correlation or causal research between Big Five scores and practice performance for this occupation, and occupational style is not treated as scale validity."
+              "Editorial observation suggestion: check records, process execution, communication under pressure and collaboration; the cited sources do not establish a correlation or causal relationship between Big Five scores and practice performance for this occupation, and occupational style is not treated as scale validity."
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.6",
@@ -27456,7 +27466,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The Big Five scale validity and thresholds for this occupation are missing this round, and O*NET style is not used to infer a performance correlation or an evidence strength ranking."
+              "The Big Five scale validity and thresholds for this occupation are not established by the cited sources, and O*NET style is not used to infer a performance correlation or an evidence strength ranking."
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.7",
@@ -27515,7 +27525,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This round obtained no predictive or screening basis for MBTI type in this occupation; preferences can serve as discussion questions but are not used to judge clinical competence or hiring."
+              "The cited sources provide no predictive or screening basis for MBTI type in this occupation; preferences can serve as discussion questions but are not used to judge clinical competence or hiring."
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.10",
@@ -27543,7 +27553,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The O*NET/BLS material read gives no MBTI screening line; this round obtained no occupational predictive validity research, so it is not inferred that all material is absent."
+              "The O*NET/BLS material read gives no MBTI screening line; the cited sources do not establish occupational predictive validity, so it is not inferred that all material is absent."
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.11",
@@ -27615,7 +27625,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This round obtained no predictive or screening basis for the Enneagram in this occupation, and reflection does not replace training, licensing and actual tasks."
+              "The cited sources provide no predictive or screening basis for the Enneagram in this occupation, and reflection does not replace training, licensing and actual tasks."
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.14",
@@ -27629,7 +27639,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This round obtained no Enneagram validity or selection basis in this occupation, and occupational tasks are not used to validate the scale."
+              "The cited sources establish neither Enneagram validity nor a selection criterion in this occupation, and occupational tasks are not used to validate the scale."
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.15",
@@ -28115,7 +28125,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This round obtained no best-suited MBTI type or occupational prediction research, so type is not used for screening; preference discussions are combined with actual tasks."
+              "The cited sources do not establish a best-suited MBTI type or predictive validity, so type is not used for screening; preference discussions are combined with actual tasks."
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.49",
@@ -28144,7 +28154,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This page does not let a test directly decide service. Occupational personality validity was not obtained this round, and training, actual evaluation and licensing are checked separately; the O*NET description does not validate all tests."
+              "This page does not let a test directly decide service. The cited sources do not establish occupational predictive validity, and training, actual evaluation and licensing are checked separately; the O*NET description does not validate all tests."
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.51",
@@ -28173,7 +28183,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial observation suggestion: check communication and collaboration in pain and pressure scenarios; the emotional intelligence scale validation for this occupation is missing this round, so a single score is not used in place of clinical training and licensing."
+              "Editorial observation suggestion: check communication and collaboration in pain and pressure scenarios; the emotional intelligence scale validation for this occupation is not established by the cited sources, so a single score is not used in place of clinical training and licensing."
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.53",
@@ -28188,7 +28198,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This round obtained no Enneagram occupational prediction basis, and it is not used for hiring or to judge practice ability; reflection needs to be combined with actual tasks."
+              "The cited sources do not establish Enneagram predictive validity, and it is not used for hiring or to judge practice ability; reflection needs to be combined with actual tasks."
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.54",
@@ -28465,7 +28475,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET task context and BLS environment support the background; the BOC2026 standards were actually read for the clauses on physician direction or collaboration, clinical assessment, records and confidentiality. The consequences of the six scenarios are editorial summaries, and not all state laws, the Chinese system or specific accident penalties were verified."
+              "Use this source for the particular tasks, statistics, training or rules it describes."
             ]
           },
           "id": "athletic-trainers.risk.career-risk-cards.10",
@@ -28570,7 +28580,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The specific first aid, calling for help, transport and emergency command follow the trained scope and the institutional plan; this round did not read the complete clinical process and no individual operating instruction is given."
+              "The specific first aid, calling for help, transport and emergency command follow the trained scope and the institutional plan; refer individual cases to trained staff under the organization’s emergency plan."
             ]
           },
           "id": "athletic-trainers.risk.career-risk-cards.17",
@@ -28930,7 +28940,7 @@
               [
                 "School sports teams and physical education institutions",
                 "Assisting with pre- and post-training protection under supervision, helping record injuries and learning the first aid process.",
-                "Editorial preparation comparison: check the target school programme, clinical training, licensing and post conditions; there is no specific recruitment sample this round, so no uniform employer requirement is claimed.",
+                "Editorial preparation comparison: check the target school programme, clinical training, licensing and post conditions; verify the requirements with the institution.",
                 "Submit a fictional protection record containing assessment points, the handling process and a record template, without using real student or athlete data.",
                 "Internal school authorisation does not replace a state licence; the specific clinical diagnosis and scope of service are checked against qualification, jurisdiction and duty, and it cannot be concluded uniformly that school posts have no diagnostic authority."
               ],
@@ -28944,7 +28954,7 @@
               [
                 "Professional clubs and professional sports teams",
                 "Taking on training and event duty, pre-competition protection and post-competition care, and travelling with the team.",
-                "Editorial preparation comparison: check the target team's credentials, scheduling, events and contract; no specific recruitment was read, so no general conditions or pay are inferred.",
+                "Editorial preparation comparison: check the target team's credentials, scheduling, events and contract; use the target employer’s posting for its terms and pay.",
                 "Submit a fictional note containing the season schedule, protection plan and emergency action plan.",
                 "Club authorisation is not the same as practice qualification; the return-to-play decision must be made by a physician or authorised personnel."
               ],
@@ -28981,17 +28991,17 @@
               {
                 "id": "education",
                 "values": [
-                  "US side: O*NET lists 29-9091.00 as Job Zone Five (SVP 8.0+), and among respondents 54% consider a master's necessary, 37% a bachelor's and 8% high school or equivalent.",
-                  "BLS currently has a typical master's and certified programme classroom and clinical training; the CAATE moved new entry-level programmes to the postgraduate level, and the O*NET54/37/8 respondent education proportions are not a new admission substitute.",
-                  "The China 2022 occupational code has 2-09-07-04 sports protection specialist, and the specific training and licensing system is checked separately; it cannot be claimed nationally that certain majors dominate."
+                  "U.S. programs, certification and state requirements",
+                  "U.S. entry typically requires a master’s degree. Check for a CAATE-accredited program. BOC certification has an examination and documentation requirements. Verify the target state’s requirements and the employer’s authorized duties separately.",
+                  "Check the target state and confirm the training route with the school."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "BLS notes that almost all states require a licence or certification with varying conditions, checked against the actual state regulation, and BOC certification is not automatically treated as a state licence.",
-                  "The specific first aid and cardiopulmonary resuscitation qualifications, validity and renewal must be checked against the applicable certification and institution; this round did not read a uniform course standard.",
-                  "The scope of practice and the situations requiring referral are set by state law, the competent department and institutional procedures and are not obtained automatically through a qualification or sports experience."
+                  "Mainland title assessment example",
+                  "Beijing’s 2026 sports injury protection title review is for relevant full-time staff in sports teams and sports schools who work on prevention, assessment, first aid, treatment or rehabilitation. This is local professional title assessment. Check the notice for eligible roles and grades.",
+                  "Title assessment is separate from an employer’s recruitment and from physician licensure."
                 ]
               },
               {
@@ -29014,10 +29024,12 @@
           },
           "id": "athletic-trainers.path.employer-evidence.1",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "boc-protection",
-            "caate-professional"
+            "bls",
+            "ath-boc",
+            "ath-boc-state",
+            "ath-fujian",
+            "ath-sport",
+            "ath-beijing"
           ],
           "title": "Preparation evidence that employers value",
           "type": "cards"
@@ -29030,42 +29042,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional material package: an injury assessment record template, a prevention and rehabilitation plan template, and an emergency action plan template.",
-                  "All material is fictional and contains no real injured person's health information, medical records or institutional internal material.",
-                  "All material and scenarios are fictional, and real injured person's health information, medical records or institutional internal material must not be used."
+                  "Materials | Three fictional venue notes",
+                  "E1: The event sheet assigns the south gate to service vehicles. The venue coordinator confirms route changes; the medical lead handles medical procedures. E2: At 18:05 the venue log reports the south gate closed for construction.",
+                  "E3: Staff can walk through the east gate; vehicle access is unverified. By 18:10, there is no confirmed replacement route or acknowledgement. There is no injury or medical incident in the exercise."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "For one fictional case, complete an assessment record, the reasons for the referral decision and a prevention plan, stating clearly the basis, the handling and the parts that remain uncertain.",
-                  "Complete within 90—120 minutes; public assessment and first aid material may be consulted, but real injured person or institutional material must not be used.",
-                  "In the record write the objective observations, the handling and the judgement separately, and mark the parts requiring review."
+                  "Task | Status table and two-sentence handover",
+                  "Use E1–E3 to record the original route, what changed, what remains unverified and who owns it. Write two sentences to the venue coordinator.",
+                  "Do not invent phone numbers, a route or acknowledgement. Draft your note before checking the sample."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First rule out red flags and confirm the handling priority, then handle and record by procedure, and finally state the referral and follow-up arrangements clearly.",
-                  "Write the objective record, observations and judgement separately, and mark anything uncertain as requiring review.",
-                  "Afterwards ask a qualified supervisor to review the assessment and records, and keep the reasons for changes."
+                  "Sample | Addressed to the venue coordinator",
+                  "At 18:10 the planned south gate is reported closed as of 18:05, and east-gate vehicle access is unverified. Please confirm an alternate vehicle entrance and inform the medical lead; receipt is unconfirmed.",
+                  "Pedestrian access does not establish vehicle access. Do not put an unverified route into the event plan."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "The exercise does not constitute certification, a licence, practice permission or a medical opinion and cannot replace institutional procedures and physician orders.",
-                  "Do not handle the health information of real injured persons in practice, or provide medication or return-to-play arrangements; such matters must be handled by qualified personnel.",
-                  "Practice does not replace certification, licensure, practice permits, or institutional protocols, nor does it constitute any medical opinion."
+                  "Self-check and limits",
+                  "Check timestamps, ownership and acknowledgement against the three notes.",
+                  "Paper exercise only. Do not call anyone, alter a real venue plan or handle injuries."
                 ]
               }
             ]
           },
           "id": "athletic-trainers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "Low-risk practice materials and tasks",
+          "title": "AT-10 | Venue handover tabletop exercise",
           "type": "cards"
         },
         {
@@ -29076,37 +29088,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Practice requirements checklist: degree and certification program, national certification, state licensure and validity period, scope of practice and referral obligations, first aid and infection control credentials, and internal institutional authorization.",
-                  "Note the source and data period for each item; leave items that cannot be verified blank and mark them as insufficient evidence rather than filling them in with speculation.",
-                  "List \"degree\", \"certification\", \"licensure\", \"institutional authorization\", and \"specific job duties\" separately to avoid conflating them."
+                  "Venue status table",
+                  "Record the planned route, change and unknowns.",
+                  "Trace entries to E1–E3."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Ask a qualified supervisor to review your assessment and treatment records, focusing on whether red flags were missed, whether referral judgments exceeded your authority, and whether records are complete and traceable.",
-                  "Keep the review comments together with the reasons for the revisions, as evidence of whether you can accept clinical and documentation review."
+                  "Responsibility table",
+                  "Separate route changes from medical procedures."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "One-page debrief: state the treatment goal, the basis, your own judgment, the parts that were corrected, and the parts that remain uncertain.",
-                  "Submit the debrief to a supervisor for review, and keep the review comments and the reasons for revisions as reviewable evidence."
+                  "Two-sentence handover",
+                  "Include times and unconfirmed receipt."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool use statement: if software is used to assist with records and assessment, note the tool name and version, the input scope, and the reasons for manual modifications.",
-                  "Archiving health and medical data requires prior authorization, and the access scope, retention period, and destruction arrangements must be recorded."
+                  "Next step",
+                  "Choose one real job route to investigate."
                 ]
               }
             ]
           },
           "id": "athletic-trainers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "Preparatory materials that can be submitted",
           "type": "cards"
@@ -29170,57 +29182,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Occupation and boundary reading: read O*NET 29-9091.00 and related public materials, and write clearly the respective meanings of scope of practice, certification, licensure, and referral obligations.",
-                  "Output: a one-page terminology reference table noting the source of each item."
+                  "Read the role",
+                  "Compare athletic training, team physicians and fitness coaching."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Assessment process outline: for a fictional case, write clearly the assessment steps, red flags, and referral conditions.",
-                  "Output: a checklist of the assessment process and referral judgments."
+                  "Check a job posting",
+                  "Choose a posting and mark its credentials and team travel duties."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "First aid process check: list the first aid process for this position, the equipment locations, and the emergency call and transport pathways.",
-                  "Output: a first aid process and equipment checklist."
+                  "Review the original route",
+                  "Use E1 and E2 to identify the plan and change."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Prevention plan exercise: write an injury prevention and protective equipment use plan for a fictional season.",
-                  "Output: a sample prevention plan."
+                  "Mark the unknowns",
+                  "Use E3 to mark vehicle access and acknowledgement."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Recording and privacy exercise: write a complete record for a fictional treatment, and explain privacy and authorization handling.",
-                  "Output: a sample record and a privacy statement."
+                  "Write the handover",
+                  "Write two sentences for the venue coordinator."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Review-based self-questioning: ask a qualified supervisor to challenge your assessments and records, and record what was corrected.",
-                  "Output: a set of review comments and a revision explanation."
+                  "Review it yourself",
+                  "Check the sample yourself; peer feedback is optional."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Final debrief: decide whether to continue, pause, or change direction, and write clearly the basis and the parts that remain uncertain.",
-                  "Output: a one-page decision statement with an evidence list."
+                  "Choose a next step",
+                  "Choose risk prevention, event coordination or documentation and investigate a role that involves it."
                 ]
               }
             ]
           },
           "id": "athletic-trainers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "Seven-day experience outputs",
           "type": "timeline"
@@ -29230,18 +29242,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: you can complete all outputs within seven days and are willing to accept item-by-item review and revision of your assessment judgments and records.",
-              "Pause: you can complete the plan but find it hard to accept others questioning your judgments, or are unwilling to invest time in record-keeping and privacy compliance.",
-              "Change direction: if you would rather guide others' training, compare the coach and scout directions; if you would rather do long-term functional rehabilitation, compare the physical therapist direction.",
-              "Verify the requirements: first check the degree, certification, licensure, and scope-of-practice requirements before deciding to invest.",
-              "Complete the evidence: organize the seven-day outputs into reviewable practical and supervision records.",
-              "Cost assessment: include tuition, internships, certification and licensure exams, retraining, and team travel costs in a written plan, and assess the payback period.",
-              "Next step: based on the verification results, decide whether to first complete a certification program and internship, or first enter an institutional assistant position to accumulate supervised practical experience."
+              "Identify the planned gate.",
+              "Keep the closure time.",
+              "Mark access unverified.",
+              "Identify the venue contact.",
+              "Leave receipt unconfirmed.",
+              "Check your own work before reading the sample.",
+              "Choose a work direction to explore."
             ]
           },
           "id": "athletic-trainers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "Judgment after seven days",
           "type": "list"
@@ -29280,18 +29292,18 @@
               ],
               [
                 "BOC certification / ATC credential",
-                "Those who complete an accredited program",
+                "Applicants who meet BOC exam eligibility",
                 "Certification is obtained after meeting exam eligibility and passing the exam; the certification itself is not what allows you to sit for the exam",
                 "Verify the actual U.S. certification and state licensure rules; not a uniform sample across all positions",
-                "The BOC public page lists pathways via CAATE program graduation or ARTI/CATA qualifications, plus passing the exam; verify individual cases separately",
+                "Graduating from a CAATE-accredited program is the typical route. Eligible applicants under BOC’s arrangements with ARTI, BASRaT or CATA can apply under the applicable rules.",
                 "Complete according to the certification cycle and renew periodically.",
                 "Certification does not equal a state license or institutional authorization."
               ],
               [
-                "State licensure",
+                "Authorization to practice",
                 "Those who practice in the United States",
                 "Determines whether you can legally practice in that state.",
-                "Nearly all states require a license or certification, with varying forms and conditions",
+                "BOC reports that 49 states and the District of Columbia regulate practice. Check the required form of authorization, scope and renewal rules with the relevant regulator.",
                 "Check the target state's regulation; do not assume that all states have the same additional examination",
                 "Renew according to the validity period.",
                 "Practicing across state lines requires verifying the requirements separately; the scope of the license is defined by state law."
@@ -29329,7 +29341,9 @@
           "source_refs": [
             "bls-ooh",
             "boc-protection",
-            "caate-professional"
+            "caate-professional",
+            "ath-boc",
+            "ath-boc-state"
           ],
           "title": "Qualification and certificate decisions",
           "type": "table"
@@ -29341,7 +29355,7 @@
             "paragraphs": [
               "Qualification boundaries: degree, certification, state licensure, internal institutional authorization, and specific job duties are distinct statuses, and none of them can be automatically inferred from another.",
               "U.S. O*NET JobZone5/SVP8+ describes the occupation's preparation; current entry-level typically master's plus clinical programs, certification, and state licensure must each be verified separately, and the new requirements are not waived by the respondent education percentages.",
-              "China's 2022 classification lists duties related to athletic trainers, but this round did not read the complete registration or practice system; one cannot conclude that China has no unified national registration, and the item-by-item correspondence and case-level authority remain to be verified.",
+              "Mainland China’s occupational classification lists a sports injury protection occupation. Beijing’s title rules and individual recruitment notices have separate scopes. Check qualifications, duties and authority with the relevant locality and employer.",
               "Before starting work and practicing, verify item by item the degree, certification, licensure, scope of practice, and referral obligations, and keep written confirmation."
             ]
           },
@@ -29360,18 +29374,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This section has no actual recruitment samples. The 2022 Chinese classification has been verified to name the occupation athletic trainer; team physician assistant, rehabilitation therapy technician, physical rehabilitation specialist, and team health services, among others, serve only as editorial search keywords, so check real announcements, status, and permits one by one, and do not claim that public recruitment has been observed.",
-              "When reading recruitment information, verify degree and certification requirements, licensure and authorization status, scope of practice and referral obligations, shift and team travel arrangements, and health data and privacy compliance requirements, and be alert to wording that advertises \"athletic experience\" or short-term training as practice credentials."
+              "The Fujian Football Administration Center listed one sports injury protection post in Fuzhou’s Changle district in 2026, involving long-term team camps and travel. It required a relevant bachelor’s degree or higher and a junior or higher professional qualification in sports protection or rehabilitation. No pay amount was listed.",
+              "The General Administration of Sport’s Institute of Sports Medicine advertised one temporary rehabilitation therapist in September 2026 for sports rehabilitation and team support. It required a relevant master’s degree or higher and a rehabilitation therapist credential; national-team experience was preferred. The application deadline was September 18; no pay amount was listed."
             ]
           },
           "id": "athletic-trainers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ath-fujian",
+            "ath-sport"
           ],
-          "title": "Recruitment information check",
+          "title": "Mainland examples: injury protection and team rehabilitation",
           "type": "notice"
         },
         {
@@ -29550,7 +29562,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET JobZone5/SVP8+, with 54% master's, 37% bachelor's, and 8% high school for education, are respondent data and do not represent current entry-level requirements; BLS typically master's, CAATE new programs at the graduate level, and BOC exam eligibility and state licensure must be verified separately. China's 2-09-07-04 athletic trainer has an entry, but the specific correspondence and registration system are unverified, and one should not claim there is no unified national registration."
+              "Use O*NET responses as background on preparation. Check current requirements separately with the CAATE program, BOC and the target state regulator. Mainland China’s occupational classification lists a sports injury protection occupation. Beijing’s title rules and individual recruitment notices have separate scopes. Check qualifications, duties and authority with the relevant locality and employer."
             ]
           },
           "id": "athletic-trainers.path.career-path-block.20",
@@ -29584,7 +29596,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "U.S. training, BOC, and state rules differ from China's athletic training and rehabilitation position systems; this round did not read all state laws and Chinese permits, so do not extrapolate between them."
+              "Verify U.S. education, certification and local practice authority separately from mainland occupational classification, local professional titles and hiring criteria."
             ]
           },
           "id": "athletic-trainers.path.career-path-block.22",
@@ -30656,11 +30668,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 2025 annual salary and 2025—2035 total employment of 35,200, growth of 13%, and average annual openings of 2,400; the wage population differs from total employment, so subsidies and performance pay cannot be uniformly excluded. China's NBS broad averages are not occupational wages; the eight directions are editorial exploration, licensure and training must be verified separately, and a direct transfer is not promised."
+              "U.S. base-year employment was 35,200 in 2025. BLS projects growth of 12.7% through 2035 and about 2,400 openings a year. Wage data and employment projections cover different groups. Mainland industry averages cannot establish athletic trainer pay; check the requirements of any role you want to move into."
             ]
           },
           "id": "athletic-trainers.market-signals.market-signal-card.8",
           "source_refs": [
+            "ep",
             "trends",
             "nbs",
             "oews-method"
@@ -30803,11 +30816,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Overall growth 13%, ending at about 39,600, net increase 4,400; the average annual 2,400 openings include growth and replacements."
+              "Overall growth 12.7%, ending at about 39,600, net increase 4,400; the average annual 2,400 openings include growth and replacements."
             ]
           },
           "id": "athletic-trainers.market-signals.market-signal-card.18",
           "source_refs": [
+            "ep",
             "trends",
             "bls-ooh"
           ],
@@ -30861,11 +30875,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "13% (about 2,400 openings per year)"
+              "12.7% (about 2,400 openings per year)"
             ]
           },
           "id": "athletic-trainers.market-signals.market-signal-card.22",
           "source_refs": [
+            "ep",
             "trends",
             "bls-ooh"
           ],
@@ -31408,10 +31423,16 @@
                 "question_key": "career.faq.athletic-trainers.5"
               },
               {
-                "answer": "U.S. side: O*NET lists 29-9091.00 as Job Zone Five (SVP 8.0+); among respondents, 54% believe a master's degree is required and 37% believe a bachelor's degree is required; this occupation typically involves an accredited degree program and clinical internship, obtaining certification through a national certification exam, and licensure in most states. Mainland China has no corresponding unified occupational registration, and related positions are spread across the rehabilitation therapy, athletic training, and physical education teaching sequences. Specific standards are set by the regulatory authorities and employers, and this page does not provide the standards.",
+                "answer": "U.S. entry typically requires a master’s degree. Check for a CAATE-accredited program. BOC certification has an examination and documentation requirements. Verify the target state’s requirements and the employer’s authorized duties separately. In mainland China, compare individual postings with local title rules.",
                 "id": "athletic-trainers.faq.6",
                 "question": "Which qualifications need to be verified to enter this occupation?",
-                "question_key": "career.faq.athletic-trainers.6"
+                "question_key": "career.faq.athletic-trainers.6",
+                "source_refs": [
+                  "bls",
+                  "ath-boc",
+                  "ath-boc-state",
+                  "ath-beijing"
+                ]
               },
               {
                 "answer": "Six types of risk need to be judged in advance: exceeding the scope of practice, delays in on-site first aid and referral, leakage of health and medical information, infection control and venue safety, loss of control over assessment and treatment records, and missing return-to-play clearance and authorization. The controls are to work within the scope of practice and protocols, refer promptly, keep complete records, report anomalies, and have authorized personnel handle them.",
@@ -31420,16 +31441,28 @@
                 "question_key": "career.faq.athletic-trainers.7"
               },
               {
-                "answer": "The BLS data shown by O*NET gives, on this occupation's own definition, about 33,900 people employed in 2024, growth from 2024—2034 much faster than average (7% or higher), and about 2,400 openings per year on average, mostly from growth and replacement needs. Directions one can move into include coaches and scouts, physical therapists, fitness trainers, exercise physiologists, physical therapist assistants, recreational therapists, chiropractors, and occupational therapists, but the degree, credentials, and scope of practice differ for each direction.",
+                "answer": "For U.S. occupation 29-9091, BLS projects 35,200 jobs in 2025 and 39,600 in 2035, up 12.7% (13% rounded in the handbook), a net increase of 4,400, and about 2,400 annual openings including replacements. Check mainland opportunities with employers.",
                 "id": "athletic-trainers.faq.8",
                 "question": "How do you judge career prospects and transitions?",
-                "question_key": "career.faq.athletic-trainers.8"
+                "question_key": "career.faq.athletic-trainers.8",
+                "source_refs": [
+                  "bls",
+                  "ep",
+                  "ath-fujian",
+                  "ath-sport"
+                ]
               },
               {
-                "answer": "The 2025 wage percentiles shown by O*NET are on the 29-9091.00 occupation-specific definition (median annual wage 62,520 USD; 10th percentile 48,180 USD, 25th percentile 55,130 USD, 75th percentile 74,630 USD, 90th percentile 88,760 USD); this occupation does not publish hourly wage percentiles, so this page does not convert to hourly pay, and does not extrapolate to income in Mainland China.",
+                "answer": "The U.S. May 2025 median annual wage was $62,520. O*NET displays annual percentiles for this role and no hourly percentiles; a conversion is not an official hourly wage. The mainland postings do not give comparable amounts.",
                 "id": "athletic-trainers.faq.9",
                 "question": "Why is there only one definition for U.S. wages?",
-                "question_key": "career.faq.athletic-trainers.9"
+                "question_key": "career.faq.athletic-trainers.9",
+                "source_refs": [
+                  "bls",
+                  "oews",
+                  "ath-fujian",
+                  "ath-sport"
+                ]
               },
               {
                 "answer": "Common misconceptions include: thinking that being a former athlete or holding a fitness coach certificate is enough to work as an athletic trainer (in fact certification and licensure are required); thinking one can handle diagnosis, medication, and return to play on one's own (in fact one must work within the scope of practice and refer to a physician); thinking this is purely a physical conditioning position (in fact it includes injury assessment, on-site first aid, and medical records); and understanding income only by the median annual wage (in fact income is affected by practice location, institution type, qualifications, and shift arrangements).",
@@ -31470,27 +31503,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round actually read the O*NET summary/details/wages/hot_tech/industry/trends for this occupation and the definitions of the eight adjacent occupations; BLS task environment, entry-level requirements, five detailed industries, wages, and projections; BOC2026 related standards, public protection eligibility, and CAATE professional programs; reused the same-window same-day NBS original text and additionally read the health industry line, wage provisions, OEWS methods, and the 2022 classification athletic trainer entry. The ILO introduction and extended abstract and the NIST brief were only broad background, and neither their full text nor this occupation's mapping was read; custom, certification discovery, and courses did not produce a complete report."
+              "U.S. wages and projections come from BLS and O*NET. Mainland evidence comes from the Fujian football and national sports medicine job postings and Beijing’s professional title notice. Each has its own scope."
             ]
           },
           "id": "athletic-trainers.sources.source-card.2",
           "source_refs": [
             "onet",
             "bls",
+            "ep",
             "oews",
-            "hr",
-            "health",
-            "trends",
-            "bls-ooh",
-            "nbs",
-            "nbs-wage-law",
-            "oews-method",
-            "boc-standards",
-            "boc-protection",
-            "caate-professional",
-            "cn-classification-2022",
-            "genai-ilo",
-            "genai-nist"
+            "ath-fujian",
+            "ath-sport",
+            "ath-beijing",
+            "ath-boc"
           ],
           "type": "prose"
         },
@@ -31499,7 +31524,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round verified as of 2026-10-09; 2025 wages, employment, and recruitment, plus the 2025—2035 projection, with NBS2025 materials published in 2026; the BOC2026 standard published 2025-12 and implemented 2026-02; China's classification is the 2022 edition, the wage provisions were published in 1990, and the old URL2020 year is not used. O*NET respondent education does not represent the master's entry requirement of current new programs, and access and data periods are kept separate."
+              "U.S. wages refer to May 2025 and projections to 2025–35. The Fujian football center and national sports medicine institute posted their vacancies in March and September 2026, respectively. Beijing issued its title rules in July 2026."
             ]
           },
           "id": "athletic-trainers.sources.source-card.3",
@@ -31558,13 +31583,13 @@
                 "entity": "Enneagram Personality Test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the athletic trainer career page",
@@ -31619,11 +31644,11 @@
                 "id": "bls",
                 "limitation": "The task list describes group work and does not mean every post carries out all tasks.",
                 "market": "United States",
-                "name": "O*NET 29-9091.00 detailed profile (tasks and work activities)",
-                "period": "Page updated in 2026; accessed 2026-10-09",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Occupational Outlook Handbook: Athletic Trainers",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/29-9091.00"
+                "url": "https://www.bls.gov/ooh/healthcare/athletic-trainers.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31635,11 +31660,11 @@
                 "id": "ep",
                 "limitation": "Employment and projection on this occupation's standalone definition; cannot be extrapolated to a broader occupational group.",
                 "market": "United States",
-                "name": "O*NET 29-9091.00 occupation summary (employment and projection fields)",
-                "period": "2025 employment and the 2025—2035 projection; accessed 2026-10-09",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Table 1.2: Athletic Trainers projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/29-9091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31649,7 +31674,7 @@
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "oews",
-                "limitation": "This round's table gives annual wages only and does not give hourly wages; do not claim that all official sources have no data or n/a, and do not treat it as personal income.",
+                "limitation": "The table reports national annual wages. It does not establish an individual hourly rate, starting pay or take-home income.",
                 "market": "United States",
                 "name": "BLS 2025 wage percentiles shown by O*NET (29-9091.00)",
                 "period": "May 2025 (OEWS); accessed 2026-10-09",
@@ -31777,7 +31802,7 @@
                 ],
                 "evidence_type": "credential discovery",
                 "id": "ilo",
-                "limitation": "Certification is not the same as licensure or institutional authorization. This round did not output complete findings, courses, or custom material, so do not claim a new full-text verification.",
+                "limitation": "Certification is not the same as licensure or institutional authorization.",
                 "market": "United States",
                 "name": "O*NET 29-9091.00 certification discovery",
                 "period": "Page updated in 2026; accessed 2026-09-15",
@@ -31788,18 +31813,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "editorial record",
-                  "Accessed 2026-10-09"
+                  "Venue and contact records are fictional.",
+                  "Venue and contact records are fictional."
                 ],
-                "evidence_type": "editorial record",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "Recorded for editorial purposes; the actual link is the O*NET summary and does not prove that a separate editorial team published original text.",
+                "limitation": "Career exploration only; no emergency medical instruction.",
                 "market": "United States",
-                "name": "FermatMind career content editorial team verification record",
-                "period": "Accessed 2026-10-09",
-                "publisher": "FermatMind career content editorial team",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/29-9091.00"
+                "name": "FermatMind Editorial: fictional AT-10 venue handover",
+                "period": "Fictional paper exercise",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/en/career/jobs/athletic-trainers#career-content-path"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -31809,7 +31834,7 @@
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "Does not constitute certification, licensure, or practice authorization. This round did not output complete findings, courses, or custom material, so do not claim a new full-text verification.",
+                "limitation": "Does not constitute certification, licensure, or practice authorization.",
                 "market": "United States",
                 "name": "O*NET 29-9091.00 training and education information",
                 "period": "Page updated in 2026; accessed 2026-09-15",
@@ -31825,7 +31850,7 @@
                 ],
                 "evidence_type": "occupation profile",
                 "id": "arxiv",
-                "limitation": "The official profile provides only occupational identity and duty descriptions. This round did not output complete findings, courses, or custom material, so do not claim a new full-text verification.",
+                "limitation": "The official profile provides only occupational identity and duty descriptions.",
                 "market": "United States",
                 "name": "O*NET 29-9091.00 custom occupation profile",
                 "period": "Page updated in 2026; accessed 2026-09-15",
@@ -31889,7 +31914,7 @@
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "r2-pay-1",
-                "limitation": "This round's table gives annual wages only and does not give hourly wages; do not claim that all official sources have no data or n/a, and do not treat it as personal income.",
+                "limitation": "The table reports national annual wages. It does not establish an individual hourly rate, starting pay or take-home income.",
                 "market": "United States",
                 "name": "O*NET 29-9091.00 national wage percentiles (annual percentiles)",
                 "period": "May 2025 (OEWS); accessed 2026-10-09",
@@ -31996,8 +32021,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the official introduction and extended abstract",
-                  "The complete paper or this occupation's mapping was not read"
+                  "Use this source for the particular tasks, statistics, training or rules it describes.",
+                  "The summary does not establish effects for this occupation."
                 ],
                 "evidence_type": "International organization research introduction and extended abstract",
                 "id": "genai-ilo",
@@ -32012,8 +32037,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the 124—125 brief and abstract",
-                  "The complete PDF was not read"
+                  "Use this source for the particular tasks, statistics, training or rules it describes.",
+                  "General background; does not establish effects on this occupation."
                 ],
                 "evidence_type": "Official voluntary risk reference brief and abstract",
                 "id": "genai-nist",
@@ -32028,12 +32053,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this source for the particular tasks, statistics, training or rules it describes.",
                   "Do not claim complete occupational or case-level verification"
                 ],
                 "evidence_type": "Relevant sections of the original official text",
                 "id": "nbs-wage-law",
-                "limitation": "Actually read articles 3/4/5/7/11 on the distinction between sports allowances and specified bonuses; does not equal a specific pay case",
+                "limitation": "Articles 3, 4, 5, 7 and 11 distinguish how certain allowances and bonuses are counted. They do not determine individual pay.",
                 "market": "Mainland China",
                 "name": "Current original text of the National Bureau of Statistics provisions on the composition of the total wage bill",
                 "period": "Published 1990; current page",
@@ -32044,7 +32069,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this source for the particular tasks, statistics, training or rules it describes.",
                   "Do not claim complete occupational or case-level verification"
                 ],
                 "evidence_type": "Relevant sections of the original official text",
@@ -32058,30 +32083,29 @@
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "PDF page 162 (zero-based 161); actually read 2-09-07-04",
-                  "Injury and disease prevention, assessment, first aid, treatment, rehabilitation, and public education"
+                  "Printed p. 155, occupation 2-09-07-04: prevention, assessment, first aid, treatment, rehabilitation and health education for sports injuries and illness."
                 ],
                 "evidence_type": "Relevant entry in the official occupational classification document",
                 "id": "cn-classification-2022",
                 "limitation": "Not an item-by-item U.S.-China licensure mapping, precise wages, or a national registration system.",
                 "market": "Mainland China",
                 "name": "Athletic trainer entry in the 2022 edition of the occupational classification dictionary",
-                "period": "2022 edition; accessed 2026-10-09",
-                "publisher": "Original public government text, Xilin Gol League site",
+                "period": "2022 edition",
+                "publisher": "Official text hosted by Guangyuan Municipal Human Resources and Social Security Bureau",
                 "scope": "contextual",
-                "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this source for the particular tasks, statistics, training or rules it describes.",
                   "Access and data periods kept separate"
                 ],
                 "evidence_type": "Relevant parts of the original official text",
                 "id": "bls-ooh",
-                "limitation": "The task environment, education, five detailed industries, wages, and projections were actually read; not a personal guarantee",
+                "limitation": "Use this source for the particular tasks, statistics, training or rules it describes.",
                 "market": "United States",
                 "name": "BLS Occupational Outlook Handbook for athletic trainers",
                 "period": "2025 wages and employment, 2025—2035 projection",
@@ -32092,7 +32116,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this source for the particular tasks, statistics, training or rules it describes.",
                   "Access and data periods kept separate"
                 ],
                 "evidence_type": "Relevant parts of the original official text",
@@ -32106,14 +32130,13 @@
                 "url": "https://www.onetonline.org/link/localtrends/29-9091.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "This round actually read the relevant parts",
-                  "Access and data periods kept separate"
+                  "Standard 1 ties service under physician direction or in collaboration to training and state rules; Standards 4 and 7 cover examination and documentation."
                 ],
                 "evidence_type": "Relevant parts of the original official text",
                 "id": "boc-standards",
-                "limitation": "Read the relevant practice and responsibility clauses; does not represent all state laws or Chinese permits",
+                "limitation": "BOC professional standards apply to credential holders. The target state governs licensure and authorized scope.",
                 "market": "United States",
                 "name": "BOC2026 professional practice standards",
                 "period": "Published 2025-12, implemented 2026-02",
@@ -32124,12 +32147,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this source for the particular tasks, statistics, training or rules it describes.",
                   "Access and data periods kept separate"
                 ],
                 "evidence_type": "Relevant parts of the original official text",
                 "id": "boc-protection",
-                "limitation": "The actual entry point for certification eligibility and standards; does not represent state licensure or individual qualification review",
+                "limitation": "BOC professional standards apply to credential holders. The target state governs licensure and authorized scope.",
                 "market": "United States",
                 "name": "BOC public protection and certification eligibility statement",
                 "period": "Current web page",
@@ -32140,7 +32163,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually read the relevant parts",
+                  "Use this source for the particular tasks, statistics, training or rules it describes.",
                   "Access and data periods kept separate"
                 ],
                 "evidence_type": "Relevant parts of the original official text",
@@ -32283,20 +32306,85 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Assessment and first aid｜O*NET lists preliminary assessment, emergency care and the referral decision; the actual process and what may be handled follow your own qualification and the system, and this page does not exclude red flags or approve procedures. — 25/100; weight=1/3; athletic-trainers.profile.responsibilities-block.1[0]",
-                  "Rehabilitation and return to play｜O*NET has tasks for collaborating with physicians, reporting recovery progress and, where necessary, clearance to compete; the specific authority follows state law and duty and cannot be uniformly reduced to giving advice only, nor can arbitrary prescribing authority be inferred. — 25/100; weight=1/3; athletic-trainers.profile.responsibilities-block.1[3]",
-                  "Records and reporting｜O*NET lists administrative records, and the BOC requires lawful records and protection of patient information; the specific format and retention system are checked separately, and records do not guarantee full traceability. — 75/100; weight=1/3; athletic-trainers.profile.responsibilities-block.1[4]"
+                  "Check timestamps, locations and omissions with fictional records.",
+                  "Check timestamps, locations and omissions with fictional records.",
+                  "Check timestamps, locations and omissions with fictional records.",
+                  "Check timestamps, locations and omissions with fictional records.",
+                  "Check timestamps, locations and omissions with fictional records."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "No estimate of job displacement.",
+                "name": "FermatMind: documentation tool limits",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The Fujian Football Administration Center listed one sports injury protection post in Fuzhou’s Changle district in 2026, involving long-term team camps and travel. It required a relevant bachelor’s degree or higher and a junior or higher professional qualification in sports protection or rehabilitation. No pay amount was listed."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ath-fujian",
+                "name": "Fujian Football Administration Center sports injury protection posting",
+                "period": "2026-03-20",
+                "publisher": "Fujian Provincial Sports Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://tyj.fj.gov.cn/zwgk/rsxx/zpxx/202603/t20260320_7113883.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The General Administration of Sport’s Institute of Sports Medicine advertised one temporary rehabilitation therapist in September 2026 for sports rehabilitation and team support. It required a relevant master’s degree or higher and a rehabilitation therapist credential; national-team experience was preferred. The application deadline was September 18; no pay amount was listed."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ath-sport",
+                "name": "Institute of Sports Medicine team rehabilitation posting",
+                "period": "2026-09-07",
+                "publisher": "General Administration of Sport, Institute of Sports Medicine",
+                "scope": "recruitment_proxy",
+                "url": "https://www.sport.gov.cn/yys/n27506619/c29915621/content.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Beijing’s 2026 sports injury protection title review is for relevant full-time staff in sports teams and sports schools who work on prevention, assessment, first aid, treatment or rehabilitation. This is local professional title assessment. Check the notice for eligible roles and grades."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ath-beijing",
+                "name": "Beijing: sports injury protection professional title review",
+                "period": "2026-07-08",
+                "publisher": "Beijing Municipal Sports Bureau",
+                "scope": "exact",
+                "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/2024zcwj/qtwj45/744062344/index.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The standard route is a CAATE-accredited program. BOC also lists an international arrangement. Certification itself does not grant state licensure."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ath-boc",
+                "name": "BOC: certification application and exam",
+                "period": "Current guidance",
+                "publisher": "Board of Certification",
+                "scope": "exact",
+                "url": "https://bocatc.org/candidates/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BOC reports that 49 states and the District of Columbia regulate practice. Check the required form of authorization, scope and renewal rules with the relevant regulator."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ath-boc-state",
+                "name": "BOC: state regulation directory",
+                "period": "Current guidance",
+                "publisher": "Board of Certification",
+                "scope": "exact",
+                "url": "https://bocatc.org/state-regulation/"
               }
             ]
           },
@@ -33050,7 +33138,7 @@
             }
           }
         ],
-        "heading": "Will AI replace athletic trainers?",
+        "heading": "What emergency records can tools help organize?",
         "method_cards": [
           {
             "含义": {
@@ -36982,7 +37070,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests suit athletic training",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37059,7 +37147,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five Personality Test"
           },
           {
             "href": {
@@ -37069,7 +37157,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI Personality Test"
           },
           {
             "href": {
@@ -37079,7 +37167,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Enneagram (Chinese)"
+            "label": "Enneagram Personality Test"
           },
           {
             "href": {
@@ -37089,7 +37177,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "IQ (Chinese)"
+            "label": "Intelligence and Reasoning Test"
           }
         ]
       },
@@ -37104,7 +37192,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which adjacent direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
-      "interface.quick_decision.experiment_heading": "What does this job mainly do?",
+      "interface.quick_decision.experiment_heading": "How can I try a venue handover?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. salary reference",
@@ -37197,7 +37285,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "Where can AI assist with records?",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Career fit guide",
@@ -37287,87 +37375,90 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "33,900 people",
+        "derivation": "BLS Table 1.2 reports 35.2 thousand.",
+        "display_value": "35,200 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "2024 employment (on the 29-9091.00 occupation definition)",
+        "measure": "Employment level",
         "occupation_scope": "Athletic trainers",
-        "period": "2024; accessed 2026-09-15",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Much faster than average (7% or higher)",
+        "derivation": "BLS Table 1.2 reports 12.7%; the OOH rounds it to 13%.",
+        "display_value": "12.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "2024—2034 employment growth label",
+        "measure": "Projected growth",
         "occupation_scope": "Athletic trainers",
-        "period": "2024—2034; accessed 2026-09-15",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 2,400 per year",
+        "derivation": "BLS Table 1.2 reports 2.4 thousand.",
+        "display_value": "About 2,400 annually",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "2024—2034 average annual job openings",
+        "measure": "Average annual openings including replacements",
         "occupation_scope": "Athletic trainers",
-        "period": "2024—2034; accessed 2026-09-15",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish industry-level median wages for this occupation)",
+        "display_value": "$71,810 annually",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "United States",
-        "measure": "Not applicable: the source does not publish this field",
-        "occupation_scope": "Athletic trainers",
-        "period": "Not applicable: the source does not publish this field",
+        "measure": "Industry median annual wage",
+        "occupation_scope": "U.S. 29-9091 athletic trainers: Arts, entertainment and recreation",
+        "period": "May 2025",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish industry-level median wages for this occupation)",
+        "display_value": "$64,340 annually",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "United States",
-        "measure": "Not applicable: the source does not publish this field",
-        "occupation_scope": "Athletic trainers",
-        "period": "Not applicable: the source does not publish this field",
+        "measure": "Industry median annual wage",
+        "occupation_scope": "U.S. 29-9091 athletic trainers: Educational services",
+        "period": "May 2025",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish industry-level median wages for this occupation)",
+        "display_value": "$62,690 annually",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "United States",
-        "measure": "Not applicable: the source does not publish this field",
-        "occupation_scope": "Athletic trainers",
-        "period": "Not applicable: the source does not publish this field",
+        "measure": "Industry median annual wage",
+        "occupation_scope": "U.S. 29-9091 athletic trainers: Hospitals",
+        "period": "May 2025",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish industry-level median wages for this occupation)",
+        "display_value": "$61,820 annually",
         "fact_id": "us-industry-wage-education-2025",
         "market": "United States",
-        "measure": "Not applicable: the source does not publish this field",
-        "occupation_scope": "Athletic trainers",
-        "period": "Not applicable: the source does not publish this field",
+        "measure": "Industry median annual wage",
+        "occupation_scope": "U.S. 29-9091 athletic trainers: Offices of physicians",
+        "period": "May 2025",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
@@ -37491,66 +37582,57 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "33,900 people",
+        "derivation": "BLS Table 1.2 reports 35.2 thousand.",
+        "display_value": "35,200 jobs",
         "fact_id": "us-employment-parent",
         "market": "United States",
-        "measure": "2024 employment (on this occupation's definition)",
+        "measure": "Employment level",
         "occupation_scope": "Athletic trainers",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Much faster than average (7% or higher)",
+        "derivation": "BLS Table 1.2 reports 12.7%; the OOH rounds it to 13%.",
+        "display_value": "12.7%",
         "fact_id": "us-growth-parent",
         "market": "United States",
-        "measure": "2024—2034 employment growth label",
+        "measure": "Projected growth",
         "occupation_scope": "Athletic trainers",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 2,400 per year",
+        "derivation": "BLS Table 1.2 reports 2.4 thousand.",
+        "display_value": "About 2,400 annually",
         "fact_id": "us-openings-parent",
         "market": "United States",
-        "measure": "2024—2034 average annual job openings",
+        "measure": "Average annual openings including replacements",
         "occupation_scope": "Athletic trainers",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Athletic trainers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "ep",
+          "bls"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and athletic training tasks"
     },
     "badges": [
       "O*NET 29-9091.00 · Job Zone Five · certification and state licensure",
       "Scope of practice and referral obligations / medical records and privacy / on-site first aid responsibility",
-      "No precise occupational statistics for Mainland China · visible gap marker"
+      "Mainland injury protection and team rehabilitation examples"
     ],
     "metrics": [
       {
@@ -37563,19 +37645,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034)"
+        "label": "U.S. employment growth (2025—2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment (2024)"
+        "label": "U.S. employment in 2025"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024—2034)"
+        "label": "U.S. average annual job openings (2025—2035)"
       },
       {
         "availability": "missing",
@@ -37589,17 +37671,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What athletic trainers do, what degrees and qualifications are required, how income and prospects look in the United States and China, and which tasks AI will change; source scope and data gaps are retained."
+      "text": "Explore athletic training and sports injury care, mainland team roles, U.S. BOC certification, state requirements and pay. Try a paper-only venue handover exercise."
     },
     "title": {
       "availability": "available",
       "text": "Athletic trainers"
     }
   },
-  "source_content_sha256": "5470e60125a8ddc9937dd0f3f65e387abcd58baf0d1ff98bc66c418771060dc6",
+  "source_content_sha256": "ec9ff197dc98f7902104c6604a8be8e691b049531d936849ecc1d47c816cf410",
   "subject": {
     "canonical_slug": "athletic-trainers",
     "name": "Athletic trainers",
-    "summary": "Athletic trainers evaluate and treat musculoskeletal injuries or illnesses under medical supervision and provide preventive, therapeutic, emergency and rehabilitative care. On the US side this corresponds to O*NET 29-9091.00 (Athletic Trainers, Bright Outlook), in Job Zone Five (SVP 8.0+), usually through an accredited degree programme and clinical internship plus a national certification examination, with most states requiring a licence; mainland China statistics aggregate by industry sector and do not list this occupation separately, and do not cover performance pay, duty pay or travelling-with-team allowances."
+    "summary": "Athletic trainers work in health care, focusing on injury prevention, assessment, emergency coordination and rehabilitation support. Related mainland roles include sports injury protection and team rehabilitation. Fitness coaching is a different job with different training and responsibilities."
   }
 }

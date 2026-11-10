@@ -170,6 +170,9 @@
       "item:museum-technicians-and-conservators.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:museum-technicians-and-conservators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:museum-technicians-and-conservators.profile.career-quick-answers-block.5": {
         "status": "mapped"
       },
@@ -13078,6 +13081,21 @@
             "bls-ooh"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。状况记录描述一处新裂纹，展出清单仍引用旧照片。列出对比依据和要向藏品负责人确认的事项，真实处理由获授权人员决定。"
+            ]
+          },
+          "id": "museum-technicians-and-conservators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核藏品状态与展出交接",
+          "type": "notice"
         }
       ]
     },
@@ -15594,6 +15612,13 @@
         "id": "museum-technicians-and-conservators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "museum-technicians-and-conservators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15799,7 +15824,7 @@
       "text": "博物馆技术员与文物修复师"
     }
   },
-  "source_content_sha256": "fe56f6b1f5ac8bc0b9793151d903c138fc32431d21b27d09466c3737b3d83301",
+  "source_content_sha256": "800306ce4af7006ea40e084fa0e9f0d7d81fe1c413d38267786d6008847c9dce",
   "subject": {
     "canonical_slug": "museum-technicians-and-conservators",
     "name": "博物馆技术员与文物修复师",

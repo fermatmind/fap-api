@@ -23666,13 +23666,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先看能否把图样要求、磨削对象与测量记录对应起来，再看是否愿意重复复核、接受工艺反馈并在未知条件下暂停。本页纸面体验可以观察判断与记录习惯，不能证明已经能安全独立操作设备。"
+              "纸面体验｜在虚构刃口修整单和验收表上找出两种轮廓编号，记下需复核的样件和工单。 "
             ]
           },
           "id": "tool-grinders-filers-and-sharpeners.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24832,13 +24831,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "工具磨削、锉削与刃磨工对金属对象实施精密磨削、刃磨、抛光或锉削，依据图样选择并修整砂轮、监控加工，测量尺寸与表面状态，处理缺陷并记录结果。部分岗位涉及锯齿调整或数控工具磨削；设备维修、锻压成形与轧制另有职责。"
+              "工具磨削、锉修和刃磨人员按指定形状修整工具、零件或模具，并检查轮廓、表面及尺寸是否符合工单。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "tool-grinders-filers-and-sharpeners.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-4194.00"
           ],
           "type": "prose"
         }
@@ -25512,15 +25510,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职业可复核任务评分、全国AI采用率与净就业因果数据。特定设备修整监测、测量和补偿功能不证明普遍部署或整岗替代；BLS2025—2035总体下降6.8%、十年净减约400人与年均500空缺含替补分指标，非AI独立减员或个人失业概率。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：在虚构刃口修整单和验收表上找出两种轮廓编号，记下需复核的样件和工单。"
             ]
           },
           "id": "tool-grinders-filers-and-sharpeners.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "editorial",
-            "bls"
+            "transfer-onet-51-4194.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33360,6 +33356,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-4194.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-4194.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-4194.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39036,10 +39059,10 @@
       "text": "工具磨削、锉削与刃磨工"
     }
   },
-  "source_content_sha256": "4ad7ee58b7f7e9fb0533d3e2c1a79d179715e853d3686bfa0d012f165c6d5f8e",
+  "source_content_sha256": "0185a1c7157ace09a0267a476b8c9a3aa906f347e38ef5a0e59aafe439f6fe1b",
   "subject": {
     "canonical_slug": "tool-grinders-filers-and-sharpeners",
     "name": "工具磨削、锉削与刃磨工",
-    "summary": "工具磨削、锉削与刃磨工依据图样与工艺要求，对金属工具、刃口或相关工件进行精密磨削、修整、抛光和锉削，选择并修整砂轮，测量尺寸与表面状态，隔离不合格件并记录异常。数控刃磨、锯齿修整与手工精修的设备和任务不同，不能以“会开磨床”代替对公差、量具和安全边界的理解。"
+    "summary": "工具磨削、锉修和刃磨人员按指定形状修整工具、零件或模具，并检查轮廓、表面及尺寸是否符合工单。"
   }
 }

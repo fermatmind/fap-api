@@ -696,7 +696,7 @@
         "status": "mapped"
       },
       "item:solar-sales-representatives-and-assessors.fit.personality-fit-block.20": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:solar-sales-representatives-and-assessors.fit.personality-fit-block.21": {
         "status": "mapped"
@@ -1533,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:solar-sales-representatives-and-assessors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:solar-sales-representatives-and-assessors.sources.source-card.1": {
         "status": "mapped"
@@ -15975,8 +15975,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -22957,7 +22963,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use the fictional S1–S4 to experience requirement clarification, quotation recalculation, condition changes and customer explanations. Compare budgets and models on paper first, without contacting real customers, climbing on roofs to operate equipment or giving personal investment advice."
+              "Think twice if you dislike repeated follow-ups, price objections, or conversations that end without a sale."
             ]
           },
           "id": "solar-sales-representatives-and-assessors.quick-decision.fit-decision-checklist.1",
@@ -22972,7 +22978,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Sales and assessment centre on customer requirements and conditional quotations, systems engineers take on engineering analysis and design, installers do the actual assembly and maintenance, and managers coordinate the on-site work sequence. Choose by the main output, and do not treat eloquence or a paper quotation as a professional qualification."
+              "Try SAS-01 in section 09. Finish a first draft before checking the key after the seven-day plan."
             ]
           },
           "id": "solar-sales-representatives-and-assessors.quick-decision.fit-decision-checklist.2",
@@ -22987,7 +22993,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Observable: whether requirements are heard clearly, each item is recalculated, unknowns are acknowledged and technical questions are passed to the corresponding person. Being willing to talk about solar energy is not the same as being willing to follow up persistently and face sales targets; the outdoor assessment scope and training are checked against the real position."
+              "This work may suit you if you enjoy discussing energy needs, checking quote versions, and explaining which questions require a technical review."
             ]
           },
           "id": "solar-sales-representatives-and-assessors.quick-decision.fit-decision-checklist.3",
@@ -25516,7 +25522,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Independently recalculate 42000−1000 and +6000 and 5400/5300W, and check the cost scope and units."
+              "After using a tool to recalculate the quote, trace the discount, reinforcement, and module units back to the right version."
             ]
           },
           "id": "solar-sales-representatives-and-assessors.ai-impact.ai-impact-table.91",
@@ -27552,31 +27558,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-test"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Sales managers",
@@ -28014,8 +28020,9 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Independently recalculate 41000 and 47000, and distinguish the 5000 surplus from the 1000 overrun.",
-              "Explain that 5.4 and 5.3kW are nameplate totals only, not annual generation."
+              "Can check both quote versions and explain what each one covers.",
+              "Can explain the separate evidence needs for nameplate power and generation.",
+              "Can hand off technical questions, price revisions, and customer approval separately."
             ]
           },
           "id": "solar-sales-representatives-and-assessors.fit.personality-fit-block.20",
@@ -28872,7 +28879,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Under S2, when the reinforcement is unknown, 41000 is called the final total cost."
+              "Record which costs the quote covers and which still need technical review."
             ]
           },
           "id": "solar-sales-representatives-and-assessors.risk.career-risk-cards.14",
@@ -28932,7 +28939,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Under S4, 10A and 2B are counted as 12A, or 5.3kW is treated as annual electricity."
+              "Check module models and nameplate power. Annual generation also needs site, shading, and climate data."
             ]
           },
           "id": "solar-sales-representatives-and-assessors.risk.career-risk-cards.18",
@@ -29172,7 +29179,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Under S4, only the 47000 quotation is mentioned, omitting the model pending verification and the customer's lack of approval."
+              "State whether the modules and revised costs have been checked and who approved the change."
             ]
           },
           "id": "solar-sales-representatives-and-assessors.risk.career-risk-cards.34",
@@ -29338,33 +29345,33 @@
               {
                 "id": "education",
                 "values": [
-                  "Insufficient evidence: no complete, checkable single employer posting was used",
-                  "No original text with complete and checkable region and date, solar responsibility mix, base pay and commissions and hiring conditions was obtained, and official tasks cannot establish a unified employer threshold.",
-                  "Verification method: real postings must be checked item by item for identity and responsibilities, date and region, pay and training."
+                  "Nankai University: AIKO domestic solar sales",
+                  "The October 30, 2026 campus notice covers distribution channels, customer development, and contract fulfillment for distributed PV components.",
+                  "Check requirements on the posting."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "Editorial suggestion: requirement and quotation explanation",
-                  "Use S1–S3 to show the budget, included cost items, discounts and change records, without claiming it is a recruitment original.",
-                  "Verification method: trace back to the original prompt and the calculations separately, and keep the first and revised drafts."
+                  "Sunrun: field sales consultant",
+                  "The Tomball, Texas role meets customers in their homes, evaluates their needs, and advances sales.",
+                  "Check requirements on the posting."
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "Purpose of the official solar tasks",
-                  "O*NET supports customer requirements, product selection, cost quotations, site assessment and lead records, and cannot prove a specific employer's salary requirements.",
-                  "Verification method: compare against the actual position's main output, not just the sales title."
+                  "Heshun Energy: commercial and industrial PV project development manager",
+                  "The April 21, 2026 posting covers rooftop site surveys, due diligence, and commercial negotiation. It illustrates related project assessment work.",
+                  "Check requirements on the posting."
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "Editorial suggestion: unknowns and technical handover",
-                  "The S4 model count, generation inputs and professional verification are undetermined; pass them to the corresponding person and record the customer explanation.",
-                  "Verification method: unknowns are not filled with zeros, and the successor can find the original basis and the items to be confirmed."
+                  "Work authority",
+                  "Keep quote status, technical review, and customer approval separate. Generation and savings require their own evidence.",
+                  "Confirm responsibilities with the employer and under local rules."
                 ]
               }
             ]
@@ -29372,7 +29379,10 @@
           "id": "solar-sales-representatives-and-assessors.path.employer-evidence.1",
           "source_refs": [
             "editor",
-            "onet"
+            "onet",
+            "d020-cn-job",
+            "d020-us-job",
+            "d020-cn-context"
           ],
           "title": "What do employers usually look for in recruitment?",
           "type": "cards"
@@ -29389,8 +29399,8 @@
                   "You do paper requirement, cost and model comparisons for a fictional customer only. The amounts and rules are exercise settings, not market quotations, solar technical standards or personal investment advice.",
                   "S1｜The customer's budget is 46000 yuan and the requirement states 12 PV-A modules at 450W nameplate each. Electricity bills, shading, weather, structural and electrical conclusions, incentives and loan eligibility are all not provided, so annual generation, savings or payback cannot be estimated.",
                   "S2｜The V1 quotation: 12 PV-A pieces at 1600 yuan each, 8000 yuan for the inverter, 12000 yuan for supports and installation, 1800 yuan for the paper documentation service and 1000 yuan for transport; the exercise assumes each listed amount includes tax, with no separate tax, and the 1000 yuan discount applies only to the option listed in V1/V2. Rooftop reinforcement is not within the V1 scope, and whether it is needed was previously unknown.",
-                  "S3｜The technical party notifies that rooftop reinforcement of 6000 yuan must be added (a tax-inclusive price given in the exercise), while the other listed items and the 1000 discount are unchanged, forming V2; the customer has not approved the overrun. V1 may no longer be called the confirmed total price of the whole project.",
-                  "S4｜The V2 attached component list is actually 10 A450W pieces and 2 B400W pieces, inconsistent with the 12 A pieces in S1, the amount is not yet revised, and both substitution applicability and customer confirmation are unknown. Sales can only recalculate and hand over the issues; models and structural and electrical matters are checked by the corresponding technical party, and discounts, overruns and contracts are confirmed by the authorizer and customer, with no commitment that construction or operation is possible."
+                  "S3｜The technical party notifies that rooftop reinforcement of 6000 yuan must be added (a tax-inclusive price given in the exercise), while the other listed items and the 1000 discount are unchanged, forming V2; the customer has not approved the revised quote. V1 may no longer be called the confirmed total price of the whole project.",
+                  "S4｜The V2 attached component list is actually 10 A450W pieces and 2 B400W pieces, the amount is not yet revised, and both substitution applicability and customer confirmation are unknown. Sales can only recalculate and hand over the issues; models and structural and electrical matters are checked by the corresponding technical party, and discounts, overruns and contracts are confirmed by the authorizer and customer, with no commitment that construction or operation is possible."
                 ]
               },
               {
@@ -29398,16 +29408,16 @@
                 "values": [
                   "Tasks and output",
                   "List the requirement and quotation item-by-item calculations per S1/S2, calculate the discounted total, the gap against the budget and the total nameplate power of the requirement, and distinguish kW from annual generation.",
-                  "Calculate the changed total and the overrun per S3; compare the component list and nameplate total per S4, and record unrevised costs, missing confirmations and professional issues. Seal the first draft first, then open the answer."
+                  "Calculate the revised total and the gap against the budget per S3; compare the component list and nameplate total per S4, and record unrevised costs, missing confirmations and professional issues. Seal the first draft first, then open the answer."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answer (complete it independently first, then look)",
-                  "S2 components 12×1600=19200 yuan; the original five items 19200+8000+12000+1800+1000=42000 yuan, minus the 1000 discount = 41000 yuan, 5000 yuan below the 46000 budget. S1 requirement 12×450W=5400W=5.4kW, a nameplate total only, and it cannot be counted as annual generation or savings.",
-                  "S3 V2 is 42000+6000−1000=47000 yuan, 1000 yuan over the 46000 budget; 6000 more than V1. Record the added reinforcement, the unchanged discount and the unapproved status, and pass them to the quotation authorizer and the customer, without deleting costs or automatically increasing the budget.",
-                  "S4 list 10×450+2×400=5300W=5.3kW, 0.1kW less than the S1 requirement of 5.4kW, with 2 pieces of a different model. A similar nameplate total cannot be taken as proof of substitution; the V2 amount has not yet been corrected for the list, and 47000 is only the result of the cost conditions set in S3, not the final quotation after the model correction. Pass models, structural and electrical matters and output inputs to the technical party for verification, pass the new quotation to the authorizer for verification, then explain the conditions to the customer; the current status is pending verification and pending approval."
+                  "Before checking your work",
+                  "Write the inputs, constraints, and calculations in your first draft.",
+                  "Name the responsible person and what still needs confirmation.",
+                  "Save your draft on day 6. Follow the day 7 instructions to open the key."
                 ]
               },
               {
@@ -29424,7 +29434,7 @@
             "editor",
             "onet"
           ],
-          "title": "Paper exercise: solar requirements, quotations and technical handover (fictional)",
+          "title": "SAS-01 | Review a solar quote and a module change",
           "type": "cards"
         },
         {
@@ -29435,33 +29445,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Requirement and input table",
-                  "List the S1 budget of 46000, 12A450, and the unknown electricity, weather, shading, structural and electrical and funding conditions, separating customer requirements from professional documents.",
-                  "Review: each item points to the S1 original, and unknowns are not written as confirmed."
+                  "Original quote calculation",
+                  "Recalculate the original line items, discount, and budget gap.",
+                  "Keep the source reference and your check."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Version and cost recalculation table",
-                  "List the S2 five items 42000, 41000 after discount with 5000 budget headroom, the 47000 with a 1000 overrun after the S3 reinforcement, and mark the V1/V2 conditions and approval status.",
-                  "Review: the 6000 increment and the 1000 discount are listed separately, and the successor can recalculate."
+                  "Change review",
+                  "Compare costs and unapproved changes across the two quotes.",
+                  "Keep the source reference and your check."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Technical and customer handover card",
-                  "S4 marks 10A2B, 5.3 against 5.4kW and the unrevised quotation and unknown applicability, and hands separate to-dos to the technical party, the quotation authorizer and the customer.",
-                  "Review: may not write that similar power allows substitution, and may not promise on-site compliance."
+                  "Module comparison",
+                  "Compare the module list against the requirement and flag questions for technical review.",
+                  "Keep the source reference and your check."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Customer explanation and limitation card",
-                  "Use a short text to explain the cost change and overrun, the model pending verification, and that annual electricity and return conditions were not given, and list the documents to confirm next.",
-                  "Review: can trace back to S1–S4, and does not present the exercise as a real quotation or a closed deal."
+                  "Client update",
+                  "Draft the client update and state what can be promised and who still needs to confirm.",
+                  "Keep the source reference and your check."
                 ]
               }
             ]
@@ -29493,27 +29503,27 @@
             "rows": [
               [
                 "Interview: cost recalculation",
-                "Can check the five items, the discount and the budget",
-                "Writes 42000−1000=41000, headroom 5000",
-                "An editorial observation point, not a unified exam"
+                "Recalculate the original line items, discount, and budget gap.",
+                "Explain the evidence and record one open question.",
+                "Check the requirements of the actual role."
               ],
               [
                 "Interview: quotation changes",
-                "Can distinguish V1 from V2",
-                "Reinforcement adds 6000; V2 is 47000, 1000 over and pending approval",
-                "Does not decide the budget for real customers"
+                "Compare costs and unapproved changes across the two quotes.",
+                "Explain the evidence and record one open question.",
+                "Check the requirements of the actual role."
               ],
               [
                 "Trial: technical handover",
-                "Can explain the S4 model mismatch and unknowns",
-                "10A2B totals 5.3kW, with model cost and applicability pending verification",
-                "Paper checking does not prove on-site assessment ability"
+                "Compare the module list against the requirement and flag questions for technical review.",
+                "Explain the evidence and record one open question.",
+                "Check the requirements of the actual role."
               ],
               [
                 "Customer communication: condition explanation",
-                "Can explain the difference between nameplate and returns",
-                "5.4 and 5.3kW are not annual electricity; funding and output inputs are unknown",
-                "A single exercise does not predict sales performance"
+                "Draft the client update and state what can be promised and who still needs to confirm.",
+                "Explain the evidence and record one open question.",
+                "Check the requirements of the actual role."
               ]
             ]
           },
@@ -29541,42 +29551,42 @@
                 "id": "entry-trial-day-2",
                 "values": [
                   "Day 2",
-                  "Build the budget, model and unknown document table from S1, keeping generation, savings and loan conditions as not provided."
+                  "Recalculate the original line items, discount, and budget gap."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day 3",
-                  "Use S2 to recalculate the five items, 41000 after discount and the 5000 headroom, writing the units and original conditions for each item."
+                  "Compare costs and unapproved changes across the two quotes."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day 4",
-                  "Apply S3 to write the V2 cost of 47000, the 1000 overrun and the pending change, without letting the old V1 pose as an all-inclusive price."
+                  "Compare the module list against the requirement and flag questions for technical review."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day 5",
-                  "Recalculate 5.3kW per S4, write the 2 non-matching pieces and the unrevised model price, and pass them to professional and customer confirmation."
+                  "Draft the client update and state what can be promised and who still needs to confirm."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day 6",
-                  "Seal the first draft first, then check the answer item by item for amounts, models, power, unknowns and authority, and record the basis for revisions."
+                  "Finish and save your own first draft with the calculations, decisions, and supporting evidence. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day 7",
-                  "Compare the first and revised drafts and the effort felt, and list the product, communication and tool training questions to fill in, without computing a suitability probability."
+                  "After saving your day 6 draft, open “SAS-01 answer key and rubric (open on day 7)” in the FAQ. Use the rubric to review the two quotes, module list, and open confirmations, then record one revision and its reason."
                 ]
               }
             ]
@@ -29594,13 +29604,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep the first and revised drafts, with each error pointing back to S1–S4 and the basis for the change.",
-              "Check whether unknown reinforcement or output and funding conditions are treated as zero, and the old V1 as the final all-inclusive price.",
-              "Record the effort felt for recalculation, explaining limits and continuous follow-up, without turning it into a career suitability score.",
-              "Recalculate 41000 and 47000 again, and check whether the 5000 budget gap and the 1000 overrun are kept distinct.",
-              "Explain that 5.4 and 5.3kW are nameplate totals only and cannot imply annual electricity, returns or compliant substitution.",
-              "Compare the requirements, version changes and handover structure produced with real job requirements, and check training and authority separately.",
-              "If unfinished, list the gaps honestly and prepare the next round of product and communication learning, without fabricating customers or closed deals."
+              "Keep the line-item calculations, discount, and budget gap for each version.",
+              "Compare requirements and the list by model, quantity, and nameplate power.",
+              "List the pricing and technical information that still needs checking.",
+              "Identify technical review, quotation authorization, and customer approval separately.",
+              "Use only the fictional materials.",
+              "Use the named answer key on day 7.",
+              "Keep your first draft and record the reason for any revision."
             ]
           },
           "id": "solar-sales-representatives-and-assessors.path.seven-day-decision.1",
@@ -29608,7 +29618,7 @@
             "editor",
             "onet"
           ],
-          "title": "How to decide at the end of the seven days whether to continue",
+          "title": "Submission and review checklist",
           "type": "list"
         },
         {
@@ -29722,15 +29732,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no employer posting with complete, checkable region and date, product responsibilities, base pay and commissions and payment and clawback conditions for this occupation was obtained, and no wage or unified threshold is invented.",
-              "S1–S4 are all editorial fictional paper documents: a 46000 budget, a 41000 base quotation, an unapproved 47000 reinforcement change, and a mismatch between a 12A requirement and a 10A2B attachment. They are for practising requirement questioning, recalculation and technical handover, and are not a recruitment sample, a real customer quotation or proof of hiring."
+              "The October 30, 2026 campus notice covers distribution channels, customer development, and contract fulfillment for distributed PV components.",
+              "The Tomball, Texas role meets customers in their homes, evaluates their needs, and advances sales."
             ]
           },
           "id": "solar-sales-representatives-and-assessors.path.recruitment-sample.1",
           "source_refs": [
-            "editor"
+            "d020-cn-job",
+            "d020-us-job"
           ],
-          "title": "Recruitment sample note",
+          "title": "Employer examples from mainland China and the United States",
           "type": "notice"
         },
         {
@@ -30363,7 +30374,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Independent recalculation of 42000 and 41000 after discount is consistent"
+              "Check the original subtotal, discount, and budget comparison with reproducible calculations."
             ]
           },
           "id": "solar-sales-representatives-and-assessors.path.career-path-block.50",
@@ -30438,7 +30449,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "S3 is 47000 with a 1000 overrun, retaining V1/V2"
+              "Put the revised amount in the new version, retain the original, and mark it as pending authorization."
             ]
           },
           "id": "solar-sales-representatives-and-assessors.path.career-path-block.55",
@@ -31905,12 +31916,22 @@
                 ]
               },
               {
-                "answer": "No. The S3 quotation is 1000 over the 46000 budget and unapproved, the S4 10A2B differs from the 12A requirement and the cost is unrevised, and professional applicability is pending verification. 5.3kW is only a nameplate total, and generation, savings and funding conditions were not given, so no return guarantee or purchasing recommendation is made.",
+                "answer": "You still need site and electrical checks, site inputs for a generation estimate, the full price, and the customer’s decision. The paper quote only checks the fictional case.",
                 "id": "solar-sales-representatives-and-assessors.faq.10",
-                "question": "If 47000 yuan and 5.3kW are calculated correctly, can a purchase be recommended?",
+                "question": "Can an accurate quote and nameplate total support a purchase recommendation?",
                 "question_key": "career.faq.solar-sales-representatives-and-assessors.outlook-transition",
                 "source_refs": [
                   "editor"
+                ]
+              },
+              {
+                "answer": "S2 components 12×1600=19200 yuan; the original five items 19200+8000+12000+1800+1000=42000 yuan, minus the 1000 discount = 41000 yuan, 5000 yuan below the 46000 budget. S1 requirement 12×450W=5400W=5.4kW, a nameplate total only, and it cannot be counted as annual generation or savings.\n\nS3 V2 is 42000+6000−1000=47000 yuan, 1000 yuan over the 46000 budget; 6000 more than V1. Record the added reinforcement, the unchanged discount and the unapproved status, and pass them to the quotation authorizer and the customer, without deleting costs or automatically increasing the budget.\n\nS4 list 10×450+2×400=5300W=5.3kW, 0.1kW less than the S1 requirement of 5.4kW, with 2 pieces of a different model. A similar nameplate total cannot be taken as proof of substitution; the V2 amount has not yet been corrected for the list, and 47000 is only the result of the cost conditions set in S3, not the final quotation after the model correction. Pass models, structural and electrical matters and output inputs to the technical party for verification, pass the new quotation to the authorizer for verification, then explain the conditions to the customer; the current status is pending verification and pending approval.\n\nScore four items from 0 to 2: calculations and budget gaps for both versions, module list and nameplate totals, unresolved generation and pricing, and technical, quotation, and customer approvals.\n\nFor each item, give 2 for complete, verifiable work, 1 for partial work, and 0 for missing work or approving outside your role.\n\nKeep the first and revised drafts. Mark one point still to verify in the handoff.\n\nRead one role with supervision and identify its biggest difference from the paper task.",
+                "id": "solar-sales-representatives-and-assessors.faq.11",
+                "question": "SAS-01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.solar-sales-representatives-and-assessors.exercise-answer-key",
+                "source_refs": [
+                  "editor",
+                  "onet"
                 ]
               }
             ]
@@ -32033,13 +32054,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the sales representatives and assessors career page",
@@ -32497,6 +32518,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The October 30, 2026 campus notice covers distribution channels, customer development, and contract fulfillment for distributed PV components."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d020-cn-job",
+                "limitation": "Use for this posting’s tasks only.",
+                "market": "Mainland China",
+                "name": "Nankai University: AIKO domestic solar sales",
+                "period": "2026-10-30",
+                "publisher": "Nankai University: AIKO domestic solar sales",
+                "scope": "recruitment_proxy",
+                "url": "https://career.nankai.edu.cn/correcruit/content/id/120255.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Tomball, Texas role meets customers in their homes, evaluates their needs, and advances sales."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d020-us-job",
+                "limitation": "Use for this posting’s tasks only.",
+                "market": "United States",
+                "name": "Sunrun: field sales consultant",
+                "period": "Read on the employer posting",
+                "publisher": "Sunrun: field sales consultant",
+                "scope": "recruitment_proxy",
+                "url": "https://careers.sunrun.com/job/tomball/field-sales-consultant/21632/99494209360"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The April 21, 2026 posting covers rooftop site surveys, due diligence, and commercial negotiation. It illustrates related project assessment work."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d020-cn-context",
+                "limitation": "Use for this posting’s tasks only.",
+                "market": "Mainland China",
+                "name": "Heshun Energy: commercial and industrial PV project development manager",
+                "period": "2026-04-21",
+                "publisher": "Heshun Energy: commercial and industrial PV project development manager",
+                "scope": "recruitment_proxy",
+                "url": "https://hssolarpv.com/default.aspx?pageid=4"
               }
             ]
           },
@@ -35809,7 +35875,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person suits sales representatives and assessors?"
+        "title": "Would solar sales and assessment suit me?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -37191,7 +37257,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests suit sales representatives and assessors",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37313,6 +37379,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which kind of solar sales or adjacent tasks would you rather invest in?",
       "interface.fit.interest_code_heading": "How to understand the interest codes",
+      "interface.quick_decision.suit_heading": "Who tends to enjoy solar sales and assessment?",
       "interface.us_salary.industry.industry_header": "Parent group industry",
       "interface.us_salary.industry.interpretation_header": "Statistical objects and limitations",
       "interface.us_salary.section_label": "US parent group statistics reference",
@@ -37762,14 +37829,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Understand the customer requirements, site documents, quotation recalculation and handover of solar sales and assessment; distinguish the US 41-4011 parent group statistics from this occupation's gap, and use the fictional S1–S4 for practice, without guaranteeing generation returns or hiring."
+      "text": "See how solar sales and assessment teams check customer needs, modules, and quotes. Compare sales and site roles, then try a quote review."
     },
     "title": {
       "availability": "available",
-      "text": "Sales representatives and assessors"
+      "text": "Solar Sales Representatives and Assessors"
     }
   },
-  "source_content_sha256": "21368efa16779df9223a49d90c2171446bac0a0ea0345e0c326dc4e09d063a38",
+  "source_content_sha256": "d444442db06b4aa8255a44aae8f20b538f6a721ca584ea06e0bd93a2177a3353",
   "subject": {
     "canonical_slug": "solar-sales-representatives-and-assessors",
     "name": "Sales representatives and assessors",

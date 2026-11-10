@@ -162,12 +162,24 @@
         "status": "pending_mapping"
       },
       "item:painting-coating-and-decorating-workers.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:painting-coating-and-decorating-workers.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:painting-coating-and-decorating-workers.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:painting-coating-and-decorating-workers.path.interview-probation.10": {
+        "status": "pending_mapping"
+      },
+      "item:painting-coating-and-decorating-workers.path.recruitment-sample.1": {
+        "status": "pending_mapping"
+      },
+      "item:painting-coating-and-decorating-workers.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:painting-coating-and-decorating-workers.path.seven-day-trial.1": {
         "status": "mapped"
       },
       "item:painting-coating-and-decorating-workers.profile.career-quick-answers-block.8": {
@@ -228,7 +240,7 @@
         "status": "pending_mapping"
       },
       "item:painting-coating-and-decorating-workers.sources.faq-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:painting-coating-and-decorating-workers.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -3175,18 +3187,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            0,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.01.mitigation": {
         "ref": null,
@@ -3346,18 +3348,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": null,
@@ -3403,18 +3395,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            4,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": null,
@@ -3460,18 +3442,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            5,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": null,
@@ -5689,52 +5661,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5965,96 +6075,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -9557,157 +9903,48 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.02.accessed_at": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "accessed_at"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.details.01": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "details",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.details.02": {
         "ref": null,
         "status": "unfilled"
       },
       "sources.published-sources.entries.02.evidence_type": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "evidence_type"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.limitation": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "limitation"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.market": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            1,
-            "market"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.name": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "name"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.period": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "period"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.publisher": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "publisher"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.scope": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "scope"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.02.url": {
-        "ref": {
-          "id": "painting-coating-and-decorating-workers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "mohrss-wage"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.03.accessed_at": {
         "ref": {
@@ -9780,7 +10017,7 @@
           "path": [
             "data",
             "entries",
-            2,
+            1,
             "market"
           ],
           "source": "item"
@@ -9929,7 +10166,7 @@
           "path": [
             "data",
             "entries",
-            3,
+            2,
             "market"
           ],
           "source": "item"
@@ -10094,7 +10331,7 @@
           "path": [
             "data",
             "entries",
-            4,
+            3,
             "market"
           ],
           "source": "item"
@@ -10247,7 +10484,7 @@
           "path": [
             "data",
             "entries",
-            5,
+            4,
             "market"
           ],
           "source": "item"
@@ -10400,7 +10637,7 @@
           "path": [
             "data",
             "entries",
-            6,
+            5,
             "market"
           ],
           "source": "item"
@@ -10553,7 +10790,7 @@
           "path": [
             "data",
             "entries",
-            7,
+            6,
             "market"
           ],
           "source": "item"
@@ -10706,7 +10943,7 @@
           "path": [
             "data",
             "entries",
-            8,
+            7,
             "market"
           ],
           "source": "item"
@@ -10859,7 +11096,7 @@
           "path": [
             "data",
             "entries",
-            9,
+            8,
             "market"
           ],
           "source": "item"
@@ -11012,7 +11249,7 @@
           "path": [
             "data",
             "entries",
-            10,
+            9,
             "market"
           ],
           "source": "item"
@@ -11165,7 +11402,7 @@
           "path": [
             "data",
             "entries",
-            11,
+            10,
             "market"
           ],
           "source": "item"
@@ -11318,7 +11555,7 @@
           "path": [
             "data",
             "entries",
-            12,
+            11,
             "market"
           ],
           "source": "item"
@@ -11395,7 +11632,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "accessed_at"
           ],
           "source": "item"
@@ -11408,7 +11645,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "details",
             0
           ],
@@ -11422,7 +11659,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "evidence_type"
           ],
           "source": "item"
@@ -11435,7 +11672,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "limitation"
           ],
           "source": "item"
@@ -11448,7 +11685,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "market"
           ],
           "source": "item"
@@ -11461,7 +11698,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "name"
           ],
           "source": "item"
@@ -11474,7 +11711,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "period"
           ],
           "source": "item"
@@ -11487,7 +11724,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "publisher"
           ],
           "source": "item"
@@ -11500,7 +11737,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "scope"
           ],
           "source": "item"
@@ -11513,7 +11750,7 @@
           "path": [
             "data",
             "entries",
-            13,
+            12,
             "url"
           ],
           "source": "item"
@@ -11526,7 +11763,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "accessed_at"
           ],
           "source": "item"
@@ -11539,7 +11776,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "details",
             0
           ],
@@ -11553,7 +11790,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "evidence_type"
           ],
           "source": "item"
@@ -11566,7 +11803,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "limitation"
           ],
           "source": "item"
@@ -11579,7 +11816,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "market"
           ],
           "source": "item"
@@ -11592,7 +11829,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "name"
           ],
           "source": "item"
@@ -11605,7 +11842,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "period"
           ],
           "source": "item"
@@ -11618,7 +11855,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "publisher"
           ],
           "source": "item"
@@ -11631,7 +11868,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "scope"
           ],
           "source": "item"
@@ -11644,7 +11881,7 @@
           "path": [
             "data",
             "entries",
-            14,
+            13,
             "url"
           ],
           "source": "item"
@@ -11657,7 +11894,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "accessed_at"
           ],
           "source": "item"
@@ -11670,7 +11907,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "details",
             0
           ],
@@ -11684,7 +11921,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "evidence_type"
           ],
           "source": "item"
@@ -11697,7 +11934,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "limitation"
           ],
           "source": "item"
@@ -11710,7 +11947,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "market"
           ],
           "source": "item"
@@ -11723,7 +11960,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "name"
           ],
           "source": "item"
@@ -11736,7 +11973,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "period"
           ],
           "source": "item"
@@ -11749,7 +11986,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "publisher"
           ],
           "source": "item"
@@ -11762,7 +11999,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "scope"
           ],
           "source": "item"
@@ -11775,7 +12012,7 @@
           "path": [
             "data",
             "entries",
-            15,
+            14,
             "url"
           ],
           "source": "item"
@@ -11995,7 +12232,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Suited to people who can control cleaning, color, coating, and appearance across different materials and patiently inspect for flaws."
+              "Consider this work if you like tracing a finish check to the work order and describing what needs another look."
             ]
           },
           "id": "painting-coating-and-decorating-workers.quick-decision.fermat-decision-card.2",
@@ -12009,7 +12246,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Choose carefully if you cannot follow the safety procedures for coatings, solvents, spraying, and drying equipment, or if you mistake product coating for building painting."
+              "If you prefer setting or watching a line, ask whether the job mainly monitors equipment or checks and retouches a finish."
             ]
           },
           "id": "painting-coating-and-decorating-workers.quick-decision.fermat-decision-card.3",
@@ -12023,7 +12260,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Safe teaching samples can be used to practice cleaning, masking, brushing, and appearance inspection; real chemicals, spraying, and drying equipment must be operated per employer training and authorization."
+              "In 09 Entry, qualifications, and career development, find “FR-28: Write a Finish Inspection Handover.” Allow about 10 minutes before reading the answer."
             ]
           },
           "id": "painting-coating-and-decorating-workers.quick-decision.fermat-decision-card.4",
@@ -12117,12 +12354,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Historical: U.S. O*NET 2024 employment in this precise occupation was about 8,800 people, not real-time hiring. Current BLS precise 51-9123 employment is about 8,200 in 2025 and about 8,300 in 2035, and the values are rounded from the thousands table; do not compute across periods."
+              "BLS reports 8,200 U.S. jobs in 2025 for 51-9123 and projects 8,300 in 2035. These are national employment counts."
             ]
           },
           "id": "painting-coating-and-decorating-workers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -12132,7 +12368,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "This occupation's object differs from that of construction painters, and its main tasks also differ from those of continuous coating machine operators."
+              "This occupation's object differs from that of construction painters, and its main tasks also differ from those of coating machine operators."
             ]
           },
           "id": "painting-coating-and-decorating-workers.profile.career-quick-answers-block.9",
@@ -12182,7 +12418,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Product painters focus on the appearance of individual items or small batches; continuous coating machine operators focus more on equipment parameters and line operation."
+              "Product painters focus on the appearance of individual items or small batches; coating machine operators focus more on equipment parameters and line operation."
             ]
           },
           "id": "painting-coating-and-decorating-workers.direction-comparison.adjacent-career-comparison-table.2",
@@ -12210,7 +12446,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "This occupation's objects are products such as furniture, glass, and pottery, producing protective or decorative coatings; construction painting handles structural surfaces, and machine operators focus on continuous equipment."
+              "This occupation's objects are products such as furniture, glass, and pottery, producing protective or decorative coatings; construction painting handles structural surfaces, and coating-machine roles focus on setting, operating or tending equipment."
             ]
           },
           "id": "painting-coating-and-decorating-workers.direction-comparison.adjacent-career-comparison-table.4",
@@ -12452,12 +12688,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Historical: U.S. 2024 employment in this occupation was about 8,800 people, not current openings; current BLS precise 51-9123 employment is about 8,200 in 2025 and about 8,300 in 2035, and the different bases cannot be computed together."
+              "BLS reports 8,200 U.S. jobs in 2025 for 51-9123 and projects 8,300 in 2035. These are national employment counts."
             ]
           },
           "id": "painting-coating-and-decorating-workers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -12509,13 +12744,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wages are 2025; the older 2024 employment of 8,800 and the 2024—2034 growth of 1%—2% with an annual average of 800 openings are historical only. The current BLS precise 51-9123 shows 2025—2035 overall growth of 1.3% and an official net increase of about 100 people, with an annual average of about 700 openings including replacements; overall projections are not AI adoption, replacement, individual unemployment, or Chinese demand."
+              "For 2025–2035, BLS projects +1.3% employment, a net gain of about 100 jobs and about 700 annual openings including replacements. This projection does not measure tool adoption or explain job losses."
             ]
           },
           "id": "painting-coating-and-decorating-workers.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "onet-wages",
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -12737,7 +12970,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "First practice cleaning, patching, color matching, and coating with safe teaching samples; real coatings and drying equipment are operated per employer procedures."
+              "In section 09, use FR-28 to compare two fictional finish records and write what should go to the reviewer."
             ]
           },
           "id": "painting-coating-and-decorating-workers.path.career-path-block.1",
@@ -12752,7 +12985,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "At hiring, verify the product material, coatings, spray guns, drying equipment, ventilation, shifts, and quality requirements."
+              "Ask which specification governs the finish, who records touch-up and who signs off on the product."
             ]
           },
           "id": "painting-coating-and-decorating-workers.path.career-path-block.2",
@@ -12767,7 +13000,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Work samples keep the work order, product material, coating formula, sample photos, and defect and rework records."
+              "Keep the work order, inspection record IDs, each finding and the designated reviewer."
             ]
           },
           "id": "painting-coating-and-decorating-workers.path.career-path-block.3",
@@ -12782,13 +13015,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "In an interview you can describe how to distinguish color difference, missed coating, sagging, and under-curing, and explain the safety escalation boundaries."
+              "BLS lists no formal educational credential as typical for entry to U.S. 51-9123 and moderate-term on-the-job training. In the O*NET survey, 59% selected less than high school, 21% selected high school or equivalent, and 17% selected some college without a degree. Ask each employer about actual requirements."
             ]
           },
           "id": "painting-coating-and-decorating-workers.path.career-path-block.4",
           "source_refs": [
-            "onet-summary",
-            "editorial-ai"
+            "bls-ep-2025-2035",
+            "onet-education-028"
           ],
           "type": "prose"
         },
@@ -12797,7 +13030,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The seven-day practice uses teaching materials to complete surface cleaning, sample coating, drying observation, and quality evaluation."
+              "W-FR uses two separate recheck notes. On Day 6, independently check the zone ID and finish result before opening the Day 7 reference."
             ]
           },
           "id": "painting-coating-and-decorating-workers.path.career-path-block.5",
@@ -12842,7 +13075,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Moving to construction painting, furniture finishing, or continuous coating machines requires adding the target objects, equipment, and safety training."
+              "Moving to construction painting, furniture finishing, or coating machines requires adding the target objects, equipment, and safety training."
             ]
           },
           "id": "painting-coating-and-decorating-workers.path.career-path-block.8",
@@ -12862,6 +13095,13 @@
               "career.column.boundary",
               "career.column.evidence",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Stage",
+              "Work",
+              "Boundary",
+              "Evidence",
+              "Next step"
             ],
             "rows": [
               [
@@ -12918,6 +13158,12 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "Situation",
+              "Action",
+              "Review",
+              "Evidence"
+            ],
             "rows": [
               [
                 "Color difference.",
@@ -12964,6 +13210,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Stage",
+              "Evidence",
+              "Authority",
+              "Conditions",
+              "Gap",
+              "Owner",
+              "Next step"
             ],
             "rows": [
               [
@@ -13028,6 +13283,142 @@
             "editorial-ai"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials (about 10 minutes)",
+                  "Fictional order T7 can go to a paperwork reviewer only if the finish code is B2 and the record shows no missed coverage.",
+                  "P1 lists B2 and a missed patch. P2 shows no missed coverage but has a blank finish-code field.",
+                  "Use paper only. Real touch-up and release are outside this task."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Decide whether either record can go to paperwork review. Give the status and reason for each.",
+                  "Name who should receive the original record and the question."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Where to find the reference",
+                  "After your own attempt, open “FR-28 answer key” in the FAQ.",
+                  "Compare it with your notes."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Did I cite both records, explain my decision, and name the person who could verify it?"
+                ]
+              }
+            ]
+          },
+          "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+          "title": "FR-28: Write a Finish Inspection Handover",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "Day 1",
+                  "In W-FR, a fictional recheck note can be filed only when it includes a zone ID and the finish result after touch-up."
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "Day 2",
+                  "Q3 has zone Z2 and a blank result. Copy both fields."
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "Day 3",
+                  "Q6 has zone Z4 and the result “no missed coverage.” Copy both fields."
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "Day 4",
+                  "Identify which entry needs a question for the inspector."
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "Day 5",
+                  "Give a filing decision for both notes."
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "Day 6",
+                  "Work alone first. Recheck both fields on each note. Peer feedback is optional."
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "Day 7",
+                  "After the Day 6 independent check, open “W-FR answer key (Day 7)” in the FAQ. Compare your note, then choose one habit to practice."
+                ]
+              }
+            ]
+          },
+          "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+          "title": "Seven-day paper trial: a separate case",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "I read both records.",
+              "I checked both rules.",
+              "I recorded my comparison decision.",
+              "I named the reviewer.",
+              "I used fictional records only.",
+              "I rechecked my work independently.",
+              "I chose one habit to practice."
+            ]
+          },
+          "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+          "title": "Judgement questions after seven days",
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "A March 2026 Lu’an hiring notice lists a solid-wood furniture finishing job requiring at least three years of related experience. That requirement belongs to the employer in the historical notice."
+            ]
+          },
+          "id": "painting-coating-and-decorating-workers.path.recruitment-sample.1",
+          "source_refs": [
+            "cn-recruitment-028"
+          ],
+          "title": "A local recruitment example",
+          "type": "notice"
         }
       ]
     },
@@ -13042,12 +13433,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Historical: U.S. 51-9123 was projected to grow 1%—2% over 2024—2034. The current BLS precise 51-9123 shows 2025—2035 overall growth of 1.3% and an official net increase of about 100 people; about 8,200 in 2025 to about 8,300 in 2035, with the table rounded to thousands, so the growth rate cannot be back-calculated."
+              "The U.S. median in 2025 was $20.00 an hour and $41,600 a year. BLS reports 8,200 jobs for 51-9123 in 2025 and projects 8,300 in 2035, a net gain of about 100 (+1.3%). It projects about 700 openings per year, including replacements."
             ]
           },
           "id": "painting-coating-and-decorating-workers.market-signals.market-signal-card.1",
           "source_refs": [
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -13057,12 +13447,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Historical 2024—2034 annual average of about 800 openings including turnover. The current 2025—2035 annual average of about 700 openings includes growth and replacements and is not the net increase of about 100 people or real-time hiring volume."
+              "United States"
             ]
           },
           "id": "painting-coating-and-decorating-workers.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -13072,12 +13461,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Historical 2024 precise occupational employment 8,800 people. Current BLS precise 51-9123 employment in 2025 is about 8,200 people, and it cannot be computed across periods or used as a Chinese or AI individual job-loss projection."
+              "2025–2035"
             ]
           },
           "id": "painting-coating-and-decorating-workers.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-summary",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -13087,12 +13475,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Digital color matching and visual inspection can change some tasks, but material suitability, on-site safety, and quality inspection still require people."
+              "The national projection counts jobs for the specific occupation."
             ]
           },
           "id": "painting-coating-and-decorating-workers.market-signals.market-signal-card.4",
           "source_refs": [
-            "source-pack-onet-summary"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13101,12 +13489,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Adjacent directions require adding the professional skills for building structures, furniture woodwork, or continuous coating equipment separately."
+              "Local hiring varies by employer."
             ]
           },
           "id": "painting-coating-and-decorating-workers.market-signals.market-signal-card.5",
           "source_refs": [
-            "source-pack-onet-summary"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         }
@@ -13138,16 +13526,18 @@
                 "question": "What is the difference from construction painters?",
                 "question_key": "career.faq.painting-coating-and-decorating-workers.2",
                 "source_refs": [
-                  "onet-details"
+                  "onet-details",
+                  "bls-construction-028"
                 ]
               },
               {
-                "answer": "This occupation emphasizes application and decoration on individual products; equipment operators emphasize continuous equipment parameters and line operation.",
+                "answer": "This occupation applies or decorates finishes on products. U.S. 51-9124 focuses on setting, operating or tending coating, painting and spraying machines. A continuous line is one possible workplace.",
                 "id": "painting-coating-and-decorating-workers.faq.3",
                 "question": "What is the difference from coating machine operators?",
                 "question_key": "career.faq.painting-coating-and-decorating-workers.3",
                 "source_refs": [
-                  "onet-details"
+                  "onet-details",
+                  "onet-machines-028"
                 ]
               },
               {
@@ -13156,16 +13546,17 @@
                 "question": "Can AI directly judge coating quality?",
                 "question_key": "career.faq.painting-coating-and-decorating-workers.4",
                 "source_refs": [
-                  "editorial-ai",
-                  "onet-summary"
+                  "onet-details",
+                  "ilo-genai"
                 ]
               },
               {
-                "answer": "Watch for coating solvents, spray mist, drying heat sources, and mixing and labeling errors.",
+                "answer": "Spray operations with applicable flammable or combustible finishing materials at U.S. sites fall within OSHA 1910.107. Confirm materials, ventilation and site authorization before any real work.",
                 "id": "painting-coating-and-decorating-workers.faq.5",
                 "question": "What are the main safety risks?",
                 "question_key": "career.faq.painting-coating-and-decorating-workers.5",
                 "source_refs": [
+                  "osha-spray-028",
                   "onet-details"
                 ]
               },
@@ -13179,24 +13570,36 @@
                 ]
               },
               {
-                "answer": "The 2025 U.S. median for this occupation is 20.00 per hour and 41,600 U.S. dollars per year; the quintiles were obtained but are not seniority or starting pay. BLS precise 51-9123 is about 8,200 in 2025 and about 8,300 in 2035; over 2025—2035 overall growth is 1.3%, an official net increase of about 100, and an annual average of about 700 openings including replacements. The thousands table is rounded, so the rate cannot be back-calculated; not AI replacement or individual layoffs. The older 2024 employment of 8,800 and the 2024—2034 materials are kept as history.",
+                "answer": "The U.S. median in 2025 was $20.00 an hour and $41,600 a year. BLS reports 8,200 jobs for 51-9123 in 2025 and projects 8,300 in 2035, a net gain of about 100 (+1.3%). It projects about 700 openings per year, including replacements.",
                 "id": "painting-coating-and-decorating-workers.faq.7",
                 "question": "What are the U.S. wages and employment?",
                 "question_key": "career.faq.painting-coating-and-decorating-workers.7",
                 "source_refs": [
                   "onet-wages",
-                  "onet-summary",
                   "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "First practice cleaning, patching, color mixing, and inspection with teaching samples; real coatings, spraying, and drying equipment are used per employer authorization.",
+                "answer": "In section 09, use FR-28 to compare two fictional finish records and write what should go to the reviewer. Use only the fictional records in this exercise. Real materials, coating, touch-up and release are handled under site procedures by authorized staff.",
                 "id": "painting-coating-and-decorating-workers.faq.8",
                 "question": "How can you get started safely?",
                 "question_key": "career.faq.painting-coating-and-decorating-workers.8",
                 "source_refs": [
-                  "onet-details"
+                  "cn-recruitment-028",
+                  "osha-spray-028"
                 ]
+              },
+              {
+                "answer": "P1 records missed coverage, while P2 lacks the required finish code. Keep both pending and give the inspection owner or designated quality reviewer both record IDs and the specific findings.",
+                "id": "painting-coating-and-decorating-workers.faq.trial-short-reference",
+                "question": "FR-28 answer key",
+                "question_key": "career.faq.painting-coating-and-decorating-workers.trial-short-reference"
+              },
+              {
+                "answer": "File Q6 under the paper rule. Q3 is missing the result. Ask the inspector for the original Z2 result. Filing the note does not authorize actual product release.",
+                "id": "painting-coating-and-decorating-workers.faq.trial-week-reference",
+                "question": "W-FR answer key (Day 7)",
+                "question_key": "career.faq.painting-coating-and-decorating-workers.trial-week-reference"
               }
             ]
           },
@@ -13234,31 +13637,31 @@
           "data": {
             "entries": [
               {
-                "entity": "Painting, Coating, and Decorating Workers.",
+                "entity": "Holland career interest test (English)",
                 "id": "navigation-1",
                 "relation": "career.section",
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Painting, Coating, and Decorating Workers.",
+                "entity": "MBTI (English)",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Painting, Coating, and Decorating Workers.",
+                "entity": "Big Five (English)",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Painting, Coating, and Decorating Workers.",
+                "entity": "MBTI (Chinese)",
                 "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Painting, Coating, and Decorating Workers.",
+                "entity": "Big Five (Chinese)",
                 "id": "navigation-5",
                 "relation": "career.section",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
@@ -13299,23 +13702,8 @@
                 "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
                 "period": "ILO Working Paper 140, 2025; accessed 2026-08-31",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "industry_proxy",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "accessed_at": "2026-08-31",
-                "details": [
-                  "No nationwide wage distribution corresponding one-to-one with this O*NET precise occupation has been established."
-                ],
-                "evidence_type": "official occupation and labor-market source",
-                "id": "mohrss-wage",
-                "limitation": "No nationwide wage distribution corresponding one-to-one with this O*NET precise occupation has been established.",
-                "market": "CN",
-                "name": "Enterprise compensation survey information.",
-                "period": "2024 enterprise wage survey information published 2025; accessed 2026-08-31",
-                "publisher": "Ministry of Human Resources and Social Security of the People's Republic of China.",
-                "scope": "parent_occupation_proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -13431,7 +13819,7 @@
                 "id": "source-pack-onet-custom",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET custom occupation profile",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -13446,7 +13834,7 @@
                 "id": "source-pack-onet-details",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET occupational tasks and work context",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -13461,7 +13849,7 @@
                 "id": "source-pack-onet-hot_tech",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "Hot Technologies: 51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET software and technology mentions",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -13476,7 +13864,7 @@
                 "id": "source-pack-onet-industry",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "Industries: 51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET occupational employment by industry",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -13491,10 +13879,10 @@
                 "id": "source-pack-onet-localcert",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "National Certifications: 51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET certification directory",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localcert/51-9123.00"
               },
               {
@@ -13506,10 +13894,10 @@
                 "id": "source-pack-onet-localtraining",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "National Training: 51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET training directory",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localtraining/51-9123.00"
               },
               {
@@ -13521,7 +13909,7 @@
                 "id": "source-pack-onet-localwages",
                 "limitation": "Wage percentiles are not seniority or starting pay, not self-employed income or Chinese wages.",
                 "market": "US",
-                "name": "National Wages: 51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET national occupational wage percentiles",
                 "period": "2025 BLS OEWS national precise 51-9123 wages.",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
@@ -13536,7 +13924,7 @@
                 "id": "source-pack-onet-summary",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
-                "name": "51-9123.00 - Painting, Coating, and Decorating Workers",
+                "name": "O*NET occupational summary",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
@@ -13560,7 +13948,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "About 8200 in 2025 to about 8300 in 2035, 1.3%, an official net increase of about 100 people, and an annual average of about 700 openings including replacements; the official thousands table is rounded."
+                  "About 8200 in 2025 to about 8300 in 2035, 1.3%, an official net increase of about 100 jobs, and an annual average of about 700 openings including replacements; the official thousands table is rounded."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-ep-2025-2035",
@@ -13582,9 +13970,9 @@
                 "limitation": "Does not prove on-site effect, AI adoption or replacement rates, individual layoffs, certificates, or equipment safety authorization.",
                 "market": "GLOBAL",
                 "name": "FermatMind product coating task and safety teaching verification suggestion.",
-                "period": "This round's author review 2026-10-02.",
+                "period": "Editorial guidance",
                 "publisher": "FermatMind editorial",
-                "scope": "internal_rubric",
+                "scope": "editorial_synthesis",
                 "url": null
               },
               {
@@ -13603,6 +13991,81 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A March 2026 Lu’an hiring notice lists a solid-wood furniture finishing job requiring at least three years of related experience. That requirement belongs to the employer in the historical notice."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-recruitment-028",
+                "limitation": "A March 2026 Lu’an hiring notice lists a solid-wood furniture finishing job requiring at least three years of related experience. That requirement belongs to the employer in the historical notice.",
+                "market": "CN",
+                "name": "Historical furniture recruitment notice",
+                "period": "2026",
+                "publisher": "Lu’an Bureau of Veterans Affairs",
+                "scope": "recruitment_proxy",
+                "url": "https://tyjrj.luan.gov.cn/public/6608621/10755445.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Survey responses about education needed for new hires."
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-education-028",
+                "limitation": "Survey responses about education needed for new hires.",
+                "market": "US",
+                "name": "O*NET new-hire education survey",
+                "period": "Current occupation profile",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-9123.00#Education"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Spray operations with applicable flammable or combustible finishing materials at U.S. sites fall within OSHA 1910.107. Confirm materials, ventilation and site authorization before any real work."
+                ],
+                "evidence_type": "primary_document",
+                "id": "osha-spray-028",
+                "limitation": "Spray operations with applicable flammable or combustible finishing materials at U.S. sites fall within OSHA 1910.107. Confirm materials, ventilation and site authorization before any real work.",
+                "market": "US",
+                "name": "OSHA 1910.107: Spray finishing",
+                "period": "29 CFR 1910.107",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.107"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. work on buildings and structures."
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-construction-028",
+                "limitation": "U.S. work on buildings and structures.",
+                "market": "US",
+                "name": "BLS construction and maintenance painters",
+                "period": "2026",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/painters-construction-and-maintenance.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. 51-9124 equipment duties. Jobs may include setting, operating or tending machines."
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-machines-028",
+                "limitation": "U.S. 51-9124 equipment duties. Jobs may include setting, operating or tending machines.",
+                "market": "US",
+                "name": "O*NET coating, painting, and spraying machine operators",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/51-9124.00"
               }
             ]
           },
@@ -13648,24 +14111,24 @@
         },
         "evidence_links": [
           {
-            "href": "https://www.onetonline.org/link/details/51-9123.00",
-            "label": "O*NET 51-9123.00 occupation details."
+            "href": "https://www.onetonline.org/link/details/51-9123.00#Tasks",
+            "label": "O*NET product coating tasks"
           },
           {
-            "href": "https://www.onetonline.org/link/details/51-9123.00",
-            "label": "O*NET 51-9123.00 occupation details."
+            "href": "https://www.bls.gov/ooh/production/painting-and-coating-workers.htm",
+            "label": "BLS product coating and coating machines"
           },
           {
-            "href": "https://www.onetonline.org/link/details/51-9123.00",
-            "label": "O*NET 51-9123.00 occupation details."
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "label": "BLS occupational comparison table"
           },
           {
-            "href": "https://www.onetonline.org/link/details/51-9123.00",
-            "label": "O*NET 51-9123.00 occupation details."
+            "href": "https://www.bls.gov/ooh/construction-and-extraction/painters-construction-and-maintenance.htm",
+            "label": "BLS construction painting"
           },
           {
-            "href": "https://www.onetonline.org/link/details/51-9123.00",
-            "label": "O*NET 51-9123.00 occupation details."
+            "href": "https://www.onetonline.org/link/summary/51-9124.00",
+            "label": "O*NET coating machine operations"
           }
         ],
         "evidence_note": {
@@ -13705,9 +14168,9 @@
             "职业方向": "Painters, Construction and Maintenance."
           },
           {
-            "关键区别": "Mainly controls machine and line parameters.",
+            "关键区别": "The role centers on machine operation and checks.",
             "更适合什么选择": "Prefers equipment monitoring.",
-            "核心工作与产出": "Runs continuous coating equipment.",
+            "核心工作与产出": "Sets up, operates or tends coating equipment.",
             "职业方向": "Coating machine operator."
           },
           {
@@ -13729,7 +14192,7 @@
             "职业方向": "Glass decorator."
           }
         ],
-        "transition": "Compare by the product object, equipment, and process safety requirements."
+        "transition": "Ask which specification governs the finish, who records touch-up and who signs off on the product. In section 09, use FR-28 to compare two fictional finish records and write what should go to the reviewer."
       },
       "ai_impact_table": {
         "action_rows": [
@@ -13871,21 +14334,21 @@
           },
           {
             "使用限制": "Editorial candidates, not on-site validation, AI adoption, or replacement rate evidence.",
-            "来源": "O*NET task context for this occupation / FermatMind editorial extrapolation.",
+            "来源": "Task context and editorial analysis · Digital color matching",
             "研究对象": "Digital color matching.",
             "结论": "Can assist color matching.",
             "链接": "https://www.onetonline.org/link/summary/51-9123.00"
           },
           {
             "使用限制": "Editorial candidates, not on-site validation, AI adoption, or replacement rate evidence.",
-            "来源": "O*NET task context for this occupation / FermatMind editorial extrapolation.",
+            "来源": "Task context and editorial analysis · Process records",
             "研究对象": "Process records.",
             "结论": "Can be used to organize records; the effect on reducing entry is pending verification.",
             "链接": "https://www.onetonline.org/link/summary/51-9123.00"
           },
           {
             "使用限制": "Editorial candidates, not on-site validation, AI adoption, or replacement rate evidence.",
-            "来源": "O*NET task context for this occupation / FermatMind editorial extrapolation.",
+            "来源": "Task context and editorial analysis · Employment replacement inference",
             "研究对象": "Employment replacement inference.",
             "结论": "Cannot be computed from occupational tasks.",
             "链接": "https://www.onetonline.org/link/summary/51-9123.00"
@@ -13894,7 +14357,7 @@
             "使用限制": "The official thousands table is rounded; not AI adoption replacement, individual layoffs, real-time hiring, or Chinese demand.",
             "来源": "BLS precise 51-9123 overall employment projections.",
             "研究对象": "U.S. 2025—2035 overall occupational employment.",
-            "结论": "About 8,200 to 8,300 people, growth 1.3%, official net increase about 100; annual average about 700 openings including replacements.",
+            "结论": "About 8,200 to 8,300 jobs, growth 1.3%, official net increase about 100; annual average about 700 openings including replacements.",
             "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
@@ -14051,7 +14514,7 @@
             "当前变化": "Organize the report draft."
           }
         ],
-        "transition": "Moving to construction painting or continuous coating equipment requires adding the target objects and safety training."
+        "transition": "Moving to construction painting or coating equipment requires adding the target objects and safety training."
       },
       "breadcrumb": {
         "label": "Painting, Coating, and Decorating Workers.",
@@ -14117,9 +14580,9 @@
             "stage": "Quality handoff."
           }
         ],
-        "direct_answer": "First learn materials, coatings, and safety, then practice surface treatment, mixing and application, drying, and inspection with teaching samples.",
-        "entry_heading": "Sample practice and on-site coaching.",
-        "heading": "From teaching samples to coating quality handoff.",
+        "direct_answer": "In section 09, use FR-28 to compare two fictional finish records and write what should go to the reviewer.",
+        "entry_heading": "Paper practice and on-site training",
+        "heading": "Entry, qualifications, and career development",
         "locale_requirements": {
           "credential_boundary": "Ordinary courses do not automatically grant authority for spraying, chemicals, or drying equipment.",
           "jurisdiction": "Keep U.S. occupational materials separate from Chinese position requirements.",
@@ -14128,28 +14591,28 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/summary/51-9123.00",
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
-            "label": "O*NET product application tasks and work context for this occupation.",
-            "scope": "U.S. product application, drying, cleaning and inspection, and exposure background; not a Chinese safety SOP or a uniform qualification, and the practice and coaching are editorial suggestions."
+            "label": "BLS Table 1.2 precise 51-9123 overall employment projections.",
+            "scope": "The precise occupation is not the parent 51-9120 or equipment 51-9124; the overall figure is not AI adoption, replacement, individual layoffs, or Chinese demand."
           },
           {
-            "href": "https://www.onetonline.org/link/summary/51-9123.00",
+            "href": "https://www.onetonline.org/link/details/51-9123.00#Education",
             "id": "nasa",
-            "label": "O*NET product application tasks and work context for this occupation.",
-            "scope": "U.S. product application, drying, cleaning and inspection, and exposure background; not a Chinese safety SOP or a uniform qualification, and the practice and coaching are editorial suggestions."
+            "label": "O*NET new-hire education survey",
+            "scope": "Survey responses about education needed for new hires."
           },
           {
-            "href": "https://www.onetonline.org/link/summary/51-9123.00",
+            "href": "https://www.onetonline.org/link/details/51-9123.00",
             "id": "onet-training",
-            "label": "O*NET product application tasks and work context for this occupation.",
-            "scope": "U.S. product application, drying, cleaning and inspection, and exposure background; not a Chinese safety SOP or a uniform qualification, and the practice and coaching are editorial suggestions."
+            "label": "Painting, Coating, And Decorating Workers 51-9123.00",
+            "scope": "U.S. occupational materials do not establish Chinese wages or authorization; when there is no precise mapping they serve only as a parent occupation proxy."
           },
           {
-            "href": "https://www.onetonline.org/link/summary/51-9123.00",
+            "href": "https://tyjrj.luan.gov.cn/public/6608621/10755445.html",
             "id": "faa",
-            "label": "O*NET product application tasks and work context for this occupation.",
-            "scope": "U.S. product application, drying, cleaning and inspection, and exposure background; not a Chinese safety SOP or a uniform qualification, and the practice and coaching are editorial suggestions."
+            "label": "Historical furniture recruitment notice",
+            "scope": "A March 2026 Lu’an hiring notice lists a solid-wood furniture finishing job requiring at least three years of related experience. That requirement belongs to the employer in the historical notice."
           }
         ],
         "tracks": [
@@ -14168,14 +14631,14 @@
                 "next_moves": "Add material and equipment knowledge.",
                 "readiness_evidence": "Supervisory feedback, checklists, and correction records.",
                 "responsibility": "Practice foundational learning during job training and supervision, verifying original inputs and recording feedback and anomalies.",
-                "role": "Trainee."
+                "role": "Authorized coating worker"
               },
               {
                 "credentials": "Verify coating and equipment training.",
                 "next_moves": "Add material and equipment knowledge.",
                 "readiness_evidence": "Corresponding training authorization, task records, and recipients.",
                 "responsibility": "After completing training and obtaining the corresponding authorization, take on foundational learning responsibilities and keep execution and handoff records; spraying, chemicals, drying equipment, and quality release authority are verified separately.",
-                "role": "In-post coating worker."
+                "role": "Experienced coating worker"
               },
               {
                 "credentials": "Verify coating and equipment training.",
@@ -14202,14 +14665,14 @@
                 "next_moves": "Add material and equipment knowledge.",
                 "readiness_evidence": "Supervisory feedback, checklists, and correction records.",
                 "responsibility": "Practice supervised coating during job training and supervision, verifying original inputs and recording feedback and anomalies.",
-                "role": "Trainee."
+                "role": "Authorized coating worker"
               },
               {
                 "credentials": "Verify coating and equipment training.",
                 "next_moves": "Add material and equipment knowledge.",
                 "readiness_evidence": "Corresponding training authorization, task records, and recipients.",
                 "responsibility": "After completing training and obtaining the corresponding authorization, take on supervised coating responsibilities and keep execution and handoff records; spraying, chemicals, drying equipment, and quality release authority are verified separately.",
-                "role": "In-post coating worker."
+                "role": "Experienced coating worker"
               },
               {
                 "credentials": "Verify coating and equipment training.",
@@ -14236,14 +14699,14 @@
                 "next_moves": "Add material and equipment knowledge.",
                 "readiness_evidence": "Supervisory feedback, checklists, and correction records.",
                 "responsibility": "Practice independent work and development during job training and supervision, verifying original inputs and recording feedback and anomalies.",
-                "role": "Trainee."
+                "role": "Authorized coating worker"
               },
               {
                 "credentials": "Verify coating and equipment training.",
                 "next_moves": "Add material and equipment knowledge.",
                 "readiness_evidence": "Corresponding training authorization, task records, and recipients.",
                 "responsibility": "After completing training and obtaining the corresponding authorization, take on independent work and development responsibilities and keep execution and handoff records; spraying, chemicals, drying equipment, and quality release authority are verified separately.",
-                "role": "In-post coating worker."
+                "role": "Experienced coating worker"
               },
               {
                 "credentials": "Verify coating and equipment training.",
@@ -14356,14 +14819,14 @@
                 {
                   "alternate_value": null,
                   "label": "2025 employed.",
-                  "secondary_value": "Precise 51-9123 rounded from the official thousands table.",
-                  "value": "About 8,200 people."
+                  "secondary_value": "BLS 51-9123, 2025",
+                  "value": "8,200 U.S. jobs"
                 },
                 {
                   "alternate_value": null,
                   "label": "Projected growth.",
                   "secondary_value": "Overall projection, not AI replacement.",
-                  "value": "2025—2035 growth 1.3%; net increase of about 100 people."
+                  "value": "+1.3% and about 100 net jobs, 2025–2035"
                 },
                 {
                   "alternate_value": null,
@@ -14375,7 +14838,7 @@
             }
           },
           {
-            "answer": "Painting, Coating, and Decorating Workers can use tools to assist with organizing information, but real adoption, authority, result release, and anomaly escalation still need to be verified by responsible people.",
+            "answer": "Try FR-28 with the two fictional finish records in section 09. Leave materials, equipment and product release to authorized staff under site rules.",
             "key": "qa1",
             "question": "How can you get started safely?",
             "table": {
@@ -14383,38 +14846,38 @@
                 {
                   "alternate_value": null,
                   "label": "01",
-                  "secondary_value": "Distinguish furniture, glass, and pottery.",
-                  "value": "Identify the material and the work order."
+                  "secondary_value": "Use the two fictional records in 09.",
+                  "value": "Read the supplied records"
                 },
                 {
                   "alternate_value": null,
                   "label": "02",
-                  "secondary_value": "Patch flaws first.",
-                  "value": "Practice surface cleaning."
+                  "secondary_value": "Compare the listed duties or the finish fields.",
+                  "value": "Find the deciding detail"
                 },
                 {
                   "alternate_value": null,
                   "label": "03",
-                  "secondary_value": "Do not use hazardous solvents.",
-                  "value": "Make safe teaching samples."
+                  "secondary_value": "Cite the record ID and the relevant detail.",
+                  "value": "Write your decision"
                 },
                 {
                   "alternate_value": null,
                   "label": "04",
-                  "secondary_value": "Formula and drying conditions.",
-                  "value": "Learn the coating instructions."
+                  "secondary_value": "Write one question for the person who can verify it.",
+                  "value": "Name the next reviewer"
                 },
                 {
                   "alternate_value": null,
                   "label": "05",
-                  "secondary_value": "Real spraying is supervised.",
-                  "value": "Accept employer coaching."
+                  "secondary_value": "Open the answer after writing your own decision.",
+                  "value": "Check independently"
                 },
                 {
                   "alternate_value": null,
                   "label": "06",
-                  "secondary_value": "Drying equipment requires separate training.",
-                  "value": "Verify equipment authorization."
+                  "secondary_value": "Training and actual work follow site requirements.",
+                  "value": "Check site authorization separately"
                 }
               ]
             }
@@ -14463,7 +14926,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
               "onet"
             ],
             "id": "cost-change",
@@ -14476,7 +14938,7 @@
             "consequence": "May increase spray mist exposure.",
             "evidence_refs": [
               "onet",
-              "onet"
+              "osha-spray-028"
             ],
             "id": "record-version",
             "mitigation": "Trained personnel verify the work area protection per the material and equipment procedures.",
@@ -14488,7 +14950,7 @@
             "consequence": "May cause burns or start a fire.",
             "evidence_refs": [
               "onet",
-              "onet"
+              "osha-spray-028"
             ],
             "id": "personal-data",
             "mitigation": "Authorized personnel verify the process equipment and stop and escalate on anomalies.",
@@ -14499,7 +14961,6 @@
             "affected_roles": "Batching staff, applicators, and recipients.",
             "consequence": "May mix up materials or cause coating incompatibility.",
             "evidence_refs": [
-              "onet",
               "onet"
             ],
             "id": "technical-boundary",
@@ -14511,7 +14972,6 @@
             "affected_roles": "Quality personnel and product recipients.",
             "consequence": "May cause rework or make the protection and decoration fail to meet requirements.",
             "evidence_refs": [
-              "onet",
               "onet"
             ],
             "id": "single-coverage",
@@ -14523,7 +14983,6 @@
             "affected_roles": "Fine-work personnel.",
             "consequence": "May increase wrist and upper-limb strain.",
             "evidence_refs": [
-              "onet",
               "onet"
             ],
             "id": "delivery-acceptance",
@@ -14559,10 +15018,10 @@
             "scope": "Does not prove risk probability, privacy law, or institutional authorization."
           },
           {
-            "href": "https://www.onetonline.org/link/summary/51-9123.00",
-            "id": "onet",
-            "label": "O*NET task context; the controls are editorial suggestions.",
-            "scope": "Does not prove risk probability, privacy law, or institutional authorization."
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.107",
+            "id": "osha-spray-028",
+            "label": "OSHA 1910.107: Spray finishing",
+            "scope": "Spray operations with applicable flammable or combustible finishing materials at U.S. sites fall within OSHA 1910.107. Confirm materials, ventilation and site authorization before any real work."
           }
         ]
       },
@@ -14714,19 +15173,19 @@
           },
           {
             "指标": "Employment outlook 2025—2035.",
-            "数值": "Growth 1.3% (official net increase of about 100 people).",
+            "数值": "Growth 1.3% (official net increase of about 100 jobs).",
             "说明": "U.S. precise occupational overall employment projections, not an AI effect; do not back-calculate the growth rate from the rounded stock."
           },
           {
             "指标": "Job openings (annual average).",
             "数值": "About 700 per year.",
-            "说明": "2025—2035 annual averages include growth and turnover replacements, not a net addition of about 100 people."
+            "说明": "2025—2035 annual averages include growth and turnover replacements, not a net addition of about 100 jobs."
           }
         ],
-        "boundary": "The 2025 U.S. precise 51-9123 employee wage distribution is not self-employed income. The current overall employment projection is 2025—2035; 2024 and 2024—2034 are kept as history. Does not explain AI adoption, replacement, individual unemployment, or Chinese demand.",
+        "boundary": "Wages describe U.S. employees in 51-9123. The 2025–2035 national jobs projection does not measure self-employment income, AI adoption or Chinese demand.",
         "direct_answer": {
           "$join": [
-            "U.S. precise 51-9123 employment is about 8,200 people in 2025; over 2025—2035 overall growth is 1.3%, an official net increase of about 100, and an annual average of about 700 openings including replacements.",
+            "U.S. precise 51-9123 employment is about 8,200 jobs in 2025; over 2025—2035 overall growth is 1.3%, an official net increase of about 100, and an annual average of about 700 openings including replacements.",
             {
               "$item": "painting-coating-and-decorating-workers.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -14751,7 +15210,7 @@
           }
         ],
         "factors_heading": "Factors affecting actual offers.",
-        "growth": "1.3% (official net increase of about 100 people).",
+        "growth": "1.3% (official net increase of about 100 jobs).",
         "heading": "U.S. product coating wages and employment.",
         "industry_heading": "Industry and position differences.",
         "industry_period": "Verify material position conditions; no industry wage statistics.",
@@ -14798,7 +15257,7 @@
           {
             "answer": {
               "$join": [
-                "The actual 2025 percentiles were obtained; current and historical employment are presented separately.",
+                "The 2025 wage percentiles describe the national employee wage distribution.",
                 {
                   "$item": "painting-coating-and-decorating-workers.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -14815,7 +15274,7 @@
             "question": "What does employment represent?"
           },
           {
-            "answer": "The overall net increase of about 100 people differs from the annual average of about 700 openings including replacements; they cannot be taken as AI adoption, replacement, individual job-loss, or Chinese demand projections.",
+            "answer": "The overall net increase of about 100 jobs differs from the annual average of about 700 openings including replacements; they cannot be taken as AI adoption, replacement, individual job-loss, or Chinese demand projections.",
             "question": "How are growth and openings used?"
           }
         ],
@@ -14899,7 +15358,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "summary": "Suited to people who like materials, color, and surface detail, are willing to mix coatings per the work order and inspect coating defects, and can also follow chemical and equipment safety procedures.",
+        "summary": "Consider this work if you like tracing a finish check to the work order and describing what needs another look.",
         "title": "Painting, Coating, and Decorating Workers."
       },
       "fit_decision_checklist": {
@@ -14923,19 +15382,19 @@
         }
       },
       "hero": {
-        "h1": "Painting, Coating, and Decorating Workers.",
+        "h1": "Painting, Coating, and Decorating Workers — review a finish record",
         "quick_answer": "Clean and patch the surfaces of products such as furniture, glass, and pottery per the work order, mix and apply paint, ink, or lacquer, dry and cure as required, inspect the appearance, and touch up defects.",
-        "title": "Painting, Coating, and Decorating Workers."
+        "title": "Painting, Coating, and Decorating Workers — review a finish record"
       },
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "Compare related work"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-us-salary",
+            "label": "Check U.S. wage and employment data"
           }
         ],
         "direct_answer": {
@@ -14971,10 +15430,10 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "Precise occupational employment.",
-            "occupation_scope": "O*NET 51-9123.00 precise occupation.",
+            "metric": "Employment",
+            "occupation_scope": "BLS 51-9123",
             "source_id": "ep",
-            "value": "About 8,200 people."
+            "value": "8,200 jobs → 8,300 jobs"
           },
           {
             "geography": "United States.",
@@ -14982,9 +15441,9 @@
             "interpretation": "U.S. precise occupational overall projections are not workshop real-time hiring, AI adoption replacement, or individual layoffs.",
             "limitation": "Cannot be extrapolated to individual hiring probability or Chinese demand.",
             "metric": "Growth and annual average openings.",
-            "occupation_scope": "O*NET 51-9123.00 precise occupation.",
+            "occupation_scope": "BLS 51-9123",
             "source_id": "bls",
-            "value": "Growth 1.3%; net increase of about 100 people; annual average of about 700 openings including replacements."
+            "value": "+1.3%, about 100 net jobs and 700 annual openings"
           },
           {
             "geography": "Chinese mainland.",
@@ -15018,10 +15477,10 @@
             "scope": "Pre-tax annual average for production, manufacturing, and related personnel in above-scale manufacturing; not an employment projection for this occupation."
           },
           {
-            "href": "https://www.onetonline.org/link/summary/51-9123.00",
+            "href": "https://www.onetonline.org/link/details/51-9123.00#Tasks",
             "id": "onet",
-            "label": "O*NET precise 51-9123 product tasks and historical context.",
-            "scope": "Tasks for this occupation and the 2024—2034 history; not an AI effect."
+            "label": "O*NET product coating tasks",
+            "scope": "Occupational tasks for U.S. 51-9123.00."
           }
         ],
         "transitions": [
@@ -15034,7 +15493,7 @@
             "transition_distance": "Editorial judgment: the target tasks and qualifications need to be added."
           },
           {
-            "capability_gaps": "Add continuous equipment feeding, parameters, thickness measurement, and machine guarding.",
+            "capability_gaps": "Check the target job’s machine feeding, operating parameters, inspection duties and guarding requirements.",
             "shared_capabilities": "Coating samples, appearance, and quality records.",
             "target_href": "/zh/career/jobs/coating-painting-and-spraying-machine-setters-operators-and-tenders",
             "target_slug": "coating-painting-and-spraying-machine-setters-operators-and-tenders",
@@ -15258,7 +15717,7 @@
               "slug": "coating-painting-and-spraying-machine-setters-operators-and-tenders",
               "title": "Coating machine operator."
             },
-            "watchouts": "Add continuous equipment feeding, parameters, thickness measurement, and machine guarding."
+            "watchouts": "Check the target job’s machine feeding, operating parameters, inspection duties and guarding requirements."
           },
           {
             "direction": "Furniture surface finisher direction.",
@@ -15329,7 +15788,7 @@
           },
           {
             "answer": "Target machine parameters, protection, and process training are verified separately; manual application is not equipment authorization.",
-            "question": "Can you move directly to continuous coating machines?"
+            "question": "Can you move directly to coating machines?"
           },
           {
             "answer": "Lighting and camera color cast affect judgment, so the physical item must be verified under standard lighting.",
@@ -15340,7 +15799,7 @@
             "question": "Can a course grant drying equipment authority?"
           },
           {
-            "answer": "Verify the product material, coatings, spray guns, drying, ventilation, shifts, and quality responsibilities.",
+            "answer": "Ask which specification governs the finish, who records touch-up and who signs off on the product. In section 09, use FR-28 to compare two fictional finish records and write what should go to the reviewer.",
             "question": "How should a specific position be judged?"
           }
         ],
@@ -15359,7 +15818,7 @@
             "tone": "caution"
           },
           {
-            "body": "First use public work orders and sample photos to verify the material, color, defects, and unknown conditions; real chemicals and equipment require separate training.",
+            "body": "In section 09, use FR-28 to compare two fictional finish records and write what should go to the reviewer.",
             "id": "experiment",
             "label": "Defect review.",
             "tone": "action"
@@ -15530,6 +15989,34 @@
         "id": "painting-coating-and-decorating-workers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "painting-coating-and-decorating-workers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "painting-coating-and-decorating-workers.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "painting-coating-and-decorating-workers.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "painting-coating-and-decorating-workers.path.recruitment-sample.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15559,7 +16046,7 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "This occupation coats products such as furniture, glass, and pottery; construction painting and continuous coating machine positions have different objects and outputs.",
+        "display_value": "This occupation coats products such as furniture, glass, and pottery; construction painting works on structures, and coating-machine roles focus on operating equipment.",
         "fact_id": "adjacent-boundary",
         "market": "United States.",
         "measure": "Occupational facts supported by the sources.",
@@ -15679,7 +16166,7 @@
       },
       {
         "derivation": null,
-        "display_value": "About 8,200 people.",
+        "display_value": "8,200 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States.",
         "measure": "2025 precise occupational employment.",
@@ -15691,7 +16178,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Growth 1.3% (official net increase of about 100 people).",
+        "display_value": "Growth 1.3% (official net increase of about 100 jobs).",
         "fact_id": "us-growth-2025-2035",
         "market": "United States.",
         "measure": "Overall employment projection net change.",
@@ -15776,17 +16263,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Clean and patch the surfaces of products such as furniture, glass, and pottery per the work order, mix and apply paint, ink, or lacquer, dry and cure as required, inspect the appearance, and touch up defects. U.S. O*NET 51-9123.00, distinguished from construction painting and continuous coating machine operation."
+      "text": "Explore product coating, finish inspection and touch-up records. Try a paper handover using two fictional finish inspection records."
     },
     "title": {
       "availability": "available",
-      "text": "Painting, Coating, and Decorating Workers: work content, wages, and safety risks."
+      "text": "Painting, Coating, and Decorating Workers — review a finish record"
     }
   },
-  "source_content_sha256": "cd67348c426a6f12ad7d8b1cce6dce1a8db0dd545f85badfc41daa333daa1dd7",
+  "source_content_sha256": "ee683fb7fc259850f05767734ed19b431bba669df3f3e41b6f2ca77cfcf6646b",
   "subject": {
     "canonical_slug": "painting-coating-and-decorating-workers",
-    "name": "Painting, Coating, and Decorating Workers.",
+    "name": "Painting, Coating, and Decorating Workers — review a finish record",
     "summary": "Clean and patch the surfaces of products such as furniture, glass, and pottery per the work order, mix and apply paint, ink, or lacquer, dry and cure as required, inspect the appearance, and touch up defects."
   }
 }

@@ -206,6 +206,9 @@
       "item:obstetricians-and-gynecologists.path.recruitment-sample.8": {
         "status": "pending_mapping"
       },
+      "item:obstetricians-and-gynecologists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:obstetricians-and-gynecologists.profile.definition-block.1": {
         "status": "pending_mapping"
       },
@@ -12351,6 +12354,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。预约单写产后复诊，转诊附件却沿用产前模板。标出要向转诊方确认的预约类型及记录。"
+            ]
+          },
+          "id": "obstetricians-and-gynecologists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "核专科复诊资料是否齐全",
+          "type": "notice"
         }
       ]
     },
@@ -14762,6 +14780,13 @@
         "id": "obstetricians-and-gynecologists.path.recruitment-sample.8",
         "location": "entry_decisions",
         "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "obstetricians-and-gynecologists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15151,7 +15176,7 @@
       "text": "妇产科医师（Obstetricians and Gynecologists）职业画像｜任务、薪资、准入与边界"
     }
   },
-  "source_content_sha256": "1446e0778ab62a719828be39b78025dfabb107de1100913444b6e6a2742ce803",
+  "source_content_sha256": "e7b11cc7d6ab94feb4cab3e80934ecfbfe4a5e6d87fee21825c421c7cf521a6f",
   "subject": {
     "canonical_slug": "obstetricians-and-gynecologists",
     "name": "妇产科医师",

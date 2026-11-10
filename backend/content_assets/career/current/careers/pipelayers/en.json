@@ -1283,6 +1283,9 @@
       "item:pipelayers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:pipelayers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:pipelayers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30775,6 +30778,21 @@
             "editor-note"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Trench order T2 names segment P6, the joint photo is labeled P9 and the elevation check is blank. Identify the original records to request and the person who should review them."
+            ]
+          },
+          "id": "pipelayers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Check a pipe segment handover",
+          "type": "notice"
         }
       ]
     },
@@ -37282,6 +37300,13 @@
         "id": "pipelayers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "pipelayers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37631,7 +37656,7 @@
       "text": "Pipelayer career guide: trenches, pipe connection, wages, and entry paths"
     }
   },
-  "source_content_sha256": "db231c5ba8663dda36f9122cdf67b232f4070ecc5feb9e6668e4020e043ca3c1",
+  "source_content_sha256": "3e547eac303e2a7e682cc9657bc1762f987d326632d150def99400ab92a97b63",
   "subject": {
     "canonical_slug": "pipelayers",
     "name": "Pipelayers",

@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1233,7 +1230,7 @@
         "status": "mapped"
       },
       "item:fuel-cell-engineers.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:fuel-cell-engineers.path.interview-probation.1": {
         "status": "mapped"
@@ -1491,7 +1488,7 @@
         "status": "pending_mapping"
       },
       "item:fuel-cell-engineers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:fuel-cell-engineers.sources.source-card.1": {
         "status": "mapped"
@@ -10828,7 +10825,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10880,7 +10877,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10932,7 +10929,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -23381,13 +23378,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Fictional paper exercise C/V2 | A portable fuel cell solution requires net power ≥9.0 kilowatts, net efficiency ≥40% and cost ≤12,000 yuan. Use only the exercise's steady-state formulas: stack power P=voltage U×current I÷1000; net power Pn=P−auxiliary power; net efficiency η=Pn÷input chemical power×100%. A: U=100 volts, I=100 amperes, auxiliary power 1.0 kilowatts, input 20 kilowatts, cost 11,500 yuan. B: U=120 volts, I=90 amperes, auxiliary power 1.5 kilowatts, input 25 kilowatts, cost 11,000 yuan. All three constraints include their boundaries. V1, which calculates net efficiency using stack power, has expired. Data D1 contains simulated steady-state values for both solutions, not measurements; summary D2 incorrectly records A's net power as 10 kilowatts. D3 durability/safety validation is pending, without lifetime curves or qualification records. Q suspends real tests, production and external publication and remains effective. A tool claims B's net efficiency is 43.2% and both solutions can enter production; check these claims. All values, currencies and rules are fictional, not real electrochemical design, testing or safety limits. 90-minute paper task | Read C/V2 15, requirements/version evidence matrix 10, independent calculations for both solutions 20, D2 errors and D3 pending checks 15, validation-plan/Q-boundary draft 20, answer comparison 10, totaling 90. Submit four artifacts: requirements matrix, independent recalculation/correction table, validation/handoff draft and tool reflection. Do not connect hydrogen, power supplies, high voltage or chemicals, build a test bench, conduct real tests, enter production or send externally. No experienced person's sign-off is needed."
+              "Try both versions of Sheet K in the entry section and open the first folded FAQ answer."
             ]
           },
           "id": "fuel-cell-engineers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet",
-            "employer"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -23396,13 +23392,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Exploration signals | Willingness to check units, simulated versus measured data and valid rules, and accept disconfirming evidence. 95% daily email, 82% daily indoor work, 64% daily face-to-face discussions and 59% teamwork extremely important are response options, not individual fit judgments."
+              "Explore the role if you enjoy tracing test versions and raw data, recording discrepancies and routing them for review."
             ]
           },
           "id": "fuel-cell-engineers.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "employer"
+            "onet"
           ],
           "type": "prose"
         },
@@ -23449,13 +23444,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Direct answer | An editorial workflow groups work into design/selection, modeling/calculation, and testing/diagnosis/improvement. The official 26 tasks also include materials/equipment development, prototypes, hybrid architectures, electric drives/power electronics, vehicle integration, hydrogen/non-hydrogen environmental assessment, scheduling and production-release authorization. These three groups are not official mutually exclusive categories. Verify actual authority separately."
+              "Fuel cell engineers design, validate and improve stacks, components or systems for transportation, stationary or portable applications. Typical work includes planning tests, analyzing performance and durability data, and handing off design changes."
             ]
           },
           "id": "fuel-cell-engineers.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet",
-            "employer"
+            "onet"
           ],
           "type": "prose"
         },
@@ -23540,12 +23534,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Read application scenarios and constraints → Set power, lifetime, cost and safety targets → Select stack type, materials and component parameters → Model efficiency and heat/water management → Review selection grounds and risks → Freeze and record the design baseline"
+              "Read test criteria → check approved plan → locate raw results → compare records → mark discrepancies → route for review"
             ]
           },
           "id": "fuel-cell-engineers.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -23583,7 +23579,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS parent category 17-2141 Mechanical Engineers: employment 298.5 thousand in 2025 and 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, average annual openings 17.8 thousand, and self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not actual recruitment or net new jobs. None are occupation-specific 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only."
+              "BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "fuel-cell-engineers.profile.onet-structured-fields-block.4",
@@ -24748,7 +24744,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No specialty generative-AI exposure score, adoption rate, task-impact ranking, employment causality or disappearance year was obtained. Do not classify exposure as medium/high or assert no near-term replacement. Editorial support candidates are research, calculation code, data organization, model pre/postprocessing and report drafts. Software lists do not establish actual AI adoption or proven efficiency. Verify grounds, input versions, validation and action authority. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Insufficient evidence: No specialty generative-AI exposure score, adoption rate, task-impact ranking, employment causality or disappearance year was obtained. Do not classify exposure as medium/high or assert no near-term replacement. Editorial support candidates are research, calculation code, data organization, model pre/postprocessing and report drafts. Software lists do not establish actual AI adoption or proven efficiency. Verify grounds, input versions, validation and action authority."
             ]
           },
           "id": "fuel-cell-engineers.ai-impact.ai-impact-table.18",
@@ -24805,7 +24801,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS parent category 17-2141 Mechanical Engineers: employment 298.5 thousand in 2025 and 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, average annual openings 17.8 thousand, and self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not actual recruitment or net new jobs. None are occupation-specific 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only."
+              "BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "fuel-cell-engineers.ai-impact.ai-impact-table.22",
@@ -25341,7 +25337,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS parent category 17-2141 Mechanical Engineers: employment 298.5 thousand in 2025 and 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, average annual openings 17.8 thousand, and self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not actual recruitment or net new jobs. None are occupation-specific 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only."
+              "BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "fuel-cell-engineers.ai-impact.ai-impact-table.60",
@@ -25484,7 +25480,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: Specialty job changes by 2035 and AI causality unverified. BLS parent 17-2141 Mechanical Engineers: 298.5 thousand employed in 2025, 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, annual openings 17.8 thousand, self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not actual recruitment or net new jobs. None are occupation-specific 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only."
+              "BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "fuel-cell-engineers.ai-impact.ai-impact-table.70",
@@ -26238,12 +26234,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 median annual pay US$104,110 and hourly US$50.05 (OEWS2025), not the specialty"
+              "USD 73,990/year and 35.57/hour"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -26253,12 +26248,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Parent national median. OEWS measures pretax regular-hours pay of full-time/part-time wage and salary employees, excluding self-employment. Includes base, piece rates, commissions, production bonuses, cost-of-living and hazardous-duty pay; excludes overtime premiums, shift differentials, nonproduction bonuses and benefit costs. Do not exclude all bonuses/allowances. Annual wages usually use hourly pay ×2080, not personal actual hours/take-home pay. Boundary | Distribution midpoint, not starting or personal take-home pay."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -26268,12 +26262,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 10th percentile US$73,990/year (OEWS2025)"
+              "USD 84,130/year and 40.45/hour"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -26283,12 +26276,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Parent national 10th percentile. Boundary | Distribution cutoff, not proof of beginner status or narrow duties."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -26298,12 +26290,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 25th percentile US$84,130/year (OEWS2025)"
+              "USD 104,110/year and 50.05/hour"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -26313,12 +26304,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Parent national 25th percentile. Boundary | Percentiles cannot establish industry/regional causes."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -26328,12 +26318,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 75th percentile US$132,590/year (OEWS2025)"
+              "USD 132,590/year and 63.75/hour"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -26343,12 +26332,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Parent national 75th percentile. Boundary | Not all senior or system-lead income."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -26358,12 +26346,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 90th percentile US$164,340/year (OEWS2025)"
+              "USD 164,340/year and 79.01/hour"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -26373,12 +26360,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Parent national 90th percentile. Boundary | Upper/lower decile cutoff ratio about 2.2; no causes, attainability or income ceiling inferred."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -26388,12 +26374,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 employment 298,500 (2025), including self-employment, not the specialty"
+              "About 298,500 jobs in 2025"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26402,12 +26388,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | EP includes self-employment, 0.5% for the parent. Boundary | Not specialty headcounts or other jurisdictions."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26416,12 +26402,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 employment change +11.2% (2025—2035), not the specialty"
+              "+11.2% in 2025–2035"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26430,12 +26416,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Current 2025—2035 parent change. Boundary | Not specialty results or AI causality."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26444,12 +26430,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 annual openings 17,800 (2025—2035), including replacement, not the specialty"
+              "About 17,800 per year in 2025–2035"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26458,12 +26444,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Parent annual openings include growth/replacement. Boundary | Not a ten-year total, net new jobs or actual recruitment."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26487,13 +26473,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupational definition | O*NET-SOC17-2141.01 designs, evaluates, modifies or builds fuel cell components or systems for transportation, stationary or portable applications. The 26 tasks cover materials experiments, technical advice, operating maps and durability assessment, cost-reduction improvements, test diagnostics/statistics, failure analysis, material specifications, design changes/validation, technical learning, instrumentation/data-acquisition preparation, materials/equipment development, prototype fabrication, fuel cell/battery hybrid architectures, test/development projects, reports/proposals, simulation, electric-drive/power-electronics design, vehicle integration, efficiency/power calculations, cross-department scheduling, authorizing components/subsystems for production, power/cost/environmental assessment of hydrogen or non-hydrogen designs, electric-drive integration fault mitigation and hydrogen-storage solutions. Official tasks include production-release authorization and cannot be excluded categorically; verify specific jurisdiction and job authority separately."
+              "NBS tables 2 and 5 report 2025 annual average urban manufacturing wages of CNY 113,594 at non-private units and CNY 76,055 at private units."
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet",
-            "employer"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26781,7 +26766,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Name searches | Fixed Chinese title: Fuel Cell Engineers. System, stack, testing and simulation terms are editorial search aliases, not all registered as the same occupation."
+              "Mainland China wage references"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.44",
@@ -26796,13 +26781,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: This round obtained no Chinese wage, employment or recruitment samples for this exact occupation; it does not assert none exists nationwide. NBS2025 manufacturing wages of 113,594 in non-private units and 76,055 yuan/year in private units are industry context, not Fuel Cell Engineer pay. Coverage is urban legal entities with 5 or more employees, excluding individually owned businesses/freelancers. Total pay includes specified bonuses, allowances, subsidies and overtime; casual/seasonal status is not a blanket exclusion."
+              "The sources checked did not provide a national mainland China wage distribution or employment series for fuel cell engineers. NBS tables 2 and 5 report 2025 annual average urban manufacturing wages of CNY 113,594 at non-private units and CNY 76,055 at private units."
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs",
-            "ep"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26811,7 +26795,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: This round obtained no Chinese wage, employment or recruitment sample for this exact occupation; it does not assert none exists nationwide. NBS2025 manufacturing wages of 113,594 in non-private units and 76,055 yuan/year in private units are industry context, not Fuel Cell Engineer wages. Covers urban legal entities with 5 or more employees; excludes individually owned businesses/freelancers. Total wages include specified bonuses, allowances, subsidies and overtime; casual/seasonal status is not a blanket exclusion. BLS parent 17-2141 Mechanical Engineers: employment 298.5 thousand in 2025, 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, annual openings 17.8 thousand, self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not actual recruitment or net new jobs. None are specialty 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only."
+              "BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.46",
@@ -26855,12 +26839,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "First-tier cities (Beijing, Shanghai, Guangzhou, Shenzhen)"
+              "Urban non-private · manufacturing"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26869,12 +26853,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No mainland Chinese occupation-specific monthly wages verifiable by city/region obtained. Do not substitute recruitment offers, industry averages or secondhand accounts."
+              "CNY 113,594/year"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26883,12 +26867,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Manufacturing and new-energy industry cluster cities"
+              "Urban private · manufacturing"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26897,12 +26881,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No mainland Chinese occupation-specific monthly wages verifiable by city/region obtained. Do not substitute recruitment offers, industry averages or secondhand accounts."
+              "CNY 76,055/year"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26911,12 +26895,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other inland and regional centers"
+              "Urban non-private · all industries"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26925,12 +26909,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: No mainland Chinese occupation-specific monthly wages verifiable by city/region obtained. Do not substitute recruitment offers, industry averages or secondhand accounts."
+              "CNY 129,441/year"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26939,13 +26923,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Classification boundary | US specialty O*NET-SOC17-2141.01, parent SOC17-2141. Specific Chinese mapping unverified this round; do not assume full equivalence or conversion."
+              "NBS tables 2 and 5 report 2025 annual average urban manufacturing wages of CNY 113,594 at non-private units and CNY 76,055 at private units."
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "employer"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27006,12 +26989,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 17-2141.01 occupation/wage data | https://www.onetonline.org/link/summary/17-2141.01; BLS Occupational Employment and Wage Statistics (OEWS) | https://www.bls.gov/oes/; O*NET Fuel Cell Engineers national wages | https://www.onetonline.org/link/localwages/17-2141.01"
+              "National Mechanical Engineers wages | https://www.onetonline.org/link/localwages/17-2141.00; BLS Employment Projections Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; SHGE role posting | https://www.shge.net/careers"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -27020,12 +27005,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 median annual pay US$104,110 and hourly US$50.05 (OEWS2025), not the specialty"
+              "USD 104,110/year and 50.05/hour"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27035,12 +27019,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Parent national median. OEWS measures pretax regular-hours pay of full-time/part-time wage and salary employees, excluding self-employment. Includes base, piece rates, commissions, production bonuses, cost-of-living and hazardous-duty pay; excludes overtime premiums, shift differentials, nonproduction bonuses and benefit costs. Do not exclude all bonuses/allowances. Annual wages usually use hourly pay ×2080, not personal actual hours/take-home pay. Boundary | Distribution midpoint, not starting or personal take-home pay."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.onetonline.org/link/localwages/17-2141.00; O*NET parent-group scope | https://www.onetonline.org/link/details/17-2141.01"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27050,12 +27033,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 10th percentile US$73,990/year (OEWS2025)"
+              "USD 73,990/year and 35.57/hour"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27065,12 +27047,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Parent national 10th percentile. Boundary | Distribution cutoff, not proof of beginner status or narrow duties."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27080,12 +27061,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 25th percentile US$84,130/year (OEWS2025)"
+              "USD 84,130/year and 40.45/hour"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27095,12 +27075,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Parent national 25th percentile. Boundary | Percentiles cannot establish industry/regional causes."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27110,12 +27089,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 75th percentile US$132,590/year (OEWS2025)"
+              "USD 132,590/year and 63.75/hour"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27125,12 +27103,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Parent national 75th percentile. Boundary | Not all senior or system-lead income."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27140,12 +27117,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 90th percentile US$164,340/year (OEWS2025)"
+              "USD 164,340/year and 79.01/hour"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27155,12 +27131,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Parent national 90th percentile. Boundary | Upper/lower decile cutoff ratio about 2.2; no causes, attainability or income ceiling inferred."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27170,12 +27145,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 employment 298,500 (2025), including self-employment, not the specialty"
+              "About 298,500 jobs in 2025"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27184,12 +27159,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | EP includes self-employment, 0.5% for the parent. Boundary | Not specialty headcounts or other jurisdictions."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27198,12 +27173,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 employment change +11.2% (2025—2035), not the specialty"
+              "+11.2% in 2025–2035"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27212,12 +27187,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Current 2025—2035 parent change. Boundary | Not specialty results or AI causality."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27226,12 +27201,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Parent 17-2141 annual openings 17,800 (2025—2035), including replacement, not the specialty"
+              "About 17,800 per year in 2025–2035"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27240,12 +27215,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Definitions | Parent annual openings include growth/replacement. Boundary | Not a ten-year total, net new jobs or actual recruitment."
+              "U.S. Mechanical Engineers parent group (17-2141) | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27269,12 +27244,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Direct answer | Parent 17-2141 median annual pay US$104,110, hourly US$50.05 (OEWS2025), not the specialty. Five national percentile values US$73,990 / 84,130 / 104,110 / 132,590 / 164,340; cutoff ratio about 2.2, not causes of pay gaps. OEWS measures pretax regular-hours pay of full-time/part-time wage and salary employees, excluding self-employment. Includes base, piece rates, commissions, production bonuses, cost-of-living and hazardous-duty pay; excludes overtime premiums, shift differentials, nonproduction bonuses and benefit costs. Do not exclude all bonuses/allowances. Annual wages usually use hourly pay ×2080, not personal actual hours/take-home pay."
+              "The May 2025 national median for U.S. parent occupation 17-2141 was USD 104,110 a year and USD 50.05 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 73,990, 84,130, 104,110, 132,590, 164,340."
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27634,12 +27608,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 10th percentile is a wage cutoff, not evidence of beginner status, technical support or seniority."
+              "May 2025 national wages for the U.S. Mechanical Engineers parent group (17-2141)."
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27649,12 +27622,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The median is the parent-distribution midpoint, not specialty entry/take-home pay. Do not infer inevitable beginner pay growth with experience."
+              "May 2025 national wages for the U.S. Mechanical Engineers parent group (17-2141)."
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27664,12 +27636,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 90th percentile is a parent cutoff, not seniority, project-lead or regional causality or an income ceiling."
+              "May 2025 national wages for the U.S. Mechanical Engineers parent group (17-2141)."
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27697,31 +27668,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Chemical Engineers direction",
@@ -29002,7 +28973,8 @@
           },
           "id": "fuel-cell-engineers.risk.career-risk-cards.17",
           "source_refs": [
-            "employer"
+            "onet",
+            "doe-hydrogen-safety"
           ],
           "type": "prose"
         },
@@ -29016,7 +28988,8 @@
           },
           "id": "fuel-cell-engineers.risk.career-risk-cards.18",
           "source_refs": [
-            "employer"
+            "onet",
+            "doe-hydrogen-safety"
           ],
           "type": "prose"
         },
@@ -29394,7 +29367,7 @@
                 "id": "education",
                 "values": [
                   "Education and preparation",
-                  "Insufficient evidence: Specific Chinese job education, credentials, jurisdictional entry and investment were not verified. O*NET new-hire required-education responses are 57% bachelor's and 43% master's, not actual workforce education or Chinese entry requirements. Job Zone4, SVP7 to <8 are preparation levels, not promises of individual years needed. The BLS parent's typical bachelor's degree, no related experience and no OJT are broader proxies, not replacements for the specialty survey.",
+                  "BLS Table 1.2 lists a bachelor’s degree as typical for the U.S. mechanical engineer parent group, with no typical related experience or on-the-job training. Check actual requirements for stack, systems and validation roles.",
                   "Separate specialty new-hire education surveys, Zone levels and parent typical conditions."
                 ]
               },
@@ -29402,7 +29375,7 @@
                 "id": "clearance",
                 "values": [
                   "Entry and authority",
-                  "Insufficient evidence: This round did not verify valid jurisdictional conditions for hydrogen, high voltage, electrical work, chemicals, special equipment or data processing. Editorial checks cover material access, retention/external sending, test procedures, change and release authority. Whether drawings/test data are trade secrets requires specific judgment, not blanket classification. Interest pages are not sources for personal-information protection law; task lists grant no authority directly.",
+                  "The Wuhan SOFC/SOEC R&D posting lists stack design, performance testing and technical reports and asks for a relevant master’s degree or higher.",
                   "Separate directories, training, certificates, licenses and job authority."
                 ]
               },
@@ -29426,7 +29399,8 @@
           },
           "id": "fuel-cell-engineers.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "title": "Fuel Cell Engineers | path",
           "type": "cards"
@@ -29439,42 +29413,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Exercise and materials",
-                  "Fictional paper exercise C/V2 | A portable fuel cell solution requires net power ≥9.0 kilowatts, net efficiency ≥40% and cost ≤12,000 yuan. Use only steady-state formulas: stack P=voltage U×current I÷1000, net Pn=P−auxiliary power, net η=Pn÷input chemical power×100%. A: U=100 volts, I=100 amperes, auxiliary 1.0 kilowatts, input 20 kilowatts, cost 11,500 yuan. B: U=120 volts, I=90 amperes, auxiliary 1.5 kilowatts, input 25 kilowatts, cost 11,000 yuan. Three constraints include boundaries. V1 using stack power for net efficiency has expired. D1 gives simulated steady-state values, not measurements; D2 incorrectly records A's net power as 10 kilowatts. D3 durability/safety validation is pending, with no lifetime curves/qualification records. Q suspends real tests, production and external publication and remains effective. A tool claims B net efficiency 43.2% and both may enter production; check these claims. All values, currencies and rules are fictional, not real electrochemical design, test or safety limits.",
-                  "D1 simulations, D2 original errors, D3 pending checks and Q suspension are exercise premises; no real experiments."
+                  "Sheet K: Checking test records before review",
+                  "Fictional paper exercise. A test record is ready for review only if it uses approved plan R4 and has a raw-result ID. K1 has R4 and A71, K2 has R3 and A72, and K3 has R4 and a blank ID. Refer plan mismatches to the test lead and missing IDs to the data owner. In the variant only K3 gains the supplied ID A73. Record the status, original values and reviewer in both cases.",
+                  "Use the two records in the prompt. No site access or tools are needed."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "90-minute task",
-                  "90-minute paper task | Read C/V2 15, requirements/version evidence matrix 10, independent calculations for both solutions 20, D2 errors and D3 pending checks 15, validation-plan/Q-boundary draft 20, answer comparison 10, totaling 90. Submit requirements matrix, independent recalculation/correction table, validation/handoff draft and tool reflection. Do not connect hydrogen, power supplies, high voltage or chemicals, build a bench, perform real tests, enter production or send externally. No experienced person's sign-off needed.",
-                  "Four artifacts use the same C/V2 only; retain original records."
+                  "What to hand over",
+                  "Record both cases. Keep the original values, status and review owner for each row.",
+                  "Retain discrepant values through review."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answer",
-                  "Reference answer | A stack: 100×100÷1000=10 kilowatts; net 10−1=9 kilowatts; net efficiency 9÷20=45%; cost 11,500 yuan. All three constraints pass; 9.0 equals the lower bound and passes. B stack: 120×90÷1000=10.8 kilowatts; net 10.8−1.5=9.3 kilowatts; net efficiency 9.3÷25=37.2%; cost 11,000 yuan. Power/cost pass but efficiency fails 40%; do not choose only by price. Tool 43.2%=10.8÷25 is expired V1 stack efficiency, not net efficiency; production claims lack grounds. Retain D2's original 10-kilowatt error and propose A net 9 kilowatts from D1, without overwriting originals. D1 is simulation only; D3 durability/safety unverified. Do not declare A engineering-validated, lifetime-compliant or authorized for production. Invent no tests, review signatures or resumption notice. Q remains effective: no real tests, production or external publication. The validation-plan draft lists model units/versions, three numeric criteria, future measurement/durability/safety evidence and responsible parties; invent no operating conditions/regulatory limits.",
-                  "Answer applies only to fictional steady-state rules, not engineering safety, durability or production evidence."
+                  "Check after finishing",
+                  "Save both answers, then open “Paper exercise answer key” in the FAQ.",
+                  "The link below opens the FAQ."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Operating boundaries",
-                  "Q still suspends real tests, production and all external sending. D3 has no lifetime curves/safety records.",
-                  "Connect no hydrogen, power supplies, high voltage or chemicals; invent no authorization/resumption."
+                  "Exercise scope",
+                  "Check the paper records only."
                 ]
               }
             ]
           },
           "id": "fuel-cell-engineers.path.entry-work-sample-data.1",
           "source_refs": [
-            "employer"
+            "paper-exercise",
+            "paper-answer-key"
           ],
-          "title": "Fuel Cell Engineers | path",
+          "title": "Paper work sample",
           "type": "cards"
         },
         {
@@ -29485,32 +29459,32 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Requirements/evidence matrix",
-                  "List net power ≥9.0, net efficiency ≥40%, cost ≤12000 and itemized grounds for V2, A/B, D1—3 and Q.",
+                  "Plan version",
+                  "Keep the approved and actual values.",
                   "Complete independently on paper; simulation is not measurement."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Independent recalculation/correction table",
-                  "Submit A10/9 kilowatts 45%, B10.8/9.3 kilowatts 37.2%, 11500 / 11000 yuan and judgments against each constraint. Retain D2 original error and correction to net 9.",
+                  "Raw-result ID",
+                  "Retain the original ID or blank.",
                   "Check tool 43.2% misuse of V1; no experienced person's sign-off needed."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Validation and handoff draft",
-                  "List model units/assumptions, three criteria, future durability/safety evidence for D3, responsible parties and Q still effective.",
+                  "Reviewer",
+                  "Route discrepancies to the named reviewer.",
                   "Invent no real conditions, regulatory limits, measured reports or release signatures."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool reflection",
-                  "Record tool V1 net-efficiency misuse and unsupported production judgment; explain original materials and independent recalculations.",
+                  "Single change",
+                  "Change only the specified entry.",
                   "Record independent calculations even without tools; invent no efficiency/adoption evidence."
                 ]
               }
@@ -29518,9 +29492,9 @@
           },
           "id": "fuel-cell-engineers.path.entry-portfolio.1",
           "source_refs": [
-            "employer"
+            "paper-exercise"
           ],
-          "title": "Fuel Cell Engineers | path",
+          "title": "Paper work-sample handoff",
           "type": "cards"
         },
         {
@@ -29581,59 +29555,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1 | 30 minutes",
-                  "Read 26 tasks including production-release authorization; distinguish descriptions from actual powers and submit a task index."
+                  "Read the criteria",
+                  "Read the criteria"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2 | 30 minutes",
-                  "Check monthly-not-weekly pressure and required-education survey; write exploration questions, not health/hiring inferences."
+                  "Check the plan",
+                  "Check the plan"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3 | 30 minutes",
-                  "Extract three constraints and D1—3/Q from C/V2; build a requirements/evidence matrix."
+                  "Check the ID",
+                  "Check the ID"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4 | 30 minutes",
-                  "Independently calculate A net 9 / 45%, B net 9.3 / 37.2%; record units/versions and original D2 correction."
+                  "Keep source values",
+                  "Keep source values"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5 | 30 minutes",
-                  "Draft validation/handoff, listing D3 unverified and Q suspension; no measurements/external sending."
+                  "Name the reviewer",
+                  "Name the reviewer"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6 | 90 minutes",
-                  "Use the same C/V2 in six sections 15 / 10 / 20 / 15 / 20 / 10; submit four artifacts and compare with the full answer above."
+                  "Try the variant",
+                  "Try the variant"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7 | 30 minutes",
-                  "Check tool 43.2% and production errors; record continuing, further practice or transition and next checks."
+                  "Check the answer",
+                  "Check the answer"
                 ]
               }
             ]
           },
           "id": "fuel-cell-engineers.path.seven-day-trial.1",
           "source_refs": [
-            "employer"
+            "paper-exercise"
           ],
-          "title": "Fuel Cell Engineers | path",
+          "title": "Sheet K check order",
           "type": "timeline"
         },
         {
@@ -29641,20 +29615,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue exploration: Check voltage/current units, net power and auxiliary power.",
-              "Continue exploration: Distinguish A passing three criteria from B failing efficiency.",
-              "Continue exploration: Preserve D2 original error and correction grounds.",
-              "Practice again: If stack and V2 net efficiency are confused, recalculate independently.",
-              "Boundary: D1 simulations are not measurements; unverified D3 cannot establish safety/durability.",
-              "Boundary: Q remains effective; no real tests, production or external sending.",
-              "Transition exploration: Compare mechanical, electrical, materials, chemical and environmental emphases; verify conditions separately."
+              "Record the statuses and reviewers for both cases, then compare the answer key.",
+              "Record the statuses and reviewers for both cases, then compare the answer key.",
+              "Record the statuses and reviewers for both cases, then compare the answer key.",
+              "Record the statuses and reviewers for both cases, then compare the answer key.",
+              "Record the statuses and reviewers for both cases, then compare the answer key.",
+              "Record the statuses and reviewers for both cases, then compare the answer key.",
+              "Record the statuses and reviewers for both cases, then compare the answer key."
             ]
           },
           "id": "fuel-cell-engineers.path.seven-day-decision.1",
           "source_refs": [
-            "employer"
+            "paper-exercise"
           ],
-          "title": "Fuel Cell Engineers | path",
+          "title": "Review after the exercise",
           "type": "list"
         },
         {
@@ -29945,13 +29919,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Direct answer | Insufficient evidence: Specific Chinese education, credentials, jurisdictional entry and investment unverified this round. O*NET required-new-hire education responses are 57% bachelor's, 43% master's, not actual workforce education or Chinese thresholds. Job Zone4, SVP7 to <8 are preparation levels, not individual years-needed promises. BLS parent's typical bachelor's, no related experience and no OJT are broader proxies, not the specialty survey. First explore units, validation and evidence boundaries through four C/V2 artifacts, then check job conditions. Paper exercises do not lead directly to real tests/production."
+              "BLS Table 1.2 lists a bachelor’s degree as typical for the U.S. mechanical engineer parent group, with no typical related experience or on-the-job training. Check actual requirements for stack, systems and validation roles. The Wuhan SOFC/SOEC R&D posting lists stack design, performance testing and technical reports and asks for a relevant master’s degree or higher."
             ]
           },
           "id": "fuel-cell-engineers.path.career-path-block.20",
           "source_refs": [
-            "onet",
-            "ep"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29960,12 +29934,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial learning advice | Qualification boundaries | 'Trained,' 'certified/qualified,' 'holding pressure-vessel/hazardous-chemical qualifications,' and 'company-authorized' are four different states. Preparation items are not statutory qualifications or automatic decisions over design release, safety findings or external technical commitments."
+              "Hydrogen systems can involve flammable gas. Verify ventilation and leak detection in the design. If controls are unclear or an alarm sounds, pause the affected work and follow site reporting procedures. Authorized personnel review testing and restart conditions."
             ]
           },
           "id": "fuel-cell-engineers.path.career-path-block.21",
           "source_refs": [
-            "employer"
+            "doe-hydrogen-safety"
           ],
           "type": "prose"
         },
@@ -29989,12 +29963,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Path suggestion | Retain grounds separately for learning, practice, validation and authority. Verify conditions; no promotion guarantees."
+              "The Wuhan SOFC/SOEC R&D posting lists stack design, performance testing and technical reports and asks for a relevant master’s degree or higher."
             ]
           },
           "id": "fuel-cell-engineers.path.career-path-block.23",
           "source_refs": [
-            "employer"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31004,14 +30978,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: This round obtained no Chinese wage, employment or recruitment samples for this exact occupation; it does not assert none exists nationwide. BLS parent 17-2141 Mechanical Engineers: 298.5 thousand employed in 2025, 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, annual openings 17.8 thousand, self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not recruitment or net new jobs. None are specialty 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons. Parent 17-2141 median annual pay US$104,110, hourly US$50.05 (OEWS2025), not the specialty. NBS2025 manufacturing wages 113,594 non-private and 76,055 yuan/year private are industry context, not Fuel Cell Engineer pay. Covers urban legal entities with 5 or more employees, excluding individually owned businesses/freelancers. Total pay includes specified bonuses, allowances, subsidies and overtime; casual/seasonal status is not a blanket exclusion."
+              "BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.8",
           "source_refs": [
-            "ep",
-            "hr",
-            "nbs"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31048,7 +31020,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS parent category 17-2141 Mechanical Engineers: employment 298.5 thousand in 2025 and 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, average annual openings 17.8 thousand, and self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not actual recruitment or net new jobs. None are occupation-specific 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only."
+              "BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.11",
@@ -31076,12 +31048,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Employment size, growth rate and openings"
+              "Employment and projected change"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31090,12 +31062,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Broader category Mechanical Engineers (presented through O*NET, covering 17-2141.01 without separate statistics)"
+              "U.S. Mechanical Engineers parent group (17-2141)"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31104,12 +31076,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS parent category 17-2141 Mechanical Engineers: employment 298.5 thousand in 2025 and 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, average annual openings 17.8 thousand, and self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not actual recruitment or net new jobs. None are occupation-specific 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only."
+              "BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.15",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31175,12 +31147,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Wages (median/percentiles)"
+              "Projected annual openings"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31189,12 +31161,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Broader category Mechanical Engineers (OEWS 2025)"
+              "U.S. Mechanical Engineers parent group (17-2141)"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31203,12 +31175,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Median hourly US$50.05, median annual US$104,110; percentiles US$73,990 / 84,130 / 132,590 / 164,340"
+              "About 17,800 projected per year, including replacements."
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31273,12 +31245,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Industry average wages (background proxy)"
+              "Median annual wage"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31287,12 +31259,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "NBS average wages of employees in urban units (industry sections)"
+              "U.S. Mechanical Engineers parent group (17-2141)"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31301,12 +31273,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: This round obtained no Chinese wage, employment or recruitment samples for this exact occupation; it does not assert none exists nationwide. NBS2025 manufacturing wages of 113,594 in non-private units and 76,055 yuan/year in private units are industry context, not Fuel Cell Engineer pay. Coverage is urban legal entities with 5 or more employees, excluding individually owned businesses/freelancers. Total pay includes specified bonuses, allowances, subsidies and overtime; casual/seasonal status is not a blanket exclusion."
+              "The May 2025 national median for U.S. parent occupation 17-2141 was USD 104,110 a year and USD 50.05 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 73,990, 84,130, 104,110, 132,590, 164,340."
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.29",
           "source_refs": [
-            "nbs"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31716,6 +31688,15 @@
           "data": {
             "entries": [
               {
+                "answer": "Only K1 is ready in the original. Keep K2’s R3 and required R4 and refer it to the test lead. Retain K3’s blank field and refer it to the data owner. In the variant K1 and K3 are ready and K2 remains pending.",
+                "id": "fuel-cell-engineers.faq.paper-exercise",
+                "question": "Paper exercise answer key (open after completing)",
+                "question_key": "career.faq.fuel-cell-engineers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
+              },
+              {
                 "answer": "Occupational definition | O*NET-SOC17-2141.01 designs, evaluates, modifies or builds fuel cell components or systems for transportation, stationary or portable applications. The 26 tasks cover materials experiments, technical advice, operating maps and durability assessment, cost-reduction improvements, test diagnostics/statistics, failure analysis, material specifications, design changes/validation, technical learning, instrumentation/data-acquisition preparation, materials/equipment development, prototype fabrication, fuel cell/battery hybrid architectures, test/development projects, reports/proposals, simulation, electric-drive/power-electronics design, vehicle integration, efficiency/power calculations, cross-department scheduling, authorizing components/subsystems for production, power/cost/environmental assessment of hydrogen or non-hydrogen designs, electric-drive integration fault mitigation and hydrogen-storage solutions. Official tasks include production-release authorization and cannot be excluded categorically; verify specific jurisdiction and job authority separately.",
                 "id": "fuel-cell-engineers.faq.1",
                 "question": "What does this occupation actually do?",
@@ -31736,18 +31717,17 @@
                 ]
               },
               {
-                "answer": "BLS parent 17-2141 Mechanical Engineers: employment 298.5 thousand in 2025, 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, annual openings 17.8 thousand, self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not recruitment or net new jobs. None are specialty 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only. Parent 17-2141 median annual pay US$104,110, hourly US$50.05 (OEWS2025), not the specialty. OEWS measures pretax regular-hours pay for full-time/part-time wage and salary employees, excluding self-employment. Includes base, piece rates, commissions, production bonuses, cost-of-living and hazardous-duty pay; excludes overtime premiums, shift differentials, nonproduction bonuses and benefit costs. Do not exclude all bonuses/allowances. Annual wages usually use hourly pay ×2080, not personal actual hours/take-home pay.",
+                "answer": "The May 2025 national median for U.S. parent occupation 17-2141 was USD 104,110 a year and USD 50.05 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 73,990, 84,130, 104,110, 132,590, 164,340. BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently.",
                 "id": "fuel-cell-engineers.faq.3",
                 "question": "What are US pay/employment conditions?",
                 "question_key": "career.faq.fuel-cell-engineers.q3",
                 "source_refs": [
-                  "ep",
-                  "hr",
-                  "oews"
+                  "oews",
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "Insufficient evidence: This round obtained no Chinese wage, employment or recruitment samples for this exact occupation; it does not assert none exists nationwide. NBS2025 manufacturing wages of 113,594 in non-private units and 76,055 yuan/year in private units are industry context, not Fuel Cell Engineer pay. Coverage is urban legal entities with 5 or more employees, excluding individually owned businesses/freelancers. Total pay includes specified bonuses, allowances, subsidies and overtime; casual/seasonal status is not a blanket exclusion.",
+                "answer": "The sources checked did not provide a national mainland China wage distribution or employment series for fuel cell engineers. NBS tables 2 and 5 report 2025 annual average urban manufacturing wages of CNY 113,594 at non-private units and CNY 76,055 at private units.",
                 "id": "fuel-cell-engineers.faq.4",
                 "question": "Are corresponding mainland Chinese wage data available?",
                 "question_key": "career.faq.fuel-cell-engineers.q4",
@@ -31756,13 +31736,13 @@
                 ]
               },
               {
-                "answer": "Environment | 82% work indoors in controlled conditions daily; a response option, not universal.\nCommunication | 95% email daily, 64% face-to-face daily, 50% telephone at least weekly but not daily.\nTeams | 59% teamwork extremely important; 41% leading/coordinating important.\nProtection | 59% routine protection daily; does not establish risks for every condition.\nAccuracy | 59% accuracy very important, not error/accident rates.\n\nProximity/posture | 59% slightly close; 45% sit about half the time, not universal physical/health conclusions.\nContact | 45% contact with others most of the time, without interpersonal-intensity ratings.\nTime/autonomy | 55% typically over 40 hours weekly; 45% time pressure at least monthly but not weekly; 68% some priority freedom and 41% some decision freedom. No milestone causality inferred.\n\nResponsibility/hazards | 32% high health/safety responsibility, 36% daily hazardous conditions, 45% moderate responsibility for others' results and moderate competition. These do not mean daily accidents or inevitable harm.",
+                "answer": "Hydrogen systems can involve flammable gas. Verify ventilation and leak detection in the design. If controls are unclear or an alarm sounds, pause the affected work and follow site reporting procedures. Authorized personnel review testing and restart conditions.",
                 "id": "fuel-cell-engineers.faq.5",
                 "question": "What are the environment/safety risks?",
                 "question_key": "career.faq.fuel-cell-engineers.q5",
                 "source_refs": [
                   "onet",
-                  "employer"
+                  "doe-hydrogen-safety"
                 ]
               },
               {
@@ -31776,43 +31756,44 @@
                 ]
               },
               {
-                "answer": "Insufficient evidence: Specific Chinese job education, credentials, jurisdictional entry and investment were not verified. O*NET new-hire required-education responses are 57% bachelor's and 43% master's, not actual workforce education or Chinese entry requirements. Job Zone4, SVP7 to <8 are preparation levels, not promises of individual years needed. The BLS parent's typical bachelor's degree, no related experience and no OJT are broader proxies, not replacements for the specialty survey.",
+                "answer": "BLS Table 1.2 lists a bachelor’s degree as typical for the U.S. mechanical engineer parent group, with no typical related experience or on-the-job training. Check actual requirements for stack, systems and validation roles. The Wuhan SOFC/SOEC R&D posting lists stack design, performance testing and technical reports and asks for a relevant master’s degree or higher.",
                 "id": "fuel-cell-engineers.faq.7",
                 "question": "What education/training is needed?",
                 "question_key": "career.faq.fuel-cell-engineers.q7",
                 "source_refs": [
-                  "onet",
-                  "ep"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "Insufficient evidence: Specific job/jurisdictional license/certificate conditions unverified. Separate training, certificates, licenses and job authority. Official tasks include production release; descriptions grant no direct power.",
+                "answer": "Check training, qualifications and authorization for the actual process, equipment and jurisdiction. Ask the employer who may test, stop and release the hydrogen system.",
                 "id": "fuel-cell-engineers.faq.8",
                 "question": "Are certificates/qualifications needed?",
                 "question_key": "career.faq.fuel-cell-engineers.q8",
                 "source_refs": [
-                  "onet",
-                  "employer"
+                  "doe-hydrogen-safety",
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "Boundary | Six editorial risk scenarios, not actual incidents, frequencies or statutory judgments. Verify valid procedures/job authority separately. Official tasks include production release and cannot be excluded categorically.",
+                "answer": "Check the test plan, raw results, ventilation and leak detection. Retain unusual readings and follow site reporting procedures. Designated staff decide on retesting and release.",
                 "id": "fuel-cell-engineers.faq.9",
                 "question": "What are the main risks?",
                 "question_key": "career.faq.fuel-cell-engineers.q9",
                 "source_refs": [
                   "onet",
-                  "employer"
+                  "doe-hydrogen-safety"
                 ]
               },
               {
-                "answer": "BLS parent 17-2141 Mechanical Engineers: employment 298.5 thousand in 2025, 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, annual openings 17.8 thousand, self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not recruitment or net new jobs. None are specialty 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only. Mechanical, electrical, chemical, materials, environmental, industrial engineering and management are editorial exploration. Recheck conditions; no transition guarantees or hydrogen-investment causality.",
+                "answer": "BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently. Compare specific roles by stack development, systems integration or validation.",
                 "id": "fuel-cell-engineers.faq.10",
                 "question": "What is the outlook and potential transition directions?",
                 "question_key": "career.faq.fuel-cell-engineers.q10",
                 "source_refs": [
+                  "bls-ep-2025-2035",
                   "onet",
-                  "ep"
+                  "cn-work-example"
                 ]
               }
             ]
@@ -31909,28 +31890,28 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Fuel Cell Engineers related direction 2",
+                "entity": "Big Five personality assessment",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Fuel Cell Engineers related direction 3",
+                "entity": "MBTI preference assessment",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Fuel Cell Engineers related direction 4",
+                "entity": "Reasoning assessment",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "Fuel Cell Engineers related direction 5",
+                "entity": "Emotional intelligence assessment",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Fuel Cell Engineers related direction 6",
@@ -31991,7 +31972,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "BLS parent category 17-2141 Mechanical Engineers: employment 298.5 thousand in 2025 and 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, average annual openings 17.8 thousand, and self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not actual recruitment or net new jobs. None are occupation-specific 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only.",
+                  "BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently.",
                   "Parent typical bachelor's, no experience/no OJT; not specialty new-hire education distribution."
                 ],
                 "evidence_type": "official employment projections",
@@ -32007,24 +31988,23 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "Parent 17-2141 median annual US$104,110, hourly US$50.05 (OEWS2025), not specialty. Five percentiles US$73990 / 84130 / 104110 / 132590 / 164340, hourly 35.57 / 40.45 / 50.05 / 63.75 / 79.01.",
-                  "OEWS measures pretax regular-hours wages for full-time/part-time wage and salary employees, excluding the self-employed. Includes base pay, piece rates, commissions, production bonuses, cost-of-living and hazardous-duty pay; excludes overtime premiums, shift differentials, nonproduction bonuses and benefit costs. Do not categorically exclude bonuses/allowances. Annual wages are usually hourly pay ×2080, not personal actual hours or take-home earnings."
+                  "The May 2025 national median for U.S. parent occupation 17-2141 was USD 104,110 a year and USD 50.05 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 73,990, 84,130, 104,110, 132,590, 164,340."
                 ],
                 "evidence_type": "official wage estimates",
                 "id": "oews",
                 "limitation": "Full-time/part-time employees, excluding self-employment; not specialty personal income.",
                 "market": "United States",
-                "name": "U.S. Bureau of Labor Statistics: 2025 Occupational Employment and Wage Statistics (OEWS)",
-                "period": "2025 OEWS",
+                "name": "O*NET national Mechanical Engineers wage table",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "17-2141 parent national wages, not specialty",
-                "url": "https://www.bls.gov/oes/tables.htm"
+                "scope": "U.S. Mechanical Engineers parent group (17-2141)",
+                "url": "https://www.onetonline.org/link/localwages/17-2141.00"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "Urban non-private manufacturing average wages 113,594 yuan/year; urban private units 76,055 yuan/year.",
-                  "Total pretax wages, including employer-withheld personal income tax and employees' social-insurance/housing-provident-fund contributions."
+                  "NBS tables 2 and 5 report 2025 annual average urban manufacturing wages of CNY 113,594 at non-private units and CNY 76,055 at private units.",
+                  "NBS tables 2 and 5 report 2025 annual average urban manufacturing wages of CNY 113,594 at non-private units and CNY 76,055 at private units."
                 ],
                 "evidence_type": "official industry wage release",
                 "id": "nbs",
@@ -32033,24 +32013,24 @@
                 "name": "National Bureau of Statistics: 2025 average wages of employees in urban units",
                 "period": "2025 annual wage",
                 "publisher": "National Bureau of Statistics",
-                "scope": "manufacturing industry proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+                "scope": "Mainland China urban manufacturing industry",
+                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "Insufficient evidence: This round obtained no Chinese wage, employment or recruitment samples for this exact occupation; it does not assert none exists nationwide. NBS2025 manufacturing wages of 113,594 in non-private units and 76,055 yuan/year in private units are industry context, not Fuel Cell Engineer pay. Coverage is urban legal entities with 5 or more employees, excluding individually owned businesses/freelancers. Total pay includes specified bonuses, allowances, subsidies and overtime; casual/seasonal status is not a blanket exclusion.",
-                  "Specified total wages include bonuses, allowances, subsidies and overtime; seasonal/casual status is not a blanket exclusion."
+                  "NBS tables 2 and 5 report 2025 annual average urban manufacturing wages of CNY 113,594 at non-private units and CNY 76,055 at private units.",
+                  "NBS tables 2 and 5 report 2025 annual average urban manufacturing wages of CNY 113,594 at non-private units and CNY 76,055 at private units."
                 ],
                 "evidence_type": "official methodology note",
                 "id": "cnclass",
                 "limitation": "No occupational split; cannot replace occupational wages.",
                 "market": "Mainland China",
-                "name": "NBS: Statistical definitions for average wages of employees in urban units",
+                "name": "National Bureau of Statistics: 2025 average wages of employees in urban units",
                 "period": "2025 release methodology",
                 "publisher": "National Bureau of Statistics",
-                "scope": "industry-level methodology",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "scope": "Mainland China urban manufacturing industry",
+                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32215,23 +32195,23 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "Used for field/evidence definitions and gap registration rules.",
-                  "Used for cross-market definition boundaries."
+                  "Tools may help organize records. Verify key information against the original.",
+                  "Tools may help organize records. Verify key information against the original."
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "Editorial explanation",
                 "id": "employer",
-                "limitation": "Internal rules, not external factual sources.",
-                "market": "Global",
-                "name": "FermatMind career content field/evidence definition rules",
-                "period": "current authoring rules",
+                "limitation": "This explanation does not measure adoption or work outcomes.",
+                "market": "This page",
+                "name": "FermatMind task and human review notes",
+                "period": "This page",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "Tasks on this page",
                 "url": "https://fermatmind.com"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "Older O*NET 2024—2034 trends are historical only; use BLS2025—2035 parent projections currently.",
+                  "BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently.",
                   "Employment trends do not establish job technology mentions/AI adoption."
                 ],
                 "evidence_type": "official trend display",
@@ -32325,20 +32305,19 @@
                 "url": "https://www.onetonline.org/link/hot_tech/17-2141.01"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Used to check point-in-time wage/employment definitions.",
-                  "Used to check national percentiles/employment size."
+                  "The May 2025 national median for U.S. parent occupation 17-2141 was USD 104,110 a year and USD 50.05 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 73,990, 84,130, 104,110, 132,590, 164,340."
                 ],
                 "evidence_type": "official statistics index",
                 "id": "onet-wages",
-                "limitation": "Not applicable to other jurisdictions.",
+                "limitation": "National occupational distribution. Local wages and individual offers vary.",
                 "market": "United States",
                 "name": "BLS Occupational Employment and Wage Statistics (OEWS) homepage",
-                "period": "2025 OEWS",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "OEWS national estimates",
-                "url": "https://www.bls.gov/oes/"
+                "scope": "U.S. Mechanical Engineers parent group (17-2141)",
+                "url": "https://www.onetonline.org/link/localwages/17-2141.00"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32389,21 +32368,64 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Selection and design — 50/100; weight=1/3; fuel-cell-engineers.ai-impact.ai-impact-table.99[0]",
-                  "Modeling and simulation — 75/100; weight=1/3; fuel-cell-engineers.ai-impact.ai-impact-table.103[0]",
-                  "Test plans and bench testing — 25/100; weight=1/3; fuel-cell-engineers.ai-impact.ai-impact-table.107[0]"
+                  "BLS Table 1.2 for U.S. parent occupation 17-2141 shows about 298,500 jobs in 2025 and projects 332,000 in 2035 (+11.2%), with about 17,800 openings per year including replacements. Counts are rounded independently.",
+                  "BLS Table 1.2 lists a bachelor’s degree as typical for the U.S. mechanical engineer parent group, with no typical related experience or on-the-job training. Check actual requirements for stack, systems and validation roles."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "17-2141",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Wuhan SOFC/SOEC R&D posting lists stack design, performance testing and technical reports and asks for a relevant master’s degree or higher."
+                ],
+                "id": "cn-work-example",
+                "limitation": "Named role example. Confirm actual responsibilities and vacancy status with the employer.",
+                "market": "Mainland China",
+                "name": "SHGE fuel cell R&D role",
+                "period": "2026-07-20",
+                "publisher": "SHGE (Hubei) Technology Co., Ltd.",
+                "scope": "Named work example",
+                "url": "https://www.shge.net/careers"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks the paper records only.",
+                "market": "This page",
+                "name": "Sheet K: Checking test records before review",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "scope": "Paper exercise",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Hydrogen systems can involve flammable gas. Verify ventilation and leak detection in the design. If controls are unclear or an alarm sounds, pause the affected work and follow site reporting procedures. Authorized personnel review testing and restart conditions."
+                ],
+                "id": "doe-hydrogen-safety",
+                "name": "U.S. Department of Energy Safe Use of Hydrogen",
+                "scope": "Ventilation and leak detection for hydrogen systems",
+                "url": "https://www.energy.gov/cmei/fuels/safe-use-hydrogen"
+              },
+              {
+                "details": [
+                  "Open the folded answer after completing both cases."
+                ],
+                "id": "paper-answer-key",
+                "name": "Paper exercise answer key (FAQ)",
+                "url": "#career-content-sources"
               }
             ]
           },
@@ -33741,7 +33763,7 @@
           "type": "prose"
         },
         "entry_heading": "How graduates/career changers can test fit and get started",
-        "heading": "How to become a Fuel Cell Engineer: Education, qualifications and career pathways",
+        "heading": "Entry and Sheet K test record check",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "fuel-cell-engineers.path.career-path-block.21",
@@ -34648,7 +34670,7 @@
             },
             "evidence_refs": [
               "onet",
-              "privacy"
+              "doe-hydrogen-safety"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34910,6 +34932,24 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "doe-hydrogen-safety",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "fuel-cell-engineers.source-register.published.1"
+            },
+            "id": "doe-hydrogen-safety",
+            "label": {
+              "$source": "doe-hydrogen-safety",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "fuel-cell-engineers.source-register.published.1"
+            },
+            "scope": "Ventilation and leak detection for hydrogen systems"
           }
         ]
       },
@@ -34917,7 +34957,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "Pay · 10th percentile",
+              "指标": "Parent group wages · 10th percentile",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -34932,7 +34972,7 @@
               }
             },
             {
-              "指标": "Pay · 25th percentile",
+              "指标": "Parent group wages · 25th percentile",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -34947,7 +34987,7 @@
               }
             },
             {
-              "指标": "Pay · Median",
+              "指标": "Parent group wages · 50th percentile",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -34962,7 +35002,7 @@
               }
             },
             {
-              "指标": "Pay · 75th percentile",
+              "指标": "Parent group wages · 75th percentile",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -34977,7 +35017,7 @@
               }
             },
             {
-              "指标": "Pay · 90th percentile",
+              "指标": "Parent group wages · 90th percentile",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.15",
                 "block": "china-salary",
@@ -34992,7 +35032,7 @@
               }
             },
             {
-              "指标": "Employment · Size",
+              "指标": "Parent group employment",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.17",
                 "block": "china-salary",
@@ -35007,7 +35047,7 @@
               }
             },
             {
-              "指标": "Employment · Growth rate",
+              "指标": "Parent group projected change",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.19",
                 "block": "china-salary",
@@ -35022,7 +35062,7 @@
               }
             },
             {
-              "指标": "Employment · Average annual openings",
+              "指标": "Parent group annual openings",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.21",
                 "block": "china-salary",
@@ -35219,7 +35259,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35233,7 +35273,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35247,7 +35287,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35301,7 +35341,7 @@
         "bls_table": [
           {
             "fact_ref": "us-wage-low10-2025",
-            "指标": "Pay · 10th percentile",
+            "指标": "Parent group wages · 10th percentile",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.11",
               "block": "us-salary",
@@ -35316,7 +35356,7 @@
             }
           },
           {
-            "指标": "Pay · 25th percentile",
+            "指标": "Parent group wages · 25th percentile",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.13",
               "block": "us-salary",
@@ -35332,7 +35372,7 @@
           },
           {
             "fact_ref": "us-wage-2025",
-            "指标": "Pay · Median",
+            "指标": "Parent group wages · 50th percentile",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35347,7 +35387,7 @@
             }
           },
           {
-            "指标": "Pay · 75th percentile",
+            "指标": "Parent group wages · 75th percentile",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.15",
               "block": "us-salary",
@@ -35363,7 +35403,7 @@
           },
           {
             "fact_ref": "us-wage-high10-2025",
-            "指标": "Pay · 90th percentile",
+            "指标": "Parent group wages · 90th percentile",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.17",
               "block": "us-salary",
@@ -35379,7 +35419,7 @@
           },
           {
             "fact_ref": "us-employment-2025",
-            "指标": "Employment · Size",
+            "指标": "Parent group employment",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.19",
               "block": "us-salary",
@@ -35395,7 +35435,7 @@
           },
           {
             "fact_ref": "us-growth-2025-2035",
-            "指标": "Employment · Growth rate",
+            "指标": "Parent group projected change",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.21",
               "block": "us-salary",
@@ -35411,7 +35451,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "Employment · Average annual openings",
+            "指标": "Parent group annual openings",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -35489,7 +35529,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "How much do Fuel Cell Engineers earn in the US?",
+        "heading": "U.S. wages · Mechanical Engineers parent group",
         "industry_heading": "How much do US wages vary by industry?",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -35631,52 +35671,55 @@
         "wage_column_labels": [
           "Position in wage statistics",
           "Annual wage reference",
-          "Conversion boundaries",
+          "Hourly wage",
           "Understanding this position"
         ],
         "wage_heading": "US wage distribution",
         "wage_tiers": [
           {
-            "equivalent": "Official annual wages, not personal monthly income",
+            "equivalent": "USD 35.57/hour",
             "interpretation": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Lowest 10%",
-            "value": {
-              "$fact": "us-wage-low10-2025",
-              "field": "display_value"
-            }
+            "label": "10th percentile",
+            "value": "USD 73,990/year"
           },
           {
-            "equivalent": "Official annual wages, not personal take-home pay",
+            "equivalent": "USD 40.45/hour",
+            "interpretation": "May 2025 national wages for the U.S. Mechanical Engineers parent group (17-2141).",
+            "label": "25th percentile",
+            "value": "USD 84,130/year"
+          },
+          {
+            "equivalent": "USD 50.05/hour",
             "interpretation": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Median (50%)",
-            "value": {
-              "$fact": "us-wage-2025",
-              "field": "display_value"
-            }
+            "label": "50th percentile",
+            "value": "USD 104,110/year"
           },
           {
-            "equivalent": "Official annual wages, not personal take-home pay",
+            "equivalent": "USD 63.75/hour",
+            "interpretation": "May 2025 national wages for the U.S. Mechanical Engineers parent group (17-2141).",
+            "label": "75th percentile",
+            "value": "USD 132,590/year"
+          },
+          {
+            "equivalent": "USD 79.01/hour",
             "interpretation": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Highest 10%",
-            "value": {
-              "$fact": "us-wage-high10-2025",
-              "field": "display_value"
-            }
+            "label": "90th percentile",
+            "value": "USD 164,340/year"
           }
         ]
       },
@@ -35820,7 +35863,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "fuel-cell-engineers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35865,7 +35908,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "fuel-cell-engineers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -35910,7 +35953,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "oews",
             "value": {
               "$item": "fuel-cell-engineers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36012,6 +36055,30 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "fuel-cell-engineers.source-register.published.1"
+            },
+            "id": "bls-ep-2025-2035",
+            "label": "BLS Employment Projections, Table 1.2",
+            "scope": "U.S. Mechanical Engineers parent group (17-2141)"
+          },
+          {
+            "href": {
+              "$source": "oews",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "fuel-cell-engineers.source-register.published.1"
+            },
+            "id": "oews",
+            "label": "O*NET national Mechanical Engineers wage table",
+            "scope": "U.S. Mechanical Engineers parent group (17-2141)"
           }
         ],
         "transitions": [
@@ -36288,7 +36355,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS employment projections (2024—2034)",
+            "label": "2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "fuel-cell-engineers.profile.onet-structured-fields-block.4",
@@ -37053,7 +37120,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit Fuel Cell Engineers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37130,7 +37197,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "Big Five personality assessment"
           },
           {
             "href": {
@@ -37140,7 +37207,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "MBTI preference assessment"
           },
           {
             "href": {
@@ -37150,7 +37217,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Reasoning assessment"
           },
           {
             "href": {
@@ -37160,7 +37227,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "Emotional intelligence assessment"
           }
         ]
       },
@@ -37338,19 +37405,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
-      "china-salary": "Mainland China pay reference",
+      "ai-impact": "AI tools and human review",
+      "china-salary": "Mainland China wage references",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
       "market-signals": "Career outlook and related transitions",
       "navigation": "Next steps and related links",
-      "path": "Entry, qualifications and career development",
+      "path": "Entry and Sheet K test record check",
       "profile": "Occupational profile",
       "quick-decision": "Quick assessment",
       "risk": "Work pressures, risks and professional boundaries",
       "source-register": "Sources",
       "sources": "FAQs and sources",
-      "us-salary": "US pay reference"
+      "us-salary": "U.S. wages · Mechanical Engineers parent group"
     }
   },
   "fact_register": {
@@ -37368,78 +37435,75 @@
         ]
       },
       {
-        "derivation": "OEWS measures pretax regular-hours wages for full-time/part-time wage and salary employees, excluding the self-employed. Includes base pay, piece rates, commissions, production bonuses, cost-of-living and hazardous-duty pay; excludes overtime premiums, shift differentials, nonproduction bonuses and benefit costs. Do not categorically exclude bonuses/allowances. Annual wages are usually hourly pay ×2080, not personal actual hours or take-home earnings.",
-        "display_value": "Parent 17-2141 median annual pay US$104,110 and hourly US$50.05 (OEWS2025), not the specialty",
+        "derivation": "National OEWS wage percentiles for the parent group 17-2141.",
+        "display_value": "USD 104,110/year",
         "fact_id": "us-wage-2025",
         "market": "United States",
-        "measure": "Median wage",
-        "occupation_scope": "Mechanical Engineers 17-2141 parent category, not specialty",
-        "period": "2025",
+        "measure": "Parent occupation · U.S. median annual wage (May 2025)",
+        "occupation_scope": "U.S. Mechanical Engineers parent group (17-2141)",
+        "period": "2025-05",
         "source_refs": [
-          "hr",
           "oews"
         ]
       },
       {
-        "derivation": "OEWS measures pretax regular-hours wages for full-time/part-time wage and salary employees, excluding the self-employed. Includes base pay, piece rates, commissions, production bonuses, cost-of-living and hazardous-duty pay; excludes overtime premiums, shift differentials, nonproduction bonuses and benefit costs. Do not categorically exclude bonuses/allowances. Annual wages are usually hourly pay ×2080, not personal actual hours or take-home earnings.",
+        "derivation": "National OEWS wage percentiles for the parent group 17-2141.",
         "display_value": "Parent 17-2141 10th percentile US$73,990/year (OEWS2025)",
         "fact_id": "us-wage-low10-2025",
         "market": "United States",
         "measure": "10th percentile wage",
-        "occupation_scope": "Mechanical Engineers 17-2141 parent category, not specialty",
+        "occupation_scope": "U.S. Mechanical Engineers parent group (17-2141)",
         "period": "2025",
         "source_refs": [
-          "hr",
           "oews"
         ]
       },
       {
-        "derivation": "OEWS measures pretax regular-hours wages for full-time/part-time wage and salary employees, excluding the self-employed. Includes base pay, piece rates, commissions, production bonuses, cost-of-living and hazardous-duty pay; excludes overtime premiums, shift differentials, nonproduction bonuses and benefit costs. Do not categorically exclude bonuses/allowances. Annual wages are usually hourly pay ×2080, not personal actual hours or take-home earnings.",
+        "derivation": "National OEWS wage percentiles for the parent group 17-2141.",
         "display_value": "Parent 17-2141 90th percentile US$164,340/year (OEWS2025)",
         "fact_id": "us-wage-high10-2025",
         "market": "United States",
         "measure": "90th percentile wage",
-        "occupation_scope": "Mechanical Engineers 17-2141 parent category, not specialty",
+        "occupation_scope": "U.S. Mechanical Engineers parent group (17-2141)",
         "period": "2025",
         "source_refs": [
-          "hr",
           "oews"
         ]
       },
       {
-        "derivation": "BLS parent category 17-2141 Mechanical Engineers: employment 298.5 thousand in 2025 and 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, average annual openings 17.8 thousand, and self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not actual recruitment or net new jobs. None are occupation-specific 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only.",
-        "display_value": "Parent 17-2141 employment change +11.2% (2025—2035), not the specialty",
+        "derivation": "BLS Table 1.2, row for the U.S. Mechanical Engineers parent group 17-2141.",
+        "display_value": "+11.2%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Employment growth",
-        "occupation_scope": "Mechanical Engineers 17-2141 parent category, not specialty",
-        "period": "2025—2035",
+        "measure": "Parent occupation · U.S. projected employment change (2025–2035)",
+        "occupation_scope": "U.S. Mechanical Engineers parent group (17-2141)",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "BLS parent category 17-2141 Mechanical Engineers: employment 298.5 thousand in 2025 and 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, average annual openings 17.8 thousand, and self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not actual recruitment or net new jobs. None are occupation-specific 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only.",
-        "display_value": "Parent 17-2141 employment 298,500 (2025), including self-employment, not the specialty",
+        "derivation": "BLS Table 1.2, row for the U.S. Mechanical Engineers parent group 17-2141.",
+        "display_value": "About 298,500 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment count",
-        "occupation_scope": "Mechanical Engineers 17-2141 parent category, not specialty",
+        "measure": "Parent occupation · U.S. employment (2025)",
+        "occupation_scope": "U.S. Mechanical Engineers parent group (17-2141)",
         "period": "2025",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "BLS parent category 17-2141 Mechanical Engineers: employment 298.5 thousand in 2025 and 332.0 thousand in 2035; 11.2% growth over 2025—2035, net increase 33.5 thousand, average annual openings 17.8 thousand, and self-employment 0.5%. EP includes self-employment; openings include growth/replacement, not actual recruitment or net new jobs. None are occupation-specific 17-2141.01 statistics; older O*NET 2024—2034 figures are historical comparisons only.",
-        "display_value": "Parent 17-2141 annual openings 17,800 (2025—2035), including replacement, not the specialty",
+        "derivation": "BLS Table 1.2, row for the U.S. Mechanical Engineers parent group 17-2141.",
+        "display_value": "About 17,800 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Average annual job openings",
-        "occupation_scope": "Mechanical Engineers 17-2141 parent category, not specialty",
-        "period": "2025—2035",
+        "measure": "Parent occupation · U.S. annual openings (2025–2035)",
+        "occupation_scope": "U.S. Mechanical Engineers parent group (17-2141)",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -37448,7 +37512,7 @@
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "Mainland China",
         "measure": "Industry average wages",
-        "occupation_scope": "2025 manufacturing industry proxy, not occupation",
+        "occupation_scope": "Mainland China urban manufacturing industry",
         "period": "2025",
         "source_refs": [
           "nbs"
@@ -37460,62 +37524,50 @@
         "fact_id": "cn-private-2025",
         "market": "Mainland China",
         "measure": "Industry average wages",
-        "occupation_scope": "2025 manufacturing industry proxy, not occupation",
+        "occupation_scope": "Mainland China urban manufacturing industry",
         "period": "2025",
         "source_refs": [
           "nbs"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Fuel Cell Engineers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
-      "Fuel Cell Engineers · Tasks, deliverables and responsibility boundaries",
-      "Source scope · Statistical definitions · Human review",
-      "Retaining the exact Chinese occupational wage gap according to evidence"
+      "Fuel Cell Engineers",
+      "Wages and projections use separate tables",
+      "China occupational wage distribution unavailable"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "US parent median wage (2025)"
+        "label": "Parent occupation · U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "US parent employment change (2025—2035)"
+        "label": "Parent occupation · U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "US parent employment count (2025)"
+        "label": "Parent occupation · U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "US parent annual openings (2025—2035)"
+        "label": "Parent occupation · U.S. annual openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -37529,17 +37581,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What Fuel Cell Engineers do, required abilities, pay/outlook and tasks AI may change. Occupational scope, source definitions and data gaps retained."
+      "text": "Explore fuel cell engineers tasks, U.S. wage percentiles and employment projections, with a paper exercise on checking records."
     },
     "title": {
       "availability": "available",
-      "text": "Fuel Cell Engineers"
+      "text": "Fuel Cell Engineers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "fec2d9dbd669e01d3a2afd56fafae8ea841a01db2b7e6583ac601c4c4e29c96d",
+  "source_content_sha256": "965b79a9a076e4f44d248e400cb50d04edc31f2857544a90805e508642340db3",
   "subject": {
     "canonical_slug": "fuel-cell-engineers",
     "name": "Fuel Cell Engineers",
-    "summary": "Occupational definition | O*NET-SOC17-2141.01 designs, evaluates, modifies or builds fuel cell components or systems for transportation, stationary or portable applications. The 26 tasks cover materials experiments, technical advice, operating maps and durability assessment, cost-reduction improvements, test diagnostics/statistics, failure analysis, material specifications, design changes/validation, technical learning, instrumentation/data-acquisition preparation, materials/equipment development, prototype fabrication, fuel cell/battery hybrid architectures, test/development projects, reports/proposals, simulation, electric-drive/power-electronics design, vehicle integration, efficiency/power calculations, cross-department scheduling, authorizing components/subsystems for production, power/cost/environmental assessment of hydrogen or non-hydrogen designs, electric-drive integration fault mitigation and hydrogen-storage solutions. Official tasks include production-release authorization and cannot be excluded categorically; verify specific jurisdiction and job authority separately."
+    "summary": "Fuel cell engineers design, validate and improve stacks, components or systems for transportation, stationary or portable applications. Typical work includes planning tests, analyzing performance and durability data, and handing off design changes."
   }
 }

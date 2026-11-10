@@ -1430,6 +1430,9 @@
       "item:clergy.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:clergy.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:clergy.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30163,6 +30166,21 @@
           "id": "clergy.path.recruitment-sample.1",
           "title": "Note on the use of recruiting samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. A signup includes a service-time question and a request for private contact. Write separate handover notes for the event volunteer and the pastoral contact."
+            ]
+          },
+          "id": "clergy.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Route event and pastoral requests separately",
+          "type": "notice"
         }
       ]
     },
@@ -36735,6 +36753,13 @@
         "id": "clergy.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "clergy.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37145,7 +37170,7 @@
       "text": "Clergy"
     }
   },
-  "source_content_sha256": "bc5160678ae6b1dcdf9bddb56034e190f3206549fbbb1f446c36667e6ea2c52a",
+  "source_content_sha256": "7acfbc1cb071ee94b8a4fdc9d3d66ca41709a7fbedf56c1e2c5991c2907382be",
   "subject": {
     "canonical_slug": "clergy",
     "name": "Clergy",

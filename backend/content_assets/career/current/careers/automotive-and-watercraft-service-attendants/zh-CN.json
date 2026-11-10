@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -36,13 +33,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -63,13 +60,13 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-high10-2025": {
         "status": "pending_mapping"
@@ -1542,7 +1539,7 @@
         "status": "pending_mapping"
       },
       "item:automotive-and-watercraft-service-attendants.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:automotive-and-watercraft-service-attendants.sources.source-card.1": {
         "status": "mapped"
@@ -23181,12 +23178,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你能按车辆或船艇的说明书核对燃料种类、油液规格与容量，愿意在户外与全天候条件下穿戴防护用品并按规定处置溢漏，能在多人排队与催单时保持收银与记录准确，并在燃料种类、油液规格或安全条件不明时停下来请示。"
+              "到入行区做「FS-45｜核对三张虚构服务收据」，先交两版记录和交接。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23195,7 +23192,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停投入的条件：你还没在任何有监督的条件下完成过一次完整的加油、油液检查、轮胎或附属件更换与收银记录流程，或只能靠「喜欢车和船」说明兴趣；也不要把课程成绩、一次帮朋友换轮胎或会开车当作可以独立操作加油设备、处理危险化学品或处置溢漏的证明。涉及燃料与危险化学品作业时必须由具备相应培训与授权的机构与人员按规程执行，本页不提供现场作业指令。"
+              "先试本页纸面 FS-45，再向用人单位问清加注、小修、收银哪些属于拟任岗位，以及岗前培训和上岗条件。课程成绩、驾驶经验和纸面记录均不能证明可以独立加注或处理溢漏。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.quick-decision.fit-decision-checklist.3",
@@ -23211,13 +23208,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历与权限必须分开核对：O*NET 把 53-6031.00 列为 Job Zone 1–2（SVP 低于 6.0），受访者中 59% 认为需要高中文凭或同等学历、23% 认为需要高中后证书、16% 认为需要低于高中文凭；中国大陆侧燃料（汽油、柴油）属危险化学品，《危险化学品安全管理条例》要求经营企业取得危险化学品经营许可证，从业人员经安全教育培训、考核合格后上岗，对有资格要求的岗位配备依法取得相应资格的人员。课程与培训、机构内部上岗资格、危险化学品经营许可与岗位授权是不同状态，须按雇主、岗位与所在地逐项核验。"
+              "学历和资格分开核。以适用规则、岗位分工、正式培训和实际雇主条件为准。 《危险化学品安全法》第 5 条要求适用单位教育培训、人员考核合格后上岗，对有资格要求的岗位配备相应持证人员。AQ 3010—2022 第 1 节明确不适用于水上加油站。水上燃料供应要核适用水域、设施和单位安排，不能直接套用陆站标准。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "health",
+            "fs-aq",
+            "fs-water"
           ],
           "type": "prose"
         },
@@ -23282,7 +23280,7 @@
               "燃料与油液补给｜先确认规格｜按车辆或船艇说明书核对燃料种类与油液规格，加注到指定液位并检查轮胎气压与各类液位，标注加注内容与数量。",
               "检查与小修｜按实际任务范围｜官方包含调整刹车、更换火花塞机油滤芯及轮胎修补更换；具体工具程序和人员条件另核，不从职业名推全系统维修能力。",
               "销售与收银｜让账目可核对｜按型号取件并安装配件，计价收款、找零并出具收据，汇总油品、机油与配件销售日报，交班时核对现金与单据。",
-              "安全与作业条件｜资格与权限分别核｜中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。本轮未取得完整站点恢复程序。 废弃物适用规则另核，未取得完整现场程序。",
+              "安全与作业条件｜资格与权限分别核｜中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。复工条件和权限以站点程序为准。 废弃物按站点分类、移交程序和适用环境规定处理。",
               "场地与库存｜让现场可用｜清洁停车区、办公区与卫生设施并清运垃圾，订购进货、标价上架并维护库存记录。",
               "记录与客户跟进｜让过程可复核｜维护客户记录并定期提醒到期服务，向客户提供本地路况与安全提示，涉及争议按机构规程上报。"
             ]
@@ -23299,7 +23297,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜98% 每天需要面对面讨论，86% 每天使用电话，77% 与他人持续接触；67% 每天在非环境可控的室内工作，77% 每天在户外全天候环境作业。\n主要装备与系统｜加油机与油枪、空压机与胎压表、黄油枪与喷剂润滑器材、举升与拆装工具、收银与库存系统，以及个人防护用品。\n任务节奏｜75% 需要持续或几乎持续用手操作设备，65% 需要持续站立，21%每周一次以上但非每天面临时间压力；本轮未得真实客流和排班样本。\n协作对象｜与客户、站长或值班主管、同事、配件供货商与配送人员协作；66% 认为与外部客户或公众打交道极其重要，36%每月一次以上但非每周遇到不友好者，37%同频率遇冲突。\n竞争与压力｜54% 认为错误的后果极其严重，37% 认为竞争程度很高，35% 对他人的工作结果承担很高责任，37% 对他人的健康与安全承担高责任。\n合规与安全｜77% 每天穿戴常规防护用品，85% 每天接触污染物，80% 每天接触危险设备，54% 每天面临轻微烧伤、割伤或叮咬风险；燃料与油液操作须符合适用的危险化学品与消防安全要求。\n记录与复盘｜服务单、日报表与库存记录是官方任务之一；76% 每天需要作出决定，56% 认为决定对同事或公司结果非常重要，60% 拥有很大的决定自由；票据与库存需要可核对。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能包含积极倾听、口头表达与批判性思维，可迁移技能包含操作与控制、服务导向、时间管理、设备维护与维修；知识以客户与个人服务、机械、销售与营销为主。\n准入与授权｜中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。\n行业与雇主｜当前O*NET宽行业为零售贸易56%、其他服务业（公共管理除外）35%、其他9%，不是中国分布或行业内本职业工资。 加油、汽车服务及码头等为编辑比较方向，未读真实雇主公告。"
+              "工作环境｜98% 每天需要面对面讨论，86% 每天使用电话，77% 与他人持续接触；67% 每天在非环境可控的室内工作，77% 每天在户外全天候环境作业。\n主要装备与系统｜加油机与油枪、空压机与胎压表、黄油枪与喷剂润滑器材、举升与拆装工具、收银与库存系统，以及个人防护用品。\n任务节奏｜75% 需要持续或几乎持续用手操作设备，65% 需要持续站立，21%每周一次以上但非每天面临时间压力；本页不提供真实客流和排班样本。\n协作对象｜与客户、站长或值班主管、同事、配件供货商与配送人员协作；66% 认为与外部客户或公众打交道极其重要，36%每月一次以上但非每周遇到不友好者，37%同频率遇冲突。\n竞争与压力｜54% 认为错误的后果极其严重，37% 认为竞争程度很高，35% 对他人的工作结果承担很高责任，37% 对他人的健康与安全承担高责任。\n合规与安全｜77% 每天穿戴常规防护用品，85% 每天接触污染物，80% 每天接触危险设备，54% 每天面临轻微烧伤、割伤或叮咬风险；燃料与油液操作须符合适用的危险化学品与消防安全要求。\n记录与复盘｜服务单、日报表与库存记录是官方任务之一；76% 每天需要作出决定，56% 认为决定对同事或公司结果非常重要，60% 拥有很大的决定自由；票据与库存需要可核对。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能包含积极倾听、口头表达与批判性思维，可迁移技能包含操作与控制、服务导向、时间管理、设备维护与维修；知识以客户与个人服务、机械、销售与营销为主。\n准入与授权｜中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。\n准备时核对拟任岗位的班次、交接、现场设备和培训。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.profile.work-context-block.1",
@@ -23330,7 +23328,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国工资分布：O*NET 展示的 2025 年 BLS 职业就业与工资统计（OEWS）按 53-6031.00 本职业口径给出年薪第 10 分位 28,630 美元、第 25 分位 31,300 美元、中位数 35,670 美元、第 75 分位 39,320 美元、第 90 分位 46,060 美元；时薪第 10 分位 13.76 美元、第 25 分位 15.05 美元、中位数 17.15 美元、第 75 分位 18.90 美元、第 90 分位 22.14 美元。中位数不等于入门工资，也不构成收入承诺；公布时薪不证明所有岗位按小时支付，真实班次和补贴须看合同。 OEWS工资薪酬员工统计不含自雇、非公司制企业的所有者及合伙人与无酬家庭劳动者；公司有薪员工不因家庭经营全部排除。基本工资、佣金生产奖金等激励工资和小费计入，加班溢价、轮班差额和非生产性奖金等排除；不能把所有夜班工资、按单者或小费全部排除。本轮未读个人合同工时或净收入。"
+              "美国工资分布：O*NET 展示的 2025 年 BLS 职业就业与工资统计（OEWS）按 53-6031.00 本职业口径给出年薪第 10 分位 28,630 美元、第 25 分位 31,300 美元、中位数 35,670 美元、第 75 分位 39,320 美元、第 90 分位 46,060 美元；时薪第 10 分位 13.76 美元、第 25 分位 15.05 美元、中位数 17.15 美元、第 75 分位 18.90 美元、第 90 分位 22.14 美元。中位数不等于入门工资，也不构成收入承诺；公布时薪不证明所有岗位按小时支付，真实班次和补贴须看合同。 OEWS工资薪酬员工统计不含自雇、非公司制企业的所有者及合伙人与无酬家庭劳动者；公司有薪员工不因家庭经营全部排除。基本工资、佣金生产奖金等激励工资和小费计入，加班溢价、轮班差额和非生产性奖金等排除；不能把所有夜班工资、按单者或小费全部排除。本页不提供个人合同工时或净收入。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.profile.onet-structured-fields-block.2",
@@ -23419,7 +23417,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "当前O*NET宽行业为零售贸易56%、其他服务业（公共管理除外）35%、其他9%，不是中国分布或行业内本职业工资。 2025美国本职业关联唯一招聘热门技术6项：Safari、Edge、Firefox各33%且标In Demand，Excel/Outlook各低于1%，Windows比例Not available；该清单3项In Demand，不是所有在岗人员采用率或每岗门槛。更宽Software Skills示例与这6项招聘清单分开。"
+              "O*NET 的美国行业分布为零售贸易 56%、其他服务（公共管理除外）35%。这些不是中国行业分布或行业内职业工资。 O*NET 的美国职业资料把浏览器和办公软件列为技术示例；面试时可问实际用哪套收银或登记系统、如何培训。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.profile.onet-structured-fields-block.5",
@@ -23646,7 +23644,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 53-6031.00 列为 Job Zone 1–2（SVP 低于 6.0），通常需要高中文凭或同等学历（部分岗位要求更低），在职培训从数天到一年；页面公布的学历构成中59% 为要求高中文凭或同等学历、23% 为要求高中后证书、16% 为要求低于高中文凭；O*NET 另列出 2 项国家认证与培训项目入口。中国大陆侧以加油站与码头服务、汽车运用与维修、交通运营服务等岗位培养为主，具体要求由用人单位规定。"
+              "美国 BLS 将本职业的典型入门列为无需正式学历或相关经验、短期在岗培训。O*NET 的新聘学历调查是另一种口径：59% 回答高中或同等学历、23% 回答高中后证书、16% 回答低于高中。大陆的岗位要求因雇主和任务而异；可从本页两份陆站招聘公告着手核对。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.profile.career-quick-answers-block.19",
@@ -23749,7 +23747,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧 O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0），通常需要高中文凭或同等学历并提供数天到一年的在职培训；中国大陆以加油站与码头服务、汽车运用与维修、交通运营服务等岗位培养为主，具体要求由用人单位规定。"
+              "美国先区分 BLS 典型条件与实际雇主要求；中国大陆先问拟任任务、所需培训与相应人员条件。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.profile.career-quick-answers-block.26",
@@ -23778,13 +23776,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧汽油、柴油等属危险化学品，经营汽油、柴油的单位须按《危险化学品安全管理条例》（国务院令第 591 号公布、2013 年修订）取得危险化学品经营许可证，从业人员应当接受安全教育与岗位技术培训、考核合格后上岗，对有资格要求的岗位配备依法取得相应资格的人员；美国侧由雇主规程与岗位授权决定。入职前核对岗前培训、作业许可与复核流程，不能从学历或认证直接推断。"
+              "《危险化学品安全法》第 5 条要求适用单位教育培训、人员考核合格后上岗，对有资格要求的岗位配备相应持证人员。AQ 3010—2022 第 1 节明确不适用于水上加油站。水上燃料供应要核适用水域、设施和单位安排，不能直接套用陆站标准。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "health",
+            "fs-aq",
+            "fs-water"
           ],
           "type": "prose"
         },
@@ -23807,13 +23806,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "燃料与油液操作须符合适用的危险化学品与消防安全要求（中国大陆侧参见《危险化学品安全管理条例》关于经营许可、从业人员培训与储存管理的规定）；油枪、空压机与举升类设备须按说明书与机构规程使用，溢漏按应急处置流程处理。本页不构成现场作业指令。"
+              "工作对象、设施和任务不同，按适用单位程序核风险与授权。异常按类别和权限记录、报告或升级。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.profile.career-quick-answers-block.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "health",
+            "fs-aq",
+            "fs-water"
           ],
           "type": "prose"
         },
@@ -23867,7 +23867,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "设备与系统更新较快（O*NET 列出 7 项软件技能，其中 6 项被标为热门技术，浏览器类以约 33% 出现在招聘要求中），需要持续的继续培训与同伴复核；入职前确认培训安排、溢漏与应急演练频率，以及技能更新的支持方式。"
+              "O*NET 的美国职业资料把浏览器和办公软件列为技术示例；面试时可问实际用哪套收银或登记系统、如何培训。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.profile.career-quick-answers-block.34",
@@ -24511,7 +24511,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑准备例：用虚构规格和服务信息核记录，具体课程看目标项目，练习不授独立设备操作或溢漏处置权；中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。"
+              "准备时：用虚构规格和服务信息核记录，具体课程看目标项目，练习不授独立设备操作或溢漏处置权；中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.11",
@@ -24541,7 +24541,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试验候选：在获准资料上比较台账、价格规格检索、收银日报整理的错漏和复核耗时，效果未测；实际规格确认、资金处理和处置按岗位分工，不一概本人独占。"
+              "可比较的用途：在获准资料上比较台账、价格规格检索、收银日报整理的错漏和复核耗时，效果未测；实际规格确认、资金处理和处置按岗位分工，不一概本人独占。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.13",
@@ -24573,7 +24573,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑核具体工具、客户交易资料权限、实际复核人和使用条件；中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。"
+              "核对具体工具、客户交易资料权限、实际复核人和使用条件；中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.15",
@@ -24621,15 +24621,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未得本职业生成AI采用、生产率、替代及就业因果测量，台账检索和日报是编辑候选。ILO介绍扩展摘要、NIST简介仅背景，未完整指数或职业映射，不据缺口断现场责任永不替代。美国53-6031本职业2025就业102,400人、2035预测106,300人，2025—2035增长3.8%（O*NET约4%，平均水平）、净增3,900、年均约12,900空缺。空缺包括增长和替补，不是净增、个人获聘率或中国就业；EP自雇栏为不可得，不能当0。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "软件可核交易字段、收据和交接记录，设备状态与异常仍按岗位权限和单位程序处理。没有可核的本职业 AI 替代率。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "bls",
-            "ilo",
-            "genai-nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24710,7 +24707,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "custom是字段选择入口，本轮未输出完整报告，不当全文或个人阈值。"
+              "custom是字段选择入口，本页不提供完整报告，不当全文或个人阈值。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.24",
@@ -24837,7 +24834,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "三组为编辑试验方向，未测自动化影响差异或效果。"
+              "三组为可比较的用途，未测自动化影响差异或效果。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.33",
@@ -24854,7 +24851,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试台账、规格价格检索、收银日报，测错漏和复核耗时，未测效果。"
+              "试着用台账、规格价格检索、收银日报，测错漏和复核耗时，未测效果。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.34",
@@ -24886,7 +24883,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试获准设备数据整理和异常提示，核漏报误报；未证明所有油枪空压机均可自动采集或安全回滚。"
+              "试着用获准设备数据整理和异常提示，核漏报误报；未证明所有油枪空压机均可自动采集或安全回滚。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.36",
@@ -24918,7 +24915,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑试服务单、日报及库存整理，核缺项和版本，未证明全自动完整交付。"
+              "试着用服务单、日报及库存整理，核缺项和版本，未证明全自动完整交付。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.38",
@@ -25119,7 +25116,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025美国本职业关联唯一招聘热门技术6项：Safari、Edge、Firefox各33%且标In Demand，Excel/Outlook各低于1%，Windows比例Not available；该清单3项In Demand，不是所有在岗人员采用率或每岗门槛。更宽Software Skills示例与这6项招聘清单分开。"
+              "O*NET 的美国职业资料把浏览器和办公软件列为技术示例；面试时可问实际用哪套收银或登记系统、如何培训。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.52",
@@ -25233,7 +25230,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "当前O*NET宽行业为零售贸易56%、其他服务业（公共管理除外）35%、其他9%，不是中国分布或行业内本职业工资。"
+              "当前O*NET宽行业为零售贸易56%、其他服务业（公共管理除外）35%，不是中国分布或行业内本职业工资。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.60",
@@ -25247,7 +25244,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "台账、规格价格检索、日报及到期提醒是编辑候选，试错漏、权限和復核，不预设均可回滚；现场操作按真实规程和人员条件。"
+              "台账、规格价格检索、日报及到期提醒是可考虑的用途，试错漏、权限和復核，不预设均可回滚；现场操作按真实规程和人员条件。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.61",
@@ -25264,7 +25261,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未得职业采用率或站点部署进度；核具体设备、工具、资料权限及复核。"
+              "证据不足：本页不提供职业采用率或站点部署进度；核具体设备、工具、资料权限及复核。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.62",
@@ -25296,7 +25293,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未得整体替代测量，不据缺口断全部责任永不替代；实际分工与工具效果另核。"
+              "本页不提供整体替代测量，不据缺口断全部责任永不替代；实际分工与工具效果另核。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.64",
@@ -25328,7 +25325,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET描述服务、设备与收银等任务，本轮未读招聘，不断所有入门不用编程；真实系统脚本要求另核。"
+              "问用人单位拟任岗位是否需要表格公式、系统配置或脚本，分别由谁负责。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.66",
@@ -25358,7 +25355,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "台账、价格型号查询、日报与提醒是编辑候选，未证明均可回滚或已采用。"
+              "台账、价格型号查询、日报与提醒是可考虑的用途，未证明均可回滚或已采用。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.68",
@@ -25511,7 +25508,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五步是编辑核对问题，未验证部署标准或全套现场程序。"
+              "五步是核对对问题，未验证部署标准或全套现场程序。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.78",
@@ -25526,7 +25523,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑核任务、实际品种目录与人员条件；中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。"
+              "核对任务、实际品种目录与人员条件；中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.79",
@@ -25575,7 +25572,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑核实际服务、票据、库存及异常字段，完整性未测；留痕不授作业权。"
+              "核对实际服务、票据、库存及异常字段，完整性未测；留痕不授作业权。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.82",
@@ -25590,7 +25587,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。本轮未取得完整站点恢复程序。"
+              "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。复工条件和权限以站点程序为准。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.83",
@@ -25636,7 +25633,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "客户交易资料外发可能涉及权限或隐私，须核真实授权及适用规则；本轮未完整数据分类和隐私实施规则。"
+              "客户交易资料外发可能涉及权限或隐私，须核真实授权及适用规则；本页不提供数据分类和隐私实施规则。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.86",
@@ -25710,7 +25707,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按实际设备说明、规范及应急预案核异常处理和恢复；本轮未得完整程序，本页不授复工批准。该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。本轮未取得完整站点恢复程序。"
+              "按实际设备说明、规范及应急预案核异常处理和恢复；本页不提供完整程序，本页不授复工批准。该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。复工条件和权限以站点程序为准。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.91",
@@ -25725,7 +25722,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑核具体资料权、任务人员及真实范围，留痕不代法定资格。"
+              "核对具体资料权、任务人员及真实范围，留痕不代法定资格。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.92",
@@ -25740,7 +25737,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按适用制度留真实记录并处理隐患，未核完整事故报告和恢复程序。"
+              "查阅站点的应急预案、报告责任和复工权限，按适用程序保留原始记录。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.93",
@@ -25797,7 +25794,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "规格检索为编辑候选，须测错漏；现场确认依真实分工，不把输出当自动确认。"
+              "规格检索为可考虑的用途，须测错漏；现场确认依真实分工，不把输出当自动确认。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.97",
@@ -25856,7 +25853,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "流量状态整理和提示是编辑候选，处置按真实人员资格分工，效果未测。"
+              "流量状态整理和提示是可考虑的用途，处置按真实人员资格分工，效果未测。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.101",
@@ -25915,7 +25912,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "备件型号检索为编辑候选，更换及交付按真实分工，不一概本人独占；效果未测。"
+              "备件型号检索为可考虑的用途，更换及交付按真实分工，不一概本人独占；效果未测。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.105",
@@ -25972,7 +25969,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数字收银整理为编辑候选，实际完整性、核账与资金责任按制度核，效果未测。"
+              "数字收银整理为可考虑的用途，实际完整性、核账与资金责任按制度核，效果未测。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.109",
@@ -26001,7 +25998,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "危化应急和废物按适用规则、实际预案及人员职责；该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。本轮未取得完整站点恢复程序。 废弃物生态环境规则未完整读取。"
+              "危化应急和废物按适用规则、实际预案及人员职责；该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。复工条件和权限以站点程序为准。 废弃物按站点分类、移交程序和适用环境规定处理。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.111",
@@ -26031,7 +26028,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监测报警为编辑候选，处置责任按实际法域人员分工，未测效能。"
+              "监测报警为可考虑的用途，处置责任按实际法域人员分工，未测效能。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.113",
@@ -26088,7 +26085,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "库存排程为编辑候选，现场核对按实际分工，未测效果或本人独占。"
+              "库存排程为可考虑的用途，现场核对按实际分工，未测效果或本人独占。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.117",
@@ -26144,7 +26141,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数字沟通为编辑候选，测错漏权限和人工复核，未证明全自动完整正确。"
+              "数字沟通为可考虑的用途，测错漏权限和人工复核，未证明全自动完整正确。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.ai-impact.ai-impact-table.121",
@@ -26182,12 +26179,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未取得与汽车与船艇服务员精确对应的中国大陆全国职业收入分布。"
+              "没有本职业大陆全国工资分布；两份陆站公告限当地岗位。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "fs-chengjiang",
+            "fs-mile"
           ],
           "type": "prose"
         },
@@ -26196,12 +26194,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至2026-10-09，本轮未得中国精确职业收入分布；NBS行业及岗位大类仅宽参考，不据其推职业月薪。"
+              "中国石化玉溪澄江石油分公司 2026 年 5 月招加油员 3 名，5 月 29 日截止；年薪 4.0 万–5.5 万元，含五险和住房公积金。转正后按绩效考核计薪，金额限这份历史公告。 弥勒市政府公布的历史招聘汇编中，中海油弥勒双桥鸿伟站列加油员 2 名、初中及以上、3,000–5,000 元/月，并另列福利。它与澄江的年薪和待遇口径不同。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "fs-chengjiang",
+            "fs-mile"
           ],
           "type": "prose"
         },
@@ -26280,7 +26279,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位大类按2022大典五类汇总，不分精确职业。NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本轮未得中国精确职业工资就业。"
+              "岗位大类按2022大典五类汇总，不分精确职业。NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本页不提供中国精确职业工资就业。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.china-salary.career-snapshot-primary-locale.14",
@@ -26295,7 +26294,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS对象城镇5人以上法人单位，不含个体户自由职业；本轮未得中国职业个体经营占比，不能说相当比例或由美国推中国。"
+              "NBS对象城镇5人以上法人单位，不含个体户自由职业；本页不提供中国职业个体经营占比，不能说相当比例或由美国推中国。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.china-salary.career-snapshot-primary-locale.15",
@@ -26309,7 +26308,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本轮未得中国精确职业工资就业。 未读招聘薪酬合同，不断各类站点主要月薪、提成或小费模式。"
+              "NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本页不提供中国精确职业工资就业。 计酬方式以实际合同为准。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.china-salary.career-snapshot-primary-locale.16",
@@ -26380,7 +26379,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未得中国精确职业收入，行业参考与缺口分开。"
+              "证据不足：本页不提供中国精确职业收入，行业参考与缺口分开。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.china-salary.career-snapshot-primary-locale.21",
@@ -26408,7 +26407,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "台账和检索是编辑AI候选，采用和工资影响未测；统计覆盖和期间按NBS说明分别核。"
+              "台账和检索是可考虑的用途，采用和工资影响未测；统计覆盖和期间按NBS说明分别核。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.china-salary.career-snapshot-primary-locale.23",
@@ -26602,7 +26601,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 储存按实际品种条件及对应国家行业规范，本轮未读全部消防设备、水上与废弃物实施规则。"
+              "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 储存按实际品种条件及对应国家行业规范，本页不提供全部消防设备、水上与废弃物实施规则。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.china-salary.career-snapshot-primary-locale.36",
@@ -26865,7 +26864,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未得其他城市精确职业月薪，不能据检索缺口断所有官方或可核资料均不存在。"
+              "证据不足：本页不提供其他城市精确职业月薪，不能据检索缺口断所有官方或可核资料均不存在。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.china-salary.career-snapshot-primary-locale.54",
@@ -27029,7 +27028,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025本职业中位35,670美元/年、17.15美元/小时，非入门承诺。OEWS工资薪酬员工统计不含自雇、非公司制企业的所有者及合伙人与无酬家庭劳动者；公司有薪员工不因家庭经营全部排除。基本工资、佣金生产奖金等激励工资和小费计入，加班溢价、轮班差额和非生产性奖金等排除；不能把所有夜班工资、按单者或小费全部排除。本轮未读个人合同工时或净收入。"
+              "2025本职业中位35,670美元/年、17.15美元/小时，非入门承诺。OEWS工资薪酬员工统计不含自雇、非公司制企业的所有者及合伙人与无酬家庭劳动者；公司有薪员工不因家庭经营全部排除。基本工资、佣金生产奖金等激励工资和小费计入，加班溢价、轮班差额和非生产性奖金等排除；不能把所有夜班工资、按单者或小费全部排除。本页不提供个人合同工时或净收入。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.14",
@@ -27086,7 +27085,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第90分位46,060美元/年、22.14美元/小时，不是普遍收入；本轮未得资历、管理或场所导致高薪的职业测量。"
+              "第90分位46,060美元/年、22.14美元/小时，不是普遍收入；本页不提供资历、管理或场所导致高薪的职业测量。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.18",
@@ -27227,7 +27226,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "编辑核实际用人单位计酬合同，本轮未读站点类型工资差异测量或真实合同。"
+              "核对实际用人单位计酬合同，本页不提供站点类型工资差异测量或真实合同。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.27",
@@ -27255,7 +27254,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "编辑核真实职责资历和管理要求对应薪酬，未得其导致高薪的职业测量。"
+              "核对真实职责资历和管理要求对应薪酬，未得其导致高薪的职业测量。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.29",
@@ -27283,7 +27282,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "编辑核排班、轮班差额及加班制度，本轮未读职业合同工时或净效应。"
+              "核对排班、轮班差额及加班制度，本页不提供职业合同工时或净效应。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.31",
@@ -27342,7 +27341,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未得零售行业内本职业工资中位数，不能说BLS从未公布；当前Profile访问未取得统计表。"
+              "证据不足：本页不提供零售行业内本职业工资中位数，不能说BLS从未公布；本表使用全国职业统计。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.35",
@@ -27357,7 +27356,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前O*NET宽行业为零售贸易56%、其他服务业（公共管理除外）35%、其他9%，不是中国分布或行业内本职业工资。"
+              "当前O*NET宽行业为零售贸易56%、其他服务业（公共管理除外）35%，不是中国分布或行业内本职业工资。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.36",
@@ -27385,7 +27384,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未得其他服务行业内本职业工资中位数，不能据入口失败断官方无数据。"
+              "证据不足：本页不提供其他服务行业内本职业工资中位数，查询时核对行业和年份。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.38",
@@ -27400,7 +27399,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前O*NET宽行业为零售贸易56%、其他服务业（公共管理除外）35%、其他9%，不是中国分布或行业内本职业工资。"
+              "当前O*NET宽行业为零售贸易56%、其他服务业（公共管理除外）35%，不是中国分布或行业内本职业工资。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.39",
@@ -27414,7 +27413,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "编辑待核方向：码头与游艇服务机构"
+              "可进一步了解：码头与游艇服务机构"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.40",
@@ -27428,7 +27427,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未得码头游艇雇主类型本职业工资中位数，不以交通行业均值冒充。"
+              "证据不足：本页不提供码头游艇雇主类型本职业工资中位数，不以交通行业均值冒充。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.41",
@@ -27443,7 +27442,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前O*NET宽行业为零售贸易56%、其他服务业（公共管理除外）35%、其他9%，不是中国分布或行业内本职业工资。 行业份额不是行业工资。"
+              "当前O*NET宽行业为零售贸易56%、其他服务业（公共管理除外）35%，不是中国分布或行业内本职业工资。 行业份额不是行业工资。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.42",
@@ -27471,7 +27470,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未得自雇净收入或具体按单合同，不年化服务总收款为个人收入。"
+              "证据不足：本页不提供自雇净收入或具体按单合同，不年化服务总收款为个人收入。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.44",
@@ -27486,7 +27485,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS工资薪酬员工统计不含自雇、非公司制企业的所有者及合伙人与无酬家庭劳动者；公司有薪员工不因家庭经营全部排除。基本工资、佣金生产奖金等激励工资和小费计入，加班溢价、轮班差额和非生产性奖金等排除；不能把所有夜班工资、按单者或小费全部排除。本轮未读个人合同工时或净收入。"
+              "OEWS工资薪酬员工统计不含自雇、非公司制企业的所有者及合伙人与无酬家庭劳动者；公司有薪员工不因家庭经营全部排除。基本工资、佣金生产奖金等激励工资和小费计入，加班溢价、轮班差额和非生产性奖金等排除；不能把所有夜班工资、按单者或小费全部排除。本页不提供个人合同工时或净收入。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.45",
@@ -27531,7 +27530,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资为2025OEWS53-6031分位，预测为2025就业、2025—2035，不混旧2024版本。"
+              "工资为 2025 年 OEWS 53-6031 职业分位，预测采用 2025 年就业及 2025–2035 年预测期。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.48",
@@ -27547,7 +27546,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "编辑比较真实职责工时与计酬条款，未得具体因素导致收入的职业测量。"
+              "比较报价时逐项核对职责、工时、轮班差额和计酬条款。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.us-salary.career-snapshot-secondary-locale.49",
@@ -27638,7 +27637,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27650,19 +27649,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "公交卡车机械师与柴油发动机专员",
@@ -27825,7 +27824,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑核按规格记录、压力下如实沟通及变化中求证行为；本轮未得大五维度与本职业表现的相关测量。"
+              "核对按规格记录、压力下如实沟通及变化中求证行为；本页不提供大五维度与本职业表现的相关测量。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.6",
@@ -27840,7 +27839,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未得本职业人格预测效度或相对于实操强弱比较。"
+              "证据不足：本页不提供本职业人格预测效度或相对于实操强弱比较。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.7",
@@ -27854,8 +27853,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "编辑自查按真实规程核记录和交班，不以尽责性分数证明能力。",
-              "编辑自查压力变化中如实沟通未决项，不据人格维度作职业因果。"
+              "自查按真实规程核记录和交班，不以尽责性分数证明能力。",
+              "自查压力变化中如实沟通未决项，不据人格维度作职业因果。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.8",
@@ -27899,7 +27898,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本页不据MBTI作录用或适配结论，本轮未得职业类型预测测量，只作自我提问。"
+              "本页不据MBTI作录用或适配结论，本页不提供职业类型预测测量，只作自我提问。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.10",
@@ -27927,7 +27926,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本轮未得本职业MBTI预测效度；所读O*NET未给类型门槛，不断全部研究结论。"
+              "本页不提供本职业MBTI预测效度；所读O*NET未给类型门槛，不断全部研究结论。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.11",
@@ -27956,8 +27955,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "编辑观察题：若把 MBTI 用作讨论与客户沟通和班组分工偏好的起点，应同时用复核反馈与实操表现来检验。 本页未核这些线索的职业预测效度或权重，不作为已验证的筛选标准。",
-              "把偏好转化为可核对的服务流程与交班说明，可作为编辑讨论材料，未核相对效用。 本页未核这些线索的职业预测效度或权重，不作为已验证的筛选标准。"
+              "可观察的行为：若把 MBTI 用作讨论与客户沟通和班组分工偏好的起点，应同时用复核反馈与实操表现来检验。 这些线索没有在此作为职业预测指标，不作为已验证的筛选标准。",
+              "把偏好转化为可核对的服务流程与交班说明，可作为讨论材料，未核相对效用。 这些线索没有在此作为职业预测指标，不作为已验证的筛选标准。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.12",
@@ -27999,7 +27998,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型仅作自我提问，本页不据其下录用适配结论，本轮未得职业预测测量。"
+              "九型仅作自我提问，本页不据其下录用适配结论，本页不提供职业预测测量。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.14",
@@ -28143,8 +28142,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "编辑核客户催促下实际规格、人员资格与程序，不凭分数授操作权。",
-              "编辑核交班字段与分工，准确性和效率须实测，不作测验强度排名。"
+              "核对客户催促下实际规格、人员资格与程序，不凭分数授操作权。",
+              "核对交班字段与分工，准确性和效率须实测，不作测验强度排名。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.24",
@@ -28173,7 +28172,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。编辑建议另核有监督下的实操记录、规格核对与收银记录质量、作业条件确认与交班记录。 本页未核这些线索的职业预测效度或权重，不作为已验证的筛选标准。"
+              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。建议另核有监督下的实操记录、规格核对与收银记录质量、作业条件确认与交班记录。 这些线索没有在此作为职业预测指标，不作为已验证的筛选标准。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.26",
@@ -28187,7 +28186,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：编辑观察题包括能按说明书与检查清单核对规格、完成加注与更换并如实记录、在客流高峰中保持收银准确，并在燃料种类、油液规格或安全条件不明时停下来升级；只靠「喜欢车和船」无法判断。 本页未核这些线索的职业预测效度或权重，不作为已验证的筛选标准。"
+              "直接回答：可观察的行为包括能按说明书与检查清单核对规格、完成加注与更换并如实记录、在客流高峰中保持收银准确，并在燃料种类、油液规格或安全条件不明时停下来升级；只靠「喜欢车和船」无法判断。 这些线索没有在此作为职业预测指标，不作为已验证的筛选标准。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.27",
@@ -28398,7 +28397,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑核航空专用设备、训练与法域资格；道路或船艇补给经历不保证全部航空任务能力或互认。"
+              "核对航空专用设备、训练与法域资格；道路或船艇补给经历不保证全部航空任务能力或互认。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.42",
@@ -28454,7 +28453,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑核按规格记录、异常按实际制度沟通及接受复核的行为，不是类型预测或本页现场程序。"
+              "核对按规格记录、异常按实际制度沟通及接受复核的行为，不是类型预测或本页现场程序。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.46",
@@ -28484,7 +28483,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内外向不授操作资格，本轮未得类型预测测量，核真实行为和人员条件。"
+              "内外向不授操作资格，本页不提供类型预测测量，核真实行为和人员条件。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.48",
@@ -28499,7 +28498,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本轮未得最适MBTI类型职业证据，本页不据类型预测，不断所有研究已证明无最佳型。"
+              "本页不提供最适MBTI类型职业证据，本页不据类型预测，不断所有研究已证明无最佳型。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.49",
@@ -28528,7 +28527,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本页不用人格兴趣分数代专业评价，本轮未核完整效度研究或强度排名，不笼统断所有工具效度。"
+              "本页不用人格兴趣分数代专业评价，本页不提供完整效度研究或强度排名，不笼统断所有工具效度。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.51",
@@ -28600,7 +28599,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑自查实际规格记录、如实报告未决项和接受复核，不保证职业适配或作业资格。"
+              "自查实际规格记录、如实报告未决项和接受复核，不保证职业适配或作业资格。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.56",
@@ -28615,7 +28614,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑核真实设备程序、现场人员条件、排班及客户协作；不把任意冲突定为停全部作业，具体紧急处置须按预案法域。"
+              "核对真实设备程序、现场人员条件、排班及客户协作；不把任意冲突定为停全部作业，具体紧急处置须按预案法域。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.fit.personality-fit-block.57",
@@ -28817,7 +28816,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "六风险为编辑可能情景，非事故排名或完整作业程序。中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。"
+              "六风险为可能情景，非事故排名或完整作业程序。中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.risk.career-risk-cards.8",
@@ -28851,7 +28850,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "实际任务及情境含85%每日污染物、80%危险设备、77%PPE、54%轻微伤害、54%错误后果极严重；本轮读2026危化法相关条，未得全部消防水上废弃物及恢复程序。"
+              "O*NET 的职业工作情境描述包含污染物、危险设备和个人防护用品。现场风险按适用的消防、水上、废弃物及应急规则核对。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.risk.career-risk-cards.10",
@@ -28898,7 +28897,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按真实品种说明、站点规程及禁火标志核操作和防护，未得全部消防实施规范。中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。本轮未取得完整站点恢复程序。"
+              "按真实品种说明、站点规程及禁火标志核操作和防护，另核站点适用的消防规定。中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。复工条件和权限以站点程序为准。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.risk.career-risk-cards.13",
@@ -29018,7 +29017,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "收款收据日报是官方任务，实际交班核账字段与资金权限按制度，本轮未得所有站点逐笔规定。"
+              "收款收据日报是官方任务，实际交班核账字段与资金权限按制度，本页不提供所有站点逐笔规定。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.risk.career-risk-cards.21",
@@ -29077,7 +29076,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按实际机构支援和夜间场地制度核，本轮未得所有单位统一禁止单独服务或统一报备规范。"
+              "按实际机构支援和夜间场地制度核，本页不提供所有单位统一禁止单独服务或统一报备规范。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.risk.career-risk-cards.25",
@@ -29137,7 +29136,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。本轮未取得完整站点恢复程序。"
+              "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。复工条件和权限以站点程序为准。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.risk.career-risk-cards.29",
@@ -29199,7 +29198,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑核真实服务、票据、库存和异常字段；留痕不授操作权或保证全部法律义务已履行。"
+              "核对真实服务、票据、库存和异常字段；留痕不授操作权或保证全部法律义务已履行。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.risk.career-risk-cards.33",
@@ -29285,7 +29284,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "链接实际危化法相关条，不是中国工资统计；未称旧条例本轮全文复核或已废止。"
+              "该法用于核对危化品作业主体和人员条件。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.risk.career-risk-cards.39",
@@ -29324,35 +29323,35 @@
               [
                 "加油站与便利店服务岗",
                 "在有监督下完成加注、检查胎压与油液、收银与出具收据，学习交班与库存流程。",
-                "编辑准备例：核实际设备、服务记录、岗前培训和人员条件。 本轮未读雇主公告。",
+                "核对设备、服务记录、岗前培训和岗位要求。可对照澄江、弥勒陆站公告。",
                 "提交一份含加注与检查记录、收银与交班说明、以及溢漏处置步骤的虚构服务方案，不使用真实客户资料。",
                 "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 核实际设备、服务记录、岗前培训和人员条件。"
               ],
               [
                 "汽车服务与快修门店服务岗",
                 "参与换机油、换滤芯、轮胎与配件更换以及收银，按检查清单核对项目并记录。",
-                "编辑准备例：核真实机械、具体小修和工具程序，不由职业名推全系统维修。 本轮未读雇主公告。",
+                "核对实际小修范围、设备和工具培训。",
                 "提交一份含检查清单、更换项目、测量与记录格式的虚构服务单。",
                 "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 核真实机械、具体小修和工具程序，不由职业名推全系统维修。"
               ],
               [
                 "码头与船艇燃料补给岗",
                 "按规程为船艇加注燃料、检查油液与安全设施并做登记，处理系泊与安全提示。",
-                "编辑准备例：核真实水上场地、设备训练和所需许可，不将港内仓储例外推燃料零售。 本轮未读雇主公告。",
+                "核对水上场地、设备训练及适用许可；两份陆站公告不代表水上岗位。",
                 "提交一份含加注与登记记录、安全提示与溢漏处置步骤的虚构方案。",
                 "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 核真实水上场地、设备训练和所需许可，不将港内仓储例外推燃料零售。"
               ],
               [
                 "停车场与车队服务岗",
                 "按清单完成车辆加油、清洁与检查登记，协助车辆调度与钥匙登记。",
-                "编辑准备例：核真实车辆、驾驶与设备权限和记录。 本轮未读雇主公告。",
+                "核对实际车辆、驾驶与设备权限及交班记录。",
                 "提交一份含车辆检查项、加油与清洁记录、钥匙与交班登记的虚构台账。",
                 "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 核真实车辆、驾驶与设备权限和记录。"
               ],
               [
                 "销售与收银岗（便利零售）",
                 "按价格与促销规则计价收款、理货与标价、维护库存与客户记录。",
-                "编辑准备例：核真实价格库存规则、资金权限和交班分工。 本轮未读雇主公告。",
+                "核对价格、库存、资金权限和交班分工。",
                 "提交一份含价格核对、收银与日报汇总、库存盘点说明的虚构台账。",
                 "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 核真实价格库存规则、资金权限和交班分工。"
               ]
@@ -29377,14 +29376,14 @@
                 "values": [
                   "O*NET Zone1–2、SVP<6；分区一般高中文凭同等学历、部分职业更低，数天至一年培训，非本职业所有雇主门槛。受访新聘学历59%高中、23%高中后证书、16%低于高中，不能当在岗学历分布。BLS EP本职业典型为无正式学历要求、无相关职业经验、短期在岗培训；口径不同。",
                   "培训认证入口未输出完整条件，不据入口推全部岗位或项目要求。",
-                  "2022职业大典PDF196页4-02-02-08油气电站操作员：在加油、加气、加氢、充电站提供动力补充及服务；三任务为设备计量采样等成品油进销存并给车（船）加油、所列气体储调计量销售并给车加气、卡发售和信息服务；含加油站操作员及车用加气站操作员。与US53-6031部分交集，不能把其小修收银清洁全部一对一映射或据分类推工资。 实际培养招生录用要求查目标项目，本轮未得全国主要培养路径。"
+                  "2022职业大典PDF196页4-02-02-08油气电站操作员：在加油、加气、加氢、充电站提供动力补充及服务；三任务为设备计量采样等成品油进销存并给车（船）加油、所列气体储调计量销售并给车加气、卡发售和信息服务；含加油站操作员及车用加气站操作员。与US53-6031部分交集，不能把其小修收银清洁全部一对一映射或据分类推工资。 实际培养招生录用要求查目标项目，本页不提供全国主要培养路径。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
                   "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 官方2022年第8号公告自2023-01-01将危化目录1674项“柴油[闭杯闪点≤60℃]”调为“柴油”；不把所有油液视为同一危化品，应核具体品种目录及安全技术说明书。",
-                  "该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。本轮未取得完整站点恢复程序。 普通监督不能代替依法必须的人员条件。",
+                  "该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。复工条件和权限以站点程序为准。 普通监督不能代替依法必须的人员条件。",
                   "客户信息与资金管理的安全要求因机构而异，须在入职前确认访问范围与合规义务。"
                 ]
               },
@@ -29400,7 +29399,7 @@
                 "id": "tools",
                 "values": [
                   "加油机与油枪、空压机与胎压表、黄油枪与喷剂润滑器材、举升与拆装工具、收银与库存系统，以及个人防护用品。",
-                  "2025美国本职业关联唯一招聘热门技术6项：Safari、Edge、Firefox各33%且标In Demand，Excel/Outlook各低于1%，Windows比例Not available；该清单3项In Demand，不是所有在岗人员采用率或每岗门槛。更宽Software Skills示例与这6项招聘清单分开。",
+                  "O*NET 的美国职业资料把浏览器和办公软件列为技术示例；面试时可问实际用哪套收银或登记系统、如何培训。",
                   "把自动检索与收银系统用于加注与服务流程前，须确认数据准确、访问权限与人工复核安排。"
                 ]
               }
@@ -29426,42 +29425,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份车辆或船艇说明书摘录与油液规格表、一份加注与检查记录模板、一份收银与交班记录模板。",
-                  "全部材料为虚构，不含真实客户资料、车牌信息或机构内部资料。",
-                  "全部材料与场景为虚构，不得使用真实客户资料、车牌信息或机构内部资料。"
+                  "材料｜虚构单位",
+                  "仅用纸面。单价固定每单位 4 个记账点；只有数量×单价等于总额且有交易凭号，才可记“齐备”；金额不符记“待核金额”，缺凭号记“待补凭证”。",
+                  "记录：A 数量 3、总额 12、凭号 R1；B 数量 4、总额 12、凭号 R2；C 数量 2、总额 8、无凭号。修订只补 C 的凭号 R3。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构服务场景写清燃料与油液规格核对、加注与检查步骤、更换项目、收银与交班记录，以及溢漏与异常的停止与上报条件。",
-                  "在 90—120 分钟内完成，允许参考公开的车辆说明书与通用流程资料，但不使用真实客户资料。",
-                  "记录中把核对结果、判断与结论分开书写，并标注需复核的部分。"
+                  "任务｜逐条核对",
+                  "用纸笔或表格核两版逐行状态和理由；保留原始金额。",
+                  "写一段交接，注明仍需谁核哪一条。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先核对场景与规格，再按检查清单逐步执行，最后写明未决事项与作业条件确认项。",
-                  "把核对结果、判断与结论分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核规格核对与服务记录，并保留修改理由。"
+                  "交卷后核对",
+                  "第六天独立交两版表与交接。",
+                  "第七天到常见问题展开「FS-45 参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成危化品、消防或现场作业指令，也不能替代机构规程与岗位授权。",
-                  "不得在练习中处理真实客户资料或操作真实加油与维修设备；涉及燃料、危化品与设备故障的事项须由有权限人员按规程处理。",
-                  "练习不替代机构规程与作业授权，也不构成任何危化品、消防或现场处置指令。"
+                  "边界",
+                  "不接触燃料、车辆、船艇、设备或真实用户资料。",
+                  "纸面记录核对不等于现场作业或收款授权。"
                 ]
               }
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "FS-45｜核对三张虚构服务收据",
           "type": "cards"
         },
         {
@@ -29480,7 +29479,7 @@
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的规格核对与服务记录，重点检查燃料与油液规格、加注量与无溢漏确认、收银与库存是否逐笔核对。",
+                  "先做独立复核；提交后可请另一人核阅。",
                   "把复核意见与修改理由一并保留，作为判断你能否接受复核的证据。"
                 ]
               },
@@ -29566,57 +29565,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与边界阅读：读 O*NET 53-6031.00 与公开的危险化学品安全资料，写清加注、检查、销售与场地维护各自的含义。",
-                  "产出：一页术语与流程对照表，标注每项的来源。"
+                  "第 1 天",
+                  "读规则并复制三行原始记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "规格核对练习：为虚构车辆与船艇建立燃料与油液规格清单，核对容量与型号。",
-                  "产出：一份规格与油液清单。"
+                  "第 2 天",
+                  "核算原表各行金额。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "加注与检查练习：为虚构场景写出加注步骤、检查项与判定标准，并记录结果。",
-                  "产出：一份加注与检查记录。"
+                  "第 3 天",
+                  "核凭号和各行证据状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "收银与交班练习：为虚构交易写计价、收款、找零与日报汇总流程，并设计交班核对表。",
-                  "产出：一份收银与交班记录模板。"
+                  "第 4 天",
+                  "按指定输入变化另写一版。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "异常处置练习：为三种虚构情形（油枪渗漏、油液规格不符、客户不满）写停止、处置与上报步骤。",
-                  "产出：一份异常处置与上报说明。"
+                  "第 5 天",
+                  "写交接，单列所缺信息。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的规格核对与服务记录，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "第 6 天",
+                  "不看参考，独立交两版表和交接。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "第 7 天",
+                  "打开常见问题「FS-45 参考解（交卷后再打开）」再核。"
                 ]
               }
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "七日体验产出",
           "type": "timeline"
@@ -29627,7 +29626,7 @@
           "data": {
             "entries": [
               "继续：你完成了七日练习并发现自己在规格核对、记录与收银纪律上可持续投入。",
-              "继续：你能接受户外全天候作业、轮班与客流高峰，并愿意先停止再上报。",
+              "继续：愿意按规则核对记录，在繁忙时也如实写交接。",
               "暂停：你只对车与船感兴趣，不愿按清单核对与如实记录。",
               "暂停：你在规格或设备状态不明时倾向先做后补，或不愿执行收银与库存核对。",
               "换方向：你更愿意做系统故障诊断与修理，可比较汽车维修技师与机械师方向。",
@@ -29668,9 +29667,9 @@
               [
                 "加油站服务与汽车运用相关专业学历",
                 "希望进入该职业的人",
-                "相关课程可作准备，未读真实招聘，不断决定多数岗位",
+                "相关课程可作准备；报名和求职时分别核对各自的要求。",
                 "具体雇主条件待核，BLS本职业典型无正式学历要求",
-                "实际课程查真实培养方案，未读全项目",
+                "向院校核对实际课程。",
                 "按学制年限完成。",
                 "学历不等于上岗资格或作业授权。"
               ],
@@ -29695,9 +29694,9 @@
               [
                 "机械润滑技师一级／认证润滑专家",
                 "希望提升润滑与维护专业方向的人",
-                "具体认证为准备方向，本轮未得效果或雇主认可测量",
+                "具体认证为准备方向，本页不提供效果或雇主认可测量",
                 "不是普遍门槛。",
-                "本轮未输出认证项目完整条件，具体证书与维护细节未复核",
+                "本页不提供认证项目完整条件，具体证书与维护细节未复核",
                 "按机构安排与证书有效期维护。",
                 "认证不等于作业许可或被所有机构认可。"
               ],
@@ -29705,8 +29704,8 @@
                 "内部值班或带班资格",
                 "希望承担交班与现场协调的人",
                 "实际带班分工和权限看单位制度，不自动授全处置权",
-                "具体单位条件未读，不断所有带班统一内证",
-                "本轮未得各单位统一年限或考核条件",
+                "向用人单位核对带班条件。",
+                "本页不提供各单位统一年限或考核条件",
                 "按机构安排完成。",
                 "真实单位职责权限另核，不断所有资格必然跨单位不可用"
               ],
@@ -29715,7 +29714,7 @@
                 "使用加油、库存与收银系统的人员",
                 "设备系统训练可作准备，不自动证明完整能力",
                 "不是普遍门槛。",
-                "查真实设备训练要求，本轮未得全厂商项目条件",
+                "查真实设备训练要求，本页不提供全厂商项目条件",
                 "按系统升级安排复训。",
                 "系统操作能力不等于资金管理或作业授权。"
               ]
@@ -29738,20 +29737,17 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界：学历、在岗培训、机构内部上岗资格（含值班或带班资格）、危险化学品经营许可与岗位授权、以及行业认证（如机械润滑技师一级、认证润滑专家）是不同状态，任何一项都不能由另一项自动推出。",
-              "O*NET Zone1–2、SVP<6；分区一般高中文凭同等学历、部分职业更低，数天至一年培训，非本职业所有雇主门槛。受访新聘学历59%高中、23%高中后证书、16%低于高中，不能当在岗学历分布。BLS EP本职业典型为无正式学历要求、无相关职业经验、短期在岗培训；口径不同。 认证项目未输出全部条件，不能当完整能力证明。",
-              "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 2022职业大典PDF196页4-02-02-08油气电站操作员：在加油、加气、加氢、充电站提供动力补充及服务；三任务为设备计量采样等成品油进销存并给车（船）加油、所列气体储调计量销售并给车加气、卡发售和信息服务；含加油站操作员及车用加气站操作员。与US53-6031部分交集，不能把其小修收银清洁全部一对一映射或据分类推工资。",
-              "操作建议：入职前把「学历／在岗培训／机构上岗资格／单位经营许可／岗位作业授权／行业认证」分列成一张表，逐项写明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。"
+              "《危险化学品安全法》第 5 条要求适用单位教育培训、人员考核合格后上岗，对有资格要求的岗位配备相应持证人员。AQ 3010—2022 第 1 节明确不适用于水上加油站。水上燃料供应要核适用水域、设施和单位安排，不能直接套用陆站标准。",
+              "陆站、水上加油站和汽车或船艇维修分别核适用制度。",
+              "经营单位的许可与个人岗位资格分别查。",
+              "纸面试做只核收据，不接触燃料或设备。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "ep-table",
-            "cn-classification-2022",
-            "cn-hazchem-law-2026",
-            "cn-diesel-directory-2022"
+            "health",
+            "fs-aq",
+            "fs-water"
           ],
           "title": "资格边界",
           "type": "notice"
@@ -29761,16 +29757,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮未读招聘公告；加油零售、汽车小修、码头车队等为编辑比较方向，不冒称已读公开样本；实际人员条件、设备程序、班次与计酬查真实公告合同。",
+              "中国石化玉溪澄江石油分公司 2026 年 5 月招加油员 3 名，5 月 29 日截止；年薪 4.0 万–5.5 万元，含五险和住房公积金。转正后按绩效考核计薪，金额限这份历史公告。 弥勒市政府公布的历史招聘汇编中，中海油弥勒双桥鸿伟站列加油员 2 名、初中及以上、3,000–5,000 元/月，并另列福利。它与澄江的年薪和待遇口径不同。",
               "核对清单：岗位属于加油站或加气站、汽车服务与快修、码头与游艇服务、停车场与车队还是便利零售；是否需要夜班与户外作业；计酬方式（固定月薪、计件或含提成）；以及是否提供岗前培训、防护用品与溢漏与消防演练。以上须写入书面条件后再比较。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "fs-chengjiang",
+            "fs-mile",
+            "health",
+            "fs-aq",
+            "fs-water"
           ],
           "title": "招聘信息核对",
           "type": "notice"
@@ -29820,7 +29817,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "以下是编辑准备和发展例，非统一晋升或课程完成即独立操作；中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。"
+              "以下是准备和发展示例，非统一晋升或课程完成即独立操作；中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.11",
@@ -29839,7 +29836,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑起步例：满足适用人员条件及真实监督程序后做获准任务，监督不豁免法定条件。"
+              "开始时：满足适用人员条件及真实监督程序后做获准任务，监督不豁免法定条件。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.12",
@@ -29868,7 +29865,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑发展例：满足真实培训考核、资格及设备程序后做获准常规任务，不凭阶段名独立全部操作。"
+              "积累经验后：满足真实培训考核、资格及设备程序后做获准常规任务，不凭阶段名独立全部操作。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.14",
@@ -29993,7 +29990,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "2022职业大典PDF196页4-02-02-08油气电站操作员：在加油、加气、加氢、充电站提供动力补充及服务；三任务为设备计量采样等成品油进销存并给车（船）加油、所列气体储调计量销售并给车加气、卡发售和信息服务；含加油站操作员及车用加气站操作员。与US53-6031部分交集，不能把其小修收银清洁全部一对一映射或据分类推工资。 中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。本轮未取得完整站点恢复程序。"
+              "2022职业大典PDF196页4-02-02-08油气电站操作员：在加油、加气、加氢、充电站提供动力补充及服务；三任务为设备计量采样等成品油进销存并给车（船）加油、所列气体储调计量销售并给车加气、卡发售和信息服务；含加油站操作员及车用加气站操作员。与US53-6031部分交集，不能把其小修收银清洁全部一对一映射或据分类推工资。 中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。复工条件和权限以站点程序为准。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.22",
@@ -30012,7 +30009,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "监督准备、获准常规任务、带教及相邻方向是编辑例，不是自动晋升。中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。"
+              "监督准备、获准常规任务、带教及相邻方向是示例，不是自动晋升。中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.23",
@@ -30102,7 +30099,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑起步例：在真实人员条件与监督规程内做获准加注检查收银；监督不代法定资格。"
+              "开始时：在真实人员条件与监督规程内做获准加注检查收银；监督不代法定资格。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.29",
@@ -30184,7 +30181,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑发展例：在真实资格、程序和岗位范围内做获准班次，不凭训练完成独立全部操作。"
+              "积累经验后：在真实资格、程序和岗位范围内做获准班次，不凭训练完成独立全部操作。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.34",
@@ -30262,7 +30259,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑带教例：具备真实条件及职责后参与带教规程，溢漏与应急按实际预案、人员分工。"
+              "参与带教前：具备真实条件及职责后参与带教规程，溢漏与应急按实际预案、人员分工。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.39",
@@ -30413,7 +30410,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑起步例：满足真实人员条件、工具程序和监督要求后做获准小修，不由监督授全系统维修。"
+              "开始时：满足真实人员条件、工具程序和监督要求后做获准小修，不由监督授全系统维修。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.49",
@@ -30495,7 +30492,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑发展例：按实际训练资格、设备规范和工单范围做获准保养，非课程即独立全部维修。"
+              "积累经验后：按实际训练资格、设备规范和工单范围做获准保养，非课程即独立全部维修。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.54",
@@ -30719,7 +30716,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑起步例：按真实水上场地条件、人员和监督程序做获准任务，不由监督或港区位置豁免全部许可。"
+              "开始时：按真实水上场地条件、人员和监督程序做获准任务，不由监督或港区位置豁免全部许可。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.69",
@@ -30801,7 +30798,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑发展例：满足真实水上设备、人员和场地程序后承担获准班次，具体系泊职责另核。"
+              "积累经验后：满足真实水上设备、人员和场地程序后承担获准班次，具体系泊职责另核。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.74",
@@ -30879,7 +30876,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑带教例：具备真实条件后参与训练与登记规程，溢漏突发按适用预案职责。该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。本轮未取得完整站点恢复程序。"
+              "参与带教前：具备真实条件后参与训练与登记规程，溢漏突发按适用预案职责。该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。复工条件和权限以站点程序为准。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.path.career-path-block.79",
@@ -31123,7 +31120,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国53-6031本职业2025就业102,400人、2035预测106,300人，2025—2035增长3.8%（O*NET约4%，平均水平）、净增3,900、年均约12,900空缺。空缺包括增长和替补，不是净增、个人获聘率或中国就业；EP自雇栏为不可得，不能当0。 NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本轮未得中国精确职业工资就业。"
+              "美国53-6031本职业2025就业102,400人、2035预测106,300人，2025—2035增长3.8%（O*NET约4%，平均水平）、净增3,900、年均约12,900空缺。空缺包括增长和替补，不是净增、个人获聘率或中国就业；EP自雇栏为不可得，不能当0。 NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本页不提供中国精确职业工资就业。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.8",
@@ -31379,7 +31376,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本轮未得中国精确职业工资就业。"
+              "NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本页不提供中国精确职业工资就业。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.26",
@@ -31493,7 +31490,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑核差距：汽车诊断、调整、维修和大修，核真实系统训练；服务经验不保证完整目标能力、资格或互认。"
+              "核对任务差距：汽车诊断、调整、维修和大修，核真实系统训练；服务经验不保证完整目标能力、资格或互认。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.34",
@@ -31521,7 +31518,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑比较：汽车诊断、调整、维修和大修，核真实系统训练。未测统一转岗距离、风险强度或成功率。"
+              "比较任务：汽车诊断、调整、维修和大修，核真实系统训练。未测统一转岗距离、风险强度或成功率。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.36",
@@ -31535,7 +31532,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑核差距：公交卡车及其他柴油发动机诊断维修，含汽车和船用柴油机，不统一强度排名；服务经验不保证完整目标能力、资格或互认。"
+              "核对任务差距：公交卡车及其他柴油发动机诊断维修，含汽车和船用柴油机，不统一强度排名；服务经验不保证完整目标能力、资格或互认。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.37",
@@ -31563,7 +31560,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑比较：公交卡车及其他柴油发动机诊断维修，含汽车和船用柴油机，不统一强度排名。未测统一转岗距离、风险强度或成功率。"
+              "比较任务：公交卡车及其他柴油发动机诊断维修，含汽车和船用柴油机，不统一强度排名。未测统一转岗距离、风险强度或成功率。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.39",
@@ -31577,7 +31574,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑核差距：轮胎修理和更换，本职业亦可能修补更换，核实际设备工艺差距；服务经验不保证完整目标能力、资格或互认。"
+              "核对任务差距：轮胎修理和更换，本职业亦可能修补更换，核实际设备工艺差距；服务经验不保证完整目标能力、资格或互认。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.40",
@@ -31605,7 +31602,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑比较：轮胎修理和更换，本职业亦可能修补更换，核实际设备工艺差距。未测统一转岗距离、风险强度或成功率。"
+              "比较任务：轮胎修理和更换，本职业亦可能修补更换，核实际设备工艺差距。未测统一转岗距离、风险强度或成功率。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.42",
@@ -31619,7 +31616,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑核差距：用水、清洗剂和刷布软管等清洁车、机器及设备，核具体工艺安全；服务经验不保证完整目标能力、资格或互认。"
+              "核对任务差距：用水、清洗剂和刷布软管等清洁车、机器及设备，核具体工艺安全；服务经验不保证完整目标能力、资格或互认。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.43",
@@ -31647,7 +31644,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑比较：用水、清洗剂和刷布软管等清洁车、机器及设备，核具体工艺安全。未测统一转岗距离、风险强度或成功率。"
+              "比较任务：用水、清洗剂和刷布软管等清洁车、机器及设备，核具体工艺安全。未测统一转岗距离、风险强度或成功率。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.45",
@@ -31661,7 +31658,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑核差距：航空器补燃料，可除冰补水冷却剂、排污、空气氧气系统服务及外部清洁，非普通车船经验自动涵盖；服务经验不保证完整目标能力、资格或互认。"
+              "核对任务差距：航空器补燃料，可除冰补水冷却剂、排污、空气氧气系统服务及外部清洁，非普通车船经验自动涵盖；服务经验不保证完整目标能力、资格或互认。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.46",
@@ -31689,7 +31686,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑比较：航空器补燃料，可除冰补水冷却剂、排污、空气氧气系统服务及外部清洁，非普通车船经验自动涵盖。未测统一转岗距离、风险强度或成功率。"
+              "比较任务：航空器补燃料，可除冰补水冷却剂、排污、空气氧气系统服务及外部清洁，非普通车船经验自动涵盖。未测统一转岗距离、风险强度或成功率。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.48",
@@ -31703,7 +31700,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑核差距：电气或燃气家电修理调整安装，如冰箱洗衣机烘干机炉具，核具体电路和设备；服务经验不保证完整目标能力、资格或互认。"
+              "核对任务差距：电气或燃气家电修理调整安装，如冰箱洗衣机烘干机炉具，核具体电路和设备；服务经验不保证完整目标能力、资格或互认。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.49",
@@ -31731,7 +31728,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑比较：电气或燃气家电修理调整安装，如冰箱洗衣机烘干机炉具，核具体电路和设备。未测统一转岗距离、风险强度或成功率。"
+              "比较任务：电气或燃气家电修理调整安装，如冰箱洗衣机烘干机炉具，核具体电路和设备。未测统一转岗距离、风险强度或成功率。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.51",
@@ -31745,7 +31742,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑核差距：动力固定便携泵及歧管输送气油液体泥浆或粉料，不只燃料加注，核实际设备规程；服务经验不保证完整目标能力、资格或互认。"
+              "核对任务差距：动力固定便携泵及歧管输送气油液体泥浆或粉料，不只燃料加注，核实际设备规程；服务经验不保证完整目标能力、资格或互认。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.52",
@@ -31773,7 +31770,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑比较：动力固定便携泵及歧管输送气油液体泥浆或粉料，不只燃料加注，核实际设备规程。未测统一转岗距离、风险强度或成功率。"
+              "比较任务：动力固定便携泵及歧管输送气油液体泥浆或粉料，不只燃料加注，核实际设备规程。未测统一转岗距离、风险强度或成功率。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.54",
@@ -31787,7 +31784,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑核差距：电机、接线或开关修理维护安装，核目标电气任务及人员条件；服务经验不保证完整目标能力、资格或互认。"
+              "核对任务差距：电机、接线或开关修理维护安装，核目标电气任务及人员条件；服务经验不保证完整目标能力、资格或互认。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.55",
@@ -31815,7 +31812,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑比较：电机、接线或开关修理维护安装，核目标电气任务及人员条件。未测统一转岗距离、风险强度或成功率。"
+              "比较任务：电机、接线或开关修理维护安装，核目标电气任务及人员条件。未测统一转岗距离、风险强度或成功率。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.market-signals.market-signal-card.57",
@@ -31838,40 +31835,63 @@
           "data": {
             "entries": [
               {
-                "answer": "核心是三类任务：为汽车、客车、卡车、船艇等加注汽油或柴油，检查轮胎气压与燃油、机油、变速箱油、冷却液、电瓶等液位并按需补充，完成换机油、换滤芯、调整刹车等小修；销售并安装电瓶、雨刷片、风扇皮带与灯泡等配件，收取现金或刷卡、找零并出具收据，汇总每日销售报表；清洁停车区、办公区与设备并清运垃圾，订购进货与标价上架，维护客户记录并定期提醒到期服务。美国侧对应 O*NET 53-6031.00，官方职责为为车辆加注燃料、润滑油与配件并收取费用，可润滑车辆、更换机油、补充防冻液或更换配件，也可能修理或更换轮胎。",
+                "answer": "汽车与船艇服务员按岗位分工提供燃油、补给、简单检查或收款。公路加油站、船舶燃料供应、汽车维修和船艇维修适用的设备、规则与授权不同。",
                 "id": "automotive-and-watercraft-service-attendants.faq.1",
                 "question": "汽车与船艇服务员每天做什么？",
-                "question_key": "career.faq.automotive-and-watercraft-service-attendants.1"
+                "question_key": "career.faq.automotive-and-watercraft-service-attendants.1",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "主要是燃料与危险化学品危险、车辆与船艇损伤风险、现金与单据差错、客户冲突与人身安全、越权作业与作业许可不明，以及记录缺失与责任不清。控制方式是按规程操作油枪与加注设备、穿戴防护用品、溢漏按应急处置流程处理、逐笔核对现金与单据，并保留服务与记录。本页不提供现场作业指令。",
+                "answer": "陆上和水上分别核设施、车辆或船艇、交易交接和人员培训。按适用程序与权限处置异常，不自行更改设备或交易。",
                 "id": "automotive-and-watercraft-service-attendants.faq.2",
                 "question": "这份工作最需要提前注意什么风险？",
-                "question_key": "career.faq.automotive-and-watercraft-service-attendants.2"
+                "question_key": "career.faq.automotive-and-watercraft-service-attendants.2",
+                "source_refs": [
+                  "health",
+                  "fs-aq",
+                  "fs-water"
+                ]
               },
               {
-                "answer": "更有解释力的信号是：能按说明书与检查清单核对规格、完成加注与更换并如实记录、在客流高峰中保持收银与记录准确，并在燃料种类、油液规格或安全条件不明时停下来升级；只靠「喜欢车和船」无法判断。霍兰德兴趣代码为 RC（现实型 + 常规型），兴趣一致只说明方向接近。",
+                "answer": "先试做收据核对，观察能否如实标出差异、找出缺凭证记录并交接。再核真实岗位的排班和训练。",
                 "id": "automotive-and-watercraft-service-attendants.faq.3",
                 "question": "怎样判断自己适不适合做汽车与船艇服务员？",
-                "question_key": "career.faq.automotive-and-watercraft-service-attendants.3"
+                "question_key": "career.faq.automotive-and-watercraft-service-attendants.3",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
-                "answer": "AI 与自动化可以改变库存与油液台账、规格与型号检索、价格与促销查询、收银与日报汇总、到期服务提醒等环节；但没有官方证据表明它会整体取代现场加注、油枪与设备状态确认、溢漏处置以及现金与单据核对责任。官方资料也未给出该职业的自动化替代率或岗位消失年份，其 2024—2034 年就业预测为下降（-1% 或更低），本页不把下降归因于 AI。",
+                "answer": "软件可核交易字段、收据和交接记录，设备状态与异常仍按岗位权限和单位程序处理。没有可核的本职业 AI 替代率。",
                 "id": "automotive-and-watercraft-service-attendants.faq.4",
                 "question": "AI 会改变哪些任务？",
-                "question_key": "career.faq.automotive-and-watercraft-service-attendants.4"
+                "question_key": "career.faq.automotive-and-watercraft-service-attendants.4",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "燃料与油液规格核对、油枪与设备状态确认、加注量与无溢漏确认、轮胎与配件型号核对、现金与单据核对、以及溢漏与设备异常的停止与上报决定，都必须由本人按机构规程承担；工具输出必须先标记为参考，经现场核对后才能进入正式服务与账务记录。",
+                "answer": "人员须复核记录、现场状态和岗位权限。软件提示不能作为对设备、交易或应急措施的单独依据。",
                 "id": "automotive-and-watercraft-service-attendants.faq.5",
                 "question": "哪些环节必须保留人工复核？",
-                "question_key": "career.faq.automotive-and-watercraft-service-attendants.5"
+                "question_key": "career.faq.automotive-and-watercraft-service-attendants.5",
+                "source_refs": [
+                  "onet",
+                  "health"
+                ]
               },
               {
-                "answer": "美国侧：O*NET 把 53-6031.00 列为 Job Zone 1–2（SVP 低于 6.0），页面公布的学历构成中 59% 为要求高中文凭或同等学历、23% 为要求高中后证书、16% 为要求低于高中文凭；认证（如机械润滑技师一级、认证润滑专家）用于证明特定能力，但不是法定作业许可。中国大陆侧：汽油、柴油等属危险化学品，经营单位须按《危险化学品安全管理条例》取得危险化学品经营许可证，从业人员应当接受安全教育培训、考核合格后上岗。学历、培训、认证、单位许可与岗位授权不可互相替代。",
+                "answer": "《危险化学品安全法》第 5 条要求适用单位教育培训、人员考核合格后上岗，对有资格要求的岗位配备相应持证人员。AQ 3010—2022 第 1 节明确不适用于水上加油站。水上燃料供应要核适用水域、设施和单位安排，不能直接套用陆站标准。",
                 "id": "automotive-and-watercraft-service-attendants.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.automotive-and-watercraft-service-attendants.6"
+                "question_key": "career.faq.automotive-and-watercraft-service-attendants.6",
+                "source_refs": [
+                  "health",
+                  "fs-aq",
+                  "fs-water"
+                ]
               },
               {
                 "answer": "需要。O*NET 的工作情境显示 75% 需要持续或几乎持续用手操作设备、65% 需要持续站立、23% 约一半时间需要走动或跑动、40% 约一半时间需要跪蹲弯腰或爬行，77% 每天在户外全天候环境作业；能力清单包含躯干力量、耐力、手臂稳定性与近视力。同时还需要核对规格与记录的能力，以及向客户说明与沟通的能力。",
@@ -31886,16 +31906,33 @@
                 "question_key": "career.faq.automotive-and-watercraft-service-attendants.8"
               },
               {
-                "answer": "官方就业预测为 2024 年在岗约 100,000 人、2024—2034 年就业下降（-1% 或更低）、年均约 14,400 个空缺（几乎全部来自替换需求）；预测不等于个人录用概率，也不代表每个地区或每类雇主同步变化。转向可比较汽车维修技师与机械师、公交卡车机械师与柴油发动机专员、轮胎修理与更换工、车辆与设备清洁工、飞机服务服务员、家电维修工等方向，但资格与授权需逐项核对。",
+                "answer": "美国 BLS 53-6031：2025 年约 102,400 岗，2035 年预计 106,300 岗，增长 3.8%，净增约 3,900，年均空缺约 12,900（含替补）。",
                 "id": "automotive-and-watercraft-service-attendants.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.automotive-and-watercraft-service-attendants.9"
+                "question_key": "career.faq.automotive-and-watercraft-service-attendants.9",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
-                "answer": "美国数字来自 BLS 职业就业与工资统计（OEWS，2025 年，53-6031.00 本职业口径），同时公布时薪与年薪分位；中国大陆没有与 53-6031.00 精确对应的全国职业工资分布，本页只展示行业门类与岗位大类平均工资作为对照。两个市场的统计口径、覆盖人群与资料期不同，不能直接换算。",
+                "answer": "美国为 53-6031 全国职业工资，澄江与弥勒是两个当地历史陆站样本，工资期间及福利口径不同。不能用于直接换算或全国推断。",
                 "id": "automotive-and-watercraft-service-attendants.faq.10",
                 "question": "美国工资与中国大陆工资为什么不能互相换算？",
-                "question_key": "career.faq.automotive-and-watercraft-service-attendants.10"
+                "question_key": "career.faq.automotive-and-watercraft-service-attendants.10",
+                "source_refs": [
+                  "oews",
+                  "fs-chengjiang",
+                  "fs-mile"
+                ]
+              },
+              {
+                "answer": "原版 A：3×4＝12、有 R1，齐备；B：4×4＝16，和记录 12 不符，待核金额；C：2×4＝8，但缺凭号，待补凭证。修订补 C 的 R3 后 C 齐备，A 不变，B 仍由对应班次核原始交易与金额。保留两版，不自行补改 B。",
+                "id": "automotive-and-watercraft-service-attendants.faq.11",
+                "question": "FS-45 参考解（交卷后再打开）",
+                "question_key": "career.faq.automotive-and-watercraft-service-attendants.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31916,7 +31953,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮九模块依据实际官方资料做作者核对，链接、旧访问和工具结果不当独立内容通过。"
+              "先分清岗位，再谈准备：陆站加注、水上补给、小修和收银并不总由同一人承担。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.sources.source-card.1",
@@ -31930,7 +31967,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "实际读本职业O*NET summary/details/wages/hottech/industry/trends、8相邻定义，BLS EP53-6031；2022大典PDF196油气电站操作员。2026危化法实际读培训经营、相关储存使用与应急条，柴油公告实际正文。NBS工资及工资规定同窗口同日已读相应行复用，OEWS方法本轮核小费等；ILO介绍扩展摘要、NIST简介仅背景。旧条例访问失败、custom/training/cert未输出全部条件；Profile访问失败未得行业工资表。"
+              "可先用两份陆站招聘公告比较学历和计薪，再用危化法和标准核培训与资格范围；船艇场景另查实际水上设施规则。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.sources.source-card.2",
@@ -31958,7 +31995,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-09核：工资招聘就业2025，预测2025—2035；中国工资2025、工资规定1990、大典2022、危化法2026-05-01施行、柴油调整2023-01-01施行。未重读旧入口保留日期。"
+              "美国全国职业工资和就业基期为 2025 年，预测覆盖 2025–2035 年。大陆澄江和弥勒陆站公告是 2026 年的岗位样本。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.sources.source-card.3",
@@ -31972,7 +32009,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本轮未得中国精确职业工资就业。 OEWS工资薪酬员工统计不含自雇、非公司制企业的所有者及合伙人与无酬家庭劳动者；公司有薪员工不因家庭经营全部排除。基本工资、佣金生产奖金等激励工资和小费计入，加班溢价、轮班差额和非生产性奖金等排除；不能把所有夜班工资、按单者或小费全部排除。本轮未读个人合同工时或净收入。 2022职业大典PDF196页4-02-02-08油气电站操作员：在加油、加气、加氢、充电站提供动力补充及服务；三任务为设备计量采样等成品油进销存并给车（船）加油、所列气体储调计量销售并给车加气、卡发售和信息服务；含加油站操作员及车用加气站操作员。与US53-6031部分交集，不能把其小修收银清洁全部一对一映射或据分类推工资。 未核具体雇主合同、全部设备消防水上废弃物和复工程序、完整许可实施细则、认证培养条件、AI职业效应、量表预测及转岗互认。共享facts定义FAQ练习冻结，不签全页一致或正式验收。"
+              "比较薪资时先分清美国职业工资、大陆行业均值与两份陆站招聘样本。核对计薪周期、税前税后、绩效和福利是否已计入；拟任岗位涉及燃料或危化品时，另问单位许可、岗前培训和本人能做的任务。"
             ]
           },
           "id": "automotive-and-watercraft-service-attendants.sources.source-card.4",
@@ -32005,25 +32042,25 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看汽车与船艇服务员职业页面",
@@ -32085,20 +32122,20 @@
                 "url": "https://www.onetonline.org/link/details/53-6031.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "102,400/106,300/约4%/12,900",
-                  "BLS3.8%及净增3,900"
+                  "美国 BLS 53-6031：2025 年约 102,400 岗，2035 年预计 106,300 岗，增长 3.8%，净增约 3,900，年均空缺约 12,900（含替补）。",
+                  "美国全国统计。"
                 ],
-                "evidence_type": "official outlook",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "美国53-6031本职业2025就业102,400人、2035预测106,300人，2025—2035增长3.8%（O*NET约4%，平均水平）、净增3,900、年均约12,900空缺。空缺包括增长和替补，不是净增、个人获聘率或中国就业；EP自雇栏为不可得，不能当0。",
+                "limitation": "美国全国统计。",
                 "market": "美国",
-                "name": "O*NET 53-6031.00 职业摘要（就业与预测字段）",
-                "period": "2025就业、2025—2035预测；访问2026-10-09",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：53-6031",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-6031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32124,7 +32161,7 @@
                 ],
                 "evidence_type": "national statistics",
                 "id": "nbs",
-                "limitation": "NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本轮未得中国精确职业工资就业。",
+                "limitation": "NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本页不提供中国精确职业工资就业。",
                 "market": "中国大陆",
                 "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
                 "period": "2025 年；2026-05-15 发布",
@@ -32135,12 +32172,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "实际工资组成和排除项目",
-                  "同窗口同日已读版本复用"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "wage definition",
                 "id": "cnclass",
-                "limitation": "NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本轮未得中国精确职业工资就业。",
+                "limitation": "NBS工资总额可含计件包干、奖金、津贴补贴及加班工资，不能将夜班节假日补贴和销售提成全部排除；按实际款项性质区分，差旅伙食补助等规定排除项目另核。行业及岗位大类均值不是本职业收入，本页不提供中国精确职业工资就业。",
                 "market": "中国大陆",
                 "name": "国家统计局《关于工资总额组成的规定》（1990发布）",
                 "period": "1990发布；访问2026-10-09",
@@ -32200,11 +32237,11 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "6热门软件、3In Demand",
-                  "3浏览器33%、2低于1%、Windows不可得"
+                  "美国职业技术示例"
                 ],
                 "evidence_type": "technology signals",
                 "id": "hr",
-                "limitation": "2025美国本职业关联唯一招聘热门技术6项：Safari、Edge、Firefox各33%且标In Demand，Excel/Outlook各低于1%，Windows比例Not available；该清单3项In Demand，不是所有在岗人员采用率或每岗门槛。更宽Software Skills示例与这6项招聘清单分开。",
+                "limitation": "O*NET 的美国职业资料把浏览器和办公软件列为技术示例；面试时可问实际用哪套收银或登记系统、如何培训。",
                 "market": "美国",
                 "name": "O*NET 53-6031.00 技术清单（热门技术信号）",
                 "period": "2025美国职业关联唯一招聘；访问2026-10-09",
@@ -32213,20 +32250,20 @@
                 "url": "https://www.onetonline.org/link/hot_tech/53-6031.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official regulation",
-                  "2011-12-01 施行、2013 年修订；访问 2026-09-15"
+                  "《危险化学品安全法》第 5 条要求适用单位教育培训、人员考核合格后上岗，对有资格要求的岗位配备相应持证人员。AQ 3010—2022 第 1 节明确不适用于水上加油站。水上燃料供应要核适用水域、设施和单位安排，不能直接套用陆站标准。",
+                  "仅适用单位与岗位。"
                 ],
-                "evidence_type": "official regulation",
+                "evidence_type": "primary_document",
                 "id": "health",
-                "limitation": "旧2013条例URL本轮访问失败，保留旧日期不冒充全文复核；新增2026危化法实际相关条，不据此说旧条例已废止。",
+                "limitation": "仅适用单位与岗位。",
                 "market": "中国大陆",
-                "name": "《危险化学品安全管理条例》（国务院令第 591 号公布、2013 年修订）",
-                "period": "2011-12-01 施行、2013 年修订；访问 2026-09-15",
-                "publisher": "中华人民共和国国务院",
-                "scope": "exact",
-                "url": "https://www.gov.cn/gongbao/content/2014/content_2695514.htm"
+                "name": "危险化学品安全法第 5 条",
+                "period": "2026-05-01",
+                "publisher": "全国人大常委会；市场监管总局转载",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2026/art_4e160e51cc134696a183a5f531f097e5.html"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32236,7 +32273,7 @@
                 ],
                 "evidence_type": "institutional task research",
                 "id": "ilo",
-                "limitation": "同窗口同日读介绍扩展摘要，未读完整指数、职业映射或采用测量，不外推替代日期。",
+                "limitation": "跨职业生成式 AI 研究；不提供本职业实际采用率、影响或替代日期。",
                 "market": "全球",
                 "name": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
                 "period": "2025 年；访问 2026-09-15",
@@ -32245,20 +32282,20 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "实际官方摘要链接",
-                  "非独立编辑组原记录"
+                  "虚构收据、状态与交接。",
+                  "纸面；无设备或真实资料。"
                 ],
-                "evidence_type": "官方职业摘要",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "实际官方职业摘要，不证明独立编辑组记录。",
-                "market": "美国",
-                "name": "O*NET53-6031职业摘要（编辑核对入口）",
-                "period": "访问 2026-10-09",
-                "publisher": "O*NET",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-6031.00"
+                "limitation": "纸面；无设备或真实资料。",
+                "market": "虚构",
+                "name": "FS-45｜核对三张虚构服务收据",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": null
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32268,7 +32305,7 @@
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "不构成上岗资格或作业许可。 本轮未输出完整培训、自定义或认证条件，不刷新访问或当全文。",
+                "limitation": "用于查询相关信息；报名前向项目方核对最新条件，不等于取得上岗资格。",
                 "market": "美国",
                 "name": "O*NET 53-6031.00 培训与教育信息",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32284,7 +32321,7 @@
                 ],
                 "evidence_type": "occupation profile",
                 "id": "arxiv",
-                "limitation": "官方档案仅提供职业身份与职责描述。 本轮未输出完整培训、自定义或认证条件，不刷新访问或当全文。",
+                "limitation": "用于查询相关信息；报名前向项目方核对最新条件，不等于取得上岗资格。",
                 "market": "美国",
                 "name": "O*NET 53-6031.00 自定义职业档案",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32391,18 +32428,18 @@
               {
                 "accessed_at": "2026-09-15",
                 "details": [
-                  "official regulation",
-                  "2011-12-01 施行、2013 年修订；访问 2026-09-15"
+                  "经营许可或依法适用例外由相关单位按实际经营范围核对。",
+                  "经营许可或依法适用例外由相关单位按实际经营范围核对。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "census",
-                "limitation": "旧2013条例URL本轮访问失败，保留旧日期不冒充全文复核；新增2026危化法实际相关条，不据此说旧条例已废止。",
+                "limitation": "单位许可和个人上岗资格分别核。",
                 "market": "中国大陆",
-                "name": "《危险化学品安全管理条例》经营与从业人员条款（第三章至第四章）",
-                "period": "2011-12-01 施行、2013 年修订；访问 2026-09-15",
+                "name": "危险化学品安全法：经营许可边界",
+                "period": "2026-05-01",
                 "publisher": "中华人民共和国国务院",
                 "scope": "exact",
-                "url": "https://www.gov.cn/gongbao/content/2014/content_2695514.htm"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2026/art_4e160e51cc134696a183a5f531f097e5.html"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32444,7 +32481,7 @@
                 ],
                 "evidence_type": "certification information",
                 "id": "archivists",
-                "limitation": "证书由行业机构颁发，不等于法定作业许可。 本轮未输出完整培训、自定义或认证条件，不刷新访问或当全文。",
+                "limitation": "用于查询相关信息；报名前向项目方核对最新条件，不等于取得上岗资格。",
                 "market": "美国",
                 "name": "O*NET 53-6031.00 认证发现（国家认证）",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32455,12 +32492,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
-                  "不冒称完整职业或个案验证"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方原文相关章节",
                 "id": "oews-method",
-                "limitation": "OEWS工资薪酬员工统计不含自雇、非公司制企业的所有者及合伙人与无酬家庭劳动者；公司有薪员工不因家庭经营全部排除。基本工资、佣金生产奖金等激励工资和小费计入，加班溢价、轮班差额和非生产性奖金等排除；不能把所有夜班工资、按单者或小费全部排除。本轮未读个人合同工时或净收入。",
+                "limitation": "OEWS工资薪酬员工统计不含自雇、非公司制企业的所有者及合伙人与无酬家庭劳动者；公司有薪员工不因家庭经营全部排除。基本工资、佣金生产奖金等激励工资和小费计入，加班溢价、轮班差额和非生产性奖金等排除；不能把所有夜班工资、按单者或小费全部排除。本页不提供个人合同工时或净收入。",
                 "market": "美国",
                 "name": "BLS OEWS Concepts当前方法",
                 "period": "当前页面，更新2026-09-24",
@@ -32487,8 +32524,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮124—125简介摘要实际读",
-                  "未读完整PDF"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方自愿风险参考简介与摘要",
                 "id": "genai-nist",
@@ -32503,12 +32540,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读所述部分或记录访问失败",
-                  "访问2026-10-09"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方资料相关部分",
                 "id": "industry-current",
-                "limitation": "当前O*NET宽行业为零售贸易56%、其他服务业（公共管理除外）35%、其他9%，不是中国分布或行业内本职业工资。",
+                "limitation": "当前O*NET宽行业为零售贸易56%、其他服务业（公共管理除外）35%，不是中国分布或行业内本职业工资。",
                 "market": "美国",
                 "name": "O*NET53-6031宽行业",
                 "period": "2025",
@@ -32519,8 +32556,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读所述部分或记录访问失败",
-                  "访问2026-10-09"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方资料相关部分",
                 "id": "ep-table",
@@ -32535,12 +32572,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读所述部分或记录访问失败",
-                  "访问2026-10-09"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方资料相关部分",
                 "id": "cn-hazchem-law-2026",
-                "limitation": "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。本轮未取得完整站点恢复程序。 本轮读相关条5、35—38、47/51/53—57、66/78及91—94/121/127，不是全部实施细则。",
+                "limitation": "中国《危险化学品安全法》2026-05-01施行：5条从业人员受教育培训、考核合格上岗，有资格要求岗位配依法合格人员；53条经营含仓储实行许可，但有依法生产企业厂内销售自产及有港口经营许可者港内危化仓储例外，后者不等船艇燃料零售都豁免。54条经营企业人员专业培训考核，主要负责人和安全管理人员另须应急部门考核。单位许可、个人条件及普通内部授权分开；具体任务按适用法域和真实规程核。 该法91条单位应急预案、救援安排与演练；93条事故由主要负责人立即组织按预案救援报告。94条直接危及人身安全时，确保安全前提下带班人员、班组长或调度可立即下达停产撤人命令，不据此让普通服务员超权限处置，也不要求人员等普通许可才避险。复工条件和权限以站点程序为准。 参见相关条5、35—38、47/51/53—57、66/78及91—94/121/127，不是全部实施细则。",
                 "market": "中国大陆",
                 "name": "中华人民共和国危险化学品安全法",
                 "period": "2025-12-27通过；2026-05-01施行",
@@ -32551,8 +32588,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读所述部分或记录访问失败",
-                  "访问2026-10-09"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方资料相关部分",
                 "id": "cn-diesel-directory-2022",
@@ -32567,14 +32604,14 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读所述部分或记录访问失败",
-                  "访问2026-10-09"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
-                "evidence_type": "官方统计入口（访问失败）",
+                "evidence_type": "官方统计查询",
                 "id": "oews-profile-entry",
-                "limitation": "本轮访问报Internal Error未得统计表，不据访问失败断BLS未公布行业工资。",
+                "limitation": "查行业内工资时核对职业代码、行业、年份及统计量；本页薪资表为全国职业分位。",
                 "market": "美国",
-                "name": "BLS职业Profile访问53-6031",
+                "name": "BLS 工资数据查询：53-6031",
                 "period": "2025",
                 "publisher": "BLS",
                 "scope": "contextual",
@@ -32583,8 +32620,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读定义",
-                  "非完整培养和互认条件"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-49-3023-00",
@@ -32599,8 +32636,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读定义",
-                  "非完整培养和互认条件"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-49-3031-00",
@@ -32615,8 +32652,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读定义",
-                  "非完整培养和互认条件"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-49-3093-00",
@@ -32631,8 +32668,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读定义",
-                  "非完整培养和互认条件"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-53-7061-00",
@@ -32647,8 +32684,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读定义",
-                  "非完整培养和互认条件"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-53-6032-00",
@@ -32663,8 +32700,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读定义",
-                  "非完整培养和互认条件"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-49-9031-00",
@@ -32679,8 +32716,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读定义",
-                  "非完整培养和互认条件"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-53-7072-00",
@@ -32695,8 +32732,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读定义",
-                  "非完整培养和互认条件"
+                  "来源说明",
+                  "统计口径见下方"
                 ],
                 "evidence_type": "官方职业定义",
                 "id": "neighbor-49-2092-00",
@@ -32709,21 +32746,83 @@
                 "url": "https://www.onetonline.org/link/summary/49-2092.00"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "燃料与油液补给｜先确认规格｜按车辆或船艇说明书核对燃料种类与油液规格，加注到指定液位并检查轮胎气压与各类液位，标注加注内容与数量。 — 0/100; weight=1/3; automotive-and-watercraft-service-attendants.profile.responsibilities-block.1[0]",
-                  "检查与小修｜按实际任务范围｜官方包含调整刹车、更换火花塞机油滤芯及轮胎修补更换；具体工具程序和人员条件另核，不从职业名推全系统维修能力。 — 25/100; weight=1/3; automotive-and-watercraft-service-attendants.profile.responsibilities-block.1[1]",
-                  "销售与收银｜让账目可核对｜按型号取件并安装配件，计价收款、找零并出具收据，汇总油品、机油与配件销售日报，交班时核对现金与单据。 — 75/100; weight=1/3; automotive-and-watercraft-service-attendants.profile.responsibilities-block.1[2]"
+                  "软件可核交易字段、收据和交接记录，设备状态与异常仍按岗位权限和单位程序处理。没有可核的本职业 AI 替代率。",
+                  "不估计岗位替代。",
+                  "不估计岗位替代。",
+                  "不估计岗位替代。",
+                  "不估计岗位替代。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "primary_document",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "不估计岗位替代。",
+                "market": "美国",
+                "name": "O*NET：交易与勤务记录",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-6031.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "《危险化学品安全法》第 5 条要求适用单位教育培训、人员考核合格后上岗，对有资格要求的岗位配备相应持证人员。AQ 3010—2022 第 1 节明确不适用于水上加油站。水上燃料供应要核适用水域、设施和单位安排，不能直接套用陆站标准。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "fs-aq",
+                "limitation": "水上加油站不在该标准内。",
+                "market": "中国大陆",
+                "name": "AQ 3010—2022 加油站作业安全规范",
+                "period": "2023-04-01",
+                "publisher": "MEM",
+                "scope": "contextual",
+                "url": "https://www.mem.gov.cn/fw/flfgbz/bz/bzwb/202212/P020221213635234132521.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "水上加油站资质、作业和防污染是有明确分工的单位责任。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "fs-water",
+                "limitation": "镇江水上业务样本，不作全国招聘条件。",
+                "market": "中国大陆",
+                "name": "镇江海事局：水上燃油过驳监管",
+                "period": "2026-09-29",
+                "publisher": "Zhenjiang MSA",
+                "scope": "contextual",
+                "url": "https://js.msa.gov.cn/art/2026/9/29/art_258_1615913.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "中国石化玉溪澄江石油分公司 2026 年 5 月招加油员 3 名，5 月 29 日截止；年薪 4.0 万–5.5 万元，含五险和住房公积金。转正后按绩效考核计薪，金额限这份历史公告。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "fs-chengjiang",
+                "limitation": "历史加油站岗位。",
+                "market": "中国大陆",
+                "name": "澄江：中石化加油员历史招聘",
+                "period": "2026-05-08",
+                "publisher": "Sinopec / Chengjiang",
+                "scope": "recruitment_proxy",
+                "url": "https://www.yncj.gov.cn/cjxzfxxgk/jygqxx/20260508/1661589.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "弥勒市政府公布的历史招聘汇编中，中海油弥勒双桥鸿伟站列加油员 2 名、初中及以上、3,000–5,000 元/月，并另列福利。它与澄江的年薪和待遇口径不同。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "fs-mile",
+                "limitation": "历史招聘汇编。",
+                "market": "中国大陆",
+                "name": "弥勒：中海油站加油员样本",
+                "period": "2026",
+                "publisher": "Mile municipal government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hhml.gov.cn/info/35871/911972.htm"
               }
             ]
           },
@@ -35594,11 +35693,11 @@
             "ai_heading": "AI 会影响汽车与船艇服务员的工资吗？",
             "driver_heading": "哪些行业与岗位可能涉及这个职业？",
             "official_heading": "中国大陆薪资参考（行业代理口径，非本职业工资）",
-            "scenario_caption": "学历与方向为编辑核对例，本轮未读招聘样本",
+            "scenario_caption": "陆上加油站历史招聘与入行条件",
             "scenario_heading": "中国大陆入行准备可以核对哪些方向？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "准备类别或岗位条件",
-            "scenario_value_label": "准备方向（编辑比较）"
+            "scenario_value_label": "准备方向"
           },
           "us_growth": {
             "$item": "automotive-and-watercraft-service-attendants.china-salary.career-snapshot-primary-locale.58",
@@ -36057,7 +36156,7 @@
       },
       "hero": {
         "h1": "汽车与船艇服务员",
-        "quick_answer": "汽车与船艇服务员为汽车、客车、卡车、船艇等车辆加注燃料与油液，检查轮胎与电瓶、更换雨刷片与皮带等配件，完成换机油等小修，收取费用并出具收据，同时维护场地与库存并记录服务；其工作不等于「站在加油机旁按一下开关」，并在燃料种类、油液规格或安全条件不明时停止升级。",
+        "quick_answer": "汽车与船艇服务员按岗位分工提供燃油、补给、简单检查或收款。公路加油站、船舶燃料供应、汽车维修和船艇维修适用的设备、规则与授权不同。",
         "title": "汽车与船艇服务员"
       },
       "market_signal_card": {
@@ -37409,7 +37508,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合汽车与船艇服务员",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37486,7 +37585,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测试"
           },
           {
             "href": {
@@ -37496,7 +37595,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -37506,7 +37605,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格测试"
           },
           {
             "href": {
@@ -37516,7 +37615,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "智力与推理测试"
           }
         ]
       },
@@ -37624,7 +37723,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与勤务记录",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37642,7 +37741,7 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "O*NET-SOC 53-6031.00",
         "fact_id": "identity",
         "market": "美国",
@@ -37654,7 +37753,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "28,630美元/年（第 10 分位）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
@@ -37666,7 +37765,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "31,300美元/年（第 25 分位）",
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
@@ -37678,7 +37777,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "35,670美元/年（中位数）",
         "fact_id": "us-wage-2025",
         "market": "美国",
@@ -37690,7 +37789,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "39,320美元/年（第 75 分位）",
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
@@ -37702,7 +37801,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "46,060美元/年（第 90 分位）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
@@ -37714,43 +37813,43 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "100,000人",
+        "derivation": "按原表口径及期间展示。",
+        "display_value": "102,400 岗",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "2024 年在岗人数（53-6031.00 本职业口径）",
-        "occupation_scope": "汽车与船艇服务员",
-        "period": "2024 年；访问 2026-09-15",
+        "measure": "2025 年在岗人数（53-6031.00 本职业口径）",
+        "occupation_scope": "美国 53-6031 单列",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "下降（-1% 或更低）",
+        "derivation": "按原表口径及期间展示。",
+        "display_value": "增长 3.8%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "2024—2034 年就业增长标签",
-        "occupation_scope": "汽车与船艇服务员",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "2025–2035 年就业增长标签",
+        "occupation_scope": "美国 53-6031 单列",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 14,400个/年",
+        "derivation": "按原表口径及期间展示。",
+        "display_value": "年均约 12,900",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "2024—2034 年平均年度岗位空缺",
-        "occupation_scope": "汽车与船艇服务员",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "measure": "2025–2035 年平均年度岗位空缺",
+        "occupation_scope": "美国 53-6031 单列",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
@@ -37762,7 +37861,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
@@ -37774,7 +37873,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
@@ -37786,7 +37885,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
@@ -37798,7 +37897,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "129,441元/年（全国城镇非私营单位）",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
@@ -37810,7 +37909,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "71,590元/年（全国城镇私营单位）",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
@@ -37822,7 +37921,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "210,016元/年（规模以上企业中层及以上管理人员）",
         "fact_id": "cn-mid-managers-2025",
         "market": "中国大陆",
@@ -37834,7 +37933,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "94,936元/年（规模以上企业办事人员和有关人员）",
         "fact_id": "cn-clerical-2025",
         "market": "中国大陆",
@@ -37846,7 +37945,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "69,622元/年（批发和零售业，城镇私营单位）",
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆",
@@ -37858,7 +37957,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "135,749元/年（批发和零售业，城镇非私营单位）",
         "fact_id": "cn-industry-science-tech-2025",
         "market": "中国大陆",
@@ -37870,7 +37969,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "70,226元/年（居民服务、修理和其他服务业，城镇非私营单位）",
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆",
@@ -37882,7 +37981,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "79,857元/年（规模以上企业社会生产服务和生活服务人员）",
         "fact_id": "cn-industry-public-admin-2025",
         "market": "中国大陆",
@@ -37894,7 +37993,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "17.15美元/小时",
         "fact_id": "us-hourly-median-parent",
         "market": "美国",
@@ -37906,7 +38005,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "按原表口径及期间展示。",
         "display_value": "35,670美元/年",
         "fact_id": "us-annual-median-parent",
         "market": "美国",
@@ -37918,61 +38017,49 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "100,000人",
+        "derivation": "按原表口径及期间展示。",
+        "display_value": "102,400 岗",
         "fact_id": "us-employment-parent",
         "market": "美国",
-        "measure": "2024 年在岗人数（本职业口径）",
-        "occupation_scope": "汽车与船艇服务员",
-        "period": "2024 年",
+        "measure": "2025 年在岗人数（本职业口径）",
+        "occupation_scope": "美国 53-6031 单列",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "下降（-1% 或更低）",
+        "derivation": "按原表口径及期间展示。",
+        "display_value": "增长 3.8%",
         "fact_id": "us-growth-parent",
         "market": "美国",
-        "measure": "2024—2034 年就业增长标签",
-        "occupation_scope": "汽车与船艇服务员",
-        "period": "2024—2034 年",
+        "measure": "2025–2035 年就业增长标签",
+        "occupation_scope": "美国 53-6031 单列",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 14,400个/年",
+        "derivation": "按原表口径及期间展示。",
+        "display_value": "年均约 12,900",
         "fact_id": "us-openings-parent",
         "market": "美国",
-        "measure": "2024—2034 年平均年度岗位空缺",
-        "occupation_scope": "汽车与船艇服务员",
-        "period": "2024—2034 年",
+        "measure": "2025–2035 年平均年度岗位空缺",
+        "occupation_scope": "美国 53-6031 单列",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "汽车与船艇服务员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与勤务记录"
     },
     "badges": [
       "O*NET 53-6031.00 · Job Zone 1–2 · 少量准备",
@@ -37990,19 +38077,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国就业增长（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均岗位空缺（2024—2034）"
+        "label": "美国年均空缺（2025–2035）"
       },
       {
         "availability": "missing",
@@ -38016,17 +38103,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "汽车与船艇服务员做什么、需要哪些学历与资格、美国与中国的收入和前景如何、AI 会改变哪些任务，以及燃料与危险化学品作业的安全边界；保留来源范围与数据缺口与就业下降预测。"
+      "text": "分清陆上加油站和水上供油，读大陆招聘与美国工资，用三张虚构收据试做。"
     },
     "title": {
       "availability": "available",
-      "text": "汽车与船艇服务员"
+      "text": "汽车与船艇服务员：加油站、工资与入行"
     }
   },
-  "source_content_sha256": "6f9fb375e8696b36b3cf821f47c42c3eb15b76713a6da58ec0f7b59e3f98277f",
+  "source_content_sha256": "21c629d4bf9a5b6a1fb4ed22586597a69837529520bc7cc082a7a8d478c6842b",
   "subject": {
     "canonical_slug": "automotive-and-watercraft-service-attendants",
     "name": "汽车与船艇服务员",
-    "summary": "汽车与船艇服务员为汽车、客车、卡车、船艇等车辆加注燃料与油液、检查与更换轮胎及配件、收取费用并维护场地与库存记录，核心是按规格核对、按清单服务并如实记账。美国侧对应 O*NET 53-6031.00（Automotive and Watercraft Service Attendants），属 Job Zone 1–2（SVP 低于 6.0），2024—2034 年就业预测为下降（-1% 或更低）；中国大陆统计按行业门类汇总，未单列该职业，汽油与柴油等属危险化学品，经营与从业人员培训要求见《危险化学品安全管理条例》，行业数字不覆盖夜班与节假日补贴与销售提成。"
+    "summary": "汽车与船艇服务员按岗位分工提供燃油、补给、简单检查或收款。公路加油站、船舶燃料供应、汽车维修和船艇维修适用的设备、规则与授权不同。"
   }
 }

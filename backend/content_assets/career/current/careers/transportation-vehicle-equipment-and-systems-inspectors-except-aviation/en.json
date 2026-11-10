@@ -5,9 +5,6 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -1008,7 +1005,7 @@
         "status": "mapped"
       },
       "item:transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.quote-limits": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.scenario.background": {
         "status": "mapped"
@@ -1677,7 +1674,7 @@
         "status": "mapped"
       },
       "item:transportation-vehicle-equipment-and-systems-inspectors-except-aviation.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:transportation-vehicle-equipment-and-systems-inspectors-except-aviation.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -3092,7 +3089,7 @@
             "data",
             "entries",
             {
-              "id": "sag-moa"
+              "id": "cn-rule"
             },
             "url"
           ],
@@ -3119,7 +3116,7 @@
             "data",
             "entries",
             {
-              "id": "sag-moa"
+              "id": "cn-rule"
             },
             "name"
           ],
@@ -3198,7 +3195,7 @@
             "data",
             "entries",
             {
-              "id": "ratify"
+              "id": "cn-rule"
             },
             "url"
           ],
@@ -3225,7 +3222,7 @@
             "data",
             "entries",
             {
-              "id": "ratify"
+              "id": "cn-rule"
             },
             "name"
           ],
@@ -4064,7 +4061,7 @@
             "data",
             "entries",
             {
-              "id": "sag-moa"
+              "id": "cn-rule"
             },
             "url"
           ],
@@ -4079,7 +4076,7 @@
             "data",
             "entries",
             {
-              "id": "sag-moa"
+              "id": "cn-rule"
             },
             "name"
           ],
@@ -4806,7 +4803,7 @@
             "data",
             "entries",
             {
-              "id": "sag-moa"
+              "id": "cn-rule"
             },
             "url"
           ],
@@ -4833,7 +4830,7 @@
             "data",
             "entries",
             {
-              "id": "sag-moa"
+              "id": "cn-rule"
             },
             "name"
           ],
@@ -4912,7 +4909,7 @@
             "data",
             "entries",
             {
-              "id": "sag-moa"
+              "id": "cn-rule"
             },
             "url"
           ],
@@ -4939,7 +4936,7 @@
             "data",
             "entries",
             {
-              "id": "sag-moa"
+              "id": "cn-rule"
             },
             "name"
           ],
@@ -9441,7 +9438,7 @@
             "data",
             "entries",
             {
-              "id": "sag-moa"
+              "id": "sag"
             },
             "url"
           ],
@@ -9456,7 +9453,7 @@
             "data",
             "entries",
             {
-              "id": "sag-moa"
+              "id": "sag"
             },
             "name"
           ],
@@ -10945,18 +10942,8 @@
         "status": "mapped"
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.monthly_pay": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_primary_locale",
-            "salary",
-            "china_salary_table",
-            1,
-            "月薪参考"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.city_range": {
         "ref": {
@@ -16855,7 +16842,7 @@
             "data",
             "entries",
             {
-              "id": "ratify"
+              "id": "cn-rule"
             },
             "url"
           ],
@@ -16870,7 +16857,7 @@
             "data",
             "entries",
             {
-              "id": "ratify"
+              "id": "cn-rule"
             },
             "name"
           ],
@@ -22640,155 +22627,44 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.16.accessed_at": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "ratify"
-            },
-            "accessed_at"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.16.details.01": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "ratify"
-            },
-            "details",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.16.evidence_type": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "ratify"
-            },
-            "evidence_type"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.16.limitation": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "ratify"
-            },
-            "limitation"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.16.market": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "ratify"
-            },
-            "market"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.16.name": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "ratify"
-            },
-            "name"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.16.period": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "ratify"
-            },
-            "period"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.16.publisher": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "ratify"
-            },
-            "publisher"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.16.scope": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "ratify"
-            },
-            "scope"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.16.url": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "ratify"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.17.accessed_at": {
         "ref": {
@@ -22942,155 +22818,44 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.18.accessed_at": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sag-moa"
-            },
-            "accessed_at"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.18.details.01": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sag-moa"
-            },
-            "details",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.18.evidence_type": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sag-moa"
-            },
-            "evidence_type"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.18.limitation": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sag-moa"
-            },
-            "limitation"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.18.market": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sag-moa"
-            },
-            "market"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.18.name": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sag-moa"
-            },
-            "name"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.18.period": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sag-moa"
-            },
-            "period"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.18.publisher": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sag-moa"
-            },
-            "publisher"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.18.scope": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sag-moa"
-            },
-            "scope"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.18.url": {
-        "ref": {
-          "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "sag-moa"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.19.details.01": {
         "ref": {
@@ -23596,7 +23361,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "First distinguish inspection, repair, vehicle driving and report issuance. Chinese motor vehicle inspection bodies must provide training and assessment and confirm staff competence; a vehicle handler also needs the driving licence for the corresponding vehicle type and more than two years of driving experience. A paper exercise confers no operating or signing authority."
+              "First distinguish inspection, repair, vehicle driving and report issuance. Chinese motor vehicle inspection bodies must provide training and assessment and confirm staff competence; a vehicle handler also needs the driving licence for the corresponding vehicle type and at least two years of driving experience. A paper exercise confers no operating or signing authority."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.quick-decision.fit-decision-checklist.2",
@@ -23708,12 +23473,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "After completing the first version, F1 and F2, compare the record status and the reasons item by item and list the real inspection conditions that remain unknown. Then read one real post and its applicable rules to decide whether to continue studying mechanics, testing or record management."
+              "Open “VI-44 | Review three fictional inspection records” in the entry section. Submit three versions before opening the reference."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.fit_decision_checklist.how-detail",
           "source_refs": [
-            "editorial"
+            "editor"
           ],
           "type": "prose"
         }
@@ -24693,7 +24458,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS53-6051 parent occupation: 2025 wages and 2025—2035 employment projections, including aviation and not separately split for this occupation."
+              "BLS53-6051 parent occupation: 2025 wages and 2025–2035 employment projections, including aviation and not separately split for this occupation."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.onet_structured_fields_block.bls",
@@ -24722,7 +24487,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "SAMR market regulation inspection letter [2022] No. 111: the requirements for staff competence, vehicle handling and records and reports at Chinese motor vehicle inspection bodies."
+              "SAMR supplementary technical requirements: staff competence, vehicle handling, records and reports."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.onet_structured_fields_block.cn",
@@ -25380,7 +25145,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "At the employment outcome level, the BLS parent occupation growth of 2.2% for 2025—2035 includes many influencing factors and aviation posts, and no AI-caused job loss for this occupation can be separated out. The OECD cases distinguish task change from job numbers, and one case cannot stand as national causality. This page obtained no representative net substitution or pay change research for this occupation and no reviewable FermatMind score; the missing state is retained, and the next step is discussed using specific tasks and institutional evidence rather than predicting an individual probability of unemployment."
+              "At the employment outcome level, the BLS parent occupation growth of 2.2% for 2025–2035 includes many influencing factors and aviation posts, and no AI-caused job loss for this occupation can be separated out. The OECD cases distinguish task change from job numbers, and one case cannot stand as national causality. This page obtained no representative net substitution or pay change research for this occupation and no reviewable FermatMind score; the missing state is retained, and the next step is discussed using specific tasks and institutional evidence rather than predicting an individual probability of unemployment."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.ai-impact.ai-impact-table.8",
@@ -25428,14 +25193,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no representative AI adoption, net employment causality or reviewable task-level score for this occupation, so the Hero shows a separate editorial estimate. Draft assistance, institutional system adoption and post outcomes are checked separately; the OECD has historical cases involving this occupation and NIST is only a general risk method, and neither can give a Chinese substitution rate. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Tools can flag blank fields, rule versions and differences between records. People at the institution still verify the applicable rule, original evidence and signing authority. No verified displacement rate is available for this occupation."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial",
-            "onet",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25562,7 +25325,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "United States transportation inspectors 53-6051 parent occupation 2025—2035 employment projections"
+              "United States transportation inspectors 53-6051 parent occupation 2025–2035 employment projections"
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.ai_impact_table.evidence.4.object",
@@ -27234,14 +26997,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no nationally comparable wage distribution for Chinese motor vehicle inspectors. Two local historical announcements support the post conditions but provide no comparable pay figures; the National Bureau of Statistics industry unit average wage is not the inspector occupational median."
+              "A national pay distribution for this occupation was not available. The two postings below cover roles with different authority."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "r2-pay-2",
-            "r2-pay-3",
-            "editorial"
+            "vi-dongtai",
+            "vi-benxi"
           ],
           "type": "prose"
         },
@@ -27280,14 +27042,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Two Chinese historical condition samples were obtained: the Tai'an Rongxin vehicle inspector and the Mianchi Zhicheng vehicle handler. The former lists no amount and the latter says the wage is negotiable; the posts and driving-year conditions differ, so they do not form a national wage sample and do not prove the posts are still open."
+              "Dongtai Tongda Auto Performance Testing advertised one vehicle inspector position in September 2026. It required a bachelor’s degree or higher, a C1 or higher license and at least two years of relevant inspection experience. Applications ran September 3–11. The posting did not list pay for that job. Benxi Liangma Motor Vehicle Testing advertised one authorized signatory in July 2026. One route listed in the notice required a signatory credential and at least two years of signatory experience. It listed CNY 3,500 monthly base pay, possible increases by negotiation, and social insurance and housing fund benefits. This is a signatory example, not inspector starting pay or a national distribution."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "r2-pay-2",
-            "r2-pay-3",
-            "editorial"
+            "vi-dongtai",
+            "vi-benxi"
           ],
           "type": "prose"
         },
@@ -27296,14 +27057,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Tai'an 2024-04-19 Rongxin vehicle inspector sample lists senior secondary school or above, C1 and proficient driving, with an automotive construction major preferred. Only the post conditions are cited here; there is no wage figure for this post, and the pay of other companies on the same page cannot be used to fill the gap."
+              "Dongtai Tongda Auto Performance Testing advertised one vehicle inspector position in September 2026. It required a bachelor’s degree or higher, a C1 or higher license and at least two years of relevant inspection experience. Applications ran September 3–11. The posting did not list pay for that job."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "r2-pay-2",
-            "r2-pay-3",
-            "editorial"
+            "vi-dongtai"
           ],
           "type": "prose"
         },
@@ -27312,14 +27071,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese income: local condition samples and the national wage gap"
+              "Historical mainland postings: inspection and authorized signing"
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.heading",
           "source_refs": [
-            "r2-pay-2",
-            "r2-pay-3",
-            "editorial"
+            "vi-dongtai",
+            "vi-benxi"
           ],
           "type": "prose"
         },
@@ -27328,12 +27086,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "; the historical Tai'an 2024-04-19 Rongxin vehicle inspector announcement lists senior secondary school or above, C1 and proficient driving, with an automotive construction major preferred; it lists no wage for the post, other companies' amounts on the same page cannot be applied, and its current validity is pending verification."
+              "Benxi Liangma Motor Vehicle Testing advertised one authorized signatory in July 2026. One route listed in the notice required a signatory credential and at least two years of signatory experience. It listed CNY 3,500 monthly base pay, possible increases by negotiation, and social insurance and housing fund benefits. This is a signatory example, not inspector starting pay or a national distribution."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "r2-pay-2"
+            "vi-benxi"
           ],
           "type": "prose"
         },
@@ -27342,14 +27100,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the Mianchi 2026-04-23 vehicle handler announcement only says the wage is negotiable and lists no amount, hours or tax treatment; the Tai'an inspector sample also lists no amount. The historical conditions are readable, but the current recruitment validity needs separate checking."
+              "Dongtai Tongda Auto Performance Testing advertised one vehicle inspector position in September 2026. It required a bachelor’s degree or higher, a C1 or higher license and at least two years of relevant inspection experience. Applications ran September 3–11. The posting did not list pay for that job."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r2-pay-2",
-            "r2-pay-3",
-            "editorial"
+            "vi-dongtai"
           ],
           "type": "prose"
         },
@@ -27358,14 +27114,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Tai'an vehicle inspector and the Mianchi vehicle handler are not the same post. C1 and driving years are sample conditions, and the vehicle handler's wage or other companies' pay on the same page cannot be treated as an inspector's wage."
+              "Dongtai Tongda Auto Performance Testing advertised one vehicle inspector position in September 2026. It required a bachelor’s degree or higher, a C1 or higher license and at least two years of relevant inspection experience. Applications ran September 3–11. The posting did not list pay for that job."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "r2-pay-2",
-            "r2-pay-3",
-            "editorial"
+            "vi-dongtai"
           ],
           "type": "prose"
         },
@@ -27374,14 +27128,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Mianchi employer writes a C1 or higher driving licence and five years of driving experience and senior secondary school or above; the five years is a condition of that post and is not replaced with a nationwide requirement, nor is an amount inferred from negotiable."
+              "Benxi Liangma Motor Vehicle Testing advertised one authorized signatory in July 2026. One route listed in the notice required a signatory credential and at least two years of signatory experience. It listed CNY 3,500 monthly base pay, possible increases by negotiation, and social insurance and housing fund benefits. This is a signatory example, not inspector starting pay or a national distribution."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "r2-pay-2",
-            "r2-pay-3",
-            "editorial"
+            "vi-benxi"
           ],
           "type": "prose"
         },
@@ -27404,14 +27156,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: two local announcements cannot form a national occupational distribution; with no comparable amounts, hours, tax treatment or representative sample, no uniform high or low pay threshold is set from them."
+              "Postings do not establish national wage percentiles. Read a single job’s pay separately from an industry average."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "r2-pay-2",
-            "r2-pay-3",
-            "editorial"
+            "vi-dongtai",
+            "vi-benxi"
           ],
           "type": "prose"
         },
@@ -27530,7 +27281,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS parent occupation projection for 2025—2035 is growth of 2.2%, with average annual openings of 2,300 including growth and replacements; the official net increase of about 600 is a ten-year total. The scope includes aviation and cannot be extrapolated to a separate figure for this non-aviation occupation, to city job counts or to Chinese demand."
+              "The BLS parent occupation projection for 2025–2035 is growth of 2.2%, with average annual openings of 2,300 including growth and replacements; the official net increase of about 600 is a ten-year total. The scope includes aviation and cannot be extrapolated to a separate figure for this non-aviation occupation, to city job counts or to Chinese demand."
             ]
           },
           "fact_refs": [
@@ -27697,12 +27448,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain the complete 2025 parent occupation wage values for the transportation and warehousing industry. The scope of rail and road tasks should be checked separately, and wages in the actors’ industry or another repair occupation cannot be borrowed to fill the gap."
+              "This page has no verified non-aviation wage table for the U.S. transportation and warehousing industry. Check duties and pay for rail and road jobs separately."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "oews"
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27799,7 +27550,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 parent occupation employment, growth and replacement openings"
+              "2025–2035 parent occupation employment, growth and replacement openings"
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_secondary_locale.outlook-heading",
@@ -27852,7 +27603,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Even after memorising the rules, the current input still has to be checked. In this exercise, evidence must first be checked for being non-empty and the record version for consistency with the rules before the learning value is compared; the first-version value of 11 for C also cannot be judged as met directly. When building the table, refer each column back to the original prompt and record whether the error was in the evidence, the version or the value judgement. F1 fills in EC only, and the F2 record remains R1; original values or versions must not be changed to produce a complete answer. One exercise can support continued practice but does not prove real vehicle inspection ability or a personal level of cognition."
+              "Check the evidence and the applicable rule version before comparing values. Record missing material, applicable rules and reasons separately."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.fit.personality-fit-block.2",
@@ -27867,13 +27618,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "On receiving a correction, first restate the specific field and the parts not changed, then check the impact. In this exercise F1 changes only the C evidence to EC; F2 carries over F1 and changes only the current rule R2 and the threshold 13, and the three records remain R1 and should all be pending verification. If the feedback is vague, ask answerable questions and do not fill in authority, equipment or measurements from imagination. Keep a version log and the reasons for your judgement, and observe whether you are willing to admit that information is insufficient and re-check, rather than only changing the conclusion to the state someone else wants."
+              "Mark the changed fields, then independently recheck which decisions change."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.fit.personality-fit-block.3",
           "source_refs": [
-            "editorial",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -27912,13 +27662,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Pay and affordability are independent of occupational interest. The two Chinese historical announcements lack specific amounts, so check the current contract, hours and paid arrangements first, and do not rely on a United States parent occupation median or an industry average as a guarantee of personal income."
+              "Check pay by job and contract. Dongtai did not disclose inspector pay. Benxi listed CNY 3,500 in monthly base pay for the signing role. Ask about shifts, paid time and benefits."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.fit.personality-fit-block.6",
           "source_refs": [
-            "editorial",
-            "onet"
+            "vi-dongtai",
+            "vi-benxi"
           ],
           "type": "prose"
         },
@@ -28535,13 +28285,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Can keep the original values of 12 / 8 / 11 unchanged and correctly locate the corrections made by F1 and F2."
+              "Keep the original records, revisions and reasons for each decision."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.personality_fit_block.assessments.iq.signals.2",
           "source_refs": [
-            "editorial",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29061,7 +28810,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "No. A Chinese vehicle handler needs the driving licence for the corresponding vehicle type and more than two years of driving experience, but the corresponding inspection still requires passing the institution's training and assessment and having competence confirmed, and the signatory has separate conditions. The Mianchi employer's five years of driving experience is a requirement of that particular vehicle handling post, not a uniform national standard for ordinary inspectors. List your own documents, training and authorisation separately; the exercise on this page does not move a vehicle or issue reports, and a driving licence cannot prove the whole of mechanical or testing ability."
+              "No. A Chinese vehicle handler needs the driving licence for the corresponding vehicle type and at least two years of driving experience, but the corresponding inspection still requires passing the institution's training and assessment and having competence confirmed, and the signatory has separate conditions. The Mianchi employer's five years of driving experience is a requirement of that particular vehicle handling post, not a uniform national standard for ordinary inspectors. List your own documents, training and authorisation separately; the exercise on this page does not move a vehicle or issue reports, and a driving licence cannot prove the whole of mechanical or testing ability."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.personality_fit_block.questions.appearance.answer",
@@ -29122,13 +28871,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Yes; this page provides all the fictional records and both rounds of feedback, and paper or a spreadsheet is enough. Check the evidence version first and compare values second, and keep the first version, F1 and F2; the reference statuses in order are met / not met / pending, met / not met / met, and all pending. Do not buy equipment or look for a real vehicle to supplement the experience, and do not enter an inspection line or connect OBD. Write the portfolio as a learning process; it cannot serve as institutional training assessment or hands-on experience."
+              "Submit three versions and a change log before opening the reference. Keep the fictional inputs. Do not present the exercise as an inspection report or practical experience."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.personality_fit_block.questions.practice.answer",
           "source_refs": [
-            "editorial",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29437,13 +29185,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The risk prompts are compiled from O*NET context for this occupation, Chinese SAMR institutional rules, United States commercial vehicle qualifications and historical employer material, and are not accident probabilities. The general NIST method supports information risk only; jurisdictions and objects are kept separate, and other occupational settings are not applied."
+              "Keep roles and jurisdictions separate. O*NET describes U.S. work. Mainland motor vehicle rules apply to the relevant institution and roles. U.S. commercial vehicle annual inspection qualifications apply within their own rule. These examples do not estimate incident rates."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_risk_cards.evidence-scope",
           "source_refs": [
             "onet",
-            "editorial"
+            "cn-rule",
+            "sag"
           ],
           "type": "prose"
         },
@@ -29878,14 +29627,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Chinese motor vehicle inspection body requirements on staff competence and records and reports; the same document as cn-rule, not counted twice as independent evidence. United States commercial vehicle annual inspection qualifications are given separately in the path section under 49CFR396.19."
+              "For U.S. commercial motor vehicles, 49 CFR 396.19(a) applies to annual inspections under 396.17(d) or (e)."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_risk_cards.source.sag",
           "source_refs": [
-            "sag-moa",
-            "sag",
-            "editorial"
+            "sag"
           ],
           "type": "prose"
         },
@@ -29917,15 +29664,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This round three historical posts from different regions were read and checked: Jacksonville2026-07172 closed on 2026-07-15; the Tai'an 2024 Rongxin vehicle inspector and the Mianchi 2026 Zhicheng vehicle handler announcements are not confirmed as currently valid. The United States post has a wage and tasks, while the two Chinese posts list no amount or say the wage is negotiable. The three employers and three specific sets of conditions serve only for comparison and do not count as current recruitment demand.",
-              "Insufficient evidence: the Tai'an inspector sample lists no wage amount and the Mianchi vehicle handler only says negotiable; both announcements lack comparable amounts, hours and tax treatment and were not confirmed as currently valid this round. The five years of driving experience is a Mianchi employer condition only."
+              "Dongtai Tongda Auto Performance Testing advertised one vehicle inspector position in September 2026. It required a bachelor’s degree or higher, a C1 or higher license and at least two years of relevant inspection experience. Applications ran September 3–11. The posting did not list pay for that job. Benxi Liangma Motor Vehicle Testing advertised one authorized signatory in July 2026. One route listed in the notice required a signatory credential and at least two years of signatory experience. It listed CNY 3,500 monthly base pay, possible increases by negotiation, and social insurance and housing fund benefits. This is a signatory example, not inspector starting pay or a national distribution."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-2",
-            "r2-pay-3"
+            "vi-dongtai",
+            "vi-benxi"
           ],
           "type": "notice"
         },
@@ -29979,7 +29724,7 @@
               [
                 "United States municipal inspection post historical sample",
                 "Read the vehicle check, defect notice, re-inspection and record tasks.",
-                "Jacksonville requires two years of education and/or inspection and repair experience, plus Class B and similar before appointment.",
+                "The posting asks for at least two years of relevant education and/or experience in vehicle inspection or general repair and overhaul. Before appointment, hold a valid Class B license and qualify for city public-driver certification; obtain and maintain that certification while employed. Obtain Florida school bus inspection certification within six months of appointment.",
                 "Record the post conditions and the evidence you have, and do not pass it off as a United States licence or real vehicle inspection experience.",
                 "It has closed and is limited to that place and post; the conditions are not applied to China or to all United States posts."
               ]
@@ -30006,21 +29751,21 @@
                 "id": "employer-0",
                 "values": [
                   "Real employer conditions apply separately",
-                  "The closed Jacksonville post includes check notices and re-inspection records, specific experience and licence conditions; the Tai'an and Mianchi Chinese historical announcements have different conditions. Three samples cannot be used to declare a nationwide uniform requirement or current demand."
+                  "Dongtai Tongda Auto Performance Testing advertised one vehicle inspector position in September 2026. It required a bachelor’s degree or higher, a C1 or higher license and at least two years of relevant inspection experience. Applications ran September 3–11. The posting did not list pay for that job. Benxi Liangma Motor Vehicle Testing advertised one authorized signatory in July 2026. One route listed in the notice required a signatory credential and at least two years of signatory experience. It listed CNY 3,500 monthly base pay, possible increases by negotiation, and social insurance and housing fund benefits. This is a signatory example, not inspector starting pay or a national distribution."
                 ]
               },
               {
                 "id": "employer-1",
                 "values": [
                   "Editorial suggestion: keep the item-by-item judgement",
-                  "Using the first version, F1 and F2 tables on this page, explain the object, version, evidence, value and paper status item by item. Pending items are not changed to passing, and a finished product is not passed off as inspection experience."
+                  "Submit three separate versions and explain the applicable rule, evidence and reasons for each row."
                 ]
               },
               {
                 "id": "employer-2",
                 "values": [
                   "Editorial suggestion: write the reason for each correction clearly",
-                  "F1 fills in the C evidence only, and F2 changes only the rule version and the threshold; keep the original records and the differences. Explain why a version mismatch is treated as pending first, and do not change the record version on your own."
+                  "For each revision, record changed fields and identify the evidence and rule for each decision."
                 ]
               },
               {
@@ -30055,7 +29800,7 @@
                 "id": "rework",
                 "values": [
                   "Correction and version log",
-                  "F1 fills in the missing C evidence as EC only; F2 carries over F1 and changes only the rule to R2 with a threshold of 13, and the records remain R1. List the changed and unchanged fields, and do not add new test material on your own."
+                  "Log only the fields that actually change and keep the original inputs."
                 ]
               },
               {
@@ -30069,7 +29814,7 @@
                 "id": "reflection",
                 "values": [
                   "Review and follow-up question list",
-                  "Check the first version as met / not met / pending, F1 as met / not met / met and F2 as all pending. Then list the pending conditions such as real standards, equipment, training and post authority, and choose one for follow-up learning."
+                  "Open the reference only after submitting all three versions. List the real standards, equipment, training and authorization still to verify."
                 ]
               }
             ]
@@ -30107,13 +29852,13 @@
               [
                 "Receiving F1",
                 "Fill in only the C evidence as EC, keeping R1 and all original values.",
-                "C changes from pending to met; the A and B statuses are unchanged and the reasons can be traced back to the rules.",
+                "Record which rows are affected and the reason for each decision.",
                 "Filling in evidence in a learning exercise is not authorisation to enter real inspection data."
               ],
               [
                 "Receiving F2",
                 "Carrying over F1, change the rule to R2 with a threshold of 13, and all records remain R1.",
-                "The three records are pending first because of the version mismatch and cannot be judged directly against the new threshold.",
+                "Check the version and evidence for each row before deciding whether to compare the value.",
                 "Original values, the record version and an issued real report must not be changed."
               ],
               [
@@ -30175,7 +29920,7 @@
               [
                 "Chinese vehicle handler driving licence and driving years",
                 "Personnel actually responsible for inspection vehicle handling",
-                "Meets one of the driving status conditions for the corresponding vehicle type",
+                "Vehicle handlers must have both a valid license for the corresponding vehicle type and at least two years of driving experience.",
                 "Applies to the vehicle handler, and not every record post has the same driving years",
                 "A valid driving licence for the corresponding vehicle type and at least two years of driving experience; the Mianchi employer's five years is a separate specific condition",
                 "Check the documents, vehicle type and real driving years before taking on vehicle handling, and do not move a vehicle in practice",
@@ -30226,19 +29971,16 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "Chinese motor vehicle inspection body accreditation, competence confirmation for ordinary staff, the vehicle handling licence and driving years, and authorised signatory status are different matters. Do not declare that all are held on the strength of one training certificate, and do not treat the body's licence as a personal certificate.",
-              "The 2019 motor vehicle tester skill standard supports the historical identity, grades and application clause text; insufficient evidence: the current 2026 application version and local assessment conditions were not checked, and the historical clauses cannot replace the verified institutional competence requirements.",
-              "The typical path for the United States parent occupation, the commercial vehicle annual inspection regulation and the Jacksonville post conditions apply separately; a statistic that includes aviation does not mean aviation and non-aviation licences are interchangeable.",
-              "All practice is record checking on fictional paper material only; it does not enter a real inspection line, move a vehicle, lift it, connect a diagnostic tool or issue a conformity certificate. Real tasks are carried out as required once the institution confirms competence, equipment procedures and authority."
+              "Article 8 of SAMR’s supplementary accreditation requirements requires the institution to train, assess and confirm inspection staff competence before assigning inspection work. Article 11 sets separate qualification and experience or equivalent-competence requirements for technical leads and authorized signatories. Accreditation applies to the institution; check inspection, vehicle handling and report-signing duties separately. Use the current GB 38900-2020 for motor vehicle safety inspection items and methods. It does not govern rail or aviation.",
+              "Check vehicle-handling requirements separately, including the institution’s authorized scope.",
+              "Check signing authority for the institution and inspection scope; prior inspection work alone does not establish it.",
+              "The paper example is for personal exploration before applying."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.path.credential-boundary.1",
           "source_refs": [
             "cn-rule",
-            "cn-policy",
-            "sag",
-            "bls",
-            "editorial"
+            "vi-gb"
           ],
           "title": "Boundaries of training, status and contract",
           "type": "notice"
@@ -30264,12 +30006,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The Tai'an historical vehicle inspector sample lists senior secondary school or above, C1 and proficient driving, with the major preferred; no amount is listed and this round does not confirm a current vacancy."
+              "Dongtai Tongda Auto Performance Testing advertised one vehicle inspector position in September 2026. It required a bachelor’s degree or higher, a C1 or higher license and at least two years of relevant inspection experience. Applications ran September 3–11. The posting did not list pay for that job."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.path.career-path-block.2",
           "source_refs": [
-            "r2-pay-2"
+            "vi-dongtai"
           ],
           "type": "prose"
         },
@@ -30278,12 +30020,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The Mianchi historical vehicle handler sample lists senior secondary school or above and a C1 or higher driving licence and five years of driving experience, and the wage is negotiable; the five years is that employer's condition, not a nationwide requirement."
+              "Benxi Liangma Motor Vehicle Testing advertised one authorized signatory in July 2026. One route listed in the notice required a signatory credential and at least two years of signatory experience. It listed CNY 3,500 monthly base pay, possible increases by negotiation, and social insurance and housing fund benefits. This is a signatory example, not inspector starting pay or a national distribution."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.path.career-path-block.3",
           "source_refs": [
-            "r2-pay-3"
+            "vi-benxi"
           ],
           "type": "prose"
         },
@@ -30311,9 +30053,9 @@
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference approach",
-                  "First version: A has evidence EA, is consistent with R1 and has 12≥10, so paper-met; B has evidence EB and is consistent with R1 but has 8<10, so paper-not met; C has empty evidence, so paper-pending, and 11 cannot cross the evidence threshold. F1: A and B are unchanged; C has EC and is consistent with R1 and has 11≥10, so paper-met.",
-                  "F2: the A / B / C evidence is all non-empty, but the records R1 do not match the current rule R2, so all are paper-pending and 13 is not compared yet. The three records cannot be judged not met directly, and neither values nor versions may be changed. The log is that F1 filled in the C evidence, changing the C status; F2 changed only the rule version and threshold, making all three pending. Real testing, standard applicability and authority remain unknown."
+                  "Submit independently",
+                  "Check all three versions and record each change and reason.",
+                  "On Day 7 open “VI-44 reference (open after submitting)” in the FAQ."
                 ]
               },
               {
@@ -30327,9 +30069,9 @@
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.path.entry-work-sample-data.1",
           "source_refs": [
-            "editorial"
+            "editor"
           ],
-          "title": "Entry case material: a three-version review of fictional records",
+          "title": "VI-44 | Review three fictional inspection records",
           "type": "cards"
         },
         {
@@ -30348,7 +30090,7 @@
                 "id": "day-2",
                 "values": [
                   "Day 2 | produce the first version",
-                  "Apply the evidence and version threshold and then compare with at least 10, producing a three-record status and reason table, and do not judge the C value of 11 as met directly."
+                  "Check evidence and version first, then write one decision per row."
                 ]
               },
               {
@@ -30362,35 +30104,35 @@
                 "id": "day-4",
                 "values": [
                   "Day 4 | apply F1",
-                  "Fill in only the C evidence as EC and produce the complete three-record table and the correction log; the A and B values and statuses are unchanged and C becomes met."
+                  "Apply the specified F1 change and write a separate table and change log."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
                   "Day 5 | apply F2",
-                  "Carrying over F1, change only the current rule to R2 with a threshold of 13, and the records remain R1; produce all pending with the version reason, and the new threshold must not be applied directly."
+                  "Recheck all three rows under F2 and retain the originals."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
                   "Day 6 | organise the portfolio and authority",
-                  "Bring together the three version tables, the log, the sources and the list of unknowns; state clearly that there was no hands-on work and no real data, and that the learning exercise is not an inspection report."
+                  "Submit three decisions tables and a change log without reading the reference."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
                   "Day 7 | decide the next step",
-                  "Check each reason against the reference, record the tasks you are willing to repeat and the knowledge still to be added, then check one specific post and the regional rules; give no suitability score or promise of employment."
+                  "Open “VI-44 reference (open after submitting)” in the FAQ and record each difference."
                 ]
               }
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.path.seven-day-trial.1",
           "source_refs": [
-            "editorial"
+            "editor"
           ],
           "title": "A seven-day low-cost experience of this occupation",
           "type": "timeline"
@@ -30400,8 +30142,8 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Compare the three complete tables: the first version met / not met / pending, F1 met / not met / met, and F2 all pending; every status can be traced back to the evidence and version threshold.",
-              "Keep facts and judgement separate: the values 12 / 8 / 11 are unchanged, F1 fills in EC only, and F2 changes only the rule R2 and the threshold 13; the record version must not be changed or real vehicle material added.",
+              "After opening the reference, compare your decisions and reasons across all three versions.",
+              "Keep the original inputs and list each change and its effect.",
               "Record the time and attention that repeated checking consumes, especially whether you are willing to keep pending items; one correct calculation does not certify real inspection or suitability.",
               "Check that the portfolio uses only fictional identifiers and your own paper records, with no real vehicle or customer material, and that no equipment was operated, no inspection line was entered and no report was issued.",
               "Observe whether, on receiving a correction, you first locate the field and the impact rather than only chasing all-met status, and whether you can honestly stop the value judgement in this exercise when versions do not match.",
@@ -30411,7 +30153,7 @@
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.path.seven-day-decision.1",
           "source_refs": [
-            "editorial"
+            "editor"
           ],
           "title": "How to judge on day seven whether to continue",
           "type": "list"
@@ -30664,7 +30406,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The complete input on this page and the first-version three-record table, able to explain why C is pending first."
+              "Keep the three original records and explain the reason for each decision."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_path_block.tracks.screen.01.readiness_evidence",
@@ -31626,12 +31368,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The Mianchi vehicle handler historical condition announcement, where the five years of driving experience is that employer's condition only; the pay and validity gaps are given in this module's recruitment sample."
+              "Dongtai Tongda Auto Performance Testing advertised one vehicle inspector position in September 2026. It required a bachelor’s degree or higher, a C1 or higher license and at least two years of relevant inspection experience. Applications ran September 3–11. The posting did not list pay for that job."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_path_block.source.r2-pay-3",
           "source_refs": [
-            "r2-pay-3"
+            "vi-dongtai"
           ],
           "type": "prose"
         }
@@ -31648,7 +31390,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The United States transportation inspectors parent occupation grows 2.2% over 2025—2035, with an official net increase of about 600 and average annual openings of 2,300. It includes aviation and non-aviation; growth and replacements are not the same quantity, and no separate figure for this occupation or Chinese opportunities can be separated out."
+              "The BLS parent group 53-6051 includes aviation and non-aviation: about 25,100 jobs in 2025 and 25,600 projected for 2035, up 2.2%, with about 600 net additions and 2,300 annual openings including replacements. BLS rounds endpoints and change separately. No separate .07 estimate is provided."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.market-signals.market-signal-card.1",
@@ -31662,7 +31404,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The BLS transportation inspectors parent occupation grows 2.2% over 2025—2035, with an official net increase of about 600 and average annual openings of 2,300. The net increase is a ten-year total and the average annual openings include growth and replacements; the endpoints are rounded independently. The scope includes aviation and cannot be broken down into a separate figure for this occupation, Chinese demand or AI causality."
+              "The BLS parent group 53-6051 includes aviation and non-aviation: about 25,100 jobs in 2025 and 25,600 projected for 2035, up 2.2%, with about 600 net additions and 2,300 annual openings including replacements. BLS rounds endpoints and change separately. No separate .07 estimate is provided."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.market-signals.market-signal-card.2",
@@ -31690,14 +31432,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "This round obtained the closed Jacksonville post and the Tai'an and Mianchi historical condition announcements. The tasks and thresholds can be compared, but three posts in different regions cannot form a current vacancy total or national recruitment demand."
+              "Jacksonville’s posting 2026-07172 opened June 30 and closed July 15, 2026. The role inspected for-hire vehicles, among others. It listed $23.02 hourly and $47,883.52 annually for this specific Florida job. The mainland examples cover inspection in Dongtai and signing in Benxi. None establishes total current demand."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.market-signals.market-signal-card.4",
           "source_refs": [
             "employer",
-            "r2-pay-2",
-            "r2-pay-3"
+            "vi-dongtai",
+            "vi-benxi"
           ],
           "type": "prose"
         },
@@ -32215,39 +31957,32 @@
                 ]
               },
               {
-                "answer": "Chinese institutions must provide training and assessment and confirm the corresponding competence; a vehicle handler needs the driving licence for the corresponding vehicle type and more than two years of driving experience, and the signatory has separate conditions. The United States parent occupation typical path and the commercial vehicle annual inspection qualification apply separately; the specific skill application and employer conditions are checked against current material.",
+                "answer": "Article 8 of SAMR’s supplementary accreditation requirements requires the institution to train, assess and confirm inspection staff competence before assigning inspection work. Article 11 sets separate qualification and experience or equivalent-competence requirements for technical leads and authorized signatories. Accreditation applies to the institution; check inspection, vehicle handling and report-signing duties separately. Use the current GB 38900-2020 for motor vehicle safety inspection items and methods. It does not govern rail or aviation. For U.S. commercial motor vehicle annual inspections, check 49 CFR 396.19 and its scope.",
                 "id": "actors.faq.4",
                 "question": "Which education, certificates or driving licences are needed?",
                 "question_key": "career.faq.transportation-vehicle-equipment-and-systems-inspectors-except-aviation.4",
                 "source_refs": [
                   "cn-rule",
-                  "cn-policy",
-                  "sag",
-                  "bls"
+                  "sag"
                 ]
               },
               {
-                "answer": "Technical assistance, institutional adoption and changes in job numbers differ. The OECD historical cases reach this occupation but are not a representative national survey; this page obtained no net substitution causality for this occupation and fills in no rate score. Real evidence, system validation and authorisation still each need checking.",
+                "answer": "Tools can flag blank fields, rule versions and differences between records. People at the institution still verify the applicable rule, original evidence and signing authority. No verified displacement rate is available for this occupation.",
                 "id": "actors.faq.5",
                 "question": "Can AI directly replace inspectors?",
                 "question_key": "career.faq.transportation-vehicle-equipment-and-systems-inspectors-except-aviation.5",
                 "source_refs": [
-                  "r2-ai",
-                  "nist",
-                  "editorial"
+                  "onet"
                 ]
               },
               {
-                "answer": "No. The 2025 United States quintiles are the transportation inspectors parent occupation, which includes aviation, and OEWS excludes self-employment; the two Chinese historical condition announcements lack comparable amounts, and an industry average is not this occupation's wage either.",
+                "answer": "No. The U.S. figure covers the parent group including aviation. The mainland figure is from one authorized signatory posting. Neither gives mainland vehicle inspector pay.",
                 "id": "actors.faq.6",
                 "question": "Can China use the United States wages directly?",
                 "question_key": "career.faq.transportation-vehicle-equipment-and-systems-inspectors-except-aviation.6",
                 "source_refs": [
                   "r2-pay-1",
-                  "bls-oews",
-                  "r2-pay-2",
-                  "r2-pay-3",
-                  "nbs"
+                  "vi-benxi"
                 ]
               },
               {
@@ -32271,12 +32006,12 @@
                 ]
               },
               {
-                "answer": "Keep the complete input, the first-version and F1/F2 three-record tables and the log. The statuses in order are met / not met / pending; met / not met / met; all pending. The F2 records remain R1 and, not matching the rule R2, are pending first; state clearly that this is fictional with no hands-on work.",
+                "answer": "Submit three versions and a change log before opening the reference. Keep the fictional inputs. Do not present the exercise as an inspection report or practical experience.",
                 "id": "actors.faq.9",
                 "question": "How do you build a checkable portfolio?",
                 "question_key": "career.faq.transportation-vehicle-equipment-and-systems-inspectors-except-aviation.9",
                 "source_refs": [
-                  "editorial"
+                  "editor"
                 ]
               },
               {
@@ -32288,6 +32023,15 @@
                   "cn-rule",
                   "editorial"
                 ]
+              },
+              {
+                "answer": "First version: A has evidence EA, is consistent with R1 and has 12≥10, so paper-met; B has evidence EB and is consistent with R1 but has 8<10, so paper-not met; C has empty evidence, so paper-pending, and 11 cannot cross the evidence threshold. F1: A and B are unchanged; C has EC and is consistent with R1 and has 11≥10, so paper-met. F2: the A / B / C evidence is all non-empty, but the records R1 do not match the current rule R2, so all are paper-pending and 13 is not compared yet. The three records cannot be judged not met directly, and neither values nor versions may be changed. The log is that F1 filled in the C evidence, changing the C status; F2 changed only the rule version and threshold, making all three pending. Real testing, standard applicability and authority remain unknown.",
+                "id": "actors.faq.11",
+                "question": "VI-44 reference (open after submitting)",
+                "question_key": "career.faq.transportation-vehicle-equipment-and-systems-inspectors-except-aviation.11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -32297,7 +32041,7 @@
             "bls-ooh",
             "cn-policy",
             "bls-oews",
-            "bls-ors"
+            "nist"
           ],
           "type": "faq"
         },
@@ -32338,12 +32082,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The tasks of this occupation, the United States parent occupation statistics, Chinese institutional rules and historical posts were each read and checked. The AI historical research and the general risk method are kept within their own scope, and the original exercise and suggestions are clearly labelled; the source pull-out cards keep the original text and limitations."
+              "These inspectors check vehicles, equipment or records against the applicable standards, document their findings and pass exceptions to the responsible person. Mainland road-vehicle inspection provides the entry examples here. The U.S. non-aviation category also includes settings such as rail. May 2025 U.S. OEWS median pay was $92,100 a year or $44.28 an hour for the parent group. It is not a separate estimate for non-aviation inspectors. Article 8 of SAMR’s supplementary accreditation requirements requires the institution to train, assess and confirm inspection staff competence before assigning inspection work. Article 11 sets separate qualification and experience or equivalent-competence requirements for technical leads and authorized signatories. Accreditation applies to the institution; check inspection, vehicle handling and report-signing duties separately."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.source_card.source",
           "source_refs": [
-            "editorial"
+            "onet",
+            "r2-pay-1",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -32352,12 +32098,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Reviewed on 2026-10-12: the precise non-aviation tasks and RCI, the SAMR staff and record and report clauses, 396.19, the closed Jacksonville post and the OECD historical case table. A plain read of the original Mianchi URL confirmed the five years of vehicle handling experience and the negotiable wage, where a web summary had previously omitted a line; the original Tai'an URL returned 403 this round, so the earlier historical conditions are retained and current validity is not confirmed. The 2019 skill PDF identity and grades four to one were read, and the 2026 local application version is not confirmed. The parent occupation national wage and EP were verified earlier in this window under 1001 and are not a separate figure for this occupation."
+              "Dongtai Tongda Auto Performance Testing advertised one vehicle inspector position in September 2026. It required a bachelor’s degree or higher, a C1 or higher license and at least two years of relevant inspection experience. Applications ran September 3–11. The posting did not list pay for that job. Benxi Liangma Motor Vehicle Testing advertised one authorized signatory in July 2026. One route listed in the notice required a signatory credential and at least two years of signatory experience. It listed CNY 3,500 monthly base pay, possible increases by negotiation, and social insurance and housing fund benefits. This is a signatory example, not inspector starting pay or a national distribution."
             ]
           },
           "id": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.source_card.updated-at",
           "source_refs": [
-            "editorial"
+            "vi-dongtai",
+            "vi-benxi"
           ],
           "type": "prose"
         },
@@ -32516,7 +32263,7 @@
                 "limitation": "Not a separate 53-6051.07 figure or Chinese statistics, and the typical conditions are not a uniform requirement for every post.",
                 "market": "United States",
                 "name": "BLS transportation inspectors 53-6051 parent occupation overview",
-                "period": "2025 wages and 2025—2035 projections",
+                "period": "2025 wages and 2025–2035 projections",
                 "publisher": "United States Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
@@ -32532,25 +32279,25 @@
                 "limitation": "Institutional requirements are not a universal personal certificate; repair, vehicle handling, inspection and issuance authority are separate.",
                 "market": "China",
                 "name": "State Administration for Market Regulation | supplementary technical requirements for accreditation review of motor vehicle inspection bodies",
-                "period": "Market regulation inspection letter [2022] No. 111; effective from 2023-06-01",
+                "period": "Dated 2022-12-29; posted on the SAMR website 2023-01-06",
                 "publisher": "State Administration for Market Regulation",
                 "scope": "exact",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/rkjcs/art/2023/art_145f7ede93374c028990f90208dc249c.html"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Fictional learning measures and checks of three-version evidence and rule versions; the reference answer, portfolio, seven-day plan and fit prompts are editorial designs."
+                  "Uses fictional points, evidence IDs and versions."
                 ],
-                "evidence_type": "editorial guidance",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "This URL serves as the page identity and is not described as live; it contains no real vehicles, inspection operations or conformity certification and does not count as an external independent source.",
-                "market": "Editorial suggestions on this page",
-                "name": "FermatMind original record review and career exploration on this page",
-                "period": "Produced locally on 2026-10-01",
-                "publisher": "FermatMind content editing",
+                "limitation": "Does not grant inspection or signing authority.",
+                "market": "Fictional",
+                "name": "VI-44 | Review three fictional inspection records",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
                 "scope": "editorial_synthesis",
-                "url": "https://www.fermatmind.com/zh/career/jobs/transportation-vehicle-equipment-and-systems-inspectors-except-aviation"
+                "url": null
               },
               {
                 "accessed_at": "2026-10-01",
@@ -32630,20 +32377,20 @@
                 "url": "https://www.bls.gov/oes/tables.htm"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Inspects or monitors transport vehicle equipment and systems, checking safety and rules, including rail and excluding aviation.",
-                  "Tasks include defect checks, testing, OBD and emissions, records and rectification notices; RCI interests."
+                  "These inspectors check vehicles, equipment or records against the applicable standards, document their findings and pass exceptions to the responsible person. Mainland road-vehicle inspection provides the entry examples here. The U.S. non-aviation category also includes settings such as rail.",
+                  "U.S. occupational tasks."
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "The Chinese name is not directly equivalent to the United States scope; employment uses the latest BLS projection, and a tool list is not AI adoption evidence.",
+                "limitation": "U.S. occupational tasks.",
                 "market": "United States",
-                "name": "O*NET non-aviation transportation vehicle, equipment and systems inspectors 53-6051.07",
-                "period": "Updated in 2026; wages for 2025, while the original employment column is still 2024—2034",
-                "publisher": "United States Department of Labor O*NET",
+                "name": "O*NET non-aviation vehicle, equipment and systems inspection",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-6051.07"
+                "url": "https://www.onetonline.org/link/details/53-6051.07"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -32662,20 +32409,20 @@
                 "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2023/03/the-impact-of-ai-on-the-workplace-evidence-from-oecd-case-studies-of-ai-implementation_b4c2c6ee/2247ce58-en.pdf"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "The page title is the aviation entry point, and the wage table clearly states the shared parent occupation of Transportation Inspectors.",
-                  "National annual P10/P25/P50/P75/P90: 40,330 / 58,780 / 92,100 / 108,890 / 138,670 US dollars; hourly 19.39 / 28.26 / 44.28 / 52.35 / 66.67."
+                  "May 2025 U.S. OEWS median pay was $92,100 a year or $44.28 an hour for the parent group. It is not a separate estimate for non-aviation inspectors.",
+                  "Includes aviation; no separate non-aviation estimate."
                 ],
-                "evidence_type": "official statistics",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-1",
-                "limitation": "The parent occupation wage table only, without citing aviation tasks; it is not a separate figure for this occupation, an individual's annual hours or a guarantee of seniority.",
+                "limitation": "Includes aviation; no separate non-aviation estimate.",
                 "market": "United States",
-                "name": "MyNextMove displays the BLS2025 parent occupation wage table (aviation entry point)",
-                "period": "May2025",
-                "publisher": "United States Department of Labor O*NET / BLS",
+                "name": "BLS OEWS parent-group inspector wages via O*NET",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.mynextmove.org/vets/profile/wages/53-6051.01"
+                "url": "https://www.onetonline.org/link/localwages/53-6051.07"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -32710,23 +32457,7 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "The corresponding inspection is carried out only after passing institutional training and assessment and having competence confirmed; a vehicle handler needs a valid driving licence for the corresponding vehicle type and at least two years of driving experience.",
-                  "Institutional accreditation, the technical lead, the signatory conditions and ordinary inspection duties are laid down separately; the records correspond to the report and results must not be falsified."
-                ],
-                "evidence_type": "official requirements",
-                "id": "ratify",
-                "limitation": "Institutional requirements are not a universal personal certificate; repair, vehicle handling, inspection and issuance authority are separate. The same document as cn-rule, not counted twice as independent evidence.",
-                "market": "China",
-                "name": "State Administration for Market Regulation | supplementary technical requirements for accreditation review of motor vehicle inspection bodies | use alias",
-                "period": "Market regulation inspection letter [2022] No. 111; effective from 2023-06-01",
-                "publisher": "State Administration for Market Regulation",
-                "scope": "exact",
-                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/rkjcs/art/2023/art_145f7ede93374c028990f90208dc249c.html"
-              },
-              {
-                "accessed_at": "2026-10-01",
-                "details": [
-                  "Personnel performing the 396.17 annual inspection must understand the relevant standards, methods and tools and meet the applicable government training qualification or at least one year of training and experience in a qualifying category, and so on."
+                  "49 CFR 396.19(a) concerns individuals performing annual inspections under 396.17(d) or (e) and lists inspection criteria, methods and experience or training requirements."
                 ],
                 "evidence_type": "official regulation",
                 "id": "sag",
@@ -32737,22 +32468,6 @@
                 "publisher": "United States electronic Code of Federal Regulations / FMCSA",
                 "scope": "contextual",
                 "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-III/subchapter-B/part-396/section-396.19"
-              },
-              {
-                "accessed_at": "2026-10-01",
-                "details": [
-                  "The corresponding inspection is carried out only after passing institutional training and assessment and having competence confirmed; a vehicle handler needs a valid driving licence for the corresponding vehicle type and at least two years of driving experience.",
-                  "Institutional accreditation, the technical lead, the signatory conditions and ordinary inspection duties are laid down separately; the records correspond to the report and results must not be falsified."
-                ],
-                "evidence_type": "official requirements",
-                "id": "sag-moa",
-                "limitation": "Institutional requirements are not a universal personal certificate; repair, vehicle handling, inspection and issuance authority are separate. The same document as cn-rule, not counted twice as independent evidence.",
-                "market": "China",
-                "name": "State Administration for Market Regulation | supplementary technical requirements for accreditation review of motor vehicle inspection bodies | use alias",
-                "period": "Market regulation inspection letter [2022] No. 111; effective from 2023-06-01",
-                "publisher": "State Administration for Market Regulation",
-                "scope": "exact",
-                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/rkjcs/art/2023/art_145f7ede93374c028990f90208dc249c.html"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -32855,7 +32570,7 @@
                 "limitation": "The parent occupation includes aviation, and the projection and growth and replacement openings cannot be extrapolated to a separate figure for this occupation, to China or to AI causality.",
                 "market": "United States",
                 "name": "BLS Table 1.2 transportation inspectors employment projections",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "United States Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32876,21 +32591,6 @@
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "accessed_at": "2026-10-01",
-                "details": [
-                  "Covers validity and reliability, safety, privacy and responsibility; supports material and output risk management."
-                ],
-                "evidence_type": "official risk framework",
-                "id": "bls-ors",
-                "limitation": "A general voluntary framework that does not establish this occupation's adoption rate, missed-detection rate or unemployment causality. The same document as nist, not counted twice as independent evidence.",
-                "market": "General",
-                "name": "NIST AI RMF1.0 general risk framework | use alias",
-                "period": "Framework 1.0, 2023-01",
-                "publisher": "National Institute of Standards and Technology, United States",
-                "scope": "contextual",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
-              },
-              {
                 "accessed_at": "2026-10-02",
                 "details": [
                   "Motor vehicle tester 4-08-05-05, using equipment to test the function and quality of whole-vehicle systems, assemblies and components.",
@@ -32907,36 +32607,83 @@
                 "url": "https://he.nvq.net.cn/siteApp/upload/1072/upload/2021-11-29/2544/78521638150779718.pdf"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Fictional learning measures and checks of three-version evidence and rule versions; the reference answer, portfolio, seven-day plan and fit prompts are editorial designs."
+                  "Paper record review."
                 ],
-                "evidence_type": "editorial guidance",
+                "evidence_type": "editorial_design",
                 "id": "editorial",
-                "limitation": "This URL serves as the page identity and is not described as live; it contains no real vehicles, inspection operations or conformity certification and does not count as an external independent source.",
-                "market": "Editorial suggestions on this page",
-                "name": "FermatMind original record review and career exploration on this page",
-                "period": "Produced locally on 2026-10-01",
-                "publisher": "FermatMind content editing",
+                "limitation": "No actual vehicles or customer data.",
+                "market": "Fictional",
+                "name": "VI-44 | Review three fictional inspection records",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
                 "scope": "editorial_synthesis",
-                "url": "https://www.fermatmind.com/zh/career/jobs/transportation-vehicle-equipment-and-systems-inspectors-except-aviation"
+                "url": null
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Inspection | defect and status identification | inspect the vehicle equipment under the applicable task, identify damage, mechanical faults and non-conformities, and keep the basis for the observation. — 25/100; weight=1/3; transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.responsibilities_block.02[0]",
-                  "Testing | test records and result comparison | obtain records under the applicable procedure, check the units, equipment and method, compare against the standard and keep the original results. — 25/100; weight=1/3; transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.responsibilities_block.03[0]",
-                  "Reporting | traceability and review | check that records correspond uniquely to the object, form the report within authority, follow the applicable process for corrections and do not alter original results. — 75/100; weight=1/3; transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.responsibilities_block.05[0]"
+                  "Tools can flag blank fields, rule versions and differences between records. People at the institution still verify the applicable rule, original evidence and signing authority. No verified displacement rate is available for this occupation.",
+                  "No displacement rate.",
+                  "No displacement rate.",
+                  "No displacement rate.",
+                  "No displacement rate."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "primary_document",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "No displacement rate.",
+                "market": "United States",
+                "name": "O*NET: inspection and documentation tasks",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-6051.07"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Dongtai Tongda Auto Performance Testing advertised one vehicle inspector position in September 2026. It required a bachelor’s degree or higher, a C1 or higher license and at least two years of relevant inspection experience. Applications ran September 3–11. The posting did not list pay for that job."
+                ],
+                "evidence_type": "primary_document",
+                "id": "vi-dongtai",
+                "limitation": "One closed posting.",
+                "market": "Mainland China",
+                "name": "Dongtai: vehicle inspector posting",
+                "period": "2026-09-02",
+                "publisher": "Dongtai municipal government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.dongtai.gov.cn/art/2026/9/2/art_24456_4451133.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Benxi Liangma Motor Vehicle Testing advertised one authorized signatory in July 2026. One route listed in the notice required a signatory credential and at least two years of signatory experience. It listed CNY 3,500 monthly base pay, possible increases by negotiation, and social insurance and housing fund benefits. This is a signatory example, not inspector starting pay or a national distribution."
+                ],
+                "evidence_type": "primary_document",
+                "id": "vi-benxi",
+                "limitation": "One historical notice; current availability unverified.",
+                "market": "Mainland China",
+                "name": "Benxi: authorized signatory posting",
+                "period": "2026-07-23",
+                "publisher": "Benxi municipal SASAC",
+                "scope": "recruitment_proxy",
+                "url": "https://benxi.gov.cn/publicity_bxsgyzcjdglwyh/fdzdgknr/ywgz/tzgg/140983"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Current mandatory standard for motor vehicle safety inspection."
+                ],
+                "evidence_type": "primary_document",
+                "id": "vi-gb",
+                "limitation": "Does not establish rail or aviation inspection rules.",
+                "market": "Mainland China",
+                "name": "GB 38900-2020: motor vehicle safety inspection items and methods",
+                "period": "GB 38900-2020",
+                "publisher": "National Standards Information Platform",
+                "scope": "contextual",
+                "url": "https://std.samr.gov.cn/gb/search/gbDetailedCNF?id=A6C17F3F874B903DE05397BE0A0A40C3"
               }
             ]
           },
@@ -34533,15 +34280,15 @@
           },
           {
             "href": {
-              "$source": "r2-pay-3",
+              "$source": "vi-dongtai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1"
             },
-            "id": "r2-pay-3",
+            "id": "vi-dongtai",
             "label": {
-              "$source": "r2-pay-3",
+              "$source": "vi-dongtai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35506,8 +35253,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-rule",
-              "sag-moa"
+              "cn-rule"
             ],
             "id": "identity-procedure",
             "mitigation": {
@@ -35677,15 +35423,15 @@
           },
           {
             "href": {
-              "$source": "sag-moa",
+              "$source": "sag",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1"
             },
-            "id": "sag-moa",
+            "id": "sag",
             "label": {
-              "$source": "sag-moa",
+              "$source": "sag",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35735,17 +35481,17 @@
             {
               "指标": "Material type",
               "数值": "Local historical condition announcements",
-              "说明": "Two employers, Tai'an and Mianchi, with different posts; no complete income sample was obtained."
+              "说明": "These are different roles. Compare their responsibilities and conditions."
             },
             {
-              "指标": "Tai'an inspector",
-              "数值": "Amount not disclosed",
-              "说明": "The 2024 conditions are readable; other companies' wages are not taken."
+              "指标": "Dongtai vehicle inspector",
+              "数值": "Pay not disclosed",
+              "说明": "One closed posting."
             },
             {
-              "指标": "Mianchi vehicle handler",
-              "数值": "Wage negotiable",
-              "说明": "The 2026 announcement uses only this wording, and a monthly salary cannot be filled in."
+              "指标": "Benxi inspection-line authorized signatory",
+              "数值": "CNY 3,500 monthly base pay",
+              "说明": "Possible increase by negotiation; not an inspector wage benchmark."
             },
             {
               "指标": "Time status",
@@ -35764,7 +35510,7 @@
             },
             {
               "指标": "Undisclosed items",
-              "数值": "Amount, hours, tax treatment",
+              "数值": "Tax treatment, hours and probation pay",
               "说明": "To be checked with the actual employer; no guessed values are filled in."
             },
             {
@@ -35782,8 +35528,8 @@
           "china_class_row": "Post and statistical background",
           "china_edu_table": [
             {
-              "学历段": "Tai'an 2024 vehicle inspector",
-              "岗位方向": "A condition sample; there is no wage amount.",
+              "学历段": "Dongtai vehicle inspector",
+              "岗位方向": "Bachelor’s degree or higher; no pay listed.",
               "说明": {
                 "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.scenario.featured",
                 "block": "china-salary",
@@ -35792,8 +35538,8 @@
               }
             },
             {
-              "学历段": "Mianchi 2026 vehicle handler",
-              "岗位方向": "Wage negotiable; the five years of driving experience is the employer's condition.",
+              "学历段": "Benxi inspection-line authorized signatory",
+              "岗位方向": "Signatory experience and employer-listed monthly base pay.",
               "说明": {
                 "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.scenario.background",
                 "block": "china-salary",
@@ -35883,25 +35629,16 @@
               }
             },
             {
-              "城市/区间": "Tai'an Rongxin inspector historical conditions",
+              "城市/区间": "Benxi inspection-line authorized signatory",
               "月薪参考": {
-                "$join": [
-                  {
-                    "$fact": "china-pay-gap",
-                    "field": "display_value"
-                  },
-                  {
-                    "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.quote-limits",
-                    "block": "china-salary",
-                    "copy_key": "career.item.career-snapshot-primary-locale",
-                    "type": "prose"
-                  }
-                ],
-                "separator": ""
+                "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.quote-limits",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
               }
             },
             {
-              "城市/区间": "Mianchi Zhicheng vehicle handler historical conditions",
+              "城市/区间": "Dongtai vehicle inspector",
               "月薪参考": {
                 "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -35912,9 +35649,7 @@
           ],
           "china_soc_row": "Chinese salary definition",
           "edu": "See the entry module for institutional training and assessment and post qualifications",
-          "fact_refs": [
-            "china-pay-gap"
-          ],
+          "fact_refs": [],
           "sources_note": "O*NET task scope for this occupation (not Chinese wages) | https://www.onetonline.org/link/summary/53-6051.07",
           "ui": {
             "ai_heading": "Can AI change be used to infer a fall in inspector wages?",
@@ -36403,15 +36138,9 @@
         }
       },
       "hero": {
-        "h1": {
-          "$subject": "name"
-        },
-        "quick_answer": {
-          "$subject": "summary"
-        },
-        "title": {
-          "$subject": "name"
-        }
+        "h1": "Transportation Vehicle and Equipment Inspectors (Non-Aviation)",
+        "quick_answer": "These inspectors check vehicles, equipment or records against the applicable standards, document their findings and pass exceptions to the responsible person. Mainland road-vehicle inspection provides the entry examples here. The U.S. non-aviation category also includes settings such as rail.",
+        "title": "Transportation Vehicle and Equipment Inspectors (Non-Aviation)"
       },
       "market_signal_card": {
         "context_links": [
@@ -36476,7 +36205,7 @@
           },
           {
             "geography": "Chinese motor vehicle inspection bodies",
-            "horizon": "The technical requirements effective from 2023-06-01",
+            "horizon": "Posted by SAMR on 2023-01-06",
             "interpretation": {
               "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -36491,12 +36220,12 @@
             },
             "metric": "Institutional competence and quality requirements",
             "occupation_scope": "Motor vehicle safety technology and emissions inspection bodies",
-            "source_id": "ratify",
+            "source_id": "cn-rule",
             "value": "Requirements on staff competence, software validation and records and reports"
           },
           {
             "geography": "Specific employers and Chinese historical cases",
-            "horizon": "Three historical posts; the United States one has closed and the current validity of the Chinese ones is pending verification",
+            "horizon": "Three historical postings with separate dates and roles",
             "interpretation": {
               "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -36512,7 +36241,7 @@
             "metric": "Specific conditions and sample boundaries",
             "occupation_scope": "A specific item or employer, not representing the whole occupation",
             "source_id": "employer",
-            "value": "Three employers in different regions, not a current total demand"
+            "value": "Examples for comparing duties and entry conditions"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -36548,7 +36277,7 @@
               "field": "url",
               "item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.source-register.published.1"
             },
-            "id": "ratify",
+            "id": "cn-rule",
             "label": {
               "$source": "cn-rule",
               "block": "source-register",
@@ -36873,7 +36602,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my occupational interests",
             "evidence_level": {
               "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -36922,7 +36651,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -36971,7 +36700,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -37020,7 +36749,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation signals",
             "evidence_level": {
               "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -37069,7 +36798,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.personality_fit_block.assessments.iq.evidence-level",
@@ -37118,7 +36847,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication signals",
             "evidence_level": {
               "$item": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation.display.personality_fit_block.assessments.eq.evidence-level",
@@ -37740,7 +37469,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore my occupational interests and task preferences",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37861,11 +37590,11 @@
             "label": "Big Five (English)"
           },
           {
-            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
             "label": "MBTI (Chinese)"
           },
           {
-            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "href": "/en/tests/big-five-personality-test-ocean-model",
             "label": "Big Five (Chinese)"
           }
         ]
@@ -38205,7 +37934,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and inspection records",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38223,7 +37952,7 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": "The original published value or an explicit access gap; a stable fact_id does not determine the statistical year and the actual period follows the fields above; no cross-market conversion is made.",
+        "derivation": "Shown for the source’s stated scope and period. No cross-market conversion.",
         "display_value": "53-6051.07",
         "fact_id": "official-code",
         "market": "United States",
@@ -38235,7 +37964,7 @@
         ]
       },
       {
-        "derivation": "The original published value or an explicit access gap; a stable fact_id does not determine the statistical year and the actual period follows the fields above; no cross-market conversion is made.",
+        "derivation": "Shown for the source’s stated scope and period. No cross-market conversion.",
         "display_value": "92,100 US dollars per year (parent occupation)",
         "fact_id": "us-median-2025",
         "market": "United States",
@@ -38247,7 +37976,7 @@
         ]
       },
       {
-        "derivation": "The original published value or an explicit access gap; a stable fact_id does not determine the statistical year and the actual period follows the fields above; no cross-market conversion is made.",
+        "derivation": "Shown for the source’s stated scope and period. No cross-market conversion.",
         "display_value": "40,330 US dollars per year (parent occupation)",
         "fact_id": "us-p10-2025",
         "market": "United States",
@@ -38259,7 +37988,7 @@
         ]
       },
       {
-        "derivation": "The original published value or an explicit access gap; a stable fact_id does not determine the statistical year and the actual period follows the fields above; no cross-market conversion is made.",
+        "derivation": "Shown for the source’s stated scope and period. No cross-market conversion.",
         "display_value": "138,670 US dollars per year (parent occupation)",
         "fact_id": "us-p90-2025",
         "market": "United States",
@@ -38271,7 +38000,7 @@
         ]
       },
       {
-        "derivation": "The original published value or an explicit access gap; a stable fact_id does not determine the statistical year and the actual period follows the fields above; no cross-market conversion is made.",
+        "derivation": "Shown for the source’s stated scope and period. No cross-market conversion.",
         "display_value": "25,100 people (parent occupation)",
         "fact_id": "us-employment-2024",
         "market": "United States",
@@ -38283,31 +38012,31 @@
         ]
       },
       {
-        "derivation": "The original published value or an explicit access gap; a stable fact_id does not determine the statistical year and the actual period follows the fields above; no cross-market conversion is made.",
-        "display_value": "2.2% (parent occupation, 2025—2035)",
+        "derivation": "Shown for the source’s stated scope and period. No cross-market conversion.",
+        "display_value": "2.2% (parent occupation, 2025–2035)",
         "fact_id": "us-growth-2024-2034",
         "market": "United States",
         "measure": "Ten-year projected employment growth",
         "occupation_scope": "Parent occupation 53-6051 transportation inspectors, including aviation",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ooh"
         ]
       },
       {
-        "derivation": "The original published value or an explicit access gap; a stable fact_id does not determine the statistical year and the actual period follows the fields above; no cross-market conversion is made.",
+        "derivation": "Shown for the source’s stated scope and period. No cross-market conversion.",
         "display_value": "2,300 per year (parent occupation)",
         "fact_id": "us-openings-2024-2034",
         "market": "United States",
         "measure": "Average annual job openings, including growth and replacements",
         "occupation_scope": "Parent occupation 53-6051 transportation inspectors, including aviation",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ooh"
         ]
       },
       {
-        "derivation": "The original published value or an explicit access gap; a stable fact_id does not determine the statistical year and the actual period follows the fields above; no cross-market conversion is made.",
+        "derivation": "Shown for the source’s stated scope and period. No cross-market conversion.",
         "display_value": "Insufficient evidence: the government sector wage was not obtained",
         "fact_id": "industry-primary",
         "market": "United States",
@@ -38319,7 +38048,7 @@
         ]
       },
       {
-        "derivation": "The original published value or an explicit access gap; a stable fact_id does not determine the statistical year and the actual period follows the fields above; no cross-market conversion is made.",
+        "derivation": "Shown for the source’s stated scope and period. No cross-market conversion.",
         "display_value": "Insufficient evidence: the transportation and warehousing industry wage was not obtained",
         "fact_id": "industry-secondary",
         "market": "United States",
@@ -38331,7 +38060,7 @@
         ]
       },
       {
-        "derivation": "The original published value or an explicit access gap; a stable fact_id does not determine the statistical year and the actual period follows the fields above; no cross-market conversion is made.",
+        "derivation": "Shown for the source’s stated scope and period. No cross-market conversion.",
         "display_value": "Insufficient evidence: comparable wages in other industries were not obtained",
         "fact_id": "industry-tertiary",
         "market": "United States",
@@ -38343,7 +38072,7 @@
         ]
       },
       {
-        "derivation": "The original published value or an explicit access gap; a stable fact_id does not determine the statistical year and the actual period follows the fields above; no cross-market conversion is made.",
+        "derivation": "Shown for the source’s stated scope and period. No cross-market conversion.",
         "display_value": "Insufficient evidence: the precise national occupational wage distribution for China was not obtained",
         "fact_id": "china-pay-gap",
         "market": "China",
@@ -38355,27 +38084,15 @@
           "r2-pay-3",
           "nbs"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Motor vehicle inspectors",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and inspection records"
     },
     "badges": [
       "The United States 53-6051.07 non-aviation scope",
@@ -38419,17 +38136,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "The motor vehicle inspector checks vehicles, standards and records, identifies defects and produces traceable results within authority. This page explains the scope difference between Chinese in-service vehicle inspection and United States non-aviation transport equipment inspection and distinguishes inspection, repair, vehicle handling and issuance; a fictional record is used to experience checking evidence and rule versions."
+      "text": "Compare inspection, vehicle handling and report signing. Read mainland job examples, U.S. parent-group pay and try a fictional record check."
     },
     "title": {
       "availability": "available",
-      "text": "Motor vehicle inspectors"
+      "text": "Non-Aviation Vehicle and Equipment Inspectors: Duties, Pay and Entry"
     }
   },
-  "source_content_sha256": "606faebffa0869742e29a46a212a6dd8badf9ca847b24e18e4effaf308d1e761",
+  "source_content_sha256": "a71ccba078ac79e53eee40799baf0a0c9a9e4fd8514a9d226fff3bfd97dae90a",
   "subject": {
     "canonical_slug": "transportation-vehicle-equipment-and-systems-inspectors-except-aviation",
-    "name": "Motor vehicle inspectors",
-    "summary": "The motor vehicle inspector checks vehicles, standards and records, identifies defects and produces traceable results within authority. This page explains the scope difference between Chinese in-service vehicle inspection and United States non-aviation transport equipment inspection and distinguishes inspection, repair, vehicle handling and issuance; a fictional record is used to experience checking evidence and rule versions."
+    "name": "Transportation Vehicle and Equipment Inspectors (Non-Aviation)",
+    "summary": "These inspectors check vehicles, equipment or records against the applicable standards, document their findings and pass exceptions to the responsible person. Mainland road-vehicle inspection provides the entry examples here. The U.S. non-aviation category also includes settings such as rail."
   }
 }

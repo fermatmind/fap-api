@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1491,7 +1488,7 @@
         "status": "pending_mapping"
       },
       "item:home-health-aides.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:home-health-aides.sources.source-card.1": {
         "status": "mapped"
@@ -24111,12 +24108,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对岗位胜任度的评价，也不构成任何护理执业、给药、医疗处置、法律或投资意见。本页对应美国 O*NET/SOC 31-1121.00「Home Health Aides」（家庭健康助理）这一精确职业：在离场或间歇在场的注册护理人员指导下，监测残障或患病个体的健康状态并满足其健康相关需要，如更换绷带、处理伤口或给药，并协助进食、沐浴、如厕或行走等日常活动；视患者能力也可帮助备餐、轻度家务与洗衣。官方范围原文：Monitor the health status of an individual with disabilities or illness, and address their health-related needs, such as changing bandages, dressing wounds, or administering medication. Work is performed under the direction of offsite or intermittent onsite licensed nursing staff. Provide assistance with routine healthcare tasks or activities of daily living, such as feeding, bathing, toileting, or ambulation. May also help with tasks such as preparing meals, doing light housekeeping, and doing laundry depending on the patient's abilities. 本页美国工资与就业取自 O*NET 呈现的 BLS OEWS 2025 年数据与 BLS 就业预测 2024—2034，且该页将工资与就业标注为 Home Health and Personal Care Aides（合并口径）；中国大陆精确职业工资未取得，按可见缺口登记；两侧法域与执业制度不可互相套用。"
+              "若难以适应贴身协助、轮班或频繁记录，先问清带教、排班、转移协助和异常由谁接手。"
             ]
           },
           "id": "home-health-aides.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24125,12 +24123,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "判断是否适合家庭健康助理，先用公开或模拟材料做一次可核验的照护演练：选定一位虚构服务对象（例如一位行动不便、需协助如厕与服药提醒的老年人），写出从接单与了解照护计划、核对身份与服务范围、执行日常照护（助餐、助浴、如厕、行走辅助与体位转移）、观察并记录健康状态、按主管或执业护士指示执行允许的照护任务、到记录与交班汇报的分步流程，标注每一步的安全与边界检查点，以及可能出现的异常（跌倒、皮肤破损或压疮、进食呛咳、发热或意识变化、感染暴露、患者拒护或情绪激动）。完成后核对：是否把跌倒预防、手卫生与感染防护作为不可省略项；是否把给药、伤口处理、病情判断等超出个人授权的情形写成停止并转向执业护士或主管报告；是否把观察到的异常写成可处置的问题并留下可复核记录。用真实可交付物检验，而不是只凭兴趣问卷作答。"
+              "到「入行与 H 表：到访记录与复核」完成原题和变式。"
             ]
           },
           "id": "home-health-aides.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24139,12 +24137,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜美国 O*NET 31-1121.00 的工作活动重要性显示：为他人提供个人协助与照护（95）、获取信息（87）、与主管同事或下属沟通（86）、决策与解决问题（86）是该职业最重要的活动；工作情境显示：与他人持续接触 79%，身体接近度 77% 表示非常接近，暴露于疾病或感染 56% 表示每天，室内环境受控 62% 表示每天，精确或准确的重要性 33% 表示极其重要、35% 表示非常重要，决策频率 56% 表示每天，应对不愉快或愤怒无礼的人 46% 表示每天，面对面讨论 45% 表示每天，典型工作周 53% 表示为 40 小时。最重要的技能是积极倾听（72）、监控、阅读理解、批判性思维与口头表达；可迁移技能以服务导向（75）与社会洞察力（69）居前。若你愿意在受监督的前提下长期做贴身照护、观察并如实记录他人的身体状况、与患者和家属耐心沟通，并能在感染与安全边界内按规程行动，这些日常要求与你的工作方式更接近。"
+              "用虚构记录区分哪些可交接、哪些还缺复核，以及应请谁查证。"
             ]
           },
           "id": "home-health-aides.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24153,12 +24151,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜O*NET 同时显示（31-1121.00）：与他人持续接触 79%，身体接近度 77% 表示非常接近（近乎接触），暴露于疾病或感染 56% 表示每天，应对不愉快、愤怒或无礼的人 46% 表示每天，应对暴力或身体攻击性人员 38% 表示每天，对他人健康与安全负有高责任 23%、中等责任 17%，重复性动作 56% 表示持续或几乎持续、站立 59% 表示持续、行走或跑动 56% 表示持续。本职业以他人身体、健康状态与情绪为对象并处于受监督的照护链中：一次跌倒预防的疏忽、一次感染防护的遗漏、一次把观察到的异常当作无事、或一次超出授权的处置，都可能造成人身伤害、执业越界或记录失实。因此本页把感染防护与安全、观察与记录、给药与伤口处理等授权边界、以及患者信息保护单列。美国侧该职业标注 Bright Outlook，O*NET 摘要页显示 2024—2034 年预计增长远高于平均（17%）、年均约 765,800 个岗位空缺、2024 年就业约 4,347,700 人，但该工资与就业为 Home Health and Personal Care Aides 合并口径，不等于本职业精确规模。若你难以承受贴身照护、感染暴露或与情绪不稳者长期相处，应把这些作为需要认真权衡的现实成本。"
+              "先看清岗位范围、带教和交接负责人。"
             ]
           },
           "id": "home-health-aides.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24167,12 +24166,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一班次内同时完成三件事：把照护做实（依据照护计划与主管或执业护士指示，完成助餐、助浴、如厕、行走辅助与体位转移等日常照护，产出可复核的照护与观察记录）；把安全与边界管住（跌倒与感染防护、按指示执行允许任务、对给药与伤口处理等超出个人授权的事项停止并报告，保护患者信息，按机构与法规要求行事）；并承担可界定的岗位责任（对本人照护操作与记录的真实性负责，对超出个人权限的判断提请执业护士或主管处理）。建议用一次可核验的体验（完成一份分步照护流程与观察记录，或对常见照护异常做识别与处置演练）来检验，而不是仅依据兴趣问卷的结论。"
+              "适合愿意在专业人员监督下做贴身照护、按计划记录观察，并把异常和待核项如实交接的人。"
             ]
           },
           "id": "home-health-aides.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         }
@@ -24189,12 +24189,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "家庭健康助理的日常工作可以按三条线来拆：（1）照护与协助——在他人家中或照护机构里协助进食、沐浴、如厕、穿衣、行走与体位转移，并料理与个人护理相关的家务；（2）健康监测与按指示执行——检查脉搏、体温与呼吸，观察并记录健康状态，并在注册护理人员指导下执行允许的照护任务；（3）沟通与记录——把观察到的状况、进展或问题记录并向主管或个案管理员汇报，同时与患者和家属保持沟通。三条线共用同一套安全与观察要求，但产出对象不同：照护与监测面向患者本人，沟通与记录面向照护团队与照护台账。"
+              "居家健康照护助理按书面照护安排协助日常活动，观察并记录变化，把异常交给负责人员。可执行的健康相关任务取决于指示、培训及所在地要求。"
             ]
           },
           "id": "home-health-aides.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -24376,12 +24377,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界要点：本页只覆盖 O*NET/SOC 31-1121.00「家庭健康助理」这一精确职业，即在注册护理人员指导下监测健康状态并协助日常活动的岗位。相邻职业（护理员、个人护理员、作业治疗师、娱乐治疗师、注册护士、急症护理护士等）在工作对象、资质与责任上不同，不能只按职位名称互换；给药、伤口处理、病情判断等属于执业授权事项，须按机构制度与适用法规由有资质人员决定，不得由工具或代理口径替代。"
+              "本页聚焦居家健康照护助理的任务。美国工资和就业使用包含个人照护助理的合并职业统计。"
             ]
           },
           "id": "home-health-aides.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -24446,7 +24448,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "美国O*NET31-1121.00 Home Health Aides：在离场或间歇现场持照护理人员指导下协助健康需要与进食、沐浴、如厕、移动、家务等。Caregiver、CHHA、CMA、CNA为该美国页面职位样例，非中国统一资格或职业等同。美国31-1121.00受持照护理人员指导的任务描述不授中国权限。中国医疗护理员属辅助服务，不属卫生专业技术人员，不得从事医疗护理专业技术性工作；机构安排或培训不能授其给药、伤口治疗等专业权限。护士执业须注册，居家岗位须核实际服务和法定身份。 Home Health and Personal Care Aides合并口径：2025就业4,677,100人；2025—2035Much faster than average（7%或以上），年均空缺760,500个含增长和更替。非31-1121.00单独规模、当前招聘或AI因果。"
+              "居家健康照护助理按书面照护安排协助日常活动，观察并记录变化，把异常交给负责人员。可执行的健康相关任务取决于指示、培训及所在地要求。"
             ]
           },
           "id": "home-health-aides.profile.definition-block.11",
@@ -24460,12 +24462,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "护士的核心过程是专业评估、护理判断与独立处置，通常不承担日常活动协助与家务的主要责任。"
+              "护士的核心过程是在适用执照和岗位范围内评估、作护理判断并实施护理措施，通常不承担日常活动协助与家务的主要责任。"
             ]
           },
           "id": "home-health-aides.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-rn-role"
           ],
           "type": "prose"
         },
@@ -24656,12 +24659,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对学历与训练要求（O*NET 教育信息显示多数岗位要求高中文凭或同等学历，部分岗位要求高中后证书或短训）。"
+              "查看目标机构的学历、培训和考核要求。BLS 将高中或同等学历列为美国两类照护助理合并组的典型准备，部分岗位不要求。"
             ]
           },
           "id": "home-health-aides.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24833,12 +24837,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "结论｜家庭健康助理与相邻职业在工作对象、执业授权与责任上不同：本职业的核心是在注册护理人员指导下监测健康状态并协助日常活动；护理员与个人护理员同样面向日常照护但授权范围与监管不同；作业治疗师与娱乐治疗师以治疗性与活动性干预为目标；注册护士与急症护理护士承担病情评估、护理诊断与独立处置。只按职位名称互换会误判执业授权与安全责任。"
+              "结论｜家庭健康助理与相邻职业在工作对象、执业授权与责任上不同：本职业的核心是在注册护理人员指导下监测健康状态并协助日常活动；护理员与个人护理员同样面向日常照护但授权范围与监管不同；作业治疗师与娱乐治疗师以治疗性与活动性干预为目标；注册护士与急症护理护士承担在适用执照和岗位范围内评估、作护理判断并实施护理措施。只按职位名称互换会误判执业授权与安全责任。"
             ]
           },
           "id": "home-health-aides.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-rn-role"
           ],
           "type": "prose"
         },
@@ -25155,12 +25160,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "承担专业护理判断与独立处置，授权范围远大于受监督的照护助理"
+              "承担在适用执照和岗位范围内作护理判断并实施护理措施，授权范围远大于受监督的照护助理"
             ]
           },
           "id": "home-health-aides.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-rn-role"
           ],
           "type": "prose"
         },
@@ -25183,12 +25189,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "评估病情、作出护理诊断并独立执行给药与处置"
+              "在适用执照和岗位范围内评估、作护理判断并实施护理措施。"
             ]
           },
           "id": "home-health-aides.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
-            "onet"
+            "bls-rn-role"
           ],
           "type": "prose"
         },
@@ -25472,7 +25478,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务分析｜可在许可非患者材料上试验记录、排程和沟通草稿，核原始观察。无本职业采用效率与替代因果，不排序影响先后。美国31-1121.00受持照护理人员指导的任务描述不授中国权限。中国医疗护理员属辅助服务，不属卫生专业技术人员，不得从事医疗护理专业技术性工作；机构安排或培训不能授其给药、伤口治疗等专业权限。护士执业须注册，居家岗位须核实际服务和法定身份。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "编辑任务分析｜可在许可非患者材料上试验记录、排程和沟通草稿，核原始观察。无本职业采用效率与替代因果，不排序影响先后。美国31-1121.00受持照护理人员指导的任务描述不授中国权限。中国医疗护理员属辅助服务，不属卫生专业技术人员，不得从事医疗护理专业技术性工作；机构安排或培训不能授其给药、伤口治疗等专业权限。护士执业须注册，居家岗位须核实际服务和法定身份。"
             ]
           },
           "id": "home-health-aides.ai-impact.ai-impact-table.18",
@@ -27468,7 +27474,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国职位样例Caregiver/CHHA/CNA不构成中国资格等同；31-1121与31-1131护理助理、31-1122个人护理助手不同。"
+              "中国大陆工资参考"
             ]
           },
           "id": "home-health-aides.china-salary.career-snapshot-primary-locale.44",
@@ -28348,31 +28354,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "注册护士",
@@ -29051,12 +29057,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不愿承担独立临床判断与处置责任的人。"
+              "不愿在执照与岗位范围内承担临床评估和护理措施责任的人。"
             ]
           },
           "id": "home-health-aides.fit.personality-fit-block.39",
           "source_refs": [
-            "onet"
+            "bls-rn-role"
           ],
           "type": "prose"
         },
@@ -30003,15 +30009,16 @@
                 "协助整理护理文书与交接信息",
                 "护理专业学习与实习记录",
                 "一份护理观察记录说明",
-                "承担专业护理判断与独立处置，授权范围更大"
+                "承担在适用执照和岗位范围内作护理判断并实施护理措施，授权范围更大"
               ]
             ]
           },
           "id": "home-health-aides.path.entry-role-comparison.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-rn-role"
           ],
-          "title": "行政服务经理的入门岗位与初期任务怎么比较？",
+          "title": "居家健康照护入门任务与相邻岗位怎么比较？",
           "type": "table"
         },
         {
@@ -30022,8 +30029,8 @@
               {
                 "id": "education",
                 "values": [
-                  "美国 O*NET 将本职业（31-1121.00）列入 Job Zone 第一至第二级；教育信息显示多数岗位要求高中文凭或同等学历，部分要求高中后证书或短训。该描述不取代雇主的招聘与考核要求。",
-                  "中国大陆相关岗位通常要求初中或高中学历，并通过在岗训练掌握照护技能；涉及注册或持证要求时以所在地规定与机构制度为准。",
+                  "查看目标机构的学历、培训和考核要求。BLS 将高中或同等学历列为美国两类照护助理合并组的典型准备，部分岗位不要求。",
+                  "中国大陆求职时按具体岗位公告核对学历、岗前培训、评估和带教安排。",
                   "学历只影响准入起点，能否承担照护工作主要取决于可核验的照护技能、观察记录与制度内的授权。"
                 ]
               },
@@ -30046,7 +30053,7 @@
               {
                 "id": "tools",
                 "values": [
-                  "O*NET 摘要显示与 31-1121.00 相关的合并口径 2024—2034 年预计增长远高于平均（17%）、年均约 765,800 个岗位空缺，2024 年就业约 4,347,700 人；该口径不构成个人就业结论。",
+                  "BLS 表 1.2（美国合并职业 31-1120）：2025 年约 4,677,100 个岗位，2035 年预计约 5,524,400 个，变化 18.1%，年均约 760,500 个空缺，含替补。",
                   "岗位多通过居家照护机构、护理院、辅助生活社区与 hospice 等渠道进入；居家上门与机构驻班形式并存。",
                   "中国大陆岗位受地区、老龄化与照护需求、支付与补贴方式影响，计酬与考核口径以机构公告为准。"
                 ]
@@ -30055,7 +30062,8 @@
           },
           "id": "home-health-aides.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -30068,26 +30076,26 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "一份完全虚构的服务对象照护说明（基本情况、照护计划要点、需协助的日常活动）。",
-                  "一套模拟的观察记录要素（脉搏、体温、呼吸、皮肤、进食与情绪）与正常与异常样例。",
-                  "一份空白的分步照护与观察记录模板。",
-                  "一份空白的异常上报与交接班清单。"
+                  "虚构照护组只将记录编号与当班复核标记均匹配的到访记录交下一班。H1 两项一致，H2 编号匹配，但缺复核标记，H3 编号冲突。旧表写三项可交。按记录条件分类。变式只补 H2 已核的当班复核标记。",
+                  "使用纸笔或表格保留题设原值。",
+                  "分别列出原题与变式。",
+                  "将未知条件单列。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "在 90 分钟内完成：一次照护的分步流程（了解照护计划→洗手与感染防护→协助日常活动与体位转移→观察并记录健康状态→按指示执行允许任务→汇报与交接），标注每步的安全检查点。",
-                  "对给出的三类异常（疑似跌倒风险、疑似感染征象、疑似病情变化）写出识别特征与处置方式。",
-                  "写出哪些事项超出个人照护授权（给药、伤口处理、照护计划调整、病情判断）。"
+                  "分别写原题和变式的逐项状态、待核条件与交接对象。",
+                  "写清未满足的条件，以及变式只改哪一项。",
+                  "保留第一稿并指定下一位复核人。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先列从接班到交班的完整步骤与不可省略项，再逐项记录依据。",
-                  "对每处异常写清识别依据与处置后果，对被压缩或省略的步骤说明风险。",
-                  "最后写一段反思：若现场条件与预期不符（患者拒绝、家属在旁、环境不安全），你会如何停止并重新评估。"
+                  "逐项核对两条条件。",
+                  "保留原始记录与更正依据。",
+                  "第 6 天独立完成两题。"
                 ]
               },
               {
@@ -30101,9 +30109,9 @@
           },
           "id": "home-health-aides.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "入行练习：一次完整的办公支持任务（虚构材料）",
+          "title": "H 表：到访记录与复核",
           "type": "cards"
         },
         {
@@ -30208,50 +30216,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（了解计划—安全防护—协助照护—观察记录—上报交接）。",
-                  "记录你观察到的感染防护、安全与患者信息要求。"
+                  "读入行区虚构题面并记录输入。",
+                  "记录依据、待核项与交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "核对工作条件：居家上门或机构班次、与患者贴身接触、感染暴露风险、搬运与体位转移负担、工作周长度。",
-                  "写下你最不适应的一个现实成本并判断能否接受。"
+                  "写下两条分类条件，保留原记录。",
+                  "记录依据、待核项与交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "完成一份分步照护流程与观察记录模板。",
-                  "按规范列出关键要求（洗手与防护、跌倒预防、观察记录、异常上报）。"
+                  "列待核条件和可交接的记录。",
+                  "记录依据、待核项与交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "对三类常见异常（跌倒风险、感染征象、病情变化）写出识别与处置方案。",
-                  "对两个典型风险（患者信息泄露、患者攻击或情绪危机）写出处置与升级方案。"
+                  "为原题和变式各准备一张结果表。",
+                  "记录依据、待核项与交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在指导下完成一次模拟照护与观察记录，并做安全确认。",
-                  "对照检查要求找出至少两处偏差并记录整改方式。"
+                  "检查原题与变式只有一项输入变化。",
+                  "记录依据、待核项与交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请有经验的照护人员或执业护士挑战你的照护判断与沟通方式。",
-                  "记录对方的异议与你的回应，不回避异常与反例。"
+                  "独立完成原题和变式，保存第一稿。",
+                  "记录依据、待核项与交接对象。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "复盘这一周：哪些环节让你投入，哪些环节让你消耗。",
-                  "据此判断是否继续投入该方向，并写下一步要验证的具体问题。"
+                  "到常见问题打开参考解，再写后续核实计划。",
+                  "记录依据、待核项与交接对象。"
                 ]
               }
             ]
@@ -30260,7 +30268,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "七天体验：用虚构材料完成一次办公支持闭环",
+          "title": "七天体验：用虚构到访记录练习复核与交接",
           "type": "timeline"
         },
         {
@@ -30572,12 +30580,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑准备路径｜核实际生活协助或医疗护理身份、服务法域与项目资格，完成真实照护安全培训及带教。美国31-1121.00受持照护理人员指导的任务描述不授中国权限。中国医疗护理员属辅助服务，不属卫生专业技术人员，不得从事医疗护理专业技术性工作；机构安排或培训不能授其给药、伤口治疗等专业权限。护士执业须注册，居家岗位须核实际服务和法定身份。"
+              "在中国大陆，可从居家或社区老年医疗护理员的辅助服务岗位了解入行。先问机构能否提供带教，工作是否包括生活协助、观察和记录，以及异常应报告给谁。照护培训与护士执业资格分别核对。卫健委 WS/T 803—2022 要求为老年人提供居家、社区辅助医疗护理服务的人员完成专门培训和考核，并按流程记录与反馈。"
             ]
           },
           "id": "home-health-aides.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "care-aide-boundary-2019",
+            "nurse-regulation-2020",
+            "cn-home-care-standard"
           ],
           "type": "prose"
         },
@@ -32338,22 +32348,33 @@
           "data": {
             "entries": [
               {
-                "answer": "依据 O*NET 31-1121.00，本职业在离场或间歇在场的注册护理人员指导下，监测残障或患病个体的健康状态并满足其健康相关需要（如更换绷带、处理伤口或给药），并协助进食、沐浴、如厕或行走等日常活动。典型任务包括按处方饮食计划、采购、准备或提供膳食（重要性 91）、通过更换床单与协助个人护理照护患者（89）、为患者沐浴（88）、记录护理状况与进展并汇报（87）、协助上下床与进出浴缸轮椅汽车并协助穿衣梳洗（84）。",
+                "answer": "居家健康照护助理按照护计划协助日常活动，记录观察，并把变化报告给负责人员。健康相关任务由机构按当地规则、训练、专业人员指导及授权分配。",
                 "id": "home-health-aides.faq.1",
                 "question": "家庭健康助理具体做什么？",
-                "question_key": "career.faq.home-health-aides.q1"
+                "question_key": "career.faq.home-health-aides.q1",
+                "source_refs": [
+                  "onet",
+                  "bls"
+                ]
               },
               {
-                "answer": "护理员与个人护理员同样面向日常照护但授权范围与监管不同；作业治疗师与娱乐治疗师以治疗性与活动性干预为目标；注册护士与急症护理护士承担病情评估、护理诊断与独立处置。执业准入、授权范围与安全责任不同，不能只按职位名称互换。",
+                "answer": "护理员与个人护理员同样面向日常照护但授权范围与监管不同；作业治疗师与娱乐治疗师以治疗性与活动性干预为目标；注册护士与急症护理护士承担在适用执照和岗位范围内评估、作护理判断并实施护理措施。执业准入、授权范围与安全责任不同，不能只按职位名称互换。",
                 "id": "home-health-aides.faq.2",
                 "question": "它和相邻职业有什么区别？",
-                "question_key": "career.faq.home-health-aides.q2"
+                "question_key": "career.faq.home-health-aides.q2",
+                "source_refs": [
+                  "bls-rn-role"
+                ]
               },
               {
-                "answer": "BLS OEWS 2025 年（经 O*NET 呈现，Home Health and Personal Care Aides 合并口径）：中位年薪 35,800 美元、时薪中位 17.21 美元；第 10/25/75/90 分位 27,040 / 31,920 / 39,470 / 45,040 美元/年。就业展望 2024—2034 年增长远高于平均（17%）、年均约 765,800 个岗位空缺，2024 年就业约 4,347,700 人。以上均为合并口径，不是 31-1121.00 单一精确职业数值。",
+                "answer": "2025 年 5 月，美国合并职业 31-1120 年薪中位数 35,800 美元，时薪中位数 17.21 美元。年薪第 10、25、50、75、90 分位依次为 27,040、31,920、35,800、39,470、45,040 美元。 BLS 表 1.2（美国合并职业 31-1120）：2025 年约 4,677,100 个岗位，2035 年预计约 5,524,400 个，变化 18.1%，年均约 760,500 个空缺，含替补。",
                 "id": "home-health-aides.faq.3",
                 "question": "美国工资和就业情况如何？",
-                "question_key": "career.faq.home-health-aides.q3"
+                "question_key": "career.faq.home-health-aides.q3",
+                "source_refs": [
+                  "oews",
+                  "ep"
+                ]
               },
               {
                 "answer": "没有可按本职业精确读取的全国职业工资。国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，无法据此得到家庭健康助理职业级数值。本页按证据政策登记缺口而不代填。",
@@ -32368,16 +32389,26 @@
                 "question_key": "career.faq.home-health-aides.q5"
               },
               {
-                "answer": "会影响文档与信息类任务，而非取代现场照护与执业责任。生成式 AI 可辅助照护与观察记录整理、排程与提醒、照护知识检索；现场照护、健康观察与异常判断、按指示的给药与伤口处理，以及与家属的沟通仍由人按规程负责。本页不给出替代概率或时间表。",
+                "answer": "AI 可以用虚构材料辅助整理照护记录、草拟排程和交接摘要。照护助理负责现场协助，记录观察，并按流程报告变化。临床判断和技术性处置由具备相应资格的人员按职责处理。美国特定居家健康照护岗位只有在当地规则允许、完成所需训练并获专业人员指导和授权时，才可协助具体健康任务。中国大陆居家、社区老年医疗护理员的辅助服务范围以 WS/T 803—2022 为参照。",
                 "id": "home-health-aides.faq.6",
                 "question": "AI 会影响这个职业吗？",
-                "question_key": "career.faq.home-health-aides.q6"
+                "question_key": "career.faq.home-health-aides.q6",
+                "source_refs": [
+                  "bls",
+                  "cn-home-care-standard",
+                  "onet"
+                ]
               },
               {
-                "answer": "O*NET 将本职业列入 Job Zone 第一至第二级；教育信息显示多数岗位要求高中文凭或同等学历，部分要求高中后证书或短训，多数以在职培训入行。中国大陆相关岗位通常要求初中或高中学历并通过在岗训练；涉及注册或持证要求时以所在地规定与机构制度为准。",
+                "answer": "美国 BLS 表 1.2 的 31-1120 合并组以高中或同等学历和短期在岗训练为典型准备。在经认证的居家健康或临终关怀机构任职，BLS 手册说明需要正式培训并通过标准化考试。州要求、雇主培训和某项任务的授权分别核对。",
                 "id": "home-health-aides.faq.7",
                 "question": "需要什么学历和培训？",
-                "question_key": "career.faq.home-health-aides.q7"
+                "question_key": "career.faq.home-health-aides.q7",
+                "source_refs": [
+                  "ep",
+                  "bls",
+                  "cn-work-example"
+                ]
               },
               {
                 "answer": "本页不虚构统一证书清单。学历、培训记录、注册登记、岗位授权与执业权限是不同状态：培训不等于注册登记，注册不等于获得执业护士对具体任务的授权。在美国，部分州要求完成培训并通过考核后登记；在中国大陆，照护类岗位要求以所在地规定与机构制度为准。",
@@ -32386,16 +32417,34 @@
                 "question_key": "career.faq.home-health-aides.q8"
               },
               {
-                "answer": "主要风险包括感染暴露或手卫生与防护不到位、跌倒预防或体位转移不当、健康状态观察遗漏或漏报、超出授权执行给药或伤口处理、患者身份与健康信息泄露，以及患者攻击或情绪危机处置不当；控制重点是把每一步留成可复核记录并在异常时停止与上报。",
+                "answer": "主要风险包括跌倒、感染暴露、异常漏报和隐私泄露。工作时按机构流程记录观察和交接，任务范围不清时向主管核对；紧急情况按适用应急流程处理。",
                 "id": "home-health-aides.faq.9",
                 "question": "这个职业有哪些主要风险？",
-                "question_key": "career.faq.home-health-aides.q9"
+                "question_key": "career.faq.home-health-aides.q9",
+                "source_refs": [
+                  "onet",
+                  "bls"
+                ]
               },
               {
-                "answer": "美国侧相关合并口径 2024—2034 年增长远高于平均（17%）、年均约 765,800 个岗位空缺；中国大陆侧登记工资缺口。可转向方向包括护理员、个人护理员、作业治疗与物理治疗助理、精神科照护与社会服务助理等，但都需补足相应训练或资质；能力迁移不等于自动晋升。",
+                "answer": "BLS 表 1.2（美国合并职业 31-1120）：2025 年约 4,677,100 个岗位，2035 年预计约 5,524,400 个，变化 18.1%，年均约 760,500 个空缺，含替补。 更偏好日常生活支持和陪伴，可了解个人照护助理岗位；希望转向机构护理助理时，另核当地培训、资格及雇主条件。",
                 "id": "home-health-aides.faq.10",
                 "question": "前景如何、能转向哪些方向？",
-                "question_key": "career.faq.home-health-aides.q10"
+                "question_key": "career.faq.home-health-aides.q10",
+                "source_refs": [
+                  "ep",
+                  "bls",
+                  "r2-pay-1"
+                ]
+              },
+              {
+                "answer": "原题仅 H1 符合交接记录条件；变式 H1 和 H2 符合，H3 仍待核。保留原表和更正记录。题面记录不能用于判断病情或执行照护。 将已符合条件的记录交给下一班。原题请当班复核人员补核 H2 标记；两种情形都请记录管理员核对 H3 编号，确认前保留待核。",
+                "id": "home-health-aides.faq.paper-exercise",
+                "question": "纸面练习参考解（完成第 6 天后打开）",
+                "question_key": "career.faq.home-health-aides.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -32452,12 +32501,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "未取得中国本职业精确全国工资分布；NBS城镇单位行业税前年平均非职业中位，不覆盖全部家庭私人雇佣或自营所得，美国NAICS行业不直接映中国门类。新聘学历含博士后20%异常待权威核，不据此形成学历比例结论；美国各州项目资格未逐一核。保护快答FAQ/facts旧2024—2034/17%/4,347,700/765,800及原权限解释保留，非全页一致。"
+              "发布说明把生活照料、基础照护和健康管理列为居家养老上门服务内容，另列评估、服务协议及实施流程。服务分类不直接对应美国居家健康照护助理。"
             ]
           },
           "id": "home-health-aides.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         }
@@ -32484,25 +32533,25 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "家庭健康助理",
@@ -32538,16 +32587,16 @@
                 "id": "onet",
                 "limitation": "美国职业描述，不覆盖中国大陆执业与资质制度；该页工资与就业为合并口径。",
                 "market": "美国",
-                "name": "O*NET OnLine：家庭健康助理职业档案与官方定义（31-1121.00）",
+                "name": "O*NET Home Health Aides",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/31-1121.00"
+                "url": "https://www.onetonline.org/link/details/31-1121.00"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "该合并口径 2024—2034 年预计增长远高于平均（17%）。",
+                  "BLS 表 1.2（美国合并职业 31-1120）：2025 年约 4,677,100 个岗位，2035 年预计约 5,524,400 个，变化 18.1%，年均约 760,500 个空缺，含替补。",
                   "用于说明相关职业的就业展望与规模。"
                 ],
                 "evidence_type": "official occupation outlook",
@@ -32555,42 +32604,41 @@
                 "limitation": "展望覆盖家庭健康助理与个人护理员，为合并口径，不能读作个人就业结论。",
                 "market": "美国",
                 "name": "Occupational Outlook Handbook：家庭健康与个人护理助理（Home Health and Personal Care Aides）",
-                "period": "2024-2034",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/healthcare/home-health-aides-and-personal-care-aides.htm"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "预计年均约 765,800 个岗位空缺，2024 年就业约 4,347,700 人、2034 年约 5,087,500 人。",
-                  "该口径为合并口径，不构成个人就业结论。"
+                  "BLS 表 1.2（美国合并职业 31-1120）：2025 年约 4,677,100 个岗位，2035 年预计约 5,524,400 个，变化 18.1%，年均约 760,500 个空缺，含替补。",
+                  "美国 BLS 对 31-1120 合并组列高中或同等学历及短期在岗训练。应聘前按机构及地区核对培训、考核和监督要求。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "ep",
                 "limitation": "合并口径，不能归因于生成式 AI，也不等于 31-1121.00 单一规模。",
                 "market": "美国",
-                "name": "BLS 就业预测：家庭健康与个人护理助理（合并口径）",
-                "period": "2024-2034",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.bls.gov/ooh/healthcare/home-health-aides-and-personal-care-aides.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "用于说明 OEWS 的抽样、估算、覆盖范围与不适用情形。",
-                  "用于核对全国口径与不含福利的说明。"
+                  "2025 年 5 月，美国合并职业 31-1120 年薪中位数 35,800 美元，时薪中位数 17.21 美元。年薪第 10、25、50、75、90 分位依次为 27,040、31,920、35,800、39,470、45,040 美元。"
                 ],
                 "evidence_type": "official methodology",
                 "id": "oews",
                 "limitation": "以方法文档原文为准。",
                 "market": "美国",
                 "name": "BLS：职业就业与工资统计（OEWS）方法说明",
-                "period": "2025 OEWS methodology; accessed 2026-09-22",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "OEWS methodology",
-                "url": "https://www.bls.gov/oes/oes_method.htm"
+                "url": "https://www.onetonline.org/link/localwages/31-1121.00"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32723,17 +32771,17 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于字段与证据口径与缺口登记规则。",
-                  "用于跨市场与法域口径边界说明。"
+                  "以原证解释职业任务与数据口径。",
+                  "以原证解释职业任务与数据口径。"
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "编辑说明",
                 "id": "editor",
-                "limitation": "内部口径规则，非外部事实来源。",
+                "limitation": "只说明本页所用来源。",
                 "market": "全球",
-                "name": "FermatMind：职业内容字段与证据口径规则",
-                "period": "current authoring rules",
+                "name": "本站资料口径说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页",
                 "url": "https://fermatmind.com"
               },
               {
@@ -32787,17 +32835,17 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明适配信号、风险场景与练习设计为编辑归纳。",
-                  "不构成对任何机构流程或要求的承诺。"
+                  "以原证解释职业任务与数据口径。",
+                  "以原证解释职业任务与数据口径。"
                 ],
-                "evidence_type": "editorial_synthesis",
+                "evidence_type": "编辑说明",
                 "id": "employer",
-                "limitation": "编辑设计，不是雇主统一要求或录用标准。",
+                "limitation": "只说明本页所用来源。",
                 "market": "全球",
-                "name": "FermatMind：页内编辑归纳与练习设计说明",
-                "period": "current authoring rules",
+                "name": "本站资料口径说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页",
                 "url": "https://fermatmind.com"
               },
               {
@@ -32897,20 +32945,20 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "用于核对年薪分位：第 10 分位 27,040 美元、第 25 分位 31,920 美元、中位 35,800 美元、第 75 分位 39,470 美元、第 90 分位 45,040 美元（2025 年）；时薪中位 17.21 美元。",
-                  "用于说明工资按年度披露、不据此推算个人月收入或到手收入。"
+                  "2025 年 5 月，美国合并职业 31-1120 年薪中位数 35,800 美元，时薪中位数 17.21 美元。年薪第 10、25、50、75、90 分位依次为 27,040、31,920、35,800、39,470、45,040 美元。",
+                  "2025 年 5 月，美国合并职业 31-1120 年薪中位数 35,800 美元，时薪中位数 17.21 美元。年薪第 10、25、50、75、90 分位依次为 27,040、31,920、35,800、39,470、45,040 美元。"
                 ],
                 "evidence_type": "official wage display",
                 "id": "onet-wages",
-                "limitation": "O*NET 将该页工资标注为 Home Health and Personal Care Aides 合并口径；不含福利与奖金；分位不等于起薪或经验等级。",
+                "limitation": "O*NET 将该页工资标注为 Home Health and Personal Care Aides 合并口径；计入生产奖金，排除非生产奖金与雇主福利成本；分位不等于起薪或经验等级。",
                 "market": "美国",
                 "name": "O*NET OnLine：家庭健康助理国家工资（BLS OEWS 2025 年）",
-                "period": "2025 BLS OEWS wage data via O*NET",
+                "period": "2025-05",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/31-1121.00"
+                "url": "https://www.bls.gov/oes/oes_method.htm"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32974,21 +33022,54 @@
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "日常照护与个人护理 — 0/100; weight=1/3; home-health-aides.ai-impact.ai-impact-table.95[0]",
-                  "健康状态观察 — 25/100; weight=1/3; home-health-aides.ai-impact.ai-impact-table.99[0]",
-                  "记录与交班 — 75/100; weight=1/3; home-health-aides.ai-impact.ai-impact-table.119[0]"
+                  "发布说明把生活照料、基础照护和健康管理列为居家养老上门服务内容，另列评估、服务协议及实施流程。服务分类不直接对应美国居家健康照护助理。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "cn-work-example",
+                "limitation": "具名历史招聘，通用雇主要求另核。",
+                "market": "中国大陆",
+                "name": "民政部：居家养老上门服务基本规范发布说明",
+                "period": "2023-10",
+                "publisher": "中国政府网",
+                "url": "https://app.www.gov.cn/govdata/gov/202310/22/508577/article.html"
+              },
+              {
+                "details": [
+                  "记录和读数均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "market": "适用于本页",
+                "name": "H 表：到访记录与复核",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "第 4、5 节规定专门培训和考核、服务记录及反馈。"
+                ],
+                "id": "cn-home-care-standard",
+                "limitation": "适用于老年辅助医疗护理服务。",
+                "market": "中国大陆",
+                "name": "居家、社区老年医疗护理员服务标准",
+                "period": "WS/T 803—2022",
+                "publisher": "National Health Commission",
+                "url": "https://www.nhc.gov.cn/fzs/c100048/202211/ff72fed5f73c48838458fb353c99509d/files/1746697545393_62705.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "护士职责及执照分工。"
+                ],
+                "id": "bls-rn-role",
+                "limitation": "具体执业权限按州、执照和岗位核对。",
+                "market": "美国",
+                "name": "BLS 注册护士职业手册",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
               }
             ]
           },
@@ -34326,7 +34407,7 @@
           "type": "prose"
         },
         "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为家庭健康助理？教育、资格与职业发展路径",
+        "heading": "入行与 H 表：到访记录与复核",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "home-health-aides.path.career-path-block.21",
@@ -36071,7 +36152,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国家庭健康助理工资多少？",
+        "heading": "美国工资：两类照护岗位合并统计",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -36845,7 +36926,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 呈现的 BLS OEWS 2025 工资与 BLS 就业预测 2024—2034（合并口径）",
+            "label": "BLS 表 1.2（美国合并职业 31-1120）：2025 年约 4,677,100 个岗位，2035 年预计约 5,524,400 个，变化 18.1%，年均约 760,500 个空缺，含替补。",
             "secondary_value": null,
             "value": {
               "$item": "home-health-aides.profile.onet-structured-fields-block.2",
@@ -37953,19 +38034,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资参考",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
       "market-signals": "职业前景与相关职业转向",
       "navigation": "下一步与相关入口",
-      "path": "入行、资格与职业发展",
+      "path": "入行与 H 表：到访记录与复核",
       "profile": "职业画像",
       "quick-decision": "快速判断",
       "risk": "工作压力、风险与职业边界",
       "source-register": "资料来源",
       "sources": "常见问题与资料来源",
-      "us-salary": "美国薪资参考"
+      "us-salary": "美国工资：两类照护岗位合并统计"
     }
   },
   "fact_register": {
@@ -37983,7 +38064,7 @@
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 31-1121.00 页呈现，但 O*NET 将其标注为 Home Health and Personal Care Aides 合并口径（涵盖家庭健康助理与个人护理员），不是本职业单一精确数据；不含福利与奖金；分位是分布位置，不对应个人起薪或经验等级。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 31-1121.00 页呈现，但 O*NET 将其标注为 Home Health and Personal Care Aides 合并口径（涵盖家庭健康助理与个人护理员），不是本职业单一精确数据；计入生产奖金，排除非生产奖金与雇主福利成本；分位是分布位置，不对应个人起薪或经验等级。",
         "display_value": "中位年薪 35,800 美元（2025 年，BLS OEWS，Home Health and Personal Care Aides 合并口径）",
         "fact_id": "us-wage-2025",
         "market": "美国",
@@ -37991,11 +38072,12 @@
         "occupation_scope": "本职业：家庭健康助理",
         "period": "2025",
         "source_refs": [
-          "onet-wages"
+          "onet-wages",
+          "bls-oews-questions"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 31-1121.00 页呈现，但 O*NET 将其标注为 Home Health and Personal Care Aides 合并口径（涵盖家庭健康助理与个人护理员），不是本职业单一精确数据；不含福利与奖金；分位是分布位置，不对应个人起薪或经验等级。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 31-1121.00 页呈现，但 O*NET 将其标注为 Home Health and Personal Care Aides 合并口径（涵盖家庭健康助理与个人护理员），不是本职业单一精确数据；计入生产奖金，排除非生产奖金与雇主福利成本；分位是分布位置，不对应个人起薪或经验等级。",
         "display_value": "第 10 分位年薪 27,040 美元（2025 年，BLS OEWS，Home Health and Personal Care Aides 合并口径）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
@@ -38003,11 +38085,12 @@
         "occupation_scope": "本职业：家庭健康助理",
         "period": "2025",
         "source_refs": [
-          "onet-wages"
+          "onet-wages",
+          "bls-oews-questions"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 31-1121.00 页呈现，但 O*NET 将其标注为 Home Health and Personal Care Aides 合并口径（涵盖家庭健康助理与个人护理员），不是本职业单一精确数据；不含福利与奖金；分位是分布位置，不对应个人起薪或经验等级。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 31-1121.00 页呈现，但 O*NET 将其标注为 Home Health and Personal Care Aides 合并口径（涵盖家庭健康助理与个人护理员），不是本职业单一精确数据；计入生产奖金，排除非生产奖金与雇主福利成本；分位是分布位置，不对应个人起薪或经验等级。",
         "display_value": "第 90 分位年薪 45,040 美元（2025 年，BLS OEWS，Home Health and Personal Care Aides 合并口径）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
@@ -38015,41 +38098,42 @@
         "occupation_scope": "本职业：家庭健康助理",
         "period": "2025",
         "source_refs": [
-          "onet-wages"
+          "onet-wages",
+          "bls-oews-questions"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 Home Health and Personal Care Aides 合并口径（2024—2034）；增长远高于平均，主要受老龄化与居家照护需求影响，不能归因于生成式 AI；含替换需求，不等于实际招聘数，也不等于 31-1121.00 单一规模。",
-        "display_value": "增长 远高于平均（17%，2024—2034，BLS 就业预测，Home Health and Personal Care Aides 合并口径）",
+        "derivation": "BLS 表 1.2（美国合并职业 31-1120）：2025 年约 4,677,100 个岗位，2035 年预计约 5,524,400 个，变化 18.1%，年均约 760,500 个空缺，含替补。",
+        "display_value": "18.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长",
-        "occupation_scope": "本职业：家庭健康助理",
-        "period": "2024-2034",
+        "occupation_scope": "31-1120",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 Home Health and Personal Care Aides 合并口径（2024—2034）；增长远高于平均，主要受老龄化与居家照护需求影响，不能归因于生成式 AI；含替换需求，不等于实际招聘数，也不等于 31-1121.00 单一规模。",
-        "display_value": "就业 约 4,347,700 人（2024 年，BLS 就业预测基期，Home Health and Personal Care Aides 合并口径）",
+        "derivation": "BLS 表 1.2（美国合并职业 31-1120）：2025 年约 4,677,100 个岗位，2035 年预计约 5,524,400 个，变化 18.1%，年均约 760,500 个空缺，含替补。",
+        "display_value": "约 4,677,100 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数",
-        "occupation_scope": "本职业：家庭健康助理",
-        "period": "2024",
+        "occupation_scope": "31-1120",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 Home Health and Personal Care Aides 合并口径（2024—2034）；增长远高于平均，主要受老龄化与居家照护需求影响，不能归因于生成式 AI；含替换需求，不等于实际招聘数，也不等于 31-1121.00 单一规模。",
-        "display_value": "预计年均岗位空缺 约 765,800 个（2024—2034，BLS 就业预测，Home Health and Personal Care Aides 合并口径，含增长与替补）",
+        "derivation": "BLS 表 1.2（美国合并职业 31-1120）：2025 年约 4,677,100 个岗位，2035 年预计约 5,524,400 个，变化 18.1%，年均约 760,500 个空缺，含替补。",
+        "display_value": "年均约 760,500 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
-        "occupation_scope": "本职业：家庭健康助理",
-        "period": "2024-2034",
+        "occupation_scope": "31-1120",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -38077,27 +38161,15 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "家庭健康助理",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
       "家庭健康助理 · 任务、交付与责任边界",
@@ -38109,25 +38181,25 @@
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国年薪中位数（2025，BLS OEWS，合并口径）"
+        "label": "美国合并职业年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国合并职业预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国合并职业就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034）"
+        "label": "美国合并职业年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -38141,17 +38213,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "家庭健康助理做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET/SOC 31-1121.00）、BLS OEWS 2025 工资分位与 BLS 就业预测 2024—2034（Home Health and Personal Care Aides 合并口径）、中国大陆照护执业制度边界与全国职业工资缺口。"
+      "text": "BLS 表 1.2（美国合并职业 31-1120）：2025 年约 4,677,100 个岗位，2035 年预计约 5,524,400 个，变化 18.1%，年均约 760,500 个空缺，含替补。"
     },
     "title": {
       "availability": "available",
       "text": "家庭健康助理"
     }
   },
-  "source_content_sha256": "b8ca4b15f9069722049817996d91c7f435f2e1f22669ed6fcdebe9c600c3933d",
+  "source_content_sha256": "513187557e5df09bbf733402ea3be337c37449efde240e96e3c7b24015491428",
   "subject": {
     "canonical_slug": "home-health-aides",
     "name": "家庭健康助理",
-    "summary": "家庭健康助理对应美国 O*NET/SOC 31-1121.00「Home Health Aides」这一精确职业：在离场或间歇在场的注册护理人员指导下，监测残障或患病个体的健康状态并满足其健康相关需要（如更换绷带、处理伤口或给药），并协助进食、沐浴、如厕或行走等日常活动。官方范围原文：Monitor the health status of an individual with disabilities or illness, and address their health-related needs, such as changing bandages, dressing wounds, or administering medication. Work is performed under the direction of offsite or intermittent onsite licensed nursing staff. Provide assistance with routine healthcare tasks or activities of daily living, such as feeding, bathing, toileting, or ambulation. May also help with tasks such as preparing meals, doing light housekeeping, and doing laundry depending on the patient’s abilities. 核心任务包括按处方饮食计划采购准备膳食（91）、照护患者（89）、为患者沐浴（88）、记录护理状况并汇报（87）。本页美国工资与就业取自 O*NET 呈现的 BLS OEWS 2025 与 BLS 就业预测 2024—2034，且 O*NET 将该工资与就业标注为 Home Health and Personal Care Aides 合并口径；中国大陆精确职业工资未取得，按可见缺口登记；中国侧照护执业与信息保护制度边界单独标注。"
+    "summary": "居家健康照护助理按书面照护安排协助日常活动，观察并记录变化，把异常交给负责人员。可执行的健康相关任务取决于指示、培训及所在地要求。"
   }
 }

@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First use the W30 fictional quantity rule to work through each case, find the upper-bound boundary error, then fix the rule per Person A and add an independent sample per Person B. Observe whether you are willing to state expectations, record failures, and explain unknowns; a paper logic problem does not prove real development competence."
+              "Paper check | Draft three checks for a fictional endpoint: success, timeout and duplicate submission. Record what the user should see in each case. "
             ]
           },
           "id": "web-developers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,12 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Web developers develop and implement websites, web applications, application databases, and interactive interfaces, check code structure and browser and device compatibility, improve performance, scalability, and server-side processes, and integrate other applications per the division of work. Delivery is more than a piece of code that displays; it also requires clear requirements, test expectations, change records, and the unverified scope."
+              "Web developers implement pages and application behavior, maintain code and assets, and verify success, failure and recovery paths in the target environment. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "web-developers.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-15-1254.00"
           ],
           "type": "prose"
         }
@@ -25570,13 +25569,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no task-level AI effect score or replacement-rate causal data for this detailed occupation was obtained. Drafts, the W30 problem logic, and real code testing are kept separate; the five-case 80% or Person A's 100% does not measure AI time saving, defects, or product security. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Draft three checks for a fictional endpoint: success, timeout and duplicate submission. Record what the user should see in each case."
             ]
           },
           "id": "web-developers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-15-1254.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33043,6 +33042,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-15-1254.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 15-1254.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/15-1254.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38507,10 +38533,10 @@
       "text": "Web Developers: duties, wages, and code boundary experience"
     }
   },
-  "source_content_sha256": "95be21e574add364d30c1f0faf2d831d06bb11196a7a8ac8a945176e7d97c122",
+  "source_content_sha256": "95e59bb38a341d6b11e43be2194c7e50573cb2747ebed0d36ca95ba55b4f8e11",
   "subject": {
     "canonical_slug": "web-developers",
     "name": "Web Developers",
-    "summary": "Web developers develop and implement websites, web applications, application databases, and interactive interfaces, check code structure and browser and device compatibility, improve performance, scalability, and server-side processes, and integrate other applications per the division of work. Delivery is more than a piece of code that displays; it also requires clear requirements, test expectations, change records, and the unverified scope."
+    "summary": "Web developers implement pages and application behavior, maintain code and assets, and verify success, failure and recovery paths in the target environment."
   }
 }

@@ -1283,6 +1283,9 @@
       "item:potters-manufacturing.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:potters-manufacturing.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:potters-manufacturing.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31234,6 +31237,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。陶器复核单 K5 需要坯体批号和烧成记录号。甲的批号正确但烧成栏空白，乙烧成号齐全但批号不同。写下各自的待核项，实际窑炉由获授权人员操作。"
+            ]
+          },
+          "id": "potters-manufacturing.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "核陶器成品批次",
+          "type": "notice"
         }
       ]
     },
@@ -37742,6 +37760,13 @@
         "id": "potters-manufacturing.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "potters-manufacturing.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38092,7 +38117,7 @@
       "text": "陶器制造工"
     }
   },
-  "source_content_sha256": "031da89bcfdc6ddaf1e6b32b91bcec42edd1a742424aae3dd922edf421621562",
+  "source_content_sha256": "f41b195e1568fc4a7457600e43ce885267e0a9d0db5b9156ad56db103eda1d4a",
   "subject": {
     "canonical_slug": "potters-manufacturing",
     "name": "陶器制造工",

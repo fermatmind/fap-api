@@ -9,7 +9,7 @@
         "status": "pending_mapping"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:employment-g04-current": {
         "status": "pending_mapping"
@@ -18,7 +18,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:growth-g04-current": {
         "status": "pending_mapping"
@@ -54,9 +54,15 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:openings-g04-current": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-clerk-jiangsu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-clerk-ningxia": {
         "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
@@ -23664,7 +23670,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; the nationwide wage distribution for this occupation, recruitment quote samples and a precise China-US mapping were not obtained. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
+              "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; a comparable nationwide occupational wage distribution and precise China–U.S. mapping were not established. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
@@ -26093,7 +26099,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; the nationwide wage distribution for this occupation, recruitment quote samples and a precise China-US mapping were not obtained. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
+              "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; a comparable nationwide occupational wage distribution and precise China–U.S. mapping were not established. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
@@ -26138,12 +26144,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no checkable recruitment quote statistics for mainland Chinese court and government document posts; a single job posting cannot represent the national level"
+              "A 2023 Ningxia court notice listed about CNY 3,800–4,800 per month, including employee social insurance and housing-fund contributions. A 2024 Jiangsu notice set base pay at least 1.2 times the local minimum wage, with performance pay and grade allowances separate. Both describe individual court hiring programs."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "clerk-ningxia",
+            "clerk-jiangsu"
           ],
           "type": "prose"
         },
@@ -26240,7 +26247,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; the nationwide wage distribution for this occupation, recruitment quote samples and a precise China-US mapping were not obtained. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -31000,7 +31007,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Receive and check whether legal documents submitted to a court comply with law and procedure, record case dispositions and court orders, answer public inquiries about procedure and appearances, prepare and issue court orders and subpoenas, and compile pending case dockets; maintain the archived custody of municipal documents, prepare ordinances, resolutions and announcements, publish public notices, prepare meeting agendas, record and edit meeting minutes, and retrieve municipal archives on request; ask for and record applicant information, assess application completeness and licensing conditions, code and enter data, issue marriage, fishing, hunting and dog licenses and collect fees, and conduct record verification of license holders as needed for investigations.",
+                "answer": "Receive applications or case filings, check documents, schedule work and maintain case or public records. Authorized officials decide cases or license applications. The U.S. category includes court, municipal and licensing work.",
                 "id": "actors.faq.1",
                 "question": "What do court, municipal and licensing clerks actually do every day?",
                 "question_key": "career.faq.court-municipal-and-license-clerks.1",
@@ -31009,9 +31016,9 @@
                 ]
               },
               {
-                "answer": "Court, municipal and licensing clerks handle court documents and case records, municipal records and meetings, and permit applications and issuance; compliance specialists assess whether an organization conforms to regulations and drive rectification; paralegals and legal assistants prepare legal documents under the direction of a lawyer; office clerks handle general administration and clerical work; receptionists are mainly reception and transfer; insurance claims clerks take in claims and policies; title examiners retrieve and check title records.",
+                "answer": "Court and licensing clerks maintain official records, process filings and follow procedures. Court reporters focus on the verbatim record; legal assistants support research and drafting. Authority depends on the institution.",
                 "id": "actors.faq.2",
-                "question": "What is the difference between court, municipal and licensing clerks and compliance specialists or office clerks?",
+                "question": "How do court clerks differ from court reporters and legal assistants?",
                 "question_key": "career.faq.court-municipal-and-license-clerks.2",
                 "source_refs": [
                   "onet"
@@ -31027,9 +31034,9 @@
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: three types of task — document intake and retrieval, information entry and forms, and meeting minutes and notices — can be partly taken on by tools; this page has no single-occupation adoption or replacement data.",
+                "answer": "Software can assist with templates, schedules and searches. Authorized staff verify identity, access, case records and final documents. This is not a measurement of AI adoption or job displacement.",
                 "id": "actors.faq.4",
-                "question": "Which tasks of court, municipal and licensing clerks already have evidence of AI-driven change?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.court-municipal-and-license-clerks.4",
                 "source_refs": [
                   "onet"
@@ -31045,12 +31052,14 @@
                 ]
               },
               {
-                "answer": "In the US 2025 wage data the median annual wage is 48,700 USD and the hourly wage 23.41 USD (single-occupation basis for 43-4031.00), with percentiles at annual wages of 36,300／40,810／48,700／60,840／73,820 USD; no occupation-level wage figure was obtained for mainland China, and this page treats it as a gap rather than filling it with a sector average.",
+                "answer": "The May 2025 U.S. median wage was $48,700 per year and $23.41 per hour. A 2023 Ningxia court notice listed about CNY 3,800–4,800 per month, including employee social insurance and housing-fund contributions. A 2024 Jiangsu notice set base pay at least 1.2 times the local minimum wage, with performance pay and grade allowances separate. Both describe individual court hiring programs.",
                 "id": "actors.faq.6",
                 "question": "What do court, municipal and licensing clerks generally earn, and how should it be compared?",
                 "question_key": "career.faq.court-municipal-and-license-clerks.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "clerk-ningxia",
+                  "clerk-jiangsu"
                 ]
               },
               {
@@ -31063,12 +31072,12 @@
                 ]
               },
               {
-                "answer": "In the US there is no uniform national license, and on-the-job training is mostly arranged by the employer; comparable posts in mainland China mostly have no uniform national qualification requirement, and some posts have recruitment or examination conditions; specific conditions are checked against the target unit's recruitment announcement and current regulations.",
+                "answer": "The Supreme People’s Court’s 2026 notice describes recruitment by examination and assessment. Check the actual court announcement for tests, skills and pay. The U.S. category also covers municipal and licensing work.",
                 "id": "actors.faq.8",
-                "question": "Do you have to get a certificate to work as a court, municipal or licensing clerk?",
+                "question": "How are contract court clerks hired in mainland China?",
                 "question_key": "career.faq.court-municipal-and-license-clerks.8",
                 "source_refs": [
-                  "cn-rule"
+                  "clerk-spc-current"
                 ]
               },
               {
@@ -31081,12 +31090,12 @@
                 ]
               },
               {
-                "answer": "The O*NET employment trends page (based on BLS 2024—2034 projections) shows about 180,400 people in this breakdown in 2024, with a projected label of Average (3% to 4%) and about 18,500 cumulative openings including growth and replacement; the work is mainly long hours of sitting processing documents plus public communication, with strict accuracy and confidentiality requirements, and must be checked against local institutional demand.",
+                "answer": "BLS projects U.S. employment in SOC 43-4031 to go from about 187,000 in 2025 to 193,300 in 2035 (+3.4%). It projects about 17,100 openings per year, including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing court, municipal or licensing clerk work now?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.court-municipal-and-license-clerks.10",
                 "source_refs": [
-                  "bls"
+                  "a19-bls-projections"
                 ]
               }
             ]
@@ -31459,11 +31468,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; the nationwide wage distribution for this occupation, recruitment quote samples and a precise China-US mapping were not obtained. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
+                  "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; a comparable nationwide occupational wage distribution and precise China–U.S. mapping were not established. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
                 ],
                 "evidence_type": "official statistics",
                 "id": "nbs",
-                "limitation": "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; the nationwide wage distribution for this occupation, recruitment quote samples and a precise China-US mapping were not obtained. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given.",
+                "limitation": "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; a comparable nationwide occupational wage distribution and precise China–U.S. mapping were not established. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 urban unit wages",
                 "period": "2025 data, released 2026-05-15",
@@ -31503,7 +31512,7 @@
                 "url": "https://www.onetonline.org/link/localwages/43-4031.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "The US 43-4031.00 has 29 tasks: 11 Core including computerized custody and archiving of municipal documents, checking legal documents and procedure, recording case outcomes, orders and fee arrangements, answering public judicial questions, general clerical and administrative work, applicant information, indicating appearance times, public and government information requests, office tracking systems, and municipal archive retrieval; 18 Supplemental including litigation outcome documents, full permit eligibility assessment, ordinance announcements, issuing permits and collecting fees, meeting notices, application coding, vital and financial records, case calendars, court orders, agendas and meeting minutes, training coordination, permit inquiries, contract bidding, license verification, budget, document authenticity, and contacting witnesses and parties. The classification is not daily frequency; courts, municipal bodies and licensing do not mean every job cycles through all three sides at high frequency. In the US, 2025 industry employment was 98% government and 2% other, which is not wages or the Chinese employment distribution, and self-employment and employer types are not further inferred."
                 ],
@@ -31515,7 +31524,7 @@
                 "period": "Page updated 2026, industry data 2025; tasks differ by survey",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-4031.00"
+                "url": "https://www.onetonline.org/link/details/43-4031.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31535,11 +31544,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; the nationwide wage distribution for this occupation, recruitment quote samples and a precise China-US mapping were not obtained. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
+                  "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; a comparable nationwide occupational wage distribution and precise China–U.S. mapping were not established. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; the nationwide wage distribution for this occupation, recruitment quote samples and a precise China-US mapping were not obtained. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given.",
+                "limitation": "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; a comparable nationwide occupational wage distribution and precise China–U.S. mapping were not established. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 urban unit wages",
                 "period": "2025 data, released 2026-05-15",
@@ -31686,6 +31695,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment in SOC 43-4031 to go from about 187,000 in 2025 to 193,300 in 2035 (+3.4%). It projects about 17,100 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a19-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "At the time, about CNY 3,800–4,800 per month, including employee social insurance and housing-fund contributions."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "clerk-ningxia",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Ningxia contract court clerks",
+                "period": "2023-09-15",
+                "publisher": "Ningxia High People’s Court",
+                "scope": "recruitment_proxy",
+                "url": "https://www.nxfy.gov.cn/xwzx/2018fyzx/202309/t20230915_4977964.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Base wage at least 1.2 times the local minimum wage; performance pay and grade allowances separate."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "clerk-jiangsu",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Jiangsu contract court clerks",
+                "period": "2024",
+                "publisher": "Jiangsu Courts",
+                "scope": "recruitment_proxy",
+                "url": "https://www.jsfy.gov.cn/article/98398.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Recruitment combines examination and assessment; pay is set locally and adjusted over time."
+                ],
+                "evidence_type": "Official notice",
+                "id": "clerk-spc-current",
+                "limitation": "Applies to contract clerks in mainland Chinese courts.",
+                "market": "Mainland China",
+                "name": "2026 notice on contract court clerk management",
+                "period": "2026",
+                "publisher": "Supreme People’s Court",
+                "scope": "jurisdiction_reference",
+                "url": "https://www.court.gov.cn/zixun/xiangqing/507841.html"
               }
             ]
           },
@@ -34483,7 +34552,7 @@
             {
               "指标": "Data and basis",
               "数值": "This round obtained no occupation-level wage figure for mainland China corresponding to court, municipal and licensing clerks (O*NET-SOC 43-4031.00), so no specific number is shown; the gap is marked in a visible place on the page.",
-              "说明": "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; the nationwide wage distribution for this occupation, recruitment quote samples and a precise China-US mapping were not obtained. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
+              "说明": "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; a comparable nationwide occupational wage distribution and precise China–U.S. mapping were not established. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
             },
             {
               "指标": "Scope of review",
@@ -34503,7 +34572,7 @@
             {
               "指标": "Statistical coverage",
               "数值": "National Bureau of Statistics urban unit wage statistics cover urban legal entities and do not include the self-employed and freelancers, among others",
-              "说明": "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; the nationwide wage distribution for this occupation, recruitment quote samples and a precise China-US mapping were not obtained. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
+              "说明": "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; a comparable nationwide occupational wage distribution and precise China–U.S. mapping were not established. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given."
             },
             {
               "指标": "Market comparison",
@@ -34649,7 +34718,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (recruitment quote basis)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34661,13 +34730,14 @@
           "china_soc_row": "The US 43-4031 combines courts, municipal bodies and licensing; the corresponding Chinese posts are checked separately, and a precise entity mapping and national occupational wages were not obtained this round.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-clerk-ningxia",
+            "posting-clerk-jiangsu"
           ],
           "sources_note": "Source links are used according to their own statistical or announcement scope; when the statistical period, survey population and pay basis differ, the figures are cited separately and no mutual conversion is made.",
           "ui": {
             "ai_heading": "Will AI or automation affect the wages of court, municipal and licensing clerks?",
             "driver_heading": "How are shifts and cycles arranged for court and government posts?",
-            "official_heading": "Official statistical basis and gap notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Jurisdiction and actual post preparation conditions, not a distribution rule from education to post",
             "scenario_heading": "How should education, recruitment and post authority be checked separately?",
             "scenario_interpretation_label": "Notes and checking suggestions",
@@ -35311,7 +35381,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/compliance-officers",
+            "target_href": "/en/career/jobs/compliance-officers",
             "target_slug": "compliance-officers",
             "target_title": "Compliance specialists (adjacent occupation)",
             "transition_distance": {
@@ -35334,7 +35404,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/insurance-claims-and-policy-processing-clerks",
+            "target_href": "/en/career/jobs/insurance-claims-and-policy-processing-clerks",
             "target_slug": "insurance-claims-and-policy-processing-clerks",
             "target_title": "Insurance claims clerks (adjacent occupation)",
             "transition_distance": {
@@ -35357,7 +35427,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/receptionists-and-information-clerks",
+            "target_href": "/en/career/jobs/receptionists-and-information-clerks",
             "target_slug": "receptionists-and-information-clerks",
             "target_title": "Receptionists and information clerks (adjacent occupation)",
             "transition_distance": {
@@ -35380,7 +35450,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/title-examiners-abstractors-and-searchers",
+            "target_href": "/en/career/jobs/title-examiners-abstractors-and-searchers",
             "target_slug": "title-examiners-abstractors-and-searchers",
             "target_title": "Title examiners, abstractors and searchers (adjacent occupation)",
             "transition_distance": {
@@ -35403,7 +35473,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/executive-secretaries-and-executive-administrative-assistants",
+            "target_href": "/en/career/jobs/executive-secretaries-and-executive-administrative-assistants",
             "target_slug": "executive-secretaries-and-executive-administrative-assistants",
             "target_title": "Executive administrative assistants (adjacent occupation)",
             "transition_distance": {
@@ -35426,7 +35496,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/data-entry-keyers",
+            "target_href": "/en/career/jobs/data-entry-keyers",
             "target_slug": "data-entry-keyers",
             "target_title": "Data entry keyers (adjacent occupation)",
             "transition_distance": {
@@ -35449,7 +35519,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/office-clerks-general",
+            "target_href": "/en/career/jobs/office-clerks-general",
             "target_slug": "office-clerks-general",
             "target_title": "Office clerks (adjacent occupation)",
             "transition_distance": {
@@ -35472,7 +35542,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/paralegals-and-legal-assistants",
+            "target_href": "/en/career/jobs/paralegals-and-legal-assistants",
             "target_slug": "paralegals-and-legal-assistants",
             "target_title": "Paralegals and legal assistants (adjacent occupation)",
             "transition_distance": {
@@ -35560,7 +35630,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my occupational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35609,7 +35679,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35658,7 +35728,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35707,7 +35777,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation leads",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35756,7 +35826,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35805,7 +35875,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication leads",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36427,7 +36497,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of court, municipal and licensing clerks",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36541,11 +36611,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -36961,39 +37031,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 180,400 people (2024, single-occupation basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "187,000 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size",
-        "occupation_scope": "The 2024 employment estimate for this breakdown on the O*NET employment trends page (based on BLS 2024—2034 projections)",
-        "period": "2024 (O*NET/BLS); retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4031",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a19-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Growth 3%—4% (2024—2034, label Average)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+3.4%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Employment change rate",
-        "occupation_scope": "Projected label 'average' for this breakdown on the O*NET employment trends page (based on BLS 2024—2034 projections)",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4031",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a19-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 18,500 (2024—2034 cumulative, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "17,100 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Job openings",
-        "occupation_scope": "Cumulative openings for this breakdown over 2024—2034 on the O*NET employment trends page, stated to include growth and replacement demand",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4031",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a19-bls-projections"
         ]
       },
       {
@@ -37122,7 +37192,7 @@
         "fact_id": "china-jiaojiang-featured-daily-2026-g04-current",
         "market": "Mainland China",
         "measure": "Statistical position not obtained (occupation-level wages for mainland Chinese court/municipal/licensing posts)",
-        "occupation_scope": "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; the nationwide wage distribution for this occupation, recruitment quote samples and a precise China-US mapping were not obtained. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given.",
+        "occupation_scope": "The NBS2025 conditional sector background: non-private public administration, social security and social organizations pre-tax annual average 119,465 yuan, which requires the legal entity's main business classification to match, and is not the occupational median for clerks or government clerical staff, nor monthly take-home pay or a job grade. The private-sector value for the corresponding sector was not obtained for this table, and 0 is not filled in. It covers urban legal entities with 5 or more persons and excludes the self-employed and freelancers; a comparable nationwide occupational wage distribution and precise China–U.S. mapping were not established. The Supreme People's Court 2026 policy interpretation states that contract-based court clerk pay is reasonably determined according to local economic and fiscal conditions and the average wage of employees and residents' income, but no nationwide uniform amount is given.",
         "period": "2025 industry/wage/employment, 2025—2035 projections; checked 2026-10-09",
         "source_refs": [
           "r2-pay-1"
@@ -37138,6 +37208,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "At the time, about CNY 3,800–4,800 per month, including employee social insurance and housing-fund contributions.",
+        "fact_id": "posting-clerk-ningxia",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Ningxia contract court clerks",
+        "period": "2023-09-15",
+        "source_refs": [
+          "clerk-ningxia"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Base wage at least 1.2 times the local minimum wage; performance pay and grade allowances separate.",
+        "fact_id": "posting-clerk-jiangsu",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Jiangsu contract court clerks",
+        "period": "2024",
+        "source_refs": [
+          "clerk-jiangsu"
         ]
       }
     ]
@@ -37165,19 +37259,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "US employment projection (2024—2034, growth 3%—4%, average)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "US employed persons (2024, about 180,400)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "US job openings (2024—2034, about 18,500)"
+        "label": "U.S. projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37191,17 +37285,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Court, Municipal, and License Clerks (O*NET-SOC 43-4031.00) handle cases and public records and take in and review applications at a court, municipal body or licensing counter: this covers checking the compliance of legal documents, recording case dispositions and court orders, answering public inquiries, preparing orders and subpoenas, compiling case dockets, maintaining ordinances and meeting minutes, publishing public notices, retrieving archives, and assessing permit applications and issuing permits and collecting fees; it includes the US 2025 median annual wage of 48,700 USD (hourly wage 23.41 USD), about 180,400 people employed in 2024, average 2024—2034 employment projections (3%—4%), the gap in mainland Chinese occupation-level wages and employment basis, and control points for accuracy and thoroughness, confidentiality and authority boundaries, and public communication pressure."
+      "text": "See how court, municipal and license clerks process filings and maintain records. Compare Chinese court postings and U.S. wages."
     },
     "title": {
       "availability": "available",
       "text": "Court, municipal and licensing clerks"
     }
   },
-  "source_content_sha256": "bb72b0e745e0c32bc90b51356cf12823e4e76c0ae1e78a12a8cc0e2b2c79bbe8",
+  "source_content_sha256": "91a9b1e30c12575fe3242e4ee4a6b24bb1de0f9f89cea5d37d755c3d913ba827",
   "subject": {
     "canonical_slug": "court-municipal-and-license-clerks",
     "name": "Court, municipal and licensing clerks",
-    "summary": "Court, Municipal, and License Clerks corresponds in the US to O*NET-SOC 43-4031.00 (Court, Municipal, and License Clerks). The core is handling cases and public records and taking in and reviewing applications at a court, municipal body or licensing counter: receiving and checking whether legal documents submitted to a court comply with law and procedure, recording case dispositions and court orders, answering public inquiries about procedure, appearance dates, subpoenas and fines, preparing and issuing court orders and subpoenas, and compiling pending case dockets; on the municipal side maintaining ordinances, resolutions and meeting minutes, publishing public notices and retrieving municipal archives; on the licensing side asking for and recording applicant information, assessing whether an application is complete and accurate and judging whether it meets licensing conditions, issuing marriage, fishing, hunting and dog licenses and collecting fees, and conducting record verification of license holders. On the Chinese side, comparable posts fall under court clerks, institutional documents and government affairs/licensing counters, are not one-to-one with this US occupation breakdown, and their employment and pay bases cannot be interchanged."
+    "summary": "Receive applications or case filings, check documents, schedule work and maintain case or public records. Authorized officials decide cases or license applications. The U.S. category includes court, municipal and licensing work."
   }
 }

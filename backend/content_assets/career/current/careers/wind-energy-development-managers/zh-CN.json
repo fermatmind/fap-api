@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先把工作包成本、文件状态及计划条件分开，再写项目状态简报。观察愿不愿复算、澄清未知和持续协调。"
+              "纸面体验｜并网节点未确认而计划表显示可开工。保留两项状态，把前置条件、责任人和影响日期列给项目负责人。 "
             ]
           },
           "id": "wind-energy-development-managers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24802,13 +24801,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "风能开发经理对应O*NET11-9199.10，领导或管理风能商业机会的开发与评估，涉及环境研究、许可资料、项目提案，也可能管理建设。协调能源评估、工程与建设，制定范围进度预算，审查建议书与技术文档并参与土地、购电和并网协议谈判。风场运维经理与风机维修技术员另分；协调开发不自动授予工程设计、现场电气作业或行政审批权限。"
+              "风电开发经理统筹立项、资源评估、用地、并网、预算和进度，把审批及协议依赖整理成项目决策材料。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "wind-energy-development-managers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-11-9199.10"
           ],
           "type": "prose"
         }
@@ -25452,13 +25450,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "草稿可辅助整理获准资料，成本、文件状态和日期须回原输入；本职采用节时替代不足，父组预测不能作AI因果。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：并网节点未确认而计划表显示可开工。保留两项状态，把前置条件、责任人和影响日期列给项目负责人。"
             ]
           },
           "id": "wind-energy-development-managers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-11-9199.10",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33045,6 +33043,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-11-9199.10",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 11-9199.10 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/11-9199.10"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38562,10 +38587,10 @@
       "text": "风能开发经理"
     }
   },
-  "source_content_sha256": "cfe6c0fe1b78cca4080e2e58fe6abe70c1383a4dfb483c1c7de3c952594f1b7d",
+  "source_content_sha256": "1331c80369efc96536578d69efc3f8e7fb8799d50508b8987a341f374c664e75",
   "subject": {
     "canonical_slug": "wind-energy-development-managers",
     "name": "风能开发经理",
-    "summary": "风能开发经理对应O*NET11-9199.10，领导或管理风能商业机会的开发与评估，涉及环境研究、许可资料、项目提案，也可能管理建设。协调能源评估、工程与建设，制定范围进度预算，审查建议书与技术文档并参与土地、购电和并网协议谈判。风场运维经理与风机维修技术员另分；协调开发不自动授予工程设计、现场电气作业或行政审批权限。"
+    "summary": "风电开发经理统筹立项、资源评估、用地、并网、预算和进度，把审批及协议依赖整理成项目决策材料。"
   }
 }

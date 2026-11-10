@@ -24111,7 +24111,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对森林经营与采伐与保护成效的评价结论。本页按美国 O*NET-SOC 19-1032.00「Foresters」编写（固定索引给本资产的中文名是「林务员」；主要对象是为经济、游憩与保护目的经营公有与私有林地，可能要调查立木的类型与数量与位置并评估价值与协商采购与拟订合同，并确定野生动物栖息地与河岸与水质与土壤稳定性的保护方式与环境法规合规方式，以及拟订植树与培育计划与监测生长并确定最佳采伐时间表）。"
+              "本清单只用于自我提问，不构成录用标准、能力评分或对森林经营与采伐与保护成效的评价结论。本页按美国 O*NET-SOC 19-1032.00「Foresters」编写（主要对象是为经济、游憩与保护目的经营公有与私有林地，可能要调查立木的类型与数量与位置并评估价值与协商采购与拟订合同，并确定野生动物栖息地与河岸与水质与土壤稳定性的保护方式与环境法规合规方式，以及拟订植树与培育计划与监测生长并确定最佳采伐时间表）。"
             ]
           },
           "id": "foresters.quick-decision.fit-decision-checklist.1",
@@ -24189,12 +24189,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "纸面虚构材料｜林班A为10公顷、给定平均蓄积20立方米/公顷；B为6公顷、15立方米/公顷；C为4公顷、25立方米/公顷。B录入副本误写60公顷，原题设为6。题设C是保护区域，不得纳入计划；A/B可列入纸面方案。方案X仅A拟列40立方米，方案Y为A40加B20立方米。合同草案额度50立方米，虚构报价300元/立方米；通告Q暂停所有现场作业。没有成本、实测样本或有效许可材料。 任务｜90分钟内计算三林班给定蓄积、可列计划范围及两方案数量与模拟报价，找出B录入错误；核合同草案额度与Q通告，写交接摘要及缺项。只用题设，不到现场、不设计采伐或用火参数。"
+              "可从林学、森林计测、森林经理和地理信息技能入手。求职时比较林草资源调查监测和森林经营岗位：前者重在调查记录、数据和图件，后者更看经营方案及作业跟踪。林草调查规划院的应届生公告按岗位核最高学历及专业，不能只看“林务员”这个名称。"
             ]
           },
           "id": "foresters.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet"
+            "forestry-inventory",
+            "forestry-role-sample",
+            "forestry-study"
           ],
           "type": "prose"
         },
@@ -24382,13 +24384,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻比较｜看林地经营、调查支持、体力作业、资源保护或森林防火的主要对象与产出；官方职责可重叠，不把林务员的调查、研究、现场参与排除。火因调查不得仅凭森林防火名称推定。"
+              "林务员主要把调查结果用于森林经营、方案和合同；护林员偏责任区巡护及异常报告；技术员可承担样地测量和数据整理。用招聘公告里的日常产出和审批责任判断，现场任务可能重叠。"
             ]
           },
           "id": "foresters.profile.career-quick-answers-block.7",
           "source_refs": [
             "onet",
-            "hr"
+            "forestry-inventory"
           ],
           "type": "prose"
         },
@@ -24613,11 +24615,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国代理｜农林牧渔行业工资只是背景；本页没有中国林务员雇主构成或季节用工比例样本。"
+              "美国 OEWS 覆盖全职和兼职受薪雇员正常工时工资，不含自雇。国家统计局的中国大陆数字覆盖城镇单位的行业工资，只作行业背景，不能读成这个职业的收入。"
             ]
           },
           "id": "foresters.profile.career-quick-answers-block.22",
           "source_refs": [
+            "r2-pay-1",
             "nbs"
           ],
           "type": "prose"
@@ -24727,7 +24730,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "统计时期｜工资May2025，BLS就业基期2025、预测2025—2035；O*NET旧2024—2034就业展示不作当前值。"
+              "统计时期｜工资May2025，BLS就业基期2025、预测2025—2035。"
             ]
           },
           "id": "foresters.profile.career-quick-answers-block.30",
@@ -28431,13 +28434,13 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
@@ -30146,7 +30149,7 @@
                 "values": [
                   "学历与州许可",
                   "美国OOH说明通常需要林学、自然资源、农业或生物等相关学士学位；部分州对林务员有许可要求，应查州主管机关，认证不能代替州许可。O*NET的73%/17%/4%为受访者回答的新聘学历要求，不是实际新入职者学历分布；Job Zone 4为总体准备层级。",
-                  "证据不足：本页未核中国精确对应职业的统一资格及招聘样本；美国条件不代填。"
+                  "证据不足：本页已核大陆相近调查监测和林业岗位样本，未证实与美国职业完全对应或有统一准入。"
                 ]
               },
               {
@@ -32523,22 +32526,25 @@
                 ]
               },
               {
-                "answer": "美国OOH说明通常需要林学、自然资源、农业或生物等相关学士学位；部分州对林务员有许可要求，应查州主管机关，认证不能代替州许可。O*NET的73%/17%/4%为受访者回答的新聘学历要求，不是实际新入职者学历分布；Job Zone 4为总体准备层级。",
+                "answer": "可从林学、森林计测、森林经理和地理信息技能入手。求职时比较林草资源调查监测和森林经营岗位：前者重在调查记录、数据和图件，后者更看经营方案及作业跟踪。林草调查规划院的应届生公告按岗位核最高学历及专业，不能只看“林务员”这个名称。",
                 "id": "foresters.faq.7",
-                "question": "需要什么学历和培训？",
+                "question": "想做森林经营或资源调查，需要怎么准备？",
                 "question_key": "career.faq.foresters.q7",
                 "source_refs": [
-                  "onet",
-                  "hr"
+                  "forestry-inventory",
+                  "forestry-role-sample",
+                  "forestry-study"
                 ]
               },
               {
-                "answer": "美国OOH说明通常需要林学、自然资源、农业或生物等相关学士学位；部分州对林务员有许可要求，应查州主管机关，认证不能代替州许可。O*NET的73%/17%/4%为受访者回答的新聘学历要求，不是实际新入职者学历分布；Job Zone 4为总体准备层级。 中国对应资格本页未核，不列统一证书清单。",
+                "answer": "中国大陆先按雇主和职位核条件。林草调查规划院的公告按岗位规定专业和学历；这个样本不能证明存在全国统一的林务员上岗证。美国另按州和具体业务核准入；例如阿拉巴马州主管机关区分提供专业林业意见与只做相关作业服务。",
                 "id": "foresters.faq.8",
-                "question": "需要证书或资格吗？",
+                "question": "做林业技术工作要考统一证书吗？",
                 "question_key": "career.faq.foresters.q8",
                 "source_refs": [
-                  "hr"
+                  "forestry-inventory",
+                  "forester-alabama",
+                  "forester-bls-ooh"
                 ]
               },
               {
@@ -32658,25 +32664,25 @@
                 "entity": "林务员相关方向 2",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "林务员相关方向 3",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "林务员相关方向 4",
+                "entity": "林业与保护技术员",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/career/jobs/forest-and-conservation-technicians"
               },
               {
-                "entity": "林务员相关方向 5",
+                "entity": "保护科学家",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/career/jobs/conservation-scientists"
               },
               {
                 "entity": "林务员相关方向 6",
@@ -32994,7 +33000,7 @@
                 "accessed_at": "2026-10-02",
                 "details": [
                   "本轮读取California页面United States行，非California工资。",
-                  "全国四分位50,790/62,710/91,640/109,700，中位76,400美元/年。"
+                  "全国工资第10、25、75、90百分位为50,790/62,710/91,640/109,700，中位76,400美元/年。"
                 ],
                 "evidence_type": "official sub-national wage display",
                 "id": "r2-pay-1",
@@ -33182,6 +33188,86 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "按职位核最高学历及专业；相近专业能否报考由招聘单位按岗位研判。"
+                ],
+                "evidence_type": "institutional sample",
+                "id": "forestry-inventory",
+                "limitation": "单一招聘周期、单一机构，不是大陆职业准入。",
+                "market": "中国大陆",
+                "name": "林草调查规划院2027年度公开招聘应届毕业生公告",
+                "period": "2026公告 / 2027招聘",
+                "publisher": "国家林业和草原局林草调查规划院",
+                "scope": "法规职责或具名岗位及培训样本",
+                "url": "https://www.forestry.gov.cn/c/ghy/ywdt/693238.jhtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "岗位表有林草资源调查监测、规划评价等方向；同表不同岗位另列学历和专业条件。"
+                ],
+                "evidence_type": "institutional sample",
+                "id": "forestry-role-sample",
+                "limitation": "岗位表说明具体招聘方向，不是总需求预测。",
+                "market": "中国大陆",
+                "name": "直属单位应届毕业生招聘岗位表",
+                "period": "2026招聘",
+                "publisher": "国家林业和草原局",
+                "scope": "法规职责或具名岗位及培训样本",
+                "url": "https://www.forestry.gov.cn/u/cms/xby/202509/090955390l2b.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "课程包括森林计测、森林培育和森林经理等，可用来判断训练内容。"
+                ],
+                "evidence_type": "institutional sample",
+                "id": "forestry-study",
+                "limitation": "专业培养举例；不是就业保证或资格法规。",
+                "market": "中国大陆",
+                "name": "林学本科专业介绍",
+                "period": "2026查阅",
+                "publisher": "湖北民族大学",
+                "scope": "法规职责或具名岗位及培训样本",
+                "url": "https://www.hbmzu.edu.cn/zsjyw1/info/1063/2772.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国职业展望手册：相关学士及州资格适用边界。"
+                ],
+                "id": "forester-bls-ooh",
+                "market": "美国",
+                "name": "BLS：Conservation Scientists and Foresters",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "州规则仅限该州；OOH为联邦职业手册。",
+                "url": "https://www.bls.gov/OOH/life-physical-and-social-science/conservation-scientists.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "阿拉巴马州区分提供专业林业意见与只做作业服务的岗位。"
+                ],
+                "id": "forester-alabama",
+                "market": "美国",
+                "name": "Alabama State Board of Registration for Foresters: FAQ",
+                "publisher": "Alabama State Board of Registration for Foresters",
+                "scope": "州规则仅限该州；OOH为联邦职业手册。",
+                "url": "https://asbrf.alabama.gov/forester-information/forester-faq/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "纳入危险津贴；排除待命工资和轮班差额。"
+                ],
+                "id": "bls-oews-wage-definition",
+                "market": "美国",
+                "name": "BLS OEWS 工资定义",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               }
             ]
           },
@@ -35052,7 +35138,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "林务员需要什么准备？",
+            "question": "想做森林经营或资源调查，需要怎么准备？",
             "table": {
               "rows": [
                 {
@@ -35109,7 +35195,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "林务员和相邻岗位有什么区别？",
+            "question": "林务员与护林员、林业技术员有什么不同？",
             "table": {
               "rows": [
                 {
@@ -37831,7 +37917,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合林务员",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37928,7 +38014,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "林业与保护技术员"
           },
           {
             "href": {
@@ -37938,7 +38024,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "保护科学家"
           }
         ]
       },
@@ -38304,17 +38390,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "林务员做什么、需要什么能力、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围、来源口径和数据缺口。"
+      "text": "了解林务员怎样把样地数据变成经营方案、在大陆可找哪些相近技术岗，以及美国工资与大陆行业工资怎样区分。"
     },
     "title": {
       "availability": "available",
-      "text": "林务员"
+      "text": "林务员做什么：森林经营、林业调查和入行路径"
     }
   },
-  "source_content_sha256": "268f35934abb4a2bea5c249df43ba89386db3625c5ba89df4bb1d0a8bc315298",
+  "source_content_sha256": "cb86d179363c6eed92bf0724903549673ef16483e6ceeac6791f9e4f48fb928f",
   "subject": {
     "canonical_slug": "foresters",
     "name": "林务员",
-    "summary": "职业定义｜林务员对应美国O*NET-SOC 19-1032.00，为经济、游憩与保护目的经营公有或私有林地：调查林分并估算蓄积、价值与生长，拟订经营与采伐安排、协商及监督合同，组织造林抚育并保护栖息地与水土。官方还列调查研究、测绘、树木生物学研究以及指导并参与森林火灾扑救，不能把这些任务整体排除。实际签认、许可、执法及火场指挥权限须核岗位与法域，职业名称不授予权限。"
+    "summary": "林务员根据林地调查和蓄积估算制定森林经营方案，并跟进造林、抚育、采伐安排和合同。中国大陆可比较林草资源调查监测、林业调查规划和森林经营技术岗；实际分工和招聘条件以岗位为准。"
   }
 }

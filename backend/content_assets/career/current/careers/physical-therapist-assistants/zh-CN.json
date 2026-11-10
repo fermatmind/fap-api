@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -22292,17 +22289,8 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.13.market": {
-        "ref": {
-          "id": "physical-therapist-assistants.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            12,
-            "market"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.13.name": {
         "ref": {
@@ -22320,19 +22308,8 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.13.period": {
-        "ref": {
-          "id": "physical-therapist-assistants.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "editor"
-            },
-            "period"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.13.publisher": {
         "ref": {
@@ -23311,12 +23288,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "快速判断：你是否愿意在物理治疗师监督下长期面对患者，按既定计划指导练习，观察疼痛、活动能力和安全变化，并把结果准确记录和报告？这项工作需要患者沟通、体力和持续训练。美国PTA资格与中国相近康复治疗岗位不能自动互认；报读前先核目标地区的正规课程、实践和岗位要求。"
+              "如果你希望独立评估、制订或修改治疗计划，先核 PT 与 PTA 的职责和资格差别。"
             ]
           },
           "id": "physical-therapist-assistants.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "editor",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -23326,7 +23303,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号：能听懂并复述物理治疗师的目标与禁忌，说明患者当前能做和不能做的活动，守住转移、感染控制和异常升级规则；对未授权的修改主动请示。合规观察和完全虚构案例可帮助检验记录与沟通习惯，兴趣量表不能证明临床胜任或取得执照。"
+              "打开「入行、资格与职业发展」，找到「PTA-08｜计划版本与交接」。按三条纸面记录做核对表和两句交接，写完再看参考。"
             ]
           },
           "id": "physical-therapist-assistants.quick-decision.fit-decision-checklist.2",
@@ -23340,14 +23317,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全练习：用完全虚构的患者资料和治疗计划，在60分钟内制作一页治疗前核对表、一次练习观察记录和异常升级说明。只整理书面资料，不操作真实患者、器械或受限病历；练习须写出哪些判断应交由物理治疗师决定。"
+              "适配信号：能听懂并复述物理治疗师的目标与禁忌，说明患者当前能做和不能做的活动，守住转移、感染控制和异常升级规则；对未授权的修改主动请示。合规观察和完全虚构案例可帮助检验记录与沟通习惯，兴趣量表不能证明临床胜任或取得执照。"
             ]
           },
           "id": "physical-therapist-assistants.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "editor",
-            "onet",
-            "employer"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23356,13 +23331,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "参考交付应写明虚构计划目标、既有禁忌、患者反馈、实际完成的练习、未测指标、需要通知物理治疗师的变化，以及不自行修改计划的理由。这个作品只显示记录和风险识别思路，不能作为治疗资格、患者诊断或真实操作许可。"
+              "这个练习只检验你能否分清观察与推断、把待核问题交给对的人。"
             ]
           },
           "id": "physical-therapist-assistants.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "editor",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23371,12 +23345,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "若你愿意在监督下反复做患者练习指导、功能观察、记录与团队交接，下一步核美国州PTA许可或中国目标机构的相近岗位要求，再评估课程、临床实习和费用。若你更想独立制定治疗计划，应比较物理治疗师的另一套教育与执业路径，不能把助理经验视为执照升级。"
+              "如果你愿意在 PT 监督下反复执行计划、观察变化、记清实际完成内容并交接，可以继续探索。先核目标岗位如何安排带教、监督和记录。"
             ]
           },
           "id": "physical-therapist-assistants.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -24303,7 +24277,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "其训练及临床决策责任不同于PTA，不能凭相似练习互认。"
+              "分别核实本地岗位与资格"
             ]
           },
           "id": "physical-therapist-assistants.direction-comparison.adjacent-career-comparison-table.23",
@@ -24758,15 +24732,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可以辅助整理公开康复资料、生成教育草稿或标出记录缺项，但没有证据证明它可独立安全指导真实患者练习。PTA的直接照护、患者变化观察、禁忌核对与向物理治疗师汇报仍须由合格人员按计划执行；机构采用和就业变化要分别验证。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "先用虚构记录试做表格和遗漏提醒。助手可整理文本，不能决定按哪版治疗计划、是否改变任务或代替 PT 签署。真实记录只在机构批准的流程内处理。"
             ]
           },
           "id": "physical-therapist-assistants.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
             "onet",
-            "bls"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26822,7 +26794,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国PTA与中国岗位不直接互认。"
+              "分别核实本地岗位与资格"
             ]
           },
           "id": "physical-therapist-assistants.china-salary.career-snapshot-primary-locale.44",
@@ -26851,13 +26823,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局表2、表5提供卫生和社会工作行业均值，未单列物理治疗师助理；国家卫健委培训资料说明中国康复治疗专业人员训练，不能据此认定美国PTA资格互认。"
+              "两份医院样本均未列工资金额，也不能据此推出中国物理治疗师助理的全国工资。一个协助物理因子相关工作，一个只操作设备，按公告逐项比较。"
             ]
           },
           "id": "physical-therapist-assistants.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "nbs",
-            "cnclass"
+            "pta-wuhan",
+            "pta-wangjing"
           ],
           "type": "prose"
         },
@@ -27721,31 +27693,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "作业治疗师",
@@ -28846,7 +28818,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "核中国新入职、转岗及初级人员的康复培训背景，不证明美国PTA资格互认。"
+              "美国 PTA 州级资格和大陆机构的实际岗位条件分别核。看公告列出的职责、资格和监督安排。"
             ]
           },
           "id": "physical-therapist-assistants.fit.personality-fit-block.66",
@@ -29474,7 +29446,7 @@
                 "id": "education",
                 "values": [
                   "学历与临床训练",
-                  "美国PTA通常完成经认证副学士课程和受监督临床训练；先核目标州规则。",
+                  "美国通常是经认可的 PTA 副学士项目和受监督临床实践。FSBPT 的 PTA 级 NPTE 与目标州或辖区颁发的执照或认证分开；境外学历核等同性与辖区审批。",
                   "核学校课程认证、实习安排及州许可申请要求。"
                 ]
               },
@@ -29497,17 +29469,20 @@
               {
                 "id": "tools",
                 "values": [
-                  "可展示作品",
-                  "用虚构病例做计划核对、练习记录和异常上报样本，不含真实患者资料。",
-                  "请合格从业者检查停练点与交接清楚程度。"
+                  "准备纸面作品",
+                  "用 PTA-08 虚构记录展示版本、身份和交接核对。",
+                  "先自核，或请同伴复核说明是否清楚。"
                 ]
               }
             ]
           },
           "id": "physical-therapist-assistants.path.employer-evidence.1",
           "source_refs": [
-            "employer",
-            "editor"
+            "bls",
+            "onet",
+            "pta-fsbpt",
+            "editor",
+            "pta-fsbpt-exam"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29520,33 +29495,33 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料与设定｜全部虚构",
-                  "虚构患者“林甲”在物理治疗师已签署计划下练习坐站与短距离步行；所有剂量、疼痛评分和日期仅为编辑练习，不是医疗建议。",
-                  "A1：计划写明坐站5次、步行10米、有人保护；出现明显头晕或新发胸痛立即停练并报告。",
-                  "A2：虚构当天患者报告起始疼痛2/10，完成第3次坐站后头晕，站立不稳。"
+                  "纸面材料｜三个虚构记录",
+                  "P1：A-17 的纸面计划 v5 由 PT 签署，列两个项目：准备练习与步行观察。变更要由 PT 确认。",
+                  "P2：系统 v6 草稿把步行观察改为另一项目，未签署。交班便签写的是 A-71。",
+                  "P3：08:45 只有排班，开始时间与完成量均未记录，未收到身份或计划版本的确认。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务与产出",
-                  "写一份操作前核对表：患者、计划版本、辅助器具、保护人员和停练条件。",
-                  "再写进展记录：只写已完成3次坐站、患者主诉与观察，不补写未完成的步行；标出报告对象。"
+                  "任务：先写待核表和两句交接",
+                  "把签署状态、两处编号、完成量与待确认事项分开。写给监督 PT；别替对方确认收到。",
+                  "把排班与实际执行分开；写完再看参考。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考思路",
-                  "应立即停止练习，保护患者并按机构流程通知监督物理治疗师；必要时启动急症程序。",
-                  "记录时间、患者原话、实际完成量和上报结果；不自行诊断头晕原因，也不擅自提高剂量。"
+                  "写完再看：参考交接",
+                  "08:45：已签 v5 记 A-17，未签 v6 变更项目，便签记 A-71；开始与完成均无记录。先暂停依据这份记录执行受影响活动，请监督 PT 与登记人员核身份、适用计划及后续安排；接收未确认。",
+                  "签署并不解决身份冲突；缺记录也不能反推未做。只留纸面待核。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界与复核",
-                  "此练习只处理纸面虚构信息；不对真实患者开展训练。"
+                  "边界与自核",
+                  "只用虚构纸面材料。不操作真人或器具，不推测病情，不替 PT 改计划。"
                 ]
               }
             ]
@@ -29555,7 +29530,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：虚构康复计划核对与异常记录",
+          "title": "PTA-08｜计划版本与交接",
           "type": "cards"
         },
         {
@@ -29566,31 +29541,31 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "计划核对包",
-                  "摘录A1中的动作、剂量、保护和停练条件，未知项明确提出。",
-                  "复核是否把计划外动作当成已授权。"
+                  "版本表",
+                  "并列两版及签署状态。",
+                  "已签 v5 的适用性仍待核；保留未签草稿。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "异常处理包",
-                  "依据A2描述先停练保护，再按流程报告监督物理治疗师。",
-                  "复核是否自行诊断或继续训练。"
+                  "编号核对卡",
+                  "保留来源，冲突留待核。",
+                  "不要擅自把两个编号合并。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "进展记录包",
-                  "区分实际完成的3次坐站和未开始的步行，保留患者主诉。"
+                  "完成状态",
+                  "缺记录时标未确认。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "交接说明卡",
-                  "写明时间、状态、已报告对象和下一步待确认事项。"
+                  "交接",
+                  "两句话交代事实、接手人及接收状态。"
                 ]
               }
             ]
@@ -29626,16 +29601,16 @@
                 "不能以模拟答案代替执照"
               ],
               [
-                "面试谈头晕",
-                "能否识别停练和上报信号",
-                "先保护患者、记录事实、按流程升级",
-                "不要求候选人远程作诊断"
+                "纸面核对",
+                "发现两个编号不一致",
+                "保留两处记录并标待核",
+                "不判断真实患者身份"
               ],
               [
-                "临床训练记录",
-                "是否如实记载完成量和患者反应",
-                "导师可核对操作与记录一致",
-                "模拟作品不等于临床能力"
+                "进展记录",
+                "能否区分排班与完成",
+                "缺少记录时不补值",
+                "不等于临床能力"
               ],
               [
                 "团队交接",
@@ -29662,49 +29637,49 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "第一日",
-                  "阅读BLS与O*NET，写清PTA、PT和aide的角色差别。"
+                  "核 PT、PTA 与 aide 的分工。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "第二日",
-                  "核目标州认可课程和许可路径，列出需向学校确认的问题。"
+                  "读目标地训练与资格，写一个要向学校核实的问题。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "第三日",
-                  "阅读虚构A1计划，写患者、动作、剂量及停练条件核对表。"
+                  "按 P1 和 P2 整理版本、签署和编号。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "第四日",
-                  "阅读虚构A2变化，写停练保护和上报顺序。"
+                  "读 P3；区分排班、开始与完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "第五日",
-                  "写进展记录，只记实际完成量与患者主诉。"
+                  "写两句交接，把接收状态保留为未确认。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "第六日",
-                  "请合格人员挑战记录和交接，修正遗漏但保留修改原因。"
+                  "先自核再读参考；同伴反馈可选。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "第七日",
-                  "复盘是否愿意持续近距离治疗、记录和团队协作；列出下一步资格核查。"
+                  "判断你更愿做计划执行、记录还是沟通；选一个雇主与一条培养路径继续核。"
                 ]
               }
             ]
@@ -29721,13 +29696,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "先了解治疗计划、患者身份、禁忌与停练信号。",
-              "受监督操作：在课程与临床训练中按物理治疗师安排指导动作，观察疼痛、疲劳与安全反应。",
-              "稳定执行与交接：在许可和雇主授权内承担指定治疗，记录进展、解释偏差并及时向物理治疗师汇报。",
-              "专长深化与协作：在合法范围内积累门诊、医院或居家康复经验；可继续教育或另走物理治疗师专业路径。",
-              "训练前先核患者身份、计划版本和禁忌。",
-              "每次操作记录实际完成量、症状与调整原因。",
-              "症状变化时停练、保护并报告监督物理治疗师。"
+              "两处编号都保留。",
+              "分开已签 v5（适用性待核）与未签草稿。",
+              "排班不当已完成。",
+              "缺记录标未确认。",
+              "写清身份、版本、接收各由谁确认。",
+              "用虚构材料先自核。",
+              "选择愿意反复做的任务，并继续核目标岗位。"
             ]
           },
           "id": "physical-therapist-assistants.path.seven-day-decision.1",
@@ -29812,7 +29787,7 @@
                 "不可直接套美国PTA",
                 "按当地主管部门和公告核对",
                 "依专业及机构而异",
-                "不建立中美证照互认"
+                "分别核实本地岗位与资格"
               ]
             ]
           },
@@ -29835,14 +29810,14 @@
               "完成课程、临床实习、州许可和雇主岗位授权是不同状态；不得因课程结业就独立开展治疗。",
               "BLS说明美国PTA通常需要认可副学士课程及州许可或认证；aide的高中学历与在岗训练路径不可混用。",
               "真实患者信息必须按机构隐私规则处理；本页虚构练习不使用患者资料。",
-              "中国康复治疗相关岗位需按所在地专业、培训和机构规则核对；不宣称美国PTA资格互认。"
+              "WS/T 893—2026 适用于基层医疗卫生机构的家庭病床康复；第 7.5.1 节由医生或康复治疗师按计划实施并记录。条文没有把大陆助理岗位等同美国 PTA，也不授权助理独立实施治疗。"
             ]
           },
           "id": "physical-therapist-assistants.path.credential-boundary.1",
           "source_refs": [
+            "pta-homebed",
             "bls",
-            "editor",
-            "privacy"
+            "pta-fsbpt"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29852,18 +29827,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "美国教育、州许可与职业任务以BLS和O*NET官方资料为准；目标州的现行要求与具体雇主监督安排应另行核对。",
-              "中国部分只引用国家卫健委康复治疗人员培训说明，不把跨职业工资、历史招聘或美国许可当作中国职业准入。"
+              "武汉大学中南医院光谷院区 2026 年 9 月劳务派遣公告列康复治疗师助理 1 名，协助康复治疗技师做物理因子治疗相关工作；要求康复治疗相关专业大专及以上及基本操作技能。报名已截止，未列工资。",
+              "中国中医科学院望京医院 2025 年合同制公告列助理技师 3 名，要求相关专业大专及以上，治疗师资格证优先；公告明确只操作设备、不参与治疗。报名已截止，未列具体工资。"
             ]
           },
           "id": "physical-therapist-assistants.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "pta-wuhan",
+            "pta-wangjing"
           ],
-          "title": "招聘样本说明",
+          "title": "大陆招聘样本：相近岗位名，职责不同",
           "type": "notice"
         },
         {
@@ -29911,7 +29884,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "模拟作品不能替代真实患者实习、执照或雇主授权。中国康复治疗相关岗位的培养与权限须按国家卫健委、地方和机构规则另核；本页不承诺中美资格互认。"
+              "美国 PTA 州级资格和大陆机构的实际岗位条件分别核。看公告列出的职责、资格和监督安排。"
             ]
           },
           "id": "physical-therapist-assistants.path.career-path-block.11",
@@ -30132,7 +30105,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国培训对象与内容；不建立美国PTA执照互认。"
+              "分别核实本地岗位与资格"
             ]
           },
           "id": "physical-therapist-assistants.path.career-path-block.26",
@@ -31899,10 +31872,15 @@
                 "question_key": "career.faq.physical-therapist-assistants.ai-impact"
               },
               {
-                "answer": "与美国PTA一一对应的中国全国职业工资中位数仍未核得。按受监督康复照护职责，提供2025年全国卫生和社会工作行业税前年平均工资参考：城镇非私营146,266元、私营75,631元/年；覆盖各岗位，非PTA中位数、新人价或收入区间。中国岗位名称、资格、机构授权及当期合同需另核。",
+                "answer": "两份医院样本均未列工资金额，也不能据此推出中国物理治疗师助理的全国工资。一个协助物理因子相关工作，一个只操作设备，按公告逐项比较。",
                 "id": "physical-therapist-assistants.faq.5",
                 "question": "中国大陆物理治疗师助理的工资是多少？",
-                "question_key": "career.faq.physical-therapist-assistants.china-pay"
+                "question_key": "career.faq.physical-therapist-assistants.china-pay",
+                "source_refs": [
+                  "pta-wuhan",
+                  "pta-wangjing",
+                  "nbs"
+                ]
               },
               {
                 "answer": "不代表。BLS报告2025年美国PTA年工资中位数68,380美元；O*NET给出的分位数覆盖不同经验、地区和雇主，不能当作新人起薪。",
@@ -31911,16 +31889,21 @@
                 "question_key": "career.faq.physical-therapist-assistants.us-pay"
               },
               {
-                "answer": "美国PTA通常需要经认证的副学士课程和受监督临床训练。中国相近康复岗位的学历、专业和培训要求需按当地规定及雇主公告核对，不能互认。",
+                "answer": "美国 PTA 州级资格和大陆机构的实际岗位条件分别核。看公告列出的职责、资格和监督安排。",
                 "id": "physical-therapist-assistants.faq.7",
                 "question": "入行需要什么学历和经验？",
                 "question_key": "career.faq.physical-therapist-assistants.education-path"
               },
               {
-                "answer": "美国各州要求PTA取得许可或认证，具体考试和继续教育要求应核目标州主管机构。中国康复治疗岗位须核当地资格及机构授权；美国PTA证照不自动适用。",
+                "answer": "美国通常是经认可的 PTA 副学士项目和受监督临床实践。FSBPT 的 PTA 级 NPTE 与目标州或辖区颁发的执照或认证分开；境外学历核等同性与辖区审批。",
                 "id": "physical-therapist-assistants.faq.8",
                 "question": "需要考什么证书吗？",
-                "question_key": "career.faq.physical-therapist-assistants.credentials"
+                "question_key": "career.faq.physical-therapist-assistants.credentials",
+                "source_refs": [
+                  "bls",
+                  "pta-fsbpt",
+                  "pta-fsbpt-exam"
+                ]
               },
               {
                 "answer": "患者跌倒或症状变化未及时停练上报、超出治疗计划操作、感染预防疏漏和进展记录不全。现场按机构流程与监督物理治疗师指令处理。",
@@ -32000,7 +31983,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页中文解释美国PTA职业范围，不建立中美资格互认。模拟病例仅用于练习记录与停练升级，不提供诊疗建议，也不使用真实患者信息。"
+              "美国 PTA 州级资格和大陆机构的实际岗位条件分别核。看公告列出的职责、资格和监督安排。"
             ]
           },
           "id": "physical-therapist-assistants.sources.source-card.4",
@@ -32033,13 +32016,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32080,8 +32063,8 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "美国精确职业任务、工作情境与2024—2034预测",
-                  "美国精确职业任务、工作情境与2024—2034预测"
+                  "美国 31-2021 职业任务和工作情境；就业预测另见 BLS 表 1.2。",
+                  "美国 31-2021 职业任务和工作情境；就业预测另见 BLS 表 1.2。"
                 ],
                 "evidence_type": "官方职业/统计资料",
                 "id": "onet",
@@ -32271,19 +32254,17 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "虚构练习与跨来源解释的编辑范围",
-                  "虚构练习与跨来源解释的编辑范围"
+                  "题中三条记录均为虚构。",
+                  "题中三条记录均为虚构。"
                 ],
-                "evidence_type": "编辑归纳",
+                "evidence_type": "虚构纸面练习",
                 "id": "editor",
-                "limitation": "本来源只支持所列范围，不能推断中国物理治疗师助理资格、职业独立工资或AI替代率。",
-                "market": "跨地区",
-                "name": "FermatMind职业内容编辑说明",
-                "period": "2026-09-26核读；原文时间见链接",
-                "publisher": "FermatMind编辑整理",
-                "scope": "editorial",
+                "limitation": "不评临床能力。",
+                "name": "费马测试编辑部：PTA-08 纸面练习",
+                "publisher": "费马测试编辑部",
+                "scope": "editorial_synthesis",
                 "url": null
               },
               {
@@ -32353,8 +32334,8 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "美国精确职业任务、工作情境与2024—2034预测",
-                  "美国精确职业任务、工作情境与2024—2034预测"
+                  "美国 31-2021 职业任务和工作情境；就业预测另见 BLS 表 1.2。",
+                  "美国 31-2021 职业任务和工作情境；就业预测另见 BLS 表 1.2。"
                 ],
                 "evidence_type": "官方职业/统计资料",
                 "id": "purchasing-managers",
@@ -32433,7 +32414,7 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "美国精确职业任务、工作情境与2024—2034预测"
+                  "美国 31-2021 职业任务和工作情境；就业预测另见 BLS 表 1.2。"
                 ],
                 "evidence_type": "官方职业/统计资料",
                 "id": "msresearch",
@@ -32479,20 +32460,85 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "观察患者练习反应 — 25/100; weight=1/3; physical-therapist-assistants.ai-impact.ai-impact-table.99[0]",
-                  "记录治疗进展 — 75/100; weight=1/3; physical-therapist-assistants.ai-impact.ai-impact-table.103[0]",
-                  "协助步态和平衡训练 — 0/100; weight=1/3; physical-therapist-assistants.ai-impact.ai-impact-table.111[0]"
+                  "使用虚构输入并人工复核。",
+                  "使用虚构输入并人工复核。",
+                  "使用虚构输入并人工复核。",
+                  "使用虚构输入并人工复核。",
+                  "使用虚构输入并人工复核。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "limitation": "不估算就业替代或疗效。",
+                "name": "费马测试：文书工具使用边界",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "武汉大学中南医院光谷院区 2026 年 9 月劳务派遣公告列康复治疗师助理 1 名，协助康复治疗技师做物理因子治疗相关工作；要求康复治疗相关专业大专及以上及基本操作技能。报名已截止，未列工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "pta-wuhan",
+                "name": "中南医院光谷院区招聘",
+                "period": "2026-09-10",
+                "publisher": "武汉大学中南医院",
+                "scope": "recruitment_proxy",
+                "url": "https://www.znhospital.cn/reurits_detail/17626.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中国中医科学院望京医院 2025 年合同制公告列助理技师 3 名，要求相关专业大专及以上，治疗师资格证优先；公告明确只操作设备、不参与治疗。报名已截止，未列具体工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "pta-wangjing",
+                "name": "望京医院合同制岗位公告",
+                "period": "2025-04-16",
+                "publisher": "中国中医科学院望京医院",
+                "scope": "recruitment_proxy",
+                "url": "https://wjhospital.com.cn/Html/News/Articles/20005821.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "PTA 在目标州或辖区取得执照或认证；考试只是申请流程的一部分。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "pta-fsbpt",
+                "name": "FSBPT：辖区许可与考试",
+                "period": "现行入口",
+                "publisher": "FSBPT",
+                "scope": "exact",
+                "url": "https://www.fsbpt.org/Secondary-Pages/Licensees/Getting-Licensed"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "WS/T 893—2026 适用于基层医疗卫生机构的家庭病床康复；第 7.5.1 节由医生或康复治疗师按计划实施并记录。条文没有把大陆助理岗位等同美国 PTA，也不授权助理独立实施治疗。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "pta-homebed",
+                "name": "国家卫健委：家庭病床康复服务标准",
+                "period": "2026-09-01",
+                "publisher": "国家卫生健康委员会",
+                "scope": "exact",
+                "url": "https://www.nhc.gov.cn/fzs/c100048/202603/a7d6e2615e9e474fba624d2e0e5bfc83/files/WST%20893%E2%80%942026.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "认可课程或经认可机构确认的实质等同性，加上目标州或辖区审批；核考试层级。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "pta-fsbpt-exam",
+                "name": "FSBPT：NPTE 考试资格",
+                "period": "现行入口",
+                "publisher": "FSBPT",
+                "scope": "exact",
+                "url": "https://www.fsbpt.org/Secondary-Pages/Exam-Candidates/National-Exam-NPTE/Eligibility-Requirements"
               }
             ]
           },
@@ -37184,7 +37230,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合物理治疗师助理工作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37398,7 +37444,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 可以辅助哪些文书任务？",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37666,27 +37712,15 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "物理治疗师助理",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与物理治疗助理工作"
     },
     "badges": [
       "物理治疗师助理 · 任务核对",
@@ -37730,17 +37764,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "物理治疗师助理（PTA）在物理治疗师监督下执行治疗计划，指导练习、观察患者反应并记录进展。查看美国2025年工资和2025—2035年就业预测、入行资格、工作风险与相邻职业；中国数据不与美国资格或薪资直接互认。"
+      "text": "物理治疗师助理怎样按计划执行和交接？比较美国 PTA、PT 与辅助人员，查看大陆两份招聘样本和美国薪资，再做一份纸面版本核对。"
     },
     "title": {
       "availability": "available",
       "text": "物理治疗师助理"
     }
   },
-  "source_content_sha256": "ad30499e61cf0a93feb8d5f90f652146887564d2e946cf1dc2aeabcd43a6cc94",
+  "source_content_sha256": "3888b6f9343a6464af63d742f7aa5c851a0471286db653557b66dc58d964be03",
   "subject": {
     "canonical_slug": "physical-therapist-assistants",
     "name": "物理治疗师助理",
-    "summary": "物理治疗师助理在物理治疗师制定的照护计划和监督下，指导患者完成指定练习与功能活动，观察治疗反应、记录进展并及时报告异常。美国PTA通常需认可的副学士课程及州级许可或认证；中国相近岗位须单独核当地教育、培训和机构职责，不能直接互认。"
+    "summary": "美国物理治疗师助理（PTA）在物理治疗师监督下实施指定治疗、观察变化并报告。大陆招聘里相近名称的助理，可能协助物理因子治疗，也可能只操作设备；选课程前先核目标岗位和当地资格。"
   }
 }

@@ -26980,13 +26980,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆公告可能把采购、供应链、合同、财务或行政职责组合在一起；本页不把混合岗位或单雇主报价合并成采购经理全国工资。"
+              "采购员职业标准 4-01-01-00 可用于理解供求调查和商品采购，不是采购经理的统一职级或签约许可。核岗时分辨谁做品类策略、谁管理人员、谁审核中标和合同。"
             ]
           },
           "id": "purchasing-managers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "editor",
-            "editor"
+            "cn-purch-standard"
           ],
           "type": "prose"
         },
@@ -27718,31 +27718,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "设施经理",
@@ -27861,7 +27861,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET兴趣档案（ECS）"
+              "O*NET 采购经理兴趣代码（EC）"
             ]
           },
           "id": "purchasing-managers.fit.personality-fit-block.3",
@@ -27964,7 +27964,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 把采购经理（11-3061.00）的兴趣代码列为 ECS：企业型 100、常规型 83、社会型 28 依次最高。它描述职业任务的侧重方向，不是给个人打分，也不构成合格线。"
+              "O*NET 将采购经理 11-3061.00 的职业兴趣代码列为 EC。分项为企业型 100、常规型 83、社会型 28。分数描述职业任务。"
             ]
           },
           "id": "purchasing-managers.fit.riasec-fit-block.9",
@@ -28021,7 +28021,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "ECS"
+              "EC"
             ]
           },
           "id": "purchasing-managers.fit.riasec-fit-block.11",
@@ -28614,7 +28614,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 2026档案按兴趣评分列ECS，侧重管理谈判、程序与数据组织以及协作服务。它描述职业活动，不是个人分数；可用采购需求、成本与供应商条件核对任务观察自己的持续兴趣。"
+              "EC 的企业型和常规型分别对应协调谈判和程序记录。可试做采购分工和条件审批，观察自己是否愿意持续核对。"
             ]
           },
           "id": "purchasing-managers.fit.personality-fit-block.50",
@@ -29473,7 +29473,7 @@
                 "values": [
                   "未采用的单一雇主案例",
                   "本轮未取得身份、日期、职责组合和报价条件均可核验的本职业雇主公告，因此不把单一雇主案例写成职业门槛。",
-                  "核对方式：若日后采用公告，逐项核验岗位身份、发布日期、地区、职责组合与报价条件。"
+                  "拓普联科的采购经理原岗列采购团队、规程合规、供应商准入和成本。康宁合肥采购运营负责人原岗列团队辅导和订单审批流程。两份岗位的具体签字限额分别核，不能从经理称谓推断。"
                 ]
               },
               {
@@ -29505,7 +29505,10 @@
           "id": "purchasing-managers.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "cn-purch-sample",
+            "cn-team-purch",
+            "cn-corning-purch"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29521,8 +29524,8 @@
                   "材料与设定｜全部为编辑设计的虚构数据",
                   "你是虚构组织的采购经理，需要评估一项关键物料采购并向授权人提交建议。供应商、金额、日期、规格与合同条款均为练习设定，不是市场报价或组织制度。",
                   "A1｜2026-09-16 09:00 需求：采购 120 支 PP-20 滤芯，过滤精度 20 微米，要求原厂包装、不得替换规格；须在 2026-09-23 17:00 前送达。验收为数量 120 支、包装无破损、抽检 5 支通过泄漏测试并提交批次/合格证明；替代规格须工程负责人书面批准。",
-                  "A2｜供应商甲报价：单价 42 元 × 120 = 5,040 元；含税，运费 240 元已含在总价之外并明确列出，合计 5,280 元；2026-09-22 17:00 送达，90 天质保，验收后 30 天付款；包含原厂包装、批次证明和运输，不含现场安装。",
-                  "A3｜供应商乙报价：单价 38 元 × 120 = 4,560 元；运费 480 元，合计已知 5,040 元，但税费和包装费未说明；承诺 2026-09-25 17:00 送达，质保 30 天。是否有 120 支现货、是否能提供批次证明、包装费金额和逾期责任均未知；不接受替代规格的条件也未确认。",
+                  "A2｜A 报每件 42 元，含税。另收运费 240 元。原计划 9 月 22 日 17:00 到货，保修 90 日，验收后 30 日付款，承诺原厂包装和批次证书，不含安装。",
+                  "A3｜B 报每件 38 元，另收运费 480 元，税和包装费未列。承诺 9 月 25 日 17:00 到货，保修 30 日。库存、批次证书、原厂包装及延期责任均待确认。",
                   "A4｜2026-09-18 14:00：供应商甲通知原定一批货延迟 2 天，预计 2026-09-24 17:00 才能送达；A2 的原交期条件已改变，直接影响 A1 的 9 月 23 日截止时间。供应商乙仍为 9 月 25 日，规格与验收条件未获替代批准。",
                   "A5｜授权链：预算上限 5,600 元；采购经理可做可比性分析和条件性推荐；工程负责人批准规格或替代品变更；财务负责人批准超预算和付款条件；采购总监签署合同/订单。若到货晚于 9 月 23 日、质量证明缺失、未知费用可能使总额超过 5,600 元或需改规格，须在 1 个工作日内升级并暂停下单。"
                 ]
@@ -29538,17 +29541,17 @@
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考答案（先独立完成再看）",
-                  "算式示例：甲为 42×120 + 240 = 5,280 元，已知低于 5,600 元 320 元；乙为 38×120 + 480 = 5,040 元已知，但税费和包装费未知，不能按 0 元计算。若税费按 13% 仅作条件测试，则 4,560×1.13 + 480 = 5,632.80 元，且仍未含包装费，可能超过预算；这不是确认后的报价。",
-                  "A4 后两家都不能直接满足 A1 的 9 月 23 日 17:00 截止。条件性建议是先要求甲在 1 个工作日内书面确认加急后的交期、批次证明和总价仍为 5,280 元；若不能确认，则提交延期、合规替代规格或其他合格供应商的选择给工程负责人、财务负责人和采购总监，不自行改规格、加预算或下单。",
-                  "交接示例：记录 A1–A5 的版本、甲乙报价原文、5,280 元与 5,040 元已知金额、乙的税费/包装/库存/责任未知、A4 延期通知、建议答复截止和每位批准人的待办；未取得书面确认前，状态写“暂停下单”。"
+                  "提交前提示",
+                  "先完成自己的草稿，完整参考在七天计划之后。",
+                  "保留原始记录并标出缺证。",
+                  "保留原始记录并标出缺证。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "边界与复核",
-                  "练习只处理虚构材料：不联系真实供应商、不付款、不代签合同、不替工程负责人改规格、不替财务负责人批准预算。乙的税费、包装、库存和逾期责任保持未知，不得把未知费用当作零；条件性税率算式只能标明假设。复核时检查 A1–A5、单位/数量/费用算式、交期、质量、合同与授权是否一一对应。"
+                  "用纸面方案记录风险、负责人和审批，不实际采购、改规格、签约或付款。"
                 ]
               }
             ]
@@ -29557,7 +29560,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：一次完整的采购运营支持任务（虚构材料）",
+          "title": "PO-M01｜关键物料中断的采购决策",
           "type": "cards"
         },
         {
@@ -29569,32 +29572,32 @@
                 "id": "requirements-matrix",
                 "values": [
                   "需求与报价矩阵",
-                  "用 A1–A3 填写规格、数量、9 月 23 日截止、验收证据、替代限制、单价、运费、税费、包装、交期、质保和责任条款；分别列甲 5,280 元已知总额、乙 5,040 元已知金额和乙的未知项目。",
-                  "复核方式：他人仅凭表格即可判断哪部分可比、哪部分不可比，且不会把乙未说明的税费和包装费当成零。"
+                  "按原件记录要求、范围和仍缺的信息。",
+                  "按原件逐项复核。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "异常升级包",
-                  "用 A4/A5 写升级单：甲从 9 月 22 日延至 9 月 24 日、乙为 9 月 25 日，均晚于 A1 截止；写清 5,600 元预算、替代规格批准人、合同/付款批准人、暂停下单状态和 1 个工作日答复期限。",
-                  "复核方式：推荐写成条件性方案，不代替工程、财务或采购总监作决定。"
+                  "复算数量或报价，列明比较口径。",
+                  "按原件逐项复核。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "采购交接包",
-                  "按 A1–A5 记录版本、报价附件、精确算式、已知/未知、交期变化、推荐条件、批准状态、责任人和下一步；把书面交期、批次证明和总价确认列为待收证据。",
-                  "复核方式：接手人无需追问“哪个条件改变、谁批准、何时升级、是否可以下单”即可继续。"
+                  "核对变更记录并列出须澄清的问题。",
+                  "按原件逐项复核。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "说明卡",
-                  "写出三条依据：需求与验收可比性、甲乙总成本的已知/未知边界、A4 交期变化与 A5 授权链；再写两处未知：乙税费/包装和现货/逾期责任。",
-                  "复核方式：不把编辑练习算式写成真实供应商价格或组织采购制度。"
+                  "把问题交给具体角色，写出下一步和授权条件。",
+                  "按原件逐项复核。"
                 ]
               }
             ]
@@ -29626,25 +29629,25 @@
               [
                 "面试追问费用差异",
                 "能否解释范围变动与审批边界",
-                "能指出哪项信息尚未确认，并说明向谁确认",
+                "按原件记录要求、范围和仍缺的信息。",
                 "单个雇主的提问方式不能推广为行业统一考试"
               ],
               [
                 "面试追问优先级",
                 "如何比较两项同时到期的需求",
-                "能说明判断依据并承认资源约束",
+                "复算数量或报价，列明比较口径。",
                 "不要求候选人给出唯一正确答案"
               ],
               [
                 "试用期交接",
                 "是否把未完成事项交给明确接收人",
-                "对方能按记录继续推进",
+                "核对变更记录并列出须澄清的问题。",
                 "试用期表现不构成对人格或适合度的评价"
               ],
               [
                 "服务投诉处理",
                 "是否先澄清事实再提出补救",
-                "使用部门确认恢复、异常有明确责任人",
+                "把问题交给具体角色，写出下一步和授权条件。",
                 "不能把一次处理结果当作长期能力结论"
               ]
             ]
@@ -29665,50 +29668,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第一日",
-                  "读 A1/A5，写角色边界卡：可做比较和条件性建议、须审批的规格/预算/合同/付款、禁止代签和下单各一栏。"
+                  "第 1 天",
+                  "读原始材料，列出任务和审批边界。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第二日",
-                  "读 A1–A3，填写需求与报价矩阵，逐项核对规格、数量、交期、验收、费用和责任；把乙未披露项目标为未知。"
+                  "第 2 天",
+                  "按原件记录要求、范围和仍缺的信息。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第三日",
-                  "计算甲 42×120+240=5,280 元、乙已知 38×120+480=5,040 元；可选地把乙 13% 税费写成 5,632.80 元的条件测试，不把它当最终报价。"
+                  "第 3 天",
+                  "复算数量或报价，列明比较口径。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第四日",
-                  "读 A4，填写延期升级单：甲变为 9 月 24 日、乙为 9 月 25 日、两者均晚于 9 月 23 日截止；不承诺供应商一定补救。"
+                  "第 4 天",
+                  "核对变更记录并列出须澄清的问题。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第五日",
-                  "按 A1–A5 汇总已知/未知、推荐条件、授权人、暂停下单状态与下一步，形成采购交接记录；逐项回查原文定位。"
+                  "第 5 天",
+                  "把问题交给具体角色，写出下一步和授权条件。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第六日",
-                  "先封存初稿，再打开参考思路对照规格、算式、未知费用、交期和授权边界，列出遗漏与修订理由。"
+                  "第 6 天",
+                  "独立完成并保存采购决策单与分工回收表初稿。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第七日",
-                  "重读初稿与修订稿，填写复盘：遗漏、解释变化、修改依据与主观精力感受；不计算适合分数，不把练习结果当录用结论。"
+                  "第 7 天",
+                  "保存第 6 天初稿后，在常见问题区展开「PO-M01 参考与自核量规（第 7 天展开）」。按四项量规核对，保留一处修订及依据。"
                 ]
               }
             ]
@@ -29717,7 +29720,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "七天体验：用虚构材料完成一次采购运营支持闭环",
+          "title": "七天试做与自核",
           "type": "timeline"
         },
         {
@@ -29725,8 +29728,8 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "保留初稿与修订稿，按“遗漏了哪条 A1–A5 材料—原先解释—现在解释—修改依据”逐项记录。",
-              "检查是否把乙未说明的税费、包装、库存或逾期责任默认为零，是否把条件性 13% 算式写成确定价格，是否把 A4 延期写成已批准的替代或加急。",
+              "分列交期、已知成本和待确认条件。",
+              "记录内部审批、对外询证和下一责任人的时点。",
               "记录每日投入时间与精力感受，例如是否愿意反复核对规格、供应商条件、算式、授权和交接记录；只描述变化，不转成适合度评分。",
               "再做一遍需求与报价矩阵，比较遗漏是否减少、未知项是否仍被保留。",
               "若做完仍不清楚自己是否喜欢这类工作，把反复出现的困难列成下一轮了解采购经理工作的具体问题。",
@@ -29738,7 +29741,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "交卷与复盘检查",
           "type": "list"
         },
         {
@@ -29856,16 +29859,12 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮未采用中国大陆或海外单一雇主报价/招聘案例：没有同时核验岗位身份、公告日期、职责组合、地域和报价条件的资料，因此本页不把混合岗位或 O*NET 职业档案当作雇主原文。下面的模拟材料只用于练习供应商评估、报价比较、合同边界和授权升级。",
-              "本页未采用混合岗位报价；模拟材料不等于招聘公告，也不支持采购经理的精确工资或统一门槛。"
+              "Continental 中国轮胎公司的战略采购品类经理样本涉及供应商战略、总拥有成本与合同生命周期。原帖把领导等级标为 Leading Self，不能仅凭经理标题说其直接带人。"
             ]
           },
           "id": "purchasing-managers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "cn-purch-sample"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -31881,7 +31880,7 @@
           "data": {
             "entries": [
               {
-                "answer": "采购经理的闭环是确认对象与要求、执行核心任务、检查结果、记录异常并向相关人员交付；重点是制定采购和合同管理制度，筛选供应商，评审规格与报价，处理订单、合同、预算、交付和供应商争议。",
+                "answer": "采购经理制定采购与合同规程，组织采购人员，复核供应商、合同、预算和交付条件，并在受委托范围内审批。美国 11-3061.00 包括部分批发或零售采购管理岗位。",
                 "id": "purchasing-managers.faq.1",
                 "question": "采购经理每天的核心闭环是什么？",
                 "question_key": "career.faq.purchasing-managers.q1",
@@ -31901,12 +31900,11 @@
                 ]
               },
               {
-                "answer": "先用一份公开或模拟任务包验证自己能否持续做规格确认、沟通、复核、记录和升级；兴趣测试只能用于探索。",
+                "answer": "A 的已知总额为 42×120＋240＝5,280 元，低于上限 320 元。B 的已知额为 38×120＋480＝5,040 元，税费和包装仍待核。两家在 A4 后均不能满足 9 月 23 日 17:00 的交期。按 A5 暂停下单，自收到 A4 起一个工作日内向工程、财务及采购总监内部升级，同时书面向 A 核加急交期、证书及总价。不要等供应商答复再内部升级。工程核规格与验收，财务核成本和付款，采购总监按审批结果决定签署。保留两份报价、变更时点、待回事项和责任人。\n\n四项各 0–2 分：交期与成本核对、停单及一个工作日内内部升级、并行询证、授权与交接。完整可追溯得 2，部分得 1，遗漏或越权得 0。",
                 "id": "purchasing-managers.faq.3",
-                "question": "采购经理如何判断自己是否适合？",
+                "question": "PO-M01 参考与自核量规（第 7 天展开）",
                 "question_key": "career.faq.purchasing-managers.q3",
                 "source_refs": [
-                  "onet",
                   "editor"
                 ]
               },
@@ -31937,10 +31935,14 @@
                 "question_key": "career.faq.purchasing-managers.us-pay"
               },
               {
-                "answer": "美国官方说明常见路径为本科学历加相关工作经验，同时明确存在其他入行路径。中国的实际要求由雇主决定，招聘公告中出现的研究生学历、党员身份或年限条件属于特定雇主要求，不是本职业普遍门槛。",
+                "answer": "美国官方说明常见路径为本科学历加相关工作经验，同时明确存在其他入行路径。中国的实际要求由雇主决定，招聘公告中出现的研究生学历、党员身份或年限条件属于特定雇主要求，不是本职业普遍门槛。 Continental 中国轮胎公司的战略采购品类经理样本涉及供应商战略、总拥有成本与合同生命周期。原帖把领导等级标为 Leading Self，不能仅凭经理标题说其直接带人。",
                 "id": "purchasing-managers.faq.7",
                 "question": "入行需要什么学历和经验？",
-                "question_key": "career.faq.purchasing-managers.education-path"
+                "question_key": "career.faq.purchasing-managers.education-path",
+                "source_refs": [
+                  "bls",
+                  "cn-purch-sample"
+                ]
               },
               {
                 "answer": "美国官方资料说明该职业通常不需要专门执照或认证，部分认证可能有助于求职。行政或采购类培训能帮助理解方法，但不授予合同签署、付款批准或专业验收权限，这些取决于组织授权。",
@@ -31970,7 +31972,7 @@
             "nbs",
             "privacy",
             "editor",
-            "editor"
+            "cn-purch-sample"
           ],
           "type": "faq"
         },
@@ -32056,13 +32058,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32532,6 +32534,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "采购员职业标准 4-01-01-00 可用于理解供求调查和商品采购，不是采购经理的统一职级或签约许可。核岗时分辨谁做品类策略、谁管理人员、谁审核中标和合同。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-purch-standard",
+                "limitation": "任务对照；不把标准申报条件当普遍岗位或签署要求。",
+                "market": "中国大陆",
+                "name": "采购员国家职业标准（2023 年版）",
+                "period": "2023",
+                "publisher": "人力资源和社会保障部等",
+                "scope": "contextual",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/202312/W020231204655462151710.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Continental 中国轮胎公司的战略采购品类经理样本涉及供应商战略、总拥有成本与合同生命周期。原帖把领导等级标为 Leading Self，不能仅凭经理标题说其直接带人。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-purch-sample",
+                "limitation": "单帖用于职责对照，未核在招和工资。",
+                "market": "中国大陆",
+                "name": "Continental 中国｜战略采购品类经理",
+                "period": "原帖未显示发布日期",
+                "publisher": "Continental",
+                "scope": "recruitment_proxy",
+                "url": "https://jobs.smartrecruiters.com/Continental/744000110322416-strategic-category-manager-purchasing"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "团队管理、流程合规、供应商评审和准入。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-team-purch",
+                "limitation": "样本支持工作任务，签署权限需核雇主。",
+                "market": "中国大陆",
+                "name": "拓普联科采购经理",
+                "period": "2026-11-06",
+                "publisher": "Top-Link",
+                "scope": "recruitment_proxy",
+                "url": "https://www.top-link.com/jobs/cai-gou-jing-li.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "团队辅导、订单审批流程与授权控制。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-corning-purch",
+                "limitation": "样本支持工作任务，签署权限需核雇主。",
+                "market": "中国大陆",
+                "name": "康宁中国采购运营负责人",
+                "period": "2026-10-19",
+                "publisher": "Corning",
+                "scope": "recruitment_proxy",
+                "url": "https://corningjobs.corning.com/job/Hefei-Lead,-Procurement-Operations,-China-AH-230011/1441164800/"
               }
             ]
           },
@@ -37223,7 +37285,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合采购经理",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37769,17 +37831,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "采购经理做什么、工资与前景如何、需要什么学历与资格，以及 AI 会改变哪些任务。基于 O*NET、BLS 和国家统计局公开资料，保留统计口径与数据缺口。"
+      "text": "采购经理制定采购规程、分配人员并复核供应商和合同。比较品类经理、采购员与文员，以及美国工资和雇主授权范围。"
     },
     "title": {
       "availability": "available",
       "text": "采购经理"
     }
   },
-  "source_content_sha256": "3afbfa07af6f77b35cca690f0560bd1f4deebfe162cb53d461a77d691b7809db",
+  "source_content_sha256": "8cbd83063cee1138acf01ce1c849e435b726ff4cda56807e2ffa7c28b119ac75",
   "subject": {
     "canonical_slug": "purchasing-managers",
     "name": "采购经理",
-    "summary": "采购经理围绕需求、规格、供应商、合同、订单、预算与交付组织采购工作，持续核对合规、质量、成本、异常和授权边界。"
+    "summary": "采购经理制定采购与合同规程，组织采购人员，复核供应商、合同、预算和交付条件，并在受委托范围内审批。美国 11-3061.00 包括部分批发或零售采购管理岗位。"
   }
 }

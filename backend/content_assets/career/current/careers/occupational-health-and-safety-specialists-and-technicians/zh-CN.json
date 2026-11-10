@@ -152,6 +152,9 @@
       "item:occupational-health-and-safety-specialists-and-technicians.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:occupational-health-and-safety-specialists-and-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:occupational-health-and-safety-specialists-and-technicians.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -13049,6 +13052,21 @@
             "mem-credential"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两则招聘一则设计控制措施并评估风险，另一则按方案做现场采样并交原始记录。为每则写一个关于权限与交付的问题。"
+            ]
+          },
+          "id": "occupational-health-and-safety-specialists-and-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-specialist-details"
+          ],
+          "title": "区分安全分析与检测执行岗位",
+          "type": "notice"
         }
       ]
     },
@@ -15677,6 +15695,13 @@
         "id": "occupational-health-and-safety-specialists-and-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-health-and-safety-specialists-and-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15858,7 +15883,7 @@
       "text": "职业健康与安全专员及技术员"
     }
   },
-  "source_content_sha256": "bf206a5693326442688cadd9c5ce8979662a2f98fbaac2594bb4e3a01ec55dac",
+  "source_content_sha256": "dc8c661d52dfc9c129c38b984f818db0e4e80aa1d580c8de0531d01962cd2fa1",
   "subject": {
     "canonical_slug": "occupational-health-and-safety-specialists-and-technicians",
     "name": "职业健康与安全专员及技术员",

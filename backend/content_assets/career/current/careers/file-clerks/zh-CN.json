@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a37-haidian": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a37-henan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:file-clerks.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:file-clerks.sources.source-card.1": {
         "status": "mapped"
@@ -14156,36 +14162,12 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": {
-          "id": "file-clerks.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": {
-          "id": "file-clerks.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
         "ref": {
@@ -14220,20 +14202,8 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "file-clerks.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
         "ref": {
@@ -14596,52 +14566,20 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": {
-          "id": "file-clerks.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": {
-          "id": "file-clerks.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": {
-          "id": "file-clerks.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "file-clerks.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
         "ref": {
@@ -20183,60 +20121,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "file-clerks.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "file-clerks.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23280,12 +23178,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS Table1.2，43-4071：2025年就业76,200人，2025—2035年下降15.8%，预计年均空缺5,600个（含替补）。OOH信息文员页是所列十职业组合，不是完整43-4000，行业工资表不能代填档案文员。"
+              "美国 BLS 表 1.2 的档案文员（43-4071）就业从 2025 年约 76,200 人预计降至 2035 年约 64,200 人（-15.8%），年均空缺约 5,600 个，含替补。人数分别取整。"
             ]
           },
           "id": "file-clerks.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26626,12 +26524,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他地区与用工模式"
+              "大陆招聘样本"
             ]
           },
           "id": "file-clerks.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a37-haidian",
+            "a37-henan"
           ],
           "type": "prose"
         },
@@ -26640,12 +26539,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可核验的其他地区与用工模式（编制内、企业全职与档案外包）的月薪统计；不同城市、机构类型与规模差异较大，需按单位核对。"
+              "海淀区刊载北京优思百特档案整理员招聘，任务包括收集分类、划分保管期限和查找缺失记录。公告要求有档案或相关工作经历，薪资面议。 河南工业大学就业网刊载河南新泰 11 个图书、档案或资料管理岗位，工作含分类、扫描录入和质检。公告列大专及以上、经验不限、4,000–6,000 元/月。"
             ]
           },
           "id": "file-clerks.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a37-haidian",
+            "a37-henan"
           ],
           "type": "prose"
         },
@@ -26930,12 +26830,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "5,600个/年"
+              "约 5,600 个/年"
             ]
           },
           "id": "file-clerks.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27390,13 +27290,13 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
@@ -29156,30 +29056,23 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料一：虚构文件归档任务",
-                  "给出记录类型与数量、所用归档规则与编号方式、需要遵守的留存与保密要求、可用存放容器与系统、需要答复的查询情形，作为本次练习输入。",
-                  "标注单位与缺失项，说明材料为完全虚构。",
-                  "列出可能影响判断的缺失信息。",
-                  "说明练习使用虚构材料，不代表任何真实机构、企业或雇主。",
-                  "可检查产出：分类与编号方案、归档与登记流程、检索与借还记录方式、清理与到期处置判断依据、必须请主管确认的情形、保密与授权访问要点。",
-                  "说明边界：档案管理、个人信息保护与销毁合规结论须由档案负责人、法务或主管部门作出。"
+                  "F12：收件单日期是 6 月 3 日，目录日期是 6 月 8 日。",
+                  "F19：目录列 4 页，扫描顺序是第 1、2、4 页。",
+                  "R7：收到复印申请，权限登记栏为空。",
+                  "题设分工：登记负责人核收件与目录，扫描负责人核页码，权限负责人核副本访问。未核的字段保留原记录。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "材料二：归档与检索任务（虚构）",
-                  "要求写出分类与编号方案、归档与登记流程、检索与借还记录方式，并说明哪些情形必须请主管确认。",
-                  "练习产出：一份可执行的归档与检索操作要点。"
+                  "交一页交接表，逐行列依据、状态和接手人。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "材料三：参考思路摘录（虚构）",
-                  "先按规则确定分类与编号，再按索引归档并登记，最后按请求检索与借还并记录，到期材料按留存期限报批处置。",
-                  "对无法确认的留存期限或访问授权保留未知并请档案负责人确认，而不是按经验处理。",
-                  "说明参考思路只是示例，不是唯一正确方法。"
+                  "先独立完成",
+                  "第七天到「常见问题与资料来源」打开「档案交接参考答案（完成第六天后再打开）」。"
                 ]
               },
               {
@@ -29195,7 +29088,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "档案文员｜path",
+          "title": "虚构档案交接记录",
           "type": "cards"
         },
         {
@@ -29303,50 +29196,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天：读一份归档规则或留存期限表",
-                  "摘录一项分类或留存要求，并写出执行要点。"
+                  "第 1 天",
+                  "抄录三组编号。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天：写一份分类与编号方案",
-                  "按记录类型写出分类、编号与索引方式。"
+                  "第 2 天",
+                  "对照日期记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天：写一份归档与借还记录模板",
-                  "列出归档、检索与借还需要记录的信息。"
+                  "第 3 天",
+                  "数扫描页与目录页。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天：写一份保密与授权要点",
-                  "写出受限资料访问与登记的核对要点。"
+                  "第 4 天",
+                  "核副本权限字段。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天：写一份留存与销毁要点",
-                  "写出到期材料的整理与报批处置流程。"
+                  "第 5 天",
+                  "拟交接记录，列接手人。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天：请他人挑战",
-                  "请一位有经验的档案人员或主管指出归档与合规遗漏并记录反馈。"
+                  "第 6 天",
+                  "独立交一页交接表。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天：写判断",
-                  "写下是否愿意继续、需要补什么，以及哪些处置不能由自己决定。"
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「档案交接参考答案（完成第六天后再打开）」。 记录一处修订。"
                 ]
               }
             ]
@@ -29355,7 +29248,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "档案文员｜path",
+          "title": "七天纸面练习",
           "type": "timeline"
         },
         {
@@ -29363,20 +29256,16 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第 1 天：能否找出分类或留存要求并写清执行要点。",
-              "第 2 天：能否写出合理的分类与编号方案。",
-              "第 3 天：能否写出完整且可追溯的归档与借还记录模板。",
-              "第 4 天：能否写出具体可操作的保密与授权核对要点。",
-              "第 5 天：能否写出可执行的留存与销毁处置流程。",
-              "第 6 天：能否在接受指正后修正归档与合规判断。",
-              "第 7 天：能否说出需要补齐的能力与处置边界。"
+              "第六天独立交件。",
+              "第七天到「常见问题与资料来源」打开「档案交接参考答案（完成第六天后再打开）」。",
+              "复查日期、页码、权限与接手人。"
             ]
           },
           "id": "file-clerks.path.seven-day-decision.1",
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "档案文员｜path",
+          "title": "练习结项",
           "type": "list"
         },
         {
@@ -30906,7 +30795,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "file-clerks.market-signals.market-signal-card.17",
@@ -30976,7 +30865,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "76,200人（2025）"
+              "2025 年约 76,200 人，2035 年预计约 64,200 人"
             ]
           },
           "id": "file-clerks.market-signals.market-signal-card.22",
@@ -31522,13 +31411,13 @@
                 ]
               },
               {
-                "answer": "美国 O*NET-SOC 43-4071.00「File Clerks」，对应 SOC 43-4071，属 Job Zone 1–2（SVP 低于 6.0）、兴趣代码 C（常规型），未被标记为 Bright Outlook；中位工资与各分位为该精确职业的 BLS OEWS 估算（May 2025，经 O*NET 呈现）；就业与增长分别有 O*NET 呈现的 2024—2034 投影口径与 BLS OOH 信息文员组 2025—2035 口径，本页分别标注。",
+                "answer": "美国工资为 BLS OEWS 2025 年 5 月的 43-4071 职业估计。就业预测采用 BLS 表 1.2 的同一职业行，信息文员大类使用不同的统计范围。",
                 "id": "file-clerks.faq.3",
                 "question": "美国统计口径是什么？",
                 "question_key": "career.faq.file-clerks.q3",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "bls-projections-2025-35",
+                  "onet-summary"
                 ]
               },
               {
@@ -31542,22 +31431,22 @@
                 ]
               },
               {
-                "answer": "O*NET 呈现的 2024—2034 投影口径：就业约 84,300 人（2024），预计下降（-1% 或更低），预计年均岗位空缺约 7,300 个（该值为预测期年均值，含替补需求）。BLS OOH 信息文员组（43-4000）2025—2035 口径：约 1,287,600 个岗位（2025），-2%（约 -30,100 人），年均空缺约 125,600 个且全部来自替补需求。两个口径的统计范围与期间不同，本页分别标注、不换算。",
+                "answer": "美国 BLS 表 1.2 的档案文员（43-4071）就业从 2025 年约 76,200 人预计降至 2035 年约 64,200 人（-15.8%），年均空缺约 5,600 个，含替补。人数分别取整。",
                 "id": "file-clerks.faq.5",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.file-clerks.q5",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "本次所核国家统计局资料为行业门类口径，未取得与本职业精确对应的全国单职业工资统计值；本页以「租赁和商务服务业」城镇单位平均工资（2025 年非私营 110,162 元/年、私营 68,919 元/年）作行业代理，仅说明行业背景，不用行业均值或单条招聘报价替代职业工资。",
+                "answer": "海淀区刊载北京优思百特档案整理员招聘，任务包括收集分类、划分保管期限和查找缺失记录。公告要求有档案或相关工作经历，薪资面议。 河南工业大学就业网刊载河南新泰 11 个图书、档案或资料管理岗位，工作含分类、扫描录入和质检。公告列大专及以上、经验不限、4,000–6,000 元/月。 公告只说明两家单位的岗位条件。大陆单职业工资中位数仍缺可比资料。",
                 "id": "file-clerks.faq.6",
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.file-clerks.us-pay",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "a37-haidian",
+                  "a37-henan"
                 ]
               },
               {
@@ -31599,6 +31488,12 @@
                   "bls-ooh-information-clerks",
                   "internal-rubric"
                 ]
+              },
+              {
+                "answer": "两份目录的日期冲突，保留 F12 原目录及收件单并请登记负责人核对。F19 缺第 3 页，标记未齐并交扫描负责人。R7 请求没有授权记录，留待权限负责人确认，暂不提供副本。自核四项：日期和依据、缺页和依据、授权及接手人、交接状态。",
+                "id": "file-clerks.faq.11",
+                "question": "档案交接参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.file-clerks.11"
               }
             ]
           },
@@ -31692,23 +31587,11 @@
                 "entity": "MBTI（英文）",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Big Five（英文）",
                 "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI（中文）",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（中文）",
-                "id": "navigation-5",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
@@ -31741,7 +31624,7 @@
                 "details": [
                   "官方职业范围：按字母或数字顺序或按所用归档系统归档信函、卡片、发票、收据与其他记录，并在被请求时查找与取出材料。",
                   "兴趣代码 C（常规型）；准备层级 Job Zone 1–2（SVP 低于 6.0）；学历调查：副学士或其他两年制学历 38%、高中文凭或同等学历 30%、部分大学教育无学位 23%；该职业未被标记为 Bright Outlook。",
-                  "工资与就业趋势（引 BLS 数据）：2025 年中位时薪 20.96 美元、中位年薪 43,600 美元；2024 年就业 84,300 人；2024—2034 年预计下降（-1% 或更低）；预计年均岗位空缺约 7,300 个；2024 年主要行业为政府机构以及专业、科学与技术服务。"
+                  "美国 2025 年中位时薪 20.96 美元、年薪 43,600 美元。就业预测见 BLS 表 1.2 的 43-4071 行。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31789,17 +31672,16 @@
                 "url": "https://www.bls.gov/ooh/office-and-administrative-support/information-clerks.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "精确职业 43-4071（经 O*NET 呈现）：2024 年就业 84,300 人，2024—2034 年预计下降（-1% 或更低），预计年均岗位空缺约 7,300 个。",
-                  "BLS 就业预测表中「Occupational openings」为预测期的年均值，本页据此标注为「/年」，不按十年累计解读。"
+                  "美国 BLS 表 1.2 的档案文员（43-4071）就业从 2025 年约 76,200 人预计降至 2035 年约 64,200 人（-15.8%），年均空缺约 5,600 个，含替补。人数分别取整。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
                 "limitation": "预测不等于实际结果；年均空缺含替补需求，不能拆成个人录用概率；两个投影口径的统计期间不同。",
                 "market": "美国",
-                "name": "BLS：职业投影与特征表（2024—2034 投影，经 O*NET 呈现；另见 2025—35 投影表）",
-                "period": "2024—2034 projections as presented by O*NET OnLine; 2025—35 table; accessed 2026-09-20",
+                "name": "BLS 表 1.2：档案文员 43-4071",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact occupation (SOC 43-4071)",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31901,6 +31783,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "海淀区刊载北京优思百特档案整理员招聘，任务包括收集分类、划分保管期限和查找缺失记录。公告要求有档案或相关工作经历，薪资面议。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a37-haidian",
+                "limitation": "仅说明该公告。",
+                "market": "中国大陆",
+                "name": "档案整理招聘样本",
+                "period": "2026-01-14",
+                "publisher": "北京市海淀区退役军人服务中心",
+                "scope": "recruitment_proxy",
+                "url": "https://www.bjhd.gov.cn/hdjyzd/Article_2424.aspx"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "河南工业大学就业网刊载河南新泰 11 个图书、档案或资料管理岗位，工作含分类、扫描录入和质检。公告列大专及以上、经验不限、4,000–6,000 元/月。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a37-henan",
+                "limitation": "仅说明该公告。",
+                "market": "中国大陆",
+                "name": "档案整理招聘样本",
+                "period": "2026-10-08",
+                "publisher": "河南工业大学就业信息网",
+                "scope": "recruitment_proxy",
+                "url": "https://job.haut.edu.cn/module/position_details/id-170738/nid-8957"
               }
             ]
           },
@@ -34396,7 +34308,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet",
+            "id": "onet-work-context",
             "label": {
               "$link": "file-clerks.risk.career-risk-cards.7",
               "block": "risk",
@@ -34767,6 +34679,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a37-haidian",
+            "posting-a37-henan"
+          ],
           "sources_note": {
             "$item": "file-clerks.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34919,7 +34835,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "2024—2034 就业 · 年均空缺",
+            "指标": "2025–2035 年均岗位空缺",
             "数值": {
               "$item": "file-clerks.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -35296,6 +35212,7 @@
         "heading": "档案文员的就业前景与相关职业转向",
         "outlook_evidence": [
           {
+            "fact_ref": "us-growth-2025-2035",
             "geography": {
               "$item": "file-clerks.market-signals.market-signal-card.9",
               "block": "market-signals",
@@ -35333,6 +35250,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "file-clerks.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35341,6 +35259,7 @@
             }
           },
           {
+            "fact_ref": "us-employment-2025",
             "geography": {
               "$item": "file-clerks.market-signals.market-signal-card.16",
               "block": "market-signals",
@@ -35378,6 +35297,7 @@
               "type": "prose"
             },
             "source_id": "bls",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "file-clerks.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -35800,7 +35720,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034）与 BLS OOH 信息文员组（2025—2035）",
+            "label": "美国 BLS 档案文员就业预测（2025–2035 年）",
             "secondary_value": null,
             "value": {
               "$item": "file-clerks.profile.onet-structured-fields-block.4",
@@ -36678,7 +36598,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测评"
           },
           {
             "href": {
@@ -36688,27 +36608,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "file-clerks.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI（中文）"
-          },
-          {
-            "href": {
-              "$link": "file-clerks.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five（中文）"
+            "label": "大五人格测评"
           }
         ]
       },
@@ -36907,36 +36807,36 @@
       },
       {
         "derivation": null,
-        "display_value": "约 84,300 人（2024，O*NET 呈现的 BLS 投影口径）；BLS OOH 信息文员组 2025 年岗位数约 1,287,600 人",
+        "display_value": "约 76,200 人",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "美国就业规模",
-        "occupation_scope": "档案文员（O*NET-SOC 43-4071.00）",
-        "period": "2024",
+        "occupation_scope": "美国档案文员（43-4071）",
+        "period": "2025",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "下降（-1% 或更低，2024—2034，BLS 投影，经 O*NET 呈现）；BLS OOH 信息文员组 2025—2035 为 -2%",
+        "display_value": "-15.8%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "美国就业变化",
-        "occupation_scope": "档案文员（O*NET-SOC 43-4071.00）",
-        "period": "2024–2034 projection",
+        "occupation_scope": "美国档案文员（43-4071）",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 7,300 个/年（2024—2034，BLS 投影年均值，精确职业 43-4071）",
+        "display_value": "约 5,600 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "美国年均岗位空缺",
-        "occupation_scope": "档案文员（O*NET-SOC 43-4071.00）",
-        "period": "2024–2034 projection",
+        "occupation_scope": "美国档案文员（43-4071）",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -37096,6 +36996,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "海淀区刊载北京优思百特档案整理员招聘，任务包括收集分类、划分保管期限和查找缺失记录。公告要求有档案或相关工作经历，薪资面议。",
+        "fact_id": "posting-a37-haidian",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "档案整理招聘样本",
+        "period": "2026-01-14",
+        "source_refs": [
+          "a37-haidian"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "河南工业大学就业网刊载河南新泰 11 个图书、档案或资料管理岗位，工作含分类、扫描录入和质检。公告列大专及以上、经验不限、4,000–6,000 元/月。",
+        "fact_id": "posting-a37-henan",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "档案整理招聘样本",
+        "period": "2026-10-08",
+        "source_refs": [
+          "a37-henan"
+        ]
       }
     ]
   },
@@ -37122,19 +37046,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业变化（2024–2034）"
+        "label": "美国就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国就业规模（2024 投影口径）"
+        "label": "美国就业规模（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均岗位空缺（2024–2034）"
+        "label": "美国年均岗位空缺（2025–2035）"
       },
       {
         "availability": "available",
@@ -37155,7 +37079,7 @@
       "text": "档案文员"
     }
   },
-  "source_content_sha256": "454ba1b1d129fbffccf69dfa759cab6597d09e601775f942823575d81aceb0c4",
+  "source_content_sha256": "f8033d52aadb7827bceda117b6e92571bf7267943f256799ce2712904ed41a27",
   "subject": {
     "canonical_slug": "file-clerks",
     "name": "档案文员",

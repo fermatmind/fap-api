@@ -1478,6 +1478,9 @@
       "item:command-and-control-center-specialists.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:command-and-control-center-specialists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:command-and-control-center-specialists.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30897,6 +30900,21 @@
           "id": "command-and-control-center-specialists.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。虚构演练有两条更新，第一条带时间戳，第二条只写“已发”。写出交班时应保留的已知信息及待核的接收状态。"
+            ]
+          },
+          "id": "command-and-control-center-specialists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核值班消息的接收确认",
+          "type": "notice"
         }
       ]
     },
@@ -37622,6 +37640,13 @@
         "id": "command-and-control-center-specialists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "command-and-control-center-specialists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38245,7 +38270,7 @@
       "text": "指挥与控制中心专员"
     }
   },
-  "source_content_sha256": "f6694f12bf653e114053d766f260c1a0fcf3b8581ee211d9dba1981bee5c83f1",
+  "source_content_sha256": "1e1040fd30f0ca6559b45707a954cbd804dedf944b7e7b919594e04dd0d247d3",
   "subject": {
     "canonical_slug": "command-and-control-center-specialists",
     "name": "指挥与控制中心专员",

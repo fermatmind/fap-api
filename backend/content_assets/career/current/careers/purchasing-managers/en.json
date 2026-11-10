@@ -26980,13 +26980,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China announcements may combine procurement, supply-chain, contract, finance, or administrative responsibilities; this page does not combine mixed roles or single-employer pay offers into national purchasing manager wages."
+              "Mainland purchasing standard 4-01-01-00 describes buying work. It does not set a universal manager grade or signing authority. Ask who owns category strategy, who supervises staff, and who approves awards and contracts."
             ]
           },
           "id": "purchasing-managers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "editor",
-            "editor"
+            "cn-purch-standard"
           ],
           "type": "prose"
         },
@@ -27718,31 +27718,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Facilities Managers",
@@ -27861,7 +27861,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET Interest Profile (ECS)"
+              "O*NET interest code for purchasing managers (EC)"
             ]
           },
           "id": "purchasing-managers.fit.personality-fit-block.3",
@@ -27964,7 +27964,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET lists purchasing managers’ (11-3061.00) interest code as ECS: Enterprising 100, Conventional 83, and Social 28, highest in that order. These describe occupational task emphases, not individual scores or a qualification threshold."
+              "O*NET lists interest code EC for purchasing managers 11-3061.00. The separate scores are Enterprising 100, Conventional 83, and Social 28. They describe the occupation."
             ]
           },
           "id": "purchasing-managers.fit.riasec-fit-block.9",
@@ -28021,7 +28021,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "ECS"
+              "EC"
             ]
           },
           "id": "purchasing-managers.fit.riasec-fit-block.11",
@@ -28614,7 +28614,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The O*NET 2026 profile lists ECS by interest scores, emphasizing management and negotiation, procedure and data organization, and collaborative services. It describes occupational activities, not individual scores; observe sustained interest through tasks checking procurement needs, costs, and supplier conditions."
+              "EC highlights negotiation and coordination alongside procedure and records. Use the exercise to see how you work through assignments and approval conditions."
             ]
           },
           "id": "purchasing-managers.fit.personality-fit-block.50",
@@ -29473,7 +29473,7 @@
                 "values": [
                   "Single-Employer Case Not Used",
                   "This round obtained no occupational employer announcement with verifiable identity, date, responsibility combination, and pay conditions, so no single-employer case is presented as an occupational entry requirement.",
-                  "Checking method: if an announcement is used later, verify role identity, publication date, region, responsibility combination, and pay conditions individually."
+                  "Top-Link’s purchasing manager posting lists team leadership, compliance, supplier qualification, and cost. Corning’s Hefei procurement operations lead posting lists coaching and purchase-order approval processes. Verify signing limits with each employer."
                 ]
               },
               {
@@ -29505,7 +29505,10 @@
           "id": "purchasing-managers.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "cn-purch-sample",
+            "cn-team-purch",
+            "cn-corning-purch"
           ],
           "title": "What Do Employers Generally Examine in Recruitment?",
           "type": "cards"
@@ -29521,8 +29524,8 @@
                   "Materials and Assumptions | All Are Editorially Designed Fictional Data",
                   "You are the purchasing manager of a fictional organization, evaluating a critical-material purchase and submitting recommendations to authorized people. Suppliers, amounts, dates, specifications, and contract terms are exercise assumptions, not market quotes or organizational policies.",
                   "A1 | 2026-09-16 09:00 request: purchase 120 PP-20 filter cartridges with 20-micron filtration, original manufacturer packaging, and no specification substitutions; deliver before 2026-09-23 17:00. Acceptance requires 120 cartridges, undamaged packaging, leak tests passed by 5 sampled cartridges, and batch and conformity certificates; alternative specifications require the engineering lead’s written approval.",
-                  "A2 | Supplier A quote: CNY 42 per unit × 120 = CNY 5,040; tax included, freight of CNY 240 separately included outside that total and explicitly listed, giving CNY 5,280 overall; delivery 2026-09-22 17:00, 90-day warranty, payment 30 days after acceptance; includes original manufacturer packaging, batch certificates, and transport, excluding on-site installation.",
-                  "A3 | Supplier B quote: CNY 38 per unit × 120 = CNY 4,560; freight CNY 480, known total CNY 5,040, with tax and packaging costs unspecified; promises delivery on 2026-09-25 17:00, with a 30-day warranty. Availability of 120 cartridges in stock, batch certificates, packaging cost, and liability for delays are unknown; the no-substitution condition is also unconfirmed.",
+                  "A2 | Supplier A quotes CNY 42 per unit, including tax, plus CNY 240 freight. Original delivery: Sep 22 at 17:00. Warranty: 90 days. Payment: 30 days after acceptance. Original packaging and lot certificates are included. Installation is excluded.",
+                  "A3 | Supplier B quotes CNY 38 per unit plus CNY 480 freight. Tax and packaging charges are unlisted. Delivery: Sep 25 at 17:00. Warranty: 30 days. Inventory, lot certificates, original packaging, and delay liability are unconfirmed.",
                   "A4 | 2026-09-18 14:00: supplier A reports the originally planned shipment delayed by 2 days, with delivery now expected only on 2026-09-24 17:00; A2’s original delivery condition has changed, directly affecting A1’s deadline on day 23 of month 9. Supplier B remains at day 25 of month 9, without approval to substitute specifications or acceptance conditions.",
                   "A5 | Authorization chain: budget ceiling CNY 5,600; the purchasing manager may analyze comparability and make conditional recommendations; the engineering lead approves specification or substitute changes; the finance lead approves over-budget costs and payment conditions; the procurement director signs contracts and orders. If arrival is later than day 23 of month 9, quality certificates are missing, unknown charges may take the total above CNY 5,600, or specifications need changing, escalate within 1 business day and pause ordering."
                 ]
@@ -29538,17 +29541,17 @@
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference Answer (Read After Completing Independently)",
-                  "Calculation example: A is 42×120 + 240 = CNY 5,280, known to be CNY 320 below CNY 5,600; B is 38×120 + 480 = CNY 5,040 known, but tax and packaging costs are unknown, so CNY 0 cannot be used as the calculated cost. If tax of 13% is used only for a conditional test, 4,560×1.13 + 480 = CNY 5,632.80, still excluding packaging and potentially exceeding budget; this is not a confirmed quote.",
-                  "After A4, neither supplier directly meets A1’s deadline of 17:00 on day 23 of month 9. A conditional recommendation is first to ask A to confirm in writing within 1 business day the expedited delivery date, batch certificates, and unchanged total of CNY 5,280; if unconfirmed, submit choices of postponement, compliant alternative specifications, or other qualified suppliers to the engineering lead, finance lead, and procurement director, without independently changing specifications, increasing budget, or ordering.",
-                  "Handover example: record A1–A5 versions, original A and B quotes, known amounts of CNY 5,280 and CNY 5,040, B’s unknown tax, packaging, inventory, and liabilities, A4’s delay notice, proposed reply deadline, and each approver’s pending tasks; until written confirmation is received, mark the status “ordering paused.”"
+                  "Before checking your work",
+                  "Finish your draft before consulting the key after the seven-day plan.",
+                  "Preserve source records and mark missing evidence.",
+                  "Preserve source records and mark missing evidence."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "Boundaries and Review",
-                  "The exercise uses fictional materials only: contact no actual suppliers, make no payments, sign no contracts for others, change no specifications for engineering leads, and approve no budgets for finance leads. B’s tax, packaging, inventory, and delay liabilities remain unknown; unknown costs cannot be treated as zero, and conditional tax-rate calculations must be labeled assumptions. Check correspondence among A1–A5, unit, quantity, and cost calculations, delivery times, quality, contracts, and authorization."
+                  "Document risks, owners, and approvals on paper. Do not order, change specifications, sign, or pay."
                 ]
               }
             ]
@@ -29557,7 +29560,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry Exercise: A Complete Procurement Operations Support Task (Fictional Materials)",
+          "title": "PO-M01 | Manage a critical supply delay",
           "type": "cards"
         },
         {
@@ -29569,32 +29572,32 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Needs and Quote Matrix",
-                  "Use A1–A3 to fill specifications, quantities, the deadline on day 23 of month 9, acceptance evidence, substitution restrictions, unit prices, freight, tax, packaging, delivery times, warranties, and liability terms; separately list A’s known total of CNY 5,280, B’s known amount of CNY 5,040, and B’s unknown items.",
-                  "Review method: others can determine comparability from the table alone without treating B’s unspecified tax and packaging charges as zero."
+                  "Record requirements, scope, and missing information from the source.",
+                  "Verify each item against its source."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "Exception Escalation Package",
-                  "Use A4/A5 to write an escalation form: A moves from day 22 of month 9 to day 24 of month 9, while B is at day 25 of month 9, both later than A1’s deadline; specify the CNY 5,600 budget, approvers for alternative specifications and contracts and payments, ordering-paused status, and a 1-business-day reply deadline.",
-                  "Review method: express recommendations as conditional proposals without deciding for engineering, finance, or the procurement director."
+                  "Recalculate quantities or quotes and state what is comparable.",
+                  "Verify each item against its source."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "Procurement Handover Package",
-                  "Record A1–A5 versions, quote attachments, exact calculations, knowns and unknowns, delivery changes, recommendation conditions, approval status, owners, and next steps; list written delivery dates, batch certificates, and total-price confirmations as pending evidence.",
-                  "Review method: recipients can continue without asking “which condition changed, who approves, when to escalate, or whether ordering can proceed.”"
+                  "Check revisions and list the questions to resolve.",
+                  "Verify each item against its source."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "Explanation Card",
-                  "Give three grounds: comparability of needs and acceptance, known and unknown boundaries in A and B’s total costs, and A4’s delivery changes with A5’s authorization chain; then give two unknown areas: B’s tax and packaging, and stock availability and delay liabilities.",
-                  "Review method: do not present editorial exercise calculations as actual supplier prices or organizational procurement policies."
+                  "Assign each issue to its owner and state next steps and approval conditions.",
+                  "Verify each item against its source."
                 ]
               }
             ]
@@ -29626,25 +29629,25 @@
               [
                 "Interview follow-up on cost differences",
                 "Whether the candidate can explain changes in scope and approval boundaries",
-                "Can identify which information remains unconfirmed and explain whom to ask for confirmation",
+                "Record requirements, scope, and missing information from the source.",
                 "One employer's approach to questioning cannot be generalized into a uniform industry examination"
               ],
               [
                 "Interview follow-up on priorities",
                 "How to compare two requirements due at the same time",
-                "Can explain the basis for a judgment and acknowledge resource constraints",
+                "Recalculate quantities or quotes and state what is comparable.",
                 "Candidates are not required to provide a single correct answer"
               ],
               [
                 "Probationary-period handover",
                 "Whether unfinished matters are handed over to a clearly identified recipient",
-                "The recipient can continue the work using the records",
+                "Check revisions and list the questions to resolve.",
                 "Performance during probation does not constitute an assessment of personality or suitability"
               ],
               [
                 "Handling service complaints",
                 "Whether facts are clarified before remedies are proposed",
-                "The user department confirms that service has been restored, and exceptions have clearly identified owners",
+                "Assign each issue to its owner and state next steps and approval conditions.",
                 "The outcome of a single case cannot be treated as a conclusion about long-term ability"
               ]
             ]
@@ -29665,50 +29668,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day One",
-                  "Read A1/A5 and write a role-boundary card with separate columns for comparisons and conditional recommendations you may make, specifications/budgets/contracts/payments requiring approval, and prohibited signing on another person's behalf and placing orders."
+                  "Day 1",
+                  "Read the source material and identify the task and authority limits."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day Two",
-                  "Read A1–A3 and complete a requirements and quotation matrix, checking specifications, quantities, delivery dates, acceptance, costs, and responsibilities item by item; mark Supplier B's undisclosed items as unknown."
+                  "Day 2",
+                  "Record requirements, scope, and missing information from the source."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day Three",
-                  "Calculate Supplier A's 42×120+240=5,280 CNY and Supplier B's known 38×120+480=5,040 CNY; optionally express Supplier B's 13% tax as a conditional test of 5,632.80 CNY, without treating it as the final quotation."
+                  "Day 3",
+                  "Recalculate quantities or quotes and state what is comparable."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day Four",
-                  "Read A4 and complete a delay escalation form: Supplier A's date changes to day 24 of month 9, Supplier B's is day 25 of month 9, and both are later than the deadline of day 23 of month 9; do not promise that either supplier will necessarily provide a remedy."
+                  "Day 4",
+                  "Check revisions and list the questions to resolve."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day Five",
-                  "Use A1–A5 to summarize knowns/unknowns, conditions for recommendations, authorized approvers, the paused ordering status, and next steps in a procurement handover record; check each item against its location in the original materials."
+                  "Day 5",
+                  "Assign each issue to its owner and state next steps and approval conditions."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day Six",
-                  "First seal the initial draft, then open the reference approach and compare specifications, calculations, unknown costs, delivery dates, and authorization boundaries, listing omissions and reasons for revision."
+                  "Day 6",
+                  "Finish and save the decision memo and follow-up by owner as your first draft. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day Seven",
-                  "Reread the initial and revised drafts and complete a reflection on omissions, changes in explanation, grounds for changes, and subjective energy levels; do not calculate a suitability score or treat the exercise outcome as a hiring conclusion."
+                  "Day 7",
+                  "After saving your day 6 draft, open “PO-M01 answer key and rubric (open on day 7)” in the FAQ. Apply the four rubric checks and keep one revision with its evidence."
                 ]
               }
             ]
@@ -29717,7 +29720,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Seven-day experience: complete a procurement operations support cycle using fictional materials",
+          "title": "Seven-day practice and self-check",
           "type": "timeline"
         },
         {
@@ -29725,8 +29728,8 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep both the initial and revised drafts, recording each item as “which A1–A5 material was omitted—original explanation—current explanation—grounds for revision.”",
-              "Check whether Supplier B's unspecified taxes, packaging, inventory, or liability for delays were assumed to be zero, whether the conditional 13% calculation was presented as a definite price, and whether the A4 delay was presented as an approved substitution or expedited delivery.",
+              "Separate delivery dates, known costs, and conditions still to confirm.",
+              "Record when internal approval, supplier confirmation, and the next handoff are due.",
               "Record daily time spent and perceived energy levels, such as whether you are willing to repeatedly check specifications, supplier conditions, calculations, authorizations, and handover records; describe changes only, without converting them into suitability scores.",
               "Complete the requirements and quotation matrix again, comparing whether omissions have decreased and unknown items remain identified.",
               "If you still do not know whether you enjoy this type of work after completing the exercise, turn recurring difficulties into specific questions for the next round of learning about purchasing managers' work.",
@@ -29738,7 +29741,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide whether to continue after seven days",
+          "title": "Submission and review checklist",
           "type": "list"
         },
         {
@@ -29856,16 +29859,12 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This round does not use a single employer's quotation/recruitment case from mainland China or overseas: no material simultaneously verifies job identity, announcement date, responsibility mix, location, and quotation conditions, so this page does not treat mixed roles or O*NET occupational profiles as an employer's original text. The simulated materials below are only for practicing supplier assessment, quotation comparisons, contract boundaries, and authorization escalation.",
-              "This page does not use quotations for mixed roles; simulated materials are not recruitment announcements and do not support precise purchasing manager wages or uniform entry requirements."
+              "Continental Tires China lists category strategy, total cost of ownership, and contract lifecycle work. It labels the leadership level “Leading Self,” so the manager title alone does not establish direct reports."
             ]
           },
           "id": "purchasing-managers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "cn-purch-sample"
           ],
           "title": "Notes on recruitment samples",
           "type": "notice"
@@ -31881,7 +31880,7 @@
           "data": {
             "entries": [
               {
-                "answer": "A purchasing manager's cycle is to confirm the object and requirements, execute core tasks, check results, record exceptions, and deliver outputs to relevant people; the focus is establishing procurement and contract management policies, selecting suppliers, reviewing specifications and quotations, and handling orders, contracts, budgets, deliveries, and supplier disputes.",
+                "answer": "Purchasing managers set purchasing and contract procedures, lead purchasing staff, and review suppliers, contracts, budgets, and delivery terms. They approve decisions within delegated limits. U.S. 11-3061.00 includes some wholesale or retail merchandising managers.",
                 "id": "purchasing-managers.faq.1",
                 "question": "What is a purchasing manager's core daily work cycle?",
                 "question_key": "career.faq.purchasing-managers.q1",
@@ -31901,12 +31900,11 @@
                 ]
               },
               {
-                "answer": "First use a public or simulated task package to test whether you can consistently confirm specifications, communicate, review, record, and escalate; interest tests are only for exploration.",
+                "answer": "A’s known total is 42×120 + 240 = CNY 5,280, or CNY 320 under the ceiling. B’s known total is 38×120 + 480 = CNY 5,040. Tax and packaging remain unconfirmed. After A4, neither supplier meets the September 23 deadline. Under A5, pause ordering and escalate internally to engineering, finance, and the procurement director within one business day of receiving A4. In parallel, ask A in writing to confirm expedited delivery, certificates, and total cost. Do not wait for A’s response to escalate internally. Engineering reviews specifications and acceptance, finance reviews costs and payment, and the procurement director decides whether to sign after the necessary reviews. Preserve the quotes, revised dates, outstanding checks, and owners.\n\nScore four items 0–2: delivery and cost, order hold and internal escalation within one business day, parallel supplier confirmation, and approval and handoff. Award 2 for complete and traceable, 1 for partial, and 0 for missing evidence or exceeding authority.",
                 "id": "purchasing-managers.faq.3",
-                "question": "How can purchasing managers assess whether the work suits them?",
+                "question": "PO-M01 answer key and rubric (open on day 7)",
                 "question_key": "career.faq.purchasing-managers.q3",
                 "source_refs": [
-                  "onet",
                   "editor"
                 ]
               },
@@ -31937,10 +31935,14 @@
                 "question_key": "career.faq.purchasing-managers.us-pay"
               },
               {
-                "answer": "Official US guidance describes a common pathway of a bachelor's degree plus related work experience while explicitly noting other entry routes. Actual requirements in China depend on the employer; postgraduate qualifications, Communist Party membership, or years-of-experience conditions in recruitment announcements are specific employer requirements rather than general occupational entry requirements.",
+                "answer": "Official US guidance describes a common pathway of a bachelor's degree plus related work experience while explicitly noting other entry routes. Actual requirements in China depend on the employer; postgraduate qualifications, Communist Party membership, or years-of-experience conditions in recruitment announcements are specific employer requirements rather than general occupational entry requirements. Continental Tires China lists category strategy, total cost of ownership, and contract lifecycle work. It labels the leadership level “Leading Self,” so the manager title alone does not establish direct reports.",
                 "id": "purchasing-managers.faq.7",
                 "question": "What education and experience are needed to enter the occupation?",
-                "question_key": "career.faq.purchasing-managers.education-path"
+                "question_key": "career.faq.purchasing-managers.education-path",
+                "source_refs": [
+                  "bls",
+                  "cn-purch-sample"
+                ]
               },
               {
                 "answer": "Official US materials state that this occupation typically does not require a specific license or certification, although some certifications may help with job seeking. Administration or procurement training can help explain methods but does not grant authority to sign contracts, approve payments, or conduct professional acceptance; these depend on organizational authorization.",
@@ -31970,7 +31972,7 @@
             "nbs",
             "privacy",
             "editor",
-            "editor"
+            "cn-purch-sample"
           ],
           "type": "faq"
         },
@@ -32068,13 +32070,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "path",
@@ -32532,6 +32534,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Mainland purchasing standard 4-01-01-00 describes buying work. It does not set a universal manager grade or signing authority. Ask who owns category strategy, who supervises staff, and who approves awards and contracts."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-purch-standard",
+                "limitation": "Task comparison only; occupational certification criteria do not establish universal employer or signing requirements.",
+                "market": "Mainland China",
+                "name": "China national occupational standard: purchasing clerk/agent (2023)",
+                "period": "2023",
+                "publisher": "Ministry of Human Resources and Social Security et al.",
+                "scope": "contextual",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/202312/W020231204655462151710.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Continental Tires China lists category strategy, total cost of ownership, and contract lifecycle work. It labels the leadership level “Leading Self,” so the manager title alone does not establish direct reports."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-purch-sample",
+                "limitation": "One posting for task comparison. Current availability and pay are unverified.",
+                "market": "Mainland China",
+                "name": "Continental China: strategic purchasing category manager",
+                "period": "Posting date not shown",
+                "publisher": "Continental",
+                "scope": "recruitment_proxy",
+                "url": "https://jobs.smartrecruiters.com/Continental/744000110322416-strategic-category-manager-purchasing"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Team leadership, process compliance, supplier review, and qualification."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-team-purch",
+                "limitation": "The posting illustrates tasks. Signing authority depends on the employer.",
+                "market": "Mainland China",
+                "name": "Top-Link purchasing manager",
+                "period": "2026-11-06",
+                "publisher": "Top-Link",
+                "scope": "recruitment_proxy",
+                "url": "https://www.top-link.com/jobs/cai-gou-jing-li.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Coaching, order approval processes, and delegation controls."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-corning-purch",
+                "limitation": "The posting illustrates tasks. Signing authority depends on the employer.",
+                "market": "Mainland China",
+                "name": "Corning lead, procurement operations, China",
+                "period": "2026-10-19",
+                "publisher": "Corning",
+                "scope": "recruitment_proxy",
+                "url": "https://corningjobs.corning.com/job/Hefei-Lead,-Procurement-Operations,-China-AH-230011/1441164800/"
               }
             ]
           },
@@ -37223,7 +37285,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit purchasing management",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37769,17 +37831,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What purchasing managers do, their wages and outlook, education and qualification requirements, and which tasks AI may change. Based on public O*NET, BLS, and National Bureau of Statistics materials, retaining statistical scope and data gaps."
+      "text": "Purchasing managers set procedures, coordinate staff, and review suppliers and contracts. Compare roles, approval authority, and U.S. wage evidence."
     },
     "title": {
       "availability": "available",
       "text": "Purchasing Managers"
     }
   },
-  "source_content_sha256": "6e078cc0d05bc5be809daf92e207cbd293ab81f7913fc709fadf79859e26b9f0",
+  "source_content_sha256": "dbc668687056c371b7d17576d221ad5f8e26e4f81e70c17f4232397cddd920c2",
   "subject": {
     "canonical_slug": "purchasing-managers",
     "name": "Purchasing Managers",
-    "summary": "Purchasing managers organize procurement around needs, specifications, suppliers, contracts, orders, budgets, and delivery, continually checking compliance, quality, costs, exceptions, and authorization boundaries."
+    "summary": "Purchasing managers set purchasing and contract procedures, lead purchasing staff, and review suppliers, contracts, budgets, and delivery terms. They approve decisions within delegated limits. U.S. 11-3061.00 includes some wholesale or retail merchandising managers."
   }
 }

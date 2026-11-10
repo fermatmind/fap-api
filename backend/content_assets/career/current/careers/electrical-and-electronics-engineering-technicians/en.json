@@ -23,6 +23,12 @@
       "fact:openings": {
         "status": "pending_mapping"
       },
+      "fact:posting-a34-ankang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a34-fengshun": {
+        "status": "pending_mapping"
+      },
       "fact:risk": {
         "status": "pending_mapping"
       },
@@ -161,7 +167,16 @@
       "item:electrical-and-electronics-engineering-technicians.path.entry-role-comparison.current.v1": {
         "status": "pending_mapping"
       },
+      "item:electrical-and-electronics-engineering-technicians.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
       "item:electrical-and-electronics-engineering-technicians.path.interview-probation.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:electrical-and-electronics-engineering-technicians.path.seven-day-decision.1": {
+        "status": "pending_mapping"
+      },
+      "item:electrical-and-electronics-engineering-technicians.path.seven-day-trial.1": {
         "status": "pending_mapping"
       },
       "item:electrical-and-electronics-engineering-technicians.profile.career-quick-answers-block.1": {
@@ -7295,7 +7310,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Reference answer: the mean of 5.09V cannot offset the 5.18V reading that is 0.08V out of range, and the identity is contradictory; the record is not closed, so it should be isolated and escalated, and must not be adjusted or released."
+              "Use the exercise below to draft your own handoff. On day seven, open “Electrical test record reference (open after day six)” under FAQs and sources."
             ]
           },
           "id": "electrical-and-electronics-engineering-technicians.quick-decision.fermat-decision-card.4",
@@ -8106,7 +8121,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Portfolio without experience: complete this page's paper questions and show the mean, the single out-of-range point, the identity contradiction, and the status."
+              "Use the exercise below to draft your own handoff. On day seven, open “Electrical test record reference (open after day six)” under FAQs and sources."
             ]
           },
           "id": "electrical-and-electronics-engineering-technicians.path.career-path-block.3",
@@ -8121,7 +8136,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Interview and probation: explain why a passing mean cannot cover the 5.18V out-of-range value and why the E-204/E-240 contradiction cannot be ignored."
+              "Use the exercise below to draft your own handoff. On day seven, open “Electrical test record reference (open after day six)” under FAQs and sources."
             ]
           },
           "id": "electrical-and-electronics-engineering-technicians.path.career-path-block.4",
@@ -8135,7 +8150,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Seven-day trial: copy the rules, build a record sheet, compute the mean deviation, draw the closed loop, make the label variant, make the reading variant, and review the stop conditions — one day each."
+              "Use the exercise below to draft your own handoff. On day seven, open “Electrical test record reference (open after day six)” under FAQs and sources."
             ]
           },
           "id": "electrical-and-electronics-engineering-technicians.path.career-path-block.5",
@@ -8358,6 +8373,114 @@
           },
           "id": "electrical-and-electronics-engineering-technicians.path.credential-decision.current.v1",
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Supplied records",
+                  "Fictional test record E-204. The plan accepts only readings between 4.90 and 5.10 V and requires matching drawing IDs.",
+                  "The readings are 5.02 V, 5.08 V and 5.18 V.",
+                  "The test record names E-204, while the attached drawing names E-240.",
+                  "The engineering reviewer checks the drawing and results. Use the supplied paper records."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "What to submit",
+                  "Submit a one-page test handoff with the three readings, each discrepancy, the disposition and the next owner."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Finish your own answer first",
+                  "On day seven, open “Electrical test record reference (open after day six)” under FAQs and sources."
+                ]
+              }
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.path.entry-work-sample-data.1",
+          "title": "Paper handoff exercise",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "Day 1",
+                  "Copy the unit ID and test condition."
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "Day 2",
+                  "Record each reading and unit."
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "Day 3",
+                  "Compare each reading with the limits."
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "Day 4",
+                  "Compare the record and drawing IDs."
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "Day 5",
+                  "Draft a handoff for the reviewer."
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "Day 6",
+                  "Finish your handoff before opening the reference."
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "Day 7",
+                  "On day seven, open “Electrical test record reference (open after day six)” under FAQs and sources. Record one correction."
+                ]
+              }
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.path.seven-day-trial.1",
+          "title": "Seven-day paper exercise",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "Finish your own answer on day six.",
+              "Use the collapsed reference on day seven to record a correction."
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.path.seven-day-decision.1",
+          "title": "Review your work",
+          "type": "list"
         }
       ]
     },
@@ -8402,7 +8525,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "A projected 2% increase over 2025—2035 (slower than average); employment was about 96,900 in 2025, and about 8,100 openings per year are projected over 2025—2035 (including growth and replacements)."
+              "2.4% (2025–2035)"
             ]
           },
           "id": "electrical-and-electronics-engineering-technicians.market-signals.market-signal-card.3",
@@ -8453,27 +8576,21 @@
           "data": {
             "entries": [
               {
-                "answer": "A checkable closed loop means checking the object and drawing version, confirming engineering instructions and the test plan, checking instrument status and conditions, assembling or inspecting per authorization, recording raw readings, comparing against specifications, isolating deviations, adjusting only within authorization, retesting, and handing off to engineering or an authorized role for acceptance; tasks include reviewing engineering plans and specifications, reading blueprints, wiring diagrams, and schematics, assembling, testing, and maintaining circuits or components per engineering instructions, maintaining test operating logs, setting up test equipment, troubleshooting and repairing, modifying prototypes, and interpreting test information.",
+                "answer": "Check drawing versions and test conditions, record measurements on electrical or electronic equipment and refer discrepancies to engineering staff.",
                 "id": "electrical-and-electronics-engineering-technicians.faq.1",
                 "question": "Electrical and Electronic Engineering Technologists and Technicians: how does the daily work form a closed loop?",
                 "question_key": "career.faq.electrical-and-electronics-engineering-technicians.daily-work",
                 "source_refs": [
-                  "ed-work",
-                  "onet-target"
+                  "a34-onet"
                 ]
               },
               {
-                "answer": "This occupation typically implements, tests, maintains, and records under the guidance of engineering staff; computer hardware engineers research, design, develop, and test computer equipment, electrical engineers research, design, develop, test, or supervise the manufacturing and installation of electrical systems, electronics engineers design, develop, and test electronic component systems, mechanical engineers plan and design mechanical equipment, and mechatronics engineers research, design, develop, and test automation and control systems.",
+                "answer": "Technicians support assembly, measurement and review under engineering direction. Engineers typically own design decisions, while assemblers build units to the current drawing and process.",
                 "id": "electrical-and-electronics-engineering-technicians.faq.2",
                 "question": "Electrical and Electronic Engineering Technologists and Technicians: how does it differ from adjacent occupations?",
                 "question_key": "career.faq.electrical-and-electronics-engineering-technicians.role-comparison",
                 "source_refs": [
-                  "onet-electrical",
-                  "onet-electronics",
-                  "onet-hardware",
-                  "onet-mechanical",
-                  "onet-mechatronics",
-                  "onet-target"
+                  "a34-onet"
                 ]
               },
               {
@@ -8504,22 +8621,22 @@
                 ]
               },
               {
-                "answer": "The 2025 National Bureau of Statistics materials cover only industry and broad job categories and cannot give a Mainland China national median or unified starting salary precisely corresponding to O*NET 17-3023.00.",
+                "answer": "Fengshun listed two product test technician positions at CNY 5,500–7,500 per month. Familiarity with testing principles was preferred, and rotating shifts were required. Ankang’s seventh notice listed five laboratory test technician positions at CNY 4,500–6,000 per month, requiring a junior-college credential. The job covered lighting product performance and reliability testing and sample and results records. These past notices describe individual posts. A comparable mainland occupational median remains unavailable.",
                 "id": "electrical-and-electronics-engineering-technicians.faq.6",
                 "question": "Electrical and Electronic Engineering Technologists and Technicians: how should Mainland China pay be checked?",
                 "question_key": "career.faq.electrical-and-electronics-engineering-technicians.china-pay",
                 "source_refs": [
-                  "nbs-wages"
+                  "a34-fengshun",
+                  "a34-ankang"
                 ]
               },
               {
-                "answer": "BLS/O*NET show May 2025 U.S. national median hourly wage of 37.59 USD and annual wage of 78,190 USD; that national median is not a starting salary, an individual quote, or a Chinese wage.",
+                "answer": "The May 2025 annual wage median for U.S. 17-3023 was $78,190.",
                 "id": "electrical-and-electronics-engineering-technicians.faq.7",
                 "question": "Electrical and Electronic Engineering Technologists and Technicians: how should the U.S. wage data be interpreted?",
                 "question_key": "career.faq.electrical-and-electronics-engineering-technicians.us-pay",
                 "source_refs": [
-                  "bls-ooh",
-                  "onet-wages"
+                  "a34-bls"
                 ]
               },
               {
@@ -8542,12 +8659,12 @@
                 ]
               },
               {
-                "answer": "BLS/O*NET show 2% growth over 2025—2035 (slower than average); employment was about 96,900 in 2025, and about 8,100 openings per year over 2025—2035, including growth and replacements.",
+                "answer": "U.S. 17-3023 employment is projected to increase from about 96,900 in 2025 to 99,200 in 2035 (+2.4%), with about 8,100 annual openings including replacements.",
                 "id": "electrical-and-electronics-engineering-technicians.faq.10",
                 "question": "Electrical and Electronic Engineering Technologists and Technicians: how should the employment outlook and adjacent transitions be understood?",
                 "question_key": "career.faq.electrical-and-electronics-engineering-technicians.outlook-transition",
                 "source_refs": [
-                  "bls-ooh"
+                  "a34-bls"
                 ]
               },
               {
@@ -8559,6 +8676,12 @@
                   "ed-fit",
                   "ed-market"
                 ]
+              },
+              {
+                "answer": "The 5.18 V reading is 0.08 V above the limit. An average cannot override an out-of-range reading. E-204 and E-240 do not establish a match. Preserve the originals, hold the record open and send both issues to the engineering reviewer. Check four items: readings and units, difference from the limit, ID mismatch, and status and owner. Count each complete item.",
+                "id": "electrical-and-electronics-engineering-technicians.faq.12",
+                "question": "Electrical test record reference (open after day six)",
+                "question_key": "career.faq.electrical-and-electronics-engineering-technicians.12"
               }
             ]
           },
@@ -9100,6 +9223,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Check drawing versions and test conditions, record measurements on electrical or electronic equipment and refer discrepancies to engineering staff."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a34-onet",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "Occupational task profile",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/17-3023.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. 17-3023 employment is projected to increase from about 96,900 in 2025 to 99,200 in 2035 (+2.4%), with about 8,100 annual openings including replacements. The May 2025 annual wage median for U.S. 17-3023 was $78,190."
+                ],
+                "evidence_type": "Official employment and wage statistics",
+                "id": "a34-bls",
+                "limitation": "Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Fengshun listed two product test technician positions at CNY 5,500–7,500 per month. Familiarity with testing principles was preferred, and rotating shifts were required."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a34-fengshun",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Product test technician",
+                "period": "2026-09-17",
+                "publisher": "Fengshun County Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.fengshun.gov.cn/zwgk/zdlyxxgk/jycyxxgk/content/post_2946182.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Ankang’s seventh notice listed five laboratory test technician positions at CNY 4,500–6,000 per month, requiring a junior-college credential. The job covered lighting product performance and reliability testing and sample and results records."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a34-ankang",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Laboratory test technician",
+                "period": "2026-08-31",
+                "publisher": "Ankang Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.ankang.gov.cn/Content-2942059.html"
               }
             ]
           },
@@ -9388,7 +9571,7 @@
               "item": "electrical-and-electronics-engineering-technicians.source-register.published.1"
             },
             "研究对象": "Overall employment projection for this occupation, 2025—2035",
-            "结论": "2% growth, 8,100 annual openings.",
+            "结论": "2.4% growth, 8,100 annual openings.",
             "链接": {
               "$source": "bls-ooh",
               "block": "source-register",
@@ -10341,8 +10524,8 @@
               "月薪参考": "Insufficient evidence: industry averages are not used to substitute for occupational wages"
             },
             {
-              "城市/区间": "Recruitment quote (cannot substitute)",
-              "月薪参考": "Insufficient evidence: a single quote is not used to substitute for occupational wages"
+              "城市/区间": "Mainland China job postings",
+              "月薪参考": "Fengshun listed two product test technician positions at CNY 5,500–7,500 per month. Familiarity with testing principles was preferred, and rotating shifts were required. Ankang’s seventh notice listed five laboratory test technician positions at CNY 4,500–6,000 per month, requiring a junior-college credential. The job covered lighting product performance and reliability testing and sample and results records."
             }
           ],
           "china_soc_row": {
@@ -10351,6 +10534,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a34-fengshun",
+            "posting-a34-ankang"
+          ],
           "sources_note": {
             "$join": [
               {
@@ -10553,7 +10740,7 @@
           },
           {
             "指标": "U.S. employment growth (2025—2035)",
-            "数值": "2% (slower than average)",
+            "数值": "2.4% (slower than average)",
             "说明": {
               "$join": [
                 {
@@ -10627,7 +10814,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "A projected 2% increase over 2025—2035 (slower than average)",
+        "growth": "A projected 2.4% increase over 2025—2035 (slower than average)",
         "heading": {
           "$item": "electrical-and-electronics-engineering-technicians.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10817,6 +11004,7 @@
             "limitation": "A projection is not a guarantee of individual hiring.",
             "metric": "Employment growth",
             "occupation_scope": "17-3023.00 Electrical and Electronic Engineering Technologists and Technicians",
+            "source_id": "a34-bls",
             "value": {
               "$item": "electrical-and-electronics-engineering-technicians.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -10831,6 +11019,7 @@
             "limitation": "A projection is not a guarantee of individual hiring.",
             "metric": "Employment size",
             "occupation_scope": "17-3023.00 Electrical and Electronic Engineering Technologists and Technicians",
+            "source_id": "a34-bls",
             "value": "About 96,900 (2025)"
           },
           {
@@ -10840,6 +11029,7 @@
             "limitation": "A projection is not a guarantee of individual hiring.",
             "metric": "Job openings",
             "occupation_scope": "17-3023.00 Electrical and Electronic Engineering Technologists and Technicians",
+            "source_id": "a34-bls",
             "value": "About 8,100 per year (2025—2035)"
           }
         ],
@@ -10932,7 +11122,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/computer-hardware-engineers",
+            "target_href": "/en/career/jobs/computer-hardware-engineers",
             "target_slug": "computer-hardware-engineers",
             "target_title": "Computer hardware engineers",
             "transition_distance": "Requires added education and design responsibility"
@@ -10940,7 +11130,7 @@
           {
             "capability_gaps": "Requires added electrical system design, calculations, and engineering responsibility education.",
             "shared_capabilities": "Electrical principles, testing, and engineering documentation; equipment and system commissioning.",
-            "target_href": "/zh/career/jobs/electrical-engineers",
+            "target_href": "/en/career/jobs/electrical-engineers",
             "target_slug": "electrical-engineers",
             "target_title": "Electrical engineers",
             "transition_distance": "Requires added education and design responsibility"
@@ -10948,7 +11138,7 @@
           {
             "capability_gaps": "Requires added circuit and system design, device selection, and engineering responsibility.",
             "shared_capabilities": "Electronic component testing, measurement, and fault localization.",
-            "target_href": "/zh/career/jobs/electronics-engineers-except-computer",
+            "target_href": "/en/career/jobs/electronics-engineers-except-computer",
             "target_slug": "electronics-engineers-except-computer",
             "target_title": "Electronics engineers (except computer)",
             "transition_distance": "Requires added education and design responsibility"
@@ -10956,7 +11146,7 @@
           {
             "capability_gaps": "Requires added mechanical design, materials, and mechanics fundamentals.",
             "shared_capabilities": "Drawing reading, assembly, and testing; cross-discipline collaboration.",
-            "target_href": "/zh/career/jobs/mechanical-engineers",
+            "target_href": "/en/career/jobs/mechanical-engineers",
             "target_slug": "mechanical-engineers",
             "target_title": "Mechanical engineers",
             "transition_distance": "Cross-discipline fundamentals must be added"
@@ -10964,7 +11154,7 @@
           {
             "capability_gaps": "Requires added control system design and system integration responsibility.",
             "shared_capabilities": "Commissioning experience with automation and control loops, sensors, and actuators.",
-            "target_href": "/zh/career/jobs/mechatronics-engineers",
+            "target_href": "/en/career/jobs/mechatronics-engineers",
             "target_slug": "mechatronics-engineers",
             "target_title": "Mechatronics engineers",
             "transition_distance": "Similar direction; system design must be added"
@@ -10972,7 +11162,7 @@
           {
             "capability_gaps": "Requires added drafting standards and CAD file management specialization.",
             "shared_capabilities": "Electrical and electronic drawing and document standards; version and change awareness.",
-            "target_href": "/zh/career/jobs/electrical-and-electronics-drafters",
+            "target_href": "/en/career/jobs/electrical-and-electronics-drafters",
             "target_slug": "electrical-and-electronics-drafters",
             "target_title": "Electrical and Electronics Drafters",
             "transition_distance": "Adjacent position in the same family"
@@ -11006,7 +11196,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Work sample",
             "id": "riasec",
@@ -11025,7 +11215,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Work sample",
             "id": "big-five",
@@ -11044,7 +11234,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Work sample",
             "id": "mbti",
@@ -11058,7 +11248,7 @@
           },
           {
             "answer": "Check against this page's seven-day exercise or a course cycle.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Work sample",
             "id": "enneagram",
@@ -11072,7 +11262,7 @@
           },
           {
             "answer": "Use paper anomaly scenarios to observe their order of handling and how they report.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Work sample",
             "id": "iq",
@@ -11086,7 +11276,7 @@
           },
           {
             "answer": "Verify with handover summaries and feedback from collaborating parties.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the career interest test",
             "evidence_level": "Work sample",
             "id": "eq",
@@ -11373,7 +11563,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Test whether my career interests suit Electrical and Electronic Engineering Technologists and Technicians",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11509,6 +11699,27 @@
         "id": "electrical-and-electronics-engineering-technicians.path.credential-decision.current.v1",
         "location": "entry_decisions",
         "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "electrical-and-electronics-engineering-technicians.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "electrical-and-electronics-engineering-technicians.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "electrical-and-electronics-engineering-technicians.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": "/en/career/jobs/electrical-and-electronics-engineering-technicians",
@@ -11568,14 +11779,14 @@
       },
       {
         "derivation": null,
-        "display_value": "2% (2025—2035, slower than average)",
+        "display_value": "2.4% (2025–2035)",
         "fact_id": "growth",
         "market": "United States",
         "measure": "projected growth",
         "occupation_scope": "Electrical and Electronic Engineering Technologists and Technicians / 17-3023.00 (precise occupation data)",
         "period": "2025-2035 projections",
         "source_refs": [
-          "bls-ooh"
+          "a34-bls"
         ]
       },
       {
@@ -11673,6 +11884,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Fengshun listed two product test technician positions at CNY 5,500–7,500 per month. Familiarity with testing principles was preferred, and rotating shifts were required.",
+        "fact_id": "posting-a34-fengshun",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Product test technician",
+        "period": "2026-09-17",
+        "source_refs": [
+          "a34-fengshun"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Ankang’s seventh notice listed five laboratory test technician positions at CNY 4,500–6,000 per month, requiring a junior-college credential. The job covered lighting product performance and reliability testing and sample and results records.",
+        "fact_id": "posting-a34-ankang",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Laboratory test technician",
+        "period": "2026-08-31",
+        "source_refs": [
+          "a34-ankang"
+        ]
       }
     ]
   },
@@ -11686,7 +11921,7 @@
     "badges": [
       "Engineering input, assembly and testing, maintenance and troubleshooting, and recording · O*NET 17-3023.00",
       "May 2025 U.S. wage data · median annual wage 78,190 USD (hourly 37.59 USD)",
-      "Job Zone Three · interest code RIC · 2% growth over 2025—2035 (slower than average)"
+      "Job Zone Three · interest code RIC · 2.4% growth over 2025—2035 (slower than average)"
     ],
     "metrics": [
       {
@@ -11725,17 +11960,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Typically under the guidance of engineering staff, turning the object and drawing version, engineering instructions, instrument conditions, raw readings, deviations, authorized changes, retests, and acceptance status into a traceable closed loop."
+      "text": "See how electrical and electronics engineering technicians check drawings and readings, compare job notices and write a paper test handoff."
     },
     "title": {
       "availability": "available",
       "text": "Electrical and Electronic Engineering Technologists and Technicians"
     }
   },
-  "source_content_sha256": "3bae04081faf250e3dd2d175e24e5619467b1f402f49a53388b617b4710a4529",
+  "source_content_sha256": "77731c16ff94db40459e6c265777318d3394ca8311d6fff4e1ce5a806de35573",
   "subject": {
     "canonical_slug": "electrical-and-electronics-engineering-technicians",
     "name": "Electrical and Electronic Engineering Technologists and Technicians",
-    "summary": "Typically under the guidance of engineering staff, turning the object and drawing version, engineering instructions, instrument conditions, raw readings, deviations, authorized changes, retests, and acceptance status into a traceable closed loop."
+    "summary": "Check drawing versions and test conditions, record measurements on electrical or electronic equipment and refer discrepancies to engineering staff."
   }
 }

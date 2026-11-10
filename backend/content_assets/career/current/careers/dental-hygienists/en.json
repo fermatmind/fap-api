@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-dental-beijing": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-dental-ganzhou": {
+        "status": "pending_mapping"
+      },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
       },
@@ -26066,14 +26072,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "In China, entry is verified against actual activity, and this round did not verify a one-to-one classification mapping with the U.S. code. Articles 2/12—15 of the 2021 Physicians Law text provide that qualification differs from practice registration and that practice is within the registered location, category, and scope; 34 assistant physicians usually work under the direction of a practicing physician, with conditional exceptions for general activities in township, village, and difficult remote county institutions, so independent practice is not absolutely prohibited across the board. The official 2023 interpretation states that teeth cleaning is a medical act, and the 2025 Xuanzhou case involved an institution arranging a registered nurse without physician qualification to perform scaling and being penalized for diagnosis and treatment outside the specialty; nursing qualifications or a U.S. hygienist license cannot be treated as Chinese scaling authority, nor can all nurses be called non-health technical personnel."
+              "The two postings describe individual jobs and quoted pay. Confirm the contract, gross or net pay and any allowances; a national distribution was not established."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "r5-cn-physician",
-            "r5-cn-clean-guidance",
-            "r5-cn-clean-case"
+            "dental-ganzhou",
+            "dental-beijing"
           ],
           "type": "prose"
         },
@@ -26138,7 +26143,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no occupational wage or real quote distribution for Chinese scaling or oral prevention positions, and it is not claimed that nothing was ever published or that no national classification counterpart exists. The China 2025 health and social work industry non-private 146266 and private 75631 yuan annual average pre-tax wages match only the multi-occupation background of actual medical legal entities; urban legal entities with 5 or more persons, excluding the self-employed and freelancers, and non-private does not mean state-owned only. They are not dental hygienist or scaling position wages or medians and do not fill the occupational gap."
+              " Health and social work industry averages cover many jobs and cannot substitute for dental occupation wages."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
@@ -26152,12 +26157,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no occupational wage or real quote distribution for Chinese scaling or oral prevention positions, and it is not claimed that nothing was ever published or that no national classification counterpart exists. The China 2025 health and social work industry non-private 146266 and private 75631 yuan annual average pre-tax wages match only the multi-occupation background of actual medical legal entities; urban legal entities with 5 or more persons, excluding the self-employed and freelancers, and non-private does not mean state-owned only. They are not dental hygienist or scaling position wages or medians and do not fill the occupational gap."
+              "A Ganzhou Shell Dental posting listed CNY 3,500–8,000 per month and referred to guidance by a periodontal clinician and at least one year of dedicated dental cleaning experience. A Beijing Shunyi Beiliangya posting listed CNY 4,000–6,000 per month and preferred a nursing credential and cleaning experience; it did not show a publication date. The postings establish neither authorization nor national pay."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-nbs-health"
+            "dental-ganzhou",
+            "dental-beijing"
           ],
           "type": "prose"
         },
@@ -26182,13 +26188,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round obtained no real Chinese recruitment sample, so an oral medicine or nursing background cannot be called common or employer mentoring a common path. Verify against the actual scaling, nursing, and administrative activities and the institution's filed subjects, and institutional filing does not replace individual authority."
+              "The two postings describe individual employer requirements. Ask whether the role centers on nursing, chairside work, imaging, instrument processing or preventive care."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "r5-cn-clinic",
-            "r5-cn-physician"
+            "dental-ganzhou",
+            "dental-beijing"
           ],
           "type": "prose"
         },
@@ -28714,36 +28720,36 @@
             "rows": [
               [
                 "Clinical internship position (while enrolled)",
-                "Under mentoring, verify medical history, observe and record periodontal examinations, assist in preparing instruments and the imaging flow, and gradually take on scaling.",
-                "Editorial summary, with no real employer sample this round; verified against the course, license, and institutional task supervision, and it does not prove a uniform recruitment assessment.",
+                "Start with observing exams and practicing documentation and instrument setup in training. Patient procedures are limited to eligible trainees under local rules, institutional authorization and supervision.",
+                "Check the course and supervision rules; distinguish observation from patient procedures.",
                 "Submit course internship records and mentor evaluations, explaining the verification and recording items you completed.",
                 "Mainly learning, with treatment authority limited by the course and mentoring."
               ],
               [
                 "Scaling and preventive treatment position",
                 "Within the license and authorization, complete scaling, root planing, polishing, and fluoride application, and process instruments to standard.",
-                "Editorial summary, with no real employer sample this round; verified against the course, license, and institutional task supervision, and it does not prove a uniform recruitment assessment.",
+                "Verify authorized services, individual credentials and required supervision.",
                 "Present the license and continuing education records, and explain the verification and treatment flow using fictional cases.",
                 "Close to the core of hygiene care, and licensed personnel still follow task supervision conditions; it is not broadly called independent."
               ],
               [
                 "Imaging and records position",
                 "Take and file dental radiographs per prescription, and complete periodontal probing records and charting for the dentist's diagnosis.",
-                "Editorial summary, with no real employer sample this round; verified against the course, license, and institutional task supervision, and it does not prove a uniform recruitment assessment.",
+                "Check imaging duties, training, permissions and recordkeeping.",
                 "Use fictional patient information to organize a sample imaging filing and periodontal record.",
                 "Requires the radiology-related qualifications or specialized training required by the jurisdiction, with record quality as the core."
               ],
               [
                 "Patient education and recall position",
                 "Provide oral hygiene instruction and dietary and smoking cessation advice, and maintain the follow-up recall system and appointment information.",
-                "Editorial summary, with no real employer sample this round; verified against the course, license, and institutional task supervision, and it does not prove a uniform recruitment assessment.",
+                "Check education topics, documentation and referral boundaries.",
                 "Use fictional patient scenarios to write oral hygiene instruction points and a recall plan.",
                 "The task focuses on education and recall, which does not mean exemption from all clinical authority or information responsibility."
               ],
               [
                 "Multi-clinic part-time position",
                 "Rotate among different clinics according to the schedule, carrying out standard procedures such as examination, scaling, and education.",
-                "Editorial summary, with no real employer sample this round; verified against the course, license, and institutional task supervision, and it does not prove a uniform recruitment assessment.",
+                "Ask whether the clinic role also covers nursing, scheduling or administration.",
                 "Use a fictional schedule to explain how you would keep verification and records consistent across different settings.",
                 "Work arrangements are flexible but require stronger self-discipline and handover ability."
               ]
@@ -31042,21 +31048,22 @@
           "data": {
             "entries": [
               {
-                "answer": "Record and review medical history, examine the gingiva and oral soft tissues, probe periodontal pocket depth and record bleeding and recession, examine floor-of-mouth lymph nodes, take dental radiographs per prescription, and chart caries and periodontal status for the dentist's diagnosis; within the license and institutional authorization, remove calculus, plaque, and stains, perform root planing and polishing, and apply fluoride and other caries prevention procedures, and per state rules possibly perform local anesthesia or remove excess cement from crown surfaces; also provide oral hygiene instruction and dietary and smoking cessation advice and maintain the follow-up recall system. Diagnosis and treatment plans are the responsibility of the dentist.",
+                "answer": "Dental hygienists provide preventive care within their authorized scope: record gum and oral findings, clean teeth, explain oral hygiene and refer concerns to the dentist. Permitted procedures depend on local licensing and the workplace.",
                 "id": "actors.faq.1",
                 "question": "What does a dental hygienist do in a typical day?",
                 "question_key": "career.faq.dental-hygienists.1",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "General dentists are responsible for examination, diagnosis, treatment plans, and clinical operations and carry responsibility for clinical results; dental assistants prepare and sterilize instruments, prepare patients, and assist and keep records during treatment under the dentist's direction, without independently performing scaling; this occupation carries out oral prevention and periodontal care (including scaling and root planing) relatively independently under the state license and hands findings requiring diagnosis to the dentist.",
+                "answer": "Dental assistants mainly support chairside work and instrument turnover. Hygienists focus on authorized preventive care and education. Dentists make diagnosis and treatment decisions. All work with patients; check who may perform, review and sign off on each task.",
                 "id": "actors.faq.2",
                 "question": "What is the difference between dental hygienists and general dentists or dental assistants?",
                 "question_key": "career.faq.dental-hygienists.2",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "dental-adjacent"
                 ]
               },
               {
@@ -31069,12 +31076,12 @@
                 ]
               },
               {
-                "answer": "What can be verified is the long-standing use of clinic information systems and digital tools: electronic medical records and appointment recall systems, dental imaging and clinic management software, and periodontal examination and recording tools; these are established practices of information and recording tools, not adoption rates or job outcome data.",
+                "answer": "Software may help with scheduling or organizing authorized information. Staff still verify patient records; automation does not replace clinical judgment, instrument handling or licensing. This page does not establish adoption or outcomes.",
                 "id": "actors.faq.4",
-                "question": "Which tasks of dental hygienists already have evidence of technology change?",
+                "question": "Which tasks could software assist with?",
                 "question_key": "career.faq.dental-hygienists.4",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current"
                 ]
               },
               {
@@ -31087,37 +31094,36 @@
                 ]
               },
               {
-                "answer": "The median annual wage in the U.S. May 2025 wage data for this occupation is 98,100 USD (median hourly 47.16 USD), with annual percentiles of 74,880／83,570／98,100／108,480／126,050 USD; about 225,300 positions in 2025. Mainland China public statistics did not obtain occupation-level wages corresponding to this position, so this page retains the gap rather than substituting industry averages or U.S. data.",
+                "answer": "The May 2025 U.S. median wage was $47.16 per hour and $98,100 per year. A Ganzhou Shell Dental posting listed CNY 3,500–8,000 per month and referred to guidance by a periodontal clinician and at least one year of dedicated dental cleaning experience. A Beijing Shunyi Beiliangya posting listed CNY 4,000–6,000 per month and preferred a nursing credential and cleaning experience; it did not show a publication date. The postings establish neither authorization nor national pay.",
                 "id": "actors.faq.6",
                 "question": "What are the typical wages for dental hygienists, and how should they be compared?",
                 "question_key": "career.faq.dental-hygienists.6",
                 "source_refs": [
-                  "oews",
-                  "bls",
-                  "r2-pay-1"
+                  "r5-wages-current",
+                  "dental-ganzhou",
+                  "dental-beijing"
                 ]
               },
               {
-                "answer": "The U.S. usually requires a dental hygiene associate degree (programs usually last 3 years including laboratory and clinical training), and most states require completing an accredited program and passing a written and clinical examination to obtain a license, license maintenance requires continuing education, and many positions also require a CPR certificate; in high school, biology, chemistry, and mathematics are recommended along with completing institutional prerequisite courses.",
+                "answer": "In the U.S. an associate degree in dental hygiene is typical. Every state requires licensure, with state-specific rules. Mainland China’s oral health technician classification (2-05-07-17) is a task comparison, not a U.S. license equivalent or authorization to practice independently. Verify specific duties with the institution and local authority.",
                 "id": "actors.faq.7",
                 "question": "What education do dental hygienists need, and how do they get licensed?",
                 "question_key": "career.faq.dental-hygienists.7",
                 "source_refs": [
-                  "bls",
-                  "ratify"
+                  "r5-bls-ooh",
+                  "china-oral-tech-class",
+                  "dental-ganzhou",
+                  "dental-beijing"
                 ]
               },
               {
-                "answer": "All U.S. states require a license, which is mandatory entry. Mainland China has no one-to-one corresponding occupational classification, and teeth cleaning (scaling) is a medical act under current rules, which should be performed by a registered oral practicing physician, while oral practicing assistant physicians must work under the direction of an oral practicing physician; taking dental radiographs also involves radiological diagnosis and treatment licensing and a Radiation Worker Certificate.",
+                "answer": "In the U.S. an associate degree in dental hygiene is typical. Every state requires licensure, with state-specific rules. Mainland China’s oral health technician classification (2-05-07-17) is a task comparison, not a U.S. license equivalent or authorization to practice independently. Verify specific duties with the institution and local authority.",
                 "id": "actors.faq.8",
-                "question": "Must I obtain a certificate to work as a dental hygienist? What qualifications are needed in mainland China?",
+                "question": "How do you verify qualifications for a particular location?",
                 "question_key": "career.faq.dental-hygienists.8",
                 "source_refs": [
-                  "ratify",
-                  "directing",
-                  "cn-rule",
-                  "art",
-                  "announcing"
+                  "r5-bls-ooh",
+                  "china-oral-tech-class"
                 ]
               },
               {
@@ -31130,14 +31136,13 @@
                 ]
               },
               {
-                "answer": "Look at three things at once: the change in the occupation total (about 8% growth projected for 2025—2035, with about 15,000 openings per year), work arrangement characteristics (a considerable proportion work part-time or for several dentists) and the state license scope, and the practice system differences of the target jurisdiction (U.S. licenses and mainland China practice qualifications are not interchangeable); do not replace these verifications with a single salary figure or an industry slogan.",
+                "answer": "BLS projects U.S. employment for 29-1292 to grow from 225,300 in 2025 to 243,200 in 2035 (+8.0%), with about 15,000 annual openings including replacement needs. Ask about patient contact, permitted duties, schedules and supervision.",
                 "id": "actors.faq.10",
                 "question": "What else should I consider when choosing the dental hygienist occupation now?",
                 "question_key": "career.faq.dental-hygienists.10",
                 "source_refs": [
-                  "employer",
-                  "cn-rule",
-                  "directing"
+                  "r5-bls-current",
+                  "r5-onet-current"
                 ]
               }
             ]
@@ -31873,7 +31878,7 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "U.S. 29-1292.00 has 16 own tasks, comprising 14 core and 2 supplementary. Core: reviewing medical history records, visual and tactile examination of the gums, probing periodontal pockets and recession, removing calculus, stains and subgingival deposits, oral hygiene education and clinical services, charting caries and periodontal findings for the dentist's diagnosis, dental X-rays, participating in continuing education, applying fluoride, sharpening, maintaining and sterilizing instruments, recall visits, examining the lymph nodes under the jaw, local anesthesia, and removing excess bonding agent from crown surfaces. Community oral health clinic activities and taking impressions for study models are supplementary. Core does not mean that everyone in every state is permitted, and supplementary does not mean prohibited. 57 U.S. context items: 100% daily indoors in a controlled environment, continuous hand use and repetitive motions, and routine protective equipment daily; 97% in continuous contact with others, facing people daily and daily infection exposure, and 84% within close physical contact distance. Sitting 44% continuously, 29% more than half the time and 22% half the time; bending or twisting 37% continuously, 31% more than half the time and 29% half the time; standing 57% less than half the time, 28% half the time and 12% never, so it cannot be written that everyone stands for long periods. A typical U.S. week is 58% less than 40 hours and 39% exactly 40, with the remaining 3% not inferred from the difference; 100% regular schedule does not prove there are no evenings or weekends. Daily time pressure 59% and never 23%; daily radiation 72% and never 20%; daily contamination 49% and never 34%; dedicated protective equipment 25% daily and 73% never. Contact frequency is not dose, infection or injury rate, or the distribution in China. OOH notes that many work part time, some for several dentists, and that benefits may be limited to full-time staff and vary by employer; the prevalence of per-day pay was not verified. O*NET 21 work styles on Impact: dependable 89, cooperative 88, careful 81, empathetic 77, integrity 72, social 69, self-control 69, concern for others 65 and stress tolerance 65, among others, which are not population percentages, Big Five scores or hiring thresholds. Interests S73/R71/I59/C55/E12/A2, code SRI, not proof of competence. U.S. OOH typically requires an associate degree, with some bachelor's and a few master's; programs usually take 3 years including laboratory, clinical and classroom work, and prerequisites differ by institution. All states require a license; most require accredited education plus written and clinical examinations, maintenance through continuing education, and CPR for many positions. The education question 75% associate degree, 13% professional degree and 9% post-baccalaureate certificate are required-education opinions, with the remaining 3 not inferred, and are not the actual education distribution of the workforce or program length. JobZone3/SVP6 is below level 7 group preparation, which is not a legal or actual training duration; BLS's typical classification of associate degree, no related experience and on-the-job training None does not mean no learning is needed."
                 ],
@@ -31918,16 +31923,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/29-1292.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "U.S. own 29-1292 employment 2025 about 225300 → 2035 about 243200, a net increase of 17900/+8.0%, with an average of 15000 openings per year including replacements rather than a net new addition each year, and 1.3% self-employed. O*NET currently uses the same 2025 and 2025—2035, so it is no longer described by an older period or as a ten-year opening total. The growth projection is not AI causation, an individual hiring probability or China demand. The typical classification of associate degree, no experience and on-the-job training None is a category, not an exemption from learning."
+                  "BLS projects U.S. employment for 29-1292 to grow from 225,300 in 2025 to 243,200 in 2035 (+8.0%), with about 15,000 annual openings including replacement needs."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r5-bls-current",
                 "limitation": "U.S. own 29-1292 employment 2025 about 225300 → 2035 about 243200, a net increase of 17900/+8.0%, with an average of 15000 openings per year including replacements rather than a net new addition each year, and 1.3% self-employed. O*NET currently uses the same 2025 and 2025—2035, so it is no longer described by an older period or as a ten-year opening total. The growth projection is not AI causation, an individual hiring probability or China demand. The typical classification of associate degree, no experience and on-the-job training None is a category, not an exemption from learning.",
                 "market": "United States",
                 "name": "BLS Table 1.2 Dental Hygienists 2025—2035",
-                "period": "2025 base period and 2025—2035 projection; retrieved 2026-10-09",
+                "period": "2025–2035",
                 "publisher": "Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32173,6 +32178,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "CNY 3,500–8,000 per month. The employer mentions guidance by a periodontal clinician and at least one year of dedicated dental cleaning experience; this does not establish authorization for independent practice."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "dental-ganzhou",
+                "limitation": "Limited to what the original posting or document supports.",
+                "market": "Mainland China",
+                "name": "Ganzhou Shell Dental: oral cleaning role",
+                "period": "Posting date not stated",
+                "publisher": "Ganzhou Shell Dental",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shelldental.cn/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%AC/%E8%AF%9A%E8%81%98%E7%B2%BE%E8%8B%B1/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One role in Shunyi, Beijing at CNY 4,000–6,000 per month. Familiarity with workflow; nursing credential and cleaning experience preferred. No publication date is shown."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "dental-beijing",
+                "limitation": "Limited to what the original posting or document supports.",
+                "market": "Mainland China",
+                "name": "Beiliangya Clinic, Beijing: oral cleaning role",
+                "period": "Posting date not stated",
+                "publisher": "KQ88",
+                "scope": "recruitment_proxy",
+                "url": "https://jobs.kq88.com/index.php?s=/Home/Sendpostinfo/index/jobid/47824/mobile/2"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In the U.S. an associate degree in dental hygiene is typical. Every state requires licensure, with state-specific rules. Mainland China’s oral health technician classification (2-05-07-17) is a task comparison, not a U.S. license equivalent or authorization to practice independently. Verify specific duties with the institution and local authority."
+                ],
+                "evidence_type": "Primary source",
+                "id": "china-oral-tech-class",
+                "limitation": "Limited to what the original posting or document supports.",
+                "market": "Mainland China",
+                "name": "MOHRSS oral health technician classification",
+                "period": "2026-11-09",
+                "publisher": "Chinese official document",
+                "scope": "regulatory_context",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/202407/W020240730573687122908.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Dental assistants mainly support chairside work and instrument turnover. Hygienists focus on authorized preventive care and education. Dentists make diagnosis and treatment decisions. All work with patients; check who may perform, review and sign off on each task."
+                ],
+                "evidence_type": "Primary source",
+                "id": "dental-adjacent",
+                "limitation": "Limited to what the original posting or document supports.",
+                "market": "United States",
+                "name": "Adjacent dental occupation tasks",
+                "period": "2026-11-09",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/31-9091.00"
               }
             ]
           },
@@ -35285,7 +35350,7 @@
               }
             },
             {
-              "城市/区间": "Individual employer and job platform quotes (cannot replace the national basis)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -35297,13 +35362,14 @@
           "china_soc_row": "U.S. 29-1292 and actual Chinese positions are not verified as one-to-one equivalents in this round",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-dental-ganzhou",
+            "posting-dental-beijing"
           ],
           "sources_note": "Source links are used according to their respective scopes of application.",
           "ui": {
             "ai_heading": "Will AI and automation directly change dental hygienists' income?",
             "driver_heading": "What should be verified when discussing pay for comparable positions in mainland China?",
-            "official_heading": "Mainland China official basis and statistical gaps",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Comparison of pay methods and statistical boundaries",
             "scenario_heading": "Can quotes from different institutions in mainland China be compared directly?",
             "scenario_interpretation_label": "Scope of application and gaps",
@@ -36133,7 +36199,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/dentists-general",
+            "target_href": "/en/career/jobs/dentists-general",
             "target_slug": "dentists-general",
             "target_title": "General dentists: capability adjacency to this occupation",
             "transition_distance": {
@@ -36156,7 +36222,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/dental-assistants",
+            "target_href": "/en/career/jobs/dental-assistants",
             "target_slug": "dental-assistants",
             "target_title": "Dental assistants: capability adjacency to this occupation",
             "transition_distance": {
@@ -36179,7 +36245,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/dental-laboratory-technicians",
+            "target_href": "/en/career/jobs/dental-laboratory-technicians",
             "target_slug": "dental-laboratory-technicians",
             "target_title": "Dental laboratory technicians: capability adjacency to this occupation",
             "transition_distance": {
@@ -36202,7 +36268,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/medical-assistants",
+            "target_href": "/en/career/jobs/medical-assistants",
             "target_slug": "medical-assistants",
             "target_title": "Medical assistants: capability adjacency to this occupation",
             "transition_distance": {
@@ -36225,7 +36291,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/radiologic-technologists",
+            "target_href": "/en/career/jobs/radiologic-technologists",
             "target_slug": "radiologic-technologists",
             "target_title": "Radiologic technologists and technicians: capability adjacency to this occupation",
             "transition_distance": {
@@ -36248,7 +36314,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/registered-nurses",
+            "target_href": "/en/career/jobs/registered-nurses",
             "target_slug": "registered-nurses",
             "target_title": "Registered nurses: capability adjacency to this occupation",
             "transition_distance": {
@@ -36271,7 +36337,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/health-educators",
+            "target_href": "/en/career/jobs/health-educators",
             "target_slug": "health-educators",
             "target_title": "Health education specialists: capability adjacency to this occupation",
             "transition_distance": {
@@ -36294,7 +36360,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/dietitians-and-nutritionists",
+            "target_href": "/en/career/jobs/dietitians-and-nutritionists",
             "target_slug": "dietitians-and-nutritionists",
             "target_title": "Dietitians and nutritionists: capability adjacency to this occupation",
             "transition_distance": {
@@ -36382,7 +36448,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -36431,7 +36497,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -36480,7 +36546,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -36529,7 +36595,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36578,7 +36644,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36627,7 +36693,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -37249,7 +37315,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand dental hygienists' task interests and work preferences",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37737,7 +37803,7 @@
         "fact_id": "identity",
         "market": "United States",
         "measure": "Official occupational code (identity basis for this page)",
-        "occupation_scope": "A single O*NET-SOC occupation (29-1292.00); its tasks, work context, abilities, wages, employment and projection are all on this occupation's own basis. Adjacent but different occupations include general dentists (29-1021.00, responsible for diagnosis and treatment decisions), dental assistants (31-9091.00, providing clinical support under a dentist's direction and not performing scaling independently), dental laboratory technicians (51-9081.00, fabricating restorations in the laboratory) and medical assistants (31-9092.00, oriented to general clinics); mainland China has no occupational classification corresponding one-to-one to this code, and tooth cleaning (scaling) is a medical act under current provisions and should be performed by a registered oral medicine practicing physician or, under their guidance, an oral medicine assistant physician",
+        "occupation_scope": "O*NET-SOC 29-1292.00 is the U.S. occupation. Mainland China’s 2-05-07-17 is a task comparison; verify practice authorization separately.",
         "period": "O*NET-SOC 2018 SOC; page updated 2026; retrieved 2026-09-19",
         "source_refs": [
           "onet"
@@ -37793,14 +37859,14 @@
       },
       {
         "derivation": null,
-        "display_value": "Growth 8% (2025—2035, labeled “Growth”; employment change +17,900)",
+        "display_value": "8.0% growth (2025–2035)",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
         "occupation_scope": "29-1292.00 on this occupation's own basis; the BLS Occupational Outlook shows growth of 8% for this occupation in 2025—2035, clearly faster than the all-occupations average, with an employment change of about +17,900; the O*NET page shows an earlier period (2024—2034, 7% or more) basis. The projection is a change in the occupation total, not an individual hiring probability",
-        "period": "2025—2035 projection period; retrieved 2026-09-19",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
@@ -37853,14 +37919,15 @@
       },
       {
         "derivation": "Precise occupational wages for mainland China were not obtained; U.S. data, industry averages or non-transparent recruitment samples are not used to replace this occupation's wage.",
-        "display_value": "Note: mainland China has no occupational classification corresponding one-to-one to U.S. 29-1292.00; tooth cleaning (scaling) is a medical act under current provisions and should be performed by a registered oral medicine practicing physician or, under their guidance, an oral medicine assistant physician; published wage statistics are released by industry category and personnel category, and no occupation-level basis corresponding to this occupation has been established; no verifiable occupation-level wage distribution for mainland China was obtained in this round",
+        "display_value": "No nationwide mainland China wage estimate comparable to the U.S. occupation was verified. Individual posting quotes are shown separately.",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "Mainland China",
         "measure": "Statistical positions not obtained (occupation-level wages for oral hygiene positions in mainland China)",
         "occupation_scope": "Mainland China occupation-level basis; quotes for tooth-cleaning specialist or oral care positions visible on recruitment platforms do not fully disclose conditions and cannot represent the national level; published wage statistics are broken down at most to industry category and personnel category (such as health and social work), and an industry average is not this occupation's wage; a page being in Simplified Chinese does not mean a precisely equivalent occupational classification exists",
         "period": "Current release basis; retrieved 2026-09-19",
         "source_refs": [
-          "r2-pay-1"
+          "dental-ganzhou",
+          "dental-beijing"
         ]
       },
       {
@@ -37916,12 +37983,12 @@
       },
       {
         "derivation": null,
-        "display_value": "Growth 8.0% and about 17900 people (2025—2035, about 243200 in 2035)",
+        "display_value": "8.0% growth (2025–2035)",
         "fact_id": "r5-current-growth",
         "market": "United States",
         "measure": "Ten-year employment change",
         "occupation_scope": "29-1292 own, including the self-employed; not an individual probability or an average annual net increase",
-        "period": "2025 base period and 2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-current"
         ]
@@ -37976,14 +38043,15 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: occupational wages for Chinese scaling and oral prevention positions were not obtained; health and social work non-private 146266 and private 75631 are only industry background",
+        "display_value": "No nationwide mainland China wage estimate comparable to the U.S. occupation was verified. Individual posting quotes are shown separately.",
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "Mainland China",
         "measure": "Occupational wage gap and industry background",
         "occupation_scope": "Matches the multi-occupation background of actual medical legal-entity units, not a personal quote or an occupational median",
         "period": "2025 industry and retrieved 2026-10-09",
         "source_refs": [
-          "r5-nbs-health"
+          "dental-ganzhou",
+          "dental-beijing"
         ]
       },
       {
@@ -37996,6 +38064,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "CNY 3,500–8,000 per month. The employer mentions guidance by a periodontal clinician and at least one year of dedicated dental cleaning experience; this does not establish authorization for independent practice.",
+        "fact_id": "posting-dental-ganzhou",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Ganzhou Shell Dental: oral cleaning role",
+        "period": "Posting date not stated",
+        "source_refs": [
+          "dental-ganzhou"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One role in Shunyi, Beijing at CNY 4,000–6,000 per month. Familiarity with workflow; nursing credential and cleaning experience preferred. No publication date is shown.",
+        "fact_id": "posting-dental-beijing",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Beiliangya Clinic, Beijing: oral cleaning role",
+        "period": "Posting date not stated",
+        "source_refs": [
+          "dental-beijing"
         ]
       }
     ]
@@ -38023,7 +38115,7 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2025—2035, growth 8%, labeled “Growth”)"
+        "label": "U.S. projected employment change (2025–2035): +8.0%"
       },
       {
         "availability": "available",
@@ -38049,17 +38141,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Dental Hygienists (O*NET-SOC 29-1292.00) provide oral prevention and hygiene care within the dental care system, independently or according to state rules: recording and reviewing medical history, examining gums and periodontium and measuring periodontal pocket depth, taking dental X-rays as prescribed, removing calculus and plaque and performing root planing and polishing, applying fluoride and other caries-preventive treatments, administering local anesthesia as authorized, and providing patients with oral hygiene instruction, diet and smoking-cessation advice and recall; diagnosis and treatment plans are the dentist's responsibility. The work context includes continuous repetitive motions and hand use, daily exposure to disease, infection and radiation, and close contact with patients, requiring protective equipment and compliance with radiation and infection control procedures. U.S. basis: about 225,300 positions in 2025, projected growth of 8% (+17,900) in 2025—2035, and about 15,000 openings per year on average; in the May 2025 wage data the median annual wage is 98,100 USD (median hourly wage 47.16 USD) and the annual percentiles are 74,880／83,570／98,100／108,480／126,050 USD; the typical entry education is an associate degree in dental hygiene (programs usually 3 years), all states require a license with differing requirements, many positions also require a CPR certificate, and a considerable share of practitioners work part time. Mainland China: there is no one-to-one corresponding occupational classification, tooth cleaning (scaling) is a medical act that should be performed by a registered oral medicine practicing physician or, under their guidance, an oral medicine assistant physician; disinfection and sterilization of dental instruments follows WS 506—2016; mainland China's published statistics do not release occupation-level wages corresponding to this occupation, and this page visibly marks the gap in the relevant places rather than filling it with an industry average."
+      "text": "Explore dental hygienist duties, U.S. wages and licensing. Compare mainland China oral health technician tasks and dental cleaning postings."
     },
     "title": {
       "availability": "available",
       "text": "Dental Hygienists"
     }
   },
-  "source_content_sha256": "af0a82b19dd16bb1c537e64ed94ca975674f62cf678029009d6647df3b8fa1c4",
+  "source_content_sha256": "5ff1a7c045a763cddb9b77b601f169b779884e1010fcc5c0ced3dfcd109e9054",
   "subject": {
     "canonical_slug": "dental-hygienists",
     "name": "Dental Hygienists",
-    "summary": "Dental Hygienists (O*NET-SOC 29-1292.00) provide oral hygiene care for patients: recording and reviewing medical history, examining gums and periodontium (using a probe to measure periodontal pocket depth and observing bleeding and recession), taking dental X-rays as prescribed, removing calculus, plaque and stains and performing root planing and polishing, applying fluoride and other caries-preventive treatments, and, depending on state rules and authorization, possibly administering local anesthesia, removing excess bonding agent from crown surfaces and taking study models, while providing patients with oral hygiene instruction, diet and smoking-cessation advice and maintaining a recall system; some positions also involve community oral health education. The work outputs are verifiable oral examination and periodontal records, imaging materials, treatment records and patient education records, and diagnosis and treatment plans are the dentist's responsibility. U.S. basis: O*NET-SOC 29-1292.00 is a single-occupation basis, with about 225,300 positions in 2025, projected growth of 8% in 2025—2035 (employment change +17,900), and about 15,000 openings per year on average over the projection period; in the May 2025 wage data the median annual wage is 98,100 USD (median hourly wage 47.16 USD) and the annual percentiles are 74,880／83,570／98,100／108,480／126,050 USD. Mainland China basis: there is no occupational classification corresponding one-to-one to this code; tooth cleaning (scaling) is a medical act that, under current provisions, should be performed by a registered oral medicine practicing physician or, under their guidance, an oral medicine assistant physician, and nurses must not perform scaling independently; the cleaning, disinfection and sterilization of dental instruments follows the mandatory health industry standard WS 506—2016, and taking dental radiographs also involves radiological diagnosis and treatment and Radiation Worker Certificate requirements. Mainland China's published statistics do not release occupation-level wages corresponding to this occupation, and this page retains the gap as it stands."
+    "summary": "Dental hygienists provide preventive care within their authorized scope: record gum and oral findings, clean teeth, explain oral hygiene and refer concerns to the dentist. Permitted procedures depend on local licensing and the workplace. In the U.S. an associate degree in dental hygiene is typical. Every state requires licensure, with state-specific rules. Mainland China’s oral health technician classification (2-05-07-17) is a task comparison, not a U.S. license equivalent or authorization to practice independently. Verify specific duties with the institution and local authority."
   }
 }

@@ -23380,13 +23380,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Those who like equipment observation and procedural discipline should first compare the actual tasks of the three sub-occupations and of the maintenance and engineering directions."
+              "Paper check | Sort three fictional handoff notes into generating equipment, power dispatch and reactor operations. For each, identify which role should confirm the information. "
             ]
           },
           "id": "power-plant-operators-distributors-and-dispatchers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "employer"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23677,13 +23676,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "The US combined group 2025 annual median is 105,080 US dollars; employment 43.7 thousand to 42.0 thousand, −4.0%, about 3.4 thousand average annual openings. Specific position duties and medians are verified separately."
+              "This group covers plant operation, power distribution and dispatch, and nuclear reactor operation. Plant operators focus on generating equipment, dispatchers monitor the distribution system, and reactor operators work under specialized site procedures. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "power-plant-operators-distributors-and-dispatchers.profile.definition-block.11",
           "source_refs": [
-            "ep",
-            "employer"
+            "transfer-onet-51-8012.00",
+            "transfer-onet-51-8013.00",
+            "transfer-onet-51-8011.00"
           ],
           "type": "prose"
         },
@@ -24855,13 +24855,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS explains that equipment and control room modernization and smart grids can automate some tasks; using generative tools to organize the three positions' logs is only a to-be-verified idea, with no job-level adoption or effect evidence. Nuclear, dispatch, and unit operation each follow their own position's training, procedures, and authorization. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Sort three fictional handoff notes into generating equipment, power dispatch and reactor operations. For each, identify which role should confirm the information."
             ]
           },
           "id": "power-plant-operators-distributors-and-dispatchers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor",
-            "employer"
+            "transfer-onet-51-8012.00",
+            "transfer-onet-51-8013.00",
+            "transfer-onet-51-8011.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32931,6 +32933,61 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-8012.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-8012.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-8012.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-8013.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-8013.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-8013.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-8011.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-8011.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-8011.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38214,10 +38271,10 @@
       "text": "Power Plant Operators, Distributors, and Dispatchers"
     }
   },
-  "source_content_sha256": "91e5643ed6b166da464edb05440e3fd42776ec80fe6cf33821928d4b270bcdfa",
+  "source_content_sha256": "8cfde11bb80276fbc8f9d3f7062c47d00f3e88352374fadf4cb29b35eca15c74",
   "subject": {
     "canonical_slug": "power-plant-operators-distributors-and-dispatchers",
     "name": "Power Plant Operators, Distributors, and Dispatchers",
-    "summary": "This page corresponds to the BLS SOC 51-8010 combined statistical group for power plant operators, distributors, and dispatchers, covering nuclear power reactor operators 51-8011, power distributors and dispatchers 51-8012, and power plant operators 51-8013. The three job types control nuclear reactors, coordinate power transmission and distribution, and run generating units respectively, and the combined group's wages or employment change cannot be treated as any single sub-occupation. Real equipment operation follows each organization's training and authorization."
+    "summary": "This group covers plant operation, power distribution and dispatch, and nuclear reactor operation. Plant operators focus on generating equipment, dispatchers monitor the distribution system, and reactor operators work under specialized site procedures."
   }
 }

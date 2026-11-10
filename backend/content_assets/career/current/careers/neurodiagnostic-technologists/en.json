@@ -188,6 +188,9 @@
       "item:neurodiagnostic-technologists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:neurodiagnostic-technologists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:neurodiagnostic-technologists.profile.definition-block.1": {
         "status": "pending_mapping"
       },
@@ -12986,6 +12989,21 @@
             "china-law-current"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The event log and test record differ by five minutes and have no clock-sync note. Preserve both times and identify who should verify the original device log."
+            ]
+          },
+          "id": "neurodiagnostic-technologists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check neurodiagnostic event times",
+          "type": "notice"
         }
       ]
     },
@@ -15595,6 +15613,13 @@
         "id": "neurodiagnostic-technologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "neurodiagnostic-technologists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15922,7 +15947,7 @@
       "text": "Neurodiagnostic technologists"
     }
   },
-  "source_content_sha256": "a2afb25e915d16150a2ddc32ff7e789f3cab49275d1988fe336cbc87ef5c8054",
+  "source_content_sha256": "6d8b1aab12813947fd4727efdbe380fc9e413d05cd521077182061859a14be84",
   "subject": {
     "canonical_slug": "neurodiagnostic-technologists",
     "name": "Neurodiagnostic technologists",

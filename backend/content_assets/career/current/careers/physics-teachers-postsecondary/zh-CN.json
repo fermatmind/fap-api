@@ -23371,13 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "路径：BLS将美国25-1054典型入职教育列为博士或专业学位；部分高校教学职位要求可能不同，具体看学校公告。"
+              "纸面体验｜给一份虚构实验报告设计两条评分标准，分别检查单位记录和论证是否能从数据推出。 "
             ]
           },
           "id": "physics-teachers-postsecondary.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "ep",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23666,14 +23665,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "定义：O*NET 25-1054包括以教学为主及教学与研究兼顾的高校物理教师。"
+              "高校物理教师把概念、推导和实验组织成课程，并用作业或实验报告评估学生能否用证据解释结果。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "physics-teachers-postsecondary.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "cnclass"
+            "transfer-onet-25-1054.00"
           ],
           "type": "prose"
         },
@@ -24778,15 +24775,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可辅助例题草稿、教学材料整理、概念解释候选和低风险练习反馈；教师仍须核物理正确性、学习目标、评分公平、学生隐私与实验安全。NIST生成式AI画像是风险治理资料，不提供25-1054岗位替代率。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：给一份虚构实验报告设计两条评分标准，分别检查单位记录和论证是否能从数据推出。"
             ]
           },
           "id": "physics-teachers-postsecondary.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-25-1054.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32660,6 +32655,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-25-1054.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 25-1054.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/25-1054.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37904,10 +37926,10 @@
       "text": "高校物理教师职业指南：教学任务、工资与入行路径"
     }
   },
-  "source_content_sha256": "78ba4e17affa2361a2fddc45ba5db24aa4133286ffd63a0b7355bf7ce395971a",
+  "source_content_sha256": "0a91378a29c280ac5463833a3d74120c399d7763e395344681178e2ee20dea13",
   "subject": {
     "canonical_slug": "physics-teachers-postsecondary",
     "name": "高校物理教师",
-    "summary": "高校物理教师（美国O*NET 25-1054）讲授大学物理课程，设计教学材料、实验与评价，辅导学生；有些岗位还承担研究、论文和项目。课程、学生学习与研究产出均须核对具体学校岗位。美国BLS 25-1054的工资和就业数不能当中国高校招聘或个人收入。"
+    "summary": "高校物理教师把概念、推导和实验组织成课程，并用作业或实验报告评估学生能否用证据解释结果。"
   }
 }

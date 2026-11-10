@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-roast-jixi": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-roast-taian": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -20127,60 +20133,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-2"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-3"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -20203,7 +20169,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -20231,7 +20197,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23564,7 +23530,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国薪资证据复核点｜本页美国数值来自 BLS OEWS May 2025 与 BLS 2024—2034 就业预测（经 O*NET 呈现）。使用前须确认其职业范围（SOC 51-3091）、是否含加班与福利（OEWS 不含），以及是否为全国口径而非某一地区或雇主。"
+              "美国工资为 2025 年 OEWS 全国职业估计；不含加班及福利，不能当成单个雇主的报价。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.profile.career-quick-answers-block.21",
@@ -23695,7 +23661,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国薪资证据—统计时期｜工资为 May 2025 OEWS；就业与增长与空缺为 2024—2034 就业预测。两类数据的参考时点不同，不得混用为同一时点的结论。"
+              "工资采用 2025 年 5 月 OEWS；就业、增长和空缺采用 2025–2035 年就业预测。两套数据的统计范围不同。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.profile.career-quick-answers-block.30",
@@ -24241,7 +24207,7 @@
                 "url": "https://www.onetonline.org/link/details/51-3091.00"
               },
               {
-                "entity": "O*NET呈现BLS2024—2034就业预测",
+                "entity": "BLS 2025–2035 年就业预测",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/51-3091.00"
@@ -24519,7 +24485,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET呈现BLS2024—2034就业预测"
+              "BLS 2025–2035 年就业预测"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.21",
@@ -25977,12 +25943,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业可核验招聘公告数值。"
+              "未核实可比的大陆年工资中位数"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -25991,12 +25958,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘样本位置未取得公告，不以US工资与投影代填。"
+              "单一报价不代表全国中位数。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26005,12 +25973,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业可核验招聘公告数值。"
+              "未核实可比的大陆第 10 分位"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26019,12 +25988,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘样本位置未取得公告，不以US工资与投影代填。"
+              "低端报价不能当作工资分位。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26033,12 +26003,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业可核验招聘公告数值。"
+              "未核实可比的大陆第 25 分位"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26047,12 +26018,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘样本位置未取得公告，不以US工资与投影代填。"
+              "不能用不同地区的两条广告估分位。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26061,12 +26033,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业可核验招聘公告数值。"
+              "未核实可比的大陆第 75 分位"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26075,12 +26048,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘样本位置未取得公告，不以US工资与投影代填。"
+              "该分位需要可比的工资分布。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26089,12 +26063,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业可核验招聘公告数值。"
+              "未核实可比的大陆第 90 分位"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26103,12 +26078,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘样本位置未取得公告，不以US工资与投影代填。"
+              "高端报价不是工资分位或上限。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26117,12 +26093,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业可核验招聘公告数值。"
+              "未核实可比的大陆全国就业人数"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26131,13 +26108,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘样本位置未取得公告，不以US工资与投影代填。"
+              "只核到招聘所列岗位，不外推就业人数。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet-summary",
-            "bls-matrix-methods"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26146,12 +26123,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业可核验招聘公告数值。"
+              "未核实可比的大陆就业增速"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26160,12 +26138,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘样本位置未取得公告，不以US工资与投影代填。"
+              "未核到同口径的就业预测序列。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26174,12 +26153,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业可核验招聘公告数值。"
+              "未核实可比的大陆预计年均空缺"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26188,12 +26168,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘样本位置未取得公告，不以US工资与投影代填。"
+              "公告人数不等于全国年均职位空缺。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "nbs-wages-2025"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26638,12 +26619,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "县域与下沉市场"
+              "大陆烤炉工与烘房招聘"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26652,12 +26634,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按城市或地区核验的本职业月薪数据；不以招聘报价、行业均值或他人转述代填。"
+              "泰安烘焙烤炉工列 3,500–5,500 元/月，并要求有效食品行业健康证。绩溪烘房岗位列 4,000–5,000 元，未注明计薪周期或设备。比较时问清是独立盯炉、辅助上下料还是轮岗，核对班制和报价；食品招聘不能外推烟草岗位。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -26694,7 +26677,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "当前2025—2035增长0.4%（基本不变）、年均空缺2500；旧2024—2034为历史。"
+              "看岗位是否负责独立盯炉、测样或只是上下料，再核报价、班制和培训。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.58",
@@ -26730,7 +26713,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET职业、工资与2024—2034预测｜https://www.onetonline.org/link/summary/51-3091.00；BLS职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；BLS就业矩阵资料方法｜https://www.bls.gov/emp/documentation/data-overview.htm"
+              "O*NET 职责｜https://www.onetonline.org/link/summary/51-3091.00；BLS职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；BLS就业矩阵资料方法｜https://www.bls.gov/emp/documentation/data-overview.htm"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.8",
@@ -26788,7 +26771,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜精确职业第10分位；边界｜原33250本轮未重新取得，OOH组合32100不能代填，不是新手、年龄或工时组。"
+              "口径｜精确职业第10分位；边界｜第 10 百分位表示工资分布低端，不是起薪。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.12",
@@ -26817,7 +26800,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜精确职业第25分位；边界｜原37540未重新取得，不是入职报价或经验组。"
+              "口径｜精确职业第25分位；边界｜第 25 百分位是下四分位，不能按工龄解读。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.14",
@@ -26845,7 +26828,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜精确职业第75分位；边界｜原50680未重新取得，不是资深或地区组。"
+              "口径｜精确职业第75分位；边界｜第 75 百分位是上四分位，不代表某地区或资深工人的工资。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.16",
@@ -26874,7 +26857,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜精确职业第90分位；边界｜原62680未重新取得，OOH组合57630不能代填，非总体上限或个人可达概率。"
+              "口径｜精确职业第90分位；边界｜第 90 百分位是工资分布高端，不是个人收入上限。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.18",
@@ -26888,7 +26871,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业 20,700 人（2024，BLS 职业投影基期，经 O*NET 呈现）"
+              "2025 年美国约 21,600 人"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.19",
@@ -26917,7 +26900,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 低于平均（约 1%–2%，2024—2034，BLS 投影，经 O*NET 呈现）"
+              "美国就业预计增长 0.4%（2025–2035 年）"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.21",
@@ -26945,7 +26928,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年均岗位空缺约 2,400 个（2024—2034，含替换需求）"
+              "美国预计年均约 2,500 个空缺（含替补需求）"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.23",
@@ -26959,7 +26942,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜旧2024—2034年均2400为历史；边界｜当前2025—2035年均2500含增长与替补，非净新增；OOH组合36600不能代填。"
+              "口径｜年均空缺含替补需求，不等于净新增、当前招聘量或十年合计；BLS 2025–2035 年就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.24",
@@ -26974,13 +26957,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "精确51-3091：May2025中位44810美元/年、21.54美元/时；2025就业21600，2025—2035增长0.4%（基本不变）、年均空缺2500；BLS典型无需正式学历、中期在岗培训。 共享旧预测保护留档；原精确分位与行业未重新取得。"
+              "美国 2025 年该职业年工资 10／25／50／75／90 分位分别为 33,250 / 37,540 / 44,810 / 50,680 / 62,680 美元。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27089,12 +27071,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前2025—2035增长0.4%（基本不变）、年均2500；旧2024—2034为历史。"
+              "BLS 预计美国 SOC 51-3091 就业由 2025 年约 21,600 人增至 2035 年约 21,700 人，增长 0.4%，年均约 2,500 个空缺（含替补需求）。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27271,13 +27253,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位非起薪，原精确分位未重新取得；分布不识别经验、班次或地区原因。"
+              "各分位描述工资分布，不能单独用来推断经验、班次或地区造成的差异。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "bls-oews-2025",
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27406,31 +27387,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "包装与灌装机器操作员方向",
@@ -27505,7 +27486,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS 职业就业预测 2024—2034",
+                "entity": "BLS 职业就业预测 2025–2035",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -28563,7 +28544,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS 职业就业预测 2024—2034",
+                "entity": "BLS 职业就业预测 2025–2035",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -29505,14 +29486,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本轮未取得本职业可核验中国公告；不认定全体职业经厂区或劳务渠道旺季招募。",
-              "核对建议｜查看招聘信息时应记录发布时间、地点、企业类型、用工形式（全职、轮班或季节工）、班次与时段补贴、是否需要健康证明或培训记录，以及设备类型与防护用品安排；这些信息比页面往往更能反映真实条件。"
+              "用两则招聘比较工位职责、培训与计薪方式；当前空缺以最新招聘为准。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "roast-taian",
+            "roast-jixi"
           ],
           "title": "如何读取招聘公告",
           "type": "notice"
@@ -29535,7 +29515,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS 职业就业预测 2024—2034",
+                "entity": "BLS 职业就业预测 2025–2035",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -30713,7 +30693,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS 职业就业预测 2024—2034",
+                "entity": "BLS 职业就业预测 2025–2035",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -30794,7 +30774,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确51-3091：May2025中位44810美元/年、21.54美元/时；2025就业21600，2025—2035增长0.4%（基本不变）、年均空缺2500；BLS典型无需正式学历、中期在岗培训。 旧2024—2034共享事实保护；中国工资招聘及精确分位/行业未重取。"
+              "美国 BLS 预计 2025–2035 年该职业就业基本持平，增长 0.4%。查看本地机会时，比较设备种类、独立操作责任和轮班。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.market-signals.market-signal-card.8",
@@ -30937,12 +30917,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位非起薪，原精确分位未重取，不能由跨度推地区、班次或经验主因。"
+              "中位数不是起薪；实际报价还要核班次、地区与工作分工。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.market-signals.market-signal-card.18",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025",
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -30994,12 +30976,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位44810美元/年、21.54美元/时已核；原33250/37540/50680/62680分位未重取。"
+              "美国工资使用该职业的全国 OEWS 统计；大陆招聘是两个雇主的历史报价。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025",
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -31520,13 +31504,12 @@
           "data": {
             "entries": [
               {
-                "answer": "按 O*NET-SOC 51-3091.00，本职业操作或看护食品或烟草的烘焙、烘烤与干燥设备，包括烤炉、窑式干燥机、烘焙机、炭窑与真空干燥设备。工作包括按工单核对品种与目标水分、设定并启动温度与时间控制、监控温度湿度与压力并调节阀门与进料、观察物料流量与设备声响、取样并用水分仪测水分与核对色泽口感、记录产量与参数并清洁设备。不含配方决定、熟制食品制作、混合与搅拌、包装与灌装。",
+                "answer": "按工单用烤炉、烘干机等设备处理食品或烟草，观察温湿度和样品，记录加工时间、温度、数量和批次。部分岗位还取样测含水率。",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q1",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "onet-summary"
                 ]
               },
               {
@@ -31540,7 +31523,7 @@
                 ]
               },
               {
-                "answer": "2025 年中位年薪 44,810 美元（中位时薪 21.54 美元）；2024 年就业约 20,700 人（BLS 职业投影基期）；2024—2034 年预计增长低于平均（约 1%–2%），年均岗位空缺约 2,400 个（含替换需求）。上述为美国 O*NET/BLS 口径，不适用其他法域。",
+                "answer": "美国 2025 年职业工资中位数为 21.54 美元/小时、44,810 美元/年。 BLS 预计美国 SOC 51-3091 就业由 2025 年约 21,600 人增至 2035 年约 21,700 人，增长 0.4%，年均约 2,500 个空缺（含替补需求）。",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q3",
@@ -31550,13 +31533,13 @@
                 ]
               },
               {
-                "answer": "本页所核中国资料未取得与本职业精确对应的职业工资统计。国家统计局按行业门类公布城镇单位就业人员平均工资（如制造业：城镇非私营 113,594 元/年、城镇私营 76,055 元/年），属行业口径、不区分职业，只能作为背景代理；本页在中国大陆部分保留「证据不足：」可见标记，不以行业均值、招聘报价或第三方估算代填。",
+                "answer": "泰安烘焙烤炉工列 3,500–5,500 元/月，并要求有效食品行业健康证。绩溪烘房岗位列 4,000–5,000 元，未注明计薪周期或设备。比较时问清是独立盯炉、辅助上下料还是轮岗，核对班制和报价；食品招聘不能外推烟草岗位。",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.4",
                 "question": "中国大陆有对应的工资数据吗？",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q4",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "roast-taian",
+                  "roast-jixi"
                 ]
               },
               {
@@ -31581,13 +31564,13 @@
                 ]
               },
               {
-                "answer": "O*NET 显示该职业通常要求高中或同等学历（61% 受访者），23% 认为低于高中即可，11% 认为需要上过大学但未获学位，并通过在职培训掌握技能（Job Zone 1-2，SVP 低于 6.0）。实际以雇主招聘条件与设备要求为准。",
+                "answer": "BLS 列美国该职业典型入行不要求正规学历凭证，通常有中期在岗训练。具体单位可要求经验、食品健康证明或岗位培训，先核招聘和实际设备。",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q7",
                 "source_refs": [
-                  "onet-summary",
-                  "bls-projections-2025-35"
+                  "bls-projections-2025-35",
+                  "roast-taian"
                 ]
               },
               {
@@ -31611,7 +31594,7 @@
                 ]
               },
               {
-                "answer": "美国口径下 2024—2034 年预计增长低于平均（约 1%–2%），空缺含替换需求；预测不等于个人机会，实际机会取决于本地食品与烟草加工结构与自动化程度。可转向食品批量制作、烹饪机器操作、混合搅拌、包装灌装、面包师与检验取样等相邻岗位（需重新学习工艺与设备），或转向设备维护与生产管理。",
+                "answer": "BLS 预计美国 SOC 51-3091 就业由 2025 年约 21,600 人增至 2035 年约 21,700 人，增长 0.4%，年均约 2,500 个空缺（含替补需求）。 如果更偏配方称量，比较食品配料工；偏蒸煮、油炸等任务，比较食品热加工设备操作员。",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q10",
@@ -31636,7 +31619,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对 O*NET-SOC 51-3091.00 的职业范围、任务与工作情境，再取 BLS OEWS May 2025 与 BLS 2024—2034 就业预测的工资与就业数据，最后以国家统计局 2025 年行业门类平均工资（制造业）作为中国大陆的背景代理；美国与中国大陆数据分别列示，不拼接、不换算。"
+              "O*NET 描述任务；BLS 的 2025 年工资和 2025–2035 年就业预测是美国职业数据；大陆公告是具体招聘样本。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.sources.source-card.1",
@@ -31666,17 +31649,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮查阅2026-10-11；核实O*NET任务、情境、RC、JobZone1—2与教育61/23/11，当前中位及2025—2035预测；食品安全法44/45条实际范围仍有效。原精确分位和NBS制造业图表值未重取。"
+              "原证按用途查看：O*NET 核职业范围，BLS 核美国工资与就业，大陆原公告核招聘职责和报价。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.sources.source-card.3",
           "source_refs": [
             "onet-summary",
-            "onet-details",
-            "bls-matrix-methods",
-            "ilo-wp96",
-            "nist-ai-rmf",
-            "cn-food-safety-law"
+            "bls-oews-2025",
+            "bls-projections-2025-35",
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         },
@@ -31685,15 +31667,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮九模块作者修订，待独立复核。精确51-3091：May2025中位44810美元/年、21.54美元/时；2025就业21600，2025—2035增长0.4%（基本不变）、年均空缺2500；BLS典型无需正式学历、中期在岗培训。 RC、JobZone1—2、教育61/23/11及主要情境保留，重复任务47%档位改非常重要；中国招聘US代填和分位绑定纠正。设备异常不能先违规疏堵，目录不赋维修放行权。保护Hero/FAQ/练习与共享旧预测留档；精确分位/行业、中国工资招聘及制造业图表未重取，人格效度/AI效果和完整设备粉尘安全规则未核。食品安全法44/45不扩大到全部烟草设备人员。未HTML、独立复核、Git或发布。"
+              "美国就业预测与工资统计覆盖不同；大陆两条招聘不支持全国估计或个人录用结论。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.sources.source-card.4",
           "source_refs": [
-            "onet-summary",
             "bls-oews-2025",
-            "nbs-wages-2025",
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "roast-taian",
+            "roast-jixi"
           ],
           "type": "prose"
         }
@@ -31717,25 +31699,13 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI（英文）",
-                "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（英文）",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI（中文）",
+                "entity": "MBTI",
                 "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five（中文）",
+                "entity": "大五人格",
                 "id": "navigation-5",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
@@ -31778,7 +31748,7 @@
                 "period": "2026 occupational profile",
                 "publisher": "O*NET Resource Center",
                 "scope": "exact occupation",
-                "url": "https://www.onetonline.org/link/summary/51-3091.00"
+                "url": "https://www.onetonline.org/link/details/51-3091.00"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31796,20 +31766,19 @@
                 "url": "https://www.onetonline.org/link/details/51-3091.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "表中 51-3091 行：2024 年就业约 20.7 千，增长低于平均（约 1%–2%），年均空缺约 2.4 千。",
-                  "预测是职业层面的统计口径，不是个人录用概率。"
+                  "BLS 预计美国 SOC 51-3091 就业由 2025 年约 21,600 人增至 2035 年约 21,700 人，增长 0.4%，年均约 2,500 个空缺（含替补需求）。"
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
-                "limitation": "2024—2034预测非实际结果；矩阵包括自雇，不能套OEWS工资覆盖。",
+                "limitation": "2025–2035预测非实际结果；矩阵包括自雇，不能套OEWS工资覆盖。",
                 "market": "US",
-                "name": "O*NET呈现BLS精确51-3091的2024—2034预测",
-                "period": "2024—2034",
+                "name": "BLS 51-3091 2025–2035 年就业预测",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "51-3091 Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders",
-                "url": "https://www.onetonline.org/link/summary/51-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31825,7 +31794,7 @@
                 "period": "May 2025 OEWS",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "51-3091 Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders",
-                "url": "https://www.bls.gov/news.release/archives/ocwage_05152026.pdf"
+                "url": "https://www.onetonline.org/link/localwages/51-3091.00"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31949,6 +31918,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第5家企业的烘焙烤炉工列3,500–5,500元/月，要求持有效食品行业健康证；包装和加工另列。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "roast-taian",
+                "limitation": "一则历史招聘；不表示仍在招聘或可代表全国。",
+                "market": "中国大陆",
+                "name": "山东泰山食品集团：烘焙烤炉工",
+                "period": "2026-05",
+                "publisher": "泰安市人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.taian.gov.cn/art/2026/5/9/art_167727_10321382.html?xxgkhide=1"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第十家企业第7岗烘房4人，待遇4,000–5,000元；未标薪资周期和设备。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "roast-jixi",
+                "limitation": "一则历史招聘；不表示仍在招聘或可代表全国。",
+                "market": "中国大陆",
+                "name": "安徽味鲜食品：烘房",
+                "period": "2026-08",
+                "publisher": "绩溪县华阳镇人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.cnjx.gov.cn/Jczwgk/show/3808494.html"
               }
             ]
           },
@@ -34809,6 +34808,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-roast-taian",
+            "posting-roast-jixi"
+          ],
           "sources_note": {
             "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34818,7 +34821,7 @@
           "ui": {
             "ai_heading": "AI 会影响食品与烟草烘烤、烘焙与干燥设备操作与看护员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "食品与烟草烘烤、烘焙与干燥设备操作与看护员在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35842,7 +35845,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测表（2024—2034）",
+            "label": "BLS 就业预测表（2025–2035）",
             "secondary_value": null,
             "value": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.profile.onet-structured-fields-block.4",
@@ -36607,7 +36610,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "开始核对食品与烟草烘烤、烘焙与干燥设备操作与看护员是否适合你",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36681,30 +36684,10 @@
               "$link": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.navigation.links.1",
               "block": "navigation",
               "copy_key": "career.item.navigation-links",
-              "entry": "navigation-2",
-              "field": "url"
-            },
-            "label": "MBTI（英文）"
-          },
-          {
-            "href": {
-              "$link": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-3",
-              "field": "url"
-            },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "了解我的人格偏好"
           },
           {
             "href": {
@@ -36714,7 +36697,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "了解我的大五特质"
           }
         ]
       },
@@ -36913,41 +36896,38 @@
       },
       {
         "derivation": null,
-        "display_value": "约20,700人（2024，BLS预测基期经O*NET呈现；就业矩阵包括自雇）",
+        "display_value": "21,600 人（2025 年）",
         "fact_id": "us-employment-2025",
         "market": "US",
-        "measure": "就业规模",
-        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
-        "period": "2024",
+        "measure": "美国基期就业（2025 年）",
+        "occupation_scope": "U.S. SOC 51-3091",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary",
-          "bls-matrix-methods"
+          "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "增长 低于平均（约 1%–2%，2024—2034，BLS 投影，经 O*NET 呈现）",
+        "display_value": "0.4% (2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
-        "measure": "就业增长率",
-        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
-        "period": "2024—2034",
+        "measure": "美国就业预测（2025–2035 年）",
+        "occupation_scope": "U.S. SOC 51-3091",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary",
-          "bls-matrix-methods"
+          "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均岗位空缺约 2,400 个（2024—2034，主要来自替换需求）",
+        "display_value": "年均 2,500 个（含替补需求）",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
-        "measure": "年均职位空缺",
-        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
-        "period": "2024—2034",
+        "measure": "美国预计年均职位空缺（2025–2035 年）",
+        "occupation_scope": "U.S. SOC 51-3091",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary",
-          "bls-matrix-methods"
+          "bls-projections-2025-35"
         ]
       },
       {
@@ -37105,6 +37085,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第5家企业的烘焙烤炉工列3,500–5,500元/月，要求持有效食品行业健康证；包装和加工另列。",
+        "fact_id": "posting-roast-taian",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "山东泰山食品集团：烘焙烤炉工",
+        "period": "2026-05",
+        "source_refs": [
+          "roast-taian"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第十家企业第7岗烘房4人，待遇4,000–5,000元；未标薪资周期和设备。",
+        "fact_id": "posting-roast-jixi",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "安徽味鲜食品：烘房",
+        "period": "2026-08",
+        "source_refs": [
+          "roast-jixi"
+        ]
       }
     ]
   },
@@ -37131,19 +37135,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国就业规模（2024 投影基期）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均空缺（2024—2034）"
+        "label": "美国预计年均职位空缺（2025–2035 年）"
       },
       {
         "availability": "available",
@@ -37157,14 +37161,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "食品与烟草烘烤、烘焙与干燥设备操作与看护员做什么、如何入行、工作边界与发展方向。基于官方职业资料，区分职业统计、行业代理和资格缺口。"
+      "text": "食品与烟草烘烤干燥设备操作员怎样看温湿度、查样品和记批次？对照大陆烤炉工招聘与美国就业数据。"
     },
     "title": {
       "availability": "available",
       "text": "食品与烟草烘烤、烘焙与干燥设备操作与看护员"
     }
   },
-  "source_content_sha256": "9397b94fcddc15645bee99c8eb9f8ae3c44c18b2f20a44ccffd23a45feafa8cc",
+  "source_content_sha256": "d6a84e3fe5603fe7624c69fa4377269210606a0267010ef7af43af49bdee43eb",
   "subject": {
     "canonical_slug": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders",
     "name": "食品与烟草烘烤、烘焙与干燥设备操作与看护员",

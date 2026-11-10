@@ -23654,13 +23654,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "You can start by observing whether you are willing to check data, set priorities, take in team and customer constraints and explain planning trade-offs. Management is not just working out the lowest price; it also includes responsibility for people, service, safety and compliance."
+              "Paper check | Compare a fictional receiving sheet with a shipping schedule. Flag a conflict between the arrival and release dates for a batch and name the team that should review it. "
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.fermat_decision_card.summary",
           "source_refs": [
-            "bls-ooh",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24753,13 +24752,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Transportation, storage and distribution managers plan, coordinate and supervise transportation, inventory and distribution activities under organisational policy and applicable law, manage people, budget, service and safety performance, and handle anomalies with other departments and partners. The management scope varies with the post."
+              "Transportation, storage and distribution managers coordinate receiving, storage, shipping and staff. They also monitor equipment or warehouse conditions that can affect where goods go and when they arrive. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh"
+            "transfer-onet-11-3071.00"
           ],
           "type": "prose"
         }
@@ -25403,12 +25401,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate technical capability, actual adoption and employment outcomes. Text assistance can serve as a draft pending verification, and transport and inventory automation must be verified against the specific system and site; the external materials used here supply no measured occupational task-level score and fills in a separate FermatMind editorial estimate, without a personal probability of unemployment. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional receiving sheet with a shipping schedule. Flag a conflict between the arrival and release dates for a batch and name the team that should review it."
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial"
+            "transfer-onet-11-3071.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32568,6 +32567,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-11-3071.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 11-3071.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/11-3071.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38074,10 +38100,10 @@
       "text": "Transportation, storage and distribution managers"
     }
   },
-  "source_content_sha256": "ae74f82795cf261db4a00196514fd410813f645251390327a373c7295031131e",
+  "source_content_sha256": "92b97094c68ee3eab6e1b430e2e95c1bd62897e8e60d38d17f12ef4521295fe5",
   "subject": {
     "canonical_slug": "transportation-storage-and-distribution-managers",
     "name": "Transportation, storage and distribution managers",
-    "summary": "Transportation, storage and distribution managers coordinate the movement of goods, inventory, people and budget and track service, safety and operating performance. This page uses United States 11-3071.00 as the baseline and distinguishes transport and warehousing management, relevant experience and post authority; a fictional planning exercise is used to experience the capacity, deadline and cost trade-offs."
+    "summary": "Transportation, storage and distribution managers coordinate receiving, storage, shipping and staff. They also monitor equipment or warehouse conditions that can affect where goods go and when they arrive."
   }
 }

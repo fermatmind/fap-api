@@ -22951,7 +22951,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "The core of robotics engineering is turning task requirements into a verifiable robotic system: check the use scenario and safety constraints, design mechanical, electrical, sensor, and control solutions, and build and test a prototype. Running code does not mean the system can be released in a staffed environment."
+              "Ask about the role’s mechanical, controls, or integration focus, plus test and design approval responsibilities."
             ]
           },
           "id": "robotics-engineers.quick-decision.fit-decision-checklist.1",
@@ -22966,7 +22966,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "It shares some design and testing methods with electrical, hardware, manufacturing, and aerospace engineers, but robotics positions focus especially on perception, actuation, control, and whole-machine integration. Robotics technicians focus on assembly, testing, and maintenance, and engineering design responsibility is checked separately."
+              "In section 09, “Entry, qualifications, and career development,” try RB-E01: Compare two prototype test records. Save a first draft before checking the key."
             ]
           },
           "id": "robotics-engineers.quick-decision.fit-decision-checklist.2",
@@ -22980,7 +22980,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "AI can help find documentation, generate code drafts, and propose test cases; interfaces, sensors, control logic, failure states, and on-site safety must be verified against real equipment and experimental data and cannot be approved automatically from generated output."
+              "This work may suit you if you like turning requirements into reproducible tests, resolving trade-offs, and keeping version records."
             ]
           },
           "id": "robotics-engineers.quick-decision.fit-decision-checklist.3",
@@ -22996,7 +22996,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Before entering a position, check the target robot type, hardware and software division of labor, experimental conditions, functional safety responsibility, physical machine operation authorization, and delivery standards. Fictional debugging exercises only train gap-finding and must not be used on real equipment."
+              "Keep requirements, test conditions, and approval separate. Record the evidence for each limit."
             ]
           },
           "id": "robotics-engineers.quick-decision.fermat-decision-card.6",
@@ -23011,7 +23011,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "US robotics engineers 17-2199.08 has no separately listed 2025 wage or 2025—2035 employment; O*NET cites the other engineers 17-2199 parent occupation median of 122,930 USD, and BLS shows parent occupation growth of 3.7% with about 8,800 average annual openings. A precise Chinese occupational wage was not obtained."
+              "This work may suit you if you like turning requirements into reproducible tests, resolving trade-offs, and keeping version records."
             ]
           },
           "id": "robotics-engineers.quick-decision.fermat-decision-card.7",
@@ -27377,31 +27377,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Electronics engineers",
@@ -29133,7 +29133,7 @@
                 "values": [
                   "Education and fundamentals",
                   "The BLS parent occupation's typical entry is a bachelor's degree; specific robotics sub-occupation requirements are set by the employer.",
-                  "Check the real duties in control, mechanical, electrical, software, and testing."
+                  "The Changsha graduate posting lists motion control, software, mechanical design, and hardware tracks."
                 ]
               },
               {
@@ -29156,8 +29156,8 @@
                 "id": "tools",
                 "values": [
                   "Collaboration and records",
-                  "Reproducible information must be shared with technicians, the application side, and safety personnel.",
-                  "Check whether the next person can reproduce the problem from the record."
+                  "In section 09, “Entry, qualifications, and career development,” try RB-E01: Compare two prototype test records. Save a first draft before checking the key.",
+                  "Keep requirements, test conditions, and approval separate. Record the evidence for each limit."
                 ]
               }
             ]
@@ -29166,7 +29166,9 @@
           "source_refs": [
             "bls",
             "onet",
-            "editor"
+            "editor",
+            "cn-d010-main",
+            "cn-d010-context"
           ],
           "title": "What do employers usually look for in hiring?",
           "type": "cards"
@@ -29179,37 +29181,35 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Exercise settings｜all fictional, with no connection to real equipment",
-                  "You are a supervised robotics systems learner. Only check information and test evidence, and do not generate physical machine motion commands.",
-                  "A1｜the requirements document requires operation in a passage where people are present; the risk assessment, permitted speed, and stop conditions are not given.",
-                  "A2｜the sensor log is marked with the 2026-09-01 calibration version, while the equipment list states 2026-09-14; the two are inconsistent.",
-                  "A3｜the control program commit number differs from the test report commit number, and the report records only normal, with no failure scenarios.",
-                  "A4｜the demonstration passed in an empty area, but the customer requires entering a real space with obstacles and foot traffic.",
-                  "A5｜engineers may list issues and recommendations; physical machine expansion, parameter changes, and deployment are approved by the authorized team."
+                  "Fictional inputs",
+                  "A fictional test bench uses the same load, script, and instrument. The approved gate for the next stage requires a mean cycle of at most 10 seconds and a maximum absolute position error of at most 1.6 mm. Review the records only.",
+                  "V1 cycle times are 10, 11, and 10 seconds. Its absolute errors are 1.2, 1.5, and 1.4 mm. V2 cycle times are 9, 9, and 10 seconds. Its absolute errors are 1.4, 1.7, and 1.8 mm.",
+                  "The records cover no other load and contain no site safety or test-expansion approval. The test lead reviews the results and the project lead authorizes the next stage."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task one: mark the items that cannot be released",
-                  "List A1 unclear personnel exposure conditions, A2 calibration conflict, A3 version inconsistency, and A4 scenario extrapolation; write the status as pause expansion.",
-                  "Do not fabricate speed, control parameters, or safety certification."
+                  "Task and deliverable",
+                  "Submit a comparison of the two versions. Calculate the mean cycle time and maximum error, apply both limits, and propose a follow-up comparison.",
+                  "Distinguish observations, inferences, and approvals. Keep three trials at one load separate from field performance."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Task two: write review and handover",
-                  "List by issue, original information, version, test conditions, responsible person, evidence to obtain, and status.",
-                  "Request a safety assessment, unified calibration and code versions, and a test plan for a scenario with pedestrian traffic.",
-                  "Clearly distinguish submitted, reviewed, and approved."
+                  "Before checking your work",
+                  "Save your draft before checking the key after the seven-day plan.",
+                  "Work independently.",
+                  "Keep the versions."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Safety boundary",
-                  "The exercise lacks actual equipment and safety parameters and cannot produce operating instructions."
+                  "Authority boundaries",
+                  "Use the fictional records only.",
+                  "Do not approve or release real work."
                 ]
               }
             ]
@@ -29218,7 +29218,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: fault localization in a fictional robotic system",
+          "title": "RB-E01 | Compare two prototype test records",
           "type": "cards"
         },
         {
@@ -29229,33 +29229,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Requirements and risk card",
-                  "Annotate the A1 requirement for operation in a passage where people are present and the missing risk assessment.",
-                  "Others can see the stop conditions that were not obtained."
+                  "Versions and conditions",
+                  "Record the common load, script, and instrument.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Configuration comparison table",
-                  "List A2 calibration version and A3 program commit number and report version side by side.",
-                  "Pass results from different versions cannot be merged."
+                  "Threshold check",
+                  "Show calculations and apply both limits to each version.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Failure scenario list",
-                  "List the differences between the A4 empty area and the real site and propose items to verify.",
-                  "Do not write a successful demonstration as on-site safety."
+                  "Follow-up test plan",
+                  "List controlled variables and the follow-up sampling plan.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Handover and approval chain",
-                  "Record who may review and who may approve expansion and deployment in A5.",
-                  "Status must be clear as to person and time."
+                  "Approval boundaries",
+                  "Name the test reviewer and who authorizes expansion.",
+                  "Use the supplied records."
                 ]
               }
             ]
@@ -29286,27 +29286,27 @@
             "rows": [
               [
                 "Requirement follow-up",
-                "What to do when the requirement for a passage where people are present is unclear",
-                "Can point out gaps in risk and stop conditions",
-                "An interview question cannot grant equipment permissions"
+                "Record the common load, script, and instrument.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Configuration checking",
-                "How to handle a calibration and program version conflict",
-                "Can pause and check the original records",
-                "Does not fabricate which version is correct"
+                "Show calculations and apply both limits to each version.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Test design",
-                "Can an empty area pass be used to enter a real site",
-                "Can distinguish scenarios and coverage",
-                "Deployment requires separate approval"
+                "List controlled variables and the follow-up sampling plan.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Handover retrospective",
-                "How to hand over residual defects",
-                "Can list conditions, responsible persons, and evidence to obtain",
-                "A single exercise does not predict long-term performance"
+                "Name the test reviewer and who authorizes expansion.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ]
             ]
           },
@@ -29326,50 +29326,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day one",
-                  "Read A1 and annotate use scenario and safety requirement gaps."
+                  "Day 1",
+                  "Record the subject and versions."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day two",
-                  "Read A2 and build a calibration version comparison table."
+                  "Day 2",
+                  "Record the common load, script, and instrument."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day three",
-                  "Read A3 and check whether programs, reports, and hardware configuration correspond."
+                  "Day 3",
+                  "Show calculations and apply both limits to each version."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day four",
-                  "Read A4 and list the conditions that an empty area demonstration cannot extrapolate."
+                  "Day 4",
+                  "List controlled variables and the follow-up sampling plan."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day five",
-                  "Per A1—A5, write the review and approval chain and keep the pause-expansion status."
+                  "Day 5",
+                  "Name the test reviewer and who authorizes expansion."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day six",
-                  "Ask someone familiar with system verification to review the simulated material and record comments."
+                  "Day 6",
+                  "Finish the handoff before checking the key and rubric below, then make one revision. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day seven",
-                  "Keep the drafts and revisions and run a retrospective on omissions and reproduction quality."
+                  "Day 7",
+                  "Organize your four practice outputs. Keep the source records and review status."
                 ]
               }
             ]
@@ -29386,20 +29386,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Record each unknown item in A1—A5 and the location of the original material.",
-              "Check whether the calibration conflict was guessed as one version being correct.",
-              "Check whether the program commit number and the test report were mixed up.",
-              "Check whether the empty area demonstration was treated as verification at a site where people are present.",
-              "Confirm that the deployment decision always stays in the authorization chain.",
-              "Record whether you are willing to check problems across mechanical, electrical, and software.",
-              "The exercise is for career exploration only and is not an equipment operating qualification."
+              "V1 averages 31/3≈10.33 seconds, above 10 seconds. Its maximum absolute error is 1.5 mm, within 1.6 mm.",
+              "V2 averages 28/3≈9.33 seconds, within the limit. Its maximum absolute error is 1.8 mm, above 1.6 mm.",
+              "Each version misses one limit. The faster cycle alone cannot justify advancing V2, and three trials do not identify the cause.",
+              "Verify the instrument, script, and versions before repeating trials at the same load and conditions. Change load separately in a follow-up comparison.",
+              "Send the records, calculations, and unobserved conditions to the test lead. Leave stage approval with the project lead. The exercise produces a recommendation only.",
+              "Score each item 0–2: version and evidence, item-by-item decisions, unknown scope, and approval and handoff.",
+              "Award 2 for complete and traceable work, 1 for partial work, and 0 for missing evidence or exceeding authority."
             ]
           },
           "id": "robotics-engineers.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide at the end of seven days whether to continue",
+          "title": "Answer key and self-check rubric",
           "type": "list"
         },
         {
@@ -29514,16 +29514,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Certificates, education, and equipment operating authorization are verified separately. A comparable recruitment sample, specific qualification bodies, and vendor authorization materials for this position in China have not been obtained, so no uniform certificate or starting pay threshold can be given.",
-              "A certificate catalogue can serve only as a search entry point; formal qualifications, employer authorization, and equipment permissions must each be checked."
+              "The Changsha graduate posting lists motion control, software, mechanical design, and hardware tracks.",
+              "This posting covers the design, implementation, and debugging of robot motion-control algorithms. It illustrates one engineering specialty."
             ]
           },
           "id": "robotics-engineers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "cn-d010-main",
+            "cn-d010-context"
           ],
           "title": "Recruitment sample note",
           "type": "notice"
@@ -31557,13 +31555,15 @@
                 ]
               },
               {
-                "answer": "The BLS parent occupation's typical entry is a bachelor's degree, but this is not a uniform statutory threshold for the robotics sub-occupation; specific employer conditions are checked separately.",
+                "answer": "The BLS parent occupation's typical entry is a bachelor's degree, but this is not a uniform statutory threshold for the robotics sub-occupation; specific employer conditions are checked separately. The Changsha graduate posting lists motion control, software, mechanical design, and hardware tracks. This posting covers the design, implementation, and debugging of robot motion-control algorithms. It illustrates one engineering specialty.",
                 "id": "robotics-engineers.faq.3",
                 "question": "Is a bachelor's degree required to enter the field?",
                 "question_key": "career.faq.robotics-engineers.q3",
                 "source_refs": [
                   "onet",
-                  "editor"
+                  "editor",
+                  "cn-d010-main",
+                  "cn-d010-context"
                 ]
               },
               {
@@ -31605,7 +31605,7 @@
                 "question_key": "career.faq.robotics-engineers.credentials"
               },
               {
-                "answer": "Use only fictional requirements, interface tables, and logs to mark version conflicts, test coverage, and the authorization chain; do not connect to real equipment.",
+                "answer": "In section 09, “Entry, qualifications, and career development,” try RB-E01: Compare two prototype test records. Save a first draft before checking the key.",
                 "id": "robotics-engineers.faq.9",
                 "question": "How can system judgment be practiced?",
                 "question_key": "career.faq.robotics-engineers.risk-boundary"
@@ -31626,7 +31626,9 @@
             "nbs",
             "privacy",
             "editor",
-            "editor"
+            "editor",
+            "cn-d010-main",
+            "cn-d010-context"
           ],
           "type": "faq"
         },
@@ -31725,13 +31727,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the robotics engineers career page",
@@ -31953,8 +31955,8 @@
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "FermatMind fictional robotics debugging exercises: used only within the scope of application above.",
-                  "Fictional exercises, not equipment debugging instructions or proof of qualification."
+                  "RB-E01 is a fictional paper exercise.",
+                  "Keep requirements, test conditions, and approval separate. Record the evidence for each limit."
                 ],
                 "evidence_type": "Editorial summary",
                 "id": "editor",
@@ -32190,6 +32192,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The Changsha graduate posting lists motion control, software, mechanical design, and hardware tracks."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-d010-main",
+                "limitation": "For task and pathway comparison.",
+                "market": "Mainland China",
+                "name": "Zoomlion robotics R&D engineer",
+                "period": "Date shown in source",
+                "publisher": "Zoomlion robotics R&D engineer",
+                "scope": "recruitment_proxy",
+                "url": "https://career.nankai.edu.cn/correcruit/content/id/116863.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "This posting covers the design, implementation, and debugging of robot motion-control algorithms. It illustrates one engineering specialty."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-d010-context",
+                "limitation": "For task and pathway comparison.",
+                "market": "Mainland China",
+                "name": "Haozhi motion control algorithm engineer",
+                "period": "Date shown in source",
+                "publisher": "Haozhi motion control algorithm engineer",
+                "scope": "contextual",
+                "url": "https://career.hebut.edu.cn/home/correcruit/content/id/80506.html"
               }
             ]
           },
@@ -36884,7 +36916,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests fit robotics engineers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37431,14 +37463,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Robotics engineer introduction: system design, sensors and control, integration testing, AI assistance boundaries, the US 17-2199 parent occupation wage and employment basis, Chinese manufacturing wage background, and fictional debugging exercises."
+      "text": "Robotics engineers design, integrate, and validate robotic systems. Compare role paths, broader U.S. data, and a prototype test exercise."
     },
     "title": {
       "availability": "available",
       "text": "Robotics Engineers"
     }
   },
-  "source_content_sha256": "61b0eddf6ff5e711905ca1c9ad0161c255d8f494330a3d0441d40fa7711fd43f",
+  "source_content_sha256": "e863c6c36c6f3785ef0e495386b7d683b9efd30782a24bd2a2379b2e4890a04c",
   "subject": {
     "canonical_slug": "robotics-engineers",
     "name": "Robotics Engineers",

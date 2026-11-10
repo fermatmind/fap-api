@@ -143,6 +143,9 @@
       "item:mobile-heavy-equipment-mechanics-except-engines.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:mobile-heavy-equipment-mechanics-except-engines.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:mobile-heavy-equipment-mechanics-except-engines.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13218,6 +13221,21 @@
             "onet-cert"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Excavator H3 is reported to have slow hydraulic movement. The handover includes a leak photo with no machine ID. Separate the recorded symptom from the unverified photo and write a question for the maintenance lead."
+            ]
+          },
+          "id": "mobile-heavy-equipment-mechanics-except-engines.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Hand over a heavy equipment fault",
+          "type": "notice"
         }
       ]
     },
@@ -15653,6 +15671,13 @@
         "id": "mobile-heavy-equipment-mechanics-except-engines.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mobile-heavy-equipment-mechanics-except-engines.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15810,7 +15835,7 @@
       "text": "Mobile Heavy Equipment Mechanics: Work, U.S. Wages, and Safety"
     }
   },
-  "source_content_sha256": "1be9ad0b40f68c35f8306be9e63ece46d7ad1b00e86a3ebe772b63ea2bf99564",
+  "source_content_sha256": "beeb4b8e002c9e1161740dab1eab9c0bf9973755cb2f8db2577a8c050932dd9b",
   "subject": {
     "canonical_slug": "mobile-heavy-equipment-mechanics-except-engines",
     "name": "Mobile heavy equipment mechanics",

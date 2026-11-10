@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a55-beijing": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a55-shanghai": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:facilities-managers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:facilities-managers.sources.source-card.1": {
         "status": "mapped"
@@ -15901,8 +15907,14 @@
         "status": "unfilled"
       },
       "interface.outlook.evidence_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.outlook.evidence_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.outlook.evidence_limitation_label": {
         "ref": null,
@@ -20183,60 +20195,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "facilities-managers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "facilities-managers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -21060,81 +21032,24 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.06.accessed_at": {
-        "ref": {
-          "id": "facilities-managers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cnclass"
-            },
-            "accessed_at"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.06.details.01": {
-        "ref": {
-          "id": "facilities-managers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cnclass"
-            },
-            "details",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.06.details.02": {
-        "ref": {
-          "id": "facilities-managers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cnclass"
-            },
-            "details",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.06.evidence_type": {
-        "ref": {
-          "id": "facilities-managers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cnclass"
-            },
-            "evidence_type"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.06.limitation": {
-        "ref": {
-          "id": "facilities-managers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cnclass"
-            },
-            "limitation"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.06.market": {
         "ref": {
@@ -21150,79 +21065,24 @@
         "status": "mapped"
       },
       "sources.published-sources.entries.06.name": {
-        "ref": {
-          "id": "facilities-managers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cnclass"
-            },
-            "name"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.06.period": {
-        "ref": {
-          "id": "facilities-managers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cnclass"
-            },
-            "period"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.06.publisher": {
-        "ref": {
-          "id": "facilities-managers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cnclass"
-            },
-            "publisher"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.06.scope": {
-        "ref": {
-          "id": "facilities-managers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cnclass"
-            },
-            "scope"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.06.url": {
-        "ref": {
-          "id": "facilities-managers.source-register.published.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "cnclass"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.07.accessed_at": {
         "ref": {
@@ -23326,7 +23186,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use the fictional facilities task in A1–A5 to observe yourself: whether you can rank three on-site exceptions by priority, verify the contractor's scope and amounts item by item, and, after the conditions in A4 change, preserve the unknowns and escalate to the authorized person in A5. The exercise is only for understanding whether you are willing to repeatedly verify on-site facts, maintenance records, supplier delivery, and authority boundaries over the long term, not a suitability score or a hiring judgment."
+              "Use FM13’s fictional quotes and building access windows to make two recommendations. Put the budget, planned downtime, acceptance records and approver on one page."
             ]
           },
           "id": "facilities-managers.quick-decision.fit-decision-checklist.2",
@@ -23473,7 +23333,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The occupational outlook page title covers facilities managers, and the wage and employment figures have been taken from the separate facilities manager row; the annual average openings given on the page belong to the combined scope and must not be attached to this occupation alone."
+              "The BLS Occupational Outlook Handbook reports openings for administrative services and facilities managers together. BLS Employment Projections Table 1.2 reports about 14,200 openings per year in 2025–35 for facilities managers alone, in row 11-3013."
             ]
           },
           "id": "facilities-managers.profile.onet-structured-fields-block.2",
@@ -25092,12 +24952,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Task exposure does not equal adoption, automation, or unemployment; the index is compiled by task rather than by position and gives no single-occupation score for facilities managers."
+              "The ILO uses task scores to build exposure gradients for four-digit ISCO-08 occupations. This page has no direct score crosswalk to U.S. SOC 11-3013. Exposure measures potential. Adoption and employment effects require separate evidence."
             ]
           },
           "id": "facilities-managers.ai-impact.ai-impact-table.41",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25120,7 +24980,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Based on 29,753 tasks in the Polish occupational classification, 52,558 data points across 2,861 tasks, and multiple rounds of international expert discussion, a four-tier exposure gradient was formed."
+              "The ILO sampled from 29,753 tasks in the Polish classification and collected 52,558 ratings for 2,861 tasks. The researchers checked the human ratings with experts, used a model to predict scores for remaining tasks, and assigned four exposure levels using each four-digit ISCO-08 occupation’s average task score and spread."
             ]
           },
           "id": "facilities-managers.ai-impact.ai-impact-table.43",
@@ -25190,12 +25050,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "About 80% of US workers have at least 10% of their tasks potentially affected, and about 19% have at least 50% of their tasks affected; with model access, about 15% of tasks can be significantly sped up."
+              "The study estimated that direct use of a large language model could at least halve the time needed for about 15% of U.S. worker tasks at equivalent quality. The researchers estimated tasks requiring additional software separately."
             ]
           },
           "id": "facilities-managers.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -25232,7 +25092,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Covers 22 industry clusters, 55 economies, and more than 1,000 employers, together representing more than 1,400 ten-thousand employees."
+              "Covers 22 industry clusters, 55 economies, and more than 1,000 employers, together representing more than 14 million workers."
             ]
           },
           "id": "facilities-managers.ai-impact.ai-impact-table.51",
@@ -25358,12 +25218,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Recording information, coordinating suppliers and facilities operations support, controlling budgets, and handling exceptions remain listed as core duties and can serve as a basis for judging which steps need human responsibility."
+              "O*NET lists controlling budgets for contracts, equipment and supplies as a core task. It lists recording information and solving problems as work activities. Supplier coordination and exception handoffs are editorial examples. Check the organization’s assignments for budget, contract and acceptance authority."
             ]
           },
           "id": "facilities-managers.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26355,7 +26216,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Average annual wage of 'middle-level and above managers' in above-scale enterprises (2025). This is a broad position category that includes but is not limited to facilities managers."
+              "CNY 210,016 is the 2025 average annual wage for middle and senior managers in enterprises above designated size. The broad category has no separate facilities managers line."
             ]
           },
           "id": "facilities-managers.china-salary.career-snapshot-primary-locale.12",
@@ -26495,7 +26356,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The National Bureau of Statistics publishes by industry category and position category and has no separate facilities manager wage. This page therefore keeps the gap and does not substitute figures from other categories."
+              "The National Bureau of Statistics release reviewed here gives averages by industry and broad job category. It does not give a separate facilities managers wage."
             ]
           },
           "id": "facilities-managers.china-salary.career-snapshot-primary-locale.22",
@@ -26524,12 +26385,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round did not use mixed recruitment cases whose facilities manager identity could not be confirmed, and no representative current recruitment or occupational quote was obtained; the education direction is only a prompt for verifying the target posting and does not infer a general starting point from excluded cases."
+              "The Beijing engineering lead and Shanghai property manager illustrate two past roles. Check the original listings when comparing duties, education and experience."
             ]
           },
           "id": "facilities-managers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "editor"
+            "a55-beijing",
+            "a55-shanghai"
           ],
           "type": "prose"
         },
@@ -26837,13 +26699,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The table below shows editorial verification directions; this round did not use mixed recruitment cases with unconfirmed identity and obtained no representative current recruitment. Education, major, and experience must be read from the target position's original text and do not constitute salary statistics or a ladder."
+              "The Beijing engineering lead and Shanghai property manager illustrate two past roles. Check the original listings when comparing duties, education and experience."
             ]
           },
           "id": "facilities-managers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs",
-            "editor"
+            "a55-beijing",
+            "a55-shanghai"
           ],
           "type": "prose"
         },
@@ -26881,13 +26743,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Only the broad National Bureau of Statistics annual average wage is shown here; this page obtained no Chinese mainland occupational wage or employer quote that can be safely mapped to facilities managers."
+              "The Beijing engineering lead and Shanghai property manager illustrate two past roles. Check the original listings when comparing duties, education and experience."
             ]
           },
           "id": "facilities-managers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "editor",
-            "editor"
+            "a55-beijing",
+            "a55-shanghai"
           ],
           "type": "prose"
         },
@@ -26896,7 +26758,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China recruitment sample verification: postings whose exact facilities manager identity could not be confirmed were not included"
+              "Beijing property engineering lead"
             ]
           },
           "id": "facilities-managers.china-salary.career-snapshot-primary-locale.49",
@@ -26910,12 +26772,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "That sample's duties were a mixed personnel and administrative role and cannot support a facilities manager quote; this page does not map its wage, benefits, or leave conditions onto facilities managers."
+              "Beijing Zhonghai Property Management advertised an engineering lead at CNY 8,000–10,000 per month. The role helped plan annual equipment maintenance, coordinated upgrades and oversaw maintenance in common areas. The event served veterans and accompanying military family members."
             ]
           },
           "id": "facilities-managers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "editor"
+            "a55-beijing"
           ],
           "type": "prose"
         },
@@ -26924,7 +26786,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China recruitment sample verification: a combined facilities site and administrative role was not used as an exact occupational sample"
+              "Compare engineering maintenance and site operations"
             ]
           },
           "id": "facilities-managers.china-salary.career-snapshot-primary-locale.51",
@@ -26938,7 +26800,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "That sample included organizational personnel, internal party affairs, and content publishing duties and cannot support a facilities manager quote; this page does not map its combined pay or benefits onto facilities managers."
+              "Compare equipment maintenance, budgets, asset operations and contractor oversight across the two postings. Keep each quote tied to its employer and role."
             ]
           },
           "id": "facilities-managers.china-salary.career-snapshot-primary-locale.52",
@@ -26952,7 +26814,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China recruitment sample verification: a deputy facilities site role was not used as an exact occupational sample"
+              "Shanghai property manager"
             ]
           },
           "id": "facilities-managers.china-salary.career-snapshot-primary-locale.53",
@@ -26966,12 +26828,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "That sample was a deputy role with a clerical focus and cannot support a facilities manager quote; this page does not map its quote or duties onto facilities managers."
+              "Shanghai Tongjin Property Services advertised a property manager at CNY 10,000–12,000 per month. Duties included the annual budget, operation of site assets, oversight of outsourced work and tenant service. The event served veterans and accompanying military family members."
             ]
           },
           "id": "facilities-managers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "editor"
+            "a55-shanghai"
           ],
           "type": "prose"
         },
@@ -27045,7 +26907,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "US Bureau of Labor Statistics occupational outlook (separate facilities manager row)｜https://www.bls.gov/ooh/management/administrative-services-managers.htm; US Bureau of Labor Statistics employment projections table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; US Bureau of Labor Statistics OEWS methodology notes｜https://www.bls.gov/oes/oes_ques.htm"
+              "US Bureau of Labor Statistics occupational outlook (separate facilities manager row)｜https://www.bls.gov/ooh/management/administrative-services-managers.htm; US Bureau of Labor Statistics employment projections table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; US Bureau of Labor Statistics OEWS methodology notes｜https://www.bls.gov/oes/methods_25.pdf"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.8",
@@ -27061,12 +26923,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Below 64,480 USD/year"
+              "USD 64,480 per year"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27075,12 +26937,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The May 2025 10th percentile is below 64,480 USD/year; this is a statistical distribution position, not an entry wage.; US Bureau of Labor Statistics occupational outlook (separate facilities manager row)｜https://www.bls.gov/ooh/management/administrative-services-managers.htm"
+              "10th percentile · USD 64,480 per year · May 2025 OEWS; O*NET national wages (BLS OEWS)｜https://www.onetonline.org/link/localwages/11-3013.00"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27089,7 +26951,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "82,020 USD/year"
+              "USD 82,020 per year"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.11",
@@ -27103,7 +26965,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 US national 25th percentile is 82,020 USD/year, not a seniority grade; O*NET NationalWages national table｜https://www.onetonline.org/link/localwages/11-3013.00"
+              "25th percentile · USD 82,020 per year · May 2025 OEWS; O*NET national wages (BLS OEWS)｜https://www.onetonline.org/link/localwages/11-3013.00"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.12",
@@ -27117,12 +26979,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "106,660 USD/year"
+              "USD 106,660 per year"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27131,12 +26993,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The May 2025 wage median is 106,660 USD/year; the median is the midpoint of the distribution and does not represent individual income.; US Bureau of Labor Statistics occupational outlook (separate facilities manager row)｜https://www.bls.gov/ooh/management/administrative-services-managers.htm"
+              "Median · USD 106,660 per year · May 2025 OEWS; O*NET national wages (BLS OEWS)｜https://www.onetonline.org/link/localwages/11-3013.00"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27145,7 +27007,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "138,870 USD/year"
+              "USD 138,870 per year"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.15",
@@ -27159,7 +27021,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 US national 75th percentile is 138,870 USD/year, not a management grade; O*NET NationalWages national table｜https://www.onetonline.org/link/localwages/11-3013.00"
+              "75th percentile · USD 138,870 per year · May 2025 OEWS; O*NET national wages (BLS OEWS)｜https://www.onetonline.org/link/localwages/11-3013.00"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.16",
@@ -27173,12 +27035,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Above 176,120 USD/year"
+              "USD 176,120 per year"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27187,12 +27049,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The May 2025 90th percentile is above 176,120 USD/year; high percentiles must be understood together with industry, region, and management scope.; US Bureau of Labor Statistics occupational outlook (separate facilities manager row)｜https://www.bls.gov/ooh/management/administrative-services-managers.htm"
+              "90th percentile · USD 176,120 per year · May 2025 OEWS; O*NET national wages (BLS OEWS)｜https://www.onetonline.org/link/localwages/11-3013.00"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27201,7 +27063,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "165,900 people (2025)"
+              "165,900 jobs (2025)"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.19",
@@ -27215,13 +27077,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The base-period employment size in BLS employment projections table 1.2 is 165,900 people (2025); this is the employment projections program and is not mixed with the wage statistics program.; US Bureau of Labor Statistics occupational outlook (separate facilities manager row)｜https://www.bls.gov/ooh/management/administrative-services-managers.htm"
+              "BLS Table 1.2 gives base-year employment of 165,900 in 2025.; BLS employment projections Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27244,7 +27105,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The official growth rate in the separate facilities manager row is 4.6%, with a net change of 7,600 people; the BLS 2025–2035 projection period is used, and the combined-category growth rate is not passed off as this occupation's.; US Bureau of Labor Statistics occupational outlook (separate facilities manager row)｜https://www.bls.gov/ooh/management/administrative-services-managers.htm"
+              "BLS Table 1.2 projects 4.6% U.S. employment growth and a net gain of 7,600 jobs for occupation 11-3013 over 2025–2035.; BLS Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.22",
@@ -27258,7 +27119,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "14,200 people/year"
+              "14,200 job openings per year"
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.23",
@@ -27317,12 +27178,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Official statistics are collected from salaried employees and do not cover the self-employed; wage and employment have different statistical scopes and cannot be converted into one another."
+              "The OEWS wage survey covers full-time and part-time wage and salary workers and excludes the self-employed. Use BLS Table 1.2 for employment counts and projections."
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "oews-method"
+            "oews-method",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27584,12 +27446,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "No. The median is the midpoint of the distribution, mixing people from different regions, industries, and experience levels; treating it as an entry wage overstates the starting point."
+              "The median is the midpoint of the national distribution across regions, industries and experience levels. For entry pay, check the target posting and local wages."
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "bls",
             "oews"
           ],
           "type": "prose"
@@ -27613,7 +27474,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "From the US Bureau of Labor Statistics Occupational Employment and Wage Statistics program, aggregating the wage distribution of salaried employees by exact occupation. The program's wages include base pay, commissions, and production bonuses, exclude overtime pay, non-production bonuses, and severance pay, and do not cover the self-employed."
+              "OEWS wages cover full-time and part-time wage and salary workers and exclude the self-employed. The survey includes base pay, commissions and cost-of-living allowances under its definitions. It excludes overtime premiums and nonproduction bonuses."
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.48",
@@ -27656,12 +27517,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The O*NET 2025 US wage table lists the facilities manager 10th percentile as below 64,480 USD/year; this is a statistical distribution position, not an entry wage."
+              "The 10th percentile is USD 64,480 per year. About one in ten workers earns that amount or less."
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "bls",
             "oews"
           ],
           "type": "prose"
@@ -27671,12 +27531,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The median is the 50% percentile, the midpoint of the distribution: half of salaried employees earn more than it and half less. This page uses the officially published median rather than an average. It mixes people from different regions, industries, and experience levels, so it cannot be treated as an entry wage or used to infer the income of a specific position or individual; when comparing across regions, also note the statistical period and whether bonuses are included."
+              "The 50th percentile is the annual median, with roughly half of wages on either side. The national distribution covers different regions, industries and levels of experience."
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27685,13 +27545,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The O*NET 2025 US wage table lists the facilities manager 90th percentile as above 176,120 USD/year; a high percentile does not equal seniority or a management grade."
+              "The 90th percentile is USD 176,120 per year. About one in ten workers earns that amount or more."
             ]
           },
           "id": "facilities-managers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "bls",
-            "editor"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27718,13 +27577,13 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
@@ -28614,7 +28473,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Public task materials show that the occupation's high-frequency activities are acquiring information, communicating with superiors, peers, and subordinates, scheduling and prioritizing work, making decisions and solving problems, and recording information; the O*NET interest code ECR also corresponds to organizational coordination and rule-based facilities and personnel matters. These describe occupational tasks, not your personal score. To judge whether you want to do this kind of work over the long term, experience the tasks one by one: first use fictional materials to write a service arrangement and handover record, then see whether you are willing to invest repeatedly in clarifying requirements and maintaining records."
+              "Public task materials show that the occupation’s listed work activities include acquiring information, communicating with superiors, peers, and subordinates, scheduling and prioritizing work, making decisions and solving problems, and recording information; the O*NET interest code ECR also corresponds to organizational coordination and rule-based facilities and personnel matters. These describe occupational tasks, not your personal score. To judge whether you want to do this kind of work over the long term, experience the tasks one by one: first use fictional materials to write a service arrangement and handover record, then see whether you are willing to invest repeatedly in clarifying requirements and maintaining records."
             ]
           },
           "id": "facilities-managers.fit.personality-fit-block.50",
@@ -28687,7 +28546,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use the fictional facilities task in A1–A5 to observe yourself: whether you can rank three on-site exceptions by priority, verify the contractor's scope and amounts item by item, and, after the conditions in A4 change, preserve the unknowns and escalate to the authorized person in A5. The exercise is only for understanding whether you are willing to repeatedly verify on-site facts, maintenance records, supplier delivery, and authority boundaries over the long term, not a suitability score or a hiring judgment."
+              "Compare the two FM13 quotes and see how you feel about checking costs, building access and acceptance records, then handing the decision to the approver."
             ]
           },
           "id": "facilities-managers.fit.personality-fit-block.55",
@@ -28731,7 +28590,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use the fictional facilities task in A1–A5 to observe yourself: whether you can rank three on-site exceptions by priority, verify the contractor's scope and amounts item by item, and, after the conditions in A4 change, preserve the unknowns and escalate to the authorized person in A5. The exercise is only for understanding whether you are willing to repeatedly verify on-site facts, maintenance records, supplier delivery, and authority boundaries over the long term, not a suitability score or a hiring judgment."
+              "Compare the two FM13 quotes and see how you feel about checking costs, building access and acceptance records, then handing the decision to the approver."
             ]
           },
           "id": "facilities-managers.fit.personality-fit-block.58",
@@ -28997,7 +28856,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Verify changes against the approved scope, hand the unapproved part to the approver for a decision, and keep written records; the administrative side provides facts and recommendations and does not commit to payment on others' behalf."
+              "The facilities manager checks the change against the approved scope and records the evidence. Refer additional costs or payment commitments to the authorized approver."
             ]
           },
           "id": "facilities-managers.risk.career-risk-cards.13",
@@ -29174,7 +29033,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "First coordinate with affected people and contact the authorized facilities or professional staff to communicate alternative arrangements; the administrative side records the process and does not personally handle live electrical or special equipment work."
+              "The facilities manager coordinates temporary arrangements with affected users and records the response. Refer live electrical and specialized equipment work to authorized specialists."
             ]
           },
           "id": "facilities-managers.risk.career-risk-cards.25",
@@ -29471,9 +29330,9 @@
               {
                 "id": "education",
                 "values": [
-                  "A single-employer case not adopted",
-                  "This round did not obtain an employer posting for this occupation whose identity, date, duty combination, and quote conditions are all verifiable, so a single-employer case is not written as an occupational threshold.",
-                  "Verification approach: if a posting is adopted later, verify the position identity, publication date, region, duty combination, and quote conditions item by item."
+                  "Read the posting for entry requirements",
+                  "The Beijing role covers maintenance planning and engineering coordination. The Shanghai role covers budgets, asset operations and contractor oversight.",
+                  "Use the original descriptions and quotes to check who approves work and who accepts it."
                 ]
               },
               {
@@ -29505,7 +29364,9 @@
           "id": "facilities-managers.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "a55-beijing",
+            "a55-shanghai"
           ],
           "title": "What do employers usually look at in recruitment?",
           "type": "cards"
@@ -29518,37 +29379,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and setup｜All are editorially designed fictional data",
-                  "You are the facilities manager of the fictional Qinghe Campus and are responsible for operations support of an office building of about 2,000 square meters. The amounts, dates, roles, and on-site phenomena below are exercise settings, not on-site records, real quotes, or safety instructions.",
-                  "A1｜2026-09-14: First, 08:10, the west third-floor air conditioning unit alarmed and the temperature in two rooms kept rising; record the alarm information, notify users, and contact a certified technician, and the root cause and electrical safety status are pending confirmation. Second, 08:25, a fire escape light in the east stairwell flickered; the on-site safety manager approved closing the affected short section first and activating the backup route, to be executed by the corresponding on-site personnel, and the backup lighting and battery status are pending professional confirmation. Third, 08:40, after the rain, a wet mark of about 2 meters appeared on the meeting room ceiling; equipment was moved away and a drip tray placed, no collapse was seen, but the leak source and structural damage are pending confirmation by the building contractor.",
-                  "A2｜Contractor A: available on 2026-09-14 from 13:00 to 17:00; the scope is three preliminary inspections, replacement of one light fixture, and temporary leak protection; labor 4,800 yuan and materials 1,200 yuan, totaling 6,000 yuan (taxes not stated). Includes inspection records, on-site photos, a material list, and functional testing; excludes roof waterproofing repair and electrical distribution box work; acceptance evidence is test results, photos, and signatures on both parties' work orders.",
-                  "A3｜Contractor B: available on 2026-09-15 from 08:00 to 12:00; can do the air conditioning inspection and light fixture replacement, with roof assessment only and no repair; labor 5,500 yuan and materials up to 800 yuan, for a total ceiling of 6,300 yuan, but taxes and travel costs are not stated. The light fixture warranty is 30 days; excludes night work and waterproofing repair; qualification documents have not yet been provided, and whether a photo package, weekend response, and distribution box work are included is unknown.",
-                  "A4｜2026-09-14 11:30: a new round of rain expanded the meeting room wet mark to about 4 meters, there is an external meeting at 15:00, and the earlier condition that assessment could wait until the next day has changed; equipment must be protected first, whether to close the meeting room must be confirmed, and the contractor's arrival and temporary leak protection capability must be re-verified.",
-                  "A5｜Roles and authority: facilities manager Lin Qiao organizes recommendations and keeps records; the office administration team is the affected user; the budget ceiling is 6,500 yuan (pre-tax); finance lead Zhou Lan approves over-budget spending and payments; the on-site safety manager approves shutdowns or closures; certified technicians confirm electrical, fire, and structural matters. If the safety status is unclear, the expected shutdown exceeds 30 minutes, or the total may exceed 6,500 yuan, escalate immediately and require the relevant responsible persons to reply within 30 minutes."
+                  "FM13: Routine maintenance needs two uninterrupted hours. The area must close during work.",
+                  "The only closure window this Saturday is 08:00–10:00.",
+                  "The total budget cap is CNY 9,000, and acceptance requires a maintenance report.",
+                  "Vendor A is only available Saturday 08:00–10:00. The quote is CNY 7,000, plus CNY 1,800 for the report.",
+                  "Vendor B is only available Saturday 14:00–16:00. The CNY 8,500 quote includes the report.",
+                  "Both reports can be delivered by Monday, which meets the exercise deadline.",
+                  "The facilities manager recommends a vendor. The budget owner approves. The building service desk sends closure notices.",
+                  "All times and costs are fictional."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Tasks and outputs",
-                  "Use A1 to build a maintenance priority table: for each item write the discovery time, impact, interim measures, known facts, items requiring professional confirmation, responsible person, and escalation deadline; a finding of no collapse seen must not be written as confirmed structural safety.",
-                  "Use A2/A3 for the quote comparison: align scope, arrival window, labor, materials, taxes, travel, warranty, and acceptance evidence item by item; list non-comparable conditions and clarification questions. Use A4 to write the exception escalation request and A5 to write the budget, shutdown, and approval chain; finally deliver a handover record with version, status, next steps, and the person taking over."
+                  "List each vendor’s total, window, acceptance evidence and reason for selection.",
+                  "Single-change variant: Saturday’s only closure window moves to 14:00–16:00. All other inputs stay the same. Mark whether each vendor can work during the allowed window, then update your recommendation.",
+                  "Write one approval item for the budget owner and state when the service desk can send its notice."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answer (complete it independently first)",
-                  "Priority example: first, the east fire escape light, because personnel safety and the backup lighting status are unconfirmed, so keep the alternate route and have professionals inspect it; second, the meeting room leak, because A4 has expanded and equipment may be damaged, so protect assets immediately and confirm whether to close the room; third, the air conditioning alarm, scheduled by business impact, but its priority rises if electrical risk is involved. The basis for ranking is safety, further damage, and business continuity, not the size of the quote.",
-                  "Calculation example: contractor A's known amount is 4,800 + 1,200 = 6,000 yuan, below the 6,500 yuan ceiling, but taxes are not stated; B is a ceiling of 5,500 + 800 = 6,300 yuan, with taxes, travel, qualifications, and the photo package all unknown, and unknowns must not be treated as zero. After A4, first ask A to confirm temporary leak protection and same-day acceptance, and if the conditions are insufficient, escalate to Zhou Lan and the on-site safety manager; the request should state that final repair is not authorized for now and that closure, shutdown, and approvable amount must be confirmed within 30 minutes. The sensors in A1 are only recorded, notified, and referred to a certified technician; closing the short section and activating the backup route are approved by the on-site safety manager and executed by the corresponding personnel, with conditions confirmed by professionals.",
-                  "Handover example: record the versions of A1 through A5, the interim measures taken, the two quote calculations, open questions, approvers, and the next re-check time; hand professional safety conclusions to certified personnel and do not sign on their behalf or promise a repair completion time."
+                  "Complete both versions independently.",
+                  "Check the workable window separately from total cost.",
+                  "On day seven, open “FM13 facilities maintenance decision reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries and review",
-                  "The exercise handles fictional materials only: do not contact real contractors, issue shutdown or closure instructions, approve payments, or make safety and structural judgments on behalf of certified personnel. Unknown taxes, qualifications, root causes, arrival, and acceptance evidence stay unknown and must not be set to zero or approved to complete a form. When reviewing, check whether A1–A5, the calculations, the basis, the responsible persons, the escalation deadlines, and the handover status correspond one to one."
+                  "Compare quotes and coordination on paper.",
+                  "Follow site procedures for actual maintenance, closure and acceptance."
                 ]
               }
             ]
@@ -29557,7 +29418,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: one complete facilities operations support task (fictional materials)",
+          "title": "FM13 fictional facilities maintenance quotes",
           "type": "cards"
         },
         {
@@ -29568,33 +29429,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Scope comparison package",
-                  "Use A1–A3 to build the maintenance priority and quote comparison table: the time, impact, interim measures, and professional confirmation items of the three incidents; the scope, costs, taxes, arrival, warranty, and acceptance evidence of A's and B's quotes; and a separate list of non-comparable conditions and at least three clarification questions.",
-                  "Review method: the person taking over can see from the table alone the basis for the priority of the fire light, the leak, and the air conditioning, and can also see which items are not included or not stated in the 6,000 yuan and 6,300 yuan ceilings."
+                  "Keep both quote and window comparisons.",
+                  "Show whether the report is included in each quote.",
+                  "Attach the recommendation, approval and notice conditions."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Exception escalation package",
-                  "Use A4/A5 to write the escalation form: the wet mark expanded at 11:30, the meeting at 15:00 is affected, the budget ceiling is 6,500 yuan, the shutdown or closure authority, who must reply within 30 minutes, and the interim measures and professional checks requested for confirmation.",
-                  "Review method: submit the recommendation only to those with authority to approve it, and do not write the escalation request as an already approved repair, closure, or payment."
+                  "Approval draft",
+                  "Send the budget owner a draft recommendation with report costs and the closure window.",
+                  "Record approval status for both versions."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Handover package",
-                  "Per A1–A5, record the versions, known facts, unknowns, interim measures, quote calculations, approval status, next responsible person, and next re-check time; list on-site photos, test results, and work order signatures as acceptance evidence still to be collected.",
-                  "Review method: the person taking over can continue without asking who knows what, what the next step is, and what cannot be promised."
+                  "Closure notice handoff",
+                  "Record both recommendations, closure windows, budget approval status and who sends the notice.",
+                  "List the maintenance report for Monday acceptance."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Explanation card",
-                  "Write three bases: personnel safety and further damage, the change A4 makes to the original arrival assumptions, and the budget and authorization boundary in A5; then write two unknowns: taxes and travel, and the professional root cause and qualifications.",
-                  "Review method: do not write editorial exercise conclusions as real facilities standards, contractor quotes, or legal advice."
+                  "Quote calculations",
+                  "Show each vendor’s base quote, report fee and total.",
+                  "Identify calculations you checked and items the owner still needs to verify."
                 ]
               }
             ]
@@ -29665,50 +29526,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day one",
-                  "Read the brief and A1/A5 and write a role boundary card: what may be recorded and temporarily coordinated, what requires approval for budget, shutdown, or closure, and what is prohibited such as signing on others' behalf or making professional safety judgments, one column each."
+                  "Day 1",
+                  "Record the budget and closure window."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day two",
-                  "Read A1 and fill in the priority table for the three incidents, writing the time, impact, interim measures, and items pending professional confirmation for each; check that observations are not written as safety conclusions."
+                  "Day 2",
+                  "List what each quote covers."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day three",
-                  "Read A2/A3 and calculate the ceilings of 4,800+1,200=6,000 yuan and 5,500+800=6,300 yuan; list A's taxes and B's taxes, travel, and qualifications as unknown."
+                  "Day 3",
+                  "Calculate the totals including reports."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day four",
-                  "Read A4 and fill in the exception escalation form, explaining that the wet mark expanded from about 2 meters to about 4 meters, the impact on the 15:00 meeting, optional interim measures, and the approval request; do not promise that the contractor will definitely arrive."
+                  "Day 4",
+                  "Compare vendor availability with building access."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day five",
-                  "Per A1–A5, consolidate the quotes, priorities, open questions, responsible persons, and next steps into a handover record; check each item back against the original text."
+                  "Day 5",
+                  "Write the recommendation and a draft closure notice."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day six",
-                  "Seal the initial draft first, then open the reference approach and compare priorities, calculations, unknowns, and authorization boundaries, listing omissions and reasons for revision."
+                  "Day 6",
+                  "Complete both versions independently. Record each vendor’s timing feasibility and your final recommendation."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day seven",
-                  "Reread the initial and revised drafts and fill in the review: omissions, explanation of changes, basis for revisions, and subjective energy; do not calculate a suitability score or treat the exercise results as a hiring conclusion."
+                  "Day 7",
+                  "On day seven, open “FM13 facilities maintenance decision reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29725,13 +29586,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep the initial and revised drafts and record item by item as which A1–A5 material was missed, the earlier explanation, the current explanation, and the basis for revision.",
-              "Check whether taxes, travel, or qualifications not stated in A2/A3 were defaulted to zero, whether the interim escalation request in A4 was written as already approved, and whether the contractor's arrival window was written as a repair completion guarantee.",
-              "Record daily time invested and energy, such as whether you are willing to repeatedly verify on-site facts, quote scope, authorization, and handover records; describe changes only and do not convert them into a suitability score.",
-              "Do the priority and quote comparison table again and compare whether omissions decreased and whether unknowns are still preserved.",
-              "If you still are not clear whether you like this kind of work after finishing, list the recurring difficulties as specific questions for the next round of learning about facilities manager work.",
-              "Compare the maintenance priority, quote comparison, escalation form, and handover templates formed in the exercise with real position forms and see where the structural differences are.",
-              "If it cannot be completed within a week, record the unfinished part honestly and do not fill the process with conclusions."
+              "Keep the original and variant.",
+              "Recalculate each total with the report.",
+              "Explain how the changed closure window affects the recommendation.",
+              "Check the report deadline.",
+              "Identify who approves and who sends the notice.",
+              "Compare against the reference and record one correction.",
+              "Ask employers who owns budgets and acceptance."
             ]
           },
           "id": "facilities-managers.path.seven-day-decision.1",
@@ -29837,7 +29698,7 @@
           "data": {
             "paragraphs": [
               "The facilities manager entry exercise is not proof of qualification or hiring: it uses only public or simulated materials to practice facilities inspection, maintenance priorities, contractor delivery, budget records, exception escalation, and handover; the education, experience, license, or security clearance requirements of a real position must be checked separately against the employer's and the jurisdiction's requirements.",
-              "This round did not adopt a single-employer recruitment case; the entry information in US official materials and Chinese position requirements are understood separately, and an unverified posting must not be written as a general occupational threshold.",
+              "Use the two past postings to compare duties and employer requirements. Confirm current entry requirements with the employer.",
               "Personal information processing and archive management obligations must be carried out under applicable law and organizational authorization; this page is not independent legal advice.",
               "When tasks enter regulated areas such as special equipment, fire protection, medical care, or financial sign-off, the applicable qualification requirements must be confirmed separately and the general authority assumptions for this occupation do not carry over."
             ]
@@ -29856,16 +29717,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This round did not adopt a single-employer quote or recruitment case from mainland China or overseas: there was no material that simultaneously verified position identity, posting date, duty combination, region, and quote conditions, so this page does not treat mixed positions or the O*NET occupational profile as an employer's original text. The simulated materials below are used only to practice facilities inspection, maintenance priorities, contractor delivery, and exception escalation.",
-              "This page did not adopt a mixed-position quote; simulated materials are not a job posting and do not support a precise facilities manager wage or a uniform threshold."
+              "Beijing Zhonghai Property Management advertised an engineering lead at CNY 8,000–10,000 per month. The role helped plan annual equipment maintenance, coordinated upgrades and oversaw maintenance in common areas. The event served veterans and accompanying military family members. Shanghai Tongjin Property Services advertised a property manager at CNY 10,000–12,000 per month. Duties included the annual budget, operation of site assets, oversight of outsourced work and tenant service. The event served veterans and accompanying military family members.",
+              "These are historical job examples. Current vacancy status is unverified. Property engineering and site operations cover different duties. Comparable nationwide wages for facilities managers in mainland China remain unavailable."
             ]
           },
           "id": "facilities-managers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "a55-beijing",
+            "a55-shanghai"
           ],
           "title": "Recruitment sample note",
           "type": "notice"
@@ -30136,7 +29995,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Used for the wage background of Chinese mainland industries and position categories; no separate data for this occupation exists."
+              "Used for the wage background of Chinese mainland industries and position categories; the release reviewed here has no separate data for this occupation."
             ]
           },
           "id": "facilities-managers.path.career-path-block.26",
@@ -31061,16 +30920,16 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS occupational outlook",
+                "entity": "BLS employment projections table 1.2",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/management/administrative-services-managers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS employment projections table 1.2",
+                "entity": "BLS Occupational Outlook Handbook (rounded figure)",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.bls.gov/ooh/management/administrative-services-managers.htm"
               },
               {
                 "entity": "National Bureau of Statistics 2025 urban unit wages",
@@ -31267,7 +31126,7 @@
           },
           "id": "facilities-managers.market-signals.market-signal-card.16",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31281,7 +31140,7 @@
           },
           "id": "facilities-managers.market-signals.market-signal-card.17",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31290,12 +31149,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The separate facilities manager row grows 4.6%; the rounded value on the BLS combined occupational outlook page cannot substitute for the separate row."
+              "The facilities managers row in BLS Table 1.2 projects 4.6% employment growth."
             ]
           },
           "id": "facilities-managers.market-signals.market-signal-card.18",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31304,12 +31163,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The title covers the combined occupation; this occupation's separately listed annual average openings of 14,200 are in the projections table"
+              "The BLS Occupational Outlook Handbook rounds the facilities managers figure to 5%."
             ]
           },
           "id": "facilities-managers.market-signals.market-signal-card.19",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31323,7 +31182,7 @@
           },
           "id": "facilities-managers.market-signals.market-signal-card.20",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31337,7 +31196,7 @@
           },
           "id": "facilities-managers.market-signals.market-signal-card.21",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31346,12 +31205,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "4.6%（2025–2035）"
+              "4.6% (2025–2035)"
             ]
           },
           "id": "facilities-managers.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31388,7 +31247,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The National Bureau of Statistics publishes average wages by industry category and position category and has no separate facilities manager entry, so this page provides no Chinese mainland occupational-level pay projection."
+              "The National Bureau of Statistics release reviewed here gives averages by industry and broad job category. It does not give a separate facilities managers wage."
             ]
           },
           "id": "facilities-managers.market-signals.market-signal-card.25",
@@ -31486,7 +31345,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Used for the wage background of Chinese mainland industries and position categories; no separate data for this occupation exists."
+              "Used for the wage background of Chinese mainland industries and position categories; the release reviewed here has no separate data for this occupation."
             ]
           },
           "id": "facilities-managers.market-signals.market-signal-card.32",
@@ -31911,7 +31770,7 @@
                 ]
               },
               {
-                "answer": "AI can assist with retrieval, classification, scheduling, option comparison, or record drafts, but it should not independently confirm on-site status, contract liability, compliance judgment, or final delivery.",
+                "answer": "Retrieval, classification, scheduling, option comparison and draft records are possible AI uses to test. Verify accuracy in the intended workflow. The responsible people confirm site conditions, contractual responsibility, compliance and final delivery. O*NET provides the occupational activity background.",
                 "id": "facilities-managers.faq.4",
                 "question": "What can and cannot AI do for facilities managers?",
                 "question_key": "career.faq.facilities-managers.q4",
@@ -31931,22 +31790,33 @@
                 ]
               },
               {
-                "answer": "It does not. The May 2025 annual wage median is 106,660 USD and is the midpoint of the occupational distribution, mixing people from different regions, industries, and experience levels; 10% are below 64,480 USD and 10% are above 176,120 USD, and these are statistical positions, not experience grades.",
+                "answer": "In May 2025 the U.S. median annual wage for facilities managers was USD 106,660. The 10th, 25th, 75th and 90th percentiles were USD 64,480, 82,020, 138,870 and 176,120. The national distribution covers different regions, industries and experience levels. Check the target posting for its entry pay.",
                 "id": "facilities-managers.faq.6",
                 "question": "Does the US median wage represent what a newcomer earns?",
-                "question_key": "career.faq.facilities-managers.us-pay"
+                "question_key": "career.faq.facilities-managers.us-pay",
+                "source_refs": [
+                  "oews"
+                ]
               },
               {
-                "answer": "US official materials state that the common path is a bachelor's degree plus related work experience while also noting that other entry paths exist. Actual Chinese requirements are decided by the employer; a graduate degree, party membership, or year conditions appearing in a job posting are specific employer requirements, not a general threshold for this occupation.",
+                "answer": "The BLS lists a bachelor’s degree and related work experience as typical in the U.S., with other paths into the role. The historical Beijing engineering lead posting listed a junior college diploma or higher and a related field. Check the target posting for education, experience and other requirements.",
                 "id": "facilities-managers.faq.7",
                 "question": "What education and experience are needed to enter?",
-                "question_key": "career.faq.facilities-managers.education-path"
+                "question_key": "career.faq.facilities-managers.education-path",
+                "source_refs": [
+                  "bls",
+                  "a55-beijing"
+                ]
               },
               {
-                "answer": "US official materials state that this occupation usually does not require a specialized license or certification, and that some certifications may help with job seeking. Administrative or purchasing training helps in understanding methods but does not grant contract signing, payment approval, or professional acceptance authority, which depends on organizational authorization.",
+                "answer": "The BLS describes professional certification as optional and potentially helpful in the U.S. Check licensing and qualification requirements for the role and jurisdiction. Contract signing, payment approval and acceptance follow the organization’s assignments.",
                 "id": "facilities-managers.faq.8",
                 "question": "Do any certificates need to be taken?",
-                "question_key": "career.faq.facilities-managers.credentials"
+                "question_key": "career.faq.facilities-managers.credentials",
+                "source_refs": [
+                  "bls",
+                  "editor"
+                ]
               },
               {
                 "answer": "It concentrates on three boundaries: whether costs and changes are documented, whether records and personal information can be handed over or cleaned up, and the boundary of authority with professional functions such as facilities, finance, and personnel. Organizations should make authorization and escalation arrangements explicit, and practitioners need to record the basis for their judgments.",
@@ -31955,10 +31825,19 @@
                 "question_key": "career.faq.facilities-managers.risk-boundary"
               },
               {
-                "answer": "US official projections show employment growth of 4% over 2025–2035 and a net change of 7,600, a national occupational total projection. When moving to an adjacent occupation, verify the task differences first: facilities and medical directions require additional professional knowledge, purchasing and compliance directions require specialized methods, and personnel directions require experience with personnel policy.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 11-3013 to rise from about 165,900 in 2025 to 173,500 in 2035, up 4.6%, with about 14,200 annual openings from growth and replacement. Managing facilities across multiple sites is one possible next step. Compare who owns budgets, contractor acceptance and coordination with building users.",
                 "id": "facilities-managers.faq.10",
                 "question": "What is the outlook for this occupation, and where can you move?",
-                "question_key": "career.faq.facilities-managers.outlook-transition"
+                "question_key": "career.faq.facilities-managers.outlook-transition",
+                "source_refs": [
+                  "ep"
+                ]
+              },
+              {
+                "answer": "Recommend A in the original. Its total with the report is CNY 8,800, within the CNY 9,000 cap, and it fits the morning window. B costs CNY 8,500 including the report but cannot work in the original closure window. Recommend B in the variant. A no longer fits the new window. In both versions, get budget approval before the service desk issues the closure notice. Use the report for acceptance on Monday. Check total cost, closure window, acceptance and authority.",
+                "id": "facilities-managers.faq.11",
+                "question": "FM13 facilities maintenance decision reference (open after day six)",
+                "question_key": "career.faq.facilities-managers.11"
               }
             ]
           },
@@ -31993,7 +31872,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round checked O*NET11-3013, BLS2025 wages and the 2025—2035 exact projections plus the OOH separate facilities industry row, the NBS2025 broad measure, ILO140 and the US paper and WEF expectations, NIST AI600-1, and the Personal Information Protection Law. Mixed recruitment cases with unconfirmed identity were not adopted."
+              "U.S. statistics use O*NET and BLS occupation 11-3013. Mainland China context comes from the National Bureau of Statistics and two historical employer notices published by government bureaus."
             ]
           },
           "id": "facilities-managers.sources.source-card.2",
@@ -32009,12 +31888,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-11 (author verification of the nine modules this round); shared source historical access dates are not uniformly rewritten."
+              "Wage data are from May 2025, and the employment projection covers 2025–2035. The mainland China postings illustrate historical roles. See each source for its publication date."
             ]
           },
           "id": "facilities-managers.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "oews",
+            "ep",
+            "a55-beijing",
+            "a55-shanghai"
           ],
           "type": "prose"
         },
@@ -32023,13 +31905,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Precise Chinese occupational wages, representative current recruitment, complete jurisdictional qualifications and specific training cost and period, occupational AI adoption benefit causation, and personality performance research lack evidence. The US national five tiers and the separate facilities industry wages were verified. Conflicts in shared FAQ and metadata legacy NIST years and industry classifications are preserved under protection and require out-of-scope review; the exercises, answers, works, and seven-day materials are unchanged and not independently accepted."
+              "U.S. wages and employment projections use occupation 11-3013. The two mainland China postings illustrate specific past roles. Check current requirements with the employer and local authorities. The AI section examines tasks. Occupational adoption and outcomes remain unverified."
             ]
           },
           "id": "facilities-managers.sources.source-card.4",
           "source_refs": [
-            "editor",
-            "privacy"
+            "ep",
+            "a55-beijing",
+            "a55-shanghai",
+            "editor"
           ],
           "type": "prose"
         }
@@ -32053,28 +31937,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "secondary_cta",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "secondary_cta",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "secondary_cta",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "secondary_cta",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Facilities Managers",
@@ -32119,12 +31991,12 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the facilities manager wages, industry wages, education, experience, and work environment information explicitly listed on the page, as well as the combined occupational background related to facilities managers.",
-                  "Usage limitation: the BLS occupational outlook page covers a combined occupational definition related to facilities managers; independent employment projections are supported only by BLS table 1.2, and combined projections are not passed off as a separate facilities manager projection."
+                  "The handbook’s separate facilities managers section provides industry wage medians, employment counts and the rounded 5% growth figure.",
+                  "See the separate 11-3013 row in Table 1.2 for the precise 4.6% growth figure and annual openings."
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls",
-                "limitation": "The BLS occupational outlook page covers a combined occupational definition related to facilities managers; the facilities manager wages, industry wages, education, experience, and work environment information explicitly shown on the page may be used, and the combined occupational background may be retained; independent employment projections are supported only by BLS table 1.2, and combined projections are not passed off as a separate facilities manager projection.",
+                "limitation": "See the separate 11-3013 row in Table 1.2 for the precise 4.6% growth figure and annual openings.",
                 "market": "United States",
                 "name": "US Bureau of Labor Statistics occupational outlook (combined page related to facilities managers)",
                 "period": "2025 wages and the 2025–2035 occupational outlook",
@@ -32133,9 +32005,9 @@
                 "url": "https://www.bls.gov/ooh/management/administrative-services-managers.htm"
               },
               {
-                "accessed_at": "2026-09-12",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports the 2025–2035 employment projection for the separate facilities manager row.",
+                  "BLS Table 1.2 projects U.S. employment in occupation 11-3013 to rise from about 165,900 in 2025 to 173,500 in 2035, up 4.6%, with about 14,200 annual openings from growth and replacement.",
                   "Usage limitation: supports only the separate facilities manager row explicitly listed in table 1.2 (the 11-3013.00 corresponding definition) and its stated employment size, growth rate, net change, and annual average openings; it is not mixed with the wage statistics program."
                 ],
                 "evidence_type": "primary_document",
@@ -32167,34 +32039,18 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
-                  "Usage limitation: the National Bureau of Statistics materials are at industry or broad position category level and do not establish a Chinese mainland national occupational wage distribution precisely corresponding to the O*NET 11-3013.00 facilities manager; they are not used to infer individual income."
+                  "Reports 2025 average wages by industry in urban units and by broad job category in enterprises above designated size.",
+                  "The release reviewed here does not report a separate facilities managers wage."
                 ],
                 "evidence_type": "primary_document",
                 "id": "nbs",
-                "limitation": "The National Bureau of Statistics materials are at industry or broad position category level and do not establish a Chinese mainland national occupational wage distribution precisely corresponding to the O*NET 11-3013.00 facilities manager; they are not used to infer individual income.",
+                "limitation": "The release reviewed here does not report a separate facilities managers wage.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 urban unit wage materials",
-                "period": "Editorial verification record",
+                "period": "2025",
                 "publisher": "National Bureau of Statistics of the People's Republic of China",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
-              },
-              {
-                "accessed_at": "2026-09-12",
-                "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
-                  "Usage limitation: this page did not use that link as an occupational fact; if reused, the region, date, duty combination, quote conditions, and occupational correspondence must be re-verified."
-                ],
-                "evidence_type": "contextual",
-                "id": "cnclass",
-                "limitation": "This page did not use that link as an occupational fact; if reused, the region, date, duty combination, quote conditions, and occupational correspondence must be re-verified.",
-                "market": "United States",
-                "name": "Chinese mainland public occupation and recruitment material entry (not used for precise wages)",
-                "period": "Editorial verification record",
-                "publisher": "Public material entry",
-                "scope": "contextual",
-                "url": "https://jshrss.jiangsu.gov.cn/art/2022/5/19/art_85534_10454317.html"
               },
               {
                 "accessed_at": "2026-09-12",
@@ -32223,7 +32079,7 @@
                 "limitation": "Supports only the US facilities manager (11-3013.00) or definitions explicitly labeled by that source; it does not establish a Chinese equivalence mapping and does not treat proxy data as exact occupational facts.",
                 "market": "United States",
                 "name": "O*NET OnLine exact occupational profile",
-                "period": "Editorial verification record",
+                "period": "O*NET occupational profile",
                 "publisher": "US Department of Labor O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/11-3013.00"
@@ -32231,7 +32087,7 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
+                  "Provides task and responsibility context for a neighboring occupation.",
                   "Usage limitation: used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation."
                 ],
                 "evidence_type": "primary_document",
@@ -32239,7 +32095,7 @@
                 "limitation": "Used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation.",
                 "market": "United States",
                 "name": "O*NET adjacent occupation: general and operations managers",
-                "period": "Editorial verification record",
+                "period": "O*NET occupational profile",
                 "publisher": "US Department of Labor O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-1021.00"
@@ -32247,7 +32103,7 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
+                  "Provides task and responsibility context for a neighboring occupation.",
                   "Usage limitation: used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation."
                 ],
                 "evidence_type": "primary_document",
@@ -32255,7 +32111,7 @@
                 "limitation": "Used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation.",
                 "market": "United States",
                 "name": "O*NET adjacent occupation: human resources managers",
-                "period": "Editorial verification record",
+                "period": "O*NET occupational profile",
                 "publisher": "US Department of Labor O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3121.00"
@@ -32263,7 +32119,7 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
+                  "Provides task and responsibility context for a neighboring occupation.",
                   "Usage limitation: used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation."
                 ],
                 "evidence_type": "primary_document",
@@ -32271,7 +32127,7 @@
                 "limitation": "Used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation.",
                 "market": "United States",
                 "name": "O*NET adjacent occupation: medical and health services managers",
-                "period": "Editorial verification record",
+                "period": "O*NET occupational profile",
                 "publisher": "US Department of Labor O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-9111.00"
@@ -32279,16 +32135,16 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
-                  "Usage limitation: used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation.",
+                  "Provides global research context on measuring exposure to generative AI.",
+                  "Provides context from other populations or methods. Adoption and employment effects for this occupation require separate evidence.",
                   "Used only within the explicit scope of that source."
                 ],
                 "evidence_type": "research",
                 "id": "ilo",
-                "limitation": "Used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation.",
-                "market": "United States",
+                "limitation": "Provides context from other populations or methods. Adoption and employment effects for this occupation require separate evidence.",
+                "market": "Global",
                 "name": "International Labour Organization research on generative AI and occupational exposure",
-                "period": "Editorial verification record",
+                "period": "May 2025",
                 "publisher": "International Labour Organization",
                 "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
@@ -32296,7 +32152,7 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
+                  "Explains the paper exercise and questions for checking job requirements.",
                   "Usage limitation: editorial design or position verification prompts, not evidence of national wages, employment, licenses, or a uniform hiring threshold."
                 ],
                 "evidence_type": "editorial_synthesis",
@@ -32304,7 +32160,7 @@
                 "limitation": "Editorial design or position verification prompts, not evidence of national wages, employment, licenses, or a uniform hiring threshold.",
                 "market": "Cross-market",
                 "name": "FermatMind editorial design and boundary statement",
-                "period": "Editorial verification record",
+                "period": "Page methodology",
                 "publisher": "FermatMind career content team",
                 "scope": "editorial_synthesis",
                 "url": null
@@ -32312,15 +32168,15 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
-                  "Usage limitation: used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation."
+                  "Provides generative AI risk management guidance.",
+                  "Provides context from other populations or methods. Adoption and employment effects for this occupation require separate evidence."
                 ],
                 "evidence_type": "primary_document",
                 "id": "nist",
-                "limitation": "Used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation.",
+                "limitation": "Provides context from other populations or methods. Adoption and employment effects for this occupation require separate evidence.",
                 "market": "United States",
                 "name": "NIST generative AI risk management framework materials",
-                "period": "Editorial verification record",
+                "period": "July 2024",
                 "publisher": "National Institute of Standards and Technology",
                 "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
@@ -32328,15 +32184,15 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
-                  "Usage limitation: used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation."
+                  "Provides research context for estimates of task-level exposure to generative AI.",
+                  "Provides context from other populations or methods. Adoption and employment effects for this occupation require separate evidence."
                 ],
                 "evidence_type": "research",
                 "id": "arxiv",
-                "limitation": "Used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation.",
+                "limitation": "Provides context from other populations or methods. Adoption and employment effects for this occupation require separate evidence.",
                 "market": "United States",
                 "name": "Occupational task and generative AI research paper",
-                "period": "Editorial verification record",
+                "period": "2023",
                 "publisher": "arXiv / research authors",
                 "scope": "contextual",
                 "url": "https://arxiv.org/abs/2303.10130"
@@ -32344,34 +32200,18 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
-                  "Usage limitation: used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation."
+                  "Provides global employer survey context on anticipated job and skill changes.",
+                  "Provides context from other populations or methods. Adoption and employment effects for this occupation require separate evidence."
                 ],
                 "evidence_type": "research",
                 "id": "weforum",
-                "limitation": "Used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation.",
-                "market": "United States",
+                "limitation": "Provides context from other populations or methods. Adoption and employment effects for this occupation require separate evidence.",
+                "market": "Global",
                 "name": "Future of Jobs 2025",
-                "period": "Editorial verification record",
+                "period": "2025",
                 "publisher": "World Economic Forum",
                 "scope": "contextual",
                 "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
-              },
-              {
-                "accessed_at": "2026-09-12",
-                "details": [
-                  "Editorial note: this round does not treat the O*NET occupational profile as an employer's recruitment text.",
-                  "Usage limitation: this page did not obtain a single-employer facilities manager original text that verifies position identity, publication date, region, duty combination, and quote conditions at the same time; it does not support conclusions about occupational wages, uniform qualifications, or a hiring threshold."
-                ],
-                "evidence_type": "editorial_synthesis",
-                "id": "employer",
-                "limitation": "This page did not obtain a single-employer facilities manager original text that verifies position identity, publication date, region, duty combination, and quote conditions at the same time; it does not support conclusions about occupational wages, uniform qualifications, or a hiring threshold.",
-                "market": "Cross-market",
-                "name": "Single-employer posting not adopted (editorial note)",
-                "period": "Not adopted this round",
-                "publisher": "FermatMind editorial verification record",
-                "scope": "contextual",
-                "url": null
               },
               {
                 "accessed_at": "2026-09-12",
@@ -32384,7 +32224,7 @@
                 "limitation": "Used only to explain this page's editorial boundaries and the nature of the exercise materials; it does not support conclusions about facilities managers' wages, employment, qualifications, or a single employer's recruitment.",
                 "market": "Cross-market",
                 "name": "FermatMind editorial design and boundary statement (facilities managers)",
-                "period": "Editorial verification record",
+                "period": "Page methodology",
                 "publisher": "FermatMind career content team",
                 "scope": "editorial_synthesis",
                 "url": "https://fermatmind.com"
@@ -32392,63 +32232,15 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
-                  "Usage limitation: this page did not use that link as an occupational fact; if reused, the region, date, duty combination, quote conditions, and occupational correspondence must be re-verified."
-                ],
-                "evidence_type": "recruitment_proxy",
-                "id": "r2-pay-1",
-                "limitation": "This page did not use that link as an occupational fact; if reused, the region, date, duty combination, quote conditions, and occupational correspondence must be re-verified.",
-                "market": "United States",
-                "name": "Chinese public recruitment link (not adopted)",
-                "period": "Editorial verification record",
-                "publisher": "Public recruitment page",
-                "scope": "contextual",
-                "url": "https://www.hhml.gov.cn/info/35871/918242.htm"
-              },
-              {
-                "accessed_at": "2026-09-12",
-                "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
-                  "Usage limitation: this page did not use that link as an occupational fact; if reused, the region, date, duty combination, quote conditions, and occupational correspondence must be re-verified."
-                ],
-                "evidence_type": "recruitment_proxy",
-                "id": "r2-pay-2",
-                "limitation": "This page did not use that link as an occupational fact; if reused, the region, date, duty combination, quote conditions, and occupational correspondence must be re-verified.",
-                "market": "United States",
-                "name": "Chinese public recruitment link (not adopted)",
-                "period": "Editorial verification record",
-                "publisher": "Public recruitment page",
-                "scope": "contextual",
-                "url": "https://www.jxrcrsksta.com/content/5820?categoryId=18"
-              },
-              {
-                "accessed_at": "2026-09-12",
-                "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
-                  "Usage limitation: this page did not use that link as an occupational fact; if reused, the region, date, duty combination, quote conditions, and occupational correspondence must be re-verified."
-                ],
-                "evidence_type": "recruitment_proxy",
-                "id": "r2-pay-3",
-                "limitation": "This page did not use that link as an occupational fact; if reused, the region, date, duty combination, quote conditions, and occupational correspondence must be re-verified.",
-                "market": "United States",
-                "name": "Chinese public recruitment link (not adopted)",
-                "period": "Editorial verification record",
-                "publisher": "Public recruitment page",
-                "scope": "contextual",
-                "url": "https://tyjr.chengde.gov.cn/art/2026/1/14/art_11448_1101207.html"
-              },
-              {
-                "accessed_at": "2026-09-12",
-                "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
-                  "Usage limitation: used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation."
+                  "Provides survey context on AI use by U.S. businesses.",
+                  "Provides context from other populations or methods. Adoption and employment effects for this occupation require separate evidence."
                 ],
                 "evidence_type": "primary_document",
                 "id": "census",
-                "limitation": "Used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation.",
+                "limitation": "Provides context from other populations or methods. Adoption and employment effects for this occupation require separate evidence.",
                 "market": "United States",
                 "name": "US enterprise AI usage statistics material",
-                "period": "Editorial verification record",
+                "period": "2026",
                 "publisher": "US Census Bureau",
                 "scope": "contextual",
                 "url": "https://www.census.gov/library/stories/2026/05/ai-use-businesses.html"
@@ -32456,14 +32248,14 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers."
+                  "Provides field-experiment context on generative AI use by knowledge workers."
                 ],
                 "evidence_type": "research",
                 "id": "msresearch",
-                "limitation": "Used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation.",
-                "market": "United States",
+                "limitation": "Provides context from other populations or methods. Adoption and employment effects for this occupation require separate evidence.",
+                "market": "Multicountry sample, mainly in the U.S. and Europe",
                 "name": "Research on generative AI and work patterns",
-                "period": "Editorial verification record",
+                "period": "April 2025",
                 "publisher": "Microsoft Research",
                 "scope": "contextual",
                 "url": "https://www.microsoft.com/en-us/research/publication/shifting-work-patterns-with-generative-ai/"
@@ -32471,15 +32263,15 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
-                  "Usage limitation: supports only the US facilities manager (11-3013.00) or definitions explicitly labeled by that source; it does not establish a Chinese equivalence mapping and does not treat proxy data as exact occupational facts."
+                  "Reports facilities managers wage percentiles for New York State and areas within the state.",
+                  "See the O*NET occupational profile for job tasks."
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "Supports only the US facilities manager (11-3013.00) or definitions explicitly labeled by that source; it does not establish a Chinese equivalence mapping and does not treat proxy data as exact occupational facts.",
+                "limitation": "Supports wage comparisons within New York State.",
                 "market": "United States",
-                "name": "O*NET national wage page",
-                "period": "Editorial verification record",
+                "name": "O*NET New York state wages (facilities managers)",
+                "period": "May 2025 wages",
                 "publisher": "US Department of Labor O*NET OnLine / BLS OEWS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/11-3013.00?st=NY"
@@ -32487,7 +32279,7 @@
               {
                 "accessed_at": "2026-09-12",
                 "details": [
-                  "Supports the occupational identity, task boundaries, or module definitions for facilities managers.",
+                  "Provides task and responsibility context for a neighboring occupation.",
                   "Usage limitation: used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation."
                 ],
                 "evidence_type": "primary_document",
@@ -32495,7 +32287,7 @@
                 "limitation": "Used only as adjacent-occupation or method background; adjacent occupations' tasks, wages, qualifications, or AI conclusions are not transplanted as facts about this occupation.",
                 "market": "United States",
                 "name": "O*NET adjacent occupation: archivists",
-                "period": "Editorial verification record",
+                "period": "O*NET occupational profile",
                 "publisher": "US Department of Labor O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/25-4011.00"
@@ -32503,18 +32295,17 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "Supports salaried employee coverage, self-employment exclusion, standard work-year conversion, and wage inclusion and exclusion boundaries.",
-                  "Usage limitation: not used as a numerical source for facilities manager wage percentiles, industry wages, or employment projections."
+                  "OEWS wages cover full-time and part-time wage and salary workers and exclude the self-employed. The survey includes base pay, commissions and cost-of-living allowances under its definitions. It excludes overtime premiums and nonproduction bonuses."
                 ],
                 "evidence_type": "primary_document",
                 "id": "oews-method",
-                "limitation": "Supports only the OEWS statistical scope, the 2,080-hour full-year full-time standard work-year conversion, wage definitions, and inclusion and exclusion notes; it provides no specific facilities manager wage percentiles, industry wages, or employment projections.",
+                "limitation": "Supports wage survey coverage, pay definitions and conversion.",
                 "market": "United States",
-                "name": "US Bureau of Labor Statistics OEWS methodology notes (OEWS FAQ)",
-                "period": "OEWS methodology notes",
+                "name": "BLS May 2025 OEWS survey methods",
+                "period": "May 2025 survey",
                 "publisher": "US Bureau of Labor Statistics",
                 "scope": "contextual",
-                "url": "https://www.bls.gov/oes/oes_ques.htm"
+                "url": "https://www.bls.gov/oes/methods_25.pdf"
               },
               {
                 "details": [
@@ -32532,6 +32323,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Beijing Zhonghai Property Management advertised an engineering lead at CNY 8,000–10,000 per month. The role helped plan annual equipment maintenance, coordinated upgrades and oversaw maintenance in common areas. The event served veterans and accompanying military family members."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a55-beijing",
+                "limitation": "These are historical job examples. Current vacancy status is unverified. Property engineering and site operations cover different duties. Comparable nationwide wages for facilities managers in mainland China remain unavailable.",
+                "market": "Mainland China",
+                "name": "Historical Beijing engineering lead posting",
+                "period": "2025-08-07",
+                "publisher": "Beijing Municipal Bureau of Veterans Affairs",
+                "scope": "recruitment_proxy",
+                "url": "https://tyjrswj.beijing.gov.cn/fwzl/jycy/202508/t20250807_4168984.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Shanghai Tongjin Property Services advertised a property manager at CNY 10,000–12,000 per month. Duties included the annual budget, operation of site assets, oversight of outsourced work and tenant service. The event served veterans and accompanying military family members."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a55-shanghai",
+                "limitation": "These are historical job examples. Current vacancy status is unverified. Property engineering and site operations cover different duties. Comparable nationwide wages for facilities managers in mainland China remain unavailable.",
+                "market": "Mainland China",
+                "name": "Historical Shanghai property manager posting",
+                "period": "2024-11-13",
+                "publisher": "Shanghai Municipal Bureau of Veterans Affairs",
+                "scope": "recruitment_proxy",
+                "url": "https://tyjr.sh.gov.cn/shtyjrswj/tzgg/20241113/1947964fa3b64fe2ac25e81b4afadd99.html"
               }
             ]
           },
@@ -35390,6 +35211,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a55-beijing",
+            "posting-a55-shanghai"
+          ],
           "sources_note": {
             "$item": "facilities-managers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -35779,7 +35604,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Lowest 10%",
+            "label": "10th percentile",
             "value": {
               "$fact": "us-wage-low10-2025",
               "field": "display_value"
@@ -35793,7 +35618,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Median (50%)",
+            "label": "Median",
             "value": {
               "$fact": "us-wage-2025",
               "field": "display_value"
@@ -35807,7 +35632,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Highest 10%",
+            "label": "90th percentile",
             "value": {
               "$fact": "us-wage-high10-2025",
               "field": "display_value"
@@ -35956,6 +35781,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "ep",
             "value": {
               "$item": "facilities-managers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36000,7 +35826,8 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
+            "source_ref": "ep",
             "value": {
               "$item": "facilities-managers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36046,6 +35873,7 @@
               "type": "prose"
             },
             "source_id": "nbs",
+            "source_ref": "nbs",
             "value": {
               "$item": "facilities-managers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36061,7 +35889,7 @@
               "$link": "facilities-managers.market-signals.market-signal-card.7",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
-              "entry": "link-3",
+              "entry": "link-4",
               "field": "url"
             },
             "id": "bls",
@@ -36069,7 +35897,7 @@
               "$link": "facilities-managers.market-signals.market-signal-card.7",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
-              "entry": "link-3",
+              "entry": "link-4",
               "field": "entity"
             },
             "scope": {
@@ -36084,7 +35912,7 @@
               "$link": "facilities-managers.market-signals.market-signal-card.7",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
-              "entry": "link-4",
+              "entry": "link-3",
               "field": "url"
             },
             "id": "ep",
@@ -36092,7 +35920,7 @@
               "$link": "facilities-managers.market-signals.market-signal-card.7",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
-              "entry": "link-4",
+              "entry": "link-3",
               "field": "entity"
             },
             "scope": {
@@ -37301,7 +37129,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -37311,27 +37139,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "facilities-managers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "facilities-managers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -37346,6 +37154,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which facilities direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand the interest code",
+      "interface.outlook.evidence_heading": "U.S. employment and China wage context",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "US salary reference",
@@ -37469,10 +37278,10 @@
       },
       {
         "derivation": null,
-        "display_value": "Below 64,480 USD/year",
+        "display_value": "USD 64,480 per year",
         "fact_id": "us-wage-low10-2025",
         "market": "United States",
-        "measure": "Upper bound of the 10th wage percentile",
+        "measure": "10th percentile",
         "occupation_scope": "US facilities managers 11-3013.00 exact occupation",
         "period": "May 2025",
         "source_refs": [
@@ -37481,10 +37290,10 @@
       },
       {
         "derivation": null,
-        "display_value": "82,020 USD/year",
+        "display_value": "USD 82,020 per year",
         "fact_id": "us-wage-q25-2025",
         "market": "United States",
-        "measure": "25th wage percentile availability",
+        "measure": "25th percentile",
         "occupation_scope": "US facilities managers 11-3013.00 exact occupation",
         "period": "May 2025",
         "source_refs": [
@@ -37493,10 +37302,10 @@
       },
       {
         "derivation": null,
-        "display_value": "106,660 USD/year",
+        "display_value": "USD 106,660 per year",
         "fact_id": "us-wage-2025",
         "market": "United States",
-        "measure": "Median wage",
+        "measure": "Median",
         "occupation_scope": "US facilities managers 11-3013.00 exact occupation",
         "period": "May 2025",
         "source_refs": [
@@ -37505,10 +37314,10 @@
       },
       {
         "derivation": null,
-        "display_value": "138,870 USD/year",
+        "display_value": "USD 138,870 per year",
         "fact_id": "us-wage-q75-2025",
         "market": "United States",
-        "measure": "75th wage percentile availability",
+        "measure": "75th percentile",
         "occupation_scope": "US facilities managers 11-3013.00 exact occupation",
         "period": "May 2025",
         "source_refs": [
@@ -37517,10 +37326,10 @@
       },
       {
         "derivation": null,
-        "display_value": "Above 176,120 USD/year",
+        "display_value": "USD 176,120 per year",
         "fact_id": "us-wage-high10-2025",
         "market": "United States",
-        "measure": "Lower bound of the 90th wage percentile",
+        "measure": "90th percentile",
         "occupation_scope": "US facilities managers 11-3013.00 exact occupation",
         "period": "May 2025",
         "source_refs": [
@@ -37529,19 +37338,19 @@
       },
       {
         "derivation": null,
-        "display_value": "165,900 people",
+        "display_value": "165,900 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Employment",
         "occupation_scope": "US facilities managers exact occupation",
         "period": "2025",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "4.6%; net change 7,600 people",
+        "display_value": "4.6%; net change 7,600 jobs",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth rate and official net change",
@@ -37553,7 +37362,7 @@
       },
       {
         "derivation": null,
-        "display_value": "14,200 people/year",
+        "display_value": "14,200 job openings per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Annual average job openings",
@@ -37718,6 +37527,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Beijing Zhonghai Property Management advertised an engineering lead at CNY 8,000–10,000 per month. The role helped plan annual equipment maintenance, coordinated upgrades and oversaw maintenance in common areas. The event served veterans and accompanying military family members.",
+        "fact_id": "posting-a55-beijing",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Facilities operations job posting",
+        "period": "2025-08-07",
+        "source_refs": [
+          "a55-beijing"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Shanghai Tongjin Property Services advertised a property manager at CNY 10,000–12,000 per month. Duties included the annual budget, operation of site assets, oversight of outsourced work and tenant service. The event served veterans and accompanying military family members.",
+        "fact_id": "posting-a55-shanghai",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Facilities operations job posting",
+        "period": "2024-11-13",
+        "source_refs": [
+          "a55-shanghai"
+        ]
       }
     ]
   },
@@ -37731,7 +37564,7 @@
     "badges": [
       "Facilities operations · maintenance and repair · construction and renovation",
       "Budget and contracts · materials and inventory · safety and compliance",
-      "Exact code 11-3013.00 · Chinese wage gap preserved"
+      "U.S. occupation 11-3013 · Mainland China job examples"
     ],
     "metrics": [
       {
@@ -37744,19 +37577,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "US employment growth (official period)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "US employment (exact occupation)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "US annual average job openings (official period)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37770,14 +37603,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What facilities managers do, wages and outlook, the education and qualifications needed, and which tasks AI will change. Based on O*NET, BLS, and National Bureau of Statistics public materials, preserving statistical definitions and data gaps."
+      "text": "Explore facilities management, contractor coordination and acceptance, U.S. wages and employment, mainland China job examples, and tasks AI could assist with."
     },
     "title": {
       "availability": "available",
       "text": "Facilities Managers"
     }
   },
-  "source_content_sha256": "dc6a937fa2e1ea955016b48633dda714540c5b07abf07b7e0f3a6428101fcff6",
+  "source_content_sha256": "8eb124910a6927d06d38ad9b2630b267f219278b59ff1b0755c904ac1f521b75",
   "subject": {
     "canonical_slug": "facilities-managers",
     "name": "Facilities Managers",

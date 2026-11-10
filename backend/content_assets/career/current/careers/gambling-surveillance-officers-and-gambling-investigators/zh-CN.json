@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1497,7 +1494,7 @@
         "status": "pending_mapping"
       },
       "item:gambling-surveillance-officers-and-gambling-investigators.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:gambling-surveillance-officers-and-gambling-investigators.sources.source-card.1": {
         "status": "mapped"
@@ -10834,7 +10831,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10886,7 +10883,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10938,7 +10935,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -24117,12 +24114,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对博彩监控与调查质量的评价。本页按美国 O*NET-SOC 33-9031.00「Gambling Surveillance Officers and Gambling Investigators」编写（固定索引给本资产的中文名是「博彩官博彩调查员」；主要对象是持牌博彩场所内的作弊与盗窃与资产威胁的观察与调查，产出为可复核的监控观察与视频与日志与事件记录）。重要法域边界：本页描述的是美国等允许持牌博彩的辖区内的合法岗位；中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止，该美国合法岗位不能当作中国大陆可经营的职业路径，涉足前必须先核实所在地法律与授权。"
+              "用纸面记录探索自己是否喜欢反复核对和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "cn-public-order"
           ],
           "type": "prose"
         },
@@ -24131,12 +24129,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "编辑探索｜独立完成S/V2合成观察文字、时钟校正、覆盖缺口与权限留痕；只观察纸面核对方法，不检验真实监控技能或授调查资格。"
+              "到「职业准备与S 表：事件登记编号与交接记录」做原题和变式，再打开常见问题参考解。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24145,7 +24143,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜O*NET 关注点：与他人持续接触（81% 为持续接触）、每天进行面对面讨论（86% 每天）、每天使用电话（93%）、每天使用电子邮件（85%）、每天进行影响他人与机构资源的决策（71% 每天）、必须非常精确或高度准确「极其重要」（86%）、不受监督时做决策的自由「很大」（64%）、持续或几乎持续坐着（91%）、持续或几乎持续用双手操作与控制与感知（81%）、持续或几乎持续做重复动作（45%）、与工作组或团队共同工作极其重要（74%）、决策对同事或机构结果「非常重要」（66%）、工作安排固定常规（97%）。若你能在长时间静坐与持续观察中保持注意力与细节准确、并能按规则与授权记录与升级，本职业的日常要求与你的工作方式更接近。"
+              "如果你愿意保留原始记录、反复核对并把差异交给指定复核人，可以进一步了解。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.quick-decision.fit-decision-checklist.3",
@@ -24159,7 +24157,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "情境问卷非事故率或强度：错误39%极严重34%严重15%较严重；时间压力25%每天22%从未，不能推每天压力低；愤怒36%每天32%从未。健康责任26/21/31/13分别很高/高/中等/有限，污染23每天47从未、公开讲话71从未。"
+              "工作中常需反复核对和交接。先用纸面题看自己是否愿意保留事件编号与交接回执的原始记录。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.quick-decision.fermat-decision-card.6",
@@ -24173,7 +24171,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "按S/V2输入校正三事件、保缺失与未知、独立对照答案和三反例；现实登记、经验、训练与机构授权另核。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.quick-decision.fermat-decision-card.7",
@@ -24195,7 +24193,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜博彩官与博彩调查员的工作大体可以分成三类：一是观察与异常识别（使用音频与视频设备与单面镜对赌场或赌场酒店运营进行持续观察，识别员工或顾客的作弊或盗窃等异常活动，监控场所活动以确保符合所在辖区博彩法规与公司政策与程序，检查并监控音频或视频监控设备以确保其正常工作，审阅视频监控录像），二是调查与记录（调查对资金与筹码与博彩设备等博彩资产的潜在威胁，核对交易与游戏流程并形成事件时间线，建立并维护监控观察日志，保全视频与日志与证据，按授权对违规行为与可疑行为进行口头或书面报告），三是监督与协作与培训（作为管理层与顾客的监督与安全代理人，培训或监督监控观察员，与安保与合规与管理岗位按流程协作）。三类工作循环衔接：持续观察与设备检查—识别异常与核对流程—保全证据与记录日志—形成报告与按授权升级。"
+              "在美国持牌场所监看异常活动、记录事件并按授权交接证据。实际执法、证据外传或纪律决定由有相应权限的岗位处理。 保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.profile.career-quick-answers-block.1",
@@ -24209,12 +24207,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业档案要点｜O*NET-SOC 33-9031.00「Gambling Surveillance Officers and Gambling Investigators」的官方范围为：观察博彩运营中的异常活动，例如员工或顾客的作弊或盗窃；调查对资金与筹码与博彩设备等博彩资产的潜在威胁；作为管理层与顾客的监督与安全代理人（Observe gambling operation for irregular activities such as cheating or theft by either employees or patrons. Investigate potential threats to gambling assets such as money, chips, and gambling equipment. Act as oversight and security agent for management and customers.）。职业档案给出的 8 项任务全部为核心任务：监控场所活动以确保遵守所有所在辖区的博彩法规与公司政策与程序；使用音频与视频设备与单面镜观察赌场或赌场酒店运营中的异常活动（如员工或顾客的作弊或盗窃）；以口头或书面形式向主管报告所有违规行为与可疑行为；建立并维护监控观察日志；检查并监控音频或视频监控设备以确保其正常工作；审阅视频监控录像；作为管理层或顾客的监督或安全代理人；培训或监督监控观察员。该职业档案在本轮检索中未显示补充任务。"
+              "美国全国工资采用 O*NET 展示的 2025 年 5 月 BLS OEWS（美国本职业 33-9031）。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -24284,12 +24282,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "设备与画面检查并确认授权范围 → 持续观察并识别异常活动 → 核对交易与游戏流程并形成时间线 → 保全视频与日志与证据 → 建立并维护观察日志 → 形成报告并按授权升级"
+              "接收记录 → 核来源编号 → 核当班记录 → 保留差异 → 标记复核人 → 交接"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "cn-public-order"
           ],
           "type": "prose"
         },
@@ -24298,12 +24298,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射33-9031，不用保安、公安调查、彩票或境外数据代填；有界查阅不证明统计不存在。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -24382,7 +24382,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本职业与相邻岗位的核心差别在「对象与产出」：本职业以持牌场所内的作弊与盗窃与资产威胁的观察与调查为对象，产出为可复核的监控观察与视频与日志与事件记录；安全经理以机构安全战略与团队与风险与预算为产出；博彩经理以场所运营与定价与人员与合规管理为产出；合规经理以合规体系与政策与审计与监管沟通为产出；管理咨询分析师以管理问题诊断与方案为产出；安全管理专员以安全方案与流程与培训为产出；侦探与刑事调查员以案件侦查与取证与移送为产出；损失预防经理以零售与资产损失防控为产出；安全警卫以现场值守与秩序与人员与财产保护为产出。对象产出重心不同可交叉，不能跨岗位沿用取证与查看与移送与处置的权限。"
+              "监控与调查岗观察、保存事实和交接记录。现场安保处理按授权分配的安全职责，管理与执法决定各有负责人。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.profile.career-quick-answers-block.7",
@@ -24606,12 +24606,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "入职前的核对说明｜以下六项用于在应聘与入职前逐条核对，避免以职位名称或宣传话术推断实际职责与授权；核对结果应以书面招聘信息、劳动合同、岗位说明与机构制度为依据，并在入职后持续确认。本页只列核对方向，不构成任何机构的正式条件清单。"
+              "BLS 的美国典型入行准备是高中或同等学历、少于 5 年的相关工作经验及中期在岗培训。 美国内华达州示例：NRS 463.0157 界定适用博彩雇员，NRS 463.335 规定雇员登记。不同州、场所和职责要求分别核对。 中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.profile.career-quick-answers-block.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "nv-registration",
+            "cn-work-example",
+            "cn-public-order"
           ],
           "type": "prose"
         },
@@ -24704,12 +24707,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射33-9031，不用保安、公安调查、彩票或境外数据代填；有界查阅不证明统计不存在。 O*NET规律班表97%、40小时75%、超40小时17%，不保证无夜班；OOH组通常8小时轮班夜班常见，具体合同另核。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.profile.career-quick-answers-block.29",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -24815,16 +24818,16 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 博彩官与博彩调查员国家工资",
+                "entity": "美国 33-9031 全国职业工资原表",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localwages/33-9031.00"
               },
               {
-                "entity": "O*NET 博彩官与博彩调查员就业趋势",
+                "entity": "BLS Employment Projections, Table 1.2",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/33-9031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -25478,12 +25481,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。 合成观察文本的时间校正和日志草稿可试为编辑机制。O*NET七软件类别：FileMaker Pro/iView Systems查询界面、Outlook邮件、Paint图像、Office套件、PowerPoint、Excel、Word；目录例子非全员采用、必须编程或GenAI采用率。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "工具可辅助记录比对和汇总。原值冲突、例外处理和最终交接由授权人员复核。BLS 就业预测没有测量生成式 AI 的采用率。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-public-order",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -26956,12 +26961,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪20.85美元 / 中位年薪43,370美元（2025，BLS OEWS）"
+              "32,730 美元／年 · 15.74 美元／时"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -26970,12 +26975,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。分位不是资历、机构规模或调查职责分层，不等个人实发。"
+              "美国全国职业工资原表｜https://www.onetonline.org/link/localwages/33-9031.00；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -26984,12 +26990,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "10 分位 32,730 美元/年（2025，BLS OEWS）"
+              "36,270 美元／年 · 17.44 美元／时"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -26998,12 +27004,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "全国10分位32730非起薪或观察员专属。"
+              "美国全国职业工资原表｜https://www.onetonline.org/link/localwages/33-9031.00；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27012,12 +27019,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "25 分位 36,270 美元/年（2025，BLS OEWS）"
+              "43,370 美元／年 · 20.85 美元／时"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27026,12 +27033,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "全国25分位36270非资历或机构组。"
+              "美国全国职业工资原表｜https://www.onetonline.org/link/localwages/33-9031.00；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27040,12 +27048,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "75 分位 49,210 美元/年（2025，BLS OEWS）"
+              "49,210 美元／年 · 23.66 美元／时"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27054,12 +27062,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "全国75分位49210非调查带教专属。"
+              "美国全国职业工资原表｜https://www.onetonline.org/link/localwages/33-9031.00；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27068,12 +27077,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "90 分位 61,970 美元/年（2025，BLS OEWS）"
+              "61,970 美元／年 · 29.79 美元／时"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27082,12 +27091,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "全国90分位61970；90/10约1.9仅分布，非机构规模或个人上限。"
+              "美国全国职业工资原表｜https://www.onetonline.org/link/localwages/33-9031.00；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27096,12 +27106,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "就业9,800人（2025，BLS本职33-9031）"
+              "2025 年约 9,800 个岗位，2035 年预计约 9,600 个。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27110,12 +27120,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜直接EP就业范围不同OEWS工资；边界｜自雇栏破折号不当0%，非招聘。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27124,12 +27135,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "下降1.8%（2025—2035，BLS本职33-9031）"
+              "−1.8%"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27138,12 +27149,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜直接EP2025—2035本职33-9031；边界｜非AI因果或个人结果。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27152,12 +27164,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年均岗位空缺1,100个（2025—2035）"
+              "年均约 1,100 个，含替补。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27166,12 +27178,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜年均空缺含转出退出需求；边界｜非十年总量净新增或实际招聘。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27208,7 +27221,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "高中文凭或同等学历"
+              "零售收银"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.25",
@@ -27222,7 +27235,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国新聘学历问卷"
+              "记录核对"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.26",
@@ -27236,7 +27249,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET新聘所需学历问卷84%高中同等、6%中学后证书、5%副学士或两年制学位，合95%不补余项，非全体学历或职责分层。Zone1–2 SVP<6为准备分组非统一训练期。BLS本职典型高中同等、相关经验少于5年、中期在岗训练；OOH本职可需数月训练，通常需赌场或视频监控经验，可从保安取得视频经验，非无经验直接独立调查。"
+              "比对班次与原件。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.27",
@@ -27250,7 +27263,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中学后证书"
+              "客户服务"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.28",
@@ -27264,7 +27277,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国新聘学历问卷"
+              "交接信息"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.29",
@@ -27278,7 +27291,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "6%中学后证书为新聘所需问卷，不等设备合规岗专属。"
+              "记录下一复核人。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.30",
@@ -27292,7 +27305,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "副学士或其他两年制学位"
+              "后台对账"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.31",
@@ -27306,7 +27319,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国新聘学历问卷"
+              "保留差异"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.32",
@@ -27320,7 +27333,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "5%副学士两年制为新聘所需问卷，非调查带教层级；合95不补余项。"
+              "写清原值和差额。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.33",
@@ -27334,7 +27347,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "辖区博彩相关登记与合规培训（如适用）"
+              "岗位要求"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.34",
@@ -27348,7 +27361,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "具体州实际纳入登记定义者"
+              "核带教"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.35",
@@ -27362,7 +27375,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或全美统一执照。机构许可、个人登记、培训及查看调查导出权限分别核。"
+              "以实际用工方要求为准。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.36",
@@ -27474,12 +27487,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜博彩官与博彩调查员（行业与招聘中常称赌场执法专员、博彩调查员、安全专员、监控专员、监控调查员、监控监视员、监控观察员、监控官、监控操作员、监控技术员；在 O*NET 中对应 33-9031.00 Gambling Surveillance Officers and Gambling Investigators，与安全经理、博彩经理、合规经理、管理咨询分析师、安全管理专员、侦探与刑事调查员、损失预防经理与安全警卫分属不同职责与授权层级）"
+              "中国大陆工资参考"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27488,12 +27501,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大，2026-01-01生效；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国分类不授中国经营许可，合法安防审计调查仍需自身准入。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27502,12 +27515,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射33-9031，不用保安、公安调查、彩票或境外数据代填；有界查阅不证明统计不存在。 2025美国全国本职年工资10/25/50/75/90分位32,730/36,270/43,370/49,210/61,970美元；小时15.74/17.44/20.85/23.66/29.79美元。 BLS本职33-9031：2025就业9.8千→2035预测9.6千，公布净减0.2千、下降1.8%，年均岗位空缺1.1千（1,100个）；自雇栏为破折号，不当0%。空缺含转出退出需求，非十年总量、净新增或实际招聘；不由圆整人数反算比例。"
+              "职业能力可用一般零售、合规客户服务或纸面对账任务探索。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27544,12 +27557,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆全国"
+              "全国职业工资分布"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27558,12 +27571,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射33-9031，不用保安、公安调查、彩票或境外数据代填；有界查阅不证明统计不存在。"
+              "所核资料未取得。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27572,12 +27585,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆城市地区"
+              "全国可比就业预测"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27586,12 +27599,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国大陆本职城市工资就业，不用美国州或保安工资代填。"
+              "所核资料未取得。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27600,12 +27613,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆用工形式"
+              "通用技能练习"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27614,12 +27627,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国大陆本职不同用工形式工资就业，不用行业均值或报价代填。"
+              "职业能力可用一般零售、合规客户服务或纸面对账任务探索。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27628,12 +27641,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET-SOC33-9031.00 / BLS SOC33-9031；不从ISCO父级名称推已核精确映射，美国分类不授中国经营许可。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27692,12 +27705,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET本职2025全国工资｜https://www.onetonline.org/link/localwages/33-9031.00?st=CA；BLS本职直接EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS工资纳排｜https://www.bls.gov/oes/oes_ques.htm；BLS OOH本职具体行业工资｜https://www.bls.gov/ooh/protective-service/security-guards.htm"
+              "美国全国职业工资原表｜https://www.onetonline.org/link/localwages/33-9031.00；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；内华达州法规示例｜https://www.leg.state.nv.us/NRS/NRS-463.html"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "bls-ep-2025-2035",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -27706,12 +27721,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "32,730美元/年"
+              "32,730 美元／年 · 15.74 美元／时"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27720,12 +27735,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜2025全国OEWS本职第10分位32730；边界｜非起薪职责组。"
+              "美国全国职业工资原表｜https://www.onetonline.org/link/localwages/33-9031.00；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27734,12 +27750,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "36,270美元/年"
+              "36,270 美元／年 · 17.44 美元／时"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27748,12 +27764,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜全国第25分位36270；边界｜非机构或年资组。"
+              "美国全国职业工资原表｜https://www.onetonline.org/link/localwages/33-9031.00；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27762,12 +27779,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "43,370美元/年"
+              "43,370 美元／年 · 20.85 美元／时"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27776,12 +27793,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜全国第50分位43370；边界｜非个人实发。"
+              "美国全国职业工资原表｜https://www.onetonline.org/link/localwages/33-9031.00；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27790,12 +27808,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "49,210美元/年"
+              "49,210 美元／年 · 23.66 美元／时"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27804,12 +27822,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜全国第75分位49210；边界｜非调查带教组。"
+              "美国全国职业工资原表｜https://www.onetonline.org/link/localwages/33-9031.00；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27818,12 +27837,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "61,970美元/年"
+              "61,970 美元／年 · 29.79 美元／时"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27832,12 +27851,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜全国第90分位61970；边界｜非规模因果或个人上限。"
+              "美国全国职业工资原表｜https://www.onetonline.org/link/localwages/33-9031.00；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27846,12 +27866,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "9,800人（2025，BLS本职33-9031）"
+              "2025 年约 9,800 个岗位，2035 年预计约 9,600 个。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27860,12 +27880,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜2025直接EP本职就业9800；边界｜自雇栏破折号非0%，非招聘。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27874,12 +27895,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下降1.8%（2025—2035）"
+              "−1.8%"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27888,12 +27909,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜2025—2035本职下降1.8%；边界｜预测非AI因果。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27902,12 +27924,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年均1,100个（2025—2035）"
+              "年均约 1,100 个，含替补。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27916,12 +27938,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜2025—2035年均空缺1100含转出退出；边界｜非十年总量净增招聘。"
+              "BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS OEWS 统计说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27944,12 +27967,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025美国全国本职年工资10/25/50/75/90分位32,730/36,270/43,370/49,210/61,970美元；小时15.74/17.44/20.85/23.66/29.79美元。 OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。分位不是资历、机构规模或调查职责分层，不等个人实发。"
+              "2025 年 5 月美国本职业 33-9031 的 OEWS 全国工资中位数为 43,370 美元／年、20.85 美元／时。 OEWS 全国职业工资覆盖领薪雇员。工资分位和就业预测分别来自两张原表。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -28042,12 +28066,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下降1.8%（2025—2035，BLS本职33-9031）"
+              "美国 BLS 表 1.2 的 33-9031 职业行显示，2025 年约 9,800 个岗位，2035 年预计约 9,600 个，表列变化 −1.8%，预计年均约 1,100 个空缺，含替补。就业人数分别取整。 OEWS 全国职业工资覆盖领薪雇员。工资分位和就业预测分别来自两张原表。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -28280,12 +28305,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪20.85美元 / 中位年薪43,370美元（2025，BLS OEWS）"
+              "2025 年 5 月美国本职业 33-9031 的 OEWS 全国工资中位数为 43,370 美元／年、20.85 美元／时。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews"
           ],
           "type": "prose"
         },
@@ -28294,12 +28320,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国10分位32730，非新手观察员专属。"
+              "2025 年 5 月美国全国职业工资。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -28308,12 +28334,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国中位43370，非个人实发或新手必低。"
+              "2025 年 5 月美国全国职业工资。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -28322,12 +28348,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国90分位61970，非资深调查岗专属或个人上限。"
+              "2025 年 5 月美国全国职业工资。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         }
@@ -28354,31 +28380,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "合规经理方向",
@@ -28435,16 +28461,16 @@
                 "url": "https://www.onetonline.org/link/interest/33-9031.00"
               },
               {
-                "entity": "O*NET 33-9031.00 资格与训练",
+                "entity": "O*NET 本职业任务（33-9031.00）",
                 "id": "link-16",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/33-9031.00"
+                "url": "https://www.onetonline.org/link/details/33-9031.00"
               },
               {
-                "entity": "O*NET 33-9031.00 证书资料",
+                "entity": "内华达州 NRS 463.0157、463.335",
                 "id": "link-17",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localcert/33-9031.00"
+                "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
               },
               {
                 "entity": "OEWS工资方法",
@@ -28534,12 +28560,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑探索｜用S/V2观察时钟校正、版本未知与权限记录方法偏好，不从大五推本职绩效。"
+              "做《S 表：事件登记编号与交接记录》原题和单项变式，保留原件和下一复核人。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.fit.personality-fit-block.6",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -28818,12 +28844,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑探索｜用S/V2未知与催促场景反思情绪反应，本职测评绩效效度未核，不设分数门槛。"
+              "做《S 表：事件登记编号与交接记录》原题和单项变式，保留原件和下一复核人。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.fit.personality-fit-block.22",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -28889,12 +28915,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "S/V2仅纸面观察核对留痕，不是最可靠实际胜任证据；真实设备录像技能、相关经验登记训练另核。"
+              "做《S 表：事件登记编号与交接记录》原题和单项变式，保留原件和下一复核人。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.fit.personality-fit-block.27",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -29253,12 +29279,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与沟通可自问；本职效度未核，不把高情商设录用条件，S/V2只观察纸面方法。"
+              "做《S 表：事件登记编号与交接记录》原题和单项变式，保留原件和下一复核人。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.fit.personality-fit-block.53",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -29281,12 +29307,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "S/V2四作品用于纸面观察校正、覆盖版本未知与权限，不称比问卷更可靠或真实胜任。"
+              "做《S 表：事件登记编号与交接记录》原题和单项变式，保留原件和下一复核人。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.fit.personality-fit-block.55",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -29464,34 +29490,34 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "O*NET 博彩官与博彩调查员职业档案",
+                "entity": "O*NET OnLine：博彩官与博彩调查员职业档案（33-9031.00）",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/33-9031.00"
+                "url": "https://www.onetonline.org/link/details/33-9031.00"
               },
               {
-                "entity": "O*NET 博彩官与博彩调查员详细资料",
+                "entity": "O*NET OnLine：博彩官与博彩调查员详细资料（33-9031.00）",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/33-9031.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "《刑法》第三百零三条修正文本",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.spp.gov.cn/zdgz/202012/t20201227_503682.shtml"
               },
               {
-                "entity": "O*NET 博彩官与博彩调查员国家工资",
+                "entity": "中华人民共和国个人信息保护法",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/33-9031.00"
+                "url": "https://www.gov.cn/xinwen/2021-08/20/content_5632486.htm"
               },
               {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
+                "entity": "本站任务与人工复核说明",
                 "id": "link-6",
                 "relation": "career.evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://fermatmind.com"
               }
             ]
           },
@@ -29506,12 +29532,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "六卡为编辑风险场景，非本职发生率；授权内可观察调查设备检查与监督培训，越权疑点内部升级，机构履行适用报告，不每次监管确认。"
+              "中国大陆与美国适用不同规则。职业资料只用来理解工作内容和通用核对技能。 中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.8",
           "source_refs": [
-            "onet"
+            "cn-public-order",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29520,12 +29547,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑风险归纳｜以下卡片用于检查误认漏看、数据权限、原录像日志缺失、设备覆盖、调查移交及报告失真；未取得发生率或严重性排名，具体责任依法域和真实权限核。"
+              "高频核对、差额与权限冲突需保留原件并交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.9",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-public-order",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -29534,12 +29563,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围｜本页依据 O*NET 33-9031.00 的任务与工作情境（与他人持续接触 81%、每天面对面讨论 86%、每天电话 93%、每天电子邮件 85%、每天决策 71%、必须非常精确或高度准确极其重要 86%、不受监督时决策自由很大 64%、错误后果极其严重 39% 与严重 34% 与较严重 15%、每天处理不愉快或愤怒顾客 36%（从未 32%）、每天时间压力 25%（从未 22%）、竞争度中等 37% 与略微 25% 与完全不 22%、身体接近中等接近 30% 与略近 23%、持续坐着 91%、持续用双手操作与控制与感知 81%、持续重复动作 45%、对他人健康与安全很高责任 26% 与高 21% 与中等 31% 与有限责任 13%、暴露污染物每天 23%（从未 47%）、危险条件从未 82%、防护装备从未 88%、工作安排固定常规 97%、工作周 40 小时 75% 与超过 40 小时 17%）与持牌场所合规实务及辖区规则与证据与数据保护要求归纳；工资与就业数字仅作背景信息，不用于风险评估。"
+              "风险为工作情境示例。法域规则和实际授权分别核对。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.10",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-work-example",
+            "cn-public-order",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -29576,12 +29608,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程回看原录像，区分事实推断未知；本职可在有效授权内判断和调查，复核人数与内部升级依实际制度，提示不认定犯罪。"
+              "保留两边原值并交指定复核人。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.13",
           "source_refs": [
-            "onet"
+            "onet",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -29590,12 +29623,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜AI 画面分析提示一名顾客在赌桌旁行为异常，现场被建议据此直接写入事件报告并列为疑似作弊。"
+              "交班资料与原始记录不一致。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.14",
           "source_refs": [
-            "onet"
+            "onet",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -29632,12 +29666,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "核适用法域、用途、法律依据与访问外供权限，按必要范围及有效留存规则处理；跨境条件依实际适用规则核，越权外泄疑点停止相关操作并内部升级。"
+              "标记缺件并找记录保管人核查。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.17",
           "source_refs": [
-            "onet"
+            "onet",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -29646,12 +29681,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜一名同事请求查看某位常客的画面与身份与交易记录以帮朋友核对，且未走数据调取审批流程。"
+              "汇总中缺少对应原件或版本。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -29688,12 +29724,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "保原录像与日志及实际访问导出状态，缺失明确保未知，不用相邻片段冒缺失；按权限调查与内部升级。"
+              "按机构规则限制访问和披露。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "privacy",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -29702,12 +29739,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜某时段录像因存储异常缺失，事件报告需引用该时段画面，被建议用相邻时段画面说明以补全记录。"
+              "记录进入了未确认权限的共享位置。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.22",
           "source_refs": [
-            "onet"
+            "privacy",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -29744,12 +29782,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本职核心检查监控设备，按有效授权检查并报修补覆盖；不因一设备故障停止所有获准画面或自行改变保全记录。"
+              "记录未决项并交有权限的负责人。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.25",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example",
+            "cn-public-order"
           ],
           "type": "prose"
         },
@@ -29758,12 +29798,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜一组摄像头出现花屏且未安排检修，当班被建议先按现有画面继续观察并在交班时再提。"
+              "班组要求处理超出本人权限的例外。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.26",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example",
+            "cn-public-order"
           ],
           "type": "prose"
         },
@@ -29800,12 +29842,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "访谈、对外提供与移交分别核真实权限；本职可授权调查资产威胁，未经授权不对峙或传播，不写所有调查只能交上级。"
+              "保留记录并按现场规则报告主管。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.29",
           "source_refs": [
-            "onet"
+            "onet",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -29814,12 +29857,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜调查中已在画面锁定一名疑似盗窃的员工，现场被建议立即把其叫到监控室当面对峙以快速确认。"
+              "交接期间出现争议或信息冲突。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.30",
           "source_refs": [
-            "onet"
+            "onet",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -29856,12 +29900,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "报告须区分观察事实与推断并注明证据来源与不确定度，按授权路径上报与报送；发现报告或报送疑点立即更正并上报主管与合规岗位"
+              "标为未完成并请主管指定复核人。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.33",
           "source_refs": [
-            "onet"
+            "onet",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -29870,12 +29915,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜为尽快结案，被建议在报告中把推断写成事实并省略证据来源与不确定度，以便对外报送。"
+              "待核记录没有指定接收人。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.risk.career-risk-cards.34",
           "source_refs": [
-            "onet"
+            "onet",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -30028,40 +30074,45 @@
               {
                 "id": "education",
                 "values": [
-                  "学历经验",
-                  "O*NET新聘所需学历问卷84%高中同等、6%中学后证书、5%副学士或两年制学位，合95%不补余项，非全体学历或职责分层。Zone1–2 SVP<6为准备分组非统一训练期。BLS本职典型高中同等、相关经验少于5年、中期在岗训练；OOH本职可需数月训练，通常需赌场或视频监控经验，可从保安取得视频经验，非无经验直接独立调查。",
+                  "美国典型入行",
+                  "BLS 的美国典型入行准备是高中或同等学历、少于 5 年的相关工作经验及中期在岗培训。",
                   "相关经验、训练和登记按真实招聘与法域核。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "权限登记",
-                  "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或全美统一执照。机构许可、个人登记、培训及查看调查导出权限分别核。",
+                  "美国州登记示例",
+                  "美国内华达州示例：NRS 463.0157 界定适用博彩雇员，NRS 463.335 规定雇员登记。不同州、场所和职责要求分别核对。 中国大陆与美国适用不同规则。职业资料只用来理解工作内容和通用核对技能。",
                   "查看、导出、外发和调查授权分别核，不沿名称继承。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "兴趣情境",
-                  "CER C77E63R52及保护性服务法律为职业偏好；坐91手81精确86均职业问卷。",
+                  "大陆法律边界",
+                  "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。",
                   "不设人格体力或录用评分；纸面练习不模拟真实夜班。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "软件资料",
-                  "O*NET七软件类别：FileMaker Pro/iView Systems查询界面、Outlook邮件、Paint图像、Office套件、PowerPoint、Excel、Word；目录例子非全员采用、必须编程或GenAI采用率。",
-                  "真实系统访问仅在有效权限内，S/V2不需系统账号。"
+                  "实际任务与权限",
+                  "保留原始时间戳和证据流转记录，异常由指定负责人复核。 中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。",
+                  "做《S 表：事件登记编号与交接记录》原题和单项变式，保留原件和下一复核人。"
                 ]
               }
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "nv-registration",
+            "cn-work-example",
+            "onet",
+            "cn-public-order",
+            "paper-exercise"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -30074,41 +30125,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "S/V2完整输入",
-                  "S/V2全为合成文字，不含真实视频或身份。标准时钟10:00:00起；A设备快30秒（显示减30秒），B慢20秒（显示加20秒）。本人仅获准查看A/B标准10:00:00至10:03:00并作内部日志，导出与外发申请待批，C无查看权限。A此窗完整，B标准[10:01:20,10:01:50)缺录像，右端恢复；设备状态记录已确认。事件E1 A显示10:01:00：蓝衣者拿起桌面物；E2 B显示10:00:50：蓝衣者进入通道；E3 A显示10:02:00：红衣者从另一侧经过。重收E1内容与来源完全相同，不增事件；蓝衣同色非同人证据、物品归属与去向均未知。L/V1原日志把E2标准时间写10:00:50，L/V2只能追加更正，原记录须保留。旧草稿X写排序E2→E1→E3、B全窗覆盖、蓝衣同人已盗窃、已导出外发。",
-                  "纸笔、计算器即可；按所给字面独立核，无真实视频、真实账号或专家签认。"
+                  "S 表：事件登记编号与交接记录",
+                  "虚构纸面题，只使用题面编号与纸面记录。编号符合已确认事件清单的 K4 且留有交接回执才可送审。S1 为 K4 且有回执，S2 为 K3 且有回执，S3 为 K4 且无回执。编号不符交监控主管，回执缺失交交接负责人。变式只把 S3 的回执改成已收到。分别记录原值、状态和复核人。",
+                  "只使用虚构题面。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "参考交付",
-                  "S/V2答案：E1标准10:00:30，E2标准10:01:10，E3标准10:01:30，顺序E1→E2→E3；E1重收去重但保接收记录。B缺[10:01:20,10:01:50)共30秒，180秒窗覆盖150秒；E2在可用B内，E3时B缺失，A完整不证明B缺失内容。蓝衣是否同人、物归属去向及是否犯罪均未知，只报可见文字。L/V2追加E2时钟与10:01:10更正，保L/V1；导出外发仍待批，C不查看。X四项错误依输入分别纠，不能伪造缺失片段或已批状态。",
-                  "120分钟：20读权限时钟、30校正排序、30覆盖未知、20版本摘要、20反例自核。"
+                  "要交付的记录",
+                  "分别写原题和变式。每行记录原值、状态和复核人。",
+                  "保留原值与缺失状态，并记复核人。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "三项反例",
-                  "反例1：仅A时钟改快60秒，B其余不变；E1标准10:00:00，E3标准10:01:00，E2仍10:01:10，顺序E1→E3→E2；记录新校正版本，不能保旧顺序。 反例2：仅B缺失改为[10:01:00,10:01:50)，50秒缺失、180秒窗覆盖130秒；旧文字E2处于缺失，失去本次录像可核支持，列待核，不把文字当现有可回看画面。",
-                  "反例3：仅新增已批内部导出A10:00:00至10:02:00；可按批准范围内部导出A，B与C及外发仍未批，E3 A10:01:30可覆盖；不从一项批准推所有数据外发。"
+                  "完成后复核",
+                  "完成两种答案后，到常见问题打开折叠参考解。",
+                  "下方链接可跳到常见问题。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "纸面边界",
-                  "保事实推断未知与原版本，不改变题面权限、不伪造录像；只观察纸面方法，非真实观察调查技能或法定证据效力。"
+                  "练习边界",
+                  "只用虚构纸面记录和编号。记录齐备仅指题面的文件状态。"
                 ]
               }
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "paper-answer-key"
           ],
-          "title": "入行练习：一次完整的观察与调查与证据任务（虚构材料）",
+          "title": "纸面试做",
           "type": "cards"
         },
         {
@@ -30119,38 +30171,38 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "权限时钟矩阵",
-                  "一页列A+30/B-20、标准窗、查看已获/导出外发待批/C无权，附原版本；反例3仅A内部批范围更新。"
+                  "并列原件",
+                  "保留编号和原值。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "三事件时间线",
-                  "列原显示与标准E1 00:30/E2 01:10/E3 01:30、E1重收不增；反例1重算00:00/01:10/01:00并排序。"
+                  "标记差异",
+                  "区分不符与缺失。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "覆盖与未知表",
-                  "B缺30秒覆盖150/180，E3时B缺；同衣非同人、物归属去向未知；反例2缺50覆盖130且E2待核。"
+                  "指定复核人",
+                  "按题面指定规则交接。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "日志交接摘要",
-                  "保L/V1追加L/V2更正E2至10:01:10，纠X顺序覆盖犯罪已批四错误，写权限状态与待核；不覆盖旧日志。"
+                  "区分原题和变式",
+                  "只改变式指定的一项。"
                 ]
               }
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "入门时可以准备哪些可复核的作品材料？",
+          "title": "练习记录",
           "type": "cards"
         },
         {
@@ -30211,59 +30263,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天30分钟｜抄S/V2权限时钟矩阵并核标准窗。",
-                  "交付权限时钟矩阵，A/B查看、导出外发待批、C无权分开。"
+                  "读题",
+                  "列题面字段。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天30分钟｜把三显示时间分别校正。",
-                  "交付E1 00:30/E2 01:10/E3 01:30排序与E1去重。"
+                  "核第一项",
+                  "保留原值。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天30分钟｜复算B缺失与覆盖。",
-                  "交付30秒缺150秒覆盖，E3时B未知。"
+                  "核第二项",
+                  "核差异或缺项。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4天30分钟｜纠旧X四项。",
-                  "交付事实推断未知及待批，蓝衣与物归属不定罪。"
+                  "保留差异",
+                  "写下原值与复核人。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5天30分钟｜保L/V1追加L/V2。",
-                  "交付E2更正依据与原记录，不抹旧值。"
+                  "做变式",
+                  "只改题面给定的一项。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天120分钟｜从空白按五阶段复做三反例。",
-                  "独立对照答案与4作品，反例1重排、反例2E2待核、反例3只A内部导出。"
+                  "记结果",
+                  "分别保存原题和变式。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天30分钟｜写继续停止转向与缺项。",
-                  "交付一页决策，纸面能力不冒真实经验登记训练授权。"
+                  "对答案",
+                  "打开常见问题折叠解。"
                 ]
               }
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天体验：用虚构材料完成一次监控观察与证据与上报闭环",
+          "title": "纸面核对顺序",
           "type": "timeline"
         },
         {
@@ -30271,20 +30323,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能从原显示独立校正排序并保原版本。",
-              "继续：能分别记录覆盖缺失、同人归属未知与待批权限。",
-              "继续：三反例能重算，不靠外部签认；真实经验训练登记另核。",
-              "停止：反复伪造缺失、犯罪或已批状态，先补记录方法。",
-              "停止：目标法域机构不允许该经营或所需授权未获，不从纸面作品推可以上岗。",
-              "转向：按安全管理、运营、合规、咨询、安防重心另核真实准入，监督培训本职已有。",
-              "继续或转向：用四作品说明方法偏好，不从问卷或7日练习预测真实岗位绩效。"
+              "核对原值。",
+              "区分差异和缺项。",
+              "核对复核对象。",
+              "检查变式是否只改一项。",
+              "按题设判断记录状态。",
+              "记录仍未解决的差异。",
+              "想一个可向岗位负责人确认的分工问题。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "完成后的复核",
           "type": "list"
         },
         {
@@ -30311,64 +30363,67 @@
             ],
             "rows": [
               [
-                "高中文凭或同等学历",
-                "多数岗位",
-                "满足招聘的学历基础",
-                "依实际招聘及法域核，不是统一条件",
-                "完成高中或同等学力教育",
-                "以具体学校、机构或监管规则核；本页未设统一期限",
-                "O*NET新聘所需学历问卷84%高中同等、6%中学后证书、5%副学士或两年制学位，合95%不补余项，非全体学历或职责分层。Zone1–2 SVP<6为准备分组非统一训练期。BLS本职典型高中同等、相关经验少于5年、中期在岗训练；OOH本职可需数月训练，通常需赌场或视频监控经验，可从保安取得视频经验，非无经验直接独立调查。"
+                "美国典型准备",
+                "美国职业参照",
+                "核教育和带教",
+                "见 BLS 表 1.2",
+                "问实际雇主",
+                "按岗位",
+                "各州另核登记"
               ],
               [
-                "辖区博彩相关登记与背景核验（如适用）",
-                "持牌场所内相关岗位",
-                "满足在持牌场所从业的登记要求",
-                "依实际招聘及法域核，不是统一条件",
-                "按辖区主管机关要求提交申请并通过核验",
-                "以具体学校、机构或监管规则核；本页未设统一期限",
-                "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或全美统一执照。机构许可、个人登记、培训及查看调查导出权限分别核。"
+                "州登记示例",
+                "内华达州适用员工",
+                "核实际职责",
+                "见 NRS 463",
+                "查法条和雇主分工",
+                "按州规定",
+                "州例仅适用本州"
               ],
               [
-                "保密与数据保护与证据保全培训",
-                "所有监控与调查岗位",
-                "编辑学习方向，训练成效未核",
-                "依实际招聘及法域核，不是统一条件",
-                "参加机构或行业培训并考核",
-                "以具体学校、机构或监管规则核；本页未设统一期限",
-                "训练不自动授查看调查导出外发权或保证录用"
+                "通用练习",
+                "职业探索",
+                "做纸面对账",
+                "用虚构记录",
+                "记录原值与差异",
+                "按题面",
+                "实际授权另核"
               ],
               [
-                "监控设备与画面与录像审阅训练",
-                "所有监控岗位",
-                "编辑学习方向，训练成效未核",
-                "依实际招聘及法域核，不是统一条件",
-                "参加机构培训并在岗练习与考核",
-                "以具体学校、机构或监管规则核；本页未设统一期限",
-                "训练不自动授查看调查导出外发权或保证录用"
+                "通用练习",
+                "职业探索",
+                "做纸面对账",
+                "用虚构记录",
+                "记录原值与差异",
+                "按题面",
+                "实际授权另核"
               ],
               [
-                "观察与日志与事件记录与上报训练",
-                "所有监控与调查岗位",
-                "编辑学习方向，训练成效未核",
-                "依实际招聘及法域核，不是统一条件",
-                "参加机构培训并在岗实践与复核",
-                "以具体学校、机构或监管规则核；本页未设统一期限",
-                "训练不自动授查看调查导出外发权或保证录用"
+                "通用练习",
+                "职业探索",
+                "做纸面对账",
+                "用虚构记录",
+                "记录原值与差异",
+                "按题面",
+                "实际授权另核"
               ],
               [
-                "调查与证据与移送与带教经验",
-                "转向调查或带教方向者",
-                "编辑学习方向，训练成效未核",
-                "依实际招聘及法域核，不是统一条件",
-                "多班次实践与内部晋升积累",
-                "以具体学校、机构或监管规则核；本页未设统一期限",
-                "训练不自动授查看调查导出外发权或保证录用"
+                "通用练习",
+                "职业探索",
+                "做纸面对账",
+                "用虚构记录",
+                "记录原值与差异",
+                "按题面",
+                "实际授权另核"
               ]
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.credential-decision.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "nv-registration",
+            "cn-work-example",
+            "cn-public-order"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -30378,15 +30433,18 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "培训证书、个人登记、机构授权、任命分别，不自动授查看导出外发权。",
-              "O*NET84/6/5为新聘所需学历问卷合95不补余，Zone分组非统一期限；BLS本职高中、相关经验少于5年、中期在岗训练，OOH可能数月而非保安数周。",
-              "资格边界（三）｜本页列示的准备项为检索与核对方向，不构成任何机构的正式资格清单；如与机构公告或辖区主管机关要求不一致，以后者为准。",
-              "资格边界（四）｜本页不提供个人背景核验结论、录用可能性或薪酬承诺。"
+              "BLS 的美国典型入行准备是高中或同等学历、少于 5 年的相关工作经验及中期在岗培训。",
+              "美国内华达州示例：NRS 463.0157 界定适用博彩雇员，NRS 463.335 规定雇员登记。不同州、场所和职责要求分别核对。",
+              "中国大陆与美国适用不同规则。职业资料只用来理解工作内容和通用核对技能。",
+              "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.credential-boundary.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "nv-registration",
+            "cn-public-order",
+            "cn-work-example"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -30396,13 +30454,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：未取得代表性本职招聘样本、渠道比例、场所规模、季节负荷或智能监控导致用人变化的量化证据。不把企业直招内部晋升与旺季影响写成已核结论。",
-              "核对建议｜查看招聘信息时应记录发布时间、地点、机构类型（持牌赌场、博彩服务运营商、住宿娱乐场所内的博彩运营部门）、岗位职责与授权边界（画面观察、录像审阅、设备检查、调查与证据、培训与监督）、是否要求辖区相关登记与背景核验与合规培训、工时与排班与夜班安排、绩效与补贴结构、学历与经历要求、以及薪酬构成（基本工资、夜班或班次或假日补贴、绩效或奖金、加班或调休）；这些信息比页面往往更能反映真实条件；同时务必先确认所在地法律是否允许该类经营。"
+              "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。",
+              "职业能力可用一般零售、合规客户服务或纸面对账任务探索。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.recruitment-sample.1",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -30413,10 +30471,10 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 博彩官与博彩调查员职业档案",
+                "entity": "O*NET OnLine：博彩官与博彩调查员详细资料（33-9031.00）",
                 "id": "link-1",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/33-9031.00"
+                "url": "https://www.onetonline.org/link/details/33-9031.00"
               },
               {
                 "entity": "BLS 职业就业与工资统计（OEWS）",
@@ -30449,11 +30507,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以机构招聘条件、学历与经历与考核，以及所在辖区对博彩相关登记与背景核验与合规培训的要求为准，也不代表取得证据调取与对外提供与移送与责任认定的权限；且所在地法律是否允许该类经营须先行核实（美国代码不授中国经营许可）。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.11",
           "source_refs": [
+            "bls-ep-2025-2035",
+            "nv-registration",
             "onet"
           ],
           "type": "prose"
@@ -30575,12 +30635,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET新聘所需学历问卷84%高中同等、6%中学后证书、5%副学士或两年制学位，合95%不补余项，非全体学历或职责分层。Zone1–2 SVP<6为准备分组非统一训练期。BLS本职典型高中同等、相关经验少于5年、中期在岗训练；OOH本职可需数月训练，通常需赌场或视频监控经验，可从保安取得视频经验，非无经验直接独立调查。 编辑学习重心为设备检查、观察录像、日志报告及授权调查监督；S/V2仅匿名纸面核对，真实视频经验和机构训练不同，非保证晋升。"
+              "BLS 的美国典型入行准备是高中或同等学历、少于 5 年的相关工作经验及中期在岗培训。 美国内华达州示例：NRS 463.0157 界定适用博彩雇员，NRS 463.335 规定雇员登记。不同州、场所和职责要求分别核对。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -30589,12 +30650,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜受过培训、取得课程或证书、取得辖区相关登记、获得机构授权是四种不同状态；本页列示的准备项不等于任何法定资格，也不自动赋予证据调取与对外提供与移送与责任认定的决定权。"
+              "美国内华达州示例：NRS 463.0157 界定适用博彩雇员，NRS 463.335 规定雇员登记。不同州、场所和职责要求分别核对。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.21",
           "source_refs": [
-            "onet"
+            "nv-registration"
           ],
           "type": "prose"
         },
@@ -30603,12 +30664,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国本职准备与州登记分别核"
+              "中国大陆与美国，分别核岗位和法域"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.22",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "nv-registration",
+            "cn-public-order"
           ],
           "type": "prose"
         },
@@ -30617,12 +30680,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑路径需实际经验训练登记与岗位权限；本职资产威胁调查与监督培训可在授权内开展，疑点越权内部升级，机构履行适用报告。"
+              "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。 可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "cn-work-example",
+            "cn-public-order"
           ],
           "type": "prose"
         },
@@ -30687,12 +30751,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "监控与保密基础培训记录；机构系统与流程培训。"
+              "核岗位授权和适用辖区。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.28",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30701,7 +30766,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "跟随带教熟悉多画面观察与设备与记录与交接流程，记录每日学习要点。"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.29",
@@ -30715,12 +30780,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "观察与画面与记录与复核意见；能复述授权与保密边界要点。"
+              "用纸面记录展示核对与交接过程。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.30",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -30729,7 +30794,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在带教下承担多画面观察与设备状态与画面覆盖记录与观察日志辅助；不独立承担异常判定与证据调取责任。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.31",
@@ -30757,12 +30822,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "辖区相关登记与在岗培训与考核记录；多画面实践。"
+              "核岗位授权和适用辖区。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.33",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30771,7 +30837,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在不同场景与班次中积累经验，练习识别与不确定度与上报处置。"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.34",
@@ -30785,12 +30851,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "观察与识别与日志与上报记录及复核意见。"
+              "用纸面记录展示核对与交接过程。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.35",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -30799,7 +30865,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成设备与画面检查与持续观察与异常识别与日志与初步报告与升级。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.36",
@@ -30827,12 +30893,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应岗位授权；带教与考核记录。"
+              "核岗位授权和适用辖区。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.38",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30841,7 +30908,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习复杂场景识别与流程优化与培训机制。"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.39",
@@ -30855,12 +30922,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "高峰统筹与带教与异常处置记录。"
+              "用纸面记录展示核对与交接过程。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.40",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -30869,7 +30936,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹多画面与多岗位与班次与监控观察员带教，负责观察与识别与记录与合规落实。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.41",
@@ -30897,12 +30964,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理资历或机构任命。"
+              "核岗位授权和适用辖区。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.43",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30911,7 +30979,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完善识别与上报与记录保存与应急与培训机制。"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.44",
@@ -30925,12 +30993,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "流程与培训与争议与合规处置记录。"
+              "用纸面记录展示核对与交接过程。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.45",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -30939,7 +31007,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与流程与培训与合规与识别标准与纪录保存与对外沟通，处理复杂与争议事项并指导新人。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.46",
@@ -30967,12 +31035,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑准备｜完成相应录像日志或合规保密训练；调取、外供、调查和放行权限按实际职责及机构授权，法定登记另核。"
+              "核岗位授权和适用辖区。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.48",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30981,7 +31050,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "熟悉录像审阅与证据保全与链条与差异处置要求。"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.49",
@@ -30995,12 +31064,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "台账与审阅与记录及被复核情况。"
+              "用纸面记录展示核对与交接过程。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.50",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -31009,7 +31078,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "负责录像检索与回放与证据与日志资料整理辅助与台账维护。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.51",
@@ -31037,12 +31106,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "机构授权与相关培训；多场景实践经历。"
+              "核岗位授权和适用辖区。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.53",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31051,7 +31121,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习证据效力与调取与对外提供与移送与记录保存要求。"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.54",
@@ -31065,12 +31135,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "审阅与证据与差异与异常记录。"
+              "用纸面记录展示核对与交接过程。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.55",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -31079,7 +31149,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担录像审阅与短暂异常还原与证据保全与链条与日志与报告与差异与异常上报。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.56",
@@ -31107,12 +31177,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理资历或机构任命。"
+              "核岗位授权和适用辖区。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.58",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31121,7 +31192,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完善制度与监控与应急与培训与审计机制。"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.59",
@@ -31135,12 +31206,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "证据与调查结论；制度与培训与审计记录。"
+              "用纸面记录展示核对与交接过程。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.60",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -31149,7 +31220,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "对审阅与证据与链条与记录与合规体系与纪录保存与培训负责，制定标准并协调内外部事项。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.61",
@@ -31177,12 +31248,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理任命或机构授权。"
+              "核岗位授权和适用辖区。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.63",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31191,7 +31263,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完善体系与数据与应急与考核与培训机制。"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.64",
@@ -31205,12 +31277,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹结论；制度与绩效与应急与培训文件。"
+              "用纸面记录展示核对与交接过程。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.65",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -31219,7 +31291,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹证据与调查与运营与对外沟通，处理复杂与争议事项。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.66",
@@ -31247,12 +31319,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑准备｜完成相应录像日志或合规保密训练；调取、外供、调查和放行权限按实际职责及机构授权，法定登记另核。"
+              "核岗位授权和适用辖区。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.68",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31261,7 +31334,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "熟悉授权与上报与移送与证据与记录保存与访问要求。"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.69",
@@ -31275,12 +31348,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "规程与记录与资料及被复核情况。"
+              "用纸面记录展示核对与交接过程。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.70",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -31289,7 +31362,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "负责规程与授权与上报资料整理与合规与异常记录与监控资料归集。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.71",
@@ -31317,12 +31390,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "机构授权与相关培训；多场景实践经历。"
+              "核岗位授权和适用辖区。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.73",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31331,7 +31405,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习移送与访谈与证据效力与许可与纪录保存与审计配合要求。"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.74",
@@ -31345,12 +31419,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "上报与移送与争议与记录。"
+              "用纸面记录展示核对与交接过程。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.75",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -31359,7 +31433,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担异常与违规与可疑行为识别与记录与报告与移送协助与顾客与员工信息保护。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.76",
@@ -31387,12 +31461,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理资历或机构任命。"
+              "核岗位授权和适用辖区。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.78",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31401,7 +31476,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完善制度与监控与应急与培训与审计机制。"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.79",
@@ -31415,12 +31490,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "合规结论；制度与培训与审计记录。"
+              "用纸面记录展示核对与交接过程。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.80",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -31429,7 +31504,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "对合规与调查执行与异常上报与记录保存与培训负责，制定标准并协调内外部事项。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.81",
@@ -31457,12 +31532,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理任命或机构授权。"
+              "核岗位授权和适用辖区。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.83",
           "source_refs": [
-            "onet"
+            "nv-registration",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31471,7 +31547,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完善体系与数据与应急与考核与培训机制。"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.84",
@@ -31485,12 +31561,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹结论；制度与绩效与应急与培训文件。"
+              "用纸面记录展示核对与交接过程。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.85",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -31499,7 +31575,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹合规与调查与监控与监管沟通与记录与纪录保存，处理复杂与争议事项。"
+              "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.86",
@@ -31548,28 +31624,28 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET本职2025全国与CA工资",
+                "entity": "O*NET OnLine：博彩官与博彩调查员详细资料（33-9031.00）",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/33-9031.00?st=CA"
+                "url": "https://www.onetonline.org/link/details/33-9031.00"
               },
               {
-                "entity": "BLS本职直接EP2025—2035",
+                "entity": "BLS Employment Projections, Table 1.2",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "现行刑法303法域",
+                "entity": "国家统计局：2025 年城镇单位就业人员年平均工资情况",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://jtgl.beijing.gov.cn/jgj/jgxx/flfg/fl/11033925/index.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "O*NET 博彩官与博彩调查员职业档案",
+                "entity": "O*NET OnLine：博彩官与博彩调查员职业档案（33-9031.00）",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/33-9031.00"
+                "url": "https://www.onetonline.org/link/details/33-9031.00"
               },
               {
                 "entity": "博彩服务工人一线主管",
@@ -31632,12 +31708,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS本职33-9031：2025就业9.8千→2035预测9.6千，公布净减0.2千、下降1.8%，年均岗位空缺1.1千（1,100个）；自雇栏为破折号，不当0%。空缺含转出退出需求，非十年总量、净新增或实际招聘；不由圆整人数反算比例。 2025美国全国本职年工资10/25/50/75/90分位32,730/36,270/43,370/49,210/61,970美元；小时15.74/17.44/20.85/23.66/29.79美元。 证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射33-9031，不用保安、公安调查、彩票或境外数据代填；有界查阅不证明统计不存在。"
+              "美国 BLS 表 1.2 的 33-9031 职业行显示，2025 年约 9,800 个岗位，2035 年预计约 9,600 个，表列变化 −1.8%，预计年均约 1,100 个空缺，含替补。就业人数分别取整。 OEWS 全国职业工资覆盖领薪雇员。工资分位和就业预测分别来自两张原表。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31646,12 +31723,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31660,12 +31737,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31674,12 +31751,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职下降1.8%、年均1100空缺，空缺含转出退出非净增；AI因果未核。 BLS OOH将远程监控及AI摄像头减少需求列为预测解释，另提网上博彩增加减少现场人员需求；这是预测解释，非生成式AI已测采用率、效率或就业因果。"
+              "美国 BLS 表 1.2 的 33-9031 职业行显示，2025 年约 9,800 个岗位，2035 年预计约 9,600 个，表列变化 −1.8%，预计年均约 1,100 个空缺，含替补。就业人数分别取整。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31688,12 +31765,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "EP就业范围与OEWS雇员工资不同，自雇栏破折号不当0%；预测非招聘。"
+              "就业人数分别取整。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31702,12 +31779,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业规模与增长与岗位空缺"
+              "就业规模与变化"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31716,12 +31793,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS本职33-9031直接EP"
+              "33-9031"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31730,12 +31807,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS本职33-9031：2025就业9.8千→2035预测9.6千，公布净减0.2千、下降1.8%，年均岗位空缺1.1千（1,100个）；自雇栏为破折号，不当0%。空缺含转出退出需求，非十年总量、净新增或实际招聘；不由圆整人数反算比例。"
+              "9,800 → 9,600，−1.8%"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31744,12 +31821,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31758,12 +31835,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31772,12 +31849,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位非起薪，90/10约1.9仅分布非场所规模职责原因。"
+              "预计空缺含人员替补。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31786,12 +31863,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。分位不是资历、机构规模或调查职责分层，不等个人实发。 本职全国及CA已核，OOH已提供具体子行业本职年工资，见工资表；O*NET宽行业工资仍未取。"
+              "预计空缺与净增就业是不同指标。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31800,12 +31877,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "工资（中位与分位）"
+              "预计年均空缺"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31814,12 +31891,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业 O*NET-SOC 33-9031.00（OEWS 2025）"
+              "33-9031"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31828,12 +31905,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025美国全国本职年工资10/25/50/75/90分位32,730/36,270/43,370/49,210/61,970美元；小时15.74/17.44/20.85/23.66/29.79美元。"
+              "年均约 1,100 个"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31842,12 +31919,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆"
+              "美国全国"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31856,12 +31933,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025-05"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31870,12 +31947,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大，2026-01-01生效；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国分类不授中国经营许可，合法安防审计调查仍需自身准入。 NBS行业及岗位大组不代本职。"
+              "OEWS 全国职业工资覆盖领薪雇员。工资分位和就业预测分别来自两张原表。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31884,12 +31961,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "法律环境与统计口径不同，不做拼接与换算；涉足相关业务前必须先核实所在地法律与授权。"
+              "实际报价按地区、雇主与班次核对。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31898,12 +31975,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "职业工资与就业（法律边界与缺口）"
+              "工资中位数"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31912,12 +31989,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "刑法303、治安法82及彩票3与有界统计查阅"
+              "33-9031"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31926,12 +32003,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射33-9031，不用保安、公安调查、彩票或境外数据代填；有界查阅不证明统计不存在。"
+              "2025 年 5 月美国本职业 33-9031 的 OEWS 全国工资中位数为 43,370 美元／年、20.85 美元／时。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -31996,7 +32073,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补班组排班与现场监督与合规执行能力"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.34",
@@ -32010,7 +32087,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可探索迁移基础｜监督培训监控观察员及异常日志协作，非完整服务班组管理；核本人经历与目标要求。"
+              "记录核对、客户沟通和异常交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.35",
@@ -32038,7 +32115,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补案件侦查与取证与程序与移送能力"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.37",
@@ -32052,7 +32129,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可探索迁移基础｜资产威胁内部调查及录像报告，非刑事询问取证权；核本人经历与目标要求。"
+              "记录核对、客户沟通和异常交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.38",
@@ -32080,7 +32157,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补零售与资产损失防控与调查与培训能力"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.40",
@@ -32094,7 +32171,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可探索迁移基础｜资产威胁观察调查、报告及培训，非零售全审计体系；核本人经历与目标要求。"
+              "记录核对、客户沟通和异常交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.41",
@@ -32122,7 +32199,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补现场值守与秩序与应急与人员与财产保护能力"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.43",
@@ -32136,7 +32213,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可探索迁移基础｜设备监控、异常记录与协作，非现场巡逻应急全技能；核本人经历与目标要求。"
+              "记录核对、客户沟通和异常交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.44",
@@ -32164,7 +32241,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补现场取证与物证与实验室与记录能力"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.46",
@@ -32178,7 +32255,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可探索迁移基础｜录像日志版本记录仅资料规范的间接基础，非现场物证实验室出庭；核本人经历与目标要求。"
+              "记录核对、客户沟通和异常交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.47",
@@ -32206,7 +32283,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补合规体系与政策与审计与监管沟通能力"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.49",
@@ -32220,7 +32297,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可探索迁移基础｜法规政策监控及日志报告，非全合规体系审计；核本人经历与目标要求。"
+              "记录核对、客户沟通和异常交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.50",
@@ -32248,7 +32325,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补欺诈识别与调查与数据与报告能力"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.52",
@@ -32262,7 +32339,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可探索迁移基础｜资产威胁调查及异常报告，非财务欺诈全技能；核本人经历与目标要求。"
+              "记录核对、客户沟通和异常交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.53",
@@ -32290,7 +32367,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补信息安全与风险评估与事件响应与合规能力"
+              "可在一般零售、客户服务和纸面对账中练习记录核对、差异留痕和交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.55",
@@ -32304,7 +32381,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可探索迁移基础｜访问权限、设备状态及异常记录仅间接基础，非网络安全事件分析全技能；核本人经历与目标要求。"
+              "记录核对、客户沟通和异常交接。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.56",
@@ -32341,103 +32418,111 @@
           "data": {
             "entries": [
               {
-                "answer": "本职定义为观察博彩运营异常、调查资金筹码设备等资产潜在威胁并作为管理与顾客监督安全代理。8核心含合规监控、音视频单面镜观察、向主管报告、维护日志、设备检查、录像审阅、监督安全代理、监督培训观察员；时间线保全为编辑方法，不冒额外核心任务。中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大，2026-01-01生效；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国分类不授中国经营许可，合法安防审计调查仍需自身准入。",
+                "answer": "原题仅 S1 可送审。S2 保留 K3 和要求的 K4，交监控主管。S3 保留缺回执状态，交交接负责人。变式 S1 和 S3 可送审，S2 仍待核。",
+                "id": "gambling-surveillance-officers-and-gambling-investigators.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.gambling-surveillance-officers-and-gambling-investigators.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
+              },
+              {
+                "answer": "在美国持牌场所监看异常活动、记录事件并按授权交接证据。实际执法、证据外传或纪律决定由有相应权限的岗位处理。 保留原始时间戳和证据流转记录，异常由指定负责人复核。",
                 "id": "gambling-surveillance-officers-and-gambling-investigators.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.gambling-surveillance-officers-and-gambling-investigators.q1",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "onet"
                 ]
               },
               {
-                "answer": "六方向按对象产出重心比较可交叉；本职核心含培训监督，不能排全部管理。取证调查查看与对外提供权限不跨岗互认。",
+                "answer": "监控与调查岗观察、保存事实和交接记录。现场安保处理按授权分配的安全职责，管理与执法决定各有负责人。",
                 "id": "gambling-surveillance-officers-and-gambling-investigators.faq.2",
                 "question": "它和安全经理、博彩经理、合规经理有什么区别？",
                 "question_key": "career.faq.gambling-surveillance-officers-and-gambling-investigators.q2",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "onet"
                 ]
               },
               {
-                "answer": "2025美国全国本职年工资10/25/50/75/90分位32,730/36,270/43,370/49,210/61,970美元；小时15.74/17.44/20.85/23.66/29.79美元。 BLS本职33-9031：2025就业9.8千→2035预测9.6千，公布净减0.2千、下降1.8%，年均岗位空缺1.1千（1,100个）；自雇栏为破折号，不当0%。空缺含转出退出需求，非十年总量、净新增或实际招聘；不由圆整人数反算比例。 OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。分位不是资历、机构规模或调查职责分层，不等个人实发。",
+                "answer": "2025 年 5 月美国本职业 33-9031 的 OEWS 全国工资中位数为 43,370 美元／年、20.85 美元／时。 美国 BLS 表 1.2 的 33-9031 职业行显示，2025 年约 9,800 个岗位，2035 年预计约 9,600 个，表列变化 −1.8%，预计年均约 1,100 个空缺，含替补。就业人数分别取整。",
                 "id": "gambling-surveillance-officers-and-gambling-investigators.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.gambling-surveillance-officers-and-gambling-investigators.q3",
                 "source_refs": [
-                  "oews",
-                  "ep"
+                  "onet-wages",
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射33-9031，不用保安、公安调查、彩票或境外数据代填；有界查阅不证明统计不存在。 中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大，2026-01-01生效；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国分类不授中国经营许可，合法安防审计调查仍需自身准入。",
+                "answer": "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。 中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。 职业能力可用一般零售、合规客户服务或纸面对账任务探索。",
                 "id": "gambling-surveillance-officers-and-gambling-investigators.faq.4",
                 "question": "中国大陆有对应的工资数据或职业路径吗？",
                 "question_key": "career.faq.gambling-surveillance-officers-and-gambling-investigators.q4",
                 "source_refs": [
                   "nbs",
-                  "cnclass"
+                  "cn-work-example",
+                  "cn-public-order"
                 ]
               },
               {
-                "answer": "O*NET 工作情境显示：与他人持续接触 81%、每天面对面讨论 86%、每天电话 93%、每天电子邮件 85%、每天使用书面信函与备忘 37%、每天决策 71%、必须非常精确或高度准确极其重要 86%、不受监督时决策自由很大 64%、错误后果极其严重 39% 与严重 34% 与较严重 15%、每天处理不愉快或愤怒顾客 36%（从未 32%）、每天时间压力 25%（从未 22%）、竞争度中等 37% 与略微 25% 与完全不 22%、身体接近中等接近 30% 与略近 23%、持续坐着 91%、持续用双手操作与控制与感知 81%、持续重复动作 45%、对他人健康与安全很高责任 26%、暴露污染物每天 23%（从未 47%）、危险条件从未 82%、防护装备从未 88%、工作安排固定常规 97%、工作周 40 小时 75%。工作以长时间静坐观察与高精确度与保密与高度合规为主。 职业问卷非个体事故率，规律班表不保证无夜班。",
+                "answer": "常见情境有反复核对、现场沟通和轮班交接。站立或久坐、噪声和夜班随地点与岗位变化。",
                 "id": "gambling-surveillance-officers-and-gambling-investigators.faq.5",
                 "question": "工作环境和沟通强度如何？",
                 "question_key": "career.faq.gambling-surveillance-officers-and-gambling-investigators.q5",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "onet"
                 ]
               },
               {
-                "answer": "证据不足：未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。 O*NET七软件类别：FileMaker Pro/iView Systems查询界面、Outlook邮件、Paint图像、Office套件、PowerPoint、Excel、Word；目录例子非全员采用、必须编程或GenAI采用率。 合成日志时钟校正草稿为编辑机制，提示不认定犯罪；获准系统依制度执行，不断永久人工或每次监管确认。",
+                "answer": "工具可辅助记录比对和汇总。原值冲突、例外处理和最终交接由授权人员复核。BLS 就业预测没有测量生成式 AI 的采用率。",
                 "id": "gambling-surveillance-officers-and-gambling-investigators.faq.6",
                 "question": "AI 会影响这个职业吗？",
                 "question_key": "career.faq.gambling-surveillance-officers-and-gambling-investigators.q6",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "bls-ep-2025-2035",
+                  "onet"
                 ]
               },
               {
-                "answer": "O*NET新聘所需学历问卷84%高中同等、6%中学后证书、5%副学士或两年制学位，合95%不补余项，非全体学历或职责分层。Zone1–2 SVP<6为准备分组非统一训练期。BLS本职典型高中同等、相关经验少于5年、中期在岗训练；OOH本职可需数月训练，通常需赌场或视频监控经验，可从保安取得视频经验，非无经验直接独立调查。",
+                "answer": "BLS 的美国典型入行准备是高中或同等学历、少于 5 年的相关工作经验及中期在岗培训。 职业能力可用一般零售、合规客户服务或纸面对账任务探索。",
                 "id": "gambling-surveillance-officers-and-gambling-investigators.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.gambling-surveillance-officers-and-gambling-investigators.q7",
                 "source_refs": [
-                  "onet",
-                  "ep"
+                  "bls-ep-2025-2035",
+                  "onet"
                 ]
               },
               {
-                "answer": "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或全美统一执照。机构许可、个人登记、培训及查看调查导出权限分别核。 中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大，2026-01-01生效；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国分类不授中国经营许可，合法安防审计调查仍需自身准入。",
+                "answer": "美国内华达州示例：NRS 463.0157 界定适用博彩雇员，NRS 463.335 规定雇员登记。不同州、场所和职责要求分别核对。 中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。",
                 "id": "gambling-surveillance-officers-and-gambling-investigators.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.gambling-surveillance-officers-and-gambling-investigators.q8",
                 "source_refs": [
-                  "hr",
-                  "facilities"
+                  "nv-registration",
+                  "cn-work-example",
+                  "cn-public-order"
                 ]
               },
               {
-                "answer": "六卡编辑风险场景非发生率：误认、越权、记录失真缺失、设备覆盖、访谈移交与报告失真。保事实推断未知，按权限开展调查和设备检查，疑点越权内部升级，机构履行适用报告。",
+                "answer": "保留原始时间戳和证据流转记录，异常由指定负责人复核。 对异常先留原件、标未决状态，再按岗位分工升级。",
                 "id": "gambling-surveillance-officers-and-gambling-investigators.faq.9",
                 "question": "这个职业有哪些主要风险？",
                 "question_key": "career.faq.gambling-surveillance-officers-and-gambling-investigators.q9",
                 "source_refs": [
                   "onet",
-                  "bls",
-                  "privacy"
+                  "nv-registration"
                 ]
               },
               {
-                "answer": "BLS本职33-9031：2025就业9.8千→2035预测9.6千，公布净减0.2千、下降1.8%，年均岗位空缺1.1千（1,100个）；自雇栏为破折号，不当0%。空缺含转出退出需求，非十年总量、净新增或实际招聘；不由圆整人数反算比例。 八转向是编辑对象产出比较，不是自动转岗或资格互认；真实经历法域另核。",
+                "answer": "美国 BLS 表 1.2 的 33-9031 职业行显示，2025 年约 9,800 个岗位，2035 年预计约 9,600 个，表列变化 −1.8%，预计年均约 1,100 个空缺，含替补。就业人数分别取整。 本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。 职业能力可用一般零售、合规客户服务或纸面对账任务探索。",
                 "id": "gambling-surveillance-officers-and-gambling-investigators.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.gambling-surveillance-officers-and-gambling-investigators.q10",
                 "source_refs": [
-                  "ep",
+                  "bls-ep-2025-2035",
+                  "nbs",
                   "onet"
                 ]
               }
@@ -32454,12 +32539,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "研究｜本轮核O*NET本职详细、概览、全国CA工资、industry与BLS本职直接EP及OOH本职训练经验段；公共OEWS中国法域NBS与州法沿本批已核范围，未取精确中国统计不证不存在。"
+              "费马测试编辑部"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-wages",
+            "bls-ep-2025-2035",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32468,12 +32556,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源用途｜本职任务情境兴趣学历、全国CA工资、直接EP与OOH训练分别；目录非采用率，ILO/NIST辅助不授权限或提供本职效度。"
+              "O*NET 为任务，OEWS 为美国工资，BLS 表 1.2 为美国就业。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.sources.source-card.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-wages",
+            "bls-ep-2025-2035",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32482,12 +32573,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "查阅｜本轮2026-10-03核当前O*NET2026职业页、2025工资及BLS2025—2035直接EP与OOH；共享公共法域方法沿本批先前已核，不冒全部源本轮新读。"
+              "来源核查日期：2026 年 11 月 10 日。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-wages",
+            "bls-ep-2025-2035",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32496,12 +32590,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射33-9031，不用保安、公安调查、彩票或境外数据代填；有界查阅不证明统计不存在。 证据不足：未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。 OOH具体子行业本职年中位已核，O*NET宽行业工资及规模职责奖金夜班贡献、代表招聘与因果未取；CA44,740已核，不再列全部地区工资未取。 当前宽行业就业份额51/25/22/2，旧共享登记保护待复核。"
+              "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。"
             ]
           },
           "id": "gambling-surveillance-officers-and-gambling-investigators.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -32525,28 +32619,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "博彩官博彩调查员相关方向 2",
+                "entity": "大五人格测评",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "博彩官博彩调查员相关方向 3",
+                "entity": "MBTI 偏好测评",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "博彩官博彩调查员相关方向 4",
+                "entity": "推理测评",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "博彩官博彩调查员相关方向 5",
+                "entity": "情绪能力测评",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "博彩官博彩调查员相关方向 6",
@@ -32575,72 +32669,72 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "官方职业范围：观察博彩运营异常并调查资产威胁并作为管理层与顾客的监督与安全代理人。",
-                  "用于界定本职业边界与样本岗位与就业与教育口径。"
+                  "在美国持牌场所监看异常活动、记录事件并按授权交接证据。实际执法、证据外传或纪律决定由有相应权限的岗位处理。",
+                  "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
                 ],
                 "evidence_type": "official occupational profile",
                 "id": "onet",
                 "limitation": "职业级描述，不替代辖区许可与雇主合规规程。",
                 "market": "美国",
-                "name": "O*NET OnLine：博彩官与博彩调查员职业档案（33-9031.00）",
+                "name": "O*NET 本职业任务（33-9031.00）",
                 "period": "O*NET current occupation profile",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "33-9031.00 exact occupation",
-                "url": "https://www.onetonline.org/link/summary/33-9031.00"
-              },
-              {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "8 项任务（均为核心）与 41 项工作活动与工作情境明细，用于界定本职业边界。",
-                  "用于核对观察与识别与设备与录像与记录与证据环节。"
-                ],
-                "evidence_type": "official task and work context detail",
-                "id": "bls",
-                "limitation": "职业级描述，非自动化风险评估。",
-                "market": "美国",
-                "name": "O*NET OnLine：博彩官与博彩调查员详细资料（33-9031.00）",
-                "period": "O*NET current occupation profile",
-                "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "33-9031.00 exact occupation",
+                "scope": "33-9031.00",
                 "url": "https://www.onetonline.org/link/details/33-9031.00"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "BLS本职33-9031：2025就业9.8千→2035预测9.6千，公布净减0.2千、下降1.8%，年均岗位空缺1.1千（1,100个）；自雇栏为破折号，不当0%。空缺含转出退出需求，非十年总量、净新增或实际招聘；不由圆整人数反算比例。",
-                  "O*NET新聘所需学历问卷84%高中同等、6%中学后证书、5%副学士或两年制学位，合95%不补余项，非全体学历或职责分层。Zone1–2 SVP<6为准备分组非统一训练期。BLS本职典型高中同等、相关经验少于5年、中期在岗训练；OOH本职可需数月训练，通常需赌场或视频监控经验，可从保安取得视频经验，非无经验直接独立调查。"
+                  "在美国持牌场所监看异常活动、记录事件并按授权交接证据。实际执法、证据外传或纪律决定由有相应权限的岗位处理。",
+                  "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
+                ],
+                "evidence_type": "official task and work context detail",
+                "id": "bls",
+                "limitation": "职业级描述，非自动化风险评估。",
+                "market": "美国",
+                "name": "O*NET 本职业任务（33-9031.00）",
+                "period": "O*NET current occupation profile",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "33-9031.00",
+                "url": "https://www.onetonline.org/link/details/33-9031.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "美国 BLS 表 1.2 的 33-9031 职业行显示，2025 年约 9,800 个岗位，2035 年预计约 9,600 个，表列变化 −1.8%，预计年均约 1,100 个空缺，含替补。就业人数分别取整。",
+                  "BLS 的美国典型入行准备是高中或同等学历、少于 5 年的相关工作经验及中期在岗培训。"
                 ],
                 "evidence_type": "official trend display",
                 "id": "ep",
                 "limitation": "预测含转出退出，自雇栏破折号不当0%，非招聘。",
                 "market": "美国",
-                "name": "BLS本职直接EP2025—2035",
-                "period": "2025—2035",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "33-9031.00 exact occupation",
+                "scope": "33-9031",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "2025美国全国本职年工资10/25/50/75/90分位32,730/36,270/43,370/49,210/61,970美元；小时15.74/17.44/20.85/23.66/29.79美元。",
-                  "CA2025年中位44,740，地方非全国。"
+                  "2025 年 5 月美国本职业 33-9031 的 OEWS 全国工资中位数为 43,370 美元／年、20.85 美元／时。",
+                  "OEWS 全国职业工资覆盖领薪雇员。工资分位和就业预测分别来自两张原表。"
                 ],
                 "evidence_type": "official wage display",
                 "id": "oews",
                 "limitation": "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。分位不是资历、机构规模或调查职责分层，不等个人实发。",
                 "market": "美国",
-                "name": "O*NET OnLine：博彩官与博彩调查员国家工资（33-9031.00）",
-                "period": "2025 BLS OEWS wage data via O*NET",
+                "name": "美国 33-9031 全国职业工资原表",
+                "period": "2025-05",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "33-9031.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localwages/33-9031.00?st=CA"
+                "scope": "33-9031",
+                "url": "https://www.onetonline.org/link/localwages/33-9031.00"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "行业及五大岗位组聚合，不能直接映射本职。",
-                  "不作为本职工资代理。"
+                  "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。",
+                  "行业和岗位大类口径。"
                 ],
                 "evidence_type": "official industry wage release",
                 "id": "nbs",
@@ -32655,18 +32749,18 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "企业薪酬官方摘要可定位。",
-                  "未取本职精确值，不能断整份调查未建立本职统计。"
+                  "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。",
+                  "美国职业资料用于理解职责和通用核对技能。大陆相关活动按适用法律处理。"
                 ],
                 "evidence_type": "official survey release",
                 "id": "cnclass",
                 "limitation": "官方摘要可定位，正文受限未核完整表；未取精确值不证不存在。",
                 "market": "中国大陆",
-                "name": "人力资源和社会保障部：企业薪酬调查信息",
+                "name": "《刑法》第三百零三条修正文本",
                 "period": "2025 survey; accessed 2026-08-31",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "parent_occupation_proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202607/t20260708_579822.html"
+                "scope": "中国大陆法域",
+                "url": "https://www.spp.gov.cn/zdgz/202012/t20201227_503682.shtml"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32678,74 +32772,74 @@
                 "id": "privacy",
                 "limitation": "以法律原文与主管部门解释为准。",
                 "market": "中国大陆",
-                "name": "中华人民共和国个人信息保护法",
+                "name": "《中华人民共和国个人信息保护法》",
                 "period": "effective 2021-11-01",
                 "publisher": "全国人民代表大会常务委员会",
                 "scope": "personal information protection",
-                "url": "https://www.gov.cn/xinwen/2021-08/20/content_5632486.htm"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "刑法303规定赌博、开设赌场及组织境外赌博的法定行为与情节，非统计不存在证明。",
-                  "治安法与彩票条例见同块两个独立官方来源；法域边界不证明工资统计不存在。"
+                  "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。",
+                  "美国职业资料用于理解职责和通用核对技能。大陆相关活动按适用法律处理。"
                 ],
                 "evidence_type": "legal guidance",
                 "id": "facilities",
                 "limitation": "刑事行为与情节范围非统计不存在证明。",
                 "market": "中国大陆",
-                "name": "刑法修正案十一后第303条",
+                "name": "《刑法》第三百零三条修正文本",
                 "period": "2021-03-01生效修正",
                 "publisher": "官方转载刑法文本",
-                "scope": "gambling criminal boundary",
-                "url": "https://jtgl.beijing.gov.cn/jgj/jgxx/flfg/fl/11033925/index.html"
+                "scope": "中国大陆法域",
+                "url": "https://www.spp.gov.cn/zdgz/202012/t20201227_503682.shtml"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于定位历年城镇单位平均工资发布。",
-                  "用于核对年度口径发布周期与统计范围。"
+                  "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。",
+                  "美国职业资料用于理解职责和通用核对技能。大陆相关活动按适用法律处理。"
                 ],
                 "evidence_type": "official release index",
                 "id": "operations",
                 "limitation": "发布索引，不含职业级数据。",
                 "market": "中国大陆",
-                "name": "国家统计局：城镇单位平均工资统计发布索引与口径说明",
+                "name": "中国大陆《治安管理处罚法》第 82 条",
                 "period": "2025 release index",
                 "publisher": "国家统计局",
-                "scope": "release index",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/"
+                "scope": "中国大陆法域",
+                "url": "https://jtgl.beijing.gov.cn/jgj/jgxx/flfg/fl/744006073/index.html"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或全美统一执照。机构许可、个人登记、培训及查看调查导出权限分别核。",
-                  "机构许可、个人登记与岗位授权分开。"
+                  "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。",
+                  "美国职业资料用于理解职责和通用核对技能。大陆相关活动按适用法律处理。"
                 ],
                 "evidence_type": "official registration form",
                 "id": "hr",
                 "limitation": "州职责定义登记非全美统一证，实际岗位另核。",
                 "market": "美国",
-                "name": "内华达NRS463实际人员定义登记",
+                "name": "中国大陆《治安管理处罚法》第 82 条",
                 "period": "本批已核现行文本",
                 "publisher": "Nevada Legislature",
-                "scope": "gaming employee registration",
-                "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
+                "scope": "中国大陆法域",
+                "url": "https://jtgl.beijing.gov.cn/jgj/jgxx/flfg/fl/744006073/index.html"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "O*NET七软件类别：FileMaker Pro/iView Systems查询界面、Outlook邮件、Paint图像、Office套件、PowerPoint、Excel、Word；目录例子非全员采用、必须编程或GenAI采用率。",
-                  "热门跨公告与本职招聘采用率分开。"
+                  "在美国持牌场所监看异常活动、记录事件并按授权交接证据。实际执法、证据外传或纪律决定由有相应权限的岗位处理。",
+                  "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
                 ],
                 "evidence_type": "official technology display",
                 "id": "health",
                 "limitation": "七类别例子非全员使用或GenAI采纳。",
                 "market": "美国",
-                "name": "O*NET本职软件目录",
+                "name": "O*NET 本职业任务（33-9031.00）",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "33-9031.00 exact occupation",
+                "scope": "33-9031.00",
                 "url": "https://www.onetonline.org/link/details/33-9031.00"
               },
               {
@@ -32767,18 +32861,18 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "兴趣代码为 CER（常规型—企业型—现实型）。",
-                  "子兴趣领域含法律与保护性服务。"
+                  "在美国持牌场所监看异常活动、记录事件并按授权交接证据。实际执法、证据外传或纪律决定由有相应权限的岗位处理。",
+                  "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
                 ],
                 "evidence_type": "official interest profile",
                 "id": "editor",
                 "limitation": "兴趣数据不构成录用或适配结论。",
                 "market": "美国",
-                "name": "O*NET OnLine：博彩官与博彩调查员职业兴趣（33-9031.00）",
+                "name": "O*NET 本职业任务（33-9031.00）",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "33-9031.00 exact occupation",
-                "url": "https://www.onetonline.org/link/interest/33-9031.00"
+                "scope": "33-9031.00",
+                "url": "https://www.onetonline.org/link/details/33-9031.00"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32815,82 +32909,82 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "BLS本职33-9031：2025就业9.8千→2035预测9.6千，公布净减0.2千、下降1.8%，年均岗位空缺1.1千（1,100个）；自雇栏为破折号，不当0%。空缺含转出退出需求，非十年总量、净新增或实际招聘；不由圆整人数反算比例。",
-                  "本职33-9031与组合33-9030安全警卫33-9032分开。"
+                  "美国 BLS 表 1.2 的 33-9031 职业行显示，2025 年约 9,800 个岗位，2035 年预计约 9,600 个，表列变化 −1.8%，预计年均约 1,100 个空缺，含替补。就业人数分别取整。",
+                  "BLS 的美国典型入行准备是高中或同等学历、少于 5 年的相关工作经验及中期在岗培训。"
                 ],
                 "evidence_type": "official projections overview",
                 "id": "weforum",
                 "limitation": "预测不等于实际招聘。",
                 "market": "美国",
-                "name": "BLS就业预测直接表",
+                "name": "BLS Employment Projections, Table 1.2",
                 "period": "2025—2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "national projections",
+                "scope": "33-9031",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于字段与证据口径与缺口登记规则。",
-                  "用于跨市场与法域口径边界说明。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "编辑说明",
                 "id": "employer",
-                "limitation": "内部口径规则，非外部事实来源。",
-                "market": "全球",
-                "name": "FermatMind 职业内容字段与证据口径规则",
-                "period": "current authoring rules",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页任务",
                 "url": "https://fermatmind.com"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "证书目录与准入提示。",
-                  "辖区博彩相关登记与背景核验以主管机关要求为准。"
+                  "美国内华达州示例：NRS 463.0157 界定适用博彩雇员，NRS 463.335 规定雇员登记。不同州、场所和职责要求分别核对。",
+                  "按具体职责和州核证件。"
                 ],
                 "evidence_type": "official credential directory",
                 "id": "purchasing-managers",
                 "limitation": "证书目录不等同于辖区登记或机构授权。",
                 "market": "美国",
-                "name": "O*NET OnLine：博彩官与博彩调查员证书资料（33-9031.00）",
+                "name": "内华达州 NRS 463.0157、463.335",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "33-9031.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localcert/33-9031.00"
+                "scope": "美国内华达州示例",
+                "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "O*NET新聘所需学历问卷84%高中同等、6%中学后证书、5%副学士或两年制学位，合95%不补余项，非全体学历或职责分层。Zone1–2 SVP<6为准备分组非统一训练期。BLS本职典型高中同等、相关经验少于5年、中期在岗训练；OOH本职可需数月训练，通常需赌场或视频监控经验，可从保安取得视频经验，非无经验直接独立调查。",
-                  "新聘问卷、Zone分组、BLS典型入门分别。"
+                  "美国内华达州示例：NRS 463.0157 界定适用博彩雇员，NRS 463.335 规定雇员登记。不同州、场所和职责要求分别核对。",
+                  "按具体职责和州核证件。"
                 ],
                 "evidence_type": "official training directory",
                 "id": "r2-pay-1",
                 "limitation": "培训路径不等于辖区登记或机构授权。",
                 "market": "美国",
-                "name": "O*NET本职学历与准备要素",
+                "name": "内华达州 NRS 463.0157、463.335",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "33-9031.00 exact occupation",
-                "url": "https://www.onetonline.org/link/details/33-9031.00"
+                "scope": "美国内华达州示例",
+                "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "用于核对职业要素与样本岗位名称。",
-                  "样本岗位含 Casino Enforcement Agent 与 Gaming Investigator 与 Surveillance Agent 与 Surveillance Investigator 与 Surveillance Monitor 与 Surveillance Officer 等。"
+                  "在美国持牌场所监看异常活动、记录事件并按授权交接证据。实际执法、证据外传或纪律决定由有相应权限的岗位处理。",
+                  "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
                 ],
                 "evidence_type": "official custom occupation profile",
                 "id": "r2-pay-2",
                 "limitation": "用于边界与要素核对。",
                 "market": "美国",
-                "name": "O*NET OnLine：博彩官与博彩调查员定制职业页（33-9031.00）",
+                "name": "O*NET 本职业任务（33-9031.00）",
                 "period": "current page; accessed 2026-09-01",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "33-9031.00 exact occupation",
-                "url": "https://www.onetonline.org/link/custom/33-9031.00"
+                "scope": "33-9031.00",
+                "url": "https://www.onetonline.org/link/details/33-9031.00"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32927,50 +33021,50 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于说明 Surveillance Officer 与 Surveillance Agent 与 Gaming Investigator 等样本标题归属本职业岗位族。",
-                  "该岗位为场所监控与调查岗位，不是发牌或柜台结算或投注受理或场所运营管理岗位。"
+                  "在美国持牌场所监看异常活动、记录事件并按授权交接证据。实际执法、证据外传或纪律决定由有相应权限的岗位处理。",
+                  "保留原始时间戳和证据流转记录，异常由指定负责人复核。"
                 ],
                 "evidence_type": "official taxonomy mapping",
                 "id": "msresearch",
                 "limitation": "用于标题到 SOC 的映射，不构成许可依据。",
                 "market": "美国",
-                "name": "美国 BLS：2018 SOC 直接匹配标题文件",
+                "name": "O*NET 本职业任务（33-9031.00）",
                 "period": "2018 SOC; accessed 2026-08-31",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "SOC direct match titles",
-                "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
+                "scope": "33-9031.00",
+                "url": "https://www.onetonline.org/link/details/33-9031.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。分位不是资历、机构规模或调查职责分层，不等个人实发。",
-                  "全国分位不按职责规模或年资分组。"
+                  "2025 年 5 月美国本职业 33-9031 的 OEWS 全国工资中位数为 43,370 美元／年、20.85 美元／时。",
+                  "OEWS 全国职业工资覆盖领薪雇员。工资分位和就业预测分别来自两张原表。"
                 ],
                 "evidence_type": "official methodology",
                 "id": "onet-wages",
-                "limitation": "以方法文档原文为准。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
-                "name": "美国 BLS：职业就业与工资统计（OEWS）方法说明",
-                "period": "2025 OEWS methodology; accessed 2026-08-31",
+                "name": "美国 33-9031 全国职业工资原表",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "OEWS methodology",
-                "url": "https://www.bls.gov/oes/oes_ques.htm"
+                "scope": "33-9031",
+                "url": "https://www.onetonline.org/link/localwages/33-9031.00"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "本职可能需数月训练、通常赌场或视频监控经验。",
-                  "安全警卫组许可证、数周训练及组合人数空缺不套本职。"
+                  "美国内华达州示例：NRS 463.0157 界定适用博彩雇员，NRS 463.335 规定雇员登记。不同州、场所和职责要求分别核对。",
+                  "按具体职责和州核证件。"
                 ],
                 "evidence_type": "official jurisdiction regulator",
                 "id": "archivists",
                 "limitation": "本職段与安全警卫及组合分开。",
                 "market": "美国",
-                "name": "BLS OOH本职监控调查训练经验",
+                "name": "内华达州 NRS 463.0157、463.335",
                 "period": "当前OOH2025—2035",
                 "publisher": "BLS",
-                "scope": "gaming regulations and registration",
-                "url": "https://www.bls.gov/ooh/protective-service/security-guards.htm"
+                "scope": "美国内华达州示例",
+                "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -33005,21 +33099,75 @@
                 "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=292"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "对多路画面持续观察并识别作弊与盗窃 — 75/100; weight=1/3; gambling-surveillance-officers-and-gambling-investigators.ai-impact.ai-impact-table.101[0]",
-                  "审阅视频监控录像并还原短暂异常 — 75/100; weight=1/3; gambling-surveillance-officers-and-gambling-investigators.ai-impact.ai-impact-table.109[0]",
-                  "建立并维护观察日志并保全视频与日志与证据 — 75/100; weight=1/3; gambling-surveillance-officers-and-gambling-investigators.ai-impact.ai-impact-table.117[0]"
+                  "美国 BLS 表 1.2 的 33-9031 职业行显示，2025 年约 9,800 个岗位，2035 年预计约 9,600 个，表列变化 −1.8%，预计年均约 1,100 个空缺，含替补。就业人数分别取整。",
+                  "BLS 的美国典型入行准备是高中或同等学历、少于 5 年的相关工作经验及中期在岗培训。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "33-9031",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。",
+                  "美国职业资料用于理解职责和通用核对技能。大陆相关活动按适用法律处理。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "用于区分法域与职业资料范围。",
+                "market": "中国大陆",
+                "name": "《刑法》第三百零三条修正文本",
+                "period": "2020-12-26",
+                "publisher": "最高人民检察院转载",
+                "scope": "中国大陆法域",
+                "url": "https://www.spp.gov.cn/zdgz/202012/t20201227_503682.shtml"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "S 表：事件登记编号与交接记录",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "前往纸面试做",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。"
+                ],
+                "id": "cn-public-order",
+                "market": "中国大陆",
+                "name": "中国大陆《治安管理处罚法》第 82 条",
+                "url": "https://jtgl.beijing.gov.cn/jgj/jgxx/flfg/fl/744006073/index.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "美国内华达州示例：NRS 463.0157 界定适用博彩雇员，NRS 463.335 规定雇员登记。不同州、场所和职责要求分别核对。"
+                ],
+                "id": "nv-registration",
+                "market": "美国内华达州",
+                "name": "内华达州 NRS 463.0157、463.335",
+                "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
+              },
+              {
+                "details": [
+                  "完成原题与变式后打开折叠答案。"
+                ],
+                "id": "paper-answer-key",
+                "name": "纸面练习参考解（常见问题）",
+                "url": "#career-content-sources"
               }
             ]
           },
@@ -34356,8 +34504,8 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
-        "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为博彩官博彩调查员？教育、资格与职业发展路径",
+        "entry_heading": "职业准备与S 表：事件登记编号与交接记录",
+        "heading": "职业准备与S 表：事件登记编号与交接记录",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "gambling-surveillance-officers-and-gambling-investigators.path.career-path-block.21",
@@ -34471,6 +34619,60 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "id": "cn-work-example",
+            "label": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "scope": "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。"
+          },
+          {
+            "href": {
+              "$source": "cn-public-order",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "id": "cn-public-order",
+            "label": {
+              "$source": "cn-public-order",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "scope": "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。"
+          },
+          {
+            "href": {
+              "$source": "nv-registration",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "id": "nv-registration",
+            "label": {
+              "$source": "nv-registration",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "scope": "美国内华达州示例：NRS 463.0157 界定适用博彩雇员，NRS 463.335 规定雇员登记。不同州、场所和职责要求分别核对。"
           }
         ],
         "tracks": [
@@ -35232,7 +35434,7 @@
             },
             "evidence_refs": [
               "onet",
-              "employer"
+              "nv-registration"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -35247,7 +35449,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "误认或漏看或对短暂异常识别错误或把工具提示当作作弊或盗窃事实"
+            "title": "金额或记录差异"
           },
           {
             "affected_roles": {
@@ -35263,8 +35465,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "employer"
+              "onet",
+              "nv-registration"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35279,7 +35481,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "越权查看或调取或对外提供或员工与顾客画面与身份与交易数据泄露或超范围使用"
+            "title": "原件与版本缺失"
           },
           {
             "affected_roles": {
@@ -35295,8 +35497,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "employer"
+              "privacy",
+              "nv-registration"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -35311,7 +35513,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "证据链断裂或录像缺失或日志与记录不完整或不真实"
+            "title": "个人信息与访问权限"
           },
           {
             "affected_roles": {
@@ -35327,8 +35529,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "onet"
+              "nv-registration",
+              "cn-work-example",
+              "cn-public-order"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -35343,7 +35546,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "设备故障或画面覆盖不足或未按规程检查致观察盲区"
+            "title": "职责和授权不明"
           },
           {
             "affected_roles": {
@@ -35359,8 +35562,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "employer"
+              "onet",
+              "nv-registration"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35375,7 +35578,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "对嫌疑人不当对峙或访谈越界或移送程序不当或未经授权对外披露"
+            "title": "高峰期与沟通压力"
           },
           {
             "affected_roles": {
@@ -35391,8 +35594,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "employer"
+              "onet",
+              "nv-registration"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35407,7 +35610,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "报告失真或把提示或怀疑当作事实或上报与报送路径不当"
+            "title": "交接对象缺失"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -35526,6 +35729,42 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "cn-public-order",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "id": "cn-public-order",
+            "label": {
+              "$source": "cn-public-order",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "scope": "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。"
+          },
+          {
+            "href": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "id": "cn-work-example",
+            "label": {
+              "$source": "cn-work-example",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "scope": "中国大陆《刑法》第三百零三条规制以营利为目的的聚众赌博、以赌博为业、开设赌场及符合条文条件的组织公民参与境外赌博。《治安管理处罚法》第 82 条涉及以营利为目的为赌博提供条件或参与赌博赌资较大等情形。"
           }
         ]
       },
@@ -35533,7 +35772,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "薪资 · 10 分位",
+              "指标": "第 10 百分位",
               "数值": {
                 "$item": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -35548,7 +35787,7 @@
               }
             },
             {
-              "指标": "薪资 · 25 分位",
+              "指标": "第 25 百分位",
               "数值": {
                 "$item": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -35563,7 +35802,7 @@
               }
             },
             {
-              "指标": "薪资 · 中位数",
+              "指标": "第 50 百分位（中位数）",
               "数值": {
                 "$item": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -35578,7 +35817,7 @@
               }
             },
             {
-              "指标": "薪资 · 75 分位",
+              "指标": "第 75 百分位",
               "数值": {
                 "$item": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -35593,7 +35832,7 @@
               }
             },
             {
-              "指标": "薪资 · 90 分位",
+              "指标": "第 90 百分位",
               "数值": {
                 "$item": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.15",
                 "block": "china-salary",
@@ -35835,7 +36074,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35849,7 +36088,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35863,7 +36102,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35886,12 +36125,12 @@
           "ui": {
             "ai_heading": "AI 会影响博彩官博彩调查员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "中国职业工资：法律边界与数据缺口",
-            "scenario_caption": "美国新聘学历问卷及具体法域条件，不映射中国岗位层级",
-            "scenario_heading": "法域、招聘学历与登记条件怎样分别核？",
-            "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
-            "scenario_value_label": "资料适用范围"
+            "official_heading": "中国大陆职业工资资料",
+            "scenario_caption": "通用岗位核对项",
+            "scenario_heading": "可探索哪些通用岗位能力？",
+            "scenario_interpretation_label": "需要确认",
+            "scenario_role_label": "核对范围",
+            "scenario_value_label": "核对项"
           },
           "us_growth": {
             "$item": "gambling-surveillance-officers-and-gambling-investigators.china-salary.career-snapshot-primary-locale.58",
@@ -35917,7 +36156,7 @@
         "bls_table": [
           {
             "fact_ref": "us-wage-low10-2025",
-            "指标": "薪资 · 10 分位",
+            "指标": "第 10 百分位",
             "数值": {
               "$item": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35933,7 +36172,7 @@
           },
           {
             "fact_ref": "us-wage-q25-2025",
-            "指标": "薪资 · 25 分位",
+            "指标": "第 25 百分位",
             "数值": {
               "$item": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.11",
               "block": "us-salary",
@@ -35949,7 +36188,7 @@
           },
           {
             "fact_ref": "us-wage-2025",
-            "指标": "薪资 · 中位数",
+            "指标": "第 50 百分位（中位数）",
             "数值": {
               "$item": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.13",
               "block": "us-salary",
@@ -35965,7 +36204,7 @@
           },
           {
             "fact_ref": "us-wage-q75-2025",
-            "指标": "薪资 · 75 分位",
+            "指标": "第 75 百分位",
             "数值": {
               "$item": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.15",
               "block": "us-salary",
@@ -35981,7 +36220,7 @@
           },
           {
             "fact_ref": "us-wage-high10-2025",
-            "指标": "薪资 · 90 分位",
+            "指标": "第 90 百分位",
             "数值": {
               "$item": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.17",
               "block": "us-salary",
@@ -36107,8 +36346,8 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国博彩官博彩调查员工资多少？",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "heading": "美国本职业工资",
+        "industry_heading": "美国行业工资资料",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
@@ -36251,50 +36490,62 @@
           "field": "period"
         },
         "wage_column_labels": [
-          "工资统计位置",
-          "年工资参考",
-          "折算边界",
-          "怎样理解这个位置"
+          "分位",
+          "年薪",
+          "时薪",
+          "统计口径"
         ],
-        "wage_heading": "美国工资分布",
+        "wage_heading": "2025 年 5 月美国全国工资分位",
         "wage_tiers": [
           {
-            "equivalent": "官方年工资，非个人月收入",
+            "equivalent": "15.74 美元／时",
             "interpretation": {
               "$item": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "第10百分位",
+            "label": "第 10 百分位",
             "value": {
               "$fact": "us-wage-low10-2025",
               "field": "display_value"
             }
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "17.44 美元／时",
+            "interpretation": "2025 年 5 月美国全国职业工资。",
+            "label": "第 25 百分位",
+            "value": "36,270 美元／年"
+          },
+          {
+            "equivalent": "20.85 美元／时",
             "interpretation": {
               "$item": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "中位数（50%）",
+            "label": "第 50 百分位（中位数）",
             "value": {
               "$fact": "us-wage-2025",
               "field": "display_value"
             }
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "23.66 美元／时",
+            "interpretation": "2025 年 5 月美国全国职业工资。",
+            "label": "第 75 百分位",
+            "value": "49,210 美元／年"
+          },
+          {
+            "equivalent": "29.79 美元／时",
             "interpretation": {
               "$item": "gambling-surveillance-officers-and-gambling-investigators.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "第90百分位",
+            "label": "第 90 百分位",
             "value": {
               "$fact": "us-wage-high10-2025",
               "field": "display_value"
@@ -36442,7 +36693,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36487,7 +36738,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36532,7 +36783,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "onet-wages",
             "value": {
               "$item": "gambling-surveillance-officers-and-gambling-investigators.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36634,6 +36885,42 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "id": "bls-ep-2025-2035",
+            "label": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "scope": "美国 BLS 表 1.2 的 33-9031 职业行显示，2025 年约 9,800 个岗位，2035 年预计约 9,600 个，表列变化 −1.8%，预计年均约 1,100 个空缺，含替补。就业人数分别取整。"
+          },
+          {
+            "href": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "id": "onet-wages",
+            "label": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "gambling-surveillance-officers-and-gambling-investigators.source-register.published.1"
+            },
+            "scope": "2025 年 5 月美国本职业 33-9031 的 OEWS 全国工资中位数为 43,370 美元／年、20.85 美元／时。"
           }
         ],
         "transitions": [
@@ -37097,7 +37384,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "cta_label": "了解我的智力与推理表现",
+            "cta_label": "体验矩阵推理测评",
             "evidence_level": {
               "$item": "gambling-surveillance-officers-and-gambling-investigators.fit.personality-fit-block.19",
               "block": "fit",
@@ -37675,7 +37962,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合博彩官博彩调查员",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37752,7 +38039,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI测评"
+            "label": "大五人格测评"
           },
           {
             "href": {
@@ -37762,7 +38049,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "大五人格测评"
+            "label": "MBTI 偏好测评"
           },
           {
             "href": {
@@ -37772,7 +38059,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "推理测评"
           },
           {
             "href": {
@@ -37782,7 +38069,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "情绪能力测评"
           }
         ]
       },
@@ -37960,19 +38247,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资参考",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
       "market-signals": "职业前景与相关职业转向",
       "navigation": "下一步与相关入口",
-      "path": "入行、资格与职业发展",
+      "path": "职业准备与S 表：事件登记编号与交接记录",
       "profile": "职业画像",
       "quick-decision": "快速判断",
       "risk": "工作压力、风险与职业边界",
       "source-register": "资料来源",
       "sources": "常见问题与资料来源",
-      "us-salary": "美国薪资参考"
+      "us-salary": "美国本职业工资"
     }
   },
   "fact_register": {
@@ -37990,81 +38277,80 @@
         ]
       },
       {
-        "derivation": "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。分位不是资历、机构规模或调查职责分层，不等个人实发。",
-        "display_value": "中位时薪20.85美元 / 中位年薪43,370美元（2025，BLS OEWS）",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "43,370 美元／年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "工资中位数",
-        "occupation_scope": "本职业：博彩官博彩调查员",
-        "period": "2025",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "33-9031",
+        "period": "2025-05",
         "source_refs": [
-          "oews",
           "onet-wages"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "10 分位 32,730 美元/年（2025，BLS OEWS）",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "32,730 美元／年",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "工资第10分位",
-        "occupation_scope": "本职业：博彩官博彩调查员",
-        "period": "2025",
+        "occupation_scope": "33-9031",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "onet-wages"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "90 分位 61,970 美元/年（2025，BLS OEWS）",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "61,970 美元／年",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "工资第90分位",
-        "occupation_scope": "本职业：博彩官博彩调查员",
-        "period": "2025",
+        "occupation_scope": "33-9031",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "onet-wages"
         ]
       },
       {
-        "derivation": "BLS本职33-9031：2025就业9.8千→2035预测9.6千，公布净减0.2千、下降1.8%，年均岗位空缺1.1千（1,100个）；自雇栏为破折号，不当0%。空缺含转出退出需求，非十年总量、净新增或实际招聘；不由圆整人数反算比例。",
-        "display_value": "下降1.8%（2025—2035，BLS本职33-9031）",
+        "derivation": "BLS 表 1.2 精确职业行。",
+        "display_value": "−1.8%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长",
-        "occupation_scope": "本职业：博彩官博彩调查员",
-        "period": "2025—2035",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "33-9031",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "BLS本职33-9031：2025就业9.8千→2035预测9.6千，公布净减0.2千、下降1.8%，年均岗位空缺1.1千（1,100个）；自雇栏为破折号，不当0%。空缺含转出退出需求，非十年总量、净新增或实际招聘；不由圆整人数反算比例。",
-        "display_value": "就业9,800人（2025，BLS本职33-9031）",
+        "derivation": "BLS 表 1.2 精确职业行。",
+        "display_value": "约 9,800 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数",
-        "occupation_scope": "本职业：博彩官博彩调查员",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "33-9031",
         "period": "2025",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "BLS本职33-9031：2025就业9.8千→2035预测9.6千，公布净减0.2千、下降1.8%，年均岗位空缺1.1千（1,100个）；自雇栏为破折号，不当0%。空缺含转出退出需求，非十年总量、净新增或实际招聘；不由圆整人数反算比例。",
-        "display_value": "年均岗位空缺1,100个（2025—2035）",
+        "derivation": "BLS 表 1.2 精确职业行。",
+        "display_value": "年均约 1,100 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺",
-        "occupation_scope": "本职业：博彩官博彩调查员",
-        "period": "2025—2035",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "33-9031",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "本轮有界未取精确值，不证明统计不存在。",
-        "display_value": "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射33-9031，不用保安、公安调查、彩票或境外数据代填；有界查阅不证明统计不存在。",
+        "derivation": "国家统计局行业背景和本页职业证据缺口分开。",
+        "display_value": "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
@@ -38076,8 +38362,8 @@
         ]
       },
       {
-        "derivation": "本轮有界未取精确值，不证明统计不存在。",
-        "display_value": "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射33-9031，不用保安、公安调查、彩票或境外数据代填；有界查阅不证明统计不存在。",
+        "derivation": "国家统计局行业背景和本页职业证据缺口分开。",
+        "display_value": "本页所核资料未取得中国大陆本职业的全国工资分布或同口径全国就业预测。",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
@@ -38089,79 +38375,67 @@
         ]
       },
       {
-        "derivation": "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。分位不是资历、机构规模或调查职责分层，不等个人实发。",
-        "display_value": "25分位36,270美元/年",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "36,270 美元／年",
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
         "measure": "工资第25分位",
-        "occupation_scope": "本职33-9031.00",
-        "period": "2025",
+        "occupation_scope": "33-9031",
+        "period": "2025-05",
         "source_refs": [
-          "oews"
+          "onet-wages"
         ]
       },
       {
-        "derivation": "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。分位不是资历、机构规模或调查职责分层，不等个人实发。",
-        "display_value": "75分位49,210美元/年",
+        "derivation": "2025 年 5 月 OEWS 全国职业工资。",
+        "display_value": "49,210 美元／年",
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
         "measure": "工资第75分位",
-        "occupation_scope": "本职33-9031.00",
-        "period": "2025",
+        "occupation_scope": "33-9031",
+        "period": "2025-05",
         "source_refs": [
-          "oews"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "75%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "博彩官博彩调查员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "onet-wages"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "博彩官博彩调查员 · 任务、交付与责任边界",
-      "来源范围 · 统计口径 · 人工复核",
-      "中国精确职业工资缺口按证据保留"
+      "博彩场所监控与调查员",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国薪资中位数（2025，BLS OEWS）"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2025—2035）"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国就业人数（2025）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均岗位空缺（2025—2035）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "available",
@@ -38175,17 +38449,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "博彩官博彩调查员做什么、需要什么能力、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围、来源口径和数据缺口。"
+      "text": "了解博彩场所监控与调查员的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "博彩官博彩调查员"
+      "text": "博彩场所监控与调查员做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "55af17352db84f6934a37a09cbf2ca8be71f8a7278da84128fefb86fecff58c9",
+  "source_content_sha256": "8bd87656de49b199020917b42bcd9fa9f613069908c88f0fa14727da05916863",
   "subject": {
     "canonical_slug": "gambling-surveillance-officers-and-gambling-investigators",
-    "name": "博彩官博彩调查员",
-    "summary": "博彩官与博彩调查员（O*NET-SOC 33-9031.00，Gambling Surveillance Officers and Gambling Investigators）在持牌博彩场所内观察博彩运营中的异常活动并调查对博彩资产的潜在威胁，并作为管理层与顾客的监督与安全代理人：使用音频与视频设备与单面镜对赌场或赌场酒店运营进行持续观察，识别员工或顾客的作弊或盗窃；监控场所活动以确保遵守所在辖区博彩法规与公司政策与程序；检查并监控音频或视频监控设备以确保其正常工作；审阅视频监控录像；调查对资金与筹码与博彩设备等博彩资产的潜在威胁；核对交易与游戏流程并形成事件时间线；建立并维护监控观察日志；保全视频与日志与证据；以口头或书面形式向主管报告违规行为与可疑行为；培训或监督监控观察员。官方定义原文：Observe gambling operation for irregular activities such as cheating or theft by either employees or patrons. Investigate potential threats to gambling assets such as money, chips, and gambling equipment. Act as oversight and security agent for management and customers."
+    "name": "博彩场所监控与调查员",
+    "summary": "在美国持牌场所监看异常活动、记录事件并按授权交接证据。实际执法、证据外传或纪律决定由有相应权限的岗位处理。"
   }
 }

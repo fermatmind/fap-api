@@ -138,12 +138,21 @@
         "status": "pending_mapping"
       },
       "item:mixing-and-blending-machine-setters-operators-and-tenders.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:mixing-and-blending-machine-setters-operators-and-tenders.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:mixing-and-blending-machine-setters-operators-and-tenders.path.interview-probation.10": {
+        "status": "pending_mapping"
+      },
+      "item:mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1": {
         "status": "mapped"
       },
       "item:mixing-and-blending-machine-setters-operators-and-tenders.profile.definition-block.1": {
@@ -5665,52 +5674,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5941,96 +6088,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -11959,7 +12342,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Scope: this page covers only O*NET 51-9023.00 (Mixing and Blending Machine Setters, Operators, and Tenders) for career exploration. Actual ingredient preparation, loading, cleaning, and equipment work must follow employer procedures and local regulations."
+              "Try the paper exercise if you tend to trust a completed form without checking the material lot it refers to."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.quick-decision.fermat-decision-card.1",
@@ -11973,7 +12356,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "How to assess: use an entirely fictional work order and formula to check whether you can describe weighing checks, loading and mixing sequences, sampling and recordkeeping, cleaning and handover essentials, and retain verifiable records."
+              "In 09 Entry, qualifications, and career development, find “MX-24: Check a Mixing Batch Record.” Allow about 10 minutes before reading the answer."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.quick-decision.fermat-decision-card.2",
@@ -11987,7 +12370,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Who it suits: people willing to operate and tend equipment consistently according to work orders and formulas, continually verify materials and batches, and stop and escalate when anomalies arise."
+              "Consider mixing and blending work if you like tracing a batch from its work order through a recorded material check."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.quick-decision.fermat-decision-card.3",
@@ -12066,7 +12449,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Pace and responsibility: 76% of respondents have extremely high responsibility for others' health and safety, 76% make decisions daily, and 68% consider exactness or accuracy extremely important. Coordination with supervisors, colleagues, and laboratories is often required."
+              "O*NET work context: 76% of respondents selected very high responsibility for other workers’ health and safety. Check how a specific employer divides safety responsibilities and who verifies a handover."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.definition-block.4",
@@ -12080,7 +12463,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Capabilities and working methods: requires production and processing knowledge, operation and control, process monitoring, and quality control analysis skills, along with the ability to use ERP and office software and keep records according to procedures."
+              "Key abilities include production and processing, equipment control, process monitoring, quality checks and keeping records to procedure. Some employers use ERP or office software for records; ask which tools the site uses."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.definition-block.5",
@@ -12236,7 +12619,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Practice weighing, loading, and recordkeeping using entirely fictional work orders and formulas."
+              "In MX-24, use paper records to check the batch and material lot. Do not calculate a formula or handle materials."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.ai-impact.ai-impact-table.2",
@@ -12342,7 +12725,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China has no national occupational wage data with exactly the same scope as O*NET 51-9023.00. Manufacturing average wages can only serve as an industry proxy, not individual wages."
+              "This review did not obtain national occupational wages for this exact job in mainland China. Manufacturing averages are industry context only."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.china-salary.career-snapshot-primary-locale.1",
@@ -12406,12 +12789,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This U.S. occupation, 51-9023.00: 2025 wages and 2025—2035 projections; not starting wages, Chinese wages, or individual guarantees."
+              "The wage table shows annual and hourly estimates at five points in the national wage distribution."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12420,12 +12803,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 wages: 10th percentile annual wage 36,790 USD, directly published hourly wage 17.69 USD; 25th percentile annual wage 42,850 USD, directly published hourly wage 20.60 USD; 50th percentile annual wage 48,990 USD, directly published hourly wage 23.55 USD; 75th percentile annual wage 59,860 USD, directly published hourly wage 28.78 USD; 90th percentile annual wage 70,200 USD, directly published hourly wage 33.75 USD. Percentiles are statistical positions, not experience stages or take-home earnings."
+              "Source: May 2025 U.S. national wage estimates."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12434,12 +12817,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. 51-9023.00: 2025—2035 employment 97,300→91,400 people, -6%, net change -5,900 people; average annual openings of 7,900 include growth and replacement needs. This overall projection does not establish AI causation."
+              "Source: May 2025 U.S. national wage estimates."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12448,12 +12831,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. employment shares by industry: manufacturing 80%, other sectors including wholesale 20%; not industry wages or demand rates."
+              "Source: May 2025 U.S. national wage estimates."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12462,12 +12845,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Employment levels, growth rates, net changes, and average annual openings must be explained separately and cannot be combined into an individual employment guarantee."
+              "It does not tell you the starting wage or what a specific employer will offer."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-wages"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12702,7 +13085,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "No actual job advertisements were collected for this page. The following are editorial capability stages and verification suggestions, not recruitment sample statistics, standardized job levels, or guaranteed timelines."
+              "The job stages below illustrate how duties can change with training and authorization. The historical job posting is one example; this page does not report a systematic survey of job ads. Employers set their own role levels and training timelines."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.career-path-block.1",
@@ -12730,7 +13113,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Entry exercise: use entirely fictional work orders and formulas to complete weighing, loading, and anomaly response exercises, and ask someone to provide feedback against standards."
+              "Start with MX-24 and write a one-line paper handover. On Day 6, check the separate case on your own before opening the Day 7 reference."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.career-path-block.3",
@@ -12772,12 +13155,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Seven-day trial: on days 1—2, become familiar with work orders, formulas, and safety procedures; on days 3—5, complete ingredient preparation and operation exercises under supervision; on days 6—7, ask others to challenge operational and safety judgments and document evidence for continuing, stopping, or changing direction."
+              "For the seven-day trial, find W-MX in this section. Compare fictional mixer inspection records by machine ID and shift. Do your first review on your own; a second reader is optional."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.career-path-block.6",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "editorial-context"
           ],
           "type": "prose"
         },
@@ -12819,6 +13202,13 @@
               "career.column.boundary",
               "career.column.evidence",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Stage",
+              "Tasks",
+              "Authority limits",
+              "Evidence",
+              "Next step"
             ],
             "rows": [
               [
@@ -12862,6 +13252,7 @@
           "source_refs": [
             "source-pack-onet-localtraining"
           ],
+          "title": "Roles and supervised responsibilities",
           "type": "table"
         },
         {
@@ -12873,6 +13264,12 @@
               "career.column.action",
               "career.column.review",
               "career.column.evidence"
+            ],
+            "column_labels": [
+              "Situation",
+              "Response",
+              "Review points",
+              "Evidence"
             ],
             "rows": [
               [
@@ -12905,6 +13302,7 @@
           "source_refs": [
             "source-pack-onet-localtraining"
           ],
+          "title": "What a reviewer may ask",
           "type": "table"
         },
         {
@@ -12919,6 +13317,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Topic",
+              "Evidence",
+              "Verifier",
+              "Condition",
+              "Limit",
+              "Responsible party",
+              "Next step"
             ],
             "rows": [
               [
@@ -12981,7 +13388,129 @@
           "source_refs": [
             "source-pack-onet-localtraining"
           ],
+          "title": "Check training and authorization by duty",
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials (about 10 minutes)",
+                  "A fictional mixing line wants batch D8 and a recorded material check for lot L6.",
+                  "Sheet B2: batch D8, checked lot L6. Sheet B5: batch D8, checked lot L9.",
+                  "Use paper only. Do not calculate a recipe, handle material or authorize equipment use."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Decide whether either sheet matches the documentation request. Cite the batch and material lot on both sheets.",
+                  "Write one line for a line reviewer saying what your paper check can establish."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Where to find the reference",
+                  "After your own attempt, open “MX-24 answer key” in the FAQ.",
+                  "Compare it with your notes."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Did I cite both records, explain my decision, and name the person who could verify it?"
+                ]
+              }
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+          "title": "MX-24: Check a Mixing Batch Record",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "Day 1",
+                  "Start W-MX. To compare two fictional inspection notes, require the same mixer ID and a recorded shift on each. Copy the two conditions."
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "Day 2",
+                  "Note V3 lists mixer Q2 and shift A. Record both fields."
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "Day 3",
+                  "Note V6 lists mixer Q2 with the shift field blank. Record both fields as written."
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "Day 4",
+                  "Check each note against the two conditions and draft one question for a supervisor."
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "Day 5",
+                  "Write a handover that cites both notes and explains your comparison decision."
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "Day 6",
+                  "Work alone first. Recheck both mixer IDs and shift fields before revising. Peer feedback is optional."
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "Day 7",
+                  "After the Day 6 independent check, open “W-MX answer key (Day 7)” in the FAQ. Compare your note, then choose one habit to practice."
+                ]
+              }
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+          "title": "Seven-day paper trial: a separate case",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "I read both records.",
+              "I checked both rules.",
+              "I recorded my comparison decision.",
+              "I named the reviewer.",
+              "I used fictional records only.",
+              "I rechecked my work independently.",
+              "I chose one habit to practice."
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+          "title": "Judgement questions after seven days",
+          "type": "list"
         }
       ]
     },
@@ -12996,7 +13525,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 51-9023.00: 2025—2035 employment 97,300→91,400 people, -6%, net change -5,900 people; average annual openings of 7,900 include growth and replacement needs. This overall projection does not establish AI causation."
+              "BLS Table 1.2 lists 97,300 U.S. jobs in 2025 and projects 91,400 in 2035 for Mixing and Blending Machine Setters, Operators, and Tenders (51-9023), a published net change of -5,900 jobs (−6.1%). The 7,900 projected average annual openings include replacements."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.market-signals.market-signal-card.1",
@@ -13010,7 +13539,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "United States nationwide; distinguish employment stock, growth, net change, and openings. Causal evidence on generative AI's net job effects has not been obtained."
+              "United States"
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.market-signals.market-signal-card.2",
@@ -13024,7 +13553,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035 projection; no real job advertisements were collected for this page, and no national demand rate is provided."
+              "May 2025"
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.market-signals.market-signal-card.3",
@@ -13111,7 +13640,7 @@
                 ]
               },
               {
-                "answer": "Available information supports task-level assistance judgments only and cannot establish a job elimination timetable. Projected employment change of -1% (2024—2034) reflects combined industry, automation, and other factors, not a replacement timetable.",
+                "answer": "The available sources do not show whether AI will replace this occupation. Tools may help organize batch records or flag readings. Qualified staff still check materials, handle abnormal conditions and follow site safety procedures. BLS projects overall U.S. employment and does not isolate the effect of AI.",
                 "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.5",
                 "question": "Will AI replace this occupation?",
                 "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.human-control",
@@ -13138,7 +13667,7 @@
                 ]
               },
               {
-                "answer": "BLS 2025 wage data: median annual wage 48,990 USD (hourly wage 23.55 USD); 10th percentile 36,790 USD, 25th percentile 42,850 USD, 75th percentile 59,860 USD, and 90th percentile 70,200 USD. Employment was approximately 101,100 in 2024, with approximately -1% change projected for 2024—2034.",
+                "answer": "May 2025 U.S. median annual wage: $48,990. BLS Table 1.2 lists 97,300 U.S. jobs in 2025 and projects 91,400 in 2035 for Mixing and Blending Machine Setters, Operators, and Tenders (51-9023), a published net change of -5,900 jobs (−6.1%). The 7,900 projected average annual openings include replacements.",
                 "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.8",
                 "question": "What U.S. wage and employment evidence is available?",
                 "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.education-path",
@@ -13147,7 +13676,7 @@
                 ]
               },
               {
-                "answer": "In the United States, this occupation generally requires a high school diploma or GED and several days to one year of on-the-job training. Mainland China's ingredient preparation and equipment operation requirements depend on relevant authority and employer rules. Training does not equal authorization to work independently.",
+                "answer": "BLS lists high school or equivalent and moderate-term on-the-job training as typical for this U.S. occupation. Employer requirements can differ. In the O*NET survey about new hires, 80% selected high school or equivalent, 12% a postsecondary certificate, and 6% some college without a degree. These are answers about new hires, not the education distribution of incumbent workers. A historical Zhifu district listing describes a batching job that prepares materials against a process sheet, loads and mixes them, and keeps production records. This is one employer example, not nationwide eligibility or a current vacancy.",
                 "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.9",
                 "question": "What are typical entry and training paths?",
                 "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.risk-boundary",
@@ -13172,12 +13701,27 @@
                 "source_refs": [
                   "onet-details"
                 ]
+              },
+              {
+                "answer": "B2 matches D8 and L6. B5 matches the batch but names L9. This selects the matching paper record only; the line reviewer must verify the original if deciding what to do with actual material.",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.trial-short-reference",
+                "question": "MX-24 answer key",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.trial-short-reference"
+              },
+              {
+                "answer": "Both notes name Q2, but V6 lacks a shift. Do not compare them under the paper rule. Ask the supervisor for V6’s source shift entry.",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.trial-week-reference",
+                "question": "W-MX answer key (Day 7)",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.trial-week-reference"
               }
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.sources.faq-block.1",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "onet-trends",
+            "source-pack-onet-localwages",
+            "cn-example-024"
           ],
           "type": "faq"
         },
@@ -13186,12 +13730,14 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "The five 2025 U.S. annual wage percentiles for 51-9023 are correct. Average annual openings of 7900 for 2025—2035 are not a ten-year total. China's manufacturing industry proxy applies only within that industry. Training groups, interests, and AI trials do not authorize equipment or material operations."
+              "The May 2025 wage table gives five national wage percentiles for this U.S. occupation. The 7,900 projected openings are an annual average for 2025–35. Mainland China manufacturing averages are broader industry figures. Paper exercises do not authorize machine operation or material handling."
             ]
           },
           "id": "mixing-and-blending-machine-setters-operators-and-tenders.sources.boundary-notice.2",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "source-pack-onet-localwages",
+            "onet-trends"
           ],
           "type": "prose"
         }
@@ -13230,13 +13776,13 @@
                 "entity": "Mixing and blending machine setters, operators, and tenders",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Mixing and blending machine setters, operators, and tenders",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Mixing and blending machine setters, operators, and tenders",
@@ -13383,19 +13929,20 @@
                 "url": "https://www.onetcenter.org/taxonomy.html"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Without figures, supports only unavailability or narrow-scope boundaries."
+                  "BLS Table 1.2 lists 97,300 U.S. jobs in 2025 and projects 91,400 in 2035 for Mixing and Blending Machine Setters, Operators, and Tenders (51-9023), a published net change of -5,900 jobs (−6.1%). The 7,900 projected average annual openings include replacements.",
+                  "BLS lists high school or equivalent and moderate-term on-the-job training as typical for this U.S. occupation. Employer requirements can differ."
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
-                "limitation": "Without figures, supports only unavailability or narrow-scope boundaries.",
+                "limitation": "BLS Table 1.2 lists 97,300 U.S. jobs in 2025 and projects 91,400 in 2035 for Mixing and Blending Machine Setters, Operators, and Tenders (51-9023), a published net change of -5,900 jobs (−6.1%). The 7,900 projected average annual openings include replacements.",
                 "market": "US",
-                "name": "National employment trends for 51-9023.00",
-                "period": "BLS 2024-2034 projections via O*NET; retrieved 2026-08-31",
-                "publisher": "O*NET OnLine / BLS",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/51-9023.00"
+                "name": "BLS Table 1.2: occupation-specific projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "Mixing and Blending Machine Setters, Operators, and Tenders",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -13415,14 +13962,14 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Shows fields selected from this O*NET occupation profile."
                 ],
                 "evidence_type": "official custom occupation profile",
                 "id": "source-pack-onet-custom",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Applies to this U.S. occupation; does not establish Chinese wages, classification or legal authorization.",
                 "market": "US",
                 "name": "51-9023.00 - Mixing and Blending Machine Setters, Operators, and Tenders",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Occupation profile, updated 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/51-9023.00"
@@ -13430,14 +13977,14 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Lists tasks, work context, education responses and other occupation data."
                 ],
                 "evidence_type": "official occupation details",
                 "id": "source-pack-onet-details",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Applies to this U.S. occupation; does not establish Chinese wages, classification or legal authorization.",
                 "market": "US",
                 "name": "51-9023.00 - Mixing and Blending Machine Setters, Operators, and Tenders",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Occupation profile, updated 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/51-9023.00"
@@ -13445,29 +13992,30 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Lists software tools associated with this occupation."
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "The tool list does not establish adoption or AI replacement rates.",
                 "market": "US",
                 "name": "Hot Technologies: 51-9023.00 - Mixing and Blending Machine Setters, Operators, and Tenders",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Directory checked 2026-11-10",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/51-9023.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Manufacturing 80%, other industries 20%.",
+                  "O*NET Details labels the top industries as 2025. These shares describe employment, not industry wages."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "O*NET Details labels the top industries as 2025. These shares describe employment, not industry wages.",
                 "market": "US",
                 "name": "Industries: 51-9023.00 - Mixing and Blending Machine Setters, Operators, and Tenders",
-                "period": "current page; accessed 2026-09-02",
+                "period": "2025",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/51-9023.00"
@@ -13475,14 +14023,14 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Lists U.S. certification resources associated with this occupation."
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "source-pack-onet-localcert",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "A directory entry does not grant authorization or establish a universal hiring requirement.",
                 "market": "US",
                 "name": "National Certifications: 51-9023.00 - Mixing and Blending Machine Setters, Operators, and Tenders",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Directory checked 2026-11-10",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/51-9023.00"
@@ -13490,14 +14038,14 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Provides a way to look up training for this U.S. occupation."
                 ],
                 "evidence_type": "official local training discovery",
                 "id": "source-pack-onet-localtraining",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "A directory entry does not grant authorization or establish a universal hiring requirement.",
                 "market": "US",
                 "name": "National Training: 51-9023.00 - Mixing and Blending Machine Setters, Operators, and Tenders",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Directory checked 2026-11-10",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/51-9023.00"
@@ -13505,14 +14053,15 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page."
+                  "May 2025 U.S. medians: $48,990 a year and $23.55 an hour.",
+                  "The table publishes both annual and hourly wage percentiles."
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
+                "limitation": "National wage percentiles do not establish starting pay, an individual offer or Chinese wages.",
                 "market": "US",
                 "name": "National Wages: 51-9023.00 - Mixing and Blending Machine Setters, Operators, and Tenders",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "May 2025, BLS OEWS",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-9023.00"
@@ -13520,14 +14069,14 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Summarizes the work and related occupational information."
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "source-pack-onet-summary",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Applies to this U.S. occupation; does not establish Chinese wages, classification or legal authorization.",
                 "market": "US",
                 "name": "51-9023.00 - Mixing and Blending Machine Setters, Operators, and Tenders",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "Occupation profile, updated 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-9023.00"
@@ -13548,6 +14097,20 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A historical Zhifu district listing describes a batching job that prepares materials against a process sheet, loads and mixes them, and keeps production records. This is one employer example, not nationwide eligibility or a current vacancy."
+                ],
+                "id": "cn-example-024",
+                "limitation": "A historical Zhifu district listing describes a batching job that prepares materials against a process sheet, loads and mixes them, and keeps production records. This is one employer example, not nationwide eligibility or a current vacancy.",
+                "market": "CN",
+                "name": "Zhifu district: June 2026 employer notice",
+                "period": "2026-06",
+                "publisher": "Zhifu district: June 2026 employer notice",
+                "scope": "Zhifu district: June 2026 employer notice",
+                "url": "https://www.zhifu.gov.cn/col/col101867/art/2026/art_0cf757963eb64f6a921d399444707a26.html"
               }
             ]
           },
@@ -13825,7 +14388,7 @@
             "使用限制": "Uses the U.S. scope for this occupation and does not represent an individual's probability of being hired.",
             "来源": "National Employment Trends 51-9023.00",
             "研究对象": "Employment and wage definitions (BLS data displayed by O*NET)",
-            "结论": "U.S. 51-9023.00: 2025—2035 employment 97,300→91,400 people, -6%, net change -5,900 people; average annual openings of 7,900 include growth and replacement needs. This overall projection does not establish AI causation.",
+            "结论": "BLS Table 1.2 lists 97,300 U.S. jobs in 2025 and projects 91,400 in 2035 for Mixing and Blending Machine Setters, Operators, and Tenders (51-9023), a published net change of -5,900 jobs (−6.1%). The 7,900 projected average annual openings include replacements.",
             "链接": "https://www.onetonline.org/link/localtrends/51-9023.00"
           },
           {
@@ -14313,7 +14876,7 @@
             }
           },
           {
-            "answer": "Qualification and safety boundaries: in the United States, this occupation generally requires a high school diploma or GED and several days to one year of on-the-job training. Verify mainland China's ingredient preparation, hazardous chemical, and equipment operation requirements against relevant authority and employer rules. Training does not equal authorization to work independently.",
+            "answer": "BLS lists a high school diploma or equivalent and moderate-term on-the-job training as typical. Verify equipment and materials authorization with the employer and follow the applicable site procedure.",
             "key": "qa1",
             "question": "Qualification and safety boundaries",
             "table": {
@@ -14613,58 +15176,58 @@
             "scenario_role_label": "Role direction",
             "scenario_value_label": "Industry annual wage reference"
           },
-          "us_growth": "-6%（2025—2035）",
+          "us_growth": "−6.1% (2025–2035)",
           "us_median": "48,990 USD/year"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "2025 national wages | https://www.onetonline.org/link/localwages/51-9023.00",
+        "authority_sources": "National wage percentiles | https://www.onetonline.org/link/localwages/51-9023.00; BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET 2025 industries | https://www.onetonline.org/link/industry/51-9023.00",
         "bls_table": [
           {
             "指标": "10th wage percentile",
-            "数值": "$36,790",
+            "数值": "$36,790 per year; $17.69 per hour",
             "说明": "This U.S. occupation | https://www.onetonline.org/link/localwages/51-9023.00"
           },
           {
             "指标": "25th wage percentile",
-            "数值": "$42,850",
+            "数值": "$42,850 per year; $20.60 per hour",
             "说明": "This U.S. occupation | https://www.onetonline.org/link/localwages/51-9023.00"
           },
           {
             "指标": "Median wage",
-            "数值": "$48,990",
+            "数值": "$48,990 per year; $23.55 per hour",
             "说明": "This U.S. occupation | https://www.onetonline.org/link/localwages/51-9023.00"
           },
           {
             "指标": "75th wage percentile",
-            "数值": "$59,860",
+            "数值": "$59,860 per year; $28.78 per hour",
             "说明": "This U.S. occupation | https://www.onetonline.org/link/localwages/51-9023.00"
           },
           {
             "指标": "90th wage percentile",
-            "数值": "$70,200",
+            "数值": "$70,200 per year; $33.75 per hour",
             "说明": "This U.S. occupation | https://www.onetonline.org/link/localwages/51-9023.00"
           },
           {
-            "指标": "Employment level (2025 / 2035)",
-            "数值": "97,300（2025）；91,400（2035）",
-            "说明": "This U.S. occupation | https://www.onetonline.org/link/localtrends/51-9023.00"
+            "指标": "Employment (jobs)",
+            "数值": "97,300 jobs in 2025; 91,400 projected for 2035",
+            "说明": "BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "Employment change (2025—2035)",
-            "数值": "-6%（2025—2035）",
-            "说明": "This U.S. occupation | https://www.onetonline.org/link/localtrends/51-9023.00"
+            "指标": "Projected job change (2025–2035)",
+            "数值": "−6.1%; published net change -5,900 jobs",
+            "说明": "BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "Average annual openings (2025—2035)",
-            "数值": "7,900 openings/year",
-            "说明": "This U.S. occupation | https://www.onetonline.org/link/localtrends/51-9023.00"
+            "指标": "Projected average annual openings",
+            "数值": "7,900 projected per year, including replacements",
+            "说明": "BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
         "boundary": "U.S. data applies only to the standard period for this occupation; it does not imply correspondence with mainland China or guarantee individual earnings or hiring.",
         "direct_answer": {
           "$join": [
-            "Five 2025 annual wage percentiles have been verified. Use directly published hourly wages only when provided by the source. The median is neither a starting wage nor an individual offer.",
+            "May 2025 U.S. median wages for this occupation were $48,990 a year and $23.55 an hour.",
             {
               "$item": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -14672,7 +15235,7 @@
               "type": "prose"
             }
           ],
-          "separator": "；"
+          "separator": "\n"
         },
         "factor_rows": [
           {
@@ -14689,39 +15252,39 @@
           }
         ],
         "factors_heading": "Factors affecting actual offers",
-        "growth": "-6%",
+        "growth": "−6.1%",
         "heading": "U.S. wages and employment for mixing and blending machine setters, operators, and tenders",
         "industry_heading": "Industry and role differences",
-        "industry_period": "2025",
+        "industry_period": "2025 employment shares",
         "industry_rows": [
           {
             "industry": "Manufacturing",
             "median": "80%",
-            "note": "The first two figures are employment shares; other items are role checks. Industry wage data has not been obtained"
+            "note": "O*NET Details labels the top industries as 2025. These shares describe employment, not industry wages."
           },
           {
-            "industry": "Other sectors, including wholesale",
+            "industry": "Other industries",
             "median": "20%",
-            "note": "The first two figures are employment shares; other items are role checks. Industry wage data has not been obtained"
+            "note": "O*NET Details labels the top industries as 2025. These shares describe employment, not industry wages."
           },
           {
-            "industry": "Specific materials and equipment",
-            "median": "Verify separately",
-            "note": "The first two figures are employment shares; other items are role checks. Industry wage data has not been obtained"
+            "industry": "Industry wages",
+            "median": "Not obtained",
+            "note": "O*NET Details labels the top industries as 2025. These shares describe employment, not industry wages."
           },
           {
-            "industry": "Region/shifts/authorization",
-            "median": "Verify separately",
-            "note": "The first two figures are employment shares; other items are role checks. Industry wage data has not been obtained"
+            "industry": "Compare actual employers",
+            "median": "—",
+            "note": "O*NET Details labels the top industries as 2025. These shares describe employment, not industry wages."
           }
         ],
-        "industry_value_label": "Employment share, not industry wages",
+        "industry_value_label": "Employment share",
         "interpretation_heading": "How to interpret",
         "interpretation_rows": [
           {
             "answer": {
               "$join": [
-                "The median wage is neither a starting wage nor a promise of individual earnings",
+                "The median is the middle of the national wage distribution.",
                 {
                   "$item": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.5",
                   "block": "us-salary",
@@ -14729,7 +15292,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
             "question": "What does the median wage represent?"
           },
@@ -14761,10 +15324,10 @@
         "outlook_heading": "Employment outlook",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
-          "Statistical position",
-          "Annual wage reference",
-          "Directly published hourly wage",
-          "Explanation"
+          "Wage percentile",
+          "Annual wage",
+          "Hourly wage",
+          "How to read it"
         ],
         "wage_heading": "Wage data",
         "wage_tiers": [
@@ -14772,7 +15335,7 @@
             "equivalent": "$20.60/hour",
             "interpretation": {
               "$join": [
-                "A statistical percentile position does not correspond to years of experience.",
+                "This marks the lower quarter of the wage distribution. It does not specify starting pay.",
                 {
                   "$item": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.2",
                   "block": "us-salary",
@@ -14780,7 +15343,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
             "label": "25th percentile",
             "value": "$42,850"
@@ -14789,7 +15352,7 @@
             "equivalent": "$23.55/hour",
             "interpretation": {
               "$join": [
-                "A statistical percentile position does not correspond to years of experience.",
+                "Half of wages fall below this midpoint and half above. An employer’s offer may differ.",
                 {
                   "$item": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.3",
                   "block": "us-salary",
@@ -14797,16 +15360,16 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "label": "Median",
+            "label": "Median (50th percentile)",
             "value": "$48,990"
           },
           {
             "equivalent": "$28.78/hour",
             "interpretation": {
               "$join": [
-                "A statistical percentile position does not correspond to years of experience.",
+                "This marks the upper quarter of the wage distribution. It does not specify pay after a particular number of years.",
                 {
                   "$item": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.4",
                   "block": "us-salary",
@@ -14814,7 +15377,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
             "label": "75th percentile",
             "value": "$59,860"
@@ -14837,7 +15400,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "Suits people who can accurately operate and tend equipment according to formulas, continually verify batches and stop equipment and escalate anomalies, and maintain truthful records.",
+        "summary": "Consider mixing and blending work if you like tracing a batch from its work order through a recorded material check.",
         "title": "What kinds of people are suited to mixing and blending machine operation and tending?"
       },
       "fit_decision_checklist": {
@@ -14909,30 +15472,30 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "Median annual wage (2025)",
+            "metric": "Median annual wage (May 2025)",
             "occupation_scope": "This U.S. occupation, 51-9023.00",
             "source_id": "bls",
-            "value": "48,990 USD/year"
+            "value": "$48,990/year"
           },
           {
             "geography": "United States",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": "Average annual growth and replacement needs, not a ten-year total or net change",
             "limitation": "Uses the U.S. scope for this occupation and does not represent an individual's probability of being hired.",
-            "metric": "Average annual openings (2025—2035)",
+            "metric": "Projected average annual openings",
             "occupation_scope": "This U.S. occupation, 51-9023.00",
             "source_id": "ep",
-            "value": "7,900 openings/year"
+            "value": "7,900 projected per year, including replacements"
           },
           {
             "geography": "United States",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": "Overall projection, not AI causation",
             "limitation": "Uses the U.S. scope for this occupation and does not represent an individual's probability of being hired.",
-            "metric": "Employment level and change",
+            "metric": "Projected employment change",
             "occupation_scope": "This U.S. occupation, 51-9023.00",
             "source_id": "ep",
-            "value": "97,300→91,400; -6%; net change -5,900"
+            "value": "−6.1%; published net change -5,900 jobs"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15055,13 +15618,13 @@
             "alternate_value": null,
             "label": "U.S. employment (2025)",
             "secondary_value": null,
-            "value": "97,300 people"
+            "value": "97,300 jobs"
           },
           {
             "alternate_value": null,
             "label": "U.S. growth (2025—2035)",
             "secondary_value": null,
-            "value": "-6%; not attributed to AI"
+            "value": "−6.1%"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15075,7 +15638,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Continue exploring RIASEC interests",
             "evidence_level": {
               "$item": "mixing-and-blending-machine-setters-operators-and-tenders.fit.riasec-fit-block.8",
@@ -15096,7 +15659,7 @@
           },
           {
             "answer": "The Big Five describes tendencies only and cannot replace equipment training and safety experience; check these through real tasks.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Continue exploring RIASEC interests",
             "evidence_level": "Exploratory tools",
             "id": "big-five",
@@ -15112,7 +15675,7 @@
           },
           {
             "answer": "MBTI type labels cannot determine competence in equipment operation or establish work authorization.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Continue exploring RIASEC interests",
             "evidence_level": "Exploratory tools",
             "id": "mbti",
@@ -15128,7 +15691,7 @@
           },
           {
             "answer": "The Enneagram describes motivational tendencies only and does not constitute evidence of operational judgment.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Continue exploring RIASEC interests",
             "evidence_level": "Exploratory tools",
             "id": "enneagram",
@@ -15144,7 +15707,7 @@
           },
           {
             "answer": "Cognitive ability tests reflect only some cognitive characteristics and do not cover operational experience and safety judgment.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Continue exploring RIASEC interests",
             "evidence_level": "Exploratory tools",
             "id": "iq",
@@ -15160,7 +15723,7 @@
           },
           {
             "answer": "Emotional intelligence tests do not constitute evidence of safety or recordkeeping integrity; check collaboration through real tasks.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Continue exploring RIASEC interests",
             "evidence_level": "Exploratory tools",
             "id": "eq",
@@ -15385,7 +15948,7 @@
           "source": "O*NET51-9023.00 tasks, 2025 wages, and 2025—2035 projections; National Bureau of Statistics industry reference",
           "updated_at": "Nine-module review 2026-10-11"
         },
-        "note": "Five 2025 wage percentiles: 36790 / 42850 / 48990 / 59860 / 70200; 2025—2035 employment 97300→91400, -6%, net -5900, average annual openings 7900. Remove the incorrect ten-year 8800 / annual 880 figures; not AI causation.",
+        "note": "O*NET provides May 2025 national wage percentiles. BLS Table 1.2 projects 97,300 to 91,400 U.S. jobs in 2025–2035 (−6.1%), with a published net decline of 5,900 and 7,900 average annual openings including replacements. The projection does not isolate AI effects.",
         "secondary_links": [
           {
             "href": {
@@ -15395,7 +15958,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "English MBTI test"
+            "label": "MBTI assessment (English)"
           },
           {
             "href": {
@@ -15405,7 +15968,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "English Big Five personality test"
+            "label": "Big Five assessment (English)"
           },
           {
             "href": {
@@ -15415,7 +15978,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Chinese MBTI test"
+            "label": "MBTI assessment (English)"
           },
           {
             "href": {
@@ -15425,7 +15988,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Chinese Big Five personality test"
+            "label": "Big Five assessment (English)"
           }
         ]
       },
@@ -15468,6 +16031,27 @@
         "id": "mixing-and-blending-machine-setters-operators-and-tenders.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -15521,36 +16105,36 @@
       },
       {
         "derivation": null,
-        "display_value": "101,100 people (2024)",
+        "display_value": "97,300 jobs",
         "fact_id": "us-employment",
         "market": "United States",
-        "measure": "Employment level",
-        "occupation_scope": "Exact occupational data: Mixing and Blending Machine Setters, Operators, and Tenders; O*NET 51-9023.00",
-        "period": "2024 BLS employment level",
+        "measure": "Employment (jobs)",
+        "occupation_scope": "Mixing and Blending Machine Setters, Operators, and Tenders",
+        "period": "2025",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
         "derivation": null,
-        "display_value": "-1%（2024—2034）",
+        "display_value": "−6.1%",
         "fact_id": "us-growth",
         "market": "United States",
-        "measure": "Projected employment growth",
-        "occupation_scope": "Exact occupational data: Mixing and Blending Machine Setters, Operators, and Tenders; O*NET 51-9023.00",
-        "period": "2024—2034 BLS employment projection",
+        "measure": "Projected employment change",
+        "occupation_scope": "Mixing and Blending Machine Setters, Operators, and Tenders",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 880 openings/year",
+        "display_value": "7,900 projected per year, including replacements",
         "fact_id": "us-openings",
         "market": "United States",
-        "measure": "Average annual job openings",
-        "occupation_scope": "Exact occupational data: Mixing and Blending Machine Setters, Operators, and Tenders; O*NET 51-9023.00",
-        "period": "2024—2034 BLS employment projection",
+        "measure": "Projected average annual openings",
+        "occupation_scope": "Mixing and Blending Machine Setters, Operators, and Tenders",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
@@ -15586,31 +16170,31 @@
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "U.S. wage reference"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. projected job change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment",
         "key": "us_employment",
-        "label": "U.S. employment count"
+        "label": "U.S. jobs in 2025"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "U.S. average annual job openings"
+        "label": "U.S. projected annual openings"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China wage reference"
+        "label": "Mainland China: exact occupational wage not verified"
       }
     ]
   },
@@ -15618,14 +16202,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Mixing and blending machine setters, operators, and tenders (O*NET 51-9023.00) weigh and load according to formulas and tend mixing and blending equipment, monitor batches, sample and record, and stop equipment and escalate anomalies. U.S. BLS median annual wages were 48,990 USD in 2025; employment was approximately 101,100 in 2024."
+      "text": "Explore mixing and blending machine work, U.S. pay and training, and try a paper exercise tracing a batch and material lot."
     },
     "title": {
       "availability": "available",
       "text": "Mixing and Blending Machine Setters, Operators, and Tenders: Work, U.S. Wages, and Safety"
     }
   },
-  "source_content_sha256": "e9a504f3da5d2557ff2bd6343ff0091b91f82d7754d62bb732c197879e7a26aa",
+  "source_content_sha256": "f9080441610f3b80527b732b47ab27d10177748cd2fd678bda2b92df9cba1de9",
   "subject": {
     "canonical_slug": "mixing-and-blending-machine-setters-operators-and-tenders",
     "name": "Mixing and blending machine setters, operators, and tenders",

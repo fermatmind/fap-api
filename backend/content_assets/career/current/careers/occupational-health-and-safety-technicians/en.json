@@ -152,6 +152,9 @@
       "item:occupational-health-and-safety-technicians.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:occupational-health-and-safety-technicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:occupational-health-and-safety-technicians.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12946,6 +12949,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The sampling sheet lacks time. The instrument log has both time and location. Identify what can be cited and what to verify with the sampler."
+            ]
+          },
+          "id": "occupational-health-and-safety-technicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check workplace sampling documentation",
+          "type": "notice"
         }
       ]
     },
@@ -15475,6 +15493,13 @@
         "id": "occupational-health-and-safety-technicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "occupational-health-and-safety-technicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15656,7 +15681,7 @@
       "text": "Occupational health and safety technicians: duties, wages, and entry paths"
     }
   },
-  "source_content_sha256": "8cf2ef1c868686655bc7136a8543af3b10c96daed97fd1ce4cf90820154b1ad5",
+  "source_content_sha256": "422eb339cd5ec15c006efb5e7683c9b411188ea7cde79293f14cadffbcfa0710",
   "subject": {
     "canonical_slug": "occupational-health-and-safety-technicians",
     "name": "Occupational health and safety technician",

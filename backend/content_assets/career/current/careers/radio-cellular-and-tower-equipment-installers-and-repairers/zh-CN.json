@@ -1269,7 +1269,7 @@
         "status": "mapped"
       },
       "item:radio-cellular-and-tower-equipment-installers-and-repairers.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:radio-cellular-and-tower-equipment-installers-and-repairers.path.interview-probation.1": {
         "status": "mapped"
@@ -23311,7 +23311,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本页的判断清单只用于自我提问，不构成录用标准、人格评价或能力结论。电台、细胞、设备安装工的授权与安全边界差异很大：带电作业、攀爬铁塔、射频暴露与接地施工的权限和规程分属不同角色，任何一条清单都不能替代对目标岗位实际授权与安全规程的核对。"
+              "先核岗位是否涉及塔上、机房、车载或其他无线设备，以及现场授权和带教。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.quick-decision.fit-decision-checklist.1",
@@ -23326,7 +23326,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先观察自己能否按图纸与工单完成安装、逐项核对紧固、接地与天线方向，并在测试数据异常时如实记录与升级。再用入行模块的虚构材料 T1—T5 做一次完整练习：核对接地与天线的检查项、整理测试数据、标出待确认与需升级事项；练习只需纸面和文本文件，不需要攀爬铁塔、带电作业或真实设备。"
+              "在 09「入行、资格与职业发展」做 RF-T01｜核对站点变更后的告警和复测，先完成初稿再看参考。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.quick-decision.fit-decision-checklist.2",
@@ -23340,7 +23340,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "更值得考虑的信号是：你愿意按规程在高处和户外作业、逐项测试并如实记录，能对同伴安全负责。需要慎重的信号是：为了赶工跳过接地与紧固检查、在未获授权时改动射频参数或电源配置——这类越界在通信施工与射频作业中后果严重，也是入职前应谈清的边界。"
+              "适合愿意看工单、读告警、复核设备和现场记录的人。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.quick-decision.fit-decision-checklist.3",
@@ -23356,7 +23356,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本卡结论来自公开职业任务资料与编辑归纳，不是对你个人的测评结果，也不预测就业结果。电台、细胞、设备安装工的实际任务范围取决于雇主、站点类型与安全制度；同一中文头衔在不同公司可能对应不同的职责与权限。"
+              "保留工单、时点、设备和复测记录，按职责交接。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.quick-decision.fermat-decision-card.6",
@@ -23371,7 +23371,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "若你愿意在高处、户外与带电环境中按规程作业、把每次安装与测试的准确与记录当作责任，这份工作值得进一步了解。判断岗位时先问清三件事：你能否独立完成常规安装与测试、谁能批准射频参数与电源变更、出现塔上或伤情异常时向谁升级。"
+              "适合愿意看工单、读告警、复核设备和现场记录的人。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.quick-decision.fermat-decision-card.7",
@@ -27718,31 +27718,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "电信设备安装与维修技师（线路安装工除外）",
@@ -28687,7 +28687,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用可交付物比较：安装与测试记录、接地与紧固检查表、故障处理记录；可用 T1—T5 验证。"
+              "保留工单、时点、设备和复测记录，按职责交接。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.fit.personality-fit-block.55",
@@ -28731,7 +28731,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做一次入行练习：用 T1—T5 复核一次虚构站点的检查与测试记录并与参考交付对照。"
+              "保留工单、时点、设备和复测记录，按职责交接。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.fit.personality-fit-block.58",
@@ -29427,7 +29427,7 @@
                 "设备维修与故障处理岗",
                 "按原理图与测试设备检查故障设备，更换元件并复测。",
                 "能否用仪表测量、按原理图定位故障并说明依据。",
-                "用 T1—T3 练习说明如何核对与排查。",
+                "保留工单、时点、设备和复测记录，按职责交接。",
                 "偏维修与诊断，与塔上安装岗的关注点不同。"
               ],
               [
@@ -29478,9 +29478,9 @@
               {
                 "id": "clearance",
                 "values": [
-                  "安全与特种作业核查",
-                  "中国直接从事目录规定特种作业者须培训考核合格取得相应操作证后上岗；是否在目录中按真实任务判断，不由雇主自行豁免。",
-                  "核对方式：确认雇主的培训安排、作业许可与可独立作业的授权范围。"
+                  "中科智信无线网络优化岗位",
+                  "原岗列无线告警、故障排查和网络指标，适合作为相邻网络侧职责例。",
+                  "先核岗位是否涉及塔上、机房、车载或其他无线设备，以及现场授权和带教。"
                 ]
               },
               {
@@ -29494,9 +29494,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "可展示的施工记录",
-                  "编辑建议准备一份虚构站点的安装与测试记录，并标注图纸版本、设备型号与检查结果。",
-                  "核对方式：由他人仅凭材料判断核对依据是否完整，而不是只看结论。"
+                  "润建基站／铁塔代维招聘",
+                  "原岗列设备巡检、故障工单和运维记录，现场条件按岗位分别核。",
+                  "原岗列天线安装、塔灯维护和蜂窝设备故障处理。"
                 ]
               }
             ]
@@ -29504,7 +29504,10 @@
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.path.employer-evidence.1",
           "source_refs": [
             "employer",
-            "editor"
+            "editor",
+            "d015-cn-main",
+            "d015-cn-context",
+            "d015-us-example"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29517,32 +29520,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料与设定｜全部为编辑设计的虚构数据",
-                  "你是虚构企业「岚山通信工程」的现场技师，需要复核站点 S-2087 的施工与测试记录并给出继续施工、整改或复核建议。以下材料与数值完全虚构，不是真实站点、设备或测试结果。",
-                  "T1 工单与站点记录：站点 S-2087 任务为更换扇区天线并复测覆盖；工单列明设备型号与两根同轴线缆。T2 图纸与设备：受控图纸版本 R-3，标明天线方位角 120°、机械下倾 4°；现场支架铭牌型号与图纸清单不一致。T3 工具与安全记录：安全带与绳索在检验有效期内；当日风速记录 12 m/s，而作业规程规定登高上限为 10 m/s；功率计与万用表在检定有效期内。T4 测试数据：方位角实测 118°、机械下倾 4°；驻波比 1.8（规程上限 1.5）；接地电阻 6 Ω（规程上限 5 Ω）。T5 记录与验收栏：初稿写「已完成并验收」，复测栏为空。"
+                  "虚构材料",
+                  "虚构站点 N14，工单 W6 只授权检查 2 号扇区。09:10 更换记录写设备编号 U5。旧工单 W5 的 U4 不再对应现场。",
+                  "09:20 监控说 W6 下告警已清。上传的复测表 A 标记 08:50、U4。10:05 复测表 B 标记 U5、2 号扇区，但缺工单号和现场复核签字。",
+                  "题设要求复测记录同时匹配设备、扇区和工单，由现场负责人复核，网络值班岗负责是否关闭事件。只做记录核对。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务",
-                  "逐项核 T1—T5，写出：哪些项目合格、哪些须整改、哪些条件下不得作业、哪些信息不足，以及验收建议应包含的未确认项与批准人。",
-                  "不得新增题面未给的设备型号、测试值或授权信息；未知项单列。"
+                  "任务与交付",
+                  "交一张站点交接单，分别列时间、设备、扇区、证据差异、需补信息及关闭状态。",
+                  "把监控状态和复测证据分开。",
+                  "用纸或本地表格，明确证据出处。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考交付",
-                  "合格项：方位角实测 118°（图纸 120°，规程允许 ±5°）与机械下倾 4° 在范围内。须整改：驻波比 1.8 超规程上限 1.5，须排查连接器与线缆后复测；接地电阻 6 Ω 超上限 5 Ω，须整改后复测。不得作业：当日风速记录 12 m/s 超登高上限 10 m/s，须停止登高作业，待条件满足后再施工。须核实：现场支架型号与受控图纸不一致，须核对受控图纸与设备清单后再安装。",
-                  "验收建议须写明复测栏为空、驻波比与接地待整改，并由授权角色验收；施工方只提交结果。"
+                  "提交前提示",
+                  "先保存初稿，再看七天计划之后的参考。",
+                  "无需同伴协助。",
+                  "记录版本。",
+                  "未给的资料留待核。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界",
-                  "本练习不涉及真实站点、真实设备或真实登高作业；实际施工、测试与验收按雇主与运营商规程执行。若无法判断，允许写「不足以判断」并说明缺少什么证据。"
+                  "权限边界",
+                  "使用虚构记录。",
+                  "不实际批准或对外交付。"
                 ]
               }
             ]
@@ -29551,7 +29559,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：一次完整的办公支持任务（虚构材料）",
+          "title": "RF-T01 | 核对站点变更后的告警和复测",
           "type": "cards"
         },
         {
@@ -29562,33 +29570,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "范围比较包",
-                  "用 T1—T3 填写站点、设备、图纸版本与安全条件对照表，标出未知项与需澄清问题。",
-                  "复核方式：他人仅凭该表即可判断哪一项信息不足及原因。"
+                  "版本和材料记录",
+                  "确认原记录和生效版本。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "独立复核说明",
-                  "对 T4 逐项写出测试值、限值与判定结论，并注明测试条件与仪表状态。",
-                  "复核方式：结论与规程限值、原始记录一致，且标明依据。"
+                  "输入与状态核对",
+                  "核对原记录、目标与差异。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "整改与安全记录",
-                  "用 T2—T4 写一份整改与安全记录：事件、影响、待答问题与升级对象；记录可追溯到站点与设备。",
-                  "复核方式：能看出整改范围与下一步。"
+                  "待核交接",
+                  "分待核项目、已知结果和下一责任人。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "验收建议草稿",
-                  "用 T5 写验收建议，列出合格项、须整改项、未确认项与批准人；不出现自行验收或代签。",
-                  "复核方式：建议与证据一致且无越权。"
+                  "交付边界",
+                  "标实际检查与批准状态。",
+                  "用题设原始记录核对。"
                 ]
               }
             ]
@@ -29619,27 +29627,27 @@
             "rows": [
               [
                 "核图纸与设备版本",
-                "能否发现支架型号与图纸不一致",
-                "能指出不一致并说明先核对受控图纸再安装",
-                "单个雇主的核对方式不能推广为行业统一考试"
+                "确认原记录和生效版本。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "核安全作业条件",
-                "能否识别风速超限",
-                "能指出风速超上限须停止登高作业",
-                "作业条件与限值随雇主与规程不同"
+                "核对原记录、目标与差异。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "核测试数据判定",
-                "能否用规程限值判断驻波比与接地",
-                "能指出驻波比与接地电阻超标须整改复测",
-                "限值随设备与运营商规程不同"
+                "分待核项目、已知结果和下一责任人。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "核验收与授权",
-                "能否区分施工结果与验收批准",
-                "能指出复测栏为空，验收须由授权角色完成",
-                "验收授权由雇主决定，不能沿用他处假设"
+                "标实际检查与批准状态。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ]
             ]
           },
@@ -29659,50 +29667,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "读材料并写角色边界卡",
-                  "读 T1—T5，写一张角色边界卡：可做（按图施工与记录）、须复核（测试判定与整改）、禁止动作（自行验收或改动射频参数）；确认不做真实登高作业。"
+                  "第 1 天",
+                  "记录对象和版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "用 T1 完成工单与站点核对表",
-                  "用 T1 核对任务、设备型号与线缆数量，标出缺失的核对项。"
+                  "第 2 天",
+                  "确认原记录和生效版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "用 T2 核对图纸与设备版本",
-                  "用 T2 核对图纸版本与现场支架型号，写出须澄清的一项。"
+                  "第 3 天",
+                  "核对原记录、目标与差异。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "用 T3 核安全作业条件",
-                  "用 T3 核对防坠装备与天气记录，写出哪一项使其不得登高作业。"
+                  "第 4 天",
+                  "分待核项目、已知结果和下一责任人。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "用 T4 完成测试判定",
-                  "逐项写出测试值、规程限值与结论，标出超标项与须复测项。"
+                  "第 5 天",
+                  "标实际检查与批准状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "用 T5 写验收建议草稿",
-                  "写出合格项、须整改项、未确认项与批准人；不自行验收。"
+                  "第 6 天",
+                  "先独立完成交接稿，再按下方参考和量规核对并修订一处。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "对照参考并修订",
-                  "对照参考交付修订前六天输出，记录最易遗漏的一步与下一步练习。"
+                  "第 7 天",
+                  "整理四份练习成果，保留原件和待审状态。"
                 ]
               }
             ]
@@ -29719,20 +29727,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "七天判断要核对的项：职业范围（美国 O*NET 49-2021.00）、安全与特种作业要求、教育与训练、所在地作业许可、受监督任务。",
-              "以「哪一步最需外部确认」为判断点：图纸与设备版本、登高作业条件与验收授权通常需要雇主确认。",
-              "区分可核事实与编辑判断：测试值与限值是规程事实，适合度是编辑判断；结论须回指原始记录。",
-              "投入估算：每天 30—60 分钟，以读材料与复算为主，无需购买设备或登高装备。",
-              "若七天中反复卡在同一环节（如限值核对），把它列为下一步优先练习项。",
-              "若无法判断某一步，写「不足以判断」并说明缺少什么证据，不猜测。",
-              "完成后，把输出与真实雇主的施工与验收格式对照，观察差额。"
+              "工单 W6 对应 2 号扇区的 U5。09:20 监控告警清除可以登记。",
+              "表 A 早于更换且对应 U4，不能作为 W6 复测。",
+              "表 B 匹配设备和扇区，但缺工单号和复核签字。",
+              "交现场负责人核表 B 与 W6 关联及签字，保留两份原始记录。",
+              "关闭事件交网络值班岗，复测证据与关闭状态暂留待审。",
+              "四项各 0–2 分：版本与原件、逐项判断、未知范围、权限交接。",
+              "完整可追溯为 2，部分为 1，缺失或越权为 0。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "题后参考与自核量规",
           "type": "list"
         },
         {
@@ -29833,7 +29841,7 @@
               "培训证明、录用资格与独立作业授权是三件事：拿到学历、证书或培训记录不等于获得雇主的登高、带电或验收授权，也不承诺签字权。",
               "美国培训与认证按实际雇主和适用安全标准核；中国特种作业证法定条件、通信职业水平和内部授权分别判断，不能混作可选招聘偏好。",
               "站点信息与客户资料义务由雇主与运营商承担，须依授权与合同执行；本页不构成个人信息保护或安全生产法律意见。",
-              "涉及高处作业、电气安全与射频暴露的要求由主管部门与雇主规程规定，是否适用取决于岗位与作业类别，本页不替代现场安全规程。"
+              "先核岗位是否涉及塔上、机房、车载或其他无线设备，以及现场授权和带教。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.path.credential-boundary.1",
@@ -29850,16 +29858,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得职责、站点类型与授权范围匹配且状态已核实的中国公开招聘原文。",
-              "本轮未取得职责、站点类型与授权范围匹配且状态已核实的中国公开招聘原文；保留缺口，不用相邻层级样本替代。"
+              "原岗列设备巡检、故障工单和运维记录，现场条件按岗位分别核。",
+              "原岗列天线安装、塔灯维护和蜂窝设备故障处理。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "d015-cn-main",
+            "d015-us-example"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -31887,7 +31893,7 @@
                 "question_key": "career.faq.radio-cellular-and-tower-equipment-installers-and-repairers.comparison"
               },
               {
-                "answer": "看可观察行为：能否按图纸与规程施工、如实记录测试与异常、把问题推动到整改，并接受射频参数与安全许可由授权角色决定；可用 T1—T5 练习与 O*NET RCI 兴趣核对，测评与单次表现不能决定任职或适合度。",
+                "answer": "适合愿意看工单、读告警、复核设备和现场记录的人。 在 09「入行、资格与职业发展」做 RF-T01｜核对站点变更后的告警和复测，先完成初稿再看参考。",
                 "id": "radio-cellular-and-tower-equipment-installers-and-repairers.faq.3",
                 "question": "怎样判断自己适不适合做电台、细胞、设备安装工？",
                 "question_key": "career.faq.radio-cellular-and-tower-equipment-installers-and-repairers.fit"
@@ -31923,7 +31929,7 @@
                 "question_key": "career.faq.radio-cellular-and-tower-equipment-installers-and-repairers.credentials"
               },
               {
-                "answer": "主要边界是未获授权改动射频或电源配置、图纸与设备版本失控、登高与防坠防护不到位、接地与线缆施工不合格、单人驻场岗中断与站点资料外发；详见风险板块。",
+                "answer": "先核岗位是否涉及塔上、机房、车载或其他无线设备，以及现场授权和带教。",
                 "id": "radio-cellular-and-tower-equipment-installers-and-repairers.faq.9",
                 "question": "这份工作最容易出问题的地方是什么？",
                 "question_key": "career.faq.radio-cellular-and-tower-equipment-installers-and-repairers.risk-boundary"
@@ -31953,7 +31959,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind 职业内容团队（编辑整理，非本职业从业者评审）"
+              "RF-T01 为本页虚构试做。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.sources.source-card.1",
@@ -31967,14 +31973,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业身份与任务依据 O*NET 49-2021.00 与美国劳工统计局公开资料；中国部分依据国家统计局与特种作业相关规则并保留证据不足。"
+              "原岗列无线告警、故障排查和网络指标，适合作为相邻网络侧职责例。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "bls",
-            "nbs"
+            "d015-cn-context"
           ],
           "type": "prose"
         },
@@ -31983,12 +31987,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "原编制核读2026-09-30；本轮2026-10-12重核O*NET、BLS当前EP、TX全国工资和应急管理部新规。当前招聘仍缺，其他来源访问记录未虚更新。"
+              "原岗列设备巡检、故障工单和运维记录，现场条件按岗位分别核。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "d015-cn-main"
           ],
           "type": "prose"
         },
@@ -31997,13 +32001,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页中文用于解释美国官方职业范围，不建立中外资格互认；所有虚构练习材料均为编辑设计，不代表雇主标准或安全规程。站点与客户信息不进入公开页面。"
+              "美国 49-2021 有独立工资和预测行；原岗只作单岗位对照。"
             ]
           },
           "id": "radio-cellular-and-tower-equipment-installers-and-repairers.sources.source-card.4",
           "source_refs": [
             "editor",
-            "privacy"
+            "privacy",
+            "d015-cn-main",
+            "d015-us-example"
           ],
           "type": "prose"
         }
@@ -32030,13 +32036,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32269,8 +32275,8 @@
               {
                 "accessed_at": "2026-09-30",
                 "details": [
-                  "练习材料、作品建议与七日计划均为编辑设计，不代表真实站点、设备或测试结果。",
-                  "发布方、原始链接与适用范围见来源条目。"
+                  "RF-T01 为虚构纸笔试做。",
+                  "保留工单、时点、设备和复测记录，按职责交接。"
                 ],
                 "evidence_type": "editorial design",
                 "id": "editor",
@@ -32490,6 +32496,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "原岗列设备巡检、故障工单和运维记录，现场条件按岗位分别核。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d015-cn-main",
+                "limitation": "仅用于任务和路径对照。",
+                "market": "中国大陆",
+                "name": "润建基站／铁塔代维招聘",
+                "period": "日期见原件",
+                "publisher": "润建基站／铁塔代维招聘",
+                "scope": "recruitment_proxy",
+                "url": "https://job.xju.edu.cn/Web/Employ/NetEmployDetails?XvyB7C2GtUUiHxERATODaBi1SrrecB8XGGF5Qc0c9WQ=.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "原岗列无线告警、故障排查和网络指标，适合作为相邻网络侧职责例。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d015-cn-context",
+                "limitation": "仅用于任务和路径对照。",
+                "market": "中国大陆",
+                "name": "中科智信无线网络优化岗位",
+                "period": "日期见原件",
+                "publisher": "中科智信无线网络优化岗位",
+                "scope": "recruitment_proxy",
+                "url": "https://zhjyb.zua.edu.cn/module/position_details/id-475996/nid-4990"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "原岗列天线安装、塔灯维护和蜂窝设备故障处理。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d015-us-example",
+                "limitation": "仅用于任务和路径对照。",
+                "market": "美国",
+                "name": "Betacom 塔设备技术员",
+                "period": "日期见原件",
+                "publisher": "Betacom 塔设备技术员",
+                "scope": "recruitment_proxy",
+                "url": "https://jobs.smartrecruiters.com/BetacomIncorporated/743999697868225-experienced-tower-climber-technicians-louisiana-"
               }
             ]
           },
@@ -35799,7 +35850,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "电台、细胞、设备安装工适合什么样的人？"
+        "title": "哪些人适合做无线通信装维？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -37181,7 +37232,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合电台、细胞、设备安装工工作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37727,14 +37778,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "电台、细胞、设备安装工 49-2021.00 的安装、布线、塔上作业、射频测试与故障维修任务；核对美国 2025 年工资分位与 2024—2034 预测、中国证据缺口、入行与特种作业路径，以及可独立完成的纸面施工与测试核对练习。"
+      "text": "了解无线电、蜂窝与塔设备安装维护的故障定位、现场检查和复测交接。对照中美原岗并做纸面试题。"
     },
     "title": {
       "availability": "available",
       "text": "电台、细胞、设备安装工"
     }
   },
-  "source_content_sha256": "00cdf79178c3ce77de210975143b42bc35fde087cd989642440c1eba2148d41c",
+  "source_content_sha256": "67d17953847dcf005f1cbc0fff3238c1d3edaaeca28717db35251db75c2cb564",
   "subject": {
     "canonical_slug": "radio-cellular-and-tower-equipment-installers-and-repairers",
     "name": "电台、细胞、设备安装工",

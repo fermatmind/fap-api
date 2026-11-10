@@ -23377,14 +23377,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "下一步核目标地区的教育、训练和岗位权限；虚构练习不能替代真实工作授权。"
+              "纸面体验｜比较虚构测试单与仪器台账，圈出校准编号冲突，保留两个原始编号供试验负责人核对。 "
             ]
           },
           "id": "photonics-technicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "ep",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23690,12 +23688,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "光子技术员建装、测试或维护激光、透镜、反射镜和光纤等设备，利用光谱仪、干涉仪等工具记录数据并交接。"
+              "光子技术员协助搭建和维护光学测试装置，检查校准状态，按指定版本记录样件和读数。记录要让工程人员能追溯测量条件。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "photonics-technicians.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "transfer-onet-17-3029.08"
           ],
           "type": "prose"
         },
@@ -24776,14 +24774,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可试整理工单、比对标签及起草交接；固定设备自动化、仿真与GenAI不同。本页无已核本职采用率、替代比例或个人失业概率，父类总体预测不分解AI因果。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((0+75+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比较虚构测试单与仪器台账，圈出校准编号冲突，保留两个原始编号供试验负责人核对。"
             ]
           },
           "id": "photonics-technicians.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ep",
-            "onet-wages",
-            "editor"
+            "transfer-onet-17-3029.08",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33099,6 +33096,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-17-3029.08",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 17-3029.08 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/17-3029.08"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38348,10 +38372,10 @@
       "text": "光子学技术员"
     }
   },
-  "source_content_sha256": "7dd032934b3ce6c4102a0bcf4003ac956f08459fb4300294d7b3c8c8e5db8d82",
+  "source_content_sha256": "825435cc77d42064c0ca01f55e9aa177e763f402b4c3766ecefe4070842851c1",
   "subject": {
     "canonical_slug": "photonics-technicians",
     "name": "光子学技术员",
-    "summary": "光子技术员（O*NET 17-3029.08）装配、安装、测试或维护激光器、透镜、反射镜与光纤等光学设备，并记录测试数据，围绕工单、器件批次、校准状态、测试条件与安全授权形成可复核的装配与测试记录、异常隔离和设备维护交接；激光、电气、洁净室和精密设备操作须按机构培训与授权执行。岗位场景、资格和最终责任须按所在地及机构制度核对。"
+    "summary": "光子技术员协助搭建和维护光学测试装置，检查校准状态，按指定版本记录样件和读数。记录要让工程人员能追溯测量条件。"
   }
 }

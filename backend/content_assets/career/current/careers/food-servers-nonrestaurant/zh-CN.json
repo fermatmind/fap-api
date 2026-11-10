@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-tray-beijing": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-tray-huangpu": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -20127,60 +20133,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "id": "food-servers-nonrestaurant.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-2"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "id": "food-servers-nonrestaurant.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-3"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -20203,7 +20169,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -20231,7 +20197,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23759,7 +23725,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "抽样限制｜OEWS 是抽样估计。May 2025 本职业全国就业 293,900 人，就业相对标准误差 1.3%；本页列出官方查询页的四个高工资行业中位数作为限定比较，不能代表主要雇主、全国行业均值或个人收入。"
+              "OEWS 为抽样估计。2025 年 5 月本职业全国就业估计 293,900 人，就业相对标准误差 1.3%。"
             ]
           },
           "id": "food-servers-nonrestaurant.profile.career-quick-answers-block.34",
@@ -25975,14 +25941,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位年薪 35,360 美元（2025，BLS OEWS）"
+              "中国大陆无可比数据"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.7",
-          "source_refs": [
-            "bls-oews-2025",
-            "bls-oews-methods"
-          ],
           "type": "prose"
         },
         {
@@ -25990,14 +25952,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资中位数，非起薪或任何雇主报价。OEWS 工资包含小费、基本工资、佣金及生产奖金；边界｜不含加班工资、班次差额、非生产奖金与雇主福利，也不覆盖自雇。年度值通常按 2,080 小时折算，不等于个人实收。"
+              "招聘报价来自个别岗位，无法计算职业工资中位数。"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.8",
-          "source_refs": [
-            "bls-oews-2025",
-            "bls-oews-methods"
-          ],
           "type": "prose"
         },
         {
@@ -26005,14 +25963,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "10 分位 28,030 美元/年（2025，BLS OEWS）"
+              "中国大陆无可比数据"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.9",
-          "source_refs": [
-            "bls-oews-2025",
-            "bls-oews-methods"
-          ],
           "type": "prose"
         },
         {
@@ -26020,13 +25974,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜第 10 百分位，约 10% 的工资处于此值以下；边界｜不是新手、兼职或经验较少人员的专属档位。"
+              "缺少同口径的工资分布，无法估计低端分位。"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.10",
-          "source_refs": [
-            "bls-oews-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26034,14 +25985,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "25 分位 31,190 美元/年（2025，BLS OEWS）"
+              "中国大陆无可比数据"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.11",
-          "source_refs": [
-            "bls-oews-2025",
-            "bls-oews-methods"
-          ],
           "type": "prose"
         },
         {
@@ -26049,14 +25996,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下四分位；边界｜处于分布下段，地区与机构与雇主差异大。"
+              "缺少同口径的工资分布，无法估计下四分位。"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.12",
-          "source_refs": [
-            "bls-oews-2025",
-            "bls-oews-methods"
-          ],
           "type": "prose"
         },
         {
@@ -26064,14 +26007,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "75 分位 38,500 美元/年（2025，BLS OEWS）"
+              "中国大陆无可比数据"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.13",
-          "source_refs": [
-            "bls-oews-2025",
-            "bls-oews-methods"
-          ],
           "type": "prose"
         },
         {
@@ -26079,13 +26018,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜第 75 百分位，约 75% 的工资低于此值；边界｜不是资深从业者专属档位，不证明差异成因。"
+              "缺少同口径的工资分布，无法估计上四分位。"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.14",
-          "source_refs": [
-            "bls-oews-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26093,14 +26029,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "90 分位 46,120 美元/年（2025，BLS OEWS）"
+              "中国大陆无可比数据"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.15",
-          "source_refs": [
-            "bls-oews-2025",
-            "bls-oews-methods"
-          ],
           "type": "prose"
         },
         {
@@ -26108,13 +26040,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜第 90 百分位，约 90% 的工资低于此值；边界｜不是最高工资或个人晋升终点，不能由分位推断收入原因。"
+              "缺少同口径的工资分布，无法估计高端分位。"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.16",
-          "source_refs": [
-            "bls-oews-2025"
-          ],
           "type": "prose"
         },
         {
@@ -26122,13 +26051,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "就业 296,300 人（美国，2025，BLS 就业预测基期）"
+              "中国大陆无可比数据"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.17",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
           "type": "prose"
         },
         {
@@ -26136,15 +26062,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜就业预测包含该行 0.2% 的自雇份额；边界｜OEWS May 2025 工资雇员就业估计为 293,900 人。统计项目不同，不可混为同一总体。"
+              "行业从业人数无法分离出该职业。"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.18",
-          "source_refs": [
-            "bls-projections-2025-35",
-            "bls-oews-2025",
-            "bls-oews-methods"
-          ],
           "type": "prose"
         },
         {
@@ -26152,13 +26073,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "就业预计增长 4.5%（美国，2025—2035，BLS）；基期 296,300 人，2035 年 309,600 人，净增约 13,300 人"
+              "中国大陆无可比数据"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.19",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
           "type": "prose"
         },
         {
@@ -26166,13 +26084,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国职业就业预测增长率 4.5%；边界｜净增约 13,300 人与年均空缺不同，也不是个人录用概率。"
+              "没有可比的职业级预测。"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.20",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
           "type": "prose"
         },
         {
@@ -26180,13 +26095,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年均岗位空缺约 48,800 个（美国，2025—2035，含增长与人员离职、转岗替换需求）"
+              "中国大陆无可比数据"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.21",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
           "type": "prose"
         },
         {
@@ -26194,13 +26106,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜2025—2035 年均空缺 48,800 个，包含增长及离职、转岗替换；边界｜不等于每年净增、实际发布的招聘或个人机会。"
+              "历史招聘公告不能代表未来年均空缺。"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.22",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
           "type": "prose"
         },
         {
@@ -26641,12 +26550,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "县域与下沉市场"
+              "大陆医院配餐与送餐招聘"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "tray-beijing",
+            "tray-huangpu"
           ],
           "type": "prose"
         },
@@ -26655,12 +26565,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按城市或地区核验的本职业月薪数据；不以招聘报价、行业均值或他人转述代填。"
+              "北京清月蓝领文化传媒招聘医院配餐员，工作地点在北京东单附近，公告由内蒙古正镶白旗就业服务中心发布。该岗税前 5,000–6,000 元/月，在医院营养膳食团队指导下处理订退餐和分餐。广州中味餐饮的黄埔病房送餐岗列 3,500–4,500 元/月，未注明税前或税后，含订餐、送餐和清洁餐车。比较时核对报价、班次、职责和用工单位；两条历史公告不能推算全国工资。"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "tray-beijing",
+            "tray-huangpu"
           ],
           "type": "prose"
         },
@@ -26698,13 +26609,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "就业预计增长 4.5%（美国，2025—2035，BLS）；基期 296,300 人，2035 年 309,600 人，净增约 13,300 人"
+              "美国数值及统计口径见美国薪资与就业。"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.58",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
           "type": "prose"
         },
         {
@@ -26712,13 +26620,10 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位年工资 35,360 美元；中位时工资 17.00 美元（美国全国，May 2025 OEWS）"
+              "美国数值及统计口径见美国薪资与就业。"
             ]
           },
           "id": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.59",
-          "source_refs": [
-            "bls-oews-2025"
-          ],
           "type": "prose"
         }
       ]
@@ -26755,7 +26660,8 @@
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
             "bls-oews-2025",
-            "bls-oews-methods"
+            "bls-oews-methods",
+            "onet-national-wages-2025"
           ],
           "type": "prose"
         },
@@ -26785,7 +26691,8 @@
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
             "bls-oews-2025",
-            "bls-oews-methods"
+            "bls-oews-methods",
+            "onet-national-wages-2025"
           ],
           "type": "prose"
         },
@@ -26814,7 +26721,8 @@
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
             "bls-oews-2025",
-            "bls-oews-methods"
+            "bls-oews-methods",
+            "onet-national-wages-2025"
           ],
           "type": "prose"
         },
@@ -26844,7 +26752,8 @@
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
             "bls-oews-2025",
-            "bls-oews-methods"
+            "bls-oews-methods",
+            "onet-national-wages-2025"
           ],
           "type": "prose"
         },
@@ -26873,7 +26782,8 @@
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
             "bls-oews-2025",
-            "bls-oews-methods"
+            "bls-oews-methods",
+            "onet-national-wages-2025"
           ],
           "type": "prose"
         },
@@ -26982,7 +26892,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界｜工资为美国全国 May 2025 OEWS，预测为 2025—2035；本页四个行业例子来自官方高工资行业列表，不能代表就业最多的行业。不同法域、统计项目和时期分别使用。"
+              "美国全国工资来自 2025 年 5 月 OEWS；就业预测覆盖 2025–2035 年。两个项目的覆盖口径不同。"
             ]
           },
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.25",
@@ -27003,7 +26913,8 @@
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
             "bls-oews-2025",
-            "bls-oews-methods"
+            "bls-oews-methods",
+            "onet-national-wages-2025"
           ],
           "type": "prose"
         },
@@ -27041,7 +26952,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同职业在不同雇主行业的工资可不同；下表只展示官方查询页列出的高工资行业例子，不能推出所有医院或酒店高于照护机构。"
+              "美国分行业工资查询"
             ]
           },
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.29",
@@ -27099,7 +27010,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业预计增长 4.5%（美国，2025—2035，BLS）；基期 296,300 人，2035 年 309,600 人，净增约 13,300 人"
+              "BLS 预计美国 SOC 35-3041 就业由 2025 年约 296,300 人增至 2035 年约 309,600 人，增长 4.5%，年均约 48,800 个空缺（含替补需求）。"
             ]
           },
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.33",
@@ -27127,7 +27038,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "61,250 美元/年（May 2025，该行业内非餐厅食品服务员中位工资）"
+              "本页未列该行业可核对的职业中位数；在 BLS OEWS 选行业及职业查询。"
             ]
           },
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.35",
@@ -27169,7 +27080,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "49,530 美元/年（May 2025，该行业内非餐厅食品服务员中位工资）"
+              "本页未列该行业可核对的职业中位数；在 BLS OEWS 选行业及职业查询。"
             ]
           },
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.38",
@@ -27211,7 +27122,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "47,660 美元/年（May 2025，该行业内非餐厅食品服务员中位工资）"
+              "本页未列该行业可核对的职业中位数；在 BLS OEWS 选行业及职业查询。"
             ]
           },
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.41",
@@ -27253,7 +27164,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "42,450 美元/年（May 2025，该行业内非餐厅食品服务员中位工资）"
+              "本页未列该行业可核对的职业中位数；在 BLS OEWS 选行业及职业查询。"
             ]
           },
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.44",
@@ -27344,7 +27255,8 @@
           },
           "id": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "bls-oews-2025"
+            "bls-oews-2025",
+            "onet-national-wages-2025"
           ],
           "type": "prose"
         },
@@ -27414,31 +27326,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "洗碗工方向",
@@ -29521,13 +29433,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘证据边界｜本轮未纳入已核验招聘公告，不报告招聘数量、代表性工资或常见渠道；不得以本页模拟作品推断录用机会。",
+              "本页核验两则历史招聘，适合对照岗位和班次；是否仍在招及全国招聘分布未核。",
               "核对建议｜针对实际公告记录发布时间、地点、机构类型、合同用工形式、实际工时与报酬包含项、食品培训与健康管理条件，以及配送、清洁、协助就餐职责。未注明的条件向雇主核实。"
             ]
           },
           "id": "food-servers-nonrestaurant.path.recruitment-sample.1",
           "source_refs": [
-            "internal-rubric"
+            "tray-beijing",
+            "tray-huangpu"
           ],
           "title": "招聘样本查阅范围与缺口",
           "type": "notice"
@@ -30802,7 +30715,8 @@
           "source_refs": [
             "bls-projections-2025-35",
             "bls-oews-2025",
-            "nbs-wages-2025"
+            "nbs-wages-2025",
+            "onet-national-wages-2025"
           ],
           "type": "prose"
         },
@@ -30999,7 +30913,8 @@
           },
           "id": "food-servers-nonrestaurant.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls-oews-2025"
+            "bls-oews-2025",
+            "onet-national-wages-2025"
           ],
           "type": "prose"
         },
@@ -31526,45 +31441,44 @@
           "data": {
             "entries": [
               {
-                "answer": "在餐厅环境之外为个人提供食品服务，例如客房、病房、居住照护机构或车辆中。任务可包括分装摆盘、核对订单与送达对象、送餐和协助就餐、回收托盘、记录特殊餐食、补充用品、简单备餐及清洗消毒餐具、设备和区域。主要区别是服务场景与工作重点，备餐、清洁、点单或收款可与相邻岗位重叠；特殊饮食的临床决定及超出岗位授权的处置应交由相应责任人。",
+                "answer": "按订单或机构指引分餐、核对餐盘和收餐人，送餐并回收餐盘。病房、照护机构和酒店客房的交接程序可能不同；有特殊餐要求时按已批准的指引处理，有疑问找负责人确认。",
                 "id": "food-servers-nonrestaurant.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.food-servers-nonrestaurant.q1",
                 "source_refs": [
-                  "onet-summary",
-                  "onet-details",
-                  "internal-rubric"
+                  "onet-summary"
                 ]
               },
               {
-                "answer": "主要比较工作场景和重心：服务员侧重餐厅桌面服务，食品制备人员侧重备料，洗碗工侧重器皿清洁。本职业在餐厅之外供餐，也可能备餐、清洁、点单和收款；不能把这些重叠职责全部排除。岗位具体分工和酒类等责任须另核。",
+                "answer": "餐厅服务员主要在用餐区接单并服务；非餐厅送餐员把餐送到病房、客房等指定地点，按岗位要求核餐盘与收餐人。食品制备人员可负责切配、分份或装盘。洗碗工以清洗餐具、锅具及厨房区域为主；送餐岗位也可能清洁消毒餐具。看交接对象和岗位分工，不能只按“服务员”三个字判断。",
                 "id": "food-servers-nonrestaurant.faq.2",
                 "question": "它和服务员、食品制备人员、洗碗工有什么区别？",
                 "question_key": "career.faq.food-servers-nonrestaurant.q2",
                 "source_refs": [
                   "onet-summary",
-                  "internal-rubric"
+                  "onet-food-prep",
+                  "onet-restaurant-server",
+                  "onet-dishwashers"
                 ]
               },
               {
-                "answer": "May 2025 美国全国中位年工资 35,360 美元、中位时工资 17.00 美元，OEWS 就业估计 293,900 人；BLS 预测基期 2025 就业 296,300 人，2025—2035 增长 4.5%，年均空缺 48,800 个。统计项目不同；OEWS 工资包含小费、基本工资、佣金及生产奖金；不含加班工资、班次差额、非生产奖金与雇主福利，也不覆盖自雇。年度值通常按 2,080 小时折算，不等于个人实收。",
+                "answer": "美国 2025 年职业工资中位数为 17.00 美元/小时、35,360 美元/年。 BLS 预计美国 SOC 35-3041 就业由 2025 年约 296,300 人增至 2035 年约 309,600 人，增长 4.5%，年均约 48,800 个空缺（含替补需求）。",
                 "id": "food-servers-nonrestaurant.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.food-servers-nonrestaurant.q3",
                 "source_refs": [
-                  "bls-oews-2025",
-                  "bls-oews-methods",
+                  "onet-national-wages-2025",
                   "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "证据不足：本次核阅的国家统计局 2025 年工资发布未单列非餐厅食品服务员；尚未取得可核验的中国大陆精确职业工资，不用行业均值代填。 2025 年住宿和餐饮业城镇非私营单位平均工资 62,461 元/年、私营单位 55,123 元/年，只是行业背景，不能代表医院与照护场景或个人薪酬。",
+                "answer": "北京清月蓝领文化传媒招聘医院配餐员，工作地点在北京东单附近，公告由内蒙古正镶白旗就业服务中心发布。该岗税前 5,000–6,000 元/月，在医院营养膳食团队指导下处理订退餐和分餐。广州中味餐饮的黄埔病房送餐岗列 3,500–4,500 元/月，未注明税前或税后，含订餐、送餐和清洁餐车。比较时核对报价、班次、职责和用工单位；两条历史公告不能推算全国工资。",
                 "id": "food-servers-nonrestaurant.faq.4",
-                "question": "中国大陆有对应的工资数据吗？",
+                "question": "如何比较大陆医院配餐与送餐报价？",
                 "question_key": "career.faq.food-servers-nonrestaurant.q4",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "tray-beijing",
+                  "tray-huangpu"
                 ]
               },
               {
@@ -31589,23 +31503,24 @@
                 ]
               },
               {
-                "answer": "美国 BLS 对该职业列示：通常入门无正式学历凭证要求、无需相关工作经验、短期在职培训。O*NET 受访者对岗位所需教育的回答为高中或同等学历 48%、低于高中 27%、部分大学无学位 9%；这不是新入职者学历分布，百分比也不是招生或招聘门槛。实际岗位以招聘公告和培训考核为准。",
+                "answer": "BLS 列美国该职业典型入行不要求正规学历凭证，通常是短期在岗训练。大陆样本可见医院膳食团队指导和岗位健康证要求。求职时确认培训是否覆盖交接、错餐上报及本机构的餐盘核对。",
                 "id": "food-servers-nonrestaurant.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.food-servers-nonrestaurant.q7",
                 "source_refs": [
-                  "onet-details",
-                  "bls-projections-2025-35"
+                  "bls-projections-2025-35",
+                  "tray-beijing",
+                  "tray-huangpu"
                 ]
               },
               {
-                "answer": "培训记录、健康证明与岗位授权分开核对。中国食品安全法第 44 条要求食品生产经营企业培训职工，第 45 条要求接触直接入口食品的从业人员每年健康检查、取得健康证明后方可上岗；经营许可不是个人证书。美国及不同机构的条件需另核，本页不提供统一跨法域资格清单。",
+                "answer": "大陆食品生产经营企业应组织食品安全培训；从事接触直接入口食品工作的人员应每年健康检查并取得健康证明。问清岗位接触哪些食品及机构另行要求；餐盘核对和转交异常不等同于制定临床膳食。",
                 "id": "food-servers-nonrestaurant.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.food-servers-nonrestaurant.q8",
                 "source_refs": [
                   "cn-food-safety-law",
-                  "internal-rubric"
+                  "onet-summary"
                 ]
               },
               {
@@ -31640,7 +31555,8 @@
             "nbs-wages-2025",
             "cn-food-safety-law",
             "ilo-genai-2025",
-            "internal-rubric"
+            "internal-rubric",
+            "onet-national-wages-2025"
           ],
           "type": "faq"
         },
@@ -31649,7 +31565,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "研究流程｜2026-10-11逐项核O*NET35-3041任务、工作情境及新聘学历问题；正常加载BLS2025动态OEWS查询，核全国就业293,900、RSE1.3%、年中位35,360、10/25/75/90分位28,030/31,190/38,500/46,120美元。行业中位例子61,250/49,530/47,660/42,450与原文一致，保留。工资包含项、预测、中国行业代理、食品法、ILO和NIST沿用本窗已核文档及各自范围。"
+              "全国分位使用 O*NET 转载的 OEWS 职业表，分行业工资需按 NAICS 单独查询。本页分开列就业预测、行业背景与历史招聘。"
             ]
           },
           "id": "food-servers-nonrestaurant.sources.source-card.1",
@@ -31698,7 +31614,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国精确职业、城市及用工形式工资仍未取得可核验资料，保留可见缺口。证据边界｜本轮取得美国全国工资和四个官方高工资行业例子；未取得本职业生成式 AI 采用率或测评效度证据，不给暴露等级、替代时间或个人适配评分。"
+              "核实了美国全国工资，分行业工资仍缺可读原始数据。本页没有本职业生成式 AI 采用率或测评效度数据。"
             ]
           },
           "id": "food-servers-nonrestaurant.sources.source-card.4",
@@ -31727,25 +31643,13 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI（英文）",
-                "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（英文）",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI（中文）",
+                "entity": "MBTI",
                 "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five（中文）",
+                "entity": "大五人格",
                 "id": "navigation-5",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
@@ -31788,7 +31692,7 @@
                 "period": "2026 occupational profile",
                 "publisher": "O*NET Resource Center",
                 "scope": "非餐厅食品服务员：职业范围与任务",
-                "url": "https://www.onetonline.org/link/summary/35-3041.00"
+                "url": "https://www.onetonline.org/link/details/35-3041.00"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -31806,17 +31710,16 @@
                 "url": "https://www.onetonline.org/link/details/35-3041.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "35-3041：2025 就业 296.3 千人，2035 预计 309.6 千人，净增 13.3 千人，增长 4.5%，年均空缺 48.8 千个，自雇占比 0.2%。",
-                  "通常入门无正式学历凭证要求、无需相关工作经验、短期在职培训。"
+                  "BLS 预计美国 SOC 35-3041 就业由 2025 年约 296,300 人增至 2035 年约 309,600 人，增长 4.5%，年均约 48,800 个空缺（含替补需求）。"
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
                 "limitation": "不得把预测增量或年均空缺直接解释为个人收入或录用保证。",
                 "market": "US",
                 "name": "BLS：2025—2035 职业就业预测与特征表",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "非餐厅食品服务员：美国就业预测",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31824,17 +31727,16 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "全国 SOC 35-3041：中位年工资 35,360 美元、时工资 17.00 美元；年工资 10/25/75/90 分位 28,030/31,190/38,500/46,120 美元；就业 293,900 人。",
-                  "measure=13 的高工资行业例子：门诊照护中心 61,250、其他支持服务 49,530、博物馆等 47,660、资助与捐赠服务 42,450 美元年中位工资。"
+                  "查询行业工资时选择 35-3041、2025 年 5 月、对应 NAICS 和中位数。本文不展示未经本轮核实的细行业工资。"
                 ],
                 "evidence_type": "official wage table",
                 "id": "bls-oews-2025",
-                "limitation": "行业例子是高工资列表，不代表主要雇主或个人报价；全国分位不是资历分档。",
+                "limitation": "查询口径须与目标行业、职业及年份一致。",
                 "market": "US",
-                "name": "BLS：May 2025 非餐厅食品服务员 OEWS 官方查询",
+                "name": "BLS OEWS：按职业与行业查询",
                 "period": "May 2025 OEWS",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "非餐厅食品服务员：美国全国及选定行业工资",
+                "scope": "分行业工资查询入口",
                 "url": "https://data.bls.gov/oesprofile/?year=2025&major_group=350000&occupation=353041&measure=13&areas=INDUSTRY,STATE,MSA"
               },
               {
@@ -31945,6 +31847,96 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第3项北京清月蓝领文化传媒招聘配餐员10名，税前5,000–6,000元/月；在医院营养膳食团队指导下办理预订、退订、分餐和配餐。公告发布地为内蒙古，工作地点是北京。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "tray-beijing",
+                "limitation": "一则历史招聘；不表示仍在招聘或可代表全国。",
+                "market": "中国大陆",
+                "name": "北京医院配餐员招聘",
+                "period": "2025-01",
+                "publisher": "正镶白旗人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zxbq.gov.cn/zxbq/zwgk/zfxxgk/fdzdgknr/zdlygk/wgjy/2025012710265156042/index.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "送餐员15名，3,500–4,500元/月；在病房送三餐，持点餐机协助订餐并在送餐后清洁消毒餐车。招聘要求食品健康证。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "tray-huangpu",
+                "limitation": "一则历史招聘；不表示仍在招聘或可代表全国。",
+                "market": "中国大陆",
+                "name": "广州中味餐饮：病房送餐员",
+                "period": "2024-01",
+                "publisher": "广州市黄埔区劳动就业服务管理中心",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzjg/qt/ldjyfwzx/zdqyzplm/content/post_9456741.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国相邻职业任务。"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "onet-food-prep",
+                "limitation": "工作分工因单位而异。",
+                "market": "美国",
+                "name": "食品制备人员",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/35-2021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国相邻职业任务。"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "onet-restaurant-server",
+                "limitation": "工作分工因单位而异。",
+                "market": "美国",
+                "name": "餐厅服务员",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/35-3031.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "清洗餐具、锅具及厨房区域；送餐员也可能清洗餐具。"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "onet-dishwashers",
+                "limitation": "具体职责随雇主而异。",
+                "market": "美国",
+                "name": "洗碗工的任务",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/35-9021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "年工资 P10/P25/P50/P75/P90：28,030 / 31,190 / 35,360 / 38,500 / 46,120 美元。"
+                ],
+                "evidence_type": "official wage table",
+                "id": "onet-national-wages-2025",
+                "limitation": "仅全国职业工资，不支持分行业值。",
+                "market": "US",
+                "name": "O*NET 转载：35-3041 全美 2025 工资",
+                "period": "May 2025 OEWS",
+                "publisher": "O*NET OnLine / BLS OEWS",
+                "scope": "全国职业工资分位",
+                "url": "https://www.onetonline.org/link/localwages/35-3041.00"
               }
             ]
           },
@@ -34461,7 +34453,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "薪资 · 中位年薪",
+              "指标": "工资中位数",
               "数值": {
                 "$item": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -34476,7 +34468,7 @@
               }
             },
             {
-              "指标": "薪资 · 10 分位",
+              "指标": "工资第 10 百分位",
               "数值": {
                 "$item": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -34491,7 +34483,7 @@
               }
             },
             {
-              "指标": "薪资 · 25 分位",
+              "指标": "工资第 25 百分位",
               "数值": {
                 "$item": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -34506,7 +34498,7 @@
               }
             },
             {
-              "指标": "薪资 · 75 分位",
+              "指标": "工资第 75 百分位",
               "数值": {
                 "$item": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -34521,7 +34513,7 @@
               }
             },
             {
-              "指标": "薪资 · 90 分位",
+              "指标": "工资第 90 百分位",
               "数值": {
                 "$item": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.15",
                 "block": "china-salary",
@@ -34536,7 +34528,7 @@
               }
             },
             {
-              "指标": "就业 · 就业规模",
+              "指标": "就业人数",
               "数值": {
                 "$item": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.17",
                 "block": "china-salary",
@@ -34551,7 +34543,7 @@
               }
             },
             {
-              "指标": "就业 · 增长率（outlook）",
+              "指标": "就业变化预测",
               "数值": {
                 "$item": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.19",
                 "block": "china-salary",
@@ -34566,7 +34558,7 @@
               }
             },
             {
-              "指标": "就业 · 预测期岗位空缺",
+              "指标": "年均空缺预测",
               "数值": {
                 "$item": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.21",
                 "block": "china-salary",
@@ -34805,6 +34797,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-tray-beijing",
+            "posting-tray-huangpu"
+          ],
           "sources_note": {
             "$item": "food-servers-nonrestaurant.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34814,7 +34810,7 @@
           "ui": {
             "ai_heading": "AI 会影响非餐厅食品服务员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "招聘证据边界（本轮未纳入公告样本）",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "教育背景与探索方向（作者建议，非招聘统计）",
             "scenario_heading": "不同教育背景下怎样核对准备方向？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -34957,7 +34953,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "就业 · 预测期岗位空缺",
+            "指标": "就业 · 2025–2035 年预计年均空缺",
             "数值": {
               "$item": "food-servers-nonrestaurant.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -35036,7 +35032,7 @@
           "type": "prose"
         },
         "heading": "美国非餐厅食品服务员工资多少？",
-        "industry_heading": "官方高工资行业中的四个例子",
+        "industry_heading": "美国分行业工资查询",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
@@ -36603,7 +36599,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "开始核对非餐厅食品服务员是否适合你",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36677,30 +36673,10 @@
               "$link": "food-servers-nonrestaurant.navigation.links.1",
               "block": "navigation",
               "copy_key": "career.item.navigation-links",
-              "entry": "navigation-2",
-              "field": "url"
-            },
-            "label": "MBTI（英文）"
-          },
-          {
-            "href": {
-              "$link": "food-servers-nonrestaurant.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-3",
-              "field": "url"
-            },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "food-servers-nonrestaurant.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "了解我的人格偏好"
           },
           {
             "href": {
@@ -36710,7 +36686,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "了解我的大五特质"
           }
         ]
       },
@@ -36856,7 +36832,7 @@
         "occupation_scope": "非餐厅食品服务员；35-3041.00",
         "period": "2025 BLS OEWS",
         "source_refs": [
-          "bls-oews-2025"
+          "onet-national-wages-2025"
         ]
       },
       {
@@ -36868,7 +36844,7 @@
         "occupation_scope": "非餐厅食品服务员；35-3041.00",
         "period": "2025 BLS OEWS",
         "source_refs": [
-          "bls-oews-2025"
+          "onet-national-wages-2025"
         ]
       },
       {
@@ -36880,7 +36856,7 @@
         "occupation_scope": "非餐厅食品服务员；35-3041.00",
         "period": "May 2025",
         "source_refs": [
-          "bls-oews-2025"
+          "onet-national-wages-2025"
         ]
       },
       {
@@ -36892,7 +36868,7 @@
         "occupation_scope": "非餐厅食品服务员；35-3041.00",
         "period": "2025 BLS OEWS",
         "source_refs": [
-          "bls-oews-2025"
+          "onet-national-wages-2025"
         ]
       },
       {
@@ -36904,48 +36880,48 @@
         "occupation_scope": "非餐厅食品服务员；35-3041.00",
         "period": "2025 BLS OEWS",
         "source_refs": [
-          "bls-oews-2025"
+          "onet-national-wages-2025"
         ]
       },
       {
         "derivation": null,
-        "display_value": "296,300 人（美国，2025，BLS 就业预测基期；与 OEWS May 2025 的 293,900 人为不同项目）",
+        "display_value": "296,300 人（2025 年）",
         "fact_id": "us-employment-2025",
         "market": "US",
-        "measure": "就业规模",
-        "occupation_scope": "非餐厅食品服务员；35-3041.00",
-        "period": "2025",
+        "measure": "美国基期就业（2025 年）",
+        "occupation_scope": "U.S. SOC 35-3041",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "就业预计增长 4.5%（美国，2025—2035，BLS）；基期 296,300 人，2035 年 309,600 人，净增约 13,300 人",
+        "display_value": "4.5% (2025–2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
-        "measure": "就业增长率",
-        "occupation_scope": "非餐厅食品服务员；35-3041.00",
-        "period": "2025—2035",
+        "measure": "美国就业预测（2025–2035 年）",
+        "occupation_scope": "U.S. SOC 35-3041",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均岗位空缺约 48,800 个（美国，2025—2035，含增长与人员离职、转岗替换需求）",
+        "display_value": "年均 48,800 个（含替补需求）",
         "fact_id": "us-openings-2025-2035",
         "market": "US",
-        "measure": "年均职位空缺",
-        "occupation_scope": "非餐厅食品服务员；35-3041.00",
-        "period": "2025—2035",
+        "measure": "美国预计年均职位空缺（2025–2035 年）",
+        "occupation_scope": "U.S. SOC 35-3041",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "61,250 美元/年（May 2025，门诊照护中心（Outpatient Care Centers）行业内本职业中位工资）",
+        "display_value": "本页未列该行业可核对的职业中位数；在 BLS OEWS 选行业及职业查询。",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "US",
         "measure": "行业工资",
@@ -36957,7 +36933,7 @@
       },
       {
         "derivation": null,
-        "display_value": "49,530 美元/年（May 2025，其他支持服务（Other Support Services）行业内本职业中位工资）",
+        "display_value": "本页未列该行业可核对的职业中位数；在 BLS OEWS 选行业及职业查询。",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "US",
         "measure": "行业工资",
@@ -36969,7 +36945,7 @@
       },
       {
         "derivation": null,
-        "display_value": "47,660 美元/年（May 2025，博物馆、历史遗址及类似机构行业内本职业中位工资）",
+        "display_value": "本页未列该行业可核对的职业中位数；在 BLS OEWS 选行业及职业查询。",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "US",
         "measure": "行业工资",
@@ -36981,7 +36957,7 @@
       },
       {
         "derivation": null,
-        "display_value": "42,450 美元/年（May 2025，资助与捐赠服务（Grantmaking and Giving Services）行业内本职业中位工资）",
+        "display_value": "本页未列该行业可核对的职业中位数；在 BLS OEWS 选行业及职业查询。",
         "fact_id": "us-industry-wage-education-2025",
         "market": "US",
         "measure": "行业工资",
@@ -37098,6 +37074,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第3项北京清月蓝领文化传媒招聘配餐员10名，税前5,000–6,000元/月；在医院营养膳食团队指导下办理预订、退订、分餐和配餐。公告发布地为内蒙古，工作地点是北京。",
+        "fact_id": "posting-tray-beijing",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "北京医院配餐员招聘",
+        "period": "2025-01",
+        "source_refs": [
+          "tray-beijing"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "送餐员15名，3,500–4,500元/月；在病房送三餐，持点餐机协助订餐并在送餐后清洁消毒餐车。招聘要求食品健康证。",
+        "fact_id": "posting-tray-huangpu",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "广州中味餐饮：病房送餐员",
+        "period": "2024-01",
+        "source_refs": [
+          "tray-huangpu"
+        ]
       }
     ]
   },
@@ -37124,19 +37124,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2025—2035）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国就业规模（2025 预测基期）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均空缺（2025—2035）"
+        "label": "美国预计年均职位空缺（2025–2035 年）"
       },
       {
         "availability": "available",
@@ -37150,14 +37150,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "非餐厅食品服务员做什么、如何入行、工作边界与发展方向。基于官方职业资料，区分职业统计、行业代理和资格缺口。"
+      "text": "非餐厅送餐员如何核对餐盘、收餐人和特殊餐要求？对照医院配餐招聘、美国就业数据与餐厅服务分工。"
     },
     "title": {
       "availability": "available",
       "text": "非餐厅食品服务员"
     }
   },
-  "source_content_sha256": "fc85d7afef2272a6735165030fb37f0a1c2f0ec2c1db284bcdc8d6a9f90706ff",
+  "source_content_sha256": "2ca17a041c377362d02723f32908d4c5b380174e375befaca08f9df510678bc4",
   "subject": {
     "canonical_slug": "food-servers-nonrestaurant",
     "name": "非餐厅食品服务员",

@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "This work turns fabric, process sheets, and equipment status into a traceable bleaching and dyeing batch. You can first observe whether you can consistently check units and batch numbers, distinguish permitted ranges from anomalies, record uncertain information, and still follow reporting and shutdown authority when rushing production. Real fit also requires checking shifts, environment, and position training."
+              "Paper check | Compare fictional batch labels with a machine log. Flag a shared color code with conflicting batch IDs and retain the label references. "
             ]
           },
           "id": "textile-bleaching-and-dyeing-machine-operators-and-tenders.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24812,13 +24811,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Textile bleaching and dyeing machine operators and tenders operate or tend machines according to an established process to bleach, wash, dye, shrink, or finish fabric, yarn, or related fibers, monitor process parameters, inspect products, and record anomalies and production results."
+              "Textile bleaching and dyeing machine operators tend washing, bleaching or dyeing equipment, monitor fabric and instrument readings, and record batch or equipment exceptions. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "textile-bleaching-and-dyeing-machine-operators-and-tenders.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-6061.00"
           ],
           "type": "prose"
         }
@@ -25494,13 +25492,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Text tools may assist with record drafts; process, equipment, and safety decisions still require review by trained and authorized personnel. The BLS overall projection for this occupation from 2025 to 2035 is a 12.5% decline with average annual openings of about 600 including replacements, and it is not attributed to AI alone; this page still has no verifiable AI adoption rate, substitution rate, or personal unemployment probability. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare fictional batch labels with a machine log. Flag a shared color code with conflicting batch IDs and retain the label references."
             ]
           },
           "id": "textile-bleaching-and-dyeing-machine-operators-and-tenders.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-6061.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33154,6 +33152,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-6061.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-6061.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-6061.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38633,10 +38658,10 @@
       "text": "Textile bleaching and dyeing machine operators and tenders"
     }
   },
-  "source_content_sha256": "2802a2ae2c312c79f1850be045804055b3c1a6dca8988d1410fb8af70b900081",
+  "source_content_sha256": "0240381c75a766d7fd6ac310d26d32ff2c45951e35990716a40444c194a5939b",
   "subject": {
     "canonical_slug": "textile-bleaching-and-dyeing-machine-operators-and-tenders",
     "name": "Textile bleaching and dyeing machine operators and tenders",
-    "summary": "Operate or tend textile bleaching, washing, dyeing and finishing machines according to established processes, monitor applicable parameters such as temperature and flow, inspect products and record production and anomaly information. Understanding the job requires checking fabric, equipment, batch traceability, safety training and authorization boundaries together; the US occupational code on this page is 51-6061.00, and Chinese trades and employer conditions are checked separately."
+    "summary": "Textile bleaching and dyeing machine operators tend washing, bleaching or dyeing equipment, monitor fabric and instrument readings, and record batch or equipment exceptions."
   }
 }

@@ -2,6 +2,15 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:dws-parent-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:dws-parent-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:dws-parent-openings": {
+        "status": "pending_mapping"
+      },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
@@ -18,6 +27,12 @@
         "status": "pending_mapping"
       },
       "fact:path-parent": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-dws-beijing": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-dws-yixun": {
         "status": "pending_mapping"
       },
       "fact:r5-current-market": {
@@ -7301,7 +7316,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Low-risk check: Use this page's entirely fictional order and customer materials to complete an exercise in defining the target grain, designing dimensions and facts, writing acceptance, quarantine and exclusion rules, and calculating and checking the three categories of row counts and original record amounts. Assess only your work preferences. The exercise involves no real customer data, keys or production connections and does not establish training competence or data authorization."
+              "Low-risk check: Create a small fictional order and customer dataset and use it to complete an exercise in defining the target grain, designing dimensions and facts, writing acceptance, quarantine and exclusion rules, and calculating and checking the three categories of row counts and original record amounts. Assess only your work preferences. The exercise involves no real customer data, keys or production connections and does not establish training competence or data authorization."
             ]
           },
           "id": "data-warehousing-specialists.quick-decision.fermat-decision-card.3",
@@ -7755,12 +7770,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial contract checks: Job level, contracting entity, monthly pay, bonuses, working hours and outsourcing arrangements. This review has no actual current vacancy samples and does not claim that full-time work or any payment form predominates."
+              "A Guangdong Yixun Technology campus posting included warehousing, ETL and modeling in a big data developer role. It listed CNY 9,000–13,000 per month and required a relevant bachelor’s degree or higher. A separate posting attachment on the People’s Bank of China website lists one Beijing warehouse R&D role in data marts, ETL and quality monitoring, requiring a master’s degree or higher with no pay quoted. Neither posting sets a national wage or education requirement."
             ]
           },
           "id": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "r5-nbs-it"
+            "dws-yixun",
+            "dws-beijing"
           ],
           "type": "prose"
         },
@@ -7783,13 +7799,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "A data gap does not mean pay offers do not exist. Save the original announcement, pay components, role scope and access date, and distinguish pretax from after-tax pay, pay cycles and statistical periods. Do not substitute industry or adjacent-occupation figures or convert exchange rates."
+              "Confirm whether monthly pay is gross or net, whether bonuses are separate, which entity hires and whether on-call work applies. Do not convert U.S. figures into a local wage."
             ]
           },
           "id": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "r5-editorial-dws",
-            "r5-nbs-it"
+            "dws-yixun",
+            "dws-beijing"
           ],
           "type": "prose"
         }
@@ -7967,7 +7983,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Check through action: Use this page's entirely fictional order and customer materials for an exercise in defining grain, designing dimensions and facts, writing routing rules, and checking the three categories of row counts and amounts; or undertake a real requirements-clarification exercise, then assess your preferences. The exercise involves no real data or production connections."
+              "Check through action: Create a small fictional order and customer dataset and use it for an exercise in defining grain, designing dimensions and facts, writing routing rules, and checking the three categories of row counts and amounts; or undertake a real requirements-clarification exercise, then assess your preferences. The exercise involves no real data or production connections."
             ]
           },
           "id": "data-warehousing-specialists.fit.riasec-fit-block.5",
@@ -8148,7 +8164,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The occupation's own tasks and opinions on required education are separate from parent proxies for wages and employment. A one-to-one classification match or actual recruitment in China has not been verified when comparing actual responsibilities. For processing identifiable personal information in China, check PIPL13 on lawful grounds, which do not always require consent; Article 6 on minimum necessity; Article 8 on quality; and Article 51 on reasonable permissions and regular security training. An account does not replace a lawful basis. Separately check Article 21 on the scope of entrusted outsourcing, supervision and conditions for sub-entrustment, and Article 59 on entrusted parties' security and assistance obligations. Organizational policies do not replace law."
+              "The occupation's own tasks and opinions on required education are separate from parent proxies for wages and employment. Two historical Chinese postings illustrate actual duties. A one-to-one classification match and current vacancies remain unverified. For processing identifiable personal information in China, check PIPL13 on lawful grounds, which do not always require consent; Article 6 on minimum necessity; Article 8 on quality; and Article 51 on reasonable permissions and regular security training. An account does not replace a lawful basis. Separately check Article 21 on the scope of entrusted outsourcing, supervision and conditions for sub-entrustment, and Article 59 on entrusted parties' security and assistance obligations. Organizational policies do not replace law."
             ]
           },
           "id": "data-warehousing-specialists.path.career-path-block.3",
@@ -8440,7 +8456,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Separate official parent-occupation projections, actual organizational arrangements and current recruitment samples. Business volume/data-driven decisions are editorial conditions awaiting investigation, not proven determinants of job distribution. This review has no actual Chinese recruitment samples."
+              "Separate official parent-occupation projections, actual organizational arrangements and current recruitment samples. Business volume/data-driven decisions are editorial conditions awaiting investigation, not proven determinants of job distribution. This page includes two historical postings, which do not establish current openings or market distribution."
             ]
           },
           "fact_refs": [
@@ -8513,23 +8529,24 @@
           "data": {
             "entries": [
               {
-                "answer": "Design, model or implement enterprise data warehousing activities, program and configure database information repositories, and support warehouse users: develop warehouse process models covering sources, loading, transformation and extraction; check structure and accuracy; map data between source systems, data warehouses and data marts; design and implement warehouse structures; create metadata and documentation; write test scripts; troubleshoot failures; and support users.",
+                "answer": "Start by mapping source fields and defining what each row represents. Extract, transform and load data, reconcile row counts and key measures, then publish documented tables. When a load fails, isolate source, transformation or scheduling problems and verify that a rerun does not double count.",
                 "id": "data-warehousing-specialists.faq.1",
-                "question": "Data Warehousing Specialists: How does daily work form a complete cycle?",
+                "question": "What do data warehousing specialists do?",
                 "question_key": "career.faq.data-warehousing-specialists.daily-work",
                 "source_refs": [
-                  "onet-dws"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "Database administrators focus on database operations, performance, capacity and access security; database architects on system-level data architecture and standards design, which is the proxy for this page's wages and employment; data scientists on modeling and interpreting conclusions; business intelligence analysts on metrics and reports; computer systems analysts and systems engineers on business systems and process analysis; and data warehousing specialists on models, loading, quality and availability of analytical data layers.",
+                "answer": "Warehousing specialists deliver reconciled tables and loading pipelines. DBAs focus on availability, recovery and access. Database architects focus on models and standards; BI analysts use data to answer business questions. Duties can overlap. Ask who writes mappings, defines metrics and responds to failures.",
                 "id": "data-warehousing-specialists.faq.2",
-                "question": "Data Warehousing Specialists: How does this role differ from adjacent occupations?",
+                "question": "How do warehousing, DBA, database architecture and BI differ?",
                 "question_key": "career.faq.data-warehousing-specialists.role-comparison",
                 "source_refs": [
-                  "onet-dws",
+                  "r5-onet-current",
                   "onet-dba",
-                  "onet-sys"
+                  "r5-target-dbarch",
+                  "r5-target-bi"
                 ]
               },
               {
@@ -8553,23 +8570,24 @@
                 ]
               },
               {
-                "answer": "The U.S. median annual wage in month 5 of 2025 was 139,500 dollars, or 67.07 dollars/hour. The 10th percentile was 86,240 dollars and the 90th percentile 204,000 dollars. The page explicitly identifies these as a proxy from parent occupation Database Architects (15-1243.00), not precise wages for this detailed occupation. Percentiles are not individual pay offers. No occupational figures were obtained for mainland China; this page treats that as an evidence gap and does not fill it with industry averages or offer samples.",
+                "answer": "The 2025 U.S. medians of $67.07 per hour and $139,500 per year describe the Database Architects parent group. They are neither separate warehousing wages nor China pay. A Guangdong Yixun Technology campus posting included warehousing, ETL and modeling in a big data developer role. It listed CNY 9,000–13,000 per month and required a relevant bachelor’s degree or higher. A separate posting attachment on the People’s Bank of China website lists one Beijing warehouse R&D role in data marts, ETL and quality monitoring, requiring a master’s degree or higher with no pay quoted. Neither posting sets a national wage or education requirement.",
                 "id": "data-warehousing-specialists.faq.5",
-                "question": "Data Warehousing Specialists: How can wages be compared without distortion?",
+                "question": "How should you read wage figures and job offers?",
                 "question_key": "career.faq.data-warehousing-specialists.pay",
                 "source_refs": [
-                  "bls-dbarch-wage",
-                  "nbs-wages"
+                  "r5-wages-current",
+                  "dws-yixun",
+                  "dws-beijing"
                 ]
               },
               {
-                "answer": "O*NET 15-1243.01 is in Job Zone Four, with SVP 7.0 to below 8.0. The education survey shows 78% requiring a bachelor's degree, 4% a high-school diploma or equivalent and 4% a postsecondary certificate. The BLS Occupational Outlook Handbook's parent-occupation scope typically requires a bachelor's degree in computer or information technology fields. In mainland China, roles commonly require an information technology background and project capabilities; specific requirements depend on the target organization.",
+                "answer": "Check each posting: the two historical examples asked for a relevant bachelor’s degree or higher and a master’s degree or higher, respectively. Use public data to build a small rerunnable warehouse, documenting what each row represents, load logs and reconciliations.",
                 "id": "data-warehousing-specialists.faq.6",
-                "question": "Data Warehousing Specialists: What education and training are needed?",
+                "question": "What education and practice help you get started?",
                 "question_key": "career.faq.data-warehousing-specialists.education",
                 "source_refs": [
-                  "onet-dws",
-                  "bls-dbarch-path"
+                  "dws-yixun",
+                  "dws-beijing"
                 ]
               },
               {
@@ -8583,7 +8601,7 @@
                 ]
               },
               {
-                "answer": "First use this page's entirely fictional order and customer materials to complete an exercise in defining the target grain, designing dimensions and facts, writing acceptance, quarantine and exclusion rules, and calculating and checking the three categories of row counts and original record amounts. The figures should match the provided materials. The exercise involves no real data, keys or production connections.",
+                "answer": "First create a small fictional order and customer dataset and use it to complete an exercise in defining the target grain, designing dimensions and facts, writing acceptance, quarantine and exclusion rules, and calculating and checking the three categories of row counts and original record amounts. Reconcile your results to the totals in your own input. The exercise involves no real data, keys or production connections.",
                 "id": "data-warehousing-specialists.faq.8",
                 "question": "Data Warehousing Specialists: What exercise can a beginner try first?",
                 "question_key": "career.faq.data-warehousing-specialists.work-sample",
@@ -8592,13 +8610,12 @@
                 ]
               },
               {
-                "answer": "O*NET's employment trends page, using parent occupation Database Architects, shows approximately 66,900 people in 2024, approximately 72,700 in 2034, growth of 9% during 2024–2034, and approximately 4,000 annual openings from growth and replacement. The BLS Occupational Outlook Handbook's combined scope shows approximately 144,500 people in 2025, growth of 4% during 2025–2035, and approximately 7,300 annual openings. The two scopes cover different periods and populations; quote them separately without combining them. Neither represents an individual's hiring probability.",
+                "answer": "BLS projects U.S. Database Architects (parent SOC 15-1243) to grow from about 69,500 jobs in 2025 to 76,000 in 2035 (+9.4%), with about 3,900 annual openings including replacements. The detailed warehousing occupation 15-1243.01 has no separate projection here.",
                 "id": "data-warehousing-specialists.faq.9",
-                "question": "Data Warehousing Specialists: How should the employment outlook be read?",
+                "question": "What does the U.S. employment outlook actually measure?",
                 "question_key": "career.faq.data-warehousing-specialists.outlook",
                 "source_refs": [
-                  "bls-dbarch-outlook",
-                  "bls-dbarch-wage"
+                  "r5-bls-current"
                 ]
               },
               {
@@ -8789,21 +8806,19 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Supports approximately 66,900 people in parent occupation Database Architects in 2024, approximately 72,700 in 2034, growth of 9% during 2024–2034, much faster than average, and approximately 4,000 annual openings from growth and replacement.",
-                  "O*NET's employment trends page explicitly identifies these data as covering parent occupation Database Architects.",
-                  "This review's current 2025–2035 parent proxy is 9.4%, 3900. The occupation's own tasks/education opinions are separate from parent statistics; protected older facts remain retained."
+                  "BLS projects U.S. Database Architects (parent SOC 15-1243) to grow from about 69,500 jobs in 2025 to 76,000 in 2035 (+9.4%), with about 3,900 annual openings including replacements. The detailed warehousing occupation 15-1243.01 has no separate projection here."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "bls-dbarch-outlook",
                 "limitation": "This is a parent-occupation proxy. The BLS Occupational Outlook Handbook's combined scope, with 4% growth during 2025–2035, covers a different period and population and cannot be combined with this page's figures.",
                 "market": "United States",
                 "name": "O*NET OnLine: Data Warehousing Specialists employment trends (data for Database Architects)",
-                "period": "2024–2034 projection period; accessed 2026-09-19",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/15-1243.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -8967,7 +8982,7 @@
                 "url": "https://www.onetonline.org/link/summary/15-1211.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "All 18 tasks are core tasks. Impact scores across 19 styles include attention to detail 100, conscientiousness 87, curiosity 72, cautiousness 69 and integrity 69; these are not proportions. CI scores C90I63E34R32S17A10 are not employee personality profiles. Education figures of 78 bachelor's, 4 high school and 4 postsecondary certificate are opinions on requirements, not employee composition. Updated does not identify a uniform survey year. Wages/employment/industries use parent occupation 15-1243 as a proxy."
                 ],
@@ -9012,16 +9027,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/15-1243.01"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "15-1243: 69.5 thousand in 2025 → 76.0 thousand in 2035, +6.5 thousand/+9.4%, 3.9 thousand annual openings and 2.1% self-employment. These are neither statistics for data warehousing itself nor OOH's combined database administrators and architects scope. The categories of a typical bachelor's degree, less than 5 years of related experience and no on-the-job training do not establish a fixed minimum tenure or constitute Chinese law."
+                  "BLS projects U.S. Database Architects (parent SOC 15-1243) to grow from about 69,500 jobs in 2025 to 76,000 in 2035 (+9.4%), with about 3,900 annual openings including replacements. The detailed warehousing occupation 15-1243.01 has no separate projection here."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r5-bls-current",
                 "limitation": "15-1243: 69.5 thousand in 2025 → 76.0 thousand in 2035, +6.5 thousand/+9.4%, 3.9 thousand annual openings and 2.1% self-employment. These are neither statistics for data warehousing itself nor OOH's combined database administrators and architects scope. The categories of a typical bachelor's degree, less than 5 years of related experience and no on-the-job training do not establish a fixed minimum tenure or constitute Chinese law.",
                 "market": "United States",
                 "name": "BLS Table 1.2: Database Architects parent-occupation projections",
-                "period": "2025 base year/2025–2035 projections; accessed 2026-10-09",
+                "period": "2025–2035",
                 "publisher": "Bureau of Labor Statistics",
                 "scope": "parent proxy",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -9192,6 +9207,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "CNY 9,000–13,000 per month; warehousing, ETL and modeling, relevant bachelor’s degree or higher."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "dws-yixun",
+                "limitation": "A historical posting, not national wages or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Guangdong Yixun Technology campus posting: Big Data Developer",
+                "period": "2025-09–2026-04",
+                "publisher": "Fuzhou University of International Studies and Trade",
+                "scope": "recruitment_proxy",
+                "url": "https://www.fzfu.com/bigdata/info/1058/4870.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One Beijing role, master’s degree or higher; data marts, ETL and quality monitoring; no salary quoted."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "dws-beijing",
+                "limitation": "A historical posting, not national wages or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Beijing Data Warehouse R&D Engineer posting attachment",
+                "period": "2025-12",
+                "publisher": "People’s Bank of China website",
+                "scope": "recruitment_proxy",
+                "url": "https://www.pbc.gov.cn/renshisi/144501/144513/5836227/5836240/2025121214564112292/2025121214560356519.pdf"
               }
             ]
           },
@@ -9338,12 +9383,12 @@
           },
           {
             "关键区别": "The core responsibilities are consistent data-layer definitions, rerunnable loading, verifiable quality and traceable lineage. This page covers only this single occupation's scope.",
-            "更适合什么选择": "First complete a routing and reconciliation exercise using this page's fictional order materials, without real data or production connections.",
+            "更适合什么选择": "First complete a routing and reconciliation exercise using fictional order data you create, without real data or production connections.",
             "核心工作与产出": "Design, model or implement enterprise data warehousing activities, program and configure database information repositories, and support warehouse users.",
             "职业方向": "Data Warehousing Specialists (15-1243.01, this occupation)"
           }
         ],
-        "transition": "Next step: Follow this page's fictional order materials through grain design, routing and reconciliation, check the target direction's responsibilities, data authorization and accountability boundaries, then choose a direction."
+        "transition": "Next step: Use fictional order data you create for grain design, routing and reconciliation, check the target direction's responsibilities, data authorization and accountability boundaries, then choose a direction."
       },
       "ai_impact_table": {
         "action_rows": [
@@ -9821,7 +9866,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "Separate the U.S. occupation's own O*NET tasks/education opinions from BLS parent-proxy preparation. PIPL was read for China; actual recruitment, all industries and supporting cross-border rules were not verified.",
+          "jurisdiction": "Separate the U.S. occupation's own O*NET tasks/education opinions from BLS parent-proxy preparation. Two mainland China historical postings were verified. National industry patterns and cross-border rules were not established; check personal information rules for the specific situation.",
           "summary": {
             "$item": "data-warehousing-specialists.path.career-path-block.3",
             "block": "path",
@@ -10292,7 +10337,7 @@
               "field": "url",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
-            "id": "onet-dws",
+            "id": "r5-onet-current",
             "label": {
               "$source": "r5-onet-current",
               "block": "source-register",
@@ -10406,22 +10451,22 @@
             {
               "学历段": "Education and training conditions in the target announcement (editorial check item)",
               "岗位方向": "Check actual data development/support responsibilities, without assigning roles by associate or bachelor's degree",
-              "说明": "This review obtained no Chinese education/job distribution or recruitment samples. These are only conditions to check with the target organization, not nationwide patterns."
+              "说明": "Two historical postings show only their own requirements. No nationwide education or job distribution was established."
             },
             {
               "学历段": "Data modeling, loading and testing training (editorial check item)",
               "岗位方向": "Check preparation against target warehouse/platform responsibilities; do not infer capability from a bachelor's degree",
-              "说明": "This review obtained no Chinese education/job distribution or recruitment samples. These are only conditions to check with the target organization, not nationwide patterns."
+              "说明": "Two historical postings show only their own requirements. No nationwide education or job distribution was established."
             },
             {
               "学历段": "Appointment conditions for proposed architecture or supervisory responsibilities (editorial check item)",
               "岗位方向": "Check the target organization's experience and responsibilities; do not treat education/experience combinations as a uniform promotion route",
-              "说明": "This review obtained no Chinese education/job distribution or recruitment samples. These are only conditions to check with the target organization, not nationwide patterns."
+              "说明": "Two historical postings show only their own requirements. No nationwide education or job distribution was established."
             },
             {
               "学历段": "Authorization conditions for proposed governance or management responsibilities (editorial check item)",
               "岗位方向": "Separately check management scope, collaboration and authorization; governance experience does not automatically confer appointment",
-              "说明": "This review obtained no Chinese education/job distribution or recruitment samples. These are only conditions to check with the target organization, not nationwide patterns."
+              "说明": "Two historical postings show only their own requirements. No nationwide education or job distribution was established."
             }
           ],
           "china_industry_table": [
@@ -10448,7 +10493,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "Actually read NBS2025 industry wages and PIPL; no current recruitment or occupational wages for this occupation were obtained",
+          "china_open": "Two historical postings were verified. Current vacancies and national occupational wages were not established.",
           "china_ref": {
             "$join": [
               {
@@ -10469,7 +10514,7 @@
             ],
             "separator": ""
           },
-          "china_salary_note": "Chinese public sources are used only to explain scope boundaries.",
+          "china_salary_note": "Each posting describes the position and any pay quoted in that announcement.",
           "china_salary_table": [
             {
               "城市/区间": "Mainland China (nationwide occupational scope)",
@@ -10480,16 +10525,20 @@
               "月薪参考": "Not applicable (industry averages are not used to replace occupational wages)"
             },
             {
-              "城市/区间": "Mainland China (recruitment pay-offer scope)",
-              "月薪参考": "Insufficient evidence: No verifiable pay-offer statistics were obtained"
+              "城市/区间": "Mainland China historical postings",
+              "月薪参考": {
+                "$item": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.2",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
             }
           ],
-          "china_soc_row": {
-            "$item": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
-          },
+          "china_soc_row": "Compare actual deliverables rather than assuming a one-to-one link between U.S. and Chinese classifications.",
+          "fact_refs": [
+            "posting-dws-yixun",
+            "posting-dws-beijing"
+          ],
           "sources_note": {
             "$join": [
               {
@@ -10513,7 +10562,7 @@
           "ui": {
             "ai_heading": "Will AI or automation affect data warehousing specialists' wages?",
             "driver_heading": "How is data warehouse work scheduled around release and business cycles?",
-            "official_heading": "Official statistical scope and explanations of missing data",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Education, training and role directions (editorial compilation, not wage statistics)",
             "scenario_heading": "Which role directions correspond to different education and training backgrounds?",
             "scenario_interpretation_label": "Notes and checking suggestions",
@@ -11174,7 +11223,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/database-administrators",
+            "target_href": "/en/career/jobs/database-administrators",
             "target_slug": "database-administrators",
             "target_title": "Database Administrators (adjacent occupation)",
             "transition_distance": "Transition distance: From analytical data layer development to database operations, security and capacity management."
@@ -11182,7 +11231,7 @@
           {
             "capability_gaps": "Gaps to fill: System-level architecture design, standards development and cross-system governance.",
             "shared_capabilities": "Conditional editorial mapping: Only when actual training or responsibilities already provide relevant experience can data models and structural design be compared with tasks. This establishes neither existing competence nor a direct transition.",
-            "target_href": "/zh/career/jobs/database-architects",
+            "target_href": "/en/career/jobs/database-architects",
             "target_slug": "database-architects",
             "target_title": "Database Architects (adjacent occupation)",
             "transition_distance": "Transition distance: From data warehouse implementation to higher-level data architecture and standards."
@@ -11190,7 +11239,7 @@
           {
             "capability_gaps": "Gaps to fill: Statistical modeling, validation and interpreting conclusions.",
             "shared_capabilities": "Conditional editorial mapping: Only when actual training or responsibilities already provide relevant experience can data preparation, programming and statistical foundations be compared with tasks. This establishes neither existing competence nor a direct transition.",
-            "target_href": "/zh/career/jobs/data-scientists",
+            "target_href": "/en/career/jobs/data-scientists",
             "target_slug": "data-scientists",
             "target_title": "Data Scientists (adjacent occupation)",
             "transition_distance": "Transition distance: From data layer development to modeling and interpreting business conclusions."
@@ -11198,7 +11247,7 @@
           {
             "capability_gaps": "Gaps to fill: Metrics system design, report delivery and business communication.",
             "shared_capabilities": "Conditional editorial mapping: Only when actual training or responsibilities already provide relevant experience can understanding metrics and delivering visualizations be compared with tasks. This establishes neither existing competence nor a direct transition.",
-            "target_href": "/zh/career/jobs/business-intelligence-analysts",
+            "target_href": "/en/career/jobs/business-intelligence-analysts",
             "target_slug": "business-intelligence-analysts",
             "target_title": "Business Intelligence Analysts (adjacent occupation)",
             "transition_distance": "Transition distance: From data layer structures to metrics and report delivery."
@@ -11206,7 +11255,7 @@
           {
             "capability_gaps": "Gaps to fill: Business process analysis, system improvement and cross-department coordination.",
             "shared_capabilities": "Conditional editorial mapping: Only when actual training or responsibilities already provide relevant experience can systems analysis, understanding requirements and solution design be compared with tasks. This establishes neither existing competence nor a direct transition.",
-            "target_href": "/zh/career/jobs/computer-systems-analysts",
+            "target_href": "/en/career/jobs/computer-systems-analysts",
             "target_slug": "computer-systems-analysts",
             "target_title": "Computer Systems Analysts (adjacent occupation)",
             "transition_distance": "Transition distance: From data layer development to information systems and process improvement."
@@ -11214,7 +11263,7 @@
           {
             "capability_gaps": "Gaps to fill: System integration design, engineering implementation and performance planning.",
             "shared_capabilities": "Conditional editorial mapping: Only when actual training or responsibilities already provide relevant experience can system structures and integration awareness be compared with tasks. This establishes neither existing competence nor a direct transition.",
-            "target_href": "/zh/career/jobs/computer-systems-engineers-architects",
+            "target_href": "/en/career/jobs/computer-systems-engineers-architects",
             "target_slug": "computer-systems-engineers-architects",
             "target_title": "Computer Systems Engineers/Architects (adjacent occupation)",
             "transition_distance": "Transition distance: From data layer implementation to system-level engineering and integration design."
@@ -11248,8 +11297,8 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the career interest test",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
+            "cta_label": "Explore my career interests",
             "evidence_level": "Work sample",
             "id": "riasec",
             "label": "Interests and tasks",
@@ -11262,8 +11311,8 @@
           },
           {
             "answer": "Editorial observations of execution/learning experiences; the Big Five's predictive validity or most-direct relationships for this occupation have not been verified",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the career interest test",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
+            "cta_label": "Explore my Big Five traits",
             "evidence_level": "Work sample",
             "id": "big-five",
             "label": "Consistent execution",
@@ -11276,8 +11325,8 @@
           },
           {
             "answer": "MBTI-type tools describe preferences, rather than assign occupations. Differences between modeling/method development and user support/collaboration mainly concern work formats, not preference types. Check through actual experience.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the career interest test",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "Explore my personality preferences",
             "evidence_level": "Work sample",
             "id": "mbti",
             "label": "Preference checks",
@@ -11290,8 +11339,8 @@
           },
           {
             "answer": "Different motivational clues suggest different choices. Treat this as a questioning tool, not a conclusion about roles.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the career interest test",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
+            "cta_label": "Reflect on my motivations",
             "evidence_level": "Work sample",
             "id": "enneagram",
             "label": "Motivation observations",
@@ -11304,8 +11353,8 @@
           },
           {
             "answer": "The occupation's own O*NET classification is JobZone4/SVP7 to below 8. The 78% bachelor's, 4% high-school and 4% postsecondary-certificate figures are opinions on education required for new hires, not employee composition. BLS classifies the parent occupation as typically requiring a bachelor's degree, less than 5 years of related experience and no on-the-job training; these categories do not establish a fixed minimum tenure, mean training is unnecessary or constitute Chinese law. IQ-type scales do not replace actual capabilities or project observations.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the career interest test",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
+            "cta_label": "Explore my reasoning performance",
             "evidence_level": "Work sample",
             "id": "iq",
             "label": "Problem solving",
@@ -11323,8 +11372,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the career interest test",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "cta_label": "Reflect on my emotional responses",
             "evidence_level": "Work sample",
             "id": "eq",
             "label": "Collaboration boundaries",
@@ -11665,7 +11714,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Test whether my career interests fit data warehousing work",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11733,7 +11782,7 @@
             "item": "data-warehousing-specialists.source-register.published.1"
           }
         },
-        "note": "The occupation's own tasks/education opinions are separate from parent-proxy wages/employment/industries. Chinese occupational wage/recruitment gaps remain; NBS industry context does not replace personal income."
+        "note": "O*NET’s detailed occupation describes tasks. U.S. wages and employment are for the Database Architects parent group. Mainland China postings describe individual jobs only."
       },
       "work_context_block": {
         "$join": [
@@ -11901,25 +11950,24 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 66,900 people in 2024 → approximately 72,700 in 2034; growth of 9% during 2024–2034, labeled much faster than average; approximately 4,000 annual openings from growth and replacement",
+        "display_value": "BLS projects U.S. Database Architects (parent SOC 15-1243) to grow from about 69,500 jobs in 2025 to 76,000 in 2035 (+9.4%), with about 3,900 annual openings including replacements. The detailed warehousing occupation 15-1243.01 has no separate projection here.",
         "fact_id": "market",
         "market": "United States",
         "measure": "Employment projections (parent-occupation proxy)",
-        "occupation_scope": "Parent-occupation proxy: O*NET's employment trends page states “Employment data for Database Architects”: 66,900 people in 2024, 72,700 in 2034, growth of 9% during 2024–2034, and approximately 4,000 annual openings from growth and replacement over ten years. These are not precise employment data for this detailed occupation or an individual's hiring probability. The BLS Occupational Outlook Handbook separately combines database administrators and architects: approximately 144,500 people in 2025, growth of 4% during 2025–2035, and approximately 7,300 annual openings. The scopes cover different periods and populations; quote them separately without combining them.",
-        "period": "2024–2034 projection period; accessed 2026-09-19",
+        "occupation_scope": "U.S. Database Architects parent group (SOC 15-1243)",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-dws",
-          "bls-dbarch-outlook"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Parent occupation 15-1243 is the proxy: approximately 69500 in 2025 → approximately 76000 in 2035, a net increase of 6500/+9.4%, with 3900 annual openings from growth and replacement and 2.1% self-employment. The O*NET7%-or-more category is only a classification, not a projection for this detailed occupation or an individual's hiring probability.",
+        "display_value": "BLS projects U.S. Database Architects (parent SOC 15-1243) to grow from about 69,500 jobs in 2025 to 76,000 in 2035 (+9.4%), with about 3,900 annual openings including replacements. The detailed warehousing occupation 15-1243.01 has no separate projection here.",
         "fact_id": "r5-current-market",
         "market": "United States",
         "measure": "Parent-occupation employment projections",
-        "occupation_scope": "15-1243 parent proxy, not precise statistics for 15-1243.01",
-        "period": "2025 base year/2025–2035",
+        "occupation_scope": "U.S. Database Architects parent group (SOC 15-1243)",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-current"
         ]
@@ -11934,6 +11982,66 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "CNY 9,000–13,000 per month; warehousing, ETL and modeling, relevant bachelor’s degree or higher.",
+        "fact_id": "posting-dws-yixun",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Guangdong Yixun Technology campus posting: Big Data Developer",
+        "period": "2025-09–2026-04",
+        "source_refs": [
+          "dws-yixun"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One Beijing role, master’s degree or higher; data marts, ETL and quality monitoring; no salary quoted.",
+        "fact_id": "posting-dws-beijing",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Beijing Data Warehouse R&D Engineer posting attachment",
+        "period": "2025-12",
+        "source_refs": [
+          "dws-beijing"
+        ]
+      },
+      {
+        "derivation": "Parent SOC 15-1243, not the detailed warehousing occupation.",
+        "display_value": "+9.4%",
+        "fact_id": "dws-parent-growth",
+        "market": "United States",
+        "measure": "Parent-group employment growth",
+        "occupation_scope": "U.S. Database Architects parent group, SOC 15-1243",
+        "period": "2025–2035",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": "Parent SOC 15-1243, not the detailed warehousing occupation.",
+        "display_value": "69,500 jobs",
+        "fact_id": "dws-parent-employment",
+        "market": "United States",
+        "measure": "Parent-group base employment",
+        "occupation_scope": "U.S. Database Architects parent group, SOC 15-1243",
+        "period": "2025",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": "Parent SOC 15-1243, not the detailed warehousing occupation.",
+        "display_value": "About 3,900 annually (including replacements)",
+        "fact_id": "dws-parent-openings",
+        "market": "United States",
+        "measure": "Parent-group projected annual openings",
+        "occupation_scope": "U.S. Database Architects parent group, SOC 15-1243",
+        "period": "2025–2035",
+        "source_refs": [
+          "r5-bls-current"
         ]
       }
     ]
@@ -11959,21 +12067,21 @@
       },
       {
         "availability": "available",
-        "fact_ref": "market",
+        "fact_ref": "dws-parent-growth",
         "key": "us_growth",
-        "label": "U.S. employment projections (2024–2034, 9% growth, much faster than average; parent-occupation proxy)"
+        "label": "U.S. parent-group employment: +9.4% projected (2025–2035)"
       },
       {
         "availability": "available",
-        "fact_ref": "market",
+        "fact_ref": "dws-parent-employment",
         "key": "us_employment",
-        "label": "U.S. employment (2024, approximately 66,900 people; parent-occupation proxy)"
+        "label": "U.S. parent-group employment: 69,500 jobs (2025)"
       },
       {
         "availability": "available",
-        "fact_ref": "market",
+        "fact_ref": "dws-parent-openings",
         "key": "us_openings",
-        "label": "U.S. annual openings (2024–2034, approximately 4,000, including growth and replacement)"
+        "label": "U.S. parent-group annual openings: 3,900 (including replacements)"
       },
       {
         "availability": "missing",
@@ -11987,17 +12095,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Data Warehousing Specialists (O*NET-SOC 15-1243.01) design, model or implement enterprise data warehousing activities, program and configure database information repositories and support warehouse users. Tasks include source mapping, extract-transform-load processes, warehouse structures and metadata, quality checks, testing and troubleshooting. This page includes U.S. median wages for month 5 of 2025 of 139,500 dollars/year (67.07 dollars/hour), the 10th percentile of 86,240 dollars and 90th percentile of 204,000 dollars; approximately 66,900 people employed in 2024, 9% growth during 2024–2034, much faster than average, and approximately 4,000 annual openings from growth and replacement. These wages and employment use parent occupation Database Architects as a proxy. It also covers the mainland China occupational wage gap, definitions and grain, rerunnable loading, quality reconciliation and data permission boundaries."
+      "text": "See how data warehousing specialists map fields, run ETL and check data quality. Compare actual job postings, U.S. parent-group data and adjacent roles."
     },
     "title": {
       "availability": "available",
       "text": "Data Warehousing Specialists"
     }
   },
-  "source_content_sha256": "df3b4241856f3477dd87f15ee404fae056c7a0c0807716be7b088b499b18900d",
+  "source_content_sha256": "b4b4a6af3a160cdda81b2793d3d20fe8cbcfa07c57c1480e25d8da81d1945638",
   "subject": {
     "canonical_slug": "data-warehousing-specialists",
     "name": "Data Warehousing Specialists",
-    "summary": "Data warehousing specialists turn dispersed source-system data into analytical data layers: define business definitions and grain, design dimension and fact models, implement rerunnable extraction, transformation and loading, check structures and data quality, maintain metadata and lineage, and support warehouse users. The basis is business definitions, data permissions and quality rules, rather than schedule pressure. The U.S. occupation is O*NET-SOC 15-1243.01 (Data Warehousing Specialists). Its wages and employment are published on that page using parent occupation Database Architects (15-1243.00) as a proxy. Mainland China's public wage statistics have not established an occupational scope corresponding to this detailed occupation; this page treats it as an evidence gap."
+    "summary": "Start by mapping source fields and defining what each row represents. Extract, transform and load data, reconcile row counts and key measures, then publish documented tables. When a load fails, isolate source, transformation or scheduling problems and verify that a rerun does not double count. U.S. wages and employment use the Database Architects parent group. Mainland China evidence consists of two historical job postings and no established national wage estimate."
   }
 }

@@ -152,6 +152,9 @@
       "item:oil-and-gas-workers.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:oil-and-gas-workers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:oil-and-gas-workers.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13215,6 +13218,21 @@
             "onet-cert"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. One posting supports equipment at a rig and the other inspects production and records readings. Ask each employer about work location, handover records and authorization."
+            ]
+          },
+          "id": "oil-and-gas-workers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Compare oil and gas field roles",
+          "type": "notice"
         }
       ]
     },
@@ -15682,6 +15700,13 @@
         "id": "oil-and-gas-workers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "oil-and-gas-workers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15887,7 +15912,7 @@
       "text": "Oil and gas rotary drill operators: tasks, wages, and safety path"
     }
   },
-  "source_content_sha256": "0f12eb572bcb492069f189183dc784886f25c234192e03b0afa01157e0213043",
+  "source_content_sha256": "f7067cdac23ed60650829627bdfaf9b5e04723bb5a16f78388b64531feabf33f",
   "subject": {
     "canonical_slug": "oil-and-gas-workers",
     "name": "Oil and gas rotary drill operators",

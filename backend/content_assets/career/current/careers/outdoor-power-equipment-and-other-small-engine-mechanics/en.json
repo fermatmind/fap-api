@@ -173,6 +173,9 @@
       "item:outdoor-power-equipment-and-other-small-engine-mechanics.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:outdoor-power-equipment-and-other-small-engine-mechanics.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:outdoor-power-equipment-and-other-small-engine-mechanics.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12989,6 +12992,21 @@
             "onet-summary"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two identical-looking trimmers were reported as unable to start and as stopping after startup. The intake sheet mixed their serial numbers. List the equipment, original complaints and questions to verify with the technician."
+            ]
+          },
+          "id": "outdoor-power-equipment-and-other-small-engine-mechanics.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Sort small-engine service reports",
+          "type": "notice"
         }
       ]
     },
@@ -15526,6 +15544,13 @@
         "id": "outdoor-power-equipment-and-other-small-engine-mechanics.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "outdoor-power-equipment-and-other-small-engine-mechanics.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15791,7 +15816,7 @@
       "text": "Small engine repair technician｜duties, salary, and entry"
     }
   },
-  "source_content_sha256": "0c7ff9428099964a0523118f0d7821603e6c1dbe8479d82588a663820a9ab289",
+  "source_content_sha256": "338255587b8f72989f8c09e147d25eac419120f862e9f832c9f0262a880112a1",
   "subject": {
     "canonical_slug": "outdoor-power-equipment-and-other-small-engine-mechanics",
     "name": "Outdoor power equipment and other small engine mechanic",

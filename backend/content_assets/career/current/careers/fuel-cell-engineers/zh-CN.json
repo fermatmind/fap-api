@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1233,7 +1230,7 @@
         "status": "mapped"
       },
       "item:fuel-cell-engineers.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:fuel-cell-engineers.path.interview-probation.1": {
         "status": "mapped"
@@ -1491,7 +1488,7 @@
         "status": "pending_mapping"
       },
       "item:fuel-cell-engineers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:fuel-cell-engineers.sources.source-card.1": {
         "status": "mapped"
@@ -10828,7 +10825,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10880,7 +10877,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10932,7 +10929,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -24126,13 +24123,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "虚构纸面题C/V2｜便携式燃料电池方案要求净功率≥9.0千瓦、净效率≥40%、成本≤12,000元。只按题设稳态公式：电堆功率P=电压U×电流I÷1000，净功率Pn=P−辅助功率，净效率η=Pn÷输入化学功率×100%。A：U=100伏、I=100安、辅助1.0千瓦、输入20千瓦、成本11,500元；B：U=120伏、I=90安、辅助1.5千瓦、输入25千瓦、成本11,000元。三限制含边界。V1用电堆功率算净效率已失效。数据D1是两方案模拟稳态值，不是实测；D2汇总把A净功率误记10千瓦；D3耐久与安全验证待核，无寿命曲线或合格记录。Q暂停真实试验、投产及对外发布，未恢复。工具称B净效率43.2%、两方案均可投产，须反查。数值币种规则全虚构，不是真实电化学设计、测试或安全限值。 90分钟纸面任务｜读C/V2题15、要求与版本证据矩阵10、两方案独立计算20、D2错误与D3待核15、验证计划与Q边界草稿20、答案对照10，共90。交要求矩阵、独立重算更正表、验证与交接草稿、工具反思四作品；不接氢气、电源、高压或化学品，不搭台架、不实测投产或外发，无需经验者签认。"
+              "到入行章做 K 表原题和变式，再打开首条折叠参考解。"
             ]
           },
           "id": "fuel-cell-engineers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet",
-            "employer"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24141,13 +24137,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "探索信号｜愿意核单位、模拟/实测和有效规则，接受反证；95%日邮件82%日室内64%日面对面59%团队极重要是受访选项，不判个人适配。"
+              "如果你愿意追溯试验版本与原始数据、保留异常并交给合适的复核人，可进一步了解。"
             ]
           },
           "id": "fuel-cell-engineers.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "employer"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24194,13 +24189,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜按编辑工作流程分设计与选型、建模计算、测试诊断改进三类，官方26任务还含材料设备开发、样机制造、混合架构、电驱功率电子、车辆集成、氢或非氢环境评估、排期与生产放行授权。三类不是官方互斥分类，实际权限另核。"
+              "燃料电池工程师为交通、固定式或便携式应用设计、验证和改进电堆、部件或系统。实际工作包括拟定试验、分析性能和耐久性数据、交接工程变更。"
             ]
           },
           "id": "fuel-cell-engineers.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet",
-            "employer"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24285,12 +24279,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "读取使用场景与约束 → 确定功率与寿命与成本与安全指标 → 选择电堆类型与材料与部件参数 → 建立模型估算效率与热与水管理 → 评审选型依据与风险 → 冻结设计基线并留痕"
+              "读试验要求 → 核批准方案 → 查原始结果 → 比对记录 → 标出异常 → 送交复核"
             ]
           },
           "id": "fuel-cell-engineers.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -24328,7 +24324,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。"
+              "BLS 表 1.2（美国上位职业 17-2141）：2025 年约 298,500 个岗位，2035 年预计约 332,000 个，变化 +11.2%，年均约 17,800 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "fuel-cell-engineers.profile.onet-structured-fields-block.4",
@@ -25493,7 +25489,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本专项生成式AI暴露分数、采用率、任务影响排序、就业因果或消失年份，不定中高暴露或短期不会替代。编辑辅助候选为资料检索、计算代码、数据整理、模型前后处理和报告草稿；软件列举不等实际AI采用或已证效率，依据、输入版本、验证与动作权限仍须核。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "证据不足：未取得本专项生成式AI暴露分数、采用率、任务影响排序、就业因果或消失年份，不定中高暴露或短期不会替代。编辑辅助候选为资料检索、计算代码、数据整理、模型前后处理和报告草稿；软件列举不等实际AI采用或已证效率，依据、输入版本、验证与动作权限仍须核。"
             ]
           },
           "id": "fuel-cell-engineers.ai-impact.ai-impact-table.18",
@@ -25550,7 +25546,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。"
+              "BLS 表 1.2（美国上位职业 17-2141）：2025 年约 298,500 个岗位，2035 年预计约 332,000 个，变化 +11.2%，年均约 17,800 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "fuel-cell-engineers.ai-impact.ai-impact-table.22",
@@ -26086,7 +26082,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。"
+              "BLS 表 1.2（美国上位职业 17-2141）：2025 年约 298,500 个岗位，2035 年预计约 332,000 个，变化 +11.2%，年均约 17,800 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "fuel-cell-engineers.ai-impact.ai-impact-table.60",
@@ -26229,7 +26225,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：2035本专项岗位增减及AI因果未核。BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。"
+              "BLS 表 1.2（美国上位职业 17-2141）：2025 年约 298,500 个岗位，2035 年预计约 332,000 个，变化 +11.2%，年均约 17,800 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "fuel-cell-engineers.ai-impact.ai-impact-table.70",
@@ -26983,12 +26979,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141中位年工资104,110美元、时薪50.05美元（OEWS2025），非专项"
+              "73,990 美元/年，35.57 美元/小时"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -26998,12 +26993,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜父类全国中位数，OEWS为领取工资的全兼职雇员正常工时税前工资，排自雇，含基本、计件、佣金、生产奖金、生活费用及危险工作报酬，排加班溢价、班次差额、非生产奖金及福利成本，不统一排奖金津贴。年工资通常按时薪×2080折算，非个人实际工时或实收。；边界｜分布中点非起薪或个人实收。"
+              "美国机械工程师上位组（17-2141）｜https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27013,12 +27007,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141第10分位73,990美元/年（OEWS2025）"
+              "84,130 美元/年，40.45 美元/小时"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27028,12 +27021,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜父类全国第10分位；边界｜分布界值非新手或职责窄的证明。"
+              "美国机械工程师上位组（17-2141）｜https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27043,12 +27035,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141第25分位84,130美元/年（OEWS2025）"
+              "104,110 美元/年，50.05 美元/小时"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27058,12 +27049,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜父类全国第25分位；边界｜不能由分位推行业地区原因。"
+              "美国机械工程师上位组（17-2141）｜https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27073,12 +27063,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141第75分位132,590美元/年（OEWS2025）"
+              "132,590 美元/年，63.75 美元/小时"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27088,12 +27077,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜父类全国第75分位；边界｜非全部资深或系统负责人收入。"
+              "美国机械工程师上位组（17-2141）｜https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27103,12 +27091,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141第90分位164,340美元/年（OEWS2025）"
+              "164,340 美元/年，79.01 美元/小时"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27118,12 +27105,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜父类全国第90分位；边界｜上下十分位界值比约2.2，不推原因、可达性或收入上限。"
+              "美国机械工程师上位组（17-2141）｜https://www.onetonline.org/link/localwages/17-2141.00"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27133,12 +27119,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141就业298,500人（2025），含自雇，非专项"
+              "2025 年约 298,500 个岗位"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27147,12 +27133,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜EP含自雇，父类自雇0.5%；边界｜非专项人数或其他法域。"
+              "美国机械工程师上位组（17-2141）｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27161,12 +27147,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141就业变化+11.2%（2025—2035），非专项"
+              "2025—2035 年 +11.2%"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27175,12 +27161,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜当前2025—2035父类变化；边界｜非专项或AI因果。"
+              "美国机械工程师上位组（17-2141）｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27189,12 +27175,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141年均职位空缺17,800（2025—2035），含替换，非专项"
+              "2025—2035 年约 17,800 个/年"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27203,12 +27189,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜父类年均空缺含增长替换；边界｜非十年总数、净新增或实际招聘。"
+              "美国机械工程师上位组（17-2141）｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27232,13 +27218,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜O*NET-SOC17-2141.01为交通、固定式或便携式应用设计、评估、改造或构建燃料电池部件或系统。26任务涵盖材料实验、技术咨询、运行图谱和耐久评估、降本改进、测试诊断和统计、失效分析、材料规格、设计变更与验证、技术学习、测试仪器与采集准备、材料设备开发、样机制造、燃料电池/电池混合架构、测试开发项目、报告提案、仿真、电驱与功率电子设计、车辆集成、效率功率计算、跨部门排期、授权部件子系统投入生产、氢或非氢设计的功率成本环境评估、电驱集成故障缓解及储氢方案。官方包含生产放行授权，不能整体排除；具体法域和岗位权限另核。"
+              "国家统计局表 2、5 给出 2025 年城镇制造业年平均工资，非私营单位 113,594 元，私营单位 76,055 元。"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet",
-            "employer"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27526,7 +27511,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "名称检索｜固定中文名燃料电池工程师；系统、电堆、测试、仿真等为编辑检索别名，不登记全部同一职业。"
+              "中国大陆工资参考"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.44",
@@ -27541,13 +27526,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本精确职业工资、就业与招聘样本，不断言全国未建立。NBS2025制造业非私营113,594、私营76,055元/年是行业背景，非燃料电池工程师工资。覆盖城镇5人以上法人，排个体工商户和自由职业者，工资总额含规定奖金津补贴加班，不按零散季节用工身份统一排。"
+              "本页所核资料未取得中国大陆燃料电池工程师全国工资分布或就业序列。 国家统计局表 2、5 给出 2025 年城镇制造业年平均工资，非私营单位 113,594 元，私营单位 76,055 元。"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs",
-            "ep"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27556,7 +27540,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本精确职业工资、就业与招聘样本，不断言全国未建立。NBS2025制造业非私营113,594、私营76,055元/年是行业背景，非燃料电池工程师工资。覆盖城镇5人以上法人，排个体工商户和自由职业者，工资总额含规定奖金津补贴加班，不按零散季节用工身份统一排。 BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。"
+              "BLS 表 1.2（美国上位职业 17-2141）：2025 年约 298,500 个岗位，2035 年预计约 332,000 个，变化 +11.2%，年均约 17,800 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.46",
@@ -27600,12 +27584,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "一线城市（北京、上海、广州、深圳）"
+              "城镇非私营 · 制造业"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27614,12 +27598,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按城市或地区核验的本职业月薪数据；不以招聘报价、行业均值或他人转述代填。"
+              "113,594 元/年"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27628,12 +27612,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "制造业与新能源产业集群城市"
+              "城镇私营 · 制造业"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27642,12 +27626,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按城市或地区核验的本职业月薪数据；不以招聘报价、行业均值或他人转述代填。"
+              "76,055 元/年"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27656,12 +27640,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他内陆与区域中心城市"
+              "城镇非私营 · 全行业"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27670,12 +27654,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按城市或地区核验的本职业月薪数据；不以招聘报价、行业均值或他人转述代填。"
+              "129,441 元/年"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27684,13 +27668,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类边界｜美国O*NET-SOC17-2141.01专项、SOC17-2141父类；中国职业分类具体映射本轮未核，不视完全等同或换算。"
+              "国家统计局表 2、5 给出 2025 年城镇制造业年平均工资，非私营单位 113,594 元，私营单位 76,055 元。"
             ]
           },
           "id": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "employer"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27751,12 +27734,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 17-2141.01 职业与工资数据｜https://www.onetonline.org/link/summary/17-2141.01；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；O*NET 燃料电池工程师国家工资｜https://www.onetonline.org/link/localwages/17-2141.01"
+              "全国机械工程师工资｜https://www.onetonline.org/link/localwages/17-2141.00；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；中氢绿能招聘｜https://www.shge.net/careers"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -27765,12 +27750,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141中位年工资104,110美元、时薪50.05美元（OEWS2025），非专项"
+              "104,110 美元/年，50.05 美元/小时"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27780,12 +27764,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜父类全国中位数，OEWS为领取工资的全兼职雇员正常工时税前工资，排自雇，含基本、计件、佣金、生产奖金、生活费用及危险工作报酬，排加班溢价、班次差额、非生产奖金及福利成本，不统一排奖金津贴。年工资通常按时薪×2080折算，非个人实际工时或实收。；边界｜分布中点非起薪或个人实收。"
+              "美国机械工程师上位组（17-2141）｜https://www.onetonline.org/link/localwages/17-2141.00；O*NET 上位组口径｜https://www.onetonline.org/link/details/17-2141.01"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27795,12 +27778,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141第10分位73,990美元/年（OEWS2025）"
+              "73,990 美元/年，35.57 美元/小时"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27810,12 +27792,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜父类全国第10分位；边界｜分布界值非新手或职责窄的证明。"
+              "美国机械工程师上位组（17-2141）｜https://www.onetonline.org/link/localwages/17-2141.00；O*NET 上位组口径｜https://www.onetonline.org/link/details/17-2141.01"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27825,12 +27806,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141第25分位84,130美元/年（OEWS2025）"
+              "84,130 美元/年，40.45 美元/小时"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27840,12 +27820,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜父类全国第25分位；边界｜不能由分位推行业地区原因。"
+              "美国机械工程师上位组（17-2141）｜https://www.onetonline.org/link/localwages/17-2141.00；O*NET 上位组口径｜https://www.onetonline.org/link/details/17-2141.01"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27855,12 +27834,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141第75分位132,590美元/年（OEWS2025）"
+              "132,590 美元/年，63.75 美元/小时"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27870,12 +27848,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜父类全国第75分位；边界｜非全部资深或系统负责人收入。"
+              "美国机械工程师上位组（17-2141）｜https://www.onetonline.org/link/localwages/17-2141.00；O*NET 上位组口径｜https://www.onetonline.org/link/details/17-2141.01"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27885,12 +27862,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141第90分位164,340美元/年（OEWS2025）"
+              "164,340 美元/年，79.01 美元/小时"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27900,12 +27876,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜父类全国第90分位；边界｜上下十分位界值比约2.2，不推原因、可达性或收入上限。"
+              "美国机械工程师上位组（17-2141）｜https://www.onetonline.org/link/localwages/17-2141.00；O*NET 上位组口径｜https://www.onetonline.org/link/details/17-2141.01"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -27915,12 +27890,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141就业298,500人（2025），含自雇，非专项"
+              "2025 年约 298,500 个岗位"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27929,12 +27904,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜EP含自雇，父类自雇0.5%；边界｜非专项人数或其他法域。"
+              "美国机械工程师上位组（17-2141）｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET 上位组口径｜https://www.onetonline.org/link/details/17-2141.01"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27943,12 +27918,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141就业变化+11.2%（2025—2035），非专项"
+              "2025—2035 年 +11.2%"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27957,12 +27932,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜当前2025—2035父类变化；边界｜非专项或AI因果。"
+              "美国机械工程师上位组（17-2141）｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET 上位组口径｜https://www.onetonline.org/link/details/17-2141.01"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27971,12 +27946,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "父类17-2141年均职位空缺17,800（2025—2035），含替换，非专项"
+              "2025—2035 年约 17,800 个/年"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27985,12 +27960,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜父类年均空缺含增长替换；边界｜非十年总数、净新增或实际招聘。"
+              "美国机械工程师上位组（17-2141）｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET 上位组口径｜https://www.onetonline.org/link/details/17-2141.01"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -28014,12 +27989,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜父类17-2141中位年工资104,110美元、时薪50.05美元（OEWS2025），非专项 全国五分位73,990/84,130/104,110/132,590/164,340美元，界值比约2.2，不据此推薪差原因；OEWS为领取工资的全兼职雇员正常工时税前工资，排自雇；含基本、计件、佣金、生产奖金、生活费用及危险工作报酬，排加班溢价、班次差额、非生产奖金及福利成本，不统一排奖金津贴。年工资通常按时薪×2080折算，非个人实际工时或实收。"
+              "2025 年 5 月美国上位职业 17-2141全国年薪中位数 104,110 美元，时薪中位数 50.05 美元。年薪第 10、25、50、75、90 分位依次为 73,990、84,130、104,110、132,590、164,340 美元。"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -28379,12 +28353,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第10分位是工资界值，非新手、技术辅助岗或资历的证明。"
+              "美国机械工程师上位组（17-2141） 2025 年 5 月全国工资。"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -28394,12 +28367,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位是父类分布中点，非专项入门或个人实收，不推新手随经验必然升薪。"
+              "美国机械工程师上位组（17-2141） 2025 年 5 月全国工资。"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -28409,12 +28381,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第90分位是父类界值，非资深、项目负责或地区的因果及收入上限。"
+              "美国机械工程师上位组（17-2141） 2025 年 5 月全国工资。"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "hr",
             "oews"
           ],
           "type": "prose"
@@ -28442,31 +28413,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.tool",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.tool",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.tool",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.tool",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.tool",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "化学工程师方向",
@@ -29747,7 +29718,8 @@
           },
           "id": "fuel-cell-engineers.risk.career-risk-cards.17",
           "source_refs": [
-            "employer"
+            "onet",
+            "doe-hydrogen-safety"
           ],
           "type": "prose"
         },
@@ -29761,7 +29733,8 @@
           },
           "id": "fuel-cell-engineers.risk.career-risk-cards.18",
           "source_refs": [
-            "employer"
+            "onet",
+            "doe-hydrogen-safety"
           ],
           "type": "prose"
         },
@@ -30139,7 +30112,7 @@
                 "id": "education",
                 "values": [
                   "学历与准备",
-                  "证据不足：中国具体岗位学历、证照、法域准入和投入本轮未核。O*NET新聘所需学历问卷57%学士、43%硕士，非从业者实际学历分布或中国门槛；Job Zone4、SVP7至<8是准备层级，非个人需几年承诺。BLS父类典型学士、无相关经验、无OJT为上位代理，不代专项问卷。",
+                  "美国 BLS 表 1.2 的机械工程师上位组典型学历为学士学位，未列典型相关工作经历或在岗培训。燃料电池岗位按电堆、系统或验证分工另核实际要求。",
                   "专项新聘所需问卷、Zone层级与父类典型条件分开。"
                 ]
               },
@@ -30147,7 +30120,7 @@
                 "id": "clearance",
                 "values": [
                   "准入与权限",
-                  "证据不足：本轮未核具体法域涉氢、高压、电气、化学品、特种设备和数据处理的有效条件。编辑核对资料访问、留存与外发范围、试验程序、变更和放行权限；图纸测试数据是否为商业秘密需具体判断，不一律认定。兴趣页不是个人信息保护法来源，任务清单不直接赋权。",
+                  "中氢绿能在武汉发布的 SOFC/SOEC 研发岗位列电堆结构设计、性能测试和技术报告，任职条件包括相关专业硕士及以上。",
                   "目录培训证书许可岗位授权分开。"
                 ]
               },
@@ -30171,7 +30144,8 @@
           },
           "id": "fuel-cell-engineers.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "title": "燃料电池工程师｜path",
           "type": "cards"
@@ -30184,42 +30158,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "题面与材料",
-                  "虚构纸面题C/V2｜便携式燃料电池方案要求净功率≥9.0千瓦、净效率≥40%、成本≤12,000元。只按题设稳态公式：电堆功率P=电压U×电流I÷1000，净功率Pn=P−辅助功率，净效率η=Pn÷输入化学功率×100%。A：U=100伏、I=100安、辅助1.0千瓦、输入20千瓦、成本11,500元；B：U=120伏、I=90安、辅助1.5千瓦、输入25千瓦、成本11,000元。三限制含边界。V1用电堆功率算净效率已失效。数据D1是两方案模拟稳态值，不是实测；D2汇总把A净功率误记10千瓦；D3耐久与安全验证待核，无寿命曲线或合格记录。Q暂停真实试验、投产及对外发布，未恢复。工具称B净效率43.2%、两方案均可投产，须反查。数值币种规则全虚构，不是真实电化学设计、测试或安全限值。",
-                  "D1模拟、D2原错、D3待核与Q暂停均题设；不做真实实验。"
+                  "K 表：试验记录送审前核对",
+                  "虚构纸面题。记录须采用批准方案 R4 且附原始结果编号，才可送审。K1 为 R4、原始编号 A71；K2 为 R3、编号 A72；K3 为 R4、编号为空。方案版本差异交试验负责人，缺原始编号交数据管理员。变式只把 K3 的原始编号补为已给定的 A73。分别记录状态、原值和复核人。",
+                  "用题面提供的两份记录，不需要现场或工具。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "90分钟任务",
-                  "90分钟纸面任务｜读C/V2题15、要求与版本证据矩阵10、两方案独立计算20、D2错误与D3待核15、验证计划与Q边界草稿20、答案对照10，共90。交要求矩阵、独立重算更正表、验证与交接草稿、工具反思四作品；不接氢气、电源、高压或化学品，不搭台架、不实测投产或外发，无需经验者签认。",
-                  "四作品只根据同一C/V2，原记录保。"
+                  "要交付的记录",
+                  "分别写原题和变式。每行记录原值、状态和复核人。",
+                  "差异原值保留至复核完成。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考答案",
-                  "参考答案｜A电堆100×100÷1000=10千瓦，净功率10−1=9千瓦，净效率9÷20=45%，成本11,500元：三项题设限制均达标，9.0等于下限计达标。B电堆120×90÷1000=10.8千瓦，净功率10.8−1.5=9.3千瓦、净效率9.3÷25=37.2%，成本11,000元：功率成本达标但效率不达40%，不能只选便宜。工具43.2%=10.8÷25是失效V1的电堆效率，不是净效率；投产结论无依据。D2保原错10千瓦并建议按D1更正A净9千瓦，不覆盖原记录。D1仅模拟，D3耐久安全未核，不能判A工程验证通过、寿命达标或允许投产；不能造试验记录、复核签名或恢复通知。Q未恢复，仍不做真实试验、投产或对外发布。验证计划草稿列模型单位版本、三项数值准则、未来实测与耐久安全所需证据和责任方，不补造工况/法规限值。",
-                  "答案只对虚构稳态规则有效，不是工程安全、耐久或投产证明。"
+                  "完成后复核",
+                  "保存两种答案，再到「常见问题」打开「纸面练习参考解」。",
+                  "下方链接可跳到常见问题。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "操作边界",
-                  "Q暂停真实试验投产全外发未恢复；D3无寿命曲线安全记录。",
-                  "不接氢气、电源、高压或化学品，不造授权与恢复。"
+                  "练习边界",
+                  "只核纸面记录。"
                 ]
               }
             ]
           },
           "id": "fuel-cell-engineers.path.entry-work-sample-data.1",
           "source_refs": [
-            "employer"
+            "paper-exercise",
+            "paper-answer-key"
           ],
-          "title": "燃料电池工程师｜path",
+          "title": "纸面试做",
           "type": "cards"
         },
         {
@@ -30230,32 +30204,32 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "要求证据矩阵",
-                  "列净功率≥9.0、净效率≥40%、成本≤12000及V2、A/B、D1—3与Q逐项依据。",
+                  "方案版本",
+                  "记批准值和原值。",
                   "独立纸面完成，模拟不当实测。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "独立重算更正表",
-                  "交A10/9千瓦45%、B10.8/9.3千瓦37.2%、11500/11000元与三项逐判；保D2原错及净9更正。",
+                  "原始编号",
+                  "保留原始编号或空栏。",
                   "反查工具43.2%误用V1，无需经验者签认。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "验证与交接草稿",
-                  "列模型单位假设、三项准则、D3未来耐久安全所需证据、责任方和Q未恢复。",
+                  "复核人",
+                  "按差异交给指定复核人。",
                   "不补造真实工况法规限值、实测报告或放行签名。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具反思",
-                  "记工具V1净效率误用及无依据投产判断，说明原资料与独立重算。",
+                  "单项变式",
+                  "只改题设指定项。",
                   "不用工具亦记录独立计算，不编效率采用证据。"
                 ]
               }
@@ -30263,9 +30237,9 @@
           },
           "id": "fuel-cell-engineers.path.entry-portfolio.1",
           "source_refs": [
-            "employer"
+            "paper-exercise"
           ],
-          "title": "燃料电池工程师｜path",
+          "title": "纸面试做交接记录",
           "type": "cards"
         },
         {
@@ -30326,59 +30300,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1日｜30分钟",
-                  "读26任务含生产放行授权，区分描述与实际赋权，交任务索引。"
+                  "读要求",
+                  "读要求"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2日｜30分钟",
-                  "核压力月非周及学历所需问卷，写探索问题不推健康录用。"
+                  "核方案",
+                  "核方案"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3日｜30分钟",
-                  "据C/V2取三限制及D1—3/Q，建要求证据矩阵。"
+                  "查编号",
+                  "查编号"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4日｜30分钟",
-                  "独立算A净9/45%、B净9.3/37.2%，记录单位版本及原D2更正。"
+                  "记原值",
+                  "记原值"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5日｜30分钟",
-                  "写验证交接草稿，列D3未核与Q暂停，不实测外发。"
+                  "写复核人",
+                  "写复核人"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6日｜90分钟",
-                  "按同一C/V2六段15/10/20/15/20/10交四作品，对照上方完整答案。"
+                  "做变式",
+                  "做变式"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7日｜30分钟",
-                  "反查工具43.2%及投产错误，记录继续、再练或转向及下一核查。"
+                  "核答案",
+                  "核答案"
                 ]
               }
             ]
           },
           "id": "fuel-cell-engineers.path.seven-day-trial.1",
           "source_refs": [
-            "employer"
+            "paper-exercise"
           ],
-          "title": "燃料电池工程师｜path",
+          "title": "K 表核对顺序",
           "type": "timeline"
         },
         {
@@ -30386,20 +30360,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续探索：能核电压电流单位及净功率辅助功率。",
-              "继续探索：能分A三项达标与B效率不达标。",
-              "继续探索：能保D2原错并记录更正依据。",
-              "再练：混淆电堆效率与V2净效率，独立重算。",
-              "边界：D1模拟不是实测，D3未核不能判安全耐久。",
-              "边界：Q未恢复，不真实试验投产外发。",
-              "转向探索：比较机械电气材料化学环境重心，具体条件另核。"
+              "把两种状态与复核人记在纸上，再核参考解。",
+              "把两种状态与复核人记在纸上，再核参考解。",
+              "把两种状态与复核人记在纸上，再核参考解。",
+              "把两种状态与复核人记在纸上，再核参考解。",
+              "把两种状态与复核人记在纸上，再核参考解。",
+              "把两种状态与复核人记在纸上，再核参考解。",
+              "把两种状态与复核人记在纸上，再核参考解。"
             ]
           },
           "id": "fuel-cell-engineers.path.seven-day-decision.1",
           "source_refs": [
-            "employer"
+            "paper-exercise"
           ],
-          "title": "燃料电池工程师｜path",
+          "title": "完成后复核",
           "type": "list"
         },
         {
@@ -30690,13 +30664,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜证据不足：中国具体岗位学历、证照、法域准入和投入本轮未核。O*NET新聘所需学历问卷57%学士、43%硕士，非从业者实际学历分布或中国门槛；Job Zone4、SVP7至<8是准备层级，非个人需几年承诺。BLS父类典型学士、无相关经验、无OJT为上位代理，不代专项问卷。 先以C/V2四作品探索单位、验证和证据边界，再核具体岗位条件；不能从纸面题跃迁真实试验投产。"
+              "美国 BLS 表 1.2 的机械工程师上位组典型学历为学士学位，未列典型相关工作经历或在岗培训。燃料电池岗位按电堆、系统或验证分工另核实际要求。 中氢绿能在武汉发布的 SOFC/SOEC 研发岗位列电堆结构设计、性能测试和技术报告，任职条件包括相关专业硕士及以上。"
             ]
           },
           "id": "fuel-cell-engineers.path.career-path-block.20",
           "source_refs": [
-            "onet",
-            "ep"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30705,12 +30679,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑学习建议｜资格边界｜「受过培训」「取得证书或资格」「取得压力容器或危险化学品等资质」「获得企业授权」是四种不同状态；本页列示的准备项不等于任何法定资质，也不自动赋予设计放行与安全结论与对外技术承诺的决定权。"
+              "氢系统可能涉及可燃气体，安全设计要核通风和泄漏检测。防护状态不明或现场报警时，暂停相关作业并按现场预案报告，由有权限人员复核测试和复工条件。"
             ]
           },
           "id": "fuel-cell-engineers.path.career-path-block.21",
           "source_refs": [
-            "employer"
+            "doe-hydrogen-safety"
           ],
           "type": "prose"
         },
@@ -30734,12 +30708,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "路径建议｜学习、实践、验证与授权各留依据，具体条件另核，不保证晋升。"
+              "中氢绿能在武汉发布的 SOFC/SOEC 研发岗位列电堆结构设计、性能测试和技术报告，任职条件包括相关专业硕士及以上。"
             ]
           },
           "id": "fuel-cell-engineers.path.career-path-block.23",
           "source_refs": [
-            "employer"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31749,14 +31723,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本精确职业工资、就业与招聘样本，不断言全国未建立。BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。 父类17-2141中位年工资104,110美元、时薪50.05美元（OEWS2025），非专项  NBS2025制造业非私营113,594、私营76,055元/年是行业背景，非燃料电池工程师工资。覆盖城镇5人以上法人，排个体工商户和自由职业者，工资总额含规定奖金津补贴加班，不按零散季节用工身份统一排。"
+              "BLS 表 1.2（美国上位职业 17-2141）：2025 年约 298,500 个岗位，2035 年预计约 332,000 个，变化 +11.2%，年均约 17,800 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.8",
           "source_refs": [
-            "ep",
-            "hr",
-            "nbs"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31793,7 +31765,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。"
+              "BLS 表 1.2（美国上位职业 17-2141）：2025 年约 298,500 个岗位，2035 年预计约 332,000 个，变化 +11.2%，年均约 17,800 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.11",
@@ -31821,12 +31793,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业规模与增长率与岗位空缺"
+              "就业规模与变化"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31835,12 +31807,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "更宽类别 Mechanical Engineers（经 O*NET 呈现，覆盖 17-2141.01 但不单独统计）"
+              "美国机械工程师上位组（17-2141）"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31849,12 +31821,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。"
+              "BLS 表 1.2（美国上位职业 17-2141）：2025 年约 298,500 个岗位，2035 年预计约 332,000 个，变化 +11.2%，年均约 17,800 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.15",
           "source_refs": [
-            "ep"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31920,12 +31892,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "工资（中位与分位）"
+              "预计年均空缺"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31934,12 +31906,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "更宽类别 Mechanical Engineers（OEWS 2025）"
+              "美国机械工程师上位组（17-2141）"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31948,12 +31920,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位时薪 50.05 美元、中位年薪 104,110 美元；分位 73,990 / 84,130 / 132,590 / 164,340 美元"
+              "预计年均约 17,800 个，含替补。"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -32018,12 +31990,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业平均工资（背景代理）"
+              "年薪中位数"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -32032,12 +32004,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局城镇单位就业人员平均工资（行业门类）"
+              "美国机械工程师上位组（17-2141）"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -32046,12 +32018,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本精确职业工资、就业与招聘样本，不断言全国未建立。NBS2025制造业非私营113,594、私营76,055元/年是行业背景，非燃料电池工程师工资。覆盖城镇5人以上法人，排个体工商户和自由职业者，工资总额含规定奖金津补贴加班，不按零散季节用工身份统一排。"
+              "2025 年 5 月美国上位职业 17-2141全国年薪中位数 104,110 美元，时薪中位数 50.05 美元。年薪第 10、25、50、75、90 分位依次为 73,990、84,130、104,110、132,590、164,340 美元。"
             ]
           },
           "id": "fuel-cell-engineers.market-signals.market-signal-card.29",
           "source_refs": [
-            "nbs"
+            "oews"
           ],
           "type": "prose"
         },
@@ -32461,6 +32433,15 @@
           "data": {
             "entries": [
               {
+                "answer": "原题仅 K1 可送审。K2 保留 R3 和要求的 R4，交试验负责人；K3 保留空栏，交数据管理员。变式 K1、K3 可送审，K2 仍待核。",
+                "id": "fuel-cell-engineers.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.fuel-cell-engineers.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
+              },
+              {
                 "answer": "职业定义｜O*NET-SOC17-2141.01为交通、固定式或便携式应用设计、评估、改造或构建燃料电池部件或系统。26任务涵盖材料实验、技术咨询、运行图谱和耐久评估、降本改进、测试诊断和统计、失效分析、材料规格、设计变更与验证、技术学习、测试仪器与采集准备、材料设备开发、样机制造、燃料电池/电池混合架构、测试开发项目、报告提案、仿真、电驱与功率电子设计、车辆集成、效率功率计算、跨部门排期、授权部件子系统投入生产、氢或非氢设计的功率成本环境评估、电驱集成故障缓解及储氢方案。官方包含生产放行授权，不能整体排除；具体法域和岗位权限另核。",
                 "id": "fuel-cell-engineers.faq.1",
                 "question": "这个职业具体做什么？",
@@ -32481,18 +32462,17 @@
                 ]
               },
               {
-                "answer": "BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。 父类17-2141中位年工资104,110美元、时薪50.05美元（OEWS2025），非专项 OEWS为领取工资的全兼职雇员正常工时税前工资，排自雇；含基本、计件、佣金、生产奖金、生活费用及危险工作报酬，排加班溢价、班次差额、非生产奖金及福利成本，不统一排奖金津贴。年工资通常按时薪×2080折算，非个人实际工时或实收。",
+                "answer": "2025 年 5 月美国上位职业 17-2141全国年薪中位数 104,110 美元，时薪中位数 50.05 美元。年薪第 10、25、50、75、90 分位依次为 73,990、84,130、104,110、132,590、164,340 美元。 BLS 表 1.2（美国上位职业 17-2141）：2025 年约 298,500 个岗位，2035 年预计约 332,000 个，变化 +11.2%，年均约 17,800 个职位空缺，含人员替补。人数分别取整。",
                 "id": "fuel-cell-engineers.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.fuel-cell-engineers.q3",
                 "source_refs": [
-                  "ep",
-                  "hr",
-                  "oews"
+                  "oews",
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "证据不足：本轮未取得中国本精确职业工资、就业与招聘样本，不断言全国未建立。NBS2025制造业非私营113,594、私营76,055元/年是行业背景，非燃料电池工程师工资。覆盖城镇5人以上法人，排个体工商户和自由职业者，工资总额含规定奖金津补贴加班，不按零散季节用工身份统一排。",
+                "answer": "本页所核资料未取得中国大陆燃料电池工程师全国工资分布或就业序列。 国家统计局表 2、5 给出 2025 年城镇制造业年平均工资，非私营单位 113,594 元，私营单位 76,055 元。",
                 "id": "fuel-cell-engineers.faq.4",
                 "question": "中国大陆有对应的工资数据吗？",
                 "question_key": "career.faq.fuel-cell-engineers.q4",
@@ -32501,13 +32481,13 @@
                 ]
               },
               {
-                "answer": "作业环境｜82%每天受控室内，为受访选项非人人情形。\n沟通｜95%每天邮件、64%每天面对面、50%每周至少但非每天电话。\n团队｜59%团队极其重要，41%带领协调重要。\n防护｜59%每天常规防护，不据此推所有工况风险。\n精确｜59%精确非常重要，非失误或事故率。\n接近体位｜59%略近，45%约半时间坐，不推普遍体力健康。\n接触｜45%大部分时间接触他人，不评级人际强度。\n时间自主｜55%典型周超过40小时，45%每月至少但非每周时间压力，68%优先级一些自由、41%决策一些自由，不推节点因果。\n责任危险｜32%健康安全高责任、36%每天危险条件、45%他人成果中等责任及竞争中等，不等每天事故或必然伤害。",
+                "answer": "氢系统可能涉及可燃气体，安全设计要核通风和泄漏检测。防护状态不明或现场报警时，暂停相关作业并按现场预案报告，由有权限人员复核测试和复工条件。",
                 "id": "fuel-cell-engineers.faq.5",
                 "question": "工作环境和安全风险如何？",
                 "question_key": "career.faq.fuel-cell-engineers.q5",
                 "source_refs": [
                   "onet",
-                  "employer"
+                  "doe-hydrogen-safety"
                 ]
               },
               {
@@ -32521,43 +32501,44 @@
                 ]
               },
               {
-                "answer": "证据不足：中国具体岗位学历、证照、法域准入和投入本轮未核。O*NET新聘所需学历问卷57%学士、43%硕士，非从业者实际学历分布或中国门槛；Job Zone4、SVP7至<8是准备层级，非个人需几年承诺。BLS父类典型学士、无相关经验、无OJT为上位代理，不代专项问卷。",
+                "answer": "美国 BLS 表 1.2 的机械工程师上位组典型学历为学士学位，未列典型相关工作经历或在岗培训。燃料电池岗位按电堆、系统或验证分工另核实际要求。 中氢绿能在武汉发布的 SOFC/SOEC 研发岗位列电堆结构设计、性能测试和技术报告，任职条件包括相关专业硕士及以上。",
                 "id": "fuel-cell-engineers.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.fuel-cell-engineers.q7",
                 "source_refs": [
-                  "onet",
-                  "ep"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "证据不足：具体岗位法域许可证书条件未核，培训证书许可和岗位授权分开；官方含生产放行任务，描述不直接赋权。",
+                "answer": "按工序、设备和法域核所需培训、资格和现场授权。对氢系统试验、停机和放行，向实际单位确认权限分工。",
                 "id": "fuel-cell-engineers.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.fuel-cell-engineers.q8",
                 "source_refs": [
-                  "onet",
-                  "employer"
+                  "doe-hydrogen-safety",
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "边界｜以下六场景为编辑风险探索，非真实事故、频率或法条判断；有效程序和岗位授权另核，官方含生产放行，不能整体排除。",
+                "answer": "重点核试验版本、原始数据、通风和泄漏检测。保留异常原值，按现场预案报告，由指定人员决定复测和放行。",
                 "id": "fuel-cell-engineers.faq.9",
                 "question": "这个职业有哪些主要风险？",
                 "question_key": "career.faq.fuel-cell-engineers.q9",
                 "source_refs": [
                   "onet",
-                  "employer"
+                  "doe-hydrogen-safety"
                 ]
               },
               {
-                "answer": "BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。 机械电气化学材料环境工业工程与管理是编辑探索，条件重新核，不保证转岗或氢能投资因果。",
+                "answer": "BLS 表 1.2（美国上位职业 17-2141）：2025 年约 298,500 个岗位，2035 年预计约 332,000 个，变化 +11.2%，年均约 17,800 个职位空缺，含人员替补。人数分别取整。 细分岗位可按电堆研发、系统集成或验证分工核实际工作。",
                 "id": "fuel-cell-engineers.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.fuel-cell-engineers.q10",
                 "source_refs": [
+                  "bls-ep-2025-2035",
                   "onet",
-                  "ep"
+                  "cn-work-example"
                 ]
               }
             ]
@@ -32654,28 +32635,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "燃料电池工程师相关方向 2",
+                "entity": "大五人格测评",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "燃料电池工程师相关方向 3",
+                "entity": "MBTI 偏好测评",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "燃料电池工程师相关方向 4",
+                "entity": "推理测评",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "燃料电池工程师相关方向 5",
+                "entity": "情绪能力测评",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "燃料电池工程师相关方向 6",
@@ -32736,7 +32717,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。",
+                  "BLS 表 1.2（美国上位职业 17-2141）：2025 年约 298,500 个岗位，2035 年预计约 332,000 个，变化 +11.2%，年均约 17,800 个职位空缺，含人员替补。人数分别取整。",
                   "父类典型学士、无相关经验无OJT，非专项新聘学历分布。"
                 ],
                 "evidence_type": "official employment projections",
@@ -32752,24 +32733,23 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "父类17-2141中位年工资104,110美元、时薪50.05美元（OEWS2025），非专项 五分位73990/84130/104110/132590/164340美元，时35.57/40.45/50.05/63.75/79.01。",
-                  "OEWS为领取工资的全兼职雇员正常工时税前工资，排自雇；含基本、计件、佣金、生产奖金、生活费用及危险工作报酬，排加班溢价、班次差额、非生产奖金及福利成本，不统一排奖金津贴。年工资通常按时薪×2080折算，非个人实际工时或实收。"
+                  "2025 年 5 月美国上位职业 17-2141全国年薪中位数 104,110 美元，时薪中位数 50.05 美元。年薪第 10、25、50、75、90 分位依次为 73,990、84,130、104,110、132,590、164,340 美元。"
                 ],
                 "evidence_type": "official wage estimates",
                 "id": "oews",
                 "limitation": "全兼职雇员，排自雇，非专项个人收入。",
                 "market": "美国",
-                "name": "U.S. Bureau of Labor Statistics：2025 职业就业与工资统计（OEWS）",
-                "period": "2025 OEWS",
+                "name": "O*NET 全国机械工程师工资表",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "17-2141父类全国工资，非专项",
-                "url": "https://www.bls.gov/oes/tables.htm"
+                "scope": "美国机械工程师上位组（17-2141）",
+                "url": "https://www.onetonline.org/link/localwages/17-2141.00"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "城镇非私营单位制造业门类平均工资 113,594 元/年；城镇私营单位 76,055 元/年。",
-                  "为税前工资总额口径，含单位代扣的个人所得税与个人缴纳的社会保险和住房公积金。"
+                  "国家统计局表 2、5 给出 2025 年城镇制造业年平均工资，非私营单位 113,594 元，私营单位 76,055 元。",
+                  "国家统计局表 2、5 给出 2025 年城镇制造业年平均工资，非私营单位 113,594 元，私营单位 76,055 元。"
                 ],
                 "evidence_type": "official industry wage release",
                 "id": "nbs",
@@ -32778,24 +32758,24 @@
                 "name": "国家统计局：2025 年城镇单位就业人员平均工资",
                 "period": "2025 annual wage",
                 "publisher": "国家统计局",
-                "scope": "manufacturing industry proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+                "scope": "中国大陆城镇制造业行业门类",
+                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "证据不足：本轮未取得中国本精确职业工资、就业与招聘样本，不断言全国未建立。NBS2025制造业非私营113,594、私营76,055元/年是行业背景，非燃料电池工程师工资。覆盖城镇5人以上法人，排个体工商户和自由职业者，工资总额含规定奖金津补贴加班，不按零散季节用工身份统一排。",
-                  "规定工资总额含奖金津补贴和加班，不按季节零散身份统一排。"
+                  "国家统计局表 2、5 给出 2025 年城镇制造业年平均工资，非私营单位 113,594 元，私营单位 76,055 元。",
+                  "国家统计局表 2、5 给出 2025 年城镇制造业年平均工资，非私营单位 113,594 元，私营单位 76,055 元。"
                 ],
                 "evidence_type": "official methodology note",
                 "id": "cnclass",
                 "limitation": "不按职业拆分；不可替代职业工资。",
                 "market": "中国大陆",
-                "name": "国家统计局：城镇单位就业人员平均工资统计口径说明",
+                "name": "国家统计局：2025 年城镇单位就业人员平均工资",
                 "period": "2025 release methodology",
                 "publisher": "国家统计局",
-                "scope": "industry-level methodology",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "scope": "中国大陆城镇制造业行业门类",
+                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32960,23 +32940,23 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于字段与证据口径与缺口登记规则。",
-                  "用于跨市场口径边界说明。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "编辑说明",
                 "id": "employer",
-                "limitation": "内部口径规则，非外部事实来源。",
-                "market": "全球",
-                "name": "FermatMind 职业内容字段与证据口径规则",
-                "period": "current authoring rules",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页任务",
                 "url": "https://fermatmind.com"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "O*NET旧2024—2034趋势仅历史；当前预测用BLS2025—2035父类。",
+                  "2025–2035",
                   "就业趋势不代岗位技术提及或AI采用。"
                 ],
                 "evidence_type": "official trend display",
@@ -33070,20 +33050,19 @@
                 "url": "https://www.onetonline.org/link/hot_tech/17-2141.01"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对时点工资与就业口径。",
-                  "用于核对全国分位与就业规模。"
+                  "2025 年 5 月美国上位职业 17-2141全国年薪中位数 104,110 美元，时薪中位数 50.05 美元。年薪第 10、25、50、75、90 分位依次为 73,990、84,130、104,110、132,590、164,340 美元。"
                 ],
                 "evidence_type": "official statistics index",
                 "id": "onet-wages",
-                "limitation": "不适用于其他法域。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
                 "name": "BLS 职业就业与工资统计（OEWS）主页",
-                "period": "2025 OEWS",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "OEWS national estimates",
-                "url": "https://www.bls.gov/oes/"
+                "scope": "美国机械工程师上位组（17-2141）",
+                "url": "https://www.onetonline.org/link/localwages/17-2141.00"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -33134,21 +33113,64 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "选型与设计 — 50/100; weight=1/3; fuel-cell-engineers.ai-impact.ai-impact-table.99[0]",
-                  "建模与仿真 — 75/100; weight=1/3; fuel-cell-engineers.ai-impact.ai-impact-table.103[0]",
-                  "测试方案与台架试验 — 25/100; weight=1/3; fuel-cell-engineers.ai-impact.ai-impact-table.107[0]"
+                  "BLS 表 1.2（美国上位职业 17-2141）：2025 年约 298,500 个岗位，2035 年预计约 332,000 个，变化 +11.2%，年均约 17,800 个职位空缺，含人员替补。人数分别取整。",
+                  "美国 BLS 表 1.2 的机械工程师上位组典型学历为学士学位，未列典型相关工作经历或在岗培训。燃料电池岗位按电堆、系统或验证分工另核实际要求。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "17-2141",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "中氢绿能在武汉发布的 SOFC/SOEC 研发岗位列电堆结构设计、性能测试和技术报告，任职条件包括相关专业硕士及以上。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "具名岗位例子，招聘状态和实际分工另核。",
+                "market": "中国大陆",
+                "name": "中氢绿能研发工程师招聘",
+                "period": "2026-07-20",
+                "publisher": "中氢绿能（湖北）科技有限公司",
+                "scope": "具名工作实例",
+                "url": "https://www.shge.net/careers"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "K 表：试验记录送审前核对",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "氢系统可能涉及可燃气体，安全设计要核通风和泄漏检测。防护状态不明或现场报警时，暂停相关作业并按现场预案报告，由有权限人员复核测试和复工条件。"
+                ],
+                "id": "doe-hydrogen-safety",
+                "name": "美国能源部氢气安全使用",
+                "scope": "氢气通风与泄漏检测工程防护",
+                "url": "https://www.energy.gov/cmei/fuels/safe-use-hydrogen"
+              },
+              {
+                "details": [
+                  "完成原题和变式后打开折叠答案。"
+                ],
+                "id": "paper-answer-key",
+                "name": "纸面练习参考解（常见问题）",
+                "url": "#career-content-sources"
               }
             ]
           },
@@ -34486,7 +34508,7 @@
           "type": "prose"
         },
         "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为燃料电池工程师？教育、资格与职业发展路径",
+        "heading": "入行与 K 表试验记录核对",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "fuel-cell-engineers.path.career-path-block.21",
@@ -35393,7 +35415,7 @@
             },
             "evidence_refs": [
               "onet",
-              "privacy"
+              "doe-hydrogen-safety"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35655,6 +35677,24 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "doe-hydrogen-safety",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "fuel-cell-engineers.source-register.published.1"
+            },
+            "id": "doe-hydrogen-safety",
+            "label": {
+              "$source": "doe-hydrogen-safety",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "fuel-cell-engineers.source-register.published.1"
+            },
+            "scope": "氢气通风与泄漏检测"
           }
         ]
       },
@@ -35662,7 +35702,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "薪资 · 10 分位",
+              "指标": "上位组工资 · 第 10 分位",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -35677,7 +35717,7 @@
               }
             },
             {
-              "指标": "薪资 · 25 分位",
+              "指标": "上位组工资 · 第 25 分位",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -35692,7 +35732,7 @@
               }
             },
             {
-              "指标": "薪资 · 中位数",
+              "指标": "上位组工资 · 第 50 分位",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -35707,7 +35747,7 @@
               }
             },
             {
-              "指标": "薪资 · 75 分位",
+              "指标": "上位组工资 · 第 75 分位",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -35722,7 +35762,7 @@
               }
             },
             {
-              "指标": "薪资 · 90 分位",
+              "指标": "上位组工资 · 第 90 分位",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.15",
                 "block": "china-salary",
@@ -35737,7 +35777,7 @@
               }
             },
             {
-              "指标": "就业 · 就业规模",
+              "指标": "上位组就业",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.17",
                 "block": "china-salary",
@@ -35752,7 +35792,7 @@
               }
             },
             {
-              "指标": "就业 · 增长率",
+              "指标": "上位组预计就业变化",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.19",
                 "block": "china-salary",
@@ -35767,7 +35807,7 @@
               }
             },
             {
-              "指标": "就业 · 年均职位空缺",
+              "指标": "上位组预计年均空缺",
               "数值": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.21",
                 "block": "china-salary",
@@ -35964,7 +36004,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35978,7 +36018,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35992,7 +36032,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "fuel-cell-engineers.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -36046,7 +36086,7 @@
         "bls_table": [
           {
             "fact_ref": "us-wage-low10-2025",
-            "指标": "薪资 · 10 分位",
+            "指标": "上位组工资 · 第 10 分位",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.11",
               "block": "us-salary",
@@ -36061,7 +36101,7 @@
             }
           },
           {
-            "指标": "薪资 · 25 分位",
+            "指标": "上位组工资 · 第 25 分位",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.13",
               "block": "us-salary",
@@ -36077,7 +36117,7 @@
           },
           {
             "fact_ref": "us-wage-2025",
-            "指标": "薪资 · 中位数",
+            "指标": "上位组工资 · 第 50 分位",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -36092,7 +36132,7 @@
             }
           },
           {
-            "指标": "薪资 · 75 分位",
+            "指标": "上位组工资 · 第 75 分位",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.15",
               "block": "us-salary",
@@ -36108,7 +36148,7 @@
           },
           {
             "fact_ref": "us-wage-high10-2025",
-            "指标": "薪资 · 90 分位",
+            "指标": "上位组工资 · 第 90 分位",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.17",
               "block": "us-salary",
@@ -36124,7 +36164,7 @@
           },
           {
             "fact_ref": "us-employment-2025",
-            "指标": "就业 · 就业规模",
+            "指标": "上位组就业",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.19",
               "block": "us-salary",
@@ -36140,7 +36180,7 @@
           },
           {
             "fact_ref": "us-growth-2025-2035",
-            "指标": "就业 · 增长率",
+            "指标": "上位组预计就业变化",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.21",
               "block": "us-salary",
@@ -36156,7 +36196,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "就业 · 年均职位空缺",
+            "指标": "上位组预计年均空缺",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -36234,7 +36274,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国燃料电池工程师工资多少？",
+        "heading": "美国工资 · 机械工程师上位组",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -36376,52 +36416,55 @@
         "wage_column_labels": [
           "工资统计位置",
           "年工资参考",
-          "折算边界",
+          "时薪",
           "怎样理解这个位置"
         ],
         "wage_heading": "美国工资分布",
         "wage_tiers": [
           {
-            "equivalent": "官方年工资，非个人月收入",
+            "equivalent": "35.57 美元/小时",
             "interpretation": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最低 10%",
-            "value": {
-              "$fact": "us-wage-low10-2025",
-              "field": "display_value"
-            }
+            "label": "第 10 分位",
+            "value": "73,990 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "40.45 美元/小时",
+            "interpretation": "美国机械工程师上位组（17-2141） 2025 年 5 月全国工资。",
+            "label": "第 25 分位",
+            "value": "84,130 美元/年"
+          },
+          {
+            "equivalent": "50.05 美元/小时",
             "interpretation": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "中位数（50%）",
-            "value": {
-              "$fact": "us-wage-2025",
-              "field": "display_value"
-            }
+            "label": "第 50 分位",
+            "value": "104,110 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "63.75 美元/小时",
+            "interpretation": "美国机械工程师上位组（17-2141） 2025 年 5 月全国工资。",
+            "label": "第 75 分位",
+            "value": "132,590 美元/年"
+          },
+          {
+            "equivalent": "79.01 美元/小时",
             "interpretation": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最高 10%",
-            "value": {
-              "$fact": "us-wage-high10-2025",
-              "field": "display_value"
-            }
+            "label": "第 90 分位",
+            "value": "164,340 美元/年"
           }
         ]
       },
@@ -36565,7 +36608,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "fuel-cell-engineers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36610,7 +36653,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "fuel-cell-engineers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36655,7 +36698,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "oews",
             "value": {
               "$item": "fuel-cell-engineers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36757,6 +36800,30 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "fuel-cell-engineers.source-register.published.1"
+            },
+            "id": "bls-ep-2025-2035",
+            "label": "BLS Employment Projections, Table 1.2",
+            "scope": "美国机械工程师上位组（17-2141）"
+          },
+          {
+            "href": {
+              "$source": "oews",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "fuel-cell-engineers.source-register.published.1"
+            },
+            "id": "oews",
+            "label": "O*NET 全国机械工程师工资表",
+            "scope": "美国机械工程师上位组（17-2141）"
           }
         ],
         "transitions": [
@@ -37033,7 +37100,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034）",
+            "label": "2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "fuel-cell-engineers.profile.onet-structured-fields-block.4",
@@ -37798,7 +37865,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合燃料电池工程师",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37875,7 +37942,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "大五人格测评"
           },
           {
             "href": {
@@ -37885,7 +37952,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "MBTI 偏好测评"
           },
           {
             "href": {
@@ -37895,7 +37962,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "推理测评"
           },
           {
             "href": {
@@ -37905,7 +37972,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "情绪能力测评"
           }
         ]
       },
@@ -38083,19 +38150,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资参考",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
       "market-signals": "职业前景与相关职业转向",
       "navigation": "下一步与相关入口",
-      "path": "入行、资格与职业发展",
+      "path": "入行与 K 表试验记录核对",
       "profile": "职业画像",
       "quick-decision": "快速判断",
       "risk": "工作压力、风险与职业边界",
       "source-register": "资料来源",
       "sources": "常见问题与资料来源",
-      "us-salary": "美国薪资参考"
+      "us-salary": "美国工资 · 机械工程师上位组"
     }
   },
   "fact_register": {
@@ -38113,78 +38180,75 @@
         ]
       },
       {
-        "derivation": "OEWS为领取工资的全兼职雇员正常工时税前工资，排自雇；含基本、计件、佣金、生产奖金、生活费用及危险工作报酬，排加班溢价、班次差额、非生产奖金及福利成本，不统一排奖金津贴。年工资通常按时薪×2080折算，非个人实际工时或实收。",
-        "display_value": "父类17-2141中位年工资104,110美元、时薪50.05美元（OEWS2025），非专项",
+        "derivation": "上位组 17-2141 全国 OEWS 工资分位。",
+        "display_value": "104,110 美元/年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "工资中位数",
-        "occupation_scope": "Mechanical Engineers 17-2141父类，非专项",
-        "period": "2025",
+        "measure": "上位职业 · 美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "美国机械工程师上位组（17-2141）",
+        "period": "2025-05",
         "source_refs": [
-          "hr",
           "oews"
         ]
       },
       {
-        "derivation": "OEWS为领取工资的全兼职雇员正常工时税前工资，排自雇；含基本、计件、佣金、生产奖金、生活费用及危险工作报酬，排加班溢价、班次差额、非生产奖金及福利成本，不统一排奖金津贴。年工资通常按时薪×2080折算，非个人实际工时或实收。",
+        "derivation": "上位组 17-2141 全国 OEWS 工资分位。",
         "display_value": "父类17-2141第10分位73,990美元/年（OEWS2025）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "工资第10分位",
-        "occupation_scope": "Mechanical Engineers 17-2141父类，非专项",
+        "occupation_scope": "美国机械工程师上位组（17-2141）",
         "period": "2025",
         "source_refs": [
-          "hr",
           "oews"
         ]
       },
       {
-        "derivation": "OEWS为领取工资的全兼职雇员正常工时税前工资，排自雇；含基本、计件、佣金、生产奖金、生活费用及危险工作报酬，排加班溢价、班次差额、非生产奖金及福利成本，不统一排奖金津贴。年工资通常按时薪×2080折算，非个人实际工时或实收。",
+        "derivation": "上位组 17-2141 全国 OEWS 工资分位。",
         "display_value": "父类17-2141第90分位164,340美元/年（OEWS2025）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "工资第90分位",
-        "occupation_scope": "Mechanical Engineers 17-2141父类，非专项",
+        "occupation_scope": "美国机械工程师上位组（17-2141）",
         "period": "2025",
         "source_refs": [
-          "hr",
           "oews"
         ]
       },
       {
-        "derivation": "BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。",
-        "display_value": "父类17-2141就业变化+11.2%（2025—2035），非专项",
+        "derivation": "BLS 表 1.2 美国机械工程师上位组 17-2141 行。",
+        "display_value": "+11.2%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长",
-        "occupation_scope": "Mechanical Engineers 17-2141父类，非专项",
-        "period": "2025—2035",
+        "measure": "上位职业 · 美国预计就业变化（2025—2035）",
+        "occupation_scope": "美国机械工程师上位组（17-2141）",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。",
-        "display_value": "父类17-2141就业298,500人（2025），含自雇，非专项",
+        "derivation": "BLS 表 1.2 美国机械工程师上位组 17-2141 行。",
+        "display_value": "约 298,500 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数",
-        "occupation_scope": "Mechanical Engineers 17-2141父类，非专项",
+        "measure": "上位职业 · 美国就业岗位（2025）",
+        "occupation_scope": "美国机械工程师上位组（17-2141）",
         "period": "2025",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。",
-        "display_value": "父类17-2141年均职位空缺17,800（2025—2035），含替换，非专项",
+        "derivation": "BLS 表 1.2 美国机械工程师上位组 17-2141 行。",
+        "display_value": "年均约 17,800 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺",
-        "occupation_scope": "Mechanical Engineers 17-2141父类，非专项",
-        "period": "2025—2035",
+        "measure": "上位职业 · 美国年均职位空缺（2025—2035）",
+        "occupation_scope": "美国机械工程师上位组（17-2141）",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -38193,7 +38257,7 @@
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "行业平均工资",
-        "occupation_scope": "2025制造业行业代理，非职业",
+        "occupation_scope": "中国大陆城镇制造业行业门类",
         "period": "2025",
         "source_refs": [
           "nbs"
@@ -38205,62 +38269,50 @@
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "行业平均工资",
-        "occupation_scope": "2025制造业行业代理，非职业",
+        "occupation_scope": "中国大陆城镇制造业行业门类",
         "period": "2025",
         "source_refs": [
           "nbs"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "燃料电池工程师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "燃料电池工程师 · 任务、交付与责任边界",
-      "来源范围 · 统计口径 · 人工复核",
-      "中国精确职业工资缺口按证据保留"
+      "燃料电池工程师",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国父类工资中位数（2025）"
+        "label": "上位职业 · 美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国父类就业变化（2025—2035）"
+        "label": "上位职业 · 美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国父类就业人数（2025）"
+        "label": "上位职业 · 美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国父类年均职位空缺（2025—2035）"
+        "label": "上位职业 · 美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "available",
@@ -38274,17 +38326,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "燃料电池工程师做什么、需要什么能力、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围、来源口径和数据缺口。"
+      "text": "了解燃料电池工程师的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "燃料电池工程师"
+      "text": "燃料电池工程师做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "ef0e783365c54f38cd328f6bf00b1e54561f114d13fffb209cb0ed6535d1f761",
+  "source_content_sha256": "55d025e995f19080d1e3ce716b3967b22fa64dd491116e420f1c475ee93d216b",
   "subject": {
     "canonical_slug": "fuel-cell-engineers",
     "name": "燃料电池工程师",
-    "summary": "职业定义｜O*NET-SOC17-2141.01为交通、固定式或便携式应用设计、评估、改造或构建燃料电池部件或系统。26任务涵盖材料实验、技术咨询、运行图谱和耐久评估、降本改进、测试诊断和统计、失效分析、材料规格、设计变更与验证、技术学习、测试仪器与采集准备、材料设备开发、样机制造、燃料电池/电池混合架构、测试开发项目、报告提案、仿真、电驱与功率电子设计、车辆集成、效率功率计算、跨部门排期、授权部件子系统投入生产、氢或非氢设计的功率成本环境评估、电驱集成故障缓解及储氢方案。官方包含生产放行授权，不能整体排除；具体法域和岗位权限另核。"
+    "summary": "燃料电池工程师为交通、固定式或便携式应用设计、验证和改进电堆、部件或系统。实际工作包括拟定试验、分析性能和耐久性数据、交接工程变更。"
   }
 }

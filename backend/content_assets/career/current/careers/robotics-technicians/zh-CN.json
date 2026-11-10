@@ -23311,7 +23311,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "机器人技术员（O*NET 17-3024.01）安装、编程、排障、测试或维护机器人及相关自动化产线设备。先看设备故障能否安全隔离、诊断和复测，再判断是否愿意长期做现场技术工作。"
+              "核现场培训、轮班、故障权限和复工审批。纸面练习只观察记录与交接习惯。"
             ]
           },
           "id": "robotics-technicians.quick-decision.fit-decision-checklist.1",
@@ -23326,7 +23326,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "与机器人工程师、机电技术员和工业机械维修人员共享部分技能；本职业核心是设备安装、控制器和传感器排障、维护记录及受授权的功能测试。"
+              "在 09「入行、资格与职业发展」做 RB-T01｜核报警、配置与交接，先完成初稿再看参考。"
             ]
           },
           "id": "robotics-technicians.quick-decision.fit-decision-checklist.2",
@@ -23340,7 +23340,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "AI可辅助查找手册、比对报警记录与起草测试步骤；实际接线、设备状态、故障原因和复机许可须按现场程序由有权限人员核实。"
+              "适合愿意追溯报警和维护记录，并在证据不足时留待核的人。"
             ]
           },
           "id": "robotics-technicians.quick-decision.fit-decision-checklist.3",
@@ -23356,7 +23356,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "入岗前核机器人型号、控制器、末端工具、产线接口、能源隔离、测试权限、值班安排与培训要求；练习材料不得接入真实设备。"
+              "分开批准配置、观察记录、检修证据和复工签批。"
             ]
           },
           "id": "robotics-technicians.quick-decision.fermat-decision-card.6",
@@ -23371,7 +23371,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "美国机器人技术员17-3024.01没有单列的2025工资和2025—2035就业；O*NET引用“机电与机电一体化技术员”17-3024父职业中位73,900美元，BLS父职业增长2.6%、年均约1,400空缺。中国精确职业工资未取得。"
+              "适合愿意追溯报警和维护记录，并在证据不足时留待核的人。"
             ]
           },
           "id": "robotics-technicians.quick-decision.fermat-decision-card.7",
@@ -27727,31 +27727,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "机电系统维护",
@@ -29477,7 +29477,7 @@
                 "values": [
                   "教育与基础",
                   "BLS父职业典型入门为副学士学位；机器人子职业具体要求由雇主决定。",
-                  "核控制、机械、电气、软件和测试的真实职责。"
+                  "校招技术员按工作站和产线描述维护、报警排故及停机处理。"
                 ]
               },
               {
@@ -29500,8 +29500,8 @@
                 "id": "tools",
                 "values": [
                   "协作与记录",
-                  "需与技术员、应用方和安全人员共享可复现信息。",
-                  "核接手人能否按记录重现问题。"
+                  "在 09「入行、资格与职业发展」做 RB-T01｜核报警、配置与交接，先完成初稿再看参考。",
+                  "分开批准配置、观察记录、检修证据和复工签批。"
                 ]
               }
             ]
@@ -29510,7 +29510,9 @@
           "source_refs": [
             "bls",
             "onet",
-            "editor"
+            "editor",
+            "cn-d010-main",
+            "cn-d010-context"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29523,37 +29525,35 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "练习设定｜全部虚构，不连接真实设备",
-                  "你是受监督机器人维护学员。只核报警、配置与测试证据，不接入真实设备或生成运动指令。",
-                  "A1｜需求文档要求在有人通道运行；风险评估、允许速度和停止条件未给出。",
-                  "A2｜传感器日志标注2026-09-01版标定，设备清单写2026-09-14版；两者不一致。",
-                  "A3｜控制程序提交号与测试报告提交号不同，报告只记录“正常”，没有失败场景。",
-                  "A4｜演示在空场地通过，但客户要求进入有障碍、有人流的真实空间。",
-                  "A5｜技术员应列明故障和停机建议；复机、参数变更及部署由获授权团队批准。"
+                  "虚构材料",
+                  "虚构工位 C9，设备档案列批准配置 C6。维护草稿提到 C7，缺批准记录。模拟规则规定复工前需核配置、报警复核及主管签批。",
+                  "08:40 日志记录传感器反馈报警，未写故障原因。08:50 维护记录显示停机等待。09:10 班报写「记录已复核」，没有报警关闭凭证。",
+                  "题面没有实际加载配置、维修确认或复工签字。工艺负责人核配置，维护主管核故障记录，有权主管签复工。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务一：标记不可放行项",
-                  "列出A1人员暴露条件不明、A2标定冲突、A3版本不一致、A4场景外推；状态写“暂停扩场”。",
-                  "不要补造速度、控制参数或安全认证。"
+                  "任务与交付",
+                  "交一页版本、报警和复工待核表。逐项注明原记录、缺证和下一责任人。",
+                  "区分已发生、待核、已批准。只做纸笔，不连接设备。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "任务二：写复核与交接",
-                  "按问题、原始资料、版本、测试条件、责任人、待证据和状态做清单。",
-                  "请求安全评估、统一标定与代码版本，并补有人流场景测试方案。",
-                  "清楚区分“已提交”“已复核”“已批准”。"
+                  "提交前提示",
+                  "先保存初稿，再看七天计划之后的参考。",
+                  "无需同伴协助。",
+                  "记录版本。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "安全边界",
-                  "练习缺实际设备与安全参数，不能导出操作指令。"
+                  "权限边界",
+                  "使用虚构记录。",
+                  "不实际批准或对外交付。"
                 ]
               }
             ]
@@ -29562,7 +29562,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：虚构机器人系统的故障定位",
+          "title": "RB-T01 | 核报警、配置与交接",
           "type": "cards"
         },
         {
@@ -29573,33 +29573,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "需求与风险卡",
-                  "标注A1有人通道需求与缺失的风险评估。",
-                  "他人可看到未取得的停止条件。"
+                  "版本记录",
+                  "核批准版本、实际版本和提议版本。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "配置对照表",
-                  "并列A2标定版本、A3程序提交号与报告版本。",
-                  "不能把不同版本的“通过”合并。"
+                  "事件时间线",
+                  "列报警、停机与复核记录。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "失败场景单",
-                  "列A4空场地和真实场地差异，提出待验证情况。",
-                  "不把演示成功写成现场安全。"
+                  "缺证清单",
+                  "写缺证及实际结论的边界。",
+                  "用题设原始记录核对。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "交接与批准链",
-                  "记录A5谁可复核、谁可批准扩场和部署。",
-                  "状态必须明确到人和时间。"
+                  "交接与授权",
+                  "明确复核责任人和恢复签批。",
+                  "用题设原始记录核对。"
                 ]
               }
             ]
@@ -29630,27 +29630,27 @@
             "rows": [
               [
                 "需求追问",
-                "有人通道需求不清怎么办",
-                "能指出风险和停止条件缺口",
-                "不能凭面试题授设备权限"
+                "核批准版本、实际版本和提议版本。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "配置核查",
-                "标定和程序版本冲突如何处理",
-                "能暂停并回查原始记录",
-                "不编造哪个版本正确"
+                "列报警、停机与复核记录。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "测试安装",
-                "空场地通过可否进真实场地",
-                "能区分场景和覆盖范围",
-                "部署须另经批准"
+                "写缺证及实际结论的边界。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ],
               [
                 "交接复盘",
-                "如何交代残余缺陷",
-                "能列条件、责任人和待证据",
-                "一次练习不预测长期表现"
+                "明确复核责任人和恢复签批。",
+                "列原件、证据和下一责任人。",
+                "缺证单列。"
               ]
             ]
           },
@@ -29670,50 +29670,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第一日",
-                  "读A1，标注使用场景和安全需求缺口。"
+                  "第 1 天",
+                  "记录对象和版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第二日",
-                  "读A2，制作标定版本对照表。"
+                  "第 2 天",
+                  "核批准版本、实际版本和提议版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第三日",
-                  "读A3，核程序、报告与硬件配置能否对应。"
+                  "第 3 天",
+                  "列报警、停机与复核记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第四日",
-                  "读A4，列空场地演示不能外推的条件。"
+                  "第 4 天",
+                  "写缺证及实际结论的边界。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第五日",
-                  "按A1—A5写复核与批准链，保持暂停扩场状态。"
+                  "第 5 天",
+                  "明确复核责任人和恢复签批。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第六日",
-                  "请熟悉系统验证的人审阅模拟材料，记录意见。"
+                  "第 6 天",
+                  "先独立完成交接稿，再按下方参考和量规核对并修订一处。没有同伴也能完成。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第七日",
-                  "保留初稿与修订稿，复盘遗漏和复现质量。"
+                  "第 7 天",
+                  "整理四份练习成果，保留原件和待审状态。"
                 ]
               }
             ]
@@ -29730,20 +29730,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "记录A1—A5每个未知项和原始资料位置。",
-              "检查是否把标定冲突猜成某一版本正确。",
-              "检查是否把程序提交号与测试报告混用。",
-              "检查是否将空场地演示当作有人场地验证。",
-              "确认部署决定始终留在授权链。",
-              "记录自己是否愿意跨机械、电气和软件核问题。",
-              "练习只用于职业探索，不是设备操作资格。"
+              "C6 是批准配置，C7 是未批草稿。实际加载版本未知，交工艺负责人核。",
+              "08:40 只能确认反馈报警，不能确定传感器本体故障。08:50 记录停机待核。",
+              "09:10 的复核记录不等于报警关闭。维护主管应核原始报警与检修证据。",
+              "没有复工签字，保持待复工审批。设备运行与配置变更由有权人员按现场流程处理。",
+              "交接列工位 C9、批准配置、实际配置待核、报警关闭证据缺失和复工审批人。",
+              "四项各 0–2 分：版本与原件、逐项判断、未知范围、权限交接。",
+              "完整可追溯为 2，部分为 1，缺失或越权为 0。"
             ]
           },
           "id": "robotics-technicians.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "题后参考与自核量规",
           "type": "list"
         },
         {
@@ -29858,16 +29858,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "学历、证书、岗位录用和设备操作授权分别核实；中国本岗可比招聘样本、资格主体与厂商规则尚未取得，不能给出统一证书或起薪门槛。",
-              "证书目录只能作为检索入口；正式资格、雇主授权和设备权限需分别核。"
+              "校招技术员按工作站和产线描述维护、报警排故及停机处理。",
+              "标准描述状态监测、故障分析、维修和预防性维护。现场任务与授权另核。"
             ]
           },
           "id": "robotics-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "cn-d010-main",
+            "cn-d010-context"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -31891,9 +31889,9 @@
                 ]
               },
               {
-                "answer": "工程师侧重安装、接口与验证，技术员多按图纸或工单装配、测试和维护；实际职责以岗位授权为准。",
+                "answer": "技术员按程序安装、测试、维护和记录；工程师通常更侧重设计、集成和验证。两岗可有调试交集，按实际交付物和审批范围核。",
                 "id": "robotics-technicians.faq.2",
-                "question": "与机器人技术员有什么区别？",
+                "question": "机器人技术员与机器人工程师有什么区别？",
                 "question_key": "career.faq.robotics-technicians.q2",
                 "source_refs": [
                   "onet",
@@ -31901,13 +31899,15 @@
                 ]
               },
               {
-                "answer": "BLS父职业典型入门为副学士学位，但不是机器人子职业统一法定门槛；具体雇主条件另核。",
+                "answer": "BLS父职业典型入门为副学士学位，但不是机器人子职业统一法定门槛；具体雇主条件另核。 校招技术员按工作站和产线描述维护、报警排故及停机处理。 标准描述状态监测、故障分析、维修和预防性维护。现场任务与授权另核。",
                 "id": "robotics-technicians.faq.3",
                 "question": "入行一定要副学士吗？",
                 "question_key": "career.faq.robotics-technicians.q3",
                 "source_refs": [
                   "onet",
-                  "editor"
+                  "editor",
+                  "cn-d010-main",
+                  "cn-d010-context"
                 ]
               },
               {
@@ -31949,7 +31949,7 @@
                 "question_key": "career.faq.robotics-technicians.credentials"
               },
               {
-                "answer": "只用虚构需求、接口表和日志，标记版本冲突、测试覆盖与授权链；不连接真实设备。",
+                "answer": "在 09「入行、资格与职业发展」做 RB-T01｜核报警、配置与交接，先完成初稿再看参考。",
                 "id": "robotics-technicians.faq.9",
                 "question": "如何练习系统判断？",
                 "question_key": "career.faq.robotics-technicians.risk-boundary"
@@ -31970,7 +31970,9 @@
             "nbs",
             "privacy",
             "editor",
-            "editor"
+            "editor",
+            "cn-d010-main",
+            "cn-d010-context"
           ],
           "type": "faq"
         },
@@ -32057,13 +32059,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32298,8 +32300,8 @@
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "FermatMind虚构机器人调试练习：仅用于上述适用范围。",
-                  "虚构练习，不是设备调试指令或资格证明。"
+                  "RB-T01 为虚构纸笔试做。",
+                  "分开批准配置、观察记录、检修证据和复工签批。"
                 ],
                 "evidence_type": "编辑归纳",
                 "id": "editor",
@@ -32534,6 +32536,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "校招技术员按工作站和产线描述维护、报警排故及停机处理。"
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-d010-main",
+                "limitation": "用于职业任务和路径对照。",
+                "market": "中国大陆",
+                "name": "陆汇智能工业机器人技术员",
+                "period": "原帖及课程日期见来源",
+                "publisher": "陆汇智能工业机器人技术员",
+                "scope": "recruitment_proxy",
+                "url": "https://zhjyb.zua.edu.cn/module/campustalkdetail/id-6aab4989947c3f2b26ebad13/nid-5119"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "标准描述状态监测、故障分析、维修和预防性维护。现场任务与授权另核。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-d010-context",
+                "limitation": "用于职业任务和路径对照。",
+                "market": "中国大陆",
+                "name": "工业机器人系统运维员国家职业技能标准",
+                "period": "原帖及课程日期见来源",
+                "publisher": "工业机器人系统运维员国家职业技能标准",
+                "scope": "contextual",
+                "url": "https://chinajob.mohrss.gov.cn/upload/resources/jnbzpdf/4ccc6a76ab912072690801.pdf"
               }
             ]
           },
@@ -37228,7 +37260,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合机器人技术员",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37791,14 +37823,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "机器人技术员职业介绍：系统安装、传感器与控制、集成测试、AI辅助边界、美国17-3024父职业工资就业口径、中国制造业工资背景及虚构调试练习。"
+      "text": "机器人技术员安装、测试和维护工作站。比较大陆调试与运维原岗、美国统计宽组和报警交接试做。"
     },
     "title": {
       "availability": "available",
       "text": "机器人技术员"
     }
   },
-  "source_content_sha256": "bfdfcbfc19e8c26cdb717050ed7dfff0e9a351ac1719fe483aff8f56269e3e3b",
+  "source_content_sha256": "0b600f98c62bbdf27b0345e6f93a5498943b7f6e3fb4b6f30b3963d4408a83f1",
   "subject": {
     "canonical_slug": "robotics-technicians",
     "name": "机器人技术员",

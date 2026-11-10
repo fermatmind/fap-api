@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -36,13 +33,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -63,7 +60,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -22826,13 +22823,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：运动训练师不是「带队员拉伸」或「体育老师」，而是在医疗监管下评估与处理肌肉骨骼损伤、并在现场提供预防、急救、治疗与康复照护；它把伤情评估、紧急处置与转诊、复出许可、康复计划与记录留痕连成一条可复核的责任链；只想做体能训练、不愿承担伤情判断与转诊责任的人不适合。"
+              "在「入行、资格与职业发展」找到「AT-10｜场馆应急交接纸面演练」，先写纸面状态表和两句交接，再看参考。"
             ]
           },
           "id": "athletic-trainers.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -22841,11 +22837,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你能在压力下按流程完成初步评估并说清何时必须转给医师，愿意长时间记录与复盘、接受队医与主管医师的复核与修正，能对运动员、学生与家长讲清照护边界，也愿意在赛事与训练现场承担值班与随队安排。"
+              "如果你愿意核风险、记录变化，并和场馆、医护和教练一起做现场保障，可以继续了解。"
             ]
           },
           "id": "athletic-trainers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -22855,14 +22852,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停投入的条件：你还没有在任何有资质的督导下完成过伤情评估与急救流程，或只能靠个人运动经历说明能力；也不要把「运动员出身」「健身房教练证」「急救培训证书」当作可以做诊断、开处方或独立决定复出的证明。涉及用药与复出时不要自行处理。"
+              "如果你更想做健身教学，或期待短训后独立处理伤病，先对比两类工作与正式训练。"
             ]
           },
           "id": "athletic-trainers.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "ath-boc"
           ],
           "type": "prose"
         },
@@ -22871,13 +22867,16 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历与训练必须分开核对：O*NET 把 29-9091.00 列为 Job Zone Five（SVP 8.0+），受访者中 54% 认为需要硕士学历、37% 认为需要学士学历、8% 认为需要高中或同等学历；美国该职业由全国认证机构（如 Board of Certification for the Athletic Trainer）颁发认证，并在多数州需要取得执照才能执业。中国大陆没有与之对应的统一职业注册，相关岗位分散在运动防护、康复治疗与体育教学等序列中。认证不等于执照，执照也不等于跨机构或跨法域通用；本页不提供诊断、用药或复出标准。"
+              "美国入行通常走 CAATE 认证项目、BOC 认证与当地执业授权三个环节。BOC 统计美国 49 州及华盛顿特区实施监管；申请前向目标监管部门确认当地授权形式、执业范围与续期条件。大陆《职业分类大典》列有运动防护师；北京职称文件和招聘公告各有适用范围。具体资格、职责和权限按所在地及用人机构核对。"
             ]
           },
           "id": "athletic-trainers.quick-decision.fermat-decision-card.6",
           "source_refs": [
             "onet",
-            "onet"
+            "caate-professional",
+            "ath-boc",
+            "ath-boc-state",
+            "cn-classification-2022"
           ],
           "type": "prose"
         },
@@ -22886,13 +22885,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以在医疗监管下评估与处理肌肉骨骼损伤、并提供预防、急救、治疗与康复照护为核心的职业。能否胜任取决于评估与转诊判断、手法与技术操作、沟通与记录、以及能否守住执业范围，而不是运动成绩或单一证书。"
+              "运动防护不仅要看动作，也要能按程序观察、记录和交接；愿意长期随队的人还应核旅行和排班。"
             ]
           },
           "id": "athletic-trainers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "ath-fujian"
           ],
           "type": "prose"
         }
@@ -22990,7 +22989,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025OEWS本职业年薪P10 48,180、P25 55,130、中位62,520、P75 74,630、P90 88,760美元；本轮O*NET工资表只给年薪，未读到n/a文字，不推所有官方从未有时薪，不换算个人时薪或起薪。OEWS仅工资员工、不含自雇；部分激励工资包含、非生产性奖金等排除，不一概排除全部绩效和补贴。"
+              "2025OEWS本职业年薪P10 48,180、P25 55,130、中位62,520、P75 74,630、P90 88,760美元；该 O*NET 工资表只列年薪，不换算个人时薪或起薪。OEWS仅工资员工、不含自雇；部分激励工资包含、非生产性奖金等排除，不一概排除全部绩效和补贴。"
             ]
           },
           "id": "athletic-trainers.profile.onet-structured-fields-block.2",
@@ -23050,11 +23049,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET当前与BLS2025本职业就业35,200，2025—2035增长13%、2035约39,600、净增4,400；年均空缺2,400含增长替补，非净增或取得认证、执照与工作的个人概率。"
+              "BLS 估计该职业 2025 年有 35,200 个岗位，到 2035 年预计增至 39,600 个（+12.7%，净增 4,400）。预计每年约有 2,400 个空缺，含扩张和替补需求。"
             ]
           },
           "id": "athletic-trainers.profile.onet-structured-fields-block.4",
           "source_refs": [
+            "ep",
             "trends",
             "bls-ooh"
           ],
@@ -23308,13 +23308,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 29-9091.00 列为 Job Zone Five（SVP 8.0+），受访者中 54% 认为需要硕士学历、37% 认为需要学士学历、8% 认为需要高中或同等学历；美国该职业通常经认证的学位项目与临床实习，由全国认证机构颁发认证，并在多数州需取得执照。中国大陆没有对应的统一职业注册，相关岗位分散在运动防护、康复治疗与体育教学序列中，标准由用人单位与主管部门规定。"
+              "O*NET 的 Job Zone Five 与受访者学历意见描述职业准备，不能替代当前项目及考试资格。BOC 统计美国 49 州及华盛顿特区实施监管；申请前向目标监管部门确认当地授权形式、执业范围与续期条件。大陆《职业分类大典》列有运动防护师；北京职称文件和招聘公告各有适用范围。具体资格、职责和权限按所在地及用人机构核对。"
             ]
           },
           "id": "athletic-trainers.profile.career-quick-answers-block.19",
           "source_refs": [
             "onet",
-            "onet"
+            "ath-boc",
+            "ath-boc-state",
+            "cn-classification-2022"
           ],
           "type": "prose"
         },
@@ -23440,13 +23442,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国多数州要求取得执照才能执业，执业范围与必须向医师转诊的情形由州法与机构规程规定；申请前核对执照要求、有效期与延续条件，不能从相邻职业的资质直接推断。"
+              "BOC 统计美国 49 州及华盛顿特区实施监管；申请前向目标监管部门确认当地授权形式、执业范围与续期条件。具体医师协作及转诊按当地规则和机构流程。"
             ]
           },
           "id": "athletic-trainers.profile.career-quick-answers-block.28",
           "source_refs": [
             "onet",
-            "onet"
+            "ath-boc-state",
+            "boc-standards"
           ],
           "type": "prose"
         },
@@ -24233,7 +24236,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：明确试验用途与资料权限，核实际医疗、未成年人保护及应急制度。本轮未读各州完整法规，不由工具流程设主管医师统一最终权或现场指挥权。"
+              "编辑建议：明确试验用途与资料权限，核实际医疗、未成年人保护及应急制度。按所在州规则和机构流程确认医师协作和现场指挥职责。"
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.15",
@@ -24280,15 +24283,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得本职业AI产品效果、采用及就业因果；O*NET任务和软件招聘、BLS总体预测不同测量对象。ILO介绍/扩展摘要与NIST简介为跨职业背景，未读全文或本职业映射。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可用虚构材料试排时间线、联系人清单和遗漏提醒。真实健康资料须用获准工具；伤情判断、应急启动与复赛决定由有权限的人按流程负责。"
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.18",
           "source_refs": [
             "onet",
-            "bls-ooh",
-            "genai-ilo",
-            "genai-nist"
+            "editor"
           ],
           "type": "prose"
         },
@@ -24369,7 +24370,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "custom仅自定义报告入口，本轮未选择输出完整报告，不设个人阈值。"
+              "O*NET 自定义报告用于查看职业资料，不设个人录用门槛。"
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.24",
@@ -24540,7 +24541,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可穿戴与影像数据采集、趋势生成是待验证系统候选，需核设备、测量口径与误差，本轮未读产品验证。"
+              "可穿戴与影像数据采集、趋势生成是待验证系统候选，需核设备、测量口径与误差，另行核验产品效果。"
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.36",
@@ -24824,11 +24825,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "当前2025就业35,200、2035约39,600、增长13%、净增4,400；年均空缺2,400含增长替补，不作AI归因或个人录用概率。"
+              "当前2025就业35,200、2035约39,600、增长12.7%、净增4,400；年均空缺2,400含增长替补，不作AI归因或个人录用概率。"
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.56",
           "source_refs": [
+            "ep",
             "trends"
           ],
           "type": "prose"
@@ -24909,7 +24911,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "实际使用需核机构设备、资料权限及专业验证，本轮未取得本职业采用率，不能推全部统计不存在或任意临床使用。"
+              "实际使用需核机构设备、资料权限及专业验证，未取得本职业采用率，不能推全部统计不存在或任意临床使用。"
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.62",
@@ -24924,11 +24926,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "暴露、采用、生产率与就业分开；BLS2025—2035总体增长13%不证明AI采用或就业因果。"
+              "暴露、采用、生产率与就业分开；BLS2025—2035总体增长12.7%不证明AI采用或就业因果。"
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.63",
           "source_refs": [
+            "ep",
             "bls-ooh"
           ],
           "type": "prose"
@@ -24938,7 +24941,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得整体取代证据，也不保证某类任务永不自动化；临床及参赛职责按适用专业与法域，不由模型输出取得。"
+              "未取得整体取代证据，也不保证某类任务永不自动化；临床及参赛职责按适用专业与法域，不由模型输出取得。"
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.64",
@@ -25028,11 +25031,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业2025—2035总体增长13%、年均2,400空缺含增长替补；不是AI因果或认证、许可通过率。"
+              "本职业2025—2035总体增长12.7%、年均2,400空缺含增长替补；不是AI因果或认证、许可通过率。"
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.70",
           "source_refs": [
+            "ep",
             "trends"
           ],
           "type": "prose"
@@ -25087,7 +25091,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得本职业消失年份，暴露、采用及岗位数量分开，不作年份预测。"
+              "未取得本职业消失年份，暴露、采用及岗位数量分开，不作年份预测。"
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.74",
@@ -25267,7 +25271,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑风险情景：患者健康、影像或位置若受保护，不当外发可能违反适用法和制度；本轮未核全部法域敏感信息分类，不能无差别归类全部资料。"
+              "编辑风险情景：患者健康、影像或位置若受保护，不当外发可能违反适用法和制度；先按所在地规则核对资料的类别和可分享范围。"
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.86",
@@ -25715,7 +25719,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "虚构说明制作为编辑试验候选，真实患者告知内容、权限及制度另核，未读产品效果。"
+              "虚构说明制作为编辑试验候选，真实患者告知内容、权限及制度另核，产品效果须另行验证。"
             ]
           },
           "id": "athletic-trainers.ai-impact.ai-impact-table.117",
@@ -25826,7 +25830,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮NBS2025公告未给精确运动训练师全国收入分布，不由一次读取推全部中国来源没有统计；不填全国月薪或起薪。"
+              "国家统计局的 2025 年行业工资公告不提供运动防护师的全国工资分布，不能据此估算该职业月薪或起薪。"
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.8",
@@ -26020,7 +26024,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮缺中国精确职业收入；NBS相关宽行业可作背景，不替代中位数、起薪或全部个人收入。"
+              "国家统计局行业平均工资可作背景，不能当作该职业中位数、起薪或个人总收入。"
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.21",
@@ -26049,7 +26053,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮未取得中国本职业AI收入因果；统计范围依对应公告定义，不能由技术设想推口径改变或永不改变。"
+              "未取得中国本职业AI收入因果；统计范围依对应公告定义，不能由技术设想推口径改变或永不改变。"
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.23",
@@ -26243,7 +26247,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "具体急救培训、资格有效期和更新条件须核真实机构与法域，本轮未读中国全部制度，不设统一周期。"
+              "具体急救培训、资格有效期和更新条件须核真实机构与法域，更新周期按当地和机构要求。"
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.36",
@@ -26392,13 +26396,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "核对报价时先确认用人单位性质、岗位职责与执业范围，以及按固定月薪、绩效还是项目计酬；不要把行业平均当作个人收入，也不要把海外数字换算成人民币预期。"
+              "两份大陆岗位原件均未列具体工资；随队要求和用工形式也不同。2025 年国家统计局卫生和社会工作行业城镇非私营年均 146,266 元、私营 75,631 元是宽行业背景。"
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "ath-fujian",
+            "ath-sport",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26421,13 +26426,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆运动训练师的月薪区间；同名岗位可能采用固定月薪、绩效、值班与随队补贴，比较时须把排班结构、资质要求与责任范围纳入书面条件。"
+              "两份大陆岗位原件均未列具体工资；随队要求和用工形式也不同。2025 年国家统计局卫生和社会工作行业城镇非私营年均 146,266 元、私营 75,631 元是宽行业背景。"
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "ath-fujian",
+            "ath-sport",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26506,7 +26512,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得其他城市可核验的本职业月薪分布。"
+              "证据不足：未取得其他城市可核验的本职业月薪分布。"
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.54",
@@ -26548,11 +26554,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "13%（2025—2035总体就业增长）"
+              "12.7%（2025—2035总体就业增长）"
             ]
           },
           "id": "athletic-trainers.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
+            "ep",
             "trends"
           ],
           "type": "prose"
@@ -26614,7 +26621,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "P10年薪48,180美元为约10%不高于的统计位置，不是分布最低值或新人起薪；本轮O*NET表只年薪。"
+              "P10年薪48,180美元为约10%不高于的统计位置，不是分布最低值或新人起薪；O*NET 该表只列年薪。"
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.10",
@@ -26642,7 +26649,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "P25年薪55,130美元，本轮表未给小时分位，不由此推所有官方从未有时薪。"
+              "P25年薪55,130美元，该表未列时薪分位。"
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.12",
@@ -26768,11 +26775,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "13%（2025—2035）"
+              "12.7%（2025—2035）"
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
+            "ep",
             "bls-ooh"
           ],
           "type": "prose"
@@ -26782,11 +26790,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS2025—2035总体增长13%，预计2035约39,600、净增4,400，不是AI归因。"
+              "BLS2025—2035总体增长12.7%，预计2035约39,600、净增4,400，不是AI归因。"
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
+            "ep",
             "bls-ooh"
           ],
           "type": "prose"
@@ -26824,7 +26833,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025OEWS年薪，覆盖工资员工、不含自雇；部分激励工资可含、非生产性奖金等排除，不一概排全部绩效值班随队补贴。就业2025、预测2025—2035，本轮工资表只年薪，不算个人时薪或中国工资。"
+              "2025OEWS年薪，覆盖工资员工、不含自雇；部分激励工资可含、非生产性奖金等排除，不一概排全部绩效值班随队补贴。就业2025、预测2025—2035，该表只列年薪，不算个人时薪或中国工资。"
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.25",
@@ -26840,7 +26849,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国资料给本职业年薪分位及总体就业预测，实际工资人群、年度与预测期分开；本轮O*NET表只年薪，不冒称读到n/a。"
+              "美国资料给本职业年薪分位及总体就业预测，实际工资人群、年度与预测期分开；O*NET 该表只列年薪。"
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.26",
@@ -26941,11 +26950,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "13%（2025—2035）"
+              "12.7%（2025—2035）"
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
+            "ep",
             "bls-ooh"
           ],
           "type": "prose"
@@ -27137,7 +27147,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本轮O*NET工资表只年薪；无个人工时及合同，不由此计算个人时薪或实发，也不推所有官方没有时薪。"
+              "O*NET 该工资表只列年薪；无个人工时及合同，不由此计算个人时薪或实发，也不推所有官方没有时薪。"
             ]
           },
           "id": "athletic-trainers.us-salary.career-snapshot-secondary-locale.47",
@@ -27254,7 +27264,7 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -27266,19 +27276,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪能力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "教练与球探",
@@ -27441,7 +27451,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑观察建议：核记录、规程执行、压力下沟通和协作；本轮未取得本职业大五分数与执业表现相关或因果研究，不将职业风格当量表效度。"
+              "编辑观察建议：核记录、规程执行、压力下沟通和协作；未取得本职业大五分数与执业表现相关或因果研究，不将职业风格当量表效度。"
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.6",
@@ -27456,7 +27466,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本轮缺本职业大五量表效度及阈值，不以O*NET风格推出成绩关联或证据强弱排名。"
+              "引用资料未建立大五在该职业的效度或阈值，不以O*NET风格推出成绩关联或证据强弱排名。"
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.7",
@@ -27515,7 +27525,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本轮未取得MBTI类型在本职业的预测或筛选依据；偏好可作讨论问题，不据此判断临床胜任或录用。"
+              "未取得MBTI类型在本职业的预测或筛选依据；偏好可作讨论问题，不据此判断临床胜任或录用。"
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.10",
@@ -27543,7 +27553,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "所读O*NET/BLS未给MBTI筛选线；本轮未取得本职业预测效度研究，不推所有资料不存在。"
+              "所读O*NET/BLS未给MBTI筛选线；未取得本职业预测效度研究，不推所有资料不存在。"
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.11",
@@ -27615,7 +27625,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本轮未取得九型在本职业的预测或筛选依据，反思不替代训练、许可与实际任务。"
+              "未取得九型在本职业的预测或筛选依据，反思不替代训练、许可与实际任务。"
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.14",
@@ -27629,7 +27639,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本轮未取得九型在本职业的效度或选拔依据，不用职业任务验证量表。"
+              "未取得九型在本职业的效度或选拔依据，不用职业任务验证量表。"
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.15",
@@ -28115,7 +28125,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本轮未取得最适MBTI类型或职业预测研究，不以类型筛选；偏好讨论结合实际任务。"
+              "未取得最适MBTI类型或职业预测研究，不以类型筛选；偏好讨论结合实际任务。"
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.49",
@@ -28144,7 +28154,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本页不以测试直接决定任职。人格职业效度本轮未取得，训练、实际评价和许可分别核，不以O*NET描述验证全部测验。"
+              "本页不以测试直接决定任职。人格职业效度未取得，训练、实际评价和许可分别核，不以O*NET描述验证全部测验。"
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.51",
@@ -28173,7 +28183,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑观察建议：核疼痛、压力情景沟通与协作；本轮缺本职业情绪智力量表验证，不用单分数代临床训练与许可。"
+              "编辑观察建议：核疼痛、压力情景沟通与协作；引用资料未验证情绪智力量表在该职业的用途，不用单分数代临床训练与许可。"
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.53",
@@ -28188,7 +28198,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本轮未取得九型职业预测依据，不据此录用或判断执业能力；反思需结合实际任务。"
+              "未取得九型职业预测依据，不据此录用或判断执业能力；反思需结合实际任务。"
             ]
           },
           "id": "athletic-trainers.fit.personality-fit-block.54",
@@ -28465,7 +28475,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET任务情境及BLS环境支持背景；BOC2026标准实际读有关医师指导/协作、临床评估、记录与保密条款。六场景后果为编辑归纳，未核所有州法、中国制度或具体事故处罚。"
+              "O*NET任务情境及BLS环境支持背景；BOC 2026 标准涵盖医师指导/协作、临床评估、记录与保密条款。六场景后果为编辑归纳，个案责任按当地适用规则核对。"
             ]
           },
           "id": "athletic-trainers.risk.career-risk-cards.10",
@@ -28570,7 +28580,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "具体急救、呼救、转运及应急指挥按受训范围和机构计划，本轮未读完整临床流程，不给个案操作指令。"
+              "具体急救、呼救、转运及应急指挥按受训范围和机构计划，个案按机构预案交给受训人员处理。"
             ]
           },
           "id": "athletic-trainers.risk.career-risk-cards.17",
@@ -28930,7 +28940,7 @@
               [
                 "学校运动队与体育教学机构",
                 "在督导下协助训练前后的防护、协助记录伤情并学习急救流程。",
-                "编辑准备比较：核目标学校项目、临床训练、许可及岗位条件；无本轮具体招募样本，不称统一雇主要求。",
+                "编辑准备比较：核目标学校项目、临床训练、许可及岗位条件；以目标单位要求为准。",
                 "提交一份含评估要点、处置流程与记录模板的虚构防护记录，不使用真实学生或运动员资料。",
                 "学校内部授权不代州许可；具体临床诊断及服务范围按资质、法域与职责核，不能一概断学校岗位无诊断权限。"
               ],
@@ -28944,7 +28954,7 @@
               [
                 "职业俱乐部与专业运动队",
                 "承担训练与赛事值班、赛前防护与赛后照护，并随队出行。",
-                "编辑准备比较：核目标队伍资质、排班、赛事及合同；未读具体招聘，不推普遍条件或报酬。",
+                "编辑准备比较：核目标队伍资质、排班、赛事及合同；报酬和资格以目标岗位公告为准。",
                 "提交一份含赛季排班、防护方案与紧急行动计划的虚构说明。",
                 "俱乐部授权不等于执业资格；复出决定须由医师或有权限人员作出。"
               ],
@@ -28958,7 +28968,7 @@
               [
                 "学校或社区体育项目的健康服务岗",
                 "承担场地与器材检查、急救准备、健康教育与紧急行动计划维护。",
-                "编辑准备比较：核应急、健康教育与具体权限，未读目标单位招募条件。",
+                "编辑准备比较：核应急、健康教育与具体权限，招聘条件以目标单位公告为准。",
                 "提交一份含场地检查表与紧急行动计划的虚构材料。",
                 "健康教育与急救准备不等于诊疗权限；发现伤情异常须按规程转诊。"
               ]
@@ -28981,17 +28991,17 @@
               {
                 "id": "education",
                 "values": [
-                  "美国侧：O*NET 把 29-9091.00 列为 Job Zone Five（SVP 8.0+），受访者中 54% 认为需要硕士学历、37% 认为需要学士学历、8% 认为需要高中或同等学历。",
-                  "BLS当前典型硕士、认证项目课堂与临床训练；CAATE新入行项目转研究生层级，O*NET54/37/8受访学历比例不是新的准入替代。",
-                  "中国2022大典有2-09-07-04运动防护师，具体培养与许可制度另核，不能称全国以某些专业为主。"
+                  "美国课程、认证与州要求",
+                  "美国典型入门为硕士；查 CAATE 认证的项目。BOC 认证包含考试与材料要求。目标州的许可、认证或其他监管要求，以及岗位权限另核。",
+                  "先核目标州，再向学校确认培养路径。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "BLS近乎所有州要求许可或认证、条件各异，按实际州监管核，不将BOC认证自动当州许可。",
-                  "具体急救和心肺复苏资质、有效期及更新需核适用认证和机构，本轮未读统一课程标准。",
-                  "执业范围与必须转诊的情形由州法、主管部门与机构规程规定，不因学历或运动经历自动获得。"
+                  "大陆职称例子",
+                  "北京市 2026 年运动防护师职称评审面向体育运动队、体育运动学校中专职做运动损伤与疾病预防、评估、急救、治疗或康复的相关专业人员。属于地方职称评价，按通知核适用身份和申报级别。",
+                  "评审与具体岗位招聘、医师执业资格分开。"
                 ]
               },
               {
@@ -29014,10 +29024,12 @@
           },
           "id": "athletic-trainers.path.employer-evidence.1",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "boc-protection",
-            "caate-professional"
+            "bls",
+            "ath-boc",
+            "ath-boc-state",
+            "ath-fujian",
+            "ath-sport",
+            "ath-beijing"
           ],
           "title": "雇主看重的准备证据",
           "type": "cards"
@@ -29030,42 +29042,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份伤情评估记录模板、一份预防与康复方案模板、一份紧急行动计划模板。",
-                  "全部材料为虚构，不含真实伤者健康信息、医疗记录或机构内部资料。",
-                  "全部材料与场景为虚构，不得使用真实伤者健康信息、医疗记录或机构内部资料。"
+                  "材料｜三条虚构场馆记录",
+                  "E1：赛事说明指定南门为服务车辆入口；场馆协调员确认改道，医疗负责人负责医疗流程。E2：18:05 的场馆记录说南门因施工关闭。",
+                  "E3：东门可供工作人员步行，但未核车辆能否通过；18:10 未收到改道确认或接收回执。题面没有伤者或医疗事件。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一个虚构个案完成评估记录、转诊判断理由与预防方案，写清依据、处置与仍不确定的部分。",
-                  "在 90—120 分钟内完成，允许参考公开的评估与急救资料，但不使用真实伤者或机构资料。",
-                  "记录中把客观观察、处置与判断分开书写，并标注需复核的部分。"
+                  "任务｜状态表与两句交接",
+                  "按 E1–E3 分列原路线、变更、待核与负责人，再给场馆协调员写两句。",
+                  "不要填电话号码、路线或接收状态的缺项。先写再看参考。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先排除危险信号并确认处置优先级，再按规程处置与记录，最后写明转诊与随访安排。",
-                  "把客观记录、观察与判断分开书写，任何不确定处标注为需复核。",
-                  "完成后请有资质的督导复核评估与记录，并保留修改理由。"
+                  "参考｜交给场馆协调员",
+                  "18:10，原定南门在 18:05 被报关闭；东门仅证实可步行，车辆通行未核。请确认车辆替代入口并同步医疗负责人，接收未确认。",
+                  "人能通过并不证明车辆可通过；不把猜测路线写进正式安排。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成认证、执照、执业许可或医疗意见，也不能替代机构规程与医师医嘱。",
-                  "不得在练习中处理真实伤者健康信息或提供用药与复出安排；相关事项须由有资质人员处理。",
-                  "练习不替代认证、执照、执业许可与机构规程，也不构成任何医疗意见。"
+                  "自核与边界",
+                  "对照三条记录，保留时间、负责人和接收状态。",
+                  "只做纸面演练，不拨电话、不改真实场馆安排、不处理伤病。"
                 ]
               }
             ]
           },
           "id": "athletic-trainers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "AT-10｜场馆应急交接纸面演练",
           "type": "cards"
         },
         {
@@ -29076,37 +29088,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "执业要求核对表：学历与认证项目、全国认证、州执照与有效期、执业范围与转诊义务、急救与感染控制资质、机构内部授权。",
-                  "每项都注明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「认证」「执照」「机构授权」「具体岗位职责」分列，避免混为一谈。"
+                  "场馆状态表",
+                  "原路线、变更、待核三栏。",
+                  "每栏标 E1–E3 的出处。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有资质的督导复核你的评估与处置记录，重点检查危险信号是否漏项、转诊判断是否越权、记录是否完整可追溯。",
-                  "把复核意见与修改理由一并保留，作为判断你是否能接受临床与文书复核的证据。"
+                  "负责人表",
+                  "场馆改道与医疗流程分开。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明处置目标、依据、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给督导复核，并保留复核意见与修改理由，作为可复核的证据。"
+                  "两句交接",
+                  "保留时间和未确认接收。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用软件辅助记录与评估，须注明工具名称与版本、输入范围与人工修改理由。",
-                  "健康与医疗数据归档须先取得授权，并记录访问范围、保留期限与销毁约定。"
+                  "下一步",
+                  "选一条真实岗位路径继续查。"
                 ]
               }
             ]
           },
           "id": "athletic-trainers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29170,57 +29182,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与边界阅读：读 O*NET 29-9091.00 与相关公开资料，写清执业范围、认证、执照与转诊义务各自的含义。",
-                  "产出：一页术语对照表，标注每项的来源。"
+                  "读职责",
+                  "对比运动防护、队医与健身教练。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "评估流程梳理：为一个虚构个案写清评估步骤、危险信号与转诊条件。",
-                  "产出：一份评估流程与转诊判断清单。"
+                  "核公告",
+                  "选一份招聘，标资格和随队要求。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "急救流程核对：列出本岗位的急救流程、器材位置与呼救与送医路径。",
-                  "产出：一份急救流程与器材清单。"
+                  "读原路线",
+                  "摘 E1 与 E2 的原安排和变更。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "预防方案练习：为一个虚构赛季写一份损伤预防与护具使用方案。",
-                  "产出：一份预防方案样例。"
+                  "记录待核",
+                  "按 E3 记车辆通行和接收状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "记录与隐私练习：为一份虚构处置写出完整记录，并说明隐私与授权处理。",
-                  "产出：一份记录样例与隐私说明。"
+                  "写交接",
+                  "写两句给场馆协调员。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有资质的督导挑战你的评估与记录，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "自己复核",
+                  "先自己对参考，同伴反馈可选。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "选择下一步",
+                  "判断更愿做风险预防、现场协调或记录，选对应岗位继续了解。"
                 ]
               }
             ]
           },
           "id": "athletic-trainers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "七日体验产出",
           "type": "timeline"
@@ -29230,18 +29242,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你能在七天内完成全部产出，并愿意接受对评估判断与记录的逐条复核与修改。",
-              "暂停：你能完成计划但难以接受别人质疑你的判断，或不愿为记录与隐私合规投入时间。",
-              "换方向：你更愿意指导他人训练，可比较教练与球探方向；若更愿意做长期功能康复，可比较物理治疗师方向。",
-              "核实要求：先核对学历、认证、执照与执业范围要求，再决定投入。",
-              "补齐证据：把七日产出整理成可复核的实操与督导记录。",
-              "成本评估：把学费、实习、认证与执照考试、复训与随队成本列入书面计划，评估回报周期。",
-              "下一步：按核实结果决定是先完成认证项目与实习，还是先进入机构辅助岗位积累督导下的实操经验。"
+              "标原入口。",
+              "保留关闭时间。",
+              "待核通行。",
+              "明确场馆联系人。",
+              "接收未确认。",
+              "先自核再看参考。",
+              "选一个工作方向继续。"
             ]
           },
           "id": "athletic-trainers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "七日后的判断",
           "type": "list"
@@ -29280,18 +29292,18 @@
               ],
               [
                 "BOC认证／ATC凭证",
-                "完成认证项目的人",
+                "符合 BOC 考试资格的人",
                 "符合考试资格并通过考试后取得认证，不是认证本身才允许考试",
                 "核实际美国认证与州许可规则，非全部岗位统一样本",
-                "BOC公开页列CAATE项目毕业或ARTI/CATA资格途径，并通过考试；具体个案另核",
+                "CAATE 认证项目毕业是典型路径；符合 BOC 与 ARTI、BASRaT 或 CATA 国际安排的申请者也可按其条件申请考试。",
                 "按认证周期完成并定期续证。",
                 "认证不等于州执照或机构授权。"
               ],
               [
-                "州执照",
+                "当地执业授权",
                 "在美国执业的人",
                 "决定能否在该州合法执业。",
-                "近乎所有州要求许可或认证，具体形式与条件各异",
+                "BOC 统计美国 49 州及华盛顿特区实施监管；申请前向目标监管部门确认当地授权形式、执业范围与续期条件。",
                 "按目标州监管核，不能假定所有州另有同一考核",
                 "按有效期续期。",
                 "跨州执业须另行核对要求；执照范围由州法规定。"
@@ -29329,7 +29341,9 @@
           "source_refs": [
             "bls-ooh",
             "boc-protection",
-            "caate-professional"
+            "caate-professional",
+            "ath-boc",
+            "ath-boc-state"
           ],
           "title": "资格与证书决策",
           "type": "table"
@@ -29341,7 +29355,7 @@
             "paragraphs": [
               "资格边界：学历、认证、州执照、机构内部授权与具体岗位职责是不同状态，任何一项都不能由另一项自动推出。",
               "美国O*NET JobZone5/SVP8+描述职业准备；当前新入行典型硕士及临床项目、认证与州许可须分别核，不由受访学历比例免除新要求。",
-              "中国2022大典列运动防护师相关职责，本轮未读完整注册或执业制度；不能断中国全国无统一注册，逐项对应与个案权限仍待核。",
+              "大陆《职业分类大典》列有运动防护师；北京职称文件和招聘公告各有适用范围。具体资格、职责和权限按所在地及用人机构核对。",
               "入职与执业前应逐项核实学历、认证、执照、执业范围与转诊义务，并保留书面确认。"
             ]
           },
@@ -29360,18 +29374,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本节没有实际招聘样本。中国2022分类已核名称为运动防护师；队医助理、康复治疗技师、体能康复师及运动队健康服务等仅作编辑检索关键词，逐个查真实公告、身份和许可，不称公开招聘已观察到。",
-              "阅读招募信息时应核对学历与认证要求、执照与授权状态、执业范围与转诊义务、排班与随队安排、健康数据与隐私合规要求，并警惕把「运动经历」或短期培训宣传为执业资质的表述。"
+              "福建省足球运动管理中心 2026 年公告列运动训练防护师 1 人，工作地福州长乐，长期随队驻训、外训外赛。要求相关专业本科及学士以上，运动防护或康复治疗初级及以上专业技术任职资格。原页未列具体工资。",
+              "国家体育总局运动医学研究所 2026 年 9 月公告列临聘康复治疗师 1 人，承担运动康复和随队保障。要求运动医学或康复治疗学相关专业硕士及以上及康复治疗师资格证，国家队经历优先。报名截止 9 月 18 日，未列金额。"
             ]
           },
           "id": "athletic-trainers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ath-fujian",
+            "ath-sport"
           ],
-          "title": "招聘信息核对",
+          "title": "大陆岗位：防护师与随队康复",
           "type": "notice"
         },
         {
@@ -29550,7 +29562,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET JobZone5/SVP8+、教育54%硕士37%学士8%高中为受访资料，不代当前新入行要求；BLS典型硕士、CAATE新项目研究生层级，BOC考试资格和州许可另核。中国2-09-07-04运动防护师有条目，具体对应及注册制度未核，不称全国无统一注册。"
+              "O*NET 受访学历只用于了解职业准备。申请时分别向 CAATE 项目、BOC 和目标州监管机构核对当前条件。大陆《职业分类大典》列有运动防护师；北京职称文件和招聘公告各有适用范围。具体资格、职责和权限按所在地及用人机构核对。"
             ]
           },
           "id": "athletic-trainers.path.career-path-block.20",
@@ -29584,7 +29596,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国训练、BOC及州规则与中国运动防护/康复岗位制度不同，本轮未读全部州法和中国许可，不互相外推。"
+              "美国的项目、认证及当地执业授权，与大陆岗位分类、地方职称和招聘条件分别核对。"
             ]
           },
           "id": "athletic-trainers.path.career-path-block.22",
@@ -30656,11 +30668,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国2025年薪及2025—2035总体就业35,200、增长13%、年均空缺2,400；工资人群与总体就业不同，不能一概排补贴绩效。中国NBS相关宽均值不是职业工资；八方向为编辑探索，许可及训练另核，不承诺直接转任。"
+              "美国 2025 年基期就业为 35,200 人，预计到 2035 年增长 12.7%，年均空缺约 2,400。工资统计与就业预测口径不同。中国统计局行业平均工资不能当作运动防护师工资，转岗时仍需核对目标岗位条件。"
             ]
           },
           "id": "athletic-trainers.market-signals.market-signal-card.8",
           "source_refs": [
+            "ep",
             "trends",
             "nbs",
             "oews-method"
@@ -30803,11 +30816,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "总体增长13%、期末约39,600、净增4,400；年均2,400空缺含增长替补。"
+              "总体增长12.7%、期末约39,600、净增4,400；年均2,400空缺含增长替补。"
             ]
           },
           "id": "athletic-trainers.market-signals.market-signal-card.18",
           "source_refs": [
+            "ep",
             "trends",
             "bls-ooh"
           ],
@@ -30861,11 +30875,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "13%（年均约2,400空缺）"
+              "12.7%（年均约2,400空缺）"
             ]
           },
           "id": "athletic-trainers.market-signals.market-signal-card.22",
           "source_refs": [
+            "ep",
             "trends",
             "bls-ooh"
           ],
@@ -31408,10 +31423,16 @@
                 "question_key": "career.faq.athletic-trainers.5"
               },
               {
-                "answer": "美国侧：O*NET 把 29-9091.00 列为 Job Zone Five（SVP 8.0+），受访者中 54% 认为需要硕士学历、37% 认为需要学士学历；该职业通常经认证的学位项目与临床实习，通过全国认证考试取得认证，并在多数州需取得执照。中国大陆没有对应的统一职业注册，相关岗位分散在康复治疗、运动防护与体育教学序列中。具体标准由主管部门与用人单位规定，本页不提供标准内容。",
+                "answer": "美国典型入门为硕士；查 CAATE 认证的项目。BOC 认证包含考试与材料要求。目标州的许可、认证或其他监管要求，以及岗位权限另核。 大陆可对照具体招聘与地方职称说明。",
                 "id": "athletic-trainers.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.athletic-trainers.6"
+                "question_key": "career.faq.athletic-trainers.6",
+                "source_refs": [
+                  "bls",
+                  "ath-boc",
+                  "ath-boc-state",
+                  "ath-beijing"
+                ]
               },
               {
                 "answer": "六类风险需要提前判断：执业范围越界、现场急救与转诊延误、健康与医疗信息泄露、感染控制与场地安全、评估与治疗记录失控，以及复出许可与授权缺失。控制方式是按执业范围与规程执行、及时转诊、完整留痕、遇异常上报并由有权限人员处理。",
@@ -31420,16 +31441,28 @@
                 "question_key": "career.faq.athletic-trainers.7"
               },
               {
-                "answer": "O*NET 展示的 BLS 数据按本职业口径给出 2024 年在岗约 33,900 人、2024—2034 年增长远快于平均（7% 或更高）、平均每年约 2,400 个空缺，多来自增长与替换需求。可转向的方向包括教练与球探、物理治疗师、健身训练师、运动生理学家、物理治疗师助理、娱乐治疗师、整脊医师与作业治疗师，但各方向的学历、资质与执业范围不同。",
+                "answer": "美国 29-9091 的就业由 2025 年 35,200 人预计升至 2035 年 39,600 人，增长 12.7%（职业手册取整为 13%），净增 4,400，年均约 2,400 空缺含替补。大陆方向另按雇主条件核。",
                 "id": "athletic-trainers.faq.8",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.athletic-trainers.8"
+                "question_key": "career.faq.athletic-trainers.8",
+                "source_refs": [
+                  "bls",
+                  "ep",
+                  "ath-fujian",
+                  "ath-sport"
+                ]
               },
               {
-                "answer": "O*NET 展示的 2025 年工资分位是 29-9091.00 本职业口径（中位年薪 62,520 美元，第 10 分位 48,180 美元、第 25 分位 55,130 美元、第 75 分位 74,630 美元、第 90 分位 88,760 美元）；该职业不公布小时工资分位，因此本页不折算时薪，也不外推为中国大陆的收入。",
+                "answer": "美国 2025 年 5 月年薪中位 62,520 美元，O*NET 全国工资表列年薪分位，未列时薪分位。不要倒算为官方时薪；大陆样本不提供可比金额。",
                 "id": "athletic-trainers.faq.9",
                 "question": "美国工资为什么只有一个口径？",
-                "question_key": "career.faq.athletic-trainers.9"
+                "question_key": "career.faq.athletic-trainers.9",
+                "source_refs": [
+                  "bls",
+                  "oews",
+                  "ath-fujian",
+                  "ath-sport"
+                ]
               },
               {
                 "answer": "常见误解包括：认为运动员出身或健身教练证就能做运动训练师（实际需要认证与执照）；认为可以自行处理诊断、用药与复出（实际须按执业范围工作并向医师转诊）；认为这是纯体能训练岗位（实际包含伤情评估、现场急救与医疗记录）；以及只按中位年薪理解收入（实际收入受执业所在地、机构类型、资历与排班影响）。",
@@ -31470,27 +31503,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮实际读O*NET本职业summary/details/wages/hot_tech/industry/trends及八邻定义；BLS任务环境入行五细行业工资预测；BOC2026相关标准、公众保护资格与CAATE专业项目；复用本窗口同日NBS原文及补读卫生行、工资规定、OEWS方法和2022分类运动防护师条目。ILO介绍/扩展摘要、NIST简介只宽背景，未读全文或本职业映射；custom/认证发现/课程未输出完整报告。"
+              "美国工资与预测分别用 BLS 及 O*NET 原表。大陆用福建足球中心、国家体育总局运动医学研究所的雇主样本和北京职称通知；各自的适用范围不同。"
             ]
           },
           "id": "athletic-trainers.sources.source-card.2",
           "source_refs": [
             "onet",
             "bls",
+            "ep",
             "oews",
-            "hr",
-            "health",
-            "trends",
-            "bls-ooh",
-            "nbs",
-            "nbs-wage-law",
-            "oews-method",
-            "boc-standards",
-            "boc-protection",
-            "caate-professional",
-            "cn-classification-2022",
-            "genai-ilo",
-            "genai-nist"
+            "ath-fujian",
+            "ath-sport",
+            "ath-beijing",
+            "ath-boc"
           ],
           "type": "prose"
         },
@@ -31499,7 +31524,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对2026-10-09；2025工资就业与招聘、2025—2035预测，NBS2025资料2026公布；BOC2026标准2025-12发布、2026-02实施；中国分类2022版，工资规定1990发布，不以旧URL2020当年。O*NET受访学历不代当前新项目硕士准入，访问和数据期分开。"
+              "美国工资为 2025 年 5 月估计，就业预测为 2025—2035 年。福建足球中心和国家体育总局运动医学研究所的招聘公告分别发布于 2026 年 3 月和 9 月，北京职称文件发布于 2026 年 7 月。"
             ]
           },
           "id": "athletic-trainers.sources.source-card.3",
@@ -31546,7 +31571,7 @@
                 "entity": "大五人格测试",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
@@ -31558,13 +31583,13 @@
                 "entity": "九型人格测试",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "查看运动训练师职业页面",
@@ -31619,11 +31644,11 @@
                 "id": "bls",
                 "limitation": "任务清单描述群体工作，不代表每个岗位都承担全部任务。",
                 "market": "美国",
-                "name": "O*NET 29-9091.00 详细资料（任务与工作活动）",
-                "period": "2026 年更新页面；访问 2026-10-09",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 职业手册：运动训练师",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/29-9091.00"
+                "url": "https://www.bls.gov/ooh/healthcare/athletic-trainers.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31635,11 +31660,11 @@
                 "id": "ep",
                 "limitation": "本职业单列口径的就业与预测；不能外推更宽职业群。",
                 "market": "美国",
-                "name": "O*NET 29-9091.00 职业摘要（就业与预测字段）",
-                "period": "2025就业及2025—2035预测，访问2026-10-09",
-                "publisher": "O*NET OnLine",
+                "name": "BLS 表 1.2：运动训练师就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/29-9091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31649,7 +31674,7 @@
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "oews",
-                "limitation": "本轮表仅年薪、未给时薪；不冒称全官方均无数据或n/a，不算个人收入。",
+                "limitation": "该表列全国年薪，不能估算个人时薪、起薪或实发收入。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年工资分位（29-9091.00）",
                 "period": "May 2025（OEWS）；访问 2026-10-09",
@@ -31777,7 +31802,7 @@
                 ],
                 "evidence_type": "credential discovery",
                 "id": "ilo",
-                "limitation": "认证不等同于执照或机构授权。 本轮未输出完整发现、课程或custom，不冒称新核全文。",
+                "limitation": "认证不等同于执照或机构授权。",
                 "market": "美国",
                 "name": "O*NET 29-9091.00 认证发现",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -31788,18 +31813,18 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "editorial record",
-                  "访问 2026-10-09"
+                  "场馆与联络记录均为虚构。",
+                  "场馆与联络记录均为虚构。"
                 ],
-                "evidence_type": "editorial record",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "编辑用途记录；实际链接为O*NET摘要，不证明另有编辑组公开原文。",
+                "limitation": "仅用于职业体验，不作应急医疗指导。",
                 "market": "美国",
-                "name": "费马测试职业内容编辑组核对记录",
-                "period": "访问 2026-10-09",
-                "publisher": "费马测试职业内容编辑组",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/29-9091.00"
+                "name": "费马测试编辑部：AT-10 虚构场馆交接",
+                "period": "虚构纸面练习",
+                "publisher": "费马测试编辑部",
+                "scope": "editorial_synthesis",
+                "url": "/zh/career/jobs/athletic-trainers#career-content-path"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -31809,7 +31834,7 @@
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "不构成认证、执照或执业授权。 本轮未输出完整发现、课程或custom，不冒称新核全文。",
+                "limitation": "不构成认证、执照或执业授权。",
                 "market": "美国",
                 "name": "O*NET 29-9091.00 培训与教育信息",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -31825,7 +31850,7 @@
                 ],
                 "evidence_type": "occupation profile",
                 "id": "arxiv",
-                "limitation": "官方档案仅提供职业身份与职责描述。 本轮未输出完整发现、课程或custom，不冒称新核全文。",
+                "limitation": "官方档案仅提供职业身份与职责描述。",
                 "market": "美国",
                 "name": "O*NET 29-9091.00 自定义职业档案",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -31889,7 +31914,7 @@
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "r2-pay-1",
-                "limitation": "本轮表仅年薪、未给时薪；不冒称全官方均无数据或n/a，不算个人收入。",
+                "limitation": "该表列全国年薪，不能估算个人时薪、起薪或实发收入。",
                 "market": "美国",
                 "name": "O*NET 29-9091.00 全国工资分位（年度分位）",
                 "period": "May 2025（OEWS）；访问 2026-10-09",
@@ -31996,8 +32021,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮官方介绍及扩展摘要实际读",
-                  "未读完整论文或本职业映射"
+                  "官方介绍与摘要，仅供背景参考",
+                  "不能据此判断本职业影响"
                 ],
                 "evidence_type": "国际组织研究介绍与扩展摘要",
                 "id": "genai-ilo",
@@ -32012,8 +32037,8 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮124—125简介摘要实际读",
-                  "未读完整PDF"
+                  "第 124–125 页简介与摘要，仅供背景参考",
+                  "仅作背景资料"
                 ],
                 "evidence_type": "官方自愿风险参考简介与摘要",
                 "id": "genai-nist",
@@ -32028,12 +32053,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
+                  "此来源只用于其说明的任务、统计、培训或规则。",
                   "不冒称完整职业或个案验证"
                 ],
                 "evidence_type": "官方原文相关章节",
                 "id": "nbs-wage-law",
-                "limitation": "实际读3/4/5/7/11条，体育津贴及规定奖金区别，不等具体报酬个案",
+                "limitation": "第 3、4、5、7、11 条说明工资总额、相关津贴和奖金的统计区别，不能据此推断个人收入。",
                 "market": "中国大陆",
                 "name": "国家统计局工资总额组成规定当前原文",
                 "period": "1990发布；当前页面",
@@ -32044,7 +32069,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
+                  "此来源只用于其说明的任务、统计、培训或规则。",
                   "不冒称完整职业或个案验证"
                 ],
                 "evidence_type": "官方原文相关章节",
@@ -32058,30 +32083,29 @@
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "PDF第162页（零基161）实际读2-09-07-04",
-                  "损伤疾病预防、评估、急救、治疗、康复及宣传教育"
+                  "印刷页 155：2-09-07-04 运动防护师；职责包括运动损伤和疾病的防护、评估、急救、治疗、康复和健康教育。"
                 ],
                 "evidence_type": "官方职业分类文件相关条目",
                 "id": "cn-classification-2022",
                 "limitation": "不是中美逐项许可映射、精确工资或全国注册制度。",
                 "market": "中国大陆",
                 "name": "2022版职业分类大典运动防护师条目",
-                "period": "2022年版；访问2026-10-09",
-                "publisher": "政府公开原文，锡林郭勒盟站点",
+                "period": "2022 年版",
+                "publisher": "广元市人力资源和社会保障局公开原文",
                 "scope": "contextual",
-                "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
+                  "此来源只用于其说明的任务、统计、培训或规则。",
                   "访问与数据期分开"
                 ],
                 "evidence_type": "官方原文相关部分",
                 "id": "bls-ooh",
-                "limitation": "任务环境教育、五细行业工资与预测实际读，非个人保证",
+                "limitation": "涵盖任务、环境、教育、五个行业工资样本与就业预测；不预测个人工资或录用。",
                 "market": "美国",
                 "name": "BLS运动训练师OOH",
                 "period": "2025工资就业、2025—2035预测",
@@ -32092,7 +32116,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
+                  "此来源只用于其说明的任务、统计、培训或规则。",
                   "访问与数据期分开"
                 ],
                 "evidence_type": "官方原文相关部分",
@@ -32106,14 +32130,13 @@
                 "url": "https://www.onetonline.org/link/localtrends/29-9091.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "本轮实际读相关部分",
-                  "访问与数据期分开"
+                  "第 1 项规定按训练、州规则并在医师指导下或与医师合作提供服务；第 4、7 项涉及检查评估与记录。"
                 ],
                 "evidence_type": "官方原文相关部分",
                 "id": "boc-standards",
-                "limitation": "读相关实践和责任条款，不代全部州法或中国许可",
+                "limitation": "BOC 专业规范适用于认证人员；州许可与执业范围仍按目标州法规。",
                 "market": "美国",
                 "name": "BOC2026专业实践标准",
                 "period": "2025-12发布、2026-02实施",
@@ -32124,12 +32147,12 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
+                  "此来源只用于其说明的任务、统计、培训或规则。",
                   "访问与数据期分开"
                 ],
                 "evidence_type": "官方原文相关部分",
                 "id": "boc-protection",
-                "limitation": "实际认证资格与标准入口，不代州许可或个人资格审查",
+                "limitation": "BOC 专业规范适用于认证人员；州许可与执业范围仍按目标州法规。",
                 "market": "美国",
                 "name": "BOC公众保护与认证资格说明",
                 "period": "当前网页",
@@ -32140,7 +32163,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮实际读相关部分",
+                  "此来源只用于其说明的任务、统计、培训或规则。",
                   "访问与数据期分开"
                 ],
                 "evidence_type": "官方原文相关部分",
@@ -32283,20 +32306,85 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "评估与急救｜O*NET列初评、紧急照护及转诊判断，实际流程和可处置范围按本人资质与制度核，不由本页排除危险信号或批准操作。 — 25/100; weight=1/3; athletic-trainers.profile.responsibilities-block.1[0]",
-                  "康复与复出｜O*NET有医师协作、恢复进度报告及必要时参赛许可任务；具体权限按州法与职责核，不能一律降为只提建议或推出任意处方权限。 — 25/100; weight=1/3; athletic-trainers.profile.responsibilities-block.1[3]",
-                  "记录与报告｜O*NET列行政记录，BOC要求依法记录及保护患者信息；具体格式和留存制度另核，记录不保证完整追溯。 — 75/100; weight=1/3; athletic-trainers.profile.responsibilities-block.1[4]"
+                  "用虚构记录核对时间、地点与遗漏。",
+                  "用虚构记录核对时间、地点与遗漏。",
+                  "用虚构记录核对时间、地点与遗漏。",
+                  "用虚构记录核对时间、地点与遗漏。",
+                  "用虚构记录核对时间、地点与遗漏。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "limitation": "不估算岗位替代。",
+                "name": "费马测试：文书工具使用边界",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "福建省足球运动管理中心 2026 年公告列运动训练防护师 1 人，工作地福州长乐，长期随队驻训、外训外赛。要求相关专业本科及学士以上，运动防护或康复治疗初级及以上专业技术任职资格。原页未列具体工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ath-fujian",
+                "name": "福建足球运动管理中心：运动训练防护师",
+                "period": "2026-03-20",
+                "publisher": "福建省体育局",
+                "scope": "recruitment_proxy",
+                "url": "https://tyj.fj.gov.cn/zwgk/rsxx/zpxx/202603/t20260320_7113883.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "国家体育总局运动医学研究所 2026 年 9 月公告列临聘康复治疗师 1 人，承担运动康复和随队保障。要求运动医学或康复治疗学相关专业硕士及以上及康复治疗师资格证，国家队经历优先。报名截止 9 月 18 日，未列金额。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ath-sport",
+                "name": "运动医学研究所：运动康复治疗师",
+                "period": "2026-09-07",
+                "publisher": "国家体育总局运动医学研究所",
+                "scope": "recruitment_proxy",
+                "url": "https://www.sport.gov.cn/yys/n27506619/c29915621/content.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "北京市 2026 年运动防护师职称评审面向体育运动队、体育运动学校中专职做运动损伤与疾病预防、评估、急救、治疗或康复的相关专业人员。属于地方职称评价，按通知核适用身份和申报级别。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ath-beijing",
+                "name": "北京：运动防护师职称评审",
+                "period": "2026-07-08",
+                "publisher": "北京市体育局",
+                "scope": "exact",
+                "url": "https://tyj.beijing.gov.cn/bjsports/zfxxgk_/2024zcwj/qtwj45/744062344/index.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "CAATE 项目是典型路径；BOC 还列特定国际安排。认证本身不是州许可。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ath-boc",
+                "name": "BOC：认证考试与申请",
+                "period": "现行说明",
+                "publisher": "Board of Certification",
+                "scope": "exact",
+                "url": "https://bocatc.org/candidates/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BOC 统计美国 49 州及华盛顿特区实施监管；申请前向目标监管部门确认当地授权形式、执业范围与续期条件。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ath-boc-state",
+                "name": "BOC：州监管入口",
+                "period": "现行说明",
+                "publisher": "Board of Certification",
+                "scope": "exact",
+                "url": "https://bocatc.org/state-regulation/"
               }
             ]
           },
@@ -33050,7 +33138,7 @@
             }
           }
         ],
-        "heading": "AI 会取代运动训练师吗？",
+        "heading": "工具能整理哪些应急记录？",
         "method_cards": [
           {
             "含义": {
@@ -36982,7 +37070,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合运动训练师",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37059,7 +37147,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -37069,7 +37157,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "MBTI 人格测试"
           },
           {
             "href": {
@@ -37079,7 +37167,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格测试"
           },
           {
             "href": {
@@ -37089,7 +37177,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "智力与推理测试"
           }
         ]
       },
@@ -37104,7 +37192,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
-      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
+      "interface.quick_decision.experiment_heading": "怎样试做一次场馆交接？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37197,7 +37285,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 能辅助哪些记录工作？",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37287,87 +37375,90 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "33,900人",
+        "derivation": "BLS 表 1.2 报 35.2 千。",
+        "display_value": "35,200 人",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "2024 年在岗人数（29-9091.00 本职业口径）",
+        "measure": "就业存量",
         "occupation_scope": "运动训练师",
-        "period": "2024 年；访问 2026-09-15",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "远快于平均（7% 或更高）",
+        "derivation": "BLS 表 1.2 报 12.7%；职业手册取整为 13%。",
+        "display_value": "12.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "2024—2034 年就业增长标签",
+        "measure": "预计就业增长",
         "occupation_scope": "运动训练师",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 2,400个/年",
+        "derivation": "BLS 表 1.2 报 2.4 千。",
+        "display_value": "约 2,400 个/年",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "2024—2034 年平均年度岗位空缺",
+        "measure": "年均空缺（含替补）",
         "occupation_scope": "运动训练师",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "71,810 美元/年",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "运动训练师",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年工资中位数",
+        "occupation_scope": "美国 29-9091 运动训练师：艺术、娱乐与休闲",
+        "period": "2025年5月",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "64,340 美元/年",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "运动训练师",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年工资中位数",
+        "occupation_scope": "美国 29-9091 运动训练师：教育服务",
+        "period": "2025年5月",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "62,690 美元/年",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "运动训练师",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年工资中位数",
+        "occupation_scope": "美国 29-9091 运动训练师：医院",
+        "period": "2025年5月",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "61,820 美元/年",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "运动训练师",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业年工资中位数",
+        "occupation_scope": "美国 29-9091 运动训练师：医师诊所",
+        "period": "2025年5月",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
@@ -37491,66 +37582,57 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "33,900人",
+        "derivation": "BLS 表 1.2 报 35.2 千。",
+        "display_value": "35,200 人",
         "fact_id": "us-employment-parent",
         "market": "美国",
-        "measure": "2024 年在岗人数（本职业口径）",
+        "measure": "就业存量",
         "occupation_scope": "运动训练师",
-        "period": "2024 年",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "远快于平均（7% 或更高）",
+        "derivation": "BLS 表 1.2 报 12.7%；职业手册取整为 13%。",
+        "display_value": "12.7%",
         "fact_id": "us-growth-parent",
         "market": "美国",
-        "measure": "2024—2034 年就业增长标签",
+        "measure": "预计就业增长",
         "occupation_scope": "运动训练师",
-        "period": "2024—2034 年",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep",
+          "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 2,400个/年",
+        "derivation": "BLS 表 1.2 报 2.4 千。",
+        "display_value": "约 2,400 个/年",
         "fact_id": "us-openings-parent",
         "market": "美国",
-        "measure": "2024—2034 年平均年度岗位空缺",
+        "measure": "年均空缺（含替补）",
         "occupation_scope": "运动训练师",
-        "period": "2024—2034 年",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "运动训练师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "ep",
+          "bls"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与运动防护任务"
     },
     "badges": [
       "O*NET 29-9091.00 · Job Zone Five · 认证与州执照",
       "执业范围与转诊义务 / 医疗记录与隐私 / 现场急救责任",
-      "中国大陆无精确职业统计 · 缺口可见标记"
+      "大陆防护与随队康复岗位样本"
     ],
     "metrics": [
       {
@@ -37563,19 +37645,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国就业增长（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国 2025 年就业存量"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均岗位空缺（2024—2034）"
+        "label": "美国年均岗位空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -37589,17 +37671,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "运动训练师做什么、需要哪些学历与资格、美国与中国的收入和前景如何，以及 AI 会改变哪些任务；保留来源范围与数据缺口。"
+      "text": "运动训练师（运动防护方向）做什么？看大陆随队岗位与职称样本、美国 BOC 和州执照、职业工资，再用虚构场馆资料试做应急交接。"
     },
     "title": {
       "availability": "available",
       "text": "运动训练师"
     }
   },
-  "source_content_sha256": "9016d74d51ed912b71a40c196cafa8d3edaf927ba946a5f2aa5661e66269307b",
+  "source_content_sha256": "b0dfd1657eb3054382c85ca965b6cfc2b713d2ffdc688b8c707cae64191df5c7",
   "subject": {
     "canonical_slug": "athletic-trainers",
     "name": "运动训练师",
-    "summary": "运动训练师在医疗监管下评估并处理肌肉骨骼损伤或疾病，提供预防、治疗、急救与康复照护。美国侧对应 O*NET 29-9091.00（Athletic Trainers，Bright Outlook），属 Job Zone Five（SVP 8.0+），通常经认证的学位项目与临床实习并通过全国认证考试，多数州需取得执照；中国大陆统计按行业门类汇总，未单列该职业，且不覆盖绩效、值班与随队补贴。"
+    "summary": "这里的运动训练师指美国 Athletic Trainer，关注运动损伤预防、评估、急救协作与康复支持。大陆更接近运动防护师或随队运动康复岗位，和健身教练的日常、资格与责任不同。"
   }
 }

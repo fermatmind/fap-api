@@ -1430,6 +1430,9 @@
       "item:control-and-valve-installers-and-repairers-except-mechanical-door.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:control-and-valve-installers-and-repairers-except-mechanical-door.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:control-and-valve-installers-and-repairers-except-mechanical-door.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -29745,6 +29748,21 @@
           "id": "control-and-valve-installers-and-repairers-except-mechanical-door.path.recruitment-sample.1",
           "title": "Notes on using recruitment samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Order V6 requires a valve ID and a retest time. A has the right valve but no time. B records a time for another valve. State the missing proof. Site-authorized staff perform actual adjustments and tests."
+            ]
+          },
+          "id": "control-and-valve-installers-and-repairers-except-mechanical-door.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check a valve retest sheet",
+          "type": "notice"
         }
       ]
     },
@@ -36038,6 +36056,13 @@
         "id": "control-and-valve-installers-and-repairers-except-mechanical-door.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "control-and-valve-installers-and-repairers-except-mechanical-door.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -36451,7 +36476,7 @@
       "text": "Control and Valve Installers and Repairers, Except Mechanical Door"
     }
   },
-  "source_content_sha256": "d9ba8b638bd15e9bea670cc819144bf0aac8062d2f9a3f5702b63f71270c2f00",
+  "source_content_sha256": "6377e897ec497b05ef4fdeef867af72342766413edf696fe276a65216990d6ab",
   "subject": {
     "canonical_slug": "control-and-valve-installers-and-repairers-except-mechanical-door",
     "name": "Control and Valve Installers and Repairers, Except Mechanical Door",

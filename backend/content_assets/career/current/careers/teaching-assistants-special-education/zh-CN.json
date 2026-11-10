@@ -23685,18 +23685,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先保观察机会与原标签，再按给定规则去重分类，核独立完成、提示后完成与未完成。记录比例不能推出儿童诊断、学习原因、真实干预效果或本人照护合格。"
+              "纸面体验｜把一份虚构课堂记录分成可观察行为和解释两列，圈出一条需要回问教师的问题。 "
             ]
           },
           "id": "teaching-assistants-special-education.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-ooh",
-            "cn-rule",
-            "employer",
-            "sag",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -25284,19 +25278,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "特殊教育教学助理在学前及中小学帮助有学习、情绪或身体障碍的学生学习学业、社会与生活技能，提供材料辅具和活动支持，保客观观察并向教师反馈。教育方案服务的设计实施由教师负主责；特定方案执行须在特教教师、心理或言语病理专业人员监督下，不等助理独立诊断或设计治疗。本页冻结25-9043.00，排普通和高校助理；BLS工资预测仅25-9045非高校合并参考，不能拆出特殊助理精确数据。中国实际教学资格、专项训练、入职查询、保护与资料用途分别核，特殊教师津贴不自动适用所有助理。全虚构纸面观察分类只核规则原值与未知，不证明真实干预效果，也不授读者接触学生、身体照护或带班权限。"
+              "特殊教育助教在教师或团队安排下提供个人或小组学习支持，协助课堂参与并记录可观察的表现。教学与支持计划由负责人员确认。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "teaching-assistants-special-education.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-ooh",
-            "cn-rule",
-            "employer",
-            "sag",
-            "nist",
-            "editorial"
+            "transfer-onet-25-9042.00"
           ],
           "type": "prose"
         }
@@ -26130,20 +26117,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先分全虚构草稿与真实学生支持，保原观察方法规则、未知与更正。正确分类不证明学生能力改善，计划评价专业监督与本职保护依真实学校分工。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：把一份虚构课堂记录分成可观察行为和解释两列，圈出一条需要回问教师的问题。"
             ]
           },
           "id": "teaching-assistants-special-education.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls",
-            "bls-ooh",
-            "sag",
-            "nbs",
-            "cn-rule",
-            "employer",
-            "nist",
-            "editorial"
+            "transfer-onet-25-9042.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -36108,6 +36088,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-25-9042.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 25-9042.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/25-9042.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -41579,10 +41586,10 @@
       "text": "教学助理（特殊教育）"
     }
   },
-  "source_content_sha256": "a776e40e316e0dcf12009c29f7cfabc97a009bd39c7fb7ed8660429d30b60954",
+  "source_content_sha256": "a8de1884249a7cb4f27c60eca6592f7b3c3b89c9f93b74a9f279c62103fd54bd",
   "subject": {
     "canonical_slug": "teaching-assistants-special-education",
     "name": "教学助理（特殊教育）",
-    "summary": "特殊教育教学助理在学前及中小学帮助有学习、情绪或身体障碍的学生学习学业、社会与生活技能，提供材料辅具和活动支持，保客观观察并向教师反馈。教育方案服务的设计实施由教师负主责；特定方案执行须在特教教师、心理或言语病理专业人员监督下，不等助理独立诊断或设计治疗。本页冻结25-9043.00，排普通和高校助理；BLS工资预测仅25-9045非高校合并参考，不能拆出特殊助理精确数据。中国实际教学资格、专项训练、入职查询、保护与资料用途分别核，特殊教师津贴不自动适用所有助理。全虚构纸面观察分类只核规则原值与未知，不证明真实干预效果，也不授读者接触学生、身体照护或带班权限。"
+    "summary": "特殊教育助教在教师或团队安排下提供个人或小组学习支持，协助课堂参与并记录可观察的表现。教学与支持计划由负责人员确认。"
   }
 }

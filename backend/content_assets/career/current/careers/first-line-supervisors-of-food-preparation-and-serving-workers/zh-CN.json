@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-sup-beijing": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-sup-huangpu": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -11581,8 +11587,28 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.04.explanation.sources.02.href": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.16",
+          "parts": [
+            [
+              "；",
+              1,
+              2
+            ],
+            [
+              "｜",
+              1,
+              2
+            ]
+          ],
+          "path": [
+            "data",
+            "paragraphs",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.04.explanation.sources.02.label": {
         "ref": {
@@ -20027,60 +20053,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "id": "first-line-supervisors-of-food-preparation-and-serving-workers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-2"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "id": "first-line-supervisors-of-food-preparation-and-serving-workers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-3"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -20103,7 +20089,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -20131,7 +20117,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23122,12 +23108,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "精确35-1012当前2025就业1,236,400人，2025—2035增长5%至6%、年均空缺171,500；2025工资中位21.19美元/时、44,080美元/年。旧共享2024—2034规模1,215,000与空缺183,900按原期阅读。 教育摘要高中70%、低于高中27%、中等后证书2% ECR，Job Zone1—2、SVP<6；摘要教育主要项不是完整分布或中国统一门槛。"
+              "BLS 35-1012 在 2025 年基期为 1,236,400 人，2035 年预计 1,303,500 人（+5.4%），预计年均空缺 171,500 个，含替补需求。 2025 年美国职业工资中位数为 21.19 美元/小时、44,080 美元/年。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-projections-2025-35",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -23180,12 +23167,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "精确35-1012当前2025就业1,236,400人，2025—2035增长5%至6%、年均空缺171,500；2025工资中位21.19美元/时、44,080美元/年。旧共享2024—2034规模1,215,000与空缺183,900按原期阅读。 教育摘要高中70%、低于高中27%、中等后证书2% ECR，Job Zone1—2、SVP<6；摘要教育主要项不是完整分布或中国统一门槛。"
+              "BLS 35-1012 在 2025 年基期为 1,236,400 人，2035 年预计 1,303,500 人（+5.4%），预计年均空缺 171,500 个，含替补需求。 2025 年美国职业工资中位数为 21.19 美元/小时、44,080 美元/年。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -24189,7 +24177,7 @@
                 "url": "https://www.onetonline.org/link/details/35-1012.00"
               },
               {
-                "entity": "BLS 就业预测（2024—2034，经 O*NET 呈现）",
+                "entity": "BLS 2025–2035 就业预测",
                 "id": "link-10",
                 "relation": "career.evidence",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24857,12 +24845,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "精确35-1012当前2025就业1,236,400人，2025—2035增长5%至6%、年均空缺171,500；2025工资中位21.19美元/时、44,080美元/年。旧共享2024—2034规模1,215,000与空缺183,900按原期阅读。预测不是AI因果结果或个人录用概率。"
+              "就业预测未单列 AI 采用造成的就业变化，也不预测个人录用。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -25113,12 +25101,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "精确35-1012当前2025就业1,236,400人，2025—2035增长5%至6%、年均空缺171,500；2025工资中位21.19美元/时、44,080美元/年。旧共享2024—2034规模1,215,000与空缺183,900按原期阅读。预测不等于实际结果，不证明AI因果。"
+              "就业预测未单列 AI 采用造成的就业变化，也不预测个人录用。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "internal-rubric",
             "bls-projections-2025-35"
           ],
           "type": "prose"
@@ -25185,12 +25172,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（2024—2034）；ILO 工作论文 96"
+              "BLS 2025–2035 职业就业预测；ILO 工作论文 96。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "ilo-wp96"
           ],
           "type": "prose"
         },
@@ -26512,7 +26500,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未能取得可核验的中国大陆餐厅与酒店餐饮与团餐现场管理岗的月薪统计；此类岗位收入常含绩效或营业额奖金与小费分配，兼职与钟点岗按小时计酬，招聘公告报价多为单一雇主样本，不能代表职业工资。"
+              "未取得中国大陆一线餐饮主管的全国可比月薪统计。对照报价时分别问固定工资、绩效、小费分配和工时；本页招聘只反映各单位当时的条件。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.china-salary.career-snapshot-primary-locale.52",
@@ -26526,12 +26514,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他地区与用工模式"
+              "大陆招聘样本（按实际职责比较）"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "sup-beijing",
+            "sup-huangpu"
           ],
           "type": "prose"
         },
@@ -26540,12 +26529,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未能取得可核验的其他地区与用工模式（学校与机构食堂、宴会与配送餐饮、连锁品牌区域督导岗）的收入统计；地区、业态与用工形式之间差异很大，需要按具体岗位逐一核对。"
+              "北京一条值班组长公告列基础 22.50 元/小时，另列补贴，广告综合 25–27 元/小时及税前 4,500–5,500 元/月；黄埔前厅主管／经理公告列 5,500 元/月，主要管开餐督导、排班培训与客诉。问清当班能调整哪些工位、退款或异常向谁升级，并分别核对底薪、津贴与工时。两条报价不能代表全国。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "sup-beijing",
+            "sup-huangpu"
           ],
           "type": "prose"
         },
@@ -26582,12 +26572,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "较快（5% 至 6%，2024—2034，BLS 投影，经 O*NET 呈现）"
+              "美国 35-1012 就业预计增长 5.4%（2025–2035）"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26618,7 +26609,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET OnLine 食品制备与餐饮服务人员一线主管（35-1012.00）职业档案｜https://www.onetonline.org/link/summary/35-1012.00；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；BLS 职业投影与特征表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "O*NET OnLine 食品制备与餐饮服务人员一线主管（35-1012.00）职业档案｜https://www.onetonline.org/link/summary/35-1012.00；BLS 职业就业与工资统计（OEWS）｜https://www.onetonline.org/link/localwages/35-1012.00；BLS 职业投影与特征表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.8",
@@ -26633,12 +26624,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "29,940 美元/年以下"
+              "29,940 美元/年"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26647,12 +26638,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "薪资 · 10 分位｜29,940 美元/年以下；精确职业 35-1012 口径（经 O*NET 呈现）｜不是入职起薪。"
+              "第 10 百分位 · 29,940 美元/年 · 2025 年 5 月 OEWS；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/35-1012.00"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26661,12 +26652,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "35,980 美元/年以下"
+              "35,980 美元/年"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26675,12 +26666,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "薪资 · 25 分位｜35,980 美元/年以下；精确职业 35-1012 口径（经 O*NET 呈现）｜不是入职起薪。"
+              "第 25 百分位 · 35,980 美元/年 · 2025 年 5 月 OEWS；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/35-1012.00"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26694,7 +26685,7 @@
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26703,12 +26694,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "薪资 · 中位数｜44,080 美元/年；中位时薪 21.19 美元（May 2025 OEWS，精确职业 35-1012 口径）｜一半从业者低于、一半高于该值。"
+              "第 50 百分位 · 44,080 美元/年 · 2025 年 5 月 OEWS · 中位时薪 21.19 美元；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/35-1012.00"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26717,12 +26708,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "54,570 美元/年以下"
+              "54,570 美元/年"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26731,12 +26722,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "旧共享75分位原始扩展表本轮未核；OEWS含定义内小费、佣金、计件与生产奖金，排除加班溢价和非生产奖金等，不能一概排除全部津贴。"
+              "第 75 百分位 · 54,570 美元/年 · 2025 年 5 月 OEWS；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/35-1012.00"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26745,12 +26736,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "65,570 美元/年以上"
+              "65,570 美元/年"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26759,12 +26750,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "薪资 · 90 分位｜65,570 美元/年以上；精确职业 35-1012 口径｜不代表本职业总体上限。"
+              "第 90 百分位 · 65,570 美元/年 · 2025 年 5 月 OEWS；O*NET 全国工资表｜https://www.onetonline.org/link/localwages/35-1012.00"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26773,12 +26764,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 1,215,000 人"
+              "1,236,400 人（2025 年）"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26787,7 +26779,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "旧2024规模卡按原期阅读；当前规模见速答。就业预测与OEWS工资覆盖分别核。"
+              "美国就业规模使用 BLS 预测基期。OEWS 工资仅覆盖受雇人员。；当前规模见速答。就业预测与OEWS工资覆盖分别核。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.20",
@@ -26816,12 +26808,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业 · 增长率｜较快（5% 至 6%，2024—2034）；精确职业 35-1012 口径｜不是个人获得岗位的概率。"
+              "美国就业变化 +5.4%（2025–2035）；BLS 表1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26830,12 +26823,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 183,900 个/年"
+              "171,500 个/年"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26844,13 +26838,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业 · 预计岗位空缺｜约 183,900 个/年（2024—2034 预测年均值）；精确职业 35-1012 口径｜多数来自替补需求，不等于净新增岗位。"
+              "预计年均 171,500 个空缺，含替补需求（2025–2035）；BLS 表1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
+            "bls-projections-2025-35",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26859,12 +26853,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计与就业预测分别核期和覆盖；当前2025—2035与旧共享预测卡分开阅读。行业细分和完整教育分布本轮未取得，不推官方未发布。"
+              "工资取自 2025 年 5 月 OEWS 全国工资表。就业基期、增幅和年均空缺取自 BLS 2025–2035 年就业预测表 1.2。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "internal-rubric",
+            "bls-oews-2025",
             "bls-projections-2025-35"
           ],
           "type": "prose"
@@ -26874,13 +26868,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "精确35-1012当前2025就业1,236,400人，2025—2035增长5%至6%、年均空缺171,500；2025工资中位21.19美元/时、44,080美元/年。旧共享2024—2034规模1,215,000与空缺183,900按原期阅读。 教育摘要高中70%、低于高中27%、中等后证书2%；工资分位扩展表与行业细分本轮未取得，不断言官方未发布。"
+              "BLS 35-1012 在 2025 年基期为 1,236,400 人，2035 年预计 1,303,500 人（+5.4%），预计年均空缺 171,500 个，含替补需求。 2025 年美国职业工资中位数为 21.19 美元/小时、44,080 美元/年。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
             "bls-projections-2025-35",
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26889,12 +26883,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS为受雇全职与兼职工资，含定义内小费、佣金和生产奖金等，不是固定工资-only；具体津贴项目另核，排除自雇、加班溢价和非生产奖金。"
+              "OEWS 统计受雇人员正常工时的税前工资，包括符合定义的小费、佣金和生产奖金，排除加班溢价、班次差额和非生产奖金。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "internal-rubric"
+            "supervisor-oews-methods"
           ],
           "type": "prose"
         },
@@ -26974,12 +26968,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "较快（5% 至 6%，2024—2034，BLS 投影，经 O*NET 呈现）"
+              "BLS 35-1012 在 2025 年基期为 1,236,400 人，2035 年预计 1,303,500 人（+5.4%），预计年均空缺 171,500 个，含替补需求。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27185,12 +27179,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资为May2025 OEWS经O*NET呈现；当前就业预测为2025—2035，旧共享2024—2034卡按原期阅读，工资不是就业规模调查。"
+              "工资来自 May 2025 OEWS；就业另按 BLS 2025–2035 预测统计。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27214,12 +27209,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 21.19 美元；中位年薪 44,080 美元（2025，BLS OEWS，经 O*NET 呈现）"
+              "中位时薪 21.19 美元，中位年薪 44,080 美元（2025 年 5 月 OEWS）。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27228,13 +27223,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "低端：第 10 百分位为 29,940 美元/年以下，属分布低端，不是入职起薪。"
+              "第 10 百分位为 29,940 美元/年。该值用于理解工资分布。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "bls-projections-2025-35",
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27243,12 +27237,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位：44,080 美元/年（中位时薪 21.19 美元，2025）；一半受雇从业者低于、一半高于该值。"
+              "第 50 百分位为 44,080 美元/年，对应年薪中位数。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27290,31 +27284,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试（英文）",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试（英文）",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "主厨与厨师长方向",
@@ -30679,13 +30673,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确35-1012当前2025就业1,236,400人，2025—2035增长5%至6%、年均空缺171,500；2025工资中位21.19美元/时、44,080美元/年。旧共享2024—2034规模1,215,000与空缺183,900按原期阅读。中国行业均值只作背景，不能替代精确职业工资。"
+              "BLS 35-1012 在 2025 年基期为 1,236,400 人，2035 年预计 1,303,500 人（+5.4%），预计年均空缺 171,500 个，含替补需求。 2025 年美国职业工资中位数为 21.19 美元/小时、44,080 美元/年。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.market-signals.market-signal-card.8",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "bls-projections-2025-35",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -31422,13 +31416,12 @@
                 ]
               },
               {
-                "answer": "美国 O*NET-SOC 35-1012.00「First-Line Supervisors of Food Preparation and Serving Workers」：兴趣代码 ECR，属 Job Zone 1-2（极少至一定准备，SVP 低于 6.0），被标记为 Bright Outlook（2024—2034 年预计较快增长）。口径提示：工资、就业与增长为该精确职业口径（2025 年中位时薪 21.19 美元、中位年薪 44,080 美元；第 10、第 25、第 75、第 90 百分位分别约 29,940、35,980、54,570、65,570 美元/年；2024 年就业约 1,215,000 人；2024—2034 年预计较快增长（5% 至 6%）；年均岗位空缺约 183,900 个）。学历调查已公布主要项（高中文凭或同等学历 70%、低于高中文凭 27%、中等后教育证书 2%），其余项未公布，本页不代填。",
+                "answer": "美国 O*NET-SOC 35-1012.00 是直接监督、协调食品制备与服务人员的职业。工资与就业用美国本职业口径。",
                 "id": "first-line-supervisors-of-food-preparation-and-serving-workers.faq.3",
-                "question": "美国统计口径与档案完整度是什么（重要）？",
+                "question": "美国 35-1012 的统计口径是什么？",
                 "question_key": "career.faq.first-line-supervisors-of-food-preparation-and-serving-workers.q3",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "onet-summary"
                 ]
               },
               {
@@ -31452,34 +31445,34 @@
                 ]
               },
               {
-                "answer": "该精确职业 2025 年中位时薪 21.19 美元、中位年薪 44,080 美元；第 10、第 25、第 75 与第 90 百分位分别约 29,940、35,980、54,570 与 65,570 美元/年（May 2025 OEWS，经 O*NET 呈现）。中位数是受雇者工资分布的中点，不是起薪；OEWS 为受雇口径，不含小费与绩效奖金与地区与业态差异，且本职业分行业工资在本职业页未见可按行业读取的表。个人收入还取决于小费、地区、业态与班次。",
+                "answer": "2025 年美国职业工资中位数为 21.19 美元/小时、44,080 美元/年。 中位数不是起薪。OEWS 包括定义内的小费和奖励性工资，不包括加班等额外工资。",
                 "id": "first-line-supervisors-of-food-preparation-and-serving-workers.faq.6",
                 "question": "美国工资是多少？中位数是入门工资吗？",
                 "question_key": "career.faq.first-line-supervisors-of-food-preparation-and-serving-workers.us-pay",
                 "source_refs": [
                   "bls-oews-2025",
-                  "internal-rubric"
+                  "supervisor-oews-methods"
                 ]
               },
               {
-                "answer": "O*NET 将本职业列为 Job Zone 1-2（极少至一定准备，SVP 低于 6.0）；O*NET 摘要页列出新雇员所需教育程度：高中文凭或同等学历 70%、低于高中文凭 27%、中等后教育证书 2%，其余项未公布，本页不代填。该职业被标记为 Bright Outlook。中国大陆多以高中及以上学历、相关餐饮服务经验、食品安全培训与食品从业人员健康证明为常见要求；具体以招聘公告与所在地规定为准。",
+                "answer": "BLS 列美国该职业典型入行为高中或同等学历、有少于 5 年相关职业经验。O*NET 调查的是受访者认为新雇员需要的学历：70% 选高中或同等，27% 选低于高中，2% 选高等教育非学位证书。大陆岗位看具体招聘，健康证明按实际食品接触职责确认。",
                 "id": "first-line-supervisors-of-food-preparation-and-serving-workers.faq.7",
                 "question": "需要什么学历和资格？",
                 "question_key": "career.faq.first-line-supervisors-of-food-preparation-and-serving-workers.education-path",
                 "source_refs": [
+                  "bls-projections-2025-35",
                   "onet-summary",
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "cn-personal-food-safety"
                 ]
               },
               {
-                "answer": "多数岗位要求相关餐饮服务经验，并可能要求食品安全管理与餐饮服务相关培训或证书、食品从业人员健康证明、餐饮服务与设备安全培训；承担库存与结算与成本职责的岗位还要求库存与成本与账务管理培训。这些要求因地区与业态而异，须按目标单位、主管部门与所在地规定原文核验，本页不提供法律或合规意见，也不把培训证书等同于现场服务与食品安全能力。",
+                "answer": "在中国大陆，食品生产经营企业负责食品安全培训；接触直接入口食品的人员须按《食品安全法》第45条每年体检并取得健康证明。连锁餐饮还须配备食品安全管理人员。店长或值班主管的职位名称不等于已获这项任命，应核正式分工与当地要求。 是否还需岗位培训或证书，核目标雇主和所在地的具体要求。",
                 "id": "first-line-supervisors-of-food-preparation-and-serving-workers.faq.8",
                 "question": "需要什么证书或许可？",
                 "question_key": "career.faq.first-line-supervisors-of-food-preparation-and-serving-workers.credentials",
                 "source_refs": [
-                  "onet-details",
-                  "internal-rubric"
+                  "cn-personal-food-safety",
+                  "cn-chain-order-104"
                 ]
               },
               {
@@ -31493,14 +31486,13 @@
                 ]
               },
               {
-                "answer": "该精确职业 2024 年就业约 1,215,000 人、2024—2034 年预计较快增长（5% 至 6%）、年均岗位空缺约 183,900 个；空缺主要来自替补需求，个人发展更多取决于班次经验、食品安全培训与管理能力。常见转向包括：主厨与厨师长（需补菜品设计与厨房出品管理能力）、餐饮服务经理（需补门店经营与成本与销售管理能力）、食品柜台工人（需补直接制作与柜台服务能力）、餐厅与食堂服务员帮工（需补餐区服务与支持能力）、膳食与营养师（需补营养评估与膳食方案能力）、零售销售工人一线主管（需补零售卖场运营与销售管理能力）、住宿经理（需补住宿与客房与配套服务经营能力）、面包师（需补烘焙与面点制作与管理能力）。转换可行性取决于目标岗位公告与所在地规定。",
+                "answer": "BLS 35-1012 在 2025 年基期为 1,236,400 人，2035 年预计 1,303,500 人（+5.4%），预计年均空缺 171,500 个，含替补需求。 若想统筹整店经营，可比较餐饮服务经理，核对预算、成本或采购责任；若想带后厨出品，可比较厨师长，核对菜单、烹制及质量标准责任。",
                 "id": "first-line-supervisors-of-food-preparation-and-serving-workers.faq.10",
                 "question": "就业前景如何？可以转到哪些方向？",
                 "question_key": "career.faq.first-line-supervisors-of-food-preparation-and-serving-workers.outlook-transition",
                 "source_refs": [
                   "bls-projections-2025-35",
-                  "onet-details",
-                  "internal-rubric"
+                  "onet-summary"
                 ]
               }
             ]
@@ -31533,14 +31525,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页来源与事实登记（O*NET 35-1012.00 职业档案与详细资料、BLS OEWS May 2025 精确职业工资分位、O*NET 呈现的 BLS 2024—2034 投影、国家统计局 2025 年行业门类与岗位类别平均工资、ILO 工作论文 96、NIST AI RMF）"
+              "O*NET 35-1012.00 职业档案、May 2025 OEWS、BLS 2025–2035 就业预测及本页所列其他来源。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.sources.source-card.2",
           "source_refs": [
-            "onet-summary",
             "bls-projections-2025-35",
-            "nbs-wages-2025"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -31563,12 +31554,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "精确35-1012当前2025就业1,236,400人，2025—2035增长5%至6%、年均空缺171,500；2025工资中位21.19美元/时、44,080美元/年。旧共享2024—2034规模1,215,000与空缺183,900按原期阅读。 教育摘要高中70%、低于高中27%、中等后证书2%、ECR、Job Zone1—2已核。OEWS含定义内小费佣金计件生产奖金，NBS含定义内奖金津贴加班；不能一概排除这些项目。分位扩展表、行业明细及完整教育表本轮未取得，不推官方未发布。中国精确分类工资、普遍准入周期、医学因果、AI采用增效及人格职业效度未核。"
+              "BLS 35-1012 在 2025 年基期为 1,236,400 人，2035 年预计 1,303,500 人（+5.4%），预计年均空缺 171,500 个，含替补需求。 2025 年美国职业工资中位数为 21.19 美元/小时、44,080 美元/年。"
             ]
           },
           "id": "first-line-supervisors-of-food-preparation-and-serving-workers.sources.source-card.4",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35",
+            "bls-oews-2025"
           ],
           "type": "prose"
         }
@@ -31590,18 +31582,6 @@
                 "id": "navigation-1",
                 "relation": "related-evidence",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
-              },
-              {
-                "entity": "MBTI（英文）",
-                "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（英文）",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI（中文）",
@@ -31645,8 +31625,9 @@
                   "官方职业范围：直接监督并协调从事食品制作与服务的工作人员。",
                   "兴趣代码 ECR（企业型、常规型、现实型）；准备层级 Job Zone 1-2（极少至一定准备，SVP 低于 6.0）；被标记为 Bright Outlook。",
                   "学历调查主要项：高中文凭或同等学历 70%、低于高中文凭 27%、中等后教育证书 2%（摘要页未列出其余类别）。",
-                  "工资与就业（该精确职业）：2025 年中位时薪 21.19 美元、中位年薪 44,080 美元；2024 年就业 1,215,000 人；2024—2034 年预计较快增长（5% 至 6%）；预计年均岗位空缺约 183,900 个。",
-                  "2024 年主要行业为住宿和餐饮服务。"
+                  "2024 年主要行业为住宿和餐饮服务。",
+                  "2025 年美国职业工资中位数为 21.19 美元/小时、44,080 美元/年。",
+                  "BLS 35-1012 在 2025 年基期为 1,236,400 人，2035 年预计 1,303,500 人（+5.4%），预计年均空缺 171,500 个，含替补需求。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31676,17 +31657,16 @@
                 "url": "https://www.onetonline.org/link/details/35-1012.00"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "该精确职业（经 O*NET 呈现）：2024 年就业 1,215,000 人，2024—2034 年预计较快增长（5% 至 6%），预计年均岗位空缺约 183,900 个；该职业被标记为 Bright Outlook。",
-                  "O*NET 呈现的空缺为预测期年均值，本页据此标注为「/年」，不按十年累计解读；空缺主要来自替补需求。"
+                  "BLS 35-1012 在 2025 年基期为 1,236,400 人，2035 年预计 1,303,500 人（+5.4%），预计年均空缺 171,500 个，含替补需求。"
                 ],
                 "evidence_type": "official employment projections (exact occupation scope)",
                 "id": "bls-projections-2025-35",
                 "limitation": "预测不等于实际结果；年均空缺含替补需求，不能拆成个人获得岗位的概率；统计为受雇口径。",
                 "market": "美国",
-                "name": "BLS：职业投影与特征表（2024—2034 投影，经 O*NET 呈现，精确职业口径）",
-                "period": "2024—2034 projections as presented by O*NET OnLine; accessed 2026-09-20",
+                "name": "BLS 2025–2035 职业预测表1.2",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact occupation 35-1012.00",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31706,7 +31686,7 @@
                 "period": "May 2025 wage data; accessed 2026-09-20",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact occupation 35-1012.00",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/localwages/35-1012.00"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -31721,7 +31701,7 @@
                 ],
                 "evidence_type": "official industry and position proxy",
                 "id": "nbs-wages-2025",
-                "limitation": "行业平均工资与岗位类别平均工资覆盖多个职业，不能当作本职业中位数或起薪，也不含小费、绩效奖金与兼职与钟点收入。",
+                "limitation": "行业与岗位大类平均工资不能作为此单一职业工资中位数或起薪。",
                 "market": "中国大陆",
                 "name": "国家统计局：2025 年城镇单位就业人员平均工资（行业门类与岗位类别口径）",
                 "period": "2025 annual wage; accessed 2026-09-20",
@@ -31793,6 +31773,81 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第1岗1人；基础22.5元/小时，另列值班、商圈、早晚班补贴；广告给综合25–27元/小时、税前4,500–5,500元/月。职责含高峰排班、物料和客诉。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "sup-beijing",
+                "limitation": "仅该招聘；不代表全国工资或当前空缺。",
+                "market": "中国大陆",
+                "name": "北京必胜客西四北大街店：值班组长",
+                "period": "2026-03-25",
+                "publisher": "北京市东城区人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.bjdch.gov.cn/zwgk/zdlygk/wgjyzdly/qyzp/202604/t20260407_4575811.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第三家雇主北京快客利广州分公司的前厅主管／经理3人、5,500元/月，餐期督导、排班培训、客诉及异常处理；和项目经理分列。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "sup-huangpu",
+                "limitation": "仅该招聘；不代表全国工资或当前空缺。",
+                "market": "中国大陆",
+                "name": "黄埔：团餐前厅服务主管／前厅经理",
+                "period": "2026-08-18",
+                "publisher": "广州市黄埔区劳动就业服务管理中心",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzjg/qt/ldjyfwzx/kljy/content/post_10969476.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中位数不是起薪。OEWS 包括定义内的小费和奖励性工资，不包括加班等额外工资。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "supervisor-oews-methods",
+                "limitation": "工资统计定义，不是个人实际收入。",
+                "market": "美国",
+                "name": "OEWS：统计概念及定义",
+                "period": "May 2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第7条要求餐饮连锁企业按规定配备食品安全管理人员；第21条列中央厨房及门店过程管理责任。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "cn-chain-order-104",
+                "limitation": "适用中国大陆餐饮服务连锁经营企业；岗位名称本身不代表已被正式配备为食品安全管理人员。",
+                "market": "中国大陆",
+                "name": "餐饮服务连锁企业落实食品安全主体责任监督管理规定",
+                "period": "2025-12-01",
+                "publisher": "国家市场监督管理总局",
+                "scope": "exact",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_09105249f5984a2fb507e88cd346f20d.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "企业应培训职工；接触直接入口食品的食品生产经营人员每年体检，取得健康证明后上岗。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "cn-personal-food-safety",
+                "limitation": "适用大陆食品生产经营活动，第45条以实际是否接触直接入口食品判断。",
+                "market": "中国大陆",
+                "name": "中华人民共和国食品安全法第44、45条",
+                "period": "2025-12-01",
+                "publisher": "全国人大常委会；北京市政府转载",
+                "scope": "exact",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202603/t20260325_4565776.html"
               }
             ]
           },
@@ -34647,6 +34702,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-sup-beijing",
+            "posting-sup-huangpu"
+          ],
           "sources_note": {
             "$item": "first-line-supervisors-of-food-preparation-and-serving-workers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34656,7 +34715,7 @@
           "ui": {
             "ai_heading": "AI 会影响食品制备与餐饮服务人员一线主管的收入吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "行业代理与岗位类别口径（非本职业统计）",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "食品制备与餐饮服务人员一线主管在不同学历与训练背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -34799,7 +34858,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "2024—2034 就业 · 年均空缺",
+            "指标": "2025–2035 年预计年均职位空缺",
             "数值": {
               "$item": "first-line-supervisors-of-food-preparation-and-serving-workers.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -36481,7 +36540,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "开始核对食品制备与餐饮服务人员一线主管是否适合你",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36555,30 +36614,10 @@
               "$link": "first-line-supervisors-of-food-preparation-and-serving-workers.navigation.links.1",
               "block": "navigation",
               "copy_key": "career.item.navigation-links",
-              "entry": "navigation-2",
-              "field": "url"
-            },
-            "label": "MBTI（英文）"
-          },
-          {
-            "href": {
-              "$link": "first-line-supervisors-of-food-preparation-and-serving-workers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-3",
-              "field": "url"
-            },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "first-line-supervisors-of-food-preparation-and-serving-workers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "了解我的人格偏好"
           },
           {
             "href": {
@@ -36588,7 +36627,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "了解我的大五特质"
           }
         ]
       },
@@ -36787,36 +36826,36 @@
       },
       {
         "derivation": null,
-        "display_value": "约 1,215,000 人（2024，经 O*NET 呈现；该数值为本精确职业口径）",
+        "display_value": "1,236,400 人（2025 年）",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业规模",
-        "occupation_scope": "食品制备与餐饮服务人员一线主管（O*NET-SOC 35-1012.00）",
-        "period": "2024",
+        "measure": "基期就业",
+        "occupation_scope": "U.S. SOC 35-1012",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "较快（5% 至 6%，2024—2034，BLS 投影，经 O*NET 呈现）",
+        "display_value": "+5.4%（2025–2035 年）",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长率",
-        "occupation_scope": "食品制备与餐饮服务人员一线主管（O*NET-SOC 35-1012.00）",
-        "period": "2024–2034 projection",
+        "measure": "就业变化率",
+        "occupation_scope": "U.S. SOC 35-1012",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 183,900 个/年（2024—2034，BLS 投影年均值，经 O*NET 呈现；多数来自替补需求）",
+        "display_value": "171,500 个/年（含替补需求）",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺",
-        "occupation_scope": "食品制备与餐饮服务人员一线主管（O*NET-SOC 35-1012.00）",
-        "period": "2024–2034 projection",
+        "measure": "年均空缺",
+        "occupation_scope": "U.S. SOC 35-1012",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -36976,6 +37015,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第1岗1人；基础22.5元/小时，另列值班、商圈、早晚班补贴；广告给综合25–27元/小时、税前4,500–5,500元/月。职责含高峰排班、物料和客诉。",
+        "fact_id": "posting-sup-beijing",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "北京必胜客西四北大街店：值班组长",
+        "period": "2026-03-25",
+        "source_refs": [
+          "sup-beijing"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第三家雇主北京快客利广州分公司的前厅主管／经理3人、5,500元/月，餐期督导、排班培训、客诉及异常处理；和项目经理分列。",
+        "fact_id": "posting-sup-huangpu",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "黄埔：团餐前厅服务主管／前厅经理",
+        "period": "2026-08-18",
+        "source_refs": [
+          "sup-huangpu"
+        ]
       }
     ]
   },
@@ -37002,19 +37065,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业变化（2024—2034，精确职业）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国就业规模（2024，精确职业）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均岗位空缺（2024—2034，精确职业）"
+        "label": "美国预计年均职位空缺（2025–2035 年）"
       },
       {
         "availability": "available",
@@ -37028,14 +37091,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "食品制备与餐饮服务人员一线主管做什么、如何入行、工作边界与发展方向。基于 O*NET 与 BLS 官方职业资料（O*NET-SOC 35-1012.00）；美国工资与就业为该精确职业口径，中国大陆未单列本职业，页面按缺口与口径逐项标注。"
+      "text": "餐饮一线主管怎样带班、排工位和处理客诉？比较北京值班组长和黄埔前厅主管，了解美国同类职业工资和就业。"
     },
     "title": {
       "availability": "available",
       "text": "食品制备与餐饮服务人员一线主管"
     }
   },
-  "source_content_sha256": "2020b11e3740f342c5ed9a5b30353b28309df6208f88851b04de2591ddd91326",
+  "source_content_sha256": "5fb54f2487f02bab605f75e0cbfc98c684f9c89ecd1dcb3dee8db517f81696bf",
   "subject": {
     "canonical_slug": "first-line-supervisors-of-food-preparation-and-serving-workers",
     "name": "食品制备与餐饮服务人员一线主管",

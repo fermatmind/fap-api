@@ -23667,14 +23667,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "工具和模具制造工适合愿意读图、计算、加工和核对装配结果的人。可观察信号是记录基准与公差，发现异常时说明依据，而不是凭手感宣布合格；同时须接受现场安全训练和岗位分工。"
+              "纸面体验｜对照虚构模具图与检测记录，标出一处检测依据为旧图版的尺寸，交给检验负责人核对。 "
             ]
           },
           "id": "tool-and-die-makers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24814,13 +24812,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "工具和模具制造工分析技术规格，计算尺寸与公差，安排材料和工序，设置与操作机床，并修配、装配相关零件，制作和维修模具、切削工具、夹具、量规及机械加工手工具。交付同时关注尺寸、配合、表面与功能，而非只完成一道加工工序。"
+              "工具与模具制造工解读图纸和公差，规划零件加工与配合，并用量具核查成品尺寸、对准或间隙。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "tool-and-die-makers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh"
+            "transfer-onet-51-4111.00"
           ],
           "type": "prose"
         }
@@ -25485,17 +25482,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职业可复核任务评分、全国AI采用率与净就业因果结果。厂商加工建议不证明自动完成模具制造修复试验；BLS2025—2035总体下降9.2%、十年净减约5200人与年均4300空缺含替补分指标，不代表AI独立减员或个人失业概率。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+0+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构模具图与检测记录，标出一处检测依据为旧图版的尺寸，交给检验负责人核对。"
             ]
           },
           "id": "tool-and-die-makers.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "ratify",
-            "bls",
-            "nist",
-            "editorial"
+            "transfer-onet-51-4111.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33141,6 +33134,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-4111.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-4111.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-4111.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38662,10 +38682,10 @@
       "text": "工具和模具制造工"
     }
   },
-  "source_content_sha256": "01eba75c6d441d92f29f94e6c4a4e8426095843eaa27d7c499df69f3a572ad4f",
+  "source_content_sha256": "dc7a964198265566bb79b0d482ba95aba33569eb67387eec736318747a64352a",
   "subject": {
     "canonical_slug": "tool-and-die-makers",
     "name": "工具和模具制造工",
-    "summary": "工具和模具制造工依据图纸和技术要求，计算尺寸与公差、安排加工工序，制作和修复模具、刀具、夹具与量规。工作既包含机床加工，也包含装配、测量和试验；交付标准是工具能否按要求工作，而非只把零件加工出来。"
+    "summary": "工具与模具制造工解读图纸和公差，规划零件加工与配合，并用量具核查成品尺寸、对准或间隙。"
   }
 }

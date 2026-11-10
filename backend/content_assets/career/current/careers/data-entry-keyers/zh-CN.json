@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-entry-huainan": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-entry-sonid": {
+        "status": "pending_mapping"
+      },
       "fact:r5-current-cn-business": {
         "status": "pending_mapping"
       },
@@ -19498,56 +19504,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19555,7 +19525,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19568,7 +19538,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19581,7 +19551,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19594,7 +19564,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -26030,7 +26000,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑核对场景：直接受雇、外包/派遣或自雇分别核实际合同与工资/项目费；本轮无中国招聘/合同样本，不能称全国以全职月薪为主。"
+              "编辑核对场景：直接受雇、外包/派遣或自雇分别核实际合同与工资/项目费；本页有两条历史招聘，实际合同和全国用工分布仍未核实。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
@@ -26114,12 +26084,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆数据录入岗位招聘或报价统计；个别平台或单位的报价不能代表全国水平"
+              "淮南一则信息录入员招聘列 2,200 元/月、要求高中及以上，未写系统和详细职责。苏尼特左旗的档案整理兼职包括扫描、著录、录入和质检；试用和转正底薪都是 2,600 元/月，转正后另列计件绩效和全勤奖。问清是录入、复核还是档案全流程，核对报价包含项；两条不是全国工资。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "entry-huainan",
+            "entry-sonid"
           ],
           "type": "prose"
         },
@@ -28589,13 +28560,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮未取得中国本职业在招样本/合同；历史或编辑示例不计需求。下列岗位与可观察能力为编辑建议，不称雇主通常统一采用。",
+              "用两则历史招聘比较工作分工、数据访问和复核要求；是否仍招聘需查当前公告。",
               "中国含可识别个人信息的录入：PIPL13核合法处理依据，非一律只靠同意；6最小必要/8质量，51合理操作权限与定期安全培训。账号授权不代处理法律依据；外包21须核委托范围和监督/转委托条件、59受托安全协助，员工按实际分工报告疑点，不自行扩大用途。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "r5-cn-pipl"
+            "entry-huainan",
+            "entry-sonid"
           ],
           "type": "notice"
         },
@@ -28922,7 +28894,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑入行路线：识别字段源值/录入核对→业务规则与疑点转交→批次复核能力；不是全国统一晋级顺序或比证书必然有效。目标岗位训练、任命及数据权限分别核，本轮无中国真实雇主招聘样本。"
+              "按岗位核字段、核对规则和疑点转交；按实际合同核雇佣与权限。两条历史招聘不代表行业的现行用工分布。"
             ]
           },
           "id": "actors.path.career-path-block.1",
@@ -30387,7 +30359,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需求分层：官方总量预测、真实单位/合同安排与当期在招样本；本轮无中国招聘样本和AI/外包因果，不能相互替代。"
+              "美国预测、两条大陆历史招聘和目标岗位合同分别阅读。本轮不判断当前空缺，也无法从这些数据分辨 AI 或外包的因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30945,21 +30917,23 @@
           "data": {
             "entries": [
               {
-                "answer": "操作数据录入设备（如键盘或照相排版穿孔机），职责可包括核对数据并准备打印材料：对需要录入的数据进行汇总、排序并核对准确性；选择完成工作所需的材料；阅读已注销支票、销售报表或账单等源文件，并用键盘或扫描仪把数据录入指定字段，或录入磁带、磁盘等介质；把数据与源文件比对，或按校验格式重新录入以发现错误；定位并更正录入错误或向上级报告；把完成的文件存放到适当位置；维护工作活动与已完成工作的日志；为设备装载纸张、卡片、磁盘、磁带或盲文介质等输入或输出介质；并用密码程序与设备解析乱码或无法辨认的信息。",
+                "answer": "按指定字段录入原始表单或单据，核对录入值与来源，纠正可确认的差错并记录或上报异常。各单位使用的材料、系统和复核方式不同。",
                 "id": "actors.faq.1",
                 "question": "数据录入员每天的具体工作是什么？",
                 "question_key": "career.faq.data-entry-keyers.1",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current"
                 ]
               },
               {
-                "answer": "本职业的核心是把源文件中的信息按指定字段准确录入并对结果负责；账单过账文员负责账务与凭证处理；普通办公室文员承担综合办公与行政事务；文字处理员与打字员负责文档排版与成稿；档案文员负责资料分类、保管与调取；邮件文员与邮件机操作员负责邮件与文件的收寄与机器处理；薪资与考勤文员负责薪酬与考勤数据的核算。名称相近不代表职责、考核方式或资格可以互换。",
+                "answer": "数据录入员主要交接结构化记录及核对结果；信函处理员主要交接针对询问的书面答复和往来记录。档案数字化招聘也可能把录入和扫描、著录、质检合在一起。",
                 "id": "actors.faq.2",
-                "question": "这个职业与相邻的文员、档案与办公设备方向有什么区别？",
+                "question": "数据录入、函件处理和档案数字化有什么区别？",
                 "question_key": "career.faq.data-entry-keyers.2",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "entry-correspondence",
+                  "entry-sonid"
                 ]
               },
               {
@@ -30972,12 +30946,13 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：数据采集与识别、比对与校验、记录与留痕三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "OCR 或表单校验可辅助识别字段和提示格式异常，复核仍要比对原始资料。这里没有该职业的 AI 实际采用率或效率测量，不能把工具示例读成实测结果。",
                 "id": "actors.faq.4",
-                "question": "这个职业哪些任务已有 AI 变化证据？",
+                "question": "哪些任务可能由软件辅助？",
                 "question_key": "career.faq.data-entry-keyers.4",
                 "source_refs": [
-                  "onet"
+                  "r5-onet-current",
+                  "r5-nist-core"
                 ]
               },
               {
@@ -30990,21 +30965,24 @@
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位年薪 41,340 美元（中位时薪 19.88 美元），年薪分位为 31,200／35,760／41,340／48,410／58,790 美元，为 O*NET-SOC 43-9021.00 本细类自身口径；分位是统计位置，不能当作个人报价或个人到手收入；中国大陆未取得职业级数值，本页按缺口处理，不使用行业均值或报价样本代填。",
+                "answer": "美国 2025 年工资中位数为 19.88 美元/小时、41,340 美元/年。 淮南一则信息录入员招聘列 2,200 元/月、要求高中及以上，未写系统和详细职责。苏尼特左旗的档案整理兼职包括扫描、著录、录入和质检；试用和转正底薪都是 2,600 元/月，转正后另列计件绩效和全勤奖。问清是录入、复核还是档案全流程，核对报价包含项；两条不是全国工资。",
                 "id": "actors.faq.6",
                 "question": "这个职业的工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.data-entry-keyers.6",
                 "source_refs": [
-                  "oews"
+                  "r5-wages-current",
+                  "entry-huainan",
+                  "entry-sonid"
                 ]
               },
               {
-                "answer": "美国准备层级为 Job Zone 1-2（SVP 低于 6.0），官方教育调查显示新入职者的教育要求以「部分岗位要求高中文凭或同等学历、部分岗位要求部分大学经历、部分岗位要求副学士或其他两年制学位」呈现，官方页面未公布对应百分比；中国大陆多要求表格与办公软件熟练，部分岗位要求相关专业背景或业务经验，具体按目标单位规定。",
+                "answer": "BLS 列美国该职业典型入行为高中或同等学历、短期在岗培训。用虚构单据练习字段核对、修改记录和异常上报；入职前确认岗位的实际系统和数据访问授权。",
                 "id": "actors.faq.7",
                 "question": "这个职业需要什么学历，又该怎样训练？",
                 "question_key": "career.faq.data-entry-keyers.7",
                 "source_refs": [
-                  "onet"
+                  "r5-bls-current",
+                  "r5-onet-current"
                 ]
               },
               {
@@ -31026,12 +31004,14 @@
                 ]
               },
               {
-                "answer": "O*NET 摘要与就业趋势页（基于 BLS 2024—2034 年预测，43-9021.00 本细类口径）显示该口径 2024 年约 141,600 人、2034 年约 104,900 人，预测标签为下降（-26%，标签「Decline」），年均约 9,500 个含更替的空缺；该预测为职业总量口径，工作以按字段录入与核对为主，须按本地行业结构、外包与自动化程度核对，并优先核对岗位职责范围、系统与数据权限、以及计酬与用工形式。",
+                "answer": "美国 BLS 预计 43-9021 就业由 2025 年约 131,800 人降至 2035 年约 98,200 人，下降 25.5%，年均约 7,700 个空缺。总就业下降仍可有替补空缺；该表没有单列 AI 贡献。 比较相邻岗位时，问清负责的是数据录入、案卷整理、异常复核还是书面答复。",
                 "id": "actors.faq.10",
                 "question": "现在选择这个职业，还应考虑什么？",
                 "question_key": "career.faq.data-entry-keyers.10",
                 "source_refs": [
-                  "bls"
+                  "r5-bls-current",
+                  "r5-onet-current",
+                  "entry-correspondence"
                 ]
               }
             ]
@@ -31272,21 +31252,19 @@
                 "url": "https://www.onetonline.org/link/summary/43-4071.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "支持该职业的就业与预测口径（本细类）。",
-                  "不含中国大陆信息，不能替代中国大陆数据。",
-                  "本轮核查：旧2024—2034消费者保留；本轮授权模块用2025—2035自身−25.5%，非43-9020合并。"
+                  "美国 BLS 预计 43-9021 就业由 2025 年约 131,800 人降至 2035 年约 98,200 人，下降 25.5%，年均约 7,700 个空缺。总就业下降仍可有替补空缺；该表没有单列 AI 贡献。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
                 "limitation": "旧2024—2034消费者保留；本轮授权模块用2025—2035自身−25.5%，非43-9020合并。",
                 "market": "美国",
-                "name": "O*NET OnLine：Data Entry Keyers 43-9021.00 摘要与就业趋势（基于 BLS 2024—2034 年预测）",
-                "period": "2024—2034 年预测期；检索 2026-09-19",
+                "name": "BLS 43-9021 就业预测（2025–2035）",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-9021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31661,16 +31639,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/43-9021.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "自身43-9021：131.8→98.2千、−33.6千/−25.5%，年均7.7千空缺，自雇1.6%。非43-9020合并−27.6%。典型高中/无相关经验/短期在岗训练，不是统一法律或无需训练；预测非AI/外包原因份额。"
+                  "美国 BLS 预计 43-9021 就业由 2025 年约 131,800 人降至 2035 年约 98,200 人，下降 25.5%，年均约 7,700 个空缺。总就业下降仍可有替补空缺；该表没有单列 AI 贡献。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r5-bls-current",
                 "limitation": "自身43-9021：131.8→98.2千、−33.6千/−25.5%，年均7.7千空缺，自雇1.6%。非43-9020合并−27.6%。典型高中/无相关经验/短期在岗训练，不是统一法律或无需训练；预测非AI/外包原因份额。",
                 "market": "美国",
                 "name": "BLS表1.2：2025—2035数据录入员预测",
-                "period": "2025基期；2025—2035预测；检索2026-10-09",
+                "period": "2025–2035",
                 "publisher": "Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31796,6 +31774,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "展位003信息录入员1名，高中及以上，2,200元/月；未列细分职责和系统。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "entry-huainan",
+                "limitation": "历史样本，非全国工资或当前空缺。",
+                "market": "中国大陆",
+                "name": "淮南振华职业培训学校：信息录入员",
+                "period": "2025-11",
+                "publisher": "淮南市人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.huainan.gov.cn/rsrc/zpxx/551848848.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "公告列档案整理兼职4名，含扫描、目录著录、录入、质检及保密。试用及转正基本工资2,600元/月，转正另有计件和全勤。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "entry-sonid",
+                "limitation": "历史样本，非全国工资或当前空缺。",
+                "market": "中国大陆",
+                "name": "锡盟硕得信息：档案整理",
+                "period": "2026-03",
+                "publisher": "苏尼特左旗就业服务中心",
+                "scope": "recruitment_proxy",
+                "url": "https://www.sntzq.gov.cn/eportal/ui?articleKey=303012146b9c44b3bda5d0fe4ad363ef&columnId=46bb97808ed145f9b184a805c76fd8c2&pageId=9ad216e54bb34e19af670978c74511cf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "按查询结果准备答复并记录来往函件。"
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "entry-correspondence",
+                "limitation": "相邻职业任务参照。",
+                "market": "美国",
+                "name": "信函处理员",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/43-4021.00"
               }
             ]
           },
@@ -34789,7 +34812,7 @@
               }
             },
             {
-              "城市/区间": "中国大陆（行业门类口径）",
+              "城市/区间": "大陆信息录入与档案招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34801,13 +34824,14 @@
           "china_soc_row": "美国代码O*NET-SOC43-9021.00；本轮未取得可直接比较的中国职业级工资口径。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-entry-huainan",
+            "posting-entry-sonid"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响这个职业的工资吗？",
             "driver_heading": "数据录入工作怎样按业务批次与截止时点安排？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "学历与业务背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "不同学历与业务背景对应哪些数据录入岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36742,7 +36766,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解数据录入员的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36854,14 +36878,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解我的人格偏好"
@@ -37274,38 +37290,38 @@
       },
       {
         "derivation": null,
-        "display_value": "约141,600人（2024 年）",
+        "display_value": "131,800 人（2025 年）",
         "fact_id": "employment",
         "market": "美国",
-        "measure": "就业规模（存量统计）",
-        "occupation_scope": "Data Entry Keyers（43-9021.00）本细类口径；2024 年就业人数来自 O*NET 摘要与就业趋势页（基于 BLS 2024—2034 年预测）",
-        "period": "2024 年基期；检索 2026-09-19",
+        "measure": "美国基期就业（2025 年）",
+        "occupation_scope": "U.S. SOC 43-9021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "下降 -26%（2024—2034 年，标签「Decline」）",
+        "display_value": "下降 25.5%（2025–2035 年）",
         "fact_id": "growth",
         "market": "美国",
-        "measure": "预测就业变化（职业总量）",
-        "occupation_scope": "43-9021.00 本细类口径；预测为下降（-26%），属于预测期总量变化，不是个人录用概率；就业规模由 2024 年约 141,600 人变为 2034 年约 104,900 人",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "measure": "美国就业预测（2025–2035 年）",
+        "occupation_scope": "U.S. SOC 43-9021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约9,500个（2024—2034 年年均，含增长与替换）",
+        "display_value": "年均 7,700 个（含替补需求）",
         "fact_id": "openings",
         "market": "美国",
-        "measure": "年均职位空缺（含增长与替换）",
-        "occupation_scope": "43-9021.00 本细类口径；空缺为 2024—2034 年年均，含因增长与替换产生的位置；总量下降期仍会有更替性空缺，不是每年净增岗位数",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "measure": "美国预计年均职位空缺",
+        "occupation_scope": "U.S. SOC 43-9021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "r5-bls-current"
         ]
       },
       {
@@ -37490,6 +37506,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "展位003信息录入员1名，高中及以上，2,200元/月；未列细分职责和系统。",
+        "fact_id": "posting-entry-huainan",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "淮南振华职业培训学校：信息录入员",
+        "period": "2025-11",
+        "source_refs": [
+          "entry-huainan"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "公告列档案整理兼职4名，含扫描、目录著录、录入、质检及保密。试用及转正基本工资2,600元/月，转正另有计件和全勤。",
+        "fact_id": "posting-entry-sonid",
+        "market": "中国大陆",
+        "measure": "公开招聘样本",
+        "occupation_scope": "锡盟硕得信息：档案整理",
+        "period": "2026-03",
+        "source_refs": [
+          "entry-sonid"
+        ]
       }
     ]
   },
@@ -37516,19 +37556,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，下降 -26%，标签「Decline」）"
+        "label": "美国就业预测（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 141,600 人）"
+        "label": "美国基期就业（2025 年）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，约 9,500 个，含增长与替换）"
+        "label": "美国预计年均职位空缺"
       },
       {
         "availability": "missing",
@@ -37542,14 +37582,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "数据录入员（O*NET-SOC 43-9021.00）操作数据录入设备，把源文件中的数据录入指定字段，并核对准确性、发现与更正错误、维护记录与日志：覆盖录入前汇总排序与核对、与源文件比对或按校验格式重录、阅读已注销支票与销售报表或账单等源文件、将数据录入指定字段或磁盘磁带等介质、定位并更正错误或向上级报告、存放完成文件、维护工作日志、装载输入输出介质，以及用密码程序解析乱码信息等任务；需说明其美国就业与工资口径：该职业 2024 年约 141,600 人在岗、2024—2034 年预测为下降（-26%，标签「Decline」）、年均约 9,500 个含更替的空缺；2025 年工资数据中位年薪 41,340 美元（中位时薪 19.88 美元），年薪分位为 31,200／35,760／41,340／48,410／58,790 美元；行业为 行政与支持服务 17%／专业、科学与技术服务 17%／医疗与社会援助 11%／其他行业（含金融保险与教育服务）55%；兴趣代码 CR、准备层级 Job Zone 1-2；以及中国大陆该类岗位的职业级工资缺口与数据核对、质量检查、权限与留痕、异常升级的控制点。"
+      "text": "数据录入员如何从原始资料填字段、复核和交接异常？对照大陆招聘、档案数字化岗位及美国就业预测。"
     },
     "title": {
       "availability": "available",
       "text": "数据录入员"
     }
   },
-  "source_content_sha256": "53cd43f82c18008f32925f0cb1b12ebba9c7e78a4ca3ee2a65999d4451e87a15",
+  "source_content_sha256": "f4f3cdd5f90628d52931be5fc580f3ca8ab75481e218ca816ebecc72190221e8",
   "subject": {
     "canonical_slug": "data-entry-keyers",
     "name": "数据录入员",

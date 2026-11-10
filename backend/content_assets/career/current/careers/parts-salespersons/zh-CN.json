@@ -1310,6 +1310,9 @@
       "item:parts-salespersons.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:parts-salespersons.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:parts-salespersons.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31293,6 +31296,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。旧件铭牌与目录的型号后缀不同，店内只有无后缀的配件。写下应向供应商核的设备号、配件号和差异。"
+            ]
+          },
+          "id": "parts-salespersons.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "核替换件兼容性",
+          "type": "notice"
         }
       ]
     },
@@ -37792,6 +37810,13 @@
         "id": "parts-salespersons.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "parts-salespersons.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38259,7 +38284,7 @@
       "text": "零部件销售员：工作内容、工资与配件适配风险"
     }
   },
-  "source_content_sha256": "228987b0ea16239859cdd71f1064e2a8e22c8db29cbff94f07ca00e92bdbbe8c",
+  "source_content_sha256": "4e8c441f145194a14a2782b3d46fc08af90d8e418cdf62522b14e96bfc6b427d",
   "subject": {
     "canonical_slug": "parts-salespersons",
     "name": "零部件销售员",

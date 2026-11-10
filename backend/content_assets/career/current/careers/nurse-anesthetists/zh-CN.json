@@ -185,6 +185,9 @@
       "item:nurse-anesthetists.path.seven-day-trial.6": {
         "status": "pending_mapping"
       },
+      "item:nurse-anesthetists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nurse-anesthetists.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13370,6 +13373,21 @@
             "onet-details"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。手术单和交接表的手术名称一致，但一处写左侧、一处写右侧。写下冲突及应交接的麻醉团队角色，实际决定由临床团队作出。"
+            ]
+          },
+          "id": "nurse-anesthetists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核麻醉团队交接",
+          "type": "notice"
         }
       ]
     },
@@ -15937,6 +15955,13 @@
         "id": "nurse-anesthetists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nurse-anesthetists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16265,7 +16290,7 @@
       "text": "麻醉护士"
     }
   },
-  "source_content_sha256": "072c5d936c166d529e22dea86d1645bb3f6316b03793e5e3845dfad4dbc350de",
+  "source_content_sha256": "617cb66cd6d42901f0f14419f762651e90fa91f232ebf073f8d100ba0ee093c5",
   "subject": {
     "canonical_slug": "nurse-anesthetists",
     "name": "麻醉护士",

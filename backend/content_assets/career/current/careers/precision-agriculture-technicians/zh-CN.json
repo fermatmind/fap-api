@@ -23371,13 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "偏好农业现场、地图与数据质量者可继续核精准农业岗位；与普通农业技术员和农艺顾问比较。"
+              "纸面体验｜比较虚构采样表和地块图，标出坐标参考缺失的记录，写清在叠加图层前需要核对哪份元数据。 "
             ]
           },
           "id": "precision-agriculture-technicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23672,13 +23671,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "精准农业技术员19-4012.01是O*NET细分职业；BLS 19-4012农业技术员为更宽统计。农业与食品科学技术员、测绘技术员及农业工程师职责不同，工资不能互借。"
+              "精准农业技术员把地块边界、采样点和产量等数据组织成可追溯的地图和记录，供农业团队分析田间差异。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "precision-agriculture-technicians.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "ep"
+            "transfer-onet-19-4012.01"
           ],
           "type": "prose"
         },
@@ -24893,14 +24891,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "图层、产量异常说明和报告草稿可作为生成式辅助设想；本页未核岗位级采用效果。遥感分类算法与生成式文本不同，不能把图像识别性能或农业技术员父组+5.4%预测当作生成式替代率。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+75)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：比较虚构采样表和地块图，标出坐标参考缺失的记录，写清在叠加图层前需要核对哪份元数据。"
             ]
           },
           "id": "precision-agriculture-technicians.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor",
-            "onet",
-            "nist"
+            "transfer-onet-19-4012.01",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33133,6 +33130,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-19-4012.01",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 19-4012.01 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/19-4012.01"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38378,10 +38402,10 @@
       "text": "精准农业技术员"
     }
   },
-  "source_content_sha256": "4709173199af8c8ad138e1f8e383bcacf5df61ca092aa3b0509d185f83a8c2e6",
+  "source_content_sha256": "21fff0ea8a099bacbff0acc81a66cb06b173ff9fb160508619b6a22b08b8547f",
   "subject": {
     "canonical_slug": "precision-agriculture-technicians",
     "name": "精准农业技术员",
-    "summary": "精准农业技术员使用GPS、GIS、产量图、土壤和遥感数据，支持地块监测、变量施用与灌溉决策。O*NET 19-4012.01给出细分任务；美国2025工资和2025–2035就业只能采用更宽的BLS 19-4012农业技术员口径，不能称精准农业专属。真实农机和农药施用依场所、设备与法规授权。"
+    "summary": "精准农业技术员把地块边界、采样点和产量等数据组织成可追溯的地图和记录，供农业团队分析田间差异。"
   }
 }

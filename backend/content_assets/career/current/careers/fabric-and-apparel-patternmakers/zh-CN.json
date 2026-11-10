@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a46-kunshan": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a46-taoyuan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:fabric-and-apparel-patternmakers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:fabric-and-apparel-patternmakers.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "fabric-and-apparel-patternmakers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "fabric-and-apparel-patternmakers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23076,7 +23042,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "FT351全虚构纸面题：款式R351仅两片相同矩形，不是完整成衣版型。单位cm，每尺码需2片；S每片长60宽40，M每片长64宽42，M相对S长加4宽加2。初始可用布幅80；长沿布长、宽沿布幅，不旋转，片间距0、不加缝份、无瑕疵。只比较同尺码两片的单行/分两行排布；材料弹性、真实缝份及试穿结果未知，不推实际可缝制或真实用料。"
+              "用 FT351 的两种尺码和两版布幅做纸面排料，写明比较依据和待核条件。"
             ]
           },
           "id": "fabric-and-apparel-patternmakers.quick-decision.fit-decision-checklist.2",
@@ -26667,12 +26633,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他城市"
+              "昆山与桃源招聘样本"
             ]
           },
           "id": "fabric-and-apparel-patternmakers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a46-kunshan",
+            "a46-taoyuan"
           ],
           "type": "prose"
         },
@@ -26681,12 +26648,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可核验的其他城市本职业月薪统计；不同地区与产品类型的差异较大，需按工作地核对。"
+              "昆山莎美娜制衣列服装制版师 3 人，综合薪资 7,000–9,000 元/月，要求三年以上针织制版经验，独立制版、放码、排版和核料，力克 CAD 熟练者优先。 湖南华颖纺织列版师 1 人，6,000–8,000 元/月，负责开发样制版和制作协调，要求三年以上内衣、内裤或家居服制版经验。版师主管与样衣工另列。 两条是不同产品线的雇主报价。核对针织或内衣家居服经验、打版与样衣分工、计薪构成和当前是否仍在招。"
             ]
           },
           "id": "fabric-and-apparel-patternmakers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a46-kunshan",
+            "a46-taoyuan"
           ],
           "type": "prose"
         },
@@ -27469,13 +27437,13 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
@@ -27886,7 +27854,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET有尺寸计算与可视化任务，目录不是个人智力门槛。FT351可独立核长加4宽加2及布幅，不证明真实放码或版型资格。"
+              "用 FT351 的两种尺码和两版布幅做纸面排料，写明比较依据和待核条件。"
             ]
           },
           "id": "fabric-and-apparel-patternmakers.fit.personality-fit-block.18",
@@ -28320,7 +28288,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "外向不证明版型能力。编辑观察能否清楚说明FT351M宽84超过初始布幅80、接受核对；真实任务仍须训练。"
+              "用 FT351 的两种尺码和两版布幅做纸面排料，写明比较依据和待核条件。"
             ]
           },
           "id": "fabric-and-apparel-patternmakers.fit.personality-fit-block.48",
@@ -28380,7 +28348,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "FT351长增4宽增2；S两片宽80可一行长60，M宽84>80须两行长128；第5天只改布幅84，M一行长64。能复核纸面算数不等真实放码排料资格。"
+              "用 FT351 的两种尺码和两版布幅做纸面排料，写明比较依据和待核条件。"
             ]
           },
           "id": "fabric-and-apparel-patternmakers.fit.personality-fit-block.52",
@@ -29249,7 +29217,7 @@
                 "id": "exercise-materials",
                 "values": [
                   "材料一：FT351纸面放码排料",
-                  "FT351全虚构纸面题：款式R351仅两片相同矩形，不是完整成衣版型。单位cm，每尺码需2片；S每片长60宽40，M每片长64宽42，M相对S长加4宽加2。初始可用布幅80；长沿布长、宽沿布幅，不旋转，片间距0、不加缝份、无瑕疵。只比较同尺码两片的单行/分两行排布；材料弹性、真实缝份及试穿结果未知，不推实际可缝制或真实用料。",
+                  "FT351全虚构纸面题：款式R351仅两片相同矩形，不是完整成衣版型。单位cm，每尺码需2片；S每片长60宽40，M每片长64宽42。初始可用布幅80；长沿布长、宽沿布幅，不旋转，片间距0、不加缝份、无瑕疵。只比较同尺码两片的单行/分两行排布；材料弹性、真实缝份及试穿结果未知，不推实际可缝制或真实用料。",
                   "两个尺码分别交付，不混尺码；两片同尺寸，不旋转或拼接",
                   "纸面布幅为可用宽度，cm；材料弹性、真实缝份、试穿结果均未知",
                   "不是现实品牌产品，不需软件、刀具、实物或外部专家才能完成",
@@ -29262,16 +29230,15 @@
                 "values": [
                   "材料二：任务",
                   "算S→M每片长宽增量；在80cm可用布幅下比较两片并排与分两行所占布长",
-                  "第5天只接受布幅改84cm，复算同两尺码；列三个未知不代补"
+                  "单项变式：只把可用布幅从 80 改为 84 厘米。重算两种尺码，保留未知项。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "材料三：可独立复核答案",
-                  "初始S：40×2=80可并排，纸面占长60cm；M：42×2=84>80，分两行占长64×2=128cm。第5天唯一把可用布幅改为84cm，S仍60cm，M可并排占长64cm；两片尺寸、数量、方向、零间距及三个未知均不变。",
-                  "未发送函草稿：请核材料弹性、真实缝份及试穿结果；责任人未给、无回复，不造发送或确认",
-                  "纸面长60/128/64cm不是真实采购用量，不能从矩形推完整成衣版型"
+                  "先独立完成",
+                  "第六天交原题与变式，并保留未发送函。",
+                  "第七天到「常见问题与资料来源」打开「FT351 放码与排料参考答案（完成第六天后再打开）」。"
                 ]
               },
               {
@@ -29300,7 +29267,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "作品一：输入与来源表",
-                  "列R351、S60×40/M64×42、各2片、初始可用布幅80cm、方向和零间距；当前招聘无代表样本",
+                  "分开列 FT351 题设条件和招聘样本要求。",
                   "保三个未知和作者虚构标注"
                 ]
               },
@@ -29308,7 +29275,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "作品二：两尺码增量排布表",
-                  "长增4宽增2；初始S一行占长60、M两行占长128；标84>80",
+                  "写每片增量，记录两种尺码的排布依据和占长。",
                   "按材料三独立核，不推真实用量"
                 ]
               },
@@ -29316,8 +29283,8 @@
                 "id": "report-summary",
                 "values": [
                   "作品三：未发送待核与更新",
-                  "列材料弹性、真实缝份和试穿结果三待核；姓名未给无回复；第5天布幅84，M一行长64",
-                  "S仍60，两片尺寸数量方向及未知均不变"
+                  "保留原记录，另写变式。",
+                  "附未发送函并注明待核项。"
                 ]
               },
               {
@@ -29396,50 +29363,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天：读输入",
-                  "列两尺码长宽、各2片、80cm布幅及固定方向与三个未知"
+                  "第 1 天",
+                  "抄录单位、尺码、片数和布幅。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天：核放码增量",
-                  "写每片长64−60=4、宽42−40=2cm，不推真实放码规则"
+                  "第 2 天",
+                  "算每片长宽增量。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天：核初始排布",
-                  "S并排宽80占长60；M并排84>80，两行占长128cm"
+                  "第 3 天",
+                  "比较原题布幅下的排布。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4天：写待核函",
-                  "列弹性、真实缝份与试穿结果待核，标未发送姓名未给无回复"
+                  "第 4 天",
+                  "列待核项，写未发送函。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5天：唯一布幅更新",
-                  "只改可用宽80→84cm；S仍60、M一行长64，其他输入及未知不变"
+                  "第 5 天",
+                  "重算变式布幅。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天：独立复核",
-                  "按材料三核四作品，外部反馈可选，无则记无"
+                  "第 6 天",
+                  "独立交原题两行和变式两行，附未发送函。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天：反思",
-                  "记录单位与限制核对、修改及剩余未知，不推真实版型能力或录用"
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「FT351 放码与排料参考答案（完成第六天后再打开）」。 写一处修订。"
                 ]
               }
             ]
@@ -29456,13 +29423,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第1天：原长宽数量布幅与未知是否完整",
-              "第2天：4和2cm增量是否回指两尺码",
-              "第3天：初始60/128cm及84>80是否正确",
-              "第4天：三个待核未发送姓名未给无回复是否真实",
-              "第5天：是否只改布幅84，S60/M64及其他输入未知不变",
-              "第6天：作品复核与工具反馈说明是否真实",
-              "第7天：过程兴趣与纸面能力边界是否分开"
+              "记录单位和尺码。",
+              "写长宽差的依据。",
+              "写原题排布与占长。",
+              "附未发送函。",
+              "写变式排布。",
+              "保留独立交件。",
+              "对照参考记录修订。"
             ]
           },
           "id": "fabric-and-apparel-patternmakers.path.seven-day-decision.1",
@@ -29584,14 +29551,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮未取得代表性当前招聘样本；以下是编辑核查提示。核真实公告日期与状态、产品类别、软件流程、职责和评审条件。",
-              "招聘公告的学历、软件与经验条件须并列读取；某项可放宽不代表其他条件可替代。"
+              "昆山莎美娜制衣列服装制版师 3 人，综合薪资 7,000–9,000 元/月，要求三年以上针织制版经验，独立制版、放码、排版和核料，力克 CAD 熟练者优先。 湖南华颖纺织列版师 1 人，6,000–8,000 元/月，负责开发样制版和制作协调，要求三年以上内衣、内裤或家居服制版经验。版师主管与样衣工另列。 两条是不同产品线的雇主报价。核对针织或内衣家居服经验、打版与样衣分工、计薪构成和当前是否仍在招。"
             ]
           },
           "id": "fabric-and-apparel-patternmakers.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a46-kunshan",
+            "a46-taoyuan"
           ],
           "title": "织物与服装制版工｜path",
           "type": "notice"
@@ -30056,7 +30022,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "FT351纸面60/128cm计算，非实际排料采购依据"
+              "用 FT351 的两种尺码和两版布幅做纸面排料，写明比较依据和待核条件。"
             ]
           },
           "id": "fabric-and-apparel-patternmakers.path.career-path-block.39",
@@ -31642,13 +31608,13 @@
                 ]
               },
               {
-                "answer": "2025中国城镇制造业就业人员税前年平均工资：非私营113,594元/年、私营76,055元/年。纸样与成衣生产任务匹配制造业宽行业背景；覆盖多职业，非本职业中位、起薪、到手工资或城市报价。 证据不足：未取得中国全国城市精确职业工资及当前代表招聘样本。",
+                "answer": "昆山莎美娜制衣列服装制版师 3 人，综合薪资 7,000–9,000 元/月，要求三年以上针织制版经验，独立制版、放码、排版和核料，力克 CAD 熟练者优先。 湖南华颖纺织列版师 1 人，6,000–8,000 元/月，负责开发样制版和制作协调，要求三年以上内衣、内裤或家居服制版经验。版师主管与样衣工另列。 两条是不同产品线的雇主报价。核对针织或内衣家居服经验、打版与样衣分工、计薪构成和当前是否仍在招。 全国职业工资分布仍缺可比数据。",
                 "id": "fabric-and-apparel-patternmakers.faq.3",
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.fabric-and-apparel-patternmakers.q3",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "a46-kunshan",
+                  "a46-taoyuan"
                 ]
               },
               {
@@ -31716,15 +31682,19 @@
                 ]
               },
               {
-                "answer": "BLS精确SOC51-6092：2025就业3,000人，2035预测2,600人；2025—2035下降15.0%、官方净变化-500人，年均职位空缺200个。千人列分别舍入，不用端点重算净变化；空缺含增长和更替，不是十年合计或净新增。 转向按真实任务条件核；FT351两尺码增量与纸面排料、未发送待核和唯一布幅更新不证明实际定版或录用。",
+                "answer": "BLS 表 1.2 的美国 51-6092 行：2025 年约 3,000 人，2035 年预计约 2,600 人，下降 15.0%，年均岗位空缺约 200 个，含替补。人数分别取整。",
                 "id": "fabric-and-apparel-patternmakers.faq.10",
                 "question": "美国就业前景如何？转行需要补什么？",
                 "question_key": "career.faq.fabric-and-apparel-patternmakers.outlook-transition",
                 "source_refs": [
-                  "onet-wages-2025",
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
+              },
+              {
+                "answer": "M 比 S 每片长 4 厘米、宽 2 厘米。布幅 80 厘米时，S 两片并排宽 80 厘米，占长 60 厘米。M 两片并排宽 84 厘米，超过布幅，分两行占长 128 厘米。变式布幅 84 厘米，S 仍占长 60 厘米，M 改为并排占长 64 厘米。未发送函示例：请核对面料伸缩、实际缝份与试样结果，并确认接手人。纸面长度不能用于实际采购。 自核四项：尺码差、原题排布、变式排布、未发送函和适用边界。",
+                "id": "fabric-and-apparel-patternmakers.faq.11",
+                "question": "FT351 放码与排料参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.fabric-and-apparel-patternmakers.11"
               }
             ]
           },
@@ -31813,26 +31783,14 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI（英文）",
+                "entity": "MBTI 人格测评",
                 "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（英文）",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI（中文）",
-                "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five（中文）",
-                "id": "navigation-5",
+                "entity": "大五人格测评",
+                "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
@@ -31864,25 +31822,25 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "绘制构建精确母版纸样或排版图，也可能标记裁剪面料服装。",
-                  "O*NET兴趣RAC，量尺R78 A73 C53 E8 I6 S5，表示工作活动偏好而非个人适合百分比或能力。 Job Zone Three为泛准备分组。",
-                  "旧2024就业2800、2024—34下降-1%或更低、空缺300，与当前BLS周期分开；2024美国制造业57%、企业管理18%、批发15%。"
+                  "O*NET兴趣RAC，量尺R78 A73 C53 E8 I6 S5，表示工作活动偏好而非个人适合百分比或能力。 Job Zone Three为泛准备分组。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
                 "limitation": "美国职业资料不自动推导中国大陆的企业流程或专业标准；也不构成产品合规或法律结论。",
                 "market": "美国",
                 "name": "O*NET OnLine：Fabric and Apparel Patternmakers（51-6092.00）",
-                "period": "当前职业页面；查阅2026-10-03",
+                "period": "2026 职业资料页",
                 "publisher": "O*NET OnLine",
                 "scope": "exact occupation (SOC 51-6092)",
                 "url": "https://www.onetonline.org/link/summary/51-6092.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "16项core任务，母版、规格输入、缝合位置标识、尺寸含伸缩、样衣试合修正及排料。",
                   "美国受访87%每日面对面、72%精确极重要28%很重要；坐姿17%几乎持续38%过半，不能推全员伏案。",
-                  "美国BLS典型入口为高中或同等学历、无需相关职业经验、中期在职训练。O*NET受访教育41%高中同等、26%学士、19%大学经历无学位；显示三类86%并非完整分布。Job Zone Three/SVP6至低于7是泛准备层级，不是该职业专属训练期限或中国门槛。"
+                  "美国BLS典型入口为高中或同等学历、无需相关职业经验、中期在职训练。O*NET受访教育41%高中同等、26%学士、19%大学经历无学位；显示三类86%并非完整分布。Job Zone Three/SVP6至低于7是泛准备层级，不是该职业专属训练期限或中国门槛。",
+                  "2025 美国中位时薪 30.17 美元、中位年薪 62,750 美元，制造业为主要就业行业。就业预测见 BLS 表 1.2。"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
@@ -31897,8 +31855,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "BLS精确SOC51-6092：2025就业3,000人，2035预测2,600人；2025—2035下降15.0%、官方净变化-500人，年均职位空缺200个。千人列分别舍入，不用端点重算净变化；空缺含增长和更替，不是十年合计或净新增。",
-                  "美国BLS典型入口为高中或同等学历、无需相关职业经验、中期在职训练。O*NET受访教育41%高中同等、26%学士、19%大学经历无学位；显示三类86%并非完整分布。Job Zone Three/SVP6至低于7是泛准备层级，不是该职业专属训练期限或中国门槛。"
+                  "BLS 表 1.2 的美国 51-6092 行：2025 年约 3,000 人，2035 年预计约 2,600 人，下降 15.0%，年均岗位空缺约 200 个，含替补。人数分别取整。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
@@ -32139,6 +32096,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "昆山莎美娜制衣列服装制版师 3 人，综合薪资 7,000–9,000 元/月，要求三年以上针织制版经验，独立制版、放码、排版和核料，力克 CAD 熟练者优先。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a46-kunshan",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "服装制版招聘样本",
+                "period": "2026-02-27",
+                "publisher": "昆山市人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.ks.gov.cn/kss/qzkx/202602/fba5eea4445b440e8649f5346f7d7821.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "湖南华颖纺织列版师 1 人，6,000–8,000 元/月，负责开发样制版和制作协调，要求三年以上内衣、内裤或家居服制版经验。版师主管与样衣工另列。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a46-taoyuan",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "服装制版招聘样本",
+                "period": "2026",
+                "publisher": "桃源县人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.taoyuan.gov.cn/zwgk/grassroots/6616340/3755469241.html"
               }
             ]
           },
@@ -34999,6 +34986,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a46-kunshan",
+            "posting-a46-taoyuan"
+          ],
           "sources_note": {
             "$item": "fabric-and-apparel-patternmakers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36032,7 +36023,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034）",
+            "label": "BLS 就业预测（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "fabric-and-apparel-patternmakers.profile.onet-structured-fields-block.4",
@@ -36910,7 +36901,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测评"
           },
           {
             "href": {
@@ -36920,27 +36911,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "fabric-and-apparel-patternmakers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI（中文）"
-          },
-          {
-            "href": {
-              "$link": "fabric-and-apparel-patternmakers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five（中文）"
+            "label": "大五人格测评"
           }
         ]
       },
@@ -37328,6 +37299,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "昆山莎美娜制衣列服装制版师 3 人，综合薪资 7,000–9,000 元/月，要求三年以上针织制版经验，独立制版、放码、排版和核料，力克 CAD 熟练者优先。",
+        "fact_id": "posting-a46-kunshan",
+        "market": "中国大陆",
+        "measure": "招聘报价",
+        "occupation_scope": "服装制版招聘样本",
+        "period": "2026-02-27",
+        "source_refs": [
+          "a46-kunshan"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "湖南华颖纺织列版师 1 人，6,000–8,000 元/月，负责开发样制版和制作协调，要求三年以上内衣、内裤或家居服制版经验。版师主管与样衣工另列。",
+        "fact_id": "posting-a46-taoyuan",
+        "market": "中国大陆",
+        "measure": "招聘报价",
+        "occupation_scope": "服装制版招聘样本",
+        "period": "2026",
+        "source_refs": [
+          "a46-taoyuan"
+        ]
       }
     ]
   },
@@ -37387,7 +37382,7 @@
       "text": "织物与服装制版工"
     }
   },
-  "source_content_sha256": "cd7d660d00823b618577fbf1beb93c8c500138332fe71794f770bd6b3b2fc7e2",
+  "source_content_sha256": "bb833afd498a8de8d4042fc219eb2f925db06d3eadfd5af4721c7239515d5922",
   "subject": {
     "canonical_slug": "fabric-and-apparel-patternmakers",
     "name": "织物与服装制版工",

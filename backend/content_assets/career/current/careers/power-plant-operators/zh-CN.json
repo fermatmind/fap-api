@@ -23371,13 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "偏好设备观察与程序纪律者，可比较厂内运行、电网调度或维修任务；实际岗位要求另核。"
+              "纸面体验｜从两张虚构运行记录里找出点位编号相近而时间不同的条目，把原值和待核项列在交班纸上。 "
             ]
           },
           "id": "power-plant-operators.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23667,13 +23666,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "发电厂操作员控制、操作或维护发电设备，包括辅助设备；监视读数、启停、调节输出和记录需按岗位授权。"
+              "电厂运行人员监看发电设备和仪表状态，按站点流程记录变化并与班组交接。异常读数应能追溯到原始点位和时点。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "power-plant-operators.profile.definition-block.11",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-onet-51-8013.00"
           ],
           "type": "prose"
         },
@@ -24772,14 +24770,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "OOH说明控制室现代化可自动化部分任务；生成式工具整理告警、日志或趋势仅本页待验证设想，无实际效果或采用率。启停、输出调节及设备异常处置须按权限和机构程序。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：从两张虚构运行记录里找出点位编号相近而时间不同的条目，把原值和待核项列在交班纸上。"
             ]
           },
           "id": "power-plant-operators.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "employer",
-            "editor",
-            "onet"
+            "transfer-onet-51-8013.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32680,6 +32677,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-8013.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-8013.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-8013.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37925,10 +37949,10 @@
       "text": "发电厂操作员"
     }
   },
-  "source_content_sha256": "27418abfe3528138dbda672c8af8ebe4a9d7e4539447444702c2a5238950ad0a",
+  "source_content_sha256": "ea77537286c0f958dff348b9c2d1ee6c561adac4c0f71b26e40128ae3dc9b9fb",
   "subject": {
     "canonical_slug": "power-plant-operators",
     "name": "发电厂操作员",
-    "summary": "发电厂操作员按授权运行发电机组及锅炉、汽轮机、发电机和辅机，监控仪表、调节输出并处理异常。O*NET 51-8013.00列机组启停、发电输出、设备监测与运行记录为核心任务；真实设备操作须按电厂规程和岗位授权。"
+    "summary": "电厂运行人员监看发电设备和仪表状态，按站点流程记录变化并与班组交接。异常读数应能追溯到原始点位和时点。"
   }
 }

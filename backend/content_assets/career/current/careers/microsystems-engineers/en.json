@@ -167,6 +167,9 @@
       "item:microsystems-engineers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:microsystems-engineers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:microsystems-engineers.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -13001,6 +13004,21 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two tests use the same device design but different packages. The report omits package revisions. List the missing fields and say whether the results can be compared directly."
+            ]
+          },
+          "id": "microsystems-engineers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "Review MEMS test comparability",
+          "type": "notice"
         }
       ]
     },
@@ -15460,6 +15478,13 @@
         "id": "microsystems-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "microsystems-engineers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15701,7 +15726,7 @@
       "text": "Microsystems Engineers: Duties, U.S. Wages, and Employment"
     }
   },
-  "source_content_sha256": "b86cb353f7f18a7b6e1131767fe7ca1718f72743aa0af85edf0f1c45bc4c53b2",
+  "source_content_sha256": "d09aca94cd1a6247da43e0c92a6e598aec1fb02dca74d140e20d1270f81f7543",
   "subject": {
     "canonical_slug": "microsystems-engineers",
     "name": "Microsystems Engineers",

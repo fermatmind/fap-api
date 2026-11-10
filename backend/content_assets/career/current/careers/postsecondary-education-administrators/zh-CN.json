@@ -23380,13 +23380,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "喜欢长期处理学生、教学和政策协调者可继续看具体岗位；若偏好纯授课或一般行政，比较高等教育教师和通用行政管理职业。"
+              "纸面体验｜在虚构毕业规则摘要和院系通知中找出版本差异，写下适用学年和需要确认版本的部门。 "
             ]
           },
           "id": "postsecondary-education-administrators.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23679,14 +23678,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET 11-9033覆盖高等教育机构教学、行政、学生服务及研究活动的协调：学习成果评估、人员管理、学生选课与毕业指导、预算和政策。补充任务可含专业领域授课；不能概括为管理者绝不教学或不指导学生，具体职责及正式决定权依岗位。"
+              "高等教育行政管理者协调学生服务、课程或部门事务。岗位可能涉及分工、记录和资源安排，具体职责取决于院校及所在部门。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "postsecondary-education-administrators.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "editor"
+            "transfer-onet-11-9033.00"
           ],
           "type": "prose"
         },
@@ -24786,15 +24783,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可能排序候选缺项，但不能凭概率填补申请资料或决定席位。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：在虚构毕业规则摘要和院系通知中找出版本差异，写下适用学年和需要确认版本的部门。"
             ]
           },
           "id": "postsecondary-education-administrators.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-11-9033.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32755,6 +32750,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-11-9033.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 11-9033.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/11-9033.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38050,10 +38072,10 @@
       "text": "高等教育行政管理者"
     }
   },
-  "source_content_sha256": "6dbb2132c00aa4d971857382cb22a8e583ffce52f9a3ca18ff4e0e9f2a2e4ce8",
+  "source_content_sha256": "7a1e9354f8ca55cc2e9ad753e3e890aef46b2001ac0991b235031e4c7037e10c",
   "subject": {
     "canonical_slug": "postsecondary-education-administrators",
     "name": "高等教育行政管理者",
-    "summary": "高等教育行政管理者对应美国O*NET 11-9033，协调大学、学院和社区学院的教学、学生服务、行政和相关研究活动。具体岗位可能侧重招生、注册、学生事务、院系或学术管理；要核学生记录、政策、预算和人员责任。它不是通用办公室经理，学历、授权和中国岗位条件须按机构及法域核实。"
+    "summary": "高等教育行政管理者协调学生服务、课程或部门事务。岗位可能涉及分工、记录和资源安排，具体职责取决于院校及所在部门。"
   }
 }

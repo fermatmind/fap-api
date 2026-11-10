@@ -23377,14 +23377,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Next, verify local pharmacy technician training, registration or certification requirements, and pharmacist supervision arrangements; a fictional exercise does not grant independent release or medication counselling authority."
+              "Paper check | Compare two fictional intake forms without personal information. Identify the blank field, retain the original reference and write what the pharmacist needs to confirm. "
             ]
           },
           "id": "pharmacy-technicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "ep",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23695,15 +23693,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Pharmacy technicians prepare medication under pharmacist direction and handle measuring, counting, labeling, data records, and inventory; the United States occupational profile does not directly grant Chinese dispensing or prescription review qualifications."
+              "Pharmacy technicians enter prescription information, manage inventory and assist with dispensing preparation within their workplace scope. Questions that need clinical judgment go to the pharmacist. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "pharmacy-technicians.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "tech-cn-prescription",
-            "editor"
+            "transfer-onet-29-2052.00"
           ],
           "type": "prose"
         },
@@ -24859,16 +24854,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verified actual generative AI adoption rate, overall substitution rate, or disappearance year for this occupation. Text organization can be a controlled trial suggestion; barcode inventory robots are tool task background and cannot be counted as a GenAI survey. The overall employment projection is also not attributed to AI. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare two fictional intake forms without personal information. Identify the blank field, retain the original reference and write what the pharmacist needs to confirm."
             ]
           },
           "id": "pharmacy-technicians.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ep",
-            "ilo",
-            "nist",
-            "editor"
+            "transfer-onet-29-2052.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33034,6 +33026,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-29-2052.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 29-2052.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/29-2052.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38282,10 +38301,10 @@
       "text": "Pharmacy technicians"
     }
   },
-  "source_content_sha256": "9dbd53d7e96d5d254cf4b2d6cfe9ea1e43594dcbc7dbbbf040039661b935830f",
+  "source_content_sha256": "d4b887c2764ccd0068c9295597d29292a077a5477f9c99ba38e97009a20d6857",
   "subject": {
     "canonical_slug": "pharmacy-technicians",
     "name": "Pharmacy technicians",
-    "summary": "Pharmacy technicians (O*NET 29-2052.00) prepare medication under pharmacist direction, and may measure, mix, count, label, and record drug quantities and doses, receive prescriptions, and maintain patient medication records and drug storage. Prescription appropriateness judgment, final release, and individual medication counselling are the responsibility of an authorized pharmacist under local law and organizational policy."
+    "summary": "Pharmacy technicians enter prescription information, manage inventory and assist with dispensing preparation within their workplace scope. Questions that need clinical judgment go to the pharmacist."
   }
 }

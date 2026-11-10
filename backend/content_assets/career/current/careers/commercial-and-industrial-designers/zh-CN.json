@@ -1478,6 +1478,9 @@
       "item:commercial-and-industrial-designers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:commercial-and-industrial-designers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:commercial-and-industrial-designers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30675,6 +30678,21 @@
           "id": "commercial-and-industrial-designers.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。原型 A 通过握持测试但未核装配，B 能装配但没有用户试用记录。为下一轮评审写一项优先补证，并说明影响哪个设计决策。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "比较原型证据",
+          "type": "notice"
         }
       ]
     },
@@ -37482,6 +37500,13 @@
         "id": "commercial-and-industrial-designers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "commercial-and-industrial-designers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38089,7 +38114,7 @@
       "text": "商业与工业设计师"
     }
   },
-  "source_content_sha256": "95fbef425e7dd7f68a69b7809d37d4b02cf04189267078e2612d98e9ae4e9003",
+  "source_content_sha256": "a77025657f191481dd788ff68d7034ddf7e69ae1a8f7789fe2638abcd7ca687b",
   "subject": {
     "canonical_slug": "commercial-and-industrial-designers",
     "name": "商业与工业设计师",

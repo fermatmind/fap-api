@@ -1418,6 +1418,9 @@
       "item:commercial-divers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:commercial-divers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:commercial-divers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30504,6 +30507,21 @@
           "id": "commercial-divers.path.recruitment-sample.1",
           "title": "Notes on using recruitment samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The job sheet names an underwater inspection location, but photos show only a date. List the location and image IDs to verify with the supervisor. Real diving follows an authorized plan."
+            ]
+          },
+          "id": "commercial-divers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check an inspection record for commercial diving",
+          "type": "notice"
         }
       ]
     },
@@ -37496,6 +37514,13 @@
         "id": "commercial-divers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "commercial-divers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37859,7 +37884,7 @@
       "text": "Commercial Diver"
     }
   },
-  "source_content_sha256": "760a78b9128f4abf507204abb50b96c63e957f0f7791bbfdefd1812f5071c04e",
+  "source_content_sha256": "17d29f9e86d285775dce09b813ac311d6a9c09c84f0f4607e75a40d02e6b3e8c",
   "subject": {
     "canonical_slug": "commercial-divers",
     "name": "Commercial Diver",

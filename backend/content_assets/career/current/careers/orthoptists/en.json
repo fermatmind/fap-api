@@ -167,6 +167,9 @@
       "item:orthoptists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:orthoptists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:orthoptists.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -12358,6 +12361,21 @@
             "source-pack-onet-summary"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two assessments used different fixation targets, but neither record identifies which target was used. List the information needed for review and who should receive it."
+            ]
+          },
+          "id": "orthoptists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Check binocular vision test conditions",
+          "type": "notice"
         }
       ]
     },
@@ -14793,6 +14811,13 @@
         "id": "orthoptists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "orthoptists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15034,7 +15059,7 @@
       "text": "Orthoptist｜duties, training, and salary boundaries"
     }
   },
-  "source_content_sha256": "1027b4c614854031e4b1397869c1ea4b08e5fb98742430687f69914c551cee51",
+  "source_content_sha256": "f6cd243edb58de943fbd8a3bc05c4dd9f5752c81e542711ad9c21f26f21e0969",
   "subject": {
     "canonical_slug": "orthoptists",
     "name": "Orthoptist",

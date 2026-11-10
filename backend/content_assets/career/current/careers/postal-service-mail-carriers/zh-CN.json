@@ -29,6 +29,9 @@
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
+      "fact:hunan-2023-postal-wage": {
+        "status": "pending_mapping"
+      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -23320,7 +23323,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合愿意按路线逐件核对地址、扫描状态和签收条件，并能在户外重复完成交付的人，可以试做邮政投递员。先观察实物投递与路线交接，而非只看职业名称。"
+              "如果你难以适应户外天气、沿线反复上下车或在赶进度时逐件核验，先核目标岗位的路线、交通工具与体力要求。"
             ]
           },
           "id": "postal-service-mail-carriers.quick-decision.fit-decision-checklist.1",
@@ -23335,7 +23338,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "可观察信号：在赶路线时仍核件、核地址、记录状态；遇到收件人不在、签名缺失或不属于本路线的邮件，能暂停错误投递并留下清楚交接。"
+              "到目录「09 入行、资格与职业发展」找到《R1 路线：站点判断与异常交接》。用虚构材料在 45 分钟内写一份站点、投递状态与交接表。先做再看参考答案，按页内量规自查，不使用真实邮件、设备或客户资料。"
             ]
           },
           "id": "postal-service-mail-carriers.quick-decision.fit-decision-checklist.2",
@@ -23349,7 +23352,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全试做：用本页完全虚构的 R1 路线和 A1–A3 三件邮件，在 45 分钟内写路线顺序、交付状态与异常交接单。不接触真实邮件、地址或客户信息。"
+              "适合愿意按路线逐件核对地址、扫描状态和签收条件，并能在户外重复完成交付的人，可以试做邮政投递员。先观察实物投递与路线交接，而非只看职业名称。"
             ]
           },
           "id": "postal-service-mail-carriers.quick-decision.fit-decision-checklist.3",
@@ -23365,7 +23368,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "自验三点：A1 去第2站；A2 去第3站但缺签收，只能记投递尝试与待处理，不得记已投递；A3 地址不在 R1，需核路线，不能猜站点。"
+              "用纸面试做观察自己能否按规则核对、留记录和交接；做完再对照第 09 节题后的参考答案。练习不代表岗位授权或录用条件。"
             ]
           },
           "id": "postal-service-mail-carriers.quick-decision.fermat-decision-card.6",
@@ -23403,12 +23406,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本页聚焦美国 O*NET 43-5052.00 Postal Service Mail Carriers 的路线投递、收取邮件、签收和回站交接。中国邮政投递岗位名称、交通工具、岗位权限及招聘条件依当地法律与机构公告；不能由美国职业代码直接推定。"
+              "中国大陆的对应职业为邮政投递员（4-02-07-04），工作重点是按段道投递、处理签收与未妥投件交接。 美国统计使用本页所列的 O*NET/SOC 职业，不直接对应大陆工资和招聘条件。"
             ]
           },
           "id": "postal-service-mail-carriers.profile.career-quick-answers-block.1",
           "source_refs": [
-            "editor",
+            "cn-postal-standards-2025",
+            "cn-postal-work-example",
             "onet"
           ],
           "type": "prose"
@@ -26566,12 +26570,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国岗位名称可能写邮政投递员、邮件投递员或不同路线岗位；不能仅按英文职业代码推资格。"
+              "邮政投递员（4-02-07-04）"
             ]
           },
           "id": "postal-service-mail-carriers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "cnclass"
+            "cn-postal-standards-2025"
           ],
           "type": "prose"
         },
@@ -26864,13 +26868,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国USPS岗位和中国邮政机构要求不同；本页不建立资格互认。"
+              "中国大陆薪资参考：地方样本与行业背景"
             ]
           },
           "id": "postal-service-mail-carriers.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "cnclass",
-            "editor"
+            "hunan-2023-postal-wage",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26923,13 +26927,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025年交通运输、仓储和邮政业城镇非私营单位税前年平均工资133,981元／人／年，私营单位73,133元／人／年。证据不足：中国邮政投递员全国单职业中位数、分位与岗位月薪分布未取得。"
+              "湖南省 2023 年企业抽样调查中，邮政投递员年工资中位数为 100,300 元/年（职业细类表第 27 行）。包含奖金、津补贴及加班工资等，不能代表全国、起薪或到手收入。 2025年交通运输、仓储和邮政业城镇非私营单位税前年平均工资133,981元／人／年，私营单位73,133元／人／年。"
             ]
           },
           "id": "postal-service-mail-carriers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "nbs",
-            "editor"
+            "hunan-2023-postal-wage",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26998,13 +27002,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国邮政投递员单职业工资"
+              "湖南省企业样本（2023）"
             ]
           },
           "id": "postal-service-mail-carriers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "nbs",
-            "editor"
+            "hunan-2023-postal-wage"
           ],
           "type": "prose"
         },
@@ -27013,13 +27016,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可比全国职业中位数、10／90分位及岗位月薪分布；申请时核具体合同、工时与工资构成。"
+              "湖南省 2023 年企业抽样调查中，邮政投递员年工资中位数为 100,300 元/年（职业细类表第 27 行）。包含奖金、津补贴及加班工资等，不能代表全国、起薪或到手收入。"
             ]
           },
           "id": "postal-service-mail-carriers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "nbs",
-            "editor"
+            "hunan-2023-postal-wage"
           ],
           "type": "prose"
         },
@@ -27028,13 +27030,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国SOC 43-5052与中国岗位分类及交付规则权限不自动互认。"
+              "湖南样本对应邮政投递员，重点是按段道递送与交接。 地方职业中位数和全国行业均值口径不同；都不等于某个岗位的起薪。"
             ]
           },
           "id": "postal-service-mail-carriers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "editor",
-            "r2-pay-1"
+            "hunan-2023-postal-wage",
+            "nbs",
+            "cn-postal-standards-2025"
           ],
           "type": "prose"
         },
@@ -27043,11 +27046,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              "湖南省企业薪酬调查（2023）｜https://rst.hunan.gov.cn/xxgk/zfxxgknb/202410/t20241018_33479798.html；国家统计局2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "postal-service-mail-carriers.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
+            "hunan-2023-postal-wage",
             "nbs"
           ],
           "type": "prose"
@@ -27929,7 +27933,7 @@
           "data": {
             "entries": [
               "愿意遵循路线和交付规则核邮件、地址、签收与扫描状态，并适应户外重复工作。",
-              "能将A2未取得签名与A3路线未知分别记录，回站说明事实、待核事项和下一责任人，不把未完成件写成已交付。"
+              "交接时说清已经核实什么、还有什么待查、由谁接手。区分未完成投递与已完成投递。"
             ]
           },
           "id": "postal-service-mail-carriers.fit.personality-fit-block.4",
@@ -28218,7 +28222,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能按R1站序定位A1/A2，对A3标待核路线，对A2标签收未完成。",
+              "用给定记录核对线路和邮件；区分路线依据与完成投递的条件。",
               "能发现记录中的数字与文字不一致，并说明差异来源。"
             ]
           },
@@ -28276,7 +28280,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能礼貌说明为何A2缺签收仍待处理，不随意承诺已投递。",
+              "礼貌说明投递状态，并指出支持该状态的记录。",
               "在压力下仍能按制度说明哪些事需要批准、哪些不能承诺。"
             ]
           },
@@ -28781,7 +28785,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "试做：用R1路线判断A1第2站、A2第3站待签收、A3路线未知。"
+              "到 09 用给定的虚构记录判断各件站点和投递状态，再写交接。"
             ]
           },
           "id": "postal-service-mail-carriers.fit.personality-fit-block.58",
@@ -29007,7 +29011,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "R1虚构练习只检验A1正常交付、A2签收缺失、A3错路待核；不演练真实邮件或客户地址。"
+              "这里说明常见的路线、签收和交接核对。练习只使用虚构地址。"
             ]
           },
           "id": "postal-service-mail-carriers.risk.career-risk-cards.10",
@@ -29067,7 +29071,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "A3寄松街18号但R1无该站，不能因同街就猜站点。"
+              "地址与负责路线同街，并不表示能匹配到站点。记录投递前先核清地址和路线。"
             ]
           },
           "id": "postal-service-mail-carriers.risk.career-risk-cards.14",
@@ -29127,7 +29131,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "A2第3站无人签收，只能记待处理，不能标已投递。"
+              "需签收的邮件，在更新状态前核实实际情况；未结件按站点流程交接。"
             ]
           },
           "id": "postal-service-mail-carriers.risk.career-risk-cards.18",
@@ -29375,7 +29379,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "A2/A3回站只写“未完成”而无原因和去向，接手人无法处理。"
+              "单写状态可能不足以让接班人继续处理。写明未结原因以及交到哪里或交给谁。"
             ]
           },
           "id": "postal-service-mail-carriers.risk.career-risk-cards.34",
@@ -29433,7 +29437,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "个人信息保护法支持中国用户资料处理边界；R1与A1–A3完全虚构，不是真实路线、事故或投递规则。"
+              "个人信息保护法规定适用的中国用户信息处理边界。练习路线与记录均为虚构，真实投递依现场规则。"
             ]
           },
           "id": "postal-service-mail-carriers.risk.career-risk-cards.38",
@@ -29590,15 +29594,15 @@
                 "values": [
                   "材料设定｜全为编辑虚构",
                   "R1路线站序：第1站松街10号、第2站松街12号、第3站河路5号。三个地址和邮件编号完全虚构，不对应真实投递。",
-                  "A1普通信件寄松街12号；按练习规则，地址匹配且信箱可用，可记第2站已投递。A2挂号包裹寄河路5号，必须由收件人签收，但收件人不在。",
-                  "A3包裹寄松街18号；该地址不在R1清单。练习只用纸面，不触碰真实邮件或客户资料。"
+                  "A1：普通信件，收件地址松街 12 号，信箱可用。A2：挂号包裹，收件地址河路 5 号，要求收件人签收；收件人不在。",
+                  "A3：包裹，收件地址松街 18 号。题内规则：普通信件不要求签收；地址应与站点表核对。练习仅用纸面虚构资料。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
                   "任务与交付｜45分钟",
-                  "0–5分钟读R1和三件条件；5–20分钟写三行表，列件号、地址、站点、签收条件、状态、依据和下一步；20–30分钟写A2/A3交接；30–40分钟独立复核；40–45分钟按下列量规评分并修订。",
+                  "0–5 分钟读站点和邮件条件；5–20 分钟记录件号、地址、站点、签收条件、状态、依据和下一步；20–30 分钟为需要交接的件写记录；30–40 分钟独立复核；40–45 分钟按量规修订。",
                   "交接单分别列件号、已知事实、禁止动作、待核信息、下一责任人。纸面练习时间记为T0；下一责任人统一为虚构R1站点主管，不擅自补路线或签名。"
                 ]
               },
@@ -29617,7 +29621,7 @@
                   "复核量规｜编辑自评，非雇主考试",
                   "四项各0–2分，共0–8：①站点：A1第2、A2第3、A3未知全部正确2分，仅部分正确1分，猜A3站点0分；②状态：A1练习已投、A2尝试待处理、A3待核且1+2=3正确2分，缺一状态或数量1分，A2虚记已投0分。",
                   "③交接：A2/A3各有事实、禁止动作、待核与主管、T0五项完整2分，缺项1分，无交接或擅改路线代签0分；④边界：明确虚构、无真实资料、后续依机构规则2分，漏一项1分，用真实客户资料或称官方投递规程0分。",
-                  "错误示例：把A2标已投、A3猜第4站，未写交接但写明虚构。四项0／0／0／2，共2/8；先恢复A2待处理、A3未知和1完成+2待处理，再补T0主管交接。分数只帮修改作品，不证明驾照、邮政授权或录用。"
+                  "错误示例：把 A2 标为已投、猜 A3 是第 4 站，也没写交接；但明确只做虚构练习，不使用真实资料，实际作业遵守站点制度。评分 0／0／0／2，共 2/8。先恢复 A2 待处理、A3 未知和 1 完成＋2 待处理，再补 T0 主管交接。分数不证明驾照、授权或录用。"
                 ]
               }
             ]
@@ -29626,7 +29630,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "入行练习：虚构R1路线投递与异常交接",
+          "title": "R1 路线：站点判断与异常交接",
           "type": "cards"
         },
         {
@@ -29768,7 +29772,7 @@
                 "id": "entry-trial-day-6",
                 "values": [
                   "第六日",
-                  "请另一人按同题面复核站点、状态与1完成+2待处理，并用四维量规标错误和修改依据。"
+                  "按页内四项量规自行核站点、状态、件数和交接；对照题后参考标出一处改进。可选请他人复核。"
                 ]
               },
               {
@@ -30118,12 +30122,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "先用虚构R1与A1–A3练站序、签收判断和异常交接，再对照岗位公告。"
+              "中国邮政盘锦的一则工作纪实展示了扫件、装袋、按段道投递的衔接。申请前问清段道、交通工具、是否兼揽收及妥投失败的交接流程。 先用虚构R1与A1–A3练站序、签收判断和异常交接，再对照岗位公告。"
             ]
           },
           "id": "postal-service-mail-carriers.path.career-path-block.20",
           "source_refs": [
-            "bls",
+            "cn-postal-work-example",
             "editor"
           ],
           "type": "prose"
@@ -30133,14 +30137,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "训练、考试、驾驶资格和路线授权分别核对。"
+              "大陆对应职业的标准代码是 4-02-07-04。标准与招聘是两回事，学历、训练、班次及劳动合同主体看具体公告。"
             ]
           },
           "id": "postal-service-mail-carriers.path.career-path-block.21",
           "source_refs": [
-            "bls",
-            "editor",
-            "privacy"
+            "cn-postal-standards-2025",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31981,7 +31984,7 @@
                 "question_key": "career.faq.postal-service-mail-carriers.ai-impact"
               },
               {
-                "answer": "证据不足：本页未取得全国单职业工资分布。国家统计局行业和单位类型平均工资不能充当投递员个人工资；以当地招聘公告、工时和合同核对。",
+                "answer": "湖南省 2023 年企业抽样调查中，邮政投递员年工资中位数为 100,300 元/年（职业细类表第 27 行）。包含奖金、津补贴及加班工资等，不能代表全国、起薪或到手收入。 本页未取得全国单职业工资分布。",
                 "id": "postal-service-mail-carriers.faq.5",
                 "question": "中国大陆邮政投递员工资是多少？",
                 "question_key": "career.faq.postal-service-mail-carriers.china-pay"
@@ -31993,7 +31996,7 @@
                 "question_key": "career.faq.postal-service-mail-carriers.us-pay"
               },
               {
-                "answer": "BLS列美国此职业典型入门教育为无正式学历证书，短期在岗培训；具体岗位可要求考试、驾驶资格和其他条件。USPS考试以招聘公告为准，申请与考试免费。",
+                "answer": "大陆对应职业的标准代码是 4-02-07-04。标准与招聘是两回事，学历、训练、班次及劳动合同主体看具体公告。 有相关课程或培训经历可写入简历；不要把培训证书当作录用保证。",
                 "id": "postal-service-mail-carriers.faq.7",
                 "question": "入行需要什么学历和训练？",
                 "question_key": "career.faq.postal-service-mail-carriers.education-path"
@@ -32026,7 +32029,10 @@
             "nbs",
             "privacy",
             "cnclass",
-            "editor"
+            "editor",
+            "cn-postal-standards-2025",
+            "employer",
+            "hunan-2023-postal-wage"
           ],
           "type": "faq"
         },
@@ -32065,12 +32071,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核阅日期2026-10-12。核对O*NET投递任务、技能与全国工资，BLS独立预测及邮政工资分项，复用本轮已核USPS考试/邮政法/信息保护法及校园总公告。上海外包采购原页本次直读失败，历史来源不作为当前个人招聘或工资证明；具体岗位条件缺口保留。"
+              "上海揽投外包与盘锦从业纪实用于核对投递任务；采购金额不是个人工资，采购期限也不代表仍在招聘。"
             ]
           },
           "id": "postal-service-mail-carriers.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "china-post-shanghai-outsourcing-2026",
+            "cn-postal-work-example"
           ],
           "type": "prose"
         },
@@ -32112,13 +32119,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "secondary_cta",
@@ -32634,6 +32641,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "邮政投递员：4-02-07-04。"
+                ],
+                "evidence_type": "official occupation standards notice",
+                "id": "cn-postal-standards-2025",
+                "limitation": "职业标准目录；不提供招聘人数、工资或统一录用条件。",
+                "market": "中国大陆",
+                "name": "邮政营业员等4个国家职业标准的颁布通知",
+                "period": "2025-04",
+                "publisher": "人力资源社会保障部、国家邮政局",
+                "scope": "contextual",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/202504/t20250428_541226.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中国邮政盘锦的一则工作纪实展示了扫件、装袋、按段道投递的衔接。"
+                ],
+                "evidence_type": "employer public document",
+                "id": "cn-postal-work-example",
+                "limitation": "单一机构案例；不是当前在招、个人待遇或全国趋势的证据。",
+                "market": "中国大陆",
+                "name": "中国邮政：盘锦邮政投递纪实",
+                "period": "2026-06",
+                "publisher": "中国邮政",
+                "scope": "contextual",
+                "url": "https://www.chinapost.com.cn/cn/report/2606/0080-1.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "City Carrier Assistant / Rural Carrier Associate"
+                ],
+                "evidence_type": "official employer guidance",
+                "id": "usps-role-examples",
+                "limitation": "例示实际岗位名称和任务；具体地点、班次、待遇及资格以公告为准。",
+                "market": "US",
+                "name": "USPS 一线岗位说明",
+                "period": "2026 页面",
+                "publisher": "USPS",
+                "scope": "contextual",
+                "url": "https://about.usps.com/careers/career-opportunities/top-jobs.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "湖南省 2023 年企业抽样调查中，邮政投递员年工资中位数为 100,300 元/年（职业细类表第 27 行）。包含奖金、津补贴及加班工资等，不能代表全国、起薪或到手收入。"
+                ],
+                "evidence_type": "official regional occupational wage survey",
+                "id": "hunan-2023-postal-wage",
+                "limitation": "湖南企业从业者样本；不代表全国或特定雇主。",
+                "market": "中国大陆·湖南",
+                "name": "湖南省2023年度企业薪酬调查信息",
+                "period": "2023",
+                "publisher": "湖南省人力资源和社会保障厅",
+                "scope": "contextual",
+                "url": "https://rst.hunan.gov.cn/xxgk/zfxxgknb/202410/t20241018_33479798.html"
               }
             ]
           },
@@ -34504,7 +34571,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "邮政投递员的路线任务主要分为哪几类？",
+            "question": "邮政投递员主要做什么？",
             "table": {
               "rows": [
                 {
@@ -35508,6 +35575,9 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "hunan-2023-postal-wage"
+          ],
           "sources_note": {
             "$item": "postal-service-mail-carriers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -35517,7 +35587,7 @@
           "ui": {
             "ai_heading": "AI 会影响邮政服务邮件投递员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "中国行业工资背景（2025年，非投递员工资）",
+            "official_heading": "大陆地方职业样本与全国行业背景",
             "scenario_caption": "学习与经验背景、准备方向及核对建议（编辑整理，非工资或招聘频率统计）",
             "scenario_heading": "不同学习与经验背景可准备哪些邮政投递能力？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -37339,7 +37409,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合邮政服务邮件投递员工作",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37869,6 +37939,18 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "100,300 元/年",
+        "fact_id": "hunan-2023-postal-wage",
+        "market": "中国大陆·湖南",
+        "measure": "年工资中位数",
+        "occupation_scope": "邮政投递员",
+        "period": "2023",
+        "source_refs": [
+          "hunan-2023-postal-wage"
+        ]
       }
     ]
   },
@@ -37910,10 +37992,10 @@
         "label": "美国年均职位空缺"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "hunan-2023-postal-wage",
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "湖南 2023 年工资中位数"
       }
     ]
   },
@@ -37921,14 +38003,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "邮政服务邮件投递员的路线排序、投递签收、异常交接与隐私边界，附美国43-5052精确职业工资就业数据、中国薪资证据缺口和虚构路线练习。"
+      "text": "邮政投递员做什么？了解按段道投递、处理签收与未妥投件交接，并区分大陆岗位条件与美国工资、就业数据。"
     },
     "title": {
       "availability": "available",
       "text": "邮政服务邮件投递员"
     }
   },
-  "source_content_sha256": "120f873a9cf9e8655fd0a842bc6566f3923164e370304637675c2fb46a14c7ca",
+  "source_content_sha256": "d026f01e993a564767dd7ef4bae22a3c9af0d8e692af09b843dedd04fafc6192",
   "subject": {
     "canonical_slug": "postal-service-mail-carriers",
     "name": "邮政服务邮件投递员",

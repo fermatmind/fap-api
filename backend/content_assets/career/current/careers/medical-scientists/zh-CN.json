@@ -12429,13 +12429,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页为目录父范围：19-1041.00流行病学家与19-1042.00医学科学家（不含流行病学家）。前者研究人群健康事件的分布及决定因素，后者以人类疾病与健康研究、临床调查或相关研发为核心；子职业的工资、教育、兴趣和行业数据分别使用，不合成为父职业的中位数。"
+              "医学研究人员研究疾病、生物机制和可能的干预方法，设计研究、分析结果并说明结论边界。研究可在实验室、转化平台或临床团队开展，研究岗位本身不赋予诊疗权。"
             ]
           },
           "id": "medical-scientists.profile.definition-block.1",
           "source_refs": [
-            "onet-medical-scientists",
-            "onet-epidemiologists"
+            "source-pack-onet-summary",
+            "cn-dmu-research",
+            "cn-nju-variants"
           ],
           "type": "prose"
         },
@@ -12480,13 +12481,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "能力与工作方式：需要研究设计、统计与生物医学知识，能读写论文与方案，重视数据质量与可复现性，并能在不确定与竞争中长期坚持伦理与规范。"
+              "用公开或合成资料写研究问题、对照、评价指标和下一步验证。大连医科大学转化研究样本聚焦基因治疗，为具体研究方向。"
             ]
           },
           "id": "medical-scientists.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet-medical-scientists",
-            "onet-epidemiologists"
+            "source-pack-onet-summary",
+            "cn-dmu-research",
+            "cn-nju-variants"
           ],
           "type": "prose"
         },
@@ -13794,25 +13796,25 @@
                 "entity": "医学科学家",
                 "id": "navigation-2",
                 "relation": "career.section",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "医学科学家",
                 "id": "navigation-3",
                 "relation": "career.section",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "医学科学家",
+                "entity": "遗传咨询专业人员",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/career/jobs/genetic-counselors"
               },
               {
-                "entity": "医学科学家",
+                "entity": "遗传学研究人员",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/career/jobs/geneticists"
               },
               {
                 "entity": "医学科学家",
@@ -14275,7 +14277,7 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "这是对本页工作任务的编辑判断，不衡量实际工时、雇主采用率或失业概率。",
                   "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
                   "设计实验或观察研究方案 — 50/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
                   "按方案采集生物医学或人群数据 — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
@@ -14289,6 +14291,46 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "具名研究组关注基因治疗载体、药物研发和转化。"
+                ],
+                "id": "cn-dmu-research",
+                "limitation": "细分方向，不能推出所有医学研究岗位要求。",
+                "market": "中国大陆",
+                "name": "大连医科大学转化研究招聘",
+                "period": "2026",
+                "publisher": "大连医科大学",
+                "scope": "具名岗位或制度",
+                "url": "https://rlzyb.dmu.edu.cn/info/1169/2173.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "疾病相关变异功能与基因组研究。"
+                ],
+                "id": "cn-nju-variants",
+                "limitation": "特定课题，非临床咨询。",
+                "market": "中国大陆",
+                "name": "南大与鼓楼医院功能遗传学研究岗位",
+                "period": "2026",
+                "publisher": "南京大学",
+                "scope": "具名岗位或制度",
+                "url": "https://imb.nju.edu.cn/rczp/syszp/20260903/i415205.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 表1.2：19-1042 2025 年就业约 181,000 人，预计 2035 年约 203,700 人，2025—2035 年变化 +12.6%，年均约 10,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。"
+                ],
+                "id": "bls-design-ep",
+                "market": "美国",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -14506,7 +14548,7 @@
             }
           }
         ],
-        "answer": "WHO2021卫生AI伦理与治理指南的出版概览支持讨论治理与责任，不提供本父范围或两个子职业的机构采用率、裁员比例或替代日期。工具辅助方案是编辑假设：让工具按四行题面列计算过程，人工复核均值6/4、差2，以及不能作因果结论；不输入真实患者或受限数据。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
+        "answer": "WHO2021卫生AI伦理与治理指南的出版概览支持讨论治理与责任，不提供本父范围或两个子职业的机构采用率、裁员比例或替代日期。工具辅助方案是编辑假设：让工具按四行题面列计算过程，人工复核均值6/4、差2，以及不能作因果结论；不输入真实患者或受限数据。 AI影响度 50% 为编辑估算。这是对本页工作任务的编辑判断，不衡量实际工时、雇主采用率或失业概率。 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET非流行病学摘要",
@@ -15002,7 +15044,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这个职业先核对什么？",
+            "question": "医学研究岗位可以展示什么能力？",
             "table": {
               "rows": [
                 {
@@ -15037,9 +15079,9 @@
             }
           },
           {
-            "answer": "从问题、设计与数据来源到分析、解释及限制形成可复核记录；统计功效、预注册、伦理审查和共享要求依研究类型与适用政策确定，不能把每项都当所有岗位统一要求。",
+            "answer": "研究关注可验证的一般问题；医师对个体承担诊疗职责。部分岗位兼具研究与临床，权限要分别确认。",
             "key": "qa2",
-            "question": "怎样判断这项工作是否形成闭环？",
+            "question": "医学研究人员与医师怎么区分？",
             "table": {
               "rows": [
                 {
@@ -16292,7 +16334,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合医学科学家",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "职业任务、工作情境与研究合规档案",
         "subject_key": "medical-scientists",
         "subject_kind": "生物医学研究与合规岗位",
@@ -16352,7 +16394,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "中文MBTI探索"
+            "label": "遗传咨询专业人员"
           },
           {
             "href": {
@@ -16362,7 +16404,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "中文大五探索"
+            "label": "遗传学研究人员"
           }
         ]
       },
@@ -16511,15 +16553,15 @@
         ]
       },
       {
-        "derivation": "2025 年就业 181,000 人，2025—2035 年预计变化 +22,700。",
-        "display_value": "2025 年 181,000 人；2035 年预计 203,700 人",
+        "derivation": "美国 BLS 表1.2：19-1042 2025 年就业约 181,000 人，预计 2035 年约 203,700 人，2025—2035 年变化 +12.6%，年均约 10,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 181,000 人",
         "fact_id": "med-market",
         "market": "美国非流行病学子职业",
         "measure": "就业规模与变化",
         "occupation_scope": "Medical Scientists, Except Epidemiologists（19-1042）",
-        "period": "2025—2035；查阅 2026-10-03",
+        "period": "2025",
         "source_refs": [
-          "bls-ooh-medical-scientists"
+          "bls-design-ep"
         ]
       },
       {
@@ -16559,31 +16601,31 @@
         ]
       },
       {
-        "derivation": "BLS OOH：2025—2035 年预计增长 13%。",
-        "display_value": "远高于平均（约 13%，2025—2035）",
+        "derivation": "美国 BLS 表1.2：19-1042 2025 年就业约 181,000 人，预计 2035 年约 203,700 人，2025—2035 年变化 +12.6%，年均约 10,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "+12.6%",
         "fact_id": "med-growth",
         "market": "美国非流行病学子职业",
         "measure": "就业增长预测",
         "occupation_scope": "Medical Scientists, Except Epidemiologists（19-1042）",
-        "period": "2025—2035；查阅 2026-10-03",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-ooh-medical-scientists"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "含替换需求。",
-        "display_value": "约 10,500 个/年（2025—2035）",
+        "derivation": "美国 BLS 表1.2：19-1042 2025 年就业约 181,000 人，预计 2035 年约 203,700 人，2025—2035 年变化 +12.6%，年均约 10,500 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 10,500 个",
         "fact_id": "med-openings",
         "market": "美国非流行病学子职业",
         "measure": "预计职位空缺（年均）",
         "occupation_scope": "Medical Scientists, Except Epidemiologists（19-1042）",
-        "period": "2025—2035；查阅 2026-10-03",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-ooh-medical-scientists"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
+        "derivation": "这是对本页工作任务的编辑判断，不衡量实际工时、雇主采用率或失业概率。",
         "display_value": "50%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
@@ -16619,19 +16661,19 @@
         "availability": "available",
         "fact_ref": "med-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "med-market",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业规模（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "med-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -16645,17 +16687,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "医学科学家（O*NET 19-1042.00；含流行病学方向）设计实验与观察研究、分析生物医学与人群数据并遵守伦理与生物安全规范。美国 BLS 2025 年中位年薪 103,410 美元，2025 年就业约 181,000 人。含工作情境、风险与入行路径。"
+      "text": "了解医学研究人员如何设计研究和判断证据，以及与临床诊疗的差别。"
     },
     "title": {
       "availability": "available",
-      "text": "医学科学家：工作内容、美国工资与入行 | 费马测试"
+      "text": "医学研究人员做什么：研究设计、验证和成果转化"
     }
   },
-  "source_content_sha256": "458e9540631ad23c30b93ca2483b3a51aa392dd80416620eda4953359d977739",
+  "source_content_sha256": "dacdb17b37551c7eabbc4decf6ea7b5e388c340b6824a520dea03816a0f47c5a",
   "subject": {
     "canonical_slug": "medical-scientists",
-    "name": "医学科学家",
-    "summary": "本页为目录父范围：19-1041.00流行病学家与19-1042.00医学科学家（不含流行病学家）。前者研究人群健康事件的分布及决定因素，后者以人类疾病与健康研究、临床调查或相关研发为核心；子职业的工资、教育、兴趣和行业数据分别使用，不合成为父职业的中位数。"
+    "name": "医学研究人员",
+    "summary": "医学研究人员研究疾病、生物机制和可能的干预方法，设计研究、分析结果并说明结论边界。研究可在实验室、转化平台或临床团队开展，研究岗位本身不赋予诊疗权。"
   }
 }

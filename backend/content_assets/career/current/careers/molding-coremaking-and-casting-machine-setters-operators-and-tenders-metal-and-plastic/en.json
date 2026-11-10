@@ -147,12 +147,21 @@
         "status": "pending_mapping"
       },
       "item:molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.interview-probation.10": {
+        "status": "pending_mapping"
+      },
+      "item:molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1": {
         "status": "mapped"
       },
       "item:molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.profile.career-quick-answers-block.8": {
@@ -213,7 +222,7 @@
         "status": "pending_mapping"
       },
       "item:molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.sources.faq-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -5674,52 +5683,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5950,96 +6097,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -11965,7 +12348,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Scope and boundaries: this page covers only O*NET-SOC 51-4072.00, Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic, excluding adjacent occupations such as nonmetallic forming, machining, and tool and die making. Employer and local rules determine safety and operating authorization for furnaces, die-casting equipment, hot work, and lifting."
+              "Try the paper exercise if you tend to rely on a tray label without checking the job card."
             ]
           },
           "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.1",
@@ -11979,7 +12362,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "How to assess: use an entirely fictional work order and process sheet to sequence work order interpretation and mold selection and installation, mold and equipment preparation, parameter settings and trial molding, operation monitoring and measurement, demolding and finishing, and records and handover. Describe three checkpoints and anomaly responses. Perform paper exercises only, without real furnaces, die-casting machines, or molds."
+              "In 09 Entry, qualifications, and career development, find “CM-23: Check a Coremaking Line Handover.” Allow about 10 minutes before reading the answer."
             ]
           },
           "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.2",
@@ -11993,7 +12376,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Who it suits: people willing to repeatedly verify work orders and parameters, notice surface and dimensional deviations, maintain attention at machine pace and record as required, and stop equipment to seek verification when jams, overtemperature, or dimensional anomalies arise. Note: if heat, noise, or repetitive movements are difficult to tolerate, or you are unwilling to stop equipment and seek verification, compare adjacent directions first."
+              "Consider this work if you like checking the job and material records at a molding or coremaking line before passing a batch to the next team."
             ]
           },
           "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.3",
@@ -12060,7 +12443,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Work context (O*NET Work Context survey): 59% of respondents encounter minor burns, cuts, stings, or bites daily; 53% report machine speed completely determines work pace, with another 23% rating it very important. 39% have continual contact with others and 33% contact most of the time. 77% never sit at work, 92% never need to face external customers or the public, and 92% never work outdoors under cover."
+              "In O*NET’s work-context survey, 53% of respondents rated the influence of machine speed on work pace as extremely important and 23% rated it very important. Separately, 59% reported daily exposure to minor cuts, burns, bites or stings. These are survey responses, not accident rates or a fixed pace at every employer."
             ]
           },
           "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.profile.work-context-block.5",
@@ -12088,7 +12471,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Preparation and training: O*NET places this occupation in Job Zone 1—2, generally requiring a high school diploma or equivalent, as reported by 57% of education survey respondents. Related experience ranges from almost none to several months—one year; on-the-job training ranges from several days to one year (SVP below 6.0). No training programs were found nationwide."
+              "O*NET lists Job Zone 1–2. BLS lists high school or equivalent and moderate-term on-the-job training as typical for this U.S. occupation. Check local training or an employer’s supervised route separately."
             ]
           },
           "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.profile.onet-structured-fields-block.7",
@@ -12180,12 +12563,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Comparison dimensions: this page compares core work and outputs, key differences from this occupation, and which choices may fit better, to help assess directional preferences."
+              "Comparison dimensions: this page compares core work and outputs, key differences from this occupation, and which choices may fit better, to help assess directional preferences. Machine work centers on setting and tending equipment; metal pourers and casters focus on directing molten metal into molds and controlling the pour. To try a machine-line handover on paper, use CM-23 in section 09. Explain what each fictional record supports and what you would ask the line reviewer."
             ]
           },
           "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "onet-pourers-023"
           ],
           "type": "prose"
         },
@@ -12831,6 +13215,13 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "Stage",
+              "Tasks",
+              "Authority limits",
+              "Evidence",
+              "Next step"
+            ],
             "rows": [
               [
                 "Guided mold installation and trial molding",
@@ -12873,6 +13264,7 @@
           "source_refs": [
             "source-pack-onet-localtraining"
           ],
+          "title": "Roles and evidence to check before applying",
           "type": "table"
         },
         {
@@ -12885,28 +13277,34 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "Situation",
+              "Response",
+              "What a reviewer checks",
+              "Evidence"
+            ],
             "rows": [
               [
                 "Specifications omit material batches",
-                "Confirm materials and mold numbers before starting",
+                "Ask who verifies the material batch and mold number before authorizing work.",
                 "The interviewer confirms questioning, confirmation methods, and audit trail requirements",
                 "Question list and response records"
               ],
               [
                 "First article has missing material or shrinkage cavities",
-                "Stop equipment and review temperatures, pressures, and injection cycles",
+                "Describe which first-piece records you would flag for the authorized lead.",
                 "The interviewer confirms decision methods, remeasurement methods, and audit trail requirements",
                 "First-article inspection and anomaly records"
               ],
               [
                 "Temperature or pressure exceeds the set range",
-                "Stop equipment, isolate, and report according to procedures, documenting curves",
+                "Explain how you would report the readings. Authorized staff decide on stopping, isolation, and follow-up under site procedures.",
                 "The interviewer confirms escalation paths, shutdown rules, and audit trail requirements",
                 "Curves and response records"
               ],
               [
                 "Batch appearance shows systematic deviations",
-                "Stop batch production, isolate, and trace molds and parameters",
+                "Explain which records you would preserve for the authorized lead to trace the mold and parameters.",
                 "The interviewer confirms tracing methods, isolation scope, and audit trail requirements",
                 "Isolation and traceability records"
               ]
@@ -12916,6 +13314,7 @@
           "source_refs": [
             "source-pack-onet-localtraining"
           ],
+          "title": "Questions to ask before a supervised trial",
           "type": "table"
         },
         {
@@ -12930,6 +13329,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Topic",
+              "Evidence",
+              "Verifier",
+              "Condition",
+              "Limitation",
+              "Responsible party",
+              "Next step"
             ],
             "rows": [
               [
@@ -12993,7 +13401,129 @@
             "source-pack-onet-localtraining",
             "source-pack-onet-localcert"
           ],
+          "title": "Check training and authorization by duty",
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials (about 10 minutes)",
+                  "A fictional line asks for work order J6 and a signed inspection record linked to the same tray.",
+                  "Tray C4: job card J6, inspection signed for C7. Tray C7: job card J9, inspection signed for C7.",
+                  "Work from paper only. The records do not authorize operating a machine or releasing a batch."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Decide whether either tray is ready for the documentation review. Cite the job and inspection records.",
+                  "Write one sentence naming what the line reviewer should verify next."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Where to find the reference",
+                  "After your own attempt, open “CM-23 answer key” in the FAQ.",
+                  "Compare it with your notes."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Did I cite both records, explain my decision, and name the person who could verify it?"
+                ]
+              }
+            ]
+          },
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+          "title": "CM-23: Check a Coremaking Line Handover",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "Day 1",
+                  "Start W-CM. The new line needs two reports on the same tool ID and shift to compare defects. Copy the two requirements."
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "Day 2",
+                  "Report R4: tool M2, shift B, defect code D1. Record all three."
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "Day 3",
+                  "Report R9: tool M2, shift C, defect code D2. Record all three."
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "Day 4",
+                  "Mark both sources and write a question for the line reviewer."
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "Day 5",
+                  "Write your comparison decision and the evidence you used."
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "Day 6",
+                  "Work alone first. Independently recheck both IDs and shifts. A second reader is optional."
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "Day 7",
+                  "After the Day 6 independent check, open “W-CM answer key (Day 7)” in the FAQ. Compare your note, then choose one habit to practice."
+                ]
+              }
+            ]
+          },
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+          "title": "Seven-day paper trial: a separate case",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "I read both records.",
+              "I checked both rules.",
+              "I recorded my comparison decision.",
+              "I named the reviewer.",
+              "I used fictional records only.",
+              "I rechecked my work independently.",
+              "I chose one habit to practice."
+            ]
+          },
+          "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+          "title": "Judgement questions after seven days",
+          "type": "list"
         }
       ]
     },
@@ -13008,7 +13538,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 2025 employment 150000; 2025—2035 decline category, with 13800 annual openings including growth and replacement. Overall projections are not attributed to AI and are not individual probabilities."
+              "BLS Table 1.2 lists 150,000 U.S. jobs in 2025 and projects 144,900 in 2035 for Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic (51-4072). It publishes a net decline of 5,200 jobs (3.4%) and 13,800 projected average annual openings, including replacements. The totals and net change are rounded separately. The projection does not isolate AI effects."
             ]
           },
           "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.market-signals.market-signal-card.1",
@@ -13116,7 +13646,7 @@
                 ]
               },
               {
-                "answer": "Mainland China has no national occupational wage data matching O*NET-SOC 51-4072.00. This page uses 2025 manufacturing wages (non-private: 113,594 yuan/year; private: 76,055 yuan/year) and the broad production/manufacturing job category (80,739 yuan/year) as industry proxies, not individual wages.",
+                "answer": "This review did not find a national mainland China wage distribution matching O*NET-SOC 51-4072.00. The National Bureau of Statistics reports annual manufacturing averages of 113,594 yuan for urban non-private units and 76,055 yuan for urban private units. It separately reports 80,739 yuan for the broad production and manufacturing job group in enterprises above the designated size. These figures do not estimate this occupation’s individual pay.",
                 "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.faq.4",
                 "question": "How should mainland China's wage data be understood?",
                 "question_key": "career.faq.molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.4",
@@ -13125,12 +13655,13 @@
                 ]
               },
               {
-                "answer": "2025 BLS OEWS national figures: median hourly wage 21.32 USD, median annual wage 44,350 USD, and 10th—90th percentiles 34,170—61,600 USD/year. Medians and percentiles are neither starting wages nor individual offers and cannot be converted into mainland Chinese earnings.",
+                "answer": "May 2025 U.S. annual wage median: $44,350. This is an occupational median, not individual pay. BLS Table 1.2 lists 150,000 U.S. jobs in 2025 and projects 144,900 in 2035 for Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic (51-4072). It publishes a net decline of 5,200 jobs (3.4%) and 13,800 projected average annual openings, including replacements. The totals and net change are rounded separately.",
                 "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.faq.5",
                 "question": "What does U.S. wage data represent?",
                 "question_key": "career.faq.molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.5",
                 "source_refs": [
-                  "onet-wages"
+                  "onet-wages",
+                  "ep"
                 ]
               },
               {
@@ -13144,30 +13675,50 @@
                 ]
               },
               {
-                "answer": "In the United States, this occupation is in preparation levels 1—2, generally requiring a high school diploma or equivalent, with on-the-job training from several days to one year. O*NET-listed national certifications include National Institute for Metalworking Skills CNC turning operation, Machining Level I series, and Metalforming Level I. No training programs were found nationwide. Verify job and safety requirements in China or the work jurisdiction against relevant authority and employer rules.",
+                "answer": "BLS lists high school or equivalent and moderate-term on-the-job training as typical for this U.S. occupation. Employer requirements may differ. In the O*NET new-hire survey, 57% selected high school or equivalent, 30% less than high school, and 11% a postsecondary certificate. These are respondent choices about new hires, not the education mix of current workers. One historical Qingyang County listing for Anhui Zhenyu Auto Parts mentions a coremaking machine and training with a mentor. This illustrates one employer’s coremaking work; it does not establish a national requirement or a current vacancy.",
                 "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.faq.7",
                 "question": "What training and qualifications are needed for entry?",
                 "question_key": "career.faq.molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.7",
                 "source_refs": [
-                  "source-pack-onet-localtraining",
-                  "source-pack-onet-localcert"
+                  "ep",
+                  "onet-education-023",
+                  "cn-employer-example-023",
+                  "source-pack-onet-localtraining"
                 ]
               },
               {
-                "answer": "Burn risks from molten metal and hot castings; foundry dust and silica exposure during sand mixing, coremaking, sand removal, and grinding; moving equipment parts and pinch injuries; and strain from prolonged standing and repetitive movements. Implement thermal protection, ventilation and wet methods, machine guarding, hearing protection, and shutdown for anomalies.",
+                "answer": "Risks include burns from molten metal and hot castings, respirable silica in some sand handling and finishing tasks, and moving-machine and pinch hazards. Dust controls must match the assessed process. Water or unexpected moisture can react violently with molten metal; follow the site’s approved controls and leave any response to authorized staff. In the United States, machine guarding and hazardous-energy control during covered servicing or maintenance are separate requirements.",
                 "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.faq.8",
                 "question": "What are the main work risks?",
                 "question_key": "career.faq.molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.8",
                 "source_refs": [
                   "source-pack-onet-industry",
-                  "source-pack-onet-localcert"
+                  "hse-foundry-silica-023",
+                  "hse-molten-metal-023",
+                  "osha-guard-023",
+                  "osha-loto-023"
                 ]
+              },
+              {
+                "answer": "Neither tray is ready. C4 is for J6 but the signed inspection names C7. C7 has its own signed inspection but is for J9. Keep the trays distinct in your note and ask the line reviewer for the inspection record for C4.",
+                "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.faq.trial-short-reference",
+                "question": "CM-23 answer key",
+                "question_key": "career.faq.molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.trial-short-reference"
+              },
+              {
+                "answer": "The tool IDs match but the shifts differ. Do not combine the defect reports for this comparison. Ask the line reviewer to retrieve the corresponding report from the same shift.",
+                "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.faq.trial-week-reference",
+                "question": "W-CM answer key (Day 7)",
+                "question_key": "career.faq.molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.trial-week-reference"
               }
             ]
           },
           "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.sources.faq-block.1",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "ep",
+            "onet-wages",
+            "cn-employer-example-023"
           ],
           "type": "faq"
         },
@@ -13205,25 +13756,25 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Casting workers",
+                "entity": "MBTI 16-Type Personality Test (English)",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Casting workers",
+                "entity": "Big Five Personality Test (English)",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "Casting workers",
+                "entity": "MBTI 16-Type Personality Test (Chinese)",
                 "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Casting workers",
+                "entity": "Big Five Personality Test (Chinese)",
                 "id": "navigation-5",
                 "relation": "career.section",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
@@ -13280,22 +13831,22 @@
                 "limitation": "Not exact occupational wages. Different statistical populations cannot be combined into a range; excludes individual businesses and freelancers.",
                 "market": "CN",
                 "name": "Average annual wages of persons employed in urban units in 2025",
-                "period": "2025; published 2026-05-16; accessed 2026-09-25",
+                "period": "2025 wages; Chinese original published 2026-05-15; checked 2026-11-10",
                 "publisher": "National Bureau of Statistics of the People's Republic of China",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Employment: 154,600 in 2024 and 148,800 in 2034; change -4%; average annual job openings 15,900."
+                  "BLS Table 1.2 lists 150,000 U.S. jobs in 2025 and projects 144,900 in 2035 for Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic (51-4072). It publishes a net decline of 5,200 jobs (3.4%) and 13,800 projected average annual openings, including replacements. The totals and net change are rounded separately."
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-context",
                 "limitation": "Projections are not guarantees; average annual openings do not equal individual hiring probabilities.",
                 "market": "US",
                 "name": "National Employment Trends 51-4072.00 Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic",
-                "period": "2024—2034 BLS projections; accessed 2026-09-25",
+                "period": "Occupational context; read 2026-11-10",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/51-4072.00"
@@ -13355,24 +13906,25 @@
                 "limitation": "U.S. scope for this occupation; do not extrapolate to other regions.",
                 "market": "US",
                 "name": "51-4072.00 Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic — Summary",
-                "period": "2025 BLS OEWS and 2024—2034 projections; accessed 2026-09-25",
+                "period": "Occupational context; read 2026-11-10",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-4072.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Approximately 90% in manufacturing and 10% in other industries."
+                  "Manufacturing 92%; other industries 8%.",
+                  "O*NET Details labels the top industries as 2025. The detailed industry table supplies other industries. These are employment shares; the panels do not give pay by industry."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "onet-tasks",
-                "limitation": "Industry distribution signals employer contexts, not demand forecasts.",
+                "limitation": "O*NET Details labels the top industries as 2025. The detailed industry table supplies other industries. These are employment shares; the panels do not give pay by industry.",
                 "market": "US",
-                "name": "Industries 51-4072.00 Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic",
-                "period": "2024; accessed 2026-09-25",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "name": "O*NET: 2025 employment by industry",
+                "period": "2025",
+                "publisher": "O*NET",
+                "scope": "Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic",
                 "url": "https://www.onetonline.org/link/industry/51-4072.00"
               },
               {
@@ -13436,19 +13988,19 @@
                 "url": "https://www.onetonline.org/link/hot_tech/51-4072.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Health effects of respirable crystalline silica, including silicosis, lung cancer, COPD, and chronic kidney impairment, and tiered prevention recommendations; foundry work is one exposure context."
+                  "NIOSH foundry evaluations describe exposures to respirable silica and other airborne hazards and report engineering controls, including local exhaust ventilation. Evaluate actual processes separately."
                 ],
                 "evidence_type": "occupational health guidance",
                 "id": "source-pack-onet-industry",
                 "limitation": "Health evidence and guidance do not replace local regulations and employer procedures.",
                 "market": "US",
-                "name": "Silica and Worker Health",
-                "period": "updated 2026-07-07; accessed 2026-09-25",
+                "name": "NIOSH: Foundries – Control Technology Recommendations",
+                "period": "Page reviewed 2018-11-16; checked 2026-11-10",
                 "publisher": "CDC / NIOSH",
                 "scope": "contextual",
-                "url": "https://www.cdc.gov/niosh/topics/silica/"
+                "url": "https://www.cdc.gov/niosh/engcontrols/ecd/detail141.html"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -13468,7 +14020,7 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "No training programs found nationwide."
+                  "A training directory is a search aid. Check local listings and employer training separately."
                 ],
                 "evidence_type": "official training discovery",
                 "id": "source-pack-onet-localtraining",
@@ -13526,6 +14078,125 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS Table 1.2 lists 150,000 U.S. jobs in 2025 and projects 144,900 in 2035 for Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic (51-4072). It publishes a net decline of 5,200 jobs (3.4%) and 13,800 projected average annual openings, including replacements. The totals and net change are rounded separately.",
+                  "BLS lists high school or equivalent and moderate-term on-the-job training as typical for this U.S. occupation. Employer requirements may differ."
+                ],
+                "id": "ep",
+                "limitation": "BLS Table 1.2 lists 150,000 U.S. jobs in 2025 and projects 144,900 in 2035 for Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic (51-4072). It publishes a net decline of 5,200 jobs (3.4%) and 13,800 projected average annual openings, including replacements. The totals and net change are rounded separately.",
+                "market": "US",
+                "name": "BLS Table 1.2: exact occupational projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "One historical Qingyang County listing for Anhui Zhenyu Auto Parts mentions a coremaking machine and training with a mentor. This illustrates one employer’s coremaking work; it does not establish a national requirement or a current vacancy."
+                ],
+                "id": "cn-employer-example-023",
+                "limitation": "One historical Qingyang County listing for Anhui Zhenyu Auto Parts mentions a coremaking machine and training with a mentor. This illustrates one employer’s coremaking work; it does not establish a national requirement or a current vacancy.",
+                "market": "CN",
+                "name": "Qingyang County trade union: 2026 first-quarter employer notice",
+                "period": "2026 Q1",
+                "publisher": "Qingyang County trade union: 2026 first-quarter employer notice",
+                "scope": "Qingyang County trade union: 2026 first-quarter employer notice",
+                "url": "https://www.ahqy.gov.cn/qyxzgh/News/show/768093.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. survey responses about new hires; not incumbent education or a universal hiring rule."
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-education-023",
+                "limitation": "U.S. survey responses about new hires; not incumbent education or a universal hiring rule.",
+                "market": "US",
+                "name": "O*NET new-hire education",
+                "period": "Checked 2026-11-10",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-4072.00#Education"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "UK regulator explains the physical hazard; it is not U.S. or Chinese law and does not authorize any handling."
+                ],
+                "evidence_type": "Molten metal and water explosion risks",
+                "id": "hse-molten-metal-023",
+                "limitation": "UK regulator explains the physical hazard; it is not U.S. or Chinese law and does not authorize any handling.",
+                "market": "UK",
+                "name": "HSE: Molten metal and water explosion risks",
+                "period": "Checked 2026-11-10",
+                "publisher": "Health and Safety Executive",
+                "scope": "contextual",
+                "url": "https://www.hse.gov.uk/moltenmetals/safety-topics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Applicable U.S. machine guarding; not a work instruction or authorization."
+                ],
+                "evidence_type": "1910.212 Machine guarding",
+                "id": "osha-guard-023",
+                "limitation": "Applicable U.S. machine guarding; not a work instruction or authorization.",
+                "market": "US",
+                "name": "OSHA machine guarding",
+                "period": "Checked 2026-11-10",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.212"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. hazardous energy control during covered servicing and maintenance, not every production stop."
+                ],
+                "evidence_type": "1910.147 Hazardous energy control",
+                "id": "osha-loto-023",
+                "limitation": "U.S. hazardous energy control during covered servicing and maintenance, not every production stop.",
+                "market": "US",
+                "name": "OSHA hazardous energy control",
+                "period": "Checked 2026-11-10",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Adjacent U.S. occupation, not a source for this page’s pay or entry rules."
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-pourers-023",
+                "limitation": "Adjacent U.S. occupation, not a source for this page’s pay or entry rules.",
+                "market": "US",
+                "name": "O*NET metal pourers and casters tasks",
+                "period": "Checked 2026-11-10",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/51-4052.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The foundry section identifies respirable crystalline silica in casting sand and finishing dust. This UK guidance supports the physical exposure context; it does not set U.S. or Chinese workplace limits."
+                ],
+                "evidence_type": "Silica in foundry sand and finishing dust",
+                "id": "hse-foundry-silica-023",
+                "limitation": "The foundry section identifies respirable crystalline silica in casting sand and finishing dust. This UK guidance supports the physical exposure context; it does not set U.S. or Chinese workplace limits.",
+                "market": "UK",
+                "name": "HSE: Silica in foundry sand and finishing dust",
+                "period": "Checked 2026-11-10",
+                "publisher": "Health and Safety Executive",
+                "scope": "contextual",
+                "url": "https://www.hse.gov.uk/lung-disease/a-z.htm"
               }
             ]
           },
@@ -13783,14 +14454,14 @@
         "evidence_rows": [
           {
             "使用限制": "Describes this occupation's scope only; does not establish adoption or automation levels",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET occupational tasks",
             "研究对象": "O*NET 51-4072.00 tasks and work context",
             "结论": "Defines occupational scope, 29 tasks, and work context survey definitions",
             "链接": "https://www.onetonline.org/link/details/51-4072.00"
           },
           {
             "使用限制": "Common technologies do not equal adoption rates, automation rates, or job outcomes",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET hot technologies",
             "研究对象": "O*NET Hot Technologies 51-4072.00",
             "结论": "Lists common software technologies in current roles: Microsoft Excel, Office, Outlook, Word, and SAP",
             "链接": "https://www.onetonline.org/link/hot_tech/51-4072.00"
@@ -13806,12 +14477,12 @@
             "使用限制": "Wages and employment are different series; overall employment projections are not attributed to AI.",
             "来源": "O*NET / U.S. Bureau of Labor Statistics",
             "研究对象": "2025 national OEWS wages and 2025—2035 overall employment projections for this occupation",
-            "结论": "Median wage 21.32 USD/hour, 44350 USD/year; 2025 employment 150000; 2025—2035 decline category; annual average 13800",
+            "结论": "May 2025 median wage: $44,350 a year and $21.32 an hour. BLS Table 1.2 lists 150,000 U.S. jobs in 2025 and projects 144,900 in 2035 for Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic (51-4072). It publishes a net decline of 5,200 jobs (3.4%) and 13,800 projected average annual openings, including replacements. The totals and net change are rounded separately.",
             "链接": "https://www.onetonline.org/link/details/51-4072.00#WagesEmployment"
           },
           {
             "使用限制": "Industry distribution signals employer contexts, not demand forecasts",
-            "来源": "O*NET OnLine",
+            "来源": "O*NET industry distribution",
             "研究对象": "O*NET Industries 51-4072.00",
             "结论": "Current 2025 main industry employment distribution: manufacturing 92%, other industries including administrative support 8%; not wages or demand projections.",
             "链接": "https://www.onetonline.org/link/industry/51-4072.00"
@@ -13973,7 +14644,7 @@
         "transition": "When moving to an adjacent occupation, first compare transferable mold and measurement fundamentals, equipment parameter control, and defect judgments, then develop target material and equipment qualifications."
       },
       "breadcrumb": {
-        "label": "Casting workers",
+        "label": "Molding, Coremaking, and Casting Machine Operators",
         "slug": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic"
       },
       "career_path_block": {
@@ -14406,11 +15077,12 @@
             "affected_roles": "Personnel installing molds, adjusting parameters, and cleaning molds",
             "consequence": "May cause pinch injuries, cuts, and crushing injuries",
             "evidence_refs": [
-              "osha-guarding",
+              "osha-guard-023",
+              "osha-loto-023",
               "onet-details"
             ],
             "id": "personal-data",
-            "mitigation": "Follow lockout/tagout and guarding procedures; do not remove guards or bypass interlocks",
+            "mitigation": "Keep required guards in use during normal operation. In U.S. servicing or maintenance covered by OSHA 1910.147, authorized staff follow the site’s hazardous-energy control procedures. Do not bypass guards or interlocks.",
             "scenario": "Approaching presses, molds, and transmission parts during mold installation, machine adjustment, mold cleaning, and part removal",
             "title": "Moving equipment parts and pinch injuries"
           },
@@ -14482,6 +15154,18 @@
             "id": "nbs-wage-2025",
             "label": "National Bureau of Statistics: average annual wages of persons employed in urban units in 2025",
             "scope": "Chinese industry proxy wage definitions"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.212",
+            "id": "osha-guard-023",
+            "label": "OSHA 1910.212: Machine guarding",
+            "scope": "U.S. machine guarding requirements."
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147",
+            "id": "osha-loto-023",
+            "label": "OSHA 1910.147: Hazardous energy control",
+            "scope": "U.S. covered servicing and maintenance."
           }
         ]
       },
@@ -14594,7 +15278,7 @@
             "scenario_role_label": "Role direction",
             "scenario_value_label": "Preparation direction"
           },
-          "us_growth": "Decline (category: -1% or lower) (2025—2035)",
+          "us_growth": "−3.4%",
           "us_median": "21.32 USD/hour (44,350 USD/year, 2025)"
         }
       },
@@ -14603,43 +15287,43 @@
         "bls_table": [
           {
             "指标": "10th wage percentile",
-            "数值": "$34,170/year ($16.43/hour)",
+            "数值": "$34,170 per year; $16.43 per hour",
             "说明": "2025 BLS OEWS national 10th percentile; low percentiles are not starting wages | https://www.onetonline.org/link/localwages/51-4072.00"
           },
           {
             "指标": "25th wage percentile",
-            "数值": "$37,270/year ($17.92/hour)",
+            "数值": "$37,270 per year; $17.92 per hour",
             "说明": "2025 BLS OEWS national 25th percentile | https://www.onetonline.org/link/localwages/51-4072.00"
           },
           {
             "指标": "Median wage",
-            "数值": "$44,350/year ($21.32/hour)",
+            "数值": "$44,350 per year; $21.32 per hour",
             "说明": "2025 BLS OEWS national median; not a starting wage or individual offer | https://www.onetonline.org/link/localwages/51-4072.00"
           },
           {
             "指标": "75th wage percentile",
-            "数值": "$51,020/year ($24.53/hour)",
+            "数值": "$51,020 per year; $24.53 per hour",
             "说明": "2025 BLS OEWS national 75th percentile | https://www.onetonline.org/link/localwages/51-4072.00"
           },
           {
             "指标": "90th wage percentile",
-            "数值": "$61,600/year ($29.62/hour)",
+            "数值": "$61,600 per year; $29.62 per hour",
             "说明": "2025 BLS OEWS national 90th percentile | https://www.onetonline.org/link/localwages/51-4072.00"
           },
           {
-            "指标": "Employment (2025)",
-            "数值": "150000 people",
-            "说明": "Current U.S. 51-4072.00 overall employment series, not current recruitment, individual probabilities, or AI causation | https://www.onetonline.org/link/details/51-4072.00#WagesEmployment"
+            "指标": "Employment (jobs)",
+            "数值": "150,000 jobs in 2025; 144,900 projected for 2035",
+            "说明": "BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET occupational scope | https://www.onetonline.org/link/details/51-4072.00"
           },
           {
-            "指标": "Employment projections (2025—2035)",
-            "数值": "Decline (category: -1% or lower)",
-            "说明": "Current U.S. 51-4072.00 overall employment series, not current recruitment, individual probabilities, or AI causation | https://www.onetonline.org/link/details/51-4072.00#WagesEmployment"
+            "指标": "Projected job change (2025–2035)",
+            "数值": "−3.4%; published net decline 5,200 jobs",
+            "说明": "BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET occupational scope | https://www.onetonline.org/link/details/51-4072.00"
           },
           {
-            "指标": "Average annual job openings (2025—2035)",
-            "数值": "13800 openings/year",
-            "说明": "Current U.S. 51-4072.00 overall employment series, not current recruitment, individual probabilities, or AI causation | https://www.onetonline.org/link/details/51-4072.00#WagesEmployment"
+            "指标": "Projected average annual openings",
+            "数值": "13,800 projected per year, including replacements",
+            "说明": "BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET occupational scope | https://www.onetonline.org/link/details/51-4072.00"
           }
         ],
         "boundary": "U.S. data applies only to the U.S. scope and listed periods for O*NET/BLS 51-4072.00 and cannot be converted or extrapolated into individual earnings in mainland China.",
@@ -14661,7 +15345,7 @@
             "factor": "Materials and molds"
           },
           {
-            "answer": "Verify region, shifts, and overtime arrangements. In this occupation, 77% never sit at work and 53% report machine speed completely determines pace.",
+            "answer": "Check the line’s actual cycle, shift, and overtime arrangements. O*NET respondents rate the role of machine speed on pace, not how much of the work it controls.",
             "factor": "Location and shifts"
           },
           {
@@ -14670,33 +15354,33 @@
           }
         ],
         "factors_heading": "Factors affecting actual offers",
-        "growth": "Decline (category: -1% or lower) (2025—2035)",
+        "growth": "−3.4%",
         "heading": "U.S. wage and employment data boundaries for casting workers",
         "industry_heading": "Industry and role differences",
-        "industry_period": "2025",
+        "industry_period": "2025 employment shares",
         "industry_rows": [
           {
             "industry": "Manufacturing",
-            "median": "Insufficient evidence: same-year wages for this occupation in this context have not been obtained",
-            "note": "O*NET2025 employment distribution: manufacturing 92%, not future demand or wages."
+            "median": "92%",
+            "note": "O*NET Details labels the top industries as 2025. The detailed industry table supplies other industries. These are employment shares; the panels do not give pay by industry."
           },
           {
             "industry": "Other industries",
-            "median": "Insufficient evidence: same-year wages for this occupation in this context have not been obtained",
-            "note": "Other industries, including administrative support, account for 8%; not wages."
+            "median": "8%",
+            "note": "O*NET Details labels the top industries as 2025. The detailed industry table supplies other industries. These are employment shares; the panels do not give pay by industry."
           },
           {
-            "industry": "Plastic and rubber products",
-            "median": "Insufficient evidence: same-year wages for this occupation in this context have not been obtained",
-            "note": "Mold closing pressure, temperature control, and appearance standard requirements may differ; verify by role."
+            "industry": "Industry wages",
+            "median": "Not obtained",
+            "note": "Check the exact role and process for a specific employer."
           },
           {
-            "industry": "Other employers and regions",
-            "median": "Insufficient evidence: same-year wages for this occupation in this context have not been obtained",
-            "note": "Location, experience, shifts, and qualifications change actual conditions."
+            "industry": "Compare employers",
+            "median": "—",
+            "note": "Check the exact role and process for a specific employer."
           }
         ],
-        "industry_value_label": "Job data",
+        "industry_value_label": "Employment share",
         "interpretation_heading": "How to interpret",
         "interpretation_rows": [
           {
@@ -14730,7 +15414,7 @@
             "question": "How should percentiles be used?"
           },
           {
-            "answer": "Approximately 150000 employed in the occupation in 2025: an employment stock, not current recruitment. Distinguish OEWS wage and EP employment series.",
+            "answer": "2025 employment was 150,000 jobs. This is a level of employment rather than a count of advertised vacancies.",
             "question": "What does the employment count represent?"
           },
           {
@@ -14818,8 +15502,8 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "Use an entirely fictional work order and process sheet for a paper exercise checking mold installation, parameter settings, trial molding, operation monitoring, and measurement review. Paper exercises do not authorize equipment operation, hot work, or lifting.",
-        "title": "Casting workers"
+        "summary": "Consider this work if you like checking the job and material records at a molding or coremaking line before passing a batch to the next team.",
+        "title": "Molding, Coremaking, and Casting Machine Operators"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -14842,19 +15526,19 @@
         }
       },
       "hero": {
-        "h1": "Casting workers",
+        "h1": "Molding, Coremaking, and Casting Machine Operators",
         "quick_answer": "Casting workers (O*NET 51-4072.00) set up, operate, or tend metal and plastic molding, casting, and coremaking equipment. They read specifications, drawings, and work orders to determine mold setup, temperatures, and times; mount molds on machines or presses and apply release agents; adjust valves and knobs to control pressure, temperature, speed, feed, and cycle times; observe instruments and gauges to record temperatures, pressures, and injection cycles; inspect surface and dimensional defects visually and with instruments; demold, cool, finish, and record batches.",
-        "title": "Casting workers"
+        "title": "Molding, Coremaking, and Casting Machine Operators"
       },
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "Career outlook and related career transitions"
+            "href": "#career-visual-group-sources",
+            "label": "Check the market data sources"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "Related career transitions"
+            "href": "#career-visual-group-direction-comparison",
+            "label": "Compare related career directions"
           }
         ],
         "direct_answer": {
@@ -14893,7 +15577,7 @@
             "metric": "U.S. employment count",
             "occupation_scope": "O*NET/BLS 51-4072.00 scope for this occupation",
             "source_id": "ep",
-            "value": "150000 people (2025)"
+            "value": "150,000 jobs in 2025; 144,900 projected for 2035"
           },
           {
             "geography": "United States",
@@ -14903,7 +15587,7 @@
             "metric": "U.S. employment change",
             "occupation_scope": "O*NET/BLS 51-4072.00 scope for this occupation",
             "source_id": "ep",
-            "value": "Decline (category: -1% or lower) (2025—2035)"
+            "value": "−3.4%; published net decline 5,200 jobs"
           },
           {
             "geography": "United States",
@@ -14912,8 +15596,8 @@
             "limitation": "Includes replacement needs, not an individual's probability of being hired",
             "metric": "U.S. average annual job openings",
             "occupation_scope": "O*NET/BLS 51-4072.00 scope for this occupation",
-            "source_id": "nbs",
-            "value": "13800 openings/year (2025—2035)"
+            "source_id": "ep",
+            "value": "13,800 projected per year, including replacements"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -14931,10 +15615,10 @@
             "scope": "Occupational scope, source definitions, and responsibility boundaries"
           },
           {
-            "href": "https://www.onetonline.org/link/summary/51-4072.00",
+            "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
             "id": "nbs",
-            "label": "O*NET 51-4072.00 summary",
-            "scope": "Occupational scope, source definitions, and responsibility boundaries"
+            "label": "NBS 2025 average wages",
+            "scope": "Chinese manufacturing context, not occupational wages."
           },
           {
             "href": "https://www.onetonline.org/link/details/51-4072.00",
@@ -15036,13 +15720,13 @@
             "alternate_value": null,
             "label": "U.S. employment (2025)",
             "secondary_value": null,
-            "value": "150000 people"
+            "value": "150,000 jobs"
           },
           {
             "alternate_value": null,
             "label": "U.S. employment change (2025—2035)",
             "secondary_value": null,
-            "value": "Decline (category: -1% or lower)"
+            "value": "−3.4%"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15056,7 +15740,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start the assessment and view results",
             "evidence_level": {
               "$item": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.fit.riasec-fit-block.8",
@@ -15077,7 +15761,7 @@
           },
           {
             "answer": "This tool is for self-exploration only and does not predict forming competence or safety performance. Judge using real outputs and mentor feedback.",
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Start the assessment and view results",
             "evidence_level": "Exploratory tool, not qualification or hiring evidence",
             "id": "big-five",
@@ -15093,7 +15777,7 @@
           },
           {
             "answer": "This tool is for self-exploration only and does not predict forming competence or safety performance. Judge using real outputs and mentor feedback.",
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Start the assessment and view results",
             "evidence_level": "Exploratory tool, not qualification or hiring evidence",
             "id": "mbti",
@@ -15109,7 +15793,7 @@
           },
           {
             "answer": "This tool is for self-exploration only and does not predict forming competence or safety performance. Judge using real outputs and mentor feedback.",
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Start the assessment and view results",
             "evidence_level": "Exploratory tool, not qualification or hiring evidence",
             "id": "enneagram",
@@ -15125,7 +15809,7 @@
           },
           {
             "answer": "This tool is for self-exploration only and does not predict forming competence or safety performance. Judge using real outputs and mentor feedback.",
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Start the assessment and view results",
             "evidence_level": "Exploratory tool, not qualification or hiring evidence",
             "id": "iq",
@@ -15141,7 +15825,7 @@
           },
           {
             "answer": "This tool is for self-exploration only and does not predict forming competence or safety performance. Judge using real outputs and mentor feedback.",
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Start the assessment and view results",
             "evidence_level": "Exploratory tool, not qualification or hiring evidence",
             "id": "eq",
@@ -15247,7 +15931,7 @@
             "question": "Can assessment results serve as hiring or qualification evidence?"
           },
           {
-            "answer": "O*NET work context shows 77% never sit and 53% report machine speed completely determines pace. Include physical capacity and attention in self-assessment.",
+            "answer": "Consider whether you can sustain attention around equipment and report exceptions. Confirm the actual posture and pacing demands with the employer.",
             "question": "Do prolonged standing and machine pace significantly affect fit?"
           },
           {
@@ -15255,7 +15939,7 @@
             "question": "Should I be concerned about molten metal and dust exposure?"
           },
           {
-            "answer": "Use entirely fictional work orders and process sheets for paper exercises and low-risk practice, retaining mold installation, parameter, temperature, and measurement records.",
+            "answer": "Try CM-23 in section 09. Compare the job card and signed inspection record, then write one line for the next team. The exercise uses paper only.",
             "question": "How can I accumulate verifiable process evidence?"
           },
           {
@@ -15278,7 +15962,7 @@
             "tone": "caution"
           },
           {
-            "body": "Complete a paper exercise using an entirely fictional work order and process sheet, describing mold installation, parameter settings, trial molding, and measurement review checkpoints.",
+            "body": "Try CM-23 in section 09. Compare the job card and signed inspection record, then write one line for the next team. The exercise uses paper only.",
             "id": "experiment",
             "label": "Low-cost trial",
             "tone": "action"
@@ -15410,7 +16094,7 @@
           }
         ]
       },
-      "work_context_block": "Work context (O*NET Work Context survey): 59% of respondents encounter minor burns, cuts, stings, or bites daily and 13% once a week or more. 53% report machine speed completely determines work pace, with another 23% rating it very important. 39% have continual contact with others and 33% contact most of the time. 77% never sit at work, 92% never need to face external customers or the public, 92% never work outdoors under cover, and 88% never wear specialized protective equipment such as respirators."
+      "work_context_block": "In O*NET’s work-context survey, 53% of respondents rated the influence of machine speed on work pace as extremely important and 23% rated it very important. Separately, 59% reported daily exposure to minor cuts, burns, bites or stings. These are survey responses, not accident rates or a fixed pace at every employer."
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
@@ -15449,6 +16133,27 @@
         "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -15514,38 +16219,38 @@
       },
       {
         "derivation": null,
-        "display_value": "154,600 people (2024)",
+        "display_value": "150,000 jobs",
         "fact_id": "us-employment",
         "market": "United States",
-        "measure": "Employment level",
-        "occupation_scope": "Exact occupational data: Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic; O*NET-SOC 51-4072.00",
-        "period": "2024 BLS employment level; accessed 2026-09-25",
+        "measure": "Employment (jobs)",
+        "occupation_scope": "Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "ep"
         ]
       },
       {
-        "derivation": "O*NET labels this Decline (-1% or lower); this page uses the -4% shown on O*NET's employment trends page.",
-        "display_value": "Decline of 4% (2024—2034)",
+        "derivation": null,
+        "display_value": "−3.4%",
         "fact_id": "us-growth",
         "market": "United States",
-        "measure": "Projected employment change",
-        "occupation_scope": "Exact occupational data: Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic; O*NET-SOC 51-4072.00",
-        "period": "2024—2034 BLS employment projection; accessed 2026-09-25",
+        "measure": "Projected job change",
+        "occupation_scope": "Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "ep"
         ]
       },
       {
-        "derivation": "Includes growth and net replacement needs; O*NET labels it as an annual average.",
-        "display_value": "Approximately 15,900 openings/year (2024—2034)",
+        "derivation": null,
+        "display_value": "13,800 projected openings per year",
         "fact_id": "us-openings",
         "market": "United States",
-        "measure": "Average annual job openings",
-        "occupation_scope": "Exact occupational data: Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic; O*NET-SOC 51-4072.00",
-        "period": "2024—2034 BLS employment projection; accessed 2026-09-25",
+        "measure": "Projected average annual openings",
+        "occupation_scope": "Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-context"
+          "ep"
         ]
       },
       {
@@ -15555,7 +16260,7 @@
         "market": "Mainland China (manufacturing industry proxy)",
         "measure": "Average annual wages in urban non-private units",
         "occupation_scope": "Manufacturing industry proxy, not the exact scope of this occupation",
-        "period": "2025; published 2026-05-16; accessed 2026-09-25",
+        "period": "2025 wages; Chinese original published 2026-05-15; checked 2026-11-10",
         "source_refs": [
           "mohrss-wage"
         ]
@@ -15603,31 +16308,31 @@
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "U.S. wage reference"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "U.S. employment change"
+        "label": "U.S. projected job change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment",
         "key": "us_employment",
-        "label": "U.S. employment count"
+        "label": "U.S. jobs in 2025"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "U.S. average annual job openings"
+        "label": "U.S. projected annual openings"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "Mainland China wage reference"
+        "label": "Mainland China: exact occupational wage not verified"
       }
     ]
   },
@@ -15635,17 +16340,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Casting workers (O*NET 51-4072.00) set up and tend metal and plastic molding, casting, and coremaking equipment, die-casting, pouring, coremaking, and demolding parts. This page explains official tasks and work context, the U.S. BLS 2025 median wage of 44,350 USD and 4% decline for 2024—2034, mainland Chinese manufacturing and broad production/manufacturing job category proxy wages, AI task boundaries, fit signals, and entry paths."
+      "text": "Explore molding, coremaking and casting machine work, U.S. wages and training, and try a paper exercise on checking coremaking records."
     },
     "title": {
       "availability": "available",
-      "text": "Casting workers"
+      "text": "Molding, Coremaking and Casting Machine Operators: Duties and Pay"
     }
   },
-  "source_content_sha256": "a5d371a4d82628f4ca77fe198becb29c4cbd4d5a9f8b719cd5265416ae971548",
+  "source_content_sha256": "7a5b01fed284c1ef312423ef2ca0d02c410668cdbf927f8a0491cf0502f2b393",
   "subject": {
     "canonical_slug": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic",
-    "name": "Casting workers",
-    "summary": "Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic (O*NET 51-4072.00) set up, operate, or tend equipment that forms metal or thermoplastic materials into parts or products. Work centers on work order interpretation and mold selection and installation, pressure, temperature, and cycle control, operation observation and measurement, demolding and finishing, and records and handover."
+    "name": "Molding, Coremaking, and Casting Machine Operators",
+    "summary": "Molding, coremaking, and casting machine operators (O*NET 51-4072.00) set up or watch equipment that shapes metal or thermoplastic parts. They follow job records, check material and tooling, monitor the line, and record results for the next team. The role focuses on the equipment that forms parts or cores."
   }
 }

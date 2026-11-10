@@ -1283,6 +1283,9 @@
       "item:pediatric-surgeons.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:pediatric-surgeons.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:pediatric-surgeons.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30906,6 +30909,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两份会诊记录引用不同版本的照护人联系方式，未标哪份有效。写明待核字段及由哪一环节确认。"
+            ]
+          },
+          "id": "pediatric-surgeons.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "核儿外科会诊资料",
+          "type": "notice"
         }
       ]
     },
@@ -37263,6 +37281,13 @@
         "id": "pediatric-surgeons.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "pediatric-surgeons.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37612,7 +37637,7 @@
       "text": "外科医师"
     }
   },
-  "source_content_sha256": "ddb1b4c756c7b97f6b9ef16e482b3b3d42c80930b6e835d37dcc9059a9474435",
+  "source_content_sha256": "f2e410402a2ab9d233585a49fc51c1408788003601572ab447b87422bb6a0fb4",
   "subject": {
     "canonical_slug": "pediatric-surgeons",
     "name": "小儿外科医生",

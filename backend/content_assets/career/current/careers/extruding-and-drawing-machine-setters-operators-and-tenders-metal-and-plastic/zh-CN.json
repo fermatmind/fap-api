@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a43-laiyang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a43-wuhan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -26625,12 +26591,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他城市"
+              "武汉与莱阳招聘样本"
             ]
           },
           "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a43-wuhan",
+            "a43-laiyang"
           ],
           "type": "prose"
         },
@@ -26639,12 +26606,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得其他城市本职业工资统计；工作地、职责和计酬条件逐项核，不用全国行业值代填。"
+              "联塑科技发展（武汉）挤出操作工，计件报价 5,500–7,000 元/月，职责包括操作调试挤出设备、检查质量和清洁维护。公告将注塑岗位单列。 山东春雨润集雨节灌设备挤出操作工，4,500–6,500 元/月。公告另列注塑调机与质检，未写本岗计薪方式。 两条样本都涉及挤出，不能推断拉拔岗位报价或全国工资。当前在招状态须向雇主核实。"
             ]
           },
           "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a43-wuhan",
+            "a43-laiyang"
           ],
           "type": "prose"
         },
@@ -27431,13 +27399,13 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
@@ -28388,7 +28356,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用FT348四作品核单位范围、A外观未知、B直径超范围和C长度唯一更新；不同方向的真实条件另核，不由题目推职业结论。"
+              "用 FT348 练习核对单位、范围、空白字段和变式变化。真实岗位条件向雇主核实。"
             ]
           },
           "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.fit.personality-fit-block.55",
@@ -29207,7 +29175,7 @@
                   "没有温度、速度、压力、模具、测量仪器精度、抽样频次、生产许可与异常处置规则；这些不能自行补造。",
                   "所有单位、产品和记录均虚构。不得据本题调机、换模、开停设备或放行产品。",
                   "产出为三行范围核对表、缺失待办和一封未发送确认函。",
-                  "第5天唯一新增信息：记录C长度100.8mm。其他输入不变，不补A外观或真实质量批准。"
+                  "单项变式：C 长度补录为 100.8 毫米，其余原始记录不变。"
                 ]
               },
               {
@@ -29221,10 +29189,9 @@
               {
                 "id": "exercise-approach",
                 "values": [
-                  "材料三：参考答案",
-                  "A：直径和长度均在闭区间，外观未知。B：直径10.12大于10.10，长度在范围。C：直径在范围，长度未知；已有外观记录只照录。不能据此判真实质量合格或放行。",
-                  "未发送函示例：负责人，FT348的A外观未记录，B直径10.12超出题设上界10.10，C长度缺失。请核原始记录、规格版本及后续确认对象；未回复前保留这些待办，不补值或作产品放行。",
-                  "第5天只将C长度更新为100.8、在99.0—101.0内；A外观未知与B直径超范围仍保留。参考答案是题设核对，不是工艺或质量判定。"
+                  "先独立完成",
+                  "第六天交原题与变式，并保留未发送函。",
+                  "第七天到「常见问题与资料来源」打开「FT348 挤出记录参考答案（完成第六天后再打开）」。"
                 ]
               },
               {
@@ -29252,7 +29219,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "作品一：要求与输入对照表",
-                  "先列FT348范围、三记录与缺失；若另有真实公告，记录链接、日期、岗位、每项要求，否则注明本题无招聘样本。",
+                  "分开列 FT348 题设范围与招聘样本的岗位要求。",
                   "不把虚构输入或未知条件写已满足。"
                 ]
               },
@@ -29260,7 +29227,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "作品二：三行范围核对表",
-                  "输出A在范围但外观未知；B直径超范围；C长度未知，各列写单位与依据。",
+                  "逐条记录单位、依据和判断。",
                   "保留原输入，不写温度速度或补测量值。"
                 ]
               },
@@ -29268,7 +29235,7 @@
                 "id": "report-summary",
                 "values": [
                   "作品三：第5天更新与待办",
-                  "仅按给定C长度100.8更新该列；A外观未知、B直径超范围待办保留。",
+                  "按变式给定的补录更新对应栏，保留原记录与待核项。",
                   "附未发送确认函，未知事项与题设答案可复核。"
                 ]
               },
@@ -29348,50 +29315,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第1天：读FT348题面",
-                  "列单位、闭区间、三记录和明确缺失，不找外部设备。"
+                  "第 1 天",
+                  "列出单位、区间与三个记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第2天：核直径",
-                  "A/C在题设范围，B超上界；写比较依据。"
+                  "第 2 天",
+                  "逐条核直径并记依据。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第3天：核长度与外观",
-                  "A/B长度在范围，C长度未知；A外观未知，不补值。"
+                  "第 3 天",
+                  "逐条核长度和外观。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第4天：写待办与确认函",
-                  "记录A外观、B直径、C长度；写题中未发送函，保留原状。"
+                  "第 4 天",
+                  "列待核项，写未发送函。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第5天：按唯一新输入更新",
-                  "仅C长度100.8mm改为在范围；A外观、B直径待办不清除。"
+                  "第 5 天",
+                  "比较 C 的补录与原题。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第6天：独立复核",
-                  "回查单位、范围与原输入；他人反馈可选，未发生则注明独立复核，不虚构。"
+                  "第 6 天",
+                  "独立交原题三行和变式的变化行，附上未发送函。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第7天：写观察",
-                  "整理四作品，写是否愿意继续核资料及待补知识；不把题目当设备能力或资格考核。"
+                  "第 7 天",
+                  "第七天到「常见问题与资料来源」打开「FT348 挤出记录参考答案（完成第六天后再打开）」。 写下一处修订。"
                 ]
               }
             ]
@@ -29408,13 +29375,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第1天：单位、范围与缺失列全。",
-              "第2天：B直径超10.10，其余在范围。",
-              "第3天：C长度、A外观保持未知。",
-              "第4天：待办和未发送函与输入一致。",
-              "第5天：仅更新C长度100.8，不消除其他待办。",
-              "第6天：独立回查；实际反馈才记录。",
-              "第7天：四作品能复核，观察不等于操作授权。"
+              "写单位和区间。",
+              "每行保留读数来源。",
+              "未知字段留待核。",
+              "附未发送函。",
+              "单列变式变化。",
+              "保留独立交件。",
+              "对照参考写修订。"
             ]
           },
           "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.path.seven-day-decision.1",
@@ -29536,14 +29503,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得本职业可核验、仍有效且代表性的招聘样本；不把编辑角色表当真实岗位公告。",
-              "若自行找到公告，逐项记录链接、日期、是否在招、材料设备、学历经验、训练与计酬；某项可放宽不代表其他条件可替代。"
+              "联塑科技发展（武汉）挤出操作工，计件报价 5,500–7,000 元/月，职责包括操作调试挤出设备、检查质量和清洁维护。公告将注塑岗位单列。 山东春雨润集雨节灌设备挤出操作工，4,500–6,500 元/月。公告另列注塑调机与质检，未写本岗计薪方式。 两条样本都涉及挤出，不能推断拉拔岗位报价或全国工资。当前在招状态须向雇主核实。"
             ]
           },
           "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a43-wuhan",
+            "a43-laiyang"
           ],
           "title": "金属挤压拉拔设备操作工｜path",
           "type": "notice"
@@ -31574,13 +31540,13 @@
                 ]
               },
               {
-                "answer": "证据不足：未取得中国本职业精确全国工资。2025制造业城镇非私营113,594、私营76,055元/年为行业均值，仅背景，不是职业中位或招聘报价。",
+                "answer": "联塑科技发展（武汉）挤出操作工，计件报价 5,500–7,000 元/月，职责包括操作调试挤出设备、检查质量和清洁维护。公告将注塑岗位单列。 山东春雨润集雨节灌设备挤出操作工，4,500–6,500 元/月。公告另列注塑调机与质检，未写本岗计薪方式。 两条样本都涉及挤出，不能推断拉拔岗位报价或全国工资。当前在招状态须向雇主核实。 全国职业工资分布仍缺可比数据。",
                 "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.faq.3",
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.q3",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "a43-wuhan",
+                  "a43-laiyang"
                 ]
               },
               {
@@ -31646,14 +31612,19 @@
                 ]
               },
               {
-                "answer": "BLS精确SOC51-4021：2025就业60,900人，2035预测61,400人，2025—2035增长0.7%，年均职位空缺5,400个；空缺含增长和更替，不是十年合计或净新增，表中千人值分别舍入。 转向按主要材料、工序与职责比较；具体经验、训练、权限和是否在招须核真实公告，本页不保证可转换。",
+                "answer": "BLS 表 1.2 的美国 51-4021 行：2025 年约 60,900 人，2035 年预计约 61,400 人，增长 0.7%，年均岗位空缺约 5,400 个，含替补。人数分别取整。",
                 "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.faq.10",
                 "question": "美国就业前景如何？转行需要补什么？",
                 "question_key": "career.faq.extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.outlook-transition",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
+              },
+              {
+                "answer": "A 的直径与长度都在范围内，外观未记录。B 直径 10.12 毫米，超出 10.10 毫米上限，长度在范围内。C 直径在范围内，原题长度未知。变式 C 的长度 100.8 毫米，在 99.0–101.0 毫米范围内。A 的外观和 B 的超范围记录仍待核。未发送函示例：请核对 A 的外观、B 的原始读数和规格版本、C 的原题缺失及补录来源，并确认接手人。题设范围核对不能用于实际放行。 自核四项：尺寸和单位、缺失字段、变式变化、未发送函与放行边界。",
+                "id": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.faq.11",
+                "question": "FT348 挤出记录参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.11"
               }
             ]
           },
@@ -31742,26 +31713,14 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI（英文）",
+                "entity": "MBTI 人格测评",
                 "id": "navigation-2",
-                "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five（英文）",
-                "id": "navigation-3",
-                "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI（中文）",
-                "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five（中文）",
-                "id": "navigation-5",
+                "entity": "大五人格测评",
+                "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
@@ -31793,8 +31752,7 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "官方职业范围：设定、操作或看护设备，把热塑性或金属材料挤压或拉拔成管、棒、软管、线材、棒材或型材。",
-                  "兴趣代码 RC；准备层级 Job Zone 1-2（很少到一些准备），SVP 低于 6.0。",
-                  "O*NET仍列2024就业66,000与2024—2034慢于平均1%—2%、年均空缺6,500；本页当前就业用BLS2025—2035，不混时期。"
+                  "兴趣代码 RC；准备层级 Job Zone 1-2（很少到一些准备），SVP 低于 6.0。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31807,11 +31765,12 @@
                 "url": "https://www.onetonline.org/link/summary/51-4021.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "用于核对任务、工作活动、工作情境、技术技能与准备层级（Job Zone 1-2）。",
                   "任务含设备控制、产品测量、模具更换、小修、裁断卷绕、热塑性混料、上料及库存；61%教育受访者回答高中或同等学历，当前页面未列其余类别。",
-                  "工作情境显示约 99% 几乎持续站立、100% 每天佩戴防护用品、噪声与冷热暴露常见、约 67% 每周工作超过 40 小时。"
+                  "工作情境显示约 99% 几乎持续站立、100% 每天佩戴防护用品、噪声与冷热暴露常见、约 67% 每周工作超过 40 小时。",
+                  "2025 美国中位时薪 22.94 美元、中位年薪 47,720 美元，制造业就业占 95%。就业预测见 BLS 表 1.2。"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
@@ -31826,8 +31785,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "BLS精确SOC51-4021：2025就业60,900人，2035预测61,400人，2025—2035增长0.7%，年均职位空缺5,400个；空缺含增长和更替，不是十年合计或净新增，表中千人值分别舍入。",
-                  "典型教育高中或同等学历，相关经验None，中期在职训练；不推中国岗位门槛。"
+                  "BLS 表 1.2 的美国 51-4021 行：2025 年约 60,900 人，2035 年预计约 61,400 人，增长 0.7%，年均岗位空缺约 5,400 个，含替补。人数分别取整。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
@@ -32083,6 +32041,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "联塑科技发展（武汉）挤出操作工，计件报价 5,500–7,000 元/月，职责包括操作调试挤出设备、检查质量和清洁维护。公告将注塑岗位单列。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a43-wuhan",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "挤出操作工招聘样本",
+                "period": "2026-07-02",
+                "publisher": "武汉市东西湖区人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.dxh.gov.cn/ZWGK/QZFXXGKML/GGFWXX_devsavepath/JY_dev19savepath/202608/t20260826_2839156.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "山东春雨润集雨节灌设备挤出操作工，4,500–6,500 元/月。公告另列注塑调机与质检，未写本岗计薪方式。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a43-laiyang",
+                "limitation": "单家雇主报价，当前在招状态未核。",
+                "market": "中国大陆",
+                "name": "挤出操作工招聘样本",
+                "period": "2025-03-20",
+                "publisher": "莱阳市人民政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.laiyang.gov.cn/art/2025/3/20/art_111048_2979210.html"
               }
             ]
           },
@@ -34578,7 +34566,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet",
+            "id": "onet-work-context",
             "label": {
               "$link": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.risk.career-risk-cards.7",
               "block": "risk",
@@ -34943,6 +34931,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a43-wuhan",
+            "posting-a43-laiyang"
+          ],
           "sources_note": {
             "$item": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36854,7 +36846,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "MBTI 人格测评"
           },
           {
             "href": {
@@ -36864,27 +36856,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
-          },
-          {
-            "href": {
-              "$link": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI（中文）"
-          },
-          {
-            "href": {
-              "$link": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five（中文）"
+            "label": "大五人格测评"
           }
         ]
       },
@@ -37272,6 +37244,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "联塑科技发展（武汉）挤出操作工，计件报价 5,500–7,000 元/月，职责包括操作调试挤出设备、检查质量和清洁维护。公告将注塑岗位单列。",
+        "fact_id": "posting-a43-wuhan",
+        "market": "中国大陆",
+        "measure": "招聘月薪报价",
+        "occupation_scope": "挤出操作工招聘样本",
+        "period": "2026-07-02",
+        "source_refs": [
+          "a43-wuhan"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "山东春雨润集雨节灌设备挤出操作工，4,500–6,500 元/月。公告另列注塑调机与质检，未写本岗计薪方式。",
+        "fact_id": "posting-a43-laiyang",
+        "market": "中国大陆",
+        "measure": "招聘月薪报价",
+        "occupation_scope": "挤出操作工招聘样本",
+        "period": "2025-03-20",
+        "source_refs": [
+          "a43-laiyang"
+        ]
       }
     ]
   },
@@ -37331,7 +37327,7 @@
       "text": "金属挤压拉拔设备操作工"
     }
   },
-  "source_content_sha256": "c507b5669c0bc9977c4967f99c5351c2cef3ac4197f4b0f0b02a02ffbb899692",
+  "source_content_sha256": "481bdf925b3bbfabf0a762465a389666331d78dfc43986675b4783b779061264",
   "subject": {
     "canonical_slug": "extruding-and-drawing-machine-setters-operators-and-tenders-metal-and-plastic",
     "name": "金属挤压拉拔设备操作工",

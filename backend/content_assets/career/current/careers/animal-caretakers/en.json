@@ -38,9 +38,6 @@
       "fact:entry-boundary": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:fit-signals": {
         "status": "pending_mapping"
       },
@@ -1554,7 +1551,7 @@
         "status": "pending_mapping"
       },
       "item:animal-caretakers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:animal-caretakers.sources.source-card.1": {
         "status": "mapped"
@@ -23308,7 +23305,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "The occupation covered on this page, animal caretakers, corresponds to Animal Caretakers (39-2021), not the 39-2000 combined group that includes Animal Trainers. The work involves feeding and cleaning, observation and record-keeping, grooming, exercise and serving owners and visitors for non-food animals such as dogs and cats, in settings that include kennels, shelters, zoos and aquariums. The 24 U.S. tasks include: feeding and watering; providing treatment or contacting a veterinarian; checking for injury or illness; mixing food and medications according to instructions or prescriptions; washing linens and cleaning, disinfecting and maintaining housing and saddles; exercise; recording weight, body size, body condition, treatment, medication and food intake; answering visitors; telephone appointments; health care advice; bathing, brushing, trimming, nail trimming and ear cleaning; observing children and reminding them to interact safely with animals; cleaning and disinfecting surgical equipment; adoption placement; discussing grooming needs; moving animals; regulating temperature and humidity; anesthetizing and vaccinating according to instructions; maintaining equipment; training animals for specific tasks; ordering, unloading and storing; selling pet food and supplies; scuba diving to maintain exhibit areas; training volunteers and staff. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
+              "The occupation covered on this page, animal caretakers, corresponds to Animal Caretakers (39-2021), not the 39-2000 combined group that includes Animal Trainers. The work involves feeding and cleaning, observation and record-keeping, grooming, exercise and serving owners and visitors for non-food animals such as dogs and cats, in settings that include kennels, shelters, zoos and aquariums. The 24 U.S. tasks include: feeding and watering; providing treatment or contacting a veterinarian; checking for injury or illness; mixing food and medications according to instructions or prescriptions; washing linens and cleaning, disinfecting and maintaining housing and saddles; exercise; recording weight, body size, body condition, treatment, medication and food intake; answering visitors; telephone appointments; health care advice; bathing, brushing, trimming, nail trimming and ear cleaning; observing children and reminding them to interact safely with animals; cleaning and disinfecting surgical equipment; adoption placement; discussing grooming needs; moving animals; regulating temperature and humidity; anesthetizing and vaccinating according to instructions; maintaining equipment; training animals for specific tasks; ordering, unloading and storing; selling pet food and supplies; scuba diving to maintain exhibit areas; training volunteers and staff. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
             ]
           },
           "id": "animal-caretakers.quick-decision.fit-decision-checklist.1",
@@ -23324,12 +23321,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "A/B/C on this page provide complete fictional inputs: calculate intake, find differences in the handover of the same record, and write fact-unknown-report. The three paper tasks do not involve contact with animals or the design of restraint, grooming or medication procedures; they cover only observation and checking and the way one communicates."
+              "Try AK-51: check the feeding record against the next shift’s summary, then revise it when a receipt arrives."
             ]
           },
           "id": "animal-caretakers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23353,15 +23350,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national or city wage distribution for this occupation in China has been obtained, and a broad industry average does not stand for an occupational median. In the United States, the May2025 median is USD 35,360 a year and USD 17.00 an hour; BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
+              "A 2024 Caidian public job list in Wuhan advertised five animal caretaker positions at Wuhan West Lake Animal Kingdom, CNY 3,000–4,000 a month. It requested high school or higher and preferred related training such as animal medicine or animal husbandry and veterinary science. Lehe Ledu in Chongqing advertised five animal keeper roles in 2025 for wildlife care and behavior demonstrations. The notice required an associate-level qualification or above in a listed field and age under 40. Applications closed May 30. No pay amount was listed."
             ]
           },
           "id": "animal-caretakers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "oews",
-            "ep",
-            "nbs",
-            "cnvet"
+            "care-wuhan",
+            "care-chongqing"
           ],
           "type": "prose"
         },
@@ -23370,13 +23365,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: a daily care job that provides feeding, cleaning, observation, grooming and exercise care for non-food animals such as dogs and cats and keeps honest records of animal condition."
+              "Daily animal care starts with feeding, cleaning, observation and handover. Ask which animals you would care for and who takes over if something changes. U.S. data use SOC 39-2021. Check actual duties and treatment authority separately in mainland China."
             ]
           },
           "id": "animal-caretakers.quick-decision.fermat-decision-card.7",
           "source_refs": [
             "onet",
-            "onet"
+            "care-wuhan",
+            "care-chongqing"
           ],
           "type": "prose"
         }
@@ -23393,7 +23389,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The 24 U.S. tasks include: feeding and watering; providing treatment or contacting a veterinarian; checking for injury or illness; mixing food and medications according to instructions or prescriptions; washing linens and cleaning, disinfecting and maintaining housing and saddles; exercise; recording weight, body size, body condition, treatment, medication and food intake; answering visitors; telephone appointments; health care advice; bathing, brushing, trimming, nail trimming and ear cleaning; observing children and reminding them to interact safely with animals; cleaning and disinfecting surgical equipment; adoption placement; discussing grooming needs; moving animals; regulating temperature and humidity; anesthetizing and vaccinating according to instructions; maintaining equipment; training animals for specific tasks; ordering, unloading and storing; selling pet food and supplies; scuba diving to maintain exhibit areas; training volunteers and staff. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. Ordinary care and customer/adoption records are kept honestly under the applicable rules, with original values traceable and corrected in line with the standards; medical records at animal diagnostic and treatment institutions have a separate retention requirement of at least three years, and this period is not applied to all care records."
+              "The 24 U.S. tasks include: feeding and watering; providing treatment or contacting a veterinarian; checking for injury or illness; mixing food and medications according to instructions or prescriptions; washing linens and cleaning, disinfecting and maintaining housing and saddles; exercise; recording weight, body size, body condition, treatment, medication and food intake; answering visitors; telephone appointments; health care advice; bathing, brushing, trimming, nail trimming and ear cleaning; observing children and reminding them to interact safely with animals; cleaning and disinfecting surgical equipment; adoption placement; discussing grooming needs; moving animals; regulating temperature and humidity; anesthetizing and vaccinating according to instructions; maintaining equipment; training animals for specific tasks; ordering, unloading and storing; selling pet food and supplies; scuba diving to maintain exhibit areas; training volunteers and staff. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. Ordinary care and customer/adoption records are kept honestly under the applicable rules, with original values traceable and corrected in line with the standards; medical records at animal diagnostic and treatment institutions have a separate retention requirement of at least three years, and this period is not applied to all care records."
             ]
           },
           "id": "animal-caretakers.profile.career-quick-answers-block.1",
@@ -23473,7 +23469,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The U.S. May2025 quintiles are USD 27,250/29,820/35,360/40,050/50,060; BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. Education levels that ONET2026 respondents reported for newly hired workers: 64% high school or equivalent, 14% associate's or another two-year degree and 13% bachelor's; these are not the education distribution of current workers or a uniform threshold in China. The EP route is typically a high school education with short on-the-job training; the OOH notes that zookeepers often need a related bachelor's degree."
+              "The U.S. May2025 quintiles are USD 27,250/29,820/35,360/40,050/50,060; BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025–2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. Education levels that ONET2026 respondents reported for newly hired workers: 64% high school or equivalent, 14% associate's or another two-year degree and 13% bachelor's; these are not the education distribution of current workers or a uniform threshold in China. The EP route is typically a high school education with short on-the-job training; the OOH notes that zookeepers often need a related bachelor's degree."
             ]
           },
           "id": "animal-caretakers.profile.onet-structured-fields-block.2",
@@ -23533,7 +23529,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. EP includes the self-employed and has a different scope from OEWS employees, and openings are not the same as net growth or turnover; the 39-2000 combined group, 413,000, 11.2%, and an annual average of 69,400, does not substitute for this occupation."
+              "BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025–2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. EP includes the self-employed and has a different scope from OEWS employees, and openings are not the same as net growth or turnover; the 39-2000 combined group, 413,000, 11.2%, and an annual average of 69,400, does not substitute for this occupation."
             ]
           },
           "id": "animal-caretakers.profile.onet-structured-fields-block.4",
@@ -23562,7 +23558,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The 2025 Guangdong catalogue lists 4-10-07-01 pet health care worker, 02 trainer and 03 groomer, with Class B guidance subsidies of 1000/1500/2000/2500/3000 yuan for junior worker/intermediate worker/senior worker/technician/senior technician; eligibility, local processing, transitional conditions and current policy must be checked, and no subsidy, income or employment is guaranteed, nor can this be equated with all U.S. care jobs. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. For wild or laboratory animal settings, the management requirements that actually apply are checked separately."
+              "The 2025 Guangdong catalogue lists 4-10-07-01 pet health care worker, 02 trainer and 03 groomer, with Class B guidance subsidies of 1000/1500/2000/2500/3000 yuan for junior worker/intermediate worker/senior worker/technician/senior technician; eligibility, local processing, transitional conditions and current policy must be checked, and no subsidy, income or employment is guaranteed, nor can this be equated with all U.S. care jobs. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. For wild or laboratory animal settings, the management requirements that actually apply are checked separately."
             ]
           },
           "id": "animal-caretakers.profile.onet-structured-fields-block.5",
@@ -23593,7 +23589,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Care is carried out according to the job and lawful training; in China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. Adoption screening follows institutional rules, and the operating entity verifies qualifications in accordance with the law; the U.S. initial treatment task is not turned into an exception allowing ordinary care workers in China to treat animals."
+              "Care is carried out according to the job and lawful training; in China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. Adoption screening follows institutional rules, and the operating entity verifies qualifications in accordance with the law; the U.S. initial treatment task is not turned into an exception allowing ordinary care workers in China to treat animals."
             ]
           },
           "id": "animal-caretakers.profile.career-quick-answers-block.7",
@@ -23669,7 +23665,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "The occupation covered on this page, animal caretakers, corresponds to Animal Caretakers (39-2021), not the 39-2000 combined group that includes Animal Trainers. The work involves feeding and cleaning, observation and record-keeping, grooming, exercise and serving owners and visitors for non-food animals such as dogs and cats, in settings that include kennels, shelters, zoos and aquariums. The May2025 median is USD 35,360; BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
+              "The occupation covered on this page, animal caretakers, corresponds to Animal Caretakers (39-2021), not the 39-2000 combined group that includes Animal Trainers. The work involves feeding and cleaning, observation and record-keeping, grooming, exercise and serving owners and visitors for non-food animals such as dogs and cats, in settings that include kennels, shelters, zoos and aquariums. The May2025 median is USD 35,360; BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025–2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
             ]
           },
           "id": "animal-caretakers.profile.definition-block.11",
@@ -23777,7 +23773,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Chinese skill levels are not the same as a diagnostic and treatment licence. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. In the OOH, professional certification in the United States is generally not required, self-employed services in many states need a business licence, and not every employee needs an individual diagnostic and treatment licence."
+              "Chinese skill levels are not the same as a diagnostic and treatment licence. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. In the OOH, professional certification in the United States is generally not required, self-employed services in many states need a business licence, and not every employee needs an individual diagnostic and treatment licence."
             ]
           },
           "id": "animal-caretakers.profile.career-quick-answers-block.18",
@@ -23942,7 +23938,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Editorially check the training content, assessment and job recognition, and do not estimate the causal effect of skill level on wages or promotion."
+              "Check the training content, assessment and job recognition, and do not estimate the causal effect of skill level on wages or promotion."
             ]
           },
           "id": "animal-caretakers.profile.career-quick-answers-block.29",
@@ -24003,7 +23999,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Editorially check the duties, authorization and development conditions; promotion or a pay rise is not guaranteed."
+              "Check the duties, authorization and development conditions; promotion or a pay rise is not guaranteed."
             ]
           },
           "id": "animal-caretakers.profile.career-quick-answers-block.33",
@@ -24528,7 +24524,7 @@
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
               },
               {
-                "entity": "EP2025—2035 detail",
+                "entity": "EP2025–2035 detail",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24714,7 +24710,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: check the duties, records and human review before introducing a tool; in China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
+              "Check this: check the duties, records and human review before introducing a tool; in China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
             ]
           },
           "id": "animal-caretakers.ai-impact.ai-impact-table.15",
@@ -24762,14 +24758,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, effect, substitution rate or wage causality has been obtained for this occupation. Appointment and record organization are only possible editorial uses, and it cannot be guaranteed that the occupation will or will not be replaced; BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. Growth cannot be attributed to AI. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "A tool can flag missing fields or handovers. Check any unusual observation under the facility’s procedures and refer it to a person with the required authority."
             ]
           },
           "id": "animal-caretakers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ep",
-            "ooh"
+            "editor",
+            "onet"
           ],
           "type": "prose"
         },
@@ -24862,7 +24857,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP2025—2035 detail"
+              "BLS EP2025–2035 detail"
             ]
           },
           "id": "animal-caretakers.ai-impact.ai-impact-table.25",
@@ -25220,7 +25215,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP2025—2035 detail for this occupation"
+              "BLS EP2025–2035 detail for this occupation"
             ]
           },
           "id": "animal-caretakers.ai-impact.ai-impact-table.50",
@@ -25248,7 +25243,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%."
+              "BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025–2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%."
             ]
           },
           "id": "animal-caretakers.ai-impact.ai-impact-table.52",
@@ -25276,7 +25271,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP2025—2035"
+              "BLS EP2025–2035"
             ]
           },
           "id": "animal-caretakers.ai-impact.ai-impact-table.54",
@@ -25304,7 +25299,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%."
+              "BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025–2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%."
             ]
           },
           "id": "animal-caretakers.ai-impact.ai-impact-table.56",
@@ -25407,7 +25402,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. Job gains or losses cannot be inferred from technical terms."
+              "BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025–2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. Job gains or losses cannot be inferred from technical terms."
             ]
           },
           "id": "animal-caretakers.ai-impact.ai-impact-table.63",
@@ -25538,7 +25533,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "An ordinary care job title does not confer Chinese diagnostic and treatment rights. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. Assistants generally may not prescribe, fill in diagnostic certificates or issue certificates; provincial measures may allow assistants to practise diagnosis and treatment independently in rural areas, and the applicable conditions are checked separately. U.S. anesthesia and vaccination tasks are not treated as Chinese authorization."
+              "An ordinary care job title does not confer Chinese diagnostic and treatment rights. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. Assistants generally may not prescribe, fill in diagnostic certificates or issue certificates; provincial measures may allow assistants to practise diagnosis and treatment independently in rural areas, and the applicable conditions are checked separately. U.S. anesthesia and vaccination tasks are not treated as Chinese authorization."
             ]
           },
           "id": "animal-caretakers.ai-impact.ai-impact-table.72",
@@ -25568,7 +25563,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. Openings include replacement and are not the same as net growth, and do not guarantee individual employment; check the actual job and the written conditions."
+              "BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025–2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. Openings include replacement and are not the same as net growth, and do not guarantee individual employment; check the actual job and the written conditions."
             ]
           },
           "id": "animal-caretakers.ai-impact.ai-impact-table.74",
@@ -25582,7 +25577,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP2025—2035 detail for this occupation, not OEWS openings data."
+              "BLS EP2025–2035 detail for this occupation, not OEWS openings data."
             ]
           },
           "id": "animal-caretakers.ai-impact.ai-impact-table.75",
@@ -26519,12 +26514,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "In China there are only NBS2025 corporate unit and industry annual averages, not occupational wages; private corporate units within scope are included while sole proprietors and the self-employed are excluded, and no estimate is made of the coverage of most businesses or of the occupation."
+              "NBS 2025 pre-tax average annual wages for urban unit employees nationwide were CNY 129,441 in non-private units and CNY 71,590 in private units. Industry averages cover many jobs. The Wuhan and Chongqing postings also do not establish nationwide animal caretaker pay."
             ]
           },
           "id": "animal-caretakers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "care-wuhan",
+            "care-chongqing"
           ],
           "type": "prose"
         },
@@ -26934,12 +26931,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national or city-level wage distribution for the exact occupation of animal caretakers has been obtained"
+              "A 2024 Caidian public job list in Wuhan advertised five animal caretaker positions at Wuhan West Lake Animal Kingdom, CNY 3,000–4,000 a month. It requested high school or higher and preferred related training such as animal medicine or animal husbandry and veterinary science. Lehe Ledu in Chongqing advertised five animal keeper roles in 2025 for wildlife care and behavior demonstrations. The notice required an associate-level qualification or above in a listed field and age under 40. Applications closed May 30. No pay amount was listed. Historical employer examples. They do not establish current openings or national occupational pay."
             ]
           },
           "id": "animal-caretakers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "nbs"
+            "care-wuhan",
+            "care-chongqing"
           ],
           "type": "prose"
         },
@@ -27033,7 +27031,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "12.1%（2025—2035）"
+              "12.1%（2025–2035）"
             ]
           },
           "id": "animal-caretakers.china-salary.career-snapshot-primary-locale.58",
@@ -27069,7 +27067,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS May2025 wage percentiles shown by O*NET｜https://www.onetonline.org/link/localwages/39-2021.00; BLS EP2025—2035｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; ONET24 tasks｜https://www.onetonline.org/link/details/39-2021.00"
+              "BLS May2025 wage percentiles shown by O*NET｜https://www.onetonline.org/link/localwages/39-2021.00; BLS EP2025–2035｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; ONET24 tasks｜https://www.onetonline.org/link/details/39-2021.00"
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.8",
@@ -27252,7 +27250,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "12.1%（2025—2035）"
+              "12.1%（2025–2035）"
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.21",
@@ -27294,7 +27292,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The annual average openings over 2025—2035 include growth and replacement and are not net growth or a turnover rate.；BLS EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "The annual average openings over 2025–2035 include growth and replacement and are not net growth or a turnover rate.；BLS EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.24",
@@ -27308,7 +27306,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wages are on the OEWS May2025 employee basis, shown through O*NET; employment is EP2025—2035 for this occupation 39-2021 including the self-employed, and cannot be mixed with the combined group or with Chinese industry averages."
+              "Wages are on the OEWS May2025 employee basis, shown through O*NET; employment is EP2025–2035 for this occupation 39-2021 including the self-employed, and cannot be mixed with the combined group or with Chinese industry averages."
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.25",
@@ -27337,7 +27335,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. Editorially check the actual institutional tasks and demand, and do not infer individual opportunities from pet spending or the number of openings."
+              "BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025–2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. Check the actual institutional tasks and demand, and do not infer individual opportunities from pet spending or the number of openings."
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.27",
@@ -27365,7 +27363,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Editorially check the work area, hours and cost of living; no regional causality or regional wages are provided on this page, and the national median is not to be inferred as an individual's income."
+              "Check the work area, hours and cost of living; no regional causality or regional wages are provided on this page, and the national median is not to be inferred as an individual's income."
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.29",
@@ -27393,7 +27391,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Editorially check the institution, job duties, hours, training requirements and pay composition, without treating them as measured causality or a ranking of effects."
+              "Check the institution, job duties, hours, training requirements and pay composition, without treating them as measured causality or a ranking of effects."
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.31",
@@ -27422,12 +27420,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "12.1%（2025—2035）"
+              "The BLS handbook lists four May 2025 annual medians for this occupation: $37,460 in arts, entertainment and recreation; $35,290 in retail; $35,190 in other personal services; and $33,350 in professional, scientific and technical services. O*NET’s 43% for other services excluding public administration and 10% for professional, scientific and technical services are employment shares."
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "ep"
+            "ooh",
+            "onet"
           ],
           "type": "prose"
         },
@@ -27534,12 +27533,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain the 39-2021 wage median within the government industry, which is not the same as BLS not publishing it."
+              "This page does not provide a verified median for this occupation in government."
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "blsindustry"
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27548,12 +27547,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Government 99 excludes state and local schools and hospitals and the USPS; a public zoo is not assigned to this code on the strength of its name, and the unit's classification must be checked."
+              "Use BLS industry tables to check the employer’s actual industry. The national occupational median does not give a government-industry wage."
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "blsindustry"
+            "blsindustry",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27590,13 +27590,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The national May2025 median for this occupation is 35360, not an industry figure. The OOH also publishes 37460 a year for arts, entertainment and recreation and 35290 for retail."
+              "The national occupational median was $35,360. The BLS handbook also reports May 2025 annual medians of $37,460 in arts, entertainment and recreation; $35,290 in retail; $35,190 in other personal services; and $33,350 in professional, scientific and technical services."
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "oews",
-            "ooh"
+            "ooh",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27633,7 +27633,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wages are May2025 OEWS shown through O*NET; employment, growth and openings are BLS EP2025—2035. EP includes the self-employed and has a different scope from OEWS employees, and the 39-2000 combined group is listed separately."
+              "Wages are May2025 OEWS shown through O*NET; employment, growth and openings are BLS EP2025–2035. EP includes the self-employed and has a different scope from OEWS employees, and the 39-2000 combined group is listed separately."
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.48",
@@ -27648,7 +27648,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Editorially check the duties, hours, region, institution, training and pay composition; these are items to check in written pay, not measured wage causality or a ranking of effects."
+              "Check the duties, hours, region, institution, training and pay composition; these are items to check in written pay, not measured wage causality or a ranking of effects."
             ]
           },
           "id": "animal-caretakers.us-salary.career-snapshot-secondary-locale.49",
@@ -27748,19 +27748,19 @@
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Veterinarian",
@@ -28325,7 +28325,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
+              "In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
             ]
           },
           "id": "animal-caretakers.fit.personality-fit-block.30",
@@ -28749,7 +28749,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The O*NET summary supports occupational identity, interests and related occupations; it currently lists 2025 employment and the 2025—2035 projection, while the exact growth, net change and openings are still checked directly against EP, and it does not prove personality prediction."
+              "The O*NET summary supports occupational identity, interests and related occupations; it currently lists 2025 employment and the 2025–2035 projection, while the exact growth, net change and openings are still checked directly against EP, and it does not prove personality prediction."
             ]
           },
           "id": "animal-caretakers.fit.personality-fit-block.59",
@@ -28834,7 +28834,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The O*NET summary is used for Bright Outlook and occupational materials; the current page already lists 2025 employment and the 2025—2035 projection, and exact growth and openings are checked directly against EP. It does not provide Chinese subsidies or personality prediction."
+              "The O*NET summary is used for Bright Outlook and occupational materials; the current page already lists 2025 employment and the 2025–2035 projection, and exact growth and openings are checked directly against EP. It does not provide Chinese subsidies or personality prediction."
             ]
           },
           "id": "animal-caretakers.fit.personality-fit-block.65",
@@ -28922,7 +28922,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The risk cards are editorial checks and do not replace specific procedures, protection or legal requirements. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
+              "The risk cards are editorial checks and do not replace specific procedures, protection or legal requirements. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
             ]
           },
           "id": "animal-caretakers.risk.career-risk-cards.8",
@@ -29426,36 +29426,36 @@
               [
                 "Pet grooming and care",
                 "Learn grooming services through lawful training",
-                "Editorially check the actual training and service standards",
-                "A/B/C calculation, difference checking and reporting",
+                "Check the actual training and service standards",
+                "Use both AK-51 versions and the handover to check your recordkeeping.",
                 "Diagnostic and treatment authority is checked separately against the role, filing and institutional licence"
               ],
               [
                 "Kennel and boarding care",
                 "Learn feeding and cleaning and observation according to the job",
-                "Editorially check the record and handover rules",
-                "Review sheet K1 = 105 / K2 to be checked",
+                "Check the record and handover rules",
+                "Use both AK-51 versions and the handover to check your recordkeeping.",
                 "The adoption and control enforcement division of work is checked separately"
               ],
               [
                 "Shelters and rescue",
                 "Care for sheltered animals and assist with adoption",
-                "Editorially check the group observation records and reception",
-                "C: fact, unknown, request",
+                "Check the group observation records and reception",
+                "Use both AK-51 versions and the handover to check your recordkeeping.",
                 "Not the exhibit animal maintenance direction"
               ],
               [
                 "Records and handover",
                 "Record and report honestly under the rules",
-                "Editorially check that the original values are traceable",
-                "The two differences for the same 10:00 K1",
+                "Check that the original values are traceable",
+                "Use both AK-51 versions and the handover to check your recordkeeping.",
                 "Paper checking does not confer medical technical authorization"
               ],
               [
                 "Safety preparation",
                 "Check the actual training, duties and protection",
-                "Editorially check the job's rules and qualifications",
-                "Qualification matrix items to be checked",
+                "Check the job's rules and qualifications",
+                "Use both AK-51 versions and the handover to check your recordkeeping.",
                 "The pieces do not confer hands-on or breeding rights"
               ]
             ]
@@ -29486,7 +29486,7 @@
                 "id": "clearance",
                 "values": [
                   "Qualifications and scope",
-                  "In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. Assistants generally may not prescribe, fill in diagnostic certificates or issue certificates; provincial measures may allow assistants to practise diagnosis and treatment independently in rural areas, and the applicable conditions are checked separately.",
+                  "In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. Assistants generally may not prescribe, fill in diagnostic certificates or issue certificates; provincial measures may allow assistants to practise diagnosis and treatment independently in rural areas, and the applicable conditions are checked separately.",
                   "Special animal settings are checked against the rules that actually apply."
                 ]
               },
@@ -29528,42 +29528,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "A/B/C fictional tasks",
-                  "A｜Entirely fictional, paper only: at 10:00 K1 was given 150 g with 45 g remaining, and behaviour was not observed; K2 was given 110 g and the amount remaining is not given. There are no species nutrition requirements, body weight or diagnostic records.",
-                  "B｜The handover at 10:05 refers to the same 10:00 K1, recording intake as 100 g and behaviour as normal; the recipient, the reviewer and the feedback are not given.",
-                  "C｜Intake is only the amount given minus the amount remaining; missing figures are written as to be checked, the same ID, time point and fields are compared, and the original values are retained and reported to the trainer. Do not diagnose, invent facts or change the original table directly."
+                  "AK-51 | Three fictional paper records",
+                  "A: K1 was served 150 g, with 45 g left. Behavior was not observed. K2 was served 110 g, with no leftover amount recorded.",
+                  "B: The next-shift summary says K1 consumed an estimated 100 g and behaved normally. It has no new observation.",
+                  "Revision: add only receipt C, which records 40 g left for K2 in the same period. The paper rule is served minus leftover. Keep missing fields open. These amounts are not feeding advice."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Three deliverables",
-                  "Use A to calculate the intake for K1 and mark K2 as unknown; list the two differences of B against A.",
-                  "Write the three sentences of fact-unknown-report request under C; attach two source entries to support the actual use."
+                  "Submit two versions and a handover",
+                  "For both versions calculate what the records support, retain original values and mark discrepancies and unobserved fields.",
+                  "Write one handover with facts, open questions, the reviewer and the original evidence needed."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference deliverable",
-                  "K1 = 150−45 = 105 g, the amount remaining for K2 is not given, so the intake is to be checked and 0 cannot be written; 105 g does not prove a safe or nutritious amount.",
-                  "For the same 10:00 K1: the two differences of 105/100 g and not observed/normal, and the reference to 10:05 is the handover time point and does not represent another 10:00 measurement.",
-                  "Three sentences: the original table calculates 105 g and behaviour was not observed; the handover is 100 g/normal and the recipient, reviewer and feedback are not given; ask the trainer to check the original record and report under the rules, retain the original values, and do not invent a correction."
+                  "Submit independently",
+                  "Submit both versions and a handover on Day 6. On Day 7 open “AK-51 reference (open after submitting)” in the FAQ.",
+                  "Keep the original record and source of confirmation.",
+                  "Keep the original record and source of confirmation."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Paper boundaries",
-                  "No real clients or animals, and no hands-on feeding, restraint, grooming, medication or diagnosis and treatment.",
-                  "Shows only calculations, difference checking and fact-and-unknown communication, and does not represent operating skills, qualifications, hiring or a human or animal safety test."
+                  "Paper exercise",
+                  "No contact with animals. Do not infer health, suitable feed amounts or medication.",
+                  "Keep the original record and source of confirmation."
                 ]
               }
             ]
           },
           "id": "animal-caretakers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "Fictional paper exercise",
           "type": "cards"
@@ -29577,39 +29577,39 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Qualification matrix",
-                  "Fill in the source, jurisdiction, date and status line by line for the target direction, the training to be checked and the job authority; write unchecked items as to be checked.",
-                  "A skill level is not the same as diagnostic and treatment rights, so for intended diagnosis and treatment first check the actual role and institutional licence, and do not invent qualifications already obtained."
+                  "Check the role and authority.",
+                  "Check the role and authority."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "Review sheet",
-                  "A: K1 = 105 g and K2 to be checked; B: the two differences of 105/100 and not observed/normal, with the original values retained.",
-                  "The recipient, reviewer and feedback are not given, so do not write that the loop is closed or that a diagnosis was made."
+                  "Keep the original and revision.",
+                  "Keep the original and revision."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "One-page report",
-                  "C: three sentences of fact-unknown-report request; the goal is paper checking only and no on-site conclusion is drawn.",
-                  "List the respective uses of the O*NET U.S. tasks and the MOA Chinese roles, which do not substitute for each other."
+                  "Write one handover.",
+                  "Write one handover."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "Tool notes",
-                  "Record the calculation rules, field comparison, manual checking and the position of original values; scripts or spreadsheets must not automatically fill in unknowns or change the original records.",
-                  "A lawful correction requires traceable original values and the actual process, and review results must not be invented."
+                  "Use paper or a spreadsheet.",
+                  "Use paper or a spreadsheet."
                 ]
               }
             ]
           },
           "id": "animal-caretakers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "What checkable portfolio materials can be prepared at entry level?",
           "type": "cards"
@@ -29634,33 +29634,32 @@
               [
                 "Paper intake",
                 "Calculate and mark unknowns under A",
-                "K1 = 105 g, K2 to be checked",
-                "Do not treat 105 g as a species-safe feeding amount"
+                "Keep original fields, evidence and next reviewer.",
+                "Use AK-51 to check both versions independently. Keep the original values and mark discrepancies and open fields."
               ],
               [
                 "Handover difference check",
                 "Check two fields of the same record",
-                "105/100, not observed/normal",
+                "Keep original fields, evidence and next reviewer.",
                 "Do not automatically overwrite the original values or invent behaviour"
               ],
               [
                 "Reporting and records",
-                "Write the three-sentence request under C",
-                "Keep fact, unknown and request separate",
+                "Use receipt C to revise K2, then write the handover",
+                "Keep original fields, evidence and next reviewer.",
                 "The recipient, reviewer and feedback are not given, so do not write that it has been settled"
               ],
               [
                 "Use of qualifications",
                 "Check the real jurisdiction and role",
-                "Sources to be checked and their scope of application",
+                "Keep original fields, evidence and next reviewer.",
                 "The paper pieces do not confer diagnostic and treatment or operating rights"
               ]
             ]
           },
           "id": "animal-caretakers.path.interview-probation.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "title": "What might be assessed at interview and during probation, and which conclusions cannot be inferred?",
           "type": "table"
@@ -29673,57 +29672,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1｜Identity and direction",
-                  "Check 39-2021 and the three editorial directions and note the O*NET U.S. task scope."
+                  "Day 1",
+                  "Separate care duties and treatment authority."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2｜Qualification matrix",
-                  "Check the MOA roles, filing and institutional licence, add the Guangdong catalogue conditions and retain what is still to be checked."
+                  "Day 2",
+                  "Copy the original and summary."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3｜Intake calculation",
-                  "Calculate K1 = 105 g under A, with K2 to be checked; no hands-on work with animals."
+                  "Day 3",
+                  "Calculate values supported in the original."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4｜Handover differences",
-                  "Check the two differences of 105/100 and not observed/normal under B, retaining the original values."
+                  "Day 4",
+                  "Add only receipt C and write a separate revision."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5｜Three-sentence report",
-                  "Write fact-unknown-report request under C and do not invent feedback."
+                  "Day 5",
+                  "List open fields and the reviewer."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6｜The four pieces",
-                  "The qualification matrix, review sheet, one-page report and tool notes all use the same A/B/C."
+                  "Day 6",
+                  "Submit both versions and one handover before opening the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7｜Review and next steps",
-                  "Check that the four pieces are complete, then check the real job training and written conditions, and do not treat the paper pieces as a finding of suitability."
+                  "Day 7",
+                  "Open “AK-51 reference (open after submitting)” in the FAQ and note differences or confirm there were none."
                 ]
               }
             ]
           },
           "id": "animal-caretakers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "Seven-day experience: complete one full cycle of an animal caretaker task using fictional materials",
           "type": "timeline"
@@ -29733,18 +29732,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Complete the calculation in A of 105 g with K2 to be checked.",
-              "Complete the two-field difference in B and retain the original values.",
-              "Complete the three-sentence request in C, and do not write a correction when feedback is not given.",
-              "The four pieces use the same inputs, and the qualifications still to be checked are retained.",
-              "No hands-on work and no conferring of diagnostic and treatment rights; lawful training is checked separately.",
-              "Check the real physical demands, roster, protection and written pay.",
-              "Continue preparing according to the real job or course, with no guarantee of suitability, hiring, promotion or a subsidy."
+              "Continue if you want to keep a reliable shift log.",
+              "Pause to practice asking about missing entries.",
+              "Compare boarding, rescue or daily care.",
+              "Ask the employer about training and qualifications.",
+              "Check against the reference and keep both versions.",
+              "Continue if you want to keep a reliable shift log.",
+              "Pause to practice asking about missing entries."
             ]
           },
           "id": "animal-caretakers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "How to decide at the end of seven days whether to continue",
           "type": "list"
@@ -29845,7 +29844,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence.",
+              "In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence.",
               "Assistants generally may not prescribe, fill in diagnostic certificates or issue certificates; provincial measures may allow assistants to practise diagnosis and treatment independently in rural areas, and the applicable conditions are checked separately.",
               "Education levels that U.S. ONET2026 respondents reported for newly hired workers: 64% high school or equivalent, 14% associate's or another two-year degree and 13% bachelor's; these are not the education distribution of current workers or a uniform threshold in China. The EP route is typically a high school education with short on-the-job training; the OOH notes that zookeepers often need a related bachelor's degree. The 2025 Guangdong catalogue lists 4-10-07-01 pet health care worker, 02 trainer and 03 groomer, with Class B five-level guidance subsidies of 1000/1500/2000/2500/3000 yuan; eligibility, local processing and transitional conditions must be checked, and no subsidy, income or employment is guaranteed, nor can this be equated with all U.S. care jobs.",
               "For intended work with wild or laboratory animals or adjacent research, breeding and control tasks, check the actual role, species, use, institution and jurisdiction; the pieces only prove paper preparation, and real work requires lawful training."
@@ -29868,17 +29867,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Scope of the sample: this page does not cite any recruitment notice as evidence of wages or demand; recruitment conditions, skill levels and job requirements vary with region and institution, and the official publications of the competent authorities and employers take precedence.",
-              "Insufficient evidence: no city-level wage distribution or skill level pass rate for this occupation in China has been obtained. U.S. wages and employment and Chinese industry averages and qualifications are different bases, and industry averages or paper exercises cannot be used to fill the gap.",
-              "To judge whether a job belongs to this occupation, look at the task description rather than the name: whether it involves feeding and cleaning and disinfection, health observation and restraint, grooming and exercise care, and records and handovers for non-food animals such as dogs and cats, as well as service to pet owners and visitors."
+              "A 2024 Caidian public job list in Wuhan advertised five animal caretaker positions at Wuhan West Lake Animal Kingdom, CNY 3,000–4,000 a month. It requested high school or higher and preferred related training such as animal medicine or animal husbandry and veterinary science. Lehe Ledu in Chongqing advertised five animal keeper roles in 2025 for wildlife care and behavior demonstrations. The notice required an associate-level qualification or above in a listed field and age under 40. Applications closed May 30. No pay amount was listed. Historical employer examples. They do not establish current openings or national occupational pay."
             ]
           },
           "id": "animal-caretakers.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "care-wuhan",
+            "care-chongqing"
           ],
           "title": "Note on recruitment samples",
           "type": "notice"
@@ -30069,7 +30064,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Education levels that ONET2026 respondents reported for newly hired workers: 64% high school or equivalent, 14% associate's or another two-year degree and 13% bachelor's; these are not the education distribution of current workers or a uniform threshold in China. The EP route is typically a high school education with short on-the-job training; the OOH notes that zookeepers often need a related bachelor's degree. In China only preparation paths can be checked, and no majority route or fixed certificate threshold can be claimed. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
+              "Education levels that ONET2026 respondents reported for newly hired workers: 64% high school or equivalent, 14% associate's or another two-year degree and 13% bachelor's; these are not the education distribution of current workers or a uniform threshold in China. The EP route is typically a high school education with short on-the-job training; the OOH notes that zookeepers often need a related bachelor's degree. In China only preparation paths can be checked, and no majority route or fixed certificate threshold can be claimed. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
             ]
           },
           "id": "animal-caretakers.path.career-path-block.20",
@@ -30088,7 +30083,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. Assistants generally may not prescribe, fill in diagnostic certificates or issue certificates; provincial measures may allow assistants to practise diagnosis and treatment independently in rural areas, and the applicable conditions are checked separately. The 2025 Guangdong catalogue lists 4-10-07-01 pet health care worker, 02 trainer and 03 groomer, with Class B five-level guidance subsidies of 1000/1500/2000/2500/3000 yuan; eligibility, local processing and transitional conditions must be checked, and no subsidy, income or employment is guaranteed, nor can this be equated with all U.S. care jobs."
+              "In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. Assistants generally may not prescribe, fill in diagnostic certificates or issue certificates; provincial measures may allow assistants to practise diagnosis and treatment independently in rural areas, and the applicable conditions are checked separately. The 2025 Guangdong catalogue lists 4-10-07-01 pet health care worker, 02 trainer and 03 groomer, with Class B five-level guidance subsidies of 1000/1500/2000/2500/3000 yuan; eligibility, local processing and transitional conditions must be checked, and no subsidy, income or employment is guaranteed, nor can this be equated with all U.S. care jobs."
             ]
           },
           "id": "animal-caretakers.path.career-path-block.21",
@@ -30152,7 +30147,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS OOH U.S. wages and training and the EP2025—2035 statistics support, and do not prove Chinese qualifications."
+              "BLS OOH U.S. wages and training and the EP2025–2035 statistics support, and do not prove Chinese qualifications."
             ]
           },
           "id": "animal-caretakers.path.career-path-block.25",
@@ -31137,7 +31132,7 @@
                 "url": "https://www.onetonline.org/link/summary/39-2021.00"
               },
               {
-                "entity": "BLS EP2025—2035 occupational detail",
+                "entity": "BLS EP2025–2035 occupational detail",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31218,7 +31213,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no official Chinese projection for this occupation has been obtained. BLS EP 39-2021: from 365300 in 2025 to 409400 in 2035, an official net increase of 44100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62800 openings including growth and replacement and 24.8% self-employed. The OOH structure of 40% in other personal services, 25% self-employed, 10% in professional, scientific and technical services, 9% in retail and 5% in arts, entertainment and recreation is the U.S. occupational employment structure, not demand causality, individual opportunity or a Chinese projection."
+              "Insufficient evidence: no official Chinese projection for this occupation has been obtained. BLS EP 39-2021: from 365300 in 2025 to 409400 in 2035, an official net increase of 44100; growth of 12.1% over 2025–2035 (OOH rounds this to 12%), with an annual average of 62800 openings including growth and replacement and 24.8% self-employed. The OOH structure of 40% in other personal services, 25% self-employed, 10% in professional, scientific and technical services, 9% in retail and 5% in arts, entertainment and recreation is the U.S. occupational employment structure, not demand causality, individual opportunity or a Chinese projection."
             ]
           },
           "id": "animal-caretakers.market-signals.market-signal-card.8",
@@ -31345,7 +31340,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "animal-caretakers.market-signals.market-signal-card.17",
@@ -31415,7 +31410,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "12.1%（2025—2035）"
+              "12.1%（2025–2035）"
             ]
           },
           "id": "animal-caretakers.market-signals.market-signal-card.22",
@@ -31443,7 +31438,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "animal-caretakers.market-signals.market-signal-card.24",
@@ -31584,7 +31579,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
+              "In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
             ]
           },
           "id": "animal-caretakers.market-signals.market-signal-card.34",
@@ -31954,28 +31949,32 @@
           "data": {
             "entries": [
               {
-                "answer": "The 24 U.S. tasks include: feeding and watering; providing treatment or contacting a veterinarian; checking for injury or illness; mixing food and medications according to instructions or prescriptions; washing linens and cleaning, disinfecting and maintaining housing and saddles; exercise; recording weight, body size, body condition, treatment, medication and food intake; answering visitors; telephone appointments; health care advice; bathing, brushing, trimming, nail trimming and ear cleaning; observing children and reminding them to interact safely with animals; cleaning and disinfecting surgical equipment; adoption placement; discussing grooming needs; moving animals; regulating temperature and humidity; anesthetizing and vaccinating according to instructions; maintaining equipment; training animals for specific tasks; ordering, unloading and storing; selling pet food and supplies; scuba diving to maintain exhibit areas; training volunteers and staff. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence.",
+                "answer": "The 24 U.S. tasks include: feeding and watering; providing treatment or contacting a veterinarian; checking for injury or illness; mixing food and medications according to instructions or prescriptions; washing linens and cleaning, disinfecting and maintaining housing and saddles; exercise; recording weight, body size, body condition, treatment, medication and food intake; answering visitors; telephone appointments; health care advice; bathing, brushing, trimming, nail trimming and ear cleaning; observing children and reminding them to interact safely with animals; cleaning and disinfecting surgical equipment; adoption placement; discussing grooming needs; moving animals; regulating temperature and humidity; anesthetizing and vaccinating according to instructions; maintaining equipment; training animals for specific tasks; ordering, unloading and storing; selling pet food and supplies; scuba diving to maintain exhibit areas; training volunteers and staff. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence.",
                 "id": "animal-caretakers.faq.1",
                 "question": "What do animal caretakers do every day?",
                 "question_key": "career.faq.animal-caretakers.daily-work"
               },
               {
-                "answer": "In the United States this occupation and adjacent tasks may overlap; in China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. Adoption screening and business qualifications are checked by institution or entity, and rights are not interchanged.",
+                "answer": "In the United States this occupation and adjacent tasks may overlap; in China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence. Adoption screening and business qualifications are checked by institution or entity, and rights are not interchanged.",
                 "id": "animal-caretakers.faq.2",
                 "question": "Where are the boundaries between this occupation and adjacent roles?",
                 "question_key": "career.faq.animal-caretakers.comparison"
               },
               {
-                "answer": "Insufficient evidence: no AI substitution rate or effects for this occupation have been obtained, and it cannot be guaranteed that the occupation will or will not be replaced. The possible editorial uses are record and appointment organization; BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. This is not to be treated as AI causality.",
+                "answer": "Insufficient evidence: no AI substitution rate or effects for this occupation have been obtained, and it cannot be guaranteed that the occupation will or will not be replaced. The possible editorial uses are record and appointment organization; BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025–2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. This is not to be treated as AI causality.",
                 "id": "animal-caretakers.faq.3",
                 "question": "Will this occupation be replaced by AI?",
                 "question_key": "career.faq.animal-caretakers.ai"
               },
               {
-                "answer": "Insufficient evidence: no national or city wage distribution for this occupation in China has been obtained. The NBS2025 figures of 70226 non-private and 52059 private for resident services, repair and other services are pre-tax industry averages; the corporate unit scope is not the same as occupational wages, and sole proprietors and the self-employed are excluded.",
+                "answer": "A 2024 Caidian public job list in Wuhan advertised five animal caretaker positions at Wuhan West Lake Animal Kingdom, CNY 3,000–4,000 a month. It requested high school or higher and preferred related training such as animal medicine or animal husbandry and veterinary science. Lehe Ledu in Chongqing advertised five animal keeper roles in 2025 for wildlife care and behavior demonstrations. The notice required an associate-level qualification or above in a listed field and age under 40. Applications closed May 30. No pay amount was listed. Historical employer examples. They do not establish current openings or national occupational pay.",
                 "id": "animal-caretakers.faq.4",
                 "question": "How should wages in mainland China be understood?",
-                "question_key": "career.faq.animal-caretakers.china-pay"
+                "question_key": "career.faq.animal-caretakers.china-pay",
+                "source_refs": [
+                  "care-wuhan",
+                  "care-chongqing"
+                ]
               },
               {
                 "answer": "The U.S. May2025 quintiles are 27250/29820/35360/40050/50060 US dollars, with an hourly median of 17.00; these are positions in the distribution, not a starting salary or a return to experience, and the actual contract and hours are checked separately.",
@@ -31984,7 +31983,7 @@
                 "question_key": "career.faq.animal-caretakers.us-pay"
               },
               {
-                "answer": "Education levels that ONET2026 respondents reported for newly hired workers: 64% high school or equivalent, 14% associate's or another two-year degree and 13% bachelor's; these are not the education distribution of current workers or a uniform threshold in China. The EP route is typically a high school education with short on-the-job training; the OOH notes that zookeepers often need a related bachelor's degree. Chinese curricula and training and job recognition are checked separately, and a skill level is not the same as diagnostic and treatment rights. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence.",
+                "answer": "Education levels that ONET2026 respondents reported for newly hired workers: 64% high school or equivalent, 14% associate's or another two-year degree and 13% bachelor's; these are not the education distribution of current workers or a uniform threshold in China. The EP route is typically a high school education with short on-the-job training; the OOH notes that zookeepers often need a related bachelor's degree. Chinese curricula and training and job recognition are checked separately, and a skill level is not the same as diagnostic and treatment rights. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence.",
                 "id": "animal-caretakers.faq.6",
                 "question": "How can one become an animal caretaker?",
                 "question_key": "career.faq.animal-caretakers.education"
@@ -31996,7 +31995,7 @@
                 "question_key": "career.faq.animal-caretakers.risk"
               },
               {
-                "answer": "Insufficient evidence: no Chinese projection for this occupation has been obtained, and individual employment is not guaranteed. BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025—2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. The 39-2000 combined group, 413000/11.2%/an annual average of 69400, does not substitute for it.",
+                "answer": "Insufficient evidence: no Chinese projection for this occupation has been obtained, and individual employment is not guaranteed. BLS EP 39-2021: from 365,300 in 2025 to 409,400 in 2035, an official net increase of 44,100; growth of 12.1% over 2025–2035 (OOH rounds this to 12%), with an annual average of 62,800 openings including growth and replacement, and the self-employed accounting for 24.8%. The 39-2000 combined group, 413000/11.2%/an annual average of 69400, does not substitute for it.",
                 "id": "animal-caretakers.faq.8",
                 "question": "What are the U.S. employment prospects?",
                 "question_key": "career.faq.animal-caretakers.outlook"
@@ -32012,6 +32011,15 @@
                 "id": "animal-caretakers.faq.10",
                 "question": "How should one choose between the three directions of pet grooming and care, kennel and boarding care, and shelters and rescue?",
                 "question_key": "career.faq.animal-caretakers.direction-choice"
+              },
+              {
+                "answer": "K1: 150−45=105 g. The summary estimates 100 g, a 5 g difference. A has no behavior observation and B adds no evidence for “normal.” K2’s leftover is unknown in the original. In the revision C supports 110−40=70 g for K2 only. K1 and its behavior status do not change. Hand A, B and C to the fictional next-shift records owner with open fields and sources. Do not infer real feeding or health.",
+                "id": "animal-caretakers.faq.11",
+                "question": "AK-51 reference (open after submitting)",
+                "question_key": "career.faq.animal-caretakers.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -32032,31 +32040,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind career content editorial team"
+              "FermatMind Editorial"
             ]
           },
           "id": "animal-caretakers.sources.source-card.1",
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.source-card",
-          "data": {
-            "paragraphs": [
-              "ONET2026 detailed tasks and the context of education for newly hired workers; May2025 wages shown by O*NET; BLS EP2025—2035 and the OOH; NBS2025 wages and scope; MOA2022 measures on veterinarians and diagnostic and treatment institutions; the 2025 Guangdong skills subsidies. The full text of the old occupational code was not obtained this round, and the GB industry notes use official search results without claiming to have read them in full."
-            ]
-          },
-          "id": "animal-caretakers.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "oews",
-            "ep",
-            "ooh",
-            "nbs",
-            "cnvet",
-            "cnclinic",
-            "cnpet",
-            "gbindustry"
+            "editor"
           ],
           "type": "prose"
         },
@@ -32065,10 +32054,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "In this window, on 2026-10-08—09, the same editions of O*NET, BLS, NBS, the 2025 Guangdong catalogue and the veterinary regulations were checked; they are reused for the same 39-2021 materials, with this asset checked item by item against the body text and consumers. October 9 additionally checked the current O*NET summary and the separate areas and medical record provisions for diagnostic and treatment institutions. The full text of the old occupational code and the industry notes PDF was not obtained, and full reading is not claimed."
+              "A 2024 Caidian public job list in Wuhan advertised five animal caretaker positions at Wuhan West Lake Animal Kingdom, CNY 3,000–4,000 a month. It requested high school or higher and preferred related training such as animal medicine or animal husbandry and veterinary science. Lehe Ledu in Chongqing advertised five animal keeper roles in 2025 for wildlife care and behavior demonstrations. The notice required an associate-level qualification or above in a listed field and age under 40. Applications closed May 30. No pay amount was listed."
             ]
           },
-          "id": "animal-caretakers.sources.source-card.3",
+          "id": "animal-caretakers.sources.source-card.2",
+          "source_refs": [
+            "care-wuhan",
+            "care-chongqing"
+          ],
           "type": "prose"
         },
         {
@@ -32076,7 +32069,25 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national wage distribution, official employment projection, AI adoption or substitution rate and effects, or personality and performance validity for this occupation in China has been obtained; the occupational wage median for 39-2021 within the U.S. government industry and the full industry distribution were not obtained, which is not the same as not being published. The U.S. national percentiles are May2025 OEWS shown through O*NET, and EP2025—2035 includes the self-employed; the occupational medians within selected industries already given in the OOH are retained. NBS industry and unit-type averages serve as a broad reference only, and an institution's industry is checked by its main activity; Chinese diagnostic and treatment roles, filing, supervision and institutional licensing are checked separately. The 2025 Guangdong subsidies are a document reference only, and the actual application and current policy are checked separately. The gaps in the full text of the old occupational code and the industry notes PDF are retained."
+              "U.S. statistics use SOC 39-2021. The Wuhan and Chongqing notices are separate historical examples. Check care duties, veterinary roles and the facility’s licence separately."
+            ]
+          },
+          "id": "animal-caretakers.sources.source-card.3",
+          "source_refs": [
+            "ep",
+            "care-wuhan",
+            "care-chongqing",
+            "cnvet",
+            "cnclinic"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.source-card",
+          "data": {
+            "paragraphs": [
+              "Insufficient evidence: no national wage distribution, official employment projection, AI adoption or substitution rate and effects, or personality and performance validity for this occupation in China has been obtained; the occupational wage median for 39-2021 within the U.S. government industry and the full industry distribution were not obtained, which is not the same as not being published. The U.S. national percentiles are May2025 OEWS shown through O*NET, and EP2025–2035 includes the self-employed; the occupational medians within selected industries already given in the OOH are retained. NBS industry and unit-type averages serve as a broad reference only, and an institution's industry is checked by its main activity; Chinese diagnostic and treatment roles, filing, supervision and institutional licensing are checked separately. The 2025 Guangdong subsidies are a document reference only, and the actual application and current policy are checked separately. The gaps in the full text of the old occupational code and the industry notes PDF are retained."
             ]
           },
           "id": "animal-caretakers.sources.source-card.4",
@@ -32127,13 +32138,13 @@
                 "entity": "Enneagram test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "See the animal caretaker occupation page",
@@ -32170,7 +32181,7 @@
                 ],
                 "evidence_type": "exact",
                 "id": "onet",
-                "limitation": "The 24 tasks, the education requirements for newly hired workers, the RSC and the surveyed context; current wages 2025, employment 2025 and the 2025—2035 projection, with exact growth and openings checked directly against EP. Does not prove Chinese authority, personality prediction or AI effects.",
+                "limitation": "The 24 tasks, the education requirements for newly hired workers, the RSC and the surveyed context; current wages 2025, employment 2025 and the 2025–2035 projection, with exact growth and openings checked directly against EP. Does not prove Chinese authority, personality prediction or AI effects.",
                 "market": "United States",
                 "name": "ONET2026 Animal Caretakers occupational detail",
                 "period": "Updated in 2026",
@@ -32189,7 +32200,7 @@
                 "limitation": "This page uses the 39-2021 detail, with the 39-2000 combined group listed separately; occupational wages in selected industries and U.S. training.",
                 "market": "United States",
                 "name": "BLS OOH animal care and service occupation materials",
-                "period": "May2025 wages; 2025—2035 projection",
+                "period": "May2025 wages; 2025–2035 projection",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
@@ -32205,7 +32216,7 @@
                 "limitation": "39-2021 including self-employed employment, growth, net change and openings, and typical training, not AI or a Chinese projection.",
                 "market": "United States",
                 "name": "BLS EP occupational projections and characteristics",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32229,14 +32240,14 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "industry_proxy",
+                  "Industry context: figures cover urban units and industry groups.",
                   "Accessed 2026-10-08"
                 ],
-                "evidence_type": "industry_proxy",
+                "evidence_type": "primary_document",
                 "id": "nbs",
                 "limitation": "Pre-tax corporate unit and broad industry averages, not an occupational median; sole proprietors and the self-employed are excluded.",
                 "market": "Mainland China",
-                "name": "NBS2025 urban unit wages",
+                "name": "National Bureau of Statistics: 2025 urban unit mean annual wages (industry context)",
                 "period": "2025",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
@@ -32250,7 +32261,7 @@
                 ],
                 "evidence_type": "contextual",
                 "id": "cnclass",
-                "limitation": "The old register serves as a classification reference only and its full text was not obtained this round; it cannot be used to assert that an old code for ornamental animals applies to all care work or to confer diagnostic and treatment rights.",
+                "limitation": "The classification gives local job-title context. It does not establish U.S.–China occupational equivalence or authority to provide treatment.",
                 "market": "Mainland China",
                 "name": "Occupational Classification Code 2022, existing reference",
                 "period": "2022 edition",
@@ -32373,18 +32384,18 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
-                  "Accessed 2026-10-08"
+                  "Fictional paper records.",
+                  "Fictional paper records."
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "Professional certification is generally not required in the United States and self-employment in many states needs a business licence, which is not the same as a nationwide Chinese diagnostic and treatment certificate.",
-                "market": "United States",
-                "name": "BLS OOH U.S. education and training and business notes",
+                "limitation": "The paper case does not guide feeding or treatment.",
+                "market": "Fictional case",
+                "name": "FermatMind Editorial: AK-51",
                 "period": "Updated in 2026",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "publisher": "FermatMind Editorial",
                 "scope": "contextual",
-                "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
+                "url": "#career-content-path"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32394,7 +32405,7 @@
                 ],
                 "evidence_type": "contextual",
                 "id": "nist",
-                "limitation": "Occupational identity, interests and related occupations; the current summary already lists 2025 employment and the 2025—2035 projection, and exact values are checked against EP, which does not stand for Chinese systems or personality validity.",
+                "limitation": "Occupational identity, interests and related occupations; the current summary already lists 2025 employment and the 2025–2035 projection, and exact values are checked against EP, which does not stand for Chinese systems or personality validity.",
                 "market": "United States",
                 "name": "O*NET occupation summary",
                 "period": "2026 page",
@@ -32509,7 +32520,7 @@
                 "limitation": "Includes self-employed employment, unlike the OEWS employee wage scope.",
                 "market": "United States",
                 "name": "BLS EP employment scope notes",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32589,7 +32600,7 @@
                 "limitation": "This page uses the 39-2021 detail, and the combined group and this occupation are not mixed.",
                 "market": "United States",
                 "name": "BLS OOH this occupation and the combined group",
-                "period": "Updated in 2026; May2025/2025—2035",
+                "period": "Updated in 2026; May2025/2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
@@ -32597,26 +32608,26 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "contextual",
+                  "Ministry of Agriculture and Rural Affairs regulation",
                   "Accessed 2026-10-08"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnvet",
                 "limitation": "Roles, qualifications, filing, supervised assistance and the provincial rural exception for assistants, which are not the same as ordinary care rights.",
                 "market": "Mainland China",
                 "name": "Measures for the Administration of Licensed Veterinarians and Rural Veterinarians",
-                "period": "No. 6 of 2022, in force from 2022-10-07",
+                "period": "Order No. 6 of 2022",
                 "publisher": "Ministry of Agriculture and Rural Affairs",
                 "scope": "contextual",
-                "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408942.htm"
+                "url": "https://www.moa.gov.cn/gk/nyncbgzk/gzk/202209/P020220930306068952275.pdf"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "contextual",
+                  "Ministry of Agriculture and Rural Affairs regulation",
                   "Accessed 2026-10-09"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnclinic",
                 "limitation": "Licensing of diagnostic and treatment institutions, Article 21 on keeping ancillary grooming and boarding areas separate from diagnostic and treatment areas, and Article 22 on keeping medical records for at least three years; the medical record period is not applied to ordinary care records.",
                 "market": "Mainland China",
@@ -32624,7 +32635,7 @@
                 "period": "No. 5 of 2022, in force from 2022-10-07",
                 "publisher": "Ministry of Agriculture and Rural Affairs",
                 "scope": "contextual",
-                "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408940.htm"
+                "url": "https://www.moa.gov.cn/gk/nyncbgzk/gzk/202209/P020221118344793830026.pdf"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32634,7 +32645,7 @@
                 ],
                 "evidence_type": "contextual",
                 "id": "gbindustry",
-                "limitation": "In this window, October 8 official search snippets verified pet hospitals 8222, the exclusion of pet hospitals from 7493 and zoo and aquarium management 7715; direct reading of the original PDF and the Guangzhou statistics bureau HTML failed, and full reading is not claimed. Industries are checked by actual main activity and not inferred from an employee's occupation.",
+                "limitation": "Industry follows the establishment’s economic activity. An employee’s title does not determine its industry code.",
                 "market": "Mainland China",
                 "name": "GB/T4754-2017 industry notes",
                 "period": "2017 industry classification",
@@ -32650,7 +32661,7 @@
                 ],
                 "evidence_type": "contextual",
                 "id": "blsindustry",
-                "limitation": "The government 99 scope excludes state and local schools and hospitals and the USPS, and the dynamic occupational industry median not being obtained is not the same as not being published.",
+                "limitation": "Read industry data separately from national occupational pay.",
                 "market": "United States",
                 "name": "BLS May2025 industry wage entry point",
                 "period": "May2025",
@@ -32660,20 +32671,46 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Daily feeding and cleaning｜Care according to schedule｜Feeding and watering according to schedules and feeding instructions, washing linens and cleaning, disinfecting and maintaining animal housing and equipment. — 0/100; weight=1/3; animal-caretakers.profile.responsibilities-block.1[0]",
-                  "Animal grooming｜Bathing and trimming｜Performing grooming work such as bathing, brushing, clipping and trimming coats, trimming nails and cleaning ears, and discussing grooming needs with clients. — 0/100; weight=1/3; animal-caretakers.profile.responsibilities-block.1[2]",
-                  "Records and adoption｜Information and placement｜Collecting and recording weight, body condition, treatments and food intake, and finding adoptive homes for stray or abandoned animals. — 50/100; weight=1/3; animal-caretakers.profile.responsibilities-block.1[4]"
+                  "A tool can flag missing fields or handovers. Check any unusual observation under the facility’s procedures and refer it to a person with the required authority."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "name": "O*NET: care and recordkeeping tasks",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "url": "https://www.onetonline.org/link/details/39-2021.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A 2024 Caidian public job list in Wuhan advertised five animal caretaker positions at Wuhan West Lake Animal Kingdom, CNY 3,000–4,000 a month. It requested high school or higher and preferred related training such as animal medicine or animal husbandry and veterinary science."
+                ],
+                "evidence_type": "primary_document",
+                "id": "care-wuhan",
+                "limitation": "Historical employer examples. They do not establish current openings or national occupational pay.",
+                "market": "Mainland China",
+                "name": "Caidian job list, item 54",
+                "period": "2024",
+                "publisher": "Caidian district government, Wuhan",
+                "scope": "recruitment_proxy",
+                "url": "https://www.caidian.gov.cn/zwgk/xxgkml/zdly/ndjy/202412/P020241224394605871762.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Lehe Ledu in Chongqing advertised five animal keeper roles in 2025 for wildlife care and behavior demonstrations. The notice required an associate-level qualification or above in a listed field and age under 40. Applications closed May 30. No pay amount was listed."
+                ],
+                "evidence_type": "primary_document",
+                "id": "care-chongqing",
+                "limitation": "Historical employer examples. They do not establish current openings or national occupational pay.",
+                "market": "Mainland China",
+                "name": "Chongqing Lehe Ledu animal keeper notice",
+                "period": "2025-05",
+                "publisher": "Chongqing state assets authority",
+                "scope": "recruitment_proxy",
+                "url": "https://gzw.cq.gov.cn/gqzp/202505/t20250523_14653140_wap.html"
               }
             ]
           },
@@ -36009,7 +36046,7 @@
       },
       "hero": {
         "h1": "Animal Caretakers",
-        "quick_answer": "The occupation covered on this page, animal caretakers, corresponds to Animal Caretakers (39-2021), not the 39-2000 combined group that includes Animal Trainers. The work involves feeding and cleaning, observation and record-keeping, grooming, exercise and serving owners and visitors for non-food animals such as dogs and cats, in settings that include kennels, shelters, zoos and aquariums. U.S. treatment and anesthesia and vaccination tasks do not confer diagnostic and treatment rights on ordinary care jobs in China, and are checked against the actual qualification, filing and institutional licence.",
+        "quick_answer": "Daily animal care starts with feeding, cleaning, observation and handover. Ask which animals you would care for and who takes over if something changes. U.S. data use SOC 39-2021. Check actual duties and treatment authority separately in mainland China.",
         "title": "Animal Caretakers"
       },
       "market_signal_card": {
@@ -36560,7 +36597,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS EP employment projection for this occupation (2025—2035)",
+            "label": "BLS EP employment projection for this occupation (2025–2035)",
             "secondary_value": null,
             "value": {
               "$item": "animal-caretakers.profile.onet-structured-fields-block.4",
@@ -37575,7 +37612,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and care records",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Comparison of occupation directions",
       "fit": "Occupational fit guide",
@@ -37683,7 +37720,7 @@
         "market": "United States",
         "measure": "Growth and official net change for this occupation",
         "occupation_scope": "Animal Caretakers",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -37695,7 +37732,7 @@
         "market": "United States",
         "measure": "Annual average openings including growth and replacement",
         "occupation_scope": "Animal Caretakers",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -37729,7 +37766,7 @@
         "display_value": "Insufficient evidence: no occupational median within the government industry has been obtained",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "United States",
-        "measure": "Occupational median 39-2021 within government 99, with the scope checked separately",
+        "measure": "BLS industry wage tables; no government-industry occupational median is shown here",
         "occupation_scope": "Animal Caretakers",
         "period": "Queried 2026-10-02",
         "source_refs": [
@@ -37847,7 +37884,7 @@
       },
       {
         "derivation": null,
-        "display_value": "The occupation covered on this page, animal caretakers, corresponds to Animal Caretakers (39-2021), not the 39-2000 combined group that includes Animal Trainers. The work involves feeding and cleaning, observation and record-keeping, grooming, exercise and serving owners and visitors for non-food animals such as dogs and cats, in settings that include kennels, shelters, zoos and aquariums. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence.",
+        "display_value": "The occupation covered on this page, animal caretakers, corresponds to Animal Caretakers (39-2021), not the 39-2000 combined group that includes Animal Trainers. The work involves feeding and cleaning, observation and record-keeping, grooming, exercise and serving owners and visitors for non-food animals such as dogs and cats, in settings that include kennels, shelters, zoos and aquariums. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence.",
         "fact_id": "adjacent-boundary",
         "market": "Mainland China",
         "measure": "Tasks and jurisdictional boundaries",
@@ -37861,7 +37898,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Education levels that ONET2026 respondents reported for newly hired workers: 64% high school or equivalent, 14% associate's or another two-year degree and 13% bachelor's; these are not the education distribution of current workers or a uniform threshold in China. The EP route is typically a high school education with short on-the-job training; the OOH notes that zookeepers often need a related bachelor's degree. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence.",
+        "display_value": "Education levels that ONET2026 respondents reported for newly hired workers: 64% high school or equivalent, 14% associate's or another two-year degree and 13% bachelor's; these are not the education distribution of current workers or a uniform threshold in China. The EP route is typically a high school education with short on-the-job training; the OOH notes that zookeepers often need a related bachelor's degree. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; students in relevant veterinary programs taking part in animal diagnosis and treatment teaching practice and relevant graduates without a veterinary qualification certificate who are doing practical work at an animal diagnostic and treatment institution assist under the supervision and guidance of a licensed veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence.",
         "fact_id": "entry-boundary",
         "market": "Mainland China",
         "measure": "Training preparation and diagnostic and treatment authority",
@@ -37950,41 +37987,29 @@
       },
       {
         "derivation": null,
-        "display_value": "12.1% (2025—2035); official net increase of 44100",
+        "display_value": "12.1% (2025–2035); official net increase of 44100",
         "fact_id": "employment-projection",
         "market": "United States",
         "measure": "EP projection for this occupation",
         "occupation_scope": "Animal Caretakers",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "17%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Animal Caretakers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and care records"
     },
     "badges": [
-      "Animal care: feeding, cleaning and restraint · grooming and boarding · animal observation and records",
-      "AI: a task-level account of change · no substitution year is given",
-      "U.S. 39-2021 wages and the 2025—2035 projection · Chinese industry references and the boundaries of diagnosis and treatment · real gaps"
+      "Feeding | cleaning | observation and handover",
+      "Reporting concerns and providing treatment are separate",
+      "U.S. data: SOC 39-2021"
     ],
     "metrics": [
       {
@@ -38023,17 +38048,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "The 24 tasks of animal caretakers, U.S. 39-2021 wages and 2025—2035 employment, Chinese industry wage references and diagnostic and treatment authority; includes a full paper entry exercise that distinguishes occupational, industry and jurisdictional scopes and real gaps."
+      "text": "Learn how animal caretakers record feeding, cleaning and unusual observations. Compare two Chinese job notices, check U.S. pay and try a paper log."
     },
     "title": {
       "availability": "available",
-      "text": "Animal Caretakers: tasks, wages and employment prospects (O*NET 39-2021.00)"
+      "text": "Animal Caretakers: Feeding Records and Shift Handovers"
     }
   },
-  "source_content_sha256": "1ba239a2511d1defba6100b6ecdd3414c3c73cc04ecac666034838db6cda2993",
+  "source_content_sha256": "9ca31f71d268e2b774f414a366225a9bf2d8abe143ff778c9b65bd6838ae5df4",
   "subject": {
     "canonical_slug": "animal-caretakers",
     "name": "Animal Caretakers",
-    "summary": "The occupation covered on this page, animal caretakers, corresponds to Animal Caretakers (39-2021), not the 39-2000 combined group that includes Animal Trainers. The work involves feeding and cleaning, observation and record-keeping, grooming, exercise and serving owners and visitors for non-food animals such as dogs and cats, in settings that include kennels, shelters, zoos and aquariums. In China, diagnosis and treatment follow the respective qualifications, filing and scope of veterinarians, assistant veterinarians or rural veterinarians; veterinary students or graduates who meet the measures may assist under the supervision of a veterinarian, and an ordinary care job title does not confer diagnostic or treatment authority. Operating a diagnostic and treatment facility requires a separate licence."
+    "summary": "Daily animal care starts with feeding, cleaning, observation and handover. Ask which animals you would care for and who takes over if something changes. U.S. data use SOC 39-2021. Check actual duties and treatment authority separately in mainland China."
   }
 }

@@ -1283,6 +1283,9 @@
       "item:pipelayers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:pipelayers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:pipelayers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31135,6 +31138,21 @@
             "editor-note"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。沟槽工单 T2 列管段 P6，接头照片标 P9，标高复核栏空白。写清需补的原始记录和接收人。"
+            ]
+          },
+          "id": "pipelayers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "核管段与接头交接",
+          "type": "notice"
         }
       ]
     },
@@ -37642,6 +37660,13 @@
         "id": "pipelayers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "pipelayers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37991,7 +38016,7 @@
       "text": "管道铺设工职业指南：沟槽、管道连接、工资与入行路径"
     }
   },
-  "source_content_sha256": "ed22f4d6c39291a77c7f27206d600c8fbac984956b87f4f35433a8915c2aec99",
+  "source_content_sha256": "66f25d9ef51e3941718c9bd96fa4f0647919878e64e399b544371bb67fe85e5e",
   "subject": {
     "canonical_slug": "pipelayers",
     "name": "管道铺设工",

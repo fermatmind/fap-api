@@ -5,11 +5,14 @@
       "fact:china-jiaojiang-featured-daily-2026": {
         "status": "mapped"
       },
+      "fact:ds-pku-pay-notice": {
+        "status": "pending_mapping"
+      },
+      "fact:ds-scu-pay-notice": {
+        "status": "pending_mapping"
+      },
       "fact:employment": {
         "status": "mapped"
-      },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
       },
       "fact:growth": {
         "status": "mapped"
@@ -1707,7 +1710,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -22534,7 +22537,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合先试：愿意先核对数据语义与质量、能接受大量时间花在清洗与验证而不是建模，愿意主动证伪自己的模型并逐项排查泄漏与偏差，能在结果不确定时如实说明不确定性，并能用非技术语言向业务方解释发现与限制。"
+              "如果你愿意核数据来源、找出模型可能错在哪里，并向非技术同事说明结论的适用条件，可以先试。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.1",
@@ -22548,7 +22551,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "需要慎重：如果只愿意做建模与调参、不愿花时间核对数据来源与权限、难以接受模型结果被业务或合规否掉、或不愿意在文档、复现与沟通上投入时间，实际工作会与期待不符。"
+              "如果你更喜欢建数据管道、维护表和解决数据延迟，可先比较数据工程；如果更喜欢口径明确的经营指标和持续报表，可先比较商业分析。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.2",
@@ -22576,7 +22579,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "低风险验证：用公开或虚构数据完成一次「写一份数据说明与质量核查清单—建立一个基线模型并给出验证与误差分析—用非技术语言写出结论与不确定性说明」练习，只判断工作偏好；练习不接触真实业务数据与个人信息，不等同岗位培训合格、数据授权或录用承诺。"
+              "打开目录「入行、证书与职业发展」，找到「虚构练习材料：数据泄漏与偏差问题处置」。DS-04 给出字段时间、两组错误数和上线规则；先做一页判断，再看参考。"
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -22604,7 +22607,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "工作以办公室或远程环境为主，需长时间面对代码、数据与文档，并与业务方、工程与合规团队频繁沟通；不同用人单位（专业与技术服务、金融与保险、信息业、企业管理等）的数据可得性、业务周期与模型风险差异明显。"
+              "常见工作在办公室开展；投入包括查数据、写代码、复现评估和解释结论。团队是否远程、谁维护模型以及上线后如何值守，向具体雇主核对。"
             ]
           },
           "id": "actors.display.fermat_decision_card.summary",
@@ -23600,7 +23603,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核与责任链条｜O*NET当前数据科学家档案（Updated2026非统一调查年）：40% 表示做得准确精确「极其重要」、44% 表示决定对同事或公司结果的影响为「中等结果」、56% 表示对如何做决定为「有一些」自由、52% 表示每周一次以上面对时间压力；模型与方法由同行评审或复核人按流程核对，数据使用与模型上线须在授权范围内进行并留痕，超出授权、发现偏差或合规边界不明时须按制度上报并存档。"
+              "复核与责任链条｜O*NET当前数据科学家档案（Updated2026非统一调查年）：40% 表示做得准确精确「极其重要」、44% 表示决定对同事或公司结果的影响为「中等结果」、56% 表示对如何做决定为「有一些」自由、52% 表示至少每周一次、但并非每天面对时间压力；模型与方法由同行评审或复核人按流程核对，数据使用与模型上线须在授权范围内进行并留痕，超出授权、发现偏差或合规边界不明时须按制度上报并存档。"
             ]
           },
           "id": "actors.display.work_context_block.review",
@@ -23686,7 +23689,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国处理可识别个人信息应核PIPL13合法依据（非一律同意）、6最小必要与51合理权限/定期安全教育；单位账号不代法律依据。利用个人信息自动化决策另适用24透明公平/相应个人权利与55事前影响评估、56报告和记录至少3年，不对所有数据科学模型一概套用。职业工资/真实雇主录用数据缺口另保留。"
+              "中国个人信息的合法处理依据、目的和权限须按实际场景核对；使用个人信息做自动化决策另核透明公平、适用的个人权利与事前影响评估。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
@@ -24340,7 +24343,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "已核任务、情境及招聘技术词；代码/特征草稿、报表与实验辅助为编辑待验证候选，本轮未测提效、雇主GenAI采用或替代日期。模型验证须核数据与方法，单位账号不代个人信息合法处理依据；NIST自愿治理与PIPL法定义务分开，预测增长不等于已发生工具因果。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "生成式 AI 可以辅助草拟代码、字段说明与汇报稿。人仍需核预测时点、数据来源、验证集隔离和各组错误。预测就业增长不是工具的已测效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24447,7 +24450,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列出用统计软件分析与清洗大规模数据、创建可视化、测试验证并重新设计模型、比较模型性能指标、应用特征选择算法、报告建模与分析结果、识别关系趋势与影响因素等任务及工作情境百分比（含 40% 准确精确极其重要、65% 竞争程度高度竞争、52% 每周一次以上面对时间压力、56% 决策自由为「有一些」）。"
+              "列出用统计软件分析与清洗大规模数据、创建可视化、测试验证并重新设计模型、比较模型性能指标、应用特征选择算法、报告建模与分析结果、识别关系趋势与影响因素等任务及工作情境百分比（含 40% 准确精确极其重要、65% 竞争程度高度竞争、52% 至少每周一次、但并非每天面对时间压力、56% 决策自由为「有一些」）。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
@@ -26053,7 +26056,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得对应15-2051.00的中国职业级工资分布；所读NBS是行业工资，不由本次检索断言全国从未公布或全部统计最高只能到行业。"
+              "本页未查到可与美国 15-2051 对应的大陆全国工资分布。下面两则公告说明岗位与报酬口径，行业均值另作背景。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
@@ -26067,7 +26070,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑合同核对：实际岗位/职级、合同主体、月薪/奖金/股权、工时与外包安排；本轮无真实招聘样本，不宣称全国全职或某计酬形式占主要份额。"
+              "北大公告薪酬面议；四川大学就业网样本未说明数字的计薪周期。向具体单位分别问合同主体、基本工资、奖金、股权和工时。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
@@ -26109,7 +26112,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明：未取得职业单列数值不等于官方从未发布；本页只登记实际查阅范围与结果，不使用美国数据、行业平均或不透明报价样本代填。"
+              "比较报价前，先把正式员工、派遣、实习和项目合同分开，再确认金额周期、固定和浮动部分。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
@@ -26137,12 +26140,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑职责对照：中文岗位名称不能直接映射美国细类；本轮未核全国分类一一对应或统一计酬方式，招聘/报价缺口仍在。"
+              "涵盖该行业多种工作；不能据此推算数据科学家工资。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "r5-onet-current",
             "r5-nbs-it"
           ],
           "type": "prose"
@@ -26152,12 +26154,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆数据科学或建模岗位招聘或报价统计；个别平台或单位的报价不能代表全国水平"
+              "两则公告只能说明各自要求。没有可比的全国职业工资分布：北大面议；川大就业网样本列 8000–12000，未说明周期或分开列全职与实习。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "r5-onet-current"
+            "ds-pku",
+            "ds-scu"
           ],
           "type": "prose"
         },
@@ -26166,14 +26169,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET JobZone4/SVP7至低于8；受访者对新雇员所需学历意见为48%学士、44%硕士、4%副学士，非员工构成或法律。BLS典型学士/无相关经验/无在岗训练类别不等于无需准备；OOH部分雇主需/偏好硕博或行业经验，不代中国录用/IQ线。"
+              "北大公共卫生学院 2026 年 10 月招 1 名合同制数据科学家，负责医疗数据治理、特征、建模及验证。要求相关硕士及以上，熟悉 SQL、Spark/Hive；两年及以上数据处理、分析或建模经验优先。首聘两年，第三方派遣，薪酬面议。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "r5-onet-current",
-            "r5-bls-current",
-            "r5-bls-ooh"
+            "ds-pku"
           ],
           "type": "prose"
         },
@@ -26182,13 +26183,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑准备建议：核目标岗位统计/编程/业务要求，未核中国真实岗位普遍专业/学历偏好；硕士不保证算法岗或收入，账号不代合法用途。"
+              "四川大学就业网的企业原公告列医学数据统计储备岗，硕士，负责病例数据清洗、建模和报告。页面把全职与实习合列，“薪资”栏写 8000–12000，未说明计薪周期，也未分列两类用工；不能当作已核月薪。 公告页面列有效期至 2026 年 11 月 29 日；实际是否仍有空缺向用人单位核对。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "r5-onet-current",
-            "r5-cn-pipl"
+            "ds-scu"
           ],
           "type": "prose"
         },
@@ -26202,7 +26202,9 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "r5-cn-pipl"
+            "r5-cn-pipl",
+            "ds-cn-catalogue",
+            "ds-moe-standard"
           ],
           "type": "prose"
         },
@@ -26254,7 +26256,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国职业工资/招聘样本缺口保留；NBS信息技术行业2025非私营248752/私营128166元年均税前，仅实际单位归属该行业时作背景，不代职业工资或美国信息业直接映射。"
+              "大陆信息传输、软件和信息技术服务业城镇单位 2025 年年均税前：非私营 248,752 元、私营 128,166 元。涵盖多职业，只在雇主实际归属该行业时用作背景。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -26832,7 +26834,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先用公开或虚构数据完成一次「写一份数据说明与质量核查清单—建立一个基线模型并给出验证与误差分析—用非技术语言写出结论与不确定性说明」练习，或一次真实项目的复盘，再判断偏好。"
+              "先做 DS-04：读字段可用时间、算错误率，再写上线建议。复盘你更愿反复做的是核字段、验证结果还是解释限制。"
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -28630,13 +28632,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮无中国当期招聘样本，以下入门/进阶/证据为编辑核对建议，不代表雇主统一采用或默认任职独立。",
-              "中国处理可识别个人信息应核PIPL13合法依据（非一律同意）、6最小必要与51合理权限/定期安全教育；单位账号不代法律依据。利用个人信息自动化决策另适用24透明公平/相应个人权利与55事前影响评估、56报告和记录至少3年，不对所有数据科学模型一概套用。"
+              "北大公共卫生学院 2026 年 10 月招 1 名合同制数据科学家，负责医疗数据治理、特征、建模及验证。要求相关硕士及以上，熟悉 SQL、Spark/Hive；两年及以上数据处理、分析或建模经验优先。首聘两年，第三方派遣，薪酬面议。",
+              "四川大学就业网的企业原公告列医学数据统计储备岗，硕士，负责病例数据清洗、建模和报告。页面把全职与实习合列，“薪资”栏写 8000–12000，未说明计薪周期，也未分列两类用工；不能当作已核月薪。 公告页面列有效期至 2026 年 11 月 29 日；实际是否仍有空缺向用人单位核对。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "r5-cn-pipl"
+            "r5-cn-pipl",
+            "ds-pku",
+            "ds-scu"
           ],
           "type": "notice"
         },
@@ -28731,7 +28735,7 @@
                 "values": [
                   "可观察的专业能力证据",
                   "能独立完成从数据核查、建模到验证与解释的闭环、排查常见泄漏与偏差、并如实说明不确定性（来自 O*NET 任务与工作情境数据）。",
-                  "以上是任务与情境观察点，不是人格标签或录用阈值；工作情境显示 40% 准确精确极其重要、65% 竞争程度高度竞争、52% 每周一次以上面对时间压力、56% 决策自由为「有一些」。"
+                  "以上是任务与情境观察点，不是人格标签或录用阈值；工作情境显示 40% 准确精确极其重要、65% 竞争程度高度竞争、52% 至少每周一次、但并非每天面对时间压力、56% 决策自由为「有一些」。"
                 ]
               },
               {
@@ -28995,12 +28999,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国岗位按实际职责/录用条件核，本轮无真实招聘样本或一一对应分类证明。中国处理可识别个人信息应核PIPL13合法依据（非一律同意）、6最小必要与51合理权限/定期安全教育；单位账号不代法律依据。利用个人信息自动化决策另适用24透明公平/相应个人权利与55事前影响评估、56报告和记录至少3年，不对所有数据科学模型一概套用。"
+              "人社部数字职业清单列数据分析处理工程技术人员（2-02-30-09）和大数据工程技术人员（2-02-38-03）。教育部大数据工程技术专业教学标准列这两个职业类别；中文岗位按任务与美国 15-2051 对照，未建立一一对应。"
             ]
           },
           "id": "actors.path.career-path-block.3",
           "source_refs": [
-            "r5-cn-pipl"
+            "r5-cn-pipl",
+            "ds-cn-catalogue",
+            "ds-moe-standard"
           ],
           "type": "prose"
         },
@@ -29012,43 +29018,41 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "虚构分析情景材料（练习输入）",
-                  "虚构情境：一名数据科学家在同一项目周期遇到四个问题。第一，训练数据中某个字段在预测期才可获得，却被用于特征；第二，业务方要求在两周内上线一个用于高风险决策的模型；第三，评估指标在整体样本上达标，但某一群体误差明显偏高；第四，其中一部分数据包含客户个人信息，同事要求把原始数据导出到外部工具处理。",
-                  "已给材料：业务问题与评估指标；字段说明与数据字典；数据使用与留痕要求；模型上线与复核流程。",
-                  "未给材料：该字段是否属于泄漏应按什么规则判定、时间不足时能否缩减验证范围、偏差偏高的处置权限、以及涉及个人信息时能否导出到外部工具。练习中如需要这些条件，请明确写出你的假设与需要确认的对象。"
+                  "DS-04｜纸面上线复核",
+                  "任务：对预测截点已经预约的记录，在开始前 24 小时预测是否爽约。字典：booked_lead_hours 创建预约时写入并固定；checkout_status 在预约结束后才写入。候选模型使用了两个字段。",
+                  "同一留出集共有 100 条：A 组 80 条错 8，B 组 20 条错 7；两组无重叠。题设门槛：总体错误率不高于 16%，每组不高于 20%，每组至少 20 条，并且所有特征在预测时点可得。",
+                  "两周后拟上线。同事想把含联系方式的原始表传外部工具；题设只有内部汇总数据权限。上线要模型负责人和数据保护负责人签字，当前均未签。移除字段后没有新评估。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "任务要求",
-                  "请写出一页处置与上报方案：包含泄漏疑似字段的判定与处理、时间不足时的沟通与验证底线、偏差偏高的处置路径，以及涉及个人信息时的权限与留痕处置。",
-                  "方案要写明哪些信息来自题面材料、哪些还是假设，并说明依据的是字段说明与数据字典、验证规范还是数据安全与合规要求。"
+                  "任务｜写一页决策",
+                  "计算两组和总体错误率，对照门槛。指出不可用字段及下一次切分、训练和评估的顺序。",
+                  "写现在能否上线、原表能否外发、要谁复核，以及哪一项信息仍未知。用两句向项目负责人说明结论。 变式：同一留出集只更正 B 组错误数为 4，分母仍 20；字段、批准及外发条件均不变。分别写两版。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "参考交付（可从题面推导）",
-                  "方案应包含：泄漏疑似字段（核对该字段在预测时点是否可得，必要时按可得性重做特征与验证，并记录判定依据）、时间不足（按流程说明风险，明确不可省略的验证环节，必要时建议缩小上线范围或延后，不以跳过验证换进度）、偏差偏高（做分组误差分析并识别原因，必要时限制使用场景并按合规流程升级审批，保留评估记录）、个人信息（在授权范围内处理，不导出到外部工具；确有需要时按制度申请并通过合规渠道处理）、交接（写清四项事项的状态、已采取动作与待确认事项）。",
-                  "参考交付只列应包含的要素，不要求与示例措辞一致；能说明判断依据即可。"
+                  "先独立写两版",
+                  "独立交两版复算和一页给项目负责人的交接，列决定、两位复核人与下一项证据。",
+                  "交卷后再展开常见问题「DS-04 上线复核参考解（交卷后再打开）」。"
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "边界与不可推断的结论",
-                  "本题只检验数据可得性与泄漏判定意识、验证底线意识、偏差处置意识以及数据合规意识，不评价真实工作中的处理是否合规，也不构成合规、安全或法律意见。",
-                  "不得使用真实单位数据或未公开的业务资料；涉及真实个人信息与受限数据处理、模型上线与行业监管要求时须按单位信息管理制度、数据安全与个人信息保护规定以及行业合规要求执行，必要时按现行规定取得相应授权。"
+                  "边界｜只用题设数值",
+                  "这些门槛只用于 DS-04，不代表正式审批要求。总体错误率通过不证明对所有群体有效，也不证明真实合规。",
+                  "无需代码、账号或真实患者资料。若想继续，先比较你更愿意查字段、做误差分析还是解释结果。"
                 ]
               }
             ]
           },
           "id": "actors.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "ds04-editor"
           ],
           "title": "虚构练习材料：数据泄漏与偏差问题处置",
           "type": "cards"
@@ -29062,58 +29066,56 @@
                 "id": "day-1",
                 "values": [
                   "第 1 天：读一份公开材料",
-                  "找一份公开的数据质量或模型验证科普材料，标出三条关键要求与对应做法，写下你想确认的地方。"
+                  "读 DS-04 的预测时间和两个字段，画可用时间线。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
                   "第 2 天：做一次字段与质量核查",
-                  "用公开或虚构数据，列出字段含义、可能缺失或异常的位置与核查方式。"
+                  "写出每组的分母和错误数，再写总体分母。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第 3 天：建一个基线模型",
-                  "用公开或虚构数据建立一个简单基线，写明切分方式与所用指标。"
+                  "第 3 天：计算错误率并核对门槛",
+                  "计算总体及两组错误率，逐项核门槛。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
                   "第 4 天：写一份验证与误差分析",
-                  "写出你如何验证、误差主要来源、以及是否存在泄漏或偏差风险。"
+                  "设计时间切分和留出集安排，并说明两版数值各能支持什么。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
                   "第 5 天：写一份结论与限制说明",
-                  "用非技术语言写一页结论，含适用条件、不确定性与不建议的使用方式。"
+                  "写两句话解释上线与外发决定。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第 6 天：让他人只凭材料复核",
-                  "让一位同伴只看你的方案复核你的判断，记录对方提出的问题。"
+                  "第 6 天：独立提交",
+                  "不看参考，独立提交。 独立交两版复算和一页给项目负责人的交接，列决定、两位复核人与下一项证据。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第 7 天：判断是否继续",
-                  "回到本页的判断清单，写下你愿意继续的三条理由与需要慎重的两条条件。"
+                  "第 7 天：打开参考自核",
+                  "展开常见问题「DS-04 上线复核参考解（交卷后再打开）」，记一处差异或无差异，再选择下一项职业探索。"
                 ]
               }
             ]
           },
           "id": "actors.path.seven-day-trial.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-sklearn-leakage"
           ],
           "title": "七天低成本体验安排",
           "type": "timeline"
@@ -29194,7 +29196,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国任务/准备按15-2051.00与BLS；中国个人信息处理按所读PIPL，未核真实招聘/全国一一对应职业分类及全部行业、敏感与跨境配套。"
+              "美国任务和准备按 O*NET 与 BLS；大陆两则招聘按原公告，个人信息处理另核适用法条和实际数据权限。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
@@ -29433,7 +29435,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：目标岗位学历/专业训练、经验、实际职责与权限/任命；本轮无中国统一条件或真实在招样本，不承诺年资自然晋级。"
+              "先核目标岗位的学历、相关经历、具体任务和数据权限。两则样本的要求只适用于各自岗位。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
@@ -29512,7 +29514,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：目标岗位学历/专业训练、经验、实际职责与权限/任命；本轮无中国统一条件或真实在招样本，不承诺年资自然晋级。"
+              "先核目标岗位的学历、相关经历、具体任务和数据权限。两则样本的要求只适用于各自岗位。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.credentials",
@@ -29591,7 +29593,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：目标岗位学历/专业训练、经验、实际职责与权限/任命；本轮无中国统一条件或真实在招样本，不承诺年资自然晋级。"
+              "先核目标岗位的学历、相关经历、具体任务和数据权限。两则样本的要求只适用于各自岗位。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.03.credentials",
@@ -29670,7 +29672,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：目标岗位学历/专业训练、经验、实际职责与权限/任命；本轮无中国统一条件或真实在招样本，不承诺年资自然晋级。"
+              "先核目标岗位的学历、相关经历、具体任务和数据权限。两则样本的要求只适用于各自岗位。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
@@ -29765,7 +29767,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：目标岗位学历/专业训练、经验、实际职责与权限/任命；本轮无中国统一条件或真实在招样本，不承诺年资自然晋级。"
+              "先核目标岗位的学历、相关经历、具体任务和数据权限。两则样本的要求只适用于各自岗位。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
@@ -29844,7 +29846,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：目标岗位学历/专业训练、经验、实际职责与权限/任命；本轮无中国统一条件或真实在招样本，不承诺年资自然晋级。"
+              "先核目标岗位的学历、相关经历、具体任务和数据权限。两则样本的要求只适用于各自岗位。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.02.credentials",
@@ -29923,7 +29925,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：目标岗位学历/专业训练、经验、实际职责与权限/任命；本轮无中国统一条件或真实在招样本，不承诺年资自然晋级。"
+              "先核目标岗位的学历、相关经历、具体任务和数据权限。两则样本的要求只适用于各自岗位。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.03.credentials",
@@ -30002,7 +30004,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：目标岗位学历/专业训练、经验、实际职责与权限/任命；本轮无中国统一条件或真实在招样本，不承诺年资自然晋级。"
+              "先核目标岗位的学历、相关经历、具体任务和数据权限。两则样本的要求只适用于各自岗位。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.credentials",
@@ -30097,7 +30099,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：目标岗位学历/专业训练、经验、实际职责与权限/任命；本轮无中国统一条件或真实在招样本，不承诺年资自然晋级。"
+              "先核目标岗位的学历、相关经历、具体任务和数据权限。两则样本的要求只适用于各自岗位。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -30176,7 +30178,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：目标岗位学历/专业训练、经验、实际职责与权限/任命；本轮无中国统一条件或真实在招样本，不承诺年资自然晋级。"
+              "先核目标岗位的学历、相关经历、具体任务和数据权限。两则样本的要求只适用于各自岗位。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.02.credentials",
@@ -30255,7 +30257,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：目标岗位学历/专业训练、经验、实际职责与权限/任命；本轮无中国统一条件或真实在招样本，不承诺年资自然晋级。"
+              "先核目标岗位的学历、相关经历、具体任务和数据权限。两则样本的要求只适用于各自岗位。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.03.credentials",
@@ -30334,7 +30336,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑核对项：目标岗位学历/专业训练、经验、实际职责与权限/任命；本轮无中国统一条件或真实在招样本，不承诺年资自然晋级。"
+              "先核目标岗位的学历、相关经历、具体任务和数据权限。两则样本的要求只适用于各自岗位。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.04.credentials",
@@ -30433,7 +30435,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需求分层：职业总量预测、真实雇主安排、当期招聘样本；OOH预期数据驱动需求与AI集成支持增长是预测解释，非已发生工具因果份额。本轮无中国样本，不能由技术提及推当前净增岗位。"
+              "区分三件事：BLS 预测美国就业总量，两则大陆公告描述特定岗位，技术词只说明来源样本。选择方向时先查自己的工作职责。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30478,13 +30480,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑整理的岗位信息核对口径说明：招聘公告只能说明某一时点某一单位或岗位的需求。"
+              "北大公共卫生学院 2026 年 10 月招 1 名合同制数据科学家，负责医疗数据治理、特征、建模及验证。要求相关硕士及以上，熟悉 SQL、Spark/Hive；两年及以上数据处理、分析或建模经验优先。首聘两年，第三方派遣，薪酬面议。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "r5-bls-current",
-            "r5-wages-current"
+            "ds-pku"
           ],
           "type": "prose"
         },
@@ -30493,13 +30494,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "招聘公告只能说明某一时点某一单位或岗位的需求。三者不能互相替代。"
+              "四川大学就业网的企业原公告列医学数据统计储备岗，硕士，负责病例数据清洗、建模和报告。页面把全职与实习合列，“薪资”栏写 8000–12000，未说明计薪周期，也未分列两类用工；不能当作已核月薪。 公告页面列有效期至 2026 年 11 月 29 日；实际是否仍有空缺向用人单位核对。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.5",
           "source_refs": [
-            "r5-bls-current",
-            "r5-wages-current"
+            "ds-scu"
           ],
           "type": "prose"
         },
@@ -31014,7 +31014,7 @@
                 ]
               },
               {
-                "answer": "生成型助手可以承担部分样板代码、特征探索、文档整理与模型原型工作，机器学习平台也缩短了训练与实验的周转时间，这些可减少部分重复编码与整理工作；但快速生成不等于数据可用、方法正确或结果可以上线——数据授权、泄漏检查、模型验证、偏差识别、上线监测与领域决策仍需人工复核，技术能力不等于业务或监管授权。O*NET 显示本职业 40% 表示准确精确极其重要、65% 表示竞争程度「高度竞争」、52% 表示每周一次以上面对时间压力；技术暴露不等于组织采用或岗位消失，也不能解释为岗位流失概率。",
+                "answer": "生成式 AI 可协助草拟代码、整理字段说明或改写汇报；本页没有职业级提效估计。特征可用性、泄漏、分组错误、数据权限和上线仍由有权人员复核。",
                 "id": "actors.faq.3",
                 "question": "AI 会怎样影响或取代数据科学家？",
                 "question_key": "career.faq.data-scientists.3",
@@ -31068,7 +31068,7 @@
                 ]
               },
               {
-                "answer": "先用公开或虚构数据完成一次「写一份数据说明与质量核查清单—建立一个基线模型并给出验证与误差分析—用非技术语言写出结论与不确定性说明」练习，再核对目标方向的对象、方法要求与合规边界。",
+                "answer": "先做「入行、证书与职业发展」的 DS-04：用题内数据算错误率，找出事后字段，再写上线和外发决定。根据哪一环节愿反复做，去查目标岗位的职责和培训。",
                 "id": "actors.faq.9",
                 "question": "零基础想尝试这个方向，应该先做什么？",
                 "question_key": "career.faq.data-scientists.9",
@@ -31077,12 +31077,21 @@
                 ]
               },
               {
-                "answer": "BLS 职业展望手册（2025—2035 年预测期，15-2051.00 本细类口径）显示 2025 年约 275,600 人在岗，预测增长 35%（远快于平均），就业变化约 +95,400 人，十年内年均约 24,800 个含更替需求的空缺；该预测为职业总量口径；O*NET 摘要页当前仍列 2024—2034 年口径，两者期间不同、分别引用；工作以数据处理、建模与验证为主，须按本地行业结构与数据治理要求核对，并优先核对岗位职责范围、数据权限与合规要求。",
+                "answer": "美国 BLS 表 1.2：2025 年 275,600 个岗位，2035 年预计 371,000 个，净增约 95,400（34.6%）；职业手册取整为 35%。年均约 24,800 个空缺含增长与替补。这是全国职业预测，选岗位时另核行业、职责与数据权限。",
                 "id": "actors.faq.10",
                 "question": "现在选择这个职业，还应考虑什么？",
                 "question_key": "career.faq.data-scientists.10",
                 "source_refs": [
                   "bls"
+                ]
+              },
+              {
+                "answer": "A：8/80 = 10%；B：7/20 = 35%；总体：15/100 = 15%。样本数和总体通过，B 未通过。checkout_status 晚于预测时点；该模型的分数不是无泄漏表现，删字段也不能沿用原分数。 当前不上线；只使用获授权的内部汇总，不上传含联系方式的原表。题中汇总可复算错误率，不能用来重训，本次只交验证计划。待获准取得合适的逐行输入及已确认的结果标签，再按时间切分，用训练集拟合并用独立留出集核总体与分组；仍需新结果和两方批准。示例：「旧模型有事后字段，且 B 组未达线，先不上线。请模型负责人复核获准数据上的新评估，数据保护负责人确认允许的输入；原表不外发。」 变式：A 8/80=10%，B 4/20=20%，总体 12/100=12%；组别、总体和样本量门槛都通过，但事后字段与批准缺口不变，仍不发布或外发。",
+                "id": "data-scientists.faq.11",
+                "question": "DS-04 上线复核参考解（交卷后再打开）",
+                "question_key": "career.faq.data-scientists.q11",
+                "source_refs": [
+                  "ds04-editor"
                 ]
               }
             ]
@@ -31098,7 +31107,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "美国自身2025工资与2025—2035就业覆盖分开；OOH35%为34.6%取整，O*NET已同期间。中国职业工资/招聘缺口，NBS信息技术仅匹配行业背景。",
+              "美国工资与就业预测的口径分开；大陆两则招聘和制造或信息技术等宽行业统计也各有用途。",
               "17任务15核心1补充1New；教育所需意见、21风格Impact与6兴趣评分非员工比例/人格门槛。编辑工具与风险不代实测采用/事故；NIST自愿、PIPL適用法条分开。",
               "练习和发展示例为编辑设计，不是录用、资格或数据/发布授权；具体岗位的统计方法、数据权限和行业条件应分别核对。"
             ]
@@ -31118,7 +31127,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind 职业内容编辑团队（来源核查与练习设计）"
+              "费马测试编辑部"
             ]
           },
           "id": "actors.display.source_card.author",
@@ -31132,7 +31141,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮所读：O*NET自身详情/2025工资/招聘词及相邻定义、BLS表/OOH/OEWS方法、NBS信息技术行业、PIPL与scikit-learn方法；ILO/NIST有限宽口径参考，未核范围见登记。"
+              "职业任务查 O*NET，美国工资与就业分别查 OEWS 和 BLS 表 1.2；大陆行业、职业分类和招聘分别注明原件。"
             ]
           },
           "id": "actors.display.source_card.source",
@@ -31152,7 +31161,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "更新：2026-10-09（各来源检索日期见来源登记）"
+              "资料核对日期：2026 年 11 月 9 日。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31166,7 +31175,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "官方统计、法律、方法/自愿指南及编辑建议分开；中国职业工资与当期招聘样本缺口保留，不能由宽口径背景推个人收入或岗位权限。"
+              "两则招聘不能推导全国招聘或薪资；DS-04 的数值与权限均为虚构。"
             ]
           },
           "id": "actors.display.source_card.note",
@@ -31326,13 +31335,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "支持该职业的就业与预测口径（本细类）。",
+                  "BLS 就业预测为 2025—2035 年；职业手册将 34.6% 四舍五入为 35%。",
                   "不含中国大陆信息，不能替代中国大陆数据。",
-                  "本轮核查：2025—2035当前34.6%、OOH35取整；旧事实保留，当前O*NET也已2025—2035。"
+                  "美国职业总量预测，不代表个人录用机会。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "2025—2035当前34.6%、OOH35取整；旧事实保留，当前O*NET也已2025—2035。",
+                "limitation": "美国职业总量预测，不代表个人录用机会。",
                 "market": "美国",
                 "name": "BLS Occupational Outlook Handbook：Data Scientists（15-2051）",
                 "period": "2025—2035 年预测期；检索 2026-09-19",
@@ -31343,13 +31352,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "支持中国大陆该类岗位的分类、用工与合规语境。",
+                  "中国个人信息与行业规则按相应条文和具体场景核对。",
                   "不据此推定任职资格、数据授权或工资数值。",
-                  "本轮核查：旧gov首页保留不支持具体法条，本轮另列实际PIPL；非完整行业法律审查。"
+                  "政务门户不替代具体法条或数据授权。"
                 ],
                 "evidence_type": "official guidance",
                 "id": "cn-rule",
-                "limitation": "旧gov首页保留不支持具体法条，本轮另列实际PIPL；非完整行业法律审查。",
+                "limitation": "政务门户不替代具体法条或数据授权。",
                 "market": "中国内地",
                 "name": "中国大陆公开用工与数据合规信息（数据分析与建模岗位）",
                 "period": "现行规定；检索 2026-09-19",
@@ -31424,13 +31433,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "支持入行准备层级、兴趣代码与行业分布的观察点。",
+                  "O*NET 职业资料可查工作任务、职业准备和调查所列学历。",
                   "不构成具体雇主的录用条件或中国大陆的门槛。",
-                  "本轮核查：2025宽行业25/19/12/10，34是编辑差额；48/44/4为所需学历意见。"
+                  "调查结果不是雇主门槛或大陆招聘条件。"
                 ],
                 "evidence_type": "official source",
                 "id": "employer",
-                "limitation": "2025宽行业25/19/12/10，34是编辑差额；48/44/4为所需学历意见。",
+                "limitation": "调查结果不是雇主门槛或大陆招聘条件。",
                 "market": "美国",
                 "name": "O*NET OnLine：Data Scientists 摘要（15-2051.00）",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31489,13 +31498,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于说明引入 AI 系统时的治理、记录与人工监督要求。",
+                  "NIST 框架用于组织 AI 风险管理和人工复核。",
                   "框架不替代单位制度与合规要求的责任划分。",
-                  "本轮核查：自愿治理非强制法律/方法或本职业采用率。"
+                  "自愿框架不替代适用法规或上线审批。"
                 ],
                 "evidence_type": "institutional framework",
                 "id": "nist",
-                "limitation": "自愿治理非强制法律/方法或本职业采用率。",
+                "limitation": "自愿框架不替代适用法规或上线审批。",
                 "market": "美国",
                 "name": "NIST：Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
                 "period": "AI RMF 1.0；检索 2026-09-19",
@@ -31538,13 +31547,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "支持雇主技术关键词的市场信号说明。",
+                  "O*NET 技术关键词来自美国招聘文本。",
                   "关键词不等于采用率或能力要求。",
-                  "本轮核查：2025全年美国招聘文本55项：Python66/SQL51/R34/Tableau22/PowerBI19/AWS17/Azure13/TensorFlow11/PyTorch10/SAS9/Excel8/Snowflake8%，非实际使用/熟练度/GenAI率；不可按这些比例相加或推业务用途。"
+                  "关键词比例不能用来估计工具使用或熟练程度。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r2-ai",
-                "limitation": "2025全年美国招聘文本55项：Python66/SQL51/R34/Tableau22/PowerBI19/AWS17/Azure13/TensorFlow11/PyTorch10/SAS9/Excel8/Snowflake8%，非实际使用/熟练度/GenAI率；不可按这些比例相加或推业务用途。",
+                "limitation": "关键词比例不能用来估计工具使用或熟练程度。",
                 "market": "美国",
                 "name": "O*NET OnLine：Data Scientists 热门技术（15-2051.00）",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31555,13 +31564,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "登记中国大陆公开工资统计的细分层级。",
+                  "国家统计局城镇单位工资按行业等范围发布。",
                   "未取得本职业单列数值，不填代理数值。",
-                  "本轮核查：旧首页保留；本轮NBS实际信息技术行业背景另列。"
+                  "行业工资不等于数据科学家职业工资。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "旧首页保留；本轮NBS实际信息技术行业背景另列。",
+                "limitation": "行业工资不等于数据科学家职业工资。",
                 "market": "中国内地",
                 "name": "国家统计局：2025 年城镇单位就业人员年平均工资情况",
                 "period": "2025 年发布口径；检索 2026-09-19",
@@ -31572,13 +31581,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "说明统计分位与个人收入不可直接互换。",
+                  "OEWS 工资含部分激励收入，排除加班溢价与轮班差额等。",
                   "不提供个人收入结论。",
-                  "本轮核查：工资含部分激励奖金/津贴，不能一概不含；所读方法另列。"
+                  "统计分位不等于个人到手收入。"
                 ],
                 "evidence_type": "official methodology",
                 "id": "r2-pay-2",
-                "limitation": "工资含部分激励奖金/津贴，不能一概不含；所读方法另列。",
+                "limitation": "统计分位不等于个人到手收入。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：OEWS 工资与折算口径",
                 "period": "现行方法说明；检索 2026-09-19",
@@ -31621,13 +31630,13 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于说明任务级暴露度量的方法。",
+                  "ILO 研究按任务估计生成式 AI 暴露。",
                   "任务暴露不等于自动化采用或岗位替代结果。",
-                  "本轮核查：本轮所读摘要未核匹配分数，不断言完整研究无单职业分数。"
+                  "潜在暴露不衡量采用率或岗位减少。"
                 ],
                 "evidence_type": "institutional research",
                 "id": "sag",
-                "limitation": "本轮所读摘要未核匹配分数，不断言完整研究无单职业分数。",
+                "limitation": "潜在暴露不衡量采用率或岗位减少。",
                 "market": "全球",
                 "name": "ILO：Generative AI and Jobs — A Refined Global Index of Occupational Exposure",
                 "period": "研究发表时点；检索 2026-09-19",
@@ -31775,11 +31784,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "ILO宽口径任务暴露方法；本轮所读摘要未核15-2051匹配分数，不断言完整研究无分数或将暴露解释为裁员概率。"
+                  "ILO 研究将生成式 AI 的潜在影响分到任务层面。"
                 ],
                 "evidence_type": "institutional research",
                 "id": "r5-ilo-index",
-                "limitation": "ILO宽口径任务暴露方法；本轮所读摘要未核15-2051匹配分数，不断言完整研究无分数或将暴露解释为裁员概率。",
+                "limitation": "研究不提供本页所用的岗位级采用或失业概率。",
                 "market": "全球",
                 "name": "ILO：Generative AI and Jobs—Refined Global Index（摘要）",
                 "period": "2025-05-20研究摘要；检索 2026-10-09",
@@ -31830,24 +31839,95 @@
                 "period": "当前官方方法文档；检索2026-10-09",
                 "publisher": "scikit-learn developers",
                 "scope": "contextual",
-                "url": "https://scikit-learn.org/stable/common_pitfalls.html"
+                "url": "https://scikit-learn.org/stable/common_pitfalls.html#data-leakage"
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "问题定义与沟通｜识别能由数据分析回答的管理目标为核心；访谈利益相关方为New未给重要度，不能称已评级核心或人人必做。 — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
-                  "数据准备｜清洗/处理与抽样技术为核心，设计调查工具为补充；编辑建议核字段/质量/合法用途，不把可选调查一律写为岗位职责。 — 75/100; weight=1/3; actors.display.responsibilities_block.02[0]",
-                  "建模与比较｜建立并比较模型｜应用特征选择算法建立模型，用损失函数或解释方差比例等统计性能指标比较模型，并识别关系、趋势或可能影响结果的因素。 — 75/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                  "按输入、人工复核和责任分析用途。",
+                  "按输入、人工复核和责任分析用途。",
+                  "按输入、人工复核和责任分析用途。",
+                  "按输入、人工复核和责任分析用途。",
+                  "按输入、人工复核和责任分析用途。"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
+                "limitation": "不衡量采用率、提效或失业。",
+                "name": "费马测试：AI 任务分析方法",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "北大公共卫生学院 2026 年 10 月招 1 名合同制数据科学家，负责医疗数据治理、特征、建模及验证。要求相关硕士及以上，熟悉 SQL、Spark/Hive；两年及以上数据处理、分析或建模经验优先。首聘两年，第三方派遣，薪酬面议。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "ds-pku",
+                "limitation": "单个合同制岗位，待遇面议。",
+                "name": "北大公共卫生学院：数据科学家",
+                "period": "2026-10-21",
+                "publisher": "Peking University Health Science Center",
+                "scope": "recruitment_proxy",
+                "url": "https://rsc.bjmu.edu.cn/rczp/jfxz/adf356a6d157414e81d8d9b76b2e1b44.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "四川大学就业网的企业原公告列医学数据统计储备岗，硕士，负责病例数据清洗、建模和报告。页面把全职与实习合列，“薪资”栏写 8000–12000，未说明计薪周期，也未分列两类用工；不能当作已核月薪。 公告页面列有效期至 2026 年 11 月 29 日；实际是否仍有空缺向用人单位核对。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "ds-scu",
+                "limitation": "相邻样本，周期与用工类型未分列。",
+                "name": "四川大学就业网：医学数据统计储备岗",
+                "period": "2026-10-12",
+                "publisher": "四川芮来医药科技有限公司；四川大学就业网",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh5eZiKk7bOynbddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "人社部数字职业清单列数据分析处理工程技术人员（2-02-30-09）和大数据工程技术人员（2-02-38-03）。教育部大数据工程技术专业教学标准列这两个职业类别；中文岗位按任务与美国 15-2051 对照，未建立一一对应。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "ds-cn-catalogue",
+                "limitation": "职业分类与任务对照，不给个人许可或工资。",
+                "name": "人社部数字职业清单",
+                "period": "2022",
+                "publisher": "人力资源社会保障部",
+                "scope": "contextual",
+                "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第 5 节列数据分析处理工程技术人员 2-02-30-09 和大数据工程技术人员 2-02-38-03。"
+                ],
+                "evidence_type": "官方原始资料",
+                "id": "ds-moe-standard",
+                "limitation": "教学标准说明培养对口方向，不是所有数据科学家岗位的准入要求。",
+                "name": "教育部：大数据工程技术专业教学标准",
+                "period": "2025",
+                "publisher": "教育部",
+                "scope": "contextual",
+                "url": "https://hudong.moe.gov.cn/s78/A07/zcs_ztzl/2017_zt06/17zt06_bznr/bznr_zyjyzyjxbz/gdzyjy_bk/bk_dzyxxdl/dzxxdl_jsjl/202502/P020250207566821328685.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "DS-04 的数据、门槛和审批条件为虚构编辑设定。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "ds04-editor",
+                "limitation": "纸面练习，不代表真实审批、机构数据或职业标准。",
+                "market": "编辑练习",
+                "name": "费马测试编辑部：DS-04 虚构试做",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -33464,6 +33544,30 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://rsc.bjmu.edu.cn/rczp/jfxz/adf356a6d157414e81d8d9b76b2e1b44.htm",
+            "id": "ds-pku",
+            "label": "北大公共卫生学院：数据科学家",
+            "scope": "单个合同制岗位，待遇面议。"
+          },
+          {
+            "href": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh5eZiKk7bOynbddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E",
+            "id": "ds-scu",
+            "label": "四川大学就业网：医学数据统计储备岗",
+            "scope": "相邻样本，周期与用工类型未分列。"
+          },
+          {
+            "href": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html",
+            "id": "ds-cn-catalogue",
+            "label": "人社部数字职业清单",
+            "scope": "职业分类与任务对照，不给个人许可或工资。"
+          },
+          {
+            "href": "https://hudong.moe.gov.cn/s78/A07/zcs_ztzl/2017_zt06/17zt06_bznr/bznr_zyjyzyjxbz/gdzyjy_bk/bk_dzyxxdl/dzxxdl_jsjl/202502/P020250207566821328685.pdf",
+            "id": "ds-moe-standard",
+            "label": "教育部：大数据工程技术专业教学标准",
+            "scope": "教学标准说明培养对口方向，不是所有数据科学家岗位的准入要求。"
           }
         ],
         "tracks": [
@@ -34679,8 +34783,8 @@
             },
             {
               "指标": "证据不足",
-              "数值": "未取得中国大陆该类岗位招聘或项目报价统计与工资分位数",
-              "说明": "不使用个别平台或单位的报价冒充全国数据，也不插值。"
+              "数值": "未找到可比的大陆全国职业工资分布",
+              "说明": "两则招聘单列。北大面议；川大就业网样本金额周期不明。"
             }
           ],
           "china_ai_row": {
@@ -34689,7 +34793,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_class_row": "编辑职责对照，未核中美一一对应分類或中国真实招聘；实际岗位/权限分别确认",
+          "china_class_row": "大陆分类按任务对照，不直接映射美国代码；两则公告见入行模块。",
           "china_edu_table": [
             {
               "学历段": "本科（数学、统计、计算机或相关专业）",
@@ -34786,7 +34890,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "本轮实际所读NBS2025行业工资与PIPL；中国职业工资和当期招聘未取得",
+          "china_open": "大陆资料：两则招聘、数字职业清单及 2025 年行业工资。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34829,7 +34933,7 @@
               }
             },
             {
-              "城市/区间": "中国大陆（招聘或项目报价口径）",
+              "城市/区间": "行业背景（不是职业工资）",
               "月薪参考": {
                 "$join": [
                   {
@@ -34843,11 +34947,11 @@
                     "type": "prose"
                   }
                 ],
-                "separator": ""
+                "separator": "\n"
               }
             },
             {
-              "城市/区间": "中国大陆（行业门类口径）",
+              "城市/区间": "两个招聘样本（不能换算月薪）",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34859,7 +34963,9 @@
           "china_soc_row": "美国代码O*NET-SOC15-2051.00；本轮未取得可与之直接比较的中国职业级工资口径，不由检索缺口断言全国未建立。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "r5-current-china-jiaojiang-featured-daily-2026",
+            "ds-pku-pay-notice",
+            "ds-scu-pay-notice"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
@@ -35292,7 +35398,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         },
         "how": {
           "$join": [
@@ -35309,7 +35415,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         },
         "suit": {
           "$join": [
@@ -35326,7 +35432,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         }
       },
       "hero": {
@@ -35366,7 +35472,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         },
         "heading": {
           "$item": "actors.display.market_signal_card.heading",
@@ -35937,7 +36043,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "了解我的职业兴趣",
+            "cta_label": "做霍兰德职业兴趣测试",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
               "block": "fit",
@@ -35986,7 +36092,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
-            "cta_label": "了解我的大五特质",
+            "cta_label": "做大五人格测试",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
               "block": "fit",
@@ -36035,7 +36141,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "cta_label": "了解我的人格偏好",
+            "cta_label": "做 MBTI 偏好测试",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
               "block": "fit",
@@ -36084,7 +36190,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
-            "cta_label": "了解我的动机线索",
+            "cta_label": "做九型人格测试",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
               "block": "fit",
@@ -36133,7 +36239,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
-            "cta_label": "了解我的认知表现",
+            "cta_label": "做矩阵推理测试",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
               "block": "fit",
@@ -36182,7 +36288,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
-            "cta_label": "了解我的沟通线索",
+            "cta_label": "做情绪能力测试",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
               "block": "fit",
@@ -36803,7 +36909,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解数据科学家的任务兴趣与工作偏好",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36916,20 +37022,20 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
-          {
-            "href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "label": "了解我的人格偏好"
+            "href": "/zh/tests/holland-career-interest-test-riasec",
+            "label": "做霍兰德职业兴趣测试"
           },
           {
             "href": "/zh/tests/big-five-personality-test-ocean-model",
-            "label": "了解我的大五特质"
+            "label": "做大五人格测试"
+          },
+          {
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "label": "做 MBTI 偏好测试"
+          },
+          {
+            "href": "/zh/tests/enneagram-personality-test-nine-types",
+            "label": "做九型人格测试"
           }
         ]
       },
@@ -37268,7 +37374,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与数据科学任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37351,7 +37457,7 @@
         "fact_id": "growth",
         "market": "美国",
         "measure": "预测就业变化（职业总量）",
-        "occupation_scope": "15-2051.00 本细类口径；BLS 预测 2025—2035 年增长 35%（远快于平均），属于预测期总量变化，不是个人录用概率；O*NET 摘要页当前仍列 2024—2034 年口径（2024 年约 245,900 人、+34%），两套口径期间不同，分别引用不合并",
+        "occupation_scope": "美国 15-2051，2025—2035 年全国就业预测；表 1.2 为 34.6%，职业手册取整为 35%。",
         "period": "2025—2035 年预测期；检索 2026-09-19",
         "source_refs": [
           "bls"
@@ -37530,36 +37636,48 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：本轮未取得中国数据科学岗位职业工资分布或招聘报价样本；中文按实际职责对照，未核中美一一对应分類",
+        "display_value": "2025 年：非私营 248,752 元、私营 128,166 元，均为年均税前。",
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "中国内地",
-        "measure": "中国职业工资/招聘缺口",
-        "occupation_scope": "中国内地，15-2051.00仅职责参考非分类对应证明",
-        "period": "检索2026-10-09",
+        "measure": "城镇信息传输、软件和信息技术服务业年平均工资",
+        "occupation_scope": "大陆城镇行业单位，涵盖多职业；非数据科学家专属统计。",
+        "period": "2025",
         "source_refs": [
           "r5-nbs-it"
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "数据科学家",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "derivation": null,
+        "display_value": "北大公共卫生学院公告未列金额。",
+        "fact_id": "ds-pku-pay-notice",
+        "market": "中国大陆",
+        "measure": "北大招聘样本：薪酬面议",
+        "occupation_scope": "单个用人单位公告。",
+        "period": "2026-10-21",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "ds-pku"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "公告列 8000–12000，未说明周期或分列全职与实习。",
+        "fact_id": "ds-scu-pay-notice",
+        "market": "中国大陆",
+        "measure": "川大就业网样本：金额未标周期",
+        "occupation_scope": "单个用人单位公告。",
+        "period": "2026-10-12",
+        "source_refs": [
+          "ds-scu"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与数据科学任务"
     },
     "badges": [
       "数据清洗与建模 · 模型验证 · 可视化与业务解释",
@@ -37603,17 +37721,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "数据科学家（O*NET-SOC 15-2051.00）用面向数据的编程语言与可视化软件把原始数据转化为有意义的信息：覆盖用统计软件分析与清洗大规模数据、创建图表与其他可视化、测试验证并重新设计模型、比较模型统计性能指标、应用特征选择算法、识别关系趋势与影响因素、编写新函数或应用开展分析、阅读科学文章识别新兴分析趋势、访谈利益相关方确定问题、设计数据采集工具、向管理层与最终用户报告建模与分析结果并提出数据驱动解决方案建议等任务；需说明其美国就业与工资口径：该职业 2025 年约 275,600 人在岗、2025—2035 年预测增长 35%（远快于平均）、十年年均约 24,800 个含更替需求的空缺；2025 年 5 月工资数据中位年薪 120,230 美元（中位时薪 57.80 美元），年薪分位为 67,240／85,660／120,230／158,880／199,130 美元；行业为 专业、科学与技术服务 28%／金融与保险 19%／信息业 11%／企业管理与综合管理 10%／其他行业 32%；兴趣代码 IC、准备层级 Job Zone Four；以及中国大陆该类岗位的职业级工资缺口与数据授权、泄漏检查、模型验证、偏差与漂移监测、领域决策复核的控制点。"
+      "text": "数据科学家怎样查数据泄漏、验证模型和解释结果？比较两则大陆招聘、美国工资与就业，再用 DS-04 做一次纸面上线判断。"
     },
     "title": {
       "availability": "available",
       "text": "数据科学家"
     }
   },
-  "source_content_sha256": "d7bfb8a2dc0363f02d77afce128843bb002a770c252480b683fc3c433f462951",
+  "source_content_sha256": "fbdc4e06baac4bb77995c664b48f3eb29b3ab8554e16f48f5debb1e8647b824d",
   "subject": {
     "canonical_slug": "data-scientists",
     "name": "数据科学家",
-    "summary": "数据科学家在美国对应 O*NET-SOC 15-2051.00（Data Scientists），开发并实施一套技术或分析应用，用面向数据的编程语言与可视化软件把原始数据转化为有意义的信息：应用数据挖掘、数据建模、自然语言处理与机器学习，从大型结构化与非结构化数据集中提取与分析信息；使用统计软件分析、处理与清洗大规模数据；创建图表与其他可视化以传达分析结果；测试、验证并重新设计模型以确保对目标结果的预测准确；比较模型的统计性能指标（如损失函数或解释方差比例）；应用特征选择算法；识别关系、趋势或可能影响研究结果的因素；用编程语言编写新函数或应用开展分析；阅读科学文章与会议论文以识别新兴分析趋势与技术；访谈利益相关方以确定待分析的问题；设计调查或数据采集工具；向管理层与其他最终用户口头或书面报告建模与分析结果；并向关键利益相关方提出数据驱动的解决方案建议，也可能创建动态数据报表。该职业准备层级为 Job Zone Four（需要相当程度的准备，SVP 7.0 至低于 8.0），官方教育调查显示新入职者中 48% 要求学士学位、44% 要求硕士学位、4% 要求副学士或其他两年制学位。在 O*NET 上，本细类的任务、工作情境与准备层级为自身口径；其全国工资页 2025 年同时公布年度与小时分位。中国侧同类多为数据分析、算法或建模岗位，职责、用工与计酬口径与该美国职业细类不是一一对应，不能互换。"
+    "summary": "数据科学家用数据回答问题，先核来源和字段能否在预测时点使用，再比较基线、分组错误和实际限制。交付包括可复核的结论、验证记录及上线建议。可用 DS-04 试一次这个过程。"
   }
 }

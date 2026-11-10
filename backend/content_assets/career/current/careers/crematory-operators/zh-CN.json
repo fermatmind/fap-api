@@ -8,6 +8,12 @@
       "fact:onet-code-39-4012": {
         "status": "pending_mapping"
       },
+      "fact:posting-crematory-daoxian": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-crematory-huoshan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -8489,7 +8495,7 @@
           "data": {
             "entries": [
               {
-                "answer": "工作链包括核对遗体身份与文件、准备和装载、控制炉温、收集并处理骨灰、清洁设备、维修检查与完整记录。",
+                "answer": "按殡仪馆规程核对身份、许可和交接记录，操作并监控火化设备，记录过程与异常，标识并移交骨灰。操作、审批与告别服务按岗位分工。",
                 "id": "crematory-operators.faq.1",
                 "question": "火化设备操作员：日常工作如何形成闭环？",
                 "question_key": "career.faq.crematory-operators.daily-work",
@@ -8498,9 +8504,9 @@
                 ]
               },
               {
-                "answer": "火化设备操作员负责火化设备与遗体处理链；防腐师负责遗体防腐与修复；殡仪服务员偏仪式、接待与流程支持。",
+                "answer": "火化操作员侧重设备操作和交接链；入殓防腐岗位处理遗体准备，殡葬礼仪人员协调家属与服务。具体机构可能合岗，核谁负责身份核对、设备操作和授权。",
                 "id": "crematory-operators.faq.2",
-                "question": "火化设备操作员：它与相邻职业有什么区别？",
+                "question": "火化操作、入殓防腐与殡葬礼仪有什么区别？",
                 "question_key": "career.faq.crematory-operators.role-comparison",
                 "source_refs": [
                   "onet-394012"
@@ -8517,12 +8523,12 @@
                 ]
               },
               {
-                "answer": "AI可辅助排程、文件核对和设备记录摘要，但任务暴露不等于岗位替代，遗体身份、设备状态与产出交接必须人工核验；自动化建议没有启动、停机、危险能量隔离或遗体处置授权；所有关键动作需要现场人员人工复核并留痕。",
+                "answer": "电子记录可帮助核对交接和提示漏项。身份核验、设备安全和异常处置仍要按机构授权与规程执行。 这不是对本职业 AI 使用率或岗位替代的测量。",
                 "id": "crematory-operators.faq.4",
-                "question": "火化设备操作员：AI 可以辅助哪些任务？",
+                "question": "哪些工作可能由软件辅助？",
                 "question_key": "career.faq.crematory-operators.ai-impact",
                 "source_refs": [
-                  "ilo-genai-2025"
+                  "onet-394012"
                 ]
               },
               {
@@ -8536,12 +8542,14 @@
                 ]
               },
               {
-                "answer": "本页所核资料尚未取得火化设备操作员在中国大陆的全国职业工资分布。国家统计局《2025年城镇单位就业人员年平均工资情况》提供行业等分组的平均工资；居民服务行业平均数不能当作本职业中位数或起薪，也不能据本页未取得就断言其他官方资料未发布。",
+                "answer": "美国 2025 年 5 月工资中位数为 43,650 美元/年、20.98 美元/小时。 霍山殡仪馆公告招编外火化工 2 名，要求本县户籍、初中及以上，薪酬按核定标准，未列金额。道县公告的火化工约 5,400 元/月，含单位和个人承担的四项社保缴费，加班费另计。该金额不能当成到手工资。",
                 "id": "crematory-operators.faq.6",
                 "question": "火化设备操作员：中国大陆薪资应如何核对？",
                 "question_key": "career.faq.crematory-operators.china-pay",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "onet-394012",
+                  "crematory-huoshan",
+                  "crematory-daoxian"
                 ]
               },
               {
@@ -8581,16 +8589,12 @@
                 ]
               },
               {
-                "answer": "O*NET显示美国该职业2024至2034年预计增长3%至4%；O*NET显示美国该职业2024至2034年平均每年约600个空缺；3%—4%（2024—2034）；约600个/年（2024—2034）。",
-                "fact_refs": [
-                  "us-outlook-2024-2034",
-                  "us-openings-2024-2034"
-                ],
+                "answer": "美国 BLS 预计 39-4012 就业从 2025 年约 3,000 到 2035 年约 3,100（+3.1%）。年均约 500 个空缺，包含替补需求。",
                 "id": "crematory-operators.faq.10",
-                "question": "火化设备操作员：就业展望与相邻转向应如何理解？",
+                "question": "美国就业预测怎么读？",
                 "question_key": "career.faq.crematory-operators.outlook-transition",
                 "source_refs": [
-                  "onet-summary-394012"
+                  "a21-bls-projections"
                 ]
               },
               {
@@ -8886,7 +8890,7 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "美国39-4012.00当前12项任务：清洁设施设备、记录分装遗体部分防错置、遗体防腐穿衣或瞻仰准备、向家属解释火化并慰藉、尊重接取人或宠物遗体、用火焰/热或碱性水解设备处理、粉碎剩余骨块、读文件核身份、取下个人物品、清理火化室收集骨灰、车辆转运。档案未给Core/Supplemental分类，不把全部任务写每岗每日必做；美国范围不能直接套中国人类遗体服务或宠物业务。",
                   "O*NET本岗为部分档案；当前12任务、17详细工作活动、软件与工作风格可读，未取得本岗Work Context响应百分比、教育回答分布，不补零或由别岗推频率。"
@@ -9298,6 +9302,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 预计 39-4012 就业从 2025 年约 3,000 到 2035 年约 3,100（+3.1%）。年均约 500 个空缺，包含替补需求。"
+                ],
+                "evidence_type": "官方统计",
+                "id": "a21-bls-projections",
+                "limitation": "年均空缺包含替补；不是净增或录用概率。",
+                "market": "美国",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "编外 2 名、本县户籍、初中及以上；按核定基本待遇，未列金额。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "crematory-huoshan",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "霍山殡仪馆火化工",
+                "period": "2026-10-12",
+                "publisher": "霍山县民政局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.ahhuoshan.gov.cn/zwzx/gsgg/38887949.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "约 5,400 元/月，含单位及个人四项社保缴费，加班费另计；实操占考试成绩 60%。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "crematory-daoxian",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "道县殡仪馆编外合同制火化工",
+                "period": "2026-06-29",
+                "publisher": "道县人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.dx.gov.cn/dxrsj/0200/202606/0b935ab02cde454f8d4ca92b99078099.shtml"
               }
             ]
           },
@@ -10619,11 +10668,15 @@
               "月薪参考": "不适用（不用行业均值替代职业工资）"
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
-              "月薪参考": "证据不足：未取得可核对报价统计"
+              "城市/区间": "大陆招聘样本",
+              "月薪参考": "霍山殡仪馆公告招编外火化工 2 名，要求本县户籍、初中及以上，薪酬按核定标准，未列金额。道县公告的火化工约 5,400 元/月，含单位和个人承担的四项社保缴费，加班费另计。该金额不能当成到手工资。"
             }
           ],
           "china_soc_row": "中国正式国家职业技能标准通知人社厅发〔2021〕82号列遗体火化师4-10-06-03；与美国涵盖人/宠物、碱性水解等范围不自动一一相同。技能标准不等个人行政准入许可，正文PDF本轮未能取得，不编其中学历、申报条件或培训课时。",
+          "fact_refs": [
+            "posting-crematory-huoshan",
+            "posting-crematory-daoxian"
+          ],
           "sources_note": {
             "$join": [
               {
@@ -10647,7 +10700,7 @@
           "ui": {
             "ai_heading": "AI 或自动化会影响火化设备操作员的工资吗？",
             "driver_heading": "火化作业怎样安排班次与周期？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "编辑准备观察；非中国统一学历或工资统计",
             "scenario_heading": "准备能力与岗位方向怎样核对？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -11778,7 +11831,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "测我的职业兴趣是否适合火化设备操作员",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11834,7 +11887,29 @@
           "source": "一手：美国当前12任务/17详细活动/风格与软件、2025工资/行业招聘词及2025—2035就业；中国现行条例、职业标准通知、GB13801、NBS行业均值、个人信息保护；美国OSHA维修适用性。任务非AI效果、标准非个人许可、机构义务非每人职责。",
           "updated_at": "核对：2026-10-09（本轮仅九模块；保护Hero/FAQ等内容未签核）"
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。"
+        "note": "来源范围、限制和统计时期按原始证据分别核对。",
+        "secondary_links": [
+          {
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "label": "人格偏好"
+          },
+          {
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "label": "大五人格特质"
+          },
+          {
+            "href": "/zh/tests/enneagram-personality-test-nine-types",
+            "label": "九型人格"
+          },
+          {
+            "href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "label": "情绪能力"
+          },
+          {
+            "href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "label": "矩阵推理"
+          }
+        ]
       },
       "work_context_block": {
         "$join": [
@@ -12069,6 +12144,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "编外 2 名、本县户籍、初中及以上；按核定基本待遇，未列金额。",
+        "fact_id": "posting-crematory-huoshan",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "霍山殡仪馆火化工",
+        "period": "2026-10-12",
+        "source_refs": [
+          "crematory-huoshan"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约 5,400 元/月，含单位及个人四项社保缴费，加班费另计；实操占考试成绩 60%。",
+        "fact_id": "posting-crematory-daoxian",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "道县殡仪馆编外合同制火化工",
+        "period": "2026-06-29",
+        "source_refs": [
+          "crematory-daoxian"
+        ]
       }
     ]
   },
@@ -12095,19 +12194,19 @@
         "availability": "available",
         "fact_ref": "us-outlook-2024-2034",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，增长 3%—4%）"
+        "label": "美国预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 3,100 人）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2024-2034",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，约 600 个/年）"
+        "label": "美国预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -12121,17 +12220,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "火化设备操作员（O*NET-SOC 39-4012.00）在身份与文件链确认后依授权控制火化设备、收集并核对骨灰、检查清洁设备并完整记录，并在身份或设备状态不一致时停止、隔离和升级；含美国 2025 年工资中位 43,650 美元/年（20.98 美元/时）、第 10 分位 33,270 美元、第 90 分位 62,460 美元，2024 年就业约 3,100 人、2024—2034 年预计增长 3%—4%、年均空缺约 600 个，以及中国大陆职业级工资缺口、身份链与零错置、危险能量隔离与排放边界。"
+      "text": "火化操作员如何核身份、操作设备和交接骨灰？对照霍山、道县招聘与美国工资和就业数据。"
     },
     "title": {
       "availability": "available",
       "text": "火化设备操作员"
     }
   },
-  "source_content_sha256": "5aba55f1df5a1cb0c1971123735c315f8d200aa544f8b30825f2088953c0fcdd",
+  "source_content_sha256": "78d04decd354b71bce867d4f70135072742de81d53deb532acafa26658e238ee",
   "subject": {
     "canonical_slug": "crematory-operators",
     "name": "火化设备操作员",
-    "summary": "火化设备操作员在身份与文件链确认后，依授权控制火化设备与火化流程、收集并核对骨灰、检查清洁设备并完整记录；依据是死亡与火化文件、排程、设备状态和机构授权链，而不是进度压力。美国对应 O*NET-SOC 39-4012.00；中国遗体火化、火化证明与殡葬服务受《殡葬管理条例》与地方规程约束，两者不是一一对应。"
+    "summary": "按殡仪馆规程核对身份、许可和交接记录，操作并监控火化设备，记录过程与异常，标识并移交骨灰。操作、审批与告别服务按岗位分工。"
   }
 }

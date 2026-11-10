@@ -1490,6 +1490,9 @@
       "item:clinical-nurse-specialists.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:clinical-nurse-specialists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:clinical-nurse-specialists.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30798,6 +30801,21 @@
           "id": "clinical-nurse-specialists.path.recruitment-sample.1",
           "title": "How job-posting samples are used",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Unit A adopted the new handover form but has no review date. Unit B’s review cites the old form. State what evidence the improvement lead should verify."
+            ]
+          },
+          "id": "clinical-nurse-specialists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Review a specialist nursing improvement record",
+          "type": "notice"
         }
       ]
     },
@@ -37538,6 +37556,13 @@
         "id": "clinical-nurse-specialists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "clinical-nurse-specialists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38200,7 +38225,7 @@
       "text": "Clinical nurse specialists"
     }
   },
-  "source_content_sha256": "08a74ad97082b571127a4f5f1febadf96af1c66f705f60966868241d17268d34",
+  "source_content_sha256": "15c3143a507a5051e3fa4db957e25c5ca3129adc211fffdf95703fa71ec146a9",
   "subject": {
     "canonical_slug": "clinical-nurse-specialists",
     "name": "Clinical nurse specialists",

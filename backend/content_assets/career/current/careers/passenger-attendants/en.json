@@ -1298,6 +1298,9 @@
       "item:passenger-attendants.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:passenger-attendants.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:passenger-attendants.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31021,6 +31024,18 @@
             "onet"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The station note requests boarding assistance, but the shift sheet lists only a seat. Identify the assistance step and receiving staff to confirm with the service lead."
+            ]
+          },
+          "id": "passenger-attendants.path.work-sample-draft-20261110.1",
+          "title": "Check a passenger assistance handover",
+          "type": "notice"
         }
       ]
     },
@@ -37490,6 +37505,13 @@
         "id": "passenger-attendants.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "passenger-attendants.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37909,7 +37931,7 @@
       "text": "Passenger attendant: work content, wages, and passenger safety duties."
     }
   },
-  "source_content_sha256": "98c869352bd6b70981cd99c31198bbc043eb69485df870b23688c2c7e6c26e08",
+  "source_content_sha256": "847675b9660201a0f9561bc6243206293195a4b0880e54658588a5ed45cb5b4c",
   "subject": {
     "canonical_slug": "passenger-attendants",
     "name": "Passenger attendant.",

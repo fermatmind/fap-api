@@ -7274,14 +7274,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页数学家与统计学家采用 BLS 职业展望手册的合并口径（含 O*NET 15-2021.00 数学家与 15-2041.00 统计学家），含计算数学家、密码学研究人员、统计分析师与生物统计等方向。工作包括开展基础数学研究并把数学技术应用于各领域，或设计并评估统计方法与抽样、准备与整理数据、分析与解释数据、判断方法适用性、用图表与论文呈现结果、开发建模与图形分析程序并指导数据收集人员。工作以办公室与计算环境为主，主要雇主为政府与研究开发机构。本页不含金融量化分析师、计算机与信息研究科学家、运筹学分析师等相邻岗位；统计师是本合并组子职业，生物统计是统计学的细分方向，不应列为本组排除项。"
+              "数学家常研究抽象结构、方法或应用模型；统计学家常设计数据收集和分析，并解释估计的不确定性。本页比较两类岗位，美国合并统计不能套给单个职业。"
             ]
           },
           "id": "mathematicians-and-statisticians.profile.definition-block.1",
           "source_refs": [
             "onet-summary",
-            "onet-stat-summary",
-            "bls-ooh"
+            "cn-stu-math",
+            "cn-nju-stats"
           ],
           "type": "prose"
         },
@@ -7379,12 +7379,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "先核对的内容：问题与假设、研究与抽样设计、数据来源与口径、方法与模型适用条件、误差与验证要求，以及学术规范与经费边界。"
+              "把同一个虚构问题做两遍：一次写假设和推导，一次写采样、估计与误差。汕头大学数值方向与南京大学因果推断方向可作任务差别的学术例。"
             ]
           },
           "id": "mathematicians-and-statisticians.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-stat-tasks"
+            "onet-summary",
+            "cn-stu-math",
+            "cn-nju-stats"
           ],
           "type": "prose"
         },
@@ -7393,12 +7395,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作闭环：从界定问题与假设开始，经过设计研究或选择方法、整理与分析数据、建模或证明、验证结果，到呈现成果并接受评审；任一数据口径或方法适用条件未确认前不下结论，任一引用或成果边界未核对前不提交发表。"
+              "合并统计描述美国两个职业群；看单职薪资或增长，应分别核 15-2021 与 15-2041。国内不直接映射同一招聘名称。"
             ]
           },
           "id": "mathematicians-and-statisticians.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-stat-tasks"
+            "onet-summary",
+            "cn-stu-math"
           ],
           "type": "prose"
         },
@@ -8566,8 +8569,8 @@
                 "id": "bls-ooh",
                 "limitation": "为数学家与统计学家的合并口径，非单一职业精确值；不自动映射到其他法域。",
                 "market": "美国",
-                "name": "BLS Occupational Outlook Handbook: Mathematicians and Statisticians（合并口径）",
-                "period": "2025 中位工资与 2025—2035 展望；查阅 2026-09-25",
+                "name": "美国 BLS 职业展望手册：数学家与统计学家",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm"
@@ -8732,6 +8735,34 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "研究方向包括数值代数、科学计算和偏微分方程。"
+                ],
+                "id": "cn-stu-math",
+                "limitation": "特定博士后研究岗位，非所有数学工作门槛。",
+                "market": "中国大陆",
+                "name": "汕头大学前沿数学与人工智能研究院博士后岗位",
+                "period": "2026 查阅",
+                "publisher": "汕头大学",
+                "scope": "具名岗位或制度",
+                "url": "https://imsai.stu.edu.cn/zxns/bshgw.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "研究涉及统计遗传、因果推断和随机算法统计分析。"
+                ],
+                "id": "cn-nju-stats",
+                "limitation": "学术样本；不能推行业岗位资格。",
+                "market": "中国大陆",
+                "name": "南京大学统计方向博士后",
+                "period": "2026",
+                "publisher": "南京大学",
+                "scope": "具名岗位或制度",
+                "url": "https://rczp.nju.edu.cn/yjxlhbsh/trxl/bshgwlb/20260914/i417308.html"
               }
             ]
           },
@@ -9564,7 +9595,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这份工作先核对什么？",
+            "question": "数学和统计怎么选项目练手？",
             "table": {
               "rows": [
                 {
@@ -9596,7 +9627,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "怎样判断工作闭环？",
+            "question": "数学家和统计学家的合并统计怎么读？",
             "table": {
               "rows": [
                 {
@@ -10990,7 +11021,7 @@
           "entry": "mathematicians-and-statisticians.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合数学家与统计学家",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11114,37 +11145,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "33,500 人",
+        "derivation": "美国 BLS 职业展望手册（合并）：15-2021 and 15-2041 2025 年就业约 33,500 人，预计 2035 年约 36,900 人，2025—2035 年变化 +10%，年均约 2,000 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 33,500 人",
         "fact_id": "us-employment-2024",
         "market": "美国（合并口径）",
         "measure": "2025 年就业规模（合并口径）",
         "occupation_scope": "BLS 展示口径：Mathematicians and Statisticians（15-2021.00 与 15-2041.00 合并口径）",
-        "period": "2025 BLS OOH；查阅 2026-09-25",
+        "period": "2025",
         "source_refs": [
           "bls-ooh"
         ]
       },
       {
-        "derivation": "BLS OOH 显示合并就业 2025—2035 年预计增长 10%（Much faster than average），就业变化约 +3,400。",
-        "display_value": "远快于平均（10%，2025—2035）",
+        "derivation": "美国 BLS 职业展望手册（合并）：15-2021 and 15-2041 2025 年就业约 33,500 人，预计 2035 年约 36,900 人，2025—2035 年变化 +10%，年均约 2,000 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "+10%",
         "fact_id": "us-growth",
         "market": "美国（合并口径）",
         "measure": "就业增长预测（合并口径）",
         "occupation_scope": "BLS 展示口径：Mathematicians and Statisticians（15-2021.00 与 15-2041.00 合并口径）",
-        "period": "2025—2035；查阅 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ooh"
         ]
       },
       {
-        "derivation": "BLS OOH 显示约 2,000 个/年（十年平均）；该数字为年均而非期间合计。",
-        "display_value": "约 2,000 个/年（2025—2035 年均）",
+        "derivation": "美国 BLS 职业展望手册（合并）：15-2021 and 15-2041 2025 年就业约 33,500 人，预计 2035 年约 36,900 人，2025—2035 年变化 +10%，年均约 2,000 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 2,000 个",
         "fact_id": "us-openings",
         "market": "美国（合并口径）",
         "measure": "预计职位空缺（年均，合并口径）",
         "occupation_scope": "BLS 展示口径：Mathematicians and Statisticians（15-2021.00 与 15-2041.00 合并口径）",
-        "period": "2025—2035；查阅 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ooh"
         ]
@@ -11234,19 +11265,19 @@
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业变化（合并）"
+        "label": "美国就业变化（2025—2035）（合并）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数（合并）"
+        "label": "美国就业规模（2025）（合并）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国职位空缺（年均，合并）"
+        "label": "美国年均空缺（2025—2035）（合并）"
       },
       {
         "availability": "missing",
@@ -11260,17 +11291,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "本页数学家与统计学家采用 BLS 职业展望手册合并口径：开展数学研究并把数学技术应用于各领域，或设计与评估统计方法、整理并分析数据、用图表与论文呈现结果。判断这条职业路径时，应同时验证工作闭环、责任与证据边界、证据口径、风险控制和可观察的入门作品。"
+      "text": "比较数学家与统计学家的问题、交付、入门作品和美国合并数据口径。"
     },
     "title": {
       "availability": "available",
-      "text": "数学家与统计学家职业判断：工作、入行与风险边界"
+      "text": "数学家与统计学家做什么：两种研究方法和岗位路径"
     }
   },
-  "source_content_sha256": "f7e6d7ad2791bd17f3742bd9ecf2da2737d7de51c4da2fc1b39f9de6c525ad65",
+  "source_content_sha256": "969579b32d9f42c5c6eaadaee8d0770c6986e2ba7a1762ca369153c67a6ef0f2",
   "subject": {
     "canonical_slug": "mathematicians-and-statisticians",
     "name": "数学家与统计学家",
-    "summary": "本页数学家与统计学家采用 BLS 职业展望手册的合并口径：数学家（O*NET 15-2021.00）在基础数学或数学技术应用于科学、管理及其他领域方面开展研究；统计学家（O*NET 15-2041.00）发展或应用数学与统计理论方法，收集、整理、解释与汇总数值数据以提供可用信息。"
+    "summary": "数学家常研究抽象结构、方法或应用模型；统计学家常设计数据收集和分析，并解释估计的不确定性。本页比较两类岗位，美国合并统计不能套给单个职业。"
   }
 }

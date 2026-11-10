@@ -15694,8 +15694,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -23036,7 +23042,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "The checklists on this page are prompts for self-reflection only, not hiring criteria, personality evaluations or conclusions about ability. Authorization and boundaries vary considerably for rail car repairers: routine maintenance, release with defects, hot work and test-run acceptance involve different roles' authority. No checklist replaces checking the actual authority and operating procedures of the target position."
+              "If shifts, outdoor work, or frequent kneeling would be difficult, ask about site conditions and schedules."
             ]
           },
           "id": "rail-car-repairers.quick-decision.fit-decision-checklist.1",
@@ -23051,7 +23057,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "First observe whether you can break vague vehicle fault descriptions into locations, symptoms, inspection steps and safety conditions, and judge whether work may proceed on site. Then complete a full exercise using fictional materials M1—M5 in the entry module: check inspection work orders, component conditions, response recommendations and release conditions, flagging items requiring confirmation or escalation. The exercise requires only paper and text files, with no real vehicles, tools or tracks needed."
+              "Try RCR-01 in section 09 on paper. Reconcile three car records and draft a handoff."
             ]
           },
           "id": "rail-car-repairers.quick-decision.fit-decision-checklist.2",
@@ -23065,7 +23071,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals worth considering include willingness to inspect and review repeatedly under procedures, accurately record defects and unresolved items, and accept that authorized roles decide release with defects and test runs. Reasons for caution include treating one inspection conclusion as universal, boarding vehicles without protection in place, or moving vehicles or performing hot work without authorization."
+              "This work may suit you if you enjoy tracing components to work orders, recording defects, and tracking rechecks."
             ]
           },
           "id": "rail-car-repairers.quick-decision.fit-decision-checklist.3",
@@ -26249,12 +26255,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page has not obtained current original Chinese recruitment pay information matched to duties, organizations and work scope. This is an information gap, not proof that no public market samples exist."
+              "The Sanxin inspector posting lists monthly pay but leaves full repair duties unspecified. Verify pay against the actual job offer."
             ]
           },
           "id": "rail-car-repairers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "cnclass"
+            "d026-sanxin-duty",
+            "d026-sanxin-latest",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26635,12 +26643,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round did not obtain original Chinese public recruitment pay information with verified posting status and matching duties, industries and work scope. The gap remains; adjacent-level samples or industry averages are not substitutes."
+              "Two Sanxin notices give recent posting fields and earlier inspection duties. Check the dates, qualifications, and pay separately."
             ]
           },
           "id": "rail-car-repairers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "r2-pay-1"
+            "d026-sanxin-duty",
+            "d026-sanxin-latest",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26663,12 +26673,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "As above: no verifiable original public recruitment pay information for this occupation was obtained. Pay offers for positions unrelated to rail maintenance are not cited."
+              "A comparable national wage for mainland rail car repairers is still unavailable. A posting’s pay applies to that position."
             ]
           },
           "id": "rail-car-repairers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "r2-pay-2"
+            "d026-sanxin-duty",
+            "d026-sanxin-latest",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28412,7 +28424,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Compare deliverables: inspection and defect records, disassembly and torque records, and grounds for testing and release. Use M1—M5 for validation."
+              "Use RCR-01 to compare inspection, repair, retest, and handoff records."
             ]
           },
           "id": "rail-car-repairers.fit.personality-fit-block.55",
@@ -29152,21 +29164,21 @@
                 "Running Gear and Brake Maintenance Role",
                 "Assist with disassembling and inspecting running gear and brake components, recording dimensions and conditions.",
                 "Can you measure and judge against standards and accurately record differences?",
-                "Use the M2—M4 exercise to explain measurement and judgment.",
+                "Use the RCR-01 brake-component records to distinguish repair and retest.",
                 "Focused on running gear and brakes, differing from car body maintenance."
               ],
               [
                 "Welding and Fabrication Role",
                 "Weld, fabricate and install fittings according to drawings.",
                 "Can you work according to process requirements and review dimensions and safety?",
-                "Use welding and machining records from the exercise to explain your approach.",
+                "If you have supervised work records, identify the drawing checked and retain the fabrication log.",
                 "Focused on welding and fabrication, with narrower independent work responsibilities."
               ],
               [
                 "Assembly and Adjustment Role",
                 "Assist with installing car ends, crossmembers and interior fittings and adjusting car bodies.",
                 "Can you assemble according to drawings and check tolerances?",
-                "Use assembly and dimensional records from the exercise to explain tradeoffs.",
+                "If you have supervised work records, show how you checked assembly dimensions and applicable tolerances.",
                 "Focused on assembly and adjustment, without directly deciding release."
               ],
               [
@@ -29195,17 +29207,17 @@
               {
                 "id": "education",
                 "values": [
-                  "Education and Experience Requirements",
-                  "Current O*NET Job Zone1—2 is a general preparation description; education self-reports are 61% high school, 38% certificates and 1% associate degrees. Current EP lists high school and long-term on-the-job training as typical. The general range of several days to one year is not a uniform duration for this occupation.",
-                  "How to check: match every requirement in the target posting to a demonstrable ability or experience."
+                  "China freight-car inspection and workshop scope",
+                  "Sanxin’s earlier railcar inspection notice lists freight car construction, component limits, inspection and fault handling.",
+                  "The regulator’s decision grants Nanning Railway Group workshop maintenance permission for GL70 freight cars within the listed scope."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "Work Permits and Safety Requirements",
-                  "Listed special operations require statutory training, assessment and the appropriate operating certificate. Check vehicle movement, isolation, hot-work permits and release against applicable procedures; organizations cannot waive legal qualifications.",
-                  "How to check: confirm organizational work permits, protection and supervision rules and independent operating scope."
+                  "US apprenticeship and trainee roles",
+                  "Union Pacific’s Seattle apprenticeship lists inspections, scheduled maintenance, and component replacement. The three-year program belongs to this posting.",
+                  "Norfolk Southern’s Fort Wayne trainee posting describes training, component replacement, computerized repair records, and shift work."
                 ]
               },
               {
@@ -29228,8 +29240,13 @@
           },
           "id": "rail-car-repairers.path.employer-evidence.1",
           "source_refs": [
-            "employer",
-            "editor"
+            "onet",
+            "editor",
+            "d026-sanxin-duty",
+            "d026-sanxin-latest",
+            "d026-nra",
+            "d026-up",
+            "d026-norfolk"
           ],
           "title": "What Do Employers Usually Look for When Hiring?",
           "type": "cards"
@@ -29242,32 +29259,32 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and Scenario | All Data Are Fictional and Editorially Designed",
-                  "You are a vehicle repairer at the fictional Lanchuan Vehicle Maintenance Depot. Review inspection and response records for maintenance order C-1187 and recommend release, corrective action or review. All materials and values below are entirely fictional, not real vehicles, tracks or work results.",
-                  "M1 Work order and vehicles: 12 arriving freight cars need brake and coupler maintenance; 1 has abnormal running gear noise; completion is required the same day. M2 Component conditions: 2 cars have coupler wear beyond limits, 1 has brake shoe wear near the limit, 1 has an elevated bearing temperature, and the rest are normal. M3 Drawings and torque: coupler replacement follows drawing C-3, with required torque 200±10 N·m; bearing inspection requires lifting and support. M4 Response and tests: the draft says All acceptable; ready for release; coupler replacement records and torque values are blank, and the bearing temperature abnormality is unresolved. M5 Conclusion and approval section: release recommendations should list passing items, items requiring correction, unconfirmed items and the approver; release and inspector confirmation fields are blank."
+                  "Five paper records for fictional work order Q-62",
+                  "The order covers three fictional freight cars. Work only from the records.",
+                  "M1 | The order lists a coupler on G-12, a brake component on G-13, and a door on G-14.\nM2 | The G-12 inspection records wear beyond the fictional limit. The repair field is blank.\nM3 | G-13 has a repair record. The retest field is blank.\nM4 | The G-14 door check meets the fictional criterion.\nM5 | The draft says “release all three cars,” with the authorized inspector’s signoff blank. The crew lead schedules follow-up, and the authorized inspector reviews it."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task",
-                  "Check M1—M5 item by item and state which results meet requirements, which need correction, which information is insufficient, and which unconfirmed items and approver must be included in the release recommendation.",
-                  "Do not add vehicle, component or authorization information absent from the scenario; list unknowns separately."
+                  "Submit a reconciliation and handoff",
+                  "T1 | Record the work order item, evidence, status, and missing record for each car.",
+                  "T2 | Write a handoff against the draft. Separate component checks from vehicle release."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference Deliverables",
-                  "Meets requirements: vehicles in normal condition and acceptable components may be released under procedures. Requires correction: couplers worn beyond limits must be replaced and torqued to 200±10 N·m; brake shoes near the limit require replacement or documented reinspection; elevated bearing temperature requires lifting for inspection and retesting. Requires verification: torque records, cause of axle bearing temperature and work permits.",
-                  "The release recommendation must state that coupler and bearing temperature issues remain unresolved and release and inspector confirmation fields are blank, and must be approved by an authorized role. The repairer only submits recommendations and records."
+                  "Before submitting",
+                  "Link each judgment to an input.",
+                  "Save your first draft and open the designated key on day 7."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries",
-                  "This exercise involves no real vehicles, tracks or work. Actual maintenance, vehicle movement and release follow organizational and safety procedures. If you cannot judge, you may write Insufficient basis to judge and explain what evidence is missing."
+                  "Exercise boundary",
+                  "This is a paper handoff. Site work, vehicle movement, and release follow the operator’s procedures and authorization."
                 ]
               }
             ]
@@ -29276,7 +29293,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry Exercise: A Complete Office Support Task (Fictional Materials)",
+          "title": "RCR-01 | Reconcile maintenance records and hand off open checks",
           "type": "cards"
         },
         {
@@ -29288,7 +29305,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Work Orders and Components Comparison Package",
-                  "Use M1—M3 to complete a comparison table of vehicles, locations, component conditions and drawing torque requirements, flagging unknowns and questions requiring clarification.",
+                  "Match each car and work order item to its source record.",
                   "Review method: another person should be able to identify which information is insufficient and why from the table alone."
                 ]
               },
@@ -29296,7 +29313,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "Independent Review Notes",
-                  "For each item in M2 and M4, state component conditions, standards, response conclusions and the basis for judgment.",
+                  "Separate inspection, repair, and retest records.",
                   "Review method: conclusions match original data and standards, with applicable scope identified."
                 ]
               },
@@ -29304,7 +29321,7 @@
                 "id": "report-summary",
                 "values": [
                   "Corrective Action and Risk Record",
-                  "Use M4 to write a corrective action record covering the event, impact, open questions and escalation contact; the record must be traceable to vehicles and components.",
+                  "Document missing evidence and name the next owner.",
                   "Review method: the corrective action scope and next step are clear."
                 ]
               },
@@ -29312,7 +29329,7 @@
                 "id": "tooling-note",
                 "values": [
                   "Draft Release Recommendation",
-                  "Use M5 to recommend release, listing passing items, items requiring correction, unconfirmed items and the approver; do not release independently or sign on another's behalf.",
+                  "Separate component findings from vehicle signoff in the handoff.",
                   "Review method: the recommendation matches the evidence and does not exceed authority."
                 ]
               }
@@ -29345,25 +29362,25 @@
               [
                 "Check Work Orders and Vehicle Conditions",
                 "Can you identify inconsistencies between work orders and vehicle conditions?",
-                "Explain that vehicles with abnormal noise need running gear inspection as a priority",
+                "Match each car and work order item to its source record.",
                 "One organization's verification method cannot be generalized into an industry-wide examination"
               ],
               [
                 "Check Component Judgments",
                 "Can you judge component usability against standards?",
-                "Explain that couplers worn beyond limits need replacement and brake shoes near limits need reinspection",
+                "Separate inspection, repair, and retest records.",
                 "Standards vary by organization and vehicle model; thresholds from elsewhere cannot be reused"
               ],
               [
                 "Check Work Safety",
                 "Can you identify protection and permit requirements?",
-                "Explain that lifting inspections require supports and hot work requires permits and fire watches",
+                "Document missing evidence and name the next owner.",
                 "Work requirements vary by activity type"
               ],
               [
                 "Check Release and Authorization",
                 "Can you distinguish recommendations from approval?",
-                "Identify blank release and inspector confirmation fields and explain that release requires authorized approval",
+                "Separate component findings from vehicle signoff in the handoff.",
                 "Organization and dispatch determine release authority; assumptions from elsewhere cannot be reused"
               ]
             ]
@@ -29384,50 +29401,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Read the Materials and Write a Role Boundary Card",
-                  "Read M1—M5 and write a role boundary card: permitted actions (inspection and records under procedures), actions requiring review (component replacement and release recommendations), and prohibited actions (independent release or vehicle movement). Confirm no real work will occur."
+                  "Day one",
+                  "Read the work order and five records. Identify each source."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Use M1—M2 to Complete a Work Order and Component Comparison Table",
-                  "Use M1—M2 to check vehicles, locations and component conditions, flagging safety-related defects."
+                  "Day two",
+                  "Match each car and work order item to its source record."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Use M3 to Organize Drawing and Torque Requirements",
-                  "Use M3 to list drawing, torque and support requirements, identifying applicable vehicles and limitations for each."
+                  "Day three",
+                  "Separate inspection, repair, and retest records."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Use M2/M4 to Judge Each Item",
-                  "State component conditions, standards and conclusions item by item, flagging unresolved items and those requiring reinspection."
+                  "Day four",
+                  "Document missing evidence and name the next owner."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Write Corrective Action and Risk Records",
-                  "Use M4 to write a corrective action record: event, impact, open questions and escalation contact."
+                  "Day five",
+                  "Separate component findings from vehicle signoff in the handoff."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Use M5 to Draft a Release Recommendation",
-                  "List passing items, items requiring correction, unconfirmed items and the approver; do not release independently."
+                  "Day six",
+                  "Complete and save the table and handoff. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Compare With the Reference and Revise",
-                  "Compare the outputs from the first six days with the reference deliverables and revise them. Record the step most easily overlooked and your next exercise."
+                  "Day seven",
+                  "After saving your day 6 draft, open “RCR-01 answer key and rubric (open on day 7)” in the FAQ. Apply the four rubric checks and record one revision."
                 ]
               }
             ]
@@ -29444,13 +29461,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Items to check during the seven-day assessment: occupational scope (U.S. O*NET 49-3043.00), work permits and safety requirements, education and experience, local requirements and supervised tasks.",
-              "Use Which step most needs external confirmation? as a decision point: critical component replacement, release with defects and vehicle movement usually require crew and dispatch confirmation.",
-              "Distinguish verifiable facts from editorial judgments: component dimensions and standards are inspection facts, whereas suitability is an editorial judgment. Conclusions must refer back to original records.",
-              "Estimated commitment: 30—60 minutes daily, mainly reading materials and recalculating; no tool purchase or real vehicle data are needed.",
-              "If you repeatedly get stuck at the same step during the seven days, such as torque and support verification, make it a priority for your next practice.",
-              "If you cannot judge a step, write Insufficient basis to judge and explain what evidence is missing; do not guess.",
-              "After completion, compare outputs with real organization maintenance and release formats and observe the gaps."
+              "Match each car and work order item to its source record.",
+              "Separate inspection, repair, and retest records.",
+              "Document missing evidence and name the next owner.",
+              "Separate component findings from vehicle signoff in the handoff.",
+              "Record what changed between drafts.",
+              "Use fictional identifiers and retain open items.",
+              "Ask employers about shifts, tools, supervision, and review."
             ]
           },
           "id": "rail-car-repairers.path.seven-day-decision.1",
@@ -29575,16 +29592,22 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain original Chinese public recruitment postings with verified status and matching duties, organizations and work scope.",
-              "This round did not obtain original Chinese public recruitment postings with verified status and matching duties, organizations and work scope. The gap remains; adjacent-level samples are not substitutes."
+              "Sanxin’s earlier railcar inspection notice lists freight car construction, component limits, inspection and fault handling.",
+              "The more recent inspector posting lists a full-time position in Ordos and a monthly pay field. Its description leaves repair duties unspecified.",
+              "The regulator’s decision grants Nanning Railway Group workshop maintenance permission for GL70 freight cars within the listed scope.",
+              "Union Pacific’s Seattle apprenticeship lists inspections, scheduled maintenance, and component replacement. The three-year program belongs to this posting.",
+              "Norfolk Southern’s Fort Wayne trainee posting describes training, component replacement, computerized repair records, and shift work.",
+              "Ask about site conditions, shifts, supervision, record review, and release authority."
             ]
           },
           "id": "rail-car-repairers.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "d026-sanxin-duty",
+            "d026-sanxin-latest",
+            "d026-nra",
+            "d026-up",
+            "d026-norfolk",
+            "editor"
           ],
           "title": "Recruitment Sample Notes",
           "type": "notice"
@@ -31612,10 +31635,13 @@
                 "question_key": "career.faq.rail-car-repairers.comparison"
               },
               {
-                "answer": "Look at observable behaviors: hands-on maintenance under procedures, accurate records of defects and unresolved items, driving issues through correction, and accepting that authorized roles decide release with defects and vehicle movement. Use the M1—M5 exercise and O*NET RC interests for exploration; assessments and a single performance cannot determine appointment eligibility or suitability.",
+                "answer": "G-12 needs corrective work: the coupler exceeds the fictional wear limit. The crew lead arranges repair and documentation. G-13 needs a retest: a brake-component repair is recorded, and the retest record is missing. G-14 meets the fictional door criterion. That record supports the door finding only.\n\nQ-62 has no signoff. Replace the draft release with an open handoff to the authorized inspector. None of the three cars has a signed release in the exercise.\n\nScore four items from 0 to 2: match car and work order; distinguish corrective work, retest, and recorded component findings; state the evidence and next owner; and separate component status from vehicle signoff. Give 2 for complete, 1 for partial, or 0 for guessing or exceeding authority.",
                 "id": "rail-car-repairers.faq.3",
-                "question": "How Can I Judge Whether Rail Car Repair Suits Me?",
-                "question_key": "career.faq.rail-car-repairers.fit"
+                "question": "RCR-01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.rail-car-repairers.fit",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "Research supports greater impacts on documentation, data and retrieval tasks, not replacement of the entire occupation. ILO, GPTs are GPTs and WEF provide potential exposure and employer expectations; these cannot calculate job replacement for this occupation.",
@@ -31708,7 +31734,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Original compilation checked on 2026-09-30; this round checked O*NET, TX national wages, current BLS EP and new Ministry of Emergency Management rules on 2026-10-12. The old OEWS occupation URL actually redirects to the tables directory, and industry medians were not obtained. Chinese recruitment postings remain missing; other source dates were not uniformly refreshed."
+              "Occupational and wage sources retain their original verification dates. This update checks two Sanxin notices, two US employer postings, and the railway regulator’s workshop permit."
             ]
           },
           "id": "rail-car-repairers.sources.source-card.3",
@@ -31767,13 +31793,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "path",
@@ -32215,6 +32241,81 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Sanxin’s earlier railcar inspection notice lists freight car construction, component limits, inspection and fault handling."
+                ],
+                "evidence_type": "Original recruitment notice",
+                "id": "d026-sanxin-duty",
+                "limitation": "Scope is limited to the organization, site, position, or vehicle named in the source.",
+                "market": "Mainland China",
+                "name": "Sanxin Railway | historical railcar inspection recruitment",
+                "period": "2025-10-13",
+                "publisher": "Wuhan Railway Vocational College",
+                "scope": "recruitment_proxy",
+                "url": "https://ygxy.wru.edu.cn/info/1011/1901.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The more recent inspector posting lists a full-time position in Ordos and a monthly pay field. Its description leaves repair duties unspecified."
+                ],
+                "evidence_type": "Original recruitment notice",
+                "id": "d026-sanxin-latest",
+                "limitation": "Scope is limited to the organization, site, position, or vehicle named in the source.",
+                "market": "Mainland China",
+                "name": "Sanxin Railway | railcar inspector posting",
+                "period": "2026-10-21",
+                "publisher": "Central South University careers",
+                "scope": "recruitment_proxy",
+                "url": "https://career.csu.edu.cn/job/view/id/1203492"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The regulator’s decision grants Nanning Railway Group workshop maintenance permission for GL70 freight cars within the listed scope."
+                ],
+                "evidence_type": "Official maintenance permit decision",
+                "id": "d026-nra",
+                "limitation": "Scope is limited to the organization, site, position, or vehicle named in the source.",
+                "market": "Mainland China",
+                "name": "Nanning Railway Group | GL70 workshop maintenance permit",
+                "period": "2026-09-11",
+                "publisher": "China National Railway Administration",
+                "scope": "contextual",
+                "url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/xzxk/xkgg/202609/t20260911_351980.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Union Pacific’s Seattle apprenticeship lists inspections, scheduled maintenance, and component replacement. The three-year program belongs to this posting."
+                ],
+                "evidence_type": "Original recruitment notice",
+                "id": "d026-up",
+                "limitation": "Scope is limited to the organization, site, position, or vehicle named in the source.",
+                "market": "United States",
+                "name": "Union Pacific | Apprentice Freight Car Repair",
+                "period": "2026-11-04",
+                "publisher": "Union Pacific",
+                "scope": "recruitment_proxy",
+                "url": "https://up.jobs/job/SEATTLE-Apprentice-Freight-Car-Repair-Seattle%2C-WA-WA-98000/1447888800/"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Norfolk Southern’s Fort Wayne trainee posting describes training, component replacement, computerized repair records, and shift work."
+                ],
+                "evidence_type": "Original recruitment notice",
+                "id": "d026-norfolk",
+                "limitation": "Scope is limited to the organization, site, position, or vehicle named in the source.",
+                "market": "United States",
+                "name": "Norfolk Southern | Freight Car Repairer Trainee",
+                "period": "2026-11-06",
+                "publisher": "Norfolk Southern",
+                "scope": "recruitment_proxy",
+                "url": "https://jobs.nscorp.com/job/Fort-Wayne-Freight-Car-Repairer-Fort-Wayne%2C-IN-IN-46803/1431471700/"
               }
             ]
           },
@@ -37028,6 +37129,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which Vehicle Maintenance Direction Might Suit You Better?",
       "interface.fit.interest_code_heading": "How to Interpret Interest Codes",
+      "interface.quick_decision.suit_heading": "Who tends to enjoy rail car repair?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to Interpret This Value",
       "interface.us_salary.section_label": "U.S. Pay Reference",
@@ -37460,7 +37562,7 @@
       "text": "Rail Car Repairer"
     }
   },
-  "source_content_sha256": "f010738c9778e54b8835ad1dd097985ec7613e57565ce12f365ac977e0cf6874",
+  "source_content_sha256": "50023875bdc4567b8e8a9d457d236dbaf69fbdae2138ac56a02f9eb0647f4418",
   "subject": {
     "canonical_slug": "rail-car-repairers",
     "name": "Rail Car Repairer",

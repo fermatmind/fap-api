@@ -23666,13 +23666,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "观察自己是否愿意读经营数据、澄清目标、比较代价、组织跨部门落实，并向治理机构解释结果。一次表达有感染力并不足够；还要看能否记录假设、接受反对意见，及时调整失效方案。"
+              "纸面体验｜阅读虚构经营摘要，把问题分成需决策的资源取舍和部门可处理的排程事项，并分别写出负责方。 "
             ]
           },
           "id": "top-executives.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24879,14 +24878,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "首席执行官在董事会或相应治理机构指导框架内制定组织政策与总体方向，借助下属高管和部门经理计划、协调最高管理层活动。其产出包括资源与预算方案、组织政策、责任安排及经营结果说明；具体权力须由实际治理和授权确定。"
+              "高层管理岗位包括制定组织方向并协调预算的首席执行角色，也包括把目标落实为部门运营和人员安排的综合运营管理角色。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "top-executives.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "editorial"
+            "transfer-onet-11-1011.00",
+            "transfer-onet-11-1021.00"
           ],
           "type": "prose"
         }
@@ -25621,15 +25619,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职业可比AI采用率、任务效果与净就业因果数据，评分保持缺失。摘要草稿选项整理为编辑试用建议，真实性取舍授权责任仍由人核。BLS11-1011在2025—2035总体增长3.2%、十年净增9300人与年均19100空缺含替补分指标，非AI独立创造或个人录用概率。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：阅读虚构经营摘要，把问题分成需决策的资源取舍和部门可处理的排程事项，并分别写出负责方。"
             ]
           },
           "id": "top-executives.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "editorial",
-            "ratify"
+            "transfer-onet-11-1011.00",
+            "transfer-onet-11-1021.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33650,6 +33647,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-11-1011.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 11-1011.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/11-1011.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-11-1021.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 11-1021.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/11-1021.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39169,10 +39207,10 @@
       "text": "首席执行官"
     }
   },
-  "source_content_sha256": "c8b1239a10ac5c6064ea74e312b21696c283d43898a4a6be77eb982a77c61dd8",
+  "source_content_sha256": "c2427e73d4bb0b7f8c241d8d65b1eacd392c1b01d2ebbdcc012fddb0ba0b6395",
   "subject": {
     "canonical_slug": "top-executives",
     "name": "首席执行官",
-    "summary": "首席执行官在董事会或相应治理机构确定的框架内制定组织政策与总体方向，协调预算、业务和高级管理团队，并对经营结果作出解释。美国身份采用 O*NET 11-1011.00；中国具体经理职权须结合公司章程和董事会授权核对。低成本体验可先完成本页虚构经营材料的预算与决策备忘录。"
+    "summary": "高层管理岗位包括制定组织方向并协调预算的首席执行角色，也包括把目标落实为部门运营和人员安排的综合运营管理角色。"
   }
 }

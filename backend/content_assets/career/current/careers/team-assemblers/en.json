@@ -23663,12 +23663,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Check the order version first, then the quantity, without deleting original rows, counting duplicates only once, and keeping clear mismatches separate from non-provision. A paper match rate does not prove real line quality, speed, or your own equipment operation competence."
+              "Paper check | Compare fictional station cards with a work order. Identify a station using an old drawing and flag its batch for crew review. "
             ]
           },
           "id": "team-assemblers.display.fermat_decision_card.summary",
           "source_refs": [
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24769,15 +24769,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Team assembly work means team members jointly assembling a complete product or its components, being able to perform all tasks in the team assembly process and rotating through all or most tasks rather than permanently doing one action. The work includes checking order drawings, quality inspection, wiring harness assistance, equipment cleaning, and production reports; members may join task assignment and training, including team leaders who work within the team. A team leader does not automatically equal an independent first-line supervisor, and maintenance or forklift mentions in the task profile grant no actual operating qualification. This page freezes 51-2092.00; the BLS wage and projection figures use the 51-2090 miscellaneous assembler combined reference, which includes other assemblers, and cannot be split into precise team data. China's real equipment, post training, special operation conditions, protection, and contracts are checked separately. Entirely fictional paper supporting records only look at rules, quantities, versions, and unknowns, and do not start machines, touch real electrical welding or forklifts, or grant quality release."
+              "Team assemblers coordinate across stations, build parts to drawings and work orders, and check the output. When rotating stations, they hand off completed work and items awaiting review. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "team-assemblers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule",
-            "editorial"
+            "transfer-onet-51-2092.00"
           ],
           "type": "prose"
         }
@@ -25421,14 +25418,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Separate the given-rule draft, real vision and robot adoption, and occupational outcomes into three layers. A paper card match of 1/3 describes only three known packages, with the fourth unknown; it does not prove real inspection accuracy, equipment safety, or production gains, and the displayed estimate follows the separate editorial model. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+75+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare fictional station cards with a work order. Identify a station using an old drawing and flag its batch for crew review."
             ]
           },
           "id": "team-assemblers.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial",
-            "nist",
-            "bls"
+            "transfer-onet-51-2092.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32796,6 +32792,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-2092.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-2092.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-2092.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38277,10 +38300,10 @@
       "text": "Team assemblers"
     }
   },
-  "source_content_sha256": "fcf625cd7a117f390bc822e008539f5f540c31b626a272bb50df35a1c1f6d0d5",
+  "source_content_sha256": "f74c0406501a41abfe7be5e1cb205cdf76ab5e674f084ab20a7ab0ea784009a1",
   "subject": {
     "canonical_slug": "team-assemblers",
     "name": "Team assemblers",
-    "summary": "Team assembly work means team members jointly assembling a complete product or its components, being able to perform all tasks in the team assembly process and rotating through all or most tasks rather than permanently doing one action. The work includes checking order drawings, quality inspection, wiring harness assistance, equipment cleaning, and production reports; members may join task assignment and training, including team leaders who work within the team. A team leader does not automatically equal an independent first-line supervisor, and maintenance or forklift mentions in the task profile grant no actual operating qualification. This page freezes 51-2092.00; the BLS wage and projection figures use the 51-2090 miscellaneous assembler combined reference, which includes other assemblers, and cannot be split into precise team data. China's real equipment, post training, special operation conditions, protection, and contracts are checked separately. Entirely fictional paper supporting records only look at rules, quantities, versions, and unknowns, and do not start machines, touch real electrical welding or forklifts, or grant quality release."
+    "summary": "Team assemblers coordinate across stations, build parts to drawings and work orders, and check the output. When rotating stations, they hand off completed work and items awaiting review."
   }
 }

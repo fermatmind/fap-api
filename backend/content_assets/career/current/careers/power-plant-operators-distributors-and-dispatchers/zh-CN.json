@@ -23380,13 +23380,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "喜欢设备观察与程序纪律者，先比较三个子职业及维修、工程方向的实际任务。"
+              "纸面体验｜把三条虚构交班信息按发电设备、输配调度和反应堆运行分类，给每条写一个要确认的责任岗位。 "
             ]
           },
           "id": "power-plant-operators-distributors-and-dispatchers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "employer"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23677,13 +23676,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "美国合并组2025年薪中位数105,080美元；就业43.7千至42.0千、−4.0%，年均空缺3.4千。具体岗位职责与中位数分别核。"
+              "这一组覆盖电厂运行、电网输配调度和核电反应堆运行。前者关注发电设备，调度岗位关注输配系统状态，核电岗位有专门的站点流程和职责。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "power-plant-operators-distributors-and-dispatchers.profile.definition-block.11",
           "source_refs": [
-            "ep",
-            "employer"
+            "transfer-onet-51-8012.00",
+            "transfer-onet-51-8013.00",
+            "transfer-onet-51-8011.00"
           ],
           "type": "prose"
         },
@@ -24855,13 +24855,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS解释设备与控制室现代化、智能电网可自动化部分任务；生成式工具整理三岗位日志只是待验证设想，无岗位级采用率或效果证据。核电、调度与机组操作各按本岗位训练、程序和授权。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：把三条虚构交班信息按发电设备、输配调度和反应堆运行分类，给每条写一个要确认的责任岗位。"
             ]
           },
           "id": "power-plant-operators-distributors-and-dispatchers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor",
-            "employer"
+            "transfer-onet-51-8012.00",
+            "transfer-onet-51-8013.00",
+            "transfer-onet-51-8011.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32931,6 +32933,61 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-8012.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-8012.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-8012.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-8013.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-8013.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-8013.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-51-8011.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 51-8011.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/51-8011.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38214,10 +38271,10 @@
       "text": "发电厂操作、配电与调度人员"
     }
   },
-  "source_content_sha256": "82dd0f30c8d95e83191acff5ed0abfa504cd08efe8eb41d8db68ae3c4d272ff7",
+  "source_content_sha256": "4c4a0dcf7492918b7c022505fb569293cafeb81ed59dc57dfa4b6287cb0c23de",
   "subject": {
     "canonical_slug": "power-plant-operators-distributors-and-dispatchers",
     "name": "发电厂操作、配电与调度人员",
-    "summary": "本页对应BLS SOC 51-8010 发电厂操作、配电与调度人员合并统计组，包含核电反应堆操作员51-8011、电力调度员51-8012和发电厂操作员51-8013。三类岗位分别控制核反应堆、协调电力输配和运行发电机组，不能把合并组工资或就业变化当作任一子职业。真实设备操作按各自机构训练和授权。"
+    "summary": "这一组覆盖电厂运行、电网输配调度和核电反应堆运行。前者关注发电设备，调度岗位关注输配系统状态，核电岗位有专门的站点流程和职责。"
   }
 }

@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a27-shunde": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a27-zhengzhou": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -1605,7 +1611,7 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1677,7 +1683,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26106,12 +26112,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Nationwide 2025 pre-tax annual average wages for urban non-private/private scientific research and technical services were 182,064/83,560 yuan, and for manufacturing 113,594/76,055 yuan. These are used respectively as broad-scope references for design service and manufacturing settings, not as the drafter median or personal income."
+              " These are past notices. A comparable mainland occupational median remains unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "a27-zhengzhou",
+            "a27-shunde"
           ],
           "type": "prose"
         },
@@ -26218,12 +26225,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page does not provide recruitment quotes or personal income promises; missing items remain missing and are not replaced with industry averages or neighboring occupations."
+              "Use the notices to compare duties and pay terms for individual posts."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "a27-zhengzhou",
+            "a27-shunde"
           ],
           "type": "prose"
         }
@@ -28975,25 +28983,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Fictional materials",
-                  "1 set of fictional technical documentation, specifications, engineer requirements, and drawing samples; 1 set of anonymized layer, symbol, annotation, schedule, version, and change data and data dictionary; templates for basis, layers, symbols, annotations, schedules, checking, versions, and anomaly reporting; and 3 drafting, standards, and document hazard items.",
-                  "All materials are fictional and contain no real project, client, or unrelated personal information."
+                  "Paper exercise inputs",
+                  "Fictional paper exercise. Approved schematic E-03 Rev C maps wire W17 to T4. Pending wiring sheet W-02 Rev B maps W17 to T5.",
+                  "Ticket C12 approves a label edit only. It does not approve a terminal change. The equipment has not been delivered, and no hardware or test result is supplied.",
+                  "The exercise assigns conflict logging to the drafter, terminal confirmation to the electrical engineer and approved issue to document control."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Portfolio task",
-                  "Within 40 minutes, write up the basis, layers, symbols, annotations, schedules, versions, and review check for drafting an electrical wiring diagram, and fill in a checking, review, change, version, and anomaly reporting form.",
-                  "Do only paper design and checking, do not touch real projects or drawings, do not make design seal, standards, safety, or legal conclusions, and this is not equivalent to a registered practice qualification or authorization to seal design documents."
+                  "What to submit",
+                  "Write a one-page check record. List the wire, conflicting terminals, sheets and revisions. Mark the scope approved under C12 and what remains open.",
+                  "State who takes over and when the sheet may be issued. Work on paper only."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Reference result",
-                  "The basis includes technical documentation, standards, version, purpose, and scope; drafting includes layers, symbols, line types, annotations, schedules, and sheet sizes; checking includes dimensions, symbols, conflicts, review, and comment handling; versions and changes include naming, revision, archiving, and permissions.",
-                  "The reference result is for self-checking and is not the only correct answer."
+                  "Finish your own answer first",
+                  "Open “Terminal check reference (open after day six)” under FAQs and sources.",
+                  "Use the checklist to record one difference and one correction."
                 ]
               },
               {
@@ -29022,50 +29031,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: understand the materials",
-                  "Read the fictional technical documentation, specifications, drawing samples, and policy materials, circle uncertain items, and write a list of questions."
+                  "Day 1",
+                  "Log the wire and revisions of both sheets."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: basis and version",
-                  "Lay out purpose, scope, standards, version, interfaces, and premises per technical documentation and standards, and flag items to confirm."
+                  "Day 2",
+                  "Locate the terminal-number difference."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: layers and symbols",
-                  "Per standards, write a paragraph describing the settings for layers, symbols, line types, annotations, schedules, and sheet sizes."
+                  "Day 3",
+                  "Check what C12 authorizes."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: drafting and checking",
-                  "Per the basis, write the key points for drawing and for checking dimensions, symbols, and conflicts."
+                  "Day 4",
+                  "List open checks and who owns them."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: versions and delivery",
-                  "Fill in a version, change, naming, archiving, review, delivery, and anomaly reporting form."
+                  "Day 5",
+                  "Write the one-page check and handoff."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: redo under time limits",
-                  "Redo it under time-limited conditions and record your energy and the types of errors."
+                  "Day 6: finish your own answer",
+                  "Check whether someone could read your handoff on its own before opening the reference."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: compare and decide",
-                  "Compare the two versions and write down continue / be cautious / stop, with reasons."
+                  "Day 7: open the reference and review",
+                  "Open “Terminal check reference (open after day six)” under FAQs and sources. Record one difference and correction, then decide whether to continue or pause."
                 ]
               }
             ]
@@ -29084,13 +29093,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1 check: were the uncertain items in the materials honestly flagged rather than filled in by guessing?",
+              "You can finish a one-page handoff and separate verified facts, open checks and approvals.",
               "Day 2 check: were basis, scope, standards, and version checked item by item against technical documentation and requirements, rather than by impression?",
-              "Day 3 check: were layers, symbols, line types, annotations, and schedules written clearly per drafting standards?",
+              "Note which paper step takes most effort. Ask the employer about actual work demands.",
               "Day 4 check: were drafting and dimension, symbol, and conflict checks written clearly per the basis?",
               "Day 5 check: are versions, changes, naming, archiving, delivery, and anomaly items checkable?",
               "Day 6 check: under time limits and multi-party revisions, can you still hold to standards, checking, versions, and confidentiality requirements?",
-              "Day 7 check: taking both versions together, judge whether you are willing to keep investing in the electrical and electronic drafting direction."
+              "On day seven, check your handoff against the collapsed reference. Repeat if a critical item is missing. Ask the employer about training and actual responsibilities."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30975,22 +30984,21 @@
           "data": {
             "entries": [
               {
-                "answer": "Read technical documentation, specifications, and engineer requirements and confirm the drawing's purpose, scope, standards, and version; collect and organize existing drawings, templates, blocks, layers, and schedules; check inputs, interfaces, and premises; draft and revise wiring and cabling diagrams, schematics, layout drawings, charts, and schedules per drafting standards and layers, symbols, line types, annotations, and schedules; measure and check dimensions, symbols, conflicts, sheet sizes, and annotations; maintain layers, blocks, templates, versions, and naming; review and revise with engineers and reviewers; release, deliver, issue drawings, and deliver electronically per process; manage versions, changes, revision notes, archiving, and retrieval; and support the site, manufacturing, installation, commissioning, and maintenance and handle questions and rework.",
+                "answer": "Turn confirmed electrical or electronic design inputs into schematics, wiring diagrams and lists. Check terminals, sheet numbers and revisions, and refer conflicts to engineering.",
                 "id": "actors.faq.1",
                 "question": "What does an electrical and electronics drafter do every day in concrete terms?",
                 "question_key": "career.faq.electrical-and-electronics-drafters.1",
                 "source_refs": [
-                  "onet"
+                  "a27-electrical-onet"
                 ]
               },
               {
-                "answer": "This page's occupation takes on electrical and electronic system drawings, documents, versions, changes, and site support; mechanical drafters take on mechanical part, assembly, and tooling drawings; architectural and civil drafters take on architectural, civil, and structural drawings; electrical and electronic engineering technologists and technicians take on electrical and electronic engineering testing and commissioning; electro-mechanical and mechatronics technologists and technicians take on mechatronic equipment commissioning and maintenance; civil engineering technologists and technicians take on civil engineering sites and testing; mechanical engineering technologists and technicians take on mechanical engineering testing and design support; industrial engineering technologists and technicians take on industrial engineering and process support; and aerospace engineering and operations technologists and technicians take on aerospace engineering and operations support. Objects, standards, registration, and authorization differ, and they cannot be substituted by specialty or job title.",
+                "answer": "Electrical drafting focuses on documenting confirmed design inputs. Engineering roles may also handle calculations, component selection and commissioning. Titles can overlap, so ask who can change the design and approve drawings.",
                 "id": "actors.faq.2",
                 "question": "How does it differ from adjacent occupations?",
                 "question_key": "career.faq.electrical-and-electronics-drafters.2",
                 "source_refs": [
-                  "onet",
-                  "agent"
+                  "a27-electrical-onet"
                 ]
               },
               {
@@ -31022,23 +31030,24 @@
                 ]
               },
               {
-                "answer": "In the U.S. BLS 2025 wage data, the median is 76,870 USD/year (36.96 USD/hour); that source provides only the median and does not provide the 10/25/75/90 percentiles, and this page leaves gaps in the corresponding places. No corresponding national occupation-level framing was obtained for Mainland China, so no median or percentile is given, and industry average wages serve only as a visible industry proxy. When comparing real positions, check city and region, type of organization and position level, discipline and drawing type, employment arrangement, whether project bonuses and allowances are included, and pre-tax versus post-tax framing.",
+                "answer": "The May 2025 U.S. annual median for electrical and electronics drafters was $76,870. The two mainland notices cover broader electrical engineering roles. The Zhengzhou notice listed five electrical engineer posts, requiring a bachelor’s degree and covering schematics, wiring diagrams, selection and commissioning. It quoted CNY 6,000–10,000 without a pay period. The Shunde notice listed CNY 8,501–10,000 per month. Duties included design review, selection, drawing and production commissioning, broader than drafting alone. These are past notices. A comparable mainland occupational median remains unavailable.",
                 "id": "actors.faq.6",
                 "question": "What is the pay generally, and how should it be compared?",
                 "question_key": "career.faq.electrical-and-electronics-drafters.6",
                 "source_refs": [
-                  "oews",
-                  "r2-pay-1"
+                  "a27-bls-current",
+                  "a27-zhengzhou",
+                  "a27-shunde"
                 ]
               },
               {
-                "answer": "U.S. feedback shows 40% require a bachelor's degree, 24% require an associate's degree or two-year degree, and 21% require a postsecondary certificate (this page shows these three items, totaling 85%), consistent with the Job Zone Three preparation level, where most positions require vocational training, an associate's degree, or related experience. In Mainland China, drafting basis and graphical symbols are implemented per national standards, and design document sealing follows regulations such as the registered electrical engineer practice qualification system.",
+                "answer": "The Zhengzhou notice listed five electrical engineer posts, requiring a bachelor’s degree and covering schematics, wiring diagrams, selection and commissioning. It quoted CNY 6,000–10,000 without a pay period. The Shunde notice listed CNY 8,501–10,000 per month. Duties included design review, selection, drawing and production commissioning, broader than drafting alone. These are past notices. A comparable mainland occupational median remains unavailable. For an application, check the posting’s education, audition or training requirements.",
                 "id": "actors.faq.7",
                 "question": "What education is needed, and how should one train?",
                 "question_key": "career.faq.electrical-and-electronics-drafters.7",
                 "source_refs": [
-                  "onet",
-                  "cn-rule"
+                  "a27-zhengzhou",
+                  "a27-shunde"
                 ]
               },
               {
@@ -31052,23 +31061,30 @@
                 ]
               },
               {
-                "answer": "First do this page's paper exercise (write up the basis, layers, symbols, annotations, schedules, versions, and review check for drafting an electrical wiring diagram), then seek supervised drafting internships and engineer mentorship; at the same time, confirm that you can accept long hours of screen work and multi-party revisions and deadline pressure, and confirm the boundaries of standards, versions, data, and documents per organizational rules.",
+                "answer": "Start with this page’s C12 paper exercise. Compare the two terminals and drawing revisions, then write a one-page check record. Open the reference on day seven.",
                 "id": "actors.faq.9",
                 "question": "With no background but wanting to try, what should I do first?",
                 "question_key": "career.faq.electrical-and-electronics-drafters.9",
                 "source_refs": [
-                  "onet",
-                  "sag"
+                  "a27-electrical-onet"
                 ]
               },
               {
-                "answer": "Consider the drafting pace (driven by project, review, drawing-issue, change, and delivery milestones, with a lot of prolonged eye, hand, seated, and screen work and repeated revision), multi-party revisions and deadline pressure, and responsibility for drawings, documents, data, intellectual property, and confidentiality.",
+                "answer": "BLS projects U.S. SOC 17-3012 to go from about 18,900 jobs in 2025 to 18,200 in 2035 (−3.4%), with about 1,400 annual openings including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing this occupation?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.electrical-and-electronics-drafters.10",
                 "source_refs": [
-                  "onet",
-                  "nist"
+                  "a27-bls-current"
+                ]
+              },
+              {
+                "answer": "W17 is shown at T4 on E-03 Rev C and T5 on W-02 Rev B. The terminal conflict remains open. C12 approves only a label edit and does not authorize changing the terminal. Hold W-02 from issue and refer the conflict to the electrical engineer. Document control issues only the approved version. Record C12, the wire, both terminals, sheet numbers, revisions and the owner. Check four items: conflict location, approved scope, hold and confirmation, and versions and handoff. Count each complete item. The fictional exercise uses the source for occupational context.",
+                "id": "actors.faq.11",
+                "question": "Terminal check reference (open after day six)",
+                "question_key": "career.faq.electrical-and-electronics-drafters.11",
+                "source_refs": [
+                  "a27-electrical-onet"
                 ]
               }
             ]
@@ -31300,20 +31316,19 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Used to check the query entry points and method descriptions for drafting and engineering technology occupation information and employment outlook.",
-                  "A first-hand outlook page for this occupation was not obtained this round; the occupation's specific figures are not inferred from the entry page."
+                  "BLS projects U.S. SOC 17-3012 to go from about 18,900 jobs in 2025 to 18,200 in 2035 (−3.4%), with about 1,400 annual openings including replacements."
                 ],
                 "evidence_type": "official guidance",
                 "id": "bls",
-                "limitation": "A first-hand outlook page for this occupation was not obtained this round; the occupation's specific figures are not inferred from the entry page.",
+                "limitation": "Annual openings include replacements.",
                 "market": "United States",
-                "name": "BLS Occupational Outlook Handbook / Occupation Finder",
-                "period": "accessed 2026-09-19",
+                "name": "BLS Table 1.2: occupational projections",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.bls.gov/ooh/occupation-finder.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31494,7 +31509,7 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "Verify the occupation definition, 30 tasks, work context and preparation level (Job Zone Three, SVP 6.0 to <7.0), the interest code RC, employment of 21,600 in 2024, the 2024—2034 projection, and the 2025 wage median.",
+                  "O*NET covers the occupation definition, tasks and work context. See BLS Table 1.2 for projections.",
                   "U.S. precise occupation data; the 2025 wage source provides only the median, not percentile framing; does not define Chinese standards, wages, or the registration system."
                 ],
                 "evidence_type": "official occupation profile",
@@ -31666,6 +31681,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Tasks include creating and revising electrical and electronic drawings and wiring documents."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a27-electrical-onet",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "Electrical and electronics drafters 17-3012.00",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/17-3012.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. SOC 17-3012 employment, annual openings and median annual wages."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a27-bls-current",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "BLS Table 1.2 electrical and electronics drafters",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Zhengzhou notice listed five electrical engineer posts, requiring a bachelor’s degree and covering schematics, wiring diagrams, selection and commissioning. It quoted CNY 6,000–10,000 without a pay period."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a27-zhengzhou",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Automation electrical engineer",
+                "period": "2026-02-27",
+                "publisher": "Zhengzhou Administration for Market Regulation",
+                "scope": "recruitment_proxy",
+                "url": "https://amr.zhengzhou.gov.cn/jycyzl/9911730.jhtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Shunde notice listed CNY 8,501–10,000 per month. Duties included design review, selection, drawing and production commissioning, broader than drafting alone."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a27-shunde",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Electrical engineer",
+                "period": "2026-09-30",
+                "publisher": "Shunde public employment service",
+                "scope": "recruitment_proxy",
+                "url": "https://sdjyt.shunde.gov.cn/m/jobs-show.php?id=61810"
               }
             ]
           },
@@ -34484,7 +34559,7 @@
             },
             {
               "指标": "Drafting and graphical symbol standards",
-              "数值": "Carried out per national standards",
+              "数值": "See the two dated job postings below.",
               "说明": "Drafting basis and graphical symbols and layers and documents and changes should be carried out per the Standardization Law of the People's Republic of China, the national standards for drafting and electrical graphical symbols (the GB/T series), and the organization's design, document, and change management rules."
             },
             {
@@ -34621,7 +34696,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "Statistical framing status",
+          "china_open": "The dated posting samples are shown alongside the national occupation-level data gap.",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34664,7 +34739,7 @@
               }
             },
             {
-              "城市/区间": "Industry average (cannot substitute for this occupation)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$join": [
                   {
@@ -34694,13 +34769,14 @@
           "china_soc_row": "Mainland China wage framing",
           "edu": "See the entry module for education, standards, registration, and training experience",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a27-zhengzhou",
+            "posting-a27-shunde"
           ],
           "sources_note": "Source links are used according to their respective scopes of application.",
           "ui": {
             "ai_heading": "Will AI and automation directly change income in this occupation?",
             "driver_heading": "What should be checked when discussing pay for comparable positions in Mainland China?",
-            "official_heading": "Mainland China official framing and statistical gaps",
+            "official_heading": "Scope of industry figures and job postings",
             "scenario_caption": "Comparison of pay methods and statistical boundaries",
             "scenario_heading": "Can pay methods for comparable positions in Mainland China be compared directly?",
             "scenario_interpretation_label": "Scope of application and gaps",
@@ -35365,7 +35441,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/mechanical-drafters",
+            "target_href": "/en/career/jobs/mechanical-drafters",
             "target_slug": "mechanical-drafters",
             "target_title": "Mechanical Drafters: differences from this occupation in object and standards",
             "transition_distance": {
@@ -35388,7 +35464,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/architectural-and-civil-drafters",
+            "target_href": "/en/career/jobs/architectural-and-civil-drafters",
             "target_slug": "architectural-and-civil-drafters",
             "target_title": "Architectural and Civil Drafters: differences from this occupation in object and specifications",
             "transition_distance": {
@@ -35411,7 +35487,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-and-electronics-engineering-technicians",
+            "target_href": "/en/career/jobs/electrical-and-electronics-engineering-technicians",
             "target_slug": "electrical-and-electronics-engineering-technicians",
             "target_title": "Electrical and Electronic Engineering Technologists and Technicians: differences from this occupation in duties and authorization",
             "transition_distance": {
@@ -35434,7 +35510,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electro-mechanical-technicians",
+            "target_href": "/en/career/jobs/electro-mechanical-technicians",
             "target_slug": "electro-mechanical-technicians",
             "target_title": "Electro-Mechanical and Mechatronics Technologists and Technicians: differences from this occupation in object and authorization",
             "transition_distance": {
@@ -35457,7 +35533,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/civil-engineering-technicians",
+            "target_href": "/en/career/jobs/civil-engineering-technicians",
             "target_slug": "civil-engineering-technicians",
             "target_title": "Civil Engineering Technologists and Technicians: differences from this occupation in object and basis",
             "transition_distance": {
@@ -35480,7 +35556,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/mechanical-engineering-technicians",
+            "target_href": "/en/career/jobs/mechanical-engineering-technicians",
             "target_slug": "mechanical-engineering-technicians",
             "target_title": "Mechanical Engineering Technologists and Technicians: differences from this occupation in object and basis",
             "transition_distance": {
@@ -35503,7 +35579,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/industrial-engineering-technicians",
+            "target_href": "/en/career/jobs/industrial-engineering-technicians",
             "target_slug": "industrial-engineering-technicians",
             "target_title": "Industrial Engineering Technologists and Technicians: differences from this occupation in basis and methods",
             "transition_distance": {
@@ -35526,7 +35602,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/aerospace-engineering-and-operations-technicians",
+            "target_href": "/en/career/jobs/aerospace-engineering-and-operations-technicians",
             "target_slug": "aerospace-engineering-and-operations-technicians",
             "target_title": "Aerospace Engineering and Operations Technologists and Technicians: differences from this occupation in object and basis",
             "transition_distance": {
@@ -35614,7 +35690,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Learn about my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35663,7 +35739,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Learn about my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35712,7 +35788,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Learn about my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35761,7 +35837,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Learn about my motivation cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35810,7 +35886,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Learn about my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35859,7 +35935,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Learn about my communication cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36481,7 +36557,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand the task interests and work preferences of electrical and electronics drafters",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37012,39 +37088,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 21,600 (2024, O*NET summary page framing)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "18,900 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistic)",
-        "occupation_scope": "Framing for this occupation (17-3012.00); the size changes with engineering investment, manufacturing, design outsourcing, and digitalization; a national total does not indicate specific opportunities in a given state, organization, or discipline",
-        "period": "2024 base period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. electrical and electronics drafters 17-3012",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "a27-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "The 2024—2034 projection is “Decline (-1% or lower)” (the category and range marked on the O*NET summary page)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "−3.4%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupational total)",
-        "occupation_scope": "Framing for this occupation, projection period 2024—2034; the projection is a change in the occupational total, not an individual's hiring probability; that page gives the “Decline (-1% or lower)” category, and this page states it per the original framing rather than converting percentages itself",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. electrical and electronics drafters 17-3012",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a27-bls-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 1,700 (2024—2034, including replacement needs; O*NET summary page framing, a total for the projection period)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "1,400 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Projected period job openings (including replacement needs)",
-        "occupation_scope": "Framing for this occupation; it is the total openings formed during the projection period from growth and replacement, not annual net job gains, and not a direct measure of individual opportunity; the framing period marked on that O*NET page is 2024—2034, and this page cites it under that framing without annual conversion",
-        "period": "2024—2034 projection period; retrieved 2026-09-19",
+        "occupation_scope": "U.S. electrical and electronics drafters 17-3012",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a27-bls-current"
         ]
       },
       {
@@ -37085,14 +37161,15 @@
       },
       {
         "derivation": "A precise occupational wage for Mainland China was not obtained; U.S. data, industry averages, or opaque recruitment quotes are not used to substitute for this occupation's pay.",
-        "display_value": "Note: Mainland China has no occupation-level wage framing in one-to-one correspondence with U.S. 17-3012.00, and requirements must be distinguished by laws and standards and organizational rules. Drafting basis and graphical symbols and documents and changes are carried out per the Standardization Law of the People's Republic of China, the national standards for drafting and electrical graphical symbols (the GB/T series), and the organization's design, document, and change management rules; design document sealing and scope of practice follow regulations such as the registered electrical engineer practice qualification system; and drawings, documents, and client data should be managed per confidentiality and intellectual property requirements. The above is cited by the names and general framing of the laws, standards, and rules, and article numbers were not checked one by one. Pay related to this occupation typically consists of base salary plus performance, project bonuses, allowances, and subsidies, and public wage statistics break down at most to industry category and organization type, with no occupation-level framing established for this occupation; no verifiable Mainland China occupation-level wage distribution was obtained this round, and industry average wages serve only as a visible industry proxy and are explicitly excluded",
+        "display_value": "The Zhengzhou notice listed five electrical engineer posts, requiring a bachelor’s degree and covering schematics, wiring diagrams, selection and commissioning. It quoted CNY 6,000–10,000 without a pay period. The Shunde notice listed CNY 8,501–10,000 per month. Duties included design review, selection, drawing and production commissioning, broader than drafting alone.",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "Mainland China",
         "measure": "Statistical position not obtained (Mainland China occupation-level wages)",
-        "occupation_scope": "Mainland China occupation-level framing; pay for drafting positions is determined by organization type and position and discipline and professional title and performance systems, and public wage statistics break down at most to industry category and organization type; a page being in Simplified Chinese does not mean a precisely equivalent occupational classification exists",
-        "period": "Current publication framing; retrieved 2026-09-19",
+        "occupation_scope": "Two past job notices",
+        "period": "2026",
         "source_refs": [
-          "r2-pay-1"
+          "a27-zhengzhou",
+          "a27-shunde"
         ]
       },
       {
@@ -37105,6 +37182,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The Zhengzhou notice listed five electrical engineer posts, requiring a bachelor’s degree and covering schematics, wiring diagrams, selection and commissioning. It quoted CNY 6,000–10,000 without a pay period.",
+        "fact_id": "posting-a27-zhengzhou",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Automation electrical engineer",
+        "period": "2026-02-27",
+        "source_refs": [
+          "a27-zhengzhou"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The Shunde notice listed CNY 8,501–10,000 per month. Duties included design review, selection, drawing and production commissioning, broader than drafting alone.",
+        "fact_id": "posting-a27-shunde",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Electrical engineer",
+        "period": "2026-09-30",
+        "source_refs": [
+          "a27-shunde"
         ]
       }
     ]
@@ -37132,19 +37233,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034 “Decline (-1% or lower)”; the source gives only the category)"
+        "label": "U.S. electrical and electronics drafters 17-3012 · projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (about 21,600 in 2024)"
+        "label": "U.S. electrical and electronics drafters 17-3012 · employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. projected job openings (about 1,700 over 2024—2034, including replacement needs)"
+        "label": "U.S. electrical and electronics drafters 17-3012 · projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37158,17 +37259,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Electrical and Electronics Drafters (O*NET-SOC 17-3012.00) use CAD and drafting specifications to draft and revise drawings and documents for electrical and electronic systems: confirm the basis per technical documentation and standards and version, draft and revise wiring and cabling diagrams, schematics, layout drawings, and schedules per drafting standards and layers, symbols, line types, annotations, and schedules, measure and check dimensions, symbols, and conflicts and review and revise with engineers, release and deliver per process and manage versions, changes, archiving, and retrieval, and support the site, manufacturing, installation, commissioning, and maintenance. U.S. framing: the BLS 2025 wage data median is 76,870 USD/year (36.96 USD/hour, median only); employment was about 21,600 in 2024, and the 2024—2034 projection is “Decline (-1% or lower)” with about 1,700 projected openings; the preparation level is Job Zone Three and the interest code is RC. Mainland China: drafting and graphical symbols are carried out per national standards, and design document sealing follows regulations such as the registered electrical engineer practice qualification system; public statistics have not established an occupation-level wage framing, and this page visibly flags the gap in the relevant places."
+      "text": "See how electrical drafters check terminals and revisions, compare adjacent engineering job notices and try a paper drawing check."
     },
     "title": {
       "availability": "available",
       "text": "Electrical and Electronics Drafters"
     }
   },
-  "source_content_sha256": "57cfe872d66095238e639e6bfa7e7aea444df2c01e0fd06441db4d0635d53b79",
+  "source_content_sha256": "c49f67ef0738d43abbbc1d0e7f6a8f17390672af94c0ccf7ed23e8720c3dcf10",
   "subject": {
     "canonical_slug": "electrical-and-electronics-drafters",
     "name": "Electrical and Electronics Drafters",
-    "summary": "Electrical and Electronics Drafters (U.S. side O*NET-SOC 17-3012.00, Electrical and Electronics Drafters) is an electrical and electronic systems drafting occupation: uses CAD and drafting specifications to draft and revise drawings and documents for electrical and electronic systems. The work includes reading technical documentation, specifications, and engineer requirements and confirming the drawing's purpose, scope, standards, and version; collecting and organizing existing drawings, templates, blocks, layers, and schedules; checking inputs, interfaces, and premises; drafting and revising wiring and cabling diagrams, schematics, layout drawings, charts, and schedules per drafting standards and layers, symbols, line types, annotations, and schedules; measuring and checking dimensions, symbols, conflicts, sheet sizes, and annotations; maintaining layers, blocks, templates, versions, and naming; reviewing and revising with engineers and reviewers; releasing, delivering, issuing drawings, and delivering electronically per process; managing versions, changes, revision notes, archiving, and retrieval; supporting the site, manufacturing, installation, commissioning, and maintenance and handling questions and rework; and participating in improving standards, templates, and processes and completing handover. U.S. framing: the BLS 2025 wage data median is 76,870 USD/year (36.96 USD/hour; this source provides the median only and does not provide the 10/25/75/90 percentiles); the O*NET summary page gives about 21,600 employed in 2024, a 2024—2034 projection of “Decline (-1% or lower)”, and about 1,700 projected openings over 2024—2034 (a projection-period total framing); the preparation level is Job Zone Three (SVP 6.0 to <7.0), the education feedback is 40% bachelor's degree, 24% associate's or two-year degree, and 21% postsecondary certificate, the interest code is RC, and there are 30 tasks. Mainland China framing: drafting basis and graphical symbols and documents and changes are carried out per the Standardization Law of the People's Republic of China, the national standards for drafting and electrical graphical symbols (the GB/T series), and organizational rules, and design document sealing and scope of practice follow regulations such as the registered electrical engineer practice qualification system. Public statistics have not established an occupation-level wage framing corresponding to this occupation, and this page keeps the gap as it stands, with industry average wages serving only as a visible industry proxy."
+    "summary": "Turn confirmed electrical or electronic design inputs into schematics, wiring diagrams and lists. Check terminals, sheet numbers and revisions, and refer conflicts to engineering."
   }
 }

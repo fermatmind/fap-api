@@ -173,6 +173,9 @@
       "item:nanosystems-engineers.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:nanosystems-engineers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nanosystems-engineers.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13233,6 +13236,21 @@
             "onet-cert"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Prototype A reached the target reading. B has simulation results only. For design review, separate measurements from simulation and state one assumption still to test."
+            ]
+          },
+          "id": "nanosystems-engineers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Separate measured and simulated nanosystem evidence",
+          "type": "notice"
         }
       ]
     },
@@ -15752,6 +15770,13 @@
         "id": "nanosystems-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nanosystems-engineers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16041,7 +16066,7 @@
       "text": "Nanosystems engineers"
     }
   },
-  "source_content_sha256": "6f133f8a81842d0120f27d7c992a9c620bdfb15073599f4f192939f1038a0b45",
+  "source_content_sha256": "2bacbfb7e595526031b9f02d7e68231343624ed803d667905e8adbb7a40465e7",
   "subject": {
     "canonical_slug": "nanosystems-engineers",
     "name": "Nanosystems engineers",

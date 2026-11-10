@@ -1283,6 +1283,9 @@
       "item:payroll-and-timekeeping-clerks.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:payroll-and-timekeeping-clerks.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:payroll-and-timekeeping-clerks.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30914,6 +30917,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。排班表写 8 小时，已签考勤写 7 小时，补录说明未标审批。分别记录三个来源及需向审批人核对的问题。"
+            ]
+          },
+          "id": "payroll-and-timekeeping-clerks.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "核考勤调整的版本",
+          "type": "notice"
         }
       ]
     },
@@ -37248,6 +37266,13 @@
         "id": "payroll-and-timekeeping-clerks.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "payroll-and-timekeeping-clerks.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37597,7 +37622,7 @@
       "text": "薪资与考勤文员"
     }
   },
-  "source_content_sha256": "97d81b4f9a1b1124272d22425623c0ed85f9ac4a2b494b316b44842f945b94fc",
+  "source_content_sha256": "08806daafee3b801d85de62e9e7a4d63a578a2f172dbe5a1a115b7b6a52e0baf",
   "subject": {
     "canonical_slug": "payroll-and-timekeeping-clerks",
     "name": "薪资与考勤文员",

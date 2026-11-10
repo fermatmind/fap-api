@@ -1298,6 +1298,9 @@
       "item:patient-representatives.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:patient-representatives.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:patient-representatives.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30979,6 +30982,18 @@
             "privacy"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. A note includes a billing question and a treatment question. Route each to the appropriate service or clinical role and write a traceable follow-up note."
+            ]
+          },
+          "id": "patient-representatives.path.work-sample-draft-20261110.1",
+          "title": "Route patient questions to the right teams",
+          "type": "notice"
         }
       ]
     },
@@ -37478,6 +37493,13 @@
         "id": "patient-representatives.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "patient-representatives.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37897,7 +37919,7 @@
       "text": "Patient representatives: work content, pay basis, and service coordination"
     }
   },
-  "source_content_sha256": "5f44ef66620c0aec5c14303eabd05dd434a71072f629d5c8d55077894b9ec49e",
+  "source_content_sha256": "2af84099c238d5198734493bac31933477c89dcae60bd22f03750ebfbf90bbe6",
   "subject": {
     "canonical_slug": "patient-representatives",
     "name": "Patient Representatives",

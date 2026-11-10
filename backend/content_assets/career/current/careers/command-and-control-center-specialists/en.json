@@ -1478,6 +1478,9 @@
       "item:command-and-control-center-specialists.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:command-and-control-center-specialists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:command-and-control-center-specialists.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30897,6 +30900,21 @@
           "id": "command-and-control-center-specialists.path.recruitment-sample.1",
           "title": "Notes on using recruitment samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. A fictional exercise has two updates. One is timestamped and the other says only “sent.” Preserve what is known and identify the receipt status to verify at handover."
+            ]
+          },
+          "id": "command-and-control-center-specialists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check an exercise message handover",
+          "type": "notice"
         }
       ]
     },
@@ -37622,6 +37640,13 @@
         "id": "command-and-control-center-specialists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "command-and-control-center-specialists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38245,7 +38270,7 @@
       "text": "Command and Control Center Specialist"
     }
   },
-  "source_content_sha256": "9bc94ad73afba9c52140e49aefc5925cb7e52c83478d6b03bcb69a3bb622971e",
+  "source_content_sha256": "82700dc805826fcf97031c3253a7e264e0b6abc28bd87b6ef07602b92ba4daf9",
   "subject": {
     "canonical_slug": "command-and-control-center-specialists",
     "name": "Command and Control Center Specialist",

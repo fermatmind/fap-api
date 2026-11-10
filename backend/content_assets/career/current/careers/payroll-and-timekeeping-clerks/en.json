@@ -1283,6 +1283,9 @@
       "item:payroll-and-timekeeping-clerks.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:payroll-and-timekeeping-clerks.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:payroll-and-timekeeping-clerks.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30554,6 +30557,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The schedule shows eight hours, signed attendance shows seven, and the adjustment note has no approval. Record all three sources and what the approver should verify."
+            ]
+          },
+          "id": "payroll-and-timekeeping-clerks.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Reconcile a timekeeping adjustment",
+          "type": "notice"
         }
       ]
     },
@@ -36888,6 +36906,13 @@
         "id": "payroll-and-timekeeping-clerks.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "payroll-and-timekeeping-clerks.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37237,7 +37262,7 @@
       "text": "Payroll and Timekeeping Clerks"
     }
   },
-  "source_content_sha256": "854a854db0bebbfe3adffd9704d92a3f9e6c91ba15f39a2a2a1cf3d60843b686",
+  "source_content_sha256": "8220c0f04f8e4fec928b5ba745ad578e304c968f5c33990e52f64ef4ef54b8cc",
   "subject": {
     "canonical_slug": "payroll-and-timekeeping-clerks",
     "name": "Payroll and Timekeeping Clerks",

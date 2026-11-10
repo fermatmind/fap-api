@@ -200,6 +200,9 @@
       "item:nurse-anesthetists-nurse-midwives-and-nurse-practitioners.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:nurse-anesthetists-nurse-midwives-and-nurse-practitioners.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nurse-anesthetists-nurse-midwives-and-nurse-practitioners.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -13047,6 +13050,21 @@
             "onet-education"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Three postings emphasize perioperative anesthesia care, maternity follow-up and outpatient chronic care. Match each to its role focus and write a question about the employer’s authorization process."
+            ]
+          },
+          "id": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "Compare three advanced nursing postings",
+          "type": "notice"
         }
       ]
     },
@@ -15649,6 +15667,13 @@
         "id": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16029,7 +16054,7 @@
       "text": "Nurse Practitioners"
     }
   },
-  "source_content_sha256": "a258e63e133d31c27407dcfe6bfceeddfffbd0f4a88fee797ce402037cdfdc7a",
+  "source_content_sha256": "eab42afdc0f1d12cd2a7e718381921d26eeed2ced45f2c465f11120b74d104a2",
   "subject": {
     "canonical_slug": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners",
     "name": "Nurse Practitioners",

@@ -24195,12 +24195,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜本页的「历史学家」是 O*NET 19-3093.00（Historians）这一精确职业，工作可以分成几类：（一）史料与研究调查——从档案馆、法庭记录、日记、新闻档案与照片以及书籍、小册子与期刊等来源收集历史数据，开展口述访谈与影像与数字史料采集；（二）整理与批判——整理数据，分析与阐释其真实性与相对重要性，进行史料批判与来源核验；（三）分析与阐释与写作——为出版与通过存储介质或互联网等其他传播方式整理与撰写信息，为他人解读信息的含义；（四）出版与展览与复核——撰写出版物与展览，或复核他人撰写内容以确保其历史准确性；（五）研究支撑与项目——开展历史研究作为历史场所与材料的认定、保护与复原的依据，并参与课题与项目与协作与评审。"
+              "选两个公开史料，记录作者、时间、原始出处及相互矛盾的地方，写一段有证据范围的解释。中科院自然科学史所样本涉及史料整理和专题研究；南京大学另有在校助理，不能作为全职门槛。"
             ]
           },
           "id": "historians.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-history-research",
+            "cn-history-assistant"
           ],
           "type": "prose"
         },
@@ -24382,12 +24384,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本页对应 O*NET 19-3093.00（历史学家），与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以史料与证据与阐释与写作为对象，产出为基于可核验史料的研究成果与阐释与资料记录，凭史料与分析与写作能力在机构与学术授权范围内完成工作，对结论严谨与学术诚信负责；社会学家与人类学家与考古学家与政治学家与档案管理员与策展人以各自对象与产出为主，方法与授权层级不同。"
+              "历史研究岗位主要产出可核史料和解释。高校教师还要负责课程、评估及指导，可能兼做研究。馆藏管理与策展也可能参与史料工作，但交付不同。"
             ]
           },
           "id": "historians.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-history-research"
           ],
           "type": "prose"
         },
@@ -24452,12 +24455,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业画像｜历史学家围绕档案、新闻、照片、访谈和手稿等史料开展研究与阐释；也可提供展览、出版或历史场所研究支撑。高校以教学为主要职责的岗位须按25-1125.00另核，研究经验不自动取得教师资格、文物修复或发掘许可。"
+              "历史研究人员提出历史问题，收集并核对档案、文献、口述资料等证据，解释来源、背景和不确定性。产出可能是研究报告、文章、展陈解读或史料整理；高校课堂教学属于不同工作职责。"
             ]
           },
           "id": "historians.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-history-research",
+            "cn-history-assistant"
           ],
           "type": "prose"
         },
@@ -27692,7 +27697,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS工资定义｜https://www.bls.gov/oes/oes_ques.htm；O*NET当前2025工资和2025—2035预测｜https://www.onetonline.org/link/details/19-3093.00；五分位表｜https://www.onetonline.org/link/localwages/19-3093.00"
+              "BLS工资定义｜https://www.bls.gov/oes/oes_ques.htm；O*NET当前2025工资和2025—2035预测｜https://www.onetonline.org/link/details/19-3093.00；工资分位数表｜https://www.onetonline.org/link/localwages/19-3093.00"
             ]
           },
           "id": "historians.us-salary.career-snapshot-secondary-locale.8",
@@ -32359,10 +32364,13 @@
                 "question_key": "career.faq.historians.q3"
               },
               {
-                "answer": "O*NET 在 19-3093.00 页呈现的 BLS 就业预测显示：就业 2024 年 3,400 人、2034 年预计 3,500 人，2024—2034 年增长为 Slower than average（1% 至 2%，该页未标注 Bright Outlook），期间年均空缺约 300 个（含增长与替补）。预测不等于个人岗位结果。",
+                "answer": "美国 BLS 表1.2：19-3093 2025 年就业约 3,800 人，预计 2035 年约 3,900 人，2025—2035 年变化 +3.0%，年均约 300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。预测不等于个人岗位结果。",
                 "id": "historians.faq.4",
                 "question": "就业前景如何？",
-                "question_key": "career.faq.historians.q4"
+                "question_key": "career.faq.historians.q4",
+                "source_refs": [
+                  "bls-history-ep"
+                ]
               },
               {
                 "answer": "O*NET 将本职业列入 Job Zone Five（需要大量准备）（8.0 及以上（SVP 8.0 and above））；学历部分显示 64% 表示要求硕士学位、10% 表示要求学士学位、9% 表示要求低于高中文凭（该页列出上述三项），即多数岗位要求研究生教育。在中国大陆，涉及档案与版权与个人信息与文物研究的岗位须满足相关法规与制度要求；具体以机构与主管机关要求为准。",
@@ -32377,10 +32385,13 @@
                 "question_key": "career.faq.historians.q6"
               },
               {
-                "answer": "不会整体被取代。文献与检索与资料与引注与初步整理可被系统辅助，但史料批判与证据与阐释与结论与诚信责任仍由具备相应训练与授权的研究者负责；O*NET 显示本职业 2024—2034 年增长为 Slower than average 1% 至 2%，自动化更多改变任务构成而非取消岗位。",
+                "answer": "不会整体被取代。美国 BLS 表1.2：19-3093 2025 年就业约 3,800 人，预计 2035 年约 3,900 人，2025—2035 年变化 +3.0%，年均约 300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                 "id": "historians.faq.7",
                 "question": "这个职业会被 AI 或自动化取代吗？",
-                "question_key": "career.faq.historians.q7"
+                "question_key": "career.faq.historians.q7",
+                "source_refs": [
+                  "bls-history-ep"
+                ]
               },
               {
                 "answer": "O*NET 工作情境显示：室内且环境可控为主要作业场所（78% 每天）、长时间坐着（17% 持续、46% 超过一半时间）、精确性要求高（33% 极其重要、52% 非常重要）、与组织外部人员沟通较多（77% 为重要活动）、工作日程以规律为主（86% 规律）、自动化程度低（89% 完全不自动化）。",
@@ -32395,10 +32406,13 @@
                 "question_key": "career.faq.historians.q9"
               },
               {
-                "answer": "本页以 O*NET 19-3093.00 与美国 BLS OEWS 2025 与 BLS 就业预测 2024—2034 为主要来源，并引用 ILO 与 NIST 的职业暴露与治理研究；所有数值为美国本职业自身口径，不覆盖中国大陆；中国大陆只登记统计口径与可见缺口；本页不构成学术或法律或版权或伦理意见。",
+                "answer": "美国 BLS 表1.2：19-3093 2025 年就业约 3,800 人，预计 2035 年约 3,900 人，2025—2035 年变化 +3.0%，年均约 300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                 "id": "historians.faq.10",
                 "question": "本页来源与口径边界是什么？",
-                "question_key": "career.faq.historians.q10"
+                "question_key": "career.faq.historians.q10",
+                "source_refs": [
+                  "bls-history-ep"
+                ]
               }
             ]
           },
@@ -32455,12 +32469,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮所核NBS发布未取得中国历史研究人员精确全国职业分布；科研行业均值为多职业背景，非职业中位、月薪或到手工资，不能覆盖所有文博、政府或高校研究岗位。美国细分中位及AI实测采用效率缺；三项新聘学历合计83%非在岗构成。原保护快答FAQ、事实与元数据有旧3400/1%-2%/2024—2034与奖金解释，按保护保留，非全页一致。"
+              "美国就业采用直接 BLS 2025—2035 年数据；大陆具名资料只说明研究或教学任务，具体条件按机构核对。"
             ]
           },
           "id": "historians.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-history-ep"
           ],
           "type": "prose"
         }
@@ -32502,10 +32517,10 @@
                 "url": "/zh/tests/iq-test"
               },
               {
-                "entity": "情绪智力测试",
+                "entity": "高校历史教师",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/career/jobs/history-teachers-postsecondary"
               },
               {
                 "entity": "本职业（历史学家）",
@@ -32566,7 +32581,7 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于核对就业 2024 年 3,400 人与 2034 年 3,500 人与 2024—2034 年增长 1% 至 2% 与期间年均空缺约 300 个（含增长与替补）。",
+                  "美国 BLS 表1.2：19-3093 2025 年就业约 3,800 人，预计 2035 年约 3,900 人，2025—2035 年变化 +3.0%，年均约 300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                   "用于说明就业预测与 OEWS 时点就业估计口径不同，且预测不等于个人岗位结果、空缺主要由替换需求构成。"
                 ],
                 "evidence_type": "official employment trends",
@@ -32574,10 +32589,10 @@
                 "limitation": "为 O*NET 在 19-3093.00 页呈现的本职业口径；增长 Slower than average 1% 至 2%，未标注 Bright Outlook。",
                 "market": "美国",
                 "name": "O*NET OnLine：历史学家就业趋势（19-3093.00，本职业自身口径）",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
+                "period": "2025–2035",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "19-3093.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/19-3093.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32977,6 +32992,46 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "科研机构史等方向涉及史料整理、专题研究及学术交流。"
+                ],
+                "id": "cn-history-research",
+                "limitation": "具名科研机构和方向，不代表全国研究岗位门槛。",
+                "market": "中国大陆",
+                "name": "中国科学院自然科学史研究所科研人员招聘",
+                "period": "2026-09",
+                "publisher": "中国科学院自然科学史研究所",
+                "scope": "具名岗位或制度",
+                "url": "https://www.ihns.ac.cn/zprc/kyxlzp/202609/t20260930_8289196.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "区分在校研究助理与学生讲解员，含校史或展陈材料工作。"
+                ],
+                "id": "cn-history-assistant",
+                "limitation": "在校岗位，不是全职历史研究人员条件。",
+                "market": "中国大陆",
+                "name": "南京大学校史研究室研究助理招募",
+                "period": "2026-05",
+                "publisher": "南京大学档案馆",
+                "scope": "具名岗位或制度",
+                "url": "https://dawww.nju.edu.cn/info/1071/21721.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 表1.2：19-3093 2025 年就业约 3,800 人，预计 2035 年约 3,900 人，2025—2035 年变化 +3.0%，年均约 300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。"
+                ],
+                "id": "bls-history-ep",
+                "market": "美国",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -34847,7 +34902,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "历史学家的工作可以分成哪几类？",
+            "question": "历史研究入门可以做什么作品？",
             "table": {
               "rows": [
                 {
@@ -34904,7 +34959,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "历史学家和相邻岗位的边界在哪里？",
+            "question": "历史研究人员和高校历史教师有什么区别？",
             "table": {
               "rows": [
                 {
@@ -36860,7 +36915,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034，本职业自身口径）",
+            "label": "BLS 就业预测（2025—2035，本职业自身口径）",
             "secondary_value": null,
             "value": {
               "$item": "historians.profile.onet-structured-fields-block.4",
@@ -37625,7 +37680,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合历史学家",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37732,7 +37787,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "高校历史教师"
           }
         ]
       },
@@ -37976,39 +38031,39 @@
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 2024—2034（经 O*NET 在 19-3093.00 页呈现，本职业自身口径，增长标为 Slower than average 1% 至 2%、该页未标注 Bright Outlook）；O*NET 该页就业基期为 2024 年 3,400 人、2034 年预计 3,500 人；预测含替换需求、不等于实际招聘或裁员。",
-        "display_value": "增长 慢于平均 Slower than average（1% 至 2%）（2024—2034，BLS 就业预测，本职业（19-3093.00）自身口径；该页未标注 Bright Outlook）",
+        "derivation": "美国 BLS 表1.2：19-3093 2025 年就业约 3,800 人，预计 2035 年约 3,900 人，2025—2035 年变化 +3.0%，年均约 300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "+3.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长",
-        "occupation_scope": "本职业：历史学家",
-        "period": "2024—2034",
+        "occupation_scope": "美国本职业 19-3093",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-history-ep"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测基期（2024 年本职业约 3,400 人，经 O*NET 呈现）；与 BLS OEWS 的时点就业估计口径不同（OEWS 只覆盖被抽样非农机构雇主、不含自雇），本页分别标注不混用。",
-        "display_value": "就业 约 3,400 人（2024，BLS 就业预测基期，本职业（19-3093.00）自身口径）",
+        "derivation": "美国 BLS 表1.2：19-3093 2025 年就业约 3,800 人，预计 2035 年约 3,900 人，2025—2035 年变化 +3.0%，年均约 300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 3,800 人",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数",
-        "occupation_scope": "本职业：历史学家",
-        "period": "2024",
+        "occupation_scope": "美国本职业 19-3093",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-history-ep"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测的期间空缺（2024—2034 本职业年均约 300 个，含增长与替补，经 O*NET 呈现）；为期间年均口径、主要由替换需求构成，不可读作净新增岗位。",
-        "display_value": "预计年均岗位空缺约 300 个（2024—2034，BLS 就业预测，本职业（19-3093.00）自身口径，含增长与替补）",
+        "derivation": "美国 BLS 表1.2：19-3093 2025 年就业约 3,800 人，预计 2035 年约 3,900 人，2025—2035 年变化 +3.0%，年均约 300 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 300 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
-        "occupation_scope": "本职业：历史学家",
-        "period": "2024—2034",
+        "occupation_scope": "美国本职业 19-3093",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-history-ep"
         ]
       },
       {
@@ -38096,19 +38151,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，本职业（19-3093.00）自身口径）"
+        "label": "美国就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，本职业（19-3093.00）自身口径）"
+        "label": "美国就业规模（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，本职业（19-3093.00）自身口径）"
+        "label": "美国年均空缺（2025—2035）"
       },
       {
         "availability": "available",
@@ -38122,17 +38177,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "历史学家做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET 19-3093.00）、Job Zone Five（需要大量准备） 与学历说明、美国工资与就业的本职业自身口径与中国大陆数据缺口。"
+      "text": "了解历史研究怎样核来源、处理冲突证据及形成可追溯解释，以及与高校历史教学的差别。"
     },
     "title": {
       "availability": "available",
-      "text": "历史学家"
+      "text": "历史研究人员做什么：史料核查、解释与入行"
     }
   },
-  "source_content_sha256": "36d517f9e5356c292408218ab142ba02b22b92ceb787c7ca1caf4026ec2442e5",
+  "source_content_sha256": "cdc2ee67490dc74ecd93bf01cf20b501a6fadd4bd11660f21e4b6bee0d033a4a",
   "subject": {
     "canonical_slug": "historians",
-    "name": "历史学家",
-    "summary": "历史学家对应 O*NET/SOC 19-3093.00「Historians」这一精确职业：对记载于政府与机构档案、报纸与其他期刊、照片、访谈、影片、电子媒体以及私人日记与信件等未刊手稿中的过去进行研究、分析、记录与阐释。核心任务包括从档案馆与法庭记录与日记与新闻档案与照片以及书籍与小册子与期刊等来源收集历史数据、整理数据并分析阐释其真实性与相对重要性、撰写出版物与展览或复核他人撰写内容以确保其历史准确性、为出版与通过存储介质或互联网等其他传播方式整理信息、开展历史研究作为历史场所与材料的认定与保护与复原的依据；常见职位名称包括 Historian 与 Research Historian 与 Public Historian 与 Archivist Historian。官方范围原文：Research, analyze, record, and interpret the past as recorded in sources, such as government and institutional records, newspapers and other periodicals, photographs, interviews, films, electronic media, and unpublished manuscripts, such as personal diaries and letters. 口径说明：O*NET 在 19-3093.00 页呈现的美国工资与就业与行业数据未标注取自上级或相邻职业，本页按本职业（19-3093.00）自身口径如实标注；该职业属 Job Zone Five（需要大量准备）（8.0 及以上（SVP 8.0 and above）），2024—2034 年增长为 Slower than average（1% 至 2%）。本页内容不构成学术、法律、版权或伦理意见。"
+    "name": "历史研究人员",
+    "summary": "历史研究人员提出历史问题，收集并核对档案、文献、口述资料等证据，解释来源、背景和不确定性。产出可能是研究报告、文章、展陈解读或史料整理；高校课堂教学属于不同工作职责。"
   }
 }

@@ -23666,13 +23666,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "用一份虚构馆内行程把资料、时间、游客问题和临时关闭信息连起来。能解释修改依据，比背熟一段华丽讲解更有观察价值。"
+              "纸面体验｜对照虚构行程表和景点通知，把解说调整与交通改期分开，写明各需谁确认。 "
             ]
           },
           "id": "tour-and-travel-guides.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24817,13 +24816,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "导游与陪同人员为个人或团体提供参观引导与地点讲解，准备资料和路线、回应问题，并观察游客活动及现场限制。美国身份采用O*NET 39-7011.00；中国实际导游活动另核资格、导游证和旅行社委派，场馆讲解等岗位不能只按中文头衔判定。可先用本页虚构馆内材料完成讲解核对和时间安排的纸面体验。"
+              "景点导览人员侧重现场解说和带团，旅行领队还可能安排交通、住宿或处理行程变动。具体分工取决于服务形式。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "tour-and-travel-guides.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-39-7011.00",
+            "transfer-onet-39-7012.00"
           ],
           "type": "prose"
         }
@@ -25492,14 +25491,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本职业可比AI采用率、任务效果与净就业因果数据，评分保持缺失。资料摘要、草稿与路线比较为编辑试用建议；事实、时间、游客信息和服务责任仍人核。美国39-7010合并2025—2035总体增长6.3%、十年净增约3,900与年均11,900空缺含替补，非本页子类独立或AI因果。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构行程表和景点通知，把解说调整与交通改期分开，写明各需谁确认。"
             ]
           },
           "id": "tour-and-travel-guides.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial",
-            "ratify"
+            "transfer-onet-39-7011.00",
+            "transfer-onet-39-7012.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33671,6 +33670,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-39-7011.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 39-7011.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/39-7011.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-39-7012.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 39-7012.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/39-7012.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -39190,10 +39230,10 @@
       "text": "导游与陪同人员"
     }
   },
-  "source_content_sha256": "d804cc3a880fc1f15f9ebd9a4d1eb10d52094a8aad721d81ae527db6b767378a",
+  "source_content_sha256": "2f8cf18543f52e19f65084579881fda77411e0816c7f4612c013bea7198db7b9",
   "subject": {
     "canonical_slug": "tour-and-travel-guides",
     "name": "导游与陪同人员",
-    "summary": "导游与陪同人员为个人或团体提供参观引导与地点讲解，准备资料和路线、回应问题，并观察游客活动及现场限制。美国身份采用O*NET 39-7011.00；中国实际导游活动另核资格、导游证和旅行社委派，场馆讲解等岗位不能只按中文头衔判定。可先用本页虚构馆内材料完成讲解核对和时间安排的纸面体验。"
+    "summary": "景点导览人员侧重现场解说和带团，旅行领队还可能安排交通、住宿或处理行程变动。具体分工取决于服务形式。"
   }
 }

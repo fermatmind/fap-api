@@ -7211,12 +7211,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Caution signals | This page corresponds to O*NET-SOC 13-2053.00, Insurance Underwriters. The official scope is to review individual insurance applications, assess the degree of risk involved, and decide whether to accept applications. Typical tasks include judging risk from health, financial standing and value, and property conditions; rejecting excessive risks; reviewing effective coverage for a single risk or a group of related risks; reducing coverage or adding endorsements and rates for substandard risks; authorizing reinsurance when necessary; and answering agents' coverage questions. The core deliverable is an explainable, reviewable underwriting decision and its basis, rather than simply approving an application. Risks include incomplete risk information, incorrect rates and endorsements, unidentified excess or accumulated risks, and decisions beyond underwriting authority. U.S. wages and employment use the precise BLS occupational category presented by O*NET (median annual pay of $81,370; approximately 127,000 employed in 2024, a declining outlook for 2024—2034, and 8,200 projected openings; the main industry is finance and insurance). Exact occupational wages for mainland China were not obtained and are recorded as a visible evidence gap. If intensive desk analysis, deadline pressure, and decision responsibility are difficult for you to tolerate, treat them as practical costs requiring serious consideration."
+              "Caution signals | This page corresponds to O*NET-SOC 13-2053.00, Insurance Underwriters. The official scope is to review individual insurance applications, assess the degree of risk involved, and decide whether to accept applications. Typical tasks include judging risk from health, financial standing and value, and property conditions; rejecting excessive risks; reviewing effective coverage for a single risk or a group of related risks; reducing coverage or adding endorsements and rates for substandard risks; authorizing reinsurance when necessary; and answering agents' coverage questions. The core deliverable is an explainable, reviewable underwriting decision and its basis, rather than simply approving an application. Risks include incomplete risk information, incorrect rates and endorsements, unidentified excess or accumulated risks, and decisions beyond underwriting authority. BLS Table 1.2: U.S. occupation 13-2053 had about 125,600 jobs in 2025 and is projected to have about 120,800 in 2035 (−3.8%), with about 6,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. Exact occupational wages for mainland China were not obtained and are recorded as a visible evidence gap. If intensive desk analysis, deadline pressure, and decision responsibility are difficult for you to tolerate, treat them as practical costs requiring serious consideration."
             ]
           },
           "id": "insurance-underwriters.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "mohrss-wage"
+            "mohrss-wage",
+            "bls-insurance-ep"
           ],
           "type": "prose"
         },
@@ -7275,13 +7276,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Insurance underwriters correspond to U.S. O*NET-SOC 13-2053.00, Insurance Underwriters. The official scope is to review individual insurance applications, assess the degree of risk involved, and decide whether to accept applications. A typical complete workflow is to review applications and supporting documents, assess health and financial risks, check coverage amounts and accumulated risks, decide on coverage or reductions and endorsements according to rules, and document the decision and reply to agents. Current U.S. national pay: a 2025 median of $81,370 per year; employment of 125,600 in 2025, -4% growth for 2025—2035, and 6,800 average annual openings (an overall projection, not attributed to AI). The exact occupational wage gap for China remains; industry averages are broad references only."
+              "Insurance underwriters review applications, assess risk and decide or recommend coverage terms under company guidelines. They may request missing information or refer complex cases. The role differs from selling policies and settling claims."
             ]
           },
           "id": "insurance-underwriters.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details",
-            "source-pack-onet-custom"
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         },
@@ -7375,12 +7375,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The first checks concern the objects (insurance applications and supporting documents, health and financial risk information, rate and endorsement rules), inputs (application materials and evidence, rate and endorsement versions, underwriting authorization and retention limits), and deliverables (risk assessment records, coverage, rejection, or reduction decisions and grounds, and reply records). Anything unverified must remain pending verification; intuition based on experience or proxy categories cannot replace risk evidence and rule versions."
+              "Use a fictional application to separate known facts, missing evidence, risk factors and questions requiring escalation. Explain which decisions the underwriter may make under assigned authority."
             ]
           },
           "id": "insurance-underwriters.profile.career-quick-answers-block.8",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         },
@@ -7389,12 +7389,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Assess the complete workflow in four steps: check inputs (confirm application evidence, rate and endorsement versions, and authorization limits) → define the task (decide only within authorization and the applicable scope of rules) → execute and document (complete assessments, decisions, and audit trails to standard) → review and escalate (stop immediately and report insufficient evidence, risks above retention limits, or rejection or reduction disputes). A complete workflow requires verifiable evidence, rules, and authorization, rather than merely issuing a decision on time."
+              "Underwriting applies risk guidelines to an application. Pricing teams develop rates and models; sales teams explain options; claims teams handle reported losses. The divisions depend on the employer."
             ]
           },
           "id": "insurance-underwriters.profile.career-quick-answers-block.9",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         },
@@ -8298,13 +8298,14 @@
                 ]
               },
               {
-                "answer": "For the United States, the precise BLS occupational category presented by O*NET shows approximately 127,000 employed in 2024, a declining outlook for 2024—2034, and 8,200 projected openings. Openings include growth and replacement needs; they are not net new jobs and cannot be converted directly into recruitment volume or individual hiring probabilities.",
+                "answer": "BLS Table 1.2: U.S. occupation 13-2053 had about 125,600 jobs in 2025 and is projected to have about 120,800 in 2035 (−3.8%), with about 6,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring. Openings include growth and replacement needs; they are not net new jobs and cannot be converted directly into recruitment volume or individual hiring probabilities.",
                 "id": "insurance-underwriters.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.insurance-underwriters.outlook-transition",
                 "source_refs": [
                   "source-pack-onet-summary",
-                  "source-pack-onet-details"
+                  "source-pack-onet-details",
+                  "bls-insurance-ep"
                 ]
               },
               {
@@ -8602,6 +8603,18 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS Table 1.2: U.S. occupation 13-2053 had about 125,600 jobs in 2025 and is projected to have about 120,800 in 2035 (−3.8%), with about 6,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring."
+                ],
+                "id": "bls-insurance-ep",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -9416,7 +9429,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "What should be checked first in this work?",
+            "question": "What work sample can show underwriting skills?",
             "table": {
               "rows": [
                 {
@@ -9448,7 +9461,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "How can you assess the complete workflow?",
+            "question": "How does underwriting differ from pricing, sales and claims?",
             "table": {
               "rows": [
                 {
@@ -10819,7 +10832,7 @@
           "entry": "insurance-underwriters.navigation.1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit insurance underwriting",
+        "label": "Explore work activities with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -10999,39 +11012,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Declining outlook (2024—2034, BLS employment projections, precise occupation 13-2053.00)",
+        "derivation": "BLS Table 1.2: U.S. occupation 13-2053 had about 125,600 jobs in 2025 and is projected to have about 120,800 in 2035 (−3.8%), with about 6,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "−3.8%",
         "fact_id": "us-growth-2024-2034",
         "market": "US",
         "measure": "projected employment direction",
         "occupation_scope": "13-2053.00 exact occupation",
-        "period": "2024-2034 outlook",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-summary"
+          "bls-insurance-ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Approximately 127,000 employed (2024, BLS employment projection base year, precise occupation 13-2053.00)",
+        "derivation": "BLS Table 1.2: U.S. occupation 13-2053 had about 125,600 jobs in 2025 and is projected to have about 120,800 in 2035 (−3.8%), with about 6,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 125,600 jobs",
         "fact_id": "us-employment-2024",
         "market": "US",
         "measure": "employment base",
         "occupation_scope": "13-2053.00 exact occupation",
-        "period": "2024 employment base",
+        "period": "2025",
         "source_refs": [
-          "source-pack-onet-summary"
+          "bls-insurance-ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "8,200 projected openings (2024—2034, BLS employment projections, precise occupation 13-2053.00, including growth and replacement needs)",
+        "derivation": "BLS Table 1.2: U.S. occupation 13-2053 had about 125,600 jobs in 2025 and is projected to have about 120,800 in 2035 (−3.8%), with about 6,800 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 6,800 per year",
         "fact_id": "us-openings-2024-2034",
         "market": "US",
         "measure": "projected job openings",
         "occupation_scope": "13-2053.00 exact occupation",
-        "period": "2024-2034 outlook",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-summary"
+          "bls-insurance-ep"
         ]
       },
       {
@@ -11071,19 +11084,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2024-2034",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034, declining)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "U.S. employment (2024)"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2024-2034",
         "key": "us_openings",
-        "label": "U.S. openings (2024—2034)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11097,17 +11110,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What insurance underwriters do, how to enter and train, their authorization and risk boundaries, and which tasks AI may change. This page corresponds to O*NET-SOC 13-2053.00, interest code CEI, and Job Zone Four. U.S. wages and employment use the precise BLS occupational category presented by O*NET; mainland China wage gaps are recorded according to the evidence."
+      "text": "Learn how insurance underwriters evaluate applications, document decisions and coordinate with pricing and claims."
     },
     "title": {
       "availability": "available",
-      "text": "Evaluating Insurance Underwriting as a Career: Work, Entry, and Risk Boundaries"
+      "text": "Insurance Underwriter: Risk Review and Coverage Decisions"
     }
   },
-  "source_content_sha256": "30df4353cb4bea7d29251ba86f890fbb3a36b366c52a1493f2f256165270b740",
+  "source_content_sha256": "21c26736c0a24a9399724085f9aa729f2a48c35d048128964a2a7d2a16cbbde4",
   "subject": {
     "canonical_slug": "insurance-underwriters",
-    "name": "Insurance Underwriters",
-    "summary": "Insurance underwriters review individual insurance applications, assess the degree of risk involved, and decide whether to accept applications. Work includes reviewing applications and supporting documents, assessing health and financial risks, checking coverage amounts and accumulated risks, deciding according to rules and specifying endorsements and rates, and documenting and replying to agents. U.S. wages and employment use the precise BLS 13-2053.00 occupational category presented by O*NET (2025 median annual pay of $81,370; approximately 127,000 employed in 2024, a declining outlook for 2024—2034, and 8,200 projected openings; the main industry is finance and insurance). Mainland China official wage sources did not establish a corresponding national occupational wage distribution; this is recorded as a visible evidence gap."
+    "name": "Insurance Underwriter",
+    "summary": "Insurance underwriters review applications, assess risk and decide or recommend coverage terms under company guidelines. They may request missing information or refer complex cases. The role differs from selling policies and settling claims."
   }
 }

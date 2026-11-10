@@ -167,6 +167,9 @@
       "item:park-naturalists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:park-naturalists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:park-naturalists.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -13076,6 +13079,21 @@
             "ai"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。原定步道暂时关闭，新路线没有无障碍说明。写下应向公园负责人核实的线路条件与给游客的替代说明。"
+            ]
+          },
+          "id": "park-naturalists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "jobzone"
+          ],
+          "title": "按现场情况改写导览安排",
+          "type": "notice"
         }
       ]
     },
@@ -15674,6 +15692,13 @@
         "id": "park-naturalists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "park-naturalists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15916,7 +15941,7 @@
       "text": "公园自然解说员"
     }
   },
-  "source_content_sha256": "fd6fb757ed073d055387f5b89366cdee2181f6e862e0c36f7b04f4b4e0c70107",
+  "source_content_sha256": "8a07976ca3559b4487fe33e6825ee2cf6250ebfc5c9bb6574c1c6aedf1b00832",
   "subject": {
     "canonical_slug": "park-naturalists",
     "name": "公园自然解说员",

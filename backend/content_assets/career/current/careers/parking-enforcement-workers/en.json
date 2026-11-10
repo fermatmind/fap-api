@@ -173,6 +173,9 @@
       "item:parking-enforcement-workers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:parking-enforcement-workers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:parking-enforcement-workers.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -13004,6 +13007,21 @@
             "road-traffic-authority"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. A photo shows the sign and the note records a time, but neither identifies the street segment. Separate the evidence from the location to verify. Actual action follows local procedures."
+            ]
+          },
+          "id": "parking-enforcement-workers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check a parking enforcement record",
+          "type": "notice"
         }
       ]
     },
@@ -15573,6 +15591,13 @@
         "id": "parking-enforcement-workers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "parking-enforcement-workers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15839,7 +15864,7 @@
       "text": "Parking enforcement worker: patrol, wages, and enforcement boundaries."
     }
   },
-  "source_content_sha256": "bed5c1e4d548b4864622bd7816c7acf9eead9eff1bad06525d4f9aaf0c0ebe67",
+  "source_content_sha256": "4c8e61a0fb70c9d528b01c04c984513aa8e0fbe98acf65a6314dd94185fb0209",
   "subject": {
     "canonical_slug": "parking-enforcement-workers",
     "name": "Parking enforcement worker.",

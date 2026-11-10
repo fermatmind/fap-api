@@ -1427,6 +1427,9 @@
       "item:choreographers.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:choreographers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:choreographers.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30642,6 +30645,21 @@
           "id": "choreographers.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。片段 A 的出场提示与音乐拍点冲突，片段 B 没有队形改动记录。选一处先改，写出给舞者和舞台人员的版本说明。"
+            ]
+          },
+          "id": "choreographers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "用排练笔记解释动作修改",
+          "type": "notice"
         }
       ]
     },
@@ -37074,6 +37092,13 @@
         "id": "choreographers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "choreographers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37472,7 +37497,7 @@
       "text": "编舞师"
     }
   },
-  "source_content_sha256": "3def5e38f6c6d3b9daf7cb6a569d0211e3830831d8023455047d91796061453b",
+  "source_content_sha256": "561215f1f458b36c62fabac2d9ad8731e2b50c652de19ea25d03ae2d00420fe9",
   "subject": {
     "canonical_slug": "choreographers",
     "name": "编舞师",

@@ -1557,7 +1557,7 @@
         "status": "pending_mapping"
       },
       "item:agricultural-and-food-science-technicians.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:agricultural-and-food-science-technicians.sources.source-card.1": {
         "status": "mapped"
@@ -23335,13 +23335,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "The core of this occupation is not the vague notion of 'doing experiments', but sampling and testing by standard methods, recording raw data truthfully, and interpreting results within the scope of your authority. Judging fit should rely on observable task behaviour and working conditions, not personality labels; the exercises and checklists on this page were designed by the editors from public occupational sources for self-exploration, and do not constitute criteria for hiring, screening or ability assessment."
+              "Start with two job examples: experimental station support and food inspection. Compare field records with sampling, raw data and method checks. The two mainland postings describe individual employers."
             ]
           },
           "id": "agricultural-and-food-science-technicians.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "caas",
+            "pku"
           ],
           "type": "prose"
         },
@@ -23350,12 +23350,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "A stronger signal is: you are willing to repeat operations to standard methods, are sensitive to values and units, can stop to verify and report when data are anomalous or the authorisation is unclear, and keep records traceable. A single mock sampling and testing record exercise with a debrief can test this: whether the method was executed properly, whether values are reproducible, and whether anomalies were closed out."
+              "Explore both field and lab work if you like matching sample identifiers, method versions and raw data, and can still flag missing evidence when results are due."
             ]
           },
           "id": "agricultural-and-food-science-technicians.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -23364,14 +23364,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "If you are unwilling to take on repetitive operations and record responsibility, tend to overlook value and unit detail, find field or production-site conditions hard to accept, or are not used to stopping and reporting when the authorisation is unclear, this kind of work may steadily drain you; job design varies considerably across organisations (company laboratories, third-party testing bodies, research institutes, agricultural extension), so first test your performance and tolerance with one complete sampling and testing record exercise."
+              "Compare two tradeoffs: field work may be tied to weather and sampling windows; food testing can mean repeated measurements and shift deadlines. Both require you to be ready to show the original record."
             ]
           },
           "id": "agricultural-and-food-science-technicians.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "r2-pay-3"
           ],
           "type": "prose"
         },
@@ -23380,13 +23378,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Assessments and exercises serve only as a reference for self-exploration, and cannot predict hiring, competence or future performance."
+              "This page compares field trials and food testing. The paper exercise checks records and handover only and does not assess hiring, job qualification or authority to sign."
             ]
           },
           "id": "agricultural-and-food-science-technicians.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "practice-editor"
           ],
           "type": "prose"
         },
@@ -23395,13 +23392,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The core of this occupation is not the vague notion of 'doing experiments', but sampling and testing by standard methods, recording raw data truthfully, and interpreting results within the scope of your authority. Fit depends more on observable task behaviour: whether you are willing to repeat operations to method, whether you can verify units and quality control, and whether you can keep records accurate under anomalies and time pressure."
+              "Use the fictional QH-54 grain records to submit two checks and a one-page handover. Separate what can be calculated from which values can be used."
             ]
           },
           "id": "agricultural-and-food-science-technicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "onet"
+            "practice-editor"
           ],
           "type": "prose"
         }
@@ -23795,13 +23791,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Result determination, release and report signature are decided by the authorised person"
+              "Technicians can compare, classify and record results within their assigned duties. Check the applicable rules and authorizations separately for public evidentiary reports and production release."
             ]
           },
           "id": "agricultural-and-food-science-technicians.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "rules",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24587,10 +24584,10 @@
                 "url": "https://www.onetonline.org/link/details/19-4013.00"
               },
               {
-                "entity": "BLS Agricultural and Food Science Technicians (2025 data, 2025—2035 projection)",
+                "entity": "BLS Employment Projections Table 1.2: group 19-4010",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET food 19-4013 national wage percentiles",
@@ -24617,16 +24614,16 @@
                 "url": "https://www.onetonline.org/link/details/19-4013.00"
               },
               {
-                "entity": "BLS Agricultural and Food Science Technicians (2025 data, 2025—2035 projection)",
+                "entity": "BLS Employment Projections Table 1.2: group 19-4010",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 19-4013.00 detailed tasks and work activities",
+                "entity": "SAMR testing-agency supervision measures, Articles 2 and 12",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/19-4013.00"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_bff8f35d8f114acca7643bddd77e9505.html"
               },
               {
                 "entity": "BLS Agricultural and Food Science Technicians (2025 data, 2025—2035 projection)",
@@ -24651,7 +24648,7 @@
             "cnclass-cross-repair",
             "onet",
             "oews",
-            "bls"
+            "ep-new"
           ],
           "type": "links"
         },
@@ -24772,7 +24769,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The agricultural and food directions assist scientists with testing and research. For the food 19-4013 context the responses are 72% making decisions every day, 61% facing strict deadlines every day, 78% considering repetition extremely important, and 56% considering accuracy extremely important. The editors propose exploring record and chart drafts on fictional data; there is still no study of AI adoption, hours saved or displacement in this occupation; the actual method, equipment and authorisation, and production release responsibility, must be checked separately. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "The agricultural and food directions assist scientists with testing and research. For the food 19-4013 context the responses are 72% making decisions every day, 61% facing strict deadlines every day, 78% considering repetition extremely important, and 56% considering accuracy extremely important. The editors propose exploring record and chart drafts on fictional data; there is still no study of AI adoption, hours saved or displacement in this occupation; the actual method, equipment and authorisation, and production release responsibility, must be checked separately. AI task-impact estimate 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.18",
@@ -25263,12 +25260,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "A national-level projection, not attributed to AI, and it cannot be used to infer an individual's hiring chances."
+              "This is a U.S. national projection for the combined group. Annual openings include replacement demand and cannot establish AI effects or individual hiring chances."
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -25277,12 +25274,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Agricultural and Food Science Technicians (2025 data, 2025—2035 projection)"
+              "BLS Employment Projections Table 1.2: group 19-4010"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -25291,12 +25288,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. combined-occupation employment in 2025 and the 2025—2035 projection; the food wage is listed separately"
+              "U.S. agricultural and food science technicians (combined group 19-4010): 2025 employment and 2025–2035 projections."
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -25305,12 +25302,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS combined occupation: employment of 40,400 in 2025, growth of 5% over 2025—2035 / a net increase of about 2,100, and about 5,900 openings per year including growth and replacement. For food 19-4013 the median wage is 52,130 USD/year (2025, month 5 (May)). The two bases are kept separate, and the projection is not attributed to AI."
+              "About 40,400 in 2025 and a projected 42,400 in 2035. BLS reports about 2,100 additional jobs (5.1%) and 5,900 openings a year. Counts are rounded independently."
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -25347,7 +25344,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. national wage percentiles for food science technicians in 2025, month 5 (May)."
+              "U.S. national wage percentiles for food science technicians in May 2025."
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.59",
@@ -25501,12 +25498,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The BLS combined-occupation growth of 5% over 2025—2035 is an aggregate projection; it is not a substitution date, an AI effect or a change in one laboratory's positions, and the average annual 5,900 openings are not a current hiring inventory either."
+              "The BLS combined-occupation growth of 5.1% over 2025—2035 is an aggregate projection; it is not a substitution date, an AI effect or a change in one laboratory's positions, and the average annual 5,900 openings are not a current hiring inventory either."
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "bls"
+            "bls",
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -25515,12 +25513,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Agricultural and Food Science Technicians (2025 data, 2025—2035 projection)"
+              "BLS Employment Projections Table 1.2: group 19-4010"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -25529,12 +25527,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "You cannot decide this on your own. Result determination, report signature and release are authorisation matters within the quality system and must be completed by people with the corresponding qualifications and authority; working in food testing in mainland China must also meet the testing and record requirements of the relevant food safety regulations, and tool output cannot replace review and signature."
+              "AI cannot sign a report or authorize release on behalf of authorized staff. Technicians can compare, classify and record results within their assigned duties. Check the applicable rules and authorizations separately for public evidentiary reports and production release."
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "ep"
+            "bls",
+            "rules",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25543,12 +25543,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 19-4013.00 detailed tasks and work activities"
+              "SAMR testing-agency supervision measures, Articles 2 and 12"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "ep"
+            "rules"
           ],
           "type": "prose"
         },
@@ -26775,7 +26775,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics, 'Average Annual Wages of Employed Persons in Urban Units in 2025'｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              "National Bureau of Statistics, 'Average Annual Wages of Employed Persons in Urban Units in 2025'｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
             ]
           },
           "id": "agricultural-and-food-science-technicians.china-salary.career-snapshot-primary-locale.43",
@@ -26804,7 +26804,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no sample of public job postings was obtained"
+              "An August 17, 2026 notice from the Tobacco Research Institute of CAAS advertised one dispatch-based research support position at an experimental station, outside the institute’s public staffing establishment. It required a full-time bachelor’s degree or higher and listed CNY 4,100 per month for bachelor’s graduates and CNY 5,100 for graduate degree holders, paid according to attendance. The attachment locates the role in Xichang, Sichuan, with greenhouse trial and laboratory management and field trial support. Applications closed August 28. A November 4, 2026 notice from Peking University’s dining center advertised one dispatch-based food inspector role. Duties include sampling ingredients, prepared food and tableware and keeping original test records. It requires a relevant bachelor’s degree or higher, prefers at least two years’ experience, lists pay as negotiable and gives November 13 as its application deadline."
             ]
           },
           "id": "agricultural-and-food-science-technicians.china-salary.career-snapshot-primary-locale.45",
@@ -26819,7 +26819,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No verifiable sample of public mainland China job postings was obtained, so this page does not display specific position or project quotes, and retains only the official statistical basis and qualification rules."
+              "An August 17, 2026 notice from the Tobacco Research Institute of CAAS advertised one dispatch-based research support position at an experimental station, outside the institute’s public staffing establishment. It required a full-time bachelor’s degree or higher and listed CNY 4,100 per month for bachelor’s graduates and CNY 5,100 for graduate degree holders, paid according to attendance. The attachment locates the role in Xichang, Sichuan, with greenhouse trial and laboratory management and field trial support. Applications closed August 28. A November 4, 2026 notice from Peking University’s dining center advertised one dispatch-based food inspector role. Duties include sampling ingredients, prepared food and tableware and keeping original test records. It requires a relevant bachelor’s degree or higher, prefers at least two years’ experience, lists pay as negotiable and gives November 13 as its application deadline."
             ]
           },
           "id": "agricultural-and-food-science-technicians.china-salary.career-snapshot-primary-locale.46",
@@ -26877,12 +26877,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no monthly pay or job-posting sample for this occupation in China's first-tier cities; the NBS pre-tax annual industry average cannot be converted into a monthly pay figure for this position, and the survey includes bonuses and allowances and does not cover all employed persons."
+              "An August 17, 2026 notice from the Tobacco Research Institute of CAAS advertised one dispatch-based research support position at an experimental station, outside the institute’s public staffing establishment. It required a full-time bachelor’s degree or higher and listed CNY 4,100 per month for bachelor’s graduates and CNY 5,100 for graduate degree holders, paid according to attendance. The attachment locates the role in Xichang, Sichuan, with greenhouse trial and laboratory management and field trial support. Applications closed August 28. A November 4, 2026 notice from Peking University’s dining center advertised one dispatch-based food inspector role. Duties include sampling ingredients, prepared food and tableware and keeping original test records. It requires a relevant bachelor’s degree or higher, prefers at least two years’ experience, lists pay as negotiable and gives November 13 as its application deadline."
             ]
           },
           "id": "agricultural-and-food-science-technicians.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "nbs"
+            "caas",
+            "pku"
           ],
           "type": "prose"
         },
@@ -26962,7 +26963,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics, 'Average Annual Wages of Employed Persons in Urban Units in 2025'｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              "National Bureau of Statistics, 'Average Annual Wages of Employed Persons in Urban Units in 2025'｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
             ]
           },
           "id": "agricultural-and-food-science-technicians.china-salary.career-snapshot-primary-locale.57",
@@ -27012,7 +27013,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. BLS Occupational Outlook Handbook: Agricultural and Food Science Technicians (2025 edition)｜https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm ; O*NET OnLine 19-4013.00 national wage percentiles for Food Science Technicians (BLS OEWS 2025, month 5 (May))｜https://www.onetonline.org/link/localwages/19-4013.00 ; O*NET OnLine 19-4012.00 national wage percentiles for Agricultural Technicians (BLS OEWS 2025, month 5 (May))｜https://www.onetonline.org/link/localwages/19-4012.00"
+              "U.S. BLS Occupational Outlook Handbook: Agricultural and Food Science Technicians (2025 edition)｜https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm ; O*NET OnLine 19-4013.00 national wage percentiles for Food Science Technicians (BLS OEWS May 2025)｜https://www.onetonline.org/link/localwages/19-4013.00 ; O*NET OnLine 19-4012.00 national wage percentiles for Agricultural Technicians (BLS OEWS May 2025)｜https://www.onetonline.org/link/localwages/19-4012.00"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.8",
@@ -27042,7 +27043,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "About 10% of workers earn below this level; it is not equal to a starting wage and does not represent the offer of any region or employer.; O*NET OnLine 19-4013.00 national wage percentiles for Food Science Technicians (BLS OEWS 2025, month 5 (May))｜https://www.onetonline.org/link/localwages/19-4013.00"
+              "About 10% of workers earn below this level; it is not equal to a starting wage and does not represent the offer of any region or employer.; O*NET OnLine 19-4013.00 national wage percentiles for Food Science Technicians (BLS OEWS May 2025)｜https://www.onetonline.org/link/localwages/19-4013.00"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.10",
@@ -27070,7 +27071,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The lower-quartile position in the distribution, usually below the national median, and needs to be compared together with industry and region.; O*NET OnLine 19-4013.00 national wage percentiles for Food Science Technicians (BLS OEWS 2025, month 5 (May))｜https://www.onetonline.org/link/localwages/19-4013.00"
+              "The lower-quartile position in the distribution, usually below the national median, and needs to be compared together with industry and region.; O*NET OnLine 19-4013.00 national wage percentiles for Food Science Technicians (BLS OEWS May 2025)｜https://www.onetonline.org/link/localwages/19-4013.00"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.12",
@@ -27098,7 +27099,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Half of workers earn below and half above this value; this is the national distribution position for Food Science Technicians (19-4013), not an individual's actual pay.; O*NET OnLine 19-4013.00 national wage percentiles for Food Science Technicians (BLS OEWS 2025, month 5 (May))｜https://www.onetonline.org/link/localwages/19-4013.00 ; U.S. BLS Occupational Outlook Handbook: Agricultural and Food Science Technicians (2025 edition)｜https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm"
+              "Half of workers earn below and half above this value; this is the national distribution position for Food Science Technicians (19-4013), not an individual's actual pay.; O*NET OnLine 19-4013.00 national wage percentiles for Food Science Technicians (BLS OEWS May 2025)｜https://www.onetonline.org/link/localwages/19-4013.00 ; U.S. BLS Occupational Outlook Handbook: Agricultural and Food Science Technicians (2025 edition)｜https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.14",
@@ -27154,7 +27155,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "About 10% of workers earn above this level, and this cannot be used to promise an individual's income.; O*NET OnLine 19-4013.00 national wage percentiles for Food Science Technicians (BLS OEWS 2025, month 5 (May))｜https://www.onetonline.org/link/localwages/19-4013.00"
+              "About 10% of workers earn above this level, and this cannot be used to promise an individual's income.; O*NET OnLine 19-4013.00 national wage percentiles for Food Science Technicians (BLS OEWS May 2025)｜https://www.onetonline.org/link/localwages/19-4013.00"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.18",
@@ -27197,12 +27198,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Projected to grow 5% over 2025—2035, a net increase of about 2,100 people"
+              "Projected 2025–35 growth: 5.1%, or about 2,100 additional jobs"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -27254,13 +27255,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The U.S. data on this page are national. O*NET has retired the combined code 19-4011.00 and split it into 19-4012.00 Agricultural Technicians and 19-4013.00 Food Science Technicians; the BLS Occupational Outlook 2025 edition still provides a median annual wage of $51,160 ($24.60/hour) for the combined occupation, while OEWS 2025, month 5 (May) publishes percentiles separately for the two split occupations. The wage percentiles on this page use the Food Science Technicians (19-4013) basis, and the median for Agricultural Technicians (19-4012) is listed below for comparison; neither can be converted into an individual's take-home income, nor extrapolated to mainland China."
+              "U.S. national data: BLS reports a May 2025 group median of $51,160 a year and $24.60 an hour for 19-4010. The five percentiles below cover food science technicians (19-4013). Agricultural technicians (19-4012) are shown separately."
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
+            "bls",
             "oews",
-            "bls"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27269,13 +27271,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "For the U.S. combined occupation, the median annual wage in 2025 was $51,160 ($24.60/hour, BLS Occupational Outlook 2025 edition). O*NET has retired the combined code 19-4011.00 and split it into Agricultural Technicians (19-4012) and Food Science Technicians (19-4013); OEWS 2025, month 5 (May) publishes percentiles separately for the split occupations: Food Science Technicians median $52,130/year ($25.06/hour), with the 10th/25th/75th/90th percentiles at $39,820/$46,020/$63,270/$78,820; Agricultural Technicians median $49,630/year ($23.86/hour), with the 10th/25th/75th/90th percentiles at $35,980/$40,950/$63,630/$76,480. The combined occupation had 2025 employed 40,400 people, and BLS projects growth of 5% from 2025 to 2035 (a net increase of about 2,100 people), with about 5,900 openings per year over the same period. A median means half of workers are above and half below; it is not an entry-level wage or a fixed monthly salary; openings come mainly from replacement demand created by transfers and exits. Entry to this occupation usually requires an associate degree, some employers accept a high school diploma plus relevant experience, and work is mostly in laboratories, food processing plants, farms and greenhouses."
+              "For the U.S. combined occupation, the median annual wage in 2025 was $51,160 ($24.60/hour, BLS Occupational Outlook 2025 edition). O*NET has retired the combined code 19-4011.00 and split it into Agricultural Technicians (19-4012) and Food Science Technicians (19-4013); OEWS May 2025 publishes percentiles separately for the split occupations: Food Science Technicians median $52,130/year ($25.06/hour), with the 10th/25th/75th/90th percentiles at $39,820/$46,020/$63,270/$78,820; Agricultural Technicians median $49,630/year ($23.86/hour), with the 10th/25th/75th/90th percentiles at $35,980/$40,950/$63,630/$76,480. The combined occupation had 2025 employed 40,400 people, and BLS projects growth of 5.1% from 2025 to 2035 (a net increase of about 2,100 people), with about 5,900 openings per year over the same period. A median means half of workers are above and half below; it is not an entry-level wage or a fixed monthly salary; openings come mainly from replacement demand created by transfers and exits. Entry to this occupation usually requires an associate degree, some employers accept a high school diploma plus relevant experience, and work is mostly in laboratories, food processing plants, farms and greenhouses."
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
             "oews",
-            "bls"
+            "bls",
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -27397,7 +27400,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$50,590/year (industry median in 2025, month 5 (May))"
+              "$50,590/year (industry median in May 2025)"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.35",
@@ -27439,7 +27442,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$63,270/year (industry median in 2025, month 5 (May))"
+              "$63,270/year (industry median in May 2025)"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.38",
@@ -27467,7 +27470,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Professional, scientific and technical services (Food Science Technicians)"
+              "Wholesale trade (agricultural technicians, 19-4012)"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.40",
@@ -27481,7 +27484,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$50,610/year (industry median in 2025, month 5 (May))"
+              "$54,720 per year (May 2025 industry median)"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.41",
@@ -27495,7 +27498,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS OOH Food 19-4013 median in this industry is 50,610; the ONet other 18% here cannot be treated as this industry's standalone share."
+              "Median wage for agricultural technicians in wholesale trade. The two food science industry wage figures use a separate occupation."
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.42",
@@ -27523,7 +27526,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "$52,130/year ($25.06/hour, 2025, month 5 (May), Food Science Technicians basis)"
+              "$52,130/year ($25.06/hour, May 2025, Food Science Technicians basis)"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.44",
@@ -27581,13 +27584,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wages come from the OEWS employee basis for 2025, month 5 (May): the Food 19-4013 and Agricultural 19-4012 percentiles are listed separately and not merged into a single distribution; the BLS employment 40,400/projection 5% is for the combined occupation. Scope and product are checked separately, and an individual's take-home income is not inferred."
+              "Wages come from the OEWS employee basis for May 2025: the Food 19-4013 and Agricultural 19-4012 percentiles are listed separately and not merged into a single distribution; the BLS employment 40,400/projection 5.1% is for the combined occupation. Scope and product are checked separately, and an individual's take-home income is not inferred."
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -27669,7 +27673,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wage reference period: 2025, month 5 (May); the Agricultural 19-4012 and Food 19-4013 are listed separately and not merged into one distribution."
+              "Wage reference period: May 2025; the Agricultural 19-4012 and Food 19-4013 are listed separately and not merged into one distribution."
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.cross-review-industry_period",
@@ -27727,19 +27731,19 @@
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Environmental science and protection technicians",
@@ -28525,7 +28529,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "No personality type is a threshold. The basis for judgement is observable task behaviour: whether you are willing to repeat sampling and measurement to standard methods, record truthfully and keep raw data, and stop and report when anomalies or unclear authorisation arise. You can first run a real test with one mock sampling and test-record exercise, then record your own real feelings after repetitive operations and review. These records can show whether you are willing to repeat this kind of work, but they cannot show whether you can be hired or sustain the role long term."
+              "No personality type is a threshold. The basis for judgement is observable task behaviour: whether you are willing to repeat sampling and measurement to standard methods, record truthfully and keep raw data, and stop and report when anomalies or unclear authorisation arise. You can first try a fictional paper exercise with one mock sampling and test-record exercise, then record your own real feelings after repetitive operations and review. These records can show whether you are willing to repeat this kind of work, but they cannot show whether you can be hired or sustain the role long term."
             ]
           },
           "id": "agricultural-and-food-science-technicians.fit.personality-fit-block.46",
@@ -29478,9 +29482,9 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Task statement and input material",
+                  "QH-54 scenario and records",
                   "Fixed Qinghe QH-V1 and samples A/B/C are given; moisture, impurities and status are checked only on paper, with no real operation.",
-                  "Fixed fictional Qinghe grain case, paper calculation only, not an official standard or real sampling. Method QH-V1: pre-mixed retained samples A/B/C, numbered QH-A/B/C; each sample is measured twice for moisture and impurities, recording the percentages and the raw values. Moisture = (total mass before drying − total mass after drying) ÷ (total mass before drying − empty dish mass) × 100%. For sample A, portion 1: empty dish 10.00g, before 20.00g, after 18.70g; the remaining percentages are given. The mean may be taken only when the absolute parallel difference in moisture is ≤0.30 percentage points; the example limits are moisture ≤14.00% and mean impurity ≤1.00%. A moisture 13.00/13.20, impurity 0.60/0.80%; B moisture 14.50/14.90, impurity 0.70/0.90%; C moisture 13.60/13.80, impurity 1.20/1.40%. Quality-control reference moisture 12.00±0.20%, measured 12.10%; impurity blank ≤0.10%, measured 0.00%. Test date 2026-10-02, moisture meter M1 calibration valid until 09-30, impurity weighing device B1 until 10-31; no subsequent calibration, retest or approval records. The assistant may only organise and report, and must not sign reports or release; the samples' representativeness for the whole batch is unverified.",
+                  "Fixed fictional Qinghe grain case, paper calculation only, not an official standard or real sampling. Method QH-V1: pre-mixed retained samples A/B/C, numbered QH-A/B/C; each sample is measured twice for moisture and impurities, recording the percentages and the raw values. Moisture = (total mass before drying − total mass after drying) ÷ (total mass before drying − empty dish mass) × 100%. For sample A, portion 1: empty dish 10.00g, before 20.00g, after 18.70g; the remaining percentages are given. The mean may be taken only when the absolute parallel difference in moisture is ≤0.30 percentage points; the example limits are moisture ≤14.00% and mean impurity ≤1.00%. A moisture portion 1 comes from the raw masses; portion 2 is 13.20, impurity 0.60/0.80%; B moisture 14.50/14.90, impurity 0.70/0.90%; C moisture 13.60/13.80, impurity 1.20/1.40%. Quality-control reference moisture 12.00±0.20%, measured 12.10%; impurity blank ≤0.10%, measured 0.00%. Test date 2026-10-02, moisture meter M1 calibration valid until 09-30, impurity weighing device B1 until 10-31; no subsequent calibration, retest or approval records. The assistant may only organise and report, and must not sign reports or release; the samples' representativeness for the whole batch is unverified.",
                   "Submit a numbering/method/equipment status table, recalculate moisture, the parallel difference, the mean and quality control, list stop conditions and missing records, and do not write a whole-batch release."
                 ]
               },
@@ -29488,30 +29492,30 @@
                 "id": "exercise-task",
                 "values": [
                   "Task requirements",
-                  "Following QH-V1, set out the hypothetical sample numbering and parallel record flow, and recalculate the mass fraction for A and the differences, means and quality control for A/B/C.",
-                  "Distinguish arithmetic comparison values, usable results and items awaiting authorisation; explain how overdue calibration, the B parallel out-of-tolerance result and the C impurity above threshold are reported."
+                  "Original: check moisture, impurities and quality controls for the three samples. Record evidence, usability and items to hand over.",
+                  "Variant: the same paper test instead includes a pre-existing valid M1 calibration record through October 3. Replace only that input. Which decisions change and which remain unresolved?"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference approach",
-                  "A portion 1 moisture (20.00−18.70)÷(20.00−10.00)×100%=13.00%. A parallel difference 0.20, mean 13.10%; B difference 0.40>0.30 so the mean must not be used for a determination (14.70% is only an arithmetic comparison); C difference 0.20, mean 13.70%. Impurity means A/B/C 0.70/0.80/1.30%, with the C value exceeding the example 1.00%; quality control 12.10 is within 11.80—12.20, and the blank 0.00≤0.10.",
-                  "But M1 was already past the 09-30 calibration deadline on 10-02, and a value passing quality control still cannot restore a valid status; all moisture results are suspended from use and determination, the raw values are retained and reported, and authorised personnel handle the equipment and the retest, with the cause of the B parallel out-of-tolerance result still to be checked. No calibration or retest result was given, so it is not written that calibration has been supplemented or that the retest passed. The C impurity exceeding the example threshold is only a lead for this retained sample and does not infer that the whole batch of food is unsafe; representativeness, applicability of the real method and approval are unconfirmed, and the assistant has no authority to sign reports or release."
+                  "Submit both versions independently",
+                  "Use the fictional QH-54 grain records to submit two checks and a one-page handover. Separate what can be calculated from which values can be used.",
+                  "After submitting, open “QH-54 reference (open after submitting)” in the FAQ."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "Boundary notes",
-                  "But M1 was already past the 09-30 calibration deadline on 10-02, and a value passing quality control still cannot restore a valid status; all moisture results are suspended from use and determination, the raw values are retained and reported, and authorised personnel handle the equipment and the retest, with the cause of the B parallel out-of-tolerance result still to be checked. No calibration or retest result was given, so it is not written that calibration has been supplemented or that the retest passed. The C impurity exceeding the example threshold is only a lead for this retained sample and does not infer that the whole batch of food is unsafe; representativeness, applicability of the real method and approval are unconfirmed, and the assistant has no authority to sign reports or release."
+                  "This is a record review; retain the original values. Give the fictional lab reviewer a one-page handover with evidence, gaps and owners for both versions. There is no real equipment operation, report signing or production release."
                 ]
               }
             ]
           },
           "id": "agricultural-and-food-science-technicians.path.entry-work-sample-data.1",
           "source_refs": [
-            "ep"
+            "practice-editor"
           ],
           "title": "Entry exercise: complete one testing and recording task with fictional material",
           "type": "cards"
@@ -29541,7 +29545,8 @@
                 "id": "report-summary",
                 "values": [
                   "One-page test record example",
-                  "Fictional deliverable: A 13.10%, B out of tolerance (14.70 arithmetic only), C 13.70%; impurity 0.70/0.80/1.30. With M1 overdue, all moisture results are suspended; B awaits verification of the out-of-tolerance result and the C impurity exceeds the example; there is no completed retest, sign-off or whole-batch release."
+                  "Submit two calculation tables and one page for the lab reviewer.",
+                  "List original values, method version, calibration records, decisions and open checks. Use no real samples or customer data."
                 ]
               },
               {
@@ -29620,49 +29625,49 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "Define the practice subject",
-                  "Following Qinghe QH-V1 and QH-A/B/C, list all raw values, thresholds, equipment deadlines and the assistant's authority."
+                  "Read both record sets. List sample, method, control and equipment fields."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
                   "Verify the method and quality control",
-                  "Recalculate the mass fraction for A as 13.00%, verify the g/% units, and list a parallel difference ≤0.30 and moisture ≤14.00."
+                  "Calculate A’s first moisture result from the raw masses and check units."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "Build a sample and field dictionary",
-                  "Build duplicate records for A/B/C, retain the raw moisture/impurity values and the M1/B1 status, and do not create additional tests."
+                  "Record both readings for each sample. Leave missing values blank."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Recalculate the parallel measurements and verify equipment status",
-                  "Calculate the moisture differences 0.20/0.40/0.20; the means A13.10/C13.70, with B14.70 for arithmetic comparison only."
+                  "Calculate replicate differences and means. Record arithmetic separately from usability."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Verify the fixed quality-control and anomaly rules",
-                  "Calculate the impurity means 0.70/0.80/1.30 and the reference 12.10/blank 0.00; passing quality control does not restore the M1 calibration deadline."
+                  "Check quality controls, equipment records and open questions independently."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Output charts, deviation notes and responsibility boundaries",
-                  "State that M1 is overdue so results are suspended, that the B out-of-tolerance result awaits checking and that the C impurity exceeds the example; there are no subsequent records, so it is not written that a retest has been done or that the whole batch is released."
+                  "Submit the original, the one-change variant and a one-page handover for the lab reviewer without opening the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Revise according to feedback and record it",
-                  "Revise records and calculations according to the review, keeping the reason for each change; check whether you are willing to repeat recording and anomaly reporting, without treating this as a competence certification."
+                  "Open “QH-54 reference (open after submitting)” in the FAQ. Record a difference or confirm there was none, then decide which role to investigate."
                 ]
               }
             ]
@@ -29792,7 +29797,7 @@
             "paragraphs": [
               "Typical U.S. BLS entry is an associate degree, with None for related experience and moderate-term on-the-job training; employers may also accept high school plus relevant experience. Food 19-4013 education feedback is bachelor's 32/associate 23/high school 17%, and Zone3 is a category, not a hard threshold for every position.",
               "Food testing in mainland China follows the Food Safety Law as amended in 2025: Article 84 on body accreditation (unless otherwise provided by law), Article 85 on designated inspectors testing independently, Article 86 on the official seal, the inspector's signature or stamp and the responsibility of both parties, and Article 89 on production enterprises testing their own products. Issuing data with statutory evidentiary effect to the public requires checking the accredited business scope separately, and Article 9 of the 2023 assessment criteria covers the competence of personnel and authorised signatories. Institutional qualifications, an individual's method competence, sign-off and production release are checked separately and cannot be applied across the board to all agricultural technology tasks.",
-              "Completing training only demonstrates learning, and cannot stand in for body accreditation, method competence assessment, inspector designation, report authorisation or production release. The jurisdiction and duties are checked separately.",
+              "Check field trial records, in-house quality checks and legally evidentiary reports issued to the public separately. Where the testing-agency rules apply to a public report, the agency stamps it and an authorized signatory issues it within their technical competence. The agency keeps original records and reports for at least six years. A job title or completed calculation confers neither signing nor production-release authority.",
               "The example uses only fixed fictional material and calculations, with no actual operation of equipment, sampling, heating or use of reagents, and does not constitute a real result or release."
             ]
           },
@@ -29800,7 +29805,9 @@
           "source_refs": [
             "bls",
             "editor",
-            "r2-pay-1"
+            "r2-pay-1",
+            "rules",
+            "onet-wages"
           ],
           "title": "Notes on qualification and authorisation boundaries",
           "type": "notice"
@@ -29810,16 +29817,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no verifiable mainland China public job-posting sample, so no specific position quotes or pay structures are displayed. The verifiable entry requirements are split by source: on the U.S. side they follow the BLS Occupational Outlook and the O*NET education and experience survey; on the mainland China side they must meet the Food Safety Law of the People's Republic of China requirements for food testing qualifications and inspectors.",
-              "Job titles may differ by organisation (for example agricultural technician, food inspector, laboratory technician, quality-control technician); verification should be based on actual duties, method requirements and the scope of authorisation, not on the title alone."
+              "An August 17, 2026 notice from the Tobacco Research Institute of CAAS advertised one dispatch-based research support position at an experimental station, outside the institute’s public staffing establishment. It required a full-time bachelor’s degree or higher and listed CNY 4,100 per month for bachelor’s graduates and CNY 5,100 for graduate degree holders, paid according to attendance. The attachment locates the role in Xichang, Sichuan, with greenhouse trial and laboratory management and field trial support. Applications closed August 28.",
+              "A November 4, 2026 notice from Peking University’s dining center advertised one dispatch-based food inspector role. Duties include sampling ingredients, prepared food and tableware and keeping original test records. It requires a relevant bachelor’s degree or higher, prefers at least two years’ experience, lists pay as negotiable and gives November 13 as its application deadline."
             ]
           },
           "id": "agricultural-and-food-science-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "bls",
-            "editor",
-            "r2-pay-1",
-            "onet-wages-cross-repair"
+            "caas",
+            "pku"
           ],
           "title": "Notes on the recruitment sample and job titles",
           "type": "notice"
@@ -31015,10 +31020,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS Agricultural and Food Science Technicians (2025 data, 2025—2035 projection)",
+                "entity": "BLS Employment Projections Table 1.2: 19-4010, 19-4012 and 19-4013",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET food 19-4013 tasks and work context",
@@ -31030,7 +31035,7 @@
                 "entity": "NBS2025 urban unit industry/position average wage",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "entity": "O*NET food 19-4013 occupation summary",
@@ -31093,7 +31098,8 @@
             "bls",
             "ep",
             "nbs",
-            "onet"
+            "onet",
+            "ep-new"
           ],
           "type": "links"
         },
@@ -31102,13 +31108,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no precise occupational employment projection or job-change success rate for mainland China. The U.S. BLS combined occupation had 2025 employment of 40,400, with growth of 5% over 2025—2035, a net increase of about 2,100 and about 5,900 openings per year including replacement demand, and this cannot be extended to the single food occupation, to a region, or to an individual's hiring."
+              "For the U.S. BLS group 19-4010, employment was about 40,400 in 2025 and is projected at 42,400 in 2035. BLS reports a net increase of about 2,100 (5.1%) and about 5,900 annual openings. Agricultural technicians (19-4012) go from about 19,500 to 20,600, with 2,800 annual openings; food science technicians (19-4013) from 20,800 to 21,800, with 3,000. Figures are rounded independently; openings include replacement demand. A comparable mainland projection was not verified. The postings help compare duties only."
             ]
           },
           "id": "agricultural-and-food-science-technicians.market-signals.market-signal-card.8",
           "source_refs": [
-            "bls",
-            "nbs"
+            "ep-new",
+            "caas",
+            "pku"
           ],
           "type": "prose"
         },
@@ -31299,12 +31306,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Growth of 5%; a net increase of about 2,100 people; about 5,900 openings per year"
+              "Growth of 5.1%; a net increase of about 2,100 people; about 5,900 openings per year"
             ]
           },
           "id": "agricultural-and-food-science-technicians.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls"
+            "bls",
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -31416,7 +31424,7 @@
           },
           "id": "agricultural-and-food-science-technicians.market-signals.market-signal-card.30",
           "source_refs": [
-            "bls"
+            "ep-new"
           ],
           "type": "prose"
         },
@@ -31894,6 +31902,15 @@
                 "id": "agricultural-and-food-science-technicians.faq.10",
                 "question": "Can agricultural and food science technicians determine results or sign reports themselves?",
                 "question_key": "career.faq.agricultural-and-food-science-technicians.result-authority"
+              },
+              {
+                "answer": "A portion 1 moisture (20.00−18.70)÷(20.00−10.00)×100%=13.00%. A parallel difference 0.20, mean 13.10%; B difference 0.40>0.30 so the mean must not be used for a determination (14.70% is only an arithmetic comparison); C difference 0.20, mean 13.70%. Impurity means A/B/C 0.70/0.80/1.30%, with the C value exceeding the example 1.00%; quality control 12.10 is within 11.80—12.20, and the blank 0.00≤0.10. But M1 was already past the 09-30 calibration deadline on 10-02, and a value passing quality control still cannot restore a valid status; all moisture results are suspended from use and determination, the raw values are retained and reported, and authorised personnel handle the equipment and the retest, with the cause of the B parallel out-of-tolerance result still to be checked. No calibration or retest result was given, so it is not written that calibration has been supplemented or that the retest passed. The C impurity exceeding the example threshold is only a lead for this retained sample and does not infer that the whole batch of food is unsafe; representativeness, applicability of the real method and approval are unconfirmed, and the assistant has no authority to sign reports or release. The variant changes only the pre-existing valid M1 calibration record. A and C now have usable moisture results for this paper exercise: each replicate difference is within tolerance and each mean is below the fictional moisture limit. B still differs by 0.40 percentage points; its mean cannot support a decision, so hand the discrepancy to the lab reviewer. C’s 1.30% impurity flag is unchanged. Neither version supports report signing or a batch decision; keep the original values and evidence. B1 is still valid on the test date. Under the fictional impurity limit, A and B do not exceed the limit and C does. Report only what the supplied retained samples show.",
+                "id": "agricultural-and-food-science-technicians.faq.11",
+                "question": "QH-54 reference (open after submitting)",
+                "question_key": "career.faq.agricultural-and-food-science-technicians.q11",
+                "source_refs": [
+                  "practice-editor"
+                ]
               }
             ]
           },
@@ -31928,7 +31945,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational tasks and work context: O*NET OnLine 19-4013.00; employment and wages: BLS Occupational Outlook 2025 edition (2025—2035 projection) and OEWS 2025, month 5 (May); China wage basis: National Bureau of Statistics 2025 annual average wage of employed persons in urban units; mainland China food testing requirements: Food Safety Law of the People's Republic of China."
+              "Occupational tasks and work context: O*NET OnLine 19-4013.00; employment and wages: BLS Occupational Outlook 2025 edition (2025—2035 projection) and OEWS May 2025; China wage basis: National Bureau of Statistics 2025 annual average wage of employed persons in urban units; mainland China food testing requirements: Food Safety Law of the People's Republic of China."
             ]
           },
           "id": "agricultural-and-food-science-technicians.sources.source-card.2",
@@ -31944,12 +31961,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-08 (nine-section revision limited to this round)"
+              "November 2026: rechecked job examples, U.S. occupational scope and the paper exercise."
             ]
           },
           "id": "agricultural-and-food-science-technicians.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "caas",
+            "pku",
+            "ep-new",
+            "practice-editor"
           ],
           "type": "prose"
         },
@@ -31991,25 +32011,25 @@
                 "entity": "Big Five personality test",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram personality test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "See the agricultural and food science technicians career page",
@@ -32063,7 +32083,7 @@
                 ],
                 "evidence_type": "Official occupational outlook",
                 "id": "bls",
-                "limitation": "Combined-occupation national basis; it contains no mainland China data and provides no individual wage quote.",
+                "limitation": "Combined-occupation national basis; it contains no mainland China data and provides no individual wage quote. The Occupational Outlook Handbook rounds the growth rate; see Employment Projections Table 1.2 for the 5.1% figure.",
                 "market": "United States",
                 "name": "U.S. BLS Occupational Outlook Handbook: Agricultural and Food Science Technicians (2025 edition)",
                 "period": "2025 edition; 2025—2035 projection; accessed 2026-10-02",
@@ -32100,8 +32120,8 @@
                 "id": "oews",
                 "limitation": "OEWS does not cover the self-employed; a percentile is a statistical position, not an individual's take-home income or a starting-pay promise.",
                 "market": "United States",
-                "name": "BLS OEWS 2025, month 5 (May), as shown by O*NET: national wage percentiles for 19-4013.00",
-                "period": "BLS OEWS 2025, month 5 (May); accessed 2026-10-02",
+                "name": "BLS OEWS May 2025, as shown by O*NET: national wage percentiles for 19-4013.00",
+                "period": "BLS OEWS May 2025; accessed 2026-10-02",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/19-4013.00"
@@ -32113,29 +32133,29 @@
                   "Urban non-private units: manufacturing 113,594 yuan/year",
                   "Professional and technical personnel in enterprises above a designated size: 155,491 yuan/year"
                 ],
-                "evidence_type": "Official wage statistics",
+                "evidence_type": "primary_document",
                 "id": "nbs",
                 "limitation": "Broad-basis annual average wages by industry sector and position category, not the wage distribution of this single occupation, city or unit type.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics, 'Average Annual Wages of Employed Persons in Urban Units in 2025'",
-                "period": "2025; published 2026-05-15; accessed 2026-10-02",
+                "period": "2025 wages; published May 16, 2026",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "Manufacturing accounts for about 52%",
-                  "Agriculture, forestry, animal husbandry and fishery accounts for about 23%",
-                  "Other industries (including professional and technical services) account for about 25%"
+                  "Manufacturing 53%",
+                  "Agriculture, forestry, fishing and hunting 29%",
+                  "Other industries 18%"
                 ],
                 "evidence_type": "Official industry distribution",
                 "id": "cnclass",
                 "limitation": "Only gives the industry employment share, without industry wages; it cannot be used to infer China's industry structure.",
                 "market": "United States",
                 "name": "O*NET 19-4013.00 industry distribution",
-                "period": "The current page states no statistical year; accessed 2026-10-02",
+                "period": "The industry subpage does not label the reference period",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-4013.00"
@@ -32143,8 +32163,8 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "The current directory lists 3 certifications: AMSA Food Safety & Science, Approved Chemist, Certified Food Scientist",
-                  "Names and issuing organisations are identified; eligibility conditions and employer recognition have not been checked item by item"
+                  "O*NET directory of related U.S. credentials.",
+                  "Check whether the target employer recognizes a credential."
                 ],
                 "evidence_type": "Official certification discovery",
                 "id": "privacy",
@@ -32175,8 +32195,8 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "Microsoft Excel about 14%, Microsoft Office about 11%, Word about 7%, Outlook about 7% and PowerPoint about 6%",
-                  "The remaining tools (Linux, Access, SQL Server, Visio, SAP, SAS) have no published share"
+                  "Technology mentions in 2025 job postings.",
+                  "Check the target employer’s records system and methods."
                 ],
                 "evidence_type": "Official technology list",
                 "id": "operations",
@@ -32278,8 +32298,8 @@
                 "id": "arxiv",
                 "limitation": "Serves as a comparison basis for the agricultural technician direction; it is used alongside the food science technicians basis and cannot be merged into a single distribution.",
                 "market": "United States",
-                "name": "O*NET OnLine 19-4012.00 national wage percentiles (BLS OEWS 2025, month 5 (May))",
-                "period": "BLS OEWS 2025, month 5 (May); accessed 2026-10-02",
+                "name": "O*NET OnLine 19-4012.00 national wage percentiles (BLS OEWS May 2025)",
+                "period": "BLS OEWS May 2025; accessed 2026-10-02",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/19-4012.00"
@@ -32385,14 +32405,14 @@
                 "accessed_at": "2026-10-02",
                 "details": [
                   "Combined occupation: median annual wage of $51,160 in 2025 ($24.60/hour)",
-                  "Agricultural technicians $49,630; food science technicians $52,130 (2025, month 5 (May))"
+                  "Agricultural technicians $49,630; food science technicians $52,130 (May 2025)"
                 ],
                 "evidence_type": "Official occupation section",
                 "id": "census",
                 "limitation": "This section gives the median annual wage for the combined occupation and the two split occupations; it does not distinguish region, industry or employer.",
                 "market": "United States",
                 "name": "U.S. BLS Occupational Outlook Handbook: Agricultural and Food Science Technicians · Pay",
-                "period": "2025, month 5 (May); accessed 2026-10-02",
+                "period": "May 2025; accessed 2026-10-02",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm#tab-5"
@@ -32405,7 +32425,7 @@
                 ],
                 "evidence_type": "Official occupation section",
                 "id": "msresearch",
-                "limitation": "This section is a national aggregate projection and cannot be used to infer an individual's probability of unemployment or regional demand.",
+                "limitation": "This section is a national aggregate projection and cannot be used to infer an individual's probability of unemployment or regional demand. The Occupational Outlook Handbook rounds the growth rate; see Employment Projections Table 1.2 for the 5.1% figure.",
                 "market": "United States",
                 "name": "U.S. BLS Occupational Outlook Handbook: Agricultural and Food Science Technicians · Job Outlook",
                 "period": "The 2025—2035 projection; accessed 2026-10-02",
@@ -32448,7 +32468,7 @@
               {
                 "accessed_at": "2026-10-08",
                 "details": [
-                  "Food 19-4013: manufacturing 53%; agriculture, forestry, animal husbandry and fishery 29%; other industries 18%.",
+                  "Food science technicians 19-4013: manufacturing 53%, agriculture, forestry, fishing and hunting 29%, other industries 18%.",
                   "The current page states no data year; it gives only the industry employment shares for the food branch occupation, not the structure of all agricultural technicians."
                 ],
                 "evidence_type": "Official industry distribution",
@@ -32456,7 +32476,7 @@
                 "limitation": "Only gives the industry employment share, without industry wages; it cannot be used to infer China's industry structure.",
                 "market": "United States",
                 "name": "O*NET 19-4013.00 industry distribution",
-                "period": "The current industry distribution page states no data year; checked 2026-10-08",
+                "period": "The industry subpage does not label the reference period",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-4013.00"
@@ -32465,14 +32485,14 @@
                 "accessed_at": "2026-10-08",
                 "details": [
                   "Combined occupation: median annual wage of $51,160 in 2025 ($24.60/hour)",
-                  "Agricultural technicians $49,630; food science technicians $52,130 (2025, month 5 (May))"
+                  "Agricultural technicians $49,630; food science technicians $52,130 (May 2025)"
                 ],
                 "evidence_type": "Official occupation section",
                 "id": "census-cross-repair",
                 "limitation": "Pay gives the median for the combined occupation and the two sub-occupations, and lists the wages of each sub-occupation in some major industries; it does not provide quotes for all regions, industries or employers.",
                 "market": "United States",
                 "name": "U.S. BLS Occupational Outlook Handbook: Agricultural and Food Science Technicians · Pay",
-                "period": "2025, month 5 (May); accessed 2026-10-02",
+                "period": "May 2025; accessed 2026-10-02",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm#tab-5"
@@ -32504,11 +32524,86 @@
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "name": "FermatMind AI task-impact estimate estimation method v1",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "An August 17, 2026 notice from the Tobacco Research Institute of CAAS advertised one dispatch-based research support position at an experimental station, outside the institute’s public staffing establishment. It required a full-time bachelor’s degree or higher and listed CNY 4,100 per month for bachelor’s graduates and CNY 5,100 for graduate degree holders, paid according to attendance. The attachment locates the role in Xichang, Sichuan, with greenhouse trial and laboratory management and field trial support. Applications closed August 28."
+                ],
+                "evidence_type": "primary_document",
+                "id": "caas",
+                "limitation": "One historical employer example, not national pay.",
+                "market": "Mainland China",
+                "name": "CAAS Tobacco Research Institute: experimental-station research support",
+                "period": "2026-08-17",
+                "publisher": "Tobacco Research Institute, Chinese Academy of Agricultural Sciences",
+                "scope": "recruitment_proxy",
+                "url": "https://tric.caas.cn/bsdt/ggl/5dba1ab2d6cb428599a38eca16f3f65d.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A November 4, 2026 notice from Peking University’s dining center advertised one dispatch-based food inspector role. Duties include sampling ingredients, prepared food and tableware and keeping original test records. It requires a relevant bachelor’s degree or higher, prefers at least two years’ experience, lists pay as negotiable and gives November 13 as its application deadline."
+                ],
+                "evidence_type": "primary_document",
+                "id": "pku",
+                "limitation": "One employer listing without a numeric salary.",
+                "market": "Mainland China",
+                "name": "Peking University dining center: food inspector posting",
+                "period": "2026-11-04",
+                "publisher": "Peking University Human Resources",
+                "scope": "recruitment_proxy",
+                "url": "https://hr.pku.edu.cn/rczp/xzjf/ldhtzp/e46f1d9704674292aafe3cd3207f8a50.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Check field trial records, in-house quality checks and legally evidentiary reports issued to the public separately. Where the testing-agency rules apply to a public report, the agency stamps it and an authorized signatory issues it within their technical competence. The agency keeps original records and reports for at least six years. A job title or completed calculation confers neither signing nor production-release authority."
+                ],
+                "evidence_type": "primary_document",
+                "id": "rules",
+                "limitation": "Articles 2, 12 and 13; limited to applicable reports issued to the public as evidence.",
+                "market": "Mainland China",
+                "name": "Testing and Inspection Agency Supervision Measures",
+                "period": "Amended March 18, 2025",
+                "publisher": "State Administration for Market Regulation",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_bff8f35d8f114acca7643bddd77e9505.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "For the U.S. BLS group 19-4010, employment was about 40,400 in 2025 and is projected at 42,400 in 2035. BLS reports a net increase of about 2,100 (5.1%) and about 5,900 annual openings. Agricultural technicians (19-4012) go from about 19,500 to 20,600, with 2,800 annual openings; food science technicians (19-4013) from 20,800 to 21,800, with 3,000. Figures are rounded independently; openings include replacement demand."
+                ],
+                "evidence_type": "primary_document",
+                "id": "ep-new",
+                "limitation": "2025 employment and 2035 projections, rather than live vacancies.",
+                "market": "United States",
+                "name": "BLS Employment Projections Table 1.2: 19-4010, 19-4012 and 19-4013",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Use the fictional QH-54 grain records to submit two checks and a one-page handover. Separate what can be calculated from which values can be used."
+                ],
+                "evidence_type": "editorial_design",
+                "id": "practice-editor",
+                "limitation": "Fictional paper exercise; no method approval or work authorization.",
+                "market": "Editorial exercise",
+                "name": "FermatMind Editorial: QH-54 paper exercise",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "contextual",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -35849,7 +35944,7 @@
       },
       "hero": {
         "h1": "Agricultural and food science technicians",
-        "quick_answer": "Agricultural and food science technicians turn field, plant, animal or food samples into reviewable test records and results; the core abilities are sampling to protocol, maintaining equipment, controlling quality, and being explicit about the boundaries of interpretation and signature.",
+        "quick_answer": "Agricultural technicians track crop or animal samples against a trial protocol. Food science technicians prepare food samples and check data and quality controls. Both keep the identifiers, raw values, methods and handover notes that let someone else review the work.",
         "title": "Agricultural and food science technicians"
       },
       "market_signal_card": {
@@ -35977,7 +36072,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep-new",
             "value": {
               "$item": "agricultural-and-food-science-technicians.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36041,7 +36136,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "bls",
+            "id": "ep-new",
             "label": {
               "$link": "agricultural-and-food-science-technicians.market-signals.market-signal-card.7",
               "block": "market-signals",
@@ -37415,7 +37510,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI task-impact estimate",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of work directions",
       "fit": "Occupation fit guide",
@@ -37451,7 +37546,7 @@
         "market": "United States",
         "measure": "Wage 10th percentile (food science technicians 19-4013)",
         "occupation_scope": "Food science technicians (19-4013, U.S. national employees)",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37463,7 +37558,7 @@
         "market": "United States",
         "measure": "Wage 25th percentile (food science technicians 19-4013)",
         "occupation_scope": "Food science technicians (19-4013, U.S. national employees)",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37475,7 +37570,7 @@
         "market": "United States",
         "measure": "Median wage (food science technicians 19-4013)",
         "occupation_scope": "Food science technicians (19-4013, U.S. national employees)",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37487,7 +37582,7 @@
         "market": "United States",
         "measure": "Wage 75th percentile (food science technicians 19-4013)",
         "occupation_scope": "Food science technicians (19-4013, U.S. national employees)",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37499,7 +37594,7 @@
         "market": "United States",
         "measure": "Wage 90th percentile (food science technicians 19-4013)",
         "occupation_scope": "Food science technicians (19-4013, U.S. national employees)",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37513,19 +37608,19 @@
         "occupation_scope": "Agricultural and food science technicians",
         "period": "2025",
         "source_refs": [
-          "bls"
+          "ep-new"
         ]
       },
       {
         "derivation": null,
-        "display_value": "+5%",
+        "display_value": "+5.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth rate and official net change",
         "occupation_scope": "Agricultural and food science technicians",
         "period": "2025—2035",
         "source_refs": [
-          "bls"
+          "ep-new"
         ]
       },
       {
@@ -37537,7 +37632,7 @@
         "occupation_scope": "Agricultural and food science technicians",
         "period": "Average over 2025—2035",
         "source_refs": [
-          "bls"
+          "ep-new"
         ]
       },
       {
@@ -37547,7 +37642,7 @@
         "market": "United States",
         "measure": "Food 19-4013: median wage in food manufacturing",
         "occupation_scope": "Food science technicians 19-4013, employees in each sub-industry",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37559,19 +37654,19 @@
         "market": "United States",
         "measure": "Food 19-4013: median wage in beverage and tobacco product manufacturing",
         "occupation_scope": "Food science technicians 19-4013, employees in each sub-industry",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "$50,610/year",
+        "display_value": "$54,720 per year",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "United States",
-        "measure": "Food 19-4013: median wage in professional, scientific and technical services",
-        "occupation_scope": "Food science technicians 19-4013, employees in each sub-industry",
-        "period": "2025, month 5 (May)",
+        "measure": "Agricultural technicians 19-4012: wholesale trade median wage",
+        "occupation_scope": "Agricultural technicians 19-4012, wholesale trade employees",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37701,7 +37796,7 @@
         "display_value": "$49,630/year",
         "fact_id": "us-ag-wage",
         "market": "United States",
-        "measure": "2025, month 5 (May) median annual wage",
+        "measure": "May 2025 median annual wage",
         "occupation_scope": "Agricultural technicians 19-4012",
         "period": "BLS OOH updated 2026-08-27; retrieved 2026-08-31",
         "source_refs": [
@@ -37713,7 +37808,7 @@
         "display_value": "$52,130/year",
         "fact_id": "us-food-wage",
         "market": "United States",
-        "measure": "2025, month 5 (May) median annual wage",
+        "measure": "May 2025 median annual wage",
         "occupation_scope": "Food science technicians 19-4013",
         "period": "BLS OOH updated 2026-08-27; retrieved 2026-08-31",
         "source_refs": [
@@ -37722,14 +37817,14 @@
       },
       {
         "derivation": null,
-        "display_value": "Growth of 5% over 2025—2035, with about 5,900 openings per year on average",
+        "display_value": "Growth of 5.1% over 2025—2035, with about 5,900 openings per year on average",
         "fact_id": "market-outlook",
         "market": "United States",
         "measure": "Employment growth rate and average annual job openings",
         "occupation_scope": "Combined agricultural and food science technicians occupation",
         "period": "BLS OOH updated 2026-08-27; retrieved 2026-08-31",
         "source_refs": [
-          "bls"
+          "ep-new"
         ]
       },
       {
@@ -37758,12 +37853,12 @@
       },
       {
         "derivation": null,
-        "display_value": "$52,130/year (2025, month 5 (May), food science technicians 19-4013 basis)",
+        "display_value": "$52,130/year (May 2025, food science technicians 19-4013 basis)",
         "fact_id": "us-wage",
         "market": "United States",
         "measure": "Occupational wage or availability boundaries",
         "occupation_scope": "Agricultural and food science technicians",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37809,7 +37904,7 @@
         "display_value": "33%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "AI task-impact estimate (editorial estimate)",
         "occupation_scope": "Agricultural and food science technicians",
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
@@ -37823,12 +37918,12 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI task-impact estimate"
     },
     "badges": [
-      "RIASEC · RCI",
+      "Interests: agricultural RIC / food RCI",
       "Agricultural technology / food testing",
-      "Sampling and release responsibility · AI exploration"
+      "Samples, quality checks and handovers"
     ],
     "metrics": [
       {
@@ -37867,17 +37962,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What agricultural and food science technicians do, what abilities and qualifications they need, what pay and prospects look like, and which tasks AI will change; source scope and data gaps are retained."
+      "text": "Compare field trials with food testing, read mainland job examples and U.S. pay by role, and try a fictional grain sample handover with a missing record."
     },
     "title": {
       "availability": "available",
-      "text": "Agricultural and food science technicians"
+      "text": "Agricultural and Food Science Technicians: Field Trials, Food Testing and Careers | FermatMind"
     }
   },
-  "source_content_sha256": "228e633f7738b580ef1e53704dcaa3412f976d08a3dd6bf5a5d75e9fee44abfe",
+  "source_content_sha256": "8ea2d8d61f4522380eb3f44f968bc37643035c57b55deb5c8cac9fe7b38d2b0e",
   "subject": {
     "canonical_slug": "agricultural-and-food-science-technicians",
     "name": "Agricultural and food science technicians",
-    "summary": "Agricultural and food science technicians turn field, plant, animal or food samples into reviewable test records and results; the core abilities are sampling to protocol, maintaining equipment, controlling quality, and being explicit about the boundaries of interpretation and signature."
+    "summary": "Agricultural technicians track crop or animal samples against a trial protocol. Food science technicians prepare food samples and check data and quality controls. Both keep the identifiers, raw values, methods and handover notes that let someone else review the work."
   }
 }

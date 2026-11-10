@@ -167,6 +167,9 @@
       "item:metal-and-plastic-machine-workers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:metal-and-plastic-machine-workers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:metal-and-plastic-machine-workers.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12959,6 +12962,21 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Order M2 calls for revision R3. Record A identifies the part and measurement but cites R2. B cites R3 but has no measurement. List the two questions for the first-piece record owner."
+            ]
+          },
+          "id": "metal-and-plastic-machine-workers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check a CNC first-piece record",
+          "type": "notice"
         }
       ]
     },
@@ -15418,6 +15436,13 @@
         "id": "metal-and-plastic-machine-workers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "metal-and-plastic-machine-workers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15659,7 +15684,7 @@
       "text": "NC machine tool operators: work content, U.S. wages, and entry"
     }
   },
-  "source_content_sha256": "c4fac599e96860dce55903614070dd30899693adb80adb05507d1e5f03f36c02",
+  "source_content_sha256": "2e35c4313beb056bce6fff78a7e7bb0cd94dfbcaae854fb865d84318506a5811",
   "subject": {
     "canonical_slug": "metal-and-plastic-machine-workers",
     "name": "Computer numerically controlled tool operators",

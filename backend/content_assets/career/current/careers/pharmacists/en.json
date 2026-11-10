@@ -23017,14 +23017,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Next, verify the target jurisdiction's pharmacy education, licences, hospital or retail institutional training, and role authority; a fictional exercise does not represent clinical judgment or real prescription review."
+              "Paper check | Compare two fictional prescription covers with no medication details. Record the original IDs and timestamps for the pharmacist to resolve the version conflict. "
             ]
           },
           "id": "pharmacists.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "cnclass",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23333,14 +23331,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "The O*NET United States occupational classification is not the same as China's licensed pharmacist or pharmacy professional title; eligibility and prescribing authority are verified separately."
+              "Pharmacists review prescriptions, dispense or oversee dispensing, and counsel patients. A prescription discrepancy calls for checking the record and contacting the appropriate clinician through the workplace process. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "pharmacists.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "cnclass",
-            "editor"
+            "transfer-onet-29-1051.00"
           ],
           "type": "prose"
         },
@@ -24453,16 +24449,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verified pharmacist generative AI adoption rate, overall substitution rate, or disappearance year. The ASHP 2025 report that nearly three quarters of surveyed hospitals use EHR automatic verification for some orders involves rule-based algorithms and cannot be taken as a pharmacist GenAI adoption rate or general exemption from review. Prescription review and patient medication responsibility are verified per jurisdiction and organizational policy. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare two fictional prescription covers with no medication details. Record the original IDs and timestamps for the pharmacist to resolve the version conflict."
             ]
           },
           "id": "pharmacists.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "oews",
-            "census",
-            "msresearch",
-            "cnclass",
-            "editor"
+            "transfer-onet-29-1051.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32864,6 +32857,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-29-1051.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 29-1051.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/29-1051.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38116,10 +38136,10 @@
       "text": "Pharmacists"
     }
   },
-  "source_content_sha256": "eca82818fd972fb5cdfc17d6aa4c949a9785c6b4e6db912553865e41702d4317",
+  "source_content_sha256": "e811efc763dff6ae4a9f2bed77528102e6ddf8022d5daf2b6c8072da9d439c81",
   "subject": {
     "canonical_slug": "pharmacists",
     "name": "Pharmacists",
-    "summary": "Pharmacists (O*NET 29-1051.00) review prescriptions for accuracy and appropriateness, verify patient information, allergy history, drugs, and directions, dispense or supervise dispensing, perform the final check, explain medication information to patients, and communicate anomalies to the care team. The specific scope of practice, prescription review, and dispensing authority are determined by local law, licences, and organizational policy; this page does not provide individual treatment advice."
+    "summary": "Pharmacists review prescriptions, dispense or oversee dispensing, and counsel patients. A prescription discrepancy calls for checking the record and contacting the appropriate clinician through the workplace process."
   }
 }

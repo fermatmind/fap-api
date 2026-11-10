@@ -38,6 +38,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-a49-changdu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a49-huangpu": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -1605,7 +1611,7 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1677,7 +1683,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -22566,7 +22572,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Verify through a paper work task:"
+              "Use fictional work order VE49 for a one-page handoff. Compare customer authorization, acceptance checks and device serial numbers, then review the variant."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -23652,7 +23658,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "8,600 employed in 2025; decline of 15% from 2025–2035, with 400 annual openings (including replacements). Main industries are retail trade and other services, rather than shop/regional recruitment."
+              "8,600 employed in 2025; decline of 14.5% from 2025–2035, with 400 annual openings (including replacements). Main industries are retail trade and other services, rather than shop/regional recruitment."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
@@ -24394,7 +24400,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "49-2096: 8,600 employed in 2025, decline of 15% from 2025–2035, with 400 annual openings, including replacements."
+              "49-2096: 8,600 employed in 2025, decline of 14.5% from 2025–2035, with 400 annual openings, including replacements."
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
@@ -26120,12 +26126,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: do not substitute a single recruitment offer for occupational wages"
+              "Both figures are historical employer quotes. Ask about current vacancies, field service, base pay and commission. Comparable mainland China occupation-level wage data remain unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "nbs"
+            "a49-huangpu",
+            "a49-changdu"
           ],
           "type": "prose"
         },
@@ -26805,7 +26812,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Stay alert to overall vehicle electrical and safety systems; prefer stopping once to working beyond scope."
+              "Use fictional work order VE49 for a one-page handoff. Compare customer authorization, acceptance checks and device serial numbers, then review the variant."
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -27855,7 +27862,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This page is a career exploration reference, without constituting operating instructions, manufacturer authorization, or hiring bases; actual requirements follow manufacturer procedures, applicable regulations, and job advertisements."
+              "Use fictional work order VE49 for a one-page handoff. Compare customer authorization, acceptance checks and device serial numbers, then review the variant."
             ]
           },
           "id": "actors.display.personality_fit_block.questions.next.answer",
@@ -28597,14 +28604,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Entering this occupation involves more than enrolling in a training course: first check target-region shops’ role definitions, education and training requirements, vehicle model and diagnostic equipment experience, brand certifications, and employer conditions, recording advertisement dates and whether hiring continues."
+              "Guangzhou Saiwei Huaxun Information Technology quoted CNY 4,000–9,000 per month for GPS equipment specialist/electrician work. The Guangzhou field role covered installation, setup and maintenance of GPS units, dashcams, video monitoring and navigation equipment. The employer asked for basic automotive circuitry knowledge and preferred an electrician certificate. A bulletin published by the Changdu government listed GPS installation and maintenance work at Tibet Kangda Beidou Technology, quoting CNY 4,000–6,000 per month plus commission and accepting apprentices. Both figures are historical employer quotes. Ask about current vacancies, field service, base pay and commission. Comparable mainland China occupation-level wage data remain unavailable."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "a49-huangpu",
+            "a49-changdu"
           ],
           "type": "notice"
         },
@@ -28725,29 +28731,29 @@
               {
                 "id": "scene",
                 "values": [
-                  "Work sample one: paper work plan",
-                  "Prepare an installation plan for a fictional vehicle model, including disassembly/refitting sequences, routing paths, and checkpoints."
+                  "Work order handoff",
+                  "Keep both versions of VE49."
                 ]
               },
               {
                 "id": "rework",
                 "values": [
-                  "Work sample two: wiring and measurement records",
-                  "Record vehicle model information versions, pin definitions, measured values, and check results."
+                  "Variant record",
+                  "Show the changed row and outstanding actions."
                 ]
               },
               {
                 "id": "materials",
                 "values": [
-                  "Work sample three: troubleshooting record",
-                  "Describe a fictional fault investigation using symptoms–hypotheses–verification–conclusions."
+                  "Paper materials",
+                  "Use only the fictional records provided."
                 ]
               },
               {
                 "id": "reflection",
                 "values": [
-                  "Work sample four: functional verification and vehicle handover records",
-                  "Verify each checklist item and specify modifications, customer confirmation, and warranty boundaries."
+                  "Reflection",
+                  "Identify the evidence that changed a decision."
                 ]
               }
             ]
@@ -28977,32 +28983,34 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Material one: fictional vehicle model configuration and wiring table",
-                  "Provides vehicle model versions, interface definitions, and constraints as exercise inputs.",
-                  "Exercise outputs: list work sequences, checkpoints, and unresolved items."
+                  "Three fictional VE49 records",
+                  "V16: The customer authorized only a dashcam. The order also lists fleet tracking. The additional authorization field is blank.",
+                  "V17: The customer authorized the camera. Installation is recorded. The image acceptance field is blank.",
+                  "V18: The customer authorized tracking. The issue sheet shows serial TR-18. The installed-device record shows TR-81."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Material two: operating procedure and criterion excerpts",
-                  "Provides requirements for disassembly/refitting processes, harness securing, and functional criteria.",
-                  "Exercise output: specify this work’s criterion sources and applicability scopes."
+                  "One-page handoff",
+                  "Record what is confirmed, what needs review and who takes over. The service adviser handles customer authorization. Quality verifies acceptance and equipment records and signs off on handover.",
+                  "Single-change variant: V17’s image acceptance field now reads “image clear.” Quality sign-off is still blank. Show the row that changes."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Material three: measurement and functional records (fictional)",
-                  "Provides power supply and signal readings and functional test results, including one anomaly and one missing condition.",
-                  "Exercise outputs: identify anomalous items and items with missing conditions, and specify retest requirements."
+                  "Finish independently",
+                  "Submit the original and variant on day six.",
+                  "On day seven, open “VE49 vehicle electronics handoff reference (open after day six)” under Common questions and sources."
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "Material four: vehicle handover and boundary explanation",
-                  "Lists reference deliverables and scopes that must not be exceeded (excluding airbags, anti-theft systems, and high-voltage systems)."
+                  "Exercise boundary",
+                  "Review the fictional records on paper.",
+                  "Follow workplace procedures for actual installation, acceptance and handover."
                 ]
               }
             ]
@@ -29013,7 +29021,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "Entry case materials",
+          "title": "VE49 fictional vehicle equipment handoff",
           "type": "cards"
         },
         {
@@ -29024,50 +29032,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: read vehicle model wiring information",
-                  "Transcribe interface definitions and specify applicability scopes and uncertainties."
+                  "Day 1",
+                  "Copy the three record IDs."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: organize a work sequence",
-                  "Sequence disassembly/refitting, routing paths, and required tools for a fictional vehicle model."
+                  "Day 2",
+                  "Compare customer authorization with the work order features."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: write a checkpoint checklist",
-                  "Specify vehicle states and inspection items to record before and after disassembly/refitting."
+                  "Day 3",
+                  "Mark acceptance evidence and blank fields."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: perform paper troubleshooting",
-                  "List verification steps and possible conclusions from symptoms and hypotheses."
+                  "Day 4",
+                  "Compare the two serial numbers."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: organize a functional verification checklist",
-                  "Specify functional items, test conditions, and pass criteria."
+                  "Day 5",
+                  "Name the next owner and action."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: make two variants",
-                  "Change one vehicle model condition and one criterion respectively, specifying effects and retest items."
+                  "Day 6",
+                  "Submit one page on your own with three original rows and a separate row for the changed record."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: review stop conditions",
-                  "Summarize conditions requiring stopping and escalation in a one-page retrospective record."
+                  "Day 7",
+                  "On day seven, open “VE49 vehicle electronics handoff reference (open after day six)” under Common questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29086,13 +29094,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: can you accurately identify interface definitions’ applicable scopes and exceptions, rather than only copy pin numbers?",
-              "Day 2: can you break work into checkable, ordered operations and list checkpoints?",
-              "Day 3: can you clearly specify vehicle state record items before and after work?",
-              "Day 4: can you write investigations as executable verification steps rather than vague guesses?",
-              "Day 5: can you write functional verification as executable criteria rather than subjective impressions?",
-              "Day 6: can you assess the scope of effects from vehicle model and criterion changes and list retest items?",
-              "Day 7: can you write clear stop and escalation conditions and specify who confirms them?"
+              "Keep the original and variant.",
+              "Record customer authorization, acceptance, device identity and handover approval separately.",
+              "Ask the employer who owns each step.",
+              "Name the next owner for both versions.",
+              "Compare with the reference.",
+              "Record one correction.",
+              "Save the one-page handoff."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30413,7 +30421,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "49-2096: 8,600 employed in 2025, overall decline of 15% from 2025–2035, with 400 annual openings (including replacements)."
+              "49-2096: 8,600 employed in 2025, overall decline of 14.5% from 2025–2035, with 400 annual openings (including replacements)."
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -31009,26 +31017,28 @@
                 "question": "What are U.S. wages?",
                 "question_key": "career.faq.electronic-equipment-installers-and-repairers-motor-vehicles.4",
                 "source_refs": [
-                  "onet"
+                  "sag-moa",
+                  "r2-pay-2"
                 ]
               },
               {
-                "answer": "O*NET/BLS show approximately 10,300 employed in 2024, projected decline (-1% or lower) from 2024–2034, with approximately 600 projected openings; openings mainly reflect replacement demand.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 49-2096 to fall from about 8,600 in 2025 to 7,400 in 2035, a decline of 14.5%. It projects about 400 openings per year on average, including replacements.",
                 "id": "actors.faq.5",
                 "question": "What is the U.S. employment outlook?",
                 "question_key": "career.faq.electronic-equipment-installers-and-repairers-motor-vehicles.5",
                 "source_refs": [
-                  "onet"
+                  "a49-bls"
                 ]
               },
               {
-                "answer": "National Bureau of Statistics materials checked this round extend only to industries and broad personnel categories; nationwide occupation-specific wage percentiles precisely corresponding to this occupation were not obtained. This page registers insufficient evidence accordingly, without substituting industry averages or a single recruitment offer.",
+                "answer": "Guangzhou Saiwei Huaxun Information Technology quoted CNY 4,000–9,000 per month for GPS equipment specialist/electrician work. The Guangzhou field role covered installation, setup and maintenance of GPS units, dashcams, video monitoring and navigation equipment. The employer asked for basic automotive circuitry knowledge and preferred an electrician certificate. A bulletin published by the Changdu government listed GPS installation and maintenance work at Tibet Kangda Beidou Technology, quoting CNY 4,000–6,000 per month plus commission and accepting apprentices. Both figures are historical employer quotes. Ask about current vacancies, field service, base pay and commission. Comparable mainland China occupation-level wage data remain unavailable.",
                 "id": "actors.faq.6",
                 "question": "Can mainland Chinese wages be found?",
                 "question_key": "career.faq.electronic-equipment-installers-and-repairers-motor-vehicles.6",
                 "source_refs": [
-                  "onet",
-                  "nbs"
+                  "nbs",
+                  "a49-huangpu",
+                  "a49-changdu"
                 ]
               },
               {
@@ -31067,6 +31077,12 @@
                 "source_refs": [
                   "onet"
                 ]
+              },
+              {
+                "answer": "V16 has dashcam authorization only. Hold fleet tracking and ask the service adviser to confirm any additional authorization. V17 lacks image acceptance, so send it to quality for review. V18’s serial numbers conflict. Ask quality to verify the device and records. In the V17 variant, image acceptance is recorded and handover still awaits quality sign-off. V16 and V18 are unchanged. Check authorization, acceptance, device identity and handover authority.",
+                "id": "actors.faq.11",
+                "question": "VE49 vehicle electronics handoff reference (open after day six)",
+                "question_key": "career.faq.electronic-equipment-installers-and-repairers-motor-vehicles.11"
               }
             ]
           },
@@ -31307,7 +31323,7 @@
                 "limitation": "Occupational group entry points cannot replace specific occupational statistics; medians are not starting pay.",
                 "market": "United States",
                 "name": "BLS OOH — installation, maintenance, and repair occupational group",
-                "period": "Wage data for month 5 of 2025; 2024–2034 projections",
+                "period": "May 2025 wages and 2025–2035 projections",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/home.htm"
@@ -31635,7 +31651,7 @@
               {
                 "accessed_at": "2026-10-11",
                 "details": [
-                  "49-2096 suboccupation: 8,600 employed in 2025, decline of 15% from 2025–2035; suboccupation median wages of USD 48,420."
+                  "49-2096 suboccupation: 8,600 employed in 2025, decline of 14.5% from 2025–2035; suboccupation median wages of USD 48,420."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "bls-repair-ooh",
@@ -31678,6 +31694,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS Table 1.2 projects U.S. employment in occupation 49-2096 to fall from about 8,600 in 2025 to 7,400 in 2035, a decline of 14.5%. It projects about 400 openings per year on average, including replacements."
+                ],
+                "evidence_type": "Official occupational employment projection",
+                "id": "a49-bls",
+                "limitation": "Published employment counts are rounded.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Electronic Equipment Installers and Repairers, Motor Vehicles, 49-2096",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Guangzhou Saiwei Huaxun Information Technology quoted CNY 4,000–9,000 per month for GPS equipment specialist/electrician work. The Guangzhou field role covered installation, setup and maintenance of GPS units, dashcams, video monitoring and navigation equipment. The employer asked for basic automotive circuitry knowledge and preferred an electrician certificate."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a49-huangpu",
+                "limitation": "Historical employer quote. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Vehicle electronics job posting",
+                "period": "2025-05-13",
+                "publisher": "Huangpu District Employment Service Center, Guangzhou",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hp.gov.cn/gzjg/qt/ldjyfwzx/kljy/content/post_10261442.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A bulletin published by the Changdu government listed GPS installation and maintenance work at Tibet Kangda Beidou Technology, quoting CNY 4,000–6,000 per month plus commission and accepting apprentices."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a49-changdu",
+                "limitation": "Historical employer quote. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Vehicle electronics job posting",
+                "period": "2021-03",
+                "publisher": "Changdu Municipal Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.changdu.gov.cn/cdrmzf/c101569/202103/71ed453b6d6b4d24a62c6c7abc1e9c44.shtml"
               }
             ]
           },
@@ -34699,19 +34760,33 @@
               }
             },
             {
-              "城市/区间": "Recruitment offers (cannot substitute)",
+              "城市/区间": "Job postings published by Guangzhou and Changdu authorities",
               "月薪参考": {
-                "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
-                "block": "china-salary",
-                "copy_key": "career.item.career-snapshot-primary-locale",
-                "type": "prose"
+                "$join": [
+                  {
+                    "$fact": "posting-a49-huangpu",
+                    "field": "display_value"
+                  },
+                  {
+                    "$fact": "posting-a49-changdu",
+                    "field": "display_value"
+                  },
+                  {
+                    "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
+                    "block": "china-salary",
+                    "copy_key": "career.item.career-snapshot-primary-locale",
+                    "type": "prose"
+                  }
+                ],
+                "separator": "\n"
               }
             }
           ],
           "china_soc_row": "Chinese wage scope",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a49-huangpu",
+            "posting-a49-changdu"
           ],
           "sources_note": {
             "$join": [
@@ -34838,7 +34913,7 @@
           {
             "fact_ref": "median",
             "指标": "2025–2035 overall projection",
-            "数值": "-15%",
+            "数值": "-14.5%",
             "说明": "Exact occupation, rather than net additions, regional recruitment, or AI attribution."
           },
           {
@@ -34906,7 +34981,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "-15% (2025–2035, not AI causation)",
+        "growth": "-14.5% (2025–2035, not AI causation)",
         "heading": {
           "$item": "actors.display.career_snapshot_secondary_locale.heading",
           "block": "us-salary",
@@ -35221,7 +35296,7 @@
         "outlook_evidence": [
           {
             "geography": "United States",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.2",
               "block": "market-signals",
@@ -35236,8 +35311,8 @@
             },
             "metric": "Employment growth",
             "occupation_scope": "O*NET-SOC 49-2096.00 (electronic equipment installers and repairers, motor vehicles)",
-            "source_id": "bls-repair-ooh",
-            "value": "-15% (overall projection, not AI causation)"
+            "source_id": "a49-bls",
+            "value": "Decline of 14.5% (overall projection)"
           },
           {
             "geography": "United States",
@@ -35256,12 +35331,12 @@
             },
             "metric": "Employment size",
             "occupation_scope": "O*NET-SOC 49-2096.00 (electronic equipment installers and repairers, motor vehicles)",
-            "source_id": "onet",
+            "source_id": "a49-bls",
             "value": "8,600 workers"
           },
           {
             "geography": "United States",
-            "horizon": "2024—2034",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -35276,8 +35351,8 @@
             },
             "metric": "Projected openings",
             "occupation_scope": "O*NET-SOC 49-2096.00 (electronic equipment installers and repairers, motor vehicles)",
-            "source_id": "onet",
-            "value": "Approximately 600 openings"
+            "source_id": "a49-bls",
+            "value": "About 400 per year, including replacements"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -35389,7 +35464,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/automotive-service-technicians-and-mechanics",
+            "target_href": "/en/career/jobs/automotive-service-technicians-and-mechanics",
             "target_slug": "automotive-service-technicians-and-mechanics",
             "target_title": "Automotive service technicians and mechanics",
             "transition_distance": {
@@ -35412,7 +35487,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-and-electronics-installers-and-repairers",
+            "target_href": "/en/career/jobs/electrical-and-electronics-installers-and-repairers",
             "target_slug": "electrical-and-electronics-installers-and-repairers",
             "target_title": "Electrical and electronics equipment installers and repairers",
             "transition_distance": {
@@ -35435,7 +35510,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/audio-and-video-technicians",
+            "target_href": "/en/career/jobs/audio-and-video-technicians",
             "target_slug": "audio-and-video-technicians",
             "target_title": "Audio and video technicians",
             "transition_distance": {
@@ -35458,7 +35533,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-and-electronics-repairers-commercial-and-industrial-equipment",
+            "target_href": "/en/career/jobs/electrical-and-electronics-repairers-commercial-and-industrial-equipment",
             "target_slug": "electrical-and-electronics-repairers-commercial-and-industrial-equipment",
             "target_title": "Electrical and electronics repairers, commercial and industrial equipment",
             "transition_distance": {
@@ -35481,7 +35556,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/security-and-fire-alarm-systems-installers",
+            "target_href": "/en/career/jobs/security-and-fire-alarm-systems-installers",
             "target_slug": "security-and-fire-alarm-systems-installers",
             "target_title": "Security and fire alarm systems installers",
             "transition_distance": {
@@ -35504,7 +35579,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/telecommunications-line-installers-and-repairers",
+            "target_href": "/en/career/jobs/telecommunications-line-installers-and-repairers",
             "target_slug": "telecommunications-line-installers-and-repairers",
             "target_title": "Telecommunications line installers and repairers",
             "transition_distance": {
@@ -35527,7 +35602,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/avionics-technicians",
+            "target_href": "/en/career/jobs/avionics-technicians",
             "target_slug": "avionics-technicians",
             "target_title": "Avionics technicians",
             "transition_distance": {
@@ -35550,7 +35625,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/bus-and-truck-mechanics-and-diesel-engine-specialists",
+            "target_href": "/en/career/jobs/bus-and-truck-mechanics-and-diesel-engine-specialists",
             "target_slug": "bus-and-truck-mechanics-and-diesel-engine-specialists",
             "target_title": "Bus and truck mechanics and diesel engine specialists",
             "transition_distance": {
@@ -35638,7 +35713,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my vocational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35687,7 +35762,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35736,7 +35811,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35785,7 +35860,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivational clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35834,7 +35909,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35883,7 +35958,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -37013,38 +37088,38 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 10,300 workers (2024)",
+        "display_value": "About 8,600 workers",
         "fact_id": "employment",
         "market": "United States",
         "measure": "U.S. employment size",
         "occupation_scope": "Electronic equipment installers and repairers, motor vehicles (O*NET-SOC 49-2096.00)",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "a49-bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Projected decline (-1% or lower, 2024–2034)",
+        "display_value": "Decline of 14.5%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "U.S. employment growth",
         "occupation_scope": "Electronic equipment installers and repairers, motor vehicles (O*NET-SOC 49-2096.00)",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a49-bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 600 openings (2024–2034, including replacements)",
+        "display_value": "About 400 per year, including replacements",
         "fact_id": "openings",
         "market": "United States",
         "measure": "U.S. projected openings",
         "occupation_scope": "Electronic equipment installers and repairers, motor vehicles (O*NET-SOC 49-2096.00)",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a49-bls"
         ]
       },
       {
@@ -37106,6 +37181,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Guangzhou Saiwei Huaxun Information Technology quoted CNY 4,000–9,000 per month for GPS equipment specialist/electrician work. The Guangzhou field role covered installation, setup and maintenance of GPS units, dashcams, video monitoring and navigation equipment. The employer asked for basic automotive circuitry knowledge and preferred an electrician certificate.",
+        "fact_id": "posting-a49-huangpu",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Vehicle electronics job posting",
+        "period": "2025-05-13",
+        "source_refs": [
+          "a49-huangpu"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "A bulletin published by the Changdu government listed GPS installation and maintenance work at Tibet Kangda Beidou Technology, quoting CNY 4,000–6,000 per month plus commission and accepting apprentices.",
+        "fact_id": "posting-a49-changdu",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Vehicle electronics job posting",
+        "period": "2021-03",
+        "source_refs": [
+          "a49-changdu"
+        ]
       }
     ]
   },
@@ -37119,7 +37218,7 @@
     "badges": [
       "In-vehicle communication, audio, security, and navigation equipment installation and repair · O*NET-SOC 49-2096.00",
       "2025 U.S. wage data · median annual wages of USD 48,420 (median hourly wages of USD 23.28)",
-      "Approximately 10,300 employed in 2024 · projected decline (-1% or lower) from 2024–2034 · interest code RCI"
+      "About 8,600 U.S. workers in 2025 · projected 14.5% decline from 2025 to 2035 · interest code RCI"
     ],
     "metrics": [
       {
@@ -37132,19 +37231,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. worker count"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. projected openings"
+        "label": "U.S. average annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37158,14 +37257,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "U.S. O*NET-SOC 49-2096.00: median annual wages of USD 48,420 in 2025, approximately 10,300 employed in 2024, and projected decline (-1% or lower) from 2024–2034; includes entry paths, certificate and manufacturer authorization explanations, and mainland Chinese scope."
+      "text": "Explore motor vehicle electronics installation and repair, U.S. wages and outlook, and two mainland China job examples. Practice reviewing vehicle handover records on paper."
     },
     "title": {
       "availability": "available",
       "text": "Electronic equipment installers and repairers, motor vehicles: duties, wages, and entry paths"
     }
   },
-  "source_content_sha256": "2e1475ab4b1d4351c3a78e5314c5ec9a9e82aab639c0b694202d390bf8db7f3e",
+  "source_content_sha256": "69235616c7717bef7a685ddde8a2cf0cd6c6d434d631bda195931a6c71c9f159",
   "subject": {
     "canonical_slug": "electronic-equipment-installers-and-repairers-motor-vehicles",
     "name": "Electronic equipment installers and repairers, motor vehicles",

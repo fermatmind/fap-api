@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a30-fengshun": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a30-shunde": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -1605,7 +1611,7 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1677,7 +1683,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26106,12 +26112,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "宽口径参考：2025全国城镇非私营/私营制造业税前年平均工资113,594/76,055元；覆盖不同制造职业，非电子装配工中位、职级或个人到手收入。"
+              " 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "a30-fengshun",
+            "a30-shunde"
           ],
           "type": "prose"
         },
@@ -26218,12 +26225,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供招聘报价或个人收入承诺；缺失项保留缺失，不用行业均值或邻近职业替代。"
+              "公告只用于核对岗位职责和计薪方式。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "a30-fengshun",
+            "a30-shunde"
           ],
           "type": "prose"
         }
@@ -28975,25 +28983,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "虚构材料",
-                  "虚构图纸与工艺与作业指导与物料清单与工单 1 份、匿名工序与自检与量测与追溯数据与数据字典 1 份、物料核对与装配与自检与防静电与防护与异常上报模板、装配与质量与安全隐患清单 3 项。",
-                  "材料均为虚构，不含真实产品与客户与你无关信息。"
+                  "纸面工单材料",
+                  "虚构装配单 A8，要求 12 套 K2 部件。箱内点到 10 套 K2、2 套 K1，K1 未获替代批准。",
+                  "其中 1 套 K2 的检验标签缺失。题设规定：版本和标签齐全才列为待装配，异常由质检判定。",
+                  "只核纸面记录，不接触设备。"
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "作品任务",
-                  "在 40 分钟内写一份装配工序的物料核对与装配步骤与自检与记录与防护核对，并填一张自检与量测与异常与追溯与上报单。",
-                  "只做纸面设计与核对，不接触真实产品与产线，不作质量放行或安全或法律结论，也不等同于职业技能等级证书或上岗资格。"
+                  "交件要求",
+                  "交一页核料记录，写可列入待装配的数量、缺口及两类异常。",
+                  "写清谁接手，保留原单。"
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "参考结果",
-                  "物料核对含型号与极性与版本与数量与批次；装配步骤含工序与参数与工装与防静电；自检含量测与目检与功能测试与判据与状态标记；异常含隔离与返工与上报与追溯。",
-                  "参考结果用于自检，不是唯一正确答案。"
+                  "先完成独立答卷",
+                  "到「常见问题与资料来源」打开「装配批次参考答案（完成第六天后再打开）」。",
+                  "用其中的自核项记录一处差异与修订。"
                 ]
               },
               {
@@ -29022,50 +29031,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "第 1 天：读懂材料",
-                  "阅读虚构图纸与工艺与物料清单与制度材料，圈出不确定项并写出问题清单。"
+                  "第 1 天",
+                  "抄录工单与实点。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "第 2 天：物料与版本",
-                  "按图纸与工单排出物料与元件与版本与极性核对要点并标注待确认项。"
+                  "第 2 天",
+                  "按版本分类。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第 3 天：装配与参数",
-                  "按工艺写一段装配步骤与焊锡与压接与紧固与点胶参数说明。"
+                  "第 3 天",
+                  "核检验标签。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "第 4 天：自检与量测",
-                  "按判据写一份量测与目检与功能测试与状态标记要点。"
+                  "第 4 天",
+                  "计算待装配数和缺口。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "第 5 天：防护与异常",
-                  "填写一张防静电与防护与 5S 与设备点检与自检与异常与追溯上报单。"
+                  "第 5 天",
+                  "写核料交接。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第 6 天：限时复做",
-                  "在限时条件下重做一遍并记录精力与错误类型。"
+                  "第六天：独立交件",
+                  "先不看参考，检查交件能否独立读懂。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第 7 天：比较与决定",
-                  "比较两版方案，写出继续／谨慎／停止及理由。"
+                  "第七天：打开参考并复盘",
+                  "到「常见问题与资料来源」打开「装配批次参考答案（完成第六天后再打开）」。写下一处差异与修订，再决定继续或暂缓。"
                 ]
               }
             ]
@@ -29084,13 +29093,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第 1 天判断：材料中的不确定项是否被如实标出，而不是猜测补全。",
+              "能用题面完成一页交接，并区分已核、待核和审批。",
               "第 2 天判断：物料与版本与极性核对是否按图纸与工单与数据逐项核对，而不是凭印象。",
-              "第 3 天判断：装配步骤与参数是否按工艺写清。",
+              "用纸面作业记录哪一步最费力，真实工作量另向雇主核对。",
               "第 4 天判断：自检与量测与功能测试与判据是否按标准写清。",
               "第 5 天判断：防静电与防护与 5S 与异常与追溯项是否可核对。",
               "第 6 天判断：限时与节拍条件下是否仍能守住自检与防静电与记录要求。",
-              "第 7 天判断：综合两版表现，判断自己是否愿意继续在电气与电子设备装配方向投入。"
+              "第七天对照折叠参考检查交件。有关键漏项先重做。真实培训及职责范围另向雇主确认。"
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30975,22 +30984,21 @@
           "data": {
             "entries": [
               {
-                "answer": "按工单与图纸与工艺领取任务并核对版本；领取与核对物料与元件与线束与连接器与工装与测试设备并确认型号与极性与数量；检查防静电与防护与用电与工装状态；按工序与节拍完成焊锡与压接与绕线与紧固与布线与点胶与清洁；按标准量测与目检与功能测试并记录数据与标记状态；保持工位 5S 与物料标识与防错；填写装配与检验与批次与追溯记录；对不合格项按流程隔离与返工或报废；如实上报异常与停线请求；配合质检与工艺与设备处理并参与改进；完成交接。",
+                "answer": "按工单核对部件和版本，组装电气或电子设备，记录检验结果并把异常交给质检或班组长。",
                 "id": "actors.faq.1",
                 "question": "电气与电子设备装配工每天的具体工作是什么？",
                 "question_key": "career.faq.electrical-and-electronic-equipment-assemblers.1",
                 "source_refs": [
-                  "onet"
+                  "a30-onet"
                 ]
               },
               {
-                "answer": "本页职业承担电气与电子设备与组件的装配与自检与追溯与交付；机电设备装配工负责机电设备与总成装配与调试，绕线与整形工专责线圈绕制与整形，团队装配工以小组协作方式装配，电气与电子设备安装维修人员负责设备安装与维修，质量控制检查员负责检验判定与放行，生产运营工人一线主管负责班组生产管理，发动机与其他机器装配工负责发动机与机器装配，焊接与切割人员负责焊接与切割。对象、工艺与授权不同，不能按设备或岗位名称互换。",
+                "answer": "装配把部件按已批准流程组成产品，质检侧重检验和判定，维修侧重既有设备故障。不同工厂可能把多项任务排在同一班。",
                 "id": "actors.faq.2",
                 "question": "它与相邻职业有什么区别？",
                 "question_key": "career.faq.electrical-and-electronic-equipment-assemblers.2",
                 "source_refs": [
-                  "onet",
-                  "agent"
+                  "a30-onet"
                 ]
               },
               {
@@ -31022,13 +31030,14 @@
                 ]
               },
               {
-                "answer": "美国 BLS 2025 年工资数据中位为 45,850 美元/年（22.04 美元/时）；该来源仅提供中位数，未提供 10/25/75/90 分位，本页在相应位置保留缺口。中国大陆未取得与之对应的全国职业级口径，不给出中位数或分位数，行业平均工资只作为可见行业代理。比较真实岗位时须核对城市与地区、单位类型与岗位层级、用工方式、是否含计件与加班与夜班与津贴与食宿，以及税前税后口径。",
+                "answer": "美国 2025 年 5 月 BLS 51-2028 统计行年工资中位数为 45,850 美元，属于更宽的统计口径。 公告列 1,000 个装配工名额，接受无经验并安排带教，未列装配岗数字工资。 5,001–7,000 元/月，岗位同时包含装配、检验和机手任务。 以上是两份历史公告。大陆职业工资中位数仍缺可比数据。",
                 "id": "actors.faq.6",
                 "question": "工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.electrical-and-electronic-equipment-assemblers.6",
                 "source_refs": [
-                  "oews",
-                  "r2-pay-1"
+                  "a30-bls",
+                  "a30-fengshun",
+                  "a30-shunde"
                 ]
               },
               {
@@ -31052,23 +31061,30 @@
                 ]
               },
               {
-                "answer": "先做本页纸面练习（写一份装配工序的物料核对与装配步骤与自检与记录与防护核对），再争取受监督的装配实习与师傅带教；同时确认自己能接受班次与节拍与加班与长时间站立，并按单位制度确认防静电与质量与追溯与异常上报边界。",
+                "answer": "先做 A8 纸面核料。按工单、实点和标签记录，完成第六天再打开参考。",
                 "id": "actors.faq.9",
                 "question": "零基础想尝试，应该先做什么？",
                 "question_key": "career.faq.electrical-and-electronic-equipment-assemblers.9",
                 "source_refs": [
-                  "onet",
-                  "sag"
+                  "a30-onet"
                 ]
               },
               {
-                "answer": "考虑产线节奏（班次与节拍与加班与换型与交付节点驱动、重复作业与长时间站立与用眼用手较多）与时间压力与质量责任，以及防静电与职业健康防护与产品与追溯数据责任。",
+                "answer": "O*NET 51-2022.00 用于本页任务；BLS 表 1.2 使用更宽的 51-2028，含机电装配且排除线圈绕线、包带与整理。该统计行从 2025 年 246,300 到 2035 年 258,700（+5.0%），年均 25,900 个空缺，含替补。",
                 "id": "actors.faq.10",
                 "question": "选择这个职业还应考虑什么？",
                 "question_key": "career.faq.electrical-and-electronic-equipment-assemblers.10",
                 "source_refs": [
-                  "onet",
-                  "nist"
+                  "a30-bls"
+                ]
+              },
+              {
+                "answer": "10 套 K2 中 1 套缺标签，9 套可列待装配，距 12 套缺 3 套。分别记 2 套 K1 版本不符、1 套 K2 缺检验标签。保留 A8 原单，将两项交质检判定。自核四项：9 套待装配、3 套缺口、两类异常、工单与交接。每项齐全计一项。题设为虚构，来源提供职业背景。",
+                "id": "actors.faq.11",
+                "question": "装配批次参考答案（完成第六天后再打开）",
+                "question_key": "career.faq.electrical-and-electronic-equipment-assemblers.11",
+                "source_refs": [
+                  "a30-onet"
                 ]
               }
             ]
@@ -31300,20 +31316,19 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对装配类职业信息与就业展望的查询入口与方法说明。",
-                  "本职业一手展望页本轮未取得；不据入口页推断本职业具体数值。"
+                  "O*NET 51-2022.00 用于本页任务；BLS 表 1.2 使用更宽的 51-2028，含机电装配且排除线圈绕线、包带与整理。该统计行从 2025 年 246,300 到 2035 年 258,700（+5.0%），年均 25,900 个空缺，含替补。"
                 ],
                 "evidence_type": "official guidance",
                 "id": "bls",
-                "limitation": "本职业一手展望页本轮未取得；不据入口页推断本职业具体数值。",
+                "limitation": "年均空缺包含替补。",
                 "market": "美国",
-                "name": "BLS Occupational Outlook Handbook / Occupation Finder",
-                "period": "accessed 2026-09-19",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.bls.gov/ooh/occupation-finder.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-19",
@@ -31494,7 +31509,7 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "核验职业定义、17 项任务、工作情境与准备层级（Job Zone 1-2，SVP 低于 6.0）与兴趣代码 RCI 与 2024 年就业 261,400 与 2024—2034 年预测与 2025 年工资中位数。",
+                  "O*NET 51-2022.00 用于职业任务；就业和工资使用 BLS 51-2028。",
                   "美国精确职业数据；2025 年工资来源仅提供中位数，不提供分位口径；不定义中国技能等级、工资或标准。"
                 ],
                 "evidence_type": "official occupation profile",
@@ -31666,6 +31681,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "O*NET 51-2022.00 用于本页任务；BLS 表 1.2 使用更宽的 51-2028，含机电装配且排除线圈绕线、包带与整理。该统计行从 2025 年 246,300 到 2035 年 258,700（+5.0%），年均 25,900 个空缺，含替补。"
+                ],
+                "evidence_type": "职业任务原始资料",
+                "id": "a30-bls",
+                "limitation": "仅用于美国任务对照。",
+                "market": "美国",
+                "name": "BLS 表 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "按工单核对部件和版本，组装电气或电子设备，记录检验结果并把异常交给质检或班组长。"
+                ],
+                "evidence_type": "职业任务原始资料",
+                "id": "a30-onet",
+                "limitation": "仅用于美国任务对照。",
+                "market": "美国",
+                "name": "职业任务细项",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/51-2022.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "公告列 1,000 个装配工名额，接受无经验并安排带教，未列装配岗数字工资。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a30-fengshun",
+                "limitation": "单次公告，只说明该岗位的条件。",
+                "market": "中国大陆",
+                "name": "3C 电子产品装配工",
+                "period": "2026-08-31",
+                "publisher": "丰顺县人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.fengshun.gov.cn/zwgk/zdlyxxgk/jycyxxgk/content/mpost_2939856.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "5,001–7,000 元/月，岗位同时包含装配、检验和机手任务。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a30-shunde",
+                "limitation": "单次公告，只说明该岗位的条件。",
+                "market": "中国大陆",
+                "name": "机手／装配工",
+                "period": "2026-08-18",
+                "publisher": "顺德就业通",
+                "scope": "recruitment_proxy",
+                "url": "https://sdjyt.shunde.gov.cn/m/jobs-show.php?id=54337&jobs_id=106027"
               }
             ]
           },
@@ -34484,7 +34559,7 @@
             },
             {
               "指标": "岗位安全与技能培训",
-              "数值": "单位组织并授权",
+              "数值": "查看下方有日期的两份岗位样本。",
               "说明": "单位应组织从业人员的安全生产教育与岗位技能与防静电与防护与有害作业培训并明确作业授权；接触化学品与噪声与粉尘等危害应按要求防护与参加职业健康检查。"
             },
             {
@@ -34621,7 +34696,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "统计口径状态",
+          "china_open": "下列为有日期的招聘样本，另列全国职业工资口径缺口。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34664,7 +34739,7 @@
               }
             },
             {
-              "城市/区间": "行业均值（不可替代本职业）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$join": [
                   {
@@ -34694,20 +34769,21 @@
           "china_soc_row": "中国大陆薪资口径",
           "edu": "技能等级与安全与在岗培训经历见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a30-fengshun",
+            "posting-a30-shunde"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
             "ai_heading": "AI 与自动化会直接改变本职业的收入吗？",
             "driver_heading": "谈中国大陆同类岗位报酬时应核对什么？",
-            "official_heading": "中国大陆官方口径与统计缺口",
+            "official_heading": "行业统计与招聘样本的范围",
             "scenario_caption": "计酬方式与统计边界对照",
             "scenario_heading": "中国大陆同类岗位的计酬方式能直接比较吗？",
             "scenario_interpretation_label": "适用范围与缺口",
             "scenario_role_label": "岗位或范围",
             "scenario_value_label": "计酬与披露情况"
           },
-          "us_growth": "美国预测见美国薪资模块",
+          "us_growth": "5.0% (2025–2035)",
           "us_median": "美国工资见美国薪资模块"
         }
       },
@@ -35188,7 +35264,7 @@
         "outlook_evidence": [
           {
             "geography": "美国",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.2",
               "block": "market-signals",
@@ -35203,12 +35279,12 @@
             },
             "metric": "就业总体变化",
             "occupation_scope": "电气与电子设备装配工（O*NET-SOC 51-2022.00）",
-            "source_id": "bls-ooh-assemblers",
-            "value": "5%（51-2028上位组，非AI归因）"
+            "source_id": "a30-bls",
+            "value": "5.0%"
           },
           {
             "geography": "美国",
-            "horizon": "2025基期",
+            "horizon": "2025",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35223,12 +35299,12 @@
             },
             "metric": "本职业就业规模",
             "occupation_scope": "电气与电子设备装配工（O*NET-SOC 51-2022.00）",
-            "source_id": "bls-ooh-assemblers",
-            "value": "246,300人（2025上位合并组）"
+            "source_id": "a30-bls",
+            "value": "246,300"
           },
           {
             "geography": "美国与中国大陆",
-            "horizon": "现行口径",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -35243,8 +35319,8 @@
             },
             "metric": "训练与技能与质量与安全路径",
             "occupation_scope": "电气与电子设备装配工（O*NET-SOC 51-2022.00）",
-            "source_id": "employer",
-            "value": "美国以高中或同等学历与在职培训为主（Job Zone 1-2，46% 高中或同等学历），经验与在岗培训从几天到一年不等；中国大陆从业人员安全培训与劳动防护依《安全生产法》与《职业病防治法》与单位制度执行，职业技能可按国家职业技能标准（电子设备装接工与电子器件装配工等）参加技能等级认定"
+            "source_id": "a30-bls",
+            "value": "25,900"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -36472,7 +36548,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解电气与电子设备装配工的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36585,11 +36661,11 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
             "label": "了解电气与电子设备装配工的任务兴趣与工作偏好"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
             "label": "了解电气与电子设备装配工的任务兴趣与工作偏好"
           },
           {
@@ -37003,39 +37079,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约261,400人（2024 年，O*NET 摘要页口径）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "246,300 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模（存量统计）",
-        "occupation_scope": "本职业（51-2022.00）口径；规模随制造业与电子与电气设备需求与自动化变化；全国总量不说明某州与某单位与某产线的具体机会",
-        "period": "2024 年基期；检索 2026-09-19",
+        "occupation_scope": "美国 BLS 51-2028",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "a30-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2024—2034 年预测为「高于平均（Faster than average，5% 至 6%）」（O*NET 摘要页标注的类别与区间）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "5.0%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "预测就业变化（职业总量）",
-        "occupation_scope": "本职业口径，预测期 2024—2034 年；该预测是职业总量变化，不是个人录用概率；该页给出「高于平均（5% 至 6%）」类别，本页按口径原文表述而不自行换算百分数",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "美国 BLS 51-2028",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a30-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约29,600个（2024—2034 年，含更替需求；O*NET 摘要页口径，为预测期合计）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 25,900 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "预测期职位空缺（含更替需求）",
-        "occupation_scope": "本职业口径；为预测期内因增长与更替等形成的合计空缺，不是每年净增岗位，也不是个人机会的直接度量；O*NET 该页标注的口径期间为 2024—2034 年，页面按该口径引用，不另按年度换算",
-        "period": "2024—2034 年预测期；检索 2026-09-19",
+        "occupation_scope": "美国 BLS 51-2028",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a30-bls"
         ]
       },
       {
@@ -37076,14 +37152,15 @@
       },
       {
         "derivation": "中国大陆精确职业工资未取得；不使用美国数据、行业平均或不透明招聘报价替代本职业报酬。",
-        "display_value": "说明：中国大陆没有与美国 51-2022.00 一一对应的职业级工资口径，要求按法规与单位制度区分。从业人员安全培训与劳动防护与有害作业防护依《中华人民共和国安全生产法》与《中华人民共和国职业病防治法》及单位安全与质量制度执行，接触化学品与噪声与粉尘等危害应按要求防护与参加职业健康检查，职业技能可按国家职业技能标准（电子设备装接工与电子器件装配工等）参加技能等级认定，装配与检验与放行按单位工艺与质量制度执行。上述按法规与制度与标准名称与一般口径引用，未逐条核对条文编号。本职业相关报酬通常由基本工资与计件或计时与加班与夜班与津贴与补贴构成，公开工资统计最高细分到行业门类与单位类型，未建立与该职业对应的职业级口径，本轮未取得可核对的中国大陆职业级工资分布，行业平均工资只作为可见行业代理并明确排除",
+        "display_value": "公告列 1,000 个装配工名额，接受无经验并安排带教，未列装配岗数字工资。 5,001–7,000 元/月，岗位同时包含装配、检验和机手任务。",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "中国内地",
         "measure": "未取得的统计位置（中国大陆职业级工资）",
-        "occupation_scope": "中国大陆职业级口径；装配岗位报酬按单位类型与岗位与技能等级与计件与绩效制度确定，公开工资统计最高细分到行业门类与单位类型；页面语言为简体中文也不等于存在精确等价职业分类",
-        "period": "现行发布口径；检索 2026-09-19",
+        "occupation_scope": "两份历史招聘公告",
+        "period": "2026",
         "source_refs": [
-          "r2-pay-1"
+          "a30-fengshun",
+          "a30-shunde"
         ]
       },
       {
@@ -37096,6 +37173,30 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "公告列 1,000 个装配工名额，接受无经验并安排带教，未列装配岗数字工资。",
+        "fact_id": "posting-a30-fengshun",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "3C 电子产品装配工",
+        "period": "2026-08-31",
+        "source_refs": [
+          "a30-fengshun"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "5,001–7,000 元/月，岗位同时包含装配、检验和机手任务。",
+        "fact_id": "posting-a30-shunde",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "机手／装配工",
+        "period": "2026-08-18",
+        "source_refs": [
+          "a30-shunde"
         ]
       }
     ]
@@ -37123,19 +37224,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年「高于平均（5% 至 6%）」；来源只给类别）"
+        "label": "美国 BLS 51-2028 · 预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年约 261,400 人）"
+        "label": "美国 BLS 51-2028 · 就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国预计职位空缺（2024—2034 年约 29,600 个，含更替需求）"
+        "label": "美国 BLS 51-2028 · 预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37149,17 +37250,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "电气与电子设备装配工（O*NET-SOC 51-2022.00）按图纸与工艺装配电气与电子设备与组件并自检：核对工单与物料与版本与极性，按工序与节拍完成焊锡与压接与绕线与紧固与布线与点胶与清洁，按标准量测与目检与功能测试并记录数据与标记状态，按防静电与防护与安全要求作业并保持 5S，填写批次与追溯记录并对不合格项隔离与返工与上报。美国口径：BLS 2025 年工资数据中位 45,850 美元/年（22.04 美元/时，仅提供中位数）；2024 年就业约 261,400 人，2024—2034 年预测「高于平均（5% 至 6%）」、预计空缺约 29,600 个；准备层级 Job Zone 1-2，兴趣代码 RCI。中国大陆：安全培训与劳动防护与职业健康与技能等级依《安全生产法》《职业病防治法》与国家职业技能标准执行；公开统计未建立职业级工资口径，本页在相关位置可见标记缺口。"
+      "text": "了解电气电子设备装配的核料、检验和交接，比较丰顺、顺德招聘，并完成纸面批次工单。"
     },
     "title": {
       "availability": "available",
       "text": "电气与电子设备装配工"
     }
   },
-  "source_content_sha256": "904def75ed38658a796eeef678f09e81eeda86d7c479abca49a12696fc4cde19",
+  "source_content_sha256": "4f182ff1d6127cdc53e10364a76fd2629f71b8327ffab22f862cbb5c16a33435",
   "subject": {
     "canonical_slug": "electrical-and-electronic-equipment-assemblers",
     "name": "电气与电子设备装配工",
-    "summary": "电气与电子设备装配工（美国侧 O*NET-SOC 51-2022.00，Electrical and Electronic Equipment Assemblers）是电气与电子设备与组件的装配岗位：按图纸与工艺与作业指导装配电气与电子设备与组件并在流水线或工位按节拍完成装配与自检；工作含按工单与图纸与工艺领取任务并核对版本，领取与核对物料与元件与线束与连接器与工装与测试设备，检查防静电与防护与用电与工装状态，按工序与节拍完成焊锡与压接与绕线与紧固与布线与点胶与清洁，按标准量测与目检与功能测试并记录数据与标记状态，保持工位 5S 与物料标识与防错，填写装配与检验与批次与追溯记录，对不合格项按流程隔离与返工或报废并如实上报异常与停线请求，配合质检与工艺与设备处理并参与改进，并完成交接。美国口径：BLS 2025 年工资数据中位 45,850 美元/年（22.04 美元/时，该来源仅提供中位数，未提供 10/25/75/90 分位）；O*NET 摘要页给出 2024 年就业约 261,400 人、2024—2034 年预测为「高于平均（Faster than average，5% 至 6%）」与 2024—2034 年预计空缺 29,600（预测期合计口径）；准备层级为 Job Zone 1-2（SVP 低于 6.0），教育反馈为 46% 高中或同等学历与 35% 低于高中，兴趣代码 RCI，任务 17 项。中国大陆口径：从业人员安全培训与劳动防护与有害作业防护依《中华人民共和国安全生产法》与《中华人民共和国职业病防治法》及单位安全与质量制度执行；职业技能可按国家职业技能标准（电子设备装接工与电子器件装配工等）参加技能等级认定。公开统计未建立与本职业对应的职业级工资口径，本页据实保留缺口，行业平均工资只作为可见行业代理。"
+    "summary": "按工单核对部件和版本，组装电气或电子设备，记录检验结果并把异常交给质检或班组长。"
   }
 }

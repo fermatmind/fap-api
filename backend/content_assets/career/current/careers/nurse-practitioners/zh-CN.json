@@ -194,6 +194,9 @@
       "item:nurse-practitioners.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:nurse-practitioners.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nurse-practitioners.profile.definition-block.1": {
         "status": "pending_mapping"
       },
@@ -12223,6 +12226,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两份记录对同一次随访分别写“已完成”和“待安排”，未标更新时间。写下冲突、应查的来源和负责复核的临床角色。"
+            ]
+          },
+          "id": "nurse-practitioners.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核门诊随访交接",
+          "type": "notice"
         }
       ]
     },
@@ -14880,6 +14898,13 @@
         "id": "nurse-practitioners.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nurse-practitioners.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15234,7 +15259,7 @@
       "text": "执业护士（Nurse Practitioners）职业画像｜任务、薪资、准入与边界"
     }
   },
-  "source_content_sha256": "07a5c1b90e5ad8e1aeae1a042578a588747cf92784a88660be876bb131364ee7",
+  "source_content_sha256": "a7e6103312d930ab9c6ff0d113ceee3f1b312d5b7390bc2cb066fa4730408495",
   "subject": {
     "canonical_slug": "nurse-practitioners",
     "name": "执业护士",

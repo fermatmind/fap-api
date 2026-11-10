@@ -155,6 +155,9 @@
       "item:office-clerks-general.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:office-clerks-general.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:office-clerks-general.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13243,6 +13246,21 @@
             "onet-cert"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two versions of a notice have different dates, and the log lists only the sender. Identify the version, recipients and owner to check before retiring the old copy."
+            ]
+          },
+          "id": "office-clerks-general.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Reconcile an office distribution log",
+          "type": "notice"
         }
       ]
     },
@@ -15737,6 +15755,13 @@
         "id": "office-clerks-general.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "office-clerks-general.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15942,7 +15967,7 @@
       "text": "General office clerks: duties, wages, and entry paths"
     }
   },
-  "source_content_sha256": "cf2fa862dcd0e86e85361762a92cc267817a4e63acbe6be68e43504e78313ab4",
+  "source_content_sha256": "7815728371f3920d88a2df2e153e98dbf810eeb694923f449238de30ec9926a0",
   "subject": {
     "canonical_slug": "office-clerks-general",
     "name": "Office clerks",

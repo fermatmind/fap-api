@@ -1283,6 +1283,9 @@
       "item:photographic-process-workers-and-processing-machine-operators.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:photographic-process-workers-and-processing-machine-operators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:photographic-process-workers-and-processing-machine-operators.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -31281,6 +31284,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Order P8 asks for two matte prints from image F3. A uses F3 but contains one print. B has two matte prints from F2. Write why each stays pending and what the order reviewer should verify."
+            ]
+          },
+          "id": "photographic-process-workers-and-processing-machine-operators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Check a photo processing order",
+          "type": "notice"
         }
       ]
     },
@@ -37824,6 +37842,13 @@
         "id": "photographic-process-workers-and-processing-machine-operators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "photographic-process-workers-and-processing-machine-operators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38181,7 +38206,7 @@
       "text": "Photographic Processing Operators"
     }
   },
-  "source_content_sha256": "738f73c06701b8e5f2ff74c6a8c5119639510362e06b731de1323da54f96ecef",
+  "source_content_sha256": "9789a7dee6a8646d2cfdcac6f8c9c210ef26d08c45c0e588dc2251de422c2d58",
   "subject": {
     "canonical_slug": "photographic-process-workers-and-processing-machine-operators",
     "name": "Photographic Processing Operators",

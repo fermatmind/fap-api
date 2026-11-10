@@ -9,7 +9,7 @@
         "status": "pending_mapping"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:employment-g04-current": {
         "status": "pending_mapping"
@@ -18,7 +18,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:growth-g04-current": {
         "status": "pending_mapping"
@@ -57,9 +57,15 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:openings-g04-current": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-crossing-shantou": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-crossing-wdlc": {
         "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
@@ -26145,12 +26151,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no verifiable recruitment or quote statistics for Mainland China school crossing and traffic direction positions; a single unit's position subsidy disclosure cannot represent the national level"
+              "A Wudalianchi road maintenance program listed CNY 3,100 per month for a public-interest traffic guide and driver with a C1 or higher license and light-truck duties. A Shantou police auxiliary notice allocated about CNY 58,000 annually per traffic assistant, including both sides’ social insurance and housing-fund costs. That adjacent role’s budget is not personal pay."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "crossing-wdlc",
+            "crossing-shantou"
           ],
           "type": "prose"
         },
@@ -26245,7 +26252,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Mainland China salary section on this page keeps only the evidence boundary: industry averages are not treated as the occupation wage, US data is not used as a substitute, and no national median, starting wage, or percentile for this occupation is stated."
+              "Use the postings to compare individual roles and pay terms. A comparable national occupational wage distribution is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -30997,7 +31004,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Escort pedestrians across the street around schools, at intersections, railroad crossings, and construction sections, stopping vehicles as needed; monitor traffic to judge gaps in which pedestrians can cross safely; guide traffic or warn of hazards with signs, flags, indicator lights, and hand signals; place traffic control signs and markers at designated posts and know the location and purpose of traffic signs in the responsibility area; stop speeding vehicles to remind them of traffic regulations and explain detour routes at construction sections to drivers; explain traffic and crossing rules to students and adults; record the license plates of vehicles that ignore traffic signals and report violation information, and report dangerous behavior by children to the school; and discuss traffic direction plans and control point locations with a supervisor.",
+                "answer": "Guide pedestrians or vehicles at assigned crossings, schools or road works. Watch visibility and conflicts and report incidents under the site plan. School crossing and work-zone flagging have different equipment, training and authority.",
                 "id": "actors.faq.1",
                 "question": "What do crossing guards and flaggers specifically do every day?",
                 "question_key": "career.faq.crossing-guards-and-flaggers.1",
@@ -31006,9 +31013,9 @@
                 ]
               },
               {
-                "answer": "This occupation focuses on guiding traffic and escorting pedestrians and usually has no citation or coercive authority; parking enforcement workers enforce parking regulations and issue citations for illegal parking; police and sheriff's patrol officers have statutory enforcement and coercive authority and are responsible for public order enforcement; transit and railroad police maintain public transit and railroad order; security guards protect site safety; recreation protection service workers take on protection and rescue at recreation sites; school bus monitors maintain order during student pickup and drop-off. Similar names do not mean duties or authorization can be interchanged.",
+                "answer": "Crossing guards and flaggers guide traffic and give warnings on site. Police have separate legal duties, and the responsible organization sets the work-zone plan. The title alone does not confer enforcement authority.",
                 "id": "actors.faq.2",
-                "question": "What is the difference between this occupation and police officers or parking enforcement workers?",
+                "question": "How does traffic guidance differ from traffic policing?",
                 "question_key": "career.faq.crossing-guards-and-flaggers.2",
                 "source_refs": [
                   "onet"
@@ -31024,9 +31031,9 @@
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: three types of tasks, namely traffic flow monitoring and safe gap judgment, scheduling and record documents, and warning and communication, can be partly taken on by tools; this page has no single-occupation adoption rate or replacement data.",
+                "answer": "Systems can assist with rosters, notifications and incident records. Staff still follow the site plan for visibility, signals, handoffs and escalation. This is not a measurement of AI adoption or job displacement.",
                 "id": "actors.faq.4",
-                "question": "For which tasks in this occupation is there already evidence of AI change?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.crossing-guards-and-flaggers.4",
                 "source_refs": [
                   "onet"
@@ -31042,12 +31049,14 @@
                 ]
               },
               {
-                "answer": "In the US 2025 wage data the median annual wage is 38,100 US dollars and the percentiles are 30,840／34,430／38,100／47,540／61,690 US dollars (33-9091.00 single-occupation basis), and hourly wages are published as well; figures broken down by state or region must be queried on the O*NET local wage page by region and period and cannot be taken as an individual quote; no occupation-level wage figure was obtained for Mainland China, and this page handles it as a gap.",
+                "answer": "The May 2025 U.S. median wage was $38,100 per year and $18.32 per hour. A Wudalianchi road maintenance program listed CNY 3,100 per month for a public-interest traffic guide and driver with a C1 or higher license and light-truck duties. A Shantou police auxiliary notice allocated about CNY 58,000 annually per traffic assistant, including both sides’ social insurance and housing-fund costs. That adjacent role’s budget is not personal pay.",
                 "id": "actors.faq.6",
                 "question": "About how much does this occupation pay, and how should it be compared?",
                 "question_key": "career.faq.crossing-guards-and-flaggers.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "crossing-wdlc",
+                  "crossing-shantou"
                 ]
               },
               {
@@ -31078,12 +31087,12 @@
                 ]
               },
               {
-                "answer": "The O*NET summary and employment trends page (based on the BLS 2024—2034 projection) shows about 91,400 people in this occupation in 2024, with a projection label of Average (growth 3% to 4%), and about 18,000 average annual openings including growth and replacement; the work is mainly outdoor standing and walking and is mostly a time-slot position of less than 40 hours per week, and must be verified against local school and road demand, employers, and seasonal arrangements.",
+                "answer": "BLS projects U.S. employment in SOC 33-9091 to go from about 94,800 in 2025 to 98,100 in 2035 (+3.5%). It projects about 17,300 openings per year, including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should I consider now when choosing this occupation?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.crossing-guards-and-flaggers.10",
                 "source_refs": [
-                  "bls"
+                  "a21-bls-projections"
                 ]
               }
             ]
@@ -31506,7 +31515,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Of the current O*NET12 task items, 7Core and 5Supplemental. Core includes escorting across the street, monitoring gaps, guiding traffic at road and railroad construction, warning with signs, flags, lights, and hand signals, explaining rules to students and adults, reporting dangerous behavior by children, and recording license plates to report to the competent department; Supplemental includes placing signs, stopping speeding drivers and reminding them of regulations, knowing the responsibility-area signs, discussing route control points with a supervisor, and guiding detours at construction sites. The task descriptions are not a Chinese or US legal permission or a task every person performs every shift.",
                   "The US education response for new hires in this position shows 73% high school or equivalent, 18% less than high school, and 6% some college with no degree; unshown remaining items are not filled in as zero. Job Zone1–2/SVP below 6 is a general preparation level, and training from a few days to one year is a general statement, not the training length for every person in this position or a uniform education threshold; Chinese position conditions must be verified against the specific announcement.",
@@ -31520,7 +31529,7 @@
                 "period": "Read 2026-10-09; the tasks, context, and education do not uniformly disclose a survey year, and the industry is 2025",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/33-9091.00"
+                "url": "https://www.onetonline.org/link/details/33-9091.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31767,6 +31776,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. employment in SOC 33-9091 to go from about 94,800 in 2025 to 98,100 in 2035 (+3.5%). It projects about 17,300 openings per year, including replacements."
+                ],
+                "evidence_type": "Official statistics",
+                "id": "a21-bls-projections",
+                "limitation": "Annual openings include replacement; they are not net change or hiring odds.",
+                "market": "United States",
+                "name": "BLS Table 1.2: Occupational employment projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Two public-interest roles, CNY 3,100 per month. C1 or above, light-truck duties and local eligibility for jobseekers facing employment barriers."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "crossing-wdlc",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Traffic guide and driver",
+                "period": "2026-09-14",
+                "publisher": "Wudalianchi Road Development Center",
+                "scope": "recruitment_proxy",
+                "url": "https://www.wdlc.gov.cn/wdlc/c100750/202609/c11_359856.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "About CNY 58,000 in annual allocated costs, including employer and employee insurance and housing-fund costs. Not take-home pay."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "crossing-shantou",
+                "limitation": "Individual posting, not national wage statistics.",
+                "market": "Mainland China",
+                "name": "Auxiliary police traffic assistant",
+                "period": "2026-09-15",
+                "publisher": "Shantou Public Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shantou.gov.cn/gaj/zwgk/gggs/content/post_2567887.html"
               }
             ]
           },
@@ -34730,7 +34784,7 @@
               }
             },
             {
-              "城市/区间": "Mainland China (recruitment quote basis)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34742,13 +34796,14 @@
           "china_soc_row": "US 33-9091.00 single occupation; the one-to-one Chinese occupation classification mapping was not obtained, and statutory authority is verified separately.",
           "edu": "See the entry module for training and qualification",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026-g04-current"
+            "posting-crossing-wdlc",
+            "posting-crossing-shantou"
           ],
           "sources_note": "Source links are used within their own statistical or announcement scopes; where the statistical period, survey object, and pay basis differ, cite them separately and do not convert between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect this occupation's wage?",
             "driver_heading": "How are time slots and seasons arranged in traffic guidance work?",
-            "official_heading": "Official statistical basis and gap statement",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Education and training background, position directions, and notes (editorial compilation, not wage statistics)",
             "scenario_heading": "Which traffic guidance position directions correspond to different education and training backgrounds?",
             "scenario_interpretation_label": "Explanation and verification suggestions",
@@ -35392,7 +35447,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/parking-enforcement-workers",
+            "target_href": "/en/career/jobs/parking-enforcement-workers",
             "target_slug": "parking-enforcement-workers",
             "target_title": "Parking enforcement workers (adjacent occupation)",
             "transition_distance": {
@@ -35415,7 +35470,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/police-and-sheriff-s-patrol-officers",
+            "target_href": "/en/career/jobs/police-and-sheriff-s-patrol-officers",
             "target_slug": "police-and-sheriff-s-patrol-officers",
             "target_title": "Police and sheriff's patrol officers (adjacent occupation)",
             "transition_distance": {
@@ -35438,7 +35493,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/transit-and-railroad-police",
+            "target_href": "/en/career/jobs/transit-and-railroad-police",
             "target_slug": "transit-and-railroad-police",
             "target_title": "Transit and railroad police (adjacent occupation)",
             "transition_distance": {
@@ -35461,7 +35516,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/security-guards",
+            "target_href": "/en/career/jobs/security-guards",
             "target_slug": "security-guards",
             "target_title": "Security guards (adjacent occupation)",
             "transition_distance": {
@@ -35484,7 +35539,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/traffic-technicians",
+            "target_href": "/en/career/jobs/traffic-technicians",
             "target_slug": "traffic-technicians",
             "target_title": "Traffic technicians (adjacent occupation)",
             "transition_distance": {
@@ -35507,7 +35562,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/lifeguards-ski-patrol-and-other-recreational-protective-service-workers",
+            "target_href": "/en/career/jobs/lifeguards-ski-patrol-and-other-recreational-protective-service-workers",
             "target_slug": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers",
             "target_title": "Protective service workers (adjacent occupation)",
             "transition_distance": {
@@ -35530,7 +35585,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/school-bus-monitors",
+            "target_href": "/en/career/jobs/school-bus-monitors",
             "target_slug": "school-bus-monitors",
             "target_title": "School bus monitors (adjacent occupation)",
             "transition_distance": {
@@ -35553,7 +35608,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/transportation-security-screeners",
+            "target_href": "/en/career/jobs/transportation-security-screeners",
             "target_slug": "transportation-security-screeners",
             "target_title": "Transportation security screeners (adjacent occupation)",
             "transition_distance": {
@@ -35641,7 +35696,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35690,7 +35745,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35739,7 +35794,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35788,7 +35843,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35837,7 +35892,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35886,7 +35941,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36508,7 +36563,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand crossing guards and flaggers' task interests and work preferences",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36622,11 +36677,11 @@
         "secondary_links": [
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "label": "Personality preferences"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "label": "Big Five traits"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
@@ -37039,39 +37094,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 91,400 people (2024, single-occupation basis)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "94,800 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment scale (stock statistics)",
-        "occupation_scope": "33-9091.00; the 2024 employment figure comes from the O*NET summary page (based on the BLS 2024—2034 projection)",
-        "period": "2024 base period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 33-9091",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a21-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Growth of 3% to 4% (2024—2034, label Average)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "+3.5%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "33-9091.00; the projection label is Average (3% to 4%), a total change for the projection period, not an individual hiring probability",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 33-9091",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a21-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 18,000 (2024—2034 annual average, including growth and replacement)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "17,300 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Average annual job openings (including growth and replacement)",
-        "occupation_scope": "33-9091.00; openings are a 2024—2034 annual average, including positions arising from growth and replacement, not the net number of jobs added each year",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "occupation_scope": "U.S. SOC 33-9091",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a21-bls-projections"
         ]
       },
       {
@@ -37229,6 +37284,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Two public-interest roles, CNY 3,100 per month. C1 or above, light-truck duties and local eligibility for jobseekers facing employment barriers.",
+        "fact_id": "posting-crossing-wdlc",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Traffic guide and driver",
+        "period": "2026-09-14",
+        "source_refs": [
+          "crossing-wdlc"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "About CNY 58,000 in annual allocated costs, including employer and employee insurance and housing-fund costs. Not take-home pay.",
+        "fact_id": "posting-crossing-shantou",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Auxiliary police traffic assistant",
+        "period": "2026-09-15",
+        "source_refs": [
+          "crossing-shantou"
+        ]
       }
     ]
   },
@@ -37255,19 +37334,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "US employment projection (2024—2034, growth 3% to 4%, average)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "US employed persons (2024, about 91,400 people)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "US average annual job openings (2024—2034, about 18,000, including growth and replacement)"
+        "label": "U.S. projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37281,17 +37360,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Crossing guards and flaggers (O*NET-SOC 33-9091.00) guide traffic around schools, at intersections, railroad crossings, and construction sections: this covers escorting students across the street and stopping vehicles, guiding traffic with signs, flags, and hand signals, monitoring traffic flow to judge safe gaps for pedestrians, explaining traffic and crossing rules, reporting dangerous behavior by children and violation information on vehicles, placing traffic control signs, knowing the traffic signs in the responsibility area, and discussing direction plans with a supervisor; it includes the US 2025 median annual wage of 38,100 US dollars, about 91,400 people employed in 2024, a 2024—2034 employment projection growth of 3% to 4% (average), about 18,000 average annual openings including growth and replacement, industry employment concentrated in administrative and support services (42%) and government (39%), the interest code RC, the Mainland China occupation-level wage gap, and the control points of outdoor work and bad weather, pedestrian safety, statutory directing authority, and record responsibility boundaries."
+      "text": "See how crossing guards and flaggers guide traffic and report hazards. Compare two Chinese examples and U.S. wages and employment."
     },
     "title": {
       "availability": "available",
       "text": "Crossing guards and flaggers"
     }
   },
-  "source_content_sha256": "1a4335f275f515238b70712e3af68a03e49cd62c18deb1e8e3c2d6336509364b",
+  "source_content_sha256": "683c779748b482c74780fc6acbd5e8b4ee6f44f0ef757cf44f3f2fd9554d4937",
   "subject": {
     "canonical_slug": "crossing-guards-and-flaggers",
     "name": "Crossing guards and flaggers",
-    "summary": "In the United States crossing guards and flaggers correspond to O*NET-SOC 33-9091.00 (Crossing Guards and Flaggers) and guide or control vehicle and pedestrian traffic around schools, on streets and at railroad crossings, and at construction sections: escorting students across the street at arrival and dismissal and stopping vehicles as needed, guiding traffic and warning of hazards with signs, flags, indicator lights, and hand signals at intersections and construction sections, monitoring traffic flow to judge gaps in which pedestrians can cross safely, explaining traffic and crossing rules to students and adults, reporting dangerous behavior by children and violation information on vehicles that ignore signals, placing traffic control signs and markers at designated posts, knowing the location and purpose of traffic signs in the responsibility area, and discussing traffic direction plans and control point locations with a supervisor. The preparation level for this occupation is Job Zone 1-2 (usually requiring a high school diploma or equivalent and providing from a few days to one year of on-the-job training); the comparable positions on the Chinese side are school area crossing posts, traffic auxiliary managers, and construction section traffic direction personnel, whose duty and authorization bases do not correspond one-to-one with this US occupation segment and cannot be interchanged."
+    "summary": "Guide pedestrians or vehicles at assigned crossings, schools or road works. Watch visibility and conflicts and report incidents under the site plan. School crossing and work-zone flagging have different equipment, training and authority."
   }
 }

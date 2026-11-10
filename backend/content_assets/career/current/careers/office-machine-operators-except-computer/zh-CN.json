@@ -149,6 +149,9 @@
       "item:office-machine-operators-except-computer.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:office-machine-operators-except-computer.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:office-machine-operators-except-computer.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -12983,6 +12986,21 @@
             "onet-education"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。工单要求每册 12 页，抽样记录写 11 页但没标批次。写出应回查的工单和批号，向交付人说明暂不能确认的数量。"
+            ]
+          },
+          "id": "office-machine-operators-except-computer.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "核复印与装订工单",
+          "type": "notice"
         }
       ]
     },
@@ -15485,6 +15503,13 @@
         "id": "office-machine-operators-except-computer.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "office-machine-operators-except-computer.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15654,7 +15679,7 @@
       "text": "非计算机办公设备操作员：职责、工资与前景"
     }
   },
-  "source_content_sha256": "aebbefb3f063a03bdb81261077e03bf78d5a66313582006219325f5ecba7a2f7",
+  "source_content_sha256": "3d8e8dfa8d99e46f4ca79586747dba67ff263ee50a8f9dda9e7cd25f726c601a",
   "subject": {
     "canonical_slug": "office-machine-operators-except-computer",
     "name": "办公设备操作员（计算机除外）",

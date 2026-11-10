@@ -161,6 +161,9 @@
       "item:order-clerks.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:order-clerks.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:order-clerks.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -13006,6 +13009,21 @@
             "internal-rubric"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。顾客把数量从 5 改为 3，确认邮件已更新，仓库单仍写 5。写出应核的版本与要通知的人。"
+            ]
+          },
+          "id": "order-clerks.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "核订单变更是否传到仓库",
+          "type": "notice"
         }
       ]
     },
@@ -15503,6 +15521,13 @@
         "id": "order-clerks.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "order-clerks.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15720,7 +15745,7 @@
       "text": "订单文员：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "819bf2eaf9d48e77e4b2fe4b5e2adc47406e213b2ee56d3cc3830aea3f04a57b",
+  "source_content_sha256": "ba2191910250aa0fac4e1337fc52d766e0a7e4e5656364532dfc09ace402a516",
   "subject": {
     "canonical_slug": "order-clerks",
     "name": "订单文员",

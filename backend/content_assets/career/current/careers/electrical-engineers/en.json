@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-a28-shunde": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a28-zhengzhou": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -1605,7 +1611,7 @@
         "status": "mapped"
       },
       "item:actors.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.interview-probation.1": {
         "status": "mapped"
@@ -1677,7 +1683,7 @@
         "status": "mapped"
       },
       "item:actors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -26107,12 +26113,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Nationwide pretax annual averages for non-private/private manufacturing in 2025: CNY 113,594/76,055; scientific research and technical services: CNY 182,064/83,560. Broad industry proxies, rather than engineer medians or personal take-home pay."
+              " These are past notices. A comparable mainland occupational median remains unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "nbs"
+            "a28-shunde",
+            "a28-zhengzhou"
           ],
           "type": "prose"
         },
@@ -26221,12 +26228,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Do not substitute industry average wages or a single recruitment offer for wages in this occupation."
+              "Use the notices to compare duties and pay terms for individual posts."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "nbs"
+            "a28-shunde",
+            "a28-zhengzhou"
           ],
           "type": "prose"
         }
@@ -28978,25 +28986,26 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Material one: fictional requirements and constraints list",
-                  "Provides requirement versions, interface definitions, and constraints as exercise inputs.",
-                  "Exercise output: list assumptions, boundary conditions, and unresolved items."
+                  "Paper exercise inputs",
+                  "Fictional system S4, on paper. Version V2 must respond in no more than 120 ms. Report T11 records 135 ms for V2. Report T09 records 110 ms for the older V1.",
+                  "The tester signed T11. The acceptance owner has not approved it. Compare records for the applicable revision. The design lead arranges review, and the acceptance owner confirms release.",
+                  "Use only the records supplied. There is no hardware work, and no cause for the deviation is given."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Material two: standard provision and criteria excerpts",
-                  "Provides applicable provisions, limits, and checking methods.",
-                  "Exercise output: state the sources of design criteria and their applicability scopes."
+                  "What to submit",
+                  "Submit a one-page verification record with the applicable report, difference, whether the old result applies and release status.",
+                  "Name the review and acceptance owners and list what still needs confirming."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Material three: calculation data table (fictional)",
-                  "Provides parameters and calculation results, including one exceeded limit and one missing condition.",
-                  "Exercise output: mark items exceeding limits and missing conditions, and state recalculation requirements."
+                  "Finish your own answer first",
+                  "Open “Verification record reference (open after day six)” under FAQs and sources.",
+                  "Use the checklist to record one difference and one correction."
                 ]
               },
               {
@@ -29025,50 +29034,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: read a standard provision",
-                  "Copy an applicable standard provision, stating its scope and uncertainties."
+                  "Day 1",
+                  "List the reports and revisions."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: write a requirements and interfaces list",
-                  "Use fictional requirements to organize interfaces and constraints, marking assumptions and unresolved items."
+                  "Day 2",
+                  "Calculate the difference against the V2 requirement."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: perform a paper calculation",
-                  "Complete a load or equipment selection calculation against excerpts, recording parameter sources."
+                  "Day 3",
+                  "Explain where the V1 result applies."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: define verification criteria",
-                  "State passing criteria, measurement conditions, and uncertainty handling methods."
+                  "Day 4",
+                  "Check signatures and review owners."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: organize a conformity checklist",
-                  "Check the design against fictional provisions individually, marking conforming items and deviations."
+                  "Day 5",
+                  "Finish the paper verification record."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: create two variants",
-                  "Change one constraint and one criterion separately, clearly stating impact scopes and recalculation items."
+                  "Day 6: finish your own answer",
+                  "Check whether someone could read your handoff on its own before opening the reference."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: review stop conditions",
-                  "Summarize conditions requiring stopping and escalation in a one-page retrospective record."
+                  "Day 7: open the reference and review",
+                  "Open “Verification record reference (open after day six)” under FAQs and sources. Record one difference and correction, then decide whether to continue or pause."
                 ]
               }
             ]
@@ -29087,13 +29096,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: can you accurately identify the provision's scope and exceptions rather than merely copy keywords?",
+              "You can finish a one-page handoff and separate verified facts, open checks and approvals.",
               "Day 2: can you break requirements into verifiable interfaces and constraints and mark unresolved items?",
-              "Day 3: can you explain parameter sources, units, and assumptions in calculations?",
+              "Note which paper step takes most effort. Ask the employer about actual work demands.",
               "Day 4: can you turn “passing” into actionable criteria rather than a general description?",
               "Day 5: can you mark deviations and missing conditions without deleting data?",
               "Day 6: can you assess change impacts and list items requiring recalculation?",
-              "Day 7: can you state explicit stop and escalation conditions and explain who confirms them?"
+              "On day seven, check your handoff against the collapsed reference. Repeat if a critical item is missing. Ask the employer about training and actual responsibilities."
             ]
           },
           "id": "actors.path.seven-day-decision.1",
@@ -30978,21 +30987,21 @@
           "data": {
             "entries": [
               {
-                "answer": "Research and design electrical equipment, components, and systems for commercial, industrial, military, or scientific use: organize requirements and applicable standards, complete electrical calculations and equipment selection, produce drawings and technical documents for checking, review, and signing, organize testing to verify conformity, and handle design changes.",
+                "answer": "Turn system requirements into an electrical design and verification plan. Review equipment choices, test results and changes, and hand over unresolved requirements.",
                 "id": "actors.faq.1",
                 "question": "What do electrical engineers mainly do?",
                 "question_key": "career.faq.electrical-engineers.1",
                 "source_refs": [
-                  "onet"
+                  "a28-onet"
                 ]
               },
               {
-                "answer": "This occupation focuses on power and electrical systems in the electrical path, taking responsibility for design calculations and conformity conclusions; electronics engineers (except computer) focus on circuits and devices; engineering technologists and technicians provide design support and test records under engineering supervision, without independently approving designs.",
+                "answer": "Electrical engineering can cover power distribution, controls and equipment systems. Electronics engineering often focuses on circuits, signals and board-level products. Verify the product, test requirements and sign-off responsibilities.",
                 "id": "actors.faq.2",
                 "question": "How does it differ from electronics engineers and engineering technologists?",
                 "question_key": "career.faq.electrical-engineers.2",
                 "source_refs": [
-                  "onet"
+                  "a28-onet"
                 ]
               },
               {
@@ -31014,22 +31023,22 @@
                 ]
               },
               {
-                "answer": "O*NET/BLS reports approximately 192,000 workers in 2024, with projected much-faster-than-average growth from 2024–2034 (7% or higher) and approximately 11,700 projected openings; openings include growth and replacements.",
+                "answer": "BLS projects U.S. SOC 17-2071 to rise from 199,700 jobs in 2025 to 219,500 in 2035 (+9.9%), with about 11,400 annual openings including replacements.",
                 "id": "actors.faq.5",
                 "question": "What is the U.S. employment outlook?",
                 "question_key": "career.faq.electrical-engineers.5",
                 "source_refs": [
-                  "onet"
+                  "a28-bls"
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics materials checked in this round cover only industries and broad personnel categories; nationwide occupation-specific wage percentiles exactly matching this occupation were not obtained. This page records insufficient evidence and does not substitute industry averages or single recruitment offers.",
+                "answer": "The Shunde post listed CNY 8,501–10,000 per month and covered electrical-system design review, equipment selection, drawings and commissioning. The Zhengzhou posting listed five electrical engineers, a bachelor’s degree, PLC programming, schematics, selection and commissioning. It quoted CNY 6,000–10,000 without a pay period. These are past notices. A comparable mainland occupational median remains unavailable.",
                 "id": "actors.faq.6",
                 "question": "Can wages for mainland China be found?",
                 "question_key": "career.faq.electrical-engineers.6",
                 "source_refs": [
-                  "onet",
-                  "nbs"
+                  "a28-shunde",
+                  "a28-zhengzhou"
                 ]
               },
               {
@@ -31067,6 +31076,15 @@
                 "question_key": "career.faq.electrical-engineers.10",
                 "source_refs": [
                   "onet"
+                ]
+              },
+              {
+                "answer": "T11 applies to V2. The 135 ms result exceeds the limit by 15 ms. T09’s 110 ms is for V1 and cannot establish V2 compliance. Log S4, V2, T11, the difference and the unresolved cause. Ask the design lead to arrange review. Release is pending the acceptance owner. Check four items: report revision, difference, old-result exclusion, and review and release handoff. Count each complete item. This is fictional. The source provides occupational context.",
+                "id": "actors.faq.11",
+                "question": "Verification record reference (open after day six)",
+                "question_key": "career.faq.electrical-engineers.11",
+                "source_refs": [
+                  "a28-onet"
                 ]
               }
             ]
@@ -31298,20 +31316,19 @@
                 "url": "https://www.bls.gov/ooh/occupation-finder.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Check median wages, employment size, growth, and average annual openings for the combined scope.",
-                  "Applies only to this combined U.S. occupation."
+                  "BLS projects U.S. SOC 17-2071 to rise from 199,700 jobs in 2025 to 219,500 in 2035 (+9.9%), with about 11,400 annual openings including replacements."
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "bls",
-                "limitation": "Applies only to the combined U.S. scope; the median is not starting pay, and openings do not equal net additions.",
+                "limitation": "Annual openings include replacements.",
                 "market": "United States",
-                "name": "BLS OOH — electrical and electronics installers and repairers (combined scope)",
-                "period": "Wage data for month 5 of 2025; projections for 2025–2035",
+                "name": "BLS Table 1.2: occupational projections",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/electrical-and-electronics-installers-and-repairers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -31694,6 +31711,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Occupational tasks and work context."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a28-onet",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "U.S. 17-2071",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact_occupation",
+                "url": "https://www.onetonline.org/link/details/17-2071.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "BLS projects U.S. SOC 17-2071 to rise from 199,700 jobs in 2025 to 219,500 in 2035 (+9.9%), with about 11,400 annual openings including replacements."
+                ],
+                "evidence_type": "Occupational task source",
+                "id": "a28-bls",
+                "limitation": "U.S. occupational task comparison only.",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Shunde post listed CNY 8,501–10,000 per month and covered electrical-system design review, equipment selection, drawings and commissioning."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a28-shunde",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Electrical engineer",
+                "period": "2026-09-30",
+                "publisher": "Shunde public employment service",
+                "scope": "recruitment_proxy",
+                "url": "https://sdjyt.shunde.gov.cn/m/jobs-show.php?id=61810"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The Zhengzhou posting listed five electrical engineers, a bachelor’s degree, PLC programming, schematics, selection and commissioning. It quoted CNY 6,000–10,000 without a pay period."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a28-zhengzhou",
+                "limitation": "Individual notice describing the terms of this posting.",
+                "market": "Mainland China",
+                "name": "Automation electrical engineer",
+                "period": "2026-02-27",
+                "publisher": "Zhengzhou Administration for Market Regulation",
+                "scope": "recruitment_proxy",
+                "url": "https://amr.zhengzhou.gov.cn/jycyzl/9911730.jhtml"
               }
             ]
           },
@@ -34531,7 +34608,7 @@
             },
             {
               "指标": "Role scope",
-              "数值": "Names of similar mainland Chinese roles do not correspond one-to-one with the specific U.S. occupational scope",
+              "数值": "See the two dated job postings below.",
               "说明": "Check boundaries of electrical design, distribution, automation engineering, and other roles by organization."
             },
             {
@@ -34671,7 +34748,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "Historical case status",
+          "china_open": "The dated posting samples are shown alongside the national occupation-level data gap.",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34715,7 +34792,7 @@
               }
             },
             {
-              "城市/区间": "Industry average wages (not a substitute)",
+              "城市/区间": "Mainland China job postings",
               "月薪参考": {
                 "$join": [
                   {
@@ -34745,7 +34822,8 @@
           "china_soc_row": "Chinese wage scope",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a28-shunde",
+            "posting-a28-zhengzhou"
           ],
           "sources_note": {
             "$join": [
@@ -34770,14 +34848,14 @@
           "ui": {
             "ai_heading": "Will AI directly change income in this occupation?",
             "driver_heading": "What should be considered when checking compensation for similar mainland Chinese roles?",
-            "official_heading": "Mainland Chinese public scopes and statistical gaps",
+            "official_heading": "Scope of industry figures and job postings",
             "scenario_caption": "Exact nationwide wages for this specific occupation were not obtained; do not substitute industry averages or recruitment offers.",
             "scenario_heading": "Can scopes of similar mainland Chinese roles be compared directly?",
             "scenario_interpretation_label": "Applicable scope and gaps",
             "scenario_role_label": "Role or scope",
             "scenario_value_label": "Pay and disclosure"
           },
-          "us_growth": "See the U.S. wage reference section for U.S. projections.",
+          "us_growth": "9.9% (2025–2035)",
           "us_median": "See the U.S. wage reference section for U.S. wages."
         }
       },
@@ -35255,7 +35333,7 @@
         "outlook_evidence": [
           {
             "geography": "United States",
-            "horizon": "2025—2035",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.2",
               "block": "market-signals",
@@ -35270,8 +35348,8 @@
             },
             "metric": "Employment growth",
             "occupation_scope": "O*NET-SOC 17-2071.00 (electrical engineers)",
-            "source_id": "bls",
-            "value": "10% (overall projection)"
+            "source_id": "a28-bls",
+            "value": "9.9%"
           },
           {
             "geography": "United States",
@@ -35290,12 +35368,12 @@
             },
             "metric": "Employment size",
             "occupation_scope": "O*NET-SOC 17-2071.00 (electrical engineers)",
-            "source_id": "ratify",
-            "value": "199,700 workers"
+            "source_id": "a28-bls",
+            "value": "199,700"
           },
           {
             "geography": "United States",
-            "horizon": "2024—2034",
+            "horizon": "2025–2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -35310,8 +35388,8 @@
             },
             "metric": "Projected openings",
             "occupation_scope": "O*NET-SOC 17-2071.00 (electrical engineers)",
-            "source_id": "employer",
-            "value": "Approximately 11,700 openings"
+            "source_id": "a28-bls",
+            "value": "11,400"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -35423,7 +35501,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-and-electronics-engineers",
+            "target_href": "/en/career/jobs/electrical-and-electronics-engineers",
             "target_slug": "electrical-and-electronics-engineers",
             "target_title": "Electrical and electronics engineers (combined scope)",
             "transition_distance": {
@@ -35446,7 +35524,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electronics-engineers-except-computer",
+            "target_href": "/en/career/jobs/electronics-engineers-except-computer",
             "target_slug": "electronics-engineers-except-computer",
             "target_title": "Electronics engineers, except computer",
             "transition_distance": {
@@ -35469,7 +35547,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-and-electronics-engineering-technicians",
+            "target_href": "/en/career/jobs/electrical-and-electronics-engineering-technicians",
             "target_slug": "electrical-and-electronics-engineering-technicians",
             "target_title": "Electrical and electronic engineering technologists and technicians",
             "transition_distance": {
@@ -35492,7 +35570,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electrical-and-electronics-drafters",
+            "target_href": "/en/career/jobs/electrical-and-electronics-drafters",
             "target_slug": "electrical-and-electronics-drafters",
             "target_title": "Electrical and electronics drafters",
             "transition_distance": {
@@ -35515,7 +35593,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/electricians",
+            "target_href": "/en/career/jobs/electricians",
             "target_slug": "electricians",
             "target_title": "Electricians",
             "transition_distance": {
@@ -35538,7 +35616,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/mechanical-engineers",
+            "target_href": "/en/career/jobs/mechanical-engineers",
             "target_slug": "mechanical-engineers",
             "target_title": "Mechanical engineers",
             "transition_distance": {
@@ -35561,7 +35639,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/computer-hardware-engineers",
+            "target_href": "/en/career/jobs/computer-hardware-engineers",
             "target_slug": "computer-hardware-engineers",
             "target_title": "Computer hardware engineers",
             "transition_distance": {
@@ -35584,7 +35662,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/industrial-engineers",
+            "target_href": "/en/career/jobs/industrial-engineers",
             "target_slug": "industrial-engineers",
             "target_title": "Industrial engineers",
             "transition_distance": {
@@ -35672,7 +35750,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore my vocational interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35721,7 +35799,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Explore my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35770,7 +35848,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35819,7 +35897,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Explore my motivational clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -35868,7 +35946,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -35917,7 +35995,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Explore my communication clues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36515,7 +36593,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore electrical engineers’ task interests and work preferences",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37046,39 +37124,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Approximately 192,000 workers (2024)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "199,700 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "U.S. employment size",
-        "occupation_scope": "Electrical and electronics installers and repairers (combined O*NET-SOC scope)",
-        "period": "2024",
+        "occupation_scope": "U.S. 17-2071",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "a28-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Much faster than average (7% or higher, 2024–2034)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "9.9%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "U.S. employment growth",
-        "occupation_scope": "Electrical and electronics installers and repairers (combined O*NET-SOC scope)",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. 17-2071",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a28-bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Approximately 11,700 openings (2024–2034)",
+        "derivation": "BLS Table 1.2.",
+        "display_value": "11,400 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "U.S. projected openings",
-        "occupation_scope": "Electrical and electronics installers and repairers (combined O*NET-SOC scope)",
-        "period": "2024—2034",
+        "occupation_scope": "U.S. 17-2071",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "a28-bls"
         ]
       },
       {
@@ -37119,14 +37197,15 @@
       },
       {
         "derivation": "Exact Chinese occupational data were not obtained; no conversion is performed.",
-        "display_value": "Insufficient evidence: nationwide occupation-specific wage percentiles exactly matching this occupation were not obtained for mainland China",
+        "display_value": "The Shunde post listed CNY 8,501–10,000 per month and covered electrical-system design review, equipment selection, drawings and commissioning. The Zhengzhou posting listed five electrical engineers, a bachelor’s degree, PLC programming, schematics, selection and commissioning. It quoted CNY 6,000–10,000 without a pay period.",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "China",
         "measure": "Mainland Chinese scope",
-        "occupation_scope": "Electrical and electronics installers and repairers (combined O*NET-SOC scope)",
-        "period": "Consulted in 2026",
+        "occupation_scope": "Two past job notices",
+        "period": "2026",
         "source_refs": [
-          "nbs"
+          "a28-shunde",
+          "a28-zhengzhou"
         ]
       },
       {
@@ -37139,6 +37218,30 @@
         "period": "Assessed 2026-10-18; tool capabilities around 2026",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The Shunde post listed CNY 8,501–10,000 per month and covered electrical-system design review, equipment selection, drawings and commissioning.",
+        "fact_id": "posting-a28-shunde",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Electrical engineer",
+        "period": "2026-09-30",
+        "source_refs": [
+          "a28-shunde"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "The Zhengzhou posting listed five electrical engineers, a bachelor’s degree, PLC programming, schematics, selection and commissioning. It quoted CNY 6,000–10,000 without a pay period.",
+        "fact_id": "posting-a28-zhengzhou",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Automation electrical engineer",
+        "period": "2026-02-27",
+        "source_refs": [
+          "a28-zhengzhou"
         ]
       }
     ]
@@ -37166,19 +37269,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. 17-2071 · projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. worker count"
+        "label": "U.S. 17-2071 · employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. projected openings"
+        "label": "U.S. 17-2071 · projected annual openings (including replacements)"
       },
       {
         "availability": "missing",
@@ -37192,17 +37295,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "U.S. O*NET-SOC 17-2071.00: median annual wage USD 120,630 in 2025, approximately 192,000 workers in 2024, and projected much-faster-than-average growth from 2024–2034 (7% or higher); includes entry paths, professional practice, and mainland Chinese scope explanations."
+      "text": "Compare electrical engineering design and verification duties, read two job notices and try a paper verification record."
     },
     "title": {
       "availability": "available",
       "text": "Electrical engineers: duties, wages, and entry paths"
     }
   },
-  "source_content_sha256": "b63d851f505e5e1c0e4acbfc2642e161df3d39b45b632153070f4263d16f9bf7",
+  "source_content_sha256": "99e3e90d7bfda57f4e8f076b18f55b88bf9774bcb6b6db902f3c0928906bead3",
   "subject": {
     "canonical_slug": "electrical-engineers",
     "name": "Electrical engineers",
-    "summary": "Under U.S. O*NET-SOC 17-2071.00, research and design electrical equipment, components, and systems for commercial, industrial, military, or scientific use: organize requirements and applicable standards, complete electrical calculations and equipment selection, produce drawings and technical documents for checking, review, and signing, organize testing to verify conformity, and handle design changes."
+    "summary": "Turn system requirements into an electrical design and verification plan. Review equipment choices, test results and changes, and hand over unresolved requirements."
   }
 }

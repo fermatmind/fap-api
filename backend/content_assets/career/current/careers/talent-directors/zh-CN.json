@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "观察你能否从角色说明提炼标准，以表演证据比较候选人，准确安排试镜，并在导演、演员和经纪人之间传递一致信息。筛选结论要能解释，资料权限和最终决定权要先确认。"
+              "纸面体验｜对照虚构角色简报和试镜安排，标出一个使用旧版要求的场次，拟一句向制作方核实版本的消息。 "
             ]
           },
           "id": "talent-directors.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24809,13 +24808,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "选角与艺人总监为舞台、影视或广播项目寻找、试镜并评估表演者，把角色需求、表演证据、档期及制作条件整理成候选名单。核心工作是筛选与协调人才，不是自己出演，也不等于代表演员的经纪人；最终选角与合同权限取决于项目分工。"
+              "选角负责人把角色要求整理成试镜资料，组织试镜并比较表演者的匹配情况，再向制作方提交建议或候选名单。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "talent-directors.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-27-2012.04"
           ],
           "type": "prose"
         }
@@ -25470,14 +25468,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可以作为资料整理、邀约草稿和排程核对的试验工具；是否准确、实际采用多少及就业影响分别核实。既有外部资料未提供可直接采用的实测可复核的任务级量化评分，另列编辑估算分数或失业概率。角色适配与最终推荐须有人工证据和明确权限。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构角色简报和试镜安排，标出一个使用旧版要求的场次，拟一句向制作方核实版本的消息。"
             ]
           },
           "id": "talent-directors.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial",
-            "nist-genai2024",
-            "onet"
+            "transfer-onet-27-2012.04",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33450,6 +33447,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-27-2012.04",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 27-2012.04 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/27-2012.04"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38949,10 +38973,10 @@
       "text": "选角与艺人总监"
     }
   },
-  "source_content_sha256": "d7d197dae07f524bed4cbded8f7ea3833dcbb59b7bc77c22a5eae04f1b00ea4f",
+  "source_content_sha256": "b9b8329facfa8b206ff545aa12c3f87beafdb5dffb63a16903319af2bd158fca",
   "subject": {
     "canonical_slug": "talent-directors",
     "name": "选角与艺人总监",
-    "summary": "选角与艺人总监为舞台、影视或广播项目寻找、试镜并评估表演者，把角色需求、表演证据、档期及制作条件整理成候选名单。核心工作是筛选与协调人才，不是自己出演，也不等于代表演员的经纪人；最终选角与合同权限取决于项目分工。"
+    "summary": "选角负责人把角色要求整理成试镜资料，组织试镜并比较表演者的匹配情况，再向制作方提交建议或候选名单。"
   }
 }

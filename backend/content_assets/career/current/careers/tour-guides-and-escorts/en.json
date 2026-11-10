@@ -23676,15 +23676,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Tour guides and escorts need to check material, explain points of interest, listen to questions and lead visits according to confirmed arrangements. First use one original paper task to observe the preparation and revision process, then check qualification, scheduling and pay conditions."
+              "Paper check | Find conflicting meeting points on a fictional venue map and group itinerary. Draft a notice that identifies the detail still awaiting confirmation. "
             ]
           },
           "id": "tour-guides-and-escorts.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24932,14 +24929,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Tour guides and escorts lead individuals or groups during visiting activities, explain places and exhibits, respond to questions, and organise the process according to confirmed material, visitor needs and on-site rules. The United States task identity is O*NET39-7011.00, and wages and employment use the separate 39-7010 combined statistics. Chinese tour guide activity requires checking qualification, the tour guide certificate and travel agency assignment against the actual duties. You can first use the fictional city tour briefing H1—H3 to practise material error correction, timetables and change handover."
+              "Tour guides and escorts explain sites, answer questions and lead groups along the visitor route. Group size, meeting points and access information affect how they organize the visit. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "tour-guides-and-escorts.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "cn-rule",
-            "editorial"
+            "transfer-onet-39-7011.00"
           ],
           "type": "prose"
         }
@@ -25652,15 +25647,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: comparable AI adoption rate, task effect and employment causal data for this occupation, so the score stays missing. Material summaries, drafts and route comparisons can be editorial trial suggestions; facts, opening, permission and visitor needs are still checked by people. The United States 39-7010 combined grows 6.3% over 2025—2035, with a ten-year net increase of about 3,900 people and 11,900 average annual openings including replacements, not a 39-7011 standalone or an independent AI effect. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Find conflicting meeting points on a fictional venue map and group itinerary. Draft a notice that identifies the detail still awaiting confirmation."
             ]
           },
           "id": "tour-guides-and-escorts.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "ratify",
-            "nist",
-            "editorial"
+            "transfer-onet-39-7011.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33772,6 +33765,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-39-7011.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 39-7011.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/39-7011.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39295,10 +39315,10 @@
       "text": "Tour guides and escorts"
     }
   },
-  "source_content_sha256": "b6e7515a25fe7d2a2bbd7903fed9d1c3e1b45e365151239c82597df123972ee8",
+  "source_content_sha256": "10dcbdd5f1bbeef369c50b39d7e6696a5178cfcfabe59e74c9709c3f72127d3f",
   "subject": {
     "canonical_slug": "tour-guides-and-escorts",
     "name": "Tour guides and escorts",
-    "summary": "Tour guides and escorts lead individuals or groups during visiting activities, explain places and exhibits, respond to questions, and organise the process according to confirmed material, visitor needs and on-site rules. The United States task identity is O*NET39-7011.00, and wages and employment use the separate 39-7010 combined statistics. Chinese tour guide activity requires checking qualification, the tour guide certificate and travel agency assignment against the actual duties. You can first use the fictional city tour briefing H1—H3 to practise material error correction, timetables and change handover."
+    "summary": "Tour guides and escorts explain sites, answer questions and lead groups along the visitor route. Group size, meeting points and access information affect how they organize the visit."
   }
 }

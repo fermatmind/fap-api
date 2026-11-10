@@ -14,9 +14,6 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -27,7 +24,7 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-2035": {
         "status": "pending_mapping"
@@ -39,7 +36,7 @@
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-current": {
         "status": "pending_mapping"
@@ -54,6 +51,9 @@
         "status": "pending_mapping"
       },
       "fact:us-industry-current-4": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-state-government-2025": {
         "status": "pending_mapping"
       },
       "fact:us-industry-wage-aerospace-mfg-2025": {
@@ -72,13 +72,13 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-current": {
         "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-high10-2025": {
         "status": "pending_mapping"
@@ -23181,10 +23181,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "One-sentence judgment: transit and intercity bus drivers are not \"just driving the vehicle away,\" but carrying passengers on approved routes and schedules and being responsible for driving safety, passenger service, and operating records. The U.S. side corresponds to O*NET-SOC 53-3052.00, which O*NET lists as Job Zone 1-2 (preparation from little to some, SVP below 6.0), and Bright Outlook is not marked. The core boundary is: you may independently complete pre-departure inspections, drive per route and schedule, announce stops, sell tickets and assist passengers, record fares and driving logs, and report delays and accidents per procedures; but you may not change approved routes, stops, or fares on your own, may not replace the operating unit's production safety management judgment, and may not drive commercially when not meeting the required vehicle class and practice qualification requirements."
+              "Ask how a shift starts, who assigns gaps between runs, and how the last run is handed over. City and intercity drivers follow the assigned route, vehicle requirements and employer procedures. Shift records help you ask practical questions about the role."
             ]
           },
           "id": "bus-drivers.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -23192,10 +23195,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: your interest in \"delivering a group of people safely and on time per the schedule\" is greater than in \"whether the route is new\"; you are willing to maintain attention for long periods and verify the vehicle and route per procedures; you can stay steady under congestion, bad weather, passenger emotions, and time pressure and insist on handling anomalies and reporting accidents per procedures; you accept long periods of sitting, an enclosed cabin, noise, and frequent public contact, and are willing to keep updating safety and emergency knowledge."
+              "Try the fictional SH-49 shift log to distinguish confirmed time from open entries. Then decide what to ask the employer."
             ]
           },
           "id": "bus-drivers.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23203,10 +23209,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions for pausing high-cost investment first: you have not yet, while holding the driving license for the corresponding vehicle class, completed under mentoring or supervision a full closed loop from pre-departure inspection, on-schedule operation, stop announcements and passenger service, anomaly handling, to end-of-shift records and fare handover; or you only want to drive and are unwilling to inspect the vehicle and keep records per procedures, and unwilling to face passenger disputes and emergencies; also, do not treat \"can drive a car\" as proof that you can drive a commercial bus or already hold the practice qualification."
+              "Ask separately about shift span, assigned duty periods and pay terms. Paper results are not proof of wages or driving experience."
             ]
           },
           "id": "bus-drivers.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23214,7 +23223,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education, qualifications, and authorization must be verified separately: O*NET lists this occupation's preparation level as Job Zone 1-2 (SVP below 6.0), usually requiring a high school diploma or equivalent or GED, with on-the-job training from a few days to a year; in the United States, bus drivers usually need a commercial driver's license (CDL) and must meet driving record, medical examination, vision and hearing, and background check requirements; in mainland China, drivers engaged in commercial road passenger transport must hold the corresponding motor vehicle driving license for more than 1 year, be no older than 63, have no major or greater at-fault traffic accident within 3 years, master road passenger transport regulations and basic passenger first aid knowledge, and pass an examination to obtain the corresponding practice qualification certificate (Provisions on the Administration of Road Transport Practitioners); urban public bus and trolleybus drivers must also hold a motor vehicle driving license matching the vehicle class with the internship period completed, and have no violation record of 12 points or more in the most recent 3 consecutive scoring cycles, among others (Provisions on the Administration of Urban Public Bus and Trolleybus Passenger Transport)."
+              "Education, qualifications, and authorization must be verified separately: O*NET lists this occupation's preparation level as Job Zone 1-2 (SVP below 6.0), usually requiring a high school diploma or equivalent or GED, with on-the-job training from a few days to a year; in the United States, bus drivers usually need a commercial driver's license (CDL) and must meet driving record, medical examination, vision and hearing, and background check requirements; in mainland China, drivers engaged in commercial road passenger transport must hold the corresponding motor vehicle driving license for at least one year, be no older than 63, have no major or greater at-fault traffic accident within 3 years, master road passenger transport regulations and basic passenger first aid knowledge, and pass an examination to obtain the corresponding practice qualification certificate (Provisions on the Administration of Road Transport Practitioners); urban public bus and trolleybus drivers must also hold a motor vehicle driving license matching the vehicle class with the internship period completed, and have no violation record of 12 points or more in the most recent 3 consecutive scoring cycles, among others (Provisions on the Administration of Urban Public Bus and Trolleybus Passenger Transport)."
             ]
           },
           "id": "bus-drivers.quick-decision.fermat-decision-card.6",
@@ -23225,10 +23234,16 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "One sentence: this is a position centered on safe driving, passenger transport service, vehicle inspection, and operating records, and its outputs are reviewable driving and fare records, transport service completed per schedule, and anomaly information reported and escalated per procedures; it is not a role that decides routes and fares on its own, nor does it replace the operating unit's production safety responsibility. The U.S. wage, employment, and projection data use this occupation's basis, Bus Drivers, Transit and Intercity (SOC 53-3052); for mainland China, the evidence routing does not publish occupation-level or proxy wage figures for this occupation, keeping only the statistical basis and the gap."
+              "Drivers follow shifts, inspect the vehicle and hand unresolved issues to dispatch or the next crew. U.S. wages and employment use SOC 53-3052. A matching nationwide mainland occupational wage is unavailable here; NBS industry means provide context."
             ]
           },
           "id": "bus-drivers.quick-decision.fermat-decision-card.7",
+          "source_refs": [
+            "onet-details",
+            "bls-pay",
+            "bls-outlook",
+            "nbs-wages"
+          ],
           "type": "prose"
         }
       ]
@@ -23598,7 +23613,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Changes to ordinary routes, stops, and time periods follow operating management procedures; Article 22 of the 2024 urban regulation has emergency and safety exceptions, and Article 34 permits suspending the relevant operation when unsafe. Drivers follow current emergency procedures to protect passengers promptly, handle the situation, and report, and Article 29 of the 2017 rules prohibits abandoning the vehicle and fleeing before the passengers; emergency protection should not be delayed to await approval for an ordinary change. In China, drivers engaged in commercial road passenger transport follow Article 9 of the 2026 practice provisions: the corresponding motor vehicle driving license for at least 1 year, age no older than 63, no major or greater at-fault traffic accident within 3 years, mastery of road passenger transport regulations and basic motor vehicle repair and passenger first aid knowledge, and passing an examination to obtain the corresponding practice qualification. 63 is not the age threshold for all motor vehicle driving licenses, and urban bus positions are verified separately under urban rules."
+              "Under Article 22 of the urban transit regulation, operators may not change routes, stops or operating times without authorization. Temporary changes for special reasons generally require advance public notice and a report to the authority, with an exception for emergency or safety measures. Article 34 lets the operator suspend service on affected sections or across the network when an emergency, equipment failure or similar event threatens safety. Drivers follow emergency procedures to protect passengers and report the event; Article 29 of the 2017 rules prohibits fleeing the vehicle before passengers. In China, drivers engaged in commercial road passenger transport follow Article 9 of the 2026 practice provisions: the corresponding motor vehicle driving license for at least 1 year, age no older than 63, no major or greater at-fault traffic accident within 3 years, mastery of road passenger transport regulations and basic motor vehicle repair and passenger first aid knowledge, and passing an examination to obtain the corresponding practice qualification. 63 is not the age threshold for all motor vehicle driving licenses, and urban bus positions are verified separately under urban rules."
             ]
           },
           "id": "bus-drivers.profile.career-quick-answers-block.19",
@@ -23658,7 +23673,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The 2022 Classification Code of Occupations, 4-02-02-01 passenger vehicle driver, includes bus drivers and urban public bus and trolleybus drivers, and also taxi and ride-hailing drivers, a scope broader than U.S. 53-3052. 4-02-02-03 road passenger transport attendant handles ticket sales and inspection and on-board service and is not a synonymous detailed class for drivers; verify against actual tasks. O*NET2025 industries: government 59%, transportation and warehousing 37%, other 4%; this is the occupational industry distribution, not wages or the Chinese bus unit industry. The OOH separately details local government (excluding education and hospitals) 54%, urban transit 17%, charter 8%, intercity and rural 5%, and other passenger transport 3%, which cannot be forcibly merged."
+              "The 2022 Occupational Classification public consultation draft, 4-02-02-01 passenger vehicle driver, includes bus drivers and urban public bus and trolleybus drivers, and also taxi and ride-hailing drivers, a scope broader than U.S. 53-3052. 4-02-02-03 road passenger transport attendant handles ticket sales and inspection and on-board service and is not a synonymous detailed class for drivers; verify against actual tasks. O*NET2025 industries: government 59%, transportation and warehousing 37%; this is the occupational industry distribution, not wages or the Chinese bus unit industry. The OOH separately details local government (excluding education and hospitals) 54%, urban transit 17%, charter 8%, intercity and rural 5%, and other passenger transport 3%, which cannot be forcibly merged."
             ]
           },
           "id": "bus-drivers.profile.career-quick-answers-block.24",
@@ -23787,7 +23802,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Editorial verification: shifts, early and last shifts and holidays, overtime and allowances, the pay method, and who bears training and certification costs are verified against the target employer's contract; no specific recruitment frequency was verified in this round."
+              "Ask the employer: shifts, early and last shifts and holidays, overtime and allowances, the pay method, and who bears training and certification costs are verified against the target employer's contract; no specific recruitment frequency was verified on this page."
             ]
           },
           "id": "bus-drivers.profile.career-quick-answers-block.34",
@@ -23853,7 +23868,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025—2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution."
+              "U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025–2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution."
             ]
           },
           "id": "bus-drivers.profile.onet-structured-fields-block.4",
@@ -23868,7 +23883,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET2025 industries: government 59%, transportation and warehousing 37%, other 4%; this is the occupational industry distribution, not wages or the Chinese bus unit industry. The OOH separately details local government (excluding education and hospitals) 54%, urban transit 17%, charter 8%, intercity and rural 5%, and other passenger transport 3%, which cannot be forcibly merged. O*NET interests R83/C62/S43/E30/A0/I0, with the top three types RCS; the 41 specific interest areas separately list transportation 97, personal service 41, physical and manual 23, mechanical and electrical 18, and social service 14, which are not exclusive RIASEC subcategories or an individual pass line."
+              "O*NET2025 industries: government 59%, transportation and warehousing 37%; this is the occupational industry distribution, not wages or the Chinese bus unit industry. The OOH separately details local government (excluding education and hospitals) 54%, urban transit 17%, charter 8%, intercity and rural 5%, and other passenger transport 3%, which cannot be forcibly merged. O*NET interests R83/C62/S43/E30/A0/I0, with the top three types RCS; the 41 specific interest areas separately list transportation 97, personal service 41, physical and manual 23, mechanical and electrical 18, and social service 14, which are not exclusive RIASEC subcategories or an individual pass line."
             ]
           },
           "id": "bus-drivers.profile.onet-structured-fields-block.5",
@@ -24665,7 +24680,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: before introducing systems, verify authority, data, review responsibility, and the accident reporting path; drivers, operating enterprises, dispatch, and the competent department each handle matters per applicable duties, and not all safety decisions are attributed as the driver's sole final decision."
+              "Check this first: before introducing systems, verify authority, data, review responsibility, and the accident reporting path; drivers, operating enterprises, dispatch, and the competent department each handle matters per applicable duties, and not all safety decisions are attributed as the driver's sole final decision."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.15",
@@ -24702,14 +24717,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The materials in this round cannot infer an overall replacement rate or year. Dispatch, ticketing, and records can be set up as tool-assisted pilots, which is an editorial suggestion; current qualifications and emergency duties follow applicable rules, and employment numbers cannot be inferred from the occupational task exposure index. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Scheduling tools can flag first and last runs, missing handovers and unconfirmed periods. Check shifts, pay terms and dispatch changes with the employer. A system output does not authorize a change."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor-current",
-            "ilo-genai",
-            "driver-current"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -24821,7 +24834,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET2025 industries: government 59%, transportation and warehousing 37%, other 4%; this is the occupational industry distribution, not wages or the Chinese bus unit industry. The OOH separately details local government (excluding education and hospitals) 54%, urban transit 17%, charter 8%, intercity and rural 5%, and other passenger transport 3%, which cannot be forcibly merged."
+              "O*NET2025 industries: government 59%, transportation and warehousing 37%; this is the occupational industry distribution, not wages or the Chinese bus unit industry. The OOH separately details local government (excluding education and hospitals) 54%, urban transit 17%, charter 8%, intercity and rural 5%, and other passenger transport 3%, which cannot be forcibly merged."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.28",
@@ -24846,7 +24859,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025—2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution."
+              "U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025–2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.30",
@@ -25137,7 +25150,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025 wages and the 2025—2035 projection, with the scope verified section by section"
+              "2025 wages and the 2025–2035 projection, with the scope verified section by section"
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.55",
@@ -25151,13 +25164,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Parent summary including school buses: 563200 employment / 49390 annual wage / 23.75 hourly / 2% growth / net increase 9800 / 77600 openings; this occupation 53-3052 separately lists a 59050 wage and 166400 employment, with projected growth of 4.1%. Both are 2025—2035 projections and cannot be swapped or added."
+              "This page uses U.S. SOC 53-3052. The 2025 employment baseline was about 166,400 jobs. The 2025 median annual wage was $59,050. Employment is projected to grow 4.1% from 2025 to 2035. The handbook overview also includes school bus drivers, so it covers a wider group."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "ooh-current",
-            "ep-current"
+            "bls-outlook",
+            "bls-pay",
+            "bls-entry"
           ],
           "type": "prose"
         },
@@ -25210,7 +25224,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial pilot: tools can assist queries, ticketing verification, records, and reports, and efficiency and on-site capability must be measured in practice; whether access to in-vehicle sensing and operating systems is permitted is verified separately. Output must return to the actual state, applicable procedures, and reviewers, and it is not assumed that all tools lack on-site information."
+              "When trying a tool: tools can assist queries, ticketing verification, records, and reports, and efficiency and on-site capability must be measured in practice; whether access to in-vehicle sensing and operating systems is permitted is verified separately. Output must return to the actual state, applicable procedures, and reviewers, and it is not assumed that all tools lack on-site information."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.61",
@@ -25235,7 +25249,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025—2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution. The projection is not an AI scenario model, and current statutory human responsibilities are not proof that positions will not decrease in the future."
+              "U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025–2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution. The projection is not an AI scenario model, and current statutory human responsibilities are not proof that positions will not decrease in the future."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.63",
@@ -25276,7 +25290,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The typical O*NET tasks in this round do not list programming as a general driving threshold; editorially suggest learning dispatch, ticketing, communication, and recording equipment per the actual position, verify specific recruitment conditions separately, and note that digital tools cannot replace driving qualifications."
+              "Ask which dispatch, fare and handover systems the employer uses and which functions the driver operates. O*NET does not list programming as a general driving requirement."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.66",
@@ -25324,7 +25338,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025—2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution. The parent projection including school buses of 2% / 77600 openings is read separately and does not replace this occupation."
+              "U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025–2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution. The parent projection including school buses of 2% / 77600 openings is read separately and does not replace this occupation."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.70",
@@ -25350,7 +25364,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Drivers, operating enterprises, and emergency command each act per current duties; systems can provide information and records, and how they are used is verified against lawful operating arrangements, and tool output cannot automatically grant driving or handling qualifications. Changes to ordinary routes, stops, and time periods follow operating management procedures; Article 22 of the 2024 urban regulation has emergency and safety exceptions, and Article 34 permits suspending the relevant operation when unsafe. Drivers follow current emergency procedures to protect passengers promptly, handle the situation, and report, and Article 29 of the 2017 rules prohibits abandoning the vehicle and fleeing before the passengers; emergency protection should not be delayed to await approval for an ordinary change."
+              "Drivers, operating enterprises, and emergency command each act per current duties; systems can provide information and records, and how they are used is verified against lawful operating arrangements, and tool output cannot automatically grant driving or handling qualifications. Under Article 22 of the urban transit regulation, operators may not change routes, stops or operating times without authorization. Temporary changes for special reasons generally require advance public notice and a report to the authority, with an exception for emergency or safety measures. Article 34 lets the operator suspend service on affected sections or across the network when an emergency, equipment failure or similar event threatens safety. Drivers follow emergency procedures to protect passengers and report the event; Article 29 of the 2017 rules prohibits fleeing the vehicle before passengers."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.72",
@@ -25377,7 +25391,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the O*NET, BLS, and ILO materials consulted in this round do not provide a basis for the year this occupation will disappear as a whole; this page does not infer a year from task exposure or the degree of automation."
+              "Insufficient evidence: the O*NET, BLS, and ILO materials consulted on this page do not provide a basis for the year this occupation will disappear as a whole; this page does not infer a year from task exposure or the degree of automation."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.74",
@@ -25426,7 +25440,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The following five steps are editorial tool usage verification suggestions, not a uniform statutory approval or the sole operating procedure for all systems."
+              "Check the tool against the employer’s access, logging and review procedures."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.78",
@@ -25886,7 +25900,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial mentoring task example: demonstrate driving, service, records, and anomaly reporting per the unit's actual personnel conditions and arrangements; an ordinary driver does not automatically gain training qualification from this page's description."
+              "Mentoring example: demonstrate driving, service, records, and anomaly reporting per the unit's actual personnel conditions and arrangements; an ordinary driver does not automatically gain training qualification from this page's description."
             ]
           },
           "id": "bus-drivers.ai-impact.ai-impact-table.119",
@@ -26048,10 +26062,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No mainland China national occupational wage distribution precisely matching transit and intercity bus drivers was obtained; it is handled under the evidence routing (no data that can be safely used), and this page does not publish occupation-level wage figures."
+              "This page does not provide verified mainland national occupational pay. The notices list no amounts; compare hiring and interview procedures instead."
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "shift-taizhou",
+            "shift-liyang"
+          ],
           "type": "prose"
         },
         {
@@ -26059,12 +26077,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Exact occupational national wages, city monthly salaries, and percentiles remain insufficient evidence; the actual employer industry background can be supplemented but is not a driver's wage. The National Bureau of Statistics 2025 urban unit pre-tax annual average wage for transportation, warehousing, and postal services: non-private 133981 yuan and private 73133 yuan. This serves only as the actual employer industry background, mixes different positions, and is not the driver's average, median, starting salary, or city monthly salary."
+              "A 2026 Taizhou Transport Industry Group notice listed 10 city bus drivers, with applications due September 28 at 17:30. The practical test counted for 70% and the interview 30%; both had a 60-point minimum. The notice listed no pay amount. Liyang Passenger Transport’s November 6, 2026 notice listed 28 city bus and seven school bus jobs separately. The city bus role listed an A1 or A3 license past the probationary driving period and a commercial road passenger transport qualification. Applications ran November 9–12. Pay followed company rules without an amount."
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "nbs-current"
+            "shift-taizhou",
+            "shift-liyang"
           ],
           "type": "prose"
         },
@@ -26181,7 +26200,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese industry averages 2025, U.S. occupational wages 2025, and the 2025—2035 projection share the year 2025 but cannot be conflated as to average versus median, occupation versus industry, or currency."
+              "Chinese industry averages 2025, U.S. occupational wages 2025, and the 2025–2035 projection share the year 2025 but cannot be conflated as to average versus median, occupation versus industry, or currency."
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.18",
@@ -26243,7 +26262,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no material on how dispatch and electronic ticketing tools affect mainland China wage statistics or the classification basis for this occupation was obtained in this round; the exact occupational wage gap is retained and is not filled with an industry average."
+              "NBS industry averages cover many jobs. They cannot tell you what a driver earns or whether dispatch or electronic ticketing affects individual pay."
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.23",
@@ -26254,7 +26273,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2022 Classification Code of Occupations, 4-02-02-01 passenger vehicle driver, includes bus drivers and urban public bus and trolleybus drivers, and also taxi and ride-hailing drivers, a scope broader than U.S. 53-3052. 4-02-02-03 road passenger transport attendant handles ticket sales and inspection and on-board service and is not a synonymous detailed class for drivers; verify against actual tasks."
+              "The 2022 Occupational Classification public consultation draft, 4-02-02-01 passenger vehicle driver, includes bus drivers and urban public bus and trolleybus drivers, and also taxi and ride-hailing drivers, a scope broader than U.S. 53-3052. 4-02-02-03 road passenger transport attendant handles ticket sales and inspection and on-board service and is not a synonymous detailed class for drivers; verify against actual tasks."
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.24",
@@ -26268,7 +26287,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial job-seeking background: verify the actual education and training requirements, and do not set a uniform Chinese statutory high school line."
+              "When applying, verify the actual education and training requirements, and do not set a uniform Chinese statutory high school line."
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.25",
@@ -26304,7 +26323,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial position background: verify driving experience, qualifications, actual safety record, and employer requirements."
+              "When reviewing a posting, verify driving experience, qualifications, actual safety record, and employer requirements."
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.28",
@@ -26632,7 +26651,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2022 Classification Code of Occupations, 4-02-02-01 passenger vehicle driver, includes bus drivers and urban public bus and trolleybus drivers, and also taxi and ride-hailing drivers, a scope broader than U.S. 53-3052. 4-02-02-03 road passenger transport attendant handles ticket sales and inspection and on-board service and is not a synonymous detailed class for drivers; verify against actual tasks. School buses 53-3051 are a separate adjacent occupation in the United States."
+              "The 2022 Occupational Classification public consultation draft, 4-02-02-01 passenger vehicle driver, includes bus drivers and urban public bus and trolleybus drivers, and also taxi and ride-hailing drivers, a scope broader than U.S. 53-3052. 4-02-02-03 road passenger transport attendant handles ticket sales and inspection and on-board service and is not a synonymous detailed class for drivers; verify against actual tasks. School buses 53-3051 are a separate adjacent occupation in the United States."
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.55",
@@ -26670,7 +26689,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Growth of 4.1% (a rounded 4%, 2025—2035)"
+              "Growth of 4.1% (a rounded 4%, 2025–2035)"
             ]
           },
           "id": "bus-drivers.china-salary.career-snapshot-primary-locale.58",
@@ -26925,7 +26944,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 90th percentile is 40.72 dollars/hour, a statistical high end; no decomposition evidence showing that route, seniority, or qualification causes this percentile was obtained in this round."
+              "The 90th percentile is 40.72 dollars/hour, a statistical high end; no decomposition evidence showing that route, seniority, or qualification causes this percentile was obtained on this page."
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.18",
@@ -26953,7 +26972,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET2025 industries: government 59%, transportation and warehousing 37%, other 4%; this is the occupational industry distribution, not wages or the Chinese bus unit industry. The OOH separately details local government (excluding education and hospitals) 54%, urban transit 17%, charter 8%, intercity and rural 5%, and other passenger transport 3%, which cannot be forcibly merged."
+              "O*NET2025 industries: government 59%, transportation and warehousing 37%; this is the occupational industry distribution, not wages or the Chinese bus unit industry. The OOH separately details local government (excluding education and hospitals) 54%, urban transit 17%, charter 8%, intercity and rural 5%, and other passenger transport 3%, which cannot be forcibly merged."
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.20",
@@ -26967,7 +26986,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Growth of 4.1% (a rounded 4%, 2025—2035)"
+              "Growth of 4.1% (a rounded 4%, 2025–2035)"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.21",
@@ -26992,7 +27011,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "21100/year (2025—2035 projection)"
+              "21100/year (2025–2035 projection)"
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.23",
@@ -27017,7 +27036,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This occupation's 2025 wages and the 2025—2035 projection; the parent summary on the same OOH page, which includes school bus drivers, gives 563200 / 2% / 77600 openings, and also lists this occupation's data and detailed industry wages separately, so they are not mixed or called unpublished just because they share a page."
+              "U.S. occupational wage percentiles use SOC 53-3052. The BLS handbook overview includes school bus drivers and reports each occupation’s pay in a separate section."
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.25",
@@ -27032,7 +27051,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 median annual wage 59050 and hourly 28.39, with annual wages from 40030 to 84700 for P10 through P90; U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025—2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution."
+              "2025 median annual wage 59050 and hourly 28.39, with annual wages from 40030 to 84700 for P10 through P90; U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025–2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution."
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.26",
@@ -27075,12 +27094,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET2025 industries: government 59%, transportation and warehousing 37%, other 4%; this is the occupational industry distribution, not wages or the Chinese bus unit industry. The OOH separately details local government (excluding education and hospitals) 54%, urban transit 17%, charter 8%, intercity and rural 5%, and other passenger transport 3%, which cannot be forcibly merged. BLS lists this occupation's median wage by detailed industry in a separate table, and wages are not inferred from industry headcount shares."
+              "O*NET employment shares for this U.S. occupation: government 59%, transportation and warehousing 37%. May 2025 annual occupational medians in the BLS handbook: $70,700 in state government excluding education and hospitals, $64,590 in local government excluding education and hospitals, $57,820 in urban transit, $48,420 in charter bus, and $46,860 in interurban and rural bus transportation."
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "industry-current",
+            "onet-industry",
             "ooh-current"
           ],
           "type": "prose"
@@ -27101,12 +27120,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "When editorially comparing income, verify shifts, overtime, duties, and the pay contract; no causal magnitude or ranking of these factors on this occupation's income was obtained in this round."
+              "When comparing offers, ask which shifts, standby periods and handovers are paid. Get the terms in writing."
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "editor-current"
+            "shift-taizhou",
+            "shift-liyang"
           ],
           "type": "prose"
         },
@@ -27126,12 +27146,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Growth of 4.1% (a rounded 4%)"
+              "Routes, shifts and vehicles can differ within an employer. Ask about reporting time, shift changes and end-of-shift handovers."
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "ep-current"
+            "bls-entry",
+            "editorial"
           ],
           "type": "prose"
         },
@@ -27168,7 +27189,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS median for this occupation in that detailed industry, not the average of all positions in the industry; the same page separately lists other passenger transport at 48330 dollars/year, which cannot be mixed with industry shares."
+              "This is the occupational median within the industry. National pay percentiles and employment shares are separate."
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.36",
@@ -27210,7 +27231,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS median for this occupation in that detailed industry, not the average of all positions in the industry; the same page separately lists other passenger transport at 48330 dollars/year, which cannot be mixed with industry shares."
+              "This is the occupational median within the industry. National pay percentiles and employment shares are separate."
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.39",
@@ -27252,7 +27273,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS median for this occupation in that detailed industry, not the average of all positions in the industry; the same page separately lists other passenger transport at 48330 dollars/year, which cannot be mixed with industry shares."
+              "This is the occupational median within the industry. National pay percentiles and employment shares are separate."
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.42",
@@ -27294,7 +27315,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The BLS median for this occupation in that detailed industry, not the average of all positions in the industry; the same page separately lists other passenger transport at 48330 dollars/year, which cannot be mixed with industry shares."
+              "This is the occupational median within the industry. National pay percentiles and employment shares are separate."
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.45",
@@ -27334,7 +27355,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wages 2025; projection 2025—2035; the OOH has already published this occupation's wages for five detailed industries, which differs from the O*NET government and transportation industry headcount share basis."
+              "Wages 2025; projection 2025–2035; the OOH has already published this occupation's wages for five detailed industries, which differs from the O*NET government and transportation industry headcount share basis."
             ]
           },
           "id": "bus-drivers.us-salary.career-snapshot-secondary-locale.48",
@@ -27557,19 +27578,19 @@
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Bus Drivers, School",
@@ -27713,7 +27734,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial observation: use procedural inspection, truthful recording, self-control, and collaboration as discussion clues; O*NET work styles dependability 88 / caution 87 / self-control 71 / cooperation 69 / attention to detail 62 / stress tolerance 62 cannot be used to establish a causal or hiring validity claim for personality tests."
+              "Look for this: use procedural inspection, truthful recording, self-control, and collaboration as discussion clues; O*NET work styles dependability 88 / caution 87 / self-control 71 / cooperation 69 / attention to detail 62 / stress tolerance 62 cannot be used to establish a causal or hiring validity claim for personality tests."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.6",
@@ -27728,7 +27749,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The evidence is the occupational work style description and editorial observation; no dedicated validity study of the Big Five for this occupation was obtained in this round."
+              "The evidence is the occupational work style description and examples of work behavior; no dedicated validity study of the Big Five for this occupation was obtained on this page."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.7",
@@ -27742,8 +27763,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Editorial observation: whether you can verify the vehicle condition against the checklist and record details.",
-              "Editorial observation: whether you can handle and report per procedures when facing complex road conditions and passenger emotions; this is not a personality causal conclusion."
+              "Look for this: whether you can verify the vehicle condition against the checklist and record details.",
+              "Look for this: whether you can handle and report per procedures when facing complex road conditions and passenger emotions; this is not a personality causal conclusion."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.8",
@@ -27776,7 +27797,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The O*NET/BLS materials in this round do not provide specific predictive validity of MBTI for this occupation; no type or score competence threshold is set."
+              "The O*NET/BLS materials on this page do not provide specific predictive validity of MBTI for this occupation; no type or score competence threshold is set."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.11",
@@ -27914,7 +27935,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET styles include self-control 71, caution 87, and dependability 88; the predictive validity of emotional intelligence tests for this occupation was not obtained in this round, and editorially suggest observing actual communication and specification execution."
+              "O*NET work styles include self-control 71, caution 87 and dependability 88. Notice whether you can follow handover procedures and communicate when a problem arises. These work-style ratings do not validate an emotional intelligence test for this role."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.23",
@@ -27929,7 +27950,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Editorial suggested observation: record whether you can handle and report per applicable procedures when a passenger becomes agitated or road conditions are abnormal; no comparative validity against emotional scores was obtained.",
+              "Look for this: record whether you can handle and report per applicable procedures when a passenger becomes agitated or road conditions are abnormal; no comparative validity against emotional scores was obtained.",
               "Being willing to admit operational or recording deviations and immediately correct and document them is part of professional ability."
             ]
           },
@@ -27952,7 +27973,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial observation: verify qualifications, actual permitted training feedback, and driving and service records; these suggestions cannot give a personality predictive validity or judge competence from a single output."
+              "Look for this: verify qualifications, actual permitted training feedback, and driving and service records; these suggestions cannot give a personality predictive validity or judge competence from a single output."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.26",
@@ -27966,7 +27987,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial suggested observation of attention, specification execution, passenger communication, and anomaly records, with actual qualifications and employer assessment verified separately; the predictive power of these indicators was not compared in this round."
+              "Notice whether you can stay attentive, follow procedures, communicate with passengers and record problems. Ask the employer about qualifications and assessment."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.27",
@@ -27994,7 +28015,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial comparison: vehicle inspection, driving, and passenger communication experience can be verified."
+              "For comparison: vehicle inspection, driving, and passenger communication experience can be verified."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.29",
@@ -28036,7 +28057,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial comparison: willing to supervise students, maintain boarding and alighting order, and cooperate with the driver."
+              "For comparison: willing to supervise students, maintain boarding and alighting order, and cooperate with the driver."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.32",
@@ -28078,7 +28099,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial comparison: willing to do baggage handling, guidance, and face-to-face service."
+              "For comparison: willing to do baggage handling, guidance, and face-to-face service."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.35",
@@ -28120,7 +28141,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial comparison: willing to handle ticketing, information verification, and passenger inquiries."
+              "For comparison: willing to handle ticketing, information verification, and passenger inquiries."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.38",
@@ -28162,7 +28183,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial comparison: route and shift knowledge can serve as a clue for understanding operations."
+              "For comparison: route and shift knowledge can serve as a clue for understanding operations."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.41",
@@ -28204,7 +28225,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial comparison: order and communication experience and the target position gap can be discussed."
+              "For comparison: order and communication experience and the target position gap can be discussed."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.44",
@@ -28243,7 +28264,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "U.S. context Q&A shows 74% in constant contact with others, 62% having face-to-face discussions every day, and dealing with the public being extremely important for 43%. Editorial suggested observation: focus on specific performance in verifying information with passengers, dispatch, and the crew; no comparative validity study against extroversion scores was obtained."
+              "U.S. context Q&A shows 74% in constant contact with others, 62% having face-to-face discussions every day, and dealing with the public being extremely important for 43%. Look for this: focus on specific performance in verifying information with passengers, dispatch, and the crew; no comparative validity study against extroversion scores was obtained."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.47",
@@ -28268,7 +28289,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "No basis was obtained in this round for a particular MBTI type being more suitable for this occupation; preferences may be organized to raise verification questions, without giving a type list or predicting hiring."
+              "No basis was obtained on this page for a particular MBTI type being more suitable for this occupation; preferences may be organized to raise verification questions, without giving a type list or predicting hiring."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.49",
@@ -28307,13 +28328,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Being weak at mathematics does not mean you cannot do it. The tasks involve verifying time, fares, mileage, and basic quantities; first practice unit conversion, time differences, and error finding with non-operational materials, and fill gaps based on actual training feedback. There is no IQ score threshold in this round, and mathematical performance cannot replace driving qualifications, attention, and position assessment."
+              "Try the three SH-49 entries. Check start and end times, pending items and the handover. Keep both versions."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.52",
           "source_refs": [
-            "details-current",
-            "editor-current"
+            "editorial"
           ],
           "type": "prose"
         },
@@ -28322,7 +28342,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial suggested observation of how you handle and communicate clearly per procedures under pressure; O*NET work styles are an occupational description and do not provide an emotional intelligence pass line or predictive validity for this occupation."
+              "Under pressure, notice whether you can follow procedures and give a clear handover. O*NET work styles do not set a passing emotional intelligence score for this role."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.53",
@@ -28348,7 +28368,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Inspection records, logs, and anomaly statements can serve as editorial observation materials; passing review only shows the state of that material and does not automatically prove basic fit, driving qualifications, or independent operating authority."
+              "Inspection records, logs, and anomaly statements can serve as examples of work behavior materials; passing review only shows the state of that material and does not automatically prove basic fit, driving qualifications, or independent operating authority."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.55",
@@ -28436,7 +28456,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025—2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution."
+              "U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025–2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution."
             ]
           },
           "id": "bus-drivers.fit.personality-fit-block.62",
@@ -28494,7 +28514,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial fit observation: compliant driving, communication, inspection records, and accepting feedback; its predictive power was not compared, and actual qualifications and employer assessment are verified independently."
+              "Notice whether you can drive to the required standard, log inspections, communicate clearly and respond to feedback. Check formal qualifications and assessment with the employer and applicable rules."
             ]
           },
           "id": "bus-drivers.fit.riasec-fit-block.9",
@@ -28728,7 +28748,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Source division: O*NET occupational context is not incidence rates, and the BLS provides a qualitative injury description for this occupation; the Chinese urban regulation, urban rules, and commercial practice provisions set duties and qualifications respectively; U.S. passenger carrier HOS is verified for scope and exceptions first. Data, posture, and debrief suggestions are editorial compilations and do not replace the unit's real procedures."
+              "Source division: O*NET occupational context is not incidence rates, and the BLS provides a qualitative injury description for this occupation; the Chinese urban regulation, urban rules, and commercial practice provisions set duties and qualifications respectively; U.S. passenger carrier HOS is verified for scope and exceptions first. Ask the employer which procedures apply."
             ]
           },
           "id": "bus-drivers.risk.career-risk-cards.10",
@@ -28774,7 +28794,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Editorial health verification: verify seating, rest, hygiene, and protection per the actual vehicle and unit requirements. Article 32 of the 2024 urban regulation requires attention to the physical and psychological condition and behavioral habits of personnel in key positions, regular physical examinations, strengthened psychological counseling, and reasonable arrangement of driver working hours to prevent fatigue; this does not equal a uniform periodic psychological examination, nor does it prove the preventive effect of this page's posture suggestions."
+              "Ask about working conditions: verify seating, rest, hygiene, and protection per the actual vehicle and unit requirements. Article 32 of the 2024 urban regulation requires attention to the physical and psychological condition and behavioral habits of personnel in key positions, regular physical examinations, strengthened psychological counseling, and reasonable arrangement of driver working hours to prevent fatigue; this does not equal a uniform periodic psychological examination, nor does it prove the preventive effect of this page's posture suggestions."
             ]
           },
           "id": "bus-drivers.risk.career-risk-cards.13",
@@ -28870,7 +28890,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Changes to ordinary routes, stops, and time periods follow operating management procedures; Article 22 of the 2024 urban regulation has emergency and safety exceptions, and Article 34 permits suspending the relevant operation when unsafe. Drivers follow current emergency procedures to protect passengers promptly, handle the situation, and report, and Article 29 of the 2017 rules prohibits abandoning the vehicle and fleeing before the passengers; emergency protection should not be delayed to await approval for an ordinary change."
+              "Under Article 22 of the urban transit regulation, operators may not change routes, stops or operating times without authorization. Temporary changes for special reasons generally require advance public notice and a report to the authority, with an exception for emergency or safety measures. Article 34 lets the operator suspend service on affected sections or across the network when an emergency, equipment failure or similar event threatens safety. Drivers follow emergency procedures to protect passengers and report the event; Article 29 of the 2017 rules prohibits fleeing the vehicle before passengers."
             ]
           },
           "id": "bus-drivers.risk.career-risk-cards.21",
@@ -28918,7 +28938,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Editorial data suggestion: verify the unit's actual confidentiality, authority, and tool data boundaries; unauthorized platforms must not receive real passenger or operating data. Do not pass off this page's road passenger transport regulatory source as NIST or a dedicated personal information law."
+              "Protect work data: verify the unit's actual confidentiality, authority, and tool data boundaries; unauthorized platforms must not receive real passenger or operating data. Do not pass off this page's road passenger transport regulatory source as NIST or a dedicated personal information law."
             ]
           },
           "id": "bus-drivers.risk.career-risk-cards.25",
@@ -28965,7 +28985,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Article 32 of China's urban bus regulation requires passing training and assessment, archives, and reasonable hours to prevent fatigue; Article 38 of the commercial passenger transport practice provisions prohibits driving continuously for more than 4h, speeding, and fatigue. U.S. positions subject to federal passenger carrier HOS additionally verify rules and exceptions such as 10h driving / 8h consecutive rest and 15h on duty, without applying truck hours. Changing debriefs into training is an editorial suggestion."
+              "Article 32 of China's urban bus regulation requires passing training and assessment, archives, and reasonable hours to prevent fatigue; Article 38 of the commercial passenger transport practice provisions prohibits driving continuously for more than 4h, speeding, and fatigue. U.S. positions subject to federal passenger carrier HOS additionally verify rules and exceptions such as 10h driving / 8h consecutive rest and 15h on duty, without applying truck hours."
             ]
           },
           "id": "bus-drivers.risk.career-risk-cards.29",
@@ -29424,7 +29444,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial pathway: first verify personal qualifications and employment conditions, and accumulate routine task experience through actually arranged training and assessment; complex routes, mentoring, and management are example directions, not a universal promotion sequence or a uniform high school threshold."
+              "Check qualifications and shifts with the employer first, then complete the training and assessment it arranges. More complex routes, mentoring and operations management are possible next steps, depending on the employer."
             ]
           },
           "id": "bus-drivers.path.career-path-block.23",
@@ -29494,7 +29514,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: a motor vehicle driving license matching the vehicle class is required, and enterprise training and assessment must be completed per urban public bus and trolleybus passenger transport requirements. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
+              "Ask the employer about training: a motor vehicle driving license matching the vehicle class is required, and enterprise training and assessment must be completed per urban public bus and trolleybus passenger transport requirements. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers.path.career-path-block.28",
@@ -29510,7 +29530,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: take on fixed-route shifts under supervision and gradually become familiar with peak periods and passenger flow organization. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
+              "A possible next step: take on fixed-route shifts under supervision and gradually become familiar with peak periods and passenger flow organization. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers.path.career-path-block.29",
@@ -29524,7 +29544,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable departure inspection records and a complete driving log.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
+              "Work records to retain: reviewable departure inspection records and a complete driving log.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
             ]
           },
           "id": "bus-drivers.path.career-path-block.30",
@@ -29564,7 +29584,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: hiring conditions such as scoring cycle and criminal record must be met, and enterprise service and emergency training and assessment passed. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
+              "Ask the employer about training: hiring conditions such as scoring cycle and criminal record must be met, and enterprise service and emergency training and assessment passed. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers.path.career-path-block.33",
@@ -29580,7 +29600,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: take on trunk routes or peak shifts and participate in passenger flow guidance and complaint handling. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
+              "A possible next step: take on trunk routes or peak shifts and participate in passenger flow guidance and complaint handling. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers.path.career-path-block.34",
@@ -29594,7 +29614,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable service records, complaint handling records, and safe driving records.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
+              "Work records to retain: reviewable service records, complaint handling records, and safe driving records.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
             ]
           },
           "id": "bus-drivers.path.career-path-block.35",
@@ -29634,7 +29654,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: multiple route driving experience and safe driving records are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
+              "Ask the employer about training: multiple route driving experience and safe driving records are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers.path.career-path-block.38",
@@ -29650,7 +29670,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: take on mentoring new drivers and safety inspection tasks and participate in route optimization suggestions. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
+              "A possible next step: take on mentoring new drivers and safety inspection tasks and participate in route optimization suggestions. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers.path.career-path-block.39",
@@ -29664,7 +29684,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: mentoring records, safety inspection records, and accident and complaint debrief materials.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
+              "Work records to retain: mentoring records, safety inspection records, and accident and complaint debrief materials.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
             ]
           },
           "id": "bus-drivers.path.career-path-block.40",
@@ -29704,7 +29724,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: training experience and assessment results related to safety management or operations management are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
+              "Ask the employer about training: training experience and assessment results related to safety management or operations management are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers.path.career-path-block.43",
@@ -29720,7 +29740,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: participate in shift scheduling and safety system improvement and organize training and emergency drills. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
+              "A possible next step: participate in shift scheduling and safety system improvement and organize training and emergency drills. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers.path.career-path-block.44",
@@ -29734,7 +29754,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable safety system documents, drill records, and training and assessment records.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
+              "Work records to retain: reviewable safety system documents, drill records, and training and assessment records.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
             ]
           },
           "id": "bus-drivers.path.career-path-block.45",
@@ -29774,7 +29794,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: the corresponding vehicle class driving license, commercial road passenger transport practice qualification, and the unit's pre-job training and assessment are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
+              "Ask the employer about training: the corresponding vehicle class driving license, commercial road passenger transport practice qualification, and the unit's pre-job training and assessment are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers.path.career-path-block.48",
@@ -29790,7 +29810,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: take on shorter intercity routes under supervision and become familiar with long-distance driving schedules and rest arrangements. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
+              "A possible next step: take on shorter intercity routes under supervision and become familiar with long-distance driving schedules and rest arrangements. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers.path.career-path-block.49",
@@ -29804,7 +29824,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable driving logs and safe driving records.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
+              "Work records to retain: reviewable driving logs and safe driving records.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
             ]
           },
           "id": "bus-drivers.path.career-path-block.50",
@@ -29844,7 +29864,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: age, accident record, and health conditions must be met, and fatigue management and emergency training completed. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
+              "Ask the employer about training: age, accident record, and health conditions must be met, and fatigue management and emergency training completed. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers.path.career-path-block.53",
@@ -29860,7 +29880,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: independently take on intercity and long-distance shifts and handle en-route and arrival anomalies. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
+              "A possible next step: independently take on intercity and long-distance shifts and handle en-route and arrival anomalies. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers.path.career-path-block.54",
@@ -29874,7 +29894,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: mileage, fares, and anomaly handling records for complete shifts.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
+              "Work records to retain: mileage, fares, and anomaly handling records for complete shifts.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
             ]
           },
           "id": "bus-drivers.path.career-path-block.55",
@@ -29914,7 +29934,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: multi-route experience and passing an emergency handling assessment are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
+              "Ask the employer about training: multi-route experience and passing an emergency handling assessment are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers.path.career-path-block.58",
@@ -29930,7 +29950,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial task extension: learn complex routes only when safe operating conditions are met and qualification assessment and unit arrangements permit; in severe weather, verify suspension or adjustment, and do not treat risky departure as advancement."
+              "When taking on new tasks: learn complex routes only when safe operating conditions are met and qualification assessment and unit arrangements permit; in severe weather, verify suspension or adjustment, and do not treat risky departure as advancement."
             ]
           },
           "id": "bus-drivers.path.career-path-block.59",
@@ -29945,7 +29965,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: emergency handling records, drill evaluations, and safe driving records.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
+              "Work records to retain: emergency handling records, drill evaluations, and safe driving records.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
             ]
           },
           "id": "bus-drivers.path.career-path-block.60",
@@ -29985,7 +30005,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: safety and operations management training experience and assessment results are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
+              "Ask the employer about training: safety and operations management training experience and assessment results are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers.path.career-path-block.63",
@@ -30001,7 +30021,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: participate in shift and fatigue management for long-distance operations, accident debriefs, and process improvement. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
+              "A possible next step: participate in shift and fatigue management for long-distance operations, accident debriefs, and process improvement. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers.path.career-path-block.64",
@@ -30015,7 +30035,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable management documents and debrief reports.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
+              "Work records to retain: reviewable management documents and debrief reports.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
             ]
           },
           "id": "bus-drivers.path.career-path-block.65",
@@ -30055,7 +30075,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: the corresponding vehicle class certificate, practice qualification, and the unit's pre-job training and assessment are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
+              "Ask the employer about training: the corresponding vehicle class certificate, practice qualification, and the unit's pre-job training and assessment are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers.path.career-path-block.68",
@@ -30071,7 +30091,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: take on single-point or multi-point transfer tasks under supervision and become familiar with trip sheets and client communication. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
+              "A possible next step: take on single-point or multi-point transfer tasks under supervision and become familiar with trip sheets and client communication. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers.path.career-path-block.69",
@@ -30085,7 +30105,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable trip execution records and safe driving records.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
+              "Work records to retain: reviewable trip execution records and safe driving records.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
             ]
           },
           "id": "bus-drivers.path.career-path-block.70",
@@ -30125,7 +30145,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: charter passenger transport related requirements must be met and service specification training completed. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
+              "Ask the employer about training: charter passenger transport related requirements must be met and service specification training completed. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers.path.career-path-block.73",
@@ -30141,7 +30161,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: independently take on charter and tourist passenger transport tasks, execute per the trip sheet, and handle changes. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
+              "A possible next step: independently take on charter and tourist passenger transport tasks, execute per the trip sheet, and handle changes. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers.path.career-path-block.74",
@@ -30155,7 +30175,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: trip sheet execution records, change confirmation records, and passenger service records.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
+              "Work records to retain: trip sheet execution records, change confirmation records, and passenger service records.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
             ]
           },
           "id": "bus-drivers.path.career-path-block.75",
@@ -30195,7 +30215,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: multi-point transfer and cross-regional operating experience are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
+              "Ask the employer about training: multi-point transfer and cross-regional operating experience are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers.path.career-path-block.78",
@@ -30211,7 +30231,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: take on cross-regional or multi-day trip tasks and coordinate with the client and dispatch. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
+              "A possible next step: take on cross-regional or multi-day trip tasks and coordinate with the client and dispatch. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers.path.career-path-block.79",
@@ -30225,7 +30245,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: cross-regional trip records, coordination records, and anomaly handling statements.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
+              "Work records to retain: cross-regional trip records, coordination records, and anomaly handling statements.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
             ]
           },
           "id": "bus-drivers.path.career-path-block.80",
@@ -30265,7 +30285,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial training verification: safety and service quality management training experience and assessment results are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
+              "Ask the employer about training: safety and service quality management training experience and assessment results are required. Specific qualifications and training conditions are verified by task, jurisdiction, and employer, and are not treated as a uniform new certificate threshold."
             ]
           },
           "id": "bus-drivers.path.career-path-block.83",
@@ -30281,7 +30301,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial next-step example: participate in building service standards and safety debriefs for charter and tourist passenger transport. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
+              "A possible next step: participate in building service standards and safety debriefs for charter and tourist passenger transport. Actual qualifications, training and assessment, and operating arrangements are required, and promotion is not guaranteed."
             ]
           },
           "id": "bus-drivers.path.career-path-block.84",
@@ -30295,7 +30315,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial capability material: reviewable service standard documents and debrief reports.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
+              "Work records to retain: reviewable service standard documents and debrief reports.; Accept the unit's assessment based on verifiable facts, and a single piece of material does not automatically grant independent operating authority."
             ]
           },
           "id": "bus-drivers.path.career-path-block.85",
@@ -30353,35 +30373,35 @@
                 "Urban transit route driver",
                 "Complete departure inspection, operate on fixed routes and shifts, announce stops, and serve passengers under supervision, and learn fare and driving record standards.",
                 "Verify the matching driving license, bus hiring conditions, training and assessment, shifts, and service duties.",
-                "Submit a supervised departure inspection and driving log sample.",
+                "Use both SH-49 versions and a handover to explore the role. Real training requires eligibility and employer arrangements.",
                 "This path does not independently decide routes and shift arrangements; it must follow unit scheduling and authorization."
               ],
               [
                 "Intercity and long-distance passenger transport driver",
                 "Complete longer-route transport per shift and handle highway conditions, en-route stops, and passenger matters.",
                 "Verify the commercial passenger transport qualification, logs, and continuous driving and rest arrangements, and do not substitute continuous endurance for fatigue prevention.",
-                "Submit a driving record containing the shift, mileage, and anomaly handling statement.",
+                "Use both SH-49 versions and a handover to explore the role. Real training requires eligibility and employer arrangements.",
                 "Schedules and rest arrangements for long-distance shifts must follow institutional rules and fitness requirements."
               ],
               [
                 "Charter and tourist passenger transport driver",
                 "Execute charter or tourist transport per the agreed itinerary and handle multi-point stops and client communication.",
                 "Verify the actual business type, personal qualifications, itinerary, and service conditions.",
-                "Submit an operation and anomaly statement completed per the trip sheet.",
+                "Use both SH-49 versions and a handover to explore the role. Real training requires eligibility and employer arrangements.",
                 "Itinerary changes must be executed after confirmation with the client and dispatch and may not be made unilaterally."
               ],
               [
                 "Safety and training positions",
                 "Assist with safe driving inspections, driver training, and accident debriefs, and learn safety procedures and training methods.",
                 "Verify the actual duties, assessment, and authority of the safety or training position; driving seniority does not automatically transfer into it.",
-                "Submit a sample statement of safety inspection items and training points.",
+                "Use both SH-49 versions and a handover to explore the role. Real training requires eligibility and employer arrangements.",
                 "Training and safety inspection authority is determined by institutional rules and position authorization."
               ],
               [
                 "Transition from adjacent trades (school bus, shuttle bus, freight driving)",
                 "Take on routine shift operation and become familiar with passenger service and ticketing processes.",
                 "Verify personal vehicle class, applicable practice qualification, and the target passenger transport unit's hiring, training, shift, and vehicle model requirements; add passenger service, stopping, ticketing, and emergency handling training, since existing school bus or freight driving qualifications are not automatically mutually recognized.",
-                "Submit a reviewable driving record compiled from an existing position and explain the gap relative to passenger transport driving.",
+                "Use both SH-49 versions and a handover to explore the role. Real training requires eligibility and employer arrangements.",
                 "Adjacent driving experience does not equal a passenger transport practice qualification; a transfer requires additional training in passenger transport regulations and service specifications."
               ]
             ]
@@ -30441,33 +30461,33 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional work package: a simplified shift timetable and stop list, an excerpt of route and fare descriptions, and a departure inspection form and driving log template, all self-made materials containing no real vehicle, passenger, or route information.",
-                  "Tools: simulated stop announcement and ticketing interfaces, driving log forms; no contact with real commercial vehicles or road operations.",
-                  "Boundary note: practice must not be used for real commercial driving, nor may practice results be packaged as safe driving or operational compliance conclusions.",
-                  "Time arrangement: one 30-minute timetable and stop reading session + one 60-minute departure inspection walkthrough and log filling session."
+                  "SH-49: three fictional shift entries",
+                  "A 06:50–07:30 / confirmed; B 07:30–08:00 / pending; C 08:00–08:50 / confirmed. All times fall on the same day.",
+                  "Paper rule: subtract start from end in minutes. Add only confirmed entries and list pending time separately. This is not a wage rule.",
+                  "In the revision, add confirmation for B only. Keep all three periods and other inputs unchanged."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Lay out the stopping sequence and estimated times for one shift per the timetable and stop list, marking the factors that may affect punctuality.",
-                  "Fill in a departure inspection form listing the inspection items, criteria, and the handling and reporting path when an anomaly is found.",
-                  "Fill in a driving log: shift, mileage, fares, anomalous events, and handling results."
+                  "Submit two versions",
+                  "Calculate minutes per entry and separate confirmed from pending time.",
+                  "Write a handover: original values, changes, open items and who should check them."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Practice method: follow the procedures and timetable before starting work, and record any unplanned assumption separately.",
-                  "Write \"shift operation completed,\" \"fares reconciled,\" and \"anomalies reported per procedures\" as separate items, and do not treat completing the task directly as meeting safety and service standards.",
-                  "Stop and verify uncertain vehicle conditions, passenger situations, or handling methods first, rather than skipping steps on experience."
+                  "Submit independently first",
+                  "Submit both versions and a handover on Day 6, before reading the reference.",
+                  "On Day 7 open “SH-49 reference (open after submitting)” in the FAQ."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "If a practice step requires contact with real road operations, passenger-carrying driving, or vehicle operation, stop and mark that step as one that must be performed by personnel with the corresponding qualifications.",
-                  "If you are unsure whether a practice complies with safety operating procedures or service specifications, record the question and ask the reviewer to confirm, rather than deciding on your own."
+                  "Fictional data",
+                  "Use no real passengers, routes, vehicles, systems or pay records."
                 ]
               }
             ]
@@ -30484,31 +30504,31 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Job requirement checklist: the vehicle class and practice qualification required by the target jurisdiction and unit, shift and schedule arrangements, route and vehicle model scope, safety and emergency training requirements, and the pay and allowance basis.",
-                  "Note the source and material date for each item; leave items that cannot be verified blank and mark them as insufficient evidence, without filling them in with speculation.",
-                  "List \"vehicle class,\" \"practice qualification,\" \"shift authorization,\" \"safety record,\" and \"pay basis\" separately to avoid conflating them."
+                  "Check sheet",
+                  "Record minutes and status per entry.",
+                  "Save original and revision separately."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Ask an experienced driver or safety manager to review your timetable understanding, departure inspection items, and anomaly handling reasoning, focusing on whether vehicle condition confirmation and the reporting path were omitted.",
-                  "Keep the review comments and reasons for revisions together, as evidence of whether you can accept professional review.",
-                  "Record each deviation the reviewer points out and your subsequent revisions to form a reviewable improvement record."
+                  "Confirmation record",
+                  "State which entry changed.",
+                  "Keep the original and reason for the change."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "One-page debrief: state the basis, your own operating process, the deviations pointed out, and the parts that remain uncertain.",
-                  "Give the debrief to an experienced person for review and keep the review comments and reasons for revisions."
+                  "Handover",
+                  "State pending time and who should check it."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool usage note: if a dispatch, stop announcement, or ticketing system is used to assist operation and records, note the system and version, data scope, and manual review method.",
-                  "Driving and fare records must retain the shift, mileage, anomalies, and handling results so that others can review the same trip."
+                  "Tools",
+                  "Use paper or a spreadsheet."
                 ]
               }
             ]
@@ -30572,50 +30592,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Occupational boundary reading: read the occupation summary and detailed information for O*NET 53-3052.00 and write clearly what the occupation does and does not do.",
-                  "Output: a one-page task comparison table marking the source and basis for each item."
+                  "Day 1: Check duties",
+                  "List shift and handover questions for an employer."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Regulatory and qualification review: verify the public requirements for vehicle class and practice qualification and organize your own qualification gaps.",
-                  "Output: a qualification and training comparison checklist."
+                  "Day 2: Copy entries",
+                  "Copy all three entries and their statuses."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Safety and emergency review: list road, weather, passenger, and cabin order risks and the corresponding handling and reporting requirements.",
-                  "Output: a risk and handling checklist."
+                  "Day 3: Calculate original",
+                  "Calculate each duration and the original total."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Timetable walkthrough practice: lay out the stopping sequence and estimated times for a fictional shift and mark the factors affecting punctuality.",
-                  "Output: a shift walkthrough statement."
+                  "Day 4: Apply one change",
+                  "Make a separate revision with only the specified change."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Departure inspection walkthrough: work through the inspection items and criteria per the departure inspection form and write out the handling and reporting path for anomalies.",
-                  "Output: a departure inspection and reporting statement."
+                  "Day 5: Write handover",
+                  "Write the original values, change, open items and owner."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Review-based self-questioning: ask an experienced person to point out the deviations in your inspection items and handling reasoning and explain why.",
-                  "Output: review comments and a revision statement."
+                  "Day 6: Submit independently",
+                  "Submit both versions and the handover before opening the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Decision debrief: organize the six-day outputs into a one-page comparison table, marking what to continue, what to pause, and what evidence still needs to be completed.",
-                  "Output: a one-page decision comparison table and a statement of reasons."
+                  "Day 7: Open reference",
+                  "Open “SH-49 reference (open after submitting)” in the FAQ and compare."
                 ]
               }
             ]
@@ -30629,13 +30649,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: you can complete all outputs within seven days and are willing to accept item-by-item checks of departure inspection, operating procedures, and records.",
+              "Keep exploring: list questions about schedules, standby and pay terms.",
               "Pause: you can complete the exercises but find it hard to accept review corrections, or you do not adapt to long periods of sitting, an enclosed cabin, noise, and high-frequency public contact.",
               "Change direction: if you prefer baggage and service work, compare baggage porters and bellhops; if you prefer ticketing and advisory work, compare reservation and transportation ticket agents and travel clerks.",
               "Verify employment: if the target position is outsourced driving or labor dispatch, first verify the form of employment, shift arrangements, and division of responsibility.",
-              "Complete the evidence: organize the seven-day outputs into reviewable departure inspection and driving record samples for use in practical training applications or job onboarding.",
+              "Keep both versions and a handover for self-review; they do not prove experience.",
               "Cost assessment: include driving license and practice qualification certification fees, refresher training arrangements, and shift and overtime arrangements in a written plan.",
-              "Supplement: if you are still unsure, first give the seven-day outputs to a practitioner for review, then decide whether to invest in certification and job hunting."
+              "Check against the named reference; other feedback after submitting is optional."
             ]
           },
           "id": "bus-drivers.path.seven-day-decision.1",
@@ -30715,7 +30735,7 @@
                 "Drivers already on the job",
                 "Determines which routes and shifts you may drive independently.",
                 "This is an enterprise internal management system requirement.",
-                "The task scope is determined per the unit's actual rules; no uniform mentoring assessment procedure across all units was obtained in this round.",
+                "The task scope is determined per the unit's actual rules; no uniform mentoring assessment procedure across all units was obtained on this page.",
                 "Adjusted with experience and assessment results.",
                 "Authorization may be adjusted or withdrawn due to changes in safety records or qualifications."
               ]
@@ -30754,11 +30774,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Recruitment verification note: no specific job postings were obtained in this round; transit, intercity routes, and charter are editorial job examples and cannot be called verified public recruitment frequency or a uniform sequence.",
-              "When reading recruitment information, verify the form of employment (bus enterprise, road passenger transport enterprise, charter or tourist transport, or outsourcing), shift and schedule arrangements, vehicle class and practice qualification requirements, route and vehicle model scope, and hours and pay method, and be wary of wording that markets short-term training as enabling independent driving of a commercial bus or independent decisions on routes and fares."
+              "A 2026 Taizhou Transport Industry Group notice listed 10 city bus drivers, with applications due September 28 at 17:30. The practical test counted for 70% and the interview 30%; both had a 60-point minimum. The notice listed no pay amount. Liyang Passenger Transport’s November 6, 2026 notice listed 28 city bus and seven school bus jobs separately. The city bus role listed an A1 or A3 license past the probationary driving period and a commercial road passenger transport qualification. Applications ran November 9–12. Pay followed company rules without an amount."
             ]
           },
           "id": "bus-drivers.path.recruitment-sample.1",
+          "source_refs": [
+            "shift-taizhou",
+            "shift-liyang"
+          ],
           "title": "How to use the recruitment sample",
           "type": "notice"
         }
@@ -30887,7 +30910,7 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS Table 1.2 2025—2035 projection for this occupation",
+                "entity": "BLS Table 1.2 2025–2035 projection for this occupation",
                 "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -30968,14 +30991,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025—2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution. The BLS parent including school buses at 563200 / 2% / 77600 is read separately. Exact Chinese occupational wages and employment are still missing, and the unit industry background can be supplemented."
+              "U.S. SOC 53-3052: 2025 median pay was $59,050 a year or $28.39 an hour. The 2025 employment baseline was about 166,400 jobs. BLS projects about 173,300 in 2035, up 4.1%, a net gain of about 6,900, with around 21,100 annual openings including replacements."
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.8",
           "source_refs": [
-            "ep-current",
-            "ooh-current",
-            "nbs-current"
+            "bls-outlook",
+            "bls-pay"
           ],
           "type": "prose"
         },
@@ -31020,12 +31042,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2025 industries: government 59%, transportation and warehousing 37%, other 4%; this is the occupational industry distribution, not wages or the Chinese bus unit industry. The OOH separately details local government (excluding education and hospitals) 54%, urban transit 17%, charter 8%, intercity and rural 5%, and other passenger transport 3%, which cannot be forcibly merged."
+              "O*NET employment shares for this U.S. occupation: government 59%, transportation and warehousing 37%."
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.12",
           "source_refs": [
-            "industry-current"
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -31081,7 +31103,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.17",
@@ -31246,12 +31268,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 53-3052: employment of 166400 in 2025 and a projection of 173300 for 2035; 2025—2035 BLS Table 1.2 growth 4.1%, OOH/O*NET a rounded 4% (Average 3%—4%), a net increase of 6900, and 21100 annual openings. Openings include replacement from transfers and exits and are not net additions or an AI attribution."
+              "U.S. SOC 53-3052: 2025 median pay was $59,050 a year or $28.39 an hour. The 2025 employment baseline was about 166,400 jobs. BLS projects about 173,300 in 2035, up 4.1%, a net gain of about 6,900, with around 21,100 annual openings including replacements."
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.30",
           "source_refs": [
-            "ep-current"
+            "bls-outlook",
+            "bls-pay"
           ],
           "type": "prose"
         },
@@ -31260,12 +31283,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2025 industries: government 59%, transportation and warehousing 37%, other 4%; this is the occupational industry distribution, not wages or the Chinese bus unit industry. The OOH separately details local government (excluding education and hospitals) 54%, urban transit 17%, charter 8%, intercity and rural 5%, and other passenger transport 3%, which cannot be forcibly merged."
+              "O*NET employment shares for this U.S. occupation: government 59%, transportation and warehousing 37%."
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.31",
           "source_refs": [
-            "industry-current"
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -31328,7 +31351,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: relatively close: both are bus driving, with different service objects and shift arrangements. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
+              "Career change comparison: relatively close: both are bus driving, with different service objects and shift arrangements. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.36",
@@ -31364,7 +31387,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: relatively close: both are passenger transport driving, with different route forms. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
+              "Career change comparison: relatively close: both are passenger transport driving, with different route forms. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.39",
@@ -31400,7 +31423,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: moderate distance: both are passenger-carrying driving, with different operating methods. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
+              "Career change comparison: moderate distance: both are passenger-carrying driving, with different operating methods. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.42",
@@ -31436,7 +31459,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: moderate distance: both are commercial driving, with different carried objects. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
+              "Career change comparison: moderate distance: both are commercial driving, with different carried objects. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.45",
@@ -31472,7 +31495,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: relatively close: both are road commercial driving, with different carried objects. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
+              "Career change comparison: relatively close: both are road commercial driving, with different carried objects. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.48",
@@ -31508,7 +31531,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: moderate distance: both are transport operations, with different operating systems. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
+              "Career change comparison: moderate distance: both are transport operations, with different operating systems. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.51",
@@ -31544,7 +31567,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: relatively close: both are passenger service, without driving responsibility. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
+              "Both serve passengers. Passenger attendants provide onboard service. Transit and intercity bus drivers drive the vehicle. Before moving roles, check qualifications, duties and training."
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.54",
@@ -31580,7 +31603,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Editorial distance judgment: moderate distance: both are within the operating system, with different decision and execution responsibilities. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
+              "Career change comparison: moderate distance: both are within the operating system, with different decision and execution responsibilities. No transfer success rate or uniform threshold was obtained; target jurisdiction qualifications, tasks, and training are verified separately."
             ]
           },
           "id": "bus-drivers.market-signals.market-signal-card.57",
@@ -31615,16 +31638,22 @@
                 "question_key": "career.faq.bus-drivers.2"
               },
               {
-                "answer": "A fit signal is maintaining attention and compliant operation during long periods of driving, handling and reporting per procedures first when a passenger dispute or road anomaly occurs, and recording fares and anomalies truthfully; liking to drive alone is not enough to prove competence.",
+                "answer": "Use SH-49 to produce two versions and a handover. Notice whether you want to preserve the original values and ask clear follow-up questions.",
                 "id": "bus-drivers.faq.3",
                 "question": "How do you judge whether you are suited to this job?",
-                "question_key": "career.faq.bus-drivers.3"
+                "question_key": "career.faq.bus-drivers.3",
+                "source_refs": [
+                  "editorial"
+                ]
               },
               {
-                "answer": "Steps such as shift and route optimization, arrival announcements and passenger queries, electronic payment and ticket clearing, and driving records and fuel consumption statistics can be assisted; driving decisions, handling of road and cabin anomalies, passenger safety and emergency handling, and accident and delay reporting still rest with people.",
+                "answer": "Scheduling tools can flag first and last runs, missing handovers and unconfirmed periods. Check shifts, pay terms and dispatch changes with the employer. A system output does not authorize a change.",
                 "id": "bus-drivers.faq.4",
                 "question": "Which steps will AI and automation change?",
-                "question_key": "career.faq.bus-drivers.4"
+                "question_key": "career.faq.bus-drivers.4",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
                 "answer": "Vehicle condition confirmation before departure, safe driving judgments per schedule and road conditions, on-site handling of emergencies and passenger safety, fare verification and anomaly handling, and delay and accident reporting conclusions must all be confirmed by drivers holding the corresponding qualifications.",
@@ -31633,7 +31662,7 @@
                 "question_key": "career.faq.bus-drivers.5"
               },
               {
-                "answer": "The vehicle class and driving license driving experience, practice qualification certificate, employer onboarding training and assessment records, shift and route authorization, and the update requirements for health examination and safety records must each be verified separately; in mainland China, drivers engaged in commercial road passenger transport must hold the corresponding motor vehicle driving license for more than 1 year, be no older than 63, have no major or greater at-fault traffic accident within 3 years, and pass an examination to obtain the corresponding practice qualification certificate.",
+                "answer": "The vehicle class and driving license driving experience, practice qualification certificate, employer onboarding training and assessment records, shift and route authorization, and the update requirements for health examination and safety records must each be verified separately; in mainland China, drivers engaged in commercial road passenger transport must hold the corresponding motor vehicle driving license for at least one year, be no older than 63, have no major or greater at-fault traffic accident within 3 years, and pass an examination to obtain the corresponding practice qualification certificate.",
                 "id": "bus-drivers.faq.6",
                 "question": "What qualifications must be verified to enter this occupation?",
                 "question_key": "career.faq.bus-drivers.6"
@@ -31645,22 +31674,34 @@
                 "question_key": "career.faq.bus-drivers.7"
               },
               {
-                "answer": "83% are on a regular schedule (established routine, fixed timetable), 29% work more than 40 hours per week, and early and last shifts and holiday attendance are common; 74% are in constant contact with others, 62% have face-to-face discussions every day, 70% need to make decisions every day, and 64% face time pressure or strict deadlines every day.",
+                "answer": "Ask how a shift starts, who assigns gaps between runs, and how the last run is handed over. City and intercity drivers follow the assigned route, vehicle requirements and employer procedures. Shift records help you ask practical questions about the role.",
                 "id": "bus-drivers.faq.8",
                 "question": "What are the work hours and ways of working like?",
-                "question_key": "career.faq.bus-drivers.8"
+                "question_key": "career.faq.bus-drivers.8",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
-                "answer": "The O*NET page shows employment of 158,800 for this occupation in 2024, projected growth of 3% to 4% from 2024 to 2034, and about 20,900 annual openings; the Occupational Outlook Handbook's combined page separately gives all bus drivers 2% growth from 2025 to 2035 and about 77,600 annual openings (the coverage and period differ). Moving to an adjacent trade requires filling in the target position's qualification and specification requirements.",
+                "answer": "U.S. SOC 53-3052: 2025 median pay was $59,050 a year or $28.39 an hour. The 2025 employment baseline was about 166,400 jobs. BLS projects about 173,300 in 2035, up 4.1%, a net gain of about 6,900, with around 21,100 annual openings including replacements.",
                 "id": "bus-drivers.faq.9",
                 "question": "How should career prospects and transitions be judged?",
-                "question_key": "career.faq.bus-drivers.9"
+                "question_key": "career.faq.bus-drivers.9",
+                "source_refs": [
+                  "bls-outlook",
+                  "bls-pay"
+                ]
               },
               {
-                "answer": "The U.S. figures come from the BLS 2025 OEWS data displayed by O*NET, with the basis of Bus Drivers, Transit and Intercity (SOC 53-3052), which is this page's identity basis; mainland China has no national occupational wage statistics for this occupation, and under the evidence routing this page does not publish occupation-level or proxy wages, keeping only the basis and the gap.",
+                "answer": "U.S. 2025 numbers are occupational percentiles. The Taizhou and Liyang notices only describe their own jobs; they do not become national wage figures through conversion.",
                 "id": "bus-drivers.faq.10",
                 "question": "Why can U.S. wages and the mainland China basis not be converted into each other?",
-                "question_key": "career.faq.bus-drivers.10"
+                "question_key": "career.faq.bus-drivers.10",
+                "source_refs": [
+                  "bls-pay",
+                  "shift-taizhou",
+                  "shift-liyang"
+                ]
               },
               {
                 "answer": "The O*NET technology list has 3 software skills (1 Hot Technology), including internet browser software, map creation software (AOL MapQuest, Microsoft MapPoint), and operating system software (Microsoft Windows); the core abilities are safe and defensive driving, executing per timetable and route, passenger service and communication, emergency and emergency evacuation handling, ticketing and driving record standards, and adjusting cabin equipment such as heating, lighting, and ventilation.",
@@ -31679,6 +31720,15 @@
                 "id": "bus-drivers.faq.13",
                 "question": "What are the working environment and ways of collaborating for transit and intercity bus drivers?",
                 "question_key": "career.faq.bus-drivers.13"
+              },
+              {
+                "answer": "A is 40 minutes, B is 30, and C is 50. The original counts A and C for 90 minutes and leaves B’s 30 pending. After confirming only B, the total is 120 and none remain pending. Keep the original and the confirmation. Hand them to the fictional record owner. The result is not actual work time or pay.",
+                "id": "bus-drivers.faq.14",
+                "question": "SH-49 reference (open after submitting)",
+                "question_key": "career.faq.bus-drivers.14",
+                "source_refs": [
+                  "editorial"
+                ]
               }
             ]
           },
@@ -31699,7 +31749,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "U.S. 2025 wages and the 2025—2035 projection, currently the same period in O*NET/BLS; the parent including school buses and this occupation are interpreted by section. The historical sources and facts within the shared protection scope are retained, and the whole page cannot be claimed to be unified.",
+              "U.S. pay and employment here use SOC 53-3052. The BLS handbook reports school bus drivers and the combined overview separately.",
               "Exact Chinese occupational and city wages and employment are still missing, and the transportation industry non-private/private annual background can be supplemented; an average does not equal this occupation's median or monthly salary.",
               "Boundary three: the editorial exercises and work sample suggestions are all fictional materials, and readers should not use them to carry out passenger-carrying driving or vehicle operation on real roads, nor may they package practice results as safe driving, operational compliance, or accident responsibility conclusions.",
               "Boundary four: this page is composed of public materials such as O*NET, BLS, the National Bureau of Statistics, the Regulations on Road Transport of the People's Republic of China, the Provisions on the Administration of Road Transport Practitioners, the Provisions on the Administration of Road Passenger Transport and Passenger Stations, the Provisions on the Administration of Urban Public Bus and Trolleybus Passenger Transport, and ILO task exposure research, plus editorial design; the applicable scope and gaps of each material are marked separately."
@@ -31727,10 +31777,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind career content editorial team: compiled from public materials such as O*NET, BLS, the National Bureau of Statistics, the Regulations on Road Transport of the People's Republic of China, the Provisions on the Administration of Road Transport Practitioners, the Provisions on the Administration of Road Passenger Transport and Passenger Stations, and the Provisions on the Administration of Urban Public Bus and Trolleybus Passenger Transport, with the basis and data period marked for each item."
+              "At an interview, ask who assigns first and last runs, standby periods, handovers, training and records."
             ]
           },
           "id": "bus-drivers.sources.source-card.1",
+          "source_refs": [
+            "shift-taizhou",
+            "shift-liyang"
+          ],
           "type": "prose"
         },
         {
@@ -31738,27 +31792,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Sources for this round: O*NET2026 tasks, activities, context, education, interests, and styles, 2025 industry/software/wages, and the 2025—2035 projection; the sectioned BLS OOH/Table 1.2; NBS 2025 industry; the 2022 Classification Code 4-02-02-01/03; the 2026 practice provisions and road regulations, the 2024 urban regulation, and the 2017 urban rules; FMCSA CDL/ELDT/passenger carrier HOS. The same-version ILO exposure method serves only as general background, and editorial suggestions are marked separately."
+              "U.S. SOC 53-3052: 2025 median pay was $59,050 a year or $28.39 an hour. The 2025 employment baseline was about 166,400 jobs. BLS projects about 173,300 in 2035, up 4.1%, a net gain of about 6,900, with around 21,100 annual openings including replacements."
             ]
           },
           "id": "bus-drivers.sources.source-card.2",
           "source_refs": [
-            "details-current",
-            "industry-current",
-            "hot-current",
-            "ep-current",
-            "ooh-current",
-            "nbs-current",
-            "classification-current",
-            "driver-current",
-            "transport-current",
-            "urban-current",
-            "city-current",
-            "cdl-current",
-            "eldt-current",
-            "hos-current",
-            "ilo-genai",
-            "editor-current"
+            "bls-outlook",
+            "bls-pay"
           ],
           "type": "prose"
         },
@@ -31767,18 +31807,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Verified current pages on 2026-10-09: O*NET profile 2026 / industry, hiring, and wages 2025 / projection 2025—2035; NBS 2025; the Road Transport Regulations sixth amendment in 2026, the practice provisions fourth amendment in 2026, the urban regulation 2024, and the urban rules 2017. Old shared registrations are not mechanically swapped for URLs or document identities, and the 2025 consultation draft was not used as an effective rule."
+              "U.S. SOC 53-3052 is the occupational data scope. Local postings describe their own requirements; check qualifications and shifts with the employer."
             ]
           },
           "id": "bus-drivers.sources.source-card.3",
           "source_refs": [
-            "details-current",
-            "ep-current",
-            "nbs-current",
-            "driver-current",
-            "transport-current",
-            "urban-current",
-            "city-current"
+            "bls-outlook",
+            "shift-taizhou",
+            "shift-liyang"
           ],
           "type": "prose"
         },
@@ -31787,15 +31823,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational statistics, industry background, and parent levels are read by section; NA is not 0, the education Q&A is not the educational composition of practitioners, and context percentages are not risk incidence rates. Business licensing, personal credentials, and enterprise assessment are kept separate; age 63 applies only to the corresponding commercial passenger transport conditions. Exact Chinese occupational wages and employment, AI replacement rates, personality validity, and recruitment frequency retain their gaps."
+              "SH-49 practices record checking. It does not establish actual driving authority, pay or work-hours compliance."
             ]
           },
           "id": "bus-drivers.sources.source-card.4",
           "source_refs": [
-            "editor-current",
-            "driver-current",
-            "ep-current",
-            "nbs-current"
+            "editorial"
           ],
           "type": "prose"
         }
@@ -31834,13 +31867,13 @@
                 "entity": "Enneagram test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the transit and intercity bus driver career page",
@@ -31899,18 +31932,18 @@
                 "url": "https://www.onetonline.org/link/summary/53-3052.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports the 2024 industry distribution: government 59%, transportation and warehousing 36%, and other industries 5%.",
-                  "2024 distribution; accessed 2026-09-16"
+                  "O*NET employment shares for this U.S. occupation: government 59%, transportation and warehousing 37%.",
+                  "See the original for scope."
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-industry",
-                "limitation": "The industry distribution is a statistical classification description and is not used to infer industry wages or employment size.",
+                "limitation": "See the original for scope.",
                 "market": "United States",
-                "name": "O*NET-SOC 53-3052.00 industry distribution",
-                "period": "2024 distribution; accessed 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET: leading U.S. industries",
+                "period": "2025",
+                "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/53-3052.00"
               },
@@ -31950,14 +31983,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "Supports the official figures under the combined occupation basis: a 2025 median annual wage of 49,390 dollars, median hourly wage 23.75 dollars, 563,200 employed in 2025, 2% growth from 2025 to 2035 (slower than average), an employment change of about 9,800, and about 77,600 annual openings; within this, transit and intercity bus drivers have a May 2025 median annual wage of 59,050 dollars and school bus drivers 47,920 dollars. That page uses the combined occupation basis, not this page's identity basis.",
-                  "May 2025 wages; the 2025—2035 projection"
+                  "May 2025 wages; the 2025–2035 projection"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-entry",
-                "limitation": "This page covers all bus drivers (including school bus drivers, etc.) and is not this page's identity basis; its period (2025—2035) and coverage differ from the 2024—2034 basis for this occupation shown by O*NET and must be marked separately, not swapped or added.",
+                "limitation": "The overview includes school buses. Check the relevant occupational section for employment and wages.",
                 "market": "United States",
                 "name": "BLS Occupational Outlook Handbook Bus Drivers (combined occupation basis)",
-                "period": "May 2025 wages; the 2025—2035 projection",
+                "period": "May 2025 wages; the 2025–2035 projection",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/transportation-and-material-moving/bus-drivers.htm"
@@ -31979,30 +32012,30 @@
                 "url": "https://www.onetonline.org/link/localwages/53-3052.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Supports employment of 158,800 for this occupation in 2024, a 2024—2034 growth label of Average (3% to 4%), and 20,900 annual job openings.",
-                  "Employment is 2024 and projections are 2024—2034; accessed 2026-09-16"
+                  "U.S. SOC 53-3052: 2025 median pay was $59,050 a year or $28.39 an hour. The 2025 employment baseline was about 166,400 jobs. BLS projects about 173,300 in 2035, up 4.1%, a net gain of about 6,900, with around 21,100 annual openings including replacements.",
+                  "See the original for scope."
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-outlook",
-                "limitation": "Employment and projections use this occupation's basis; the BLS combined page's period (2025—2035) and coverage differ.",
+                "limitation": "See the original for scope.",
                 "market": "United States",
-                "name": "O*NET-SOC 53-3052.00 occupation summary (employment and projection fields)",
-                "period": "Employment is 2024 and projections are 2024—2034; accessed 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Table 1.2: 53-3052",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-3052.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "Supports the fact that mainland China publishes average wages by industry category and major occupational group but does not list this occupation separately, along with the statistical coverage (legal entity units with 5 or more employed persons within urban areas, excluding self-employed individuals and freelancers); under the evidence routing, this page does not display its figures.",
+                  "NBS publishes industry and other aggregate means. It does not give a separate wage for this occupation.",
                   "2025; published 2026-05-15"
                 ],
                 "evidence_type": "primary_document",
                 "id": "nbs-wages",
-                "limitation": "Aggregated by industry category and major occupational group without a separately listed figure for this occupation; under the evidence routing, this page does not display its figures or use them as an occupational wage.",
+                "limitation": "Industry means give context and do not estimate drivers’ wages.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics, Average Annual Wages of Urban Unit Employees in 2025",
                 "period": "2025; published 2026-05-15",
@@ -32109,12 +32142,12 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "Supports the practice qualification conditions for commercial road passenger transport drivers: holding the corresponding motor vehicle driving license for more than 1 year, age no older than 63, no major or greater at-fault traffic accident within 3 years, mastery of relevant road passenger transport regulations and basic passenger first aid knowledge, and passing an examination to obtain the corresponding practice qualification certificate; the practice qualification certificate is issued and managed by the transport department of the city with districts; and the integrity assessment cycle is specified as 12 months.",
+                  "Supports the practice qualification conditions for commercial road passenger transport drivers: holding the corresponding motor vehicle driving license for at least one year, age no older than 63, no major or greater at-fault traffic accident within 3 years, mastery of relevant road passenger transport regulations and basic passenger first aid knowledge, and passing an examination to obtain the corresponding practice qualification certificate; the practice qualification certificate is issued and managed by the transport department of the city with districts; and the integrity assessment cycle is specified as 12 months.",
                   "Republished with the 2026 fourth amendment, effective 2026-03-20; accessed 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-17-3021",
-                "limitation": "The provisions govern the practice qualification of road transport practitioners: drivers engaged in commercial road passenger transport must hold the corresponding motor vehicle driving license for more than 1 year, be no older than 63, have no major or greater at-fault traffic accident within 3 years, and pass an examination to obtain the corresponding practice qualification certificate; it does not establish a wage statistical basis.",
+                "limitation": "The provisions govern the practice qualification of road transport practitioners: drivers engaged in commercial road passenger transport must hold the corresponding motor vehicle driving license for at least one year, be no older than 63, have no major or greater at-fault traffic accident within 3 years, and pass an examination to obtain the corresponding practice qualification certificate; it does not establish a wage statistical basis.",
                 "market": "Mainland China",
                 "name": "Provisions on the Administration of Road Transport Practitioners (Ministry of Transport order, 2026 fourth amendment)",
                 "period": "Republished with the 2026 fourth amendment, effective 2026-03-20; accessed 2026-09-16",
@@ -32162,7 +32195,7 @@
                 ],
                 "evidence_type": "primary_document",
                 "id": "industry-current",
-                "limitation": "Government 59 / transportation 37 / other 4, which do not equal the OOH's finer industry shares or wages.",
+                "limitation": "Government 59 / transportation 37, which do not equal the OOH's finer industry shares or wages.",
                 "market": "United States",
                 "name": "O*NET industry distribution for this occupation",
                 "period": "2025",
@@ -32190,14 +32223,14 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "Current O*NET employment projection",
-                  "2025—2035"
+                  "2025–2035"
                 ],
                 "evidence_type": "primary_document",
                 "id": "trends-current",
                 "limitation": "166400→173300 / a rounded 4 / 21100 openings, not an AI attribution.",
                 "market": "United States",
                 "name": "Current O*NET employment projection",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/53-3052.00"
@@ -32205,15 +32238,15 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "BLS Occupational Outlook for bus drivers (basis verified by section)",
-                  "2025 wages / 2025—2035 projection"
+                  "May 2025 annual occupational medians in the BLS handbook: $70,700 in state government excluding education and hospitals, $64,590 in local government excluding education and hospitals, $57,820 in urban transit, $48,420 in charter bus, and $46,860 in interurban and rural bus transportation.",
+                  "2025 wages / 2025–2035 projection"
                 ],
                 "evidence_type": "primary_document",
                 "id": "ooh-current",
-                "limitation": "The summary figures 563200/49390/2/77600 are the parent level including school buses; it also explicitly lists 53-3052 employment 166400, wage 59050, five detailed industry wages, and projected 4.1, read section by section.",
+                "limitation": "These five industry figures are for transit and intercity bus drivers.",
                 "market": "United States",
                 "name": "BLS Occupational Outlook for bus drivers (basis verified by section)",
-                "period": "2025 wages / 2025—2035 projection",
+                "period": "2025 wages / 2025–2035 projection",
                 "publisher": "BLS",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/transportation-and-material-moving/bus-drivers.htm"
@@ -32222,14 +32255,14 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "BLS Table 1.2 transit and intercity bus drivers",
-                  "2025—2035"
+                  "2025–2035"
                 ],
                 "evidence_type": "primary_document",
                 "id": "ep-current",
                 "limitation": "53-3052: 166400→173300 / 4.1% / net increase 6900 / 21100 annual openings; the typical entry is a high school diploma / None related experience / medium-term on-the-job training.",
                 "market": "United States",
                 "name": "BLS Table 1.2 transit and intercity bus drivers",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "BLS",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32328,7 +32361,7 @@
                 "period": "Current page verified 2026-10-09",
                 "publisher": "FMCSA",
                 "scope": "contextual",
-                "url": "https://www.fmcsa.dot.gov/regulations/hours-service/summary-hours-service-regulations"
+                "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-III/subchapter-B/part-395/subpart-A/section-395.5"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32344,7 +32377,7 @@
                 "period": "Page updated 2025-10-02",
                 "publisher": "FMCSA",
                 "scope": "contextual",
-                "url": "https://www.fmcsa.dot.gov/cdl"
+                "url": "https://www.fmcsa.dot.gov/registration/commercial-drivers-license/drivers"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32372,8 +32405,8 @@
                 "id": "classification-current",
                 "limitation": "4-02-02-01 includes bus and urban public bus and trolleybus drivers and also taxi and ride-hailing drivers, broader than 53-3052; 4-02-02-03 passenger service attendant is a different non-driving duty.",
                 "market": "Mainland China",
-                "name": "2022 Classification Code of Occupations passenger vehicle driver",
-                "period": "2022 / pages 187—188 of the original book",
+                "name": "China Occupational Classification (2022 public consultation draft)",
+                "period": "2022",
                 "publisher": "Classification Code publicized by the Guangyuan Municipal Human Resources and Social Security Bureau",
                 "scope": "contextual",
                 "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
@@ -32382,34 +32415,66 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "FermatMind driving task and transfer verification suggestions",
-                  "Compiled by the author on 2026-10-09"
+                  "FermatMind Editorial on 2026-10-09"
                 ],
                 "evidence_type": "editorial_synthesis",
                 "id": "editor-current",
                 "limitation": "Tool uses, personality observation, progression, and transfer distances are editorial suggestions; recruitment frequency, assessment validity, automation deployment rates, and risk intervention effects were not verified.",
                 "market": "Cross-market",
                 "name": "FermatMind driving task and transfer verification suggestions",
-                "period": "Compiled by the author on 2026-10-09",
+                "period": "FermatMind Editorial on 2026-10-09",
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": "https://www.onetonline.org/link/details/53-3052.00"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Safe driving and stopping | Drive per the schedule and approved route, obey traffic laws, and stop properly in the loading area | Transport service completed per shift and driving records. — 25/100; weight=1/3; bus-drivers.profile.responsibilities-block.1[1]",
-                  "Passenger service | Announce stops, assist elderly or disabled passengers and others in boarding and alighting, and answer questions about schedules and routes | Passenger service process and anomaly reports. — 25/100; weight=1/3; bus-drivers.profile.responsibilities-block.1[2]",
-                  "End of shift and handover | Record fares and driving information and maintain the log, keep the vehicle clean, and complete handover of fares and vehicle condition | End-of-shift records and handover documents. — 75/100; weight=1/3; bus-drivers.profile.responsibilities-block.1[5]"
+                  "Scheduling tools can flag first and last runs, missing handovers and unconfirmed periods. Check shifts, pay terms and dispatch changes with the employer. A system output does not authorize a change.",
+                  "See the original for scope.",
+                  "See the original for scope.",
+                  "See the original for scope.",
+                  "See the original for scope."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "primary_document",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "See the original for scope.",
+                "market": "United States",
+                "name": "O*NET: bus driving and record tasks",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-3052.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A 2026 Taizhou Transport Industry Group notice listed 10 city bus drivers, with applications due September 28 at 17:30. The practical test counted for 70% and the interview 30%; both had a 60-point minimum. The notice listed no pay amount."
+                ],
+                "evidence_type": "primary_document",
+                "id": "shift-taizhou",
+                "limitation": "See the original for scope.",
+                "market": "Mainland China",
+                "name": "Taizhou Transport Industry Group: city bus driver notice",
+                "period": "2026",
+                "publisher": "Taizhou Transport Industry Group",
+                "scope": "recruitment_proxy",
+                "url": "https://jtgs.taizhou.gov.cn/xxgk/tzgg3/art/2026/art_45a9db71f19447398d503f747fa876f4.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Liyang Passenger Transport’s November 6, 2026 notice listed 28 city bus and seven school bus jobs separately. The city bus role listed an A1 or A3 license past the probationary driving period and a commercial road passenger transport qualification. Applications ran November 9–12. Pay followed company rules without an amount."
+                ],
+                "evidence_type": "primary_document",
+                "id": "shift-liyang",
+                "limitation": "See the original for scope.",
+                "market": "Mainland China",
+                "name": "Liyang: city bus and school bus driver notice",
+                "period": "2026-11-06",
+                "publisher": "Liyang municipal government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.liyang.gov.cn/html/czly/2026/AQQJAIBA_1106/35959.html"
               }
             ]
           },
@@ -35807,7 +35872,7 @@
       },
       "hero": {
         "h1": "Bus Drivers, Transit and Intercity",
-        "quick_answer": "The entry on this page corresponds to transit and intercity bus drivers (U.S. side O*NET-SOC 53-3052.00): driving transit buses or long-distance coaches, including regular route operation, charter, and private carriage — driving per schedule and approved route, stopping properly and announcing stops, assisting passengers in boarding and alighting, collecting tickets or fares, maintaining cabin order, recording fares and driving logs, and handling passenger emergencies and reporting delays or accidents; the work routinely involves long periods of sitting, an enclosed cabin, all kinds of weather, and high-frequency public contact, and its duties do not equal deciding routes and fares on its own, nor do they replace the operating unit's production safety responsibility.",
+        "quick_answer": "Ask how a shift starts, who assigns gaps between runs, and how the last run is handed over. City and intercity drivers follow the assigned route, vehicle requirements and employer procedures. Shift records help you ask practical questions about the role.",
         "title": "Bus Drivers, Transit and Intercity"
       },
       "market_signal_card": {
@@ -36358,7 +36423,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET/BLS employment and projections (2025—2035)",
+            "label": "O*NET/BLS employment and projections (2025–2035)",
             "secondary_value": null,
             "value": {
               "$item": "bus-drivers.profile.onet-structured-fields-block.4",
@@ -37373,7 +37438,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and shift records",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37391,7 +37456,7 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "O*NET-SOC 53-3052.00",
         "fact_id": "occupation-identity",
         "market": "United States",
@@ -37403,7 +37468,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "59,050 dollars/year (median)",
         "fact_id": "us-wage-2025",
         "market": "United States",
@@ -37415,7 +37480,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "28.39 dollars/hour (median)",
         "fact_id": "us-wage-hourly-2025",
         "market": "United States",
@@ -37427,67 +37492,67 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "158,800 people (2024)",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "About 166,400 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment size (this occupation's basis)",
+        "measure": "2025 employment",
         "occupation_scope": "Bus Drivers, Transit and Intercity",
-        "period": "2024; Bus Drivers, Transit and Intercity (SOC 53-3052) basis",
+        "period": "2025",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Insufficient evidence: the O*NET page does not publish projected employment figures (53-3052 basis)",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "About 173,300 jobs",
         "fact_id": "us-employment-2035",
         "market": "United States",
-        "measure": "Projected employment (not published)",
+        "measure": "2035 projected employment",
         "occupation_scope": "Bus Drivers, Transit and Intercity",
-        "period": "2024—2034; Bus Drivers, Transit and Intercity (SOC 53-3052) basis",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-oews-methods"
+          "bls-outlook"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Growth of 3% to 4% (Average)",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "+4.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Employment growth rate (this occupation's basis)",
+        "measure": "Projected employment change",
         "occupation_scope": "Bus Drivers, Transit and Intercity",
-        "period": "2024—2034; Bus Drivers, Transit and Intercity (SOC 53-3052) basis",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Insufficient evidence: the O*NET page does not publish the projected net change in employment (53-3052 basis)",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "Net gain of about 6,900",
         "fact_id": "us-change-2025-2035",
         "market": "United States",
-        "measure": "Net employment change (not published)",
+        "measure": "Projected net change",
         "occupation_scope": "Bus Drivers, Transit and Intercity",
-        "period": "2024—2034; Bus Drivers, Transit and Intercity (SOC 53-3052) basis",
-        "source_refs": [
-          "bls-oews-methods"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "20,900/year",
-        "fact_id": "us-openings-2025-2035",
-        "market": "United States",
-        "measure": "Average annual job openings over the projection period (this occupation's basis)",
-        "occupation_scope": "Bus Drivers, Transit and Intercity",
-        "period": "2024—2034; Bus Drivers, Transit and Intercity (SOC 53-3052) basis",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "About 21,100 annually",
+        "fact_id": "us-openings-2025-2035",
+        "market": "United States",
+        "measure": "Projected annual openings",
+        "occupation_scope": "Bus Drivers, Transit and Intercity",
+        "period": "2025–2035",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      },
+      {
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence: no mainland China national occupational wage precisely matching transit and intercity bus drivers was obtained; under the evidence routing, occupation-level figures are not published",
         "fact_id": "cn-industry-science-tech-2024",
         "market": "Mainland China",
@@ -37499,7 +37564,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence: the industry category average does not list this occupation separately, and under the evidence routing it is not used to replace an occupational wage",
         "fact_id": "cn-industry-manufacturing-2024",
         "market": "Mainland China",
@@ -37511,7 +37576,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence: the major occupational group average does not distinguish specific occupations, and this page does not infer or display this occupation's wage from it",
         "fact_id": "cn-professional-technical-2024",
         "market": "Mainland China",
@@ -37523,7 +37588,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence: the urban unit basis does not list this occupation separately, and this page does not publish occupation-level figures",
         "fact_id": "cn-urban-nonprivate-2024",
         "market": "Mainland China",
@@ -37535,7 +37600,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "40,030 dollars/year (10th percentile)",
         "fact_id": "us-wage-low10-2025",
         "market": "United States",
@@ -37547,7 +37612,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "84,700 dollars/year (90th percentile)",
         "fact_id": "us-wage-high10-2025",
         "market": "United States",
@@ -37559,67 +37624,67 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry median wage for this occupation)",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "This industry is not among the five listed by the BLS handbook for this occupation.",
         "fact_id": "us-industry-wage-aerospace-mfg-2025",
         "market": "United States",
         "measure": "Median wage for this occupation within the industry",
         "occupation_scope": "Bus Drivers, Transit and Intercity",
         "period": "Not applicable: the source does not publish this field",
         "source_refs": [
-          "bls-oews-methods"
+          "ooh-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry median wage for this occupation)",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "This industry is not among the five listed by the BLS handbook for this occupation.",
         "fact_id": "us-industry-wage-engineering-services-2025",
         "market": "United States",
         "measure": "Median wage for this occupation within the industry",
         "occupation_scope": "Bus Drivers, Transit and Intercity",
         "period": "Not applicable: the source does not publish this field",
         "source_refs": [
-          "bls-oews-methods"
+          "ooh-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry median wage for this occupation)",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "This industry is not among the five listed by the BLS handbook for this occupation.",
         "fact_id": "us-industry-wage-federal-2025",
         "market": "United States",
         "measure": "Median wage for this occupation within the industry",
         "occupation_scope": "Bus Drivers, Transit and Intercity",
         "period": "Not applicable: the source does not publish this field",
         "source_refs": [
-          "bls-oews-methods"
+          "ooh-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry median wage for this occupation)",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "This industry is not among the five listed by the BLS handbook for this occupation.",
         "fact_id": "us-industry-wage-rd-2025",
         "market": "United States",
         "measure": "Median wage for this occupation within the industry",
         "occupation_scope": "Bus Drivers, Transit and Intercity",
         "period": "Not applicable: the source does not publish this field",
         "source_refs": [
-          "bls-oews-methods"
+          "ooh-current"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Insufficient evidence (O*NET and BLS do not publish an industry median wage for this occupation)",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "This industry is not among the five listed by the BLS handbook for this occupation.",
         "fact_id": "us-industry-wage-instruments-2025",
         "market": "United States",
         "measure": "Median wage for this occupation within the industry",
         "occupation_scope": "Bus Drivers, Transit and Intercity",
         "period": "Not applicable: the source does not publish this field",
         "source_refs": [
-          "bls-oews-methods"
+          "ooh-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "47,530 dollars/year (25th percentile)",
         "fact_id": "us-wage-p25-2025",
         "market": "United States",
@@ -37631,7 +37696,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "70,700 dollars/year (75th percentile)",
         "fact_id": "us-wage-p75-2025",
         "market": "United States",
@@ -37643,67 +37708,67 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "166400 people",
         "fact_id": "us-employment-current",
         "market": "United States",
         "measure": "Employment size",
         "occupation_scope": "Bus Drivers, Transit and Intercity (SOC53-3052)",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "173300 people",
         "fact_id": "us-employment-2035-current",
         "market": "United States",
         "measure": "Projected employment",
         "occupation_scope": "Bus Drivers, Transit and Intercity (SOC53-3052)",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Growth of 4.1% (a rounded 4%)",
         "fact_id": "us-growth-current",
         "market": "United States",
         "measure": "Employment growth rate",
         "occupation_scope": "Bus Drivers, Transit and Intercity (SOC53-3052)",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "6900 people",
         "fact_id": "us-change-current",
         "market": "United States",
         "measure": "Projected net increase",
         "occupation_scope": "Bus Drivers, Transit and Intercity (SOC53-3052)",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "21100/year",
         "fact_id": "us-openings-current",
         "market": "United States",
         "measure": "Average annual job openings",
         "occupation_scope": "Bus Drivers, Transit and Intercity (SOC53-3052)",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "ep-current"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "64590 dollars/year",
         "fact_id": "us-industry-current-1",
         "market": "United States",
@@ -37715,7 +37780,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "57820 dollars/year",
         "fact_id": "us-industry-current-2",
         "market": "United States",
@@ -37727,7 +37792,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "48420 dollars/year",
         "fact_id": "us-industry-current-3",
         "market": "United States",
@@ -37739,7 +37804,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "46860 dollars/year",
         "fact_id": "us-industry-current-4",
         "market": "United States",
@@ -37751,30 +37816,30 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Bus Drivers, Transit and Intercity",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "derivation": "Shown for the source’s stated period and scope.",
+        "display_value": "$70,700 per year",
+        "fact_id": "us-industry-state-government-2025",
+        "market": "United States",
+        "measure": "Occupational annual median in state government excluding education and hospitals",
+        "occupation_scope": "Bus Drivers, Transit and Intercity (SOC53-3052)",
+        "period": "May 2025",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "ooh-current"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and shift records"
     },
     "badges": [
-      "O*NET 53-3052.00 · safe driving / passenger service / ticketing and driving records",
-      "operating per schedule and approved route / passenger assistance and emergency handling / shift and fatigue management",
-      "U.S. data uses this occupation's exact basis · mainland China registers only the basis and gaps under the evidence routing"
+      "Shifts | open time entries | handover",
+      "Ask about work and pay separately",
+      "U.S. statistics for SOC 53-3052"
     ],
     "metrics": [
       {
@@ -37787,19 +37852,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034, 53-3052.00 basis)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment (2024, 53-3052.00 basis)"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2024—2034, 53-3052.00 basis)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37813,17 +37878,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What transit and intercity bus drivers do, what education and qualifications are needed, how U.S. and Chinese salaries and prospects look, and which steps AI and automation will change; the gaps registered under the mainland China evidence routing are retained."
+      "text": "Before an interview, check shifts, gaps, handovers and pay terms. Compare two Chinese postings and practice reading a fictional shift log."
     },
     "title": {
       "availability": "available",
-      "text": "Bus Drivers, Transit and Intercity"
+      "text": "Bus Drivers: Shifts, Handovers and Interviews"
     }
   },
-  "source_content_sha256": "257764363e4b22a780bed7e23e62a5c56fb7dbf5dc2984e63eb9dc14c7bbc098",
+  "source_content_sha256": "df0729ef123b64430bf950fee2d502b93a519707082f5f90ad5f9c3d149e7579",
   "subject": {
     "canonical_slug": "bus-drivers",
     "name": "Bus Drivers, Transit and Intercity",
-    "summary": "The entry on this page corresponds to transit and intercity bus drivers (U.S. side O*NET-SOC 53-3052.00): driving transit buses or long-distance coaches, including regular route operation, charter, and private carriage — driving per schedule and approved route, stopping properly and announcing stops, assisting passengers in boarding and alighting, collecting tickets or fares, maintaining cabin order, recording fares and driving logs, and handling passenger emergencies and reporting delays or accidents; the work routinely involves long periods of sitting, an enclosed cabin, all kinds of weather, and high-frequency public contact, and its duties do not equal deciding routes and fares on its own, nor do they replace the operating unit's production safety responsibility."
+    "summary": "Ask how a shift starts, who assigns gaps between runs, and how the last run is handed over. City and intercity drivers follow the assigned route, vehicle requirements and employer procedures. Shift records help you ask practical questions about the role."
   }
 }

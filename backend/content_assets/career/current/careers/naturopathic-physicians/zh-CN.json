@@ -173,6 +173,9 @@
       "item:naturopathic-physicians.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:naturopathic-physicians.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:naturopathic-physicians.profile.career-quick-answers-block.6": {
         "status": "pending_mapping"
       },
@@ -13032,6 +13035,21 @@
             "wa-license"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两份初访表列了不同的用药清单，只有一份标日期。写出给接诊临床人员的冲突记录和待核来源。"
+            ]
+          },
+          "id": "naturopathic-physicians.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "整理初访资料的来源",
+          "type": "notice"
         }
       ]
     },
@@ -15524,6 +15542,13 @@
         "id": "naturopathic-physicians.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "naturopathic-physicians.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15790,7 +15815,7 @@
       "text": "自然疗法医师"
     }
   },
-  "source_content_sha256": "2508c3de54c3bc00477cc9aea75ce332795888cd8dff7f267db4fdc719e0a8fb",
+  "source_content_sha256": "9709a598a66c2b393ce696e461ade36189d3f9bfa1c515548e8d03bc497b3094",
   "subject": {
     "canonical_slug": "naturopathic-physicians",
     "name": "自然疗法医师",

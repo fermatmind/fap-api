@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First observe whether the person is willing to check the time, cumulative readings, and units against the records, state anomalies and items to confirm clearly, accept guidance, and keep the basis for changes. W23 can help explore record and handover tasks; actual sampling, testing, equipment operation, safety training, and shift adaptation still need verification in a real position."
+              "Paper check | Match the sample ID and time. If a gauge and lab record disagree, retain both and hand them to the shift lead. The exercise gives no dosing or discharge instruction. "
             ]
           },
           "id": "water-and-wastewater-treatment-plant-and-system-operators.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24820,13 +24819,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Water and wastewater treatment plant and system operators operate or control equipment and systems to convey and treat water and wastewater, monitor operation, sample and test, keep records, patrol and maintain, and hand over anomalies. Water supply, wastewater treatment, and engineering design, environmental monitoring, and hazardous materials removal have different objectives and responsibilities and do not merge identities just because they share a facility."
+              "Water and wastewater operators monitor equipment, collect samples under site procedures, record instrument and test results, and hand off exceptions. The site assigns process adjustments. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "water-and-wastewater-treatment-plant-and-system-operators.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh"
+            "transfer-onet-51-8031.00"
           ],
           "type": "prose"
         }
@@ -25493,16 +25491,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: first separate industrial automation, generative text assistance, and real employment outcomes. This occupation already has control and monitoring tasks, but that is not evidence of large model adoption; suggestions from a text tool must be reviewed. The external materials used here supply no measured occupational task score or AI replacement rate, so a separate editorial estimate is shown. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Match the sample ID and time. If a gauge and lab record disagree, retain both and hand them to the shift lead. The exercise gives no dosing or discharge instruction."
             ]
           },
           "id": "water-and-wastewater-treatment-plant-and-system-operators.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "nist",
-            "bls-ooh",
-            "bls",
-            "editorial"
+            "transfer-onet-51-8031.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33544,6 +33539,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-8031.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-8031.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-8031.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39012,10 +39034,10 @@
       "text": "Water and wastewater treatment plant and system operators: tasks, wages, training, and paper experience"
     }
   },
-  "source_content_sha256": "4bb7d741f6a90427dd346e9283bbff65113f0522fd56868d2aaab8a76d980869",
+  "source_content_sha256": "476433bc16544a89966ed1f33a139a5eefd6f05d7b2d9c188092d653ee6ef833",
   "subject": {
     "canonical_slug": "water-and-wastewater-treatment-plant-and-system-operators",
     "name": "Water and wastewater treatment plant and system operators",
-    "summary": "Water and wastewater treatment plant and system operators monitor and operate the equipment and processes that convey and purify water and treat wastewater, sample and test, record operating data, patrol and maintain, and hand over anomalies. Water supply and wastewater treatment have different targets and specific standards; beginners should first practice readings, units, and handover records, then operate within the training and authority of a real position."
+    "summary": "Water and wastewater operators monitor equipment, collect samples under site procedures, record instrument and test results, and hand off exceptions. The site assigns process adjustments."
   }
 }

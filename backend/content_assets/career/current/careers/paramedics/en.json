@@ -179,6 +179,9 @@
       "item:paramedics.path.recruitment-sample.8": {
         "status": "pending_mapping"
       },
+      "item:paramedics.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:paramedics.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12360,6 +12363,21 @@
             "nremt-certification"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The pickup log and transport sheet give different times for the same event. Preserve both original entries and their sources for the receiving team."
+            ]
+          },
+          "id": "paramedics.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Reconcile a prehospital handover timeline",
+          "type": "notice"
         }
       ]
     },
@@ -14835,6 +14853,13 @@
         "id": "paramedics.path.recruitment-sample.8",
         "location": "entry_decisions",
         "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "paramedics.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15112,7 +15137,7 @@
       "text": "Advanced prehospital emergency provider (Paramedic): work content, wages, and practice boundaries."
     }
   },
-  "source_content_sha256": "141c6356bc227493b6c4f38c0eded597073826a158ecf5b7ed233c7ecbace087",
+  "source_content_sha256": "aedc41738265f68f89e050ad3563cf71df55dabe5d23d3a4f176a2bab6e3dae4",
   "subject": {
     "canonical_slug": "paramedics",
     "name": "Advanced prehospital emergency provider (Paramedic).",

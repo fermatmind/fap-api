@@ -23375,14 +23375,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "下一步核目标地区施药类别、雇主带教、产品标签与环境保护流程，再完成虚构工单；不在纸面练习中给出配方、药量或施用步骤。"
+              "纸面体验｜对照虚构工单和地块草图，标出遗漏的边界编号和缺记的天气栏，写下需主管确认的两项。 "
             ]
           },
           "id": "pesticide-handlers-sprayers-and-applicators-vegetation.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "privacy",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23677,13 +23675,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET美国职业分类不等于中国植保或农药施用资格；真实服务按当地制度和产品标签执行。"
+              "植被施药作业人员按指派区域作业，并记录地块、材料和现场条件。清楚的地块边界与作业记录便于主管核对完成范围。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "pesticide-handlers-sprayers-and-applicators-vegetation.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "privacy"
+            "transfer-onet-37-3012.00"
           ],
           "type": "prose"
         },
@@ -24783,16 +24780,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未核得本职实际生成式AI采用、整体替代率、替代年份及可靠节时、识别错误、暴露安全、环境服务与报酬效果。获准路线工单照片归档仅编辑试用，植物病虫草害、当前标签、风雨水体及资格由有权人员核；总体3.9%、净1.0千和年3.3千含替补空缺非AI作用个人失业中国需求。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构工单和地块草图，标出遗漏的边界编号和缺记的天气栏，写下需主管确认的两项。"
             ]
           },
           "id": "pesticide-handlers-sprayers-and-applicators-vegetation.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ep",
-            "nist",
-            "ilo",
-            "editor"
+            "transfer-onet-37-3012.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33026,6 +33020,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-37-3012.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 37-3012.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/37-3012.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38280,10 +38301,10 @@
       "text": "植保员"
     }
   },
-  "source_content_sha256": "1698023a9d8b70ebdc32a0b043893e0a30c04fe9bab43d232c354bc2cec23882",
+  "source_content_sha256": "79572c0da278d8b7f6743cf20e70f5ecf7d03c402031155d221c2f7a29ceee7d",
   "subject": {
     "canonical_slug": "pesticide-handlers-sprayers-and-applicators-vegetation",
     "name": "植被农药施用人员",
-    "summary": "植被农药施用人员（O*NET 37-3012.00）检查草坪、树木、灌木或作物的病虫草害与现场条件，依据产品标签、适用资格和机构方案使用获准方法，记录服务并复查植被与环境。O*NET列有混配和施用任务，但本页不提供操作参数；真实施用须按当前标签、训练与监管要求进行。"
+    "summary": "植被施药作业人员按指派区域作业，并记录地块、材料和现场条件。清楚的地块边界与作业记录便于主管核对完成范围。"
   }
 }

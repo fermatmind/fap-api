@@ -1717,6 +1717,9 @@
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.6": {
         "status": "mapped"
+      },
+      "item:cooks.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -30336,6 +30339,21 @@
             "cn-rule"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The order changes the side dish, but the dispatch slip still uses the old version. Identify the order to check, who in the kitchen to notify and the change record to retain."
+            ]
+          },
+          "id": "cooks.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "sag-moa"
+          ],
+          "title": "Check a kitchen order revision",
+          "type": "notice"
         }
       ]
     },
@@ -36989,6 +37007,13 @@
         "id": "actors.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "cooks.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/en/career/jobs/cooks",
@@ -37381,7 +37406,7 @@
       "text": "Cooks (occupational family)"
     }
   },
-  "source_content_sha256": "6466ccc884016f1cf48d80a292ae56d62007d9d90e190cd3ba6e084580a428d0",
+  "source_content_sha256": "e362cc561c38e26ebb37aeeacc5d37e01bb63f53535cac66ab395156cde8008d",
   "subject": {
     "canonical_slug": "cooks",
     "name": "Cooks (occupational family)",

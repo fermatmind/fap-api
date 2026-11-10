@@ -1469,6 +1469,9 @@
       "item:claims-adjusters-appraisers-examiners-and-investigators.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:claims-adjusters-appraisers-examiners-and-investigators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:claims-adjusters-appraisers-examiners-and-investigators.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30980,6 +30983,21 @@
           "id": "claims-adjusters-appraisers-examiners-and-investigators.path.recruitment-sample.1",
           "title": "招聘样本使用说明",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。事故照片时间与报案日吻合，但照片未标保单车辆。把已知情况和待核归属分开，写给负责理赔复核的人。"
+            ]
+          },
+          "id": "claims-adjusters-appraisers-examiners-and-investigators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核理赔材料的归属",
+          "type": "notice"
         }
       ]
     },
@@ -37419,6 +37437,13 @@
         "id": "claims-adjusters-appraisers-examiners-and-investigators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "claims-adjusters-appraisers-examiners-and-investigators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37985,7 +38010,7 @@
       "text": "理赔核损员、审查员与调查员"
     }
   },
-  "source_content_sha256": "0671773849481ae549f4c7ac40270b4528567aaeda46c1a879a40e1dea140d92",
+  "source_content_sha256": "5a1b3fdaff6489cb8278d8068b15ab301215e0936dc52491de83b2bde7c32d4c",
   "subject": {
     "canonical_slug": "claims-adjusters-appraisers-examiners-and-investigators",
     "name": "理赔核损员、审查员与调查员",

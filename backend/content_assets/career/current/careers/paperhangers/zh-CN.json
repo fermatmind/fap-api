@@ -167,6 +167,9 @@
       "item:paperhangers.path.seven-day-trial.5": {
         "status": "mapped"
       },
+      "item:paperhangers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:paperhangers.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -12540,6 +12543,21 @@
             "editorial-guidance"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。工单要求两卷同一批号，第二卷标签不全，图案对位样张也未标墙面。写出交给施工负责人的两项待核凭证。"
+            ]
+          },
+          "id": "paperhangers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "核裱糊图案和卷材批次",
+          "type": "notice"
         }
       ]
     },
@@ -14950,6 +14968,13 @@
         "id": "paperhangers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "paperhangers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15191,7 +15216,7 @@
       "text": "裱糊工：壁纸施工、工资与入行路径"
     }
   },
-  "source_content_sha256": "125c4f1b9bf7dffb0c551975640b1302d3473f740bae6832716f368dc370dc93",
+  "source_content_sha256": "ee789ba2b6ab97ec1184d66a9fbaabf57da7820a8f35d04b0a50f993ad186679",
   "subject": {
     "canonical_slug": "paperhangers",
     "name": "裱糊工",

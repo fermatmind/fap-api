@@ -14,9 +14,6 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -24,13 +21,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-2035": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-industry-wage-aerospace-mfg-2025": {
         "status": "pending_mapping"
@@ -48,10 +45,10 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-high10-2025": {
         "status": "pending_mapping"
@@ -23272,10 +23269,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Low-cost trial: using the three fictional shipments from the T1 pathway and the R/S rules, calculate charges and verify time limits and capability, handle the three differences in piece count / temperature control / attributes and a delay injection, and submit four deliverables: quotation, differences, exceptions, and review. Pen and paper are enough, with no connection to real systems; self-check against the reference and observe whether you want to keep exploring."
+              "Try the FG-46 paper check before pursuing the role. The exercise uses no real cargo, shipping systems or customer information."
             ]
           },
           "id": "cargo-and-freight-agents.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23283,7 +23283,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: willingness to re-verify weight, rates, deadlines, and fields repeatedly, the ability to keep a pending-verification status when attributes or authorization have not been checked, and acceptance of review and changes. Use T1 to observe how the tasks feel; completing them does not mean you are competent or qualified."
+              "Signals to keep exploring: willingness to re-verify weight, rates, deadlines, and fields repeatedly, the ability to keep a pending-verification status when attributes or authorization have not been checked, and acceptance of review and changes. Use FG-46 to observe how the tasks feel; completing them does not mean you are competent or qualified."
             ]
           },
           "id": "cargo-and-freight-agents.quick-decision.fit-decision-checklist.3",
@@ -23294,7 +23294,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education, certification, and authorization are verified separately. O*NET Job Zone 1–2; the new-hire education judgments are 31% bachelor's, 19% some college no degree, and 18% postsecondary certificate, which is not the actual composition of practitioners. For this occupation BLS gives typical entry with a high school diploma or equivalent, no related work experience, and short-term on-the-job training, which is a U.S. overview. The certification entry lists 6 items and is only a discovery list. In the United States, acting as a customs broker for others in customs business in principle requires a license; the CBP 2025 guidance also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately."
+              "Education, certification, and authorization are verified separately. O*NET Job Zone 1–2; the new-hire education judgments are 31% bachelor's, 19% some college no degree, and 18% postsecondary certificate, which is not the actual composition of practitioners. For this occupation BLS gives typical entry with a high school diploma or equivalent, no related work experience, and short-term on-the-job training, which is a U.S. overview. The certification entry lists 6 items and is only a discovery list. In the United States, acting as a customs broker for others in customs business in principle requires a license; 19 CFR § 111.2(a)(2) also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately."
             ]
           },
           "id": "cargo-and-freight-agents.quick-decision.fermat-decision-card.6",
@@ -23653,7 +23653,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Quotation, shipping arrangement, documentation, and milestone tasks are carried out according to the position's division of labor; freight agents may also lawfully choose the transport mode. The liability of carriers, shippers and their agents, customs business entities, and insurers is determined separately under the applicable law and contract, and authority is not inferred from the occupational title. In the United States, acting as a customs broker for others in customs business in principle requires a license; the CBP 2025 guidance also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately."
+              "Quotation, shipping arrangement, documentation, and milestone tasks are carried out according to the position's division of labor; freight agents may also lawfully choose the transport mode. The liability of carriers, shippers and their agents, customs business entities, and insurers is determined separately under the applicable law and contract, and authority is not inferred from the occupational title. In the United States, acting as a customs broker for others in customs business in principle requires a license; 19 CFR § 111.2(a)(2) also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately."
             ]
           },
           "id": "cargo-and-freight-agents.profile.career-quick-answers-block.17",
@@ -23730,7 +23730,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "U.S. O*NET-SOC43-5011.00, in the office and administrative support category; the summary interest code is CE, and the detailed scores are conventional 89, enterprising 64, realistic 36. The specific interest fields office 56, accounting 30, and administrative management 28 cannot be treated as individual score thresholds from the ranking. Preparation level Job Zone1–2, SVP below 6; labeled Bright Outlook. The 2025 industry page shows 91% transportation and warehousing and 9% other, which is only a distribution. The Chinese name does not establish a Chinese occupational subcategory or a one-to-one wage mapping."
+              "U.S. O*NET-SOC43-5011.00, in the office and administrative support category; the summary interest code is CE, and the detailed scores are conventional 89, enterprising 64, realistic 36. The specific interest fields office 56, accounting 30, and administrative management 28 cannot be treated as individual score thresholds from the ranking. Preparation level Job Zone1–2, SVP below 6; labeled Bright Outlook. The 2025 industry page shows 91% transportation and warehousing, which is only a distribution. The Chinese name does not establish a Chinese occupational subcategory or a one-to-one wage mapping."
             ]
           },
           "id": "cargo-and-freight-agents.profile.career-quick-answers-block.24",
@@ -23774,7 +23774,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The O*NET technology list names 11 categories of software skills, and the Hot Technologies page shows 6 items (Microsoft Office 7%, Excel 6%, Outlook 4%, Word 2%, PowerPoint 1%, and SAP below 1%; the data source is 2025 U.S. job postings from Lightcast). The editorial suggestion is to verify whether the target position mainly uses transport management and booking and tracking systems, customs declaration and document filing platforms, document templates such as bills of lading and invoices and packing lists, rate and mileage and weight calculation tools, barcode scanning and warehouse management systems, and office and email and telephone communication tools."
+              "O*NET lists office software and email among technology examples for the U.S. occupation. Ask which booking and record systems the employer uses and which records require human review."
             ]
           },
           "id": "cargo-and-freight-agents.profile.career-quick-answers-block.28",
@@ -23818,7 +23818,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "In the United States, acting as a customs broker for others in customs business in principle requires a license; the CBP 2025 guidance also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately."
+              "In the United States, acting as a customs broker for others in customs business in principle requires a license; 19 CFR § 111.2(a)(2) also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately."
             ]
           },
           "id": "cargo-and-freight-agents.profile.career-quick-answers-block.32",
@@ -23873,7 +23873,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "U.S. 2025 OEWS national annual wage 10/25/50/75/90 percentiles are 38340/45710/52260/63390/79810 USD; the corresponding hourly wages are 18.43/21.98/25.13/30.48/38.37 USD. Percentiles are not an individual's starting pay or take-home income, and this round did not obtain the original average table, so an average cannot be inferred from the percentiles."
+              "The 2025 U.S. national annual wage percentiles at the 10th, 25th, 50th, 75th and 90th are $38,340, $45,710, $52,260, $63,390 and $79,810. Corresponding hourly figures are $18.43, $21.98, $25.13, $30.48 and $38.37. Percentiles are not starting pay, take-home pay or a mean."
             ]
           },
           "id": "cargo-and-freight-agents.profile.onet-structured-fields-block.2",
@@ -23884,7 +23884,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "China 2025 transportation, warehousing and postal services averages: urban non-private 133981 and private 73133 yuan/year, which are only proxies for the whole industry, not this occupation's median or starting wage. This round did not establish a one-to-one Chinese subcategory mapping, nor did it verify the full text of the occupational code, so the closest entry is not used as an authoritative conclusion."
+              "China’s NBS reports 2025 urban annual industry averages of CNY 133,981 at non-private units and CNY 73,133 at private units in transportation, storage and postal services. The Shanghai and Weihai notices describe individual jobs."
             ]
           },
           "id": "cargo-and-freight-agents.profile.onet-structured-fields-block.3",
@@ -23895,7 +23895,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Industry distribution and employment background: the O*NET 2025 industry distribution shows 91% of this occupation in transportation and warehousing and 9% in other industries; the BLS Table 1.2 projection framing is about 100,300 in 2025, with 2025—2035 employment growth of 6.2%, a net increase of about 6,200 positions, and about 9,000 average annual job openings (including replacement needs such as turnover and retirement); position demand is affected by trade volume and freight structure, e-commerce and cross-border fulfillment, carrier capacity and freight rate volatility, the degree of automation and document digitization, and the supply of people with transport and documentation and compliance knowledge. The occupation is labeled Bright Outlook (good growth prospects), but among its O*NET related occupations, freight forwarders (43-5011.01), aircraft cargo handling supervisors (53-1041.00), and light truck drivers (53-3033.00) are also labeled Bright Outlook and are different occupational identities."
+              "Industry distribution and employment background: the O*NET 2025 industry distribution shows 91% of this occupation in transportation and warehousing; the BLS Table 1.2 projection framing is about 100,300 in 2025, with 2025—2035 employment growth of 6.2%, a net increase of about 6,200 positions, and about 9,000 average annual job openings (including replacement needs such as turnover and retirement); position demand is affected by trade volume and freight structure, e-commerce and cross-border fulfillment, carrier capacity and freight rate volatility, the degree of automation and document digitization, and the supply of people with transport and documentation and compliance knowledge. The occupation is labeled Bright Outlook (good growth prospects), but among its O*NET related occupations, freight forwarders (43-5011.01), aircraft cargo handling supervisors (53-1041.00), and light truck drivers (53-3033.00) are also labeled Bright Outlook and are different occupational identities."
             ]
           },
           "id": "cargo-and-freight-agents.profile.onet-structured-fields-block.4",
@@ -23906,7 +23906,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Tool signals and abilities: the technology list names 11 categories of software skills, and the Hot Technologies page shows 6 items (Microsoft Office 7%, Excel 6%, Outlook 4%, Word 2%, PowerPoint 1%, SAP below 1%); work activities center on getting information (78), recording information and decision making and problem solving (72 each), handling and moving objects (65), and communicating with people outside the organization and controlling machines and processes and judging the qualities of objects and services and monitoring processes and materials (61 each); basic skills center on oral expression (66) and active listening (63) and critical thinking and reading comprehension (56 each), with mathematics 31 and science 0; transferable skills center on negotiation and time management (53 each) and complex problem solving and coordination and service orientation and social perceptiveness (50 each); knowledge centers on transportation (89) and geography (88) and public safety and security (76) and English language (73) and administration and management (72); the interest code is CE (conventional, enterprising); the detailed page realistic score is 36 and cannot be added into the summary code; work styles center on dependability (88) and attention to detail (79) and integrity (58) and adaptability (47)."
+              "O*NET lists office software and email among technology examples for the U.S. occupation. Ask which booking and record systems the employer uses and which records require human review."
             ]
           },
           "id": "cargo-and-freight-agents.profile.onet-structured-fields-block.5",
@@ -24093,7 +24093,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The comparison basis is the U.S. definitions and tasks of this occupation and the six adjacent O*NET occupations, which have been verified item by item this round. The tasks overlap, and the editorial selection advice is not a switching probability; the U.S. customs business exceptions and the Chinese enterprise filing and civil aviation dangerous goods training are verified separately."
+              "Compare the tasks in the adjacent U.S. roles. Check the applicable rules separately for mainland customs, dangerous goods or other jurisdictions."
             ]
           },
           "id": "cargo-and-freight-agents.direction-comparison.adjacent-career-comparison-table.9",
@@ -24730,10 +24730,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no measurement of this occupation's actual AI adoption rate, efficiency gain, or displacement rate. Retrieval, document first drafts, and ledger organizing can be trialed on fictional materials with errors and review costs checked; task exposure, actual adoption, and employment projections are different objects. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Software can compare fields in bills of lading and packing lists, flag deadlines and summarize open items. The responsible people still confirm rates, space, temperature controls, customs and dangerous goods requirements. A tool suggestion is not customer consent or carrier confirmation."
             ]
           },
           "id": "cargo-and-freight-agents.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -24840,7 +24843,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Used to explain that in 2025, 91% is in transportation and warehousing and 9% in other industries; industry wages or employment size cannot be derived from it."
+              "O*NET reports that 91% of U.S. employment in the occupation was in transportation and warehousing in 2025. That share does not give a wage by industry."
             ]
           },
           "id": "cargo-and-freight-agents.ai-impact.ai-impact-table.28",
@@ -25104,7 +25107,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The detailed profile has a full software table of 11 categories, and Hot Technologies lists 6 separately: Office7%, Excel6%, Outlook4%, Word2%, PowerPoint1%, and SAP below 1%. Lightcast2025 U.S. hiring mentions across the full year, not a deployment rate or a proficiency requirement for all positions."
+              "O*NET lists office software and email among technology examples for the U.S. occupation. Ask which booking and record systems the employer uses and which records require human review."
             ]
           },
           "id": "cargo-and-freight-agents.ai-impact.ai-impact-table.52",
@@ -25203,7 +25206,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: use fictional materials to test price comparison, document first drafts, and ledger organizing, and record errors and review costs. This round's materials did not measure efficiency gains for this occupation; what a system can see depends on data access, so it cannot be said categorically that it cannot see real-time space or cargo status."
+              "Use fictional records to try rate comparisons, draft documents and logs. Note which errors need human review. Ask whether the employer’s system shows live cargo space or shipment status."
             ]
           },
           "id": "cargo-and-freight-agents.ai-impact.ai-impact-table.61",
@@ -25280,7 +25283,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial trial suggestion: test rate and mileage and weight retrieval, document and notification first drafts, milestone and ledger organizing, and initial exception screening on fictional or authorized data, and check the original inputs and errors; this round obtained no measurement of actual deployment or effects for this occupation."
+              "Editorial trial suggestion: test rate and mileage and weight retrieval, document and notification first drafts, milestone and ledger organizing, and initial exception screening on fictional or authorized data, and check the original inputs and errors; on this page obtained no measurement of actual deployment or effects for this occupation."
             ]
           },
           "id": "cargo-and-freight-agents.ai-impact.ai-impact-table.68",
@@ -25346,7 +25349,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The O*NET, BLS, and ILO materials reviewed this round do not give a year in which this occupation disappears; it cannot be inferred from task exposure or the current employment projection."
+              "Tools can assist with document checks and reminders. The employment projection does not give a task displacement rate or an end date for the occupation."
             ]
           },
           "id": "cargo-and-freight-agents.ai-impact.ai-impact-table.74",
@@ -25983,10 +25986,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no mainland China occupation-level wage framing precisely corresponding to cargo and freight agents has been established; this evidence route only has the 'industry category proxy framing', so this page publishes no median or percentiles or starting wage for this occupation."
+              "There is no directly comparable mainland national wage figure. The two historical postings do not establish a national median."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "fg-shanghai",
+            "fg-weihai"
+          ],
           "type": "prose"
         },
         {
@@ -25994,10 +26001,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round's NBS wage table is published by industry category and unit type, and no exact Chinese wage distribution for this occupation was obtained; the Chinese occupational name cannot establish a one-to-one correspondence."
+              "On September 3, 2026, Shanghai’s human resources publication listed six documentation operations jobs at Jiekaiyi (Shanghai) Logistics, with a junior college diploma and CNY 6,000–8,000 per month. Duties included booking, tracking, checking documents and helping prepare customs materials. New graduates and people without related experience were welcome. A Weihai Comprehensive Bonded Zone posting listed two document review jobs and two operations jobs, with an October 31, 2026, 16:00 deadline. Reviewers checked invoices, packing lists and bills of lading. Operations staff booked cargo space and arranged vehicles as instructed. The notice specified 80% of total pay during the three-month probation but did not list a pay amount."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "fg-shanghai",
+            "fg-weihai"
+          ],
           "type": "prose"
         },
         {
@@ -26049,7 +26060,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable job-posting price distribution was obtained"
+              "Historical job examples, not a wage distribution."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.13",
@@ -26060,7 +26071,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: verify the city and business type and fixed and variable pay and working hours and unit of the real offer; this round has no de-duplicated verifiable offer sample, so no frequency or wage distribution judgment can be made."
+              "Shanghai lists monthly pay. Weihai does not list amounts for the two roles. Check pay period, fixed and variable pay, hours and duties for other offers."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.14",
@@ -26115,7 +26126,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Conclusion: the official materials verified for this page did not obtain a Chinese nationwide wage distribution precisely corresponding to this occupation, and not obtaining it does not prove it is unpublished; the available official figures only reach the 'transportation, warehousing and postal services' industry category proxy; this page publishes the industry proxy with the marking at each place, does not use it to pass as this occupation's exact framing, and does not fill in with recruitment samples."
+              "The NBS release groups wages by industry and employer type. Each historical job example is shown on its own terms."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.19",
@@ -26137,7 +26148,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no exact Chinese wage distribution for this occupation or de-duplicated recruitment offer sample; the NBS industry average is retained as a limited proxy."
+              "The local notices illustrate roles; NBS averages describe the industry. Neither can be converted into a national occupational median."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.21",
@@ -26159,7 +26170,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round has no measurement of this occupation's AI adoption rate or wage impact in China. Tools cannot fill in the missing occupational wage distribution, and a pay raise or job loss cannot be predicted from them."
+              "This page has no measurement of this occupation's AI adoption rate or wage impact in China. Tools cannot fill in the missing occupational wage distribution, and a pay raise or job loss cannot be predicted from them."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.23",
@@ -26170,7 +26181,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The U.S. occupational code and Chinese positions are compared by actual duties, and this round did not establish a one-to-one mapping from the occupational classification publication entry. International freight forwarding enterprise filing and civil aviation dangerous goods training each have their own applicable rules and are not a uniform individual certificate for all positions."
+              "The U.S. occupational code and Chinese positions are compared by actual duties, and on this page did not establish a one-to-one mapping from the occupational classification publication entry. International freight forwarding enterprise filing and civil aviation dangerous goods training each have their own applicable rules and are not a uniform individual certificate for all positions."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.24",
@@ -26401,7 +26412,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The official materials verified for this page did not obtain a Chinese nationwide wage distribution precisely corresponding to this occupation, and not obtaining it does not prove it is unpublished; this page registers the verifiable industry proxy framing and its limits, and the occupational mapping boundary."
+              "Check whether a figure describes the occupation, an industry or a specific job."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.45",
@@ -26434,7 +26445,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round does not provide a Chinese monthly wage range or city ranking for this occupation. The editorial suggestion is to verify duties and authority and allowances and commission and working hours with the target employer, and not to claim that institutional differences have been measured."
+              "This page does not provide a Chinese monthly wage range or city ranking for this occupation. The editorial suggestion is to verify duties and authority and allowances and commission and working hours with the target employer, and not to claim that institutional differences have been measured."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.48",
@@ -26478,7 +26489,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no verifiable wage distribution for this occupation at specific freight hubs or ports, and industry averages are not used to infer regional wages."
+              "Insufficient evidence: on this page obtained no verifiable wage distribution for this occupation at specific freight hubs or ports, and industry averages are not used to infer regional wages."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.52",
@@ -26500,7 +26511,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round's NBS wage release did not provide a regional monthly wage range for this occupation, and other sources are not compiled on this page; not obtaining it does not prove it is unpublished."
+              "The NBS release gives national industry averages by employer type, without regional monthly wages for this occupation."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.54",
@@ -26511,7 +26522,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The U.S. occupational identity is O*NET-SOC43-5011.00, and the Chinese name does not prove the same Chinese occupational subcategory or wage. This round did not establish a one-to-one mapping from the occupational classification publication entry, and comparison is by actual position tasks and jurisdiction."
+              "The U.S. occupational identity is O*NET-SOC43-5011.00, and the Chinese name does not prove the same Chinese occupational subcategory or wage. This page did not establish a one-to-one mapping from the occupational classification publication entry, and comparison is by actual position tasks and jurisdiction."
             ]
           },
           "id": "cargo-and-freight-agents.china-salary.career-snapshot-primary-locale.55",
@@ -26914,7 +26925,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The O*NET industry page's 91% transportation and warehousing and 9% other is an employment distribution and does not measure employer commission structures or wage causes; verify fixed wages and variable pay and working hours with the target employer."
+              "O*NET reports that 91% of U.S. employment in the occupation was in transportation and warehousing in 2025. That share does not give a wage by industry."
             ]
           },
           "id": "cargo-and-freight-agents.us-salary.career-snapshot-secondary-locale.29",
@@ -26936,7 +26947,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The editorial suggestion is to verify the actual documents and on-site and client and compliance and mentoring tasks and authority handled; this round has no measurement of wage differences by duty, and it cannot be asserted that one type of duty affects pay more than other factors."
+              "Compare the duties and authority in the offer, along with hours and pay. The figures on this page do not isolate pay differences by task."
             ]
           },
           "id": "cargo-and-freight-agents.us-salary.career-snapshot-secondary-locale.31",
@@ -26991,7 +27002,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The O*NET 2025 industry distribution shows 91% of this occupation in transportation and warehousing and 9% in other industries."
+              "O*NET reports that 91% of U.S. employment in the occupation was in transportation and warehousing in 2025. That share does not give a wage by industry."
             ]
           },
           "id": "cargo-and-freight-agents.us-salary.career-snapshot-secondary-locale.36",
@@ -27002,7 +27013,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Other industries (9%)"
+              "Other work settings"
             ]
           },
           "id": "cargo-and-freight-agents.us-salary.career-snapshot-secondary-locale.37",
@@ -27090,7 +27101,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This round did not compile regional and institutional wages; O*NET has state and postal code lookup entries for further inquiry by target area, so it cannot be said that BLS does not publish all regional data."
+              "This page did not compile regional and institutional wages; O*NET has state and postal code lookup entries for further inquiry by target area, so it cannot be said that BLS does not publish all regional data."
             ]
           },
           "id": "cargo-and-freight-agents.us-salary.career-snapshot-secondary-locale.45",
@@ -27123,7 +27134,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The figures come from BLS May 2025 OEWS, framed as Cargo and Freight Agents (SOC 43-5011); employment and projections use the 2025—2035 framing (shown in BLS Table 1.2). 91% of this occupation is concentrated in transportation and warehousing, and insufficient evidence: the materials verified for this page did not obtain this occupation's wages by transport mode and region, and it is not inferred from this that all sources have not published them."
+              "U.S. national wages come from May 2025 OEWS for SOC 43-5011. Employment projections come from BLS Table 1.2. O*NET separately reports that 91% of U.S. employment in the occupation was in transportation and warehousing in 2025. That share does not give a wage by industry."
             ]
           },
           "id": "cargo-and-freight-agents.us-salary.career-snapshot-secondary-locale.48",
@@ -27134,7 +27145,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Verify the fixed and variable pay and overtime and shifts and scope of responsibility and quotation cycles in the employment contract; this is an editorial verification suggestion, not a measured wage cause from this round."
+              "Compare fixed and variable pay, overtime, shifts, responsibilities and the pay period."
             ]
           },
           "id": "cargo-and-freight-agents.us-salary.career-snapshot-secondary-locale.49",
@@ -27178,7 +27189,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 90th percentile of 79,810 USD/year indicates the upper end of the distribution, not a common income; this round's national percentile table cannot explain which personal conditions produce that figure."
+              "The 2025 U.S. 90th percentile is $79,810 a year. This marks a position in the national distribution and does not predict an individual offer."
             ]
           },
           "id": "cargo-and-freight-agents.us-salary.career-snapshot-secondary-locale.53",
@@ -27339,19 +27350,19 @@
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Transportation, storage, and distribution managers",
@@ -27492,7 +27503,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial reflection suggestion: observe whether you are willing to re-verify documents repeatedly, stay organized under follow-up pressure, and accept collaboration and changes. Do not equate these task requirements with Big Five predictive validity; this round has no personality validity research for this occupation."
+              "Self-check: observe whether you are willing to re-verify documents repeatedly, stay organized under follow-up pressure, and accept collaboration and changes. Do not equate these task requirements with Big Five predictive validity; the figures here do not provide personality validity research for this occupation."
             ]
           },
           "id": "cargo-and-freight-agents.fit.personality-fit-block.6",
@@ -27503,7 +27514,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This round's occupational materials have task and work style descriptions but did not verify Big Five prediction research for this occupation; use it to raise questions, not as a screening threshold."
+              "Use task and work style descriptions to prompt reflection. Big Five scores do not set screening thresholds here."
             ]
           },
           "id": "cargo-and-freight-agents.fit.personality-fit-block.7",
@@ -27514,8 +27525,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Editorial observation suggestion: check whether you are willing to review documents and weight and rates against a checklist and record actual omissions and corrections; an error rate cannot be inferred from conscientiousness scores.",
-              "Editorial observation suggestion: in a simulated situation of client follow-up or changing carrier conditions, observe whether you can keep a pending-verification status and communicate clearly and escalate per process; emotional stability scores do not prove competence."
+              "Self-check: check whether you are willing to review documents and weight and rates against a checklist and record actual omissions and corrections; an error rate cannot be inferred from conscientiousness scores.",
+              "Self-check: in a simulated situation of client follow-up or changing carrier conditions, observe whether you can keep a pending-verification status and communicate clearly and escalate per process; emotional stability scores do not prove competence."
             ]
           },
           "id": "cargo-and-freight-agents.fit.personality-fit-block.8",
@@ -27537,7 +27548,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The occupational materials reviewed this round did not provide a best-fit MBTI type or prediction basis for this occupation; this page does not assign qualifications or positions by type."
+              "The occupational materials reviewed on this page did not provide a best-fit MBTI type or prediction basis for this occupation; this page does not assign qualifications or positions by type."
             ]
           },
           "id": "cargo-and-freight-agents.fit.personality-fit-block.10",
@@ -27582,7 +27593,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This round did not verify Enneagram research on performance in this occupation; this page draws no hiring or qualification or authorization conclusions by type."
+              "This page did not verify Enneagram research on performance in this occupation; this page draws no hiring or qualification or authorization conclusions by type."
             ]
           },
           "id": "cargo-and-freight-agents.fit.personality-fit-block.14",
@@ -27959,7 +27970,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "It can be explored. Extraversion or a desire to express yourself does not automatically prove competence; first use T1 to check calculation, records, communication, and exception escalation, then verify the real task mix with the target employer."
+              "It can be explored. Extraversion or a desire to express yourself does not automatically prove competence; first use FG-46 to check calculation, records, communication, and exception escalation, then verify the real task mix with the target employer."
             ]
           },
           "id": "cargo-and-freight-agents.fit.personality-fit-block.48",
@@ -27970,7 +27981,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This round's materials do not give a best-fit MBTI type, and this page recommends no type list or hiring prediction; preferences can be turned into task questions to verify."
+              "This page's materials do not give a best-fit MBTI type, and this page recommends no type list or hiring prediction; preferences can be turned into task questions to verify."
             ]
           },
           "id": "cargo-and-freight-agents.fit.personality-fit-block.49",
@@ -28014,7 +28025,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "You can first use T1 to observe whether you are willing to re-verify when an error is pointed out and whether you can state the undecided conditions when a delay occurs; this round has no emotional intelligence prediction results for this occupation, and no score threshold is set."
+              "Use FG-46 to notice how you respond when a reviewer spots an error or a shipment changes. State what remains unresolved. An emotional intelligence score is not a hiring or authorization threshold."
             ]
           },
           "id": "cargo-and-freight-agents.fit.personality-fit-block.53",
@@ -28025,7 +28036,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This round has no Enneagram prediction basis for this occupation; it can serve as self-reflection, but this page draws no hiring or qualification conclusions by type."
+              "This page has no Enneagram prediction basis for this occupation; it can serve as self-reflection, but this page draws no hiring or qualification conclusions by type."
             ]
           },
           "id": "cargo-and-freight-agents.fit.personality-fit-block.54",
@@ -28036,7 +28047,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Complete the four deliverables on the T1 pathway — quotation comparison, field differences, milestone exceptions, and review — and self-check against the reference or ask someone to review. Mark the review method faithfully and observe whether you want to keep exploring; completing the simulation or getting someone's approval does not prove competence in real freight work or any authorization."
+              "Complete two check sheets and a handover independently in FG-46. Compare them with the named reference after submitting and keep the original version. Use no real cargo or systems; the exercise grants no authority."
             ]
           },
           "id": "cargo-and-freight-agents.fit.personality-fit-block.55",
@@ -28069,7 +28080,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use the three fictional shipments and two sets of carrier conditions provided on the T1 pathway for practice, without handling real cargo or entering real systems. Self-check against the reference or ask someone to look at the four deliverables, and exploration with faithful records is possible even without a reviewer."
+              "Complete two check sheets and a handover independently in FG-46. Compare them with the named reference after submitting and keep the original version. Use no real cargo or systems; the exercise grants no authority."
             ]
           },
           "id": "cargo-and-freight-agents.fit.personality-fit-block.58",
@@ -28378,7 +28389,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "This round's risk basis is the O*NET tasks and context, the CBP licensing principle and exceptions, the PHMSA training description, and China's 2024 civil aviation provisions; the control steps are editorial suggestions and the specific procedures are verified by jurisdiction and contract and unit, without claiming a measured industry-wide practice."
+              "Check shipping documents, customs representation and dangerous goods training separately. Verify the jurisdiction, contract and employer responsibilities."
             ]
           },
           "id": "cargo-and-freight-agents.risk.career-risk-cards.10",
@@ -28664,7 +28675,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The CBP2025 guidance supports the U.S. licensing principle for brokering for others and the exceptions for own-business and authorized employees; this round indexed and can verify the relevant passages, and the PDF returned 403 directly, so full-text reading is not claimed."
+              "U.S. 19 CFR §111.2 generally requires a license to transact customs business as a broker. Paragraph (a)(2) covers exceptions such as own-account business and qualifying authorized employees. That does not make a U.S. broker license a universal freight documentation requirement."
             ]
           },
           "id": "cargo-and-freight-agents.risk.career-risk-cards.36",
@@ -28984,7 +28995,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "U.S. O*NET preparation level Job Zone1–2: usually a high school diploma or equivalent, and some occupations may not require it; the preparation and training range is a merged occupational group overview. For the specific SOC43-5011 BLS gives typical entry with a high school diploma or equivalent, no related experience, and short-term on-the-job training. O*NET's judgment on new-hire education is 31% bachelor's, 19% some college no degree, and 18% postsecondary certificate. Chinese recruitment and business authorization are verified separately, and the U.S. overview is not applied as a Chinese legal requirement. In the United States, acting as a customs broker for others in customs business in principle requires a license; the CBP 2025 guidance also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately."
+              "U.S. O*NET preparation level Job Zone1–2: usually a high school diploma or equivalent, and some occupations may not require it; the preparation and training range is a merged occupational group overview. For the specific SOC43-5011 BLS gives typical entry with a high school diploma or equivalent, no related experience, and short-term on-the-job training. O*NET's judgment on new-hire education is 31% bachelor's, 19% some college no degree, and 18% postsecondary certificate. Chinese recruitment and business authorization are verified separately, and the U.S. overview is not applied as a Chinese legal requirement. In the United States, acting as a customs broker for others in customs business in principle requires a license; 19 CFR § 111.2(a)(2) also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately."
             ]
           },
           "id": "cargo-and-freight-agents.path.career-path-block.20",
@@ -29006,7 +29017,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "In the United States, acting as a customs broker for others in customs business in principle requires a license; the CBP 2025 guidance also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately."
+              "In the United States, acting as a customs broker for others in customs business in principle requires a license; 19 CFR § 111.2(a)(2) also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately."
             ]
           },
           "id": "cargo-and-freight-agents.path.career-path-block.22",
@@ -29805,9 +29816,9 @@
                 "id": "clearance",
                 "values": [
                   "Position conditions and authorization",
-                  "Verify whether the target position requires background or health or on-site safety conditions and confirm the applicable basis; this round obtained no frequency of these requirements in this occupation's recruitment.",
+                  "Verify whether the target position requires background or health or on-site safety conditions and confirm the applicable basis; on this page obtained no frequency of these requirements in this occupation's recruitment.",
                   "Positions involving client and cargo and trade data must comply with privacy and trade secret and permission management requirements.",
-                  "In the United States, acting as a customs broker for others in customs business in principle requires a license; the CBP 2025 guidance also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately."
+                  "In the United States, acting as a customs broker for others in customs business in principle requires a license; 19 CFR § 111.2(a)(2) also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately."
                 ]
               },
               {
@@ -29823,7 +29834,7 @@
                 "id": "tools",
                 "values": [
                   "Software and hiring signals",
-                  "The technology list names 11 categories of software skills, and the Hot Technologies page shows 6 items (Microsoft Office 7%, Excel 6%, Outlook 4%, Word 2%, PowerPoint 1%, SAP below 1%; Lightcast 2025 U.S. job postings).",
+                  "O*NET lists office software and email among technology examples for the U.S. occupation. Ask which booking and record systems the employer uses and which records require human review.",
                   "The editorial suggestion is to verify the tools and systems, such as transport management and booking tracking systems, customs declaration and document filing platforms, bill of lading and invoice and packing list templates, rate and weight calculation tools, and barcode scanning and warehouse management systems.",
                   "A hiring share indicates frequency of appearance in job postings and does not mean the institution has deployed that type of system."
                 ]
@@ -29842,36 +29853,36 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "T1: three fictional shipments and carrier conditions",
-                  "All dates and rates and cargo are paper models, not real transport conditions. 2026-10-05 09:00 from the same fictional origin to destination: A ordinary paper boxes, 2 boxes totaling 80kg, 0.40m³, required before October 7 18:00; B temperature-controlled sample, 1 box, 30kg, 0.20m³, required before October 6 18:00 with full-journey 2–8°C temperature records; C sample labeled 'contains battery', 1 box, 20kg, 0.10m³, client requires arrival by October 6 but there is no composition / classification / test documentation.",
-                  "Plan R: chargeable weight = max(actual weight kg, volume m³ × 200kg/m³), 4 yuan/kg + 100 yuan per shipment, arrival in 48 hours, ordinary cargo capability only, no temperature-controlled or battery cargo. Plan S: chargeable weight = max(actual weight kg, volume m³ × 250kg/m³), 8 yuan/kg + 150 yuan per shipment, arrival in 24 hours; B adds 80 yuan and 2–8°C and temperature records are already confirmed in writing; whether C is accepted is unconfirmed. Both models are calculated per the whole kilograms given, with no other taxes or fees.",
-                  "Original instructions: A 2 boxes/80kg, B 1 box/30kg, C 1 box/20kg. Drafts: A invoice 2 boxes/80kg, packing list 3 boxes/80kg; B instructions require 2–8°C but the transport instruction says ambient temperature; C draft says ordinary cargo. Do not alter the originals to eliminate discrepancies."
+                  "FG-46: check three fictional shipments",
+                  "Original inputs: A weighs 20 kg, two cartons with matching documents, due Wednesday 16:00. B weighs 30 kg, three cartons on the document and two on the order, due Wednesday 16:00. C weighs 10 kg, one carton with matching documents, due Tuesday 12:00.",
+                  "Option R costs 3 points per kg plus 40 and arrives Wednesday 10:00. S costs 5 points per kg plus 20 and arrives Tuesday 10:00. These are paper quotes. An option meets the exercise rules only if on time and the documents agree; choose the lower points when both qualify.",
+                  "Change just one input for the revision: the carrier moves R’s estimate to Wednesday 17:00. Keep the original table. Do not fill in B’s carton count or assume a booking exists."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Tasks and exception injection",
-                  "Task 1: calculate the chargeable weight and total price for both plans A/B, and compare by deadline and cargo capability and confirmed conditions; for C only the model amount can be calculated and it cannot serve as an executable quotation. List the basis for the choice and the undecided conditions.",
-                  "Task 2: compile a check table for instruction / invoice / packing list / transport instruction, find the three differences in A piece count, B temperature control, and C attributes, and note the pending checks and stop conditions. Task 3: inject that carrier R notifies at October 5 17:00 that A's estimated arrival is changed to October 8 09:00; mark that the original deadline is exceeded, the client has not agreed, and an alternative must be asked about, and it must not be written that the booking has been re-made.",
-                  "Record columns: shipment number, original version, time, event, verified/unverified, temporary stop items, responsibility code, next verification action. Exception information goes to responsible person Q and client code K; these are fictional roles."
+                  "Deliverables",
+                  "For both versions, list R and S points and timing for A, B and C.",
+                  "Record each choice or open issue and explain who should verify document differences and how to preserve the original values.",
+                  "Explain the differences between versions, open items and next steps in a handover."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference calculation and handling",
-                  "A: R chargeable 80kg, total 420 yuan, original estimate October 7 09:00 meets the deadline; S chargeable 100kg, total 950 yuan, October 6 09:00 meets it. Initially R is cheaper. B: R chargeable 40kg model 260 yuan, but it has no temperature control capability and 48 hours exceeds the deadline, so it is not selectable; S chargeable 50kg, total 630 yuan (400+150+80), October 6 09:00 with temperature control already confirmed, meeting the paper conditions.",
-                  "C: R model 180 yuan, S model 350 yuan; neither can be a conclusion of acceptance or shippability. Record that the attributes are unverified, stop the current shipment confirmation, and have appropriate personnel verify classification, training, documents, and carrier acceptance by jurisdiction; a dangerous goods category or exemption must not be judged from 'contains battery' alone.",
-                  "For A the piece count is based on the original instruction and cargo check as the pending basis, B's instruction is to be corrected and the temperature control confirmation re-verified, C's ordinary-cargo draft is pending, and signatures must not be fabricated. After the delay injection R no longer meets the deadline; S at this point has neither space nor a new quotation verified, so it can only be asked about and await client and authorized confirmation, and the initial S plan must not automatically be written as the actual replacement."
+                  "Check order",
+                  "Copy times, weights, carton counts and version first.",
+                  "Then calculate points and check arrival times and documents separately.",
+                  "Submit both versions independently on Day 6. On Day 7 open “FG-46 reference (open after submitting)” in the FAQ."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "The four deliverables and their boundaries of use",
-                  "Deliver the quotation comparison table, the field difference table, the milestone exception record, and a one-page review. Self-check against the reference or ask someone to review, noting the actual method and change records, and it can be completed even with no one on duty. Suggested preparation and calculation 40 minutes, document checking 50 minutes, exceptions and review 30 minutes.",
-                  "Do not handle real cargo, real booking/customs systems, or hazardous substances, and do not include real client data. The practice prices are not market quotations, and completion cannot prove customs declaration qualifications, dangerous goods capability, real professional competence, or any position authorization."
+                  "Exercise boundary",
+                  "Use only paper or a spreadsheet with fictional records and points. Do not access actual cargo or customer data.",
+                  "Do not book transport, make external promises or file a customs declaration."
                 ]
               }
             ]
@@ -29889,28 +29900,28 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Quotation comparison table",
-                  "Use T1 to list A420/950 yuan, B not selectable for R and S630 yuan, and C model only 180/350 yuan with shipment pending; consider time and capability and confirmation together with price."
+                  "Keep both rate and arrival comparisons."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
                   "Field difference table",
-                  "Record A piece count 2/3, B2–8°C / ambient, and C contains battery / ordinary cargo, keeping the original versions and pending responsibility and stop conditions; do not fill in real classification on your own."
+                  "Record document agreement and ownership for each shipment."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
                   "Milestone and exception record",
-                  "Record A's October 5 17:00 delay notice, October 8 09:00 exceeding the deadline, and the new S quotation/space/client consent pending; it must not be falsely stated that the carrier has been changed."
+                  "Record the change, each shipment’s latest status and what remains to verify."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "One-page review and review record",
-                  "List the calculation basis, errors and changes, undecided items, and the T1 boundary, and self-check against the reference or ask someone to review with faithful notes. The deliverables are only for exploration."
+                  "Label calculations and original versions so the reviewer can trace them."
                 ]
               }
             ]
@@ -29975,49 +29986,49 @@
                 "id": "entry-trial-day-1",
                 "values": [
                   "Day 1: verify tasks and authority",
-                  "Read O*NET and this page's jurisdictional notes, and list observable tasks and qualification/authorization questions."
+                  "Distinguish booking, documents, customs and release authority."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: organize the T1 inputs",
-                  "List A/B/C weight, volume, deadlines, temperature control, attributes, and the R/S charging rules."
+                  "Day 2: organize the FG-46 inputs",
+                  "Copy the inputs for the three shipments and both options."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day 3: recompute and compare",
-                  "Verify A420/950, B260 but not selectable / 630, and C180/350 model only, recording the capability and time conditions."
+                  "Calculate the original points and check timing."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day 4: document differences",
-                  "Record the three differences in A piece count, B temperature control, and C attributes together with the pending-check actions, keeping the original versions."
+                  "Check carton counts, documents and original versions."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day 5: exception injection",
-                  "Record the A delay and the pending alternative, and the original quotation must not automatically be treated as newly available space."
+                  "Make a separate revision and handover with the changed arrival time."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day 6: real review",
-                  "Self-check against the reference or ask someone to review the four deliverables, recording actual opinions and changes and undecided items, without fabricating signatures."
+                  "Submit both versions independently without reading the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day 7: exploration judgment",
-                  "Organize the deliverables and task experience, and record the reasons for continuing / pausing / looking at adjacent occupations and questions about the target recruitment conditions."
+                  "Open “FG-46 reference (open after submitting)” in the FAQ and compare."
                 ]
               }
             ]
@@ -30088,9 +30099,9 @@
               [
                 "Industry certification (such as Master Customs Specialist, Certified International Trade Documentation Specialist)",
                 "Incumbent staff and those hoping to enhance professional recognition",
-                "As a discovery entry for checking professional learning requirements; this round did not verify the effect of each certification on hiring or pay.",
+                "As a discovery entry for checking professional learning requirements; on this page did not verify the effect of each certification on hiring or pay.",
                 "It is an industry or professional body certification: the O*NET page for this occupation lists 6 certifications in total.",
-                "Verify application and examination and maintenance and costs with each issuing body individually; this round only checked the discovery list and does not uniformly infer experience requirements.",
+                "Confirm applications, exams, renewal and fees with the issuer.",
                 "Invest according to training and examination and maintenance costs.",
                 "Industry certification does not equal a customs broker license or dangerous goods acceptance qualification or institutional position authorization."
               ],
@@ -30099,7 +30110,7 @@
                 "Applicants intending to conduct customs business for others as a U.S. customs broker",
                 "Determines whether one may handle import and export customs business in a licensed capacity.",
                 "The U.S. licensing principle and exceptions are verified against CBP guidance: own-business entities and qualifying authorized employees, among others, are not uniformly required to hold a personal license.",
-                "Verify against CBP's current personal license qualifications and examination and application conditions; this round used only the guidance's licensing principle and exceptions and did not verify application qualifications item by item, and the abbreviation is not treated as the complete application conditions.",
+                "Check current U.S. CBP licensing rules for exams and applications.",
                 "Invest according to examination and compliance costs.",
                 "License and institutional permits and employee authority are verified separately; it cannot be said that all customs declaration matters in this occupation must be handled by a personally licensed individual."
               ],
@@ -30134,7 +30145,7 @@
             "paragraphs": [
               "Qualification boundary: education and training, industry certification, statutory qualifications (customs broker license, dangerous goods training), position hiring and authorization, external quotation and document signing authority, and carrier and claims handling authority are different states, and none of them can be automatically derived from another.",
               "U.S. O*NET preparation level Job Zone1–2: usually a high school diploma or equivalent, and some occupations may not require it; the preparation and training range is a merged occupational group overview. For the specific SOC43-5011 BLS gives typical entry with a high school diploma or equivalent, no related experience, and short-term on-the-job training. O*NET's judgment on new-hire education is 31% bachelor's, 19% some college no degree, and 18% postsecondary certificate. Chinese recruitment and business authorization are verified separately, and the U.S. overview is not applied as a Chinese legal requirement.",
-              "In the United States, acting as a customs broker for others in customs business in principle requires a license; the CBP 2025 guidance also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately. The 6-item certification entry does not mean each item is relevant to this position or is a statutory license or institutional authorization.",
+              "In the United States, acting as a customs broker for others in customs business in principle requires a license; 19 CFR § 111.2(a)(2) also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately. The 6-item certification entry does not mean each item is relevant to this position or is a statutory license or institutional authorization.",
               "Before starting, verify item by item the business direction and the scope of authority to commit externally, whether customs declaration or dangerous goods are involved and the corresponding qualification and training requirements, the systems and data permissions used, and shift and duty and assessment arrangements, and keep written confirmation."
             ]
           },
@@ -30147,11 +30158,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round collected no de-duplicated verifiable recruitment sample, so requirement frequency and offer distribution and representativeness cannot be given. The positions and assessment steps in this section are editorial verification examples; in practice verify duties and systems and working hours and pay and authority against the specific posting and contract.",
-              "When reading recruitment information, verify the scope of authority to commit externally and whether customs declaration or dangerous goods and the corresponding training requirements are involved, the systems and data permissions used, shift and duty and commission structure, and the probation assessment method, and be alert to statements presenting 'has freight forwarding experience' as holding customs declaration qualifications or being able to independently commit space and deadlines."
+              "On September 3, 2026, Shanghai’s human resources publication listed six documentation operations jobs at Jiekaiyi (Shanghai) Logistics, with a junior college diploma and CNY 6,000–8,000 per month. Duties included booking, tracking, checking documents and helping prepare customs materials. New graduates and people without related experience were welcome. A Weihai Comprehensive Bonded Zone posting listed two document review jobs and two operations jobs, with an October 31, 2026, 16:00 deadline. Reviewers checked invoices, packing lists and bills of lading. Operations staff booked cargo space and arranged vehicles as instructed. The notice specified 80% of total pay during the three-month probation but did not list a pay amount. Article 11 of China’s Customs Law requires consignees, consignors, and customs declaration enterprises that carry out customs formalities to file with customs. Booking transport or preparing and checking documents does not make the worker the filing entity. Ask who files and what the role is authorized to do."
             ]
           },
           "id": "cargo-and-freight-agents.path.recruitment-sample.1",
+          "source_refs": [
+            "fg-shanghai",
+            "fg-weihai",
+            "fg-customs"
+          ],
           "title": "Notes on using the recruitment sample",
           "type": "notice"
         }
@@ -30361,7 +30376,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no exact Chinese wage distribution for this occupation. The China 2025 industry averages are non-private 133981 and private 73133 yuan/year, which are not this occupation's wage. The U.S. 2025 national median annual wage is 52260 USD with an hourly wage of 25.13 USD, and the annual 10th to 90th percentile is 38340 to 79810 USD; BLS2025—2035 is projected to grow 6.2% with a net increase of 6200 and 9000 average annual openings. Group statistics are not a hiring guarantee; AI exposure does not indicate position numbers."
+              "Insufficient evidence: on this page obtained no exact Chinese wage distribution for this occupation. The China 2025 industry averages are non-private 133981 and private 73133 yuan/year, which are not this occupation's wage. The U.S. 2025 national median annual wage is 52260 USD with an hourly wage of 25.13 USD, and the annual 10th to 90th percentile is 38340 to 79810 USD; BLS2025—2035 is projected to grow 6.2% with a net increase of 6200 and 9000 average annual openings. Group statistics are not a hiring guarantee; AI exposure does not indicate position numbers."
             ]
           },
           "id": "cargo-and-freight-agents.market-signals.market-signal-card.8",
@@ -30548,7 +30563,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "This round's NBS wage release provides industry category and unit type averages and did not obtain an exact Chinese wage distribution for this occupation; not obtaining it does not prove it is unpublished."
+              "NBS industry averages provide context and do not substitute for a national occupational wage."
             ]
           },
           "id": "cargo-and-freight-agents.market-signals.market-signal-card.25",
@@ -30932,16 +30947,22 @@
                 "question_key": "career.faq.cargo-and-freight-agents.2"
               },
               {
-                "answer": "The fit signals are being able to reconcile the documents and weight and rates of multiple shipments under deadline pressure, being willing to escalate exceptions per process rather than committing on your own, and being able to state the conditions clearly with clients and carriers and leave a written record; what matters is whether you have reviewable quotation and booking records, document check records, milestone and exception and escalation records, and actual business performance, not just knowing how to use a booking system or some industry experience.",
+                "answer": "Submit two check sheets and a handover in FG-46. Notice whether you are willing to recalculate under a deadline, preserve conflicting values and identify who should confirm them.",
                 "id": "cargo-and-freight-agents.faq.3",
                 "question": "How do I judge whether this work suits me?",
-                "question_key": "career.faq.cargo-and-freight-agents.3"
+                "question_key": "career.faq.cargo-and-freight-agents.3",
+                "source_refs": [
+                  "editorial"
+                ]
               },
               {
-                "answer": "Steps such as rate and mileage and weight retrieval and price comparison, bill of lading and document first drafts, milestone and ledger organizing, and notification and communication text drafting can be assisted; the choice of carrier solution, quotation and space commitments, document consistency judgments, judgments on import and export documents and tariff classification, dangerous goods boundary identification, and exception escalation and responsibility judgments are still verified and borne by authorized personnel.",
+                "answer": "Software can compare fields in bills of lading and packing lists, flag deadlines and summarize open items. The responsible people still confirm rates, space, temperature controls, customs and dangerous goods requirements. A tool suggestion is not customer consent or carrier confirmation.",
                 "id": "cargo-and-freight-agents.faq.4",
                 "question": "Which steps will AI and automation change?",
-                "question_key": "career.faq.cargo-and-freight-agents.4"
+                "question_key": "career.faq.cargo-and-freight-agents.4",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
                 "answer": "The committable quotation and space and deadline, document consistency and release judgments, judgments on import and export documents and tariff classification, boundary identification and acceptance compliance for dangerous goods and special cargo, the original records of cargo damage and shortages and claims escalation, the use of client and cargo data within permissions, and consistency checks between automated price comparison and document results and the original documents and actual cargo state must all be completed by authorized or qualified personnel with a paper trail.",
@@ -30950,10 +30971,13 @@
                 "question_key": "career.faq.cargo-and-freight-agents.5"
               },
               {
-                "answer": "U.S. O*NET preparation level Job Zone1–2: usually a high school diploma or equivalent, and some occupations may not require it; the preparation and training range is a merged occupational group overview. For the specific SOC43-5011 BLS gives typical entry with a high school diploma or equivalent, no related experience, and short-term on-the-job training. O*NET's judgment on new-hire education is 31% bachelor's, 19% some college no degree, and 18% postsecondary certificate. Chinese recruitment and business authorization are verified separately, and the U.S. overview is not applied as a Chinese legal requirement. In the United States, acting as a customs broker for others in customs business in principle requires a license; the CBP 2025 guidance also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately.",
+                "answer": "Article 11 of China’s Customs Law requires consignees, consignors, and customs declaration enterprises that carry out customs formalities to file with customs. Booking transport or preparing and checking documents does not make the worker the filing entity. Ask who files and what the role is authorized to do.",
                 "id": "cargo-and-freight-agents.faq.6",
                 "question": "What qualifications must be verified to enter this occupation?",
-                "question_key": "career.faq.cargo-and-freight-agents.6"
+                "question_key": "career.faq.cargo-and-freight-agents.6",
+                "source_refs": [
+                  "fg-customs"
+                ]
               },
               {
                 "answer": "O*NET context: 61% on the telephone every day, 60% in continuous contact, 52% at a slight close distance; 49% facing deadline pressure at least once a week but not every day, and 49% dealing with unfriendly people at least once a month but not every week; 34% working 40 hours per week, 28% sitting about half the time, and 16% never indoors in a controlled environment. Group responses cannot be used to infer each position's location or shifts or on-site frequency.",
@@ -30962,40 +30986,59 @@
                 "question_key": "career.faq.cargo-and-freight-agents.7"
               },
               {
-                "answer": "O*NET shows NET58% having a lot of freedom over task priorities, 30% with limited decision freedom, 28% making decisions at least once a week but not every day, and 54% considering accuracy very important. Shifts, night shifts, and holiday duty are verified with the target employer, and general arrangements are not inferred backwards from these responses.",
+                "answer": "In the O*NET survey, 58% reported having a lot of freedom over task priorities, 30% with limited decision freedom, 28% making decisions at least once a week but not every day, and 54% considering accuracy very important. Shifts, night shifts, and holiday duty are verified with the target employer, and general arrangements are not inferred backwards from these responses.",
                 "id": "cargo-and-freight-agents.faq.8",
                 "question": "What are the working hours and working style like?",
                 "question_key": "career.faq.cargo-and-freight-agents.8"
               },
               {
-                "answer": "This occupation is labeled Bright Outlook on the O*NET page; BLS Table 1.2 shows about 100,300 in 2025, and BLS projects 2025—2035 employment growth of 6.2%, a net increase of about 6,200 positions, and about 9,000 average annual job openings (including replacement needs such as turnover and retirement); demand is affected by trade volume and freight structure, e-commerce and cross-border fulfillment, carrier capacity and freight rate volatility, the degree of automation and document digitization, and the supply of people with transport and documentation and compliance knowledge. Among its O*NET related occupations, freight forwarders (43-5011.01), aircraft cargo handling supervisors (53-1041.00), and light truck drivers (53-3033.00) are also labeled Bright Outlook and are different occupational identities. Switching to adjacent directions (transportation and storage and distribution managers, purchasing agents, customs brokers, logistics analysts, freight forwarders, shipping and receiving and inventory clerks, dispatchers, and so on) requires building up the corresponding qualification and authorization evidence.",
+                "answer": "For U.S. SOC 43-5011, 2025 median pay was $52,260 a year or $25.13 an hour. BLS projects about 100,300 jobs in 2025 and 106,400 in 2035, up 6.2%, with a net gain of about 6,200 and around 9,000 openings annually. Published values are rounded separately.",
                 "id": "cargo-and-freight-agents.faq.9",
                 "question": "How to judge career prospects and switches?",
-                "question_key": "career.faq.cargo-and-freight-agents.9"
+                "question_key": "career.faq.cargo-and-freight-agents.9",
+                "source_refs": [
+                  "bls-pay",
+                  "bls-outlook"
+                ]
               },
               {
-                "answer": "Insufficient evidence: this round obtained no exact Chinese wage distribution for this occupation; the 2025 transportation, warehousing and postal services industry averages of 133981 for non-private and 73133 yuan/year for private units are retained, and they are not an offer for this occupation. The U.S. 2025 OEWS national framing is a median hourly wage of 25.13 USD and a median annual wage of 52260 USD, with the 10th to 90th percentile at 38340 to 79810 USD. The statistical objects differ, and currency conversion cannot make them comparable personal wages; not obtaining it does not prove it is unpublished.",
+                "answer": "Insufficient evidence: on this page obtained no exact Chinese wage distribution for this occupation; the 2025 transportation, warehousing and postal services industry averages of 133981 for non-private and 73133 yuan/year for private units are retained, and they are not an offer for this occupation. The U.S. 2025 OEWS national framing is a median hourly wage of 25.13 USD and a median annual wage of 52260 USD, with the 10th to 90th percentile at 38340 to 79810 USD. The statistical objects differ, and currency conversion cannot make them comparable personal wages; not obtaining it does not prove it is unpublished.",
                 "id": "cargo-and-freight-agents.faq.10",
                 "question": "Why can't U.S. wages and mainland China figures be converted into each other?",
                 "question_key": "career.faq.cargo-and-freight-agents.10"
               },
               {
-                "answer": "The O*NET technology list names 11 categories of software skills, and the Hot Technologies page shows 6 items (Microsoft Office 7%, Excel 6%, Outlook 4%, Word 2%, PowerPoint 1%, and SAP below 1%); the core ability is knowing transport modes and rate structures, document preparation and consistency checking, reading import and export documents and tariff classification, boundary identification and escalation for dangerous goods and special cargo, and communication and negotiation with clients and carriers.",
+                "answer": "O*NET lists office software and email among technology examples for the U.S. occupation. Ask which booking and record systems the employer uses and which records require human review.",
                 "id": "cargo-and-freight-agents.faq.11",
                 "question": "What tools and skills need to be mastered?",
-                "question_key": "career.faq.cargo-and-freight-agents.11"
+                "question_key": "career.faq.cargo-and-freight-agents.11",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
-                "answer": "The editorial suggestion is to review against the checklist and keep versions and differences, and to stop the relevant confirmation and escalate when something is beyond authorization or the attributes are unverified. In the United States, acting as a customs broker for others in customs business in principle requires a license; the CBP 2025 guidance also lists exceptions such as importers and exporters handling only their own business and their authorized regular employees, and qualifying broker employees. In China, the information filing of international freight forwarding enterprises and their branches is an institutional matter, not an individual customs declaration certificate. China's 2024 civil aviation dangerous goods rules require relevant practitioners to be trained and pass assessment, and a shipper's agent must hold a shipper's authorization letter; carrier permits, training, and individual position authorization are verified separately.",
+                "answer": "Article 11 of China’s Customs Law requires consignees, consignors, and customs declaration enterprises that carry out customs formalities to file with customs. Booking transport or preparing and checking documents does not make the worker the filing entity. Ask who files and what the role is authorized to do.",
                 "id": "cargo-and-freight-agents.faq.12",
                 "question": "What should be noted about documentation and compliance?",
-                "question_key": "career.faq.cargo-and-freight-agents.12"
+                "question_key": "career.faq.cargo-and-freight-agents.12",
+                "source_refs": [
+                  "fg-customs"
+                ]
               },
               {
                 "answer": "61% having telephone conversations every day, 60% in continuous contact with others, 52% keeping a slight close distance with others, 49% considering dealing with external customers or the public extremely important, 47% considering working with a team extremely important, 28% sitting about half the time, and 16% never indoors in a controlled environment; communication is needed with clients and carriers and cargo terminal and wharf and warehouse operators and customs brokers and insurers and packing and loading personnel, and quotation and documentation and milestone and exception handling must be completed and evidenced against transport contracts and institutional policy.",
                 "id": "cargo-and-freight-agents.faq.13",
                 "question": "What are the work environment and collaboration style of cargo and freight agents?",
                 "question_key": "career.faq.cargo-and-freight-agents.13"
+              },
+              {
+                "answer": "Original: A costs 100 points on R and 120 on S. Both are on time and the documents agree, so choose R. B costs 130 on R and 170 on S, but the carton counts differ, so hold both. C costs 70 on either option; choose S because only S is on time. Revision: R now arrives Wednesday 17:00, so switch A to S, leave B open and keep C on S. Preserve B’s two and three cartons as recorded and ask the document owner to confirm. Neither version is a booking.",
+                "id": "cargo-and-freight-agents.faq.14",
+                "question": "FG-46 reference (open after submitting)",
+                "question_key": "career.faq.cargo-and-freight-agents.14",
+                "source_refs": [
+                  "editorial"
+                ]
               }
             ]
           },
@@ -31018,9 +31061,9 @@
             "entries": [
               "Boundary one: this page's identity framing is O*NET-SOC 43-5011.00 (Cargo and Freight Agents); the occupation page lists it as Job Zone 1–2 (little to some preparation, SVP below 6.0) and labels it Bright Outlook; the official duties are to expedite and route the movement of incoming and outgoing cargo and freight shipments in airline and train and trucking terminals and shipping docks, taking orders from customers, arranging pickup of freight and cargo for delivery to the loading platform, and preparing and examining bills of lading to determine shipping charges and tariffs; the license requirements of all positions cannot be judged from the occupational title, and customs declaration and dangerous goods and operating qualifications are required separately under their own rules.",
               "U.S. 2025 national median wage 52260 USD/year and 25.13 USD/hour, with the annual 10th to 90th percentile at 38340 to 79810 USD. BLS projects about 100300 in 2025 and about 106400 in 2035, a growth of 6.2%, an official independently rounded net increase of 6200, and 9000 average annual openings including replacement needs. The wage survey and the projected employment use different statistical framings and cannot be used to validate each other or to infer an individual hire.",
-              "This round obtained no exact Chinese wage distribution for this occupation; the 2025 non-private 133981 and private 73133 yuan/year are only proxies for the transport, warehousing and postal services industry average. This round also did not establish a one-to-one mapping of Chinese occupational subcategories, so equivalence cannot be inferred from the Chinese name or from the classification publication entry.",
+              "NBS industry and U.S. occupational wages cover different groups. The two mainland notices describe only the listed roles.",
               "Boundary four: the editorial exercises and business suggestions are all simulated materials, and readers should not use them for real quotation commitments, bookings, customs declarations, dangerous goods acceptance, or claims determinations; the exercise results do not constitute a customs broker license or dangerous goods acceptance qualification or institutional position authorization.",
-              "Sources and reading boundaries are in the current register: O*NET occupational tasks, the BLS relayed wages and projections, the NBS industry averages, the jurisdiction-specific CBP and PHMSA and Chinese civil aviation and Ministry of Commerce rules, and the ILO global exposure study. The T1 and control suggestions are editorial design; dead links or search indexes or publication entries must not be written as having been read in full."
+              "FG-46 uses fictional points and records for two checks and a handover. Look up applicable laws, entity filing and individual authority separately."
             ]
           },
           "id": "cargo-and-freight-agents.sources.boundary.1",
@@ -31045,10 +31088,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind career content editorial team: compiled from the current occupational tasks, wage percentiles, BLS projections, and jurisdiction-specific rules; the T1 and the deliverables and pathways and control steps are editorial suggestions and are not presented as real professional practice or independent review."
+              "Start with the assigned duties, then ask about training, schedules, pay and what you can confirm."
             ]
           },
           "id": "cargo-and-freight-agents.sources.source-card.1",
+          "source_refs": [
+            "fg-shanghai",
+            "fg-weihai"
+          ],
           "type": "prose"
         },
         {
@@ -31056,10 +31103,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Main sources: the O*NET definitions and tasks for this occupation and 8 adjacent occupations, preparation and education, interests, software, and certification and training discovery; BLS Table 1.2; the NBS 2025 industry wages; the CBP2025 license exception index; the PHMSA training description; China's 2024 civil aviation provisions and the Ministry of Commerce enterprise filing guide; and the ILO global task exposure study."
+              "U.S. occupational statistics use SOC 43-5011. Mainland industry pay and the Shanghai and Weihai examples have different scopes."
             ]
           },
           "id": "cargo-and-freight-agents.sources.source-card.2",
+          "source_refs": [
+            "bls-pay",
+            "bls-outlook",
+            "nbs-wages",
+            "fg-shanghai",
+            "fg-weihai"
+          ],
           "type": "prose"
         },
         {
@@ -31067,10 +31121,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The reference periods are respectively U.S. 2025 OEWS wages, BLS2025—2035 projections, Lightcast2025 full-year postings, and China 2025 industry wages; the O*NET2026 page and the current public rules. Retrieved 2026-10-03; reading limits such as CBP PDF403 and the dynamic BLS average not being obtained are noted on each card."
+              "Article 11 of China’s Customs Law requires consignees, consignors, and customs declaration enterprises that carry out customs formalities to file with customs. Booking transport or preparing and checking documents does not make the worker the filing entity. Ask who files and what the role is authorized to do."
             ]
           },
           "id": "cargo-and-freight-agents.sources.source-card.3",
+          "source_refs": [
+            "fg-customs"
+          ],
           "type": "prose"
         },
         {
@@ -31078,10 +31135,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no original average table for this occupation, no wage summary by industry or region, no recruitment sample, and no exact Chinese wage distribution; not obtaining them does not prove they are unpublished. The verified U.S. wages use the SOC43-5011 national percentiles, and the occupational preparation is currently Job Zone1–2 with interest code CE; for China only the industry average proxy is retained. Qualifications are verified by the specific jurisdiction and institution or individual entity, and education or certificates or paper exercises cannot be used to infer one another. The AI suggestions are not effect research."
+              "Use paper or a spreadsheet for FG-46. Actual rates, customs declarations, space promises, dangerous goods classification and release follow the real division of responsibility."
             ]
           },
           "id": "cargo-and-freight-agents.sources.source-card.4",
+          "source_refs": [
+            "editorial",
+            "fg-customs"
+          ],
           "type": "prose"
         }
       ]
@@ -31119,13 +31180,13 @@
                 "entity": "Enneagram test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the cargo and freight occupational page",
@@ -31178,7 +31239,7 @@
                 "limitation": "U.S. occupational classification; it does not directly prove mainland China position identity or qualification and operating license arrangements; this occupation's page is labeled Bright Outlook and listed as Job Zone 1–2 (SVP below 6.0).",
                 "market": "United States",
                 "name": "O*NET-SOC 43-5011.00 occupation summary",
-                "period": "Page updated 2026; accessed 2026-10-03 this round",
+                "period": "Page updated 2026; accessed 2026-10-03 on this page",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/43-5011.00"
@@ -31186,12 +31247,12 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Supports the industry distribution: 90% transportation and warehousing, 10% other industries.",
-                  "Industry distribution framing; accessed 2026-09-16"
+                  "O*NET reports that 91% of U.S. employment in the occupation was in transportation and warehousing in 2025. That share does not give a wage by industry.",
+                  "2025 U.S. employment in the occupation."
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-industry",
-                "limitation": "The industry distribution describes the statistical classification (90% transportation and warehousing, 10% other industries) and is not used to infer sector wages or employment size.",
+                "limitation": "O*NET reports that 91% of U.S. employment in the occupation was in transportation and warehousing in 2025. That share does not give a wage by industry.",
                 "market": "United States",
                 "name": "O*NET-SOC 43-5011.00 industry distribution",
                 "period": "Industry distribution framing; accessed 2026-10-03",
@@ -31202,24 +31263,24 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Office7%, Excel6%, Outlook4%, Word2%, PowerPoint1%, and SAP below 1%; job postings from 2025-01-01 to 12-31. The 11 software categories are separately in the detailed page.",
-                  "Accessed 2026-10-03 this round"
+                  "O*NET lists office software and email among technology examples for the U.S. occupation. Ask which booking and record systems the employer uses and which records require human review.",
+                  "Occupational technology examples."
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-hot-tech",
-                "limitation": "The 6 hot technologies are Lightcast2025 U.S. hiring mentions for the full year; the 11 software categories in the detailed profile are a different count. They cannot be treated as requirements of all positions or as a deployment or displacement rate.",
+                "limitation": "O*NET lists office software and email among technology examples for the U.S. occupation. Ask which booking and record systems the employer uses and which records require human review.",
                 "market": "United States",
-                "name": "O*NET-SOC 43-5011.00 technology list (employer hiring technology signals)",
-                "period": "The hiring technology information comes from Lightcast 2025 U.S. job postings; accessed 2026-09-16",
+                "name": "O*NET: occupational technology examples",
+                "period": "Current occupation profile",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/hot_tech/43-5011.00"
+                "url": "https://www.onetonline.org/link/details/43-5011.00"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
                   "It currently finds 183 programs and supports lookup by state/postal code; it does not mean all of them suit everyone or that completing a program grants authority.",
-                  "Accessed 2026-10-03 this round"
+                  "Accessed 2026-10-03 on this page"
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-training",
@@ -31235,7 +31296,7 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "The certification discovery entry lists 6 items; it is only an entry for further verifying the issuing body's conditions, not government recognition of all items.",
-                  "Accessed 2026-10-03 this round"
+                  "Accessed 2026-10-03 on this page"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-entry",
@@ -31251,11 +31312,11 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "2025 annual wage 10/25/50/75/90 percentiles are 38340/45710/52260/63390/79810 USD; hourly wages 18.43/21.98/25.13/30.48/38.37 USD.",
-                  "May 2025; accessed 2026-10-03 this round"
+                  "May 2025; accessed 2026-10-03 on this page"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-pay",
-                "limitation": "The occupational national percentile table supports annual and hourly wage positions and is not a personal offer or an explanation of the average or a regional ranking. The old static BLS page redirects to a directory; the dynamic profile and ZIP page did not yield the original average table, so this page does not retain an unverified average.",
+                "limitation": "National annual and hourly occupational percentiles do not represent individual offers or rank regions.",
                 "market": "United States",
                 "name": "O*NET relayed BLS2025 OEWS national wage percentiles (SOC43-5011)",
                 "period": "May 2025 OEWS; accessed 2026-09-16",
@@ -31271,7 +31332,7 @@
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-outlook",
-                "limitation": "In the source table, employment and net change and average annual openings are in thousands; 43-5011 is the exact occupation row. The employment levels 100.3 and 106.4 have been rounded separately, and the net change follows the official 6.2 thousand rather than subtracting the endpoints; the annual 9.0 thousand openings include growth and replacement and are not a ten-year total. They cannot explain individual employment or AI causation. The O*NET summary currently shows 2024—2034 separately and the two cannot be interchanged.",
+                "limitation": "Table 1.2 independently rounds employment endpoints and net change in thousands. Annual openings include growth and replacements.",
                 "market": "United States",
                 "name": "BLS Table 1.2 occupational employment projections and worker characteristics (SOC 43-5011)",
                 "period": "2025—2035 employment projections; 2025 worker characteristics",
@@ -31287,7 +31348,7 @@
                 ],
                 "evidence_type": "primary_document",
                 "id": "nbs-wages",
-                "limitation": "That publication reports average annual wages of urban unit employees by industry category and unit type, and this round did not establish an occupation-level distribution precisely corresponding to Cargo and Freight Agents (43-5011.00); the available figures only reach the 'transportation, warehousing and postal services' industry category (2025 urban non-private units 133,981 yuan and urban private units 73,133 yuan), and this page publishes the industry proxy with the marking at each place that it is not this occupation's exact framing.",
+                "limitation": "NBS publishes urban average wages by industry and employer type. This occupation is not listed separately; transportation, storage and postal services figures are industry context.",
                 "market": "Mainland China",
                 "name": "NBS 'Average Annual Wages of Urban Unit Employees' (2025)",
                 "period": "2025 data; published 2026",
@@ -31298,24 +31359,24 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "The licensing principle for brokering for others; exceptions exist for importers and exporters handling only their own business and their authorized regular employees, and for qualifying broker employees, per 19 CFR 111.2.",
-                  "2025-08; retrieved 2026-10-03"
+                  "U.S. 19 CFR §111.2 generally requires a license to transact customs business as a broker. Paragraph (a)(2) covers exceptions such as own-account business and qualifying authorized employees. That does not make a U.S. broker license a universal freight documentation requirement.",
+                  "U.S. customs brokerage."
                 ],
                 "evidence_type": "primary_document",
                 "id": "nasa-seh",
-                "limitation": "The official search index this round can verify the 'License Not Required' section; the PDF returned 403 directly, so full-text reading is not claimed. U.S. exceptions cannot be applied to the Chinese customs declaration system.",
+                "limitation": "U.S. 19 CFR §111.2 generally requires a license to transact customs business as a broker. Paragraph (a)(2) covers exceptions such as own-account business and qualifying authorized employees. That does not make a U.S. broker license a universal freight documentation requirement.",
                 "market": "United States",
-                "name": "CBP customs broker guidance, 2025 edition: licensing principle and exceptions",
-                "period": "2nd edition, 2025-08; retrieved 2026-10-03 this round",
-                "publisher": "U.S. Customs and Border Protection",
+                "name": "U.S. eCFR: 19 CFR §111.2",
+                "period": "Current rule",
+                "publisher": "eCFR",
                 "scope": "contextual",
-                "url": "https://www.cbp.gov/sites/default/files/2025-08/Version%202.0%20-%20Customs%20Broker%20Guidance.pdf"
+                "url": "https://www.ecfr.gov/current/title-19/chapter-I/part-111/subpart-A/section-111.2"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
                   "Employer training and testing and certification and records; general awareness, function-specific, safety, security, and applicable in-depth security or driving training; new employees under direct supervision completing within 90 days, with refresher training at least every 3 years.",
-                  "Accessed 2026-10-03 this round"
+                  "Accessed 2026-10-03 on this page"
                 ],
                 "evidence_type": "primary_document",
                 "id": "faa-design-approvals",
@@ -31346,12 +31407,12 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "The T1 three shipments, the R/S model and three differences, the delay injection, and the references; the deliverables and the seven days share the same inputs and can be self-checked with faithful records.",
-                  "Editorial design 2026-10"
+                  "FG-46 uses three shipments, two options and one revised estimate. Submit two versions and a handover.",
+                  "Paper exercise."
                 ],
                 "evidence_type": "editorial_synthesis",
                 "id": "editorial",
-                "limitation": "All T1 inputs are editorially fictional and are not market rates or real cargo or on-the-job review; they cannot prove competence or qualification or authorization.",
+                "limitation": "All records and points are fictional. Completing the exercise does not establish qualifications or authority.",
                 "market": "United States",
                 "name": "FermatMind editorial design and fictional exercises",
                 "period": "Compiled 2026-09",
@@ -31453,12 +31514,12 @@
                 "period": "Current service guide; verified 2026-10-03",
                 "publisher": "Ministry of Commerce of the People's Republic of China",
                 "scope": "contextual",
-                "url": "https://gjhy.mofcom.gov.cn/zhinan.shtml"
+                "url": "https://gjhy.mofcom.gov.cn/"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "This round actually read the definition and the full task table, used for the adjacent comparison and the switch prompts.",
+                  "U.S. occupation duties for comparing a possible move.",
                   "Page updated 2026; accessed 2026-10-03"
                 ],
                 "evidence_type": "primary_document",
@@ -31474,7 +31535,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "This round actually read the definition and the full task table, used for the adjacent comparison and the switch prompts.",
+                  "U.S. occupation duties for comparing a possible move.",
                   "Page updated 2026; accessed 2026-10-03"
                 ],
                 "evidence_type": "primary_document",
@@ -31490,7 +31551,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "This round actually read the definition and the full task table, used for the adjacent comparison and the switch prompts.",
+                  "U.S. occupation duties for comparing a possible move.",
                   "Page updated 2026; accessed 2026-10-03"
                 ],
                 "evidence_type": "primary_document",
@@ -31506,7 +31567,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "This round actually read the definition and the full task table, used for the adjacent comparison and the switch prompts.",
+                  "U.S. occupation duties for comparing a possible move.",
                   "Page updated 2026; accessed 2026-10-03"
                 ],
                 "evidence_type": "primary_document",
@@ -31522,7 +31583,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "This round actually read the definition and the full task table, used for the adjacent comparison and the switch prompts.",
+                  "U.S. occupation duties for comparing a possible move.",
                   "Page updated 2026; accessed 2026-10-03"
                 ],
                 "evidence_type": "primary_document",
@@ -31538,7 +31599,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "This round actually read the definition and the full task table, used for the adjacent comparison and the switch prompts.",
+                  "U.S. occupation duties for comparing a possible move.",
                   "Page updated 2026; accessed 2026-10-03"
                 ],
                 "evidence_type": "primary_document",
@@ -31554,7 +31615,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "This round actually read the definition and the full task table, used for the adjacent comparison and the switch prompts.",
+                  "U.S. occupation duties for comparing a possible move.",
                   "Page updated 2026; accessed 2026-10-03"
                 ],
                 "evidence_type": "primary_document",
@@ -31570,7 +31631,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "This round actually read the definition and the full task table, used for the adjacent comparison and the switch prompts.",
+                  "U.S. occupation duties for comparing a possible move.",
                   "Page updated 2026; accessed 2026-10-03"
                 ],
                 "evidence_type": "primary_document",
@@ -31585,20 +31646,65 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Orders and quotations｜Taking orders from customers and confirming deadlines and service requirements, negotiating and arranging transport with shipping or freight companies, and estimating freight charges and giving a solution and quotation｜Inquiry and quotation and booking records. — 75/100; weight=1/3; cargo-and-freight-agents.profile.responsibilities-block.1[0]",
-                  "Documents and compliance｜Determining the transport mode and preparing bills of lading and invoices and other transport documents, checking import and export documents and classifying goods with tariff codes, and arranging cargo insurance｜Bill of lading and document check and classification records. — 75/100; weight=1/3; cargo-and-freight-agents.profile.responsibilities-block.1[1]",
-                  "Receiving and differences｜Checking and tallying received goods against invoices, recording shortages and rejecting damaged goods, and contacting suppliers or the claims department｜Receiving check and shortage and rejection records. — 25/100; weight=1/3; cargo-and-freight-agents.profile.responsibilities-block.1[3]"
+                  "Software can compare fields in bills of lading and packing lists, flag deadlines and summarize open items. The responsible people still confirm rates, space, temperature controls, customs and dangerous goods requirements. A tool suggestion is not customer consent or carrier confirmation.",
+                  "Software can compare fields in bills of lading and packing lists, flag deadlines and summarize open items. The responsible people still confirm rates, space, temperature controls, customs and dangerous goods requirements. A tool suggestion is not customer consent or carrier confirmation.",
+                  "Software can compare fields in bills of lading and packing lists, flag deadlines and summarize open items. The responsible people still confirm rates, space, temperature controls, customs and dangerous goods requirements. A tool suggestion is not customer consent or carrier confirmation.",
+                  "Software can compare fields in bills of lading and packing lists, flag deadlines and summarize open items. The responsible people still confirm rates, space, temperature controls, customs and dangerous goods requirements. A tool suggestion is not customer consent or carrier confirmation.",
+                  "Software can compare fields in bills of lading and packing lists, flag deadlines and summarize open items. The responsible people still confirm rates, space, temperature controls, customs and dangerous goods requirements. A tool suggestion is not customer consent or carrier confirmation."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "The task list does not estimate automation rates.",
+                "name": "O*NET: freight coordination and documentation tasks",
                 "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
+                "publisher": "O*NET",
                 "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "url": "https://www.onetonline.org/link/details/43-5011.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "On September 3, 2026, Shanghai’s human resources publication listed six documentation operations jobs at Jiekaiyi (Shanghai) Logistics, with a junior college diploma and CNY 6,000–8,000 per month. Duties included booking, tracking, checking documents and helping prepare customs materials. New graduates and people without related experience were welcome."
+                ],
+                "evidence_type": "primary_document",
+                "id": "fg-shanghai",
+                "limitation": "One historical employer sample.",
+                "market": "Mainland China",
+                "name": "Shanghai human resources: documentation operations posting",
+                "period": "2026-09-03",
+                "publisher": "Shanghai Municipal Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.sh.gov.cn/dzb/rsj/2026-09-03/aid/03-01.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A Weihai Comprehensive Bonded Zone posting listed two document review jobs and two operations jobs, with an October 31, 2026, 16:00 deadline. Reviewers checked invoices, packing lists and bills of lading. Operations staff booked cargo space and arranged vehicles as instructed. The notice specified 80% of total pay during the three-month probation but did not list a pay amount."
+                ],
+                "evidence_type": "primary_document",
+                "id": "fg-weihai",
+                "limitation": "Two different roles; no pay amount published.",
+                "market": "Mainland China",
+                "name": "Weihai Comprehensive Bonded Zone: document review and operations posting",
+                "period": "2026-09-30",
+                "publisher": "Weihai Comprehensive Bonded Zone Administrative Committee",
+                "scope": "recruitment_proxy",
+                "url": "https://zhbsq.weihai.gov.cn/art/2026/9/30/art_67841_6653065.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Article 11 of China’s Customs Law requires consignees, consignors, and customs declaration enterprises that carry out customs formalities to file with customs. Booking transport or preparing and checking documents does not make the worker the filing entity. Ask who files and what the role is authorized to do."
+                ],
+                "evidence_type": "primary_document",
+                "id": "fg-customs",
+                "limitation": "Supports the entity and role distinction.",
+                "market": "Mainland China",
+                "name": "Customs Law of the People’s Republic of China (2021 sixth amendment), Article 11",
+                "period": "2021 sixth amendment; Article 11",
+                "publisher": "Standing Committee of the National People’s Congress (amendment)",
+                "scope": "contextual",
+                "url": "https://www.caea.gov.cn/n6760401/n6760402/c6827751/content.html"
               }
             ]
           },
@@ -34943,15 +35049,9 @@
         }
       },
       "hero": {
-        "h1": {
-          "$subject": "name"
-        },
-        "quick_answer": {
-          "$subject": "summary"
-        },
-        "title": {
-          "$subject": "name"
-        }
+        "h1": "Cargo and Freight Agents",
+        "quick_answer": "Cargo and freight agents book transport, arrange pickup, check shipping documents, track milestones and hand off exceptions. Find out what the role can promise, who can release a shipment, and who handles customs or dangerous goods.",
+        "title": "Cargo and Freight Agents"
       },
       "market_signal_card": {
         "context_links": [
@@ -36516,7 +36616,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and document checks",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Career fit guide",
@@ -36534,7 +36634,7 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "O*NET-SOC 43-5011.00",
         "fact_id": "occupation-identity",
         "market": "United States",
@@ -36546,7 +36646,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "52,260 USD/year (median)",
         "fact_id": "us-wage-2025",
         "market": "United States",
@@ -36558,7 +36658,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "25.13 USD/hour (median)",
         "fact_id": "us-wage-hourly-2025",
         "market": "United States",
@@ -36570,7 +36670,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "About 100,300 (2025)",
         "fact_id": "us-employment-2025",
         "market": "United States",
@@ -36582,7 +36682,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "About 106,400 (2035)",
         "fact_id": "us-employment-2035",
         "market": "United States",
@@ -36594,7 +36694,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Growth 6.2% (2025—2035)",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
@@ -36606,7 +36706,7 @@
         ]
       },
       {
-        "derivation": "The source table's 6.2 thousand × 1000; the source endpoints have each been rounded, so 106.4 − 100.3 thousand cannot be used to replace the net increase.",
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "About +6,200 (2025—2035; the official rounded original value)",
         "fact_id": "us-change-2025-2035",
         "market": "United States",
@@ -36618,7 +36718,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "9,000/year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
@@ -36630,7 +36730,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence: no verifiable industry-breakdown wage data for this occupation was obtained; this route does not fill in with recruitment samples or adjacent position offers",
         "fact_id": "cn-industry-science-tech-2024",
         "market": "Mainland China",
@@ -36642,7 +36742,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence: no verifiable industry-breakdown wage data for this occupation was obtained; this route does not fill in with recruitment samples or adjacent position offers",
         "fact_id": "cn-industry-manufacturing-2024",
         "market": "Mainland China",
@@ -36654,7 +36754,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "73,133 yuan/year (the 2025 average annual wage of employees in urban private units in 'transportation, warehousing and postal services', an industry-level proxy, not this occupation's exact framing)",
         "fact_id": "cn-professional-technical-2024",
         "market": "Mainland China",
@@ -36666,7 +36766,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "133,981 yuan/year (the 2025 average annual wage of employees in urban non-private units in 'transportation, warehousing and postal services', an industry-level proxy, not this occupation's exact framing)",
         "fact_id": "cn-urban-nonprivate-2024",
         "market": "Mainland China",
@@ -36678,7 +36778,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "38,340 USD/year (10th percentile)",
         "fact_id": "us-wage-low10-2025",
         "market": "United States",
@@ -36690,7 +36790,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "79,810 USD/year (90th percentile)",
         "fact_id": "us-wage-high10-2025",
         "market": "United States",
@@ -36702,7 +36802,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence (the BLS materials verified for this page did not obtain the industry-breakdown median wage for this occupation)",
         "fact_id": "us-industry-wage-aerospace-mfg-2025",
         "market": "United States",
@@ -36714,7 +36814,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence (the BLS materials verified for this page did not obtain the industry-breakdown median wage for this occupation)",
         "fact_id": "us-industry-wage-engineering-services-2025",
         "market": "United States",
@@ -36726,7 +36826,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence (the BLS materials verified for this page did not obtain the industry-breakdown median wage for this occupation)",
         "fact_id": "us-industry-wage-federal-2025",
         "market": "United States",
@@ -36738,7 +36838,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence (the BLS materials verified for this page did not obtain the industry-breakdown median wage for this occupation)",
         "fact_id": "us-industry-wage-rd-2025",
         "market": "United States",
@@ -36750,7 +36850,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "Insufficient evidence (the BLS materials verified for this page did not obtain the industry-breakdown median wage for this occupation)",
         "fact_id": "us-industry-wage-instruments-2025",
         "market": "United States",
@@ -36762,7 +36862,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "45,710 USD/year (25th percentile)",
         "fact_id": "us-wage-p25-2025",
         "market": "United States",
@@ -36774,7 +36874,7 @@
         ]
       },
       {
-        "derivation": null,
+        "derivation": "Shown for the source’s stated period and scope.",
         "display_value": "63,390 USD/year (75th percentile)",
         "fact_id": "us-wage-p75-2025",
         "market": "United States",
@@ -36784,27 +36884,15 @@
         "source_refs": [
           "bls-pay"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+25)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "58%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Cargo and freight",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and document checks"
     },
     "badges": [
       "O*NET 43-5011.00 · orders and quotations / documents and compliance / milestones and exceptions",
@@ -36848,17 +36936,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What cargo and freight agents do, what education and training and qualifications they need, and the salaries in China and the United States, and which steps AI and automation will change; U.S. wages use the 2025 BLS OEWS percentiles (relayed via O*NET), employment uses the BLS Table 1.2 2025—2035 projections, the O*NET outlook label follows its own page framing, and for mainland China there is only the industry-level proxy framing for transportation, warehousing and postal services (2025 urban non-private units 133,981 yuan and urban private units 73,133 yuan average annual wages), with the marking at each place that it is not this occupation's exact framing."
+      "text": "Compare booking, documentation and exception handling duties, U.S. pay and historical Shanghai and Weihai jobs. Try a paper freight handover exercise."
     },
     "title": {
       "availability": "available",
-      "text": "Cargo and freight"
+      "text": "Cargo and Freight Agents: Duties, Pay and Entry"
     }
   },
-  "source_content_sha256": "4fc4a7ea2d7a8d3f27edc9ee3f1d565b6bc4f400d4645e3508a7a21837b38bce",
+  "source_content_sha256": "85a40d219dc9eaed9f95fb87c1ffd7a4906b9d0bdb7d1be8f8ec831c70cac866",
   "subject": {
     "canonical_slug": "cargo-and-freight-agents",
-    "name": "Cargo and freight",
-    "summary": "This occupation is U.S. O*NET-SOC43-5011.00 Cargo and Freight Agents: expediting and routing the movement of incoming and outgoing cargo, taking orders, comparing transport modes, preparing and examining bills of lading and invoices, tracking delivery, and handling differences. Some positions also tally or secure or load and unload cargo; the occupational list does not mean every position performs all tasks. Preparation level Job Zone1–2, interest code CE, labeled Bright Outlook. Transport decisions, document signing, customs business, and dangerous goods activities are verified by jurisdiction, training, and position authorization."
+    "name": "Cargo and Freight Agents",
+    "summary": "Cargo and freight agents book transport, arrange pickup, check shipping documents, track milestones and hand off exceptions. Find out what the role can promise, who can release a shipment, and who handles customs or dangerous goods."
   }
 }

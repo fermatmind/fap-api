@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1491,7 +1488,7 @@
         "status": "pending_mapping"
       },
       "item:home-health-aides-and-personal-care-aides.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:home-health-aides-and-personal-care-aides.sources.source-card.1": {
         "status": "mapped"
@@ -24111,12 +24108,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "This checklist is for self-questioning only. It does not constitute hiring criteria, an ability score, or an evaluation of job competence, nor does it constitute any nursing practice, medication administration, medical treatment, or legal or investment advice. This page corresponds to the combined U.S. BLS/O*NET occupation \"Home Health and Personal Care Aides\" (SOC 31-1120), covering the two detailed occupations Home Health Aides (31-1121) and Personal Care Aides (31-1122). The official BLS definition reads: monitor the condition of people with disabilities or chronic illnesses and help them with daily living activities. The Home Health Aides detailed occupation has the following official scope: monitoring the health status of individuals with disabilities or illness and addressing their health-related needs, such as changing bandages, dressing wounds, or administering medication, under the direction of offsite or intermittent onsite licensed nursing staff, and assisting with daily activities such as feeding, bathing, toileting, or ambulation; depending on the patient's abilities, they may also help with preparing meals, light housekeeping, and laundry. Official scope text: Monitor the health status of an individual with disabilities or illness, and address their health-related needs, such as changing bandages, dressing wounds, or administering medication. Work is performed under the direction of offsite or intermittent onsite licensed nursing staff. Provide assistance with routine healthcare tasks or activities of daily living, such as feeding, bathing, toileting, or ambulation. May also help with tasks such as preparing meals, doing light housekeeping, and doing laundry depending on the patient's abilities. The U.S. wages and employment on this page come from BLS OEWS 2025 data presented by O*NET and BLS employment projections 2025—2035, and that page labels the wages and employment as Home Health and Personal Care Aides (combined scope); the precise occupational wage for mainland China was not obtained and is registered as a visible gap; the two jurisdictions and their practice systems must not be applied to one another."
+              "Ask how the employer handles close personal care, schedule changes and conflicting requests. Check who reviews changes and receives the handoff."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-home-health",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24125,12 +24124,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "To judge whether home health and personal care assisting suits you, first run one verifiable care drill using public or simulated materials: choose a fictional service user (for example, an older adult with limited mobility who needs assistance with toileting and medication reminders), and write a step-by-step process from taking the assignment and understanding the care plan, verifying identity and service scope, carrying out daily care (meal assistance, bathing assistance, toileting, walking assistance, and transfers), observing and recording health status, performing permitted care tasks per supervisor or licensed nurse instructions, to records and shift handover reporting, marking the safety and boundary check points at each step and the possible abnormalities (falls, skin breakdown or pressure sores, choking while eating, fever or changes in consciousness, infection exposure, refusal of care or agitation). Afterward, check: whether fall prevention, hand hygiene, and infection protection are treated as non-omittable items; whether situations beyond your individual authorization, such as administering medication, wound care, and judging condition changes, are written as stop and report to the licensed nurse or supervisor; and whether observed abnormalities are written up as handleable problems with reviewable records left behind. Test with a real deliverable, not just answers to an interest questionnaire."
+              "Try the original case and variant under “Entry and Sheet S: Service checklist and agreement.”"
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24139,12 +24138,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Fit signals | The work activity importance ratings for U.S. O*NET 31-1121.00 show that providing personal assistance and care to others (95), getting information (87), communicating with supervisors, peers, or subordinates (86), and making decisions and solving problems (86) are the most important activities for this occupation; work context shows that contact with others 79%, physical proximity 77% report very close, exposure to disease or infections 56% report every day, indoors, environmentally controlled 62% report every day, importance of being exact or accurate 33% report extremely important and 35% report very important, frequency of decision making 56% report every day, dealing with unpleasant or angry individuals 46% report every day, face-to-face discussions 45% report every day, and typical work week 53% report 40 hours. The most important skills are active listening (72), monitoring, reading comprehension, critical thinking, and speaking; among transferable skills, service orientation (75) and social perceptiveness (69) rank highest. If you are willing to do hands-on personal care under supervision over the long term, observe and truthfully record others' physical condition, communicate patiently with patients and families, and act to procedure within infection and safety boundaries, these daily demands are closer to the way you work."
+              "Use a fictional checklist to separate agreed tasks, unconfirmed times and requests outside the agreement."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24153,12 +24152,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Caution signals | O*NET also shows (31-1121.00): contact with others 79%, physical proximity 77% report very close (nearly touching), exposure to disease or infections 56% report every day, dealing with unpleasant, angry, or discourteous individuals 46% report every day, dealing with violent or physically aggressive individuals 38% report every day, high responsibility for others' health and safety 23% and moderate responsibility 18%, repetitive motions 56% report continually or almost continually, standing 59% report continually, and walking or running 56% report continually. This occupation deals with others' bodies, health status, and emotions within a supervised care chain: a single lapse in fall prevention, a single missed infection protection step, a single time an observed abnormality is treated as nothing, or a single action beyond authorization can cause personal injury, practice overreach, or inaccurate records. This page therefore lists infection protection and safety, observation and records, authorization boundaries such as medication administration and wound care, and patient information protection separately. On the U.S. side, this occupation is marked Bright Outlook, and the O*NET summary page shows projected growth far above average (18%) from 2025 to 2035, with about 760,500 job openings per year and employment of about 4,677,100 in 2025, but those wages and employment are for Home Health and Personal Care Aides (SOC 31-1120) and do not equal this occupation's precise size. If it is hard for you to sustain hands-on personal care, infection exposure, or long-term contact with emotionally unstable people, you should treat these as real costs that need careful weighing."
+              "Check the assignment scope, supervision and handoff contact."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-home-health",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24167,12 +24168,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Commitment judgment | Real fit comes from whether you can do three things within the same shift at once: make the care solid (complete daily care such as meal assistance, bathing assistance, toileting, walking assistance, and transfers based on the care plan and supervisor or licensed nurse instructions, producing reviewable care and observation records); keep safety and boundaries under control (fall and infection protection, performing permitted tasks per instructions, stopping and reporting on matters beyond your individual authorization such as medication administration and wound care, protecting patient information, and acting per institutional and regulatory requirements); and carry definable position responsibility (be responsible for the truthfulness of your own care operations and records, and refer judgments beyond your individual authority to the licensed nurse or supervisor). It is recommended to test this with one verifiable experience (completing a step-by-step care process and observation record, or a drill on recognizing and handling common care abnormalities), rather than relying only on the conclusions of an interest questionnaire."
+              "Both roles suit people who listen patiently, check agreed tasks and keep clear records. If you prefer daily living support, meal preparation and companionship, explore personal care. If you also want to observe and report changes under professional supervision, explore home health aide roles."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-home-health",
+            "bls"
           ],
           "type": "prose"
         }
@@ -24189,12 +24192,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The daily work of home health and personal care aides can be broken down along three lines: (1) care and assistance—assisting with eating, bathing, toileting, dressing, walking, and transfers in the person's home or a care facility, and handling housekeeping related to personal care; (2) health monitoring and following instructions—checking pulse, temperature, and respiration, observing and recording health status, and performing permitted care tasks under the direction of licensed nursing staff; (3) communication and records—recording observed conditions, progress, or problems and reporting them to the supervisor or case manager, while maintaining communication with patients and families. The three lines share the same set of safety and observation requirements, but their deliverables go to different recipients: care and monitoring serve the patient directly, while communication and records serve the care team and the care ledger."
+              "This U.S. category combines home health aides and personal care aides. Both may help with daily activities. The balance of health observation, directed tasks, practical support and companionship varies by role."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-home-health",
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -24320,7 +24326,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "U.S. SOC31-1120 combined occupation: 4,677,100 employed in 2025; BLS OOH2025—2035 projected growth 18%, with 760,500 annual openings including growth and replacement; this is not current hiring, individual employment, or AI causality."
+              "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.profile.onet-structured-fields-block.4",
@@ -24376,12 +24382,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Boundary note: this page covers only the precise occupation O*NET/SOC 31-1121.00 \"Home Health Aides\", that is, positions that monitor health status and assist with daily activities under the direction of licensed nursing staff. Adjacent occupations (nursing assistants, personal care aides, occupational therapists, recreation therapists, registered nurses, acute care nurses, and so on) differ in work object, qualifications, and responsibilities, and cannot be swapped based only on job title; medication administration, wound care, and condition judgment are practice authorization matters that must be decided by qualified personnel under institutional rules and applicable regulations, and cannot be replaced by tool or agent descriptions."
+              "This combined page covers both roles. Care plans, employer training and local rules determine which health-related tasks a worker may perform."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-home-health",
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -24446,12 +24455,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "U.S. BLS Home Health and Personal Care Aides, the SOC31-1120 combined occupation: assisting service users with disabilities or chronic illness in daily living, covering 31-1121 and 31-1122. BLS distinguishes the health tasks of home health aides under statutory conditions and direction, while personal care aides usually provide non-medical daily living services; this page is not a standalone occupational profile for 31-1121. The U.S. 31-1121.00 task description performed under the direction of licensed nursing staff does not confer authority in China. In China, medical nursing assistants are auxiliary services and are not health professional technical personnel, and must not perform professional technical medical nursing work; institutional arrangements or training cannot confer on them professional authority such as administering medication or treating wounds. Nursing practice requires registration, and home-based positions must be checked against the actual service and legal status."
+              "This U.S. category combines home health aides and personal care aides. Both may help with daily activities. The balance of health observation, directed tasks, practical support and companionship varies by role."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-home-health",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24460,12 +24471,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The nurse's core process is professional assessment, nursing judgment, and independent treatment, and they usually do not bear the main responsibility for daily activity assistance and housekeeping."
+              "The nurse's core process is assessment, nursing judgment and care within the applicable license and role, and they usually do not bear the main responsibility for daily activity assistance and housekeeping."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-rn-role"
           ],
           "type": "prose"
         },
@@ -24656,12 +24668,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Verify the education and training requirements (O*NET education information shows that most positions require a high school diploma or equivalent, and some require a postsecondary certificate or short-term training)."
+              "Check the target agency’s education, training and assessment requirements. BLS lists high school or equivalent as typical preparation for the two U.S. aide roles combined, with some exceptions."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24833,12 +24846,16 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Conclusion | Home health aides differ from adjacent occupations in work object, practice authorization, and responsibilities: the core of this occupation is to monitor health status and assist with daily activities under the direction of licensed nursing staff; nursing assistants and personal care aides also serve daily care but have different authorization scope and regulation; occupational therapists and recreation therapists aim at therapeutic and activity-based intervention; and registered nurses and acute care nurses take on condition assessment, nursing diagnosis, and independent treatment. Swapping them based only on job title would misjudge practice authorization and safety responsibility."
+              "Compare the two roles within this group first. Personal care commonly covers daily living support, meals and companionship. Home health can also involve observing and reporting changes under professional direction. Check facility duties and training separately for nursing assistant jobs. Registered nurses assess, make nursing judgments and provide nursing care within their license and role."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-home-health",
+            "bls",
+            "r2-pay-1",
+            "bls-rn-role"
           ],
           "type": "prose"
         },
@@ -24917,7 +24934,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Home health aides (this occupation)"
+              "Home health aides (within this group)"
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.direction-comparison.adjacent-career-comparison-table.14",
@@ -25029,7 +25046,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Personal care aides (adjacent)"
+              "Personal care aides (within this group)"
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.direction-comparison.adjacent-career-comparison-table.22",
@@ -25155,12 +25172,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Takes on professional nursing judgment and independent treatment, with a far larger authorization scope than supervised care aides"
+              "Takes on nursing judgment and care within the applicable license and role, with a far larger authorization scope than supervised care aides"
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-rn-role"
           ],
           "type": "prose"
         },
@@ -25183,12 +25201,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Assessing conditions, making nursing diagnoses, and independently administering medication and treatment"
+              "Assesses needs, makes nursing judgments and provides nursing care within the applicable license and role."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
-            "onet"
+            "bls-rn-role"
           ],
           "type": "prose"
         },
@@ -25472,7 +25490,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task analysis | Records, scheduling, and communication drafts can be trialed on licensed non-patient materials, verifying against original observations. There is no adoption efficiency or substitution causality for this occupation, and the order of impact is not ranked. The U.S. 31-1121.00 task description performed under the direction of licensed nursing staff does not confer authority in China. In China, medical nursing assistants are auxiliary services and are not health professional technical personnel, and must not perform professional technical medical nursing work; institutional arrangements or training cannot confer on them professional authority such as administering medication or treating wounds. Nursing practice requires registration, and home-based positions must be checked against the actual service and legal status. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Editorial task analysis | Records, scheduling, and communication drafts can be trialed on licensed non-patient materials, verifying against original observations. There is no adoption efficiency or substitution causality for this occupation, and the order of impact is not ranked. The U.S. 31-1121.00 task description performed under the direction of licensed nursing staff does not confer authority in China. In China, medical nursing assistants are auxiliary services and are not health professional technical personnel, and must not perform professional technical medical nursing work; institutional arrangements or training cannot confer on them professional authority such as administering medication or treating wounds. Nursing practice requires registration, and home-based positions must be checked against the actual service and legal status."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.ai-impact.ai-impact-table.18",
@@ -25528,7 +25546,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. SOC31-1120 combined occupation: 4,677,100 employed in 2025; BLS OOH2025—2035 projected growth 18%, with 760,500 annual openings including growth and replacement; this is not current hiring, individual employment, or AI causality."
+              "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.ai-impact.ai-impact-table.22",
@@ -26004,7 +26022,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. SOC31-1120 combined occupation: 4,677,100 employed in 2025; BLS OOH2025—2035 projected growth 18%, with 760,500 annual openings including growth and replacement; this is not current hiring, individual employment, or AI causality."
+              "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.ai-impact.ai-impact-table.56",
@@ -26102,7 +26120,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. SOC31-1120 combined occupation: 4,677,100 employed in 2025; BLS OOH2025—2035 projected growth 18%, with 760,500 annual openings including growth and replacement; this is not current hiring, individual employment, or AI causality. This round obtained no causal evidence of AI job changes."
+              "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.ai-impact.ai-impact-table.63",
@@ -26200,7 +26218,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. SOC31-1120 combined occupation: 4,677,100 employed in 2025; BLS OOH2025—2035 projected growth 18%, with 760,500 annual openings including growth and replacement; this is not current hiring, individual employment, or AI causality."
+              "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.ai-impact.ai-impact-table.70",
@@ -27468,7 +27486,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "U.S. sample job titles such as Caregiver, CHHA, and CNA do not constitute equivalent Chinese qualifications; 31-1121 differs from 31-1131 nursing assistants and 31-1122 personal care aides."
+              "Mainland China wage references"
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.china-salary.career-snapshot-primary-locale.44",
@@ -27924,7 +27942,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 combined-scope median hourly wage is $17.21 and median annual wage is $35,800; the 10th/25th/75th/90th percentiles of annual wage are 27,040/31,920/39,470/45,040 dollars, not experience tiers. OEWS pretax wages for normal hours include specified items such as production bonuses and exclude overtime pay, shift differentials, nonproduction bonuses, and employer benefit costs; these are not an individual's actual annual earnings. U.S. SOC31-1120 combined occupation: 4,677,100 employed in 2025; BLS OOH2025—2035 projected growth 18%, with 760,500 annual openings including growth and replacement; this is not current hiring, individual employment, or AI causality."
+              "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.us-salary.career-snapshot-secondary-locale.25",
@@ -27938,7 +27956,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 combined-scope median hourly wage is $17.21 and median annual wage is $35,800; the 10th/25th/75th/90th percentiles of annual wage are 27,040/31,920/39,470/45,040 dollars, not experience tiers. OEWS pretax wages for normal hours include specified items such as production bonuses and exclude overtime pay, shift differentials, nonproduction bonuses, and employer benefit costs; these are not an individual's actual annual earnings. U.S. SOC31-1120 combined occupation: 4,677,100 employed in 2025; BLS OOH2025—2035 projected growth 18%, with 760,500 annual openings including growth and replacement; this is not current hiring, individual employment, or AI causality."
+              "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.us-salary.career-snapshot-secondary-locale.26",
@@ -28036,7 +28054,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. SOC31-1120 combined occupation: 4,677,100 employed in 2025; BLS OOH2025—2035 projected growth 18%, with 760,500 annual openings including growth and replacement; this is not current hiring, individual employment, or AI causality."
+              "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.us-salary.career-snapshot-secondary-locale.33",
@@ -28348,31 +28366,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Registered nurses",
@@ -28387,7 +28405,7 @@
                 "url": "/en/career/jobs/personal-care-aides"
               },
               {
-                "entity": "Home health aides (this occupation)",
+                "entity": "Home health aides (within this group)",
                 "id": "link-9",
                 "relation": "career.related",
                 "url": "/en/career/jobs/home-health-aides-and-personal-care-aides"
@@ -29051,12 +29069,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "People unwilling to bear independent clinical judgment and treatment responsibility."
+              "People unwilling to take responsibility for clinical assessment and nursing care within the applicable license and role."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.fit.personality-fit-block.39",
           "source_refs": [
-            "onet"
+            "bls-rn-role"
           ],
           "type": "prose"
         },
@@ -29971,7 +29989,7 @@
             ],
             "rows": [
               [
-                "Home health aides (this occupation)",
+                "Home health aides (within this group)",
                 "Assisting with eating, bathing, toileting, and walking under mentoring, and learning to observe and record",
                 "Care training records, mentoring and observation records",
                 "A step-by-step care process and observation record",
@@ -29985,7 +30003,7 @@
                 "Different work settings and authorization scope, and registration requirements must be checked locally"
               ],
               [
-                "Personal care aides (adjacent)",
+                "Personal care aides (within this group)",
                 "Assisting with daily living care and companionship at home",
                 "Daily living care training records",
                 "A home care plan note",
@@ -30003,15 +30021,16 @@
                 "Assisting in organizing nursing documentation and handover information",
                 "Nursing study and internship records",
                 "A nursing observation record note",
-                "Takes on professional nursing judgment and independent treatment, with a larger authorization scope"
+                "Takes on nursing judgment and care within the applicable license and role, with a larger authorization scope"
               ]
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.path.entry-role-comparison.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-rn-role"
           ],
-          "title": "How do entry-level positions and initial tasks of administrative services managers compare?",
+          "title": "How do entry-level home health and personal care duties compare?",
           "type": "table"
         },
         {
@@ -30022,8 +30041,8 @@
               {
                 "id": "education",
                 "values": [
-                  "U.S. O*NET places this occupation (31-1121.00) in Job Zone Levels One to Two; education information shows that most positions require a high school diploma or equivalent, and some require a postsecondary certificate or short-term training. This description does not replace an employer's hiring and evaluation requirements.",
-                  "Related positions in mainland China usually require junior high or high school education, with care skills acquired through on-the-job training; where registration or certification is required, the rules of the location and institutional policy govern.",
+                  "Check the target agency’s education, training and assessment requirements. BLS lists high school or equivalent as typical preparation for the two U.S. aide roles combined, with some exceptions.",
+                  "For mainland China, use the specific job posting to check education, training, assessment and supervision.",
                   "Education only affects the entry point; whether you can take on care work mainly depends on verifiable care skills, observation records, and authorization within the system."
                 ]
               },
@@ -30046,7 +30065,7 @@
               {
                 "id": "tools",
                 "values": [
-                  "The O*NET summary shows the combined scope related to 31-1121.00 is projected to grow far above average (18%) from 2025 to 2035, with about 760,500 job openings per year, from employment of about 4,677,100 in 2025; this scope does not constitute an individual employment conclusion.",
+                  "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements.",
                   "Positions are mostly entered through home care agencies, nursing homes, assisted living communities, and hospice channels; home visits and facility shifts coexist.",
                   "Positions in mainland China are affected by region, aging and care demand, and payment and subsidy methods, and pay and evaluation scope are governed by institutional announcements."
                 ]
@@ -30055,7 +30074,8 @@
           },
           "id": "home-health-aides-and-personal-care-aides.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "title": "What do employers usually look for in hiring?",
           "type": "cards"
@@ -30068,26 +30088,26 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "A fully fictional service user care description (basic situation, key care plan points, daily activities needing assistance).",
-                  "A set of simulated observation record elements (pulse, temperature, respiration, skin, eating, and mood) with normal and abnormal examples.",
-                  "A blank step-by-step care and observation record template.",
-                  "A blank abnormality reporting and shift handover checklist."
+                  "A fictional service team schedules an item only if it is in the agreement and its time is confirmed. S1 meal delivery meets both conditions. S2 companionship is agreed but has no confirmed time. S3 a new errand is outside the agreement. Rework the three items marked ready in the old schedule. In the variant, confirm only the time for S2.",
+                  "Keep the inputs on paper or in a spreadsheet.",
+                  "Set up the original and variant separately.",
+                  "List unknown conditions separately."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Complete within 90 minutes: a step-by-step care process for one instance (understanding the care plan → hand washing and infection protection → assisting with daily activities and transfers → observing and recording health status → performing permitted tasks per instructions → reporting and handover), marking the safety check points for each step.",
-                  "Write the identifying features and handling methods for the three given abnormalities (suspected fall risk, suspected signs of infection, suspected change in condition).",
-                  "Write out which matters exceed individual care authorization (medication administration, wound care, adjusting the care plan, condition judgment)."
+                  "Submit a status for each item in the original and variant, with the open checks and handoff contact.",
+                  "Name the criterion that is unmet and the single input that changes in the variant.",
+                  "Keep the first draft and identify the next reviewer."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First list the complete steps and non-omittable items from taking over the shift to handover, then record the basis for each item.",
-                  "State the basis for identifying each abnormality and the consequences of handling it, and explain the risks of steps that were condensed or omitted.",
-                  "Finally, write a reflection: if site conditions differ from expectations (the patient refuses, family members are present, the environment is unsafe), how will you stop and reassess?"
+                  "Check each item against both conditions.",
+                  "Keep the original entries and record corrections separately.",
+                  "Complete both cases independently on day 6."
                 ]
               },
               {
@@ -30101,9 +30121,9 @@
           },
           "id": "home-health-aides-and-personal-care-aides.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "Entry practice: one complete office support task (fictional materials)",
+          "title": "Sheet S: Service checklist and agreement",
           "type": "cards"
         },
         {
@@ -30208,50 +30228,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Understanding this occupation's work object and process (understanding the plan—safety protection—assisting with care—observation records—reporting and handover).",
-                  "Record the infection protection, safety, and patient information requirements you observed."
+                  "Read the fictional exercise and list inputs.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Check working conditions: home visits or facility shifts, close contact with patients, infection exposure risk, lifting and transfer burden, and workweek length.",
-                  "Write down one real cost you find hardest to adapt to and judge whether you can accept it."
+                  "Write the two classification criteria and keep the original entries.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Complete a step-by-step care process and observation record template.",
-                  "List the key requirements per standards (hand washing and protection, fall prevention, observation records, abnormality reporting)."
+                  "List pending checks and the records to hand off.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Write identification and handling plans for the three common abnormalities (fall risk, signs of infection, change in condition).",
-                  "Write handling and escalation plans for two typical risks (patient information leakage, patient aggression or emotional crisis)."
+                  "Prepare a separate result sheet for each case.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Complete one simulated care and observation record under guidance, and perform safety confirmation.",
-                  "Identify at least two deviations against the inspection requirements and record how to correct them."
+                  "Verify that only one input changes in the variant.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Ask an experienced care worker or licensed nurse to challenge your care judgments and communication approach.",
-                  "Record the other party's objections and your responses, without avoiding abnormalities or counterexamples."
+                  "Complete the original and variant independently and save your first draft.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Debrief this week: which steps engaged you and which drained you.",
-                  "On that basis, judge whether to keep investing in this direction, and write the specific questions to verify next."
+                  "Open the answer key in the FAQ, then plan any further checks.",
+                  "Record the basis, open checks and handoff owner."
                 ]
               }
             ]
@@ -30260,7 +30280,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "Seven-day experience: complete one office support loop with fictional materials",
+          "title": "Seven-day exercise: check a fictional service schedule and prepare a handoff",
           "type": "timeline"
         },
         {
@@ -30572,12 +30592,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial preparation path | The requirements of the combined daily living support and health assistance programs are checked separately. The combined BLS occupation usually requires a high school diploma or equivalent, with some positions not requiring it; certified home health or hospice agencies require formal training and a standard examination. This scope is not the O*NET31-1121 new-hire education proportions and does not apply as China's uniform threshold; specific U.S. programs and state conditions are checked separately. The U.S. 31-1121.00 task description performed under the direction of licensed nursing staff does not confer authority in China. In China, medical nursing assistants are auxiliary services and are not health professional technical personnel, and must not perform professional technical medical nursing work; institutional arrangements or training cannot confer on them professional authority such as administering medication or treating wounds. Nursing practice requires registration, and home-based positions must be checked against the actual service and legal status."
+              "Start by choosing between personal care and home health. Compare the employer’s duties, supervision and state requirements. BLS reports that a high school diploma or equivalent is typical for the combined group, with exceptions. Aides in certified home health or hospice agencies must complete formal training and pass a standardized test."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "bls",
+            "onet-home-health"
           ],
           "type": "prose"
         },
@@ -31629,7 +31650,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The 2025 combined-scope median hourly wage is $17.21 and median annual wage is $35,800; the 10th/25th/75th/90th percentiles of annual wage are 27,040/31,920/39,470/45,040 dollars, not experience tiers. OEWS pretax wages for normal hours include specified items such as production bonuses and exclude overtime pay, shift differentials, nonproduction bonuses, and employer benefit costs; these are not an individual's actual annual earnings. U.S. SOC31-1120 combined occupation: 4,677,100 employed in 2025; BLS OOH2025—2035 projected growth 18%, with 760,500 annual openings including growth and replacement; this is not current hiring, individual employment, or AI causality. No precise national wage distribution for this occupation in China was obtained; the NBS urban unit industry pretax annual average is not the occupational median, does not cover all private household employment or self-employment income, and U.S. NAICS industries do not directly map to Chinese categories."
+              "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.market-signals.market-signal-card.8",
@@ -31671,7 +31692,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. SOC31-1120 combined occupation: 4,677,100 employed in 2025; BLS OOH2025—2035 projected growth 18%, with 760,500 annual openings including growth and replacement; this is not current hiring, individual employment, or AI causality."
+              "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.market-signals.market-signal-card.11",
@@ -32338,22 +32359,34 @@
           "data": {
             "entries": [
               {
-                "answer": "According to O*NET 31-1121.00, this occupation monitors the health status of individuals with disabilities or illness and addresses their health-related needs (such as changing bandages, dressing wounds, or administering medication) under the direction of offsite or intermittent onsite licensed nursing staff, and assists with daily activities such as feeding, bathing, toileting, or ambulation. Typical tasks include purchasing, preparing, or serving meals per prescribed diet plans (importance 91), caring for patients by changing bed linens and assisting with personal care (89), bathing patients (88), recording care status and progress and reporting (87), and assisting with getting in and out of bed, bathtubs, wheelchairs, and cars and with dressing and grooming (84).",
+                "answer": "Personal care aides generally support daily activities, household tasks, meal preparation and companionship. Home health aides observe and report under professional supervision. Permitted health-related tasks depend on local rules, training and instructions. Check each job’s duties separately.",
                 "id": "home-health-aides-and-personal-care-aides.faq.1",
-                "question": "What exactly do home health aides do?",
-                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q1"
+                "question": "What do home health aides and personal care aides each do?",
+                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q1",
+                "source_refs": [
+                  "onet",
+                  "onet-home-health",
+                  "bls"
+                ]
               },
               {
-                "answer": "Nursing assistants and personal care aides also serve daily care but have different authorization scope and regulation; occupational therapy assistants and recreation therapists aim at therapeutic and activity-based intervention; registered nurses and acute care nurses take on condition assessment, nursing diagnosis, and independent treatment. Practice entry, authorization scope, and safety responsibility differ, and they cannot be swapped based only on job title.",
+                "answer": "Personal care and home health are both part of the group on this page. Nursing assistant jobs have their own facility duties and training. Registered nurses assess, make nursing judgments and provide nursing care within their license and role.",
                 "id": "home-health-aides-and-personal-care-aides.faq.2",
                 "question": "How does it differ from adjacent occupations?",
-                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q2"
+                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q2",
+                "source_refs": [
+                  "bls-rn-role"
+                ]
               },
               {
-                "answer": "BLS OEWS 2025 (presented via O*NET, Home Health and Personal Care Aides (SOC 31-1120)): median annual wage $35,800 and median hourly wage $17.21; the 10th/25th/75th/90th percentiles are 27,040 / 31,920 / 39,470 / 45,040 dollars per year. The employment outlook projects growth far above average (18%) from 2025 to 2035, with about 760,500 job openings per year, from employment of about 4,677,100 in 2025. All of these are combined-scope figures, not values for the single precise occupation 31-1121.00.",
+                "answer": "The May 2025 U.S. median wage for combined group 31-1120 was USD 35,800 a year and USD 17.21 an hour. Annual wage percentiles (10th, 25th, 50th, 75th and 90th) were USD 27,040, 31,920, 35,800, 39,470, 45,040. BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements.",
                 "id": "home-health-aides-and-personal-care-aides.faq.3",
                 "question": "What are the wages and employment situation in the U.S.?",
-                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q3"
+                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q3",
+                "source_refs": [
+                  "oews",
+                  "ep"
+                ]
               },
               {
                 "answer": "There is no national occupational wage that can be read precisely for this occupation. The National Bureau of Statistics publishes the average wage of urban unit employees by industry category without distinguishing occupations, so occupational-level figures for home health aides cannot be derived from them. This page registers the gap per its evidence policy rather than filling it.",
@@ -32362,22 +32395,36 @@
                 "question_key": "career.faq.home-health-aides-and-personal-care-aides.q4"
               },
               {
-                "answer": "O*NET work context shows: contact with others 79%, physical proximity 77% very close, exposure to disease or infections 56% every day, dealing with unpleasant, angry, or discourteous individuals 46% every day, and dealing with violent or aggressive individuals 38% every day. The main risks include infection exposure and inadequate protection, falls and improper transfers, missed or unreported health observations, performing medication administration or wound care beyond authorization, patient information leakage, and improper handling of patient aggression or an emotional crisis.",
+                "answer": "In the U.S. O*NET survey for home health aides (31-1121.00), 79% reported constant contact with others, 77% reported very close physical proximity, 56% reported daily exposure to disease or infection, 46% reported dealing daily with unpleasant, angry or discourteous people, and 38% reported dealing daily with violent or aggressive people. These percentages describe respondents in that occupation only. Compare both roles by asking about close personal assistance, help with transfers, privacy and how to hand over concerns.",
                 "id": "home-health-aides-and-personal-care-aides.faq.5",
                 "question": "What are the work environment and occupational risks like?",
-                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q5"
+                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q5",
+                "source_refs": [
+                  "onet-home-health",
+                  "onet",
+                  "bls"
+                ]
               },
               {
-                "answer": "It will affect document and information tasks, not replace on-site care and practice responsibility. Generative AI can assist with organizing care and observation records, scheduling and reminders, and care knowledge retrieval; on-site care, health observation and abnormality judgment, medication administration and wound care per instructions, and communication with families remain the responsibility of people working to procedure. This page gives no substitution probability or timeline.",
+                "answer": "AI can help organize fictional care records and draft schedules or handoff summaries. Aides provide in-person support, record observations and report changes under the agency’s procedure. Qualified staff make clinical judgments and carry out technical care within their role. Some U.S. home health aide assignments include specific health tasks when local rules allow them and training, professional direction and authorization are in place. Mainland China’s WS/T 803—2022 covers auxiliary nursing services for older adults in home and community settings.",
                 "id": "home-health-aides-and-personal-care-aides.faq.6",
                 "question": "Will AI affect this occupation?",
-                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q6"
+                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q6",
+                "source_refs": [
+                  "bls",
+                  "cn-home-care-standard",
+                  "onet-home-health"
+                ]
               },
               {
-                "answer": "O*NET places this occupation in Job Zone Levels One to Two; education information shows that most positions require a high school diploma or equivalent, some require a postsecondary certificate or short-term training, and most enter through on-the-job training. Related positions in mainland China usually require junior high or high school education and on-the-job training; where registration or certification is required, the rules of the location and institutional policy govern.",
+                "answer": "For the combined 31-1120 group, BLS lists a high school diploma or equivalent and short-term on-the-job training. Actual requirements depend on the employer, role and jurisdiction. Fengze’s reference list separates meal assistance, personal hygiene and home visits. It illustrates a local service plan, with scope and eligibility set locally.",
                 "id": "home-health-aides-and-personal-care-aides.faq.7",
                 "question": "What education and training are needed?",
-                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q7"
+                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q7",
+                "source_refs": [
+                  "ep",
+                  "cn-work-example"
+                ]
               },
               {
                 "answer": "This page does not fabricate a uniform certificate list. Education, training records, registration, position authorization, and practice authority are different states: training is not the same as registration, and registration is not the same as obtaining a licensed nurse's authorization for a specific task. In the U.S., some states require completing training and passing an examination before registration; in mainland China, requirements for care positions are governed by local rules and institutional policy.",
@@ -32386,16 +32433,35 @@
                 "question_key": "career.faq.home-health-aides-and-personal-care-aides.q8"
               },
               {
-                "answer": "The main risks include infection exposure or inadequate hand hygiene and protection, improper fall prevention or transfer, missed or unreported health status observation, performing medication administration or wound care beyond authorization, leakage of patient identity and health information, and improper handling of patient aggression or an emotional crisis; the focus of control is to leave every step as a reviewable record and to stop and report on abnormalities.",
+                "answer": "Both roles protect privacy, record handoffs and verify the scope of service. In personal care, check unplanned requests with the scheduler or service lead. In home health, report changes through the agency’s care process and verify training, instructions and authorization for health-related tasks.",
                 "id": "home-health-aides-and-personal-care-aides.faq.9",
                 "question": "What are the main risks of this occupation?",
-                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q9"
+                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q9",
+                "source_refs": [
+                  "onet",
+                  "onet-home-health",
+                  "bls"
+                ]
               },
               {
-                "answer": "On the U.S. side, the related combined scope is projected to grow far above average (18%) from 2025 to 2035, with about 760,500 job openings per year; on the mainland China side, a wage gap is registered. Directions you can move into include nursing assistant, personal care aide, occupational therapy and physical therapy assistant, and psychiatric care and social service assistant, but each requires filling in the corresponding training or qualifications; skill transfer does not equal automatic promotion.",
+                "answer": "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements. When comparing paths, check personal care’s daily-living duties against the supervision and recordkeeping expected in home health. For nursing assistant roles, verify the separate preparation and employer requirements.",
                 "id": "home-health-aides-and-personal-care-aides.faq.10",
                 "question": "What is the outlook, and which directions can you move into?",
-                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q10"
+                "question_key": "career.faq.home-health-aides-and-personal-care-aides.q10",
+                "source_refs": [
+                  "ep",
+                  "bls",
+                  "r2-pay-1"
+                ]
+              },
+              {
+                "answer": "Only S1 meets the scheduling criteria in the original. S1 and S2 meet them in the variant. S3 still needs a scope check. Keep the previous schedule, the reason for the update and the open items. Give the schedulable items to the scheduler. In the original, ask them to confirm S2’s time. In both cases, ask the service lead to verify whether S3 belongs in the agreement and leave it pending until confirmed.",
+                "id": "home-health-aides-and-personal-care-aides.faq.paper-exercise",
+                "question": "paper exercise answer key (open after day 6)",
+                "question_key": "career.faq.home-health-aides-and-personal-care-aides.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -32410,7 +32476,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round, the BLS OOH was checked for the SOC31-1120 combined definition, shared tasks, 2025 employment 4677100, the 2025—2035 growth of 18% and 760500 openings, and the fact that high school is usual but not required for all positions; the 31-1121 and 31-1122 definitions were checked separately, and the profile, skills, interests, and work context of the whole group must not be misused for a single subdivision. All five 2025 wage percentiles and the OEWS definitions were verified."
+              "This round, the BLS OOH was checked for the SOC31-1120 combined definition, shared tasks, 2025 employment 4677100, the 2025—2035 growth of 18.1% and 760500 openings, and the fact that high school is usual but not required for all positions; the 31-1121 and 31-1122 definitions were checked separately, and the profile, skills, interests, and work context of the whole group must not be misused for a single subdivision. All five 2025 wage percentiles and the OEWS definitions were verified."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.sources.source-card.1",
@@ -32452,12 +32518,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "No precise national wage distribution for this occupation in China was obtained; the NBS urban unit industry pretax annual average is not the occupational median, does not cover all private household employment or self-employment income, and U.S. NAICS industries do not directly map to Chinese categories. The independent growth, wages, and AI adoption effects of each combined subdivision were not obtained, and U.S. state-by-state program qualifications were not fully verified. The protected quick-answer FAQ and the original 31-1121 whole-group interest, work context, and authority facts are retained, without whole-page consistency."
+              "Fengze’s reference list separates meal assistance, personal hygiene and home visits. It illustrates a local service plan, with scope and eligibility set locally."
             ]
           },
           "id": "home-health-aides-and-personal-care-aides.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "cn-work-example"
           ],
           "type": "prose"
         }
@@ -32484,25 +32550,25 @@
                 "entity": "Big Five Personality Test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Home Health and Personal Care Aides",
@@ -32538,16 +32604,16 @@
                 "id": "onet",
                 "limitation": "U.S. occupational description; it does not cover mainland China practice and qualification systems; the wages and employment on that page are the combined scope.",
                 "market": "U.S.",
-                "name": "O*NET OnLine: Home Health Aides occupational profile and official definition (31-1121.00)",
+                "name": "O*NET Personal Care Aides (one role in the combined group)",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/31-1121.00"
+                "url": "https://www.onetonline.org/link/details/31-1122.00"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "This combined scope is projected to grow far above average (18%) from 2025 to 2035.",
+                  "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements.",
                   "Used to explain the related occupation's employment outlook and size."
                 ],
                 "evidence_type": "official occupation outlook",
@@ -32555,42 +32621,41 @@
                 "limitation": "The outlook covers both home health aides and personal care aides and is a combined scope, so it cannot be read as an individual employment conclusion.",
                 "market": "U.S.",
                 "name": "Occupational Outlook Handbook: Home Health and Personal Care Aides",
-                "period": "2024-2034",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/healthcare/home-health-aides-and-personal-care-aides.htm"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Projected about 760,500 job openings per year, from employment of about 4,677,100 in 2025 and about 847,300 in 2034.",
-                  "This scope is a combined scope and does not constitute an individual employment conclusion."
+                  "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements.",
+                  "For the combined 31-1120 group, BLS lists a high school diploma or equivalent and short-term on-the-job training. Actual requirements depend on the employer, role and jurisdiction."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "ep",
                 "limitation": "Combined scope, not attributable to generative AI, and not equal to the standalone size of 31-1121.00.",
                 "market": "U.S.",
-                "name": "BLS employment projections: Home Health and Personal Care Aides (combined scope)",
-                "period": "2024-2034",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.bls.gov/ooh/healthcare/home-health-aides-and-personal-care-aides.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Used to explain OEWS sampling, estimation, coverage, and cases where it does not apply.",
-                  "Used to check the national scope and the note that benefits are excluded."
+                  "The May 2025 U.S. median wage for combined group 31-1120 was USD 35,800 a year and USD 17.21 an hour. Annual wage percentiles (10th, 25th, 50th, 75th and 90th) were USD 27,040, 31,920, 35,800, 39,470, 45,040."
                 ],
                 "evidence_type": "official methodology",
                 "id": "oews",
                 "limitation": "The methodology document prevails.",
                 "market": "U.S.",
                 "name": "BLS: Occupational Employment and Wage Statistics (OEWS) methodology notes",
-                "period": "2025 OEWS methodology; accessed 2026-09-22",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "OEWS methodology",
-                "url": "https://www.bls.gov/oes/oes_method.htm"
+                "url": "https://www.onetonline.org/link/localwages/31-1121.00"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32723,17 +32788,17 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used for field, evidence scope, and gap registration rules.",
-                  "Used for cross-market and jurisdictional scope boundary notes."
+                  "Use the original sources for tasks and data scope.",
+                  "Use the original sources for tasks and data scope."
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "Editorial explanation",
                 "id": "editor",
-                "limitation": "An internal scope rule, not an external factual source.",
+                "limitation": "Explains sources on this page.",
                 "market": "Global",
-                "name": "FermatMind: career content field and evidence scope rules",
-                "period": "current authoring rules",
+                "name": "FermatMind source scope notes",
+                "period": "This page",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "This page",
                 "url": "https://fermatmind.com"
               },
               {
@@ -32787,17 +32852,17 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "Used to explain that fit signals, risk scenarios, and exercise design are editorial summaries.",
-                  "It does not constitute a promise about any institution's process or requirements."
+                  "Use the original sources for tasks and data scope.",
+                  "Use the original sources for tasks and data scope."
                 ],
-                "evidence_type": "editorial_synthesis",
+                "evidence_type": "Editorial explanation",
                 "id": "employer",
-                "limitation": "An editorial design, not a uniform employer requirement or hiring criterion.",
+                "limitation": "Explains sources on this page.",
                 "market": "Global",
-                "name": "FermatMind: in-page editorial summary and exercise design notes",
-                "period": "current authoring rules",
+                "name": "FermatMind source scope notes",
+                "period": "This page",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "This page",
                 "url": "https://fermatmind.com"
               },
               {
@@ -32897,20 +32962,20 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Used to check annual wage percentiles: 10th percentile $27,040, 25th percentile $31,920, median $35,800, 75th percentile $39,470, 90th percentile $45,040 (2025); median hourly wage $17.21.",
-                  "Used to explain that wages are disclosed annually and are not used to derive individual monthly or take-home income."
+                  "The May 2025 U.S. median wage for combined group 31-1120 was USD 35,800 a year and USD 17.21 an hour. Annual wage percentiles (10th, 25th, 50th, 75th and 90th) were USD 27,040, 31,920, 35,800, 39,470, 45,040.",
+                  "The May 2025 U.S. median wage for combined group 31-1120 was USD 35,800 a year and USD 17.21 an hour. Annual wage percentiles (10th, 25th, 50th, 75th and 90th) were USD 27,040, 31,920, 35,800, 39,470, 45,040."
                 ],
                 "evidence_type": "official wage display",
                 "id": "onet-wages",
-                "limitation": "O*NET labels that page's wages as Home Health and Personal Care Aides (SOC 31-1120); benefits and bonuses are excluded; percentiles are not starting pay or experience levels.",
+                "limitation": "O*NET labels that page's wages as Home Health and Personal Care Aides (SOC 31-1120); production bonuses are included, while nonproduction bonuses and employer benefit costs are excluded; percentiles are not starting pay or experience levels.",
                 "market": "U.S.",
                 "name": "O*NET OnLine: Home Health Aides national wages (BLS OEWS 2025)",
-                "period": "2025 BLS OEWS wage data via O*NET",
+                "period": "2025-05",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/31-1121.00"
+                "url": "https://www.bls.gov/oes/oes_method.htm"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32975,20 +33040,64 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Daily care and personal care — 0/100; weight=1/3; home-health-aides-and-personal-care-aides.ai-impact.ai-impact-table.95[0]",
-                  "Health status observation — 25/100; weight=1/3; home-health-aides-and-personal-care-aides.ai-impact.ai-impact-table.99[0]",
-                  "Records and handover — 75/100; weight=1/3; home-health-aides-and-personal-care-aides.ai-impact.ai-impact-table.119[0]"
+                  "For comparison with personal care duties."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "onet-home-health",
+                "market": "United States",
+                "name": "O*NET Home Health Aides",
+                "period": "Occupational profile",
+                "publisher": "O*NET",
+                "url": "https://www.onetonline.org/link/details/31-1121.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Fengze’s reference list separates meal assistance, personal hygiene and home visits. It illustrates a local service plan, with scope and eligibility set locally."
+                ],
+                "id": "cn-work-example",
+                "limitation": "A named historical vacancy. Check other employers separately.",
+                "market": "Mainland China",
+                "name": "Fengze District: home and community eldercare plan",
+                "period": "2023",
+                "publisher": "Fengze District Government",
+                "url": "https://www.qzfz.gov.cn/zwgk/zfxxgkzl/bmzfxxgk/mzj/zfxxgkml/202311/t20231101_2960183.htm"
+              },
+              {
+                "details": [
+                  "The records and measurements are fictional."
+                ],
+                "id": "paper-exercise",
+                "market": "This page",
+                "name": "Sheet S: Service checklist and agreement",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Sections 4 and 5 cover training and assessment, records and feedback."
+                ],
+                "id": "cn-home-care-standard",
+                "limitation": "Applies to auxiliary nursing services for older adults.",
+                "market": "Mainland China",
+                "name": "Home and community medical nursing assistance for older adults",
+                "period": "WS/T 803—2022",
+                "publisher": "National Health Commission",
+                "url": "https://www.nhc.gov.cn/fzs/c100048/202211/ff72fed5f73c48838458fb353c99509d/files/1746697545393_62705.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Registered nurse duties and licensing."
+                ],
+                "id": "bls-rn-role",
+                "limitation": "Check state, license and job scope separately.",
+                "market": "United States",
+                "name": "BLS Registered Nurses occupational handbook",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
               }
             ]
           },
@@ -33120,7 +33229,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "type": "prose"
         },
-        "heading": "How do the work directions of home health aides compare with adjacent occupations?",
+        "heading": "How do the two aide roles compare with related occupations?",
         "intro": {
           "$item": "home-health-aides-and-personal-care-aides.direction-comparison.adjacent-career-comparison-table.10",
           "block": "direction-comparison",
@@ -33739,7 +33848,7 @@
             }
           }
         ],
-        "heading": "Will AI replace home health aides?",
+        "heading": "How might both aide roles use AI?",
         "method_cards": [
           {
             "含义": {
@@ -34326,7 +34435,7 @@
           "type": "prose"
         },
         "entry_heading": "How new graduates or career changers can verify and enter the field",
-        "heading": "How to become a home health aide: education, qualifications, and career development paths",
+        "heading": "Entry and Sheet S: Service checklist and agreement",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "home-health-aides-and-personal-care-aides.path.career-path-block.21",
@@ -35184,7 +35293,7 @@
           "copy_key": "career.item.career-risk-cards",
           "type": "prose"
         },
-        "heading": "What pressures, risks, and career boundaries do home health aides face?",
+        "heading": "What risks and responsibilities come with each aide role?",
         "risks": [
           {
             "affected_roles": {
@@ -36071,7 +36180,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "How much do U.S. home health aides earn?",
+        "heading": "U.S. wages for the two aide roles combined",
         "industry_heading": "How much do U.S. wages differ across industries?",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -36360,7 +36469,7 @@
           "copy_key": "career.item.market-signal-card",
           "type": "prose"
         },
-        "heading": "What is the outlook for home health aides? Which related occupations can you move into?",
+        "heading": "Outlook and next steps for both aide roles",
         "outlook_evidence": [
           {
             "geography": {
@@ -37351,7 +37460,7 @@
             }
           }
         ],
-        "heading": "To be a home health aide, which interests, abilities, and ways of working matter more?",
+        "heading": "What ways of working suit each aide role?",
         "questions": [
           {
             "answer": {
@@ -37953,19 +38062,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
-      "china-salary": "Mainland China pay reference",
-      "direction-comparison": "Career direction comparison",
-      "fit": "Career fit guide",
-      "market-signals": "Career outlook and moving into related occupations",
+      "ai-impact": "How might both aide roles use AI?",
+      "china-salary": "Mainland China wage references",
+      "direction-comparison": "How do the two aide roles compare with related occupations?",
+      "fit": "What ways of working suit each aide role?",
+      "market-signals": "Outlook and next steps for both aide roles",
       "navigation": "Next steps and related entries",
-      "path": "Entry, qualifications, and career development",
+      "path": "Entry and Sheet S: Service checklist and agreement",
       "profile": "Occupational profile",
       "quick-decision": "Quick judgment",
-      "risk": "Work pressure, risks, and career boundaries",
+      "risk": "What risks and responsibilities come with each aide role?",
       "source-register": "Sources",
       "sources": "Common questions and sources",
-      "us-salary": "U.S. pay reference"
+      "us-salary": "U.S. wages for the two aide roles combined"
     }
   },
   "fact_register": {
@@ -37983,7 +38092,7 @@
         ]
       },
       {
-        "derivation": "Scope | 2025 BLS OEWS national wages, presented by O*NET on its occupation page and labeled as the combined group Home Health and Personal Care Aides (SOC 31-1120, covering Home Health Aides and Personal Care Aides); the BLS OOH May 2025 median matches it; benefits and bonuses are excluded; percentiles are positions in the distribution and do not correspond to individual starting pay or experience levels.",
+        "derivation": "Scope | 2025 BLS OEWS national wages, presented by O*NET on its occupation page and labeled as the combined group Home Health and Personal Care Aides (SOC 31-1120, covering Home Health Aides and Personal Care Aides); the BLS OOH May 2025 median matches it; production bonuses are included, while nonproduction bonuses and employer benefit costs are excluded; percentiles are positions in the distribution and do not correspond to individual starting pay or experience levels.",
         "display_value": "Median annual wage $35,800 (May 2025, BLS, Home Health and Personal Care Aides, SOC 31-1120)",
         "fact_id": "us-wage-2025",
         "market": "U.S.",
@@ -37991,11 +38100,12 @@
         "occupation_scope": "This occupation: Home Health Aides",
         "period": "2025",
         "source_refs": [
-          "onet-wages"
+          "onet-wages",
+          "bls-oews-questions"
         ]
       },
       {
-        "derivation": "Scope | 2025 BLS OEWS national wages, presented by O*NET on its occupation page and labeled as the combined group Home Health and Personal Care Aides (SOC 31-1120, covering Home Health Aides and Personal Care Aides); the BLS OOH May 2025 median matches it; benefits and bonuses are excluded; percentiles are positions in the distribution and do not correspond to individual starting pay or experience levels.",
+        "derivation": "Scope | 2025 BLS OEWS national wages, presented by O*NET on its occupation page and labeled as the combined group Home Health and Personal Care Aides (SOC 31-1120, covering Home Health Aides and Personal Care Aides); the BLS OOH May 2025 median matches it; production bonuses are included, while nonproduction bonuses and employer benefit costs are excluded; percentiles are positions in the distribution and do not correspond to individual starting pay or experience levels.",
         "display_value": "10th percentile annual wage $27,040 (2025, BLS OEWS, Home Health and Personal Care Aides (SOC 31-1120))",
         "fact_id": "us-wage-low10-2025",
         "market": "U.S.",
@@ -38003,11 +38113,12 @@
         "occupation_scope": "This occupation: Home Health Aides",
         "period": "2025",
         "source_refs": [
-          "onet-wages"
+          "onet-wages",
+          "bls-oews-questions"
         ]
       },
       {
-        "derivation": "Scope | 2025 BLS OEWS national wages, presented by O*NET on its occupation page and labeled as the combined group Home Health and Personal Care Aides (SOC 31-1120, covering Home Health Aides and Personal Care Aides); the BLS OOH May 2025 median matches it; benefits and bonuses are excluded; percentiles are positions in the distribution and do not correspond to individual starting pay or experience levels.",
+        "derivation": "Scope | 2025 BLS OEWS national wages, presented by O*NET on its occupation page and labeled as the combined group Home Health and Personal Care Aides (SOC 31-1120, covering Home Health Aides and Personal Care Aides); the BLS OOH May 2025 median matches it; production bonuses are included, while nonproduction bonuses and employer benefit costs are excluded; percentiles are positions in the distribution and do not correspond to individual starting pay or experience levels.",
         "display_value": "90th percentile annual wage $45,040 (2025, BLS OEWS, Home Health and Personal Care Aides (SOC 31-1120))",
         "fact_id": "us-wage-high10-2025",
         "market": "U.S.",
@@ -38015,41 +38126,42 @@
         "occupation_scope": "This occupation: Home Health Aides",
         "period": "2025",
         "source_refs": [
-          "onet-wages"
+          "onet-wages",
+          "bls-oews-questions"
         ]
       },
       {
-        "derivation": "Scope | BLS employment projections for the combined occupation Home Health and Personal Care Aides (SOC 31-1120, 2025—2035); growth is far above average (18%), mainly driven by aging and home care demand, and cannot be attributed to generative AI; it includes replacement needs and does not equal actual hiring numbers.",
-        "display_value": "Growth: far above average (18%, 2025—2035, BLS employment projections, Home Health and Personal Care Aides (SOC 31-1120))",
+        "derivation": "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements.",
+        "display_value": "18.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "U.S.",
         "measure": "Employment growth",
-        "occupation_scope": "This occupation: Home Health Aides",
-        "period": "2025-2035",
+        "occupation_scope": "31-1120",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": "Scope | BLS employment projections for the combined occupation Home Health and Personal Care Aides (SOC 31-1120, 2025—2035); growth is far above average (18%), mainly driven by aging and home care demand, and cannot be attributed to generative AI; it includes replacement needs and does not equal actual hiring numbers.",
-        "display_value": "Employment about 4,677,100 (2025, BLS, Home Health and Personal Care Aides, SOC 31-1120)",
+        "derivation": "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements.",
+        "display_value": "About 4,677,100 jobs",
         "fact_id": "us-employment-2025",
         "market": "U.S.",
         "measure": "Employment size",
-        "occupation_scope": "This occupation: Home Health Aides",
+        "occupation_scope": "31-1120",
         "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": "Scope | BLS employment projections for the combined occupation Home Health and Personal Care Aides (SOC 31-1120, 2025—2035); growth is far above average (18%), mainly driven by aging and home care demand, and cannot be attributed to generative AI; it includes replacement needs and does not equal actual hiring numbers.",
-        "display_value": "Projected average annual job openings about 760,500 (2025—2035, BLS employment projections, Home Health and Personal Care Aides, SOC 31-1120, including growth and replacement)",
+        "derivation": "BLS Table 1.2 shows about 4,677,100 U.S. jobs in combined group 31-1120 in 2025 and projects 5,524,400 in 2035 (18.1%), with about 760,500 openings per year including replacements.",
+        "display_value": "About 760,500 a year",
         "fact_id": "us-openings-2025-2035",
         "market": "U.S.",
         "measure": "Average annual job openings",
-        "occupation_scope": "This occupation: Home Health Aides",
-        "period": "2025-2035",
+        "occupation_scope": "31-1120",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -38077,30 +38189,18 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Home Health and Personal Care Aides",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
-      "Home Health Aides · tasks, deliverables, and responsibility boundaries",
+      "Home health and personal care · duties and handoffs",
       "Source scope · statistical scope · human review",
       "The mainland China precise occupational wage gap is retained per the evidence policy"
     ],
@@ -38109,25 +38209,25 @@
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "U.S. median annual wage (2025, BLS OEWS, combined scope)"
+        "label": "U.S. combined-group median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2025—2035)"
+        "label": "U.S. combined-group projected change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment headcount (2025)"
+        "label": "U.S. combined-group employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2025—2035)"
+        "label": "U.S. combined-group annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -38148,10 +38248,10 @@
       "text": "Home Health and Personal Care Aides"
     }
   },
-  "source_content_sha256": "65f35e5b4b20924a0b043164386c7d615e7dcffb7e90f70580b3b7b17e266d47",
+  "source_content_sha256": "ed564199e57b3539dbd44e9f808b6174c65f03e329a9f29099c07aeffab402ec",
   "subject": {
     "canonical_slug": "home-health-aides-and-personal-care-aides",
     "name": "Home Health and Personal Care Aides",
-    "summary": "Home Health and Personal Care Aides corresponds to the combined U.S. BLS/O*NET occupation \"Home Health and Personal Care Aides\" (SOC 31-1120), covering Home Health Aides 31-1121 and Personal Care Aides 31-1122; the official BLS definition reads: monitor the condition of people with disabilities or chronic illnesses and help them with daily living activities. The Home Health Aides detailed occupation monitors the health status of individuals with disabilities or illness and addresses their health-related needs (such as changing bandages, dressing wounds, or administering medication) under the direction of offsite or intermittent onsite licensed nursing staff, and assists with daily activities such as feeding, bathing, toileting, or ambulation. Official scope text: Monitor the health status of an individual with disabilities or illness, and address their health-related needs, such as changing bandages, dressing wounds, or administering medication. Work is performed under the direction of offsite or intermittent onsite licensed nursing staff. Provide assistance with routine healthcare tasks or activities of daily living, such as feeding, bathing, toileting, or ambulation. May also help with tasks such as preparing meals, doing light housekeeping, and doing laundry depending on the patient's abilities. Core tasks include purchasing and preparing meals per prescribed diet plans (91), caring for patients (89), bathing patients (88), and recording care status and reporting (87). The U.S. wages and employment on this page come from BLS OOH and the OEWS 2025 data presented by O*NET and the BLS 2025—2035 employment projections (combined occupation scope); the precise occupational wage for mainland China was not obtained and is registered as a visible gap; China's care practice and information protection institutional boundaries are labeled separately."
+    "summary": "This U.S. category combines home health aides and personal care aides. Both may help with daily activities. The balance of health observation, directed tasks, practical support and companionship varies by role."
   }
 }

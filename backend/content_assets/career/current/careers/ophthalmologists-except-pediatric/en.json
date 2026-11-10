@@ -152,6 +152,9 @@
       "item:ophthalmologists-except-pediatric.path.seven-day-trial.6": {
         "status": "mapped"
       },
+      "item:ophthalmologists-except-pediatric.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:ophthalmologists-except-pediatric.profile.career-quick-answers-block.4": {
         "status": "mapped"
       },
@@ -13229,6 +13232,21 @@
             "onet-cert"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The adult referral lists a different eye from the image label. Prepare a note with both sources and the missing confirmation for the clinical reviewer."
+            ]
+          },
+          "id": "ophthalmologists-except-pediatric.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Prepare an adult eye referral for review",
+          "type": "notice"
         }
       ]
     },
@@ -15712,6 +15730,13 @@
         "id": "ophthalmologists-except-pediatric.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "ophthalmologists-except-pediatric.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15905,7 +15930,7 @@
       "text": "Non-pediatric ophthalmologist: work, wages, and entry paths"
     }
   },
-  "source_content_sha256": "e06da937216b23cf4a770980fda5e2cbaad054ab53a5a07e12908665f3c3663f",
+  "source_content_sha256": "70c8d9611766d610ab9bc42cc85e4d08722873f9789444d8779737977441d3a0",
   "subject": {
     "canonical_slug": "ophthalmologists-except-pediatric",
     "name": "Non-pediatric ophthalmologist",

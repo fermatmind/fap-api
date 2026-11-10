@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a36-changchun": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a36-putuo": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1269,7 +1275,7 @@
         "status": "mapped"
       },
       "item:film-and-video-editors.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:film-and-video-editors.path.interview-probation.1": {
         "status": "mapped"
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:film-and-video-editors.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:film-and-video-editors.sources.source-card.1": {
         "status": "mapped"
@@ -14156,36 +14162,12 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": {
-          "id": "film-and-video-editors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": {
-          "id": "film-and-video-editors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-task"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
         "ref": {
@@ -14220,20 +14202,8 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "film-and-video-editors.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
         "ref": {
@@ -14596,52 +14566,20 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": {
-          "id": "film-and-video-editors.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": {
-          "id": "film-and-video-editors.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            4
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": {
-          "id": "film-and-video-editors.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            5
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "film-and-video-editors.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
         "ref": {
@@ -20183,60 +20121,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "film-and-video-editors.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "film-and-video-editors.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23280,12 +23178,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS Table1.2, exact occupation 27-4032: employment of 39,400 in 2025, growth of 3.7% over 2025—2035, and 3,100 annual openings on average, including replacement needs. The OOH27-4030 combination has 72,000 workers, approximately 3% growth (2.6% in the table), and 5,600 annual openings on average; do not merge it with or substitute it for exact occupation values."
+              "BLS Table 1.2 projects U.S. employment for film and video editors (27-4032) from about 39,400 in 2025 to 40,800 in 2035 (+3.7%), with about 3,100 annual openings including replacements. Employment figures are rounded separately."
             ]
           },
           "id": "film-and-video-editors.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26626,12 +26524,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other regions and employment arrangements"
+              "Mainland China job postings"
             ]
           },
           "id": "film-and-video-editors.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a36-putuo",
+            "a36-changchun"
           ],
           "type": "prose"
         },
@@ -26640,12 +26539,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable monthly wage statistics were obtained for other regions and employment arrangements (full-time employment, project work, and freelancing). Cities, genres, and project sizes vary considerably; check each project."
+              "Shanghai Putuo listed six editing positions at Shanghai Miaoyu Network Technology. Work includes video pacing and quality for doctors’ accounts. It listed a bachelor’s degree or higher, preferred editing experience, and offered CNY 10,000–15,000 per month. Changchun New Area listed an editor at Baishi Datong for promotional films and profiles. It required a relevant bachelor’s degree or higher and at least two years of promotional-film editing experience. Pay was negotiable."
             ]
           },
           "id": "film-and-video-editors.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a36-putuo",
+            "a36-changchun"
           ],
           "type": "prose"
         },
@@ -26930,12 +26830,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3,100 openings per year"
+              "About 3,100 per year"
             ]
           },
           "id": "film-and-video-editors.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -27399,13 +27299,13 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
@@ -29165,30 +29065,22 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Material one: fictional editing assignment",
-                  "Provide genre and duration, available material lists and durations, director and client requirements, copyright and confidentiality restrictions, delivery formats and timecode standards, and available software and hardware as exercise inputs.",
-                  "Label units and missing items, and state that the materials are entirely fictional.",
-                  "List missing information that could affect judgments.",
-                  "State that the exercise uses fictional materials and represents no actual project, business, or employer.",
-                  "Checkable outputs: the order for organizing and reviewing materials, shot selection and narrative structure ideas, sound synchronization and effects considerations, a technical checking and export checklist, versioning and backup methods, and situations requiring director or producer confirmation.",
-                  "State the boundaries: copyright judgments and delivery compliance conclusions must be made by the production company, legal team, or technical supervisor."
+                  "Fictional delivery spec D3 requires 1080p at 25 fps. The V7 export is 1080p at 25 fps. The V8 export is 1080p at 30 fps.",
+                  "Both versions use music M2, with an empty clearance field. The A1/A2 shot order is marked pending in the review field.",
+                  "The technical lead checks exports, production verifies rights, and the director reviews shot order. Delivery requires all three records to be complete."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Material two: editing and delivery assignment (fictional)",
-                  "Write the order for organizing and reviewing materials, shot selection and narrative structure ideas, and sound synchronization and effects considerations, explaining which situations require director, producer, or technical supervisor confirmation.",
-                  "Exercise output: actionable editing and delivery guidelines."
+                  "Submit a one-page version check with the evidence, open items, owners and delivery status."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material three: reference approach excerpt (fictional)",
-                  "First review all materials and mark usable shots, then organize and trim according to script structure, and finally composite sound and picture and export to specifications.",
-                  "Leave unconfirmed licensing or specification issues as unknown and seek director or producer confirmation rather than relying on experience.",
-                  "Explain that the reference approach is an example, not the only correct method."
+                  "Finish your own answer first",
+                  "On day seven, open “Editing delivery reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
@@ -29204,7 +29096,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "Film and Video Editors | path",
+          "title": "Fictional edit delivery check",
           "type": "cards"
         },
         {
@@ -29312,50 +29204,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read a delivery specification or material list",
-                  "Extract a format or licensing requirement and write its implementation points."
+                  "Day 1",
+                  "Record the D3 delivery requirements."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: write material organization and marking guidelines",
-                  "Specify material classification, marking, and retrieval methods by genre."
+                  "Day 2",
+                  "List the settings by export version."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: create a structure and version record template",
-                  "List information to record for structural versions, revisions, and delivery."
+                  "Day 3",
+                  "Check the M2 clearance record."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: write technical checking guidelines",
-                  "Write checking points for resolution, frame rate, audio levels, and timecodes."
+                  "Day 4",
+                  "Check the A1/A2 review status."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: write licensing and confidentiality guidelines",
-                  "Write use requirements for material licensing and confidentiality restrictions."
+                  "Day 5",
+                  "List open items and their owners."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: invite someone to challenge your work",
-                  "Ask an experienced editor or postproduction manager to identify structural and delivery omissions, and record the feedback."
+                  "Day 6",
+                  "Finish your own one-page version check."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: write your judgment",
-                  "Write whether you want to continue, what you need to learn, and which judgments you cannot make yourself."
+                  "Day 7",
+                  "On day seven, open “Editing delivery reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29364,7 +29256,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "Film and Video Editors | path",
+          "title": "Seven-day paper exercise",
           "type": "timeline"
         },
         {
@@ -29372,20 +29264,16 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: can you identify format or licensing requirements and clearly explain implementation points?",
-              "Day 2: can you write reasonable material organization and marking methods?",
-              "Day 3: can you create a complete, traceable structure and version record template?",
-              "Day 4: can you write actionable technical checking points?",
-              "Day 5: can you write specific, actionable licensing and confidentiality guidelines?",
-              "Day 6: can you revise structural and delivery judgments after receiving corrections?",
-              "Day 7: can you identify abilities to develop and boundaries on your judgments?"
+              "Finish your own handoff on day six.",
+              "On day seven, open “Editing delivery reference (open after day six)” under Frequently asked questions and sources.",
+              "Review version, clearance, owner and delivery status."
             ]
           },
           "id": "film-and-video-editors.path.seven-day-decision.1",
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "Film and Video Editors | path",
+          "title": "Review your work",
           "type": "list"
         },
         {
@@ -30915,7 +30803,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "film-and-video-editors.market-signals.market-signal-card.17",
@@ -30985,7 +30873,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "39,400 workers (2025)"
+              "About 39,400 in 2025, projected 40,800 in 2035"
             ]
           },
           "id": "film-and-video-editors.market-signals.market-signal-card.22",
@@ -31531,13 +31419,13 @@
                 ]
               },
               {
-                "answer": "U.S. O*NET-SOC 27-4032.00, Film and Video Editors, corresponds to SOC 27-4032, belongs to Job Zone Four (considerable preparation, SVP 7.0 to <8.0), has interest code AC, and is not designated Bright Outlook. Median wages and percentiles are BLS OEWS estimates for this exact occupation (May 2025, presented through O*NET). Employment and growth use both O*NET's presentation of 2024—2034 projections and the BLS OOH film and video editors and camera operators group's 2025—2035 scope; this page labels them separately.",
+                "answer": "U.S. wages use May 2025 BLS OEWS estimates for 27-4032. Employment projections use the same occupation’s row in BLS Table 1.2. The combined camera operator and editor group is reported separately.",
                 "id": "film-and-video-editors.faq.3",
                 "question": "What is the scope of U.S. statistics?",
                 "question_key": "career.faq.film-and-video-editors.q3",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "bls-projections-2025-35",
+                  "onet-summary"
                 ]
               },
               {
@@ -31551,22 +31439,22 @@
                 ]
               },
               {
-                "answer": "O*NET's presentation of 2024—2034 projections: employment of approximately 43,500 (2024), projected average growth (3% to 4%), and approximately 3,600 annual openings on average (an annual average over the projection period, including replacement needs). The BLS OOH film and video editors and camera operators group (27-4030), 2025—2035 scope: approximately 72,000 jobs (2025), +3% (approximately +1,900 workers), and approximately 5,600 annual openings, mostly from replacement needs. Statistical coverage and periods differ; this page labels them separately without conversion.",
+                "answer": "BLS Table 1.2 projects U.S. employment for film and video editors (27-4032) from about 39,400 in 2025 to 40,800 in 2035 (+3.7%), with about 3,100 annual openings including replacements. Employment figures are rounded separately.",
                 "id": "film-and-video-editors.faq.5",
                 "question": "What is the U.S. employment outlook?",
                 "question_key": "career.faq.film-and-video-editors.q5",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics materials checked in this round cover industry categories. No national wage statistic precisely matching this occupation was obtained. This page uses average urban-unit wages in culture, sports, and entertainment (2025: non-private units CNY 129,447 per year; private units CNY 64,015 per year) as an industry proxy for context only. Neither industry averages nor individual recruitment quotations substitute for occupational wages.",
+                "answer": "Shanghai Putuo listed six editing positions at Shanghai Miaoyu Network Technology. Work includes video pacing and quality for doctors’ accounts. It listed a bachelor’s degree or higher, preferred editing experience, and offered CNY 10,000–15,000 per month. Changchun New Area listed an editor at Baishi Datong for promotional films and profiles. It required a relevant bachelor’s degree or higher and at least two years of promotional-film editing experience. Pay was negotiable. These notices describe two employers. A comparable mainland median for this occupation remains unavailable.",
                 "id": "film-and-video-editors.faq.6",
                 "question": "Are wage data available for mainland China?",
                 "question_key": "career.faq.film-and-video-editors.us-pay",
                 "source_refs": [
-                  "nbs-wages-2025"
+                  "a36-putuo",
+                  "a36-changchun"
                 ]
               },
               {
@@ -31608,6 +31496,12 @@
                   "bls-ooh-video-editors",
                   "internal-rubric"
                 ]
+              },
+              {
+                "answer": "V7’s 25 fps meets the specification. V8’s 30 fps does not. Keep both export records and send V8 to the technical lead for review. Log the missing M2 clearance and ask production to check the rights. Ask the director to confirm the A1/A2 order. Neither version is ready for delivery. Check four items: frame rate and version, clearance record, shot-order owner and delivery status.",
+                "id": "film-and-video-editors.faq.11",
+                "question": "Editing delivery reference (open after day six)",
+                "question_key": "career.faq.film-and-video-editors.11"
               }
             ]
           },
@@ -31710,18 +31604,6 @@
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
-              },
-              {
                 "entity": "Return to the Film and Video Editors career page",
                 "id": "navigation-6",
                 "relation": "related-evidence",
@@ -31750,7 +31632,7 @@
                 "details": [
                   "Official occupational scope: edit moving images on film, video, or other media, possibly working with producers or directors to organize footage for final production and possibly editing or synchronizing soundtracks.",
                   "Interest code AC; preparation level Job Zone Four (considerable preparation, SVP 7.0 to <8.0); education survey: bachelor's degree 65%, associate degree or other two-year qualification 17%, high school diploma or equivalent 16%. This occupation is not designated Bright Outlook.",
-                  "Wage and employment trends (citing BLS data): median hourly wage USD 36.26 and median annual wage USD 75,420 in 2025; employment of 43,500 in 2024; projected average growth (3% to 4%) over 2024—2034; approximately 3,600 annual openings on average. Major industries in 2024 were information and professional, scientific, and technical services."
+                  "The 2025 U.S. wage medians were $36.26 hourly and $75,420 annually. For employment projections, see BLS Table 1.2, row 27-4032."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31798,17 +31680,16 @@
                 "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Exact occupation 27-4032 (presented through O*NET): employment of 43,500 in 2024, projected average growth (3% to 4%) over 2024—2034, and approximately 3,600 annual openings on average.",
-                  "Occupational openings in BLS employment projections are annual averages over the projection period. This page therefore labels them as per year, not a cumulative ten-year total."
+                  "BLS Table 1.2 projects U.S. employment for film and video editors (27-4032) from about 39,400 in 2025 to 40,800 in 2035 (+3.7%), with about 3,100 annual openings including replacements. Employment figures are rounded separately."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
                 "limitation": "Projections do not equal actual outcomes. Annual openings include replacement needs and cannot be interpreted as individual hiring probabilities. The two projection scopes cover different periods.",
                 "market": "United States",
-                "name": "BLS: Occupational Projections and Characteristics Table (2024—2034 projections presented through O*NET; see also the 2025—35 projections table)",
-                "period": "2024—2034 projections as presented by O*NET OnLine; 2025—35 table; accessed 2026-09-20",
+                "name": "BLS Table 1.2: Film and Video Editors, 27-4032",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact occupation (SOC 27-4032)",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31925,6 +31806,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Shanghai Putuo listed six editing positions at Shanghai Miaoyu Network Technology. Work includes video pacing and quality for doctors’ accounts. It listed a bachelor’s degree or higher, preferred editing experience, and offered CNY 10,000–15,000 per month."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a36-putuo",
+                "limitation": "Individual notice.",
+                "market": "Mainland China",
+                "name": "Video editor job posting",
+                "period": "2026-10-10",
+                "publisher": "Shanghai Putuo District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://shpt.gov.cn/bm-ms/20261010/973597.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Changchun New Area listed an editor at Baishi Datong for promotional films and profiles. It required a relevant bachelor’s degree or higher and at least two years of promotional-film editing experience. Pay was negotiable."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a36-changchun",
+                "limitation": "Individual notice.",
+                "market": "Mainland China",
+                "name": "Video editor job posting",
+                "period": "2026-04-17",
+                "publisher": "Changchun New Area employment portal",
+                "scope": "recruitment_proxy",
+                "url": "https://rcjy.ccxq.gov.cn/mobile/content/jobs/show/14115.html"
               }
             ]
           },
@@ -34420,7 +34331,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet",
+            "id": "onet-work-context",
             "label": {
               "$link": "film-and-video-editors.risk.career-risk-cards.7",
               "block": "risk",
@@ -34785,6 +34696,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a36-putuo",
+            "posting-a36-changchun"
+          ],
           "sources_note": {
             "$item": "film-and-video-editors.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34937,7 +34852,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "2024—2034 Employment · Annual average openings",
+            "指标": "Average annual openings, 2025–2035",
             "数值": {
               "$item": "film-and-video-editors.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -35314,6 +35229,7 @@
         "heading": "Film and Video Editors Employment Outlook and Transitions to Related Occupations",
         "outlook_evidence": [
           {
+            "fact_ref": "us-growth-2025-2035",
             "geography": {
               "$item": "film-and-video-editors.market-signals.market-signal-card.9",
               "block": "market-signals",
@@ -35351,6 +35267,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "film-and-video-editors.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35359,6 +35276,7 @@
             }
           },
           {
+            "fact_ref": "us-employment-2025",
             "geography": {
               "$item": "film-and-video-editors.market-signals.market-signal-card.16",
               "block": "market-signals",
@@ -35396,6 +35314,7 @@
               "type": "prose"
             },
             "source_id": "bls",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "film-and-video-editors.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -35818,7 +35737,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Employment Projections (2024—2034) and BLS OOH Film and Video Editors and Camera Operators Group (2025—2035)",
+            "label": "U.S. BLS film and video editor employment projections (2025–2035)",
             "secondary_value": null,
             "value": {
               "$item": "film-and-video-editors.profile.onet-structured-fields-block.4",
@@ -36696,7 +36615,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36706,27 +36625,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "film-and-video-editors.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "film-and-video-editors.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -36925,36 +36824,36 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 43,500 workers (2024, BLS projection scope presented through O*NET); approximately 72,000 jobs in the BLS OOH film and video editors and camera operators group in 2025",
+        "display_value": "About 39,400 workers",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "U.S. employment size",
-        "occupation_scope": "Film and Video Editors (O*NET-SOC 27-4032.00)",
-        "period": "2024",
+        "occupation_scope": "U.S. Film and Video Editors (27-4032)",
+        "period": "2025",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Average growth (3% to 4%, 2024—2034, BLS projections presented through O*NET); +3% for the BLS OOH film and video editors and camera operators group over 2025—2035",
+        "display_value": "+3.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "U.S. employment change",
-        "occupation_scope": "Film and Video Editors (O*NET-SOC 27-4032.00)",
-        "period": "2024–2034 projection",
+        "occupation_scope": "U.S. Film and Video Editors (27-4032)",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 3,600 per year (2024—2034, BLS projection annual average, exact occupation 27-4032)",
+        "display_value": "About 3,100 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "U.S. annual average job openings",
-        "occupation_scope": "Film and Video Editors (O*NET-SOC 27-4032.00)",
-        "period": "2024–2034 projection",
+        "occupation_scope": "U.S. Film and Video Editors (27-4032)",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
@@ -37114,6 +37013,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Shanghai Putuo listed six editing positions at Shanghai Miaoyu Network Technology. Work includes video pacing and quality for doctors’ accounts. It listed a bachelor’s degree or higher, preferred editing experience, and offered CNY 10,000–15,000 per month.",
+        "fact_id": "posting-a36-putuo",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Video editor job posting",
+        "period": "2026-10-10",
+        "source_refs": [
+          "a36-putuo"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Changchun New Area listed an editor at Baishi Datong for promotional films and profiles. It required a relevant bachelor’s degree or higher and at least two years of promotional-film editing experience. Pay was negotiable.",
+        "fact_id": "posting-a36-changchun",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Video editor job posting",
+        "period": "2026-04-17",
+        "source_refs": [
+          "a36-changchun"
+        ]
       }
     ]
   },
@@ -37140,19 +37063,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment change (2024–2034)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment size (2024 projection scope)"
+        "label": "U.S. employment size (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. annual average job openings (2024–2034)"
+        "label": "U.S. annual average job openings (2025–2035)"
       },
       {
         "availability": "available",
@@ -37173,7 +37096,7 @@
       "text": "Film and Video Editors"
     }
   },
-  "source_content_sha256": "ce04358085ceb15eb1a1122f84de795ec27ce94954d506776d01d0f48a36a58d",
+  "source_content_sha256": "5b9a9f0d5948b9d1eb7324f2c62049186c6501f9dbe33cda13666f19379b628c",
   "subject": {
     "canonical_slug": "film-and-video-editors",
     "name": "Film and Video Editors",

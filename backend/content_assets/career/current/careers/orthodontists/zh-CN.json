@@ -173,6 +173,9 @@
       "item:orthodontists.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:orthodontists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:orthodontists.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12328,6 +12331,21 @@
             "bls-ooh-dentists-2026"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。同一复诊的模型与照片版本不一致。写给负责临床复核者的说明，区分已知日期、来源与需要确认的版本。"
+            ]
+          },
+          "id": "orthodontists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "整理正畸复诊差异",
+          "type": "notice"
         }
       ]
     },
@@ -14800,6 +14818,13 @@
         "id": "orthodontists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "orthodontists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15065,7 +15090,7 @@
       "text": "正畸医师"
     }
   },
-  "source_content_sha256": "744fa23ce5a7450ded258173b66017a909c5867bc48b50183ca9db5da8ad85e8",
+  "source_content_sha256": "e178520960bd32bf9b928a26563f36722ca203835bd551dbdf5c793ffdd013df",
   "subject": {
     "canonical_slug": "orthodontists",
     "name": "正畸医师",

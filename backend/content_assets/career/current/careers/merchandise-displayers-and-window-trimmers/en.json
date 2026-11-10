@@ -167,6 +167,9 @@
       "item:merchandise-displayers-and-window-trimmers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:merchandise-displayers-and-window-trimmers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:merchandise-displayers-and-window-trimmers.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -12294,6 +12297,21 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. A display plan places a stand at an aisle edge, but the site note has no clearance check. List two details to verify before changing the plan or asking the site lead to review."
+            ]
+          },
+          "id": "merchandise-displayers-and-window-trimmers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "title": "Reconcile a display plan with the floor",
+          "type": "notice"
         }
       ]
     },
@@ -14618,6 +14636,13 @@
         "id": "merchandise-displayers-and-window-trimmers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "merchandise-displayers-and-window-trimmers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -14859,7 +14884,7 @@
       "text": "Merchandise displayers and window trimmers: work content, U.S. wages, and entry"
     }
   },
-  "source_content_sha256": "26fa4e640a44ae3a111efe7c23b7b4f226c80e95b9b77acca7ed7f71c3a47a0c",
+  "source_content_sha256": "613c9412e3d0275a91415309f2526066a225cc2b38a2d36fd71e026a9db5b709",
   "subject": {
     "canonical_slug": "merchandise-displayers-and-window-trimmers",
     "name": "Merchandise displayers and window trimmers",

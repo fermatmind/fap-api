@@ -161,6 +161,9 @@
       "item:orthopedic-surgeons-except-pediatric.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:orthopedic-surgeons-except-pediatric.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:orthopedic-surgeons-except-pediatric.profile.definition-block.1": {
         "status": "mapped"
       },
@@ -13047,6 +13050,21 @@
             "onet-summary"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。成人转诊记录中，影像文件号和检查申请号未对应。写给骨科团队一条复核说明，区分已有材料和缺失链接。"
+            ]
+          },
+          "id": "orthopedic-surgeons-except-pediatric.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "核骨科手术评估资料",
+          "type": "notice"
         }
       ]
     },
@@ -15610,6 +15628,13 @@
         "id": "orthopedic-surgeons-except-pediatric.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "orthopedic-surgeons-except-pediatric.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15827,7 +15852,7 @@
       "text": "非儿科骨科外科医师｜职责、资格与薪资"
     }
   },
-  "source_content_sha256": "b2f6504840522239a42bf1832994ccfec7d13a52f2a6e4b51834ae9cf66701c4",
+  "source_content_sha256": "11f29e30835f72e53fe740a2b5998cdf4d576d42025ffef28f8c499f971db1e6",
   "subject": {
     "canonical_slug": "orthopedic-surgeons-except-pediatric",
     "name": "非儿科骨科外科医师",

@@ -143,6 +143,9 @@
       "item:medical-scientists-except-epidemiologists.path.entry-role-comparison.10": {
         "status": "pending_mapping"
       },
+      "item:medical-scientists-except-epidemiologists.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
       "item:medical-scientists-except-epidemiologists.path.interview-probation.11": {
         "status": "pending_mapping"
       },
@@ -169,6 +172,12 @@
       },
       "item:medical-scientists-except-epidemiologists.path.recruitment-sample.8": {
         "status": "pending_mapping"
+      },
+      "item:medical-scientists-except-epidemiologists.path.seven-day-decision.1": {
+        "status": "mapped"
+      },
+      "item:medical-scientists-except-epidemiologists.path.seven-day-trial.1": {
+        "status": "mapped"
       },
       "item:medical-scientists-except-epidemiologists.profile.definition-block.1": {
         "status": "mapped"
@@ -5689,52 +5698,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -5965,96 +6112,332 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.entries.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.03": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.04": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            3
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.05": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            4
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.06": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            5
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "data",
+            "entries",
+            6
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-decision.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -11972,7 +12355,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "直接判断：愿意围绕疾病与健康提出问题、反复核方法和数据并如实写限制，可进一步探索。安全试做只用本页完全虚构四行数字，公开或脱敏数据不自动具备研究许可。"
+              "如果你更需要迅速确定答案，或主要想做患者照护，选择时要谨慎。医学研究常需要回查方法，等更充分的证据再下结论。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.quick-decision.fermat-decision-card.1",
@@ -11983,7 +12366,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "观察行为：能否保留原值、复算并承认未知条件；真实研究还需训练、导师反馈与机构权限。本题只检验一次纸面作业。"
+              "到目录「09 入行、资格与职业发展」找《MS-15：核两项研究比较的凭证》，用约 10 分钟核虚构记录，再读题后参考。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.quick-decision.fermat-decision-card.2",
@@ -11994,7 +12377,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "愿意长期训练与接受方法质疑可继续；若不愿核对数据或面对不确定结论，先比较方法、协调或工程方向。兴趣不是录用或许可。"
+              "如果你喜欢把观察和解释分开、追溯方法变更，并在复核后修改结论，可以继续了解医学研究。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.quick-decision.fermat-decision-card.3",
@@ -12005,7 +12388,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "60分钟纸面题（编辑虚构）：四条非随机观察记录A1：X=1、Y=3；A2：X=3、Y=7；B1：X=1、Y=2；B2：X=3、Y=4。X、Y均无单位，不是患者、样本或临床指标。求两组Y均值、A减B的均值差，判断能否写成A导致Y上升；保留原值和计算、两条局限、需补的设计信息。无缺失值，不采集数据、不做显著性或功效计算。 参考解：A均值(3+7)/2=5，B均值(2+4)/2=3，A减B=2。只能描述这四条虚构记录；分组非随机、每组仅2条，抽样、时间顺序与混杂未说明，不能证明因果、疗效或显著性。需请求分组规则、测量含义与研究设计，不补造条件。10分钟读题、20分钟计算、20分钟写限制与请求、10分钟遮答案复算并记录纠错。"
+              "只使用第 09 节的虚构短题 MS-15 及独立七日新题 W-MS；均不涉及真人资料、实际临床结果或实验。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.quick-decision.fermat-decision-card.4",
@@ -12079,7 +12462,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "资料输入：19-1042官方任务/情境/IR/JobZone5、2025工资；O*NET2024—2034与BLS2025—2035预测分别展示，不能混期。"
+              "职业任务见 O*NET；美国 2025–2035 年就业预测采用 BLS 表 1.2。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.profile.definition-block.5",
@@ -12096,7 +12479,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "研究问题、合法数据与方法；教学题只用虚构数字。"
+              "研究问题、合法数据与方法；教学题只用虚构记录。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.profile.definition-block.6",
@@ -12239,7 +12622,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：用完全虚构数据集练习设计与分析。 仅用虚构题复算5/3/2；不称采用实测。"
+              "使用第 09 节的 MS-15 虚构记录，核对比较条件是否满足；缺失依据保留待核，不推断效果。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.ai-impact.ai-impact-table.2",
@@ -12388,7 +12771,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国全国精确范围为19-1042非流行病学；2025工资、当前2025—2035就业预测分别标注。"
+              "美国医学研究人员（不含流行病学家，19-1042）：2025 年 5 月年工资中位数为 103,410 美元。BLS 表 1.2 列出 2025 年 181,000 个岗位，2035 年预计 203,700 个（增长 12.6%），预计年均空缺 10,500 个，含替换需求。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.us-salary.career-snapshot-secondary-locale.1",
@@ -12418,7 +12801,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前O*NET与BLS同为2025—2035：19-1042就业181,000至203,700，官方13%、净增22,700、年均空缺10,500；是总体职业预测非AI归因，空缺含增长与替换，非当前在招或个人录用率，不猜基线更新原因。"
+              "当前O*NET与BLS同为2025—2035：19-1042就业181,000至203,700，12.6%（BLS 表 1.2；OOH 取整为 13%）、净增22,700、年均空缺10,500；是总体职业预测非AI归因，空缺含增长与替换，非当前在招或个人录用率，不猜基线更新原因。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.us-salary.career-snapshot-secondary-locale.3",
@@ -12570,7 +12953,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "60分钟纸面题（编辑虚构）：四条非随机观察记录A1：X=1、Y=3；A2：X=3、Y=7；B1：X=1、Y=2；B2：X=3、Y=4。X、Y均无单位，不是患者、样本或临床指标。求两组Y均值、A减B的均值差，判断能否写成A导致Y上升；保留原值和计算、两条局限、需补的设计信息。无缺失值，不采集数据、不做显著性或功效计算。 参考解：A均值(3+7)/2=5，B均值(2+4)/2=3，A减B=2。只能描述这四条虚构记录；分组非随机、每组仅2条，抽样、时间顺序与混杂未说明，不能证明因果、疗效或显著性。需请求分组规则、测量含义与研究设计，不补造条件。10分钟读题、20分钟计算、20分钟写限制与请求、10分钟遮答案复算并记录纠错。"
+              "只使用第 09 节的虚构短题 MS-15 及独立七日新题 W-MS；均不涉及真人资料、实际临床结果或实验。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.fit.riasec-fit-block.8",
@@ -12617,7 +13000,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "解释风险：四条题面仅能描述5/3/差2，非因果、显著性或疗效；真实结果另核设计。"
+              "解释风险：MS-15 只核比较所需的文档，不能证明因果、统计显著性或临床疗效。真实结果须另核研究设计。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.risk.career-risk-cards.3",
@@ -12742,7 +13125,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "作品（编辑建议）：保存四行题面、原值、均值5/3/差2的过程、两条局限和设计请求、首次稿与纠错稿；加一页60分钟任务日志，不包装成真实科研成果或伦理批准。"
+              "只使用第 09 节的虚构短题 MS-15 及独立七日新题 W-MS；均不涉及真人资料、实际临床结果或实验。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.path.recruitment-sample.7",
@@ -12753,7 +13136,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "七日探索（每天30—60分钟，只复用同一虚构题）：第1天读19-1042定义并记分类边界；第2天手算5/3/2；第3天写非随机和小样本局限；第4天写需补的设计信息；第5天遮答案重算并记错；第6天让他人检查原值/计算/因果限制；第7天整理作品、列训练与权限问题再决定下一步。本页只作职业探索。研究学位不自动授予临床诊疗、签字或研究批准权限；以研究为主通常无需执照或认证，实际行医、治疗试验患者等须相应医疗执照。真实活动依法域、机构、材料与资助条件核验。"
+              "只使用第 09 节的虚构短题 MS-15 及独立七日新题 W-MS；均不涉及真人资料、实际临床结果或实验。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.path.recruitment-sample.8",
@@ -12848,9 +13231,9 @@
             "rows": [
               [
                 "面试前准备",
-                "只用本页虚构四行，展示5/3/2及非因果限制",
-                "请他人挑战方法与解释",
-                "原值、计算、限制与纠错稿"
+                "使用第 09 节的 MS-15 虚构记录，核对比较条件是否满足；缺失依据保留待核，不推断效果。",
+                "按 MS-15 题后量规独立回核，同伴复核可选。",
+                "虚构来源记录、凭证便笺、一个交给项目负责人的核对问题和修订交接"
               ],
               [
                 "面试现场",
@@ -12961,6 +13344,127 @@
             "nih-dms"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "虚构材料：MS-15（约 10 分钟）",
+                  "一份模拟方案要求：比较练习数据前，结果定义须一致，且记录了方法版本。",
+                  "A：定义一致，记录了方法 v2。B：定义一致，方法版本空白。",
+                  "项目负责人决定结果是否可写进摘要；无任何参与者记录。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "任务与交付",
+                  "分别写两行凭证、拟议比较和待核项。",
+                  "给项目负责人写一个核对问题。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "题后参考",
+                  "A 满足两项文档条件；B 缺方法版本，暂不比较。",
+                  "请项目负责人对照原始方法记录核 B 的版本。"
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "独立自核量规",
+                  "核两个编号和两项条件，区分拟议比较与已获批准的结果。"
+                ]
+              }
+            ]
+          },
+          "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+          "title": "MS-15：核两项研究比较的凭证",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "第 1 天",
+                  "开始新题 W-MS。另一个虚构小组要求 K6、K7 有分析计划日期，且结果单位一致才能比较。抄下两项条件。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "第 2 天",
+                  "K6 单位为分钟，K7 为秒。分别抄下单位，把换算规则列为待复核。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "第 3 天",
+                  "K6 有带日期的计划，K7 有计划文件但没日期。列已有证据，不猜日期。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "第 4 天",
+                  "本题由指定方法复核人核对凭证。给该角色各写一个问题：核 K7 的计划日期、核单位换算规则。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "第 5 天",
+                  "拟给指定方法复核人的交接，分开写观察、待核问题和可比较的前提。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "第 6 天",
+                  "独立按第 1 天规则、第 2–3 天凭证和第 4 天的复核角色回核便笺；同伴反馈可选。"
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "第 7 天",
+                  "写下你是否喜欢追溯方法并暂缓结论，再定一项要练的能力。"
+                ]
+              }
+            ]
+          },
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+          "title": "七天纸面体验：独立新题",
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "我记录了两个编号。",
+              "我核对了两项条件。",
+              "我把缺失证据保留为待核。",
+              "我写清了复核责任。",
+              "我没有使用真实标本或记录。",
+              "我可以独立完成第 6 天。",
+              "我确定了一项要练的能力。"
+            ]
+          },
+          "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+          "title": "七天后的判断问题",
+          "type": "list"
         }
       ]
     },
@@ -12975,7 +13479,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS新期2025—2035：181,000→203,700人，净增22,700，官方13%，年均空缺10,500。总体就业预测，非AI归因；净增为端点相减，官方整数比例单列，空缺含增长与替换，不是当前招聘数或录用概率。"
+              "BLS新期2025—2035：181,000→203,700 个岗位，净增22,700，12.6%（BLS 表 1.2；OOH 取整为 13%），年均空缺10,500。总体就业预测，非AI归因；净增为端点相减，手册取整前的增幅单列，空缺含增长与替换，不是当前招聘数或录用概率。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.market-signals.market-signal-card.1",
@@ -12989,7 +13493,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "当前O*NET与BLS为同一2025—2035预测。旧2024—2034仅是冻结共享记录的历史期，选定模块不把两期拼成连续序列或个人保证。"
+              "职业任务见 O*NET；本页美国岗位预测采用 BLS 表 1.2 的 2025–2035 期。职业总体预测不是个人录用概率。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.market-signals.market-signal-card.2",
@@ -13014,7 +13518,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑工具试验建议：只把本页四行虚构数字交给工具列计算与限制，人工复算5/3/2并拒绝因果夸大。O*NET职责和招聘软件提及只提供任务背景；ILO2025全球任务暴露、WHO2021卫生AI治理概览均不证明本职业机构采用率、裁员比例或替代日期。真实研究先核机构工具权限与数据规则。"
+              "纸面工具练习只使用 MS-15 虚构资料。核对原始记录，区分有凭证的比较与缺乏依据的因果判断。O*NET职责和招聘软件提及只提供任务背景；ILO2025全球任务暴露、WHO2021卫生AI治理概览均不证明本职业机构采用率、裁员比例或替代日期。真实研究先核机构工具权限与数据规则。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.market-signals.market-signal-card.4",
@@ -13079,7 +13583,7 @@
                 ]
               },
               {
-                "answer": "编辑工具试验建议：只把本页四行虚构数字交给工具列计算与限制，人工复算5/3/2并拒绝因果夸大。O*NET职责和招聘软件提及只提供任务背景；ILO2025全球任务暴露、WHO2021卫生AI治理概览均不证明本职业机构采用率、裁员比例或替代日期。真实研究先核机构工具权限与数据规则。",
+                "answer": "AI 可辅助归整文献、起草代码或摘要、提示文档缺项。研究人员仍须核原证、选择并记录可用的比较方法，对解释和适用的审查负责。不得把敏感研究资料上传到未经批准的工具。",
                 "id": "medical-scientists-except-epidemiologists.faq.4",
                 "question": "AI 会如何影响这个职业的工作？",
                 "question_key": "career.faq.medical-scientists-except-epidemiologists.4",
@@ -13110,12 +13614,13 @@
                 ]
               },
               {
-                "answer": "美国全国19-1042、2025工资五分位年薪/时薪：第10为64,800/31.15，第25为79,840/38.39，中位为103,410/49.72，第75为139,380/67.01，第90为177,780/85.47美元。分位是统计位置，不是起薪、到手收入或个人保证，时薪来自官方展示而非个人工时换算。",
+                "answer": "美国医学研究人员（不含流行病学家，19-1042）：2025 年 5 月年工资中位数为 103,410 美元。BLS 表 1.2 列出 2025 年 181,000 个岗位，2035 年预计 203,700 个（增长 12.6%），预计年均空缺 10,500 个，含替换需求。",
                 "id": "medical-scientists-except-epidemiologists.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.medical-scientists-except-epidemiologists.7",
                 "source_refs": [
-                  "onet-wages"
+                  "onet-wages",
+                  "bls-table-1-2"
                 ]
               },
               {
@@ -13143,7 +13648,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "本轮核19-1042的14任务/完整情境/IR/JobZone5、36/25/25教育、2025全国五分位年薪/时薪及BLS五细行业工资，正确保持并补第五行业行；当前O*NET已与BLS同2025—2035，181000至203700/13%/净增22700/年均10500，行业更新35/33/21/11。15软件提及、15认证、3116混合课程核一致，课程供数年份本轮补取得；均非GenAI采用/岗位结果或资格认可。NBS六个相关行业均值本批已核，仅税前年平均参考；精确职业缺口保持。复用本轮实读WHO/CDC概览、NIH适用概览及45CFR46相关条款，不称完整指南。原5/3/2四行题/答案/作品/七日保持，共享旧期事实和来源受保护，未独立复核。"
+              "费马测试编辑部：2026 年 11 月 9 日复核来源口径与实例；体验使用虚构材料。"
             ]
           },
           "id": "medical-scientists-except-epidemiologists.sources.boundary-notice.2",
@@ -13178,28 +13683,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "医学科学家（不含流行病学家）",
+                "entity": "MBTI 人格测试",
                 "id": "navigation-2",
-                "relation": "career.section",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "医学科学家（不含流行病学家）",
-                "id": "navigation-3",
-                "relation": "career.section",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "医学科学家（不含流行病学家）",
-                "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "医学科学家（不含流行病学家）",
-                "id": "navigation-5",
+                "entity": "大五人格测试",
+                "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
+              },
+              {
+                "entity": "临床检验技术人员",
+                "id": "navigation-4",
+                "relation": "career.section",
+                "url": "/zh/career/jobs/clinical-laboratory-technologists-and-technicians"
+              },
+              {
+                "entity": "临床研究协调员",
+                "id": "navigation-5",
+                "relation": "career.section",
+                "url": "/zh/career/jobs/clinical-research-coordinators"
               },
               {
                 "entity": "医学科学家（不含流行病学家）",
@@ -13237,7 +13742,7 @@
                 "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
                 "period": "ILO Working Paper 140, 2025; accessed 2026-08-31",
                 "publisher": "International Labour Organization",
-                "scope": "contextual",
+                "scope": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -13252,7 +13757,7 @@
                 "name": "企业薪酬调查信息",
                 "period": "2024 enterprise wage survey information published 2025; accessed 2026-08-31",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "parent_occupation_proxy",
+                "scope": "企业薪酬调查信息",
                 "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
               },
               {
@@ -13406,16 +13911,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/19-1042.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "专业科学技术37%、医疗社会援助33%、教育19%、其他11%；就业分布非工资"
+                  "O*NET 行业分布：专业、科学和技术服务 35%，医疗保健和社会援助 33%，教育服务 21%，其他行业（含制造业）11%。这是就业分布，不是工资。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "O*NET 行业分布：专业、科学和技术服务 35%，医疗保健和社会援助 33%，教育服务 21%，其他行业（含制造业）11%。这是就业分布，不是工资。",
                 "market": "US",
                 "name": "Industries: 19-1042.00 - Medical Scientists, Except Epidemiologists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "2026 年 11 月 9 日查阅",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-1042.00"
@@ -13498,16 +14003,16 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "O*NET旧期2024—2034：165,300→179,600人，净增14,300，官方9%，年均空缺9,600。"
+                  "O*NET 链接至美国 19-1042 就业趋势。本页 2025–2035 精确数值取自 BLS 表 1.2。"
                 ],
                 "evidence_type": "official occupation and labor-market source",
                 "id": "onet-old-trends",
-                "limitation": "O*NET旧期2024—2034：165,300→179,600人，净增14,300，官方9%，年均空缺9,600。",
+                "limitation": "O*NET 链接至美国 19-1042 就业趋势。本页 2025–2035 精确数值取自 BLS 表 1.2。",
                 "market": "US",
-                "name": "O*NET19-1042旧期趋势",
-                "period": "2024—2034",
+                "name": "O*NET 美国就业趋势（19-1042）",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "O*NET 链接至美国 19-1042 就业趋势。本页 2025–2035 精确数值取自 BLS 表 1.2。",
                 "url": "https://www.onetonline.org/link/localtrends/19-1042.00"
               },
               {
@@ -13520,9 +14025,9 @@
                 "limitation": "表2非私营、表5私营及附注统计范围/工资定义；研发、医院及院校雇主场景匹配，仅行业税前均值",
                 "market": "CN",
                 "name": "国家统计局2025相关行业工资",
-                "period": "2025年；2026发布",
+                "period": "2025 年数据（2026 年 5 月 15 日发布）",
                 "publisher": "国家统计局",
-                "scope": "industry_proxy",
+                "scope": "国家统计局2025相关行业工资",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
@@ -13537,7 +14042,7 @@
                 "name": "CDC BMBL概览",
                 "period": "第6版；概览页面更新2026-03-18",
                 "publisher": "Centers for Disease Control and Prevention",
-                "scope": "contextual",
+                "scope": "CDC BMBL概览",
                 "url": "https://www.cdc.gov/labs/bmbl/index.html"
               },
               {
@@ -13552,7 +14057,7 @@
                 "name": "45 CFR46适用及同意条款",
                 "period": "现行45 CFR46；查阅2026-10-03",
                 "publisher": "eCFR / U.S. Department of Health and Human Services",
-                "scope": "contextual",
+                "scope": "45 CFR46适用及同意条款",
                 "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-A/part-46"
               },
               {
@@ -13567,7 +14072,7 @@
                 "name": "NIH DMS政策概览",
                 "period": "2023-01-25政策生效；按申请/协议日期适用",
                 "publisher": "National Institutes of Health",
-                "scope": "contextual",
+                "scope": "NIH DMS政策概览",
                 "url": "https://grants.nih.gov/policy-and-compliance/policy-topics/sharing-policies/dms/policy-overview"
               },
               {
@@ -13582,7 +14087,7 @@
                 "name": "WHO卫生AI治理概览",
                 "period": "2021出版概览",
                 "publisher": "World Health Organization",
-                "scope": "contextual",
+                "scope": "WHO卫生AI治理概览",
                 "url": "https://www.who.int/publications/i/item/9789240029200"
               },
               {
@@ -13736,6 +14241,32 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "details": [
+                  "美国医学研究人员（不含流行病学家，19-1042）"
+                ],
+                "id": "bls-table-1-2",
+                "limitation": "美国医学研究人员（不含流行病学家，19-1042）",
+                "market": "US",
+                "name": "BLS 表 1.2（19-1042）",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "美国医学研究人员（不含流行病学家，19-1042）",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "details": [
+                  "副研究员或助理研究员公告要求博士学位，列出研究、教学、项目和指导任务，仅代表该机构。"
+                ],
+                "id": "cn-shu-medical-research-position",
+                "limitation": "副研究员或助理研究员公告要求博士学位，列出研究、教学、项目和指导任务，仅代表该机构。",
+                "market": "CN",
+                "name": "上海大学医学院科学研究岗位",
+                "period": "2026",
+                "publisher": "Shanghai University",
+                "scope": "上海大学医学院科学研究岗位",
+                "url": "https://jobs.shu.edu.cn/Ads/Ads?a=921ef790-92ec-4eac-b670-b2d098959bd3"
               }
             ]
           },
@@ -13817,17 +14348,12 @@
         "rows": [
           {
             "关键区别": {
-              "$item": "medical-scientists-except-epidemiologists.direction-comparison.adjacent-career-comparison-table.4",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
               "$item": "medical-scientists-except-epidemiologists.direction-comparison.adjacent-career-comparison-table.5",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
+            "更适合什么选择": "如果更想研究人群中的疾病与伤害分布，可优先探索这一方向。",
             "核心工作与产出": "调查人群疾病与伤害的分布与原因，产出监测与流行病学研究报告。",
             "职业方向": "流行病学家"
           },
@@ -13858,7 +14384,18 @@
           {
             "关键区别": "名称相近不等于职责、资格与授权可互换。",
             "更适合什么选择": "按资格与授权链逐项核对。",
-            "核心工作与产出": "生物化学/物理机制、常规医学检验等分别有官方范围，另核训练与权限",
+            "核心工作与产出": {
+              "$join": [
+                "生物化学/物理机制、常规医学检验等分别有官方范围，另核训练与权限",
+                {
+                  "$item": "medical-scientists-except-epidemiologists.direction-comparison.adjacent-career-comparison-table.4",
+                  "block": "direction-comparison",
+                  "copy_key": "career.item.adjacent-career-comparison-table",
+                  "type": "prose"
+                }
+              ],
+              "separator": "\n"
+            },
             "职业方向": "关联与相关职业"
           }
         ],
@@ -13923,7 +14460,7 @@
             }
           }
         ],
-        "answer": "编辑工具试验建议：只把本页四行虚构数字交给工具列计算与限制，人工复算5/3/2并拒绝因果夸大。O*NET职责和招聘软件提及只提供任务背景；ILO2025全球任务暴露、WHO2021卫生AI治理概览均不证明本职业机构采用率、裁员比例或替代日期。真实研究先核机构工具权限与数据规则。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
+        "answer": "纸面工具练习只使用 MS-15 虚构资料。核对原始记录，区分有凭证的比较与缺乏依据的因果判断。O*NET职责和招聘软件提及只提供任务背景；ILO2025全球任务暴露、WHO2021卫生AI治理概览均不证明本职业机构采用率、裁员比例或替代日期。真实研究先核机构工具权限与数据规则。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
         "authority_links": [
           {
             "来源": "O*NET19-1042摘要",
@@ -14006,7 +14543,7 @@
             "使用限制": "总体就业预测，非AI归因",
             "来源": "BLS精确职业预测",
             "研究对象": "2025—2035美国19-1042",
-            "结论": "181,000→203,700、官方13%、年均空缺10,500",
+            "结论": "181,000→203,700、12.6%（BLS 表 1.2；OOH 取整为 13%）、年均空缺10,500",
             "链接": "https://www.bls.gov/ooh/life-physical-and-social-science/medical-scientists.htm"
           },
           {
@@ -14020,14 +14557,14 @@
             "使用限制": "总体就业预测，与BLS同一期，非AI归因或个人概率",
             "来源": "O*NET当前全国趋势",
             "研究对象": "2025—2035美国19-1042",
-            "结论": "181,000至203,700、13%、净增22,700、年均空缺10,500",
+            "结论": "181,000至203,700、12.6%（BLS 表 1.2；OOH 取整为 13%）、净增22,700、年均空缺10,500",
             "链接": "https://www.onetonline.org/link/localtrends/19-1042.00"
           }
         ],
         "heading": "医学科学家的研究任务与 AI 边界",
         "method_cards": [
           {
-            "含义": "编辑方案：工具辅助本页虚构题计算、比对或草稿；真实研究先确认工具能力与机构权限，不声称普遍采用。",
+            "含义": "编辑方案：工具可辅助归整两条虚构记录并提示待核的方法文档；真实研究先确认工具能力与机构权限，不声称普遍采用。",
             "概念": "任务层面的可被辅助能力"
           },
           {
@@ -14053,13 +14590,13 @@
             "问题": "软件比例是采用率吗？"
           },
           {
-            "回答": "编辑虚构非随机四行，仅描述5/3/2，不能证明疗效",
+            "回答": "有凭证的比较也不能据此证明因果。MS-15 只核两项文档条件，没有临床证据。",
             "来源": "所列职业来源；应用判断为编辑建议",
             "链接": "https://www.onetonline.org/link/summary/19-1042.00",
-            "问题": "题目差2能当因果吗？"
+            "问题": "有凭证的比较能证明因果吗？"
           },
           {
-            "回答": "13%是总体职业预测，非AI归因",
+            "回答": "BLS 表 1.2 的 12.6% 是总体职业岗位预测，不能归因于 AI。",
             "来源": "所列职业来源；应用判断为编辑建议",
             "链接": "https://www.bls.gov/ooh/life-physical-and-social-science/medical-scientists.htm",
             "问题": "预测增长是AI效应吗？"
@@ -14077,7 +14614,7 @@
             "问题": "工具可以给研究许可吗？"
           },
           {
-            "回答": "只用虚构题并人工复算；真实研究另核机构权限和适用规则",
+            "回答": "只用虚构记录并对照原始记录核比较条件；真实研究另核机构权限和适用规则",
             "来源": "所列职业来源；应用判断为编辑建议",
             "链接": "https://www.onetonline.org/link/summary/19-1042.00",
             "问题": "如何开始工具演练？"
@@ -14198,7 +14735,7 @@
         },
         "competence_ladder": [
           {
-            "description": "核问题、数据来源与使用条件，教学题只用虚构数字",
+            "description": "核问题、数据来源与使用条件，教学题只用虚构记录",
             "stage": "核对输入"
           },
           {
@@ -14295,6 +14832,12 @@
               "item": "medical-scientists-except-epidemiologists.source-register.published.1"
             },
             "scope": "NIH覆盖科学数据研究，按政策日期/共享限制核"
+          },
+          {
+            "href": "https://jobs.shu.edu.cn/Ads/Ads?a=921ef790-92ec-4eac-b670-b2d098959bd3",
+            "id": "cn-shu-medical-research-position",
+            "label": "上海大学医学院科学研究岗位",
+            "scope": "副研究员或助理研究员公告要求博士学位，列出研究、教学、项目和指导任务，仅代表该机构。"
           }
         ],
         "tracks": [
@@ -14958,12 +15501,12 @@
           },
           {
             "指标": "就业人数（2025→2035）",
-            "数值": "181,000→203,700人",
+            "数值": "181,000→203,700 个岗位",
             "说明": "BLS总体就业预测，非AI归因；不代表当前招聘或个人概率"
           },
           {
             "指标": "就业增长及净增（2025—2035）",
-            "数值": "官方13%；净增22,700人",
+            "数值": "12.6%（BLS 表 1.2；OOH 取整为 13%）；净增22,700 个岗位",
             "说明": "BLS总体就业预测，非AI归因；不代表当前招聘或个人概率"
           },
           {
@@ -15017,7 +15560,7 @@
           }
         ],
         "factors_heading": "影响实际报价的因素",
-        "growth": "13%（2025—2035）；非AI归因或个人保证",
+        "growth": "12.6%，2025–2035 年预计增幅",
         "heading": "医学科学家（不含流行病学家）的美国薪资与就业数据边界",
         "industry_heading": "行业与岗位差异",
         "industry_period": "2025年5月",
@@ -15126,7 +15669,7 @@
           "type": "prose"
         },
         "summary": "适合愿意提出可检验问题、设计并执行研究、在不确定中坚持数据与伦理规范，并能长期投入论文与基金工作的人。",
-        "title": "医学科学家适合什么样的人？"
+        "title": "谁可能适合做医学研究人员（不含流行病学家）？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -15160,7 +15703,7 @@
             "label": "就业预测与统计边界"
           },
           {
-            "href": "#career-visual-group-market-signals",
+            "href": "#career-visual-group-direction-comparison",
             "label": "比较相关职业方向"
           }
         ],
@@ -15224,12 +15767,12 @@
           {
             "geography": "美国全国",
             "horizon": "2025—2035",
-            "interpretation": "总体就业预测，非AI归因；净增22,700、官方13%分别解释",
+            "interpretation": "总体就业预测，非AI归因；净增22,700、12.6%（BLS 表 1.2；OOH 取整为 13%）分别解释",
             "limitation": "精确职业统计，不构成个人概率，预测非AI归因",
             "metric": "就业规模与变化",
             "occupation_scope": "19-1042医学科学家（不含流行病学家）",
             "source_id": "bls",
-            "value": "2025 年约 181,000 人，2035 年预计约 203,700 人"
+            "value": "2025 年约 181,000 个岗位，2035 年预计约 203,700 个岗位"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15352,13 +15895,13 @@
             "alternate_value": null,
             "label": "美国就业（2025）",
             "secondary_value": null,
-            "value": "181,000人（本职业）"
+            "value": "181,000 个岗位（本职业）"
           },
           {
             "alternate_value": null,
             "label": "美国增长（2025—2035）",
             "secondary_value": null,
-            "value": "官方13%；净增22,700；非个人录用保证"
+            "value": "12.6%（BLS 表 1.2；OOH 取整为 13%）；净增22,700；非个人录用保证"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15433,7 +15976,7 @@
             "watchout": "类型标签不构成科研协作或伦理判断能力证据。"
           },
           {
-            "answer": "看题目计算和方法限制，不设职业IQ阈值",
+            "answer": "回看你在 MS-15 如何追溯证据、写清比较限制；不能据此设定职业 IQ 门槛。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "前往职业兴趣试验，设计观察",
             "evidence_level": "编辑自查；非本职业效度证据",
@@ -15543,11 +16086,11 @@
         "heading": "适配信号、人格工具边界与实际使用方法",
         "questions": [
           {
-            "answer": "60分钟纸面题（编辑虚构）：四条非随机观察记录A1：X=1、Y=3；A2：X=3、Y=7；B1：X=1、Y=2；B2：X=3、Y=4。X、Y均无单位，不是患者、样本或临床指标。求两组Y均值、A减B的均值差，判断能否写成A导致Y上升；保留原值和计算、两条局限、需补的设计信息。无缺失值，不采集数据、不做显著性或功效计算。",
+            "answer": "只使用第 09 节的虚构短题 MS-15 及独立七日新题 W-MS；均不涉及真人资料、实际临床结果或实验。",
             "question": "如何开始？"
           },
           {
-            "answer": "参考解：A均值(3+7)/2=5，B均值(2+4)/2=3，A减B=2。只能描述这四条虚构记录；分组非随机、每组仅2条，抽样、时间顺序与混杂未说明，不能证明因果、疗效或显著性。需请求分组规则、测量含义与研究设计，不补造条件。10分钟读题、20分钟计算、20分钟写限制与请求、10分钟遮答案复算并记录纠错。",
+            "answer": "逐条核结果定义是否一致、方法版本有无记录，再对照第 09 节题后参考，并核清谁能批准使用结果。",
             "question": "怎样检查答案？"
           },
           {
@@ -15555,7 +16098,7 @@
             "question": "纸面题证明胜任吗？"
           },
           {
-            "answer": "公开不自动授权，本练习只用虚构数字",
+            "answer": "公开不自动授权，本练习只用虚构记录",
             "question": "能使用公开数据吗？"
           },
           {
@@ -15567,7 +16110,7 @@
             "question": "需要统一博士后吗？"
           },
           {
-            "answer": "保留原值、5/3/2、限制、设计请求和纠错稿",
+            "answer": "保留虚构来源记录、第一版比较便笺、待核问题和修订稿。注明是纸面练习样稿，不使用真人资料。",
             "question": "如何整理作品？"
           },
           {
@@ -15717,7 +16260,7 @@
             "type": "prose"
           },
           "source": "O*NET19-1042；BLS精确职业；国家统计局相关行业均值；规则按适用范围",
-          "updated_at": "本轮查阅2026-10-11"
+          "updated_at": "2026 年 11 月 9 日复核"
         },
         "note": "证据只支持医学科学家（不含流行病学家）在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15729,7 +16272,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "英文MBTI探索"
+            "label": "MBTI 人格测试"
           },
           {
             "href": {
@@ -15739,7 +16282,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "英文大五探索"
+            "label": "大五人格测试"
           },
           {
             "href": {
@@ -15749,7 +16292,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "中文MBTI探索"
+            "label": "临床检验技术人员"
           },
           {
             "href": {
@@ -15759,7 +16302,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "中文大五探索"
+            "label": "临床研究协调员"
           }
         ]
       },
@@ -15858,6 +16401,27 @@
         "id": "medical-scientists-except-epidemiologists.path.recruitment-sample.8",
         "location": "entry_decisions",
         "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "medical-scientists-except-epidemiologists.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "medical-scientists-except-epidemiologists.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "medical-scientists-except-epidemiologists.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
       }
     ],
     "path": {
@@ -15985,38 +16549,38 @@
       },
       {
         "derivation": null,
-        "display_value": "165,300 人（2024）",
+        "display_value": "181,000 个岗位 — 美国医学研究人员（不含流行病学家，19-1042）",
         "fact_id": "employment",
         "market": "美国",
-        "measure": "2024 年就业规模",
-        "occupation_scope": "O*NET 19-1042.00 本职业口径",
-        "period": "2024；查阅 2026-09-25",
+        "measure": "181,000 个岗位",
+        "occupation_scope": "美国医学研究人员（不含流行病学家，19-1042）",
+        "period": "2025",
         "source_refs": [
-          "onet-old-trends"
+          "bls-table-1-2"
         ]
       },
       {
-        "derivation": "O*NET 全国就业趋势页：2024—2034 年预计增长约 9%。",
-        "display_value": "远高于平均（约 9%，2024—2034）",
+        "derivation": null,
+        "display_value": "12.6% 预计岗位增幅 — 美国医学研究人员（不含流行病学家，19-1042）",
         "fact_id": "growth",
         "market": "美国",
-        "measure": "就业增长预测",
-        "occupation_scope": "O*NET 19-1042.00 本职业口径",
-        "period": "2024—2034；查阅 2026-09-25",
+        "measure": "12.6% 预计岗位增幅",
+        "occupation_scope": "美国医学研究人员（不含流行病学家，19-1042）",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-old-trends"
+          "bls-table-1-2"
         ]
       },
       {
-        "derivation": "含替换需求。",
-        "display_value": "约 9,600 个/年（2024—2034）",
+        "derivation": null,
+        "display_value": "10,500 个预计年均空缺 — 美国医学研究人员（不含流行病学家，19-1042）",
         "fact_id": "openings",
         "market": "美国",
-        "measure": "预计职位空缺（年均）",
-        "occupation_scope": "O*NET 19-1042.00 本职业口径",
-        "period": "2024—2034；查阅 2026-09-25",
+        "measure": "10,500 个预计年均空缺",
+        "occupation_scope": "美国医学研究人员（不含流行病学家，19-1042）",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-old-trends"
+          "bls-table-1-2"
         ]
       },
       {
@@ -16062,31 +16626,31 @@
         "availability": "available",
         "fact_ref": "us-median",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国 19-1042 年工资中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国 19-1042 预计岗位增幅（2025–2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国 19-1042 2025 年岗位数"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国 19-1042 预计年均空缺（2025–2035 年）"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆：未核实本职业全国精确工资"
       }
     ]
   },
@@ -16094,14 +16658,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "医学科学家（不含流行病学家）（O*NET 19-1042.00）就人类疾病与健康开展临床调查与实验研究并分析数据。美国 BLS 2025 年中位年薪 103,410 美元，2024 年就业约 165,300 人。含工作情境、风险与入行路径。"
+      "text": "了解医学研究人员的研究任务、美国工资与岗位数据、中国大陆岗位样本，并用纸面练习核对比较证据。"
     },
     "title": {
       "availability": "available",
       "text": "医学科学家（不含流行病学家）：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "379df6caa86da47706a6ef8a97a3d4c8fe02dced8cd85df1b9efd7fd68482205",
+  "source_content_sha256": "564de05a43ce99b18ad3d019617a5ba54566df2233f2037e2279951127035add",
   "subject": {
     "canonical_slug": "medical-scientists-except-epidemiologists",
     "name": "医学科学家（不含流行病学家）",

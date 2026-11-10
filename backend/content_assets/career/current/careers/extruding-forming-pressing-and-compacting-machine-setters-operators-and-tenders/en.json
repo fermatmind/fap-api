@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a44-rongchang": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a44-yuechi": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23075,7 +23041,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "FT350 is entirely fictional: product Z, batch CP350, with the item's closed mass interval 98—102g. P1 batch CP350, mass 100g, appearance not recorded; P2 batch CP350, mass 103g, appearance as written 'rectangular'; P3 batch CP350, mass missing, appearance as written 'chipped edge'. Only verify the item's mass range and transcribe appearance; do not judge real conformity or equipment condition."
+              "Use the three FT350 paper records to check the mass range, copy the appearance entries, flag open items and record what changes in the variant."
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.quick-decision.fit-decision-checklist.2",
@@ -26647,12 +26613,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other cities"
+              "Rongchang and Hechuan job postings"
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a44-rongchang",
+            "a44-yuechi"
           ],
           "type": "prose"
         },
@@ -26661,12 +26628,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable monthly salary statistic for this occupation in other cities was obtained; differences across regions and product types are large and must be checked by work location."
+              "Chongqing Weimei Ceramics listed four press operator openings, junior middle school or above, and rotating shifts. It accepted applicants without experience. The pay cell showed 4,500–5,000, with no pay period stated in that row. A Sichuan–Chongqing recruitment list from Yuechi County quoted CNY 4,000–8,000 per month for a glass press operator at Xingyuan Glassware in Hechuan, Chongqing. It asked for at least three years of glass press experience and listed blowing and maintenance separately. The samples cover ceramic and glass presses with different experience requirements. Check pay periods, shifts and current openings before comparing them."
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a44-rongchang",
+            "a44-yuechi"
           ],
           "type": "prose"
         },
@@ -27424,13 +27392,13 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
@@ -27812,7 +27780,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "In FT350, preserve the P1 unknown appearance, the P2 out-of-range mass, and the P3 missing mass, and do not guess on-site handling",
+              "Use the three FT350 paper records to check the mass range, copy the appearance entries, flag open items and record what changes in the variant.",
               "Able to accept independent review of the original records and the verification table"
             ]
           },
@@ -28337,7 +28305,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "FT350 only needs to compare the g-unit closed interval: 100 is within 98—102, 103 exceeds it, and the missing entry stays unknown; on day 5 only P3=99 is added as within range. A reviewable document judgment does not equal real weighing, machine adjustment, or quality qualifications."
+              "Use the three FT350 paper records to check the mass range, copy the appearance entries, flag open items and record what changes in the variant."
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.fit.personality-fit-block.52",
@@ -28367,7 +28335,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The Enneagram is only a reflection entry point and type is not used to judge suitability. Observe whether FT350 preserves the P1 unknown, the P2 out-of-range item, the P3 original text, and accepts review; real training and environment are checked separately."
+              "Use the three FT350 paper records to check the mass range, copy the appearance entries, flag open items and record what changes in the variant."
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.fit.personality-fit-block.54",
@@ -29207,24 +29175,23 @@
                   "Missing items are not filled with zero, and appearance original text does not imply real quality",
                   "The entire item is authorial fiction, not an institutional standard",
                   "The output is a three-row mass range and appearance verification and an unsent letter",
-                  "No equipment parameters, material formulas, or measurement authorization are given, and none may be added"
+                  "Single-change variant: add 99 g as record P3’s mass. Leave the other records unchanged."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
                   "Material Two: tasks",
-                  "Compare mass ranges line by line, transcribe appearance or record it as unknown; organize P1 unknown appearance, P2 out of range, and P3 missing mass",
+                  "Compare each mass with the range, copy the appearance entry or mark it unknown, then record what needs review and why.",
                   "Document verification only; no weighing, machine operation, release, or shutdown decision"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material Three: independently reviewable answer",
-                  "Initial: P1 mass in range with appearance unknown; P2 mass above the upper bound with 'rectangular' transcribed; P3 mass unknown with 'chipped edge' transcribed. On day 5 only P3 mass 99g is added and its mass changes to in range; P1 unknown appearance, the P2 out-of-range item, and the P3 appearance original text all remain.",
-                  "Unsent letter: lists P1 unknown appearance, P2 out-of-range mass, and P3 missing mass, and asks the responsible person to verify the original tags and specification version; no name is given, and with no reply no sending or closure is invented",
-                  "On day 5 only the P3 mass of 99g is accepted, and no other field is filled in"
+                  "Finish independently",
+                  "Submit the original and variant on day six, including the unsent note.",
+                  "On day seven, open “FT350 press record reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
@@ -29252,7 +29219,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Work One: input source table",
-                  "List product Z, CP350, g and the closed interval 98—102, and the three tags; record 'none' if no current recruitment was obtained",
+                  "Keep the FT350 range separate from the requirements in the job postings.",
                   "Keep the fictional marking and unknowns; do not treat them as real production material"
                 ]
               },
@@ -29260,7 +29227,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "Work Two: three-row verification table",
-                  "P1 in range with appearance unknown; P2 out of range with 'rectangular' transcribed; P3 mass unknown with 'chipped edge' transcribed",
+                  "Record mass, evidence and appearance for each row.",
                   "Review independently against the answer and do not infer real conformity"
                 ]
               },
@@ -29268,8 +29235,8 @@
                 "id": "report-summary",
                 "values": [
                   "Work Three: draft verification letter and update",
-                  "Write the three pending items and mark that it is unsent, no responsible person was given, and there is no reply; on day 5 only the P3 mass of 99g is added",
-                  "The P1 unknown, the P2 out-of-range item, and the P3 appearance all remain"
+                  "Keep the original record and show the changed row in the variant.",
+                  "Include the unsent note and identify open items."
                 ]
               },
               {
@@ -29348,50 +29315,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read the input",
-                  "Transcribe Z, CP350, g, the closed interval 98—102, and the three tags"
+                  "Day 1",
+                  "Copy the batch, unit and range."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: verify masses",
-                  "Write P1 in range, P2 over the limit, P3 unknown, and the basis"
+                  "Day 2",
+                  "Compare each mass and record the evidence."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: verify appearance",
-                  "P1 unknown, P2 rectangular, and P3 chipped edge are transcribed, without inferring conformity"
+                  "Day 3",
+                  "Copy the appearance entries and mark blanks."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: write the verification letter",
-                  "List the three pending items and the specification version request, marking that it is unsent, no name was given, and there is no reply"
+                  "Day 4",
+                  "List open items and draft the unsent note."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: the single input update",
-                  "Add only the P3 mass of 99g as within range; the other records are unchanged"
+                  "Day 5",
+                  "Compare the P3 update with the original."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: independent review",
-                  "Check the four works against Material Three; outside feedback is optional, and record 'none' if none occurred"
+                  "Day 6",
+                  "Submit the three original rows and a separate row for the changed record in the variant. Include the unsent note."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: reflection",
-                  "Record verification habits, modifications, and remaining unknowns, without inferring machine operating capability or hiring"
+                  "Day 7",
+                  "On day seven, open “FT350 press record reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29408,13 +29375,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: are the unit, batch, range, and original values complete",
-              "Day 2: are in-range, over-limit, and unknown correct",
-              "Day 3: are the appearance original text and unknowns transcribed",
-              "Day 4: is it marked unsent, with no name given and no reply",
-              "Day 5: is only the P3 mass of 99g added, keeping the other items",
-              "Day 6: are the four-work review and the tool and feedback notes truthful",
-              "Day 7: are unknowns and the limits of paper capability preserved"
+              "State the unit and range.",
+              "Give evidence for each row.",
+              "Copy appearance or mark it unknown.",
+              "Include the unsent note.",
+              "Show the variant change separately.",
+              "Keep your independent work.",
+              "Compare with the reference and record a correction."
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.path.seven-day-decision.1",
@@ -29535,12 +29502,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Editorial recruitment verification: read the real posting date, current recruitment status, products, equipment, and duties. Insufficient evidence: no representative current Chinese recruitment conditions, jurisdiction-specific equipment and health and hygiene rules, or specific training cost and period were obtained; a uniform education, refresher period, or equipment authority cannot be set."
+              "Chongqing Weimei Ceramics listed four press operator openings, junior middle school or above, and rotating shifts. It accepted applicants without experience. The pay cell showed 4,500–5,000, with no pay period stated in that row. A Sichuan–Chongqing recruitment list from Yuechi County quoted CNY 4,000–8,000 per month for a glass press operator at Xingyuan Glassware in Hechuan, Chongqing. It asked for at least three years of glass press experience and listed blowing and maintenance separately. The samples cover ceramic and glass presses with different experience requirements. Check pay periods, shifts and current openings before comparing them."
             ]
           },
           "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.path.recruitment-sample.1",
           "source_refs": [
-            "internal-rubric"
+            "a44-rongchang",
+            "a44-yuechi"
           ],
           "title": "Extruding, forming, pressing, and compacting machine setters, operators, and tenders｜path",
           "type": "notice"
@@ -31590,13 +31558,13 @@
                 ]
               },
               {
-                "answer": "2025 pre-tax average annual wage of Chinese urban manufacturing employees: non-private 113,594 yuan/year, private 76,055 yuan/year. Forming and pressing work is a manufacturing production task, so manufacturing is used as the broad industry background; it covers multiple occupations and is not this occupation's median, starting wage, take-home pay, or a city quote. Insufficient evidence: no precise Chinese occupational national or city wage or current representative recruitment sample was obtained.",
+                "answer": "Chongqing Weimei Ceramics listed four press operator openings, junior middle school or above, and rotating shifts. It accepted applicants without experience. The pay cell showed 4,500–5,000, with no pay period stated in that row. A Sichuan–Chongqing recruitment list from Yuechi County quoted CNY 4,000–8,000 per month for a glass press operator at Xingyuan Glassware in Hechuan, Chongqing. It asked for at least three years of glass press experience and listed blowing and maintenance separately. The samples cover ceramic and glass presses with different experience requirements. Check pay periods, shifts and current openings before comparing them. Comparable national occupation-level wage data remain unavailable.",
                 "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.faq.3",
                 "question": "Can wages in mainland China be found?",
                 "question_key": "career.faq.extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.q3",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "a44-rongchang",
+                  "a44-yuechi"
                 ]
               },
               {
@@ -31664,15 +31632,19 @@
                 ]
               },
               {
-                "answer": "BLS exact SOC51-9041: 58,300 employed in 2025 and a 2035 projection of 59,200; growth of 1.5% over 2025—2035, an official net change of 900, and an annual average of 5,200 job openings. The thousands columns are rounded separately; openings include growth and replacements, are not a ten-year total or net additions.\nFor a transition, verify against the real target tasks and conditions; the FT350 three-row record and unsent letter can only observe document verification and do not prove machine operation or hiring.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 51-9041 to increase from about 58,300 in 2025 to 59,200 in 2035, up 1.5%, with about 5,200 openings per year on average, including replacements. Employment totals are rounded separately.",
                 "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.faq.10",
                 "question": "What is the US employment outlook? What needs to be added for a career change?",
                 "question_key": "career.faq.extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.outlook-transition",
                 "source_refs": [
-                  "onet-wages-2025",
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
+              },
+              {
+                "answer": "P1 weighs 100 g, within 98–102 g. Appearance was not recorded. P2 weighs 103 g, exceeding the 102 g limit, and its appearance reads “rectangular.” P3’s mass is unknown in the original, and its appearance reads “chipped edge.” In the variant, P3 is recorded at 99 g, which is in range. Other fields stay as given. Sample unsent note: Please verify P1’s appearance, P2’s original reading and specification version, and the source of the P3 update. Confirm who will follow up. These checks do not authorize actual release. Check four items: mass and units, the recorded appearance, the variant change, and the unsent note and release boundary.",
+                "id": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.faq.11",
+                "question": "FT350 press record reference (open after day six)",
+                "question_key": "career.faq.extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.11"
               }
             ]
           },
@@ -31761,28 +31733,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the extruding, forming, pressing, and compacting machine setters, operators, and tenders career page",
@@ -31812,8 +31772,7 @@
                 "accessed_at": "2026-10-03",
                 "details": [
                   "The US O*NET51-9041.00 covers setting up, operating, or tending machines such as glass forming machines, plodders, and tubers to form products such as glassware, food, rubber, soap, brick and tile, clay, wax, tobacco, or cosmetics. Official tasks include parameter and material control, measuring and weighing, gauge monitoring, handling jams and defective products, and production records; installing parts and disassembly and repair are supplementary items in the task set, and not every position performs all tasks.",
-                  "Interest scales R92, C55, I21, A5, E4, S1, not an individual suitability rate; JobZone1—2 is a general group.",
-                  "The 2025 median is 45,760/22.00; the earlier 2024 employment of 57,300, 2024—2034 growth of 1%—2%, and 5,200 openings; the earlier 93% manufacturing figure is US background only."
+                  "Interest scales R92, C55, I21, A5, E4, S1, not an individual suitability rate; JobZone1—2 is a general group."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
@@ -31826,11 +31785,12 @@
                 "url": "https://www.onetonline.org/link/summary/51-9041.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "This round actually read 26 tasks, including core parameters, measuring and weighing, gauges, jams, and records; part installation and disassembly and repair are supplemental and not performed in every position.",
                   "The US survey shows 100% routine protective equipment daily, 85% noise, 79% contaminants, and 63% heat or cold; 65% stand almost continuously and 61% are face-to-face daily; this does not represent Chinese rules or an accident rate.",
-                  "The education data show 78% high school equivalent, 9% post-high-school certificate, and 8% some college with no degree; the three categories total 95% and the unknown remainder is not filled in. The 7 software categories include SAP, databases, scheduling, and office tools, and programming is not inferred for every position."
+                  "The education data show 78% high school equivalent, 9% post-high-school certificate, and 8% some college with no degree; the three categories total 95% and the unknown remainder is not filled in. The 7 software categories include SAP, databases, scheduling, and office tools, and programming is not inferred for every position.",
+                  "The 2025 U.S. wage medians were $22.00 hourly and $45,760 annually. Manufacturing accounted for 93% of employment. See BLS Table 1.2 for the projection."
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
@@ -31845,8 +31805,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "BLS exact SOC51-9041: 58,300 employed in 2025 and a 2035 projection of 59,200; growth of 1.5% over 2025—2035, an official net change of 900, and an annual average of 5,200 job openings. The thousands columns are rounded separately; openings include growth and replacements, are not a ten-year total or net additions.",
-                  "The typical US BLS entry is a high school diploma or equivalent, no related work experience required, and medium-term on-the-job training. The O*NET education survey shows 78% answered high school or equivalent, 9% post-high-school certificate, and 8% some college with no degree; the three categories total 95%, which is not a complete distribution. JobZone1—2 is a general preparation group, not occupation-specific training days."
+                  "BLS Table 1.2 projects U.S. employment in occupation 51-9041 to increase from about 58,300 in 2025 to 59,200 in 2035, up 1.5%, with about 5,200 openings per year on average, including replacements. Employment totals are rounded separately."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
@@ -32088,6 +32047,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Chongqing Weimei Ceramics listed four press operator openings, junior middle school or above, and rotating shifts. It accepted applicants without experience. The pay cell showed 4,500–5,000, with no pay period stated in that row."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a44-rongchang",
+                "limitation": "One employer’s quote. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Press operator job posting",
+                "period": "2026-02-09",
+                "publisher": "Chongqing Rongchang District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.rongchang.gov.cn/bm/qrlsbj/zwgk_70831/zfxxgkml_160179/cjjy/zpxx/myqyzp/202602/t20260209_15397532.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A Sichuan–Chongqing recruitment list from Yuechi County quoted CNY 4,000–8,000 per month for a glass press operator at Xingyuan Glassware in Hechuan, Chongqing. It asked for at least three years of glass press experience and listed blowing and maintenance separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a44-yuechi",
+                "limitation": "One employer’s quote. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Press operator job posting",
+                "period": "2024-04-29",
+                "publisher": "Yuechi County Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.scyc.gov.cn/ycxrmzfw/wgjy/pc/content/content_1784861546425794560.html"
               }
             ]
           },
@@ -34948,6 +34937,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a44-rongchang",
+            "posting-a44-yuechi"
+          ],
           "sources_note": {
             "$item": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36859,7 +36852,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36869,27 +36862,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -37277,6 +37250,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Chongqing Weimei Ceramics listed four press operator openings, junior middle school or above, and rotating shifts. It accepted applicants without experience. The pay cell showed 4,500–5,000, with no pay period stated in that row.",
+        "fact_id": "posting-a44-rongchang",
+        "market": "Mainland China",
+        "measure": "Advertised pay",
+        "occupation_scope": "Press operator job posting",
+        "period": "2026-02-09",
+        "source_refs": [
+          "a44-rongchang"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "A Sichuan–Chongqing recruitment list from Yuechi County quoted CNY 4,000–8,000 per month for a glass press operator at Xingyuan Glassware in Hechuan, Chongqing. It asked for at least three years of glass press experience and listed blowing and maintenance separately.",
+        "fact_id": "posting-a44-yuechi",
+        "market": "Mainland China",
+        "measure": "Advertised pay",
+        "occupation_scope": "Press operator job posting",
+        "period": "2024-04-29",
+        "source_refs": [
+          "a44-yuechi"
+        ]
       }
     ]
   },
@@ -37336,7 +37333,7 @@
       "text": "Extruding, Forming, Pressing, and Compacting Machine Setters, Operators, and Tenders"
     }
   },
-  "source_content_sha256": "738179d3f82a9ed09ab188d1c79958d56af1d9a27a6706c8ce40e7e3c6936ea8",
+  "source_content_sha256": "c98d01ec588f0618c726c0dfc5a27e1906b009538818f5a4daef2f00e99e68e2",
   "subject": {
     "canonical_slug": "extruding-forming-pressing-and-compacting-machine-setters-operators-and-tenders",
     "name": "Extruding, Forming, Pressing, and Compacting Machine Setters, Operators, and Tenders",

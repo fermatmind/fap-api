@@ -155,6 +155,9 @@
       "item:millwrights.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:millwrights.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:millwrights.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -12980,6 +12983,21 @@
             "source-pack-onet-localtraining"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。交接清单要求基础点位和复测记录。安装单 A 仅有基础点位，安装单 B 有复测值但缺设备编号。写下两单能确认的内容及下一位复核人。"
+            ]
+          },
+          "id": "millwrights.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "对中记录交接",
+          "type": "notice"
         }
       ]
     },
@@ -15409,6 +15427,13 @@
         "id": "millwrights.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "millwrights.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15602,7 +15627,7 @@
       "text": "机械安装工：工作内容、美国工资与安全 | 费马测试"
     }
   },
-  "source_content_sha256": "cf322bfc884c0d11c80e6d9b6ff9878487462d7ec6c810c468c65cc84976f64c",
+  "source_content_sha256": "a9b0b5fc3c933acbe070e9c545ac665713d288bb09d384542b8a33289eabcd9c",
   "subject": {
     "canonical_slug": "millwrights",
     "name": "机械安装工",

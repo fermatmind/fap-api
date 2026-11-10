@@ -23660,13 +23660,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "See whether you are willing to check readings, units and versions precisely, to judge at the rule boundaries and to keep unknown items. Then learn about the assembly tools, workstation training and product requirements; getting the question right does not prove you can assemble or that you have release authority."
+              "Paper check | Compare a fictional movement traveler with a measurement sheet. Flag a mismatched component batch and record the form and time to verify. "
             ]
           },
           "id": "timing-device-assemblers-and-adjusters.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24809,13 +24808,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Precisely assemble, install and adjust timing devices to narrow tolerances, checking component fits, running and timing accuracy and recording anomalies. US 51-2061 is a manufacturing assembly measure; watch repair is listed separately as 49-9064, and Chinese 6-26-01-02 also covers part manufacturing and finishing, so the three cannot be combined statistically."
+              "Timing device assemblers and adjusters put together small components, observe movements or subassemblies, and measure fit and accuracy. They use records to review irregularities. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "timing-device-assemblers-and-adjusters.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-51-2061.00"
           ],
           "type": "prose"
         }
@@ -25565,15 +25563,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First separate text record assistance, physical assembly and measurement, and job change. Insufficient evidence: a verifiable quantitative AI score, actual adoption and net job impact for this occupation. This page shows a separate editorial estimate; the following are task-based editorial checking suggestions and do not guess a score from the overall growth projection. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional movement traveler with a measurement sheet. Flag a mismatched component batch and record the form and time to verify."
             ]
           },
           "id": "timing-device-assemblers-and-adjusters.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls",
-            "nist",
-            "editorial"
+            "transfer-onet-51-2061.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33717,6 +33713,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-51-2061.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 51-2061.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/51-2061.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39193,10 +39216,10 @@
       "text": "Timing device assemblers and adjusters"
     }
   },
-  "source_content_sha256": "f6a28575f05fbbe66c7fcdbdb017d9456135682fe2211efa0046e05763825e6b",
+  "source_content_sha256": "3a68c0796e867bf36966c8867f446b531c44e0014624ebc93c199ea21c5f50c5",
   "subject": {
     "canonical_slug": "timing-device-assemblers-and-adjusters",
     "name": "Timing device assemblers and adjusters",
-    "summary": "Precisely assemble, install and adjust timing devices to narrow tolerances, checking component fits, running and timing accuracy and recording anomalies. US 51-2061 is a manufacturing assembly measure; watch repair is listed separately as 49-9064, and Chinese 6-26-01-02 also covers part manufacturing and finishing, so the three cannot be combined statistically."
+    "summary": "Timing device assemblers and adjusters put together small components, observe movements or subassemblies, and measure fit and accuracy. They use records to review irregularities."
   }
 }

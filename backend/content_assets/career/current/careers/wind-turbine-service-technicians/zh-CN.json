@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "用虚构备件领用记录核单位和余量，列缺项及追问，观察是否愿反复检查细节。"
+              "纸面体验｜模拟交班时有报警记录但无机组号。保留报警原值，先核机组和时间，再交接。 "
             ]
           },
           "id": "wind-turbine-service-technicians.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24805,13 +24804,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "风力涡轮机服务技术员对应O*NET49-9081.00，检查、诊断、调整和维修风机，处理电气、机械、液压系统故障。任务含例行维护、按计划测试、备件管理及运行数据收集，可能涉及高处、狭小机舱及恶劣天气。风场工程设计、开发与持续运营管理另分；知识训练、相应作业证书和单位现场授权不能由岗位标题或纸面练习替代。"
+              "风机服务技师按工单做巡检、维护和故障排查，留存报警、测量、处理和待复核事项。登高和隔离按现场授权。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "wind-turbine-service-technicians.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-49-9081.00"
           ],
           "type": "prose"
         }
@@ -25455,13 +25453,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可探索工单与库存整理，独立复算并保未知；控制诊断软件不等文字AI采用证据。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：模拟交班时有报警记录但无机组号。保留报警原值，先核机组和时间，再交接。"
             ]
           },
           "id": "wind-turbine-service-technicians.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-49-9081.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33100,6 +33098,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-49-9081.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 49-9081.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/49-9081.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38617,10 +38642,10 @@
       "text": "风力涡轮机服务技术员"
     }
   },
-  "source_content_sha256": "f1f2b188daa5e92a8bcb771a179a1aaaa9ef39a28a1e25c272f38f33159ed49f",
+  "source_content_sha256": "5c8c6905b541049aea7bf3700375605637e940ee5925073475315020f026eab2",
   "subject": {
     "canonical_slug": "wind-turbine-service-technicians",
     "name": "风力涡轮机服务技术员",
-    "summary": "风力涡轮机服务技术员对应O*NET49-9081.00，检查、诊断、调整和维修风机，处理电气、机械、液压系统故障。任务含例行维护、按计划测试、备件管理及运行数据收集，可能涉及高处、狭小机舱及恶劣天气。风场工程设计、开发与持续运营管理另分；知识训练、相应作业证书和单位现场授权不能由岗位标题或纸面练习替代。"
+    "summary": "风机服务技师按工单做巡检、维护和故障排查，留存报警、测量、处理和待复核事项。登高和隔离按现场授权。"
   }
 }

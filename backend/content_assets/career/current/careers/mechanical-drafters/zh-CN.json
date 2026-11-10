@@ -7269,18 +7269,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页覆盖 O*NET 17-3013.00「机械制图员（Mechanical Drafters）」：准备机械和机械装置的详细工作图纸，包括尺寸、紧固方法及其他工程信息；常见岗位名包括 CAD 设计师、CAD 操作员、设计制图员、制图技术员与机械设计师。工作以室内、受控环境与长时间电脑绘图为主。本页不含建筑与土木制图员（17-3011.00）、电气与电子制图员（17-3012.00）等相邻岗位。"
+              "机械制图员把设计输入变成可交接的零件图和装配图，记录尺寸、公差、材料或版本要求，处理核对意见。图纸反映设计决策，签审和放行另按项目规定。"
             ]
           },
           "id": "mechanical-drafters.profile.definition-block.1",
           "source_refs": [
             "onet-summary",
-            "onet-tasks",
-            "onet-context",
-            "onet-industry",
-            "onet-education",
-            "onet-details",
-            "onet-wages"
+            "cn-haut-draw",
+            "cn-nk-mecheng"
           ],
           "type": "prose"
         },
@@ -7374,12 +7370,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "先核对的内容：功能与装配要求、草图与既有图纸、尺寸与公差、材料与紧固方法、BOM 与版本规则，以及需要工程师确认的工程判断。"
+              "选一个虚构组件，给出零件图、装配关系和版本说明，标出待工程师复核的尺寸。中原内配一则机械设计岗位提到图纸会签，可用于理解协作。"
             ]
           },
           "id": "mechanical-drafters.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-details"
+            "onet-summary",
+            "cn-haut-draw",
+            "cn-nk-mecheng"
           ],
           "type": "prose"
         },
@@ -7388,12 +7386,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作闭环：从核对功能与装配要求开始，经过建立三维模型、绘制视图并标注尺寸公差、编制物料清单，到按评审与生产反馈修改并归档版本；任一要求或公差未确认前不出图，任一图纸与 BOM 不一致未更正前不交付。"
+              "制图聚焦准确表达和版本一致性；机械设计聚焦方案、功能和验证。谁能决定公差或签字放行，按实际授权。"
             ]
           },
           "id": "mechanical-drafters.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-details"
+            "onet-summary",
+            "cn-haut-draw"
           ],
           "type": "prose"
         },
@@ -8294,12 +8293,13 @@
                 ]
               },
               {
-                "answer": "BLS/O*NET 2024 年就业约 42,900 人，2024—2034 年预计下降（约 -1%），年均职位空缺约 3,300 个（含替换需求）；为统计预测，不等于个人录用概率。",
+                "answer": "美国 BLS 表1.2：17-3013 2025 年就业约 42,100 人，预计 2035 年约 39,600 人，2025—2035 年变化 −6.0%，年均约 2,900 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                 "id": "mechanical-drafters.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.mechanical-drafters.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "onet-trends",
+                  "bls-design-ep"
                 ]
               },
               {
@@ -8531,18 +8531,18 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "2024 年就业 42,900 人、2024—2034 年预计下降（约 -1%）、年均空缺约 3,300 个。",
+                  "美国 BLS 表1.2：17-3013 2025 年就业约 42,100 人，预计 2035 年约 39,600 人，2025—2035 年变化 −6.0%，年均约 2,900 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                   "含替换需求，不等于净增岗位。"
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
                 "limitation": "含替换需求，不等于净增岗位。",
                 "market": "美国",
-                "name": "O*NET 17-3013.00 全国就业趋势（BLS 2024—2034 年预测）",
-                "period": "2024—2034 年预测；查阅 2026-09-25",
-                "publisher": "O*NET OnLine（BLS 就业预测展示）, U.S. Department of Labor",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/17-3013.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8672,6 +8672,46 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "岗位样本列图纸会签、工装验证与试制资料。"
+                ],
+                "id": "cn-haut-draw",
+                "limitation": "设计岗位为交接近邻，不代表制图员必须负责签审。",
+                "market": "中国大陆",
+                "name": "中原内配机械设计师招聘",
+                "period": "2026",
+                "publisher": "河南工业大学就业网",
+                "scope": "具名岗位或制度",
+                "url": "https://job.haut.edu.cn/module/position_details/id-276348/nid-6014"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "具名机器人机械工程样本列结构方案、建模、样机和图纸。"
+                ],
+                "id": "cn-nk-mecheng",
+                "limitation": "特定行业雇主样本，不能外推入门条件。",
+                "market": "中国大陆",
+                "name": "星猿哲科技机械工程岗位",
+                "period": "2027届",
+                "publisher": "南开大学就业网",
+                "scope": "具名岗位或制度",
+                "url": "https://career.nankai.edu.cn/correcruit/content/id/117823.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 表1.2：17-3013 2025 年就业约 42,100 人，预计 2035 年约 39,600 人，2025—2035 年变化 −6.0%，年均约 2,900 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。"
+                ],
+                "id": "bls-design-ep",
+                "market": "美国",
+                "name": "美国 BLS 表1.2：就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -9504,7 +9544,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这份工作先核对什么？",
+            "question": "制图作品集可以展示什么？",
             "table": {
               "rows": [
                 {
@@ -9536,7 +9576,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "怎样判断工作闭环？",
+            "question": "制图与机械设计有什么区别？",
             "table": {
               "rows": [
                 {
@@ -11118,7 +11158,7 @@
           "entry": "mechanical-drafters.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合机械制图员",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11238,39 +11278,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "42,900 人",
+        "derivation": "美国 BLS 表1.2：17-3013 2025 年就业约 42,100 人，预计 2035 年约 39,600 人，2025—2035 年变化 −6.0%，年均约 2,900 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 42,100 人",
         "fact_id": "us-employment-2024",
         "market": "美国",
         "measure": "2024 年就业规模",
         "occupation_scope": "17-3013.00",
-        "period": "2024；查阅 2026-09-25",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET 全国就业趋势页：2024—2034 年预计下降（-1% 或更低）。",
-        "display_value": "下降（约 -1%，2024—2034）",
+        "derivation": "美国 BLS 表1.2：17-3013 2025 年就业约 42,100 人，预计 2035 年约 39,600 人，2025—2035 年变化 −6.0%，年均约 2,900 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "−6.0%",
         "fact_id": "us-growth",
         "market": "美国",
         "measure": "就业增长预测",
         "occupation_scope": "17-3013.00",
-        "period": "2024—2034；查阅 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "为预测期内的职位空缺估计，含替换需求。",
-        "display_value": "约 3,300 个/年（2024—2034）",
+        "derivation": "美国 BLS 表1.2：17-3013 2025 年就业约 42,100 人，预计 2035 年约 39,600 人，2025—2035 年变化 −6.0%，年均约 2,900 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 2,900 个",
         "fact_id": "us-openings",
         "market": "美国",
         "measure": "预计职位空缺（年均）",
         "occupation_scope": "17-3013.00",
-        "period": "2024—2034；查阅 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
@@ -11346,19 +11386,19 @@
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业规模（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11372,17 +11412,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "机械制图员（O*NET 17-3013.00）用 CAD 绘制机械与机械装置的详细工作图纸。2025 年 BLS 中位年薪 71,550 美元；2024 年就业 42,900 人，2024—2034 年预计下降（约 -1%）。含工作情境、风险与入行路径。"
+      "text": "了解机械制图员如何交接图纸、核对尺寸和版本，并与机械设计或试验岗位区分。"
     },
     "title": {
       "availability": "available",
-      "text": "机械制图员：工作内容、美国工资与入行 | 费马测试"
+      "text": "机械制图员做什么：零件图、装配图与版本管理"
     }
   },
-  "source_content_sha256": "1d449b774e894081f6680ae97042418ef865506e35f095f91b67114c4fe0d268",
+  "source_content_sha256": "5b8794730af1f154cf351d7636aeec8cac7df4fa2a1548e4337212c044314603",
   "subject": {
     "canonical_slug": "mechanical-drafters",
     "name": "机械制图员",
-    "summary": "机械制图员（O*NET 17-3013.00）用 CAD 软件把机械与机械装置的构想转成含尺寸、紧固方法与工程信息的详细工作图纸：建立三维模型、绘制示意与正投影视图、编制物料清单并按反馈修改设计。"
+    "summary": "机械制图员把设计输入变成可交接的零件图和装配图，记录尺寸、公差、材料或版本要求，处理核对意见。图纸反映设计决策，签审和放行另按项目规定。"
   }
 }

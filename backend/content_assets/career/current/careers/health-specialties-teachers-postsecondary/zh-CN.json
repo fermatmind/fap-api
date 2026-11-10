@@ -8,9 +8,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1239,7 +1236,7 @@
         "status": "mapped"
       },
       "item:health-specialties-teachers-postsecondary.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:health-specialties-teachers-postsecondary.path.interview-probation.1": {
         "status": "mapped"
@@ -1497,7 +1494,7 @@
         "status": "pending_mapping"
       },
       "item:health-specialties-teachers-postsecondary.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:health-specialties-teachers-postsecondary.sources.source-card.1": {
         "status": "mapped"
@@ -10834,7 +10831,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.01.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10886,7 +10883,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.02.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -10938,7 +10935,7 @@
       },
       "career_snapshot_primary_locale.salary.china_salary_table.03.headers.monthly_pay": {
         "ref": {
-          "key": "月薪参考",
+          "key": "年工资参照（行业/岗位大类）",
           "path": [
             "components",
             "career_snapshot_primary_locale",
@@ -24117,7 +24114,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对岗位胜任度的评价，也不构成任何医疗、诊断、治疗、用药、法律或教育政策意见。本页对应美国 O*NET/SOC 25-1071.00「Health Specialties Teachers, Postsecondary」（高校健康专业教师）这一精确职业：在健康专业领域教授课程，涵盖牙科、实验室技术、医学、药学、公共卫生、治疗与兽医等方向。官方范围原文：Teach courses in health specialties, in fields such as dentistry, laboratory technology, medicine, pharmacy, public health, therapy, and veterinary medicine. O*NET 列出的核心任务包括：准备课程材料（如教学大纲、作业与讲义，重要性 84）；通过阅读当前文献、与同事交流并参加专业会议跟进领域发展（83）；评估并批改学生的课堂作业与作业与论文（81）；指导实验课（80）；编制、实施并批改考试或把该项工作分配他人（79）；维护学生出勤与成绩与其他必要记录（79）；发起、促进并主持课堂讨论（78）；规划、评估并修订课程体系与课程内容与材料与教学方法（75）；指导本科或研究生的教学与实习与研究工作（74）；参与招生与注册与就业安置活动（72）；选择并获取教材与实验设备等材料与用品（70）；与同事协作处理教学与研究问题（68）；在学术或行政委员会中就机构政策与系务与学术事务任职（68）；就学术与职业课程与职业问题指导学生（68）；保持固定的答疑时间以指导学生与提供帮助（67）；在特定知识领域开展研究并在专业期刊、书籍或电子媒体发表成果（64）；参与校园与社区活动（51）；为本科或研究生准备并讲授公共卫生与压力管理与工作场所健康促进等主题（79）；履行行政职责（如担任系主任，77）；撰写资助申请以获取外部研究经费（69）；担任学生组织的顾问（60）；为课外阅读任务编制专门材料书目（56）。常见职位名称包括 Assistant Professor 与 Associate Professor 与 Clinical Professor 与 Instructor 与 Lecturer 与 Occupational Therapy Professor 与 Pharmacology Professor 与 Physical Therapy Professor 与 Professor 与 Public Health Professor。口径提示：O*NET 在 25-1071.00 页呈现的工资与就业与行业数据未标注取自上级职业，本页按本职业（25-1071.00）自身口径如实标注；该页工资仅显示年薪分布（未显示时薪），本页不代填时薪；该页同时显示 2024—2034 年预测增长为「Much faster than average (7% or higher)」（远快于平均）并标注 Bright Outlook 前景良好。口径与边界见下文各板块。"
+              "BLS 表 1.2（美国本职业 25-1071）：2025 年约 278,400 个岗位，2035 年预计约 328,300 个，变化 +17.9%，年均约 24,900 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.quick-decision.fit-decision-checklist.1",
@@ -24131,12 +24128,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一份完全虚构的高校健康专业课程设计与教学任务包（仅用于练习流程，不代表任何真实院校、专业、学生或数据）。请写出方案草案：（1）如何根据一份虚构的培养方案与课程大纲与先修要求，按结构化思路安排一门健康专业课程（培养目标与学习成果、课程内容与顺序与依据、教学与实验与临床或实习安排、考核与评分与反馈、学术诚信与教学伦理与安全、评估与改进、记录与档案），并写明哪些信息不足需要补充（先修与学业背景、专业与行业标准与认证要求、实验或临床场所与安全要求、考核与评分口径与公平性、无障碍与语言要求、学术诚信与数据与隐私要求）；（2）如何为一份虚构的教学与考核与成绩记录表设计填写与复核要点（字段与口径、学生与课程与班级、成绩与评分依据与复核、异常与申诉与更正、原始记录与修订留痕）；（3）如何撰写一份可交接的课程说明（培养目标—内容与依据—教学与考核—伦理与安全—评估与改进—遗留项）；（4）如何记录与保存学生成绩与教学档案与研究数据，并区分可披露信息与受控或涉及学生与受试者个人信息的资料；（5）如何在发现学业或学术诚信问题或实验或临床安全风险、涉及隐私或伦理问题、超出岗位授权时暂停并复核与上报。使用公开资料与模拟数据作答，不使用任何真实学生或受试者数据。"
+              "到入行章做 J 表原题和变式，再打开首条折叠参考解。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24145,12 +24142,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜美国 O*NET 25-1071.00 的工作活动重要性显示：培训与教导他人（89）与更新并使用相关知识（89）与获取信息（87）与计算机工作（86）与创造性思考（83）与建立与维护人际关系（81）与组织、计划与排定优先（79）与为他人解释信息含义（78）与识别对象、动作与事件（76）与决策与解决问题（76）是该职业最重要的活动；工作情境（百分比响应口径）显示面对面讨论 95% 表示每天、电子邮件 90% 表示每天、与他人持续接触 76%、公开演讲 35% 表示每天与 53% 表示每周一次或以上、室内环境受控 86% 表示每天、与工作组或团队合作或贡献 62% 表示极为重要、决策自由 86% 表示很大自由、对精确或高度准确的重要性 67% 表示非常重要、他人健康与安全责任 42% 表示很高、工作日程 85% 表示常规。若你愿意在健康专业领域持续学习并把知识讲清楚、能与学生与同事与行业协作、并愿意对教学质量与学术诚信与师生与患者安全负责，本职业的日常要求与你的工作方式更接近。"
+              "对照课件版本和评分说明，保留未决项和复核人。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -24195,7 +24192,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜本页的「高校健康专业教师」是 O*NET 25-1071.00（Health Specialties Teachers, Postsecondary）这一精确职业，工作可以分成几类：（一）课程与教学准备——准备课程材料（如教学大纲与作业与讲义，重要性 84），规划、评估并修订课程体系与课程内容与材料与教学方法（75），选择并获取教材与实验设备等材料与用品（70）；（二）授课与研讨与实验——为本科或研究生准备并讲授公共卫生与压力管理与工作场所健康促进等主题（79），发起、促进并主持课堂讨论（78），指导实验课（80），保持固定的答疑时间以指导学生（67）；（三）考核与评价——评估并批改学生的课堂作业与作业与论文（81），编制、实施并批改考试或把该项工作分配他人（79），维护学生出勤与成绩与其他必要记录（79）；（四）指导与带教——指导本科或研究生的教学与实习与研究工作（74），就学术与职业课程与职业问题指导学生（68），担任学生组织的顾问（60）；（五）教研与科研——通过阅读当前文献与与同事交流与参加专业会议跟进领域发展（83），在特定知识领域开展研究并在专业期刊与书籍或电子媒体发表成果（64），撰写资助申请以获取外部研究经费（69）；（六）学术服务与行政——与同事协作处理教学与研究问题（68），在学术或行政委员会中就机构政策与系务与学术事务任职（68），履行行政职责（如担任系主任，77），参与招生与注册与就业安置活动（72），参与校园与社区活动（51），为课外阅读任务编制专门材料书目（56）。工作循环衔接：课程与教学需求识别—课程与材料设计与准备—授课与研讨与带教—考核与评分与反馈—教研与科研与发表—记录与复核与学术服务。本页不把该职业与相邻的高校护理教师、健康教育专员、临床护士专员、高校生物科学教师、职业技术教育教师、教育学教师、高校心理学教师、高校社会工作教师等混为一谈，也不把教学职责扩大到代替临床诊疗、用药与医疗决定的范围。"
+              "高校医学与健康专业教师在高等教育中教授医学、药学、公共卫生、治疗专业、兽医或实验技术等课程。岗位可能兼有课程开发、评分、临床带教或科研。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.profile.career-quick-answers-block.1",
@@ -24284,7 +24281,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "课程与教学需求识别 → 课程与材料设计与准备 → 授课与研讨与带教 → 考核与评分与反馈 → 教研与科研与发表 → 记录与复核与学术服务"
+              "接收工单 → 核对分工 → 核对课件版本与评分说明 → 报告差异 → 协助已分配任务 → 交接记录"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.profile.career-quick-answers-block.3",
@@ -25264,7 +25261,7 @@
                 "url": "https://www.onetonline.org/link/hot_tech/25-1071.00"
               },
               {
-                "entity": "O*NET 25-1071.00 就业趋势（本职业（25-1071.00）自身口径，BLS 就业预测 2024—2034）",
+                "entity": "2025–2035",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
@@ -25478,7 +25475,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜课程材料、考试、成绩记录、学生指导和教研是本职业任务。材料草稿、文献整理和记录核对可作为工具辅助候选，这是编辑判断；普通教学软件、自动化与生成式AI不同。本页未取得本职业采用率、节省工时或岗位替代的实测与因果证据，不能保证已提效或整体不会被取代。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "直接回答｜课程材料、考试、成绩记录、学生指导和教研是本职业任务。材料草稿、文献整理和记录核对可作为工具辅助候选，这是编辑判断；普通教学软件、自动化与生成式AI不同。本页未取得本职业采用率、节省工时或岗位替代的实测与因果证据，不能保证已提效或整体不会被取代。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -26956,12 +26953,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位年薪 59,270 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；仅年薪）"
+              "第 10 分位年薪 59,270 美元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26970,12 +26967,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26984,12 +26981,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 25 分位年薪 75,690 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；仅年薪）"
+              "第 25 分位年薪 75,690 美元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26998,12 +26995,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27012,12 +27009,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位年薪 107,310 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；该页仅显示年薪）"
+              "第 50 分位年薪 107,310 美元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27026,12 +27023,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27040,12 +27037,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 75 分位年薪 210,370 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；仅年薪）"
+              "第 75 分位年薪 210,370 美元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27054,12 +27051,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27068,12 +27065,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位年薪 322,020 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；仅年薪）"
+              "第 90 分位年薪 322,020 美元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27082,12 +27079,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27096,12 +27093,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025年就业约278,400人"
+              "约 278,400 个岗位（2025）"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27110,12 +27107,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27124,12 +27121,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035增长17.9%（O*NET展示7%或更高）"
+              "+17.9%"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27138,12 +27135,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27152,12 +27149,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035年均空缺約24,900个（含增长与替换）"
+              "预计年均约 24,900 个"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27166,12 +27163,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27194,12 +27191,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜本页的高校健康专业教师是 O*NET 25-1071.00（Health Specialties Teachers, Postsecondary）这一精确职业：在健康专业领域教授课程，涵盖牙科、实验室技术、医学、药学、公共卫生、治疗与兽医等方向。常见职位名称包括 Assistant Professor 与 Associate Professor 与 Clinical Professor 与 Instructor 与 Lecturer 与 Occupational Therapy Professor 与 Pharmacology Professor 与 Physical Therapy Professor 与 Professor 与 Public Health Professor。产出为课程与教学材料与考核与评分与指导与教研与科研成果记录；上述为美国口径，中国大陆的高等教育与临床教学与教师管理制度与统计口径另见本页说明。"
+              "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局表 2、5 给出 2025 年城镇教育行业平均年工资，非私营单位 133,539 元、私营单位 63,908 元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27474,7 +27471,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜高校健康专业教师（O*NET/SOC 25-1071.00 Health Specialties Teachers, Postsecondary；招聘与行业内常称医学院校专任教师、护理院校专业教师、临床带教教师、公共卫生与药学与医学检验等专业教师、健康专业讲师与副教授与教授等；与高校护理教师、健康教育专员、临床护士专员、高校生物科学教师、职业技术教育教师、教育学教师、高校心理学教师、高校社会工作教师分属不同对象与授权层级）"
+              "中国大陆工资参考"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.44",
@@ -27488,12 +27485,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜中国大陆在高等医学教育与护理教育与应用型本科与高职专科健康专业教学与继续医学教育领域存在与高校健康专业教师相近的岗位（如医学院校与护理院校专任教师、附属医院临床带教教师、卫生类高职院校专业教师、继续医学教育师资），其作业与资质与规范与记录受《中华人民共和国教育法》与《中华人民共和国高等教育法》与《中华人民共和国教师法》与《中华人民共和国学位法》与《中华人民共和国基本医疗卫生与健康促进法》及高校教师职业行为准则与临床教学与科研伦理与个人信息保护相关规范约束：高等教育教学与临床教学须按规范与标准执行；涉及诊疗与用药的须由具备相应资质的机构与人员执行；学生与患者与受试者个人信息须依法保护并按最小必要处理。但本轮未取得与美国 O*NET 25-1071.00（高校健康专业教师）精确对应的全国职业工资分布：国家统计局按行业门类公布城镇单位就业人员平均工资，属行业口径、不区分职业，也未按本职业单列。按证据政策，本页只登记统计口径与可见缺口（「证据不足：」标记），展示缺失而不使用代理数字，不以行业均值、招聘报价、美国工资或境外数据推断起薪、中位数或个人收入。"
+              "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局表 2、5 给出 2025 年城镇教育行业平均年工资，非私营单位 133,539 元、私营单位 63,908 元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27544,12 +27541,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025年 教育／城镇非私营单位（行业参考）"
+              "城镇非私营单位 · 教育"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27558,12 +27555,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年平均工资 133,539 元/年；行业全体就业人员平均数，不是本职业工资。"
+              "133,539 元/年"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet",
             "nbs-wage-release-2025"
           ],
           "type": "prose"
@@ -27573,26 +27569,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025年 教育／城镇私营单位（行业参考）"
+              "城镇私营单位 · 教育"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "年平均工资 63,908 元/年；行业全体就业人员平均数，不是本职业工资。"
-            ]
-          },
-          "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.52",
-          "source_refs": [
-            "onet",
             "nbs-wage-release-2025"
           ],
           "type": "prose"
@@ -27602,12 +27583,26 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆本职业精确全国职业工资"
+              "63,908 元/年"
+            ]
+          },
+          "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.52",
+          "source_refs": [
+            "nbs-wage-release-2025"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "城镇非私营单位 · 全行业"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27616,12 +27611,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆本轮未取得与美国 O*NET 25-1071.00（高校健康专业教师）精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "129,441 元/年"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27630,12 +27625,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜本页为 O*NET 25-1071.00（高校健康专业教师）这一精确职业，与高校护理教师（25-1072.00）、健康教育专员（21-1091.00）、临床护士专员（29-1141.04）、高校生物科学教师（25-1042.00）、职业技术教育教师（25-1194.00）、教育学教师（25-1081.00）、高校心理学教师（25-1066.00）、高校社会工作教师（25-1113.00）分属不同对象与授权层级。国际职业分类（如 ISCO-08）只能说明教育与健康专业教师岗位的宽泛位置，不能替代美国 SOC 或中国大陆的专业与资格与职业分类与统计口径。两者统计口径与法律环境不同，不做数值换算。"
+              "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局表 2、5 给出 2025 年城镇教育行业平均年工资，非私营单位 133,539 元、私营单位 63,908 元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "nbs-wage-release-2025"
           ],
           "type": "prose"
         },
@@ -27694,12 +27689,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国工资｜https://www.onetonline.org/link/localwages/25-1071.00；就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；任务与行业背景｜https://www.onetonline.org/link/details/25-1071.00"
+              "O*NET 全国职业工资｜https://www.onetonline.org/link/localwages/25-1071.00；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；福建医科大学 2026 年公开招聘方案｜https://www.fjmu.edu.cn/2026/0310/c86a214125/page.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -27708,12 +27705,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位年薪 59,270 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；仅年薪）"
+              "第 10 分位年薪 59,270 美元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27722,12 +27719,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27736,12 +27733,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 25 分位年薪 75,690 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；仅年薪）"
+              "第 25 分位年薪 75,690 美元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27750,12 +27747,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27764,12 +27761,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位年薪 107,310 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；该页仅显示年薪）"
+              "第 50 分位年薪 107,310 美元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27778,12 +27775,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27792,12 +27789,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 75 分位年薪 210,370 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；仅年薪）"
+              "第 75 分位年薪 210,370 美元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27806,12 +27803,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27820,12 +27817,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位年薪 322,020 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；仅年薪）"
+              "第 90 分位年薪 322,020 美元。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27834,12 +27831,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025 年 5 月美国全国职业工资。；O*NET 全国工资原表｜https://www.onetonline.org/link/localwages/25-1071.00"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27848,12 +27845,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025年就业约278,400人"
+              "约 278,400 个岗位（2025）"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27862,12 +27859,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27876,12 +27873,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035增长17.9%（O*NET展示7%或更高）"
+              "+17.9%"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27890,12 +27887,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27904,12 +27901,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035年均空缺約24,900个（含增长与替换）"
+              "预计年均约 24,900 个"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27918,12 +27915,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国SOC25-1071，May 2025年工资及2025—2035预测；边界｜工资仅年薪，分位不等于资历或起薪，空缺不等于净新增。"
+              "2025—2035 美国全国职业就业预测。；BLS 就业预测表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27946,12 +27943,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜O*NET 在 25-1071.00（高校健康专业教师）页面呈现的 2025 年美国年薪中位数 107,310 美元；分布上第 10 分位年薪 59,270 美元、第 25 分位 75,690 美元、第 75 分位 210,370 美元、第 90 分位 322,020 美元（BLS OEWS 2025 年，经 O*NET 呈现）。就业与增长：2025 年就业 278,400 人、2025—2035 年预测增长 7% 或更高（远快于平均并标注 Bright Outlook）、期间年均岗位空缺约 24,900 个（含增长与替补）。需要强调：O*NET 在 25-1071.00 页未标注该数据取自上或上级职业，本页按本职业（25-1071.00）自身口径呈现，也不借用相邻职业数值；该页工资仅显示年薪、未显示时薪，本页不代填时薪；差异主要来自院校类型与学科方向与地区与职称与临床或科研职责；中位不代表起薪，也含生产奖金等激励工资，不含加班费、轮班差额、非生产奖金及雇主福利成本。"
+              "用于核对年薪中位数 107,310 美元与第 10/25/75/90 分位（59,270 / 75,690 / 210,370 / 322,020 美元/年）。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28296,12 +28293,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国工资分布位置，不能据此反推个人资历、起薪、轨制或职责；本职业只列年工资，不折算时薪。"
+              "2025 年 5 月美国全国职业年薪。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28310,12 +28307,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国工资分布位置，不能据此反推个人资历、起薪、轨制或职责；本职业只列年工资，不折算时薪。"
+              "2025 年 5 月美国全国职业年薪。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28324,12 +28321,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国工资分布位置，不能据此反推个人资历、起薪、轨制或职责；本职业只列年工资，不折算时薪。"
+              "2025 年 5 月美国全国职业年薪。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -28356,31 +28353,31 @@
                 "entity": "大五人格测试",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI 人格测试",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "临床护士专员方向",
@@ -28455,7 +28452,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "BLS 就业预测（2024—2034）",
+                "entity": "2025–2035",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/"
@@ -30031,7 +30028,7 @@
                 "id": "education",
                 "values": [
                   "美国 O*NET 将 25-1071.00（高校健康专业教师）列入 Job Zone Five（需要大量准备），SVP 区间为 8.0 及以上；学历部分显示 36% 表示硕士学位、25% 表示博士学位、19% 表示博士后训练；该描述不取代主管机关与雇主的学历与训练与资格与继续教育与专业资质要求。",
-                  "能否独立开设课程与指导研究生与出具成绩与科研结论不取决于学历本身，而取决于是否取得相应资格与继续教育并在机构授权范围内承担相应职责。",
+                  "BLS 表 1.2 将博士或专业学位和少于 5 年的相关职业经验列为美国典型准备，未列典型在岗培训。专业课程、临床带教及任教要求向实际机构核对。",
                   "编辑建议观察课程设计、讲授与考核学习过程；没有学历与实践能力相对预测效度的本职业研究。"
                 ]
               },
@@ -30039,7 +30036,7 @@
                 "id": "clearance",
                 "values": [
                   "常见要求：学术诚信与考试纪律与评卷与成绩复核要求；教学与研究伦理与伦理审查与知情同意要求；学生与患者与受试者个人信息的访问与存储与共享与披露要求；数据保护与信息安全要求；实验或临床场所安全与防护与暴露处置要求；利益冲突与经费与署名规范；无障碍与语言与公平性要求。",
-                  "涉及临床判断与医疗建议与成绩与学术处分与对外披露与学生与患者个人信息处理的须由具备相应资格的岗位或机构执行。",
+                  "福建医科大学 2026 年公告单列基础医学院教学科研岗，列基础医学、临床医学、公共卫生与预防医学等学科。",
                   "受控或涉及学生与患者或受试者个人信息的资料的保存与提供与披露须按隐私与最小必要要求管理；不得把受控资料外发至未授权环境。"
                 ]
               },
@@ -30063,7 +30060,8 @@
           },
           "id": "health-specialties-teachers-postsecondary.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -30076,45 +30074,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "一份完全虚构的培养方案与课程大纲与先修要求（不含任何真实学生数据）。",
-                  "一份虚构的专业与行业标准与认证与考核要求说明。",
-                  "一份空白的课程设计与考核与评分记录模板。",
-                  "一份空白的成绩与出勤与学术诚信记录模板。",
-                  "一份空白的教学与研究伦理与隐私与安全要点模板。",
-                  "可用的课件与表格与题库与统计工具环境（用于课程与考核与数据核算）。"
+                  "J 表：课程材料发布前核对",
+                  "虚构纸面练习。课程只提交使用批准版 V3、且评分说明栏已填写的材料。J1 是 V3，评分说明已填；J2 是 V2，评分说明已填；J3 是 V3，评分说明为空。版本差异交课程负责人，评分说明缺失交教学审核人。变式只把 J3 的评分说明栏标为已填写。分别记录状态、原值和复核人。",
+                  "用题面提供的两份记录，不需要现场或工具。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "在 90 分钟内完成：课程与考核方案、成绩与记录说明、教学与研究伦理与隐私与安全要点草案。",
-                  "完成一次成绩与学习结果核算，并写出至少两条可能导致评分不公或教学失效或伦理风险的情形与对应措施。",
-                  "写出哪些情形必须停下并复核或上报或移交（学业或学术诚信问题、实验或临床安全风险、隐私或伦理问题、涉及临床建议或超授权判定）。"
+                  "要交付的记录",
+                  "分别写原题和变式。每行记录原值、状态和复核人。",
+                  "差异原值保留至复核完成。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先列从课程与教学需求识别到课程与材料设计到授课与带教到考核与评分到教研与发表的关键步骤与不可省略项，再逐项记录依据与结果。",
-                  "对培养目标与课程与考核与评分与复核人写清依据与口径，保留原始记录与版本。",
-                  "对风险写清识别信号、处置步骤与报告对象。",
-                  "最后写一段反思：哪些步骤被压缩或省略会导致什么后果，以及哪些结论在现有信息下不能下。"
+                  "完成后复核",
+                  "保存两种答案，再到「常见问题」打开「纸面练习参考解」。",
+                  "下方链接可跳到常见问题。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "不涉及真实学生或患者或受试者数据或真实机构或个人信息；对学业或学术诚信问题或安全或隐私或伦理风险或超授权要求一律写明暂停并复核与上报与移交；并声明所有课程与成绩与披露须由具备相应资质与授权的人员与机构在伦理与合规要求内执行，练习使用虚构材料。",
-                  "作品只证明你能按本职业的工作方式组织课程与教学与考核与记录工作，不构成授权或胜任证明。"
+                  "练习边界",
+                  "只核纸面记录。"
                 ]
               }
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise",
+            "paper-answer-key"
           ],
-          "title": "入行练习：一次完整的课程设计与教学与考核与学术诚信任务（虚构材料）",
+          "title": "纸面试做",
           "type": "cards"
         },
         {
@@ -30125,32 +30120,32 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "用依据（培养目标与专业与行业标准）—方法（课程设计与教学与考核与评分）—结果与建议三列列出你在模拟任务中完成的每一步。",
-                  "标注每一步是独立完成还是他人指导下完成。",
+                  "批准版本",
+                  "记录要求和实际版本。",
                   "标注哪些步骤涉及学术诚信与学生或患者信息或临床相关表述，必须按授权与制度由本人或相应岗位完成。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有经验的教学或科研或伦理或教务岗位复核你的课程与考核与记录说明，并书面指出问题。",
-                  "记录复核意见、时间与依据，便于后续复盘。",
+                  "评分说明",
+                  "记录有无说明。",
                   "不要只展示上完了，要展示从培养目标到课程到考核到评分到记录与归档的流程与留痕。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "写一份可交接的课程摘要（培养目标与课程与考核依据、评分与成绩与出勤、实验或临床带教与安全、学术诚信与伦理与隐私、改进与遗留事项）。",
-                  "摘要中不得出现真实学生或患者或受试者数据或可识别个人信息，必要时使用编号与合成数据。",
+                  "待核项",
+                  "写原值和复核人。",
                   "注明信息来源与假设，区分实测事实与判断推断与待验证。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "若使用了生成式工具或自动评分或课件或数据与文档生成工具，标注哪些部分由设备或工具生成、哪些由本人核对与修订。",
-                  "说明课程与成绩与结论在使用与提交前经过了谁的复核与哪次依据核对。",
+                  "单项变式",
+                  "仅改题设指定项。",
                   "数值与结论若为示例值，必须标明并说明由具备相应授权的人员最终确认。"
                 ]
               }
@@ -30158,9 +30153,9 @@
           },
           "id": "health-specialties-teachers-postsecondary.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "入门时可以准备哪些可复核的作品材料？",
+          "title": "纸面试做交接记录",
           "type": "cards"
         },
         {
@@ -30221,59 +30216,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（课程与教学需求识别—课程与材料设计与准备—授课与研讨与带教—考核与评分与反馈—教研与科研与发表—记录与复核与学术服务）。",
-                  "记录你观察到的学术诚信与教学与研究伦理与学生与患者隐私要求。"
+                  "读要求",
+                  "读工单，列出需要核对的字段。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "核对工作条件：工时与学期与考试与科研节点安排、教学平台与实验或临床场所与工具与数据与文献权限、学生与患者信息归属与保密约定、与教学管理与科研管理与伦理委员会的协作方式。",
-                  "写下你最不适应的一个现实成本并判断能否接受。"
+                  "看版本",
+                  "逐行对照两份原记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "完成一份课程与考核方案与一份成绩与记录说明。",
-                  "按规范列出关键要求（培养目标、课程内容与依据、考核与评分口径、学术诚信与伦理与隐私）。"
+                  "核评分",
+                  "把差异分给题面指定的复核人。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "完成一次成绩与学习结果核算，并标注假设与数据来源。",
-                  "对两个典型风险（学业或学术诚信问题、安全或隐私或伦理风险）写出核对与报告方案。"
+                  "记原值",
+                  "只改变式要求的一项，重做状态判断。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在指导下完成一次模拟评分复核与成绩提交前审核演练。",
-                  "对照检查单找出至少两处偏差并记录整改方式。"
+                  "写复核人",
+                  "保留原题和变式的记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请有经验的人挑战你的教学依据与学术诚信与伦理与披露边界理解。",
-                  "记录对方的异议与你的回应，不回避反例。"
+                  "做变式",
+                  "打开折叠参考解核对。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "写出继续、停止或转向的判断与证据。",
-                  "列出若继续需要补齐的能力与经历（如学科与教学与考核与科研能力、教师资格与专业资质与继续教育、特定学科或临床教学方向经验），以及下一步行动。"
+                  "核答案",
+                  "写下一个需要向雇主确认的分工问题。"
                 ]
               }
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天体验：用虚构材料完成一次课程设计与教学与考核与复核闭环",
+          "title": "纸面核对顺序",
           "type": "timeline"
         },
         {
@@ -30281,20 +30276,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能在学术诚信与伦理与机构授权范围内完成课程设计与教学与考核与教研与记录并使过程与依据可复核。",
-              "继续：在学期与考试与科研与申报压力下坚持依据与诚信与留痕，不因赶节点跳过复核或放宽学术诚信或夸大教学质量。",
-              "继续：愿意在教学实习与带教中把学科与教学与学术诚信与伦理与记录规范学扎实。",
-              "停止：难以长期面向学生与同行讲授与沟通，且短期无法改善。",
-              "停止：对学术诚信与伦理与隐私边界缺乏警觉，反复出现评分不公或学术不端或未经授权处理学生数据或记录失真。",
-              "换方向：偏好护理专业教学与临床带教可考虑高校护理教师；偏好面向人群的健康教育项目可考虑健康教育专员。",
-              "换方向：偏好直接临床照护可考虑临床护士专员；偏好生物科学学科教学可考虑高校生物科学教师；偏好职业技术课程与实训可考虑职业技术教育教师方向。"
+              "按题面记录两种状态及复核人。",
+              "只核虚构课程记录。",
+              "只核虚构课程记录。",
+              "只核虚构课程记录。",
+              "只核虚构课程记录。",
+              "只核虚构课程记录。",
+              "只核虚构课程记录。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "七天结束时如何判断要不要继续",
+          "title": "完成后复核",
           "type": "list"
         },
         {
@@ -30406,7 +30401,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本页不引用任何具体招聘公告的数量或薪酬数字。高校健康专业教师岗位多通过高校与医学院校与护理院校与临床教学医院招聘，且受学科与院校与地区影响，公开渠道的样本难以代表整体市场；本页工资与就业为 O*NET 在 25-1071.00 页面呈现的本职业（25-1071.00）自身口径（工资仅年薪），且 2024—2034 年预测增长 7% 或更高并标注 Bright Outlook。",
+              "BLS 表 1.2（美国本职业 25-1071）：2025 年约 278,400 个岗位，2035 年预计约 328,300 个，变化 +17.9%，年均约 24,900 个职位空缺，含人员替补。人数分别取整。",
               "核对建议｜查看招聘信息时应记录发布时间、地点、院校类型与学科方向、职称与轨制（终身轨与非终身轨与兼职）、工时与学期与科研节点安排、学历与资格与继续教育要求、学生与患者信息与研究数据处理要求、教学与科研平台配备、合同期限与科研启动与考核口径；这些信息比职位名称往往更能反映真实条件。"
             ]
           },
@@ -30435,7 +30430,7 @@
                 "url": "https://www.onetonline.org/link/details/25-1071.00"
               },
               {
-                "entity": "O*NET 25-1071.00 证书目录",
+                "entity": "美国证书检索",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localcert/25-1071.00"
@@ -30459,12 +30454,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以学历与训练与资格与继续教育与机构授权与考核为准，也不代表取得独立开设课程或出具成绩认定或科研结论的权限；涉及学生与患者与受试者数据与披露须在伦理与合规要求内进行。"
+              "大陆高校任教按教师资格认定和学校聘任要求核对。岗位实际涉及医师执业时，另核注册、执业范围及机构授权。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.career-path-block.11",
           "source_refs": [
-            "onet"
+            "teacher-qualifications",
+            "physician-law"
           ],
           "type": "prose"
         },
@@ -30585,13 +30581,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国BLS25-1071典型入门教育为博士或专业学位、相关经验少于五年；O*NET为Job Zone Five，36%硕士、25%博士、19%博士后是受访者对新聘要求的回答，不是统一准入清单。编辑建议积累课程、实验指导、考核和教研经验。中国高等学校教师实行资格制度，《高等教育法》第46条列学历、教学能力与认定条件；实际聘用学历与职务条件另核。健康专业认证、继续教育和临床资质按具体事项适用，不自动授予临床或成绩处分权限。"
+              "BLS 表 1.2 将博士或专业学位和少于 5 年的相关职业经验列为美国典型准备，未列典型在岗培训。专业课程、临床带教及任教要求向实际机构核对。 福建医科大学 2026 年公告单列基础医学院教学科研岗，列基础医学、临床医学、公共卫生与预防医学等学科。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.career-path-block.20",
           "source_refs": [
-            "onet",
-            "moe-higher-education-law"
+            "bls-ep-2025-2035",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -30600,12 +30596,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学位、教师资格、健康专业认证与临床资质、机构任命及教学或数据授权是不同状态。O*NET认证目录并非全部教师必考清单；中国专门从事学校教育教学的教师资格制度另按适用法规核对。"
+              "大陆高校任教按教师资格认定和学校聘任要求核对。岗位实际涉及医师执业时，另核注册、执业范围及机构授权。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.career-path-block.21",
           "source_refs": [
-            "onet"
+            "teacher-qualifications",
+            "physician-law"
           ],
           "type": "prose"
         },
@@ -30628,12 +30625,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "分别核美国典型入门准备、中国高校教师资格与具体机构聘用条件。学位、教师资格、健康专业认证、继续教育及教学或临床授权不同；研究伦理审查按实际项目适用。"
+              "大陆高校任教按教师资格认定和学校聘任要求核对。岗位实际涉及医师执业时，另核注册、执业范围及机构授权。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "teacher-qualifications",
+            "physician-law",
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -31643,12 +31642,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国口径：本页工资与就业取 O*NET 在 25-1071.00（高校健康专业教师）页面呈现的本职业自身口径（该页未标注取自上或上级职业）——2025 年年薪中位数 107,310 美元；第 10 分位年薪 59,270 美元、第 25 分位 75,690 美元、第 75 分位 210,370 美元、第 90 分位 322,020 美元（BLS OEWS 2025 年，经 O*NET 呈现；该页仅显示年薪、未显示时薪，本页不代填时薪）。就业与增长：2025 年就业 278,400 人、2025—2035 年预测增长 7% 或更高（远快于平均并标注 Bright Outlook）、期间年均岗位空缺约 24,900 个（含增长与替补）。需说明：空缺主要由替换需求构成；本职业受高等教育入学结构与院校经费与临床教学需求影响；不代表个人的岗位结果，也不代表相邻职业。中国大陆部分：本轮未取得与本职业精确对应的全国职业工资分布，按证据政策本页只登记统计口径与缺口，不提供代理数值。"
+              "BLS 表 1.2（美国本职业 25-1071）：2025 年约 278,400 个岗位，2035 年预计约 328,300 个，变化 +17.9%，年均约 24,900 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31657,12 +31656,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31671,12 +31670,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025–2035"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31713,12 +31712,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "工资（中位与分位，本职业（25-1071.00）自身口径，仅年薪）"
+              "就业规模与变化"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31727,12 +31726,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 25-1071.00（OEWS 2025 年，经 O*NET 呈现）"
+              "25-1071"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31741,12 +31740,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "年薪中位数 107,310 美元；第 10 分位 59,270、第 25 分位 75,690、第 75 分位 210,370、第 90 分位 322,020（美元/年）"
+              "BLS 表 1.2（美国本职业 25-1071）：2025 年约 278,400 个岗位，2035 年预计约 328,300 个，变化 +17.9%，年均约 24,900 个职位空缺，含人员替补。人数分别取整。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31755,12 +31754,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国"
+              "美国全国"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31769,12 +31768,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035"
+              "2025–2035"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31811,12 +31810,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业规模与增长与岗位空缺（本职业（25-1071.00）自身口径）"
+              "预计年均空缺"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31825,12 +31824,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "SOC 25-1071.00（BLS 就业预测，经 O*NET 呈现）"
+              "25-1071"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31839,12 +31838,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025年约278,400人→2035年328,300人，增长17.9%；年均空缺约24,900个。"
+              "预计年均约 24,900 个，含替补。"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31853,12 +31852,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆"
+              "美国全国"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31867,12 +31866,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025"
+              "2025-05"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31909,12 +31908,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "职业工资与就业（统计口径与缺口）"
+              "年薪中位数"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31923,12 +31922,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局城镇单位就业人员平均工资（行业门类口径）与有界检索"
+              "25-1071"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31937,12 +31936,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆本轮未取得与美国 O*NET 25-1071.00（高校健康专业教师）精确对应的全国职业工资分布；国家统计局按行业门类公布平均工资、不区分职业，本页展示缺失而不使用代理数字。"
+              "107,310 美元/年"
             ]
           },
           "id": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -32352,6 +32351,15 @@
           "data": {
             "entries": [
               {
+                "answer": "原题仅 J1 可提交。J2 保留 V2 和要求的 V3，交课程负责人；J3 保留空栏，交教学审核人。变式 J1、J3 可提交，J2 仍待核。",
+                "id": "health-specialties-teachers-postsecondary.faq.paper-exercise",
+                "question": "纸面练习参考解（完成后打开）",
+                "question_key": "career.faq.health-specialties-teachers-postsecondary.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
+              },
+              {
                 "answer": "本页的高校健康专业教师是 O*NET 25-1071.00（Health Specialties Teachers, Postsecondary）这一精确职业：在健康专业领域教授课程，涵盖牙科、实验室技术、医学、药学、公共卫生、治疗与兽医等方向。核心任务包括准备课程材料（重要性 84）、通过阅读文献与交流与参会跟进领域发展（83）、评估并批改学生作业与论文（81）、指导实验课（80）、编制与实施与批改考试（79）、维护学生出勤与成绩记录（79）、发起与促进并主持课堂讨论（78）、为本科或研究生准备并讲授公共卫生与压力管理与工作场所健康促进等主题（79）、规划与评估与修订课程体系（75）、指导教学与实习与研究（74）、参与招生与注册与就业安置（72）、开展研究并发表与申请经费（64 与 69）。常见职位名称包括 Assistant Professor 与 Associate Professor 与 Clinical Professor 与 Instructor 与 Lecturer 与 Occupational Therapy Professor 与 Pharmacology Professor 与 Physical Therapy Professor 与 Professor 与 Public Health Professor；O*NET 在 25-1071.00 页显示该职业在美国的主要行业为教育服务。本页所述为美国职业分类口径，工资与就业为本职业（25-1071.00）自身口径（工资仅年薪）；本页内容不构成任何医疗、诊断、治疗、用药、法律或教育政策意见。",
                 "id": "health-specialties-teachers-postsecondary.faq.1",
                 "question": "这个职业具体做什么？",
@@ -32373,83 +32381,84 @@
                 ]
               },
               {
-                "answer": "需要先说明口径：O*NET 在 25-1071.00 页未标注该数据取自上或上级职业，本页按本职业（25-1071.00）自身口径如实呈现；该页工资仅显示年薪分布、未显示时薪，本页不代填时薪。本职业 2025 年年薪中位数 107,310 美元；第 10 分位年薪 59,270 美元、第 25 分位 75,690 美元、第 75 分位 210,370 美元、第 90 分位 322,020 美元（BLS OEWS 2025 年，经 O*NET 呈现）。就业与增长：2024 年就业 289,600 人、2024—2034 年预测增长 7% 或更高（远快于平均并标注 Bright Outlook）、期间年均岗位空缺约 27,400 个（含增长与替补）。上述不含福利与奖金，不适用其他法域，也不代表相邻职业；空缺主要由替换需求构成，且需求受高等教育入学结构与院校经费与临床教学需求影响。",
+                "answer": "用于核对年薪中位数 107,310 美元与第 10/25/75/90 分位（59,270 / 75,690 / 210,370 / 322,020 美元/年）。 BLS 表 1.2（美国本职业 25-1071）：2025 年约 278,400 个岗位，2035 年预计约 328,300 个，变化 +17.9%，年均约 24,900 个职位空缺，含人员替补。人数分别取整。",
                 "id": "health-specialties-teachers-postsecondary.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q3",
                 "source_refs": [
                   "oews",
-                  "ep"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "没有与该美国职业精确对应的全国职业工资分布。中国大陆在高等医学教育与护理教育与应用型健康专业教学与继续医学教育领域存在相近岗位，其作业与资质与规范与记录受《中华人民共和国教育法》与《中华人民共和国高等教育法》与《中华人民共和国教师法》与《中华人民共和国学位法》与《中华人民共和国基本医疗卫生与健康促进法》及高校教师职业行为准则与临床教学与科研伦理与个人信息保护相关规范约束（高等教育教学与临床教学须按规范与标准执行；涉及诊疗与用药的须由具备相应资质的机构与人员执行；学生与患者与受试者个人信息须依法保护并按最小必要处理），但公开职业统计未按本职业单列：国家统计局按行业门类公布城镇单位就业人员平均工资，属行业口径、不区分职业。按本页证据政策，中国部分只登记统计口径与「证据不足：」可见标记，不使用行业均值、招聘报价或美国数据跨法域外推起薪、中位数或个人收入。本页内容不构成医疗或法律意见。",
+                "answer": "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局表 2、5 给出 2025 年城镇教育行业平均年工资，非私营单位 133,539 元、私营单位 63,908 元。",
                 "id": "health-specialties-teachers-postsecondary.faq.4",
                 "question": "中国大陆有对应的工资数据吗？",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q4",
                 "source_refs": [
-                  "nbs",
-                  "cnclass"
+                  "nbs-wage-release-2025"
                 ]
               },
               {
-                "answer": "O*NET 25-1071.00 的工作活动重要性最高为培训与教导他人（89）与更新并使用相关知识（89）与获取信息（87）与计算机工作（86）与创造性思考（83）；工作情境（百分比响应口径）显示面对面讨论 95% 表示每天、电子邮件 90% 表示每天、与他人持续接触 76%、公开演讲 35% 表示每天与 53% 表示每周一次或以上、室内环境受控 86% 表示每天、与工作组或团队合作或贡献 62% 表示极为重要、决策自由 86% 表示很大自由、对精确或高度准确的重要性 67% 表示非常重要、他人健康与安全责任 42% 表示很高、错误的后果 47% 表示非常严重、工作日程 85% 表示常规、每周工作时间超过 40 小时 46%。工作以面向学生与同行讲授与沟通与教研为特点，学期与考试与科研与申报节点可能带来集中加班，需按学术诚信与教学与研究伦理与隐私要求工作。",
+                "answer": "工作场景可能包括课堂、实验室和临床带教点。向学校核教学时数、科研任务、评分与实习管理的分工。",
                 "id": "health-specialties-teachers-postsecondary.faq.5",
                 "question": "工作环境和工作强度如何？",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q5",
                 "source_refs": [
                   "onet",
-                  "bls"
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "本职业的课程材料与讲义与题库初稿与文献与数据与成绩与出勤台账环节已可被生成式与教学与统计工具辅助，自动化暴露中等；生成式 AI 本身直接影响集中在材料与题库初稿与文档与数据整理。O*NET 热门技术页列出 9 项软件技能（Microsoft Office software 4%、Microsoft PowerPoint 2%、Microsoft Excel 2%、Microsoft Outlook 1%、Microsoft Word Under 1%、Microsoft Access Under 1% 等）。课程设计判断与教学与考核与评分判断、学术诚信与教学与研究伦理判断、学生指导与答疑、教研与科研判断与责任仍由具备相应资质与授权的人员负责；O*NET 显示本职业 2024—2034 年预测增长 7% 或更高并标注 Bright Outlook，但预测不等于个人岗位结果。",
+                "answer": "工具可以整理课程版本和反馈草稿。课程质量、评分与带教仍由相应教师审核。",
                 "id": "health-specialties-teachers-postsecondary.faq.6",
                 "question": "AI 会影响这个职业吗？",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q6",
                 "source_refs": [
-                  "weforum",
-                  "nist"
+                  "onet"
                 ]
               },
               {
-                "answer": "美国 O*NET 将 25-1071.00（高校健康专业教师）列入 Job Zone Five（需要大量准备，SVP 8.0 及以上）；学历部分显示 36% 表示硕士学位、25% 表示博士学位、19% 表示博士后训练。在中国大陆，高等教育教学与临床教学须按规范与标准执行，涉及诊疗与用药的须由具备相应资质的机构与人员执行。该描述不取代主管机关与机构对学历与训练与资格与继续教育与专业资质的要求。",
+                "answer": "BLS 表 1.2 将博士或专业学位和少于 5 年的相关职业经验列为美国典型准备，未列典型在岗培训。专业课程、临床带教及任教要求向实际机构核对。 福建医科大学 2026 年公告单列基础医学院教学科研岗，列基础医学、临床医学、公共卫生与预防医学等学科。",
                 "id": "health-specialties-teachers-postsecondary.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q7",
                 "source_refs": [
-                  "r2-pay-1",
-                  "editor"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "需要区分学历、训练证明、教师资格与健康专业相关认证与继续教育、健康与职业健康检查、机构与岗位授权、成绩与学术处分与对外披露权限。O*NET 证书目录列出与本职业相关的多项认证，例如 National Board of Public Health Examiners 的 Certified in Public Health、National Certification Board for Diabetes Educators 的 Certified Diabetes Educator、American Medical Technologists 的 Allied Health Instructor、Biofeedback Certification International Alliance 的 Academic Certification in Biofeedback 与 Academic Certification in Neurofeedback、National Board for Respiratory Care 的 Asthma Educator Specialist 等；在中国大陆，涉及诊疗与用药的须由具备相应资质的机构与人员执行，涉及高校教学的须符合教师与学位与教学规范。",
+                "answer": "大陆高校任教按教师资格认定和学校聘任要求核对。岗位实际涉及医师执业时，另核注册、执业范围及机构授权。",
                 "id": "health-specialties-teachers-postsecondary.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q8",
                 "source_refs": [
-                  "purchasing-managers",
-                  "health"
+                  "teacher-qualifications",
+                  "physician-law",
+                  "cn-work-example"
                 ]
               },
               {
-                "answer": "常见失效包括：课程设计或考核或评分不当或课业与学术诚信处理不当或越界提供临床与用药判断；学生或患者或受试者个人信息与研究数据处理不当、知情同意或伦理审查缺失或共享越界；成绩或出勤或课程或考核或教研或经费记录失真或版本失控，或学术诚信与利益冲突处理不当；超出授权自行作出成绩与学术处分或临床建议或对外披露；关键资格或学科或科研或临床带教能力由单一点承担；课程与考核或无障碍与语言与文化适配不足或师生与患者安全防护不足。控制要点是按培养目标与专业与行业标准与学术诚信与教学与研究伦理与隐私要求核对与复核与留痕，学业或学术诚信问题或安全或隐私或伦理风险或超授权事项立即暂停与上报。本页内容不构成医疗、诊断、治疗、用药或法律意见。",
+                "answer": "重点核课程版本与评分一致性、学生和患者信息、临床带教范围。出现未经核准的材料或任务时暂停提交并交相应负责人。",
                 "id": "health-specialties-teachers-postsecondary.faq.9",
                 "question": "这个职业有哪些主要风险？",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q9",
                 "source_refs": [
                   "onet",
-                  "nist"
+                  "privacy",
+                  "teacher-qualifications",
+                  "physician-law"
                 ]
               },
               {
-                "answer": "需先说明口径：本页就业与增长为 O*NET 在 25-1071.00 页呈现的本职业（25-1071.00）自身口径（2024 年就业 289,600 人、2024—2034 年预测增长 7% 或更高并标注 Bright Outlook、期间年均岗位空缺约 27,400 个含替补），不代表相邻职业或个人就业机会；空缺主要由替换需求构成，且需求受高等教育入学结构与院校经费与临床教学需求影响。可转向高校生物科学教师、职业技术教育教师、临床护士专员、教育学教师、健康教育专员、高校护理教师、高校心理学教师与高校社会工作教师等相邻方向（需重新学习与补足该方向的对象与规范与资质与经验）。中国大陆相关岗位与规范与统计口径另见本页说明。",
+                "answer": "BLS 表 1.2（美国本职业 25-1071）：2025 年约 278,400 个岗位，2035 年预计约 328,300 个，变化 +17.9%，年均约 24,900 个职位空缺，含人员替补。人数分别取整。 本页未查得大陆同职业的全国就业序列，可按高校教学、教研和临床带教的实际分工查看岗位。",
                 "id": "health-specialties-teachers-postsecondary.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.health-specialties-teachers-postsecondary.q10",
                 "source_refs": [
-                  "ep",
-                  "onet"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               }
             ]
@@ -32536,28 +32545,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "大五人格测试",
+                "entity": "大五人格测评",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "MBTI 人格测试",
+                "entity": "MBTI 偏好测评",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test"
+                "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "智力与推理测试",
+                "entity": "推理测评",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
-                "entity": "情绪智力测试",
+                "entity": "情绪能力测评",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "本职业（高校健康专业教师）",
@@ -32616,20 +32625,20 @@
                 "url": "https://www.onetonline.org/link/summary/25-1071.00"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对就业 2024 年 289,600 人、2024—2034 年预测增长 7% 或更高与期间年均岗位空缺约 27,400 个（含增长与替补）。",
-                  "用于说明就业预测与 OEWS 时点就业估计口径不同，且预测不等于个人岗位结果、空缺主要由替换需求构成。"
+                  "BLS 表 1.2（美国本职业 25-1071）：2025 年约 278,400 个岗位，2035 年预计约 328,300 个，变化 +17.9%，年均约 24,900 个职位空缺，含人员替补。人数分别取整。",
+                  "BLS 表 1.2 将博士或专业学位和少于 5 年的相关职业经验列为美国典型准备，未列典型在岗培训。专业课程、临床带教及任教要求向实际机构核对。"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "ep",
-                "limitation": "为 O*NET 在 25-1071.00 页呈现的本职业口径；预测增长 7% 或更高并标注 Bright Outlook。",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
                 "market": "美国",
-                "name": "O*NET OnLine：高校健康专业教师就业趋势（25-1071.00，本职业自身口径）",
-                "period": "BLS Employment Projections 2024-2034 via O*NET",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "25-1071.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/25-1071.00"
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "25-1071",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32666,18 +32675,18 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明公开企业薪酬调查未建立与本职业精确对应的全国工资分布。",
-                  "不作为本职业工资代理数字使用。"
+                  "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局表 2、5 给出 2025 年城镇教育行业平均年工资，非私营单位 133,539 元、私营单位 63,908 元。",
+                  "城镇教育行业工资参照"
                 ],
                 "evidence_type": "official survey release",
                 "id": "cnclass",
-                "limitation": "为岗位大类聚合口径，未建立与本职业精确对应的统计值。",
+                "limitation": "城镇教育行业工资参照",
                 "market": "中国大陆",
-                "name": "人力资源和社会保障部：企业薪酬调查信息",
-                "period": "2025 survey; accessed 2026-09-22",
-                "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "occupation major class proxy",
-                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
+                "name": "国家统计局：2025年城镇单位就业人员年平均工资情况",
+                "period": "2025",
+                "publisher": "国家统计局",
+                "scope": "城镇教育行业工资参照",
+                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32698,34 +32707,34 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明医学教育与临床教学与科研伦理与临床带教相关规范与要求。",
-                  "涉及诊疗与用药的须由具备相应资质的机构与人员执行。"
+                  "大陆高校任教按教师资格认定和学校聘任要求核对。岗位实际涉及医师执业时，另核注册、执业范围及机构授权。",
+                  "大陆高校任教按教师资格认定和学校聘任要求核对。岗位实际涉及医师执业时，另核注册、执业范围及机构授权。"
                 ],
                 "evidence_type": "regulator portal",
                 "id": "facilities",
                 "limitation": "以主管机关发布的规范与要求为准。",
                 "market": "中国大陆",
-                "name": "中华人民共和国国家卫生健康委员会：医学教育与临床教学与科研伦理管理",
+                "name": "中华人民共和国医师法",
                 "period": "current; accessed 2026-09-22",
                 "publisher": "国家卫生健康委员会",
                 "scope": "medical education and research ethics",
-                "url": "https://www.nhc.gov.cn/"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202204/t20220412_2674457.html"
               },
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明高等教育与高校教师职业行为与教学管理相关要求。",
-                  "教学与学位与学术诚信要求以主管机关与机构要求为准。"
+                  "大陆高校任教按教师资格认定和学校聘任要求核对。岗位实际涉及医师执业时，另核注册、执业范围及机构授权。",
+                  "大陆高校任教按教师资格认定和学校聘任要求核对。岗位实际涉及医师执业时，另核注册、执业范围及机构授权。"
                 ],
                 "evidence_type": "regulator portal",
                 "id": "operations",
                 "limitation": "以主管机关发布的政策与要求为准。",
                 "market": "中国大陆",
-                "name": "中华人民共和教育部：高等教育与高校教师管理",
+                "name": "教师资格条例",
                 "period": "current; accessed 2026-09-22",
                 "publisher": "中华人民共和国教育部",
                 "scope": "higher education",
-                "url": "https://www.moe.gov.cn/"
+                "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyxzfg/202204/t20220422_620496.html"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32842,17 +32851,17 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于字段与证据口径与缺口登记规则。",
-                  "用于跨市场与法域口径边界说明。"
+                  "工具只能辅助整理记录，关键内容须回到原件复核。",
+                  "工具只能辅助整理记录，关键内容须回到原件复核。"
                 ],
-                "evidence_type": "internal authoring rules",
+                "evidence_type": "编辑说明",
                 "id": "employer",
-                "limitation": "内部口径规则，非外部事实来源。",
-                "market": "全球",
-                "name": "FermatMind 职业内容字段与证据口径规则",
-                "period": "current authoring rules",
+                "limitation": "本说明不证明采用率或工作结果。",
+                "market": "适用于本页",
+                "name": "本站任务与人工复核说明",
+                "period": "本页",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
+                "scope": "本页任务",
                 "url": "https://fermatmind.com"
               },
               {
@@ -32952,20 +32961,19 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "用于核对教育服务行业。",
-                  "用于说明主要用人单位类型。"
+                  "2025 年 5 月美国本职业 25-1071全国年薪中位数 107,310 美元。年薪第 10、25、50、75、90 分位依次为 59,270、75,690、107,310、210,370、322,020 美元。此表未列时薪。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "onet-wages",
-                "limitation": "该口径为美国分布，不建立中国大陆映射。",
+                "limitation": "全国职业分布，地区及具体雇主报价另核。",
                 "market": "美国",
                 "name": "O*NET OnLine：高校健康专业教师行业分布（25-1071.00）",
-                "period": "current page; accessed 2026-09-22",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "25-1071.00 exact occupation",
-                "url": "https://www.onetonline.org/link/industry/25-1071.00"
+                "url": "https://www.onetonline.org/link/localwages/25-1071.00"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32986,17 +32994,17 @@
               {
                 "accessed_at": "2026-10-11",
                 "details": [
-                  "使用表2非私营及表5私营同一行业门类，单位元/年；不折算个人月薪。",
-                  "学校健康专业教学可归教育行业；附属医院按实际雇主行业另核，护理教师另属相邻职业，不能把统计值混合"
+                  "本页所核资料未取得本职业的中国大陆全国工资分布。国家统计局表 2、5 给出 2025 年城镇教育行业平均年工资，非私营单位 133,539 元、私营单位 63,908 元。",
+                  "城镇教育行业工资参照"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wage-release-2025",
-                "limitation": "行业全体就业人员平均工资，不是本职业中位数、起薪或个人收入；非私营与私营分列。",
+                "limitation": "城镇教育行业工资参照",
                 "market": "中国大陆",
                 "name": "国家统计局：2025年城镇单位就业人员年平均工资情况",
                 "period": "2025年；2026-05-15发布",
                 "publisher": "国家统计局",
-                "scope": "教育；中国城镇单位就业人员，行业门类宽口径",
+                "scope": "城镇教育行业工资参照",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
@@ -33015,21 +33023,70 @@
                 "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202204/t20220421_620257.html"
               },
               {
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "课程与教学设计 — 75/100; weight=1/3; health-specialties-teachers-postsecondary.ai-impact.ai-impact-table.95[0]",
-                  "授课与研讨与实验 — 25/100; weight=1/3; health-specialties-teachers-postsecondary.ai-impact.ai-impact-table.99[0]",
-                  "指导与带教 — 25/100; weight=1/3; health-specialties-teachers-postsecondary.ai-impact.ai-impact-table.107[0]"
+                  "BLS 表 1.2（美国本职业 25-1071）：2025 年约 278,400 个岗位，2035 年预计约 328,300 个，变化 +17.9%，年均约 24,900 个职位空缺，含人员替补。人数分别取整。",
+                  "BLS 表 1.2 将博士或专业学位和少于 5 年的相关职业经验列为美国典型准备，未列典型在岗培训。专业课程、临床带教及任教要求向实际机构核对。"
                 ],
-                "evidence_type": "编辑模型估算方法",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "就业和空缺人数分别取整，空缺含替补。",
+                "market": "美国",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "25-1071",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "福建医科大学 2026 年公告单列基础医学院教学科研岗，列基础医学、临床医学、公共卫生与预防医学等学科。"
+                ],
+                "id": "cn-work-example",
+                "limitation": "具名招聘案例仅用于识别教学科研分工。",
+                "market": "中国大陆",
+                "name": "福建医科大学 2026 年公开招聘方案",
+                "period": "2026",
+                "publisher": "福建医科大学",
+                "scope": "中国大陆高校医学教学招聘案例",
+                "url": "https://www.fjmu.edu.cn/2026/0310/c86a214125/page.htm"
+              },
+              {
+                "details": [
+                  "记录与结果均为虚构。"
+                ],
+                "id": "paper-exercise",
+                "limitation": "用于复核纸面记录。",
+                "market": "适用于本页",
+                "name": "J 表：课程材料发布前核对",
+                "period": "本页",
+                "publisher": "FermatMind",
+                "scope": "纸面练习",
+                "url": "#career-content-path"
+              },
+              {
+                "details": [
+                  "第五条列高等学校教师资格，第十三条规定相应认定。"
+                ],
+                "id": "teacher-qualifications",
+                "name": "教师资格条例",
+                "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyxzfg/202204/t20220422_620496.html"
+              },
+              {
+                "details": [
+                  "第十三条规定从事医师执业活动的注册要求。"
+                ],
+                "id": "physician-law",
+                "name": "中华人民共和国医师法",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202204/t20220412_2674457.html"
+              },
+              {
+                "details": [
+                  "完成原题和变式后打开折叠答案。"
+                ],
+                "id": "paper-answer-key",
+                "name": "纸面练习参考解（常见问题）",
+                "url": "#career-content-sources"
               }
             ]
           },
@@ -34366,8 +34423,8 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
-        "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为高校健康专业教师？教育、资格与职业发展路径",
+        "entry_heading": "任教、实践与纸面试做",
+        "heading": "入行与 J 表课程核对",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "health-specialties-teachers-postsecondary.path.career-path-block.21",
@@ -35845,7 +35902,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.50",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35859,7 +35916,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.52",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35873,7 +35930,7 @@
                 "copy_key": "career.item.career-snapshot-primary-locale",
                 "type": "prose"
               },
-              "月薪参考": {
+              "年工资参照（行业/岗位大类）": {
                 "$item": "health-specialties-teachers-postsecondary.china-salary.career-snapshot-primary-locale.54",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -35927,7 +35984,7 @@
         "bls_table": [
           {
             "fact_ref": "us-wage-low10-2025",
-            "指标": "薪资 · 10 分位",
+            "指标": "年薪 · 第 10 分位",
             "数值": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35943,7 +36000,7 @@
           },
           {
             "fact_ref": "us-wage-q25-2025",
-            "指标": "薪资 · 25 分位",
+            "指标": "年薪 · 第 25 分位",
             "数值": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.11",
               "block": "us-salary",
@@ -35959,7 +36016,7 @@
           },
           {
             "fact_ref": "us-wage-2025",
-            "指标": "薪资 · 中位数",
+            "指标": "年薪 · 第 50 分位",
             "数值": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.13",
               "block": "us-salary",
@@ -35975,7 +36032,7 @@
           },
           {
             "fact_ref": "us-wage-q75-2025",
-            "指标": "薪资 · 75 分位",
+            "指标": "年薪 · 第 75 分位",
             "数值": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.15",
               "block": "us-salary",
@@ -35991,7 +36048,7 @@
           },
           {
             "fact_ref": "us-wage-high10-2025",
-            "指标": "薪资 · 90 分位",
+            "指标": "年薪 · 第 90 分位",
             "数值": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.17",
               "block": "us-salary",
@@ -36114,7 +36171,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国高校健康专业教师工资多少（本职业（25-1071.00）自身口径）？",
+        "heading": "美国高校健康专业教师工资",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -36253,52 +36310,55 @@
         "wage_column_labels": [
           "工资统计位置",
           "年工资参考",
-          "折算边界",
+          "时薪原表",
           "怎样理解这个位置"
         ],
         "wage_heading": "美国工资分布",
         "wage_tiers": [
           {
-            "equivalent": "官方年工资，非个人月收入",
+            "equivalent": "未列",
             "interpretation": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最低 10%",
-            "value": {
-              "$fact": "us-wage-low10-2025",
-              "field": "display_value"
-            }
+            "label": "第 10 百分位",
+            "value": "59,270 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "未列",
+            "interpretation": "2025 年 5 月美国全国工资。",
+            "label": "第 25 百分位",
+            "value": "75,690 美元/年"
+          },
+          {
+            "equivalent": "未列",
             "interpretation": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "中位数（50%）",
-            "value": {
-              "$fact": "us-wage-2025",
-              "field": "display_value"
-            }
+            "label": "第 50 百分位",
+            "value": "107,310 美元/年"
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "未列",
+            "interpretation": "2025 年 5 月美国全国工资。",
+            "label": "第 75 百分位",
+            "value": "210,370 美元/年"
+          },
+          {
+            "equivalent": "未列",
             "interpretation": {
               "$item": "health-specialties-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最高 10%",
-            "value": {
-              "$fact": "us-wage-high10-2025",
-              "field": "display_value"
-            }
+            "label": "第 90 百分位",
+            "value": "322,020 美元/年"
           }
         ]
       },
@@ -36442,7 +36502,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36487,7 +36547,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls-ep-2025-2035",
             "value": {
               "$item": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36532,7 +36592,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "oews",
             "value": {
               "$item": "health-specialties-teachers-postsecondary.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36634,6 +36694,18 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "health-specialties-teachers-postsecondary.source-register.published.1"
+            },
+            "id": "bls-ep-2025-2035",
+            "label": "BLS Employment Projections, Table 1.2",
+            "scope": "美国本职业就业和空缺预测"
           }
         ],
         "transitions": [
@@ -36910,7 +36982,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034，本职业（25-1071.00）自身口径）",
+            "label": "2025–2035",
             "secondary_value": null,
             "value": {
               "$item": "health-specialties-teachers-postsecondary.profile.onet-structured-fields-block.4",
@@ -37752,7 +37824,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "大五人格（中文）"
+            "label": "大五人格测评"
           },
           {
             "href": {
@@ -37762,7 +37834,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "MBTI 偏好测评"
           },
           {
             "href": {
@@ -37772,7 +37844,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "智力与推理测评（中文）"
+            "label": "推理测评"
           },
           {
             "href": {
@@ -37782,7 +37854,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "情绪智力测评（中文）"
+            "label": "情绪能力测评"
           }
         ]
       },
@@ -37851,14 +37923,14 @@
       "interface.path.credential_boundary_label": "资格边界",
       "interface.path.entry_decisions_heading": "入行前要核对什么",
       "interface.path.next_step_label": "下一步",
-      "interface.path.promotion_evidence_label": "晋升证据",
+      "interface.path.promotion_evidence_label": "阶段记录与探索练习",
       "interface.path.responsibilities_label": "典型职责",
       "interface.profile.comparison.dimension_header": "维度",
       "interface.profile.comparison.primary_header": "主要方向",
       "interface.profile.comparison.secondary_header": "比较方向",
       "interface.profile.responsibilities_heading": "核心工作",
       "interface.quick_decision.caution_heading": "什么情况下需要慎重选择高校健康专业教师？",
-      "interface.quick_decision.experiment_heading": "如何用一次小实验判断自己是否适合高校健康专业教师？",
+      "interface.quick_decision.experiment_heading": "纸面试做能帮你观察什么？",
       "interface.quick_decision.suit_heading": "什么样的人更可能适合高校健康专业教师？",
       "interface.risk.affected_roles_label": "主要岗位",
       "interface.risk.consequence_label": "可能后果",
@@ -37960,19 +38032,19 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
-      "china-salary": "中国大陆薪资参考",
+      "ai-impact": "AI 与人工复核",
+      "china-salary": "中国大陆工资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
       "market-signals": "职业前景与相关职业转向",
       "navigation": "下一步与相关入口",
-      "path": "入行、资格与职业发展",
+      "path": "入行与 J 表课程核对",
       "profile": "职业画像",
       "quick-decision": "快速判断",
       "risk": "工作压力、风险与职业边界",
       "source-register": "资料来源",
       "sources": "常见问题与资料来源",
-      "us-salary": "美国薪资参考"
+      "us-salary": "美国高校健康专业教师工资"
     }
   },
   "fact_register": {
@@ -37990,19 +38062,19 @@
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 25-1071.00 页呈现；O*NET 在该页未标注该数据取自上或上级职业，本页按本职业（25-1071.00）自身口径如实标注，也不借用相邻职业数值；该页仅显示年薪、未显示时薪，本页不代填时薪；不含福利与奖金；中位为分布中点，分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
-        "display_value": "中位年薪 107,310 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；该页仅显示年薪）",
+        "derivation": "O*NET 全国工资原表，美国 2025 年 5 月 OEWS 年工资。",
+        "display_value": "107,310 美元/年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "工资中位数",
-        "occupation_scope": "本职业：高校健康专业教师",
-        "period": "2025",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "25-1071",
+        "period": "2025-05",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 25-1071.00 页呈现；O*NET 在该页未标注该数据取自上或上级职业，本页按本职业（25-1071.00）自身口径如实标注，也不借用相邻职业数值；该页仅显示年薪、未显示时薪，本页不代填时薪；不含福利与奖金；中位为分布中点，分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "O*NET 全国工资原表，美国 2025 年 5 月 OEWS 年工资。",
         "display_value": "第 10 分位年薪 59,270 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；仅年薪）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
@@ -38010,11 +38082,11 @@
         "occupation_scope": "本职业：高校健康专业教师",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 25-1071.00 页呈现；O*NET 在该页未标注该数据取自上或上级职业，本页按本职业（25-1071.00）自身口径如实标注，也不借用相邻职业数值；该页仅显示年薪、未显示时薪，本页不代填时薪；不含福利与奖金；中位为分布中点，分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "O*NET 全国工资原表，美国 2025 年 5 月 OEWS 年工资。",
         "display_value": "第 90 分位年薪 322,020 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；仅年薪）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
@@ -38022,71 +38094,71 @@
         "occupation_scope": "本职业：高校健康专业教师",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 2024—2034（经 O*NET 在 25-1071.00 页呈现，取值自本职业（25-1071.00），预测增长 7% 或更高并标注 Bright Outlook）；O*NET 该页示例的就业基期为 2024 年 289,600 人；预测含替换需求、不等于实际招聘数或裁员，且受高等教育入学结构与院校经费与临床教学需求影响；不代表个人岗位稳定性。",
-        "display_value": "增长 远快于平均 7% 或更高（2024—2034，BLS 就业预测，本职业（25-1071.00）自身口径）",
+        "derivation": "BLS 表 1.2 的 25-1071 行。",
+        "display_value": "+17.9%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长",
-        "occupation_scope": "本职业：高校健康专业教师",
-        "period": "2024—2034",
+        "measure": "美国预计就业变化（2025—2035）",
+        "occupation_scope": "25-1071",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测基期（2024 年本职业（25-1071.00）约 289,600 人，经 O*NET 呈现）；与 BLS OEWS 的时点就业估计口径不同（OEWS 只覆盖被抽样非农机构雇主、不含自雇），本页分别标注不混用；本职业受高等教育入学结构与院校经费与临床教学需求影响。",
-        "display_value": "就业 约 289,600 人（2024，BLS 就业预测基期，本职业（25-1071.00）自身口径）",
+        "derivation": "BLS 表 1.2 的 25-1071 行。",
+        "display_value": "约 278,400 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数",
-        "occupation_scope": "本职业：高校健康专业教师",
-        "period": "2024",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "25-1071",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测的期间空缺（2024—2034 本职业（25-1071.00）年均约 27,400 个，含增长与替补，经 O*NET 呈现）；为期间年均口径、主要由替换需求构成，不可读作净新增岗位。",
-        "display_value": "预计年均岗位空缺约 27,400 个（2024—2034，BLS 就业预测，本职业（25-1071.00）自身口径，含增长与替补）",
+        "derivation": "BLS 表 1.2 的 25-1071 行。",
+        "display_value": "年均约 24,900 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺",
-        "occupation_scope": "本职业：高校健康专业教师",
-        "period": "2024—2034",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "25-1071",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "口径｜中国大陆公开职业统计未建立与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业；高等教育与临床教学与学术诚信与隐私另按相应规范与要求执行；本页按证据政策登记缺口而不使用代理数字。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与 O*NET 25-1071.00（高校健康专业教师）精确对应的全国职业工资分布；不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "国家统计局表 2、5，行业均值。",
+        "display_value": "城镇非私营 133,539 元/年，城镇私营 63,908 元/年",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
-        "measure": "中国大陆精确职业工资",
+        "measure": "城镇教育行业工资参照",
         "occupation_scope": "本职业：高校健康专业教师",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs-wage-release-2025"
         ]
       },
       {
-        "derivation": "口径｜中国大陆公开职业统计未建立与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业；高等教育与临床教学与学术诚信与隐私另按相应规范与要求执行；本页按证据政策登记缺口而不使用代理数字。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与 O*NET 25-1071.00（高校健康专业教师）精确对应的全国职业工资分布；不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "国家统计局表 2、5，行业均值。",
+        "display_value": "城镇非私营 133,539 元/年，城镇私营 63,908 元/年",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
-        "measure": "中国大陆精确职业工资",
+        "measure": "城镇教育行业工资参照",
         "occupation_scope": "本职业：高校健康专业教师",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs-wage-release-2025"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 25-1071.00 页呈现；O*NET 在该页未标注该数据取自上或上级职业，本页按本职业（25-1071.00）自身口径如实标注，也不借用相邻职业数值；该页仅显示年薪、未显示时薪，本页不代填时薪；不含福利与奖金；中位为分布中点，分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "O*NET 全国工资原表，美国 2025 年 5 月 OEWS 年工资。",
         "display_value": "第 25 分位年薪 75,690 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；仅年薪）",
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
@@ -38094,11 +38166,11 @@
         "occupation_scope": "本职业：高校健康专业教师",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 25-1071.00 页呈现；O*NET 在该页未标注该数据取自上或上级职业，本页按本职业（25-1071.00）自身口径如实标注，也不借用相邻职业数值；该页仅显示年薪、未显示时薪，本页不代填时薪；不含福利与奖金；中位为分布中点，分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "O*NET 全国工资原表，美国 2025 年 5 月 OEWS 年工资。",
         "display_value": "第 75 分位年薪 210,370 美元（2025 年，BLS OEWS，本职业（25-1071.00）自身口径；仅年薪）",
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
@@ -38106,65 +38178,53 @@
         "occupation_scope": "本职业：高校健康专业教师",
         "period": "2025",
         "source_refs": [
-          "onet"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "高校健康专业教师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "oews"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与人工复核"
     },
     "badges": [
-      "高校健康专业教师 · 任务、交付与责任边界",
-      "来源范围 · 统计口径 · 人工复核",
-      "中国精确职业工资缺口按证据保留"
+      "高校医学与健康专业教师",
+      "工资与就业采用不同原表",
+      "中国大陆职业工资分布缺证"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国年薪中位数（2025，BLS OEWS，本职业（25-1071.00）自身口径）"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，本职业（25-1071.00）自身口径）"
+        "label": "美国预计就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024，本职业（25-1071.00）自身口径）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034，本职业（25-1071.00）自身口径）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "cn-urban-nonprivate-2025",
         "key": "china_pay",
-        "label": "中国大陆（暂无精确职业工资）"
+        "label": "城镇教育行业工资参照"
       }
     ]
   },
@@ -38172,17 +38232,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "高校健康专业教师做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET/SOC 25-1071.00）、Job Zone Five 与学历分布、美国工资与就业的本职业（25-1071.00）自身口径（工资仅年薪）与中国大陆数据缺口。"
+      "text": "了解高校医学与健康专业教师的日常交付、美国工资分位与就业预测，并用纸面练习核对原始记录。"
     },
     "title": {
       "availability": "available",
-      "text": "高校健康专业教师"
+      "text": "高校医学与健康专业教师做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "6e1d23bd6c7e0f7fd1bc0995eeb1d9f868107e51f659abdc08103f15d8cc741b",
+  "source_content_sha256": "3c3d70948c8ae66c0d94f50f6bc271fa564a17f1257528270b8e38efdeeda2ff",
   "subject": {
     "canonical_slug": "health-specialties-teachers-postsecondary",
-    "name": "高校健康专业教师",
-    "summary": "高校健康专业教师对应 O*NET/SOC 25-1071.00「Health Specialties Teachers, Postsecondary」这一精确职业：在健康专业领域教授课程，涵盖牙科、实验室技术、医学、药学、公共卫生、治疗与兽医等方向；核心任务包括准备课程材料与讲授课程与主持讨论与指导实验、评估与批改作业与论文与编制与实施与批改考试、维护学生出勤与成绩记录、指导教学与实习与研究并答疑、开展研究并发表与申请经费、参与招生与委员会与学术服务；常见职位名称包括 Assistant Professor 与 Associate Professor 与 Clinical Professor 与 Instructor 与 Lecturer 与 Professor 与 Public Health Professor。官方范围原文：Teach courses in health specialties, in fields such as dentistry, laboratory technology, medicine, pharmacy, public health, therapy, and veterinary medicine. 口径说明：O*NET 在 25-1071.00 页呈现的美国工资与就业与行业数据未标注取自上级职业，本页按本职业（25-1071.00）自身口径如实标注；该页工资仅显示年薪分布、未显示时薪，本页不代填时薪；该职业 2024—2034 年预测增长 7% 或更高并标注 Bright Outlook，且 O*NET 将其列入 Job Zone Five（需要大量准备，SVP 8.0 及以上）。本页内容不构成医疗、诊断、治疗、用药、法律或教育政策意见。"
+    "name": "高校医学与健康专业教师",
+    "summary": "高校医学与健康专业教师在高等教育中教授医学、药学、公共卫生、治疗专业、兽医或实验技术等课程。岗位可能兼有课程开发、评分、临床带教或科研。"
   }
 }

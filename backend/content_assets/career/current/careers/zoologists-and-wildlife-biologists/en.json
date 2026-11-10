@@ -23666,13 +23666,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Organize the fictional observation records, keep the survey duration and the pending identification status, compare the confirmed counts per 30 minutes, and then write a short report."
+              "Paper check | Two transect surveys cover different distances. Keep distance, timing and observation conditions, and explain comparability before discussing a change in counts. "
             ]
           },
           "id": "zoologists-and-wildlife-biologists.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24813,13 +24812,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Zoologists and wildlife biologists correspond to O*NET19-1023.00, studying animal taxonomy, behavior, genetics, disease, and life processes, surveying wild populations and habitats, analyzing environmental and human activity effects, and producing papers, reports, and conservation management recommendations. The research may take place in offices, laboratories, and the field, and is not daily husbandry, veterinary practice, or self-authorized enforcement. Degrees, positions, research activity permits, and on-site safety are verified separately; the paper exercise only compares fictional observation records and does not contact animals or infer real populations."
+              "Zoologists and wildlife biologists survey populations or habitats under a research design, record observation conditions, analyze results and explain limitations to research or management teams. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "zoologists-and-wildlife-biologists.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-19-1023.00"
           ],
           "type": "prose"
         }
@@ -25463,14 +25461,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Organization and outlines can be explored, while identification, methods, and conclusions need human rechecking; GIS, Python, and R background is not a generative adoption rate. The U.S. 19-1023 overall 2025—2035 projection of +3.6% with an annual average of 1,400 openings (including replacements) is separate employment background and not an AI attribution. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+0)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Two transect surveys cover different distances. Keep distance, timing and observation conditions, and explain comparability before discussing a change in counts."
             ]
           },
           "id": "zoologists-and-wildlife-biologists.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "editorial",
-            "bls"
+            "transfer-onet-19-1023.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33137,6 +33134,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-19-1023.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 19-1023.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/19-1023.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38673,10 +38697,10 @@
       "text": "Zoologists and wildlife biologists"
     }
   },
-  "source_content_sha256": "1692450bc19b2f62d079ed53a716527882ff0bce9ca23c0c70a022f5793412c1",
+  "source_content_sha256": "3d62ef2b4246669484828144df819fca1dc53611815407ccc28f5640802974b3",
   "subject": {
     "canonical_slug": "zoologists-and-wildlife-biologists",
     "name": "Zoologists and wildlife biologists",
-    "summary": "Zoologists and wildlife biologists correspond to O*NET19-1023.00, studying animal taxonomy, behavior, genetics, disease, and life processes, surveying wild populations and habitats, analyzing environmental and human activity effects, and producing papers, reports, and conservation management recommendations. The research may take place in offices, laboratories, and the field, and is not daily husbandry, veterinary practice, or self-authorized enforcement. Degrees, positions, research activity permits, and on-site safety are verified separately; the paper exercise only compares fictional observation records and does not contact animals or infer real populations."
+    "summary": "Zoologists and wildlife biologists survey populations or habitats under a research design, record observation conditions, analyze results and explain limitations to research or management teams."
   }
 }

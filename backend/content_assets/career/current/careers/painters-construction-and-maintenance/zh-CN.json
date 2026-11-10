@@ -164,6 +164,9 @@
       "item:painters-construction-and-maintenance.path.seven-day-trial.8": {
         "status": "mapped"
       },
+      "item:painters-construction-and-maintenance.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:painters-construction-and-maintenance.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -13075,6 +13078,21 @@
             "onet-education"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。工单写走廊墙面，旧照片拍的是相邻房间，现场复核栏空白。写清应核对的作业面与接收人。"
+            ]
+          },
+          "id": "painters-construction-and-maintenance.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "核建筑涂装工单的作业面",
+          "type": "notice"
         }
       ]
     },
@@ -15586,6 +15604,13 @@
         "id": "painters-construction-and-maintenance.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "painters-construction-and-maintenance.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15803,7 +15828,7 @@
       "text": "建筑与维护油漆工：工作内容、薪资与安全风险"
     }
   },
-  "source_content_sha256": "6465073d71e8f029c594c277ad5f08ca15698ddc3b8617c3f92d9e8259bab821",
+  "source_content_sha256": "bae856835fedc3fea9bf3053e18b8cefefcda01b6c2159cbdd79993285b60837",
   "subject": {
     "canonical_slug": "painters-construction-and-maintenance",
     "name": "建筑与维护油漆工",

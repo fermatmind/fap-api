@@ -23011,13 +23011,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Path: verify the local public security organ's formal recruitment announcement, qualifications, physical or professional assessments, and training requirements. The US BLS training academy path does not equal Chinese application conditions."
+              "Paper check | Label statements in a fictional incident note as direct observation, reported account or inference to verify. Write one question that requires consulting the original record. "
             ]
           },
           "id": "police-and-detectives.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23313,12 +23312,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Police patrol officers respond to community incidents, maintain order, record the situation, and start follow-up procedures as authorized."
+              "Police and detective roles span incident response, patrol, investigation and reporting. Patrol personnel often record immediate observations, while investigators also compare case records and evidence leads. Responsibilities vary by agency. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "police-and-detectives.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "transfer-onet-33-3051.00",
+            "transfer-onet-33-3021.00"
           ],
           "type": "prose"
         },
@@ -24417,15 +24417,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence is insufficient: no AI adoption rate, displacement rate, or task-level scoring basis for police and criminal investigation roles was obtained. Transcription, retrieval, record organization, and conflict prompts within authorized systems can serve as editorial trial suggestions; authorized personnel must still verify the originals, procedures, privacy, and judgment, and task exposure does not equal an employment outcome. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+25+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Label statements in a fictional incident note as direct observation, reported account or inference to verify. Write one question that requires consulting the original record."
             ]
           },
           "id": "police-and-detectives.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-33-3051.00",
+            "transfer-onet-33-3021.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32226,6 +32225,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-33-3051.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 33-3051.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/33-3051.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-33-3021.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 33-3021.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/33-3021.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -37470,10 +37510,10 @@
       "text": "Police and detectives: work tasks, wage definitions, and the entry path"
     }
   },
-  "source_content_sha256": "a4bc1e82c90ea07d8634b91fdf5ba519c971b426e616a7bd11cbfd31535efc15",
+  "source_content_sha256": "b5c9c0eb9f021e6dfa0c0b07166113086e70c1d57a488b27a4b3c45787702bd7",
   "subject": {
     "canonical_slug": "police-and-detectives",
     "name": "Police and Detectives",
-    "summary": "Police officers and detectives protect people and property, respond to incidents, patrol, collect and verify leads, and create records and hand over cases under lawful authorization and agency procedures. This page uses the US BLS Police and Detectives Occupational Outlook Handbook combined definition as the statistical reference; that combination also includes fish and game enforcement and transit and railroad police. The tasks and wages of patrol 33-3051 and investigation 33-3021 are verified separately, and US conditions cannot be treated as Chinese recruitment standards."
+    "summary": "Police and detective roles span incident response, patrol, investigation and reporting. Patrol personnel often record immediate observations, while investigators also compare case records and evidence leads. Responsibilities vary by agency."
   }
 }

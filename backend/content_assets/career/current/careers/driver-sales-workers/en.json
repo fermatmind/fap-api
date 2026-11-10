@@ -6,13 +6,13 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -36,7 +36,13 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "fact:posting-route-taian": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-route-zhangqiu": {
+        "status": "pending_mapping"
       },
       "fact:r5-current-china-jiaojiang-featured-daily-2026": {
         "status": "pending_mapping"
@@ -26090,7 +26096,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page."
+              "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. Wholesale and retail averages were CNY 135,749 and CNY 69,622, respectively. These averages cover multiple jobs and cannot estimate individual pay for this occupation."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
@@ -26146,7 +26152,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify the real contract's fixed/hourly/volume/commission terms, hours, allowances, and whether deductions are lawful. No real samples were obtained, so no usual combination or guaranteed peak-season income increase is claimed."
+              "Compare base pay, hours, allowances, commission rules and payment cycles."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
@@ -26188,12 +26194,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national single-occupation wage definition was obtained."
+              "A Tai’an Longshui Trading ad listed CNY 5,000–11,500 per month for driver-sales roles, separately from delivery-only drivers. A Zhangqiu Wangshuo ad combines consumer goods delivery, sales and customer upkeep; it listed CNY 5,000–12,000 without a pay period. Confirm targets, returns, base and variable pay. Two ads do not establish national wages."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "route-taian",
+            "route-zhangqiu"
           ],
           "type": "prose"
         },
@@ -26202,7 +26209,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify the real contract's fixed/hourly/volume/commission terms, hours, allowances, and whether deductions are lawful. No real samples were obtained, so no usual combination or guaranteed peak-season income increase is claimed."
+              "Compare base pay, hours, allowances, commission rules and payment cycles."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -26216,7 +26223,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page."
+              "These averages cover multiple jobs and cannot estimate individual pay for this occupation."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -26230,7 +26237,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial verification item: verify the real contract's fixed/hourly/volume/commission terms, hours, allowances, and whether deductions are lawful. No real samples were obtained, so no usual combination or guaranteed peak-season income increase is claimed."
+              "Compare base pay, hours, allowances, commission rules and payment cycles."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
@@ -26244,7 +26251,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page."
+              "No comparable nationwide occupational wage distribution for mainland China was found. The postings below show the terms listed by individual employers at the time."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26288,7 +26295,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page provides no recruitment quotes or personal income promises; missing items remain missing and are not replaced by industry averages or adjacent occupations."
+              "The historical postings show individual jobs and terms at the time. A comparable nationwide wage distribution for this occupation is unavailable."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -31025,7 +31032,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Verify the delivery slips and orders and route and customer list and count and load goods by quantity and batch number and shelf life, inspect the vehicle and refrigeration and food dispensing equipment and safety devices, and prepare documents and promotional materials and payment float; drive the vehicle along the set route or within the set area, deliver goods at the delivery point and obtain the customer's sign-off, take orders and introduce new products and price changes, stock shelves and set up promotional displays or hand out promotional materials, and collect payment and restock and remove stale goods for vending machines; collect payment and give change and issue receipts or charge to the account per the order, and listen to and handle customer complaints about goods or services; record sales and delivery information on the daily sales or delivery record, complete payment and document settlement and reconciliation and handle discrepancies and returns and rejections, maintain the vehicle and food dispensing equipment and clean the interior of food or beverage dispensers, and report and hand over as required when damage or complaints or accidents or equipment anomalies occur.",
+                "answer": "Deliver goods along a route and handle the sales duties assigned to the job. Check stock and proof of delivery, then record sales, replenishment or returns as applicable and reconcile under employer procedures.",
                 "id": "actors.faq.1",
                 "question": "What does a driver/sales worker do on a typical day?",
                 "question_key": "career.faq.driver-sales-workers.1",
@@ -31034,13 +31041,12 @@
                 ]
               },
               {
-                "answer": "This page's occupation drives along a set route and sells and collects payment while delivering and takes orders and stocks at delivery points; heavy and tractor-trailer truck drivers focus on long-haul and trunk freight and usually do not take on sales and payment collection; light truck drivers focus on pure delivery and usually do not take on sales and payment collection and stocking. The object and duties and authorization differ and cannot be interchanged by name.",
+                "answer": "Delivery drivers focus on safe transport and handoff. Driver-sales workers also handle assigned route sales, ordering or customer service. Check the actual vehicle and local rules rather than inferring licensing from a job title.",
                 "id": "actors.faq.2",
                 "question": "How is it different from heavy and tractor-trailer truck drivers and light truck drivers?",
                 "question_key": "career.faq.driver-sales-workers.2",
                 "source_refs": [
-                  "onet",
-                  "agent"
+                  "onet"
                 ]
               },
               {
@@ -31054,9 +31060,9 @@
                 ]
               },
               {
-                "answer": "Route optimization and arrival reminders, order and inventory and restocking forecasts, and mobile payment and invoicing and reconciliation and delivery record archiving tools; these tools improve efficiency, but route and cost and food safety and payment judgment remain the responsibility of people.",
+                "answer": "Software may assist scheduling, routing or records. Staff verify conditions, customer disputes and exceptions under their own procedures. This page does not measure AI adoption, gains or replacement.",
                 "id": "actors.faq.4",
-                "question": "Which tasks already have tool or system support?",
+                "question": "Which tasks might software assist?",
                 "question_key": "career.faq.driver-sales-workers.4",
                 "source_refs": [
                   "onet"
@@ -31072,17 +31078,18 @@
                 ]
               },
               {
-                "answer": "In the U.S. BLS 2025 wage data, the median is 38,770 USD per year (18.64 USD per hour), annual percentiles are 22,590 / 30,200 / 38,770 / 49,000 / 59,980 USD, and hourly percentiles are 10.86 / 14.52 / 18.64 / 23.56 / 28.84 USD. Mainland China has no corresponding national single-occupation definition, so no median or percentiles are given, and industry average wages serve only as a visible industry proxy and exclude inferences about commissions or position mix or individual take-home income. When comparing real positions, verify the city and industry, unit type and size, whether it is route sales or pure delivery or express, whether it is a fixed salary or includes commissions and performance pay and fuel and meal allowances, and the pre-tax and post-tax definitions.",
+                "answer": "The May 2025 U.S. median wage was $18.64 per hour and $38,770 per year. A Tai’an Longshui Trading ad listed CNY 5,000–11,500 per month for driver-sales roles, separately from delivery-only drivers. A Zhangqiu Wangshuo ad combines consumer goods delivery, sales and customer upkeep; it listed CNY 5,000–12,000 without a pay period. Confirm targets, returns, base and variable pay. Two ads do not establish national wages.",
                 "id": "actors.faq.6",
                 "question": "What is the typical wage, and how should it be compared?",
                 "question_key": "career.faq.driver-sales-workers.6",
                 "source_refs": [
-                  "oews",
-                  "r2-pay-1"
+                  "onet",
+                  "route-taian",
+                  "route-zhangqiu"
                 ]
               },
               {
-                "answer": "The U.S. education feedback this round is only a qualitative answer (some positions require a high school diploma or equivalent and some require less than high school) and this page does not invent percentages; on the job, people usually learn through route mentoring and on-the-job training. Mainland China does not set a unified access-type occupational qualification for this occupation, but drivers engaged in commercial road passenger and freight transport must obtain the corresponding practitioner qualification certificate under the Provisions on the Administration of Road Transport Practitioners, and in practice enterprise and fleet and store requirements govern.",
+                "answer": "Education requirements vary by U.S. employer, and workers can learn through supervised route training. In mainland China, check the license class, vehicle gross mass and cargo. Article 52 of the transport ministry’s 2026 revised rule excludes drivers of ordinary freight vehicles with a gross mass of 4,500 kg or less. Check applicable requirements for other types of transport.",
                 "id": "actors.faq.7",
                 "question": "What education is needed, and how should training be done?",
                 "question_key": "career.faq.driver-sales-workers.7",
@@ -31112,13 +31119,12 @@
                 ]
               },
               {
-                "answer": "Consider the site and safety load (outdoor all kinds of weather 'every day' 100%, time pressure every day 92%, exposure to extreme heat or extreme cold every day 82%, inside an enclosed vehicle every day 78%, continuous use of hands 76%, continuous bending or twisting 59%, exposure to contaminants every day 40%) and the consequences of error (extremely serious 32%, serious 19%), as well as traffic and practitioner qualification and food safety and payment responsibilities.",
+                "answer": "BLS projects U.S. employment for 53-3031 to move from about 442,900 in 2025 to 478,100 in 2035 (+7.9%), with about 45,500 annual openings including replacements.",
                 "id": "actors.faq.10",
-                "question": "What else should be considered when choosing this occupation?",
+                "question": "How should you read the U.S. employment projection?",
                 "question_key": "career.faq.driver-sales-workers.10",
                 "source_refs": [
-                  "onet",
-                  "nist"
+                  "r5-bls-projections"
                 ]
               }
             ]
@@ -31138,7 +31144,7 @@
               "The exact U.S. occupation 53-3031 shows 2025 national 10/25/50/75/90 percentiles of 22,590 / 30,200 / 38,770 / 49,000 / 59,980 USD annual and 10.86 / 14.52 / 18.64 / 23.56 / 28.84 USD hourly, with the original figures retained correctly. OEWS straight-time pre-tax wages for employed workers include applicable tips, commissions, and production bonuses and the like and exclude self-employment, overtime premiums, shift differentials, and non-production bonuses and the like; commission-based work, outsourced or dispatched employees, and all performance allowances cannot be excluded across the board. Percentiles are not starting pay, seniority levels, or personal caps; no causal estimate of the effect of route density or sales volume on percentiles was obtained.",
               "BLS53-3031 exact line: 2025 employment 442.9 thousand → 2035 projected 478.1 thousand, a net increase of 35.2 thousand, growth 7.9%; 2025—2035 annual average openings 45.5 thousand, about 45,500 (including growth and replacement), not a ten-year total or annual net increase. Self-employment 7.3%; employment includes self-employment, while OEWS wages exclude self-employment. The O*NET category 7% or higher and the OOH exact line rounded to 8%, with the precise 7.9% taking priority; the OOH overall 7% / 152700 annual average is driver/sales plus light truck combined and is not treated as this occupation's figure. U.S. projections do not represent Chinese demand, a specific route, or individual hiring, and are not AI causality.",
               "O*NET2025 industry employment shares for this occupation: accommodation and food services 40% and wholesale 25%; the more detailed OOH figures are food services and drinking places 39%, wholesale 25%, retail 9%, and transportation and warehousing 6%, with the rounded self-employment 7% distinguished from the precise 7.3%. These are employment distributions for this occupation, not wages. The OOH 2025 industry annual median wages for this occupation: wholesale 49,090, transportation and warehousing 45,690, retail 36,640, and food services and drinking places 30,580 USD; they apply only to this occupation's employed wages in that industry and are not a substitute for China figures or an individual quote.",
-              "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page.",
+              "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. Wholesale and retail averages were CNY 135,749 and CNY 69,622, respectively. These averages cover multiple jobs and cannot estimate individual pay for this occupation.",
               "The O*NET education feedback is only qualitative: some new hires require high school or equivalent and some less than high school; no percentages are invented. Job Zone1—2/SVP<6 is a preparation group with several days to one year of on-the-job training and does not mean the same course for every position. The BLS typical entry for this occupation is high school or equivalent, related experience None, and short-term on-the-job training; the OOH combined occupation narrative mentions 1 month or less of training and the requirement of a work-state driver's license and a good driving record, and the specific state/vehicle type conditions were not verified one by one. None does not mean training is unnecessary, and a lookup entry cannot prove nationwide exemption from driving licensing.",
               "The Provisions on the Administration of Road Transport Practitioners, Order No. 4 of 2026, fourth amendment, effective 2026-03-20, lists in Articles 2/6 the qualification subjects such as commercial passenger and freight drivers and dangerous goods; Article 10 covers the corresponding driving license for commercial freight, an age not exceeding 63, and related knowledge/examination certification, and it is not the case that all motor vehicle licenses are uniformly capped at 63. Article 29 provides that the qualification certificate is valid for 6 years and renewal is required no later than 30 days before expiry, and Article 32 provides for cancellation for exceeding 63 and other reasons. Article 38 applies to drivers and prohibits overloading and oversize loads, continuous driving of more than 4 hours, speeding, and fatigue; Article 46 sets 200—2000 yuan for missing, invalid, forged or altered, or out-of-scope passenger transport certificates and 200 yuan for freight under the same circumstances, with dangerous goods covered separately by Article 47 at 5—10 ten thousand yuan, and penalties are not mechanically applied as for ordinary freight. Article 52 provides that drivers of ordinary freight vehicles with a total mass of 4500 kg or less are not subject to these Provisions, which is not equivalent to exemption from the motor vehicle driving license, dangerous goods, or food obligations. Non-commercial activities cannot be said on this basis to be exempt from all qualifications, and taxis are subject to special rules that were not exhaustively verified this round, so it is not claimed that they are entirely unaffected.",
               "Road Transport Regulations, sixth revision of 2026-01-30: Article 2 covers the scope of transport operations and related business; Articles 21/22 cover freight vehicles and safety management and driving licenses, and the age and knowledge examination by the competent authority (with an exception for ordinary freight of 4500 kg or less); Article 24 provides that ordinary freight operations of the same kind do not need the business license and vehicle operating certificate under that Article, which are business and vehicle formalities and not an individual driving permit. Article 28 applies to operator education and practitioner procedures and continuous driving of no more than 4 hours, and Articles 30/31 cover vehicle maintenance and inspection and the operator's emergency plan for accidents and the like. The actual nature of the operation, total mass, and cargo category must be verified and cannot be determined by the name driver/sales.",
@@ -31518,11 +31524,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page."
+                  "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. Wholesale and retail averages were CNY 135,749 and CNY 69,622, respectively. These averages cover multiple jobs and cannot estimate individual pay for this occupation."
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs",
-                "limitation": "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page.",
+                "limitation": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. Wholesale and retail averages were CNY 135,749 and CNY 69,622, respectively. These averages cover multiple jobs and cannot estimate individual pay for this occupation.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics public channels: average annual wages of urban unit employed persons in 2025",
                 "period": "2025; accessed 2026-09-19",
@@ -31562,7 +31568,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "U.S. 53-3031.00 is defined as driving a vehicle along a set route/area to sell or deliver goods and to collect or deliver items such as commercial laundry, with order taking, payment collection, and stocking being possible duties, and it cannot be said that every person must perform all tasks. Its 11 tasks are 6 Core / 5 Supplemental: driving to deliver 83, introducing new products/services and prices to regular customers 77, daily records 76, listening to and resolving complaints 75, collecting payment and giving change and recording customer receipts 74, and maintaining the truck/food dispensing equipment and cleaning 74 are Core; promotional displays 79, vending machine coin collection and restocking and removal of old goods 78, company-rule order and sales contracts 67, verifying the customer/delivery list and loading 63, and selling specialty food (importance not provided) are Supplemental. Repair and cleaning can be part of this occupation's duties, but authority for major repair/handling must be verified separately; cold chain and batch number and shelf life apply to actual food rather than all goods. Actually read from 57 U.S. context items: outdoor all kinds of weather every day 100%, deadlines every day 92%, heat and cold every day 82% / weekly but not every day 18%, face-to-face every day 77% / weekly but not every day 18%; typical week more than 40 hours 81% / 40 hours 14%, regular 82% / irregular 18%. Continuous use of hands 76%, repetitive motions 64%, bending and twisting 59%, enclosed vehicle every day 78% / never 22%; decision freedom very large 43% / some 14% / none 14%, daily decisions 39%, contaminants every day 40%. Unpleasant or angry people every day 19% / weekly but not every day 18%, conflict weekly but not every day 26% / yearly but not monthly 15% / never 17%; violent people yearly but not monthly 18% / never 82%, which is not daily personal attacks. Error extremely serious 32% / serious 19% / not serious at all 12%, competition extremely high 21%. Proportions for telephone/email/continuous contact/teamwork/automation were not given in this feedback and are not filled in as 0, and no GenAI adoption rate or individual accident rate is inferred. The O*NET education feedback is only qualitative: some new hires require high school or equivalent and some less than high school; no percentages are invented. Job Zone1—2/SVP<6 is a preparation group with several days to one year of on-the-job training and does not mean the same course for every position. The BLS typical entry for this occupation is high school or equivalent, related experience None, and short-term on-the-job training; the OOH combined occupation narrative mentions 1 month or less of training and the requirement of a work-state driver's license and a good driving record, and the specific state/vehicle type conditions were not verified one by one. None does not mean training is unnecessary, and a lookup entry cannot prove nationwide exemption from driving licensing. O*NET2025 industry employment shares for this occupation: accommodation and food services 40% and wholesale 25%; the more detailed OOH figures are food services and drinking places 39%, wholesale 25%, retail 9%, and transportation and warehousing 6%, with the rounded self-employment 7% distinguished from the precise 7.3%. These are employment distributions for this occupation, not wages. The OOH 2025 industry annual median wages for this occupation: wholesale 49,090, transportation and warehousing 45,690, retail 36,640, and food services and drinking places 30,580 USD; they apply only to this occupation's employed wages in that industry and are not a substitute for China figures or an individual quote."
                 ],
@@ -31574,7 +31580,7 @@
                 "period": "updated 2026; accessed 2026-09-19",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/53-3031.00"
+                "url": "https://www.onetonline.org/link/details/53-3031.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31594,11 +31600,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page. The original human resources homepage is not a quote sample."
+                  "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. Wholesale and retail averages were CNY 135,749 and CNY 69,622, respectively. These averages cover multiple jobs and cannot estimate individual pay for this occupation."
                 ],
                 "evidence_type": "official navigation entry",
                 "id": "r2-pay-1",
-                "limitation": "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page. The original human resources homepage is not a quote sample.",
+                "limitation": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. Wholesale and retail averages were CNY 135,749 and CNY 69,622, respectively. These averages cover multiple jobs and cannot estimate individual pay for this occupation.",
                 "market": "Mainland China",
                 "name": "Entry point for verifying Chinese public recruitment and pay definitions (editorial synthesis)",
                 "period": "accessed 2026-09-19",
@@ -31772,16 +31778,16 @@
                 "url": "https://www.onetonline.org/link/localwages/53-3031.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "BLS53-3031 exact line: 2025 employment 442.9 thousand → 2035 projected 478.1 thousand, a net increase of 35.2 thousand, growth 7.9%; 2025—2035 annual average openings 45.5 thousand, about 45,500 (including growth and replacement), not a ten-year total or annual net increase. Self-employment 7.3%; employment includes self-employment, while OEWS wages exclude self-employment. The O*NET category 7% or higher and the OOH exact line rounded to 8%, with the precise 7.9% taking priority; the OOH overall 7% / 152700 annual average is driver/sales plus light truck combined and is not treated as this occupation's figure. U.S. projections do not represent Chinese demand, a specific route, or individual hiring, and are not AI causality. The O*NET education feedback is only qualitative: some new hires require high school or equivalent and some less than high school; no percentages are invented. Job Zone1—2/SVP<6 is a preparation group with several days to one year of on-the-job training and does not mean the same course for every position. The BLS typical entry for this occupation is high school or equivalent, related experience None, and short-term on-the-job training; the OOH combined occupation narrative mentions 1 month or less of training and the requirement of a work-state driver's license and a good driving record, and the specific state/vehicle type conditions were not verified one by one. None does not mean training is unnecessary, and a lookup entry cannot prove nationwide exemption from driving licensing."
+                  "BLS projects U.S. employment for 53-3031 to move from about 442,900 in 2025 to 478,100 in 2035 (+7.9%), with about 45,500 annual openings including replacements."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "r5-bls-projections",
                 "limitation": "BLS53-3031 exact line: 2025 employment 442.9 thousand → 2035 projected 478.1 thousand, a net increase of 35.2 thousand, growth 7.9%; 2025—2035 annual average openings 45.5 thousand, about 45,500 (including growth and replacement), not a ten-year total or annual net increase. Self-employment 7.3%; employment includes self-employment, while OEWS wages exclude self-employment. The O*NET category 7% or higher and the OOH exact line rounded to 8%, with the precise 7.9% taking priority; the OOH overall 7% / 152700 annual average is driver/sales plus light truck combined and is not treated as this occupation's figure. U.S. projections do not represent Chinese demand, a specific route, or individual hiring, and are not AI causality. The O*NET education feedback is only qualitative: some new hires require high school or equivalent and some less than high school; no percentages are invented. Job Zone1—2/SVP<6 is a preparation group with several days to one year of on-the-job training and does not mean the same course for every position. The BLS typical entry for this occupation is high school or equivalent, related experience None, and short-term on-the-job training; the OOH combined occupation narrative mentions 1 month or less of training and the requirement of a work-state driver's license and a good driving record, and the specific state/vehicle type conditions were not verified one by one. None does not mean training is unnecessary, and a lookup entry cannot prove nationwide exemption from driving licensing.",
                 "market": "United States",
                 "name": "BLS53-3031 employment projection 2025—2035",
-                "period": "2025—2035",
+                "period": "2025–2035",
                 "publisher": "BLS",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31892,6 +31898,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Five driver-sales positions at CNY 5,000–11,500 per month, secondary vocational education or above and preferred consumer goods experience. Delivery-only drivers are listed separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "route-taian",
+                "limitation": "Historical posting, not national statistics or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Tai’an Longshui Trading: driver and sales worker",
+                "period": "2026-03",
+                "publisher": "Tai’an Human Resources and Social Security",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.taian.gov.cn/art/2026/3/13/art_214534_10320734.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Township consumer goods delivery, sales and customer and vehicle upkeep; CNY 5,000–12,000 without a stated pay period."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "route-zhangqiu",
+                "limitation": "Historical posting, not national statistics or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Zhangqiu Wangshuo Trading: route sales and food delivery",
+                "period": "2025-08",
+                "publisher": "Zhangqiu Talent Network",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zqrc.com.cn/job/44066.html"
               }
             ]
           },
@@ -34688,7 +34724,7 @@
             {
               "指标": "Data type",
               "数值": "Occupational wage gap; industry annual averages listed separately",
-              "说明": "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page."
+              "说明": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. Wholesale and retail averages were CNY 135,749 and CNY 69,622, respectively. These averages cover multiple jobs and cannot estimate individual pay for this occupation."
             },
             {
               "指标": "Road transport practitioner qualification",
@@ -34718,12 +34754,12 @@
             {
               "指标": "Sample boundaries",
               "数值": "Wage sample scope",
-              "说明": "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page."
+              "说明": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. Wholesale and retail averages were CNY 135,749 and CNY 69,622, respectively. These averages cover multiple jobs and cannot estimate individual pay for this occupation."
             },
             {
               "指标": "Regional comparison",
               "数值": "Chinese and U.S. interpreted separately",
-              "说明": "The exact U.S. occupation 53-3031 shows 2025 national 10/25/50/75/90 percentiles of 22,590 / 30,200 / 38,770 / 49,000 / 59,980 USD annual and 10.86 / 14.52 / 18.64 / 23.56 / 28.84 USD hourly, with the original figures retained correctly. OEWS straight-time pre-tax wages for employed workers include applicable tips, commissions, and production bonuses and the like and exclude self-employment, overtime premiums, shift differentials, and non-production bonuses and the like; commission-based work, outsourced or dispatched employees, and all performance allowances cannot be excluded across the board. Percentiles are not starting pay, seniority levels, or personal caps; no causal estimate of the effect of route density or sales volume on percentiles was obtained. National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page."
+              "说明": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. Wholesale and retail averages were CNY 135,749 and CNY 69,622, respectively. These averages cover multiple jobs and cannot estimate individual pay for this occupation."
             }
           ],
           "china_ai_row": {
@@ -34766,7 +34802,7 @@
             },
             {
               "学历段": "National occupation-level wage distribution",
-              "岗位方向": "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page.",
+              "岗位方向": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. Wholesale and retail averages were CNY 135,749 and CNY 69,622, respectively. These averages cover multiple jobs and cannot estimate individual pay for this occupation.",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
                 "block": "china-salary",
@@ -34890,7 +34926,7 @@
               }
             },
             {
-              "城市/区间": "Recruitment quotes (not a substitute for actual pay)",
+              "城市/区间": "Mainland China historical job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34902,13 +34938,14 @@
           "china_soc_row": "Mainland China wage definition",
           "edu": "See the entry module for training and driving and practitioner qualifications",
           "fact_refs": [
-            "r5-current-china-jiaojiang-featured-daily-2026"
+            "posting-route-taian",
+            "posting-route-zhangqiu"
           ],
           "sources_note": "Source links are used within their respective scopes of application.",
           "ui": {
             "ai_heading": "Will AI and automation directly change the income of this occupation?",
             "driver_heading": "What should be verified when discussing pay for comparable positions in mainland China?",
-            "official_heading": "Official mainland China definitions and statistical gaps",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Comparison of pay methods and statistical boundaries",
             "scenario_heading": "Can the pay methods of comparable positions in mainland China be compared directly?",
             "scenario_interpretation_label": "Scope of application and gaps",
@@ -35588,7 +35625,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/heavy-and-tractor-trailer-truck-drivers",
+            "target_href": "/en/career/jobs/heavy-and-tractor-trailer-truck-drivers",
             "target_slug": "heavy-and-tractor-trailer-truck-drivers",
             "target_title": "Heavy and tractor-trailer truck drivers: compared by vehicle type and freight task",
             "transition_distance": {
@@ -35611,7 +35648,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/light-truck-drivers",
+            "target_href": "/en/career/jobs/light-truck-drivers",
             "target_slug": "light-truck-drivers",
             "target_title": "Light truck drivers: duty differences in mainly picking up and delivering goods",
             "transition_distance": {
@@ -35634,7 +35671,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/couriers-and-messengers",
+            "target_href": "/en/career/jobs/couriers-and-messengers",
             "target_slug": "couriers-and-messengers",
             "target_title": "Couriers and messengers: differences from this occupation in pickup and delivery item timeliness",
             "transition_distance": {
@@ -35657,7 +35694,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/retail-salespersons",
+            "target_href": "/en/career/jobs/retail-salespersons",
             "target_slug": "retail-salespersons",
             "target_title": "Retail salespersons: differences from this occupation in in-store closing",
             "transition_distance": {
@@ -35680,7 +35717,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/bus-drivers-transit-and-intercity",
+            "target_href": "/en/career/jobs/bus-drivers-transit-and-intercity",
             "target_slug": "bus-drivers-transit-and-intercity",
             "target_title": "Bus drivers, transit and intercity: differences from this occupation in passenger driving",
             "transition_distance": {
@@ -35703,7 +35740,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/stockers-and-order-fillers",
+            "target_href": "/en/career/jobs/stockers-and-order-fillers",
             "target_slug": "stockers-and-order-fillers",
             "target_title": "Stockers and order fillers: differences from this occupation in stocking and order filling",
             "transition_distance": {
@@ -35726,7 +35763,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/cashiers",
+            "target_href": "/en/career/jobs/cashiers",
             "target_slug": "cashiers",
             "target_title": "Cashiers: differences from this occupation in the settlement scenario",
             "transition_distance": {
@@ -35749,7 +35786,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/counter-and-rental-clerks",
+            "target_href": "/en/career/jobs/counter-and-rental-clerks",
             "target_slug": "counter-and-rental-clerks",
             "target_title": "Counter and rental clerks: differences from this occupation in counter business",
             "transition_distance": {
@@ -35837,7 +35874,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore my career interests",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -35886,7 +35923,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Explore my Big Five traits",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -35935,7 +35972,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore my personality preferences",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -35984,7 +36021,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Explore my motivation cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -36033,7 +36070,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore my cognitive performance",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -36082,7 +36119,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Explore my communication cues",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -36704,7 +36741,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore the task interests and work preferences of driver/sales workers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37204,7 +37241,7 @@
         "fact_id": "median",
         "market": "United States",
         "measure": "Median wage (annual definition, with hourly definition)",
-        "occupation_scope": "For this occupation (53-3031.00); this figure uses the employed pre-tax wage statistical definition and excludes commissions and performance pay and fuel and meal allowances and overtime and full attendance, so it cannot be treated as an individual's take-home income",
+        "occupation_scope": "U.S. SOC 53-3031 nationwide straight-time wage for employees. It can include commissions and production bonuses and excludes overtime premiums and self-employment.",
         "period": "2025 wage data; searched 2026-09-19",
         "source_refs": [
           "oews"
@@ -37235,39 +37272,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 451,500 people (2024, O*NET summary page definition)",
+        "derivation": "BLS Table 1.2, exact occupation.",
+        "display_value": "442,900 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
         "measure": "Employment size (stock statistic)",
         "occupation_scope": "For this occupation (53-3031.00); the size is large and changes with consumption and delivery demand and pickup, delivery app, and retail channel shifts; the national total does not indicate specific opportunities in a given city or route, and statistical fluctuation is related to industry conditions",
-        "period": "2024 base period; searched 2026-09-19",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "r5-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "The 2024—2034 projection is 'much faster than average (Much faster than average, 7% or higher)' (the category and threshold noted on the O*NET summary page; that page does not give a single precise percentage)",
+        "derivation": "BLS Table 1.2, exact occupation.",
+        "display_value": "+7.9%",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment change (occupation total)",
-        "occupation_scope": "For this occupation, projection period 2024—2034; this projection is a change in the occupation total and not an individual's chance of being hired; that page gives only the 'much faster than average (7% or higher)' category and threshold rather than a single precise percentage, and this page follows the source wording instead of converting percentages itself; this page did not obtain a first-hand BLS occupational outlook page definition for this occupation",
-        "period": "2024—2034 projection period; searched 2026-09-19",
+        "occupation_scope": "U.S. SOC 53-3031",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "About 51,300 (2024—2034, including replacement needs; O*NET summary page definition)",
+        "derivation": "BLS Table 1.2, exact occupation.",
+        "display_value": "45,500 annually (including replacements)",
         "fact_id": "openings",
         "market": "United States",
         "measure": "Projected period job openings (including replacement needs)",
-        "occupation_scope": "For this occupation; this is the total openings formed by growth and replacement during the projection period, not annual net new positions and not a direct measure of individual opportunity; the period noted on that O*NET page is 2024—2034, and this page cites that definition without converting to annual figures",
-        "period": "2024—2034 projection period; searched 2026-09-19",
+        "occupation_scope": "U.S. SOC 53-3031",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "r5-bls-projections"
         ]
       },
       {
@@ -37358,37 +37395,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2025 employment 442.9 thousand",
+        "derivation": "BLS Table 1.2, exact occupation.",
+        "display_value": "442,900 jobs (2025)",
         "fact_id": "r5-current-employment",
         "market": "United States",
         "measure": "Employment stock",
         "occupation_scope": "BLS53-3031 exact line: 2025 employment 442.9 thousand → 2035 projected 478.1 thousand, a net increase of 35.2 thousand, growth 7.9%; 2025—2035 annual average openings 45.5 thousand, about 45,500 (including growth and replacement), not a ten-year total or annual net increase. Self-employment 7.3%; employment includes self-employment, while OEWS wages exclude self-employment. The O*NET category 7% or higher and the OOH exact line rounded to 8%, with the precise 7.9% taking priority; the OOH overall 7% / 152700 annual average is driver/sales plus light truck combined and is not treated as this occupation's figure. U.S. projections do not represent Chinese demand, a specific route, or individual hiring, and are not AI causality.",
-        "period": "2025—2035",
+        "period": "2025",
         "source_refs": [
           "r5-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2025—2035 growth 7.9%; net increase 35.2 thousand",
+        "derivation": "BLS Table 1.2, exact occupation.",
+        "display_value": "+7.9%",
         "fact_id": "r5-current-growth",
         "market": "United States",
         "measure": "Projected change",
         "occupation_scope": "BLS53-3031 exact line: 2025 employment 442.9 thousand → 2035 projected 478.1 thousand, a net increase of 35.2 thousand, growth 7.9%; 2025—2035 annual average openings 45.5 thousand, about 45,500 (including growth and replacement), not a ten-year total or annual net increase. Self-employment 7.3%; employment includes self-employment, while OEWS wages exclude self-employment. The O*NET category 7% or higher and the OOH exact line rounded to 8%, with the precise 7.9% taking priority; the OOH overall 7% / 152700 annual average is driver/sales plus light truck combined and is not treated as this occupation's figure. U.S. projections do not represent Chinese demand, a specific route, or individual hiring, and are not AI causality.",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2025—2035 annual average openings about 45,500 (including replacement)",
+        "derivation": "BLS Table 1.2, exact occupation.",
+        "display_value": "45,500 annually (including replacements)",
         "fact_id": "r5-current-openings",
         "market": "United States",
         "measure": "Annual average openings",
         "occupation_scope": "BLS53-3031 exact line: 2025 employment 442.9 thousand → 2035 projected 478.1 thousand, a net increase of 35.2 thousand, growth 7.9%; 2025—2035 annual average openings 45.5 thousand, about 45,500 (including growth and replacement), not a ten-year total or annual net increase. Self-employment 7.3%; employment includes self-employment, while OEWS wages exclude self-employment. The O*NET category 7% or higher and the OOH exact line rounded to 8%, with the precise 7.9% taking priority; the OOH overall 7% / 152700 annual average is driver/sales plus light truck combined and is not treated as this occupation's figure. U.S. projections do not represent Chinese demand, a specific route, or individual hiring, and are not AI causality.",
-        "period": "2025—2035",
+        "period": "2025–2035",
         "source_refs": [
           "r5-bls-projections"
         ]
@@ -37446,11 +37483,11 @@
       },
       {
         "derivation": null,
-        "display_value": "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page. The Provisions on the Administration of Road Transport Practitioners, Order No. 4 of 2026, fourth amendment, effective 2026-03-20, lists in Articles 2/6 the qualification subjects such as commercial passenger and freight drivers and dangerous goods; Article 10 covers the corresponding driving license for commercial freight, an age not exceeding 63, and related knowledge/examination certification, and it is not the case that all motor vehicle licenses are uniformly capped at 63. Article 29 provides that the qualification certificate is valid for 6 years and renewal is required no later than 30 days before expiry, and Article 32 provides for cancellation for exceeding 63 and other reasons. Article 38 applies to drivers and prohibits overloading and oversize loads, continuous driving of more than 4 hours, speeding, and fatigue; Article 46 sets 200—2000 yuan for missing, invalid, forged or altered, or out-of-scope passenger transport certificates and 200 yuan for freight under the same circumstances, with dangerous goods covered separately by Article 47 at 5—10 ten thousand yuan, and penalties are not mechanically applied as for ordinary freight. Article 52 provides that drivers of ordinary freight vehicles with a total mass of 4500 kg or less are not subject to these Provisions, which is not equivalent to exemption from the motor vehicle driving license, dangerous goods, or food obligations. Non-commercial activities cannot be said on this basis to be exempt from all qualifications, and taxis are subject to special rules that were not exhaustively verified this round, so it is not claimed that they are entirely unaffected. Road Transport Regulations, sixth revision of 2026-01-30: Article 2 covers the scope of transport operations and related business; Articles 21/22 cover freight vehicles and safety management and driving licenses, and the age and knowledge examination by the competent authority (with an exception for ordinary freight of 4500 kg or less); Article 24 provides that ordinary freight operations of the same kind do not need the business license and vehicle operating certificate under that Article, which are business and vehicle formalities and not an individual driving permit. Article 28 applies to operator education and practitioner procedures and continuous driving of no more than 4 hours, and Articles 30/31 cover vehicle maintenance and inspection and the operator's emergency plan for accidents and the like. The actual nature of the operation, total mass, and cargo category must be verified and cannot be determined by the name driver/sales. Road Traffic Safety Law 2021: Article 19 requires the corresponding driving license and permitted vehicle type; Article 21 requires a careful inspection of safety and technical performance before departure and prohibits driving a vehicle with safety hazards; Article 22 prohibits driving under conditions such as excessive fatigue that affect safe driving. Article 70 requires stopping immediately at an accident to protect the scene, immediately rescuing the injured and promptly calling the police; where there is no injury and no dispute over the facts and cause, the parties may immediately leave the scene and restore traffic and negotiate, and if they do not leave they must promptly call the police, while for minor property damage with clear facts they should leave first and then negotiate. Article 73 provides that the public security traffic management department prepares the accident determination letter, and the individual or organization does not issue a formal liability conclusion on its own. General complaints and payment discrepancies and accidents cannot be handled by the same stop-work and reporting sequence; enterprise restart systems were not obtained. Food Safety Law 2025 revision government text: Article 33, item 6, covers safe, harmless, and clean containers, tools, and equipment for transport, storage, and loading and unloading, pollution prevention, the required temperature and humidity conditions, and not transporting together with toxic or harmful items; this item also applies to non-food operators engaged in storage, transport, and loading and unloading. Article 45 covers the health system and the annual health examination certificate for personnel who come into contact with directly edible food, and it is not a uniform health certificate for all packaged food delivery workers. Article 44 covers training and management of operating enterprises and the responsibility of the principal person in charge; Article 47 provides that if operating conditions no longer meet requirements rectification is required, and that if there is a potential food accident risk food operations must be stopped immediately and reported to the food safety department at or above the county level where the business is located; Article 63 provides that food that does not meet standards or may be harmful is stopped, notified, and recalled according to law by the corresponding producer or operator, and it is not an authority for delivery workers to destroy it at will. Article 41 additionally provides for a permitted transport system for road bulk transport of key liquid foods, which covers only that specific scope, and the specific catalog and supporting rules were not verified this round and are not generalized to ordinary parcels.",
+        "display_value": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. Wholesale and retail averages were CNY 135,749 and CNY 69,622, respectively. These averages cover multiple jobs and cannot estimate individual pay for this occupation.",
         "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
         "market": "Mainland China",
         "measure": "Wage gap and regulatory subjects",
-        "occupation_scope": "National Bureau of Statistics 2025 urban unit wages: transportation, storage, and postal services non-private 133981 / private 73133 yuan, wholesale and retail 135749 / 69622 yuan, and accommodation and food services 62461 / 55123 yuan, pre-tax annual averages, only matching possible industry background and not the median, percentiles, or monthly wage for driver/sales workers. Statistics for legal entities with 5 or more people exclude self-employment and freelance work and do not fully exclude commission-based, project, outsourced, or dispatched employees. Insufficient evidence: no exact national occupational wage for China or real pay samples were obtained, so it cannot be said that the country has never published them, nor can general allowances and deductions or a guaranteed peak-season raise be claimed. Whether deductions are lawful must be verified against the actual law and contract and is not authorized by this page.",
+        "occupation_scope": "In 2025, NBS reported gross annual average wages of CNY 133,981 in urban non-private units and CNY 73,133 in urban private units in transportation, storage and postal services. Wholesale and retail averages were CNY 135,749 and CNY 69,622, respectively. These averages cover multiple jobs and cannot estimate individual pay for this occupation.",
         "period": "2025/2026",
         "source_refs": [
           "nbs",
@@ -37471,6 +37508,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Five driver-sales positions at CNY 5,000–11,500 per month, secondary vocational education or above and preferred consumer goods experience. Delivery-only drivers are listed separately.",
+        "fact_id": "posting-route-taian",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Tai’an Longshui Trading: driver and sales worker",
+        "period": "2026-03",
+        "source_refs": [
+          "route-taian"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Township consumer goods delivery, sales and customer and vehicle upkeep; CNY 5,000–12,000 without a stated pay period.",
+        "fact_id": "posting-route-zhangqiu",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Zhangqiu Wangshuo Trading: route sales and food delivery",
+        "period": "2025-08",
+        "source_refs": [
+          "route-zhangqiu"
+        ]
       }
     ]
   },
@@ -37484,7 +37545,7 @@
     "badges": [
       "Route delivery and sales · delivery and payment collection · vehicle and food safety",
       "O*NET-SOC 53-3031.00 · 2025 wage data",
-      "Job Zone 1-2 · interest code RCE · 2024—2034 'much faster than average (7% or higher)'"
+      "Job Zone 1–2 · interest code RCE"
     ],
     "metrics": [
       {
@@ -37497,19 +37558,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034 'much faster than average (7% or higher)'; the source gives only the category and threshold)"
+        "label": "U.S. projected employment change (2025–2035): +7.9%"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employment (about 451,500 people in 2024)"
+        "label": "U.S. employment (2025): 442,900 jobs"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. projected job openings (about 51,300 in 2024—2034, including replacement needs)"
+        "label": "U.S. projected annual openings: 45,500 (including replacements)"
       },
       {
         "availability": "missing",
@@ -37523,17 +37584,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Driver/sales workers (O*NET-SOC 53-3031.00) drive a vehicle along a set route or within a set area to sell and collect payment while delivering: they verify the delivery slips and orders and route and load by quantity and batch number and shelf life, inspect the vehicle and refrigeration and food dispensing equipment, drive safely along the route and deliver and obtain sign-off and take orders and stock shelves and set up promotional displays at the delivery point, collect payment and give change and issue receipts or charge to the account per the order and handle discrepancies and returns and rejections, and record sales and delivery information and complete settlement and reconciliation and maintain the vehicle and equipment and report when anomalies occur. U.S. definition: the BLS 2025 wage data median is 38,770 USD per year (18.64 USD per hour), with annual percentiles of 22,590 / 30,200 / 38,770 / 49,000 / 59,980 USD; 2024 employment was about 451,500, and the 2024—2034 projection is 'much faster than average (7% or higher)' with about 51,300 projected openings; the preparation level is Job Zone 1-2 and the interest code is RCE. Mainland China: drivers engaged in commercial road passenger and freight transport obtain the corresponding practitioner qualification certificate under the Provisions on the Administration of Road Transport Practitioners (Ministry of Transport Order No. 4 of 2026); public statistics have not established an occupation-level wage definition, and this page visibly marks the gap in the relevant places."
+      "text": "Explore route delivery, sales and customer handoffs. Compare driver-sales job postings, U.S. wages and delivery-only duties."
     },
     "title": {
       "availability": "available",
       "text": "Driver/sales workers"
     }
   },
-  "source_content_sha256": "105e9019d7e8171b616cc39eb06f0c14e9a6f4529d291c3b98b02d4749a88d58",
+  "source_content_sha256": "b256e735259a4ce2df9d6151ad0531c02e3d843ad18e021588f5314c13f81bed",
   "subject": {
     "canonical_slug": "driver-sales-workers",
     "name": "Driver/sales workers",
-    "summary": "Driver/sales workers (U.S. side O*NET-SOC 53-3031.00, Driver/Sales Workers) are route sales positions that drive a vehicle along a set route or within a set area to sell and collect payment while delivering: they drive a truck or other vehicle to sell or deliver goods such as food and restaurant takeout, or to collect and deliver items such as commercial laundry; the work includes verifying the delivery slips and orders and route and loading goods, inspecting the vehicle and food dispensing equipment, driving along the route and delivering and obtaining sign-off at the delivery point, introducing new products and price changes and taking orders, stocking shelves and setting up promotional displays or handing out promotional materials, collecting payment and restocking and removing stale goods for vending machines, collecting payment and giving change and issuing receipts or charging to the account per the order, handling customer complaints about goods or services, recording sales and delivery information on the daily sales or delivery record, completing payment and document settlement and reconciliation and handling discrepancies and returns and rejections, maintaining the vehicle and food dispensing equipment and cleaning the interior of food or beverage dispensers, and reporting and handing over as required when damage or complaints or accidents or equipment anomalies occur. U.S. definition: the BLS 2025 wage data median is 38,770 USD per year (18.64 USD per hour), with annual percentiles of 22,590 / 30,200 / 38,770 / 49,000 / 59,980 USD (hourly percentiles 10.86 / 14.52 / 18.64 / 23.56 / 28.84); the O*NET summary page gives 2024 employment of about 451,500, a 2024—2034 projection of 'much faster than average (Much faster than average, 7% or higher)', and about 51,300 projected job openings (that source gives only the category and threshold rather than a single precise percentage, and this page follows the source wording); the preparation level is Job Zone 1-2 (SVP below 6.0), the education feedback this round is only a qualitative answer (some positions require a high school diploma or equivalent and some require less than high school), the interest code is RCE, and there are 11 tasks; the work context includes outdoor exposure to all kinds of weather 'every day' 100%, time pressure every day 92%, exposure to extreme heat or extreme cold every day 82%, repeating the same tasks 'extremely important' 76%, continuous use of hands 76%, inside an enclosed vehicle every day 78%, face-to-face discussions every day 77%, decision freedom 'very large' 43%, decisions every day 39%, having to deal with unpleasant or angry people every day 19%, conflict situations 'weekly or more' 26%, work hours 'regular' 82%, continuous repetitive motions 64%, continuous bending or twisting 59%, exposure to contaminants every day 40%, competition 'extremely competitive' 21%, consequences of error 'extremely serious' 32%, and working more than 40 hours per week 81%. Mainland China definition: drivers engaged in commercial road passenger and freight transport must obtain the corresponding practitioner qualification certificate under the Provisions on the Administration of Road Transport Practitioners (Ministry of Transport Order No. 4 of 2026, fourth amendment, published February 6, 2026 and effective from March 20, 2026); failing to obtain the corresponding practitioner qualification certificate, or using an invalid, forged, or altered certificate, or driving a road passenger vehicle beyond the approved scope is ordered to be corrected and fined not less than 200 yuan and not more than 2000 yuan, and driving a road freight vehicle in the same circumstances is ordered to be corrected and fined 200 yuan (Article forty-six); drivers using ordinary freight vehicles with a total mass of 4500 kg or less and drivers of non-commercial private vehicles do not need to obtain the practitioner qualification certificate, and these Provisions do not cover taxi drivers; at the same time the Road Traffic Safety Law of the People's Republic of China and (where food delivery is involved) the Food Safety Law of the People's Republic of China and the Law of the People's Republic of China on the Protection of Consumer Rights and Interests must be observed. The above is cited by regulation name and general requirements, and article numbers were not verified one by one. This occupation has no unified access-type occupational qualification in mainland China. Public statistics have not established an occupation-level wage definition corresponding to this occupation, this page preserves the gap as it stands, and industry average wages serve only as a visible industry proxy."
+    "summary": "Deliver goods along a route and handle the sales duties assigned to the job. Check stock and proof of delivery, then record sales, replenishment or returns as applicable and reconcile under employer procedures."
   }
 }

@@ -23,6 +23,18 @@
       "fact:us-wage": {
         "status": "pending_mapping"
       },
+      "fact:verified-us-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:verified-us-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:verified-us-openings": {
+        "status": "pending_mapping"
+      },
+      "fact:verified-us-pay": {
+        "status": "pending_mapping"
+      },
       "item:insulation-workers-mechanical.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -7221,12 +7233,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜本页对应 O*NET-SOC 47-2132.00「Insulation Workers, Mechanical」。官方范围为：对管道、风管或其他机械系统施加保温材料，以帮助控制并维持温度。该职业标注 Bright Outlook。核心交付是符合规格与安全要求的机械系统保温与保护层，而不是「把材料包上去」本身。风险来自管径与支架尺寸判断错误、保护层与密封不严、高处与受限空间作业、以及石棉等旧材料识别与拆除不当。美国工资未取得可安全固化的静态值，本页提供 O*NET 47-2132.00 当期查询入口；中国大陆精确职业工资未建立安全对应，本页仅以制造业行业门类平均工资作为显式代理并标注。若你难以承受登高、受限空间、粉尘与噪音等作业条件，应把这些作为需要认真权衡的现实成本。"
+              "施工前把管线编号、规格与支撑处逐项对应。运行状态或旧保温材料不明时，先交接待核。"
             ]
           },
           "id": "insulation-workers-mechanical.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "bls-insulation-ooh"
           ],
           "type": "prose"
         },
@@ -7249,7 +7262,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "判断是否适合机械绝缘工，先用公开或模拟材料做一次可核验的演练：设定一个完全虚构的工艺管道保温情境，写出从识读管线图纸与规格、按管径测量与成型、安装与固定支架、包裹保护层与密封、到检查与交接的流程，标注每一步的核对点与可能出现的问题（管径或支架尺寸判断错误、成型与贴合不良、保护层与密封不严、高处与受限空间风险、石棉等旧材料识别与处置不当）。完成后核对：是否把管线规格、支架与固定、作业安全、旧材料识别作为不可省略项；是否把超出个人权限的系统改动或旧材料处置写成请示或转交；是否把过程留成可复核记录。全部材料须为虚构，不进行真实登高、受限空间或拆除作业。"
+              "见「入行、资格与职业发展」的纸面练习《P 工单：管段保温记录》。"
             ]
           },
           "id": "insulation-workers-mechanical.quick-decision.fermat-decision-card.3",
@@ -7285,21 +7298,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "机械绝缘工对应美国 O*NET-SOC 47-2132.00「Insulation Workers, Mechanical」。官方范围为：对管道、风管或其他机械系统施加保温材料，以帮助控制并维持温度。典型工作闭环是识读管线图纸与规格、按管径与形状测量成型、安装与固定、包裹与密封、检查与交接。当前美国全国工资：2025年中位58,340美元/年；2025就业26,700人，2025—2035增长5%、年均空缺1,800个（总体预测，非AI归因）。中国精确职业工资缺口保留，行业均值只作宽参考。"
+              "机械设备保温工给管道、风管和其他机械系统加装保温层及保护层。工作要核对管线规格、支撑及接口，交付时记录待核异常。"
             ]
           },
           "id": "insulation-workers-mechanical.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
-            "source-pack-onet-custom",
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "source-pack-onet-localcert",
-            "source-pack-onet-localtraining",
-            "source-pack-onet-localwages",
-            "source-pack-onet-summary",
-            "onet-hot",
             "onet-details"
           ],
           "type": "prose"
@@ -7380,12 +7383,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入｜O*NET 47-2132.00 提供精确职业身份、任务、工作活动与工作情境；兴趣代码为 RC（现实型—常规型），Job Zone 第一至二级（72% 回答高中文凭、21% 回答高等教育证书、8% 低于高中文凭），并标注 Bright Outlook；主要行业为建筑业。当前美国全国工资：2025年中位58,340美元/年；2025就业26,700人，2025—2035增长5%、年均空缺1,800个（总体预测，非AI归因）。中国精确职业工资缺口保留，行业均值只作宽参考。"
+              "O*NET 47-2132.00 提供任务、工作情境与职业准备信息。工资与就业分别采用 OEWS 和 BLS 表 1.2。"
             ]
           },
           "id": "insulation-workers-mechanical.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "onet-summary"
+            "onet-details",
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7567,7 +7572,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜数字工具可辅助识读管线图纸与规格、估算材料用量、生成成型与施工清单、整理检查记录，但现场测量与成型判断、材料选型、支架与固定安全、高处与受限空间作业判断以及旧材料处置仍由人员承担。任务暴露不等于岗位替代，也不等于已普遍采用；正式使用需要授权、人工复核与留痕。本页不给出替代概率或时间表。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "直接回答｜数字工具可辅助识读管线图纸与规格、估算材料用量、生成成型与施工清单、整理检查记录，但现场测量与成型判断、材料选型、支架与固定安全、高处与受限空间作业判断以及旧材料处置仍由人员承担。任务暴露不等于岗位替代，也不等于已普遍采用；正式使用需要授权、人工复核与留痕。本页不给出替代概率或时间表。 AI影响度 17% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。这是对本页任务的编辑判断。 三项任务、档位和来源见本页FermatMind方法来源记录。"
             ]
           },
           "id": "insulation-workers-mechanical.ai-impact.ai-impact-table.2",
@@ -7690,7 +7695,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "宽口径参考｜工艺管道、风管与机械系统保温施工与建筑业相关。国家统计局表2/5：2025中国城镇建筑业单位就业人员平均年工资，非私营单位92,036元、私营单位66,275元。二者不是本职业工资区间、中位数或到手收入。依据：https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html。"
+              "国家统计局表 2、表 5：2025 年城镇建筑业单位平均年工资，非私营 92,036 元、私营 66,275 元。"
             ]
           },
           "fact_refs": [
@@ -7707,7 +7712,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开统计未建立与美国 O*NET-SOC 47-2132.00 精确对应的全国机械绝缘工职业工资分布。本页仅以制造业行业门类平均工资作为「显式代理」并标注来源与口径（2025 年城镇非私营单位制造业平均 113,594 元/年、城镇私营单位制造业平均 76,055 元/年，来源：国家统计局），不充当本职业中位数、起薪或到手收入，并要求核对当地真实招聘与岗位要求。"
+              "行业均值仅作背景。中国大陆本职业的工资分布仍缺证。"
             ]
           },
           "fact_refs": [
@@ -7749,7 +7754,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国薪资参考｜O*NET 47-2132.00 国家工资页，2025年BLS OEWS，美国全国精确职业口径；2026-10-11核对。"
+              "美国薪资参考｜O*NET 47-2132.00 国家工资页，2025年BLS OEWS，美国全国精确职业口径；2026-11-09核对。"
             ]
           },
           "id": "insulation-workers-mechanical.us-salary.career-snapshot-secondary-locale.1",
@@ -7763,7 +7768,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国2025年工资｜第10/25/50/75/90百分位年工资分别为 42,470 / 48,100 / 58,340 / 77,360 / 100,220 美元，中位数为58,340美元/年。百分位不是最低工资或经验等级；数据不等于个人到手收入。"
+              "2025 年 5 月美国全国年薪第 10、25、50、75、90 分位依次为 42,470、48,100、58,340、77,360、100,220 美元。2025 年 5 月美国全国年薪中位数 58,340 美元，时薪中位数 28.05 美元（BLS OEWS）。"
             ]
           },
           "id": "insulation-workers-mechanical.us-salary.career-snapshot-secondary-locale.2",
@@ -8054,12 +8059,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国入口｜BLS OOH机械保温工常经高中或同等学历后4—5年学徒训练，包含技术教学与有薪在岗训练；O*NET教育分布不是统一门槛。涉及石棉拆除需专门训练，部分州另需许可；中国具体岗位与作业条件另核。"
+              "美国 BLS 表 1.2 将典型入门列为高中或同等学历、学徒训练。应聘时核对学徒项目和现场作业授权。"
             ]
           },
           "id": "insulation-workers-mechanical.path.career-path-block.2",
           "source_refs": [
-            "onet-cert"
+            "bls-ep-2025-2035",
+            "bls-insulation-ooh"
           ],
           "type": "prose"
         },
@@ -8068,12 +8074,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "特定法域要求｜美国侧以 O*NET 准备信息代表典型路径并结合学徒或岗位训练；中国大陆的岗位准入、特种作业与安全生产要求受相关法规与机构制度约束，须分别核对，不能互相套用。"
+              "阳江市住建局通知分别列出外墙外保温配套材料、空调管网绝热材料的验收与复验要求。适用范围以当地项目规定为准。"
             ]
           },
           "id": "insulation-workers-mechanical.path.career-path-block.3",
           "source_refs": [
-            "onet-cert"
+            "cn-yangjiang"
           ],
           "type": "prose"
         },
@@ -8110,12 +8116,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "可复核证据｜用完全虚构的施工情境展示能力：管线图纸与规格识读、测量与成型、安装与密封方案、检查记录；不使用真实项目或现场数据，注明依据与假设。"
+              "纸面练习《P 工单：管段保温记录》。虚构工单 V2 将 A 管段记为 6 米，已确认图纸；B 为 3 米，编号一致但设备运行状态待核。V1 将 A 写为 5 米，已废止。记录版本、已确认长度和 B 的交接对象。变式只把 A 改为 7 米，重算已确认长度。"
             ]
           },
           "id": "insulation-workers-mechanical.path.career-path-block.6",
           "source_refs": [
-            "onet-cert"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8124,12 +8130,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "下一步动作｜完成一次虚构机械保温施工方案与检查记录，请有经验者挑战你的成型、材料选型与安全判断，并据此判断是否继续投入该方向；用可观察交付而不是课程名称证明能力。"
+              "完成原题和变式后，请人只凭你的记录复算。用是否保留原始尺寸、说明计算依据、把待核项单独交接来评估纸面成果。设备、现场条件和作业授权另核。"
             ]
           },
           "id": "insulation-workers-mechanical.path.career-path-block.7",
           "source_refs": [
-            "onet-cert"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8174,12 +8180,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国总体就业预测，非AI归因｜O*NET 47-2132.00：2025年就业26,700人，2025—2035增长5%，预计年均空缺1,800个（含增长与替补）。证据不足：中国该职业全国就业预测及规范招聘样本未取得，不能转换个人录用概率。"
+              "美国 BLS 表 1.2（47-2132）：2025 年约 26,700 个岗位，2035 年预计约 28,100 个，增幅 5.1%，年均约 1,800 个空缺。空缺含人员替补，人数分别取整。"
             ]
           },
           "id": "insulation-workers-mechanical.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8188,12 +8194,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国总体就业预测，非AI归因｜O*NET 47-2132.00：2025年就业26,700人，2025—2035增长5%，预计年均空缺1,800个（含增长与替补）。证据不足：中国该职业全国就业预测及规范招聘样本未取得，不能转换个人录用概率。"
+              "这些预测用于理解美国职业规模与替补需求。中国大陆本职业的全国就业预测与职业工资分布仍缺证。"
             ]
           },
           "id": "insulation-workers-mechanical.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8289,7 +8295,7 @@
                 ]
               },
               {
-                "answer": "证据不足：中国大陆公开统计未建立与 O*NET 47-2132.00 精确对应的全国机械绝缘工职业工资分布。本页仅以制造业行业门类平均工资作为显式代理并标注（2025 年城镇非私营单位制造业平均 113,594 元/年、城镇私营单位制造业平均 76,055 元/年，来源国家统计局），不充当本职业中位数或起薪，并请核对当地真实招聘。",
+                "answer": "国家统计局表 2、表 5：2025 年城镇建筑业单位平均年工资，非私营 92,036 元、私营 66,275 元。 行业均值仅作背景。中国大陆本职业的工资分布仍缺证。",
                 "id": "insulation-workers-mechanical.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.insulation-workers-mechanical.china-pay",
@@ -8298,23 +8304,22 @@
                 ]
               },
               {
-                "answer": "本页不固化美国该职业的静态工资数值（可能随地区与期间变化）；请以 O*NET 47-2132.00 国家工资页当期查询为准。OEWS 为雇主报告的工资、不含福利与奖金，地区或职业组数值不代表个人报价。",
+                "answer": "2025 年 5 月美国全国年薪中位数 58,340 美元，时薪中位数 28.05 美元（BLS OEWS）。同一职业分位不能代表具体地区的报价。",
                 "id": "insulation-workers-mechanical.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.insulation-workers-mechanical.us-pay",
                 "source_refs": [
-                  "source-pack-onet-localwages",
                   "onet-wages"
                 ]
               },
               {
-                "answer": "O*NET 准备信息显示该职业 Job Zone 第一至二级：通常要求高中文凭或同等学历（72% 回答高中文凭、21% 回答高等教育证书、8% 低于高中文凭），训练从几天到一年在职培训，并有注册学徒路径。进入该职业应结合训练与可验证的施工记录；学历、证书、许可、岗位录用、机构授权与签字权限必须分别核对。",
+                "answer": "美国 BLS 表 1.2 将典型入门列为高中或同等学历、学徒训练。应聘时核对学徒项目和现场作业授权。",
                 "id": "insulation-workers-mechanical.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.insulation-workers-mechanical.education-path",
                 "source_refs": [
-                  "source-pack-onet-localtraining",
-                  "source-pack-onet-localcert"
+                  "bls-ep-2025-2035",
+                  "bls-insulation-ooh"
                 ]
               },
               {
@@ -8328,13 +8333,12 @@
                 ]
               },
               {
-                "answer": "美国侧按 O*NET 47-2132.00 就业趋势页按地区与期间查询增长与空缺指标，本页不转录静态数值；中国大陆侧仅以制造业行业门类平均工资作为显式代理。空缺含增长与替换需求，不等于净新增岗位，也不能直接转换为个人录用概率。",
+                "answer": "美国 BLS 表 1.2（47-2132）：2025 年约 26,700 个岗位，2035 年预计约 28,100 个，增幅 5.1%，年均约 1,800 个空缺。空缺含人员替补，人数分别取整。",
                 "id": "insulation-workers-mechanical.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.insulation-workers-mechanical.outlook-transition",
                 "source_refs": [
-                  "onet-trends",
-                  "source-pack-onet-summary"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8478,31 +8482,31 @@
                   "Organizes assistable tasks and human controls.",
                   "Not adoption, job-loss, regulation or authorization evidence."
                 ],
-                "evidence_type": "internal task rubric",
+                "evidence_type": "编辑估计",
                 "id": "internal-rubric",
                 "limitation": "Not adoption, job-loss, regulation or authorization evidence.",
-                "market": "全球任务层面",
-                "name": "FermatMind 机械绝缘工任务影响量表",
-                "period": "FermatMind task rubric v2026.08; reviewed 2026-08-31",
+                "market": "适用于本页",
+                "name": "费马测试：本页 AI 任务估计",
+                "period": "2026-10-18",
                 "publisher": "FermatMind",
-                "scope": "internal_rubric",
-                "url": null
+                "scope": "本职业代表任务",
+                "url": "#career-ai-assessment-method"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Industry annual average wages for urban units.",
-                  "Industry means are not occupation medians and exclude self-employed workers."
+                  "国家统计局表 2、表 5：2025 年城镇建筑业单位平均年工资，非私营 92,036 元、私营 66,275 元。",
+                  "行业均值仅作背景。中国大陆本职业的工资分布仍缺证。"
                 ],
-                "evidence_type": "official industry wage statistics",
+                "evidence_type": "官方行业工资",
                 "id": "nbs-wages",
-                "limitation": "Industry means are not occupation medians and exclude self-employed workers.",
-                "market": "中国城镇单位制造业",
-                "name": "2025年城镇单位就业人员年平均工资情况",
-                "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
-                "publisher": "国家统计局",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "limitation": "行业均值仅作背景。中国大陆本职业的工资分布仍缺证。",
+                "market": "中国大陆",
+                "name": "国家统计局：2025 年城镇单位就业人员年平均工资",
+                "period": "2025",
+                "publisher": "中国国家统计局",
+                "scope": "城镇建筑业单位",
+                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -8571,23 +8575,22 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "Current employment and projection measure shown for the occupation page.",
-                  "Projection is not a hiring guarantee; parent data are not exact occupation counts."
+                  "美国 BLS 表 1.2（47-2132）：2025 年约 26,700 个岗位，2035 年预计约 28,100 个，增幅 5.1%，年均约 1,800 个空缺。空缺含人员替补，人数分别取整。"
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
                 "limitation": "Projection is not a hiring guarantee; parent data are not exact occupation counts.",
                 "market": "美国",
                 "name": "National Employment Trends 47-2132.00 Insulation Workers, Mechanical",
-                "period": "current O*NET/BLS employment data; accessed 2026-08-31",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/47-2132.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Current wage measure shown for the occupation page.",
+                  "2025 年 5 月美国全国年薪中位数 58,340 美元，时薪中位数 28.05 美元（BLS OEWS）。",
                   "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay."
                 ],
                 "evidence_type": "official wage data",
@@ -8595,7 +8598,7 @@
                 "limitation": "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay.",
                 "market": "美国",
                 "name": "National Wages 47-2132.00 Insulation Workers, Mechanical",
-                "period": "2025 wage data; accessed 2026-08-31",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/47-2132.00"
@@ -8697,17 +8700,17 @@
                 "url": "https://www.onetonline.org/link/localtraining/47-2132.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "按本页证据政策，本页不转录静态工资数值；该页提供 47-2132.00 国家工资按地区与期间的当期查询入口。",
+                  "2025 年 5 月美国全国年薪中位数 58,340 美元，时薪中位数 28.05 美元（BLS OEWS）。",
                   "保留所显示的期间、就业人群、地域与计量单位；直接访问 BLS 失败不影响已打开的 O*NET 页面。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "O*NET OnLine 呈现的 BLS OEWS 工资数据；本页不固化静态数值，需按当期查询。",
+                "limitation": "O*NET OnLine 展示 2025 年 5 月 BLS OEWS 美国全国职业工资。地区和雇主报价须另核。",
                 "market": "美国",
                 "name": "National Wages: 47-2132.00 - Insulation Workers, Mechanical",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "2025-05",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/47-2132.00"
@@ -8730,7 +8733,7 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。这是对本页任务的编辑判断。",
                   "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
                   "识读机械管线图纸规格 — 50/100; weight=1/3; insulation-workers-mechanical.profile.responsibilities-block.4[0]",
                   "测量并成型保温材料 — 0/100; weight=1/3; insulation-workers-mechanical.profile.responsibilities-block.4[0]",
@@ -8744,6 +8747,48 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 表 1.2（47-2132）：2025 年约 26,700 个岗位，2035 年预计约 28,100 个，增幅 5.1%，年均约 1,800 个空缺。空缺含人员替补，人数分别取整。"
+                ],
+                "id": "bls-ep-2025-2035",
+                "limitation": "美国职业预测，含替补。",
+                "market": "美国",
+                "name": "U.S. BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "BLS",
+                "scope": "47-2132",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 表 1.2 将典型入门列为高中或同等学历、学徒训练。应聘时核对学徒项目和现场作业授权。"
+                ],
+                "id": "bls-insulation-ooh",
+                "limitation": "手册合计空缺属于两个职业组成的组。",
+                "market": "美国",
+                "name": "U.S. BLS Occupational Outlook Handbook: Insulation Workers",
+                "period": "2025–2035",
+                "publisher": "BLS",
+                "scope": "47-2132",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/insulation-workers.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "阳江市住建局通知分别列出外墙外保温配套材料、空调管网绝热材料的验收与复验要求。适用范围以当地项目规定为准。"
+                ],
+                "id": "cn-yangjiang",
+                "limitation": "地方工程资料，不能推断招聘、工资或资格。",
+                "market": "中国广东阳江",
+                "name": "阳江市住建局：建筑节能工程质量管理通知",
+                "period": "2025",
+                "publisher": "阳江市住房和城乡建设局",
+                "scope": "第 6.2.3 与 15.2.2 项",
+                "url": "https://www.yangjiang.gov.cn/yjzjj/gkmlpt/content/0/908/post_908634.html?jump=true"
               }
             ]
           },
@@ -10184,7 +10229,7 @@
           },
           {
             "指标": "就业 · 增长",
-            "数值": "5%（2025—2035）",
+            "数值": "5.1%（2025—2035）",
             "说明": "美国精确职业总体就业预测，非AI归因；不代表实时招聘样本或个人录用概率。"
           },
           {
@@ -10220,7 +10265,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "5%（2025—2035，总体就业预测，非AI归因）",
+        "growth": "5.1%（2025—2035，总体就业预测，非AI归因）",
         "heading": {
           "$item": "insulation-workers-mechanical.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10283,7 +10328,7 @@
         ],
         "median": "58,340 美元/年（2025，美国精确职业）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2025基期 / 2025—2035预测；2026-10-11核对",
+        "outlook_period": "2025基期 / 2025—2035预测；2026-11-09核对",
         "wage_column_labels": [
           "分位",
           "年度参考",
@@ -11131,7 +11176,7 @@
             "item": "insulation-workers-mechanical.source-register.published.1"
           }
         },
-        "note": "2026-10-11作者核对｜O*NET 47-2132.00提供职业任务与准备背景，国家工资页的2025分位为42,470 / 48,100 / 58,340 / 77,360 / 100,220美元/年；就业为2025基期、2025—2035预测。NBS表2/5只支持中国建筑业行业平均年工资，不能替代本职业。AI分析是任务级编辑判断。共享登记、Hero和FAQ保留原口径，未宣称全页一致。"
+        "note": "美国工资采用 OEWS 全国行，就业采用 BLS 表 1.2。中国行业工资只作背景。"
       },
       "work_context_block": {
         "$item": "insulation-workers-mechanical.profile.work-context-block.5",
@@ -11172,24 +11217,24 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "113,594 元/年（2025 年城镇非私营单位制造业平均，行业代理，非本职业中位数）",
+        "display_value": "92,036 元/年（2025 年城镇非私营建筑业单位平均）",
         "fact_id": "cn-wage-nonprivate",
-        "market": "中国城镇单位制造业",
+        "market": "中国大陆",
         "measure": "pre-tax annual mean wage",
-        "occupation_scope": "制造业 proxy, not 机械绝缘工",
-        "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
+        "occupation_scope": "城镇建筑业单位，行业背景",
+        "period": "2025",
         "source_refs": [
           "nbs-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "76,055 元/年（2025 年城镇私营单位制造业平均，行业代理，非本职业中位数）",
+        "display_value": "66,275 元/年（2025 年城镇私营建筑业单位平均）",
         "fact_id": "cn-wage-private",
-        "market": "中国城镇单位制造业",
+        "market": "中国大陆",
         "measure": "pre-tax annual mean wage",
-        "occupation_scope": "制造业 proxy, not 机械绝缘工",
-        "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
+        "occupation_scope": "城镇建筑业单位，行业背景",
+        "period": "2025",
         "source_refs": [
           "nbs-wages"
         ]
@@ -11208,14 +11253,14 @@
       },
       {
         "derivation": null,
-        "display_value": "美国就业增长需按 O*NET 47-2132.00 就业趋势页当期查询；本页不固化静态数值",
+        "display_value": "美国 BLS 表 1.2（47-2132）：2025 年约 26,700 个岗位，2035 年预计约 28,100 个，增幅 5.1%，年均约 1,800 个空缺。空缺含人员替补，人数分别取整。",
         "fact_id": "employment-projection",
         "market": "美国",
         "measure": "employment projection measure",
         "occupation_scope": "Insulation Workers, Mechanical page; scope preserved",
-        "period": "current O*NET/BLS employment data; accessed 2026-08-31",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -11232,18 +11277,18 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：本页不固化美国该职业静态工资数值，请以 O*NET 47-2132.00 国家工资页当期查询为准",
+        "display_value": "2025 年 5 月美国全国年薪中位数 58,340 美元，时薪中位数 28.05 美元（BLS OEWS）。",
         "fact_id": "us-wage",
         "market": "美国",
         "measure": "annual wage measure",
         "occupation_scope": "Insulation Workers, Mechanical page; scope preserved",
-        "period": "2025 wage data; accessed 2026-08-31",
+        "period": "2025-05",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "onet-wages"
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
+        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。这是对本页任务的编辑判断。",
         "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
@@ -11252,6 +11297,54 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "58,340 美元/年",
+        "fact_id": "verified-us-pay",
+        "market": "美国",
+        "measure": "美国年薪中位数（2025 年 5 月）",
+        "occupation_scope": "47-2132",
+        "period": "2025-05",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "5.1%",
+        "fact_id": "verified-us-growth",
+        "market": "美国",
+        "measure": "美国就业变化（2025—2035）",
+        "occupation_scope": "47-2132",
+        "period": "2025–2035",
+        "source_refs": [
+          "bls-ep-2025-2035"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约 26,700 个",
+        "fact_id": "verified-us-employment",
+        "market": "美国",
+        "measure": "美国就业岗位（2025）",
+        "occupation_scope": "47-2132",
+        "period": "2025",
+        "source_refs": [
+          "bls-ep-2025-2035"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约 1,800 个",
+        "fact_id": "verified-us-openings",
+        "market": "美国",
+        "measure": "美国年均职位空缺（2025—2035）",
+        "occupation_scope": "47-2132",
+        "period": "2025–2035",
+        "source_refs": [
+          "bls-ep-2025-2035"
         ]
       }
     ]
@@ -11264,34 +11357,34 @@
       "label": "AI影响度"
     },
     "badges": [
-      "机械绝缘工 · 规格、安全与作业边界",
-      "来源范围 · 统计口径 · 人工复核",
-      "中国侧为行业代理 · 美国数值不固化并给查询入口"
+      "机械设备保温工",
+      "美国工资与就业各按原表",
+      "中国大陆职业工资分布待核"
     ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "verified-us-pay",
         "key": "us_pay",
-        "label": "美国薪资参考（本页不固化，见 O*NET 当期查询）"
+        "label": "美国年薪中位数（2025 年 5 月）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "verified-us-growth",
         "key": "us_growth",
-        "label": "美国就业增长（本页不固化，见 O*NET 当期查询）"
+        "label": "美国就业变化（2025—2035）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "verified-us-employment",
         "key": "us_employment",
-        "label": "美国在岗人数（本页不固化，见 O*NET 当期查询）"
+        "label": "美国就业岗位（2025）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "verified-us-openings",
         "key": "us_openings",
-        "label": "美国职位空缺（本页不固化，见 O*NET 当期查询）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11305,17 +11398,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "机械绝缘工做什么、如何入行与训练、有哪些授权与风险边界，以及 AI 会改变哪些任务。本页对应 O*NET-SOC 47-2132.00，兴趣代码 RC、Job Zone 第一至二级并标注 Bright Outlook；美国工资按证据政策不固化并给查询入口，中国侧仅以制造业行业平均作为显式代理。"
+      "text": "了解管线保温如何核对规格、处理接口和交接，并查看美国工资分位与就业预测。"
     },
     "title": {
       "availability": "available",
-      "text": "机械绝缘工职业判断：工作、入行与风险边界"
+      "text": "机械设备保温工做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "b4d7c22546b7ea0825800bde0563d01693e488414f05226bbafa6cd28bbb92c2",
+  "source_content_sha256": "43c8050d56808ab99fc422c7a0d56479dfcece115ccb7023075b726f3b7712b4",
   "subject": {
     "canonical_slug": "insulation-workers-mechanical",
-    "name": "机械绝缘工",
-    "summary": "机械绝缘工对管道、风管或其他机械系统施加保温材料，以帮助控制并维持温度。工作包括识读管线图纸与规格、测量与成型、安装与固定、包裹与密封、检查与交接。职业身份为 O*NET-SOC 47-2132.00（兴趣代码 RC、Job Zone 第一至二级、标注 Bright Outlook，主要行业建筑业）。按本页证据政策，美国工资未取得可安全固化的静态值，提供 O*NET 当期查询入口；中国大陆公开统计未建立与该精确职业对应的全国工资分布，本页仅以制造业行业门类平均工资作为显式代理并标注。"
+    "name": "机械设备保温工",
+    "summary": "机械设备保温工给管道、风管和其他机械系统加装保温层及保护层。工作要核对管线规格、支撑及接口，交付时记录待核异常。"
   }
 }

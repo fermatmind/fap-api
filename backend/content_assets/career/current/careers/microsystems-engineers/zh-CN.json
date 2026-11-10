@@ -167,6 +167,9 @@
       "item:microsystems-engineers.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:microsystems-engineers.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:microsystems-engineers.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -13001,6 +13004,21 @@
             "source-pack-onet-localcert"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "只看虚构记录。两次测试用同一芯片设计但封装版本不同，报告未注明版本。写下需要补的字段及能否直接比较。"
+            ]
+          },
+          "id": "microsystems-engineers.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "区分 MEMS 封装与器件测试记录",
+          "type": "notice"
         }
       ]
     },
@@ -15460,6 +15478,13 @@
         "id": "microsystems-engineers.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "microsystems-engineers.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15701,7 +15726,7 @@
       "text": "微系统工程师：工作内容、美国工资与就业 | 费马测试"
     }
   },
-  "source_content_sha256": "6da240643139bf809af2865d76ad4c72e48264086ad1d3def95d0fc4892f98e5",
+  "source_content_sha256": "4346fa7b926b9fd959c85b29d371ab91b3b7f2ebc02551fdf9d11bbf33b61614",
   "subject": {
     "canonical_slug": "microsystems-engineers",
     "name": "微系统工程师",

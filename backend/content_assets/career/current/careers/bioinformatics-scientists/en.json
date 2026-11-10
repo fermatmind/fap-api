@@ -57,13 +57,13 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -84,7 +84,7 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -1572,7 +1572,7 @@
         "status": "pending_mapping"
       },
       "item:bioinformatics-scientists.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:bioinformatics-scientists.sources.source-card.1": {
         "status": "mapped"
@@ -23201,12 +23201,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Occupational identity and scope must be checked separately: O*NET places 19-1029.01 (Bioinformatics Scientists) in Job Zone Five (Extensive Preparation Needed). For education distribution, 42% of respondents consider a master’s degree necessary and 28% a doctoral degree (the page lists only these two categories); the interest code is ICR (Investigative—Conventional—Realistic). Also note that wage, employment and industry data on the occupational page are explicitly labeled by O*NET as coming from broader occupation Biological Scientists, All Other (19-1029.00): the local wages page states “Wage data for Biological Scientists, All Other.” and the employment trends page states “Employment data for Biological Scientists, All Other.” Accordingly, this page publishes wage, employment and industry fields under broader occupation 19-1029.00 scope and labels each occurrence, without treating broader-occupation values as occupation-specific data or income promises. Education, occupational training, industry certification, employer appointment and role authorization, data and system permissions, and applicable jurisdictional requirements for human genetic resources, personal information and biosafety are different statuses that must be verified individually against the employer, role and jurisdiction."
+              "Try BF-77 in section 09: check two versions of a fictional analysis handoff and write one page for the project reviewer."
             ]
           },
           "id": "bioinformatics-scientists.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
+            "bf77-paper",
             "onet"
           ],
           "type": "prose"
@@ -23216,13 +23216,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: this role centers on molecular biological data, computational methods and statistical inference, delivering research conclusions with reproducibility and data compliance. Its core is data analysis and modeling, tool and software development, results review and communication, rather than an imagined picture of biology. U.S. wage, employment and industry data use broader occupation 19-1029.00 scope, labeled at each occurrence; mainland China uses only the scientific research and technical services industry average as an explicit proxy labeled “not wages for this occupation.”"
+              "Try BF-77 if you enjoy tracing data and versions, explaining anomalies and inviting review. Then compare roles focused on research design and workflow support."
             ]
           },
           "id": "bioinformatics-scientists.quick-decision.fermat-decision-card.7",
           "source_refs": [
             "onet",
-            "onet"
+            "bf77-paper"
           ],
           "type": "prose"
         }
@@ -23290,15 +23290,22 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Work environment | 89% consider exactness or accuracy extremely important; 81% use email daily (19% at least once a week but not daily); 52% have face-to-face discussions daily (48% at least once a week but not daily); 61% have a lot of freedom in decisions (12% some, 19% very little); 66% have a lot of freedom in determining tasks and priorities (19% very little); 49% need to make decisions at least once a month but not weekly (20% at least once a year but not monthly); 33% have contact with others most of the time (41% about half the time); 48% work within arm’s length of others (24% slightly farther away); 29% consider competition extremely intense (11% very intense, 41% moderate); 19% face time pressure daily (47% at least once a week but not daily, 15% at least once a month but not weekly); 11% consider consequences of error extremely serious (51% fairly serious, 30% not serious at all); 11% consider their responsibility for others’ health and safety very high (55% limited, 29% none).\nMain equipment and tools | Computing and analysis environments: Python, R, Perl, Linux, UNIX, Bash, Git, GitHub, Docker, C, C++, Oracle Java, JavaScript, SQL, MySQL, The MathWorks MATLAB, SAS, Microsoft Excel, Office software, PowerPoint, Amazon Web Services and Microsoft Azure (the O*NET technology list contains 48 entries, most with occurrence information; PostgreSQL2%, while Hadoop and others lack percentages). Software skills separately list 21 categories, including analytical and scientific software, database management systems, data-query, development-environment, operating-system, presentation and Web platform development software. Methods, workflows, parameters and software versions must be traceable, with data, code and run records retained.\nTask pace | 89% consider exactness or accuracy extremely important; 61% have a lot of freedom in decisions and 66% in determining tasks and priorities; 49% need to make decisions at least once a month but not weekly; 19% face time pressure daily (47% at least once a week but not daily); 50% consider automation low (23% no automation at all); 21% consider work pace determined by equipment speed (72% consider it not important at all); 30% make repetitive motions continually or almost continually (19% about half the time); 30% use both hands continually or almost continually (64% never). Prolonged sitting, screen work and long analysis cycles require ergonomic arrangements, breaks and movement.\nCollaborators | Collaborate with researchers, laboratory colleagues, software and information technology personnel, and clinical or translational teams; 54% consider teamwork extremely important (27% very important, 19% important); 26% consider coordinating or leading others to accomplish work extremely important (21% important); 36% consider their decisions to have an important impact on colleagues or company results (26% a minor impact); 11% consider their responsibility for others’ health and safety very high; 48% work within arm’s length of others.\nCompliance and safety | Data analysis and tool development must remain within institutional data-management, information-security, research-integrity and ethics authorization. The Regulations of the People’s Republic of China on the Administration of Human Genetic Resources and their implementing rules require separately checking statutory procedures for collection, preservation, international collaboration, materials export and providing information externally according to the specific data and activity, without concluding that every use requires approval/filing. The Personal Information Protection Law of the People’s Republic of China requires personal information processing to follow legality, propriety, necessity and good faith, with stricter requirements for sensitive personal information. This page describes only applicable scope and conduct boundaries and provides no means of evading regulation.\nRecords and reviews | Data sources, quality control and preprocessing; methods, workflows, parameters and software versions; statistical assumptions, uncertainty and bias; abnormalities, failed runs and aspects requiring review; and conclusions and limitations must be traceable. Method changes and traces of manual processing must be truthfully recorded, retaining raw data, code and run records; do not selectively retain results or alter them afterward.\nSkills and training | O*NET places this occupation in Job Zone Five (Extensive Preparation Needed). Basic skills nominally include 10 entries, led by reading comprehension 85, active listening 75, critical thinking 75, science 75, speaking 75, writing 75, active learning 72 and mathematics 72. All 25 transferable skills have scores, with higher scores for complex problem solving 75, judgment and decision making 69, systems analysis 60, systems evaluation 56, time management 56, instructing 50 and programming 50. Of 33 knowledge entries, 29 have scores and 4 lack scores; higher scores include biology 98, computers and electronics 93, engineering and technology 84, English language 84, mathematics 82, chemistry 74 and education and training 53. All 52 abilities have scores, with higher scores for written comprehension 85, inductive reasoning 81, deductive reasoning 78, oral comprehension 78, written expression 78, fluency of ideas 75, information ordering 75, mathematical reasoning 75, oral expression 75 and originality 75. There are Impact ratings for 21 work styles, such as intellectual curiosity 100, attention to detail 92, innovation 87, adaptability 77 and dependability 73. These describe occupational work styles, not personal psychological test scores or hiring thresholds.\nEntry and authorization | Education and training do not equal authorization for data acquisition, conclusions publication or processing data involving humans. O*NET respondent answers about new-entry education requirements are master’s degree 42% and doctoral degree 28% (the page lists only these two categories). This occupation is in Job Zone Five; most roles require graduate education. O*NET’s training page shows 4,580 programs registered nationwide, while its certification page states “No certifications were found.” (no national certifications found for this occupation); this does not equal hiring thresholds or employer appointment.\nIndustries and employers | O*NET industry data (labeled as coming from broader occupation 19-1029.00) are government 39%, professional, scientific and technical services 34%, educational services 11%, and other industries (including manufacturing) 16%. Common employers include research institutes, universities, research hospitals, biotechnology and pharmaceutical companies, and sequencing and bioinformatics service platforms."
+              "Work environment | 89% consider exactness or accuracy extremely important; 81% use email daily (19% at least once a week but not daily); 52% have face-to-face discussions daily (48% at least once a week but not daily); 61% have a lot of freedom in decisions (12% some, 19% very little); 66% have a lot of freedom in determining tasks and priorities (19% very little); 49% need to make decisions at least once a month but not weekly (20% at least once a year but not monthly); 33% have contact with others most of the time (41% about half the time); 48% work within arm’s length of others (24% slightly farther away); 29% consider competition extremely intense (11% very intense, 41% moderate); 19% face time pressure daily (47% at least once a week but not daily, 15% at least once a month but not weekly); 11% consider consequences of error extremely serious (51% fairly serious, 30% not serious at all); 11% consider their responsibility for others’ health and safety very high (55% limited, 29% none).\nMain equipment and tools | Computing and analysis environments: Python, R, Perl, Linux, UNIX, Bash, Git, GitHub, Docker, C, C++, Oracle Java, JavaScript, SQL, MySQL, The MathWorks MATLAB, SAS, Microsoft Excel, Office software, PowerPoint, Amazon Web Services and Microsoft Azure (the O*NET technology list contains 48 entries, most with occurrence information; PostgreSQL2%, while Hadoop and others lack percentages). Software skills separately list 21 categories, including analytical and scientific software, database management systems, data-query, development-environment, operating-system, presentation and Web platform development software. Methods, workflows, parameters and software versions must be traceable, with data, code and run records retained.\nTask pace | 89% consider exactness or accuracy extremely important; 61% have a lot of freedom in decisions and 66% in determining tasks and priorities; 49% need to make decisions at least once a month but not weekly; 19% face time pressure daily (47% at least once a week but not daily); 50% consider automation low (23% no automation at all); 21% consider work pace determined by equipment speed (72% consider it not important at all); 30% make repetitive motions continually or almost continually (19% about half the time); 30% use both hands continually or almost continually (64% never). Prolonged sitting, screen work and long analysis cycles require ergonomic arrangements, breaks and movement.\nCollaborators | Collaborate with researchers, laboratory colleagues, software and information technology personnel, and clinical or translational teams; 54% consider teamwork extremely important (27% very important, 19% important); 26% consider coordinating or leading others to accomplish work extremely important (21% important); 36% consider their decisions to have an important impact on colleagues or company results (26% a minor impact); 11% consider their responsibility for others’ health and safety very high; 48% work within arm’s length of others.\nCompliance and safety | Data analysis and tool development must remain within institutional data-management, information-security, research-integrity and ethics authorization. The Regulations of the People’s Republic of China on the Administration of Human Genetic Resources and their implementing rules require separately checking statutory procedures for collection, preservation, international collaboration, materials export and providing information externally according to the specific data and activity, without concluding that every use requires approval/filing. The Personal Information Protection Law of the People’s Republic of China requires personal information processing to follow legality, propriety, necessity and good faith, with stricter requirements for sensitive personal information. This page describes only applicable scope and conduct boundaries and provides no means of evading regulation.\nRecords and reviews | Data sources, quality control and preprocessing; methods, workflows, parameters and software versions; statistical assumptions, uncertainty and bias; abnormalities, failed runs and aspects requiring review; and conclusions and limitations must be traceable. Method changes and traces of manual processing must be truthfully recorded, retaining raw data, code and run records; do not selectively retain results or alter them afterward.\nSkills and training | O*NET places this occupation in Job Zone Five (Extensive Preparation Needed). Basic skills nominally include 10 entries, led by reading comprehension 85, active listening 75, critical thinking 75, science 75, speaking 75, writing 75, active learning 72 and mathematics 72. All 25 transferable skills have scores, with higher scores for complex problem solving 75, judgment and decision making 69, systems analysis 60, systems evaluation 56, time management 56, instructing 50 and programming 50. Of 33 knowledge entries, 29 have scores and 4 lack scores; higher scores include biology 98, computers and electronics 93, engineering and technology 84, English language 84, mathematics 82, chemistry 74 and education and training 53. All 52 abilities have scores, with higher scores for written comprehension 85, inductive reasoning 81, deductive reasoning 78, oral comprehension 78, written expression 78, fluency of ideas 75, information ordering 75, mathematical reasoning 75, oral expression 75 and originality 75. There are Impact ratings for 21 work styles, such as intellectual curiosity 100, attention to detail 92, innovation 87, adaptability 77 and dependability 73. These describe occupational work styles, not personal psychological test scores or hiring thresholds.\nEntry and authorization | Read the duties before the degree. In the Chengdu sample, the scientist needs a relevant doctorate and the assistant needs a master’s or higher. The Guangzhou analyst/assistant accepts a bachelor’s or higher and specifies analytical skills. O*NET places the U.S. specialty in Job Zone Five. BLS’s typical bachelor’s degree is for the U.S. parent group. O*NET’s new-hire education question displays 42% master’s and 28% doctorate. Its training directory shows 4,580 programs and its credential directory returns no entries.\nIndustries and employers | O*NET details identify the industry data as coming from the U.S. parent group Biological Scientists, All Other (19-1029). The industry subtable lists government at 39%, professional, scientific, and technical services at 34%, education at 11%, and other industries at 16%, without a separate year. It does not establish a standalone bioinformatics scientist distribution."
             ]
           },
           "id": "bioinformatics-scientists.profile.work-context-block.1",
           "source_refs": [
+            "hgr-implementation-2023",
+            "hgr-current",
+            "bio-current",
+            "r2-pay-2",
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
+            "nist",
+            "arxiv",
+            "details-current",
             "onet",
             "hr-current",
-            "details-current",
-            "hgr-current",
             "nhc-guidance",
             "pipl-current"
           ],
@@ -23379,7 +23386,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 5% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate."
+              "U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 4.7% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate."
             ]
           },
           "id": "bioinformatics-scientists.profile.onet-structured-fields-block.4",
@@ -23407,13 +23414,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025 U.S. broader-occupation industry distribution: government 39%, professional, scientific and technical services 34%, educational services 11%, and other industries including manufacturing 16%. This is neither occupation-specific nor Chinese distribution, nor industry wage statistics. The O*NET technology list contains 48 software entries from U.S. Lightcast job advertisements throughout 2025. Percentages are unique advertisements for this occupation mentioning the software divided by all unique advertisements for this occupation: Python60%, R54%, Linux21%, Perl15%, UNIX and AWS each 13%, Git/C++/Bash each 10%, SQL9%, GitHub8%, Java/Docker each 7%, MATLAB/C each 6%; PostgreSQL2%, while Hadoop and others have no percentage given. These are not software market share, GenAI adoption rates, a personal compulsory list or global demand. Detailed information separately lists 21 software categories."
+              "O*NET details identify the industry data as coming from the U.S. parent group Biological Scientists, All Other (19-1029). The industry subtable lists government at 39%, professional, scientific, and technical services at 34%, education at 11%, and other industries at 16%, without a separate year. It does not establish a standalone bioinformatics scientist distribution. O*NET U.S. software mentions for 2025: Python 60%, R 54%, Linux 21%, Perl 15%. The denominator is unique postings linked to the specialty. These are neither tool use rates nor universal requirements."
             ]
           },
           "id": "bioinformatics-scientists.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "industry-current",
-            "hr-current"
+            "r2-pay-2",
+            "hr-current",
+            "industry-current"
           ],
           "type": "prose"
         },
@@ -23515,11 +23523,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET19-1029.01 (Updated2026) definition: conduct research using bioinformatics theory and methods in fields such as pharmaceuticals, medical technology, biotechnology, computational biology, proteomics, computer information science, biology and medical informatics. May design databases and develop algorithms to process and analyze genomic or other biological information. Discussing problems and computational strategies with researchers is one task in the list, not the full definition. Corresponding Chinese roles must be checked against actual tasks."
+              "Bioinformatics scientists use computational and statistical methods to study biological data such as genomes and transcriptomes. They define questions, choose data and methods, review anomalies, record versions and explain results and limits. Scientists often focus on design and interpretation, while support roles may focus on running and maintaining workflows. Check the actual position."
             ]
           },
           "id": "bioinformatics-scientists.profile.definition-block.11",
           "source_refs": [
+            "onet",
             "onet-current",
             "details-current",
             "editor"
@@ -23662,7 +23671,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Education, occupational training, industry certification, employer appointment and role authorization, data, system and computing-resource permissions, and applicable jurisdictional requirements for human genetic resources, personal information and biosafety are different statuses. Education and completion of training do not confer permission to acquire data, publish conclusions or process data involving humans; verify each individually against the employer, role and jurisdiction. This page’s wage, employment and industry data use broader occupation Biological Scientists, All Other (19-1029.00) scope, labeled at each occurrence. For mainland China, broad scientific research and technical services industry and personnel-category references are provided, labeled “not wages for this occupation.”"
+              "Education, occupational training, industry certification, employer appointment and role authorization, data, system and computing-resource permissions, and applicable jurisdictional requirements for human genetic resources, personal information and biosafety are different statuses. Education and completion of training do not confer permission to acquire data, publish conclusions or process data involving humans; verify each individually against the employer, role and jurisdiction. This page’s wage and employment data use broader occupation Biological Scientists, All Other (19-1029.00) scope, labeled at each occurrence. For mainland China, broad scientific research and technical services industry and personnel-category references are provided, labeled “not wages for this occupation.”"
             ]
           },
           "id": "bioinformatics-scientists.profile.career-quick-answers-block.21",
@@ -23710,7 +23719,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "In the United States, this is O*NET 19-1029.01 (Bioinformatics Scientists): identity, tasks and work context are specific to the occupation, but wage, employment and industry data are explicitly labeled on O*NET as coming from broader occupation Biological Scientists, All Other (19-1029.00) (both the local wages and employment trends pages carry this label). This page publishes wage, employment and industry fields under broader-occupation scope, labeling each occurrence. For mainland China, under this page’s evidence scope (no data currently safe to use, with the handling note “use the scientific research and technical services industry average as an explicit proxy”), only that industry average is used as an explicit proxy, labeled “not wages for this occupation” at each occurrence. When comparing roles, first identify whether the role involves data analysis and bioinformatics platforms, algorithm and tool development, clinical and translational data, or multi-omics and population cohorts, then check data and system permissions and compliance boundaries."
+              "In the United States, this is O*NET 19-1029.01 (Bioinformatics Scientists): identity, tasks and work context are specific to the occupation, but wage and employment data are explicitly labeled on O*NET as coming from broader occupation Biological Scientists, All Other (19-1029.00) (both the local wages and employment trends pages carry this label). This page publishes wage, employment and industry fields under broader-occupation scope, labeling each occurrence. For mainland China, under this page’s evidence scope (no data currently safe to use, with the handling note “use the scientific research and technical services industry average as an explicit proxy”), only that industry average is used as an explicit proxy, labeled “not wages for this occupation” at each occurrence. When comparing roles, first identify whether the role involves data analysis and bioinformatics platforms, algorithm and tool development, clinical and translational data, or multi-omics and population cohorts, then check data and system permissions and compliance boundaries."
             ]
           },
           "id": "bioinformatics-scientists.profile.career-quick-answers-block.24",
@@ -23739,7 +23748,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Chinese training and role thresholds must be checked with the target organization; this round has no Chinese occupational education distribution or representative recruitment sample. O*NET2026 materials ask about the education needed by new entrants: 42% answer a master’s degree and 28% a doctoral degree; the page lists only two categories. These are not the educational qualifications of all current employees. Job Zone Five/SVP8 and above describes occupational preparation, without implying an individual must already have a certain number of years of experience. The 4,580-entry training directory is based on IPEDS2025—26 directory and 2024—25 degree records, not current admissions or hiring standards. No records were found this time in the associated CareerOneStop certification directory; that does not prove there are no certificates on the market or that specific role authorization is unnecessary."
+              "Chinese training and role thresholds must be checked with the target organization; this round has no national Chinese occupational education distribution; see the two dated employer notices for examples. O*NET2026 materials ask about the education needed by new entrants: 42% answer a master’s degree and 28% a doctoral degree; the page lists only two categories. These are not the educational qualifications of all current employees. Job Zone Five/SVP8 and above describes occupational preparation, without implying an individual must already have a certain number of years of experience. The 4,580-entry training directory is based on IPEDS2025—26 directory and 2024—25 degree records, not current admissions or hiring standards. No records were found this time in the associated CareerOneStop certification directory; that does not prove there are no certificates on the market or that specific role authorization is unnecessary."
             ]
           },
           "id": "bioinformatics-scientists.profile.career-quick-answers-block.26",
@@ -23964,7 +23973,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The following table compares bioinformatics scientists with five adjacent directions using the same dimensions: occupational direction, core work and outputs, key differences, and the choice better suited to each preference."
+              "The following table compares bioinformatics scientists with six adjacent directions using the same dimensions: occupational direction, core work and outputs, key differences, and the choice better suited to each preference."
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.10",
@@ -23994,7 +24003,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "If you prefer business data, modeling and product delivery, compare Data Scientists first. If you prefer analyzing molecular biological data and biological questions, this occupation is suited."
+              "If you prefer business data, modeling and product delivery, compare Data Scientists first. If you prefer analyzing molecular biological data and biological questions, you could explore this occupation further."
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.12",
@@ -24053,7 +24062,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "If you prefer statistical design and inference for clinical research and trials, compare Biostatisticians first. If you prefer molecular data analysis and tool development, this occupation is suited."
+              "If you prefer statistical design and inference for clinical research and trials, compare Biostatisticians first. If you prefer molecular data analysis and tool development, you could explore this occupation further."
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.16",
@@ -24112,7 +24121,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "If you prefer general statistical methods, surveys and analysis, compare Statisticians first. If you prefer biological data and algorithms, this occupation is suited."
+              "If you prefer general statistical methods, surveys and analysis, compare Statisticians first. If you prefer biological data and algorithms, you could explore this occupation further."
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.20",
@@ -24156,13 +24165,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Mathematicians primarily undertake mathematical theory, proofs and models, delivering formal reasoning. This occupation primarily delivers work on data-driven biological questions and engineering implementation."
+              "Scientists more often design questions and methods and interpret results. Technicians more often run existing tools, maintain databases and assist with analysis. Check the actual position."
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
             "onet",
-            "onet"
+            "adj-15-2099.01"
           ],
           "type": "prose"
         },
@@ -24171,13 +24180,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "If you prefer mathematical theory, proofs and models, compare Mathematicians first. If you prefer data-driven biological questions, this occupation is suited."
+              "Explore scientist roles for research design and interpretation, or technician roles for running, troubleshooting and maintaining workflows."
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
             "onet",
-            "onet"
+            "adj-15-2099.01"
           ],
           "type": "prose"
         },
@@ -24186,13 +24195,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Complete mathematical theory, proofs and models, with outputs primarily consisting of papers, proofs and models."
+              "Scientists deliver reviewable analyses and interpretations. Technicians deliver traceable run, data or maintenance records."
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
             "onet",
-            "onet"
+            "adj-15-2099.01"
           ],
           "type": "prose"
         },
@@ -24201,12 +24210,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Bioinformatics Scientists and Mathematicians"
+              "Bioinformatics Scientists and Bioinformatics Technicians"
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "adj-15-2099.01"
           ],
           "type": "prose"
         },
@@ -24230,7 +24240,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "If you prefer research organization, personnel and budget management, compare Natural Sciences Managers first. If you prefer analytical tools and conclusions, this occupation is suited."
+              "If you prefer research organization, personnel and budget management, compare Natural Sciences Managers first. If you prefer analytical tools and conclusions, you could explore this occupation further."
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.28",
@@ -24289,7 +24299,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "If you prefer experiments and mechanism research, compare Biochemists and Biophysicists first. If you prefer computing, statistics and tools, this occupation is suited."
+              "If you prefer experiments and mechanism research, compare Biochemists and Biophysicists first. If you prefer computing, statistics and tools, you could explore this occupation further."
             ]
           },
           "id": "bioinformatics-scientists.direction-comparison.adjacent-career-comparison-table.32",
@@ -24386,10 +24396,10 @@
                 "url": "https://www.onetonline.org/link/industry/19-1029.01"
               },
               {
-                "entity": "O*NET 19-1029.01 Occupational Summary (Employment and Projection Fields)",
+                "entity": "BLS Table 1.2: Biological Scientists, All Other, 19-1029",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 19-1029.01 Local Wages Page (Broader Occupation 19-1029.00 Scope)",
@@ -24428,10 +24438,10 @@
                 "url": "https://www.onetonline.org/link/hot_tech/19-1029.01"
               },
               {
-                "entity": "O*NET 19-1029.01 Occupational Summary (Employment and Projection Fields)",
+                "entity": "BLS Table 1.2: Biological Scientists, All Other, 19-1029",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 19-1029.01 Training and Education Information",
@@ -24467,12 +24477,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First practice the question—acquire—analyze—review—reproduce—deliver cycle using fixed fictional materials: a fictional research question and hypothesis, a fictional dataset description, and a set of fictional analysis parameters, statistical results and abnormality records. Write the methods and data requirements, analysis and modeling process, review of abnormalities and reruns, and reproducibility and communication descriptions in order before discussing roles. Also check the target institution’s data, compliance and ethics training and authorization arrangements."
+              "Try BF-77 in section 09: check two versions of a fictional analysis handoff and write one page for the project reviewer."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
+            "bf77-paper",
             "onet"
           ],
           "type": "prose"
@@ -24496,7 +24506,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Use data cleaning and batch-workflow scheduling, code completion and documentation and comment generation, literature and database retrieval and summaries, chart and report drafts and results checks to improve efficiency. However, setting research questions and hypotheses; selecting methods and workflows and performing statistical inference; judging results, bias and biological meaning; and processing decisions involving human genetic resources, personal information and ethics remain the responsibility of you and authorized personnel under institutional procedures and applicable jurisdictions. Tool outputs must be checked by humans and data recalculated before entering formal conclusions."
+              "Tools can assist with cleaning, literature summaries and draft handoffs. Researchers check provenance, versions, assumptions and limitations. Stop your own work if it exceeds authorization and document and report it. Authorized staff or institutions make compliance determinations and release decisions."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.13",
@@ -24575,11 +24585,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task-impact judgment: assistance may be considered for cleaning, coding, retrieval and documentation; methods, data compliance, statistics and biological meaning still require review by responsible personnel. No occupation-specific evidence has been obtained on GenAI adoption, time savings, wage premiums or overall replacement. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Try drafting field notes and a handoff with fictional material. Responsible staff verify provenance, model assumptions, anomalies and interpretation. Available evidence does not establish occupational adoption, time savings or displacement."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.18",
           "source_refs": [
+            "source-fermatmind-ai-rubric",
             "editor",
             "details-current",
             "ilo",
@@ -25138,7 +25149,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 5% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate."
+              "U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 4.7% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.56",
@@ -25198,11 +25209,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025 U.S. broader-occupation industry distribution: government 39%, professional, scientific and technical services 34%, educational services 11%, and other industries including manufacturing 16%. This is neither occupation-specific nor Chinese distribution, nor industry wage statistics."
+              "O*NET details identify the industry data as coming from the U.S. parent group Biological Scientists, All Other (19-1029). The industry subtable lists government at 39%, professional, scientific, and technical services at 34%, education at 11%, and other industries at 16%, without a separate year. It does not establish a standalone bioinformatics scientist distribution."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.60",
           "source_refs": [
+            "r2-pay-2",
             "industry-current",
             "editor"
           ],
@@ -25244,11 +25256,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Task exposure, adoption, productivity and employment are different objects. U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 5% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate."
+              "Three paper subtasks score 25, 25 and 0 with equal weight, rounding to 17%. This editorial index does not measure adoption, time saved or displacement."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.63",
           "source_refs": [
+            "source-fermatmind-ai-rubric",
             "editor",
             "ilo",
             "ep-current"
@@ -25353,11 +25366,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 5% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate."
+              "BLS projects the U.S. parent group Biological Scientists, All Other (19-1029) from about 59,600 jobs in 2025 to 62,400 in 2035, up 4.7%, a net gain of about 2,800, with about 4,300 annual openings from growth and replacement. The baseline includes 1.5% self-employment and does not isolate bioinformatics scientists."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.70",
           "source_refs": [
+            "ep",
             "ep-current",
             "editor"
           ],
@@ -25771,13 +25785,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Tools can assist with policy and regulatory materials, but compliance judgments and authorization responsibility remain with you and the institution."
+              "Check your authorized scope and document and report uncertainties. Authorized staff or institutions make formal compliance determinations and authorization decisions."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
-            "editor"
+            "bio-current",
+            "hgr-current",
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -25891,7 +25906,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Tools can assist summaries and visualization, but judgments on results usability and review responsibility remain yours."
+              "Tools can assist with summaries. Check records, versions and limitations and submit them for assigned review."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.105",
@@ -25951,7 +25966,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Systems can assist archiving, but responsibility for completeness and compliance remains yours."
+              "Systems can assist with archiving. Check record completeness within your role and refer formal compliance decisions to authorized staff."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.109",
@@ -26011,13 +26026,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Writing and visualization can be assisted, but compliance responsibility for statements and publication remains with you and authorized personnel."
+              "Writing tools can help draft. Document evidence and limitations, and leave release decisions to the authorized role."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
-            "editor"
+            "bio-current",
+            "hgr-current",
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -26026,16 +26042,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Judge whether human genetic resources, personal information, ethics review or other circumstances requiring approval are involved."
+              "Check your own authorization first. Document and refer possible human genetic resources, personal information or ethics issues to authorized staff."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.114",
           "source_refs": [
-            "onet",
+            "bio-current",
             "hgr-current",
-            "nhc-guidance",
-            "pipl-current",
-            "editor"
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -26044,7 +26058,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Immediately stop related processing when ethics review or data authorization has not been obtained or use exceeds scope, and report and assist investigations under institutional procedures. Do not participate or assist."
+              "Stop your own relevant work and report under institutional procedures if applicable ethics review or data authorization is incomplete or the work exceeds authorization."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.115",
@@ -26074,13 +26088,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Policy and regulatory materials can be assisted, but compliance judgments and decisions to stop processing and report remain with you and authorized personnel. This page provides no means of evading regulation."
+              "Stop your own work outside authorization, document it and report it. The authorized role or institution determines compliance and whether work may resume."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.117",
           "source_refs": [
-            "onet",
-            "editor"
+            "bio-current",
+            "hgr-current",
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -26106,13 +26121,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "For circumstances requiring special approval, process only after obtaining approval or filing and completing training under rules; do not proceed when conditions are unmet."
+              "Authorized staff check and fulfill the approval, filing or advance reporting procedure applicable to each activity. Obtain approval where approval is required. Do not start when the applicable conditions are unmet."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.119",
           "source_refs": [
-            "onet",
-            "editor"
+            "bio-current",
+            "hgr-current",
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -26136,13 +26152,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Policy and regulatory materials can be assisted, but judgments on whether conditions are met and whether to proceed remain with you and authorized personnel. This page provides no means of evading regulation."
+              "Check your training, assigned role and authorization, and document unresolved items. The authorized role or institution determines the applicable procedure and whether work may begin."
             ]
           },
           "id": "bioinformatics-scientists.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
-            "editor"
+            "bio-current",
+            "hgr-current",
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -26249,11 +26266,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no Chinese median wage, starting pay or city-level percentiles for this occupation have been obtained. Matching broad references available follow. National Bureau of Statistics broad scientific research and technical services reference for 2025: urban non-private 182,064 and private 83,560 CNY per year; enterprises above designated size: all personnel 173,855, middle management and above 324,177, and professional and technical personnel 172,877 CNY per year. Select according to the actual employer’s industry and management/technical duties. Annual averages before tax for broad industry and personnel categories do not equal wages for this occupation, medians, starting pay, city-level monthly wages or individual take-home pay."
+              "A July 13, 2026 posting by the Peking University Chengdu Advanced Interdisciplinary Institute of Biotechnology listed one bioinformatics research scientist in the He Aibin lab with a relevant doctorate, analytical frameworks and algorithms or models, and CNY 250,000–400,000 per year. It separately listed two bioinformatics research assistants with at least a master’s degree, high-throughput analysis and workflow work, at CNY 180,000–240,000 per year."
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
+            "pku-chengdu-bioinfo-2026",
             "nbs-current",
             "editor"
           ],
@@ -26264,11 +26282,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round actually read the National Bureau of Statistics 2025 wage release and reused industry and broad personnel-category tables from the same version. No representative Chinese recruitment wage sample for this occupation was obtained; no occupational monthly wage range can be stated."
+              "These are two dated employer notices and their quoted figures. They do not establish live vacancies, a universal degree threshold, market pay or take-home income."
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
+            "pku-chengdu-bioinfo-2026",
             "nbs-current",
             "editor"
           ],
@@ -26279,11 +26298,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "CNY 182,064 per year (scientific research and technical services, 2025, urban non-private units; industry proxy, not wages for this occupation)"
+              "A March 13, 2026 notice from the Pan Guangjin group at the CAS Guangzhou Institutes of Biomedicine and Health listed one bioinformatics analyst/research assistant. It accepted a bachelor’s degree or higher and asked for Linux, tools such as R or Python, sequencing analysis and scripting. The notice gave no numeric pay."
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
+            "gibh-pan-bioinfo-2026",
             "onet"
           ],
           "type": "prose"
@@ -26293,11 +26313,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This is the National Bureau of Statistics 2025 annual average wage for employed persons in urban non-private scientific research and technical services units. It is an industry-category average proxy, not the occupational median for bioinformatics scientists, nor actual recruitment quotations in a particular location or institution. Check actual local recruitment, role duties and employment arrangements before use."
+              "These are two dated employer notices and their quoted figures. They do not establish live vacancies, a universal degree threshold, market pay or take-home income."
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
+            "gibh-pan-bioinfo-2026",
             "onet",
             "nbs-current"
           ],
@@ -26498,12 +26519,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupational classification: this page has not obtained a mainland Chinese public occupational wage entry precisely corresponding to 19-1029.01. The Occupational Classification Dictionary of the People’s Republic of China (2022 Edition) classifies occupations by intermediate and detailed categories. Bioinformatics and computational biology roles are spread across research, technical services, health, education and other sequences and must be identified by employer type and role duties."
+              "No mainland occupational wage matched to O*NET 19-1029.01 was verified. Compare the two postings by employer, duties and requirements."
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026"
           ],
           "type": "prose"
         },
@@ -26706,11 +26728,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 U.S. broader-occupation industry distribution: government 39%, professional, scientific and technical services 34%, educational services 11%, and other industries including manufacturing 16%. This is neither occupation-specific nor Chinese distribution, nor industry wage statistics. It is not a Chinese industry mapping."
+              "O*NET details identify the industry data as coming from the U.S. parent group Biological Scientists, All Other (19-1029). The industry subtable lists government at 39%, professional, scientific, and technical services at 34%, education at 11%, and other industries at 16%, without a separate year. It does not establish a standalone bioinformatics scientist distribution."
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
+            "r2-pay-2",
             "industry-current"
           ],
           "type": "prose"
@@ -26734,11 +26757,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025 U.S. broader-occupation industry distribution: government 39%, professional, scientific and technical services 34%, educational services 11%, and other industries including manufacturing 16%. This is neither occupation-specific nor Chinese distribution, nor industry wage statistics."
+              "O*NET details identify the industry data as coming from the U.S. parent group Biological Scientists, All Other (19-1029). The industry subtable lists government at 39%, professional, scientific, and technical services at 34%, education at 11%, and other industries at 16%, without a separate year. It does not establish a standalone bioinformatics scientist distribution."
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
+            "r2-pay-2",
             "industry-current"
           ],
           "type": "prose"
@@ -26805,11 +26829,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scenario comparisons require consistent institutional type, platform and employment arrangement. This page provides industry and broad personnel-category references but lacks occupational monthly wage ranges."
+              "No national occupation wage was verified. Chengdu publishes offer ranges; the Guangzhou notice gives no numeric pay."
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
             "onet"
           ],
           "type": "prose"
@@ -26847,11 +26873,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No Chinese city-level monthly wage, starting pay, percentiles or take-home pay for this occupation have been obtained. Matching industry and broad personnel categories can provide broad references; check region, institution, employment duration, duties and pay structure when comparing."
+              "These are two dated employer notices and their quoted figures. They do not establish live vacancies, a universal degree threshold, market pay or take-home income."
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
             "nbs-current",
             "editor"
           ],
@@ -26905,11 +26933,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "What can be checked is the role itself: employment arrangement and project cycle, research direction and data and platform types, whether human genetic resources and personal information are involved, whether external publication and open data are involved, and before/after-tax and performance-pay structure. This page does not publish occupational wage values."
+              "Read the duties before the degree. In the Chengdu sample, the scientist needs a relevant doctorate and the assistant needs a master’s or higher. The Guangzhou analyst/assistant accepts a bachelor’s or higher and specifies analytical skills. O*NET places the U.S. specialty in Job Zone Five. BLS’s typical bachelor’s degree is for the U.S. parent group."
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
             "onet",
             "hgr-current",
             "nhc-guidance",
@@ -26950,7 +26980,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupational comparison: U.S. O*NET 19-1029.01 (Bioinformatics Scientists) has occupation-specific identity and tasks, while wage, employment and industry data on O*NET are labeled as coming from broader occupation Biological Scientists, All Other (19-1029.00). This page has not obtained a mainland Chinese public occupational wage entry precisely corresponding to 19-1029.01; the page’s Chinese language does not establish equivalent mapping. Broad scientific research and technical services industry and personnel-category references are provided, labeled “not wages for this occupation.”"
+              "Occupational comparison: U.S. O*NET 19-1029.01 (Bioinformatics Scientists) has occupation-specific identity and tasks, while wage and employment data on O*NET are labeled as coming from broader occupation Biological Scientists, All Other (19-1029.00). This page has not obtained a mainland Chinese public occupational wage entry precisely corresponding to 19-1029.01; the page’s Chinese language does not establish equivalent mapping. Broad scientific research and technical services industry and personnel-category references are provided, labeled “not wages for this occupation.”"
             ]
           },
           "id": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.55",
@@ -27202,7 +27232,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "5% (Faster than average; 2025—2035, U.S. Broader Occupation)"
+              "4.7% (Faster than average; 2025—2035, U.S. Broader Occupation)"
             ]
           },
           "id": "bioinformatics-scientists.us-salary.career-snapshot-secondary-locale.21",
@@ -27266,7 +27296,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Boundaries (scope): first, occupational identity, tasks, work context, skills and knowledge are specific to O*NET 19-1029.01; second, wage, employment and industry data on O*NET are explicitly labeled as coming from broader occupation Biological Scientists, All Other (19-1029.00) (both the local wages and employment trends pages carry this label); third, this page publishes wage, employment and industry fields under that scope, labeling each occurrence, without treating broader-occupation values as occupation-specific data or personal income promises; fourth, no mainland Chinese occupational wage entry for this occupation has been obtained (no data currently safe to use, with the handling note “use the scientific research and technical services industry average as an explicit proxy”). This page uses only that industry average as an explicit proxy, labeled “not wages for this occupation.”"
+              "Boundaries (scope): first, occupational identity, tasks, work context, skills and knowledge are specific to O*NET 19-1029.01; second, wage and employment data on O*NET are explicitly labeled as coming from broader occupation Biological Scientists, All Other (19-1029.00) (both the local wages and employment trends pages carry this label); third, this page publishes wage, employment and industry fields under that scope, labeling each occurrence, without treating broader-occupation values as occupation-specific data or personal income promises; fourth, no mainland Chinese occupational wage entry for this occupation has been obtained (no data currently safe to use, with the handling note “use the scientific research and technical services industry average as an explicit proxy”). This page uses only that industry average as an explicit proxy, labeled “not wages for this occupation.”"
             ]
           },
           "id": "bioinformatics-scientists.us-salary.career-snapshot-secondary-locale.25",
@@ -28841,16 +28871,16 @@
                 "url": "https://www.onetonline.org/link/localwages/19-1029.01"
               },
               {
-                "entity": "O*NET 19-1029.01 Employment Trends Page (Broader-Occupation Scope)",
+                "entity": "BLS Table 1.2: Biological Scientists, All Other, 19-1029",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "Regulations of the People’s Republic of China on the Administration of Human Genetic Resources (Public Text on the Chinese Government Website)",
+                "entity": "Human Genetic Resources Implementing Rules: Article 2",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.gov.cn/zhengce/content/2019-06/10/content_5398829.htm"
+                "url": "https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/fgzc/bmgz/202306/t20230601_186416.html"
               }
             ]
           },
@@ -28886,11 +28916,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Direct answer: key risks include exceeding data acquisition and analysis authorization; data involving humans, privacy and compliance risks; irreproducible algorithms, code and conclusions; treating tool outputs and automatically generated code as conclusions; prolonged screen work, repetitive motions and pressure; and exceeding boundaries in external conclusions and open data. Controls include working within authorized data, system and ethics scope and identifying risks first; processing data involving humans under procedures and retaining records; truthfully recording data, code, parameters, versions and abnormalities; delivering conclusions and opening data within authorization; and stopping and escalating when matters exceed authorization or abnormalities are found."
+              "Verify data provenance, consent or another applicable basis, permitted uses and access. For China’s human genetic resources, check Biosecurity Law Articles 55–57 and applicable rules. Removing names does not itself allow sharing. Authorized professionals handle clinical judgment and release."
             ]
           },
           "id": "bioinformatics-scientists.risk.career-risk-cards.9",
           "source_refs": [
+            "bio-current",
+            "pipl-current",
             "onet"
           ],
           "type": "prose"
@@ -29367,35 +29399,35 @@
                 "Bioinformatics and Data Analysis Roles",
                 "Under supervision, complete data quality control and analysis using established workflows and record results, participating in method reproduction and conclusions review.",
                 "Employers typically consider programming and statistics fundamentals, method reproduction ability and record quality; adherence to data and ethics procedures; and communication with teams and willingness to accept review. Data and system authorization depend on institutional and project arrangements.",
-                "Submit a record containing a fictional question, hypothesis, dataset, quality control, analytical results and abnormality review, without using real data involving humans or project data.",
+                "Start with the two BF-77 checks and a paper handoff. Verify the methods for the actual role separately.",
                 "First check identifiable personal information, human genetic resource information and project contract restrictions, determining processing and publication permissions separately; do not collectively label all project data sensitive personal information."
               ],
               [
                 "Algorithm and Tool Development Roles",
                 "Develop and test analytical tools and workflows, document them and improve user interfaces, iterating with researchers.",
                 "Employers typically consider programming, software engineering, algorithms and testing; reproducibility, documentation and version-management requirements; and collaboration with researchers and understanding their needs.",
-                "Submit a record containing fictional tool design, you, testing, documentation and reproduction explanations.",
+                "Start with the two BF-77 checks and a paper handoff. Verify the methods for the actual role separately.",
                 "External publication and open-source release of tools and code must follow institutional rules. This page provides no means of evading regulation."
               ],
               [
                 "Data Platform and Engineering Roles",
                 "Undertake data storage, workflow orchestration, computing resources, permissions, auditing and data governance, working with analysis and clinical teams to ensure data usability and compliance.",
                 "Employers typically consider engineering, systems, information-security and data-governance capabilities; understanding of permission, audit, desensitization and compliance requirements; and collaboration across teams.",
-                "Submit an explanation containing a fictional data-governance, permission, audit and desensitization plan.",
+                "Start with the two BF-77 checks and a paper handoff. Verify the methods for the actual role separately.",
                 "Data-governance plans must follow institutional and jurisdictional requirements; do not bypass permission or audit controls."
               ],
               [
                 "Multi-Omics and Cohort Analysis Roles",
                 "Undertake multi-omics data integration, population cohort analysis and statistical modeling, working with researchers to interpret results and limitations.",
                 "Employers typically consider multi-omics, statistics and modeling capabilities; ability to assess bias, confounding and uncertainty; and collaboration with clinical or public-health teams.",
-                "Submit a record containing fictional multi-omics or cohort analysis, bias assessment and conclusions limitations.",
+                "Start with the two BF-77 checks and a paper handoff. Verify the methods for the actual role separately.",
                 "Population cohort data involve personal-information and ethics requirements; process within authorization."
               ],
               [
                 "Clinical and Translational Data Roles",
                 "Undertake data processing, statistical support and materials preparation for clinical and translational research, delivering within regulatory and ethics frameworks.",
                 "Employers typically consider understanding of clinical data, statistics and regulatory requirements and documentation quality; data-cleaning and traceability requirements; and collaboration with clinical and registration teams.",
-                "Submit an explanation containing fictional clinical data processing, statistical support and a document checklist.",
+                "Start with the two BF-77 checks and a paper handoff. Verify the methods for the actual role separately.",
                 "Clinical and regulatory materials must follow institutional and jurisdictional requirements; escalate matters exceeding authorization."
               ]
             ]
@@ -29424,7 +29456,7 @@
                 "id": "education",
                 "values": [
                   "O*NET2026 materials ask about the education needed by new entrants: 42% answer a master’s degree and 28% a doctoral degree; the page lists only two categories. These are not the educational qualifications of all current employees. Job Zone Five/SVP8 and above describes occupational preparation, without implying an individual must already have a certain number of years of experience. The 4,580-entry training directory is based on IPEDS2025—26 directory and 2024—25 degree records, not current admissions or hiring standards. No records were found this time in the associated CareerOneStop certification directory; that does not prove there are no certificates on the market or that specific role authorization is unnecessary.",
-                  "O*NET’s training page shows 4,580 programs registered nationwide, while its certification page states “No certifications were found.” (no national certifications found for this occupation). Wage, employment and industry data on O*NET are explicitly labeled as coming from broader occupation Biological Scientists, All Other (19-1029.00). This page publishes under that scope and labels each occurrence; employment and projections use broader-occupation scope (2025—2035 5%, approximately 4,300 annual openings).",
+                  "O*NET’s training page shows 4,580 programs listed, while its certification page states “No certifications were found.” (the directory returned no entries). Wage and employment data on O*NET are explicitly labeled as coming from broader occupation Biological Scientists, All Other (19-1029.00). This page publishes under that scope and labels each occurrence; employment and projections use broader-occupation scope (2025—2035 5%, approximately 4,300 annual openings).",
                   "Chinese education and training requirements must be checked with the target institution; this round lacks representative Chinese recruitment samples or education distribution and cannot infer these from U.S. JobZone. National Bureau of Statistics broad scientific research and technical services reference for 2025: urban non-private 182,064 and private 83,560 CNY per year; enterprises above designated size: all personnel 173,855, middle management and above 324,177, and professional and technical personnel 172,877 CNY per year. Select according to the actual employer’s industry and management/technical duties. Annual averages before tax for broad industry and personnel categories do not equal wages for this occupation, medians, starting pay, city-level monthly wages or individual take-home pay."
                 ]
               },
@@ -29478,42 +29510,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional materials package: a research-question and hypothesis explanation, a dataset and quality-control explanation, a set of fictional analysis, parameters and statistical results, and an abnormality and failed-run record table.",
-                  "All materials are fictional and contain no real data involving humans, project data, unpublished research outputs, real client or partner information, or actual institutional internal materials.",
-                  "All materials and scenarios are fictional. Do not use real data involving humans, project data, unpublished research outputs, real client or partner information, actual institutional internal materials, or real data restricted by ethics review."
+                  "BF-77 fictional analysis handoff: F1 requires input D4 and workflow version V2.",
+                  "F2 shows D4 but gives no workflow version. F3 has no reviewer signoff. The exercise requires both version evidence and signoff before marking review complete.",
+                  "The variant changes only F2: verifiable run metadata shows that V2 processed D4. F1 and F3 are unchanged."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "For a fictional research question, clearly describe hypotheses and the basis for selecting methods and workflows; data quality control, preprocessing and parameter and version recording; statistical assumptions, results and uncertainty and bias assessment; abnormality, rerun and reproduction processes; and conclusions, limitations and steps requiring review or authorization.",
-                  "Complete within 90—120 minutes. Public method and statistics materials may be consulted, but do not use real data or perform any processing involving data concerning humans.",
-                  "Write research questions and hypotheses; dataset, quality control and preprocessing; methods, workflows, parameters and software versions; statistical assumptions, results, uncertainty and bias; abnormalities, reruns, reproduction, conclusions and limitations separately in the record, marking aspects requiring review."
+                  "Write one record for each version.",
+                  "Cite F1–F3 individually.",
+                  "Send a one-page handoff to the project reviewer."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "First confirm whether research questions and hypotheses are clear and data support the intended methods, then analyze and reproduce under workflows, and finally state conclusions and unresolved matters.",
-                  "Write questions and hypotheses, data and quality control, methods and workflows, statistical results and uncertainty, abnormalities and reruns, and conclusions and limitations separately, marking any uncertainty as requiring review.",
-                  "After completion, ask an experienced person to review methods, statistical judgments, conclusions and limitations, retaining reasons for changes."
+                  "Mark the fields you can verify.",
+                  "List open questions.",
+                  "Assess each version before comparing them."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "The exercise provides no means of evading regulation and cannot replace applicable jurisdictional and institutional ethics and data-management rules.",
-                  "Do not fabricate or modify raw data or results in the exercise, or use any real data involving humans or restricted by ethics review. Work involving data concerning humans and external publication must be handled by authorized personnel under procedures.",
-                  "The exercise does not replace applicable jurisdictional and institutional ethics and data-management rules or provide any means of evading regulation. Do not fabricate or modify raw data or results in the exercise or use any real data involving humans or restricted by ethics review."
+                  "Use only the paper records provided.",
+                  "No code, outside data or real samples are needed.",
+                  "Do not conduct real analysis, publish results or sign off."
                 ]
               }
             ]
           },
           "id": "bioinformatics-scientists.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "bf77-paper"
           ],
-          "title": "Low-Risk Practice Materials and Tasks",
+          "title": "BF-77: Check two analysis versions",
           "type": "cards"
         },
         {
@@ -29524,37 +29556,37 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Role-requirement checklist: education, occupational training, industry certification, institutional data, ethics and safety training, data, system and computing-resource authorization, approval for data involving humans and ethics, conclusions publication and open-data authorization, and applicable jurisdictional requirements for human genetic resources, personal information and biosafety.",
-                  "Label each item with source, reference period and jurisdiction. Leave unverifiable items blank and mark insufficient evidence rather than filling them with speculation.",
-                  "List “education,” “occupational training,” “industry certification,” “institutional data and system authorization,” “approval for data involving humans and ethics,” “conclusions publication and open-data authorization,” and “data, code and records retention requirements” separately to avoid conflation. Also label that wage, employment and industry data use broader occupation 19-1029.00 scope at each occurrence and mainland China uses only the scientific research and technical services industry average as an explicit proxy."
+                  "Identify input and version.",
+                  "Identify input and version. Verify independently.",
+                  "Identify input and version. Write the handoff."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Ask an experienced person to review your analysis record, focusing on whether questions, hypotheses and the method-selection basis; data, quality control and preprocessing; parameters and software versions; statistical assumptions, results, uncertainty and bias; and abnormalities, reruns, reproduction, conclusions and limitations match the evidence.",
-                  "Retain review comments and reasons for changes together as evidence of your willingness to accept review."
+                  "Separate confirmed and open items.",
+                  "Separate confirmed and open items. Verify independently."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "One-page review: state the facts, process and conclusions of this analysis, your judgments, corrected aspects and remaining uncertainties.",
-                  "Submit the review to colleagues, mentors or supervisors and retain review comments and reasons for changes."
+                  "Use only the exercise records.",
+                  "Use only the exercise records. Verify independently."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool-use explanation: when using analysis, retrieval or code-assistance tools, specify tool names, versions, inputs, bases and reasons for manual changes. Data, system and computing-resource permissions must be institutionally authorized.",
-                  "Processing data involving humans, business data and code requires prior authorization, with access scope, retention periods and destruction and sharing restrictions recorded. Do not store or transmit data involving humans or restricted data outside authorized systems."
+                  "Identify the project reviewer.",
+                  "Identify the project reviewer. Verify independently."
                 ]
               }
             ]
           },
           "id": "bioinformatics-scientists.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "bf77-paper"
           ],
           "title": "Preparation Materials You Can Submit",
           "type": "cards"
@@ -29618,59 +29650,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Occupational and scope reading: read public O*NET 19-1029.01 materials and clearly explain occupation-specific scope, what “wage, employment and industry data labeled as coming from broader occupation Biological Scientists, All Other (19-1029.00)” means, and the evidence boundary for mainland China using only the scientific research and technical services industry average as an explicit proxy.",
-                  "Output: a one-page scope and workflow comparison table labeling each item’s source."
+                  "Read the verification rules.",
+                  "Locate F1–F3."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Question and hypothesis practice: clearly state testable hypotheses, required data and compliance boundaries for a fictional research question.",
-                  "Output: a question, hypothesis and data-requirements explanation."
+                  "Read the original.",
+                  "List evidence."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Data quality-control practice: clearly state data acquisition, quality control, preprocessing, missing-data and abnormality handling, recording methods and judgments requiring review.",
-                  "Output: a data quality-control and preprocessing explanation."
+                  "Write the original check.",
+                  "Mark open items."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Analysis and modeling practice: clearly state methods, workflows, parameters, versions, statistical assumptions, results and uncertainty for fictional data.",
-                  "Output: an analysis and modeling record."
+                  "Replace only F2.",
+                  "Write the variant check."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Reproduction and abnormality practice: clearly state review and rerun workflows for run errors and abnormal results, and a reproducibility checklist.",
-                  "Output: a reproduction and abnormality-handling record."
+                  "Compare both versions.",
+                  "Write one handoff page."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Review-based self-questioning: ask an experienced person to challenge your method choices, statistical judgments and conclusions, recording corrections.",
-                  "Output: review comments and a changes explanation."
+                  "Submit both checks and the handoff.",
+                  "Leave the reference closed."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Final review: decide whether to continue, pause or change direction, explaining the basis and remaining uncertainties.",
-                  "Output: a one-page decision explanation with an evidence list."
+                  "Open “BF-77 reference (open after submitting)”.",
+                  "Check input, version, review and receiver."
                 ]
               }
             ]
           },
           "id": "bioinformatics-scientists.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "bf77-paper"
           ],
-          "title": "Seven-Day Experience Outputs",
+          "title": "BF-77 seven-day trial",
           "type": "timeline"
         },
         {
@@ -29678,13 +29710,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Continue: you completed the seven-day exercise and found you can sustainably engage in questioning, quality control, analysis and managing reproduction.",
-              "Continue: you can accept long debugging cycles, uncertain results and competitive pressure, and are willing to record under procedures and accept review.",
-              "Pause: you only seek “significant results” and are unwilling to trace data, workflows and method versions.",
-              "Pause: you consider “choosing results first and adding conditions afterward” acceptable.",
-              "Change direction: you prefer business data, modeling and product delivery; compare Data Scientists.",
-              "Change direction: you prefer statistical design and inference for clinical research and trials; compare Biostatisticians.",
-              "Insufficient information: if you lack any supervised data analysis or workflow reproduction experience, obtain both before judging."
+              "Continue if you like checking data and versions.",
+              "Continue if you can document missing evidence.",
+              "Pause if you submit without checking versions.",
+              "Pause if you treat a draft as approval.",
+              "Compare research analysis.",
+              "Compare workflow support.",
+              "Verify actual authority separately."
             ]
           },
           "id": "bioinformatics-scientists.path.seven-day-decision.1",
@@ -29739,7 +29771,7 @@
                 "Industry Certification (National Certification Scope)",
                 "People Seeking Third-Party Proof of Competence",
                 "Third-party proof of specialized competence.",
-                "O*NET’s certification page states “No certifications were found.” (no national certifications found for this occupation).",
+                "O*NET’s certification page states “No certifications were found.” (the directory returned no entries).",
                 "No records were found in this directory. Market certificates, costs, entry and renewal conditions were not obtained this round; check the specific issuer.",
                 "Maintain according to issuer arrangements and certificate validity periods.",
                 "Certification demonstrates competence, not a practice license or data-processing authorization."
@@ -29748,7 +29780,7 @@
                 "Occupational Training and Continuing Education (Methods and Tools)",
                 "People Seeking to Build Method and Tool Capabilities",
                 "Proof of learning in statistics, computing, data engineering and compliance.",
-                "O*NET’s training page shows 4,580 programs registered nationwide; whether required depends on the employer and role.",
+                "O*NET’s training page shows 4,580 programs listed; whether required depends on the employer and role.",
                 "Complete courses and assessments according to training-provider and employer arrangements.",
                 "Maintain according to institutional arrangements and course validity periods.",
                 "Course completion has course and version scope limits and does not equal data or publication authorization."
@@ -29794,7 +29826,7 @@
           "data": {
             "paragraphs": [
               "Qualification boundaries: education, occupational training, industry certification, employer appointment, internal role authorization for data, systems, computing resources, ethics approval and conclusions publication, and applicable jurisdictional requirements for human genetic resources, personal information and biosafety are different statuses. None can be inferred automatically from another. Data and system permissions and storage, sharing and destruction requirements are working prerequisites and cannot be replaced by education.",
-              "O*NET2026 materials ask about the education needed by new entrants: 42% answer a master’s degree and 28% a doctoral degree; the page lists only two categories. These are not the educational qualifications of all current employees. Job Zone Five/SVP8 and above describes occupational preparation, without implying an individual must already have a certain number of years of experience. The 4,580-entry training directory is based on IPEDS2025—26 directory and 2024—25 degree records, not current admissions or hiring standards. No records were found this time in the associated CareerOneStop certification directory; that does not prove there are no certificates on the market or that specific role authorization is unnecessary. U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 5% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate.",
+              "O*NET2026 materials ask about the education needed by new entrants: 42% answer a master’s degree and 28% a doctoral degree; the page lists only two categories. These are not the educational qualifications of all current employees. Job Zone Five/SVP8 and above describes occupational preparation, without implying an individual must already have a certain number of years of experience. The 4,580-entry training directory is based on IPEDS2025—26 directory and 2024—25 degree records, not current admissions or hiring standards. No records were found this time in the associated CareerOneStop certification directory; that does not prove there are no certificates on the market or that specific role authorization is unnecessary. U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 4.7% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate.",
               "Assess human genetic resources, personal information, research ethics and institutional permissions separately. Human genetic resource materials and information have different scopes; clinical, imaging, protein or metabolic data alone do not automatically constitute human genetic resource information merely by their names. Check statutory procedures separately for specific collection, preservation, international collaboration, materials export and providing information externally; do not generalize that every use requires approval or filing. Regulatory responsibilities have transferred to health authorities. First check whether data can identify a natural person, then whether they involve sensitive information such as medical and health information and the basis for processing. Not all biological, commercial or project data constitute sensitive personal information; de-identification is not equivalent to anonymization. Confirm specific purposes, necessity, protective measures and sharing scope under applicable rules. National Bureau of Statistics broad scientific research and technical services reference for 2025: urban non-private 182,064 and private 83,560 CNY per year; enterprises above designated size: all personnel 173,855, middle management and above 324,177, and professional and technical personnel 172,877 CNY per year. Select according to the actual employer’s industry and management/technical duties. Annual averages before tax for broad industry and personnel categories do not equal wages for this occupation, medians, starting pay, city-level monthly wages or individual take-home pay.",
               "Operating suggestion: before entry, make separate columns for “education / occupational training / industry certification / institutional data, ethics and safety training / data, system and computing-resource authorization / approval for data involving humans and ethics / conclusions publication and open-data authorization / data, code and records retention requirements.” Record sources, reference periods and jurisdictions individually; leave unverifiable items blank and mark insufficient evidence rather than filling them with speculation."
             ]
@@ -29820,12 +29852,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This round has no representative Chinese employer recruitment sample for the occupation. The following institutions, titles, employment and capability directions are editorial checking suggestions; O*NET adjacent occupations do not establish prevalence of Chinese role titles. Check the actual employing entity, duties, education/experience, data permissions, project duration, pay and training conditions.",
-              "Checklist: whether the role is in a research institute, university, corporate R&D center, hospital research platform or sequencing and bioinformatics service provider; full-time, project, research-group or postdoctoral employment; research direction and data and platform types; whether human genetic resources and personal information are involved; whether external publication and open data are involved; and implementation of before/after-tax pay, performance pay and records-retention requirements."
+              "A July 13, 2026 posting by the Peking University Chengdu Advanced Interdisciplinary Institute of Biotechnology listed one bioinformatics research scientist in the He Aibin lab with a relevant doctorate, analytical frameworks and algorithms or models, and CNY 250,000–400,000 per year. It separately listed two bioinformatics research assistants with at least a master’s degree, high-throughput analysis and workflow work, at CNY 180,000–240,000 per year.",
+              "A March 13, 2026 notice from the Pan Guangjin group at the CAS Guangzhou Institutes of Biomedicine and Health listed one bioinformatics analyst/research assistant. It accepted a bachelor’s degree or higher and asked for Linux, tools such as R or Python, sequencing analysis and scripting. The notice gave no numeric pay.",
+              "These are two dated employer notices and their quoted figures. They do not establish live vacancies, a universal degree threshold, market pay or take-home income."
             ]
           },
           "id": "bioinformatics-scientists.path.recruitment-sample.1",
           "source_refs": [
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
             "editor",
             "details-current",
             "nbs-current",
@@ -29833,7 +29868,7 @@
             "nhc-guidance",
             "pipl-current"
           ],
-          "title": "Checking Recruitment Information",
+          "title": "Two historical notices from Chengdu and Guangzhou",
           "type": "notice"
         },
         {
@@ -30011,11 +30046,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial pathway checking suggestion: direct answer: O*NET places 19-1029.01 (Bioinformatics Scientists) in Job Zone Five (Extensive Preparation Needed). Respondent answers about new-entry education requirements are 42% considering a master’s degree necessary and 28% a doctoral degree (the page lists only these two categories). Most roles require graduate education; some require doctoral or other professional degrees. O*NET’s training page shows 4,580 programs registered nationwide, while its certification page states “No certifications were found.” (no national certifications found for this occupation). Wage, employment and industry data on O*NET are explicitly labeled as coming from broader occupation Biological Scientists, All Other (19-1029.00); this page publishes under that scope and labels each occurrence. Mainland Chinese data processing is subject to the Regulations of the People’s Republic of China on the Administration of Human Genetic Resources and the Personal Information Protection Law of the People’s Republic of China. None provides exemption from jurisdictional constraints."
+              "Read the duties before the degree. In the Chengdu sample, the scientist needs a relevant doctorate and the assistant needs a master’s or higher. The Guangzhou analyst/assistant accepts a bachelor’s or higher and specifies analytical skills. O*NET places the U.S. specialty in Job Zone Five. BLS’s typical bachelor’s degree is for the U.S. parent group."
             ]
           },
           "id": "bioinformatics-scientists.path.career-path-block.20",
           "source_refs": [
+            "onet",
+            "ep",
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
             "editor",
             "details-current",
             "hgr-current",
@@ -30029,7 +30068,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial pathway checking suggestion: qualification boundaries: education, occupational training, industry certification (the page shows no national certifications found for the occupation), employer appointment, internal role authorization for data, systems, computing resources, ethics approval and conclusions publication, and applicable jurisdictional requirements for human genetic resources, personal information and biosafety are different statuses. None can be inferred automatically from another. Also note that wage, employment and industry data on this page use broader occupation 19-1029.00 scope, labeled at each occurrence, with employment and projections published under that scope (2025—2035 5%, approximately 4,300 annual openings). The Personal Information Protection Law of the People’s Republic of China requires personal information processing to follow legality, propriety, necessity and good faith, with stricter requirements for sensitive personal information."
+              "Editorial pathway checking suggestion: qualification boundaries: education, occupational training, industry certification (the page shows no entries returned by the linked credential directory), employer appointment, internal role authorization for data, systems, computing resources, ethics approval and conclusions publication, and applicable jurisdictional requirements for human genetic resources, personal information and biosafety are different statuses. None can be inferred automatically from another. Also note that wage and employment data on this page use broader occupation 19-1029.00 scope, labeled at each occurrence, with employment and projections published under that scope (2025—2035 5%, approximately 4,300 annual openings). The Personal Information Protection Law of the People’s Republic of China requires personal information processing to follow legality, propriety, necessity and good faith, with stricter requirements for sensitive personal information."
             ]
           },
           "id": "bioinformatics-scientists.path.career-path-block.21",
@@ -30111,7 +30150,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Editorial pathway checking suggestion: used to explain the training and education information entry (the page shows 4,580 programs registered nationwide); does not constitute hiring thresholds or authorization."
+              "Editorial pathway checking suggestion: used to explain the training and education information entry (the page shows 4,580 programs listed); does not constitute hiring thresholds or authorization."
             ]
           },
           "id": "bioinformatics-scientists.path.career-path-block.26",
@@ -31065,10 +31104,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 19-1029.01 Occupational Summary (Employment and Projection Fields, Broader-Occupation Scope)",
+                "entity": "BLS Table 1.2: Biological Scientists, All Other, 19-1029",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 19-1029.01 Industry Distribution (Broader-Occupation Scope)",
@@ -31077,10 +31116,10 @@
                 "url": "https://www.onetonline.org/link/industry/19-1029.01"
               },
               {
-                "entity": "O*NET 19-1029.01 Employment Trends Page (Broader-Occupation Scope)",
+                "entity": "BLS Table 1.2: Biological Scientists, All Other, 19-1029",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtrends/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 19-1029.01 Local Wages Page (Broader Occupation 19-1029.00 Scope)",
@@ -31149,11 +31188,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 5% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate."
+              "BLS projects the U.S. parent group Biological Scientists, All Other (19-1029) from about 59,600 jobs in 2025 to 62,400 in 2035, up 4.7%, a net gain of about 2,800, with about 4,300 annual openings from growth and replacement. The baseline includes 1.5% self-employment and does not isolate bioinformatics scientists."
             ]
           },
           "id": "bioinformatics-scientists.market-signals.market-signal-card.8",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31191,11 +31231,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Employment given on O*NET’s employment trends page under broader occupation 19-1029.00 scope, not specific to this occupation. Recruitment demand in individual institutions or regions may differ greatly from national scope."
+              "BLS 2025 parent group baseline. It is separate from the OEWS wage survey employment count."
             ]
           },
           "id": "bioinformatics-scientists.market-signals.market-signal-card.11",
           "source_refs": [
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31289,7 +31330,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 5% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate."
+              "U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 4.7% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate."
             ]
           },
           "id": "bioinformatics-scientists.market-signals.market-signal-card.18",
@@ -31345,11 +31386,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "5% (Faster than average); Approximately 4,300 Annual Openings, Both for the Broader Occupation"
+              "Parent group growth of 4.7% and about 4,300 annual openings"
             ]
           },
           "id": "bioinformatics-scientists.market-signals.market-signal-card.22",
           "source_refs": [
+            "ep",
             "ep-current"
           ],
           "type": "prose"
@@ -31472,11 +31514,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 U.S. broader-occupation industry distribution: government 39%, professional, scientific and technical services 34%, educational services 11%, and other industries including manufacturing 16%. This is neither occupation-specific nor Chinese distribution, nor industry wage statistics."
+              "O*NET details identify the industry data as coming from the U.S. parent group Biological Scientists, All Other (19-1029). The industry subtable lists government at 39%, professional, scientific, and technical services at 34%, education at 11%, and other industries at 16%, without a separate year. It does not establish a standalone bioinformatics scientist distribution."
             ]
           },
           "id": "bioinformatics-scientists.market-signals.market-signal-card.31",
           "source_refs": [
+            "r2-pay-2",
             "industry-current"
           ],
           "type": "prose"
@@ -31486,7 +31529,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 5% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate."
+              "U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 4.7% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate."
             ]
           },
           "id": "bioinformatics-scientists.market-signals.market-signal-card.32",
@@ -31907,16 +31950,23 @@
           "data": {
             "entries": [
               {
-                "answer": "Collaborate with researchers to analyze problems and recommend technology-based solutions or determine computational strategies, provide statistical and computational tools for biological activities such as genetic analysis and molecular measurements, and analyze large molecular datasets: analyzing microarrays, genomic sequences and proteomics; creating new computational methods and analytical tools for research objectives; compiling data for gene expression, genome annotation and structural bioinformatics; communicating research findings through conferences, papers and project reports; testing new and updated tools and software; designing and applying algorithms including unsupervised and supervised machine learning and dynamic programming; developing new software or adapting existing software; operating public, commercial or proprietary genomic and proteomic databases; establishing data models and databases; guiding technicians and information technology staff applying tools; teaching tool selection and use; improving software and database user interfaces; proposing new systems and processes to improve operations; compiling summary statistics on the human genome; and creating or modifying web-based bioinformatics tools.",
+                "answer": "Bioinformatics scientists use computational and statistical methods to study biological data such as genomes and transcriptomes. They define questions, choose data and methods, review anomalies, record versions and explain results and limits. Scientists often focus on design and interpretation, while support roles may focus on running and maintaining workflows. Check the actual position.",
                 "id": "bioinformatics-scientists.faq.1",
                 "question": "What Do Bioinformatics Scientists Do Each Day?",
-                "question_key": "career.faq.bioinformatics-scientists.1"
+                "question_key": "career.faq.bioinformatics-scientists.1",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "Key risks include exceeding data acquisition and analysis authorization; data involving humans, privacy and compliance risks; irreproducible algorithms, code and conclusions; treating tool outputs and automatically generated code as conclusions; prolonged screen work, repetitive motions and pressure; and exceeding boundaries in external conclusions and open data. Controls include working within authorized data, system and ethics scope and identifying risks first; processing data involving humans under procedures and retaining records; truthfully recording data, code, parameters, versions and abnormalities; delivering conclusions and opening data within authorization; and stopping and escalating when matters exceed authorization or abnormalities are found.",
+                "answer": "Verify data provenance, consent or another applicable basis, permitted uses and access. For China’s human genetic resources, check Biosecurity Law Articles 55–57 and applicable rules. Removing names does not itself allow sharing. Authorized professionals handle clinical judgment and release.",
                 "id": "bioinformatics-scientists.faq.2",
                 "question": "What Risks Should I Consider Before Entering This Work?",
-                "question_key": "career.faq.bioinformatics-scientists.2"
+                "question_key": "career.faq.bioinformatics-scientists.2",
+                "source_refs": [
+                  "bio-current",
+                  "pipl-current"
+                ]
               },
               {
                 "answer": "Look at reviewable outputs: can you break research questions into testable hypotheses and choose suitable methods, perform quality control and analysis under workflows and record parameters and versions, and stop to review and report abnormal data, unexpected results or matters exceeding authorization? The ICR interest code and skill and knowledge scores indicate only a nearby direction and cannot replace practical evidence.",
@@ -31925,22 +31975,36 @@
                 "question_key": "career.faq.bioinformatics-scientists.3"
               },
               {
-                "answer": "AI and automation can change data cleaning and batch-workflow scheduling, code completion and documentation generation, literature and database retrieval and summaries, and draft writing. However, setting questions and hypotheses, selecting methods and workflows and performing statistical inference, judging results and bias, and response decisions for data involving humans, ethics and publication remain human responsibilities. Task automation does not equal changes in role numbers; official public employment and projections use broader occupation 19-1029.00 scope.",
+                "answer": "Try drafting field notes and a handoff with fictional material. Responsible staff verify provenance, model assumptions, anomalies and interpretation. Available evidence does not establish occupational adoption, time savings or displacement.",
                 "id": "bioinformatics-scientists.faq.4",
                 "question": "Which Tasks Will AI Change?",
-                "question_key": "career.faq.bioinformatics-scientists.4"
+                "question_key": "career.faq.bioinformatics-scientists.4",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
-                "answer": "You and authorized personnel must undertake question and hypothesis setting; method and workflow selection and statistical inference; results and bias judgments; and response decisions involving human genetic resources, personal information, ethics, open data and code publication, under applicable jurisdictional and institutional rules. Tool outputs and automatically generated code can only serve as reversible, reviewable supporting steps.",
+                "answer": "Submit an analysis others can review, documenting data, methods, versions and limitations. Authorized staff or institutions decide issues involving human genetic resources, personal information, ethics, data access, and release of code or results under the applicable procedures.",
                 "id": "bioinformatics-scientists.faq.5",
                 "question": "Which Steps Must Retain Human Review?",
-                "question_key": "career.faq.bioinformatics-scientists.5"
+                "question_key": "career.faq.bioinformatics-scientists.5",
+                "source_refs": [
+                  "bio-current",
+                  "pipl-current",
+                  "hgr-current"
+                ]
               },
               {
-                "answer": "Check six categories: education (O*NET education distribution: master’s degree 42%, doctoral degree 28%; the page lists only these two); occupational training and continuing education (the training page shows 4,580 programs registered nationwide); industry certification (the certification page states “No certifications were found.”, meaning no national certifications found for this occupation); institutional data, ethics and information-security training and data, system and computing-resource permissions; internal institutional data and ethics approval and conclusions publication and open-data authorization; and applicable jurisdictional requirements for human genetic resources, personal information and biosafety. The occupation is in Job Zone Five (Extensive Preparation Needed). None can be inferred automatically from another.",
+                "answer": "Read the duties before the degree. In the Chengdu sample, the scientist needs a relevant doctorate and the assistant needs a master’s or higher. The Guangzhou analyst/assistant accepts a bachelor’s or higher and specifies analytical skills. O*NET places the U.S. specialty in Job Zone Five. BLS’s typical bachelor’s degree is for the U.S. parent group.",
                 "id": "bioinformatics-scientists.faq.6",
                 "question": "Which Qualifications Should I Check to Enter This Occupation?",
-                "question_key": "career.faq.bioinformatics-scientists.6"
+                "question_key": "career.faq.bioinformatics-scientists.6",
+                "source_refs": [
+                  "onet",
+                  "ep",
+                  "pku-chengdu-bioinfo-2026",
+                  "gibh-pan-bioinfo-2026"
+                ]
               },
               {
                 "answer": "Work context shows 89% consider exactness or accuracy extremely important, 81% use email daily, 52% have face-to-face discussions daily, 61% have a lot of freedom in decisions (12% some, 19% very little), 66% have a lot of freedom in determining tasks and priorities (19% very little), 19% face time pressure daily (47% more than once a week), 29% consider competition extremely intense (11% very intense, 41% moderate), 90% never face hazardous conditions, 37% face distracting or uncomfortable noise more than once a month (47% never), and 30% make repetitive motions continually or almost continually (19% about half the time). Prolonged sitting, screen work and repetitive operations require ergonomic arrangements, breaks and movement. Project, publication and application milestones can bring periods of increased intensity; report persistent discomfort early.",
@@ -31955,16 +32019,33 @@
                 "question_key": "career.faq.bioinformatics-scientists.8"
               },
               {
-                "answer": "O*NET’s employment trends page uses broader occupation Biological Scientists, All Other (19-1029.00) scope, giving 2024 employment of 63,700 people, approximately 64,500 in 2034 (1%, slower than average), and approximately 4,800 annual openings in the projection period. This is not occupation-specific data. Growth and openings are different indicators; openings include replacement needs. For transitions, compare Bioinformatics Technicians, Data Scientists, Biostatisticians, Statisticians, Mathematicians, Natural Sciences Managers, Biochemists and Biophysicists, Geneticists and Microbiologists, all requiring corresponding additional training, qualifications and authorization.",
+                "answer": "BLS projects the U.S. parent group Biological Scientists, All Other (19-1029) from about 59,600 jobs in 2025 to 62,400 in 2035, up 4.7%, a net gain of about 2,800, with about 4,300 annual openings from growth and replacement. The baseline includes 1.5% self-employment and does not isolate bioinformatics scientists.",
                 "id": "bioinformatics-scientists.faq.9",
                 "question": "How Should I Assess Outlook and Transitions?",
-                "question_key": "career.faq.bioinformatics-scientists.9"
+                "question_key": "career.faq.bioinformatics-scientists.9",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
-                "answer": "O*NET’s U.S. local wages page states “Wage data for Biological Scientists, All Other.”, so official page values use broader occupation 19-1029.00 scope. This page publishes 2025 BLS values under that scope, labeled at each occurrence (median annual wage USD 98,920, median hourly wage USD 47.56). No occupation-level wage entry for mainland China has been obtained. Under this page’s evidence scope (no data currently safe to use, with the handling note “use the scientific research and technical services industry average as an explicit proxy”), the page uses only 2025 scientific research and technical services industry averages as explicit proxies: urban non-private units 182,064 CNY per year and urban private units 83,560 CNY per year, labeled “not wages for this occupation” at each occurrence. Industry averages are not presented as occupational medians or starting pay. Occupational scopes, statistical systems, reference periods, employment and pay structures differ; USD or broader-occupation values cannot be converted to CNY, and quotations lacking samples and role scope should not be trusted.",
+                "answer": "These are two dated employer notices and their quoted figures. They do not establish live vacancies, a universal degree threshold, market pay or take-home income.",
                 "id": "bioinformatics-scientists.faq.10",
                 "question": "Why Can’t U.S. Wages and Mainland Chinese Scope Be Converted into Each Other?",
-                "question_key": "career.faq.bioinformatics-scientists.10"
+                "question_key": "career.faq.bioinformatics-scientists.10",
+                "source_refs": [
+                  "nbs",
+                  "pku-chengdu-bioinfo-2026",
+                  "gibh-pan-bioinfo-2026"
+                ]
+              },
+              {
+                "answer": "In the original, F1 requires D4 and V2, while F2 confirms D4 but not the workflow version. The variant changes only F2, so the run metadata confirms that V2 processed D4. Neither version has F3 reviewer signoff. Send both to the project reviewer. Did you distinguish input, workflow version, signoff and receiver?",
+                "id": "bioinformatics-scientists.faq.11",
+                "question": "BF-77 reference (open after submitting)",
+                "question_key": "career.faq.bioinformatics-scientists.q11",
+                "source_refs": [
+                  "bf77-paper"
+                ]
               }
             ]
           },
@@ -32031,11 +32112,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational page Updated2026; 2025 wages and 2025—2035 projections concern broader occupation 19-1029.00; advertisements cover all of 2025; training IPEDS2025—26/2024—25; Chinese 2025 wages concern industry/broad personnel categories; historical industry annual averages reference BLS2023. Legal provisions are distinguished from the 2026 consultation draft."
+              "Checked November 10, 2026. BLS wages cover 2025 and projections cover 2025–2035, both for the parent group. The two mainland notices retain their original dates."
             ]
           },
           "id": "bioinformatics-scientists.sources.source-card.3",
           "source_refs": [
+            "ep",
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
             "editor",
             "onet-current",
             "details-current",
@@ -32054,11 +32138,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Explain occupational tasks and structural fields, broader-occupation wages/employment/industries, Chinese industry wages and editorial suggestions separately; do not mix them as precise occupational wages, personal thresholds or Chinese trends. Check human genetic resource materials/information, personal information, ethics and internal permissions separately. Old Hero/FAQ and original facts remain unchanged under authorization; their historical values differ from this round’s nine modules, recorded in the report as pending."
+              "Tasks come from the O*NET specialty. U.S. wages and employment, mainland industry means, historical notices and the fictional exercise answer different questions."
             ]
           },
           "id": "bioinformatics-scientists.sources.source-card.4",
           "source_refs": [
+            "onet",
+            "ep",
+            "nbs",
+            "pku-chengdu-bioinfo-2026",
+            "gibh-pan-bioinfo-2026",
+            "bf77-paper",
             "editor",
             "onet-current",
             "details-current",
@@ -32101,19 +32191,19 @@
                 "entity": "MBTI Personality Test",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test"
               },
               {
                 "entity": "View the Bioinformatics Scientists Career Page",
@@ -32146,14 +32236,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "official occupation profile",
-                  "Page Updated in 2025; Accessed 2026-09-16"
+                  "Occupation profile updated in 2026"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
                 "limitation": "U.S. occupational classification does not directly establish Chinese role sequences or qualifications. Identity and duties on this page use occupation-specific 19-1029.01 scope, but the wage, employment and industry rows explicitly label broader occupation Biological Scientists, All Other (19-1029.00) as their source.",
                 "market": "United States",
                 "name": "O*NET 19-1029.01 Occupational Summary (Bioinformatics Scientists)",
-                "period": "Page Updated in 2025; Accessed 2026-09-16",
+                "period": "Occupation profile updated in 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/19-1029.01"
@@ -32162,33 +32252,33 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "official occupation details",
-                  "Page Updated in 2025; Accessed 2026-09-16"
+                  "Occupation profile updated in 2026"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "bls",
                 "limitation": "The task list describes work at group level, not that every role performs all tasks. The page lists 20 tasks with importance scores.",
                 "market": "United States",
                 "name": "O*NET 19-1029.01 Detailed Information (Tasks and Work Activities)",
-                "period": "Page Updated in 2025; Accessed 2026-09-16",
+                "period": "Occupation profile updated in 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/19-1029.01"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official outlook",
-                  "2024—2034; Broader Occupation Biological Scientists, All Other Scope; Accessed 2026-09-16"
+                  "BLS projects the U.S. parent group Biological Scientists, All Other (19-1029) from about 59,600 jobs in 2025 to 62,400 in 2035, up 4.7%, a net gain of about 2,800, with about 4,300 annual openings from growth and replacement. The baseline includes 1.5% self-employment and does not isolate bioinformatics scientists.",
+                  "Parent group, not a bioinformatics-specific series."
                 ],
-                "evidence_type": "official outlook",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "Employment and projections use broader occupation Biological Scientists, All Other (19-1029.00) scope, not data specific to this occupation; do not extrapolate to broader occupational groups.",
+                "limitation": "BLS projects the U.S. parent group Biological Scientists, All Other (19-1029) from about 59,600 jobs in 2025 to 62,400 in 2035, up 4.7%, a net gain of about 2,800, with about 4,300 annual openings from growth and replacement. The baseline includes 1.5% self-employment and does not isolate bioinformatics scientists.",
                 "market": "United States",
-                "name": "O*NET 19-1029.01 Occupational Summary (Employment and Projection Fields)",
-                "period": "2024—2034; Broader Occupation Biological Scientists, All Other Scope; Accessed 2026-09-16",
-                "publisher": "O*NET OnLine",
+                "name": "BLS Table 1.2: Biological Scientists, All Other, 19-1029",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/summary/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32225,18 +32315,18 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "official administrative regulation",
-                  "Promulgated in 2019 by State Council Order No. 717, Effective 2019-07-01; Accessed 2026-09-16"
+                  "Regulation Article 28: information use and security review.",
+                  "Check the procedures for materials and information separately."
                 ],
                 "evidence_type": "official administrative regulation",
                 "id": "cnclass",
-                "limitation": "These regulations govern collection, preservation, use and external provision of China’s human genetic resources. Foreign organizations and individuals and institutions they establish or actually control may not collect or preserve China’s human genetic resources within China; they must collaborate with Chinese research institutes, universities and enterprises and follow provisions. Providing China’s human genetic resources overseas requires approval or filing according to law. Data involving humans are also subject to general personal-information protection requirements (lawful, proper, necessary and good-faith processing, with stricter requirements for sensitive personal information). These regulations are administrative regulations, not role authorization. This page cites only applicable scope and conduct boundaries and provides no means of evading regulation.",
+                "limitation": "Biosecurity Law Article 56 sets approval rules for listed activities, including export of China’s human genetic resource materials. Article 57 requires advance reporting and an information backup to the State Council health authority when information is provided or opened to foreign organizations, individuals or entities they establish or effectively control. Regulation Article 28 separately provides for filing and for security review where public health, national security or the public interest may be affected. Check the applicable provisions and procedures through the institution.",
                 "market": "Mainland China",
-                "name": "Regulations of the People’s Republic of China on the Administration of Human Genetic Resources — Public Text on the Chinese Government Website",
-                "period": "Promulgated in 2019 by State Council Order No. 717, Effective 2019-07-01; Accessed 2026-09-16",
-                "publisher": "State Council of the People’s Republic of China (Public Text on the Chinese Government Website)",
-                "scope": "jurisdiction_specific",
-                "url": "https://www.gov.cn/zhengce/content/2019-06/10/content_5398829.htm"
+                "name": "Regulation on Human Genetic Resources (2024 amendment)",
+                "period": "2024",
+                "publisher": "State Council; Published by Xinwu District Government",
+                "scope": "contextual",
+                "url": "https://www.wnd.gov.cn/doc/2024/05/10/4348442.shtml"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32258,14 +32348,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "occupation details",
-                  "Page Updated in 2025; Accessed 2026-09-16"
+                  "Occupation profile updated in 2026"
                 ],
                 "evidence_type": "occupation details",
                 "id": "facilities",
                 "limitation": "Work-context fields are respondent percentages, not individual role conditions. The page lists 57 work contexts, with accuracy requirements, time pressure, competition, automation, exposure and other items given by graded responses on the page.",
                 "market": "United States",
                 "name": "O*NET 19-1029.01 Detailed Information (Work Context and Work Activities)",
-                "period": "Page Updated in 2025; Accessed 2026-09-16",
+                "period": "Occupation profile updated in 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/19-1029.01"
@@ -32274,14 +32364,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "official outlook",
-                  "2024—2034; Broader Occupation 19-1029.00 Scope; Accessed 2026-09-16"
+                  "2025–2035; Broader Occupation 19-1029.00 Scope; Accessed 2026-09-16"
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
                 "limitation": "Employment and projections under broader-occupation scope, not occupation-specific data or individual hiring probabilities.",
                 "market": "United States",
                 "name": "O*NET 19-1029.01 Occupational Summary (Employment and Projection Fields, Broader-Occupation Scope)",
-                "period": "2024—2034; Broader Occupation 19-1029.00 Scope; Accessed 2026-09-16",
+                "period": "2025–2035; Broader Occupation 19-1029.00 Scope; Accessed 2026-09-16",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/summary/19-1029.01"
@@ -32290,14 +32380,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "technology signals",
-                  "Page Updated in 2025; Accessed 2026-09-16"
+                  "U.S. Lightcast postings in 2025."
                 ],
                 "evidence_type": "technology signals",
                 "id": "hr",
-                "limitation": "The page lists 48 software skills with occurrence information by demand (Python 60, R 54, Linux 21, Perl 15, UNIX 13, Amazon Web Services 13, Git 10, C++ 10, Bash 10, SQL 9, GitHub 8, Oracle Java 7, Docker 7, The MathWorks MATLAB 6 and others, with PostgreSQL and others labeled “Not available”). The source is Lightcast job advertisements; missing percentages do not establish role adoption rates.",
+                "limitation": "U.S. related postings in 2025: Python 60%, R 54%, Linux 21%, Perl 15%, PostgreSQL 2%. Missing percentages do not establish tool use.",
                 "market": "United States",
                 "name": "O*NET 19-1029.01 Technology List (Software Skills Signals)",
-                "period": "Page Updated in 2025; Accessed 2026-09-16",
+                "period": "Occupation profile updated in 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/19-1029.01"
@@ -32354,14 +32444,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "training information",
-                  "Page Updated in 2025; Accessed 2026-09-16"
+                  "Occupation profile updated in 2026"
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
                 "limitation": "The page shows 4,580 training programs registered nationwide. Occupational preparation information places the occupation in Job Zone Five; most roles require graduate education, some doctoral or other professional degrees. Training information does not constitute a practice license or employer appointment.",
                 "market": "United States",
                 "name": "O*NET 19-1029.01 Training and Education Information",
-                "period": "Page Updated in 2025; Accessed 2026-09-16",
+                "period": "Occupation profile updated in 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/19-1029.01"
@@ -32370,14 +32460,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "certification information",
-                  "Page Updated in 2025; Accessed 2026-09-16"
+                  "Occupation profile updated in 2026"
                 ],
                 "evidence_type": "certification information",
                 "id": "arxiv",
-                "limitation": "The page states “No certifications were found.” (no national certifications found for this occupation). No certifications found does not imply employer or institutional role authorization is unnecessary or establish a hiring threshold.",
+                "limitation": "The page states “No certifications were found.” (the directory returned no entries). No certifications found does not imply employer or institutional role authorization is unnecessary or establish a hiring threshold.",
                 "market": "United States",
-                "name": "O*NET 19-1029.01 Certification Finder (National Certifications)",
-                "period": "Page Updated in 2025; Accessed 2026-09-16",
+                "name": "O*NET related credentials directory",
+                "period": "Occupation profile updated in 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/19-1029.01"
@@ -32386,14 +32476,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "occupation profile",
-                  "Page Updated in 2025; Accessed 2026-09-16"
+                  "Occupation profile updated in 2026"
                 ],
                 "evidence_type": "occupation profile",
                 "id": "weforum",
                 "limitation": "Used to check the original official duty text: “Consult with researchers to analyze problems, recommend technology-based solutions, or determine computational strategies.”",
                 "market": "United States",
                 "name": "O*NET 19-1029.01 Occupational Summary (Original Duties Text)",
-                "period": "Page Updated in 2025; Accessed 2026-09-16",
+                "period": "Occupation profile updated in 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/19-1029.01"
@@ -32402,14 +32492,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "occupation details",
-                  "Page Updated in 2025; Accessed 2026-09-16"
+                  "Occupation profile updated in 2026"
                 ],
                 "evidence_type": "occupation details",
                 "id": "employer",
                 "limitation": "Used for basic skills, transferable skills and knowledge scope. The page nominally lists 10 basic skills (reading comprehension 85, active listening 75, critical thinking 75, science 75, speaking 75, writing 75, active learning 72, mathematics 72, monitoring 60, learning strategies 50); 25 transferable skills, with visible scores for complex problem solving 75, judgment and decision making 69, systems analysis 60, systems evaluation 56 and others; and 33 knowledge entries, with visible scores for biology 98, computers and electronics 93, engineering and technology 84, English language 84, mathematics 82 and chemistry 74.",
                 "market": "United States",
                 "name": "O*NET 19-1029.01 Detailed Information (Skills and Knowledge)",
-                "period": "Page Updated in 2025; Accessed 2026-09-16",
+                "period": "Occupation profile updated in 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/19-1029.01"
@@ -32418,14 +32508,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "occupation profile",
-                  "Page Updated in 2025; Accessed 2026-09-16"
+                  "Occupation profile updated in 2026"
                 ],
                 "evidence_type": "occupation profile",
                 "id": "purchasing-managers",
                 "limitation": "The task list describes work at group level. The page lists 20 tasks grouped into core and supplemental tasks with importance scores.",
                 "market": "United States",
                 "name": "O*NET 19-1029.01 Occupational Summary (Task List)",
-                "period": "Page Updated in 2025; Accessed 2026-09-16",
+                "period": "Occupation profile updated in 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/19-1029.01"
@@ -32449,66 +32539,50 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "industry distribution",
-                  "2024; Accessed 2026-09-16"
+                  "O*NET details identify the industry data as coming from the U.S. parent group Biological Scientists, All Other (19-1029). The industry subtable lists government at 39%, professional, scientific, and technical services at 34%, education at 11%, and other industries at 16%, without a separate year. It does not establish a standalone bioinformatics scientist distribution.",
+                  "The subtable does not give wages."
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "Government 38%, professional, scientific and technical services 34%, educational services 11%, and other industries (including manufacturing) 17%. The summary labels industry data as coming from broader occupation Biological Scientists, All Other (19-1029.00). Industry distribution describes statistical classification, not industry wage levels.",
+                "limitation": "O*NET details identify the industry data as coming from the U.S. parent group Biological Scientists, All Other (19-1029). The industry subtable lists government at 39%, professional, scientific, and technical services at 34%, education at 11%, and other industries at 16%, without a separate year. It does not establish a standalone bioinformatics scientist distribution.",
                 "market": "United States",
                 "name": "O*NET 19-1029.01 Industry Distribution",
-                "period": "2024; Accessed 2026-09-16",
+                "period": "No separate year on subtable",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/industry/19-1029.01"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official employment trends",
-                  "2024—2034; Broader Occupation Biological Scientists, All Other Scope; Accessed 2026-09-16"
+                  "BLS projects the U.S. parent group Biological Scientists, All Other (19-1029) from about 59,600 jobs in 2025 to 62,400 in 2035, up 4.7%, a net gain of about 2,800, with about 4,300 annual openings from growth and replacement. The baseline includes 1.5% self-employment and does not isolate bioinformatics scientists.",
+                  "Parent group, not a bioinformatics-specific series."
                 ],
-                "evidence_type": "official employment trends",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
-                "limitation": "The page states “Employment data for Biological Scientists, All Other.”; 2024 employment of 63,700 people, approximately 64,500 in 2034, 2024—2034 1% (Slower than average), and approximately 4,800 annual openings in the projection period. These use broader-occupation scope, not data specific to this occupation.",
+                "limitation": "BLS projects the U.S. parent group Biological Scientists, All Other (19-1029) from about 59,600 jobs in 2025 to 62,400 in 2035, up 4.7%, a net gain of about 2,800, with about 4,300 annual openings from growth and replacement. The baseline includes 1.5% self-employment and does not isolate bioinformatics scientists.",
                 "market": "United States",
-                "name": "O*NET 19-1029.01 Employment Trends Page (Broader-Occupation Scope)",
-                "period": "2024—2034; Broader Occupation Biological Scientists, All Other Scope; Accessed 2026-09-16",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "BLS Table 1.2: Biological Scientists, All Other, 19-1029",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-16",
                 "details": [
                   "occupation profile",
-                  "Page Updated in 2025; Accessed 2026-09-16"
+                  "Occupation profile updated in 2026"
                 ],
                 "evidence_type": "occupation profile",
                 "id": "census",
                 "limitation": "The official profile provides occupational identity, duties descriptions and sample job titles. Related occupations include Biochemists and Biophysicists, Bioinformatics Technicians, Biostatisticians, Data Scientists, Geneticists, Mathematicians, Microbiologists, Natural Sciences Managers and Statisticians. It does not set personal competence thresholds.",
                 "market": "United States",
                 "name": "O*NET 19-1029.01 Custom Occupational Profile",
-                "period": "Page Updated in 2025; Accessed 2026-09-16",
+                "period": "Occupation profile updated in 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/19-1029.01"
-              },
-              {
-                "accessed_at": "2026-09-16",
-                "details": [
-                  "official occupation classification reference",
-                  "2022 Edition; Accessed 2026-09-16"
-                ],
-                "evidence_type": "official occupation classification reference",
-                "id": "msresearch",
-                "limitation": "Occupational classification divides occupations into intermediate and detailed categories. This page has not obtained a mainland Chinese occupational wage entry precisely corresponding to 19-1029.01. Bioinformatics and computational biology roles are spread across research, technical services, health, education and other sequences and must be identified by employer type and role duties. This is an occupational classification reference, not role authorization.",
-                "market": "Mainland China",
-                "name": "Explanations Related to the Occupational Classification Dictionary of the People’s Republic of China (2022 Edition) (Ministry of Human Resources and Social Security)",
-                "period": "2022 Edition; Accessed 2026-09-16",
-                "publisher": "Ministry of Human Resources and Social Security of the People’s Republic of China",
-                "scope": "jurisdiction_specific",
-                "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32530,14 +32604,14 @@
                 "accessed_at": "2026-09-16",
                 "details": [
                   "occupation details",
-                  "Page Updated in 2025; Accessed 2026-09-16"
+                  "Occupation profile updated in 2026"
                 ],
                 "evidence_type": "occupation details",
                 "id": "archivists",
                 "limitation": "The official profile provides only occupational identity, duty, domain and tool descriptions, usable for searching the occupation by industry, interests and knowledge domains. It does not set personal competence thresholds.",
                 "market": "United States",
                 "name": "O*NET 19-1029.01 Detailed Information (Domain and Tool Search)",
-                "period": "Page Updated in 2025; Accessed 2026-09-16",
+                "period": "Occupation profile updated in 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/19-1029.01"
@@ -32575,33 +32649,33 @@
                 "url": "https://www.onetonline.org/link/details/19-1029.01"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "official employment trends",
-                  "2025—2035"
+                  "BLS projects the U.S. parent group Biological Scientists, All Other (19-1029) from about 59,600 jobs in 2025 to 62,400 in 2035, up 4.7%, a net gain of about 2,800, with about 4,300 annual openings from growth and replacement. The baseline includes 1.5% self-employment and does not isolate bioinformatics scientists.",
+                  "Parent group, not a bioinformatics-specific series."
                 ],
-                "evidence_type": "official employment trends",
+                "evidence_type": "primary_document",
                 "id": "ep-current",
-                "limitation": "U.S. broader occupation Biological Scientists, All Other (19-1029.00): 2025 employment of 59,600 people, projected 2035 employment of 62,400; 2025—2035 growth of 5% (Faster than average), a net increase of approximately 2,800 people and approximately 4,300 annual openings (including growth and replacement). These are not the separate size of Bioinformatics Scientists, a Chinese projection or an individual hiring rate.",
+                "limitation": "BLS projects the U.S. parent group Biological Scientists, All Other (19-1029) from about 59,600 jobs in 2025 to 62,400 in 2035, up 4.7%, a net gain of about 2,800, with about 4,300 annual openings from growth and replacement. The baseline includes 1.5% self-employment and does not isolate bioinformatics scientists.",
                 "market": "United States",
-                "name": "O*NET Current Broader-Occupation Employment Trends",
-                "period": "2025—2035",
-                "publisher": "O*NET/BLS",
+                "name": "BLS Table 1.2: Biological Scientists, All Other, 19-1029",
+                "period": "2025–2035",
+                "publisher": "BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/19-1029.01"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "industry distribution",
-                  "2025"
+                  "O*NET details identify the industry data as coming from the U.S. parent group Biological Scientists, All Other (19-1029). The industry subtable lists government at 39%, professional, scientific, and technical services at 34%, education at 11%, and other industries at 16%, without a separate year. It does not establish a standalone bioinformatics scientist distribution.",
+                  "The subtable does not give wages."
                 ],
                 "evidence_type": "industry distribution",
                 "id": "industry-current",
-                "limitation": "2025 U.S. broader-occupation industry distribution: government 39%, professional, scientific and technical services 34%, educational services 11%, and other industries including manufacturing 16%. This is neither occupation-specific nor Chinese distribution, nor industry wage statistics.",
+                "limitation": "O*NET details identify the industry data as coming from the U.S. parent group Biological Scientists, All Other (19-1029). The industry subtable lists government at 39%, professional, scientific, and technical services at 34%, education at 11%, and other industries at 16%, without a separate year. It does not establish a standalone bioinformatics scientist distribution.",
                 "market": "United States",
-                "name": "O*NET Current Broader-Occupation Industry Distribution",
-                "period": "2025",
+                "name": "O*NET bioinformatics industry subtable",
+                "period": "No separate year on subtable",
                 "publisher": "O*NET/BLS",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/industry/19-1029.01"
@@ -32641,33 +32715,33 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "official administrative regulation",
-                  "Amended in 2024"
+                  "Regulation Article 28: information use and security review.",
+                  "Check the procedures for materials and information separately."
                 ],
                 "evidence_type": "official administrative regulation",
                 "id": "hgr-current",
-                "limitation": "Articles 2—4, 7—14, and 21—28 have been read; assess procedures by activity. The regulatory authority in the 2019 original no longer represents current responsibilities.",
+                "limitation": "Biosecurity Law Article 56 sets approval rules for listed activities, including export of China’s human genetic resource materials. Article 57 requires advance reporting and an information backup to the State Council health authority when information is provided or opened to foreign organizations, individuals or entities they establish or effectively control. Regulation Article 28 separately provides for filing and for security review where public health, national security or the public interest may be affected. Check the applicable provisions and procedures through the institution.",
                 "market": "Mainland China",
-                "name": "Official Public Text of Human Genetic Resources Regulations Amended in 2024",
-                "period": "Amended in 2024",
+                "name": "Regulation on Human Genetic Resources (2024 amendment)",
+                "period": "2024",
                 "publisher": "State Council; Published by Xinwu District Government",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.wnd.gov.cn/doc/2024/05/10/4348442.shtml"
               },
               {
                 "accessed_at": "2026-10-09",
                 "details": [
                   "official administrative guidance",
-                  "Guidance Published 2026-10-09"
+                  "National Health Commission service portal"
                 ],
                 "evidence_type": "official administrative guidance",
                 "id": "nhc-guidance",
-                "limitation": "Implementing entities, no fees and FAQ on definitions/collection activity scope have been read. The scope includes nucleic acid sequences and associated disease information, excluding clinical, imaging, protein or metabolic data alone. This guidance is not a personal certificate or a compliance determination for this project.",
+                "limitation": "Use this portal to find service procedures. For data classification, see Article 2 of the implementing rules.",
                 "market": "Mainland China",
-                "name": "Current National Health Commission Human Genetic Resources Service System Application Guidance",
-                "period": "Guidance Published 2026-10-09",
+                "name": "National Health Commission human genetic resources service portal",
+                "period": "Service portal",
                 "publisher": "National Health Commission",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://zwfw.nhc.gov.cn/bsp/rlyczyfwxt/"
               },
               {
@@ -32678,12 +32752,12 @@
                 ],
                 "evidence_type": "official national law",
                 "id": "bio-current",
-                "limitation": "China’s Biosecurity Law, amended in 2024: Articles 34—38 distinguish research risks. High-/medium-risk R&D must be conducted by legally established domestic legal entities, with approval or filing according to law, risk assessment and contingency plans. Articles 42—50 regulate by pathogenic microorganism and laboratory level. Research risk categories and laboratory protection levels are different indicators; do not describe all biochemical research as subject to a uniform permit. Article 55 requires human genetic resource activities to meet ethics requirements. Article 56 provides for health-authority approval for specific collection, preservation, international research collaboration, materials export and other circumstances, with statutory exclusions and clinical-trial filing exceptions. Article 57 requires prior reporting and submission of backups before resource information is provided overseas or opened for use. Not all samples or uses uniformly require approval, and institutional authorization cannot replace statutory requirements.",
+                "limitation": "Biosecurity Law Articles 55–57 cover ethics, approval and exceptions for specified activities, and advance reporting and a backup to the State Council health authority when providing or opening access to resource information to a foreign organization, individual, or entity they establish or effectively control.",
                 "market": "Mainland China",
                 "name": "Biosecurity Law of the People’s Republic of China (Amended in 2024)",
                 "period": "Amended 2024-04-26; Original Law Effective 2021-04-15",
                 "publisher": "Legal Text Republished by the Ministry of Commerce Global Laws and Regulations Website",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=100341"
               },
               {
@@ -32699,7 +32773,7 @@
                 "name": "Personal Information Protection Law of the People’s Republic of China",
                 "period": "Effective 2021-11-01",
                 "publisher": "Published by the Cyberspace Administration of China",
-                "scope": "jurisdiction_specific",
+                "scope": "contextual",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
@@ -32715,7 +32789,7 @@
                 "name": "BLS OEWS Wage Definition and Scope",
                 "period": "Current Definition; Checked 2026-10-09",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "wage_scope",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
@@ -32731,7 +32805,7 @@
                 "name": "OSHA Computer Workstation Work Organization Guidance",
                 "period": "Public Guidance 2026-10-09",
                 "publisher": "OSHA",
-                "scope": "broad_workplace_reference",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/etools/computer-workstations/work-process"
               },
               {
@@ -32747,7 +32821,7 @@
                 "name": "OSHA Computer Workstation Environment Guidance",
                 "period": "Public Guidance 2026-10-09",
                 "publisher": "OSHA",
-                "scope": "broad_workplace_reference",
+                "scope": "contextual",
                 "url": "https://www.osha.gov/etools/computer-workstations/workstation-environment"
               },
               {
@@ -32779,7 +32853,7 @@
                 "name": "O*NET Adjacent Occupation: Bioinformatics Technicians",
                 "period": "Updated2026; Definition Checked This Round",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-2099.01"
               },
               {
@@ -32795,7 +32869,7 @@
                 "name": "O*NET Adjacent Occupation: Data Scientists",
                 "period": "Updated2026; Definition Checked This Round",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-2051.00"
               },
               {
@@ -32811,7 +32885,7 @@
                 "name": "O*NET Adjacent Occupation: Biostatisticians",
                 "period": "Updated2026; Definition Checked This Round",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-2041.01"
               },
               {
@@ -32827,7 +32901,7 @@
                 "name": "O*NET Adjacent Occupation: Statisticians",
                 "period": "Updated2026; Definition Checked This Round",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-2041.00"
               },
               {
@@ -32843,7 +32917,7 @@
                 "name": "O*NET Adjacent Occupation: Biochemists and Biophysicists",
                 "period": "Updated2026; Definition Checked This Round",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-1021.00"
               },
               {
@@ -32859,7 +32933,7 @@
                 "name": "O*NET Adjacent Occupation: Geneticists",
                 "period": "Updated2026; Definition Checked This Round",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-1029.03"
               },
               {
@@ -32875,7 +32949,7 @@
                 "name": "O*NET Adjacent Occupation: Microbiologists",
                 "period": "Updated2026; Definition Checked This Round",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-1022.00"
               },
               {
@@ -32891,25 +32965,85 @@
                 "name": "O*NET Adjacent Occupation: Natural Sciences Managers",
                 "period": "Updated2026; Definition Checked This Round",
                 "publisher": "O*NET OnLine",
-                "scope": "adjacent_occupation",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-9121.00"
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
+                  "Three paper subtasks score 25, 25 and 0 with equal weight, rounding to 17%. This editorial index does not measure adoption, time saved or displacement. floor((25+25+0)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-11-10.",
                   "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Clarify questions and hypotheses | Give analysis a basis | Work with researchers to break questions into testable hypotheses and computable indicators, explaining methods, data requirements and compliance boundaries in advance. — 50/100; weight=1/3; bioinformatics-scientists.profile.responsibilities-block.1[0]",
-                  "Analyze and model | Make conclusions testable | Select or design suitable methods and workflows, assess uncertainty and bias, and implement and run them reproducibly. — 75/100; weight=1/3; bioinformatics-scientists.profile.responsibilities-block.1[2]",
-                  "Review and reproduce | Make results traceable | Review and rerun abnormalities and failed runs first, retaining parameters, versions and run records rather than choosing desired results first. — 75/100; weight=1/3; bioinformatics-scientists.profile.responsibilities-block.1[3]"
+                  "Data preparation | Organize fields | A text tool can draft field notes. Check definitions, units and versions. — 25/100; weight=1/3; Editorial sample from the tasks on this page",
+                  "Review preparation | Draft handoff | A text tool can organize notes. People check anomalies and open items. — 25/100; weight=1/3; Editorial sample from the tasks on this page",
+                  "Result review | Release decision | Authorized people decide what can be released. — 0/100; weight=1/3; Editorial sample from the tasks on this page"
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "name": "FermatMind AI subtask editorial method",
+                "period": "2026-11-10",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
+                "scope": "editorial_synthesis",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A July 13, 2026 posting by the Peking University Chengdu Advanced Interdisciplinary Institute of Biotechnology listed one bioinformatics research scientist in the He Aibin lab with a relevant doctorate, analytical frameworks and algorithms or models, and CNY 250,000–400,000 per year. It separately listed two bioinformatics research assistants with at least a master’s degree, high-throughput analysis and workflow work, at CNY 180,000–240,000 per year."
+                ],
+                "evidence_type": "primary_document",
+                "id": "pku-chengdu-bioinfo-2026",
+                "limitation": "These are two dated employer notices and their quoted figures. They do not establish live vacancies, a universal degree threshold, market pay or take-home income.",
+                "market": "Mainland China (Chengdu)",
+                "name": "Peking University Chengdu institute: bioinformatics scientist and assistants",
+                "period": "2026-07-13",
+                "publisher": "Peking University Chengdu institute",
+                "scope": "recruitment_proxy",
+                "url": "https://aaib.pku.edu.cn/info/1008/1794.htm"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "A March 13, 2026 notice from the Pan Guangjin group at the CAS Guangzhou Institutes of Biomedicine and Health listed one bioinformatics analyst/research assistant. It accepted a bachelor’s degree or higher and asked for Linux, tools such as R or Python, sequencing analysis and scripting. The notice gave no numeric pay."
+                ],
+                "evidence_type": "primary_document",
+                "id": "gibh-pan-bioinfo-2026",
+                "limitation": "These are two dated employer notices and their quoted figures. They do not establish live vacancies, a universal degree threshold, market pay or take-home income.",
+                "market": "Mainland China (Guangzhou)",
+                "name": "CAS Guangzhou institute: bioinformatics analyst/research assistant",
+                "period": "2026-03-13",
+                "publisher": "CAS Guangzhou Institutes of Biomedicine and Health",
+                "scope": "recruitment_proxy",
+                "url": "https://gibh.cas.cn/rczp/202603/t20260313_8158954.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Try BF-77 in section 09: check two versions of a fictional analysis handoff and write one page for the project reviewer."
+                ],
+                "evidence_type": "editorial_design",
+                "id": "bf77-paper",
+                "limitation": "Try BF-77 in section 09: check two versions of a fictional analysis handoff and write one page for the project reviewer.",
+                "market": "Fictional exercise",
+                "name": "FermatMind BF-77: Two result records and one handoff",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Article 2 defines human genetic resource information and excludes clinical, imaging, protein and metabolic data by themselves."
+                ],
+                "evidence_type": "Ministry of Science and Technology Order No. 21 (departmental rule)",
+                "id": "hgr-implementation-2023",
+                "limitation": "Check the type of data, applicable rules, personal information and institutional authority separately.",
+                "market": "Mainland China",
+                "name": "Human Genetic Resources Implementing Rules: Article 2",
+                "period": "2023",
+                "publisher": "Ministry of Science and Technology",
+                "scope": "contextual",
+                "url": "https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/fgzc/bmgz/202306/t20230601_186416.html"
               }
             ]
           },
@@ -33036,6 +33170,10 @@
               "entry": "link-5",
               "field": "entity"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-2099.01",
+            "label": "O*NET Bioinformatics Technicians 15-2099.01"
           }
         ],
         "evidence_note": {
@@ -33663,7 +33801,7 @@
             }
           }
         ],
-        "heading": "Will AI Replace Bioinformatics Scientists?",
+        "heading": "Which bioinformatics subtasks can you try with AI?",
         "method_cards": [
           {
             "含义": {
@@ -34334,6 +34472,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://aaib.pku.edu.cn/info/1008/1794.htm",
+            "id": "pku-chengdu-bioinfo-2026",
+            "label": "Peking University Chengdu institute: bioinformatics scientist and assistants",
+            "scope": "recruitment_proxy"
+          },
+          {
+            "href": "https://gibh.cas.cn/rczp/202603/t20260313_8158954.html",
+            "id": "gibh-pan-bioinfo-2026",
+            "label": "CAS Guangzhou institute: bioinformatics analyst/research assistant",
+            "scope": "recruitment_proxy"
+          },
+          {
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "id": "ep",
+            "label": "BLS Table 1.2: Biological Scientists, All Other, 19-1029",
+            "scope": "parent_occupation_proxy"
           }
         ],
         "tracks": [
@@ -35429,6 +35585,18 @@
             "id": "work-env",
             "label": "OSHA Workstation Environment Guidance",
             "scope": "Excessive lighting/glare may cause visual fatigue; guidance recommends adjusting lighting and screen environments. This is not occupation-specific incidence or individual medical diagnosis."
+          },
+          {
+            "href": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=100341",
+            "id": "bio-current",
+            "label": "Biosecurity Law of the People’s Republic of China (Amended in 2024)",
+            "scope": "jurisdiction_specific"
+          },
+          {
+            "href": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm",
+            "id": "pipl-current",
+            "label": "Personal Information Protection Law of the People’s Republic of China",
+            "scope": "jurisdiction_specific"
           }
         ]
       },
@@ -35436,7 +35604,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "Occupational Scope (Mainland China)",
+              "指标": "Chengdu: scientist and research assistants",
               "数值": {
                 "$item": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -35451,7 +35619,7 @@
               }
             },
             {
-              "指标": "Broad Industry Category Scope",
+              "指标": "Guangzhou: analyst/research assistant",
               "数值": {
                 "$item": "bioinformatics-scientists.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -36256,7 +36424,7 @@
       },
       "hero": {
         "h1": "Bioinformatics Scientists",
-        "quick_answer": "Bioinformatics scientists collaborate with researchers to analyze problems and recommend technology-based solutions or determine computational strategies, provide statistical and computational tools for biological activities and analyze large molecular datasets. Common work includes analyzing microarrays, genomic sequences and proteomics; compiling data for gene expression, genome annotation and structural bioinformatics; creating new computational methods and analytical tools for research objectives; designing and applying algorithms including unsupervised and supervised machine learning and dynamic programming; developing new software or adapting existing software; testing new and updated bioinformatics tools and software; operating public, commercial or proprietary genomic and proteomic databases; establishing data models and databases; improving software and database user interfaces; creating or modifying web-based bioinformatics tools; compiling summary statistics on the human genome; communicating research findings through conferences, papers and project reports; guiding technicians and information technology staff applying tools; and teaching bioinformatics tool selection and use. This work does not equal approval of ethics review, data export or clinical conclusions, nor replace applicable jurisdictional, regulatory-authority, institutional ethics and management requirements for human genetic resources, personal information and biological data management. Stop and escalate when data sources are noncompliant, special approval is required for data involving humans or cross-border transfers, results are abnormal, or matters exceed your authorization.",
+        "quick_answer": "Bioinformatics scientists use computational and statistical methods to study biological data such as genomes and transcriptomes. They define questions, choose data and methods, review anomalies, record versions and explain results and limits. Scientists often focus on design and interpretation, while support roles may focus on running and maintaining workflows. Check the actual position.",
         "title": "Bioinformatics Scientists"
       },
       "market_signal_card": {
@@ -37701,7 +37869,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "MBTI (English)"
           },
           {
             "href": {
@@ -37711,7 +37879,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "Enneagram (Chinese)"
+            "label": "Enneagram (English)"
           },
           {
             "href": {
@@ -37721,7 +37889,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Intelligence and Reasoning (Chinese)"
+            "label": "IQ (English)"
           }
         ]
       },
@@ -37829,7 +37997,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and bioinformatics subtasks",
       "china-salary": "Mainland Chinese Wage Reference",
       "direction-comparison": "Career Direction Comparison",
       "fit": "Occupational Fit Guide",
@@ -37853,7 +38021,7 @@
         "market": "United States",
         "measure": "O*NET-SOC Occupational Code",
         "occupation_scope": "Bioinformatics Scientists",
-        "period": "O*NET Page Updated in 2025; Accessed 2026-09-16",
+        "period": "O*NET Occupation profile updated in 2026",
         "source_refs": [
           "onet"
         ]
@@ -37919,37 +38087,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "63,700 People (2024, Broader Occupation 19-1029.00 Scope)",
+        "derivation": "BLS published value.",
+        "display_value": "About 59,600 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Employment Size (Broader-Occupation Scope)",
-        "occupation_scope": "Bioinformatics Scientists",
-        "period": "2024; Broader Occupation Biological Scientists, All Other Scope; Accessed 2026-09-16",
+        "occupation_scope": "U.S. parent group Biological Scientists, All Other (19-1029)",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1% (Slower than average, Broader Occupation 19-1029.00 Scope)",
+        "derivation": "BLS published value.",
+        "display_value": "4.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment Growth Rate (Broader-Occupation Scope)",
-        "occupation_scope": "Bioinformatics Scientists",
-        "period": "2024—2034; Broader Occupation Biological Scientists, All Other Scope; Accessed 2026-09-16",
+        "occupation_scope": "U.S. parent group Biological Scientists, All Other (19-1029)",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Approximately 4,800 (Including Growth and Replacement, Broader Occupation 19-1029.00 Scope)",
+        "derivation": "BLS published value.",
+        "display_value": "About 4,300 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Annual Openings in the Projection Period (Broader-Occupation Scope)",
-        "occupation_scope": "Bioinformatics Scientists",
-        "period": "2024—2034; Broader Occupation Biological Scientists, All Other Scope; Accessed 2026-09-16",
+        "occupation_scope": "U.S. parent group Biological Scientists, All Other (19-1029)",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -38123,37 +38291,37 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "63,700 People (2024, Broader-Occupation Scope)",
+        "derivation": "BLS published value.",
+        "display_value": "About 59,600 jobs",
         "fact_id": "us-employment-parent",
         "market": "United States",
         "measure": "Employment Size (Broader-Occupation Scope)",
-        "occupation_scope": "Bioinformatics Scientists",
-        "period": "2024; Broader Occupation 19-1029.00 Scope",
+        "occupation_scope": "U.S. parent group Biological Scientists, All Other (19-1029)",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "1% (Slower than average, Broader-Occupation Scope)",
+        "derivation": "BLS published value.",
+        "display_value": "4.7%",
         "fact_id": "us-growth-parent",
         "market": "United States",
         "measure": "Employment Growth Rate (Broader-Occupation Scope)",
-        "occupation_scope": "Bioinformatics Scientists",
-        "period": "2024—2034; Broader Occupation 19-1029.00 Scope",
+        "occupation_scope": "U.S. parent group Biological Scientists, All Other (19-1029)",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Approximately 4,800 (Including Growth and Replacement, Broader-Occupation Scope)",
+        "derivation": "BLS published value.",
+        "display_value": "About 4,300 per year",
         "fact_id": "us-openings-parent",
         "market": "United States",
         "measure": "Annual Openings in the Projection Period (Broader-Occupation Scope)",
-        "occupation_scope": "Bioinformatics Scientists",
-        "period": "2024—2034; Broader Occupation 19-1029.00 Scope",
+        "occupation_scope": "U.S. parent group Biological Scientists, All Other (19-1029)",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -38172,7 +38340,7 @@
       },
       {
         "derivation": null,
-        "display_value": "5% (Faster than average; 2025—2035 Broader Occupation)",
+        "display_value": "4.7% (Faster than average; 2025—2035 Broader Occupation)",
         "fact_id": "current-growth-parent",
         "market": "United States",
         "measure": "Employment Growth Rate",
@@ -38243,13 +38411,13 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
+        "derivation": "Three paper subtasks score 25, 25 and 0 with equal weight, rounding to 17%. This editorial index does not measure adoption, time saved or displacement.",
+        "display_value": "17%",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Bioinformatics Scientists",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "measure": "AI subtask editorial index (editorial estimate)",
+        "occupation_scope": "Three selected paper subtasks",
+        "period": "2026-11-10",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -38261,7 +38429,7 @@
       "availability": "available",
       "fact_ref": "fermatmind-ai-impact-estimate",
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI subtask editorial index"
     },
     "badges": [
       "O*NET 19-1029.01 · Job Zone Five (Extensive Preparation Needed) · Education Primarily Graduate-Level",
@@ -38279,19 +38447,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. Employment Growth (2024—2034, Broader Occupation Biological Scientists, All Other Scope)"
+        "label": "U.S. parent group growth (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. Employment (2024, Broader Occupation Biological Scientists, All Other Scope)"
+        "label": "U.S. parent group employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. Annual Job Openings (2024—2034, Broader Occupation Biological Scientists, All Other Scope)"
+        "label": "U.S. parent group annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -38305,17 +38473,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What bioinformatics scientists do, required education and preparation, U.S. income and outlook, tasks AI may change, and boundaries concerning exceeding data acquisition and analysis authorization; data involving humans, privacy and compliance risks; irreproducible algorithms, code and conclusions; tool outputs treated as conclusions; prolonged screen work, repetitive motions and pressure; and external conclusions and open data. Source scopes and data gaps are retained."
+      "text": "Explore bioinformatics scientist duties, two mainland China job notices, U.S. parent occupation wages and a paper version-traceability exercise."
     },
     "title": {
       "availability": "available",
       "text": "Bioinformatics Scientists"
     }
   },
-  "source_content_sha256": "5d76622ee460c9c50c1bd93139295c15f9573730186f14112ca797c13b7197ba",
+  "source_content_sha256": "0c97dd5d8dc2c9a03fd75122a2b8502f9daf30eb72f31b1151c8b88384b884b6",
   "subject": {
     "canonical_slug": "bioinformatics-scientists",
     "name": "Bioinformatics Scientists",
-    "summary": "Bioinformatics scientists collaborate with researchers to analyze problems and recommend technology-based solutions or determine computational strategies, provide statistical and computational tools for biological activities such as genetic analysis and molecular measurements, and analyze large molecular datasets such as microarrays, genomic sequences and proteomics: creating new computational methods and analytical tools, designing and applying algorithms such as machine learning and dynamic programming, developing or adapting software, testing tools and software, operating genomic and proteomic databases, establishing data models and databases, improving user interfaces, creating or modifying web-based tools, compiling summary statistics on the human genome, communicating research findings, and guiding and teaching tool use. In the United States, this corresponds to O*NET 19-1029.01 (Bioinformatics Scientists), in Job Zone Five (Extensive Preparation Needed). Wage, employment and industry data on the occupational page are explicitly labeled as coming from broader occupation Biological Scientists, All Other (19-1029.00); this page publishes those fields under that scope and labels each occurrence. For mainland China, this page has not obtained a public occupational wage entry precisely matching the occupation. Under its evidence scope, only the scientific research and technical services industry average is used as an explicit proxy, labeled “not wages for this occupation,” without presenting industry averages as occupational medians or starting pay. Processing data involving humans in mainland China is subject to the Regulations of the People’s Republic of China on the Administration of Human Genetic Resources and other provisions."
+    "summary": "Bioinformatics scientists use computational and statistical methods to study biological data such as genomes and transcriptomes. They define questions, choose data and methods, review anomalies, record versions and explain results and limits. Scientists often focus on design and interpretation, while support roles may focus on running and maintaining workflows. Check the actual position. BLS projects the U.S. parent group Biological Scientists, All Other (19-1029) from about 59,600 jobs in 2025 to 62,400 in 2035, up 4.7%, a net gain of about 2,800, with about 4,300 annual openings from growth and replacement. The baseline includes 1.5% self-employment and does not isolate bioinformatics scientists."
   }
 }

@@ -156,10 +156,13 @@
         "status": "pending_mapping"
       },
       "item:packaging-and-filling-machine-operators-and-tenders.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:packaging-and-filling-machine-operators-and-tenders.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.2": {
         "status": "pending_mapping"
@@ -168,7 +171,7 @@
         "status": "pending_mapping"
       },
       "item:packaging-and-filling-machine-operators-and-tenders.path.interview-probation.10": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:packaging-and-filling-machine-operators-and-tenders.path.recruitment-sample.1": {
         "status": "pending_mapping"
@@ -178,6 +181,9 @@
       },
       "item:packaging-and-filling-machine-operators-and-tenders.path.seven-day-decision.5": {
         "status": "pending_mapping"
+      },
+      "item:packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1": {
+        "status": "mapped"
       },
       "item:packaging-and-filling-machine-operators-and-tenders.profile.career-quick-answers-block.5": {
         "status": "mapped"
@@ -234,7 +240,7 @@
         "status": "pending_mapping"
       },
       "item:packaging-and-filling-machine-operators-and-tenders.sources.faq-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:packaging-and-filling-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.1": {
         "status": "mapped"
@@ -5703,52 +5709,190 @@
         "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-materials"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-task"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            2
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-approach"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "exercise-boundary"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.interview-probation.headers.boundary": {
         "ref": null,
@@ -6027,64 +6171,238 @@
         "status": "unfilled"
       },
       "entry_decisions.seven-day-trial.entries.01.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.01.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-1"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.02.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-2"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.03.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-3"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.04.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-4"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.05.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-5"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.06.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-6"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.description.01": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            1
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.entries.07.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "data",
+            "entries",
+            {
+              "id": "entry-trial-day-7"
+            },
+            "values",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "entry_decisions.seven-day-trial.title": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "path": [
+            "title"
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "faq_block.items.01.answer": {
         "ref": {
@@ -12018,7 +12336,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "This is a production line position that reliably converts bulk, liquid, or individual products into storable and shippable finished goods; the core is getting cycle time, sealing, weight, labeling, and batch right at the same time. Precise occupational wages for China are currently unavailable."
+              "Try the paper task if you tend to trust a printed label before checking the approved record it belongs to."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.quick-decision.fermat-decision-card.1",
@@ -12032,7 +12350,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Suited to those who can continuously verify feed, containers, seals, counts, and labels at the equipment's cycle rate and are willing to document short stoppages and defects clearly."
+              "In 09 Getting started, qualifications, and career development, find “PF-24: Route a Packaging Changeover Record.” Allow about 10 minutes before reading the answer."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.quick-decision.fit-decision-checklist.2",
@@ -12046,7 +12364,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "If you tend to skip first-article checks, records, or guard checks during repetitive work, or would handle jams by hand, the quality and safety friction on this path will be very high."
+              "Consider packaging and filling work if you like matching the product, label and inspection record before a batch moves on."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.quick-decision.fit-decision-checklist.3",
@@ -12155,13 +12473,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "U.S. employment for this precise occupation in 2024 was 381,200 people, useful for understanding U.S. scale and not representing the hiring volume of a given production line. This is history; the current 2025 precise employment is 377700, over 2025—2035 overall 4.1%, net 15600, and 41400 openings per year including replacements, and does not infer AI or individual unemployment or Chinese demand."
+              "Check fill, seal and label records, and refer discrepancies to the responsible reviewer."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.profile.career-quick-answers-block.7",
           "source_refs": [
-            "source-pack-onet-summary",
-            "bls-ep-51-9111"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12398,7 +12715,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: a nationwide comparable median, percentile, and starting pay for this occupation in China was not obtained. For above-scale manufacturing legal-person employers, the 2025 manufacturing production and manufacturing-related personnel figure of 79,182 yuan/year (pre-tax) can be referenced; this includes other production positions and is not this occupation's wage or an individual range, and excludes below-scale small enterprises and self-employed individuals and freelancers; non-manufacturing or labor outsourcing is verified by the actual employer."
+              "We did not find a comparable nationwide wage distribution for this occupation in mainland China. The 2025 wage data in Table 7 give a pre-tax annual average of 79,182 yuan for production, manufacturing and related workers at manufacturing enterprises above the designated size. The table does not report pay for this occupation separately."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.1",
@@ -12476,13 +12793,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The U.S. had 381,200 people in this occupation in 2024; headcount scale and personal salary are different indicators. The above old-period stock keeps the history; the current 2025 precise employment is 377700 rising to 393300 in 2035, over 2025—2035 overall 4.1%, a net increase of 15600, and 41400 openings per year including replacements, not AI or individual unemployment."
+              "Source: May 2025 U.S. national wage estimates."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "source-pack-onet-summary",
-            "bls-ep-51-9111"
+            "source-pack-onet-localwages"
           ],
           "type": "prose"
         },
@@ -12491,7 +12807,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This is a U.S. national occupational basis and cannot be directly converted into Chinese wages, nor does it represent the offer of a given industry, state, or shift."
+              "Source: May 2025 U.S. national wage estimates."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.3",
@@ -12505,7 +12821,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "When comparing contracts, break out base pay, shift and overtime, piece-rate rules, benefits, hygiene requirements, quality responsibility, and training arrangements. This round's 2025 precise five annual wage percentiles are 33390/36850/43220/49070/60030 U.S. dollars, not seniority, starting pay, or offers; hourly 16.06/17.72/20.78/23.59/28.86, which cannot be interpolated for the same period."
+              "Source: May 2025 U.S. national wage estimates."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.4",
@@ -12533,12 +12849,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wage data corresponds to 2025 and employment data to 2024; the two can be cited separately but cannot be stitched into a pay-growth trend the source does not give. The above 2024 is history only; the current EP2025 employment and the 2025—2035 projection are used separately, without mixing the old period."
+              "The wage table shows May 2025 OEWS. BLS employment is for 2025, with a separate 2025–2035 projection. These data do not describe a wage trend."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "source-pack-onet-summary",
+            "source-pack-onet-localwages",
             "bls-ep-51-9111"
           ],
           "type": "prose"
@@ -12766,14 +13082,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Entry starts with identifying packaging materials, products, equipment status, batches, and labels, and practicing pre-start checks, first-article confirmation, and standard records."
+              "One historical Jinan listing describes operating a filling machine in food production. It is one employer’s example, not nationwide eligibility or a current vacancy."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.path.recruitment-sample.1",
           "source_refs": [
-            "source-pack-onet-summary",
-            "bls-ep-51-9111"
+            "cn-example-024"
           ],
+          "title": "One historical employer example",
           "type": "notice"
         },
         {
@@ -12781,7 +13097,7 @@
           "copy_key": "career.item.entry-work-sample-data",
           "data": {
             "paragraphs": [
-              "Sample one: create a changeover verification checklist covering line clearance, materials, containers, label templates, metering, sealing, and reject testing. Paper problem statement: AC01 order batch L1 and label L2; AD01 is the same batch, the fictional specification is 500±5 grams, the record is 493 grams, the reject column is blank, and the summary reads qualified. Follow only the given rule: batch numbers must match, 495—505 grams includes the boundary, and unknown is not a pass; list the deviations and persons to verify, and do not operate equipment or real products."
+              "Try PF-24 with the supplied paper records only."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.2",
@@ -12789,6 +13105,7 @@
             "internal-rubric",
             "source-pack-onet-summary"
           ],
+          "title": "How to use the short task",
           "type": "notice"
         },
         {
@@ -12796,7 +13113,7 @@
           "copy_key": "career.item.entry-work-sample-data",
           "data": {
             "paragraphs": [
-              "Sample two: create a batch anomaly packet linking weight trends, mislabel photos, stoppage time, isolation quantity, and restart signatures. Reference: AC01 keeps the L1/L2 original values, lists the mislabel for quality review, and does not change the batch number without authorization; AD01493 below 495 is a paper underfill, and the unknown rejection conflicts with the qualified summary, so it is not marked released. The work submits a two-line deviation table and a simulated escalation draft, listing the original values, quantities to verify, responsible person, and correction records; it does not infer whole-batch defect counts or adjust machine parameters."
+              "Cite the original label and seal entries, and keep unknowns visible."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.3",
@@ -12804,6 +13121,7 @@
             "internal-rubric",
             "source-pack-onet-summary"
           ],
+          "title": "How to check your handover",
           "type": "notice"
         },
         {
@@ -12811,9 +13129,9 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Days 1—2: draw the material path for feeding, filling, sealing, labeling, inspection, and boxing.",
-              "Days 3—4: fill in the pre-start and first-article tables and design reviewable records for the four defect types.",
-              "AC/AD addendum: Day 1 copy the fictional inputs and the 495—505 rule, inclusive of both endpoints; Days 2—4 create the two-line batch and weight deviation table and the draft that keeps original values pending verification, using only paper simulation without performing line clearance."
+              "I read both records.",
+              "I checked both rules.",
+              "I recorded my comparison decision."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-decision.4",
@@ -12827,9 +13145,9 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 5: simulate changeover line clearance and confirm that old materials and old labels do not enter the new batch.",
-              "Days 6—7: simulate jams and weight drift, and write the sequence for stoppage, isolation, escalation, and restart.",
-              "AC/AD addendum: Days 5—7 submit the two-line table, escalation draft, and simulated quality review feedback and corrections; the rejection quantity is still unknown as not given, and no real filling, parameter adjustment, jam clearing, or release is performed."
+              "I named the reviewer.",
+              "I used fictional records only.",
+              "I rechecked my work independently."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-decision.5",
@@ -12893,6 +13211,13 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "Stage",
+              "Tasks",
+              "Authority limits",
+              "Evidence",
+              "Next step"
+            ],
             "rows": [
               [
                 "Entry operations",
@@ -12936,6 +13261,7 @@
             "editorial-context",
             "source-pack-onet-summary"
           ],
+          "title": "Roles and supervised responsibilities",
           "type": "table"
         },
         {
@@ -12947,6 +13273,12 @@
               "career.column.action",
               "career.column.review",
               "career.column.evidence"
+            ],
+            "column_labels": [
+              "Situation",
+              "Response",
+              "Review points",
+              "Evidence"
             ],
             "rows": [
               [
@@ -12980,6 +13312,7 @@
             "internal-rubric",
             "osha-loto"
           ],
+          "title": "What a reviewer may ask",
           "type": "table"
         },
         {
@@ -12994,6 +13327,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Topic",
+              "Evidence",
+              "Verifier",
+              "Condition",
+              "Limit",
+              "Responsible party",
+              "Next step"
             ],
             "rows": [
               [
@@ -13058,7 +13400,111 @@
             "osha-loto",
             "osha-guarding"
           ],
+          "title": "Check training and authorization by duty",
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Fictional materials (about 10 minutes)",
+                  "A fictional line’s paperwork review needs label version P4 and a recorded seal check.",
+                  "Record G2: P4, seal check blank. Record G7: P2, seal check recorded.",
+                  "Use paper only. No real line adjustment, testing or release."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Task and deliverable",
+                  "Decide whether either record is ready for paperwork review. Cite the label and seal entries.",
+                  "Write one question for the packaging reviewer."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Where to find the reference",
+                  "After your own attempt, open “PF-24 answer key” in the FAQ.",
+                  "Compare it with your notes."
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Self-check rubric",
+                  "Did I cite both records, explain my decision, and name the person who could verify it?"
+                ]
+              }
+            ]
+          },
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+          "title": "PF-24: Route a Packaging Changeover Record",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "entry-trial-day-1",
+                "values": [
+                  "Day 1",
+                  "Start W-PF. A new paperwork review wants product code C5 and a box label that also says C5. Record both conditions."
+                ]
+              },
+              {
+                "id": "entry-trial-day-2",
+                "values": [
+                  "Day 2",
+                  "Sheet H3: product C5, box label C8. Record both codes."
+                ]
+              },
+              {
+                "id": "entry-trial-day-3",
+                "values": [
+                  "Day 3",
+                  "Sheet H6: product C5, box label C5. Record both codes."
+                ]
+              },
+              {
+                "id": "entry-trial-day-4",
+                "values": [
+                  "Day 4",
+                  "Check both sheets against the request and write a question for the reviewer."
+                ]
+              },
+              {
+                "id": "entry-trial-day-5",
+                "values": [
+                  "Day 5",
+                  "Write the paperwork decision with both source IDs."
+                ]
+              },
+              {
+                "id": "entry-trial-day-6",
+                "values": [
+                  "Day 6",
+                  "Work alone first. Recheck the product and label fields before revising your note. Peer feedback is optional."
+                ]
+              },
+              {
+                "id": "entry-trial-day-7",
+                "values": [
+                  "Day 7",
+                  "After the Day 6 independent check, open “W-PF answer key (Day 7)” in the FAQ. Compare your note, then choose one habit to practice."
+                ]
+              }
+            ]
+          },
+          "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+          "title": "Seven-day paper trial: a separate case",
+          "type": "timeline"
         }
       ]
     },
@@ -13073,7 +13519,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The U.S. O*NET 51-9111.00 2024—2034 projection was growth of 5%—6%; this is a national occupational projection and does not guarantee individual or regional growth. The above is the old 2024—2034 history; the current 2025 employment is 377700 rising to 393300 in 2035, over 2025—2035 overall 4.1%, an official net increase of 15600 / year41400 openings including replacements, not AI adoption replacement, individual layoffs, or Chinese demand."
+              "BLS Table 1.2 lists 377,700 U.S. jobs in 2025 and projects 393,300 in 2035 for Packaging and Filling Machine Operators and Tenders (51-9111), a published net change of +15,600 jobs (+4.1%). The 41,400 projected average annual openings include replacements."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.market-signals.market-signal-card.1",
@@ -13088,7 +13534,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "U.S. 2024 employment was about 381,200 people; this page does not display an unverified 2034 headcount. The above is the old 2024—2034 history; the current 2025 employment is 377700 rising to 393300 in 2035, over 2025—2035 overall 4.1%, an official net increase of 15600 / year41400 openings including replacements, not AI adoption replacement, individual layoffs, or Chinese demand."
+              "United States"
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.market-signals.market-signal-card.2",
@@ -13103,7 +13549,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "About 45,300 job openings are projected per year, including staff turnover, and cannot be treated as net new jobs each year. The above is the old 2024—2034 history; the current 2025 employment is 377700 rising to 393300 in 2035, over 2025—2035 overall 4.1%, an official net increase of 15600 / year41400 openings including replacements, not AI adoption replacement, individual layoffs, or Chinese demand."
+              "2025–2035"
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.market-signals.market-signal-card.3",
@@ -13118,7 +13564,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Machine vision, automatic weighing, and automatic labeling can serve as candidate assisted inspection and recording scenarios; reduced burden or calculated effects cannot be asserted from the occupational technology list alone, and changeover, anomaly isolation, and responsible release still require an on-site closed loop."
+              "Counts jobs in the U.S. occupation; the 2035 figure is a projection."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.market-signals.market-signal-card.4",
@@ -13133,7 +13579,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Moving to adhesive equipment requires adding adhesive and curing knowledge; moving to paper goods equipment requires adding paper material, die cutting, or forming processes, and machine operation experience alone cannot be transferred."
+              "National data for the U.S. occupation do not measure local hiring or mainland China demand."
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.market-signals.market-signal-card.5",
@@ -13193,7 +13639,7 @@
                 ]
               },
               {
-                "answer": "Insufficient evidence: a nationwide comparable median, percentile, and starting pay for this occupation in China was not obtained. The 2025 above-scale manufacturing legal-person production and manufacturing-related personnel figure of 79182 yuan pre-tax annual average includes other production positions and is not this occupation's wage; excludes small enterprises and self-employment, and non-manufacturing or labor outsourcing is verified by the actual employer.",
+                "answer": "We did not find a comparable nationwide wage distribution for this occupation in mainland China. The 2025 wage data in Table 7 give a pre-tax annual average of 79,182 yuan for production, manufacturing and related workers at manufacturing enterprises above the designated size. The table does not report pay for this occupation separately.",
                 "id": "packaging-and-filling-machine-operators-and-tenders.faq.5",
                 "question": "Does the Chinese mainland have reliable wage figures for this occupation?",
                 "question_key": "career.faq.packaging-and-filling-machine-operators-and-tenders.5",
@@ -13202,7 +13648,7 @@
                 ]
               },
               {
-                "answer": "The U.S. 2025 median wage for this precise occupation is 20.78 U.S. dollars/hour and 43,220 U.S. dollars/year, and cannot be directly converted into Chinese wages.",
+                "answer": "May 2025 U.S. median annual wage: $43,220. BLS Table 1.2 lists 377,700 U.S. jobs in 2025 and projects 393,300 in 2035 for Packaging and Filling Machine Operators and Tenders (51-9111), a published net change of +15,600 jobs (+4.1%). The 41,400 projected average annual openings include replacements.",
                 "id": "packaging-and-filling-machine-operators-and-tenders.faq.6",
                 "question": "What is the U.S. median wage?",
                 "question_key": "career.faq.packaging-and-filling-machine-operators-and-tenders.6",
@@ -13211,7 +13657,7 @@
                 ]
               },
               {
-                "answer": "Entry first covers equipment status, material and label verification, pre-start checks, first-article confirmation, and run records, and then changeover parameter adjustment under supervision.",
+                "answer": "BLS lists high school or equivalent and moderate-term on-the-job training as typical for this U.S. occupation. Employer requirements can differ. In the O*NET survey about new hires, 80% of respondents selected high school or equivalent. The current panel only displays that option. These are answers about new hires, not the education distribution of incumbent workers. One historical Jinan listing describes operating a filling machine in food production. It is one employer’s example, not nationwide eligibility or a current vacancy.",
                 "id": "packaging-and-filling-machine-operators-and-tenders.faq.7",
                 "question": "How to enter safely?",
                 "question_key": "career.faq.packaging-and-filling-machine-operators-and-tenders.7",
@@ -13230,12 +13676,27 @@
                   "osha-guarding",
                   "osha-loto"
                 ]
+              },
+              {
+                "answer": "Neither record meets both conditions. G2 names P4 but has no seal check; G7 records a seal check but names P2. Ask the reviewer for G2’s original seal record and keep both entries unchanged.",
+                "id": "packaging-and-filling-machine-operators-and-tenders.faq.trial-short-reference",
+                "question": "PF-24 answer key",
+                "question_key": "career.faq.packaging-and-filling-machine-operators-and-tenders.trial-short-reference"
+              },
+              {
+                "answer": "H6 matches the paperwork request. H3 has product code C5 but label C8. Ask the reviewer to verify H3’s original label record; matching paperwork does not release a real batch.",
+                "id": "packaging-and-filling-machine-operators-and-tenders.faq.trial-week-reference",
+                "question": "W-PF answer key (Day 7)",
+                "question_key": "career.faq.packaging-and-filling-machine-operators-and-tenders.trial-week-reference"
               }
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.sources.faq-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-pack-onet-details",
+            "bls-ep-51-9111",
+            "source-pack-onet-localwages",
+            "cn-example-024"
           ],
           "type": "faq"
         },
@@ -13288,13 +13749,13 @@
                 "entity": "Machine operator tender",
                 "id": "navigation-4",
                 "relation": "career.section",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Machine operator tender",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Machine operator tender",
@@ -13321,15 +13782,15 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "2025 Table 7: above-scale manufacturing production and manufacturing-related personnel at 79182 yuan pre-tax annual average; based on the 20 tasks, a broad reference for above-scale manufacturing legal-person production positions only."
+                  "Table 7 reports a 2025 average of 79,182 yuan a year before tax for production, manufacturing and related workers in manufacturing enterprises above the designated size. This is a broad industry group average; the table does not isolate packaging and filling machine operators."
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "nbs-2025-wages",
-                "limitation": "Includes other production positions and is not this occupation's wage; excludes below-scale small enterprises and self-employed freelancers; non-manufacturing or labor outsourcing employers require separate verification, and it is not starting pay or an individual offer.",
+                "limitation": "Industry group average for manufacturing enterprises above the designated size. It is not the pay distribution for this occupation, starting pay or an individual offer.",
                 "market": "CN",
-                "name": "2025 Urban Unit Employment Annual Average Wage Situation",
+                "name": "National Bureau of Statistics: 2025 urban wages, Table 7",
                 "period": "2025",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
@@ -13381,31 +13842,31 @@
                 "url": "https://www.onetonline.org/link/details/51-9111.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "U.S. precise occupational data; not extrapolated to Chinese wages."
+                  "Describes machine operation, packaging, filling and quality-check tasks."
                 ],
                 "evidence_type": "official occupation workforce summary",
                 "id": "onet-summary-51911100",
-                "limitation": "U.S. precise occupational data; not extrapolated to Chinese wages.",
+                "limitation": "This task profile does not establish Chinese wages or an individual job offer.",
                 "market": "US",
-                "name": "51-9111.00 occupation summary and workforce labels",
-                "period": "2024 employment; 2025 wages; 2024-2034 projections",
+                "name": "O*NET profile: Packaging and Filling Machine Operators and Tenders",
+                "period": "Occupation profile, updated 2026",
                 "publisher": "O*NET",
-                "scope": "exact",
+                "scope": "U.S. occupation 51-9111.00",
                 "url": "https://www.onetonline.org/link/summary/51-9111.00"
               },
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "U.S. national projection; openings include growth and replacement."
+                  "O*NET offers an overview. Use BLS Table 1.2 for exact 2025–2035 numbers."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "onet-trends-51911100",
                 "limitation": "U.S. national projection; openings include growth and replacement.",
                 "market": "US",
                 "name": "National Employment Trends 51-9111.00",
-                "period": "2024-2034",
+                "period": "2025–2035",
                 "publisher": "O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/51-9111.00"
@@ -13458,14 +13919,14 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Shows fields selected from this O*NET occupation profile."
                 ],
                 "evidence_type": "official custom occupation profile",
                 "id": "source-pack-onet-custom",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Applies to this U.S. occupation; does not establish Chinese wages, classification or legal authorization.",
                 "market": "US",
                 "name": "51-9111.00 - Packaging and Filling Machine Operators and Tenders",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Occupation profile, updated 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/51-9111.00"
@@ -13473,14 +13934,14 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Lists tasks, work context, education responses and other occupation data."
                 ],
                 "evidence_type": "official occupation details",
                 "id": "source-pack-onet-details",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Applies to this U.S. occupation; does not establish Chinese wages, classification or legal authorization.",
                 "market": "US",
                 "name": "51-9111.00 - Packaging and Filling Machine Operators and Tenders",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Occupation profile, updated 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/51-9111.00"
@@ -13488,29 +13949,30 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Lists software tools associated with this occupation."
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "The tool list does not establish adoption or AI replacement rates.",
                 "market": "US",
                 "name": "Hot Technologies: 51-9111.00 - Packaging and Filling Machine Operators and Tenders",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Directory checked 2026-11-10",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/51-9111.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Manufacturing 79%, other industries 21%.",
+                  "O*NET Details labels the top industries as 2025. These shares describe employment, not industry wages."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "O*NET Details labels the top industries as 2025. These shares describe employment, not industry wages.",
                 "market": "US",
                 "name": "Industries: 51-9111.00 - Packaging and Filling Machine Operators and Tenders",
-                "period": "current page; accessed 2026-09-02",
+                "period": "2025",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/51-9111.00"
@@ -13518,14 +13980,14 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Lists U.S. certification resources associated with this occupation."
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "source-pack-onet-localcert",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "A directory entry does not grant authorization or establish a universal hiring requirement.",
                 "market": "US",
                 "name": "National Certifications: 51-9111.00 - Packaging and Filling Machine Operators and Tenders",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Directory checked 2026-11-10",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/51-9111.00"
@@ -13533,14 +13995,14 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Provides a way to look up training for this U.S. occupation."
                 ],
                 "evidence_type": "official local training discovery",
                 "id": "source-pack-onet-localtraining",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "A directory entry does not grant authorization or establish a universal hiring requirement.",
                 "market": "US",
                 "name": "National Training: 51-9111.00 - Packaging and Filling Machine Operators and Tenders",
-                "period": "current page; accessed 2026-09-02",
+                "period": "Directory checked 2026-11-10",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/51-9111.00"
@@ -13548,14 +14010,15 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "2025 precise five wages of 33390/36850/43220/49070/60030, hourly 16.06/17.72/20.78/23.59/28.86."
+                  "May 2025 U.S. medians: $43,220 a year and $20.78 an hour.",
+                  "The table publishes both annual and hourly wage percentiles."
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "Same-occupation percentiles, not seniority, starting pay, individual contracts, or Chinese wages; the actual table is not interpolated.",
+                "limitation": "National wage percentiles do not establish starting pay, an individual offer or Chinese wages.",
                 "market": "US",
                 "name": "National Wages: 51-9111.00 - Packaging and Filling Machine Operators and Tenders",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "May 2025, BLS OEWS",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/51-9111.00"
@@ -13563,32 +14026,32 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "This round's 20 tasks: labeling, weighing, inspection, shutdown, anomaly, rejection, monitoring, start-up, packaging, cleaning, fine adjustment, feeding, counting, boxing, container preparation, and material cleaning.",
-                  "Old 2024 employment of 381200 / 2024—34 growth of 5—6 / year45300 including replacements; 2025 wage of 43220 / 20.78 hourly."
+                  "Summarizes the work and related occupational information."
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "source-pack-onet-summary",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "Applies to this U.S. occupation; does not establish Chinese wages, classification or legal authorization.",
                 "market": "US",
                 "name": "51-9111.00 - Packaging and Filling Machine Operators and Tenders",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "Occupation profile, updated 2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-9111.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "51-9111 precise: 2025 wage of 43220, jobs377.7 thousand to 393.3 thousand, overall 4.1%, net 15.6 thousand, / year41.4 thousand including replacements; high school equivalency and moderate-term on-the-job training."
+                  "BLS Table 1.2 lists 377,700 U.S. jobs in 2025 and projects 393,300 in 2035 for Packaging and Filling Machine Operators and Tenders (51-9111), a published net change of +15,600 jobs (+4.1%). The 41,400 projected average annual openings include replacements.",
+                  "BLS lists high school or equivalent and moderate-term on-the-job training as typical for this U.S. occupation. Employer requirements can differ."
                 ],
                 "evidence_type": "official occupational statistics",
                 "id": "bls-ep-51-9111",
-                "limitation": "Overall, not AI adoption replacement, individual layoffs, Chinese demand, or current hiring; the old 2024—34 is kept separately and not mixed.",
+                "limitation": "National U.S. projection; includes replacements in annual openings and does not isolate AI effects.",
                 "market": "US",
-                "name": "Occupational projections and worker characteristics",
-                "period": "2025 wage; 2025–2035 projections",
+                "name": "BLS Table 1.2: occupation-specific projections",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "Packaging and Filling Machine Operators and Tenders",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
@@ -13624,11 +14087,11 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "AC order L1 label L2/AD paper 500±5 grams with 493 and blank rejection conflicting with the qualified summary; 495—505 includes the boundary and is the problem statement only; two-line table, escalation draft, seven days."
+                  "PF-24 and W-PF use fictional paperwork to check label and inspection records. No real machine adjustment, testing or release."
                 ],
                 "evidence_type": "internal task rubric",
                 "id": "internal-rubric",
-                "limitation": "Not actual product tolerance, inspection, or SOP; the quantity is not given and remains unknown; do not actually fill, adjust parameters, clear jams, or release.",
+                "limitation": "PF-24 and W-PF use fictional paperwork to check label and inspection records. No real machine adjustment, testing or release.",
                 "market": "GLOBAL",
                 "name": "FermatMind packaging and filling paper batch exercise",
                 "period": "Author exercise 2026-10-02",
@@ -13652,6 +14115,20 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "One historical Jinan listing describes operating a filling machine in food production. It is one employer’s example, not nationwide eligibility or a current vacancy."
+                ],
+                "id": "cn-example-024",
+                "limitation": "One historical Jinan listing describes operating a filling machine in food production. It is one employer’s example, not nationwide eligibility or a current vacancy.",
+                "market": "CN",
+                "name": "Jinan start-up area: June 2026 employer notice",
+                "period": "2026-06",
+                "publisher": "Jinan start-up area: June 2026 employer notice",
+                "scope": "Jinan start-up area: June 2026 employer notice",
+                "url": "https://jnxxq.jinan.gov.cn/col/col71555/art/2026/art_61540669756448f4b1262af576877054.html"
               }
             ]
           },
@@ -13946,10 +14423,10 @@
           },
           {
             "source_ref": "bls-ep-51-9111",
-            "使用限制": "Not AI adoption replacement, individual layoffs, current hiring, or Chinese demand.",
+            "使用限制": "The forecast covers overall U.S. employment; it does not isolate AI effects.",
             "来源": "BLS precise occupation overall projection",
             "研究对象": "U.S. 51-9111; 2025—2035",
-            "结论": "Overall 4.1%, net increase of 15600; year41400 openings including replacements.",
+            "结论": "BLS projects 4.1% growth (+15,600 U.S. jobs) in 2025–35 and 41,400 annual openings on average, including replacements.",
             "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
@@ -14339,7 +14816,7 @@
             }
           },
           {
-            "answer": "Packaging and filling machine operators can use tools to assist with information organization, but actual adoption, authority, result release, and anomaly escalation still require verification by responsible people.",
+            "answer": "The U.S. occupational wage medians were $43,220 a year and $20.78 an hour in May 2025. BLS projects 377,700 jobs in 2025 rising to 393,300 in 2035, with 41,400 average annual openings including replacements. These are national statistics for this U.S. occupation.",
             "key": "qa2",
             "question": "What do the U.S. data show?",
             "table": {
@@ -14365,32 +14842,32 @@
                 {
                   "alternate_value": null,
                   "label": "U.S. median annual wage",
-                  "secondary_value": "U.S. national occupational data",
-                  "value": "$43,220（2025）"
+                  "secondary_value": "U.S. national occupational wage",
+                  "value": "$43,220 (May 2025)"
                 },
                 {
                   "alternate_value": null,
-                  "label": "2025 employed",
-                  "secondary_value": "U.S. precise occupation stock, not current hiring",
-                  "value": "377,700 people"
+                  "label": "U.S. employment, 2025",
+                  "secondary_value": "BLS national baseline",
+                  "value": "377,700 jobs"
                 },
                 {
                   "alternate_value": null,
-                  "label": "Overall employment change",
-                  "secondary_value": "Not an AI attribution or Chinese demand",
-                  "value": "2025—2035 growth of 4.1%; net increase of 15600"
+                  "label": "Projected employment change, 2025–35",
+                  "secondary_value": "2035 projected employment: 393,300",
+                  "value": "+4.1%; 15,600 more jobs"
                 },
                 {
                   "alternate_value": null,
-                  "label": "Annual average openings",
-                  "secondary_value": "2025—2035 includes replacements, not a ten-year net increase of 15600",
-                  "value": "About 41,400/year"
+                  "label": "Projected average annual openings",
+                  "secondary_value": "Includes replacements",
+                  "value": "41,400 per year"
                 }
               ]
             }
           },
           {
-            "answer": "Packaging and filling machine operators can use tools to assist with information organization, but actual adoption, authority, result release, and anomaly escalation still require verification by responsible people.",
+            "answer": "Start with supervised training on the assigned line and ask who may stop, clear, or restart it. Do not reach into equipment or clear a jam on your own; follow the site procedure and contact an authorized person.",
             "key": "qa1",
             "question": "How to enter safely?",
             "table": {
@@ -14602,7 +15079,7 @@
             {
               "指标": "2025 above-scale manufacturing · production and manufacturing-related personnel",
               "数值": "79,182 yuan/year (pre-tax)",
-              "说明": "Broad above-scale manufacturing legal-person position including other production positions, not this occupation's wage; excludes below-scale small enterprises, self-employment, and other employers."
+              "说明": "Production, manufacturing and related workers at manufacturing enterprises above the designated size; a broad job group, not an estimate for this occupation."
             }
           ],
           "china_ai_row": {
@@ -14658,7 +15135,7 @@
           "china_open": "Public duty and skill information can be used for career exploration, but Chinese market wages cannot be derived from it.",
           "china_open_note": "For salary judgments, return to the specific city, employer, position level, and public recruitment conditions for verification.",
           "china_ref": "2025 Urban Unit Employment Annual Average Wage Situation｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
-          "china_salary_note": "Insufficient evidence: a nationwide wage distribution for this occupation was not obtained. The 2025 above-scale manufacturing legal-person production and manufacturing-related personnel figure of 79182 yuan pre-tax annual average includes other production positions and is not this occupation's wage; small enterprises, self-employment, and non-manufacturing or labor outsourcing require separate verification.",
+          "china_salary_note": "We did not find a comparable nationwide wage distribution for this occupation in mainland China. The 2025 wage data in Table 7 give a pre-tax annual average of 79,182 yuan for production, manufacturing and related workers at manufacturing enterprises above the designated size. The table does not report pay for this occupation separately.",
           "china_salary_table": [
             {
               "城市/区间": "China data status",
@@ -14700,53 +15177,53 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "BLS precise 51-9111 overall projection｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET same-occupation wages｜https://www.onetonline.org/link/localwages/51-9111.00",
+        "authority_sources": "National wage percentiles | https://www.onetonline.org/link/localwages/51-9111.00; BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET 2025 industries | https://www.onetonline.org/link/industry/51-9111.00",
         "bls_table": [
           {
             "指标": "Salary 10th percentile",
-            "数值": "$33,390",
-            "说明": "2025 U.S. precise 51-9111 annual wage percentile, not starting pay, seniority levels, individual contracts, or Chinese conversion."
+            "数值": "$33,390 per year; $16.06 per hour",
+            "说明": "National wage percentile for this U.S. occupation, May 2025."
           },
           {
             "指标": "Salary 25th percentile",
-            "数值": "$36,850",
-            "说明": "2025 U.S. precise 51-9111 annual wage percentile, not starting pay, seniority levels, individual contracts, or Chinese conversion."
+            "数值": "$36,850 per year; $17.72 per hour",
+            "说明": "National wage percentile for this U.S. occupation, May 2025."
           },
           {
             "指标": "Median salary",
-            "数值": "$43,220",
-            "说明": "2025 U.S. precise 51-9111 annual wage percentile, not starting pay, seniority levels, individual contracts, or Chinese conversion."
+            "数值": "$43,220 per year; $20.78 per hour",
+            "说明": "National wage percentile for this U.S. occupation, May 2025."
           },
           {
             "指标": "Salary 75th percentile",
-            "数值": "$49,070",
-            "说明": "2025 U.S. precise 51-9111 annual wage percentile, not starting pay, seniority levels, individual contracts, or Chinese conversion."
+            "数值": "$49,070 per year; $23.59 per hour",
+            "说明": "National wage percentile for this U.S. occupation, May 2025."
           },
           {
             "指标": "Salary 90th percentile",
-            "数值": "$60,030",
-            "说明": "2025 U.S. precise 51-9111 annual wage percentile, not starting pay, seniority levels, individual contracts, or Chinese conversion."
+            "数值": "$60,030 per year; $28.86 per hour",
+            "说明": "National wage percentile for this U.S. occupation, May 2025."
           },
           {
-            "指标": "Employment",
-            "数值": "377,700",
-            "说明": "2025 precise 51-9111 employment stock, not hiring."
+            "指标": "Employment (jobs)",
+            "数值": "377,700 jobs in 2025; 393,300 projected for 2035",
+            "说明": "BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "Employment outlook 2025—2035",
-            "数值": "4.1%",
-            "说明": "Overall change with an official net increase of 15600, not an AI attribution or individual unemployment."
+            "指标": "Projected job change (2025–2035)",
+            "数值": "+4.1%; published net change +15,600 jobs",
+            "说明": "BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "Job openings (annual average)",
-            "数值": "About 41,400/year",
-            "说明": "2025—2035 annual average openings include replacements, not a ten-year net increase of 15600."
+            "指标": "Projected average annual openings",
+            "数值": "41,400 projected per year, including replacements",
+            "说明": "BLS Table 1.2 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
-        "boundary": "2025 wages and the 2025—2035 precise overall projection are separate, and the old 2024—2034 is clearly retained as history and not used as AI or Chinese individual probability.",
+        "boundary": "U.S. occupational wages and BLS job projections have different measures. Neither establishes an individual wage, AI impact, or mainland China hiring.",
         "direct_answer": {
           "$join": [
-            "2025 U.S. precise 51-9111 median of 43220 U.S. dollars annual wage and employment of 377700; over 2025—2035 overall 4.1%, net 15600, and 41400 openings per year including replacements.",
+            "BLS counts 377,700 U.S. jobs in 2025 and projects 393,300 in 2035.",
             {
               "$item": "packaging-and-filling-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -14754,7 +15231,7 @@
               "type": "prose"
             }
           ],
-          "separator": "；"
+          "separator": "\n"
         },
         "factor_rows": [
           {
@@ -14771,33 +15248,33 @@
           }
         ],
         "factors_heading": "Factors affecting actual offers",
-        "growth": "4.1%",
+        "growth": "+4.1%",
         "heading": "U.S. packaging and filling occupational wages and employment",
         "industry_heading": "Industry and position differences",
-        "industry_period": "Production line condition verification; no industry wage statistics",
+        "industry_period": "2025 employment shares",
         "industry_rows": [
           {
-            "industry": "Food and beverage production line",
-            "median": "Verify the specific position",
-            "note": "Hygiene and batch requirements differ."
+            "industry": "Manufacturing",
+            "median": "79%",
+            "note": "O*NET Details labels the top industries as 2025. These shares describe employment, not industry wages."
           },
           {
-            "industry": "Household chemical packaging line",
-            "median": "Verify the specific position",
-            "note": "Container and label requirements differ."
+            "industry": "Other industries",
+            "median": "21%",
+            "note": "O*NET Details labels the top industries as 2025. These shares describe employment, not industry wages."
           },
           {
-            "industry": "Industrial product packaging line",
-            "median": "Verify the specific position",
-            "note": "Material and mechanical risks differ."
+            "industry": "Industry wages",
+            "median": "Not obtained",
+            "note": "O*NET Details labels the top industries as 2025. These shares describe employment, not industry wages."
           },
           {
-            "industry": "Other employers",
-            "median": "Verify the specific position",
-            "note": "The national median is not an individual offer."
+            "industry": "Compare actual employers",
+            "median": "—",
+            "note": "O*NET Details labels the top industries as 2025. These shares describe employment, not industry wages."
           }
         ],
-        "industry_value_label": "Data status",
+        "industry_value_label": "Employment share",
         "interpretation_heading": "How to interpret",
         "interpretation_rows": [
           {
@@ -14811,14 +15288,14 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
             "question": "What does the median wage represent?"
           },
           {
             "answer": {
               "$join": [
-                "The 2025 same-occupation percentiles of 33390/36850/43220/49070/60030 U.S. dollars annual wage have been obtained and are not interpolated from the median, nor are they individual offers.",
+                "The table gives published national wage percentiles for May 2025. Each shows a position in the wage distribution; it is not an individual offer.",
                 {
                   "$item": "packaging-and-filling-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -14826,7 +15303,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
             "question": "How to use percentile wages?"
           },
@@ -14835,7 +15312,7 @@
             "question": "What does the employment figure represent?"
           },
           {
-            "answer": "Over 2025—2035 overall 4.1% and a net increase of 15600, with 41400 openings per year including replacements, not AI adoption replacement, individual unemployment, Chinese demand, or current hiring.",
+            "answer": "BLS projects 4.1% growth (+15,600 jobs) in 2025–35 and an average of 41,400 openings per year, including replacements. These are overall U.S. projections; they do not isolate AI effects or measure current hiring.",
             "question": "How to use growth and openings?"
           }
         ],
@@ -14843,18 +15320,18 @@
         "outlook_heading": "Employment outlook",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
-          "Wage statistical scope",
-          "Annual salary reference",
-          "Pay boundaries",
-          "Explanation"
+          "Wage percentile",
+          "Annual wage",
+          "Hourly wage",
+          "How to read it"
         ],
         "wage_heading": "Wage data",
         "wage_tiers": [
           {
-            "equivalent": "Not converted",
+            "equivalent": "$17.72/hour",
             "interpretation": {
               "$join": [
-                "Only states the median annual wage fact, not starting pay or an individual offer.",
+                "This marks the lower quarter of the wage distribution. It does not specify starting pay.",
                 {
                   "$item": "packaging-and-filling-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.2",
                   "block": "us-salary",
@@ -14862,16 +15339,16 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "label": "Median level obtained",
-            "value": "$43,220"
+            "label": "25th percentile",
+            "value": "$36,850"
           },
           {
-            "equivalent": "Not provided",
+            "equivalent": "$20.78/hour",
             "interpretation": {
               "$join": [
-                "National percentiles cannot replace a specific regional employer offer",
+                "Half of wages fall below this midpoint and half above. An employer’s offer may differ.",
                 {
                   "$item": "packaging-and-filling-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.3",
                   "block": "us-salary",
@@ -14879,16 +15356,16 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "label": "Position and region differences",
-            "value": "Verify separately by specific region and employer"
+            "label": "Median (50th percentile)",
+            "value": "$43,220"
           },
           {
-            "equivalent": "Not provided",
+            "equivalent": "$23.59/hour",
             "interpretation": {
               "$join": [
-                "True percentiles of the precise same-occupation 2025 annual wage, not starting pay or seniority levels",
+                "This marks the upper quarter of the wage distribution. It does not specify pay after a particular number of years.",
                 {
                   "$item": "packaging-and-filling-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.4",
                   "block": "us-salary",
@@ -14896,10 +15373,10 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "label": "2025 wage percentiles",
-            "value": "$33,390 / $36,850 / $43,220 / $49,070 / $60,030"
+            "label": "75th percentile",
+            "value": "$49,070"
           }
         ]
       },
@@ -14919,7 +15396,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "Suited to those who can continuously monitor equipment cycle time, verify weight and labels, record anomalies accurately, and handle stoppages per authorization.",
+        "summary": "Consider packaging and filling work if you like matching the product, label and inspection record before a batch moves on.",
         "title": "Packaging and filling machine operator"
       },
       "fit_decision_checklist": {
@@ -14991,30 +15468,30 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "Precise occupation employment",
-            "occupation_scope": "O*NET 51-9111.00 precise occupation",
+            "metric": "Employment (jobs)",
+            "occupation_scope": "Packaging and Filling Machine Operators and Tenders (51-9111)",
             "source_id": "ep",
-            "value": "377,700 people (2025)"
+            "value": "377,700 jobs in 2025; 393,300 projected for 2035"
           },
           {
             "geography": "United States",
-            "horizon": "2025—2035",
-            "interpretation": "Precise 51-9111 overall net increase of 15600, year41400 including replacements, not an AI attribution or current hiring.",
-            "limitation": "Cannot be extrapolated to individual hiring probability or Chinese demand.",
-            "metric": "Projected growth and annual average openings",
-            "occupation_scope": "O*NET 51-9111.00 precise occupation",
-            "source_id": "bls",
-            "value": "4.1%; about 41,400/year"
+            "horizon": "2025–2035",
+            "interpretation": "The overall projection does not isolate the effect of AI.",
+            "limitation": "National data for the U.S. occupation do not measure local hiring or mainland China demand.",
+            "metric": "Projected employment change",
+            "occupation_scope": "Packaging and Filling Machine Operators and Tenders (51-9111)",
+            "source_id": "ep",
+            "value": "+4.1%; published net change +15,600 jobs"
           },
           {
-            "geography": "Chinese mainland",
-            "horizon": "Current materials",
-            "interpretation": "A national projection cannot represent hiring at a specific factory.",
-            "limitation": "Cannot be extrapolated to individual hiring probability or Chinese demand.",
-            "metric": "Same-basis projection",
-            "occupation_scope": "Chinese positions cannot be directly mapped",
-            "source_id": "nbs",
-            "value": "No data currently available for safe use"
+            "geography": "United States",
+            "horizon": "2025–2035",
+            "interpretation": "Includes openings to replace workers who leave the occupation.",
+            "limitation": "National data for the U.S. occupation do not measure local hiring or mainland China demand.",
+            "metric": "Projected average annual openings",
+            "occupation_scope": "Packaging and Filling Machine Operators and Tenders (51-9111)",
+            "source_id": "ep",
+            "value": "41,400 projected per year, including replacements"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15157,7 +15634,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Explore occupational interests",
             "evidence_level": {
               "$item": "packaging-and-filling-machine-operators-and-tenders.fit.riasec-fit-block.8",
@@ -15178,7 +15655,7 @@
           },
           {
             "answer": "Reflect on detailed records and stoppage habits under cycle time; observe with mentoring feedback.",
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand personality traits",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for the occupation has not been verified.",
             "id": "big-five",
@@ -15194,7 +15671,7 @@
           },
           {
             "answer": "Describe hands-on, analytical, and communication preferences; type does not determine production line ability.",
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Explore occupational interests",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for the occupation has not been verified.",
             "id": "mbti",
@@ -15210,7 +15687,7 @@
           },
           {
             "answer": "Use stress reflection to explore reactions when output conflicts with deviations; this cannot replace quality judgment.",
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand personality traits",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for the occupation has not been verified.",
             "id": "enneagram",
@@ -15226,7 +15703,7 @@
           },
           {
             "answer": "Observe label counting rules and defect classification; online scores do not replace equipment training.",
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Explore occupational interests",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for the occupation has not been verified.",
             "id": "iq",
@@ -15242,7 +15719,7 @@
           },
           {
             "answer": "Focus on describing batch numbers, anomalies, and pending items to production, quality, and maintenance; scales do not determine the position.",
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand personality traits",
             "evidence_level": "Editorial exploration suggestion; the predictive or comparative validity of this assessment for the occupation has not been verified.",
             "id": "eq",
@@ -15487,7 +15964,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five personality assessment (English)"
+            "label": "Big Five assessment (English)"
           },
           {
             "href": {
@@ -15497,7 +15974,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI assessment (Chinese)"
+            "label": "MBTI assessment (English)"
           },
           {
             "href": {
@@ -15507,7 +15984,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five personality assessment (Chinese)"
+            "label": "Big Five assessment (English)"
           }
         ]
       },
@@ -15599,6 +16076,20 @@
         "id": "packaging-and-filling-machine-operators-and-tenders.path.credential-boundary.7",
         "location": "entry_decisions",
         "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "packaging-and-filling-machine-operators-and-tenders.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "packaging-and-filling-machine-operators-and-tenders.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
       }
     ],
     "path": {
@@ -15652,7 +16143,7 @@
       },
       {
         "derivation": null,
-        "display_value": "Nationwide wage records for the precise occupation unavailable",
+        "display_value": "No exact nationwide occupational wage obtained in this review",
         "fact_id": "china-wage-boundary",
         "market": "Chinese mainland",
         "measure": "Wage evidence boundaries",
@@ -15676,14 +16167,14 @@
       },
       {
         "derivation": null,
-        "display_value": "381,200 people",
+        "display_value": "377,700 jobs",
         "fact_id": "us-employment",
         "market": "United States",
-        "measure": "Employment",
-        "occupation_scope": "O*NET 51-9111.00",
-        "period": "2024 employment; 2025 wages; 2024-2034 projections",
+        "measure": "Employment (jobs)",
+        "occupation_scope": "Packaging and Filling Machine Operators and Tenders",
+        "period": "2025",
         "source_refs": [
-          "source-pack-onet-summary"
+          "bls-ep-51-9111"
         ]
       },
       {
@@ -15736,38 +16227,38 @@
       },
       {
         "derivation": null,
-        "display_value": "Growth of 5%—6%",
+        "display_value": "+4.1%",
         "fact_id": "us-growth",
         "market": "United States",
-        "measure": "Projected employment growth",
-        "occupation_scope": "O*NET 51-9111.00",
-        "period": "2024—2034",
+        "measure": "Projected employment change",
+        "occupation_scope": "Packaging and Filling Machine Operators and Tenders",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-summary"
+          "bls-ep-51-9111"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Not displayed: the current summary has not verified a same-basis 2034 headcount",
+        "display_value": "2034 value not used; current projection is for 2035",
         "fact_id": "us-employment-2034",
         "market": "United States",
-        "measure": "Projected employment",
-        "occupation_scope": "O*NET 51-9111.00",
-        "period": "2024-2034",
+        "measure": "Prior horizon outside current projection",
+        "occupation_scope": "Packaging and Filling Machine Operators and Tenders",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-summary"
+          "bls-ep-51-9111"
         ]
       },
       {
         "derivation": null,
-        "display_value": "45,300 job openings per year",
+        "display_value": "41,400 projected per year, including replacements",
         "fact_id": "us-openings",
         "market": "United States",
-        "measure": "Projected annual job openings",
-        "occupation_scope": "O*NET 51-9111.00",
-        "period": "2024-2034",
+        "measure": "Projected average annual openings",
+        "occupation_scope": "Packaging and Filling Machine Operators and Tenders",
+        "period": "2025–2035",
         "source_refs": [
-          "source-pack-onet-summary"
+          "bls-ep-51-9111"
         ]
       },
       {
@@ -15776,7 +16267,7 @@
         "fact_id": "cn-scale-manufacturing-production",
         "market": "Chinese mainland",
         "measure": "Annual average wage for above-scale manufacturing production and manufacturing-related personnel",
-        "occupation_scope": "Broad above-scale manufacturing legal-person position including other production positions; not this occupation's wage; excludes small enterprises and self-employed individuals and freelancers",
+        "occupation_scope": "Production, manufacturing and related workers at manufacturing enterprises above the designated size; a broad job group, not an estimate for this occupation.",
         "period": "2025",
         "source_refs": [
           "nbs-2025-wages"
@@ -15784,11 +16275,11 @@
       },
       {
         "derivation": null,
-        "display_value": "377,700 people (2025)",
+        "display_value": "377,700 jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment",
-        "occupation_scope": "Precise 51-9111 stock, not current hiring",
+        "measure": "Employment (jobs)",
+        "occupation_scope": "Packaging and Filling Machine Operators and Tenders",
         "period": "2025",
         "source_refs": [
           "bls-ep-51-9111"
@@ -15796,24 +16287,24 @@
       },
       {
         "derivation": null,
-        "display_value": "4.1%",
+        "display_value": "+4.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Overall employment change; official net increase of 15600",
-        "occupation_scope": "Precise 51-9111, not an AI attribution, individual unemployment, or Chinese demand",
-        "period": "2025—2035 projection",
+        "measure": "Projected employment change",
+        "occupation_scope": "Packaging and Filling Machine Operators and Tenders",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ep-51-9111"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 41,400/year",
+        "display_value": "41,400 projected per year, including replacements",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Annual average openings include replacements; not a net increase of 15600",
-        "occupation_scope": "Precise 51-9111, not current hiring or probability",
-        "period": "2025—2035 projection",
+        "measure": "Projected average annual openings",
+        "occupation_scope": "Packaging and Filling Machine Operators and Tenders",
+        "period": "2025–2035",
         "source_refs": [
           "bls-ep-51-9111"
         ]
@@ -15849,31 +16340,31 @@
         "availability": "available",
         "fact_ref": "us-median-wage",
         "key": "us_pay",
-        "label": "U.S. median wage (2025)"
+        "label": "U.S. wage medians (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. overall employment change"
+        "label": "U.S. projected job change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. 2025 employment"
+        "label": "U.S. jobs in 2025"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "Annual average openings (including replacements)"
+        "label": "U.S. projected annual openings"
       },
       {
-        "availability": "available",
-        "fact_ref": "cn-scale-manufacturing-production",
+        "availability": "missing",
+        "fact_ref": null,
         "key": "china_pay",
-        "label": "Above-scale manufacturing · broad production position"
+        "label": "Mainland China: exact occupational wage not verified"
       }
     ]
   },
@@ -15881,14 +16372,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Operate and tend packaging and filling equipment, forming traceable finished-product batches with products at specified quantities, seals, and labels; continuously check quality, record anomalies, and stop and escalate within authorization. U.S. O*NET 51-9111.00; reliable same-basis Chinese precise occupational salary data is currently unavailable."
+      "text": "Explore packaging and filling machine work, U.S. pay and training, and try a paper exercise on labels and seal checks."
     },
     "title": {
       "availability": "available",
       "text": "Packaging and filling machine operator: work content, salary, and safety boundaries"
     }
   },
-  "source_content_sha256": "ec4e25015f6f536dbad274eb67222e05a30924c07c76419f1fb761f0d2a2caee",
+  "source_content_sha256": "0e1042d9bd4c26b0dba35bd9220b0b7ecce6077c95d4eb9ed41dd88ac2cda477",
   "subject": {
     "canonical_slug": "packaging-and-filling-machine-operators-and-tenders",
     "name": "Packaging and filling machine operator",

@@ -32,22 +32,19 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a56-conghua": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a56-shanghai": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
-      "fact:us-industry-wage-education-2025": {
-        "status": "pending_mapping"
-      },
-      "fact:us-industry-wage-finance-2025": {
-        "status": "pending_mapping"
-      },
-      "fact:us-industry-wage-localgov-2025": {
-        "status": "pending_mapping"
-      },
-      "fact:us-industry-wage-professional-2025": {
+      "fact:us-industry-employment-share-2025": {
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
@@ -1527,7 +1524,7 @@
         "status": "pending_mapping"
       },
       "item:first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.sources.source-card.1": {
         "status": "mapped"
@@ -1572,7 +1569,7 @@
         "status": "mapped"
       },
       "item:first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.20": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.21": {
         "status": "mapped"
@@ -11581,8 +11578,28 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.04.explanation.sources.02.href": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.16",
+          "parts": [
+            [
+              ";",
+              1,
+              2
+            ],
+            [
+              "｜",
+              1,
+              2
+            ]
+          ],
+          "path": [
+            "data",
+            "paragraphs",
+            0
+          ],
+          "source": "item"
+        },
+        "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.04.explanation.sources.02.label": {
         "ref": {
@@ -15801,8 +15818,14 @@
         "status": "unfilled"
       },
       "interface.outlook.evidence_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.outlook.evidence_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.outlook.evidence_limitation_label": {
         "ref": null,
@@ -20083,60 +20106,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -22961,13 +22944,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "This checklist is for self-reflection only and does not constitute hiring criteria, an ability score, or a safety assessment. This page follows U.S. O*NET-SOC 37-1012.00, First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (the fixed index assigns this asset the corresponding Chinese title; the text follows the official occupational scope). Landscaping supervisory roles vary greatly: municipal and park maintenance, golf and sports turf, property and campus landscaping, commercial landscaping and lawn service companies including contracts and quotes, landscape construction and hardscape coordination, nursery and greenhouse production, and cemeteries, botanical gardens, and other specialized sites. Supervisors may lead one crew or arrange multiple sites and machines. Before comparing roles or development paths, check education and experience requirements; pesticide application, machinery operation and landscaping qualifications and training; physical and health requirements and environments, including heat, cold, sun, dust and noise; seasonal overtime and project schedules; and whether contract review, pricing, budgets, and personnel management are included."
+              "If you prefer predictable indoor hours or dislike rescheduling crews around weather, seasons and deadlines, check the role’s outdoor time and peak-season roster."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "onet-details",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -22976,7 +22959,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Test your interest with a tabletop exercise: given a wholly fictional landscaping shift assignment covering site type and area, plant and lawn conditions, pruning, fertilizing, irrigation or plant protection tasks, available personnel, machinery, chemicals and consumables, plant, fertilizer and chemical inventories and arrivals, one machine fault, chemical misuse or irrigation damage incident, and required scheduling, assignments, safety and quality reviews and records, write pre-shift assignments and safety briefings, work sequences and quality standards, pesticide and machinery use and protective measures, supply and plant allocation and shortage handling, incident response and reporting routes, and quality inspection, contract and record checks. Mark decisions that must be made by site management or appropriately qualified personnel."
+              "Use GR12’s fictional maintenance records for a one-page recheck handoff. Compare acceptance criteria, site records and crew follow-up."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.quick-decision.fit-decision-checklist.2",
@@ -23063,6 +23046,7 @@
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.profile.onet-structured-fields-block.1",
           "source_refs": [
+            "onet-details",
             "onet-summary"
           ],
           "type": "prose"
@@ -23092,13 +23076,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Work context | First-line supervisors of landscaping, lawn service, and groundskeeping workers focus on organizing outdoor operations, seasonal care, and safety and quality oversight, with workloads driven by seasons, weather, and contracts. O*NET work context shows schedules affected by weather, seasons, and deadlines, with no regularity percentage on this page; 65% work more than 40 hours per week and 35% work 40 hours; 82% have constant contact with others; 85% have face-to-face discussions daily; 85% have telephone conversations daily; email is used daily by 57%, once a week or more by 28%, and never by 15%; coordinating or leading others is extremely important for 74% and very important for 16%; extremely precise or highly accurate work is required for a combined 78% (extremely important 23%, very important 55%); consequences of error are extremely serious for 22%, very serious for 35%, serious for 22%, and fairly serious for 16%; strict deadlines occur daily for 54% and once a week or more for 34%; conflicts occur daily for 19%, once a week or more for 24%, once a month or more for 45%, and once a year or more for 11%; dealing with unpleasant, angry or rude people occurs once a week or more for 50%, once a month or more for 13%, and once a year or more for 25%; 41% stand more than half the time, 14% about half, and 19% less than half; 29% walk or run continually or almost continually, 29% more than half the time, 20% about half, and 21% less than half; 12% bend or twist continually or almost continually and 51% more than half the time; 49% climb ladders less than half the time and 34% never; 29% kneel, crouch, stoop or crawl about half the time and 54% less than half; 16% maintain or regain balance about half the time and 16% never; controlled indoor work occurs daily for 15% and once a week or more for 42%; 95% work outdoors in all weather daily; covered outdoor work occurs daily for 21% and once a year or more for 44%; contaminants occur daily for 38% and once a week or more for 28%; hazardous equipment daily for 59% and once a week or more for 15%; hazardous conditions once a week or more for 40%, once a year or more for 27%, and never for 19%; noise daily for 68%; extreme heat or cold daily for 41%, once a week or more for 37%, and once a month or more for 23%; work is moderately automated for 43%, slightly automated for 22%, and not automated at all for 25%; 84% make decisions daily; decisions have very important results for 49% and important results for 36%; decision-making freedom is considerable for 50%, some for 25%, and limited for 15%; freedom to determine tasks, priorities and goals is considerable for 63% and some for 17%.\nMain subjects | Landscaping and care crews; nursery plants, lawns, flowers, shrubs and trees; fertilizers, pesticides and herbicides; mowing, pruning, irrigation and powered machinery; and lawns, greenspaces, courses, campuses and sites.\nWorking relationships | Collaborate with site, property or park management, landscape architects and engineering managers, plant, chemical and equipment suppliers, irrigation and hardscape contractors, clients and property owners' committees, and adjacent crews.\nTools and materials | Mowers, pruning, hedge trimming, brush cutting and leaf blowing equipment; sprinkler and irrigation controls; spraying and pesticide application tools; soil, moisture and pest/disease testing instruments; trucks, trailers and powered machinery; assignment, quoting, inventory and timekeeping software; personal protective equipment; and quality, inspection, contract and record forms.\nGoverning requirements | Pesticide and hazardous chemical safety, application and storage requirements; machinery, electrical and outdoor safety requirements; urban landscaping and grounds care rules; contract, pricing, settlement and invoice requirements; labor, working-hours and seasonal employment rules; and quality, inspection and project record rules.\nRecord requirements | Pre-shift assignment and safety briefing records, landscaping and care quality reviews and inspections, machinery inspection and maintenance and irrigation repair records, plant, chemical and fertilizer issue and inventory records, and working-hours, project, estimate and contract performance records must be retained under applicable rules.\nScope of practice | Pesticide selection, mixing and application, hazardous chemical handling, machinery, electrical, work-at-height and near-power-line work, sprinkler design and water pressure calculations, and labor, employment, tax and contract compliance must follow procedures and be handled by appropriately qualified personnel, responsible authorities, or professional organizations. This page provides no specific advice on pesticide use, electrical and mechanical repair, design calculations, labor law, or tax.\nEnvironment and pace | Work primarily occurs outdoors in parks, courses, campuses and construction sites, with sun, wind, rain, snow, dust, noise and machine vibration. Summer heat, rainy seasons and winter snow removal create pronounced seasonal rhythms; deadlines, sporting events and plant seasons determine intensity.\nGeographic scope and definitions | U.S. O*NET-SOC 37-1012.00 does not map one-to-one to mainland China's occupational classification. Wages, employment, and growth on this page cover the exact occupation; the occupation page did not show a readable industry-specific wage table. Mainland pesticide sales and application, landscaping care, employment, and working-hours requirements must be verified separately against local and responsible authority rules."
+              "Work context | O*NET lists scheduling work around priorities, weather, and crew or equipment availability as a task. Ask the employer about peak-season shifts and weather procedures. In the O*NET work-context survey, 95% reported working outdoors in all weather every day. For strict deadlines, 54% reported daily and 34% at least weekly but less than daily, and 12% at least annually but less than monthly. For conflict situations, 19% reported daily, 24% at least weekly but less than daily, 45% at least monthly but less than weekly, and 11% at least annually but less than monthly. A combined 78% rated accuracy extremely or very important. Each percentage refers to the stated question and answer category. Frequency categories within a question are mutually exclusive.\nMain subjects | Landscaping and care crews; nursery plants, lawns, flowers, shrubs and trees; fertilizers, pesticides and herbicides; mowing, pruning, irrigation and powered machinery; and lawns, greenspaces, courses, campuses and sites.\nWorking relationships | Collaborate with site, property or park management, landscape architects and engineering managers, plant, chemical and equipment suppliers, irrigation and hardscape contractors, clients and property owners' committees, and adjacent crews.\nTools and materials | Mowers, pruning, hedge trimming, brush cutting and leaf blowing equipment; sprinkler and irrigation controls; spraying and pesticide application tools; soil, moisture and pest/disease testing instruments; trucks, trailers and powered machinery; assignment, quoting, inventory and timekeeping software; personal protective equipment; and quality, inspection, contract and record forms.\nGoverning requirements | Pesticide and hazardous chemical safety, application and storage requirements; machinery, electrical and outdoor safety requirements; urban landscaping and grounds care rules; contract, pricing, settlement and invoice requirements; labor, working-hours and seasonal employment rules; and quality, inspection and project record rules.\nRecord requirements | Pre-shift assignment and safety briefing records, landscaping and care quality reviews and inspections, machinery inspection and maintenance and irrigation repair records, plant, chemical and fertilizer issue and inventory records, and working-hours, project, estimate and contract performance records must be retained under applicable rules.\nScope of practice | Pesticide selection, mixing and application, hazardous chemical handling, machinery, electrical, work-at-height and near-power-line work, sprinkler design and water pressure calculations, and labor, employment, tax and contract compliance must follow procedures and be handled by appropriately qualified personnel, responsible authorities, or professional organizations. This page provides no specific advice on pesticide use, electrical and mechanical repair, design calculations, labor law, or tax.\nEnvironment and pace | Work primarily occurs outdoors in parks, courses, campuses and construction sites, with sun, wind, rain, snow, dust, noise and machine vibration. Summer heat, rainy seasons and winter snow removal create pronounced seasonal rhythms; deadlines, sporting events and plant seasons determine intensity.\nGeographic scope and definitions | U.S. O*NET-SOC 37-1012.00 does not map one-to-one to mainland China's occupational classification. Wages, employment, and growth on this page cover the exact occupation; the occupation page did not show a readable industry-specific wage table. Mainland pesticide sales and application, landscaping care, employment, and working-hours requirements must be verified separately against local and responsible authority rules."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.profile.work-context-block.1",
           "source_refs": [
-            "onet-summary",
-            "bls-projections-2025-35"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -23122,12 +23105,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "For exact occupation 37-1012, current 2025 employment is 243,300; projected 2025–2035 growth is 3% to 4%, with 23,900 annual openings; median 2025 wages are USD 28.09 per hour and USD 58,430 per year. Read the older shared 2024 figures of 224,700 employed, 1% to 2% growth, and 23,200 openings within their original period. The education summary lists bachelor's degree at 32%, high school at 20%, and associate or two-year degree at 14%, ECR, Job Zone3, SVP6 to <7. The main education categories are neither a complete distribution nor a uniform Chinese entry requirement."
+              "The May 2025 U.S. median was USD 28.09 hourly and USD 58,430 annually. See the O*NET national wage table for the five annual percentiles."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -23180,12 +23163,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "For exact occupation 37-1012, current 2025 employment is 243,300; projected 2025–2035 growth is 3% to 4%, with 23,900 annual openings; median 2025 wages are USD 28.09 per hour and USD 58,430 per year. Read the older shared 2024 figures of 224,700 employed, 1% to 2% growth, and 23,200 openings within their original period. The education summary lists bachelor's degree at 32%, high school at 20%, and associate or two-year degree at 14%, ECR, Job Zone3, SVP6 to <7. The main education categories are neither a complete distribution nor a uniform Chinese entry requirement."
+              "BLS Table 1.2 projects U.S. employment in occupation 37-1012 to rise from about 243,300 jobs in 2025 to 253,000 jobs in 2035, up 4.0%, with about 23,900 annual openings from growth and replacement."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -23508,12 +23491,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Confirm how education requirements—bachelor's degrees for some roles, high school or above or postsecondary certificates for most—relate to landscaping, care, or nursery experience"
+              "Check the target posting for education, grounds maintenance experience and certificates. Read its main duties to distinguish grounds maintenance supervision from nursery production."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.profile.career-quick-answers-block.24",
           "source_refs": [
-            "onet-summary",
+            "onet-details",
             "internal-rubric"
           ],
           "type": "prose"
@@ -24147,13 +24130,13 @@
                 "url": "https://www.onetonline.org/link/details/37-1012.00"
               },
               {
-                "entity": "BLS Occupational Employment and Wage Statistics (OEWS)",
+                "entity": "O*NET national wage table (37-1012, May 2025 OEWS)",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/localwages/37-1012.00"
               },
               {
-                "entity": "BLS Occupational Projections and Characteristics Tables",
+                "entity": "BLS employment projections Table 1.2 (37-1012, 2025–2035)",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24174,7 +24157,7 @@
                 "entity": "BLS Occupational Employment and Wage Statistics (OEWS) Methodology",
                 "id": "link-7",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.bls.gov/oes/methods_25.pdf"
               },
               {
                 "entity": "ILO Working Paper 96: Task Exposure Research",
@@ -24189,16 +24172,16 @@
                 "url": "https://www.onetonline.org/link/details/37-1012.00"
               },
               {
-                "entity": "BLS Employment Projections (2024–2034, presented through O*NET)",
+                "entity": "BLS employment projections Table 1.2 (37-1012, 2025–2035)",
                 "id": "link-10",
                 "relation": "career.evidence",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS OEWS (May 2025 wage statistics)",
+                "entity": "O*NET national wage table (37-1012, May 2025 OEWS)",
                 "id": "link-11",
                 "relation": "career.evidence",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/localwages/37-1012.00"
               },
               {
                 "entity": "NIST AI RMF 1.0 (voluntary AI risk management framework)",
@@ -24225,7 +24208,7 @@
                 "url": "https://www.onetonline.org/link/details/37-1012.00"
               },
               {
-                "entity": "BLS Occupational Projections and Characteristics Tables",
+                "entity": "BLS employment projections Table 1.2 (37-1012, 2025–2035)",
                 "id": "link-16",
                 "relation": "career.related",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -24829,12 +24812,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Current BLS2025–2035 projections (through O*NET)"
+              "BLS employment projections Table 1.2 (37-1012, 2025–2035)"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -24857,12 +24840,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "For exact occupation 37-1012, current 2025 employment is 243,300; projected 2025–2035 growth is 3% to 4%, with 23,900 annual openings; median 2025 wages are USD 28.09 per hour and USD 58,430 per year. Read the older shared 2024 figures of 224,700 employed, 1% to 2% growth, and 23,200 openings within their original period. Projections are neither AI causal outcomes nor an individual's probability of being hired."
+              "BLS Table 1.2 projects U.S. employment in occupation 37-1012 to rise from about 243,300 jobs in 2025 to 253,000 jobs in 2035, up 4.0%, with about 23,900 annual openings from growth and replacement."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -24913,12 +24896,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This page presents median 2025 hourly wages of USD 28.09 and annual wages of USD 58,430; the 10th and 90th percentiles are approximately USD 40,560 and USD 85,650 per year respectively (May 2025 OEWS, presented through O*NET). These figures illustrate scale and statistical scope only; location, premises type, and seasonal overtime can substantially affect individual income."
+              "May 2025 OEWS: the median was USD 28.09 hourly and USD 58,430 annually. The 10th and 90th annual percentiles were USD 40,560 and USD 85,650."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25113,12 +25096,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "For exact occupation 37-1012, current 2025 employment is 243,300; projected 2025–2035 growth is 3% to 4%, with 23,900 annual openings; median 2025 wages are USD 28.09 per hour and USD 58,430 per year. Read the older shared 2024 figures of 224,700 employed, 1% to 2% growth, and 23,200 openings within their original period. Projections are not actual outcomes and do not establish AI causation."
+              "BLS Table 1.2 projects U.S. employment in occupation 37-1012 to rise from about 243,300 jobs in 2025 to 253,000 jobs in 2035, up 4.0%, with about 23,900 annual openings from growth and replacement."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "internal-rubric",
             "bls-projections-2025-35"
           ],
           "type": "prose"
@@ -25128,12 +25110,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Current BLS2025–2035 projections presented by O*NET"
+              "BLS employment projections Table 1.2 (37-1012, 2025–2035)"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "internal-rubric",
             "bls-projections-2025-35"
           ],
           "type": "prose"
@@ -25185,7 +25166,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections (2024–2034); ILO Working Paper 96"
+              "BLS Employment Projections (2025–2035); ILO Working Paper 96"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.ai-impact.ai-impact-table.75",
@@ -25964,12 +25945,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Pay basis: landscaping and care site management roles often receive role-based pay plus peak-season overtime, allowances, or project performance pay. Landscaping outsourcing, labor dispatch, and seasonal employment involve two statistical scopes. These three arrangements cannot be compared directly."
+              "The mainland China releases and historical postings reviewed here do not provide a comparable occupational wage distribution. Ask the target employer about base pay, peak-season overtime, allowances, incentives and the employment arrangement."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "nbs-wages-2025"
+            "nbs-wages-2025",
+            "a56-shanghai",
+            "a56-conghua"
           ],
           "type": "prose"
         },
@@ -26399,7 +26382,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Construction (industry proxy)"
+              "Mainland China wages and job examples"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.china-salary.career-snapshot-primary-locale.44",
@@ -26470,7 +26453,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National (industry proxy)"
+              "Shanghai grounds maintenance supervisor"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.china-salary.career-snapshot-primary-locale.49",
@@ -26484,12 +26467,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round did not obtain national monthly or annual wage distributions for the exact occupation. National, industry, and job-category averages cannot be directly converted into individual pay, nor do they establish that no official data exist."
+              "Shanghai Mingchen Property Management listed one grounds maintenance supervisor at CNY 6,500–8,000 per month. Duties included assigning staff, checking and documenting maintenance, and managing tools and materials. The posting required a relevant grounds maintenance certificate."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "internal-rubric"
+            "a56-shanghai"
           ],
           "type": "prose"
         },
@@ -26512,12 +26495,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: verifiable monthly pay statistics were not obtained for landscaping care site management in mainland Chinese municipal areas, campuses, and courses. Income often includes peak-season overtime, allowances, and project performance pay. Landscaping outsourcing, labor dispatch, and seasonal employment involve two statistical scopes. Advertised pay usually represents one employer and cannot represent occupational wages."
+              "The mainland China releases and historical postings reviewed here do not provide a comparable occupational wage distribution. Ask the target employer about base pay, peak-season overtime, allowances, incentives and the employment arrangement."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "internal-rubric"
+            "nbs-wages-2025",
+            "a56-shanghai",
+            "a56-conghua"
           ],
           "type": "prose"
         },
@@ -26526,7 +26511,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other locations and employment models"
+              "Guangzhou Conghua landscaping crew lead"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.china-salary.career-snapshot-primary-locale.53",
@@ -26540,12 +26525,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: verifiable income statistics were not obtained for other locations and employment models, including golf and sports ground care, nursery and greenhouse production management, cemetery and botanical garden specialist care, and landscape construction, hardscape and irrigation coordination. Locations, site types, and employment arrangements vary greatly and must be checked role by role."
+              "Guangzhou Helenbergh Property Management’s Conghua branch listed a landscaping crew lead at CNY 3,800–4,300 per month and asked for at least two years of grounds management experience. The same notice listed separate grounds worker roles at CNY 3,000–3,200 per month."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a56-conghua"
           ],
           "type": "prose"
         },
@@ -26554,7 +26539,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "In mainland China, landscaping and grounds care commonly occurs in municipal and urban park greenspaces, property and campus landscaping, golf and sports grounds, school, government and institutional support services, landscape construction and plant companies, and nurseries and greenhouses. Pesticide sales and application, machinery operation, outdoor and near-power-line work, urban landscaping care rules, employment, working hours and seasonal employment requirements follow local and responsible authority rules. These roles do not map one-to-one to U.S. occupational classifications."
+              "Look for crew supervision examples in municipal greenspace, property, campus and sports grounds maintenance. Compare nursery and greenhouse production supervision separately."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.china-salary.career-snapshot-primary-locale.55",
@@ -26582,11 +26567,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Slower than average (1% to 2%, 2024–2034, BLS projections presented through O*NET)"
+              "BLS Table 1.2 projects U.S. employment in occupation 37-1012 to rise from about 243,300 jobs in 2025 to 253,000 jobs in 2035, up 4.0%, with about 23,900 annual openings from growth and replacement. The 2025 U.S. medians were $28.09 per hour and $58,430 per year."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
+            "bls-projections-2025-35",
+            "bls-oews-2025",
             "internal-rubric"
           ],
           "type": "prose"
@@ -26618,13 +26605,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET OnLine: First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (37-1012.00) Occupational Profile | https://www.onetonline.org/link/summary/37-1012.00; BLS Occupational Employment and Wage Statistics (OEWS) | https://www.bls.gov/oes/; BLS Occupational Projections and Characteristics Tables | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "O*NET OnLine: First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (37-1012.00) Occupational Profile | https://www.onetonline.org/link/summary/37-1012.00; BLS Occupational Employment and Wage Statistics (OEWS) | https://www.bls.gov/oes/; BLS Occupational Projections and Characteristics Tables | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; BLS May 2025 OEWS survey methods | https://www.bls.gov/oes/methods_25.pdf"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "bls-projections-2025-35",
-            "internal-rubric"
+            "a56-oews-method"
           ],
           "type": "prose"
         },
@@ -26633,12 +26619,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Below USD 40,560 per year"
+              "USD 40,560 per year"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26647,12 +26633,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Pay · 10th percentile | Below USD 40,560 per year; May 2025 OEWS (presented through O*NET) | Not a starting wage."
+              "10th percentile · USD 40,560 per year · May 2025 OEWS; O*NET national wages (BLS OEWS) | https://www.onetonline.org/link/localwages/37-1012.00"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26661,12 +26647,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Below USD 47,390 per year"
+              "USD 47,390 per year"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26675,12 +26661,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Pay · 25th percentile | Below USD 47,390 per year; May 2025 OEWS (presented through O*NET) | Not a starting wage."
+              "25th percentile · USD 47,390 per year · May 2025 OEWS; O*NET national wages (BLS OEWS) | https://www.onetonline.org/link/localwages/37-1012.00"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26694,7 +26680,7 @@
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26703,12 +26689,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Pay · Median | USD 58,430 per year; median hourly wage USD 28.09 (May 2025 OEWS, presented through O*NET) | Half of workers earn less and half earn more."
+              "Median · USD 58,430 per year · May 2025 OEWS; O*NET national wages (BLS OEWS) | https://www.onetonline.org/link/localwages/37-1012.00"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26717,12 +26703,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Below USD 72,590 per year"
+              "USD 72,590 per year"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26731,12 +26717,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The original expanded table for the older shared 75th percentile was not checked in this round. OEWS includes tips, commissions, piece rates, and production bonuses within its definitions and excludes overtime premiums and nonproduction bonuses, among other items; it does not categorically exclude all allowances."
+              "75th percentile · USD 72,590 per year · May 2025 OEWS; O*NET national wages (BLS OEWS)｜https://www.onetonline.org/link/localwages/37-1012.00"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26745,12 +26731,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Above USD 85,650 per year"
+              "USD 85,650 per year"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26759,12 +26745,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Pay · 90th percentile | Above USD 85,650 per year; May 2025 OEWS (presented through O*NET) | Does not represent an overall earnings ceiling for this occupation."
+              "90th percentile · USD 85,650 per year · May 2025 OEWS; O*NET national wages (BLS OEWS) | https://www.onetonline.org/link/localwages/37-1012.00"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -26773,7 +26759,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Approximately 224,700 people"
+              "About 243,300 jobs in 2025"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.19",
@@ -26787,7 +26773,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Read the older 2024 employment card within its original period; see Quick Answers for current employment. Verify employment projection and OEWS wage coverage separately."
+              "U.S. employment projection base year, 2025; BLS Table 1.2｜OEWS wage estimates use a separate survey."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.20",
@@ -26802,12 +26788,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Slower than average (1% to 2%)"
+              "Growth of 4.0%"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26816,12 +26802,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Employment · Growth rate | Slower than average (1% to 2%, 2024–2034); BLS projections (presented through O*NET) | Not an individual's probability of obtaining a job."
+              "Employment · Growth rate | Growth of 4.0% (2025–2035); BLS Table 1.2 | Occupation-level projection."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -26830,7 +26816,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Approximately 23,200 openings per year"
+              "About 23,900 openings per year"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.23",
@@ -26844,12 +26830,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Employment · Projected openings | Approximately 23,200 per year (2024–2034 projected annual average); BLS projections (presented through O*NET) | Mostly from replacement needs, not net new jobs."
+              "Employment · Projected openings | About 23,900 annually (2025–2035 average); BLS Table 1.2 | Includes growth and replacement."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "internal-rubric",
             "bls-projections-2025-35"
           ],
           "type": "prose"
@@ -26859,13 +26844,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Check wage statistics and employment projections separately for period and coverage. Read current 2025–2035 figures separately from older shared projection cards. Industry breakdowns and the complete education distribution were not obtained in this round; this does not imply they have not been officially published."
+              "BLS Table 1.2 projects U.S. employment in occupation 37-1012 to rise from about 243,300 jobs in 2025 to 253,000 jobs in 2035, up 4.0%, with about 23,900 annual openings from growth and replacement. The 2025 U.S. medians were $28.09 per hour and $58,430 per year."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
+            "bls-projections-2025-35",
+            "bls-oews-2025",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -26874,12 +26860,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "For exact occupation 37-1012, current 2025 employment is 243,300; projected 2025–2035 growth is 3% to 4%, with 23,900 annual openings; median 2025 wages are USD 28.09 per hour and USD 58,430 per year. Read the older shared 2024 figures of 224,700 employed, 1% to 2% growth, and 23,200 openings within their original period. The education summary lists bachelor's degree at 32%, high school at 20%, and associate or two-year degree at 14%. Expanded wage percentile tables and industry breakdowns were not obtained in this round; this does not assert that official sources have not published them."
+              "BLS Table 1.2 projects U.S. employment in occupation 37-1012 to rise from about 243,300 jobs in 2025 to 253,000 jobs in 2035, up 4.0%, with about 23,900 annual openings from growth and replacement. The 2025 U.S. medians were $28.09 per hour and $58,430 per year."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
             "bls-projections-2025-35",
+            "bls-oews-2025",
             "internal-rubric"
           ],
           "type": "prose"
@@ -26889,12 +26876,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS covers wages of full-time and part-time employees, including tips, commissions, and production bonuses within its definitions; it is not fixed-pay-only. Verify specific allowance items separately. Self-employment, overtime premiums, and nonproduction bonuses are excluded."
+              "OEWS covers wages of full-time and part-time employees, including tips, commissions, and production bonuses within its definitions; it is not fixed-pay-only. Verify specific allowance items separately. Self-employment, overtime premiums, and nonproduction bonuses are excluded.; BLS May 2025 OEWS survey methods | https://www.bls.gov/oes/methods_25.pdf"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "internal-rubric"
+            "a56-oews-method"
           ],
           "type": "prose"
         },
@@ -26964,8 +26951,7 @@
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "bls-projections-2025-35",
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -26974,11 +26960,109 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Slower than average (1% to 2%, 2024–2034, BLS projections presented through O*NET)"
+              "BLS Table 1.2 projects U.S. employment in occupation 37-1012 to rise from about 243,300 jobs in 2025 to 253,000 jobs in 2035, up 4.0%, with about 23,900 annual openings from growth and replacement."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
+            "bls-projections-2025-35"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "Employment in administrative and support services"
+            ]
+          },
+          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.34",
+          "source_refs": [
+            "a56-employment-by-industry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "37%"
+            ]
+          },
+          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.35",
+          "source_refs": [
+            "a56-employment-by-industry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "About 37% of U.S. employment in this occupation was in this sector in 2025."
+            ]
+          },
+          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "a56-employment-by-industry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "Employment in other industries"
+            ]
+          },
+          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.37",
+          "source_refs": [
+            "a56-employment-by-industry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "No individual shares listed"
+            ]
+          },
+          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.38",
+          "source_refs": [
+            "a56-employment-by-industry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "O*NET lists administrative and support services in its top-industries section."
+            ]
+          },
+          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "a56-employment-by-industry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "Wages by industry for this occupation"
+            ]
+          },
+          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
             "internal-rubric"
           ],
           "type": "prose"
@@ -26988,110 +27072,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Administrative and support services (OEWS industry definition)"
-            ]
-          },
-          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.34",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "Insufficient evidence: the BLS occupation page did not show readable industry-specific median wages for this occupation. This page uses no third-party estimates."
-            ]
-          },
-          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.35",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "This industry covers outsourced landscaping and grounds care and is listed by O*NET as the occupation's main industry in 2024. Specific medians must be checked separately against original OEWS industry detail tables."
-            ]
-          },
-          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.36",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "Building and facility services (OEWS industry definition)"
-            ]
-          },
-          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.37",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "Insufficient evidence: the BLS occupation page did not show readable industry-specific median wages for this occupation. This page uses no third-party estimates."
-            ]
-          },
-          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.38",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "Landscape construction, hardscape, and irrigation coordination roles are often related to this industry; specific medians were not obtained."
-            ]
-          },
-          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.39",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "Public-sector and institutional grounds (OEWS industry definition)"
-            ]
-          },
-          "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.40",
-          "source_refs": [
-            "bls-projections-2025-35"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "Insufficient evidence: the BLS occupation page did not show readable industry-specific median wages for this occupation. This page uses no third-party estimates."
+              "Industry medians unavailable here"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "bls-projections-2025-35"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -27100,12 +27086,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Landscaping care roles in parks, schools, government agencies, enterprises and public institutions are often related to this industry; specific medians were not obtained."
+              "For an industry comparison, check the sector and the specific job offer."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "bls-projections-2025-35"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -27114,12 +27100,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "National (all industries, reference)"
+              "U.S. national median annual wage"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27133,7 +27119,7 @@
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27142,12 +27128,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The May 2025 national median annual wage presented on this page (BLS OEWS, presented through O*NET) is for comparison, not an industry figure."
+              "The May 2025 national estimate covers the industries in the OEWS survey."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27185,12 +27171,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wages are from May2025 OEWS presented through O*NET. Current employment projections cover 2025–2035; read older shared 2024–2034 cards within their original period. Wage statistics are not an employment-size survey."
+              "Wages come from the BLS May 2025 OEWS survey, presented in the O*NET national wage table."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025",
+            "a56-oews-method"
           ],
           "type": "prose"
         },
@@ -27219,7 +27206,7 @@
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27228,13 +27215,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Lower end: the 10th percentile is below USD 40,560 per year, a position at the lower end of the distribution, not a starting wage."
+              "The 10th percentile is USD 40,560 per year. About one in ten workers earns that amount or less."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "bls-projections-2025-35",
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27248,7 +27234,7 @@
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -27257,13 +27243,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 90th percentile is only a distribution position; this figure does not establish causal effects of location, rank, or work arrangements."
+              "The 90th percentile is USD 85,650 per year. About one in ten workers earns that amount or more."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "bls-projections-2025-35",
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         }
@@ -27290,13 +27275,13 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
@@ -28998,7 +28983,7 @@
             "internal-rubric",
             "onet-summary"
           ],
-          "title": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers | path",
+          "title": "Entry roles and tasks",
           "type": "table"
         },
         {
@@ -29045,7 +29030,7 @@
             "onet-summary",
             "internal-rubric"
           ],
-          "title": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers | path",
+          "title": "What employers look for",
           "type": "cards"
         },
         {
@@ -29056,37 +29041,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Material One: Fictional landscaping shift assignment",
-                  "Provide site type and area, plant and lawn conditions, pruning, fertilizing, irrigation or plant protection tasks, available personnel, machinery, chemicals and consumables, plant, fertilizer and chemical inventories and arrivals, one machine fault, chemical misuse or irrigation damage incident, and required scheduling, assignments, safety and quality reviews and records as exercise inputs.",
-                  "Label units and missing items and state that the materials are wholly fictional.",
-                  "List missing information that may affect judgment.",
-                  "State that the exercise uses fictional materials and represents no real company, site, or incident.",
-                  "Checkable outputs: pre-shift assignments and safety briefings, work sequences and quality standards, pesticide and machinery use and protection points, plant and supply allocation and shortage handling, incident response and reporting routes, quality inspection, contract and record checks, and decisions that must be made by site management or appropriately qualified personnel.",
-                  "State the boundary: pesticide safety, electrical and mechanical repair, design calculations, labor law, and tax conclusions must be made by qualified personnel, responsible authorities, and professional organizations."
+                  "GR12: A crew submits records after Friday maintenance in three areas.",
+                  "G1 lawn: The site requires all three spot checks to be 45–55 mm. The record shows 48, 52 and 57 mm.",
+                  "G2 path: Acceptance requires a post-cleanup inspection photo. The order says cleanup is complete, but the photo field is blank.",
+                  "G3 bed: Four bags of trimmings had to be removed. The collection record shows four bags.",
+                  "Identify records you can verify, then separate rework from missing evidence.",
+                  "The crew lead assigns rework and checks it. The project lead gives final acceptance.",
+                  "The areas and standards are fictional.",
+                  "Write a paper handoff only."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Material Two: Site landscaping, safety, and quality review points (fictional)",
-                  "Write pre-shift safety briefings, pesticide selection and mixing ratios, protection and wind requirements, machinery, electrical and operating-condition checks, landscaping and lawn quality inspection points, and exception handling. Explain actions exceeding your qualifications and authorization.",
-                  "Exercise output: an actionable set of site landscaping, safety, and quality review points."
+                  "Record the standard, measurements or records, next action and owner for each area.",
+                  "Single-change variant: G2 gains a verifiable inspection photo showing the path has been cleared. All other inputs stay the same. Show the row that changes.",
+                  "Give the project lead one item ready for acceptance and one open action."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material Three: Reference approach excerpt (fictional)",
-                  "First complete pre-shift assignments and safety briefings; then organize landscaping, care and reviews in work sequence; next handle shortages and machinery, chemical and irrigation abnormalities; finally complete records, project matters and handover.",
-                  "Keep unconfirmed chemical mixing risks, machinery and electrical conditions, or plant disease causes marked as unknown and seek confirmation from site management or qualified personnel rather than acting on experience alone.",
-                  "State that the reference approach is only an example, not the sole correct method."
+                  "Complete both versions independently.",
+                  "Separate rework, missing evidence and sign-off.",
+                  "On day seven, open “GR12 grounds maintenance recheck reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Material Four: Scope statement",
-                  "This exercise does not constitute pesticide safety, electrical and mechanical repair, design calculation, labor law, or tax conclusions. Restricted chemicals, hazardous chemicals, and electrical and machinery work must follow rules and procedures and be handled by qualified personnel, responsible authorities, and professional organizations."
+                  "Use the fictional heights to read the records.",
+                  "Follow the site and project requirements for actual maintenance standards and scheduling."
                 ]
               }
             ]
@@ -29095,7 +29080,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers | path",
+          "title": "GR12 fictional grounds maintenance recheck",
           "type": "cards"
         },
         {
@@ -29106,9 +29091,9 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Work Sample One: Job hiring requirements comparison table",
-                  "List the target vacancy's education, experience, pesticide, machinery and safety training, and health requirements item by item in a comparison table.",
-                  "Mark requirements met, gaps to address, and items to verify."
+                  "Keep both versions of the recheck.",
+                  "Show rework, missing evidence and acceptance authority.",
+                  "Attach the project lead handoff."
                 ]
               },
               {
@@ -29141,7 +29126,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers | path",
+          "title": "Work samples to prepare",
           "type": "cards"
         },
         {
@@ -29192,7 +29177,7 @@
             "internal-rubric",
             "onet-summary"
           ],
-          "title": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers | path",
+          "title": "Interview and probation",
           "type": "table"
         },
         {
@@ -29203,50 +29188,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: Read a pesticide safety or machinery and outdoor work requirement",
-                  "Extract one safety requirement and write its implementation and recording points."
+                  "Day 1",
+                  "Record the three areas and their criteria."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: Write pre-shift assignment and safety briefing points",
-                  "Write inspection items for personnel, machinery, chemicals, plants, and area responsibilities."
+                  "Day 2",
+                  "Check the three lawn measurements."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: Write seasonal work sequence and quality standard points",
-                  "Write key points for arranging sequences and quality requirements by season, weather, and plant type."
+                  "Day 3",
+                  "Check the path photo and collection record."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: Write pesticide, machinery, and protection review points",
-                  "Write chemical selection, mixing ratios, wind, machinery inspection, and electrical confirmation items."
+                  "Day 4",
+                  "Write separate handoffs for rework and missing evidence."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: Write recordkeeping, plant, chemical, and handover points",
-                  "Write care, inspection, plant and chemical issue records and project handover items."
+                  "Day 5",
+                  "Name the final approver."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: Invite challenges from others",
-                  "Ask an experienced site supervisor or safety professional to identify omissions concerning plants, machinery, and pesticides and record the feedback."
+                  "Day 6",
+                  "Submit both versions independently and show the row that changes."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: Write your judgment",
-                  "Write whether you want to continue, what you need to develop, and which decisions you cannot make yourself."
+                  "Day 7",
+                  "On day seven, open “GR12 grounds maintenance recheck reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29255,7 +29240,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers | path",
+          "title": "Seven-day maintenance recheck",
           "type": "timeline"
         },
         {
@@ -29263,20 +29248,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: Can you find plant and safety requirements and clearly write implementation points?",
-              "Day 2: Can you write complete pre-shift assignments and safety briefings?",
-              "Day 3: Can you write reasonable seasonal work sequences and quality standards?",
-              "Day 4: Can you write actionable pesticide, machinery, and protection review points?",
-              "Day 5: Can you write specific recordkeeping, plant, chemical, and handover items?",
-              "Day 6: Can you revise plant and safety judgments after receiving corrections?",
-              "Day 7: Can you identify skills to develop and authorization boundaries?"
+              "Keep both versions.",
+              "Compare each G1 measurement with the site requirement.",
+              "Identify the evidence that changes for G2.",
+              "Compare G3’s collection record with the requirement.",
+              "Separate rework, missing evidence and pending approval.",
+              "Check the crew, crew lead and project lead’s responsibilities.",
+              "Open the reference and record one correction."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.path.seven-day-decision.1",
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers | path",
+          "title": "Day seven review",
           "type": "list"
         },
         {
@@ -29364,7 +29349,7 @@
             "internal-rubric",
             "onet-summary"
           ],
-          "title": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers | path",
+          "title": "Education, experience and qualifications",
           "type": "table"
         },
         {
@@ -29372,7 +29357,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "Entering this occupation requires more than physical strength. First check the direction—municipal areas and parks, courses and sports grounds, properties and campuses, landscaping service companies, landscape construction and hardscape, nurseries and greenhouses, or cemeteries and botanical gardens—and the target site type's and locality's hiring and qualification standards. Then prepare the education, pesticide, machinery and safety training, and shift or project experience appropriate to that direction.",
+              "Check whether the job primarily delivers grounds maintenance or nursery production. Ask the employer about crew scope, work authorization and qualifications. The Shanghai posting’s certificate requirement applies to that job.",
               "Education and ability are different levels: obtaining education or completing training does not establish site landscaping organization or plant and quality judgment. Pesticide application, machinery, and irrigation qualification requirements also differ across directions.",
               "Qualification requirements, care standards, and employment systems differ by location and site. Reverify when changing employers or operation types.",
               "This page does not replace laws, rules, or responsible authority requirements. Qualified personnel, responsible authorities, and professional organizations must confirm pesticide safety, electrical and mechanical repairs, design calculations, employment, tax, and contract matters."
@@ -29383,7 +29368,7 @@
             "bls-projections-2025-35",
             "internal-rubric"
           ],
-          "title": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers | path",
+          "title": "Role and work authorization",
           "type": "notice"
         },
         {
@@ -29391,16 +29376,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Verify hiring, qualification, and safety requirements against original vacancy announcements, employer rules, and responsible authority documents. This page only indicates what to check.",
-              "Read education, experience, pesticide, machinery and safety training, and health requirements in vacancy announcements together. Relaxing one requirement does not mean others can be substituted."
+              "Shanghai Mingchen Property Management listed one grounds maintenance supervisor at CNY 6,500–8,000 per month. Duties included assigning staff, checking and documenting maintenance, and managing tools and materials. The posting required a relevant grounds maintenance certificate. Guangzhou Helenbergh Property Management’s Conghua branch listed a landscaping crew lead at CNY 3,800–4,300 per month and asked for at least two years of grounds management experience. The same notice listed separate grounds worker roles at CNY 3,000–3,200 per month.",
+              "These are historical employer postings. Current vacancy status is unverified. Check supervision duties and certificate requirements for each role. Comparable nationwide occupation-level wages for mainland China remain unavailable."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a56-shanghai",
+            "a56-conghua"
           ],
-          "title": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers | path",
+          "title": "Historical job examples",
           "type": "notice"
         },
         {
@@ -29578,7 +29563,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET places this occupation in Job Zone 3 (medium preparation, SVP 6.0 to <7.0), with interest code ECR, and does not mark it Bright Outlook. The O*NET summary lists education required for new hires: bachelor's degree, 32%; high school diploma or equivalent, 20%; associate degree or other two-year degree, 14% (insufficient evidence: other education categories are not listed on the summary page; this page does not combine these into a complete distribution). Typical entry generally requires relevant landscaping, care, or nursery experience and on-the-job training. Pesticide, machinery and safety training and health requirements depend on operation type and location."
+              "BLS Table 1.2 lists a high school diploma or equivalent, less than five years of related work experience and no typical on-the-job training for U.S. occupation 37-1012. O*NET classifies the occupation as Job Zone 3. Its summary shows part of the new-hire education survey: bachelor’s degree 32%, high school or equivalent 20%, and associate or other two-year degree 14%. Check local rules and employer postings for specific qualifications."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.path.career-path-block.20",
@@ -30592,22 +30577,22 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 37-1012.00 Occupational Profile",
+                "entity": "BLS employment projections Table 1.2 (37-1012)",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/37-1012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS Occupational Projections and Characteristics Tables",
+                "entity": "O*NET 2025 employment by industry",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.onetonline.org/link/details/37-1012.00#WagesEmployment"
               },
               {
                 "entity": "National Bureau of Statistics: Average Wages of Persons Employed in Urban Units (industry sections and job categories)",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "BLS Occupational Employment and Wage Statistics (OEWS)",
@@ -30679,11 +30664,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "For exact occupation 37-1012, current 2025 employment is 243,300; projected 2025–2035 growth is 3% to 4%, with 23,900 annual openings; median 2025 wages are USD 28.09 per hour and USD 58,430 per year. Read the older shared 2024 figures of 224,700 employed, 1% to 2% growth, and 23,200 openings within their original period. Chinese industry averages provide context only and cannot replace exact-occupation wages."
+              "BLS Table 1.2 projects U.S. employment in occupation 37-1012 to rise from about 243,300 jobs in 2025 to 253,000 jobs in 2035, up 4.0%, with about 23,900 annual openings from growth and replacement. The 2025 U.S. medians were $28.09 per hour and $58,430 per year."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.8",
           "source_refs": [
+            "bls-projections-2025-35",
+            "bls-oews-2025",
             "internal-rubric",
             "onet-summary"
           ],
@@ -30699,7 +30686,7 @@
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.9",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -30713,7 +30700,7 @@
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.10",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -30722,12 +30709,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Current projection categories cannot be treated as exact realized values. Openings include replacement needs; this table does not separately identify causal effects of other factors, so it cannot establish that those factors are absent from the projections."
+              "BLS Table 1.2 projects 4.0% U.S. employment growth in occupation 37-1012 over 2025–2035."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.11",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -30741,7 +30728,7 @@
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.12",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -30755,7 +30742,7 @@
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.13",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -30769,7 +30756,7 @@
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.14",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -30778,12 +30765,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "3% to 4%"
+              "4.0%"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.15",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         },
@@ -30876,7 +30863,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "243,300 people"
+              "243,300 jobs"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.22",
@@ -31402,13 +31389,12 @@
           "data": {
             "entries": [
               {
-                "answer": "This page follows U.S. O*NET-SOC 37-1012.00, First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (the fixed index assigns this asset the corresponding Chinese title): directly supervising and coordinating landscaping or groundskeeping workers. Work may include reviewing contracts for service, machinery and staffing needs, answering prospective clients' questions about methods, materials and price ranges, and estimating costs from labor, materials and machinery. Duties include establishing and enforcing procedures and standards; scheduling by priorities, crew and equipment availability and weather; inspecting parks, botanical gardens, cemeteries and courses and checking plants and soil; supervising projects for adherence to instructions and deadlines; directing landscaping, lawn care and tree and shrub pruning; checking completed work against specifications, standards and contracts; planting or caring for vegetation through mulching, fertilizing, watering, pruning and weeding; directing or performing fertilizer, insecticide, herbicide and fungicide mixing and application; training staff in transplanting, pruning, concrete finishing, equipment use and lawn care; preparing service estimates and maintaining project budgets; identifying diseases and pests and ordering treatments; inventorying tools, equipment and materials; maintaining personnel and project records; handling hiring, assessments and discipline; assisting workers when needed; preparing activity and personnel reports; investigating complaints and determining responses; approving leave and processing timesheets; coordinating interdepartmental work; directing or assisting power tool and equipment maintenance and repairs; reviewing contracts and assignments for service, machinery and staffing needs; arranging corrective work and recommending procedural changes; developing care or renovation plans with managers or landscape architects; recommending work condition or equipment changes to improve efficiency; answering client questions about methods, materials and prices; installing or maintaining landscaped areas, including snow removal, concrete curbs and sidewalk repairs; designing or overseeing sprinkler installation and calculating water pressure, valve and pipe coverage needs; negotiating fees; and repairing irrigation systems.",
+                "answer": "Schedule grounds maintenance crews, check site quality and safety, and coordinate quotes, tools and supplies. Common settings include parks, properties and sports grounds. For example, a crew lead assigns work around weather and crew availability, checks the result against site requirements and sends it to the project lead for acceptance.",
                 "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.faq.1",
                 "question": "What do first-line supervisors of landscaping, lawn service, and groundskeeping workers mainly do?",
                 "question_key": "career.faq.first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.q1",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "onet-details"
                 ]
               },
               {
@@ -31422,27 +31408,26 @@
                 ]
               },
               {
-                "answer": "U.S. O*NET-SOC 37-1012.00, First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers: interest code ECR; Job Zone 3 (medium preparation, SVP 6.0 to <7.0); not marked Bright Outlook. Scope note: O*NET wages, employment, growth, and openings all cover this exact occupation. Median 2025 hourly wages are USD 28.09 and annual wages USD 58,430; 10th, 25th, 75th, and 90th percentiles are approximately USD 40,560, USD 47,390, USD 72,590, and USD 85,650 per year respectively; approximately 224,700 employed in 2024; slower-than-average projected growth of 1% to 2% for 2024–2034; and approximately 23,200 annual openings. Main education survey categories are published: bachelor's degree, 32%; high school diploma or equivalent, 20%; associate degree or other two-year degree, 14%. Other categories are unpublished; this page does not fill them in. The occupation page did not show a readable industry-specific wage table.",
+                "answer": "U.S. occupation 37-1012 covers first-line supervisors who directly oversee landscaping, lawn service and groundskeeping workers. The O*NET national wage table uses May 2025 OEWS data, with medians of USD 28.09 hourly and USD 58,430 annually.",
                 "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.faq.3",
-                "question": "What are the U.S. statistical scope and profile completeness (important)?",
+                "question": "What does the U.S. occupation code cover, and where do the wage figures come from?",
                 "question_key": "career.faq.first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.q3",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "onet-details",
+                  "bls-oews-2025"
                 ]
               },
               {
-                "answer": "O*NET places this occupation in Job Zone 3 (medium preparation, SVP 6.0 to <7.0). Work context shows schedules affected by weather, seasons, and deadlines, with no regularity percentage on this page; 65% work more than 40 hours per week and 35% work 40 hours; 82% have constant contact with others; 85% have face-to-face discussions daily; 85% have telephone conversations daily; 57% use email daily; coordinating or leading others is extremely important for 74% and very important for 16%; extremely precise or highly accurate work is required for a combined 78%; consequences of error are extremely serious for 22%, very serious for 35%, serious for 22%, and fairly serious for 16%; strict deadlines occur daily for 54% and more than once a week for 34%; conflicts occur daily for 19%, more than once a week for 24%, and more than once a month for 45%; 50% deal with unpleasant, angry or rude people more than once a week; 41% stand more than half the time; 29% walk or run continually or almost continually and 29% more than half the time; 12% bend or twist continually or almost continually and 51% more than half the time; 49% climb ladders less than half the time and 34% never; 29% kneel, crouch, stoop or crawl about half the time and 54% less than half; 16% never maintain or regain balance; controlled indoor work occurs daily for 15% and more than once a week for 42%; 95% work outdoors in all weather daily; 38% face contaminants daily; 59% face hazardous equipment daily; 40% face hazardous conditions more than once a week; 68% face noise daily; extreme heat or cold occurs daily for 41% and more than once a week for 37%; work is moderately automated for 43%, slightly automated for 22%, and not automated at all for 25%; 84% make decisions daily; decisions have very important results for 49%; 50% have considerable decision-making freedom; and 63% have considerable freedom to determine tasks, priorities and goals.",
+                "answer": "O*NET classifies the occupation as Job Zone 3. In its work-context survey, 54% reported strict deadlines every day and 34% at least weekly but less than daily, and 12% at least annually but less than monthly. For conflict situations, 19% reported daily, 24% at least weekly but less than daily, 45% at least monthly but less than weekly, and 11% at least annually but less than monthly. In the survey, 95% reported working outdoors in all weather every day. A combined 78% rated accuracy extremely or very important. Each percentage refers to the stated question and answer category. Frequency categories within a question are mutually exclusive.",
                 "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.faq.4",
                 "question": "What are the daily work context and preparation level?",
                 "question_key": "career.faq.first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.q4",
                 "source_refs": [
-                  "onet-details",
-                  "internal-rubric"
+                  "onet-details"
                 ]
               },
               {
-                "answer": "A more accurate assessment is that tools will take over processes such as scheduling, dispatching and project timeline statistics; records of plants, chemicals, supplies and work hours; organizing inspection and quality data; and drafting records, reports, estimates and contract documents. The occupation as a whole will mainly be augmented. The ILO's 2023 study shows that task exposure varies greatly across occupations, with relatively low proportions of highly exposed tasks in managerial and professional occupations; technical feasibility does not mean organizations have already adopted the technology. On-site plant and quality checks, pesticide and machinery safety judgments, and handling personnel, plants and chemicals must still be undertaken by trained, authorized personnel. The conclusion is therefore that working methods will change, rather than the occupation being replaced as a whole.",
+                "answer": "Scheduling drafts, maintenance record summaries and report drafts are possible uses for AI assistance. The supervisor still verifies staffing, site quality, work authorization and acceptance. Research on potential task exposure leaves this occupation’s actual adoption and employment effects unresolved.",
                 "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.faq.5",
                 "question": "Will AI replace this occupation?",
                 "question_key": "career.faq.first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.q5",
@@ -31452,56 +31437,59 @@
                 ]
               },
               {
-                "answer": "This page presents a 2025 median hourly wage of USD 28.09 and median annual wage of USD 58,430. The 10th, 25th, 75th and 90th percentiles are approximately USD 40,560, 47,390, 72,590 and 85,650 per year, respectively (May 2025 OEWS, presented through O*NET). The median is the midpoint of the wage distribution among employees, not a starting wage. OEWS covers employees and excludes differences in peak-season overtime, allowances, regions and site types. No industry wage table readable by industry was found on the page for this occupation.",
+                "answer": "The 2025 U.S. median was $28.09 an hour and $58,430 a year. The 10th, 25th, 75th and 90th percentiles were $40,560, $47,390, $72,590 and $85,650 a year. OEWS excludes overtime premiums and includes cost-of-living allowances, hazard pay and some incentive pay. Use the national distribution for context and check actual quotes by location, employer and role. The median describes the national wage distribution. Check the target posting for entry pay.",
                 "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.faq.6",
                 "question": "What are US wages? Is the median an entry-level wage?",
                 "question_key": "career.faq.first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-pay",
                 "source_refs": [
                   "bls-oews-2025",
-                  "internal-rubric"
+                  "a56-oews-method"
                 ]
               },
               {
-                "answer": "O*NET places this occupation in Job Zone 3 (medium preparation, SVP 6.0 to <7.0). Its summary page lists the education needed by new hires as a bachelor's degree, 32%; a high school diploma or equivalent, 20%; and an associate's or other two-year degree, 14%. The remaining categories are not published, and this page does not fill them in. This occupation is not designated Bright Outlook. Most positions also require relevant experience in landscaping, grounds care or nursery stock, and may require training in pesticide application, machinery operation, outdoor work and work near electrical hazards. Consult the job posting and local regulations for specific requirements.",
+                "answer": "BLS Table 1.2 lists a high school diploma or equivalent, less than five years of related work experience and no typical on-the-job training for U.S. occupation 37-1012. O*NET classifies the occupation as Job Zone 3. Its summary shows part of the new-hire education survey: bachelor’s degree 32%, high school or equivalent 20%, and associate or other two-year degree 14%. Check local rules and employer postings for specific qualifications.",
                 "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.faq.7",
                 "question": "What education and qualifications are needed?",
                 "question_key": "career.faq.first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.education-path",
                 "source_refs": [
-                  "onet-summary",
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "bls-projections-2025-35",
+                  "onet-summary"
                 ]
               },
               {
-                "answer": "Most positions require relevant experience in landscaping, grounds care or nursery stock, and may require training and qualifications related to pesticide application and business operations; training in machinery operation, machinery and electrical safety; training in irrigation and sprinkler system installation and commissioning; and training in contracts, estimates and project management. There are also health and physical requirements. These requirements vary by region and type of work and must be checked against the original requirements of the target employer, competent authorities and local regulations. This page does not provide legal or compliance advice, or equate training or qualifications with on-site management, plant knowledge or safety competence.",
+                "answer": "First check whether the job primarily supervises grounds maintenance, then read the employer’s experience, certificate and work requirements. The historical Shanghai posting lists a landscaping certificate for that job. If pesticide application is part of the role, confirm the separate requirements for applicators and business licensing with the employer and local authority.",
                 "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.faq.8",
                 "question": "What certifications or licenses are needed?",
                 "question_key": "career.faq.first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.credentials",
                 "source_refs": [
                   "onet-details",
-                  "internal-rubric"
+                  "a56-shanghai"
                 ]
               },
               {
-                "answer": "The on-site supervisor is responsible for landscaping quality, work safety and the management of personnel, plants and machinery during the shift. Matters involving pesticide selection, mixing and application; hazardous chemical handling; machinery, electrical, elevated and near-electricity work; sprinkler system design and water pressure calculations; and labor, employment, tax and contract compliance must be handled according to procedures by appropriately qualified personnel, competent authorities or professional organizations. Pre-shift briefings and landscaping, inspection and project records must be retained under organizational procedures. Employee, customer, contract and estimate information must be processed only to the minimum extent necessary. When using dispatching, estimating, inventory, inspection and recordkeeping tools, their outputs do not constitute plant or quality conclusions or safety determinations. Matters beyond one's authority should be escalated to the site manager. This page does not replace requirements for pesticide and hazardous chemical safety, application and storage; machinery, electrical, outdoor and near-electricity work safety; urban landscaping and grounds care management; contracts, estimates and settlement; labor, work hours and seasonal employment; or quality, inspection and project records management.",
+                "answer": "The crew lead assigns work, checks quality and safety, and follows up on rework. Confirm pesticide application, machinery operation and irrigation work separately for the task, local requirements and employer procedures. Escalate work outside your authorization to the designated person.",
                 "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.faq.9",
                 "question": "Where do the responsibilities and boundaries of this work lie?",
                 "question_key": "career.faq.first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.risk-boundary",
                 "source_refs": [
-                  "nist-ai-rmf",
+                  "onet-details",
                   "internal-rubric"
                 ]
               },
               {
-                "answer": "This page presents employment of approximately 224,700 in 2024, projected slower growth of 1% to 2% during 2024–2034, and approximately 23,200 annual openings, using the exact occupation definition. Openings mainly arise from replacement needs, while individual development depends more on shift and project experience, the scope of qualifications and management skills. Common transitions include landscaping workers (requiring additional hands-on planting, pruning and care skills); grounds maintenance personnel (site cleaning and routine lawn and facility care); pesticide handlers, sprayers and applicators, vegetation (pesticide mixing, application and protective practices); pest control workers (identifying and controlling pests in buildings and premises); landscape architects (landscaping and landscape design, drawings and specifications); farmworkers and laborers, crop, nursery and greenhouse (propagation, cultivation, nursery stock dispatch and production planning); construction laborers (hardscape construction, materials and safety coordination); and general maintenance workers (mechanical and electrical repair and equipment maintenance). The feasibility of a transition depends on the target job posting and local regulations.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 37-1012 to rise from about 243,300 jobs in 2025 to 253,000 jobs in 2035, up 4.0%, with about 23,900 annual openings from growth and replacement. When comparing roles, check crew size, sign-off authority and who performs field maintenance.",
                 "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.faq.10",
                 "question": "What is the employment outlook, and what other directions can this work lead to?",
                 "question_key": "career.faq.first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.outlook-transition",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "onet-details",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
+              },
+              {
+                "answer": "G1 at 57 mm exceeds the limit. The crew lead assigns rework and a recheck. G2 has a completion note but lacks the photo. Ask the crew for evidence. G3’s collection record matches four bags and can go to acceptance. In the variant, G2 can go to acceptance. G1 and G3 stay the same. The project lead gives final sign-off. Check criteria, evidence, action and owner.",
+                "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.faq.11",
+                "question": "GR12 grounds maintenance recheck reference (open after day six)",
+                "question_key": "career.faq.first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.11"
               }
             ]
           },
@@ -31533,7 +31521,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Sources and fact register for this page (O*NET 37-1012.00 occupation profile and detailed information; BLS OEWS May 2025 wage percentiles; BLS 2024–2034 projections presented by O*NET; National Bureau of Statistics 2025 average wages by industry section and job category; ILO Working Paper 96; NIST AI RMF)"
+              "Sources and fact register for this page (O*NET 37-1012.00 occupation profile and detailed information; BLS OEWS May 2025 wage percentiles; BLS 2025–2035 projections presented by O*NET; National Bureau of Statistics 2025 average wages by industry section and job category; ILO Working Paper 96; NIST AI RMF)"
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.sources.source-card.2",
@@ -31563,12 +31551,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "For exact occupation 37-1012, current 2025 employment is 243,300, 2025–2035 growth is 3% to 4%, and annual openings are 23,900; the 2025 median is USD 28.09 per hour and USD 58,430 per year. Read the older shared 2024 figures of 224,700 employed, 1% to 2% growth and 23,200 openings within their original period. The education summary of 32% bachelor's degree, 20% high school and 14% associate's or two-year degree, ECR and Job Zone3 have been verified. OEWS includes tips, commissions, piecework pay and production bonuses within its definition; NBS includes bonuses, allowances and overtime within its definition. These items cannot be categorically excluded. Extended percentile tables, industry details and the full education table were not obtained in this round; this does not imply they are officially unpublished. Exact occupation wages in China, a universal entry timeline, medical causation, AI adoption and efficiency gains, and personality-based occupational validity have not been verified."
+              "BLS Table 1.2 projects U.S. employment in occupation 37-1012 to rise from about 243,300 jobs in 2025 to 253,000 jobs in 2035, up 4.0%, with about 23,900 annual openings from growth and replacement."
             ]
           },
           "id": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.sources.source-card.4",
           "source_refs": [
-            "internal-rubric"
+            "bls-projections-2025-35"
           ],
           "type": "prose"
         }
@@ -31592,28 +31580,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers career page",
@@ -31640,55 +31616,53 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "Official occupational scope: Directly supervise and coordinate the activities of workers engaged in landscaping or groundskeeping. Work may include reviewing contracts to determine service, machinery and personnel requirements; answering prospective customers' questions about methods, materials and price ranges; and preparing estimates based on labor, material and machinery costs.",
                   "Interest code ECR (Enterprising, Conventional, Realistic); preparation level Job Zone 3 (medium preparation, SVP 6.0 to <7.0); not designated Bright Outlook.",
                   "Main education survey categories: bachelor's degree, 32%; high school diploma or equivalent, 20%; associate's or other two-year degree, 14% (the summary page does not list the remaining categories).",
-                  "Wages and employment (exact occupation definition): 2025 median hourly wage, USD 28.09; median annual wage, USD 58,430; 2024 employment, 224,700; projected slower growth of 1% to 2% during 2024–2034; approximately 23,200 projected annual openings.",
-                  "The main industry for this occupation in 2024 was administrative and support services."
+                  "The 2025 U.S. medians were $28.09 per hour and $58,430 per year."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
                 "limitation": "Only the main education survey categories are published; this page does not combine them into a complete distribution. No industry wage table readable by industry was found on this occupation's page. US information does not automatically establish pesticide, machinery or employment requirements in mainland China.",
                 "market": "United States",
                 "name": "O*NET OnLine：First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers（37-1012.00）",
-                "period": "current page (updated 2026); accessed 2026-09-20",
+                "period": "2026 occupation profile; 2025 wages",
                 "publisher": "O*NET OnLine",
                 "scope": "exact title 37-1012.00",
                 "url": "https://www.onetonline.org/link/summary/37-1012.00"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "Used to check tasks and work activities: establish and enforce operating procedures and work standards; schedule work by priorities, crew or equipment availability and weather; tour parks, botanical gardens, cemeteries and golf courses and inspect plants and soil; supervise project activities, progress and deadlines; direct landscaping, lawn care and tree and shrub pruning; inspect completed work for compliance with specifications, standards and contracts; plant or maintain vegetation; direct or personally mix and apply fertilizers, insecticides, herbicides or fungicides; train workers in transplanting, pruning, concrete finishing, equipment use and lawn care; prepare service estimates and maintain project budgets; identify diseases or pests and order treatment; inventory tools, equipment and materials; maintain personnel and project records; handle hiring, performance evaluations and disciplinary action; assist employees with work; prepare work and personnel reports; investigate work complaints and determine responses; handle administrative duties such as approving leave and processing timesheets; coordinate work across departments with other supervisors; direct or assist with equipment maintenance and repair; review contracts or work assignments to determine requirements; arrange corrective work and recommend process changes; discuss plans with managers or landscape designers; recommend changes in working conditions or equipment; answer customer questions about methods, materials and prices; install or maintain landscaped areas, including snow removal, concrete curbs and sidewalks; design or supervise sprinkler system installation and calculate water pressure and valve and pipe coverage; negotiate fees with customers; repair irrigation systems.",
-                  "Work context (available data): more than 40 hours per week, 65% / 40 hours, 35%; constant contact with others, 82%; daily face-to-face discussions, 85%; daily telephone conversations, 85%; email daily, 57% / more than once a week, 28% / never, 15%; coordinating or leading others is extremely important, 74% / very important, 16%; being extremely exact or highly accurate, 78% combined; consequences of error extremely serious, 22% / very serious, 35% / serious, 22% / fairly serious, 16%; strict deadlines daily, 54% / more than once a week, 34%; conflict situations daily, 19% / more than once a week, 24% / more than once a month, 45%; dealing with unpleasant, angry or discourteous people more than once a week, 50%; standing more than half the time, 41%; walking or running continually, 29% / more than half the time, 29%; bending or twisting continually, 12% / more than half the time, 51%; climbing ladders less than half the time, 49% / never, 34%; kneeling, crouching, stooping or crawling about half the time, 29%; never keeping balance, 16%; indoor controlled environments daily, 15% / more than once a week, 42%; outdoors in all weather daily, 95%; exposure to contaminants daily, 38%; exposure to hazardous equipment daily, 59%; exposure to hazardous conditions more than once a week, 40%; noise exposure daily, 68%; extreme heat or cold daily, 41% / more than once a week, 37%; work moderately automated, 43% / slightly, 22% / not at all, 25%; making decisions daily, 84%; decisions affect very important outcomes, 49%; considerable decision-making freedom, 50%; considerable freedom to determine tasks, priorities and goals, 63%.",
+                  "In the O*NET work-context survey, 95% reported working outdoors in all weather every day. For strict deadlines, 54% reported daily and 34% at least weekly but less than daily, and 12% at least annually but less than monthly. For conflict situations, 19% reported daily, 24% at least weekly but less than daily, 45% at least monthly but less than weekly, and 11% at least annually but less than monthly. A combined 78% rated accuracy extremely or very important. Each percentage refers to the stated question and answer category. Frequency categories within a question are mutually exclusive.",
                   "The page provides no percentages for three work context items: regularity of work schedules, teamwork, and responsibility for others' health and safety. This page does not fill them in.",
-                  "Software skill categories include database query software (work order software), email, office suites, presentation software, spreadsheets, time accounting, and webpage creation and editing software."
+                  "Software skill categories include database query software (work order software), email, office suites, presentation software, spreadsheets, time accounting, and webpage creation and editing software.",
+                  "The 2025 U.S. medians were $28.09 per hour and $58,430 per year."
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
                 "limitation": "Work context percentages are survey responses and do not represent all positions. Pesticide, machinery, electrical and employment requirements require separate verification.",
                 "market": "United States",
                 "name": "O*NET OnLine: First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers detailed occupational information (37-1012.00)",
-                "period": "current page (updated 2026); accessed 2026-09-20",
+                "period": "2026 occupation profile; 2025 wages",
                 "publisher": "O*NET OnLine",
                 "scope": "exact title (37-1012.00)",
                 "url": "https://www.onetonline.org/link/details/37-1012.00"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "As presented through O*NET: 2024 employment of 224,700, projected slower growth of 1% to 2% during 2024–2034, and approximately 23,200 projected annual openings. This occupation is not designated Bright Outlook.",
-                  "The openings presented by O*NET are annual averages over the projection period. This page therefore labels them as per year, not a cumulative total over ten years. Openings mainly arise from replacement needs.",
-                  "The main industry for this occupation in 2024 was administrative and support services."
+                  "BLS Table 1.2 projects U.S. employment in occupation 37-1012 to rise from about 243,300 jobs in 2025 to 253,000 jobs in 2035, up 4.0%, with about 23,900 annual openings from growth and replacement."
                 ],
                 "evidence_type": "official employment projections (exact occupation scope)",
                 "id": "bls-projections-2025-35",
-                "limitation": "Projections are not actual outcomes. Annual openings include replacement needs and cannot be converted into an individual's probability of obtaining a job. The statistics cover employees.",
+                "limitation": "Table 1.2 includes self-employment in its base-year employment. The self-employed share was 46.8% for this occupation in 2025. Annual openings include growth and replacement and do not measure a person’s hiring probability.",
                 "market": "United States",
-                "name": "BLS: Occupational projections and characteristics table (2024–2034 projections, presented through O*NET, exact occupation 37-1012.00)",
-                "period": "2024—2034 projections as presented by O*NET OnLine; accessed 2026-09-20",
+                "name": "BLS Table 1.2: First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers, 37-1012",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact occupation 37-1012.00",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31697,18 +31671,18 @@
                 "accessed_at": "2026-09-20",
                 "details": [
                   "Median hourly wage, USD 28.09; median annual wage, USD 58,430. The 10th, 25th, 75th and 90th percentiles are approximately USD 40,560, 47,390, 72,590 and 85,650 per year, respectively (hourly wages of USD 19.50, 22.79, 34.90 and 41.18).",
-                  "OEWS covers employees; differences in peak-season overtime, allowances, regions and site types are generally excluded or only partly included.",
+                  "The national table gives annual and hourly occupational wage percentiles.",
                   "No industry wage table readable by industry was found on this occupation's page. Industry rows on this page are marked as insufficient evidence, and no third-party estimates were used."
                 ],
                 "evidence_type": "official wage statistics (exact occupation scope)",
                 "id": "bls-oews-2025",
-                "limitation": "The median is not a starting wage. Industry values are not readable by industry. Wages exclude differences in peak-season overtime, allowances, outsourcing and seasonal employment.",
+                "limitation": "The national wage percentiles combine industries. Check local, industry and employer pay separately.",
                 "market": "United States",
-                "name": "BLS: May 2025 Occupational Employment and Wage Statistics (OEWS, exact occupation 37-1012.00)",
+                "name": "O*NET national wages: U.S. occupation 37-1012 (BLS OEWS)",
                 "period": "May 2025 wage data; accessed 2026-09-20",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact occupation 37-1012.00",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/localwages/37-1012.00"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -31719,17 +31693,17 @@
                   "Average annual wage in public administration, social security and social organizations in urban non-private units: CNY 119,465 (2025).",
                   "National average annual wage of employees in urban non-private units: CNY 129,441; in urban private units: CNY 71,590 (2025).",
                   "Average annual wages by job category in enterprises above designated size: middle and senior managers, CNY 210,016; clerical and related personnel, CNY 94,936 (2025).",
-                  "Mainland China does not list this occupation separately. Industry and job-category proxies cannot replace income data for this occupation."
+                  "The release reports averages by industry and broad job category."
                 ],
                 "evidence_type": "official industry and position proxy",
                 "id": "nbs-wages-2025",
-                "limitation": "Industry and job-category average wages cover multiple occupations and cannot be treated as this occupation's median or starting wage. They also exclude income from peak-season overtime, allowances, project performance pay, outsourcing and seasonal employment.",
+                "limitation": "The National Bureau of Statistics definition of gross wages in urban units includes applicable bonuses, allowances and overtime pay. The industry and broad job-category averages provide context.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics: 2025 Average Wages of Employees in Urban Units (by industry section and job category)",
                 "period": "2025 annual wage; accessed 2026-09-20",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry proxy: water conservancy, environment and public facilities management; leasing and business services; construction; public administration; position-group proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -31795,6 +31769,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Shanghai Mingchen Property Management listed one grounds maintenance supervisor at CNY 6,500–8,000 per month. Duties included assigning staff, checking and documenting maintenance, and managing tools and materials. The posting required a relevant grounds maintenance certificate."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a56-shanghai",
+                "limitation": "These are historical employer postings. Current vacancy status is unverified. Check supervision duties and certificate requirements for each role. Comparable nationwide occupation-level wages for mainland China remain unavailable.",
+                "market": "Mainland China",
+                "name": "Grounds crew supervision job posting",
+                "period": "2025-08-04",
+                "publisher": "Shanghai Yangpu District Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shanghai.gov.cn/nw17239/20250804/e425d99793fe462aa265ea499423e069.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Guangzhou Helenbergh Property Management’s Conghua branch listed a landscaping crew lead at CNY 3,800–4,300 per month and asked for at least two years of grounds management experience. The same notice listed separate grounds worker roles at CNY 3,000–3,200 per month."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a56-conghua",
+                "limitation": "These are historical employer postings. Current vacancy status is unverified. Check supervision duties and certificate requirements for each role. Comparable nationwide occupation-level wages for mainland China remain unavailable.",
+                "market": "Mainland China",
+                "name": "Grounds crew supervision job posting",
+                "period": "2025-05-23",
+                "publisher": "Conghua District Government, Guangzhou",
+                "scope": "recruitment_proxy",
+                "url": "https://www.conghua.gov.cn/ztzl/jyjh/content/post_10280158.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The May 2025 OEWS survey covers full-time and part-time wage and salary workers in nonfarm establishments. It includes eligible cost-of-living allowances and excludes overtime premiums."
+                ],
+                "evidence_type": "Official survey methodology",
+                "id": "a56-oews-method",
+                "limitation": "Defines survey coverage.",
+                "market": "United States",
+                "name": "May 2025 OEWS survey methods",
+                "period": "May 2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/methods_25.pdf"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Administrative and support services account for 37% of U.S. employment in this occupation."
+                ],
+                "evidence_type": "Official occupational profile",
+                "id": "a56-employment-by-industry",
+                "limitation": "Supports the industry employment share.",
+                "market": "United States",
+                "name": "O*NET 2025 employment by industry",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/37-1012.00#WagesEmployment"
               }
             ]
           },
@@ -34649,6 +34683,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a56-shanghai",
+            "posting-a56-conghua"
+          ],
           "sources_note": {
             "$item": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -34801,7 +34839,7 @@
           },
           {
             "fact_ref": "us-openings-2025-2035",
-            "指标": "2024–2034 employment · Annual openings",
+            "指标": "2025–2035 employment · Annual openings",
             "数值": {
               "$item": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.23",
               "block": "us-salary",
@@ -34880,14 +34918,14 @@
           "type": "prose"
         },
         "heading": "How much do First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers earn in the US?",
-        "industry_heading": "How much do US wages differ across industries?",
+        "industry_heading": "U.S. industry employment and wage coverage",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-finance-2025",
+            "fact_ref": "us-industry-employment-share-2025",
             "industry": {
               "$item": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34908,7 +34946,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-professional-2025",
             "industry": {
               "$item": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -34929,7 +34966,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-localgov-2025",
             "industry": {
               "$item": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -34950,7 +34986,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-education-2025",
+            "fact_ref": "us-wage-2025",
             "industry": {
               "$item": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -34971,7 +35007,7 @@
             }
           }
         ],
-        "industry_value_label": "Median wage for this occupation within the industry",
+        "industry_value_label": "Verified figure",
         "interpretation_heading": "How should these US wage figures be interpreted?",
         "interpretation_rows": [
           {
@@ -35038,7 +35074,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Lowest 10%",
+            "label": "10th percentile",
             "value": {
               "$fact": "us-wage-low10-2025",
               "field": "display_value"
@@ -35052,7 +35088,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Median (50%)",
+            "label": "Median",
             "value": {
               "$fact": "us-wage-2025",
               "field": "display_value"
@@ -35066,7 +35102,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "Highest 10%",
+            "label": "90th percentile",
             "value": {
               "$fact": "us-wage-high10-2025",
               "field": "display_value"
@@ -35215,6 +35251,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35259,7 +35296,8 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
+            "source_ref": "bls-projections-2025-35",
             "value": {
               "$item": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -35305,6 +35343,7 @@
               "type": "prose"
             },
             "source_id": "nbs",
+            "source_ref": "nbs-wages-2025",
             "value": {
               "$item": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -35320,7 +35359,7 @@
               "$link": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.7",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
-              "entry": "link-3",
+              "entry": "link-4",
               "field": "url"
             },
             "id": "bls",
@@ -35328,7 +35367,7 @@
               "$link": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.7",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
-              "entry": "link-3",
+              "entry": "link-4",
               "field": "entity"
             },
             "scope": {
@@ -35343,7 +35382,7 @@
               "$link": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.7",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
-              "entry": "link-4",
+              "entry": "link-3",
               "field": "url"
             },
             "id": "ep",
@@ -35351,7 +35390,7 @@
               "$link": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.market-signals.market-signal-card.7",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
-              "entry": "link-4",
+              "entry": "link-3",
               "field": "entity"
             },
             "scope": {
@@ -35660,7 +35699,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Employment and Wage Statistics (OEWS: wages, employment and percentiles, exact occupation definition)",
+            "label": "U.S. national wages and percentiles (BLS OEWS via O*NET)",
             "secondary_value": null,
             "value": {
               "$item": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.profile.onet-structured-fields-block.2",
@@ -36560,7 +36599,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36570,27 +36609,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -36605,6 +36624,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which path within this occupation is more likely to suit you?",
       "interface.fit.interest_code_heading": "How to interpret the interest code",
+      "interface.outlook.evidence_heading": "Three employment and wage measures",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to interpret this value",
       "interface.us_salary.section_label": "US wage references",
@@ -36729,10 +36749,10 @@
       },
       {
         "derivation": null,
-        "display_value": "Below USD 40,560 per year (10th percentile, May 2025 OEWS, presented through O*NET)",
+        "display_value": "USD 40,560 per year",
         "fact_id": "us-wage-low10-2025",
         "market": "United States",
-        "measure": "US 10th-percentile annual wage",
+        "measure": "10th percentile",
         "occupation_scope": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (O*NET-SOC 37-1012.00)",
         "period": "May 2025",
         "source_refs": [
@@ -36741,10 +36761,10 @@
       },
       {
         "derivation": null,
-        "display_value": "Below USD 47,390 per year (25th percentile, May 2025 OEWS, presented through O*NET)",
+        "display_value": "USD 47,390 per year",
         "fact_id": "us-wage-q25-2025",
         "market": "United States",
-        "measure": "US 25th-percentile annual wage",
+        "measure": "25th percentile",
         "occupation_scope": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (O*NET-SOC 37-1012.00)",
         "period": "May 2025",
         "source_refs": [
@@ -36753,10 +36773,10 @@
       },
       {
         "derivation": null,
-        "display_value": "Median hourly wage USD 28.09; median annual wage USD 58,430 (2025, BLS OEWS presented through O*NET)",
+        "display_value": "USD 58,430 per year",
         "fact_id": "us-wage-2025",
         "market": "United States",
-        "measure": "Median wage",
+        "measure": "Median",
         "occupation_scope": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (O*NET-SOC 37-1012.00)",
         "period": "May 2025",
         "source_refs": [
@@ -36765,10 +36785,10 @@
       },
       {
         "derivation": null,
-        "display_value": "Below USD 72,590 per year (75th percentile, May 2025 OEWS, presented through O*NET)",
+        "display_value": "USD 72,590 per year",
         "fact_id": "us-wage-q75-2025",
         "market": "United States",
-        "measure": "US 75th-percentile annual wage",
+        "measure": "75th percentile",
         "occupation_scope": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (O*NET-SOC 37-1012.00)",
         "period": "May 2025",
         "source_refs": [
@@ -36777,10 +36797,10 @@
       },
       {
         "derivation": null,
-        "display_value": "Above USD 85,650 per year (90th percentile, May 2025 OEWS, presented through O*NET)",
+        "display_value": "USD 85,650 per year",
         "fact_id": "us-wage-high10-2025",
         "market": "United States",
-        "measure": "US 90th-percentile annual wage",
+        "measure": "90th percentile",
         "occupation_scope": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (O*NET-SOC 37-1012.00)",
         "period": "May 2025",
         "source_refs": [
@@ -36789,86 +36809,38 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 224,700 employed (2024, BLS occupational projections, presented through O*NET; exact occupation definition)",
+        "display_value": "About 243,300 jobs in 2025",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment size",
+        "measure": "Employment measured in jobs",
         "occupation_scope": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (O*NET-SOC 37-1012.00)",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Slower than average (1% to 2%, 2024–2034, BLS projections presented through O*NET)",
+        "display_value": "Projected growth of 4.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth rate",
         "occupation_scope": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (O*NET-SOC 37-1012.00)",
-        "period": "2024–2034 projection",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 23,200 per year (2024–2034, BLS projected annual average, presented through O*NET; mostly from replacement needs)",
+        "display_value": "About 23,900 annual openings from growth and replacement",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Annual job openings",
         "occupation_scope": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (O*NET-SOC 37-1012.00)",
-        "period": "2024–2034 projection",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections-2025-35"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "Insufficient evidence: no median wage for this occupation in this industry was obtained (no industry wage table readable by industry was found on the BLS occupation page; this page uses no third-party estimates)",
-        "fact_id": "us-industry-wage-finance-2025",
-        "market": "United States",
-        "measure": "Median occupational wage within the industry (administrative and support services)",
-        "occupation_scope": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (O*NET-SOC 37-1012.00)",
-        "period": "May 2025",
-        "source_refs": [
-          "bls-oews-2025"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "Insufficient evidence: no median wage for this occupation in this industry was obtained (no industry wage table readable by industry was found on the BLS occupation page; this page uses no third-party estimates)",
-        "fact_id": "us-industry-wage-professional-2025",
-        "market": "United States",
-        "measure": "Median occupational wage within the industry (building and facility services)",
-        "occupation_scope": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (O*NET-SOC 37-1012.00)",
-        "period": "May 2025",
-        "source_refs": [
-          "bls-oews-2025"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "Insufficient evidence: no median wage for this occupation in this industry was obtained (no industry wage table readable by industry was found on the BLS occupation page; this page uses no third-party estimates)",
-        "fact_id": "us-industry-wage-localgov-2025",
-        "market": "United States",
-        "measure": "Median occupational wage within the industry (public-sector and institutional grounds)",
-        "occupation_scope": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (O*NET-SOC 37-1012.00)",
-        "period": "May 2025",
-        "source_refs": [
-          "bls-oews-2025"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "Insufficient evidence: no median wage for this occupation in this industry was obtained (no industry wage table readable by industry was found on the BLS occupation page; this page uses no third-party estimates)",
-        "fact_id": "us-industry-wage-education-2025",
-        "market": "United States",
-        "measure": "Median occupational wage within the industry (other industries)",
-        "occupation_scope": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers (O*NET-SOC 37-1012.00)",
-        "period": "May 2025",
-        "source_refs": [
-          "bls-oews-2025"
         ]
       },
       {
@@ -36978,6 +36950,42 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Shanghai Mingchen Property Management listed one grounds maintenance supervisor at CNY 6,500–8,000 per month. Duties included assigning staff, checking and documenting maintenance, and managing tools and materials. The posting required a relevant grounds maintenance certificate.",
+        "fact_id": "posting-a56-shanghai",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Grounds crew supervision job posting",
+        "period": "2025-08-04",
+        "source_refs": [
+          "a56-shanghai"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Guangzhou Helenbergh Property Management’s Conghua branch listed a landscaping crew lead at CNY 3,800–4,300 per month and asked for at least two years of grounds management experience. The same notice listed separate grounds worker roles at CNY 3,000–3,200 per month.",
+        "fact_id": "posting-a56-conghua",
+        "market": "Mainland China",
+        "measure": "Job posting details",
+        "occupation_scope": "Grounds crew supervision job posting",
+        "period": "2025-05-23",
+        "source_refs": [
+          "a56-conghua"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "37%",
+        "fact_id": "us-industry-employment-share-2025",
+        "market": "United States",
+        "measure": "Share of employment in this occupation",
+        "occupation_scope": "Share of U.S. occupation 37-1012 jobs in administrative and support services",
+        "period": "2025",
+        "source_refs": [
+          "a56-employment-by-industry"
+        ]
       }
     ]
   },
@@ -36991,7 +36999,7 @@
     "badges": [
       "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers · Official occupational scope (37-1012.00)",
       "Scheduling and dispatching · Landscaping and safety review · Contract estimates, supplies and equipment",
-      "US data use the exact occupation definition (May 2025 OEWS and BLS projections); main education survey categories are published; China has only industry and job-category proxies"
+      "U.S. occupational data · Mainland China job examples"
     ],
     "metrics": [
       {
@@ -37004,25 +37012,25 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "US employment change (2024–2034)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "US employment (2024)"
+        "label": "U.S. jobs (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "US annual job openings (2024–2034)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
-        "availability": "available",
-        "fact_ref": "cn-urban-nonprivate-2025",
+        "availability": "missing",
+        "fact_ref": null,
         "key": "china_pay",
-        "label": "China industry wage proxies (not occupational wages)"
+        "label": "Comparable mainland China occupational wages unavailable"
       }
     ]
   },
@@ -37030,17 +37038,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers do, how to enter the occupation, its work boundaries and development paths. Based on official O*NET and BLS occupational information (O*NET-SOC 37-1012.00). US wages, employment and growth use the exact occupation definition; availability of industry wages and education distributions is noted individually. Mainland China does not list this occupation separately, so this page uses industry and job-category proxies with the scope labeled for each item."
+      "text": "Explore crew supervision, grounds maintenance checks and entry paths. See U.S. occupational data and job examples from Shanghai and Guangzhou Conghua."
     },
     "title": {
       "availability": "available",
       "text": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers"
     }
   },
-  "source_content_sha256": "badb9cc45d2cb66b718feb2102c1510c870714e57312b7d76dfbe28cc1a2f84b",
+  "source_content_sha256": "a9ef1d1becf46c2558ebc77555ea10013f3a497184381289bc45bf071e3d0f12",
   "subject": {
     "canonical_slug": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers",
     "name": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers",
-    "summary": "Directly supervise and coordinate landscaping or groundskeeping workers: establish and enforce procedures and work standards for performance and safety; schedule crews by priorities, crew or equipment availability, and weather; inspect parks, botanical gardens, cemeteries, golf courses, and other sites and assess plants and soil; supervise projects for adherence to instructions, deadlines, and progress; direct landscaping, lawn care, and tree and shrub pruning; inspect completed work against specifications, standards, and contracts; plant or care for vegetation through mulching, fertilizing, watering, pruning, and weeding; direct or perform fertilizer, insecticide, herbicide, or fungicide mixing and application; train workers in transplanting, pruning, concrete finishing, equipment use, and lawn care; estimate service costs from labor, materials, and machinery and maintain project budgets; identify diseases and pests and order treatments; inventory tools, equipment, and materials for adequate supply and readiness; maintain personnel and project records; handle hiring, performance assessment, and discipline; assist workers when needed to meet deadlines; prepare work activity and personnel reports; investigate complaints and determine responses; approve leave and process timesheets; coordinate work across departments or organizations with other supervisors; direct or assist power tool and equipment maintenance and repairs; review contracts or assignments to determine service, machinery, and staffing needs; arrange corrective work and recommend procedural changes; develop maintenance or renovation plans and schedules with managers or landscape architects; recommend work condition or equipment changes to improve crew efficiency; answer customer questions on methods, materials, or price ranges; install or maintain landscaped areas, including snow removal, concrete curb construction, or sidewalk repairs; design or oversee sprinkler installation and calculate water pressure, valve, and pipe coverage needs; negotiate service and groundskeeping costs; and repair irrigation systems."
+    "summary": "Schedule grounds maintenance crews, check site quality and safety, and coordinate quotes, tools and supplies. Common settings include parks, properties and sports grounds."
   }
 }

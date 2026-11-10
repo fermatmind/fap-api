@@ -32,6 +32,12 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:posting-a45-yanhu": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a45-yuanyuan": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -1527,7 +1533,7 @@
         "status": "pending_mapping"
       },
       "item:extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.sources.source-card.1": {
         "status": "mapped"
@@ -20183,60 +20189,20 @@
         "status": "mapped"
       },
       "source_card.secondary_links.03.href": {
-        "ref": {
-          "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-4"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            2,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.href": {
-        "ref": {
-          "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.navigation.links.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "navigation-5"
-            },
-            "url"
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.04.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            3,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "sources.published-sources.entries.01.accessed_at": {
         "ref": {
@@ -23076,7 +23042,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "FT349 fictional tag record item: product Y, batch GX349, with the item's closed length interval 950—1050m; F1 batch GX349, length 1000m, continuity not recorded; F2 batch GX349, length 1060m, continuity as written 'no broken filament record'; F3 batch GX349, length missing, continuity as written 'broken filament observed'. Only verify the item's length, transcribe the original text, and preserve the unknowns; do not judge real product conformity or equipment condition."
+              "Use the three FT349 paper tags to check length, copy continuity entries, flag open items and record the single variant change."
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.quick-decision.fit-decision-checklist.2",
@@ -26630,12 +26596,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other cities"
+              "Shangyou County fiber-line job postings"
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "internal-rubric"
+            "a45-yanhu",
+            "a45-yuanyuan"
           ],
           "type": "prose"
         },
@@ -26644,12 +26611,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no monthly salary statistic for this occupation in other cities was obtained; region, position, period, and pay must be checked separately."
+              "Shangyou Yanhu Fiberglass listed three fiber drawing jobs at CNY 6,000–9,000 per month. It listed line inspection and quality inspection separately and did not give details on the drawing equipment or pay components. Yuanyuan New Materials listed eight combined openings for shift bushing work and filament threading, at CNY 6,000–8,000 per month, with high school education or above. Winding and twisting were listed separately. These quotes cover different employers in Shangyou County. Ask each employer about the equipment, division of work and current openings."
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "internal-rubric"
+            "a45-yanhu",
+            "a45-yuanyuan"
           ],
           "type": "prose"
         },
@@ -27411,13 +27379,13 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
@@ -28360,7 +28328,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use the four FT349 works to verify F1 unknown continuity, F2 out-of-range length, F3 missing length, and the single 980m update on the fifth day; do not infer on-site capability or transition qualifications from paper."
+              "Use the three FT349 paper tags to check length, copy continuity entries, flag open items and record the single variant change."
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.fit.personality-fit-block.55",
@@ -28405,7 +28373,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "FT349: the item's closed interval is 950—1050m, F1=1000m with continuity unknown, F2=1060m with 'no broken filament record' transcribed, and F3 length missing with 'broken filament observed' transcribed; verify documents only, and on the fifth day only F3=980m is added, keeping the other unknowns and original text."
+              "Use the three FT349 paper tags to check length, copy continuity entries, flag open items and record the single variant change."
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.fit.personality-fit-block.58",
@@ -29185,24 +29153,23 @@
                   "Missing items cannot be filled with zero, and original text cannot be changed into a quality conclusion",
                   "The entire item is authorial fiction and does not represent an institutional standard",
                   "Checkable output: three-row length and continuity verification and the unsent letter",
-                  "The item gives no material formula, temperature, flow, denier, strength, or equipment authority, and none may be added"
+                  "Single-change variant: add 980 m as record F3’s length. Leave the other records unchanged."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
                   "Material Two: tasks",
-                  "Compare length ranges tag by tag, transcribe continuity or record it as unknown; organize F1 unknown, F2 out of range, and F3 missing as pending verification",
+                  "Compare each length with the range, copy the continuity entry or mark it unknown, then record what needs review and why.",
                   "Document verification only; no measurement, machine operation, release, or shutdown decision"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Material Three: independent review answer",
-                  "Initial answer: F1 length in range with continuity unknown; F2 length above the upper bound with 'no broken filament record' transcribed; F3 length unknown with 'broken filament observed' transcribed. On the fifth day only F3 length 980m is added and its length changes to in range; F1 unknown continuity, the F2 out-of-range item, and the F3 broken filament original text all remain unchanged.",
-                  "The unsent letter lists F1 continuity unknown, F2 out of range, and F3 length missing, and asks the responsible person to verify the original tags and specification version; no responsible person name or reply is given, and none is fabricated",
-                  "On the fifth day only the item's given F3 length of 980m is accepted, and no other items are filled in"
+                  "Finish independently",
+                  "Submit the original and variant on day six, including the unsent note.",
+                  "On day seven, open “FT349 fiber-tag record reference (open after day six)” under Frequently asked questions and sources."
                 ]
               },
               {
@@ -29230,7 +29197,7 @@
                 "id": "requirements-matrix",
                 "values": [
                   "Work One: input source table",
-                  "List the FT349 product, batch, m units, closed interval, and the three original records; record 'none' if no recruitment sample was obtained",
+                  "Keep the FT349 range separate from the requirements in the job postings.",
                   "Mark the fictional sources and unknowns; this is not real work material"
                 ]
               },
@@ -29238,7 +29205,7 @@
                 "id": "independent-recheck",
                 "values": [
                   "Work Two: three-row verification table",
-                  "Write line by line whether the length is in range, out of range, or unknown, and the continuity original text or unknown",
+                  "Record length, evidence and continuity for each row.",
                   "Review independently against Material Three and do not equate 'no broken filament record' with conformity"
                 ]
               },
@@ -29246,8 +29213,8 @@
                 "id": "report-summary",
                 "values": [
                   "Work Three: draft verification letter and update",
-                  "Write F1 unknown, F2 out of range, and F3 missing, marking that it is unsent and no responsible person was given; on the fifth day only F3 length 980m is updated",
-                  "Without a reply, do not fabricate closure; the F1 unknown and F2 out-of-range items remain"
+                  "Keep the original record and show the changed row in the variant.",
+                  "Include the unsent note and identify open items."
                 ]
               },
               {
@@ -29326,50 +29293,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: read the input",
-                  "Organize product Y, GX349, m units, and the closed interval 950—1050, and transcribe the three tags"
+                  "Day 1",
+                  "Copy the batch, unit and range."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: verify lengths",
-                  "F1 in range, F2 above the upper bound, F3 unknown; write the basis for the comparison"
+                  "Day 2",
+                  "Compare each length and record the evidence."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: verify continuity",
-                  "F1 unknown, F2 transcribed as no broken filament record, F3 transcribed as broken filament observed; do not infer quality conformity"
+                  "Day 3",
+                  "Copy the continuity entries and mark blanks."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: write the verification letter",
-                  "Write the three pending verification items and the specification version verification request; mark it unsent, with no responsible person given and no reply"
+                  "Day 4",
+                  "List open items and draft the unsent note."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: the single new input",
-                  "The item adds only F3 length 980m, which is in range; the other original text and pending items are unchanged"
+                  "Day 5",
+                  "Compare the F3 update with the original."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: independent review",
-                  "Check the four works against Material Three; outside feedback is optional, and record 'none' if none was obtained"
+                  "Day 6",
+                  "Submit the three original rows and a separate row for the changed record in the variant. Include the unsent note."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: reflection",
-                  "Record whether you are willing to keep verifying documents, making modifications, and preserving remaining unknowns; this is not an equipment capability or occupational suitability conclusion"
+                  "Day 7",
+                  "On day seven, open “FT349 fiber-tag record reference (open after day six)” under Frequently asked questions and sources. Record one correction."
                 ]
               }
             ]
@@ -29386,13 +29353,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Day 1: are the input values, units, batches, and boundaries complete",
-              "Day 2: are in-range, out-of-range, and unknown distinguished",
-              "Day 3: is continuity transcribed without changing it into a quality conclusion",
-              "Day 4: does the verification letter clearly state that it is unsent, with no responsible person name and no reply",
-              "Day 5: is only the F3 length of 980m updated, keeping the other records",
-              "Day 6: are the four works independently reviewed, with truthful tool and feedback notes",
-              "Day 7: are unknowns preserved, without inferring on-site capability from the document item"
+              "State the unit and range.",
+              "Give evidence for each row.",
+              "Copy continuity or mark it unknown.",
+              "Include the unsent note.",
+              "Show the variant change separately.",
+              "Keep your independent work.",
+              "Compare with the reference and record a correction."
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.path.seven-day-decision.1",
@@ -29514,14 +29481,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "No representative current recruitment sample was obtained this round; the following are editorial verification prompts. Verify the target position's materials and products, equipment, and quality and safety duties, and record the posting date and whether it is still open.",
-              "The education, training, and experience conditions in a job posting must be read together; one item being relaxed does not mean other conditions can be substituted."
+              "Shangyou Yanhu Fiberglass listed three fiber drawing jobs at CNY 6,000–9,000 per month. It listed line inspection and quality inspection separately and did not give details on the drawing equipment or pay components. Yuanyuan New Materials listed eight combined openings for shift bushing work and filament threading, at CNY 6,000–8,000 per month, with high school education or above. Winding and twisting were listed separately. These quotes cover different employers in Shangyou County. Ask each employer about the equipment, division of work and current openings."
             ]
           },
           "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.path.recruitment-sample.1",
           "source_refs": [
-            "onet-summary",
-            "internal-rubric"
+            "a45-yanhu",
+            "a45-yuanyuan"
           ],
           "title": "Extruding and forming machine setters, operators, and tenders, synthetic and glass fibers｜path",
           "type": "notice"
@@ -31562,13 +31528,13 @@
                 ]
               },
               {
-                "answer": "2025 pre-tax average annual wage of urban manufacturing employees in China: non-private 113,594 yuan/year, private 76,055 yuan/year. Filament equipment operation is a manufacturing production task, so manufacturing is used as the broad industry background; it covers multiple occupations and is not this occupation's median, starting wage, take-home pay, or a city quote. Insufficient evidence: no precise Chinese single-occupation national or city wage was obtained.",
+                "answer": "Shangyou Yanhu Fiberglass listed three fiber drawing jobs at CNY 6,000–9,000 per month. It listed line inspection and quality inspection separately and did not give details on the drawing equipment or pay components. Yuanyuan New Materials listed eight combined openings for shift bushing work and filament threading, at CNY 6,000–8,000 per month, with high school education or above. Winding and twisting were listed separately. These quotes cover different employers in Shangyou County. Ask each employer about the equipment, division of work and current openings. Comparable national occupation-level wage data remain unavailable.",
                 "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.faq.3",
                 "question": "Can wages in mainland China be found?",
                 "question_key": "career.faq.extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.q3",
                 "source_refs": [
-                  "nbs-wages-2025",
-                  "internal-rubric"
+                  "a45-yanhu",
+                  "a45-yuanyuan"
                 ]
               },
               {
@@ -31632,14 +31598,19 @@
                 ]
               },
               {
-                "answer": "BLS exact SOC51-6091: 13,500 employed in 2025, a 2035 projection of 13,000, growth of -3.3% over 2025—2035, an official net change of -400, and an annual average of 1,100 job openings; the thousands columns are rounded separately, and the official change cannot be recomputed from the two endpoints. Openings include growth and replacements, are not a ten-year total or net additions.\nAn overall employment projection, not AI attribution. For a transition, first compare the target main tasks, training, and authority; with no representative recruitment sample, individual transition feasibility is not promised.",
+                "answer": "BLS Table 1.2 projects U.S. employment in occupation 51-6091 to decline from about 13,500 in 2025 to 13,000 in 2035, down 3.3%, with about 1,100 openings per year on average, including replacements. Employment totals are rounded separately.",
                 "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.faq.10",
                 "question": "What is the US employment outlook? What needs to be added for a career change?",
                 "question_key": "career.faq.extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.outlook-transition",
                 "source_refs": [
-                  "bls-projections-2025-35",
-                  "internal-rubric"
+                  "bls-projections-2025-35"
                 ]
+              },
+              {
+                "answer": "F1 is 1,000 m, within the 950–1,050 m range. Continuity was not recorded. F2 is 1,060 m, exceeding the 1,050 m limit. Copy its wording, “no broken filament record.” F3’s length is unknown in the original. Copy its wording, “broken filament observed.” In the variant, F3 is recorded at 980 m, which is in range. All other entries stay as given. Sample unsent note: Please check F1’s continuity record, F2’s original tag and specification version, and the source of the F3 update. Confirm who will follow up. These checks do not authorize actual release. Check four items: length and units, the recorded continuity, the variant change, and the unsent note and release boundary.",
+                "id": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.faq.11",
+                "question": "FT349 fiber-tag record reference (open after day six)",
+                "question_key": "career.faq.extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.11"
               }
             ]
           },
@@ -31731,28 +31702,16 @@
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "MBTI (English)",
+                "entity": "MBTI personality test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "Big Five (English)",
+                "entity": "Big Five personality test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
-              },
-              {
-                "entity": "MBTI (Chinese)",
-                "id": "navigation-4",
-                "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
-              },
-              {
-                "entity": "Big Five (Chinese)",
-                "id": "navigation-5",
-                "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the extruding and forming machine setters, operators, and tenders, synthetic and glass fibers career page",
@@ -31781,26 +31740,26 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "The US O*NET51-6091.00 covers setting up, operating, or tending machines that extrude synthetic materials such as liquid polymers, rayon, or glass fiber into continuous filaments. Tasks include controlling equipment and feeding speed, observing control panels and gauges, identifying blockages or coating device abnormalities, recording faults and job tags, notifying relevant personnel, and cleaning and maintaining. The task set does not mean every position is responsible for all operations.",
-                  "RC; 2024 employment 15,200, 2024—2034 decline (-1% or lower), and an annual average of 2,000 openings; 98% manufacturing is an old-period US background, and the current projection uses an independent BLS source."
+                  "The US O*NET51-6091.00 covers setting up, operating, or tending machines that extrude synthetic materials such as liquid polymers, rayon, or glass fiber into continuous filaments. Tasks include controlling equipment and feeding speed, observing control panels and gauges, identifying blockages or coating device abnormalities, recording faults and job tags, notifying relevant personnel, and cleaning and maintaining. The task set does not mean every position is responsible for all operations."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
                 "limitation": "US occupational materials do not automatically yield equipment, safety, or employer requirements for mainland China, and they do not constitute safe operating or quality judgment conclusions.",
                 "market": "United States",
                 "name": "O*NET OnLine：Extruding and Forming Machine Setters, Operators, and Tenders, Synthetic and Glass Fibers（51-6091.00）",
-                "period": "2026 profile; 2024 old employment / 2024—2034 old projections; accessed 2026-10-03",
+                "period": "2026 occupational profile",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-6091.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
                   "The US O*NET51-6091.00 covers setting up, operating, or tending machines that extrude synthetic materials such as liquid polymers, rayon, or glass fiber into continuous filaments. Tasks include controlling equipment and feeding speed, observing control panels and gauges, identifying blockages or coating device abnormalities, recording faults and job tags, notifying relevant personnel, and cleaning and maintaining. The task set does not mean every position is responsible for all operations.",
                   "US context: 100% routine protective equipment daily, 95% face-to-face daily, 75% noise daily, 72% contaminants daily, 70% indoors in a controlled environment daily, 54% heat or cold daily, and 58% with a work week over 40 hours; not an accident rate.",
                   "The typical US BLS entry is a high school diploma or equivalent, no related work experience required, and medium-term on-the-job training; the O*NET education survey shows 74% answered high school or equivalent, 19% less than high school, and 6% post-high-school certificate, and the rounded total of 99% leaves no remainder to fill in. Job Zone1—2 is a general preparation group, not an occupation-specific training period.",
-                  "The technology directory includes Camstar MES/SPC, SAP, and Office, among others; programming is not required in all positions."
+                  "The technology directory includes Camstar MES/SPC, SAP, and Office, among others; programming is not required in all positions.",
+                  "The 2025 U.S. wage medians were $22.29 hourly and $46,350 annually. Manufacturing was listed as a leading industry. See BLS Table 1.2 for the projection."
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
@@ -31815,8 +31774,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "BLS exact SOC51-6091: 13,500 employed in 2025, a 2035 projection of 13,000, growth of -3.3% over 2025—2035, an official net change of -400, and an annual average of 1,100 job openings; the thousands columns are rounded separately, and the official change cannot be recomputed from the two endpoints. Openings include growth and replacements, are not a ten-year total or net additions.",
-                  "An overall employment projection, not AI attribution; typical education is a high school diploma or equivalent, related experience None, and medium-term on-the-job training."
+                  "BLS Table 1.2 projects U.S. employment in occupation 51-6091 to decline from about 13,500 in 2025 to 13,000 in 2035, down 3.3%, with about 1,100 openings per year on average, including replacements. Employment totals are rounded separately."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-projections-2025-35",
@@ -32057,6 +32015,36 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Shangyou Yanhu Fiberglass listed three fiber drawing jobs at CNY 6,000–9,000 per month. It listed line inspection and quality inspection separately and did not give details on the drawing equipment or pay components."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a45-yanhu",
+                "limitation": "One employer’s quote. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Fiber-line job posting",
+                "period": "2026-09-01",
+                "publisher": "Shangyou County Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shangyou.gov.cn/syxxxgk/c103978/202609/a525dd14aa524fd3953982dd97b7f62a.shtml"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Yuanyuan New Materials listed eight combined openings for shift bushing work and filament threading, at CNY 6,000–8,000 per month, with high school education or above. Winding and twisting were listed separately."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "a45-yuanyuan",
+                "limitation": "One employer’s quote. Current vacancy status unverified.",
+                "market": "Mainland China",
+                "name": "Fiber-line job posting",
+                "period": "2026-02-13",
+                "publisher": "Shangyou County Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shangyou.gov.cn/syxrmzfw/c124549re/202602/7cf03cd1dfc042768965f22a966ef5fa.shtml"
               }
             ]
           },
@@ -34917,6 +34905,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-a45-yanhu",
+            "posting-a45-yuanyuan"
+          ],
           "sources_note": {
             "$item": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.china-salary.career-snapshot-primary-locale.57",
             "block": "china-salary",
@@ -36828,7 +36820,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI personality test"
           },
           {
             "href": {
@@ -36838,27 +36830,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
-          },
-          {
-            "href": {
-              "$link": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-4",
-              "field": "url"
-            },
-            "label": "MBTI (Chinese)"
-          },
-          {
-            "href": {
-              "$link": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers.navigation.links.1",
-              "block": "navigation",
-              "copy_key": "career.item.navigation-links",
-              "entry": "navigation-5",
-              "field": "url"
-            },
-            "label": "Big Five (Chinese)"
+            "label": "Big Five personality test"
           }
         ]
       },
@@ -37246,6 +37218,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Shangyou Yanhu Fiberglass listed three fiber drawing jobs at CNY 6,000–9,000 per month. It listed line inspection and quality inspection separately and did not give details on the drawing equipment or pay components.",
+        "fact_id": "posting-a45-yanhu",
+        "market": "Mainland China",
+        "measure": "Advertised pay",
+        "occupation_scope": "Fiber-line job posting",
+        "period": "2026-09-01",
+        "source_refs": [
+          "a45-yanhu"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Yuanyuan New Materials listed eight combined openings for shift bushing work and filament threading, at CNY 6,000–8,000 per month, with high school education or above. Winding and twisting were listed separately.",
+        "fact_id": "posting-a45-yuanyuan",
+        "market": "Mainland China",
+        "measure": "Advertised pay",
+        "occupation_scope": "Fiber-line job posting",
+        "period": "2026-02-13",
+        "source_refs": [
+          "a45-yuanyuan"
+        ]
       }
     ]
   },
@@ -37305,7 +37301,7 @@
       "text": "Extruding and Forming Machine Setters, Operators, and Tenders, Synthetic and Glass Fibers"
     }
   },
-  "source_content_sha256": "a69f94384dfcdb67c72aa3ef84d1d3933fdb405bf4523d147246bab9b9f81a5a",
+  "source_content_sha256": "7419651b7c1754b959b174b1f4ab179bb7b3b1cbff4c5960cfc0d24a185c1be5",
   "subject": {
     "canonical_slug": "extruding-and-forming-machine-setters-operators-and-tenders-synthetic-and-glass-fibers",
     "name": "Extruding and Forming Machine Setters, Operators, and Tenders, Synthetic and Glass Fibers",

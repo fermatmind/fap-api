@@ -1430,6 +1430,9 @@
       "item:continuous-mining-machine-operators.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:continuous-mining-machine-operators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:continuous-mining-machine-operators.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -29755,6 +29758,21 @@
           "id": "continuous-mining-machine-operators.path.recruitment-sample.1",
           "title": "Notes on using recruitment samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The working face matches the record, but ventilation confirmation is blank and the ground-support note cites another shift. List the original records to verify with the authorized shift lead."
+            ]
+          },
+          "id": "continuous-mining-machine-operators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check a continuous-miner shift handover",
+          "type": "notice"
         }
       ]
     },
@@ -36063,6 +36081,13 @@
         "id": "continuous-mining-machine-operators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "continuous-mining-machine-operators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -36476,7 +36501,7 @@
       "text": "Continuous mining machine operator"
     }
   },
-  "source_content_sha256": "ff23d936b74e09fb70e5c0ce993df50baade039669c7b6c8da93af37fac3f011",
+  "source_content_sha256": "ac0c13b075a5b2d552f5996ad473e07d3b1c779b41f430c881aa6808c9652fce",
   "subject": {
     "canonical_slug": "continuous-mining-machine-operators",
     "name": "Continuous mining machine operator",

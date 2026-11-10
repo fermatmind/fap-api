@@ -23375,14 +23375,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "下一步核目标地区施药资格、雇主带教、产品标签阅读与客户告知流程，再完成虚构工单，不在纸面练习中给出农药用量或操作处方。"
+              "纸面体验｜在虚构平面图和巡查表上比对诱捕点编号，保留原始编号并标出需请现场负责人确认的一个位置。 "
             ]
           },
           "id": "pest-control-workers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "privacy",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23677,13 +23675,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET美国职业分类不等于中国有害生物防制资格；真实农药使用按当地规则和产品标签执行。"
+              "虫害防治人员检查场所、寻找虫害活动迹象，按现场安排处理并记录位置和结果。复访人员要能凭记录找到同一检查点。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "pest-control-workers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "privacy"
+            "transfer-onet-37-2021.00"
           ],
           "type": "prose"
         },
@@ -24783,16 +24780,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未核得本职实际生成式AI采用、整体替代率、替代年份或可靠节时、识别错误、暴露安全、服务与报酬效果。获准资料归档、路线及复查草稿仅编辑试用；虫种、标签、资格、现场人员环境和告知仍由有权人员核。总体5.5%、净6.0千与年13.7千含替补空缺非AI作用个人失业中国需求。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+0)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：在虚构平面图和巡查表上比对诱捕点编号，保留原始编号并标出需请现场负责人确认的一个位置。"
             ]
           },
           "id": "pest-control-workers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ilo",
-            "nist",
-            "ep",
-            "editor"
+            "transfer-onet-37-2021.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33049,6 +33043,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-37-2021.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 37-2021.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/37-2021.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38299,10 +38320,10 @@
       "text": "虫害防治人员"
     }
   },
-  "source_content_sha256": "b418f2e7d132231a324c221465ae3a7b48fe109ba1add5a5f563ca3dd65fdf57",
+  "source_content_sha256": "6cb1c136419c829e8fca9926ab2202a063a7ca8d307ab7ab730e897d07cc0080",
   "subject": {
     "canonical_slug": "pest-control-workers",
     "name": "虫害防治人员",
-    "summary": "虫害防治人员（O*NET 37-2021.00）调查建筑及周边的虫害迹象，识别问题、记录现场和客户信息，制定并执行获准的防治方案，完成清理、复查与沟通。涉及农药时必须按产品标签、适用地区资格、组织训练和安全要求工作；本页不提供配药或施用步骤。"
+    "summary": "虫害防治人员检查场所、寻找虫害活动迹象，按现场安排处理并记录位置和结果。复访人员要能凭记录找到同一检查点。"
   }
 }

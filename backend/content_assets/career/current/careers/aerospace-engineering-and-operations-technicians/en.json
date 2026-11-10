@@ -32,9 +32,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1548,7 +1545,7 @@
         "status": "pending_mapping"
       },
       "item:aerospace-engineering-and-operations-technicians.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:aerospace-engineering-and-operations-technicians.sources.source-card.1": {
         "status": "mapped"
@@ -23341,12 +23338,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "A stronger signal is: you are willing to prepare equipment hands-on, can verify items one by one against procedures, keep records accurate under time pressure and safety requirements, and can stop to verify the measurement chain when data look anomalous before deciding. A single mock measurement-chain and data-collection exercise with a debrief record can test this: whether constraints were clarified, whether the configuration is reproducible, and whether anomalies were closed out."
+              "Find “ATX-18 | Which test record is ready to hand over?” in “Entry, qualifications and career development”. Complete the main case and variant before reading the reference."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23355,14 +23352,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "If you dislike repetitive wiring and record checking, find strict safety and procedural requirements hard to accept, tend to miss items during long repetitive operations, or are unwilling to stop and escalate when uncertain, this kind of work may steadily drain you; job design varies considerably across settings (aerospace manufacturing, research institutes, maintenance and test units), so first test your performance and tolerance with one complete controlled-test preparation exercise."
+              "Explore test support if you like reconciling instrument and certificate IDs, preserving records and flagging discrepancies."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.quick-decision.fit-decision-checklist.3",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23371,13 +23367,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Assessments and exercises serve only as a reference for self-exploration, and cannot predict hiring, competence or future performance."
+              "Try the 90-minute ATX-18 paper review and produce a one-page handover with three statuses, original record IDs, evidence gaps and a recipient. No equipment, parameter changes or release of results."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23386,12 +23381,11 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The core of aerospace engineering and operations technician work is not the vague notion of 'knowing equipment', but preparing controlled tests to specification, verifying the measurement chain and the data, recording anomalies, and making a reviewable judgement about test status. Fit depends more on observable task behaviour: whether you are willing to work hands-on, whether you can verify items against procedures, and whether you can keep records accurate under safety and time pressure."
+              "Aerospace engineering and operations technologists and technicians turn a test plan into traceable instruments, equipment checks and original records. Test support, measurement and assembly quality have different outputs. When a certificate or version does not match, keep the original record and refer the decision to authorized staff."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23458,7 +23452,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Section title｜The working environment and ways of working of aerospace engineering and operations technicians\nDirect answer｜Aerospace engineering and operations technicians work in manufacturing plants, laboratories and offices, installing and maintaining test equipment, running tests and recording data. The work consists mainly of high-frequency communication, precise record keeping and equipment operation, is mostly full-time, and may involve wearing protective equipment while working in controlled environments.\nCommon organisations and locations｜They are mainly employed by aerospace manufacturers, space and defence contractors, research institutes and maintenance units; workplaces include laboratories, test stands and production sites.\nWork materials and systems｜Common materials include test directives, specification documents, calibration records, acquisition configurations and data files; frequently used tools include CAD, data acquisition and analysis software, gauges and test instruments.\nHow the work is organised｜The work proceeds through 'equipment preparation—wiring and calibration—acquisition configuration—running the test—recording anomalies—retest and issuing records', with checks against test milestones and safety requirements.\nDeadlines and work intensity｜Intensity centres on test windows, programme milestones and rework: O*NET work context shows that 95% of workers in this occupation work more than 40 hours per week, 96% work in a controlled indoor environment every day, and 55% face time pressure every day.\nCollaboration and reporting lines｜They usually collaborate with engineers, quality and safety roles, and production and maintenance teams; test release and configuration changes are approved by authorised personnel.\nReview and chain of responsibility｜Test records must be reviewed and signed, and anomalies escalated through the procedure; configuration changes and maintenance sign-off are executed and recorded according to organisational authority.\nQuality and job requirements｜Quality depends on whether the measurement chain is traceable, whether the data are complete and consistent, whether anomalies are closed out, and whether records and authorisations are documented."
+              "Section title｜The working environment and ways of working of aerospace engineering and operations technicians\nDirect answer｜Aerospace engineering and operations technicians work in manufacturing plants, laboratories and offices, installing and maintaining test equipment, running tests and recording data. The work consists mainly of high-frequency communication, precise record keeping and equipment operation, is mostly full-time, and may involve wearing protective equipment while working in controlled environments.\nCommon organisations and locations｜They are mainly employed by aerospace manufacturers, space and defence contractors, research institutes and maintenance units; workplaces include laboratories, test stands and production sites.\nWork materials and systems｜Common materials include test directives, specification documents, calibration records, acquisition configurations and data files; frequently used tools include CAD, data acquisition and analysis software, gauges and test instruments.\nHow the work is organised｜The work proceeds through 'equipment preparation—wiring and calibration—acquisition configuration—running the test—recording anomalies—retest and issuing records', with checks against test milestones and safety requirements.\nDeadlines and work intensity｜Intensity centres on test windows, programme milestones and rework: O*NET work context shows that 95% of respondents work more than 40 hours per week, 96% work in a controlled indoor environment every day, and 55% face time pressure every day.\nCollaboration and reporting lines｜They usually collaborate with engineers, quality and safety roles, and production and maintenance teams; test release and configuration changes are approved by authorised personnel.\nReview and chain of responsibility｜Test records must be reviewed and signed, and anomalies escalated through the procedure; configuration changes and maintenance sign-off are executed and recorded according to organisational authority.\nQuality and job requirements｜Quality depends on whether the measurement chain is traceable, whether the data are complete and consistent, whether anomalies are closed out, and whether records and authorisations are documented."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.profile.work-context-block.1",
@@ -24578,10 +24572,10 @@
                 "url": "https://www.onetonline.org/link/details/17-3021.00"
               },
               {
-                "entity": "U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians",
+                "entity": "BLS Employment Projections Table 1.2",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET national wage percentiles",
@@ -24590,10 +24584,10 @@
                 "url": "https://www.onetonline.org/link/localwages/17-3021.00"
               },
               {
-                "entity": "U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians",
+                "entity": "BLS Employment Projections Table 1.2",
                 "id": "link-13",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 17-3021.00 technology list",
@@ -24608,10 +24602,10 @@
                 "url": "https://www.onetonline.org/link/details/17-3021.00"
               },
               {
-                "entity": "U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians",
+                "entity": "BLS Employment Projections Table 1.2",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 17-3021.00 detailed tasks and work activities",
@@ -24763,13 +24757,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This occupation's tasks include configuring, installing and calibrating instruments, running tests, diagnosing faults, and recording and interpreting data. This page suggests exploring tool assistance for organising, script drafting and record comparison on fictional data; no AI adoption rate, time saved or job-displacement ratio for this occupation was obtained. O*NET's accuracy and protective-equipment context does not constitute a measurement of AI effect; safety boundaries, approval and signing must be verified against the organisation's authority. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Tools can compare fictional equipment IDs, certificate fields and worksheet versions. Check the originals, record gaps and retain discrepancies. A tool cannot invent a certificate, overwrite raw data or approve a result. There is no measured displacement rate here."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ep",
-            "bls"
+            "editor",
+            "onet"
           ],
           "type": "prose"
         },
@@ -25240,7 +25234,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "96% consider precision or accuracy extremely important, 95% work more than 40 hours per week, and 96% work in a controlled indoor environment every day; 86% use email every day, 74% use the telephone every day, 72% take part in face-to-face discussions every day, 55% face time pressure every day, 69% wear protective or safety equipment every day, and 36% consider the consequences of error very serious. These percentages describe the work context; they are not a skill threshold and cannot be used to infer an automation rate."
+              "In the O*NET work-context survey on errors that are hard to correct, 36% of respondents chose “very serious” and 30% chose “extremely serious.” These are context responses, not skill thresholds or automation rates."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.52",
@@ -25268,12 +25262,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians"
+              "BLS Employment Projections Table 1.2"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25296,12 +25290,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS: employment of 11,600 in 2025, projected to grow 12% over 2025—2035, an official net increase of 1,400 people, with about 1,100 openings per year on average. Employment size, net change and average annual openings are different indicators; this projection cannot be attributed to generative AI, nor can it be used to infer an individual's hiring chances."
+              "BLS: employment of 11,600 in 2025, projected to grow 11.9% over 2025—2035, an official net increase of 1,400 people, with about 1,100 openings per year on average. Employment size, net change and average annual openings are different indicators; this projection cannot be attributed to generative AI, nor can it be used to infer an individual's hiring chances."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25338,7 +25332,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. national wage percentiles for this occupation in 2025, month 5 (May)."
+              "U.S. national wage percentiles for this occupation in May 2025."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.59",
@@ -25352,7 +25346,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "United States, 2025, month 5 (May): annual wage 10th percentile $59,050, median $82,890, 90th percentile $125,160, corresponding to hourly rates of $28.39, $39.85 and $60.18. The national distribution does not provide a newcomer's starting wage, itemised project allowances or an individual's take-home quote."
+              "United States, May 2025: annual wage 10th percentile $59,050, median $82,890, 90th percentile $125,160, corresponding to hourly rates of $28.39, $39.85 and $60.18. The national distribution does not provide a newcomer's starting wage, itemised project allowances or an individual's take-home quote."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.60",
@@ -25394,7 +25388,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS projects that U.S. employment for this occupation will grow 12% over 2025—2035; the projection does not break the result down into a net generative AI effect. A tool being able to handle a task is not enough to conclude that positions will shrink or to give a year of disappearance."
+              "The U.S. employment projection is 11.9% and does not isolate generative AI. A tool helping with one task does not establish job loss."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.63",
@@ -25408,12 +25402,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no AI adoption rate, time saved, displacement ratio or timing forecast for this occupation was obtained. The BLS 2025—2035 employment projection is growth of 12%, and is not an AI attribution study; the tool trial suggestions on this page also do not prove that efficiency has been improved or positions reduced."
+              "Insufficient evidence: no AI adoption rate, time saved, displacement ratio or timing forecast for this occupation was obtained. The BLS 2025—2035 employment projection is growth of 11.9%, and is not an AI attribution study; the tool trial suggestions on this page also do not prove that efficiency has been improved or positions reduced."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25422,12 +25416,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians"
+              "BLS Employment Projections Table 1.2"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25492,12 +25486,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Current BLS projections have U.S. employment for this occupation growing 12% over 2025—2035, an official net increase of 1,400 people, with about 1,100 openings per year on average. The projected direction to 2035 is growth, but this is not a guarantee and cannot be used to derive the number of positions in a specific organisation or programme."
+              "Current BLS projections have U.S. employment for this occupation growing 11.9% over 2025—2035, an official net increase of 1,400 people, with about 1,100 openings per year on average. The projected direction to 2035 is growth, but this is not a guarantee and cannot be used to derive the number of positions in a specific organisation or programme."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25506,12 +25500,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians"
+              "BLS Employment Projections Table 1.2"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26511,13 +26505,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "An editorial exploration direction, not supported by a recruitment sample for this education level: positions focused on installation, calibration and data recording, such as avionics assembly and test assistant, test-stand operation support, and equipment maintenance technician. The specific position's education requirement, duties and authority must be verified; positions cannot be assigned directly by education level."
+              "Compare assembly, equipment maintenance and test support. Check each employer’s requirements."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "nbs",
-            "ep"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26526,12 +26519,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no sample of mainland China job-posting quotes was obtained for this education level."
+              "The GalaxySpace example accepts associate-level education and omits a pay period."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "nbs"
+            "galaxy",
+            "npu"
           ],
           "type": "prose"
         },
@@ -26555,13 +26549,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "An editorial exploration direction, not supported by a recruitment sample for this education level: positions such as aerospace test technician, avionics test technician and instrument and calibration technician that require independently operating test equipment and recording data. The specific position's education requirement, duties and authority must be verified; positions cannot be assigned directly by education level."
+              "Start with the GalaxySpace posting’s equipment checks, monitoring shifts and original records."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "nbs",
-            "ep"
+            "galaxy"
           ],
           "type": "prose"
         },
@@ -26570,12 +26563,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no sample of mainland China job-posting quotes was obtained for this education level."
+              "The NPU example accepts a related bachelor’s degree or above, without stating pay."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "nbs"
+            "galaxy",
+            "npu"
           ],
           "type": "prose"
         },
@@ -26599,13 +26593,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "An editorial exploration direction, not supported by a recruitment sample for this education level: positions such as test-stand engineer, flight-test instrumentation technician, and system test and verification roles. The specific position's education requirement, duties and authority must be verified; positions cannot be assigned directly by education level."
+              "Compare equipment, verification and records in the NPU laboratory posting."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "nbs",
-            "ep"
+            "npu"
           ],
           "type": "prose"
         },
@@ -26614,12 +26607,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no sample of mainland China job-posting quotes was obtained for this education level."
+              "These examples do not determine pay for other education levels."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "nbs"
+            "galaxy",
+            "npu"
           ],
           "type": "prose"
         },
@@ -26643,13 +26637,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "An editorial exploration direction, not supported by a recruitment sample for this education level: positions such as test plan and test system design, programme verification and technical management. The specific position's education requirement, duties and authority must be verified; positions cannot be assigned directly by education level."
+              "If considering further study, check actual project tasks, equipment and authority."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "nbs",
-            "ep"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26658,12 +26651,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no verifiable mainland China job-posting quote sample for this education level, so no pay is provided for it."
+              "Check duties, equipment training and employer authorization."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "nbs"
+            "galaxy",
+            "npu"
           ],
           "type": "prose"
         },
@@ -26784,12 +26778,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no sample of public job postings was obtained"
+              "Two postings; pay period or amount incomplete"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs"
+            "galaxy",
+            "npu"
           ],
           "type": "prose"
         },
@@ -26798,12 +26793,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No verifiable sample of public mainland China job postings was obtained, so this page does not display specific position or project quotes, and retains only the official statistical basis and qualification rules."
+              "In September 2026, GalaxySpace posted six test technician positions in Anhui through Hebei University of Technology. The posting lists an associate-level minimum, spacecraft testing, equipment operation and maintenance, monitoring shifts and test records. Both pay fields list CNY 10,000 or above without a pay period. This is one posting. In March 2026, Northwestern Polytechnical University advertised one aerospace structural integrity lab technician at its Youyi campus in Xi’an, with a relevant bachelor’s degree or higher. The non-establishment hire covers equipment coordination, routine verification, records and fatigue-machine training. No pay amount was stated and the application deadline has passed."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "nbs"
+            "galaxy",
+            "npu"
           ],
           "type": "prose"
         },
@@ -26826,7 +26822,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "For China, only the broad basis of the National Bureau of Statistics 2025 annual average wage by industry sector is used; it is a gross wage total before tax, excludes self-employed individuals and freelancers, and cannot be treated as an individual quote for this occupation."
+              "In 2025, NBS reported average annual pay in urban non-private units of CNY 113,594 in manufacturing and CNY 182,064 in scientific research and technical services. These industry figures do not establish this role’s starting pay or pay distribution."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.48",
@@ -26854,12 +26850,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no monthly pay statistics or verifiable public job-posting sample was obtained for aerospace engineering and operations technicians in mainland China's first-tier cities. The National Bureau of Statistics industry-sector annual average wage is limited to employed persons in urban non-private legal entities within the survey scope and does not separately show this occupation, city or qualification distribution, so it cannot be converted into a monthly pay reference for this position, and this page also does not substitute adjacent-occupation data. If verifiable official or job-posting material becomes available later, it should be added to the same occupation file and this marker removed."
+              "The Anhui example gives a figure without a pay period; Xi’an gives no figure. Neither establishes city-level monthly pay."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "nbs"
+            "galaxy"
           ],
           "type": "prose"
         },
@@ -26882,7 +26878,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no monthly pay data was obtained for aerospace engineering and operations technicians in mainland China's second-tier and provincial-capital cities. Official industry-sector annual average wages do not distinguish city tier, job duties or qualification level, cannot be converted into a monthly pay reference, and do not mean that this position is necessarily recruited at that city tier; this page makes no inference."
+              "There are no comparable nationwide city-level wages here. Industry averages cannot be converted to an individual monthly wage."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.52",
@@ -26938,7 +26934,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics, 'Average Annual Wages of Employed Persons in Urban Units in 2025'｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              "NBS 2025 Urban Unit Wages｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.57",
@@ -26988,7 +26984,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians｜https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm ; O*NET OnLine 17-3021.00 national wage percentiles (BLS OEWS 2025, month 5 (May))｜https://www.onetonline.org/link/localwages/17-3021.00 ; O*NET OnLine 17-3021.00 occupation summary｜https://www.onetonline.org/link/summary/17-3021.00"
+              "U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians｜https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm ; O*NET OnLine 17-3021.00 national wage percentiles (BLS OEWS May 2025)｜https://www.onetonline.org/link/localwages/17-3021.00 ; O*NET OnLine 17-3021.00 occupation summary｜https://www.onetonline.org/link/summary/17-3021.00"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.8",
@@ -27017,7 +27013,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "About 10% of workers earn below this level; it is not equal to a starting wage and does not represent the offer of any region or employer.; O*NET OnLine 17-3021.00 national wage percentiles (BLS OEWS 2025, month 5 (May))｜https://www.onetonline.org/link/localwages/17-3021.00"
+              "About 10% of workers earn below this level; it is not equal to a starting wage and does not represent the offer of any region or employer.; O*NET OnLine 17-3021.00 national wage percentiles (BLS OEWS May 2025)｜https://www.onetonline.org/link/localwages/17-3021.00"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.10",
@@ -27045,7 +27041,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The lower-quartile position in the distribution, usually below the national median, and needs to be compared together with industry and region.; O*NET OnLine 17-3021.00 national wage percentiles (BLS OEWS 2025, month 5 (May))｜https://www.onetonline.org/link/localwages/17-3021.00"
+              "The lower-quartile position in the distribution, usually below the national median, and needs to be compared together with industry and region.; O*NET OnLine 17-3021.00 national wage percentiles (BLS OEWS May 2025)｜https://www.onetonline.org/link/localwages/17-3021.00"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.12",
@@ -27073,7 +27069,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Half of workers earn below and half above this value; this is a position in the national distribution, not an individual's actual pay.; O*NET OnLine 17-3021.00 national wage percentiles (BLS OEWS 2025, month 5 (May))｜https://www.onetonline.org/link/localwages/17-3021.00 ; U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians｜https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm"
+              "Half of workers earn below and half above this value; this is a position in the national distribution, not an individual's actual pay.; O*NET OnLine 17-3021.00 national wage percentiles (BLS OEWS May 2025)｜https://www.onetonline.org/link/localwages/17-3021.00 ; U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians｜https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.14",
@@ -27129,7 +27125,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "About 10% of workers earn above this level, and this cannot be used to promise an individual's income.; O*NET OnLine 17-3021.00 national wage percentiles (BLS OEWS 2025, month 5 (May))｜https://www.onetonline.org/link/localwages/17-3021.00"
+              "About 10% of workers earn above this level, and this cannot be used to promise an individual's income.; O*NET OnLine 17-3021.00 national wage percentiles (BLS OEWS May 2025)｜https://www.onetonline.org/link/localwages/17-3021.00"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.18",
@@ -27143,12 +27139,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Employed persons in 2025: 11,600"
+              "11,600 in 2025; 12,900 projected for 2035."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27157,12 +27153,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The U.S. national employment size for this occupation in 2025, from the BLS employment projections programme; do not confuse it with the coverage of the OEWS wage survey.; BLS Occupational Outlook｜https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm"
+              "U.S. national occupation projection; BLS Employment Projections Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27171,12 +27167,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Projected to grow 12% over 2025—2035; official net increase of 1,400 people"
+              "Up 11.9%; BLS publishes a separately rounded net increase of 1,400."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27185,12 +27181,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS national projection, employment of 12,900 in 2035. The headcounts and the net change are rounded separately, so the official net change must not be rewritten by subtracting the endpoints.; BLS Occupational Outlook｜https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm"
+              "U.S. national occupation projection; BLS Employment Projections Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27199,12 +27195,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "About 1,100 openings per year on average"
+              "About 1,100 annual openings on average, including replacements."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27213,12 +27209,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Average annual openings include replacement demand created by transfers and exits, and are not equal to net new positions.; U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians｜https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm"
+              "U.S. national occupation projection; BLS Employment Projections Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27227,7 +27223,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. national wage percentiles come from OEWS 2025, month 5 (May); employment size and projections come from the BLS 2025—2035 employment projections. OEWS does not cover the self-employed; the two programmes use different bases and cannot be converted into an individual's actual pay or extrapolated to mainland China."
+              "U.S. national wage percentiles come from OEWS May 2025; employment size and projections come from the BLS 2025—2035 employment projections. OEWS does not cover the self-employed; the two programmes use different bases and cannot be converted into an individual's actual pay or extrapolated to mainland China."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.25",
@@ -27242,13 +27238,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "In the United States, the median annual wage in 2025, month 5 (May), is $82,890 (hourly $39.85), with the 10th, 25th, 75th and 90th percentiles at $59,050, $67,680, $111,280 and $125,160 respectively. BLS employment in 2025 was 11,600, projected to grow 12% over 2025—2035, an official net increase of 1,400 people, with about 1,100 openings per year on average. Openings include replacement demand and are not net new positions; a percentile is not a newcomer's quote."
+              "The May 2025 U.S. national median for SOC 17-3021 was $82,890 a year and $39.85 an hour. U.S. SOC 17-3021: 11,600 jobs in 2025 and 12,900 projected in 2035, up 11.9%. BLS publishes a separately rounded net increase of 1,400 and about 1,100 openings annually, including replacements."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
             "oews",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27341,12 +27337,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:us-growth-2025-2035}}"
+              "U.S. SOC 17-3021: 11,600 jobs in 2025 and 12,900 projected in 2035, up 11.9%. BLS publishes a separately rounded net increase of 1,400 and about 1,100 openings annually, including replacements."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27383,7 +27379,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS median for this occupation in this industry, 2025, month 5 (May), not the average wage for the whole industry."
+              "BLS median for this occupation in this industry, May 2025, not the average wage for the whole industry."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.36",
@@ -27425,12 +27421,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS median for this occupation in this industry, 2025, month 5 (May); it cannot be matched to the 35% broad industry share in this O*NET set."
+              "BLS median for this occupation in this industry, May 2025; it cannot be matched to the 35% broad industry share in this O*NET set."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "bls"
+            "bls",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -27467,7 +27464,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS median for this occupation in this industry, 2025, month 5 (May); it is not education-sector statistics."
+              "BLS median for this occupation in this industry, May 2025; it is not education-sector statistics."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.42",
@@ -27509,7 +27506,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS median for this occupation in this industry, 2025, month 5 (May), not the U.S. national median."
+              "BLS median for this occupation in this industry, May 2025, not the U.S. national median."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.45",
@@ -27553,7 +27550,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wages come from BLS OEWS 2025, month 5 (May), with national percentiles shown by O*NET; employment and openings come from the BLS 2025—2035 projection. The two statistical programmes, years and coverage must be understood separately."
+              "Wages come from BLS OEWS May 2025, with national percentiles shown by O*NET; employment and openings come from the BLS 2025—2035 projection. The two statistical programmes, years and coverage must be understood separately."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.48",
@@ -27639,7 +27636,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Wage reference period: 2025, month 5 (May); 17-3021 national occupational wages."
+              "Wage reference period: May 2025; 17-3021 national occupational wages."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.cross-review-industry_period",
@@ -27697,19 +27694,19 @@
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional ability test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/emotional-intelligence-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Calibration technicians",
@@ -28957,7 +28954,7 @@
           "id": "aerospace-engineering-and-operations-technicians.risk.career-risk-cards.15",
           "source_refs": [
             "onet",
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28972,7 +28969,7 @@
           "id": "aerospace-engineering-and-operations-technicians.risk.career-risk-cards.16",
           "source_refs": [
             "onet",
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28987,7 +28984,7 @@
           "id": "aerospace-engineering-and-operations-technicians.risk.career-risk-cards.17",
           "source_refs": [
             "onet",
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29002,7 +28999,7 @@
           "id": "aerospace-engineering-and-operations-technicians.risk.career-risk-cards.18",
           "source_refs": [
             "onet",
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29016,8 +29013,8 @@
           },
           "id": "aerospace-engineering-and-operations-technicians.risk.career-risk-cards.19",
           "source_refs": [
-            "privacy",
-            "employer"
+            "pipl",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29031,8 +29028,8 @@
           },
           "id": "aerospace-engineering-and-operations-technicians.risk.career-risk-cards.20",
           "source_refs": [
-            "privacy",
-            "employer"
+            "pipl",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29041,13 +29038,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Collect and check permissions for test data and drawings on a minimised basis, specify which fields may be shared externally, and keep approval records."
+              "Collect only personal information needed for the task. Separately check project authorization before sharing unpublished drawings or test records."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.risk.career-risk-cards.21",
           "source_refs": [
-            "privacy",
-            "employer"
+            "pipl",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29061,8 +29058,8 @@
           },
           "id": "aerospace-engineering-and-operations-technicians.risk.career-risk-cards.22",
           "source_refs": [
-            "privacy",
-            "employer"
+            "pipl",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29346,7 +29343,7 @@
               [
                 "Test and measurement assistant",
                 "Assists in setting up equipment, checking wiring, and organising calibration records and test data.",
-                "Usually looks at hands-on habits, instrument use and whether records are properly kept.",
+                "In September 2026, GalaxySpace posted six test technician positions in Anhui through Hebei University of Technology. The posting lists an associate-level minimum, spacecraft testing, equipment operation and maintenance, monitoring shifts and test records. Both pay fields list CNY 10,000 or above without a pay period. This is one posting.",
                 "Submit a mock instrument list and calibration check record, noting the sources.",
                 "A supportive entry-level position that usually does not independently determine test parameters and release."
               ],
@@ -29384,7 +29381,9 @@
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "galaxy",
+            "npu"
           ],
           "title": "How do the entry-level positions and early tasks for aerospace engineering and operations technicians compare?",
           "type": "table"
@@ -29399,7 +29398,7 @@
                 "values": [
                   "Education and preparation",
                   "The BLS Occupational Outlook states that entry usually requires an associate degree in engineering technology; some employers accept candidates with a high school diploma or a completed certificate programme.",
-                  "O*NET places this occupation in Job Zone Three (medium preparation), and 39% of respondents in the survey said a post-secondary certificate was required."
+                  "GalaxySpace lists an associate-level minimum; NPU’s laboratory example lists a bachelor’s minimum. Check each role and its authority."
                 ]
               },
               {
@@ -29414,8 +29413,8 @@
                 "id": "onet-traits",
                 "values": [
                   "Work context",
-                  "O*NET work context shows that 96% consider precision or accuracy extremely important, 95% work more than 40 hours per week, and 96% work in a controlled indoor environment every day.",
-                  "86% use email every day, 74% use the telephone every day, 69% wear protective or safety equipment every day, and 36% consider the consequences of error very serious."
+                  "In O*NET’s Work Context survey, 96% of respondents rated precision or accuracy as extremely important.",
+                  "For errors that are hard to correct, 36% of respondents chose “very serious” consequences and 30% chose “extremely serious.” This describes work context."
                 ]
               },
               {
@@ -29431,7 +29430,9 @@
           "id": "aerospace-engineering-and-operations-technicians.path.employer-evidence.1",
           "source_refs": [
             "bls",
-            "ep"
+            "ep",
+            "galaxy",
+            "npu"
           ],
           "title": "What do employers usually look at in hiring?",
           "type": "cards"
@@ -29444,42 +29445,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Task statement and input material",
-                  "Fixed exercise (all fictional): test-stand records for the landing-gear actuator of the drone supplier Xiangce. 20 cycles are planned, but this page gives only a summary of 3 initial test runs and 1 retest, and does not mean the full test series has been completed.",
-                  "Input: displacement sensor L1 with a range of 0—150 mm and an example error limit of ±0.5 mm; CH1 corresponds to L1, with a sampling rate of 1,000 Hz; the channel timestamp is 2 ms later than the reference, so align offline by subtracting 2 ms. The initial peaks are 118.6, 119.2 and 120.4 mm in order. The zero check record is +0.8 mm, and only in this exercise is the drift assumed to be a constant offset.",
-                  "Exercise criteria: corrected peak = reading − 0.8 mm; example upper bound = corrected value + 0.5 mm, which must not exceed 120.0 mm. If an upper bound exceeds the limit or the calibration status is unclear, keep the original record and stop the assessment for that run. After calibration is restored, the 3rd retest peak is given as 119.0 mm with a zero of 0.0 mm; the 17 runs not given must not be fabricated."
+                  "Case: three fictional A17 bench records. No equipment access.",
+                  "Plan A17 Rev B: the handover must cite revision B and a matching instrument certificate that explicitly covers the record date, October 3. Handover does not mean pass or release.",
+                  "R01: Rev B, I-17, certificate I-17 valid September 1 through October 30, reading 12.4. R02: Rev B, I-24, certificate I-42 valid September 1 through October 30, reading 12.6. R03: Rev A, I-31, certificate I-31 valid September 1 through October 30, reading 12.5.",
+                  "Readings are fictional placeholders with no units; do not apply engineering limits. Use three statuses: ready for review, certificate on hold, revision on hold."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task requirements",
-                  "For the same case, write out the L1—CH1 measurement chain, the range, the 1,000 Hz sampling and the −2 ms time alignment; list separately the original readings, the zero-corrected values, the example upper bounds, the criteria and the retest record.",
-                  "Calculate the upper bounds for the 3 initial runs and the 3rd retest, and explain why the 3rd initial run cannot be judged as passing directly. Distinguish the given data, the constant-offset assumption, and the calibration evidence and the 17 cycles still missing; the presence of drift cannot by itself rule out a structural fault."
+                  "First assign one status to each record. Cite the evidence, name the reviewer and state what original document is needed. Preserve every reading.",
+                  "Variant: the R01 certificate still says I-17 but has no validity date. Change only that field. What is the new R01 status?",
+                  "Produce a one-page handover with three statuses, original record IDs, evidence gaps and a recipient. Finish both cases before reading the reference. Do not operate equipment or fill gaps by guessing."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference approach",
-                  "Reference calculation: the corrected initial peaks are 117.8, 118.4 and 119.6 mm; adding the example error limit gives upper bounds of 118.3, 118.9 and 120.1 mm. The first two meet the numerical criteria of this exercise, while the 3rd upper bound exceeds 120.0 mm, so the record should be kept and calibration verification and a retest awaited. The 2 ms alignment changes only the time axis and cannot prove the cause of the displacement anomaly.",
-                  "The given retest upper bound is 119.0＋0.5＝119.5 mm, which meets the numerical criteria of this exercise. The constant +0.8 mm offset is only an assumption in the statement, not a proven fault cause; the error limit is not equal to the full measurement uncertainty. In the absence of calibration validity, the full 20 runs of data and on-site readiness evidence, the whole test series cannot be judged as passing, structural failure cannot be ruled out, and no sign-off can be given."
+                  "Complete both versions first",
+                  "For each record, state its status, the evidence gap and the reviewer. Keep the original ID and reading.",
+                  "Submit both versions and a one-page handover independently on Day 6. On Day 7 open “A17 reference (open after submitting)” in the FAQ."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundary notes",
-                  "The case, material and figures above are fictional exercise data and do not represent a real company, model or official statistic; the exercise does not constitute test or safety advice, and real testing must follow the organisation's test directive, safety procedures and authorisation process."
+                  "A record on hold does not establish a test result or authorize release.",
+                  "Self-check IDs, revisions, validity and the recipient. Do not use this exercise in an actual test or rewrite original records."
                 ]
               }
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "Entry exercise: complete one aerospace engineering and operations technician task with fictional material",
+          "title": "ATX-18 | Which test record is ready to hand over?",
           "type": "cards"
         },
         {
@@ -29506,15 +29507,15 @@
               {
                 "id": "report-summary",
                 "values": [
-                  "Sample one-page report summary",
-                  "Fictional one-page summary: 20 runs are planned, but only 3 initial runs and the 3rd retest are given. The initial upper bounds are 118.3, 118.9 and 120.1 mm, and the 3rd requires the assessment to be paused; the given retest upper bound of 119.5 mm meets the example criterion of 120.0 mm. The 17 runs and the calibration and readiness evidence are still missing, so the whole series cannot be judged as passing and no fault cause can be established."
+                  "One-page handover",
+                  "Label each record’s status, evidence gap and recipient. Do not write a real release conclusion."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Notes on tools and systems",
-                  "Work standard: the measurement chain and parameters are verifiable, the data have original records, anomalies are closed out, and it is stated which conclusions cannot be drawn from the available information."
+                  "Version record",
+                  "Preserve readings and original revisions. Note the source and reason for any updated status."
                 ]
               }
             ]
@@ -29585,56 +29586,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Define the practice subject",
-                  "Use the Xiangce landing-gear actuator case: L1—CH1, a range of 0—150 mm and an example error limit of ±0.5 mm, with 20 runs planned rather than completed."
+                  "Day 1",
+                  "Read the GalaxySpace or NPU example, or O*NET instrument and recording tasks. Note two evidence requirements and one authority question."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Complete the measurement chain and parameter assessment",
-                  "Write out the sensor, range, sampling rate and channel mapping, and state the basis."
+                  "Day 2",
+                  "Copy the A17 revision, date, instrument and certificate criteria into a checklist."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Write the readiness checklist",
-                  "List the readiness check items, safety requirements and stop conditions."
+                  "Day 3",
+                  "Keep the original records and compare revisions and IDs without changing readings."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Complete one acquisition plan",
-                  "Give the acquisition configuration, anomaly decision thresholds and data retention method."
+                  "Day 4",
+                  "Check date coverage and name the evidence gap and recipient."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Set metrics and stop conditions",
-                  "Write down the data validity criteria, the review method, and when to stop the test and escalate."
+                  "Day 5",
+                  "Handle the missing-validity variant separately. Explain whether the status changes."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Simulate a one-page debrief",
-                  "List the initial upper bounds of 118.3, 118.9 and 120.1 mm and the given retest value of 119.5 mm; explain why the 3rd run pauses the assessment first, and register the missing 17 runs, the calibration validity and the readiness evidence."
+                  "Day 6",
+                  "Submit the original, variant and one-page handover independently before opening the reference."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Revise according to feedback and record it",
-                  "Revise the plan or assumptions according to review feedback, and record whether you are willing to repeat this process."
+                  "Day 7",
+                  "Open “A17 reference (open after submitting)” in the FAQ, check your work and record a difference or confirm there were none. Then choose whether to explore test support, compare assembly quality or build measurement basics."
                 ]
               }
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.path.seven-day-trial.1",
           "source_refs": [
+            "editor",
+            "galaxy",
+            "npu",
             "onet"
           ],
           "title": "Seven-day experience: complete one full aerospace engineering and operations technician task cycle using fictional material",
@@ -29757,7 +29761,7 @@
           "data": {
             "paragraphs": [
               "United States, BLS: the typical entry education is an associate degree related to engineering technology, and some employers consider high school graduates or certificate programme completers; the BLS typical related work experience and on-the-job training categories are both None. This does not exempt specific employers' requirements for training, security clearance or operating authority.",
-              "Mainland China: this page obtained no precise recruitment sample or unified admission conclusion for this occupation, so qualifications must be checked against actual duties; where civil aircraft maintenance and other aviation personnel are involved, the current Civil Aviation Law and regulatory rules apply separately, and U.S. statistics must not be treated as a Chinese threshold.",
+              "For an applicable mainland civil aviation engine project, CAAC AC-33-AA-2024-01R1 discusses bench test planning and personnel and equipment conditions. This project-specific guidance does not grant maintenance release or airworthiness approval authority.",
               "Training, certification, education and actual signing authority are verified separately; an external course catalogue grants no test release, maintenance sign-off or security clearance. Some U.S. defence programmes may also require security clearance and a specific level of U.S. citizenship.",
               "The exercises on this page use fictional data only; actual equipment operation, configuration changes and release must follow the organisation's procedures and the individual's authorisation."
             ]
@@ -29775,15 +29779,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no verifiable public mainland China job postings, so specific position quotes, allowances or general recruitment conditions cannot be entered. The U.S. education description comes from BLS and applies only to that statistical occupation and the U.S. market.",
-              "Titles such as test technician, avionics test, calibration and drone test must each be checked for actual tasks, jurisdiction, training, security clearance and scope of authority; a job title cannot prove that a person may sign off test or maintenance release."
+              "In September 2026, GalaxySpace posted six test technician positions in Anhui through Hebei University of Technology. The posting lists an associate-level minimum, spacecraft testing, equipment operation and maintenance, monitoring shifts and test records. Both pay fields list CNY 10,000 or above without a pay period. This is one posting.",
+              "In March 2026, Northwestern Polytechnical University advertised one aerospace structural integrity lab technician at its Youyi campus in Xi’an, with a relevant bachelor’s degree or higher. The non-establishment hire covers equipment coordination, routine verification, records and fatigue-machine training. No pay amount was stated and the application deadline has passed."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.path.recruitment-sample.1",
           "source_refs": [
-            "bls"
+            "galaxy",
+            "npu"
           ],
-          "title": "Notes on the recruitment sample and job titles",
+          "title": "Hiring examples from Anhui and Xi’an",
           "type": "notice"
         },
         {
@@ -30974,10 +30979,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS Occupational Outlook",
+                "entity": "BLS Employment Projections Table 1.2",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET tasks and work context",
@@ -30989,7 +30994,7 @@
                 "entity": "National Bureau of Statistics wages in 2025",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "entity": "O*NET occupation summary",
@@ -31061,13 +31066,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page obtained no precise employment projection or transition success rate for this occupation in mainland China. U.S. BLS: employment of 11,600 in 2025, projected to grow 12% over 2025—2035, an official net increase of 1,400 people, with about 1,100 openings per year on average, including replacement demand. A national projection provides no probability of hiring in a specific region, programme or for an individual."
+              "U.S. SOC 17-3021: 11,600 jobs in 2025 and 12,900 projected in 2035, up 11.9%. BLS publishes a separately rounded net increase of 1,400 and about 1,100 openings annually, including replacements. There is no comparable mainland occupation forecast here."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.market-signals.market-signal-card.8",
           "source_refs": [
-            "bls",
-            "nbs"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31258,12 +31262,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Growth of 12%; official net increase of 1,400 people; about 1,100 openings per year on average"
+              "U.S. SOC 17-3021: 11,600 jobs in 2025 and 12,900 projected in 2035, up 11.9%. BLS publishes a separately rounded net increase of 1,400 and about 1,100 openings annually, including replacements."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31370,12 +31374,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Supports verification of the U.S. employment projection and the openings basis"
+              "Exact U.S. projections for SOC 17-3021."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.market-signals.market-signal-card.30",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31384,12 +31388,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Supports verification of the occupational task and work context basis"
+              "U.S. occupational work context and tasks."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.market-signals.market-signal-card.31",
           "source_refs": [
-            "ep"
+            "onet"
           ],
           "type": "prose"
         },
@@ -31795,10 +31799,15 @@
           "data": {
             "entries": [
               {
-                "answer": "The typical work chain is to confirm the test procedure with engineers, build or maintain test facilities, install instruments and the item under test, calibrate computers and measurement systems, run the test safely and record data, and finally troubleshoot equipment faults and quality anomalies.",
+                "answer": "Aerospace engineering and operations technologists and technicians turn a test plan into traceable instruments, equipment checks and original records. Test support, measurement and assembly quality have different outputs. When a certificate or version does not match, keep the original record and refer the decision to authorized staff.",
                 "id": "aerospace-engineering-and-operations-technicians.faq.1",
                 "question": "What do aerospace engineering and operations technicians do every day?",
-                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.daily-work"
+                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.daily-work",
+                "source_refs": [
+                  "onet",
+                  "galaxy",
+                  "npu"
+                ]
               },
               {
                 "answer": "The core output of these technicians is traceable test configurations, measurement data and equipment status; aerospace engineers focus more on design and technical decisions, while electronic or mechanical engineering technicians work on a broader range of electrical, electronic or mechanical equipment.",
@@ -31807,34 +31816,54 @@
                 "question_key": "career.faq.aerospace-engineering-and-operations-technicians.role-comparison"
               },
               {
-                "answer": "The editors suggest observing procedure execution, record completeness, verification of units and timelines, and anomaly communication; these exercises do not predict hiring or long-term competence.",
+                "answer": "Try ATX-18. Compare instrument IDs, certificates and revisions, preserve raw entries, then produce a one-page handover. Notice whether you are willing to recheck each discrepancy. This is not a hiring screen.",
                 "id": "aerospace-engineering-and-operations-technicians.faq.3",
                 "question": "How can I judge whether I am suited to being an aerospace engineering and operations technician?",
-                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.fit"
+                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.fit",
+                "source_refs": [
+                  "editor",
+                  "onet"
+                ]
               },
               {
-                "answer": "The editors of this page suggest trying scripts, data organisation and report drafts on fictional data; there is still no quantitative evidence of AI adoption or efficiency gain in this occupation. Actual installation, calibration, safety judgement and signing must still be reviewed against the position's authority.",
+                "answer": "Tools can organize fictional records, compare revisions and draft a discrepancy list. There is no measured adoption or displacement rate here. Use only approved tools for actual data.",
                 "id": "aerospace-engineering-and-operations-technicians.faq.4",
                 "question": "Which tasks will AI change?",
-                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.ai-impact"
+                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.ai-impact",
+                "source_refs": [
+                  "editor",
+                  "onet"
+                ]
               },
               {
-                "answer": "This page's editorial checklist covers the measurement chain, units and time stamps, calibration status, parameter and configuration versions, original records and change approvals. The required review items and responsible persons in a real project are set by the applicable procedures and authorisation; this generic exercise checklist must not be described as verified FAA flight check requirements.",
+                "answer": "People verify original records, instrument status, certificate validity and approved conditions. Authorized staff decide dispositions and sign results. CAAC bench-test guidance applies to relevant engine projects.",
                 "id": "aerospace-engineering-and-operations-technicians.faq.5",
                 "question": "Which steps must retain human review?",
-                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.human-control"
+                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.human-control",
+                "source_refs": [
+                  "arxiv",
+                  "onet"
+                ]
               },
               {
-                "answer": "No. The U.S. national median annual wage in 2025, month 5 (May), is $82,890, with a median hourly wage of $39.85; this indicates the middle position of the income distribution and cannot be treated as a newcomer's starting pay, an individual's take-home wage or a particular employer's offer.",
+                "answer": "No. $82,890 a year and $39.85 an hour are May 2025 U.S. medians for SOC 17-3021, not entry pay or one employer’s offer.",
                 "id": "aerospace-engineering-and-operations-technicians.faq.6",
                 "question": "Does the median wage for aerospace engineering and operations technicians in the United States represent a newcomer's income?",
-                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.us-pay"
+                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.us-pay",
+                "source_refs": [
+                  "oews"
+                ]
               },
               {
-                "answer": "BLS lists the typical U.S. entry education as an associate degree in engineering technology or a related field; some employers also consider high school graduates or certificate programme completers.",
+                "answer": "BLS describes an associate degree in a related engineering technology field as typical; some employers consider high school or certificate programs. In mainland China, the GalaxySpace example lists an associate-level minimum and NPU lists a relevant bachelor’s minimum.",
                 "id": "aerospace-engineering-and-operations-technicians.faq.7",
                 "question": "What education is required to enter work as an aerospace engineering and operations technician?",
-                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.education-path"
+                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.education-path",
+                "source_refs": [
+                  "bls",
+                  "galaxy",
+                  "npu"
+                ]
               },
               {
                 "answer": "BLS does not list a particular occupational certificate as a general statutory prerequisite for this occupation, but some defence-related programmes require security clearance, and certain levels may require U.S. citizenship; specific operating and signing authority is still determined by the programme, the employer and regulatory rules.",
@@ -31849,10 +31878,22 @@
                 "question_key": "career.faq.aerospace-engineering-and-operations-technicians.risk-boundary"
               },
               {
-                "answer": "BLS currently projects U.S. growth of 12% for this occupation over 2025—2035, with about 1,100 openings per year on average; demand factors discussed include commercial small satellites, electric and hybrid aircraft, and drones. A projection is not a guarantee of individual opportunity; transitions must be checked separately for target duties, education and authorisation.",
+                "answer": "U.S. SOC 17-3021: 11,600 jobs in 2025 and 12,900 projected in 2035, up 11.9%. BLS publishes a separately rounded net increase of 1,400 and about 1,100 openings annually, including replacements. For individual opportunities, check the employer, training and authority.",
                 "id": "aerospace-engineering-and-operations-technicians.faq.10",
                 "question": "How should the prospects and transition options for aerospace engineering and operations technicians be judged?",
-                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.outlook-transition"
+                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.outlook-transition",
+                "source_refs": [
+                  "ep"
+                ]
+              },
+              {
+                "answer": "Main case: R01 is ready for review; R02 is on certificate hold; R03 is on revision hold. Keep all three readings and original record IDs. Ask the instrument records owner for the I-24 certificate covering October 3. Ask the test lead to verify R03’s authorized revision and decide the disposition; do not rewrite Rev A as B. A hold does not determine the test result. None of these records establishes an actual test conclusion or release. Variant: R01 moves to certificate hold. Ask for the I-17 original that covers October 3. R02 and R03 remain unchanged.",
+                "id": "aerospace-engineering-and-operations-technicians.faq.11",
+                "question": "A17 reference (open after submitting)",
+                "question_key": "career.faq.aerospace-engineering-and-operations-technicians.q11",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31887,14 +31928,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational tasks and work context: O*NET OnLine 17-3021.00; employment and wages: U.S. BLS Occupational Outlook Handbook and OEWS 2025, month 5 (May); China wage basis: National Bureau of Statistics 2025 annual average wages of employed persons in urban units."
+              "Use O*NET for tasks, OEWS for U.S. wages, Table 1.2 for projections, the two job postings for mainland roles and NBS for industry pay."
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.sources.source-card.2",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "oews",
+            "ep",
+            "galaxy",
+            "npu",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31903,12 +31947,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-08 (nine-section revision limited to this round)"
+              "2026-11-09"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31950,25 +31994,25 @@
                 "entity": "Big Five personality test",
                 "id": "navigation-2",
                 "relation": "career.test",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "navigation-3",
                 "relation": "career.test",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram personality test",
                 "id": "navigation-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "navigation-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "View the aerospace engineering and operations technicians occupation page",
@@ -31998,50 +32042,102 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Includes entries for tasks, work activities, work context and interest code",
-                  "U.S. Department of Labor O*NET official occupation profile; accessed 2026-09-14"
+                  "Aerospace engineering and operations technologists and technicians turn a test plan into traceable instruments, equipment checks and original records. Test support, measurement and assembly quality have different outputs. When a certificate or version does not match, keep the original record and refer the decision to authorized staff.",
+                  "U.S. occupational reference."
                 ],
-                "evidence_type": "Official occupation profile",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "Applies only to the O*NET 17-3021.00 occupation and the U.S. market, and cannot be used to infer mainland China occupational mapping, wages or qualification authority.",
+                "limitation": "U.S. occupational reference.",
                 "market": "United States",
-                "name": "O*NET OnLine 17-3021.00 Aerospace Engineering and Operations Technicians occupation summary",
-                "period": "Updated 2026; accessed 2026-09-14",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 17-3021.00 occupational tasks",
+                "period": "2026",
+                "publisher": "O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/17-3021.00"
+                "url": "https://www.onetonline.org/link/details/17-3021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Employed persons in 2025: 11,600",
-                  "Projected to grow 12% over 2025—2035, an official net increase of 1,400 people",
-                  "About 1,100 openings per year on average"
+                  "The May 2025 U.S. national median for SOC 17-3021 was $82,890 a year and $39.85 an hour.",
+                  "The Handbook rounds growth to 12%; see Table 1.2 for the precise projection.",
+                  "The Handbook rounds growth to 12%; see Table 1.2 for the precise projection."
                 ],
-                "evidence_type": "Official occupational outlook",
+                "evidence_type": "primary_document",
                 "id": "bls",
-                "limitation": "National-basis employment and projections; excludes mainland China data and does not provide an individual wage quote.",
+                "limitation": "The Handbook rounds growth to 12%; see Table 1.2 for the precise projection.",
                 "market": "United States",
-                "name": "U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians",
-                "period": "Employment in 2025; the 2025—2035 projection; accessed 2026-10-02",
+                "name": "BLS Occupational Outlook Handbook",
+                "period": "2025",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Includes 12 tasks and work activity dimensions",
-                  "Accessed 2026-09-14"
+                  "U.S. SOC 17-3021: 11,600 jobs in 2025 and 12,900 projected in 2035, up 11.9%. BLS publishes a separately rounded net increase of 1,400 and about 1,100 openings annually, including replacements.",
+                  "Projections are not job postings."
                 ],
-                "evidence_type": "Official occupation profile",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "Task and work activity descriptions are used to understand the boundaries of duties, not as wage or demand statistics.",
+                "limitation": "Projections are not job postings.",
                 "market": "United States",
-                "name": "O*NET OnLine 17-3021.00 details: tasks and work activities",
-                "period": "Updated 2026; accessed 2026-09-14",
+                "name": "BLS Employment Projections Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The May 2025 U.S. national median for SOC 17-3021 was $82,890 a year and $39.85 an hour.",
+                  "National wage percentiles, not offers.",
+                  "National wage percentiles, not offers.",
+                  "National wage percentiles, not offers.",
+                  "National wage percentiles, not offers."
+                ],
+                "evidence_type": "primary_document",
+                "id": "oews",
+                "limitation": "National wage percentiles, not offers.",
+                "market": "United States",
+                "name": "O*NET wage table (BLS OEWS)",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/17-3021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In 2025, NBS reported average annual pay in urban non-private units of CNY 113,594 in manufacturing and CNY 182,064 in scientific research and technical services. These industry figures do not establish this role’s starting pay or pay distribution.",
+                  "Industry average only.",
+                  "Industry average only."
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs",
+                "limitation": "Industry average only.",
+                "market": "Mainland China",
+                "name": "NBS 2025 Urban Unit Wages",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Manufacturing: 55%; professional, scientific, and technical services: 35%.",
+                  "The remaining industries are not itemized. These are not industry wages."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cnclass",
+                "limitation": "Only gives the industry employment share, without industry wages; it cannot be used to infer China's industry structure.",
+                "market": "United States",
+                "name": "O*NET 17-3021.00: top industries in 2025",
+                "period": "2025",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/17-3021.00"
@@ -32049,63 +32145,10 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "10th percentile $59,050/year ($28.39/hour)",
-                  "25th percentile $67,680/year ($32.54/hour)",
-                  "Median $82,890/year ($39.85/hour)",
-                  "75th percentile $111,280/year ($53.50/hour)",
-                  "90th percentile $125,160/year ($60.18/hour)"
-                ],
-                "evidence_type": "Official wage percentiles",
-                "id": "oews",
-                "limitation": "OEWS does not cover the self-employed; a percentile is a statistical position, not an individual's take-home income or a starting-pay promise.",
-                "market": "United States",
-                "name": "BLS OEWS 2025, month 5 (May), as shown by O*NET: national wage percentiles for 17-3021.00",
-                "period": "BLS OEWS 2025, month 5 (May); accessed 2026-09-14",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/17-3021.00"
-              },
-              {
-                "accessed_at": "2026-10-02",
-                "details": [
-                  "Urban non-private units: manufacturing 113,594 yuan/year",
-                  "Urban non-private units: scientific research and technical services 182,064 yuan/year",
-                  "Professional and technical personnel in enterprises above a designated size: 155,491 yuan/year"
-                ],
-                "evidence_type": "Official wage statistics",
-                "id": "nbs",
-                "limitation": "Broad-basis annual average wages by industry sector and position category, not the wage distribution of this single occupation, city or unit type.",
-                "market": "Mainland China",
-                "name": "National Bureau of Statistics, 'Average Annual Wages of Employed Persons in Urban Units in 2025'",
-                "period": "2025; published 2026-05-15; accessed 2026-09-14",
-                "publisher": "National Bureau of Statistics",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
-              },
-              {
-                "accessed_at": "2026-10-02",
-                "details": [
-                  "Manufacturing accounts for about 51%",
-                  "Professional and technical services account for about 36%",
-                  "Other industries (including education services) account for about 13%"
-                ],
-                "evidence_type": "Official industry distribution",
-                "id": "cnclass",
-                "limitation": "Only gives the industry employment share, without industry wages; it cannot be used to infer China's industry structure.",
-                "market": "United States",
-                "name": "O*NET 17-3021.00 industry distribution",
-                "period": "The current industry share page states no statistical year; accessed 2026-10-02",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/17-3021.00"
-              },
-              {
-                "accessed_at": "2026-10-02",
-                "details": [
                   "Used to verify the existence and category of related certifications",
                   "Accessed 2026-09-14"
                 ],
-                "evidence_type": "Official certification discovery",
+                "evidence_type": "primary_document",
                 "id": "privacy",
                 "limitation": "The certification list is an entry point for discovering related U.S. qualifications, and does not constitute a requirement for practising in China.",
                 "market": "United States",
@@ -32121,7 +32164,7 @@
                   "Used to verify related training directions and provider types",
                   "Accessed 2026-09-14"
                 ],
-                "evidence_type": "Official training discovery",
+                "evidence_type": "primary_document",
                 "id": "facilities",
                 "limitation": "The training list is an entry point for discovering local U.S. training, and does not represent a uniform employer requirement.",
                 "market": "United States",
@@ -32137,7 +32180,7 @@
                   "Includes 27 software skills (CAD, programming, databases, office tools)",
                   "Accessed 2026-09-14"
                 ],
-                "evidence_type": "Official technology list",
+                "evidence_type": "primary_document",
                 "id": "operations",
                 "limitation": "27 hiring software skills, with no mention shares provided; no inference can be drawn about usage rates, hiring thresholds or tool effects.",
                 "market": "United States",
@@ -32153,7 +32196,7 @@
                   "The default page provides selection of occupational attribute dimensions",
                   "A custom report is generated only after sections are selected"
                 ],
-                "evidence_type": "Official custom profile",
+                "evidence_type": "primary_document",
                 "id": "hr",
                 "limitation": "The default form is a report configuration entry point; the existence of the entry point does not mean the occupational attributes have been read.",
                 "market": "United States",
@@ -32169,7 +32212,7 @@
                   "The total wage bill includes time-rate wages, piece-rate wages, bonuses, allowances and subsidies, overtime pay and wages paid under special circumstances",
                   "The before-tax and withholding basis is also set out in the NBS 2025 wage statistics notes"
                 ],
-                "evidence_type": "Official basis provisions",
+                "evidence_type": "primary_document",
                 "id": "health",
                 "limitation": "Used for the composition of the total wage bill; the before-tax and withholding basis in the 2025 statistics comes from the NBS notes on this page.",
                 "market": "Mainland China",
@@ -32180,12 +32223,12 @@
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "A labour contract should set out the work content and labour remuneration",
-                  "Basic provisions on probation periods and working-hour arrangements"
+                  "Article 17 lists work contents, working hours and pay among contract terms.",
+                  "Articles 19–20 cover probation and probation pay."
                 ],
-                "evidence_type": "Legal text",
+                "evidence_type": "primary_document",
                 "id": "ilo",
                 "limitation": "Used to explain the basic requirements for labour contracts and for working-hour and remuneration terms; it does not cover other jurisdictions and does not replace organisational rules.",
                 "market": "Mainland China",
@@ -32196,20 +32239,20 @@
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_0abfdd261c03417b949df19d869add8d.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Requirements for safety training for workers",
-                  "Responsibility for identifying and rectifying hidden production safety hazards"
+                  "ATX-18 | Which test record is ready to hand over?",
+                  "Paper exercise only."
                 ],
-                "evidence_type": "Legal text",
+                "evidence_type": "editorial_design",
                 "id": "editor",
-                "limitation": "Used to explain production and business units' work safety and worker training obligations; it does not constitute specific operating standards for a position.",
-                "market": "Mainland China",
-                "name": "Work Safety Law of the People's Republic of China",
-                "period": "Amended in 2021; accessed 2026-10-02",
-                "publisher": "Ministry of Emergency Management of the People's Republic of China",
-                "scope": "contextual",
-                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
+                "limitation": "Paper exercise only.",
+                "market": "Fictional exercise",
+                "name": "ATX-18 | Which test record is ready to hand over?",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "/en/career/jobs/aerospace-engineering-and-operations-technicians#career-content-path"
               },
               {
                 "accessed_at": "2026-09-14",
@@ -32217,7 +32260,7 @@
                   "Used to verify OEWS national, regional and industry breakdown bases",
                   "Accessed 2026-09-14"
                 ],
-                "evidence_type": "Official statistics entry point",
+                "evidence_type": "primary_document",
                 "id": "nist",
                 "limitation": "Serves as the official query entry point for OEWS data; percentile values follow the same reference period as shown by O*NET.",
                 "market": "United States",
@@ -32228,20 +32271,20 @@
                 "url": "https://www.bls.gov/oes/current/oes173021.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Airworthiness management requirements for civil aircraft",
-                  "Responsibilities relating to maintenance and airworthiness inspection"
+                  "For an applicable mainland civil aviation engine project, CAAC AC-33-AA-2024-01R1 discusses bench test planning and personnel and equipment conditions. This project-specific guidance does not grant maintenance release or airworthiness approval authority.",
+                  "Applicable civil aviation engine projects."
                 ],
-                "evidence_type": "Legal text",
+                "evidence_type": "primary_document",
                 "id": "arxiv",
-                "limitation": "Used to explain the institutional background of civil aircraft airworthiness and maintenance management; it does not constitute specific position qualification requirements.",
+                "limitation": "Applicable civil aviation engine projects.",
                 "market": "Mainland China",
-                "name": "Civil Aviation Law of the People's Republic of China · version in force in 2026",
-                "period": "Revised in 2025; effective from 2026-07-01; accessed 2026-10-02",
-                "publisher": "Civil Aviation Administration of China",
+                "name": "CAAC AC-33-AA-2024-01R1",
+                "period": "2024",
+                "publisher": "CAAC",
                 "scope": "contextual",
-                "url": "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html"
+                "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202406/P020240618576167173469.pdf"
               },
               {
                 "accessed_at": "2026-09-14",
@@ -32249,7 +32292,7 @@
                   "Used to compare with adjacent engineering positions",
                   "Accessed 2026-09-14"
                 ],
-                "evidence_type": "Official occupational group page",
+                "evidence_type": "primary_document",
                 "id": "weforum",
                 "limitation": "The occupational group page is used for horizontal comparison with similar positions; its figures are not precise occupational statistics for aerospace engineering and operations technicians.",
                 "market": "United States",
@@ -32262,34 +32305,34 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "National median annual wage in 2025, month 5 (May): $82,890",
+                  "National median annual wage in May 2025: $82,890",
                   "Aerospace product and parts manufacturing $94,910; engineering services $77,260"
                 ],
-                "evidence_type": "Official occupation section",
+                "evidence_type": "primary_document",
                 "id": "employer",
                 "limitation": "National and by-listed-industry median wages for this occupation; it does not provide individual programme quotes, actual allowance lists or hiring conditions.",
                 "market": "United States",
                 "name": "U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians · Pay",
-                "period": "2025, month 5 (May); accessed 2026-10-02",
+                "period": "May 2025; accessed 2026-10-02",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm#tab-5"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Projected to grow 12% over 2025—2035, an official net increase of 1,400 people",
+                  "Projected to grow 11.9% over 2025—2035, an official net increase of 1,400 people",
                   "About 1,100 openings per year on average"
                 ],
-                "evidence_type": "Official occupation section",
+                "evidence_type": "primary_document",
                 "id": "purchasing-managers",
                 "limitation": "This section is a national aggregate projection and cannot be used to infer an individual's probability of unemployment or regional demand.",
                 "market": "United States",
-                "name": "U.S. BLS Occupational Outlook Handbook: Aerospace Engineering and Operations Technicians · Job Outlook",
-                "period": "The 2025—2035 projection; accessed 2026-10-02",
+                "name": "BLS Employment Projections Table 1.2: 17-3021",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineering-and-operations-technicians.htm#tab-6"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-02",
@@ -32297,7 +32340,7 @@
                   "Mostly work in manufacturing plants, laboratories and offices",
                   "Mostly full-time work"
                 ],
-                "evidence_type": "Official occupation section",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-1",
                 "limitation": "This section describes the workplace, working hours and safety requirements, and is a description of the U.S. work context.",
                 "market": "United States",
@@ -32313,7 +32356,7 @@
                   "Usually requires an associate degree in engineering technology",
                   "Some employers accept a high school diploma or a certificate programme"
                 ],
-                "evidence_type": "Official occupation section",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-2",
                 "limitation": "This section describes the U.S. entry pathway and does not constitute an education or qualification requirement in China.",
                 "market": "United States",
@@ -32328,7 +32371,7 @@
                 "details": [
                   "Compared with aerospace engineers, aircraft and avionics maintenance technicians, mechanical engineering technicians, etc."
                 ],
-                "evidence_type": "Official occupation section",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
                 "limitation": "Used to compare with adjacent engineering positions; it is not evidence of this occupation's wages or demand.",
                 "market": "United States",
@@ -32344,7 +32387,7 @@
                   "Used to query wages and employment by state and metropolitan area",
                   "Accessed 2026-09-14"
                 ],
-                "evidence_type": "Official data entry point",
+                "evidence_type": "primary_document",
                 "id": "census",
                 "limitation": "Regional data entry point; this page cites only the national basis and does not use state or metropolitan area figures.",
                 "market": "United States",
@@ -32361,7 +32404,7 @@
                   "95% work more than 40 hours per week",
                   "69% wear protective or safety equipment every day"
                 ],
-                "evidence_type": "Official occupation section",
+                "evidence_type": "primary_document",
                 "id": "msresearch",
                 "limitation": "Work context dimensions are used to understand working conditions, not as risk ratios or health diagnoses.",
                 "market": "United States",
@@ -32372,20 +32415,20 @@
                 "url": "https://www.onetonline.org/link/details/17-3021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Getting information, monitoring processes, identifying and recording",
-                  "Using computers and documenting records"
+                  "The May 2025 U.S. national median for SOC 17-3021 was $82,890 a year and $39.85 an hour.",
+                  "National wage percentiles, not offers."
                 ],
-                "evidence_type": "Official occupation section",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "Work activity dimensions are used to understand the composition of tasks, not as performance standards or hiring thresholds.",
+                "limitation": "National wage percentiles, not offers.",
                 "market": "United States",
-                "name": "O*NET OnLine 17-3021.00 Work Activities",
-                "period": "Updated 2026; accessed 2026-09-14",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET wage table (BLS OEWS)",
+                "period": "May 2025",
+                "publisher": "O*NET / BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/17-3021.00"
+                "url": "https://www.onetonline.org/link/localwages/17-3021.00"
               },
               {
                 "accessed_at": "2026-10-02",
@@ -32393,48 +32436,95 @@
                   "Producers are responsible for product quality",
                   "Passing off non-conforming products as conforming products is prohibited"
                 ],
-                "evidence_type": "Legal text",
+                "evidence_type": "primary_document",
                 "id": "archivists",
                 "limitation": "Used to explain the institutional background of product liability and quality obligations; it does not constitute specific testing or calibration standards.",
                 "market": "Mainland China",
                 "name": "Product Quality Law of the People's Republic of China · producer and seller liability",
                 "period": "Amended in 2018; accessed 2026-10-02",
-                "publisher": "China National Intellectual Property Administration",
+                "publisher": "Republished by the State Administration for Market Regulation",
                 "scope": "contextual",
-                "url": "https://www.cnipa.gov.cn/art/2019/7/31/art_104_67810.html"
+                "url": "https://www.samr.gov.cn/zfjcj/tzgg/art/2023/art_579118cd202a45fba28b7edfd9f6fd72.html"
               },
               {
-                "accessed_at": "2026-10-08",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Manufacturing 55%; professional, scientific and technical services 35%; other industries 10%.",
-                  "The page states no statistical year; this is only the current occupational industry share on this page, not China's structure or industry wages."
+                  "Manufacturing: 55%; professional, scientific, and technical services: 35%.",
+                  "The remaining industries are not itemized. These are not industry wages."
                 ],
-                "evidence_type": "Official industry distribution",
+                "evidence_type": "primary_document",
                 "id": "cnclass-cross-repair",
                 "limitation": "Only gives the industry employment share, without industry wages; it cannot be used to infer China's industry structure.",
                 "market": "United States",
-                "name": "O*NET 17-3021.00 industry distribution",
-                "period": "The current industry distribution page states no data year; checked 2026-10-08",
+                "name": "O*NET 17-3021.00: top industries in 2025",
+                "period": "2025",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/17-3021.00"
+                "url": "https://www.onetonline.org/link/details/17-3021.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Test｜Equipment preparation and calibration｜Prepare test equipment to specification, verify the measurement chain and ranges, and record calibration status. — 25/100; weight=1/3; aerospace-engineering-and-operations-technicians.profile.responsibilities-block.1[0]",
-                  "Test｜Test execution and data collection｜Configure acquisition parameters, run the specified operating conditions and collect traceable test data. — 25/100; weight=1/3; aerospace-engineering-and-operations-technicians.profile.responsibilities-block.1[1]",
-                  "Data｜Data verification and anomaly handling｜Verify values, units and periods, record anomalies and provide retest recommendations. — 75/100; weight=1/3; aerospace-engineering-and-operations-technicians.profile.responsibilities-block.1[3]"
+                  "Tools can compare fictional equipment IDs, certificate fields and worksheet versions. Check the originals, record gaps and retain discrepancies. A tool cannot invent a certificate, overwrite raw data or approve a result. There is no measured displacement rate here.",
+                  "No displacement estimate.",
+                  "No displacement estimate.",
+                  "No displacement estimate.",
+                  "No displacement estimate."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "No displacement estimate.",
+                "market": "Editorial guidance",
+                "name": "Editorial note: AI and test records",
+                "period": "2026",
+                "publisher": "FermatMind Editorial",
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In September 2026, GalaxySpace posted six test technician positions in Anhui through Hebei University of Technology. The posting lists an associate-level minimum, spacecraft testing, equipment operation and maintenance, monitoring shifts and test records. Both pay fields list CNY 10,000 or above without a pay period. This is one posting."
+                ],
+                "evidence_type": "primary_document",
+                "id": "galaxy",
+                "limitation": "Pay period is unspecified.",
+                "market": "Mainland China",
+                "name": "GalaxySpace: test technician",
+                "period": "2026-09-17",
+                "publisher": "GalaxySpace / Hebei University of Technology",
+                "scope": "recruitment_proxy",
+                "url": "https://career.hebut.edu.cn/correcruit/content/id/80822.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In March 2026, Northwestern Polytechnical University advertised one aerospace structural integrity lab technician at its Youyi campus in Xi’an, with a relevant bachelor’s degree or higher. The non-establishment hire covers equipment coordination, routine verification, records and fatigue-machine training. No pay amount was stated and the application deadline has passed."
+                ],
+                "evidence_type": "primary_document",
+                "id": "npu",
+                "limitation": "Historical posting with no pay amount.",
+                "market": "Mainland China",
+                "name": "NPU Aerospace School: lab technician",
+                "period": "2026-03-31",
+                "publisher": "Northwestern Polytechnical University",
+                "scope": "recruitment_proxy",
+                "url": "https://renshi.nwpu.edu.cn/info/1326/31075.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Covers identifiable personal information and limits collection to the necessary scope."
+                ],
+                "evidence_type": "primary_document",
+                "id": "pipl",
+                "limitation": "Check project rules for sharing technical drawings.",
+                "market": "Mainland China",
+                "name": "Personal Information Protection Law, Articles 4–6",
+                "period": "2021",
+                "publisher": "CAC repost of NPC text",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               }
             ]
           },
@@ -34713,8 +34803,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "employer"
+              "pipl",
+              "editor"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34944,6 +35034,36 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "aerospace-engineering-and-operations-technicians.source-register.published.1"
+            },
+            "id": "pipl",
+            "label": {
+              "$source": "pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "aerospace-engineering-and-operations-technicians.source-register.published.1"
+            },
+            "scope": "Personal data only; check project authorization for technical records."
+          },
+          {
+            "href": null,
+            "id": "editor",
+            "label": {
+              "$source": "editor",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "aerospace-engineering-and-operations-technicians.source-register.published.1"
+            },
+            "scope": "No general permission to share project records."
           }
         ]
       },
@@ -35306,7 +35426,7 @@
             "driver_heading": "Which industries and directions use this occupation?",
             "official_heading": "Official broad-basis wage proxy (not a recruitment sample)",
             "scenario_caption": "Educational background, common job directions and verification advice (editorial compilation, not salary statistics)",
-            "scenario_heading": "With different educational backgrounds, which job directions do aerospace engineering and operations technicians usually start from?",
+            "scenario_heading": "Which roles should you check with different training backgrounds?",
             "scenario_interpretation_label": "Notes and verification advice",
             "scenario_role_label": "Educational background",
             "scenario_value_label": "Common job directions"
@@ -35774,9 +35894,9 @@
         }
       },
       "hero": {
-        "h1": "Aerospace engineering and operations technicians",
-        "quick_answer": "Aerospace engineering and operations technicians turn test plans into reviewable equipment configurations, calibration records and measurement data, installing instruments, running tests, identifying anomalies and maintaining test systems within the requirements and safety boundaries defined by engineers.",
-        "title": "Aerospace engineering and operations technicians"
+        "h1": "Aerospace Engineering and Operations Technologists and Technicians",
+        "quick_answer": "Aerospace engineering and operations technologists and technicians turn a test plan into traceable instruments, equipment checks and original records. Test support, measurement and assembly quality have different outputs. When a certificate or version does not match, keep the original record and refer the decision to authorized staff.",
+        "title": "Aerospace Engineering and Operations Technologists and Technicians"
       },
       "market_signal_card": {
         "context_links": [
@@ -35858,7 +35978,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "onet-context",
             "value": {
               "$item": "aerospace-engineering-and-operations-technicians.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35903,7 +36023,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "aerospace-engineering-and-operations-technicians.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -35967,7 +36087,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "bls",
+            "id": "ep",
             "label": {
               "$link": "aerospace-engineering-and-operations-technicians.market-signals.market-signal-card.7",
               "block": "market-signals",
@@ -35990,7 +36110,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "id": "ep",
+            "id": "onet-context",
             "label": {
               "$link": "aerospace-engineering-and-operations-technicians.market-signals.market-signal-card.7",
               "block": "market-signals",
@@ -37127,7 +37247,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my vocational interests suit aerospace engineering and operations technicians",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37341,7 +37461,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and test records",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Comparison of work directions",
       "fit": "Occupation fit guide",
@@ -37377,7 +37497,7 @@
         "market": "United States",
         "measure": "10th percentile wage",
         "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37389,19 +37509,19 @@
         "market": "United States",
         "measure": "25th percentile wage",
         "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "$82,890/year",
+        "display_value": "$82,890 per year; $39.85 per hour",
         "fact_id": "us-wage-2025",
         "market": "United States",
         "measure": "Median wage",
         "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37413,7 +37533,7 @@
         "market": "United States",
         "measure": "75th percentile wage",
         "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37425,7 +37545,7 @@
         "market": "United States",
         "measure": "90th percentile wage",
         "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37439,19 +37559,19 @@
         "occupation_scope": "Aerospace engineering and operations technicians",
         "period": "2025",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "+12%",
+        "display_value": "11.9%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth rate and official net change",
         "occupation_scope": "Aerospace engineering and operations technicians",
         "period": "2025—2035",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
@@ -37463,7 +37583,7 @@
         "occupation_scope": "Aerospace engineering and operations technicians",
         "period": "Average over 2025—2035",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
@@ -37472,8 +37592,8 @@
         "fact_id": "us-industry-wage-finance-2025",
         "market": "United States",
         "measure": "Median wage for this occupation in this industry (aerospace product and parts manufacturing)",
-        "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "2025, month 5 (May)",
+        "occupation_scope": "Aerospace product and parts manufacturing",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37484,8 +37604,8 @@
         "fact_id": "us-industry-wage-professional-2025",
         "market": "United States",
         "measure": "Median wage for this occupation in this industry (engineering services)",
-        "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "2025, month 5 (May)",
+        "occupation_scope": "Engineering services",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37496,8 +37616,8 @@
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "United States",
         "measure": "Median wage for this occupation in this industry (scientific research and development services)",
-        "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "2025, month 5 (May)",
+        "occupation_scope": "Scientific research and development services",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37508,8 +37628,8 @@
         "fact_id": "us-industry-wage-education-2025",
         "market": "United States",
         "measure": "Median wage for this occupation in this industry (computer and electronic product manufacturing)",
-        "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "2025, month 5 (May)",
+        "occupation_scope": "Computer and electronic product manufacturing",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37612,12 +37732,12 @@
       },
       {
         "derivation": null,
-        "display_value": "$82,890/year (median)",
+        "display_value": "$82,890 per year; $39.85 per hour",
         "fact_id": "us-wage-median-2025",
         "market": "United States",
         "measure": "Median annual wage",
         "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37629,7 +37749,7 @@
         "market": "United States",
         "measure": "Annual wage percentile distribution",
         "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37648,12 +37768,12 @@
       },
       {
         "derivation": null,
-        "display_value": "$82,890/year (2025, month 5 (May), national basis)",
+        "display_value": "$82,890 per year; $39.85 per hour",
         "fact_id": "us-wage",
         "market": "United States",
         "measure": "Occupational wage or availability boundaries",
         "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "2025, month 5 (May)",
+        "period": "May 2025",
         "source_refs": [
           "oews"
         ]
@@ -37684,41 +37804,29 @@
       },
       {
         "derivation": null,
-        "display_value": "+12% (2025—2035)",
+        "display_value": "11.9%",
         "fact_id": "employment-projection",
         "market": "United States",
         "measure": "Employment trend or availability boundaries",
         "occupation_scope": "Aerospace engineering and operations technicians",
         "period": "2025—2035",
         "source_refs": [
-          "bls"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Aerospace engineering and operations technicians",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "ep"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and test records"
     },
     "badges": [
-      "RIASEC · RCI",
-      "Test execution / instrument calibration",
-      "Measurement and authorisation responsibility · AI exploration"
+      "Equipment and testing",
+      "Calibration and original records",
+      "Handover and escalation"
     ],
     "metrics": [
       {
@@ -37757,17 +37865,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What aerospace engineering and operations technicians do, what abilities and qualifications they need, what pay and prospects look like, and which tasks AI will change; source scope and data gaps are retained."
+      "text": "See how aerospace test technicians check instruments and preserve original records. Compare mainland hiring and U.S. pay, then try a fictional test handover."
     },
     "title": {
       "availability": "available",
-      "text": "Aerospace engineering and operations technicians"
+      "text": "Aerospace Test Technicians: Work, Pay and a Practical Exercise"
     }
   },
-  "source_content_sha256": "899bb21a9a4bcb0dec800e00253cae8a5da67574a58ca038e80cc58305e2cf3c",
+  "source_content_sha256": "25a17f9e0715ec036cd4248d447a2cc63399fd169e17210fe1243c11fad6c5e3",
   "subject": {
     "canonical_slug": "aerospace-engineering-and-operations-technicians",
-    "name": "Aerospace engineering and operations technicians",
-    "summary": "Aerospace engineering and operations technicians turn test plans into reviewable equipment configurations, calibration records and measurement data, installing instruments, running tests, identifying anomalies and maintaining test systems within the requirements and safety boundaries defined by engineers."
+    "name": "Aerospace Engineering and Operations Technologists and Technicians",
+    "summary": "Aerospace engineering and operations technologists and technicians turn a test plan into traceable instruments, equipment checks and original records. Test support, measurement and assembly quality have different outputs. When a certificate or version does not match, keep the original record and refer the decision to authorized staff."
   }
 }

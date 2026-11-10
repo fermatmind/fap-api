@@ -1454,6 +1454,9 @@
       "item:commercial-pilots.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:commercial-pilots.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:commercial-pilots.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30839,6 +30842,21 @@
           "id": "commercial-pilots.path.recruitment-sample.1",
           "title": "Notes on using recruitment samples",
           "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two fictional charter briefs name the same departure but different destinations. Identify the version and acknowledgments to verify with scheduling and crew."
+            ]
+          },
+          "id": "commercial-pilots.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Check a charter flight assignment",
+          "type": "notice"
         }
       ]
     },
@@ -37753,6 +37771,13 @@
         "id": "commercial-pilots.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "commercial-pilots.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -38263,7 +38288,7 @@
       "text": "Commercial Pilot"
     }
   },
-  "source_content_sha256": "fc50c67040d2bdd9edfdb34b2b1c5c31aabfc64ea6e9ee46c0909f83cad13c74",
+  "source_content_sha256": "dcb68156a329b8e5ed7587d16528dbaee155f9e6de72b105e523ccbbd9c67bb3",
   "subject": {
     "canonical_slug": "commercial-pilots",
     "name": "Commercial Pilot",

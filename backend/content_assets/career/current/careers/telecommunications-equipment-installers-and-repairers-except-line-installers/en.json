@@ -23656,13 +23656,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "First assess whether you can check equipment, ports, and versions, separate readings from guesses, narrow the problem through tests, and stop to ask when permissions or safety conditions are unclear; then consider attendance and personal conditions. One experience is not job certification."
+              "Paper check | Compare a fictional cabinet port diagram with a test sheet. Flag a port ID mismatch and refer the original drawing to the equipment lead. "
             ]
           },
           "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls-ooh"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24791,13 +24790,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Telecommunications equipment installers and repairers install, set up, adjust, and repair switching, distribution, routing, and customer communication equipment; use drawings and tests to locate problems, recheck repair results, maintain records, and explain results to users. 49-2022.00 excludes line installer occupations, but in-building communication wiring may be among its tasks."
+              "Telecommunications equipment installers and repairers install, test or service communications equipment and connections at equipment sites. They use diagrams and test records to isolate faults and hand off findings. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh"
+            "transfer-onet-49-2022.00"
           ],
           "type": "prose"
         }
@@ -25437,13 +25435,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has no verifiable 49-2022 task-level AI ratings and shows a separate editorial estimate. Text assistance with manual questions, record drafts, and test checklists can be explored; diagnostic validity, operational permissions, and safety conditions still require human checks. No individual unemployment probability is predicted. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+50+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional cabinet port diagram with a test sheet. Flag a port ID mismatch and refer the original drawing to the equipment lead."
             ]
           },
           "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.display.ai_impact_table.answer",
           "source_refs": [
-            "bls-ors",
-            "bls-ooh"
+            "transfer-onet-49-2022.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32743,6 +32741,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-49-2022.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 49-2022.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/49-2022.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38259,10 +38284,10 @@
       "text": "Telecommunications Equipment Installers and Repairers, Except Line Installers"
     }
   },
-  "source_content_sha256": "58010629629a9f96e83ba1d386ff7bd254a56819a01b37bf4b0cad171bb5a76b",
+  "source_content_sha256": "3f353a05a6275857f1c6d709678757df9a63934d3cd7bb6b1cd9097db5c10f3b",
   "subject": {
     "canonical_slug": "telecommunications-equipment-installers-and-repairers-except-line-installers",
     "name": "Telecommunications Equipment Installers and Repairers, Except Line Installers",
-    "summary": "Install, set up, adjust, and repair switching, distribution, routing, and customer communication equipment; use drawings and tests to locate anomalies, recheck repair results, and retain records and user explanations. O*NET49-2022.00 may include in-building communication wiring but does not merge with line installation occupations; check Chinese tasks, qualifications, and site permissions separately."
+    "summary": "Telecommunications equipment installers and repairers install, test or service communications equipment and connections at equipment sites. They use diagrams and test records to isolate faults and hand off findings."
   }
 }

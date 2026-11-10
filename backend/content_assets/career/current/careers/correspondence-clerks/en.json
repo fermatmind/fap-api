@@ -47,6 +47,12 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:posting-letter-miyun": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-letter-yantian": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -19424,56 +19430,20 @@
         "status": "unfilled"
       },
       "source_card.secondary_links.01.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            0,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.href": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "href"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.02.label": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "secondary_links",
-            1,
-            "label"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.03.href": {
         "ref": {
@@ -19481,7 +19451,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "href"
           ],
           "source": "display"
@@ -19494,7 +19464,7 @@
             "components",
             "source_card",
             "secondary_links",
-            2,
+            0,
             "label"
           ],
           "source": "display"
@@ -19507,7 +19477,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "href"
           ],
           "source": "display"
@@ -19520,7 +19490,7 @@
             "components",
             "source_card",
             "secondary_links",
-            3,
+            1,
             "label"
           ],
           "source": "display"
@@ -23547,7 +23517,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
+              "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 5.6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
@@ -24376,7 +24346,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
+              "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 5.6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
@@ -24571,7 +24541,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
+              "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 5.6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
@@ -26057,12 +26027,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round did not obtain verifiable job posting offer statistics for correspondence and clerical positions in mainland China; a single posting cannot represent the national level"
+              "A historical Yantian office clerk ad lists CNY 5,000–6,000 per month for duties including drafting correspondence, registering documents and filing. A Miyun deputy office director ad also lists CNY 5,000–6,000 per month, negotiable for experienced applicants, and asks for related office experience and familiarity with drafting official documents and letters. Both are mixed roles. Ask who checks records, drafts the reply, approves sending and records it. The postings do not establish national wages for correspondence clerks."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "letter-yantian",
+            "letter-miyun"
           ],
           "type": "prose"
         },
@@ -26177,7 +26148,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 national wages and 2025—2035 projections each keep this occupation's basis, with the combined group used only for comparison. This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate. OEWS covers pretax regular monetary wages for wage and salary jobs and excludes self-employed workers, direct household employees and unpaid family workers; official annual values may be cited, the standard 2080 conversion does not guarantee personal hours, and take-home pay or overtime bonuses are not inferred."
+              "The 2025 national wages and 2025—2035 projections each keep this occupation's basis, with the combined group used only for comparison. This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 5.6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate. OEWS covers pretax regular monetary wages for wage and salary jobs and excludes self-employed workers, direct household employees and unpaid family workers; official annual values may be cited, the standard 2080 conversion does not guarantee personal hours, and take-home pay or overtime bonuses are not inferred."
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
@@ -28299,7 +28270,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Similar positions in mainland China are mostly called clerical staff, back office staff or customer service back office and belong to different units and outsourcing settings, and data permissions, handling processes and compliance requirements differ markedly by unit and business."
+              "Possible mainland China search terms include clerk, office support and customer service back office; check the employer, duties and contract, and data permissions, handling processes and compliance requirements differ markedly by unit and business."
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
@@ -28447,7 +28418,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
+              "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 5.6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
@@ -28529,8 +28500,8 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This page does not cite specific active recruitment announcements and does not count historical recruitment cases as active positions; recruiting and outsourcing conditions must be checked against the target unit's announcement for the relevant year.",
-              "The scenario judgment, record checking and observation methods in the examples are editorially designed to provide task observation ideas; this page did not obtain a recruitment sample, so they cannot be called a verification process commonly used by employers."
+              "This page cites two historical postings and does not establish any current vacancies; recruiting and outsourcing conditions must be checked against the target unit's announcement for the relevant year.",
+              "The scenario judgment, record checking and observation methods in the examples are editorially designed to provide task observation ideas; the two historical postings do not establish how employers generally evaluate applicants."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
@@ -28623,7 +28594,7 @@
                 "id": "employer-1",
                 "values": [
                   "Office software and system ability",
-                  "Editorial preparation suggestion: experience accurate entry and retrieval in word processing, spreadsheets, email and record systems; this page did not obtain a Chinese recruitment sample, so specific systems and proficiency requirements are verified with the target position.",
+                  "Practice retrieving correspondence, email and records in a test environment. The Yantian and Miyun postings are historical examples; verify software and proficiency with the target employer.",
                   "This page did not obtain nationally uniform published qualification conditions for mainland China, and they must be checked against the target unit's recruitment requirements for the relevant year; this page does not constitute a qualification determination or authorization suggestion."
                 ]
               },
@@ -28823,7 +28794,7 @@
               [
                 "Process and training ability",
                 "People preparing to take on team leader or supervisor responsibilities",
-                "Editorial preparation thread: check process maintenance, coordination and training tasks; this page did not obtain evidence on management recruitment or training effects.",
+                "The Miyun deputy office director posting illustrates office experience, familiarity with drafting and coordination. It does not establish general management requirements or training outcomes.",
                 "Check against target position conditions; no Chinese prevalence distribution across positions was obtained",
                 "Per unit systems and position requirements",
                 "Fees and actual duration not obtained",
@@ -30367,7 +30338,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
+              "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 5.6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
@@ -30829,7 +30800,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
+              "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 5.6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
@@ -30898,7 +30869,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Read incoming letters, emails and forms and judge the request category and handling method, retrieve and check order, billing and account records, draft and proofread replies and confirmation letters, route letters to the appropriate department, calculate fees due and send payment letters, record payments received and keep them safe, compile data from the records into periodic reports, and prepare mailing materials for registered mail or courier.",
+                "answer": "Read incoming correspondence, verify records such as invoices or claims, draft a reply, route it as required and keep records. The employer decides which replies need approval or referral.",
                 "id": "actors.faq.1",
                 "question": "What does the daily work of correspondence clerks involve?",
                 "question_key": "career.faq.correspondence-clerks.1",
@@ -30907,12 +30878,13 @@
                 ]
               },
               {
-                "answer": "Correspondence clerks mainly read incoming letters, check records and draft replies and correspondence, and the output is traceable correspondence and a ledger; customer service representatives directly receive and resolve customer issues through real-time conversation; order clerks receive orders, enter payment methods and track processing progress; file clerks focus on filing and retrieval; and billing and posting clerks focus on receivables calculation and posting.",
+                "answer": "Correspondence clerks focus on documented written replies and correspondence records. Data entry keyers focus on transferring information into specified fields and checking it. Both may review documents or use a database; compare whether the main output is a reply or a record.",
                 "id": "actors.faq.2",
-                "question": "How do correspondence clerks differ from customer service representatives and order clerks?",
+                "question": "How do correspondence clerks differ from data entry keyers?",
                 "question_key": "career.faq.correspondence-clerks.2",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "letter-data-entry"
                 ]
               },
               {
@@ -30925,12 +30897,13 @@
                 ]
               },
               {
-                "answer": "What can be verified is change at the task level: the three task categories of incoming letter classification and initial routing, record and report compilation, and reply drafting and format validation can be partly taken on by tools; this page has no single-occupation adoption rate or displacement data.",
+                "answer": "Templates and search tools can help sort incoming messages or draft a response. Check facts, authority and recipients under the employer’s procedures. These are possible uses, not measurements of AI adoption or productivity.",
                 "id": "actors.faq.4",
-                "question": "For which tasks of correspondence clerks is there already AI change evidence?",
+                "question": "Which tasks could software help with?",
                 "question_key": "career.faq.correspondence-clerks.4",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "nist"
                 ]
               },
               {
@@ -30943,29 +30916,34 @@
                 ]
               },
               {
-                "answer": "Among the U.S. 2025 wage data, the median annual wage is 46,800 USD and the hourly wage 22.50 USD (single-occupation basis for 43-4021.00), with percentiles at annual wages 33,300／38,610／46,800／56,090／64,510 USD; the BLS information clerks combined basis median is 45,430 USD/year in 2025; no occupation-level wage value was obtained for mainland China, and this page treats it as a gap rather than filling it with an industry average.",
+                "answer": "The 2025 U.S. occupational median wage was $22.50 an hour and $46,800 a year. A historical Yantian office clerk ad lists CNY 5,000–6,000 per month for duties including drafting correspondence, registering documents and filing. A Miyun deputy office director ad also lists CNY 5,000–6,000 per month, negotiable for experienced applicants, and asks for related office experience and familiarity with drafting official documents and letters. Both are mixed roles. Ask who checks records, drafts the reply, approves sending and records it. The postings do not establish national wages for correspondence clerks.",
                 "id": "actors.faq.6",
                 "question": "What is the usual wage for correspondence clerks, and how should it be compared?",
                 "question_key": "career.faq.correspondence-clerks.6",
                 "source_refs": [
-                  "oews"
+                  "oews",
+                  "letter-yantian",
+                  "letter-miyun"
                 ]
               },
               {
-                "answer": "The U.S. preparation level is Job Zone 1–2, usually requiring a high school diploma or equivalent, with on-the-job training from a few days to one year; most positions master the processes and templates through one onboarding training and on-the-job learning. Recruitment and training for similar positions in mainland China follow the target unit's rules.",
+                "answer": "BLS lists a high school diploma or equivalent and short-term on-the-job training as typical in the United States. The mainland examples are a broader clerical role and a deputy office director role. Check each employer’s education, experience and approval requirements separately.",
                 "id": "actors.faq.7",
                 "question": "What education do correspondence clerks need, and how should training be done?",
                 "question_key": "career.faq.correspondence-clerks.7",
                 "source_refs": [
-                  "onet"
+                  "g04-trends",
+                  "letter-yantian",
+                  "letter-miyun"
                 ]
               },
               {
-                "answer": "There is no uniform national license in the United States, and on-the-job training is mostly arranged by employers; similar positions in mainland China mostly have no uniform national qualification requirement, and specific conditions are checked against the target unit's recruitment announcement and current rules.",
+                "answer": "BLS describes typical education and on-the-job training. That does not establish national licensing. The two mainland China postings show individual requirements; check the employer, industry and local rules for the specific role.",
                 "id": "actors.faq.8",
                 "question": "Do you have to get a certificate to work as a correspondence clerk?",
                 "question_key": "career.faq.correspondence-clerks.8",
                 "source_refs": [
+                  "g04-trends",
                   "cn-rule"
                 ]
               },
@@ -30979,12 +30957,13 @@
                 ]
               },
               {
-                "answer": "The O*NET single-occupation basis (43-4021.00) shows 2024 employment of about 6,900 people, a projected decline over 2024—2034, and about 700 cumulative openings; the BLS information clerks combined basis declines 2% over 2025—2035 (-30,100), with about 125,600 openings per year all from replacement demand; the total declines but replacement openings continue to arise, and the work is mainly repeated reading and checking, so it must be checked against the actual demand of local institutions.",
+                "answer": "BLS projects U.S. employment for SOC 43-4021 to fall 5.6%, from about 4,800 in 2025 to 4,500 in 2035, with about 500 annual openings including replacement needs. Figures are rounded independently. Before applying for adjacent jobs, check whether the daily output is written replies, routed complaints or general document processing.",
                 "id": "actors.faq.10",
                 "question": "What else should be considered when choosing a correspondence clerk career now?",
                 "question_key": "career.faq.correspondence-clerks.10",
                 "source_refs": [
-                  "bls"
+                  "g04-trends",
+                  "onet"
                 ]
               }
             ]
@@ -31218,12 +31197,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate.",
-                  "U.S. O*NET JobZone1–2, SVP below 6; the level summary of a few days to one year of training is not the duration for every person in this occupation. Education responses 43% high school, 28% two-year degree and 17% some college no degree, with others not shown, so it is not called a majority at high school or below. The BLS combined group usually requires high school and short-term on-the-job training (usually a few weeks, possibly months in government), not a uniform China threshold."
+                  "The OOH Information Clerks table displays the individual 43-4021 row at a rounded −6%. See BLS Table 1.2 for the one-decimal −5.6%. The broader group is context only."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate. U.S. O*NET JobZone1–2, SVP below 6; the level summary of a few days to one year of training is not the duration for every person in this occupation. Education responses 43% high school, 28% two-year degree and 17% some college no degree, with others not shown, so it is not called a majority at high school or below. The BLS combined group usually requires high school and short-term on-the-job training (usually a few weeks, possibly months in government), not a uniform China threshold.",
+                "limitation": "General duties and education context. The group is not a substitute for the exact occupation.",
                 "market": "United States",
                 "name": "BLS Occupational Outlook Handbook: Information Clerks (information clerks, including correspondence clerks)",
                 "period": "2025 median wages and 2025—2035 projections; retrieved 2026-09-18",
@@ -31546,19 +31524,19 @@
                 "url": "https://www.onetonline.org/link/summary/43-3031.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
+                  "BLS projects U.S. employment for SOC 43-4021 to fall 5.6%, from about 4,800 in 2025 to 4,500 in 2035, with about 500 annual openings including replacement needs. Figures are rounded independently."
                 ],
                 "evidence_type": "official statistics",
                 "id": "g04-trends",
-                "limitation": "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate.",
+                "limitation": "Table 1.2 exact occupation 43-4021. Baseline, endpoint and net change are rounded independently. The OOH displays the same occupation at a rounded −6%, and its broader Information Clerks group is not the individual occupation.",
                 "market": "United States",
                 "name": "O*NET employment trend for this occupation 43-4021",
-                "period": "2025—2035 projections",
+                "period": "2025–2035",
                 "publisher": "O*NET citing BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/43-4021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "details": [
@@ -31576,6 +31554,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Five office clerks at CNY 5,000–6,000 per month. Duties include drafting letters, registering incoming documents, following up and filing, alongside other office and operations support."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "letter-yantian",
+                "limitation": "A historical posting, not a national wage estimate or current vacancy.",
+                "market": "Mainland China",
+                "name": "Dameisha Outlets: office clerk",
+                "period": "2022-04",
+                "publisher": "Yantian District Human Resources Bureau, Shenzhen",
+                "scope": "recruitment_proxy",
+                "url": "https://www.yantian.gov.cn/cn/service/ldjy/jyzpxx/content/post_9713598.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Employer three lists one deputy office director at CNY 5,000–6,000 per month, with pay negotiable for experienced applicants. The ad asks for office experience and familiarity with drafting correspondence and official documents."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "letter-miyun",
+                "limitation": "A historical posting, not a national wage estimate or current vacancy.",
+                "market": "Mainland China",
+                "name": "Beijing Haiwang Zhongxin Pharmaceutical: deputy office director",
+                "period": "2026-04",
+                "publisher": "Miyun District Human Resources and Social Security Bureau, Beijing",
+                "scope": "recruitment_proxy",
+                "url": "https://www.bjmy.gov.cn/zwgk/jy1/202604/t20260415_538113.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Enter and verify data."
+                ],
+                "evidence_type": "O*NET task profile",
+                "id": "letter-data-entry",
+                "limitation": "Comparison occupation.",
+                "market": "United States",
+                "name": "Data Entry Keyers",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "related",
+                "url": "https://www.onetonline.org/link/details/43-9021.00"
               }
             ]
           },
@@ -34382,7 +34405,7 @@
             },
             {
               "指标": "Occupational classification",
-              "数值": "Similar positions in mainland China are mostly called clerical staff, back office staff or customer service back office and belong to different units and outsourcing settings",
+              "数值": "Possible mainland China search terms include clerk, office support and customer service back office; check the employer, duties and contract",
               "说明": "Used to explain the Chinese context; clerical positions cannot be directly equated with the duties or wages of U.S. occupational codes, and qualification requirements cannot be inferred from it."
             },
             {
@@ -34525,7 +34548,7 @@
               "月薪参考": "NBS2025 conditional matching background: finance non-private 211,164／private 140,451, leasing and business services 110,162／68,919 yuan pretax annual average. Cited only when the unit's main business classification matches; the 94,936 yuan annual average for office and related personnel in enterprises above designated size is another coverage for a broad position, not this occupation's percentiles. Urban legal entities with 5 or more people, excluding self-employed and freelance workers, including bonuses and allowances; the wage and recruitment distribution for this occupation in China was not obtained, and no monthly take-home conversion is made."
             },
             {
-              "城市/区间": "Mainland China (job posting offer basis)",
+              "城市/区间": "Mainland China correspondence-related job postings",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34537,20 +34560,21 @@
           "china_soc_row": "This round obtained the U.S. occupation-level wages and projections for 43-4021; no verifiable precise statistical mapping was established for similar positions in China, and it is not asserted that the classification or data does not exist nationwide.",
           "edu": "See the entry module for training and qualifications",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-letter-yantian",
+            "posting-letter-miyun"
           ],
           "sources_note": "Source links are used according to their respective statistical or announcement scope; when the statistical period, survey subjects and pay basis differ they are cited separately, with no conversion between them.",
           "ui": {
             "ai_heading": "Will AI or automation affect the wages of correspondence clerks?",
             "driver_heading": "How are work cycles arranged in correspondence and accounting settings?",
-            "official_heading": "Official statistical basis and missing data notes",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "Educational background, position directions and notes (editorial compilation, not wage statistics)",
             "scenario_heading": "Which correspondence and clerical position directions correspond to different educational and training backgrounds?",
             "scenario_interpretation_label": "Notes and verification suggestions",
             "scenario_role_label": "Educational background",
             "scenario_value_label": "Position directions"
           },
-          "us_growth": "A decline of 6% (2025—2035 for this occupation)",
+          "us_growth": "A decline of 5.6% (2025—2035 for this occupation)",
           "us_median": "46,800 USD/year (median, 2025 wage data)"
         }
       },
@@ -34601,7 +34625,7 @@
               "$fact": "g04-employment-2025",
               "field": "display_value"
             },
-            "说明": "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
+            "说明": "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 5.6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
           },
           {
             "fact_ref": "g04-growth-2025-2035",
@@ -34610,7 +34634,7 @@
               "$fact": "g04-growth-2025-2035",
               "field": "display_value"
             },
-            "说明": "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
+            "说明": "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 5.6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
           },
           {
             "fact_ref": "g04-openings-2025-2035",
@@ -34619,7 +34643,7 @@
               "$fact": "g04-openings-2025-2035",
               "field": "display_value"
             },
-            "说明": "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
+            "说明": "This occupation 43-4021: 2025 employment 4,800 people, 2035 projected 4,500 people, a decline of 5.6% and a net decrease of 300 people; annual average openings 500 over 2025—2035, not a ten-year cumulative total or a net increase. The BLS information clerks combined group, at 1,287,600 people, a decline of 2%, a net change of -30,100 and 125,600 per year on average, is listed separately and does not stand in for this occupation; the projection is not AI displacement or an individual hiring rate."
           }
         ],
         "boundary": {
@@ -36291,7 +36315,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Explore the task interests and work preferences of correspondence clerks",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36403,14 +36427,6 @@
           "separator": "\n"
         },
         "secondary_links": [
-          {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
-          },
-          {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
-          },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
             "label": "Explore my personality preferences"
@@ -36826,38 +36842,38 @@
       },
       {
         "derivation": null,
-        "display_value": "About 6,900 people (2024, single-occupation basis)",
+        "display_value": "4,800 people (2025)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment size",
-        "occupation_scope": "Correspondence Clerks (43-4021.00) 2024 employment estimate; the BLS information clerks combined basis was about 1,287,600 people in 2025, which is a different basis",
-        "period": "2024 (O*NET/BLS single-occupation basis); retrieved 2026-09-18",
+        "measure": "U.S. employment (2025 base year)",
+        "occupation_scope": "U.S. SOC 43-4021",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "g04-trends"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Decline (2024—2034, label Decline, -1% or lower)",
+        "display_value": "Decline of 5.6% (2025–2035)",
         "fact_id": "growth",
         "market": "United States",
-        "measure": "Employment change rate",
-        "occupation_scope": "Correspondence Clerks (43-4021.00) 2024—2034 projections; the BLS information clerks combined basis declines 2% over 2025—2035 (-30,100), which is a different basis",
-        "period": "2024—2034 projection period (O*NET/BLS single-occupation basis); retrieved 2026-09-18",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "U.S. SOC 43-4021",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "g04-trends"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 700 (2024—2034 cumulative, single-occupation basis)",
+        "display_value": "500 per year (including replacement needs)",
         "fact_id": "openings",
         "market": "United States",
-        "measure": "Job openings",
-        "occupation_scope": "Correspondence Clerks (43-4021.00) cumulative job openings over 2024—2034; the BLS information clerks combined basis is about 125,600 per year on average, which is a different basis",
-        "period": "2024—2034 projection period; retrieved 2026-09-18",
+        "measure": "U.S. projected annual openings",
+        "occupation_scope": "U.S. SOC 43-4021",
+        "period": "2025–2035",
         "source_refs": [
-          "onet"
+          "g04-trends"
         ]
       },
       {
@@ -36898,7 +36914,7 @@
       },
       {
         "derivation": "No precise occupation-level wage for mainland China was obtained; industry averages, industry means or population averages are not used in place of this occupation's wage.",
-        "display_value": "Note: mainland China has no detailed occupation corresponding one to one with 43-4021.00, and this round did not obtain a standalone value for this type of position; similar clerical positions are scattered across different units and outsourcing settings, and the employment relationship and pay basis differ from the U.S. occupation",
+        "display_value": "This review did not establish a one-to-one match between mainland China jobs and 43-4021.00 or obtain a comparable nationwide value. Check each employer’s responsibilities and contract.",
         "fact_id": "china-jiaojiang-featured-daily-2026",
         "market": "Mainland China",
         "measure": "Statistical position not obtained (mainland China occupation-level wage for correspondence clerks)",
@@ -36923,7 +36939,7 @@
       },
       {
         "derivation": null,
-        "display_value": "A decline of 6% (2025—2035; net change -300)",
+        "display_value": "A decline of 5.6% (2025—2035; net change -300)",
         "fact_id": "g04-growth-2025-2035",
         "market": "United States",
         "measure": "Employment change rate",
@@ -36958,6 +36974,30 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Five office clerks at CNY 5,000–6,000 per month. Duties include drafting letters, registering incoming documents, following up and filing, alongside other office and operations support.",
+        "fact_id": "posting-letter-yantian",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Dameisha Outlets: office clerk",
+        "period": "2022-04",
+        "source_refs": [
+          "letter-yantian"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Employer three lists one deputy office director at CNY 5,000–6,000 per month, with pay negotiable for experienced applicants. The ad asks for office experience and familiarity with drafting correspondence and official documents.",
+        "fact_id": "posting-letter-miyun",
+        "market": "Mainland China",
+        "measure": "Public job posting sample",
+        "occupation_scope": "Beijing Haiwang Zhongxin Pharmaceutical: deputy office director",
+        "period": "2026-04",
+        "source_refs": [
+          "letter-miyun"
+        ]
       }
     ]
   },
@@ -36984,19 +37024,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "U.S. employment projection (2024—2034, decline)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. employed persons (2024, about 6,900 people)"
+        "label": "U.S. employment (2025 base year)"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "U.S. job openings (2024—2034, about 700)"
+        "label": "U.S. projected annual openings"
       },
       {
         "availability": "missing",
@@ -37010,14 +37050,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Correspondence clerks (O*NET-SOC 43-4021.00) handle correspondence and records around incoming letters and customer requests: this covers reading incoming letters to judge the handling method, checking order and billing records, drafting and proofreading replies, routing incoming letters, following up on payments and fees, explaining rules and processes, and preparing periodic reports; it includes the U.S. 2025 median annual wage of 46,800 USD (hourly wage 22.50 USD), 2024 employment of about 6,900 people, a projected employment decline over 2024—2034, the mainland China occupation-level wage gap, and the control points arising from repetitive eye strain, sedentary work and emotional communication."
+      "text": "See how correspondence clerks check records, draft replies and track correspondence. Compare mainland China postings, data entry duties and U.S. job data."
     },
     "title": {
       "availability": "available",
       "text": "Correspondence clerks"
     }
   },
-  "source_content_sha256": "b67dcf8fa6a357be70aaeeafa06a8e5ebc56461a42b23fa4386b3caa08301fff",
+  "source_content_sha256": "0b0c9d6c4e917cd7036570eb1e4fa92d1426c3ea334b078419a09c3b666b2afe",
   "subject": {
     "canonical_slug": "correspondence-clerks",
     "name": "Correspondence clerks",

@@ -23665,14 +23665,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe whether you can listen to the full question, check product price versions, honestly explain uncertainties, and record customer choices. Stop selling after refusals and refer refunds or professional questions to authorized personnel; also assess target pressure, repeated calls, and income conditions."
+              "Paper check | Compare a fictional call log with a follow-up list. Flag a request to stop calls that is still queued and refer it to the supervisor. "
             ]
           },
           "id": "telemarketers.display.fermat_decision_card.summary",
           "source_refs": [
-            "editorial",
-            "onet",
-            "cn-rule"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24849,12 +24847,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Telemarketers introduce goods and services by telephone and solicit orders or donations, listen to needs, explain verified price conditions, and maintain contact, transaction, and appointment records. Commercial calls in China require checking consumer consent first and stopping immediately after cancellation; check specific product permissions and order processes by organization and jurisdiction."
+              "Telemarketers use calls to explain goods, services or fundraising campaigns, answer questions and record responses, orders or follow-up. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "telemarketers.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "transfer-onet-41-9041.00"
           ],
           "type": "prose"
         }
@@ -25533,15 +25531,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has no verifiable 41-9041 task-level AI ratings. Record and price-list check drafts can be explored, but people check contact bases, prices, and customer cancellation through organizational procedures; no individual unemployment probability is given. Separately listed US 41-9041 overall 2025—2035 employment projections of -21.4% and 5,800 average annual openings, including replacements, provide employment background only, not AI attribution. AI Impact Score 75% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional call log with a follow-up list. Flag a request to stop calls that is still queued and refer it to the supervisor."
             ]
           },
           "id": "telemarketers.display.ai_impact_table.answer",
           "source_refs": [
-            "editorial",
-            "onet",
-            "nist",
-            "bls"
+            "transfer-onet-41-9041.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33102,6 +33098,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-41-9041.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 41-9041.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/41-9041.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -38585,10 +38608,10 @@
       "text": "Telemarketers"
     }
   },
-  "source_content_sha256": "3e4d5812e081143a6a2a83aa82b98a60b46df42952072c998daedcedcc944522",
+  "source_content_sha256": "c0017f88c4893cd1f9bbe66cce070039e0134fa64074c85d085fab4f4d63d03d",
   "subject": {
     "canonical_slug": "telemarketers",
     "name": "Telemarketers",
-    "summary": "Introduce goods and services by telephone and solicit orders or donations, understand needs, explain verified fees, and maintain contact and transaction records. Commercial calls in China require checking consumer consent first and stopping immediately after cancellation; check product permissions and actual transactions by organization and jurisdiction."
+    "summary": "Telemarketers use calls to explain goods, services or fundraising campaigns, answer questions and record responses, orders or follow-up."
   }
 }

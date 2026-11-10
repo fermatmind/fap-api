@@ -23375,14 +23375,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "下一步核目标地区与机构的岗位权限、产品范围、资格和披露要求，再用虚构材料练需求访谈与方案说明，不把练习当真实投资建议。"
+              "纸面体验｜对照虚构家庭的月度收支表与到账日历，圈出同一笔奖金的两种到账月份，记下需向客户确认的问题。 "
             ]
           },
           "id": "personal-financial-advisors.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "privacy",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23679,13 +23677,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "美国职业分类不等于中国理财岗位的执业资格；证券、保险、税务等权限按当地规则核。"
+              "个人理财顾问先梳理客户的目标、收支和风险承受能力，再讨论方案和后续复核。定期会谈需要区分客户情况变化与原方案的假设。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "personal-financial-advisors.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "privacy"
+            "transfer-onet-13-2052.00"
           ],
           "type": "prose"
         },
@@ -24794,15 +24791,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未核得本职实际生成式AI采用、整体替代率、替代年份及可靠节时、错误、客户理解或报酬效果。许可环境资料汇总、情景计算和披露草稿为编辑试用；客户目标、适用权限和最终建议由有权人员复核。BLS仅定性称AI建议工具可能缓和需求，1.4%、净4.1千与年17.1千含替补空缺不能推AI作用、个人失业或中国需求。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+50)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：对照虚构家庭的月度收支表与到账日历，圈出同一笔奖金的两种到账月份，记下需向客户确认的问题。"
             ]
           },
           "id": "personal-financial-advisors.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "bls",
-            "ep",
-            "ilo",
-            "editor"
+            "transfer-onet-13-2052.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33043,6 +33038,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-13-2052.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 13-2052.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/13-2052.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38293,10 +38315,10 @@
       "text": "个人理财顾问"
     }
   },
-  "source_content_sha256": "9d5925a08c50ff3e810744a249e0a240eaad1b0eb038b35763b2797c84c52432",
+  "source_content_sha256": "3af1a11982aa6b602cbf23d87014370711a4da24a9852d1f1ee12a640ba57d19",
   "subject": {
     "canonical_slug": "personal-financial-advisors",
     "name": "个人理财顾问",
-    "summary": "个人理财顾问（O*NET 13-2052.00）了解客户资产、负债、现金流、保障、税务状况与目标，解释可选的预算、投资、保险及退休规划方案，记录假设、费用、风险、利益冲突和后续复核。证券建议或交易须在适用地区、机构和个人权限内完成；职业名称本身不授予执照。"
+    "summary": "个人理财顾问先梳理客户的目标、收支和风险承受能力，再讨论方案和后续复核。定期会谈需要区分客户情况变化与原方案的假设。"
   }
 }

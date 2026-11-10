@@ -14,9 +14,6 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-combined-median-wage": {
         "status": "mapped"
       },
@@ -7271,7 +7268,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The core work of material recording clerks is to keep incoming, outgoing, and inventory records accurate and traceable: check shipment contents against bills of lading, invoices, orders, and other documents; requisition and store packing materials to maintain inventory; prepare work orders, bills of lading, and other documents for material movement; pack, seal, label, or affix postage to prepare shipments; record weights, charges, storage space, damage, and discrepancies for reporting and accounting; communicate with stakeholders to resolve damage, shortages, or specification mismatches; distribute materials along routes using hand trucks or sorting bins; contact carriers and determine shipping methods, routes, and rates; and calculate storage, freight, or demurrage charges."
+              "This work may suit people who like matching goods to documents, logging discrepancies and following up on handoffs."
             ]
           },
           "id": "material-recording-clerks.quick-decision.fermat-decision-card.2",
@@ -7285,12 +7282,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Entirely fictional task package: provide fictional incoming and outgoing shipment documents and inventory records, including 1 order and packing list, 1 set of inventory and discrepancy data, and 1 shortage or damage scenario to resolve. Within 60 minutes, write verification steps, recordkeeping and discrepancy-handling methods, circumstances requiring reporting or claims, and records to retain. Do not use real company, customer, or cargo data."
+              "Try the original case and variant under “Entry and Sheet R: Receiving discrepancy handoff.” Record what needs review and who should check it."
             ]
           },
           "id": "material-recording-clerks.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-tasks"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7299,12 +7296,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Sample output and reflection: check whether cargo and documents were verified first, discrepancies were recorded accurately rather than concealed, reporting and claim routes were explained, and recordkeeping and handover requirements were clear. Then ask yourself whether you can maintain accuracy in repetitive administration under time pressure, communicate with carriers and internal departments to solve problems, and take responsibility for record accuracy."
+              "When a system count differs from a physical count, keep both entries and identify who should recount. Would you be comfortable repeating that check throughout a shift?"
             ]
           },
           "id": "material-recording-clerks.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "onet-tasks"
+            "paper-exercise"
           ],
           "type": "prose"
         }
@@ -7321,13 +7318,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "The fixed slug is material-recording-clerks, but the actual subject is ONet43-5071.00 Shipping, Receiving, and Inventory Clerks: verifying incoming and outgoing shipments and documents and maintaining inventory records, with packing and labeling, recording weights, costs, and discrepancies, and contacting carriers according to the role. This is not every material recording suboccupation or 53-7065 stockers and order fillers. Equipment handling, transportation arrangements, and abnormality handling depend on role authorization and are not interchangeable with production management or logistics analysis."
+              "This page focuses on shipment and inventory records within material recording work, using O*NET 43-5071.00. Typical outputs include traceable receipt and dispatch records and discrepancies in counts, lots or status for warehouse or quality review."
             ]
           },
           "id": "material-recording-clerks.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
-            "onet-tasks"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7407,13 +7403,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Research inputs: occupational identity, tasks, work activities, work context, skills and knowledge, interest code, education, and Job Zone for O*NET 43-5071.00. Wage, employment, and industry data on that page cover this occupation. Research conclusions do not establish mainland China's qualification, wage, or employment scope."
+              "O*NET 43-5071.00 describes this occupation’s tasks and work context. U.S. wages come from OEWS and projections from BLS Table 1.2."
             ]
           },
           "id": "material-recording-clerks.profile.onet-structured-fields-block.7",
           "source_refs": [
             "onet-summary",
-            "onet-trends"
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7595,7 +7592,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task hypothesis: barcodes / RFID, ERP inventory systems, and fixed-rate calculations are not generative AI. The latter may organize fictional shipment descriptions or draft discrepancy records. No occupational adoption rates or job outcomes were obtained. People check physical counts / damage, documents, and rates. Do not upload real customer / waybill information without approval or automatically confirm receipt, charges, or dispatch. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Editorial task hypothesis: barcodes / RFID, ERP inventory systems, and fixed-rate calculations are not generative AI. The latter may organize fictional shipment descriptions or draft discrepancy records. No occupational adoption rates or job outcomes were obtained. People check physical counts / damage, documents, and rates. Do not upload real customer / waybill information without approval or automatically confirm receipt, charges, or dispatch."
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.2",
@@ -7701,7 +7698,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this research did not obtain a Chinese occupational wage distribution safely matching 43-5071.00. Transportation, warehousing, and postal unit averages provide only that employer context; check manufacturing / retail and other employers separately. They do not prove this occupation mainly belongs to one industry or public wages do not exist."
+              "Mainland China wage references"
             ]
           },
           "fact_refs": [
@@ -7779,7 +7776,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "US wage and employment scope for material recording clerks, occupation 43-5071.00"
+              "U.S. shipping, receiving, and inventory clerk wages"
             ]
           },
           "fact_refs": [
@@ -7796,7 +7793,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 US median wage for 43-5071 is 45,260 dollars / year and 21.76 dollars / hour; full percentiles appear in the table. Older employment of 862,200 in 2024 and 69,300 average annual openings in 2024—2034 are retained separately. Latest figures are 827,700 employed in 2025, an 8% decline in 2025—2035, and 61,300 average annual openings. These are not the entire material recording group or individual hiring probabilities."
+              "The May 2025 national median for U.S. occupation 43-5071 was USD 45,260 a year and USD 21.76 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 34,650, 38,200, 45,260, 51,570, 62,190."
             ]
           },
           "fact_refs": [
@@ -7816,7 +7813,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 US nationwide occupational wages for 43-5071. Annual and hourly percentiles are entered separately from the original table, not as a conversion of individual working hours or take-home income."
+              "National wage percentiles"
             ]
           },
           "fact_refs": [
@@ -7833,7 +7830,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "P10/25/50/75/90 denotes wage distribution positions, not beginner / senior levels. Interpret employment size, openings, and individual opportunities separately."
+              "How to read the percentiles"
             ]
           },
           "fact_refs": [
@@ -7850,7 +7847,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: exact industry wages for 43-5071 were not obtained. BLS May 2025 industry median annual wages for the multi-occupation material recording group provide proxies: 48,950 dollars in manufacturing, 47,990 in transportation and warehousing, 46,310 in wholesale trade, and 39,290 in retail. These include production planning and weighing, checking, and recording occupations and are not detailed occupational industry values or employment shares."
+              "Industry wage context for the broader group"
             ]
           },
           "fact_refs": [
@@ -7867,7 +7864,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The older 69,300 figure is average annual openings in 2024—2034, not a period total. The newer 2025—2035 annual average of 61,300 mainly reflects replacement needs. An 8% decline does not mean no jobs. Do not mix this with the whole material recording group's annual average of 98,600."
+              "What affects pay and preparation"
             ]
           },
           "fact_refs": [
@@ -8091,7 +8088,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Entry pathways and capability stages"
+              "Entry and Sheet R: Receiving discrepancy handoff"
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.1",
@@ -8106,13 +8103,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "ONet's new-hire education survey reports 75% high school / GED, 12% two-year / associate degree, and 11% bachelor's, not every employer's threshold. BLS says the material recording group typically requires high school plus on-the-job training, mostly up to one month; up to six months for production planning clerks belongs to another detailed occupation. The several days to one year for JobZone1—2 is a group description; check specific role training separately."
+              "For U.S. shipping, receiving, and inventory clerk jobs, look for training in document checks, barcode or inventory systems and discrepancy handoffs. BLS lists high school or equivalent and short-term on-the-job training as typical preparation for 43-5071."
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.2",
           "source_refs": [
-            "onet-education",
-            "bls-ooh-recording"
+            "bls-ep-2025-2035",
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -8121,13 +8118,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Ordinary US recording roles follow employer training; check actual apprenticeship programs separately. Powered industrial truck work requires OSHA formal instruction, practical training, and workplace evaluation. No exact Chinese occupational qualification match was established. Listed forklift driver N1 is a market-regulation special equipment qualification, not a general clerk certificate or emergency-management special-operation certificate."
+              "In an October 2026 Tuoxin Logistics warehouse vacancy published by Guangzhou's Huangpu district, the role checks incoming item codes and counts against system records and traces wrong codes, missed scans and discrepancies. The vacancy also includes broader warehouse duties."
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.3",
           "source_refs": [
-            "osha-pit",
-            "samr-n1"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8165,12 +8161,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Evidence to show: use a reviewable recordkeeping and discrepancy-handling description covering document checks, data records, discrepancy handling, and reporting routes to demonstrate accurate records and honest problem handling."
+              "Paper exercise “Sheet R: Receiving discrepancy handoff.” Fictional paper exercise. Lot IDs match in all three rows. Mark the receiving record checked only when counts agree and the quality check is confirmed. R1: 18 expected, 18 received, quality check confirmed. R2: 24 expected, 21 received, quality check confirmed. R3: 12 expected, 12 received, quality check pending. Subtract expected from received. Send count discrepancies to the receiving recount clerk and quality status to the quality records clerk. List the differences and handoff owners. In the variant, change only R2's verified received count to 24."
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.6",
           "source_refs": [
-            "onet-education"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8179,12 +8175,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Next step: check the target employer's systems and procedures, document and rate definitions, and safety and stacking rules. Validate checking, documentation, and communication skills through real supervised shipping and receiving."
+              "Finish both cases and save the first draft. Open the folded answer key under “FAQs and boundaries” and check the original records and handoffs."
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.7",
           "source_refs": [
-            "onet-education"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8215,7 +8211,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Market signals and transition directions"
+              "Occupational outlook and related work"
             ]
           },
           "id": "material-recording-clerks.market-signals.market-signal-card.1",
@@ -8229,12 +8225,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Retain older employment of 862,200 in 2024 and 69,300 average annual openings in 2024—2034. Latest 43-5071 figures are 827,700 employed in 2025, an 8% decline in 2025—2035, and 61,300 average annual openings, mainly replacements, not ten-year totals or current vacancies."
+              "BLS Table 1.2 for U.S. occupation 43-5071 shows about 827,700 jobs in 2025 and projects 765,000 in 2035 (−7.6%), with about 61,300 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "material-recording-clerks.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8243,12 +8239,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The main industries on that page for 2024 are Manufacturing and Retail Trade. Employment and openings are statistical projections and must be interpreted separately from individual opportunities."
+              "BLS Table 1.2 for U.S. occupation 43-5071 shows about 827,700 jobs in 2025 and projects 765,000 in 2035 (−7.6%), with about 61,300 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "material-recording-clerks.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-industry"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8294,13 +8290,13 @@
           "data": {
             "entries": [
               {
-                "answer": "On this page, material recording clerks refers to O*NET 43-5071.00: workers who verify and maintain incoming and outgoing inventory shipment records, verify and record incoming materials or merchandise and arrange transport, and may prepare items for shipment. Tasks include checking cargo and documents, requisitioning and storing packing materials, preparing work orders and bills of lading, packing, sealing, and labeling, recording weights, charges, and discrepancies, communicating to resolve errors, contacting carriers, determining shipping methods and rates, and calculating charges. Work mainly takes place in warehouses, freight terminals, and uncontrolled indoor environments. This occupation is distinct from industrial production managers, transportation, storage, and distribution managers, supply chain managers, or logistics analysts.",
+                "answer": "This page focuses on U.S. 43-5071, shipping, receiving, and inventory clerks. They check incoming or outgoing shipments against documents, log scans, track inventory and report discrepancies. The job can involve both an office and the warehouse or plant floor. Check shift schedules with the employer.",
                 "id": "material-recording-clerks.faq.1",
                 "question": "What are everyday work and working hours like?",
                 "question_key": "career.faq.material-recording-clerks.daily-work",
                 "source_refs": [
-                  "onet-summary",
-                  "onet-tasks"
+                  "onet-tasks",
+                  "bls-ooh-recording"
                 ]
               },
               {
@@ -8352,7 +8348,7 @@
                 ]
               },
               {
-                "answer": "The O*NET page displays a 2025 BLS OEWS median annual wage of 45,260 dollars, approximately 21.76 dollars / hour, for occupation 43-5071.00. That page does not display percentile wages. These are US nationwide statistics, not individual take-home income or starting pay.",
+                "answer": "The May 2025 national median for U.S. occupation 43-5071 was USD 45,260 a year and USD 21.76 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 34,650, 38,200, 45,260, 51,570, 62,190.",
                 "id": "material-recording-clerks.faq.7",
                 "question": "What wage evidence is available for the United States?",
                 "question_key": "career.faq.material-recording-clerks.us-pay",
@@ -8361,13 +8357,13 @@
                 ]
               },
               {
-                "answer": "In the United States, this occupation is in Job Zone 1-2. Most positions require a high-school diploma and on-the-job training. Mainland China: there is no unified occupational qualification exactly corresponding to this O*NET occupation. Check warehouse and logistics clerk roles against employer and industry requirements; check forklift and on-site vehicle work against local safety and special-operation rules.",
+                "answer": "BLS Table 1.2 lists high school or equivalent and short-term on-the-job training as typical for U.S. 43-5071. Ask how the employer trains staff to verify documents, use inventory systems and handle discrepancies. In an October 2026 Tuoxin Logistics warehouse vacancy published by Guangzhou's Huangpu district, the role checks incoming item codes and counts against system records and traces wrong codes, missed scans and discrepancies. The vacancy also includes broader warehouse duties.",
                 "id": "material-recording-clerks.faq.8",
                 "question": "What are the entry and training pathways?",
                 "question_key": "career.faq.material-recording-clerks.education-path",
                 "source_refs": [
-                  "onet-education",
-                  "onet-cert"
+                  "bls-ep-2025-2035",
+                  "cn-work-example"
                 ]
               },
               {
@@ -8381,12 +8377,12 @@
                 ]
               },
               {
-                "answer": "O*NET cites BLS data showing about 862,200 employed in this occupation in 2024, a projected decline of -1% or lower in 2024—2034, and about 69,300 job openings during the period. These are occupational statistics, not an individual's hiring probability. Overall decline does not mean every region or employer has no opportunities.",
+                "answer": "BLS Table 1.2 for U.S. occupation 43-5071 shows about 827,700 jobs in 2025 and projects 765,000 in 2035 (−7.6%), with about 61,300 openings per year including replacements. Counts are rounded independently.",
                 "id": "material-recording-clerks.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.material-recording-clerks.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
@@ -8403,6 +8399,15 @@
                 "id": "material-recording-clerks.faq.boundary",
                 "question": "What are the limits of using this page?",
                 "question_key": "career.faq.material-recording-clerks.boundary"
+              },
+              {
+                "answer": "In the original, R1 differs by 0 and is checked. R2 differs by −3 and goes to the receiving recount clerk. R3 differs by 0 and still goes to the quality records clerk. In the variant, R2 differs by 0. R1 and R2 are checked, and R3 remains pending. Keep both R2 received counts.",
+                "id": "material-recording-clerks.faq.paper-exercise",
+                "question": "Paper exercise answer key (open after completing)",
+                "question_key": "career.faq.material-recording-clerks.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -8568,17 +8573,16 @@
                 "url": "https://www.onetonline.org/link/details/43-5071.00#WorkContext"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2025 BLS OEWS median wages; the page covers this occupation, 43-5071.00.",
-                  "This page does not display percentile wages; inferred values are not substituted."
+                  "The May 2025 national median for U.S. occupation 43-5071 was USD 45,260 a year and USD 21.76 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 34,650, 38,200, 45,260, 51,570, 62,190."
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "onet-wages",
-                "limitation": "This page does not display percentile wages; the median does not represent starting pay or individual take-home income.",
+                "limitation": "National occupational distribution. Local wages and individual offers vary.",
                 "market": "United States",
                 "name": "O*NET 43-5071.00 National Wages (BLS OEWS Display)",
-                "period": "2025 BLS OEWS wage data; accessed 2026-09-25",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/43-5071.00"
@@ -8586,15 +8590,15 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Employment in 2024 and projections for growth and job openings in 2024—2034.",
-                  "Projections are not a hiring guarantee."
+                  "The employment projections shown here come from BLS Table 1.2.",
+                  "The employment projections shown here come from BLS Table 1.2."
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
                 "limitation": "Projections are not a hiring guarantee; decline does not mean individual opportunities necessarily decrease.",
                 "market": "United States",
                 "name": "O*NET 43-5071.00 National Employment Trends",
-                "period": "2024—2034 projections; accessed 2026-09-25",
+                "period": "Occupational profile or live lookup",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/43-5071.00"
@@ -8618,8 +8622,7 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Job Zone 1-2, little to some preparation needed: most positions require a high-school diploma or GED, approximately 75%, while some require a two-year degree. On-the-job training ranges from several days to one year.",
-                  "Education distribution does not establish a mandatory requirement for every employer."
+                  "O*NET reports respondents’ answers about new-hire education. 75% selected high school or equivalent."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-education",
@@ -8698,17 +8701,17 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Organizes potentially assisted tasks and human control points for task-level AI and fit discussions.",
-                  "An editorial scale is not evidence of adoption rates, layoffs, regulations, or licensing."
+                  "Tools may help organize records. Verify key information against the original.",
+                  "Tools may help organize records. Verify key information against the original."
                 ],
-                "evidence_type": "internal task rubric",
+                "evidence_type": "Editorial explanation",
                 "id": "internal-rubric",
-                "limitation": "An editorial scale is not evidence of adoption rates, layoffs, regulations, or licensing.",
-                "market": "Global task level",
-                "name": "FermatMind Task Impact Scale for Material Recording Clerks",
-                "period": "FermatMind task rubric v2026.09; reviewed 2026-09-25",
+                "limitation": "This explanation does not measure adoption or work outcomes.",
+                "market": "This page",
+                "name": "FermatMind task and human review notes",
+                "period": "This page",
                 "publisher": "FermatMind",
-                "scope": "editorial_synthesis",
+                "scope": "Tasks on this page",
                 "url": null
               },
               {
@@ -8772,21 +8775,46 @@
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2023/art_6608605c3b334954ac72e19851c38a35.html"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Enter documents and update inventory — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Look up rates and calculate charges — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Check cargo and handle discrepancies — 50/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                  "BLS Table 1.2 for U.S. occupation 43-5071 shows about 827,700 jobs in 2025 and projects 765,000 in 2035 (−7.6%), with about 61,300 openings per year including replacements. Counts are rounded independently.",
+                  "BLS Table 1.2 lists high school or equivalent and short-term on-the-job training as typical for U.S. 43-5071. Ask how the employer trains staff to verify documents, use inventory systems and handle discrepancies."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "43-5071",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In an October 2026 Tuoxin Logistics warehouse vacancy published by Guangzhou's Huangpu district, the role checks incoming item codes and counts against system records and traces wrong codes, missed scans and discrepancies. The vacancy also includes broader warehouse duties."
+                ],
+                "id": "cn-work-example",
+                "limitation": "This case does not establish national pay, entry requirements or hiring.",
+                "market": "Mainland China",
+                "name": "Huangpu recruitment fair, warehouse clerk example",
+                "period": "2026-10-13",
+                "publisher": "Guangzhou Huangpu District Labor and Employment Service Center",
+                "scope": "Named work example",
+                "url": "https://www.hp.gov.cn/gzjg/qt/gzshpqrcjlfwzx/hprczc/rdzx/rddt/content/post_11042943.html"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks the paper records only.",
+                "market": "This page",
+                "name": "Sheet R: Receiving discrepancy handoff",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "scope": "Paper exercise",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -9712,7 +9740,7 @@
             }
           },
           {
-            "answer": "In the United States, this occupation is in Job Zone 1-2. Most positions require a high-school diploma and on-the-job training. Forklift and on-site vehicle work requires authorization under employer and local rules. This page does not judge individual eligibility.",
+            "answer": "BLS lists high school or equivalent and short-term on-the-job training as typical for U.S. shipping, receiving, and inventory clerks (43-5071). If the job separately includes forklift operation, check the equipment rules and employer authorization.",
             "key": "qa1",
             "question": "What are the qualification boundaries?",
             "table": {
@@ -9991,24 +10019,24 @@
           },
           "china_edu_table": [
             {
-              "学历段": "Not separately tabulated",
-              "岗位方向": "Hiring depends on the employer and position",
-              "说明": "National Bureau of Statistics wage statistics are organized by industry and registration type, not by education levels within this occupation."
+              "学历段": "Entry role",
+              "岗位方向": "Check the scope",
+              "说明": "Separate receiving, shipping and inventory duties from broader warehouse supervision."
             },
             {
-              "学历段": "Not separately tabulated",
-              "岗位方向": "Hiring depends on the employer and position",
-              "说明": "National Bureau of Statistics wage statistics are organized by industry and registration type, not by education levels within this occupation."
+              "学历段": "Systems training",
+              "岗位方向": "Check the tools",
+              "说明": "Ask about scanning, ERP or WMS, and training on discrepancy records."
             },
             {
-              "学历段": "Not separately tabulated",
-              "岗位方向": "Hiring depends on the employer and position",
-              "说明": "National Bureau of Statistics wage statistics are organized by industry and registration type, not by education levels within this occupation."
+              "学历段": "Base pay",
+              "岗位方向": "Check the pay unit",
+              "说明": "Separate hourly or monthly base pay from any probation rate."
             },
             {
-              "学历段": "Not separately tabulated",
-              "岗位方向": "Hiring depends on the employer and position",
-              "说明": "National Bureau of Statistics wage statistics are organized by industry and registration type, not by education levels within this occupation."
+              "学历段": "Additional pay",
+              "岗位方向": "Check eligibility",
+              "说明": "Ask how shift pay, overtime and performance pay are calculated."
             }
           ],
           "china_industry_table": [
@@ -10117,11 +10145,11 @@
             "ai_heading": "Boundaries for AI and wage judgments",
             "driver_heading": "Influencing factors",
             "official_heading": "Official statistical scope",
-            "scenario_caption": "This scenario illustrates statistical scope only; it is not an individual price quote.",
-            "scenario_heading": "Scenario-based reference",
-            "scenario_interpretation_label": "Explanation",
-            "scenario_role_label": "Role scope",
-            "scenario_value_label": "Reference value"
+            "scenario_caption": "Job and pay checks",
+            "scenario_heading": "What should you check in a job posting?",
+            "scenario_interpretation_label": "Ask the employer",
+            "scenario_role_label": "Scope",
+            "scenario_value_label": "Check"
           },
           "us_growth": "Local scope not applicable",
           "us_median": "Local scope not applicable"
@@ -10277,78 +10305,21 @@
           },
           {
             "指标": "Employment · Size",
-            "数值": "862,200 people (2024)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "material-recording-clerks.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "material-recording-clerks.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "About 827,700 jobs (2025)",
+            "说明": "Source: BLS Employment Projections, Table 1.2."
           },
           {
             "指标": "Employment · Change",
-            "数值": "Decline (-1% or lower, 2024—2034)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "material-recording-clerks.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "material-recording-clerks.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "−7.6%",
+            "说明": "Source: BLS Employment Projections, Table 1.2."
           },
           {
             "指标": "Employment · Openings",
-            "数值": "About 69,300 openings / year (older 2024—2034)",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "material-recording-clerks.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "material-recording-clerks.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "About 61,300 projected per year",
+            "说明": "Source: BLS Employment Projections, Table 1.2."
           }
         ],
-        "boundary": "2025 nationwide wages for 43-5071; the industry table is a proxy for the multi-occupation material recording group, with detailed industry wages still missing. Separate older / newer employment projections; these are not individual income or hiring outcomes.",
+        "boundary": "2025 nationwide wages for 43-5071; the industry table is a proxy for the multi-occupation material recording group, with detailed industry wages still missing. The 2025–2035 employment projection uses a separate data series from the wage estimate.",
         "direct_answer": {
           "$item": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10357,7 +10328,7 @@
         },
         "factor_rows": [
           {
-            "answer": "ONet75% high school / 12% associate / 11% bachelor's is survey data. BLS group on-the-job training is typically up to one month; check specific role and practical equipment authorization separately.",
+            "answer": "BLS lists high school or equivalent and short-term on-the-job training as typical preparation for U.S. 43-5071. The O*NET figure of 75% refers to respondents selecting high school or equivalent as a new-hire requirement. Check the specific employer’s requirements.",
             "factor": "Qualifications"
           },
           {
@@ -10375,7 +10346,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "Decline (2024—2034)",
+        "growth": "2025–2035",
         "heading": {
           "$item": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10424,11 +10395,11 @@
             "question": "Wages"
           },
           {
-            "answer": "Employment count in 2024, not the number of vacancies being recruited for.",
+            "answer": "Employment in the 2025 baseline year.",
             "question": "Employment"
           },
           {
-            "answer": "Latest occupational 2025—2035 projections show an 8% decline and 61,300 average annual openings; older projections are separate, not individual hiring outcomes.",
+            "answer": "BLS Table 1.2 for U.S. occupation 43-5071 shows about 827,700 jobs in 2025 and projects 765,000 in 2035 (−7.6%), with about 61,300 openings per year including replacements. Counts are rounded independently.",
             "question": "Outlook"
           },
           {
@@ -10438,11 +10409,11 @@
         ],
         "median": "$45,260 / year (2025)",
         "outlook_heading": "Employment outlook and job openings",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025–2035",
         "wage_column_labels": [
           "Percentile",
           "Annual reference",
-          "Hourly equivalent",
+          "Hourly wage",
           "Explanation"
         ],
         "wage_heading": {
@@ -10511,10 +10482,10 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "Who might suit material recording work?"
+        "title": "Who might suit shipping, receiving, and inventory work?"
       },
       "fit_decision_checklist": {
-        "boundary": "This is an entirely fictional shipping and receiving record scenario check, not a personality diagnosis, hiring conclusion, or qualification assessment.",
+        "boundary": "If arrivals make it hard to stay accurate, or you dislike following up on missed scans and unresolved discrepancies, ask about shifts, recounts and correction approvals.",
         "how": {
           "$item": "material-recording-clerks.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10561,7 +10532,7 @@
         "outlook_evidence": [
           {
             "geography": "US nationwide",
-            "horizon": "2024—2034",
+            "horizon": "2025–2035",
             "interpretation": "Employment size, change, and job openings must be interpreted separately.",
             "limitation": "Occupational statistics cannot guarantee individual employment.",
             "metric": "Employment size and change",
@@ -10575,12 +10546,12 @@
           },
           {
             "geography": "US nationwide",
-            "horizon": "2024—2034",
-            "interpretation": "Older 2024—2034 annual average; the newer 2025—2035 occupational annual average is 61,300, not current vacancies or a period total.",
+            "horizon": "2025–2035",
+            "interpretation": "BLS Table 1.2 for U.S. occupation 43-5071 shows about 827,700 jobs in 2025 and projects 765,000 in 2035 (−7.6%), with about 61,300 openings per year including replacements. Counts are rounded independently.",
             "limitation": "Cannot represent an individual's probability of being hired.",
             "metric": "Projected average annual job openings",
             "occupation_scope": "Display scope: Shipping, Receiving, and Inventory Clerks (43-5071.00)",
-            "value": "About 69,300 openings / year (older version)"
+            "value": "About 61,300 projected per year"
           },
           {
             "geography": "US nationwide",
@@ -10761,7 +10732,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "riasec",
@@ -10780,7 +10751,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "big-five",
@@ -10799,7 +10770,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "mbti",
@@ -10813,7 +10784,7 @@
           },
           {
             "answer": "Continue checking against real tasks, boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "enneagram",
@@ -10827,7 +10798,7 @@
           },
           {
             "answer": "Continue checking against real tasks, boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "iq",
@@ -10841,7 +10812,7 @@
           },
           {
             "answer": "Continue checking against real tasks, boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "eq",
@@ -10901,8 +10872,8 @@
         },
         "questions": [
           {
-            "answer": "Use this page's work sample to check attention to detail and accuracy.",
-            "question": "Can you maintain accuracy in repetitive administration?"
+            "answer": "Use “Sheet R: Receiving discrepancy handoff” to identify what still needs checking and record the original values and reviewer.",
+            "question": "How would you hand off a record discrepancy?"
           },
           {
             "answer": "Check and record discrepancies according to procedures.",
@@ -11219,7 +11190,7 @@
             "item": "material-recording-clerks.source-register.published.1"
           }
         },
-        "note": "Check source scope, limitations, and statistical periods separately against the original evidence. Source usage notes: O*NET 43-5071.00 Shipping, Receiving, and Inventory Clerks (Summary): provides occupational identity, the official description, interest code, Job Zone, skills, and knowledge for 43-5071.00. Wage and employment data on that page cover this occupation. O*NET 43-5071.00 Tasks: provides tasks including checking cargo and documents, requisitioning and storing packing materials, preparing work orders and bills of lading, packing, sealing, and labeling, recording discrepancies, contacting carriers, determining shipping methods and rates, and calculating charges. Task examples do not mean every position performs every task. O*NET 43-5071.00 Work Context: describes daily face-to-face communication and email and telephone use, often uncontrolled indoor work, repetitive tasks, common time pressure, and other contexts. US work context does not replace Chinese law or employer procedures. O*NET 43-5071.00 National Wages (BLS OEWS Display): 2025 BLS OEWS median wages for this occupation. This page does not display percentile wages. O*NET 43-5071.00 National Employment Trends: employment in 2024 and projections for growth, a decline of -1% or lower, and job openings in 2024—2034. Projections are not a hiring guarantee. Industries: 43-5071.00: the main industries on that page for 2024 are Manufacturing and Retail Trade. Industry distribution signals employer settings, not projected growth or demand. O*NET 43-5071.00 Education and Occupational Preparation: Job Zone 1-2; most positions require a high-school diploma or GED, approximately 75%, and on-the-job training ranges from several days to one year. Education distribution does not establish mandatory requirements for every employer. Licenses & Certifications: 43-5071.00: O*NET provides state licensing and national certification lookup entry points. Certification and training do not equal work authorization or employer hiring requirements. Generative AI and Jobs (ILO Working Paper 140, 2025): assesses occupational exposure to generative AI at the task level. An exposure index is not an adoption rate, job outcome, or hiring probability. Average Annual Wages of Employees in Urban Units in 2025: provides average annual wages by industry category for urban non-private and private units, including transportation, warehousing, and postal services. Industry averages are not occupational medians and exclude individually owned businesses and freelancers. FermatMind Task Impact Scale for Material Recording Clerks: organizes potentially assisted tasks and human control points for task-level AI and fit discussions. An editorial scale is not evidence of adoption rates, layoffs, regulations, or licensing."
+        "note": "O*NET describes the tasks, OEWS provides wage estimates, and BLS Table 1.2 provides employment projections."
       },
       "work_context_block": {
         "$item": "material-recording-clerks.profile.work-context-block.5",
@@ -11231,7 +11202,9 @@
     "contract_version": "career.detail.display.v1",
     "interface": {
       "interface.fit.directions_heading": "Which recordkeeping and logistics direction might suit you best?",
-      "interface.fit.interest_code_heading": "How to understand the CRE interest code"
+      "interface.fit.interest_code_heading": "How to understand the CRE interest code",
+      "interface.path.promotion_evidence_label": "Stage records and exploration exercises",
+      "interface.quick_decision.experiment_heading": "What can you learn from a short paper exercise?"
     },
     "locale": "zh-CN",
     "native_items": [
@@ -11245,69 +11218,69 @@
     ],
     "path": "/en/career/jobs/material-recording-clerks",
     "section_titles": {
-      "ai-impact": "AI Impact Score",
-      "china-salary": "Mainland China wages",
+      "ai-impact": "AI tools and human review",
+      "china-salary": "Mainland China wage references",
       "direction-comparison": "Comparison with adjacent occupations",
       "fit": "Fit signals",
       "market-signals": "Market signals",
       "navigation": "Page navigation",
-      "path": "Entry pathways",
+      "path": "Entry and Sheet R: Receiving discrepancy handoff",
       "profile": "Occupational definition and responsibilities",
       "quick-decision": "Quick assessment",
       "risk": "Risks and boundaries",
       "source-register": "Source registry",
       "sources": "FAQs and boundaries",
-      "us-salary": "US wages"
+      "us-salary": "U.S. shipping, receiving, and inventory clerk wages"
     }
   },
   "fact_register": {
     "facts": [
       {
         "derivation": null,
-        "display_value": "45,260 dollars / year",
+        "display_value": "USD 45,260/year",
         "fact_id": "us-combined-median-wage",
         "market": "United States",
-        "measure": "2025 median annual wage, approximately 21.76 dollars / hour",
-        "occupation_scope": "O*NET display scope: this occupation, Shipping, Receiving, and Inventory Clerks (43-5071.00)",
-        "period": "2025 BLS OEWS; accessed 2026-09-25",
+        "measure": "U.S. median annual wage (May 2025)",
+        "occupation_scope": "43-5071",
+        "period": "2025-05",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "862,200 people",
+        "display_value": "About 827,700 jobs",
         "fact_id": "us-employment-2024",
         "market": "United States",
-        "measure": "Employment count in 2024",
-        "occupation_scope": "O*NET display scope: this occupation, Shipping, Receiving, and Inventory Clerks (43-5071.00)",
-        "period": "2024; accessed 2026-09-25",
+        "measure": "U.S. employment (2025)",
+        "occupation_scope": "43-5071",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "O*NET displays Projected growth (2024-2034) as Decline (-1% or lower); the displayed data covers this occupation, 43-5071.00.",
-        "display_value": "Decline (-1% or lower, 2024—2034)",
+        "derivation": null,
+        "display_value": "−7.6%",
         "fact_id": "us-growth",
         "market": "United States",
-        "measure": "Projected employment growth",
-        "occupation_scope": "O*NET display scope: this occupation, Shipping, Receiving, and Inventory Clerks (43-5071.00)",
-        "period": "2024—2034; accessed 2026-09-25",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "43-5071",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "O*NET displays Projected job openings (2024-2034) as 69,300; this figure is a period total rather than an annual average.",
-        "display_value": "About 69,300 openings (2024—2034 total)",
+        "derivation": null,
+        "display_value": "About 61,300 per year",
         "fact_id": "us-openings",
         "market": "United States",
-        "measure": "Projected job openings (period total)",
-        "occupation_scope": "O*NET display scope: this occupation, Shipping, Receiving, and Inventory Clerks (43-5071.00)",
-        "period": "2024—2034; accessed 2026-09-25",
+        "measure": "U.S. annual openings (2025–2035)",
+        "occupation_scope": "43-5071",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -11357,57 +11330,45 @@
         "source_refs": [
           "nbs-wages"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+75+50)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Material Recording Clerks",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
-      "Incoming and outgoing shipment records",
-      "Documents and verification",
-      "Packaging and transportation arrangements"
+      "Shipping, Receiving, and Inventory Clerks",
+      "Wages and projections use separate tables",
+      "China occupational wage distribution unavailable"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-combined-median-wage",
         "key": "us_pay",
-        "label": "US wage reference"
+        "label": "U.S. 43-5071 · median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "US employment change"
+        "label": "U.S. 43-5071 · projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "US employment count"
+        "label": "U.S. 43-5071 · employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "US job openings (period total)"
+        "label": "U.S. 43-5071 · annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11421,17 +11382,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "On this page, material recording clerks refers to O*NET 43-5071.00: checking cargo and documents, requisitioning and storing packing materials, preparing work orders and bills of lading, packing, sealing, and labeling, recording weights, charges, and discrepancies, checking and resolving errors with stakeholders, contacting carriers, determining shipping methods and rates, and calculating charges. Evaluate this career path by checking the complete workflow, recordkeeping and safety boundaries, evidence scope, risk controls, and observable entry-level work samples together."
+      "text": "Explore shipping, receiving, and inventory clerk work (U.S. 43-5071), wages and entry preparation. Try a fictional receiving discrepancy handoff."
     },
     "title": {
       "availability": "available",
-      "text": "Evaluating a Career as a Material Recording Clerk: Work, Entry, and Risk Boundaries"
+      "text": "Shipping, Receiving, and Inventory Clerks: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "2d6c6e5dd2e48ef64493ecb431f7d391f33c58a29c9f5b2dd7476fa984d6fc1a",
+  "source_content_sha256": "8dd61f0be71e71128c05bee158ee476b1a959ef91bc7c6421f626be87b6ff9c3",
   "subject": {
     "canonical_slug": "material-recording-clerks",
-    "name": "Material Recording Clerks",
-    "summary": "On this page, material recording clerks refers to O*NET 43-5071.00: workers who verify and maintain incoming and outgoing inventory shipment records, verify and record incoming materials or merchandise and arrange transport, and may prepare shipment items, including titles such as receiving clerk, shipping clerk, and order fulfillment specialist."
+    "name": "Shipping, Receiving, and Inventory Clerks",
+    "summary": "This page focuses on shipment and inventory records within material recording work, using O*NET 43-5071.00. Typical outputs include traceable receipt and dispatch records and discrepancies in counts, lots or status for warehouse or quality review."
   }
 }

@@ -7264,13 +7264,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页覆盖 O*NET 29-2011.00「医疗临床技术专家（Medical and Clinical Laboratory Technologists）」：执行用于疾病诊断、治疗与预防的复杂医学检验，并可培训或监督人员；常见报告岗位名包括临床化学师、临床实验室科学家、临床实验室技术专家、组织学技术专家、医学实验室技术专家、医学技术专家、微生物学技术专家与医学实验室科学家。本页不含微生物学家、医学科学家、化学家等相邻岗位。"
+              "临床检验技师使用经验证的方法处理临床检测任务，关注仪器、质量控制、异常记录和复核。实验室分工和结果审核权限取决于资质及岗位。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.profile.definition-block.1",
           "source_refs": [
             "onet-summary",
-            "onet-details"
+            "cn-sh-lab",
+            "cn-ordos-lab"
           ],
           "type": "prose"
         },
@@ -7366,12 +7367,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "先核对的内容：标本身份与状态、检验申请与方法、质控与校准状态、方法变更是否经验证、感染控制与防护条件，以及需要授权者确认的异常、放行与监督判断。"
+              "用虚构记录找出缺失的批次、设备状态和复核人，说明需要上报哪些问题。上海临床检验中心的公开说明可帮助理解质量控制；机构任务不能照搬为个人权限。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-details"
+            "onet-summary",
+            "cn-sh-lab",
+            "cn-ordos-lab"
           ],
           "type": "prose"
         },
@@ -7380,12 +7383,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作闭环由机构规程规定：核对输入与方法，执行检测，复核结果和质量记录，依授权审核报告并交接异常。身份、方法或感染控制有未决疑问时记录并升级，是否暂停或恢复由适用程序与授权人员判断。"
+              "美国 O*NET 将两者分别描述，复杂检测和质控责任可能不同。中国岗位名称、专业技术资格和报告授权按国内招聘和机构要求核对。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-details"
+            "onet-summary",
+            "cn-sh-lab"
           ],
           "type": "prose"
         },
@@ -8285,12 +8289,13 @@
                 ]
               },
               {
-                "answer": "美国 Clinical Laboratory Technologists and Technicians组合口径 2024 年就业约 351,200 人，2034 年预计约 357,200 人，2024—2034 年预计慢于平均（约 2%），年均职位空缺约 22,600 个（含替换需求）；为组合口径统计预测，不等于单列职业需求或个人录用概率。",
+                "answer": "美国 BLS 表1.2 上位职业 Clinical Laboratory Technologists and Technicians：29-2010 2025 年就业约 343,000 人，预计 2035 年约 352,400 人，2025—2035 年变化 +2.7%，年均约 20,800 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
                 "id": "medical-and-clinical-laboratory-technologists.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technologists.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "onet-trends",
+                  "bls-design-ep"
                 ]
               },
               {
@@ -8554,18 +8559,17 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "2024 年组合口径就业约 351,200 人、2034 年预计约 357,200 人、2024—2034 年预计慢于平均（约 2%）、年均空缺约 22,600 个。",
-                  "为组合口径，含替换需求。"
+                  "2025 年约 343,000 人；2035 年约 352,400 人；+2.7%，年均约 20,800。"
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
                 "limitation": "组合口径：非单列本职业；含替换需求。",
                 "market": "美国",
-                "name": "O*NET 29-2011.00 全国就业趋势（Clinical Laboratory Technologists and Technicians 组合口径；BLS 2024—2034 年预测）",
-                "period": "BLS2024—2034预测；查阅2026-10-03",
-                "publisher": "O*NET OnLine / BLS",
+                "name": "美国 BLS 表1.2：临床检验技术人员合并口径（29-2010）",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/29-2011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-25",
@@ -8802,6 +8806,46 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "机构负责临床检验质控、技术服务和培训。"
+                ],
+                "id": "cn-sh-lab",
+                "limitation": "机构职能不是每个检验技术岗位的权限。",
+                "market": "中国大陆",
+                "name": "上海市临床检验中心招聘",
+                "period": "2026招聘",
+                "publisher": "上海市人力资源和社会保障局",
+                "scope": "具名岗位或制度",
+                "url": "https://rsj.sh.gov.cn/tzpgg_17408/20251111/t0035_1436720.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "具名检验岗位列质控、台账与生物安全。"
+                ],
+                "id": "cn-ordos-lab",
+                "limitation": "该院具体职责与要求不外推。",
+                "market": "中国大陆",
+                "name": "鄂尔多斯正康中医医院检验岗位",
+                "period": "2026",
+                "publisher": "鄂尔多斯高新区",
+                "scope": "具名岗位或制度",
+                "url": "https://gxq.ordos.gov.cn/zwgx/tzgg_121477/202609/t20260924_1988021.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "2025 年约 343,000 人；2035 年约 352,400 人；+2.7%，年均约 20,800。"
+                ],
+                "id": "bls-design-ep",
+                "market": "美国",
+                "name": "美国 BLS 表1.2：临床检验技术人员合并口径（29-2010）",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -9639,26 +9683,26 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这个职业先核对什么？",
+            "question": "怎样练习理解检验质量工作？",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "对象",
+                  "label": "要点一",
                   "secondary_value": null,
-                  "value": "患者标本与复杂检验结果"
+                  "value": "虚构质控单"
                 },
                 {
                   "alternate_value": null,
-                  "label": "输入",
+                  "label": "要点二",
                   "secondary_value": null,
-                  "value": "标本、检验申请与方法要求"
+                  "value": "批次和设备状态"
                 },
                 {
                   "alternate_value": null,
-                  "label": "交付",
+                  "label": "要点三",
                   "secondary_value": null,
-                  "value": "可复核的检验结果与技术信息"
+                  "value": "缺失信息"
                 }
               ]
             }
@@ -9671,26 +9715,26 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "怎样判断工作闭环？",
+            "question": "临床检验技师和技术员是中美一一对应的职称吗？",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "闭环",
+                  "label": "要点一",
                   "secondary_value": null,
-                  "value": "方法执行、验证、复核与交付"
+                  "value": "美国岗位"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤一",
+                  "label": "要点二",
                   "secondary_value": null,
-                  "value": "核对标本与申请"
+                  "value": "中国岗位"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤二",
+                  "label": "要点三",
                   "secondary_value": null,
-                  "value": "按方法学处理与检测"
+                  "value": "机构授权"
                 },
                 {
                   "alternate_value": null,
@@ -11120,7 +11164,7 @@
           "entry": "medical-and-clinical-laboratory-technologists.navigation.1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合医疗临床技术专家",
+        "label": "测职业兴趣，探索工作活动",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11237,46 +11281,46 @@
         "fact_id": "us-wage",
         "market": "美国（Clinical Laboratory Technologists and Technicians 组合口径）",
         "measure": "2025 年年薪中位数（组合口径）",
-        "occupation_scope": "Clinical Laboratory Technologists and Technicians（Clinical Laboratory Technologists and Technicians组合口径，非单列 29-2011.00）",
+        "occupation_scope": "美国上位职业 Clinical Laboratory Technologists and Technicians（29-2010）",
         "period": "2025 年工资数据；查阅 2026-10-03",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "351,200 人（组合口径）",
+        "derivation": "美国 BLS 表1.2 上位职业 Clinical Laboratory Technologists and Technicians：29-2010 2025 年就业约 343,000 人，预计 2035 年约 352,400 人，2025—2035 年变化 +2.7%，年均约 20,800 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "约 343,000 人",
         "fact_id": "us-employment-2024",
         "market": "美国（Clinical Laboratory Technologists and Technicians 组合口径）",
         "measure": "2024 年就业规模（组合口径）",
-        "occupation_scope": "Clinical Laboratory Technologists and Technicians组合口径，非单列 29-2011.00",
-        "period": "2024；查阅 2026-10-03",
+        "occupation_scope": "美国上位职业 Clinical Laboratory Technologists and Technicians（29-2010）",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "O*NET 全国就业趋势页：2024—2034 年预计慢于平均（约 2%）。",
-        "display_value": "慢于平均（约 2%，2024—2034；组合口径）",
+        "derivation": "美国 BLS 表1.2 上位职业 Clinical Laboratory Technologists and Technicians：29-2010 2025 年就业约 343,000 人，预计 2035 年约 352,400 人，2025—2035 年变化 +2.7%，年均约 20,800 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "+2.7%",
         "fact_id": "us-growth",
         "market": "美国（Clinical Laboratory Technologists and Technicians 组合口径）",
         "measure": "就业增长预测（组合口径）",
-        "occupation_scope": "Clinical Laboratory Technologists and Technicians组合口径，非单列本职业",
-        "period": "2024—2034；查阅 2026-10-03",
+        "occupation_scope": "美国上位职业 Clinical Laboratory Technologists and Technicians（29-2010）",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": "为预测期内的职位空缺估计，含替换需求。",
-        "display_value": "约 22,600 个/年（2024—2034；组合口径）",
+        "derivation": "美国 BLS 表1.2 上位职业 Clinical Laboratory Technologists and Technicians：29-2010 2025 年就业约 343,000 人，预计 2035 年约 352,400 人，2025—2035 年变化 +2.7%，年均约 20,800 个空缺。人数为独立取整，空缺包含替换，不是当前招聘。",
+        "display_value": "年均约 20,800 个",
         "fact_id": "us-openings",
         "market": "美国（Clinical Laboratory Technologists and Technicians 组合口径）",
         "measure": "预计职位空缺（年均，组合口径）",
-        "occupation_scope": "Clinical Laboratory Technologists and Technicians组合口径，非单列本职业",
-        "period": "2024—2034；查阅 2026-10-03",
+        "occupation_scope": "美国上位职业 Clinical Laboratory Technologists and Technicians（29-2010）",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-design-ep"
         ]
       },
       {
@@ -11310,25 +11354,25 @@
         "availability": "available",
         "fact_ref": "us-wage",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国上位职业年薪中位数（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "上位职业：美国就业变化（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "上位职业：美国就业规模（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "上位职业：美国年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11342,17 +11386,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "医疗临床技术专家（O*NET 29-2011.00）执行复杂医学检验，负责方法学与质量保证、结果验证、技术沟通并可培训或监督人员。美国 BLS 2025 年 Clinical Laboratory Technologists and Technicians组合口径中位年薪 62,930 美元；2024 年组合口径就业约 351,200 人。含工作情境、风险与入行路径。"
+      "text": "了解临床检验技师怎样区分检测执行、质控与结果复核，以及与检验技术员的职责差别。"
     },
     "title": {
       "availability": "available",
-      "text": "医疗临床技术专家：工作内容、美国工资与入行 | 费马测试"
+      "text": "临床检验技师做什么：检测、质控与结果复核"
     }
   },
-  "source_content_sha256": "1e15b269a256c9f31b8ad167d34133b57dda924b25281cd83960b8f2b4ab1f63",
+  "source_content_sha256": "e050155419762f5dddaff030f975b44c047ab5eeb60cabc66dd84b6b7e5f129e",
   "subject": {
     "canonical_slug": "medical-and-clinical-laboratory-technologists",
-    "name": "医疗临床技术专家",
-    "summary": "医疗临床技术专家（O*NET 29-2011.00）执行复杂医学检验、评估方法与质量保证，可培训或监督人员；实际检测、报告审核、诊断及监督权限须按法域、检测类型和机构岗位核验。"
+    "name": "临床检验技师",
+    "summary": "临床检验技师使用经验证的方法处理临床检测任务，关注仪器、质量控制、异常记录和复核。实验室分工和结果审核权限取决于资质及岗位。"
   }
 }

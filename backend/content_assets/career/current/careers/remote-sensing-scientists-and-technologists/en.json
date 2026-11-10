@@ -14244,20 +14244,8 @@
         "status": "mapped"
       },
       "entry_decisions.entry-work-sample-data.entries.03.description.02": {
-        "ref": {
-          "id": "remote-sensing-scientists-and-technologists.path.entry-work-sample-data.1",
-          "path": [
-            "data",
-            "entries",
-            {
-              "id": "exercise-approach"
-            },
-            "values",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.entry-work-sample-data.entries.03.title": {
         "ref": {
@@ -14656,16 +14644,8 @@
         "status": "mapped"
       },
       "entry_decisions.seven-day-decision.entries.07": {
-        "ref": {
-          "id": "remote-sensing-scientists-and-technologists.path.seven-day-decision.1",
-          "path": [
-            "data",
-            "entries",
-            6
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.seven-day-decision.title": {
         "ref": {
@@ -22975,7 +22955,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "N1—N5 are entirely fictional and grant no authority over data, surveying, flight, or release of results."
+              "If repeated checks or deferring a conclusion when evidence is missing would be difficult, check the role’s workflow. Confirm authority separately for collection, flight, and publication."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.quick-decision.fit-decision-checklist.1",
@@ -22990,7 +22970,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "First compute NDVI by hand, then exclude cloud pixels, mark zero denominators, and list scale and independent validation to-dos."
+              "Use the three fictional pixels in section 09 to draft a screening and handoff sheet. Record your decisions before checking the key."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.quick-decision.fit-decision-checklist.2",
@@ -23004,7 +22984,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Those willing to check metadata, reproduce experiments, acknowledge error, and explain the boundaries of conclusions can explore this role."
+              "Explore research roles if you enjoy checking image sources, reproducing analyses, and explaining uncertainty."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.quick-decision.fit-decision-checklist.3",
@@ -23224,7 +23204,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "USGS quality documentation describes QA_PIXEL and QA_RADSAT for Landsat Collection 2; the former contains pixel flags such as clouds. Actual sensors, products, and bit encodings must each be checked, and the N2 cloud flag is only an editorial premise, not an official QA code."
+              "In Landsat Collection 2, QA_PIXEL includes cloud quality flags and QA_RADSAT identifies radiometric saturation by band. Check the USGS bit definitions and masking rules for the exact sensor and product."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.profile.onet-structured-fields-block.5",
@@ -25488,7 +25468,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Using N1—N5, recompute 0.5, 1/3, and the zero denominator, excluding cloud pixels; unknown period scale remains to be checked."
+              "Recalculate the fictional pixels in section 09. Separate a computable value, quality exclusion, and no value, and record any unknown scale factor."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.ai-impact.ai-impact-table.91",
@@ -25638,7 +25618,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Tools can flag the N2 cloud flag; do not pass on appearance."
+              "A tool can extract quality flags. Check the original record and product rules before recording a disposition."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.ai-impact.ai-impact-table.101",
@@ -25698,7 +25678,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Tools can compute P1=0.5 and P2≈0.333, but P2 is excluded as cloud-contaminated under the premise, and P3 has no value because of a zero denominator; do not infer real vegetation classes."
+              "Tools can apply the formula, but a reviewer must check quality flags, missing values, scale, and version. Section 09 provides a fictional exercise, not land-cover evidence."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.ai-impact.ai-impact-table.105",
@@ -26671,13 +26651,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Industry averages, job quotes, and individual contracts have different denominators; do not infer starting pay."
+              "China’s photogrammetry and remote sensing engineering category (2-02-02-03) covers data acquisition, interpretation, production, and acceptance. This page overlaps with its method, analysis, and validation work; check whether the actual role owns method choices and interpretation."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "editor",
-            "editor"
+            "cn-rs-class"
           ],
           "type": "prose"
         },
@@ -27417,31 +27397,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Cartographers and photogrammetrists",
@@ -27864,8 +27844,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "Recomputes N1 as 0.5 and N2 as 1/3, but the latter carries a cloud flag.",
-              "Identifies the zero denominator in N3 and does not produce a valid NDVI."
+              "Can you recompute the fictional pixels and explain how quality flags change which values are retained?",
+              "Can you document when the formula applies, which quality flags matter, and what evidence still needs checking?"
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.fit.personality-fit-block.20",
@@ -28339,7 +28319,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Trainable. First recompute 0.5 and 1/3 and distinguish zero denominators and cloud flags, then study statistics and remote sensing."
+              "This is learnable. Start with the calculations and quality screening in section 09 before studying statistics and remote sensing."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.fit.personality-fit-block.52",
@@ -28771,7 +28751,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "N2: carries a cloud flag and cannot be interpreted the same as a clear pixel."
+              "Image appearance alone is insufficient. Use product rules and quality records to document whether a pixel can enter later analysis."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.risk.career-risk-cards.18",
@@ -28831,7 +28811,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "N3: both NIR and RED are 0, so NDVI is undefined."
+              "Keep original band values and quality flags. Use section 09 to check each fictional pixel and document your reasoning."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.risk.career-risk-cards.22",
@@ -29178,7 +29158,7 @@
                 "values": [
                   "Career preparation",
                   "O*NET Job Zone Four; most occupations of this type require a bachelor's degree; specific project requirements are checked separately.",
-                  "Not a uniform Chinese education requirement or license."
+                  "A CAS National Space Science Center project hire involved researching multispectral algorithms, validating algorithms through simulation, evaluating performance, and documenting results. It required at least a bachelor’s degree. Its application deadline has passed. Jiangsu Geological Bureau’s A1 listing combines GIS, interpretation, and spatial modeling, requires a relevant doctoral degree for 2026 graduates, and specifies extended fieldwork. These conditions describe one opening."
                 ]
               },
               {
@@ -29210,7 +29190,9 @@
           "id": "remote-sensing-scientists-and-technologists.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "cas-rs-algorithm",
+            "js-geo-research"
           ],
           "title": "What do employers usually look for in hiring?",
           "type": "cards"
@@ -29224,10 +29206,10 @@
                 "id": "exercise-materials",
                 "values": [
                   "Premise｜N1—N5 are fictional pixels, not actual observations",
-                  "Complete indicator recomputation, quality screening, and independent validation to-dos in 30 minutes. The NIR and RED in the premise are already comparable reflectance and need no extra scaling.",
+                  "Allow 30 minutes. NIR means near-infrared reflectance and RED means red reflectance. The supplied values already use the same scale.",
                   "N1｜pixel P1: NIR=0.60, RED=0.20; the premise quality flag is clear.",
-                  "N2｜pixel P2: NIR=0.50, RED=0.25; the premise flags it as cloud-contaminated, so the computed value cannot be used in this exercise's valid statistics.",
-                  "N3｜pixel P3: NIR=0, RED=0; the denominator is zero.",
+                  "N2 | P2: NIR=0.50, RED=0.25, with a cloud-contamination flag.",
+                  "N3 | P3: NIR=0, RED=0.",
                   "N4｜the premise gives no coordinates, pixel area, acquisition period, or sensor product; do not compute regional area or change.",
                   "N5｜no ground truth is provided; independent supporting data and a validation plan must be listed, and no classification accuracy may be declared."
                 ]
@@ -29236,24 +29218,22 @@
                 "id": "exercise-task",
                 "values": [
                   "Task and outputs",
-                  "Recompute P1/P2 using NDVI=(NIR-RED)/(NIR+RED) and judge P3; make clear that quality screening precedes statistical interpretation.",
+                  "Check each pixel with NDVI=(NIR−RED)/(NIR+RED). Record the original values and quality flag, then check the denominator. Record any computable value. Summarize only values that pass quality screening and give the reason for each exclusion or missing value.",
                   "Submit one page with the formulas, a valid/excluded/no-value table, and validation to-dos; make no real surface determination for fictional pixels."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answer (complete it independently first)",
-                  "P1=(0.60-0.20)/(0.60+0.20)=0.50。P2=(0.50-0.25)/(0.50+0.25)=1/3≈0.333。",
-                  "P2 can be computed, but is excluded because the premise marks it cloud-contaminated; P3 has a denominator of 0, so NDVI is undefined. Only P1 can enter the valid table of this paper exercise.",
-                  "N4/N5 lacks scale, time, real sensors, and independent ground truth, so regional area, surface class, change, or accuracy cannot be inferred."
+                  "Before checking your work",
+                  "Save your draft before checking the key after the seven-day plan."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "Boundaries and review",
-                  "NASA provides the NDVI concept; the quality flags in this exercise are editorial fiction, not Landsat bit encodings. Real product scaling, masking, registration, and validation follow the corresponding documentation; do not collect real sensitive locations."
+                  "Use the fictional records only and document what still needs authorization."
                 ]
               }
             ]
@@ -29262,7 +29242,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: fictional NDVI, quality screening, and validation design",
+          "title": "RS-R01 | NDVI screening and independent validation",
           "type": "cards"
         },
         {
@@ -29282,8 +29262,8 @@
                 "id": "independent-recheck",
                 "values": [
                   "Indicator and screening card",
-                  "Recompute P1=0.5, P2≈0.333 but excluded, and P3 with no value.",
-                  "Do not simply average the three pixels."
+                  "Do not simply average the three pixels.",
+                  "Show each pixel calculation, quality screen, and basis for inclusion in the summary."
                 ]
               },
               {
@@ -29330,27 +29310,27 @@
             "rows": [
               [
                 "Formula recomputation",
-                "Whether 0.5 and 1/3 are obtained",
-                "Keeps formulas and rounding",
-                "Proves only the premise arithmetic"
+                "How would you check that the formula applies and make the result reproducible?",
+                "Use the supplied records and rules to explain your decision.",
+                "Do not invent observations or approvals."
               ],
               [
                 "Quality judgment",
-                "Whether cloudy P2 can enter statistics",
-                "Excludes it and writes the reason",
-                "Real masks require product documentation"
+                "How would you use quality flags to decide what can enter later analysis?",
+                "Use the supplied records and rules to explain your decision.",
+                "Do not invent observations or approvals."
               ],
               [
                 "Invalid values",
-                "How to record the zero denominator in P3",
-                "No value, with the original input retained",
-                "Must not write 0 or fill in a guess"
+                "How would you preserve the inputs if the formula does not apply?",
+                "Use the supplied records and rules to explain your decision.",
+                "Do not invent observations or approvals."
               ],
               [
                 "Independent validation",
-                "Whether a class or accuracy can be declared",
-                "Lists the missing ground truth and methods",
-                "Does not fabricate validation conclusions"
+                "What missing evidence and next steps belong in the handoff?",
+                "Use the supplied records and rules to explain your decision.",
+                "Do not invent observations or approvals."
               ]
             ]
           },
@@ -29385,35 +29365,35 @@
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day three",
-                  "Compute 0.5 and 1/3 by hand and identify the zero denominator."
+                  "Recompute each pixel using the supplied reflectance. Record the calculation or explain why it does not apply."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "Day four",
-                  "Build the valid/excluded/no-value table and do not average ineligible values."
+                  "Apply the scenario’s quality rules to each row and state what enters the summary."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day five",
-                  "Design independent validation and flag the coordinates, time, products, and pixel area that were not given."
+                  "List independent references, your matching method, and the missing data."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "Day six",
-                  "Compare with the reference answer and correct the error of writing cloudy or no-value pixels as valid."
+                  "Complete and save all four first drafts, keeping the sources and calculations. No partner is required. Review against the key on day 7."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "Day seven",
-                  "Check the target position's field, education, code, validation, and data permissions."
+                  "After saving your day 6 drafts, open “RS-R01 answer key and rubric (open on day 7)” in the FAQ. Apply the four rubric checks and keep one revision with its reason."
                 ]
               }
             ]
@@ -29430,20 +29410,19 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep inputs, formulas, the screening table draft, and revisions.",
-              "Correctly explains 0.5, 1/3, cloud exclusion, and the zero denominator.",
-              "Records whether they enjoy checking metadata, code, and error.",
-              "Redo the N4/N5 limitations statement and do not fabricate real accuracy.",
-              "List the products, scale, time, and ground truth to add next round.",
-              "Against the position, flag gaps in remote sensing, GIS, statistics, or domain knowledge.",
-              "Keep incomplete items as they are and do not substitute assessments for behavioral evidence."
+              "Keep the input, formula, and processing record for each pixel.",
+              "Record the value, quality flag, and disposition separately.",
+              "Identify missing metadata and independent references.",
+              "Write a handoff the next owner can verify.",
+              "Keep both drafts and record the evidence behind the revision.",
+              "State which conclusions still need field or independent reference data."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide at the end of seven days whether to continue",
+          "title": "How to review your work",
           "type": "list"
         },
         {
@@ -29557,14 +29536,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "NBS broad industry wages are not the precise income of remote sensing researchers.",
-              "Insufficient evidence: no comparable Chinese single-job quote was obtained that matches field, region, education, duties, work hours, and pay basis."
+              "A CAS National Space Science Center project hire involved researching multispectral algorithms, validating algorithms through simulation, evaluating performance, and documenting results. It required at least a bachelor’s degree. Its application deadline has passed. Jiangsu Geological Bureau’s A1 listing combines GIS, interpretation, and spatial modeling, requires a relevant doctoral degree for 2026 graduates, and specifies extended fieldwork. These conditions describe one opening."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.path.recruitment-sample.1",
           "source_refs": [
-            "nbs",
-            "editor"
+            "cas-rs-algorithm",
+            "js-geo-research"
           ],
           "title": "Recruitment sample note",
           "type": "notice"
@@ -31620,7 +31598,7 @@
                 ]
               },
               {
-                "answer": "Complete the N1—N5 fictional NDVI exercise: compute by hand, exclude cloud pixels, mark the zero denominator, and list scale and validation to-dos. Observe whether you can check the inputs and clearly acknowledge limitations.",
+                "answer": "Use the fictional inputs in section 09 to calculate and screen results. Retain the original records and reasons, and identify the missing evidence and next reviewer.",
                 "id": "remote-sensing-scientists-and-technologists.faq.5",
                 "question": "How do I judge whether I fit?",
                 "question_key": "career.faq.remote-sensing-scientists-and-technologists.q5",
@@ -31648,12 +31626,11 @@
                 ]
               },
               {
-                "answer": "N1—N5 only test entry-level judgment and grant no permission for data, map publication, surveying, flight, or field work. Education, training, and access are checked against the actual position.",
+                "answer": "P1=(0.60-0.20)/(0.60+0.20)=0.50. P2=(0.50-0.25)/(0.50+0.25)=1/3≈0.333.\n\nP2 can be computed, but is excluded because the premise marks it cloud-contaminated; P3 has a denominator of 0, so NDVI is undefined. Only P1 can enter the valid table of this paper exercise.\n\nN4/N5 lacks scale, time, real sensors, and independent ground truth, so regional area, surface class, change, or accuracy cannot be inferred.\n\nIdentify the target product, units, coordinates, pixel size, and acquisition window. Use contemporaneous field measurements or independent higher-resolution reference data. Stratify by land cover and homogeneity. Hold out an independent set from calibration.\n\nAlign the reference data to the pixel footprint, coordinates, and acquisition window. For continuous values, report valid pairs, bias, MAE or RMSE, and uncertainty. Document missing matches and coverage gaps. The fictional inputs support a plan only.\n\nScore each 0–2: pixel calculations or no-value reason, quality flags and exclusion, the unobserved scope, and the validation or quality handoff and next owner. Give 2 for complete, 1 for partial, or 0 for guessing or exceeding authority.",
                 "id": "remote-sensing-scientists-and-technologists.faq.8",
-                "question": "Can I formally start projects after the paper exercise?",
+                "question": "RS-R01 answer key and rubric (open on day 7)",
                 "question_key": "career.faq.remote-sensing-scientists-and-technologists.credentials",
                 "source_refs": [
-                  "onet",
                   "editor"
                 ]
               },
@@ -31714,14 +31691,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational tasks use O*NET19-2099.01; US wages and projections are labeled as the broad 19-2099 category, and NASA/USGS only support indicator and product quality background."
+              "O*NET describes the detailed U.S. occupations. BLS wage and employment figures are available only for the broader groups shown. Mainland sources support task comparisons and individual postings, not an occupational wage."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.sources.source-card.2",
           "source_refs": [
             "onet",
             "bls",
-            "nbs"
+            "nbs",
+            "cn-rs-class",
+            "cas-rs-algorithm",
+            "js-geo-research"
           ],
           "type": "prose"
         },
@@ -31730,7 +31710,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Materials were reviewed on October 3, 2026; 2025 wages and 2025—2035 projections follow the parent occupation 19-2099, with gaps for the precise occupation 19-2099.01 listed separately."
+              "Mainland classification and postings and U.S. occupation data for this update checked November 9, 2026."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.sources.source-card.3",
@@ -31744,7 +31724,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "N1—N5 are entirely fictional. This Chinese explanation of a US occupational classification does not establish mutual recognition of Chinese or foreign education, data, or surveying and flight qualifications."
+              "N1—N5 are entirely fictional. The U.S. occupational classification describes work. Check the applicable employer and local rules for education, data access, surveying, and flight."
             ]
           },
           "id": "remote-sensing-scientists-and-technologists.sources.source-card.4",
@@ -31789,13 +31769,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Back to the remote sensing scientists and technologists career page",
@@ -31838,20 +31818,20 @@
                 "url": "https://www.onetonline.org/link/details/19-2099.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Broad-category median 122,570 USD.",
-                  "The page explicitly states Physical Scientists, All Other."
+                  "US national annual wages for this parent group at the 10th, 25th, 50th, 75th and 90th percentiles (USD): 67,000 / 86,620 / 122,570 / 161,890 / 195,190.",
+                  "The parent group median hourly wage is USD 58.93. Employment and openings projections come from BLS Table 1.2."
                 ],
                 "evidence_type": "Broad occupation wage",
                 "id": "bls",
                 "limitation": "Not an independent wage for 19-2099.01",
                 "market": "United States",
-                "name": "O*NET wages: broad category 19-2099, other physical scientists",
-                "period": "2025 wages",
-                "publisher": "O*NET / BLS",
+                "name": "US BLS OEWS | 19-2099 Physical Scientists, All Other (parent occupation)",
+                "period": "May 2025",
+                "publisher": "US Bureau of Labor Statistics (BLS)",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/19-2099.01"
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=190000&measure=01&occupation=192099&year=2025"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -31870,20 +31850,20 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "Broad-category median 122,570 USD.",
-                  "The page explicitly states Physical Scientists, All Other."
+                  "US national annual wages for this parent group at the 10th, 25th, 50th, 75th and 90th percentiles (USD): 67,000 / 86,620 / 122,570 / 161,890 / 195,190.",
+                  "The parent group median hourly wage is USD 58.93. Employment and openings projections come from BLS Table 1.2."
                 ],
                 "evidence_type": "Broad occupation wage",
                 "id": "oews",
                 "limitation": "Not an independent wage for 19-2099.01",
                 "market": "United States",
-                "name": "O*NET wages: broad category 19-2099, other physical scientists",
-                "period": "2025 wages",
-                "publisher": "O*NET / BLS",
+                "name": "US BLS OEWS | 19-2099 Physical Scientists, All Other (parent occupation)",
+                "period": "May 2025",
+                "publisher": "US Bureau of Labor Statistics (BLS)",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/19-2099.01"
+                "url": "https://data.bls.gov/oesprofile/?areas=INDUSTRY,STATE,MSA&major_group=190000&measure=01&occupation=192099&year=2025"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32016,7 +31996,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "P1=0.5; P2 is about 1/3 but excluded due to cloud; P3 has a zero denominator and no value.",
+                  "The exercise supplies fictional pixel band values and quality information. Record the calculation basis, quality decision, and open questions for each item.",
                   "N4 lacks spatiotemporal scale and products, and N5 has no independent ground truth; do not infer real classes, area, or accuracy."
                 ],
                 "evidence_type": "Editorial exercise and recommendations",
@@ -32080,7 +32060,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "P1=0.5; P2 is about 1/3 but excluded due to cloud; P3 has a zero denominator and no value.",
+                  "The exercise supplies fictional pixel band values and quality information. Record the calculation basis, quality decision, and open questions for each item.",
                   "N4 lacks spatiotemporal scale and products, and N5 has no independent ground truth; do not infer real classes, area, or accuracy."
                 ],
                 "evidence_type": "Editorial exercise and recommendations",
@@ -32317,6 +32297,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "2-02-02-03 covers acquisition, processing, interpretation, production, and acceptance."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-rs-class",
+                "limitation": "Partial task correspondence; it does not establish a U.S. occupation equivalent, grade, or wage.",
+                "market": "Mainland China",
+                "name": "China occupational classification: photogrammetry and remote sensing engineering",
+                "period": "2022",
+                "publisher": "China Ministry of Human Resources and Social Security et al.; hosted by Guangyuan HRSS",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A CAS National Space Science Center project hire involved researching multispectral algorithms, validating algorithms through simulation, evaluating performance, and documenting results. It required at least a bachelor’s degree. Its application deadline has passed."
+                ],
+                "evidence_type": "Job posting sample",
+                "id": "cas-rs-algorithm",
+                "limitation": "One historical posting. It does not establish current vacancy status, universal education, or national wages.",
+                "market": "Mainland China",
+                "name": "CAS National Space Science Center: remote sensing algorithm development",
+                "period": "2026-09-03",
+                "publisher": "CAS National Space Science Center",
+                "scope": "recruitment_proxy",
+                "url": "https://cssar.cas.cn/jrwm2015/202609/t20260903_8277690.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Jiangsu Geological Bureau’s A1 listing combines GIS, interpretation, and spatial modeling, requires a relevant doctoral degree for 2026 graduates, and specifies extended fieldwork. These conditions describe one opening."
+                ],
+                "evidence_type": "Job posting sample",
+                "id": "js-geo-research",
+                "limitation": "One historical posting. It does not establish current vacancy status, universal education, or national wages.",
+                "market": "Mainland China",
+                "name": "Jiangsu Geological Bureau First Geological Team: surveying and remote sensing",
+                "period": "2026",
+                "publisher": "Jiangsu Geological Bureau First Geological Team",
+                "scope": "recruitment_proxy",
+                "url": "https://jzgc.ecut.edu.cn/1c/e3/c10294a138467/page.htm"
               }
             ]
           },
@@ -37011,7 +37036,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests fit remote sensing scientists and technologists",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37088,7 +37113,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI Personality Test"
           },
           {
             "href": {
@@ -37098,7 +37123,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five Personality Test"
           },
           {
             "href": {
@@ -37108,7 +37133,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Enneagram Test"
           },
           {
             "href": {
@@ -37118,7 +37143,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "IQ Reasoning Assessment"
           }
         ]
       },
@@ -37660,7 +37685,7 @@
       "text": "Remote sensing scientists and technologists: work content, data analysis, and entry paths"
     }
   },
-  "source_content_sha256": "a87fef567f3c34fa084d1b3da621dddf2ed491d155bb499a5dc4548033367478",
+  "source_content_sha256": "fe6faf7f8388db859e6763dc24f0a4c73af28fef3b939acd383b08a0f64393ac",
   "subject": {
     "canonical_slug": "remote-sensing-scientists-and-technologists",
     "name": "Remote Sensing Scientists and Technologists",

@@ -7269,19 +7269,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Interior designers correspond to O*NET-SOC 27-1025.00, Interior Designers. The official scope is to plan, design, and furnish the interiors of rooms or buildings; design practical, aesthetic interior environments or physical layouts suited to their intended use; and possibly specialize in a particular field, style, or design phase. A typical complete workflow is to confirm needs and budget, check codes and safety requirements, plan spaces and furniture, select materials and colors, prepare construction drawings and details, and brief contractors and participate in acceptance. Current U.S. national pay: a 2025 median of $67,190 per year; employment of 97,100 in 2025, 3% growth for 2025—2035, and 7,700 average annual openings (an overall projection, not attributed to AI). The exact occupational wage gap for China remains; industry averages are broad references only."
+              "Interior designers plan how indoor spaces will be used. They develop layouts, select materials and coordinate drawings with clients and project teams. Work on regulated building systems or signed documents may require separate authority."
             ]
           },
           "id": "interior-designers.profile.definition-block.1",
           "source_refs": [
-            "onet-profile",
-            "source-pack-onet-custom",
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "source-pack-onet-localcert",
-            "source-pack-onet-localtraining",
-            "source-pack-onet-localwages",
             "source-pack-onet-summary"
           ],
           "type": "prose"
@@ -7376,12 +7368,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The first checks concern the objects (interior spaces and usage needs, code requirements, and materials, furniture and equipment), inputs (client needs and budget, code references and versions, material specifications and samples, and structural and building services interface conditions), and deliverables (plans, elevations and construction drawings, material and furniture specifications, cost and schedule estimates, and briefing and acceptance records). Anything unverified must remain pending verification; renderings or intuition based on experience cannot replace code references and material versions."
+              "Compare two layouts for a fictional room. Show movement, dimensions, materials and issues that need specialist review. Explain what you would hand to a contractor or client."
             ]
           },
           "id": "interior-designers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-profile"
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         },
@@ -7390,12 +7382,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Assess the complete workflow in four steps: check inputs (confirm needs and budget, code references, and interface conditions) → define the task (proceed only within approved plan scope and authorization) → execute and document (complete drawings, specifications, and version trails to standard) → review and escalate (stop immediately and report code conflicts, uncoordinated interfaces, or commitments beyond authority). A complete workflow requires verifiable codes, interfaces, and versions, rather than merely attractive renderings."
+              "Interior design addresses how indoor space functions. Decoration emphasizes furnishings and finishes. Landscape design focuses on outdoor sites. Exact responsibilities depend on the project."
             ]
           },
           "id": "interior-designers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet-profile"
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         },
@@ -8720,6 +8712,18 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS Table 1.2: U.S. occupation 27-1025 had about 97,100 jobs in 2025 and is projected to have about 99,700 in 2035 (+2.7%), with about 7,700 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring."
+                ],
+                "id": "bls-design-ep",
+                "market": "United States",
+                "name": "BLS Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -9534,7 +9538,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "What should be checked first in this work?",
+            "question": "What should an interior design work sample include?",
             "table": {
               "rows": [
                 {
@@ -9566,7 +9570,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "How can you assess the complete workflow?",
+            "question": "How does interior design differ from decoration or landscape design?",
             "table": {
               "rows": [
                 {
@@ -11039,7 +11043,7 @@
           "entry": "interior-designers.navigation.1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit interior design",
+        "label": "Explore work activities with RIASEC",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11147,27 +11151,27 @@
   "fact_register": {
     "facts": [
       {
-        "derivation": null,
-        "display_value": "Approximately 97,100 employed (2025, O*NET / BLS employment projection base year, precise occupation 27-1025.00)",
+        "derivation": "BLS Table 1.2: U.S. occupation 27-1025 had about 97,100 jobs in 2025 and is projected to have about 99,700 in 2035 (+2.7%), with about 7,700 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 97,100 jobs",
         "fact_id": "us-employment-2025",
         "market": "US",
         "measure": "Employment size",
         "occupation_scope": "Interior Designers 27-1025",
-        "period": "May 2025 wages; 2025–2035 projection",
+        "period": "2025",
         "source_refs": [
-          "bls-ooh"
+          "bls-design-ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "3% growth (2025—2035, O*NET / BLS employment projections, precise occupation 27-1025.00)",
+        "derivation": "BLS Table 1.2: U.S. occupation 27-1025 had about 97,100 jobs in 2025 and is projected to have about 99,700 in 2035 (+2.7%), with about 7,700 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "+2.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "US",
         "measure": "Projected employment growth",
         "occupation_scope": "Interior Designers 27-1025",
-        "period": "May 2025 wages; 2025–2035 projection",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-ooh"
+          "bls-design-ep"
         ]
       },
       {
@@ -11183,15 +11187,15 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "Approximately 7,700 projected average annual openings (2025—2035, O*NET / BLS employment projections, precise occupation 27-1025.00, including growth and replacement needs)",
+        "derivation": "BLS Table 1.2: U.S. occupation 27-1025 had about 97,100 jobs in 2025 and is projected to have about 99,700 in 2035 (+2.7%), with about 7,700 openings per year. Counts are rounded independently; projected openings include replacements and do not measure current hiring.",
+        "display_value": "About 7,700 per year",
         "fact_id": "us-openings-annual-2025-2035",
         "market": "US",
         "measure": "Average annual occupational openings",
         "occupation_scope": "Interior Designers 27-1025",
-        "period": "May 2025 wages; 2025–2035 projection",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-ooh"
+          "bls-design-ep"
         ]
       },
       {
@@ -11267,19 +11271,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (2025—2035, 3%)"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employment (2025)"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-annual-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual openings (2025—2035)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11293,17 +11297,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What interior designers do, how to enter and train, their code and responsibility boundaries, and which tasks AI may change. This page corresponds to O*NET-SOC 27-1025.00, interest code AR, and Job Zone Four. U.S. wages and employment use the precise O*NET / BLS occupational category; mainland China wage gaps are recorded according to the evidence."
+      "text": "See what interior designers deliver, how to build a space planning portfolio and how the job differs from decoration."
     },
     "title": {
       "availability": "available",
-      "text": "Evaluating Interior Design as a Career: Work, Entry, and Risk Boundaries"
+      "text": "Interior Designer: Space Planning, Materials and Project Handoffs"
     }
   },
-  "source_content_sha256": "9dd7d050fcd9ef533eddf45dff93b080d7ffca40f54ffcd3f8274a7112f7fdf4",
+  "source_content_sha256": "e182ae28253aede388fa8546b055d369fd538ab21c1dc0c9b8a0efba5009f737",
   "subject": {
     "canonical_slug": "interior-designers",
-    "name": "Interior Designers",
-    "summary": "Interior designers plan, design, and furnish the interiors of rooms or buildings; design practical, aesthetic interior environments or physical layouts suited to their intended use; and may specialize in a field, style, or design phase. Work includes confirming needs and budget, checking codes and safety requirements, planning spaces and furniture, selecting materials and colors, preparing construction drawings and details, and briefing and acceptance. U.S. wages and employment use the precise O*NET / BLS 27-1025.00 occupational category (2025 median annual pay of $67,190; approximately 97,100 employed in 2025, 3% growth for 2025—2035, and approximately 7,700 average annual openings). Exact occupational wages for mainland China were not obtained and are recorded as a visible evidence gap."
+    "name": "Interior Designer",
+    "summary": "Interior designers plan how indoor spaces will be used. They develop layouts, select materials and coordinate drawings with clients and project teams. Work on regulated building systems or signed documents may require separate authority."
   }
 }

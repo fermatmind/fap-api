@@ -1269,7 +1269,7 @@
         "status": "mapped"
       },
       "item:quality-control-systems-managers.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:quality-control-systems-managers.path.interview-probation.1": {
         "status": "mapped"
@@ -9022,18 +9022,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -23326,7 +23316,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "First observe whether you can break a vague quality problem into object, specification, evidence, and responsible person, and trace it to the root cause when a defect recurs. Then use the fictional materials E1—E5 from the entry module for one complete exercise: write down the non-conformance facts, the drawing and specification versions involved, the gauge status, and the items pending approval; the exercise needs only paper and text files, with no cooperation from others and no real production."
+              "Under 09 “Entry, qualifications, and career development,” try “QC-M01 | Define a cross-line hold and restart gates.” Compare missing-record rates and propose the hold scope, investigation owners, and restart approval."
             ]
           },
           "id": "quality-control-systems-managers.quick-decision.fit-decision-checklist.2",
@@ -23443,13 +23433,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Communication | Official work environment data show: 100% of workers use email daily, 76% hold face-to-face discussions daily, and 83% use the telephone daily.\nWorkplace | About 81% work daily in an indoor controlled environment.\nAccuracy requirement | About 48% consider it important that the work be \"extremely precise or accurate\", and decisions and records directly affect release conclusions.\nDecision freedom | About 56% report some decision freedom, and about 43% can determine tasks and priorities themselves.\nScope of responsibility | About 48% have very high responsibility for the health and safety of others, and about 43% have very high responsibility for the work results of others.\nTime pressure | About 36% experience time pressure at least once a week.\nTime spent sitting | About 44% spend about half the time sitting, with the rest used for on-site and equipment checking.\nRepetitive tasks | About 47% consider repeating the same tasks very important.\nConflict situations | About 61% encounter a conflict situation at least once a month, and about 60% deal with unpleasant or angry people, mostly related to disputes over non-conforming products."
+              "Communication | All percentages in this section come from O*NET’s U.S. survey responses. 100% reported using email daily, 76% reported having face-to-face discussions daily, and 83% reported using the telephone daily.\nWorkplace | 81% of respondents reported working indoors in a controlled environment every day.\nAccuracy requirement | 48% of respondents rated being exact or accurate in performing the work as extremely important.\nDecision freedom | 56% reported some freedom to make decisions. 43% reported some freedom in determining tasks, priorities, or goals.\nScope of responsibility | 48% of respondents reported very high responsibility for others’ health and safety, and 43% reported very high responsibility for others’ work outcomes.\nTime pressure | 36% reported meeting strict deadlines once a week or more but not every day.\nTime spent sitting | 44% reported sitting about half the time.\nRepetitive tasks | About 47% consider repeating the same tasks very important.\nConflict situations | 61% reported facing conflict at least monthly but less than weekly. 60% reported dealing with unpleasant, angry, or discourteous people at that frequency."
             ]
           },
           "id": "quality-control-systems-managers.profile.work-context-block.1",
           "source_refs": [
-            "onet",
-            "bls"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -25506,7 +25495,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS projects 3% growth for the 11-3051 category in 2025—2035, a net increase of about 6,500 people; projections cannot prove AI adoption or employment causality."
+              "BLS projects 3% growth for the 11-3051 category in 2025—2035, a net increase of about 6,500 jobs; projections cannot prove AI adoption or employment causality."
             ]
           },
           "id": "quality-control-systems-managers.ai-impact.ai-impact-table.70",
@@ -26583,7 +26572,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Bachelor's degree as a common starting point or requirement"
+              "BLS group 11-3051: a bachelor’s degree is typical"
             ]
           },
           "id": "quality-control-systems-managers.china-salary.career-snapshot-primary-locale.28",
@@ -26613,7 +26602,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The common official US path is a bachelor's degree plus related experience; Chinese position requirements are decided by the employer and must be checked item by item."
+              "For the broader U.S. Industrial Production Managers group (11-3051), BLS lists a bachelor’s degree and related work experience as typical. Check the specific employer’s requirements for a role in China."
             ]
           },
           "id": "quality-control-systems-managers.china-salary.career-snapshot-primary-locale.30",
@@ -26837,7 +26826,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The table below is the editorial suggestion for checking education background and directions; no current recruitment text for this occupation was obtained; it is not a universal requirement or wage statistic summarized from a recruitment sample."
+              "The table offers editorial suggestions for checking education and job directions. The cited employer examples have not been verified as still hiring. Check current entry requirements and pay with the employer."
             ]
           },
           "id": "quality-control-systems-managers.china-salary.career-snapshot-primary-locale.45",
@@ -26867,7 +26856,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics average annual wage of urban unit employees 2025 | https://www.stats.gov.cn/sj/zxfb/"
+              "National Bureau of Statistics average annual wage of urban unit employees 2025 | https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "quality-control-systems-managers.china-salary.career-snapshot-primary-locale.47",
@@ -26980,13 +26969,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The same title covers very different positions in mainland China: there are execution-level inspection positions and combined management positions that carry quality system, release approval, and regulatory duties. When checking, look at duties and authorization rather than the title alone."
+              "Mainland quality management engineering professionals (2-02-29-03) overlap in quality management for products, projects, and services. This category does not establish a management grade or authority to stop, release, or restart production."
             ]
           },
           "id": "quality-control-systems-managers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "editor",
-            "r2-pay-1"
+            "r2-pay-1",
+            "cn-qc-class"
           ],
           "type": "prose"
         },
@@ -26995,7 +26985,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics average annual wage of urban unit employees 2025 | https://www.stats.gov.cn/sj/zxfb/"
+              "National Bureau of Statistics average annual wage of urban unit employees 2025 | https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "quality-control-systems-managers.china-salary.career-snapshot-primary-locale.57",
@@ -27075,7 +27065,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May 2025 the lowest 10% wage for this occupation is below this value (the official Occupational Outlook gives the lower-end threshold). This is a statistical distribution position, not an entry-level wage.; US Bureau of Labor Statistics Occupational Outlook (industrial production managers, SOC 11-3051 category) | https://www.bls.gov/ooh/management/industrial-production-managers.htm"
+              "May 2025 the lowest 10% wage for the broader U.S. Industrial Production Managers group (11-3051) is below this value (the official Occupational Outlook gives the lower-end threshold). This is a statistical distribution position, not an entry-level wage.; US Bureau of Labor Statistics Occupational Outlook (industrial production managers, SOC 11-3051 category) | https://www.bls.gov/ooh/management/industrial-production-managers.htm"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.10",
@@ -27103,7 +27093,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May 2025 the 25th percentile annual wage for the US SOC11-3051 category, from the United States national row of the O*NET local wages page; not specific to quality control systems managers or a seniority level.; O*NET national wages (derived from BLS2025) | https://www.onetonline.org/link/localwages/11-3051.01?st=NJ"
+              "May 2025 the 25th percentile annual wage for the US SOC11-3051 category, from the United States national row of the O*NET local wages page; not specific to quality control systems managers or a seniority level.; O*NET national wages (derived from BLS2025) | https://www.onetonline.org/link/localwages/11-3051.01"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.12",
@@ -27159,7 +27149,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May 2025 the 75th percentile annual wage for the US SOC11-3051 category, from the United States national row of the O*NET local wages page; not specific to quality control systems managers or a seniority level.; O*NET national wages (derived from BLS2025) | https://www.onetonline.org/link/localwages/11-3051.01?st=NJ"
+              "May 2025 the 75th percentile annual wage for the US SOC11-3051 category, from the United States national row of the O*NET local wages page; not specific to quality control systems managers or a seniority level.; O*NET national wages (derived from BLS2025) | https://www.onetonline.org/link/localwages/11-3051.01"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.16",
@@ -27187,7 +27177,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May 2025 the highest 10% wage for this occupation is above this value (the official Occupational Outlook gives the upper-end threshold). High percentiles need to be read together with industry, region, and management scope.; US Bureau of Labor Statistics Occupational Outlook (industrial production managers, SOC 11-3051 category) | https://www.bls.gov/ooh/management/industrial-production-managers.htm"
+              "May 2025 the highest 10% wage for the broader U.S. Industrial Production Managers group (11-3051) is above this value (the official Occupational Outlook gives the upper-end threshold). High percentiles need to be read together with industry, region, and management scope.; US Bureau of Labor Statistics Occupational Outlook (industrial production managers, SOC 11-3051 category) | https://www.bls.gov/ooh/management/industrial-production-managers.htm"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.18",
@@ -27201,7 +27191,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "252,100 people (2025)"
+              "252,100 jobs (2025)"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.19",
@@ -27230,7 +27220,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "About 3% (2025—2035)"
+              "About 3% (rounded from 2.6%) (2025—2035)"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.21",
@@ -27244,7 +27234,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The EP table exact change rate for 11-3051 is 2.6%, and the overview rounds it to 3%; 252.1 to 258.6 thousand, a net increase of 6.5 thousand, and annual average openings of 17 thousand are category measures.; BLS EP 2025—2035 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "The EP table exact change rate for 11-3051 is 2.6%, and the overview rounds it to 3% (rounded from 2.6%); 252.1 thousand jobs in the 2025 base year and 258.6 thousand projected jobs in 2035, a net increase of 6.5 thousand jobs, and annual average openings of 17 thousand are category measures.; BLS EP 2025—2035 | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.22",
@@ -27302,7 +27292,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Quality control systems managers are a management occupation in the US: the May 2025 annual wage median is 126,060 US dollars (60.61 US dollars per hour), with official projections of about 3% growth in 2025—2035 (a net increase of about 6,500 people; about 17,000 annual average openings); the above is on the SOC 11-3051 category basis, not a narrower single-occupation value."
+              "Quality control systems managers are a management occupation in the US: the May 2025 annual wage median is 126,060 US dollars (60.61 US dollars per hour), with official projections of about 3% (rounded from 2.6%) growth in 2025—2035 (a net increase of about 6,500 jobs; about 17,000 annual average openings); the above is on the SOC 11-3051 category basis, not a narrower single-occupation value."
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.26",
@@ -27656,7 +27646,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The lowest 10% is the lower end of the statistical distribution: arranging the annual wages of paid employees in this occupation nationwide from low to high, 10% are below 78,000 US dollars."
+              "The lowest 10% is the lower end of the statistical distribution: arranging the annual wages of U.S. paid employees in the broader Industrial Production Managers group (11-3051) from low to high, 10% are below 78,000 US dollars."
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.51",
@@ -27685,7 +27675,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The highest 10% is the upper end of the statistical distribution: 10% of paid employees earn more than 205,520 US dollars per year. The percentile table gives only position values and does not state these people's job grades or management scope."
+              "The highest 10% is the upper end of the statistical distribution: 10% of paid employees in the broader U.S. Industrial Production Managers group (11-3051) earn more than 205,520 US dollars per year. The percentile table gives only position values and does not state these people's job grades or management scope."
             ]
           },
           "id": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.53",
@@ -27718,31 +27708,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram personality test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Quality control inspector",
@@ -27805,28 +27795,28 @@
                 "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
               },
               {
-                "entity": "O*NET interests",
+                "entity": "O*NET Compliance Managers (11-9199.02)",
                 "id": "link-17",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/11-3051.01#Interests"
+                "url": "https://www.onetonline.org/link/summary/11-9199.02"
               },
               {
-                "entity": "O*NET tasks and work activities",
+                "entity": "O*NET Regulatory Affairs Managers (11-9199.01)",
                 "id": "link-18",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/11-3051.01#Tasks"
+                "url": "https://www.onetonline.org/link/summary/11-9199.01"
               },
               {
-                "entity": "O*NET education and Job Zone",
+                "entity": "O*NET Project Management Specialists (13-1082.00)",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/11-3051.01#Education"
+                "url": "https://www.onetonline.org/link/summary/13-1082.00"
               },
               {
-                "entity": "Personal Information Protection Law of the People's Republic of China",
+                "entity": "O*NET Natural Sciences Managers (11-9121.00)",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+                "url": "https://www.onetonline.org/link/summary/11-9121.00"
               }
             ]
           },
@@ -28136,7 +28126,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This occupation does not use IQ tests as a threshold, but it requires numerical checking and logical ordering (tolerance upper and lower limits, sample size, trend judgment), which is a work method that can be practiced."
+              "The occupational sources and job sample here do not list an IQ score. Check each employer’s requirements. Use the exercise to observe how you check numbers, document findings, and hand them off."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.18",
@@ -28282,12 +28272,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Inspection and decision direction"
+              "Production management direction"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.28",
           "source_refs": [
-            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28297,12 +28286,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Interested in specifications, gauges, and decision methods"
+              "Interested in production planning, team coordination, and balancing output with quality."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.29",
           "source_refs": [
-            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28312,12 +28300,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Shared decision ability does not mean positions can be directly interchanged."
+              "Check staffing, budget and delivery responsibility for the target role."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.30",
           "source_refs": [
-            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28327,12 +28314,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Quality system and audit direction"
+              "Compliance systems and audit direction"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.31",
           "source_refs": [
-            "purchasing-managers",
             "editor"
           ],
           "type": "prose"
@@ -28342,12 +28328,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Interested in system documents, auditing, and training management"
+              "Interested in controls, audit evidence, and corrective action."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.32",
           "source_refs": [
-            "purchasing-managers",
             "editor"
           ],
           "type": "prose"
@@ -28357,12 +28342,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "System and audit methods must be added separately, and inspection experience does not automatically equal a system qualification."
+              "Learn the applicable regulatory and internal control requirements for the employer."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.33",
           "source_refs": [
-            "purchasing-managers",
             "editor"
           ],
           "type": "prose"
@@ -28372,12 +28356,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Regulatory and compliance direction"
+              "Laboratory and quality analysis direction"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.34",
           "source_refs": [
-            "archivists",
             "editor"
           ],
           "type": "prose"
@@ -28387,12 +28370,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Willing to study regulatory texts and compliance risk"
+              "Interested in test methods, analyzing results, and documenting deviations."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.35",
           "source_refs": [
-            "archivists",
             "editor"
           ],
           "type": "prose"
@@ -28402,12 +28384,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Regulatory and internal control knowledge is required, and quality experience does not automatically equal a compliance qualification."
+              "Check method training and authorization to make or sign test decisions."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.36",
           "source_refs": [
-            "archivists",
             "editor"
           ],
           "type": "prose"
@@ -28417,12 +28398,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Production management direction"
+              "Inspection and decision direction"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.37",
           "source_refs": [
-            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -28432,12 +28412,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "More willing to lead a team, arrange production, and bear delivery pressure"
+              "Interested in specifications, gauges, sampling, and individual inspection decisions."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.38",
           "source_refs": [
-            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -28447,12 +28426,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Quality experience does not automatically equal production management, and output and cost responsibility must be taken on separately."
+              "Check the product-specific inspection method and the limits of your decision authority."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.39",
           "source_refs": [
-            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -28462,13 +28440,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Calibration and metrology direction"
+              "Regulatory affairs direction"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.40",
           "source_refs": [
-            "hr",
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -28478,13 +28454,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "More willing to work on measurement values, calibration, and error analysis"
+              "Interested in submission records, approval changes, and product compliance."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.41",
           "source_refs": [
-            "hr",
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -28494,13 +28468,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Metrology knowledge must be added separately, and inspection experience does not automatically equal a calibration qualification."
+              "Learn the applicable submission procedures and the target jurisdiction’s requirements."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.42",
           "source_refs": [
-            "hr",
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -28510,12 +28482,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Laboratory and testing direction"
+              "Quality improvement project direction"
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.43",
           "source_refs": [
-            "health",
             "editor"
           ],
           "type": "prose"
@@ -28525,12 +28496,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Willing to perform testing and records in a laboratory per method"
+              "Interested in defining scope, coordinating owners, and tracking corrective actions across teams."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.44",
           "source_refs": [
-            "health",
             "editor"
           ],
           "type": "prose"
@@ -28540,12 +28510,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Laboratory methods and qualification requirements are needed, and management experience does not automatically authorize test signing."
+              "Check whether the job owns project budgets, schedules, or only a quality workstream."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.45",
           "source_refs": [
-            "health",
             "editor"
           ],
           "type": "prose"
@@ -28731,7 +28700,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Try an entry exercise: use E1—E5 to review a set of fictional sampling inspection records and compare with the reference deliverable."
+              "Use the fictional production lines in section 09 to practice defining a hold, assigning investigations, and setting restart gates."
             ]
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.58",
@@ -28806,7 +28775,7 @@
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.63",
           "source_refs": [
-            "facilities"
+            "onet-compliance-manager"
           ],
           "type": "prose"
         },
@@ -28820,7 +28789,7 @@
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.64",
           "source_refs": [
-            "hr"
+            "onet-regulatory-affairs-manager"
           ],
           "type": "prose"
         },
@@ -28834,7 +28803,7 @@
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.65",
           "source_refs": [
-            "purchasing-managers"
+            "onet-project-management-specialists"
           ],
           "type": "prose"
         },
@@ -28848,7 +28817,7 @@
           },
           "id": "quality-control-systems-managers.fit.personality-fit-block.66",
           "source_refs": [
-            "privacy"
+            "onet-natural-sciences-managers"
           ],
           "type": "prose"
         }
@@ -29092,7 +29061,7 @@
           },
           "id": "quality-control-systems-managers.risk.career-risk-cards.19",
           "source_refs": [
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29106,7 +29075,7 @@
           },
           "id": "quality-control-systems-managers.risk.career-risk-cards.20",
           "source_refs": [
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29115,12 +29084,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Check the calibration status and expiry date before use; on exceptions, stop use and escalate, and re-decide after retesting."
+              "In this fictional scenario, stop using the gauge and escalate through the site’s authorized process. Authorized staff decide whether to retest and how to reassess the batch under the applicable method."
             ]
           },
           "id": "quality-control-systems-managers.risk.career-risk-cards.21",
           "source_refs": [
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29129,13 +29098,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The micrometer calibration is valid until 2026-05-31, yet on 2026-06-02 it was still registered as valid and readings were issued."
+              "Fictional scenario: before using a gauge to assess a batch of parts, you find an expired calibration label and no later calibration entry in the log."
             ]
           },
           "id": "quality-control-systems-managers.risk.career-risk-cards.22",
           "source_refs": [
-            "privacy",
-            "employer"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29420,14 +29388,14 @@
                 "Incoming and in-process inspection role",
                 "Perform dimensional and appearance inspection on incoming or in-line products per drawings and sampling plans, record readings and decide against tolerances, and isolate and report non-conformances.",
                 "Whether you can measure per method, recalculate readings, and explain the basis for the decision; when questioned, whether you can point out the gauge status and specification version.",
-                "Use the inspection records and decisions from the exercise to explain your approach, and note which information was unconfirmed at the time.",
+                "Make a separate fictional dimensional inspection record showing gauge status, specification version, and the basis for the decision.",
                 "Leans toward execution and decisions and generally does not take on method development or system audits; release authority is set by position authorization."
               ],
               [
                 "Final and shipping inspection role",
                 "Perform full or sampling inspection on finished products, check appearance and function, mark accept or reject, and issue inspection records.",
                 "Whether records can be kept complete under time pressure, and whether \"pending review\" can be distinguished from \"conforming\".",
-                "Use the E1—E5 exercises to explain how the sampling quantity and decision boundary are checked.",
+                "Make a separate fictional final inspection record showing the sample count, appearance findings, and items pending review.",
                 "The object is finished products and shipping batches, which differs from the focus of in-process inspection."
               ],
               [
@@ -29472,22 +29440,22 @@
                 "values": [
                   "Education and experience requirements",
                   "The O*NET detailed occupation Job Zone4 is a combined background of education, training, and experience; the EP bachelor's degree plus 5 or more years of experience describes the 11-3051 category, not all positions of that detailed occupation or a uniform Chinese requirement.",
-                  "How to check: match each requirement in the target posting to a demonstrable ability or experience."
+                  "ContiTech’s Changzhou Head of Quality listing includes budgeting, plant quality systems, inspection and lab operation, and stopping processes and ensuring corrective action when requirements are unmet. That authority describes this position only. A Tianjin food QA systems posting from China Otsuka includes internal audits, management review, external-audit follow-up, and instrument records. It illustrates systems work without establishing that the role manages a team."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
                   "Training and job-entry verification",
-                  "O*NET states that the occupation usually requires several years of related work experience and on-the-job training; the specific form and authorization vary with the employer and production line.",
+                  "O*NET Job Zone 4 describes occupations requiring considerable preparation. Education and training examples are category context. Check each role’s experience and authority.",
                   "How to check: confirm the employer's training arrangements, the mentoring approach, and the authorized scope for independent decisions."
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "Interest and work context requirements",
-                  "The O*NET interest code is CEI, and the work context shows 100% daily email use, 76% daily face-to-face discussions, and 48% reporting accuracy as extremely important; all of these are on the US self-reported basis.",
+                  "Interests and work context",
+                  "The O*NET interest code is CEI, and the work context shows 100% daily email use, 76% daily face-to-face discussions, and 48% rating being exact or accurate at work as extremely important; all of these are on the US self-reported basis.",
                   "How to check: match the posting requirements to demonstrable decision and record abilities."
                 ]
               },
@@ -29504,7 +29472,10 @@
           "id": "quality-control-systems-managers.path.employer-evidence.1",
           "source_refs": [
             "employer",
-            "editor"
+            "editor",
+            "cn-contitech-quality",
+            "cn-otsuka-qa",
+            "onet-details"
           ],
           "title": "What do employers usually look at in recruitment?",
           "type": "cards"
@@ -29517,32 +29488,33 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and setup | all editorially designed fictional data",
-                  "You are the quality control systems manager at the fictional company \"Chengchuan Precision Manufacturing\" and need to review the quality records of sampling batch Q-1120 and give a release or return recommendation. The following materials and values are entirely fictional and are not real inspection results or tolerance standards.",
-                  "E1 Batch and sample record: Q-1120 is divided into Q-1120-01 to 03, and the inspection items are outer diameter, hardness, and appearance; the numbers in the batch record and the sample log-in sheet are not fully consistent. E2 Gauge and equipment log: the outer diameter micrometer calibration is valid until 2026-05-31, and the hardness tester and the inspection platform are within their validity periods. E3 Quality data and specifications: outer diameter 20.03 mm (specification 20.00±0.05 mm), hardness 58 HRC (specification 55—60 HRC), appearance free of scratches; the outer diameter was measured on 2026-06-02. E4 Non-conformance and corrective action: one sample has an outer diameter of 20.11 mm, above the upper limit, which was registered but no corrective action was started, and the inconsistent sample identification is recorded as pending confirmation. E5 Release recommendation and approval column: the draft says \"recommend release\" and the approval column is empty."
+                  "Fictional inputs",
+                  "Use the records provided here.",
+                  "E1 | A fictional plant makes the same product on lines A and B. Each line sampled 50 units this week. A has five missing seal test records and B has one. Last week each line sampled 50 units and each had one missing record. E2 | A reused an old worksheet with no reviewer named. B has a shift reviewer’s signature. The cause is unknown.",
+                  "E3 | Related A-line lots A17 and A18 are in the warehouse. B-line lot B22 contains one unit with a missing record. E4 | Under the scenario’s rules, units with missing test records cannot be released. The manager may issue an internal hold. The quality lead approves lot disposition. Quality and production leads jointly authorize restart. E5 | The manager must propose restart conditions. Approval has not yet been given."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task",
-                  "Check E1—E5 item by item and write out: which items are acceptable, which must not be released, which data are unusable, and the unconfirmed items and the approver that the release recommendation should include.",
-                  "Do not add readings, tolerances, authorizations, or customer information that the scenario does not give; list unknown items separately."
+                  "Task and deliverable",
+                  "Submit a one-page decision memo. Compare the lines’ missing-record rates this week and last week. Define the hold scope, investigation owners, restart gates, and a follow-up date.",
+                  "List evidence gaps. Do not invent readings or approvals."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference deliverable",
-                  "Acceptable: the outer diameter 20.03 mm and hardness 58 HRC are within specification, and the appearance is free of scratches. Must not be released: one outer diameter of 20.11 mm is above the upper limit of 20.05 mm, which should be judged non-conforming and trigger corrective action. Unusable data: the outer diameter was measured on 2026-06-02, while the micrometer calibration expired on 2026-05-31, so recalibration and remeasurement are required.",
-                  "The release recommendation must state that the sample identification is pending confirmation and the corrective action is not complete, and it must be approved by a role authorized by the organization; the quality control systems manager submits only a recommendation."
+                  "Before checking your work",
+                  "Save your draft before checking the key after the seven-day plan.",
+                  "You need no equipment, physical samples, or partner."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries",
-                  "This exercise does not involve real inspection, sample retention, or release; actual inspection, decisions, release, and isolation follow the quality system and authorization of the organization concerned. If you cannot judge, you are allowed to write \"insufficient to judge\" and explain what evidence is missing."
+                  "Authority boundaries",
+                  "This is a paper exercise. Do not operate equipment, approve release, or restart production."
                 ]
               }
             ]
@@ -29551,7 +29523,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: a complete office support task (fictional materials)",
+          "title": "QC-M01 | Define a cross-line hold and restart gates",
           "type": "cards"
         },
         {
@@ -29562,33 +29534,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Scope comparison package",
-                  "Use E1—E3 to fill in a comparison table of batch identification, inspection items, gauges, and specification versions, marking unknown items and questions that need clarification.",
-                  "How to review: from this table alone, another person can judge which data item is unusable and why."
+                  "Scope and evidence sheet",
+                  "Record the subject and scope from E1.",
+                  "Verify against the supplied inputs."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Independent review statement",
-                  "For E3, write out the data, the tolerance direction, and the decision conclusion item by item, and note the gauge status.",
-                  "How to review: the conclusion is consistent with the raw data and the specification version and states the basis."
+                  "Comparison record",
+                  "Use E1 to compare each line’s missing-record rate this week and last week. Show both denominators.",
+                  "Verify against the supplied inputs."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Non-conformance and corrective action record",
-                  "Use E4 to write a non-conformance record: event, impact, open questions, and escalation target; the record can be traced back to the batch and gauge, and the disposition responsibility is clear.",
-                  "How to review: the isolation scope and the next step can be seen."
+                  "Exception handoff",
+                  "Use E4 and E5 to record open items, the proposed disposition, and its owner.",
+                  "Verify against the supplied inputs."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Draft release recommendation",
-                  "Use E5 to write a release recommendation listing acceptable items, items that must not be released, unconfirmed items, and the approver; no self-approval or signing on behalf of others may appear.",
-                  "How to review: the recommendation is consistent with the evidence and does not exceed authority."
+                  "Decision draft",
+                  "Submit a one-page decision memo. Compare the lines’ missing-record rates this week and last week. Define the hold scope, investigation owners, restart gates, and a follow-up date.",
+                  "Verify against the supplied inputs."
                 ]
               }
             ]
@@ -29620,25 +29592,25 @@
               [
                 "Check batch and sample identification",
                 "Whether inconsistency between the number and the handover can be found",
-                "Can point out the inconsistency and explain that isolation comes before reporting",
+                "Identify the record, version, and scope.",
                 "A single employer's questioning approach cannot be generalized into a uniform industry exam"
               ],
               [
                 "Confirming calibration status",
                 "Whether an expired gauge calibration can be identified",
-                "Can point out that the calibration has expired and require recalibration and remeasurement",
+                "Explain whether the evidence supports a decision.",
                 "Gauge and calibration requirements vary with the laboratory and production line system"
               ],
               [
                 "Judging tolerance direction",
                 "Whether the direction of the tolerance upper and lower limits can be judged",
-                "Can read the specification and judge above the upper limit and below the lower limit",
+                "Show the calculation or specification comparison.",
                 "Limits and specifications vary with product and regulation"
               ],
               [
                 "Release and production stop boundary",
                 "Whether a recommendation can be distinguished from an approval",
-                "Can point out that the approval column is empty and release must be decided by an authorized role",
+                "Name the disposition authority and reviewer.",
                 "The scope of authority is determined by the organization and cannot be carried over from assumptions made elsewhere"
               ]
             ]
@@ -29659,50 +29631,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Read the materials and write a role boundary card",
-                  "Read E1—E5 and write a role boundary card: what you may do (inspect and record per standards), what must be reviewed (decisions and handling of out-of-tolerance items), and prohibited actions (approving release on your own); confirm that you will not do real inspection or release."
+                  "Day 1",
+                  "Read E1–E5 and identify records and authority."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Use E1 to complete a batch log-in check sheet",
-                  "Use E1 to check the batch numbers, inspection items, and quantities, marking inconsistencies and pending items."
+                  "Day 2",
+                  "Record the subject and scope from E1."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Use E2 to check gauge status",
-                  "Use E2 to check the gauge calibration dates and valid status, and write down which gauge's data cannot be used for a decision."
+                  "Day 3",
+                  "Review the record versions and investigation leads in E2."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Use E3 to complete the data and tolerance comparison",
-                  "Write out the data, tolerance direction, and conclusion item by item, marking items above the upper limit and items with unusable data."
+                  "Day 4",
+                  "Use E1 to compare each line’s missing-record rate this week and last week. Show both denominators."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Use E4 to write a non-conformance record",
-                  "Use E4 to write a non-conformance record: event, impact, open questions, and escalation target."
+                  "Day 5",
+                  "Trace the lots with E3, then use E4 and E5 to document the hold, investigation, and restart approval."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Use E5 to write a draft release recommendation",
-                  "Write out acceptable items, items that must not be released, unconfirmed items, and the approver; do not approve on your own."
+                  "Day 6",
+                  "Finish and save your first draft with the evidence behind your judgments. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Compare with the reference and revise",
-                  "Revise the first six days' output against the reference deliverable, and record the step most easily missed and the practice step for next time."
+                  "Day 7",
+                  "After saving your day 6 draft, open “QC-M01 answer key and rubric (open on day 7)” in the FAQ. Apply the four rubric checks and record one revision and its reason."
                 ]
               }
             ]
@@ -29711,7 +29683,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Seven-day experience: complete one office support loop with fictional materials",
+          "title": "Seven-day practice and self-check",
           "type": "timeline"
         },
         {
@@ -29719,11 +29691,11 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Items to check in the seven-day judgment: occupational scope (SOC 11-3051 category proxy), employer requirements, education and training, local qualifications, and supervised tasks.",
-              "Use \"which step most needs external confirmation\" as the judgment point: batch identification, gauge status, and release authorization usually need organizational confirmation.",
-              "Distinguish verifiable facts from editorial judgments: data and tolerances are verifiable facts, while fit is an editorial judgment; conclusions must point back to the raw data.",
-              "Investment estimate: 30—60 minutes per day, mainly reading materials and recalculating, with no need to buy gauges or equipment.",
-              "If you keep getting stuck at the same step during the seven days (such as judging tolerance direction), list it as the priority practice item for the next step.",
+              "State the lines, periods, and denominators used in the comparison.",
+              "Document the hold rationale, investigation owners, and restart approval roles.",
+              "Separate known records, hold recommendations, and decisions still awaiting approval. Link each to the evidence.",
+              "Allow about 30–60 minutes a day to compare records and recalculate on paper.",
+              "If traceability or restart approval keeps causing difficulty, make it the next practice item.",
               "If you cannot judge a step, write \"insufficient to judge\" and explain what evidence is missing rather than guessing.",
               "After finishing, compare your output with the quality record format of a real position and observe the difference."
             ]
@@ -29732,7 +29704,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide at the end of seven days whether to continue",
+          "title": "Submission and review checklist",
           "type": "list"
         },
         {
@@ -29850,8 +29822,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no verified original Chinese public recruitment text whose duties, inspection items, and authorization scope match.",
-              "This round obtained no verified original Chinese public recruitment text whose duties, inspection items, and authorization scope match; the gap is retained, and samples from adjacent levels are not used as substitutes."
+              "ContiTech’s Changzhou Head of Quality listing includes budgeting, plant quality systems, inspection and lab operation, and stopping processes and ensuring corrective action when requirements are unmet. That authority describes this position only. A Tianjin food QA systems posting from China Otsuka includes internal audits, management review, external-audit follow-up, and instrument records. It illustrates systems work without establishing that the role manages a team."
             ]
           },
           "id": "quality-control-systems-managers.path.recruitment-sample.1",
@@ -29859,7 +29830,9 @@
             "employer",
             "r2-pay-1",
             "r2-pay-2",
-            "r2-pay-3"
+            "r2-pay-3",
+            "cn-contitech-quality",
+            "cn-otsuka-qa"
           ],
           "title": "Recruitment sample note",
           "type": "notice"
@@ -31070,7 +31043,7 @@
                 "entity": "National Bureau of Statistics average annual wage of urban unit employees 2025",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET 11-3051.01 occupational profile",
@@ -31142,7 +31115,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The US SOC 11-3051 category is projected to grow 3% in 2025—2035 (a net increase of about 6,500 people), with about 17,000 annual average openings (including replacement); the wage median of 126,060 US dollars per year is on the May 2025 basis, and the two have different bases and periods. No exact wage for this occupation was obtained for China."
+              "The US SOC 11-3051 category is projected to grow 3% (rounded from 2.6%) in 2025—2035 (a net increase of about 6,500 jobs), with about 17,000 annual average openings (including replacement); the wage median of 126,060 US dollars per year is on the May 2025 basis, and the two have different bases and periods. No exact wage for this occupation was obtained for China."
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.8",
@@ -31186,7 +31159,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The 3% growth is an official projection, not a promise; net increase, growth rate, and annual average openings are three different measures."
+              "The 3% (rounded from 2.6%) growth is an official projection, not a promise; net increase, growth rate, and annual average openings are three different measures."
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.11",
@@ -31242,7 +31215,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Growth 3%, net increase about 6,500 people"
+              "Growth 3% (rounded from 2.6%), net increase about 6,500 jobs"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.15",
@@ -31508,13 +31481,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Needs checking of the target inspection methods, gauge operation, sampling, and on-site position authorization"
+              "Needs to add production planning and cost management"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.34",
           "source_refs": [
-            "facilities",
-            "onet"
+            "editor",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -31523,13 +31496,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Inspection and quality records"
+              "Site and process control"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.35",
           "source_refs": [
-            "facilities",
-            "editor"
+            "editor",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -31538,58 +31511,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Transferable: quality standards and records; to add: the specific measurement operations and inspection methods of the target product, since system management experience does not automatically prove hands-on ability."
+              "Transferable: process control; to add: production and cost responsibility"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.36",
           "source_refs": [
-            "facilities",
-            "editor"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "Needs to add data analysis and statistical methods"
-            ]
-          },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.37",
-          "source_refs": [
-            "purchasing-managers",
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "Quality data and specification decisions"
-            ]
-          },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.38",
-          "source_refs": [
-            "purchasing-managers",
-            "editor"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "Transferable: quality data; to add: statistical and investigation methods"
-            ]
-          },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.39",
-          "source_refs": [
-            "purchasing-managers",
-            "editor"
+            "editor",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -31601,10 +31529,9 @@
               "Needs to add regulatory and internal control knowledge"
             ]
           },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.40",
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.37",
           "source_refs": [
-            "operations",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31616,9 +31543,8 @@
               "Quality system and auditing"
             ]
           },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.41",
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.38",
           "source_refs": [
-            "operations",
             "editor"
           ],
           "type": "prose"
@@ -31631,9 +31557,8 @@
               "Transferable: system and auditing; to add: regulation and internal control"
             ]
           },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.42",
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.39",
           "source_refs": [
-            "operations",
             "editor"
           ],
           "type": "prose"
@@ -31643,13 +31568,57 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Needs to add regulatory submission experience"
+              "Needs to add data analysis and statistical methods"
+            ]
+          },
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.40",
+          "source_refs": [
+            "editor",
+            "archivists"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "Quality data and specification decisions"
+            ]
+          },
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.41",
+          "source_refs": [
+            "editor",
+            "archivists"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "Transferable: quality data; to add: statistical and investigation methods"
+            ]
+          },
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.42",
+          "source_refs": [
+            "editor",
+            "archivists"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "Needs checking of the target inspection methods, gauge operation, sampling, and on-site position authorization"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.43",
           "source_refs": [
-            "hr",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31658,12 +31627,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Quality documents and records"
+              "Inspection and quality records"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.44",
           "source_refs": [
-            "hr",
             "editor"
           ],
           "type": "prose"
@@ -31673,57 +31641,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Transferable: quality documents; to add: regulatory submissions"
+              "Transferable: quality standards and records; to add: the specific measurement operations and inspection methods of the target product, since system management experience does not automatically prove hands-on ability."
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.45",
           "source_refs": [
-            "hr",
-            "editor"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "Needs to add production planning and cost management"
-            ]
-          },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.46",
-          "source_refs": [
-            "health",
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "Site and process control"
-            ]
-          },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.47",
-          "source_refs": [
-            "health",
-            "editor"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "Transferable: process control; to add: production and cost responsibility"
-            ]
-          },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.48",
-          "source_refs": [
-            "health",
             "editor"
           ],
           "type": "prose"
@@ -31736,10 +31658,9 @@
               "Needs to add laboratory and research management"
             ]
           },
-          "id": "quality-control-systems-managers.market-signals.market-signal-card.49",
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.46",
           "source_refs": [
-            "editor",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31749,6 +31670,48 @@
           "data": {
             "paragraphs": [
               "Laboratory and test methods"
+            ]
+          },
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.47",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "Transferable: laboratory management; to add: research management experience"
+            ]
+          },
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.48",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "Needs to add regulatory submission experience"
+            ]
+          },
+          "id": "quality-control-systems-managers.market-signals.market-signal-card.49",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "Quality documents and records"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.50",
@@ -31762,7 +31725,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Transferable: laboratory management; to add: research management experience"
+              "Transferable: quality documents; to add: regulatory submissions"
             ]
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.51",
@@ -31781,7 +31744,6 @@
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31796,7 +31758,6 @@
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31811,7 +31772,6 @@
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.54",
           "source_refs": [
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31826,7 +31786,6 @@
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31841,7 +31800,6 @@
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31856,7 +31814,6 @@
           },
           "id": "quality-control-systems-managers.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31878,61 +31835,98 @@
                 "answer": "Plan and coordinate quality assurance programs: set quality control policies, specify inspection and sampling, supervise inspection and laboratory activities and decide conformity; record quality data, organize root cause analysis of defects, and drive corrective actions. O*NET 11-3051.01 is on the US basis, and actual duties are determined by position authorization.",
                 "id": "quality-control-systems-managers.faq.1",
                 "question": "What does a quality control systems manager do every day?",
-                "question_key": "career.faq.quality-control-systems-managers.daily-work"
+                "question_key": "career.faq.quality-control-systems-managers.daily-work",
+                "source_refs": [
+                  "onet"
+                ]
               },
               {
-                "answer": "This occupation focuses on the quality system and conformity decisions; industrial production managers are responsible for output, cost, and delivery, and compliance and regulatory affairs managers are responsible for regulatory submissions and compliance risk, so the objects and responsibilities differ.",
+                "answer": "Inspectors often submit inspection and nonconformance records; lab analysts submit test results and deviation documentation; systems managers oversee rules, review, and follow-up across processes. Exact authority varies by employer and industry.",
                 "id": "quality-control-systems-managers.faq.2",
                 "question": "How is a quality control systems manager different from adjacent positions?",
-                "question_key": "career.faq.quality-control-systems-managers.comparison"
+                "question_key": "career.faq.quality-control-systems-managers.comparison",
+                "source_refs": [
+                  "onet",
+                  "editor",
+                  "cn-qc-class"
+                ]
               },
               {
-                "answer": "Look at observable behavior: whether you can decide per standards, record truthfully, drive defects to correction, and accept that release is decided by an authorized role; E1—E5 exercises and the O*NET CEI interest can be used to check, and assessments or a single performance cannot determine employment or fit.",
+                "answer": "Key: A is at 10%, B at 2%, and each was at 2% last week. These are missing-record rates in the samples, not overall defect rates. Hold A17 and A18 and the affected B22 unit. Verify wider scope through traceability. Assign the worksheet check to production, the record and hold review to quality, and system or process changes to engineering. Before restart, review affected records and confirm traceability, the updated worksheet, and its reviewer. Require joint quality and production approval. Recheck the sampled missing-record rate one week after the corrective action.\n\nScore each item 0–2: rates and denominators, hold scope, investigation ownership, and restart gates and follow-up. Award 2 for complete and traceable, 1 for partial, and 0 for missing evidence or exceeding authority.",
                 "id": "quality-control-systems-managers.faq.3",
-                "question": "How do I judge whether I am suited to being a quality control systems manager?",
-                "question_key": "career.faq.quality-control-systems-managers.fit"
+                "question": "QC-M01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.quality-control-systems-managers.fit",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
                 "answer": "The research supports that standard, record, and retrieval text tasks are more affected and does not support replacement of the whole occupation; ILO, GPTs are GPTs, and WEF provide potential exposure and employer expectations and cannot be used to calculate job replacement for this occupation.",
                 "id": "quality-control-systems-managers.faq.4",
                 "question": "Will AI reduce quality control systems manager positions?",
-                "question_key": "career.faq.quality-control-systems-managers.ai-impact"
+                "question_key": "career.faq.quality-control-systems-managers.ai-impact",
+                "source_refs": [
+                  "ilo",
+                  "editor"
+                ]
               },
               {
                 "answer": "This round did not obtain a national or city wage for the exact occupation quality control systems manager in mainland China; the National Bureau of Statistics industry average wage serves only as statistical background, and US values are not used for conversion.",
                 "id": "quality-control-systems-managers.faq.5",
                 "question": "What is the wage of quality control systems managers in mainland China?",
-                "question_key": "career.faq.quality-control-systems-managers.china-pay"
+                "question_key": "career.faq.quality-control-systems-managers.china-pay",
+                "source_refs": [
+                  "nbs"
+                ]
               },
               {
-                "answer": "The US SOC 11-3051 category May 2025 median of 126,060 US dollars per year is the midpoint of the distribution, not entry-level income; the 10th percentile below 78,000 and the 90th percentile above 205,520 also do not correspond to job grades.",
+                "answer": "The May 2025 median annual wage for the U.S. Industrial Production Managers group (11-3051) was $126,060, the midpoint of its wage distribution. The 10th percentile was $78,000 and the 90th percentile was $205,520. These figures do not describe starting pay or job grades.",
                 "id": "quality-control-systems-managers.faq.6",
                 "question": "Does the US median wage represent entry-level income?",
-                "question_key": "career.faq.quality-control-systems-managers.us-pay"
+                "question_key": "career.faq.quality-control-systems-managers.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
               },
               {
-                "answer": "O*NET shows Job Zone 4, with a typical entry-level education of a bachelor's degree and related work experience of 5 or more years; this is the typical US background, and China follows the target posting.",
+                "answer": "O*NET places quality control systems managers in Job Zone 4, indicating considerable preparation. BLS lists a bachelor’s degree and at least five years of related work experience as typical for the broader U.S. Industrial Production Managers group (11-3051). Check the individual posting for requirements in China. ContiTech’s Changzhou Head of Quality listing includes budgeting, plant quality systems, inspection and lab operation, and stopping processes and ensuring corrective action when requirements are unmet. That authority describes this position only.",
                 "id": "quality-control-systems-managers.faq.7",
                 "question": "What education and experience are needed to enter the field?",
-                "question_key": "career.faq.quality-control-systems-managers.education-path"
+                "question_key": "career.faq.quality-control-systems-managers.education-path",
+                "source_refs": [
+                  "bls",
+                  "onet",
+                  "cn-contitech-quality"
+                ]
               },
               {
                 "answer": "This round did not verify a uniform mandatory qualification certificate in China; O*NET and BLS describe typical US education and training. Training proof, hiring eligibility, and release approval authority are three different things, and a certificate does not equal signing authority.",
                 "id": "quality-control-systems-managers.faq.8",
                 "question": "Do I need to take any certification exams?",
-                "question_key": "career.faq.quality-control-systems-managers.credentials"
+                "question_key": "career.faq.quality-control-systems-managers.credentials",
+                "source_refs": [
+                  "editor"
+                ]
               },
               {
-                "answer": "Six editorial risks: releasing or stopping production without authorization, using an outdated specification version, expired gauge or equipment calibration, errors in identifying and isolating non-conforming products, untraceable quality records, and inadequate review of supplier or external laboratory quality plans. Taking E1—E5 as an example, the micrometer data after it expired on 2026-05-31 is unusable, and the outer diameter of 20.11 mm exceeds the upper limit of 20.05 mm.",
+                "answer": "Clarify hold authority, applicable procedures, affected scope, and corrective actions. Record unresolved evidence and have the authorized roles approve disposition and restart.",
                 "id": "quality-control-systems-managers.faq.9",
                 "question": "What risks does a quality control systems manager face?",
-                "question_key": "career.faq.quality-control-systems-managers.risk-boundary"
+                "question_key": "career.faq.quality-control-systems-managers.risk-boundary",
+                "source_refs": [
+                  "onet",
+                  "editor"
+                ]
               },
               {
-                "answer": "The US SOC 11-3051 category is projected to grow 3% in 2025—2035, with a net increase of about 6,500 people and about 17,000 annual average openings (including replacement); openings do not equal net additions or the number of hires in China. Adjacent directions such as industrial production management, compliance, regulatory affairs, project management, and natural sciences management can be explored.",
+                "answer": "The US SOC 11-3051 category is projected to grow 3% (rounded from 2.6%) in 2025—2035, with a net increase of about 6,500 jobs and about 17,000 annual average openings (including replacement); openings do not equal net additions or the number of hires in China. Adjacent directions such as industrial production management, compliance, regulatory affairs, project management, and natural sciences management can be explored.",
                 "id": "quality-control-systems-managers.faq.10",
                 "question": "What is the outlook and where can I move?",
-                "question_key": "career.faq.quality-control-systems-managers.outlook"
+                "question_key": "career.faq.quality-control-systems-managers.outlook",
+                "source_refs": [
+                  "ep",
+                  "editor"
+                ]
               }
             ]
           },
@@ -31944,7 +31938,11 @@
             "nbs",
             "privacy",
             "cnclass",
-            "editor"
+            "editor",
+            "cn-qc-class",
+            "ilo",
+            "onet-wages",
+            "cn-contitech-quality"
           ],
           "type": "faq"
         },
@@ -32042,13 +32040,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "path",
@@ -32087,7 +32085,7 @@
                 "name": "ILO generative AI and jobs: refined global index of occupational exposure (working paper 140)",
                 "period": "2025",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -32109,8 +32107,8 @@
               {
                 "accessed_at": "2026-09-30",
                 "details": [
-                  "May 2025 median wage 126,060 US dollars per year (60.61 US dollars per hour); the 10th percentile is below 78,000 and the 90th percentile is above 205,520.",
-                  "2025 employment 252,100; 2025—2035 growth 3%, net increase 6,500, annual average openings about 17,000."
+                  "For U.S. Industrial Production Managers (11-3051), the May 2025 median was $126,060 per year ($60.61 per hour). The lowest 10% earned less than $78,000, and the highest 10% earned more than $205,520.",
+                  "2025 employment 252,100 jobs; 2025—2035 growth 3% (rounded from 2.6%), net increase 6,500 jobs, annual average openings about 17,000."
                 ],
                 "evidence_type": "official occupational outlook and wage statistics",
                 "id": "bls",
@@ -32130,7 +32128,7 @@
                 ],
                 "evidence_type": "official employment projections",
                 "id": "ep",
-                "limitation": "11-3051 row: base period 252,100, growth 3%, net increase 6,500, annual average openings about 17,000; projections are not promises.",
+                "limitation": "11-3051 row: base year 252,100 jobs, growth 3% (rounded from 2.6%), net increase 6,500 jobs, annual average openings about 17,000; projections are not promises.",
                 "market": "United States",
                 "name": "BLS 2025—2035 employment projections and occupational characteristics table (table 1.2)",
                 "period": "2025—2035",
@@ -32141,8 +32139,8 @@
               {
                 "accessed_at": "2026-10-12",
                 "details": [
-                  "Median 126,060 US dollars per year; the 10th percentile is below 78,000 and the 90th percentile is above 205,520.",
-                  "Covers salaried employees and does not cover self-employed people."
+                  "May 2025 U.S. Industrial Production Managers group (11-3051): 10th percentile $78,000, median $126,060, and 90th percentile $205,520 per year.",
+                  "Covers wage and salary workers and excludes self-employed people."
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "oews",
@@ -32152,7 +32150,7 @@
                 "period": "May 2025",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/11-3051.01?st=NJ"
+                "url": "https://www.onetonline.org/link/localwages/11-3051.01"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -32168,7 +32166,7 @@
                 "period": "2025 statistics; released 2026-05",
                 "publisher": "National Bureau of Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -32183,7 +32181,7 @@
                 "name": "Occupational Classification Code of the People's Republic of China and related notes on vocational qualifications",
                 "period": "Current version",
                 "publisher": "Ministry of Human Resources and Social Security of the People's Republic of China",
-                "scope": "Mainland China",
+                "scope": "contextual",
                 "url": "https://www.mohrss.gov.cn/"
               },
               {
@@ -32199,7 +32197,7 @@
                 "name": "Personal Information Protection Law of the People's Republic of China",
                 "period": "In force since 2021",
                 "publisher": "Standing Committee of the National People's Congress",
-                "scope": "Mainland China",
+                "scope": "contextual",
                 "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12c401d9a13e0a97f1c60d5.html"
               },
               {
@@ -32215,7 +32213,7 @@
                 "name": "O*NET 11-3051.00 Industrial Production Managers (adjacent occupation)",
                 "period": "O*NET updated 2026",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3051.00"
               },
               {
@@ -32231,7 +32229,7 @@
                 "name": "O*NET 11-1021.00 General and Operations Managers (adjacent occupation)",
                 "period": "O*NET updated 2026",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-1021.00"
               },
               {
@@ -32247,7 +32245,7 @@
                 "name": "O*NET 11-3121.00 Human Resources Managers (adjacent occupation)",
                 "period": "O*NET updated 2026",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3121.00"
               },
               {
@@ -32263,13 +32261,13 @@
                 "name": "O*NET 11-9111.00 Medical and Health Services Managers (adjacent occupation)",
                 "period": "O*NET updated 2026",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-9111.00"
               },
               {
                 "accessed_at": "2026-09-30",
                 "details": [
-                  "The fictional company \"Chengchuan Precision Manufacturing\", batch Q-1120, and materials E1—E5.",
+                  "The fictional company \"Chengchuan Precision Manufacturing\", batches A17, A18, and B22, and materials E1—E5.",
                   "Any actual inspection, decision, release, and isolation must follow the quality system and authorization of the organization concerned."
                 ],
                 "evidence_type": "editorial design",
@@ -32279,7 +32277,7 @@
                 "name": "FermatMind career content editorial: fictional exercises and portfolio samples",
                 "period": "2026-09",
                 "publisher": "FermatMind content editorial",
-                "scope": "editorial",
+                "scope": "editorial_synthesis",
                 "url": null
               },
               {
@@ -32295,7 +32293,7 @@
                 "name": "NIST generative artificial intelligence risk management profile (AI 600-1)",
                 "period": "Released 2024",
                 "publisher": "National Institute of Standards and Technology",
-                "scope": "general",
+                "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
@@ -32311,7 +32309,7 @@
                 "name": "GPTs are GPTs: the potential impact of large language models on the labor market",
                 "period": "2023",
                 "publisher": "Eloundou et al.",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://arxiv.org/abs/2303.10130"
               },
               {
@@ -32327,7 +32325,7 @@
                 "name": "World Economic Forum Future of Jobs Report 2025",
                 "period": "Released 2025",
                 "publisher": "World Economic Forum",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
               },
               {
@@ -32343,7 +32341,7 @@
                 "name": "Public employer recruitment sample (editorial compilation)",
                 "period": "2026",
                 "publisher": "Public recruitment platforms",
-                "scope": "individual_employer",
+                "scope": "recruitment_proxy",
                 "url": null
               },
               {
@@ -32366,7 +32364,7 @@
                 "accessed_at": "2026-10-12",
                 "details": [
                   "The median of 126,060 US dollars per year is consistent with BLS OOH.",
-                  "Covers salaried employees and does not cover self-employed people."
+                  "Covers wage and salary workers and excludes self-employed people."
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "onet-wages",
@@ -32376,7 +32374,7 @@
                 "period": "May 2025",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/11-3051.01?st=NJ"
+                "url": "https://www.onetonline.org/link/localwages/11-3051.01"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -32391,7 +32389,7 @@
                 "name": "O*NET 11-3061.00 Purchasing Managers (adjacent occupation)",
                 "period": "O*NET updated 2026",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/11-3061.00"
               },
               {
@@ -32407,7 +32405,7 @@
                 "name": "O*NET 19-4099.01 Quality Control Analysts (adjacent occupation)",
                 "period": "O*NET updated 2026",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "adjacent",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-4099.01"
               },
               {
@@ -32423,7 +32421,7 @@
                 "name": "U.S. Census Bureau industry and manufacturing statistics",
                 "period": "Most recent year",
                 "publisher": "U.S. Census Bureau",
-                "scope": "general",
+                "scope": "contextual",
                 "url": "https://www.census.gov/"
               },
               {
@@ -32439,7 +32437,7 @@
                 "name": "Chinese public recruitment pay sample (not obtained in this round)",
                 "period": "2026",
                 "publisher": "Public recruitment notices",
-                "scope": "Mainland China",
+                "scope": "contextual",
                 "url": null
               },
               {
@@ -32455,7 +32453,7 @@
                 "name": "Chinese public recruitment pay sample (not obtained in this round)",
                 "period": "2026",
                 "publisher": "Public recruitment notices",
-                "scope": "Mainland China",
+                "scope": "contextual",
                 "url": null
               },
               {
@@ -32471,7 +32469,7 @@
                 "name": "Chinese public recruitment pay sample (not obtained in this round)",
                 "period": "2026",
                 "publisher": "Public recruitment notices",
-                "scope": "Mainland China",
+                "scope": "contextual",
                 "url": null
               },
               {
@@ -32490,6 +32488,111 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Mainland quality management engineering professionals (2-02-29-03) overlap in quality management for products, projects, and services. This category does not establish a management grade or authority to stop, release, or restart production."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-qc-class",
+                "limitation": "Task overlap does not establish a grade, authority, or wage.",
+                "market": "Mainland China",
+                "name": "China occupational classification: Quality management engineering professional",
+                "period": "2022",
+                "publisher": "China Ministry of Human Resources and Social Security et al.; government-hosted copy",
+                "scope": "contextual",
+                "url": "https://www.szns.gov.cn/attachment/1/1509/1509585/11457700.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "ContiTech’s Changzhou Head of Quality listing includes budgeting, plant quality systems, inspection and lab operation, and stopping processes and ensuring corrective action when requirements are unmet. That authority describes this position only."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-contitech-quality",
+                "limitation": "One posting for task comparison. It does not establish current availability, market pay, or national requirements.",
+                "market": "Mainland China",
+                "name": "ContiTech Changzhou: Head of Quality",
+                "period": "Date not shown",
+                "publisher": "ContiTech Changzhou",
+                "scope": "recruitment_proxy",
+                "url": "https://jobs.smartrecruiters.com/ContinentalGroupSectorContiTech/744000148024736-head-of-quality-changzhou"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A Tianjin food QA systems posting from China Otsuka includes internal audits, management review, external-audit follow-up, and instrument records. It illustrates systems work without establishing that the role manages a team."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "cn-otsuka-qa",
+                "limitation": "One posting for task comparison. It does not establish current availability, market pay, or national requirements.",
+                "market": "Mainland China",
+                "name": "China Otsuka: food QA systems role",
+                "period": "2026-09-08",
+                "publisher": "China Otsuka",
+                "scope": "recruitment_proxy",
+                "url": "https://job.tiangong.edu.cn/correcruit/content/id/55906.html"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Used to compare an adjacent occupation."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-compliance-manager",
+                "limitation": "Adjacent occupation profile. Requirements and responsibilities apply to the named occupation.",
+                "market": "United States",
+                "name": "O*NET Compliance Managers (11-9199.02)",
+                "period": "Accessed November 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-9199.02"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Used to compare an adjacent occupation."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-regulatory-affairs-manager",
+                "limitation": "Adjacent occupation profile. Requirements and responsibilities apply to the named occupation.",
+                "market": "United States",
+                "name": "O*NET Regulatory Affairs Managers (11-9199.01)",
+                "period": "Accessed November 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-9199.01"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Used to compare an adjacent occupation."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-project-management-specialists",
+                "limitation": "Adjacent occupation profile. Requirements and responsibilities apply to the named occupation.",
+                "market": "United States",
+                "name": "O*NET Project Management Specialists (13-1082.00)",
+                "period": "Accessed November 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/13-1082.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Used to compare an adjacent occupation."
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-natural-sciences-managers",
+                "limitation": "Adjacent occupation profile. Requirements and responsibilities apply to the named occupation.",
+                "market": "United States",
+                "name": "O*NET Natural Sciences Managers (11-9121.00)",
+                "period": "Accessed November 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-9121.00"
               }
             ]
           },
@@ -34765,8 +34868,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "facilities"
+              "editor"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34996,6 +35098,12 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://fermatmind.com",
+            "id": "editor",
+            "label": "FermatMind editorial scenario",
+            "scope": "Follow the employer’s authorized procedure for actual decisions."
           }
         ]
       },
@@ -35387,7 +35495,7 @@
         "bls_table": [
           {
             "fact_ref": "us-wage-low10-2025",
-            "指标": "Pay · 10th percentile",
+            "指标": "Pay · Lowest-paid 10%",
             "数值": {
               "$item": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35451,7 +35559,7 @@
           },
           {
             "fact_ref": "us-wage-high10-2025",
-            "指标": "Pay · 90th percentile",
+            "指标": "Pay · Highest-paid 10%",
             "数值": {
               "$item": "quality-control-systems-managers.us-salary.career-snapshot-secondary-locale.17",
               "block": "us-salary",
@@ -37181,7 +37289,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests suit quality control systems manager work",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37258,7 +37366,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "MBTI Personality Test"
           },
           {
             "href": {
@@ -37268,7 +37376,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "Big Five Personality Test"
           },
           {
             "href": {
@@ -37278,7 +37386,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (Chinese)"
+            "label": "Enneagram Test"
           },
           {
             "href": {
@@ -37288,7 +37396,11 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (Chinese)"
+            "label": "IQ Reasoning Assessment"
+          },
+          {
+            "href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "label": "EQ Assessment"
           }
         ]
       },
@@ -37301,7 +37413,7 @@
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
-      "interface.fit.directions_heading": "Which administrative service direction are you more likely suited to?",
+      "interface.fit.directions_heading": "Which area of quality management might suit you?",
       "interface.fit.interest_code_heading": "How to understand interest codes",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
@@ -37429,9 +37541,9 @@
         "display_value": "Below 78,000 US dollars per year",
         "fact_id": "us-wage-low10-2025",
         "market": "United States",
-        "measure": "Upper bound of the 10th percentile wage",
+        "measure": "Annual wage range for the lowest-paid 10%",
         "occupation_scope": "US SOC 11-3051 category; not a narrower single-occupation value, and not a job grade line",
-        "period": "May 2025 or 2025—2035",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37455,7 +37567,7 @@
         "market": "United States",
         "measure": "Annual wage median",
         "occupation_scope": "US SOC 11-3051 category; not a narrower single-occupation value and does not project individual income",
-        "period": "May 2025 or 2025—2035",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37477,33 +37589,33 @@
         "display_value": "Above 205,520 US dollars per year",
         "fact_id": "us-wage-high10-2025",
         "market": "United States",
-        "measure": "Lower bound of the 90th percentile wage",
+        "measure": "Annual wage range for the highest-paid 10%",
         "occupation_scope": "US SOC 11-3051 category; not a narrower single-occupation value",
-        "period": "May 2025 or 2025—2035",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "252,100 people (2025)",
+        "display_value": "252,100 jobs (2025)",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment (BLS employment projections table 1.2)",
+        "measure": "Employment measured in jobs (BLS Table 1.2)",
         "occupation_scope": "US SOC 11-3051 category; a different program from OEWS survey employment, and not mixed together",
-        "period": "May 2025 or 2025—2035",
+        "period": "2025 base year",
         "source_refs": [
           "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Projected growth 3% in 2025—2035, net increase about 6,500 people",
+        "display_value": "Projected growth 3% in 2025—2035, net increase about 6,500 jobs",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment change rate and official net change",
         "occupation_scope": "US SOC 11-3051 category; growth rate, net increase, and annual average openings are three different measures",
-        "period": "May 2025 or 2025—2035",
+        "period": "2025–2035 projections",
         "source_refs": [
           "ep"
         ]
@@ -37515,7 +37627,7 @@
         "market": "United States",
         "measure": "Annual average job openings, including replacement needs",
         "occupation_scope": "US SOC 11-3051 category; openings include replacement for those leaving and do not equal net new jobs or recruitment volume in China",
-        "period": "May 2025 or 2025—2035",
+        "period": "2025–2035 projections",
         "source_refs": [
           "ep"
         ]
@@ -37527,7 +37639,7 @@
         "market": "United States",
         "measure": "Industry-specific median wages",
         "occupation_scope": "US SOC 11-3051 category; covers only people in this occupation group working in that industry (chemical manufacturing)",
-        "period": "May 2025 or 2025—2035",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37539,7 +37651,7 @@
         "market": "United States",
         "measure": "Industry-specific median wages",
         "occupation_scope": "US SOC 11-3051 category; covers only people in this occupation group working in that industry (transportation equipment manufacturing)",
-        "period": "May 2025 or 2025—2035",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37551,7 +37663,7 @@
         "market": "United States",
         "measure": "Industry-specific median wages",
         "occupation_scope": "US SOC 11-3051 category; covers only people in this occupation group working in that industry (machinery manufacturing)",
-        "period": "May 2025 or 2025—2035",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37563,7 +37675,7 @@
         "market": "United States",
         "measure": "Industry-specific median wages",
         "occupation_scope": "US SOC 11-3051 category; covers only people in this occupation group working in that industry (food manufacturing)",
-        "period": "May 2025 or 2025—2035",
+        "period": "May 2025",
         "source_refs": [
           "bls"
         ]
@@ -37727,14 +37839,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Quality policy, inspection and sampling, and decision and record tasks of quality control systems manager 11-3051.01; checks the US SOC 11-3051 category wage percentiles and the 2025—2035 projection, the Chinese evidence gap, entry paths, and paper quality exercises that can be completed independently."
+      "text": "Quality control systems managers set testing rules, coordinate teams, and follow up on defects. Compare plant roles, U.S. wage scope, and a stop-or-restart exercise."
     },
     "title": {
       "availability": "available",
       "text": "Quality control systems manager"
     }
   },
-  "source_content_sha256": "6622276c08aa023f1c34b825e09dbdc1dc88000ed92a8d36be772a1e1d8978c5",
+  "source_content_sha256": "a17d2cf6fd4860a2c6a37f0b667a30715e820fd1e04ad5248b320dc15c0e3686",
   "subject": {
     "canonical_slug": "quality-control-systems-managers",
     "name": "Quality control systems manager",

@@ -6,7 +6,7 @@
         "status": "mapped"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:employment-2025": {
         "status": "pending_mapping"
@@ -15,7 +15,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:growth-2025": {
         "status": "pending_mapping"
@@ -42,9 +42,15 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:openings-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a22-sh-hotline": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-a22-sh-theme": {
         "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
@@ -26066,12 +26072,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆客服岗位招聘或报价统计；个别企业或平台的薪酬披露不能代表全国水平"
+              "上海 12345 语音客服样本为税前综合 6,500–10,500 元/月，实际与绩效挂钩，需周末及节假日轮值；上海人社发布的游乐园英文电话咨询样本为 4,000–5,000 元/月，要求大专，涉及订票订房和投诉。两条均为单岗历史报价。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "a22-sh-hotline",
+            "a22-sh-theme"
           ],
           "type": "prose"
         },
@@ -26164,7 +26171,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "保留中国客服精确工资缺口；另提供有条件匹配的行业税前年均工资背景。私营/非私营分列，行业均值不冒充客服中位数、起薪、招聘报价或到手收入。"
+              "以下公告用于对照岗位和计薪条件。全国职业工资分布缺少可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -30923,7 +30930,7 @@
           "data": {
             "entries": [
               {
-                "answer": "与客户通过电话或当面交流，就产品或服务的常规询问提供基础或按规程的信息；受理询问或订单、登记与取消账户、获取投诉细节；记录与客户的互动或交易并写明询问、投诉、意见与所采取的行动；核对客户问题是否已通过适当的更改得到解决；联系客户答复询问或告知索赔调查结果与计划调整；确定收费、收取押金或款项并安排账单；用电脑填写合同表单、变更地址记录或签发停用服务指令；把未解决的申诉转给指定部门；通过换货、退款或调整账单解决服务或计费投诉；并查阅保险条款判断承保范围、按需推介服务或产品。",
+                "answer": "回答客户咨询，记录订单、投诉或退款诉求，在政策授权内处理，向专岗升级无法当场解决的问题。渠道可能是电话、聊天或邮件，职责取决于产品与权限。",
                 "id": "actors.faq.1",
                 "question": "客户服务代表每天的具体工作是什么？",
                 "question_key": "career.faq.customer-service-representatives.1",
@@ -30932,9 +30939,9 @@
                 ]
               },
               {
-                "answer": "本职业以客户询问与一般投诉的受理、记录与解决为主，不承担销售指标；管理咨询分析师以组织流程与经营分析为核心；非零售销售工人一线主管以团队督导与业绩管理为核心；收银员以款项收付与结算为核心；柜台租赁文员以租赁与柜台业务办理为核心；零售销售员以商品推介与成交为核心；保险销售代表以销售指标与客户开发为核心。名称相近不代表职责或授权可以互换。",
+                "answer": "客服处理问题和跟进承诺；销售侧重达成交易，技术支持侧重诊断与排障。应聘时问清是否兼外呼、退款授权、升级规则与质检评分。",
                 "id": "actors.faq.2",
-                "question": "这个职业与相邻的销售、收银与柜台岗位有什么区别？",
+                "question": "客服、销售和技术支持有什么区别？",
                 "question_key": "career.faq.customer-service-representatives.2",
                 "source_refs": [
                   "onet"
@@ -30950,9 +30957,9 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：检索与信息说明、工单分类与记录、答复初稿与话术三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "检索知识库和起草回复可由软件辅助。客服仍需核对账户与政策、判断退款权限，把不明确或高风险问题升级。 这不是对本职业 AI 使用率或岗位替代的测量。",
                 "id": "actors.faq.4",
-                "question": "这个职业哪些任务已有 AI 变化证据？",
+                "question": "哪些工作可能由软件辅助？",
                 "question_key": "career.faq.customer-service-representatives.4",
                 "source_refs": [
                   "onet"
@@ -30968,12 +30975,14 @@
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位年薪 44,770 美元（时薪 21.53 美元），分位为 31,750／36,870／44,770／51,780／63,590 美元（43-4051.00 单一职业口径）；按州或地区细分的数值须在 O*NET 当地工资页按地区与期间查询，不能当作个人报价；中国大陆未取得职业级工资数值，本页按缺口处理。",
+                "answer": "美国 2025 年 5 月工资中位数为 44,770 美元/年、21.53 美元/小时。 上海 12345 语音客服样本为税前综合 6,500–10,500 元/月，实际与绩效挂钩，需周末及节假日轮值；上海人社发布的游乐园英文电话咨询样本为 4,000–5,000 元/月，要求大专，涉及订票订房和投诉。两条均为单岗历史报价。",
                 "id": "actors.faq.6",
                 "question": "这个职业的工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.customer-service-representatives.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "a22-sh-hotline",
+                  "a22-sh-theme"
                 ]
               },
               {
@@ -31004,12 +31013,12 @@
                 ]
               },
               {
-                "answer": "O*NET 摘要与就业趋势页（基于 BLS 2024—2034 年预测）显示该职业 2024 年约 2,814,000 人，预测标签为 Decline（下降 -1% 或更低），年均约 341,700 个含增长与替换的空缺；总体预测下降仍会有大量替换性空缺，工作以坐席接听与重复处理为主，须按本地服务需求、外包安排与自动化投资核对。",
+                "answer": "美国 BLS 预计 U.S. SOC 43-4051 就业从 2025 年约 2,666,000 到 2035 年约 2,524,100（−5.3%）。年均约 289,500 个空缺，包含替补需求。",
                 "id": "actors.faq.10",
-                "question": "现在选择这个职业，还应考虑什么？",
+                "question": "美国就业预测怎么读？",
                 "question_key": "career.faq.customer-service-representatives.10",
                 "source_refs": [
-                  "bls"
+                  "a22-bls-projections"
                 ]
               }
             ]
@@ -31439,7 +31448,7 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "支持本职业的任务、工作情境与准备层级。",
                   "不含技术采用与岗位替代数据。"
@@ -31452,7 +31461,7 @@
                 "period": "页面 2026 年更新；检索 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-4051.00"
+                "url": "https://www.onetonline.org/link/details/43-4051.00"
               },
               {
                 "accessed_at": "2026-09-18",
@@ -31645,6 +31654,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 预计 U.S. SOC 43-4051 就业从 2025 年约 2,666,000 到 2035 年约 2,524,100（−5.3%）。年均约 289,500 个空缺，包含替补需求。"
+                ],
+                "evidence_type": "官方统计",
+                "id": "a22-bls-projections",
+                "limitation": "年均空缺包含替补；不是净增或录用概率。",
+                "market": "美国",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "语音岗 10 名，中专及以上；税前综合 6,500–10,500 元/月，实际与绩效挂钩，需周末及节假日轮值。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a22-sh-hotline",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "上海 12345 语音客服代表",
+                "period": "2025-02-06",
+                "publisher": "上海市人民政府门户（黄浦区供稿）",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shanghai.gov.cn/nw17239/20250206/a07f46aa591249cfaa72850fd3cbbb0f.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "盈环网络 5 人，大专，4,000–5,000 元/月；答复票务、处理预订和投诉。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "a22-sh-theme",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "国际游乐园英文电话咨询",
+                "period": "2026-09-03",
+                "publisher": "上海市人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.sh.gov.cn/dzb/rsj/2026-09-03/aid/03-01.html"
               }
             ]
           },
@@ -34627,7 +34681,7 @@
               "月薪参考": "行业参考：若目标服务外包/呼叫中心雇主实际归入租赁和商务服务业，可参照国家统计局2025全国城镇单位该行业税前年平均工资：非私营110162元/年；私营68919元/年。两组包含全行业岗位，不是客服工资区间或个人到手收入。"
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34639,13 +34693,14 @@
           "china_soc_row": "美国职业代码：O*NET-SOC 43-4051.00（Customer Service Representatives）；本页未取得与之可比的中国职业级工资资料。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-a22-sh-hotline",
+            "posting-a22-sh-theme"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响这个职业的工资吗？",
             "driver_heading": "客服工作怎样按排班与来量高峰安排？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "准备项与岗位核对建议（编辑整理，非学历门槛或工资统计）",
             "scenario_heading": "哪些准备项需要按目标岗位核对？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36435,7 +36490,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解客户服务代表的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36548,12 +36603,12 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "label": "Personality preferences"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "label": "Big Five traits"
           },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
@@ -36966,39 +37021,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约2,814,000人（2024 年，单一职业口径）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "2,666,000 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模（存量统计）",
-        "occupation_scope": "43-4051.00；2024 年就业人数来自 O*NET 摘要页（基于 BLS 2024—2034 年预测）",
-        "period": "2024 年基期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4051",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a22-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "下降-1%或更低（2024—2034 年，标签「下降」）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "−5.3%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "预测就业变化（职业总量）",
-        "occupation_scope": "43-4051.00；预测标签 Decline（-1% 或更低），属于预测期总量变化，不是个人录用概率",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4051",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a22-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约341,700个（2024—2034 年年均，含增长与替换）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 289,500 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "年均职位空缺（含增长与替换）",
-        "occupation_scope": "43-4051.00；空缺为 2024—2034 年年均，含因增长与替换产生的位置，即使总体预测下降也会有大量替换性空缺",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-4051",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a22-bls-projections"
         ]
       },
       {
@@ -37050,39 +37105,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "2,666,000人（美国，2025基期）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "2,666,000 人（2025）",
         "fact_id": "employment-2025",
         "market": "美国",
         "measure": "就业人数",
-        "occupation_scope": "Customer Service Representatives，SOC 43-4051；BLS OOH 2025—2035就业预测",
-        "period": "2025年基期",
+        "occupation_scope": "U.S. SOC 43-4051",
+        "period": "2025",
         "source_refs": [
-          "bls-ooh-2025"
+          "a22-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "下降5%（美国，2025—2035总体就业预测，非AI归因）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "−5.3%",
         "fact_id": "growth-2025",
         "market": "美国",
         "measure": "预测就业百分比变化",
-        "occupation_scope": "Customer Service Representatives，SOC 43-4051；BLS OOH 2025—2035就业预测",
-        "period": "2025—2035年预测期",
+        "occupation_scope": "U.S. SOC 43-4051",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-ooh-2025"
+          "a22-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "289,500个/年（美国，2025—2035年均替换性空缺）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 289,500 个（含替补）",
         "fact_id": "openings-2025",
         "market": "美国",
         "measure": "年均职位空缺",
-        "occupation_scope": "Customer Service Representatives，SOC 43-4051；BLS OOH 2025—2035就业预测",
-        "period": "2025—2035年预测期",
+        "occupation_scope": "U.S. SOC 43-4051",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-ooh-2025"
+          "a22-bls-projections"
         ]
       },
       {
@@ -37095,6 +37150,30 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "语音岗 10 名，中专及以上；税前综合 6,500–10,500 元/月，实际与绩效挂钩，需周末及节假日轮值。",
+        "fact_id": "posting-a22-sh-hotline",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "上海 12345 语音客服代表",
+        "period": "2025-02-06",
+        "source_refs": [
+          "a22-sh-hotline"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "盈环网络 5 人，大专，4,000–5,000 元/月；答复票务、处理预订和投诉。",
+        "fact_id": "posting-a22-sh-theme",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "国际游乐园英文电话咨询",
+        "period": "2026-09-03",
+        "source_refs": [
+          "a22-sh-theme"
         ]
       }
     ]
@@ -37122,19 +37201,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，下降 -1% 或更低）"
+        "label": "美国预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 2,814,000 人）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，约 341,700 个，含增长与替换）"
+        "label": "美国预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37148,17 +37227,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "客户服务代表（O*NET-SOC 43-4051.00）与客户通过电话或当面交流处理常规询问与一般投诉：覆盖受理询问与订单、登记与取消账户、记录互动与投诉细节、核对问题是否已解决、联系客户答复询问或告知结果、确定收费与收取款项并安排账单、填写合同与变更记录、转交未解决的申诉、换货退款或调整账单、查阅保险条款判断承保范围与推介服务等；含美国 2025 年中位年薪 44,770 美元（21.53 美元/时）、2024 年约 2,814,000 人在岗、2024—2034 年就业预测下降（-1% 或更低）、年均预计约 341,700 个含增长与替换的空缺、行业就业集中在金融与保险（19%）、零售贸易（17%）与行政与支持服务（14%）、兴趣代码 CES、中国大陆职业级工资缺口，以及订单与账户信息核对、投诉判定与越权处置、客户沟通与记录留痕的控制点。"
+      "text": "客服代表每天处理哪些工单？对照上海语音与英文电话咨询招聘，了解轮班、升级处理和美国就业数据。"
     },
     "title": {
       "availability": "available",
       "text": "客户服务代表"
     }
   },
-  "source_content_sha256": "bbe8dc5b3fedd44530e7309e6aea55799ab559aeb0bb9fd363718c916f3f4a2e",
+  "source_content_sha256": "283d37734acc6a8dfd237f9dafa193d845e8ef78cbd333c98cdfe9525570af46",
   "subject": {
     "canonical_slug": "customer-service-representatives",
     "name": "客户服务代表",
-    "summary": "客户服务代表在美国对应 O*NET-SOC 43-4051.00（Customer Service Representatives），与客户通过电话或当面交流，就产品或服务的常规询问提供基础或按规程的信息，也可处理并解决一般投诉：受理询问或订单并登记与取消账户、获取投诉细节，记录与客户的互动或交易并写明询问、投诉、意见与所采取的行动，核对客户问题是否已通过适当的更改得到解决，联系客户答复询问或告知索赔调查结果与计划调整，确定所请求服务的收费、收取押金或款项并安排账单，用电脑填写合同表单、变更地址记录或签发停用服务指令，把未解决的客户申诉转给指定部门进一步调查，通过换货、退款或调整账单解决服务或计费投诉，查阅保险条款判断某项损失是否在承保范围内，按需推介新服务或产品。该职业准备层级为 Job Zone 1-2（通常要求高中文凭或同等学历，SVP 低于 6.0）；职责不包含以安装、销售、维修与技术支持为主要职责的岗位。中国侧同类岗位为客服坐席、呼叫中心专员、售后受理与客户关系岗位，职责与授权口径与该美国职业细类不是一一对应，不能互换。"
+    "summary": "回答客户咨询，记录订单、投诉或退款诉求，在政策授权内处理，向专岗升级无法当场解决的问题。渠道可能是电话、聊天或邮件，职责取决于产品与权限。"
   }
 }

@@ -161,6 +161,9 @@
       "item:order-clerks.path.interview-probation.10": {
         "status": "mapped"
       },
+      "item:order-clerks.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:order-clerks.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
@@ -13006,6 +13009,21 @@
             "internal-rubric"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The customer changed the quantity from five to three. The confirmation reflects it, but the warehouse ticket still says five. Identify the records and person to check."
+            ]
+          },
+          "id": "order-clerks.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "Check an order quantity change",
+          "type": "notice"
         }
       ]
     },
@@ -15503,6 +15521,13 @@
         "id": "order-clerks.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "order-clerks.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15720,7 +15745,7 @@
       "text": "Order clerk: work, wages, and entry paths"
     }
   },
-  "source_content_sha256": "73d15961f3b170e7f37e62321d2eabbe184c033fa95adb67551ddcdeadeb394b",
+  "source_content_sha256": "bec14487238ef02678b6acda39e4307b4456e4c5d6caa6ca59ce8689829a6e11",
   "subject": {
     "canonical_slug": "order-clerks",
     "name": "Order clerk",

@@ -9,7 +9,7 @@
         "status": "pending_mapping"
       },
       "fact:employment": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:employment-g04-current": {
         "status": "pending_mapping"
@@ -18,7 +18,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:growth-g04-current": {
         "status": "pending_mapping"
@@ -54,9 +54,15 @@
         "status": "mapped"
       },
       "fact:openings": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:openings-g04-current": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-courier-beijing": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-courier-nanjing": {
         "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
@@ -23672,7 +23678,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
+              "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。未取得本岗位全国工资分布、全兼职与计件外包比例，尚未核实精确跨国映射。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
@@ -26091,7 +26097,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
+              "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。未取得本岗位全国工资分布、全兼职与计件外包比例，尚未核实精确跨国映射。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
@@ -26133,12 +26139,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可核对的中国大陆快递与取送岗位招聘报价统计；单条招聘公告或平台单价不能代表全国水平"
+              "南京雨花台公告的江苏顺丰快递员为 6,000–7,000 元/月；北京房山公告的收派员为 7,000 元/月起。招聘未说明统一的计件办法或实际到手金额，比较时问清工时、计价和配送范围。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "courier-nanjing",
+            "courier-beijing"
           ],
           "type": "prose"
         },
@@ -26234,7 +26241,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
+              "以下公告用于对照岗位和计薪条件。全国职业工资分布缺少可比数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -28622,7 +28629,7 @@
           "data": {
             "paragraphs": [
               "本页不引用具体在招公告，也不把历史招聘案例计为在招岗位；招聘与用工条件须按目标单位当年公告核对。",
-              "情景判断、路线核对与观察方式为编辑设计的任务观察思路，未取得招聘样本，不证明雇主常用考核流程。"
+              "情景判断、路线核对与观察方式为编辑设计的任务观察思路，两份历史招聘未说明雇主通用考核流程。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
@@ -28959,7 +28966,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑建议先观察分拣取送和记录能力，无本轮招聘样本，不比较证书与任务证据预测力。美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。"
+              "编辑建议先观察分拣取送和记录能力，两则历史招聘不能比较证书与任务证据的预测力。美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。"
             ]
           },
           "id": "actors.path.career-path-block.1",
@@ -30991,7 +30998,7 @@
           "data": {
             "entries": [
               {
-                "answer": "接收待投递的物件与投递信息（收件人姓名、地址、电话与投递说明），按线路分拣并规划最省时的路线，按清单装载车辆并注意危险品，步行、骑行、驾车或乘公共交通到点投递与收取信件、文件、包裹等物品，记录收取与投递的物品及收件人回应，取得签收或代收款项，卸车分拣、把大车货物转装小型车、拆封分拣来件，并完成车辆例行维护与一般收发文书事务。",
+                "answer": "收取信件、文件或包裹，核地址与交接要求，按路线送达，保留签收、异常和退回记录。医院样本、贵重或需保密物品要按对应流程交接。",
                 "id": "actors.faq.1",
                 "question": "快递员每天的具体工作是什么？",
                 "question_key": "career.faq.couriers-and-messengers.1",
@@ -31000,9 +31007,9 @@
                 ]
               },
               {
-                "answer": "快递员在机构内部或机构之间取送与投递物品，承担件数核对、签收与代收款项责任；轻型卡车司机以驾驶货车运输整批货物并装卸为主；调度员安排人员车辆与线路并派单，不直接到点投递；货物与货运代理处理货运单据与运输安排；发运收货与库存文员处理收发与库存登记；邮件文员在室内分拣处理邮件。",
+                "answer": "快递和信使的核心是收取、送达和交接凭证；轻型货车司机还对车辆与装载负责，司机兼销售员还要销售和收款。以岗位主要职责区分。",
                 "id": "actors.faq.2",
-                "question": "快递员和轻型卡车司机、调度员有什么区别？",
+                "question": "快递与轻型货车驾驶、司机兼销售有什么区别？",
                 "question_key": "career.faq.couriers-and-messengers.2",
                 "source_refs": [
                   "onet"
@@ -31018,9 +31025,9 @@
                 ]
               },
               {
-                "answer": "可核对的是任务层面的变化：路线规划与派单、投递状态与通知、末端寄取与智能柜三类任务可被工具部分承担；本页没有单职业的采用率或替代数据。",
+                "answer": "路线与扫描系统可帮助更新地址、追踪状态和整理异常；本人核对收件方、交接凭证及损坏或遗失情况。 这不是对本职业 AI 使用率或岗位替代的测量。",
                 "id": "actors.faq.4",
-                "question": "快递员哪些任务已有 AI 变化证据？",
+                "question": "哪些工作可能由软件辅助？",
                 "question_key": "career.faq.couriers-and-messengers.4",
                 "source_refs": [
                   "onet"
@@ -31036,12 +31043,14 @@
                 ]
               },
               {
-                "answer": "美国 2025 年工资数据中位年薪 39,200 美元、时薪 18.85 美元（43-5021.00 单一职业口径），分位为年薪 31,550／36,070／39,200／45,280／50,330 美元；中国大陆未取得职业级工资数值，本页按缺口处理，不用行业均值代填。",
+                "answer": "美国 2025 年 5 月工资中位数为 39,200 美元/年、18.85 美元/小时。 南京雨花台公告的江苏顺丰快递员为 6,000–7,000 元/月；北京房山公告的收派员为 7,000 元/月起。招聘未说明统一的计件办法或实际到手金额，比较时问清工时、计价和配送范围。",
                 "id": "actors.faq.6",
                 "question": "快递员工资一般多少，应该怎样比较？",
                 "question_key": "career.faq.couriers-and-messengers.6",
                 "source_refs": [
-                  "oews"
+                  "onet",
+                  "courier-nanjing",
+                  "courier-beijing"
                 ]
               },
               {
@@ -31072,12 +31081,12 @@
                 ]
               },
               {
-                "answer": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 247,200 人，预测标签为 Much faster than average（7% 或更高），累计约 27,900 个含增长与替换的空缺；工作以驾驶骑行、户外与天气暴露为主，且早班晚班与节假日排班集中，须按本地网点与业务需求核对。",
+                "answer": "美国 BLS 预计 43-5021 就业从 2025 年约 228,900 到 2035 年约 247,100（+8.0%）。年均约 23,800 个空缺，包含替补需求。 BLS 表的 2025 就业有 69.9% 自雇；OEWS 工资统计不含自雇。",
                 "id": "actors.faq.10",
-                "question": "现在选择快递员职业，还应考虑什么？",
+                "question": "美国就业预测怎么读？",
                 "question_key": "career.faq.couriers-and-messengers.10",
                 "source_refs": [
-                  "bls"
+                  "a19-bls-projections"
                 ]
               }
             ]
@@ -31450,11 +31459,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
+                  "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。未取得本岗位全国工资分布、全兼职与计件外包比例，尚未核实精确跨国映射。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "nbs",
-                "limitation": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。",
+                "limitation": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。未取得本岗位全国工资分布、全兼职与计件外包比例，尚未核实精确跨国映射。",
                 "market": "中国内地",
                 "name": "国家统计局2025城镇单位工资",
                 "period": "2025数据，2026-05-15发布",
@@ -31494,7 +31503,7 @@
                 "url": "https://www.onetonline.org/link/localwages/43-5021.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "美国43-5021.00的16项任务为10Core、6Supplemental：Core含医疗记录、标本及药品取送、步行骑车驾车或公共交通、清单装载与危险物品预防、接收物品及投递信息、机构与住家取送文件报纸包裹、记录物品与回应、卸车分拣、沿路排序、规划省时路线、油液燃料等例行维护；Supplemental含签名或安排付款、大车转小车、拆封分拣来件、送后联系本单位、电话口头传信和一般文书差事。Core不等每日频次，Supplemental不等每岗必做。美国2025行业就业分布医疗保健与社会援助11%、其他行业89%含运输仓储；不是工资或中国雇主分布，不推未披露行业与自雇细分。"
                 ],
@@ -31506,7 +31515,7 @@
                 "period": "2026页面更新；2025行业，不同任务调查",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/43-5021.00"
+                "url": "https://www.onetonline.org/link/details/43-5021.00"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31526,11 +31535,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
+                  "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。未取得本岗位全国工资分布、全兼职与计件外包比例，尚未核实精确跨国映射。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。",
+                "limitation": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。未取得本岗位全国工资分布、全兼职与计件外包比例，尚未核实精确跨国映射。",
                 "market": "中国内地",
                 "name": "国家统计局2025城镇单位工资",
                 "period": "2025数据，2026-05-15发布",
@@ -31691,6 +31700,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 预计 43-5021 就业从 2025 年约 228,900 到 2035 年约 247,100（+8.0%）。年均约 23,800 个空缺，包含替补需求。 BLS 表的 2025 就业有 69.9% 自雇；OEWS 工资统计不含自雇。"
+                ],
+                "evidence_type": "官方统计",
+                "id": "a19-bls-projections",
+                "limitation": "年均空缺包含替补；不是净增或录用概率。",
+                "market": "美国",
+                "name": "美国 BLS 表 1.2 职业就业预测",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "5 名，6,000–7,000 元/月。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "courier-nanjing",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "江苏顺丰快递员",
+                "period": "2025-02-17",
+                "publisher": "南京雨花台区政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.njyh.gov.cn/yhtqrmzf/202502/t20250217_5075870.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "12 名，7,000 元/月起。"
+                ],
+                "evidence_type": "公开招聘样本",
+                "id": "courier-beijing",
+                "limitation": "岗位个案，不是全国工资统计。",
+                "market": "中国大陆",
+                "name": "北京房山收派员",
+                "period": "2024-07",
+                "publisher": "北京市房山区政府",
+                "scope": "recruitment_proxy",
+                "url": "https://www.bjfsh.gov.cn/zwgk/qrlsbj/zdly_999/fshcyjy/rlzyscgqxx/202407/t20240726_40079183.shtml"
               }
             ]
           },
@@ -34489,7 +34543,7 @@
             {
               "指标": "数据与口径",
               "数值": "本轮未取得与快递员（O*NET-SOC 43-5021.00）对应的中国大陆职业级工资数值，故不展示具体数字；缺口已在页面可见位置标记。",
-              "说明": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
+              "说明": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。未取得本岗位全国工资分布、全兼职与计件外包比例，尚未核实精确跨国映射。"
             },
             {
               "指标": "查阅范围",
@@ -34509,7 +34563,7 @@
             {
               "指标": "统计覆盖",
               "数值": "国家统计局城镇单位工资统计覆盖城镇法人单位，不含个体工商户与自由职业者等",
-              "说明": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
+              "说明": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。未取得本岗位全国工资分布、全兼职与计件外包比例，尚未核实精确跨国映射。"
             },
             {
               "指标": "市场对照",
@@ -34655,7 +34709,7 @@
               }
             },
             {
-              "城市/区间": "中国大陆（招聘报价口径）",
+              "城市/区间": "大陆招聘样本",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -34667,13 +34721,14 @@
           "china_soc_row": "美国43-5021包含内部及医疗信使；中国4-02-07-08已明确，精确映射和职业全国工资仍未取得。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "posting-courier-nanjing",
+            "posting-courier-beijing"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响快递员的工资吗？",
             "driver_heading": "快递与配送场景怎样安排排班？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方统计、行业参照与招聘样本",
             "scenario_caption": "不同法域的准备线索，不是学历到岗位的录用映射",
             "scenario_heading": "学历、培训与岗位要求怎样核对？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36433,7 +36488,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "了解快递员的任务兴趣与工作偏好",
+        "label": "测测我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36546,12 +36601,12 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Personality preferences (EN)"
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "label": "Personality preferences"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Big Five traits (EN)"
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "label": "Big Five traits"
           },
           {
             "href": "/zh/tests/mbti-personality-test-16-personality-types",
@@ -36967,39 +37022,39 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 247,200 人（2024 年，单一职业口径）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "228,900 人（2025）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "就业规模",
-        "occupation_scope": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）该细分的 2024 年就业估计",
-        "period": "2024 年（O*NET/BLS）；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-5021",
+        "period": "2025",
         "source_refs": [
-          "bls"
+          "a19-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "增长 7% 或更高（2024—2034 年，标签 Much faster than average）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "+8.0%",
         "fact_id": "growth",
         "market": "美国",
         "measure": "就业变化率",
-        "occupation_scope": "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）该细分的预测标签「远高于平均」",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-5021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a19-bls-projections"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "约 27,900 个（2024—2034 年累计，含增长与替换）",
+        "derivation": "BLS 表 1.2。",
+        "display_value": "年均 23,800 个（含替补）",
         "fact_id": "openings",
         "market": "美国",
         "measure": "职位空缺",
-        "occupation_scope": "O*NET 就业趋势页该细分 2024—2034 年累计空缺，说明含增长与替换需求",
-        "period": "2024—2034 年预测期；检索 2026-09-18",
+        "occupation_scope": "U.S. SOC 43-5021",
+        "period": "2025–2035",
         "source_refs": [
-          "bls"
+          "a19-bls-projections"
         ]
       },
       {
@@ -37128,7 +37183,7 @@
         "fact_id": "china-jiaojiang-featured-daily-2026-g04-current",
         "market": "中国内地",
         "measure": "未取得的统计位置（中国大陆快递与取送岗位职业级工资）",
-        "occupation_scope": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。",
+        "occupation_scope": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。未取得本岗位全国工资分布、全兼职与计件外包比例，尚未核实精确跨国映射。",
         "period": "2025行业工资或就业；预测2025—2035；核2026-10-09",
         "source_refs": [
           "r2-pay-1"
@@ -37144,6 +37199,30 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "5 名，6,000–7,000 元/月。",
+        "fact_id": "posting-courier-nanjing",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "江苏顺丰快递员",
+        "period": "2025-02-17",
+        "source_refs": [
+          "courier-nanjing"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "12 名，7,000 元/月起。",
+        "fact_id": "posting-courier-beijing",
+        "market": "中国大陆",
+        "measure": "招聘样本",
+        "occupation_scope": "北京房山收派员",
+        "period": "2024-07",
+        "source_refs": [
+          "courier-beijing"
         ]
       }
     ]
@@ -37171,19 +37250,19 @@
         "availability": "available",
         "fact_ref": "growth",
         "key": "us_growth",
-        "label": "美国就业预测（2024—2034 年，增长 7% 或更高，远高于平均）"
+        "label": "美国预计就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 247,200 人）"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "openings",
         "key": "us_openings",
-        "label": "美国职位空缺（2024—2034 年，约 27,900 个）"
+        "label": "美国预计年均空缺（含替补）"
       },
       {
         "availability": "missing",
@@ -37197,17 +37276,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "快递员（O*NET-SOC 43-5021.00）在机构内部或机构之间取送与投递信件、文件、包裹和其它物品：覆盖领取物品与投递信息、规划路线、装载与取送、记录收取投递、卸车分拣、取得签收与代收款项、车辆例行维护与收发文书事务；含美国 2025 年中位年薪 39,200 美元（时薪 18.85 美元）、2024 年约 247,200 人在岗、2024—2034 年就业预测远高于平均（7% 或更高）、中国大陆职业级工资与用工口径缺口，以及道路与天气暴露、时间压力与物品安全责任的控制点。"
+      "text": "快递员和信使如何收件、规划路线、处理签收和异常？对照南京、北京历史报价与美国工资、就业。"
     },
     "title": {
       "availability": "available",
       "text": "快递员"
     }
   },
-  "source_content_sha256": "bbbe6a04ff1d113d5117375602bce6140060cd517d6917cc8dc7f031c75096e6",
+  "source_content_sha256": "58e679aa215f22e4c5e683bdb30712e5ebc8186581b0ab476c0288edc2ffc764",
   "subject": {
     "canonical_slug": "couriers-and-messengers",
     "name": "快递员",
-    "summary": "快递员在美国对应 O*NET-SOC 43-5021.00（Couriers and Messengers）。核心是在机构内部或机构之间取送与投递信件、文件、包裹和其他物品：按派单或线路领取物品与投递信息、规划并遵循最省时的路线、装载车辆并注意危险品、在途中取件与送件、记录收取与投递信息、卸车并按路线分拣、取得签收与代收款项、完成车辆例行维护与出勤确认，并在需要时承担收发与一般文书事务。中国侧，同类岗位多称快递员、同城配送、送件员或单位内部信使与收发员，与该美国职业细类不是一一对应，任职与计酬口径不能互换。"
+    "summary": "收取信件、文件或包裹，核地址与交接要求，按路线送达，保留签收、异常和退回记录。医院样本、贵重或需保密物品要按对应流程交接。"
   }
 }

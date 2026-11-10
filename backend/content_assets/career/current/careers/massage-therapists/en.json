@@ -14,9 +14,6 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -7222,7 +7219,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The core work of massage therapists is to manipulate soft tissues and joints to relieve symptoms and support health: discuss clients' medical histories, stress, and pain; assess soft tissue conditions, joint function, strength, and range of motion; develop and recommend treatment plans as needed; massage and knead muscles and soft tissues and apply pressure to specific areas; guide posture improvement, stretching, and relaxation exercises; maintain treatment records; refer to other therapists or collaborate with physicians, physical therapists, and chiropractors when needed; and clean and disinfect equipment and work areas."
+              "This work may suit people who consistently check consent and comfort, record feedback and follow appointment and handoff procedures."
             ]
           },
           "id": "massage-therapists.quick-decision.fermat-decision-card.2",
@@ -7236,12 +7233,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Entirely fictional task package: provide a fictional client service form and health questionnaire, including 1 description of stress, pain, and medical history, 1 set of range-of-motion and strength observation points, and 1 situation requiring referral or modified techniques. Within 60 minutes, write an assessment approach, proposed techniques, contraindication and referral boundaries, and documentation points. Do not use real client or medical data or make diagnoses from it."
+              "Try the paper exercise under “Entry and Sheet M: Bookings and room handoff.”"
             ]
           },
           "id": "massage-therapists.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-tasks"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7250,12 +7247,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Sample output and reflection: check whether medical history and contraindications were established first, observations were distinguished from judgments, referral situations were stated, and hygiene and documentation requirements were explained. Then ask yourself whether you can stand for long periods and repeat manual techniques, control pressure within comfort and safety boundaries, and willingly continue practice under licensing and hygiene standards."
+              "This work may suit you if you are comfortable checking client consent and comfort throughout a session, preparing the space and records, and practising manual techniques."
             ]
           },
           "id": "massage-therapists.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "onet-tasks"
+            "onet-tasks",
+            "bls-ooh"
           ],
           "type": "prose"
         }
@@ -7272,14 +7270,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "This page corresponds to US ONet31-9011.00, primarily soft tissue / joint massage, potentially assisting with range-of-motion / strength assessment and service planning. Medical-history discussions, techniques, hygiene, records, and referrals remain within competence and state authority and do not replace chiropractic, physical / occupational, or radiation therapy. Chinese wellness services cannot copy US treatment responsibilities: the 2023 traditional Chinese medicine health maintenance standards apply to corresponding nonmedical institutions, prohibiting diagnosis and treatment, hazardous methods such as traction / manipulation, or treatment claims. Medical-institution tasks follow separate competent authority rules."
+              "U.S. massage therapists work with soft tissue within the agreed scope, confirm goals and consent, prepare the space, and document the session and issues requiring referral."
             ]
           },
           "id": "massage-therapists.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
-            "onet-tasks",
-            "cn-tcm-wellness"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7344,7 +7340,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Environment and pace: primarily controlled indoor settings, close physical proximity, continuous hand use and prolonged standing, with many repetitive movements. Most work fewer than 40 hours, with relatively regular schedules; some are self-employed and schedule by client appointments."
+              "Environment and pace: primarily controlled indoor settings, close physical proximity, continuous hand use and prolonged standing, with many repetitive movements. In the O*NET survey, 89% reported a workweek shorter than 40 hours, with relatively regular schedules; some are self-employed and schedule by client appointments."
             ]
           },
           "id": "massage-therapists.profile.work-context-block.6",
@@ -7359,13 +7355,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Research inputs: occupational identity, tasks, work activities, work context, skills and knowledge, interest code, education, and Job Zone for O*NET 31-9011.00. Wage, employment, and industry data on that page cover this occupation. Research conclusions do not establish mainland China's qualification, licensing, wage, or employment scope."
+              "O*NET 31-9011.00 describes this occupation’s tasks and work context. U.S. wages come from OEWS and projections from BLS Table 1.2."
             ]
           },
           "id": "massage-therapists.profile.onet-structured-fields-block.7",
           "source_refs": [
             "onet-summary",
-            "onet-trends"
+            "onet-wages",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -7547,7 +7544,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task hypothesis: distinguish ordinary appointment / inventory systems from generative AI, which may draft fictional service materials. No occupational adoption rates or job outcomes were obtained. Real health information requires authorization. Actual qualified providers are responsible for techniques, safety, and referrals; automated text is not a diagnosis or a substitute for medical care. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Editorial task hypothesis: distinguish ordinary appointment / inventory systems from generative AI, which may draft fictional service materials. No occupational adoption rates or job outcomes were obtained. Real health information requires authorization. Actual qualified providers are responsible for techniques, safety, and referrals; automated text is not a diagnosis or a substitute for medical care."
             ]
           },
           "id": "massage-therapists.ai-impact.ai-impact-table.2",
@@ -7603,12 +7600,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First conduct an offline exercise using entirely fictional client service forms and health questionnaires. Write assessment approaches, technique choices, contraindications, and referral boundaries without relying on unverified automated advice or making diagnoses from it."
+              "Use the fictional entry exercise to practise writing a handoff. If you use an automated tool, check the identifiers, gaps and corrections against the original records."
             ]
           },
           "id": "massage-therapists.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "internal-rubric"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -7653,7 +7650,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this research did not obtain a Chinese occupational wage distribution safely matching 31-9011.00. Household-service unit averages provide only employer context. They do not prove no public materials publish such data, cover medical institutions or individual businesses, or confer diagnosis and treatment authority on wellness massage."
+              "Mainland China wage data"
             ]
           },
           "id": "massage-therapists.china-salary.career-snapshot-primary-locale.1",
@@ -7717,7 +7714,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "US wage and employment scope for massage therapists, occupation 31-9011.00"
+              "U.S. wages (May 2025 OEWS)"
             ]
           },
           "fact_refs": [
@@ -7734,7 +7731,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 US nationwide median wage for this occupation is 58,450 dollars annually and 28.10 dollars hourly; full percentiles appear in the table. Retain older employment of 168,000 in 2024 and 24,700 average annual openings in 2024—2034. Latest figures of 155,400 employed in 2025, 15% growth in 2025—2035, and 20,400 average annual openings are separate. Wages are not per-client charges, self-employment revenue / net earnings, or conversions of an individual's actual working hours."
+              "The May 2025 national median for U.S. occupation 31-9011 was USD 58,450 a year and USD 28.10 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 33,640, 43,480, 58,450, 78,320, 100,200."
             ]
           },
           "fact_refs": [
@@ -7805,7 +7802,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The older 24,700 figure is projected average annual openings in 2024—2034, not a period total or net new jobs. The newer 2025—2035 annual average of 20,400 is separate and includes replacements for workers leaving / changing occupations."
+              "BLS Table 1.2 for U.S. occupation 31-9011 shows about 155,400 jobs in 2025 and projects 179,100 in 2035 (15.3%), with about 20,400 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "fact_refs": [
@@ -7887,12 +7884,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Trial activity: using entirely fictional client service forms and health questionnaires, rehearse assessment approaches, technique choices, and referral boundaries, and ask someone else to review them against the records."
+              "Find “Sheet M: Bookings and room handoff” under “Entry and Sheet M: Bookings and room handoff.”"
             ]
           },
           "id": "massage-therapists.fit.riasec-fit-block.5",
           "source_refs": [
-            "onet-tasks"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8029,7 +8026,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Entry pathways and capability stages"
+              "Entry and Sheet M: Bookings and room handoff"
             ]
           },
           "id": "massage-therapists.path.career-path-block.1",
@@ -8044,12 +8041,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "ONet's new-hire education responses report 48% postsecondary certificate, 19% high school, and 15% associate degree. Postsecondary does not mean after an associate degree; the one to two years for JobZone3 is a group description. BLS programs may take months to years. Most states regulate practice; verify approved programs, examinations / licensing, or registration by state."
+              "BLS lists a postsecondary nondegree award as typical preparation. Most states require a license or certification. Check approved programmes, exams and registration rules with the state regulator."
             ]
           },
           "id": "massage-therapists.path.career-path-block.2",
           "source_refs": [
-            "onet-education",
+            "bls-ep-2025-2035",
             "bls-ooh"
           ],
           "type": "prose"
@@ -8059,14 +8056,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "United States: postsecondary massage training and practice, with approved programs / examinations and licensing or registration checked separately in regulating states. ONet lists registered apprenticeship title examples but does not guarantee local enrollment or replace licensing. No exact Chinese occupational qualification mapping was established, but nonmedical traditional Chinese medicine health maintenance institutions have clear service / hygiene / personnel training and data security requirements. They may not provide diagnosis and treatment or claim therapeutic effects."
+              "Zhuhai’s published April–May 2026 schedule includes wellness massage practitioner skill assessment. This is a local, dated skills-assessment example with a different scope from U.S. massage therapy licensing."
             ]
           },
           "id": "massage-therapists.path.career-path-block.3",
           "source_refs": [
-            "bls-ooh",
-            "onet-education",
-            "cn-tcm-wellness"
+            "cn-work-example"
           ],
           "type": "prose"
         },
@@ -8104,12 +8099,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Evidence to show: use a reviewable service and documentation description covering assessment approaches, technique choices, hygiene steps, and referral boundaries to demonstrate compliant service under supervision."
+              "Paper exercise “Sheet M: Bookings and room handoff.” A fictional venue marks a booking ready on its paper schedule only when the booking ID matches and room cleaning was checked. M1 meets both conditions. M2 has a matching booking ID but lacks the cleaning check. M3 has a conflicting booking ID and a confirmed cleaning check. Reclassify the three entries marked ready on the old sheet and write a handoff. In the variant, add only the verified cleaning check for M2. Use fictional data only. Check the site and the client’s consent separately before providing any service. In the exercise, the venue lead checks the cleaning record and the scheduling lead checks booking IDs. Both roles are fictional."
             ]
           },
           "id": "massage-therapists.path.career-path-block.6",
           "source_refs": [
-            "onet-education"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8118,12 +8113,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Next step: check the target employer's service scope and client populations and state or local licensing or certification and hygiene requirements. Validate assessment, manual, and communication skills through real services under supervision."
+              "Complete both cases and save your first draft. Under “FAQs and boundaries,” open “Paper exercise answer key (open after completing)” and compare pending reasons and handoff owners."
             ]
           },
           "id": "massage-therapists.path.career-path-block.7",
           "source_refs": [
-            "onet-education"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -8154,7 +8149,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Market signals and transition directions"
+              "Occupational outlook and related work"
             ]
           },
           "id": "massage-therapists.market-signals.market-signal-card.1",
@@ -8168,12 +8163,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Retain older employment of 168,000 in 2024 and 24,700 average annual openings in 2024—2034. Latest figures are 155,400 employed in 2025, 15% growth in 2025—2035, and 20,400 average annual openings, not period totals or individual hiring outcomes."
+              "BLS Table 1.2 for U.S. occupation 31-9011 shows about 155,400 jobs in 2025 and projects 179,100 in 2035 (15.3%), with about 20,400 openings per year including replacements. Counts are rounded independently."
             ]
           },
           "id": "massage-therapists.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8182,7 +8177,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The main industries on that page for 2024 are Other Services (Except Public Administration) and Health Care and Social Assistance. Employment and openings are statistical projections and must be interpreted separately from individual opportunities."
+              "O*NET’s 2025 U.S. industry distribution shows 33% of employment in other services (except public administration) and 21% in health care and social assistance. 2025 employment is the baseline estimate. 2035 employment is projected, and average annual openings are projected for 2025–2035 and include replacements."
             ]
           },
           "id": "massage-therapists.market-signals.market-signal-card.3",
@@ -8201,7 +8196,8 @@
           },
           "id": "massage-therapists.market-signals.market-signal-card.4",
           "source_refs": [
-            "onet-tasks"
+            "onet-tasks",
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -8210,12 +8206,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "First target, chiropractor: in the United States, an accredited D.C. degree and state license are required, with specialized diagnosis / spinal assessment / adjustment training. Massage techniques / certificates do not replace this education and authority. Verify Chinese medical and nonmedical boundaries separately; wellness institutions cannot directly provide manipulation or diagnosis and treatment."
+              "First target, chiropractor: in the United States, an accredited D.C. degree and state license are required, with specialized diagnosis / spinal assessment / adjustment training. Massage techniques / certificates do not replace this education and authority. In China, the trial standard applies to nonmedical providers registered for traditional Chinese medicine wellness services. It prohibits spinal manipulation and diagnosis or treatment in that setting."
             ]
           },
           "id": "massage-therapists.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-summary"
+            "bls-chiropractors",
+            "cn-tcm-wellness"
           ],
           "type": "prose"
         }
@@ -8233,13 +8230,14 @@
           "data": {
             "entries": [
               {
-                "answer": "On this page, massage therapists refers to O*NET 31-9011.00: workers who provide massage treatment of soft tissues and joints and may assist with range-of-motion and strength assessment or propose client treatment plans. Tasks include reviewing medical history and assessing soft tissue conditions, developing treatment plans, massaging and kneading muscles and soft tissues, guiding posture and relaxation exercises, maintaining treatment records, referring and consulting, and cleaning and disinfecting equipment and work areas. Work mainly takes place in controlled indoor spas, clinics, and client locations. This occupation is distinct from chiropractors, occupational therapists, physical therapists, radiation therapists, or recreational therapists.",
+                "answer": "On this page, massage therapists refers to O*NET 31-9011.00: workers who provide massage treatment of soft tissues and joints and may assist with range-of-motion and strength assessment or propose client treatment plans. Tasks include reviewing medical history and assessing soft tissue conditions, developing treatment plans, massaging and kneading muscles and soft tissues, guiding posture and relaxation exercises, maintaining treatment records, referring and consulting, and cleaning and disinfecting equipment and work areas. Work mainly takes place in controlled indoor spas, clinics, and client locations. This occupation is distinct from chiropractors, occupational therapists, physical therapists, radiation therapists, or recreational therapists. BLS reports that part-time work is common and appointment schedules can cause weekly hours to vary.",
                 "id": "massage-therapists.faq.1",
                 "question": "What are everyday work and working hours like?",
                 "question_key": "career.faq.massage-therapists.daily-work",
                 "source_refs": [
                   "onet-summary",
-                  "onet-tasks"
+                  "onet-tasks",
+                  "bls-ooh"
                 ]
               },
               {
@@ -8291,7 +8289,7 @@
                 ]
               },
               {
-                "answer": "The O*NET page displays a 2025 BLS OEWS median annual wage of 58,450 dollars, approximately 28.10 dollars / hour, for occupation 31-9011.00. That page does not display percentile wages. These are US nationwide statistics, not individual take-home income or starting pay.",
+                "answer": "The May 2025 national median for U.S. occupation 31-9011 was USD 58,450 a year and USD 28.10 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 33,640, 43,480, 58,450, 78,320, 100,200.",
                 "id": "massage-therapists.faq.7",
                 "question": "What wage evidence is available for the United States?",
                 "question_key": "career.faq.massage-therapists.us-pay",
@@ -8300,14 +8298,14 @@
                 ]
               },
               {
-                "answer": "In the United States, this occupation is in Job Zone 3. Most positions require a certificate after an associate degree and typically one to two years of training. Most states regulate massage therapy and require massage therapists to have a license or certification, according to BLS OOH. Check specific requirements with state regulators. Mainland China: there is no unified occupational qualification exactly corresponding to this O*NET occupation; check employer and local hygiene and business administration rules.",
+                "answer": "BLS lists a postsecondary nondegree award as typical preparation. Most states require a license or certification. Check approved programmes, exams and registration rules with the state regulator. Zhuhai’s published April–May 2026 schedule includes wellness massage practitioner skill assessment. This is a local, dated skills-assessment example with a different scope from U.S. massage therapy licensing.",
                 "id": "massage-therapists.faq.8",
                 "question": "What are the entry and training pathways?",
                 "question_key": "career.faq.massage-therapists.education-path",
                 "source_refs": [
-                  "onet-education",
-                  "bls-ooh",
-                  "onet-cert"
+                  "bls-ep-2025-2035",
+                  "cn-work-example",
+                  "bls-ooh"
                 ]
               },
               {
@@ -8321,21 +8319,21 @@
                 ]
               },
               {
-                "answer": "O*NET cites BLS data showing about 168,000 employed in this occupation in 2024, projected growth much faster than average, at 7% or higher, in 2024—2034, and about 24,700 job openings during the period. These are occupational statistics, not an individual's probability of being hired.",
+                "answer": "BLS Table 1.2 for U.S. occupation 31-9011 shows about 155,400 jobs in 2025 and projects 179,100 in 2035 (15.3%), with about 20,400 openings per year including replacements. Counts are rounded independently.",
                 "id": "massage-therapists.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.massage-therapists.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "bls-ep-2025-2035"
                 ]
               },
               {
-                "answer": "If you can patiently repeat techniques under safety and hygiene standards and communicate with clients, a low-cost exercise using entirely fictional client service forms and health questionnaires is worthwhile, without using it for diagnosis or treatment. Moving into physical or occupational therapy requires additional corresponding education and licensing.",
+                "answer": "Find “Sheet M: Bookings and room handoff” under “Entry and Sheet M: Bookings and room handoff.” Then reflect on whether you want to spend time checking details, keeping evidence and handing open items to the right person.",
                 "id": "massage-therapists.faq.11",
                 "question": "Is this occupation worth exploring further?",
                 "question_key": "career.faq.massage-therapists.career-worth",
                 "source_refs": [
-                  "onet-summary"
+                  "paper-exercise"
                 ]
               },
               {
@@ -8343,6 +8341,15 @@
                 "id": "massage-therapists.faq.boundary",
                 "question": "What are the limits of using this page?",
                 "question_key": "career.faq.massage-therapists.boundary"
+              },
+              {
+                "answer": "Only M1 is ready on paper in the original. M1 and M2 are ready in the variant. M3 remains pending. Keep the old sheet, the basis for the correction and open issues. Scheduling status does not replace consent or an on-site check. In the original, send M2’s missing cleaning check to the fictional venue lead and M3’s booking ID conflict to the fictional scheduling lead. In the variant, M2 has the check and M3 keeps the same handoff.",
+                "id": "massage-therapists.faq.paper-exercise",
+                "question": "Paper exercise answer key (open after completing)",
+                "question_key": "career.faq.massage-therapists.paper-exercise",
+                "source_refs": [
+                  "paper-exercise"
+                ]
               }
             ]
           },
@@ -8508,17 +8515,16 @@
                 "url": "https://www.onetonline.org/link/details/31-9011.00#WorkContext"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2025 BLS OEWS median wages; the page covers this occupation, 31-9011.00.",
-                  "This page does not display percentile wages; inferred values are not substituted."
+                  "The May 2025 national median for U.S. occupation 31-9011 was USD 58,450 a year and USD 28.10 an hour. The annual 10th, 25th, 50th, 75th and 90th percentiles were USD 33,640, 43,480, 58,450, 78,320, 100,200."
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "onet-wages",
-                "limitation": "This page does not display percentile wages; the median does not represent starting pay or individual take-home income.",
+                "limitation": "National occupational distribution. Local wages and individual offers vary.",
                 "market": "United States",
                 "name": "O*NET 31-9011.00 National Wages (BLS OEWS Display)",
-                "period": "2025 BLS OEWS wage data; accessed 2026-09-25",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/31-9011.00"
@@ -8526,23 +8532,23 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Employment in 2024 and projections for growth and job openings in 2024—2034.",
-                  "Projections are not a hiring guarantee."
+                  "The employment projections shown here come from BLS Table 1.2.",
+                  "The employment projections shown here come from BLS Table 1.2."
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
                 "limitation": "Projections are not a hiring guarantee; much faster than average does not mean individual opportunities necessarily increase.",
                 "market": "United States",
                 "name": "O*NET 31-9011.00 National Employment Trends",
-                "period": "2024—2034 projections; accessed 2026-09-25",
+                "period": "Occupational profile or live lookup",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/31-9011.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "The main industries on that page for 2024 are Other Services (Except Public Administration) and Health Care and Social Assistance.",
+                  "O*NET’s 2025 U.S. industry distribution shows 33% of employment in other services (except public administration) and 21% in health care and social assistance.",
                   "Industry distribution signals employer settings, not projected growth or demand."
                 ],
                 "evidence_type": "official industry distribution",
@@ -8550,15 +8556,15 @@
                 "limitation": "Industry distribution signals employer settings, not projected growth or demand.",
                 "market": "United States",
                 "name": "Industries: 31-9011.00",
-                "period": "O*NET industry data current 2026; accessed 2026-09-25",
+                "period": "2025",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/31-9011.00"
+                "url": "https://www.onetonline.org/link/details/31-9011.00"
               },
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Job Zone 3, medium preparation needed: most positions require a certificate after an associate degree, approximately 48%, while some require a high-school diploma, approximately 19%, or two-year degree, approximately 15%. One to two years of training is typically needed.",
+                  "Among O*NET respondents, 48% reported a postsecondary certificate, 19% a high school diploma or equivalent, and 15% an associate or other two-year degree. Check licensing requirements in the target state separately.",
                   "Education distribution does not establish a mandatory requirement for every employer."
                 ],
                 "evidence_type": "official occupation profile",
@@ -8588,10 +8594,9 @@
                 "url": "https://www.onetonline.org/link/localcert/31-9011.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Explains that most states regulate massage therapy and require massage therapists to have a license or certification.",
-                  "Official explanation of US state regulation and entry education."
+                  "BLS lists a postsecondary nondegree award as typical preparation. Most states require a license or certification. Check approved programmes, exams and registration rules with the state regulator."
                 ],
                 "evidence_type": "official occupational handbook",
                 "id": "bls-ooh",
@@ -8654,17 +8659,17 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Organizes potentially assisted tasks and human control points for task-level AI and fit discussions.",
-                  "An editorial scale is not evidence of adoption rates, layoffs, regulations, or licensing."
+                  "Tools may help organize records. Verify key information against the original.",
+                  "Tools may help organize records. Verify key information against the original."
                 ],
-                "evidence_type": "internal task rubric",
+                "evidence_type": "Editorial explanation",
                 "id": "internal-rubric",
-                "limitation": "An editorial scale is not evidence of adoption rates, layoffs, regulations, or licensing.",
-                "market": "Global task level",
-                "name": "FermatMind Task Impact Scale for Massage Therapists",
-                "period": "FermatMind task rubric v2026.09; reviewed 2026-09-25",
+                "limitation": "This explanation does not measure adoption or work outcomes.",
+                "market": "This page",
+                "name": "FermatMind task and human review notes",
+                "period": "This page",
                 "publisher": "FermatMind",
-                "scope": "editorial_synthesis",
+                "scope": "Tasks on this page",
                 "url": null
               },
               {
@@ -8713,21 +8718,58 @@
                 "url": "https://www.bls.gov/ooh/healthcare/chiropractors.htm"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Manage appointments and maintain records — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Assess and provide manual treatment — 0/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
-                  "Recognize contraindications and refer — 25/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "BLS Table 1.2 for U.S. occupation 31-9011 shows about 155,400 jobs in 2025 and projects 179,100 in 2035 (15.3%), with about 20,400 openings per year including replacements. Counts are rounded independently."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "bls-ep-2025-2035",
+                "limitation": "Employment and openings are rounded independently. Openings include replacements.",
+                "market": "United States",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "31-9011",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Zhuhai’s published April–May 2026 schedule includes wellness massage practitioner skill assessment. This is a local, dated skills-assessment example with a different scope from U.S. massage therapy licensing."
+                ],
+                "id": "cn-work-example",
+                "limitation": "This case does not establish national pay, entry requirements or hiring.",
+                "market": "Mainland China",
+                "name": "Zhuhai: occupational skill assessment schedule",
+                "period": "April–May 2026",
+                "publisher": "Zhuhai municipal government portal",
+                "scope": "Named work example",
+                "url": "https://www.zhuhai.gov.cn/xw/gsgg/content/post_3895182.html"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks the paper records only.",
+                "market": "This page",
+                "name": "Sheet M: Bookings and room handoff",
+                "period": "This page",
+                "publisher": "FermatMind",
+                "scope": "Paper exercise",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "U.S. physical therapists need a DPT degree and licensure in every state."
+                ],
+                "id": "bls-physical-therapists",
+                "limitation": "Describes entry to a separate occupation.",
+                "market": "United States",
+                "name": "BLS: How to Become a Physical Therapist",
+                "period": "2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "url": "https://www.bls.gov/ooh/healthcare/physical-therapists.htm#tab-4"
               }
             ]
           },
@@ -8829,7 +8871,7 @@
             "职业方向": "Radiation Therapists"
           }
         ],
-        "transition": "Next, turn the comparison into small-scale manual practice that can be stopped."
+        "transition": "Next, try Sheet M under the entry pathway to check booking IDs, cleaning review and handoff responsibilities."
       },
       "ai_impact_table": {
         "action_rows": [
@@ -9488,35 +9530,35 @@
             "id": "track-1",
             "stages": [
               {
-                "credentials": "Verify program and employer requirements.",
-                "next_moves": "Build rehabilitation and exercise foundations.",
-                "readiness_evidence": "Retain assistance and records.",
-                "responsibility": "Participate in rehabilitation assistance under supervision.",
-                "role": "Rehabilitation assistant"
+                "credentials": "Verify the target role’s duties, local licensing requirements and supervision.",
+                "next_moves": "Build the preparation required for the target role.",
+                "readiness_evidence": "Document the training, authorization and supervised work required for the target role.",
+                "responsibility": "Help with records and arrangements, and hand off issues as directed.",
+                "role": "Supervised service assistant"
               },
               {
-                "credentials": "Verify employer requirements.",
-                "next_moves": "Add functional-assessment evidence.",
-                "readiness_evidence": "Retain tasks and records.",
-                "responsibility": "Independently handle rehabilitation or exercise support tasks.",
-                "role": "Rehabilitation / exercise specialist"
+                "credentials": "Verify the target role’s duties, local licensing requirements and supervision.",
+                "next_moves": "Build the preparation required for the target role.",
+                "readiness_evidence": "Document the training, authorization and supervised work required for the target role.",
+                "responsibility": "Support general activity within the assigned scope. Refer clinical assessment to the appropriate professional.",
+                "role": "Nonclinical exercise support"
               },
               {
-                "credentials": "Verify employer requirements.",
-                "next_moves": "Add systematic-practice and collaboration evidence.",
-                "readiness_evidence": "Retain complex-case records.",
-                "responsibility": "Handle complex cases and plans.",
-                "role": "Senior rehabilitation specialist"
+                "credentials": "Verify the target role’s duties, local licensing requirements and supervision.",
+                "next_moves": "Build the preparation required for the target role.",
+                "readiness_evidence": "Document the training, authorization and supervised work required for the target role.",
+                "responsibility": "Clinical assessments and treatment plans belong to professionals who meet local qualifications.",
+                "role": "Clinical rehabilitation role"
               },
               {
-                "credentials": "Verify employer requirements.",
-                "next_moves": "Add evidence of management responsibility.",
-                "readiness_evidence": "Retain program and team records.",
-                "responsibility": "Oversee programs and teams.",
-                "role": "Rehabilitation program lead"
+                "credentials": "Verify the target role’s duties, local licensing requirements and supervision.",
+                "next_moves": "Build the preparation required for the target role.",
+                "readiness_evidence": "Document the training, authorization and supervised work required for the target role.",
+                "responsibility": "Coordinate workflows and teams within assigned authority. Clinical responsibilities stay with the appropriate professionals.",
+                "role": "Service programme coordination"
               }
             ],
-            "title": "Transition into rehabilitation and exercise"
+            "title": "Exploring exercise support or regulated clinical rehabilitation"
           },
           {
             "id": "track-2",
@@ -10206,11 +10248,11 @@
           },
           {
             "指标": "Employment · Size",
-            "数值": "168,000 people (2024)",
+            "数值": "About 155,400 jobs (2025)",
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-ep-2025-2035",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10218,7 +10260,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-ep-2025-2035",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10230,11 +10272,11 @@
           },
           {
             "指标": "Employment · Change",
-            "数值": "Much faster than average (7% or higher, 2024—2034)",
+            "数值": "15.3% (2025–2035)",
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-ep-2025-2035",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10242,7 +10284,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-ep-2025-2035",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10254,11 +10296,11 @@
           },
           {
             "指标": "Employment · Openings",
-            "数值": "About 24,700 openings / year (older 2024—2034 projection)",
+            "数值": "About 20,400 openings per year",
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-ep-2025-2035",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10266,7 +10308,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-ep-2025-2035",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10277,7 +10319,7 @@
             }
           }
         ],
-        "boundary": "US occupation 31-9011, 2025 OEWS wages / industries. Separate older 2024—2034 employment from latest 2025—2035 data. Part-time / appointment work is common; wage percentiles do not represent individual service hours, price quotes, or self-employed net income.",
+        "boundary": "BLS Table 1.2 for U.S. occupation 31-9011 shows about 155,400 jobs in 2025 and projects 179,100 in 2035 (15.3%), with about 20,400 openings per year including replacements. Counts are rounded independently.",
         "direct_answer": {
           "$item": "massage-therapists.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10304,7 +10346,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "Much faster than average (2024—2034)",
+        "growth": "2025–2035",
         "heading": {
           "$item": "massage-therapists.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10353,11 +10395,11 @@
             "question": "Wages"
           },
           {
-            "answer": "Employment count in 2024, not the number of vacancies being recruited for.",
+            "answer": "Estimated U.S. employment in 2025. Openings are measured separately.",
             "question": "Employment"
           },
           {
-            "answer": "Latest 2025—2035 growth is 15%, with 20,400 average annual openings. The older version is separate; these do not represent recruitment or hiring outcomes.",
+            "answer": "BLS projects a 15.3% change in U.S. employment from 2025 to 2035, with about 20,400 openings per year including replacements.",
             "question": "Outlook"
           },
           {
@@ -10367,11 +10409,11 @@
         ],
         "median": "$58,450 / year (2025)",
         "outlook_heading": "Employment outlook and job openings",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025–2035",
         "wage_column_labels": [
           "Percentile",
           "Annual reference",
-          "Hourly equivalent",
+          "Hourly wage",
           "Explanation"
         ],
         "wage_heading": {
@@ -10443,7 +10485,7 @@
         "title": "Who might suit massage therapy?"
       },
       "fit_decision_checklist": {
-        "boundary": "This is an entirely fictional educational client-service scenario check, not a personality diagnosis, hiring conclusion, or medical assessment.",
+        "boundary": "If prolonged standing, repetitive hand use or irregular bookings would be difficult, check the employer’s schedule, breaks and workload before committing.",
         "how": {
           "$item": "massage-therapists.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10490,7 +10532,7 @@
         "outlook_evidence": [
           {
             "geography": "US nationwide",
-            "horizon": "2024—2034",
+            "horizon": "2025–2035",
             "interpretation": "Employment size, change, and job openings must be interpreted separately.",
             "limitation": "Occupational statistics cannot guarantee individual employment.",
             "metric": "Employment size and change",
@@ -10504,12 +10546,12 @@
           },
           {
             "geography": "US nationwide",
-            "horizon": "2024—2034",
-            "interpretation": "Older 2024—2034 average annual openings, not a period total; the newer 2025—2035 annual average of 20,400 is listed separately.",
+            "horizon": "2025–2035",
+            "interpretation": "BLS Table 1.2 for U.S. occupation 31-9011 shows about 155,400 jobs in 2025 and projects 179,100 in 2035 (15.3%), with about 20,400 openings per year including replacements. Counts are rounded independently.",
             "limitation": "Cannot represent an individual's probability of being hired.",
             "metric": "Projected average annual job openings",
             "occupation_scope": "Display scope: Massage Therapists (31-9011.00)",
-            "value": "About 24,700 openings / year (older version)"
+            "value": "About 20,400 openings per year"
           },
           {
             "geography": "US nationwide",
@@ -10690,7 +10732,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "riasec",
@@ -10709,7 +10751,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "big-five",
@@ -10728,7 +10770,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "mbti",
@@ -10742,7 +10784,7 @@
           },
           {
             "answer": "Continue checking against real tasks, boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "enneagram",
@@ -10756,7 +10798,7 @@
           },
           {
             "answer": "Continue checking against real tasks, boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "iq",
@@ -10770,7 +10812,7 @@
           },
           {
             "answer": "Continue checking against real tasks, boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Start a career-interest trial",
             "evidence_level": "Editorial guidance; no occupation-specific validity study provided",
             "id": "eq",
@@ -10830,8 +10872,8 @@
         },
         "questions": [
           {
-            "answer": "Use this page's work sample to check communication and recognition.",
-            "question": "Can you review medical history and recognize contraindications?"
+            "answer": "Use Sheet M to check appointment IDs, cleaning review and handoff responsibilities. Write down what still needs confirmation.",
+            "question": "What would you check on the schedule before handing it over?"
           },
           {
             "answer": "Check assessment points against standards.",
@@ -10858,7 +10900,7 @@
             "question": "How can your work be reviewed?"
           },
           {
-            "answer": "Complete an exercise using entirely fictional client service forms and health questionnaires.",
+            "answer": "Use the fictional Sheet M to practise schedule checks and handoffs.",
             "question": "How can I try this next?"
           }
         ],
@@ -11080,7 +11122,7 @@
           "entry": "massage-therapists.navigation.1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit massage therapy",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11148,7 +11190,7 @@
             "item": "massage-therapists.source-register.published.1"
           }
         },
-        "note": "Check source scope, limitations, and statistical periods separately against the original evidence. Source usage notes: O*NET 31-9011.00 Massage Therapists (Summary): provides occupational identity, the official description, interest code, Job Zone, skills, and knowledge for 31-9011.00. Wage and employment data on that page cover this occupation. O*NET 31-9011.00 Tasks: provides tasks including massaging and kneading soft tissues, applying pressure to specific areas, assessing soft tissues and joints, developing and recommending treatment plans, maintaining records, referral and consultation, and cleaning and disinfection. Task examples do not mean every position performs every task. O*NET 31-9011.00 Work Context: describes primarily controlled indoor work, physical proximity, repetitive movements and prolonged standing, hand use, and other contexts. US work context does not replace Chinese law or employer procedures. O*NET 31-9011.00 National Wages (BLS OEWS Display): 2025 BLS OEWS median wages for this occupation. This page does not display percentile wages. O*NET 31-9011.00 National Employment Trends: employment in 2024 and projections for growth and job openings in 2024—2034. Projections are not a hiring guarantee. Industries: 31-9011.00: the main industries on that page for 2024 are Other Services (Except Public Administration) and Health Care and Social Assistance. Industry distribution signals employer settings, not projected growth or demand. O*NET 31-9011.00 Education and Occupational Preparation: Job Zone 3; most positions require a certificate after an associate degree, approximately 48%, and typically one to two years of training. Education distribution does not establish mandatory requirements for every employer. Licenses & Certifications: 31-9011.00: O*NET provides state licensing and national certification lookup entry points. Certification and training do not equal authorization to practice or employer hiring requirements. BLS Occupational Outlook Handbook: Massage Therapists: explains that most states regulate massage therapy and require licensing or certification. This describes US state regulation and does not automatically map to other jurisdictions. Generative AI and Jobs (ILO Working Paper 140, 2025): assesses occupational exposure to generative AI at the task level. An exposure index is not an adoption rate, job outcome, or hiring probability. Average Annual Wages of Employees in Urban Units in 2025: provides average annual wages by industry category for urban non-private and private units, including residential services, repairs, and other services. Industry averages are not occupational medians and exclude individually owned businesses and freelancers. FermatMind Task Impact Scale for Massage Therapists: organizes potentially assisted tasks and human control points for task-level AI and fit discussions. An editorial scale is not evidence of adoption rates, layoffs, regulations, or licensing."
+        "note": "O*NET describes the tasks, OEWS provides wage estimates, and BLS Table 1.2 provides employment projections."
       },
       "work_context_block": {
         "$item": "massage-therapists.profile.work-context-block.5",
@@ -11160,7 +11202,11 @@
     "contract_version": "career.detail.display.v1",
     "interface": {
       "interface.fit.directions_heading": "Which massage and rehabilitation direction might suit you best?",
-      "interface.fit.interest_code_heading": "How to understand the SRI interest code"
+      "interface.fit.interest_code_heading": "How to understand the SRI interest code",
+      "interface.path.promotion_evidence_label": "Stage records and exploration exercises",
+      "interface.quick_decision.caution_heading": "What should you check before choosing massage therapy?",
+      "interface.quick_decision.experiment_heading": "What can you learn from a short paper exercise?",
+      "interface.quick_decision.suit_heading": "Who might enjoy working in massage therapy?"
     },
     "locale": "zh-CN",
     "native_items": [
@@ -11174,13 +11220,13 @@
     ],
     "path": "/en/career/jobs/massage-therapists",
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI tools and human review",
       "china-salary": "Mainland China wages",
       "direction-comparison": "Comparison with adjacent occupations",
       "fit": "Fit signals",
       "market-signals": "Market signals",
       "navigation": "Page navigation",
-      "path": "Entry pathways",
+      "path": "Entry and Sheet M: Bookings and room handoff",
       "profile": "Occupational definition and responsibilities",
       "quick-decision": "Quick assessment",
       "risk": "Risks and boundaries",
@@ -11193,50 +11239,50 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "58,450 dollars / year",
+        "display_value": "USD 58,450/year",
         "fact_id": "us-wage-median",
         "market": "United States",
-        "measure": "2025 median annual wage, approximately 28.10 dollars / hour",
-        "occupation_scope": "O*NET display scope: this occupation, Massage Therapists (31-9011.00)",
-        "period": "2025 BLS OEWS; accessed 2026-09-25",
+        "measure": "U.S. median annual wage (May 2025)",
+        "occupation_scope": "31-9011",
+        "period": "2025-05",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "168,000 people",
+        "display_value": "About 155,400 jobs",
         "fact_id": "us-employment-2024",
         "market": "United States",
-        "measure": "Employment count in 2024",
-        "occupation_scope": "O*NET display scope: this occupation, Massage Therapists (31-9011.00)",
-        "period": "2024; accessed 2026-09-25",
+        "measure": "U.S. employment (2025)",
+        "occupation_scope": "31-9011",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "O*NET displays Projected growth (2024-2034) as Much faster than average (7% or higher); the displayed data covers this occupation, 31-9011.00.",
-        "display_value": "Much faster than average (7% or higher, 2024—2034)",
+        "derivation": null,
+        "display_value": "15.3%",
         "fact_id": "us-growth",
         "market": "United States",
-        "measure": "Projected employment growth",
-        "occupation_scope": "O*NET display scope: this occupation, Massage Therapists (31-9011.00)",
-        "period": "2024—2034; accessed 2026-09-25",
+        "measure": "U.S. projected employment change (2025–2035)",
+        "occupation_scope": "31-9011",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
-        "derivation": "O*NET displays Projected job openings (2024-2034) as 24,700; this figure is a period total rather than an annual average.",
-        "display_value": "About 24,700 openings (2024—2034 total)",
+        "derivation": null,
+        "display_value": "About 20,400 per year",
         "fact_id": "us-openings",
         "market": "United States",
-        "measure": "Projected job openings (period total)",
-        "occupation_scope": "O*NET display scope: this occupation, Massage Therapists (31-9011.00)",
-        "period": "2024—2034; accessed 2026-09-25",
+        "measure": "U.S. annual openings (2025–2035)",
+        "occupation_scope": "31-9011",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -11286,57 +11332,45 @@
         "source_refs": [
           "nbs-wages"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Massage Therapists",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
-      "Massage and soft tissue treatment",
-      "Assessment and treatment plans",
-      "Hygiene and practice standards"
+      "Massage Therapists",
+      "Wages and projections use separate tables",
+      "China occupational wage distribution unavailable"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "US wage reference"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "US employment change"
+        "label": "U.S. projected employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "US employment count"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "US job openings (period total)"
+        "label": "U.S. annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11350,17 +11384,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "On this page, massage therapists refers to O*NET 31-9011.00: massaging and kneading muscles and soft tissues, applying pressure to specific areas, reviewing medical history, stress, and pain, assessing soft tissues and joints, developing and recommending treatment plans, maintaining treatment records, referring and consulting with other professionals, and cleaning and disinfecting equipment and work areas. Evaluate this career path by checking the complete workflow, practice and safety boundaries, evidence scope, risk controls, and observable entry-level work samples together."
+      "text": "See what massage therapists do, review U.S. wages and employment projections, and try a fictional booking handoff."
     },
     "title": {
       "availability": "available",
-      "text": "Evaluating a Career as a Massage Therapist: Work, Entry, and Practice Boundaries"
+      "text": "Massage Therapists: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "745c56645e6fcbfac7e3d306d05dd568f7a8580e00510117eda0e039061852ca",
+  "source_content_sha256": "b7c7dc1a3b1c4f1dff91ea28a27dce3ee22c9cb0c45cb4163af098b3d187c706",
   "subject": {
     "canonical_slug": "massage-therapists",
     "name": "Massage Therapists",
-    "summary": "On this page, massage therapists refers to O*NET 31-9011.00: workers who massage soft tissues and joints and may assist with range-of-motion and strength assessment or propose client treatment plans."
+    "summary": "U.S. massage therapists work with soft tissue within the agreed scope, confirm goals and consent, prepare the space, and document the session and issues requiring referral."
   }
 }

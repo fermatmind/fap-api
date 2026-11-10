@@ -191,6 +191,9 @@
       "item:nursing-instructors-and-teachers-postsecondary.path.seven-day-trial.8": {
         "status": "mapped"
       },
+      "item:nursing-instructors-and-teachers-postsecondary.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:nursing-instructors-and-teachers-postsecondary.profile.career-quick-answers-block.5": {
         "status": "mapped"
       },
@@ -13460,6 +13463,21 @@
             "aacn-faculty"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. One simulated handover was graded on the new rubric and another on the old one. Identify scores that cannot be compared directly and write a question for the course lead."
+            ]
+          },
+          "id": "nursing-instructors-and-teachers-postsecondary.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "title": "Review evidence from a nursing simulation",
+          "type": "notice"
         }
       ]
     },
@@ -16055,6 +16073,13 @@
         "id": "nursing-instructors-and-teachers-postsecondary.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "nursing-instructors-and-teachers-postsecondary.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -16372,7 +16397,7 @@
       "text": "Nursing Instructors and Teachers, Postsecondary career profile｜teaching, qualifications, and boundaries"
     }
   },
-  "source_content_sha256": "8467bccb96290858a19f5db8fa072ebbaa8b8f783868fc4746167aa51861989a",
+  "source_content_sha256": "082cbfdd61ba5d28ed05b2e20585eea50363d8c2a95e482f861d9ab1771c539b",
   "subject": {
     "canonical_slug": "nursing-instructors-and-teachers-postsecondary",
     "name": "College nursing instructors",

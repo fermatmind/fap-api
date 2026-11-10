@@ -1527,7 +1527,7 @@
         "status": "pending_mapping"
       },
       "item:retail-loss-prevention-specialists.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:retail-loss-prevention-specialists.sources.source-card.1": {
         "status": "mapped"
@@ -15969,8 +15969,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -22951,7 +22957,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "The core work of retail loss prevention specialists is to trace leads on merchandise or cash loss, patrol store and warehouse risks, check inventory discrepancies and monitoring systems, and record facts, sources, times, and handling receipts in incident reports. When personal risk or suspected unlawful conduct arises, notify authorized personnel per protocol; do not classify a situation from a single anomaly or detain beyond authority."
+              "Think twice if you dislike store shifts and on-floor communication or tend to reach conclusions before checking the evidence."
             ]
           },
           "id": "retail-loss-prevention-specialists.quick-decision.fit-decision-checklist.1",
@@ -22966,7 +22972,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Directions such as security guards, security supervisors, fraud investigation, or loss prevention managers can be considered, but their patrol duties, personnel management, investigative authority, and evidence standards differ. Compare the service population, daily tasks, and training requirements first, then check the specific employer and local rules."
+              "In section 09, “Entry, qualifications, and career development,” try LP-01: Reconcile a store inventory discrepancy. Save a first draft before checking the key."
             ]
           },
           "id": "retail-loss-prevention-specialists.quick-decision.fit-decision-checklist.2",
@@ -22980,7 +22986,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "AI can assist in organizing inventory discrepancies, indexing surveillance clips, and drafting incident notes, but it cannot infer theft directly from a blurry image or a single anomaly, let alone decide on detention, searches, or employee discipline. Original records, on-site safety, and human review are control points that must be retained."
+              "Consider this work if you enjoy tracing inventory records, handling discrepancies calmly, and following authorization limits."
             ]
           },
           "id": "retail-loss-prevention-specialists.quick-decision.fit-decision-checklist.3",
@@ -22996,7 +23002,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The quick judgment is based only on occupational tasks and editorially designed fictional exercises, not on personal fit or a hiring prediction. Loss prevention authority varies by regional law, employer protocols, position training, and the specific incident; safety takes priority over recovering merchandise."
+              "Keep dated counts, unknown causes, and the next owner traceable."
             ]
           },
           "id": "retail-loss-prevention-specialists.quick-decision.fermat-decision-card.6",
@@ -23011,7 +23017,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "This page has no national occupational wage distribution for Chinese retail loss prevention specialists. National Bureau of Statistics industry averages serve only as broad background; the US O*NET wage and BLS employment data map to the broader other protective service workers occupation group and cannot be treated as this occupation's precise wage or a hiring promise."
+              "Try retail loss prevention if you like following up on what you notice on the sales floor and checking the records before escalating."
             ]
           },
           "id": "retail-loss-prevention-specialists.quick-decision.fermat-decision-card.7",
@@ -24291,7 +24297,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First practice inventory discrepancies and incident timelines: write the source, time, and unknowns for each item; trial tools only with fictional A1—A5 material and do not enter real customer or employee footage."
+              "Preserve the source, time, and unknowns when checking stock records. Practice with fictional data."
             ]
           },
           "id": "retail-loss-prevention-specialists.ai-impact.ai-impact-table.11",
@@ -25238,7 +25244,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First learn discrepancy checking, incident timelines, safety escalation, and personal information boundaries, then use fictional A1—A5 to practice item-by-item review of tool output."
+              "Practice checking count differences and event times, then see whether a tool changes original counts or drops open items."
             ]
           },
           "id": "retail-loss-prevention-specialists.ai-impact.ai-impact-table.76",
@@ -25913,7 +25919,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Career exploration can use fictional A1—A5 discrepancy tables to practice fact checking, writing incident timelines, and escalation receipts; real footage, customer data, and on-site detention may only be handled within organizational authorization and the limits of the law."
+              "Use a mock count sheet to practice fact checking and handoffs. Handle actual footage and customer records under the applicable permissions."
             ]
           },
           "id": "retail-loss-prevention-specialists.ai-impact.ai-impact-table.122",
@@ -27370,31 +27376,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Fraud examiners and analysts",
@@ -28338,7 +28344,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use the A1—A5 fictional store discrepancy case to build a checklist, incident report, and escalation form, then compare whether you prefer on-site patrols or data review."
+              "Use the mock count in section 09 to see how you handle reconciliation, follow-up, and handoff."
             ]
           },
           "id": "retail-loss-prevention-specialists.fit.personality-fit-block.55",
@@ -28663,7 +28669,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "A1 shows 2 items missing in the physical count, but without checking the return and transfer receipts in A2 it was written that someone stole them."
+              "When counts differ, check receipts, returns, transfers, and posting times before deciding next steps."
             ]
           },
           "id": "retail-loss-prevention-specialists.risk.career-risk-cards.14",
@@ -28723,7 +28729,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "A4 shows a dispute at the exit whose safety status is not yet confirmed, and the trainee pursues or stops the customer alone."
+              "For an on-floor dispute, check immediate safety and follow the reporting and escalation procedure."
             ]
           },
           "id": "retail-loss-prevention-specialists.risk.career-risk-cards.18",
@@ -28840,7 +28846,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "A3 shows a camera offline for five minutes, yet the report states that the footage proves someone took merchandise."
+              "If device records have a gap, preserve the log and report the limits of the observation."
             ]
           },
           "id": "retail-loss-prevention-specialists.risk.career-risk-cards.26",
@@ -29032,7 +29038,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The A1—A5 above are fictional risk examples and do not indicate any employer's event probability or a uniform on-site procedure."
+              "Check each employer’s store procedures, tools, and authority."
             ]
           },
           "id": "retail-loss-prevention-specialists.risk.career-risk-cards.39",
@@ -29129,9 +29135,9 @@
               {
                 "id": "clearance",
                 "values": [
-                  "Investigation and detention authorization",
-                  "Customer contact, employee investigation, footage review, detention, and police cooperation follow local law and employer protocols.",
-                  "Ask clearly what you may do, what is prohibited, and what must be handed to a supervisor; in personal risk, call for help first."
+                  "Hanbin District listing: Wumart merchandise loss prevention",
+                  "The original listing covers checking merchandise for expiry, damage, or loss and reporting findings.",
+                  "Ask about store shifts, floor checks, reporting, and escalation responsibilities."
                 ]
               },
               {
@@ -29145,9 +29151,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "Systems and data",
-                  "Sales, returns, count, surveillance, and incident systems may involve personal information and access permissions.",
-                  "Check system training, footage retention, evidence handover, and minimum necessary access rules."
+                  "Yuanmou Chukelong supermarket loss prevention",
+                  "The county job list separates loss prevention from cashier and stock roles and mentions store pace and customer service.",
+                  "Ask about store shifts, floor checks, reporting, and escalation responsibilities."
                 ]
               }
             ]
@@ -29155,7 +29161,10 @@
           "id": "retail-loss-prevention-specialists.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d017-cn-main",
+            "d017-cn-context",
+            "d017-us-example"
           ],
           "title": "What do employers usually look for in hiring?",
           "type": "cards"
@@ -29168,37 +29177,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and setup｜a completely fictional store loss prevention tabletop exercise",
-                  "You are a loss prevention trainee at a fictional store and may only check the A1—A5 records, list suspicious points, and report to the duty supervisor. The material contains no real customer or employee information; no detention, search, disciplinary, or police reporting decision is made by the trainee.",
-                  "A1｜Tuesday handover sheet: SKU-R8 wireless earphones show system inventory of 20 and a physical count of 18; the count time is 18:00 and the recorder code is C1. The discrepancy has not yet been reviewed.",
-                  "A2｜transaction summary: 1 sold that day, 1 customer return pending quality inspection; a transfer record for 1 unit shows shipped but there is no receiving receipt. Each system was updated at different times.",
-                  "A3｜the surveillance index notes only that the receiving area footage is missing for 5 minutes at 17:20; there is no conclusion about anyone's identity or behavior. The equipment log indicates the camera was briefly offline, and the cause has not been confirmed.",
-                  "A4｜a colleague says verbally that maybe someone took the earphones, with no incident time or original voucher; a customer is in a dispute at the exit, and the on-site safety status has not been checked.",
-                  "A5｜fictional store protocol: the trainee attends to personal safety first and must not pursue, search, or accuse; original records are shown only to the authorized supervisor. The supervisor is responsible for on-site judgment, contacting security or police when necessary, and keeping a takeover receipt."
+                  "Fictional inputs",
+                  "Fictional store count C9 at 18:00 shows 23 units of product X versus 24 in the system, and 10 units of product Y versus 10 in the system. The count is signed.",
+                  "Transfer M8 at 17:50 lists one unit of X. Removal from the shelf is signed, but receipt at the destination and the system adjustment are unverified. A verbal handoff says another shift handled it, with no supporting record. No personal, transaction, or image evidence is supplied.",
+                  "The inventory lead checks transfer and system records, the loss prevention specialist logs the discrepancy, and an authorized supervisor closes it."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task and outputs",
-                  "Using A1—A5, build a one-page discrepancy checklist: list the physical count, sales, returns, transfers, system update times, footage gap, verbal statements, and still-unknown items separately; the 2-unit discrepancy must not be written directly as theft.",
-                  "Then write a safety escalation card: mark the customer dispute, the surveillance interruption, the time the supervisor was notified, the person taking over, and the next review; do not invent identities, footage content, or your own handling steps."
+                  "Task and deliverable",
+                  "Write a two-row reconciliation, a handoff note, and the closure status. Keep the original quantities, times, and sources.",
+                  "Separate the count difference, a possible explanation, and a verified cause.",
+                  "Use paper or a local spreadsheet and identify the evidence."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference approach (complete it independently first)",
-                  "A1's 20 versus 18 is only a count discrepancy. A2 requires checking at least sales, return quality inspection, transfer receiving receipts, and timestamps; the cause of loss cannot be determined before these records reconcile.",
-                  "A3 has only a footage gap and an offline equipment log and cannot be used to infer who did what; per permissions, ask the supervisor to arrange an equipment check and preserve the available original records.",
-                  "The verbal statement in A4 is an unverified lead, and for the customer dispute the supervisor is notified first per the A5 safety protocol. Handover should state what is known, unknown, the time, material location, notification recipients, and takeover confirmation; the trainee does not pursue or accuse."
+                  "Before checking your work",
+                  "Save your own first draft on day 6. Follow the day 7 instructions to open the key.",
+                  "Work independently.",
+                  "Keep the versions.",
+                  "Leave missing evidence open."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Exercise boundaries",
-                  "All material is fictional; surveillance, background checks, searches, or detention must not be carried out on that basis. Real incidents must be handled per local law, employer policy, and on-site safety protocols; a tabletop work product only explains checking and handover thinking."
+                  "Authority boundaries",
+                  "Use the fictional records only.",
+                  "Do not approve or release real work."
                 ]
               }
             ]
@@ -29207,7 +29216,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: fictional store inventory discrepancy and safety escalation",
+          "title": "LP-01 | Reconcile a store inventory discrepancy",
           "type": "cards"
         },
         {
@@ -29218,33 +29227,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Inventory discrepancy checklist",
-                  "Per A1—A5, list the SKU, time, physical count, sales, returns, transfers, footage gap, sources, and to-check items.",
-                  "Others can recompute the discrepancy item by item and will not treat unknowns as zero or label the discrepancy as theft."
+                  "Version and material record",
+                  "Identify the original record and current version.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Safety escalation and takeover form",
-                  "Record the customer dispute, equipment offline status, supervisor notification, and takeover confirmation; do not write unverified conclusions about people.",
-                  "The reviewer can distinguish reported from supervisor has taken over and can see the next owner."
+                  "Inputs and status",
+                  "Compare source records, targets, and discrepancies.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "De-identified incident timeline",
-                  "Per A1—A5, order known facts, verbal statements, and evidence pending verification, and remove any real personnel information.",
-                  "The next person can continue checking the material without being able to identify real customers or employees from the work."
+                  "Open checks and handoff",
+                  "Separate open checks, verified findings, and owners.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Tool review notes",
-                  "If tables or AI are used to draft summaries, review the fictional original cards item by item and mark omissions, fabrications, and unauthorized inferences.",
-                  "Tools do not determine theft, decide detention, or replace original footage and supervisor judgment."
+                  "Delivery boundaries",
+                  "Record physical checks and approval status.",
+                  "Use the supplied records."
                 ]
               }
             ]
@@ -29275,27 +29284,27 @@
             "rows": [
               [
                 "Interview follow-up on inventory discrepancies",
-                "Whether a discrepancy can be distinguished from a theft conclusion",
-                "Lists transaction and transfer receipt to-check items",
-                "A case answer is not real investigative authorization"
+                "Identify the original record and current version.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Interview follow-up on conflict",
-                "Whether personal safety is addressed first and the supervisor is notified",
-                "States the notification time, person taking over, and unverified facts",
-                "Must not pursue or accuse in order to recover merchandise"
+                "Compare source records, targets, and discrepancies.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Equipment and data training",
-                "Whether camera interruptions and system access permissions can be checked",
-                "Training, fault forms, and handover records",
-                "Must not access footage one is not authorized to view"
+                "Separate open checks, verified findings, and owners.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Probation handover",
-                "Whether discrepancy investigations preserve sources and receipts",
-                "De-identified timelines, checklists, and retrospectives",
-                "A single simulated work product cannot prove long-term position performance"
+                "Record physical checks and approval status.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ]
             ]
           },
@@ -29315,50 +29324,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day one",
-                  "Read A1—A5 and mark what the trainee may do, what requires supervisor judgment, and what is prohibited."
+                  "Day 1",
+                  "Record the subject and versions."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day two",
-                  "Build a discrepancy table by item, time, sales, and physical count, without explaining causes."
+                  "Day 2",
+                  "Identify the original record and current version."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day three",
-                  "Check the return quality inspection and transfer receipt in A2 and list every still-unknown time and owner."
+                  "Day 3",
+                  "Compare source records, targets, and discrepancies."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day four",
-                  "Put the A3 equipment offline status on a separate card and do not infer anyone's behavior from the footage gap."
+                  "Day 4",
+                  "Separate open checks, verified findings, and owners."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day five",
-                  "Per A4/A5, write the safety escalation and the supervisor's takeover receipt."
+                  "Day 5",
+                  "Record physical checks and approval status."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day six",
-                  "Use tables or tools to draft a de-identified timeline and correct omissions against A1—A5."
+                  "Day 6",
+                  "Finish and save your own first handoff draft with your records and reasons. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day seven",
-                  "Compile the discrepancy table, escalation form, and retrospective, and list the real permissions and training to check with the employer."
+                  "Day 7",
+                  "After saving your day 6 draft, open “LP-01 answer key and rubric (open on day 7)” in the FAQ. Use the rubric and record one revision with its reason."
                 ]
               }
             ]
@@ -29375,20 +29384,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep the drafts and revisions and record item by item which A1—A5 facts were missed, the original inference, and the basis for revision.",
-              "Check whether the 2-unit discrepancy was written as theft, an unchecked return inspection or unreceived transfer was treated as zero, or a surveillance gap was written as someone's behavior.",
-              "Record whether you are willing to check transactions, counts, footage, and safety protocols repeatedly and accept evening shifts and conflict situations; record the experience only, with no fit score.",
-              "Redo the timeline and compare whether sources, unknowns, notification, and takeover receipts are clearer.",
-              "List real position questions for the employer: surveillance permissions, detention rules, conflict help, shifts, training, and pay structure.",
-              "Make clear that a fictional work product cannot prove investigative, detention, security licensing, or enforcement ability.",
-              "If a week's work is unfinished, state honestly which items were not completed and why, without substituting generalized conclusions."
+              "Keep both original counts and the comparison time for each product.",
+              "Record the transfer evidence separately from the inventory count.",
+              "State what the evidence supports and which causes still need checking.",
+              "Name the records to check, who should review them, and the closure status.",
+              "Use only the fictional inputs and keep the first draft for review.",
+              "Use the named answer key on day 7.",
+              "Record one revision and the evidence behind it."
             ]
           },
           "id": "retail-loss-prevention-specialists.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide at the end of seven days whether to continue",
+          "title": "Submission and review checklist",
           "type": "list"
         },
         {
@@ -29486,8 +29495,8 @@
             "paragraphs": [
               "Job Zone 1—2 for O*NET 33-9099.02 usually corresponds to a high school or equivalent education plus on-the-job training, and is not a uniform statutory entry requirement in every country or for every employer; specific store training and position authorization must follow local rules and announcements.",
               "Investigation, customer contact, physical detention, employee data, and surveillance access all follow local law and employer procedures; a loss prevention job title itself grants no police or private investigator power.",
-              "Fictional A1—A5 can only demonstrate fact checking, records, escalation, and handover, not investigative technique, enforcement ability, on-site conflict handling, or real evidence custody ability.",
-              "Retail loss prevention specialists collaborate with security, store managers, human resources, and law enforcement and must hand safety incidents, customer complaints, employee discipline, and criminal judgment to the corresponding authorized people."
+              "The paper exercise tests fact checking and handoff. Field capability depends on training and authority.",
+              "Ask about store shifts, floor checks, reporting, and escalation responsibilities."
             ]
           },
           "id": "retail-loss-prevention-specialists.path.credential-boundary.1",
@@ -29504,16 +29513,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has not obtained a real loss prevention recruitment sample with comparable occupational identity, region, period, duties, work hours, and pay; no uniform national education, age, height, or wage threshold is implied. When job seeking, check the store, evening shifts, system permissions, conflict protocols, preceptorship, and pay composition, and keep the original announcement.",
-              "US 33-9099 broader occupation group wages and employment projections cannot serve as a standalone retail loss prevention position quote; fictional exercises are not an employer recruitment sample."
+              "Yuanmou Chukelong supermarket loss prevention. The county job list separates loss prevention from cashier and stock roles and mentions store pace and customer service.",
+              "Old Navy asset protection specialist. The employer role includes store loss prevention, safety reporting, and team collaboration."
             ]
           },
           "id": "retail-loss-prevention-specialists.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "d017-cn-main",
+            "d017-us-example"
           ],
           "title": "Recruitment sample note",
           "type": "notice"
@@ -29840,7 +29847,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Fictional A1—A5 can list discrepancies, customer disputes, and supervisor takeover without making accusations alone."
+              "Practice preserving the discrepancy, its sources, and the next owner."
             ]
           },
           "id": "retail-loss-prevention-specialists.path.career-path-block.30",
@@ -31538,7 +31545,7 @@
                 ]
               },
               {
-                "answer": "No conclusion can be drawn from a system prompt or a single image alone. Check the original records first, protect personal safety first, and hand the matter to a supervisor or authorized person per store protocol.",
+                "answer": "Reconcile inventory discrepancies against original records. Any incident response follows applicable rules, employer policy, and authorization.",
                 "id": "retail-loss-prevention-specialists.faq.2",
                 "question": "Can they detain someone directly upon suspected theft?",
                 "question_key": "career.faq.retail-loss-prevention-specialists.q2",
@@ -31584,7 +31591,7 @@
                 "question_key": "career.faq.retail-loss-prevention-specialists.us-pay"
               },
               {
-                "answer": "Use fictional store inventory discrepancies to practice factual recording, evidence gaps, and supervisor escalation; show reviewable thinking when job seeking, then accept the employer's formal training.",
+                "answer": "In section 09, “Entry, qualifications, and career development,” try LP-01: Reconcile a store inventory discrepancy. Save a first draft before checking the key.",
                 "id": "retail-loss-prevention-specialists.faq.7",
                 "question": "How should someone with no security experience prepare?",
                 "question_key": "career.faq.retail-loss-prevention-specialists.education-path"
@@ -31606,6 +31613,15 @@
                 "id": "retail-loss-prevention-specialists.faq.10",
                 "question": "What career development directions are there?",
                 "question_key": "career.faq.retail-loss-prevention-specialists.outlook-transition"
+              },
+              {
+                "answer": "X: 23 − 24 = −1. The physical count is one below the system at 18:00.\n\nY: 10 − 10 = 0. The records agree at that time.\n\nM8 is a lead to check. Receipt and adjustment are unverified, and the verbal handoff does not establish the cause.\n\nAsk inventory to verify receipt, posting time, and the link to C9. Preserve the original count.\n\nKeep X open for review. The authorized supervisor decides closure. The supplied records establish no individual conduct.\n\nScore each item 0–2: version and evidence, item-by-item decisions, unknown scope, and approval and handoff.\n\nAward 2 for complete and traceable work, 1 for partial work, and 0 for missing evidence or exceeding authority.",
+                "id": "retail-loss-prevention-specialists.faq.11",
+                "question": "LP-01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.retail-loss-prevention-specialists.exercise-answer-key",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31626,7 +31642,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Retail loss prevention tasks and interests use O*NET 33-9099.02; US wages and employment use the broader BLS 33-9099 group; Chinese industry background uses National Bureau of Statistics 2025 urban unit wages."
+              "LP-01 is a fictional exercise for this page."
             ]
           },
           "id": "retail-loss-prevention-specialists.sources.source-card.1",
@@ -31640,16 +31656,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational tasks follow this page's O*NET and related BLS occupational materials; US wages retain the original precise or clearly labeled parent category/composite basis, and employment trends use the BLS 2025—2035 projections. Chinese wage additions use National Bureau of Statistics 2025 pre-tax averages for the wholesale and retail trade industry and broad jobs, clearly marked as not this occupation's wage and not an AI attribution."
+              "The original listing covers checking merchandise for expiry, damage, or loss and reporting findings."
             ]
           },
           "id": "retail-loss-prevention-specialists.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "bls",
-            "ep",
-            "nbs",
-            "editor"
+            "d017-cn-context"
           ],
           "type": "prose"
         },
@@ -31658,12 +31670,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The Chinese text is a career exploration note. Fictional store exercises do not represent employer investigative authority; accessing surveillance, contacting customers, and handling personal information must comply with local rules and employer authorization."
+              "The county job list separates loss prevention from cashier and stock roles and mentions store pace and customer service."
             ]
           },
           "id": "retail-loss-prevention-specialists.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "d017-cn-main"
           ],
           "type": "prose"
         },
@@ -31672,13 +31684,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The Chinese text on this page explains the scope of the US official occupation and does not establish mutual recognition of qualifications; all fictional exercise materials are editorial designs and do not represent employer standards or legal requirements. Personal results, orders, and payment information do not enter public pages."
+              "U.S. wages and employment projections are for the broader 33-9099 group. The postings illustrate duties for individual jobs."
             ]
           },
           "id": "retail-loss-prevention-specialists.sources.source-card.4",
           "source_refs": [
             "editor",
-            "privacy"
+            "privacy",
+            "d017-cn-main",
+            "d017-us-example"
           ],
           "type": "prose"
         }
@@ -31717,13 +31731,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the retail loss prevention specialists career page",
@@ -31945,15 +31959,15 @@
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "FermatMind editorial summary: this page extracts only conclusions related to retail loss prevention tasks or the corresponding statistical basis.",
-                  "Fictional exercises and decision recommendations, not official statistics, law, or employer authorization."
+                  "LP-01 is a fictional paper exercise.",
+                  "Keep dated counts, unknown causes, and the next owner traceable."
                 ],
-                "evidence_type": "editorial_reasoning",
+                "evidence_type": "Fictional paper exercise",
                 "id": "editor",
                 "limitation": "Fictional exercises and decision recommendations, not official statistics, law, or employer authorization.",
                 "market": "According to the page notes",
                 "name": "FermatMind editorial summary",
-                "period": "2026-09-28",
+                "period": "2026-11-09",
                 "publisher": "FermatMind",
                 "scope": "editorial",
                 "url": null
@@ -32183,6 +32197,51 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The county job list separates loss prevention from cashier and stock roles and mentions store pace and customer service."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d017-cn-main",
+                "limitation": "For task and pathway comparison.",
+                "market": "Mainland China",
+                "name": "Yuanmou Chukelong supermarket loss prevention",
+                "period": "Job listing dated 2026-01-21",
+                "publisher": "Wuding County Human Resources and Social Security Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.ynwd.gov.cn/info/2565/316841.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The original listing covers checking merchandise for expiry, damage, or loss and reporting findings."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d017-cn-context",
+                "limitation": "For task and pathway comparison.",
+                "market": "Mainland China",
+                "name": "Beijing Wumart merchandise loss prevention (reposted by Hanbin District government)",
+                "period": "Date shown where available",
+                "publisher": "Hanbin District government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hanbin.gov.cn/Content-2887980.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The employer role includes store loss prevention, safety reporting, and team collaboration."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d017-us-example",
+                "limitation": "For task and pathway comparison.",
+                "market": "United States",
+                "name": "Old Navy asset protection specialist, Jamaica, New York (R224330)",
+                "period": "Date shown where available",
+                "publisher": "Old Navy",
+                "scope": "recruitment_proxy",
+                "url": "https://www.gapinc.com/en-us/jobs/w43/30/asset-protection-specialist"
               }
             ]
           },
@@ -35273,7 +35332,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "How much do retail loss prevention specialists earn in the United States?",
+        "heading": "U.S. wage reference for the broader 33-9099 group",
         "industry_heading": "How much do US wages differ by industry?",
         "industry_period": "2025 (broader occupation group; not independent loss prevention pay)",
         "industry_rows": [
@@ -35489,7 +35548,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person suits retail loss prevention specialists?"
+        "title": "Would retail loss prevention suit me?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36871,7 +36930,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my occupational interests fit retail loss prevention specialists",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36993,6 +37052,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which work direction within this occupation are you more likely to suit?",
       "interface.fit.interest_code_heading": "How to understand interest codes",
+      "interface.quick_decision.suit_heading": "Who tends to enjoy retail loss prevention?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "US salary reference",
@@ -37148,7 +37208,7 @@
         "occupation_scope": "BLS 33-9099 other protective service workers; includes positions beyond retail loss prevention",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "bls"
         ]
       },
       {
@@ -37184,7 +37244,7 @@
         "occupation_scope": "BLS 33-9099 other protective service workers; includes positions beyond retail loss prevention",
         "period": "2025",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
@@ -37196,7 +37256,7 @@
         "occupation_scope": "BLS 33-9099 other protective service workers; includes positions beyond retail loss prevention",
         "period": "2025–2035 projections",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
@@ -37208,7 +37268,7 @@
         "occupation_scope": "BLS 33-9099 other protective service workers; includes positions beyond retail loss prevention",
         "period": "2025–2035 average",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
@@ -37426,14 +37486,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What retail loss prevention specialists do, how to check inventory and safety incidents, how to enter the field, and how to identify occupational boundaries. Based on O*NET 33-9099.02, distinguishing US broader occupation group statistics from Chinese industry background."
+      "text": "Explore retail loss prevention, store checks, and discrepancy handoffs. Compare job examples and try a sample inventory reconciliation."
     },
     "title": {
       "availability": "available",
       "text": "Retail Loss Prevention Specialists"
     }
   },
-  "source_content_sha256": "a16753a682328b2c34155560707db19d722587341b58af5fa2e785d7576e9698",
+  "source_content_sha256": "3c6c404bb5346014c267951acb1b6347749146c59b8274acafe34a7449e3222c",
   "subject": {
     "canonical_slug": "retail-loss-prevention-specialists",
     "name": "Retail Loss Prevention Specialists",

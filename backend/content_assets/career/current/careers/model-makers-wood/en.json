@@ -152,6 +152,9 @@
       "item:model-makers-wood.path.seven-day-trial.8": {
         "status": "pending_mapping"
       },
+      "item:model-makers-wood.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:model-makers-wood.profile.career-quick-answers-block.7": {
         "status": "mapped"
       },
@@ -13179,6 +13182,21 @@
             "onet-education"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. The product review calls for an M4 scale model. Record A has complete dimensions but cites M3. B cites M4 but has no contour check. Write what the designer or model lead should verify for each record, then ask who signs off the model review."
+            ]
+          },
+          "id": "model-makers-wood.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "title": "Check a wood model revision",
+          "type": "notice"
         }
       ]
     },
@@ -15645,6 +15663,13 @@
         "id": "model-makers-wood.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "model-makers-wood.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -15814,7 +15839,7 @@
       "text": "Wood modelmakers"
     }
   },
-  "source_content_sha256": "f749ed7461d3984fc3f9d7af178d2823fca4128b08beb72f7f63895f13f75438",
+  "source_content_sha256": "92f9d1c90aa8a70ca29e8a24d3270dc5271676df251e177fb74d9bcd82c76893",
   "subject": {
     "canonical_slug": "model-makers-wood",
     "name": "Wood modelmakers",

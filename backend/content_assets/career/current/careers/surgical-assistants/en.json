@@ -23678,16 +23678,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Observe accurate checking, team response, responsibility boundaries and continuous error correction. In the United States the occupation assists in surgery under the supervision of a surgeon; in China first check the specific physician, nurse or assistant post identity. Paper practice can only help explore interest."
+              "Paper check | Compare a fictional roster with a preoperative role card. Flag an assignment listed under two roles and write a question for the operating team lead. "
             ]
           },
           "id": "surgical-assistants.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "cn-rule",
-            "ratify",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -25040,16 +25036,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Surgical assistants assist the surgical team under the supervision of a surgeon and within applicable law, checking information, supporting preparation and tasks, and communicating and recording accurately. The U.S. 29-9093.00 is the identity baseline; Chinese posts with similar names are checked separately by actual tasks, qualification registration and institutional scope."
+              "Surgical assistants directly support procedures as part of the operating team and help maintain the sterile field. Their assigned tasks depend on training, authorization and the institution. When reviewing a job, ask who checks the work or records and which tasks require separate authorization."
             ]
           },
           "id": "surgical-assistants.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "cn-rule",
-            "ratify",
-            "editor"
+            "transfer-onet-29-9093.00"
           ],
           "type": "prose"
         }
@@ -25873,19 +25865,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Document organising and information expression can be discussed, but text generation cannot replace supervised clinical collaboration. There is no representative adoption or substitution share for this occupation; the task examples below are an editorial exploration using fictional paper inputs only. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "An approved tool can organize a draft handoff from fictional inputs. Check original values, revisions and open items, then refer the draft to the person authorized to review it. Example: Compare a fictional roster with a preoperative role card. Flag an assignment listed under two roles and write a question for the operating team lead."
             ]
           },
           "id": "surgical-assistants.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "sag",
-            "sag-moa",
-            "ratify",
-            "bls-ors",
-            "nist",
-            "editor"
+            "transfer-onet-29-9093.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -34079,6 +34065,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "The task table describes the work and its typical outputs."
+                ],
+                "id": "transfer-onet-29-9093.00",
+                "limitation": "Check duties and authorization for the actual workplace.",
+                "market": "United States",
+                "name": "O*NET 29-9093.00 occupational tasks",
+                "period": "Occupational profile",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "Occupational tasks; for combined pages applies to the named component occupation",
+                "url": "https://www.onetonline.org/link/details/29-9093.00"
+              },
+              {
+                "details": [
+                  "Use a fictional record to identify discrepancies and hand them off for review."
+                ],
+                "id": "transfer-work-check",
+                "limitation": "Paper exercise only.",
+                "market": "This page",
+                "name": "FermatMind paper check",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "Fictional occupational record",
+                "url": null
               }
             ]
           },
@@ -39667,10 +39680,10 @@
       "text": "Surgical assistants"
     }
   },
-  "source_content_sha256": "abd2f1c8f59fb6c1be90b465245bde2ada551aa45852b1ef112267208a0dbd77",
+  "source_content_sha256": "de3a6503792dc57acdd8c03dcb21bf24789b1c07fcfdd83607613fc9e2149c36",
   "subject": {
     "canonical_slug": "surgical-assistants",
     "name": "Surgical assistants",
-    "summary": "Surgical assistants assist the surgical team under a surgeon's supervision and within applicable law, checking information, supporting material preparation and tasks, and communicating and recording accurately. The U.S. 29-9093.00 is the identity baseline, and similarly named Chinese posts are checked separately by actual tasks, physician or nurse qualification registration and institutional scope. Complete fictional paper materials can be used first to observe checking and error correction, and this does not stand for clinical training or authorization."
+    "summary": "Surgical assistants directly support procedures as part of the operating team and help maintain the sterile field. Their assigned tasks depend on training, authorization and the institution."
   }
 }

@@ -1530,7 +1530,7 @@
         "status": "pending_mapping"
       },
       "item:security-management-specialists.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:security-management-specialists.sources.source-card.1": {
         "status": "mapped"
@@ -15972,8 +15972,14 @@
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -22954,7 +22960,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Use fictional premises materials to practice scoping, threats, control recommendations, residual risk and handoff; do not access real security systems."
+              "Think twice if you dislike going back and forth between field evidence and records or feel pressured to close work before review."
             ]
           },
           "id": "security-management-specialists.quick-decision.fit-decision-checklist.1",
@@ -22969,7 +22975,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Suited to people willing to gather evidence, analyze threats, design measures and communicate trade-offs; a personality type is not proof of suitability."
+              "In section 09, “Entry, qualifications, and career development,” try PS-01: Review physical security corrective-action evidence. Save a first draft before checking the key."
             ]
           },
           "id": "security-management-specialists.quick-decision.fit-decision-checklist.2",
@@ -22983,7 +22989,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Specialists assess and design, guards keep watch, installers construct and managers approve resources; job seekers must verify the role."
+              "Consider this work if you enjoy assessing physical risks, documenting corrective actions, and following up across teams."
             ]
           },
           "id": "security-management-specialists.quick-decision.fit-decision-checklist.3",
@@ -22999,7 +23005,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "This page draws on O*NET 13-1199.07, the BLS 13-1199 aggregate statistics and fictional exercises and does not predict an individual's hiring or specific risk."
+              "Separate the control objective, evidence, open issues, and closure authority."
             ]
           },
           "id": "security-management-specialists.quick-decision.fermat-decision-card.6",
@@ -23014,7 +23020,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "AI can help organize draft assessment materials; vulnerability judgments, on-site verification, remediation and risk acceptance are the responsibility of staff acting within authority."
+              "Try physical security assessment if you like turning site observations into a corrective-action list and following up with different teams until there is evidence to review."
             ]
           },
           "id": "security-management-specialists.quick-decision.fermat-decision-card.7",
@@ -23399,7 +23405,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET Job Zone 4 indicates considerable preparation and many roles require a bachelor's degree or related experience; this is not a uniform license."
+              "Most occupations in O*NET Job Zone 4 require a four-year bachelor's degree, with some exceptions. They also require considerable related preparation. Check the employer's requirements and any local credentials."
             ]
           },
           "id": "security-management-specialists.profile.career-quick-answers-block.17",
@@ -23702,6 +23708,12 @@
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/13-1199.07"
+              },
+              {
+                "entity": "O*NET Retail Loss Prevention Specialists 33-9099.02",
+                "id": "link-6",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/33-9099.02"
               }
             ]
           },
@@ -23711,7 +23723,8 @@
             "editor",
             "editor",
             "editor",
-            "editor"
+            "editor",
+            "d017-retail-onet"
           ],
           "type": "links"
         },
@@ -23720,14 +23733,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "13-1199.07 assesses security threats, audits controls and designs systems and processes; managers approve and coordinate resources, guards keep watch, installers construct and first-line supervisors manage teams."
+              "13-1199.07 assesses security threats, audits controls and designs systems and processes; managers approve and coordinate resources, guards keep watch, installers construct and first-line supervisors manage teams. If you prefer investigating merchandise losses, inventory discrepancies, and store audit findings, compare retail loss prevention specialists. Both roles can check physical controls, but physical security focuses on facility risks, control testing, and follow-up on corrective actions."
             ]
           },
           "id": "security-management-specialists.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "editor",
             "onet",
-            "editor"
+            "d017-retail-onet"
           ],
           "type": "prose"
         },
@@ -26247,7 +26259,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 13-1199.07 Job Zone 4; many roles require a bachelor's degree or related experience"
+              "O*NET 13-1199.07 Job Zone 4: most occupations require a four-year bachelor's degree and considerable related preparation"
             ]
           },
           "id": "security-management-specialists.china-salary.career-snapshot-primary-locale.29",
@@ -26545,12 +26557,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: job qualifications, pay structure and assessment and remediation authority for matching Chinese recruitment were not obtained; no job quote is provided."
+              "The Shanghai AI Laboratory posting states its hiring requirements. It does not disclose pay structure or who has final authority to close corrective actions, so no job pay quote is available here."
             ]
           },
           "id": "security-management-specialists.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "editor"
+            "editor",
+            "d017-cn-main"
           ],
           "type": "prose"
         },
@@ -26601,12 +26614,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese recruitment check: assessment and remediation authority not obtained"
+              "Shanghai recruitment sample: final corrective-action closure authority undisclosed"
             ]
           },
           "id": "security-management-specialists.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "editor"
+            "d017-cn-main"
           ],
           "type": "prose"
         },
@@ -27362,31 +27375,31 @@
                 "entity": "Big Five personality test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI personality test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and reasoning test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional intelligence test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "First-line supervisors of security workers",
@@ -27737,7 +27750,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "There is no validated data on Enneagram type and performance in this occupation."
+              "This page has not identified validation data linking Enneagram type to performance in this occupation."
             ]
           },
           "id": "security-management-specialists.fit.personality-fit-block.15",
@@ -29115,17 +29128,17 @@
               {
                 "id": "education",
                 "values": [
-                  "No single Chinese employer announcement adopted",
-                  "No announcement was obtained in which the job identity, assessment scope, authorization and pay are all verifiable; no national threshold is inferred.",
+                  "Hiring criteria and pay disclosure in the Shanghai posting",
+                  "The Shanghai AI Laboratory posting lists duties and hiring requirements. It does not disclose pay.",
                   "Verify region, premises, systems, travel, qualifications and the approval chain."
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "Purpose of the fictional work",
-                  "M1–M6 only demonstrate assessment, recommendations and review and do not prove authority to construct or accept risk.",
-                  "Assets, premises and test results are entirely fictional."
+                  "Yima project manager duties (procurement example)",
+                  "Page 32 of the Yima procurement document assigns risk assessment and the development and implementation of security plans to the project manager.",
+                  "Ask whether the role emphasizes risk assessment, system planning, implementation review, or site operations."
                 ]
               },
               {
@@ -29139,9 +29152,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "Employer process check",
-                  "This occupation may assess and design and may also take part in budgeting and scheduling, contractor oversight, control acceptance or installation and maintenance; construction, budget approval and risk acceptance depend on the specific role and authorization.",
-                  "Training certificates do not automatically grant approval authority."
+                  "Shanghai AI Laboratory physical security specialist",
+                  "The posting covers site physical controls, protection across different spaces, and provider management.",
+                  "Ask whether the role emphasizes risk assessment, system planning, implementation review, or site operations."
                 ]
               }
             ]
@@ -29149,7 +29162,10 @@
           "id": "security-management-specialists.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "d017-cn-main",
+            "d017-cn-context",
+            "d017-us-example"
           ],
           "title": "What do employers usually look for in recruitment?",
           "type": "cards"
@@ -29162,37 +29178,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional materials: office building security assessment",
-                  "M1 | A fully fictional office building F. Assets include east gate D, north passage N and server room M; the scope requires covering access control at all three.",
-                  "M2 | The D access control log shows 3 anomalous door openings and on-site cameras can be reviewed; the anomaly has been found but the cause is unverified.",
-                  "M3 | The N passage lighting and cameras were verified as normal from records; the status is control verified.",
-                  "M4 | The M server room has no on-site access authorization, so there was no inspection or testing; the status is not assessed and must not be written as passed.",
-                  "M5 | The D alarm linkage has not yet been trigger-tested; the status is untested and authorized technical staff should test and record it.",
-                  "M6 | Management wants to close the project immediately. With D's cause unverified, M not assessed and the D linkage untested, all-safe must not be written; list owners, deadlines and residual risk awaiting approval."
+                  "Fictional inputs",
+                  "Fictional facility register Q6 requires three authorized tests for control A and an owner’s review record for control B. Only A and B are in scope.",
+                  "Log J4 shows two authorized tests for A, both meeting the stated criteria. A third test was not run. B has an installation completion note from facilities but no owner review. The project brief says both can be closed.",
+                  "The test lead verifies tests, the facilities owner reviews installation, and the project security lead approves closure. Review the fictional records only."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Tasks: evidence, countermeasures and handoff",
-                  "T1 | List the evidence status of D, N and M, separating verified, anomalous, not assessed and untested.",
-                  "T2 | Propose the next controls and review responsibilities for D and M and judge whether the project can be written as closed."
+                  "Task and deliverable",
+                  "Submit a two-row action register and revise the brief. Show completed work, outstanding evidence, reviewers, and closure authority.",
+                  "Track installation, testing, review, and closure separately.",
+                  "Use paper or a local spreadsheet and identify the evidence."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference answers and boundaries",
-                  "The N control is verified; D has an anomaly but the cause is unverified and the linkage untested; M is not assessed.",
-                  "D requires investigating the door opening events and testing the alarm, and M requires authorization before on-site assessment; untested or unassessed items must not be written as passed.",
-                  "Management pressing to close the project does not equal accepted risk. Record the evidence, assumptions, responsible owners, deadlines, review and authorized approval; the exercise involves no real system operation."
+                  "Before checking your work",
+                  "Save your own first draft on day 6. Follow the day 7 instructions to open the key.",
+                  "Work independently.",
+                  "Keep the versions.",
+                  "Leave missing evidence open."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Review checklist",
-                  "Use fictional materials only; verify that N is verified, D has an anomaly with an untested linkage, and M is not assessed, with residual risk pending."
+                  "Authority boundaries",
+                  "Use the fictional records only.",
+                  "Do not approve or release real work."
                 ]
               }
             ]
@@ -29201,7 +29217,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: fictional office building threat assessment and control recommendations",
+          "title": "PS-01 | Review physical security corrective-action evidence",
           "type": "cards"
         },
         {
@@ -29212,33 +29228,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Assessment scope card",
-                  "List the D, N and M assets, authorization and inspection scope.",
-                  "Contains no real premises layout."
+                  "Version and material record",
+                  "Identify the original record and current version.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "Evidence status table",
-                  "N is verified; D has an anomaly with an untested linkage; M is not assessed.",
-                  "Untested does not equal passed."
+                  "Inputs and status",
+                  "Compare source records, targets, and discrepancies.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Countermeasures and review page",
-                  "D requires investigation and testing and M requires authorized assessment; list owners and deadlines.",
-                  "Do not operate real systems on your own."
+                  "Open checks and handoff",
+                  "Separate open checks, verified findings, and owners.",
+                  "Use the supplied records."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Risk handoff minutes",
-                  "List findings, assumptions, failed items, untested items and the residual risk approver separately.",
-                  "Pressing to close a project does not equal accepting risk."
+                  "Delivery boundaries",
+                  "Record physical checks and approval status.",
+                  "Use the supplied records."
                 ]
               }
             ]
@@ -29269,27 +29285,27 @@
             "rows": [
               [
                 "Interview: evidence classification",
-                "Which has been verified",
-                "The N control is verified",
-                "Fictional records only"
+                "Identify the original record and current version.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Interview: not assessed",
-                "Can M be written as passed",
-                "No, no access authorization was granted",
-                "Needs on-site assessment"
+                "Compare source records, targets, and discrepancies.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Job trial: linkage testing",
-                "How should D be handled",
-                "Mark as untested and hand to authorized technical staff for testing",
-                "Must not falsely record a pass"
+                "Separate open checks, verified findings, and owners.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ],
               [
                 "Handoff: project closure",
-                "Can it be written as secure",
-                "No; D and M are still pending",
-                "Residual risk approval is verified separately"
+                "Record physical checks and approval status.",
+                "Name the source, evidence, and next owner.",
+                "Record missing evidence separately."
               ]
             ]
           },
@@ -29309,50 +29325,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day one",
-                  "Read M1–M6 and list the assets, scope and authorization."
+                  "Day 1",
+                  "Record the subject and versions."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day two",
-                  "Complete the fictional D/N/M evidence table."
+                  "Day 2",
+                  "Identify the original record and current version."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day three",
-                  "Organize the evidence that N is verified."
+                  "Day 3",
+                  "Compare source records, targets, and discrepancies."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day four",
-                  "Mark D as anomalous with an unverified cause and an untested linkage."
+                  "Day 4",
+                  "Separate open checks, verified findings, and owners."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day five",
-                  "Mark M as not assessed and do not presume a result."
+                  "Day 5",
+                  "Record physical checks and approval status."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day six",
-                  "Write the countermeasures, owners and deadlines handoff card."
+                  "Day 6",
+                  "Finish and save your own first handoff draft with your records and reasons. No partner is required."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day seven",
-                  "Organize the fictional work and verify the target role's qualifications, travel and approval chain."
+                  "Day 7",
+                  "After saving your day 6 draft, open “PS-01 answer key and rubric (open on day 7)” in the FAQ. Use the rubric and record one revision with its reason."
                 ]
               }
             ]
@@ -29369,20 +29385,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Keep the first assessment draft and the revision and explain the status changes.",
-              "Verify that N is verified, D is anomalous and untested, and M is not assessed.",
-              "State that neither untested nor unassessed items may be written as passed.",
-              "List the review responsibilities and deadlines for D and M.",
-              "All practice materials are fictional and contain no real layouts or system passwords.",
-              "Verify the target role's assessment, design, testing and approval authority.",
-              "Budget and residual risk are approved by authorized managers."
+              "Match each control to its target and available records.",
+              "Record installation, testing, review, and closure separately.",
+              "Identify the missing evidence and who should check it.",
+              "Explain the evidence for the brief and which decisions need approval.",
+              "Use only the fictional records and keep the first draft for review.",
+              "Use the named answer key on day 7.",
+              "Record one revision and the evidence behind it."
             ]
           },
           "id": "security-management-specialists.path.seven-day-decision.1",
           "source_refs": [
             "editor"
           ],
-          "title": "How to decide at the end of seven days whether to continue",
+          "title": "Submission and review checklist",
           "type": "list"
         },
         {
@@ -29480,10 +29496,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "M1–M6 are fictional desk exercises and do not authorize a real security audit, engineering construction or risk acceptance.",
+              "PS-01 is a tabletop corrective-action review. Actual audits, engineering, and risk closure follow organizational authority.",
               "The O*NET 13-1199.07 Job Zone 4 does not replace local licensing or specific employer requirements; BLS 13-1199 is broad occupational statistics.",
               "High-risk defects, configuration leaks or delayed remediation are escalated through real institutional processes.",
-              "U.S. aggregate wages, employment and openings cannot be extrapolated to Chinese wages or an individual's hiring probability."
+              "Ask whether the role emphasizes risk assessment, system planning, implementation review, or site operations."
             ]
           },
           "id": "security-management-specialists.path.credential-boundary.1",
@@ -29500,16 +29516,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no Chinese precise announcement in which identity, qualifications, assessment scope and pay are all verifiable was adopted; a uniform threshold is not inferred from a single role.",
-              "M1–M6 are not employer exam questions; a real role must be verified for organization, systems, site, standards, the approval chain and pay."
+              "Shanghai AI Laboratory physical security specialist. The posting covers site physical controls, protection across different spaces, and provider management.",
+              "U.S. Department of Justice physical security specialist. The federal posting is for a non-supervisory physical security role. Read its duties and requirements in the agency context."
             ]
           },
           "id": "security-management-specialists.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "editor",
-            "editor",
-            "editor"
+            "d017-cn-main",
+            "d017-us-example"
           ],
           "title": "Note on the recruitment sample",
           "type": "notice"
@@ -29690,7 +29704,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "First verify the target role's physical security, system design or personnel security scope; demonstrate evidence and recommendations using the fictional M1–M6 D anomaly, N verified and M not assessed."
+              "Ask whether the role focuses on physical security, system planning, or implementation review, then use section 09 to show how you document corrective action."
             ]
           },
           "id": "security-management-specialists.path.career-path-block.20",
@@ -31545,7 +31559,7 @@
                 ]
               },
               {
-                "answer": "O*NET places 13-1199.07 in Job Zone 4: considerable preparation is needed and many roles require a bachelor's degree or related experience; this is not a uniform license.",
+                "answer": "O*NET places 13-1199.07 in Job Zone 4. Most occupations in this zone require a four-year bachelor's degree, with some exceptions. Considerable related preparation is also needed. Check the employer and local requirements.",
                 "id": "security-management-specialists.faq.3",
                 "question": "What are the U.S. preparation requirements?",
                 "question_key": "career.faq.security-management-specialists.q3",
@@ -31589,15 +31603,15 @@
                 "question_key": "career.faq.security-management-specialists.education-path"
               },
               {
-                "answer": "Use fictional M1–M6 office building materials to submit the asset scope, evidence status, control recommendations and remediation handoff card.",
+                "answer": "In section 09, “Entry, qualifications, and career development,” try PS-01: Review physical security corrective-action evidence. Save a first draft before checking the key.",
                 "id": "security-management-specialists.faq.8",
                 "question": "How can entry-level ability be demonstrated?",
                 "question_key": "career.faq.security-management-specialists.credentials"
               },
               {
-                "answer": "The N control is verified; D has an unverified cause and an untested linkage; M is not assessed. All-safe or project closed must not be written.",
+                "answer": "Confirm the control objective, retest conditions, and evidence scope. Record who can close the issue.",
                 "id": "security-management-specialists.faq.9",
-                "question": "How is the status judged in the fictional exercise?",
+                "question": "How can a physical security fix be verified?",
                 "question_key": "career.faq.security-management-specialists.risk-boundary"
               },
               {
@@ -31605,6 +31619,15 @@
                 "id": "security-management-specialists.faq.10",
                 "question": "Which adjacent occupations can you move into?",
                 "question_key": "career.faq.security-management-specialists.outlook-transition"
+              },
+              {
+                "answer": "A has two qualifying tests against a target of three, so one test is missing.\n\nAsk the test lead to arrange the third authorized test and retain the result.\n\nB has an installation record. Owner review is missing, so do not mark it reviewed.\n\nUpdate the brief with the evidence and open conditions for both controls. Leave approval with the project security lead.\n\nKeep both actions open. The authorized owner records closure and remaining risk.\n\nScore each item 0–2: version and evidence, item-by-item decisions, unknown scope, and approval and handoff.\n\nAward 2 for complete and traceable work, 1 for partial work, and 0 for missing evidence or exceeding authority.",
+                "id": "security-management-specialists.faq.11",
+                "question": "PS-01 answer key and rubric (open on day 7)",
+                "question_key": "career.faq.security-management-specialists.exercise-answer-key",
+                "source_refs": [
+                  "editor"
+                ]
               }
             ]
           },
@@ -31625,7 +31648,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Precise occupational tasks, aggregate statistics and fictional exercises are kept separate; AI only assists with organizing and does not replace on-site assessment or risk acceptance."
+              "PS-01 is a fictional exercise for this page."
             ]
           },
           "id": "security-management-specialists.sources.source-card.1",
@@ -31639,14 +31662,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 13-1199.07 describes tasks; the BLS 13-1199 aggregate wage and projection cannot be treated as standalone; the China background uses National Bureau of Statistics 2025 leasing and business services data."
+              "The service specification lists risk assessment and security plans as project requirements."
             ]
           },
           "id": "security-management-specialists.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "bls",
-            "nbs"
+            "d017-cn-context"
           ],
           "type": "prose"
         },
@@ -31655,12 +31676,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Sources for this round of occupation, wage, employment and interest data were checked on 2026-10-12; unchanged sources keep their historical records. The 2025 parent-level national percentiles, 2023 parent-level industry averages, the 2025–2035 parent-level projection and the fictional materials are kept separate; only the United States row is taken from the state wage pages."
+              "The posting covers site physical controls, protection across different spaces, and provider management."
             ]
           },
           "id": "security-management-specialists.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "d017-cn-main"
           ],
           "type": "prose"
         },
@@ -31669,13 +31690,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The Chinese text explains the U.S. classification and does not establish mutual recognition of security credentials or wages between China and the United States; real assessment, privacy and contract matters follow local requirements and the employer's original text."
+              "U.S. wages and employment projections are for the broader 13-1199 group. The postings illustrate duties for individual jobs."
             ]
           },
           "id": "security-management-specialists.sources.source-card.4",
           "source_refs": [
             "editor",
-            "privacy"
+            "privacy",
+            "d017-cn-main",
+            "d017-us-example"
           ],
           "type": "prose"
         }
@@ -31714,13 +31737,13 @@
                 "entity": "secondary_cta",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/mbti-personality-test-16-personality-types"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "secondary_cta",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "Back to the Security Management Specialists career page",
@@ -31755,7 +31778,7 @@
                 "evidence_type": "Precise tasks",
                 "id": "onet",
                 "limitation": "Security assessment and system process design; wages and employment fall under the 13-1199 aggregate.",
-                "market": "United States / International",
+                "market": "United States",
                 "name": "O*NET 13-1199.07 occupational details",
                 "period": "2026 profile",
                 "publisher": "O*NET OnLine",
@@ -31771,7 +31794,7 @@
                 "evidence_type": "Broad occupational survey employment and average wage",
                 "id": "bls",
                 "limitation": "13-1199 covers various business operations specialists and is not standalone for this occupation.",
-                "market": "United States / International",
+                "market": "United States",
                 "name": "BLS 2025 OEWS 13-1199 national table",
                 "period": "May 2025",
                 "publisher": "U.S. Bureau of Labor Statistics",
@@ -31787,7 +31810,7 @@
                 "evidence_type": "Broad occupational employment, openings and typical education",
                 "id": "ep",
                 "limitation": "The 13-1199 aggregate line is not a standalone 13-1199.07 projection.",
-                "market": "United States / International",
+                "market": "United States",
                 "name": "BLS 2025–2035 projection 13-1199",
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
@@ -31803,7 +31826,7 @@
                 "evidence_type": "Broad occupational annual wage percentiles",
                 "id": "oews",
                 "limitation": "O*NET states the data come from Business Operations Specialists, All Other.",
-                "market": "United States / International",
+                "market": "United States",
                 "name": "O*NET 2025 wage percentiles 13-1199 aggregate",
                 "period": "2025 wages",
                 "publisher": "O*NET OnLine / BLS",
@@ -31942,15 +31965,15 @@
               {
                 "accessed_at": "Editorial time point for this page",
                 "details": [
-                  "Used to organize the task breakdown, exercise boundaries and decision prompts for Security Management Specialists; factual parts still follow the official sources on the same page.",
-                  "Used to organize the task breakdown, exercise boundaries and decision prompts for Security Management Specialists; factual parts still follow the official sources on the same page."
+                  "PS-01 is a fictional paper exercise.",
+                  "Separate the control objective, evidence, open issues, and closure authority."
                 ],
-                "evidence_type": "editorial_reasoning",
+                "evidence_type": "Fictional paper exercise",
                 "id": "editor",
                 "limitation": "Editorial recommendations and fictional exercises, not official occupational statistics or legally binding credential conclusions.",
                 "market": "As described on the page",
                 "name": "FermatMind editorial summary",
-                "period": "Editorial time point for this page",
+                "period": "2026-11-09",
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
@@ -32253,6 +32276,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The posting covers site physical controls, protection across different spaces, and provider management."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d017-cn-main",
+                "limitation": "Supports this role’s duties and hiring requirements. The posting does not disclose pay.",
+                "market": "Mainland China",
+                "name": "Shanghai AI Laboratory physical security specialist",
+                "period": "Shanghai job listing dated 2026-10-12",
+                "publisher": "Shanghai AI Laboratory",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shlab.org.cn/joinus/detail/7654837551317158185?mode=social"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Page 32 of the Yima procurement document assigns risk assessment and the development and implementation of security plans to the project manager."
+                ],
+                "evidence_type": "primary_document",
+                "id": "d017-cn-context",
+                "limitation": "This procurement describes an adjacent role. Check specialist entry requirements and pay separately.",
+                "market": "Mainland China",
+                "name": "Yima physical security service specifications",
+                "period": "Date shown where available",
+                "publisher": "Yima physical security service specifications",
+                "scope": "contextual",
+                "url": "https://erqi.zfcg.henan.gov.cn/cmsweb81e27e/nas/webfile2024/sanmenxia/rootfiles/2026/02/02/424733a3e7884273972992e476020cdc.pdf#page=32"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The federal posting is for a non-supervisory physical security role. Read its duties and requirements in the agency context."
+                ],
+                "evidence_type": "job_posting_sample",
+                "id": "d017-us-example",
+                "limitation": "For task and pathway comparison.",
+                "market": "United States",
+                "name": "U.S. Department of Justice physical security specialist (Washington, DC, non-supervisory)",
+                "period": "Date shown where available",
+                "publisher": "U.S. Department of Justice (USAJOBS)",
+                "scope": "recruitment_proxy",
+                "url": "https://www.usajobs.gov/job/891258400"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Tasks include investigating store losses, inventory discrepancies, and store audits."
+                ],
+                "evidence_type": "O*NET occupational tasks",
+                "id": "d017-retail-onet",
+                "limitation": "For adjacent occupation task comparison.",
+                "market": "United States",
+                "name": "O*NET Retail Loss Prevention Specialists 33-9099.02",
+                "period": "2026 occupational profile",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/33-9099.02"
               }
             ]
           },
@@ -32377,6 +32460,22 @@
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "entry": "link-5",
+              "field": "entity"
+            }
+          },
+          {
+            "href": {
+              "$link": "security-management-specialists.direction-comparison.adjacent-career-comparison-table.7",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-6",
+              "field": "url"
+            },
+            "label": {
+              "$link": "security-management-specialists.direction-comparison.adjacent-career-comparison-table.7",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-6",
               "field": "entity"
             }
           }
@@ -35122,7 +35221,7 @@
           "ui": {
             "ai_heading": "Will AI affect the wages of Security Management Specialists?",
             "driver_heading": "Which industries and directions use this occupation?",
-            "official_heading": "Public recruitment sample (no matching sample obtained)",
+            "official_heading": "Shanghai recruitment sample (pay undisclosed)",
             "scenario_caption": "Educational background, common job directions and verification advice (editorial compilation, not wage statistics)",
             "scenario_heading": "With different educational backgrounds, which job directions do Security Management Specialists usually start from?",
             "scenario_interpretation_label": "Notes and verification advice",
@@ -35343,7 +35442,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "How much do U.S. Security Management Specialists earn?",
+        "heading": "U.S. wage reference for the broader 13-1199 group",
         "industry_heading": "U.S. 13-1199 aggregate industry wages (2023)",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -35565,7 +35664,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person is suited to Security Management Specialists?"
+        "title": "Would physical security management suit me?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36947,7 +37046,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests suit Security Management Specialists",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37069,6 +37168,7 @@
     "interface": {
       "interface.fit.directions_heading": "Which work direction within this occupation are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to understand interest codes",
+      "interface.quick_decision.suit_heading": "Who tends to enjoy physical security assessment?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. wage reference",
@@ -37505,14 +37605,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Learn about the threat assessment, process design, auditing and risk recommendations of Security Management Specialists 13-1199.07, and the scope limits of the U.S. 13-1199 aggregate statistics."
+      "text": "Explore physical security assessment, risk controls, and corrective action review. Compare roles and try a sample action register."
     },
     "title": {
       "availability": "available",
       "text": "Security Management Specialists"
     }
   },
-  "source_content_sha256": "fbe924bf46989c86d69d2eacf24dde9aba62ad90b19f105d2c82304660172816",
+  "source_content_sha256": "f509def78d6a8713f4ba0556ea6588d0fd4706b860bf82414752d6f90b189ccc",
   "subject": {
     "canonical_slug": "security-management-specialists",
     "name": "Security Management Specialists",

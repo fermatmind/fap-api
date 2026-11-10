@@ -1289,6 +1289,9 @@
       "item:paving-surfacing-and-tamping-equipment-operators.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:paving-surfacing-and-tamping-equipment-operators.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:paving-surfacing-and-tamping-equipment-operators.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30538,6 +30541,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Segment P2 has an elevation entry but no thickness check. The P3 thickness sheet is attached by mistake. Write the checks to hand to the site lead."
+            ]
+          },
+          "id": "paving-surfacing-and-tamping-equipment-operators.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Check a paving segment handover",
+          "type": "notice"
         }
       ]
     },
@@ -36924,6 +36942,13 @@
         "id": "paving-surfacing-and-tamping-equipment-operators.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "paving-surfacing-and-tamping-equipment-operators.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37297,7 +37322,7 @@
       "text": "Equipment operators"
     }
   },
-  "source_content_sha256": "fad5b09c332366575d9f25c6b356c61af1d57808c26ff7bf212fa2665a2c4cc5",
+  "source_content_sha256": "d67e6d2ab4b002f71b88d8e3f458da24a4bc73c9d77118723b1ba33f78904ac3",
   "subject": {
     "canonical_slug": "paving-surfacing-and-tamping-equipment-operators",
     "name": "Paving, Surfacing, and Tamping Equipment Operators",

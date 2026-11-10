@@ -23,9 +23,6 @@
       "fact:content-us-salary-1": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -1512,7 +1509,7 @@
         "status": "pending_mapping"
       },
       "item:glass-blowers-molders-benders-and-finishers.sources.faq.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:glass-blowers-molders-benders-and-finishers.sources.source-card.1": {
         "status": "mapped"
@@ -23786,12 +23783,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Editorial exercise H1 | 6 complete fictional inputs and reference solutions are given below; use 90 minutes to check dimensional limits, cooling record arithmetic, missing permits, versions, handover time limits and listed costs. Read paper records only; do not heat, blow, cut or operate glass equipment. Deliver a result table, an issues table, a V1 to V2 revision table and a handover of no more than 200 characters."
+              "Find “Work order G: Glass forming records” under “Entering the field, qualifications, and career development.”"
             ]
           },
           "id": "glass-blowers-molders-benders-and-finishers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         },
@@ -23828,12 +23825,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "H1 only observes paper checking and evidence stratification habits; it cannot prove real blowing feel, equipment operation, product qualification, qualifications, long-term fit or employment outcomes. Once interested, check the real job's training and conditions."
+              "See “Work order G: Glass forming records” under “Entering the field, qualifications, and career development.”"
             ]
           },
           "id": "glass-blowers-molders-benders-and-finishers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
           "type": "prose"
         }
@@ -24107,7 +24104,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Glass occupation profile | 51-9195.04 shapes molten glass according to patterns, covering heating, blowing, forming, bending and joining, cutting and trimming, finishing, measurement and records, and also design creation and developing sketches into specifications. The electric kiln task at importance 70 refers to moulding glass sheets and must not be translated directly as annealing. The O*NET2026 page context shows 96% wearing common protection daily, 83% using their hands continually, 70% exposed to minor injuries daily and 50% facing extreme temperatures daily; these are not accident rates. US 2025 parent occupation 51-9195.00 median wage 46,170 USD per year and 22.20 USD per hour; this round's employment uses the BLS direct 2025—2035 parent occupation series with 43,000 to 45,500, growth 5.8% and average annual openings 5,100; O*NET has presented 2025 employment and the 2025—2035 trend this round, consistent with the BLS current-period figures on this page, and the parent occupation and the precise scope must still be distinguished. The 2024 parent occupation industry share for manufacturing is 70%, which is not the glass sub-occupation's employer distribution. This round's 2025 parent occupation manufacturing share is 64%, again not the glass sub-occupation's employer distribution, and the 2024 figure of 70% is historical only."
+              "Glass blowers and formers shape glass to a pattern by blowing, molding, bending or finishing it. They check dimensions and defects before handing off the work. U.S. wages and projections cover the broader parent occupation."
             ]
           },
           "id": "glass-blowers-molders-benders-and-finishers.profile.definition-block.11",
@@ -25133,7 +25130,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no precise generative AI exposure level, adoption rate, substitution rate or income causality for 51-9195.04 was obtained. Editorial task analysis: assistance may be explored for sketches, record organization, and inventory and document drafts; effects must be checked by comparing the original draft with the tool-assisted draft, and automation or ordinary software must not be equated with generative AI. The detailed occupation page lists 4 software categories — Billing, Outlook, Inventory control and Excel; the hot technologies page lists only Excel and Outlook, and the 2025 US job-posting mention shares are all NA. Software entries do not prove widespread use, actual adoption rates, AI use or productivity gains. AI Impact Score 17% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Tools can help organize sketches, compare inspection records and draft handoffs. Authorized staff verify forming, equipment condition and quality release."
             ]
           },
           "id": "glass-blowers-molders-benders-and-finishers.ai-impact.ai-impact-table.18",
@@ -28040,31 +28037,31 @@
                 "entity": "Big Five Personality Test",
                 "id": "link-2",
                 "relation": "career.test",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "link-3",
                 "relation": "career.test",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Enneagram Personality Test",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/en/tests/enneagram-personality-test"
+                "url": "/en/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/en/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/en/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "Tool and Die Maker direction",
@@ -29771,7 +29768,7 @@
                   "M3 | fictional record: 760°C at 15:00 and 720°C at 15:10; find the average rate of temperature change between the two points. No material, sensor calibration or approved curve was given, so annealing qualification cannot be judged. V1 mistakenly wrote 40°C/min.",
                   "M4 | training record A has expired, B is valid but no operation approval was given; V1 mistakenly wrote that four pieces all passed. Organize only the paper package pending review and do not treat it as process or product release. V2 retains V1, records the actual correction time, the reason and the pending S review, and fabricates no signature.",
                   "M5 | the current time is 15:28 and the internal handover deadline is 16:00; Q was asked about the missing items at 15:13 and has not replied. Work out the remaining time and the time already waited; no reply does not equal approval, and only the review material may be handed over.",
-                  "M6 | listed costs only: 4 pieces × 18 CNY per piece for material; 1.5 person-hours × 80 CNY per person-hour for labour. Energy and taxes are not given, so find the listed subtotal rather than a full cost or quotation. Only pen and paper or a calculator are needed; do not operate equipment, measure or heat glass."
+                  "M6 | listed costs only: 4 pieces × 18 CNY per piece for material; 1.5 person-hours × 80 CNY per person-hour for labour. Energy and taxes are not given, so find the listed subtotal rather than a full cost or quotation. Only pen and paper or a calculator are needed; do not operate equipment, measure or heat glass. Variant: change only the length of C from 100.6 to 100.5 mm. Keep all other measurements, timing, costs and authorization unchanged. Recount pieces within both teaching limits."
                 ]
               },
               {
@@ -29785,10 +29782,10 @@
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference calculation | the closed length interval is 99.5—100.5 mm and the diameter interval 7.8—8.2 mm; A and B are both within limits, C's length exceeds the upper limit by 0.1 mm and D's diameter falls 0.1 mm below the lower limit. The pass rate on the two teaching dimensions is 2/4 = 50%, which is not an actual production yield or product acceptance. The average rate of change is (720−760)/10 = −4°C/min, a cooling of 4°C/min. The listed subtotal is 72+120 = 192 CNY.",
-                  "Reference issues table | material, appearance and strength, instrument and temperature sensor calibration and the approved curve are unknown, so annealing or product qualification cannot be judged; A's training has expired and B's valid training does not equal operation approval. From 15:28 to 16:00 there are 32 minutes left, and Q has been waiting 15 minutes since 15:13; no response still means pending review.",
-                  "Reference V2 | retain V1 with its four pieces all passed and 40°C/min, and change it to A and B passing only on the teaching dimensions, C and D out of limits and an average rate of change of −4°C/min; record the actual correction time, the basis M1 to M3 and S's pending review, without backdating or overwriting the original record.",
-                  "Handover example | H1 paper package: A and B pass only on the two teaching dimensions, while C's length and D's diameter are out of limits. The rate of change is −4°C/min and the listed cost is 192 CNY. Material, calibration and curve items are missing and training and approval are incomplete; Q is pending review for 15 minutes and 32 minutes remain to the deadline. V1 has been retained and V2 awaits S's review, and this is not product release. Four self-check points: boundaries, units, missing items and versions; only paper checking can be assessed."
+                  "List the exercise inputs and units first.",
+                  "After finishing both cases, check formulas, units and pending items.",
+                  "Keep V1, the actual correction time and the review status.",
+                  "Open the answer key in the FAQ after completing day 6."
                 ]
               },
               {
@@ -29802,9 +29799,9 @@
           },
           "id": "glass-blowers-molders-benders-and-finishers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "paper-exercise"
           ],
-          "title": "H1: paper dimensional checking and record error correction (complete inputs and reference solutions)",
+          "title": "“Work order G: Glass forming records”",
           "type": "cards"
         },
         {
@@ -29815,8 +29812,8 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "The result table contains the M1 limits, the item-by-item judgment for A to D, the temperature change rate, 32/15 minutes and 192 CNY.",
-                  "State that only the two teaching dimensions were checked and that appearance, strength, calibration and curves were not obtained.",
+                  "List calculation steps, units and each measurement decision.",
+                  "State the scope of each check and the calculation basis.",
                   "Show the units, formulas and original inputs, and do not call it real product acceptance."
                 ]
               },
@@ -29833,7 +29830,7 @@
                 "values": [
                   "Keep the V1 and V2 revision table, recording the original values, corrected values, reasons and actual times.",
                   "S's status is pending review and no approval is fabricated; use synthetic identifiers and do not send controlled materials out.",
-                  "Write a handover of no more than 200 characters that distinguishes what is known, calculated, unknown and pending verification."
+                  "Record the deadline, listed costs and unresolved checks in the handoff."
                 ]
               },
               {
@@ -29925,8 +29922,8 @@
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Check A to D item by item and calculate 2/4 = 50%.",
-                  "Only the pass rate on the two dimensions, not treated as a yield or acceptance."
+                  "Check each measurement. Record the limits and deviations.",
+                  "Record the verification basis, unknown items and handoff owner."
                 ]
               },
               {
@@ -29939,22 +29936,22 @@
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Check the M5 32 minutes and 15 minutes and the M6 192 CNY.",
+                  "Calculate time remaining, time already waited and the listed costs.",
                   "No reply at handover does not equal approval; a subtotal is not a quotation."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Build the V1 to V2 revision table and self-check against the reference solution.",
-                  "Retain the original values and actual times; if there is no mentor, write that it is a self-check only."
+                  "Complete the original and variant independently. Submit the four paper outputs and save your first draft.",
+                  "Record the verification basis, unknown items and handoff owner."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Write a handover of no more than 200 characters, with the reasons for continuing to explore.",
-                  "Only decide whether to keep learning or look for a trained path; H1 cannot be used to judge real occupational fit."
+                  "After day 6, open “Work order G answer key (open after day 6)” under “Frequently asked questions and sources.”",
+                  "Record the verification basis, unknown items and handoff owner."
                 ]
               }
             ]
@@ -32062,14 +32059,12 @@
                 ]
               },
               {
-                "answer": "US wages are the 2025 parent occupation 51-9195.00: median 46,170 USD per year and 22.20 USD per hour, with the 10th/25th/75th/90th percentiles at 35,850/39,280/53,000/61,530 USD per year. OEWS excludes self-employment and benefits, includes production bonuses and commissions and excludes non-production bonuses, overtime premiums and shift differentials; it is not total compensation or actual personal take-home pay. Percentiles are positions in the wage distribution and cannot be mapped to experience, qualifications or personal starting pay. BLS direct 2025—2035 projection table: parent occupation 51-9195 employment 43,000 people in 2025 and 45,500 in 2035, growth 5.8%, average annual job openings 5,100. The original table shows employment and openings in thousands; multiply each by 1000; openings include growth and replacement demand and are not net new jobs. This parent occupation also includes other non-metallic forming work and cannot be treated as the 51-9195.04 glass sub-occupation's own figures or as individual opportunities.",
+                "answer": "The May 2025 median for U.S. parent occupation 51-9195 was USD 46,170 a year and USD 22.20 an hour. Annual wage percentiles (10th, 25th, 50th, 75th, 90th) were USD 35,850, 39,280, 46,170, 53,000, 61,530.",
                 "id": "glass-blowers-molders-benders-and-finishers.faq.3",
                 "question": "What are the US wages and employment situation?",
                 "question_key": "career.faq.glass-blowers-molders-benders-and-finishers.q3",
                 "source_refs": [
-                  "oews",
-                  "arxiv",
-                  "ep"
+                  "onet-wages"
                 ]
               },
               {
@@ -32141,13 +32136,21 @@
                 ]
               },
               {
-                "answer": "BLS direct 2025—2035 projection table: parent occupation 51-9195 employment 43,000 people in 2025 and 45,500 in 2035, growth 5.8%, average annual job openings 5,100. The original table shows employment and openings in thousands; multiply each by 1000; openings include growth and replacement demand and are not net new jobs. This parent occupation also includes other non-metallic forming work and cannot be treated as the 51-9195.04 glass sub-occupation's own figures or as individual opportunities. Other non-metallic forming, stone, die, welding and feeding work in the parent category can be compared, but the materials, tasks and training must be checked anew, and there is no evidence of a transfer success rate or automatic promotion.",
+                "answer": "BLS Table 1.2 for U.S. parent occupation 51-9195 projects employment from about 43,000 jobs in 2025 to 45,500 in 2035 (5.8%), with about 5,100 openings per year including replacements.",
                 "id": "glass-blowers-molders-benders-and-finishers.faq.10",
                 "question": "What are the prospects, and which directions can one move to?",
                 "question_key": "career.faq.glass-blowers-molders-benders-and-finishers.q10",
                 "source_refs": [
-                  "ep",
-                  "onet"
+                  "ep"
+                ]
+              },
+              {
+                "answer": "Reference calculation | the closed length interval is 99.5—100.5 mm and the diameter interval 7.8—8.2 mm; A and B are both within limits, C's length exceeds the upper limit by 0.1 mm and D's diameter falls 0.1 mm below the lower limit. The pass rate on the two teaching dimensions is 2/4 = 50%, which is not an actual production yield or product acceptance. The average rate of change is (720−760)/10 = −4°C/min, a cooling of 4°C/min. The listed subtotal is 72+120 = 192 CNY. Reference issues table | material, appearance and strength, instrument and temperature sensor calibration and the approved curve are unknown, so annealing or product qualification cannot be judged; A's training has expired and B's valid training does not equal operation approval. From 15:28 to 16:00 there are 32 minutes left, and Q has been waiting 15 minutes since 15:13; no response still means pending review. Reference V2 | retain V1 with its four pieces all passed and 40°C/min, and change it to A and B passing only on the teaching dimensions, C and D out of limits and an average rate of change of −4°C/min; record the actual correction time, the basis M1 to M3 and S's pending review, without backdating or overwriting the original record. Handover example | H1 paper package: A and B pass only on the two teaching dimensions, while C's length and D's diameter are out of limits. The rate of change is −4°C/min and the listed cost is 192 CNY. Material, calibration and curve items are missing and training and approval are incomplete; Q is pending review for 15 minutes and 32 minutes remain to the deadline. V1 has been retained and V2 awaits S's review, and this is not product release. Four self-check points: boundaries, units, missing items and versions; only paper checking can be assessed. In the variant C is at the length limit and within the diameter limits. A, B and C pass, or 3/4 = 75%, and D still fails.",
+                "id": "glass-blowers-molders-benders-and-finishers.faq.11",
+                "question": "Work order G answer key (open after day 6)",
+                "question_key": "career.faq.glass-blowers-molders-benders-and-finishers.q11",
+                "source_refs": [
+                  "paper-exercise"
                 ]
               }
             ]
@@ -32205,12 +32208,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no wages or employment for the glass sub-occupation itself, no industry or regional wages, no precise China mapping for wages or employment, no specific fully verifiable recruitment posting, no AI adoption, substitution or wage causality and no assessment predictive validity for the occupation were obtained. The parent occupation proxy must be stated clearly and cannot be treated as the precise occupation; the editorial H1 and the learning suggestions are not survey facts."
+              "U.S. wages come from OEWS and projections from BLS Table 1.2. The Chinese project is a local work example. A Songjiang report describes a named manufacturer using cold bending to form glass. It illustrates one production method."
             ]
           },
           "id": "glass-blowers-molders-benders-and-finishers.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "ep",
+            "onet-wages",
+            "cn-forming"
           ],
           "type": "prose"
         }
@@ -32237,25 +32242,25 @@
                 "entity": "Big Five Personality Test",
                 "id": "navigation-2",
                 "relation": "related-evidence",
-                "url": "/en/tests/big-five-personality-test"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "MBTI Personality Test",
                 "id": "navigation-3",
                 "relation": "related-evidence",
-                "url": "/en/tests/mbti-personality-test"
+                "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
                 "entity": "Intelligence and Reasoning Test",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test"
+                "url": "/en/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "Emotional Intelligence Test",
                 "id": "navigation-5",
                 "relation": "related-evidence",
-                "url": "/zh/tests/eq-test"
+                "url": "/en/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "This occupation (glass blowers, moulders, benders and finishers)",
@@ -32300,12 +32305,12 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "For checking the official scope (shaping molten glass according to patterns), the common job titles and the Bright Outlook marker.",
-                  "For checking the RC interest code, Job Zone1-2 and the new-entrant education requirement questionnaire of 27% high school, 23% less than high school and 23% a two-year degree, which is not the education already held."
+                  "BLS Table 1.2 for U.S. parent occupation 51-9195 projects employment from about 43,000 jobs in 2025 to 45,500 in 2035 (5.8%), with about 5,100 openings per year including replacements.",
+                  "Projection period: 2025–2035."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "bls",
-                "limitation": "An occupation-level description that does not constitute material, process, kiln, gas, electrical, safety or investment advice.",
+                "limitation": "Employment projections use BLS Table 1.2.",
                 "market": "United States",
                 "name": "O*NET OnLine: Glass Blowers, Molders, Benders, and Finishers occupation profile and official scope (51-9195.04)",
                 "period": "O*NET updated 2026; accessed 2026-09-21",
@@ -32316,15 +32321,15 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Parent occupation 51-9195, not the glass sub-occupation itself",
-                  "BLS direct 2025—2035 projection table: parent occupation 51-9195 employment 43,000 people in 2025 and 45,500 in 2035, growth 5.8%, average annual job openings 5,100. The original table shows employment and openings in thousands; multiply each by 1000; openings include growth and replacement demand and are not net new jobs. This parent occupation also includes other non-metallic forming work and cannot be treated as the 51-9195.04 glass sub-occupation's own figures or as individual opportunities."
+                  "BLS Table 1.2 for U.S. parent occupation 51-9195 projects employment from about 43,000 jobs in 2025 to 45,500 in 2035 (5.8%), with about 5,100 openings per year including replacements.",
+                  "Projection period: 2025–2035."
                 ],
                 "evidence_type": "official statistics",
                 "id": "ep",
-                "limitation": "BLS direct 2025—2035 projection table: parent occupation 51-9195 employment 43,000 people in 2025 and 45,500 in 2035, growth 5.8%, average annual job openings 5,100. The original table shows employment and openings in thousands; multiply each by 1000; openings include growth and replacement demand and are not net new jobs. This parent occupation also includes other non-metallic forming work and cannot be treated as the 51-9195.04 glass sub-occupation's own figures or as individual opportunities.",
+                "limitation": "Counts are rounded independently. Openings include replacements.",
                 "market": "United States",
-                "name": "BLS direct occupational projections 2025—2035",
-                "period": "2025—2035",
+                "name": "BLS Employment Projections, Table 1.2",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "Parent occupation 51-9195, not the glass sub-occupation itself",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32650,20 +32655,19 @@
                 "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "The detail page shows parent occupation 51-9195.00 manufacturing at 70% (2024).",
-                  "This is not the glass sub-occupation's own industry distribution and is not used for a China industry mapping."
+                  "The May 2025 median for U.S. parent occupation 51-9195 was USD 46,170 a year and USD 22.20 an hour. Annual wage percentiles (10th, 25th, 50th, 75th, 90th) were USD 35,850, 39,280, 46,170, 53,000, 61,530."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "onet-wages",
                 "limitation": "O*NET notes on that page that the industry data come from the parent occupation 51-9195.00; that measure is the US distribution and does not establish a mainland China mapping.",
                 "market": "United States",
                 "name": "O*NET OnLine: Glass Blowers, Molders, Benders, and Finishers industry distribution (51-9195.04, parent occupation 51-9195.00 measure)",
-                "period": "2024 industry data; checked 2026-10-03",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "51-9195.04 page displaying parent-occupation data",
-                "url": "https://www.onetonline.org/link/details/51-9195.04"
+                "url": "https://www.onetonline.org/link/localwages/51-9195.00"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32682,21 +32686,29 @@
                 "url": "https://www.onetonline.org/link/summary/51-9195.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Heating and gathering — 0/100; weight=1/3; glass-blowers-molders-benders-and-finishers.ai-impact.ai-impact-table.95[0]",
-                  "Forming, bending and joining — 0/100; weight=1/3; glass-blowers-molders-benders-and-finishers.ai-impact.ai-impact-table.99[0]",
-                  "Inspection and records — 50/100; weight=1/3; glass-blowers-molders-benders-and-finishers.ai-impact.ai-impact-table.115[0]"
+                  "A Songjiang report describes a named manufacturer using cold bending to form glass. It illustrates one production method."
                 ],
-                "evidence_type": "Editorial model estimation method",
-                "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "id": "cn-forming",
+                "limitation": "A named project only. It does not establish national wages, credentials or hiring.",
+                "market": "Mainland China",
+                "name": "Songjiang District: cold-bent glass case",
+                "period": "2022",
+                "publisher": "Shanghai district government",
+                "url": "https://www.songjiang.gov.cn/xwzx/001001/20221207/0ac5ee51-8a93-40c9-80b2-bb4ed2bb9a45.html"
+              },
+              {
+                "details": [
+                  "Inputs and results are fictional."
+                ],
+                "id": "paper-exercise",
+                "limitation": "Checks records on paper. Site work requires separate verification.",
+                "market": "This page",
+                "name": "“Work order G: Glass forming records”",
+                "period": "Paper exercise",
+                "publisher": "FermatMind",
+                "url": "#career-content-path"
               }
             ]
           },
@@ -37631,7 +37643,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI tools and human review",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupation direction comparison",
       "fit": "Occupation fit guide",
@@ -37761,8 +37773,8 @@
         ]
       },
       {
-        "derivation": "BLS direct 2025—2035 projection table: parent occupation 51-9195 employment 43,000 people in 2025 and 45,500 in 2035, growth 5.8%, average annual job openings 5,100. The original table shows employment and openings in thousands; multiply each by 1000; openings include growth and replacement demand and are not net new jobs. This parent occupation also includes other non-metallic forming work and cannot be treated as the 51-9195.04 glass sub-occupation's own figures or as individual opportunities.",
-        "display_value": "Growth 5.8% (2025—2035, BLS direct table, parent occupation 51-9195)",
+        "derivation": "BLS Table 1.2 for U.S. parent occupation 51-9195 projects employment from about 43,000 jobs in 2025 to 45,500 in 2035 (5.8%), with about 5,100 openings per year including replacements.",
+        "display_value": "5.8%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth",
@@ -37773,7 +37785,7 @@
         ]
       },
       {
-        "derivation": "BLS direct 2025—2035 projection table: parent occupation 51-9195 employment 43,000 people in 2025 and 45,500 in 2035, growth 5.8%, average annual job openings 5,100. The original table shows employment and openings in thousands; multiply each by 1000; openings include growth and replacement demand and are not net new jobs. This parent occupation also includes other non-metallic forming work and cannot be treated as the 51-9195.04 glass sub-occupation's own figures or as individual opportunities.",
+        "derivation": "BLS Table 1.2 for U.S. parent occupation 51-9195 projects employment from about 43,000 jobs in 2025 to 45,500 in 2035 (5.8%), with about 5,100 openings per year including replacements.",
         "display_value": "Employment 43,000 people (2025, BLS direct projection base period, parent occupation 51-9195)",
         "fact_id": "us-employment-2025",
         "market": "United States",
@@ -37785,7 +37797,7 @@
         ]
       },
       {
-        "derivation": "BLS direct 2025—2035 projection table: parent occupation 51-9195 employment 43,000 people in 2025 and 45,500 in 2035, growth 5.8%, average annual job openings 5,100. The original table shows employment and openings in thousands; multiply each by 1000; openings include growth and replacement demand and are not net new jobs. This parent occupation also includes other non-metallic forming work and cannot be treated as the 51-9195.04 glass sub-occupation's own figures or as individual opportunities.",
+        "derivation": "BLS Table 1.2 for U.S. parent occupation 51-9195 projects employment from about 43,000 jobs in 2025 to 45,500 in 2035 (5.8%), with about 5,100 openings per year including replacements.",
         "display_value": "Average annual job openings 5,100 (2025—2035, parent occupation 51-9195, including growth and replacement)",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
@@ -37845,27 +37857,15 @@
           "oews",
           "arxiv"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+50)/3+0.5)=17; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "17%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Glass Blowers, Molders, Benders, and Finishers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI tools and human review"
     },
     "badges": [
       "Glass Blowers, Molders, Benders, and Finishers: tasks, deliverables and responsibility boundaries",
@@ -37883,7 +37883,7 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "US employment growth (2025—2035, parent occupation 51-9195.00 measure)"
+        "label": "U.S. parent occupation 51-9195 projected employment change (2025–2035)"
       },
       {
         "availability": "available",
@@ -37909,17 +37909,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What glass blowers, moulders, benders and finishers do, what capabilities are needed, wages and prospects, and which tasks AI will change. It preserves the occupation scope (O*NET/SOC 51-9195.04), the parent occupation 51-9195.00 measure for US wages and employment, and the mainland China data gap."
+      "text": "Explore how glass is blown, formed and finished, try a paper work order, and see what the U.S. parent occupation data cover."
     },
     "title": {
       "availability": "available",
-      "text": "Glass Blowers, Molders, Benders, and Finishers"
+      "text": "Glass Blowing and Forming: Tasks and Training"
     }
   },
-  "source_content_sha256": "036c327a709525527cdb4a98fd7ccc653d27487b73b3249ba5270ede94c0547a",
+  "source_content_sha256": "06e1577d899de1852adf4e1481cbca4e07993053c3c4ef1101988810cdc5672d",
   "subject": {
     "canonical_slug": "glass-blowers-molders-benders-and-finishers",
-    "name": "Glass Blowers, Molders, Benders, and Finishers",
-    "summary": "Glass Blowers, Molders, Benders, and Finishers correspond to the precise occupation O*NET/SOC 51-9195.04 Glass Blowers, Molders, Benders, and Finishers: shaping molten glass according to patterns, including heating and gathering, forming, bending and joining, annealing and cooling, cutting, grinding and polishing, decorating and inspection; common job titles include Glassblower, Gaffer, Glass Artist, Neon Glass Bender, Glass Lathe Operator and Glass Worker. The official scope text reads: Shape molten glass according to patterns. Measure note: the US wages, employment and industry data that O*NET presents on the 51-9195.04 page are taken from the parent occupation 51-9195.00 (Molders, Shapers, and Casters, Except Metal and Plastic), and this page faithfully labels them as the parent occupation measure and does not call them this precise occupation's own values."
+    "name": "Glass Blowers, Molders, Benders and Finishers",
+    "summary": "Glass blowers and formers shape glass to a pattern by blowing, molding, bending or finishing it. They check dimensions and defects before handing off the work. U.S. wages and projections cover the broader parent occupation."
   }
 }

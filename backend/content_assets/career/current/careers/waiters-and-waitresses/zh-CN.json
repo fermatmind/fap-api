@@ -23657,13 +23657,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先看你是否愿意听取需求、准确记单、跟进厨房和纠正漏项；再核长时间站立、餐期忙碌、投诉沟通与轮班是否符合个人条件。用两桌纸面订单测试记录与变更能力，比只判断自己是否外向更具体。"
+              "纸面体验｜纸面核对 12 桌的两份订单。若厨房单漏掉顾客确认的过敏备注，保留两份原单，交当班负责人确认后再送餐。 "
             ]
           },
           "id": "waiters-and-waitresses.display.fermat_decision_card.summary",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -24804,13 +24803,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "服务员在餐厅等餐饮场所为桌边顾客接单、传递厨房需求、上餐、处理用餐反馈和核对账单。可靠交付是餐品、桌号、数量与已确认变更一致；现场服务、卫生和收款权限须遵守门店安排。本页对应 O*NET-SOC 35-3031.00，不包含客房清洁或泛指所有客服。"
+              "餐桌服务员把顾客点单、加减项和上菜顺序准确交给厨房，核对桌号及账单，按门店分工处理反馈。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "waiters-and-waitresses.display.definition_block.definition",
           "source_refs": [
-            "onet",
-            "editorial"
+            "transfer-onet-35-3031.00"
           ],
           "type": "prose"
         }
@@ -25487,18 +25485,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得本职AI采用率、替代概率或可复核分数依据。已核任务显示订单信息处理与现场餐饮服务不同；美国行业访谈和决策者问卷仅给技术背景。看具体系统如何接单、核餐与授权，比一个职业替代百分比更可用。 AI影响度 25% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+25)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：纸面核对 12 桌的两份订单。若厨房单漏掉顾客确认的过敏备注，保留两份原单，交当班负责人确认后再送餐。"
             ]
           },
           "id": "waiters-and-waitresses.display.ai_impact_table.answer",
           "source_refs": [
-            "onet",
-            "bls-ooh",
-            "bls",
-            "sag",
-            "r2-ai",
-            "nist",
-            "editorial"
+            "transfer-onet-35-3031.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -33315,6 +33308,33 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-35-3031.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 35-3031.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/35-3031.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -38812,10 +38832,10 @@
       "text": "服务员"
     }
   },
-  "source_content_sha256": "3ecb06e6098cfc8190fa99a5510a3a1693111bd837bfe5ce5c4da4560c915c3e",
+  "source_content_sha256": "b71ae0b54eab2955684b972838274e98febd665c06ae68b38d9cb6aa36c86aad",
   "subject": {
     "canonical_slug": "waiters-and-waitresses",
     "name": "服务员",
-    "summary": "服务员在餐厅等餐饮场所为桌边顾客接单、传递厨房需求、上餐、处理用餐反馈和核对账单。可靠交付是餐品、桌号、数量与已确认变更一致；现场服务、卫生和收款权限须遵守门店安排。本页对应 O*NET-SOC 35-3031.00，不包含客房清洁或泛指所有客服。"
+    "summary": "餐桌服务员把顾客点单、加减项和上菜顺序准确交给厨房，核对桌号及账单，按门店分工处理反馈。"
   }
 }

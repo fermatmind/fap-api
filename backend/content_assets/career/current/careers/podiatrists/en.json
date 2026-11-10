@@ -1283,6 +1283,9 @@
       "item:podiatrists.path.seven-day-trial.1": {
         "status": "mapped"
       },
+      "item:podiatrists.path.work-sample-draft-20261110.1": {
+        "status": "pending_mapping"
+      },
       "item:podiatrists.profile.career-quick-answers-block.1": {
         "status": "mapped"
       },
@@ -30726,6 +30729,21 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "Fictional records only. Two referral documents identify different sides, and no reviewer is recorded. List the original materials and what the clinical team needs to verify."
+            ]
+          },
+          "id": "podiatrists.path.work-sample-draft-20261110.1",
+          "source_refs": [
+            "onet"
+          ],
+          "title": "Review a foot and ankle referral",
+          "type": "notice"
         }
       ]
     },
@@ -37210,6 +37228,13 @@
         "id": "podiatrists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "podiatrists.path.work-sample-draft-20261110.1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": {
@@ -37559,7 +37584,7 @@
       "text": "Podiatrist career guide: foot and ankle care, US wages, and the entry path"
     }
   },
-  "source_content_sha256": "deed77ecb50a59ceee395d8acf42cf9355e90822687da9b0b33c14be4c720f00",
+  "source_content_sha256": "d8a83f6078e62535cf22a9b1fe57e75fae0333b9f0af432ca35959900b03d134",
   "subject": {
     "canonical_slug": "podiatrists",
     "name": "Podiatrists",

@@ -14,6 +14,21 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:conservation-us-industry-advocacy-median-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:conservation-us-industry-federal-median-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:conservation-us-industry-local-median-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:conservation-us-industry-professional-median-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:conservation-us-industry-state-median-2025": {
+        "status": "pending_mapping"
+      },
       "fact:current-us-change-2025-2035": {
         "status": "pending_mapping"
       },
@@ -1737,7 +1752,7 @@
         "status": "pending_mapping"
       },
       "item:conservation-scientists.sources.boundary.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:conservation-scientists.sources.faq.1": {
         "status": "pending_mapping"
@@ -1908,7 +1923,7 @@
         "status": "pending_mapping"
       },
       "item:conservation-scientists.us-salary.career-snapshot-secondary-locale.8": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:conservation-scientists.us-salary.career-snapshot-secondary-locale.9": {
         "status": "mapped"
@@ -23092,7 +23107,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "什么情况下需要慎重：不愿做实地调查就下结论、不愿写清计算依据与假设、无法接受野外与办公室交替的工作节奏，或倾向于替使用者做决定而不说明授权边界。边界：本页练习与判断只用于自我核对，不构成录用标准、资质认定或真实项目的作业授权；涉及土地、水利与法规事项时须按所在单位与主管部门规定执行。"
+              "如果你不喜欢反复核对调查条件、记录不确定性，先做一次纸面练习。"
             ]
           },
           "id": "conservation-scientists.quick-decision.fit-decision-checklist.1",
@@ -23103,7 +23118,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "试用方式：为虚构场景（一片 120 公顷坡耕地出现细沟侵蚀，同时要兼顾产量与下游水质）写一份一页保护方案，包含现状与约束、拟定措施与设计依据、成本估算与假设、监测指标，以及需要向谁确认。"
+              "到目录「09 入行、资格与职业发展」找《CS-19：核对两份生境调查记录》，先用约 10 分钟作答，再看题后参考。"
             ]
           },
           "id": "conservation-scientists.quick-decision.fit-decision-checklist.2",
@@ -23114,7 +23129,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "上手前先确认：你能把一块地的现状拆成土壤、地形、水系与使用方式几类，并说明你的措施针对哪一类问题；能在拿出方案前先说明哪些数据是你实地取得的、哪些是合理假设。"
+              "如果你喜欢把野外记录变成可追溯的证据，也愿意解释哪些比较需要补核，可以考虑自然保护科学。"
             ]
           },
           "id": "conservation-scientists.quick-decision.fit-decision-checklist.3",
@@ -23136,7 +23151,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话总结：这是一份以「把一块土地的现状与约束变成可实施、可监测、可复核的保护方案」为核心的工作，适合愿意做实地调查与计算、能把方案讲给使用者听，并对方案依据与合规边界负责的人。"
+              "如果你喜欢把野外记录变成可追溯的证据，也愿意解释哪些比较需要补核，可以考虑自然保护科学。"
             ]
           },
           "id": "conservation-scientists.quick-decision.fermat-decision-card.7",
@@ -23726,7 +23741,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "当前行业页政府67%、其他服务21%、其他12%含专业科技，未给精确年度；非行业工资或个人机会。OOH2025细行业联邦27/地方21/州19/社会倡导20/专业科技5，与门类页粒度不同，不叠加。当前11热技能为2025美国Lightcast招聘提及Office12%、Excel8%、ArcGIS7%、PowerPoint5%、Word4%、Outlook3%；Acrobat/AutoCAD/Access/ASP/Windows比例NA，不能当0或估值。非熟练度/采用/AI部署；GIS分类与遥感自动化不自动计生成式AI。"
+              "O*NET 展示政府 67%、其他服务业（公共行政除外）21%、其余行业 12%。这是就业份额，不能当作工资或预计需求。当前11热技能为2025美国Lightcast招聘提及Office12%、Excel8%、ArcGIS7%、PowerPoint5%、Word4%、Outlook3%；Acrobat/AutoCAD/Access/ASP/Windows比例NA，不能当0或估值。非熟练度/采用/AI部署；GIS分类与遥感自动化不自动计生成式AI。"
             ]
           },
           "id": "conservation-scientists.profile.onet-structured-fields-block.4",
@@ -23764,7 +23779,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "美国O*NET情境：室内受控23%每天/59%每周；户外全天候17%每天/61%每周；邮件96%每天/电话74%每天/面谈61%每天；周43%超过40；作息55%固定/41%不固定，不直接解释为项目或天气因果。期限43%每周/43%每月，不推验收期更强。团队26%极其重要/43%非常重要；准确13%极其重要/57%非常重要；难纠正错误13%非常严重、17%严重、39%比较严重、22%完全不严重，旧极其严重13误读。各问独立非中国样本；具体值守/汇报/采样权限与安全制度未取得，按真实组织及法域核，编辑建议保留原始数据/方法/版本。"
+              "美国O*NET情境：室内受控23%每天/59%每周；户外全天候17%每天/61%每周；邮件96%每天/电话74%每天/面谈61%每天；周43%超过40；作息55%固定/41%不固定，不直接解释为项目或天气因果。期限43%每周/43%每月，不推验收期更强。团队26%极其重要/43%非常重要；准确13%极其重要/57%非常重要；难纠正错误13%非常严重、17%严重、39%比较严重、22%完全不严重。各问独立非中国样本；具体值守/汇报/采样权限与安全制度未取得，按真实组织及法域核，编辑建议保留原始数据/方法/版本。"
             ]
           },
           "id": "conservation-scientists.profile.work-context-block.1",
@@ -23913,7 +23928,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "六个相邻方向的差别在于对象、授权与责任：相邻职业的工作对象常常交叉，但森林采伐与更新决策权、环境执法的判定与处罚权、水资源调配与工程设计的责任不随之转移；比较时以本页对照表的六项维度逐项核对岗位实际职责。"
+              "六个相邻方向的差别在于对象、授权与责任：相邻职业的工作对象常常交叉，但森林采伐与更新决策权、环境执法的判定与处罚权、水资源调配与工程设计的责任不随之转移；比较时以本页对照表的六项维度逐项核对岗位实际职责。 想先试方向，可到第 09 节用 CS-19 核虚构调查条件，写能否直接比较和一条待核问题，作答后再展开参考。"
             ]
           },
           "id": "conservation-scientists.direction-comparison.adjacent-career-comparison-table.8",
@@ -24858,7 +24873,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以上为本职业 19-1031.00 精确口径；BLS 职业展望手册另有「自然保护科学家与林务员」合并口径（2025 年合并就业 40,900 人、2025—2035 年增速 4%、+1,700 人、约 3,000 个年均空缺），合并口径不能当作本职业数值。"
+              "以上为本职业 19-1031.00 精确口径；BLS 职业展望手册另有「自然保护科学家与林务员」合并口径（2025 年合并就业 40,900 个岗位、2025—2035 年增速 4%、+1,700 个岗位、约 3,000 个年均空缺），合并口径不能当作本职业数值。"
             ]
           },
           "id": "conservation-scientists.ai-impact.ai-impact-table.45",
@@ -24891,7 +24906,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025独立年中位73,010美元/小时35.10；BLS表1.2 SOC19-1031（2025—2035）独立总体就业27,700→29,200，公布净变化+1,500/+5.3%、年均空缺2,100含替补。自然保护科学家与林务员合计19-1030为40,900→42,700/公布+1,700/+4.3%/3,000空缺，OOH约4为舍入；不混两范围，舍入端点相减不代公布变化。总体含自雇，非AI因果或个人机会。当前行业页政府67%、其他服务21%、其他12%含专业科技，未给精确年度；非行业工资或个人机会。OOH2025细行业联邦27/地方21/州19/社会倡导20/专业科技5，与门类页粒度不同，不叠加。"
+              "2025独立年中位73,010美元/小时35.10；BLS表1.2 SOC19-1031（2025—2035）独立总体就业27,700→29,200，公布净变化+1,500/+5.3%、年均空缺2,100含替补。自然保护科学家与林务员合计19-1030为40,900→42,700/公布+1,700/+4.3%/3,000空缺，OOH约4为舍入；不混两范围，舍入端点相减不代公布变化。总体含自雇，非AI因果或个人机会。O*NET 行业页显示政府 67%、其他服务业（公共行政除外）21%、其余 12%；这是就业份额。OOH2025细行业联邦27/地方21/州19/社会倡导20/专业科技5，与门类页粒度不同，不叠加。"
             ]
           },
           "id": "conservation-scientists.ai-impact.ai-impact-table.48",
@@ -26514,7 +26529,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET2025全国独立受雇工资；BLS表1.2独立19-1031当前总体预测，OOH合计另标。"
+              "BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；美国劳工统计局 2025 年 5 月行业工资｜https://www.bls.gov/ooh/life-physical-and-social-science/conservation-scientists.htm#tab-5；O*NET 全国工资分位｜https://www.onetonline.org/link/localwages/19-1031.00"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.8",
@@ -26635,7 +26650,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "27,700人（2025；独立职业）"
+              "27,700 个岗位（2025；独立职业）"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.19",
@@ -26800,7 +26815,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "政府"
+              "联邦政府（不含邮政）"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.34",
@@ -26811,7 +26826,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "67%（当前行业页就业占比）"
+              "88,610 美元/年"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.35",
@@ -26822,7 +26837,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前行业页政府67%、其他服务21%、其他12%含专业科技，未给精确年度；非行业工资或个人机会。OOH2025细行业联邦27/地方21/州19/社会倡导20/专业科技5，与门类页粒度不同，不叠加。"
+              "2025 年 5 月本职业在该行业的年工资中位数；与就业行业份额及林务员合计口径分开。"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.36",
@@ -26833,7 +26848,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他服务业（不含公共行政）"
+              "专业、科学和技术服务"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.37",
@@ -26844,7 +26859,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "21%（当前行业页就业占比）"
+              "76,290 美元/年"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.38",
@@ -26855,7 +26870,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他服务行业占比非工资或机会；与OOH社会倡导20%粒度不同。"
+              "2025 年 5 月本职业在该行业的年工资中位数；与就业行业份额及林务员合计口径分开。"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.39",
@@ -26866,7 +26881,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业合计"
+              "社会倡导组织"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.40",
@@ -26877,7 +26892,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "12%（当前其余行业占比）"
+              "71,180 美元/年"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.41",
@@ -26888,7 +26903,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "含专业科技等其余门类；非工资。"
+              "2025 年 5 月本职业在该行业的年工资中位数；与就业行业份额及林务员合计口径分开。"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.42",
@@ -26899,7 +26914,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "未取得（行业工资）"
+              "州政府（不含教育机构和医院）"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.43",
@@ -26910,7 +26925,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业按行业细分的工资中位数（美国，2025 年 5 月工资数据期）"
+              "68,620 美元/年"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.44",
@@ -26921,7 +26936,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前行业页政府67%、其他服务21%、其他12%含专业科技，未给精确年度；非行业工资或个人机会。OOH2025细行业联邦27/地方21/州19/社会倡导20/专业科技5，与门类页粒度不同，不叠加。"
+              "2025 年 5 月本职业在该行业的年工资中位数；与就业行业份额及林务员合计口径分开。"
             ]
           },
           "id": "conservation-scientists.us-salary.career-snapshot-secondary-locale.45",
@@ -28154,16 +28169,16 @@
                 "url": "https://www.onetonline.org/link/details/19-1031.00"
               },
               {
-                "entity": "O*NET 全国工资页面（19-1031.00）",
+                "entity": "美国农业部 NRCS：保护规划",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localwages/19-1031.00"
+                "url": "https://www.nrcs.usda.gov/getting-assistance/conservation-technical-assistance/conservation-planning"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "美国农业部 NRCS：地方技术指南",
                 "id": "link-4",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.nrcs.usda.gov/resources/guides-and-instructions/field-office-technical-guides"
               },
               {
                 "entity": "O*NET 19-1031.00 工作情境分区",
@@ -28172,10 +28187,10 @@
                 "url": "https://www.onetonline.org/link/details/19-1031.00#WorkContext"
               },
               {
-                "entity": "ILO 生成式 AI 与工作暴露研究",
+                "entity": "美国 CDC：高温与户外工作者",
                 "id": "link-6",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.cdc.gov/heat-health/risk-factors/heat-and-outdoor-workers.html"
               }
             ]
           },
@@ -28209,7 +28224,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "细类任务情境O*NET，2025独立工资及2025—2035独立总体预测BLS；具体合规/数据/作业制度未取得，措施为编辑建议。"
+              "O*NET 提供职业任务与工作情境，USDA 与 CDC 提供相关的美国规划或安全背景。六条为编辑情境，具体流程和权限应向所在机构核对当地规则。"
             ]
           },
           "id": "conservation-scientists.risk.career-risk-cards.10",
@@ -28495,7 +28510,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 全国工资页面与摘要页（19-1031.00）：用于说明就业与工资口径；不说明个人风险水平。"
+              "美国保护规划示例，说明资源清查、决定记录与维护计划，不设定当地权限。"
             ]
           },
           "id": "conservation-scientists.risk.career-risk-cards.36",
@@ -28506,7 +28521,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "NIST自愿框架非职业强制人工复核。"
+              "美国分地技术指南与标准示例；实际场地条件和权限需另核。"
             ]
           },
           "id": "conservation-scientists.risk.career-risk-cards.37",
@@ -28528,7 +28543,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "ILO 生成式 AI 与工作暴露研究：用于说明任务暴露框架；不提供时间表或岗位消失年份。"
+              "美国户外高温安全资料；不是本职业风险发生率，也不是完整野外安全方案。"
             ]
           },
           "id": "conservation-scientists.risk.career-risk-cards.39",
@@ -29669,40 +29684,39 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构地块材料（练习输入）",
-                  "虚构情境：一片 120 公顷缓坡旱作农田，近三年出现细沟侵蚀，下游为一座小型水库的汇水区。",
-                  "已给材料：坡度 3°—8°；土壤为砂壤土，有机质偏低；现状为顺坡耕作、无植被缓冲带；年均降雨集中；下游水库承担灌溉与饮用水备用功能。",
-                  "未给材料：地块权属与承包期限、当地补贴政策、水库水质监测数据。练习中如需要这些条件，请明确写出你的假设与需要确认的对象。"
+                  "虚构材料（约 10 分钟）",
+                  "虚构生境调查只比较样地相同且调查时长相同的计数。",
+                  "记录 J：样地 H2、20 分钟、11 次观察。记录 K：样地 H2、10 分钟、8 次观察。",
+                  "只用题面虚构记录，无需外部数据或实地调查。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务要求",
-                  "请写出一页保护方案：包含问题判断与依据、两项以上拟定措施与设计要点、成本与维护估算及其假设、建议的监测指标，以及需要向谁确认才能实施。",
-                  "方案要写明哪些数据是你实地取得的、哪些是假设，并说明措施在什么条件下不适用。"
+                  "任务与交付",
+                  "给每条记录写一句核对说明，再给调查负责人提一个问题。",
+                  "只用题面记录，判断两条计数能否直接比较，并说明理由。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考交付（可从题面推导）",
-                  "方案应包含：问题判断（顺坡耕作叠加砂壤土与集中降雨形成细沟侵蚀，并向汇水区输沙）、措施（等高耕作或梯田化、植被缓冲带、秸秆覆盖或有机质提升、必要时修建排水与沉沙设施）、设计要点（按坡度分段确定带宽与间距、缓冲带宽度与位置）、成本与维护（建设与年度维护估算、假设的单价与年限、使用者可承担的维护安排）、监测指标（细沟密度或侵蚀量、缓冲带存活率、下游含沙量）与需确认对象（权属与承包期限、补贴与审批要求、水库水质数据）。",
-                  "参考交付只列应包含的要素，不要求与示例措辞一致；能说明判断依据即可。"
+                  "参考入口",
+                  "独立作答后，到常见问题展开「CS-19 题后参考」。",
+                  "再对照自己的记录，写下还想核对的问题。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界与不可推断的结论",
-                  "本题只检验问题判断、措施选择与方案写作能力，不评价真实项目效果，也不构成录用或资质判断。",
-                  "不得使用真实地块、权属资料或第三方监测数据；涉及真实项目时须按所在单位与主管部门规定执行。"
+                  "自核清单",
+                  "是否核对了两项比较条件、写下自己的判断，并指出谁能复核原始记录？"
                 ]
               }
             ]
           },
           "id": "conservation-scientists.path.entry-work-sample-data.1",
-          "title": "纸面案例与任务",
+          "title": "CS-19：核对两份生境调查记录",
           "type": "cards"
         },
         {
@@ -29801,56 +29815,56 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天：读一份公开技术指南",
-                  "找一份公开的水土保持或土壤调查技术指南，标出其中的设计参数与适用条件，写下三处你想确认的地方。"
+                  "第 1 天",
+                  "开启新题 W-CS。虚构修复团队只比较同季节、同样地边界的记录。抄下两条条件。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天：写地块现状",
-                  "用虚构地块写出土壤、坡度、水系与使用方式四类现状，并注明哪些是实测、哪些是假设。"
+                  "第 2 天",
+                  "记录 R 来自春季，覆盖 H5 整块样地。记下季节与边界。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天：做一次问题判断",
-                  "根据第 2 天的现状，写出问题的可能成因与判断依据，并列出还需要哪些数据。"
+                  "第 3 天",
+                  "记录 S 来自夏季，覆盖 H5 东半块。记下季节与边界。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天：选两项措施",
-                  "为同一地块选择两项措施，写出设计要点与各自的适用条件。"
+                  "第 4 天",
+                  "按两条条件逐一核对两份记录，给调查负责人写一个问题。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天：做成本与维护估算",
-                  "为第 4 天的措施估算建设与年度维护成本，写明单价与年限假设。"
+                  "第 5 天",
+                  "写一份交接说明，保留原始记录并写明你的比较判断。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天：写监测与说明",
-                  "写出三条可测量的监测指标，并把方案改写成面向土地使用者的说明。"
+                  "第 6 天",
+                  "先独立复看两条条件和两份记录，再核对自己的说明。找同伴反馈可选。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天：判断是否继续",
-                  "回到本页的判断清单，写下你愿意继续的三条理由与需要慎重的两条条件。"
+                  "第 7 天",
+                  "完成第 6 天独立复核后，到常见问题展开「W-CS 第 7 天参考」。对照自己的记录，再选一个要练的习惯。"
                 ]
               }
             ]
           },
           "id": "conservation-scientists.path.seven-day-trial.1",
-          "title": "七天渐进体验",
+          "title": "七天纸面体验：独立新题",
           "type": "timeline"
         },
         {
@@ -29858,13 +29872,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "具体变化：你是否能在给定地块条件下写出成因判断、措施与可维护的成本估算，而不是只列措施名称。",
-              "事实与选择：你更愿意做调查监测、方案编制，还是研究与合规方向。",
-              "练习消耗：野外调查记录、设计计算、方案写作与成本估算，哪一步最消耗你，你能否接受它在项目中反复出现。",
-              "材料边界：练习材料均为虚构或以公开资料为基础，不得写入真实地块位置、权属资料或第三方数据。",
-              "反馈反应：当你的方案被指出缺少适用条件时，你是否愿意补齐并更新到方案模板。",
-              "过程兴趣：即使项目进展缓慢，你是否愿意把数据与记录整理到可复核的程度。",
-              "下一步：如果前六步你都愿意继续，下一步是用一个脱敏的真实场景完成一次调查到方案的小闭环并请同行评阅；如果某一步明显消耗，先缩小方向再验证。"
+              "我抄了两条比较条件。",
+              "我记录了两份案例。",
+              "比较前我标出了差异。",
+              "我指出了该向谁核实。",
+              "我只用了虚构资料。",
+              "我独立复核了判断。",
+              "我选了一个要练的技能。"
             ]
           },
           "id": "conservation-scientists.path.seven-day-decision.1",
@@ -29974,11 +29988,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本页不引用具体在招公告，也不把历史招聘案例计为在招岗位；中国大陆的招聘条件须按目标雇主当年公告核对。",
+              "中科院地球化学研究所课题组公告涉及区域生态修复和监测，将野外调查、遥感等列为相关经历。公告中的博士学历要求只适用于该科研招聘样本。",
               "示例中的情景案例、方案评审与考核方式为编辑设计，用于说明常见验证方式，不代表任何雇主的统一流程。"
             ]
           },
           "id": "conservation-scientists.path.recruitment-sample.1",
+          "source_refs": [
+            "cn-local-career-example-019"
+          ],
           "title": "招聘样本使用说明",
           "type": "notice"
         }
@@ -30107,10 +30124,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 19-1031.00 摘要页",
+                "entity": "BLS 表 1.2：19-1031 单列，2025—2035 年",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/summary/19-1031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "ILO 生成式 AI 与工作暴露研究",
@@ -30232,7 +30249,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业预测不是个人就业保证；增速与净变化人数、年均空缺是不同指标。"
+              "就业预测不是个人就业保证；增速与净增岗位数、年均空缺是不同指标。"
             ]
           },
           "id": "conservation-scientists.market-signals.market-signal-card.12",
@@ -30759,7 +30776,7 @@
                 "question_key": "career.faq.conservation-scientists.comparison"
               },
               {
-                "answer": "部分数据与文档任务会被辅助（数据整理与可视化、地理信息分类、方案与报告草稿、法规条款检索），但现场判断成因、确定设计规格与适用条件、向使用者解释并取得配合、以及合规判定与责任承担仍需人负责；本页美国就业为精确职业口径（2024—2034 年 3%），不能用来推断被替代的程度。",
+                "answer": "工具可辅助整理调查记录和拟写摘要。调查条件核对、证据解释及决定的记录仍需专业人员负责。BLS 预测没有单列 AI 的影响。",
                 "id": "conservation-scientists.faq.3",
                 "question": "AI 会取代自然保护科学家吗？",
                 "question_key": "career.faq.conservation-scientists.ai-replacement"
@@ -30777,52 +30794,92 @@
                 "question_key": "career.faq.conservation-scientists.human-skills"
               },
               {
-                "answer": "O*NET 全国工资页面公示的 2025 年 5 月数据为：中位年薪 73,010 美元（时薪 35.10 美元），10／25／75／90 分位分别为 47,550／57,700／91,560／110,410 美元。就业为 2024 年约 28,500 人、2024—2034 年增速 3%（平均）、年均空缺约 2,500 个；BLS 职业展望手册另有「自然保护科学家与林务员」合并口径（2025 年 40,900 人、4%、+1,700 人、约 3,000 个），两类口径不能混用。",
+                "answer": "自然保护科学家（19-1031） 2025 年 5 月年工资中位数为 73,010 美元。 BLS 表 1.2 的自然保护科学家（19-1031）：2025 年 27,700 个美国岗位，2035 年预计 29,200 个，公布净增 1,500 个（5.3%），预计年均空缺 2,100 个。",
                 "id": "conservation-scientists.faq.6",
                 "question": "美国工资和就业数据是多少？",
-                "question_key": "career.faq.conservation-scientists.salary"
+                "question_key": "career.faq.conservation-scientists.salary",
+                "source_refs": [
+                  "bls-pay",
+                  "bls-projections"
+                ]
               },
               {
-                "answer": "美国口径：准备层级为 Job Zone Four，多数要求四年制学士学位，通常需要数年相关经验与在职或职业培训；教育层级调查为 70% 学士、13% 硕士、9% 学士后证书；My Next Move 教育需求评级为 3/4。中国大陆要求以目标雇主当年招聘公告为准。",
+                "answer": "BLS 将学士列为美国自然保护科学家的典型入行学历，未列典型相关经验或在岗培训要求。O*NET 的 Job Zone Four 描述准备层级；新聘教育调查中，70% 的受访者选学士、13% 选硕士、9% 选学士后证书。具体岗位按雇主公告核对。",
                 "id": "conservation-scientists.faq.7",
                 "question": "入行需要什么学历？",
-                "question_key": "career.faq.conservation-scientists.education"
+                "question_key": "career.faq.conservation-scientists.education",
+                "source_refs": [
+                  "bls-projections",
+                  "onet-details",
+                  "onet-training"
+                ]
               },
               {
                 "answer": "本页不提供强制资质清单；O*NET 认证检索列出 15 项候选认证（如水管理、湿地、土壤科学方向），可作为能力证明。合规判定、执法处置与现场作业授权由主管部门与所在单位规定。",
                 "id": "conservation-scientists.faq.8",
                 "question": "需要哪些证书或资质？",
-                "question_key": "career.faq.conservation-scientists.credentials"
+                "question_key": "career.faq.conservation-scientists.credentials",
+                "source_refs": [
+                  "onet-cert-current"
+                ]
               },
               {
                 "answer": "现实。常见入口是调查、监测或技术服务岗位；有农学、林学、生态或地理信息背景的人可结合经验切入，但需要补齐方案编制、成本估算与法规阅读能力。",
                 "id": "conservation-scientists.faq.9",
                 "question": "转行进入这个职业现实吗？",
-                "question_key": "career.faq.conservation-scientists.career-change"
+                "question_key": "career.faq.conservation-scientists.career-change",
+                "source_refs": [
+                  "onet-details",
+                  "cn-local-career-example-019"
+                ]
               },
               {
                 "answer": "O*NET 摘要页公示的兴趣代码为 IRC，由研究型、现实型与常规型组成，分别对应分析求证、实地操作与按规范记录；My Next Move 把活动倾向描述为「喜欢想法、思考与弄清楚事情」。代码描述活动类型，不预测工作表现。",
                 "id": "conservation-scientists.faq.10",
                 "question": "这个职业的兴趣代码是什么？",
-                "question_key": "career.faq.conservation-scientists.career-worth"
+                "question_key": "career.faq.conservation-scientists.career-worth",
+                "source_refs": [
+                  "onet-summary",
+                  "bls-entry"
+                ]
               },
               {
                 "answer": "本条证据路由把中国大陆职业级工资登记为「未取得」（公开工资统计按行业门类或人员大类聚合发布，未建立与 O*NET-SOC 19-1031.00 一一对应的职业细类），因此本页只保留可见缺口，不用行业均值、父职业或美国数据代填。",
                 "id": "conservation-scientists.faq.12",
                 "question": "为什么中国大陆没有具体工资数字？",
-                "question_key": "career.faq.conservation-scientists.china-data-scope"
+                "question_key": "career.faq.conservation-scientists.china-data-scope",
+                "source_refs": [
+                  "nbs-wages"
+                ]
               },
               {
-                "answer": "O*NET 全国工资页面与摘要页提供的是本职业 19-1031.00 精确职业口径（工资为 2025 年 5 月数据、就业与预测为 2024 年与 2024—2034 年）；BLS 职业展望手册按「自然保护科学家与林务员」合并口径发布 2025 年就业与 2025—2035 年预测。本页逐处标注范围与期间，两类口径不能相加或相互替代。",
+                "answer": "O*NET 职业号为 19-1031.00；BLS 表 1.2 有 19-1031 单列行。职业展望手册还发布与林务员的合计，合计只用于其职业组。",
                 "id": "conservation-scientists.faq.13",
                 "question": "美国数据的口径和期间是什么？",
-                "question_key": "career.faq.conservation-scientists.us-data-scope"
+                "question_key": "career.faq.conservation-scientists.us-data-scope",
+                "source_refs": [
+                  "bls-projections",
+                  "bls-oews-methods",
+                  "onet-summary"
+                ]
               },
               {
-                "answer": "不能。练习材料与情境均为虚构，用于检验问题判断、措施选择与方案写作能力，不构成录用、资质或真实项目的作业授权；涉及真实项目时须按所在单位与主管部门规定执行。",
+                "answer": "CS-19 使用虚构调查记录。核对两份记录的条件，说明能否直接比较，再写一条待核问题。W-CS 是独立新题。两项都不是实地工作或资质证明。",
                 "id": "conservation-scientists.faq.14",
                 "question": "页面里的练习能当作真实项目依据吗？",
                 "question_key": "career.faq.conservation-scientists.exercise-boundary"
+              },
+              {
+                "answer": "样地一致，调查时长不同；原始计数差可能来自调查投入不同。 暂缓比较，请调查负责人提供调查时长一致的记录。",
+                "id": "conservation-scientists.faq.trial-short-reference",
+                "question": "CS-19 题后参考",
+                "question_key": "career.faq.conservation-scientists.trial-short-reference"
+              },
+              {
+                "answer": "R 来自春季，覆盖 H5 整块样地；S 来自夏季，只覆盖 H5 东半块。季节和样地边界均不同，应保留两份原记录，暂缓比较。请调查负责人提供季节和样地边界都一致的两份记录。",
+                "id": "conservation-scientists.faq.trial-week-reference",
+                "question": "W-CS 第 7 天参考",
+                "question_key": "career.faq.conservation-scientists.trial-week-reference"
               }
             ]
           },
@@ -30843,9 +30900,8 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "本页把职业身份与任务（O*NET-SOC 19-1031.00）、美国工资与就业（O*NET 全国工资页面 2025 年 5 月工资数据、O*NET 摘要页 2024—2034 年预测，以及 BLS 职业展望手册的合并口径）、行业结构（O*NET 行业分布，就业占比）与中国大陆的统计口径边界分别标注来源与限制，不混用不同口径与不同期间。",
-              "编辑归纳（能力阶段、风险情境、适配信号、练习材料与七日安排）与来源事实分开表述：三个工作面与六条职责来自官方定义与任务清单，能力阶段、风险情境、适配信号与练习均为编辑整理，其中练习材料全部为虚构，不得用于真实项目的作业授权或资质依据。",
-              "统计位置与不可换算说明：中位数不是入门工资、分位不是职级等级；雇主类型、学历、地区与资质差异不能外推为个人报价，也不换算个人月收入或到手工资；本职业按行业细分的工资中位数与净变化人数未取得，缺口按规则保留并在可见位置标记。"
+              "O*NET 职业号为 19-1031.00；BLS 表 1.2 有 19-1031 单列行。职业展望手册还发布与林务员的合计，合计只用于其职业组。",
+              "美国数据不能说明中国大陆的工资或专业权限。"
             ]
           },
           "id": "conservation-scientists.sources.boundary.1",
@@ -30996,30 +31052,30 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "历史2024—2034摘要供保留Hero/FAQ等历史消费者；本次九模块预测以新增BLS表1.2为准"
+                  "O*NET-SOC 19-1031.00 职业档案、任务与兴趣。"
                 ],
                 "evidence_type": "official source",
                 "id": "onet-summary",
-                "limitation": "支持就业 28,500 人（2024）、2034 年预测 29,500 人、增速 3%（平均）、年均空缺 2,500 个、兴趣代码 IRC 与教育层级分布（70% 学士、13% 硕士、9% 学士后证书）。",
+                "limitation": "就业预测以 BLS 表 1.2 为准；O*NET 学历调查问的是新聘所需教育。",
                 "market": "美国",
                 "name": "19-1031.00 - Conservation Scientists: Summary（职业摘要）",
-                "period": "2024 年就业与 2024—2034 年预测、2025 年工资中位数；检索 2026-09-17",
+                "period": "当前职业档案，2026-11-10 读回",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/19-1031.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "本页美国行业行引用行业分布页的就业占比。",
-                  "来源身份、章节与用途按本职业主张逐项核对；未取得项按缺口登记。"
+                  "O*NET 展示政府 67%、其他服务业（公共行政除外）21%、其余行业 12%。这是就业份额，不能当作工资或预计需求。",
+                  "就业分布不表示工资或职业需求估算。"
                 ],
                 "evidence_type": "official source",
                 "id": "onet-industry",
-                "limitation": "当前行业页政府67%、其他服务21%、其他12%含专业科技，未给精确年度；非行业工资或个人机会。OOH2025细行业联邦27/地方21/州19/社会倡导20/专业科技5，与门类页粒度不同，不叠加。",
+                "limitation": "O*NET 展示政府 67%、其他服务业（公共行政除外）21%、其余行业 12%。这是就业份额，不能当作工资或预计需求。",
                 "market": "美国",
                 "name": "Industries: 19-1031.00 - Conservation Scientists（行业分布）",
-                "period": "当前行业页未给精确年度；2026-10-09查读",
+                "period": "2026-11-10 原页读回",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-1031.00"
@@ -31088,20 +31144,20 @@
                 "url": "https://www.onetonline.org/link/localwages/19-1031.00"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "本页工资口径与不可外推说明引用 OEWS 方法说明。",
-                  "来源身份、章节与用途按本职业主张逐项核对；未取得项按缺口登记。"
+                  "BLS 表 1.2 的自然保护科学家（19-1031）：2025 年 27,700 个美国岗位，2035 年预计 29,200 个，公布净增 1,500 个（5.3%），预计年均空缺 2,100 个。",
+                  "预计空缺包括离开劳动力市场或转职业造成的替换需求。"
                 ],
                 "evidence_type": "official source",
                 "id": "bls-outlook",
-                "limitation": "说明 OEWS 的覆盖人群、工资构成与统计口径；不提供本职业具体数值，也不说明合并口径的拆分方法。",
+                "limitation": "BLS 表 1.2 的自然保护科学家（19-1031）：2025 年 27,700 个美国岗位，2035 年预计 29,200 个，公布净增 1,500 个（5.3%），预计年均空缺 2,100 个。",
                 "market": "美国",
-                "name": "Handbook of Methods: Occupational Employment and Wage Statistics（方法说明）",
-                "period": "方法说明页；检索 2026-09-17",
+                "name": "美国劳工统计局表 1.2 就业预测",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "contextual",
-                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+                "scope": "自然保护科学家（19-1031）",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -31127,7 +31183,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "nasa-seh",
-                "limitation": "用于工作情境与责任边界语境（96% 每天使用电子邮件、74% 每天电话沟通、61% 每天面对面讨论、26% 认为与外部公众打交道极其重要、13% 认为错误后果极其严重等）；不替代具体雇主的作业规程或当地规则。",
+                "limitation": "用于工作情境与责任边界语境（96% 每天使用电子邮件、74% 每天电话沟通、61% 每天面对面讨论、26% 认为与外部公众打交道极其重要、13% 认为错误后果非常严重等）；不替代具体雇主的作业规程或当地规则。",
                 "market": "美国",
                 "name": "O*NET 工作情境与责任字段（Work Context，19-1031.00）",
                 "period": "当前页面；检索 2026-10-09",
@@ -31234,12 +31290,12 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "本页美国就业与工资的 BLS 现行口径引用此页，并与 O*NET 摘要页的 2024—2034 年精确职业口径分开标注。",
-                  "来源身份、章节与用途按本职业主张逐项核对；未取得项按缺口登记。"
+                  "BLS 表 1.2 的自然保护科学家（19-1031）：2025 年 27,700 个美国岗位，2035 年预计 29,200 个，公布净增 1,500 个（5.3%），预计年均空缺 2,100 个。",
+                  "自然保护科学家（19-1031） 2025 年 5 月年工资中位数为 73,010 美元。"
                 ],
                 "evidence_type": "official source",
                 "id": "bls-oews-methods",
-                "limitation": "该页把自然保护科学家与林务员合并发布：合并就业 40,900 人（2025）、2025—2035 年增速 4%、净变化 +1,700 人、约 3,000 个年均空缺；该页单独给出自然保护科学家中位年薪 73,010 美元（2025 年 5 月），林务员为 76,400 美元；合并口径不等于本职业精确数值。",
+                "limitation": "自然保护科学家单列行与林务员合计分开读。",
                 "market": "美国",
                 "name": "Conservation Scientists and Foresters: Occupational Outlook Handbook（就业、工资与入行要求）",
                 "period": "2025 年 5 月中位工资；2025 年就业与 2025—2035 年预测；检索 2026-09-17",
@@ -31248,9 +31304,9 @@
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/conservation-scientists.htm"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-10",
                 "details": [
-                  "BLS表1.2独立SOC19-1031"
+                  "BLS 表 1.2 的自然保护科学家（19-1031）：2025 年 27,700 个美国岗位，2035 年预计 29,200 个，公布净增 1,500 个（5.3%），预计年均空缺 2,100 个。"
                 ],
                 "evidence_type": "official source",
                 "id": "bls-projections",
@@ -31259,7 +31315,7 @@
                 "name": "BLS表1.2独立SOC19-1031",
                 "period": "2025—2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "自然保护科学家（19-1031）",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
@@ -31308,6 +31364,19 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "details": [
+                  "中科院地球化学研究所课题组公告涉及区域生态修复和监测，将野外调查、遥感等列为相关经历。公告中的博士学历要求只适用于该科研招聘样本。"
+                ],
+                "id": "cn-local-career-example-019",
+                "limitation": "中科院地球化学研究所课题组公告涉及区域生态修复和监测，将野外调查、遥感等列为相关经历。公告中的博士学历要求只适用于该科研招聘样本。",
+                "market": "CN",
+                "name": "中科院地球化学研究所生态监测招聘样本",
+                "period": "2026-11-10 来源读回",
+                "publisher": "中科院地球化学研究所生态监测招聘样本",
+                "scope": "中科院地球化学研究所生态监测招聘样本",
+                "url": "https://gyig.cas.cn/rczp_2021/202606/t20260612_8228072.html"
               }
             ]
           },
@@ -33520,7 +33589,7 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "nrcs-planning"
             ],
             "id": "requirement-interface",
             "mitigation": {
@@ -33552,7 +33621,7 @@
             },
             "evidence_refs": [
               "onet",
-              "nasa"
+              "nrcs-site-guide"
             ],
             "id": "model-validity",
             "mitigation": {
@@ -33584,7 +33653,7 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "nrcs-planning"
             ],
             "id": "test-data-integrity",
             "mitigation": {
@@ -33616,7 +33685,7 @@
             },
             "evidence_refs": [
               "onet",
-              "nasa"
+              "nrcs-planning"
             ],
             "id": "change-control",
             "mitigation": {
@@ -33648,7 +33717,7 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "faa"
             ],
             "id": "controlled-access",
             "mitigation": {
@@ -33680,7 +33749,7 @@
             },
             "evidence_refs": [
               "onet",
-              "ilo"
+              "cdc-heat"
             ],
             "id": "skill-obsolescence",
             "mitigation": {
@@ -33731,7 +33800,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "bls",
+            "id": "nrcs-planning",
             "label": {
               "$link": "conservation-scientists.risk.career-risk-cards.7",
               "block": "risk",
@@ -33754,7 +33823,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "id": "nasa",
+            "id": "nrcs-site-guide",
             "label": {
               "$link": "conservation-scientists.risk.career-risk-cards.7",
               "block": "risk",
@@ -33800,7 +33869,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "ilo",
+            "id": "cdc-heat",
             "label": {
               "$link": "conservation-scientists.risk.career-risk-cards.7",
               "block": "risk",
@@ -34402,10 +34471,10 @@
         },
         "heading": "美国自然保护科学家工资与就业数据？",
         "industry_heading": "不同行业的就业分布是多少？",
-        "industry_period": "2025（O*NET详细页Top industries，非工资2025年5月期间）",
+        "industry_period": "2025 年 5 月",
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "conservation-us-industry-federal-median-2025",
             "industry": {
               "$item": "conservation-scientists.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34426,7 +34495,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "conservation-us-industry-professional-median-2025",
             "industry": {
               "$item": "conservation-scientists.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -34447,7 +34516,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "conservation-us-industry-advocacy-median-2025",
             "industry": {
               "$item": "conservation-scientists.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -34468,7 +34537,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "conservation-us-industry-state-median-2025",
             "industry": {
               "$item": "conservation-scientists.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -34487,9 +34556,15 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             }
+          },
+          {
+            "fact_ref": "conservation-us-industry-local-median-2025",
+            "industry": "地方政府（不含教育机构和医院）",
+            "median": "62,710 美元/年",
+            "note": "2025 年 5 月本职业在该行业的年工资中位数；与就业行业份额及林务员合计口径分开。"
           }
         ],
-        "industry_value_label": "该行业就业占比（不是行业工资中位数）",
+        "industry_value_label": "年工资中位数",
         "interpretation_heading": "美国自然保护科学家工资怎么理解？",
         "interpretation_rows": [
           {
@@ -34619,7 +34694,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "自然保护科学家适合什么样的人？"
+        "title": "谁可能适合做自然保护科学？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36246,14 +36321,14 @@
       },
       {
         "derivation": null,
-        "display_value": "73,010美元/年（中位数，2025 年 5 月工资数据）",
+        "display_value": "73,010 美元/年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "中位年工资（BLS OEWS 口径）",
-        "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
-        "period": "2025 年 5 月工资数据；检索 2026-10-09",
+        "measure": "OEWS 年工资中位数",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "bls-pay"
+          "bls-oews-methods"
         ]
       },
       {
@@ -36262,7 +36337,7 @@
         "fact_id": "us-wage-hourly-2025",
         "market": "美国",
         "measure": "中位时薪",
-        "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
+        "occupation_scope": "自然保护科学家（19-1031）",
         "period": "2025 年 5 月工资数据；检索 2026-10-09",
         "source_refs": [
           "bls-pay"
@@ -36270,62 +36345,62 @@
       },
       {
         "derivation": null,
-        "display_value": "约 28,500 人（2024 年）",
+        "display_value": "27,700 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业规模",
-        "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
-        "period": "2024 年；检索 2026-09-17",
+        "measure": "就业岗位数",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 29,500 人（2034 年预测）",
+        "display_value": "预计 29,200 个岗位",
         "fact_id": "us-employment-2035",
         "market": "美国",
-        "measure": "预测目标年就业人数",
-        "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
-        "period": "2024—2034 年预测期；检索 2026-09-17",
+        "measure": "预计就业岗位数",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2035",
         "source_refs": [
-          "onet-summary"
+          "bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "平均（3%；2024—2034 年）",
+        "display_value": "+5.3%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业变化率（增速）",
-        "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
-        "period": "2024—2034 年预测期；检索 2026-09-17",
+        "measure": "预计岗位增幅",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：O*NET 摘要页公布了 2024 年与 2034 年就业规模及 3% 增速，但未单列净变化人数",
+        "display_value": "1,500 个净增岗位（公布值）",
         "fact_id": "us-change-2025-2035",
         "market": "美国",
-        "measure": "未取得的统计位置（净变化人数）",
-        "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
-        "period": "2024—2034 年预测期；检索 2026-09-17",
+        "measure": "预计岗位净增",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 2,500 个/年（2024—2034 年年均职位空缺）",
+        "display_value": "2,100 个预计年均空缺",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺（含替换需求）",
-        "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
-        "period": "2024—2034 年预测期；检索 2026-09-17",
+        "measure": "预计年均空缺，含替换需求",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-projections"
         ]
       },
       {
@@ -36385,7 +36460,7 @@
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "年工资第 10 分位（BLS OEWS 口径）",
-        "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
+        "occupation_scope": "自然保护科学家（19-1031）",
         "period": "2025 年 5 月工资数据；检索 2026-10-09",
         "source_refs": [
           "bls-pay"
@@ -36397,7 +36472,7 @@
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "年工资第 90 分位（BLS OEWS 口径）",
-        "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
+        "occupation_scope": "自然保护科学家（19-1031）",
         "period": "2025 年 5 月工资数据；检索 2026-10-09",
         "source_refs": [
           "bls-pay"
@@ -36405,10 +36480,10 @@
       },
       {
         "derivation": null,
-        "display_value": "政府67%（当前行业页占比）",
+        "display_value": "O*NET 展示政府 67%、其他服务业（公共行政除外）21%、其余行业 12%。这是就业份额，不能当作工资或预计需求。",
         "fact_id": "us-industry-wage-aerospace-mfg-2025",
         "market": "美国",
-        "measure": "行业就业占比",
+        "measure": "O*NET 就业行业份额",
         "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
         "period": "当前行业页未给精确年度；2026-10-09查读",
         "source_refs": [
@@ -36417,10 +36492,10 @@
       },
       {
         "derivation": null,
-        "display_value": "其他服务21%（当前行业页占比）",
+        "display_value": "O*NET 展示政府 67%、其他服务业（公共行政除外）21%、其余行业 12%。这是就业份额，不能当作工资或预计需求。",
         "fact_id": "us-industry-wage-engineering-services-2025",
         "market": "美国",
-        "measure": "行业就业占比",
+        "measure": "O*NET 就业行业份额",
         "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
         "period": "当前行业页未给精确年度；2026-10-09查读",
         "source_refs": [
@@ -36429,10 +36504,10 @@
       },
       {
         "derivation": null,
-        "display_value": "其他12%（含专业科技；当前行业页占比）",
+        "display_value": "O*NET 展示政府 67%、其他服务业（公共行政除外）21%、其余行业 12%。这是就业份额，不能当作工资或预计需求。",
         "fact_id": "us-industry-wage-federal-2025",
         "market": "美国",
-        "measure": "行业就业占比（合并行）",
+        "measure": "O*NET 就业行业份额",
         "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
         "period": "当前行业页未给精确年度；2026-10-09查读",
         "source_refs": [
@@ -36441,14 +36516,14 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得本职业按行业细分的工资中位数（美国，2025 年 5 月工资数据期）",
+        "display_value": "2025 年 5 月本职业在该行业的年工资中位数；与就业行业份额及林务员合计口径分开。",
         "fact_id": "us-industry-wage-rd-2025",
         "market": "美国",
-        "measure": "未取得的统计位置（行业工资中位数）",
+        "measure": "BLS 行业工资口径",
         "occupation_scope": "美国；按行业细分",
         "period": "2025 年 5 月工资数据期；检索 2026-09-17",
         "source_refs": [
-          "onet-localwages"
+          "bls-oews-methods"
         ]
       },
       {
@@ -36469,7 +36544,7 @@
         "fact_id": "us-wage-p25-2025",
         "market": "美国",
         "measure": "年工资第 25 分位（BLS OEWS 口径）",
-        "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
+        "occupation_scope": "自然保护科学家（19-1031）",
         "period": "2025 年 5 月工资数据；检索 2026-10-09",
         "source_refs": [
           "bls-pay"
@@ -36481,7 +36556,7 @@
         "fact_id": "us-wage-p75-2025",
         "market": "美国",
         "measure": "年工资第 75 分位（BLS OEWS 口径）",
-        "occupation_scope": "自然保护科学家（O*NET-SOC 19-1031.00）",
+        "occupation_scope": "自然保护科学家（19-1031）",
         "period": "2025 年 5 月工资数据；检索 2026-10-09",
         "source_refs": [
           "bls-pay"
@@ -36489,12 +36564,12 @@
       },
       {
         "derivation": null,
-        "display_value": "27,700人（2025）",
+        "display_value": "27,700 个岗位",
         "fact_id": "current-us-employment-2025-2035",
         "market": "美国",
-        "measure": "总体就业",
-        "occupation_scope": "SOC19-1031独立自然保护科学家",
-        "period": "2025—2035",
+        "measure": "就业岗位数",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025",
         "source_refs": [
           "bls-projections"
         ]
@@ -36525,24 +36600,24 @@
       },
       {
         "derivation": null,
-        "display_value": "+5.3%（2025—2035）",
+        "display_value": "+5.3%",
         "fact_id": "current-us-growth-2025-2035",
         "market": "美国",
-        "measure": "公布变化率",
-        "occupation_scope": "SOC19-1031独立自然保护科学家",
-        "period": "2025—2035",
+        "measure": "预计岗位增幅",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections"
         ]
       },
       {
         "derivation": null,
-        "display_value": "2,100个/年（2025—2035）",
+        "display_value": "2,100 个预计年均空缺",
         "fact_id": "current-us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均空缺含替补",
-        "occupation_scope": "SOC19-1031独立自然保护科学家",
-        "period": "2025—2035",
+        "measure": "预计年均空缺，含替换需求",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025–2035",
         "source_refs": [
           "bls-projections"
         ]
@@ -36557,6 +36632,66 @@
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
           "source-fermatmind-ai-rubric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "88,610 美元/年",
+        "fact_id": "conservation-us-industry-federal-median-2025",
+        "market": "United States",
+        "measure": "行业年工资中位数",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "bls-oews-methods"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "76,290 美元/年",
+        "fact_id": "conservation-us-industry-professional-median-2025",
+        "market": "United States",
+        "measure": "行业年工资中位数",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "bls-oews-methods"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "71,180 美元/年",
+        "fact_id": "conservation-us-industry-advocacy-median-2025",
+        "market": "United States",
+        "measure": "行业年工资中位数",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "bls-oews-methods"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "68,620 美元/年",
+        "fact_id": "conservation-us-industry-state-median-2025",
+        "market": "United States",
+        "measure": "行业年工资中位数",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "bls-oews-methods"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "62,710 美元/年",
+        "fact_id": "conservation-us-industry-local-median-2025",
+        "market": "United States",
+        "measure": "行业年工资中位数",
+        "occupation_scope": "自然保护科学家（19-1031）",
+        "period": "2025 年 5 月",
+        "source_refs": [
+          "bls-oews-methods"
         ]
       }
     ]
@@ -36578,25 +36713,25 @@
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国年薪中位数（2025 年 5 月数据，约 73,010 美元）"
+        "label": "美国年工资中位数（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034 年，平均，3%）"
+        "label": "美国预计岗位增幅（2025—2035 年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 28,500 人）"
+        "label": "美国 2025 年岗位数"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，约 2,500 个）"
+        "label": "美国预计年均空缺"
       },
       {
         "availability": "missing",
@@ -36610,14 +36745,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "自然保护科学家对应 O*NET-SOC 19-1031.00：管理与保护土壤、水与牧场等自然资源，开展调查监测、编制保护方案并向土地使用者提供指导；30 项官方任务、工作情境百分比、美国工资与就业（2025 年 5 月中位数 73,010 美元、2024—2034 年 3%）、中国大陆职业级工资缺口与练习边界一次看清。"
+      "text": "了解自然保护科学家的工作、入行与就业，做一次生境调查记录核对，并查看美国单列职业工资和就业预测。"
     },
     "title": {
       "availability": "available",
       "text": "自然保护科学家"
     }
   },
-  "source_content_sha256": "9aeb4e8e615c61ccfb83b84209e4133dd369c625c7e9a1c27e61ade09d083a23",
+  "source_content_sha256": "71db6c13572e0546075afe243dbbe64b22a8ed026031aa1dfd870f451d664994",
   "subject": {
     "canonical_slug": "conservation-scientists",
     "name": "自然保护科学家",

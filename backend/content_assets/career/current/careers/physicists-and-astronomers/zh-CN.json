@@ -23371,13 +23371,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "路径：研究与高校职位通常需博士；BLS提到部分美国联邦物理入门岗位可接受本科。分别核研究方向、导师、项目、设备安全与合同。"
+              "纸面体验｜把虚构实验测量和望远镜观测分为两列，为每列标出影响后续比较的一项缺失元数据。 "
             ]
           },
           "id": "physicists-and-astronomers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "bls",
-            "editor"
+            "transfer-work-check"
           ],
           "type": "prose"
         }
@@ -23670,14 +23669,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "定义：BLS 19-2010 Astronomers and Physicists为合并统计行，任务和兴趣分别查O*NET 19-2011、19-2012。"
+              "物理学家可能以实验或计算检验物理机制，天文学家常借观测资料和模型研究天体。项目开始时应明确数据来源、观测条件和要检验的问题。 看岗位时，可先问谁复核成品或记录、哪些任务需要另行授权。"
             ]
           },
           "id": "physicists-and-astronomers.profile.definition-block.11",
           "source_refs": [
-            "bls",
-            "ep",
-            "editor"
+            "transfer-onet-19-2012.00",
+            "transfer-onet-19-2011.00"
           ],
           "type": "prose"
         },
@@ -24774,15 +24772,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可辅助文献检索、分析代码、模拟和天文观测资料分类，但不能独立证明实验校准、观测选择、量纲、模型边界或科学解释。物理与天文研究者须核原始证据和可复现性。没有可核的19-2010合并职业AI岗位替代率。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+25+75)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可在获准环境用工具整理虚构的交接记录。先核原始值、版本和未决项，再由有权限的人复核。任务示例：把虚构实验测量和望远镜观测分为两列，为每列标出影响后续比较的一项缺失元数据。"
             ]
           },
           "id": "physicists-and-astronomers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "transfer-onet-19-2012.00",
+            "transfer-onet-19-2011.00",
+            "transfer-work-check"
           ],
           "type": "prose"
         },
@@ -32608,6 +32605,47 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-19-2012.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 19-2012.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/19-2012.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "任务表用于核对工作对象与常见产出。"
+                ],
+                "id": "transfer-onet-19-2011.00",
+                "limitation": "按实际岗位核分工及现场授权。",
+                "market": "美国",
+                "name": "O*NET 19-2011.00 职业任务",
+                "period": "职业档案",
+                "publisher": "O*NET OnLine (U.S. DOL/ETA)",
+                "scope": "职业任务原页；在组合页用于具名子职业",
+                "url": "https://www.onetonline.org/link/details/19-2011.00"
+              },
+              {
+                "details": [
+                  "用于观察如何保留原值、识别差异并交给复核人。"
+                ],
+                "id": "transfer-work-check",
+                "limitation": "仅作纸面体验。",
+                "market": "本页",
+                "name": "本站纸面核对示例",
+                "period": "2026-11-10",
+                "publisher": "FermatMind",
+                "scope": "虚构职业记录",
+                "url": null
               }
             ]
           },
@@ -37852,10 +37890,10 @@
       "text": "物理学家与天文学家职业指南：任务、工资与入行路径"
     }
   },
-  "source_content_sha256": "e41ad5e292dad27a712080d85724b33ba53076d1d5f38303d4498ecde0d8da8e",
+  "source_content_sha256": "814513e13c94dcabfe8309a5579285aab95cb98116f9cba1dadd8577f791f161",
   "subject": {
     "canonical_slug": "physicists-and-astronomers",
     "name": "物理学家与天文学家",
-    "summary": "物理学家与天文学家（美国BLS 19-2010合并统计）研究物质、能量与宇宙天体的规律。物理学家可侧重理论、实验或应用；天文学家可用地面和空间仪器观测天体、分析数据并提出模型。两者都需说明假设、误差和可复现性。BLS合并工资与就业不能当任一独立职业的数值，O*NET任务和兴趣须按19-2011、19-2012分别核对。"
+    "summary": "物理学家可能以实验或计算检验物理机制，天文学家常借观测资料和模型研究天体。项目开始时应明确数据来源、观测条件和要检验的问题。"
   }
 }

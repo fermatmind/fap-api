@@ -20,6 +20,24 @@
       "fact:fermatmind-ai-impact-estimate": {
         "status": "pending_mapping"
       },
+      "fact:nutrition-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:nutrition-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:nutrition-openings": {
+        "status": "pending_mapping"
+      },
+      "fact:nutrition-wage": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-nutrition-ningguo": {
+        "status": "pending_mapping"
+      },
+      "fact:posting-nutrition-tongliao": {
+        "status": "pending_mapping"
+      },
       "item:dietitians-and-nutritionists.ai-impact.ai-impact-table.1": {
         "status": "pending_mapping"
       },
@@ -8501,28 +8519,24 @@
           "data": {
             "entries": [
               {
-                "answer": "The day begins with collecting dietary and health history and verifying labels and guidelines, then completing nutrition assessment and risk screening, setting executable goals together with the person, carrying out education or implementing a programme, and then monitoring continuously and reviewing or referring, forming a closed loop.",
+                "answer": "Assess dietary and health information, design a nutrition or food-service plan and review implementation and outcomes. Clinical, community and food-service roles differ; clinical treatment follows the institution’s division of responsibility and credentials.",
                 "id": "dietitians-and-nutritionists.faq.1",
                 "question": "Dietitians and nutritionists: how does the daily work form a closed loop?",
                 "question_key": "career.faq.dietitians-and-nutritionists.daily-work",
                 "source_refs": [
-                  "editorial-safe-exercise-v2",
                   "onet-details"
                 ]
               },
               {
-                "answer": "Health educators do group programme design and evaluation; pharmacists review and dispense medication; occupational therapists restore function through activity and environmental adjustment; exercise physiologists design exercise programmes; registered nurses implement nursing plans. This occupation deals with nutritional status and eating behaviour and directly carries out nutrition assessment, nutrition care and monitoring.",
+                "answer": "Technicians assist with meal implementation, recordkeeping, delivery checks and reporting. Appropriately trained personnel may also participate in screening, assessment or meal preparation within their role. Dietitians often design and review plans. Chinese clinical care follows local professional qualifications and guidance. U.S. hospital diet orders depend on state law, qualified personnel and medical staff authorization.",
                 "id": "dietitians-and-nutritionists.faq.2",
                 "question": "Dietitians and nutritionists: what is the difference from adjacent occupations?",
                 "question_key": "career.faq.dietitians-and-nutritionists.role-comparison",
                 "source_refs": [
-                  "adjacent-onet-21-1091-00",
-                  "adjacent-onet-29-1051-00",
-                  "adjacent-onet-29-1122-00",
-                  "adjacent-onet-29-1128-00",
-                  "adjacent-onet-29-1141-00",
-                  "editorial-safe-exercise-v2",
-                  "onet-details"
+                  "onet-details",
+                  "r5-adj-technicians",
+                  "nutrition-clinical-cn",
+                  "nutrition-hospital-us"
                 ]
               },
               {
@@ -8554,33 +8568,33 @@
                 ]
               },
               {
-                "answer": "Current official wage material in mainland China has no national occupational wage distribution corresponding one-to-one to United States 29-1031.00, so no precise median, percentile, starting salary or monthly wage is displayed, and no industry average or recruitment quote is used to fill in.",
+                "answer": "A Ningguo People’s Hospital posting lists a bachelor’s degree or higher in relevant fields and does not show pay. A historical Tongliao Bode Mongolian Medicine Hospital posting covers dietary guidance and quotes CNY 3,000–6,000 plus social insurance without a pay period. The figure cannot be treated as a monthly wage or a national estimate.",
                 "id": "dietitians-and-nutritionists.faq.6",
                 "question": "Dietitians and nutritionists: how should mainland China salaries be verified?",
                 "question_key": "career.faq.dietitians-and-nutritionists.china-pay",
                 "source_refs": [
-                  "nbs-wage-2025"
+                  "nutrition-ningguo",
+                  "nutrition-tongliao"
                 ]
               },
               {
-                "answer": "The 2025 national median wage for United States 29-1031.00 is 76,400 USD per year and 36.73 USD per hour; this is not a novice starting salary, a specific regional quote or a personal total income.",
+                "answer": "The May 2025 U.S. median was $36.73 per hour and $76,400 per year.",
                 "id": "dietitians-and-nutritionists.faq.7",
                 "question": "Dietitians and nutritionists: how should United States wage data be interpreted?",
                 "question_key": "career.faq.dietitians-and-nutritionists.us-pay",
                 "source_refs": [
-                  "bls-current-2025-2035"
+                  "onet-wage-2025"
                 ]
               },
               {
-                "answer": "In the United States a bachelor's or master's degree plus a supervised internship is usually required, and most states require a licence; clinical nutrition department positions in mainland China and public nutritionist skill levels are different systems. Specific courses, internships and qualifications must be verified by location and employer.",
+                "answer": "BLS lists a bachelor’s degree and internship or residency as typical. Specific credentials have separate education and supervised practice requirements; check the state, credential and employer. The mainland China postings show only their individual requirements.",
                 "id": "dietitians-and-nutritionists.faq.8",
                 "question": "Dietitians and nutritionists: what education or training is usually needed to enter?",
                 "question_key": "career.faq.dietitians-and-nutritionists.education-path",
                 "source_refs": [
-                  "bls-current-2025-2035",
-                  "nhc-clinical-nutrition-2022",
-                  "mohrss-public-nutritionist-2021",
-                  "editorial-safe-exercise-v2"
+                  "r5-bls-current",
+                  "nutrition-ningguo",
+                  "nutrition-tongliao"
                 ]
               },
               {
@@ -8594,13 +8608,12 @@
                 ]
               },
               {
-                "answer": "United States 29-1031.00 had about 86,300 positions in 2025, is projected to grow 8% over 2025—2035 with about 5,700 annual average openings; a national projection does not represent individual hiring. Moving toward health education or exercise physiology requires building up the corresponding capability and qualification.",
+                "answer": "BLS projects U.S. employment for 29-1031 to grow from about 86,300 in 2025 to 93,000 in 2035 (+7.7%), with about 5,700 annual openings including replacements. Counts are rounded independently.",
                 "id": "dietitians-and-nutritionists.faq.10",
                 "question": "Dietitians and nutritionists: how should the employment outlook and adjacent transitions be understood?",
                 "question_key": "career.faq.dietitians-and-nutritionists.outlook-transition",
                 "source_refs": [
-                  "bls-current-2025-2035",
-                  "editorial-safe-exercise-v2"
+                  "r5-bls-current"
                 ]
               },
               {
@@ -8929,7 +8942,7 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Verify occupational identity, tasks, work activities and work context.",
                   "Does not define Chinese qualification, clinical authorization or wages."
@@ -9146,16 +9159,16 @@
                 "url": "https://www.onetonline.org/link/localtrends/29-1031.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "29-1031: 86.3→93.0 thousand, a net change of 6.7 thousand, 7.7%, 5.7 thousand annual average openings, self-employment 8.5%; typical bachelor's degree, no related experience, Internship/residency. This does not replace the RDN application requirements."
+                  "BLS projects U.S. employment for 29-1031 to grow from about 86,300 in 2025 to 93,000 in 2035 (+7.7%), with about 5,700 annual openings including replacements. Counts are rounded independently."
                 ],
                 "evidence_type": "official employment projections and worker characteristics",
                 "id": "r5-bls-current",
                 "limitation": "29-1031: 86.3→93.0 thousand, a net change of 6.7 thousand, 7.7%, 5.7 thousand annual average openings, self-employment 8.5%; typical bachelor's degree, no related experience, Internship/residency. This does not replace the RDN application requirements.",
                 "market": "United States",
                 "name": "BLS Table 1.2 occupational projection and entry characteristics",
-                "period": "2025 employment; 2025—2035 projection",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -9251,6 +9264,66 @@
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One hospital dietitian role, bachelor’s degree or above in listed fields. No wage in the vacancy row."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "nutrition-ningguo",
+                "limitation": "Historical posting, not national pay or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Ningguo People’s Hospital: dietitian",
+                "period": "2026",
+                "publisher": "Ningguo Municipal Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.ningguo.gov.cn/OpennessContent/show/3782273.html?branch=453"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Five dietitian roles providing dietary guidance. The ad gives CNY 3,000–6,000 plus social insurance without stating the pay period."
+                ],
+                "evidence_type": "Public job posting sample",
+                "id": "nutrition-tongliao",
+                "limitation": "Historical posting, not national pay or a current vacancy.",
+                "market": "Mainland China",
+                "name": "Tongliao Bode Mongolian Medicine Hospital: dietitian",
+                "period": "2025-11",
+                "publisher": "Tongliao Economic and Technological Development Zone",
+                "scope": "recruitment_proxy",
+                "url": "https://kfq.tongliao.gov.cn/zwgk/zfxxgk/fdzdgknr/zdlyxxgk/wgjy/gwxx/202511/t20251117_1015242.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Distinguishes trained physicians’ clinical work from qualified technical staff’s screening, assessment and related tasks."
+                ],
+                "evidence_type": "Official guidance or regulation",
+                "id": "nutrition-clinical-cn",
+                "limitation": "Verify the jurisdiction, institution, credentials and task.",
+                "market": "As specified by jurisdiction",
+                "name": "China NHC Clinical Nutrition Department guideline, Articles 5–6",
+                "period": "2026-11-09",
+                "publisher": "Official text",
+                "scope": "regulatory_context",
+                "url": "https://www.hunan.gov.cn/zqt/zcsd/202204/t20220413_22735524.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Hospital therapeutic diet orders depend on state law and medical staff authorization."
+                ],
+                "evidence_type": "Official guidance or regulation",
+                "id": "nutrition-hospital-us",
+                "limitation": "Verify the jurisdiction, institution, credentials and task.",
+                "market": "As specified by jurisdiction",
+                "name": "U.S. 42 CFR 482.28(b)(2)",
+                "period": "2026-11-09",
+                "publisher": "Official text",
+                "scope": "regulatory_context",
+                "url": "https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-482/subpart-C/section-482.28"
               }
             ]
           },
@@ -10468,8 +10541,8 @@
               "月薪参考": "2025 health and social work: urban non-private 146266 and private 75631 yuan/year; a multi-occupation average, not the dietitian wage."
             },
             {
-              "城市/区间": "Recruitment quotes (cannot substitute)",
-              "月薪参考": "Insufficient evidence: no national single-occupation scope obtained"
+              "城市/区间": "Mainland China historical job postings",
+              "月薪参考": "A Ningguo People’s Hospital posting lists a bachelor’s degree or higher in relevant fields and does not show pay. A historical Tongliao Bode Mongolian Medicine Hospital posting covers dietary guidance and quotes CNY 3,000–6,000 plus social insurance without a pay period. The figure cannot be treated as a monthly wage or a national estimate."
             }
           ],
           "china_soc_row": {
@@ -10478,6 +10551,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
+          "fact_refs": [
+            "posting-nutrition-ningguo",
+            "posting-nutrition-tongliao"
+          ],
           "sources_note": {
             "$join": [
               {
@@ -10501,7 +10578,7 @@
           "ui": {
             "ai_heading": "Boundaries of AI assistance",
             "driver_heading": "Influencing factors",
-            "official_heading": "Mainland China public scope",
+            "official_heading": "Official statistics, industry context and job postings",
             "scenario_caption": "No precise national single-occupation wage obtained, and no industry average or recruitment quote is used as a substitute.",
             "scenario_heading": "Occupational context boundaries",
             "scenario_interpretation_label": "Explanation",
@@ -10516,7 +10593,7 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "adjacent-onet-29-1051-00",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10524,7 +10601,7 @@
             },
             "｜",
             {
-              "$source": "adjacent-onet-29-1051-00",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10540,7 +10617,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "adjacent-onet-21-1091-00",
+                  "$source": "onet-wage-2025",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10548,7 +10625,7 @@
                 },
                 "｜",
                 {
-                  "$source": "adjacent-onet-21-1091-00",
+                  "$source": "onet-wage-2025",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10564,7 +10641,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "adjacent-onet-21-1091-00",
+                  "$source": "onet-wage-2025",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10572,7 +10649,7 @@
                 },
                 "｜",
                 {
-                  "$source": "adjacent-onet-21-1091-00",
+                  "$source": "onet-wage-2025",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10588,7 +10665,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "adjacent-onet-21-1091-00",
+                  "$source": "onet-wage-2025",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10596,7 +10673,7 @@
                 },
                 "｜",
                 {
-                  "$source": "adjacent-onet-21-1091-00",
+                  "$source": "onet-wage-2025",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10612,7 +10689,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "adjacent-onet-21-1091-00",
+                  "$source": "onet-wage-2025",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10620,7 +10697,7 @@
                 },
                 "｜",
                 {
-                  "$source": "adjacent-onet-21-1091-00",
+                  "$source": "onet-wage-2025",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10636,7 +10713,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "adjacent-onet-21-1091-00",
+                  "$source": "onet-wage-2025",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10644,7 +10721,7 @@
                 },
                 "｜",
                 {
-                  "$source": "adjacent-onet-21-1091-00",
+                  "$source": "onet-wage-2025",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10660,7 +10737,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "adjacent-onet-29-1051-00",
+                  "$source": "r5-bls-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10668,7 +10745,7 @@
                 },
                 "｜",
                 {
-                  "$source": "adjacent-onet-29-1051-00",
+                  "$source": "r5-bls-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10680,11 +10757,11 @@
           },
           {
             "指标": "United States employment growth (2025—2035)",
-            "数值": "8% (much faster than average)",
+            "数值": "7.7%",
             "说明": {
               "$join": [
                 {
-                  "$source": "adjacent-onet-29-1051-00",
+                  "$source": "r5-bls-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10692,7 +10769,7 @@
                 },
                 "｜",
                 {
-                  "$source": "adjacent-onet-29-1051-00",
+                  "$source": "r5-bls-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10708,7 +10785,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "adjacent-onet-29-1051-00",
+                  "$source": "r5-bls-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10716,7 +10793,7 @@
                 },
                 "｜",
                 {
-                  "$source": "adjacent-onet-29-1051-00",
+                  "$source": "r5-bls-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10754,7 +10831,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "Projected growth of 8% over 2025—2035 (much faster than average)",
+        "growth": "U.S. BLS Table 1.2: projected growth of 7.7% from 2025 to 2035.",
         "heading": {
           "$item": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -11149,7 +11226,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/health-educators",
+            "target_href": "/en/career/jobs/health-educators",
             "target_slug": "health-educators",
             "target_title": "Health educators: differences in objects from this occupation",
             "transition_distance": "Editorial task comparison; transition success rates, general distance levels or fixed completion times were not verified in this round."
@@ -11157,7 +11234,7 @@
           {
             "capability_gaps": "To be built up: pharmacy professional knowledge, internship and licensing.",
             "shared_capabilities": "Transferable capabilities: nutrition knowledge and patient communication habits.",
-            "target_href": "/zh/career/jobs/pharmacists",
+            "target_href": "/en/career/jobs/pharmacists",
             "target_slug": "pharmacists",
             "target_title": "Pharmacists: differences in objects from this occupation",
             "transition_distance": "Editorial task comparison; transition success rates, general distance levels or fixed completion times were not verified in this round."
@@ -11165,7 +11242,7 @@
           {
             "capability_gaps": "To be built up: functional assessment, rehabilitation techniques and clinical authorization.",
             "shared_capabilities": "Transferable capabilities: assessment and individual communication experience.",
-            "target_href": "/zh/career/jobs/occupational-therapists",
+            "target_href": "/en/career/jobs/occupational-therapists",
             "target_slug": "occupational-therapists",
             "target_title": "Occupational therapists: differences in goals from this occupation",
             "transition_distance": "Editorial task comparison; transition success rates, general distance levels or fixed completion times were not verified in this round."
@@ -11173,7 +11250,7 @@
           {
             "capability_gaps": "To be built up: exercise testing, physiological monitoring and the corresponding qualification.",
             "shared_capabilities": "Transferable capabilities: health behaviour change and monitoring experience.",
-            "target_href": "/zh/career/jobs/exercise-physiologists",
+            "target_href": "/en/career/jobs/exercise-physiologists",
             "target_slug": "exercise-physiologists",
             "target_title": "Exercise physiologists: differences in methods from this occupation",
             "transition_distance": "Editorial task comparison; transition success rates, general distance levels or fixed completion times were not verified in this round."
@@ -11181,7 +11258,7 @@
           {
             "capability_gaps": "To be built up: nursing education, clinical practice and registration licensing.",
             "shared_capabilities": "Transferable capabilities: health communication and awareness of record standards.",
-            "target_href": "/zh/career/jobs/registered-nurses",
+            "target_href": "/en/career/jobs/registered-nurses",
             "target_slug": "registered-nurses",
             "target_title": "Registered nurses: differences in authorization from this occupation",
             "transition_distance": "Editorial task comparison; transition success rates, general distance levels or fixed completion times were not verified in this round."
@@ -11189,7 +11266,7 @@
           {
             "capability_gaps": "Target 29-2051 works under the supervision of a dietitian and also includes nutrition assessment, teaching and research; verify the target education or NDTR and unit duties, and it cannot be treated merely as a records assistant.",
             "shared_capabilities": "Transferable capabilities: basic nutrition and dietary knowledge.",
-            "target_href": "/zh/career/jobs/dietetic-technicians",
+            "target_href": "/en/career/jobs/dietetic-technicians",
             "target_slug": "dietetic-technicians",
             "target_title": "Dietetic technicians: differences in level from this occupation",
             "transition_distance": "Editorial task comparison; transition success rates, general distance levels or fixed completion times were not verified in this round."
@@ -11223,8 +11300,8 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the occupational interest test",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
+            "cta_label": "Explore career interests",
             "evidence_level": "Editorial work observation; this round did not obtain validity research on this scale for performance or hiring in this occupation.",
             "id": "riasec",
             "label": "Interests and tasks",
@@ -11242,8 +11319,8 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the occupational interest test",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
+            "cta_label": "Explore Big Five traits",
             "evidence_level": "Editorial work observation; this round did not obtain validity research on this scale for performance or hiring in this occupation.",
             "id": "big-five",
             "label": "Stable execution",
@@ -11261,8 +11338,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the occupational interest test",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "Explore personality preferences",
             "evidence_level": "Editorial work observation; this round did not obtain validity research on this scale for performance or hiring in this occupation.",
             "id": "mbti",
             "label": "Observation preferences",
@@ -11275,8 +11352,8 @@
           },
           {
             "answer": "Verify through actual observation and institutional feedback, not by assessment.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the occupational interest test",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
+            "cta_label": "Reflect on motivations",
             "evidence_level": "Editorial work observation; this round did not obtain validity research on this scale for performance or hiring in this occupation.",
             "id": "enneagram",
             "label": "Motivation observation",
@@ -11289,8 +11366,8 @@
           },
           {
             "answer": "Observe how the person judges and hands over in a simulated or supervised setting.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the occupational interest test",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
+            "cta_label": "Explore reasoning performance",
             "evidence_level": "Editorial work observation; this round did not obtain validity research on this scale for performance or hiring in this occupation.",
             "id": "iq",
             "label": "Problem solving",
@@ -11303,8 +11380,8 @@
           },
           {
             "answer": "Verify through handover records and team feedback.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the occupational interest test",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "cta_label": "Reflect on emotional responses",
             "evidence_level": "Editorial work observation; this round did not obtain validity research on this scale for performance or hiring in this occupation.",
             "id": "eq",
             "label": "Collaboration boundaries",
@@ -11680,7 +11757,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Test whether my occupational interests suit dietitians and nutritionists",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11863,19 +11940,20 @@
       },
       {
         "derivation": "Entries visible in the main text are cited directly, with no cross-scope calculation performed.",
-        "display_value": "United States 29-1031.00 (2025): employment about 86,300 people; projected growth of 8% over 2025—2035 (much faster than average, a net increase of about 6,700 people), with about 5,700 job openings per year on average; May 2025 median annual wage 76,400 USD (36.73 USD/hour).",
+        "display_value": "The May 2025 U.S. median was $36.73 per hour and $76,400 per year. BLS projects U.S. employment for 29-1031 to grow from about 86,300 in 2025 to 93,000 in 2035 (+7.7%), with about 5,700 annual openings including replacements. Counts are rounded independently.",
         "fact_id": "content-us-salary-1",
         "market": "United States",
         "measure": "United States wage and projection scope",
         "occupation_scope": "Precise occupational data (BLS Occupational projections and worker characteristics, 2025–2035): openings include both growth and replacement; combined or parent scopes must not be split into precise statistics for a target sub-occupation.",
         "period": "2025 employment/wage and 2025-2035 projections",
         "source_refs": [
-          "bls-current-2025-2035"
+          "r5-bls-current",
+          "onet-wage-2025"
         ]
       },
       {
         "derivation": "Entries visible in the main text are cited directly, with no cross-scope calculation performed.",
-        "display_value": "In the United States a bachelor's or master's degree plus a supervised internship or residency is usually required, and most states require a licence; education, internship and licensing are verified by location and employer.",
+        "display_value": "In the United States a bachelor's or master's degree plus a supervised internship or residency is usually required, and many states require a licence; education, internship and licensing are verified by location and employer.",
         "fact_id": "content-path-1",
         "market": "United States",
         "measure": "Typical entry or path boundaries",
@@ -11908,6 +11986,78 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One hospital dietitian role, bachelor’s degree or above in listed fields. No wage in the vacancy row.",
+        "fact_id": "posting-nutrition-ningguo",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Ningguo People’s Hospital: dietitian",
+        "period": "2026",
+        "source_refs": [
+          "nutrition-ningguo"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Five dietitian roles providing dietary guidance. The ad gives CNY 3,000–6,000 plus social insurance without stating the pay period.",
+        "fact_id": "posting-nutrition-tongliao",
+        "market": "Mainland China",
+        "measure": "Job posting sample",
+        "occupation_scope": "Tongliao Bode Mongolian Medicine Hospital: dietitian",
+        "period": "2025-11",
+        "source_refs": [
+          "nutrition-tongliao"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$36.73 per hour; $76,400 per year",
+        "fact_id": "nutrition-wage",
+        "market": "United States",
+        "measure": "United States median wage (May 2025, 76,400 USD/year; 36.73 USD/hour)",
+        "occupation_scope": "US SOC 29-1031",
+        "period": "May 2025",
+        "source_refs": [
+          "onet-wage-2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "+7.7%",
+        "fact_id": "nutrition-growth",
+        "market": "United States",
+        "measure": "U.S. 2025–2035 projected employment: +7.7%",
+        "occupation_scope": "US SOC 29-1031",
+        "period": "2025–2035",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "86,300 jobs",
+        "fact_id": "nutrition-employment",
+        "market": "United States",
+        "measure": "U.S. employment: 86,300 jobs (2025)",
+        "occupation_scope": "US SOC 29-1031",
+        "period": "2025",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "About 5,700 per year (including replacements)",
+        "fact_id": "nutrition-openings",
+        "market": "United States",
+        "measure": "U.S. projected annual openings: 5,700 (including replacements)",
+        "occupation_scope": "US SOC 29-1031",
+        "period": "2025–2035",
+        "source_refs": [
+          "r5-bls-current"
+        ]
       }
     ]
   },
@@ -11926,27 +12076,27 @@
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "content-us-salary-1",
+        "fact_ref": "nutrition-wage",
         "key": "us_pay",
         "label": "United States median wage (May 2025, 76,400 USD/year; 36.73 USD/hour)"
       },
       {
         "availability": "available",
-        "fact_ref": "content-us-salary-1",
+        "fact_ref": "nutrition-growth",
         "key": "us_growth",
-        "label": "United States employment projection (growth of 8% over 2025—2035, much faster than average)"
+        "label": "U.S. 2025–2035 projected employment: +7.7%"
       },
       {
         "availability": "available",
-        "fact_ref": "content-us-salary-1",
+        "fact_ref": "nutrition-employment",
         "key": "us_employment",
-        "label": "United States employment (2025, about 86,300 people)"
+        "label": "U.S. employment: 86,300 jobs (2025)"
       },
       {
         "availability": "available",
-        "fact_ref": "content-us-salary-1",
+        "fact_ref": "nutrition-openings",
         "key": "us_openings",
-        "label": "United States annual average job openings (2025—2035, about 5,700)"
+        "label": "U.S. projected annual openings: 5,700 (including replacements)"
       },
       {
         "availability": "missing",
@@ -11960,17 +12110,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Dietitians and nutritionists assess diet and health information, plan nutrition programmes or food services, carry out education and consultation and monitor outcomes; clinical, community and group catering duties differ, and practice and licensing must be confirmed by jurisdiction."
+      "text": "Explore dietitian work from assessment to meal planning and follow-up. Compare U.S. wages, Chinese hospital postings and technician duties."
     },
     "title": {
       "availability": "available",
       "text": "Dietitians and nutritionists"
     }
   },
-  "source_content_sha256": "3ebab45e1495f916bea01f8f3b4c459904fa9ea3bf0c8e0143dd2bf0b6e612a7",
+  "source_content_sha256": "d49694698ea2b4b37874f60e76b07ed24a9b86fda648b2a868417c42381e4de4",
   "subject": {
     "canonical_slug": "dietitians-and-nutritionists",
     "name": "Dietitians and nutritionists",
-    "summary": "Dietitians and nutritionists assess diet and health information, plan nutrition programmes or food services, carry out education and consultation and monitor outcomes; clinical, community and group catering duties differ, and practice and licensing must be confirmed by jurisdiction."
+    "summary": "Assess dietary and health information, design a nutrition or food-service plan and review implementation and outcomes. Clinical, community and food-service roles differ; clinical treatment follows the institution’s division of responsibility and credentials."
   }
 }
